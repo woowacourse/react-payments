@@ -7,12 +7,14 @@ export const Card = styled.div<any>`
 
   padding: 12px 18px;
 
-  background-color: ${(props: any) => props.bgColor ?? '#E5E5E5'};
+  background-color: ${(props: any) => props.bgColor};
+  color: white;
+
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+
   border-radius: 5px;
 
-  color: #ffffff;
-  letter-spacing: 0.1em;
+  letter-spacing: 1.5px;
 
   &:not(:last-child) {
     margin-bottom: 50px;
@@ -31,7 +33,7 @@ export const Rectangle = styled.div`
   border-radius: 4px;
 `;
 
-export const CardInformationContainer = styled.div`
+export const CardInfos = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -39,45 +41,38 @@ export const CardInformationContainer = styled.div`
   height: 100%;
 `;
 
-export const CardNumber = styled.div`
+export const CardNumbers = styled.div`
+  display: flex;
   justify-content: space-between;
   align-items: center;
 
   margin-bottom: 8px;
 
-  letter-spacing: 0.2em;
-  height: 20px;
+  letter-spacing: 2px;
 
-  input {
-    width: 25%;
-    font-size: 14px;
-    letter-spacing: 4px;
-    color: white;
-    background-color: inherit;
-    border: none;
+  & > div {
+    width: 18%;
   }
 `;
 
 export const EllipseContainer = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   align-items: center;
-
-  & > div {
-    margin-right: 5px;
-  }
 `;
 
 export const Ellipse = styled.div`
-  width: 5px;
-  height: 5px;
+  width: 4px;
+  height: 4px;
 
   border-radius: 50%;
 
-  background: ${(props) => (props.color ? props.color : '#ffffff')};
+  background-color: white;
+
+  margin-right: 5px;
 `;
 
-export const CardNameAndExpirationDateContainer = styled.div`
+export const CardBottomInfos = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: end;
@@ -85,6 +80,18 @@ export const CardNameAndExpirationDateContainer = styled.div`
   font-size: 11px;
 `;
 
-export const CardName = styled.p``;
+export const CardOwnerName = styled.div``;
 
-export const ExpirationDate = styled.p``;
+export const ExpirationDate = styled.div`
+  display: flex;
+`;
+
+export const ExpirationMonth = styled.div``;
+
+export const ExpirationYear = styled.div`
+  span {
+    display: block;
+    background-color: blue;
+    width: 14px;
+  }
+`;
