@@ -29,6 +29,12 @@ function CreditCardExpiryInput({ creditCardExpiry, setCreditCardExpiry }: Props)
     } else {
       setError(false);
     }
+    if (creditCardExpiry.length === 5) {
+      const [month, year] = creditCardExpiry.split('/').map((str) => parseInt(str, 10));
+      if (month < 1 || month > 12 || year <= 22) {
+        setCreditCardExpiry('');
+      }
+    }
   }, [creditCardExpiry]);
 
   return (
