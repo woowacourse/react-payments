@@ -14,14 +14,22 @@ const CardItem = ({ card }: CardItemProps) => {
           <CardNumberContainer>
             <p>{card.cardNumber[0]}</p>
             <p>{card.cardNumber[1]}</p>
-            <p>{card.cardNumber[2]}</p>
-            <p>{card.cardNumber[3]}</p>
+            <SecurityCardNumber
+              type='password'
+              value={card.cardNumber[2]}
+              disabled
+            />
+            <SecurityCardNumber
+              type='password'
+              value={card.cardNumber[3]}
+              disabled
+            />
           </CardNumberContainer>
           <CardInfoContainer>
             <CardNameContainer>{card.name || 'NAME'}</CardNameContainer>
-            <CardExpirationContainer>{`${card.expirationDate[0] || 'MM'}/${
+            <p>{`${card.expirationDate[0] || 'MM'}/${
               card.expirationDate[1] || 'YY'
-            }`}</CardExpirationContainer>
+            }`}</p>
           </CardInfoContainer>
         </>
       )}
@@ -68,7 +76,8 @@ const CardNumberContainer = styled.div`
   font-size: 14px;
   letter-spacing: 3px;
 
-  > p {
+  > p,
+  input {
     width: 20%;
   }
 `;
@@ -88,6 +97,13 @@ const CardNameContainer = styled.p`
   white-space: nowrap;
 `;
 
-const CardExpirationContainer = styled.p``;
+const SecurityCardNumber = styled.input`
+  background: none;
+  border: none;
+  color: #ffffff;
+
+  text-align: center;
+  letter-spacing: 5px;
+`;
 
 export default CardItem;
