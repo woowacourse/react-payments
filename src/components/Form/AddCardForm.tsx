@@ -124,40 +124,54 @@ function AddCardForm({ onSubmit }: Props) {
   };
 
   return (
+    <>
+      <CardWrapper>
         <CreditCard card={card} />
-    <FormContainer onSubmit={handleSubmit}>
-      <Label text="카드 번호" />
-      <CardNumberContainer>
-        <CardNumberInputs valueAndOnChanges={valueAndOnChanges} />
-      </CardNumberContainer>
-      <Label text="만료일" />
-      <ExpirationDateContainer>
-        <ExpirationDateInput
-          month={{ value: month, onChange: handleMonthInputChange }}
-          year={{ value: year, onChange: handleYearInputChange }}
-        />
-      </ExpirationDateContainer>
-      <Label text="카드 소유자 이름(선택)" />
-      <NameInputContainer>
-        <NameInput value={name} onChange={handleNameInputChange} />
-      </NameInputContainer>
-      <Label text="보안 코드(CVC/CVV)" />
-      <SecurityCodeInputContainer>
-        <SecurityCodeInput value={securityCode} onChange={handleSecurityCodeChange} />
-      </SecurityCodeInputContainer>
-      <Label text="카드 비밀번호" />
-      <PasswordInputContainer>
-        <PasswordInput
-          first={{ value: firstDigit, onChange: handleFirstPasswordInputChange }}
-          second={{ value: secondDigit, onChange: handleSecondPasswordInputChange }}
-        />
-        <DotContainer>•</DotContainer>
-        <DotContainer>•</DotContainer>
-      </PasswordInputContainer>
-      <button type="submit">다음</button>
-    </FormContainer>
+      </CardWrapper>
+      <FormContainer onSubmit={handleSubmit}>
+        <InputLabel>카드 번호</InputLabel>
+        <CardNumberContainer>
+          <CardNumberInputs valueAndOnChanges={valueAndOnChanges} />
+        </CardNumberContainer>
+        <InputLabel>만료일</InputLabel>
+        <ExpirationDateContainer>
+          <ExpirationDateInput
+            month={{ value: month, onChange: handleMonthInputChange }}
+            year={{ value: year, onChange: handleYearInputChange }}
+          />
+        </ExpirationDateContainer>
+        <NameLabelContainer>
+          <InputLabel>카드 소유자 이름(선택)</InputLabel>
+          <InputLabel>{`${name.length} / 30`}</InputLabel>
+        </NameLabelContainer>
+        <NameInputContainer>
+          <NameInput value={name} onChange={handleNameInputChange} />
+        </NameInputContainer>
+
+        <InputLabel>보안 코드(CVC/CVV)</InputLabel>
+        <SecurityCodeInputContainer>
+          <SecurityCodeInput value={securityCode} onChange={handleSecurityCodeChange} />
+        </SecurityCodeInputContainer>
+
+        <InputLabel>카드 비밀번호</InputLabel>
+        <PasswordInputContainer>
+          <PasswordInput
+            first={{ value: firstDigit, onChange: handleFirstPasswordInputChange }}
+            second={{ value: secondDigit, onChange: handleSecondPasswordInputChange }}
+          />
+          <DotContainer>•</DotContainer>
+          <DotContainer>•</DotContainer>
+        </PasswordInputContainer>
+        <FormSubmitButton type="submit">다음</FormSubmitButton>
+      </FormContainer>
+    </>
   );
 }
+
+const CardWrapper = styled.div`
+  margin-top: 10px;
+  margin-bottom: 10px;
+`;
 
 const FormContainer = styled.form`
   display: flex;
@@ -165,12 +179,15 @@ const FormContainer = styled.form`
   Label {
     margin-bottom: 12px;
   }
+`;
 
-  button {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-  }
+const InputLabel = styled.span`
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: -0.085em;
+  color: #525252;
+  margin-top: 19px;
+  margin-bottom: 3px;
 `;
 
 const CardNumberContainer = styled(Container)`
@@ -222,6 +239,22 @@ const PasswordInputContainer = styled(Container)`
 const DotContainer = styled.div`
   padding: 0 20px;
   font-size: 19px;
+`;
+
+const FormSubmitButton = styled.button`
+  border: none;
+  font-size: 14px;
+  font-weight: 700;
+  background-color: #ffffff;
+  margin-left: auto;
+  cursor: pointer;
+`;
+
+const NameLabelContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: rgba(255, 255, 255, 0);
 `;
 
 export default AddCardForm;
