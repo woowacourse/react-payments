@@ -69,9 +69,16 @@ export const HiddentInput = styled.input`
     opacity: 0;
     position: absolute;
     text-align: center;
-    top: 50%;
+    bottom: 0;
     left: 0;
     right: 0;
+    outline: none;
+    border: none;
+    background: #ECEBF1;
+    height: 48px;
+    font-size: 18px;
+    color: #ECEBF1;
+    caret-color: black;
 `;
 
 export const PasswordBox = styled.div`
