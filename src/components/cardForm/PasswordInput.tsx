@@ -3,32 +3,39 @@ import Input from '../common/Input';
 import InputBox from '../common/InputBox';
 import InputGroup from '../common/InputGroup';
 import { DotIcon } from '../../assets/icons';
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 
 interface PasswordInputProps {
   password: string[];
   setPassword: (password: string[]) => void;
+  errorMessage: string;
+  setErrorMessage: (errorMessage: string) => void;
 }
 
-const PasswordInput = ({ password, setPassword }: PasswordInputProps) => {
-  const [errorMessage, setErrorMessage] = useState('');
-
+const PasswordInput = ({
+  password,
+  setPassword,
+  errorMessage,
+  setErrorMessage,
+}: PasswordInputProps) => {
   const refs = [useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null)];
 
   const handleChangeInput =
     (inputIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
       const inputValue = event.target.value;
 
+      if (isOverLength(inputValue)) return;
+
       if (isNotInputNumber(inputValue)) {
         setErrorMessage('숫자만 입력해주세요');
         return;
       }
-      if (isOverLength(inputValue)) return;
 
       const newInputs = [...password];
       newInputs[inputIndex] = inputValue;
 
       setPassword(newInputs);
+      setErrorMessage('');
 
       if (isNextInputFocusable(inputValue, inputIndex)) {
         refs[inputIndex + 1].current?.focus();

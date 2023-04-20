@@ -2,25 +2,29 @@ import styled from 'styled-components';
 import Input from '../common/Input';
 import InputBox from '../common/InputBox';
 import InputGroup from '../common/InputGroup';
-import { useState } from 'react';
 
 interface NameInputProps {
   name: string;
   setName: (name: string) => void;
+  errorMessage: string;
+  setErrorMessage: (errorMessage: string) => void;
 }
 
-const NameInput = ({ name, setName }: NameInputProps) => {
-  const [errorMessage, setErrorMessage] = useState('');
-
+const NameInput = ({
+  name,
+  setName,
+  errorMessage,
+  setErrorMessage,
+}: NameInputProps) => {
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
 
-    if (isNotInputEnglish(inputValue)) {
-      setErrorMessage('영어만 입력해주세요');
-      return;
-    }
     if (isOverLength(inputValue)) {
       setErrorMessage('30자 이하로 입력해주세요');
+      return;
+    }
+    if (isNotInputEnglish(inputValue)) {
+      setErrorMessage('영어만 입력해주세요');
       return;
     }
 
@@ -29,8 +33,8 @@ const NameInput = ({ name, setName }: NameInputProps) => {
   };
 
   const isNotInputEnglish = (inputValue: string) => {
-    const regExp = /^[a-zA-Z\s]*$/;
-    return !regExp.test(inputValue);
+    const regex = /^[a-zA-Z\s]*$/;
+    return !regex.test(inputValue);
   };
 
   const isOverLength = (inputValue: string) => {

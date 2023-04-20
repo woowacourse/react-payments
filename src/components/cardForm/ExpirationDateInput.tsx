@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import Input from '../common/Input';
 import InputBox from '../common/InputBox';
 import InputGroup from '../common/InputGroup';
@@ -7,14 +7,16 @@ import InputSeparator from '../common/InputSeparator';
 interface ExpirationDateInputProps {
   expirationDate: string[];
   setExpirationDate: (expirationDate: string[]) => void;
+  errorMessage: string;
+  setErrorMessage: (errorMessage: string) => void;
 }
 
 const ExpirationDateInput = ({
   expirationDate,
   setExpirationDate,
+  errorMessage,
+  setErrorMessage,
 }: ExpirationDateInputProps) => {
-  const [errorMessage, setErrorMessage] = useState('');
-
   const refs = [useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null)];
 
   useEffect(() => {
@@ -29,19 +31,18 @@ const ExpirationDateInput = ({
       setErrorMessage('유효한 달을 입력해주세요');
       return;
     }
-
-    setErrorMessage('');
-  }, [expirationDate]);
+  }, [expirationDate, setErrorMessage]);
 
   const handleChangeInput =
     (inputIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
       const inputValue = event.target.value;
 
+      if (isOverLength(inputValue)) return;
+
       if (isNotInputNumber(inputValue)) {
         setErrorMessage('숫자만 입력해주세요');
         return;
       }
-      if (isOverLength(inputValue)) return;
 
       const newInputs = [...expirationDate];
       newInputs[inputIndex] = inputValue;
@@ -51,6 +52,8 @@ const ExpirationDateInput = ({
       if (isNextInputFocusable(inputValue, inputIndex)) {
         refs[inputIndex + 1].current?.focus();
       }
+
+      setErrorMessage('');
     };
 
   const isValidMonth = (monthValue: string) => {
@@ -58,7 +61,8 @@ const ExpirationDateInput = ({
   };
 
   const isNotInputNumber = (inputValue: string) => {
-    return Number.isNaN(Number(inputValue));
+    const regex = /^\d{0,2}$/;
+    return !regex.test(inputValue);
   };
 
   const isOverLength = (inputValue: string) => {

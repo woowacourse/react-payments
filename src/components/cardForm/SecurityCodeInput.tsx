@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import Input from '../common/Input';
 import InputBox from '../common/InputBox';
 import InputGroup from '../common/InputGroup';
@@ -6,22 +5,25 @@ import InputGroup from '../common/InputGroup';
 interface SecurityCodeInputProps {
   securityCode: string;
   setSecurityCode: (securityCode: string) => void;
+  errorMessage: string;
+  setErrorMessage: (errorMessage: string) => void;
 }
 
 const SecurityCodeInput = ({
   securityCode,
   setSecurityCode,
+  errorMessage,
+  setErrorMessage,
 }: SecurityCodeInputProps) => {
-  const [errorMessage, setErrorMessage] = useState('');
-
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
+
+    if (isOverLength(inputValue)) return;
 
     if (isNotInputNumber(inputValue)) {
       setErrorMessage('숫자만 입력해주세요');
       return;
     }
-    if (isOverLength(inputValue)) return;
 
     setSecurityCode(inputValue.toUpperCase());
     setErrorMessage('');

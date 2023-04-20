@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import CardNumberInput from '../cardForm/CardNumberInput';
 import ExpirationDateInput from '../cardForm/ExpirationDateInput';
@@ -21,32 +21,114 @@ const CardForm = ({ onChangeForm }: CardFormProps) => {
   const [securityCode, setSecurityCode] = useState('');
   const [password, setPassword] = useState(['', '']);
 
+  const [cardNumberError, setCardNumberError] = useState('');
+  const [expirationDateError, setExpirationDateError] = useState('');
+  const [nameError, setNameError] = useState('');
+  const [securityCodeError, setSecurityCodeError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+
+  const [buttonActive, setButtonActive] = useState(false);
+
+  useEffect(() => {
+    if (
+      cardNumber.some(
+        (numberValue) => numberValue.length !== 4 || !!cardNumberError
+      )
+    ) {
+      setButtonActive(false);
+      return;
+    }
+    if (
+      expirationDate.some((dateValue) => dateValue.length !== 2) ||
+      !!expirationDateError
+    ) {
+      setButtonActive(false);
+      return;
+    }
+    if (securityCode.length !== 3 || !!securityCodeError) {
+      setButtonActive(false);
+      return;
+    }
+    if (password.some((passwordValue) => !passwordValue) || !!passwordError) {
+      setButtonActive(false);
+      return;
+    }
+
+    setButtonActive(true);
+  }, [
+    cardNumber,
+    expirationDate,
+    name,
+    securityCode,
+    password,
+    expirationDateError,
+  ]);
+
   useEffect(() => {
     onChangeForm(cardNumber, expirationDate, name);
   }, [cardNumber, expirationDate, name]);
 
+  const handleSubmitForm = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+  };
+
   return (
-    <FormContainer>
-      <CardNumberInput cardNumber={cardNumber} setCardNumber={setCardNumber} />
+    <FormContainer onSubmit={handleSubmitForm}>
+      <CardNumberInput
+        cardNumber={cardNumber}
+        setCardNumber={setCardNumber}
+        errorMessage={cardNumberError}
+        setErrorMessage={setCardNumberError}
+      />
       <ExpirationDateInput
         expirationDate={expirationDate}
         setExpirationDate={setExpirationDate}
+        errorMessage={expirationDateError}
+        setErrorMessage={setExpirationDateError}
       />
-      <NameInput name={name} setName={setName} />
+      <NameInput
+        name={name}
+        setName={setName}
+        errorMessage={nameError}
+        setErrorMessage={setNameError}
+      />
       <SecurityCodeInput
         securityCode={securityCode}
         setSecurityCode={setSecurityCode}
+        errorMessage={securityCodeError}
+        setErrorMessage={setSecurityCodeError}
       />
-      <PasswordInput password={password} setPassword={setPassword} />
+      <PasswordInput
+        password={password}
+        setPassword={setPassword}
+        errorMessage={passwordError}
+        setErrorMessage={setPasswordError}
+      />
+      <NextButton isActive={buttonActive}>다음</NextButton>
     </FormContainer>
   );
 };
 
-const FormContainer = styled.section`
+const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
   gap: 12px;
   padding: 28px;
+`;
+
+const NextButton = styled.button<{ isActive: boolean }>`
+  visibility: ${({ isActive }) => (isActive ? 'visible' : 'hidden')};
+
+  padding: 10px 20px;
+
+  background-color: transparent;
+  border: none;
+
+  font-weight: 700;
+  font-size: 14px;
+
+  align-self: flex-end;
+  cursor: pointer;
 `;
 
 export default CardForm;

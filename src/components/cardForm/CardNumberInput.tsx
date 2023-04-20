@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import Input from '../common/Input';
 import InputBox from '../common/InputBox';
 import InputGroup from '../common/InputGroup';
@@ -7,14 +7,16 @@ import InputSeparator from '../common/InputSeparator';
 interface CardNumberInputProps {
   cardNumber: string[];
   setCardNumber: (cardNumber: string[]) => void;
+  errorMessage: string;
+  setErrorMessage: (errorMessage: string) => void;
 }
 
 const CardNumberInput = ({
   cardNumber,
   setCardNumber,
+  errorMessage,
+  setErrorMessage,
 }: CardNumberInputProps) => {
-  const [errorMessage, setErrorMessage] = useState('');
-
   const refs = [
     useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
@@ -26,11 +28,13 @@ const CardNumberInput = ({
     (inputIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
       const inputValue = event.target.value;
 
+      if (isOverLength(inputValue)) return;
+
       if (isNotInputNumber(inputValue)) {
         setErrorMessage('숫자만 입력해주세요');
         return;
       }
-      if (isOverLength(inputValue)) return;
+
       if (isNextInputFocusable(inputValue, inputIndex))
         refs[inputIndex + 1].current?.focus();
 
@@ -42,7 +46,8 @@ const CardNumberInput = ({
     };
 
   const isNotInputNumber = (inputValue: string) => {
-    return Number.isNaN(Number(inputValue));
+    const regex = /^\d{0,4}$/;
+    return !regex.test(inputValue);
   };
 
   const isOverLength = (inputValue: string) => {
