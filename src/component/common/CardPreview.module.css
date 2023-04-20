@@ -2,6 +2,7 @@
   width: 213px;
   height: 133px;
   margin: auto;
+  margin-bottom: 10px;
 
   background: var(--card-color);
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
@@ -27,7 +28,7 @@
   width: 90%;
   position: relative;
   top: 55px;
-  left: 10px;
+  left: 20px;
 
   letter-spacing: 3px;
 }
@@ -37,7 +38,7 @@
 
   position: relative;
   top: 60px;
-  left: 10px;
+  left: 20px;
 }
 
 .expireDate {
