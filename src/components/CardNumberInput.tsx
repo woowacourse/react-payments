@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import styled from 'styled-components';
 import { useFocusChain } from '../hooks/useFocusChain';
-import { Input } from './common/Input';
+import { NumberInput } from './common/NumberInput';
 
 const StyledCardNumberInput = styled.div`
   display: flex;
@@ -28,43 +28,45 @@ export const CardNumberInput = (props: CardNumberInputProps) => {
   const { next } = useFocusChain([cardNumberRef1, cardNumberRef2, cardNumberRef3, cardNumberRef4]);
 
   const getPartialCardNumber = (index: number) => {
-    return value.slice(index * 4, (index + 1) * 4);
+    return value.split('-')[index] ?? '';
   };
 
   const handleCardNumberChange = (index: number) => (newValue: string) => {
-    if (!/^\d{0,4}$/.test(newValue)) return;
+    if (newValue.length === 4) next();
 
-    if (/^\d{4}$/.test(newValue)) next();
-
-    const partialCardNumbers = [0, 1, 2, 3].map(getPartialCardNumber);
+    const partialCardNumbers = value.split('-');
     partialCardNumbers[index] = newValue;
 
-    onChange(partialCardNumbers.join(''));
+    onChange(partialCardNumbers.join('-'));
   };
 
   return (
     <StyledCardNumberInput>
-      <Input
+      <NumberInput
         ref={cardNumberRef1}
+        maxCount={4}
         value={getPartialCardNumber(0)}
         onChange={handleCardNumberChange(0)}
         center
       />
-      <Input
+      <NumberInput
         ref={cardNumberRef2}
+        maxCount={4}
         value={getPartialCardNumber(1)}
         onChange={handleCardNumberChange(1)}
         center
       />
-      <Input
+      <NumberInput
         ref={cardNumberRef3}
+        maxCount={4}
         value={getPartialCardNumber(2)}
         onChange={handleCardNumberChange(2)}
         center
         type="password"
       />
-      <Input
+      <NumberInput
         ref={cardNumberRef4}
+        maxCount={4}
         value={getPartialCardNumber(3)}
         onChange={handleCardNumberChange(3)}
         center

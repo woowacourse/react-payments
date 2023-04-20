@@ -9,6 +9,7 @@ import { CreditCardView } from '../CreditCardView';
 import { ExpirationDateInput } from '../ExpirationDateInput';
 import { BackButton } from '../common/BackButton';
 import { Input } from '../common/Input';
+import { NumberInput } from '../common/NumberInput';
 import { Page } from '../common/Page';
 import { Text } from '../common/Text';
 
@@ -70,14 +71,10 @@ export const NewCreditCardPage = () => {
   };
 
   const handleCardNameChange = (value: string) => {
-    if (value.length > 30) return;
-
     setNewCardField('name', value);
   };
 
   const handleCVCNumberChange = (value: string) => {
-    if (!/^\d{0,3}$/.test(value)) return;
-
     setNewCardField('cvc', value);
   };
 
@@ -119,6 +116,7 @@ export const NewCreditCardPage = () => {
             <Text size="small">{newCard.name.length} / 30</Text>
           </FormGroupLabel>
           <Input
+            maxCount={30}
             value={newCard.name}
             onChange={handleCardNameChange}
             placeholder="카드에 표시된 이름과 동일하게 입력하세요."
@@ -127,7 +125,8 @@ export const NewCreditCardPage = () => {
 
         <FormGroup>
           <Text size="small">보안 코드</Text>
-          <Input
+          <NumberInput
+            maxCount={3}
             value={newCard.cvc}
             onChange={handleCVCNumberChange}
             width={8}

@@ -50,7 +50,7 @@ export const CreditCardView = (props: CreditCardViewProps) => {
   const { name, cardNumbers, expirationDate } = props;
 
   const getPartialCardNumber = (index: number) => {
-    const partialCardNumber = cardNumbers.slice(index * 4, (index + 1) * 4);
+    const partialCardNumber = cardNumbers.split('-')[index] ?? '';
 
     return [0, 1].includes(index) ? partialCardNumber : partialCardNumber.replaceAll(/\d/g, '•');
   };

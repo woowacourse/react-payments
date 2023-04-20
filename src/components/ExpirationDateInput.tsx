@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import styled from 'styled-components';
 import { useFocusChain } from '../hooks/useFocusChain';
-import { Input } from './common/Input';
+import { NumberInput } from './common/NumberInput';
 
 const StyledExpirationDateInput = styled.div`
   display: flex;
@@ -25,9 +25,7 @@ export const ExpirationDateInput = (props: ExpirationDateInputProps) => {
   const { next } = useFocusChain([monthRef, yearRef]);
 
   const handleMonthChange = (value: string) => {
-    if (!/^((0?[1-9]?)|(1?[0-2]?))$/.test(value)) return;
-
-    if (/^\d{2}$/.test(value)) next();
+    if (value.length === 2) next();
 
     onChange([value, year]);
   };
@@ -40,16 +38,18 @@ export const ExpirationDateInput = (props: ExpirationDateInputProps) => {
 
   return (
     <StyledExpirationDateInput>
-      <Input
+      <NumberInput
         ref={monthRef}
+        maxCount={2}
         value={month}
         onChange={handleMonthChange}
         center
         placeholder="MM"
         width={6}
       />
-      <Input
+      <NumberInput
         ref={yearRef}
+        maxCount={2}
         value={year}
         onChange={handleYearChange}
         center

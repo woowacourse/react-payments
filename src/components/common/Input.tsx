@@ -2,7 +2,7 @@ import type { ChangeEventHandler, HTMLInputTypeAttribute } from 'react';
 import { forwardRef } from 'react';
 import styled from 'styled-components';
 
-type InputProps = {
+export type InputProps = {
   type?: HTMLInputTypeAttribute;
   width?: number;
   center?: boolean;
@@ -10,6 +10,7 @@ type InputProps = {
   onChange?: (value: string) => void;
   value: string;
   disabled?: boolean;
+  maxCount?: number;
 };
 
 type StyledInputProps = {
@@ -31,9 +32,11 @@ const StyledInput = styled.input<StyledInputProps>`
 `;
 
 export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
-  const { type, width, center, placeholder, value, onChange, disabled } = props;
+  const { type, width, center, placeholder, value, onChange, disabled, maxCount } = props;
 
   const handleInputChange: ChangeEventHandler<HTMLInputElement> = (event) => {
+    if (maxCount !== undefined && event.target.value.length > maxCount) return;
+
     onChange?.(event.target.value);
   };
 
