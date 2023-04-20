@@ -35,6 +35,7 @@ export function ExpirationDateInput(props: ExpirationProps) {
         maxLength={2}
         placeholder="MM"
         onChange={(e) => handleChange(e, 0, month.onChange)}
+        inputMode="numeric"
         required
       />
       <SLASH />
@@ -45,6 +46,7 @@ export function ExpirationDateInput(props: ExpirationProps) {
         maxLength={2}
         placeholder="YY"
         onChange={(e) => handleChange(e, 1, year.onChange)}
+        inputMode="numeric"
         required
       />
     </>

@@ -34,6 +34,7 @@ export function CardNumberInputs({ valueAndOnChanges }: CardNumberInputProps) {
             maxLength={4}
             onChange={(e) => handleChange(e, index, onChange)}
             placeholder={DEFAULT_CARD_NUMBER}
+            inputMode="numeric"
             required
           />
           {index < valueAndOnChanges.length - 1 && <span>-</span>}
