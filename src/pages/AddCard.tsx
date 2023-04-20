@@ -5,17 +5,13 @@ import CardOwnerName from '../components/CardOwnerName/CardOwnerName';
 import SecurityCode from '../components/SecurityCode/SecurityCode';
 import CardPassword from '../components/CardPassword/CardPassword';
 import Card from '../components/Card/Card';
+import { CardType } from '../types/Card';
 import { Link } from 'react-router-dom';
-
-interface Card {
-  cardNumbers: Record<number, string>;
-  expiredDate: Record<number, string>;
-  cardOwnerName: string;
-}
+import { v4 as uuidv4 } from 'uuid';
 
 interface SetCardsProps {
-  cards: Card[];
-  setCards: React.Dispatch<React.SetStateAction<Card[]>>;
+  cards: CardType[];
+  setCards: React.Dispatch<React.SetStateAction<CardType[]>>;
 }
 
 const AddCard = ({ cards, setCards }: SetCardsProps) => {
@@ -61,7 +57,7 @@ const AddCard = ({ cards, setCards }: SetCardsProps) => {
   const handleSetCards = () => {
     setCards([
       ...cards,
-      { cardNumbers, expiredDate, cardOwnerName: ownerName },
+      { id: uuidv4(), cardNumbers, expiredDate, cardOwnerName: ownerName },
     ]);
   };
 

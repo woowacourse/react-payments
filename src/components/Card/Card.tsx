@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { CardType } from '../../types/Card';
 
 const Wrapper = styled.div`
   display: flex;
@@ -36,11 +37,7 @@ const TextWrapper = styled.div`
   justify-content: space-between;
 `;
 
-interface CardProps {
-  cardNumbers: Record<number, string>;
-  expiredDate: Record<number, string>;
-  cardOwnerName: string;
-}
+type CardProps = Omit<CardType, 'id'>;
 
 const Card = ({ cardNumbers, expiredDate, cardOwnerName }: CardProps) => {
   return (

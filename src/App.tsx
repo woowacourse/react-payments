@@ -3,17 +3,10 @@ import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
 import GlobalStyle from './styles/GlobalStyle';
 import Home from './pages/Home';
 import AddCard from './pages/AddCard';
-
-interface Card {
-  cardNumbers: Record<number, string>;
-  expiredDate: Record<number, string>;
-  cardOwnerName: string;
-}
+import { CardType } from './types/Card';
 
 function App() {
-  const [cards, setCards] = useState<Card[]>([]);
-
-  console.log(cards);
+  const [cards, setCards] = useState<CardType[]>([]);
 
   return (
     <Router>
