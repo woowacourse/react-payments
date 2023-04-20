@@ -2,8 +2,13 @@ import { useState } from 'react';
 import AddCardForm from '../components/AddCardForm/AddCardForm';
 import ArrowHeader from '../components/ArrowHeader/ArrowHeader';
 import CardPreview from '../components/CardPreview/CardPreview';
+import type { CardInfo } from '../types';
 
-const CardRegistration = () => {
+type CardRegistrationProps = {
+  registerNewCard: (cardInfo: CardInfo) => void;
+};
+
+const CardRegistration = ({ registerNewCard }: CardRegistrationProps) => {
   const [cardNumber, setCardNumber] = useState('');
   const [cardOwnerName, setCardOwnerName] = useState('');
   const [cardExpirationDate, setCardExpirationDate] = useState('');
@@ -28,6 +33,7 @@ const CardRegistration = () => {
         updateCardNumber={updateCardNumber}
         updateExpirationDate={updateCardExpirationDate}
         updateCardOwnerName={updateCardOwnerName}
+        registerNewCard={registerNewCard}
       />
     </>
   );
