@@ -1,4 +1,4 @@
-import React, { FormEvent } from "react";
+import React, { FormEvent, useState } from "react";
 import styled from "styled-components";
 import { useInput } from "../hooks/useInput";
 import Card from "./Card";
@@ -11,6 +11,7 @@ import NextButton from "./NextButton";
 import OwnerInput from "./OwnerInput";
 import PasswordInput from "./PasswordInput";
 import PrevButton from "./PrevButton";
+import ToolTip from "./ToolTip";
 
 interface AddCardPageProps {
   onSubmit: (event: FormEvent<HTMLFormElement>) => void;
@@ -57,6 +58,7 @@ const CvcWrapper = styled.div`
   align-items: center;
 `;
 const CvcButtonWrapper = styled.div`
+  position: relative;
   margin-left: 11px;
 `;
 const NextButtonWrapper = styled.div`
@@ -80,6 +82,10 @@ export default function AddCardPage({ onSubmit }: AddCardPageProps) {
   const firstPassword = useInput("", "firstPassword");
   const secondPassword = useInput("", "secondPassword");
 
+  const [isOpenToolTip, setIsOpenToolTip] = useState(false);
+  const handleToolTip = () => {
+    setIsOpenToolTip((prev) => !prev);
+  };
   return (
     <Page>
       <TitleWrapper>
@@ -120,7 +126,14 @@ export default function AddCardPage({ onSubmit }: AddCardPageProps) {
             <CvcWrapper>
               <CvcInput cvc={cvc} />
               <CvcButtonWrapper>
-                <InformationButton />
+                <InformationButton onClick={handleToolTip} />
+                {isOpenToolTip && (
+                  <ToolTip
+                    text={
+                      "CVC번호는 카드 뒷 면에 있는 3자리 숫자이며 카드 보안을 위한 번호입니다"
+                    }
+                  />
+                )}
               </CvcButtonWrapper>
             </CvcWrapper>
           </InputField>
