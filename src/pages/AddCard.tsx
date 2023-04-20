@@ -5,8 +5,20 @@ import CardOwnerName from '../components/CardOwnerName/CardOwnerName';
 import SecurityCode from '../components/SecurityCode/SecurityCode';
 import CardPassword from '../components/CardPassword/CardPassword';
 import Card from '../components/Card/Card';
+import { Link } from 'react-router-dom';
 
-const AddCard = () => {
+interface Card {
+  cardNumbers: Record<number, string>;
+  expiredDate: Record<number, string>;
+  cardOwnerName: string;
+}
+
+interface SetCardsProps {
+  cards: Card[];
+  setCards: React.Dispatch<React.SetStateAction<Card[]>>;
+}
+
+const AddCard = ({ cards, setCards }: SetCardsProps) => {
   const [cardNumbers, setCardNumbers] = useState<Record<number, string>>({
     0: '',
     1: '',
@@ -44,7 +56,14 @@ const AddCard = () => {
       return;
     }
     setIsActive(true);
-  }, [expiredDate, expiredDate, cardNumbers, securityCode, password]);
+  }, [expiredDate, cardNumbers, securityCode, password]);
+
+  const handleSetCards = () => {
+    setCards([
+      ...cards,
+      { cardNumbers, expiredDate, cardOwnerName: ownerName },
+    ]);
+  };
 
   return (
     <>
@@ -61,7 +80,11 @@ const AddCard = () => {
         setSecurityCode={setSecurityCode}
       />
       <CardPassword password={password} setPassword={setPassword} />
-      {isActive && <button>다음</button>}
+      {isActive && (
+        <Link to={'/'}>
+          <button onClick={handleSetCards}>다음</button>
+        </Link>
+      )}
     </>
   );
 };
