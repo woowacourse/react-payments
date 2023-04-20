@@ -17,16 +17,6 @@ function CreditCardRegister() {
   const [creditCardNumber, setCreditCardNumber] = useState('');
 
   const [creditCardExpiry, setCreditCardExpiry] = useState('');
-  const handleChangeCreditCardExpiry = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newCardExpiry = event.target.value.replaceAll('/', '');
-
-    if (newCardExpiry.length <= 2) setCreditCardExpiry(newCardExpiry);
-    else if (newCardExpiry.length <= 4) {
-      const newCardExpiryArray = newCardExpiry.split('');
-      newCardExpiryArray.splice(2, 0, '/');
-      setCreditCardExpiry(newCardExpiryArray.join(''));
-    }
-  };
 
   const [creditCardOwner, setCreditCardOwner] = useState('');
   const handleChangeCreditCardOwner = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -111,7 +101,7 @@ function CreditCardRegister() {
         />
         <CreditCardExpiryInput
           creditCardExpiry={creditCardExpiry}
-          onChange={handleChangeCreditCardExpiry}
+          setCreditCardExpiry={setCreditCardExpiry}
         />
         <CreditCardOwnerInput
           creditCardOwner={creditCardOwner}
@@ -127,7 +117,13 @@ function CreditCardRegister() {
           onChangeSecondPassword={handleChangeCreditCardSecondPassword}
         />
         <S.ButtonWrapper>
-          <S.ResigerButton disabled={!isFullFilled} type="button" onClick={() => handleSubmit()}>확인</S.ResigerButton>
+          <S.ResigerButton
+            disabled={!isFullFilled}
+            type="button"
+            onClick={() => handleSubmit()}
+          >
+            확인
+          </S.ResigerButton>
         </S.ButtonWrapper>
       </S.CreditCardRegisterForm>
     </S.CreditCardRegisterLayout>
