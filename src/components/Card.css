@@ -13,7 +13,11 @@
 }
 
 .card-track-1 {
-  height: 47px;
+  height: 33px;
+  padding: 14px 0 0 10px;
+}
+
+.card-type {
 }
 
 .ic-chip {
@@ -25,15 +29,24 @@
 }
 
 .card-track-3 {
-  padding: 7px 0;
-}
-.card-track-3 span {
-  margin-left: 19px;
+  padding: 7px 14px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .card-track-4 {
-  margin: 0 19px;
+  padding: 0px 14px;
   display: flex;
   margin-bottom: 13px;
   justify-content: space-between;
+}
+
+.card-track-3 span {
+  letter-spacing: 1px;
+}
+
+.card-owner-view {
+  width: 50px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

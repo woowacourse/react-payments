@@ -26,6 +26,15 @@
   flex-direction: column;
   gap: 46px;
   align-items: center;
-  justify-content: space-around;
-  margin: 36px 0;
+  margin-bottom: 36px;
+}
+
+.empty-card-list-title {
+  font-weight: 700;
+  font-size: 14px;
+  color: #575757;
+}
+
+.add-card-page-header-title {
+  margin-left: 36px;
 }

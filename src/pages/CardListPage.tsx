@@ -24,18 +24,22 @@ const CardListPage = () => {
   return (
     <div className="add-card-page">
       <Header>
-        <h3>보유카드</h3>
+        <h3 className="add-card-page-header-title">보유카드</h3>
       </Header>
       <div className="add-card-page-body">
-        {cardList.map((card: CardType) => (
-          <Card
-            key={card.id}
-            cardType={card.cardType}
-            cardNumber={card.cardNumber}
-            cardOwner={card.cardOwner}
-            expired={card.expired}
-          />
-        ))}
+        {cardList.length === 0 ? (
+          <span className="empty-card-list-title">새로운 카드를 등록해주세요.</span>
+        ) : (
+          cardList.map((card: CardType) => (
+            <Card
+              key={card.id}
+              cardType={card.cardType}
+              cardNumber={card.cardNumber}
+              cardOwner={card.cardOwner}
+              expired={card.expired}
+            />
+          ))
+        )}
         <button className="add-card-button" onClick={onAddButton}>
           +
         </button>
