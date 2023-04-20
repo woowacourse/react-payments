@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useInput } from "../hooks/useInput";
 import Card from "./Card";
@@ -83,9 +83,30 @@ export default function AddCardPage({ onSubmit }: AddCardPageProps) {
   const secondPassword = useInput("", "secondPassword");
 
   const [isOpenToolTip, setIsOpenToolTip] = useState(false);
+
+  const [isFormfilled, setIsFormfilled] = useState(true);
+
   const handleToolTip = () => {
     setIsOpenToolTip((prev) => !prev);
   };
+
+  const cardForm = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    if (!cardForm.current) return;
+    setIsFormfilled(!cardForm.current.checkValidity());
+  }, [
+    firstCardNumber.value,
+    secondCardNumber.value,
+    thirdCardNumber.value,
+    fourthCardNumber.value,
+    year.value,
+    month.value,
+    cvc.value,
+    firstPassword.value,
+    secondPassword.value,
+  ]);
+
   return (
     <Page>
       <TitleWrapper>
@@ -106,7 +127,7 @@ export default function AddCardPage({ onSubmit }: AddCardPageProps) {
           owner={owner.value}
         />
       </CardWrapper>
-      <InputWrapperParent onSubmit={onSubmit}>
+      <InputWrapperParent onSubmit={onSubmit} ref={cardForm}>
         <InputWrapper>
           <InputField kind="cardNumber">
             <CardNumberInput
@@ -145,7 +166,7 @@ export default function AddCardPage({ onSubmit }: AddCardPageProps) {
           </InputField>
         </InputWrapper>
         <NextButtonWrapper>
-          <NextButton />
+          <NextButton isDisable={isFormfilled} />
         </NextButtonWrapper>
       </InputWrapperParent>
     </Page>

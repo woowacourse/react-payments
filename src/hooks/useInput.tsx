@@ -14,7 +14,6 @@ export const useInput = (
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value;
-
     setValue(value);
   };
 

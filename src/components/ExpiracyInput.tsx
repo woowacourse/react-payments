@@ -38,6 +38,7 @@ export default function ExpiracyInput({ year, month }: ExpiracyInputProps) {
           maxLength={2}
           id="expiracy"
           isNumber={true}
+          required
           placeholder="MM"
           textAlign="center"
           {...month}
@@ -49,6 +50,7 @@ export default function ExpiracyInput({ year, month }: ExpiracyInputProps) {
           type="text"
           maxLength={2}
           isNumber={true}
+          required
           placeholder="YY"
           textAlign="center"
           {...year}

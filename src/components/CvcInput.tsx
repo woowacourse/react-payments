@@ -25,6 +25,7 @@ export default function CvcInput({ cvc }: CvcInputProps) {
         textAlign="center"
         isNumber={true}
         maxLength={3}
+        required
         id="cvc"
         {...cvc}
       />

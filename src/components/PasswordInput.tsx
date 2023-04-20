@@ -47,6 +47,7 @@ export default function PasswordInput({
           isNumber={true}
           maxLength={1}
           id="password"
+          required
           type="password"
           textAlign="center"
           {...firstPassword}
@@ -56,6 +57,7 @@ export default function PasswordInput({
         <Input
           isNumber={true}
           maxLength={1}
+          required
           type="password"
           textAlign="center"
           {...secondPassword}
