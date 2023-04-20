@@ -18,7 +18,13 @@ const CardOwnerName = ({ updateCardOwnerName }: CardOwnerNameProps) => {
 
   return (
     <CardInfoInput title="카드 소유자 이름 (선택)" numberOfLetter={[cardOwnerName.length, 30]}>
-      <Input width="100%" onChange={checkCardOwnerNameLength} maxLength={30} value={cardOwnerName} />
+      <Input
+        width="100%"
+        onChange={checkCardOwnerNameLength}
+        maxLength={30}
+        value={cardOwnerName}
+        name="cardOwnerName"
+      />
     </CardInfoInput>
   );
 };

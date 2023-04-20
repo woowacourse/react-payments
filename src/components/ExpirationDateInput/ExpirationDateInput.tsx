@@ -22,7 +22,13 @@ const ExpirationDateInput = ({ updateExpirationDate }: ExpirationDateInputProps)
 
   return (
     <CardInfoInput title="만료일">
-      <Input width="40%" onChange={addSlashInExpirationDate} value={expirationDate} maxLength={5} />
+      <Input
+        width="40%"
+        onChange={addSlashInExpirationDate}
+        value={expirationDate}
+        maxLength={5}
+        name="expirationDate"
+      />
     </CardInfoInput>
   );
 };
