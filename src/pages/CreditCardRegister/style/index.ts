@@ -37,12 +37,14 @@ export const RelativeBox = styled.div`
 `;
 
 type FlexBoxProps = {
-  justifyContent: 'center' | 'flex-start' | 'flex-end' | 'space-between' | 'space-around';
+  justifyContent?: 'center' | 'flex-start' | 'flex-end' | 'space-between' | 'space-around';
+  alignItems?: 'center' | 'flex-start' | 'flex-end' | 'center';
 };
 
 export const FlexBox = styled.div<FlexBoxProps>`
     display: flex;
     justify-content: ${(props) => props.justifyContent};
+    align-items: ${(props) => props.alignItems};
 `;
 
 export const CreditCardRegisterLabel = styled.div`
@@ -86,4 +88,18 @@ export const PasswordBox = styled.div`
     align-items: center;
     border: 1px solid #ECEBF1;
     border-radius: 7px;
+`;
+
+export const QuestionBox = styled.div`
+    border: 1px solid #BABABA;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+`;
+
+export const QuestionMark = styled.div`
+    padding-left: 11px;
+    padding-right: 11px;
+    padding-top: 9px;
 `;
