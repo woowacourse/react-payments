@@ -15,7 +15,5 @@ export const Primary: Story = {
     value: '하이',
     onChange: (e) => {},
     className: 'asdf',
-    status: true,
-    errorMessage: '',
   },
 };

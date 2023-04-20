@@ -47,24 +47,18 @@ const FormCardAdd = ({
         <InputCardData
           value={cardNumber.value.first}
           onChange={cardNumber.onChange}
-          status={cardNumber.status}
           className="example"
-          errorMessage="잘못된 값"
           name="first"
         />
         <InputCardData
           value={cardNumber.value.second}
           onChange={cardNumber.onChange}
-          status={cardNumber.status}
           className="example"
-          errorMessage="잘못된 값"
           name="second"
         />
         <InputCardPassword
           value={cardNumber.value.third}
           onChange={cardNumber.onChange}
-          status={cardNumber.status}
-          errorMessage="잘못된 값"
           name="third"
           minDataLength={4}
           maxDataLength={4}
@@ -73,8 +67,6 @@ const FormCardAdd = ({
         <InputCardPassword
           value={cardNumber.value.fourth}
           onChange={cardNumber.onChange}
-          status={cardNumber.status}
-          errorMessage="잘못된 값"
           name="fourth"
           minDataLength={4}
           maxDataLength={4}
@@ -86,9 +78,7 @@ const FormCardAdd = ({
         <InputCardData
           value={cardExpire.value}
           onChange={cardExpire.onChange}
-          status={cardExpire.status}
           className="example"
-          errorMessage="잘못된 값"
           name="expire"
         />
       </div>
@@ -100,9 +90,7 @@ const FormCardAdd = ({
         <InputCardData
           value={cardOwner.value}
           onChange={cardOwner.onChange}
-          status={cardOwner.status}
           className="example"
-          errorMessage="잘못된 값"
           name="owner"
         />
       </div>
@@ -112,8 +100,6 @@ const FormCardAdd = ({
           <InputCardPassword
             value={securityCode.value}
             onChange={securityCode.onChange}
-            status={securityCode.status}
-            errorMessage="잘못된 값"
             maxDataLength={3}
             minDataLength={3}
             width="84px"
@@ -129,8 +115,6 @@ const FormCardAdd = ({
           <InputCardPassword
             value={cardPassword1.value}
             onChange={cardPassword1.onChange}
-            status={cardPassword1.status}
-            errorMessage=""
             maxDataLength={1}
             minDataLength={1}
             width="45px"
@@ -138,8 +122,6 @@ const FormCardAdd = ({
           <InputCardPassword
             value={cardPassword2.value}
             onChange={cardPassword2.onChange}
-            status={cardPassword2.status}
-            errorMessage=""
             maxDataLength={1}
             minDataLength={1}
             width="45px"

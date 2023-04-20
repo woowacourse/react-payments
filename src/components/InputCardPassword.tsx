@@ -4,8 +4,6 @@ import './InputCardPassword.css';
 export type InputCardPasswordProps = {
   value: string;
   onChange: (e: React.ChangeEvent) => void;
-  status: boolean;
-  errorMessage: string;
   maxDataLength: number;
   minDataLength: number;
   width: string;
@@ -15,8 +13,6 @@ export type InputCardPasswordProps = {
 const InputCardPassword = ({
   value,
   onChange,
-  status,
-  errorMessage,
   maxDataLength,
   minDataLength,
   width,
@@ -35,7 +31,6 @@ const InputCardPassword = ({
         name={name}
         required
       />
-      {status ? '' : <span>{errorMessage}</span>}
     </div>
   );
 };

@@ -14,8 +14,6 @@ export const Primary: Story = {
   args: {
     value: '1',
     onChange: (e) => {},
-    status: true,
     maxDataLength: 1,
-    errorMessage: '',
   },
 };
