@@ -14,7 +14,6 @@
   height: 123px;
   border-radius: 5px;
   border: none;
-  cursor: pointer;
   transition: 0.3s;
   box-shadow: 3px 3px 10px var(--grey-300);
   font-size: 20px;
