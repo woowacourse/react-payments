@@ -1,10 +1,10 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
-import CardPassword from ".";
+import type { Meta, StoryObj } from '@storybook/react';
+
+import CardPassword from '.';
 
 const cardPassword = {
   component: CardPassword,
-  title: "CardPassword",
+  title: 'CardPassword',
 } satisfies Meta<typeof CardPassword>;
 
 export default cardPassword;
