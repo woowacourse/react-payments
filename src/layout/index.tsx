@@ -22,7 +22,7 @@ const Style = {
     justify-content: center;
     align-items: center;
 
-    background-color: #c8c8c8;
+    background-color: white;
   `,
   ChildrenContainer: styled.div`
     width: max-content;
