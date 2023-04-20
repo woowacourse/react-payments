@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 interface CardFormProps {
   cardInfo: CardType;
-  setCardInfo: (value: any) => void;
+  setCardInfo: React.Dispatch<React.SetStateAction<CardType>>;
   addNewCards: React.Dispatch<React.SetStateAction<CardType[]>>;
 }
 

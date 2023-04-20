@@ -50,7 +50,7 @@ export const ExpiryDateInput = ({
     }
   };
 
-  const handleOutFocusEvent = (e: any) => {
+  const handleOutFocusEvent = (e: React.FocusEvent<HTMLInputElement>) => {
     const value = e.target.value.replaceAll(" / ", "");
 
     setIsCompleted(false);
