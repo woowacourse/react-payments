@@ -23,7 +23,7 @@ export const Input = ({
 }: InputProps) => {
   const { isValid, errorMessage } = error;
   return (
-    <>
+    <Colum>
       <InputField
         placeholder={placeholder}
         id={label}
@@ -34,10 +34,15 @@ export const Input = ({
         textPosition={textPosition}
         type={type}
       />
-      {!isValid && <ErrorMessage>{errorMessage}</ErrorMessage>}
-    </>
+      {<ErrorMessage>{!isValid ? errorMessage : ""}</ErrorMessage>}
+    </Colum>
   );
 };
+
+const Colum = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 const InputField = styled.input<{ textPosition: string; width: string }>`
   height: 45px;
@@ -62,5 +67,6 @@ const InputField = styled.input<{ textPosition: string; width: string }>`
 `;
 
 const ErrorMessage = styled.div`
+  height: 15px;
   color: red;
 `;

@@ -12,4 +12,5 @@ export const InputLabel = ({ name, text }: InputLabelProps) => {
 const Label = styled.label`
   font-size: 12px;
   font-weight: 600;
+  margin-bottom: 5px;
 `;
