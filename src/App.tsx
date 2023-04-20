@@ -1,19 +1,18 @@
-import CardNumberInputBox from './components/CardNumberInputBox/CardNumberInputBox';
-import ExpirationDateInputBox from './components/ExpirationDateInputBox/ExpirationDateInputBox';
-import OwnerNameInputBox from './components/OwnerNameInputBox/OwnerNameInputBox';
-import SecurityCodeInputBox from './components/SecurityCodeInputBox/SecurityCodeInputBox';
-import PasswordBoxInput from './components/PasswordInputBox/PasswordInputBox';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import MyCardPage from './pages/MyCardPage/MyCardPage';
+import CardRegisterPage from './pages/CardRegisterPage/CardRegisterPage';
 
-function App() {
+const App = () => {
   return (
     <div className="App">
-      <CardNumberInputBox />
-      <ExpirationDateInputBox />
-      <OwnerNameInputBox />
-      <SecurityCodeInputBox />
-      <PasswordBoxInput />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<MyCardPage />} />
+          <Route path="/register" element={<CardRegisterPage />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
-}
+};
 
 export default App;
