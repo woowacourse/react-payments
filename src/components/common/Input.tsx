@@ -6,7 +6,7 @@ export interface InputProps {
   placeholder: string;
   textPosition: string;
   type: string;
-  handleInput: (e: any) => void;
+  handleInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const Input = ({

@@ -11,7 +11,7 @@ const passwordInfo = {
 };
 
 export const PasswordInput = () => {
-  const handleInput = (e: any) => {
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length > 1 || !/\d$/.test(e.target.value)) {
       e.target.value = e.target.value.slice(0, -1);
       return;

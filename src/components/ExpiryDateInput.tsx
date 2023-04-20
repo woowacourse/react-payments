@@ -15,7 +15,7 @@ const ExpiryDateInfo = {
 };
 
 export const ExpiryDateInput = ({ setExpiryDate }: ExpiryDateInputProps) => {
-  const handleInput = (e: any) => {
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value.replaceAll(" / ", "");
 
     if (value.length > 4) {

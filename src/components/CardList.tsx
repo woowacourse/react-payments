@@ -13,7 +13,7 @@ export const CardList = ({ cards }: CardListProps) => {
       {!cards.length && <GuideText>새로운 카드를 등록해주세요.</GuideText>}
       <List>
         {cards.map((card) => (
-          <CardItem card={card} />
+          <CardItem key={card.owner} card={card} />
         ))}
         <EmptyCard />
       </List>
