@@ -7,19 +7,12 @@ import InputBoxPassword from "../InputBoxPassword/InputBoxPassword";
 import InputBoxSecurityCode from "../InputBoxSecurityCode/InputBoxSecurityCode";
 
 import { useState, useRef, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import "./cardInputForm.css";
 
-const initialFormCondition = {
-  cardNumber: true,
-  ExpirationDate: true,
-  Owner: true,
-  SecurityCode: true,
-  Password: true,
-};
-
 export default function CardInputForm() {
-  const [isFormFilled, setIsFormFilled] = useState(initialFormCondition);
+  const [isFormFilled, setIsFormFilled] = useState(false);
 
   const [isCardNumberComplete, setIsCardNumberComplete] = useState(false);
   const [isExpirationDateComplete, setIsExpirationDateComplete] =
@@ -27,8 +20,6 @@ export default function CardInputForm() {
   const [isOwnerComplete, setIsOwnerComplete] = useState(false);
   const [isSecurityComplete, setIsSecurityComplete] = useState(false);
   const [isPasswordComplete, setIsPasswordComplete] = useState(false);
-
-  const isFormComplete = Object.values(isFormFilled).every(Boolean);
 
   const formElement = useRef<HTMLFormElement>(null);
 
@@ -45,8 +36,8 @@ export default function CardInputForm() {
       isSecurityComplete &&
       isPasswordComplete
     )
-      console.log("입력이 완료되었습니다!");
-    else console.log("미완성 입력이에요ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ");
+      setIsFormFilled(true);
+    else setIsFormFilled(false);
   }, [
     isCardNumberComplete,
     isExpirationDateComplete,
@@ -62,7 +53,11 @@ export default function CardInputForm() {
       <InputBoxOwner setIsComplete={setIsOwnerComplete} />
       <InputBoxSecurityCode setIsComplete={setIsSecurityComplete} />
       <InputBoxPassword setIsComplete={setIsPasswordComplete} />
-      {isFormComplete && <Button type="submit">다음</Button>}
+      {isFormFilled && (
+        <Link to="/CardListPage" className="next-button">
+          <Button type="submit">다음</Button>
+        </Link>
+      )}
     </form>
   );
 }

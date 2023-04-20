@@ -8,3 +8,12 @@ p {
   color: var(--input-text);
   font-size: 12px;
 }
+
+.next-button {
+  width: 30%;
+
+  margin-left: auto;
+  margin-right: 0;
+
+  text-align: right;
+}
