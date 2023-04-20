@@ -14,6 +14,7 @@ type InputInfo = {
 type InputProps = {
   labelText: string;
   inputInfoList: InputInfo[];
+  children?: React.ReactNode;
 };
 
 const handleMaxLength = (e: ChangeEvent) => {
@@ -23,11 +24,14 @@ const handleMaxLength = (e: ChangeEvent) => {
   }
 };
 
-const Input = ({ labelText, inputInfoList }: InputProps) => {
+const Input = ({ labelText, inputInfoList, children }: InputProps) => {
   return (
     <StyledInputWrapper>
       <StyledInputLabel>
-        {labelText}
+        <StyledInputLabelContainer>
+          <span>{labelText}</span>
+          <div>{children}</div>
+        </StyledInputLabelContainer>
         <div>
           {inputInfoList.map(
             ({ type, placeholder, maxLength, width, value, center, onChange }, index) => {
@@ -85,6 +89,11 @@ const StyledInput = styled.input`
   & + & {
     margin-left: 8px;
   }
+`;
+
+const StyledInputLabelContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
 export default Input;

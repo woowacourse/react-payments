@@ -125,38 +125,51 @@ const AddCardContainer = () => {
               onChange: onChangeState(cardOwner, setCardOwner),
             },
           ]}
-        />
-        <Input
-          labelText="보안 코드(CVC/CVV)"
-          inputInfoList={[
-            {
-              type: 'password',
-              maxLength: 3,
-              width: '75px',
-              center: false,
-              onChange: onChangeState(cardCVC, setCardCVC),
-            },
-          ]}
-        />
-        <Input
-          labelText="카드 비밀번호"
-          inputInfoList={[
-            {
-              type: 'password',
-              maxLength: 1,
-              width: '40px',
-              center: false,
-              onChange: onChangeState(cardPWD, setCardPWD),
-            },
-            {
-              type: 'password',
-              maxLength: 1,
-              width: '40px',
-              center: false,
-              onChange: onChangeState(cardPWD, setCardPWD),
-            },
-          ]}
-        />
+        >
+          <p>{cardOwner[0].length} / 30</p>
+        </Input>
+        <StyledHeightCenter>
+          <Input
+            labelText="보안 코드(CVC/CVV)"
+            inputInfoList={[
+              {
+                type: 'password',
+                maxLength: 3,
+                width: '75px',
+                center: false,
+                onChange: onChangeState(cardCVC, setCardCVC),
+              },
+            ]}
+          />
+          <StyledHelperButton disabled>?</StyledHelperButton>
+        </StyledHeightCenter>
+        <StyledHeightCenter>
+          <Input
+            labelText="카드 비밀번호"
+            inputInfoList={[
+              {
+                type: 'password',
+                maxLength: 1,
+                width: '40px',
+                center: false,
+                onChange: onChangeState(cardPWD, setCardPWD),
+              },
+              {
+                type: 'password',
+                maxLength: 1,
+                width: '40px',
+                center: false,
+                onChange: onChangeState(cardPWD, setCardPWD),
+              },
+            ]}
+          />
+          <StyledDotWrapper>
+            <StyledDot />
+          </StyledDotWrapper>
+          <StyledDotWrapper>
+            <StyledDot />
+          </StyledDotWrapper>
+        </StyledHeightCenter>
         <StyledSubmitButton onClick={onSubmitCard}>다음</StyledSubmitButton>
       </StyledForm>
     </AddCardContainerWrapper>
@@ -185,6 +198,48 @@ const StyledSubmitButton = styled.button`
   font-weight: 700;
   font-size: 14px;
   line-height: 16px;
+`;
+
+const StyledHelperButton = styled.button`
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+
+  color: #969696;
+  border: 1px solid #bababa;
+  background-color: #fff;
+  border-radius: 50%;
+  font-size: 20px;
+  font-weight: 500;
+
+  margin-top: 14px;
+`;
+
+const StyledHeightCenter = styled.div`
+  display: flex;
+  align-items: center;
+
+  margin-top: 18px;
+`;
+
+const StyledDotWrapper = styled.div`
+  margin-left: 8px;
+  width: 40px;
+  height: 40px;
+
+  background-color: white;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const StyledDot = styled.div`
+  width: 5px;
+  height: 5px;
+
+  border-radius: 50%;
+  background-color: black;
 `;
 
 export default AddCardContainer;
