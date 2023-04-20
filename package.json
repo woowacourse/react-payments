@@ -23,7 +23,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -65,10 +67,10 @@
     "@storybook/testing-library": "^0.0.14-next.2",
     "@typescript-eslint/parser": "^5.59.0",
     "babel-plugin-named-exports-order": "^0.0.2",
+    "gh-pages": "^5.0.0",
     "prop-types": "^15.8.1",
     "storybook": "^7.0.5",
     "webpack": "^5.79.0"
   },
-  "homepage": "./"
+  "homepage": "https://chsua.github.io/react-payments"
 }
-
