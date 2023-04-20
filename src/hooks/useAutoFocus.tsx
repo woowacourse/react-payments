@@ -1,5 +1,3 @@
-import { useRef } from "react";
-
 interface Props {
   initialRefs: Array<React.RefObject<HTMLInputElement>>;
   maxLength: number;
