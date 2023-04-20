@@ -1,7 +1,7 @@
 import CardInput from '../CardInput/CardInput';
 import CardLabel from '../CardLabel/CardLabel';
 import styled from 'styled-components';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 
 const Wrapper = styled.div`
   display: flex;
@@ -26,24 +26,16 @@ const Pargraph = styled.p`
   text-align: center;
 `;
 
-interface RefType {
-  [key: number]: React.RefObject<HTMLInputElement>;
+interface CardPasswordProps {
+  password: Record<number, string>;
+  setPassword: React.Dispatch<React.SetStateAction<Record<number, string>>>;
 }
 
-interface PasswordType {
-  [key: number]: string;
-}
-
-const CardPassword = () => {
-  const refObject: RefType = {
+const CardPassword = ({ password, setPassword }: CardPasswordProps) => {
+  const passwordRefs: Record<number, React.RefObject<HTMLInputElement>> = {
     0: useRef<HTMLInputElement>(null),
     1: useRef<HTMLInputElement>(null),
   };
-
-  const [password, setPassword] = useState<PasswordType>({
-    0: '',
-    1: '',
-  });
 
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const currentOrder = Number(e.target.dataset['order']);
@@ -55,7 +47,7 @@ const CardPassword = () => {
     setPassword({ ...password, [currentOrder]: e.target.value });
 
     if (currentOrder === 0 && password[0].length === 0) {
-      refObject[currentOrder + 1].current?.focus();
+      passwordRefs[currentOrder + 1].current?.focus();
     }
   };
 
@@ -67,7 +59,7 @@ const CardPassword = () => {
           <CardInput
             type="password"
             maxLength={1}
-            ref={refObject[0]}
+            ref={passwordRefs[0]}
             onChange={handleCardInputChange}
             value={password[0]}
             order={0}
@@ -79,7 +71,7 @@ const CardPassword = () => {
           <CardInput
             type="password"
             maxLength={1}
-            ref={refObject[1]}
+            ref={passwordRefs[1]}
             onChange={handleCardInputChange}
             value={password[1]}
             order={1}

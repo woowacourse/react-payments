@@ -1,7 +1,7 @@
+import { useRef } from 'react';
 import CardInput from '../CardInput/CardInput';
 import CardLabel from '../CardLabel/CardLabel';
 import styled from 'styled-components';
-import { useState } from 'react';
 
 const Wrapper = styled.div`
   display: flex;
@@ -16,12 +16,13 @@ const LabelContainer = styled.div`
   justify-content: space-between;
 `;
 
-const CardOwnerName = ({
-  nameRef,
-}: {
-  nameRef: React.RefObject<HTMLInputElement>;
-}) => {
-  const [ownerName, setOwnerName] = useState('');
+interface CardOwnerNameProps {
+  ownerName: string;
+  setOwnerName: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const CardOwnerName = ({ ownerName, setOwnerName }: CardOwnerNameProps) => {
+  const nameRef = useRef<HTMLInputElement>(null);
 
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!(e.target instanceof HTMLInputElement)) return;

@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/react';
 import ExpiredDate from './ExpiredDate';
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
 
 const meta = {
   component: ExpiredDate,
@@ -10,10 +10,12 @@ const meta = {
 export default meta;
 
 export const CardExpiredDateStory = () => {
-  const cardExpiredDateRefs = {
-    0: useRef<HTMLInputElement>(null),
-    1: useRef<HTMLInputElement>(null),
-  };
+  const [expiredDate, setExpiredDate] = useState<Record<number, string>>({
+    0: '',
+    1: '',
+  });
 
-  return <ExpiredDate refs={cardExpiredDateRefs} />;
+  return (
+    <ExpiredDate expiredDate={expiredDate} setExpiredDate={setExpiredDate} />
+  );
 };

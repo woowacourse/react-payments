@@ -36,22 +36,13 @@ const TextWrapper = styled.div`
   justify-content: space-between;
 `;
 
-interface RefType {
-  [key: number]: React.RefObject<HTMLInputElement>;
-}
-
 interface CardProps {
-  cardNumbers: any;
-  cardExpiredDateRefs: RefType;
-  cardOwnerNameRef: React.RefObject<HTMLInputElement>;
+  cardNumbers: Record<number, string>;
+  expiredDate: Record<number, string>;
+  cardOwnerName: string;
 }
 
-const Card = ({
-  cardNumbers,
-  cardExpiredDateRefs,
-  cardOwnerNameRef,
-}: CardProps) => {
-  //const [first, second, third, fourth] = cardNumbers;
+const Card = ({ cardNumbers, expiredDate, cardOwnerName }: CardProps) => {
   return (
     <>
       <Wrapper>
@@ -60,12 +51,14 @@ const Card = ({
           <TextWrapper>
             <CardText>{cardNumbers[0]}</CardText>
             <CardText>{cardNumbers[1]}</CardText>
-            <CardText>{cardNumbers[2]}</CardText>
-            <CardText>{cardNumbers[3]}</CardText>
+            <CardText>{'•'.repeat(cardNumbers[2].length)}</CardText>
+            <CardText>{'•'.repeat(cardNumbers[3].length)}</CardText>
           </TextWrapper>
           <TextWrapper>
-            <CardText>SUN</CardText>
-            <CardText>04/23</CardText>
+            <CardText>{cardOwnerName || 'NAME'}</CardText>
+            <CardText>
+              {expiredDate[0] || 'MM'} / {expiredDate[1] || 'YY'}
+            </CardText>
           </TextWrapper>
         </ChipWrapper>
       </Wrapper>

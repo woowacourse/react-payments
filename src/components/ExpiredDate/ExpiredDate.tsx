@@ -1,7 +1,7 @@
 import CardInput from '../CardInput/CardInput';
 import CardLabel from '../CardLabel/CardLabel';
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useRef } from 'react';
 
 const Wrapper = styled.div`
   display: flex;
@@ -15,19 +15,19 @@ const Pargraph = styled.p`
   width: 16px;
 `;
 
-interface RefType {
-  [key: number]: React.RefObject<HTMLInputElement>;
+interface ExpiredDateProps {
+  expiredDate: Record<number, string>;
+  setExpiredDate: React.Dispatch<React.SetStateAction<Record<number, string>>>;
 }
 
-interface TypingType {
-  [key: number]: string;
-}
-
-const ExpiredDate = ({ refs }: { refs: RefType }) => {
-  const [typing, setTyping] = useState<TypingType>({
-    0: '',
-    1: '',
-  });
+const ExpiredDate = ({ expiredDate, setExpiredDate }: ExpiredDateProps) => {
+  const cardExpiredDateRefs: Record<
+    number,
+    React.RefObject<HTMLInputElement>
+  > = {
+    0: useRef<HTMLInputElement>(null),
+    1: useRef<HTMLInputElement>(null),
+  };
 
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!(e.target instanceof HTMLInputElement)) return;
@@ -36,13 +36,13 @@ const ExpiredDate = ({ refs }: { refs: RefType }) => {
     if (/[^0-9]/g.test(e.target.value)) {
       return;
     }
-    setTyping({ ...typing, [currentOrder]: e.target.value });
+    setExpiredDate({ ...expiredDate, [currentOrder]: e.target.value });
 
     validateDate(currentOrder);
   };
 
   const validateDate = (currentOrder: number) => {
-    const currentRef = refs[currentOrder];
+    const currentRef = cardExpiredDateRefs[currentOrder];
 
     if (currentRef.current === null) return;
     // todo
@@ -50,14 +50,14 @@ const ExpiredDate = ({ refs }: { refs: RefType }) => {
 
     if (currentOrder === 1) {
       if (/^[0-9]{2}/g.test(currentRef.current.value)) return;
-      setTyping({ ...typing, 1: '' });
+      setExpiredDate({ ...expiredDate, 1: '' });
       return;
     }
 
-    refs[currentOrder + 1].current?.focus();
+    cardExpiredDateRefs[currentOrder + 1].current?.focus();
 
     if (!/^(0[1-9]|1[0-2])/g.test(currentRef.current.value)) {
-      setTyping({ ...typing, 0: '' });
+      setExpiredDate({ ...expiredDate, 0: '' });
       currentRef.current.focus();
       return;
     }
@@ -70,9 +70,9 @@ const ExpiredDate = ({ refs }: { refs: RefType }) => {
         <CardInput
           type="text"
           maxLength={2}
-          ref={refs[0]}
+          ref={cardExpiredDateRefs[0]}
           onChange={handleCardInputChange}
-          value={typing[0]}
+          value={expiredDate[0]}
           order={0}
           placeholder="MM"
           required={true}
@@ -81,9 +81,9 @@ const ExpiredDate = ({ refs }: { refs: RefType }) => {
         <CardInput
           type="text"
           maxLength={2}
-          ref={refs[1]}
+          ref={cardExpiredDateRefs[1]}
           onChange={handleCardInputChange}
-          value={typing[1]}
+          value={expiredDate[1]}
           order={1}
           placeholder="YY"
           required={true}

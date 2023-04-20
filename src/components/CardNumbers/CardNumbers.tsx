@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 import styled from 'styled-components';
 import CardInput from '../CardInput/CardInput';
 import CardLabel from '../CardLabel/CardLabel';
@@ -15,16 +15,13 @@ const Pargraph = styled.p`
   width: 32px;
 `;
 
-interface RefType {
-  [key: number]: React.RefObject<HTMLInputElement>;
+interface CardNumbersProps {
+  cardNumbers: Record<number, string>;
+  setCardNumbers: React.Dispatch<React.SetStateAction<Record<number, string>>>;
 }
 
-interface TypingType {
-  [key: number]: string;
-}
-
-const CardNumbers = ({ cardNumbers, setCardNumbers }: any) => {
-  const cardNumberRefs: RefType = {
+const CardNumbers = ({ cardNumbers, setCardNumbers }: CardNumbersProps) => {
+  const cardNumberRefs: Record<number, React.RefObject<HTMLInputElement>> = {
     0: useRef<HTMLInputElement>(null),
     1: useRef<HTMLInputElement>(null),
     2: useRef<HTMLInputElement>(null),

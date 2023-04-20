@@ -1,7 +1,7 @@
 import CardInput from '../CardInput/CardInput';
 import CardLabel from '../CardLabel/CardLabel';
 import styled from 'styled-components';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 
 const Wrapper = styled.div`
   display: flex;
@@ -27,8 +27,12 @@ const InputWrapper = styled.div`
   align-items: center;
 `;
 
-const SecurityCode = () => {
-  const [securityCode, setSecurityCode] = useState('');
+interface SecurityCodeProps {
+  securityCode: string;
+  setSecurityCode: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const SecurityCode = ({ securityCode, setSecurityCode }: SecurityCodeProps) => {
   const securityCodeRef = useRef<HTMLInputElement>(null);
 
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

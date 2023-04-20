@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/react';
 import CardOwnerName from './CardOwnerName';
-import { useRef } from 'react';
+import { useState } from 'react';
 
 const meta = {
   component: CardOwnerName,
@@ -10,7 +10,7 @@ const meta = {
 export default meta;
 
 export const CardOwnerNameStory = () => {
-  const cardNumberRefs = useRef<HTMLInputElement>(null);
+  const [ownerName, setOwnerName] = useState('');
 
-  return <CardOwnerName nameRef={cardNumberRefs} />;
+  return <CardOwnerName ownerName={ownerName} setOwnerName={setOwnerName} />;
 };
