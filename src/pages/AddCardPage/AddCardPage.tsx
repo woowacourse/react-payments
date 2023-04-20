@@ -67,11 +67,13 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
     const name = e.target.value;
 
     if (!isValidOwnerName(name)) {
-      alert("영문만 입력 가능합니다.");
+      alert("영문만 입력 가능합니다만?");
       return;
     }
-
-    setOwnerName(name.toUpperCase());
+    setOwnerName(name);
+    setTimeout(() => {
+      setOwnerName(name.toUpperCase());
+    }, 70);
   };
 
   const handleSecurityCode = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -95,7 +97,7 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
     e.preventDefault();
 
     if (!isValidMonth(expirationDate.month)) {
-      alert("잘못된 만료일 입력 형식입니다. 다시 입력해 주세요!");
+      alert("만료일이 잘못되었습니다만?");
 
       return;
     }
