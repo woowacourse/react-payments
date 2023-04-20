@@ -3,7 +3,7 @@ import './InputCardPassword.css';
 
 export type InputCardPasswordProps = {
   value: string;
-  onChange: (e: React.ChangeEvent) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   maxDataLength: number;
   minDataLength: number;
   passwordType: string;

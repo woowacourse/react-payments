@@ -6,6 +6,7 @@ import cvcInfo from '../asset/cvc_info.png';
 import { fetchData } from '../utils/fetchData';
 import { useNavigate } from 'react-router-dom';
 import './FormCardAdd.css';
+import { CardType, FormCardAddProps } from '../type';
 
 const FormCardAdd = ({
   cardNumber,
@@ -14,14 +15,14 @@ const FormCardAdd = ({
   securityCode,
   cardPassword1,
   cardPassword2,
-}: any) => {
+}: FormCardAddProps) => {
   const navigate = useNavigate();
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const { first, second, third, fourth } = cardNumber.value;
 
-    const postData = {
+    const postData: Omit<CardType, 'id'> = {
       cardType: '현대',
       cardNumber: {
         first,
@@ -43,6 +44,7 @@ const FormCardAdd = ({
     }
     navigate('/');
   };
+
   return (
     <form className="add-card-form" onSubmit={onSubmit}>
       <div>

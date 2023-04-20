@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-const usePasswordInput = (initialState: object) => {
+const usePasswordInput = <T>(initialState: T) => {
   const [value, setValue] = useState(initialState);
 
-  const onChange = (e: any) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue({
       ...value,
       [e.target.name]: e.target.value,

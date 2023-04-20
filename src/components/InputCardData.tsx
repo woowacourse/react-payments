@@ -3,7 +3,7 @@ import './InputCardData.css';
 
 export type InputProps = {
   value: string;
-  onChange: (e: React.ChangeEvent) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   className: string;
   name: string;
 };

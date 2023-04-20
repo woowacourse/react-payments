@@ -7,6 +7,7 @@ import useCardNumber from '../hooks/useCardNumber';
 import useInput from '../hooks/useInput';
 import usePasswordInput from '../hooks/usePasswordInput';
 import { formatExpireDate, handleNumberInput, isAlphabetInput, isNumberInput } from '../utils/util';
+import type { CardNumber, InputHook } from '../type';
 
 import './AddCardPage.css';
 
@@ -37,7 +38,7 @@ const AddCardPage = () => {
   const navigate = useNavigate();
   const [cardType, setCardType] = useState('현대');
 
-  const [cardNumber, onChangeCardNumber] = usePasswordInput({
+  const [cardNumber, onChangeCardNumber] = usePasswordInput<CardNumber>({
     first: '',
     second: '',
     third: '',
@@ -53,9 +54,9 @@ const AddCardPage = () => {
     navigate('/');
   };
 
-  const cardNumberProps = {
+  const cardNumberProps: InputHook<CardNumber> = {
     value: cardNumber,
-    onChange: (e: any) => {
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
       const lastWord = e.target.value[e.target.value.length - 1];
 
       if (e.target.value.length > 4) return;
@@ -63,7 +64,6 @@ const AddCardPage = () => {
 
       onChangeCardNumber(e);
     },
-    status: false,
   };
 
   return (
@@ -77,7 +77,7 @@ const AddCardPage = () => {
       <section className="add-card-page-body">
         <Card
           cardType={cardType}
-          cardNumber={cardNumber as any}
+          cardNumber={cardNumber}
           cardOwner={cardOwner.value}
           expired={cardExpire.value}
         />

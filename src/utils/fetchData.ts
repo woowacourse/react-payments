@@ -1,12 +1,14 @@
-export const fetchData = (data: any): boolean => {
+import type { CardType } from '../type';
+
+export const fetchData = (data: Omit<CardType, 'id'>): boolean => {
   const getData = localStorage.getItem('cardList');
 
   if (getData) {
     const dataToArr = JSON.parse(getData);
 
-    const sameNumbers = dataToArr.filter((card: any) => {
+    const sameNumbers = dataToArr.filter((card: Omit<CardType, 'id'>) => {
       const { cardNumber } = card;
-      const keys = Object.keys(cardNumber);
+      const keys = Object.keys(cardNumber) as ('first' | 'second' | 'third' | 'fourth')[];
       let cardNumberSerial = '';
       let fetchCardNumberSerial = '';
       for (const key of keys) {
