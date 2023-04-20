@@ -11,7 +11,6 @@ function CardAddButton() {
 
   return (
     <St.AddButtonSection>
-      <St.Title>새로운 카드를 등록해주세요.</St.Title>
       <St.CardAddButton onClick={moveToAddCardForm}>+</St.CardAddButton>
     </St.AddButtonSection>
   );

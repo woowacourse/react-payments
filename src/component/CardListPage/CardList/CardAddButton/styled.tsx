@@ -6,13 +6,6 @@ const St = {
     flex-direction: column;
     align-items: center;
   `,
-  Title: styled.h1`
-    margin-top: 15px;
-    margin-bottom: 15px;
-
-    font: 700 14px/16px "Roboto";
-    color: #575757;
-  `,
 
   CardAddButton: styled.button`
     width: 280px;
