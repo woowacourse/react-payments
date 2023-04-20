@@ -13,14 +13,14 @@ export function CardNumberInputs({ valueAndOnChanges }: CardNumberInputProps) {
   const handleChange = (
     e: ChangeEvent<HTMLInputElement>,
     index: number,
-    onChange: ChangeEventHandler<HTMLInputElement>
+    onChange?: ChangeEventHandler<HTMLInputElement>
   ) => {
     const value = e.target.value;
 
     if (index < valueAndOnChanges.length - 1 && value.length === e.target.maxLength) {
       inputRefs[index + 1].current?.focus();
     }
-    onChange(e);
+    onChange && onChange(e);
   };
 
   return (

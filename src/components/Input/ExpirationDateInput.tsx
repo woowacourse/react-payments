@@ -1,11 +1,7 @@
 import { Input } from 'components/common';
 import React, { ChangeEventHandler, ChangeEvent } from 'react';
 import styled from 'styled-components';
-
-export type ValueAndOnChange = {
-  value: string;
-  onChange: ChangeEventHandler<HTMLInputElement>;
-};
+import { ValueAndOnChange } from './types';
 
 interface ExpirationProps {
   month: ValueAndOnChange;
@@ -19,14 +15,15 @@ export function ExpirationDateInput(props: ExpirationProps) {
   const handleChange = (
     e: ChangeEvent<HTMLInputElement>,
     index: number,
-    onChange: ChangeEventHandler<HTMLInputElement>
+    onChange?: ChangeEventHandler<HTMLInputElement>
   ) => {
     const value = e.target.value;
 
     if (index < Object.keys(props).length - 1 && value.length === e.target.maxLength) {
       inputRefs[index + 1].current?.focus();
     }
-    onChange(e);
+
+    onChange && onChange(e);
   };
 
   return (
