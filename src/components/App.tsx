@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import NotFound from '../pages/NotFound';
 import Home from '../pages/Home';
 import CardRegistration from '../pages/CardRegistration';
@@ -19,13 +19,13 @@ const App = () => {
 
   return (
     <div className={styles.container}>
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           <Route path="/" element={<Home cardInfo={cardInfo} />}></Route>
           <Route path="/card-registration" element={<CardRegistration registerNewCard={registerNewCard} />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 };
