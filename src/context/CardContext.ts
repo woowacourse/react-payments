@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 
 export type Card = {
+  id: string;
   cardNumbers: string[];
   cardExpirationDate: string[];
   cardOwner: string[];

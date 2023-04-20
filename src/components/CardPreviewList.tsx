@@ -14,8 +14,9 @@ const CardPreviewList = () => {
 
   return (
     <CardPreviewListWrapper>
-      {cardList.map(({ cardNumbers, cardExpirationDate, cardOwner }) => (
+      {cardList.map(({ id, cardNumbers, cardExpirationDate, cardOwner }) => (
         <CardPreview
+          key={id}
           cardNumbers={cardNumbers}
           cardOwner={cardOwner}
           cardExpirationDate={cardExpirationDate}

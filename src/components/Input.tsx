@@ -48,6 +48,7 @@ const Input = ({ labelText, inputInfoList, children }: InputProps) => {
             ) => {
               return (
                 <StyledInput
+                  key={index}
                   pattern={`.{${minLength},}`}
                   required={minLength !== 0}
                   type={type === 'number' ? 'text' : type}

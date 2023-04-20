@@ -6,6 +6,7 @@ import Input from './Input';
 import { useCardDispatch } from '../context/CardContext';
 import { isAlphabet, isNumber, regEx, validateMonth, validateYear } from '../utils/validateInput';
 import ErrorMessage from './ErrorMessage';
+import { getUniqueID } from '../utils/key';
 
 const AddCardContainer = () => {
   const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
@@ -72,7 +73,10 @@ const AddCardContainer = () => {
 
   const successSubmit = () => {
     setCard((prev) => {
-      return [...prev, { cardNumbers, cardExpirationDate, cardOwner, cardCVC, cardPWD }];
+      return [
+        ...prev,
+        { id: getUniqueID(), cardNumbers, cardExpirationDate, cardOwner, cardCVC, cardPWD },
+      ];
     });
     navigate('/');
     setExpirationError(false);

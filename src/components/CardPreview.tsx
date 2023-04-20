@@ -15,13 +15,13 @@ const CardPreview = ({ cardNumbers, cardOwner, cardExpirationDate }: CardPreview
         {cardNumbers.map((cardNumber, index) => {
           if (index < 2) {
             return (
-              <CardNumber>
+              <CardNumber key={index}>
                 <div>{cardNumber}</div>
               </CardNumber>
             );
           } else {
             return (
-              <CardNumber>
+              <CardNumber key={index}>
                 {Array(cardNumber.length)
                   .fill(0)
                   .map(() => (
