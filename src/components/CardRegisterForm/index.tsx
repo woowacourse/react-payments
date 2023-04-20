@@ -13,6 +13,7 @@ import Input, { Focus } from '../Input';
 import Tooltip from '../Tooltip';
 import TooltipButton from '../TooltipButton';
 
+import { isNotAlphabet, isNotNumber } from '../../utils/validation';
 import type { CardInfo } from '../../types/card';
 
 import styles from './cardRegisterForm.module.css';
@@ -54,16 +55,6 @@ const CardRegisterForm = ({ registerCard }: Props) => {
     cvc.length === 3 &&
     cardPassword1.length === 1 &&
     cardPassword2.length === 1;
-
-  const isNotNumber = (value: string) => {
-    return (
-      Number.isNaN(Number(value)) || value.includes(' ') || value.includes('.')
-    );
-  };
-
-  const isNotAlphabet = (value: string) => {
-    return !/^[a-zA-Z\s]*$/.test(value);
-  };
 
   const isValidExpiredDate = (month: number, year: number) => {
     if (month < 1 || month > 12) return false;
