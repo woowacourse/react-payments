@@ -32,7 +32,6 @@ const Slash = styled.span`
   color: #737373;
 `;
 export default function ExpiracyInput({ year, month }: ExpiracyInputProps) {
-  console.log(year, month);
   return (
     <Wrapper>
       <InputWrapper>
