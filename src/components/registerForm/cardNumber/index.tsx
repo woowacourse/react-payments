@@ -17,7 +17,6 @@ interface Props {}
 
 export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
   const [cardInput, setCardInput] = useContext(InputValuesContext);
-  // const [cardNumber, setCardNumber] = useState(cardNumberData);
 
   const [cardError, setCardError] = useState({
     isError: false,
@@ -110,9 +109,17 @@ export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
 
 const CardNumberInputContainer = styled.div`
   display: flex;
+  -webkit-box-align: center;
   align-items: center;
+  -webkit-box-pack: justify;
   justify-content: space-between;
-  width: 318px;
+
+  width: 100%;
+  height: 45px;
+
+  border-radius: 7px;
+  background-color: #ecebf1;
+  padding: 0 10px;
 `;
 
 const CardNumberInput = css`

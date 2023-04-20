@@ -57,15 +57,22 @@ const CardNumberContainer = styled.div`
   display: flex;
   justify-content: space-around;
 
+  height: 13px;
+
   color: white;
   font-weight: 600;
   font-size: 10px;
   letter-spacing: 3px;
+
+  span {
+    width: 35px;
+    display: inline-block;
+  }
 `;
 
 const CardNameContainer = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 
   color: white;

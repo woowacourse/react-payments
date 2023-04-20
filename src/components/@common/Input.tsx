@@ -1,49 +1,46 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import styled, { CSSProp } from "styled-components";
 
 interface Props extends StyleInputProps {
-  value: string;
+  value?: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   maxLength?: number;
   placeholder?: string;
   type?: string;
-  inputmode?:
-    | "text"
-    | "search"
-    | "none"
-    | "tel"
-    | "url"
-    | "email"
-    | "numeric"
-    | "decimal"
-    | undefined;
+  inputmode?: React.HTMLAttributes<HTMLLIElement>["inputMode"];
 }
 
 interface StyleInputProps {
   customInputStyle?: CSSProp;
 }
 
-function Input({ value, placeholder, onChange, inputmode, ...props }: Props) {
+const Input = forwardRef<HTMLInputElement, Props>(function (
+  { value, placeholder, onChange, inputmode, ...props }: Props,
+  ref,
+) {
   return (
     <InputStyle
       value={value}
       onChange={onChange}
       inputMode={inputmode ?? "none"}
       placeholder={placeholder}
+      ref={ref}
       {...props}
     />
   );
-}
+});
 
 export default Input;
 
 const InputStyle = styled.input<StyleInputProps>`
-  /* width: ${(props) => props.width ?? "318px"}; */
+  width: ${(props) => props.width ?? "100%"};
   height: 45px;
 
   background-color: #ecebf1;
   border-radius: 7px;
   border: none;
+
+  padding: 0 10px;
 
   &:focus {
     outline: none;
