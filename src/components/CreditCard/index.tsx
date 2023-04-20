@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
 import * as T from 'types';
@@ -25,19 +24,17 @@ function CreditCard({ fullFilled, creditCard: { expiry, number, owner } }: Credi
   return (
     <S.CreditCardLayout isVaild={isVaild()}>
       <S.CreditCardICChip />
-      <S.Booooxx>
+      <S.CreditCardInfoLayout>
         <S.CreditCardNumber>
-          {creditCard.convertSecuredCreditCard(number).map((num, idx) => <div key={idx}>{num}</div>)}
+          {creditCard.convertSecuredCreditCard(number).map((num, idx) => (
+            <div key={idx}>{num}</div>
+          ))}
         </S.CreditCardNumber>
-        <S.CreditCardConatiner>
-          <S.CreditCardBox>
-            {owner}
-          </S.CreditCardBox>
-          <S.CreditCardBox>
-            {expiry}
-          </S.CreditCardBox>
-        </S.CreditCardConatiner>
-      </S.Booooxx>
+        <S.CreditCardContainer>
+          <S.CreditCardBox>{owner}</S.CreditCardBox>
+          <S.CreditCardBox>{expiry}</S.CreditCardBox>
+        </S.CreditCardContainer>
+      </S.CreditCardInfoLayout>
     </S.CreditCardLayout>
   );
 }
