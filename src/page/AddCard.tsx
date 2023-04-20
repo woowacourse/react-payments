@@ -6,7 +6,11 @@ import styled from "styled-components";
 import { CardForm } from "../components/CardForm";
 import { Link } from "react-router-dom";
 
-export const AddCard = () => {
+interface AddCardProps {
+  setCards: React.Dispatch<React.SetStateAction<CardType[]>>;
+}
+
+export const AddCard = ({ setCards }: AddCardProps) => {
   const [cardInfo, setCardInfo] = useState<CardType>({
     numbers: "",
     owner: "",
@@ -26,7 +30,11 @@ export const AddCard = () => {
       </HeaderWrapper>
       <Main>
         <CardItem card={cardInfo} />
-        <CardForm cardInfo={cardInfo} setCardInfo={setCardInfo} />
+        <CardForm
+          cardInfo={cardInfo}
+          setCardInfo={setCardInfo}
+          addNewCards={setCards}
+        />
       </Main>
     </>
   );

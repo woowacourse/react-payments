@@ -6,15 +6,19 @@ import { ExpiryDateInput } from "./ExpiryDateInput";
 import { OwnerInput } from "./OwnerInput";
 import { PasswordInput } from "./PasswordInput";
 import { FormEvent } from "react";
-import { pushData } from "../page/Home";
 import { useNavigate } from "react-router-dom";
 
 interface CardFormProps {
   cardInfo: CardType;
   setCardInfo: (value: any) => void;
+  addNewCards: React.Dispatch<React.SetStateAction<CardType[]>>;
 }
 
-export const CardForm = ({ cardInfo, setCardInfo }: CardFormProps) => {
+export const CardForm = ({
+  cardInfo,
+  setCardInfo,
+  addNewCards,
+}: CardFormProps) => {
   const history = useNavigate();
 
   const moveToHome = () => {
@@ -29,15 +33,19 @@ export const CardForm = ({ cardInfo, setCardInfo }: CardFormProps) => {
     console.log(data);
 
     const newCard = {
-      numbers: data.cardNumber,
-      expiryDate: data.expiryDate,
-      owner: data.owner,
+      numbers: cardInfo.numbers,
+      expiryDate: cardInfo.expiryDate,
+      owner: cardInfo.owner,
       color: "#525252",
       CVC: Number(data.cvc),
       password: [Number(data.password1), Number(data.password2)],
-    };
+    } as CardType;
 
-    pushData(newCard);
+    addNewCards((prev: CardType[]) => {
+      const newData = [...prev, newCard];
+      localStorage.setItem("cards", JSON.stringify(newData));
+      return newData;
+    });
     moveToHome();
 
     console.log(newCard);
@@ -55,6 +63,7 @@ export const CardForm = ({ cardInfo, setCardInfo }: CardFormProps) => {
         }}
       />
       <ExpiryDateInput
+        expiryDate={cardInfo.expiryDate}
         setExpiryDate={(date: string) => {
           setCardInfo({ ...cardInfo, expiryDate: date });
         }}
