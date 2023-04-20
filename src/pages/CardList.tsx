@@ -9,8 +9,8 @@ function CardList() {
   const navigation = useNavigate();
   const { cardList } = useCardList({ key: "card-list" });
 
-  const cardLists = useMemo(
-    () =>
+  const cardLists = useMemo(() => {
+    return cardList.length ? (
       cardList.map((card) => {
         const { cardNumbers, ownerName, expireDate } = card;
         return (
@@ -21,21 +21,18 @@ function CardList() {
             expireDate={expireDate}
           />
         );
-      }),
-    [cardList],
-  );
+      })
+    ) : (
+      <CardRegisterParagarph>새로운 카드를 등록해주세요.</CardRegisterParagarph>
+    );
+  }, [cardList]);
 
   return (
     <Layout>
       <CardListSection>
-        {cardList.length ? (
-          cardLists
-        ) : (
-          <CardRegisterParagarph>
-            새로운 카드를 등록해주세요.
-          </CardRegisterParagarph>
-        )}
+        {cardLists}
         <AddButton
+          isFirst={cardList.length ? false : true}
           onClick={() => {
             navigation("/card-register");
           }}
@@ -59,7 +56,7 @@ const CardRegisterParagarph = styled.p`
   margin-bottom: 9px;
 `;
 
-const AddButton = styled.button`
+const AddButton = styled.button<{ isFirst: boolean }>`
   width: 208px;
   height: 123px;
 
@@ -71,4 +68,6 @@ const AddButton = styled.button`
   font-weight: 400;
   font-size: 30px;
   line-height: 35px;
+
+  margin: ${(props) => (props.isFirst ? "" : "25px auto")};
 `;
