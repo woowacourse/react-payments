@@ -20,14 +20,16 @@ function ExpireDate() {
     const date = value.replace("/", "");
 
     if (!ONLY_NUMBER_REGEXP.test(date)) return;
+    if (!setCardInput) return;
+
+    const dateValitation =
+      value.length > 0 &&
+      (!MMYY_REGEXP.test(date) ||
+        curYY.slice(2) > YY ||
+        (curYY.slice(2) === YY && curMM > MM));
 
     try {
-      if (
-        value.length > 0 &&
-        (!MMYY_REGEXP.test(date) ||
-          curYY.slice(2) > YY ||
-          (curYY.slice(2) === YY && curMM > MM))
-      ) {
+      if (dateValitation) {
         throw new Error();
       }
 
@@ -35,9 +37,12 @@ function ExpireDate() {
     } catch {
       setExpireError(true);
     } finally {
+      if (dateValitation && value.length === 5) {
+        setCardInput((prev) => ({ ...prev, expireDate: "" }));
+        return;
+      }
       const expire = date.match(/.{1,2}/g) ?? [];
 
-      if (!setCardInput) return;
       setCardInput((prev) => ({ ...prev, expireDate: expire.join("/") }));
     }
   };
