@@ -36,22 +36,34 @@ function CreditCardRegister() {
     setMarkedCreditCardNumber(markedNumber);
     setCreditCardNumber(event.target.value);
   };
+
   const [creditCardExpiry, setCreditCardExpiry] = useState('');
   const handleChangeCreditCardExpiry = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCreditCardExpiry(event.target.value);
+    const newCardExpiry = event.target.value.replaceAll('/', '');
+
+    if (newCardExpiry.length <= 2) setCreditCardExpiry(newCardExpiry);
+    else if (newCardExpiry.length <= 4) {
+      const newCardExpiryArray = newCardExpiry.split('');
+      newCardExpiryArray.splice(2, 0, '/');
+      setCreditCardExpiry(newCardExpiryArray.join(''));
+    }
   };
+
   const [creditCardOwner, setCreditCardOwner] = useState('');
   const handleChangeCreditCardOwner = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCreditCardOwner(event.target.value);
   };
+
   const [creditCardCVC, setCreditCardCVC] = useState('');
   const handleChangeCreditCardCVC = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCreditCardCVC(event.target.value);
   };
+
   const [creditCardPassword, setCreditCardPassword] = useState<CreditCardPasswordType>({ first: '', second: '' });
   const handleChangeCreditCardFirstPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCreditCardPassword({ ...creditCardPassword, first: event.target.value });
   };
+
   const handleChangeCreditCardSecondPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCreditCardPassword({ ...creditCardPassword, second: event.target.value });
   };
