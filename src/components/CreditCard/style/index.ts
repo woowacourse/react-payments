@@ -11,8 +11,6 @@ export const CreditCardLayout = styled.div<Props>`
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
     padding: 14px;
-
-    
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 500;
@@ -20,7 +18,6 @@ export const CreditCardLayout = styled.div<Props>`
     line-height: 14px;
     color: #FFFFFF;
     letter-spacing: 3px;
-
     border: ${(props) => (props.isVaild ? '' : '2px solid red')};
 `;
 
@@ -37,12 +34,16 @@ export const Booooxx = styled.div`
     display: grid;
     grid-template-rows: 1fr 1fr;
     row-gap: 12px;
-    align-items: center
+    align-items: center;
+    min-width: 100%;
 `;
 
 export const CreditCardConatiner = styled.div`
-    display: flex;
-    justify-content: space-between;
+    min-width: 100%;
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: 165px auto;
+    column-gap: 10px;
 `;
 
 export const CreditCardNumber = styled.div`
@@ -52,8 +53,11 @@ export const CreditCardNumber = styled.div`
     justify-items: flex-start;
 `;
 
-export const CreditCardBox = styled.div`
+export const CreditCardBox = styled.div`    
     display: flex;
     align-items: start;
     letter-spacing: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 `;

@@ -36,7 +36,7 @@ export const CreditCardRegisterForm = styled.form`
     }
 `;
 
-export const Box = styled.div`
+export const RelativeBox = styled.div`
     position: relative;
 `;
 
