@@ -1,6 +1,5 @@
 import { CardNumberFormat, PasswordFormat } from '../types';
 
-// ! cardNumber 검증 추가했음
 const validateCardNumber = (cardNumberInputs: CardNumberFormat) => {
   return cardNumberInputs.every((number) => number.length === 4);
 };
@@ -29,7 +28,6 @@ const validateSecurityCode = (input: string) => {
   return input.length >= 3 && input.length <= 4;
 };
 
-// ! password 검증 수정했음
 const validatePassword = (passwordInputs: PasswordFormat) => {
   return passwordInputs.every((password) => password.length === 1);
 };
