@@ -67,10 +67,10 @@ const CardRegisterForm = ({ registerCard }: Props) => {
   const autoFocusNextInput = (target: HTMLInputElement) => {
     const { value, maxLength, tabIndex } = target;
 
-    if (tabIndex === inputRefs.length - 1) return;
+    if (tabIndex === inputRefs.length) return;
 
     if (value.length === maxLength) {
-      inputRefs[tabIndex + 1].current?.focus();
+      inputRefs[tabIndex].current?.focus();
     }
   };
 
@@ -139,7 +139,7 @@ const CardRegisterForm = ({ registerCard }: Props) => {
               minLength={4}
               maxLength={4}
               required
-              tabIndex={0}
+              tabIndex={1}
               autoFocus
               value={cardNumber1}
               onChange={(e) => handleNumberChange(e, setCardNumber1)}
@@ -152,20 +152,19 @@ const CardRegisterForm = ({ registerCard }: Props) => {
               minLength={4}
               maxLength={4}
               required
-              tabIndex={1}
+              tabIndex={2}
               value={cardNumber2}
               onChange={(e) => handleNumberChange(e, setCardNumber2)}
               ref={inputRefs[1]}
               placeholder="0000"
             />
             <span>-</span>
-
             <Input
               type="password"
               minLength={4}
               maxLength={4}
               required
-              tabIndex={2}
+              tabIndex={3}
               value={cardNumber3}
               onChange={(e) => handleNumberChange(e, setCardNumber3)}
               ref={inputRefs[2]}
@@ -177,7 +176,7 @@ const CardRegisterForm = ({ registerCard }: Props) => {
               minLength={4}
               maxLength={4}
               required
-              tabIndex={3}
+              tabIndex={4}
               value={cardNumber4}
               onChange={(e) => handleNumberChange(e, setCardNumber4)}
               ref={inputRefs[3]}
@@ -194,7 +193,7 @@ const CardRegisterForm = ({ registerCard }: Props) => {
               minLength={2}
               maxLength={2}
               required
-              tabIndex={4}
+              tabIndex={5}
               placeholder="MM"
               value={expiredMonth}
               onChange={(e) => handleNumberChange(e, setExpiredMonth)}
@@ -206,7 +205,7 @@ const CardRegisterForm = ({ registerCard }: Props) => {
               minLength={2}
               maxLength={2}
               required
-              tabIndex={5}
+              tabIndex={6}
               placeholder="YY"
               value={expiredYear}
               onChange={(e) => handleNumberChange(e, setExpiredYear)}
@@ -224,7 +223,7 @@ const CardRegisterForm = ({ registerCard }: Props) => {
                 type="text"
                 maxLength={20}
                 placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-                tabIndex={6}
+                tabIndex={7}
                 value={owner}
                 onChange={(e) => handleOwnerChange(e)}
                 ref={inputRefs[6]}
@@ -242,14 +241,15 @@ const CardRegisterForm = ({ registerCard }: Props) => {
                 minLength={3}
                 maxLength={3}
                 required
-                tabIndex={7}
+                tabIndex={8}
                 value={cvc}
                 onChange={(e) => handleNumberChange(e, setCvc)}
                 ref={inputRefs[7]}
               />
             </div>
+
             <Tooltip>
-              <TooltipButton />
+              <TooltipButton tabIndex={12} />
             </Tooltip>
           </div>
         </label>
@@ -262,7 +262,7 @@ const CardRegisterForm = ({ registerCard }: Props) => {
               minLength={1}
               maxLength={1}
               required
-              tabIndex={8}
+              tabIndex={9}
               value={cardPassword1}
               onChange={(e) => handleNumberChange(e, setCardPassword1)}
               ref={inputRefs[8]}
@@ -272,7 +272,7 @@ const CardRegisterForm = ({ registerCard }: Props) => {
               minLength={1}
               maxLength={1}
               required
-              tabIndex={9}
+              tabIndex={10}
               value={cardPassword2}
               onChange={(e) => handleNumberChange(e, setCardPassword2)}
               ref={inputRefs[9]}
@@ -283,7 +283,9 @@ const CardRegisterForm = ({ registerCard }: Props) => {
         </label>
 
         {isValidCardData && (
-          <button className={styles.submitButton}>다음</button>
+          <button tabIndex={11} className={styles.submitButton}>
+            다음
+          </button>
         )}
       </form>
     </>
