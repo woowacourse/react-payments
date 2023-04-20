@@ -35,7 +35,7 @@ jobs:
       - name: Install Dependencies
 
         if: steps.cache.outputs.cache-hit != 'true'
-        run: npm ci
+        run: npm ci --legacy-peer-deps
 
       - name: Build
         run: CI='' npm run build
