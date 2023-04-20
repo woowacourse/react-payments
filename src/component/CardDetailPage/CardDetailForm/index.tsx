@@ -24,7 +24,7 @@ type CardDetailFormProps = {
   changeCardPassword: (e: React.FormEvent<HTMLInputElement>) => void;
   cardPassword: [string, string];
 
-  submitCreditCard: (e: React.FormEvent<HTMLFormElement>) => void;
+  submitCreditCard: () => void;
 };
 
 function CardDetailForm({
