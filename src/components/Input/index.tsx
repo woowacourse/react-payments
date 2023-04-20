@@ -7,12 +7,13 @@ export type InputProps<T> = {
   textAlign: 'center' | 'start',
   placeholder?: string,
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+  onClick?: () => void,
 };
 
 type InputValueType = string | number | readonly string[] | undefined;
 
 function Input<T extends InputValueType>({
-  type, value, width, textAlign, placeholder, onChange
+  type, value, width, textAlign, placeholder, onChange, onClick
 }: InputProps<T>) {
   return (
     <S.Input
@@ -21,6 +22,7 @@ function Input<T extends InputValueType>({
       type={type}
       value={value}
       onChange={onChange}
+      onClick={onClick}
       placeholder={placeholder}
     />
   );

@@ -1,16 +1,39 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable max-len */
 import CreditCard from 'components/CreditCard';
 import Input from 'components/Input';
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as S from './style';
 
 type CreditCardPasswordType = { first: string, second: string };
 
+// copied
+const convertSecuredCreditCard = (number: string) => {
+  const creditCardNumberLength = number.length;
+  const securedCreditNumber = creditCardNumberLength <= 8
+    ? number
+    : number.slice(0, 8) + '●'.repeat(number.length - 8);
+  return securedCreditNumber.split('').reduce((a, b, i) => {
+    a[Math.floor(i / 4)].push(b);
+    return a;
+  }, [[], [], [], []] as string[][]);
+};
+
 function CreditCardRegister() {
   const navigate = useNavigate();
+
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [markedCreditCardNumber, setMarkedCreditCardNumber] = useState('');
+
   const [creditCardNumber, setCreditCardNumber] = useState('');
   const handleChangeCreditCardNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const markedNumber = convertSecuredCreditCard(event.target.value)
+      .filter((numbers) => !!numbers.length)
+      .map((numbers) => numbers.join(''))
+      .join(' - ');
+
+    setMarkedCreditCardNumber(markedNumber);
     setCreditCardNumber(event.target.value);
   };
   const [creditCardExpiry, setCreditCardExpiry] = useState('');
@@ -62,11 +85,28 @@ function CreditCardRegister() {
       <S.CreditCardRegisterForm>
         <S.Box>
           <S.CreditCardRegisterLabel>카드 번호</S.CreditCardRegisterLabel>
-          <Input type="string" value={creditCardNumber} width="100%" textAlign="center" onChange={handleChangeCreditCardNumber} />
+          <Input
+            type="string"
+            value={markedCreditCardNumber}
+            width="100%"
+            textAlign="center"
+            onClick={() => {
+              if (inputRef.current) {
+                inputRef.current.focus();
+              }
+            }}
+            onChange={() => { }}
+          />
+          <S.HiddentInput
+            ref={inputRef}
+            type="string"
+            value={creditCardNumber}
+            onChange={handleChangeCreditCardNumber}
+          />
         </S.Box>
         <S.Box>
           <S.CreditCardRegisterLabel>만료일</S.CreditCardRegisterLabel>
-          <Input placeholder="MM/YY" type="string" value={creditCardExpiry} width="40%" textAlign="center" onChange={handleChangeCreditCardExpiry} />
+          <Input placeholder="MM /YY" type="string" value={creditCardExpiry} width="40%" textAlign="center" onChange={handleChangeCreditCardExpiry} />
         </S.Box>
         <S.Box>
           <S.FlexBox>

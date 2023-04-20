@@ -19,7 +19,7 @@ export const CreditCardLayout = styled.div<Props>`
     font-size: 12px;
     line-height: 14px;
     color: #FFFFFF;
-    letter-spacing: 6px;
+    letter-spacing: 3px;
 
     border: ${(props) => (props.isVaild ? '' : '2px solid red')};
 `;
@@ -48,7 +48,7 @@ export const CreditCardConatiner = styled.div`
 export const CreditCardNumber = styled.div`
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    column-gap: 10px;
+    column-gap: 5px;
     justify-items: flex-start;
 `;
 

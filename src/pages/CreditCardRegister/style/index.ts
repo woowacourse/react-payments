@@ -29,9 +29,15 @@ export const PreviewCreditCard = styled.div`
 export const CreditCardRegisterForm = styled.form`
     display: grid;
     row-gap: 20px;
+
+    #hiddenInput{
+        visibility: hidden;
+    }
 `;
 
-export const Box = styled.div``;
+export const Box = styled.div`
+    position: relative;
+`;
 
 export const FlexBox = styled.div`
     display: flex;
@@ -51,5 +57,12 @@ export const ButtonWrapper = styled.div`
 
 export const ResigerButton = styled.button`
     font-weight: 700;
+`;
 
+export const HiddentInput = styled.input`
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
 `;
