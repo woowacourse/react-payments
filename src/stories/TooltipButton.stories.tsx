@@ -2,12 +2,12 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import TooltipButton from '../components/TooltipButton';
 
-const meta = {
+const meta: Meta<typeof TooltipButton> = {
   title: 'Example/TooltipButton',
   component: TooltipButton,
-} satisfies Meta<typeof TooltipButton>;
+};
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof TooltipButton>;
 
 export const Default: Story = {};
