@@ -86,6 +86,7 @@ export function useCardCVC() {
   const defaultConditions = useMemo(
     () => ({
       pattern: '[0-9]{3}',
+      type: 'password',
       maxLength: 3,
       asChild: true,
       required: true,
