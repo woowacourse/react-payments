@@ -7,8 +7,11 @@ import { SecurityCodeInput } from './input/SecurityCodeInput';
 import { PasswordInput } from './input/PasswordInput';
 import { CardViewer } from './CardViewer';
 import { cardDataService } from '../domains/cardDataService';
+import { useNavigate } from 'react-router-dom';
 
 export const AddNewCardForm = () => {
+  const navigate = useNavigate();
+
   const [isInputFinish, setIsInputFinish] = useState(false);
 
   const [cardNumber, setCardNumber] = useState({
@@ -69,7 +72,7 @@ export const AddNewCardForm = () => {
           password,
         });
 
-        window.location.href = `${process.env.PUBLIC_URL}/`;
+        navigate('/');
       }}
     >
       <CardViewer

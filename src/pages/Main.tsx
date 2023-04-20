@@ -3,8 +3,10 @@ import { CardViewer } from '../components/CardViewer';
 import { cardDataService } from '../domains/cardDataService';
 import { Layout } from '../layout';
 import { v4 } from 'uuid';
+import { useNavigate } from 'react-router-dom';
 
 export const Main = () => {
+  const navigate = useNavigate();
   const cardList = cardDataService.getCardList();
 
   return (
@@ -14,11 +16,7 @@ export const Main = () => {
         {cardList.length === 0 ? (
           <Style.EmptyCardListWrapper>
             <Style.Caption>새로운 카드를 등록해주세요.</Style.Caption>
-            <Style.AddCardButton
-              onClick={() =>
-                (window.location.href = `${process.env.PUBLIC_URL}/register`)
-              }
-            >
+            <Style.AddCardButton onClick={() => navigate('/register')}>
               +
             </Style.AddCardButton>
           </Style.EmptyCardListWrapper>
@@ -36,11 +34,7 @@ export const Main = () => {
           })
         )}
         {cardList.length !== 0 && (
-          <Style.AddCardButton
-            onClick={() =>
-              (window.location.href = `${process.env.PUBLIC_URL}/register`)
-            }
-          >
+          <Style.AddCardButton onClick={() => navigate('/register')}>
             +
           </Style.AddCardButton>
         )}

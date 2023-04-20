@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 interface Props {
@@ -5,10 +6,12 @@ interface Props {
 }
 
 export const BackButton = ({ path }: Props) => {
+  const navigate = useNavigate();
+
   return (
     <Style.Wrapper
       onClick={() => {
-        window.location.href = `${process.env.PUBLIC_URL}/${path}`;
+        navigate(path);
       }}
     >
       <svg
