@@ -1,5 +1,9 @@
-import React from "react";
+import React, { MouseEvent } from "react";
 import styled from "styled-components";
+
+interface AddCardButtonProps {
+  onClick: (event: MouseEvent<HTMLElement>) => void;
+}
 
 const Wrapper = styled.button`
   width: 213px;
@@ -15,9 +19,10 @@ const PlusWrapper = styled.svg`
   max-width: 36px;
   color: #575757;
 `;
-export default function AddCardButton() {
+
+export default function AddCardButton({ onClick }: AddCardButtonProps) {
   return (
-    <Wrapper>
+    <Wrapper onClick={onClick}>
       <PlusWrapper
         xmlns="http://www.w3.org/2000/svg"
         fill="none"

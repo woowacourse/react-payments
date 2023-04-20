@@ -1,6 +1,10 @@
-import React from "react";
+import React, { MouseEvent } from "react";
 import styled from "styled-components";
 import AddCardButton from "./AddCardButton";
+
+interface HomePageProps {
+  onAddCardClick: (event: MouseEvent<HTMLElement>) => void;
+}
 
 const Page = styled.div`
   width: 375px;
@@ -32,14 +36,13 @@ const CardWrapper = styled.div`
   gap: 46px;
 `;
 
-export default function Homepage() {
+export default function Homepage({ onAddCardClick }: HomePageProps) {
   return (
     <Page>
       <Title>보유카드</Title>
       <AddInformation>새로운 카드를 등록해주세요.</AddInformation>
       <CardWrapper>
-        <AddCardButton />
-        <AddCardButton />
+        <AddCardButton onClick={onAddCardClick} />
       </CardWrapper>
     </Page>
   );
