@@ -6,7 +6,7 @@ import App from './pages';
 
 import './styles/index.css';
 
-const basename = process.env.NODE_ENV === 'production' ? process.env.PUBLIC_URL : ''
+const basename = window.location.pathname || '';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
