@@ -1,8 +1,11 @@
 import { Container } from "./CardNumberInput";
 import { Input } from "./common/Input";
 import { InputLabel } from "./common/InputLabel";
+import { useState } from "react";
+import styled from "styled-components";
 
 interface ExpiryDateInputProps {
+  expiryDate: string;
   setExpiryDate: (value: string) => void;
 }
 
@@ -14,7 +17,13 @@ const ExpiryDateInfo = {
   type: "text",
 };
 
-export const ExpiryDateInput = ({ setExpiryDate }: ExpiryDateInputProps) => {
+export const ExpiryDateInput = ({
+  setExpiryDate,
+  expiryDate,
+}: ExpiryDateInputProps) => {
+  const [isValid, setIsValid] = useState(true);
+  const [isCompleted, setIsCompleted] = useState(true);
+
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value.replaceAll(" / ", "");
 
@@ -31,10 +40,48 @@ export const ExpiryDateInput = ({ setExpiryDate }: ExpiryDateInputProps) => {
     setExpiryDate(e.target.value);
   };
 
+  const validateExpiryDate = (expiryDate: string): void => {
+    const [month, year] = expiryDate.split(" / ").map((each) => Number(each));
+    if (month < 1 || month > 12) {
+      setIsValid(false);
+    }
+
+    if (year < new Date().getFullYear() % 2000) {
+      setIsValid(false);
+    }
+  };
+
+  const handleOutFocusEvent = (e: any) => {
+    const value = e.target.value.replaceAll(" / ", "");
+
+    setIsCompleted(false);
+    setIsValid(true);
+    if (value.length === 4) {
+      setIsCompleted(true);
+      validateExpiryDate(e.target.value);
+    }
+  };
+
+  const getValidMessage = (): string => {
+    if (!isCompleted) return "유효기간 입력이 완료되지 않았습니다.";
+
+    if (!isValid) return "유효한 유효기간이 아닙니다";
+
+    return "";
+  };
+
   return (
     <Container>
       <InputLabel text="만료일" name="expiryDate" />
-      <Input {...ExpiryDateInfo} handleInput={handleInput} />
+      <Input
+        {...ExpiryDateInfo}
+        handleInput={handleInput}
+        handleChange={handleOutFocusEvent}
+        error={{
+          isValid: isValid && isCompleted && !!expiryDate,
+          errorMessage: getValidMessage(),
+        }}
+      />
     </Container>
   );
 };

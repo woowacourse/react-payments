@@ -6,7 +6,9 @@ export interface InputProps {
   placeholder: string;
   textPosition: string;
   type: string;
-  handleInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  error: { isValid: boolean; errorMessage: string };
+  handleInput: (e: any) => void;
+  handleChange: (e: any) => void;
 }
 
 export const Input = ({
@@ -16,7 +18,10 @@ export const Input = ({
   textPosition,
   type,
   handleInput,
+  handleChange,
+  error,
 }: InputProps) => {
+  const { isValid, errorMessage } = error;
   return (
     <>
       <InputField
@@ -25,9 +30,11 @@ export const Input = ({
         name={label}
         width={width}
         onInput={handleInput}
+        onBlur={handleChange}
         textPosition={textPosition}
         type={type}
       />
+      {!isValid && <ErrorMessage>{errorMessage}</ErrorMessage>}
     </>
   );
 };
@@ -52,4 +59,8 @@ const InputField = styled.input<{ textPosition: string; width: string }>`
   &::placeholder {
     font-size: 14px;
   }
+`;
+
+const ErrorMessage = styled.div`
+  color: red;
 `;
