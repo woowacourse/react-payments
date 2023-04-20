@@ -15,8 +15,6 @@ export function useInputNumber() {
       ...cardNumber,
       [name]: value,
     });
-    console.log(cardNumber);
-    // setCardNumber(target.value);
   }
 
   return { cardNumber, handleChange };
