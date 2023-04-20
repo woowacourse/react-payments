@@ -1,8 +1,14 @@
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { PaymentsContext } from '../../context/PaymentsContext';
+import { useValidation } from '../../hooks/useValidation';
 import type { CreditCard } from '../../types/CreditCard';
+import {
+  validateCVC,
+  validateCardNumbers,
+  validateCardPassword,
+  validateExpirationDate,
+} from '../../validations/Validation';
 import { CardNumberInput } from '../CardNumberInput';
 import { CardPasswordInput } from '../CardPasswordInput';
 import { CreditCardView } from '../CreditCardView';
@@ -50,6 +56,12 @@ export const NewCreditCardPage = () => {
     cvc: '',
     password: '',
   });
+  const { validationResult, validate } = useValidation<CreditCard>({
+    cardNumbers: validateCardNumbers,
+    expirationDate: validateExpirationDate,
+    cvc: validateCVC,
+    password: validateCardPassword,
+  });
 
   const setNewCardField = <Field extends keyof CreditCard>(
     field: Field,
@@ -83,7 +95,10 @@ export const NewCreditCardPage = () => {
   };
 
   const handleClickNextButton = () => {
-    setCreditCards([...creditCards, newCard]);
+    if (!validate(newCard)) return;
+
+    addCreditCard(newCard);
+
     navigate('/');
   };
 
@@ -100,6 +115,11 @@ export const NewCreditCardPage = () => {
         <FormGroup>
           <Text size="small">카드 번호</Text>
           <CardNumberInput value={newCard.cardNumbers} onChange={handleCardNumbersChange} />
+          {validationResult.cardNumbers && (
+            <Text size="small" color="red">
+              {validationResult.cardNumbers}
+            </Text>
+          )}
         </FormGroup>
 
         <FormGroup>
@@ -108,6 +128,11 @@ export const NewCreditCardPage = () => {
             value={newCard.expirationDate}
             onChange={handleExpirationDateChange}
           />
+          {validationResult.expirationDate && (
+            <Text size="small" color="red">
+              {validationResult.expirationDate}
+            </Text>
+          )}
         </FormGroup>
 
         <FormGroup>
@@ -133,11 +158,21 @@ export const NewCreditCardPage = () => {
             center
             type="password"
           />
+          {validationResult.cvc && (
+            <Text size="small" color="red">
+              {validationResult.cvc}
+            </Text>
+          )}
         </FormGroup>
 
         <FormGroup>
           <Text size="small">카드 비밀번호</Text>
           <CardPasswordInput value={newCard.password} onChange={handleCardPasswordChange} />
+          {validationResult.password && (
+            <Text size="small" color="red">
+              {validationResult.password}
+            </Text>
+          )}
         </FormGroup>
 
         <NextButton onClick={handleClickNextButton}>
