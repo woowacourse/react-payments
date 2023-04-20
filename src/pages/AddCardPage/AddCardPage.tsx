@@ -11,7 +11,13 @@ import { Container } from "../../components/common";
 import { useState } from "react";
 import { Card, CardExpirationDate, CardNumber, CardPassword } from "../../types";
 import { useNavigate } from "react-router-dom";
-import { isCapitalAlphabetic, isNumeric, isFulfilledObject, isFulfilledString } from "../../validator/Validator";
+import {
+  isCapitalAlphabetic,
+  isNumeric,
+  isFulfilledObject,
+  isFulfilledString,
+  isValidMonth,
+} from "../../validator/Validator";
 
 type AddCardPageProps = {
   onSubmit: (card: Card) => void;
@@ -84,6 +90,12 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
 
   const addCard = (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!isValidMonth(expirationDate.month)) {
+      alert("잘못된 만료일 입력 형식입니다. 다시 입력해 주세요!");
+
+      return;
+    }
 
     const card: Card = {
       cardNumber,

@@ -9,7 +9,7 @@ export const isValidMonth = (value: string) => {
 
   const number = Number(value);
 
-  return 0 <= number && number <= 12;
+  return 1 <= number && number <= 12;
 };
 
 export const isCapitalAlphabetic = (value: string) => {
