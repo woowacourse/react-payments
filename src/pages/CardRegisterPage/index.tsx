@@ -2,10 +2,12 @@ import { Link } from 'react-router-dom';
 
 import CardRegisterForm from '../../components/CardRegisterForm';
 
+import type { CardInfo } from '../../types/card';
+
 import styles from './cardRegisterPage.module.css';
 
 interface Props {
-  registerCard: (card: any) => void;
+  registerCard: (card: CardInfo) => void;
 }
 
 const CardRegisterPage = ({ registerCard }: Props) => {
