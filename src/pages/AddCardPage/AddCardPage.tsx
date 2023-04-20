@@ -11,6 +11,7 @@ import { Container } from "../../components/common";
 import { useState } from "react";
 import { Card, CardExpirationDate, CardNumber } from "../../types";
 import { useNavigate } from "react-router-dom";
+import { isNumeric } from "../../validator/Validator";
 
 type AddCardPageProps = {
   onSubmit: (card: Card) => void;
@@ -37,6 +38,8 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
   const handleCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     const targetGroup = e.target.name;
+
+    if (!isNumeric(value)) return;
 
     setCardNumber({ ...cardNumber, [targetGroup]: value });
   };
