@@ -1,5 +1,5 @@
 import React from 'react';
-import InputSection from './InputSection';
+import InputSection from './InputSectionTemplate';
 import InputBox from '../Common/InputBox';
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -34,24 +34,12 @@ export function ExpireDateInput() {
     { type: 'number', maxLength: 2, placeholder: 'MM' },
     { type: 'number', maxLength: 2, placeholder: 'YY' },
   ];
-  return (
-    <InputBox
-      inputs={inputs}
-      align="center"
-      separator="/"
-      inputValues=""
-      setInputValues={() => {}}
-    />
-  );
+  return <InputBox inputs={inputs} align="center" separator="/" inputValues="" setInputValues={() => {}} />;
 }
 
 export function OwnerNameInput() {
-  const inputs = [
-    { type: 'text', maxLength: 30, placeholder: '카드에 표시된 이름과 동일하게 입력하세요.' },
-  ];
-  return (
-    <InputBox inputs={inputs} align="left" isFullWidth inputValues="" setInputValues={() => {}} />
-  );
+  const inputs = [{ type: 'text', maxLength: 30, placeholder: '카드에 표시된 이름과 동일하게 입력하세요.' }];
+  return <InputBox inputs={inputs} align="left" isFullWidth inputValues="" setInputValues={() => {}} />;
 }
 
 export function SecurityCodeInput() {

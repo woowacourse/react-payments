@@ -1,7 +1,7 @@
 import React from 'react';
-import InputSection from '../Box/InputSection';
-import InputBox from '../Common/InputBox';
-import { InputStateProps } from '../../types';
+import InputSectionTemplate from '../InputSectionTemplate';
+import InputBox from '../../Common/InputBox';
+import { InputStateProps } from '../../../types';
 
 const ExpireDateInput = (props: InputStateProps) => {
   const inputs = [
@@ -9,9 +9,9 @@ const ExpireDateInput = (props: InputStateProps) => {
     { type: 'number', maxLength: 2, placeholder: 'YY', required: true },
   ];
   return (
-    <InputSection label="만료일">
+    <InputSectionTemplate label="만료일">
       <InputBox inputs={inputs} align="center" separator="/" {...props} />
-    </InputSection>
+    </InputSectionTemplate>
   );
 };
 

@@ -1,7 +1,7 @@
 import React from 'react';
-import InputSection from '../Box/InputSection';
-import InputBox from '../Common/InputBox';
-import { InputStateProps } from '../../types';
+import InputSectionTemplate from '../InputSectionTemplate';
+import InputBox from '../../Common/InputBox';
+import { InputStateProps } from '../../../types';
 import styled from 'styled-components';
 
 interface CardPasswordInputProps {
@@ -10,14 +10,14 @@ interface CardPasswordInputProps {
 }
 
 const CardPasswordInput = ({ cardPassword1Props, cardPassword2Props }: CardPasswordInputProps) => {
-  const inputs = [{ type: 'password', maxLength: 1, required: true, textSecurity: true }];
+  const inputs = [{ type: 'number', maxLength: 1, required: true, textSecurity: true }];
   return (
-    <InputSection label="카드 번호">
+    <InputSectionTemplate label="카드 번호">
       <InputBox inputs={inputs} align="center" {...cardPassword1Props} />
       <InputBox inputs={inputs} align="center" {...cardPassword2Props} />
       <PasswordPlaceholder>∙</PasswordPlaceholder>
       <PasswordPlaceholder>∙</PasswordPlaceholder>
-    </InputSection>
+    </InputSectionTemplate>
   );
 };
 
