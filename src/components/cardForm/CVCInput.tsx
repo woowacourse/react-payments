@@ -2,6 +2,7 @@ import { Container } from "../common/Container";
 import { Input } from "../common/Input";
 import { InputLabel } from "../common/InputLabel";
 import styled from "styled-components";
+import { useState } from "react";
 
 const CVCInfo = {
   label: "cvc",
@@ -12,10 +13,22 @@ const CVCInfo = {
 };
 
 export const CVCInput = () => {
+  const [isCompleted, setIsCompleted] = useState(true);
+
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length > 3 || !/\d$/.test(e.target.value)) {
       e.target.value = e.target.value.slice(0, -1);
       return;
+    }
+  };
+
+  const handleOutFocusEvent = (e: any) => {
+    const value = e.target.value;
+
+    setIsCompleted(false);
+
+    if (value.length === 3) {
+      setIsCompleted(true);
     }
   };
 
@@ -26,8 +39,11 @@ export const CVCInput = () => {
         <Input
           {...CVCInfo}
           handleInput={handleInput}
-          handleChange={(e) => {}}
-          error={{ isValid: true, errorMessage: "" }}
+          handleChange={handleOutFocusEvent}
+          error={{
+            isValid: isCompleted,
+            errorMessage: "3자리 숫자를 입력하세요.",
+          }}
         />
         <HelpIcon
           onClick={() => {
