@@ -101,5 +101,5 @@
   "lint-staged": {
     "*.js": "eslint --cache --fix"
   },
-  "homepage": "https://noeyes.github.io/react-payments/"
+  "homepage": "https://n0eyes.github.io/react-payments/"
 }
