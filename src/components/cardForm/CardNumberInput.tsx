@@ -21,6 +21,8 @@ export const CardNumberInput = ({
   cardNumbers,
 }: CardNumberInputProps) => {
   const [postText, setPostText] = useState("");
+  const [isCompleted, setIsCompleted] = useState(true);
+
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const text = e.target.value;
 
@@ -55,14 +57,27 @@ export const CardNumberInput = ({
     }
   };
 
+  const handleOutFocusEvent = (e: any) => {
+    const value = e.target.value.replaceAll(" - ", "");
+
+    setIsCompleted(false);
+
+    if (value.length === 16) {
+      setIsCompleted(true);
+    }
+  };
+
   return (
     <Container>
       <InputLabel text="카드 번호" name="cardNumber" />
       <Input
-        error={{ isValid: true, errorMessage: "" }}
+        error={{
+          isValid: isCompleted,
+          errorMessage: "16자리 숫자를 입력하세요.",
+        }}
         {...cardNumberInputInfo}
         handleInput={handleInput}
-        handleChange={(e) => {}}
+        handleChange={handleOutFocusEvent}
       />
     </Container>
   );
