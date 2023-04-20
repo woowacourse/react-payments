@@ -2,6 +2,7 @@ import { ChangeEvent, useState } from 'react';
 import Input from '../Input/Input';
 import * as styled from './CardNumberInputBox.styled';
 import { isNumeric } from '../../validator';
+import { CardInfo } from '../../App';
 
 export interface NumbersState {
   first: string;
@@ -11,13 +12,13 @@ export interface NumbersState {
   [key: string]: string;
 }
 
-const CardNumberInputBox = () => {
-  const [numbers, setNumbers] = useState<NumbersState>({
-    first: '',
-    second: '',
-    third: '',
-    fourth: '',
-  });
+const CardNumberInputBox = ({
+  setCardInfo,
+  numbers,
+}: {
+  setCardInfo: CallableFunction;
+  numbers: any;
+}) => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const onChange = ({ target: { name, value } }: ChangeEvent<HTMLInputElement>) => {
@@ -27,9 +28,14 @@ const CardNumberInputBox = () => {
 
     if (value.length > 4) return;
 
-    setNumbers({
-      ...numbers,
-      [name]: value,
+    setCardInfo((prev: CardInfo) => {
+      return {
+        ...prev,
+        numbers: {
+          ...numbers,
+          [name]: value,
+        },
+      };
     });
   };
 

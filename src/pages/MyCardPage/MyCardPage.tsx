@@ -1,7 +1,7 @@
-import { useNavigate } from 'react-router-dom';
 import * as styled from './MyCardPage.styled';
+import { useNavigate } from 'react-router-dom';
 
-const MyCardPage = () => {
+const MyCardPage = (props: any) => {
   const navigation = useNavigate();
 
   const handleClick = () => {

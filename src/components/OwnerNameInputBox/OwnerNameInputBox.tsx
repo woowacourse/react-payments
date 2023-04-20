@@ -1,21 +1,32 @@
 import { ChangeEvent, useState } from 'react';
 import Input from '../Input/Input';
 import * as styled from './OwnerNameInputBox.styled';
+import { CardInfo } from '../../App';
 
-const OwnerNameInputBox = (props: any) => {
-  const [ownerName, setOwnerName] = useState('');
+const OwnerNameInputBox = ({
+  setCardInfo,
+  ownerName,
+}: {
+  setCardInfo: CallableFunction;
+  ownerName: any;
+}) => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const onChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
-    if (/^[A-Za-z](?:\s?[A-Za-z])*$/.test(ownerName)) {
-      return setErrorMessage('영문과 영문 사이 띄어쓰기만 허용됩니다.');
-    }
+    // if (/^[A-Za-z](?:\s?[A-Za-z])*$/.test(ownerName)) {
+    //   return setErrorMessage('영문과 영문 사이 띄어쓰기만 허용됩니다.');
+    // }
 
     if (errorMessage) setErrorMessage('');
 
     if (value.length > 30) return;
 
-    setOwnerName(value);
+    setCardInfo((prev: CardInfo) => {
+      return {
+        ...prev,
+        ownerName: value,
+      };
+    });
   };
 
   return (

@@ -2,6 +2,7 @@ import { ChangeEvent, useState } from 'react';
 import Input from '../Input/Input';
 import * as styled from './ExpirationDateInputBox.styled';
 import { isNumeric } from '../../validator';
+import { CardInfo } from '../../App';
 
 export interface DateState {
   month: string;
@@ -9,11 +10,13 @@ export interface DateState {
   [key: string]: string;
 }
 
-const ExpirationDateInputBox = (props: any) => {
-  const [date, setDate] = useState<DateState>({
-    month: '',
-    year: '',
-  });
+const ExpirationDateInputBox = ({
+  setCardInfo,
+  expirationDate,
+}: {
+  setCardInfo: CallableFunction;
+  expirationDate: any;
+}) => {
   const [errorMessage, setErrorMessage] = useState('asdasd');
 
   const onChange = ({ target: { name, value } }: ChangeEvent<HTMLInputElement>) => {
@@ -23,9 +26,14 @@ const ExpirationDateInputBox = (props: any) => {
 
     if (value.length > 2) return;
 
-    setDate({
-      ...date,
-      [name]: value,
+    setCardInfo((prev: CardInfo) => {
+      return {
+        ...prev,
+        expirationDate: {
+          ...expirationDate,
+          [name]: value,
+        },
+      };
     });
   };
 
@@ -36,12 +44,12 @@ const ExpirationDateInputBox = (props: any) => {
           <span>만료일</span>
         </styled.LabelHeader>
         <styled.InputContainer>
-          {Object.keys(date).map((key) => {
+          {Object.keys(expirationDate).map((key) => {
             return (
               <Input
                 key={key}
                 name={key}
-                value={date[key]}
+                value={expirationDate[key]}
                 onChange={onChange}
                 width="s"
                 type="text"

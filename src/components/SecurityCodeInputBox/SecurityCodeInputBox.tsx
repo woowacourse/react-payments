@@ -2,9 +2,15 @@ import { ChangeEvent, useState } from 'react';
 import Input from '../Input/Input';
 import * as styled from './SecurityCodeInputBox.styled';
 import { isNumeric } from '../../validator';
+import { CardInfo } from '../../App';
 
-const SecurityCodeInputBox = () => {
-  const [securityCode, setSecurityCode] = useState('');
+const SecurityCodeInputBox = ({
+  setCardInfo,
+  securityCode,
+}: {
+  setCardInfo: CallableFunction;
+  securityCode: any;
+}) => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const onChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
@@ -16,7 +22,12 @@ const SecurityCodeInputBox = () => {
 
     if (value.length > 3) return;
 
-    setSecurityCode(value);
+    setCardInfo((prev: CardInfo) => {
+      return {
+        ...prev,
+        securityCode: value,
+      };
+    });
   };
 
   return (
