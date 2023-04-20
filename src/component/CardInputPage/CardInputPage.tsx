@@ -2,7 +2,21 @@ import CardInputForm from "./CardInputForm/CardInputForm";
 
 import "./cardInputPage.css";
 
-export default function CardInputPage() {
+interface CreditCard {
+  name?: string;
+  date?: string;
+  bank?: string;
+  number?: number[];
+  securityCode?: number;
+  password?: number;
+}
+interface Props {
+  addNewCard: (card: CreditCard) => void;
+}
+
+export default function CardInputPage(props: Props) {
+  const { addNewCard } = props;
+
   return (
     <section className="card-Input-section">
       <div className="card-Input-section-header">
@@ -23,7 +37,7 @@ export default function CardInputPage() {
         </button>
         <span className="page-explanation">카드 추가</span>
       </div>
-      <CardInputForm />
+      <CardInputForm addNewCard={addNewCard} />
     </section>
   );
 }

@@ -7,11 +7,24 @@ import InputBoxPassword from "../InputBoxPassword/InputBoxPassword";
 import InputBoxSecurityCode from "../InputBoxSecurityCode/InputBoxSecurityCode";
 
 import { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import "./cardInputForm.css";
 
-export default function CardInputForm() {
+interface CreditCard {
+  name?: string;
+  date?: string;
+  bank?: string;
+  number?: number[];
+  securityCode?: number;
+  password?: number;
+}
+interface Props {
+  addNewCard: (card: CreditCard) => void;
+}
+
+export default function CardInputForm(props: Props) {
+  const { addNewCard } = props;
   const [isFormFilled, setIsFormFilled] = useState(false);
 
   const [isCardNumberComplete, setIsCardNumberComplete] = useState(false);
@@ -21,13 +34,45 @@ export default function CardInputForm() {
   const [isSecurityComplete, setIsSecurityComplete] = useState(false);
   const [isPasswordComplete, setIsPasswordComplete] = useState(false);
 
+  const navigate = useNavigate();
+
   const formElement = useRef<HTMLFormElement>(null);
 
+  function event(e: SubmitEvent) {
+    e.preventDefault();
+
+    if (!formElement.current) return;
+
+    console.log(formElement.current);
+    const formData = new FormData(formElement.current);
+
+    const card: CreditCard = {
+      name: formData.get("card-owner")?.toString(),
+      date: formData.get("expiration-date")?.toString(),
+      number: [
+        formData.get("card-number-1"),
+        formData.get("card-number-2"),
+        formData.get("card-number-3"),
+        formData.get("card-number-4"),
+      ].map(Number),
+      securityCode: Number(formData.get("security-code")),
+      password:
+        Number(formData.get("card-password-1")) +
+        Number(formData.get("card-password-2")),
+    };
+
+    addNewCard(card);
+
+    navigate("/CardListPage");
+  }
+
   useEffect(() => {
-    formElement.current?.addEventListener("submit", (e) => {
-      e.preventDefault();
-    });
-  }, []);
+    if (!isFormFilled) {
+      formElement.current?.removeEventListener("submit", event);
+    }
+
+    formElement.current?.addEventListener("submit", event);
+  }, [isFormFilled]);
 
   useEffect(() => {
     if (
@@ -53,11 +98,7 @@ export default function CardInputForm() {
       <InputBoxOwner setIsComplete={setIsOwnerComplete} />
       <InputBoxSecurityCode setIsComplete={setIsSecurityComplete} />
       <InputBoxPassword setIsComplete={setIsPasswordComplete} />
-      {isFormFilled && (
-        <Link to="/CardListPage" className="next-button">
-          <Button type="submit">다음</Button>
-        </Link>
-      )}
+      {isFormFilled && <Button type="submit">다음</Button>}
     </form>
   );
 }
