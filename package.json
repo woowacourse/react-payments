@@ -72,5 +72,6 @@
     "prop-types": "^15.8.1",
     "storybook": "^7.0.5",
     "webpack": "^5.79.0"
-  }
+  },
+  "homepage": "."
 }
