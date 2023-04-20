@@ -1,23 +1,15 @@
-import React, { forwardRef, useState, useContext, useRef } from "react";
+import React, { useState, useContext, useRef } from "react";
 import Input from "src/components/@common/Input";
 import styled, { css } from "styled-components";
 import FormLabel from "src/components/@common/FormLabel";
 import ErrorSpan from "src/components/@common/ErrorSpan";
 import { ONLY_NUMBER_REGEXP } from "src/utils/regexp";
-import { InputValuesContext } from "../InputValueContext";
+import { inputValuesContext } from "src/InputValueContext";
+import { CardNumberObj } from "src/interfaces";
 import useAutoFocus from "src/hooks/useAutoFocus";
 
-export interface CardNumberObj {
-  first: string;
-  second: string;
-  third: string;
-  fourth: string;
-}
-
-interface Props {}
-
-export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
-  const [cardInput, setCardInput] = useContext(InputValuesContext);
+function CardNumber() {
+  const [cardInput, setCardInput] = useContext(inputValuesContext);
 
   const [cardError, setCardError] = useState({
     isError: false,
@@ -71,7 +63,7 @@ export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
   return (
     <div>
       <FormLabel>카드 번호</FormLabel>
-      <CardNumberInputContainer ref={ref}>
+      <CardNumberInputContainer>
         <Input
           data-order="first"
           data-index="0"
@@ -125,7 +117,9 @@ export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
       {cardError?.isError && <ErrorSpan>{cardError?.message}</ErrorSpan>}
     </div>
   );
-});
+}
+
+export default CardNumber;
 
 const CardNumberInputContainer = styled.div`
   display: flex;

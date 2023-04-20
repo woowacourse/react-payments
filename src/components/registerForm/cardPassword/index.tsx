@@ -3,7 +3,7 @@ import Input from "src/components/@common/Input";
 import FormLabel from "src/components/@common/FormLabel";
 import { ONLY_NUMBER_REGEXP } from "src/utils/regexp";
 import styled, { css } from "styled-components";
-import { InputValuesContext } from "../InputValueContext";
+import { inputValuesContext } from "src/InputValueContext";
 import ErrorSpan from "src/components/@common/ErrorSpan";
 import useAutoFocus from "src/hooks/useAutoFocus";
 
@@ -13,7 +13,7 @@ interface CardPasswordObj {
 }
 
 function CardPassword() {
-  const [cardInput, setCardInput] = useContext(InputValuesContext);
+  const [cardInput, setCardInput] = useContext(inputValuesContext);
 
   const [passwordError, setPasswordError] = useState(false);
 

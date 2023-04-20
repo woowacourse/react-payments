@@ -31,6 +31,6 @@ const initialCardInfos = {
   },
 };
 
-export const InputValuesContext = createContext<
+export const inputValuesContext = createContext<
   [CardInfoType, React.Dispatch<React.SetStateAction<CardInfoType>> | null]
 >([initialCardInfos, null]);

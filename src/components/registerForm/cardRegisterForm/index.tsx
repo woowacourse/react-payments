@@ -1,11 +1,11 @@
 import React, { useEffect, useContext, useState } from "react";
-import { CardNumber } from "../CardNumber";
-import ExpireDate from "../ExpireDate";
-import OwnerNameInput from "../OwnerNameInput";
-import SecurityCode from "../SecurityCode";
-import CardPassword from "../CardPassword";
+import CardNumber from "src/components/registerForm/cardNumber";
+import ExpireDate from "src/components/registerForm/expireDate";
+import OwnerNameInput from "src/components/registerForm/ownerNameInput";
+import SecurityCode from "src/components/registerForm/securityCode";
+import CardPassword from "src/components/registerForm/cardPassword";
 import styled from "styled-components";
-import { InputValuesContext } from "../InputValueContext";
+import { inputValuesContext } from "src/InputValueContext";
 import useCardList from "src/hooks/useCardList";
 import { useNavigate } from "react-router-dom";
 
@@ -15,7 +15,7 @@ const objectValueToString = (obj: { [key: string]: string }) => {
 
 function CardRegisterForm() {
   const navigation = useNavigate();
-  const [cardInput] = useContext(InputValuesContext);
+  const [cardInput] = useContext(inputValuesContext);
   const [nextShow, setNextShow] = useState(false);
   const { saveCard } = useCardList({ key: "card-list" });
 

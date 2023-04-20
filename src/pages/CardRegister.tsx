@@ -1,11 +1,11 @@
 import { useContext, useMemo, useState } from "react";
 import Card from "src/components/@common/Card";
 import Layout from "src/components/@common/Layout";
-import CardRegisterForm from "src/components/RegisterForm/CardRegisterForm";
-import { InputValuesContext } from "src/components/RegisterForm/InputValueContext";
+import CardRegisterForm from "src/components/registerForm/cardRegisterForm";
+import { inputValuesContext } from "src/InputValueContext";
 
 function CardRegister() {
-  const [inputValueContext] = useContext(InputValuesContext);
+  const [inputValueContext] = useContext(inputValuesContext);
   const [cardInput, setCardInput] = useState(inputValueContext);
 
   const cardPreview = useMemo(
@@ -21,10 +21,10 @@ function CardRegister() {
 
   return (
     <Layout>
-      <InputValuesContext.Provider value={[cardInput, setCardInput]}>
+      <inputValuesContext.Provider value={[cardInput, setCardInput]}>
         {cardPreview}
         <CardRegisterForm />
-      </InputValuesContext.Provider>
+      </inputValuesContext.Provider>
     </Layout>
   );
 }
