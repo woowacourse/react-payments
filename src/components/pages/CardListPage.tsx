@@ -7,54 +7,54 @@ import { Card } from '../../types/Card';
 import { useState } from 'react';
 
 const cards: Card[] = [
-  {
-    id: 1,
-    cardNumber: {
-      first: '1234',
-      second: '2345',
-      third: '3456',
-      fourth: '4567',
-    },
-    expirationDate: {
-      month: '04',
-      year: '25',
-    },
-    name: 'SUN',
-    securityCode: '123',
-    password: '12',
-  },
-  {
-    id: 2,
-    cardNumber: {
-      first: '1234',
-      second: '2345',
-      third: '3456',
-      fourth: '4567',
-    },
-    expirationDate: {
-      month: '04',
-      year: '25',
-    },
-    name: 'SUN',
-    securityCode: '123',
-    password: '12',
-  },
-  {
-    id: 3,
-    cardNumber: {
-      first: '1234',
-      second: '2345',
-      third: '3456',
-      fourth: '4567',
-    },
-    expirationDate: {
-      month: '04',
-      year: '25',
-    },
-    name: 'SUN',
-    securityCode: '123',
-    password: '12',
-  },
+  // {
+  //   id: 1,
+  //   cardNumber: {
+  //     first: '1234',
+  //     second: '2345',
+  //     third: '3456',
+  //     fourth: '4567',
+  //   },
+  //   expirationDate: {
+  //     month: '04',
+  //     year: '25',
+  //   },
+  //   name: 'SUN',
+  //   securityCode: '123',
+  //   password: '12',
+  // },
+  // {
+  //   id: 2,
+  //   cardNumber: {
+  //     first: '1234',
+  //     second: '2345',
+  //     third: '3456',
+  //     fourth: '4567',
+  //   },
+  //   expirationDate: {
+  //     month: '04',
+  //     year: '25',
+  //   },
+  //   name: 'SUN',
+  //   securityCode: '123',
+  //   password: '12',
+  // },
+  // {
+  //   id: 3,
+  //   cardNumber: {
+  //     first: '1234',
+  //     second: '2345',
+  //     third: '3456',
+  //     fourth: '4567',
+  //   },
+  //   expirationDate: {
+  //     month: '04',
+  //     year: '25',
+  //   },
+  //   name: 'SUN',
+  //   securityCode: '123',
+  //   password: '12',
+  // },
 ];
 
 const CardListPage = () => {

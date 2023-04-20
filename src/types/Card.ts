@@ -1,16 +1,11 @@
-export interface Card {
+export interface CardItemInfo {
   id: number;
-  cardNumber: {
-    first: string;
-    second: string;
-    third: string;
-    fourth: string;
-  };
-  expirationDate: {
-    month: string;
-    year: string;
-  };
+  cardNumber: string[];
+  expirationDate: string[];
   name: string;
+}
+
+export interface Card extends CardItemInfo {
   securityCode: string;
   password: string;
 }

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { Card } from '../../types/Card';
+import { CardItemInfo } from '../../types/Card';
 
 interface CardItemProps {
-  card?: Card;
+  card: CardItemInfo;
 }
 
 const CardItem = ({ card }: CardItemProps) => {
@@ -12,14 +12,16 @@ const CardItem = ({ card }: CardItemProps) => {
       {card && (
         <>
           <CardNumberContainer>
-            <p>{card.cardNumber.first}</p>
-            <p>{card.cardNumber.second}</p>
-            <p>{card.cardNumber.third}</p>
-            <p>{card.cardNumber.fourth}</p>
+            <p>{card.cardNumber[0]}</p>
+            <p>{card.cardNumber[1]}</p>
+            <p>{card.cardNumber[2]}</p>
+            <p>{card.cardNumber[3]}</p>
           </CardNumberContainer>
           <CardInfoContainer>
-            <CardNameContainer>{card.name}</CardNameContainer>
-            <CardExpirationContainer>{`${card.expirationDate.month}/${card.expirationDate.year}`}</CardExpirationContainer>
+            <CardNameContainer>{card.name || 'NAME'}</CardNameContainer>
+            <CardExpirationContainer>{`${card.expirationDate[0] || 'MM'}/${
+              card.expirationDate[1] || 'YY'
+            }`}</CardExpirationContainer>
           </CardInfoContainer>
         </>
       )}
@@ -59,10 +61,16 @@ const CardNumberContainer = styled.p`
   display: flex;
   justify-content: space-between;
 
+  height: 12px;
+
   margin-top: 12px;
 
   font-size: 14px;
   letter-spacing: 3px;
+
+  > p {
+    width: 20%;
+  }
 `;
 
 const CardInfoContainer = styled.div`
@@ -72,7 +80,13 @@ const CardInfoContainer = styled.div`
   margin-top: 7px;
 `;
 
-const CardNameContainer = styled.p``;
+const CardNameContainer = styled.p`
+  width: 60%;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
 
 const CardExpirationContainer = styled.p``;
 
