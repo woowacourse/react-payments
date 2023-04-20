@@ -21,7 +21,9 @@ const CardRegisterPage = ({ navigate }: CardRegisterPageProps) => {
   const [cardPassword1, setCardPassword1] = useState('');
   const [cardPassword2, setCardPassword2] = useState('');
 
-  const submitNewCard = () => {
+  const submitNewCard = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     const newCard: CardType = {
       id: Date.now(),
       cardNumber,
@@ -31,7 +33,10 @@ const CardRegisterPage = ({ navigate }: CardRegisterPageProps) => {
       cardPassword: cardPassword1 + cardPassword2,
     };
 
+    console.log(newCard);
+
     const cardList: CardType[] = JSON.parse(localStorage.getItem('cardList') || '[]');
+    console.log(cardList);
     cardList.push(newCard);
     localStorage.setItem('cardList', JSON.stringify(cardList));
     navigate('list');
@@ -44,7 +49,7 @@ const CardRegisterPage = ({ navigate }: CardRegisterPageProps) => {
   return (
     <PageTemplate title={'카드 추가'} onClickBack={onClickBack}>
       <Card cardNumber={cardNumber} ownerName={ownerName} expireDate={expireDate} />
-      <InputForm>
+      <InputForm onSubmit={submitNewCard}>
         <CardNumberInput
           inputValues={cardNumber}
           setInputValues={(val) => setCardNumber(val as string[])}
@@ -71,19 +76,17 @@ const CardRegisterPage = ({ navigate }: CardRegisterPageProps) => {
             setInputValues: (val) => setCardPassword2(val as string),
           }}
         />
+        <ButtonWrapper>
+          <SubmitButton type="submit">다음</SubmitButton>
+        </ButtonWrapper>
       </InputForm>
-      <ButtonWrapper>
-        <SubmitButton type="button" onClick={submitNewCard}>
-          다음
-        </SubmitButton>
-      </ButtonWrapper>
     </PageTemplate>
   );
 };
 
 export default CardRegisterPage;
 
-const InputForm = styled.div`
+const InputForm = styled.form`
   width: 100%;
 
   margin-top: 28px;

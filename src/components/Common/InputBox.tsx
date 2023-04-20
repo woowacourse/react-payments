@@ -6,6 +6,7 @@ interface InputType {
   maxLength: number;
   placeholder?: string;
   textSecurity?: boolean;
+  required?: boolean;
 }
 
 interface InputBoxProps {
@@ -27,34 +28,37 @@ const InputBox = ({
 }: InputBoxProps) => {
   const isInputValueString = typeof inputValues === 'string';
 
-  const onChangeInput = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.length > inputs[index].maxLength) {
-      return;
-    }
+  const onChangeInput =
+    (type: string, index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (type === 'number' && isNaN(Number(e.target.value))) {
+        return;
+      }
 
-    if (isInputValueString) {
-      setInputValues(e.target.value);
-      return;
-    }
+      if (isInputValueString) {
+        setInputValues(e.target.value);
+        return;
+      }
 
-    const newInputValues = inputValues.slice();
-    newInputValues[index] = e.target.value;
-    setInputValues(newInputValues);
-  };
+      const newInputValues = inputValues.slice();
+      newInputValues[index] = e.target.value;
+      setInputValues(newInputValues);
+    };
 
   return (
     <InputsBoxWrapper isFullWidth={isFullWidth} align={align}>
-      {inputs.map(({ type, maxLength, placeholder, textSecurity }, index) => (
+      {inputs.map(({ type, maxLength, placeholder, textSecurity, required }, index) => (
         <>
           {index > 0 && <Separator>{separator}</Separator>}
           <Input
-            type={type}
+            type="text"
             value={isInputValueString ? inputValues : inputValues[index]}
-            onChange={onChangeInput(index)}
+            onChange={onChangeInput(type, index)}
             placeholder={placeholder}
+            minLength={maxLength}
             maxLength={maxLength}
             align={align}
             textSecurity={textSecurity}
+            required={required}
           />
         </>
       ))}
