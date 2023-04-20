@@ -19,7 +19,7 @@ function CardCVCInput({ changeCardCVC, cardCVC }: CardCVCInputProps) {
             onInput={changeCardCVC}
           ></St.Input>
         </St.InputSection>
-        <St.Button>?</St.Button>
+        <St.Button type="button">?</St.Button>
       </St.Contents>
     </section>
   );
