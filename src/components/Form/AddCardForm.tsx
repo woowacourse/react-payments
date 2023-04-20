@@ -32,6 +32,14 @@ function AddCardForm({ onSubmit }: Props) {
 
   const [securityCode, setSecurityCode] = useState('');
 
+  const card: Card = {
+    numbers: cardNumbers,
+    expirationDate: { month: month, year: year },
+    name,
+    securityCode: securityCode,
+    password: { first: firstDigit, second: secondDigit },
+  };
+
   const valueAndOnChanges: ValueAndOnChange[] = cardNumbers.map((cardNumber, index) => ({
     value: cardNumber,
     onChange: (e) => {
@@ -120,6 +128,7 @@ function AddCardForm({ onSubmit }: Props) {
   };
 
   return (
+        <CreditCard card={card} />
     <FormContainer onSubmit={handleSubmit}>
       <Label text="카드 번호" />
       <CardNumberContainer>
