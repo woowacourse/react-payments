@@ -1,6 +1,5 @@
-import { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import CardOwnerName from './CardOwnerName';
-import { useState } from 'react';
 
 const meta = {
   component: CardOwnerName,
@@ -8,14 +7,10 @@ const meta = {
 } satisfies Meta<typeof CardOwnerName>;
 
 export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const CardOwnerNameStory = () => {
-  const [cardOwnerName, setCardOwnerName] = useState('');
-
-  return (
-    <CardOwnerName
-      cardOwnerName={cardOwnerName}
-      setCardOwnerName={setCardOwnerName}
-    />
-  );
+export const CardOwnerNameStory: Story = {
+  args: {
+    cardOwnerName: 'NAME',
+  },
 };

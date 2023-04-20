@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import CardNumbers from './CardNumbers';
 
 const meta = {
@@ -9,15 +8,15 @@ const meta = {
 
 export default meta;
 
-export const CardNumbersStory = () => {
-  const [cardNumbers, setCardNumbers] = useState<Record<number, string>>({
-    0: '',
-    1: '',
-    2: '',
-    3: '',
-  });
+type Story = StoryObj<typeof meta>;
 
-  return (
-    <CardNumbers cardNumbers={cardNumbers} setCardNumbers={setCardNumbers} />
-  );
+export const CardNumbersStory: Story = {
+  args: {
+    cardNumbers: {
+      0: '1111',
+      1: '2222',
+      2: '3333',
+      3: '4444',
+    },
+  },
 };

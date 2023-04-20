@@ -1,6 +1,5 @@
-import { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import ExpiredDate from './ExpiredDate';
-import React, { useState } from 'react';
 
 const meta = {
   component: ExpiredDate,
@@ -9,13 +8,13 @@ const meta = {
 
 export default meta;
 
-export const CardExpiredDateStory = () => {
-  const [expiredDate, setExpiredDate] = useState<Record<number, string>>({
-    0: '',
-    1: '',
-  });
+type Story = StoryObj<typeof meta>;
 
-  return (
-    <ExpiredDate expiredDate={expiredDate} setExpiredDate={setExpiredDate} />
-  );
+export const SecurityCodeStory: Story = {
+  args: {
+    expiredDate: {
+      0: '02',
+      1: '32',
+    },
+  },
 };

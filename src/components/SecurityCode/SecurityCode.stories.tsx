@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import SecurityCode from './SecurityCode';
 
 const meta = {
@@ -9,13 +8,10 @@ const meta = {
 
 export default meta;
 
-export const SecurityCodeStory = () => {
-  const [securityCode, setSecurityCode] = useState('');
+type Story = StoryObj<typeof meta>;
 
-  return (
-    <SecurityCode
-      securityCode={securityCode}
-      setSecurityCode={setSecurityCode}
-    />
-  );
+export const SecurityCodeStory: Story = {
+  args: {
+    securityCode: '000',
+  },
 };

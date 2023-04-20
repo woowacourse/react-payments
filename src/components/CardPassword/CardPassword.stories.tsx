@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import CardPassword from './CardPassword';
 
 const meta = {
@@ -9,11 +8,13 @@ const meta = {
 
 export default meta;
 
-export const CardPasswordStory = () => {
-  const [password, setPassword] = useState<Record<number, string>>({
-    0: '',
-    1: '',
-  });
+type Story = StoryObj<typeof meta>;
 
-  return <CardPassword password={password} setPassword={setPassword} />;
+export const CardPasswordStory: Story = {
+  args: {
+    password: {
+      0: '0',
+      1: '2',
+    },
+  },
 };
