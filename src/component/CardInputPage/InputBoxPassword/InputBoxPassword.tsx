@@ -3,17 +3,20 @@ import CardPassword from "./CardPassword";
 
 import "./inputBoxPassword.css";
 
-export default function InputBoxPassword() {
-  const [error, setError] = useState(true);
+interface Props {
+  //   setCardNumber?: React.Dispatch<React.SetStateAction<number[]>>
+  setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-  const onChangeCallback = (event: ChangeEvent<HTMLInputElement>) => {
-    // setNameLength(event.target.value.trim().length);
-  };
+export default function InputBoxPassword(props: Props) {
+  const { setIsComplete } = props;
+
+  const [error, setError] = useState(true);
 
   return (
     <div className="input-box-card-password">
       <p>카드 비밀번호</p>
-      <CardPassword setError={setError} />
+      <CardPassword setError={setError} setIsComplete={setIsComplete} />
       <p className={error ? "visible" : ""}>error message</p>
     </div>
   );
