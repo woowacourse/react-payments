@@ -12,6 +12,8 @@ import { Container } from 'components/style/InputContainer';
 import CardDB from 'db/Cards';
 import { Card } from 'components/common/Card/types';
 import { ValueAndOnChange } from 'components/Input/types';
+import { CreditCard } from 'components/common/Card/CreditCard';
+import { useCardFormValid } from 'hooks/useCardFormValid';
 
 type Props = {
   onSubmit: () => void;
@@ -39,6 +41,8 @@ function AddCardForm({ onSubmit }: Props) {
     securityCode: securityCode,
     password: { first: firstDigit, second: secondDigit },
   };
+
+  const [isValid, errorMessages] = useCardFormValid(card);
 
   const valueAndOnChanges: ValueAndOnChange[] = cardNumbers.map((cardNumber, index) => ({
     value: cardNumber,
@@ -110,18 +114,10 @@ function AddCardForm({ onSubmit }: Props) {
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-    if (!month || !firstDigit || !secondDigit) {
-      alert('모든 항목을 입력해주세요.');
-      return;
-    }
 
-    const card: Card = {
-      numbers: cardNumbers,
-      expirationDate: { month: month, year: year },
-      name: name,
-      securityCode: securityCode,
-      password: { first: firstDigit, second: secondDigit },
-    };
+    if (!isValid) {
+      return alert(Object.values(errorMessages).join('\n'));
+    }
 
     CardDB.registerCard(card);
     onSubmit();
