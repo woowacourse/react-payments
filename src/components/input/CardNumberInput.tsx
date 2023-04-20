@@ -33,6 +33,8 @@ export function CardNumberInput({
   const thirdInputRef = useRef<HTMLInputElement>(null);
   const fourthInputRef = useRef<HTMLInputElement>(null);
 
+  const allRef = [firstInputRef, secondInputRef, thirdInputRef, fourthInputRef];
+
   useEffect(() => {
     firstInputRef.current?.focus();
   }, []);
@@ -49,140 +51,75 @@ export function CardNumberInput({
         <Style.Title>카드 번호</Style.Title>
       </Style.Label>
       <InputWrapper width={318}>
-        <Input
-          value={cardNumber[0]}
-          width={'36'}
-          minLength={4}
-          maxLength={4}
-          required
-          inputMode="numeric"
-          ref={firstInputRef}
-          tabIndex={0}
-          onChange={(e) => {
-            setCardNumber({
-              ...cardNumber,
-              0: e.target.value,
-            });
-            if (e.target.value.length === 4) {
-              setMaxLengthReached((current) => [true, ...current.slice(0, -1)]);
-              secondInputRef.current?.focus();
-            }
-          }}
-          placeholder="0000"
-        />
-        <HYPHEN
-          style={{ visibility: maxLengthReached[0] ? 'visible' : 'hidden' }}
-        >
-          &nbsp;-&nbsp;
-        </HYPHEN>
-        <Input
-          value={cardNumber[1]}
-          width={'36'}
-          minLength={4}
-          maxLength={4}
-          required
-          inputMode="numeric"
-          ref={secondInputRef}
-          tabIndex={1}
-          onChange={(e) => {
-            setCardNumber({
-              ...cardNumber,
-              1: e.target.value,
-            });
-            if (e.target.value.length === 4) {
-              setMaxLengthReached((current) => [true, ...current.slice(0, -1)]);
-              thirdInputRef.current?.focus();
-            }
-          }}
-          onKeyDown={(e) => {
-            if (e.key === 'Backspace' && cardNumber[1] === '') {
-              e.preventDefault();
-              setMaxLengthReached((current) => [...current.slice(1), false]);
-              firstInputRef.current?.focus();
-            }
-          }}
-          placeholder="0000"
-        />
-        <HYPHEN
-          style={{ visibility: maxLengthReached[1] ? 'visible' : 'hidden' }}
-        >
-          &nbsp;-&nbsp;
-        </HYPHEN>
-        <Input
-          value={cardNumber[2]}
-          width={'36'}
-          minLength={4}
-          maxLength={4}
-          type="password"
-          required
-          inputMode="numeric"
-          ref={thirdInputRef}
-          tabIndex={2}
-          onChange={(e) => {
-            setCardNumber({
-              ...cardNumber,
-              2: e.target.value,
-            });
-            if (e.target.value.length === 4) {
-              setMaxLengthReached((current) => [true, ...current.slice(0, -1)]);
-              fourthInputRef.current?.focus();
-            }
-          }}
-          onKeyDown={(e) => {
-            if (e.key === 'Backspace' && cardNumber[2] === '') {
-              e.preventDefault();
-              setMaxLengthReached((current) => [...current.slice(1), false]);
-              secondInputRef.current?.focus();
-            }
-          }}
-          placeholder="••••"
-        />
-        <HYPHEN
-          style={{ visibility: maxLengthReached[2] ? 'visible' : 'hidden' }}
-        >
-          &nbsp;-&nbsp;
-        </HYPHEN>
-        <Input
-          value={cardNumber[3]}
-          width={'36'}
-          minLength={4}
-          maxLength={4}
-          type="password"
-          required
-          inputMode="numeric"
-          ref={fourthInputRef}
-          tabIndex={3}
-          onChange={(e) => {
-            setCardNumber({
-              ...cardNumber,
-              3: e.target.value,
-            });
-            if (e.target.value.length === 4) moveFocusToExpirationDate();
-          }}
-          onKeyDown={(e) => {
-            if (e.key === 'Backspace' && cardNumber[3] === '') {
-              e.preventDefault();
-              setMaxLengthReached((current) => [...current.slice(1), false]);
-              thirdInputRef.current?.focus();
-            }
-          }}
-          placeholder="••••"
-          onBlur={() => {
-            Object.values(cardNumber).forEach((number) => {
-              if (!validator(number)) {
-                setCardNumber({
-                  0: '',
-                  1: '',
-                  2: '',
-                  3: '',
-                });
-                alert('유효하지 않은 카드 번호입니다.');
+        {Array.from({ length: 4 }).map((_, index) => {
+          return (
+            <>
+              <Input
+                value={cardNumber[index as keyof typeof cardNumber]}
+                width={'36'}
+                minLength={4}
+                maxLength={4}
+                required
+                inputMode="numeric"
+                type={index > 1 ? 'password' : 'text'}
+                ref={allRef[index]}
+                onChange={(e) => {
+                  setCardNumber({
+                    ...cardNumber,
+                    [index]: e.target.value,
+                  });
+                  if (e.target.value.length === 4) {
+                    setMaxLengthReached((current) => [
+                      true,
+                      ...current.slice(0, -1),
+                    ]);
+                    if (index !== 3) allRef[index + 1].current?.focus();
+                    if (index === 3) moveFocusToExpirationDate();
+                  }
+                }}
+                onKeyDown={(e) => {
+                  if (
+                    e.key === 'Backspace' &&
+                    cardNumber[index as keyof typeof cardNumber] === '' &&
+                    index !== 0
+                  ) {
+                    e.preventDefault();
+                    setMaxLengthReached((current) => [
+                      ...current.slice(1),
+                      false,
+                    ]);
+                    allRef[index - 1].current?.focus();
+                  }
+                }}
+                onBlur={() => {
+                  if (index === 3) {
+                    if (!validator(Object.values(cardNumber).join(''))) {
+                      setCardNumber({
+                        0: '',
+                        1: '',
+                        2: '',
+                        3: '',
+                      });
+                      alert('유효하지 않은 카드 번호입니다.');
 
-                firstInputRef.current?.focus();
-              }
-            });
-          }}
-        />
+                      firstInputRef.current?.focus();
+                    }
+                  }
+                }}
+                placeholder="0000"
+              />
+              {index !== 3 && (
+                <HYPHEN
+                  style={{
+                    visibility: maxLengthReached[index] ? 'visible' : 'hidden',
+                  }}
+                >
+                  &nbsp;-&nbsp;
+                </HYPHEN>
+              )}
+            </>
+          );
+        })}
       </InputWrapper>
     </>
   );
