@@ -52,11 +52,16 @@ const S = {
 
   Message: styled.p`
     margin: 34px 0 12px;
+
+    & + button {
+      margin-top: 0;
+    }
   `,
 
   Button: styled.button`
     width: 208px;
     height: 123px;
+    margin-top: 30px;
     font-size: 34px;
     background: #e5e5e5;
     border-radius: 5px;

@@ -35,9 +35,9 @@ const CardNumberInput = ({ cardNumber, setCardNumber }: Props) => {
 
   return (
     <>
-      <label className="label-text" htmlFor="card-label">
+      <S.Label className="label-text" htmlFor="card-label">
         카드 번호
-      </label>
+      </S.Label>
       <S.InputBox>
         <S.Input
           type="text"
@@ -101,6 +101,11 @@ const CardNumberInput = ({ cardNumber, setCardNumber }: Props) => {
 };
 
 const S = {
+  Label: styled.label`
+    display: inline-block;
+    margin-top: 26px;
+  `,
+
   InputBox: styled.div`
     display: flex;
     justify-content: center;
