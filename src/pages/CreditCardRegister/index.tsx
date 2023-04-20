@@ -9,44 +9,16 @@ import CreditCardCVCInput from './components/CreditCardCVCInput';
 import CreditCardPasswordInput from './components/CreditCardPasswordInput';
 import * as S from './style';
 
-type CreditCardPasswordType = { first: string, second: string };
-
 function CreditCardRegister() {
   const navigate = useNavigate();
 
   const [creditCardNumber, setCreditCardNumber] = useState('');
-
   const [creditCardExpiry, setCreditCardExpiry] = useState('');
-
   const [creditCardOwner, setCreditCardOwner] = useState('');
-
   const [creditCardCVC, setCreditCardCVC] = useState('');
-
-  const [creditCardPassword, setCreditCardPassword] = useState<CreditCardPasswordType>({ first: '', second: '' });
-  const handleChangeCreditCardFirstPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newFirstPassword = event.target.value;
-    if (newFirstPassword.length <= 1) {
-      setCreditCardPassword({ ...creditCardPassword, first: event.target.value });
-    }
-  };
-
-  const handleChangeCreditCardSecondPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newSecondPassword = event.target.value;
-    if (newSecondPassword.length <= 1) {
-      setCreditCardPassword({ ...creditCardPassword, second: event.target.value });
-    }
-  };
+  const [creditCardPassword, setCreditCardPassword] = useState<Type.CreditCardPasswordType>({ first: '', second: '' });
 
   const [isFullFilled, setIsFullFilled] = useState(false);
-
-  useEffect(() => {
-    if (creditCardCVC === '') return setIsFullFilled(false);
-    if (creditCardExpiry === '') return setIsFullFilled(false);
-    if (creditCardCVC === '') return setIsFullFilled(false);
-    if (creditCardPassword.first === '' || creditCardPassword.second === '') return setIsFullFilled(false);
-
-    return setIsFullFilled(true);
-  }, [creditCardNumber, creditCardExpiry, creditCardCVC, creditCardPassword]);
 
   const handleSubmit = () => {
     if (!isFullFilled) return;
@@ -65,6 +37,15 @@ function CreditCardRegister() {
     localStorage.setItem('creditCards', JSON.stringify([...existCreditCard, newCreditCard]));
     navigate('/');
   };
+
+  useEffect(() => {
+    if (creditCardCVC === '') return setIsFullFilled(false);
+    if (creditCardExpiry === '') return setIsFullFilled(false);
+    if (creditCardCVC === '') return setIsFullFilled(false);
+    if (creditCardPassword.first === '' || creditCardPassword.second === '') return setIsFullFilled(false);
+
+    return setIsFullFilled(true);
+  }, [creditCardNumber, creditCardExpiry, creditCardCVC, creditCardPassword]);
 
   return (
     <S.CreditCardRegisterLayout>
@@ -101,8 +82,7 @@ function CreditCardRegister() {
         />
         <CreditCardPasswordInput
           creditCardPassword={creditCardPassword}
-          onChangeFirstPassword={handleChangeCreditCardFirstPassword}
-          onChangeSecondPassword={handleChangeCreditCardSecondPassword}
+          setCreditCardPassword={setCreditCardPassword}
         />
         <S.ButtonWrapper>
           <S.ResigerButton
