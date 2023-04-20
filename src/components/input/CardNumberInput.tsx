@@ -36,7 +36,7 @@ export function CardNumberInput({
   const allRef = [firstInputRef, secondInputRef, thirdInputRef, fourthInputRef];
 
   useEffect(() => {
-    firstInputRef.current?.focus();
+    firstInputRef.current?.click();
   }, []);
 
   const [maxLengthReached, setMaxLengthReached] = useState([
@@ -61,6 +61,7 @@ export function CardNumberInput({
                 maxLength={4}
                 required
                 inputMode="numeric"
+                autoFocus={index === 0 ? true : false}
                 type={index > 1 ? 'password' : 'text'}
                 ref={allRef[index]}
                 onChange={(e) => {
@@ -106,7 +107,7 @@ export function CardNumberInput({
                     }
                   }
                 }}
-                placeholder="0000"
+                placeholder={index < 2 ? '0000' : '••••'}
               />
               {index !== 3 && (
                 <HYPHEN

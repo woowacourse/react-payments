@@ -21,11 +21,13 @@ export function CardViewer({ cardNumber, expirationDate, ownerName }: Props) {
       <Style.CardNumberContainer>
         {Object.values(cardNumber).map((number, index) => (
           <Style.NumberInput
-            key={index}
-            value={number}
-            type={index > 1 ? 'password' : 'text'}
-            disabled
-          />
+            style={{
+              letterSpacing:
+                window.innerWidth < 768 ? (index > 1 ? '-7px' : '0px') : '0px',
+            }}
+          >
+            {index < 2 ? number : '•'.repeat(number.length)}
+          </Style.NumberInput>
         ))}
       </Style.CardNumberContainer>
       <Style.NameAndDateContainer>
@@ -80,10 +82,10 @@ const Style = {
 
     width: 100%;
   `,
-  NumberInput: styled.input`
+  NumberInput: styled.div`
     all: unset;
 
-    width: 40px;
+    width: 30px;
   `,
   NameAndDateContainer: styled.div`
     display: flex;
