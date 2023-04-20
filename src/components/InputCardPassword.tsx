@@ -6,9 +6,9 @@ export type InputCardPasswordProps = {
   onChange: (e: React.ChangeEvent) => void;
   status: boolean;
   errorMessage: string;
-  className: string;
   maxDataLength: number;
   width: string;
+  name?: string;
 };
 
 const InputCardPassword = ({
@@ -18,6 +18,7 @@ const InputCardPassword = ({
   errorMessage,
   maxDataLength,
   width,
+  name,
 }: InputCardPasswordProps) => {
   return (
     <div className="input-password-container">
@@ -28,6 +29,7 @@ const InputCardPassword = ({
         value={value}
         onChange={onChange}
         style={{ width }}
+        name={name}
       />
       {status ? '' : <span>{errorMessage}</span>}
     </div>

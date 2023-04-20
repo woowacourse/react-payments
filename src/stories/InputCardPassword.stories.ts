@@ -15,7 +15,6 @@ export const Primary: Story = {
     value: '1',
     onChange: (e) => {},
     status: true,
-    className: 'asdf',
     maxDataLength: 1,
     errorMessage: '',
   },
