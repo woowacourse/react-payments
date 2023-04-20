@@ -1,7 +1,7 @@
 import { Input } from 'components/common';
-import { ChangeEventHandler, useState } from 'react';
+import { ChangeEventHandler } from 'react';
 
-interface NameInputProps {
+export interface NameInputProps {
   value: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
 }

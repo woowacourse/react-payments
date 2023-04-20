@@ -1,7 +1,7 @@
 import { Input } from 'components/common';
 import { ChangeEventHandler } from 'react';
 
-interface SecurityInputProps {
+export interface SecurityInputProps {
   value: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
 }

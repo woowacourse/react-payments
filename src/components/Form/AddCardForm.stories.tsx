@@ -1,12 +1,12 @@
 import { StoryFn } from '@storybook/react';
-import AddCardForm from './AddCardForm';
+import AddCardForm, { AddCardFormProps } from './AddCardForm';
 
 export default {
   title: 'AddCardForm',
   component: AddCardForm,
 };
 
-const Template: StoryFn<{}> = (args: {}) => <AddCardForm {...args} />;
+const Template: StoryFn<AddCardFormProps> = (args) => <AddCardForm {...args} />;
 
 export const Default = Template.bind({});
 

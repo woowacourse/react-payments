@@ -3,7 +3,7 @@ import React, { ChangeEventHandler, ChangeEvent } from 'react';
 import styled from 'styled-components';
 import { ValueAndOnChange } from './types';
 
-interface ExpirationProps {
+export interface ExpirationProps {
   month: ValueAndOnChange;
   year: ValueAndOnChange;
 }
