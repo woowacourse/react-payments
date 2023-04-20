@@ -53,9 +53,11 @@ const CardRegisterPage = ({ setCardList }: { setCardList: CallableFunction }) =>
         <CardOwnerNameInput ownerName={cardInfo.ownerName} setCardInfo={setCardInfo} />
         <CardSecurityCodeInput securityCode={cardInfo.securityCode} setCardInfo={setCardInfo} />
         <CardPasswordInput password={cardInfo.password} setCardInfo={setCardInfo} />
-        <styled.CardInfoSubmitButton onClick={handleOnClickSubmitButton}>
-          다음
-        </styled.CardInfoSubmitButton>
+        <styled.CardInfoSubmitButtonContainer>
+          <styled.CardInfoSubmitButton onClick={handleOnClickSubmitButton}>
+            다음
+          </styled.CardInfoSubmitButton>
+        </styled.CardInfoSubmitButtonContainer>
       </styled.CardRegisterForm>
     </>
   );
