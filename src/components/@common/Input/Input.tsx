@@ -19,7 +19,7 @@ import React, {
   LabelHTMLAttributes,
 } from 'react';
 import { getAllChildElement } from '../../../utils/jsx';
-import * as Styled from './Input.styles';
+import * as Styled from './InputStyles.styles';
 
 interface InputContext {
   id: string;
