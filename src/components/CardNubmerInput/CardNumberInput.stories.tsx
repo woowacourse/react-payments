@@ -9,6 +9,9 @@ export default {
 export const Default = () => (
   <>
     <GlobalStyle />
-    <CardNumberInput onChange={() => {}}></CardNumberInput>
+    <CardNumberInput
+      cardNumber={{ firstGroup: "", secondGroup: "", thirdGroup: "", fourthGroup: "" }}
+      onChange={() => {}}
+    ></CardNumberInput>
   </>
 );

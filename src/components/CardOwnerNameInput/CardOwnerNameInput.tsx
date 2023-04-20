@@ -2,11 +2,12 @@ import styled from "styled-components";
 import { InputContainer, Input, Label } from "../common";
 
 type CardOwnerNameInputProp = {
+  ownerName: string;
   nameLength: number;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const CardOwnerNameInput = ({ onChange, nameLength }: CardOwnerNameInputProp) => {
+const CardOwnerNameInput = ({ ownerName, nameLength, onChange }: CardOwnerNameInputProp) => {
   return (
     <Label>
       <Div>
@@ -15,6 +16,7 @@ const CardOwnerNameInput = ({ onChange, nameLength }: CardOwnerNameInputProp) =>
       </Div>
       <InputContainer width="318px">
         <Input
+          value={ownerName}
           width="100%"
           textAlign="left"
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."

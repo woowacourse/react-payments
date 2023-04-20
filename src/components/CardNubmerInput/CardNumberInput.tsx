@@ -1,15 +1,20 @@
+import { CardNumber } from "../../types";
 import { InputContainer, Input, Label } from "../common";
 
 type CardNumberInputProps = {
+  cardNumber: CardNumber;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const CardNumberInput = ({ onChange }: CardNumberInputProps) => {
+const CardNumberInput = ({ cardNumber, onChange }: CardNumberInputProps) => {
+  const { firstGroup, secondGroup, thirdGroup, fourthGroup } = cardNumber;
+
   return (
     <Label>
       카드번호
       <InputContainer width="318px">
         <Input
+          value={firstGroup}
           name="firstGroup"
           inputMode="numeric"
           textAlign="center"
@@ -22,6 +27,7 @@ const CardNumberInput = ({ onChange }: CardNumberInputProps) => {
         />
         <span>-</span>
         <Input
+          value={secondGroup}
           name="secondGroup"
           inputMode="numeric"
           textAlign="center"
@@ -34,6 +40,7 @@ const CardNumberInput = ({ onChange }: CardNumberInputProps) => {
         />
         <span>-</span>
         <Input
+          value={thirdGroup}
           name="thirdGroup"
           inputMode="numeric"
           textAlign="center"
@@ -46,6 +53,7 @@ const CardNumberInput = ({ onChange }: CardNumberInputProps) => {
         />
         <span>-</span>
         <Input
+          value={fourthGroup}
           name="fourthGroup"
           inputMode="numeric"
           textAlign="center"

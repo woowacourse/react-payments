@@ -9,6 +9,6 @@ export default {
 export const Default = () => (
   <>
     <GlobalStyle />
-    <CardExpirationDateInput onChange={() => {}}></CardExpirationDateInput>
+    <CardExpirationDateInput expirationDate={{ month: "", year: "" }} onChange={() => {}}></CardExpirationDateInput>
   </>
 );
