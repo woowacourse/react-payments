@@ -11,7 +11,7 @@ import { Label } from 'components/common';
 import { ChangeEventHandler, useState } from 'react';
 import { Container } from 'components/style/InputContainer';
 
-const NOT_ALPHABET_REGEX = /[^A-Za-z]/gi;
+const NOT_ALPHABET_REGEX = /[^A-Za-z\s]/gi;
 
 function AddCardForm() {
   const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
