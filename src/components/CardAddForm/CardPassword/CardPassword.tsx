@@ -30,6 +30,7 @@ function CardPassword({ handleValidationChange, onChange, values }: CardPassword
       <div className={styles.container} onBlur={onErrorBlur}>
         {values.map((password, index) => (
           <Input
+            key={index}
             type="password"
             id={index === 0 ? 'password' : `password${index}`}
             value={password}

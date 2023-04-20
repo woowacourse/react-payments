@@ -11,8 +11,8 @@ function CardList({ cardList }: CardListProps) {
     <div className={styles.container}>
       {cardList.length ? (
         <div className={styles.listContainer}>
-          {cardList.map((card) => (
-            <CardItem information={card} />
+          {cardList.map((card, index) => (
+            <CardItem information={card} key={index} />
           ))}
         </div>
       ) : (

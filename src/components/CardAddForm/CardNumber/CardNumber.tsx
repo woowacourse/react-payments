@@ -35,6 +35,7 @@ function CardNumber({ handleValidationChange, onChange, values }: CardNumberProp
       >
         {values.map((number, index) => (
           <Input
+            key={index}
             type={index < 2 ? 'text' : 'password'}
             id={index === 0 ? 'cardNumber' : `cardNumber${index}`}
             value={number}
