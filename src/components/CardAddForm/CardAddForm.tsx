@@ -40,8 +40,16 @@ function CardAddForm({
     }
   }, []);
 
+  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (!isFormComplete) return;
+
+    onCardInformationSubmit(event);
+  };
+
   return (
-    <form ref={formRef} className={styles.form} onSubmit={onCardInformationSubmit} tabIndex={0}>
+    <form ref={formRef} className={styles.form} onSubmit={onSubmit} tabIndex={0}>
       <CardNumber
         onChange={onCardNumberChange}
         handleValidationChange={handleValidationChange}
