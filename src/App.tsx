@@ -1,7 +1,13 @@
-import CardRegisterForm from "components/CardRegisterForm";
+import MainPage from "components/MainPage";
+import CardRegisterForm from "components/RegisterPage/CardRegisterForm";
 
 const App = () => {
-  return <CardRegisterForm />;
+  return (
+    <>
+      <MainPage />
+      <CardRegisterForm />;
+    </>
+  );
 };
 
 export default App;

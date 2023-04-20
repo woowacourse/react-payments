@@ -8,7 +8,7 @@ import SecurityCodeInput from "./FormInputs/SecurityCodeInput";
 import CardPreview from "./CardPreview";
 import { getFormData } from "utils/formDataGetter";
 import { areValidInfo } from "validation";
-import Header from "./Header";
+import Header from "../Header";
 
 const CardRegisterForm = () => {
   const [cardNumber, setCardNumber] = useState({
