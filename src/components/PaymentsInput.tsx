@@ -19,6 +19,10 @@ const InputContainer = styled.div`
   border-radius: 7px;
   input[type='password'] {
     font-family: Verdana;
+    ::placeholder {
+      font-family: 'Roboto';
+      font-weight: 600;
+    }
   }
 `;
 
@@ -48,12 +52,14 @@ interface InputInformation {
   isRequired: boolean;
   pattern: [number, number];
   name: string;
+  placeholder?: string;
 }
 
 export type { PaymentsInputProps };
 
 function PaymentsInput({ title, inputInformationList, inputDivideLetter, onChange }: PaymentsInputProps) {
   const inputAmount = inputInformationList.length;
+
   return (
     <div>
       {title && <LabelTitle>{title}</LabelTitle>}
@@ -69,6 +75,7 @@ function PaymentsInput({ title, inputInformationList, inputDivideLetter, onChang
               onChange={onChange}
               data-index={i}
               required={inputInformationList[i].isRequired}
+              placeholder={inputInformationList[i].placeholder}
             />
             {inputDivideLetter && <InputDivider>{inputDivideLetter}</InputDivider>}
           </>
@@ -83,6 +90,7 @@ function PaymentsInput({ title, inputInformationList, inputDivideLetter, onChang
           onChange={onChange}
           data-index={inputAmount - 1}
           required={inputInformationList[inputAmount - 1].isRequired}
+          placeholder={inputInformationList[inputAmount - 1].placeholder}
         />
       </InputContainer>
     </div>
