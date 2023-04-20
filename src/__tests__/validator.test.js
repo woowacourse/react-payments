@@ -3,7 +3,7 @@ import {
   validateMonth,
   validateExpirationDate,
   validateValidUserName,
-} from '../validator';
+} from '../domain/validator';
 
 describe('', () => {
   it.each(['1234', '12345678', '3'])('숫자로만 이루어진 값은 에러를 반환하지 않는다.', (value) => {

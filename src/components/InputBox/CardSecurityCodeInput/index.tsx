@@ -1,8 +1,10 @@
 import { ChangeEvent, useState } from 'react';
-import Input from '../Input/Input';
-import * as styled from './SecurityCodeInputBox.styled';
-import { isNumeric } from '../../validator';
-import { CardInfo } from '../../App';
+
+import { Input } from '../../index';
+
+import * as styled from './CardSecurityCodeInput.styled';
+import { isNumeric } from '../../../domain/validator';
+import { CardInfo } from '../../../App';
 
 const SecurityCodeInputBox = ({
   setCardInfo,

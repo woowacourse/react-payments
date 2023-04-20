@@ -1,16 +1,10 @@
 import { ChangeEvent, useState } from 'react';
-import Input from '../Input/Input';
-import * as styled from './CardNumberInputBox.styled';
-import { isNumeric } from '../../validator';
-import { CardInfo } from '../../App';
 
-export interface NumbersState {
-  first: string;
-  second: string;
-  third: string;
-  fourth: string;
-  [key: string]: string;
-}
+import { Input } from '../../index';
+
+import * as styled from './CardNumbersInput.styled';
+import { isNumeric } from '../../../domain/validator';
+import { CardInfo } from '../../../App';
 
 const CardNumberInputBox = ({
   setCardInfo,

@@ -1,7 +1,9 @@
 import { ChangeEvent, useState } from 'react';
-import Input from '../Input/Input';
-import * as styled from './OwnerNameInputBox.styled';
-import { CardInfo } from '../../App';
+
+import { Input } from '../../index';
+
+import * as styled from './CardOwnerNameInput.styled';
+import { CardInfo } from '../../../App';
 
 const OwnerNameInputBox = ({
   setCardInfo,

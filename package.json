@@ -2,6 +2,7 @@
   "name": "react-payments",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://evencoding.github.io/react-payments/",
   "dependencies": {
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "13.4.0",
@@ -11,6 +12,7 @@
     "@types/react": "18.0.37",
     "@types/react-dom": "18.0.11",
     "eslint-plugin-functional": "5.0.8",
+    "gh-pages": "^5.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "6.10.0",
@@ -18,6 +20,7 @@
     "styled-components": "5.3.9",
     "styled-reset": "4.4.6",
     "typescript": "4.9.5",
+    "uuid": "^9.0.0",
     "web-vitals": "2.1.4"
   },
   "scripts": {
@@ -26,7 +29,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -66,6 +71,7 @@
     "@storybook/react-webpack5": "7.0.6",
     "@storybook/testing-library": "^0.0.14-next.2",
     "@types/styled-components": "5.1.26",
+    "@types/uuid": "^9.0.1",
     "babel-plugin-named-exports-order": "0.0.2",
     "eslint-config-prettier": "8.8.0",
     "eslint-plugin-prettier": "4.2.1",

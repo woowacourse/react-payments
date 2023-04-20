@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import CardNumberInputBox from '../components/CardNumberInputBox/CardNumberInputBox';
+import { CardNumbersInput } from '../components';
 
-const meta: Meta<typeof CardNumberInputBox> = {
-  title: 'Components/CardNumberInputBox',
-  component: CardNumberInputBox,
+const meta: Meta<typeof CardNumbersInput> = {
+  title: 'Components/CardNumbers',
+  component: CardNumbersInput,
   tags: ['autodocs'],
 };
 
 export default meta;
-type Story = StoryObj<typeof CardNumberInputBox>;
+type Story = StoryObj<typeof CardNumbersInput>;
 
 export const Container: Story = {
   args: {},

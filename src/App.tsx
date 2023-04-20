@@ -1,31 +1,32 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import MyCardPage from './pages/MyCardPage/MyCardPage';
-import CardRegisterPage from './pages/CardRegisterPage/CardRegisterPage';
+import MyCardPage from './pages/MyCardPage/index';
+import CardRegisterPage from './pages/CardRegisterPage/index';
 import { useState } from 'react';
-import Header from './components/Header/Header';
+import Header from './components/Header';
 
-interface Numbers {
-  first: string;
-  second: string;
-  third: string;
-  fourth: string;
+export interface CardNumbers {
+  0: string;
+  1: string;
+  2: string;
+  3: string;
 }
 
-interface ExpirationDate {
+export interface CardExpirationDate {
   month: string;
   year: string;
 }
 
-interface Password {
-  first: string;
-  second: string;
+export interface CardPassword {
+  0: string;
+  1: string;
 }
 
 export interface CardInfo {
-  numbers: Numbers;
-  expirationDate: ExpirationDate;
+  id: string;
+  numbers: CardNumbers;
+  expirationDate: CardExpirationDate;
   securityCode: string;
-  password: Password;
+  password: CardPassword;
   ownerName?: string;
 }
 
@@ -34,7 +35,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Header />
         <Routes>
           <Route path="/" element={<MyCardPage cardList={cardList} />} />

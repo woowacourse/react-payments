@@ -7,10 +7,10 @@ const Card = ({ cardInfo, bgColor }: { cardInfo: CardInfo; bgColor: string }) =>
       <styled.Rectangle />
       <styled.CardInformationContainer>
         <styled.CardNumber>
-          <input disabled defaultValue={cardInfo.numbers.first} />
-          <input disabled defaultValue={cardInfo.numbers.second} />
-          <input disabled type="password" defaultValue={cardInfo.numbers.third} />
-          <input disabled type="password" defaultValue={cardInfo.numbers.fourth} />
+          <input disabled defaultValue={cardInfo.numbers[0]} />
+          <input disabled defaultValue={cardInfo.numbers[1]} />
+          <input disabled type="password" defaultValue={cardInfo.numbers[2]} />
+          <input disabled type="password" defaultValue={cardInfo.numbers[3]} />
         </styled.CardNumber>
         <styled.CardNameAndExpirationDateContainer>
           <styled.CardName>{cardInfo.ownerName ? cardInfo.ownerName : 'NAME'}</styled.CardName>

@@ -1,14 +1,10 @@
 import { ChangeEvent, useState } from 'react';
-import Input from '../Input/Input';
-import * as styled from './PasswordInputBox.styled';
-import { isNumeric } from '../../validator';
-import { CardInfo } from '../../App';
 
-export interface PasswordsState {
-  first: string;
-  second: string;
-  [key: string]: string;
-}
+import { Input } from '../../index';
+
+import * as styled from './CardPasswordInput.styled';
+import { isNumeric } from '../../../domain/validator';
+import { CardInfo } from '../../../App';
 
 const PasswordInputBox = ({
   password,

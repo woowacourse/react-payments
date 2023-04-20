@@ -1,14 +1,10 @@
 import { ChangeEvent, useState } from 'react';
-import Input from '../Input/Input';
-import * as styled from './ExpirationDateInputBox.styled';
-import { isNumeric } from '../../validator';
-import { CardInfo } from '../../App';
 
-export interface DateState {
-  month: string;
-  year: string;
-  [key: string]: string;
-}
+import { Input } from '../../index';
+
+import * as styled from './CardExpirationDateInput.styled';
+import { CardInfo } from '../../../App';
+import { isNumeric } from '../../../domain/validator';
 
 const ExpirationDateInputBox = ({
   setCardInfo,
@@ -17,7 +13,7 @@ const ExpirationDateInputBox = ({
   setCardInfo: CallableFunction;
   expirationDate: any;
 }) => {
-  const [errorMessage, setErrorMessage] = useState('asdasd');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const onChange = ({ target: { name, value } }: ChangeEvent<HTMLInputElement>) => {
     if (!isNumeric(value)) return setErrorMessage('숫자만 입력 가능');
