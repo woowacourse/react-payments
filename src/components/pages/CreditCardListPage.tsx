@@ -1,6 +1,5 @@
-import { useContext } from 'react';
 import styled from 'styled-components';
-import { PaymentsContext } from '../../context/PaymentsContext';
+import { usePayments } from '../../hooks/usePayments';
 import { CreditCardView } from '../CreditCardView';
 import { NewCreditCardButton } from '../NewCreditCardButton';
 import { Page } from '../common/Page';
@@ -14,7 +13,7 @@ const Content = styled.main`
 `;
 
 export const CreditCardListPage = () => {
-  const { creditCards } = useContext(PaymentsContext);
+  const { creditCards } = usePayments();
 
   return (
     <Page>

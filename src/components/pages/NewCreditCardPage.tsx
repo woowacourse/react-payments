@@ -1,6 +1,7 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { usePayments } from '../../hooks/usePayments';
 import { useValidation } from '../../hooks/useValidation';
 import type { CreditCard } from '../../types/CreditCard';
 import {
@@ -62,6 +63,7 @@ export const NewCreditCardPage = () => {
     cvc: validateCVC,
     password: validateCardPassword,
   });
+  const { addCreditCard } = usePayments();
 
   const setNewCardField = <Field extends keyof CreditCard>(
     field: Field,
@@ -69,8 +71,6 @@ export const NewCreditCardPage = () => {
   ) => {
     setNewCard({ ...newCard, [field]: value });
   };
-
-  const { creditCards, setCreditCards } = useContext(PaymentsContext);
 
   const navigate = useNavigate();
 
