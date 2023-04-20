@@ -1,13 +1,14 @@
-import React, { useMemo } from "react";
-import Layout from "src/components/@common/Layout";
-import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-import useCardList from "src/hooks/useCardList";
-import Card from "src/components/@common/Card";
+import React, { useMemo } from 'react';
+
+import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import useCardList from '../hooks/useCardList';
+import Card from '../components/@common/Card';
+import Layout from '../components/@common/Layout';
 
 function CardList() {
   const navigation = useNavigate();
-  const { cardList } = useCardList({ key: "card-list" });
+  const { cardList } = useCardList({ key: 'card-list' });
 
   const cardLists = useMemo(() => {
     return cardList.length ? (
@@ -34,7 +35,7 @@ function CardList() {
         <AddButton
           isFirst={cardList.length ? false : true}
           onClick={() => {
-            navigation("/card-register");
+            navigation('/card-register');
           }}
         >
           +
@@ -69,5 +70,5 @@ const AddButton = styled.button<{ isFirst: boolean }>`
   font-size: 30px;
   line-height: 35px;
 
-  margin: ${(props) => (props.isFirst ? "" : "25px auto")};
+  margin: ${(props) => (props.isFirst ? '' : '25px auto')};
 `;

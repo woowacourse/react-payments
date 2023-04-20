@@ -1,6 +1,6 @@
-import { Routes, Route, BrowserRouter, Navigate } from "react-router-dom";
-import CardList from "src/pages/CardList";
-import CardRegister from "src/pages/CardRegister";
+import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
+import CardList from '../pages/CardList';
+import CardRegister from '../pages/CardRegister';
 
 function CardRoutes() {
   return (

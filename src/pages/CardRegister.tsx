@@ -1,8 +1,8 @@
-import { useContext, useMemo, useState } from "react";
-import Card from "src/components/@common/Card";
-import Layout from "src/components/@common/Layout";
-import CardRegisterForm from "src/components/RegisterForm/CardRegisterForm";
-import { InputValuesContext } from "src/components/RegisterForm/InputValueContext";
+import { useContext, useMemo, useState } from 'react';
+import Card from '../components/@common/Card';
+import { InputValuesContext } from '../components/registerForm/InputValueContext';
+import Layout from '../components/@common/Layout';
+import CardRegisterForm from '../components/registerForm/cardRegisterForm';
 
 function CardRegister() {
   const [inputValueContext] = useContext(InputValuesContext);
@@ -16,7 +16,7 @@ function CardRegister() {
         ownerName={cardInput.ownerName}
       />
     ),
-    [cardInput.cardNumbers, cardInput.expireDate, cardInput.ownerName],
+    [cardInput.cardNumbers, cardInput.expireDate, cardInput.ownerName]
   );
 
   return (

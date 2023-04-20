@@ -1,10 +1,11 @@
-import React, { useState, useContext } from "react";
-import ErrorSpan from "src/components/@common/ErrorSpan";
-import FormLabel from "src/components/@common/FormLabel";
-import Input from "src/components/@common/Input";
-import { ONLY_NUMBER_REGEXP } from "src/utils/regexp";
-import styled, { css } from "styled-components";
-import { InputValuesContext } from "../InputValueContext";
+import React, { useState, useContext } from 'react';
+
+import styled, { css } from 'styled-components';
+import { InputValuesContext } from '../InputValueContext';
+import { ONLY_NUMBER_REGEXP } from '../../../utils/regexp';
+import FormLabel from '../../@common/FormLabel';
+import Input from '../../@common/Input';
+import ErrorSpan from '../../@common/ErrorSpan';
 
 function SecurityCode() {
   const [cardInput, setCardInput] = useContext(InputValuesContext);
@@ -27,7 +28,7 @@ function SecurityCode() {
 
   return (
     <SecurityCodeContainer>
-      <FormLabel>{"보안 코드(CVC/CVV)"}</FormLabel>
+      <FormLabel>{'보안 코드(CVC/CVV)'}</FormLabel>
       <Input
         value={cardInput.securityCode}
         onChange={codeChange}

@@ -1,44 +1,38 @@
-import React, { useState, useContext } from "react";
-import FormLabel from "src/components/@common/FormLabel";
-import Input from "src/components/@common/Input";
-import ErrorSpan from "src/components/@common/ErrorSpan";
-import {
-  CONTINUOUS_EMPTY_REGEXP,
-  ONLY_ENG_AND_EMPTY_REGEXP,
-} from "src/utils/regexp";
-import styled, { css } from "styled-components";
-import { InputValuesContext } from "../InputValueContext";
+import React, { useState, useContext } from 'react';
+
+import styled, { css } from 'styled-components';
+import { InputValuesContext } from '../InputValueContext';
+import { CONTINUOUS_EMPTY_REGEXP, ONLY_ENG_AND_EMPTY_REGEXP } from '../../../utils/regexp';
+import FormLabel from '../../@common/FormLabel';
+import Input from '../../@common/Input';
+import ErrorSpan from '../../@common/ErrorSpan';
 
 function OwnerNameInput() {
   const [cardInput, setCardInput] = useContext(InputValuesContext);
 
   const [error, setError] = useState({
     isError: false,
-    message: "",
+    message: '',
   });
 
-  const ownerNameChange: React.ChangeEventHandler<HTMLInputElement> = (
-    event,
-  ) => {
+  const ownerNameChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     const value = event.currentTarget.value as string;
 
     if (!ONLY_ENG_AND_EMPTY_REGEXP.test(value)) return;
     try {
       if (value.length > 0) {
         if (CONTINUOUS_EMPTY_REGEXP.test(value)) {
-          throw new Error(
-            "카드 소유자 이름은 공백을 연속해서 작성할 수 없습니다.",
-          );
+          throw new Error('카드 소유자 이름은 공백을 연속해서 작성할 수 없습니다.');
         }
 
         if (value.length < 3 || value.length > 30) {
-          throw new Error("카드 소유자 이름은 3글자 이상 30글자 이하입니다.");
+          throw new Error('카드 소유자 이름은 3글자 이상 30글자 이하입니다.');
         }
       }
 
       setError({
         isError: false,
-        message: "",
+        message: '',
       });
     } catch (error) {
       if (!(error instanceof Error)) return;

@@ -1,27 +1,28 @@
-import React, { useEffect, useContext, useState } from "react";
-import { CardNumber } from "../CardNumber";
-import ExpireDate from "../ExpireDate";
-import OwnerNameInput from "../OwnerNameInput";
-import SecurityCode from "../SecurityCode";
-import CardPassword from "../CardPassword";
-import styled from "styled-components";
-import { InputValuesContext } from "../InputValueContext";
-import useCardList from "src/hooks/useCardList";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useContext, useState } from 'react';
+
+import styled from 'styled-components';
+import { InputValuesContext } from '../InputValueContext';
+
+import { useNavigate } from 'react-router-dom';
+import useCardList from '../../../hooks/useCardList';
+import { CardNumber } from '../cardNumber';
+import ExpireDate from '../expireDate';
+import OwnerNameInput from '../ownerNameInput';
+import SecurityCode from '../securityCode';
+import CardPassword from '../cardPassword';
 
 const objectValueToString = (obj: { [key: string]: string }) => {
-  return Object.values(obj).reduce((acc, cur) => acc + cur, "");
+  return Object.values(obj).reduce((acc, cur) => acc + cur, '');
 };
 
 function CardRegisterForm() {
   const navigation = useNavigate();
   const [cardInput] = useContext(InputValuesContext);
   const [nextShow, setNextShow] = useState(false);
-  const { saveCard } = useCardList({ key: "card-list" });
+  const { saveCard } = useCardList({ key: 'card-list' });
 
   useEffect(() => {
-    const { cardNumbers, expireDate, securityCode, password, ownerName } =
-      cardInput;
+    const { cardNumbers, expireDate, securityCode, password, ownerName } = cardInput;
     try {
       const exceptOwnerName =
         objectValueToString(cardNumbers).length !== 16 ||
@@ -41,7 +42,7 @@ function CardRegisterForm() {
   const cardInputSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
     saveCard(cardInput);
-    navigation("/card-list");
+    navigation('/card-list');
   };
 
   return (
@@ -52,7 +53,7 @@ function CardRegisterForm() {
       <SecurityCode />
       <CardPassword />
       {nextShow && (
-        <div style={{ display: "flex", justifyContent: "end" }}>
+        <div style={{ display: 'flex', justifyContent: 'end' }}>
           <NextButton>다음</NextButton>
         </div>
       )}

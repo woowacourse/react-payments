@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { CardNumberObj } from "../RegisterForm/CardNumber";
+import styled from 'styled-components';
+import { CardNumberObj } from '../registerForm/cardNumber';
 
 interface Props {
   cardNumber: CardNumberObj;
@@ -10,7 +10,7 @@ interface Props {
 function Card({ cardNumber, ownerName, expireDate }: Props) {
   const cardNumbers = Object.values(cardNumber).map((value, index) => {
     if (index === 2 || index === 3) {
-      return <span>{"●".repeat(value.length)}</span>;
+      return <span>{'●'.repeat(value.length)}</span>;
     }
     return <span>{value}</span>;
   });

@@ -1,11 +1,13 @@
-import React, { forwardRef, useState, useContext, useRef } from "react";
-import Input from "src/components/@common/Input";
-import styled, { css } from "styled-components";
-import FormLabel from "src/components/@common/FormLabel";
-import ErrorSpan from "src/components/@common/ErrorSpan";
-import { ONLY_NUMBER_REGEXP } from "src/utils/regexp";
-import { InputValuesContext } from "../InputValueContext";
-import useAutoFocus from "src/hooks/useAutoFocus";
+import React, { forwardRef, useState, useContext, useRef } from 'react';
+
+import styled, { css } from 'styled-components';
+
+import { InputValuesContext } from '../InputValueContext';
+import useAutoFocus from '../../../hooks/useAutoFocus';
+import FormLabel from '../../@common/FormLabel';
+import Input from '../../@common/Input';
+import ErrorSpan from '../../@common/ErrorSpan';
+import { ONLY_NUMBER_REGEXP } from '../../../utils/regexp';
 
 export interface CardNumberObj {
   first: string;
@@ -21,7 +23,7 @@ export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
 
   const [cardError, setCardError] = useState({
     isError: false,
-    message: "",
+    message: '',
   });
 
   const firstInputRef = useRef<HTMLInputElement>(null);
@@ -36,8 +38,8 @@ export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
 
   const cardChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     const value = event.currentTarget.value as string;
-    const name = event.currentTarget.dataset["order"] as keyof CardNumberObj;
-    const idx = event.currentTarget.dataset["index"];
+    const name = event.currentTarget.dataset['order'] as keyof CardNumberObj;
+    const idx = event.currentTarget.dataset['index'];
     if (!name) return;
 
     if (!ONLY_NUMBER_REGEXP.test(value)) return;
@@ -49,7 +51,7 @@ export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
 
       setCardError({
         isError: false,
-        message: "",
+        message: '',
       });
     } catch (error) {
       if (error instanceof Error) {
@@ -75,7 +77,7 @@ export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
         <Input
           data-order="first"
           data-index="0"
-          value={cardInput.cardNumbers["first"]}
+          value={cardInput.cardNumbers['first']}
           onChange={cardChange}
           maxLength={4}
           customInputStyle={CardNumberInput}
@@ -86,7 +88,7 @@ export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
         <Input
           data-order="second"
           data-index="1"
-          value={cardInput.cardNumbers["second"]}
+          value={cardInput.cardNumbers['second']}
           onChange={cardChange}
           maxLength={4}
           customInputStyle={CardNumberInput}
@@ -98,12 +100,12 @@ export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
         <Input
           data-order="third"
           data-index="2"
-          value={cardInput.cardNumbers["third"]}
+          value={cardInput.cardNumbers['third']}
           onChange={cardChange}
           maxLength={4}
           customInputStyle={CardNumberInput}
           inputmode="numeric"
-          type={"password"}
+          type={'password'}
           placeholder="●●●●"
           ref={thirdInputRef}
         />
@@ -112,12 +114,12 @@ export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
         <Input
           data-order="fourth"
           data-index="3"
-          value={cardInput.cardNumbers["fourth"]}
+          value={cardInput.cardNumbers['fourth']}
           onChange={cardChange}
           maxLength={4}
           customInputStyle={CardNumberInput}
           inputmode="numeric"
-          type={"password"}
+          type={'password'}
           placeholder="●●●●"
           ref={fourthInputRef}
         />

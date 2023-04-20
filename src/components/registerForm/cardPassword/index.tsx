@@ -1,11 +1,12 @@
-import React, { useState, useContext, useRef } from "react";
-import Input from "src/components/@common/Input";
-import FormLabel from "src/components/@common/FormLabel";
-import { ONLY_NUMBER_REGEXP } from "src/utils/regexp";
-import styled, { css } from "styled-components";
-import { InputValuesContext } from "../InputValueContext";
-import ErrorSpan from "src/components/@common/ErrorSpan";
-import useAutoFocus from "src/hooks/useAutoFocus";
+import React, { useState, useContext, useRef } from 'react';
+
+import styled, { css } from 'styled-components';
+import { InputValuesContext } from '../InputValueContext';
+import useAutoFocus from '../../../hooks/useAutoFocus';
+import { ONLY_NUMBER_REGEXP } from '../../../utils/regexp';
+import FormLabel from '../../@common/FormLabel';
+import Input from '../../@common/Input';
+import ErrorSpan from '../../@common/ErrorSpan';
 
 interface CardPasswordObj {
   first: string;
@@ -25,12 +26,10 @@ function CardPassword() {
     maxLength: 1,
   });
 
-  const passwordChange: React.ChangeEventHandler<HTMLInputElement> = (
-    event,
-  ) => {
+  const passwordChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     const value = event.currentTarget.value as string;
-    const name = event.currentTarget.dataset["order"] as keyof CardPasswordObj;
-    const idx = event.currentTarget.dataset["idx"] as string;
+    const name = event.currentTarget.dataset['order'] as keyof CardPasswordObj;
+    const idx = event.currentTarget.dataset['idx'] as string;
 
     if (!ONLY_NUMBER_REGEXP.test(value)) return;
 
@@ -57,12 +56,12 @@ function CardPassword() {
 
   return (
     <CardPasswordContainer>
-      <FormLabel>{"카드 비밀번호"}</FormLabel>
+      <FormLabel>{'카드 비밀번호'}</FormLabel>
       <PasswordInputContainer>
         <Input
           data-order="first"
           data-idx="0"
-          value={cardInput.password["first"]}
+          value={cardInput.password['first']}
           onChange={passwordChange}
           maxLength={1}
           inputmode="numeric"
@@ -73,7 +72,7 @@ function CardPassword() {
         <Input
           data-order="second"
           data-idx="1"
-          value={cardInput.password["second"]}
+          value={cardInput.password['second']}
           onChange={passwordChange}
           maxLength={1}
           inputmode="numeric"
@@ -84,9 +83,7 @@ function CardPassword() {
         <DotParagraph>•</DotParagraph>
         <DotParagraph>•</DotParagraph>
       </PasswordInputContainer>
-      {passwordError && (
-        <ErrorSpan>비밀번호 앞 2자리를 입력해주세요.</ErrorSpan>
-      )}
+      {passwordError && <ErrorSpan>비밀번호 앞 2자리를 입력해주세요.</ErrorSpan>}
     </CardPasswordContainer>
   );
 }
