@@ -1,17 +1,39 @@
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, useEffect } from "react";
 import Input from "../../common/Input";
 
 import "./inputBoxSecurityCode.css";
 import { validateSecurityNumber } from "../../../validation/securityNumber";
 
-export default function InputBoxSecurityCode() {
-  const [error, setError] = useState(false);
+interface Props {
+  setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const INPUT_STATUS = {
+  ERROR: 0,
+  NOT_COMPLETE: 1,
+  COMPLETE: 2,
+};
+
+export default function InputBoxSecurityCode(props: Props) {
+  const { setIsComplete } = props;
+
+  const [inputStatus, setInputStatus] = useState(INPUT_STATUS.NOT_COMPLETE);
 
   const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length > 3) e.target.value = e.target.value.slice(0, 3);
 
-    setError(!validateSecurityNumber(e.target.value));
+    if (validateSecurityNumber(e.target.value)) {
+      e.target.value.length === 3
+        ? setInputStatus(INPUT_STATUS.COMPLETE)
+        : setInputStatus(INPUT_STATUS.NOT_COMPLETE);
+    } else {
+      setInputStatus(INPUT_STATUS.ERROR);
+    }
   };
+
+  useEffect(() => {
+    setIsComplete(inputStatus === INPUT_STATUS.COMPLETE ? true : false);
+  }, [inputStatus]);
 
   return (
     <div className="input-box-security-code">
@@ -25,7 +47,9 @@ export default function InputBoxSecurityCode() {
       <button className="button-security-code" type="button">
         ?
       </button>
-      <p className={error ? "visible" : ""}>error message</p>
+      <p className={inputStatus === INPUT_STATUS.ERROR ? "visible" : ""}>
+        error message
+      </p>
     </div>
   );
 }
