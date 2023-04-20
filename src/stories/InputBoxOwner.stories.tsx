@@ -10,4 +10,6 @@ const meta: Meta = {
 
 export default meta;
 
-export const InputTest = (args: any) => <InputBoxOwner></InputBoxOwner>;
+export const InputTest = (args: any) => (
+  <InputBoxOwner setIsComplete={() => {}}></InputBoxOwner>
+);
