@@ -53,7 +53,7 @@ const CardRegisterPage = ({ navigate }: PageProps) => {
   const { cardNumber, expireDate, ownerName, securityCode, cardPassword1, cardPassword2 } = card;
 
   return (
-    <PageTemplate title={'카드 추가'} onClickBack={onClickBack}>
+    <PageTemplate title="카드 추가" onClickBack={onClickBack}>
       <Card cardNumber={cardNumber} ownerName={ownerName} expireDate={expireDate} />
       <InputForm onSubmit={submitNewCard}>
         <CardNumberInput inputValues={cardNumber} setInputValues={onChange('cardNumber')} />
