@@ -37,7 +37,7 @@ const InputDivider = styled.div`
 `;
 
 interface PaymentsInputProps {
-  title: string;
+  title?: string;
   inputInformationList: InputInformation[];
   inputDivideLetter?: string | '';
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -46,7 +46,7 @@ interface PaymentsInputProps {
 interface InputInformation {
   type: string;
   isRequired: boolean;
-  maxLength: number;
+  pattern: [number, number];
   name: string;
 }
 
@@ -56,7 +56,7 @@ function PaymentsInput({ title, inputInformationList, inputDivideLetter, onChang
   const inputAmount = inputInformationList.length;
   return (
     <div>
-      <LabelTitle>{title}</LabelTitle>
+      {title && <LabelTitle>{title}</LabelTitle>}
       <InputContainer>
         {Array.from({ length: inputAmount - 1 }, (_, i) => (
           <>
@@ -64,7 +64,8 @@ function PaymentsInput({ title, inputInformationList, inputDivideLetter, onChang
               name={inputInformationList[i].name}
               key={i}
               type={inputInformationList[i].type}
-              maxLength={inputInformationList[i].maxLength}
+              pattern={`.{${inputInformationList[i].pattern[0]},${inputInformationList[i].pattern[1]}}`}
+              maxLength={inputInformationList[i].pattern[1]}
               onChange={onChange}
               data-index={i}
               required={inputInformationList[i].isRequired}
@@ -75,7 +76,10 @@ function PaymentsInput({ title, inputInformationList, inputDivideLetter, onChang
         <InputItem
           name={inputInformationList[inputAmount - 1].name}
           type={inputInformationList[inputAmount - 1].type}
-          maxLength={inputInformationList[inputAmount - 1].maxLength}
+          pattern={`.{${inputInformationList[inputAmount - 1].pattern[0]},${
+            inputInformationList[inputAmount - 1].pattern[1]
+          }}`}
+          maxLength={inputInformationList[inputAmount - 1].pattern[1]}
           onChange={onChange}
           data-index={inputAmount - 1}
           required={inputInformationList[inputAmount - 1].isRequired}

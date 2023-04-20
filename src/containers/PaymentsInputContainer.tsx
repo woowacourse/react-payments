@@ -98,10 +98,10 @@ function PaymentsInputContainer({ setCardInformation }: PaymentInputContainerPro
       <PaymentsInput
         title="카드 번호"
         inputInformationList={[
-          { type: 'text', isRequired: true, maxLength: 4, name: 'cardNumber' },
-          { type: 'text', isRequired: true, maxLength: 4, name: 'cardNumber' },
-          { type: 'password', isRequired: true, maxLength: 4, name: 'cardNumber' },
-          { type: 'password', isRequired: true, maxLength: 4, name: 'cardNumber' },
+          { type: 'text', isRequired: true, pattern: [4, 4], name: 'cardNumber' },
+          { type: 'text', isRequired: true, pattern: [4, 4], name: 'cardNumber' },
+          { type: 'password', isRequired: true, pattern: [4, 4], name: 'cardNumber' },
+          { type: 'password', isRequired: true, pattern: [4, 4], name: 'cardNumber' },
         ]}
         inputDivideLetter="-"
         onChange={onChangeCardNumber}
@@ -109,27 +109,27 @@ function PaymentsInputContainer({ setCardInformation }: PaymentInputContainerPro
       <PaymentsInput
         title="만료일"
         inputInformationList={[
-          { type: 'text', isRequired: true, maxLength: 2, name: 'expirationDate' },
-          { type: 'text', isRequired: true, maxLength: 2, name: 'expirationDate' },
+          { type: 'text', isRequired: true, pattern: [1, 2], name: 'expirationDate' },
+          { type: 'text', isRequired: true, pattern: [2, 2], name: 'expirationDate' },
         ]}
         inputDivideLetter="/"
         onChange={onChangeExpirationDate}
       />
       <PaymentsInput
         title="카드 소유자 이름(선택)"
-        inputInformationList={[{ type: 'text', isRequired: false, maxLength: 30, name: 'owner' }]}
+        inputInformationList={[{ type: 'text', isRequired: false, pattern: [0, 30], name: 'owner' }]}
         onChange={onChangeOwner}
       />
       <PaymentsInput
         title="보안 코드(CVC/CVV)"
-        inputInformationList={[{ type: 'password', isRequired: true, maxLength: 3, name: 'securityCode' }]}
+        inputInformationList={[{ type: 'password', isRequired: true, pattern: [3, 3], name: 'securityCode' }]}
         onChange={onChangeCVC}
       />
       <PaymentsInput
         title="카드 비밀번호"
         inputInformationList={[
-          { type: 'password', isRequired: true, maxLength: 1, name: 'cardPassword' },
-          { type: 'password', isRequired: true, maxLength: 1, name: 'cardPassword' },
+          { type: 'password', isRequired: true, pattern: [1, 1], name: 'cardPassword' },
+          { type: 'password', isRequired: true, pattern: [1, 1], name: 'cardPassword' },
         ]}
         inputDivideLetter=""
         onChange={onChangePassword}
