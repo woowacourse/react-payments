@@ -1,7 +1,7 @@
 import React from "react";
-import CardAddButton from "./CardAddButton";
-import St from "./styled";
-import CardDetailView from "../../CardDetailView";
+import CardAddButton from "./CardAddButton/CardAddButton";
+import St from "./CardListStyled";
+import CardDetailView from "../../CardDetailView/CardDetailView";
 import { CreditCard } from "../../../types/card";
 
 type CardListProps = {

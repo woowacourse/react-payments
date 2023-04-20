@@ -1,6 +1,6 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import CardCVCInput from "./index";
+import CardCVCInput from "./CardCVCInput";
 
 const meta = {
   component: CardCVCInput,

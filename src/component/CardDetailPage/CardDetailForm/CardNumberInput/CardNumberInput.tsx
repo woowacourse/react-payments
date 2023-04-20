@@ -1,5 +1,5 @@
 import React from "react";
-import St from "./styled";
+import St from "./CardNumberInputStyled";
 
 type CardNumberInputProps = {
   changeCardNumber: (e: React.ChangeEvent<HTMLInputElement>) => void;

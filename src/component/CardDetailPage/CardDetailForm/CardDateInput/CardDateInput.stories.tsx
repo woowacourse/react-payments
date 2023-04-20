@@ -1,6 +1,6 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import CardDateInput from "./index";
+import CardDateInput from "./CardDateInput";
 
 const meta = {
   component: CardDateInput,

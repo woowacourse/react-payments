@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import CardDetailPage from "./component/CardDetailPage";
-import CardListPage from "./component/CardListPage";
+import CardDetailPage from "./component/CardDetailPage/CardDetailPage";
+import CardListPage from "./component/CardListPage/CardListPage";
 
 type CreditCard = {
   cardNumberOrigin: string;
@@ -17,8 +17,6 @@ function App() {
 
   const addCreditCard = (card: CreditCard) => {
     setCreditCardList([...creditCardList, card]);
-
-    console.log(creditCardList);
   };
 
   return (

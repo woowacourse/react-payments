@@ -1,5 +1,5 @@
 import React from "react";
-import St from "./styled";
+import St from "./CardDateInputStyled";
 
 type CardDateInputProps = {
   changeCardDate: (e: React.ChangeEvent<HTMLInputElement>) => void;

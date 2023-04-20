@@ -1,6 +1,6 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import CardPasswordInput from "./index";
+import CardPasswordInput from "./CardPasswordInput";
 
 const meta = {
   component: CardPasswordInput,

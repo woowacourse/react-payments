@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import St from "./styled";
+import St from "./CardPasswordInputStyled";
 
 type CardPasswordInputProps = {
   changeCardPassword: (e: React.FormEvent<HTMLInputElement>) => void;

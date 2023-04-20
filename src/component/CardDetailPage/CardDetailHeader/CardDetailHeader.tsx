@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import St from "./styled";
+import St from "./CardDetailHeaderStyled";
 
 function CardDetailHeader() {
   const navigate = useNavigate();

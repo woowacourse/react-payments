@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import CardDetailHeader from "./CardDetailHeader";
-import CardDetailView from "../CardDetailView";
-import CardDetailForm from "./CardDetailForm";
+import CardDetailHeader from "./CardDetailHeader/CardDetailHeader";
+import CardDetailView from "../CardDetailView/CardDetailView";
+import CardDetailForm from "./CardDetailForm/CardDetailForm";
 
-import St from "./styled";
+import St from "./CardDetailPageStyled";
 import { CreditCard } from "../../types/card";
 
 type CardDetailPageProps = {
@@ -85,7 +85,7 @@ function CardDetailPage({ addCreditCard }: CardDetailPageProps) {
     }
   };
 
-  const submitCreditCard = () => {
+  const submitCreditCard = (e: React.FormEvent<HTMLFormElement>) => {
     const newCard: CreditCard = {
       cardNumberOrigin,
       cardNumberHidden,
@@ -95,6 +95,7 @@ function CardDetailPage({ addCreditCard }: CardDetailPageProps) {
       cardPassword,
     };
 
+    e.preventDefault();
     navigate("/");
     addCreditCard(newCard);
   };

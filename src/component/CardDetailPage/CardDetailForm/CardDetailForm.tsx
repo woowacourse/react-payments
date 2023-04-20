@@ -1,12 +1,12 @@
 import React from "react";
 
-import CardNumberInput from "./CardNumberInput";
-import CardDateInput from "./CardDateInput";
-import CardOwnerNameInput from "./CardOwnerNameInput";
-import CardCVCInput from "./CardCVCInput";
-import CardPasswordInput from "./CardPasswordInput";
+import CardNumberInput from "./CardNumberInput/CardNumberInput";
+import CardDateInput from "./CardDateInput/CardDateInput";
+import CardOwnerNameInput from "./CardOwnerNameInput/CardOwnerNameInput";
+import CardCVCInput from "./CardCVCInput/CardCVCInput";
+import CardPasswordInput from "./CardPasswordInput/CardPasswordInput";
 
-import St from "./styled";
+import St from "./CardDetailFormStyled";
 
 type CardDetailFormProps = {
   changeCardNumber: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -24,7 +24,7 @@ type CardDetailFormProps = {
   changeCardPassword: (e: React.FormEvent<HTMLInputElement>) => void;
   cardPassword: [string, string];
 
-  submitCreditCard: () => void;
+  submitCreditCard: (e: React.FormEvent<HTMLFormElement>) => void;
 };
 
 function CardDetailForm({

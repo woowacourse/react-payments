@@ -1,6 +1,6 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import CardDetailView from "./index";
+import CardDetailView from "./CardDetailView";
 
 const meta = {
   component: CardDetailView,

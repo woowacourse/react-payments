@@ -1,5 +1,5 @@
 import React from "react";
-import St from "./styled";
+import St from "./CardCVCInputStyled";
 
 type CardCVCInputProps = {
   changeCardCVC: (e: React.ChangeEvent<HTMLInputElement>) => void;

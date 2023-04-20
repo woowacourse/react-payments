@@ -1,6 +1,6 @@
 import React from "react";
 
-import St from "./styled";
+import St from "./CardDetailViewStyled";
 
 type CardDetailViewProps = {
   cardNumberHidden: string;
