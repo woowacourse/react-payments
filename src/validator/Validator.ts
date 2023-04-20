@@ -17,3 +17,11 @@ export const isCapitalAlphabetic = (value: string) => {
 
   return REGEX.test(value);
 };
+
+export const isFulfilledObject = (obj: Record<string, string>, length: number) => {
+  return Object.values(obj).every((value) => value.length === length);
+};
+
+export const isFulfilledString = (value: string, length: number) => {
+  return value.length === length;
+};

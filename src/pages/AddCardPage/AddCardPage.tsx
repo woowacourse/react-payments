@@ -11,7 +11,7 @@ import { Container } from "../../components/common";
 import { useState } from "react";
 import { Card, CardExpirationDate, CardNumber, CardPassword } from "../../types";
 import { useNavigate } from "react-router-dom";
-import { isCapitalAlphabetic, isNumeric } from "../../validator/Validator";
+import { isCapitalAlphabetic, isNumeric, isFulfilledObject, isFulfilledString } from "../../validator/Validator";
 
 type AddCardPageProps = {
   onSubmit: (card: Card) => void;
@@ -98,6 +98,15 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
     navigate("/");
   };
 
+  const isAddButtonVisible = (): boolean => {
+    return (
+      isFulfilledObject(cardNumber, 4) &&
+      isFulfilledObject(expirationDate, 2) &&
+      isFulfilledObject(password, 1) &&
+      isFulfilledString(securityCode, 3)
+    );
+  };
+
   return (
     <Container>
       <AppBar title={"카드 추가"} leftChild={<Link to="/">〈</Link>} />
@@ -108,7 +117,7 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
         <CardOwnerNameInput ownerName={ownerName} nameLength={ownerName.length} onChange={handleOwnerName} />
         <CardSecurityCodeInput securityCode={securityCode} onChange={handleSecurityCode} />
         <CardPasswordInput password={password} onChange={handlePassword} />
-        <ButtonBox>
+        <ButtonBox isVisible={isAddButtonVisible()}>
           <Button>다음</Button>
         </ButtonBox>
       </Form>
@@ -122,9 +131,10 @@ const Form = styled.form`
   gap: 19px;
 `;
 
-const ButtonBox = styled.div`
+const ButtonBox = styled.div<{ isVisible: boolean }>`
   display: flex;
   justify-content: flex-end;
+  visibility: ${({ isVisible }) => (isVisible ? "visible" : "hidden")};
 `;
 
 const Button = styled.button`
