@@ -2,7 +2,7 @@
 /* eslint-disable max-len */
 import CreditCard from 'components/CreditCard';
 import Input from 'components/Input';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import * as Type from 'types';
 import * as S from './style';
