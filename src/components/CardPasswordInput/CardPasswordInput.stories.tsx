@@ -1,4 +1,4 @@
-import GlobalStyle from "../../styled/GlobalStyle";
+import GlobalStyle from "../../styles/GlobalStyle";
 import CardPasswordInput from "./CardPasswordInput";
 
 export default {

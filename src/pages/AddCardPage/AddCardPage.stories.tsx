@@ -1,5 +1,5 @@
 import { Layout } from "../../App";
-import GlobalStyle from "../../styled/GlobalStyle";
+import GlobalStyle from "../../styles/GlobalStyle";
 import AddCardPage from "./AddCardPage";
 
 export default {

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import GlobalStyle from "../../styled/GlobalStyle";
+import GlobalStyle from "../../styles/GlobalStyle";
 import AppBar from "./AppBar";
 
 export default {

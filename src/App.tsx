@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import GlobalStyle from "./styled/GlobalStyle";
+import GlobalStyle from "./styles/GlobalStyle";
 import AddCardPage from "./pages/AddCardPage/AddCardPage";
 import CardListPage from "./pages/CardListPage/CardListPage";
 

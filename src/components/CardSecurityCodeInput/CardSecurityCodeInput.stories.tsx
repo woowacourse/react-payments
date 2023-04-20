@@ -1,4 +1,4 @@
-import GlobalStyle from "../../styled/GlobalStyle";
+import GlobalStyle from "../../styles/GlobalStyle";
 import CardSecurityCodeInput from "./CardSecurityCodeInput";
 
 export default {

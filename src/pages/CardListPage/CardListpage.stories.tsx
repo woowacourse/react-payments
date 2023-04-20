@@ -1,4 +1,4 @@
-import GlobalStyle from "../../styled/GlobalStyle";
+import GlobalStyle from "../../styles/GlobalStyle";
 import CardListPage from "./CardListPage";
 import { Layout } from "../../App";
 import { Card } from "../../types";
