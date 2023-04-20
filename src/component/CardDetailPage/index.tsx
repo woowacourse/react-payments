@@ -8,6 +8,7 @@ function CardDetailPage() {
   const [cardNumberOrigin, setCardNumberOrigin] = useState("");
   const [cardNumberHidden, setCardNumberHidden] = useState("");
   const [cardDate, setCardDate] = useState("");
+  const [cardOwnerName, setCardOwnerName] = useState("");
 
   const changeCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     const cardNumber = e.target.value.replace(/[^\d•]/g, "").slice(0, 16); // 16자리 이상은 자르기
@@ -25,6 +26,7 @@ function CardDetailPage() {
         setCardNumberOrigin(cardNumberOrigin.slice(0, -1));
       }
     }
+
     if (cardNumberOrigin.length <= 8) {
       setCardNumberOrigin(cardNumber);
     }
@@ -36,6 +38,7 @@ function CardDetailPage() {
         : cardNumber;
     const showNumber = hiddenNumber.match(/.{1,4}/g);
     const resultNumber = showNumber ? showNumber.join("-") : "";
+
     setCardNumberHidden(resultNumber);
   };
 
@@ -46,6 +49,11 @@ function CardDetailPage() {
 
     setCardDate(resultDate);
   };
+
+  const changeCardOwnerName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const name = e.target.value;
+    setCardOwnerName(name);
+  };
   return (
     <St.Page>
       <CardDetailHeader />
@@ -55,6 +63,8 @@ function CardDetailPage() {
         cardNumberHidden={cardNumberHidden}
         changeCardDate={changeCardDate}
         cardDate={cardDate}
+        changeCardOwnerName={changeCardOwnerName}
+        cardOwnerName={cardOwnerName}
       />
     </St.Page>
   );

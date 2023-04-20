@@ -14,6 +14,9 @@ type CardDetailFormProps = {
 
   changeCardDate: (e: React.ChangeEvent<HTMLInputElement>) => void;
   cardDate: string;
+
+  changeCardOwnerName: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  cardOwnerName: string;
 };
 
 function CardDetailForm({
@@ -21,6 +24,8 @@ function CardDetailForm({
   cardNumberHidden,
   changeCardDate,
   cardDate,
+  changeCardOwnerName,
+  cardOwnerName,
 }: CardDetailFormProps) {
   return (
     <St.Form>
@@ -29,7 +34,10 @@ function CardDetailForm({
         cardNumberHidden={cardNumberHidden}
       />
       <CardDateInput changeCardDate={changeCardDate} cardDate={cardDate} />
-      <CardOwnerNameInput />
+      <CardOwnerNameInput
+        changeCardOwnerName={changeCardOwnerName}
+        cardOwnerName={cardOwnerName}
+      />
       <CardCVCInput />
       <CardPasswordInput />
       <St.SubmitButton type="submit" value={"다음"} />
