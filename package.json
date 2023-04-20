@@ -1,6 +1,6 @@
 {
   "name": "react-payments",
-  "home": "https://xodms0309.github.io/react-payments/",
+  "homepage": "https://xodms0309.github.io/react-payments/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
