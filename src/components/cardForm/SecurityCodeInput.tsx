@@ -1,6 +1,6 @@
-import Input from '../common/Input';
-import InputBox from '../common/InputBox';
-import InputGroup from '../common/InputGroup';
+import Input from "../common/Input";
+import InputBox from "../common/InputBox";
+import InputGroup from "../common/InputGroup";
 
 interface SecurityCodeInputProps {
   securityCode: string;
@@ -21,16 +21,17 @@ const SecurityCodeInput = ({
     if (isOverLength(inputValue)) return;
 
     if (isNotInputNumber(inputValue)) {
-      setErrorMessage('숫자만 입력해주세요');
+      setErrorMessage("숫자만 입력해주세요");
       return;
     }
 
     setSecurityCode(inputValue.toUpperCase());
-    setErrorMessage('');
+    setErrorMessage("");
   };
 
   const isNotInputNumber = (inputValue: string) => {
-    return Number.isNaN(Number(inputValue));
+    const regex = /^\d{0,3}$/;
+    return !regex.test(inputValue);
   };
 
   const isOverLength = (inputValue: string) => {
@@ -38,13 +39,9 @@ const SecurityCodeInput = ({
   };
 
   return (
-    <InputGroup labelValue={'보안 코드(CVC/CVV)'} errorMessage={errorMessage}>
-      <InputBox width='100px' isError={!!errorMessage}>
-        <Input
-          type='password'
-          value={securityCode}
-          onChange={handleChangeInput}
-        />
+    <InputGroup labelValue={"보안 코드(CVC/CVV)"} errorMessage={errorMessage}>
+      <InputBox width="100px" isError={!!errorMessage}>
+        <Input type="password" value={securityCode} onChange={handleChangeInput} />
       </InputBox>
     </InputGroup>
   );

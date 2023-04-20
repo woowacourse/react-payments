@@ -1,9 +1,9 @@
-import styled from 'styled-components';
-import Input from '../common/Input';
-import InputBox from '../common/InputBox';
-import InputGroup from '../common/InputGroup';
-import { DotIcon } from '../../assets/icons';
-import { useRef } from 'react';
+import styled from "styled-components";
+import Input from "../common/Input";
+import InputBox from "../common/InputBox";
+import InputGroup from "../common/InputGroup";
+import { DotIcon } from "../../assets/icons";
+import { useRef } from "react";
 
 interface PasswordInputProps {
   password: string[];
@@ -12,38 +12,33 @@ interface PasswordInputProps {
   setErrorMessage: (errorMessage: string) => void;
 }
 
-const PasswordInput = ({
-  password,
-  setPassword,
-  errorMessage,
-  setErrorMessage,
-}: PasswordInputProps) => {
+const PasswordInput = ({ password, setPassword, errorMessage, setErrorMessage }: PasswordInputProps) => {
   const refs = [useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null)];
 
-  const handleChangeInput =
-    (inputIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
-      const inputValue = event.target.value;
+  const handleChangeInput = (inputIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = event.target.value;
 
-      if (isOverLength(inputValue)) return;
+    if (isOverLength(inputValue)) return;
 
-      if (isNotInputNumber(inputValue)) {
-        setErrorMessage('숫자만 입력해주세요');
-        return;
-      }
+    if (isNotInputNumber(inputValue)) {
+      setErrorMessage("숫자만 입력해주세요");
+      return;
+    }
 
-      const newInputs = [...password];
-      newInputs[inputIndex] = inputValue;
+    const newInputs = [...password];
+    newInputs[inputIndex] = inputValue;
 
-      setPassword(newInputs);
-      setErrorMessage('');
+    setPassword(newInputs);
+    setErrorMessage("");
 
-      if (isNextInputFocusable(inputValue, inputIndex)) {
-        refs[inputIndex + 1].current?.focus();
-      }
-    };
+    if (isNextInputFocusable(inputValue, inputIndex)) {
+      refs[inputIndex + 1].current?.focus();
+    }
+  };
 
   const isNotInputNumber = (inputValue: string) => {
-    return Number.isNaN(Number(inputValue));
+    const regex = /^\d{0,1}$/;
+    return !regex.test(inputValue);
   };
 
   const isOverLength = (inputValue: string) => {
@@ -55,23 +50,13 @@ const PasswordInput = ({
   };
 
   return (
-    <InputGroup labelValue='카드 비밀번호' errorMessage={errorMessage}>
+    <InputGroup labelValue="카드 비밀번호" errorMessage={errorMessage}>
       <BoxContainer>
-        <InputBox width='43px' isError={!!errorMessage}>
-          <Input
-            type='password'
-            ref={refs[0]}
-            value={password[0]}
-            onChange={handleChangeInput(0)}
-          ></Input>
+        <InputBox width="43px" isError={!!errorMessage}>
+          <Input type="password" ref={refs[0]} value={password[0]} onChange={handleChangeInput(0)}></Input>
         </InputBox>
-        <InputBox width='43px' isError={!!errorMessage}>
-          <Input
-            type='password'
-            ref={refs[1]}
-            value={password[1]}
-            onChange={handleChangeInput(1)}
-          ></Input>
+        <InputBox width="43px" isError={!!errorMessage}>
+          <Input type="password" ref={refs[1]} value={password[1]} onChange={handleChangeInput(1)}></Input>
         </InputBox>
         <DotIcon />
         <DotIcon />
