@@ -29,7 +29,7 @@ const AddCardPage = () => {
       const lastWord = e.target.value[e.target.value.length - 1];
 
       if (e.target.value.length > 5) return;
-      if (e.target.value.length > 0 && !isNumberInput(lastWord)) return;
+      if (e.target.value.length > 0 && !(isNumberInput(lastWord) || lastWord === '/')) return;
       setCardExpireDate(formatExpireDate(e.target.value));
     },
     status: false,
