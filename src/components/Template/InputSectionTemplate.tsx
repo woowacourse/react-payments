@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-interface InputSectionType {
+interface InputSectionTemplateType {
   label: string;
   isCountLength?: boolean;
   children: React.ReactNode;
@@ -9,15 +9,15 @@ interface InputSectionType {
   maxLength?: number;
 }
 
-const InputSection = ({
+const InputSectionTemplate = ({
   label,
   isCountLength,
   children,
   maxLength,
   inputValues,
-}: InputSectionType) => {
+}: InputSectionTemplateType) => {
   return (
-    <InputSectionWrapper>
+    <InputSectionTemplateWrapper>
       <InputLabelWrapper>
         <p>{label}</p>
         {isCountLength && maxLength && (
@@ -27,13 +27,13 @@ const InputSection = ({
         )}
       </InputLabelWrapper>
       <ChildrenWrapper>{children}</ChildrenWrapper>
-    </InputSectionWrapper>
+    </InputSectionTemplateWrapper>
   );
 };
 
-export default InputSection;
+export default InputSectionTemplate;
 
-const InputSectionWrapper = styled.div`
+const InputSectionTemplateWrapper = styled.div`
   width: 100%;
   margin-bottom: 19px;
   display: flex;

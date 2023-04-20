@@ -1,11 +1,11 @@
 import React from 'react';
-import InputSectionTemplate from '../InputSectionTemplate';
-import InputBox from '../../Common/InputBox';
+import InputSectionTemplate from '../../template/InputSectionTemplate';
+import InputBox, { InputType } from '../../common/InputBox';
 import { InputStateProps } from '../../../types';
 import styled from 'styled-components';
 
 const SecurityCodeInput = (props: InputStateProps) => {
-  const inputs = [{ type: 'number', maxLength: 3, required: true, textSecurity: true }];
+  const inputs: InputType[] = [{ textType: 'number', maxLength: 3, required: true, textSecurity: true }];
   return (
     <InputSectionTemplate label="보안 코드(CVC/CVV)">
       <InputBox inputs={inputs} align="center" {...props} />

@@ -1,14 +1,14 @@
 import React from 'react';
-import InputSectionTemplate from '../InputSectionTemplate';
-import InputBox from '../../Common/InputBox';
+import InputSectionTemplate from '../../template/InputSectionTemplate';
+import InputBox, { InputType } from '../../common/InputBox';
 import { InputStateProps } from '../../../types';
 
 const CardNumberInput = (props: InputStateProps) => {
-  const inputs = [
-    { type: 'number', maxLength: 4, placeholder: '1234', required: true },
-    { type: 'number', maxLength: 4, placeholder: '5678', required: true },
-    { type: 'number', maxLength: 4, placeholder: '∙∙∙∙', required: true, textSecurity: true },
-    { type: 'number', maxLength: 4, placeholder: '∙∙∙∙', required: true, textSecurity: true },
+  const inputs: InputType[] = [
+    { textType: 'number', maxLength: 4, placeholder: '1234', required: true },
+    { textType: 'number', maxLength: 4, placeholder: '5678', required: true },
+    { textType: 'number', maxLength: 4, placeholder: '∙∙∙∙', required: true, textSecurity: true },
+    { textType: 'number', maxLength: 4, placeholder: '∙∙∙∙', required: true, textSecurity: true },
   ];
   return (
     <InputSectionTemplate label="카드 번호">

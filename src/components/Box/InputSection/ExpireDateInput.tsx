@@ -1,12 +1,12 @@
 import React from 'react';
-import InputSectionTemplate from '../InputSectionTemplate';
-import InputBox from '../../Common/InputBox';
+import InputSectionTemplate from '../../template/InputSectionTemplate';
+import InputBox, { InputType } from '../../common/InputBox';
 import { InputStateProps } from '../../../types';
 
 const ExpireDateInput = (props: InputStateProps) => {
-  const inputs = [
-    { type: 'number', maxLength: 2, placeholder: 'MM', required: true },
-    { type: 'number', maxLength: 2, placeholder: 'YY', required: true },
+  const inputs: InputType[] = [
+    { textType: 'number', maxLength: 2, placeholder: 'MM', required: true },
+    { textType: 'number', maxLength: 2, placeholder: 'YY', required: true },
   ];
   return (
     <InputSectionTemplate label="만료일">

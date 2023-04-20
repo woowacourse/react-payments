@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import Card from '../Common/Card';
-import CardNumberInput from '../Box/InputSection/CardNumberInput';
-import ExpireDateInput from '../Box/InputSection/ExpireDateInput';
-import OwnerNameInput from '../Box/InputSection/OwnerNameInput';
-import SecurityCodeInput from '../Box/InputSection/SecurityCodeInput';
-import CardPasswordInput from '../Box/InputSection/CardPasswordInput';
+import Card from '../common/Card';
+import CardNumberInput from '../box/inputSection/CardNumberInput';
+import ExpireDateInput from '../box/inputSection/ExpireDateInput';
+import OwnerNameInput from '../box/inputSection/OwnerNameInput';
+import SecurityCodeInput from '../box/inputSection/SecurityCodeInput';
+import CardPasswordInput from '../box/inputSection/CardPasswordInput';
 import styled from 'styled-components';
-import { CardType, PageProps } from '../../types';
-import PageTemplate from '../Template/PageTemplate';
+import { CardType, Page, PageProps } from '../../types';
+import PageTemplate from '../template/PageTemplate';
 
 interface CardFormState extends Omit<CardType, 'id' | 'cardPassword'> {
   cardPassword1: string;
@@ -39,11 +39,11 @@ const CardRegisterPage = ({ navigate }: PageProps) => {
     const cardList: CardType[] = JSON.parse(localStorage.getItem('cardList') || '[]');
     cardList.push(newCard);
     localStorage.setItem('cardList', JSON.stringify(cardList));
-    navigate('list');
+    navigate(Page.list);
   };
 
   const onClickBack = () => {
-    navigate('list');
+    navigate(Page.list);
   };
 
   const onChange = (key: keyof CardFormState) => (value: string | string[]) => {

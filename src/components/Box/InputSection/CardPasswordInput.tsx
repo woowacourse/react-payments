@@ -1,6 +1,6 @@
 import React from 'react';
-import InputSectionTemplate from '../InputSectionTemplate';
-import InputBox from '../../Common/InputBox';
+import InputSectionTemplate from '../../template/InputSectionTemplate';
+import InputBox, { InputType } from '../../common/InputBox';
 import { InputStateProps } from '../../../types';
 import styled from 'styled-components';
 
@@ -10,7 +10,7 @@ interface CardPasswordInputProps {
 }
 
 const CardPasswordInput = ({ cardPassword1Props, cardPassword2Props }: CardPasswordInputProps) => {
-  const inputs = [{ type: 'number', maxLength: 1, required: true, textSecurity: true }];
+  const inputs: InputType[] = [{ textType: 'number', maxLength: 1, required: true, textSecurity: true }];
   return (
     <InputSectionTemplate label="카드 번호">
       <InputBox inputs={inputs} align="center" {...cardPassword1Props} />
