@@ -12,7 +12,5 @@ type Story = StoryObj<typeof AddCardPage>;
 
 //title,cardNumberSet,owner,expiracy
 export const AddCard: Story = {
-  args: {
-    cardNumberSet: ["1111", "2222", "····", "····"],
-  },
+  args: {},
 };

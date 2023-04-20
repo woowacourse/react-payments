@@ -6,8 +6,8 @@ interface AddCardButtonProps {
 }
 
 const Wrapper = styled.button`
-  width: 213px;
-  height: 133px;
+  width: 249px;
+  height: 169px;
   background: #e5e5e5;
   border-radius: 5px;
   border: none;
