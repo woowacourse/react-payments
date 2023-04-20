@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { CardInfo } from '../../App';
 import { useState } from 'react';
 
-import Header from '../../components/Header/Header';
 import CardNumberInputBox from '../../components/CardNumberInputBox/CardNumberInputBox';
 import ExpirationDateInputBox from '../../components/ExpirationDateInputBox/ExpirationDateInputBox';
 import OwnerNameInputBox from '../../components/OwnerNameInputBox/OwnerNameInputBox';

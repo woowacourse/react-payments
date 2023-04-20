@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 
 import { CardInfo } from '../../App';
 
-import Header from '../../components/Header/Header';
 import Card from '../../components/Card/Card';
 
 const MyCardPage = ({ cardList }: { cardList: CardInfo[] }) => {

@@ -14,7 +14,7 @@ const Input = (props: InputProps) => {
         nextInput.focus();
       }
     }
-  }, [value]);
+  }, [value, maxLength]);
 
   return (
     <styled.Input
