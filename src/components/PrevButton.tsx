@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+interface PrevButtonProps {
+  onClick: () => void;
+}
+
 const Wrapper = styled.button`
   cursor: pointer;
   border: 0;
@@ -11,9 +15,9 @@ const Svg = styled.svg`
   height: 20px;
 `;
 
-export default function PrevButton() {
+export default function PrevButton({ onClick }: PrevButtonProps) {
   return (
-    <Wrapper>
+    <Wrapper onClick={onClick}>
       <Svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"

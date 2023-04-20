@@ -15,6 +15,7 @@ import ToolTip from "./ToolTip";
 
 interface AddCardPageProps {
   onSubmit: (event: FormEvent<HTMLFormElement>) => void;
+  onClick: () => void;
 }
 
 const Page = styled.div`
@@ -67,7 +68,7 @@ const NextButtonWrapper = styled.div`
   bottom: 25px;
 `;
 
-export default function AddCardPage({ onSubmit }: AddCardPageProps) {
+export default function AddCardPage({ onSubmit, onClick }: AddCardPageProps) {
   const firstCardNumber = useInput("", "firstCardNumber");
   const secondCardNumber = useInput("", "secondCardNumber");
   const thirdCardNumber = useInput("", "thirdCardNumber");
@@ -110,7 +111,7 @@ export default function AddCardPage({ onSubmit }: AddCardPageProps) {
   return (
     <Page>
       <TitleWrapper>
-        <PrevButton />
+        <PrevButton onClick={onClick} />
         <Title>카드 추가</Title>
       </TitleWrapper>
       <CardWrapper>

@@ -57,7 +57,12 @@ export default function App() {
       {pageIndex === 0 && (
         <Homepage cardList={cardList} onClick={() => setPageIndex(1)} />
       )}
-      {pageIndex === 1 && <AddCardPage onSubmit={onCardInfoSubmit} />}
+      {pageIndex === 1 && (
+        <AddCardPage
+          onClick={() => setPageIndex(0)}
+          onSubmit={onCardInfoSubmit}
+        />
+      )}
     </div>
   );
 }
