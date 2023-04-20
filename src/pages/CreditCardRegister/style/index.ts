@@ -14,6 +14,7 @@ export const CreditCardRegisterTopSheet = styled.div`
 export const HomeButton = styled.button`
     margin-right: 12px;
     margin-bottom: 3px;
+    cursor: pointer;
 `;
 
 export const CreditCardRegisterHeader = styled.h3`
@@ -61,6 +62,7 @@ export const ButtonWrapper = styled.div`
 
 export const ResigerButton = styled.button`
     font-weight: 700;
+    cursor: pointer;
 `;
 
 export const HiddentInput = styled.input`

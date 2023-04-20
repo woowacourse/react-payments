@@ -34,6 +34,5 @@ export const RegisterCreditCardButton = styled.button`
     background-color: #E5E5E5;
     border-radius: 5px;
     font-size: 30px;
+    cursor: pointer;
 `;
-
-export default {};
