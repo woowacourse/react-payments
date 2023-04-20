@@ -112,6 +112,7 @@ const S = {
     margin: 0 2.2vw;
     font-size: 14px;
     text-align: center;
+    letter-spacing: 1px;
   `,
 
   Hyphen: styled.p<{ cardNumber: string }>`

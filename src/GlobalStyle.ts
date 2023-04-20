@@ -27,6 +27,7 @@ export const GlobalStyle = createGlobalStyle`
     --gray-color-300: #969696;
     --gray-color-400: #727272;
     --caption-color: #ee3507;
+    --darken-color: #333;
   }
 
   #root {

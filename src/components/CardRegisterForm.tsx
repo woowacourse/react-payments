@@ -17,6 +17,7 @@ const CardRegisterForm = () => {
         <NameInput />
         <SecurityCodeInput />
         <PasswordInput />
+
         <S.Button>다음</S.Button>
       </form>
     </div>
@@ -26,13 +27,15 @@ const CardRegisterForm = () => {
 const S = {
   Button: styled.button`
     display: flex;
-    margin: 34px 0 0 auto;
+    margin: 38px 0 30px auto;
     padding: 10px 16px;
-    border: 1px solid #000;
+    color: var(--darken-color);
+    border: 1px solid var(--darken-color);
     border-radius: 8px;
     font-size: 14px;
     font-weight: 700;
     background: none;
+    cursor: pointer;
   `,
 };
 

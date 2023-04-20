@@ -52,11 +52,12 @@ const S = {
     display: block;
     width: 24vw;
     height: 48px;
-    padding: 0 28px;
+    padding: 0 8vw;
     background: var(--input-background);
     border-radius: 8px;
     font-size: 14px;
     text-align: center;
+    letter-spacing: 1px;
   `,
 
   QuestionMark: styled.p`
@@ -72,6 +73,7 @@ const S = {
     color: var(--gray-color-300);
     border: 1.4px solid var(--gray-color-200);
     border-radius: 50%;
+    cursor: pointer;
 
     &:hover::after {
       content: "카드 뒷면 서명란에 적힌 끝 번호 3자리를 입력해 주세요.";

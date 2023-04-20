@@ -86,6 +86,7 @@ const S = {
     margin: 0 2.2vw;
     text-align: center;
     font-size: 14px;
+    letter-spacing: 1px;
   `,
 
   Hyphen: styled.p<{ month: string }>`

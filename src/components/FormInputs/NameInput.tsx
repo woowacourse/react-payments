@@ -54,7 +54,7 @@ const S = {
     width: 88vw;
     height: 48px;
     margin: 10px 0 36px;
-    padding: 0 28px;
+    padding: 0 8vw;
     font-size: 14px;
     background: var(--input-background);
     border-radius: 8px;
