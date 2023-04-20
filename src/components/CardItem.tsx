@@ -7,11 +7,17 @@ interface CardProps {
 }
 
 export const CardItem = ({ card }: CardProps) => {
+  const hideNumbers = (numbers: string): string => {
+    const hiddenNumbers =
+      numbers.slice(0, 8) + "●".repeat(numbers.slice(8).length);
+    return (hiddenNumbers.match(/\d{1,4}|●{1,4}/g) ?? []).join("   ");
+  };
+
   return (
     <Card backgroundColor={card.color}>
       <Container>
         <IcChip />
-        <CardNumbers>{card.numbers}</CardNumbers>
+        <CardNumbers>{hideNumbers(card.numbers)}</CardNumbers>
         <InfoWrapper>
           <Name>{card.owner ? card.owner : "NAME"}</Name>
           <ExpiryDate>
@@ -46,6 +52,7 @@ const IcChip = styled.div`
 const CardNumbers = styled.div`
   text-align: center;
   height: 15px;
+  letter-spacing: 1px;
 `;
 
 const InfoWrapper = styled.div`

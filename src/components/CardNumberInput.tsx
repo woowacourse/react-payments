@@ -1,9 +1,11 @@
 import { InputLabel } from "./common/InputLabel";
 import { Input } from "./common/Input";
 import styled from "styled-components";
+import { useState } from "react";
 
 interface CardNumberInputProps {
   setCardNumbers: (numbers: string) => void;
+  cardNumbers: string;
 }
 
 const cardNumberInputInfo = {
@@ -14,19 +16,43 @@ const cardNumberInputInfo = {
   type: "text",
 };
 
-export const CardNumberInput = ({ setCardNumbers }: CardNumberInputProps) => {
-  const handleInput = (e: any) => {
-    const value = e.target.value.replaceAll(" - ", "");
+export const CardNumberInput = ({
+  setCardNumbers,
+  cardNumbers,
+}: CardNumberInputProps) => {
+  const [postText, setPostText] = useState("");
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const text = e.target.value;
 
-    if (value.length > 16) {
-      e.target.value = e.target.value.slice(0, -1);
-      return;
+    //문자가 추가됐을 때
+    if (
+      postText.replaceAll(" - ", "").length < text.replaceAll(" - ", "").length
+    ) {
+      const numbers = text.replaceAll(" - ", "");
+
+      if (numbers.length > 16 || !/\d/g.test(text.slice(-1))) {
+        e.target.value = e.target.value.slice(0, -1);
+        return;
+      }
+
+      const addNumbers = cardNumbers + text.slice(-1);
+      setCardNumbers(addNumbers);
+
+      setPostText(e.target.value);
+      const nextText =
+        addNumbers.slice(0, 8) + "●".repeat(addNumbers.slice(8).length);
+      e.target.value = (nextText.match(/\d{1,4}|●{1,4}/g) ?? []).join(" - ");
     }
+    //문자가 제거 됐을 때
+    else {
+      const minusNumbers = cardNumbers.slice(0, -1);
+      setCardNumbers(minusNumbers);
 
-    const numbers = value.slice(0, 8) + "●".repeat(value.slice(8).length);
-
-    e.target.value = (numbers.match(/\d{1,4}|●{1,4}/g) ?? []).join(" - ");
-    setCardNumbers(e.target.value);
+      setPostText(e.target.value);
+      const nextText =
+        minusNumbers.slice(0, 8) + "●".repeat(minusNumbers.slice(8).length);
+      e.target.value = (nextText.match(/\d{1,4}|●{1,4}/g) ?? []).join(" - ");
+    }
   };
 
   return (
