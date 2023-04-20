@@ -1,3 +1,4 @@
+import uuid from "react-uuid";
 import styled from "styled-components";
 import { IcChip } from "../assets";
 import { CardType } from "../types";
@@ -12,9 +13,13 @@ const Card = (props: CardType) => {
         <div>
           {cardNumberArray.map((cardNumber, index) => {
             return index > 1 ? (
-              <span style={{ letterSpacing: "-3px" }}>{cardNumber}</span>
+              <span key={uuid()} style={{ letterSpacing: "-3px" }}>
+                {cardNumber}
+              </span>
             ) : (
-              <span style={{ letterSpacing: "4px" }}>{cardNumber}</span>
+              <span key={uuid()} style={{ letterSpacing: "4px" }}>
+                {cardNumber}
+              </span>
             );
           })}
         </div>
