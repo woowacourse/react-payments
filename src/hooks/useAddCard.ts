@@ -20,7 +20,7 @@ const useAddCard = () => {
   const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
-    const { 0: expiredMonth, 1: expiredDay } = expiredDate;
+    const { 0: expiredMonth, 1: expiredYear } = expiredDate;
     const { 0: first, 1: second, 2: third, 3: fourth } = cardNumbers;
     const { 0: firstPassword, 1: secondPassword } = password;
     if (
@@ -28,9 +28,9 @@ const useAddCard = () => {
       second.length !== 4 ||
       third.length !== 4 ||
       fourth.length !== 4 ||
-      !expiredMonth ||
-      !expiredDay ||
-      !securityCode ||
+      expiredMonth.length !== 2 ||
+      expiredYear.length !== 2 ||
+      securityCode.length !== 3 ||
       !firstPassword ||
       !secondPassword
     ) {
