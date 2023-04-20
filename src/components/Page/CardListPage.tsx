@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { CardType, PageProps } from '../../types';
-import Card from '../Common/Card';
-import PageTemplate from '../Template/PageTemplate';
+import { CardType, Page, PageProps } from '../../types';
+import Card from '../common/Card';
+import PageTemplate from '../template/PageTemplate';
 
 const CardListPage = ({ navigate }: PageProps) => {
   const onClickAdd = () => {
-    navigate('register');
+    navigate(Page.register);
   };
 
   const cardList: CardType[] = JSON.parse(localStorage.getItem('cardList') || '[]');

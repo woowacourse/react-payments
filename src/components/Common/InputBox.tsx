@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-interface InputType {
-  type: string;
+export interface InputType {
+  textType: 'text' | 'number';
   maxLength: number;
   placeholder?: string;
   textSecurity?: boolean;
@@ -26,8 +26,8 @@ const InputBox = ({
   separator,
   isFullWidth = false,
 }: InputBoxProps) => {
-  const onChangeInput = (type: string, index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (type === 'number' && isNaN(Number(e.target.value))) {
+  const onChangeInput = (textType: string, index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (textType === 'number' && isNaN(Number(e.target.value))) {
       return;
     }
 
@@ -43,13 +43,13 @@ const InputBox = ({
 
   return (
     <InputsBoxWrapper isFullWidth={isFullWidth} align={align}>
-      {inputs.map(({ type, maxLength, placeholder, textSecurity, required }, index) => (
+      {inputs.map(({ textType, maxLength, placeholder, textSecurity, required }, index) => (
         <>
           {index > 0 && <Separator>{separator}</Separator>}
           <Input
             type="text"
             value={typeof inputValues === 'string' ? inputValues : inputValues[index]}
-            onChange={onChangeInput(type, index)}
+            onChange={onChangeInput(textType, index)}
             placeholder={placeholder}
             minLength={required ? maxLength : 0}
             maxLength={maxLength}

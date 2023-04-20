@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import CardRegisterPage from './components/Page/CardRegisterPage';
-import CardListPage from './components/Page/CardListPage';
+import CardRegisterPage from './components/page/CardRegisterPage';
+import CardListPage from './components/page/CardListPage';
 import styled from 'styled-components';
+import { Page } from './types';
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('list');
-  const navigate = (page: string) => {
+  const [currentPage, setCurrentPage] = useState<Page>(Page.list);
+  const navigate = (page: Page) => {
     setCurrentPage(page);
   };
 

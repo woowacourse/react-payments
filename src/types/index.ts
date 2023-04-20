@@ -13,5 +13,10 @@ export interface CardType {
 }
 
 export interface PageProps {
-  navigate: (page: string) => void;
+  navigate: (page: Page) => void;
+}
+
+export enum Page {
+  list = 'list',
+  register = 'register',
 }
