@@ -6,6 +6,7 @@ export const fetchData = (data: Omit<CardType, 'id'>): boolean => {
   if (getData) {
     const dataToArr = JSON.parse(getData);
 
+    // eslint-disable-next-line array-callback-return
     const sameNumbers = dataToArr.filter((card: Omit<CardType, 'id'>) => {
       const { cardNumber } = card;
       const keys = Object.keys(cardNumber) as ('first' | 'second' | 'third' | 'fourth')[];

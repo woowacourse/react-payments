@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import Card from '../components/Card';
 import FormCardAdd from '../components/FormCardAdd';
 import Header from '../components/Header';
-import useCardNumber from '../hooks/useCardNumber';
 import useInput from '../hooks/useInput';
 import usePasswordInput from '../hooks/usePasswordInput';
 import { formatExpireDate, handleNumberInput, isAlphabetInput, isNumberInput } from '../utils/util';
@@ -36,7 +35,7 @@ const cardPasswordCondition = (e: React.ChangeEvent<HTMLInputElement>) => {
 
 const AddCardPage = () => {
   const navigate = useNavigate();
-  const [cardType, setCardType] = useState('현대');
+  const [cardType] = useState('현대');
 
   const [cardNumber, onChangeCardNumber] = usePasswordInput<CardNumber>({
     first: '',
