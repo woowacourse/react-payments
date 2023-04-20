@@ -26,10 +26,46 @@ export const ExpiredDate: Story = {
     id: "expiredDate",
     placeholder: "MM / YY",
     width: "137px",
-    value: 0,
+    value: "",
     isSecured: false,
     isAutoFocus: false,
     isRequired: true,
     maxLength: 7,
+  },
+};
+
+export const OwnerName: Story = {
+  args: {
+    id: "ownerName",
+    placeholder: "카드에 표시된 이름과 동일하게 입력하세요.",
+    value: "",
+    isSecured: false,
+    isAutoFocus: false,
+    isRequired: true,
+    maxLength: 7,
+  },
+};
+
+export const Cvc: Story = {
+  args: {
+    id: "cvc",
+    width: "84px",
+    value: "",
+    isSecured: true,
+    isAutoFocus: false,
+    isRequired: true,
+    maxLength: 3,
+  },
+};
+
+export const Password: Story = {
+  args: {
+    id: "password",
+    width: "42px",
+    value: "",
+    isSecured: true,
+    isAutoFocus: false,
+    isRequired: true,
+    maxLength: 1,
   },
 };
