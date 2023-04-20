@@ -45,7 +45,7 @@ jobs:
         run: npm ci # package-lock.json에 적혀있는 패키지를 그대로 설치
 
       - name: Build
-        run: npm run build # package.json에 빌드 스크립트 여기에 적기
+        run: CI='' npm run build # package.json에 빌드 스크립트 여기에 적기
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
