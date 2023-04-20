@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { InputWrapper } from './InputWrapper';
 import { Input } from './Input';
 import styled from 'styled-components';

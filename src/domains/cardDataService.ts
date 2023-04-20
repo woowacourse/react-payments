@@ -31,7 +31,7 @@ export const cardDataService = {
 
     localStorage.setItem(
       LOCAL_STORAGE_KEY.CARD_LIST,
-      JSON.stringify([...storedCardList, card])
+      JSON.stringify([card, ...storedCardList])
     );
   },
 };

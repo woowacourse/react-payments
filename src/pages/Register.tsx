@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { AddNewCardForm } from '../components/AddNewCardForm';
 import { Layout } from '../layout';
 import { BackButton } from '../layout/BackButton';
-import { useRef } from 'react';
 
 export const Register = () => {
   return (
@@ -20,6 +19,8 @@ const Style = {
   Header: styled.div`
     display: flex;
     align-items: center;
+
+    font-weight: bold;
 
     margin-bottom: 25px;
   `,

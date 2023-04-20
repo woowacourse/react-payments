@@ -29,8 +29,10 @@ export function CardViewer({ cardNumber, expirationDate, ownerName }: Props) {
         ))}
       </Style.CardNumberContainer>
       <Style.NameAndDateContainer>
-        <span>{ownerName}</span>
-        {expirationDate.month !== '' && (
+        <span>{ownerName === '' ? 'NAME' : ownerName}</span>
+        {expirationDate.month === '' ? (
+          <span>MM/YY</span>
+        ) : (
           <span>
             {expirationDate.month}/{expirationDate.year}
           </span>

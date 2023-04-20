@@ -6,12 +6,12 @@
 
 ### 보유 카드 목록 페이지
 
-- [ ] CardList 컴포넌트
-  - [ ] UI
-  - [ ] 등록일자 기준 내림차순 정렬 (sort 함수 사용하거나 저장할 때 unshift 함수로 배열 앞에 추가하기)
-- [ ] AddNewCardButton 컴포넌트
-  - [ ] UI
-  - [ ] 클릭시 페이지 이동
+- [x] CardList 컴포넌트
+  - [x] UI
+  - [x] 등록일자 기준 내림차순 정렬 (sort 함수 사용하거나 저장할 때 unshift 함수로 배열 앞에 추가하기)
+- [x] AddNewCardButton 컴포넌트
+  - [x] UI
+  - [x] 클릭시 페이지 이동
 
 <br/>
 

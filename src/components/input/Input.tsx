@@ -10,11 +10,15 @@ export const Input = styled.input`
   border: 0;
   border-radius: 7px;
   background-color: #ecebf1;
-  font-size: 16px;
+  font-size: 15px;
   padding: 0;
   text-align: center;
 
   :focus {
     outline: none;
+  }
+
+  ::placeholder {
+    color: #c6c6c6;
   }
 `;
