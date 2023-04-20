@@ -10,16 +10,25 @@ const MainPage = () => {
     navigate("/register");
   };
 
-  const getCards = localStorage.getItem("card");
-  const cardInfoObject = JSON.parse(getCards as string);
+  const registeredCards = Object.keys(localStorage).filter((key) =>
+    key.startsWith("card")
+  );
+
+  const cardList = registeredCards.map((_, idx) => {
+    const card = localStorage.getItem(`card${idx}`);
+    if (!card) return [];
+    return JSON.parse(card);
+  });
 
   return (
     <div>
       <Header navigator={false} title="보유카드" />
 
-      {cardInfoObject && <CardPreview cardInfo={cardInfoObject}></CardPreview>}
+      {cardList.map((card, index) => (
+        <CardPreview key={index} cardInfo={card} />
+      ))}
 
-      {!cardInfoObject && <S.Message>새로운 카드를 등록해 주세요.</S.Message>}
+      {!cardList.length && <S.Message>새로운 카드를 등록해 주세요.</S.Message>}
       <S.Button onClick={goToRegister}>+</S.Button>
     </div>
   );

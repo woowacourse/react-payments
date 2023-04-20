@@ -38,7 +38,14 @@ const CardRegisterForm = () => {
     const formDataObject = Object.fromEntries(formData);
 
     if (areValidInfo(formDataObject)) {
-      localStorage.setItem("card", JSON.stringify(formDataObject));
+      const registeredCards = Object.keys(localStorage).filter((key) =>
+        key.startsWith("card")
+      );
+
+      localStorage.setItem(
+        `card${registeredCards.length}`,
+        JSON.stringify(formDataObject)
+      );
 
       navigate("/");
     } else {
