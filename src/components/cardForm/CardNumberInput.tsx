@@ -61,31 +61,21 @@ const CardNumberInput = ({
   return (
     <InputGroup labelValue='카드 번호' errorMessage={errorMessage}>
       <InputBox isError={!!errorMessage}>
-        <Input
-          ref={refs[0]}
-          value={cardNumber[0]}
-          onChange={handleChangeInput(0)}
-        />
-        <InputSeparator isActive={cardNumber[0].length === 4}>-</InputSeparator>
-        <Input
-          ref={refs[1]}
-          value={cardNumber[1]}
-          onChange={handleChangeInput(1)}
-        />
-        <InputSeparator isActive={cardNumber[1].length === 4}>-</InputSeparator>
-        <Input
-          ref={refs[2]}
-          value={cardNumber[2]}
-          type='password'
-          onChange={handleChangeInput(2)}
-        />
-        <InputSeparator isActive={cardNumber[2].length === 4}>-</InputSeparator>
-        <Input
-          ref={refs[3]}
-          value={cardNumber[3]}
-          type='password'
-          onChange={handleChangeInput(3)}
-        />
+        {[0, 1, 2, 3].map((index) => (
+          <>
+            <Input
+              ref={refs[index]}
+              value={cardNumber[index]}
+              type={index >= 2 ? 'password' : undefined}
+              onChange={handleChangeInput(index)}
+            />
+            {index < 3 && (
+              <InputSeparator isActive={cardNumber[index].length === 4}>
+                -
+              </InputSeparator>
+            )}
+          </>
+        ))}
       </InputBox>
     </InputGroup>
   );
