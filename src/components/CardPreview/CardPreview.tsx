@@ -94,6 +94,7 @@ const ICChip = styled.svg`
   top: 50px;
   left: 14px;
 `;
+
 const NumberContainer = styled.div`
   display: flex;
   justify-content: space-around;
