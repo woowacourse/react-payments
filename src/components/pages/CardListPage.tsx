@@ -11,7 +11,7 @@ interface CardListPageProps {
 
 const CardListPage = ({ cardList }: CardListPageProps) => {
   return (
-    <div>
+    <>
       <Header title='보유카드' />
       <ContentContainer>
         {!cardList.length && (
@@ -20,7 +20,7 @@ const CardListPage = ({ cardList }: CardListPageProps) => {
         <CardList cardList={cardList} />
         <AddCardButton />
       </ContentContainer>
-    </div>
+    </>
   );
 };
 
