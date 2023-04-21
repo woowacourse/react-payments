@@ -1,12 +1,13 @@
 import { FormEvent, useState } from "react";
 import AddCardPage from "./components/AddCardPage";
 import Homepage from "./components/Homepage";
-import { LOCAL_STORAGE_CARD_KEY } from "./constant";
+import { ADD_CARD_PAGE, HOME_PAGE, LOCAL_STORAGE_CARD_KEY } from "./constant";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 import "./styles/index.css";
-import { CardInfo } from "./types";
+import { CardInfo, PageInfo } from "./types";
+
 export default function App() {
-  const [pageIndex, setPageIndex] = useState(0);
+  const [pageIndex, setPageIndex] = useState<PageInfo>(HOME_PAGE);
   const [cardList, setCardList] = useLocalStorage<CardInfo[]>(
     [],
     LOCAL_STORAGE_CARD_KEY
@@ -49,17 +50,19 @@ export default function App() {
 
     const updatedCardList = [...cardList, newCard];
     setCardList(updatedCardList);
-    setPageIndex(0);
   };
 
   return (
     <div className="app">
-      {pageIndex === 0 && (
-        <Homepage cardList={cardList} onClick={() => setPageIndex(1)} />
+      {pageIndex === HOME_PAGE && (
+        <Homepage
+          cardList={cardList}
+          onClick={() => setPageIndex(ADD_CARD_PAGE)}
+        />
       )}
-      {pageIndex === 1 && (
+      {pageIndex === ADD_CARD_PAGE && (
         <AddCardPage
-          onClick={() => setPageIndex(0)}
+          onClick={() => setPageIndex(HOME_PAGE)}
           onSubmit={onCardInfoSubmit}
         />
       )}
