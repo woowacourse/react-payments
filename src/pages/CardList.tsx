@@ -1,10 +1,9 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import useCardList from '../hooks/useCardList';
 import Card from '../components/@common/Card';
-import Layout from '../components/@common/Layout';
 
 function CardList() {
   const navigation = useNavigate();
@@ -29,19 +28,17 @@ function CardList() {
   }, [cardList]);
 
   return (
-    <Layout>
-      <CardListSection>
-        {cardLists}
-        <AddButton
-          isFirst={cardList.length ? false : true}
-          onClick={() => {
-            navigation('/card-register');
-          }}
-        >
-          +
-        </AddButton>
-      </CardListSection>
-    </Layout>
+    <CardListSection>
+      {cardLists}
+      <AddButton
+        isFirst={cardList.length ? false : true}
+        onClick={() => {
+          navigation('/card-register');
+        }}
+      >
+        +
+      </AddButton>
+    </CardListSection>
   );
 }
 

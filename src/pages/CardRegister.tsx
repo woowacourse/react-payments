@@ -1,7 +1,6 @@
 import { useContext, useMemo, useState } from 'react';
 import Card from '../components/@common/Card';
 import { InputValuesContext } from '../components/registerForm/InputValueContext';
-import Layout from '../components/@common/Layout';
 import CardRegisterForm from '../components/registerForm/cardRegisterForm';
 
 function CardRegister() {
@@ -20,12 +19,10 @@ function CardRegister() {
   );
 
   return (
-    <Layout>
-      <InputValuesContext.Provider value={[cardInput, setCardInput]}>
-        {cardPreview}
-        <CardRegisterForm />
-      </InputValuesContext.Provider>
-    </Layout>
+    <InputValuesContext.Provider value={[cardInput, setCardInput]}>
+      {cardPreview}
+      <CardRegisterForm />
+    </InputValuesContext.Provider>
   );
 }
 
