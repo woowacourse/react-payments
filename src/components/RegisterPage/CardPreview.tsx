@@ -30,7 +30,9 @@ const CardPreview = ({ cardInfo }: { cardInfo: Props }) => {
         <S.Wrapper>
           <p>{cardInfo.name}</p>
           <S.Date>{`${cardInfo.month} ${
-            cardInfo.month.length === LIMIT_LENGTH.ALL_EXPIRATION_DATE && "/"
+            cardInfo.month.length === LIMIT_LENGTH.ALL_EXPIRATION_DATE
+              ? "/"
+              : ""
           } ${cardInfo.year}`}</S.Date>
         </S.Wrapper>
       </S.CardInfo>
