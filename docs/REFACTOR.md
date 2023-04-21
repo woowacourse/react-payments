@@ -1,7 +1,7 @@
 ## 스탭 1 리팩터링 목록
 
-- [ ] 스토리북 defaultViewPort 설정
-- [ ] HTML title 설정하기
+- [x] 스토리북 defaultViewPort 설정
+- [x] HTML title 설정하기
 - [ ] 페이지가 많아지는 것을 고려해서 page를 변경하는 상태를 상수화하여 사용
 - [ ] 범용적으로 사용 가능한 Button 컴포넌트 만들기
 - [ ] 일반적인 컨벤션을 맞춰 코드 작성하기
