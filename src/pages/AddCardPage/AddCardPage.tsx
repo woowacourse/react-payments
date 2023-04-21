@@ -50,6 +50,7 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
     const targetGroup = e.target.name;
 
     if (!isNumeric(value)) return;
+    if (!(targetGroup in cardNumber)) return;
 
     setCardNumber({ ...cardNumber, [targetGroup]: value });
   };
@@ -59,6 +60,7 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
     const dateType = e.target.name;
 
     if (!isNumeric(value)) return;
+    if (!(dateType in expirationDate)) return;
 
     setExpirationDate({ ...expirationDate, [dateType]: value });
   };
@@ -84,6 +86,7 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
     const targetDigit = e.target.name;
 
     if (!isNumeric(pw)) return;
+    if (!(targetDigit in password)) return;
 
     setPassword({ ...password, [targetDigit]: pw });
   };
