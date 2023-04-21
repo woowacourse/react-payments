@@ -74,7 +74,10 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
   };
 
   const handleExpirationDateError = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!isValidMonth(expirationDate.month)) {
+    const { month } = expirationDate;
+
+    if (month.length === 1 && month !== "0") setExpirationDate({ ...expirationDate, month: `0${month}` });
+    if (!isValidMonth(month)) {
       setError(true);
       return;
     }
