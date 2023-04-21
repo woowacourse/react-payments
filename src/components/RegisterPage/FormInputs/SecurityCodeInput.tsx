@@ -2,6 +2,8 @@ import { ChangeEvent, useState } from "react";
 import styled from "styled-components";
 import { changeToValidValue } from "utils/inputValidator";
 import { HIDDEN_ELEMENT_STYLE } from "constants/style";
+import { LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
+const { ONLY_NUMBER } = VALID_INPUT;
 
 const SecurityCodeInput = () => {
   const [code, setCode] = useState("");
@@ -9,8 +11,8 @@ const SecurityCodeInput = () => {
   const handleCardNumber = ({ target }: ChangeEvent<HTMLInputElement>) => {
     setCode(
       changeToValidValue(target.value, {
-        length: 3,
-        regex: /[^\d]/g,
+        length: LIMIT_LENGTH.SECURITY_CODE,
+        regex: ONLY_NUMBER,
       })
     );
   };
@@ -25,7 +27,7 @@ const SecurityCodeInput = () => {
           type="password"
           name="code"
           id="code"
-          maxLength={3}
+          maxLength={LIMIT_LENGTH.SECURITY_CODE}
           inputMode="numeric"
           value={code}
           onChange={handleCardNumber}
@@ -35,7 +37,7 @@ const SecurityCodeInput = () => {
         <S.QuestionMark>?</S.QuestionMark>
       </S.Wrapper>
       <S.Caption codeLength={code.length}>
-        보안 코드 3자리를 모두 입력해 주세요.
+        보안 코드 {LIMIT_LENGTH.SECURITY_CODE}자리를 모두 입력해 주세요.
       </S.Caption>
     </>
   );
@@ -105,7 +107,7 @@ const S = {
     font-size: 12px;
     margin: 8px 0 16px 4px;
     visibility: ${({ codeLength }) =>
-      codeLength === 3 && `${HIDDEN_ELEMENT_STYLE}`};
+      codeLength === LIMIT_LENGTH.SECURITY_CODE && `${HIDDEN_ELEMENT_STYLE}`};
   `,
 };
 

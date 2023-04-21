@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { LIMIT_LENGTH } from "constants/limit";
+import { HIDDEN_VALUE, SECURITY_TARGET } from "constants/security";
 
 interface Props {
   number1: string;
@@ -18,13 +20,17 @@ const CardPreview = ({ cardInfo }: { cardInfo: Props }) => {
         <S.Numbers>
           <S.Span>{cardInfo.number1}</S.Span>
           <S.Span>{cardInfo.number2}</S.Span>
-          <S.Secret>{cardInfo.number3.replaceAll(/[0-9]/gi, "ㆍ")}</S.Secret>
-          <S.Secret>{cardInfo.number4.replaceAll(/[0-9]/gi, "ㆍ")}</S.Secret>
+          <S.Secret>
+            {cardInfo.number3.replaceAll(SECURITY_TARGET, HIDDEN_VALUE)}
+          </S.Secret>
+          <S.Secret>
+            {cardInfo.number4.replaceAll(SECURITY_TARGET, HIDDEN_VALUE)}
+          </S.Secret>
         </S.Numbers>
         <S.Wrapper>
           <p>{cardInfo.name}</p>
           <S.Date>{`${cardInfo.month} ${
-            cardInfo.month.length === 2 ? "/" : ""
+            cardInfo.month.length === LIMIT_LENGTH.ALL_EXPIRATION_DATE && "/"
           } ${cardInfo.year}`}</S.Date>
         </S.Wrapper>
       </S.CardInfo>

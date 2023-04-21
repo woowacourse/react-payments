@@ -1,6 +1,8 @@
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
 import { changeToValidValue } from "utils/inputValidator";
+import { LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
+const { ONLY_ENGLISH, INVALID_BLANK } = VALID_INPUT;
 
 type Name = string;
 
@@ -12,12 +14,12 @@ interface Props {
 const NameInput = ({ name, setName }: Props) => {
   const handleName = ({ target }: ChangeEvent<HTMLInputElement>) => {
     const value = target.value.toUpperCase().trimStart();
-    if (value.includes("  ")) return;
+    if (value.includes(INVALID_BLANK)) return;
 
     setName(
       changeToValidValue(value, {
-        length: 20,
-        regex: /[^a-z A-Z]/g,
+        length: LIMIT_LENGTH.NAME,
+        regex: ONLY_ENGLISH,
       })
     );
   };
@@ -28,13 +30,15 @@ const NameInput = ({ name, setName }: Props) => {
         <label className="label-text" htmlFor="name">
           카드 소유자 이름&#40;선택&#41;
         </label>
-        <p>{name.length}/20</p>
+        <p>
+          {name.length}/{LIMIT_LENGTH.NAME}
+        </p>
       </S.Wrapper>
       <S.Input
         type="text"
         name="name"
         id="name"
-        maxLength={20}
+        maxLength={LIMIT_LENGTH.NAME}
         value={name}
         onChange={handleName}
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."

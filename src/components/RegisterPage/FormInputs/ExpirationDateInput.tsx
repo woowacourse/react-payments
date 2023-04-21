@@ -3,6 +3,8 @@ import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
 import { changeToValidValue } from "utils/inputValidator";
 import { HIDDEN_ELEMENT_STYLE } from "constants/style";
+import { LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
+const { ONLY_NUMBER, VALID_MONTH, MIN_DATE } = VALID_INPUT;
 
 interface Date {
   month: string;
@@ -18,20 +20,22 @@ const ExpirationDateInput = ({ date, setDate }: Props) => {
   const { handleRef, moveFocus } = useFocus();
 
   const handleDate = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    const value = Number(target.value);
-    if ((target.name === "month" && value > 12) || value < 0) return "";
+    const value = target.value;
+    const NumberValue = Number(value);
+    const isValidMonth = target.name === "month" && NumberValue > VALID_MONTH;
+    if (isValidMonth || NumberValue < MIN_DATE) return "";
 
     setDate((prevState) => {
       return {
         ...prevState,
-        [target.name]: changeToValidValue(target.value, {
-          length: 2,
-          regex: /[^\d]/g,
+        [target.name]: changeToValidValue(value, {
+          length: LIMIT_LENGTH.EXPIRATION_DATE,
+          regex: ONLY_NUMBER,
         }),
       };
     });
 
-    moveFocus(target, 2);
+    moveFocus(target, LIMIT_LENGTH.EXPIRATION_DATE);
   };
 
   return (
@@ -45,7 +49,7 @@ const ExpirationDateInput = ({ date, setDate }: Props) => {
           name="month"
           id="date-label"
           aria-labelledby="date-label"
-          maxLength={2}
+          maxLength={LIMIT_LENGTH.EXPIRATION_DATE}
           inputMode="numeric"
           value={date.month}
           ref={(el) => handleRef(el, 0)}
@@ -58,7 +62,7 @@ const ExpirationDateInput = ({ date, setDate }: Props) => {
           type="text"
           name="year"
           aria-labelledby="date-label"
-          maxLength={2}
+          maxLength={LIMIT_LENGTH.EXPIRATION_DATE}
           inputMode="numeric"
           value={date.year}
           ref={(el) => handleRef(el, 1)}
@@ -98,7 +102,8 @@ const S = {
     font-weight: 900;
     align-self: center;
     visibility: ${({ month }) =>
-      month.length !== 2 && `${HIDDEN_ELEMENT_STYLE}`};
+      month.length !== LIMIT_LENGTH.EXPIRATION_DATE &&
+      `${HIDDEN_ELEMENT_STYLE}`};
   `,
 
   Caption: styled.p<{ date: string[] }>`
@@ -106,7 +111,8 @@ const S = {
     font-size: 12px;
     margin: 8px 0 16px 4px;
     visibility: ${({ date }) =>
-      date.join("").length === 4 && `${HIDDEN_ELEMENT_STYLE}`};
+      date.join("").length === LIMIT_LENGTH.ALL_EXPIRATION_DATE &&
+      `${HIDDEN_ELEMENT_STYLE}`};
   `,
 };
 

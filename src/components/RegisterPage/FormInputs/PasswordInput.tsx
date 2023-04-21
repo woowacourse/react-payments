@@ -3,6 +3,8 @@ import { ChangeEvent, useState } from "react";
 import styled from "styled-components";
 import { changeToValidValue } from "utils/inputValidator";
 import { HIDDEN_ELEMENT_STYLE } from "constants/style";
+import { LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
+const { ONLY_NUMBER } = VALID_INPUT;
 
 const PasswordInput = () => {
   const { handleRef, moveFocus } = useFocus();
@@ -17,13 +19,13 @@ const PasswordInput = () => {
       return {
         ...prevState,
         [target.name]: changeToValidValue(target.value, {
-          length: 1,
-          regex: /[^\d]/g,
+          length: LIMIT_LENGTH.PASSWORD,
+          regex: ONLY_NUMBER,
         }),
       };
     });
 
-    moveFocus(target, 1);
+    moveFocus(target, LIMIT_LENGTH.PASSWORD);
   };
 
   return (
@@ -33,11 +35,11 @@ const PasswordInput = () => {
       </label>
       <S.InputBox>
         <S.Input
-          type="text"
+          type="password"
           name="password1"
           id="password-label"
           aria-labelledby="password-label"
-          maxLength={1}
+          maxLength={LIMIT_LENGTH.PASSWORD}
           inputMode="numeric"
           value={password.password1}
           ref={(el) => handleRef(el, 0)}
@@ -46,10 +48,10 @@ const PasswordInput = () => {
           required
         />
         <S.Input
-          type="text"
+          type="password"
           name="password2"
           aria-labelledby="password-label"
-          maxLength={1}
+          maxLength={LIMIT_LENGTH.PASSWORD}
           inputMode="numeric"
           value={password.password2}
           ref={(el) => handleRef(el, 1)}
@@ -61,7 +63,7 @@ const PasswordInput = () => {
         <S.HiddenPassword>ㆍ</S.HiddenPassword>
       </S.InputBox>
       <S.Caption password={Object.values(password)}>
-        카드 비밀번호 앞 2자리를 입력해 주세요.
+        카드 비밀번호 앞 {LIMIT_LENGTH.PASSWORD}자리를 입력해 주세요.
       </S.Caption>
     </>
   );
