@@ -27,6 +27,7 @@ const HeaderWrapper = styled.div`
   height: 64px;
 
   padding-left: 40px;
+  background: white;
 
   position: fixed;
   top: 0;
