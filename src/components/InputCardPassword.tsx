@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent, RefObject } from 'react';
 import './InputCardPassword.css';
 
 export type InputCardPasswordProps = {
@@ -7,7 +7,10 @@ export type InputCardPasswordProps = {
   maxDataLength: number;
   minDataLength: number;
   passwordType: string;
+  dataId: number;
+  Ref: RefObject<HTMLInputElement>;
   name?: string;
+  onFocus: (e: ChangeEvent) => void;
 };
 
 const InputCardPassword = ({
@@ -17,6 +20,9 @@ const InputCardPassword = ({
   minDataLength,
   passwordType,
   name,
+  Ref,
+  dataId,
+  onFocus,
 }: InputCardPasswordProps) => {
   return (
     <input
@@ -25,7 +31,12 @@ const InputCardPassword = ({
       maxLength={maxDataLength}
       minLength={minDataLength}
       value={value}
-      onChange={onChange}
+      data-id={dataId}
+      ref={Ref}
+      onChange={(e) => {
+        onChange(e);
+        onFocus(e);
+      }}
       name={name}
       required
     />

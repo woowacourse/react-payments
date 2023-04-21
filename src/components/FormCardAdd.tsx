@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import InputCardData from './InputCardData';
 import InputCardPassword from './InputCardPassword';
 import passwordDotImg from '../asset/password_dot.png';
@@ -17,6 +17,18 @@ const FormCardAdd = ({
   cardPassword2,
 }: FormCardAddProps) => {
   const navigate = useNavigate();
+
+  const inputRef = Array.from({ length: 9 }).map(() => React.createRef<HTMLInputElement>());
+
+  const moveFocus = (e: ChangeEvent) => {
+    if (!(e.target instanceof HTMLInputElement)) return;
+    if (
+      e.target.value.length === e.target.maxLength &&
+      Number(e.target.dataset.id) + 1 < inputRef.length
+    ) {
+      inputRef[Number(e.target.dataset.id) + 1].current?.focus();
+    }
+  };
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -55,6 +67,11 @@ const FormCardAdd = ({
             onChange={cardNumber.onChange}
             className="card-number"
             name="first"
+            dataId={0}
+            Ref={inputRef[0]}
+            minDataLength={4}
+            maxDataLength={4}
+            onFocus={moveFocus}
           />
           <span>-</span>
           <InputCardData
@@ -62,24 +79,35 @@ const FormCardAdd = ({
             onChange={cardNumber.onChange}
             className="card-number"
             name="second"
+            dataId={1}
+            minDataLength={4}
+            Ref={inputRef[1]}
+            maxDataLength={4}
+            onFocus={moveFocus}
           />
           <span>-</span>
           <InputCardPassword
             value={cardNumber.value.third}
             onChange={cardNumber.onChange}
             name="third"
+            dataId={2}
             minDataLength={4}
             maxDataLength={4}
+            Ref={inputRef[2]}
             passwordType="card-number"
+            onFocus={moveFocus}
           />
           <span>-</span>
           <InputCardPassword
             value={cardNumber.value.fourth}
             onChange={cardNumber.onChange}
             name="fourth"
+            dataId={3}
             minDataLength={4}
             maxDataLength={4}
+            Ref={inputRef[3]}
             passwordType="card-number"
+            onFocus={moveFocus}
           />
         </div>
       </div>
@@ -89,7 +117,12 @@ const FormCardAdd = ({
           value={cardExpire.value}
           onChange={cardExpire.onChange}
           className="card-expired"
+          dataId={4}
+          Ref={inputRef[4]}
+          minDataLength={5}
+          maxDataLength={5}
           name="expire"
+          onFocus={moveFocus}
         />
       </div>
       <div>
@@ -102,6 +135,11 @@ const FormCardAdd = ({
           onChange={cardOwner.onChange}
           className="card-owner"
           name="owner"
+          dataId={5}
+          Ref={inputRef[5]}
+          minDataLength={1}
+          maxDataLength={30}
+          onFocus={moveFocus}
         />
       </div>
       <div className="card-security-code-container">
@@ -110,9 +148,12 @@ const FormCardAdd = ({
           <InputCardPassword
             value={securityCode.value}
             onChange={securityCode.onChange}
+            dataId={6}
+            Ref={inputRef[6]}
             maxDataLength={3}
             minDataLength={3}
             passwordType="password-cvc"
+            onFocus={moveFocus}
           />
           <button type="button" className="cvc-info-button">
             <img src={cvcInfo} alt="cvc_info" />
@@ -129,16 +170,22 @@ const FormCardAdd = ({
           <InputCardPassword
             value={cardPassword1.value}
             onChange={cardPassword1.onChange}
+            dataId={7}
+            Ref={inputRef[7]}
             maxDataLength={1}
             minDataLength={1}
             passwordType="password-single"
+            onFocus={moveFocus}
           />
           <InputCardPassword
             value={cardPassword2.value}
             onChange={cardPassword2.onChange}
+            dataId={8}
+            Ref={inputRef[8]}
             maxDataLength={1}
             minDataLength={1}
             passwordType="password-single"
+            onFocus={moveFocus}
           />
           <img src={passwordDotImg} alt="비밀번호" />
           <img src={passwordDotImg} alt="비밀번호" />
