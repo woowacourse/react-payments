@@ -9,8 +9,7 @@ function App() {
   const [cardList, setCardList] = useState<CardItemInfo[]>([]);
 
   const addCardItem = (cardItem: CardItemInfo) => {
-    const updatedCardList = [...cardList, cardItem];
-    setCardList(updatedCardList);
+    setCardList((prevCardList) => [...prevCardList, cardItem]);
   };
 
   return (
