@@ -36,8 +36,9 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
     year: "",
   });
 
-  const [ownerName, setOwnerName] = useState<string>("");
-  const [securityCode, setSecurityCode] = useState<string>("");
+  const [ownerName, setOwnerName] = useState<Card["ownerName"]>("");
+  const [securityCode, setSecurityCode] = useState<Card["securityCode"]>("");
+
   const [password, setPassword] = useState<CardPassword>({
     first: "",
     second: "",
