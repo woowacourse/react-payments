@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
 import CardListPage from './components/pages/CardListPage';
 import CardRegistrationPage from './components/pages/CardRegistrationPage';
+import NotFoundPage from './components/pages/NotFoundPage';
 import { CardItemInfo } from './types/Card';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
             path='/register'
             element={<CardRegistrationPage addCardItem={addCardItem} />}
           />
+          <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
     </AppContainer>
