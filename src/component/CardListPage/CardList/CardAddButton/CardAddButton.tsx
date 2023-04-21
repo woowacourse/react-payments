@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import St from "./CardAddButtonStyled";
+import Style from "./CardAddButtonStyled";
 
 function CardAddButton() {
   const navigate = useNavigate();
@@ -10,9 +10,9 @@ function CardAddButton() {
   };
 
   return (
-    <St.AddButtonSection>
-      <St.CardAddButton onClick={moveToAddCardForm}>+</St.CardAddButton>
-    </St.AddButtonSection>
+    <Style.AddButtonSection>
+      <Style.CardAddButton onClick={moveToAddCardForm}>+</Style.CardAddButton>
+    </Style.AddButtonSection>
   );
 }
 

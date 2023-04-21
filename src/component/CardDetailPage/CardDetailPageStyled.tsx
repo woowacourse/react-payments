@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const St = {
+const Style = {
   Page: styled.section`
     display: flex;
     flex-direction: column;
@@ -13,4 +13,4 @@ const St = {
   `,
 };
 
-export default St;
+export default Style;

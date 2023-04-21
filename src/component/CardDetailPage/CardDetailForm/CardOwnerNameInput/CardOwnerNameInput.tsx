@@ -1,5 +1,7 @@
 import React from "react";
-import St from "./CardOwnerNameInputStyled";
+import Style from "./CardOwnerNameInputStyled";
+import Input from "../../../common/Input/Input";
+import { ThemeProvider } from "styled-components";
 
 type CardOwnerNameInputProps = {
   changeCardOwnerName: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -10,20 +12,28 @@ function CardOwnerNameInput({
   changeCardOwnerName,
   cardOwnerName,
 }: CardOwnerNameInputProps) {
+  const props = {
+    type: "text",
+    minLength: 30,
+    isRequired: false,
+    placeholder: "카드에 표시된 이름과 동일하게 입력하세요.",
+    onInput: changeCardOwnerName,
+  };
+  const theme = {
+    width: "100%",
+    size: "15px",
+  };
   return (
     <section>
-      <St.Title>
+      <Style.Title>
         <div>카드 소유자 이름 (선택)</div>
         <div>{cardOwnerName.length}/30</div>
-      </St.Title>
-      <St.InputSection>
-        <St.Input
-          type="text"
-          maxLength={30}
-          onInput={changeCardOwnerName}
-          placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-        ></St.Input>
-      </St.InputSection>
+      </Style.Title>
+      <Style.InputSection>
+        <ThemeProvider theme={theme}>
+          <Input {...props} />
+        </ThemeProvider>
+      </Style.InputSection>
     </section>
   );
 }

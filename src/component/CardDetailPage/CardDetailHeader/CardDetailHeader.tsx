@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import St from "./CardDetailHeaderStyled";
+import Style from "./CardDetailHeaderStyled";
 
 function CardDetailHeader() {
   const navigate = useNavigate();
@@ -10,10 +10,10 @@ function CardDetailHeader() {
   };
 
   return (
-    <St.Header>
-      <St.Button onClick={goBack}>{"〈"}</St.Button>
-      <St.Title>카드 추가</St.Title>
-    </St.Header>
+    <Style.Header>
+      <Style.Button onClick={goBack}>{"〈"}</Style.Button>
+      <Style.Title>카드 추가</Style.Title>
+    </Style.Header>
   );
 }
 

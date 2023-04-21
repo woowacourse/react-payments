@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const St = {
+const Style = {
   Header: styled.header`
     align-items: center;
     display: flex;
@@ -21,4 +21,4 @@ const St = {
   `,
 };
 
-export default St;
+export default Style;

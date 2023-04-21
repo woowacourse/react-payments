@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const St = {
+const Style = {
   Title: styled.h1`
     align-items: center;
     font: 400 17px "Roboto";
@@ -9,4 +9,4 @@ const St = {
   `,
 };
 
-export default St;
+export default Style;

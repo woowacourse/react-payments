@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const St = {
+const Style = {
   InputSection: styled.section`
     display: flex;
     align-items: center;
@@ -15,17 +15,6 @@ const St = {
     background: #ecebf1;
   `,
 
-  Input: styled.input`
-    width: 60%;
-
-    border: none;
-
-    text-align: center;
-    background: inherit;
-    font-size: 20px;
-    letter-spacing: 2px;
-  `,
-
   Title: styled.h1`
     padding-bottom: 10px;
 
@@ -37,4 +26,4 @@ const St = {
   `,
 };
 
-export default St;
+export default Style;

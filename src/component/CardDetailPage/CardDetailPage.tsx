@@ -5,7 +5,7 @@ import CardDetailHeader from "./CardDetailHeader/CardDetailHeader";
 import CardDetailView from "../CardDetailView/CardDetailView";
 import CardDetailForm from "./CardDetailForm/CardDetailForm";
 
-import St from "./CardDetailPageStyled";
+import Style from "./CardDetailPageStyled";
 import { CreditCard } from "../../types/card";
 
 type CardDetailPageProps = {
@@ -83,6 +83,7 @@ function CardDetailPage({ addCreditCard }: CardDetailPageProps) {
     if (inputID === "second") {
       setCardPassword([cardPassword[0], password]);
     }
+    console.log(cardPassword);
   };
 
   const submitCreditCard = (e: React.FormEvent<HTMLFormElement>) => {
@@ -101,7 +102,7 @@ function CardDetailPage({ addCreditCard }: CardDetailPageProps) {
   };
 
   return (
-    <St.Page>
+    <Style.Page>
       <CardDetailHeader />
       <CardDetailView
         cardNumberHidden={cardNumberHidden}
@@ -121,7 +122,7 @@ function CardDetailPage({ addCreditCard }: CardDetailPageProps) {
         changeCardPassword={changeCardPassword}
         submitCreditCard={submitCreditCard}
       />
-    </St.Page>
+    </Style.Page>
   );
 }
 

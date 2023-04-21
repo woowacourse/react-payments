@@ -1,8 +1,8 @@
 import React from "react";
-import St from "./CardListHeaderStyled";
+import Style from "./CardListHeaderStyled";
 
 function CardListHeader() {
-  return <St.Title>보유 카드</St.Title>;
+  return <Style.Title>보유 카드</Style.Title>;
 }
 
 export default CardListHeader;

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const St = {
+const Style = {
   AddButtonSection: styled.li`
     display: flex;
     flex-direction: column;
@@ -20,4 +20,4 @@ const St = {
   `,
 };
 
-export default St;
+export default Style;

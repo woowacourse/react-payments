@@ -1,6 +1,6 @@
 import React from "react";
 import CardAddButton from "./CardAddButton/CardAddButton";
-import St from "./CardListStyled";
+import Style from "./CardListStyled";
 import CardDetailView from "../../CardDetailView/CardDetailView";
 import { CreditCard } from "../../../types/card";
 
@@ -10,9 +10,9 @@ type CardListProps = {
 
 function CardList({ creditCardList }: CardListProps) {
   return (
-    <St.ListSection>
+    <Style.ListSection>
       {!creditCardList.length ? (
-        <St.Title>새로운 카드를 등록해주세요.</St.Title>
+        <Style.Title>새로운 카드를 등록해주세요.</Style.Title>
       ) : null}
       {creditCardList.map((card) => {
         const { cardNumberOrigin, cardNumberHidden, cardDate, cardOwnerName } =
@@ -28,7 +28,7 @@ function CardList({ creditCardList }: CardListProps) {
         );
       })}
       <CardAddButton />
-    </St.ListSection>
+    </Style.ListSection>
   );
 }
 

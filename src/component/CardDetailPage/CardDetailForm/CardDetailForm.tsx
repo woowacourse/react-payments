@@ -6,7 +6,7 @@ import CardOwnerNameInput from "./CardOwnerNameInput/CardOwnerNameInput";
 import CardCVCInput from "./CardCVCInput/CardCVCInput";
 import CardPasswordInput from "./CardPasswordInput/CardPasswordInput";
 
-import St from "./CardDetailFormStyled";
+import Style from "./CardDetailFormStyled";
 
 type CardDetailFormProps = {
   changeCardNumber: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -41,7 +41,7 @@ function CardDetailForm({
   submitCreditCard,
 }: CardDetailFormProps) {
   return (
-    <St.Form onSubmit={submitCreditCard}>
+    <Style.Form onSubmit={submitCreditCard}>
       <CardNumberInput
         changeCardNumber={changeCardNumber}
         cardNumberHidden={cardNumberHidden}
@@ -56,8 +56,8 @@ function CardDetailForm({
         changeCardPassword={changeCardPassword}
         cardPassword={cardPassword}
       />
-      <St.SubmitButton type="submit" value={"다음"} />
-    </St.Form>
+      <Style.SubmitButton type="submit" value={"다음"} />
+    </Style.Form>
   );
 }
 
