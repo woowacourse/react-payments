@@ -14,7 +14,9 @@ const CardListPage = ({ cardList }: CardListPageProps) => {
     <div>
       <Header title='보유카드' />
       <ContentContainer>
-        {!cardList.length && <Title title='새로운 카드를 등록해주세요.' />}
+        {!cardList.length && (
+          <Title title='새로운 카드를 등록해주세요.' fontSize={18} />
+        )}
         <CardList cardList={cardList} />
         <AddCardButton />
       </ContentContainer>
