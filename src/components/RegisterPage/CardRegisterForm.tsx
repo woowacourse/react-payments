@@ -1,32 +1,32 @@
-import styled from "styled-components";
-import { FormEvent, useState } from "react";
-import CardNumberInput from "./FormInputs/CardNumberInput";
-import ExpirationDateInput from "./FormInputs/ExpirationDateInput";
-import NameInput from "./FormInputs/NameInput";
-import PasswordInput from "./FormInputs/PasswordInput";
-import SecurityCodeInput from "./FormInputs/SecurityCodeInput";
-import CardPreview from "./CardPreview";
-import { getFormData } from "utils/formDataGetter";
-import { areValidInfo } from "validation";
-import Header from "../Header";
-import { useNavigate } from "react-router-dom";
+import styled from 'styled-components';
+import { FormEvent, useState } from 'react';
+import CardNumberInput from './FormInputs/CardNumberInput';
+import ExpirationDateInput from './FormInputs/ExpirationDateInput';
+import NameInput from './FormInputs/NameInput';
+import PasswordInput from './FormInputs/PasswordInput';
+import SecurityCodeInput from './FormInputs/SecurityCodeInput';
+import CardPreview from './CardPreview';
+import { getFormData } from 'utils/formDataGetter';
+import { areValidInfo } from 'validation';
+import Header from '../Header';
+import { useNavigate } from 'react-router-dom';
 
 const CardRegisterForm = () => {
   const navigate = useNavigate();
 
   const [cardNumber, setCardNumber] = useState({
-    number1: "",
-    number2: "",
-    number3: "",
-    number4: "",
+    number1: '',
+    number2: '',
+    number3: '',
+    number4: '',
   });
 
   const [date, setDate] = useState({
-    month: "",
-    year: "",
+    month: '',
+    year: '',
   });
 
-  const [name, setName] = useState("");
+  const [name, setName] = useState('');
 
   const cardInfo = { ...cardNumber, ...date, name };
 
@@ -38,17 +38,17 @@ const CardRegisterForm = () => {
     const formDataObject = Object.fromEntries(formData);
 
     if (areValidInfo(formDataObject)) {
-      localStorage.setItem("card", JSON.stringify(formDataObject));
+      localStorage.setItem('card', JSON.stringify(formDataObject));
 
-      navigate("/");
+      navigate('/');
     } else {
-      alert("값을 모두 입력해 주세요.");
+      alert('값을 모두 입력해 주세요.');
     }
   };
 
   return (
     <div>
-      <Header navigator={true} title="카드 추가" />
+      <Header navigator title="카드 추가" />
 
       <CardPreview cardInfo={cardInfo} />
 
