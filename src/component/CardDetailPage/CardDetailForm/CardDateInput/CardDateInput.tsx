@@ -1,5 +1,7 @@
 import React from "react";
-import St from "./CardDateInputStyled";
+import Style from "./CardDateInputStyled";
+import Input from "../../../common/Input/Input";
+import { ThemeProvider } from "styled-components";
 
 type CardDateInputProps = {
   changeCardDate: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -7,19 +9,27 @@ type CardDateInputProps = {
 };
 
 function CardDateInput({ changeCardDate, cardDate }: CardDateInputProps) {
+  const props = {
+    type: "text",
+    value: cardDate,
+    minLength: 5,
+    isRequired: true,
+    placeholder: "MM/YY",
+    onInput: changeCardDate,
+  };
+  const theme = {
+    width: "60%",
+    size: "20px",
+    spacing: "2px",
+  };
   return (
     <section>
-      <St.Title>만료일</St.Title>
-      <St.InputSection>
-        <St.Input
-          type="text"
-          value={cardDate}
-          minLength={5}
-          required
-          onInput={changeCardDate}
-          placeholder="MM/YY"
-        ></St.Input>
-      </St.InputSection>
+      <Style.Title>만료일</Style.Title>
+      <Style.InputSection>
+        <ThemeProvider theme={theme}>
+          <Input {...props} />
+        </ThemeProvider>
+      </Style.InputSection>
     </section>
   );
 }

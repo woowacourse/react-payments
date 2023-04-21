@@ -1,5 +1,7 @@
 import React from "react";
-import St from "./CardNumberInputStyled";
+import Style from "./CardNumberInputStyled";
+import Input from "../../../common/Input/Input";
+import { ThemeProvider } from "styled-components";
 
 type CardNumberInputProps = {
   changeCardNumber: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -10,18 +12,26 @@ function CardNumberInput({
   changeCardNumber,
   cardNumberHidden,
 }: CardNumberInputProps) {
+  const props = {
+    type: "text",
+    value: cardNumberHidden,
+    minLength: 19,
+    isRequired: true,
+    onInput: changeCardNumber,
+  };
+  const theme = {
+    width: "90%",
+    size: "20px",
+    spacing: "2px",
+  };
   return (
     <section>
-      <St.Title>카드 번호</St.Title>
-      <St.InputSection>
-        <St.Input
-          type="text"
-          minLength={19}
-          required
-          value={cardNumberHidden}
-          onInput={changeCardNumber}
-        ></St.Input>
-      </St.InputSection>
+      <Style.Title>카드 번호</Style.Title>
+      <Style.InputSection>
+        <ThemeProvider theme={theme}>
+          <Input {...props} />
+        </ThemeProvider>
+      </Style.InputSection>
     </section>
   );
 }
