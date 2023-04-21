@@ -17,7 +17,7 @@ const Card = (props: CardType) => {
                 {cardNumber}
               </span>
             ) : (
-              <span key={uuid()} style={{ letterSpacing: "4px" }}>
+              <span key={uuid()} style={{ letterSpacing: "3px" }}>
                 {cardNumber}
               </span>
             );

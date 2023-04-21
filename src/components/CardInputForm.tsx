@@ -2,7 +2,6 @@ import React, { FormEvent, useState } from "react";
 import styled from "styled-components";
 import CardInput from "./CardInput";
 import {
-  INPUT_MAX_LENGTH,
   PASSWORD_DIGIT_INDEX,
   SEPERATED_CARD_NUMBER_LENGTH,
 } from "../constants";
@@ -78,13 +77,21 @@ const CardInputForm = (props: CardInputFormType) => {
     }
   };
 
-  const handlePasswordChanged = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    digit: number
-  ) => {
-    const newPassword = [...card.password];
-    newPassword[digit] = e.target.value;
-    card.password = newPassword;
+  const handlePasswordChanged =
+    (digit: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      const newPassword = [...card.password];
+      newPassword[digit] = e.target.value;
+      card.password = newPassword;
+      props.setCard(card);
+    };
+
+  const handleOwnerNameChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
+    card.ownerName = e.target.value.toLocaleUpperCase();
+    props.setCard(card);
+  };
+
+  const handleCvcChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
+    card.cvc = e.target.value;
     props.setCard(card);
   };
 
@@ -94,18 +101,13 @@ const CardInputForm = (props: CardInputFormType) => {
         <label htmlFor="cardNumber">카드 번호</label>
         <CardInput
           id="cardNumber"
-          placeholder="카드 번호를 입력해 주세요."
           value={card.cardNumber}
-          isSecured={false}
+          placeholder="카드 번호를 입력해 주세요."
+          width="318px"
           isAutoFocus={true}
           isRequired={true}
-          maxLength={INPUT_MAX_LENGTH.CARD_NUMBER}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            handleCardNumberChanged(e);
-          }}
-          onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
-            handleCardNumberKey(e);
-          }}
+          onChange={handleCardNumberChanged}
+          onKeyDown={handleCardNumberKey}
         />
       </InputSetWrapper>
 
@@ -113,39 +115,26 @@ const CardInputForm = (props: CardInputFormType) => {
         <label htmlFor="expiredDate">만료일</label>
         <CardInput
           id="expiredDate"
+          value={card.expiredDate}
           placeholder="MM / YY"
           width="137px"
-          value={card.expiredDate}
-          isSecured={false}
-          isAutoFocus={false}
           isRequired={true}
-          maxLength={INPUT_MAX_LENGTH.EXPIRED_DATE}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            handleExpiredDateChanged(e)
-          }
-          onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
-            handleExpiredDateKey(e);
-          }}
+          onChange={handleExpiredDateChanged}
+          onKeyDown={handleExpiredDateKey}
         />
       </InputSetWrapper>
+
       <InputSetWrapper>
         <OwnerNameLabelWrapper>
           <label htmlFor="ownerName">카드 소유자 이름 (선택)</label>
           <span>{card.ownerName.length}/30</span>
         </OwnerNameLabelWrapper>
-
         <CardInput
           id="ownerName"
-          placeholder="카드에 표시된 이름과 동일하게 입력하세요."
           value={card.ownerName}
-          isSecured={false}
-          isAutoFocus={false}
-          isRequired={false}
-          maxLength={INPUT_MAX_LENGTH.OWNER_NAME}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            card.ownerName = e.target.value.toLocaleUpperCase();
-            props.setCard(card);
-          }}
+          width="318px"
+          placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+          onChange={handleOwnerNameChanged}
         />
       </InputSetWrapper>
 
@@ -154,16 +143,11 @@ const CardInputForm = (props: CardInputFormType) => {
         <CvcInputWrapper>
           <CardInput
             id="cvc"
-            width="84px"
             value={card.cvc}
+            width="84px"
             isSecured={true}
-            isAutoFocus={false}
             isRequired={true}
-            maxLength={INPUT_MAX_LENGTH.CVC}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              card.cvc = e.target.value;
-              props.setCard(card);
-            }}
+            onChange={handleCvcChanged}
           />
           <img
             src={QuestionMark}
@@ -178,35 +162,27 @@ const CardInputForm = (props: CardInputFormType) => {
         <PasswordInputWrapper>
           <CardInput
             id="password"
-            width="43px"
             value={card.password[PASSWORD_DIGIT_INDEX.FIRST]}
+            width="42px"
             isSecured={true}
-            isAutoFocus={false}
             isRequired={true}
-            maxLength={INPUT_MAX_LENGTH.PASSWORD}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              handlePasswordChanged(e, PASSWORD_DIGIT_INDEX.FIRST);
-            }}
+            onChange={handlePasswordChanged(PASSWORD_DIGIT_INDEX.FIRST)}
           />
           <CardInput
             id="password"
-            width="43px"
+            width="42px"
             value={card.password[PASSWORD_DIGIT_INDEX.SECOND]}
             isSecured={true}
-            isAutoFocus={false}
             isRequired={true}
-            maxLength={INPUT_MAX_LENGTH.PASSWORD}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              handlePasswordChanged(e, PASSWORD_DIGIT_INDEX.SECOND);
-            }}
+            onChange={handlePasswordChanged(PASSWORD_DIGIT_INDEX.SECOND)}
           />
-          <span>●</span>
-          <span>●</span>
+          <SecuredPasswordWrapper>●</SecuredPasswordWrapper>
+          <SecuredPasswordWrapper>●</SecuredPasswordWrapper>
         </PasswordInputWrapper>
       </InputSetWrapper>
       {isAnswered && (
         <AnswerBoxWrapper>
-          <p>카드 뒷면의 보안 3자리 숫자를 입력해 주세요.</p>
+          <p>카드 뒷면의 보안 3자리 숫자를 입력해 주세요 😊</p>
         </AnswerBoxWrapper>
       )}
       <NextLink type="submit" onClick={props.onSubmit} to="/">
@@ -275,7 +251,7 @@ const OwnerNameLabelWrapper = styled.div`
 const CvcInputWrapper = styled.div`
   display: flex;
   & > img {
-    margin: 8px 0 0 2px;
+    margin: 8px 0 0 10px;
     width: 27px;
     height: 27px;
     cursor: pointer;
@@ -285,13 +261,22 @@ const CvcInputWrapper = styled.div`
 `;
 
 const PasswordInputWrapper = styled.div`
-  & > span {
-    font-size: 15px;
-    :first-of-type {
-      margin-left: 14px;
-      margin-right: 20px;
-    }
+  display: flex;
+  & > :first-child {
+    margin-right: 5px;
   }
+  & > :nth-child(2) {
+    margin-right: 7px;
+  }
+`;
+
+const SecuredPasswordWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 48px;
+  font-size: 12px;
 `;
 
 const AnswerBoxWrapper = styled.div`
@@ -299,14 +284,13 @@ const AnswerBoxWrapper = styled.div`
   padding: 10px;
 
   position: absolute;
-  top: 515px;
-  right: 60px;
+  top: 520px;
+  right: 75px;
 
-  width: 43%;
+  width: 180px;
   height: 6%;
 
   background: #ecebf1;
-
   border-radius: 8px;
 
   & > p {
