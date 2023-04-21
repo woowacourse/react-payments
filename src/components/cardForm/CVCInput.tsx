@@ -66,6 +66,9 @@ const Wrapper = styled.div`
 `;
 
 const HelpIcon = styled.div`
+  position: absolute;
+  transform: translate(95px, -7px);
+
   display: flex;
   align-items: center;
   text-align: center;
