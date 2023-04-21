@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta } from '@storybook/react';
 
 import { PasswordInput } from '../../components/input/PasswordInput';
 
@@ -25,6 +25,7 @@ export const Password = () => {
       activateNextButton={() => {}}
       password={password}
       setPassword={setPassword}
+      moveFocusToSecurityCode={() => {}}
     />
   );
 };

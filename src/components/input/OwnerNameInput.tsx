@@ -7,6 +7,7 @@ interface Props {
   moveFocusToSecurityCode: () => void;
   ownerName: string;
   setOwnerName: React.Dispatch<React.SetStateAction<string>>;
+  moveFocusToYearInput: () => void;
 }
 
 export function OwnerNameInput({
@@ -14,6 +15,7 @@ export function OwnerNameInput({
   moveFocusToSecurityCode,
   ownerName,
   setOwnerName,
+  moveFocusToYearInput,
 }: Props) {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!isValidName(e.target.value)) {
@@ -42,6 +44,11 @@ export function OwnerNameInput({
           onChange={handleInputChange}
           onKeyDown={(e) => {
             if (e.key === 'Enter') moveFocusToSecurityCode();
+
+            if (!(e.target instanceof HTMLInputElement)) return;
+
+            if (e.key === 'Backspace' && e.target.value === '')
+              moveFocusToYearInput();
           }}
         />
       </InputWrapper>

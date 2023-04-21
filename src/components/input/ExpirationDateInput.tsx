@@ -1,10 +1,11 @@
-import { useRef, useEffect } from 'react';
+import { useEffect } from 'react';
 import { InputWrapper } from './InputWrapper';
 import { Input } from './Input';
 import styled from 'styled-components';
 
 interface Props {
   monthInputRef: React.RefObject<HTMLInputElement>;
+  yearInputRef: React.RefObject<HTMLInputElement>;
   moveFocusToOwnerName: () => void;
   expirationDate: {
     month: string;
@@ -16,24 +17,37 @@ interface Props {
       year: string;
     }>
   >;
+  moveFocusToLastCardNumberInput: () => void;
 }
 
 export function ExpirationDateInput({
   monthInputRef,
+  yearInputRef,
   moveFocusToOwnerName,
   expirationDate,
   setExpirationDate,
+  moveFocusToLastCardNumberInput,
 }: Props) {
-  const yearInputRef = useRef<HTMLInputElement>(null);
-
   useEffect(() => {
     if (expirationDate.year.length === 2) moveFocusToOwnerName();
+    //
   }, [expirationDate.year]);
 
   const handleBackspacePress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Backspace' && expirationDate.year === '') {
-      e.preventDefault();
+    if (e.key !== 'Backspace') return;
+    if (!(e.target instanceof HTMLInputElement)) return;
+
+    e.preventDefault();
+
+    if (e.target.dataset.inputTarget === 'year' && expirationDate.year === '') {
       monthInputRef.current?.focus();
+      return;
+    }
+    if (
+      e.target.dataset.inputTarget === 'month' &&
+      expirationDate.month === ''
+    ) {
+      moveFocusToLastCardNumberInput();
     }
   };
 
@@ -59,6 +73,7 @@ export function ExpirationDateInput({
         <Input
           ref={monthInputRef}
           value={expirationDate.month}
+          data-input-target={'month'}
           width={'30'}
           minLength={2}
           maxLength={2}
@@ -73,11 +88,13 @@ export function ExpirationDateInput({
 
             if (e.target.value.length === 2) yearInputRef.current?.focus();
           }}
+          onKeyDown={handleBackspacePress}
         />
         &nbsp;/&nbsp;
         <Input
           ref={yearInputRef}
           value={expirationDate.year}
+          data-input-target={'year'}
           width={'30'}
           minLength={2}
           maxLength={2}

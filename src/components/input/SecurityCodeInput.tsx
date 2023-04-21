@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { InputWrapper } from './InputWrapper';
 import { Input } from './Input';
 import styled from 'styled-components';
@@ -8,6 +8,7 @@ interface Props {
   moveFocusToPassword: () => void;
   securityCode: string;
   setSecurityCode: React.Dispatch<React.SetStateAction<string>>;
+  moveFocusToOwnerName: () => void;
 }
 
 export function SecurityCodeInput({
@@ -15,6 +16,7 @@ export function SecurityCodeInput({
   moveFocusToPassword,
   securityCode,
   setSecurityCode,
+  moveFocusToOwnerName,
 }: Props) {
   useEffect(() => {
     if (securityCode.length === 3) moveFocusToPassword();
@@ -39,6 +41,13 @@ export function SecurityCodeInput({
     }
   };
 
+  const handleBackspacePress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key !== 'Backspace') return;
+    if (!(e.target instanceof HTMLInputElement)) return;
+
+    if (e.target.value === '') moveFocusToOwnerName();
+  };
+
   return (
     <>
       <Style.Label>
@@ -54,6 +63,7 @@ export function SecurityCodeInput({
           placeholder="•••"
           onChange={handleInputChange}
           onBlur={validateSecurityCode}
+          onKeyDown={handleBackspacePress}
           inputMode="numeric"
           type="password"
           required

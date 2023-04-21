@@ -1,4 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
+
+import type { Meta } from '@storybook/react';
 
 import { CardNumberInput } from '../../components/input/CardNumberInput';
 import { useState } from 'react';
@@ -19,6 +21,7 @@ export const CardNumber = () => {
       moveFocusToExpirationDate={() => {}}
       cardNumber={cardNumber}
       setCardNumber={setCardNumber}
+      lastCardNumberInputRef={React.createRef()}
     />
   );
 };

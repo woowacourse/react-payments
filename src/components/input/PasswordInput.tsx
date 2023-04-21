@@ -16,6 +16,7 @@ interface Props {
       secondPassword: string;
     }>
   >;
+  moveFocusToSecurityCode: () => void;
 }
 
 export const PasswordInput = ({
@@ -23,6 +24,7 @@ export const PasswordInput = ({
   activateNextButton,
   password,
   setPassword,
+  moveFocusToSecurityCode,
 }: Props) => {
   const secondInputRef = useRef<HTMLInputElement>(null);
 
@@ -72,6 +74,12 @@ export const PasswordInput = ({
               });
 
               if (e.target.value.length === 1) secondInputRef.current?.focus();
+            }}
+            onKeyDown={(e) => {
+              if (e.key !== 'Backspace') return;
+              if (!(e.target instanceof HTMLInputElement)) return;
+
+              if (e.target.value === '') moveFocusToSecurityCode();
             }}
             placeholder="•"
           />

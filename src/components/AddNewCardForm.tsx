@@ -34,13 +34,23 @@ export const AddNewCardForm = () => {
     secondPassword: '',
   });
 
+  const lastCardNumberInputRef = useRef<HTMLInputElement>(null);
   const monthInputRef = useRef<HTMLInputElement>(null);
+  const yearInputRef = useRef<HTMLInputElement>(null);
   const ownerNameInputRef = useRef<HTMLInputElement>(null);
   const securityCodeInputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
 
-  const moveFocusToExpirationDate = () => {
+  const moveFocusToLastCardNumberInput = () => {
+    lastCardNumberInputRef.current?.focus();
+  };
+
+  const moveFocusToMonthInput = () => {
     monthInputRef.current?.focus();
+  };
+
+  const moveFocusToYearInput = () => {
+    yearInputRef.current?.focus();
   };
 
   const moveFocusToOwnerName = () => {
@@ -51,7 +61,7 @@ export const AddNewCardForm = () => {
     securityCodeInputRef.current?.focus();
   };
 
-  const moveFocusToPassword = () => {
+  const moveFocusToFirstPassword = () => {
     passwordInputRef.current?.focus();
   };
 
@@ -82,12 +92,15 @@ export const AddNewCardForm = () => {
       />
       <Style.InputContainer>
         <CardNumberInput
-          moveFocusToExpirationDate={moveFocusToExpirationDate}
+          moveFocusToExpirationDate={moveFocusToMonthInput}
           cardNumber={cardNumber}
           setCardNumber={setCardNumber}
+          lastCardNumberInputRef={lastCardNumberInputRef}
         />
         <ExpirationDateInput
+          moveFocusToLastCardNumberInput={moveFocusToLastCardNumberInput}
           monthInputRef={monthInputRef}
+          yearInputRef={yearInputRef}
           moveFocusToOwnerName={moveFocusToOwnerName}
           expirationDate={expirationDate}
           setExpirationDate={setExpirationDate}
@@ -97,18 +110,21 @@ export const AddNewCardForm = () => {
           moveFocusToSecurityCode={moveFocusToSecurityCode}
           ownerName={ownerName}
           setOwnerName={setOwnerName}
+          moveFocusToYearInput={moveFocusToYearInput}
         />
         <SecurityCodeInput
           securityCodeInputRef={securityCodeInputRef}
-          moveFocusToPassword={moveFocusToPassword}
+          moveFocusToPassword={moveFocusToFirstPassword}
           securityCode={securityCode}
           setSecurityCode={setSecurityCode}
+          moveFocusToOwnerName={moveFocusToOwnerName}
         />
         <PasswordInput
           passwordInputRef={passwordInputRef}
           activateNextButton={activateNextButton}
           password={password}
           setPassword={setPassword}
+          moveFocusToSecurityCode={moveFocusToSecurityCode}
         />
       </Style.InputContainer>
       <Style.ButtonContainer>

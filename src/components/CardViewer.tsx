@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { v4 } from 'uuid';
 
 interface Props {
   cardNumber: {
@@ -21,6 +22,7 @@ export function CardViewer({ cardNumber, expirationDate, ownerName }: Props) {
       <Style.CardNumberContainer>
         {Object.values(cardNumber).map((number, index) => (
           <Style.NumberInput
+            key={v4()}
             style={{
               letterSpacing:
                 window.innerWidth < 768 ? (index > 1 ? '-7px' : '0px') : '0px',
