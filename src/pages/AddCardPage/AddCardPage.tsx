@@ -43,7 +43,7 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
     second: "",
   });
 
-  const [error, setError] = useState<boolean>(false);
+  const [error, setError] = useState<{ expirationError: boolean }>({ expirationError: false });
 
   const navigate = useNavigate();
 
@@ -66,10 +66,10 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
 
     if (dateType === "month") {
       if (!isValidMonth(value)) {
-        setError(true);
+        setError({ ...error, expirationError: true });
         return;
       }
-      setError(false);
+      setError({ ...error, expirationError: false });
     }
   };
 
@@ -78,10 +78,10 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
 
     if (month.length === 1 && month !== "0") setExpirationDate({ ...expirationDate, month: `0${month}` });
     if (!isValidMonth(month)) {
-      setError(true);
+      setError({ ...error, expirationError: true });
       return;
     }
-    setError(false);
+    setError({ ...error, expirationError: false });
   };
 
   const handleOwnerName = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -146,7 +146,7 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
         <CardNumberInput cardNumber={cardNumber} onChange={handleCardNumber} />
         <CardExpirationDateInput
           expirationDate={expirationDate}
-          error={error}
+          error={error.expirationError}
           onChange={handleExpirationDate}
           onBlur={handleExpirationDateError}
         />
