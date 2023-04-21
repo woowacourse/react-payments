@@ -1,18 +1,21 @@
 import { CardNumber } from "../../types";
+import { ErrorMessage } from "../CardExpirationDateInput/CardExpirationDateInput";
 import { InputContainer, Input, Label } from "../common";
 
 type CardNumberInputProps = {
   cardNumber: CardNumber;
+  error: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const CardNumberInput = ({ cardNumber, onChange }: CardNumberInputProps) => {
+const CardNumberInput = ({ cardNumber, error, onChange, onBlur }: CardNumberInputProps) => {
   const { firstGroup, secondGroup, thirdGroup, fourthGroup } = cardNumber;
 
   return (
     <Label>
       카드번호
-      <InputContainer width="318px">
+      <InputContainer width="318px" border={error ? "3px solid #f09c9c" : "none"}>
         <Input
           value={firstGroup}
           name="firstGroup"
@@ -25,6 +28,7 @@ const CardNumberInput = ({ cardNumber, onChange }: CardNumberInputProps) => {
           required
           autoFocus
           onChange={onChange}
+          onBlur={onBlur}
         />
         <span>-</span>
         <Input
@@ -38,6 +42,7 @@ const CardNumberInput = ({ cardNumber, onChange }: CardNumberInputProps) => {
           maxLength={4}
           required
           onChange={onChange}
+          onBlur={onBlur}
         />
         <span>-</span>
         <Input
@@ -51,6 +56,7 @@ const CardNumberInput = ({ cardNumber, onChange }: CardNumberInputProps) => {
           maxLength={4}
           required
           onChange={onChange}
+          onBlur={onBlur}
         />
         <span>-</span>
         <Input
@@ -64,8 +70,10 @@ const CardNumberInput = ({ cardNumber, onChange }: CardNumberInputProps) => {
           maxLength={4}
           required
           onChange={onChange}
+          onBlur={onBlur}
         />
       </InputContainer>
+      {error && <ErrorMessage>카드번호 입력 형식이 잘못되었습니다.</ErrorMessage>}
     </Label>
   );
 };

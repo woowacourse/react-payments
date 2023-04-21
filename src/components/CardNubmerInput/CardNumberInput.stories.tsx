@@ -11,7 +11,9 @@ export const Default = () => (
     <GlobalStyle />
     <CardNumberInput
       cardNumber={{ firstGroup: "", secondGroup: "", thirdGroup: "", fourthGroup: "" }}
+      error={false}
       onChange={() => {}}
+      onBlur={() => {}}
     ></CardNumberInput>
   </>
 );

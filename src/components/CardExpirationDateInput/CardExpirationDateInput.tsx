@@ -50,7 +50,7 @@ const CardExpirationDateInput = ({ expirationDate, error, onChange, onBlur }: Ca
   );
 };
 
-const ErrorMessage = styled.div`
+export const ErrorMessage = styled.div`
   border-radius: 4px;
 
   padding: 10px;

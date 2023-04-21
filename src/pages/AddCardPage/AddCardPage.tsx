@@ -43,7 +43,10 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
     second: "",
   });
 
-  const [error, setError] = useState<{ expirationError: boolean }>({ expirationError: false });
+  const [error, setError] = useState<{ cardNumberError: boolean; expirationError: boolean }>({
+    cardNumberError: false,
+    expirationError: false,
+  });
 
   const navigate = useNavigate();
 
@@ -54,6 +57,30 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
     if (!isNumeric(value)) return;
 
     setCardNumber({ ...cardNumber, [targetGroup]: value });
+
+    const keys = Object.keys(cardNumber).filter((key) => key !== targetGroup) as (keyof CardNumber)[];
+    const isAllKeysLengthFour = keys.every((key) => cardNumber[key].length === 4);
+
+    if (isAllKeysLengthFour && value.length === 4) setError({ ...error, cardNumberError: false });
+  };
+
+  const handleCardNumberError = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const targetGroup = e.target.name as keyof CardNumber;
+
+    if (cardNumber[targetGroup].length !== 4) {
+      setError({ ...error, cardNumberError: true });
+      return;
+    }
+
+    const keys = Object.keys(cardNumber) as (keyof CardNumber)[];
+    const hasInvalidKey = keys.some((key) => cardNumber[key].length !== 0 && cardNumber[key].length !== 4);
+
+    if (hasInvalidKey) {
+      setError({ ...error, cardNumberError: true });
+      return;
+    }
+
+    if (keys.every((key) => cardNumber[key].length === 4)) setError({ ...error, cardNumberError: false });
   };
 
   const handleExpirationDate = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -143,7 +170,12 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
       <AppBar title={"카드 추가"} leftChild={<Link to="/">〈</Link>} />
       <CardPreview card={{ cardNumber, expirationDate, ownerName }} style={{ transition: "none", transform: "none" }} />
       <Form onSubmit={addCard}>
-        <CardNumberInput cardNumber={cardNumber} onChange={handleCardNumber} />
+        <CardNumberInput
+          cardNumber={cardNumber}
+          error={error.cardNumberError}
+          onChange={handleCardNumber}
+          onBlur={handleCardNumberError}
+        />
         <CardExpirationDateInput
           expirationDate={expirationDate}
           error={error.expirationError}
