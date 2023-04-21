@@ -13,10 +13,10 @@ export default function CardExpirationDateInput() {
   } = useCardRegisterContext();
   const { monthConditions, yearConditions } = useCardExpirationDate();
 
-  const onChangeValue: <T extends keyof ExpirationDate>(
-    key: T,
-    value: ExpirationDate[T]
-  ) => void = (key, value) => {
+  const onChangeValue: <T extends keyof ExpirationDate>(key: T, value: ExpirationDate[T]) => void = (
+    key,
+    value
+  ) => {
     handleCardInfo('expirationDate', {
       ...expirationDate,
       [key]: value,
@@ -32,10 +32,11 @@ export default function CardExpirationDateInput() {
             <Input.Field
               name="month"
               value={expirationDate['month']}
-              onChange={({ target: { value } }) =>
-                onChangeValue('month', value)
-              }
-              {...monthConditions}>
+              onChange={({ target: { value } }) => {
+                onChangeValue('month', value);
+              }}
+              {...monthConditions}
+            >
               <Styled.Input />
             </Input.Field>
           </Input>
@@ -45,7 +46,8 @@ export default function CardExpirationDateInput() {
               name="year"
               value={expirationDate['year']}
               onChange={({ target: { value } }) => onChangeValue('year', value)}
-              {...yearConditions}>
+              {...yearConditions}
+            >
               <Styled.Input />
             </Input.Field>
           </Input>

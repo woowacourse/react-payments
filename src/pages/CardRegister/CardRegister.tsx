@@ -16,14 +16,12 @@ export default function CardRegister() {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    navigate('/', { state: { isReadyForRegister: true } });
+    navigate('/', { state: { cardRegisterInfo } });
   };
 
   const handleChange = (e: FormEvent<HTMLFormElement>) => {
     const form = e.currentTarget as HTMLFormElement;
-    const inputs = Array.from(form.elements).filter(
-      (e) => e.tagName === 'INPUT'
-    ) as HTMLInputElement[];
+    const inputs = Array.from(form.elements).filter((e) => e.tagName === 'INPUT') as HTMLInputElement[];
 
     inputs.find((input, i) => {
       if (input !== e.target) return;
