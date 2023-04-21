@@ -12,8 +12,10 @@ import './AddCardPage.css';
 
 const cardExpireCondition = (e: React.ChangeEvent<HTMLInputElement>) => {
   const length = e.target.value.length;
-  const lastWord = e.target.value[length - 1];
-  return length <= 5 && length > 0 && (isNumberInput(lastWord) || lastWord === '/');
+  const lastWord = length === 0 ? '' : e.target.value[length - 1];
+  return (
+    length <= 5 && length >= 0 && (isNumberInput(lastWord) || lastWord === '/' || lastWord === '')
+  );
 };
 
 const securityCodeCondition = (e: React.ChangeEvent<HTMLInputElement>) => {
