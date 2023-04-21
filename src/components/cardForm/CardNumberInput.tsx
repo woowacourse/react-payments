@@ -1,4 +1,4 @@
-import { Container } from "../common/Container";
+import { Container } from "../common/Layout";
 import { InputLabel } from "../common/InputLabel";
 import { Input } from "../common/Input";
 import { useState } from "react";
