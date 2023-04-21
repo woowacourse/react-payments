@@ -43,6 +43,8 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
     second: "",
   });
 
+  const [error, setError] = useState<boolean>(false);
+
   const navigate = useNavigate();
 
   const handleCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,13 +63,28 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
     if (!isNumeric(value)) return;
 
     setExpirationDate({ ...expirationDate, [dateType]: value });
+
+    if (dateType === "month") {
+      if (!isValidMonth(value)) {
+        setError(true);
+        return;
+      }
+      setError(false);
+    }
+  };
+
+  const handleExpirationDateError = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!isValidMonth(expirationDate.month)) {
+      setError(true);
+      return;
+    }
+    setError(false);
   };
 
   const handleOwnerName = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.value;
 
     if (!isValidOwnerName(name)) {
-      alert("영문만 입력 가능합니다만?");
       return;
     }
     setOwnerName(name);
@@ -95,13 +112,6 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
 
   const addCard = (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (!isValidMonth(expirationDate.month)) {
-      alert("만료일이 잘못되었습니다만?");
-
-      return;
-    }
-
     const card: Card = {
       cardNumber,
       expirationDate,
@@ -120,7 +130,8 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
       isFulfilledObject(cardNumber, 4) &&
       isFulfilledObject(expirationDate, 2) &&
       isFulfilledObject(password, 1) &&
-      isFulfilledString(securityCode, 3)
+      isFulfilledString(securityCode, 3) &&
+      !error
     );
   };
 
@@ -130,7 +141,12 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
       <CardPreview card={{ cardNumber, expirationDate, ownerName }} style={{ transition: "none", transform: "none" }} />
       <Form onSubmit={addCard}>
         <CardNumberInput cardNumber={cardNumber} onChange={handleCardNumber} />
-        <CardExpirationDateInput expirationDate={expirationDate} onChange={handleExpirationDate} />
+        <CardExpirationDateInput
+          expirationDate={expirationDate}
+          error={error}
+          onChange={handleExpirationDate}
+          onBlur={handleExpirationDateError}
+        />
         <CardOwnerNameInput ownerName={ownerName} nameLength={ownerName.length} onChange={handleOwnerName} />
         <CardSecurityCodeInput securityCode={securityCode} onChange={handleSecurityCode} />
         <CardPasswordInput password={password} onChange={handlePassword} />
@@ -145,7 +161,10 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
 const Form = styled.form`
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   gap: 19px;
+
+  height: 400px;
 `;
 
 const ButtonBox = styled.div<{ isVisible: boolean }>`
