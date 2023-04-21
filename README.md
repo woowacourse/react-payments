@@ -1,10 +1,11 @@
-<h2 align="middle">💵</h2>
-<h1 align="middle">페이먼츠</h1>
+<h1 align="middle">💵 페이먼츠 💵</h1>
 <p align="middle">우아한테크코스 레벨2 페이먼츠 미션</p>
 
 <br>
-
-사진 넣기
+<p align="middle">
+<img width="416" alt="스크린샷 2023-04-21 오후 1 47 56" src="https://user-images.githubusercontent.com/80464961/233543249-40be579f-448b-4724-a7b9-447717c22053.png">
+<img width="400" alt="스크린샷 2023-04-21 오후 1 47 48" src="https://user-images.githubusercontent.com/80464961/233543241-4105acb6-7fff-4af3-895d-c05f668dad78.png">
+</p>
 
 <br>
 
@@ -50,7 +51,7 @@
 
 ### 📝 실행 방법
 
-- <a href="">앱 바로 실행하기</a>
+- <a href="https://github.com/hae-on/react-payments/deployments/activity_log?environment=github-pages">앱 바로 실행하기</a>
 
 - 터미널에서 npm 설치(`npm install`) 후 `npm start` 커맨드로 앱을 실행할 수 있다.
 
