@@ -31,8 +31,8 @@ const InputContainer = styled.div`
 `;
 
 const Label = styled.label`
-  font: var(--text-caption);
-  color: var(--grey-300);
+  ${({ theme }) => theme.fonts.label};
+  color: ${({ theme }) => theme.colors.gray400};
   margin-bottom: 0.3rem;
 `;
 
@@ -41,17 +41,16 @@ const InputWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* width: 51.8rem; */
   height: 4.5rem;
 
-  font-size: 1.5rem;
+  ${({ theme }) => theme.fonts.body}
 
-  background: #ecebf1;
+  background: ${({ theme }) => theme.colors.gray200};
   border-radius: 7px;
 `;
 
 const ErrorMessage = styled.strong`
   margin-top: 1rem;
 
-  color: red;
+  color: ${({ theme }) => theme.colors.error};
 `;

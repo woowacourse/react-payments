@@ -49,7 +49,7 @@ const Section = styled.section`
   align-items: center;
 
   gap: 3rem;
-  font-size: 1.4rem;
+  ${({ theme }) => theme.fonts.h2}
 `;
 
 const Button = styled.button`

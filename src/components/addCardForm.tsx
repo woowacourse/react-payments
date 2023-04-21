@@ -81,6 +81,6 @@ const CompleteButton = styled.button`
 
   padding: 0.5rem 0.1rem;
 
-  background-color: black;
-  color: #ecebf1;
+  background-color: ${({ theme }) => theme.colors.black};
+  color: ${({ theme }) => theme.colors.gray200};
 `;

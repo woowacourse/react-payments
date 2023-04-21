@@ -23,14 +23,14 @@ const HeaderUnit = styled.header`
   align-items: center;
   height: 5.6rem;
 
-  font-size: 2rem;
+  ${({ theme }) => theme.fonts.h1};
   margin-bottom: 2rem;
 
   width: 100%;
 `;
 
 const Title = styled.h2`
-  font-size: 1.6rem;
+  ${({ theme }) => theme.fonts.h2};
 
   margin-left: 5rem;
 `;

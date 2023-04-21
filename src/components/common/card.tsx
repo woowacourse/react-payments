@@ -38,10 +38,9 @@ const CardContainer = styled.section`
   height: 13.3rem;
   margin-bottom: 3.5rem;
 
-  background-color: #333333;
-  color: white;
-  font-size: 1.3rem;
-  letter-spacing: 0.2rem;
+  background-color: ${({ theme }) => theme.colors.card_main};
+  color: ${({ theme }) => theme.colors.white};
+  ${({ theme }) => theme.fonts.card};
 
   border-radius: 0.5rem;
 `;
@@ -53,7 +52,7 @@ const Magnetic = styled.div`
   margin-top: 4.7rem;
   margin-left: 1.4rem;
 
-  background-color: #cbba64;
+  background-color: ${({ theme }) => theme.colors.card_sub};
 
   border-radius: 0.4rem;
 `;

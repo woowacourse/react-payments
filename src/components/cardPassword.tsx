@@ -55,5 +55,5 @@ const Wrapper = styled.section`
 const DefaultDot = styled.div`
   margin: 0 1rem;
 
-  font-size: 2rem;
+  ${({ theme }) => theme.fonts.body};
 `;

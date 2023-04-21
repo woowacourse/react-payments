@@ -20,7 +20,7 @@ const InputUnit = styled.input`
 
   padding: 0 1rem;
 
-  background: #ecebf1;
+  background: ${({ theme }) => theme.colors.gray200};
   border-radius: 0.7rem;
 
   text-align: center;
