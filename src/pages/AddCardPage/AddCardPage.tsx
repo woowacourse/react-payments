@@ -199,7 +199,15 @@ const Form = styled.form`
   justify-content: flex-start;
   gap: 19px;
 
-  height: 400px;
+  height: 500px;
+
+  overflow: scroll;
+
+  ::-webkit-scrollbar {
+    width: 3px;
+    height: 2px;
+    background-color: transparent;
+  }
 `;
 
 const ButtonBox = styled.div<{ isVisible: boolean }>`
