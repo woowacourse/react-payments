@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import backImage from '../../assets/back-button.png';
 
 interface HeaderProps {
   headingText: string;
@@ -17,7 +18,7 @@ function Header({ headingText, backButton }: HeaderProps) {
             navigate(-1);
           }}
         >
-          <img src={'../../src/assets/back-button.png'} alt="뒤로 가기" />
+          <img src={backImage} alt="뒤로 가기" />
         </BackButton>
       )}
       <Heading>{headingText}</Heading>
