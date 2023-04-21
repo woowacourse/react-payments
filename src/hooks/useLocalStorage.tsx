@@ -4,17 +4,17 @@ export const useLocalStorage = <T,>(
   initialValue: T,
   key: string
 ): [T, (data: T) => void] => {
-  const [value, setValue] = useState(initialValue);
+  const [value, setData] = useState(initialValue);
 
-  useEffect(() => {
-    const savedData = JSON.parse(localStorage.getItem(key) || "[]");
-    if (savedData && savedData.length > 0) setValue(savedData);
-  }, []);
-
-  const setState = (data: T) => {
-    setValue(data);
+  const setValue = (data: T) => {
+    setData(data);
     localStorage.setItem(key, JSON.stringify(data));
   };
 
-  return [value, setState];
+  useEffect(() => {
+    const savedData = JSON.parse(localStorage.getItem(key) || "[]");
+    if (savedData && savedData.length > 0) setData(savedData);
+  }, []);
+
+  return [value, setValue];
 };
