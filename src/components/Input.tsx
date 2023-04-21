@@ -22,18 +22,20 @@ export default function Input({
 }: InputProps) {
   const onInput = (event: ChangeEvent<HTMLInputElement>) => {
     if (!event.currentTarget) return;
-    event.currentTarget.value = event.currentTarget.value.replace(
-      /[^0-9]/g,
-      ""
-    );
+
+    if (isNumber) {
+      event.currentTarget.value = event.currentTarget.value.replace(
+        /[^0-9]/g,
+        ""
+      );
+    }
   };
-  const defaultOnInput = () => {};
 
   return (
     <StyledInput
       textAlign={textAlign}
       inputMode={isNumber ? "numeric" : "text"}
-      onInput={isNumber ? onInput : defaultOnInput}
+      onInput={onInput}
       {...rest}
     />
   );
