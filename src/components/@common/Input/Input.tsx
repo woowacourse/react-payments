@@ -150,13 +150,15 @@ function Field(props: PropsWithChildren<FieldProps>) {
   }
 
   return (
-    <input
-      id={idProps ? `${idProps}-${id}` : id}
-      value={valueProps ?? value}
-      onChange={localOnChange}
-      pattern={pattern}
-      {...restProps}
-    />
+    <InputItem>
+      <input
+        {...restProps}
+        id={idProps ? `${idProps}-${id}` : id}
+        value={valueProps ?? value}
+        onChange={localOnChange}
+        pattern={pattern}
+      />
+    </InputItem>
   );
 }
 
@@ -174,7 +176,7 @@ function Label(props: PropsWithChildren<LabelProps>) {
   const [fieldId, setFieldId] = useState('');
   const childrenArray = Children.toArray(children);
   const child = childrenArray[0];
-
+  console.log(child, fieldId);
   useEffect(() => {
     const fieldItem = itemMap.get('field');
 
@@ -193,7 +195,7 @@ function Label(props: PropsWithChildren<LabelProps>) {
   }
 
   return (
-    <label htmlFor={fieldId} {...restProps}>
+    <label {...restProps} htmlFor={fieldId}>
       {children}
     </label>
   );
