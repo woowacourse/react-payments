@@ -20,7 +20,9 @@ export function CardList() {
     <CardListContainer>
       <Header title='보유 카드' />
       <Section>
-        <h3>{cards?.length === 0 ? '새로운 카드를 추가하세요' : ''}</h3>
+        <Direction>
+          {cards?.length === 0 ? '새로운 카드를 추가하세요' : ''}
+        </Direction>
         {cards &&
           cards?.map((card) => {
             return (
@@ -56,6 +58,10 @@ const Section = styled.section`
   font-size: 1.4rem;
 `;
 
+const Direction = styled.h3`
+  font: var(--text-subtitle);
+  color: #575757;
+`;
 const Button = styled.button`
   background: #e5e5e5;
   border-radius: 5px;

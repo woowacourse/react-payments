@@ -38,7 +38,7 @@ export function SecurityCode() {
 }
 
 const Wrapper = styled.section`
-  width: 15rem;
+  width: 16rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -46,4 +46,5 @@ const Wrapper = styled.section`
 
 const Img = styled.img`
   margin: 0.7rem;
+  padding-top: 1rem;
 `;

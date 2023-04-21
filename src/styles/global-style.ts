@@ -1,5 +1,5 @@
-import { createGlobalStyle } from "styled-components";
-import reset from "styled-reset";
+import { createGlobalStyle } from 'styled-components';
+import reset from 'styled-reset';
 
 export const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -30,9 +30,9 @@ export const GlobalStyle = createGlobalStyle`
     --black: #333333;
     --yellow: #CBBA64;
 
-    --text-title: 600 20px/24px san-serif;
-    --text-subtitle: 600 18px/28px san-serif;
-    --text-body: 400 16px/24px san-serif;
-    --text-caption: 500 12px/14px Roboto ;
+    --text-title: 600 2rem/1.9rem Roboto;
+    --text-subtitle: 700 1.5rem/1.6rem Roboto;
+    --text-body: 400 1.6rem/2.4rem Roboto;
+    --text-caption: 500 1.2rem/1.4rem Roboto ;
   }
 `;

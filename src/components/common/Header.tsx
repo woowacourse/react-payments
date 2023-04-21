@@ -29,8 +29,6 @@ const HeaderUnit = styled.header`
 `;
 
 const Title = styled.h2`
-  font-size: 2rem;
-  font-weight: bold;
-
+  font: var(--text-title);
   margin-left: 5rem;
 `;

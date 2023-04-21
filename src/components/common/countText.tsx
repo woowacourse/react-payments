@@ -14,8 +14,10 @@ export function CountText(maxLength: number) {
 
 const Wrapper = styled.div`
   position: absolute;
-  top: 0.3rem;
+  top: 0.1rem;
   right: 0;
+
+  font: var(--text-caption);
 
   display: flex;
 `;
