@@ -1,12 +1,12 @@
 import styles from './style.module.css';
-import { ChangeEvent, FocusEvent } from 'react';
+import { ChangeEvent, FocusEvent, useRef } from 'react';
 import { CardInputValidation } from '../../../types';
+import { PASSWORD_UNIT_MAX_LENGTH, SECURITY_TEXT_ICON } from '../../../constants';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Input from '../../common/Input/Input';
 import { useError } from '../../../hooks/useError';
 import { isElementOfType } from '../../../utils/eventUtils';
 import validator from '../../../utils/validator';
-import { PASSWORD_UNIT_MAX_LENGTH, SECURITY_TEXT_ICON } from '../../../constants';
 
 interface CardPasswordProps {
   changeInputValidation: (key: keyof CardInputValidation, value: boolean) => void;
@@ -20,11 +20,20 @@ function CardPassword({ changeInputValidation, onInputChange, values }: CardPass
     changeInputValidation,
     inputs: values,
   });
+  const lastInputRef = useRef<HTMLInputElement>(null);
 
   const onBlur = (event: FocusEvent<HTMLElement>) => {
     if (!isElementOfType<HTMLInputElement>(event)) return;
 
     handleError(event.target.name, event.target.value);
+  };
+
+  const onFirstInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    onInputChange(event);
+
+    if (event.target.value.length === PASSWORD_UNIT_MAX_LENGTH && lastInputRef.current) {
+      lastInputRef.current.focus();
+    }
   };
 
   return (
@@ -38,6 +47,7 @@ function CardPassword({ changeInputValidation, onInputChange, values }: CardPass
       <div className={styles.container} onBlur={onBlur}>
         {values.map((password, index) => (
           <Input
+            ref={index === 0 ? undefined : lastInputRef}
             key={index}
             type="password"
             id={index === 0 ? 'password' : `password${index}`}
@@ -47,7 +57,7 @@ function CardPassword({ changeInputValidation, onInputChange, values }: CardPass
             maxLength={PASSWORD_UNIT_MAX_LENGTH}
             autoComplete="off"
             isError={isError}
-            onChange={onInputChange}
+            onChange={index === 0 ? onFirstInputChange : onInputChange}
           />
         ))}
         <div className={styles.passwordPlaceholder}>
