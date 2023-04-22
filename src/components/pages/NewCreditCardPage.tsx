@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { SUCCESS_MESSAGE } from '../../constants/validation';
 import { usePayments } from '../../hooks/usePayments';
 import { useValidation } from '../../hooks/useValidation';
-import type { CreditCard } from '../../types/CreditCard';
+import type { CreditCard, Month, Year } from '../../types/CreditCard';
 import {
   validateCVC,
   validateCardNumbers,
@@ -81,7 +81,7 @@ export const NewCreditCardPage = () => {
     setNewCardField('cardNumbers', value);
   };
 
-  const handleExpirationDateChange = (value: [string, string]) => {
+  const handleExpirationDateChange = (value: [Month, Year]) => {
     setNewCardField('expirationDate', value);
   };
 

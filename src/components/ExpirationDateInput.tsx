@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import styled from 'styled-components';
 import { useFocusChain } from '../hooks/useFocusChain';
+import type { Month, Year } from '../types/CreditCard';
 import { NumberInput } from './common/NumberInput';
 
 const StyledExpirationDateInput = styled.div`
@@ -9,8 +10,8 @@ const StyledExpirationDateInput = styled.div`
 `;
 
 type ExpirationDateInputProps = {
-  value: [string, string];
-  onChange: (value: [string, string]) => void;
+  value: [Month, Year];
+  onChange: (value: [Month, Year]) => void;
 };
 
 export const ExpirationDateInput = (props: ExpirationDateInputProps) => {
