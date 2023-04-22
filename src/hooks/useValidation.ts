@@ -1,10 +1,18 @@
 import { useState } from 'react';
+import type { ERROR_MESSAGE } from '../constants/validation';
+import { SUCCESS_MESSAGE } from '../constants/validation';
 
 type ValidateFunctions<Data> = Partial<{
   [K in keyof Data]: (value: Data[K]) => void;
 }>;
 
-type ValidationResult<Data> = Partial<Record<keyof Data, string | null>>;
+type ErrorMessage = (typeof ERROR_MESSAGE)[keyof typeof ERROR_MESSAGE];
+
+type SuccessMessage = typeof SUCCESS_MESSAGE;
+
+type isValidateMessage = ErrorMessage | SuccessMessage;
+
+type ValidationResult<Data> = Partial<Record<keyof Data, isValidateMessage>>;
 
 export const useValidation = <Data extends object>(
   validationFunctions: ValidateFunctions<Data>,
@@ -16,21 +24,20 @@ export const useValidation = <Data extends object>(
       Object.keys(validationFunctions) as Array<keyof Data>
     ).reduce((result, key) => {
       // 각 필드마다 검증을 수행할 함수
-      const validateFn = validationFunctions[key];
+      const validateFunction = validationFunctions[key];
 
       try {
-        validateFn?.(data[key]);
-        return { ...result, [key]: null };
+        validateFunction?.(data[key]);
+        return { ...result, [key]: SUCCESS_MESSAGE };
       } catch (e) {
         const error = e as Error;
-        return { ...result, [key]: error.message };
+        return { ...result, [key]: error.message as ErrorMessage };
       }
     }, {});
 
     setValidationResult(nextValidationResult);
 
-    // 검증 성공 여부 반환: 객체 검증 성공 시 모든 필드의 값은 null
-    return Object.values(nextValidationResult).every((result) => result === null);
+    return Object.values(nextValidationResult).every((result) => result === SUCCESS_MESSAGE);
   };
 
   return { validate, validationResult };

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { SUCCESS_MESSAGE } from '../../constants/validation';
 import { usePayments } from '../../hooks/usePayments';
 import { useValidation } from '../../hooks/useValidation';
 import type { CreditCard } from '../../types/CreditCard';
@@ -57,12 +58,14 @@ export const NewCreditCardPage = () => {
     cvc: '',
     password: '',
   });
+
   const { validationResult, validate } = useValidation<CreditCard>({
     cardNumbers: validateCardNumbers,
     expirationDate: validateExpirationDate,
     cvc: validateCVC,
     password: validateCardPassword,
   });
+
   const { addCreditCard } = usePayments();
 
   const setNewCardField = <Field extends keyof CreditCard>(
@@ -115,7 +118,7 @@ export const NewCreditCardPage = () => {
         <FormGroup>
           <Text size="small">카드 번호</Text>
           <CardNumberInput value={newCard.cardNumbers} onChange={handleCardNumbersChange} />
-          {validationResult.cardNumbers && (
+          {validationResult.cardNumbers !== SUCCESS_MESSAGE && (
             <Text size="small" color="red">
               {validationResult.cardNumbers}
             </Text>
@@ -128,7 +131,7 @@ export const NewCreditCardPage = () => {
             value={newCard.expirationDate}
             onChange={handleExpirationDateChange}
           />
-          {validationResult.expirationDate && (
+          {validationResult.expirationDate !== SUCCESS_MESSAGE && (
             <Text size="small" color="red">
               {validationResult.expirationDate}
             </Text>
@@ -158,7 +161,7 @@ export const NewCreditCardPage = () => {
             center
             type="password"
           />
-          {validationResult.cvc && (
+          {validationResult.cvc !== SUCCESS_MESSAGE && (
             <Text size="small" color="red">
               {validationResult.cvc}
             </Text>
@@ -168,7 +171,7 @@ export const NewCreditCardPage = () => {
         <FormGroup>
           <Text size="small">카드 비밀번호</Text>
           <CardPasswordInput value={newCard.password} onChange={handleCardPasswordChange} />
-          {validationResult.password && (
+          {validationResult.password !== SUCCESS_MESSAGE && (
             <Text size="small" color="red">
               {validationResult.password}
             </Text>
