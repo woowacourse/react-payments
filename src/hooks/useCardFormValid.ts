@@ -10,7 +10,7 @@ export function useCardFormValid(card: Card) {
   const isCardNumberValid = numbers.every((number) => isNumberLengthValid(number, 4));
 
   const isExpirationDateValid =
-    isNumberLengthValid(expirationDate.month, 4) && isNumberLengthValid(expirationDate.year, 4);
+    isNumberLengthValid(expirationDate.month, 2) && isNumberLengthValid(expirationDate.year, 2);
 
   const isSecurityCodeValid = isNumberLengthValid(securityCode, 3);
 
