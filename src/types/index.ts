@@ -12,10 +12,6 @@ export interface CardType {
   cardPassword: string;
 }
 
-export interface PageProps {
-  navigate: (page: Page) => void;
-}
-
 export enum Page {
   list = 'list',
   register = 'register',

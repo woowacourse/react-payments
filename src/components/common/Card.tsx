@@ -1,11 +1,9 @@
 import type { CardType } from '../../types';
 import styled from 'styled-components';
 
-const Card = ({
-  cardNumber = [],
-  ownerName,
-  expireDate = [],
-}: Pick<CardType, 'cardNumber' | 'expireDate' | 'ownerName'>) => {
+interface Props extends Pick<CardType, 'cardNumber' | 'expireDate' | 'ownerName'> {}
+
+const Card = ({ cardNumber, ownerName, expireDate }: Props) => {
   return (
     <CardWrapper>
       <CardChip></CardChip>

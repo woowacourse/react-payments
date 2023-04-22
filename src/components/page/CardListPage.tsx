@@ -1,11 +1,15 @@
-import type { CardType, PageProps } from '../../types';
+import type { CardType } from '../../types';
 import { Page } from '../../types';
 import styled from 'styled-components';
 
 import Card from '../common/Card';
 import PageTemplate from '../template/PageTemplate';
 
-const CardListPage = ({ navigate }: PageProps) => {
+interface Props {
+  navigate: (page: Page) => void;
+}
+
+const CardListPage = ({ navigate }: Props) => {
   const onClickAdd = () => {
     navigate(Page.register);
   };

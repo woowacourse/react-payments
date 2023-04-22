@@ -1,4 +1,4 @@
-import type { CardType, PageProps } from '../../types';
+import type { CardType } from '../../types';
 import { Page } from '../../types';
 import { useState } from 'react';
 import styled from 'styled-components';
@@ -11,12 +11,16 @@ import SecurityCodeInput from '../box/inputSection/SecurityCodeInput';
 import CardPasswordInput from '../box/inputSection/CardPasswordInput';
 import PageTemplate from '../template/PageTemplate';
 
+interface Props {
+  navigate: (page: Page) => void;
+}
+
 interface CardFormState extends Omit<CardType, 'id' | 'cardPassword'> {
   cardPassword1: string;
   cardPassword2: string;
 }
 
-const CardRegisterPage = ({ navigate }: PageProps) => {
+const CardRegisterPage = ({ navigate }: Props) => {
   const [card, setCard] = useState<CardFormState>({
     cardNumber: ['', '', '', ''],
     expireDate: ['', ''],

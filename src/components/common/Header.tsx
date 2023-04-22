@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-interface HeaderProps {
+interface Props {
   title: string;
   onClickBack?: (e: React.MouseEvent) => void;
 }
@@ -11,7 +11,7 @@ const BackBtn = () => (
   </svg>
 );
 
-const Header = ({ title, onClickBack }: HeaderProps) => {
+const Header = ({ title, onClickBack }: Props) => {
   return (
     <HeaderWrapper>
       {onClickBack && (

@@ -9,7 +9,7 @@ export interface InputType {
   required?: boolean;
 }
 
-interface InputBoxProps {
+interface Props {
   inputs: InputType[];
   inputValues: string | string[];
   setInputValues: (val: string | string[]) => void;
@@ -18,18 +18,9 @@ interface InputBoxProps {
   isFullWidth?: boolean;
 }
 
-const InputBox = ({
-  inputs,
-  inputValues,
-  setInputValues,
-  align,
-  separator,
-  isFullWidth = false,
-}: InputBoxProps) => {
+const InputBox = ({ inputs, inputValues, setInputValues, align, separator, isFullWidth = false }: Props) => {
   const onChangeInput = (textType: string, index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (textType === 'number' && isNaN(Number(e.target.value))) {
-      return;
-    }
+    if (textType === 'number' && isNaN(Number(e.target.value))) return;
 
     if (typeof inputValues === 'string') {
       setInputValues(e.target.value);
@@ -70,15 +61,14 @@ const InputsBoxWrapper = styled.div<{ isFullWidth?: boolean; align?: string }>`
   flex-direction: row;
   justify-content: ${({ align }) => (align === 'center' ? 'center' : 'flex-start')};
   align-items: center;
-  width: ${({ isFullWidth }) => (isFullWidth ? '100%' : 'min-content')};
-  height: 48.75px;
   box-sizing: border-box;
 
+  width: ${({ isFullWidth }) => (isFullWidth ? '100%' : 'min-content')};
+  height: 48.75px;
   border: none;
-  padding: 0 14px;
-
-  background: #ecebf1;
   border-radius: 7px;
+  padding: 0 14px;
+  background: #ecebf1;
 
   color: #000000;
   font-size: 20px;
@@ -86,6 +76,7 @@ const InputsBoxWrapper = styled.div<{ isFullWidth?: boolean; align?: string }>`
 
 const Separator = styled.span`
   text-align: center;
+
   font-size: 16px;
 `;
 
@@ -96,9 +87,9 @@ const Input = styled.input<{ align: string; textSecurity?: boolean }>`
   border: none;
   background-color: transparent;
 
-  color: #000000;
-  font-size: 16px;
   text-align: ${({ align }) => align};
+  font-size: 16px;
+  color: #000000;
   outline: none;
 
   &[type='number']::-webkit-outer-spin-button,

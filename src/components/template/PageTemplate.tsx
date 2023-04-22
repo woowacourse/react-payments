@@ -3,13 +3,13 @@ import styled from 'styled-components';
 
 import Header from '../common/Header';
 
-interface PageTemplateProps {
+interface Props {
   children: React.ReactNode;
   title: string;
   onClickBack?: () => void;
 }
 
-const PageTemplate = ({ children, title, onClickBack }: PageTemplateProps) => {
+const PageTemplate = ({ children, title, onClickBack }: Props) => {
   return (
     <PageTemplateWrapper>
       <Header title={title} onClickBack={onClickBack}></Header>
