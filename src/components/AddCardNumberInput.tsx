@@ -1,5 +1,4 @@
 import { AddCardNumberInputProps } from '../type';
-import './AddCardNumberInput.css';
 
 const AddCardNumberInput = ({ cardNumber }: AddCardNumberInputProps) => {
   const {

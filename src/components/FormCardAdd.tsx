@@ -8,6 +8,7 @@ import './FormCardAdd.css';
 import { CardType, FormCardAddProps } from '../type';
 import AddCardNumberInput from './AddCardNumberInput';
 import AddCardExpireDateInput from './AddCardExpireDateInput';
+import AddCardOwnerInput from './AddCardOwnerInput';
 
 const FormCardAdd = ({
   cardNumber,
@@ -50,18 +51,7 @@ const FormCardAdd = ({
     <form className="add-card-form" onSubmit={onSubmit}>
       <AddCardNumberInput cardNumber={cardNumber} />
       <AddCardExpireDateInput cardExpire={cardExpire} />
-      <div>
-        <div className="card-owner-container-header">
-          <span className="form-label">카드 소유자 이름(선택)</span>
-          <span className="form-label">{cardOwner.value.length}/30</span>
-        </div>
-        <input
-          className="input-box card-owner"
-          value={cardOwner.value}
-          onChange={cardOwner.onChange}
-          name="owner"
-        />
-      </div>
+      <AddCardOwnerInput cardOwner={cardOwner} />
       <div className="card-security-code-container">
         <span className="form-label">보안코드(CVC/CVV)</span>
         <div className="card-security-code-box">

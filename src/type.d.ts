@@ -37,3 +37,4 @@ export type FormCardAddProps = {
 
 export type AddCardNumberInputProps = Pick<FormCardAddProps, 'cardNumber'>;
 export type AddCardExpireDateInputProps = Pick<FormCardAddProps, 'cardExpire'>;
+export type AddCardOwnerInputProps = Pick<FormCardAddProps, 'cardOwner'>;
