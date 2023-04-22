@@ -3,23 +3,25 @@ import styled from "styled-components";
 export interface InputProps {
   label: string;
   width: string;
-  placeholder: string;
+  placeholder?: string;
   textPosition: string;
   type: string;
-  error: { isValid: boolean; errorMessage: string };
-  handleInput: (e: any) => void;
-  handleChange: (e: any) => void;
+  maxLength: number;
+  error?: { isValid: boolean; errorMessage: string };
+  handleInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleChange: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
 
 export const Input = ({
   label,
   width,
-  placeholder,
+  placeholder = "",
   textPosition,
   type,
+  error = { isValid: true, errorMessage: "" },
+  maxLength,
   handleInput,
   handleChange,
-  error,
 }: InputProps) => {
   const { isValid, errorMessage } = error;
 
@@ -33,6 +35,7 @@ export const Input = ({
         onBlur={handleChange}
         textPosition={textPosition}
         type={type}
+        maxLength={maxLength}
       />
       {<ErrorMessage>{!isValid ? errorMessage : ""}</ErrorMessage>}
     </Colum>

@@ -51,9 +51,9 @@ export const CardForm = ({
   return (
     <Form onSubmit={handleSubmit}>
       <CardNumberInput
-        cardNumbers={cardInfo.numbers}
-        setCardNumbers={(numbers: string) => {
-          setCardInfo({ ...cardInfo, numbers: numbers });
+        setCardNumbers={(index: number, numbers: string) => {
+          cardInfo.numbers[index] = numbers;
+          setCardInfo({ ...cardInfo, numbers: cardInfo.numbers });
         }}
       />
       <ExpiryDateInput

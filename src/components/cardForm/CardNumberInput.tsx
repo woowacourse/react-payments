@@ -2,67 +2,38 @@ import { InputContainer } from "../common/InputContainer";
 import { InputLabel } from "../common/InputLabel";
 import { Input } from "../common/Input";
 import { useState } from "react";
+import styled from "styled-components";
 
 interface CardNumberInputProps {
-  setCardNumbers: (numbers: string) => void;
-  cardNumbers: string;
+  setCardNumbers: (index: number, numbers: string) => void;
 }
 
 const cardNumberInputInfo = {
-  label: "cardNumber",
-  width: "318px",
-  placeholder: "",
+  width: "80px",
+  maxLength: 4,
   textPosition: "center",
   type: "text",
 };
 
-export const CardNumberInput = ({
-  setCardNumbers,
-  cardNumbers,
-}: CardNumberInputProps) => {
-  const [postText, setPostText] = useState("");
+export const CardNumberInput = ({ setCardNumbers }: CardNumberInputProps) => {
   const [isCompleted, setIsCompleted] = useState(true);
 
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const text = e.target.value;
+  const handleInput =
+    (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value;
 
-    //문자가 추가됐을 때
-    if (
-      postText.replaceAll(" - ", "").length < text.replaceAll(" - ", "").length
-    ) {
-      const numbers = text.replaceAll(" - ", "");
-
-      if (numbers.length > 16 || !/\d/g.test(text.slice(-1))) {
-        e.target.value = e.target.value.slice(0, -1);
+      if (value.length > 4) {
+        e.target.value = value.slice(0, 4);
         return;
       }
 
-      const addNumbers = cardNumbers + text.slice(-1);
-      setCardNumbers(addNumbers);
-
-      setPostText(e.target.value);
-      const nextText =
-        addNumbers.slice(0, 8) + "●".repeat(addNumbers.slice(8).length);
-      e.target.value = (nextText.match(/\d{1,4}|●{1,4}/g) ?? []).join(" - ");
-    }
-    //문자가 제거 됐을 때
-    else {
-      const minusNumbers = cardNumbers.slice(0, -1);
-      setCardNumbers(minusNumbers);
-
-      setPostText(e.target.value);
-      const nextText =
-        minusNumbers.slice(0, 8) + "●".repeat(minusNumbers.slice(8).length);
-      e.target.value = (nextText.match(/\d{1,4}|●{1,4}/g) ?? []).join(" - ");
-    }
-  };
+      setCardNumbers(index, value);
+    };
 
   const handleOutFocusEvent = (e: React.FocusEvent<HTMLInputElement>) => {
-    const value = e.target.value.replaceAll(" - ", "");
-
     setIsCompleted(false);
 
-    if (value.length === 16) {
+    if (e.target.value.length === 4) {
       setIsCompleted(true);
     }
   };
@@ -70,15 +41,43 @@ export const CardNumberInput = ({
   return (
     <InputContainer>
       <InputLabel text="카드 번호" name="cardNumber" />
-      <Input
-        error={{
-          isValid: isCompleted,
-          errorMessage: "16자리 숫자를 입력하세요.",
-        }}
-        {...cardNumberInputInfo}
-        handleInput={handleInput}
-        handleChange={handleOutFocusEvent}
-      />
+      <Row>
+        <Input
+          error={{
+            isValid: isCompleted,
+            errorMessage: "16자리 숫자를 입력하세요.",
+          }}
+          {...cardNumberInputInfo}
+          label="cardNumber1"
+          handleInput={handleInput(0)}
+          handleChange={handleOutFocusEvent}
+        />
+        <Input
+          {...cardNumberInputInfo}
+          label="cardNumber2"
+          handleInput={handleInput(1)}
+          handleChange={handleOutFocusEvent}
+        />
+        <Input
+          {...cardNumberInputInfo}
+          label="cardNumber3"
+          type="password"
+          handleInput={handleInput(2)}
+          handleChange={handleOutFocusEvent}
+        />
+        <Input
+          {...cardNumberInputInfo}
+          label="cardNumber4"
+          type="password"
+          handleInput={handleInput(3)}
+          handleChange={handleOutFocusEvent}
+        />
+      </Row>
     </InputContainer>
   );
 };
+
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+`;

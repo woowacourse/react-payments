@@ -7,10 +7,15 @@ interface CardProps {
 }
 
 export const CardItem = ({ card }: CardProps) => {
-  const hideNumbers = (numbers: string): string => {
-    const hiddenNumbers =
-      numbers.slice(0, 8) + "●".repeat(numbers.slice(8).length);
-    return (hiddenNumbers.match(/\d{1,4}|●{1,4}/g) ?? []).join("   ");
+  const hideNumbers = (numbers: string[]): string => {
+    return numbers
+      .map((number, index) => {
+        if (index === 2 || index === 3) {
+          return "●".repeat(number.length);
+        }
+        return number;
+      })
+      .join("  ");
   };
 
   return (

@@ -1,5 +1,5 @@
 export interface CardType {
-  numbers: string;
+  numbers: string[];
   expiryDate: string;
   owner?: string;
   color: string;
