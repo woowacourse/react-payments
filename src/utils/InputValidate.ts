@@ -1,5 +1,5 @@
 export const isInputNumber = (inputValue: string, maxLength: number) => {
-  const numberRegex = new RegExp(`/^\\d{0,${maxLength}}$/`);
+  const numberRegex = new RegExp(`^\\d{0,${maxLength}}$`);
   return !numberRegex.test(inputValue);
 };
 
