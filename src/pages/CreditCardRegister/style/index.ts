@@ -125,9 +125,9 @@ export const PasswordBox = styled.div`
 export const ErrorMessage = styled.div`
   font-size: 12px;
   position: absolute;
-  bottom: -14px;
-  font-weight: 700;
-  color: rgba(255, 100, 100);
+  bottom: -16px;
+  font-weight: 500;
+  color: rgba(255, 50, 50, 0.8);
 `;
 
 export const CVCInputLayout = styled.div`
