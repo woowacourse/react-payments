@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import './FormCardAdd.css';
 import { CardType, FormCardAddProps } from '../type';
 import AddCardNumberInput from './AddCardNumberInput';
+import AddCardExpireDateInput from './AddCardExpireDateInput';
 
 const FormCardAdd = ({
   cardNumber,
@@ -48,16 +49,7 @@ const FormCardAdd = ({
   return (
     <form className="add-card-form" onSubmit={onSubmit}>
       <AddCardNumberInput cardNumber={cardNumber} />
-      <div>
-        <span className="form-label">만료일</span>
-        <input
-          className="input-box card-expired"
-          value={cardExpire.value}
-          onChange={cardExpire.onChange}
-          name="expire"
-          required
-        />
-      </div>
+      <AddCardExpireDateInput cardExpire={cardExpire} />
       <div>
         <div className="card-owner-container-header">
           <span className="form-label">카드 소유자 이름(선택)</span>
