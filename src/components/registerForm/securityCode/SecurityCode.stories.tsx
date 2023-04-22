@@ -1,10 +1,10 @@
-import type { Meta } from "@storybook/react";
-import React, { useRef } from "react";
-import SecurityCode from ".";
+import type { Meta } from '@storybook/react';
+import React, { useRef } from 'react';
+import SecurityCode from './SecurityCode';
 
 const securityCode = {
   component: SecurityCode,
-  title: "SecurityCode",
+  title: 'SecurityCode',
 } satisfies Meta<typeof SecurityCode>;
 
 export default securityCode;

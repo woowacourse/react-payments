@@ -1,10 +1,10 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
-import ExpireDate from ".";
+import type { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
+import ExpireDate from './ExpireDate';
 
 const expireDate = {
   component: ExpireDate,
-  title: "ExpireDate Input",
+  title: 'ExpireDate Input',
 } satisfies Meta<typeof ExpireDate>;
 
 export default expireDate;

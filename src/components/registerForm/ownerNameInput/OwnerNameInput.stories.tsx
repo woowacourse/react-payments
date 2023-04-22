@@ -1,10 +1,10 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
-import OwnerNameInput from ".";
+import type { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
+import OwnerNameInput from './OwnerName';
 
 const ownerNameInput = {
   component: OwnerNameInput,
-  title: "OwnerNameInput",
+  title: 'OwnerNameInput',
 } satisfies Meta<typeof OwnerNameInput>;
 
 export default ownerNameInput;

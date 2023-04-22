@@ -19,8 +19,10 @@ export interface CardNumberObj {
 interface Props {}
 
 export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
+  // cardInput 상태 (외부)
   const [cardInput, setCardInput] = useContext(InputValuesContext);
 
+  // cardError 상태 (내부)
   const [cardError, setCardError] = useState({
     isError: false,
     message: '',
@@ -31,21 +33,22 @@ export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
   const thirdInputRef = useRef<HTMLInputElement>(null);
   const fourthInputRef = useRef<HTMLInputElement>(null);
 
-  const { nextInputFocus } = useAutoFocus({
-    initialRefs: [firstInputRef, secondInputRef, thirdInputRef, fourthInputRef],
+  // auto-focus
+  const nextInputFocus = useAutoFocus({
+    refs: [firstInputRef, secondInputRef, thirdInputRef, fourthInputRef],
     maxLength: 4,
   });
 
-  const cardChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    const value = event.currentTarget.value as string;
-    const name = event.currentTarget.dataset['order'] as keyof CardNumberObj;
-    const idx = event.currentTarget.dataset['index'];
-    if (!name) return;
+  const onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+    const inputValue = event.currentTarget.value as string;
+    const order = event.currentTarget.dataset['order'] as keyof CardNumberObj;
+    const inputIndex = event.currentTarget.dataset['index'];
+    if (!order) return;
 
-    if (!ONLY_NUMBER_REGEXP.test(value)) return;
+    if (!ONLY_NUMBER_REGEXP.test(inputValue)) return;
 
     try {
-      if (value.length !== 4) {
+      if (inputValue.length !== 4) {
         throw new Error(`4글자를 입력해 주세요`);
       }
 
@@ -64,10 +67,10 @@ export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
       if (!setCardInput) return;
       setCardInput((prev) => ({
         ...prev,
-        cardNumbers: { ...prev.cardNumbers, [name]: value },
+        cardNumbers: { ...prev.cardNumbers, [order]: inputValue },
       }));
     }
-    nextInputFocus(Number(idx));
+    nextInputFocus(Number(inputIndex));
   };
 
   return (
@@ -78,7 +81,7 @@ export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
           data-order="first"
           data-index="0"
           value={cardInput.cardNumbers['first']}
-          onChange={cardChange}
+          onChange={onChange}
           maxLength={4}
           customInputStyle={CardNumberInput}
           inputmode="numeric"
@@ -89,7 +92,7 @@ export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
           data-order="second"
           data-index="1"
           value={cardInput.cardNumbers['second']}
-          onChange={cardChange}
+          onChange={onChange}
           maxLength={4}
           customInputStyle={CardNumberInput}
           inputmode="numeric"
@@ -101,7 +104,7 @@ export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
           data-order="third"
           data-index="2"
           value={cardInput.cardNumbers['third']}
-          onChange={cardChange}
+          onChange={onChange}
           maxLength={4}
           customInputStyle={CardNumberInput}
           inputmode="numeric"
@@ -115,7 +118,7 @@ export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
           data-order="fourth"
           data-index="3"
           value={cardInput.cardNumbers['fourth']}
-          onChange={cardChange}
+          onChange={onChange}
           maxLength={4}
           customInputStyle={CardNumberInput}
           inputmode="numeric"

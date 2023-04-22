@@ -5,11 +5,11 @@ import { InputValuesContext } from '../InputValueContext';
 
 import { useNavigate } from 'react-router-dom';
 import useCardList from '../../../hooks/useCardList';
-import { CardNumber } from '../cardNumber';
-import ExpireDate from '../expireDate';
-import OwnerNameInput from '../ownerNameInput';
-import SecurityCode from '../securityCode';
-import CardPassword from '../cardPassword';
+import { CardNumber } from '../cardNumber/CardNumber';
+import ExpireDate from '../expireDate/ExpireDate';
+import OwnerNameInput from '../ownerNameInput/OwnerName';
+import SecurityCode from '../securityCode/SecurityCode';
+import CardPassword from '../cardPassword/CardPassword';
 
 const objectValueToString = (obj: { [key: string]: string }) => {
   return Object.values(obj).reduce((acc, cur) => acc + cur, '');

@@ -1,10 +1,10 @@
-import { Meta } from "@storybook/react";
-import React, { useRef } from "react";
-import { CardNumber } from ".";
+import { Meta } from '@storybook/react';
+import React, { useRef } from 'react';
+import { CardNumber } from './CardNumber';
 
 const cardNumber = {
   component: CardNumber,
-  title: "Card Number Input",
+  title: 'Card Number Input',
 } satisfies Meta<typeof CardNumber>;
 
 export default cardNumber;

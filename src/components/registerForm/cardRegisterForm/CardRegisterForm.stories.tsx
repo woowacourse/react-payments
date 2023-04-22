@@ -1,10 +1,10 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
-import CardRegisterForm from ".";
+import type { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
+import CardRegisterForm from './CardRegisterForm';
 
 const cardRegister = {
   component: CardRegisterForm,
-  title: "CardRegisterForm Input",
+  title: 'CardRegisterForm Input',
 } satisfies Meta<typeof CardRegisterForm>;
 
 export default cardRegister;

@@ -21,8 +21,8 @@ function CardPassword() {
   const firstInputRef = useRef<HTMLInputElement>(null);
   const secondInputRef = useRef<HTMLInputElement>(null);
 
-  const { nextInputFocus } = useAutoFocus({
-    initialRefs: [firstInputRef, secondInputRef],
+  const nextInputFocus = useAutoFocus({
+    refs: [firstInputRef, secondInputRef],
     maxLength: 1,
   });
 

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { CardNumberObj } from '../registerForm/cardNumber';
+import { CardNumberObj } from '../registerForm/cardNumber/CardNumber';
 
 interface Props {
   cardNumber: CardNumberObj;
