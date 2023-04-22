@@ -10,15 +10,8 @@ import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import "./cardInputForm.css";
+import { CreditCard } from "../../../type";
 
-interface CreditCard {
-  name?: string;
-  date?: string;
-  bank?: string;
-  number?: number[];
-  securityCode?: number;
-  password?: number;
-}
 interface Props {
   addNewCard: (card: CreditCard) => void;
 }

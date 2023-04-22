@@ -1,13 +1,5 @@
+import { CreditCard } from "../../type";
 import styles from "./CardPreview.module.css";
-
-interface CreditCard {
-  name?: string;
-  date?: string;
-  bank?: string;
-  number?: number[];
-  securityCode?: number;
-  password?: number;
-}
 
 interface Props {
   card: CreditCard;
