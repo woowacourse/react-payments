@@ -12,23 +12,22 @@ import CreditCardContext from '../../../contexts/InputValueContext';
 interface Props {}
 
 export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
-  // cardInput 상태 (외부)
   const [creditCardInfo, setCreditCardInfo] = useContext(CreditCardContext);
-
-  // cardError 상태 (내부)
   const [cardError, setCardError] = useState({
     isError: false,
     message: '',
   });
 
-  const firstInputRef = useRef<HTMLInputElement>(null);
-  const secondInputRef = useRef<HTMLInputElement>(null);
-  const thirdInputRef = useRef<HTMLInputElement>(null);
-  const fourthInputRef = useRef<HTMLInputElement>(null);
-
   // auto-focus
+  const refs = [
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+  ];
+
   const nextInputFocus = useAutoFocus({
-    refs: [firstInputRef, secondInputRef, thirdInputRef, fourthInputRef],
+    refs: refs,
     maxLength: 4,
   });
 
@@ -64,6 +63,7 @@ export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
     } finally {
       if (!setCreditCardInfo) return;
 
+      console.log(refs[3].current?.value);
       const newValue = [...creditCardInfo.cardNumber];
       newValue[inputIndex] = enteredNumber;
 
@@ -84,7 +84,7 @@ export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
           maxLength={4}
           customInputStyle={CardNumberInput}
           inputmode="numeric"
-          ref={firstInputRef}
+          ref={refs[0]}
         />
         <p>-</p>
         <Input
@@ -95,7 +95,7 @@ export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
           maxLength={4}
           customInputStyle={CardNumberInput}
           inputmode="numeric"
-          ref={secondInputRef}
+          ref={refs[1]}
         />
         <p>-</p>
 
@@ -109,7 +109,7 @@ export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
           inputmode="numeric"
           type={'password'}
           placeholder="●●●●"
-          ref={thirdInputRef}
+          ref={refs[2]}
         />
         <p>-</p>
 
@@ -123,7 +123,7 @@ export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
           inputmode="numeric"
           type={'password'}
           placeholder="●●●●"
-          ref={fourthInputRef}
+          ref={refs[3]}
         />
       </CardNumberInputContainer>
       {cardError?.isError && <ErrorSpan>{cardError?.message}</ErrorSpan>}
