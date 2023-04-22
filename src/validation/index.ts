@@ -4,7 +4,7 @@ export const areValidInfo = (info: any) => {
   const { month, year, code, password1, password2 } = info;
 
   const cardNumbers = Array.from(
-    { length: 4 },
+    { length: LENGTH.EACH_CARD_NUMBER },
     (_, index) => info[`number${index + 1}`]
   );
 
