@@ -4,7 +4,7 @@ interface Props {
 }
 
 const useAutoFocus = ({ refs, maxLength }: Props) => {
-  const nextInputFocus = (index = 0) => {
+  const focusNext = (index = 0) => {
     if (index === refs.length - 1) return;
 
     if (refs[index].current?.value.length === maxLength) {
@@ -12,7 +12,7 @@ const useAutoFocus = ({ refs, maxLength }: Props) => {
     }
   };
 
-  return nextInputFocus;
+  return { focusNext };
 };
 
 export default useAutoFocus;

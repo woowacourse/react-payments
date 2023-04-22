@@ -13,12 +13,10 @@ function CardPassword() {
   const [passwordError, setPasswordError] = useState(false);
   const [creditCardInfo, setCreditCardInfo] = useContext(CreditCardContext);
 
-  const firstInputRef = useRef<HTMLInputElement>(null);
-  const secondInputRef = useRef<HTMLInputElement>(null);
+  const refs = [useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null)];
 
-  // type guard
-  const nextInputFocus = useAutoFocus({
-    refs: [firstInputRef, secondInputRef],
+  const { focusNext } = useAutoFocus({
+    refs: refs,
     maxLength: 1,
   });
 
@@ -49,7 +47,7 @@ function CardPassword() {
       setCreditCardInfo('password', newValue);
 
       // focus 조정
-      nextInputFocus(Number(inputIndex));
+      focusNext(Number(inputIndex));
     }
   };
 
@@ -66,7 +64,7 @@ function CardPassword() {
           inputmode="numeric"
           type="password"
           customInputStyle={PasswordInput}
-          ref={firstInputRef}
+          ref={refs[0]}
         />
         <Input
           data-order="second"
@@ -77,7 +75,7 @@ function CardPassword() {
           inputmode="numeric"
           type="password"
           customInputStyle={PasswordInput}
-          ref={secondInputRef}
+          ref={refs[1]}
         />
         <DotParagraph>•</DotParagraph>
         <DotParagraph>•</DotParagraph>

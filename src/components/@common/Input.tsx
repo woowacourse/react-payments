@@ -1,13 +1,14 @@
-import React, { forwardRef } from "react";
-import styled, { CSSProp } from "styled-components";
+import React, { forwardRef } from 'react';
+import styled, { CSSProp } from 'styled-components';
 
 interface Props extends StyleInputProps {
   value?: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
+  onBlur?: React.FocusEventHandler<HTMLInputElement>;
   maxLength?: number;
   placeholder?: string;
   type?: string;
-  inputmode?: React.HTMLAttributes<HTMLLIElement>["inputMode"];
+  inputmode?: React.HTMLAttributes<HTMLLIElement>['inputMode'];
 }
 
 interface StyleInputProps {
@@ -16,13 +17,13 @@ interface StyleInputProps {
 
 const Input = forwardRef<HTMLInputElement, Props>(function (
   { value, placeholder, onChange, inputmode, ...props }: Props,
-  ref,
+  ref
 ) {
   return (
     <InputStyle
       value={value}
       onChange={onChange}
-      inputMode={inputmode ?? "none"}
+      inputMode={inputmode ?? 'none'}
       placeholder={placeholder}
       ref={ref}
       {...props}
@@ -33,7 +34,7 @@ const Input = forwardRef<HTMLInputElement, Props>(function (
 export default Input;
 
 const InputStyle = styled.input<StyleInputProps>`
-  width: ${(props) => props.width ?? "100%"};
+  width: ${(props) => props.width ?? '100%'};
   height: 45px;
 
   background-color: #ecebf1;

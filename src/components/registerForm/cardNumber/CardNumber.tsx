@@ -6,15 +6,14 @@ import useAutoFocus from '../../../hooks/useAutoFocus';
 import FormLabel from '../../@common/FormLabel';
 import Input from '../../@common/Input';
 import ErrorSpan from '../../@common/ErrorSpan';
-import { ONLY_NUMBER_REGEXP } from '../../../utils/regexp';
 import CreditCardContext from '../../../contexts/InputValueContext';
 
 interface Props {}
 
 export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
   const [creditCardInfo, setCreditCardInfo] = useContext(CreditCardContext);
-  const [cardError, setCardError] = useState({
-    isError: false,
+  const [validStatus, setValidStatus] = useState({
+    isValid: false,
     message: '',
   });
 
@@ -26,50 +25,47 @@ export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
     useRef<HTMLInputElement>(null),
   ];
 
-  const nextInputFocus = useAutoFocus({
+  const { focusNext } = useAutoFocus({
     refs: refs,
     maxLength: 4,
   });
 
-  const onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+  const _onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     const enteredNumber = event.currentTarget.value as string;
     const inputIndex = Number(event.currentTarget.dataset['index']);
 
-    // type guard
-    if (Number.isNaN(inputIndex)) return;
-
-    // 숫자가 아니면 입력받지 않는다.
-    if (!ONLY_NUMBER_REGEXP.test(enteredNumber)) return;
-
-    try {
-      // validation1. 4글자인지 확인하기
-      // FIXME blur 되었을 때 (border처리 및 메세지 출력 및 focus 유지)
-      if (enteredNumber.length !== 4) {
-        throw new Error(`4글자를 입력해 주세요`);
-      }
-
-      // validation 통과하면 에러메세지 없애기
-      setCardError({
-        isError: false,
-        message: '',
+    // 숫자 외 입력 방지 그리고 오류 메세지 렌더링
+    if (isNaN(Number(enteredNumber))) {
+      return setValidStatus({
+        isValid: false,
+        message: '숫자만 입력 가능합니다.',
       });
-    } catch (error) {
-      if (error instanceof Error) {
-        setCardError({
-          isError: true,
-          message: error.message,
-        });
-      }
-    } finally {
-      if (!setCreditCardInfo) return;
-
-      console.log(refs[3].current?.value);
-      const newValue = [...creditCardInfo.cardNumber];
-      newValue[inputIndex] = enteredNumber;
-
-      setCreditCardInfo('cardNumber', newValue);
     }
-    nextInputFocus(Number(inputIndex));
+
+    const newCardNumber = [...creditCardInfo.cardNumber];
+    newCardNumber[inputIndex] = enteredNumber;
+
+    if (!setCreditCardInfo) return;
+
+    setCreditCardInfo('cardNumber', newCardNumber);
+    setValidStatus({
+      isValid: true,
+      message: '',
+    });
+    focusNext(inputIndex);
+  };
+
+  const _onBlur: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+    const enteredNumber = event.currentTarget.value as string;
+
+    console.log(enteredNumber);
+
+    if (enteredNumber.length !== 4) {
+      return setValidStatus({
+        isValid: false,
+        message: '4글자를 모두 입력해주세요.',
+      });
+    }
   };
 
   return (
@@ -80,7 +76,8 @@ export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
           data-order="first"
           data-index="0"
           value={creditCardInfo.cardNumber[0]}
-          onChange={onChange}
+          onChange={_onChange}
+          onBlur={_onBlur}
           maxLength={4}
           customInputStyle={CardNumberInput}
           inputmode="numeric"
@@ -91,7 +88,8 @@ export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
           data-order="second"
           data-index="1"
           value={creditCardInfo.cardNumber[1]}
-          onChange={onChange}
+          onChange={_onChange}
+          onBlur={_onBlur}
           maxLength={4}
           customInputStyle={CardNumberInput}
           inputmode="numeric"
@@ -103,7 +101,8 @@ export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
           data-order="third"
           data-index="2"
           value={creditCardInfo.cardNumber[2]}
-          onChange={onChange}
+          onChange={_onChange}
+          onBlur={_onBlur}
           maxLength={4}
           customInputStyle={CardNumberInput}
           inputmode="numeric"
@@ -117,7 +116,8 @@ export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
           data-order="fourth"
           data-index="3"
           value={creditCardInfo.cardNumber[3]}
-          onChange={onChange}
+          onChange={_onChange}
+          onBlur={_onBlur}
           maxLength={4}
           customInputStyle={CardNumberInput}
           inputmode="numeric"
@@ -126,7 +126,7 @@ export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
           ref={refs[3]}
         />
       </CardNumberInputContainer>
-      {cardError?.isError && <ErrorSpan>{cardError?.message}</ErrorSpan>}
+      {!validStatus.isValid && <ErrorSpan>{validStatus.message}</ErrorSpan>}
     </div>
   );
 });
