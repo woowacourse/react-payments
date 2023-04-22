@@ -9,7 +9,7 @@ const AppBar = ({ title, children }: AppBarProps) => {
   return (
     <Div>
       {children && children}
-      <h1>{title}</h1>
+      <H1>{title}</H1>
     </Div>
   );
 };
@@ -29,12 +29,12 @@ const Div = styled.div`
   a {
     text-decoration: none;
   }
+`;
 
-  h1 {
-    margin-left: 10px;
-    font-size: 16px;
-    font-weight: 700;
-  }
+const H1 = styled.h1`
+  margin-left: 10px;
+  font-size: 16px;
+  font-weight: 700;
 `;
 
 export default AppBar;
