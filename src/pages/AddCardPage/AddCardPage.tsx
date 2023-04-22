@@ -11,13 +11,7 @@ import { Container } from "../../components/common";
 import { useState } from "react";
 import { Card, CardExpirationDate, CardNumber, CardPassword } from "../../types";
 import { useNavigate } from "react-router-dom";
-import {
-  isCapitalAlphabetic,
-  isNumeric,
-  isFulfilledObject,
-  isFulfilledString,
-  isValidMonth,
-} from "../../validator/Validator";
+import { isAlphabetic, isNumeric, isFulfilledObject, isFulfilledString, isValidMonth } from "../../validator/Validator";
 
 type AddCardPageProps = {
   onSubmit: (card: Card) => void;
@@ -69,9 +63,10 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
   const handleOwnerName = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.value;
 
-    if (!isCapitalAlphabetic(name)) return;
+    if (!isAlphabetic(name)) return;
+    const upperCaseName = name.toUpperCase();
 
-    setOwnerName(name);
+    setOwnerName(upperCaseName);
   };
 
   const handleSecurityCode = (e: React.ChangeEvent<HTMLInputElement>) => {
