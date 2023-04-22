@@ -9,7 +9,7 @@ interface ExpirationDateFormat {
 }
 
 interface Card {
-  cardNumber: '';
+  cardNumber: string;
   expirationDate: ExpirationDateFormat;
   ownerName?: string;
   securityCode: string;
