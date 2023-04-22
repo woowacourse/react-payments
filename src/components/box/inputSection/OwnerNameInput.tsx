@@ -1,20 +1,20 @@
-import type { InputStateProps } from '../../../types';
+import type { CardType } from '../../../types';
 
-import InputBox, { InputType } from '../../common/InputBox';
 import InputSectionTemplate from '../../template/InputSectionTemplate';
+import InputBox from '../../common/InputBox';
+import Input from '../../common/Input';
 
-const OwnerNameInput = (props: InputStateProps) => {
-  const inputs: InputType[] = [
-    { textType: 'text', maxLength: 30, placeholder: '카드에 표시된 이름과 동일하게 입력하세요.' },
-  ];
+interface Props {
+  ownerName: CardType['ownerName'];
+  setOwnerName: (value: CardType['ownerName']) => void;
+}
+
+const OwnerNameInput = ({ ownerName, setOwnerName }: Props) => {
   return (
-    <InputSectionTemplate
-      label="카드 소유자 이름(선택)"
-      isCountLength
-      inputValues={props.inputValues as string}
-      maxLength={inputs[0].maxLength}
-    >
-      <InputBox inputs={inputs} align="left" isFullWidth {...props} />
+    <InputSectionTemplate label="카드 소유자 이름(선택)" countLength={ownerName.length} maxLength={30}>
+      <InputBox align="left" isFullWidth>
+        <Input textType="string" value={ownerName} setValue={setOwnerName} length={30} textAlign="left" />
+      </InputBox>
     </InputSectionTemplate>
   );
 };

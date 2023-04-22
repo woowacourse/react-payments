@@ -1,18 +1,29 @@
-import type { InputStateProps } from '../../../types';
+import type { CardType } from '../../../types';
 
-import InputBox, { InputType } from '../../common/InputBox';
 import InputSectionTemplate from '../../template/InputSectionTemplate';
+import InputBox from '../../common/InputBox';
+import Input from '../../common/Input';
 
-const CardNumberInput = (props: InputStateProps) => {
-  const inputs: InputType[] = [
-    { textType: 'number', maxLength: 4, placeholder: '1234', required: true },
-    { textType: 'number', maxLength: 4, placeholder: '5678', required: true },
-    { textType: 'number', maxLength: 4, placeholder: '∙∙∙∙', required: true, textSecurity: true },
-    { textType: 'number', maxLength: 4, placeholder: '∙∙∙∙', required: true, textSecurity: true },
-  ];
+interface Props {
+  cardNumber: CardType['cardNumber'];
+  setCardNumber: (index: number) => (value: CardType['cardNumber'][number]) => void;
+}
+
+const CardNumberInput = ({ cardNumber, setCardNumber }: Props) => {
   return (
     <InputSectionTemplate label="카드 번호">
-      <InputBox inputs={inputs} align="center" separator="-" isFullWidth {...props} />
+      <InputBox align="center" separator="-" isFullWidth>
+        {cardNumber.map((value, index) => (
+          <Input
+            textType="number"
+            value={value}
+            setValue={setCardNumber(index)}
+            length={4}
+            required
+            textSecurity={index >= 2}
+          />
+        ))}
+      </InputBox>
     </InputSectionTemplate>
   );
 };

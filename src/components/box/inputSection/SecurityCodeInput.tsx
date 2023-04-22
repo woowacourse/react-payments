@@ -1,14 +1,28 @@
-import type { InputStateProps } from '../../../types';
+import type { CardType } from '../../../types';
 import styled from 'styled-components';
 
-import InputBox, { InputType } from '../../common/InputBox';
 import InputSectionTemplate from '../../template/InputSectionTemplate';
+import InputBox from '../../common/InputBox';
+import Input from '../../common/Input';
 
-const SecurityCodeInput = (props: InputStateProps) => {
-  const inputs: InputType[] = [{ textType: 'number', maxLength: 3, required: true, textSecurity: true }];
+interface Props {
+  securityCode: CardType['securityCode'];
+  setSecurityCode: (securityCode: CardType['securityCode']) => void;
+}
+
+const SecurityCodeInput = ({ securityCode, setSecurityCode }: Props) => {
   return (
     <InputSectionTemplate label="보안 코드(CVC/CVV)">
-      <InputBox inputs={inputs} align="center" {...props} />
+      <InputBox align="center">
+        <Input
+          textType="number"
+          value={securityCode}
+          setValue={setSecurityCode}
+          length={3}
+          required
+          textSecurity
+        />
+      </InputBox>
       <HelpButton>
         <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="13.5" cy="13.5" r="13" fill="white" stroke="#BABABA" />

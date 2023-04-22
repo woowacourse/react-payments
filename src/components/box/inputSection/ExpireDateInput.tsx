@@ -1,16 +1,29 @@
-import type { InputStateProps } from '../../../types';
+import type { CardType } from '../../../types';
 
-import InputBox, { InputType } from '../../common/InputBox';
 import InputSectionTemplate from '../../template/InputSectionTemplate';
+import InputBox from '../../common/InputBox';
+import Input from '../../common/Input';
 
-const ExpireDateInput = (props: InputStateProps) => {
-  const inputs: InputType[] = [
-    { textType: 'number', maxLength: 2, placeholder: 'MM', required: true },
-    { textType: 'number', maxLength: 2, placeholder: 'YY', required: true },
-  ];
+interface Props {
+  expireDate: CardType['expireDate'];
+  setExpireDateIndex: (index: number) => (value: CardType['expireDate'][number]) => void;
+}
+
+const ExpireDateInput = ({ expireDate, setExpireDateIndex }: Props) => {
   return (
     <InputSectionTemplate label="만료일">
-      <InputBox inputs={inputs} align="center" separator="/" {...props} />
+      <InputBox separator="/">
+        {expireDate.map((value, index) => (
+          <Input
+            textType="number"
+            value={value}
+            setValue={setExpireDateIndex(index)}
+            length={2}
+            textAlign="center"
+            required
+          />
+        ))}
+      </InputBox>
     </InputSectionTemplate>
   );
 };
