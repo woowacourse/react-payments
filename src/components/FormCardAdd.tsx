@@ -1,6 +1,5 @@
 import React from 'react';
-import InputCardData from './InputCardData';
-import InputCardPassword from './InputCardPassword';
+
 import passwordDotImg from '../asset/password_dot.png';
 import cvcInfo from '../asset/cvc_info.png';
 import { fetchData } from '../utils/fetchData';
@@ -50,46 +49,53 @@ const FormCardAdd = ({
       <div>
         <span className="form-label">카드 번호</span>
         <div className="card-number-input-container">
-          <InputCardData
+          <input
+            className="input-box card-number"
             value={cardNumber.value.first}
             onChange={cardNumber.onChange}
-            className="card-number"
             name="first"
+            required
           />
           <span>-</span>
-          <InputCardData
+          <input
+            className="input-box card-number"
             value={cardNumber.value.second}
             onChange={cardNumber.onChange}
-            className="card-number"
             name="second"
+            required
           />
           <span>-</span>
-          <InputCardPassword
+          <input
+            className="input-password-container card-number"
+            type="password"
+            maxLength={4}
+            minLength={4}
             value={cardNumber.value.third}
             onChange={cardNumber.onChange}
             name="third"
-            minDataLength={4}
-            maxDataLength={4}
-            passwordType="card-number"
+            required
           />
           <span>-</span>
-          <InputCardPassword
+          <input
+            className="input-password-container card-number"
+            type="password"
+            maxLength={4}
+            minLength={4}
             value={cardNumber.value.fourth}
             onChange={cardNumber.onChange}
             name="fourth"
-            minDataLength={4}
-            maxDataLength={4}
-            passwordType="card-number"
+            required
           />
         </div>
       </div>
       <div>
         <span className="form-label">만료일</span>
-        <InputCardData
+        <input
+          className="input-box card-expired"
           value={cardExpire.value}
           onChange={cardExpire.onChange}
-          className="card-expired"
           name="expire"
+          required
         />
       </div>
       <div>
@@ -97,22 +103,24 @@ const FormCardAdd = ({
           <span className="form-label">카드 소유자 이름(선택)</span>
           <span className="form-label">{cardOwner.value.length}/30</span>
         </div>
-        <InputCardData
+        <input
+          className="input-box card-owner"
           value={cardOwner.value}
           onChange={cardOwner.onChange}
-          className="card-owner"
           name="owner"
         />
       </div>
       <div className="card-security-code-container">
         <span className="form-label">보안코드(CVC/CVV)</span>
         <div className="card-security-code-box">
-          <InputCardPassword
+          <input
+            className="input-password-container password-cvc"
+            type="password"
+            maxLength={3}
+            minLength={3}
             value={securityCode.value}
             onChange={securityCode.onChange}
-            maxDataLength={3}
-            minDataLength={3}
-            passwordType="password-cvc"
+            required
           />
           <button type="button" className="cvc-info-button">
             <img src={cvcInfo} alt="cvc_info" />
@@ -126,19 +134,23 @@ const FormCardAdd = ({
       <div className="card-password-container">
         <span className="form-label">카드 비밀번호</span>
         <div className="card-password-input-box">
-          <InputCardPassword
+          <input
+            className="input-password-container password-single"
+            type="password"
+            maxLength={1}
+            minLength={1}
             value={cardPassword1.value}
             onChange={cardPassword1.onChange}
-            maxDataLength={1}
-            minDataLength={1}
-            passwordType="password-single"
+            required
           />
-          <InputCardPassword
+          <input
+            className="input-password-container password-single"
+            type="password"
+            maxLength={1}
+            minLength={1}
             value={cardPassword2.value}
             onChange={cardPassword2.onChange}
-            maxDataLength={1}
-            minDataLength={1}
-            passwordType="password-single"
+            required
           />
           <img src={passwordDotImg} alt="비밀번호" />
           <img src={passwordDotImg} alt="비밀번호" />
