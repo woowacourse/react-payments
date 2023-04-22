@@ -1,12 +1,24 @@
 import styles from './style.module.css';
-import { ComponentPropsWithoutRef } from 'react';
+import { ComponentPropsWithRef, ForwardedRef, forwardRef } from 'react';
 
-interface InputProps extends ComponentPropsWithoutRef<'input'> {
+interface InputProps extends ComponentPropsWithRef<'input'> {
+  variant?: 'outline' | 'underline';
   isError?: boolean;
 }
 
-function Input({ isError = false, ...attributes }: InputProps) {
-  return <input className={`${styles.input} ${isError && styles.error}`} {...attributes} />;
+function Input(
+  { variant = 'outline', isError = false, ...attributes }: InputProps,
+  ref: ForwardedRef<HTMLInputElement>
+) {
+  const visualStyle = variant === 'outline' ? styles.outline : styles.underline;
+
+  return (
+    <input
+      ref={ref}
+      className={`${styles.input} ${visualStyle} ${isError ? styles.error : ''}`}
+      {...attributes}
+    />
+  );
 }
 
-export default Input;
+export default forwardRef(Input);
