@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  height: 500px;
+  flex-direction: column;
+  gap: 20px;
+  padding: 28px;
+  font-size: small;
+}
+
+.button {
+  display: flex;
+  justify-content: flex-end;
+}

@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  color: var(--grey-300);
+  font-size: 30px;
+  line-height: 100px;
+}
+
+.button:hover {
+  cursor: pointer;
+  color: var(--grey-500);
+}

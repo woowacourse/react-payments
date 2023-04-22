@@ -1,0 +1,30 @@
+:root {
+  --primary-color: #ec4a0a;
+  --lighten-color: #f6a88a;
+  --gold-color: #cbba64;
+  --purple-color: #ecebf1;
+  --grey-100: #eeeeee;
+  --grey-200: #e5e5e5;
+  --grey-300: #667085;
+  --grey-400: #344054;
+  --grey-500: #000000;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--grey-100);
+}
+
+ul,
+li {
+  list-style: none;
+}
