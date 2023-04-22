@@ -43,7 +43,7 @@ function CardAddForm({
   };
 
   return (
-    <form ref={formRef} className={styles.form} onSubmit={onSubmit} tabIndex={0}>
+    <form ref={formRef} className={styles.form} onSubmit={onSubmit}>
       <CardNumber
         onInputChange={onSingleInputFieldChange}
         changeInputValidation={handleValidationChange}
@@ -65,7 +65,7 @@ function CardAddForm({
         changeInputValidation={handleValidationChange}
         values={cardInformation.password}
       />
-      <Button id="submitButton" className={isFormComplete ? '' : 'hide'} primary>
+      <Button className="submit-button" disabled={!isFormComplete} primary>
         완료
       </Button>
     </form>
