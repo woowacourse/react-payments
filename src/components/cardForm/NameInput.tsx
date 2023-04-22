@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Input from '../common/Input';
 import InputBox from '../common/InputBox';
 import InputGroup from '../common/InputGroup';
-import { CardItemInfo } from '../../types/Card';
+import type { CardItemInfo } from '../../types/Card';
 
 interface NameInputProps {
   name: CardItemInfo['name'];

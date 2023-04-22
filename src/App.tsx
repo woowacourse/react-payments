@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import CardListPage from './components/pages/CardListPage';
 import CardRegistrationPage from './components/pages/CardRegistrationPage';
 import NotFoundPage from './components/pages/NotFoundPage';
-import { CardItemInfo } from './types/Card';
+import type { CardItemInfo } from './types/Card';
 
 function App() {
   const [cardList, setCardList] = useState<CardItemInfo[]>([]);

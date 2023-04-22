@@ -3,7 +3,7 @@ import Header from '../common/Header';
 import Title from '../common/Title';
 import AddCardButton from '../CardListPageComponents/AddCardButton';
 import CardList from '../CardListPageComponents/CardList';
-import { CardItemInfo } from '../../types/Card';
+import type { CardItemInfo } from '../../types/Card';
 
 interface CardListPageProps {
   cardList: CardItemInfo[];

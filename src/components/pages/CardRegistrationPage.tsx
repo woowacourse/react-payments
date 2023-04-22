@@ -1,11 +1,11 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from '../common/Header';
-import { LeftArrowIcon } from '../../assets/icons';
 import CardItem from '../common/CardItem';
 import CardForm from '../cardForm/CardForm';
-import { useState } from 'react';
-import { CardItemInfo } from '../../types/Card';
+import { LeftArrowIcon } from '../../assets/icons';
+import type { CardItemInfo } from '../../types/Card';
 
 interface CardRegistrationPageProps {
   addCardItem: (cardItem: CardItemInfo) => void;

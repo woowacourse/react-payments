@@ -3,7 +3,7 @@ import Input from '../common/Input';
 import InputBox from '../common/InputBox';
 import InputGroup from '../common/InputGroup';
 import InputSeparator from '../common/InputSeparator';
-import { CardItemInfo } from '../../types/Card';
+import type { CardItemInfo } from '../../types/Card';
 
 interface ExpirationDateInputProps {
   expirationDate: CardItemInfo['expirationDate'];

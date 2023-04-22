@@ -4,7 +4,7 @@ import Input from '../common/Input';
 import InputBox from '../common/InputBox';
 import InputGroup from '../common/InputGroup';
 import { DotIcon } from '../../assets/icons';
-import { Card } from '../../types/Card';
+import type { Card } from '../../types/Card';
 
 interface PasswordInputProps {
   password: Card['password'];
