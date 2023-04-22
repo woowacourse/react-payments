@@ -1,5 +1,5 @@
 import AddCardForm from 'components/Form/AddCardForm';
-import Header from 'components/common/Header/Header';
+import { Header } from 'components/common/';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { PageContainer } from 'components/style/PageContainer';

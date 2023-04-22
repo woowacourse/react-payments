@@ -5,7 +5,7 @@ type Props = {
   onClickBackButton?: () => void;
 };
 
-function Header({ text, onClickBackButton }: Props) {
+export function Header({ text, onClickBackButton }: Props) {
   return (
     <Container>
       {onClickBackButton ? (
@@ -26,4 +26,3 @@ const BackButton = styled.span`
   margin-right: 18px;
   cursor: pointer;
 `;
-export default Header;

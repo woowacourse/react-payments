@@ -11,8 +11,8 @@ import { Container } from 'components/style/InputContainer';
 import CardDB from 'db/Cards';
 import { Card } from 'components/common/Card/types';
 import { ValueAndOnChange } from 'components/Input/types';
-import { CreditCard } from 'components/common/Card/CreditCard';
 import { useCardFormValid } from 'hooks/useCardFormValid';
+import { CreditCard } from 'components/common';
 
 export type AddCardFormProps = {
   onSubmit: () => void;

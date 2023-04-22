@@ -1,9 +1,7 @@
-import { CreditCard } from 'components/common/Card/CreditCard';
-import Header from 'components/common/Header/Header';
 import { useNavigate } from 'react-router-dom';
 import CardDB from 'db/Cards';
 import styled from 'styled-components';
-import { Label } from 'components/common';
+import { CreditCard, Header, Label } from 'components/common';
 import { PageContainer } from 'components/style/PageContainer';
 
 function Home() {
