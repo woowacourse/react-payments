@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { UseInputProps } from "../hooks/useInput";
-import Input from "./Input";
+import Input from "../../common/Input";
+import { UseInputProps } from "../../../hooks/useInput";
 
 export interface PasswordInputProps {
   firstPassword: UseInputProps;

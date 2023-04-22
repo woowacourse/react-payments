@@ -1,17 +1,17 @@
 import React, { FormEvent, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useInput } from "../hooks/useInput";
-import Card from "./Card";
-import CardNumberInput from "./CardNumberInput";
-import CvcInput from "./CvcInput";
-import ExpiracyInput from "./ExpiracyInput";
-import InformationButton from "./InformationButton";
-import InputField from "./InputField";
-import NextButton from "./NextButton";
-import OwnerInput from "./OwnerInput";
-import PasswordInput from "./PasswordInput";
-import PrevButton from "./PrevButton";
-import ToolTip from "./ToolTip";
+import PrevButton from "../components/common/PrevButton";
+import Card from "../components/card/Card";
+import InputField from "../components/common/InputField";
+import CardNumberInput from "../components/card/input/CardNumberInput";
+import ExpiracyInput from "../components/card/input/ExpiracyInput";
+import OwnerInput from "../components/card/input/OwnerInput";
+import CvcInput from "../components/card/input/CvcInput";
+import InformationButton from "../components/common/InformationButton";
+import ToolTip from "../components/common/ToolTip";
+import PasswordInput from "../components/card/input/PasswordInput";
+import NextButton from "../components/common/NextButton";
 
 interface AddCardPageProps {
   onSubmit: (event: FormEvent<HTMLFormElement>) => void;
@@ -79,7 +79,6 @@ export default function AddCardPage({ onSubmit, onClick }: AddCardPageProps) {
   };
 
   const yearValidate = (year: string) => {
-    const currentYear = new Date().getFullYear();
     return Number(year) >= 0;
   };
 
@@ -158,7 +157,7 @@ export default function AddCardPage({ onSubmit, onClick }: AddCardPageProps) {
           <InputField kind="expiracy">
             <ExpiracyInput year={year} month={month} />
           </InputField>
-          <InputField kind="owner" inputLength={`${0}/30`}>
+          <InputField kind="owner" inputLength={`${owner.value.length}/30`}>
             <OwnerInput owner={owner} />
           </InputField>
           <InputField kind="cvc">

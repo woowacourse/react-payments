@@ -1,8 +1,8 @@
 import React, { MouseEvent } from "react";
 import styled from "styled-components";
 import { CardInfo } from "../types";
-import AddCardButton from "./AddCardButton";
-import Card from "./Card";
+import Card from "../components/card/Card";
+import AddCardButton from "../components/card/button/AddCardButton";
 
 interface HomePageProps {
   cardList: CardInfo[];
@@ -44,11 +44,11 @@ export default function Homepage({ onClick, cardList }: HomePageProps) {
   return (
     <Page>
       <Title>보유카드</Title>
-      {cardList.length === 0 && (
+      {cardList?.length === 0 && (
         <AddInformation>새로운 카드를 등록해주세요.</AddInformation>
       )}
       <CardWrapper>
-        {cardList.map((card, index) => (
+        {cardList?.map((card, index) => (
           <Card
             key={`${card.owner}${index}`}
             owner={card.owner}

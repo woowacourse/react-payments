@@ -1,6 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-
-import NextButton from "../components/NextButton";
+import NextButton from "../../components/common/NextButton";
 
 const meta: Meta<typeof NextButton> = {
   component: NextButton,

@@ -1,6 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-
-import PrevButton from "../components/PrevButton";
+import PrevButton from "../../components/common/PrevButton";
 
 const meta: Meta<typeof PrevButton> = {
   component: PrevButton,
