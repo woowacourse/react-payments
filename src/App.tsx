@@ -11,7 +11,7 @@ function App() {
     setCurrentPage(page);
   };
 
-  const pageRoute: Record<string, React.ReactNode> = {
+  const pageRoute: Record<Page, React.ReactNode> = {
     list: <CardListPage navigate={navigate} />,
     register: <CardRegisterPage navigate={navigate} />,
   };
