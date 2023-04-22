@@ -61,8 +61,11 @@ const CardRegisterForm = ({ registerCard }: Props) => {
     event.preventDefault();
 
     if (!isValidExpiredDate(Number(expiredMonth), Number(expiredYear))) {
+      const expiredMonthInput = inputRefs[4];
+
       alert('유효한 만료일이 아닙니다. 다시 입력해주세요.');
-      inputRefs[4].current?.focus();
+      expiredMonthInput.current?.focus();
+
       return;
     }
 
