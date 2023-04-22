@@ -6,6 +6,7 @@ import { fetchData } from '../utils/fetchData';
 import { useNavigate } from 'react-router-dom';
 import './FormCardAdd.css';
 import { CardType, FormCardAddProps } from '../type';
+import AddCardNumberInput from './AddCardNumberInput';
 
 const FormCardAdd = ({
   cardNumber,
@@ -46,48 +47,7 @@ const FormCardAdd = ({
 
   return (
     <form className="add-card-form" onSubmit={onSubmit}>
-      <div>
-        <span className="form-label">카드 번호</span>
-        <div className="card-number-input-container">
-          <input
-            className="input-box card-number"
-            value={cardNumber.value.first}
-            onChange={cardNumber.onChange}
-            name="first"
-            required
-          />
-          <span>-</span>
-          <input
-            className="input-box card-number"
-            value={cardNumber.value.second}
-            onChange={cardNumber.onChange}
-            name="second"
-            required
-          />
-          <span>-</span>
-          <input
-            className="input-password-container card-number"
-            type="password"
-            maxLength={4}
-            minLength={4}
-            value={cardNumber.value.third}
-            onChange={cardNumber.onChange}
-            name="third"
-            required
-          />
-          <span>-</span>
-          <input
-            className="input-password-container card-number"
-            type="password"
-            maxLength={4}
-            minLength={4}
-            value={cardNumber.value.fourth}
-            onChange={cardNumber.onChange}
-            name="fourth"
-            required
-          />
-        </div>
-      </div>
+      <AddCardNumberInput cardNumber={cardNumber} />
       <div>
         <span className="form-label">만료일</span>
         <input

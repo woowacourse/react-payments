@@ -4,10 +4,12 @@
   height: 100%;
   justify-content: space-around;
 }
+
 .add-card-submit {
   display: flex;
   flex-direction: row-reverse;
 }
+
 .card-number-label {
   color: #525252;
   font-weight: 500;

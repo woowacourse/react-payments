@@ -34,3 +34,5 @@ export type FormCardAddProps = {
   cardPassword1: InputHook;
   cardPassword2: InputHook;
 };
+
+export type AddCardNumberInputProps = Pick<FormCardAddProps, 'cardNumber'>;
