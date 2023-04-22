@@ -3,10 +3,11 @@ import Input from '../common/Input';
 import InputBox from '../common/InputBox';
 import InputGroup from '../common/InputGroup';
 import InputSeparator from '../common/InputSeparator';
+import { CardItemInfo } from '../../types/Card';
 
 interface CardNumberInputProps {
-  cardNumber: string[];
-  setCardNumber: (cardNumber: string[]) => void;
+  cardNumber: CardItemInfo['cardNumber'];
+  setCardNumber: (cardNumber: CardItemInfo['cardNumber']) => void;
   errorMessage: string;
   setErrorMessage: (errorMessage: string) => void;
 }

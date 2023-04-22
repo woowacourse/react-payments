@@ -3,10 +3,11 @@ import Input from '../common/Input';
 import InputBox from '../common/InputBox';
 import InputGroup from '../common/InputGroup';
 import InputSeparator from '../common/InputSeparator';
+import { CardItemInfo } from '../../types/Card';
 
 interface ExpirationDateInputProps {
-  expirationDate: string[];
-  setExpirationDate: (expirationDate: string[]) => void;
+  expirationDate: CardItemInfo['expirationDate'];
+  setExpirationDate: (expirationDate: CardItemInfo['expirationDate']) => void;
   errorMessage: string;
   setErrorMessage: (errorMessage: string) => void;
 }

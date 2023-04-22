@@ -7,5 +7,5 @@ export interface CardItemInfo {
 
 export interface Card extends CardItemInfo {
   securityCode: string;
-  password: string;
+  password: string[];
 }

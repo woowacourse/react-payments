@@ -1,13 +1,14 @@
+import { useRef } from 'react';
 import styled from 'styled-components';
 import Input from '../common/Input';
 import InputBox from '../common/InputBox';
 import InputGroup from '../common/InputGroup';
 import { DotIcon } from '../../assets/icons';
-import { useRef } from 'react';
+import { Card } from '../../types/Card';
 
 interface PasswordInputProps {
-  password: string[];
-  setPassword: (password: string[]) => void;
+  password: Card['password'];
+  setPassword: (password: Card['password']) => void;
   errorMessage: string;
   setErrorMessage: (errorMessage: string) => void;
 }

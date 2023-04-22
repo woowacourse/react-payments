@@ -1,10 +1,11 @@
 import Input from '../common/Input';
 import InputBox from '../common/InputBox';
 import InputGroup from '../common/InputGroup';
+import { Card } from '../../types/Card';
 
 interface SecurityCodeInputProps {
-  securityCode: string;
-  setSecurityCode: (securityCode: string) => void;
+  securityCode: Card['securityCode'];
+  setSecurityCode: (securityCode: Card['securityCode']) => void;
   errorMessage: string;
   setErrorMessage: (errorMessage: string) => void;
 }

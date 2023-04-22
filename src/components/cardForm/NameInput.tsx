@@ -2,10 +2,11 @@ import styled from 'styled-components';
 import Input from '../common/Input';
 import InputBox from '../common/InputBox';
 import InputGroup from '../common/InputGroup';
+import { CardItemInfo } from '../../types/Card';
 
 interface NameInputProps {
-  name: string;
-  setName: (name: string) => void;
+  name: CardItemInfo['name'];
+  setName: (name: CardItemInfo['name']) => void;
   errorMessage: string;
   setErrorMessage: (errorMessage: string) => void;
 }
