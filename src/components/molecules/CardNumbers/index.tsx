@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 import CardInput from '../../atomics/CardInput';
-import CardInputMessage from '../../atomics/CardInputMessage';
+import ErrorMessage from '../../atomics/ErrorMessage';
+import Message from '../../atomics/Message';
 
 import { SBetweenStack, VStack } from '../../layout/flexbox';
 
@@ -11,7 +12,7 @@ const CardNumbers: React.FC = () => {
   return (
     <StyledCardNumbersWrapper>
       <StyledCardLabel>
-        <CardInputMessage type="title">카드 번호</CardInputMessage>
+        <Message type="label">카드 번호</Message>
         <StyledCardInputWrapper>
           {Array(4)
             .fill(0)
@@ -20,7 +21,7 @@ const CardNumbers: React.FC = () => {
             ))}
         </StyledCardInputWrapper>
       </StyledCardLabel>
-      <CardInputMessage type="error">총 16자리 카드 번호를 입력해주세요!!</CardInputMessage>
+      <ErrorMessage isError={true}>총 16자리 카드 번호를 입력해주세요!!</ErrorMessage>
     </StyledCardNumbersWrapper>
   );
 };
@@ -29,20 +30,12 @@ const CardNumbers: React.FC = () => {
 const StyledCardLabel = styled.label`
   ${VStack}
 
-  span + input {
+  span + p {
     margin-top: 8px;
   }
 `;
 
-const StyledCardNumbersWrapper = styled.article`
-  ${VStack}
-
-  label + span {
-    margin-top: 8px;
-  }
-`;
-
-const StyledCardInputWrapper = styled.span`
+const StyledCardInputWrapper = styled.p`
   ${SBetweenStack}
 
   width: 350px;
@@ -53,6 +46,16 @@ const StyledCardInputWrapper = styled.span`
   input + input {
     margin-left: 12px;
   }
+`;
+
+const StyledCardNumbersWrapper = styled.article`
+  ${VStack}
+
+  label + span {
+    margin-top: 8px;
+  }
+
+  margin-bottom: 8px;
 `;
 
 export default CardNumbers;
