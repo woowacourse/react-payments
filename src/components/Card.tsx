@@ -25,8 +25,8 @@ const Card = ({ cardType, cardNumber, cardOwner, expired }: CardProps) => {
         <div className="ic-chip"></div>
       </div>
       <div className="card-track-3">
-        <span>{`${cardNumber.first}`}</span>
-        <span>{`${cardNumber.second}`}</span>
+        <span>{cardNumber.first}</span>
+        <span>{cardNumber.second}</span>
         <span>{changeNumberToMask(cardNumber.third)}</span>
         <span>{changeNumberToMask(cardNumber.fourth)}</span>
       </div>
