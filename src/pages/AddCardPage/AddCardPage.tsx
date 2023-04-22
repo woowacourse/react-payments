@@ -169,7 +169,7 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
 
   return (
     <Container>
-      <AppBar title={"카드 추가"} leftChild={<Link to={PAGE.CARD_LIST}>〈</Link>} />
+      <AppBar title={"카드 추가"} children={<Link to={PAGE.CARD_LIST}>〈</Link>} />
       <CardPreview card={{ cardNumber, expirationDate, ownerName }} style={{ transition: "none", transform: "none" }} />
       <Form onSubmit={addCard}>
         <CardNumberInput

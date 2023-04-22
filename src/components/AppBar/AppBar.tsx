@@ -2,14 +2,14 @@ import styled from "styled-components";
 
 type AppBarProps = {
   title: string;
-  leftChild?: JSX.Element;
+  children?: JSX.Element;
 };
 
-const AppBar = ({ title, leftChild }: AppBarProps) => {
+const AppBar = ({ title, children }: AppBarProps) => {
   return (
     <Div>
-      {leftChild && leftChild}
-      <p>{title}</p>
+      {children && children}
+      <h1>{title}</h1>
     </Div>
   );
 };
@@ -25,13 +25,12 @@ const Div = styled.div`
   gap: 10px;
 
   font-size: 16px;
-  font-weight: 700;
 
   a {
     text-decoration: none;
   }
 
-  p {
+  h1 {
     margin-left: 10px;
     font-size: 16px;
     font-weight: 700;

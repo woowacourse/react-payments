@@ -5,7 +5,7 @@ import { PAGE } from "../../constant";
 const AddCardButton = () => {
   return (
     <Link to={PAGE.ADD_CARD}>
-      <Button>✚</Button>
+      <Button type="button">✚</Button>
     </Link>
   );
 };
@@ -15,13 +15,10 @@ const Button = styled.button`
   width: 208px;
 
   border: none;
-
+  border-radius: 5px;
   background-color: #e5e5e5;
 
-  border-radius: 5px;
-
   box-shadow: 5px 5px 5px #adadad;
-
   transition: all 0.3s ease;
 
   &:hover {
@@ -30,4 +27,5 @@ const Button = styled.button`
 
   cursor: pointer;
 `;
+
 export default AddCardButton;

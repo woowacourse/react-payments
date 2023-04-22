@@ -18,6 +18,6 @@ export const CardListPage = () => (
 export const AddCardPage = () => (
   <>
     <GlobalStyle />
-    <AppBar title="카드추가" leftChild={<Link to={PAGE.CARD_LIST}>〈</Link>}></AppBar>
+    <AppBar title="카드추가" children={<Link to={PAGE.CARD_LIST}>〈</Link>}></AppBar>
   </>
 );
