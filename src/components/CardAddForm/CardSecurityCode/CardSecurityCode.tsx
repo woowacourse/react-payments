@@ -36,7 +36,7 @@ function CardSecurityCode({ changeInputValidation, onInputChange, value }: CardS
       <Input
         type="password"
         id="securityCode"
-        data-name="securityCode"
+        name="securityCode"
         value={value}
         minLength={3}
         maxLength={4}

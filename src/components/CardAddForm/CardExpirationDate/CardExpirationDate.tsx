@@ -41,7 +41,7 @@ function CardExpirationDate({
       <Input
         type="text"
         id="expirationDate"
-        data-name="expirationDate"
+        name="expirationDate"
         value={expirationDate}
         placeholder="연/년도(MM/YY) 순서로 4자리 숫자를 입력해주세요"
         isError={isError}

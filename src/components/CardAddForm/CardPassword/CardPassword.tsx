@@ -45,7 +45,7 @@ function CardPassword({ changeInputValidation, onInputChange, values }: CardPass
             isError={isError}
             autoComplete="off"
             data-index={index}
-            data-name="password"
+            name="password"
             onChange={onInputChange}
           />
         ))}
