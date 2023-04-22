@@ -92,7 +92,7 @@ const CardRegisterForm = ({ registerCard }: Props) => {
       <form className={styles.form} onSubmit={handleSubmit}>
         <label>
           카드 번호
-          <div className={styles.inputContainer}>
+          <div className={`${styles.inputContainer} ${styles.cardNumber}`}>
             <Input
               type="text"
               minLength={4}
@@ -146,7 +146,7 @@ const CardRegisterForm = ({ registerCard }: Props) => {
 
         <label>
           만료일
-          <div className={styles.expirationDate}>
+          <div className={`${styles.inputContainer} ${styles.expirationDate}`}>
             <Input
               type="text"
               minLength={2}
@@ -177,7 +177,7 @@ const CardRegisterForm = ({ registerCard }: Props) => {
           <label>
             카드 소유자 이름(선택)
             <span className={styles.ownerNameLength}>{owner.length} / 20</span>
-            <div className={styles.ownerName}>
+            <div className={`${styles.inputContainer} ${styles.ownerName}`}>
               <Input
                 type="text"
                 maxLength={20}
@@ -194,7 +194,7 @@ const CardRegisterForm = ({ registerCard }: Props) => {
         <label>
           보안 코드(CVC/CVV)
           <div className={styles.cvcContainer}>
-            <div className={styles.cvc}>
+            <div className={`${styles.inputContainer} ${styles.cvc}`}>
               <Input
                 type="password"
                 minLength={3}
@@ -206,7 +206,6 @@ const CardRegisterForm = ({ registerCard }: Props) => {
                 ref={inputRefs[7]}
               />
             </div>
-
             <Tooltip>
               <TooltipButton tabIndex={12} />
             </Tooltip>
@@ -215,7 +214,7 @@ const CardRegisterForm = ({ registerCard }: Props) => {
 
         <label>
           카드 비밀번호
-          <div className={styles.cardPassword}>
+          <div className={`${styles.inputContainer} ${styles.cardPassword}`}>
             <Input
               type="password"
               minLength={1}
@@ -240,12 +239,9 @@ const CardRegisterForm = ({ registerCard }: Props) => {
             <p>﹒</p>
           </div>
         </label>
-
-        {isValidCardData && (
-          <button tabIndex={11} className={styles.submitButton}>
-            다음
-          </button>
-        )}
+        <div className={styles.submitButton}>
+          {isValidCardData && <button tabIndex={11}>다음</button>}
+        </div>
       </form>
     </>
   );
