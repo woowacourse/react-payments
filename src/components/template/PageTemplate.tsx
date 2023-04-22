@@ -12,7 +12,7 @@ interface Props {
 const PageTemplate = ({ children, title, onClickBack }: Props) => {
   return (
     <PageTemplateWrapper>
-      <Header title={title} onClickBack={onClickBack}></Header>
+      <Header title={title} onClickBack={onClickBack} />
       {children}
     </PageTemplateWrapper>
   );
