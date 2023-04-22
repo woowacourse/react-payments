@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 type Props = {
-  isVaild: boolean;
+  isValid: boolean;
 };
 
 export const CreditCardLayout = styled.div<Props>`
@@ -18,7 +18,7 @@ export const CreditCardLayout = styled.div<Props>`
   line-height: 14px;
   color: #ffffff;
   letter-spacing: 3px;
-  border: ${(props) => (props.isVaild ? '' : '2px solid red')};
+  border: ${(props) => (props.isValid ? '' : '2px solid red')};
 `;
 
 export const CreditCardICChip = styled.div`
