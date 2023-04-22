@@ -7,7 +7,7 @@ import {
 } from 'react';
 
 import { isNotAlphabet, isNotNumber } from '../../utils/validation';
-import type { Focus } from '../Input';
+import type { Focus } from '../common/Input';
 
 const useCardRegisterForm = (inputRefs: RefObject<Focus>[]) => {
   const [cardNumber1, setCardNumber1] = useState('');
