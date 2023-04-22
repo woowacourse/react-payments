@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function useCardNumber() {
+function useCardNumber() {
   const [cardNumberOrigin, setCardNumberOrigin] = useState("");
   const [cardNumberHidden, setCardNumberHidden] = useState("");
 
@@ -42,3 +42,5 @@ export default function useCardNumber() {
     changeCardNumber,
   };
 }
+
+export default useCardNumber;
