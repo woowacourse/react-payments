@@ -11,11 +11,11 @@ interface AddCardProps {
 }
 
 export const AddCard = ({ setCards }: AddCardProps) => {
-  const [cardInfo, setCardInfo] = useState<CardType>({
-    numbers: "",
+  const [newCard, setNewCard] = useState<CardType>({
+    numbers: [],
     owner: "",
     expiryDate: "MM/YY",
-    color: "#333333",
+    color: "#e07171",
     CVC: 123,
     password: [0, 0],
   });
@@ -29,10 +29,10 @@ export const AddCard = ({ setCards }: AddCardProps) => {
         <Header text="카드 추가" />
       </HeaderWrapper>
       <Main>
-        <CardItem card={cardInfo} />
+        <CardItem card={newCard} />
         <CardForm
-          cardInfo={cardInfo}
-          setCardInfo={setCardInfo}
+          cardInfo={newCard}
+          setCardInfo={setNewCard}
           addNewCards={setCards}
         />
       </Main>
