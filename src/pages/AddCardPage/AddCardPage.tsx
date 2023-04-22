@@ -1,6 +1,6 @@
 import AppBar from "../../components/AppBar/AppBar";
 import CardPreview from "../../components/CardPreview/CardPreview";
-import CardNumberInput from "../../components/CardNubmerInput/CardNumberInput";
+import CardNumberInput from "../../components/CardNumberInput/CardNumberInput";
 import CardOwnerNameInput from "../../components/CardOwnerNameInput/CardOwnerNameInput";
 import CardExpirationDateInput from "../../components/CardExpirationDateInput/CardExpirationDateInput";
 import CardSecurityCodeInput from "../../components/CardSecurityCodeInput/CardSecurityCodeInput";
