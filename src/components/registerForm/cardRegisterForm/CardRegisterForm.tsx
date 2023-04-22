@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from 'react';
 
 import styled from 'styled-components';
-import { InputValuesContext } from '../InputValueContext';
+import { InputValuesContext } from '../../../contexts/InputValueContext';
 
 import { useNavigate } from 'react-router-dom';
 import useCardList from '../../../hooks/useCardList';

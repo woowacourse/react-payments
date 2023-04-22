@@ -1,7 +1,7 @@
 import React, { useState, useContext, useRef } from 'react';
 
 import styled, { css } from 'styled-components';
-import { InputValuesContext } from '../InputValueContext';
+import { InputValuesContext } from '../../../contexts/InputValueContext';
 import useAutoFocus from '../../../hooks/useAutoFocus';
 import { ONLY_NUMBER_REGEXP } from '../../../utils/regexp';
 import FormLabel from '../../@common/FormLabel';
@@ -31,14 +31,19 @@ function CardPassword() {
     const name = event.currentTarget.dataset['order'] as keyof CardPasswordObj;
     const idx = event.currentTarget.dataset['idx'] as string;
 
+    // 숫자 외 입력 방지
     if (!ONLY_NUMBER_REGEXP.test(value)) return;
 
     try {
+      // 1. 길이 불통과 -> 에러
       if (value.length !== 1) {
         throw new Error();
       }
+
+      // 2. 길이 통과 -> password 갱신
       setPasswordError(false);
     } catch {
+      // 3. 다시 에러 설정
       setPasswordError(true);
     } finally {
       if (!setCardInput) return;
@@ -51,6 +56,7 @@ function CardPassword() {
       }));
     }
 
+    // focus 조정
     nextInputFocus(Number(idx));
   };
 

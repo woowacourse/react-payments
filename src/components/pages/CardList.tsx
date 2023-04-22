@@ -2,8 +2,8 @@ import { useMemo } from 'react';
 
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import useCardList from '../hooks/useCardList';
-import Card from '../components/@common/Card';
+import useCardList from '../../hooks/useCardList';
+import Card from '../@common/Card';
 
 function CardList() {
   const navigation = useNavigate();

@@ -1,7 +1,7 @@
 import { useContext, useMemo, useState } from 'react';
-import Card from '../components/@common/Card';
-import { InputValuesContext } from '../components/registerForm/InputValueContext';
-import CardRegisterForm from '../components/registerForm/cardRegisterForm/CardRegisterForm';
+import Card from '../@common/Card';
+import { InputValuesContext } from '../../contexts/InputValueContext';
+import CardRegisterForm from '../registerForm/cardRegisterForm/CardRegisterForm';
 
 function CardRegister() {
   const [inputValueContext] = useContext(InputValuesContext);

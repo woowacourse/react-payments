@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 
 import styled, { css } from 'styled-components';
-import { InputValuesContext } from '../InputValueContext';
+import { InputValuesContext } from '../../../contexts/InputValueContext';
 import { ONLY_NUMBER_REGEXP } from '../../../utils/regexp';
 import FormLabel from '../../@common/FormLabel';
 import Input from '../../@common/Input';

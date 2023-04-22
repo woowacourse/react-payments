@@ -1,4 +1,4 @@
-import React, { createContext } from "react";
+import React, { createContext } from 'react';
 
 export interface CardInfoType {
   cardNumbers: {
@@ -17,17 +17,17 @@ export interface CardInfoType {
 }
 const initialCardInfos = {
   cardNumbers: {
-    first: "",
-    second: "",
-    third: "",
-    fourth: "",
+    first: '',
+    second: '',
+    third: '',
+    fourth: '',
   },
-  expireDate: "",
-  ownerName: "",
-  securityCode: "",
+  expireDate: '',
+  ownerName: '',
+  securityCode: '',
   password: {
-    first: "",
-    second: "",
+    first: '',
+    second: '',
   },
 };
 

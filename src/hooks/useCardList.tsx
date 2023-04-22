@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CardInfoType } from '../components/registerForm/InputValueContext';
+import { CardInfoType } from '../contexts/InputValueContext';
 
 interface Props {
   key: string;
