@@ -244,8 +244,11 @@ const FormSubmitButton = styled.button`
   border: none;
   font-size: 14px;
   font-weight: 700;
-  background-color: #ffffff;
+  background-color: transparent;
+  color: #000000;
   margin-left: auto;
+  border-radius: 10px;
+  padding: 10px;
   cursor: pointer;
 `;
 
