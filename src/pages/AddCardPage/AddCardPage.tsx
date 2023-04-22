@@ -114,14 +114,11 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
     navigate("/");
   };
 
-  const isAddButtonVisible = (): boolean => {
-    return (
-      isFulfilledObject(cardNumber, 4) &&
-      isFulfilledObject(expirationDate, 2) &&
-      isFulfilledObject(password, 1) &&
-      isFulfilledString(securityCode, 3)
-    );
-  };
+  const isAddButtonVisible: boolean =
+    isFulfilledObject(cardNumber, 4) &&
+    isFulfilledObject(expirationDate, 2) &&
+    isFulfilledObject(password, 1) &&
+    isFulfilledString(securityCode, 3);
 
   return (
     <Container>
@@ -133,8 +130,10 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
         <CardOwnerNameInput ownerName={ownerName} nameLength={ownerName.length} onChange={handleOwnerName} />
         <CardSecurityCodeInput securityCode={securityCode} onChange={handleSecurityCode} />
         <CardPasswordInput password={password} onChange={handlePassword} />
-        <ButtonBox isVisible={isAddButtonVisible()}>
-          <Button>다음</Button>
+        <ButtonBox>
+          <Button type="submit" isVisible={isAddButtonVisible}>
+            다음
+          </Button>
         </ButtonBox>
       </Form>
     </Container>
@@ -147,18 +146,19 @@ const Form = styled.form`
   gap: 19px;
 `;
 
-const ButtonBox = styled.div<{ isVisible: boolean }>`
+const ButtonBox = styled.div`
   display: flex;
   justify-content: flex-end;
-  visibility: ${({ isVisible }) => (isVisible ? "visible" : "hidden")};
 `;
 
-const Button = styled.button`
+const Button = styled.button<{ isVisible: boolean }>`
   background-color: transparent;
   border: none;
 
   font-size: 14px;
   font-weight: 700;
+
+  visibility: ${({ isVisible }) => (isVisible ? "visible" : "hidden")};
 
   cursor: pointer;
 `;
