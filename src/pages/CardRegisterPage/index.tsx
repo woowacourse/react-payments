@@ -11,12 +11,12 @@ interface Props {
 
 const CardRegisterPage = ({ registerCard }: Props) => {
   return (
-    <div className={styles.container}>
+    <>
       <Header title="카드 추가" previousButton />
       <main className={styles.formContainer}>
         <CardRegisterForm registerCard={registerCard} />
       </main>
-    </div>
+    </>
   );
 };
 

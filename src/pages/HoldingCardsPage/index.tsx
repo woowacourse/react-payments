@@ -19,7 +19,7 @@ const HoldingCardsPage = ({ cards }: Props) => {
   };
 
   return (
-    <div className={styles.container}>
+    <>
       <Header title="보유 카드" />
       <main>
         {cards.length === 0 && (
@@ -43,7 +43,7 @@ const HoldingCardsPage = ({ cards }: Props) => {
           <CardRegisterButton onClick={handleClick} />
         </section>
       </main>
-    </div>
+    </>
   );
 };
 

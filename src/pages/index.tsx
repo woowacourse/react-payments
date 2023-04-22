@@ -5,6 +5,7 @@ import HoldingCardsPage from './HoldingCardsPage';
 import CardRegisterPage from './CardRegisterPage';
 
 import type { CardInfo } from '../types/card';
+import Layout from '../components/Layout';
 
 function App() {
   const [cards, setCards] = useState<CardInfo[]>([]);
@@ -29,11 +30,13 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<HoldingCardsPage cards={cards} />} />
-      <Route
-        path="card-register"
-        element={<CardRegisterPage registerCard={registerCard} />}
-      />
+      <Route element={<Layout />}>
+        <Route path="/" element={<HoldingCardsPage cards={cards} />} />
+        <Route
+          path="card-register"
+          element={<CardRegisterPage registerCard={registerCard} />}
+        />
+      </Route>
     </Routes>
   );
 }
