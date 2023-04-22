@@ -8,7 +8,6 @@ import Input from '../../@common/Input';
 import ErrorSpan from '../../@common/ErrorSpan';
 
 function SecurityCode() {
-  console.log('>>> Security 시작');
   const [creditCardInfo, setCreditCard] = useContext(CreditCardContext);
   const [error, setError] = useState(false);
 

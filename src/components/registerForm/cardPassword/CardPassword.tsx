@@ -10,7 +10,6 @@ import ErrorSpan from '../../@common/ErrorSpan';
 import CreditCardContext from '../../../contexts/InputValueContext';
 
 function CardPassword() {
-  console.log('>>> CardPassword 시작');
   const [passwordError, setPasswordError] = useState(false);
   const [creditCardInfo, setCreditCardInfo] = useContext(CreditCardContext);
 
@@ -47,10 +46,10 @@ function CardPassword() {
       const newValue = creditCardInfo.password;
       newValue[inputIndex] = enteredValue;
 
-      // setCreditCardInfo('password', newValue);
+      setCreditCardInfo('password', newValue);
 
       // focus 조정
-      // nextInputFocus(Number(inputIndex));
+      nextInputFocus(Number(inputIndex));
     }
   };
 

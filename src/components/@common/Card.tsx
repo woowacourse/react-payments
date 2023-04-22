@@ -6,7 +6,6 @@ interface Props {
 }
 
 function Card({ cardNumber, ownerName, expirationDate }: Props) {
-  console.log('>>> Card 시작');
   return (
     <CardContainer>
       <CardChip></CardChip>

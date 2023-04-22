@@ -8,7 +8,6 @@ import Input from '../../@common/Input';
 import ErrorSpan from '../../@common/ErrorSpan';
 
 function OwnerNameInput() {
-  console.log('>>> OwnerName 시작');
   const [creditCardInfo, setCreditCardInfo] = useContext(CreditCardContext);
 
   const [error, setError] = useState({

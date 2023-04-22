@@ -14,7 +14,7 @@ function RegisterPage() {
     bank: '현대카드',
   });
 
-  console.log('>>> creditCardEntered:', creditCardEntered);
+  console.log('>>> REGISTER PAGE ', creditCardEntered);
 
   const { cardNumber, expirationDate, ownerName } = creditCardEntered;
 
@@ -22,8 +22,6 @@ function RegisterPage() {
     target: T,
     newValue: CreditCardInfo[T]
   ) => {
-    //! 실행X
-    console.log('>>> :setCreditCard');
     setCreditCardEntered((prev) => ({
       ...prev,
       [target]: newValue,

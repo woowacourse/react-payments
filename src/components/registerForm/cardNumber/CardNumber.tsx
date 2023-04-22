@@ -9,17 +9,9 @@ import ErrorSpan from '../../@common/ErrorSpan';
 import { ONLY_NUMBER_REGEXP } from '../../../utils/regexp';
 import CreditCardContext from '../../../contexts/InputValueContext';
 
-export interface CardNumberObj {
-  first: string;
-  second: string;
-  third: string;
-  fourth: string;
-}
-
 interface Props {}
 
 export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
-  console.log('>>> CardNumber 시작');
   // cardInput 상태 (외부)
   const [creditCardInfo, setCreditCardInfo] = useContext(CreditCardContext);
 
@@ -45,7 +37,7 @@ export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
     const inputIndex = Number(event.currentTarget.dataset['index']);
 
     // type guard
-    if (!inputIndex) return;
+    if (Number.isNaN(inputIndex)) return;
 
     // 숫자가 아니면 입력받지 않는다.
     if (!ONLY_NUMBER_REGEXP.test(enteredNumber)) return;

@@ -12,7 +12,6 @@ import CardPassword from '../cardPassword/CardPassword';
 import CreditCardContext from '../../../contexts/InputValueContext';
 
 function CardRegisterForm() {
-  console.log('>>> CardRegister 시작');
   const navigation = useNavigate();
   const creditCardInfo = useContext(CreditCardContext)[0];
 
