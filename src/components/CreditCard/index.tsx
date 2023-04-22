@@ -1,12 +1,12 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
-import * as T from 'types';
+import * as Type from 'types';
 import creditCard from '../../domains/creditCard';
-import * as S from './style';
+import * as Style from './style';
 
 export type CreditCardProps = {
   fullFilled: boolean;
-  creditCard: Pick<T.CreditCard, 'number' | 'expiry' | 'owner'>;
+  creditCard: Pick<Type.CreditCard, 'number' | 'expiry' | 'owner'>;
 };
 
 function CreditCard({ fullFilled, creditCard: { expiry, number, owner } }: CreditCardProps) {
@@ -22,20 +22,20 @@ function CreditCard({ fullFilled, creditCard: { expiry, number, owner } }: Credi
   };
 
   return (
-    <S.CreditCardLayout isValid={isValid()}>
-      <S.CreditCardICChip />
-      <S.CreditCardInfoLayout>
-        <S.CreditCardNumber>
+    <Style.CreditCardLayout isValid={isValid()}>
+      <Style.CreditCardICChip />
+      <Style.CreditCardInfoLayout>
+        <Style.CreditCardNumber>
           {creditCard.convertSecuredCreditCard(number).map((num, idx) => (
             <div key={idx}>{num}</div>
           ))}
-        </S.CreditCardNumber>
-        <S.CreditCardContainer>
-          <S.CreditCardBox>{owner}</S.CreditCardBox>
-          <S.CreditCardBox>{expiry}</S.CreditCardBox>
-        </S.CreditCardContainer>
-      </S.CreditCardInfoLayout>
-    </S.CreditCardLayout>
+        </Style.CreditCardNumber>
+        <Style.CreditCardContainer>
+          <Style.CreditCardBox>{owner}</Style.CreditCardBox>
+          <Style.CreditCardBox>{expiry}</Style.CreditCardBox>
+        </Style.CreditCardContainer>
+      </Style.CreditCardInfoLayout>
+    </Style.CreditCardLayout>
   );
 }
 
