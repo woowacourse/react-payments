@@ -27,8 +27,19 @@ const Ul = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: center;
-
   gap: 46px;
+
+  width: 100%;
+
+  padding-bottom: 20px;
+
+  overflow: scroll;
+
+  ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    background-color: transparent;
+  }
 `;
 
 export default CardList;
