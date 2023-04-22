@@ -7,6 +7,8 @@ type PaymentsContextValue = {
   setCreditCards: Dispatch<CreditCard[]>;
 };
 
+const STORAGE_KEY = 'creditCards' as const;
+
 export const PaymentsContext = createContext<PaymentsContextValue>({
   creditCards: [],
   setCreditCards: () => {
@@ -17,11 +19,11 @@ export const PaymentsContext = createContext<PaymentsContextValue>({
 export const PaymentsProvider = (props: PropsWithChildren) => {
   const { children } = props;
   const [creditCards, setCreditCards] = useState<CreditCard[]>(
-    JSON.parse(localStorage.getItem('creditCards') ?? '[]'),
+    JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '[]'),
   );
 
   const internalSetCreditCards: Dispatch<CreditCard[]> = (nextCreditCards) => {
-    localStorage.setItem('creditCards', JSON.stringify(nextCreditCards));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(nextCreditCards));
 
     setCreditCards(nextCreditCards);
   };
