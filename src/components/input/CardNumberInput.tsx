@@ -1,24 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
+import React, { useEffect, useRef, useState } from 'react';
 import { Input } from './Input';
 import { InputWrapper } from './InputWrapper';
+import { CardNumber } from '../../types';
 
 interface Props {
+  cardNumber: CardNumber;
+  setCardNumber: React.Dispatch<React.SetStateAction<CardNumber>>;
   moveFocusToExpirationDate: () => void;
-  cardNumber: {
-    0: string;
-    1: string;
-    2: string;
-    3: string;
-  };
-  setCardNumber: React.Dispatch<
-    React.SetStateAction<{
-      0: string;
-      1: string;
-      2: string;
-      3: string;
-    }>
-  >;
 }
 
 export function CardNumberInput({ moveFocusToExpirationDate, cardNumber, setCardNumber }: Props) {

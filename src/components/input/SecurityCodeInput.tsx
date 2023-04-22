@@ -2,12 +2,13 @@ import styled from 'styled-components';
 import { useEffect } from 'react';
 import { Input } from './Input';
 import { InputWrapper } from './InputWrapper';
+import { SecurityCode } from '../../types';
 
 interface Props {
+  securityCode: SecurityCode;
   securityCodeInputRef: React.RefObject<HTMLInputElement>;
+  setSecurityCode: React.Dispatch<React.SetStateAction<SecurityCode>>;
   moveFocusToPassword: () => void;
-  securityCode: string;
-  setSecurityCode: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export function SecurityCodeInput({

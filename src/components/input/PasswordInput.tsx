@@ -2,27 +2,20 @@ import styled from 'styled-components';
 import { useRef } from 'react';
 import { Input } from './Input';
 import { InputWrapper } from './InputWrapper';
+import { PassWord } from '../../types';
 
 interface Props {
+  password: PassWord;
   passwordInputRef: React.RefObject<HTMLInputElement>;
+  setPassword: React.Dispatch<React.SetStateAction<PassWord>>;
   activateNextButton: () => void;
-  password: {
-    firstPassword: string;
-    secondPassword: string;
-  };
-  setPassword: React.Dispatch<
-    React.SetStateAction<{
-      firstPassword: string;
-      secondPassword: string;
-    }>
-  >;
 }
 
 export const PasswordInput = ({
-  passwordInputRef,
-  activateNextButton,
   password,
+  passwordInputRef,
   setPassword,
+  activateNextButton,
 }: Props) => {
   const secondInputRef = useRef<HTMLInputElement>(null);
 

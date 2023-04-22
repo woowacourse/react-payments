@@ -2,19 +2,12 @@ import styled from 'styled-components';
 import { useRef, useEffect } from 'react';
 import { Input } from './Input';
 import { InputWrapper } from './InputWrapper';
+import { ExpirationDate } from '../../types';
 
 interface Props {
   monthInputRef: React.RefObject<HTMLInputElement>;
-  expirationDate: {
-    month: string;
-    year: string;
-  };
-  setExpirationDate: React.Dispatch<
-    React.SetStateAction<{
-      month: string;
-      year: string;
-    }>
-  >;
+  expirationDate: ExpirationDate;
+  setExpirationDate: React.Dispatch<React.SetStateAction<ExpirationDate>>;
   moveFocusToOwnerName: () => void;
 }
 

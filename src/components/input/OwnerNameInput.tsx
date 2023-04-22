@@ -1,19 +1,20 @@
 import styled from 'styled-components';
 import { Input } from './Input';
 import { InputWrapper } from './InputWrapper';
+import { OwnerName } from '../../types';
 
 interface Props {
+  ownerName: OwnerName;
   ownerNameInputRef: React.RefObject<HTMLInputElement>;
+  setOwnerName: React.Dispatch<React.SetStateAction<OwnerName>>;
   moveFocusToSecurityCode: () => void;
-  ownerName: string;
-  setOwnerName: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export function OwnerNameInput({
-  ownerNameInputRef,
-  moveFocusToSecurityCode,
   ownerName,
+  ownerNameInputRef,
   setOwnerName,
+  moveFocusToSecurityCode,
 }: Props) {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!isValidName(e.target.value)) {

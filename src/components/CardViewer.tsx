@@ -1,17 +1,10 @@
 import styled from 'styled-components';
+import { CardNumber, ExpirationDate, OwnerName } from '../types';
 
 interface Props {
-  cardNumber: {
-    0: string;
-    1: string;
-    2: string;
-    3: string;
-  };
-  expirationDate: {
-    month: string;
-    year: string;
-  };
-  ownerName: string;
+  cardNumber: CardNumber;
+  expirationDate: ExpirationDate;
+  ownerName: OwnerName;
 }
 
 export function CardViewer({ cardNumber, expirationDate, ownerName }: Props) {
