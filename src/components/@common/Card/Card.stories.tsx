@@ -12,7 +12,7 @@ const Template: Story<CardProps> = (args: CardProps) => <Card {...args} />;
 
 export const AddButton = Template.bind({});
 AddButton.args = {
-  addButton: true,
+  type: 'button',
 };
 
 export const CardContent = Template.bind({});
@@ -28,4 +28,4 @@ CardContent.args = {
     year: '25',
   },
   holderName: 'John Doe',
-} as CardRegisterInfo;
+};

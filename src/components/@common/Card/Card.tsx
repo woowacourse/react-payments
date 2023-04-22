@@ -1,53 +1,49 @@
-import React from 'react';
+import React, { MouseEvent } from 'react';
 import { CardRegisterInfo } from '../../../types/card.type';
 import * as Styled from './Card.styles';
 
-export type CardProps =
-  | { addButton: boolean; onClick?: () => void }
-  | CardRegisterInfo;
-
-export default function Card(props: CardProps) {
-  return 'addButton' in props ? (
-    <AddButton onClick={props.onClick} />
-  ) : (
-    <CardContent {...props} />
-  );
+interface AddButtonProps {
+  type: 'button';
+  onClick(e: MouseEvent): void;
 }
 
-function AddButton({ onClick }: { onClick?: () => void }) {
+interface CardContentProps extends CardRegisterInfo {
+  type: 'card';
+}
+
+export type CardProps = CardContentProps | AddButtonProps;
+
+export default function Card(props: CardProps) {
+  const { type } = props;
+
+  return type === 'button' ? <AddButton {...props} /> : <CardContent {...props} />;
+}
+
+function AddButton({ onClick }: AddButtonProps) {
   return <Styled.CardRegisterButton onClick={onClick} />;
 }
 
-function CardContent({
-  cardNumber,
-  expirationDate,
-  holderName,
-}: CardRegisterInfo) {
+function CardContent({ cardNumber, expirationDate, holderName }: CardRegisterInfo) {
   return (
     <Styled.Card>
-      <Styled.CardMagnet />
-      <Styled.CardNumberContainer>
-        <Styled.CardNumber index={0}>{cardNumber.first}</Styled.CardNumber>
-        <Styled.CardNumber index={1}>{cardNumber.second}</Styled.CardNumber>
-        <Styled.CardNumber index={2}>
-          {'●'.repeat(cardNumber.third.length)}
-        </Styled.CardNumber>
-        <Styled.CardNumber index={3}>
-          {'●'.repeat(cardNumber.fourth.length)}
-        </Styled.CardNumber>
-      </Styled.CardNumberContainer>
-      <Styled.CardHolderName>{holderName}</Styled.CardHolderName>
-      <Styled.ExpirationDateContainer>
-        <Styled.ExpirationDateText index={0}>
-          {expirationDate.month}
-        </Styled.ExpirationDateText>
-        {(expirationDate.month || expirationDate.year) && (
-          <Styled.ExpirationDateDivider />
-        )}
-        <Styled.ExpirationDateText index={1}>
-          {expirationDate.year}
-        </Styled.ExpirationDateText>
-      </Styled.ExpirationDateContainer>
+      <Styled.CardContainer>
+        <Styled.CardMagnet />
+        <Styled.CardNumberContainer>
+          {Object.values(cardNumber).map((number, i) =>
+            i < 2 ? (
+              <Styled.CardNumber key={i} defaultValue={number} disabled />
+            ) : (
+              <Styled.CardNumber key={i} type="password" defaultValue={number} disabled />
+            )
+          )}
+        </Styled.CardNumberContainer>
+        <Styled.CardHolderName>{holderName}</Styled.CardHolderName>
+        <Styled.ExpirationDateContainer>
+          <Styled.ExpirationDateText>{expirationDate.month}</Styled.ExpirationDateText>
+          <Styled.ExpirationDateDivider>/</Styled.ExpirationDateDivider>
+          <Styled.ExpirationDateText>{expirationDate.year}</Styled.ExpirationDateText>
+        </Styled.ExpirationDateContainer>
+      </Styled.CardContainer>
     </Styled.Card>
   );
 }
