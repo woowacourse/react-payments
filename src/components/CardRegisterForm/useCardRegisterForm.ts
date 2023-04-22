@@ -24,7 +24,7 @@ const useCardRegisterForm = (inputRefs: RefObject<Focus>[]) => {
   const [cardPassword1, setCardPassword1] = useState('');
   const [cardPassword2, setCardPassword2] = useState('');
 
-  const isValidCardData =
+  const isCardFormFilled =
     cardNumber1.length === 4 &&
     cardNumber2.length === 4 &&
     cardNumber3.length === 4 &&
@@ -91,7 +91,7 @@ const useCardRegisterForm = (inputRefs: RefObject<Focus>[]) => {
     setCardPassword1,
     setCardPassword2,
 
-    isValidCardData,
+    isCardFormFilled,
     handleNumberChange,
     handleOwnerChange,
   };

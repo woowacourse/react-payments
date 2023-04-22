@@ -5,12 +5,12 @@ import Card from '../Card';
 import Input, { Focus } from '../Input';
 import Tooltip from '../Tooltip';
 import TooltipButton from '../TooltipButton';
-import useCardRegisterForm from './useCardRegisterForm';
 
+import useCardRegisterForm from './useCardRegisterForm';
+import { CARD_NUMBER_INPUT_PLACEHOLDER } from '../../domain/constants';
 import type { CardInfo } from '../../domain/types/card';
 
 import styles from './cardRegisterForm.module.css';
-import { CARD_NUMBER_INPUT_PLACEHOLDER } from '../../domain/constants';
 
 const today = new Date();
 const currentYear = today.getFullYear() % 100;
@@ -45,7 +45,7 @@ const CardRegisterForm = ({ registerCard }: Props) => {
     setCardPassword1,
     setCardPassword2,
 
-    isValidCardData,
+    isCardFormFilled,
     handleNumberChange,
     handleOwnerChange,
   } = useCardRegisterForm(inputRefs);
@@ -245,7 +245,7 @@ const CardRegisterForm = ({ registerCard }: Props) => {
           </div>
         </label>
 
-        {isValidCardData && (
+        {isCardFormFilled && (
           <button tabIndex={11} className={styles.submitButton}>
             다음
           </button>
