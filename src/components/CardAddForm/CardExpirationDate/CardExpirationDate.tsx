@@ -3,7 +3,7 @@ import InputContainer from '../../common/InputContainer/InputContainer';
 import Input from '../../common/Input/Input';
 import { useError } from '../../../hooks/useError';
 import validator from '../../../utils/validator';
-import { formatExpirationDate } from '../../../utils/formatter';
+import { formatDisplayedExpirationDate } from '../../../utils/formatter';
 import { ChangeEvent } from 'react';
 
 interface CardExpirationDateProps {
@@ -18,7 +18,7 @@ function CardExpirationDate({ onChange, handleValidationChange, value }: CardExp
     handleValidationChange,
   });
 
-  const expirationDate = formatExpirationDate(`${value.month}${value.year}`);
+  const expirationDate = formatDisplayedExpirationDate(`${value.month}${value.year}`);
 
   return (
     <InputContainer
