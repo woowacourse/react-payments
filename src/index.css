@@ -42,12 +42,12 @@ main {
   height: calc(100% - 43px);
   padding: 0 3px;
   overflow-y: scroll;
-  /* scrollbar-width: none; */
+  scrollbar-width: none;
 }
 
-/* main::-webkit-scrollbar {
+main::-webkit-scrollbar {
   display: none;
-} */
+}
 
 a {
   text-decoration: none;

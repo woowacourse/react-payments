@@ -11,10 +11,10 @@ const meta = {
 
 export default meta;
 
-export const Default = () => (
-  <CardNumber
-    onChange={({ target: { value, dataset } }: ChangeEvent<HTMLInputElement>) => {}}
-    handleValidationChange={(key: keyof CardInputValidation, value: boolean) => {}}
-    values={['', '', '', '']}
-  ></CardNumber>
-);
+// export const Default = () => (
+//   <CardNumber
+//     onChange={({ target: { value, dataset } }: ChangeEvent<HTMLInputElement>) => {}}
+//     handleValidationChange={(key: keyof CardInputValidation, value: boolean) => {}}
+//     values={['', '', '', '']}
+//   ></CardNumber>
+// );

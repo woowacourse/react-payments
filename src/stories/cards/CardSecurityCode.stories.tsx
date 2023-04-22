@@ -11,10 +11,10 @@ const meta = {
 
 export default meta;
 
-export const Default = () => (
-  <CardSecurityCode
-    onChange={({ target: { value } }: ChangeEvent<HTMLInputElement>) => {}}
-    handleValidationChange={(key: keyof CardInputValidation, value: boolean) => {}}
-    value=""
-  ></CardSecurityCode>
-);
+// export const Default = () => (
+//   <CardSecurityCode
+//     onChange={({ target: { value } }: ChangeEvent<HTMLInputElement>) => {}}
+//     handleValidationChange={(key: keyof CardInputValidation, value: boolean) => {}}
+//     value=""
+//   ></CardSecurityCode>
+// );

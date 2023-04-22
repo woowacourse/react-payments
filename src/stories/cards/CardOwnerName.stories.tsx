@@ -10,9 +10,9 @@ const meta = {
 
 export default meta;
 
-export const Default = () => (
-  <CardOwnerName
-    onChange={({ target: { value, dataset } }: ChangeEvent<HTMLInputElement>) => {}}
-    value=""
-  ></CardOwnerName>
-);
+// export const Default = () => (
+//   <CardOwnerName
+//     onChange={({ target: { value, dataset } }: ChangeEvent<HTMLInputElement>) => {}}
+//     value=""
+//   ></CardOwnerName>
+// );

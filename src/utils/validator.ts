@@ -1,24 +1,28 @@
 import { MultipleInputFieldCardInformation } from '../types';
-import { CARD_NUMBER_INPUT_MAX_LENGTH } from '../constants';
+import {
+  CARD_NUMBER_INPUT_MAX_LENGTH,
+  DATE_DIVIDER,
+  MAX_VALID_EXPIRATION_YEAR,
+  REGEX,
+} from '../constants';
 
 const validateCardNumber = (input: string) => {
   return input.length === CARD_NUMBER_INPUT_MAX_LENGTH;
 };
 
 const validateExpirationDate = (input: string) => {
-  const [month, year] = input.split('/');
+  const [month, year] = input.split(DATE_DIVIDER).map(Number);
 
-  if (!year) return false;
-  if (month.length !== 2 || year.length !== 2) return false;
+  if (month < 1 || month > 12) return false;
+  if (!year || !REGEX.TWO_DIGIT.test(String(year))) return false;
 
   const date = new Date();
-  const currentMonth = (date.getMonth() + 1).toString().padStart(2, '0');
+  const currentMonth = date.getMonth() + 1;
   const currentYear = date.getFullYear() % 100;
 
-  if (month < currentMonth || Number(month) > 12) return false;
-  if (Number(year) < currentYear || Number(year) > Number(currentYear) + 5) return false;
+  if (year < currentYear || year > currentYear + MAX_VALID_EXPIRATION_YEAR) return false;
 
-  return true;
+  return year === currentYear ? month >= currentMonth : true;
 };
 
 const validateOwnerName = (input: string) => {

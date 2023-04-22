@@ -11,10 +11,10 @@ const meta = {
 
 export default meta;
 
-export const Default = () => (
-  <CardExpirationDate
-    onChange={({ target: { value } }: ChangeEvent<HTMLInputElement>) => {}}
-    handleValidationChange={(key: keyof CardInputValidation, value: boolean) => {}}
-    value={{ month: '', year: '' }}
-  ></CardExpirationDate>
-);
+// export const Default = () => (
+//   <CardExpirationDate
+//     onChange={({ target: { value } }: ChangeEvent<HTMLInputElement>) => {}}
+//     handleValidationChange={(key: keyof CardInputValidation, value: boolean) => {}}
+//     value={{ month: '', year: '' }}
+//   ></CardExpirationDate>
+// );
