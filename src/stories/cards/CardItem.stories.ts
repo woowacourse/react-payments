@@ -10,17 +10,15 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// export const Default: Story = {
-//   args: {
-//     information: {
-//       cardNumber: ['1233', '1234', '1234', '1234'],
-//       expirationDate: {
-//         month: '06',
-//         year: '23',
-//       },
-//       ownerName: 'ASHLEY',
-//       securityCode: '111',
-//       password: ['1', '1'],
-//     },
-//   },
-// };
+export const Default: Story = {
+  args: {
+    information: {
+      cardNumber: '12341234123412341234',
+      expirationDate: {
+        month: '06',
+        year: '23',
+      },
+      ownerName: 'ASHLEY',
+    },
+  },
+};

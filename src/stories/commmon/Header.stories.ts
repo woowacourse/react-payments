@@ -12,13 +12,14 @@ type Story = StoryObj<typeof meta>;
 
 export const CardList: Story = {
   args: {
-    content: '보유 카드',
+    content: 'Header',
+    isOverlayPage: false,
   },
 };
 
 export const CardAdd: Story = {
   args: {
-    content: '카드 추가',
+    content: 'Header',
     isOverlayPage: true,
   },
 };

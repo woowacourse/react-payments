@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { SupportingText } from './InputContainer.stories';
+import SupportingText from '../../components/common/SupportingText/SupportingText';
 
 const meta = {
   title: 'Payments/Common/SupportingText',
@@ -10,15 +10,15 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  args: {
-    message: 'Supporting Text',
-  },
-};
+// export const Default: Story = {
+//   args: {
+//     message: 'Supporting Text',
+//   },
+// };
 
-export const Error: Story = {
-  args: {
-    message: 'Error Message',
-    isError: true,
-  },
-};
+// export const Error: Story = {
+//   args: {
+//     message: 'Error Message',
+//     isError: true,
+//   },
+// };

@@ -1,6 +1,4 @@
-import { ChangeEvent } from 'react';
 import type { Meta } from '@storybook/react';
-import { CardInputValidation } from '../../types';
 import CardExpirationDate from '../../components/CardAddForm/CardExpirationDate/CardExpirationDate';
 
 const meta = {
@@ -11,10 +9,10 @@ const meta = {
 
 export default meta;
 
-// export const Default = () => (
-//   <CardExpirationDate
-//     onChange={({ target: { value } }: ChangeEvent<HTMLInputElement>) => {}}
-//     handleValidationChange={(key: keyof CardInputValidation, value: boolean) => {}}
-//     value={{ month: '', year: '' }}
-//   ></CardExpirationDate>
-// );
+export const Default = () => (
+  <CardExpirationDate
+    onInputChange={() => {}}
+    changeInputValidation={() => {}}
+    value={{ month: '', year: '' }}
+  ></CardExpirationDate>
+);

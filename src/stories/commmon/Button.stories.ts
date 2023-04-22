@@ -13,12 +13,29 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     primary: true,
-    children: '완료',
+    children: 'Button',
+  },
+};
+
+export const PrimaryDisabled: Story = {
+  args: {
+    primary: true,
+    children: 'Button',
+    disabled: true,
   },
 };
 
 export const Secondary: Story = {
   args: {
-    children: '카드 추가하기',
+    primary: false,
+    children: 'Button',
+  },
+};
+
+export const SecondaryDisabled: Story = {
+  args: {
+    primary: false,
+    children: 'Button',
+    disabled: true,
   },
 };

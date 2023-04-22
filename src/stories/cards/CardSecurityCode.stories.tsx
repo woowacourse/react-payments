@@ -1,6 +1,4 @@
-import { ChangeEvent } from 'react';
 import type { Meta } from '@storybook/react';
-import { CardInputValidation } from '../../types';
 import CardSecurityCode from '../../components/CardAddForm/CardSecurityCode/CardSecurityCode';
 
 const meta = {
@@ -11,10 +9,10 @@ const meta = {
 
 export default meta;
 
-// export const Default = () => (
-//   <CardSecurityCode
-//     onChange={({ target: { value } }: ChangeEvent<HTMLInputElement>) => {}}
-//     handleValidationChange={(key: keyof CardInputValidation, value: boolean) => {}}
-//     value=""
-//   ></CardSecurityCode>
-// );
+export const Default = () => (
+  <CardSecurityCode
+    onInputChange={() => {}}
+    changeInputValidation={() => {}}
+    value=""
+  ></CardSecurityCode>
+);

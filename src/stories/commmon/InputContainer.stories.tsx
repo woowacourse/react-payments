@@ -1,5 +1,6 @@
 import type { Meta } from '@storybook/react';
 import InputContainer from '../../components/common/InputContainer/InputContainer';
+import InputLabel from '../../components/common/Label/Label';
 import Input from '../../components/common/Input/Input';
 
 const meta = {
@@ -11,31 +12,38 @@ const meta = {
 export default meta;
 
 export const Default = () => (
-  <InputContainer label="Label Text" id="id">
-    <Input />
+  <InputContainer>
+    <InputLabel htmlFor="input">Label</InputLabel>
+    <Input id="input" placeholder="Placeholder Text" />
   </InputContainer>
 );
 
 export const Required = () => (
-  <InputContainer label="Label Text" id="id" required>
-    <Input />
+  <InputContainer>
+    <InputLabel htmlFor="input" required>
+      Label
+    </InputLabel>
+    <Input id="input" placeholder="Placeholder Text" />
   </InputContainer>
 );
 
 export const SupportingText = () => (
-  <InputContainer label="Label Text" id="id" supportingText="Supporting Text">
-    <Input />
-  </InputContainer>
-);
-
-export const ErrorSupportingText = () => (
-  <InputContainer label="Label Text" id="id" supportingText="Error Supporting Text" isError>
-    <Input />
+  <InputContainer supportingText={{ default: 'Supporting Text' }}>
+    <InputLabel htmlFor="input">Label</InputLabel>
+    <Input id="input" placeholder="Placeholder Text" />
   </InputContainer>
 );
 
 export const CharacterCounter = () => (
-  <InputContainer label="Label Text" id="id" characterCounter={[0, 30]}>
-    <Input />
+  <InputContainer characterCounter={[0, 30]}>
+    <InputLabel htmlFor="input">Label</InputLabel>
+    <Input id="input" placeholder="Placeholder Text" />
+  </InputContainer>
+);
+
+export const Error = () => (
+  <InputContainer isError>
+    <InputLabel htmlFor="input">Label</InputLabel>
+    <Input placeholder="Placeholder Text" isError />
   </InputContainer>
 );

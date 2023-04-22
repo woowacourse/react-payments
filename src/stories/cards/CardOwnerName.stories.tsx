@@ -1,4 +1,3 @@
-import { ChangeEvent } from 'react';
 import type { Meta } from '@storybook/react';
 import CardOwnerName from '../../components/CardAddForm/CardOwnerName/CardOwnerName';
 
@@ -10,9 +9,4 @@ const meta = {
 
 export default meta;
 
-// export const Default = () => (
-//   <CardOwnerName
-//     onChange={({ target: { value, dataset } }: ChangeEvent<HTMLInputElement>) => {}}
-//     value=""
-//   ></CardOwnerName>
-// );
+export const Default = () => <CardOwnerName onInputChange={() => {}} value=""></CardOwnerName>;
