@@ -38,7 +38,7 @@ const AddCardForm = ({
       )
     ) {
       alert('폼 전송에 실패했습니다.');
-      return false;
+      return;
     }
 
     const cardInfo: CardInfo = {
