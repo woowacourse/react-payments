@@ -18,6 +18,7 @@ function CardDateInput({ changeCardDate, cardDate }: CardDateInputProps) {
     onInput: changeCardDate,
   };
   const theme = {
+    inputSectionWidth: "45%",
     width: "60%",
     size: "20px",
     spacing: "2px",
@@ -25,11 +26,9 @@ function CardDateInput({ changeCardDate, cardDate }: CardDateInputProps) {
   return (
     <section>
       <Style.Title>만료일</Style.Title>
-      <Style.InputSection>
-        <ThemeProvider theme={theme}>
-          <Input {...props} />
-        </ThemeProvider>
-      </Style.InputSection>
+      <ThemeProvider theme={theme}>
+        <Input {...props} />
+      </ThemeProvider>
     </section>
   );
 }

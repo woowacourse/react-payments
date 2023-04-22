@@ -20,6 +20,7 @@ function CardOwnerNameInput({
     onInput: changeCardOwnerName,
   };
   const theme = {
+    inputSectionWidth: "100%",
     width: "100%",
     size: "15px",
   };
@@ -29,11 +30,9 @@ function CardOwnerNameInput({
         <div>카드 소유자 이름 (선택)</div>
         <div>{cardOwnerName.length}/30</div>
       </Style.Title>
-      <Style.InputSection>
-        <ThemeProvider theme={theme}>
-          <Input {...props} />
-        </ThemeProvider>
-      </Style.InputSection>
+      <ThemeProvider theme={theme}>
+        <Input {...props} />
+      </ThemeProvider>
     </section>
   );
 }

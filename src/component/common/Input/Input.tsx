@@ -12,7 +12,13 @@ type InputProps = {
 };
 
 function Input({ isRequired, ...props }: InputProps) {
-  return <Style.Input {...props} required={isRequired ? true : false} />;
+  return (
+    <>
+      <Style.InputSection>
+        <Style.Input {...props} required={isRequired ? true : false} />
+      </Style.InputSection>
+    </>
+  );
 }
 
 export default Input;

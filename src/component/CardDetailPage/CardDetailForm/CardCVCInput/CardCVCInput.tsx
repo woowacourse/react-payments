@@ -16,6 +16,7 @@ function CardCVCInput({ changeCardCVC, cardCVC }: CardCVCInputProps) {
     onInput: changeCardCVC,
   };
   const theme = {
+    inputSectionWidth: "30%",
     width: "60%",
     size: "30px",
     spacing: "4px",
@@ -24,11 +25,9 @@ function CardCVCInput({ changeCardCVC, cardCVC }: CardCVCInputProps) {
     <section>
       <Style.Title>보안 코드(CVC/CVV)</Style.Title>
       <Style.Contents>
-        <Style.InputSection>
-          <ThemeProvider theme={theme}>
-            <Input {...props} />
-          </ThemeProvider>
-        </Style.InputSection>
+        <ThemeProvider theme={theme}>
+          <Input {...props} />
+        </ThemeProvider>
         <Style.Button type="button">?</Style.Button>
       </Style.Contents>
     </section>

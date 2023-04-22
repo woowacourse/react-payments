@@ -23,6 +23,7 @@ function CardPasswordInput({
   const secondPassword = { id: "second", value: cardPassword[1], ...props };
 
   const theme = {
+    inputSectionWidth: "17%",
     width: "60%",
     size: "30px",
   };
@@ -30,16 +31,12 @@ function CardPasswordInput({
     <section>
       <Style.Title>카드 비밀번호</Style.Title>
       <Style.Contents>
-        <Style.InputSection>
-          <ThemeProvider theme={theme}>
-            <Input {...firstPassword} />
-          </ThemeProvider>
-        </Style.InputSection>
-        <Style.InputSection>
-          <ThemeProvider theme={theme}>
-            <Input {...secondPassword} />
-          </ThemeProvider>
-        </Style.InputSection>
+        <ThemeProvider theme={theme}>
+          <Input {...firstPassword} />
+        </ThemeProvider>
+        <ThemeProvider theme={theme}>
+          <Input {...secondPassword} />
+        </ThemeProvider>
         <Style.LastDigits>•</Style.LastDigits>
         <Style.LastDigits>•</Style.LastDigits>
       </Style.Contents>

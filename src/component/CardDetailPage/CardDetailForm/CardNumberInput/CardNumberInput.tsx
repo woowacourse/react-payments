@@ -20,6 +20,7 @@ function CardNumberInput({
     onInput: changeCardNumber,
   };
   const theme = {
+    inputSectionWidth: "100%",
     width: "90%",
     size: "20px",
     spacing: "2px",
@@ -27,11 +28,9 @@ function CardNumberInput({
   return (
     <section>
       <Style.Title>카드 번호</Style.Title>
-      <Style.InputSection>
-        <ThemeProvider theme={theme}>
-          <Input {...props} />
-        </ThemeProvider>
-      </Style.InputSection>
+      <ThemeProvider theme={theme}>
+        <Input {...props} />
+      </ThemeProvider>
     </section>
   );
 }

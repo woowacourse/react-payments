@@ -6,19 +6,6 @@ const Style = {
     align-items: center;
     gap: 8px;
   `,
-  InputSection: styled.section`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-
-    width: 17%;
-    height: 7vh;
-
-    border-radius: 7px;
-
-    background: #ecebf1;
-  `,
 
   Title: styled.h1`
     padding-bottom: 10px;
