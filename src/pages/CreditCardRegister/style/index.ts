@@ -59,9 +59,13 @@ export const ButtonWrapper = styled.div`
   justify-content: flex-end;
 `;
 
-export const RegisterButton = styled.button`
+type RegisterButtonType = {
+  isFullFilled: boolean;
+};
+
+export const RegisterButton = styled.button<RegisterButtonType>`
   font-weight: 700;
-  cursor: pointer;
+  cursor: ${(props) => (props.isFullFilled ? 'pointer' : 'not-allowed')};
 `;
 
 const cursorBlink = keyframes`

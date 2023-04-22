@@ -121,7 +121,12 @@ function CreditCardRegister() {
           setCreditCardPassword={setCreditCardPassword}
         />
         <S.ButtonWrapper>
-          <S.RegisterButton disabled={!isFullFilled} type="button" onClick={() => handleSubmit()}>
+          <S.RegisterButton
+            isFullFilled={isFullFilled}
+            disabled={!isFullFilled}
+            type="button"
+            onClick={() => handleSubmit()}
+          >
             확인
           </S.RegisterButton>
         </S.ButtonWrapper>
