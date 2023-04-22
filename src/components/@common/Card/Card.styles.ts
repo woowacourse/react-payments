@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const Card = styled.div`
-  position: relative;
   width: 270px;
   aspect-ratio: 213 / 133;
   flex-shrink: 0;
@@ -21,12 +20,19 @@ export const Card = styled.div`
   }
 `;
 
+export const CardContainer = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  padding-top: 34px;
+`;
+
 export const CardMagnet = styled.div`
   width: 40px;
   height: 26px;
   left: 14px;
   top: 47px;
-  margin-top: 33.77px;
 
   background: #cbba64;
   border-radius: 4px;
@@ -37,69 +43,52 @@ export const CardNumberContainer = styled.div`
   justify-content: space-between;
   position: relative;
   width: 100%;
-  height: 9.99px;
-  margin-top: 15px;
   font-size: 13px;
   font-weight: bold;
   letter-spacing: 2.6px;
 `;
 
-interface CardNumberProps extends React.HTMLAttributes<HTMLSpanElement> {
-  index: number;
-}
+export const CardNumber = styled.input`
+  width: 25%;
+  object-fit: contain;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-size: 16px;
+  padding: 0;
 
-export const CardNumber = styled.span<CardNumberProps>`
-  font-size: 13px;
-  position: absolute;
-  left: ${({ index }) => (index ? index * 4.3 + 'em' : 0)};
+  &[type='password'] {
+    font-size: 32px;
+  }
 `;
 
 export const CardHolderName = styled.span`
   font-size: 12px;
   font-weight: bold;
   position: absolute;
-  bottom: 10px;
-  left: 20px;
+  bottom: 0;
+  left: 0;
   color: #ffffff;
 `;
 
 export const ExpirationDateContainer = styled.div`
   position: absolute;
-  width: 34%;
-  height: 20px;
-  line-height: 1.3;
-  bottom: 10px;
   right: 0px;
+
+  display: flex;
+
+  width: 20%;
+  bottom: 0;
   font-size: 13px;
   font-weight: bold;
   letter-spacing: 2.6px;
 `;
 
-export const ExpirationDateDivider = styled.span`
-  position: absolute;
-  display: inline-block;
-  right: 66px;
-  bottom: 12px;
-  padding: 0 5px;
-  font-size: 1.2em;
-  color: #ffffff;
+export const ExpirationDateDivider = styled.span``;
 
-  &::after {
-    content: '/';
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-`;
-
-interface ExpirationDateTextProps
-  extends React.HTMLAttributes<HTMLSpanElement> {
-  index: number;
-}
-
-export const ExpirationDateText = styled.span<ExpirationDateTextProps>`
-  position: absolute;
-  left: ${({ index }) => (index ? index * 2.3 + 'em' : 0)};
+export const ExpirationDateText = styled.span`
+  width: 45%;
 `;
 
 export const CardRegisterButton = styled(Card)`
