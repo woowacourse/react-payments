@@ -8,20 +8,13 @@ type CardInfoInputProps = {
 };
 
 const CardInfoInput = ({ title, numberOfLetter, children }: CardInfoInputProps) => {
-  let currentLetter = 0;
-  let maximumLetter = 0;
-
-  if (numberOfLetter) {
-    [currentLetter, maximumLetter] = numberOfLetter;
-  }
-
   return (
     <div>
       <div className={styles.info}>
         <div>{title}</div>
         {numberOfLetter && (
           <div>
-            {currentLetter}/{maximumLetter}
+            {numberOfLetter[0]}/{numberOfLetter[1]}
           </div>
         )}
       </div>
