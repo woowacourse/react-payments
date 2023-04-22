@@ -19,7 +19,7 @@ export const CardItem = ({ card }: CardProps) => {
         <IcChip />
         <CardNumbers>{hideNumbers(card.numbers)}</CardNumbers>
         <InfoWrapper>
-          <Name>{card.owner ? card.owner : "NAME"}</Name>
+          <Owner>{card.owner ? card.owner : "NAME"}</Owner>
           <ExpiryDate>
             {card.expiryDate ? card.expiryDate : "MM / YY"}
           </ExpiryDate>
@@ -32,8 +32,9 @@ export const CardItem = ({ card }: CardProps) => {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: 180px;
-  height: 95px;
+  justify-content: flex-end;
+  width: 90%;
+  height: 75%;
   color: white;
 
   font-size: 10px;
@@ -46,13 +47,13 @@ const IcChip = styled.div`
   height: 26px;
   border-radius: 4px;
   background-color: #cbba64;
-  margin-top: 32px;
 `;
 
 const CardNumbers = styled.div`
-  text-align: center;
-  height: 15px;
-  letter-spacing: 1px;
+  height: 12px;
+  font-size: 12px;
+  text-align: left;
+  letter-spacing: 1.1px;
 `;
 
 const InfoWrapper = styled.div`
@@ -61,6 +62,10 @@ const InfoWrapper = styled.div`
   justify-content: space-between;
 `;
 
-const Name = styled.div``;
+const Owner = styled.div`
+  width: 80%;
+  height: 20px;
+  word-wrap: break-word;
+`;
 
 const ExpiryDate = styled.div``;
