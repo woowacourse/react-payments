@@ -33,40 +33,28 @@ const CardForm = ({ onSubmitForm, onChangeForm }: CardFormProps) => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (
-      cardNumber.some(
-        (numberValue) => numberValue.length !== 4 || !!cardNumberError
-      )
-    ) {
-      setButtonActive(false);
-      return;
-    }
-    if (
-      expirationDate.some((dateValue) => dateValue.length !== 2) ||
-      !!expirationDateError
-    ) {
-      setButtonActive(false);
-      return;
-    }
-    if (securityCode.length !== 3 || !!securityCodeError) {
-      setButtonActive(false);
-      return;
-    }
-    if (password.some((passwordValue) => !passwordValue) || !!passwordError) {
-      setButtonActive(false);
-      return;
-    }
+  const isCardNumberValid = cardNumber.every(
+    (numberValue) => numberValue.length === 4
+  );
+  const isExpirationDateValid = expirationDate.every(
+    (dateValue) => dateValue.length === 2
+  );
+  const isSecurityCodeValid = securityCode.length === 3;
+  const isPasswordValid = password.every((passwordValue) => !!passwordValue);
 
-    setButtonActive(true);
-  }, [
-    cardNumber,
-    expirationDate,
-    name,
-    securityCode,
-    password,
-    expirationDateError,
-  ]);
+  const isFormValid =
+    isCardNumberValid &&
+    isExpirationDateValid &&
+    isSecurityCodeValid &&
+    isPasswordValid &&
+    !cardNumberError &&
+    !expirationDateError &&
+    !securityCodeError &&
+    !passwordError;
+
+  useEffect(() => {
+    setButtonActive(isFormValid);
+  }, [isFormValid]);
 
   useEffect(() => {
     onChangeForm(cardNumber, expirationDate, name);
