@@ -1,8 +1,7 @@
 .button {
   width: 208px;
   height: 123px;
-  background-color: #e5e5e5;
+  background-color: var(--gray-e);
   border-radius: 5px;
   border: none;
-  cursor: pointer;
 }

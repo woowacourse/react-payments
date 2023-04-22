@@ -11,8 +11,11 @@
   width: 185px;
   margin-left: 8px;
   padding: 6px 10px;
-  border: 1px solid rgb(128, 128, 128, 0.5);
+  border: 1px solid var(--gray-6);
   border-radius: 4px;
-  color: #909090;
-  line-height: 1.3;
+}
+
+.message > p {
+  line-height: 1.5;
+  color: var(--gray-6);
 }

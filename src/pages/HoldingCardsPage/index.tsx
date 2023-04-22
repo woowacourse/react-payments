@@ -23,9 +23,7 @@ const HoldingCardsPage = ({ cards }: Props) => {
       <Header title="보유 카드" />
       <main>
         {cards.length === 0 && (
-          <h2 className={`text-subtitle ${styles.subTitle}`}>
-            새로운 카드를 등록해주세요.
-          </h2>
+          <h2 className={styles.subTitle}>새로운 카드를 등록해주세요.</h2>
         )}
         <section className={styles.cardContainer}>
           {cards.map((card, index) => (

@@ -10,7 +10,6 @@ label {
   position: relative;
   font-size: 12px;
   line-height: 14px;
-  color: #525252;
 }
 
 .inputContainer {
@@ -18,7 +17,7 @@ label {
   align-items: center;
   height: 45px;
   margin-top: 8px;
-  background: #ecebf1;
+  background: var(--background-input);
   border: none;
   border-radius: 8px;
   text-align: center;
@@ -95,7 +94,7 @@ label {
 
 .cardPassword {
   width: 174px;
-  background: #fff;
+  background: var(--background-white);
 }
 
 .cardPassword > * + * {
@@ -104,7 +103,7 @@ label {
 
 .cardPassword > input {
   width: 25%;
-  background: #ecebf1;
+  background: var(--background-input);
 }
 
 .cardPassword > p {
@@ -119,7 +118,7 @@ label {
 .submitButton > button {
   width: 50px;
   height: 100%;
-  font-weight: 600;
+  font-weight: 500;
   background: transparent;
   border: none;
 }

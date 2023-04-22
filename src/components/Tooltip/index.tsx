@@ -39,9 +39,7 @@ const Tooltip = ({ children }: Props) => {
       {children}
       {isShow && (
         <div className={styles.message}>
-          <span>
-            카드 뒷면의 서명란에 인쇄된 숫자 끝 3자리가 CVC 번호입니다.
-          </span>
+          <p>카드 뒷면의 서명란에 인쇄된 숫자 끝 3자리가 CVC 번호입니다.</p>
         </div>
       )}
     </div>

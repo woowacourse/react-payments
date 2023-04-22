@@ -72,7 +72,7 @@ const Card = ({
           strokeWidth={0.5}
         />
       </svg>
-      <div className={`${styles.cardNumber} text-card-number`}>
+      <div className={styles.cardNumber}>
         <span className={styles.number}>{cardNumber1}</span>
         <span className={styles.number}>{cardNumber2}</span>
         <span className={styles.password}>
@@ -87,8 +87,8 @@ const Card = ({
         </span>
       </div>
       <div className={styles.detailContainer}>
-        <p className="text-card-detail">{owner}</p>
-        <p className="text-card-detail">
+        <p>{owner}</p>
+        <p>
           {expiredMonth}
           {expiredMonth.length === 2 && <span>/</span>}
           {expiredYear}

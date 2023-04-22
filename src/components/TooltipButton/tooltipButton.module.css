@@ -4,10 +4,9 @@
   justify-content: center;
   width: 27px;
   height: 27px;
-  background: #ffffff;
-  border: 1px solid #bababa;
+  border: 1px solid var(--gray-6);
   border-radius: 50%;
-  color: #969696;
+  color: var(--gray-6);
 }
 
 .mark {
