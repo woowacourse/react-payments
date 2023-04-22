@@ -63,7 +63,6 @@ export const CardForm = ({
         }}
       />
       <ExpiryDateInput
-        expiryDate={cardInfo.expiryDate}
         setExpiryDate={(date: string) => {
           setCardInfo({ ...cardInfo, expiryDate: date });
         }}

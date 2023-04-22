@@ -5,7 +5,6 @@ import { useState } from "react";
 import { CARD_INPUT_NUMBER } from "../../constant/cardInput";
 
 interface ExpiryDateInputProps {
-  expiryDate: string;
   setExpiryDate: (value: string) => void;
 }
 
@@ -18,24 +17,11 @@ const ExpiryDateInfo = {
   maxLength: CARD_INPUT_NUMBER.EXPIRY_DATE,
 };
 
-export const ExpiryDateInput = ({
-  setExpiryDate,
-  expiryDate,
-}: ExpiryDateInputProps) => {
+export const ExpiryDateInput = ({ setExpiryDate }: ExpiryDateInputProps) => {
   const [isValid, setIsValid] = useState(true);
-  const [isCompleted, setIsCompleted] = useState(true);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let value = e.target.value.replaceAll(" / ", "");
-
-    if (value.length > 4) {
-      e.target.value = e.target.value.slice(0, -1);
-      return;
-    }
-
-    if (e.target.value.length === 2 && !/[^2-9]/g.test(e.target.value[0])) {
-      value = "0" + value;
-    }
+    const value = e.target.value;
 
     e.target.value = (value.match(/\d{1,2}/g) ?? []).join(" / ");
     setExpiryDate(e.target.value);
@@ -43,6 +29,9 @@ export const ExpiryDateInput = ({
 
   const validateExpiryDate = (expiryDate: string): void => {
     const [month, year] = expiryDate.split(" / ").map((each) => Number(each));
+
+    setIsValid(true);
+
     if (month < 1 || month > 12) {
       setIsValid(false);
     }
@@ -55,20 +44,12 @@ export const ExpiryDateInput = ({
   const handleOutFocusEvent = (e: React.FocusEvent<HTMLInputElement>) => {
     const value = e.target.value.replaceAll(" / ", "");
 
-    setIsCompleted(false);
-    setIsValid(true);
     if (value.length === 4) {
-      setIsCompleted(true);
       validateExpiryDate(e.target.value);
+      return;
     }
-  };
 
-  const getValidMessage = (): string => {
-    if (!isCompleted) return "유효기간 입력이 완료되지 않았습니다.";
-
-    if (!isValid) return "유효한 유효기간이 아닙니다";
-
-    return "";
+    setIsValid(false);
   };
 
   return (
@@ -79,8 +60,8 @@ export const ExpiryDateInput = ({
         handleInput={handleInput}
         handleChange={handleOutFocusEvent}
         error={{
-          isValid: isValid && (isCompleted || !expiryDate),
-          errorMessage: getValidMessage(),
+          isValid: isValid,
+          errorMessage: "유효한 만료일이 아닙니다. ",
         }}
       />
     </InputContainer>
