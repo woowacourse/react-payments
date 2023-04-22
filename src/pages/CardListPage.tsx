@@ -12,10 +12,12 @@ function CardListPage({ cardList }: CardListPageProps) {
   return (
     <>
       <Header content="나의 카드" />
-      <CardList cardList={cardList} />
-      <Link to={'/add-card'}>
-        <Button className="add-button center-hoz-item w-250">카드 추가하기</Button>
-      </Link>
+      <main>
+        <CardList cardList={cardList} />
+        <Link to={'/add-card'}>
+          <Button className="add-button center-hoz-item w-250">카드 추가하기</Button>
+        </Link>
+      </main>
     </>
   );
 }

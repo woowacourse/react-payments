@@ -16,13 +16,15 @@ function CardAddPage({ addCard }: CardAddPageProps) {
   return (
     <>
       <Header content="카드 추가" isOverlayPage={true} />
-      <CardItem className="mg-b-24 center-hoz-item" information={cardInformation} />
-      <CardAddForm
-        cardInformation={cardInformation}
-        onSingleInputFieldChange={onSingleInputFieldChange}
-        onMultipleInputFieldsChange={onMultipleInputFieldsChange}
-        handleCardInformationSubmit={handleSubmit}
-      />
+      <main>
+        <CardItem className="mg-b-24 center-hoz-item" information={cardInformation} />
+        <CardAddForm
+          cardInformation={cardInformation}
+          onSingleInputFieldChange={onSingleInputFieldChange}
+          onMultipleInputFieldsChange={onMultipleInputFieldsChange}
+          handleCardInformationSubmit={handleSubmit}
+        />
+      </main>
     </>
   );
 }

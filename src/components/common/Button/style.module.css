@@ -18,7 +18,7 @@ button {
   color: white;
 }
 
-.primaryButton:hover {
+.primaryButton:hover:enabled {
   background-color: #007aea;
 }
 
@@ -27,6 +27,10 @@ button {
   color: #007aea;
 }
 
-.secondaryButton:hover {
+.secondaryButton:hover:enabled {
   background-color: #d7ecff;
+}
+
+button:disabled {
+  opacity: 0.3;
 }
