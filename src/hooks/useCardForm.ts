@@ -1,16 +1,14 @@
-import { ChangeEvent, Dispatch, FormEvent, SetStateAction, useState } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Card, CardNumberFormat, PasswordFormat } from '../types';
-import {
-  checkEnglishFormat,
-  checkExpirationDateFormat,
-  checkNumberFormat,
-} from '../utils/formatChecker';
-import { formatEnglishCapitalization } from '../utils/formatter';
+import { Card } from '../types';
+import formatChecker from '../utils/formatChecker';
+import formatter from '../utils/formatter';
+import { isKeyOfObj } from '../utils/typeUtils';
+import { validateMultipleInputField } from '../utils/validator';
 
 const useCardForm = (addCard: Dispatch<SetStateAction<Card[]>>) => {
   const [cardInformation, setCardInformation] = useState<Card>({
-    cardNumber: ['', '', '', ''],
+    cardNumber: '',
     expirationDate: {
       month: '',
       year: '',
@@ -22,81 +20,44 @@ const useCardForm = (addCard: Dispatch<SetStateAction<Card[]>>) => {
 
   const navigate = useNavigate();
 
-  const onCardNumberChange = ({ target: { value, dataset } }: ChangeEvent<HTMLInputElement>) => {
-    if (!checkNumberFormat(value)) return;
+  const onSingleInputFieldChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+    const { name } = event.target;
+    const value = event.target.dataset.value ?? event.target.value;
 
-    const index = Number(dataset.index);
+    if (isKeyOfObj(formatChecker, name) && !formatChecker[name](value)) return;
 
-    setCardInformation((information) => {
-      const cardNumber: CardNumberFormat = [...information.cardNumber];
-      cardNumber[index] = value;
-
-      return {
-        ...information,
-        cardNumber,
-      };
-    });
-  };
-
-  const onOwnerNameChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
-    if (!checkEnglishFormat(value)) return;
-
-    const ownerName = formatEnglishCapitalization(value);
+    const formattedValue = isKeyOfObj(formatter, name) ? formatter[name](value) : value;
 
     setCardInformation((information) => {
       return {
         ...information,
-        ownerName,
+        [name]: formattedValue,
       };
     });
-  };
+  }, []);
 
-  const onExpirationDateChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
-    if (!checkExpirationDateFormat(value)) return;
+  const onMultipleInputFieldsChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+    const {
+      name,
+      value,
+      dataset: { index },
+    } = event.target;
+
+    if (!validateMultipleInputField(name) || !index) return;
+    if (isKeyOfObj(formatChecker, name) && !formatChecker[name](value)) return;
 
     setCardInformation((information) => {
-      const [month, year] = value.split('/');
+      const changeInformation: string[] = [...information[name]];
+      changeInformation[Number(index)] = value;
 
       return {
         ...information,
-        expirationDate: {
-          month,
-          year,
-        },
+        [name]: changeInformation,
       };
     });
-  };
+  }, []);
 
-  const onSecurityCodeChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
-    if (!checkNumberFormat(value)) return;
-
-    setCardInformation((information) => {
-      return {
-        ...information,
-        securityCode: value,
-      };
-    });
-  };
-
-  const onPasswordChange = ({ target: { value, dataset } }: ChangeEvent<HTMLInputElement>) => {
-    if (!checkNumberFormat(value)) return;
-
-    const index = Number(dataset.index);
-
-    setCardInformation((information) => {
-      const password: PasswordFormat = [...information.password];
-      password[index] = value;
-
-      return {
-        ...information,
-        password,
-      };
-    });
-  };
-
-  const onCardInformationSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
+  const handleSubmit = () => {
     addCard((cardList) => {
       return [...cardList, cardInformation];
     });
@@ -105,12 +66,9 @@ const useCardForm = (addCard: Dispatch<SetStateAction<Card[]>>) => {
 
   return {
     cardInformation,
-    onCardNumberChange,
-    onOwnerNameChange,
-    onExpirationDateChange,
-    onSecurityCodeChange,
-    onPasswordChange,
-    onCardInformationSubmit,
+    onSingleInputFieldChange,
+    onMultipleInputFieldsChange,
+    handleSubmit,
   };
 };
 

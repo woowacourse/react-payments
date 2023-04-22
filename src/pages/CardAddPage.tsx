@@ -10,15 +10,8 @@ interface CardAddPageProps {
 }
 
 function CardAddPage({ addCard }: CardAddPageProps) {
-  const {
-    cardInformation,
-    onCardNumberChange,
-    onOwnerNameChange,
-    onExpirationDateChange,
-    onSecurityCodeChange,
-    onPasswordChange,
-    onCardInformationSubmit,
-  } = useCardForm(addCard);
+  const { cardInformation, onSingleInputFieldChange, onMultipleInputFieldsChange, handleSubmit } =
+    useCardForm(addCard);
 
   return (
     <>
@@ -26,12 +19,9 @@ function CardAddPage({ addCard }: CardAddPageProps) {
       <CardItem className="mg-b-24 center-hoz-item" information={cardInformation} />
       <CardAddForm
         cardInformation={cardInformation}
-        onCardNumberChange={onCardNumberChange}
-        onOwnerNameChange={onOwnerNameChange}
-        onExpirationDateChange={onExpirationDateChange}
-        onSecurityCodeChange={onSecurityCodeChange}
-        onPasswordChange={onPasswordChange}
-        onCardInformationSubmit={onCardInformationSubmit}
+        onSingleInputFieldChange={onSingleInputFieldChange}
+        onMultipleInputFieldsChange={onMultipleInputFieldsChange}
+        handleCardInformationSubmit={handleSubmit}
       />
     </>
   );

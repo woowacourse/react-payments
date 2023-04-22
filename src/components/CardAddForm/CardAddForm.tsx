@@ -12,22 +12,16 @@ import { useCardValidator } from '../../hooks/useCardValidation';
 
 interface CardAddFormProps {
   cardInformation: Card;
-  onCardNumberChange: ({ target: { value, dataset } }: ChangeEvent<HTMLInputElement>) => void;
-  onOwnerNameChange: ({ target: { value } }: ChangeEvent<HTMLInputElement>) => void;
-  onExpirationDateChange: ({ target: { value } }: ChangeEvent<HTMLInputElement>) => void;
-  onSecurityCodeChange: ({ target: { value } }: ChangeEvent<HTMLInputElement>) => void;
-  onPasswordChange: ({ target: { value, dataset } }: ChangeEvent<HTMLInputElement>) => void;
-  onCardInformationSubmit: (event: FormEvent<HTMLFormElement>) => void;
+  onSingleInputFieldChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onMultipleInputFieldsChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  handleCardInformationSubmit: () => void;
 }
 
 function CardAddForm({
   cardInformation,
-  onCardNumberChange,
-  onOwnerNameChange,
-  onExpirationDateChange,
-  onSecurityCodeChange,
-  onPasswordChange,
-  onCardInformationSubmit,
+  onSingleInputFieldChange,
+  onMultipleInputFieldsChange,
+  handleCardInformationSubmit,
 }: CardAddFormProps) {
   const [cardInputValidation, handleValidationChange] = useCardValidator();
   const isFormComplete = useFormComplete(cardInputValidation);
@@ -45,29 +39,29 @@ function CardAddForm({
 
     if (!isFormComplete) return;
 
-    onCardInformationSubmit(event);
+    handleCardInformationSubmit();
   };
 
   return (
     <form ref={formRef} className={styles.form} onSubmit={onSubmit} tabIndex={0}>
       <CardNumber
-        onChange={onCardNumberChange}
+        onInputChange={onSingleInputFieldChange}
         handleValidationChange={handleValidationChange}
-        values={cardInformation.cardNumber}
+        value={cardInformation.cardNumber}
       />
       <CardExpirationDate
-        onChange={onExpirationDateChange}
+        onInputChange={onSingleInputFieldChange}
         handleValidationChange={handleValidationChange}
         value={cardInformation.expirationDate}
       />
-      <CardOwnerName onChange={onOwnerNameChange} value={cardInformation.ownerName} />
+      <CardOwnerName onInputChange={onSingleInputFieldChange} value={cardInformation.ownerName} />
       <CardSecurityCode
-        onChange={onSecurityCodeChange}
+        onInputChange={onSingleInputFieldChange}
         handleValidationChange={handleValidationChange}
         value={cardInformation.securityCode}
       />
       <CardPassword
-        onChange={onPasswordChange}
+        onInputChange={onMultipleInputFieldsChange}
         handleValidationChange={handleValidationChange}
         values={cardInformation.password}
       />

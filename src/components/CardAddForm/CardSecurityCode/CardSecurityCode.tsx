@@ -7,11 +7,11 @@ import validator from '../../../utils/validator';
 
 interface CardSecurityCodeProps {
   handleValidationChange: (key: keyof CardInputValidation, value: boolean) => void;
-  onChange: ({ target: { value } }: ChangeEvent<HTMLInputElement>) => void;
+  onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
   value: string;
 }
 
-function CardSecurityCode({ handleValidationChange, onChange, value }: CardSecurityCodeProps) {
+function CardSecurityCode({ handleValidationChange, onInputChange, value }: CardSecurityCodeProps) {
   const [isError, onErrorBlur] = useError({
     validator: validator.securityCode,
     handleValidationChange,
@@ -38,7 +38,7 @@ function CardSecurityCode({ handleValidationChange, onChange, value }: CardSecur
         maxLength={4}
         isError={isError}
         autoComplete="off"
-        onChange={onChange}
+        onChange={onInputChange}
         onBlur={onErrorBlur}
       />
     </InputContainer>

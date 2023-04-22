@@ -8,11 +8,15 @@ import { ChangeEvent } from 'react';
 
 interface CardExpirationDateProps {
   handleValidationChange: (key: keyof CardInputValidation, value: boolean) => void;
-  onChange: ({ target: { value } }: ChangeEvent<HTMLInputElement>) => void;
+  onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
   value: ExpirationDateFormat;
 }
 
-function CardExpirationDate({ onChange, handleValidationChange, value }: CardExpirationDateProps) {
+function CardExpirationDate({
+  handleValidationChange,
+  onInputChange,
+  value,
+}: CardExpirationDateProps) {
   const [isError, onErrorBlur] = useError({
     validator: validator.expirationDate,
     handleValidationChange,
@@ -39,7 +43,7 @@ function CardExpirationDate({ onChange, handleValidationChange, value }: CardExp
         isError={isError}
         maxLength={5}
         autoComplete="cc-csc"
-        onChange={onChange}
+        onChange={onInputChange}
         onBlur={onErrorBlur}
       />
     </InputContainer>

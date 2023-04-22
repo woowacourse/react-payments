@@ -8,11 +8,11 @@ import validator from '../../../utils/validator';
 
 interface CardNumberProps {
   handleValidationChange: (key: keyof CardInputValidation, value: boolean) => void;
-  onChange: ({ target: { value, dataset } }: ChangeEvent<HTMLInputElement>) => void;
+  onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
   value: string;
 }
 
-function CardNumber({ handleValidationChange, onChange, value }: CardNumberProps) {
+function CardNumber({ handleValidationChange, onInputChange, value }: CardNumberProps) {
   const [isError, onErrorBlur] = useError({
     validator: validator.cardNumber,
     handleValidationChange,
@@ -33,7 +33,7 @@ function CardNumber({ handleValidationChange, onChange, value }: CardNumberProps
         maxLength={CARD_NUMBER_INPUT_MAX_LENGTH}
         autoComplete="cc-csc"
         isError={isError}
-        onChange={onChange}
+        onChange={onInputChange}
         onBlur={onErrorBlur}
       />
     </InputContainer>

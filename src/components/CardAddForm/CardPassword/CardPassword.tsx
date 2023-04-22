@@ -2,17 +2,17 @@ import styles from './style.module.css';
 import { ChangeEvent } from 'react';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Input from '../../common/Input/Input';
-import { CardInputValidation, PasswordFormat } from '../../../types';
+import { CardInputValidation } from '../../../types';
 import { useError } from '../../../hooks/useError';
 import validator from '../../../utils/validator';
 
 interface CardPasswordProps {
   handleValidationChange: (key: keyof CardInputValidation, value: boolean) => void;
-  onChange: ({ target: { value } }: ChangeEvent<HTMLInputElement>) => void;
-  values: PasswordFormat;
+  onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  values: string[];
 }
 
-function CardPassword({ handleValidationChange, onChange, values }: CardPasswordProps) {
+function CardPassword({ handleValidationChange, onInputChange, values }: CardPasswordProps) {
   const [isError, onErrorBlur] = useError({
     validator: validator.password,
     handleValidationChange,
@@ -39,7 +39,7 @@ function CardPassword({ handleValidationChange, onChange, values }: CardPassword
             autoComplete="off"
             data-index={index}
             data-name="password"
-            onChange={onChange}
+            onChange={onInputChange}
           />
         ))}
         <div className={styles.passwordPlaceholder}>

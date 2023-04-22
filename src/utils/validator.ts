@@ -1,3 +1,4 @@
+import { MultipleInputFieldCardInformation } from '../types';
 import { CARD_NUMBER_INPUT_MAX_LENGTH } from '../constants';
 
 const validateCardNumber = (input: string) => {
@@ -28,7 +29,7 @@ const validateSecurityCode = (input: string) => {
   return input.length >= 3 && input.length <= 4;
 };
 
-const validatePassword = (passwordInputs: PasswordFormat) => {
+const validatePassword = (passwordInputs: string[]) => {
   return passwordInputs.every((password) => password.length === 1);
 };
 
@@ -41,3 +42,9 @@ const validator = {
 };
 
 export default validator;
+
+const validateMultipleInputField = (key: string): key is MultipleInputFieldCardInformation => {
+  return ['password'].includes(key);
+};
+
+export { validateMultipleInputField };
