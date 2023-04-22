@@ -1,5 +1,6 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import CardNumber from "./CardNumber";
+import { CARD_ERROR_MESSAGE } from "../../../CONSTANT";
 
 import "./inputBoxCardNumber.css";
 
@@ -16,7 +17,9 @@ export default function InputBoxCardNumber(props: Props) {
     <div className="input-box-card-number">
       <p>카드번호</p>
       <CardNumber setError={setError} setIsComplete={setIsComplete} />
-      <p className={error ? "visible" : ""}>에러</p>
+      <p className={error ? "visible" : ""}>
+        {CARD_ERROR_MESSAGE.INPUT_CARD_NUMBER}
+      </p>
     </div>
   );
 }

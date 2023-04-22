@@ -3,6 +3,7 @@ import Input from "../../common/Input";
 
 import "./inputBoxSecurityCode.css";
 import { validateSecurityNumber } from "../../../validation/securityNumber";
+import { CARD_ERROR_MESSAGE } from "../../../CONSTANT";
 
 interface Props {
   setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
@@ -49,7 +50,7 @@ export default function InputBoxSecurityCode(props: Props) {
         ?
       </button>
       <p className={inputStatus === INPUT_STATUS.ERROR ? "visible" : ""}>
-        error message
+        {CARD_ERROR_MESSAGE.INPUT_CARD_PASSWORD}
       </p>
     </div>
   );

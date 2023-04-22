@@ -2,6 +2,7 @@ import { useState, ChangeEvent } from "react";
 import Input from "../../common/Input";
 
 import "./inputBoxOwner.css";
+import { CARD_ERROR_MESSAGE } from "../../../CONSTANT";
 
 interface Props {
   setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
@@ -36,7 +37,7 @@ export default function InputBoxOwner(props: Props) {
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
         inputMode="text"
       ></Input>
-      <p>TBD</p>
+      <p>{CARD_ERROR_MESSAGE.INPUT_CARD_OWNER}</p>
     </div>
   );
 }

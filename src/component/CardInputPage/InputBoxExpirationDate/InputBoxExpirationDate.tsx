@@ -2,7 +2,9 @@ import { useState, useEffect, ChangeEvent } from "react";
 import Input from "../../common/Input";
 
 import "./inputBoxExpirationDate.css";
+import { CARD_ERROR_MESSAGE } from "../../../CONSTANT";
 import { validateExpirationDate } from "../../../validation/ExpirationDate";
+
 interface Props {
   setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -53,7 +55,7 @@ export default function InputBoxExpirationDate(props: Props) {
         inputMode="numeric"
       ></Input>
       <p className={inputStatus === INPUT_STATUS.ERROR ? "visible" : ""}>
-        error message
+        {CARD_ERROR_MESSAGE.INPUT_CARD_EXPIRATION_DATE}
       </p>
     </div>
   );
