@@ -36,3 +36,7 @@ export const isNumberInput = (data: string): boolean => {
 export const changeNumberToMask = (data: string): string => {
   return '·'.repeat(data.length);
 };
+
+export const stringToUpperCase = (data: string): string => {
+  return data.toUpperCase();
+};

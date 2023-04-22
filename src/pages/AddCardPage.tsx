@@ -1,37 +1,25 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import type { CardNumber, InputHook } from '../type';
 import Card from '../components/Card';
 import FormCardAdd from '../components/FormCardAdd';
 import Header from '../components/Header';
 import useInput from '../hooks/useInput';
 import usePasswordInput from '../hooks/usePasswordInput';
-import { formatExpireDate, handleNumberInput, isAlphabetInput, isNumberInput } from '../utils/util';
-import type { CardNumber, InputHook } from '../type';
-
+import {
+  formatExpireDate,
+  handleNumberInput,
+  isNumberInput,
+  stringToUpperCase,
+} from '../utils/util';
+import {
+  cardExpireCondition,
+  securityCodeCondition,
+  cardOwnerCondition,
+  cardPasswordCondition,
+} from './cardInputCondition';
 import './AddCardPage.css';
-
-const cardExpireCondition = (e: React.ChangeEvent<HTMLInputElement>) => {
-  const length = e.target.value.length;
-  const lastWord = e.target.value[length - 1];
-  return length <= 5 && length > 0 && (isNumberInput(lastWord) || lastWord === '/');
-};
-
-const securityCodeCondition = (e: React.ChangeEvent<HTMLInputElement>) => {
-  return e.target.value.length <= 3;
-};
-const cardOwnerCondition = (e: React.ChangeEvent<HTMLInputElement>) => {
-  const length = e.target.value.length;
-  const lastWord = e.target.value[length - 1];
-  return length <= 30 && !(length > 0 && !isAlphabetInput(lastWord.toUpperCase()));
-};
-
-const stringToUpperCase = (data: string): string => {
-  return data.toUpperCase();
-};
-
-const cardPasswordCondition = (e: React.ChangeEvent<HTMLInputElement>) => {
-  return e.target.value.length <= 1;
-};
 
 const AddCardPage = () => {
   const navigate = useNavigate();
