@@ -1,8 +1,6 @@
-import React from 'react';
-
-import type { Meta, StoryObj } from '@storybook/react';
-
+import type { Meta } from '@storybook/react';
 import { AddNewCardForm } from '../../components/AddNewCardForm';
+import { BrowserRouter } from 'react-router-dom';
 
 const meta = {
   title: 'Example/Form',
@@ -11,10 +9,11 @@ const meta = {
 } satisfies Meta<typeof AddNewCardForm>;
 
 export default meta;
-type Story = StoryObj<typeof meta>;
 
-export const NewCardForm: Story = {
-  args: {
-    addNewCardFormRef: React.createRef(),
-  },
+export const RegisterNewCardForm = () => {
+  return (
+    <BrowserRouter>
+      <AddNewCardForm />
+    </BrowserRouter>
+  );
 };
