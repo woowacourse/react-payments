@@ -60,8 +60,6 @@ export const ErrorMessage = styled.div`
 
   font-size: 10px;
   color: rgb(33, 33, 33);
-
-  transition: all 0.3s ease;
 `;
 
 const Span = styled.span`

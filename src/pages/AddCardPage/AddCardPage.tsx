@@ -205,8 +205,8 @@ const Form = styled.form`
   overflow: scroll;
 
   ::-webkit-scrollbar {
-    width: 3px;
-    height: 2px;
+    width: 0;
+    height: 0;
     background-color: transparent;
   }
 `;
