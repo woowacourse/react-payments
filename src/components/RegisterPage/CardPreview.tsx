@@ -1,17 +1,8 @@
 import { LENGTH } from 'constants/constants';
 import styled from 'styled-components';
+import { Card } from 'types/Card';
 
-interface Props {
-  number1: string;
-  number2: string;
-  number3: string;
-  number4: string;
-  month: string;
-  year: string;
-  name: string;
-}
-
-const CardPreview = ({ cardInfo }: { cardInfo: Props }) => {
+const CardPreview = ({ cardInfo }: { cardInfo: Card }) => {
   return (
     <S.Card>
       <S.Chip />

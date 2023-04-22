@@ -3,13 +3,9 @@ import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import { changeToValidValue } from 'utils/inputValidator';
 import { HIDDEN_ELEMENT_STYLE, LENGTH, REGEX } from 'constants/constants';
+import { Card } from 'types/Card';
 
-interface CardNumber {
-  number1: string;
-  number2: string;
-  number3: string;
-  number4: string;
-}
+type CardNumber = Pick<Card, 'number1' | 'number2' | 'number3' | 'number4'>;
 
 interface Props {
   cardNumber: CardNumber;

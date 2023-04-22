@@ -3,11 +3,9 @@ import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import { changeToValidValue } from 'utils/inputValidator';
 import { HIDDEN_ELEMENT_STYLE, LENGTH, REGEX } from 'constants/constants';
+import { Card } from 'types/Card';
 
-interface Date {
-  month: string;
-  year: string;
-}
+type Date = Pick<Card, 'month' | 'year'>;
 
 interface Props {
   date: Date;

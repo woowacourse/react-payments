@@ -11,6 +11,7 @@ import { areValidInfo } from 'validation';
 import Header from '../Header';
 import { useNavigate } from 'react-router-dom';
 import { setLocalStorage } from 'utils/localStorage';
+import { Card } from 'types/Card';
 
 const CardRegisterForm = () => {
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ const CardRegisterForm = () => {
 
   const [name, setName] = useState('');
 
-  const cardInfo = { ...cardNumber, ...date, name };
+  const cardInfo: Card = { ...cardNumber, ...date, name };
 
   const handleForm = (event: FormEvent) => {
     event.preventDefault();
