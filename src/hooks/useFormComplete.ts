@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
-import { CardInputValidation } from '../types';
 
-const useFormComplete = (validationInformation: CardInputValidation) => {
+const useFormComplete = <T extends Record<string, boolean>>(validationInformation: T) => {
   const [isComplete, setIsComplete] = useState(false);
 
   useEffect(() => {
