@@ -10,21 +10,24 @@ type Props = {
 
 function CreditCardExpiryInput({ creditCardExpiry, errorMessage, setCreditCardExpiry }: Props) {
   const handleChangeCreditCardExpiry = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newCardExpiry = event.target.value.replaceAll('/', '');
+    let newCardExpiry = event.target.value.replaceAll('/', '');
 
-    if (newCardExpiry.length <= 2) setCreditCardExpiry(newCardExpiry);
-    else if (newCardExpiry.length <= 4) {
+    if (newCardExpiry.length > 4) return;
+
+    if (newCardExpiry.length >= 3 && newCardExpiry.length <= 4) {
       const newCardExpiryArray = newCardExpiry.split('');
-      newCardExpiryArray.splice(2, 0, '/');
-      setCreditCardExpiry(newCardExpiryArray.join(''));
+      newCardExpiryArray.splice(2, 0, '/').join('');
+      newCardExpiry = newCardExpiryArray.join('');
     }
+
+    setCreditCardExpiry(newCardExpiry);
   };
 
   return (
     <InputLayout errorMessage={errorMessage}>
       <S.CreditCardRegisterLabel>만료일</S.CreditCardRegisterLabel>
       <Input
-        placeholder="MM /YY"
+        placeholder="MM/YY"
         type="string"
         value={creditCardExpiry}
         width="40%"
