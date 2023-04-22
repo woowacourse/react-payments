@@ -14,13 +14,16 @@ import * as S from './style';
 function CreditCardRegister() {
   const navigate = useNavigate();
 
-  const [creditCardNumber, setCreditCardNumber, numberErrorMessage] = useInput<string>('', creditCard.isValidNumber);
-  const [creditCardExpiry, setCreditCardExpiry, expiryErrorMessage] = useInput<string>('', creditCard.isValidExpiry);
-  const [creditCardOwner, setCreditCardOwner, ownerErrorMessage] = useInput<string>('', creditCard.isValidOwner);
-  const [creditCardCVC, setCreditCardCVC, CVCErrorMessage] = useInput<string>('', creditCard.isValidCVC);
+  const { numberValidationFns, expiryValidationFns, ownerValidationFns, cvcValidationFns, passwordValidationFns } =
+    creditCard.getValidationFns();
+
+  const [creditCardNumber, setCreditCardNumber, numberErrorMessage] = useInput<string>('', numberValidationFns);
+  const [creditCardExpiry, setCreditCardExpiry, expiryErrorMessage] = useInput<string>('', expiryValidationFns);
+  const [creditCardOwner, setCreditCardOwner, ownerErrorMessage] = useInput<string>('', ownerValidationFns);
+  const [creditCardCVC, setCreditCardCVC, CVCErrorMessage] = useInput<string>('', cvcValidationFns);
   const [creditCardPassword, setCreditCardPassword, passwordErrorMessage] = useInput<Type.CreditCardPasswordType>(
     { first: '', second: '' },
-    creditCard.isValidPassword,
+    passwordValidationFns,
   );
 
   const [isFullFilled, setIsFullFilled] = useState(false);

@@ -25,6 +25,19 @@ const creditCard = {
 
       return { ok: true };
     },
+
+    checkLength: (numbers: string) => {
+      if (!numbers.length) return { ok: true };
+
+      if (numbers.length !== 16) {
+        return {
+          ok: false,
+          errorMessage: '카드는 16자리이어야 합니다.',
+        };
+      }
+
+      return { ok: true };
+    },
   },
 
   isValidExpiry: {
@@ -84,6 +97,16 @@ const creditCard = {
 
       return { ok: true };
     },
+  },
+
+  getValidationFns() {
+    return {
+      numberValidationFns: Object.values(this.isValidNumber),
+      expiryValidationFns: Object.values(this.isValidExpiry),
+      ownerValidationFns: Object.values(this.isValidOwner),
+      cvcValidationFns: Object.values(this.isValidCVC),
+      passwordValidationFns: Object.values(this.isValidPassword),
+    };
   },
 };
 

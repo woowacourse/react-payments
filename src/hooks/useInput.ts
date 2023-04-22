@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
 
+type ValidFn<T> = (value: T) => { ok: boolean; errorMessage?: string };
+
 function useInput<T>(
   initValue: T,
-  validFn: {
-    [key: string]: (value: T) => { ok: boolean; errorMessage?: string };
-  },
+  validFns: ValidFn<T>[],
 ): [T, React.Dispatch<React.SetStateAction<T>>, string | null] {
   const [value, setValue] = useState(initValue);
   const [errorMessage, setErrorMessage] = useState<null | string>(null);
 
   useEffect(() => {
     let newErrorMessage = null;
-    Object.values(validFn).some((fn) => {
+    validFns.some((fn) => {
       const result = fn(value);
       if (!result.ok) {
         newErrorMessage = result.errorMessage;
