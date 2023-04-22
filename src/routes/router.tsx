@@ -10,7 +10,7 @@ const router = createBrowserRouter(
       element: <App />,
       children: [
         {
-          path: 'card-list',
+          path: '',
           element: <CardList />,
         },
         {
