@@ -42,6 +42,20 @@ function CardDetailPage({ addCreditCard }: CardDetailPageProps) {
     addCreditCard(newCard);
   };
 
+  const detailFromProps = {
+    changeCardNumber: changeCardNumber,
+    cardNumberHidden: cardNumberHidden,
+    changeCardDate: changeCardDate,
+    cardDate: cardDate,
+    changeCardOwnerName: changeCardOwnerName,
+    cardOwnerName: cardOwnerName,
+    changeCardCVC: changeCardCVC,
+    cardCVC: cardCVC,
+    cardPassword: cardPassword,
+    changeCardPassword: changeCardPassword,
+    submitCreditCard: submitCreditCard,
+  };
+
   return (
     <Style.Page>
       <CardDetailHeader />
@@ -50,19 +64,7 @@ function CardDetailPage({ addCreditCard }: CardDetailPageProps) {
         cardDate={cardDate}
         cardOwnerName={cardOwnerName}
       />
-      <CardDetailForm
-        changeCardNumber={changeCardNumber}
-        cardNumberHidden={cardNumberHidden}
-        changeCardDate={changeCardDate}
-        cardDate={cardDate}
-        changeCardOwnerName={changeCardOwnerName}
-        cardOwnerName={cardOwnerName}
-        changeCardCVC={changeCardCVC}
-        cardCVC={cardCVC}
-        cardPassword={cardPassword}
-        changeCardPassword={changeCardPassword}
-        submitCreditCard={submitCreditCard}
-      />
+      <CardDetailForm {...detailFromProps} />
     </Style.Page>
   );
 }
