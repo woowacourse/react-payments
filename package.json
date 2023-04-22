@@ -64,6 +64,7 @@
     "@storybook/testing-library": "^0.0.14-next.2",
     "@types/react-router-dom": "^5.3.3",
     "babel-plugin-named-exports-order": "^0.0.2",
+    "prettier": "^2.8.7",
     "prop-types": "^15.8.1",
     "storybook": "^7.0.5",
     "webpack": "^5.79.0"
