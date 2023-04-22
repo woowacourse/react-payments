@@ -17,7 +17,14 @@ function CardAddPage({ addCard }: CardAddPageProps) {
     <>
       <Header content="카드 추가" isOverlayPage={true} />
       <main>
-        <CardItem className="mg-b-24 center-hoz-item" information={cardInformation} />
+        <CardItem
+          className="mg-b-24 center-hoz-item"
+          information={{
+            cardNumber: cardInformation.cardNumber,
+            expirationDate: cardInformation.expirationDate,
+            ownerName: cardInformation.ownerName,
+          }}
+        />
         <CardAddForm
           cardInformation={cardInformation}
           onSingleInputFieldChange={onSingleInputFieldChange}

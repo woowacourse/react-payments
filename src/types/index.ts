@@ -20,6 +20,8 @@ type CardInputValidation = {
   [K in keyof Card]: boolean;
 };
 
+type CardInformation = Pick<Card, 'cardNumber' | 'expirationDate' | 'ownerName'>;
+
 type MultipleInputFieldCardInformation = 'password';
 
 export type {
@@ -27,5 +29,6 @@ export type {
   ExpirationDateFormat,
   Card,
   CardInputValidation,
+  CardInformation,
   MultipleInputFieldCardInformation,
 };

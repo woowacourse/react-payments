@@ -1,10 +1,10 @@
 import styles from './style.module.css';
 import { ComponentPropsWithoutRef } from 'react';
-import { Card } from '../../types';
+import { CardInformation } from '../../types';
 import { CARD_NUMBER_UNIT_MAX_LENGTH, REGEX, SECURITY_TEXT_ICON } from '../../constants';
 
 interface CardItemProps extends ComponentPropsWithoutRef<'div'> {
-  information: Card;
+  information: CardInformation;
 }
 
 function CardItem({ information, className }: CardItemProps) {
