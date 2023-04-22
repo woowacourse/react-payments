@@ -1,4 +1,4 @@
-import { Container } from "../common/Layout";
+import { InputContainer } from "../common/InputContainer";
 import { Input } from "../common/Input";
 import { InputLabel } from "../common/InputLabel";
 import styled from "styled-components";
@@ -28,7 +28,7 @@ export const OwnerInput = ({ setOwner, owner }: OwnerInputProps) => {
   };
 
   return (
-    <Container>
+    <InputContainer>
       <Row>
         <InputLabel text="카드 소유자 이름 (선택)" name="owner" />
         <InputLabel
@@ -42,7 +42,7 @@ export const OwnerInput = ({ setOwner, owner }: OwnerInputProps) => {
         handleInput={handleInput}
         handleChange={(e) => {}}
       />
-    </Container>
+    </InputContainer>
   );
 };
 

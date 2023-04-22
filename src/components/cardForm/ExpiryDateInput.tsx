@@ -1,4 +1,4 @@
-import { Container } from "../common/Layout";
+import { InputContainer } from "../common/InputContainer";
 import { Input } from "../common/Input";
 import { InputLabel } from "../common/InputLabel";
 import { useState } from "react";
@@ -70,7 +70,7 @@ export const ExpiryDateInput = ({
   };
 
   return (
-    <Container>
+    <InputContainer>
       <InputLabel text="만료일" name="expiryDate" />
       <Input
         {...ExpiryDateInfo}
@@ -81,6 +81,6 @@ export const ExpiryDateInput = ({
           errorMessage: getValidMessage(),
         }}
       />
-    </Container>
+    </InputContainer>
   );
 };

@@ -1,4 +1,4 @@
-import { Container } from "../common/Layout";
+import { InputContainer } from "../common/InputContainer";
 import { InputLabel } from "../common/InputLabel";
 import { Input } from "../common/Input";
 import { useState } from "react";
@@ -68,7 +68,7 @@ export const CardNumberInput = ({
   };
 
   return (
-    <Container>
+    <InputContainer>
       <InputLabel text="카드 번호" name="cardNumber" />
       <Input
         error={{
@@ -79,6 +79,6 @@ export const CardNumberInput = ({
         handleInput={handleInput}
         handleChange={handleOutFocusEvent}
       />
-    </Container>
+    </InputContainer>
   );
 };

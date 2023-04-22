@@ -1,4 +1,4 @@
-import { Container } from "../common/Layout";
+import { InputContainer } from "../common/InputContainer";
 import { Input } from "../common/Input";
 import { InputLabel } from "../common/InputLabel";
 import styled from "styled-components";
@@ -32,7 +32,7 @@ export const PasswordInput = () => {
   };
 
   return (
-    <Container>
+    <InputContainer>
       <InputLabel text="비밀번호" name="password" />
       <Row>
         <Input
@@ -55,7 +55,7 @@ export const PasswordInput = () => {
         <HiddenPassword>●</HiddenPassword>
         <HiddenPassword>●</HiddenPassword>
       </Row>
-    </Container>
+    </InputContainer>
   );
 };
 

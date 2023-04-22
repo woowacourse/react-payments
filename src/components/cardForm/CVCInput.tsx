@@ -1,4 +1,4 @@
-import { Container } from "../common/Layout";
+import { InputContainer } from "../common/InputContainer";
 import { Input } from "../common/Input";
 import { InputLabel } from "../common/InputLabel";
 import styled from "styled-components";
@@ -33,7 +33,7 @@ export const CVCInput = () => {
   };
 
   return (
-    <Container>
+    <InputContainer>
       <InputLabel text="보안 코드 (CVC/CVV)" name="CVC" />
       <Wrapper>
         <Input
@@ -53,7 +53,7 @@ export const CVCInput = () => {
           ?
         </HelpIcon>
       </Wrapper>
-    </Container>
+    </InputContainer>
   );
 };
 
