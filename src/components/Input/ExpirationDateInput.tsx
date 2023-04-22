@@ -23,7 +23,7 @@ export function ExpirationDateInput(props: ExpirationProps) {
       inputRefs[index + 1].current?.focus();
     }
 
-    onChange && onChange(e);
+    onChange?.(e);
   };
 
   return (

@@ -21,7 +21,7 @@ export function PasswordInput(props: PasswordInputProps) {
     if (index < Object.keys(props).length - 1 && value.length === e.target.maxLength) {
       inputRefs[index + 1].current?.focus();
     }
-    onChange && onChange(e);
+    onChange?.(e);
   };
 
   return (
