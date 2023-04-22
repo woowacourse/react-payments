@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import Input from '@Components/Input';
 
 import InputLayout from './InputLayout';
@@ -10,16 +12,18 @@ type Props = {
 };
 
 function CreditCardCVCInput({ creditCardCVC, errorMessage, setCreditCardCVC }: Props) {
+  const [isHoverHelperIcon, setIsHoverHelperIcon] = useState(false);
+
   const handleChangeCreditCardCVC = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newCVC = event.target.value;
-    // if (newCVC.length <= 3) {
+    if (newCVC.length > 3) return;
+
     setCreditCardCVC(newCVC);
-    // }
   };
 
-  const handleGuideMessage = () => {
-    window.alert('카드 뒷면에 입력된 마지막 숫자 3자리를 입력해주세요.');
-  };
+  const handleGuideIconMouseEnter = () => setIsHoverHelperIcon(true);
+
+  const handleGuideIconMouseLeave = () => setIsHoverHelperIcon(false);
 
   return (
     <InputLayout errorMessage={errorMessage}>
@@ -33,7 +37,16 @@ function CreditCardCVCInput({ creditCardCVC, errorMessage, setCreditCardCVC }: P
           onChange={handleChangeCreditCardCVC}
           maxLength={3}
         />
-        <S.GuideMessage onClick={handleGuideMessage}>?</S.GuideMessage>
+        <S.GuideLayout>
+          <S.GuideIcon onMouseEnter={handleGuideIconMouseEnter} onMouseLeave={handleGuideIconMouseLeave}>
+            ?
+          </S.GuideIcon>
+          {isHoverHelperIcon && (
+            <S.GuideTextLayout>
+              <S.GuideText>카드 뒷면에 입력된 마지막 숫자 3자리를 입력해주세요.</S.GuideText>
+            </S.GuideTextLayout>
+          )}
+        </S.GuideLayout>
       </S.CVCInputLayout>
     </InputLayout>
   );
