@@ -1,5 +1,5 @@
 import AppBar from "../../components/AppBar/AppBar";
-import CardList from "../../components/CardLIst/CardList";
+import CardList from "../../components/CardList/CardList";
 import { Container } from "../../components/common";
 import { Card } from "../../types";
 
