@@ -1,13 +1,13 @@
-import { useRef, useState } from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import { useRef, useState } from 'react';
+import { CardViewer } from './CardViewer';
 import { CardNumberInput } from './input/CardNumberInput';
 import { ExpirationDateInput } from './input/ExpirationDateInput';
 import { OwnerNameInput } from './input/OwnerNameInput';
 import { SecurityCodeInput } from './input/SecurityCodeInput';
 import { PasswordInput } from './input/PasswordInput';
-import { CardViewer } from './CardViewer';
 import { cardDataService } from '../domains/cardDataService';
-import { useNavigate } from 'react-router-dom';
 
 export const AddNewCardForm = () => {
   const navigate = useNavigate();
@@ -38,6 +38,20 @@ export const AddNewCardForm = () => {
   const securityCodeInputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
 
+  const handleCardInfoSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    cardDataService.addNewCard({
+      cardNumber,
+      expirationDate,
+      ownerName,
+      securityCode,
+      password,
+    });
+
+    navigate('/');
+  };
+
   const moveFocusToExpirationDate = () => {
     monthInputRef.current?.focus();
   };
@@ -59,21 +73,7 @@ export const AddNewCardForm = () => {
   };
 
   return (
-    <Style.Wrapper
-      onSubmit={(e) => {
-        e.preventDefault();
-
-        cardDataService.addNewCard({
-          cardNumber,
-          expirationDate,
-          ownerName,
-          securityCode,
-          password,
-        });
-
-        navigate('/');
-      }}
-    >
+    <Style.Wrapper onSubmit={handleCardInfoSubmit}>
       <CardViewer cardNumber={cardNumber} expirationDate={expirationDate} ownerName={ownerName} />
       <Style.InputContainer>
         <CardNumberInput
@@ -118,9 +118,10 @@ const Style = {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 19px;
 
     width: max-content;
+
+    gap: 19px;
   `,
   InputContainer: styled.div`
     display: flex;

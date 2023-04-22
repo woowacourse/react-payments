@@ -1,13 +1,13 @@
 import styled from 'styled-components';
-import { AddNewCardForm } from '../components/AddNewCardForm';
 import { Layout } from '../layout';
 import { BackButton } from '../layout/BackButton';
+import { AddNewCardForm } from '../components/AddNewCardForm';
 
 export const Register = () => {
   return (
     <Layout>
       <Style.Header>
-        <BackButton path="/" />
+        <BackButton path='/' />
         <Style.Title>카드추가</Style.Title>
       </Style.Header>
       <AddNewCardForm />
@@ -20,13 +20,13 @@ const Style = {
     display: flex;
     align-items: center;
 
-    font-weight: bold;
-
     margin-bottom: 25px;
+
+    font-weight: bold;
   `,
   Title: styled.span`
-    font-size: 16px;
-
     margin-left: 18px;
+
+    font-size: 16px;
   `,
 };

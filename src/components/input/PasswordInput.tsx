@@ -1,7 +1,7 @@
-import { useRef } from 'react';
 import styled from 'styled-components';
-import { InputWrapper } from './InputWrapper';
+import { useRef } from 'react';
 import { Input } from './Input';
+import { InputWrapper } from './InputWrapper';
 
 interface Props {
   passwordInputRef: React.RefObject<HTMLInputElement>;
@@ -33,6 +33,28 @@ export const PasswordInput = ({
     }
   };
 
+  const handleFirstPasswordInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    validatePassword(e);
+
+    setPassword({
+      ...password,
+      firstPassword: e.target.value,
+    });
+
+    if (e.target.value.length === 1) secondInputRef.current?.focus();
+  };
+
+  const handleSecondPasswordInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    validatePassword(e);
+
+    setPassword({
+      ...password,
+      secondPassword: e.target.value,
+    });
+
+    if (e.target.value) activateNextButton();
+  };
+
   const validatePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!/^[0-9]*$/.test(e.target.value)) {
       e.preventDefault();
@@ -60,20 +82,11 @@ export const PasswordInput = ({
             value={password.firstPassword}
             width={43}
             maxLength={1}
-            type="password"
-            inputMode="numeric"
+            type='password'
+            inputMode='numeric'
             required
-            onChange={(e) => {
-              validatePassword(e);
-
-              setPassword({
-                ...password,
-                firstPassword: e.target.value,
-              });
-
-              if (e.target.value.length === 1) secondInputRef.current?.focus();
-            }}
-            placeholder="•"
+            onChange={handleFirstPasswordInputChange}
+            placeholder='•'
           />
         </InputWrapper>
         <InputWrapper width={43}>
@@ -82,25 +95,16 @@ export const PasswordInput = ({
             value={password.secondPassword}
             width={43}
             maxLength={1}
-            type="password"
-            inputMode="numeric"
+            type='password'
+            inputMode='numeric'
             required
-            onChange={(e) => {
-              validatePassword(e);
-
-              setPassword({
-                ...password,
-                secondPassword: e.target.value,
-              });
-
-              if (e.target.value) activateNextButton();
-            }}
+            onChange={handleSecondPasswordInputChange}
             onKeyDown={handleBackspacePress}
-            placeholder="•"
+            placeholder='•'
           />
         </InputWrapper>
-        <Style.DotContainer>•</Style.DotContainer>
-        <Style.DotContainer>•</Style.DotContainer>
+        <Style.Dot>•</Style.Dot>
+        <Style.Dot>•</Style.Dot>
       </Style.Wrapper>
     </>
   );
@@ -113,30 +117,26 @@ const Style = {
 
     width: 193px;
   `,
-  Input: styled.input`
-    width: 43px;
-    height: 45px;
-    text-align: center;
 
-    padding: 0;
+  Label: styled.div`
+    display: flex;
+    justify-content: space-between;
+
+    width: 318px;
+
+    font-size: 12px;
   `,
-  DotContainer: styled.div`
+
+  Title: styled.span`
+    color: #2f2f2f;
+  `,
+
+  Dot: styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
 
     width: 43px;
     height: 45px;
-  `,
-  Label: styled.div`
-    width: 318px;
-
-    display: flex;
-    justify-content: space-between;
-
-    font-size: 12px;
-  `,
-  Title: styled.span`
-    color: #2f2f2f;
   `,
 };

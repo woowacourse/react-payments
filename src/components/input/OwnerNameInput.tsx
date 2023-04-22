@@ -1,6 +1,6 @@
-import { InputWrapper } from './InputWrapper';
-import { Input } from './Input';
 import styled from 'styled-components';
+import { Input } from './Input';
+import { InputWrapper } from './InputWrapper';
 
 interface Props {
   ownerNameInputRef: React.RefObject<HTMLInputElement>;
@@ -35,10 +35,10 @@ export function OwnerNameInput({
         <Input
           ref={ownerNameInputRef}
           value={ownerName}
-          width={'318'}
+          width={318}
           minLength={1}
           maxLength={30}
-          placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+          placeholder='카드에 표시된 이름과 동일하게 입력하세요.'
           onChange={handleInputChange}
           onKeyDown={(e) => {
             if (e.key === 'Enter') moveFocusToSecurityCode();
@@ -55,16 +55,18 @@ const isValidName = (input: string) => {
 
 const Style = {
   Label: styled.div`
-    width: 318px;
-
     display: flex;
     justify-content: space-between;
 
+    width: 318px;
+
     font-size: 12px;
   `,
+
   NameLength: styled.span`
     color: #2f2f2f;
   `,
+
   Title: styled.span`
     color: #2f2f2f;
   `,

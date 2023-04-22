@@ -1,11 +1,10 @@
-import { useRef, useEffect } from 'react';
-import { InputWrapper } from './InputWrapper';
-import { Input } from './Input';
 import styled from 'styled-components';
+import { useRef, useEffect } from 'react';
+import { Input } from './Input';
+import { InputWrapper } from './InputWrapper';
 
 interface Props {
   monthInputRef: React.RefObject<HTMLInputElement>;
-  moveFocusToOwnerName: () => void;
   expirationDate: {
     month: string;
     year: string;
@@ -16,25 +15,38 @@ interface Props {
       year: string;
     }>
   >;
+  moveFocusToOwnerName: () => void;
 }
 
 export function ExpirationDateInput({
   monthInputRef,
-  moveFocusToOwnerName,
   expirationDate,
   setExpirationDate,
+  moveFocusToOwnerName,
 }: Props) {
   const yearInputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    if (expirationDate.year.length === 2) moveFocusToOwnerName();
-  }, [expirationDate.year]);
 
   const handleBackspacePress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Backspace' && expirationDate.year === '') {
       e.preventDefault();
       monthInputRef.current?.focus();
     }
+  };
+
+  const handleMonthInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setExpirationDate({
+      ...expirationDate,
+      month: e.target.value,
+    });
+
+    if (e.target.value.length === 2) yearInputRef.current?.focus();
+  };
+
+  const handleYearInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setExpirationDate({
+      ...expirationDate,
+      year: e.target.value,
+    });
   };
 
   const validateDate = () => {
@@ -50,6 +62,10 @@ export function ExpirationDateInput({
     }
   };
 
+  useEffect(() => {
+    if (expirationDate.year.length === 2) moveFocusToOwnerName();
+  }, [expirationDate.year]);
+
   return (
     <>
       <Style.Label>
@@ -59,37 +75,25 @@ export function ExpirationDateInput({
         <Input
           ref={monthInputRef}
           value={expirationDate.month}
-          width={'30'}
+          width={30}
           minLength={2}
           maxLength={2}
           required
-          inputMode="numeric"
-          placeholder="MM"
-          onChange={(e) => {
-            setExpirationDate({
-              ...expirationDate,
-              month: e.target.value,
-            });
-
-            if (e.target.value.length === 2) yearInputRef.current?.focus();
-          }}
+          inputMode='numeric'
+          placeholder='MM'
+          onChange={handleMonthInputChange}
         />
-        &nbsp;/&nbsp;
+        <Style.Slash>/</Style.Slash>
         <Input
           ref={yearInputRef}
           value={expirationDate.year}
-          width={'30'}
+          width={30}
           minLength={2}
           maxLength={2}
           required
-          inputMode="numeric"
-          placeholder="YY"
-          onChange={(e) => {
-            setExpirationDate({
-              ...expirationDate,
-              year: e.target.value,
-            });
-          }}
+          inputMode='numeric'
+          placeholder='YY'
+          onChange={handleYearInputChange}
           onKeyDown={handleBackspacePress}
           onBlur={validateDate}
         />
@@ -116,21 +120,24 @@ const isValidDate = (month: string, year: string) => {
 
   if (Number(year) > Number(currentYear)) return true;
 
-  return Number(year) === Number(currentYear)
-    ? Number(month) >= Number(currentMonth)
-    : false;
+  return Number(year) === Number(currentYear) ? Number(month) >= Number(currentMonth) : false;
 };
 
 const Style = {
   Label: styled.div`
-    width: 318px;
-
     display: flex;
     justify-content: space-between;
 
+    width: 318px;
+
     font-size: 12px;
   `,
+
   Title: styled.span`
     color: #2f2f2f;
+  `,
+
+  Slash: styled.span`
+    padding: 0 5px;
   `,
 };

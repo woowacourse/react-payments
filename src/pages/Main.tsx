@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { CardViewer } from '../components/CardViewer';
-import { cardDataService } from '../domains/cardDataService';
-import { Layout } from '../layout';
 import { v4 } from 'uuid';
+import { Layout } from '../layout';
+import { CardViewer } from '../components/CardViewer';
 import { useNavigate } from 'react-router-dom';
+import { cardDataService } from '../domains/cardDataService';
 
 export const Main = () => {
   const navigate = useNavigate();
@@ -44,10 +44,11 @@ const Style = {
     display: flex;
     align-items: center;
 
-    font-weight: bold;
-
     margin-bottom: 25px;
+
+    font-weight: bold;
   `,
+
   CardListWrapper: styled.div`
     display: flex;
     flex-direction: column;
@@ -58,6 +59,7 @@ const Style = {
 
     gap: 46px;
   `,
+
   EmptyCardListWrapper: styled.div`
     display: flex;
     flex-direction: column;
@@ -65,23 +67,28 @@ const Style = {
 
     gap: 9px;
   `,
+
   Caption: styled.span`
-    color: #575757;
     font-size: 14px;
+    color: #575757;
   `,
+
   AddCardButton: styled.button`
     all: unset;
-
-    width: 241px;
-    height: 161px;
 
     display: flex;
     justify-content: center;
     align-items: center;
 
-    background-color: #e5e5e5;
+    width: 213px;
+    height: 133px;
+
     border-radius: 5px;
+    background-color: #e5e5e5;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+
     font-size: 30px;
+
     cursor: pointer;
   `,
 };

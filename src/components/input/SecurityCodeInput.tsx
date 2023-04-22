@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
-import { InputWrapper } from './InputWrapper';
-import { Input } from './Input';
 import styled from 'styled-components';
+import { useEffect } from 'react';
+import { Input } from './Input';
+import { InputWrapper } from './InputWrapper';
 
 interface Props {
   securityCodeInputRef: React.RefObject<HTMLInputElement>;
@@ -16,10 +16,6 @@ export function SecurityCodeInput({
   securityCode,
   setSecurityCode,
 }: Props) {
-  useEffect(() => {
-    if (securityCode.length === 3) moveFocusToPassword();
-  }, [securityCode]);
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!isNumeric(e.target.value)) {
       e.target.value = '';
@@ -39,6 +35,10 @@ export function SecurityCodeInput({
     }
   };
 
+  useEffect(() => {
+    if (securityCode.length === 3) moveFocusToPassword();
+  }, [securityCode]);
+
   return (
     <>
       <Style.Label>
@@ -48,14 +48,14 @@ export function SecurityCodeInput({
         <Input
           ref={securityCodeInputRef}
           value={securityCode}
-          width={'84'}
+          width={84}
           minLength={3}
           maxLength={3}
-          placeholder="•••"
+          placeholder='•••'
           onChange={handleInputChange}
           onBlur={validateSecurityCode}
-          inputMode="numeric"
-          type="password"
+          inputMode='numeric'
+          type='password'
           required
         />
       </InputWrapper>
@@ -73,10 +73,10 @@ const isValidSecurityCode = (input: string) => {
 
 const Style = {
   Label: styled.div`
-    width: 318px;
-
     display: flex;
     justify-content: space-between;
+
+    width: 318px;
 
     font-size: 12px;
   `,

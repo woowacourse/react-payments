@@ -6,16 +6,17 @@ interface InputWrapperProps {
 }
 
 export function InputWrapper({ children, width }: InputWrapperProps) {
-  return <Style.Wrapper style={{ width: width }}>{children}</Style.Wrapper>;
+  return <Style.Wrapper width={width}>{children}</Style.Wrapper>;
 }
 
 const Style = {
-  Wrapper: styled.div`
-    height: 49px;
-
+  Wrapper: styled.div<{ width: number }>`
     display: flex;
     justify-content: center;
     align-items: center;
+
+    width: ${(props) => `${props.width}px`};
+    height: 49px;
 
     border-radius: 7px;
     background-color: #ecebf1;
