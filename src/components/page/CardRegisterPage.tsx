@@ -3,32 +3,26 @@ import { Page } from '../../types';
 import { useState } from 'react';
 import styled from 'styled-components';
 
-import Card from '../common/Card';
+import PageTemplate from '../template/PageTemplate';
 import CardNumberInput from '../box/inputSection/CardNumberInput';
 import ExpireDateInput from '../box/inputSection/ExpireDateInput';
 import OwnerNameInput from '../box/inputSection/OwnerNameInput';
 import SecurityCodeInput from '../box/inputSection/SecurityCodeInput';
 import CardPasswordInput from '../box/inputSection/CardPasswordInput';
-import PageTemplate from '../template/PageTemplate';
+import Card from '../common/Card';
+
+import useList from '../../utils/useList';
 
 interface Props {
   navigate: (page: Page) => void;
 }
 
-interface CardFormState extends Omit<CardType, 'id' | 'cardPassword'> {
-  cardPassword1: string;
-  cardPassword2: string;
-}
-
 const CardRegisterPage = ({ navigate }: Props) => {
-  const [card, setCard] = useState<CardFormState>({
-    cardNumber: ['', '', '', ''],
-    expireDate: ['', ''],
-    ownerName: '',
-    securityCode: '',
-    cardPassword1: '',
-    cardPassword2: '',
-  });
+  const [cardNumber, setCardNumberIndex] = useList(['', '', '', '']);
+  const [expireDate, setExpireDateIndex] = useList(['', '']);
+  const [ownerName, setOwnerName] = useState('');
+  const [securityCode, setSecurityCode] = useState('');
+  const [cardPassword, setCardPasswordIndex] = useList(['', '']);
 
   const submitNewCard = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -39,7 +33,7 @@ const CardRegisterPage = ({ navigate }: Props) => {
       expireDate,
       ownerName,
       securityCode,
-      cardPassword: cardPassword1 + cardPassword2,
+      cardPassword,
     };
 
     const cardList: CardType[] = JSON.parse(localStorage.getItem('cardList') || '[]');
@@ -52,30 +46,15 @@ const CardRegisterPage = ({ navigate }: Props) => {
     navigate(Page.list);
   };
 
-  const onChange = (key: keyof CardFormState) => (value: string | string[]) => {
-    setCard((prev) => ({ ...prev, [key]: value }));
-  };
-
-  const { cardNumber, expireDate, ownerName, securityCode, cardPassword1, cardPassword2 } = card;
-
   return (
     <PageTemplate title="카드 추가" onClickBack={onClickBack}>
       <Card cardNumber={cardNumber} ownerName={ownerName} expireDate={expireDate} />
       <InputForm onSubmit={submitNewCard}>
-        <CardNumberInput inputValues={cardNumber} setInputValues={onChange('cardNumber')} />
-        <ExpireDateInput inputValues={expireDate} setInputValues={onChange('expireDate')} />
-        <OwnerNameInput inputValues={ownerName} setInputValues={onChange('ownerName')} />
-        <SecurityCodeInput inputValues={securityCode} setInputValues={onChange('securityCode')} />
-        <CardPasswordInput
-          cardPassword1Props={{
-            inputValues: cardPassword1,
-            setInputValues: onChange('cardPassword1'),
-          }}
-          cardPassword2Props={{
-            inputValues: cardPassword2,
-            setInputValues: onChange('cardPassword2'),
-          }}
-        />
+        <CardNumberInput cardNumber={cardNumber} setCardNumber={setCardNumberIndex} />
+        <ExpireDateInput expireDate={expireDate} setExpireDateIndex={setExpireDateIndex} />
+        <OwnerNameInput ownerName={ownerName} setOwnerName={setOwnerName} />
+        <SecurityCodeInput securityCode={securityCode} setSecurityCode={setSecurityCode} />
+        <CardPasswordInput cardPassword={cardPassword} setCardPasswordIndex={setCardPasswordIndex} />
         <ButtonWrapper>
           <SubmitButton type="submit">다음</SubmitButton>
         </ButtonWrapper>
