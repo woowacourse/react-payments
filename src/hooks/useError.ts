@@ -1,33 +1,33 @@
-import { FocusEvent, useState } from 'react';
-import { isElementOfType } from '../utils/eventUtils';
+import { useState } from 'react';
 
-interface useErrorProps {
-  validator: CallableFunction;
-  handleValidationChange: CallableFunction;
+interface useErrorProps<T> {
+  validator: (...args: any[]) => boolean;
+  changeInputValidation: (key: keyof T, value: boolean) => void;
   inputs?: string[];
 }
 
-const useError = ({ validator, handleValidationChange, inputs }: useErrorProps) => {
+const useError = <T extends Record<string, boolean>>({
+  validator,
+  changeInputValidation,
+  inputs,
+}: useErrorProps<T>) => {
   const [isError, setIsError] = useState(false);
 
-  const onErrorBlur = (event: FocusEvent<HTMLElement>) => {
-    if (event.currentTarget.contains(event.relatedTarget)) return;
-
-    const isSingleInput = !inputs && isElementOfType<HTMLInputElement>(event);
-    const isValid = isSingleInput ? validator(event.target.value) : validator(inputs);
+  const handleError = (inputName: string, value?: string) => {
+    const isValid = inputs ? validator(inputs) : validator(value);
 
     if (isValid) {
       setIsError(false);
-      handleValidationChange(event.target.dataset.name, true);
+      changeInputValidation(inputName, true);
     }
 
     if (!isValid) {
       setIsError(true);
-      handleValidationChange(event.target.dataset.name, false);
+      changeInputValidation(inputName, false);
     }
   };
 
-  return [isError, onErrorBlur] as const;
+  return [isError, handleError] as const;
 };
 
 export { useError };

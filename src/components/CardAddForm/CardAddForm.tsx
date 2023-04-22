@@ -46,23 +46,23 @@ function CardAddForm({
     <form ref={formRef} className={styles.form} onSubmit={onSubmit} tabIndex={0}>
       <CardNumber
         onInputChange={onSingleInputFieldChange}
-        handleValidationChange={handleValidationChange}
+        changeInputValidation={handleValidationChange}
         value={cardInformation.cardNumber}
       />
       <CardExpirationDate
         onInputChange={onSingleInputFieldChange}
-        handleValidationChange={handleValidationChange}
+        changeInputValidation={handleValidationChange}
         value={cardInformation.expirationDate}
       />
       <CardOwnerName onInputChange={onSingleInputFieldChange} value={cardInformation.ownerName} />
       <CardSecurityCode
         onInputChange={onSingleInputFieldChange}
-        handleValidationChange={handleValidationChange}
+        changeInputValidation={handleValidationChange}
         value={cardInformation.securityCode}
       />
       <CardPassword
         onInputChange={onMultipleInputFieldsChange}
-        handleValidationChange={handleValidationChange}
+        changeInputValidation={handleValidationChange}
         values={cardInformation.password}
       />
       <Button id="submitButton" className={isFormComplete ? '' : 'hide'} primary>

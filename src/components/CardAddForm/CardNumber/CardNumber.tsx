@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, FocusEvent } from 'react';
 import { CardInputValidation } from '../../../types';
 import { CARD_NUMBER_INPUT_MAX_LENGTH } from '../../../constants';
 import InputContainer from '../../common/InputContainer/InputContainer';
@@ -7,16 +7,20 @@ import { useError } from '../../../hooks/useError';
 import validator from '../../../utils/validator';
 
 interface CardNumberProps {
-  handleValidationChange: (key: keyof CardInputValidation, value: boolean) => void;
+  changeInputValidation: (key: keyof CardInputValidation, value: boolean) => void;
   onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
   value: string;
 }
 
-function CardNumber({ handleValidationChange, onInputChange, value }: CardNumberProps) {
-  const [isError, onErrorBlur] = useError({
+function CardNumber({ changeInputValidation, onInputChange, value }: CardNumberProps) {
+  const [isError, handleError] = useError<CardInputValidation>({
     validator: validator.cardNumber,
-    handleValidationChange,
+    changeInputValidation,
   });
+
+  const onBlur = (event: FocusEvent<HTMLInputElement>) => {
+    handleError(event.target.name, event.target.value);
+  };
 
   return (
     <InputContainer
@@ -34,7 +38,7 @@ function CardNumber({ handleValidationChange, onInputChange, value }: CardNumber
         autoComplete="cc-csc"
         isError={isError}
         onChange={onInputChange}
-        onBlur={onErrorBlur}
+        onBlur={onBlur}
       />
     </InputContainer>
   );
