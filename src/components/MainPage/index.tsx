@@ -1,17 +1,17 @@
-import Header from "components/Header";
-import CardPreview from "components/RegisterPage/CardPreview";
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import Header from 'components/Header';
+import CardPreview from 'components/RegisterPage/CardPreview';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import { getLocalStorage } from 'utils/localStorage';
 
 const MainPage = () => {
   const navigate = useNavigate();
 
   const goToRegister = () => {
-    navigate("/register");
+    navigate('/register');
   };
 
-  const getCards = localStorage.getItem("card");
-  const cardInfoObject = JSON.parse(getCards as string);
+  const cardInfoObject = getLocalStorage('card');
 
   return (
     <div>

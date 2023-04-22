@@ -10,6 +10,7 @@ import { getFormData } from 'utils/formDataGetter';
 import { areValidInfo } from 'validation';
 import Header from '../Header';
 import { useNavigate } from 'react-router-dom';
+import { setLocalStorage } from 'utils/localStorage';
 
 const CardRegisterForm = () => {
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ const CardRegisterForm = () => {
     const formDataObject = Object.fromEntries(formData);
 
     if (areValidInfo(formDataObject)) {
-      localStorage.setItem('card', JSON.stringify(formDataObject));
+      setLocalStorage('card', formDataObject);
 
       navigate('/');
     } else {
