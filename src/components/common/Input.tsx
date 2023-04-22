@@ -61,6 +61,10 @@ const InputField = styled.input<{ textPosition: string }>`
     margin: 0;
   }
 
+  &[type="password"]::-ms-reveal {
+    display: none;
+  }
+
   &::placeholder {
     font-size: 14px;
   }
