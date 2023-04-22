@@ -2,6 +2,7 @@ import CreditCard from 'components/CreditCard';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import * as Type from 'types';
+import localStorageHelper from 'utils/localStorageHelper';
 import * as S from './style';
 
 function Home() {
@@ -9,7 +10,7 @@ function Home() {
   const [creditCardList, setCreditCardList] = useState<Type.CreditCard[]>([]);
 
   useEffect(() => {
-    setCreditCardList(JSON.parse(localStorage.getItem('creditCards') || '[]'));
+    setCreditCardList(localStorageHelper.getValue('creditCard', []));
   }, []);
 
   return (

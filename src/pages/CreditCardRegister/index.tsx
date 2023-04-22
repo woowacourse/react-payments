@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import * as Type from 'types';
 import creditCard from 'domains/creditCard';
 import useInput from 'hooks/useInput';
+import localStorageHelper from 'utils/localStorageHelper';
 import CreditCardNumberInput from './components/CreditCardNumberInput';
 import CreditCardExpiryInput from './components/CreditCardExpiryInput';
 import CreditCardOwnerInput from './components/CreditCardOwnerInput';
@@ -41,8 +42,10 @@ function CreditCardRegister() {
         second: creditCardPassword.second,
       },
     };
-    const existCreditCard = JSON.parse(localStorage.getItem('creditCards') || '[]');
-    localStorage.setItem('creditCards', JSON.stringify([...existCreditCard, newCreditCard]));
+
+    const existCreditCard = localStorageHelper.getValue('creditCard', []);
+    localStorageHelper.setValue('creditCard', [...existCreditCard, newCreditCard]);
+
     navigate('/');
   };
 
