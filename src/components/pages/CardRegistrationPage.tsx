@@ -39,7 +39,7 @@ const CardRegistrationPage = ({ addCardItem }: CardRegistrationPageProps) => {
 
   return (
     <>
-      <Header title='카드추가' leftChild={<BackButton />} />
+      <Header title='카드추가' leading={<BackButton />} />
       <CardItemContainer>
         <CardItem card={cardItem} />
       </CardItemContainer>

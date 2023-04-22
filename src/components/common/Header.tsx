@@ -3,13 +3,13 @@ import styled from 'styled-components';
 
 interface HeaderProps {
   title: string;
-  leftChild?: React.ReactElement;
+  leading?: React.ReactElement;
 }
 
-const Header = ({ title, leftChild }: HeaderProps) => {
+const Header = ({ title, leading }: HeaderProps) => {
   return (
     <HeaderContainer>
-      <LeftChildWrapper>{leftChild}</LeftChildWrapper>
+      <LeadingIconWrapper>{leading}</LeadingIconWrapper>
       <TitleWrapper>{title}</TitleWrapper>
     </HeaderContainer>
   );
@@ -23,7 +23,7 @@ const HeaderContainer = styled.header`
   align-items: center;
 `;
 
-const LeftChildWrapper = styled.div`
+const LeadingIconWrapper = styled.div`
   display: flex;
   width: 15%;
 
