@@ -1,15 +1,15 @@
-import { useFocus } from "hooks/useFocus";
-import { ChangeEvent, useState } from "react";
-import styled from "styled-components";
-import { changeToValidValue } from "utils/inputValidator";
-import { HIDDEN_ELEMENT_STYLE } from "constants/style";
+import { useFocus } from 'hooks/useFocus';
+import { ChangeEvent, useState } from 'react';
+import styled from 'styled-components';
+import { changeToValidValue } from 'utils/inputValidator';
+import { HIDDEN_ELEMENT_STYLE, LENGTH, REGEX } from 'constants/constants';
 
 const PasswordInput = () => {
   const { handleRef, moveFocus } = useFocus();
 
   const [password, setPassword] = useState({
-    password1: "",
-    password2: "",
+    password1: '',
+    password2: '',
   });
 
   const handlePassword = ({ target }: ChangeEvent<HTMLInputElement>) => {
@@ -17,13 +17,13 @@ const PasswordInput = () => {
       return {
         ...prevState,
         [target.name]: changeToValidValue(target.value, {
-          length: 1,
-          regex: /[^\d]/g,
+          length: LENGTH.EACH_PASSWORD,
+          regex: REGEX.ONLY_NUMBER,
         }),
       };
     });
 
-    moveFocus(target, 1);
+    moveFocus(target, LENGTH.EACH_PASSWORD);
   };
 
   return (
@@ -37,7 +37,7 @@ const PasswordInput = () => {
           name="password1"
           id="password-label"
           aria-labelledby="password-label"
-          maxLength={1}
+          maxLength={LENGTH.EACH_PASSWORD}
           inputMode="numeric"
           value={password.password1}
           ref={(el) => handleRef(el, 0)}
@@ -49,7 +49,7 @@ const PasswordInput = () => {
           type="text"
           name="password2"
           aria-labelledby="password-label"
-          maxLength={1}
+          maxLength={LENGTH.EACH_PASSWORD}
           inputMode="numeric"
           value={password.password2}
           ref={(el) => handleRef(el, 1)}
@@ -98,7 +98,8 @@ const S = {
     font-size: 12px;
     margin: 8px 0 16px 4px;
     visibility: ${({ password }) =>
-      password.join("").length === 2 && `${HIDDEN_ELEMENT_STYLE}`};
+      password.join('').length === LENGTH.EACH_PASSWORD * 2 &&
+      `${HIDDEN_ELEMENT_STYLE}`};
   `,
 };
 

@@ -1,8 +1,8 @@
-import { useFocus } from "hooks/useFocus";
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
-import styled from "styled-components";
-import { changeToValidValue } from "utils/inputValidator";
-import { HIDDEN_ELEMENT_STYLE } from "constants/style";
+import { useFocus } from 'hooks/useFocus';
+import { ChangeEvent, Dispatch, SetStateAction } from 'react';
+import styled from 'styled-components';
+import { changeToValidValue } from 'utils/inputValidator';
+import { HIDDEN_ELEMENT_STYLE, LENGTH, REGEX } from 'constants/constants';
 
 interface CardNumber {
   number1: string;
@@ -24,13 +24,13 @@ const CardNumberInput = ({ cardNumber, setCardNumber }: Props) => {
       return {
         ...prevState,
         [target.name]: changeToValidValue(target.value, {
-          length: 4,
-          regex: /[^\d]/g,
+          length: LENGTH.EACH_CARD_NUMBER,
+          regex: REGEX.ONLY_NUMBER,
         }),
       };
     });
 
-    moveFocus(target, 4);
+    moveFocus(target, LENGTH.EACH_CARD_NUMBER);
   };
 
   return (
@@ -44,7 +44,7 @@ const CardNumberInput = ({ cardNumber, setCardNumber }: Props) => {
           name="number1"
           id="card-label"
           aria-labelledby="card-label"
-          maxLength={4}
+          maxLength={LENGTH.EACH_CARD_NUMBER}
           inputMode="numeric"
           value={cardNumber.number1}
           ref={(el) => handleRef(el, 0)}
@@ -58,7 +58,7 @@ const CardNumberInput = ({ cardNumber, setCardNumber }: Props) => {
           type="text"
           name="number2"
           aria-labelledby="card-label"
-          maxLength={4}
+          maxLength={LENGTH.EACH_CARD_NUMBER}
           inputMode="numeric"
           value={cardNumber.number2}
           ref={(el) => handleRef(el, 1)}
@@ -71,7 +71,7 @@ const CardNumberInput = ({ cardNumber, setCardNumber }: Props) => {
           type="password"
           name="number3"
           aria-labelledby="card-label"
-          maxLength={4}
+          maxLength={LENGTH.EACH_CARD_NUMBER}
           inputMode="numeric"
           value={cardNumber.number3}
           ref={(el) => handleRef(el, 2)}
@@ -84,7 +84,7 @@ const CardNumberInput = ({ cardNumber, setCardNumber }: Props) => {
           type="password"
           name="number4"
           aria-labelledby="card-label"
-          maxLength={4}
+          maxLength={LENGTH.EACH_CARD_NUMBER}
           inputMode="numeric"
           value={cardNumber.number4}
           ref={(el) => handleRef(el, 3)}
@@ -124,7 +124,8 @@ const S = {
     font-weight: 900;
     align-self: center;
     visibility: ${({ cardNumber }) =>
-      cardNumber.length !== 4 && `${HIDDEN_ELEMENT_STYLE}`};
+      cardNumber.length !== LENGTH.EACH_CARD_NUMBER &&
+      `${HIDDEN_ELEMENT_STYLE}`};
   `,
 
   Caption: styled.p<{ cardNumbers: string[] }>`
@@ -132,7 +133,9 @@ const S = {
     font-size: 12px;
     margin: 8px 0 16px 4px;
     visibility: ${({ cardNumbers }) =>
-      cardNumbers.join("").length === 16 && `${HIDDEN_ELEMENT_STYLE}`};
+      cardNumbers.join('').length ===
+        LENGTH.EACH_CARD_NUMBER * LENGTH.EACH_CARD_NUMBER &&
+      `${HIDDEN_ELEMENT_STYLE}`};
   `,
 };
 
