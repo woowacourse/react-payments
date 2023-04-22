@@ -59,7 +59,7 @@ export const CardCVC: Story = {
     minLength: 3,
     maxLength: 3,
     width: '75px',
-    center: false,
+    center: true,
   },
 };
 
