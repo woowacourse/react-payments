@@ -27,17 +27,23 @@ export const CardForm = ({
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     const formData = new FormData(e.target as HTMLFormElement);
     const data = Object.fromEntries(formData.entries());
 
     const newCard = {
-      numbers: cardInfo.numbers,
-      expiryDate: cardInfo.expiryDate,
-      owner: cardInfo.owner,
-      color: "#de75d0",
+      numbers: [
+        String(data.cardNumber1),
+        String(data.cardNumber2),
+        String(data.cardNumber3),
+        String(data.cardNumber4),
+      ],
+      expiryDate: String(data.expiryDate),
+      owner: String(data.owner),
       CVC: Number(data.cvc),
       password: [Number(data.password1), Number(data.password2)],
-    } as CardType;
+      color: "#de75d0",
+    };
 
     addNewCards((prev: CardType[]) => {
       const newData = [...prev, newCard];

@@ -3,16 +3,16 @@ import { InputLabel } from "../common/InputLabel";
 import { Input } from "../common/Input";
 import { useState } from "react";
 import styled from "styled-components";
+import { CARD_INPUT_NUMBER } from "../../constant/cardInput";
 
 interface CardNumberInputProps {
   setCardNumbers: (index: number, numbers: string) => void;
 }
 
 const cardNumberInputInfo = {
-  width: "80px",
-  maxLength: 4,
+  width: "70px",
+  maxLength: CARD_INPUT_NUMBER.CARD_NUMBERS,
   textPosition: "center",
-  type: "text",
 };
 
 export const CardNumberInput = ({ setCardNumbers }: CardNumberInputProps) => {
@@ -22,18 +22,23 @@ export const CardNumberInput = ({ setCardNumbers }: CardNumberInputProps) => {
     (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;
 
-      if (value.length > 4) {
-        e.target.value = value.slice(0, 4);
+      if (!/^\d*$/.test(value)) {
+        e.target.value = value.slice(0, -1);
         return;
       }
 
-      setCardNumbers(index, value);
+      if (value.length > CARD_INPUT_NUMBER.CARD_NUMBERS) {
+        e.target.value = value.slice(0, -1);
+        return;
+      }
+
+      setCardNumbers(index - 1, value);
     };
 
   const handleOutFocusEvent = (e: React.FocusEvent<HTMLInputElement>) => {
     setIsCompleted(false);
 
-    if (e.target.value.length === 4) {
+    if (e.target.value.length === CARD_INPUT_NUMBER.CARD_NUMBERS) {
       setIsCompleted(true);
     }
   };
@@ -48,30 +53,20 @@ export const CardNumberInput = ({ setCardNumbers }: CardNumberInputProps) => {
             errorMessage: "16자리 숫자를 입력하세요.",
           }}
           {...cardNumberInputInfo}
+          type="text"
           label="cardNumber1"
-          handleInput={handleInput(0)}
-          handleChange={handleOutFocusEvent}
-        />
-        <Input
-          {...cardNumberInputInfo}
-          label="cardNumber2"
           handleInput={handleInput(1)}
           handleChange={handleOutFocusEvent}
         />
-        <Input
-          {...cardNumberInputInfo}
-          label="cardNumber3"
-          type="password"
-          handleInput={handleInput(2)}
-          handleChange={handleOutFocusEvent}
-        />
-        <Input
-          {...cardNumberInputInfo}
-          label="cardNumber4"
-          type="password"
-          handleInput={handleInput(3)}
-          handleChange={handleOutFocusEvent}
-        />
+        {[2, 3, 4].map((ind) => (
+          <Input
+            {...cardNumberInputInfo}
+            type={ind < 3 ? "text" : "password"}
+            label={`cardNumber${ind}`}
+            handleInput={handleInput(ind)}
+            handleChange={handleOutFocusEvent}
+          />
+        ))}
       </Row>
     </InputContainer>
   );
@@ -80,4 +75,7 @@ export const CardNumberInput = ({ setCardNumbers }: CardNumberInputProps) => {
 const Row = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+
+  width: 100%;
 `;
