@@ -1,0 +1,19 @@
+.container {
+  height: 80%;
+  margin-bottom: 36px;
+  overflow: auto;
+}
+
+.listContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.emptyListMessage {
+  padding: 36px 0;
+  font-size: 14px;
+  color: #575757;
+  text-align: center;
+}

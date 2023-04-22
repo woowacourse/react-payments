@@ -1,0 +1,18 @@
+.header {
+  position: relative;
+  margin-bottom: 24px;
+  height: 20px;
+}
+
+.header a {
+  display: inline-block;
+}
+
+.header h3 {
+  display: inline-block;
+  position: absolute;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  color: #575757;
+}
