@@ -2,6 +2,7 @@ import { ChangeEvent, FocusEvent } from 'react';
 import { CardInputValidation, ExpirationDateFormat } from '../../../types';
 import { EXPIRATION_DATE_INPUT_MAX_LENGTH } from '../../../constants';
 import InputContainer from '../../common/InputContainer/InputContainer';
+import Label from '../../common/Label/Label';
 import Input from '../../common/Input/Input';
 import { useError } from '../../../hooks/useError';
 import validator from '../../../utils/validator';
@@ -31,14 +32,14 @@ function CardExpirationDate({
 
   return (
     <InputContainer
-      label="만료일"
-      id="expirationDate"
+      supportingText={{
+        error: '카드에 표시된 만료일을 (MM/YY) 순서로 동일하게 입력해주세요',
+      }}
       isError={isError}
-      supportingText={
-        isError ? '카드에 표시된 만료일을 (MM/YY) 순서로 동일하게 입력해주세요' : undefined
-      }
-      required
     >
+      <Label htmlFor="expirationDate" required>
+        만료일
+      </Label>
       <Input
         id="expirationDate"
         name="expirationDate"

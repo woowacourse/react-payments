@@ -5,6 +5,7 @@ import {
   CARD_NUMBER_INPUT_UNIT_MAX_LENGTH,
 } from '../../../constants';
 import InputContainer from '../../common/InputContainer/InputContainer';
+import Label from '../../common/Label/Label';
 import Input from '../../common/Input/Input';
 import { useInputCursorPosition } from '../../../hooks/useInputCursorPosition';
 import { useError } from '../../../hooks/useError';
@@ -74,12 +75,14 @@ function CardNumber({ changeInputValidation, onInputChange, value }: CardNumberP
 
   return (
     <InputContainer
-      label="카드 번호"
-      id="cardNumber"
+      supportingText={{
+        error: '카드에 표시된 16자리 숫자와 동일하게 입력해주세요',
+      }}
       isError={isError}
-      supportingText={isError ? '카드에 표시된 16자리 숫자와 동일하게 입력해주세요' : undefined}
-      required
     >
+      <Label htmlFor="cardNumber" required>
+        카드 번호
+      </Label>
       <Input
         ref={inputRef}
         id="cardNumber"

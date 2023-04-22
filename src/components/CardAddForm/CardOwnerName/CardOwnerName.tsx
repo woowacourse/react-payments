@@ -1,6 +1,7 @@
 import { ChangeEvent } from 'react';
 import { OWNER_NAME_MAX_LENGTH } from '../../../constants';
 import InputContainer from '../../common/InputContainer/InputContainer';
+import Label from '../../common/Label/Label';
 import Input from '../../common/Input/Input';
 
 interface CardOwnerNameProps {
@@ -10,7 +11,8 @@ interface CardOwnerNameProps {
 
 function CardOwnerName({ onInputChange, value = '' }: CardOwnerNameProps) {
   return (
-    <InputContainer label="카드 소유자 이름" id="ownerName" characterCounter={[value.length, 20]}>
+    <InputContainer characterCounter={[value.length, 20]}>
+      <Label htmlFor="ownerName">카드 소유자 이름</Label>
       <Input
         id="ownerName"
         name="ownerName"

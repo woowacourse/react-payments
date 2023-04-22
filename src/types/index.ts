@@ -1,3 +1,8 @@
+interface SupportingTextMessage {
+  default?: string;
+  error?: string;
+}
+
 interface ExpirationDateFormat {
   month: string;
   year: string;
@@ -17,4 +22,10 @@ type CardInputValidation = {
 
 type MultipleInputFieldCardInformation = 'password';
 
-export type { ExpirationDateFormat, Card, CardInputValidation, MultipleInputFieldCardInformation };
+export type {
+  SupportingTextMessage,
+  ExpirationDateFormat,
+  Card,
+  CardInputValidation,
+  MultipleInputFieldCardInformation,
+};

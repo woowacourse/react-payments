@@ -1,6 +1,7 @@
 import { ChangeEvent, FocusEvent } from 'react';
 import { CardInputValidation } from '../../../types';
 import Input from '../../common/Input/Input';
+import Label from '../../common/Label/Label';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import { useError } from '../../../hooks/useError';
 import validator from '../../../utils/validator';
@@ -24,16 +25,15 @@ function CardSecurityCode({ changeInputValidation, onInputChange, value }: CardS
 
   return (
     <InputContainer
-      label="보안 코드 (CVC/CVV)"
-      id="securityCode"
-      supportingText={
-        isError
-          ? '카드에 표시된 CVC/CVV 번호와 동일하게 입력해주세요'
-          : '카드 뒷면의 CVC 번호 3자리 숫자를 입력해주세요'
-      }
+      supportingText={{
+        default: '카드 뒷면의 CVC 번호 3자리 숫자를 입력해주세요',
+        error: '카드에 표시된 CVC/CVV 번호와 동일하게 입력해주세요',
+      }}
       isError={isError}
-      required
     >
+      <Label htmlFor="securityCode" required>
+        보안 코드 (CVC/CVV)
+      </Label>
       <Input
         type="password"
         id="securityCode"

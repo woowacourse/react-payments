@@ -3,6 +3,7 @@ import { ChangeEvent, FocusEvent, useRef } from 'react';
 import { CardInputValidation } from '../../../types';
 import { PASSWORD_UNIT_MAX_LENGTH, SECURITY_TEXT_ICON } from '../../../constants';
 import InputContainer from '../../common/InputContainer/InputContainer';
+import Label from '../../common/Label/Label';
 import Input from '../../common/Input/Input';
 import { useError } from '../../../hooks/useError';
 import { isElementOfType } from '../../../utils/eventUtils';
@@ -38,12 +39,14 @@ function CardPassword({ changeInputValidation, onInputChange, values }: CardPass
 
   return (
     <InputContainer
-      label="비밀 번호"
-      id="password"
-      supportingText={isError ? '카드 비밀번호 앞 2자리 숫자를 입력해주세요' : undefined}
+      supportingText={{
+        error: '카드 비밀번호 앞 2자리 숫자를 입력해주세요',
+      }}
       isError={isError}
-      required
     >
+      <Label htmlFor="password" required>
+        비밀번호
+      </Label>
       <div className={styles.container} onBlur={onBlur}>
         {values.map((password, index) => (
           <Input

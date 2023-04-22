@@ -1,32 +1,23 @@
 import styles from './style.module.css';
 import { ReactNode } from 'react';
+import { SupportingTextMessage } from '../../../types';
 import SupportingText from '../SupportingText/SupportingText';
 
 interface InputContainerProps {
-  label: string;
-  id: string;
   children: ReactNode;
-  required?: boolean;
-  supportingText?: string;
+  supportingText?: SupportingTextMessage;
+  characterCounter?: [number, number];
   isError?: boolean;
-  characterCounter?: number[];
 }
 
 function InputContainer({
-  label,
-  id,
   children,
-  required = false,
   supportingText,
-  isError = false,
   characterCounter,
+  isError = false,
 }: InputContainerProps) {
   return (
     <div className={styles.inputContainer}>
-      <label htmlFor={id}>
-        {label}
-        {required && <span className={styles.required}> *</span>}
-      </label>
       {children}
       <div className={styles.subInformation}>
         {supportingText && <SupportingText message={supportingText} isError={isError} />}
