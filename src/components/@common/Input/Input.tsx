@@ -47,11 +47,7 @@ const useInputItemsContext = () => useContext(InputItemsContext);
 function InputItemsProvider({ children }: PropsWithChildren) {
   const itemMap = useRef<InputItemsContext['itemMap']>(new Map()).current;
 
-  return (
-    <InputItemsContext.Provider value={{ itemMap }}>
-      {children}
-    </InputItemsContext.Provider>
-  );
+  return <InputItemsContext.Provider value={{ itemMap }}>{children}</InputItemsContext.Provider>;
 }
 
 function InputItem({ children }: PropsWithChildren) {
@@ -92,7 +88,8 @@ function Input(props: PropsWithChildren) {
         id,
         value,
         onChange,
-      }}>
+      }}
+    >
       <InputItemsProvider>{children}</InputItemsProvider>
     </InputContext.Provider>
   );
@@ -176,7 +173,7 @@ function Label(props: PropsWithChildren<LabelProps>) {
   const [fieldId, setFieldId] = useState('');
   const childrenArray = Children.toArray(children);
   const child = childrenArray[0];
-  console.log(child, fieldId);
+
   useEffect(() => {
     const fieldItem = itemMap.get('field');
 
@@ -246,9 +243,7 @@ Input.Message = Message;
 
 export default Input;
 
-const validateAsChild = (
-  childrenArray: ReturnType<typeof Children.toArray>
-) => {
+const validateAsChild = (childrenArray: ReturnType<typeof Children.toArray>) => {
   if (childrenArray.length > 1) throw new Error('자식은 하나만');
   if (childrenArray.length === 0) throw new Error('자식은 필수');
 };
