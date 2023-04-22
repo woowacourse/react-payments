@@ -1,0 +1,96 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "extends": ["airbnb", "airbnb-typescript"],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+
+  "rules": {
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "linebreak-style": "off",
+    "react/react-in-jsx-scope": 0,
+    "react/jsx-uses-react": 0,
+    "react/prop-types": 0,
+    "import/no-unresolved": "off",
+    "@typescript-eslint/comma-dangle": "off",
+    "react/jsx-props-no-spreading": "off",
+    "import/no-extraneous-dependencies": [0, { "devDependencies": true }],
+    "react/require-default-props": "off",
+    "operator-linebreak": "off",
+    "max-len": ["error", { "code": 120 }],
+    "object-curly-newline": "off",
+    "import/order": [
+      "error",
+      {
+        "groups": ["external", "internal", "builtin", ["parent", "sibling"], "index", "unknown"],
+        "pathGroups": [
+          {
+            "pattern": "react*,react*/**",
+            "group": "external",
+            "position": "before"
+          },
+          {
+            "pattern": "@Components/*",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "@Pages/*",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "@Domains/*",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "@Hooks/*",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "@Utils/*",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "@Constant/*",
+            "group": "internal",
+            "position": "after"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": [],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc"
+        }
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "rules": {
+        "no-undef": "off"
+      }
+    }
+  ],
+  "settings": {
+    "import/resolver": {}
+  }
+}
