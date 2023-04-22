@@ -6,6 +6,7 @@ import ExpirationDateInput from '../cardForm/ExpirationDateInput';
 import NameInput from '../cardForm/NameInput';
 import SecurityCodeInput from '../cardForm/SecurityCodeInput';
 import PasswordInput from '../cardForm/PasswordInput';
+import { INPUT_MAX_LENGTH } from '../../utils/Constants';
 
 interface CardFormProps {
   onSubmitForm: () => void;
@@ -34,12 +35,13 @@ const CardForm = ({ onSubmitForm, onChangeForm }: CardFormProps) => {
   const navigate = useNavigate();
 
   const isCardNumberValid = cardNumber.every(
-    (numberValue) => numberValue.length === 4
+    (numberValue) => numberValue.length === INPUT_MAX_LENGTH.CARD_NUMBER_LENGTH
   );
   const isExpirationDateValid = expirationDate.every(
-    (dateValue) => dateValue.length === 2
+    (dateValue) => dateValue.length === INPUT_MAX_LENGTH.EXPIRATION_DATE_LENGTH
   );
-  const isSecurityCodeValid = securityCode.length === 3;
+  const isSecurityCodeValid =
+    securityCode.length === INPUT_MAX_LENGTH.SECURITY_CODE_LENGTH;
   const isPasswordValid = password.every((passwordValue) => !!passwordValue);
 
   const isFormValid =
