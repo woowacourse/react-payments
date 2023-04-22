@@ -33,3 +33,12 @@ export const CardExist = () => (
     </Layout>
   </>
 );
+
+export const TenCardExist = () => (
+  <>
+    <GlobalStyle />
+    <Layout>
+      <CardListPage cards={[card, card, card, card, card, card, card, card, card, card]} />
+    </Layout>
+  </>
+);
