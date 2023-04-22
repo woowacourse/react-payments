@@ -11,16 +11,16 @@ interface PageTemplateProps {
 
 const PageTemplate = ({ children, title, onClickBack }: PageTemplateProps) => {
   return (
-    <PageWrapper>
+    <PageTemplateWrapper>
       <Header title={title} onClickBack={onClickBack}></Header>
       {children}
-    </PageWrapper>
+    </PageTemplateWrapper>
   );
 };
 
 export default PageTemplate;
 
-const PageWrapper = styled.main`
+const PageTemplateWrapper = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
