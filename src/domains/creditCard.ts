@@ -14,7 +14,7 @@ const creditCard = {
     );
   },
 
-  isValidNumber: {
+  numberValidation: {
     checkChar: (numbers: string) => {
       if (numbers.match(/\D/g)) {
         return {
@@ -40,7 +40,7 @@ const creditCard = {
     },
   },
 
-  isValidExpiry: {
+  expiryValidation: {
     checkChar: (numbers: string) => {
       if (numbers.replaceAll('/', '').match(/\D/g)) {
         return {
@@ -51,14 +51,39 @@ const creditCard = {
 
       return { ok: true };
     },
-  },
 
-  isValidOwner: {
-    checkChar: (owner: string) => {
-      if (!owner.match(/^[a-zA-Z]*$/g)) {
+    checkMonth: (numbers: string) => {
+      if (numbers.length < 2) return { ok: true };
+
+      const month = Number(numbers.slice(0, 2));
+
+      if (month > 12) {
         return {
           ok: false,
-          errorMessage: '카드 소유자는 영문자만 가능합니다.',
+          errorMessage: 'MM의 형식이 올바르지 않습니다.(12이하의 숫자로 입력하세요)',
+        };
+      }
+
+      return { ok: true };
+    },
+
+    checkYear: (numbers: string) => {
+      if (numbers.length < 5) return { ok: true };
+
+      const year = Number(numbers.slice(3));
+      const currentYear = Number(String(new Date().getFullYear()).slice(2));
+
+      if (year < currentYear) {
+        return {
+          ok: false,
+          errorMessage: `YY에는 ${currentYear}보다 작은 숫자를 입력할 수 없습니다.`,
+        };
+      }
+
+      if (year > currentYear + 5) {
+        return {
+          ok: false,
+          errorMessage: `YY에는 ${currentYear + 5}보다 큰 숫자를 입력할 수 없습니다.`,
         };
       }
 
@@ -66,7 +91,20 @@ const creditCard = {
     },
   },
 
-  isValidCVC: {
+  ownerValidation: {
+    checkChar: (owner: string) => {
+      if (!owner.match(/^[a-zA-Z\s]*$/g)) {
+        return {
+          ok: false,
+          errorMessage: '카드 소유자는 영문자 또는 공백만 가능합니다.',
+        };
+      }
+
+      return { ok: true };
+    },
+  },
+
+  cvcValidation: {
     checkChar: (numbers: string) => {
       if (numbers.match(/\D/g)) {
         return {
@@ -79,7 +117,7 @@ const creditCard = {
     },
   },
 
-  isValidPassword: {
+  passwordValidation: {
     checkChar: (numbers: Type.CreditCardPasswordType) => {
       if (numbers.first.match(/\D/g)) {
         return {
@@ -101,11 +139,11 @@ const creditCard = {
 
   getValidationFns() {
     return {
-      numberValidationFns: Object.values(this.isValidNumber),
-      expiryValidationFns: Object.values(this.isValidExpiry),
-      ownerValidationFns: Object.values(this.isValidOwner),
-      cvcValidationFns: Object.values(this.isValidCVC),
-      passwordValidationFns: Object.values(this.isValidPassword),
+      numberValidationFns: Object.values(this.numberValidation),
+      expiryValidationFns: Object.values(this.expiryValidation),
+      ownerValidationFns: Object.values(this.ownerValidation),
+      cvcValidationFns: Object.values(this.cvcValidation),
+      passwordValidationFns: Object.values(this.passwordValidation),
     };
   },
 };

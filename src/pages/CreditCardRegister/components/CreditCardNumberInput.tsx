@@ -29,6 +29,7 @@ function CreditCardNumberInput({ creditCardNumber, errorMessage, setCreditCardNu
 
     setMarkedCreditCardNumber(markedNumber);
     setCreditCardNumber(newCreditCarNumber);
+    setIsHoverFakeInput(true);
   };
 
   const handleFakeInputClick = () => {
