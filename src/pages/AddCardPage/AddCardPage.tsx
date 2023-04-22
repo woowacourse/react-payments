@@ -161,7 +161,8 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
       isFulfilledObject(expirationDate, 2) &&
       isFulfilledObject(password, 1) &&
       isFulfilledString(securityCode, 3) &&
-      !error
+      !error.cardNumberError &&
+      !error.expirationError
     );
   };
 
