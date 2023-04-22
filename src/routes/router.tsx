@@ -1,6 +1,6 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import CardList from '../components/pages/CardList';
-import CardRegister from '../components/pages/CardRegister';
+import RegisterPage from '../components/pages/RegisterPage';
 import App from '../App';
 
 const router = createBrowserRouter(
@@ -15,7 +15,7 @@ const router = createBrowserRouter(
         },
         {
           path: 'card-register',
-          element: <CardRegister />,
+          element: <RegisterPage />,
         },
         {
           path: '/*',
