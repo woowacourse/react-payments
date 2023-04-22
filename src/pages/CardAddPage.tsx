@@ -3,7 +3,7 @@ import { Card } from '../types';
 import Header from '../components/common/Header/Header';
 import CardItem from '../components/CardItem/CardItem';
 import CardAddForm from '../components/CardAddForm/CardAddForm';
-import { useCardAddition } from '../hooks/useCardAddition';
+import { useCardForm } from '../hooks/useCardForm';
 
 interface CardAddPageProps {
   addCard: Dispatch<SetStateAction<Card[]>>;
@@ -18,7 +18,7 @@ function CardAddPage({ addCard }: CardAddPageProps) {
     onSecurityCodeChange,
     onPasswordChange,
     onCardInformationSubmit,
-  } = useCardAddition(addCard);
+  } = useCardForm(addCard);
 
   return (
     <>

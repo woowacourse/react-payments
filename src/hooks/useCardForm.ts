@@ -8,7 +8,7 @@ import {
 } from '../utils/formatChecker';
 import { formatEnglishCapitalization } from '../utils/formatter';
 
-const useCardAddition = (addCard: Dispatch<SetStateAction<Card[]>>) => {
+const useCardForm = (addCard: Dispatch<SetStateAction<Card[]>>) => {
   const [cardInformation, setCardInformation] = useState<Card>({
     cardNumber: ['', '', '', ''],
     expirationDate: {
@@ -114,4 +114,4 @@ const useCardAddition = (addCard: Dispatch<SetStateAction<Card[]>>) => {
   };
 };
 
-export { useCardAddition };
+export { useCardForm };
