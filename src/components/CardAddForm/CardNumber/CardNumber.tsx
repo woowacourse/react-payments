@@ -9,6 +9,8 @@ import Input from '../../common/Input/Input';
 import { useInputCursorPosition } from '../../../hooks/useInputCursorPosition';
 import { useError } from '../../../hooks/useError';
 import validator from '../../../utils/validator';
+import { encryptDisplayedCardNumber, formatDisplayedCardNumber } from '../../../utils/formatter';
+import { checkNumberFormat } from '../../../utils/formatChecker';
 
 interface CardNumberProps {
   changeInputValidation: (key: keyof CardInputValidation, value: boolean) => void;
@@ -24,6 +26,8 @@ function CardNumber({ changeInputValidation, onInputChange, value }: CardNumberP
     changeInputValidation,
   });
 
+  const cardNumber = formatDisplayedCardNumber(value);
+
   const onBlur = (event: FocusEvent<HTMLInputElement>) => {
     handleError(event.target.name, event.target.value);
   };
@@ -38,7 +42,32 @@ function CardNumber({ changeInputValidation, onInputChange, value }: CardNumberP
     setCursor(cursor);
   };
 
+  const onInputValueChange = ({ target, nativeEvent }: ChangeEvent<HTMLInputElement>) => {
+    if (
+      !(nativeEvent instanceof InputEvent) ||
+      target.dataset.value === undefined ||
+      target.selectionStart === null
+    ) {
+      return;
+    }
+
+    if (nativeEvent.inputType === 'insertText') {
+      const value = nativeEvent.data as string;
+      target.dataset.value = checkNumberFormat(value)
+        ? target.dataset.value + value
+        : target.dataset.value;
+    }
+
+    if (nativeEvent.inputType === 'deleteContentBackward') {
+      const modifiedValue =
+        target.dataset.value.slice(0, target.selectionStart) +
+        target.dataset.value.slice(target.selectionStart + 1);
+      target.dataset.value = modifiedValue;
+    }
+  };
+
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+    onInputValueChange(event);
     onInputCursorPositionChange(event);
     onInputChange(event);
   };
@@ -55,7 +84,8 @@ function CardNumber({ changeInputValidation, onInputChange, value }: CardNumberP
         ref={inputRef}
         id="cardNumber"
         name="cardNumber"
-        value={value}
+        value={encryptDisplayedCardNumber(cardNumber)}
+        data-value={cardNumber}
         maxLength={CARD_NUMBER_INPUT_MAX_LENGTH}
         autoComplete="cc-csc"
         isError={isError}

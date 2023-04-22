@@ -1,8 +1,11 @@
 import {
+  CARD_NUMBER_INPUT_MAX_LENGTH,
+  CARD_NUMBER_INPUT_MAX_VISIBLE_LENGTH,
   DATE_DIVIDER,
   EXPIRATION_DATE_INPUT_MAX_LENGTH,
   EXPIRATION_DATE_UNIT_LENGTH,
   REGEX,
+  SECURITY_TEXT_ICON,
 } from '../constants';
 
 const formatExpirationDate = (input: string) => {
@@ -22,6 +25,24 @@ const formatter = {
 
 export default formatter;
 
+const formatDisplayedCardNumber = (input: string) => {
+  const value = input
+    .replace(REGEX.NON_NUMBER, '')
+    .replace(REGEX.FOUR_NUMBER_SEQUENCE, '$1 ')
+    .slice(0, CARD_NUMBER_INPUT_MAX_LENGTH);
+
+  return value;
+};
+
+const encryptDisplayedCardNumber = (input: string) => {
+  return input.length > CARD_NUMBER_INPUT_MAX_VISIBLE_LENGTH
+    ? input.slice(0, CARD_NUMBER_INPUT_MAX_VISIBLE_LENGTH) +
+        input
+          .slice(CARD_NUMBER_INPUT_MAX_VISIBLE_LENGTH)
+          .replace(REGEX.NON_WHITESPACE_CHAR, SECURITY_TEXT_ICON)
+    : input;
+};
+
 const formatDisplayedExpirationDate = (input: string) => {
   const value = input.replace(REGEX.NON_NUMBER, '');
   const formattedValue =
@@ -30,4 +51,4 @@ const formatDisplayedExpirationDate = (input: string) => {
   return formattedValue.slice(0, EXPIRATION_DATE_INPUT_MAX_LENGTH);
 };
 
-export { formatDisplayedExpirationDate };
+export { formatDisplayedExpirationDate, formatDisplayedCardNumber, encryptDisplayedCardNumber };

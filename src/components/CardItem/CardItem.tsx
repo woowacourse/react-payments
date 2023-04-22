@@ -11,9 +11,9 @@ function CardItem({ information, className }: CardItemProps) {
     <div className={`${styles.cardItemContainer} ${className}`}>
       <div className={styles.cardChip}></div>
       <div className={styles.cardNumber}>
-        {information.cardNumber.map((number, index) => (
+        {/* {information.cardNumber.map((number, index) => (
           <span key={index}>{index < 2 ? number : '•'.repeat(number.length)}</span>
-        ))}
+        ))} */}
       </div>
       <div className={styles.cardMetaInfo}>
         <span className={styles.cardOwnerName}>{information.ownerName || 'NAME'}</span>

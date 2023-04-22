@@ -20,3 +20,5 @@ const formatChecker = {
 };
 
 export default formatChecker;
+
+export { checkNumberFormat };
