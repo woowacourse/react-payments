@@ -32,6 +32,6 @@ const ErrorMessage = styled.p`
   font-weight: 500;
   font-size: 14px;
   letter-spacing: -0.085em;
-  color: #ec2f1b;
+  color: var(--red-color);
 `;
 export default InputGroup;

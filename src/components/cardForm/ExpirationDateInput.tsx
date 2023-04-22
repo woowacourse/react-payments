@@ -82,7 +82,7 @@ const ExpirationDateInput = ({
           value={expirationDate[0]}
           onChange={handleChangeInput(0)}
         />
-        <InputSeparator color='#737373' isActive>
+        <InputSeparator color='var(--grey-color)' isActive>
           /
         </InputSeparator>
         <Input

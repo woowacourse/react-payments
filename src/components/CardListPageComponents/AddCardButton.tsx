@@ -15,7 +15,7 @@ const AddCardButtonBox = styled.button`
 
   border: none;
 
-  background: #e5e5e5;
+  background: var(--light-grey-color);
   border-radius: 5px;
 
   font-size: 30px;

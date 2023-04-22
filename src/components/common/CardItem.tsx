@@ -45,14 +45,14 @@ const CardItemContainer = styled.div`
 
   box-sizing: border-box;
 
-  background: #333333;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  background: var(--black-color);
+  box-shadow: 3px 3px 5px var(--shadow-color);
   border-radius: 5px;
 
   font-size: 12px;
   font-weight: 700;
 
-  color: #ffffff;
+  color: var(--white-color);
 `;
 
 const ICChip = styled.div`
@@ -61,7 +61,7 @@ const ICChip = styled.div`
 
   margin-top: 33px;
 
-  background: #cbba64;
+  background: var(--yellow-color);
   border-radius: 4px;
 `;
 
@@ -100,7 +100,7 @@ const CardNameContainer = styled.p`
 const SecurityCardNumber = styled.input`
   background: none;
   border: none;
-  color: #ffffff;
+  color: var(--white-color);
 
   text-align: center;
   letter-spacing: 5px;

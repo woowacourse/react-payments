@@ -32,7 +32,7 @@ function App() {
 const AppContainer = styled.div`
   min-height: 100vh;
   box-sizing: border-box;
-  background-color: white;
+  background-color: var(--white-color);
 
   @media (min-width: 440px) {
     width: 438px;

@@ -38,7 +38,7 @@ const TitleWrapper = styled.h1`
   font-size: 20px;
   line-height: 19px;
 
-  color: #383838;
+  color: var(--black-color);
 `;
 
 export default Header;

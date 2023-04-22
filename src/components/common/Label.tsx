@@ -8,7 +8,7 @@ const Label = styled.label`
   font-size: 14px;
   letter-spacing: -0.085em;
 
-  color: #525252;
+  color: var(--dark-grey-color);
 `;
 
 export default Label;

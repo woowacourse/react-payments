@@ -13,7 +13,7 @@ const TitleContainer = styled.h3<{ fontSize?: number }>`
   font-weight: 700;
   font-size: ${({ fontSize }) => (fontSize ? `${fontSize}px` : '16px')};
 
-  color: #575757;
+  color: var(--dark-grey-color);
 
   opacity: 0.9;
 `;

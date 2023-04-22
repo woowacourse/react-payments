@@ -8,7 +8,7 @@ const InputSeparator = styled.span<{ isActive?: boolean }>`
 
   font-weight: 600;
   font-size: 18px;
-  color: #737373;
+  color: var(--grey-color);
 
   padding: 0.8rem 0;
 `;

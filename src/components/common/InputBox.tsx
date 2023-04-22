@@ -8,7 +8,7 @@ const InputBox = styled.div<{ width?: string; isError?: boolean }>`
   padding: 12px;
 
   box-sizing: border-box;
-  background: #ecebf1;
+  background: var(--blue-grey-color);
 
   border: ${({ isError }) => (isError ? '1px solid #ec2f1b' : 'none')};
   border-radius: 7px;
