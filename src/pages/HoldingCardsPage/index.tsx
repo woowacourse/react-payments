@@ -3,8 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import Card from '../../components/Card';
 import CardRegisterButton from '../../components/CardRegisterButton';
 
-import styles from './holdingCardsPage.module.css';
+import { uuid } from '../../utils/uuid';
 import type { CardInfo } from '../../types/card';
+
+import styles from './holdingCardsPage.module.css';
 
 interface Props {
   cards: CardInfo[];
@@ -29,8 +31,9 @@ const HoldingCardsPage = ({ cards }: Props) => {
           </h2>
         )}
         <section className={styles.cardContainer}>
-          {cards.map((card, index) => (
+          {cards.map((card) => (
             <Card
+              key={uuid()}
               cardNumber1={card.cardNumber1}
               cardNumber2={card.cardNumber2}
               cardNumber3={card.cardNumber3}
@@ -38,7 +41,6 @@ const HoldingCardsPage = ({ cards }: Props) => {
               expiredMonth={card.expiredMonth}
               expiredYear={card.expiredYear}
               owner={card.owner}
-              key={index}
             />
           ))}
           <CardRegisterButton onClick={handleClick} />
