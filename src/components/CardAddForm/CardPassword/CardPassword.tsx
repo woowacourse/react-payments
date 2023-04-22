@@ -6,6 +6,7 @@ import Input from '../../common/Input/Input';
 import { useError } from '../../../hooks/useError';
 import { isElementOfType } from '../../../utils/eventUtils';
 import validator from '../../../utils/validator';
+import { PASSWORD_UNIT_MAX_LENGTH, SECURITY_TEXT_ICON } from '../../../constants';
 
 interface CardPasswordProps {
   changeInputValidation: (key: keyof CardInputValidation, value: boolean) => void;
@@ -40,18 +41,18 @@ function CardPassword({ changeInputValidation, onInputChange, values }: CardPass
             key={index}
             type="password"
             id={index === 0 ? 'password' : `password${index}`}
-            value={password}
-            maxLength={1}
-            isError={isError}
-            autoComplete="off"
-            data-index={index}
             name="password"
+            value={password}
+            data-index={index}
+            maxLength={PASSWORD_UNIT_MAX_LENGTH}
+            autoComplete="off"
+            isError={isError}
             onChange={onInputChange}
           />
         ))}
         <div className={styles.passwordPlaceholder}>
-          <div className="passwordItem">•</div>
-          <div className="passwordItem">•</div>
+          <p className="passwordItem">{SECURITY_TEXT_ICON}</p>
+          <p className="passwordItem">{SECURITY_TEXT_ICON}</p>
         </div>
       </div>
     </InputContainer>

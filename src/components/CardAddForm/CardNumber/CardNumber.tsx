@@ -87,7 +87,7 @@ function CardNumber({ changeInputValidation, onInputChange, value }: CardNumberP
         value={encryptDisplayedCardNumber(cardNumber)}
         data-value={cardNumber}
         maxLength={CARD_NUMBER_INPUT_MAX_LENGTH}
-        autoComplete="cc-csc"
+        autoComplete="cc-number"
         isError={isError}
         onChange={onChange}
         onBlur={onBlur}

@@ -1,10 +1,11 @@
+import { ChangeEvent, FocusEvent } from 'react';
 import { CardInputValidation, ExpirationDateFormat } from '../../../types';
+import { EXPIRATION_DATE_INPUT_MAX_LENGTH } from '../../../constants';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Input from '../../common/Input/Input';
 import { useError } from '../../../hooks/useError';
 import validator from '../../../utils/validator';
 import { formatDisplayedExpirationDate } from '../../../utils/formatter';
-import { ChangeEvent, FocusEvent } from 'react';
 
 interface CardExpirationDateProps {
   changeInputValidation: (key: keyof CardInputValidation, value: boolean) => void;
@@ -39,14 +40,13 @@ function CardExpirationDate({
       required
     >
       <Input
-        type="text"
         id="expirationDate"
         name="expirationDate"
         value={expirationDate}
-        placeholder="연/년도(MM/YY) 순서로 4자리 숫자를 입력해주세요"
+        placeholder="월/년도(MM/YY) 순서로 4자리 숫자를 입력해주세요"
+        maxLength={EXPIRATION_DATE_INPUT_MAX_LENGTH}
+        autoComplete="cc-exp"
         isError={isError}
-        maxLength={5}
-        autoComplete="cc-csc"
         onChange={onInputChange}
         onBlur={onBlur}
       />

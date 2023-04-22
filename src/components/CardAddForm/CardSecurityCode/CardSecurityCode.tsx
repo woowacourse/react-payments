@@ -4,6 +4,7 @@ import Input from '../../common/Input/Input';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import { useError } from '../../../hooks/useError';
 import validator from '../../../utils/validator';
+import { SECURITY_CODE_MAX_LENGTH, SECURITY_CODE_MIN_LENGTH } from '../../../constants';
 
 interface CardSecurityCodeProps {
   changeInputValidation: (key: keyof CardInputValidation, value: boolean) => void;
@@ -38,10 +39,10 @@ function CardSecurityCode({ changeInputValidation, onInputChange, value }: CardS
         id="securityCode"
         name="securityCode"
         value={value}
-        minLength={3}
-        maxLength={4}
+        minLength={SECURITY_CODE_MIN_LENGTH}
+        maxLength={SECURITY_CODE_MAX_LENGTH}
+        autoComplete="cc-csc"
         isError={isError}
-        autoComplete="off"
         onChange={onInputChange}
         onBlur={onBlur}
       />

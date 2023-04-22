@@ -1,4 +1,5 @@
 import { ChangeEvent } from 'react';
+import { OWNER_NAME_MAX_LENGTH } from '../../../constants';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Input from '../../common/Input/Input';
 
@@ -15,9 +16,9 @@ function CardOwnerName({ onInputChange, value = '' }: CardOwnerNameProps) {
         name="ownerName"
         value={value}
         placeholder="카드에 표시된 이름과 동일하게 입력해주세요"
-        maxLength={20}
+        maxLength={OWNER_NAME_MAX_LENGTH}
+        autoComplete="cc-name"
         onChange={onInputChange}
-        autoComplete="cc-csc"
       />
     </InputContainer>
   );
