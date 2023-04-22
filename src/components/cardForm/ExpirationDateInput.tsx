@@ -3,6 +3,13 @@ import Input from '../common/Input';
 import InputBox from '../common/InputBox';
 import InputGroup from '../common/InputGroup';
 import InputSeparator from '../common/InputSeparator';
+import {
+  isInputNumber,
+  isNextInputFocusable,
+  isOverLength,
+  isValidMonth,
+} from '../../utils/InputValidate';
+import { ERROR_MESSAGE, INPUT_MAX_LENGTH } from '../../utils/Constants';
 import type { CardItemInfo } from '../../types/Card';
 
 interface ExpirationDateInputProps {
@@ -23,13 +30,19 @@ const ExpirationDateInput = ({
   useEffect(() => {
     if (!expirationDate[0].length && !expirationDate[1].length) return;
 
-    if (expirationDate[0].length < 2 || expirationDate[1].length < 2) {
-      setErrorMessage('만료일은 MM/YY 형식으로 입력해주세요');
+    if (
+      expirationDate[0].length < INPUT_MAX_LENGTH.EXPIRATION_DATE_LENGTH ||
+      expirationDate[1].length < INPUT_MAX_LENGTH.EXPIRATION_DATE_LENGTH
+    ) {
+      setErrorMessage(ERROR_MESSAGE.EXPIRATION_DATE_FORM);
       return;
     }
 
-    if (expirationDate[0].length === 2 && !isValidMonth(expirationDate[0])) {
-      setErrorMessage('유효한 달을 입력해주세요');
+    if (
+      expirationDate[0].length === INPUT_MAX_LENGTH.EXPIRATION_DATE_LENGTH &&
+      !isValidMonth(expirationDate[0])
+    ) {
+      setErrorMessage(ERROR_MESSAGE.VALID_MONTH);
       return;
     }
   }, [expirationDate, setErrorMessage]);
@@ -38,10 +51,10 @@ const ExpirationDateInput = ({
     (inputIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
       const inputValue = event.target.value;
 
-      if (isOverLength(inputValue)) return;
-
-      if (isNotInputNumber(inputValue)) {
-        setErrorMessage('숫자만 입력해주세요');
+      if (isOverLength(inputValue, INPUT_MAX_LENGTH.EXPIRATION_DATE_LENGTH))
+        return;
+      if (isInputNumber(inputValue, INPUT_MAX_LENGTH.EXPIRATION_DATE_LENGTH)) {
+        setErrorMessage(ERROR_MESSAGE.ONLY_NUMBER);
         return;
       }
 
@@ -50,29 +63,17 @@ const ExpirationDateInput = ({
 
       setExpirationDate(newInputs);
 
-      if (isNextInputFocusable(inputValue, inputIndex)) {
+      if (
+        isNextInputFocusable(
+          inputValue,
+          inputIndex,
+          INPUT_MAX_LENGTH.EXPIRATION_DATE_LENGTH
+        )
+      )
         refs[inputIndex + 1].current?.focus();
-      }
 
       setErrorMessage('');
     };
-
-  const isValidMonth = (monthValue: string) => {
-    return Number(monthValue) <= 12 && Number(monthValue) >= 1;
-  };
-
-  const isNotInputNumber = (inputValue: string) => {
-    const regex = /^\d{0,2}$/;
-    return !regex.test(inputValue);
-  };
-
-  const isOverLength = (inputValue: string) => {
-    return inputValue.length > 2;
-  };
-
-  const isNextInputFocusable = (inputValue: string, inputIndex: number) => {
-    return inputValue.length > 1 && inputIndex < 1;
-  };
 
   return (
     <InputGroup labelValue='만료일' errorMessage={errorMessage}>

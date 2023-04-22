@@ -4,6 +4,12 @@ import Input from '../common/Input';
 import InputBox from '../common/InputBox';
 import InputGroup from '../common/InputGroup';
 import { DotIcon } from '../../assets/icons';
+import {
+  isInputNumber,
+  isNextInputFocusable,
+  isOverLength,
+} from '../../utils/InputValidate';
+import { ERROR_MESSAGE, INPUT_MAX_LENGTH } from '../../utils/Constants';
 import type { Card } from '../../types/Card';
 
 interface PasswordInputProps {
@@ -25,10 +31,9 @@ const PasswordInput = ({
     (inputIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
       const inputValue = event.target.value;
 
-      if (isOverLength(inputValue)) return;
-
-      if (isNotInputNumber(inputValue)) {
-        setErrorMessage('숫자만 입력해주세요');
+      if (isOverLength(inputValue, INPUT_MAX_LENGTH.PASSWORD_LENGTH)) return;
+      if (isInputNumber(inputValue, INPUT_MAX_LENGTH.PASSWORD_LENGTH)) {
+        setErrorMessage(ERROR_MESSAGE.ONLY_NUMBER);
         return;
       }
 
@@ -38,23 +43,16 @@ const PasswordInput = ({
       setPassword(newInputs);
       setErrorMessage('');
 
-      if (isNextInputFocusable(inputValue, inputIndex)) {
+      if (
+        isNextInputFocusable(
+          inputValue,
+          inputIndex,
+          INPUT_MAX_LENGTH.PASSWORD_LENGTH
+        )
+      ) {
         refs[inputIndex + 1].current?.focus();
       }
     };
-
-  const isNotInputNumber = (inputValue: string) => {
-    const regex = /^\d{0,1}$/;
-    return !regex.test(inputValue);
-  };
-
-  const isOverLength = (inputValue: string) => {
-    return inputValue.length > 1;
-  };
-
-  const isNextInputFocusable = (inputValue: string, inputIndex: number) => {
-    return inputIndex === 0 && inputValue.length > 0;
-  };
 
   return (
     <InputGroup labelValue='카드 비밀번호' errorMessage={errorMessage}>

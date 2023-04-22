@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import Input from '../common/Input';
 import InputBox from '../common/InputBox';
 import InputGroup from '../common/InputGroup';
+import { isInputEnglish, isOverLength } from '../../utils/InputValidate';
+import { ERROR_MESSAGE, INPUT_MAX_LENGTH } from '../../utils/Constants';
 import type { CardItemInfo } from '../../types/Card';
 
 interface NameInputProps {
@@ -20,26 +22,17 @@ const NameInput = ({
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
 
-    if (isOverLength(inputValue)) {
-      setErrorMessage('30자 이하로 입력해주세요');
+    if (isOverLength(inputValue, INPUT_MAX_LENGTH.NAME_LENGTH)) {
+      setErrorMessage(ERROR_MESSAGE.MAX_INPUT_LENGTH);
       return;
     }
-    if (isNotInputEnglish(inputValue)) {
-      setErrorMessage('영어만 입력해주세요');
+    if (isInputEnglish(inputValue)) {
+      setErrorMessage(ERROR_MESSAGE.ONLY_ENGLISH);
       return;
     }
 
     setName(inputValue.toUpperCase());
     setErrorMessage('');
-  };
-
-  const isNotInputEnglish = (inputValue: string) => {
-    const regex = /^[a-zA-Z\s]*$/;
-    return !regex.test(inputValue);
-  };
-
-  const isOverLength = (inputValue: string) => {
-    return inputValue.length > 30;
   };
 
   return (

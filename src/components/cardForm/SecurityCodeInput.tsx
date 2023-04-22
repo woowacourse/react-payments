@@ -1,6 +1,8 @@
 import Input from '../common/Input';
 import InputBox from '../common/InputBox';
 import InputGroup from '../common/InputGroup';
+import { isInputNumber, isOverLength } from '../../utils/InputValidate';
+import { ERROR_MESSAGE, INPUT_MAX_LENGTH } from '../../utils/Constants';
 import type { Card } from '../../types/Card';
 
 interface SecurityCodeInputProps {
@@ -19,24 +21,14 @@ const SecurityCodeInput = ({
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
 
-    if (isOverLength(inputValue)) return;
-
-    if (isNotInputNumber(inputValue)) {
-      setErrorMessage('숫자만 입력해주세요');
+    if (isOverLength(inputValue, INPUT_MAX_LENGTH.SECURITY_CODE_LENGTH)) return;
+    if (isInputNumber(inputValue, INPUT_MAX_LENGTH.SECURITY_CODE_LENGTH)) {
+      setErrorMessage(ERROR_MESSAGE.ONLY_NUMBER);
       return;
     }
 
     setSecurityCode(inputValue.toUpperCase());
     setErrorMessage('');
-  };
-
-  const isNotInputNumber = (inputValue: string) => {
-    const regex = /^\d{0,3}$/;
-    return !regex.test(inputValue);
-  };
-
-  const isOverLength = (inputValue: string) => {
-    return inputValue.length > 3;
   };
 
   return (

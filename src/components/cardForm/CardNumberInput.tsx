@@ -3,6 +3,12 @@ import Input from '../common/Input';
 import InputBox from '../common/InputBox';
 import InputGroup from '../common/InputGroup';
 import InputSeparator from '../common/InputSeparator';
+import {
+  isNextInputFocusable,
+  isInputNumber,
+  isOverLength,
+} from '../../utils/InputValidate';
+import { ERROR_MESSAGE, INPUT, INPUT_MAX_LENGTH } from '../../utils/Constants';
 import type { CardItemInfo } from '../../types/Card';
 
 interface CardNumberInputProps {
@@ -29,14 +35,18 @@ const CardNumberInput = ({
     (inputIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
       const inputValue = event.target.value;
 
-      if (isOverLength(inputValue)) return;
-
-      if (isNotInputNumber(inputValue)) {
-        setErrorMessage('숫자만 입력해주세요');
+      if (isOverLength(inputValue, INPUT_MAX_LENGTH.CARD_NUMBER_LENGTH)) return;
+      if (isInputNumber(inputValue, INPUT_MAX_LENGTH.CARD_NUMBER_LENGTH)) {
+        setErrorMessage(ERROR_MESSAGE.ONLY_NUMBER);
         return;
       }
-
-      if (isNextInputFocusable(inputValue, inputIndex))
+      if (
+        isNextInputFocusable(
+          inputValue,
+          inputIndex,
+          INPUT_MAX_LENGTH.CARD_NUMBER_LENGTH
+        )
+      )
         refs[inputIndex + 1].current?.focus();
 
       const newCardNumber = [...cardNumber];
@@ -46,19 +56,6 @@ const CardNumberInput = ({
       setErrorMessage('');
     };
 
-  const isNotInputNumber = (inputValue: string) => {
-    const regex = /^\d{0,4}$/;
-    return !regex.test(inputValue);
-  };
-
-  const isOverLength = (inputValue: string) => {
-    return inputValue.length > 4;
-  };
-
-  const isNextInputFocusable = (inputValue: string, inputIndex: number) => {
-    return inputValue.length > 3 && inputIndex < 3;
-  };
-
   return (
     <InputGroup labelValue='카드 번호' errorMessage={errorMessage}>
       <InputBox isError={!!errorMessage}>
@@ -67,11 +64,20 @@ const CardNumberInput = ({
             <Input
               ref={refs[index]}
               value={cardNumber[index]}
-              type={index >= 2 ? 'password' : undefined}
+              type={
+                index >= INPUT.CARD_NUMBER_VISIBLE_INPUT_ORDER
+                  ? 'password'
+                  : undefined
+              }
               onChange={handleChangeInput(index)}
             />
-            {index < 3 && (
-              <InputSeparator isActive={cardNumber[index].length === 4}>
+            {index < INPUT.CARD_NUMBER_LAST_INPUT_ORDER && (
+              <InputSeparator
+                isActive={
+                  cardNumber[index].length ===
+                  INPUT_MAX_LENGTH.CARD_NUMBER_LENGTH
+                }
+              >
                 -
               </InputSeparator>
             )}
