@@ -10,6 +10,7 @@ import useCardRegisterForm from './useCardRegisterForm';
 import type { CardInfo } from '../../domain/types/card';
 
 import styles from './cardRegisterForm.module.css';
+import { CARD_NUMBER_INPUT_PLACEHOLDER } from '../../domain/constants';
 
 const today = new Date();
 const currentYear = today.getFullYear() % 100;
@@ -106,7 +107,7 @@ const CardRegisterForm = ({ registerCard }: Props) => {
               value={cardNumber1}
               onChange={(e) => handleNumberChange(e, setCardNumber1)}
               ref={inputRefs[0]}
-              placeholder="0000"
+              placeholder={CARD_NUMBER_INPUT_PLACEHOLDER}
             />
             <span>-</span>
             <Input
@@ -118,7 +119,7 @@ const CardRegisterForm = ({ registerCard }: Props) => {
               value={cardNumber2}
               onChange={(e) => handleNumberChange(e, setCardNumber2)}
               ref={inputRefs[1]}
-              placeholder="0000"
+              placeholder={CARD_NUMBER_INPUT_PLACEHOLDER}
             />
             <span>-</span>
             <Input
@@ -130,7 +131,7 @@ const CardRegisterForm = ({ registerCard }: Props) => {
               value={cardNumber3}
               onChange={(e) => handleNumberChange(e, setCardNumber3)}
               ref={inputRefs[2]}
-              placeholder="0000"
+              placeholder={CARD_NUMBER_INPUT_PLACEHOLDER}
             />
             <span>-</span>
             <Input
@@ -142,7 +143,7 @@ const CardRegisterForm = ({ registerCard }: Props) => {
               value={cardNumber4}
               onChange={(e) => handleNumberChange(e, setCardNumber4)}
               ref={inputRefs[3]}
-              placeholder="0000"
+              placeholder={CARD_NUMBER_INPUT_PLACEHOLDER}
             />
           </div>
         </label>
