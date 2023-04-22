@@ -55,12 +55,26 @@ function CreditCardRegister() {
   };
 
   useEffect(() => {
+    if (creditCardNumber.length !== 16) return setIsFullFilled(false);
+    if (creditCardExpiry.length !== 5) return setIsFullFilled(false);
+
     if (numberErrorMessage || expiryErrorMessage || ownerErrorMessage || CVCErrorMessage || passwordErrorMessage) {
       return setIsFullFilled(false);
     }
 
     return setIsFullFilled(true);
   }, [numberErrorMessage, expiryErrorMessage, ownerErrorMessage, CVCErrorMessage, passwordErrorMessage]);
+
+  useEffect(() => {
+    if (creditCardNumber.length !== 16) return setIsFullFilled(false);
+    if (creditCardExpiry.length !== 5) return setIsFullFilled(false);
+    if (creditCardCVC.length !== 3) return setIsFullFilled(false);
+    if (creditCardPassword.first.length !== 1 || creditCardPassword.second.length !== 1) {
+      return setIsFullFilled(false);
+    }
+
+    return setIsFullFilled(true);
+  }, [creditCardNumber, creditCardExpiry, creditCardCVC, creditCardPassword]);
 
   return (
     <S.CreditCardRegisterLayout>
