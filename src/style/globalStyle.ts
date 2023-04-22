@@ -1,4 +1,5 @@
 import styled, { createGlobalStyle } from 'styled-components';
+
 import resetStyle from './resetStyle';
 
 const GlobalStyle = createGlobalStyle`
@@ -26,7 +27,6 @@ export const GlobalLayout = styled.div`
   width: 375px;
   min-height: 100vh;
   margin: 0 auto;
-
 `;
 
 export default GlobalStyle;

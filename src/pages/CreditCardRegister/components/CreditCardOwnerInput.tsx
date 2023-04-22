@@ -1,6 +1,7 @@
-import Input from '../../../components/Input';
-import * as S from '../style';
+import Input from '@Components/Input';
+
 import InputLayout from './InputLayout';
+import * as S from '../style';
 
 type Props = {
   creditCardOwner: string;

@@ -1,4 +1,4 @@
-import * as Type from 'types';
+import * as Type from '@Types/index';
 
 const creditCard = {
   convertSecuredCreditCard: (number: string) => {

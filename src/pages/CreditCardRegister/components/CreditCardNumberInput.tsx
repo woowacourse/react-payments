@@ -1,8 +1,11 @@
 import { useRef, useState } from 'react';
-import creditCard from '../../../domains/creditCard';
-import Input from '../../../components/Input';
-import * as S from '../style';
+
+import Input from '@Components/Input';
+
+import creditCard from '@Domains/creditCard';
+
 import InputLayout from './InputLayout';
+import * as S from '../style';
 
 type Props = {
   creditCardNumber: string;

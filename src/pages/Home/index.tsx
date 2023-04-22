@@ -1,8 +1,11 @@
-import CreditCard from 'components/CreditCard';
-import { useNavigate } from 'react-router-dom';
+import * as Type from '@Types/index';
 import { useEffect, useState } from 'react';
-import * as Type from 'types';
-import localStorageHelper from 'utils/localStorageHelper';
+import { useNavigate } from 'react-router-dom';
+
+import CreditCard from '@Components/CreditCard';
+
+import localStorageHelper from '@Utils/localStorageHelper';
+
 import * as S from './style';
 
 function Home() {

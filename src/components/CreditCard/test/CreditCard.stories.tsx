@@ -1,8 +1,9 @@
 /* eslint-disable react/function-component-definition */
 /* eslint-disable import/no-extraneous-dependencies */
 
-import React from 'react';
 import { Story, Meta } from '@storybook/react';
+import React from 'react';
+
 import CreditCard, { CreditCardProps } from '..';
 
 export default {

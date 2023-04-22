@@ -1,14 +1,19 @@
-import CreditCard from 'components/CreditCard';
-import { useNavigate } from 'react-router-dom';
+import * as Type from '@Types/index';
 import { useEffect, useState } from 'react';
-import * as Type from 'types';
-import creditCard from 'domains/creditCard';
-import useInput from 'hooks/useInput';
-import localStorageHelper from 'utils/localStorageHelper';
-import CreditCardNumberInput from './components/CreditCardNumberInput';
-import CreditCardExpiryInput from './components/CreditCardExpiryInput';
-import CreditCardOwnerInput from './components/CreditCardOwnerInput';
+import { useNavigate } from 'react-router-dom';
+
+import CreditCard from '@Components/CreditCard';
+
+import creditCard from '@Domains/creditCard';
+
+import useInput from '@Hooks/useInput';
+
+import localStorageHelper from '@Utils/localStorageHelper';
+
 import CreditCardCVCInput from './components/CreditCardCVCInput';
+import CreditCardExpiryInput from './components/CreditCardExpiryInput';
+import CreditCardNumberInput from './components/CreditCardNumberInput';
+import CreditCardOwnerInput from './components/CreditCardOwnerInput';
 import CreditCardPasswordInput from './components/CreditCardPasswordInput';
 import * as S from './style';
 

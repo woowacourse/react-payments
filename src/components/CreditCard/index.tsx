@@ -1,7 +1,8 @@
 /* eslint-disable react/no-array-index-key */
-import React from 'react';
-import * as Type from 'types';
-import creditCard from '../../domains/creditCard';
+import * as Type from '@Types/index';
+
+import creditCard from '@Domains/creditCard';
+
 import * as Style from './style';
 
 export type CreditCardProps = {

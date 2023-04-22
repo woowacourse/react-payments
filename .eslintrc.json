@@ -31,7 +31,55 @@
     "react/require-default-props": "off",
     "operator-linebreak": "off",
     "max-len": ["error", { "code": 120 }],
-    "object-curly-newline": "off"
+    "object-curly-newline": "off",
+    "import/order": [
+      "error",
+      {
+        "groups": ["external", "internal", "builtin", ["parent", "sibling"], "index", "unknown"],
+        "pathGroups": [
+          {
+            "pattern": "react*,react*/**",
+            "group": "external",
+            "position": "before"
+          },
+          {
+            "pattern": "@Components/*",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "@Pages/*",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "@Domains/*",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "@Hooks/*",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "@Utils/*",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "@Constant/*",
+            "group": "internal",
+            "position": "after"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": [],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc"
+        }
+      }
+    ]
   },
   "overrides": [
     {
