@@ -1,4 +1,3 @@
-import { timeEnd } from 'console';
 export const DATE_OR_EMPTY_REGEX = /^(0[1-9]|1[0-2])([0-9]{2})$/;
 export const ALPHA_OR_EMPTY_REGEXP = /(^$|^[a-zA-Z][a-zA-Z ]*$)/;
 export const CONTINUOUS_EMPTY_REGEXP = /[ ]{2,}/;

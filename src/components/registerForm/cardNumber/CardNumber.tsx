@@ -2,7 +2,7 @@ import React, { forwardRef, useState, useContext, useRef } from 'react';
 
 import styled, { css } from 'styled-components';
 
-import { InputValuesContext } from '../../../contexts/InputValueContext';
+import CreditCardContext from '../../../contexts/InputValueContext';
 import useAutoFocus from '../../../hooks/useAutoFocus';
 import FormLabel from '../../@common/FormLabel';
 import Input from '../../@common/Input';
