@@ -5,6 +5,10 @@ export const VStack = css`
   flex-direction: column;
 `;
 
+export const Stack = css`
+  display: flex;
+`;
+
 export const SBetweenStack = css`
   display: flex;
   justify-content: space-between;
