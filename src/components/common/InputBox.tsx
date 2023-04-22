@@ -15,7 +15,7 @@ const InputBox = ({ children, separator, isFullWidth, align }: Props) => {
     <InputsBoxWrapper isFullWidth={isFullWidth} align={align}>
       {React.Children.toArray(children).map((input, index) => (
         <>
-          {index !== 0 && <Separator>{separator}</Separator>}
+          {index > 0 && <Separator>{separator}</Separator>}
           {input}
         </>
       ))}
