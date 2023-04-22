@@ -1,4 +1,4 @@
-import type { CardInfo } from '../../types/card';
+import type { CardInfo } from '../../domain/types/card';
 
 import styles from './card.module.css';
 

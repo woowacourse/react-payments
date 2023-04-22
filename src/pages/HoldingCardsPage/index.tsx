@@ -4,7 +4,7 @@ import Card from '../../components/Card';
 import CardRegisterButton from '../../components/CardRegisterButton';
 
 import { uuid } from '../../utils/uuid';
-import type { CardInfo } from '../../types/card';
+import type { CardInfo } from '../../domain/types/card';
 
 import styles from './holdingCardsPage.module.css';
 

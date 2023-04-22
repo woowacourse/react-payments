@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import CardRegisterForm from '../../components/CardRegisterForm';
 
-import type { CardInfo } from '../../types/card';
+import type { CardInfo } from '../../domain/types/card';
 
 import styles from './cardRegisterPage.module.css';
 

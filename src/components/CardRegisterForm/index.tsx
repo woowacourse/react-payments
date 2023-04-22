@@ -7,7 +7,7 @@ import Tooltip from '../Tooltip';
 import TooltipButton from '../TooltipButton';
 import useCardRegisterForm from './useCardRegisterForm';
 
-import type { CardInfo } from '../../types/card';
+import type { CardInfo } from '../../domain/types/card';
 
 import styles from './cardRegisterForm.module.css';
 
