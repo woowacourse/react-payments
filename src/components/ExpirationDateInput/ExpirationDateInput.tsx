@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import CardInfoInput from '../CardInfoInput/CardInfoInput';
 import Input from '../Input/Input';
+import { NUMBER_REGEX } from '../../constant/regex';
 
 type ExpirationDateInputProps = {
   updateExpirationDate: (expirationDate: string) => void;
@@ -10,7 +11,7 @@ const ExpirationDateInput = ({ updateExpirationDate }: ExpirationDateInputProps)
   const [expirationDate, setExpirationDate] = useState('');
 
   const addSlashInExpirationDate = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (/[^0-9/]/.test(e.target.value)) return alert('숫자만 입력이 가능합니다!');
+    if (NUMBER_REGEX.test(e.target.value)) return alert('숫자만 입력이 가능합니다!');
 
     const expirationDate = e.target.value;
     const slashRemovedExpirationDate = expirationDate.replaceAll('/', '');

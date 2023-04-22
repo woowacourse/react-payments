@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import CardInfoInput from '../CardInfoInput/CardInfoInput';
 import Input from '../Input/Input';
+import { NUMBER_REGEX } from '../../constant/regex';
 
 const CardPasswordInput = () => {
   const [firstDigit, setFirstDigit] = useState('');
@@ -8,7 +9,7 @@ const CardPasswordInput = () => {
   const secondDigitRef = useRef<HTMLInputElement>(null);
 
   const updateDigit = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
-    if (/[^0-9-]/.test(e.target.value)) return alert('숫자만 입력이 가능합니다.');
+    if (NUMBER_REGEX.test(e.target.value)) return alert('숫자만 입력이 가능합니다.');
 
     const currentDigit = e.target.value;
     index === 1 ? setFirstDigit(currentDigit) : setSecondDigit(currentDigit);

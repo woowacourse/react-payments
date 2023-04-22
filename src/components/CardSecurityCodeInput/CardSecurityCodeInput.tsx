@@ -2,6 +2,7 @@ import { useState } from 'react';
 import CardInfoInput from '../CardInfoInput/CardInfoInput';
 import HelpButton from '../HelpButton/HelpButton';
 import Input from '../Input/Input';
+import { NUMBER_REGEX } from '../../constant/regex';
 
 const CardSecurityCodeInput = () => {
   const [securityCode, setSecurityCode] = useState('');
@@ -9,7 +10,7 @@ const CardSecurityCodeInput = () => {
   const updateSecurityCode = (e: React.ChangeEvent<HTMLInputElement>) => {
     const currentSecurityCode = e.target.value;
 
-    if (/[^0-9-]/.test(currentSecurityCode)) return alert('숫자만 입력이 가능합니다!');
+    if (NUMBER_REGEX.test(currentSecurityCode)) return alert('숫자만 입력이 가능합니다!');
     setSecurityCode(currentSecurityCode);
   };
 
