@@ -7,15 +7,13 @@ import CardRegisterPage from './pages/CardRegisterPage';
 import type { CardInfo } from './types/card';
 
 const App = () => {
-  const [cards, setCards] = useState<CardInfo[]>([]);
+  const [cards, setCards] = useState<CardInfo[]>(() => {
+    const localStorageData = localStorage.getItem('cards');
 
-  useEffect(() => {
-    const cardsData = localStorage.getItem('cards');
+    if (localStorageData === null) return [];
 
-    if (cardsData === null) return;
-
-    setCards(JSON.parse(cardsData));
-  }, []);
+    return JSON.parse(localStorageData);
+  });
 
   useEffect(() => {
     if (cards.length > 0) {
