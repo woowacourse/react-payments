@@ -2,15 +2,6 @@
   padding: 20px 36px 0;
 }
 
-.header {
-  display: flex;
-  height: 64px;
-  column-gap: 18px;
-}
-
-.subTitle {
-  text-align: center;
-}
 
 .formContainer {
   display: flex;

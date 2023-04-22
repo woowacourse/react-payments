@@ -1,0 +1,17 @@
+.header {
+  display: flex;
+  align-items: center;
+  height: 40px;
+}
+
+.previousButton {
+  margin-right: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 500;
+}

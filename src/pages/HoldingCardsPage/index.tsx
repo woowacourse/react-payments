@@ -5,6 +5,7 @@ import CardRegisterButton from '../../components/CardRegisterButton';
 
 import styles from './holdingCardsPage.module.css';
 import type { CardInfo } from '../../types/card';
+import Header from '../../components/Header';
 
 interface Props {
   cards: CardInfo[];
@@ -19,9 +20,7 @@ const HoldingCardsPage = ({ cards }: Props) => {
 
   return (
     <div className={styles.container}>
-      <header className={styles.header}>
-        <h1 className="text-title">보유 카드</h1>
-      </header>
+      <Header title="보유 카드" />
       <main>
         {cards.length === 0 && (
           <h2 className={`text-subtitle ${styles.subTitle}`}>
