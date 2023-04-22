@@ -1,0 +1,31 @@
+.container {
+  width: 213px;
+  height: 133px;
+  background: #333;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  padding: 47px 14px 0px;
+  color: #fff;
+}
+
+.cardNumber {
+  display: flex;
+  column-gap: 10px;
+  height: 16px;
+  margin: 10px 0 8px;
+}
+
+.detailContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.number {
+  width: 36px;
+  letter-spacing: 0.2em;
+}
+
+.password {
+  width: 42px;
+  letter-spacing: -0.2em;
+}

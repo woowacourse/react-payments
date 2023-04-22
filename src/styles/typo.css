@@ -1,0 +1,25 @@
+.text-title {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #383838;
+}
+
+.text-subtitle {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  color: #575757;
+}
+
+.text-card-number {
+  font-size: 13px;
+}
+
+.text-card-detail {
+  font-size: 11px;
+}
