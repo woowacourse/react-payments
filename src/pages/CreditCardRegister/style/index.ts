@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/indent */
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 export const CreditCardRegisterLayout = styled.div`
   padding: 28px 24px;
@@ -62,6 +62,37 @@ export const ButtonWrapper = styled.div`
 export const RegisterButton = styled.button`
   font-weight: 700;
   cursor: pointer;
+`;
+
+const cursorBlink = keyframes`
+  0% {
+    opacity: 0;
+  }
+`;
+
+type FakeInputType = {
+  isHover: boolean;
+};
+
+export const FakeInput = styled.div<FakeInputType>`
+  background-color: #ecebf1;
+  border-radius: 7px;
+  height: 48px;
+  border: none;
+  font-size: 18px;
+  padding: 0px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  ::after {
+    content: '';
+    width: 1px;
+    height: 18px;
+    background: ${(props) => (props.isHover ? 'black' : '#ecebf1')};
+    display: inline-block;
+    animation: ${cursorBlink} 1.5s steps(2) infinite;
+  }
 `;
 
 export const HiddenInput = styled.input`

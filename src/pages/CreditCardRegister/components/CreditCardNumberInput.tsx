@@ -1,6 +1,4 @@
-import { useRef, useState } from 'react';
-
-import Input from '@Components/Input';
+import { useEffect, useRef, useState } from 'react';
 
 import creditCard from '@Domains/creditCard';
 
@@ -16,6 +14,7 @@ type Props = {
 function CreditCardNumberInput({ creditCardNumber, errorMessage, setCreditCardNumber }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [markedCreditCardNumber, setMarkedCreditCardNumber] = useState('');
+  const [isHoverFakeInput, setIsHoverFakeInput] = useState(true);
 
   const handleChangeCreditCardNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newCreditCarNumber = event.target.value;
@@ -32,22 +31,34 @@ function CreditCardNumberInput({ creditCardNumber, errorMessage, setCreditCardNu
     setCreditCardNumber(newCreditCarNumber);
   };
 
+  const handleFakeInputClick = () => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  };
+
+  const handleHiddenInputBlur = () => setIsHoverFakeInput(false);
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
+
   return (
     <InputLayout errorMessage={errorMessage}>
       <S.CreditCardRegisterLabel>카드 번호</S.CreditCardRegisterLabel>
-      <Input
+      <S.FakeInput onClick={handleFakeInputClick} isHover={isHoverFakeInput}>
+        {markedCreditCardNumber}
+      </S.FakeInput>
+      <S.HiddenInput
+        ref={inputRef}
         type="string"
-        value={markedCreditCardNumber}
-        width="100%"
-        textAlign="center"
-        onClick={() => {
-          if (inputRef.current) {
-            inputRef.current.focus();
-          }
-        }}
+        value={creditCardNumber}
+        onChange={handleChangeCreditCardNumber}
+        onBlur={handleHiddenInputBlur}
         maxLength={16}
       />
-      <S.HiddenInput ref={inputRef} type="string" value={creditCardNumber} onChange={handleChangeCreditCardNumber} />
       {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
     </InputLayout>
   );
