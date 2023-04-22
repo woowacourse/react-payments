@@ -6,6 +6,7 @@ import CardListPage from "./pages/CardListPage/CardListPage";
 import { Route, Routes } from "react-router-dom";
 import { useState } from "react";
 import { Card } from "./types";
+import { PAGE } from "./constant";
 
 function App() {
   const [cards, setCards] = useState<Card[]>([]);
@@ -19,8 +20,8 @@ function App() {
       <GlobalStyle />
       <Layout>
         <Routes>
-          <Route index path="/" element={<CardListPage cards={cards} />} />
-          <Route path="/addCard" element={<AddCardPage onSubmit={addCard} />} />
+          <Route index path={PAGE.CARD_LIST} element={<CardListPage cards={cards} />} />
+          <Route path={PAGE.ADD_CARD} element={<AddCardPage onSubmit={addCard} />} />
         </Routes>
       </Layout>
     </>

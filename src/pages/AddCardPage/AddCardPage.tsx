@@ -18,6 +18,7 @@ import {
   isValidMonth,
   isValidOwnerName,
 } from "../../validator/Validator";
+import { PAGE } from "../../constant";
 
 type AddCardPageProps = {
   onSubmit: (card: Card) => void;
@@ -152,7 +153,7 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
 
     onSubmit(card);
 
-    navigate("/");
+    navigate(PAGE.CARD_LIST);
   };
 
   const isAddButtonVisible = (): boolean => {
@@ -168,7 +169,7 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
 
   return (
     <Container>
-      <AppBar title={"카드 추가"} leftChild={<Link to="/">〈</Link>} />
+      <AppBar title={"카드 추가"} leftChild={<Link to={PAGE.CARD_LIST}>〈</Link>} />
       <CardPreview card={{ cardNumber, expirationDate, ownerName }} style={{ transition: "none", transform: "none" }} />
       <Form onSubmit={addCard}>
         <CardNumberInput

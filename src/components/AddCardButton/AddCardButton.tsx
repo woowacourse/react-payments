@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { PAGE } from "../../constant";
 
 const AddCardButton = () => {
   return (
-    <Link to="/addCard">
+    <Link to={PAGE.ADD_CARD}>
       <Button>✚</Button>
     </Link>
   );
