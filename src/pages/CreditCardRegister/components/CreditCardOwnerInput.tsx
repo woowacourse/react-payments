@@ -11,7 +11,7 @@ type Props = {
 function CreditCardOwnerInput({ creditCardOwner, errorMessage, setCreditCardOwner }: Props) {
   const handleChangeCreditCardOwner = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newName = event.target.value.toUpperCase();
-    if (newName.length <= 30) {
+    if (newName.length <= 20) {
       setCreditCardOwner(newName);
     }
   };
@@ -22,7 +22,7 @@ function CreditCardOwnerInput({ creditCardOwner, errorMessage, setCreditCardOwne
         <S.CreditCardRegisterLabel>카드 소유자 이름 (선택)</S.CreditCardRegisterLabel>
         <S.CreditCardRegisterLabel>
           {creditCardOwner.length}
-          /30
+          /20
         </S.CreditCardRegisterLabel>
       </S.FlexBox>
       <Input
@@ -32,6 +32,7 @@ function CreditCardOwnerInput({ creditCardOwner, errorMessage, setCreditCardOwne
         width="100%"
         textAlign="start"
         onChange={handleChangeCreditCardOwner}
+        maxLength={20}
       />
       {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
     </InputLayout>

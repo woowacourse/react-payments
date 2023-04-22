@@ -42,6 +42,7 @@ function CreditCardPasswordInput({ creditCardPassword, errorMessage, setCreditCa
           width="48px"
           textAlign="center"
           onChange={handleChangeCreditCardFirstPassword}
+          maxLength={1}
         />
         <Input
           type="password"
@@ -49,6 +50,7 @@ function CreditCardPasswordInput({ creditCardPassword, errorMessage, setCreditCa
           width="48px"
           textAlign="center"
           onChange={handleChangeCreditCardSecondPassword}
+          maxLength={1}
         />
         <S.PasswordBox>•</S.PasswordBox>
         <S.PasswordBox>•</S.PasswordBox>

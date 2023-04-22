@@ -42,7 +42,7 @@ function CreditCardNumberInput({ creditCardNumber, errorMessage, setCreditCardNu
             inputRef.current.focus();
           }
         }}
-        onChange={() => {}}
+        maxLength={16}
       />
       <S.HiddenInput ref={inputRef} type="string" value={creditCardNumber} onChange={handleChangeCreditCardNumber} />
       {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}

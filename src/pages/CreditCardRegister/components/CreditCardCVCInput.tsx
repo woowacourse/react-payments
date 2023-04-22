@@ -11,9 +11,9 @@ type Props = {
 function CreditCardCVCInput({ creditCardCVC, errorMessage, setCreditCardCVC }: Props) {
   const handleChangeCreditCardCVC = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newCVC = event.target.value;
-    if (newCVC.length <= 3) {
-      setCreditCardCVC(newCVC);
-    }
+    // if (newCVC.length <= 3) {
+    setCreditCardCVC(newCVC);
+    // }
   };
 
   const handleGuideMessage = () => {
@@ -30,6 +30,7 @@ function CreditCardCVCInput({ creditCardCVC, errorMessage, setCreditCardCVC }: P
           width="72px"
           textAlign="center"
           onChange={handleChangeCreditCardCVC}
+          maxLength={3}
         />
         <S.GuideMessage onClick={handleGuideMessage}>?</S.GuideMessage>
       </S.CVCInputLayout>

@@ -33,6 +33,7 @@ function CreditCardExpiryInput({ creditCardExpiry, errorMessage, setCreditCardEx
         width="40%"
         textAlign="center"
         onChange={handleChangeCreditCardExpiry}
+        maxLength={5}
       />
       {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
     </InputLayout>

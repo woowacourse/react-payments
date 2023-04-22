@@ -47,17 +47,12 @@ function CreditCardRegister() {
   };
 
   useEffect(() => {
-    if (creditCardExpiry === '') return setIsFullFilled(false);
-    if (creditCardCVC === '') return setIsFullFilled(false);
-    if (creditCardPassword.first === '' || creditCardPassword.second === '') {
-      return setIsFullFilled(false);
-    }
     if (numberErrorMessage || expiryErrorMessage || ownerErrorMessage || CVCErrorMessage || passwordErrorMessage) {
       return setIsFullFilled(false);
     }
 
     return setIsFullFilled(true);
-  }, [creditCardNumber, creditCardExpiry, creditCardCVC, creditCardPassword]);
+  }, [numberErrorMessage, expiryErrorMessage, ownerErrorMessage, CVCErrorMessage, passwordErrorMessage]);
 
   return (
     <S.CreditCardRegisterLayout>
