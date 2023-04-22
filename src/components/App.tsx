@@ -1,9 +1,9 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import NotFound from '../pages/NotFound';
 import Home from '../pages/Home';
 import CardRegistration from '../pages/CardRegistration';
 import styles from './App.module.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import type { CardInfo } from '../types';
 
 const App = () => {
@@ -13,19 +13,24 @@ const App = () => {
     setCardInfo([...cardInfo, { cardNumber, cardExpirationDate, cardOwnerName }]);
   };
 
-  useEffect(() => {
-    setCardInfo(cardInfo);
-  }, [cardInfo]);
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <Home cardInfo={cardInfo} />,
+    },
+    {
+      path: '/card-registration',
+      element: <CardRegistration registerNewCard={registerNewCard} />,
+    },
+    {
+      path: '*',
+      element: <NotFound />,
+    },
+  ]);
 
   return (
     <div className={styles.container}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home cardInfo={cardInfo} />}></Route>
-          <Route path="/card-registration" element={<CardRegistration registerNewCard={registerNewCard} />}></Route>
-          <Route path="*" element={<NotFound />}></Route>
-        </Routes>
-      </BrowserRouter>
+      <RouterProvider router={router} />
     </div>
   );
 };
