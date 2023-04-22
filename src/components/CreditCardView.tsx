@@ -33,7 +33,7 @@ const ICChip = styled.div`
 
 const CardNumber = styled.div`
   display: flex;
-  gap: 10px;
+  gap: 6px;
   letter-spacing: 2px;
 
   height: 12px;
