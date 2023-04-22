@@ -1,13 +1,10 @@
-type CardNumberFormat = [string, string, string, string];
-type PasswordFormat = [string, string];
-
 interface ExpirationDateFormat {
   month: string;
   year: string;
 }
 
 interface Card {
-  cardNumber: CardNumberFormat;
+  cardNumber: '';
   expirationDate: ExpirationDateFormat;
   ownerName?: string;
   securityCode: string;

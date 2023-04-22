@@ -1,7 +1,7 @@
-import { CardNumberFormat, PasswordFormat } from '../types';
+import { CARD_NUMBER_INPUT_MAX_LENGTH } from '../constants';
 
-const validateCardNumber = (cardNumberInputs: CardNumberFormat) => {
-  return cardNumberInputs.every((number) => number.length === 4);
+const validateCardNumber = (input: string) => {
+  return input.length === CARD_NUMBER_INPUT_MAX_LENGTH;
 };
 
 const validateExpirationDate = (input: string) => {
