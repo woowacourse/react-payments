@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@craco/craco": "^7.1.0",
     "@storybook/cli": "^7.0.5",
     "@storybook/react-docgen-typescript-plugin": "^1.0.1",
     "@testing-library/jest-dom": "^5.14.1",
@@ -23,14 +24,15 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "craco eject",
     "sb": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "chromatic": "npx chromatic --project-token=df8bdd6bfb50"
   },
   "eslintConfig": {
     "extends": [
@@ -75,6 +77,8 @@
     "@types/styled-components": "^5.1.26",
     "@typescript-eslint/eslint-plugin": "^5.43.0",
     "babel-plugin-named-exports-order": "^0.0.2",
+    "chromatic": "^6.17.3",
+    "craco-alias": "^3.0.1",
     "eslint": "^8.2.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.0.0",

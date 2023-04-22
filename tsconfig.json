@@ -26,5 +26,9 @@
       "@Domains/*": ["./domains/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src", "./craco.config.js"],
+  "exclude": ["node_modules", "build"],
+  "settings": {
+    "import/resolver": {}
+  }
 }

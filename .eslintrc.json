@@ -8,6 +8,7 @@
   "parserOptions": {
     "project": "./tsconfig.json"
   },
+
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
     "import/extensions": [
@@ -88,5 +89,8 @@
         "no-undef": "off"
       }
     }
-  ]
+  ],
+  "settings": {
+    "import/resolver": {}
+  }
 }

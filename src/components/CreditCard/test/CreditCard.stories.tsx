@@ -2,7 +2,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 import { Story, Meta } from '@storybook/react';
-import React from 'react';
 
 import CreditCard, { CreditCardProps } from '..';
 
