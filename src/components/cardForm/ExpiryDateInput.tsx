@@ -2,6 +2,7 @@ import { InputContainer } from "../common/InputContainer";
 import { Input } from "../common/Input";
 import { InputLabel } from "../common/InputLabel";
 import { useState } from "react";
+import { CARD_INPUT_NUMBER } from "../../constant/cardInput";
 
 interface ExpiryDateInputProps {
   expiryDate: string;
@@ -14,6 +15,7 @@ const ExpiryDateInfo = {
   placeholder: "MM / YY",
   textPosition: "center",
   type: "text",
+  maxLength: CARD_INPUT_NUMBER.EXPIRY_DATE,
 };
 
 export const ExpiryDateInput = ({

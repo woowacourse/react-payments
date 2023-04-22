@@ -3,12 +3,14 @@ import { Input } from "../common/Input";
 import { InputLabel } from "../common/InputLabel";
 import styled from "styled-components";
 import { useState } from "react";
+import { CARD_INPUT_NUMBER } from "../../constant/cardInput";
 
 const passwordInfo = {
   width: "43px",
   placeholder: "",
   textPosition: "center",
   type: "password",
+  maxLength: CARD_INPUT_NUMBER.PASSWORD,
 };
 
 export const PasswordInput = () => {

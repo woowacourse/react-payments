@@ -2,6 +2,7 @@ import { InputContainer } from "../common/InputContainer";
 import { Input } from "../common/Input";
 import { InputLabel } from "../common/InputLabel";
 import styled from "styled-components";
+import { CARD_INPUT_NUMBER } from "../../constant/cardInput";
 
 interface OwnerInputProps {
   setOwner: (value: string) => void;
@@ -14,6 +15,7 @@ const OwnerInfo = {
   placeholder: "카드에 표시된 이름과 동일하게 입력하세요.",
   textPosition: "left",
   type: "text",
+  maxLength: CARD_INPUT_NUMBER.OWNER,
 };
 
 export const OwnerInput = ({ setOwner, owner }: OwnerInputProps) => {

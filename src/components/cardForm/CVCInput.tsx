@@ -3,6 +3,7 @@ import { Input } from "../common/Input";
 import { InputLabel } from "../common/InputLabel";
 import styled from "styled-components";
 import { useState } from "react";
+import { CARD_INPUT_NUMBER } from "../../constant/cardInput";
 
 const CVCInfo = {
   label: "cvc",
@@ -10,6 +11,7 @@ const CVCInfo = {
   placeholder: "",
   textPosition: "center",
   type: "password",
+  maxLength: CARD_INPUT_NUMBER.CVC,
 };
 
 export const CVCInput = () => {
