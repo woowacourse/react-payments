@@ -2,12 +2,12 @@ import React, { forwardRef, useState, useContext, useRef } from 'react';
 
 import styled, { css } from 'styled-components';
 
-import CreditCardContext from '../../../contexts/InputValueContext';
 import useAutoFocus from '../../../hooks/useAutoFocus';
 import FormLabel from '../../@common/FormLabel';
 import Input from '../../@common/Input';
 import ErrorSpan from '../../@common/ErrorSpan';
 import { ONLY_NUMBER_REGEXP } from '../../../utils/regexp';
+import CreditCardContext from '../../../contexts/InputValueContext';
 
 export interface CardNumberObj {
   first: string;
@@ -19,8 +19,9 @@ export interface CardNumberObj {
 interface Props {}
 
 export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
+  console.log('>>> CardNumber 시작');
   // cardInput 상태 (외부)
-  const [cardInput, setCardInput] = useContext(InputValuesContext);
+  const [creditCardInfo, setCreditCardInfo] = useContext(CreditCardContext);
 
   // cardError 상태 (내부)
   const [cardError, setCardError] = useState({
@@ -40,18 +41,19 @@ export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
   });
 
   const onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    const inputValue = event.currentTarget.value as string;
-    const order = event.currentTarget.dataset['order'] as keyof CardNumberObj;
-    const inputIndex = event.currentTarget.dataset['index'];
-    if (!order) return;
+    const enteredNumber = event.currentTarget.value as string;
+    const inputIndex = Number(event.currentTarget.dataset['index']);
+
+    // type guard
+    if (!inputIndex) return;
 
     // 숫자가 아니면 입력받지 않는다.
-    if (!ONLY_NUMBER_REGEXP.test(inputValue)) return;
+    if (!ONLY_NUMBER_REGEXP.test(enteredNumber)) return;
 
     try {
       // validation1. 4글자인지 확인하기
       // FIXME blur 되었을 때 (border처리 및 메세지 출력 및 focus 유지)
-      if (inputValue.length !== 4) {
+      if (enteredNumber.length !== 4) {
         throw new Error(`4글자를 입력해 주세요`);
       }
 
@@ -68,11 +70,12 @@ export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
         });
       }
     } finally {
-      if (!setCardInput) return;
-      setCardInput((prev) => ({
-        ...prev,
-        cardNumbers: { ...prev.cardNumbers, [order]: inputValue },
-      }));
+      if (!setCreditCardInfo) return;
+
+      const newValue = [...creditCardInfo.cardNumber];
+      newValue[inputIndex] = enteredNumber;
+
+      setCreditCardInfo('cardNumber', newValue);
     }
     nextInputFocus(Number(inputIndex));
   };
@@ -84,7 +87,7 @@ export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
         <Input
           data-order="first"
           data-index="0"
-          value={cardInput.cardNumbers['first']}
+          value={creditCardInfo.cardNumber[0]}
           onChange={onChange}
           maxLength={4}
           customInputStyle={CardNumberInput}
@@ -95,7 +98,7 @@ export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
         <Input
           data-order="second"
           data-index="1"
-          value={cardInput.cardNumbers['second']}
+          value={creditCardInfo.cardNumber[1]}
           onChange={onChange}
           maxLength={4}
           customInputStyle={CardNumberInput}
@@ -107,7 +110,7 @@ export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
         <Input
           data-order="third"
           data-index="2"
-          value={cardInput.cardNumbers['third']}
+          value={creditCardInfo.cardNumber[2]}
           onChange={onChange}
           maxLength={4}
           customInputStyle={CardNumberInput}
@@ -121,7 +124,7 @@ export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
         <Input
           data-order="fourth"
           data-index="3"
-          value={cardInput.cardNumbers['fourth']}
+          value={creditCardInfo.cardNumber[3]}
           onChange={onChange}
           maxLength={4}
           customInputStyle={CardNumberInput}

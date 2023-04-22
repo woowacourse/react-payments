@@ -12,13 +12,13 @@ function CardList() {
   const cardLists = useMemo(() => {
     return cardList.length ? (
       cardList.map((card) => {
-        const { cardNumbers, ownerName, expireDate } = card;
+        const { cardNumber, ownerName, expirationDate } = card;
         return (
           <Card
-            key={cardNumbers + expireDate}
-            cardNumber={cardNumbers}
+            key={cardNumber.join('') + expirationDate.join('')}
+            cardNumber={cardNumber.join(' ')}
             ownerName={ownerName}
-            expireDate={expireDate}
+            expirationDate={expirationDate.join(' / ')}
           />
         );
       })

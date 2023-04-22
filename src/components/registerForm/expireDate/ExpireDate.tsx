@@ -1,33 +1,33 @@
 import React, { useState, useContext } from 'react';
 
 import styled, { css } from 'styled-components';
-
-import { InputValuesContext } from '../../../contexts/InputValueContext';
 import { MMYY_REGEXP, ONLY_NUMBER_REGEXP } from '../../../utils/regexp';
 import FormLabel from '../../@common/FormLabel';
 import Input from '../../@common/Input';
 import ErrorSpan from '../../@common/ErrorSpan';
+import CreditCardContext from '../../../contexts/InputValueContext';
 
 function ExpireDate() {
-  const [cardInput, setCardInput] = useContext(InputValuesContext);
+  console.log('>>> ExpireDate 시작');
+  const [creditCardInfo, setCreditCardInfo] = useContext(CreditCardContext);
 
   const [expireError, setExpireError] = useState(false);
 
   const expireDateChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    const value = event.currentTarget.value as string;
+    const enteredValue = event.currentTarget.value as string;
     const [curMM, _, curYY] = new Date().toLocaleDateString('en-US').split('/');
-    const [MM, YY] = value.split('/');
-    const date = value.replace('/', '');
+    const [MM, YY] = enteredValue.split('/');
+    const date = enteredValue.replace('/', '');
 
     if (!ONLY_NUMBER_REGEXP.test(date)) return;
-    if (!setCardInput) return;
+    if (!setCreditCardInfo) return;
 
-    const dateValitation =
-      value.length > 0 &&
+    const isDateValid =
+      enteredValue.length > 0 &&
       (!MMYY_REGEXP.test(date) || curYY.slice(2) > YY || (curYY.slice(2) === YY && curMM > MM));
 
     try {
-      if (dateValitation) {
+      if (isDateValid) {
         throw new Error();
       }
 
@@ -35,13 +35,15 @@ function ExpireDate() {
     } catch {
       setExpireError(true);
     } finally {
-      if (dateValitation && value.length === 5) {
-        setCardInput((prev) => ({ ...prev, expireDate: '' }));
+      if (isDateValid && enteredValue.length === 5) {
+        // FIXME: 버그 있을 예정
+        setCreditCardInfo('expirationDate', enteredValue.split(' / '));
         return;
       }
-      const expire = date.match(/.{1,2}/g) ?? [];
+      // FIXME:
+      const expiration = date.match(/.{1,2}/g) ?? [];
 
-      setCardInput((prev) => ({ ...prev, expireDate: expire.join('/') }));
+      setCreditCardInfo('expirationDate', expiration);
     }
   };
 
@@ -49,7 +51,7 @@ function ExpireDate() {
     <ExpireDateContainer>
       <FormLabel>{'만료일'}</FormLabel>
       <Input
-        value={cardInput.expireDate}
+        value={creditCardInfo.expirationDate.join(' / ')}
         onChange={expireDateChange}
         maxLength={5}
         customInputStyle={ExpireDateInput}

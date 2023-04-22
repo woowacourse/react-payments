@@ -1,7 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react';
 
 import styled from 'styled-components';
-import { InputValuesContext } from '../../../contexts/InputValueContext';
 
 import { useNavigate } from 'react-router-dom';
 import useCardList from '../../../hooks/useCardList';
@@ -10,25 +9,24 @@ import ExpireDate from '../expireDate/ExpireDate';
 import OwnerNameInput from '../ownerNameInput/OwnerName';
 import SecurityCode from '../securityCode/SecurityCode';
 import CardPassword from '../cardPassword/CardPassword';
-
-const objectValueToString = (obj: { [key: string]: string }) => {
-  return Object.values(obj).reduce((acc, cur) => acc + cur, '');
-};
+import CreditCardContext from '../../../contexts/InputValueContext';
 
 function CardRegisterForm() {
+  console.log('>>> CardRegister 시작');
   const navigation = useNavigate();
-  const [cardInput] = useContext(InputValuesContext);
+  const creditCardInfo = useContext(CreditCardContext)[0];
+
   const [nextShow, setNextShow] = useState(false);
   const { saveCard } = useCardList({ key: 'card-list' });
 
   useEffect(() => {
-    const { cardNumbers, expireDate, securityCode, password, ownerName } = cardInput;
+    const { cardNumber, expirationDate, securityCode, password, ownerName } = creditCardInfo;
     try {
       const exceptOwnerName =
-        objectValueToString(cardNumbers).length !== 16 ||
-        expireDate.length !== 5 ||
+        cardNumber.join('').length !== 16 ||
+        expirationDate.join('').length !== 4 ||
         securityCode.length !== 3 ||
-        objectValueToString(password).length !== 2;
+        password.join('').length !== 2;
 
       if ((ownerName.length > 0 && ownerName.length < 3) || exceptOwnerName) {
         throw new Error();
@@ -37,11 +35,11 @@ function CardRegisterForm() {
     } catch {
       setNextShow(false);
     }
-  }, [cardInput]);
+  }, [creditCardInfo]);
 
   const cardInputSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
-    saveCard(cardInput);
+    saveCard(creditCardInfo);
     navigation('/card-list');
   };
 

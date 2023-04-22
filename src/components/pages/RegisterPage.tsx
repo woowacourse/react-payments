@@ -6,40 +6,36 @@ import CreditCardInfo from '../../@types/creditCardInfo';
 
 function RegisterPage() {
   const [creditCardEntered, setCreditCardEntered] = useState<CreditCardInfo>({
-    cardNumber: '',
+    cardNumber: ['', '', '', ''],
     expirationDate: ['', ''],
     ownerName: '',
     securityCode: '',
-    password: '',
+    password: ['', ''],
     bank: '현대카드',
   });
 
-  const refineCardNumber = (cardNumber: string) => {
-    return [...cardNumber].reduce((acc, cur, idx) => {
-      let toAdd = cur;
+  console.log('>>> creditCardEntered:', creditCardEntered);
 
-      if (idx > 8) {
-        toAdd = '•';
-      }
+  const { cardNumber, expirationDate, ownerName } = creditCardEntered;
 
-      if (idx !== 0 && idx % 4 === 0) {
-        return acc + ' ' + toAdd;
-      } else {
-        return acc + toAdd;
-      }
-    }, '');
-  };
-
-  const refineExpirationDate = (expirationDate: [string, string]) => {
-    return expirationDate.join(' / ');
+  const setCreditCard = <T extends keyof CreditCardInfo>(
+    target: T,
+    newValue: CreditCardInfo[T]
+  ) => {
+    //! 실행X
+    console.log('>>> :setCreditCard');
+    setCreditCardEntered((prev) => ({
+      ...prev,
+      [target]: newValue,
+    }));
   };
 
   return (
-    <CreditCardContext.Provider value={[creditCardEntered, setCreditCardEntered]}>
+    <CreditCardContext.Provider value={[creditCardEntered, setCreditCard]}>
       <Card
-        cardNumber={refineCardNumber(creditCardEntered.cardNumber)}
-        expireDate={refineExpirationDate(creditCardEntered.expirationDate)}
-        ownerName={creditCardEntered.ownerName}
+        cardNumber={cardNumber.join(' ')}
+        expirationDate={expirationDate.join(' / ')}
+        ownerName={ownerName}
       />
       <CardRegisterForm />
     </CreditCardContext.Provider>

@@ -1,15 +1,18 @@
-import React, { createContext } from 'react';
+import { createContext } from 'react';
 import CreditCardInfo from '../@types/creditCardInfo';
 
 const CreditCardContext = createContext<
-  [CreditCardInfo, React.Dispatch<React.SetStateAction<CreditCardInfo>> | null]
+  [
+    CreditCardInfo,
+    (<T extends keyof CreditCardInfo>(target: T, newValue: CreditCardInfo[T]) => void) | null
+  ]
 >([
   {
-    cardNumber: '',
+    cardNumber: ['', '', '', ''],
     expirationDate: ['', ''],
     ownerName: '',
     securityCode: '',
-    password: '',
+    password: ['', ''],
     bank: '현대카드',
   },
   null,

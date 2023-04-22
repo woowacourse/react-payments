@@ -1,42 +1,38 @@
-import React, { useState, useContext, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 
 import styled, { css } from 'styled-components';
-import { InputValuesContext } from '../../../contexts/InputValueContext';
+
 import useAutoFocus from '../../../hooks/useAutoFocus';
 import { ONLY_NUMBER_REGEXP } from '../../../utils/regexp';
 import FormLabel from '../../@common/FormLabel';
 import Input from '../../@common/Input';
 import ErrorSpan from '../../@common/ErrorSpan';
-
-interface CardPasswordObj {
-  first: string;
-  second: string;
-}
+import CreditCardContext from '../../../contexts/InputValueContext';
 
 function CardPassword() {
-  const [cardInput, setCardInput] = useContext(InputValuesContext);
-
+  console.log('>>> CardPassword 시작');
   const [passwordError, setPasswordError] = useState(false);
+  const [creditCardInfo, setCreditCardInfo] = useContext(CreditCardContext);
 
   const firstInputRef = useRef<HTMLInputElement>(null);
   const secondInputRef = useRef<HTMLInputElement>(null);
 
+  // type guard
   const nextInputFocus = useAutoFocus({
     refs: [firstInputRef, secondInputRef],
     maxLength: 1,
   });
 
   const passwordChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    const value = event.currentTarget.value as string;
-    const name = event.currentTarget.dataset['order'] as keyof CardPasswordObj;
-    const idx = event.currentTarget.dataset['idx'] as string;
+    const enteredValue = event.currentTarget.value as string;
+    const inputIndex = Number(event.currentTarget.dataset['idx']);
 
     // 숫자 외 입력 방지
-    if (!ONLY_NUMBER_REGEXP.test(value)) return;
+    if (!ONLY_NUMBER_REGEXP.test(enteredValue)) return;
 
     try {
       // 1. 길이 불통과 -> 에러
-      if (value.length !== 1) {
+      if (enteredValue.length !== 1) {
         throw new Error();
       }
 
@@ -46,18 +42,16 @@ function CardPassword() {
       // 3. 다시 에러 설정
       setPasswordError(true);
     } finally {
-      if (!setCardInput) return;
-      setCardInput((prev) => ({
-        ...prev,
-        password: {
-          ...prev.password,
-          [name]: value,
-        },
-      }));
-    }
+      if (!setCreditCardInfo) return;
 
-    // focus 조정
-    nextInputFocus(Number(idx));
+      const newValue = creditCardInfo.password;
+      newValue[inputIndex] = enteredValue;
+
+      // setCreditCardInfo('password', newValue);
+
+      // focus 조정
+      // nextInputFocus(Number(inputIndex));
+    }
   };
 
   return (
@@ -67,7 +61,7 @@ function CardPassword() {
         <Input
           data-order="first"
           data-idx="0"
-          value={cardInput.password['first']}
+          value={creditCardInfo.password[0]}
           onChange={passwordChange}
           maxLength={1}
           inputmode="numeric"
@@ -78,7 +72,7 @@ function CardPassword() {
         <Input
           data-order="second"
           data-idx="1"
-          value={cardInput.password['second']}
+          value={creditCardInfo.password[1]}
           onChange={passwordChange}
           maxLength={1}
           inputmode="numeric"

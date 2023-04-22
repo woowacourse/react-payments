@@ -1,9 +1,9 @@
 interface CreditCardInfo {
-  cardNumber: string;
-  expirationDate: [string, string];
+  cardNumber: string[];
+  expirationDate: string[];
   ownerName: string;
   securityCode: string;
-  password: string;
+  password: string[];
   bank: string;
 }
 

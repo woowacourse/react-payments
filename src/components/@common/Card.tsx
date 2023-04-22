@@ -2,17 +2,18 @@ import styled from 'styled-components';
 interface Props {
   cardNumber: string;
   ownerName: string;
-  expireDate: string;
+  expirationDate: string;
 }
 
-function Card({ cardNumber, ownerName, expireDate }: Props) {
+function Card({ cardNumber, ownerName, expirationDate }: Props) {
+  console.log('>>> Card 시작');
   return (
     <CardContainer>
       <CardChip></CardChip>
       <CardNumberContainer>{cardNumber}</CardNumberContainer>
       <CardNameContainer>
         <span>{ownerName}</span>
-        <span>{expireDate}</span>
+        <span>{expirationDate}</span>
       </CardNameContainer>
     </CardContainer>
   );

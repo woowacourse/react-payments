@@ -1,14 +1,15 @@
 import React, { useState, useContext } from 'react';
 
 import styled, { css } from 'styled-components';
-import { InputValuesContext } from '../../../contexts/InputValueContext';
+import CreditCardContext from '../../../contexts/InputValueContext';
 import { CONTINUOUS_EMPTY_REGEXP, ONLY_ENG_AND_EMPTY_REGEXP } from '../../../utils/regexp';
 import FormLabel from '../../@common/FormLabel';
 import Input from '../../@common/Input';
 import ErrorSpan from '../../@common/ErrorSpan';
 
 function OwnerNameInput() {
-  const [cardInput, setCardInput] = useContext(InputValuesContext);
+  console.log('>>> OwnerName 시작');
+  const [creditCardInfo, setCreditCardInfo] = useContext(CreditCardContext);
 
   const [error, setError] = useState({
     isError: false,
@@ -43,11 +44,8 @@ function OwnerNameInput() {
       });
     } finally {
       if (value.length <= 30) {
-        if (!setCardInput) return;
-        setCardInput((prev) => ({
-          ...prev,
-          ownerName: value.toUpperCase(),
-        }));
+        if (!setCreditCardInfo) return;
+        setCreditCardInfo('ownerName', value.toUpperCase());
       }
     }
   };
@@ -56,10 +54,10 @@ function OwnerNameInput() {
     <OwnerNameInputContainer>
       <LabelContainer>
         <FormLabel>카드 소유자 이름(선택)</FormLabel>
-        <span>{`${cardInput.ownerName.length} / 30`}</span>
+        <span>{`${creditCardInfo.ownerName.length} / 30`}</span>
       </LabelContainer>
       <Input
-        value={cardInput.ownerName}
+        value={creditCardInfo.ownerName}
         onChange={ownerNameChange}
         customInputStyle={OwnerNameStyle}
       />
