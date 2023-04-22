@@ -1,11 +1,12 @@
 import { BsQuestionCircle } from 'react-icons/bs';
 import styles from './HelpButton.module.css';
+import React from 'react';
 
 type HelpButtonProps = {
   message: string;
 };
 
-const HelpButton = ({ message }: HelpButtonProps) => {
+const HelpButton = React.memo(({ message }: HelpButtonProps) => {
   const showMessage = () => {
     alert(message);
   };
@@ -15,6 +16,6 @@ const HelpButton = ({ message }: HelpButtonProps) => {
       <BsQuestionCircle className={styles.button} onClick={showMessage} />
     </div>
   );
-};
+});
 
 export default HelpButton;
