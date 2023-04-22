@@ -2,21 +2,20 @@ import React from 'react';
 import styled from 'styled-components';
 
 interface Props {
-  label: string;
-  isCountLength?: boolean;
   children: React.ReactNode;
-  inputValues?: string;
+  label: string;
+  countLength?: number;
   maxLength?: number;
 }
 
-const InputSectionTemplate = ({ label, isCountLength, children, maxLength, inputValues }: Props) => {
+const InputSectionTemplate = ({ children, label, countLength, maxLength }: Props) => {
   return (
     <InputSectionTemplateWrapper>
       <InputLabelWrapper>
         <p>{label}</p>
-        {isCountLength && maxLength && (
+        {countLength && maxLength && (
           <p>
-            {inputValues?.length} / {maxLength}
+            {countLength} / {maxLength}
           </p>
         )}
       </InputLabelWrapper>
