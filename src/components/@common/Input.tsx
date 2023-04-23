@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 import styled, { CSSProp } from "styled-components";
 
 interface Props extends StyleInputProps {
-  value?: string;
+  value: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   maxLength?: number;
   placeholder?: string;

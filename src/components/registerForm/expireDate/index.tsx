@@ -1,10 +1,10 @@
 import React, { useState, useContext } from "react";
 import Input from "src/components/@common/Input";
-import styled, { css } from "styled-components";
 import ErrorSpan from "src/components/@common/ErrorSpan";
 import FormLabel from "src/components/@common/FormLabel";
 import { MMYY_REGEXP, ONLY_NUMBER_REGEXP } from "src/utils/regexp";
 import { inputValuesContext } from "src/InputValueContext";
+import { Styled } from "./ExpireDate.styles";
 
 function ExpireDate() {
   const [cardInput, setCardInput] = useContext(inputValuesContext);
@@ -14,7 +14,7 @@ function ExpireDate() {
   const expireDateChange: React.ChangeEventHandler<HTMLInputElement> = (
     event,
   ) => {
-    const value = event.currentTarget.value as string;
+    const value = event.currentTarget.value;
     const [curMM, _, curYY] = new Date().toLocaleDateString("en-US").split("/");
     const [MM, YY] = value.split("/");
     const date = value.replace("/", "");
@@ -48,32 +48,17 @@ function ExpireDate() {
   };
 
   return (
-    <ExpireDateContainer>
+    <Styled.ExpireDateContainer>
       <FormLabel>{"만료일"}</FormLabel>
       <Input
         value={cardInput.expireDate}
         onChange={expireDateChange}
         maxLength={5}
-        customInputStyle={ExpireDateInput}
+        customInputStyle={Styled.ExpireDateInput}
         placeholder="MM / YY"
       />
       {expireError && <ErrorSpan>{"유효한 만료일이 아닙니다."}</ErrorSpan>}
-    </ExpireDateContainer>
+    </Styled.ExpireDateContainer>
   );
 }
 export default ExpireDate;
-
-const ExpireDateContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  row-gap: 5px;
-`;
-
-const ExpireDateInput = css`
-  width: 137px;
-  letter-spacing: 3px;
-  text-align: center;
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 21px;
-`;

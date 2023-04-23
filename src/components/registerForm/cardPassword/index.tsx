@@ -2,10 +2,10 @@ import React, { useState, useContext, useRef } from "react";
 import Input from "src/components/@common/Input";
 import FormLabel from "src/components/@common/FormLabel";
 import { ONLY_NUMBER_REGEXP } from "src/utils/regexp";
-import styled, { css } from "styled-components";
 import { inputValuesContext } from "src/InputValueContext";
 import ErrorSpan from "src/components/@common/ErrorSpan";
 import useAutoFocus from "src/hooks/useAutoFocus";
+import { Styled } from "./CardPassword.styles";
 
 interface CardPasswordObj {
   first: string;
@@ -56,9 +56,9 @@ function CardPassword() {
   };
 
   return (
-    <CardPasswordContainer>
+    <Styled.CardPasswordContainer>
       <FormLabel>{"카드 비밀번호"}</FormLabel>
-      <PasswordInputContainer>
+      <Styled.PasswordInputContainer>
         <Input
           data-order="first"
           data-idx="0"
@@ -67,7 +67,7 @@ function CardPassword() {
           maxLength={1}
           inputmode="numeric"
           type="password"
-          customInputStyle={PasswordInput}
+          customInputStyle={Styled.PasswordInput}
           ref={firstInputRef}
         />
         <Input
@@ -78,46 +78,17 @@ function CardPassword() {
           maxLength={1}
           inputmode="numeric"
           type="password"
-          customInputStyle={PasswordInput}
+          customInputStyle={Styled.PasswordInput}
           ref={secondInputRef}
         />
-        <DotParagraph>•</DotParagraph>
-        <DotParagraph>•</DotParagraph>
-      </PasswordInputContainer>
+        <Styled.DotParagraph>•</Styled.DotParagraph>
+        <Styled.DotParagraph>•</Styled.DotParagraph>
+      </Styled.PasswordInputContainer>
       {passwordError && (
         <ErrorSpan>비밀번호 앞 2자리를 입력해주세요.</ErrorSpan>
       )}
-    </CardPasswordContainer>
+    </Styled.CardPasswordContainer>
   );
 }
 
 export default CardPassword;
-
-const CardPasswordContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  row-gap: 5px;
-`;
-
-const PasswordInputContainer = styled.div`
-  display: flex;
-  align-items: center;
-  column-gap: 7px;
-`;
-
-const PasswordInput = css`
-  width: 43px;
-
-  text-align: center;
-  font-size: 28px;
-`;
-
-const DotParagraph = styled.p`
-  width: 43px;
-  height: 45px;
-
-  margin: 0;
-
-  font-size: 28px;
-  text-align: center;
-`;

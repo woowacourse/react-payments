@@ -3,8 +3,8 @@ import ErrorSpan from "src/components/@common/ErrorSpan";
 import FormLabel from "src/components/@common/FormLabel";
 import Input from "src/components/@common/Input";
 import { ONLY_NUMBER_REGEXP } from "src/utils/regexp";
-import styled, { css } from "styled-components";
 import { inputValuesContext } from "src/InputValueContext";
+import { Styled } from "./SecurityCode.styles";
 
 function SecurityCode() {
   const [cardInput, setCardInput] = useContext(inputValuesContext);
@@ -26,31 +26,18 @@ function SecurityCode() {
   };
 
   return (
-    <SecurityCodeContainer>
+    <Styled.SecurityCodeContainer>
       <FormLabel>{"보안 코드(CVC/CVV)"}</FormLabel>
       <Input
         value={cardInput.securityCode}
         onChange={codeChange}
         maxLength={3}
         type="password"
-        customInputStyle={SecurityInput}
+        customInputStyle={Styled.SecurityInput}
       />
       {error && <ErrorSpan>보안 코드는 3자리 입니다.</ErrorSpan>}
-    </SecurityCodeContainer>
+    </Styled.SecurityCodeContainer>
   );
 }
 
 export default SecurityCode;
-
-const SecurityCodeContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  row-gap: 5px;
-`;
-
-const SecurityInput = css`
-  width: 84px;
-  letter-spacing: 7px;
-  text-align: center;
-  font-size: 28px;
-`;

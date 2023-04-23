@@ -1,12 +1,12 @@
 import React, { useState, useContext, useRef } from "react";
 import Input from "src/components/@common/Input";
-import styled, { css } from "styled-components";
 import FormLabel from "src/components/@common/FormLabel";
 import ErrorSpan from "src/components/@common/ErrorSpan";
 import { ONLY_NUMBER_REGEXP } from "src/utils/regexp";
 import { inputValuesContext } from "src/InputValueContext";
 import { CardNumberObj } from "src/interfaces";
 import useAutoFocus from "src/hooks/useAutoFocus";
+import { Styled } from "./CardNumber.styles";
 
 function CardNumber() {
   const [cardInput, setCardInput] = useContext(inputValuesContext);
@@ -63,14 +63,14 @@ function CardNumber() {
   return (
     <div>
       <FormLabel>카드 번호</FormLabel>
-      <CardNumberInputContainer>
+      <Styled.CardNumberInputContainer>
         <Input
           data-order="first"
           data-index="0"
           value={cardInput.cardNumbers["first"]}
           onChange={cardChange}
           maxLength={4}
-          customInputStyle={CardNumberInput}
+          customInputStyle={Styled.CardNumberInput}
           inputmode="numeric"
           ref={firstInputRef}
         />
@@ -81,7 +81,7 @@ function CardNumber() {
           value={cardInput.cardNumbers["second"]}
           onChange={cardChange}
           maxLength={4}
-          customInputStyle={CardNumberInput}
+          customInputStyle={Styled.CardNumberInput}
           inputmode="numeric"
           ref={secondInputRef}
         />
@@ -93,7 +93,7 @@ function CardNumber() {
           value={cardInput.cardNumbers["third"]}
           onChange={cardChange}
           maxLength={4}
-          customInputStyle={CardNumberInput}
+          customInputStyle={Styled.CardNumberInput}
           inputmode="numeric"
           type={"password"}
           placeholder="●●●●"
@@ -107,38 +107,16 @@ function CardNumber() {
           value={cardInput.cardNumbers["fourth"]}
           onChange={cardChange}
           maxLength={4}
-          customInputStyle={CardNumberInput}
+          customInputStyle={Styled.CardNumberInput}
           inputmode="numeric"
           type={"password"}
           placeholder="●●●●"
           ref={fourthInputRef}
         />
-      </CardNumberInputContainer>
+      </Styled.CardNumberInputContainer>
       {cardError?.isError && <ErrorSpan>{cardError?.message}</ErrorSpan>}
     </div>
   );
 }
 
 export default CardNumber;
-
-const CardNumberInputContainer = styled.div`
-  display: flex;
-  -webkit-box-align: center;
-  align-items: center;
-  -webkit-box-pack: justify;
-  justify-content: space-between;
-
-  width: 100%;
-  height: 45px;
-
-  border-radius: 7px;
-  background-color: #ecebf1;
-  padding: 0 10px;
-`;
-
-const CardNumberInput = css`
-  width: 60px;
-  letter-spacing: 3px;
-  text-align: center;
-  font-size: 18px;
-`;

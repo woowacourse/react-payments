@@ -6,8 +6,8 @@ import {
   CONTINUOUS_EMPTY_REGEXP,
   ONLY_ENG_AND_EMPTY_REGEXP,
 } from "src/utils/regexp";
-import styled, { css } from "styled-components";
 import { inputValuesContext } from "src/InputValueContext";
+import { Styled } from "./OwnerNameInput.styles";
 
 function OwnerNameInput() {
   const [cardInput, setCardInput] = useContext(inputValuesContext);
@@ -59,41 +59,19 @@ function OwnerNameInput() {
   };
 
   return (
-    <OwnerNameInputContainer>
-      <LabelContainer>
+    <Styled.OwnerNameInputContainer>
+      <Styled.LabelContainer>
         <FormLabel>카드 소유자 이름(선택)</FormLabel>
         <span>{`${cardInput.ownerName.length} / 30`}</span>
-      </LabelContainer>
+      </Styled.LabelContainer>
       <Input
         value={cardInput.ownerName}
         onChange={ownerNameChange}
-        customInputStyle={OwnerNameStyle}
+        customInputStyle={Styled.OwnerNameStyle}
       />
       {error.isError && <ErrorSpan>{error.message}</ErrorSpan>}
-    </OwnerNameInputContainer>
+    </Styled.OwnerNameInputContainer>
   );
 }
 
 export default OwnerNameInput;
-
-const OwnerNameInputContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  row-gap: 5px;
-`;
-
-const LabelContainer = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const OwnerNameStyle = css`
-  width: 100%;
-
-  font-size: 18px;
-  font-weight: 500;
-
-  letter-spacing: 1px;
-`;

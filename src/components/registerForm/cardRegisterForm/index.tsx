@@ -4,10 +4,10 @@ import ExpireDate from "src/components/registerForm/expireDate";
 import OwnerNameInput from "src/components/registerForm/ownerNameInput";
 import SecurityCode from "src/components/registerForm/securityCode";
 import CardPassword from "src/components/registerForm/cardPassword";
-import styled from "styled-components";
 import { inputValuesContext } from "src/InputValueContext";
 import useCardList from "src/hooks/useCardList";
 import { useNavigate } from "react-router-dom";
+import { Styled } from "./CardRegisterForm.styles";
 
 const objectValueToString = (obj: { [key: string]: string }) => {
   return Object.values(obj).reduce((acc, cur) => acc + cur, "");
@@ -45,41 +45,19 @@ function CardRegisterForm() {
   };
 
   return (
-    <Form onSubmit={cardInputSubmit}>
+    <Styled.Form onSubmit={cardInputSubmit}>
       <CardNumber />
       <ExpireDate />
       <OwnerNameInput />
       <SecurityCode />
       <CardPassword />
       {nextShow && (
-        <div style={{ display: "flex", justifyContent: "end" }}>
-          <NextButton>다음</NextButton>
-        </div>
+        <Styled.ButtonContainer>
+          <Styled.NextButton>다음</Styled.NextButton>
+        </Styled.ButtonContainer>
       )}
-    </Form>
+    </Styled.Form>
   );
 }
 
 export default CardRegisterForm;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  row-gap: 19px;
-`;
-
-const NextButton = styled.button`
-  width: 51px;
-
-  background: none;
-  border: none;
-
-  font-style: normal;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 16px;
-
-  &:hover {
-    cursor: pointer;
-  }
-`;
