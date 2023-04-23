@@ -42,6 +42,7 @@ function CardSecurityCode({ changeInputValidation, onInputChange, value }: CardS
         minLength={SECURITY_CODE_MIN_LENGTH}
         maxLength={SECURITY_CODE_MAX_LENGTH}
         autoComplete="cc-csc"
+        inputMode="numeric"
         isError={isError}
         onChange={onInputChange}
         onBlur={onBlur}

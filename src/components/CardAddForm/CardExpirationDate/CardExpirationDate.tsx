@@ -47,6 +47,7 @@ function CardExpirationDate({
         placeholder="월/년도(MM/YY) 순서로 4자리 숫자를 입력해주세요"
         maxLength={EXPIRATION_DATE_INPUT_MAX_LENGTH}
         autoComplete="cc-exp"
+        inputMode="numeric"
         isError={isError}
         onChange={onInputChange}
         onBlur={onBlur}

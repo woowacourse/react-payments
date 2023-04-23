@@ -59,6 +59,7 @@ function CardPassword({ changeInputValidation, onInputChange, values }: CardPass
             data-index={index}
             maxLength={PASSWORD_UNIT_MAX_LENGTH}
             autoComplete="off"
+            inputMode="numeric"
             isError={isError}
             onChange={index === 0 ? onFirstInputChange : onInputChange}
           />

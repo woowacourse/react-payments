@@ -91,6 +91,7 @@ function CardNumber({ changeInputValidation, onInputChange, value }: CardNumberP
         data-value={cardNumber}
         maxLength={CARD_NUMBER_INPUT_MAX_LENGTH}
         autoComplete="cc-number"
+        inputMode="numeric"
         isError={isError}
         onChange={onChange}
         onBlur={onBlur}
