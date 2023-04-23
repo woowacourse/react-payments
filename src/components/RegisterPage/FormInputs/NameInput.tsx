@@ -1,10 +1,10 @@
 import { LENGTH, REGEX } from 'constants/constants';
 import { useInputHandler } from 'hooks/useInputHandler';
-import { ChangeEvent, Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
-import { changeToValidValue } from 'utils/inputValidator';
+import { Card } from 'types/Card';
 
-type Name = string;
+type Name = Pick<Card, 'name'>;
 
 interface Props {
   name: Name;
@@ -32,7 +32,7 @@ const NameInput = (props: Props) => {
           카드 소유자 이름&#40;선택&#41;
         </label>
         <p>
-          {name.length}/{LENGTH.NAME}
+          {name.name.length}/{LENGTH.NAME}
         </p>
       </S.Wrapper>
       <S.Input
@@ -40,7 +40,7 @@ const NameInput = (props: Props) => {
         name="name"
         id="name"
         maxLength={LENGTH.NAME}
-        value={name}
+        value={name.name}
         onChange={handleName}
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
       />

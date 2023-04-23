@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FormEvent, useState } from 'react';
+import { useState } from 'react';
 import CardNumberInput from './FormInputs/CardNumberInput';
 import ExpirationDateInput from './FormInputs/ExpirationDateInput';
 import NameInput from './FormInputs/NameInput';
@@ -23,9 +23,11 @@ const CardRegisterForm = () => {
     year: '',
   });
 
-  const [name, setName] = useState('');
+  const [name, setName] = useState({
+    name: '',
+  });
 
-  const cardInfo: Card = { ...cardNumber, ...date, name };
+  const cardInfo: Card = { ...cardNumber, ...date, ...name };
 
   const { handleForm } = useFormHandler();
 
