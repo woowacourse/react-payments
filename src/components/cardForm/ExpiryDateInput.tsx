@@ -19,19 +19,25 @@ const ExpiryDateInfo = {
 };
 
 export const ExpiryDateInput = ({ isValid, setExpiryDate, setIsCompleted, setIsValid }: ExpiryDateInputProps) => {
+  const paddingSingleDigitMonth = (expriyDate: string) => {
+    if (expriyDate.length === 2 && !/[^2-9]/g.test(expriyDate[0])) {
+      return `${"0"}${expriyDate}`;
+    }
+
+    return expriyDate;
+  };
+
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let value = e.target.value.replaceAll(" / ", "");
+    const value = e.target.value.replaceAll(" / ", "");
 
     if (value.length > 4) {
       e.target.value = e.target.value.slice(0, -1);
       return;
     }
 
-    if (e.target.value.length === 2 && !/[^2-9]/g.test(e.target.value[0])) {
-      value = "0" + value;
-    }
+    const expriyDate = paddingSingleDigitMonth(value);
 
-    e.target.value = (value.match(/\d{1,2}/g) ?? []).join(" / ");
+    e.target.value = (expriyDate.match(/\d{1,2}/g) ?? []).join(" / ");
     setExpiryDate(e.target.value);
 
     setIsCompleted(false);
