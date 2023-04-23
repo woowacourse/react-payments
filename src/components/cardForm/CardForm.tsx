@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 interface CardFormProps {
   cardInfo: CardType;
   setCardInfo: (value: any) => void;
-  addNewCards: React.Dispatch<React.SetStateAction<CardType[]>>;
+  addNewCard: (newCard: CardType) => void;
 }
 
 const validateExpiryDate = (expiryDate: string): boolean => {
@@ -29,13 +29,8 @@ const validateExpiryDate = (expiryDate: string): boolean => {
   return true;
 };
 
-export const CardForm = ({ cardInfo, setCardInfo, addNewCards }: CardFormProps) => {
+export const CardForm = ({ cardInfo, setCardInfo, addNewCard }: CardFormProps) => {
   const history = useNavigate();
-  const expiryDateInputRef = useRef("AA");
-  const nameInputRef = useRef();
-  const CVCInputRef = useRef();
-  const PasswordRef = useRef();
-
   const [isInputCompleted, setIsInputCompleted] = useState({
     isCardNumberCompleted: false,
     isExpiryDateCompleted: false,
@@ -59,6 +54,7 @@ export const CardForm = ({ cardInfo, setCardInfo, addNewCards }: CardFormProps) 
     e.preventDefault();
 
     if (!isAllCompleted()) return;
+
     if (!validateExpiryDate(cardInfo.expiryDate)) {
       setIsInputValid({ ...isInputValid, isExpiryDateValid: false });
       return;
@@ -76,11 +72,7 @@ export const CardForm = ({ cardInfo, setCardInfo, addNewCards }: CardFormProps) 
       password: [Number(data.password1), Number(data.password2)],
     } as CardType;
 
-    addNewCards((prev: CardType[]) => {
-      const newData = [...prev, newCard];
-      localStorage.setItem("cards", JSON.stringify(newData));
-      return newData;
-    });
+    addNewCard(newCard);
 
     moveToHome();
   };

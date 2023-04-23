@@ -38,12 +38,13 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 183px;
-  height: 99px;
+  height: 100px;
   color: white;
 
   font-size: 10px;
   font-weight: 500;
 
+  gap: 4px;
   white-space: pre;
 `;
 
@@ -81,7 +82,7 @@ const HiddenNumbers = styled.div`
   font-size: 10px;
   letter-spacing: 3.5px;
 
-  margin-left: 7px;
+  margin-left: 11px;
   zoom: 0.8;
 `;
 
@@ -95,11 +96,14 @@ const Name = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   width: 110px;
-  height: 10px;
+  height: 11px;
 
-  margin-left: 3px;
+  margin-left: 2px;
+
+  font-size: 11px;
 `;
 
 const ExpiryDate = styled.div`
-  margin-right: 3px;
+  margin-right: 2px;
+  font-size: 11px;
 `;
