@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useContext } from 'react';
 
 import styled from 'styled-components';
 
@@ -15,26 +15,15 @@ function CardRegisterForm() {
   const navigation = useNavigate();
   const creditCardInfo = useContext(CreditCardContext)[0];
 
-  const [nextShow, setNextShow] = useState(false);
   const { saveCard } = useCardList({ key: 'card-list' });
+  const { cardNumber, expirationDate, securityCode, password } = creditCardInfo;
 
-  useEffect(() => {
-    const { cardNumber, expirationDate, securityCode, password, ownerName } = creditCardInfo;
-    try {
-      const exceptOwnerName =
-        cardNumber.join('').length !== 16 ||
-        expirationDate.join('').length !== 4 ||
-        securityCode.length !== 3 ||
-        password.join('').length !== 2;
-
-      if ((ownerName.length > 0 && ownerName.length < 3) || exceptOwnerName) {
-        throw new Error();
-      }
-      setNextShow(true);
-    } catch {
-      setNextShow(false);
-    }
-  }, [creditCardInfo]);
+  const hasShowButton =
+    cardNumber.join('').length === 16 &&
+    /^(0[1-9]|1[0-2])$/.test(expirationDate[0]) &&
+    /^\d{2}$/.test(expirationDate[1]) &&
+    securityCode.length === 3 &&
+    password.join('').length === 2;
 
   const _onSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
@@ -49,7 +38,7 @@ function CardRegisterForm() {
       <OwnerNameInput />
       <SecurityCode />
       <CardPassword />
-      {nextShow && (
+      {hasShowButton && (
         <div style={{ display: 'flex', justifyContent: 'end' }}>
           <NextButton>다음</NextButton>
         </div>
