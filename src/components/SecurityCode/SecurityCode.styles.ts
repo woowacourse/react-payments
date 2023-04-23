@@ -18,7 +18,6 @@ export const QuestionButton = styled.button`
   border-radius: 50%;
   text-align: center;
   cursor: pointer;
-  tab
 `;
 
 export const InputWrapper = styled.div`
