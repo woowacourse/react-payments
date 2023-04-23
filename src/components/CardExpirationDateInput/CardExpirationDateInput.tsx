@@ -24,6 +24,7 @@ const CardExpirationDateInput = ({ expirationDate, error, onChange, onBlur }: Ca
           width="40px"
           placeholder="MM"
           type="text"
+          autoComplete="cc-exp-month"
           minLength={2}
           maxLength={2}
           required
@@ -39,6 +40,7 @@ const CardExpirationDateInput = ({ expirationDate, error, onChange, onBlur }: Ca
           width="40px"
           placeholder="YY"
           type="text"
+          autoComplete="cc-exp-year"
           minLength={2}
           maxLength={2}
           required

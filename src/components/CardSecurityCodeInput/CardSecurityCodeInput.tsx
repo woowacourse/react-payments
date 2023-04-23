@@ -16,6 +16,7 @@ const CardSecurityCodeInput = ({ securityCode, onChange }: CardSecurityCodeInput
           inputMode="numeric"
           width="100%"
           type="password"
+          autoComplete="cc-csc"
           minLength={3}
           maxLength={3}
           required

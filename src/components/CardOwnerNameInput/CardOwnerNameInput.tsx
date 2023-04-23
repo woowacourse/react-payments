@@ -24,6 +24,7 @@ const CardOwnerNameInput = ({ ownerName, nameLength, onChange }: CardOwnerNameIn
           maxLength={30}
           required
           onChange={onChange}
+          autoComplete="name"
         />
       </InputContainer>
     </Label>

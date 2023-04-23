@@ -23,6 +23,7 @@ const CardNumberInput = ({ cardNumber, error, onChange, onBlur }: CardNumberInpu
           textAlign="center"
           width="55px"
           type="text"
+          autoComplete="cc-number"
           minLength={4}
           maxLength={4}
           required
@@ -38,6 +39,7 @@ const CardNumberInput = ({ cardNumber, error, onChange, onBlur }: CardNumberInpu
           textAlign="center"
           width="55px"
           type="text"
+          autoComplete="cc-number"
           minLength={4}
           maxLength={4}
           required
@@ -52,6 +54,7 @@ const CardNumberInput = ({ cardNumber, error, onChange, onBlur }: CardNumberInpu
           textAlign="center"
           width="55px"
           type="password"
+          autoComplete="cc-number"
           minLength={4}
           maxLength={4}
           required
@@ -66,6 +69,7 @@ const CardNumberInput = ({ cardNumber, error, onChange, onBlur }: CardNumberInpu
           textAlign="center"
           width="55px"
           type="password"
+          autoComplete="cc-number"
           minLength={4}
           maxLength={4}
           required
