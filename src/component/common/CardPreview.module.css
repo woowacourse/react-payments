@@ -12,9 +12,9 @@
 }
 
 .chip {
-  position: absolute;
-  left: 210px;
-  top: 130px;
+  position: relative;
+  left: 14px;
+  top: 47px;
 
   width: 40px;
   height: 26px;
@@ -24,9 +24,9 @@
 }
 
 .number {
-  position: absolute;
-  top: 165px;
-  left: 210px;
+  position: relative;
+  left: 14px;
+  top: 60px;
 
   color: white;
   width: 172px;
@@ -35,18 +35,21 @@
 }
 
 .name {
-  position: absolute;
-  top: 185px;
-  left: 210px;
+  position: relative;
+  left: 14px;
+  top: 65px;
 
+  display: inline-block;
+  width: 150px;
   color: white;
 }
 
 .expireDate {
-  position: absolute;
-  top: 185px;
-  left: 350px;
+  position: relative;
+  left: 10px;
+  top: 65px;
 
+  display: inline-block;
   width: 35px;
   text-align: right;
   color: white;
