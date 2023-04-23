@@ -69,12 +69,7 @@ const AddCardPage = () => {
 
   return (
     <div className="add-card-page">
-      <Header>
-        <button className="back-button" onClick={onBackButtonClick}>
-          {'<'}
-        </button>
-        <h3>뒤로 가기</h3>
-      </Header>
+      <Header headerTitle="뒤로가기" clickHandler={onBackButtonClick} />
       <section className="add-card-page-body">
         <Card
           cardType={cardType}
