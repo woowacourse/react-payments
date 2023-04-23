@@ -8,7 +8,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>((props
   const { onChange, ...inputProps } = props;
 
   const handleInputChange = (value: string) => {
-    if (!/^\d*$/.test(value)) return;
+    if (/\D/.test(value)) return;
 
     onChange?.(value);
   };
