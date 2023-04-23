@@ -1,5 +1,5 @@
 export const CARD_INPUT_NUMBER: Readonly<{ [key: string]: number }> = {
-  CARD_NUMBERS: 4,
+  CARD_NUMBER: 4,
   CVC: 3,
   EXPIRY_DATE: 7,
   OWNER: 30,

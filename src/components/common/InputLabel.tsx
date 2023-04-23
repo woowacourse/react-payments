@@ -1,6 +1,7 @@
+import { HTMLAttributes } from "react";
 import styled from "styled-components";
 
-interface InputLabelProps {
+interface InputLabelProps extends HTMLAttributes<HTMLLabelElement> {
   name: string;
   text: string;
 }

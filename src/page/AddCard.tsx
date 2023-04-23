@@ -6,15 +6,17 @@ import styled from "styled-components";
 import { CardForm } from "../components/cardForm/CardForm";
 import { Link } from "react-router-dom";
 
+const initialCard = {
+  numbers: [],
+  owner: "",
+  expiryDate: "MM/YY",
+  color: "#e07171",
+  CVC: 123,
+  password: [0, 0],
+};
+
 export const AddCard = () => {
-  const [newCard, setNewCard] = useState<CardType>({
-    numbers: [],
-    owner: "",
-    expiryDate: "MM/YY",
-    color: "#e07171",
-    CVC: 123,
-    password: [0, 0],
-  });
+  const [newCard, setNewCard] = useState<CardType>(initialCard);
 
   return (
     <>
@@ -26,7 +28,7 @@ export const AddCard = () => {
       </HeaderWrapper>
       <Main>
         <CardItem card={newCard} />
-        <CardForm cardInfo={newCard} setCardInfo={setNewCard} />
+        <CardForm setCardInfo={setNewCard} />
       </Main>
     </>
   );

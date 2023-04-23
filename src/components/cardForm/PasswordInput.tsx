@@ -40,17 +40,16 @@ export const PasswordInput = () => {
       <InputLabel text="비밀번호" name="password" />
       <Row>
         <Input
-          error={{
-            isValid: isCompleted,
-            errorMessage: "비밀번호를 입력하세요.",
-          }}
           {...passwordInfo}
           handleInput={handleInput}
           handleChange={handleOutFocusEvent}
           label="password1"
+          error={{
+            isValid: isCompleted,
+            errorMessage: "비밀번호를 입력하세요.",
+          }}
         />
         <Input
-          error={{ isValid: true, errorMessage: "" }}
           {...passwordInfo}
           handleInput={handleInput}
           handleChange={handleOutFocusEvent}

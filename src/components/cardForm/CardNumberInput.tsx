@@ -27,7 +27,7 @@ export const CardNumberInput = ({ setCardNumbers }: CardNumberInputProps) => {
         return;
       }
 
-      if (value.length > CARD_INPUT_NUMBER.CARD_NUMBERS) {
+      if (value.length > CARD_INPUT_NUMBER.CARD_NUMBER) {
         e.target.value = value.slice(0, -1);
         return;
       }
