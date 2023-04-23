@@ -11,5 +11,8 @@ const meta: Meta = {
 export default meta;
 
 export const InputTest = (args: any) => (
-  <InputBoxCardNumber setIsComplete={() => {}}></InputBoxCardNumber>
+  <InputBoxCardNumber
+    setIsComplete={() => {}}
+    changeNowCardInfo={() => {}}
+  ></InputBoxCardNumber>
 );
