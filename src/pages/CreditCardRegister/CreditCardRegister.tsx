@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import CreditCard from 'components/CreditCard';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -38,14 +39,16 @@ function CreditCardRegister() {
     navigate('/');
   };
 
+  const isValidCVC = (cvc: string): boolean => cvc === '' || cvc.length < 3;
+  const isValidExpiry = (expiry: string): boolean => expiry === '' || expiry.length < 5;
+  const isValidCardNumber = (number: string): boolean => number === '' || number.length < 16;
+  const isValidCardPassword = (first: string, second: string): boolean => first === '' || second === '';
+
   useEffect(() => {
-    if (creditCardCVC === '') return setIsFullFilled(false);
-    if (creditCardCVC.length < 3) return setIsFullFilled(false);
-    if (creditCardExpiry === '') return setIsFullFilled(false);
-    if (creditCardExpiry.length < 5) return setIsFullFilled(false);
-    if (creditCardNumber === '') return setIsFullFilled(false);
-    if (creditCardNumber.length < 16) return setIsFullFilled(false);
-    if (creditCardPassword.first === '' || creditCardPassword.second === '') return setIsFullFilled(false);
+    if (isValidCVC(creditCardCVC)) return setIsFullFilled(false);
+    if (isValidExpiry(creditCardExpiry)) return setIsFullFilled(false);
+    if (isValidCardNumber(creditCardNumber)) return setIsFullFilled(false);
+    if (isValidCardPassword(creditCardPassword.first, creditCardPassword.second)) return setIsFullFilled(false);
 
     return setIsFullFilled(true);
   }, [creditCardNumber, creditCardExpiry, creditCardCVC, creditCardPassword]);
