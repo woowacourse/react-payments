@@ -9,4 +9,9 @@ const meta: Meta<typeof CVCTooltip> = {
 export default meta;
 type Story = StoryObj<typeof CVCTooltip>;
 
-export const Primary: Story = {};
+export const Primary: Story = {
+  args: {
+    title: 'cvc란?',
+    detail: '카드 뒷면의 3자리 숫자입니다.',
+  },
+};
