@@ -32,11 +32,11 @@ const getFormData = (form: HTMLFormElement): CreditCard => {
   card.name = (formData.get("card-owner")|| '').toString();
   card.date = (formData.get("expiration-date") || '').toString();
   card.number = [
-      formData.get("card-number-1"),
-      formData.get("card-number-2"),
-      formData.get("card-number-3"),
-      formData.get("card-number-4"),
-  ].map(Number);
+      (formData.get("card-number-1") || '').toString(),
+      (formData.get("card-number-2") || '').toString(),
+      (formData.get("card-number-3") || '').toString(),
+      (formData.get("card-number-4") || '').toString(),
+  ];
   card.securityCode = Number(formData.get("security-code"));
   card.password = (
     Number(formData.get("card-password-1")) * 10 +

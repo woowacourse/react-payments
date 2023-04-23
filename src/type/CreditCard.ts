@@ -2,7 +2,7 @@ export default interface CreditCard {
   name: string;
   date: string;
   bank?: string;
-  number: number[];
+  number: string[];
   securityCode: number;
   password: number;
 };
