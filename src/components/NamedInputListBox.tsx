@@ -1,18 +1,18 @@
 import InputListBox from './InputListBox';
 
-interface InputLabelBoxProps {
+interface NamedInputListBoxProps {
   inputListInformation: React.ComponentPropsWithoutRef<typeof InputListBox>;
   name?: string;
   id?: string;
 }
 
-function NamedInputListBox({ inputListInformation, name, id }: InputLabelBoxProps) {
-  const { inputInformation, bridgeLetter, autoFocus } = inputListInformation;
+export type { NamedInputListBoxProps };
 
+function NamedInputListBox({ inputListInformation, name, id }: NamedInputListBoxProps) {
   return (
     <>
       {name && <label htmlFor={id}>{name}</label>}
-      <InputListBox inputInformation={inputInformation} bridgeLetter={bridgeLetter} autoFocus={autoFocus} />
+      <InputListBox {...inputListInformation} />
     </>
   );
 }
