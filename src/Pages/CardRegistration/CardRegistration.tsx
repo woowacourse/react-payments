@@ -25,7 +25,11 @@ function CardRegistration() {
       <Header title="카드 추가" hasBackHistory />
       <MainCardRegistration>
         <Card cardType={CARD_TYPE.DEFAULT} cardInformation={{ cardNumber, expirationDate, owner }} />
-        <PaymentsInputContainer setCardInformation={{ setCardNumber, setExpirationDate, setOwner }} />
+        <PaymentsInputContainer
+          setCardNumber={setCardNumber}
+          setExpirationDate={setExpirationDate}
+          setOwner={setOwner}
+        />
       </MainCardRegistration>
     </>
   );

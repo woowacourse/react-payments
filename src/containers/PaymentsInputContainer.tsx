@@ -39,15 +39,12 @@ const NextButton = styled.button`
 `;
 
 interface PaymentInputContainerProps {
-  setCardInformation: {
-    setCardNumber: (index: number, value: string) => void;
-    setExpirationDate: (index: number, value: string) => void;
-    setOwner: (value: string) => void;
-  };
+  setCardNumber: (index: number, value: string) => void;
+  setExpirationDate: (index: number, value: string) => void;
+  setOwner: (value: string) => void;
 }
 
-function PaymentsInputContainer({ setCardInformation }: PaymentInputContainerProps) {
-  const { setCardNumber, setExpirationDate, setOwner } = setCardInformation;
+function PaymentsInputContainer({ setCardNumber, setExpirationDate, setOwner }: PaymentInputContainerProps) {
   const { dispatchCardList } = useWrappingContext(CardListStore);
   const navigate = useNavigate();
   const handleForm = (e: FormEvent<HTMLFormElement>) => {
