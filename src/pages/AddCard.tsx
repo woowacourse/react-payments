@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
 import CardNumbers from '../components/CardNumbers/CardNumbers';
 import ExpiredDate from '../components/ExpiredDate/ExpiredDate';
 import CardOwnerName from '../components/CardOwnerName/CardOwnerName';
@@ -8,7 +7,6 @@ import SecurityCode from '../components/SecurityCode/SecurityCode';
 import CardPassword from '../components/CardPassword/CardPassword';
 import Card from '../components/Card/Card';
 import Header from '../components/Header/Header';
-import { CardType } from '../types/Card';
 import {
   useAddCard,
   useCardNumbers,
@@ -35,11 +33,14 @@ const ButtonWrapper = styled.div`
 `;
 
 interface SetCardsProps {
-  cards: CardType[];
-  setCards: React.Dispatch<React.SetStateAction<CardType[]>>;
+  handleSetCards: (
+    cardNumbers: Record<number, string>,
+    expiredDate: Record<number, string>,
+    cardOwnerName: string
+  ) => void;
 }
 
-const AddCard = ({ cards, setCards }: SetCardsProps) => {
+const AddCard = ({ handleSetCards }: SetCardsProps) => {
   const { cardNumbers, checkCardNumbers } = useCardNumbers();
   const { cardOwnerName, checkCardOwnerName } = useCardOwnerName();
   const { password, checkPassword } = useCardPassword();
@@ -54,18 +55,15 @@ const AddCard = ({ cards, setCards }: SetCardsProps) => {
 
   const navigate = useNavigate();
 
-  const handleSetCards = () => {
-    setCards([
-      ...cards,
-      { id: uuidv4(), cardNumbers, expiredDate, cardOwnerName },
-    ]);
-    navigate('/');
-  };
-
   return (
     <>
       <Header page="add-card" />
-      <form onSubmit={handleSetCards}>
+      <form
+        onSubmit={() => {
+          handleSetCards(cardNumbers, expiredDate, cardOwnerName);
+          navigate('/');
+        }}
+      >
         <Wrapper>
           <Card
             cardNumbers={cardNumbers}
