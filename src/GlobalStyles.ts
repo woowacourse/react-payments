@@ -9,9 +9,32 @@ const GlobalStyles = createGlobalStyle`
 	}
 
 	body {
-		padding: 28px 24px;
+		width: 100vw;
+		height: 100vh;
+
 		font-family: "Roboto", sans-serif;
+
+		background-color: #333333;
   }
+
+	#root {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+		width: 100%;
+		height: 100%;
+	}
+
+	.App {
+		width: 100%;
+		height: 100%;
+
+		padding: 28px 24px;
+
+		background-color: #FFFFFF;
+	}
 
   a {
       text-decoration: none;
@@ -35,6 +58,20 @@ const GlobalStyles = createGlobalStyle`
     padding: 0;
     cursor: pointer;
   }
+
+	@media (min-width: 992px) {
+		.App {
+			width: 50%;
+			height: 100%;
+		}
+	}
+
+	@media (min-width: 1200px) {
+		.App {
+			width: 30%;
+			height: 100%;
+		}
+	}
 `;
 
 export default GlobalStyles;
