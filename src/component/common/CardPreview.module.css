@@ -12,39 +12,42 @@
 }
 
 .chip {
-  position: relative;
+  position: absolute;
+  left: 210px;
+  top: 130px;
+
   width: 40px;
   height: 26px;
-  left: 14px;
-  top: 47px;
 
   background: #cbba64;
   border-radius: 4px;
 }
 
 .number {
+  position: absolute;
+  top: 165px;
+  left: 210px;
+
   color: white;
+  width: 172px;
 
-  width: 90%;
-  position: relative;
-  top: 55px;
-  left: 20px;
-
-  letter-spacing: 3px;
+  letter-spacing: 2px;
 }
 
 .name {
-  color: white;
+  position: absolute;
+  top: 185px;
+  left: 210px;
 
-  position: relative;
-  top: 60px;
-  left: 20px;
+  color: white;
 }
 
 .expireDate {
-  color: white;
+  position: absolute;
+  top: 185px;
+  left: 350px;
 
-  position: relative;
-  top: 60px;
-  left: 118px;
+  width: 35px;
+  text-align: right;
+  color: white;
 }
