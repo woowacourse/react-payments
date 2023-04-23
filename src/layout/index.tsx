@@ -25,6 +25,8 @@ const Style = {
   ChildrenContainer: styled.div`
     width: max-content;
     height: max-content;
+    min-width: 368px;
+    min-height: 754px;
 
     padding: 25px;
 

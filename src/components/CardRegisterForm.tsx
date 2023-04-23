@@ -9,7 +9,7 @@ import { SecurityCodeInput } from './input/SecurityCodeInput';
 import { PasswordInput } from './input/PasswordInput';
 import { cardDataService } from '../domains/cardDataService';
 
-export const AddNewCardForm = () => {
+export const CardRegisterForm = () => {
   const navigate = useNavigate();
   const [isInputFinish, setIsInputFinish] = useState(false);
   const [cardNumber, setCardNumber] = useState(['', '', '', '']);

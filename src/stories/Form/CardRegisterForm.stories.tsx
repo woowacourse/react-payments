@@ -1,19 +1,19 @@
 import type { Meta } from '@storybook/react';
-import { AddNewCardForm } from '../../components/AddNewCardForm';
+import { CardRegisterForm } from '../../components/CardRegisterForm';
 import { BrowserRouter } from 'react-router-dom';
 
 const meta = {
   title: 'Example/Form',
-  component: AddNewCardForm,
+  component: CardRegisterForm,
   tags: ['autodocs'],
-} satisfies Meta<typeof AddNewCardForm>;
+} satisfies Meta<typeof CardRegisterForm>;
 
 export default meta;
 
 export const RegisterNewCardForm = () => {
   return (
     <BrowserRouter>
-      <AddNewCardForm />
+      <CardRegisterForm />
     </BrowserRouter>
   );
 };

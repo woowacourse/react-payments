@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Layout } from '../layout';
 import { BackButton } from '../layout/BackButton';
-import { AddNewCardForm } from '../components/AddNewCardForm';
+import { CardRegisterForm } from '../components/CardRegisterForm';
 
 export const Register = () => {
   return (
@@ -10,7 +10,7 @@ export const Register = () => {
         <BackButton path='/' />
         <Style.Title>카드추가</Style.Title>
       </Style.Header>
-      <AddNewCardForm />
+      <CardRegisterForm />
     </Layout>
   );
 };
@@ -25,7 +25,7 @@ const Style = {
     font-weight: bold;
   `,
   Title: styled.span`
-    margin-left: 18px;
+    margin-left: 8px;
 
     font-size: 16px;
   `,
