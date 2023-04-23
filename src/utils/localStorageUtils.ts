@@ -5,5 +5,5 @@ export const pushList = <Value>(key: string, value: Value) => {
 };
 
 export const getList = (key: string) => {
-  return JSON.parse(localStorage.get(key) || '[]');
+  return JSON.parse(localStorage.getItem(key) || '[]');
 };
