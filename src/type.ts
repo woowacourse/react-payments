@@ -4,5 +4,5 @@ export interface CreditCard {
   bank?: string;
   number?: number[];
   securityCode?: number;
-  password?: number;
+  password?: number[];
 }

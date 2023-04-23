@@ -8,15 +8,7 @@ import CardInputPage from "./component/CardInputPage/CardInputPage";
 import CardListPage from "./component/CardListPage/CardListPage";
 
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-
-interface CreditCard {
-  name?: string;
-  date?: string;
-  bank?: string;
-  number?: number[];
-  securityCode?: number;
-  password?: number;
-}
+import { CreditCard } from "./type";
 
 function App() {
   const [cardList, setCardList] = useState<CreditCard[]>([]);

@@ -4,9 +4,15 @@ import Input from "../../common/Input";
 import "./inputBoxOwner.css";
 import { CARD_ERROR_MESSAGE } from "../../../CONSTANT";
 import { validateCardOwner } from "../../../validation/cardOwner";
+import { CreditCard } from "../../../type";
 
 interface Props {
   setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
+  changeNowCardInfo: (
+    key: keyof CreditCard,
+    value: any,
+    index?: number
+  ) => void;
 }
 
 const INPUT_STATUS = {
@@ -16,7 +22,7 @@ const INPUT_STATUS = {
 };
 
 export default function InputBoxOwner(props: Props) {
-  const { setIsComplete } = props;
+  const { setIsComplete, changeNowCardInfo } = props;
 
   const [nameLength, setNameLength] = useState(0);
   const [inputStatus, setInputStatus] = useState(INPUT_STATUS.NOT_COMPLETE);
@@ -31,6 +37,7 @@ export default function InputBoxOwner(props: Props) {
 
     if (validateCardOwner(e.target.value)) {
       setInputStatus(INPUT_STATUS.COMPLETE);
+      changeNowCardInfo("name", e.target.value);
     } else {
       setInputStatus(INPUT_STATUS.ERROR);
     }

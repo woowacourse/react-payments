@@ -4,9 +4,15 @@ import Input from "../../common/Input";
 import "./inputBoxExpirationDate.css";
 import { CARD_ERROR_MESSAGE } from "../../../CONSTANT";
 import { validateExpirationDate } from "../../../validation/ExpirationDate";
+import { CreditCard } from "../../../type";
 
 interface Props {
   setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
+  changeNowCardInfo: (
+    key: keyof CreditCard,
+    value: any,
+    index?: number
+  ) => void;
 }
 
 const INPUT_STATUS = {
@@ -16,7 +22,7 @@ const INPUT_STATUS = {
 };
 
 export default function InputBoxExpirationDate(props: Props) {
-  const { setIsComplete } = props;
+  const { setIsComplete, changeNowCardInfo } = props;
 
   const [inputStatus, setInputStatus] = useState(INPUT_STATUS.NOT_COMPLETE);
 
@@ -34,6 +40,8 @@ export default function InputBoxExpirationDate(props: Props) {
       e.target.value.length === 5
         ? setInputStatus(INPUT_STATUS.COMPLETE)
         : setInputStatus(INPUT_STATUS.NOT_COMPLETE);
+
+      e.target.value.length === 5 && changeNowCardInfo("date", e.target.value);
     } else {
       setInputStatus(INPUT_STATUS.ERROR);
     }
@@ -53,6 +61,9 @@ export default function InputBoxExpirationDate(props: Props) {
         onChange={changeExpirationDate}
         placeholder="MM / YY"
         inputMode="numeric"
+        onBlur={(e: ChangeEvent<HTMLInputElement>) => {
+          console.log(e);
+        }}
       ></Input>
       <p className={inputStatus === INPUT_STATUS.ERROR ? "visible" : ""}>
         {CARD_ERROR_MESSAGE.INPUT_CARD_EXPIRATION_DATE}

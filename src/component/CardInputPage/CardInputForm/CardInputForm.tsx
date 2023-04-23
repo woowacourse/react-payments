@@ -16,9 +16,20 @@ interface Props {
   addNewCard: (card: CreditCard) => void;
 }
 
+const initialCard = {
+  name: "",
+  date: "",
+  bank: "",
+  number: [],
+  securityCode: 0,
+  password: [],
+};
+
 export default function CardInputForm(props: Props) {
   const { addNewCard } = props;
   const [isFormFilled, setIsFormFilled] = useState(false);
+
+  const [nowCardInfo, setNowCardInfo] = useState<CreditCard>(initialCard);
 
   const [isCardNumberComplete, setIsCardNumberComplete] = useState(false);
   const [isExpirationDateComplete, setIsExpirationDateComplete] =
@@ -31,7 +42,7 @@ export default function CardInputForm(props: Props) {
 
   const formElement = useRef<HTMLFormElement>(null);
 
-  function event(e: SubmitEvent) {
+  function submitCardInfo(e: SubmitEvent) {
     e.preventDefault();
 
     if (!formElement.current) return;
@@ -49,9 +60,10 @@ export default function CardInputForm(props: Props) {
         formData.get("card-number-4"),
       ].map(Number),
       securityCode: Number(formData.get("security-code")),
-      password:
-        Number(formData.get("card-password-1")) +
-        Number(formData.get("card-password-2")),
+      password: [
+        formData.get("card-password-1"),
+        formData.get("card-password-2"),
+      ].map(Number),
     };
 
     addNewCard(card);
@@ -59,12 +71,33 @@ export default function CardInputForm(props: Props) {
     navigate("/CardListPage");
   }
 
-  useEffect(() => {
-    if (!isFormFilled) {
-      formElement.current?.removeEventListener("submit", event);
+  const changeNowCardInfo = (
+    key: keyof CreditCard,
+    value: any,
+    index?: number
+  ) => {
+    if (key === "number" && index !== undefined) {
+      const result = { ...nowCardInfo };
+      if (result.number !== undefined) result.number[index] = value;
+      isCardNumberComplete && setNowCardInfo(result);
+      return;
     }
 
-    formElement.current?.addEventListener("submit", event);
+    if (key === "date") {
+      console.log(isExpirationDateComplete);
+      setNowCardInfo({ ...nowCardInfo, [key]: value });
+      return;
+    }
+    if (key === "name" && isOwnerComplete)
+      setNowCardInfo({ ...nowCardInfo, [key]: value });
+  };
+
+  useEffect(() => {
+    if (!isFormFilled) {
+      formElement.current?.removeEventListener("submit", submitCardInfo);
+    }
+
+    formElement.current?.addEventListener("submit", submitCardInfo);
   }, [isFormFilled]);
 
   useEffect(() => {
@@ -85,10 +118,19 @@ export default function CardInputForm(props: Props) {
 
   return (
     <form ref={formElement} className="form">
-      <CardPreview card={{}} />
-      <InputBoxCardNumber setIsComplete={setIsCardNumberComplete} />
-      <InputBoxExpirationDate setIsComplete={setIsExpirationDateComplete} />
-      <InputBoxOwner setIsComplete={setIsOwnerComplete} />
+      <CardPreview card={nowCardInfo} />
+      <InputBoxCardNumber
+        setIsComplete={setIsCardNumberComplete}
+        changeNowCardInfo={changeNowCardInfo}
+      />
+      <InputBoxExpirationDate
+        setIsComplete={setIsExpirationDateComplete}
+        changeNowCardInfo={changeNowCardInfo}
+      />
+      <InputBoxOwner
+        setIsComplete={setIsOwnerComplete}
+        changeNowCardInfo={changeNowCardInfo}
+      />
       <InputBoxSecurityCode setIsComplete={setIsSecurityComplete} />
       <InputBoxPassword setIsComplete={setIsPasswordComplete} />
       {isFormFilled && <Button type="submit">다음</Button>}
