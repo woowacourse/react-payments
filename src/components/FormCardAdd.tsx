@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import InputCardData from './InputCardData';
 
 import { fetchNewCardData } from '../utils/fetchData';
