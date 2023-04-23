@@ -1,23 +1,23 @@
-import React, { PropsWithChildren, useContext, useState } from 'react';
-import { createContext } from 'react';
-import { CardRegisterInfo } from '../types/card.type';
+import React, { PropsWithChildren, useContext, useState } from "react";
+import { createContext } from "react";
+import { CardRegisterInfo } from "../types/card.type";
 
-export const initialCardRegisterInfo = {
+export const initialCardRegisterInfo: CardRegisterInfo = {
   cardNumber: {
-    first: '',
-    second: '',
-    third: '',
-    fourth: '',
+    first: "",
+    second: "",
+    third: "",
+    fourth: "",
   },
   expirationDate: {
-    month: '',
-    year: '',
+    month: "",
+    year: "",
   },
-  holderName: '',
-  cvc: '',
+  holderName: "",
+  cvc: "",
   password: {
-    passwordFirstDigit: '',
-    passwordSecondDigit: '',
+    passwordFirstDigit: "",
+    passwordSecondDigit: "",
   },
 };
 
@@ -52,7 +52,8 @@ export default function CardRegisterProvider({ children }: PropsWithChildren) {
   };
   return (
     <CardRegisterContext.Provider
-      value={{ cardRegisterInfo, handleCardInfo, initCardRegisterInfo }}>
+      value={{ cardRegisterInfo, handleCardInfo, initCardRegisterInfo }}
+    >
       {children}
     </CardRegisterContext.Provider>
   );
