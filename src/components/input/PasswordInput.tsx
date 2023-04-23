@@ -4,6 +4,7 @@ import { Input } from './Input';
 import { InputWrapper } from './InputWrapper';
 import { PassWord } from '../../types';
 import { hasValidLength, isNumeric } from '../../validator';
+import { ERROR, PASSWORD_LENGTH, PASSWORD_TEXT } from '../../constants';
 
 interface Props {
   password: PassWord;
@@ -44,8 +45,8 @@ export const PasswordInput = ({
   };
 
   const validatePassword = (inputs: string) => {
-    if (!isNumeric(inputs) || !hasValidLength(inputs, 2)) {
-      alert('유효한 비밀번호가 아닙니다.');
+    if (!isNumeric(inputs) || !hasValidLength(inputs, PASSWORD_LENGTH)) {
+      alert(ERROR.INVALID_PASSWORD);
       setPassword(['', '']);
 
       allRef[0].current?.focus();
@@ -75,7 +76,7 @@ export const PasswordInput = ({
                 required
                 onChange={(e) => handlePasswordInputChange(index, e)}
                 onKeyDown={(e) => handleBackspacePress(index, e)}
-                placeholder='•'
+                placeholder={PASSWORD_TEXT}
               />
             </InputWrapper>
           );

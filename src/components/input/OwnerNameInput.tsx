@@ -3,6 +3,7 @@ import { Input } from './Input';
 import { InputWrapper } from './InputWrapper';
 import { OwnerName } from '../../types';
 import { isEnglish } from '../../validator';
+import { ERROR, MAX_NAME_LENGTH } from '../../constants';
 
 interface Props {
   ownerName: OwnerName;
@@ -18,8 +19,8 @@ export function OwnerNameInput({
   moveFocusToSecurityCode,
 }: Props) {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!isEnglish(e.target.value, 30)) {
-      alert('유효한 이름이 아닙니다.');
+    if (!isEnglish(e.target.value, MAX_NAME_LENGTH)) {
+      alert(ERROR.INVALID_OWNER_NAME);
 
       e.target.value = '';
     }
@@ -27,11 +28,17 @@ export function OwnerNameInput({
     setOwnerName(e.target.value.toUpperCase());
   };
 
+  const handleEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') moveFocusToSecurityCode();
+  };
+
   return (
     <>
       <Style.Label htmlFor='ownerName'>
         <Style.Title>카드 소유자 이름(선택)</Style.Title>
-        <Style.NameLength>{ownerName.length}/30</Style.NameLength>
+        <Style.NameLength>
+          {ownerName.length}/{MAX_NAME_LENGTH}
+        </Style.NameLength>
       </Style.Label>
       <InputWrapper width={318}>
         <Input
@@ -39,13 +46,10 @@ export function OwnerNameInput({
           ref={ownerNameInputRef}
           value={ownerName}
           width={318}
-          minLength={1}
-          maxLength={30}
+          maxLength={MAX_NAME_LENGTH}
           placeholder='카드에 표시된 이름과 동일하게 입력하세요.'
           onChange={handleInputChange}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') moveFocusToSecurityCode();
-          }}
+          onKeyDown={handleEnterPress}
         />
       </InputWrapper>
     </>

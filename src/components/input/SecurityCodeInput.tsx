@@ -4,6 +4,7 @@ import { Input } from './Input';
 import { InputWrapper } from './InputWrapper';
 import { SecurityCode } from '../../types';
 import { hasValidLength, isNumeric } from '../../validator';
+import { ERROR, PASSWORD_TEXT, SECURITY_CODE_LENGTH } from '../../constants';
 
 interface Props {
   securityCode: SecurityCode;
@@ -20,7 +21,7 @@ export function SecurityCodeInput({
 }: Props) {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!isNumeric(e.target.value)) {
-      alert('숫자를 입력해주세요.');
+      alert(ERROR.IS_NOT_NUMBER);
 
       e.target.value = '';
     }
@@ -29,8 +30,8 @@ export function SecurityCodeInput({
   };
 
   const validateSecurityCode = () => {
-    if (!hasValidLength(securityCode, 3) && securityCode !== '') {
-      alert('유효한 보안 코드가 아닙니다. 3자리 숫자를 입력해주세요.');
+    if (!hasValidLength(securityCode, SECURITY_CODE_LENGTH) && securityCode !== '') {
+      alert(ERROR.INVALID_SECURITY_CODE);
 
       setSecurityCode('');
       securityCodeInputRef.current?.focus();
@@ -38,7 +39,7 @@ export function SecurityCodeInput({
   };
 
   useEffect(() => {
-    if (securityCode.length === 3) moveFocusToPassword();
+    if (securityCode.length === SECURITY_CODE_LENGTH) moveFocusToPassword();
   }, [securityCode]);
 
   return (
@@ -52,9 +53,9 @@ export function SecurityCodeInput({
           ref={securityCodeInputRef}
           value={securityCode}
           width={84}
-          minLength={3}
-          maxLength={3}
-          placeholder='•••'
+          minLength={SECURITY_CODE_LENGTH}
+          maxLength={SECURITY_CODE_LENGTH}
+          placeholder={PASSWORD_TEXT.repeat(SECURITY_CODE_LENGTH)}
           onChange={handleInputChange}
           onBlur={validateSecurityCode}
           inputMode='numeric'

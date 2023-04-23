@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { CardNumber, ExpirationDate, OwnerName } from '../types';
+import { PASSWORD_START_INDEX, PASSWORD_TEXT } from '../constants';
 
 interface Props {
   cardNumber: CardNumber;
@@ -9,9 +10,8 @@ interface Props {
 
 export function CardViewer({ cardNumber, expirationDate, ownerName }: Props) {
   const changeCardNumberFormat = (rawCardNumbers: string[]) => {
-    const PASSWORD_START = 2;
     const cardNumbersFormat = rawCardNumbers.map((rawCardNumber, index) =>
-      index < PASSWORD_START ? rawCardNumber : '•'.repeat(rawCardNumber.length),
+      index < PASSWORD_START_INDEX ? rawCardNumber : PASSWORD_TEXT.repeat(rawCardNumber.length),
     );
 
     return cardNumbersFormat;

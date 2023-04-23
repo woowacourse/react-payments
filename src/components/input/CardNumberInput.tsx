@@ -4,6 +4,7 @@ import { Input } from './Input';
 import { InputWrapper } from './InputWrapper';
 import { CardNumber } from '../../types';
 import { hasValidLength, isNumeric } from '../../validator';
+import { CARD_NUMBER_DIGITS, ERROR, PASSWORD_START_INDEX } from '../../constants';
 
 interface Props {
   cardNumber: CardNumber;
@@ -20,17 +21,13 @@ export function CardNumberInput({ moveFocusToExpirationDate, cardNumber, setCard
     useRef<HTMLInputElement>(null),
   ];
 
-  const CARD_NUMBER_DIGITS = 16;
+  const isPasswordInput = (index: number) => index >= PASSWORD_START_INDEX;
   const isFirstInput = (index: number) => index === 0;
   const isLastInput = (index: number) => index === cardNumber.length - 1;
   const isEmptyInput = (index: number) => !cardNumber[index].length;
+
   const isFullInput = (target: string) => {
     return target.length === CARD_NUMBER_DIGITS / cardNumber.length;
-  };
-
-  const isPasswordInput = (index: number) => {
-    const PASSWORD_START_INDEX = 2;
-    return index >= PASSWORD_START_INDEX;
   };
 
   const handleBackspacePress = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -64,7 +61,7 @@ export function CardNumberInput({ moveFocusToExpirationDate, cardNumber, setCard
 
     if (!isValidCardNumber) {
       setCardNumber(['', '', '', '']);
-      alert('유효하지 않은 카드 번호입니다.');
+      alert(ERROR.INVALID_CARD_NUMBER);
 
       allRef[0].current?.focus();
     }
