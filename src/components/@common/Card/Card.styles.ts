@@ -44,7 +44,7 @@ export const CardNumberContainer = styled.div`
   letter-spacing: 2.6px;
 `;
 
-interface CardNumberProps extends React.HTMLAttributes<HTMLSpanElement> {
+interface CardNumberProps  {
   index: number;
 }
 
