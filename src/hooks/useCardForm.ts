@@ -36,7 +36,7 @@ const useCardForm = (addCard: Dispatch<SetStateAction<Card[]>>) => {
 
   const handleMultipleInputFieldChange = useCallback(
     (name: string, value: string, index: number) => {
-      if (!validateMultipleInputField(name) || !index) return;
+      if (!validateMultipleInputField(name)) return;
       if (isKeyOfObj(formatChecker, name) && !formatChecker[name](value)) return;
 
       setCardInformation((information) => {
