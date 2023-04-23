@@ -8,8 +8,8 @@ export const Styled = {
   `,
 
   ButtonContainer: styled.div`
-    display: "flex";
-    justify-content: "end";
+    display: flex;
+    justify-content: end;
   `,
 
   NextButton: styled.button`
