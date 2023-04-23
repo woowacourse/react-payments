@@ -5,6 +5,7 @@ import InputGroup from "../common/InputGroup";
 import { DotIcon } from "../../assets/icons";
 import { useRef } from "react";
 import { isNumber, isOverMaxLength } from "../../utils";
+import { INPUT_LENGTH } from "../../constants";
 
 interface PasswordInputProps {
   password: string[];
@@ -19,7 +20,7 @@ const PasswordInput = ({ password, setPassword, errorMessage, setErrorMessage }:
   const handleChangeInput = (inputIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
 
-    if (isOverMaxLength(inputValue, 1)) return;
+    if (isOverMaxLength(inputValue, INPUT_LENGTH.PASSWORD)) return;
 
     if (!isNumber(inputValue)) {
       setErrorMessage("숫자만 입력해주세요");
@@ -38,7 +39,7 @@ const PasswordInput = ({ password, setPassword, errorMessage, setErrorMessage }:
   };
 
   const isNextInputFocusable = (inputValue: string, inputIndex: number) => {
-    return inputIndex === 0 && inputValue.length > 0;
+    return inputIndex === 0 && inputValue.length === INPUT_LENGTH.PASSWORD;
   };
 
   return (

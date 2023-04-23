@@ -1,3 +1,4 @@
+import { INPUT_LENGTH } from "../../constants";
 import { isNumber, isOverMaxLength } from "../../utils";
 import Input from "../common/Input";
 import InputBox from "../common/InputBox";
@@ -19,7 +20,7 @@ const SecurityCodeInput = ({
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
 
-    if (isOverMaxLength(inputValue, 3)) return;
+    if (isOverMaxLength(inputValue, INPUT_LENGTH.SECURITY_CODE)) return;
 
     if (!isNumber(inputValue)) {
       setErrorMessage("숫자만 입력해주세요");

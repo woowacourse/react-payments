@@ -3,6 +3,7 @@ import Input from "../common/Input";
 import InputBox from "../common/InputBox";
 import InputGroup from "../common/InputGroup";
 import { isEnglish, isOverMaxLength } from "../../utils";
+import { INPUT_LENGTH } from "../../constants";
 
 interface NameInputProps {
   name: string;
@@ -15,7 +16,7 @@ const NameInput = ({ name, setName, errorMessage, setErrorMessage }: NameInputPr
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
 
-    if (isOverMaxLength(inputValue, 30)) {
+    if (isOverMaxLength(inputValue, INPUT_LENGTH.NAME)) {
       setErrorMessage("30자 이하로 입력해주세요");
       return;
     }
@@ -50,7 +51,9 @@ const LabelValue = ({ length }: LabelValueProps) => {
   return (
     <LabelContainer>
       <p>카드 소유자 이름(선택)</p>
-      <p>{length}/30</p>
+      <p>
+        {length}/{INPUT_LENGTH.NAME}
+      </p>
     </LabelContainer>
   );
 };

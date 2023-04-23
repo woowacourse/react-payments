@@ -4,6 +4,7 @@ import InputBox from "../common/InputBox";
 import InputGroup from "../common/InputGroup";
 import InputSeparator from "../common/InputSeparator";
 import { isNumber, isOverMaxLength } from "../../utils";
+import { INPUT_LENGTH, NUMBER_OF_INPUT } from "../../constants";
 
 interface CardNumberInputProps {
   cardNumber: string[];
@@ -23,7 +24,7 @@ const CardNumberInput = ({ cardNumber, setCardNumber, errorMessage, setErrorMess
   const handleChangeInput = (inputIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
 
-    if (isOverMaxLength(inputValue, 4)) return;
+    if (isOverMaxLength(inputValue, INPUT_LENGTH.CARD_NUMBER)) return;
 
     if (!isNumber(inputValue)) {
       setErrorMessage("숫자만 입력해주세요");
@@ -40,18 +41,18 @@ const CardNumberInput = ({ cardNumber, setCardNumber, errorMessage, setErrorMess
   };
 
   const isNextInputFocusable = (inputValue: string, inputIndex: number) => {
-    return inputValue.length > 3 && inputIndex < 3;
+    return inputValue.length === INPUT_LENGTH.CARD_NUMBER && inputIndex < NUMBER_OF_INPUT.CARD_NUMBER - 1;
   };
 
   return (
     <InputGroup labelValue="카드 번호" errorMessage={errorMessage}>
       <InputBox isError={!!errorMessage}>
         <Input ref={refs[0]} value={cardNumber[0]} onChange={handleChangeInput(0)} />
-        <InputSeparator isActive={cardNumber[0].length === 4}>-</InputSeparator>
+        <InputSeparator>-</InputSeparator>
         <Input ref={refs[1]} value={cardNumber[1]} onChange={handleChangeInput(1)} />
-        <InputSeparator isActive={cardNumber[1].length === 4}>-</InputSeparator>
+        <InputSeparator>-</InputSeparator>
         <Input ref={refs[2]} value={cardNumber[2]} type="password" onChange={handleChangeInput(2)} />
-        <InputSeparator isActive={cardNumber[2].length === 4}>-</InputSeparator>
+        <InputSeparator>-</InputSeparator>
         <Input ref={refs[3]} value={cardNumber[3]} type="password" onChange={handleChangeInput(3)} />
       </InputBox>
     </InputGroup>
