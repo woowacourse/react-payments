@@ -1,14 +1,14 @@
 import React from 'react';
 
-import { fetchData } from '../utils/fetchData';
+import type { FormCardAddProps } from '../type';
+import { sumbitCard } from '../utils/applicationUtil';
 import { useNavigate } from 'react-router-dom';
-import './FormCardAdd.css';
-import { CardType, FormCardAddProps } from '../type';
 import AddCardNumberInput from './AddCardNumberInput';
 import AddCardExpireDateInput from './AddCardExpireDateInput';
 import AddCardOwnerInput from './AddCardOwnerInput';
 import AddCardSecurityCodeInput from './AddCardSecurityCodeInput';
 import AddCardPasswordInput from './AddCardPasswordInput';
+import './FormCardAdd.css';
 
 const FormCardAdd = ({
   cardNumber,
@@ -22,28 +22,16 @@ const FormCardAdd = ({
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const { first, second, third, fourth } = cardNumber.value;
-
-    const postData: Omit<CardType, 'id'> = {
-      cardType: '현대',
-      cardNumber: {
-        first,
-        second,
-        third,
-        fourth,
-      },
-      cardOwner: cardOwner.value,
-      expired: cardExpire.value,
-      securityCode: securityCode.value,
-      cardPassword: {
+    try {
+      sumbitCard('현대', cardNumber.value, cardOwner.value, cardExpire.value, securityCode.value, {
         first: cardPassword1.value,
         second: cardPassword2.value,
-      },
-    };
-    if (!fetchData(postData)) {
-      alert('이미 등록된 카드입니다.');
+      });
+    } catch (error) {
+      alert('중복된 카드 입니다.');
       return;
     }
+
     navigate('/');
   };
 
