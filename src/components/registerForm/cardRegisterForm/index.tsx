@@ -21,30 +21,20 @@ function CardRegisterForm() {
   } = NUMBERS;
   const navigation = useNavigate();
   const [cardInput] = useContext(cardInfoContext);
-  const [nextShow, setNextShow] = useState(false);
   const { saveCard } = useCardList({ key: "card-list" });
 
-  useEffect(() => {
-    const { cardNumbers, expireDate, securityCode, password, ownerName } =
-      cardInput;
-    try {
-      const exceptOwnerName =
-        objectValueToString(cardNumbers).length !== MAX_CARD ||
-        expireDate.length !== MAX_EXPIREDATE ||
-        securityCode.length !== MAX_SECURITY ||
-        objectValueToString(password).length !== MAX_PASSWORD;
+  const { cardNumbers, expireDate, securityCode, password, ownerName } =
+    cardInput;
 
-      if (
-        (ownerName.length > 0 && ownerName.length < MIN_OWNER_NAME) ||
-        exceptOwnerName
-      ) {
-        throw new Error();
-      }
-      setNextShow(true);
-    } catch {
-      setNextShow(false);
-    }
-  }, [cardInput]);
+  const exceptOwnerName =
+    objectValueToString(cardNumbers).length !== MAX_CARD ||
+    expireDate.length !== MAX_EXPIREDATE ||
+    securityCode.length !== MAX_SECURITY ||
+    objectValueToString(password).length !== MAX_PASSWORD;
+
+  const isCardComplete =
+    (ownerName.length > 0 && ownerName.length < MIN_OWNER_NAME) ||
+    exceptOwnerName;
 
   const cardInputSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
@@ -59,7 +49,7 @@ function CardRegisterForm() {
       <OwnerNameInput />
       <SecurityCode />
       <CardPassword />
-      {nextShow && (
+      {!isCardComplete && (
         <Styled.ButtonContainer>
           <Styled.NextButton>다음</Styled.NextButton>
         </Styled.ButtonContainer>
