@@ -59,30 +59,32 @@ const CardNumberInput = ({
   return (
     <InputGroup labelValue='카드 번호' errorMessage={errorMessage}>
       <InputBox isError={!!errorMessage}>
-        {[0, 1, 2, 3].map((index) => (
-          <React.Fragment key={index}>
-            <Input
-              ref={refs[index]}
-              value={cardNumber[index]}
-              type={
-                index >= INPUT.CARD_NUMBER_VISIBLE_INPUT_ORDER
-                  ? 'password'
-                  : undefined
-              }
-              onChange={handleChangeInput(index)}
-            />
-            {index < INPUT.CARD_NUMBER_LAST_INPUT_ORDER && (
-              <InputSeparator
-                isActive={
-                  cardNumber[index].length ===
-                  INPUT_MAX_LENGTH.CARD_NUMBER_LENGTH
+        {Array.from({ length: INPUT_MAX_LENGTH.CARD_NUMBER_LENGTH }).map(
+          (_, index) => (
+            <React.Fragment key={index}>
+              <Input
+                ref={refs[index]}
+                value={cardNumber[index]}
+                type={
+                  index >= INPUT.CARD_NUMBER_VISIBLE_INPUT_ORDER
+                    ? 'password'
+                    : undefined
                 }
-              >
-                -
-              </InputSeparator>
-            )}
-          </React.Fragment>
-        ))}
+                onChange={handleChangeInput(index)}
+              />
+              {index < INPUT.CARD_NUMBER_LAST_INPUT_ORDER && (
+                <InputSeparator
+                  isActive={
+                    cardNumber[index].length ===
+                    INPUT_MAX_LENGTH.CARD_NUMBER_LENGTH
+                  }
+                >
+                  -
+                </InputSeparator>
+              )}
+            </React.Fragment>
+          )
+        )}
       </InputBox>
     </InputGroup>
   );
