@@ -58,8 +58,12 @@ const PasswordInput = ({ password, setPassword, errorMessage, setErrorMessage }:
         <InputBox width="43px" isError={!!errorMessage}>
           <Input type="password" ref={refs[1]} value={password[1]} onChange={handleChangeInput(1)}></Input>
         </InputBox>
-        <DotIcon />
-        <DotIcon />
+        <DotIconWrapper>
+          <DotIcon />
+        </DotIconWrapper>
+        <DotIconWrapper>
+          <DotIcon />
+        </DotIconWrapper>
       </BoxContainer>
     </InputGroup>
   );
@@ -68,6 +72,15 @@ const PasswordInput = ({ password, setPassword, errorMessage, setErrorMessage }:
 const BoxContainer = styled.div`
   display: flex;
   gap: 7px;
+`;
+
+const DotIconWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 43px;
+  height: 45px;
 `;
 
 export default PasswordInput;

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { DotIcon } from "../../assets/icons";
 import { CardPublicInfo } from "../../types/Card";
 
 interface CardItemProps {
@@ -14,8 +15,16 @@ const CardItem = ({ card }: CardItemProps) => {
           <CardNumberContainer>
             <p>{card.cardNumber[0]}</p>
             <p>{card.cardNumber[1]}</p>
-            <SecurityCardNumber type="password" value={card.cardNumber[2]} disabled />
-            <SecurityCardNumber type="password" value={card.cardNumber[3]} disabled />
+            <SecurityCardNumber>
+              {[...Array(card.cardNumber[2].length)].map((_, i) => (
+                <DotIcon key={i} color="white" />
+              ))}
+            </SecurityCardNumber>
+            <SecurityCardNumber>
+              {[...Array(card.cardNumber[3].length)].map((_, i) => (
+                <DotIcon key={i} color="white" />
+              ))}
+            </SecurityCardNumber>
           </CardNumberContainer>
           <CardInfoContainer>
             <CardNameContainer>{card.name || "NAME"}</CardNameContainer>
@@ -87,13 +96,13 @@ const CardNameContainer = styled.p`
   white-space: nowrap;
 `;
 
-const SecurityCardNumber = styled.input`
-  background: none;
-  border: none;
-  color: #ffffff;
+const SecurityCardNumber = styled.p`
+  display: flex;
+  align-items: center;
+  gap: 5px;
 
   text-align: center;
-  letter-spacing: 5px;
+  color: #ffffff;
 `;
 
 export default CardItem;
