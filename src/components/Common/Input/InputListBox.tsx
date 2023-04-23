@@ -6,15 +6,26 @@ interface InputListBoxProps {
   inputInformation: React.ComponentPropsWithRef<typeof Input>[];
   bridgeLetter?: string;
   autoFocus?: boolean;
+  regExp?: RegExp;
+  getInputListValue: (value: string[]) => void;
   children?: React.ReactNode;
 }
 
-function InputListBox({ inputInformation, bridgeLetter = '', autoFocus = true, children }: InputListBoxProps) {
+function InputListBox({
+  inputInformation,
+  bridgeLetter = '',
+  autoFocus = true,
+  regExp,
+  getInputListValue,
+  children,
+}: InputListBoxProps) {
   const [value, setValue] = useState<string[]>(Array.from({ length: inputInformation.length }));
   const refs = useRef<HTMLInputElement[]>([]);
-  console.log(value);
   const onChange = (currentIndex: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
     const { target } = e;
+    if (regExp) {
+      target.value = target.value.replace(regExp, '');
+    }
     setValue(prev => prev.map((prevValue, index) => (index === currentIndex ? target.value : prevValue)));
     if (autoFocus) {
       if (target.value.length === 0) {
@@ -24,6 +35,7 @@ function InputListBox({ inputInformation, bridgeLetter = '', autoFocus = true, c
         refs.current[currentIndex + 1]?.focus();
       }
     }
+    getInputListValue(value);
   };
 
   return (
