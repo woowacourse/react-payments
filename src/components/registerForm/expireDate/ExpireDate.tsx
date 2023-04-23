@@ -1,68 +1,90 @@
 import React, { useState, useContext } from 'react';
 
 import styled, { css } from 'styled-components';
-import { MMYY_REGEXP, ONLY_NUMBER_REGEXP } from '../../../utils/regexp';
 import FormLabel from '../../@common/FormLabel';
 import Input from '../../@common/Input';
 import ErrorSpan from '../../@common/ErrorSpan';
-import CreditCardContext from '../../../contexts/InputValueContext';
+import { CreditCardContext } from '../../../contexts/CreditCardContext';
+import { ONLY_NUMBER_OR_SLASH_REGEX } from '../../../utils/regexp';
 
 function ExpireDate() {
   const [creditCardInfo, setCreditCardInfo] = useContext(CreditCardContext);
-  const [expireError, setExpireError] = useState(false);
+  const [validStatus, setValidStatus] = useState({
+    isValid: true,
+    message: '',
+  });
 
-  const expireDateChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    const enteredValue = event.currentTarget.value as string;
-    const [curMM, _, curYY] = new Date().toLocaleDateString('en-US').split('/');
-    const [MM, YY] = enteredValue.split('/');
-    const date = enteredValue.replace('/', '');
-    console.log('>>> date:', date);
+  const reArrange = (value: string) => {
+    const newValue = value.replace('/', '');
+    const newValueList = [newValue.slice(0, 2), newValue.slice(2)];
 
-    // if (!ONLY_NUMBER_REGEXP.test(date)) return;
-    if (!setCreditCardInfo) return;
-
-    const isDateValid =
-      enteredValue.length > 0 &&
-      (!MMYY_REGEXP.test(date) || curYY.slice(2) > YY || (curYY.slice(2) === YY && curMM > MM));
-
-    try {
-      if (isDateValid) {
-        throw new Error();
-      }
-
-      setExpireError(false);
-    } catch {
-      setExpireError(true);
-    } finally {
-      if (isDateValid && enteredValue.length === 5) {
-        console.log('1');
-        // FIXME: 버그 있을 예정
-        setCreditCardInfo('expirationDate', enteredValue.split(' / '));
-        return;
-      }
-      console.log('2');
-      // FIXME:
-      const expiration = date.match(/.{1,2}/g) ?? [];
-      console.log('>>> date:', date, '2');
-
-      setCreditCardInfo('expirationDate', expiration);
+    if (newValue.length > 2) {
+      return newValueList.join('/');
+    } else {
+      return newValueList[0];
     }
   };
 
+  const _onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+    const enteredDate = reArrange(event.currentTarget.value as string);
+
+    if (!ONLY_NUMBER_OR_SLASH_REGEX.test(enteredDate)) {
+      setValidStatus({
+        isValid: false,
+        message: '숫자만 입력 가능합니다.',
+      });
+
+      return;
+    }
+
+    if (!setCreditCardInfo) return;
+
+    setValidStatus({
+      isValid: true,
+      message: '',
+    });
+
+    setCreditCardInfo('expirationDate', enteredDate.split('/') as [string, string]);
+  };
+
+  const refineExpirationDate = ([month, year]: string[]): string => {
+    if (month === '') {
+      return '';
+    }
+
+    if (!year) {
+      return `${month}/`;
+    }
+
+    return `${month}/${year}`;
+  };
+
+  const _onBlur: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+    const enteredNumber = event.currentTarget.value as string;
+
+    if (enteredNumber.length !== 5) {
+      return setValidStatus({
+        isValid: false,
+        message: '만료일을 모두 작성해주세요.',
+      });
+    }
+  };
   return (
     <ExpireDateContainer>
       <FormLabel>{'만료일'}</FormLabel>
       <Input
-        value={creditCardInfo.expirationDate.join(' / ')}
-        onChange={expireDateChange}
+        value={refineExpirationDate(creditCardInfo.expirationDate)}
+        onChange={_onChange}
+        onBlur={_onBlur}
         maxLength={5}
         customInputStyle={ExpireDateInput}
         placeholder="MM / YY"
       />
-      {expireError && <ErrorSpan>{'유효한 만료일이 아닙니다.'}</ErrorSpan>}
+      {!validStatus.isValid && <ErrorSpan>{validStatus.message}</ErrorSpan>}
     </ExpireDateContainer>
   );
 }
+
 export default ExpireDate;
 
 const ExpireDateContainer = styled.div`
