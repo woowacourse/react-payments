@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState } from 'react';
 
 export interface UseInputProps {
   value: string;
@@ -18,14 +18,14 @@ export const useInput = (
   { name, validate = () => true, errorMessage }: UseInputOptionProps
 ): UseInputProps => {
   const [value, setValue] = useState(initialValue);
-  const [error, setError] = useState<string | undefined>("");
+  const [error, setError] = useState<string | undefined>('');
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value;
 
     if (validate(value)) {
       setValue(value);
-      setError("");
+      setError('');
       return;
     }
 

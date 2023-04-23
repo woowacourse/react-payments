@@ -1,9 +1,9 @@
-import { Meta, StoryObj } from "@storybook/react";
-import AddCardPage from "../../pages/AddCardPage";
+import { Meta, StoryObj } from '@storybook/react';
+import AddCardPage from '../../pages/AddCardPage';
 
 const meta: Meta<typeof AddCardPage> = {
   component: AddCardPage,
-  title: "Page",
+  title: 'Page',
 };
 
 export default meta;

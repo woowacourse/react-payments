@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components";
-import Input from "../../common/Input";
-import { UseInputProps } from "../../../hooks/useInput";
+import React from 'react';
+import styled from 'styled-components';
+import Input from '../../common/Input';
+import { UseInputProps } from '../../../hooks/useInput';
 
 export interface PasswordInputProps {
   firstPassword: UseInputProps;
@@ -50,6 +50,7 @@ export default function PasswordInput({
           required
           type="password"
           textAlign="center"
+          tabIndex={8}
           {...firstPassword}
         />
       </GrayWrapper>
@@ -60,6 +61,7 @@ export default function PasswordInput({
           required
           type="password"
           textAlign="center"
+          tabIndex={9}
           {...secondPassword}
         />
       </GrayWrapper>

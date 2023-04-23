@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import Input from "../../common/Input";
-import { UseInputProps } from "../../../hooks/useInput";
+import styled from 'styled-components';
+import Input from '../../common/Input';
+import { UseInputProps } from '../../../hooks/useInput';
 
 interface CardNumberInputProps {
   firstNumber: UseInputProps;
@@ -39,6 +39,8 @@ export default function CardNumberInput({
         type="text"
         required
         textAlign="center"
+        autoFocus
+        tabIndex={0}
         {...firstNumber}
       />
       <Dash>-</Dash>
@@ -47,6 +49,7 @@ export default function CardNumberInput({
         maxLength={4}
         type="text"
         required
+        tabIndex={1}
         textAlign="center"
         {...secondNumber}
       />
@@ -57,6 +60,7 @@ export default function CardNumberInput({
         type="password"
         required
         textAlign="center"
+        tabIndex={2}
         {...thirdNumber}
       />
       <Dash>-</Dash>
@@ -66,6 +70,7 @@ export default function CardNumberInput({
         type="password"
         required
         textAlign="center"
+        tabIndex={3}
         {...fourthNumber}
       />
     </Wrapper>

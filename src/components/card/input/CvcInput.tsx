@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components";
-import Input from "../../common/Input";
-import { UseInputProps } from "../../../hooks/useInput";
+import React from 'react';
+import styled from 'styled-components';
+import Input from '../../common/Input';
+import { UseInputProps } from '../../../hooks/useInput';
 
 interface CvcInputProps {
   cvc: UseInputProps;
@@ -27,6 +27,7 @@ export default function CvcInput({ cvc }: CvcInputProps) {
         maxLength={3}
         required
         id="cvc"
+        tabIndex={7}
         {...cvc}
       />
     </Wrapper>

@@ -1,5 +1,5 @@
-import { ChangeEvent, InputHTMLAttributes } from "react";
-import styled from "styled-components";
+import { ChangeEvent, InputHTMLAttributes } from 'react';
+import styled from 'styled-components';
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   textAlign?: string;
@@ -16,7 +16,7 @@ const StyledInput = styled.input<{ textAlign?: string }>`
 `;
 
 export default function Input({
-  textAlign = "baseline",
+  textAlign = 'baseline',
   isNumber,
   ...rest
 }: InputProps) {
@@ -26,7 +26,7 @@ export default function Input({
     if (isNumber) {
       event.currentTarget.value = event.currentTarget.value.replace(
         /[^0-9]/g,
-        ""
+        ''
       );
     }
   };
@@ -34,7 +34,7 @@ export default function Input({
   return (
     <StyledInput
       textAlign={textAlign}
-      inputMode={isNumber ? "numeric" : "text"}
+      inputMode={isNumber ? 'numeric' : 'text'}
       onInput={onInput}
       {...rest}
     />

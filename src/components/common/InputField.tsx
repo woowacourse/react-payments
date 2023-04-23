@@ -1,11 +1,11 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export type InputTitle =
-  | "cardNumber"
-  | "expiracy"
-  | "owner"
-  | "cvc"
-  | "password";
+  | 'cardNumber'
+  | 'expiracy'
+  | 'owner'
+  | 'cvc'
+  | 'password';
 
 export interface InputContainerProps {
   kind: InputTitle;
@@ -15,24 +15,24 @@ export interface InputContainerProps {
 
 const INPUT_INFO = {
   cardNumber: {
-    title: "카드 번호",
-    width: "318px",
+    title: '카드 번호',
+    width: '318px',
   },
   expiracy: {
-    title: "만료일",
-    width: "137px",
+    title: '만료일',
+    width: '137px',
   },
   owner: {
-    title: "카드 소유자 이름(선택)",
-    width: "318px",
+    title: '카드 소유자 이름(선택)',
+    width: '318px',
   },
   cvc: {
-    title: "보안 코드(CVC/CVV)",
-    width: "122px",
+    title: '보안 코드(CVC/CVV)',
+    width: '122px',
   },
   password: {
-    title: "카드 비밀번호",
-    width: "174px",
+    title: '카드 비밀번호',
+    width: '174px',
   },
 };
 

@@ -1,8 +1,8 @@
-import React from "react";
-import styled from "styled-components";
-import { UseInputProps } from "../../../hooks/useInput";
-import Input from "../../common/Input";
-import ToolTip from "../../common/ToolTip";
+import React from 'react';
+import styled from 'styled-components';
+import { UseInputProps } from '../../../hooks/useInput';
+import Input from '../../common/Input';
+import ToolTip from '../../common/ToolTip';
 
 interface ExpiracyInputProps {
   year: UseInputProps;
@@ -43,6 +43,7 @@ export default function ExpiracyInput({ year, month }: ExpiracyInputProps) {
           required
           placeholder="MM"
           textAlign="center"
+          tabIndex={4}
           {...month}
         />
       </InputWrapper>
@@ -55,6 +56,7 @@ export default function ExpiracyInput({ year, month }: ExpiracyInputProps) {
           required
           placeholder="YY"
           textAlign="center"
+          tabIndex={5}
           {...year}
         />
       </InputWrapper>

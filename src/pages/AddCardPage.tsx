@@ -107,7 +107,7 @@ export default function AddCardPage({ onSubmit, onClick }: AddCardPageProps) {
   const [isFormfilled, setIsFormfilled] = useState(true);
 
   const handleToolTip = () => {
-    setIsOpenToolTip(prev => !prev);
+    setIsOpenToolTip((prev) => !prev);
   };
 
   useEffect(() => {
@@ -148,7 +148,8 @@ export default function AddCardPage({ onSubmit, onClick }: AddCardPageProps) {
       <InputWrapperParent
         onSubmit={onSubmit}
         ref={cardForm}
-        onKeyDown={e => onInputKeydown(e)}>
+        onKeyDown={(e) => onInputKeydown(e)}
+      >
         <InputWrapper>
           <InputField kind="cardNumber">
             <CardNumberInput

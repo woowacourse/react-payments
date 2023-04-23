@@ -1,8 +1,10 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
+import { DISMISS_TAB_INDEX } from '../../constant';
 
 interface ToolTipProps {
   text: string;
+  tabIndex?: number;
 }
 
 const Wrapper = styled.div`
@@ -15,6 +17,9 @@ const Wrapper = styled.div`
   bottom: 35px;
 `;
 
-export default function ToolTip({ text }: ToolTipProps) {
-  return <Wrapper>{text}</Wrapper>;
+export default function ToolTip({
+  text,
+  tabIndex = DISMISS_TAB_INDEX,
+}: ToolTipProps) {
+  return <Wrapper tabIndex={tabIndex}>{text}</Wrapper>;
 }

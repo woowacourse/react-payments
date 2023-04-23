@@ -1,8 +1,8 @@
-import React, { MouseEvent } from "react";
-import styled from "styled-components";
-import { CardInfo } from "../types";
-import Card from "../components/card/Card";
-import AddCardButton from "../components/card/button/AddCardButton";
+import React, { MouseEvent } from 'react';
+import styled from 'styled-components';
+import { CardInfo } from '../types';
+import Card from '../components/card/Card';
+import AddCardButton from '../components/card/button/AddCardButton';
 
 interface HomePageProps {
   cardList: CardInfo[];

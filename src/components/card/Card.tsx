@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 interface CardProps {
   cardNumberSet: string[];
@@ -84,12 +84,12 @@ export default function Card({ cardNumberSet, owner, expiracy }: CardProps) {
           {cardNumberSet.map((cardNumberItem: string, index: number) => (
             <StyledCardNumberItem key={`${index}${cardNumberItem}`}>
               {index >= ENCRYPT_INDEX
-                ? "·".repeat(cardNumberItem.length)
+                ? '·'.repeat(cardNumberItem.length)
                 : cardNumberItem}
             </StyledCardNumberItem>
           ))}
         </StyledCardNumber>
-        <StyledOwnerName>{owner ? owner : "NAME"}</StyledOwnerName>
+        <StyledOwnerName>{owner ? owner : 'NAME'}</StyledOwnerName>
         <StyledExpiracy>{expiracy}</StyledExpiracy>
       </div>
     </StyledCard>

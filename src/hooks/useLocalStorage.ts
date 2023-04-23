@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-export const useLocalStorage = <T,>(
+export const useLocalStorage = <T>(
   initialValue: T,
   key: string
 ): [T, (data: T) => void] => {
@@ -12,7 +12,7 @@ export const useLocalStorage = <T,>(
   };
 
   useEffect(() => {
-    const savedData = JSON.parse(localStorage.getItem(key) || "[]");
+    const savedData = JSON.parse(localStorage.getItem(key) || '[]');
     if (savedData && savedData.length > 0) setData(savedData);
   }, [key]);
 

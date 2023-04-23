@@ -1,9 +1,9 @@
-import { Meta, StoryObj } from "@storybook/react";
-import Homepage from "../../pages/HomePage";
+import { Meta, StoryObj } from '@storybook/react';
+import Homepage from '../../pages/HomePage';
 
 const meta: Meta<typeof Homepage> = {
   component: Homepage,
-  title: "Page",
+  title: 'Page',
 };
 
 export default meta;

@@ -1,11 +1,11 @@
-import "./styles/index.css";
+import './styles/index.css';
 
-import { FormEvent, useState } from "react";
-import { ADD_CARD_PAGE, HOME_PAGE, LOCAL_STORAGE_CARD_KEY } from "./constant";
-import { CardInfo, PageInfo } from "./types";
-import { useLocalStorage } from "./hooks/useLocalStorage";
-import Homepage from "./pages/HomePage";
-import AddCardPage from "./pages/AddCardPage";
+import { FormEvent, useState } from 'react';
+import { ADD_CARD_PAGE, HOME_PAGE, LOCAL_STORAGE_CARD_KEY } from './constant';
+import { CardInfo, PageInfo } from './types';
+import { useLocalStorage } from './hooks/useLocalStorage';
+import Homepage from './pages/HomePage';
+import AddCardPage from './pages/AddCardPage';
 
 export default function App() {
   const [pageIndex, setPageIndex] = useState<PageInfo>(HOME_PAGE);
@@ -51,6 +51,7 @@ export default function App() {
 
     const updatedCardList = [...cardList, newCard];
     setCardList(updatedCardList);
+    setPageIndex(HOME_PAGE);
   };
 
   return (
