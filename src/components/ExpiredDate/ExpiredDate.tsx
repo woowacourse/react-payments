@@ -1,15 +1,22 @@
 import { useRef } from 'react';
-import { YEAR_REGEX, MONTH_REGEX } from '../../constants/regex';
 import CardInput from '../CardInput/CardInput';
 import CardLabel from '../CardLabel/CardLabel';
 import * as Styled from './ExpiredDate.styles';
 
 interface ExpiredDateProps {
   expiredDate: Record<number, string>;
-  setExpiredDate: React.Dispatch<React.SetStateAction<Record<number, string>>>;
+  checkExpiredDate: (order: number, value: string) => boolean;
+  validateDate: (
+    order: number,
+    refs: Record<number, React.RefObject<HTMLInputElement>>
+  ) => void;
 }
 
-const ExpiredDate = ({ expiredDate, setExpiredDate }: ExpiredDateProps) => {
+const ExpiredDate = ({
+  expiredDate,
+  checkExpiredDate,
+  validateDate,
+}: ExpiredDateProps) => {
   const cardExpiredDateRefs: Record<
     number,
     React.RefObject<HTMLInputElement>
@@ -21,35 +28,8 @@ const ExpiredDate = ({ expiredDate, setExpiredDate }: ExpiredDateProps) => {
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!(e.target instanceof HTMLInputElement)) return;
     const currentOrder = Number(e.target.dataset['order']);
-
-    if (/[^0-9]/g.test(e.target.value)) {
-      return;
-    }
-    setExpiredDate({ ...expiredDate, [currentOrder]: e.target.value });
-
-    validateDate(currentOrder);
-  };
-
-  const validateDate = (currentOrder: number) => {
-    const currentRef = cardExpiredDateRefs[currentOrder];
-
-    if (currentRef.current === null) return;
-    // todo
-    if (currentRef.current.value.length !== 2) return;
-
-    if (currentOrder === 1) {
-      if (YEAR_REGEX.test(currentRef.current.value)) return;
-      setExpiredDate({ ...expiredDate, 1: '' });
-      return;
-    }
-
-    cardExpiredDateRefs[currentOrder + 1].current?.focus();
-
-    if (!MONTH_REGEX.test(currentRef.current.value)) {
-      setExpiredDate({ ...expiredDate, 0: '' });
-      currentRef.current.focus();
-      return;
-    }
+    checkExpiredDate(currentOrder, e.target.value);
+    validateDate(currentOrder, cardExpiredDateRefs);
   };
 
   return (

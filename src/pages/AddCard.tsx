@@ -14,6 +14,7 @@ import useCardNumbers from '../hooks/useCardNumbers';
 import useCardOwnerName from '../hooks/useCardOwnerName';
 import useCardPassword from '../hooks/useCardPassword';
 import useSecurityCode from '../hooks/useSecurityCode';
+import useExpiredDate from '../hooks/useExpiredDate';
 
 const Wrapper = styled.div`
   display: flex;
@@ -41,7 +42,8 @@ const AddCard = ({ cards, setCards }: SetCardsProps) => {
   const { cardOwnerName, checkCardOwnerName } = useCardOwnerName();
   const { password, checkPassword } = useCardPassword();
   const { securityCode, checkSecurityCode } = useSecurityCode();
-  const { expiredDate, setExpiredDate, disabled } = useAddCard();
+  const { expiredDate, checkExpiredDate, validateDate } = useExpiredDate();
+  const { disabled } = useAddCard();
 
   const navigate = useNavigate();
 
@@ -70,7 +72,8 @@ const AddCard = ({ cards, setCards }: SetCardsProps) => {
         />
         <ExpiredDate
           expiredDate={expiredDate}
-          setExpiredDate={setExpiredDate}
+          checkExpiredDate={checkExpiredDate}
+          validateDate={validateDate}
         />
         <CardOwnerName
           cardOwnerName={cardOwnerName}
