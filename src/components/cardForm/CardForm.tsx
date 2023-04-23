@@ -10,11 +10,10 @@ import { FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 
 interface CardFormProps {
-  cardInfo: CardType;
   setCardInfo: React.Dispatch<React.SetStateAction<CardType>>;
 }
 
-export const CardForm = ({ cardInfo, setCardInfo }: CardFormProps) => {
+export const CardForm = ({ setCardInfo }: CardFormProps) => {
   const navigate = useNavigate();
 
   const moveToHome = () => {
@@ -52,7 +51,7 @@ export const CardForm = ({ cardInfo, setCardInfo }: CardFormProps) => {
         setCardNumbers={(index: number, numbers: string) => {
           setCardInfo((prev) => {
             prev.numbers[index] = numbers;
-            return { ...prev, numbers: cardInfo.numbers };
+            return { ...prev, numbers: prev.numbers };
           });
         }}
       />
@@ -62,7 +61,6 @@ export const CardForm = ({ cardInfo, setCardInfo }: CardFormProps) => {
         }}
       />
       <OwnerInput
-        owner={cardInfo.owner}
         setOwner={(owner: string) => {
           setCardInfo((prev) => ({ ...prev, owner }));
         }}
