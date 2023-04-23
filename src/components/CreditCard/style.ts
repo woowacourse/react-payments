@@ -38,7 +38,7 @@ export const Box = styled.div`
     min-width: 100%;
 `;
 
-export const CreditCardConatiner = styled.div`
+export const CreditCardContainer = styled.div`
     min-width: 100%;
     max-width: 100%;
     display: grid;

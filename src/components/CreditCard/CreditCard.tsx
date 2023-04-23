@@ -29,14 +29,14 @@ function CreditCard({ fullFilled, creditCard: { expiry, number, owner } }: Credi
         <S.CreditCardNumber>
           {convertSecuredCreditCard(number).map((num, idx) => <div key={idx}>{num}</div>)}
         </S.CreditCardNumber>
-        <S.CreditCardConatiner>
+        <S.CreditCardContainer>
           <S.CreditCardBox>
             {owner}
           </S.CreditCardBox>
           <S.CreditCardBox>
             {expiry}
           </S.CreditCardBox>
-        </S.CreditCardConatiner>
+        </S.CreditCardContainer>
       </S.Box>
     </S.CreditCardLayout>
   );
