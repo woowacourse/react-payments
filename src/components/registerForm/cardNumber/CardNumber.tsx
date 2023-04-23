@@ -15,7 +15,6 @@ export const CardNumber = () => {
     message: '',
   });
 
-  // auto-focus
   const refs = [
     useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
@@ -32,7 +31,6 @@ export const CardNumber = () => {
     const enteredNumber = event.currentTarget.value as string;
     const inputIndex = Number(event.currentTarget.dataset['index']);
 
-    // 숫자 외 입력 방지 그리고 오류 메세지 렌더링
     if (isNaN(Number(enteredNumber))) {
       return setValidStatus({
         isValid: false,
@@ -55,8 +53,6 @@ export const CardNumber = () => {
 
   const _onBlur: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     const enteredNumber = event.currentTarget.value as string;
-
-    console.log(enteredNumber);
 
     if (enteredNumber.length !== 4) {
       return setValidStatus({
