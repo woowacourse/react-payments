@@ -34,7 +34,7 @@ const Input = forwardRef<HTMLInputElement, Props>(function (
 export default Input;
 
 const InputStyle = styled.input<StyleInputProps>`
-  width: ${(props) => props.width ?? "100%"};
+  width: 100%;
   height: 45px;
 
   background-color: #ecebf1;
