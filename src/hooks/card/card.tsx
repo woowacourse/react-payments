@@ -19,18 +19,18 @@ export function useMyCardRegister() {
     inputs.forEach((input, i) => {
       if (input !== e.target) return;
 
-      const nextInvalidInput = findInvalidInput(inputs.slice(i + 1));
-      const prevInvalidInput = findInvalidInput(inputs.slice(0, i).reverse());
+      const nextInput = findInvalidInput(inputs.slice(i + 1)) ?? inputs[i + 1];
+      const prevInput = findInvalidInput(inputs.slice(0, i).reverse()) ?? inputs[i - 1];
 
       if (input.name === 'name') {
-        input.value.length === input.maxLength && nextInvalidInput?.focus();
-        input.value === '' && prevInvalidInput?.focus();
+        input.value.length === input.maxLength && nextInput?.focus();
+        !input.value && prevInput?.focus();
 
         return;
       }
 
-      input.validity.valid && nextInvalidInput?.focus();
-      input.value === '' && prevInvalidInput?.focus();
+      input.validity.valid && nextInput?.focus();
+      !input.value && prevInput?.focus();
     });
 
     setIsAllValid(validateAllInputs(inputs));
