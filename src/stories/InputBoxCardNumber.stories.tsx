@@ -1,5 +1,4 @@
-import { ChangeEvent } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta } from "@storybook/react";
 
 import InputBoxCardNumber from "../component/CardInputPage/InputBoxCardNumber/InputBoxCardNumber";
 
@@ -10,6 +9,6 @@ const meta: Meta = {
 
 export default meta;
 
-export const InputTest = (args: any) => (
+export const InputTest = () => (
   <InputBoxCardNumber setIsComplete={() => {}} setPreviewDataHandler={() => {}}></InputBoxCardNumber>
 );

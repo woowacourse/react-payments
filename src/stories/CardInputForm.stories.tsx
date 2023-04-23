@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta } from "@storybook/react";
 
 import CardInputForm from "../component/CardInputPage/CardInputForm/CardInputForm";
 
@@ -9,6 +9,6 @@ const meta: Meta = {
 
 export default meta;
 
-export const InputTest = (args: any) => (
+export const InputTest = () => (
   <CardInputForm addNewCard={() => {}}></CardInputForm>
 );
