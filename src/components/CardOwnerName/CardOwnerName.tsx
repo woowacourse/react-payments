@@ -1,27 +1,22 @@
 import { useRef } from 'react';
-import { ALPHABET_REGEX } from '../../constants/regex';
 import CardInput from '../CardInput/CardInput';
 import CardLabel from '../CardLabel/CardLabel';
 import * as Styled from './CardOwnerName.styles';
 
 interface CardOwnerNameProps {
   cardOwnerName: string;
-  setCardOwnerName: React.Dispatch<React.SetStateAction<string>>;
+  checkCardOwnerName: (value: string) => void;
 }
 
 const CardOwnerName = ({
   cardOwnerName,
-  setCardOwnerName,
+  checkCardOwnerName,
 }: CardOwnerNameProps) => {
   const nameRef = useRef<HTMLInputElement>(null);
 
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!(e.target instanceof HTMLInputElement)) return;
-
-    if (e.target.value.length === 0) setCardOwnerName('');
-    if (!ALPHABET_REGEX.test(e.target.value)) return;
-
-    setCardOwnerName(e.target.value.toUpperCase());
+    checkCardOwnerName(e.target.value);
   };
 
   return (

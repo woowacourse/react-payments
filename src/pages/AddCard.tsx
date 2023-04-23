@@ -11,6 +11,7 @@ import Header from '../components/Header/Header';
 import { CardType } from '../types/Card';
 import useAddCard from '../hooks/useAddCard';
 import useCardNumbers from '../hooks/useCardNumbers';
+import useCardOwnerName from '../hooks/useCardOwnerName';
 
 const Wrapper = styled.div`
   display: flex;
@@ -35,12 +36,10 @@ interface SetCardsProps {
 
 const AddCard = ({ cards, setCards }: SetCardsProps) => {
   const { cardNumbers, checkCardNumbers } = useCardNumbers();
-
+  const { cardOwnerName, checkCardOwnerName } = useCardOwnerName();
   const {
     expiredDate,
     setExpiredDate,
-    cardOwnerName,
-    setCardOwnerName,
     securityCode,
     setSecurityCode,
     password,
@@ -79,7 +78,7 @@ const AddCard = ({ cards, setCards }: SetCardsProps) => {
         />
         <CardOwnerName
           cardOwnerName={cardOwnerName}
-          setCardOwnerName={setCardOwnerName}
+          checkCardOwnerName={checkCardOwnerName}
         />
         <SecurityCode
           securityCode={securityCode}
