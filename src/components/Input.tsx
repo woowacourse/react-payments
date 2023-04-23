@@ -2,17 +2,21 @@
 import { forwardRef } from 'react';
 import styled, { css } from 'styled-components';
 
-interface Props extends React.HTMLAttributes<HTMLInputElement> {
+interface InputProps extends React.HTMLAttributes<HTMLInputElement> {
+  type?: string;
+  maxLength?: number;
   resetStyle?: boolean;
   backgroundColor?: string;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
-const Input = forwardRef<HTMLInputElement, Props>(({ backgroundColor, resetStyle = true, ...props }, ref) => (
+export type { InputProps };
+
+const Input = forwardRef<HTMLInputElement, InputProps>(({ backgroundColor, resetStyle = true, ...props }, ref) => (
   <StyledInput backgroundColor={backgroundColor} {...props} ref={ref} resetStyle={resetStyle} />
 ));
 
-const StyledInput = styled.input<Props>`
+const StyledInput = styled.input<InputProps>`
   background-color: ${({ backgroundColor }) => backgroundColor ?? null};
   ${({ resetStyle }) =>
     resetStyle &&
