@@ -1,8 +1,8 @@
 export interface CreditCard {
-  name?: string;
-  date?: string;
+  owner: string;
+  expirationDate: string;
   bank?: string;
-  number?: number[];
-  securityCode?: number;
-  password?: number[];
+  number: number[];
+  securityCode: string;
+  password: number[];
 }

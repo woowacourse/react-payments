@@ -16,12 +16,12 @@ interface Props {
   addNewCard: (card: CreditCard) => void;
 }
 
-const initialCard = {
-  name: "",
-  date: "",
+const initialCard: CreditCard = {
+  owner: "",
+  expirationDate: "",
   bank: "",
   number: [],
-  securityCode: 0,
+  securityCode: "",
   password: [],
 };
 
@@ -51,15 +51,15 @@ export default function CardInputForm(props: Props) {
     const formData = new FormData(formElement.current);
 
     const card: CreditCard = {
-      name: formData.get("card-owner")?.toString(),
-      date: formData.get("expiration-date")?.toString(),
+      owner: formData.get("card-owner")?.toString() as string,
+      expirationDate: formData.get("expiration-date")?.toString() as string,
       number: [
         formData.get("card-number-1"),
         formData.get("card-number-2"),
         formData.get("card-number-3"),
         formData.get("card-number-4"),
       ].map(Number),
-      securityCode: Number(formData.get("security-code")),
+      securityCode: formData.get("security-code")?.toString() as string,
       password: [
         formData.get("card-password-1"),
         formData.get("card-password-2"),
@@ -83,12 +83,12 @@ export default function CardInputForm(props: Props) {
       return;
     }
 
-    if (key === "date") {
+    if (key === "expirationDate") {
       console.log(isExpirationDateComplete);
       setNowCardInfo({ ...nowCardInfo, [key]: value });
       return;
     }
-    if (key === "name" && isOwnerComplete)
+    if (key === "owner" && isOwnerComplete)
       setNowCardInfo({ ...nowCardInfo, [key]: value });
   };
 

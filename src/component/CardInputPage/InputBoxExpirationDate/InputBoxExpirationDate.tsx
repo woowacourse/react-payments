@@ -41,7 +41,8 @@ export default function InputBoxExpirationDate(props: Props) {
         ? setInputStatus(INPUT_STATUS.COMPLETE)
         : setInputStatus(INPUT_STATUS.NOT_COMPLETE);
 
-      e.target.value.length === 5 && changeNowCardInfo("date", e.target.value);
+      e.target.value.length === 5 &&
+        changeNowCardInfo("expirationDate", e.target.value);
     } else {
       setInputStatus(INPUT_STATUS.ERROR);
     }

@@ -37,7 +37,7 @@ export default function InputBoxOwner(props: Props) {
 
     if (validateCardOwner(e.target.value)) {
       setInputStatus(INPUT_STATUS.COMPLETE);
-      changeNowCardInfo("name", e.target.value);
+      changeNowCardInfo("owner", e.target.value);
     } else {
       setInputStatus(INPUT_STATUS.ERROR);
     }
