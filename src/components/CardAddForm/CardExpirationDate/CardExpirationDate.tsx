@@ -1,5 +1,5 @@
 import { ChangeEvent, FocusEvent } from 'react';
-import { CardInputValidation, ExpirationDateFormat } from '../../../types';
+import { CardInputValidation, ExpirationDate } from '../../../types';
 import { EXPIRATION_DATE_INPUT_MAX_LENGTH } from '../../../constants';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
@@ -11,7 +11,7 @@ import { formatDisplayedExpirationDate } from '../../../utils/formatter';
 interface CardExpirationDateProps {
   changeInputValidation: (key: keyof CardInputValidation, value: boolean) => void;
   onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  value: ExpirationDateFormat;
+  value: ExpirationDate;
 }
 
 function CardExpirationDate({

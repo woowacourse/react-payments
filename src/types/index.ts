@@ -3,14 +3,14 @@ interface SupportingTextMessage {
   error?: string;
 }
 
-interface ExpirationDateFormat {
+interface ExpirationDate {
   month: string;
   year: string;
 }
 
 interface Card {
   cardNumber: string;
-  expirationDate: ExpirationDateFormat;
+  expirationDate: ExpirationDate;
   ownerName?: string;
   securityCode: string;
   password: string[];
@@ -26,7 +26,7 @@ type MultipleInputFieldCardInformation = 'password';
 
 export type {
   SupportingTextMessage,
-  ExpirationDateFormat,
+  ExpirationDate,
   Card,
   CardInputValidation,
   CardInformation,
