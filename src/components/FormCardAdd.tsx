@@ -7,6 +7,8 @@ import { fetchData } from '../utils/fetchData';
 import { useNavigate } from 'react-router-dom';
 import './FormCardAdd.css';
 import { CardType, FormCardAddProps } from '../type';
+import Tooltip from './CVCTooltip';
+import { CVC_TOOLTIP_DETAIL, CVC_TOOLTIP_TITLE } from '../utils/constants';
 
 const FormCardAdd = ({
   cardNumber,
@@ -155,13 +157,7 @@ const FormCardAdd = ({
             passwordType="password-cvc"
             onFocus={moveFocus}
           />
-          <button type="button" className="cvc-info-button">
-            <img src={cvcInfo} alt="cvc_info" />
-          </button>
-          <div className="cvc-info-box">
-            <p>CVC란?</p>
-            <p>카드 뒷면의 3자리 숫자입니다.</p>
-          </div>
+          <Tooltip title={CVC_TOOLTIP_TITLE} detail={CVC_TOOLTIP_DETAIL} />
         </div>
       </div>
       <div className="card-password-container">
