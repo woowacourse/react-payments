@@ -17,8 +17,19 @@ const cardNumberInputInfo = {
   type: "text",
 };
 
+const hideNumbers = (numbers: string): string => {
+  const hiddenNumbers = `${numbers.slice(0, 8)}${"●".repeat(numbers.slice(8).length)}`;
+  return (hiddenNumbers.match(/\d{1,4}|●{1,4}/g) ?? []).join(" - ");
+};
+
 export const CardNumberInput = ({ cardNumbers, setCardNumbers, setIsCompleted }: CardNumberInputProps) => {
   const [postText, setPostText] = useState("");
+
+  const saveNumbers = (target: HTMLInputElement, numbers: string) => {
+    setCardNumbers(numbers);
+    setPostText(hideNumbers(numbers));
+    target.value = hideNumbers(numbers);
+  };
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const text = e.target.value;
@@ -29,11 +40,6 @@ export const CardNumberInput = ({ cardNumbers, setCardNumbers, setIsCompleted }:
       return;
     }
 
-    const hideNumbers = (numbers: string): string => {
-      const hiddenNumbers = numbers.slice(0, 8) + "●".repeat(numbers.slice(8).length);
-      return (hiddenNumbers.match(/\d{1,4}|●{1,4}/g) ?? []).join(" - ");
-    };
-
     //문자가 추가됐을 때
     if (postText.replaceAll(" - ", "").length < text.replaceAll(" - ", "").length) {
       const numbers = text.replaceAll(" - ", "");
@@ -43,11 +49,8 @@ export const CardNumberInput = ({ cardNumbers, setCardNumbers, setIsCompleted }:
         return;
       }
 
-      const addNumbers = cardNumbers + text.slice(-1);
-      setCardNumbers(addNumbers);
-
-      setPostText(hideNumbers(addNumbers));
-      e.target.value = hideNumbers(addNumbers);
+      const addNumbers = `${cardNumbers}${text.slice(-1)}`;
+      saveNumbers(e.target, addNumbers);
 
       if (addNumbers.length === 16) setIsCompleted(true);
 
@@ -56,10 +59,7 @@ export const CardNumberInput = ({ cardNumbers, setCardNumbers, setIsCompleted }:
 
     //문자가 제거 됐을 때
     const minusNumbers = postText.slice(-1) === "●" ? cardNumbers.slice(0, 8) : cardNumbers.slice(0, -1);
-    setCardNumbers(minusNumbers);
-
-    setPostText(hideNumbers(minusNumbers));
-    e.target.value = hideNumbers(minusNumbers);
+    saveNumbers(e.target, minusNumbers);
 
     setIsCompleted(false);
   };
@@ -68,12 +68,9 @@ export const CardNumberInput = ({ cardNumbers, setCardNumbers, setIsCompleted }:
     <Container>
       <InputLabel text="카드 번호" name="cardNumber" />
       <Input
-        error={{
-          isValid: true,
-          errorMessage: "16자리 숫자를 입력하세요.",
-        }}
         {...cardNumberInputInfo}
         handleInput={handleInput}
+        error={{ isValid: true, errorMessage: "기존 카드 번호와 중복됩니다." }}
       />
     </Container>
   );
