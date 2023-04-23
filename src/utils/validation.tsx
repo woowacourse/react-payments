@@ -4,7 +4,8 @@ export const validateExpiryDate = (expiryDate: string): boolean => {
     return false;
   }
 
-  if (year < new Date().getFullYear() % 2000) {
+  const currentYear = new Date().getFullYear() % 2000;
+  if (year < currentYear) {
     return false;
   }
 
