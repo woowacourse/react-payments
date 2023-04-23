@@ -158,7 +158,7 @@ const FormCardAdd = ({
       <div>
         <div className="card-owner-container-header">
           <span className="form-label">카드 소유자 이름(선택)</span>
-          <span className="form-label">{cardOwner.value.length}/30</span>
+          <span className="form-label">{cardOwner.value.length}/15</span>
         </div>
         <InputCardData
           value={cardOwner.value}
@@ -168,7 +168,7 @@ const FormCardAdd = ({
           dataId={5}
           Ref={inputRef[5]}
           minDataLength={1}
-          maxDataLength={30}
+          maxDataLength={15}
           handleError={() => {}}
           onFocus={moveFocus}
         />

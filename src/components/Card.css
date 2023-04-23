@@ -44,6 +44,5 @@
 
 .card-owner-view {
   width: 50px;
-  overflow: hidden;
   text-overflow: ellipsis;
 }
