@@ -17,7 +17,7 @@ interface cardInputValueInfo {
 }
 
 interface InputDetailInfo {
-  data: string[];
+  data: HTMLInputElement[];
   maxLength: number;
   isRequired: boolean;
   validation: (value: string) => boolean;
@@ -51,35 +51,35 @@ export default function App() {
     const cardInputValue: cardInputValueInfo = {
       card: {
         data: [
-          firstCardNumber.value,
-          secondCardNumber.value,
-          thirdCardNumber.value,
-          fourthCardNumber.value,
+          firstCardNumber,
+          secondCardNumber,
+          thirdCardNumber,
+          fourthCardNumber,
         ],
         maxLength: 4,
         isRequired: true,
         validation: isNumber,
       },
       date: {
-        data: [month.value, year.value],
+        data: [month, year],
         maxLength: 2,
         isRequired: true,
         validation: isNumber,
       },
       cvc: {
-        data: [cvc.value],
+        data: [cvc],
         maxLength: 3,
         isRequired: true,
         validation: isNumber,
       },
       owner: {
-        data: [owner.value],
+        data: [owner],
         maxLength: 30,
         isRequired: false,
         validation: isOnlyKoreanAndEnglish,
       },
       password: {
-        data: [firstPassword.value, secondPassword.value],
+        data: [firstPassword, secondPassword],
         maxLength: 1,
         isRequired: true,
         validation: isNumber,
@@ -88,24 +88,33 @@ export default function App() {
 
     const cardInputKey = ['card', 'cvc', 'owner', 'password', 'date'] as const;
 
+    const wrongInputs: HTMLInputElement[] = [];
+
     const validationResult = cardInputKey.every((key: InputKind) => {
       const current = cardInputValue[key];
-      const data = current.data;
+      const dataList = current.data;
 
-      const result = data.every((item) => {
+      const result = dataList.every((data) => {
         const requiredResult = current.isRequired
-          ? item.length === current.maxLength
+          ? data.value.length === current.maxLength
           : true;
-        const validationResult = current.validation(item);
+        const validationResult = current.validation(data.value);
 
-        return requiredResult && validationResult;
+        const dataValidationResult = requiredResult && validationResult;
+
+        if (!dataValidationResult) {
+          wrongInputs.push(data);
+        }
+
+        return dataValidationResult;
       });
       return result;
     });
 
-    console.log(validationResult);
-
-    if (!validationResult) return;
+    if (!validationResult) {
+      wrongInputs[0].focus();
+      return;
+    }
 
     const newCard: CardInfo = {
       cardNumber: {
