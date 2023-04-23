@@ -1,4 +1,4 @@
-import React, { forwardRef, useState, useContext, useRef } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 
 import styled, { css } from 'styled-components';
 
@@ -8,9 +8,7 @@ import Input from '../../@common/Input';
 import ErrorSpan from '../../@common/ErrorSpan';
 import { CreditCardContext } from '../../../contexts/CreditCardContext';
 
-interface Props {}
-
-export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
+export const CardNumber = () => {
   const [creditCardInfo, setCreditCardInfo] = useContext(CreditCardContext);
   const [validStatus, setValidStatus] = useState({
     isValid: false,
@@ -82,7 +80,7 @@ export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
   return (
     <div>
       <FormLabel>카드 번호</FormLabel>
-      <CardNumberInputContainer ref={ref}>
+      <CardNumberInputContainer>
         <Input
           data-order="first"
           data-index="0"
@@ -140,7 +138,7 @@ export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
       {!validStatus.isValid && <ErrorSpan>{validStatus.message}</ErrorSpan>}
     </div>
   );
-});
+};
 
 const CardNumberInputContainer = styled.div`
   display: flex;

@@ -23,7 +23,7 @@ export const Example = () => {
 
   return (
     <form onSubmit={registerCard}>
-      <CardNumber ref={divRef} />
+      <CardNumber />
       <button>다음</button>
     </form>
   );
