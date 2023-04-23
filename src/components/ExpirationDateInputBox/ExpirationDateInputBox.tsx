@@ -17,7 +17,7 @@ const ExpirationDateInputBox = ({
   setCardInfo: CallableFunction;
   expirationDate: any;
 }) => {
-  const [errorMessage, setErrorMessage] = useState('asdasd');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const onChange = ({ target: { name, value } }: ChangeEvent<HTMLInputElement>) => {
     if (!isNumeric(value)) return setErrorMessage('숫자만 입력 가능');
@@ -44,7 +44,7 @@ const ExpirationDateInputBox = ({
           <span>만료일</span>
         </styled.LabelHeader>
         <styled.InputContainer>
-          {Object.keys(expirationDate).map((key) => {
+          {Object.keys(expirationDate).map(key => {
             return (
               <Input
                 key={key}
