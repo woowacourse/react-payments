@@ -6,7 +6,7 @@ import ExpirationDateInput from '../cardForm/ExpirationDateInput';
 import NameInput from '../cardForm/NameInput';
 import SecurityCodeInput from '../cardForm/SecurityCodeInput';
 import PasswordInput from '../cardForm/PasswordInput';
-import { INPUT_MAX_LENGTH } from '../../utils/Constants';
+import { useFormValidation } from '../../hooks/useFormValidation';
 
 interface CardFormProps {
   onSubmitForm: () => void;
@@ -18,6 +18,9 @@ interface CardFormProps {
 }
 
 const CardForm = ({ onSubmitForm, onChangeForm }: CardFormProps) => {
+  const navigate = useNavigate();
+  const [buttonActive, setButtonActive] = useState(false);
+
   const [cardNumber, setCardNumber] = useState(['', '', '', '']);
   const [expirationDate, setExpirationDate] = useState(['', '']);
   const [name, setName] = useState('');
@@ -30,33 +33,17 @@ const CardForm = ({ onSubmitForm, onChangeForm }: CardFormProps) => {
   const [securityCodeError, setSecurityCodeError] = useState('');
   const [passwordError, setPasswordError] = useState('');
 
-  const [buttonActive, setButtonActive] = useState(false);
-
-  const navigate = useNavigate();
-
-  const isCardNumberValid = cardNumber.every(
-    (numberValue) => numberValue.length === INPUT_MAX_LENGTH.CARD_NUMBER_LENGTH
+  useFormValidation(
+    cardNumber,
+    expirationDate,
+    securityCode,
+    password,
+    cardNumberError,
+    expirationDateError,
+    securityCodeError,
+    passwordError,
+    setButtonActive
   );
-  const isExpirationDateValid = expirationDate.every(
-    (dateValue) => dateValue.length === INPUT_MAX_LENGTH.EXPIRATION_DATE_LENGTH
-  );
-  const isSecurityCodeValid =
-    securityCode.length === INPUT_MAX_LENGTH.SECURITY_CODE_LENGTH;
-  const isPasswordValid = password.every((passwordValue) => !!passwordValue);
-
-  const isFormValid =
-    isCardNumberValid &&
-    isExpirationDateValid &&
-    isSecurityCodeValid &&
-    isPasswordValid &&
-    !cardNumberError &&
-    !expirationDateError &&
-    !securityCodeError &&
-    !passwordError;
-
-  useEffect(() => {
-    setButtonActive(isFormValid);
-  }, [isFormValid]);
 
   useEffect(() => {
     onChangeForm(cardNumber, expirationDate, name);
