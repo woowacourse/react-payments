@@ -5,3 +5,5 @@ export const LOCATION = Object.freeze({
   ADD_CARD_PAGE: '/add',
 });
 export const LOCAL_STORAGE_CARD_LIST = 'cardList';
+export const SECURITY_MAX_NUMBER_LENGTH = 3;
+export const NAME_INPUT_MAX_LENGTH = 30;

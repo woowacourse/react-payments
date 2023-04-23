@@ -5,18 +5,16 @@ import FormCardAdd from '../components/FormCardAdd';
 import Header from '../components/Header';
 import useInput from '../hooks/useInput';
 import usePasswordInput from '../hooks/usePasswordInput';
+import { isNumberInput, stringToUpperCase } from '../utils/util';
+import type { CardNumber, InputHook } from '../type';
+import './AddCardPage.css';
 import {
   cardExpireCondition,
   cardOwnerCondition,
   cardPasswordCondition,
-  formatExpireDate,
-  handleNumberInput,
-  isNumberInput,
   securityCodeCondition,
-  stringToUpperCase,
-} from '../utils/util';
-import type { CardNumber, InputHook } from '../type';
-import './AddCardPage.css';
+} from '../utils/validate';
+import { formatExpireDate, handleNumberInput } from '../utils/processData';
 
 const AddCardPage = () => {
   const navigate = useNavigate();
