@@ -1,14 +1,9 @@
 import styled from "styled-components";
+import Button from "../common/Button";
 
 interface PrevButtonProps {
-  onClick: () => void;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
-
-const Wrapper = styled.button`
-  cursor: pointer;
-  border: 0;
-  background-color: transparent;
-`;
 
 const Svg = styled.svg`
   width: 20px;
@@ -17,7 +12,7 @@ const Svg = styled.svg`
 
 export default function PrevButton({ onClick }: PrevButtonProps) {
   return (
-    <Wrapper onClick={onClick}>
+    <Button onClick={onClick}>
       <Svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -32,6 +27,6 @@ export default function PrevButton({ onClick }: PrevButtonProps) {
           d="M15.75 19.5L8.25 12l7.5-7.5"
         />
       </Svg>
-    </Wrapper>
+    </Button>
   );
 }
