@@ -1,16 +1,45 @@
+:root {
+  --dark-gray: #191919;
+  --gray: #444444;
+  --light-gray: #999999;
+  --slight-dark-white: #eeeeee;
+}
+
 .container {
   display: flex;
+  position: relative;
   justify-content: center;
   align-items: center;
+  width: 30px;
+  height: 100%;
 }
 
 .button {
-  color: var(--grey-300);
-  font-size: 30px;
-  line-height: 100px;
+  font-size: 26px;
+  color: var(--gray);
+  cursor: help;
+  transition: 0.2s;
+}
+
+.balloon {
+  position: absolute;
+  left: 33px;
+  padding: 10px;
+  word-wrap: break-word;
+  height: auto;
+  border-radius: 10px;
+  display: none;
+  background-color: var(--dark-gray);
+  color: var(--dark-gray);
+  overflow: hidden;
+  font-size: 12px;
+}
+
+.button:hover ~ .balloon {
+  display: block;
+  color: var(--slight-dark-white);
 }
 
 .button:hover {
-  cursor: pointer;
-  color: var(--grey-500);
+  color: var(--light-gray);
 }
