@@ -25,7 +25,7 @@ type CardInputValidation = {
   [K in keyof Card]: boolean;
 };
 
-type CardInformation = Pick<Card, 'cardNumber' | 'expirationDate' | 'ownerName'>;
+type CardInformation = Pick<Card, 'issuer' | 'cardNumber' | 'expirationDate' | 'ownerName'>;
 
 type MultipleInputFieldCardInformation = 'password';
 

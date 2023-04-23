@@ -24,6 +24,7 @@ function CardAddPage({ addCard }: CardAddPageProps) {
         <CardItem
           className="mg-b-24 center-hoz-item"
           information={{
+            issuer: cardInformation.issuer,
             cardNumber: cardInformation.cardNumber,
             expirationDate: cardInformation.expirationDate,
             ownerName: cardInformation.ownerName,

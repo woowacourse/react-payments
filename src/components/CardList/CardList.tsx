@@ -14,6 +14,7 @@ function CardList({ cardList }: CardListProps) {
           {cardList.map((card, index) => (
             <CardItem
               information={{
+                issuer: card.issuer,
                 cardNumber: card.cardNumber,
                 expirationDate: card.expirationDate,
                 ownerName: card.ownerName,
