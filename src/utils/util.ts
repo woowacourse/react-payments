@@ -64,3 +64,28 @@ export const isNumberInput = (data: string): boolean => {
 export const changeNumberToMask = (data: string): string => {
   return '·'.repeat(data.length);
 };
+
+export const cardExpireCondition = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const length = e.target.value.length;
+  const lastWord = length === 0 ? '' : e.target.value[length - 1];
+  return (
+    length <= 5 && length >= 0 && (isNumberInput(lastWord) || lastWord === '/' || lastWord === '')
+  );
+};
+
+export const securityCodeCondition = (e: React.ChangeEvent<HTMLInputElement>) => {
+  return e.target.value.length <= 3;
+};
+export const cardOwnerCondition = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const length = e.target.value.length;
+  const lastWord = e.target.value[length - 1];
+  return length <= 30 && !(length > 0 && !isAlphabetInput(lastWord.toUpperCase()));
+};
+
+export const stringToUpperCase = (data: string): string => {
+  return data.toUpperCase();
+};
+
+export const cardPasswordCondition = (e: React.ChangeEvent<HTMLInputElement>) => {
+  return e.target.value.length <= 1;
+};

@@ -5,39 +5,22 @@ import FormCardAdd from '../components/FormCardAdd';
 import Header from '../components/Header';
 import useInput from '../hooks/useInput';
 import usePasswordInput from '../hooks/usePasswordInput';
-import { formatExpireDate, handleNumberInput, isAlphabetInput, isNumberInput } from '../utils/util';
+import {
+  cardExpireCondition,
+  cardOwnerCondition,
+  cardPasswordCondition,
+  formatExpireDate,
+  handleNumberInput,
+  isNumberInput,
+  securityCodeCondition,
+  stringToUpperCase,
+} from '../utils/util';
 import type { CardNumber, InputHook } from '../type';
-
 import './AddCardPage.css';
-
-const cardExpireCondition = (e: React.ChangeEvent<HTMLInputElement>) => {
-  const length = e.target.value.length;
-  const lastWord = length === 0 ? '' : e.target.value[length - 1];
-  return (
-    length <= 5 && length >= 0 && (isNumberInput(lastWord) || lastWord === '/' || lastWord === '')
-  );
-};
-
-const securityCodeCondition = (e: React.ChangeEvent<HTMLInputElement>) => {
-  return e.target.value.length <= 3;
-};
-const cardOwnerCondition = (e: React.ChangeEvent<HTMLInputElement>) => {
-  const length = e.target.value.length;
-  const lastWord = e.target.value[length - 1];
-  return length <= 30 && !(length > 0 && !isAlphabetInput(lastWord.toUpperCase()));
-};
-
-const stringToUpperCase = (data: string): string => {
-  return data.toUpperCase();
-};
-
-const cardPasswordCondition = (e: React.ChangeEvent<HTMLInputElement>) => {
-  return e.target.value.length <= 1;
-};
 
 const AddCardPage = () => {
   const navigate = useNavigate();
-  const [cardType] = useState('현대');
+  const [cardType] = useState('');
 
   const [cardNumber, onChangeCardNumber] = usePasswordInput<CardNumber>({
     first: '',
