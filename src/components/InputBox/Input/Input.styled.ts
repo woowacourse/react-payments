@@ -1,16 +1,20 @@
 import styled from 'styled-components';
-import { InputProps } from '../../types/props';
 
-const InputWidth = {
-  xl: '100%',
-  l: '20%',
-  m: '80px',
-  s: '35px',
-  xs: '45px',
+interface InputProps {
+  maxLength: number;
+  center?: boolean;
+}
+
+const InputWidth: { [key: string]: string } = {
+  1: '45px',
+  2: '70px',
+  3: '80px',
+  4: '100%',
+  30: '100%',
 };
 
 export const Input = styled.input<InputProps>`
-  width: ${(props) => InputWidth[props.width]};
+  width: ${(props) => InputWidth[props.maxLength]};
   height: 45px;
 
   background-color: #e5e5e5;
@@ -22,4 +26,10 @@ export const Input = styled.input<InputProps>`
   font-size: ${(props) => (props.type === 'password' ? '24px' : '18px')};
   letter-spacing: 2px;
   text-align: ${(props) => props.center && 'center'};
+
+  padding: ${(props) => props.name === 'ownerName' && '0 16px'};
+
+  &:focus {
+    border: 2px solid #0078ff;
+  }
 `;
