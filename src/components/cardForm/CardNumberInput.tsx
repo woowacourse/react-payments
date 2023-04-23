@@ -5,6 +5,8 @@ import { useState } from "react";
 
 interface CardNumberInputProps {
   cardNumbers: string;
+  isValid: boolean;
+  setIsValid: (isValid: boolean) => void;
   setCardNumbers: (numbers: string) => void;
   setIsCompleted: (isCompleted: boolean) => void;
 }
@@ -22,7 +24,13 @@ const hideNumbers = (numbers: string): string => {
   return (hiddenNumbers.match(/\d{1,4}|●{1,4}/g) ?? []).join(" - ");
 };
 
-export const CardNumberInput = ({ cardNumbers, setCardNumbers, setIsCompleted }: CardNumberInputProps) => {
+export const CardNumberInput = ({
+  cardNumbers,
+  isValid,
+  setIsValid,
+  setCardNumbers,
+  setIsCompleted,
+}: CardNumberInputProps) => {
   const [postText, setPostText] = useState("");
 
   const saveNumbers = (target: HTMLInputElement, numbers: string) => {
@@ -61,6 +69,7 @@ export const CardNumberInput = ({ cardNumbers, setCardNumbers, setIsCompleted }:
     const minusNumbers = postText.slice(-1) === "●" ? cardNumbers.slice(0, 8) : cardNumbers.slice(0, -1);
     saveNumbers(e.target, minusNumbers);
 
+    setIsValid(true);
     setIsCompleted(false);
   };
 
@@ -70,7 +79,7 @@ export const CardNumberInput = ({ cardNumbers, setCardNumbers, setIsCompleted }:
       <Input
         {...cardNumberInputInfo}
         handleInput={handleInput}
-        error={{ isValid: true, errorMessage: "기존 카드 번호와 중복됩니다." }}
+        error={{ isValid: isValid, errorMessage: "기존 카드 번호와 중복됩니다." }}
       />
     </Container>
   );

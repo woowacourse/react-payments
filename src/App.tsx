@@ -15,7 +15,7 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home cards={cards} />} />
-          <Route path="/addCard" element={<AddCard addNewCard={addNewCard} />} />
+          <Route path="/addCard" element={<AddCard cards={cards} addNewCard={addNewCard} />} />
         </Routes>
       </BrowserRouter>
     </>

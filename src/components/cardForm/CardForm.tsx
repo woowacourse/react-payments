@@ -10,12 +10,14 @@ import { PasswordInput } from "./PasswordInput";
 import useAddCardForm from "../../hook/useAddCardForm";
 
 interface CardFormProps {
-  cardInfo: CardType;
-  setCardInfo: (value: CardType) => void;
+  cards: CardType[];
+  newCard: CardType;
+  setNewCard: (value: CardType) => void;
   addNewCard: (newCard: CardType) => void;
 }
 
-export const CardForm = ({ cardInfo, setCardInfo, addNewCard }: CardFormProps) => {
+export const CardForm = (props: CardFormProps) => {
+  const { numbers, owner } = props.newCard;
   const {
     handleSubmit,
 
@@ -28,29 +30,32 @@ export const CardForm = ({ cardInfo, setCardInfo, addNewCard }: CardFormProps) =
     setCVCCompleted,
     setPasswordCompleted,
 
-    setValidExpiryDateValid,
-
+    setExpiryDateValid,
+    setCardNumbersValid,
     isInputValid,
+
     isAllCompleted,
-  } = useAddCardForm({ cardInfo, setCardInfo, addNewCard });
+  } = useAddCardForm(props);
 
   return (
     <Form onSubmit={handleSubmit}>
       <CardNumberInput
-        cardNumbers={cardInfo.numbers}
+        cardNumbers={numbers}
+        isValid={isInputValid.isCardNumbersValid}
+        setIsValid={setCardNumbersValid}
         setCardNumbers={setCardNumbers}
         setIsCompleted={setCardNumbersCompleted}
       />
       <ExpiryDateInput
         isValid={isInputValid.isExpiryDateValid}
-        setIsValid={setValidExpiryDateValid}
+        setIsValid={setExpiryDateValid}
         setExpiryDate={setExpiryDate}
         setIsCompleted={setExpriyDateCompleted}
       />
-      <OwnerInput owner={cardInfo.owner} setOwner={setOwner} />
+      <OwnerInput owner={owner} setOwner={setOwner} />
       <CVCInput setIsCompleted={setCVCCompleted} />
       <PasswordInput setIsCompleted={setPasswordCompleted} />
-      <SubmitButton color={isAllCompleted() ? "#525252" : "#D3D3D3"} type="submit">
+      <SubmitButton $color={isAllCompleted() ? "#525252" : "#D3D3D3"} type="submit">
         다음
       </SubmitButton>
     </Form>
@@ -64,11 +69,11 @@ const Form = styled.form`
   margin-top: 20px;
 `;
 
-const SubmitButton = styled.button<{ color: string }>`
+const SubmitButton = styled.button<{ $color: string }>`
   font-size: 14px;
   font-weight: 700;
   line-height: 16px;
   text-align: right;
 
-  color: ${(props) => props.color};
+  color: ${(props) => props.$color};
 `;

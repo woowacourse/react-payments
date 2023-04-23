@@ -1,7 +1,6 @@
 import { Container } from "../common/Container";
 import { Input } from "../common/Input";
 import { InputLabel } from "../common/InputLabel";
-import { useState } from "react";
 
 interface ExpiryDateInputProps {
   isValid: boolean;
@@ -14,6 +13,7 @@ const ExpiryDateInfo = {
   label: "expiryDate",
   placeholder: "MM / YY",
   type: "text",
+
   $width: "137px",
   $textPosition: "center",
 };

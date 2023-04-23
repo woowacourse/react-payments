@@ -2,15 +2,16 @@ import { useState, useCallback, FormEvent } from "react";
 import { CardType } from "../types/card";
 import { useNavigate } from "react-router-dom";
 
-import { validateExpiryDate } from "../utils/validation";
+import { validateCardNumbers, validateExpiryDate } from "../validation/validation";
 
 interface Props {
-  cardInfo: CardType;
-  setCardInfo: (value: CardType) => void;
+  cards: CardType[];
+  newCard: CardType;
+  setNewCard: (value: CardType) => void;
   addNewCard: (newCard: CardType) => void;
 }
 
-const useAddCardForm = ({ cardInfo, addNewCard, setCardInfo }: Props) => {
+const useAddCardForm = ({ cards, newCard, addNewCard, setNewCard }: Props) => {
   const navigate = useNavigate();
   const moveToHome = () => {
     navigate("/");
@@ -28,6 +29,7 @@ const useAddCardForm = ({ cardInfo, addNewCard, setCardInfo }: Props) => {
   };
 
   const [isInputValid, setIsInputValid] = useState({
+    isCardNumbersValid: true,
     isExpiryDateValid: true,
   });
 
@@ -36,45 +38,50 @@ const useAddCardForm = ({ cardInfo, addNewCard, setCardInfo }: Props) => {
 
     if (!isAllCompleted()) return;
 
-    if (!validateExpiryDate(cardInfo.expiryDate)) {
+    if (!validateExpiryDate(newCard.expiryDate)) {
       setIsInputValid({ ...isInputValid, isExpiryDateValid: false });
+      return;
+    }
+
+    if (!validateCardNumbers(newCard, cards)) {
+      setIsInputValid({ ...isInputValid, isCardNumbersValid: false });
       return;
     }
 
     const formData = new FormData(e.target as HTMLFormElement);
     const data = Object.fromEntries(formData.entries());
-    const newCard: CardType = {
-      numbers: cardInfo.numbers,
-      expiryDate: cardInfo.expiryDate,
-      owner: cardInfo.owner,
+    const cardInfo: CardType = {
+      numbers: newCard.numbers,
+      expiryDate: newCard.expiryDate,
+      owner: newCard.owner,
       color: "#de75d0",
       CVC: Number(data.cvc),
       password: [Number(data.password1), Number(data.password2)],
     };
 
-    addNewCard(newCard);
+    addNewCard(cardInfo);
     moveToHome();
   };
 
   const setCardNumbers = useCallback(
     (numbers: string) => {
-      setCardInfo({ ...cardInfo, numbers: numbers });
+      setNewCard({ ...newCard, numbers: numbers });
     },
-    [setCardInfo, cardInfo]
+    [setNewCard, newCard]
   );
 
   const setExpiryDate = useCallback(
     (date: string) => {
-      setCardInfo({ ...cardInfo, expiryDate: date });
+      setNewCard({ ...newCard, expiryDate: date });
     },
-    [setCardInfo, cardInfo]
+    [setNewCard, newCard]
   );
 
   const setOwner = useCallback(
     (owner: string) => {
-      setCardInfo({ ...cardInfo, owner: owner });
+      setNewCard({ ...newCard, owner: owner });
     },
-    [setCardInfo, cardInfo]
+    [setNewCard, newCard]
   );
 
   const setCardNumbersCompleted = useCallback(
@@ -105,9 +112,16 @@ const useAddCardForm = ({ cardInfo, addNewCard, setCardInfo }: Props) => {
     [setIsInputCompleted, isInputCompleted]
   );
 
-  const setValidExpiryDateValid = useCallback(
+  const setExpiryDateValid = useCallback(
     (isValid: boolean) => {
       setIsInputValid({ ...isInputValid, isExpiryDateValid: isValid });
+    },
+    [setIsInputValid, isInputValid]
+  );
+
+  const setCardNumbersValid = useCallback(
+    (isValid: boolean) => {
+      setIsInputValid({ ...isInputValid, isCardNumbersValid: isValid });
     },
     [setIsInputValid, isInputValid]
   );
@@ -124,7 +138,8 @@ const useAddCardForm = ({ cardInfo, addNewCard, setCardInfo }: Props) => {
     setCVCCompleted,
     setPasswordCompleted,
 
-    setValidExpiryDateValid,
+    setExpiryDateValid,
+    setCardNumbersValid,
     isInputValid,
 
     isAllCompleted,

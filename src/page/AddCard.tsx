@@ -7,11 +7,12 @@ import { CardForm } from "../components/cardForm/CardForm";
 import { Link } from "react-router-dom";
 
 interface AddCardProps {
+  cards: CardType[];
   addNewCard: (newCard: CardType) => void;
 }
 
-export const AddCard = ({ addNewCard }: AddCardProps) => {
-  const [cardInfo, setCardInfo] = useState<CardType>({
+export const AddCard = ({ cards, addNewCard }: AddCardProps) => {
+  const [newCard, setNewCard] = useState<CardType>({
     numbers: "",
     owner: "",
     expiryDate: "MM/YY",
@@ -29,8 +30,8 @@ export const AddCard = ({ addNewCard }: AddCardProps) => {
         <Header text="카드 추가" />
       </HeaderWrapper>
       <Main>
-        <CardItem card={cardInfo} />
-        <CardForm cardInfo={cardInfo} setCardInfo={setCardInfo} addNewCard={addNewCard} />
+        <CardItem card={newCard} />
+        <CardForm cards={cards} newCard={newCard} setNewCard={setNewCard} addNewCard={addNewCard} />
       </Main>
     </>
   );
