@@ -12,6 +12,7 @@ import CardPasswordInput from '../box/inputSection/CardPasswordInput';
 import Card from '../common/Card';
 
 import useList from '../../utils/useList';
+import useFocusRef from '../../utils/useFocusRef';
 
 interface Props {
   navigate: (page: Page) => void;
@@ -23,6 +24,8 @@ const CardRegisterPage = ({ navigate }: Props) => {
   const [ownerName, setOwnerName] = useState('');
   const [securityCode, setSecurityCode] = useState('');
   const [cardPassword, setCardPasswordIndex] = useList(['', '']);
+
+  const [insert, focus] = useFocusRef();
 
   const submitNewCard = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -50,13 +53,35 @@ const CardRegisterPage = ({ navigate }: Props) => {
     <PageTemplate title="카드 추가" onClickBack={onClickBack}>
       <Card cardNumber={cardNumber} ownerName={ownerName} expireDate={expireDate} />
       <InputForm onSubmit={submitNewCard}>
-        <CardNumberInput cardNumber={cardNumber} setCardNumber={setCardNumberIndex} />
-        <ExpireDateInput expireDate={expireDate} setExpireDateIndex={setExpireDateIndex} />
-        <OwnerNameInput ownerName={ownerName} setOwnerName={setOwnerName} />
-        <SecurityCodeInput securityCode={securityCode} setSecurityCode={setSecurityCode} />
-        <CardPasswordInput cardPassword={cardPassword} setCardPasswordIndex={setCardPasswordIndex} />
+        <CardNumberInput
+          cardNumber={cardNumber}
+          setCardNumber={setCardNumberIndex}
+          insert={insert}
+          focus={focus}
+        />
+        <ExpireDateInput
+          expireDate={expireDate}
+          setExpireDateIndex={setExpireDateIndex}
+          insert={insert}
+          focus={focus}
+        />
+        <OwnerNameInput ownerName={ownerName} setOwnerName={setOwnerName} insert={insert} focus={focus} />
+        <SecurityCodeInput
+          securityCode={securityCode}
+          setSecurityCode={setSecurityCode}
+          insert={insert}
+          focus={focus}
+        />
+        <CardPasswordInput
+          cardPassword={cardPassword}
+          setCardPasswordIndex={setCardPasswordIndex}
+          insert={insert}
+          focus={focus}
+        />
         <ButtonWrapper>
-          <SubmitButton type="submit">다음</SubmitButton>
+          <SubmitButton type="submit" ref={(el) => insert(10)(el)}>
+            다음
+          </SubmitButton>
         </ButtonWrapper>
       </InputForm>
     </PageTemplate>
