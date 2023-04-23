@@ -6,6 +6,10 @@ import {
   REGEX,
 } from '../constants';
 
+const validateIssuer = (input: string) => {
+  return input !== '';
+};
+
 const validateCardNumber = (input: string) => {
   return input.length === CARD_NUMBER_INPUT_MAX_LENGTH;
 };
@@ -38,6 +42,7 @@ const validatePassword = (passwordInputs: string[]) => {
 };
 
 const validator = {
+  issuer: validateIssuer,
   cardNumber: validateCardNumber,
   expirationDate: validateExpirationDate,
   ownerName: validateOwnerName,
