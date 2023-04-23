@@ -33,7 +33,7 @@ const PasswordInput = () => {
       </label>
       <S.InputBox>
         <S.Input
-          type="text"
+          type="password"
           name="password1"
           id="password-label"
           aria-labelledby="password-label"
@@ -46,7 +46,7 @@ const PasswordInput = () => {
           required
         />
         <S.Input
-          type="text"
+          type="password"
           name="password2"
           aria-labelledby="password-label"
           maxLength={LENGTH.EACH_PASSWORD}
