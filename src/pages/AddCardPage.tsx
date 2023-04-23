@@ -26,7 +26,8 @@ interface AddCardPageProps {
 
 interface cardInputValueInfo {
   card: InputDetailInfo;
-  date: InputDetailInfo;
+  month: InputDetailInfo;
+  year: InputDetailInfo;
   owner: InputDetailInfo;
   cvc: InputDetailInfo;
   password: InputDetailInfo;
@@ -39,7 +40,7 @@ interface InputDetailInfo {
   validation: (value: string) => boolean;
 }
 
-type InputKind = 'card' | 'cvc' | 'owner' | 'password' | 'date';
+type InputKind = 'card' | 'cvc' | 'owner' | 'password' | 'month' | 'year';
 
 const Page = styled.div`
   position: relative;
@@ -116,23 +117,13 @@ export default function AddCardPage({
     maxLength: 4,
   });
 
-  const monthValidate = (month: string) => {
-    return Number(month) <= 12 && Number(month) >= 0;
-  };
-
-  const yearValidate = (year: string) => {
-    return Number(year) >= 0;
-  };
-
   const year = useInput('', {
     name: 'year',
-    validate: yearValidate,
     errorMessage: '카드의 연도를 확인해주세요',
     maxLength: 2,
   });
   const month = useInput('', {
     name: 'month',
-    validate: monthValidate,
     errorMessage: '카드의 달을 확인해주세요.',
     maxLength: 2,
   });
@@ -150,6 +141,15 @@ export default function AddCardPage({
   const [isOpenToolTip, setIsOpenToolTip] = useState(false);
 
   const [isFormfilled, setIsFormfilled] = useState(true);
+
+  const monthValidate = (month: string) => {
+    return Number(month) <= 12 && Number(month) >= 0;
+  };
+
+  const yearValidate = (year: string) => {
+    const currentYear = new Date().getFullYear() % 100;
+    return Number(year) >= currentYear && Number(year) <= currentYear + 5;
+  };
 
   const handleToolTip = () => {
     setIsOpenToolTip((prev) => !prev);
@@ -183,11 +183,17 @@ export default function AddCardPage({
         isRequired: true,
         validation: isNumber,
       },
-      date: {
-        data: [month, year],
+      month: {
+        data: [month],
         maxLength: 2,
         isRequired: true,
-        validation: isNumber,
+        validation: monthValidate,
+      },
+      year: {
+        data: [year],
+        maxLength: 2,
+        isRequired: true,
+        validation: yearValidate,
       },
       cvc: {
         data: [cvc],
@@ -209,7 +215,14 @@ export default function AddCardPage({
       },
     };
 
-    const cardInputKey = ['card', 'cvc', 'owner', 'password', 'date'] as const;
+    const cardInputKey = [
+      'card',
+      'cvc',
+      'owner',
+      'password',
+      'year',
+      'month',
+    ] as const;
 
     const wrongInputs: HTMLInputElement[] = [];
 
