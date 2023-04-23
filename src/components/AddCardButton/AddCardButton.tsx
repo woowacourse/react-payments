@@ -20,4 +20,4 @@ const AddCardButton = ({ showMessage }: AddCardButtonProps) => {
   );
 };
 
-export default AddCardButton;
+export default React.memo(AddCardButton);
