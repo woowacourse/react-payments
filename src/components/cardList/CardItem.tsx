@@ -8,8 +8,7 @@ interface CardProps {
 
 export const CardItem = ({ card }: CardProps) => {
   const hideNumbers = (numbers: string): string => {
-    const hiddenNumbers =
-      numbers.slice(0, 8) + "●".repeat(numbers.slice(8).length);
+    const hiddenNumbers = numbers.slice(0, 8) + "●".repeat(numbers.slice(8).length);
     return (hiddenNumbers.match(/\d{1,4}|●{1,4}/g) ?? []).join("   ");
   };
 
@@ -20,9 +19,7 @@ export const CardItem = ({ card }: CardProps) => {
         <CardNumbers>{hideNumbers(card.numbers)}</CardNumbers>
         <InfoWrapper>
           <Name>{card.owner ? card.owner : "NAME"}</Name>
-          <ExpiryDate>
-            {card.expiryDate ? card.expiryDate : "MM / YY"}
-          </ExpiryDate>
+          <ExpiryDate>{card.expiryDate ? card.expiryDate : "MM / YY"}</ExpiryDate>
         </InfoWrapper>
       </Container>
     </Card>
@@ -61,6 +58,11 @@ const InfoWrapper = styled.div`
   justify-content: space-between;
 `;
 
-const Name = styled.div``;
+const Name = styled.div`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 110px;
+  height: 10px;
+`;
 
 const ExpiryDate = styled.div``;
