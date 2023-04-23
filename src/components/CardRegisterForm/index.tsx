@@ -3,13 +3,12 @@ import { useNavigate } from 'react-router-dom';
 
 import Card from '../Card';
 import Input, { Focus } from '../Input';
-import Tooltip from '../Tooltip';
-import TooltipButton from '../TooltipButton';
 import useCardRegisterForm from './useCardRegisterForm';
 
 import type { CardInfo } from '../../types/card';
 
 import styles from './cardRegisterForm.module.css';
+import CardRegisterField from '../CardRegisterField';
 
 const today = new Date();
 const currentYear = today.getFullYear() % 100;
@@ -90,155 +89,138 @@ const CardRegisterForm = ({ registerCard }: Props) => {
         expiredYear={expiredYear}
       />
       <form className={styles.form} onSubmit={handleSubmit}>
-        <label>
-          카드 번호
-          <div className={`${styles.inputContainer} ${styles.cardNumber}`}>
-            <Input
-              type="text"
-              minLength={4}
-              maxLength={4}
-              required
-              tabIndex={1}
-              autoFocus
-              value={cardNumber1}
-              onChange={(e) => handleNumberChange(e, setCardNumber1)}
-              ref={inputRefs[0]}
-              placeholder="0000"
-            />
-            <span>-</span>
-            <Input
-              type="text"
-              minLength={4}
-              maxLength={4}
-              required
-              tabIndex={2}
-              value={cardNumber2}
-              onChange={(e) => handleNumberChange(e, setCardNumber2)}
-              ref={inputRefs[1]}
-              placeholder="0000"
-            />
-            <span>-</span>
-            <Input
-              type="password"
-              minLength={4}
-              maxLength={4}
-              required
-              tabIndex={3}
-              value={cardNumber3}
-              onChange={(e) => handleNumberChange(e, setCardNumber3)}
-              ref={inputRefs[2]}
-              placeholder="0000"
-            />
-            <span>-</span>
-            <Input
-              type="password"
-              minLength={4}
-              maxLength={4}
-              required
-              tabIndex={4}
-              value={cardNumber4}
-              onChange={(e) => handleNumberChange(e, setCardNumber4)}
-              ref={inputRefs[3]}
-              placeholder="0000"
-            />
-          </div>
-        </label>
+        <CardRegisterField label="카드 번호" size='fit'>
+          <Input
+            type="text"
+            minLength={4}
+            maxLength={4}
+            required
+            tabIndex={1}
+            autoFocus
+            value={cardNumber1}
+            onChange={(e) => handleNumberChange(e, setCardNumber1)}
+            ref={inputRefs[0]}
+            placeholder="0000"
+          />
+          <span>-</span>
+          <Input
+            type="text"
+            minLength={4}
+            maxLength={4}
+            required
+            tabIndex={2}
+            value={cardNumber2}
+            onChange={(e) => handleNumberChange(e, setCardNumber2)}
+            ref={inputRefs[1]}
+            placeholder="0000"
+          />
+          <span>-</span>
+          <Input
+            type="password"
+            minLength={4}
+            maxLength={4}
+            required
+            tabIndex={3}
+            value={cardNumber3}
+            onChange={(e) => handleNumberChange(e, setCardNumber3)}
+            ref={inputRefs[2]}
+            placeholder="0000"
+          />
+          <span>-</span>
+          <Input
+            type="password"
+            minLength={4}
+            maxLength={4}
+            required
+            tabIndex={4}
+            value={cardNumber4}
+            onChange={(e) => handleNumberChange(e, setCardNumber4)}
+            ref={inputRefs[3]}
+            placeholder="0000"
+          />
+        </CardRegisterField>
 
-        <label>
-          만료일
-          <div className={`${styles.inputContainer} ${styles.expirationDate}`}>
-            <Input
-              type="text"
-              minLength={2}
-              maxLength={2}
-              required
-              tabIndex={5}
-              placeholder="MM"
-              value={expiredMonth}
-              onChange={(e) => handleNumberChange(e, setExpiredMonth)}
-              ref={inputRefs[4]}
-            />
-            <span>/</span>
-            <Input
-              type="text"
-              minLength={2}
-              maxLength={2}
-              required
-              tabIndex={6}
-              placeholder="YY"
-              value={expiredYear}
-              onChange={(e) => handleNumberChange(e, setExpiredYear)}
-              ref={inputRefs[5]}
-            />
-          </div>
-        </label>
+        <CardRegisterField label="만료일" size='medium'>
+          <Input
+            type="text"
+            minLength={2}
+            maxLength={2}
+            required
+            tabIndex={5}
+            placeholder="MM"
+            value={expiredMonth}
+            onChange={(e) => handleNumberChange(e, setExpiredMonth)}
+            ref={inputRefs[4]}
+          />
+          <span>/</span>
+          <Input
+            type="text"
+            minLength={2}
+            maxLength={2}
+            required
+            tabIndex={6}
+            placeholder="YY"
+            value={expiredYear}
+            onChange={(e) => handleNumberChange(e, setExpiredYear)}
+            ref={inputRefs[5]}
+          />
+        </CardRegisterField>
 
-        <div>
-          <label>
-            카드 소유자 이름(선택)
-            <span className={styles.ownerNameLength}>{owner.length} / 20</span>
-            <div className={`${styles.inputContainer} ${styles.ownerName}`}>
-              <Input
-                type="text"
-                maxLength={20}
-                placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-                tabIndex={7}
-                value={owner}
-                onChange={(e) => handleOwnerChange(e)}
-                ref={inputRefs[6]}
-              />
-            </div>
-          </label>
-        </div>
+        <CardRegisterField
+          label="카드 소유자 이름(선택)"
+          size='fit'
+          valueLength={owner.length}
+          maxLength={20}
+        >
+          <Input
+            type="text"
+            maxLength={20}
+            placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+            tabIndex={7}
+            value={owner}
+            onChange={(e) => handleOwnerChange(e)}
+            ref={inputRefs[6]}
+          />
+        </CardRegisterField>
 
-        <label>
-          보안 코드(CVC/CVV)
-          <div className={styles.cvcContainer}>
-            <div className={`${styles.inputContainer} ${styles.cvc}`}>
-              <Input
-                type="password"
-                minLength={3}
-                maxLength={3}
-                required
-                tabIndex={8}
-                value={cvc}
-                onChange={(e) => handleNumberChange(e, setCvc)}
-                ref={inputRefs[7]}
-              />
-            </div>
-            <Tooltip>
-              <TooltipButton tabIndex={12} />
-            </Tooltip>
-          </div>
-        </label>
+        <CardRegisterField label="보안코드(CVC/CVV)" size='small' tooltip>
+          <Input
+            type="password"
+            minLength={3}
+            maxLength={3}
+            required
+            tabIndex={8}
+            value={cvc}
+            onChange={(e) => handleNumberChange(e, setCvc)}
+            ref={inputRefs[7]}
+          />
+        </CardRegisterField>
 
-        <label>
-          카드 비밀번호
-          <div className={`${styles.inputContainer} ${styles.cardPassword}`}>
-            <Input
-              type="password"
-              minLength={1}
-              maxLength={1}
-              required
-              tabIndex={9}
-              value={cardPassword1}
-              onChange={(e) => handleNumberChange(e, setCardPassword1)}
-              ref={inputRefs[8]}
-            />
-            <Input
-              type="password"
-              minLength={1}
-              maxLength={1}
-              required
-              tabIndex={10}
-              value={cardPassword2}
-              onChange={(e) => handleNumberChange(e, setCardPassword2)}
-              ref={inputRefs[9]}
-            />
-            <p>﹒</p>
-            <p>﹒</p>
-          </div>
-        </label>
+        <CardRegisterField label="카드 비밀번호" size='medium' split>
+          <Input
+            type="password"
+            minLength={1}
+            maxLength={1}
+            required
+            tabIndex={9}
+            value={cardPassword1}
+            onChange={(e) => handleNumberChange(e, setCardPassword1)}
+            ref={inputRefs[8]}
+          />
+          <Input
+            type="password"
+            minLength={1}
+            maxLength={1}
+            required
+            tabIndex={10}
+            value={cardPassword2}
+            onChange={(e) => handleNumberChange(e, setCardPassword2)}
+            ref={inputRefs[9]}
+          />
+          <p>﹒</p>
+          <p>﹒</p>
+        </CardRegisterField>
+
         <div className={styles.submitButton}>
           {isValidCardData && <button tabIndex={11}>다음</button>}
         </div>

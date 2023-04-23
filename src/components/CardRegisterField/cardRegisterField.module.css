@@ -1,0 +1,89 @@
+label {
+  display: block;
+  position: relative;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.inputContainer {
+  display: flex;
+  align-items: center;
+  height: 45px;
+  margin-top: 8px;
+  padding: 0 10px;
+  background: var(--background-input);
+  border: none;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.inputContainer > input {
+  flex: 1 1;
+  width: 100%;
+  height: 100%;
+  padding: 0 8px;
+  text-align: center;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  letter-spacing: 0.05em;
+}
+
+.inputContainer > p {
+  flex: 1 1;
+  width: 100%;
+  font-size: 24px;
+}
+
+.inputContainer > input[type='password'] {
+  letter-spacing: 0.2em;
+}
+
+.inputContainer > input[type='password']::placeholder {
+  letter-spacing: 0.05em;
+}
+
+.inputContainer.fit {
+  width: 100%;
+}
+
+.inputContainer.medium {
+  width: 50%;
+}
+
+.inputContainer.small {
+  width: 25%;
+}
+
+.split {
+  padding: 0;
+  column-gap: 10px;
+  background: var(--background-white);
+}
+
+.split > input {
+  background: var(--background-input);
+}
+
+.valueLength {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.tooltipContainer {
+  position: absolute;
+  top: 45%;
+}
+
+.tooltipContainer.small {
+  left: 30%;
+}
+
+.tooltipContainer.medium {
+  left: 60%;
+}
+
+.tooltipContainer.fit {
+  right: 0;
+}
