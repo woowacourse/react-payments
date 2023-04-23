@@ -13,6 +13,7 @@ import useAddCard from '../hooks/useAddCard';
 import useCardNumbers from '../hooks/useCardNumbers';
 import useCardOwnerName from '../hooks/useCardOwnerName';
 import useCardPassword from '../hooks/useCardPassword';
+import useSecurityCode from '../hooks/useSecurityCode';
 
 const Wrapper = styled.div`
   display: flex;
@@ -39,13 +40,8 @@ const AddCard = ({ cards, setCards }: SetCardsProps) => {
   const { cardNumbers, checkCardNumbers } = useCardNumbers();
   const { cardOwnerName, checkCardOwnerName } = useCardOwnerName();
   const { password, checkPassword } = useCardPassword();
-  const {
-    expiredDate,
-    setExpiredDate,
-    securityCode,
-    setSecurityCode,
-    disabled,
-  } = useAddCard();
+  const { securityCode, checkSecurityCode } = useSecurityCode();
+  const { expiredDate, setExpiredDate, disabled } = useAddCard();
 
   const navigate = useNavigate();
 
@@ -82,7 +78,7 @@ const AddCard = ({ cards, setCards }: SetCardsProps) => {
         />
         <SecurityCode
           securityCode={securityCode}
-          setSecurityCode={setSecurityCode}
+          checkSecurityCode={checkSecurityCode}
         />
         <CardPassword password={password} checkPassword={checkPassword} />
         <ButtonWrapper>
