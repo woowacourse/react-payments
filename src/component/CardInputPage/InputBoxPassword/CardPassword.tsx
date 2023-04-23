@@ -1,6 +1,6 @@
 import { useState, ChangeEvent, useEffect } from "react";
 import Input from "../../common/Input";
-
+import { INPUT_STATUS } from "../../../type/InputStatus";
 import "./cardPassword.css";
 import { validatePassword } from "../../../validation/password";
 
@@ -8,12 +8,6 @@ interface Props {
   setError: React.Dispatch<React.SetStateAction<boolean>>;
   setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
 }
-
-const INPUT_STATUS = {
-  ERROR: 0,
-  NOT_COMPLETE: 1,
-  COMPLETE: 2,
-};
 
 export default function CardPassword(props: Props) {
   const [inputStatus1, setInputStatus1] = useState(INPUT_STATUS.NOT_COMPLETE);

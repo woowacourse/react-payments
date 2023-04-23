@@ -1,6 +1,7 @@
 import { ChangeEvent, useState, useEffect } from "react";
 import { validateCardNumber } from "../../../validation/cardNumber";
 import Input from "../../common/Input";
+import { INPUT_STATUS } from "../../../type/InputStatus";
 
 import "./cardNumber.css";
 
@@ -9,12 +10,6 @@ interface Props {
   setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
   setPreviewDataHandler: () => void;
 }
-
-const INPUT_STATUS = {
-  ERROR: 0,
-  NOT_COMPLETE: 1,
-  COMPLETE: 2,
-};
 
 export default function CardNumber(props: Props) {
   const [inputStatus1, setInputStatus1] = useState(INPUT_STATUS.NOT_COMPLETE);
