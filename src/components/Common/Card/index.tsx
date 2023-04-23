@@ -1,6 +1,58 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { ReactComponent as Dot } from '../assets/white-dot.svg';
+import { ReactComponent as Dot } from '../../../assets/white-dot.svg';
+import type { CardInformation } from './types';
+
+interface CardProps {
+  cardInformation?: CardInformation;
+  isAddForm: boolean;
+}
+
+const defaultCardInformation: CardInformation = {
+  cardNumber: ['', '', '', ''],
+  expirationDate: ['', ''],
+  owner: 'NAME',
+};
+
+function Card({ cardInformation = defaultCardInformation, isAddForm }: CardProps) {
+  const { cardNumber, expirationDate, owner } = cardInformation;
+  return (
+    <CardContainer isAddFrom={isAddForm}>
+      {isAddForm ? (
+        <>
+          <ICChipTemplate />
+          <CardInfoTemplate>
+            <CardNumberTemplate>
+              {cardNumber?.map((number, index) =>
+                index < 2 ? (
+                  <CardNumberItem>{number}</CardNumberItem>
+                ) : (
+                  <CardNumberItem>
+                    {Array.from({ length: number.length }, () => (
+                      <Dot />
+                    ))}
+                  </CardNumberItem>
+                ),
+              )}
+            </CardNumberTemplate>
+            <CardDetail>
+              <div>{owner?.slice(0, 12)}</div>
+              {expirationDate && (
+                <div>
+                  {expirationDate[0].padStart(2, '0')}/{expirationDate[1].padStart(2, '0')}
+                </div>
+              )}
+            </CardDetail>
+          </CardInfoTemplate>
+        </>
+      ) : (
+        <Link to="/registration">
+          <AddButton type="button">+</AddButton>
+        </Link>
+      )}
+    </CardContainer>
+  );
+}
 
 const CardContainer = styled.div<{ isAddFrom: boolean }>`
   position: relative;
@@ -63,71 +115,5 @@ const AddButton = styled.button`
   border: none;
   font-size: 30px;
 `;
-
-interface CardProps {
-  cardInformation?: CardInformation;
-  isAddForm: boolean;
-}
-
-interface CardInformation {
-  cardNumber: CardNumber;
-  expirationDate: ExpirationDate;
-  owner?: string;
-}
-
-type CardNumber = [string, string, string, string];
-
-interface ExpirationDate {
-  year: string;
-  month: string;
-}
-
-export type { CardInformation, CardNumber, ExpirationDate };
-
-const defaultCardInformation: CardInformation = {
-  cardNumber: ['', '', '', ''],
-  expirationDate: { year: 'YY', month: 'MM' },
-  owner: 'NAME',
-};
-
-function Card({ cardInformation = defaultCardInformation, isAddForm }: CardProps) {
-  const { cardNumber, expirationDate, owner } = cardInformation;
-  return (
-    <CardContainer isAddFrom={isAddForm}>
-      {isAddForm ? (
-        <>
-          <ICChipTemplate />
-          <CardInfoTemplate>
-            <CardNumberTemplate>
-              {cardNumber?.map((number, index) =>
-                index < 2 ? (
-                  <CardNumberItem>{number}</CardNumberItem>
-                ) : (
-                  <CardNumberItem>
-                    {Array.from({ length: number.length }, () => (
-                      <Dot />
-                    ))}
-                  </CardNumberItem>
-                ),
-              )}
-            </CardNumberTemplate>
-            <CardDetail>
-              <div>{owner?.slice(0, 12)}</div>
-              {expirationDate && (
-                <div>
-                  {expirationDate.month.padStart(2, '0')}/{expirationDate.year.padStart(2, '0')}
-                </div>
-              )}
-            </CardDetail>
-          </CardInfoTemplate>
-        </>
-      ) : (
-        <Link to="/registration">
-          <AddButton type="button">+</AddButton>
-        </Link>
-      )}
-    </CardContainer>
-  );
-}
 
 export default Card;

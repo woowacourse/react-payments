@@ -1,16 +1,19 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { ReactComponent as BlackDot } from '../../assets/black-dot.svg';
+import useWrappingContext from '../../hooks/useWrappingContext';
+import CardListStore from '../../store';
 import PaymentsInput from '../PaymentsInput';
 import QuestionToolTip from '../QuestionToolTip';
-import { ReactComponent as BlackDot } from '../assets/black-dot.svg';
 import useCardForm from './hooks/useCardForm';
 
 function CardRegistrationForm() {
   const { card, setCardNumber, setExpirationDate, setOwner, setPassword, setSecurityCode } = useCardForm();
+  const { dispatchCardList } = useWrappingContext(CardListStore);
   const navigate = useNavigate();
   const handleForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(card);
+    dispatchCardList(card);
     navigate('/');
   };
 
