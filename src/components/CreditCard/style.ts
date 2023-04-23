@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 type Props = {
-  isVaild: boolean
+    isVaild: boolean
 };
 
 export const CreditCardLayout = styled.div<Props>`
@@ -30,7 +30,7 @@ export const CreditCardICChip = styled.div`
     margin-bottom: 15px;
 `;
 
-export const Booooxx = styled.div`
+export const Box = styled.div`
     display: grid;
     grid-template-rows: 1fr 1fr;
     row-gap: 12px;

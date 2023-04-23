@@ -25,7 +25,7 @@ function CreditCard({ fullFilled, creditCard: { expiry, number, owner } }: Credi
   return (
     <S.CreditCardLayout isVaild={isVaild()}>
       <S.CreditCardICChip />
-      <S.Booooxx>
+      <S.Box>
         <S.CreditCardNumber>
           {creditCard.convertSecuredCreditCard(number).map((num, idx) => <div key={idx}>{num}</div>)}
         </S.CreditCardNumber>
@@ -37,7 +37,7 @@ function CreditCard({ fullFilled, creditCard: { expiry, number, owner } }: Credi
             {expiry}
           </S.CreditCardBox>
         </S.CreditCardConatiner>
-      </S.Booooxx>
+      </S.Box>
     </S.CreditCardLayout>
   );
 }
