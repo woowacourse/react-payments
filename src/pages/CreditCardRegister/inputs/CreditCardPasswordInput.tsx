@@ -13,17 +13,10 @@ type Props = {
 function CreditCardPasswordInput({
   creditCardPassword, setCreditCardPassword
 }: Props) {
-  const handleChangeCreditCardFirstPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newFirstPassword = event.target.value;
-    if (newFirstPassword.length <= 1) {
-      setCreditCardPassword({ ...creditCardPassword, first: event.target.value });
-    }
-  };
-
-  const handleChangeCreditCardSecondPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeCreditCardPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newSecondPassword = event.target.value;
     if (newSecondPassword.length <= 1) {
-      setCreditCardPassword({ ...creditCardPassword, second: event.target.value });
+      setCreditCardPassword({ ...creditCardPassword, [event.target.name]: event.target.value });
     }
   };
 
@@ -34,8 +27,8 @@ function CreditCardPasswordInput({
     <S.Box>
       <S.CreditCardRegisterLabel>카드 비밀번호</S.CreditCardRegisterLabel>
       <S.FlexBox justifyContent="flex-start">
-        <Input type="password" value={creditCardPassword?.first} width="48px" textAlign="center" onChange={handleChangeCreditCardFirstPassword} />
-        <Input type="password" value={creditCardPassword?.second} width="48px" textAlign="center" onChange={handleChangeCreditCardSecondPassword} />
+        <Input type="password" value={creditCardPassword?.first} width="48px" textAlign="center" name="first" onChange={handleChangeCreditCardPassword} />
+        <Input type="password" value={creditCardPassword?.second} width="48px" textAlign="center" name="second" onChange={handleChangeCreditCardPassword} />
         <S.PasswordBox>•</S.PasswordBox>
         <S.PasswordBox>•</S.PasswordBox>
       </S.FlexBox>
