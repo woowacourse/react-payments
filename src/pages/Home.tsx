@@ -17,7 +17,7 @@ function Home() {
       <PageContainer>
         <Header text={'보유카드'} />
         <CardContainer>
-          <Label text="새로운 카드를 등록해주세요" />
+          {CardDB.getCards().length ? '' : <Label text={'새로운 카드를 등록해주세요'} />}
           {CardDB.getCards().map((card) => (
             <CreditCard card={card} />
           ))}
