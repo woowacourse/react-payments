@@ -45,15 +45,19 @@ function CardAddForm({
 
   return (
     <form ref={formRef} className={styles.form} onSubmit={onSubmit}>
-      <CardIssuer handleInputChange={handleSingleInputFieldChange} value={cardInformation.issuer} />
+      <CardIssuer
+        handleInputChange={handleSingleInputFieldChange}
+        validateInput={handleValidationChange}
+        value={cardInformation.issuer}
+      />
       <CardNumber
         handleInputChange={handleSingleInputFieldChange}
-        changeInputValidation={handleValidationChange}
+        validateInput={handleValidationChange}
         value={cardInformation.cardNumber}
       />
       <CardExpirationDate
         handleInputChange={handleSingleInputFieldChange}
-        changeInputValidation={handleValidationChange}
+        validateInput={handleValidationChange}
         value={cardInformation.expirationDate}
       />
       <CardOwnerName
@@ -62,12 +66,12 @@ function CardAddForm({
       />
       <CardSecurityCode
         handleInputChange={handleSingleInputFieldChange}
-        changeInputValidation={handleValidationChange}
+        validateInput={handleValidationChange}
         value={cardInformation.securityCode}
       />
       <CardPassword
         handleInputChange={handleMultipleInputFieldChange}
-        changeInputValidation={handleValidationChange}
+        validateInput={handleValidationChange}
         values={cardInformation.password}
       />
       <Button className="submit-button" variant="primary" disabled={!isFormComplete}>

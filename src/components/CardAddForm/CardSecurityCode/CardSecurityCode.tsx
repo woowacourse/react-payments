@@ -1,34 +1,25 @@
-import { ChangeEvent, FocusEvent } from 'react';
-import { CardInputValidation } from '../../../types';
-import Input from '../../common/Input/Input';
-import Label from '../../common/Label/Label';
-import InputContainer from '../../common/InputContainer/InputContainer';
-import { useError } from '../../../hooks/useError';
-import validator from '../../../utils/validator';
+import { ChangeEvent, FocusEvent, useState } from 'react';
 import { SECURITY_CODE_MAX_LENGTH, SECURITY_CODE_MIN_LENGTH } from '../../../constants';
+import InputContainer from '../../common/InputContainer/InputContainer';
+import Label from '../../common/Label/Label';
+import Input from '../../common/Input/Input';
 
 interface CardSecurityCodeProps {
-  changeInputValidation: (key: keyof CardInputValidation, value: boolean) => void;
   handleInputChange: (name: string, value: string) => void;
+  validateInput: (key: string, value: string | string[]) => boolean | undefined;
   value: string;
 }
 
-function CardSecurityCode({
-  changeInputValidation,
-  handleInputChange,
-  value,
-}: CardSecurityCodeProps) {
-  const [isError, handleError] = useError<CardInputValidation>({
-    validator: validator.securityCode,
-    changeInputValidation,
-  });
+function CardSecurityCode({ handleInputChange, validateInput, value }: CardSecurityCodeProps) {
+  const [isError, setIsError] = useState(false);
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     handleInputChange(event.target.name, event.target.value);
   };
 
   const onBlur = (event: FocusEvent<HTMLInputElement>) => {
-    handleError(event.target.name, event.target.value);
+    const isValid = validateInput(event.target.name, event.target.value);
+    setIsError(!isValid);
   };
 
   return (

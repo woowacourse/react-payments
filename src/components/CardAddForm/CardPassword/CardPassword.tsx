@@ -1,27 +1,20 @@
 import styles from './style.module.css';
-import { ChangeEvent, FocusEvent, useRef } from 'react';
-import { CardInputValidation } from '../../../types';
+import { ChangeEvent, FocusEvent, useRef, useState } from 'react';
 import { PASSWORD_UNIT_MAX_LENGTH, SECURITY_TEXT_ICON } from '../../../constants';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
 import Input from '../../common/Input/Input';
-import { useError } from '../../../hooks/useError';
 import { isElementOfType } from '../../../utils/eventUtils';
-import validator from '../../../utils/validator';
 
 interface CardPasswordProps {
-  changeInputValidation: (key: keyof CardInputValidation, value: boolean) => void;
   handleInputChange: (name: string, value: string, index: number) => void;
+  validateInput: (key: string, value: string | string[]) => boolean | undefined;
   values: string[];
 }
 
-function CardPassword({ changeInputValidation, handleInputChange, values }: CardPasswordProps) {
-  const [isError, handleError] = useError<CardInputValidation>({
-    validator: validator.password,
-    changeInputValidation,
-    inputs: values,
-  });
+function CardPassword({ handleInputChange, validateInput, values }: CardPasswordProps) {
   const lastInputRef = useRef<HTMLInputElement>(null);
+  const [isError, setIsError] = useState(false);
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     handleInputChange(event.target.name, event.target.value, Number(event.target.dataset.index));
@@ -30,7 +23,8 @@ function CardPassword({ changeInputValidation, handleInputChange, values }: Card
   const onBlur = (event: FocusEvent<HTMLElement>) => {
     if (!isElementOfType<HTMLInputElement>(event)) return;
 
-    handleError(event.target.name, event.target.value);
+    const isValid = validateInput(event.target.name, event.target.value);
+    setIsError(!isValid);
   };
 
   const onFirstInputChange = (event: ChangeEvent<HTMLInputElement>) => {

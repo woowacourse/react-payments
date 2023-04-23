@@ -1,5 +1,5 @@
-import { MouseEvent } from 'react';
-import { Issuer } from '../../../types';
+import { KeyboardEvent, MouseEvent, useState } from 'react';
+import { CardInputValidation, Issuer } from '../../../types';
 import CardIssuerSelection from './CardIssuerSelection/CardIssuerSelection';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
@@ -11,20 +11,36 @@ import DownIcon from '../../../assets/down-icon.svg';
 
 interface CardIssuerProps {
   handleInputChange: (name: string, value: string) => void;
+  validateInput: (key: keyof CardInputValidation, value: string | string[]) => boolean | undefined;
   value: Issuer | '';
 }
 
-function CardIssuer({ handleInputChange, value }: CardIssuerProps) {
-  const { isModalOpen, openModal, closeModal, onModalClosePress } = useModal();
+function CardIssuer({ handleInputChange, validateInput, value }: CardIssuerProps) {
+  const { isModalOpen, openModal, closeModal } = useModal();
+  const [isError, setIsError] = useState(false);
+
+  const handleClose = () => {
+    const isValid = validateInput('issuer', value);
+    setIsError(!isValid);
+    closeModal();
+  };
+
+  const onClosePress = (event: KeyboardEvent<HTMLElement>) => {
+    if (event.key === 'Escape') {
+      handleClose();
+    }
+  };
 
   const onOptionClick = (event: MouseEvent<HTMLDivElement>) => {
     if (!isElementOfType<HTMLDivElement>(event)) return;
 
-    const { name, value } = event.target.dataset;
+    const { value } = event.target.dataset;
 
-    if (!name || !value) return;
+    if (!value) return;
 
-    handleInputChange(name, value);
+    const isValid = validateInput('issuer', value);
+    setIsError(!isValid);
+    handleInputChange('issuer', value);
     closeModal();
   };
 
@@ -33,6 +49,7 @@ function CardIssuer({ handleInputChange, value }: CardIssuerProps) {
       <Label htmlFor="issuer" required>
         카드사
       </Label>
+      {isError ? 'isError' : 'Valid'}
       <Button
         type="button"
         id="issuer"
@@ -43,8 +60,8 @@ function CardIssuer({ handleInputChange, value }: CardIssuerProps) {
         {value ? `${value}` : '카드사를 선택해주세요'}
       </Button>
       {isModalOpen && (
-        <Modal isOpen={isModalOpen} close={closeModal} onKeyDown={onModalClosePress}>
-          <CardIssuerSelection onOptionClick={onOptionClick} close={closeModal} />
+        <Modal isOpen={isModalOpen} close={handleClose} onKeyDown={onClosePress}>
+          <CardIssuerSelection onOptionClick={onOptionClick} close={handleClose} />
         </Modal>
       )}
     </InputContainer>
