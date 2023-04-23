@@ -18,7 +18,7 @@ export const CreditCardLayout = styled.div<CreditCardLayoutProps>`
     line-height: 14px;
     color: #FFFFFF;
     letter-spacing: 3px;
-    border: ${(props) => (props.isValid ? '' : '2px solid red')};
+    border: ${(props) => (props.isValid ? '0' : '2px solid red')};
 `;
 
 export const CreditCardICChip = styled.div`
