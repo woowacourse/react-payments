@@ -2,6 +2,7 @@ import CardInputForm from "./CardInputForm/CardInputForm";
 
 import "./cardInputPage.css";
 import { CreditCard } from "../../type/CreditCard";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   addNewCard: (card: CreditCard) => void;
@@ -9,11 +10,16 @@ interface Props {
 
 export default function CardInputPage(props: Props) {
   const { addNewCard } = props;
+  const navigate = useNavigate();
 
   return (
     <section className="card-Input-section">
       <div className="card-Input-section-header">
-        <button className="back-page-button" type="button">
+        <button 
+          className="back-page-button"
+          type="button"
+          onClick={() => navigate(-1)}
+        >
           <svg
             width="10"
             height="17"
