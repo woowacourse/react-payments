@@ -10,11 +10,11 @@ import { isElementOfType } from '../../../utils/eventUtils';
 import DownIcon from '../../../assets/down-icon.svg';
 
 interface CardIssuerProps {
-  onInputChange: (name: string, value: string) => void;
+  handleInputChange: (name: string, value: string) => void;
   value: Issuer | '';
 }
 
-function CardIssuer({ onInputChange, value }: CardIssuerProps) {
+function CardIssuer({ handleInputChange, value }: CardIssuerProps) {
   const { isModalOpen, openModal, closeModal, onModalClosePress } = useModal();
 
   const onOptionClick = (event: MouseEvent<HTMLDivElement>) => {
@@ -24,7 +24,7 @@ function CardIssuer({ onInputChange, value }: CardIssuerProps) {
 
     if (!name || !value) return;
 
-    onInputChange(name, value);
+    handleInputChange(name, value);
     closeModal();
   };
 

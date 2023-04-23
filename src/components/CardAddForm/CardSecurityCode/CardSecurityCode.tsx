@@ -9,15 +9,23 @@ import { SECURITY_CODE_MAX_LENGTH, SECURITY_CODE_MIN_LENGTH } from '../../../con
 
 interface CardSecurityCodeProps {
   changeInputValidation: (key: keyof CardInputValidation, value: boolean) => void;
-  onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  handleInputChange: (name: string, value: string) => void;
   value: string;
 }
 
-function CardSecurityCode({ changeInputValidation, onInputChange, value }: CardSecurityCodeProps) {
+function CardSecurityCode({
+  changeInputValidation,
+  handleInputChange,
+  value,
+}: CardSecurityCodeProps) {
   const [isError, handleError] = useError<CardInputValidation>({
     validator: validator.securityCode,
     changeInputValidation,
   });
+
+  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+    handleInputChange(event.target.name, event.target.value);
+  };
 
   const onBlur = (event: FocusEvent<HTMLInputElement>) => {
     handleError(event.target.name, event.target.value);
@@ -44,7 +52,7 @@ function CardSecurityCode({ changeInputValidation, onInputChange, value }: CardS
         autoComplete="cc-csc"
         inputMode="numeric"
         isError={isError}
-        onChange={onInputChange}
+        onChange={onChange}
         onBlur={onBlur}
       />
     </InputContainer>

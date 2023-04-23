@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, SetStateAction, useCallback, useState } from 'react';
+import { Dispatch, SetStateAction, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card } from '../types';
 import formatChecker from '../utils/formatChecker';
@@ -34,42 +34,23 @@ const useCardForm = (addCard: Dispatch<SetStateAction<Card[]>>) => {
     });
   }, []);
 
-  const onSingleInputFieldChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-    const { name } = event.target;
-    const value = event.target.dataset.value ?? event.target.value;
+  const handleMultipleInputFieldChange = useCallback(
+    (name: string, value: string, index: number) => {
+      if (!validateMultipleInputField(name) || !index) return;
+      if (isKeyOfObj(formatChecker, name) && !formatChecker[name](value)) return;
 
-    if (isKeyOfObj(formatChecker, name) && !formatChecker[name](value)) return;
+      setCardInformation((information) => {
+        const changeInformation: string[] = [...information[name]];
+        changeInformation[index] = value;
 
-    const formattedValue = isKeyOfObj(formatter, name) ? formatter[name](value) : value;
-
-    setCardInformation((information) => {
-      return {
-        ...information,
-        [name]: formattedValue,
-      };
-    });
-  }, []);
-
-  const onMultipleInputFieldsChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-    const {
-      name,
-      value,
-      dataset: { index },
-    } = event.target;
-
-    if (!validateMultipleInputField(name) || !index) return;
-    if (isKeyOfObj(formatChecker, name) && !formatChecker[name](value)) return;
-
-    setCardInformation((information) => {
-      const changeInformation: string[] = [...information[name]];
-      changeInformation[Number(index)] = value;
-
-      return {
-        ...information,
-        [name]: changeInformation,
-      };
-    });
-  }, []);
+        return {
+          ...information,
+          [name]: changeInformation,
+        };
+      });
+    },
+    []
+  );
 
   const handleSubmit = () => {
     addCard((cardList) => {
@@ -81,8 +62,7 @@ const useCardForm = (addCard: Dispatch<SetStateAction<Card[]>>) => {
   return {
     cardInformation,
     handleSingleInputFieldChange,
-    onSingleInputFieldChange,
-    onMultipleInputFieldsChange,
+    handleMultipleInputFieldChange,
     handleSubmit,
   };
 };

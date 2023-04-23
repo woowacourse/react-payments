@@ -15,11 +15,11 @@ import { checkNumberFormat } from '../../../utils/formatChecker';
 
 interface CardNumberProps {
   changeInputValidation: (key: keyof CardInputValidation, value: boolean) => void;
-  onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  handleInputChange: (name: string, value: string) => void;
   value: string;
 }
 
-function CardNumber({ changeInputValidation, onInputChange, value }: CardNumberProps) {
+function CardNumber({ changeInputValidation, handleInputChange, value }: CardNumberProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const setCursor = useInputCursorPosition(inputRef);
   const [isError, handleError] = useError<CardInputValidation>({
@@ -70,7 +70,7 @@ function CardNumber({ changeInputValidation, onInputChange, value }: CardNumberP
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     onInputValueChange(event);
     onInputCursorPositionChange(event);
-    onInputChange(event);
+    handleInputChange(event.target.name, event.target.dataset.value || '');
   };
 
   return (

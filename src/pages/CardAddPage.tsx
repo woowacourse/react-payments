@@ -13,8 +13,7 @@ function CardAddPage({ addCard }: CardAddPageProps) {
   const {
     cardInformation,
     handleSingleInputFieldChange,
-    onSingleInputFieldChange,
-    onMultipleInputFieldsChange,
+    handleMultipleInputFieldChange,
     handleSubmit,
   } = useCardForm(addCard);
 
@@ -32,9 +31,8 @@ function CardAddPage({ addCard }: CardAddPageProps) {
         />
         <CardAddForm
           cardInformation={cardInformation}
-          onSingleInputFieldChange={onSingleInputFieldChange}
           handleSingleInputFieldChange={handleSingleInputFieldChange}
-          onMultipleInputFieldsChange={onMultipleInputFieldsChange}
+          handleMultipleInputFieldChange={handleMultipleInputFieldChange}
           handleCardInformationSubmit={handleSubmit}
         />
       </main>

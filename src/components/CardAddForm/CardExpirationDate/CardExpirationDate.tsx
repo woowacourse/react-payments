@@ -10,13 +10,13 @@ import { formatDisplayedExpirationDate } from '../../../utils/formatter';
 
 interface CardExpirationDateProps {
   changeInputValidation: (key: keyof CardInputValidation, value: boolean) => void;
-  onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  handleInputChange: (name: string, value: string) => void;
   value: ExpirationDate;
 }
 
 function CardExpirationDate({
   changeInputValidation,
-  onInputChange,
+  handleInputChange,
   value,
 }: CardExpirationDateProps) {
   const [isError, handleError] = useError<CardInputValidation>({
@@ -25,6 +25,10 @@ function CardExpirationDate({
   });
 
   const expirationDate = formatDisplayedExpirationDate(`${value.month}${value.year}`);
+
+  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+    handleInputChange(event.target.name, event.target.value);
+  };
 
   const onBlur = (event: FocusEvent<HTMLInputElement>) => {
     handleError(event.target.name, event.target.value);
@@ -49,7 +53,7 @@ function CardExpirationDate({
         autoComplete="cc-exp"
         inputMode="numeric"
         isError={isError}
-        onChange={onInputChange}
+        onChange={onChange}
         onBlur={onBlur}
       />
     </InputContainer>

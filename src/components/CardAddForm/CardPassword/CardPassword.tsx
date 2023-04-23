@@ -11,17 +11,21 @@ import validator from '../../../utils/validator';
 
 interface CardPasswordProps {
   changeInputValidation: (key: keyof CardInputValidation, value: boolean) => void;
-  onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  handleInputChange: (name: string, value: string, index: number) => void;
   values: string[];
 }
 
-function CardPassword({ changeInputValidation, onInputChange, values }: CardPasswordProps) {
+function CardPassword({ changeInputValidation, handleInputChange, values }: CardPasswordProps) {
   const [isError, handleError] = useError<CardInputValidation>({
     validator: validator.password,
     changeInputValidation,
     inputs: values,
   });
   const lastInputRef = useRef<HTMLInputElement>(null);
+
+  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+    handleInputChange(event.target.name, event.target.value, Number(event.target.dataset.index));
+  };
 
   const onBlur = (event: FocusEvent<HTMLElement>) => {
     if (!isElementOfType<HTMLInputElement>(event)) return;
@@ -30,7 +34,7 @@ function CardPassword({ changeInputValidation, onInputChange, values }: CardPass
   };
 
   const onFirstInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    onInputChange(event);
+    onChange(event);
 
     if (event.target.value.length === PASSWORD_UNIT_MAX_LENGTH && lastInputRef.current) {
       lastInputRef.current.focus();
@@ -61,7 +65,7 @@ function CardPassword({ changeInputValidation, onInputChange, values }: CardPass
             autoComplete="off"
             inputMode="numeric"
             isError={isError}
-            onChange={index === 0 ? onFirstInputChange : onInputChange}
+            onChange={index === 0 ? onFirstInputChange : onChange}
           />
         ))}
         <div className={styles.passwordPlaceholder}>

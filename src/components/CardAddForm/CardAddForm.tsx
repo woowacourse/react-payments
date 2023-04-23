@@ -1,5 +1,5 @@
 import styles from './style.module.css';
-import { ChangeEvent, FormEvent, useEffect, useRef } from 'react';
+import { FormEvent, useEffect, useRef } from 'react';
 import { Card } from '../../types';
 import CardNumber from './CardNumber/CardNumber';
 import CardExpirationDate from './CardExpirationDate/CardExpirationDate';
@@ -13,17 +13,15 @@ import CardIssuer from './CardIssuer/CardIssuer';
 
 interface CardAddFormProps {
   cardInformation: Card;
-  onSingleInputFieldChange: (event: ChangeEvent<HTMLInputElement>) => void;
   handleSingleInputFieldChange: (name: string, value: string) => void;
-  onMultipleInputFieldsChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  handleMultipleInputFieldChange: (name: string, value: string, index: number) => void;
   handleCardInformationSubmit: () => void;
 }
 
 function CardAddForm({
   cardInformation,
-  onSingleInputFieldChange,
   handleSingleInputFieldChange,
-  onMultipleInputFieldsChange,
+  handleMultipleInputFieldChange,
   handleCardInformationSubmit,
 }: CardAddFormProps) {
   const [cardInputValidation, handleValidationChange] = useCardValidator();
@@ -47,25 +45,28 @@ function CardAddForm({
 
   return (
     <form ref={formRef} className={styles.form} onSubmit={onSubmit}>
-      <CardIssuer onInputChange={handleSingleInputFieldChange} value={cardInformation.issuer} />
+      <CardIssuer handleInputChange={handleSingleInputFieldChange} value={cardInformation.issuer} />
       <CardNumber
-        onInputChange={onSingleInputFieldChange}
+        handleInputChange={handleSingleInputFieldChange}
         changeInputValidation={handleValidationChange}
         value={cardInformation.cardNumber}
       />
       <CardExpirationDate
-        onInputChange={onSingleInputFieldChange}
+        handleInputChange={handleSingleInputFieldChange}
         changeInputValidation={handleValidationChange}
         value={cardInformation.expirationDate}
       />
-      <CardOwnerName onInputChange={onSingleInputFieldChange} value={cardInformation.ownerName} />
+      <CardOwnerName
+        handleInputChange={handleSingleInputFieldChange}
+        value={cardInformation.ownerName}
+      />
       <CardSecurityCode
-        onInputChange={onSingleInputFieldChange}
+        handleInputChange={handleSingleInputFieldChange}
         changeInputValidation={handleValidationChange}
         value={cardInformation.securityCode}
       />
       <CardPassword
-        onInputChange={onMultipleInputFieldsChange}
+        handleInputChange={handleMultipleInputFieldChange}
         changeInputValidation={handleValidationChange}
         values={cardInformation.password}
       />
