@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import Input from '../common/Input';
 import InputBox from '../common/InputBox';
 import InputGroup from '../common/InputGroup';
@@ -60,7 +60,7 @@ const CardNumberInput = ({
     <InputGroup labelValue='카드 번호' errorMessage={errorMessage}>
       <InputBox isError={!!errorMessage}>
         {[0, 1, 2, 3].map((index) => (
-          <>
+          <React.Fragment key={index}>
             <Input
               ref={refs[index]}
               value={cardNumber[index]}
@@ -81,7 +81,7 @@ const CardNumberInput = ({
                 -
               </InputSeparator>
             )}
-          </>
+          </React.Fragment>
         ))}
       </InputBox>
     </InputGroup>
