@@ -15,7 +15,7 @@ interface StyleInputProps {
 }
 
 const Input = forwardRef<HTMLInputElement, Props>(function (
-  { value, placeholder, onChange, inputmode, ...props }: Props,
+  { value, placeholder, onChange, inputmode, type, ...props }: Props,
   ref,
 ) {
   return (
@@ -25,6 +25,7 @@ const Input = forwardRef<HTMLInputElement, Props>(function (
       inputMode={inputmode ?? "text"}
       placeholder={placeholder}
       ref={ref}
+      type={type ?? "text"}
       {...props}
     />
   );
