@@ -14,7 +14,7 @@ export function PasswordInput(props: PasswordInputProps) {
   const handleChange = (
     e: ChangeEvent<HTMLInputElement>,
     index: number,
-    onChange?: ChangeEventHandler<HTMLInputElement>
+    onChange?: ChangeEventHandler<HTMLInputElement>,
   ) => {
     const value = e.target.value;
 
@@ -28,6 +28,7 @@ export function PasswordInput(props: PasswordInputProps) {
     <>
       <Input
         ref={inputRefs[0]}
+        inputMode="numeric"
         value={first.value}
         type="password"
         maxLength={1}
@@ -36,6 +37,7 @@ export function PasswordInput(props: PasswordInputProps) {
       />
       <Input
         ref={inputRefs[1]}
+        inputMode="numeric"
         value={second.value}
         type="password"
         maxLength={1}

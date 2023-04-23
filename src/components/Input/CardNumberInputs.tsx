@@ -7,13 +7,15 @@ interface CardNumberInputProps {
 }
 
 const DEFAULT_CARD_NUMBER = '0000';
+const THIRD_BOX = 2;
 
 export function CardNumberInputs({ valueAndOnChanges }: CardNumberInputProps) {
   const inputRefs = valueAndOnChanges.map(() => React.createRef<HTMLInputElement>());
+
   const handleChange = (
     e: ChangeEvent<HTMLInputElement>,
     index: number,
-    onChange?: ChangeEventHandler<HTMLInputElement>
+    onChange?: ChangeEventHandler<HTMLInputElement>,
   ) => {
     const value = e.target.value;
 
@@ -25,20 +27,23 @@ export function CardNumberInputs({ valueAndOnChanges }: CardNumberInputProps) {
 
   return (
     <>
-      {valueAndOnChanges.map(({ value, onChange }, index) => (
-        <>
-          <Input
-            ref={inputRefs[index]}
-            value={value}
-            type={index < 2 ? 'text' : 'password'}
-            maxLength={4}
-            onChange={(e) => handleChange(e, index, onChange)}
-            placeholder={DEFAULT_CARD_NUMBER}
-            required
-          />
-          {index < valueAndOnChanges.length - 1 && <span>-</span>}
-        </>
-      ))}
+      {valueAndOnChanges.map(({ value, onChange }, index) => {
+        return (
+          <>
+            <Input
+              ref={inputRefs[index]}
+              inputMode="numeric"
+              value={value}
+              type={index < THIRD_BOX ? 'text' : 'password'}
+              maxLength={4}
+              onChange={(e) => handleChange(e, index, onChange)}
+              placeholder={DEFAULT_CARD_NUMBER}
+              required
+            />
+            {index < valueAndOnChanges.length - 1 && <span>-</span>}
+          </>
+        );
+      })}
     </>
   );
 }

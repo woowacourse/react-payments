@@ -8,9 +8,13 @@ export interface SecurityInputProps {
 
 export function SecurityCodeInput({ value, onChange }: SecurityInputProps) {
   return (
-    <>
-      {' '}
-      <Input value={value} type="password" maxLength={3} onChange={onChange} required />
-    </>
+    <Input
+      value={value}
+      inputMode="numeric"
+      type="password"
+      maxLength={3}
+      onChange={onChange}
+      required
+    />
   );
 }

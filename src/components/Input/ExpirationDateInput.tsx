@@ -15,7 +15,7 @@ export function ExpirationDateInput(props: ExpirationProps) {
   const handleChange = (
     e: ChangeEvent<HTMLInputElement>,
     index: number,
-    onChange?: ChangeEventHandler<HTMLInputElement>
+    onChange?: ChangeEventHandler<HTMLInputElement>,
   ) => {
     const value = e.target.value;
 
@@ -30,6 +30,7 @@ export function ExpirationDateInput(props: ExpirationProps) {
     <>
       <Input
         ref={inputRefs[0]}
+        inputMode="numeric"
         value={month.value}
         type="text"
         maxLength={2}
@@ -40,6 +41,7 @@ export function ExpirationDateInput(props: ExpirationProps) {
       <SLASH />
       <Input
         ref={inputRefs[1]}
+        inputMode="numeric"
         value={year.value}
         type="text"
         maxLength={2}
