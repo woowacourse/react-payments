@@ -1,24 +1,19 @@
-import styled from 'styled-components';
+import React, { CSSProperties } from "react";
+import styled from "styled-components";
 
-const Flex = styled.div<{
-  width?: string;
-  dir?: 'row' | 'column';
-  justify?:
-    | 'start'
-    | 'center'
-    | 'space-between'
-    | 'space-around'
-    | 'space-evenly';
+interface FlexProps {
+  width?: CSSProperties["width"];
+  dir?: CSSProperties["flexDirection"];
+  justify?: CSSProperties["justifyContent"];
+  align?: CSSProperties["alignItems"];
+}
 
-  align?: 'stretch' | 'center' | 'start' | 'end';
-}>`
+const Flex = styled.div<FlexProps>`
   display: flex;
-  flex-direction: ${({ dir = 'row' }) => dir};
-
-  justify-content: ${({ justify = 'start' }) => justify};
-  align-items: ${({ align = 'stretch' }) => align};
-
-  width: ${({ width = '100%' }) => width};
+  flex-direction: ${({ dir = "row" }) => dir};
+  justify-content: ${({ justify = "start" }) => justify};
+  align-items: ${({ align = "stretch" }) => align};
+  width: ${({ width = "100%" }) => width};
   overflow: scroll;
 `;
 
