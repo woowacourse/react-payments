@@ -42,7 +42,7 @@ const InputDivider = styled.div`
 interface PaymentsInputProps {
   title?: string;
   inputInformationList: InputInformation[];
-  inputDivideLetter?: string | '';
+  inputDivideLetter?: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
