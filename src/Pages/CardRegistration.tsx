@@ -1,41 +1,8 @@
-import { useState } from 'react';
 import styled from 'styled-components';
-import Card, { CardNumber } from '../components/Card';
-import Header from '../components/Header';
-import PaymentsInputContainer from '../containers/PaymentsInputContainer';
-
-export const useCardNumber = (initialState = ['', '', '', '']) => {
-  const [cardNumber, setValue] = useState<CardNumber>(initialState as CardNumber);
-
-  const setCardNumber = (index: number, value: string) => {
-    const newCardNumber = [...cardNumber.slice(0, index), value, ...cardNumber.slice(index + 1)];
-    setValue(newCardNumber as CardNumber);
-  };
-
-  return { cardNumber, setCardNumber };
-};
-
-export const useExpirationDate = (initialState = { year: 'YY', month: 'MM' }) => {
-  const [expirationDate, setValue] = useState(initialState);
-  const setExpirationDate = (index: number, value: string) => {
-    if (index === 0) {
-      setValue(prev => ({ ...prev, month: value }));
-    }
-    if (index === 1) {
-      setValue(prev => ({ ...prev, year: value }));
-    }
-  };
-
-  return { expirationDate, setExpirationDate };
-};
-
-export const useOwner = (initialState = 'NAME') => {
-  const [owner, setValue] = useState(initialState);
-  const setOwner = (value: string) => {
-    setValue(value);
-  };
-  return { owner, setOwner };
-};
+import CardRegistrationForm from '../components/CardRegistrationForm';
+import Card from '../components/Common/Card';
+import Header from '../components/Common/Header';
+import type { CardInformation } from '../components/Common/Card/types';
 
 const MainCardRegistration = styled.main`
   display: flex;
@@ -46,17 +13,19 @@ const MainCardRegistration = styled.main`
   }
 `;
 
-function CardRegistration() {
-  const { cardNumber, setCardNumber } = useCardNumber();
-  const { expirationDate, setExpirationDate } = useExpirationDate();
-  const { owner, setOwner } = useOwner();
+const cardInformation: CardInformation = {
+  cardNumber: ['1234', '1234', '1234', '1234'],
+  expirationDate: ['YY', 'MM'],
+  owner: 'NAME',
+};
 
+function CardRegistration() {
   return (
     <>
       <Header title="카드 추가" hasBackHistory />
       <MainCardRegistration>
-        <Card isAddForm cardInformation={{ cardNumber, expirationDate, owner }} />
-        <PaymentsInputContainer setCardInformation={{ setCardNumber, setExpirationDate, setOwner }} />
+        <Card cardInformation={cardInformation} isAddForm />
+        <CardRegistrationForm />
       </MainCardRegistration>
     </>
   );
