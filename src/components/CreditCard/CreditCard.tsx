@@ -2,7 +2,7 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
 import * as T from 'types';
-import creditCard from '../../domains/creditCard';
+import { convertSecuredCreditCard } from 'domains/creditCard';
 import * as S from './style';
 
 export type CreditCardProps = {
@@ -27,7 +27,7 @@ function CreditCard({ fullFilled, creditCard: { expiry, number, owner } }: Credi
       <S.CreditCardICChip />
       <S.Box>
         <S.CreditCardNumber>
-          {creditCard.convertSecuredCreditCard(number).map((num, idx) => <div key={idx}>{num}</div>)}
+          {convertSecuredCreditCard(number).map((num, idx) => <div key={idx}>{num}</div>)}
         </S.CreditCardNumber>
         <S.CreditCardConatiner>
           <S.CreditCardBox>
