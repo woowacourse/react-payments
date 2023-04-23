@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { CardType } from "../../types/card";
 import Card from "../common/Card";
+import { CARDNUMBERS_REGEX, DEFAULT_EXPRIYDATE, DEFAULT_NAME } from "../../constants";
 
 import { useMemo } from "react";
 
@@ -11,20 +12,20 @@ interface CardProps {
 export const CardItem = ({ card }: CardProps) => {
   const memorizedNumbers = useMemo((): string => {
     const shownNumbers = card.numbers.slice(0, 8);
-    return (shownNumbers.match(/\d{1,4}|●{1,4}/g) ?? []).join(" ");
+    return (shownNumbers.match(CARDNUMBERS_REGEX) ?? []).join(" ");
   }, [card.numbers]);
 
   const memorizedHideNumbers = useMemo((): string => {
     const hiddenNumbers = "●".repeat(card.numbers.slice(8).length);
-    return (hiddenNumbers.match(/\d{1,4}|●{1,4}/g) ?? []).join(" ");
+    return (hiddenNumbers.match(CARDNUMBERS_REGEX) ?? []).join(" ");
   }, [card.numbers]);
 
   const memoizedName = useMemo(() => {
-    return card.owner ? card.owner : "NAME";
+    return card.owner ? card.owner : DEFAULT_NAME;
   }, [card.owner]);
 
   const memoizedExpiryDate = useMemo(() => {
-    return card.expiryDate ? card.expiryDate : "MM / YY";
+    return card.expiryDate ? card.expiryDate : DEFAULT_EXPRIYDATE;
   }, [card.expiryDate]);
 
   return (

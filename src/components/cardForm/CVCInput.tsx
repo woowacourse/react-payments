@@ -5,12 +5,14 @@ import styled from "styled-components";
 
 import { useCallback } from "react";
 
+import { CVC_MAXLEGNTH, NUMBER_REGEX } from "../../constants";
+
 interface CVCProps {
   setIsCompleted: (isCompleted: boolean) => void;
 }
 
 const CVCInfo = {
-  label: "cvc",
+  label: "CVC",
   placeholder: "",
   type: "password",
   $width: "84px",
@@ -20,13 +22,13 @@ const CVCInfo = {
 export const CVCInput = ({ setIsCompleted }: CVCProps) => {
   const handleInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (e.target.value.length > 3 || !/\d$/.test(e.target.value)) {
+      if (e.target.value.length > CVC_MAXLEGNTH || !NUMBER_REGEX.test(e.target.value)) {
         e.target.value = e.target.value.slice(0, -1);
         return;
       }
 
       setIsCompleted(false);
-      if (e.target.value.length === 3) {
+      if (e.target.value.length === CVC_MAXLEGNTH) {
         setIsCompleted(true);
       }
     },

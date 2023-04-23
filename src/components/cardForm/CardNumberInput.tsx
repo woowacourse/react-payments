@@ -3,6 +3,8 @@ import { InputLabel } from "../common/InputLabel";
 import { Input } from "../common/Input";
 import { useState } from "react";
 
+import { CARDNUMBERS_MAXLEGNTH, CARDNUMBERS_REGEX } from "../../constants";
+
 interface CardNumberInputProps {
   cardNumbers: string;
   isValid: boolean;
@@ -12,7 +14,7 @@ interface CardNumberInputProps {
 }
 
 const cardNumberInputInfo = {
-  label: "cardNumber",
+  label: "cardNumbers",
   placeholder: "",
   type: "text",
   $width: "318px",
@@ -21,7 +23,7 @@ const cardNumberInputInfo = {
 
 const hideNumbers = (numbers: string): string => {
   const hiddenNumbers = `${numbers.slice(0, 8)}${"●".repeat(numbers.slice(8).length)}`;
-  return (hiddenNumbers.match(/\d{1,4}|●{1,4}/g) ?? []).join(" - ");
+  return (hiddenNumbers.match(CARDNUMBERS_REGEX) ?? []).join(" - ");
 };
 
 export const CardNumberInput = ({
@@ -52,7 +54,7 @@ export const CardNumberInput = ({
     if (postText.replaceAll(" - ", "").length < text.replaceAll(" - ", "").length) {
       const numbers = text.replaceAll(" - ", "");
 
-      if (numbers.length > 16 || !/\d/g.test(text.slice(-1))) {
+      if (numbers.length > CARDNUMBERS_MAXLEGNTH || !/\d/g.test(text.slice(-1))) {
         e.target.value = e.target.value.slice(0, -1);
         return;
       }
@@ -60,7 +62,7 @@ export const CardNumberInput = ({
       const addNumbers = `${cardNumbers}${text.slice(-1)}`;
       saveNumbers(e.target, addNumbers);
 
-      if (addNumbers.length === 16) setIsCompleted(true);
+      if (addNumbers.length === CARDNUMBERS_MAXLEGNTH) setIsCompleted(true);
 
       return;
     }

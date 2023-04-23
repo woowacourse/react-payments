@@ -5,9 +5,11 @@ import { Link } from "react-router-dom";
 export const EmptyCard = () => {
   return (
     <Link to="/addCard">
-      <Card>
-        <PlusIcon>+</PlusIcon>
-      </Card>
+      <Container>
+        <Card>
+          <PlusIcon>+</PlusIcon>
+        </Card>
+      </Container>
     </Link>
   );
 };
@@ -19,4 +21,9 @@ const PlusIcon = styled.div`
   font-size: 30px;
   font-weight: 600;
   color: #575757;
+`;
+
+const Container = styled.div`
+  height: 125px;
+  margin-bottom: 46px;
 `;

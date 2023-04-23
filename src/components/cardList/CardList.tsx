@@ -21,7 +21,7 @@ export const CardList = ({ cards }: CardListProps) => {
   );
 };
 
-const CardListWrapper = styled.div`
+const CardListWrapper = styled.li`
   display: flex;
   flex-direction: column;
   align-items: center;

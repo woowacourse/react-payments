@@ -4,6 +4,8 @@ import { InputLabel } from "../common/InputLabel";
 import { useRef } from "react";
 import styled from "styled-components";
 
+import { PASSWORD_MAXLEGNTH, NUMBER_REGEX } from "../../constants";
+
 interface PasswordProps {
   setIsCompleted: (isCompleted: boolean) => void;
 }
@@ -26,13 +28,13 @@ export const PasswordInput = ({ setIsCompleted }: PasswordProps) => {
       setIsCompleted(false);
     }
 
-    if (e.target.value.length > 1 || !/\d$/.test(e.target.value)) {
+    if (e.target.value.length > 1 || !NUMBER_REGEX.test(e.target.value)) {
       e.target.value = e.target.value.slice(0, -1);
       return;
     }
 
     isInputsCompleted.current[index] = false;
-    if (e.target.value.length === 1) isInputsCompleted.current[index] = true;
+    if (e.target.value.length === PASSWORD_MAXLEGNTH) isInputsCompleted.current[index] = true;
 
     setIsCompleted(false);
     if (isInputsCompleted.current.every((isCompleted) => isCompleted)) setIsCompleted(true);
