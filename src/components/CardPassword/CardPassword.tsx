@@ -1,15 +1,14 @@
 import { useRef } from 'react';
-import { NUMBER_REGEX } from '../../constants/regex';
 import CardInput from '../CardInput/CardInput';
 import CardLabel from '../CardLabel/CardLabel';
 import * as Styled from './CardPassword.styles';
 
 interface CardPasswordProps {
   password: Record<number, string>;
-  setPassword: React.Dispatch<React.SetStateAction<Record<number, string>>>;
+  checkPassword: (order: number, value: string) => boolean;
 }
 
-const CardPassword = ({ password, setPassword }: CardPasswordProps) => {
+const CardPassword = ({ password, checkPassword }: CardPasswordProps) => {
   const passwordRefs: Record<number, React.RefObject<HTMLInputElement>> = {
     0: useRef<HTMLInputElement>(null),
     1: useRef<HTMLInputElement>(null),
@@ -18,11 +17,7 @@ const CardPassword = ({ password, setPassword }: CardPasswordProps) => {
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const currentOrder = Number(e.target.dataset['order']);
 
-    if (NUMBER_REGEX.test(e.target.value)) {
-      return;
-    }
-
-    setPassword({ ...password, [currentOrder]: e.target.value });
+    if (!checkPassword(currentOrder, e.target.value)) return;
 
     if (currentOrder === 0 && password[0].length === 0) {
       passwordRefs[currentOrder + 1].current?.focus();

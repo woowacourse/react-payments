@@ -16,5 +16,6 @@ export const CardPasswordStory: Story = {
       0: '0',
       1: '2',
     },
+    checkPassword: (order: number, value: string) => true,
   },
 };

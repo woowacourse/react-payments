@@ -12,6 +12,7 @@ import { CardType } from '../types/Card';
 import useAddCard from '../hooks/useAddCard';
 import useCardNumbers from '../hooks/useCardNumbers';
 import useCardOwnerName from '../hooks/useCardOwnerName';
+import useCardPassword from '../hooks/useCardPassword';
 
 const Wrapper = styled.div`
   display: flex;
@@ -37,13 +38,12 @@ interface SetCardsProps {
 const AddCard = ({ cards, setCards }: SetCardsProps) => {
   const { cardNumbers, checkCardNumbers } = useCardNumbers();
   const { cardOwnerName, checkCardOwnerName } = useCardOwnerName();
+  const { password, checkPassword } = useCardPassword();
   const {
     expiredDate,
     setExpiredDate,
     securityCode,
     setSecurityCode,
-    password,
-    setPassword,
     disabled,
   } = useAddCard();
 
@@ -84,7 +84,7 @@ const AddCard = ({ cards, setCards }: SetCardsProps) => {
           securityCode={securityCode}
           setSecurityCode={setSecurityCode}
         />
-        <CardPassword password={password} setPassword={setPassword} />
+        <CardPassword password={password} checkPassword={checkPassword} />
         <ButtonWrapper>
           <NextButton disabled={disabled}>다음</NextButton>
         </ButtonWrapper>
