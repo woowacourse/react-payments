@@ -1,13 +1,8 @@
 import React from 'react';
+import { CardNumber } from '../type';
 import { changeNumberToMask } from '../utils/util';
 import './Card.css';
 
-type CardNumber = {
-  first: string;
-  second: string;
-  third: string;
-  fourth: string;
-};
 type CardProps = {
   cardType: string;
   cardNumber: CardNumber;
