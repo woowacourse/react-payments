@@ -1,7 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react';
-
-import { CardNumberInput } from '../../components/input/CardNumberInput';
+import type { Meta } from '@storybook/react';
 import { useState } from 'react';
+import { CardNumberInput } from '../../components/input/CardNumberInput';
 
 const meta = {
   title: 'Example/Input',
@@ -12,7 +11,7 @@ const meta = {
 export default meta;
 
 export const CardNumber = () => {
-  const [cardNumber, setCardNumber] = useState({ 0: '', 1: '', 2: '', 3: '' });
+  const [cardNumber, setCardNumber] = useState(['', '', '', '']);
 
   return (
     <CardNumberInput

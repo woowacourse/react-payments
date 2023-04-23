@@ -1,8 +1,9 @@
 import styled from 'styled-components';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Input } from './Input';
 import { InputWrapper } from './InputWrapper';
 import { CardNumber } from '../../types';
+import { hasValidLength, isNumeric } from '../../validator';
 
 interface Props {
   cardNumber: CardNumber;
@@ -26,42 +27,41 @@ export function CardNumberInput({ moveFocusToExpirationDate, cardNumber, setCard
       index !== 0
     ) {
       e.preventDefault();
-      setMaxLengthReached((current) => [...current.slice(1), false]);
+      setMaxLengthReached((prev) => [...prev.slice(1), false]);
       allRef[index - 1].current?.focus();
     }
   };
 
   const handleCardNumberInputChange = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
-    setCardNumber({
-      ...cardNumber,
-      [index]: e.target.value,
+    setCardNumber((prev) => {
+      const currentCardNumber = [...prev];
+      currentCardNumber[index] = e.target.value;
+      return currentCardNumber;
     });
+
     if (e.target.value.length === 4) {
-      setMaxLengthReached((current) => [true, ...current.slice(0, -1)]);
-      if (index !== 3) allRef[index + 1].current?.focus();
-      if (index === 3) moveFocusToExpirationDate();
+      setMaxLengthReached((prev) => [true, ...prev.slice(0, -1)]);
+
+      const isLastInput = index === cardNumber.length - 1;
+
+      if (!isLastInput) allRef[index + 1].current?.focus();
+      if (isLastInput) moveFocusToExpirationDate();
     }
   };
 
-  const handleLastInputBlur = (index: number) => {
+  const handleLastInputBlur = (index: number, e: React.FocusEvent<HTMLInputElement>) => {
     if (index === 3) {
-      if (!validator(Object.values(cardNumber).join(''))) {
-        setCardNumber({
-          0: '',
-          1: '',
-          2: '',
-          3: '',
-        });
+      const input = [...cardNumber.slice(0, -1), e.target.value].join('');
+      const isValidCardNumber = isNumeric(input) && hasValidLength(input, 16);
+
+      if (!isValidCardNumber) {
+        setCardNumber(['', '', '', '']);
         alert('유효하지 않은 카드 번호입니다.');
 
         firstInputRef.current?.focus();
       }
     }
   };
-
-  useEffect(() => {
-    firstInputRef.current?.click();
-  }, []);
 
   return (
     <>
@@ -73,7 +73,7 @@ export function CardNumberInput({ moveFocusToExpirationDate, cardNumber, setCard
           return (
             <>
               <Input
-                value={cardNumber[index as keyof typeof cardNumber]}
+                value={cardNumber[index]}
                 width={36}
                 minLength={4}
                 maxLength={4}
@@ -84,7 +84,7 @@ export function CardNumberInput({ moveFocusToExpirationDate, cardNumber, setCard
                 ref={allRef[index]}
                 onChange={(e) => handleCardNumberInputChange(index, e)}
                 onKeyDown={(e) => handleBackspacePress(index, e)}
-                onBlur={() => handleLastInputBlur(index)}
+                onBlur={(e) => handleLastInputBlur(index, e)}
                 placeholder={index < 2 ? '0000' : '••••'}
               />
               {index !== 3 && <Style.Hyphen isVisible={maxLengthReached[index]}>-</Style.Hyphen>}
@@ -96,10 +96,6 @@ export function CardNumberInput({ moveFocusToExpirationDate, cardNumber, setCard
   );
 }
 
-const validator = (input: string) => {
-  return /^[0-9]+$|^$/.test(input);
-};
-
 const Style = {
   Label: styled.div`
     display: flex;
@@ -109,6 +105,7 @@ const Style = {
 
     font-size: 12px;
   `,
+
   Title: styled.span`
     color: #2f2f2f;
   `,

@@ -13,12 +13,7 @@ export const AddNewCardForm = () => {
   const navigate = useNavigate();
   const [isInputFinish, setIsInputFinish] = useState(false);
 
-  const [cardNumber, setCardNumber] = useState({
-    0: '',
-    1: '',
-    2: '',
-    3: '',
-  });
+  const [cardNumber, setCardNumber] = useState(['', '', '', '']);
 
   const [expirationDate, setExpirationDate] = useState({
     month: '',
