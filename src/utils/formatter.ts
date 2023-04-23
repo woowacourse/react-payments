@@ -8,6 +8,10 @@ import {
   SECURITY_TEXT_ICON,
 } from '../constants';
 
+const formatCardNumber = (input: string) => {
+  return input.replace(REGEX.NON_NUMBER, '');
+};
+
 const formatExpirationDate = (input: string) => {
   const [month, year] = input.replace(DATE_DIVIDER, '').match(REGEX.TWO_CHAR_SEQUENCE) ?? [];
 
@@ -19,6 +23,7 @@ const formatEnglishCapitalization = (input: string) => {
 };
 
 const formatter = {
+  cardNumber: formatCardNumber,
   expirationDate: formatExpirationDate,
   ownerName: formatEnglishCapitalization,
 };

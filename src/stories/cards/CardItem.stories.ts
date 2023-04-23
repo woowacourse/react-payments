@@ -13,7 +13,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     information: {
-      cardNumber: '12341234123412341234',
+      cardNumber: '1234123412341234',
       expirationDate: {
         month: '06',
         year: '23',
