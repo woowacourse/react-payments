@@ -9,12 +9,14 @@ import CardPassword from '../components/CardPassword/CardPassword';
 import Card from '../components/Card/Card';
 import Header from '../components/Header/Header';
 import { CardType } from '../types/Card';
-import useAddCard from '../hooks/useAddCard';
-import useCardNumbers from '../hooks/useCardNumbers';
-import useCardOwnerName from '../hooks/useCardOwnerName';
-import useCardPassword from '../hooks/useCardPassword';
-import useSecurityCode from '../hooks/useSecurityCode';
-import useExpiredDate from '../hooks/useExpiredDate';
+import {
+  useAddCard,
+  useCardNumbers,
+  useCardOwnerName,
+  useCardPassword,
+  useExpiredDate,
+  useSecurityCode,
+} from '../hooks';
 
 const Wrapper = styled.div`
   display: flex;
@@ -43,7 +45,12 @@ const AddCard = ({ cards, setCards }: SetCardsProps) => {
   const { password, checkPassword } = useCardPassword();
   const { securityCode, checkSecurityCode } = useSecurityCode();
   const { expiredDate, checkExpiredDate, validateDate } = useExpiredDate();
-  const { disabled } = useAddCard();
+  const { disabled } = useAddCard(
+    cardNumbers,
+    expiredDate,
+    securityCode,
+    password
+  );
 
   const navigate = useNavigate();
 
