@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { NUMBER_REGEX } from '../constants/regex';
+import { NOT_A_NUMBER_REGEX } from '../constants/regex';
 
 const useCardNumbers = () => {
   const [cardNumbers, setCardNumbers] = useState<Record<number, string>>({
@@ -10,7 +10,7 @@ const useCardNumbers = () => {
   });
 
   const checkCardNumbers = (order: number, value: string) => {
-    if (NUMBER_REGEX.test(value)) return false;
+    if (NOT_A_NUMBER_REGEX.test(value)) return false;
     setCardNumbers({ ...cardNumbers, [order]: value });
     return true;
   };
