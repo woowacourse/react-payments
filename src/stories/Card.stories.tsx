@@ -1,4 +1,4 @@
-import Card from '../components/Card';
+import Card from '../components/Common/Card';
 import type { Meta, StoryObj } from '@storybook/react';
 
 type Story = StoryObj<typeof Card>;
@@ -14,7 +14,7 @@ export const Default: Story = {
   args: {
     cardInformation: {
       cardNumber: ['1234', '1234', '1234', '1234'],
-      expirationDate: { year: 'YY', month: 'MM' },
+      expirationDate: ['YY', 'MM'],
       owner: 'NAME',
     },
     isAddForm: true,

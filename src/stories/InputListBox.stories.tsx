@@ -1,4 +1,4 @@
-import InputListBox from '../components/InputListBox';
+import InputListBox from '../components/Common/Input/InputListBox';
 import type { Meta, StoryObj } from '@storybook/react';
 
 type Story = StoryObj<typeof InputListBox>;

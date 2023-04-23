@@ -23,6 +23,7 @@ export const CardNumber: Story = {
         { type: 'password', maxLength: 4, textAlign: 'center', placeholder: '1234' },
       ],
       bridgeLetter: '-',
+      getInputListValue: () => {},
     },
   },
 };
@@ -36,6 +37,7 @@ export const ExpirationDate: Story = {
         { type: 'string', maxLength: 2, textAlign: 'center', placeholder: 'YY' },
       ],
       bridgeLetter: '/',
+      getInputListValue: () => {},
     },
   },
 };
@@ -45,6 +47,7 @@ export const Owner: Story = {
     name: '카드 소유자 이름 (선택)',
     inputListInformation: {
       inputInformation: [{ type: 'string', maxLength: 30, placeholder: '카드에 표시된 이름과 동일하게 입력하세요.' }],
+      getInputListValue: () => {},
     },
   },
 };
@@ -54,6 +57,7 @@ export const SecurityCode: Story = {
     name: '보안 코드(CVC/CVV)',
     inputListInformation: {
       inputInformation: [{ type: 'password', textAlign: 'center', maxLength: 3 }],
+      getInputListValue: () => {},
       children: (
         <QuestionToolTip questionMessage="CVV/CVC 번호는 카드 뒷 면에 있는 3자리 숫자이며 카드 보안을 위한 번호입니다." />
       ),
@@ -69,6 +73,7 @@ export const CardPassword: Story = {
         { type: 'password', textAlign: 'center', maxLength: 1 },
         { type: 'password', textAlign: 'center', maxLength: 1 },
       ],
+      getInputListValue: () => {},
       bridgeLetter: '',
       children: (
         <>
