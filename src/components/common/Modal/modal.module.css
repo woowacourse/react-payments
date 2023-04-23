@@ -7,3 +7,38 @@
 
   background: rgba(0, 0, 0, 0.35);
 }
+
+.container {
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 228px;
+  padding: 34px 0;
+  border-radius: 5px 5px 0px 0px;
+  background: #fff;
+  animation: slideDown 0.3s ease-in-out forwards;
+}
+
+.container.slideUp {
+  animation-name: slideUp;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
