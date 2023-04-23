@@ -67,9 +67,13 @@ export default function CardInputForm(props: Props) {
     };
 
     addNewCard(card);
-
+    resetNowCardInfo();
     navigate("/CardListPage");
   }
+
+  const resetNowCardInfo = () => {
+    setNowCardInfo(initialCard);
+  };
 
   const changeNowCardInfo = (
     key: keyof CreditCard,
@@ -77,8 +81,9 @@ export default function CardInputForm(props: Props) {
     index?: number
   ) => {
     if (key === "number" && index !== undefined) {
-      const result = { ...nowCardInfo };
-      if (result.number !== undefined) result.number[index] = value;
+      const result = JSON.parse(JSON.stringify(nowCardInfo));
+      result.number[index] = value;
+
       isCardNumberComplete && setNowCardInfo(result);
       return;
     }
@@ -88,8 +93,8 @@ export default function CardInputForm(props: Props) {
       setNowCardInfo({ ...nowCardInfo, [key]: value });
       return;
     }
-    if (key === "owner" && isOwnerComplete)
-      setNowCardInfo({ ...nowCardInfo, [key]: value });
+    if (key === "owner") console.log(isOwnerComplete);
+    setNowCardInfo({ ...nowCardInfo, [key]: value });
   };
 
   useEffect(() => {
