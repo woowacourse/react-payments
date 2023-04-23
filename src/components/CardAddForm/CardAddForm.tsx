@@ -75,7 +75,7 @@ function CardAddForm({
         values={cardInformation.password}
       />
       <Button className="submit-button" variant="primary" disabled={!isFormComplete}>
-        완료
+        다음
       </Button>
     </form>
   );

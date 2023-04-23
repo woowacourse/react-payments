@@ -23,11 +23,6 @@ function CardNumber({ handleInputChange, validateInput, value }: CardNumberProps
 
   const cardNumber = formatDisplayedCardNumber(value);
 
-  const onBlur = (event: FocusEvent<HTMLInputElement>) => {
-    const isValid = validateInput(event.target.name, event.target.value);
-    setIsError(!isValid);
-  };
-
   const onInputCursorPositionChange = ({ target, nativeEvent }: ChangeEvent<HTMLInputElement>) => {
     if (!(nativeEvent instanceof InputEvent) || !target.selectionStart) return;
 
@@ -63,9 +58,17 @@ function CardNumber({ handleInputChange, validateInput, value }: CardNumberProps
   };
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (isError) setIsError(false);
+
     onInputValueChange(event);
     onInputCursorPositionChange(event);
     handleInputChange(event.target.name, event.target.dataset.value || '');
+    validateInput(event.target.name, event.target.value);
+  };
+
+  const onBlur = (event: FocusEvent<HTMLInputElement>) => {
+    const isValid = validateInput(event.target.name, event.target.value);
+    setIsError(!isValid);
   };
 
   return (

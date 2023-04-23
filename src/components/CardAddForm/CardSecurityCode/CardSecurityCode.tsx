@@ -14,7 +14,10 @@ function CardSecurityCode({ handleInputChange, validateInput, value }: CardSecur
   const [isError, setIsError] = useState(false);
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (isError) setIsError(false);
+
     handleInputChange(event.target.name, event.target.value);
+    validateInput(event.target.name, event.target.value);
   };
 
   const onBlur = (event: FocusEvent<HTMLInputElement>) => {

@@ -21,9 +21,10 @@ function CardPassword({ handleInputChange, validateInput, values }: CardPassword
   };
 
   const onBlur = (event: FocusEvent<HTMLElement>) => {
+    if (event.currentTarget.contains(event.relatedTarget)) return;
     if (!isElementOfType<HTMLInputElement>(event)) return;
 
-    const isValid = validateInput(event.target.name, event.target.value);
+    const isValid = validateInput(event.target.name, values);
     setIsError(!isValid);
   };
 
