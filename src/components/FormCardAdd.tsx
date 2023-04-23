@@ -1,14 +1,12 @@
 import React, { ChangeEvent } from 'react';
 import InputCardData from './InputCardData';
 import InputCardPassword from './InputCardPassword';
-import passwordDotImg from '../asset/password_dot.png';
-import cvcInfo from '../asset/cvc_info.png';
 import { fetchData } from '../utils/fetchData';
 import { useNavigate } from 'react-router-dom';
-import './FormCardAdd.css';
-import { CardType, FormCardAddProps } from '../type';
-import Tooltip from './CVCTooltip';
 import { CVC_TOOLTIP_DETAIL, CVC_TOOLTIP_TITLE } from '../utils/constants';
+import { CardType, FormCardAddProps } from '../type';
+import './FormCardAdd.css';
+import Tooltip from './CVCTooltip';
 
 const FormCardAdd = ({
   cardNumber,
@@ -183,8 +181,9 @@ const FormCardAdd = ({
             passwordType="password-single"
             onFocus={moveFocus}
           />
-          <img src={passwordDotImg} alt="비밀번호" />
-          <img src={passwordDotImg} alt="비밀번호" />
+
+          <span className="passwordDot">ㆍ</span>
+          <span className="passwordDot">ㆍ</span>
         </div>
       </div>
       <div className="add-card-submit">
