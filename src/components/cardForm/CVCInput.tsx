@@ -3,6 +3,8 @@ import { Input } from "../common/Input";
 import { InputLabel } from "../common/InputLabel";
 import styled from "styled-components";
 
+import { useCallback } from "react";
+
 interface CVCProps {
   setIsCompleted: (isCompleted: boolean) => void;
 }
@@ -16,18 +18,20 @@ const CVCInfo = {
 };
 
 export const CVCInput = ({ setIsCompleted }: CVCProps) => {
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.length > 3 || !/\d$/.test(e.target.value)) {
-      e.target.value = e.target.value.slice(0, -1);
-      return;
-    }
+  const handleInput = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (e.target.value.length > 3 || !/\d$/.test(e.target.value)) {
+        e.target.value = e.target.value.slice(0, -1);
+        return;
+      }
 
-    setIsCompleted(false);
-
-    if (e.target.value.length === 3) {
-      setIsCompleted(true);
-    }
-  };
+      setIsCompleted(false);
+      if (e.target.value.length === 3) {
+        setIsCompleted(true);
+      }
+    },
+    [setIsCompleted]
+  );
 
   return (
     <Container>
@@ -59,7 +63,6 @@ const Wrapper = styled.div`
   align-items: center;
 
   width: 125px;
-  j
 
   gap: 10px;
 `;
