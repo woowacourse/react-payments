@@ -8,25 +8,39 @@ interface Props {
 }
 
 export function CardViewer({ cardNumber, expirationDate, ownerName }: Props) {
+  const changeCardNumberFormat = (rawCardNumbers: string[]) => {
+    const PASSWORD_START = 2;
+    const cardNumbersFormat = rawCardNumbers.map((rawCardNumber, index) =>
+      index < PASSWORD_START ? rawCardNumber : '•'.repeat(rawCardNumber.length),
+    );
+
+    return cardNumbersFormat;
+  };
+
+  const changeExpirationDateFormat = (month: string, year: string) => {
+    if (!month.length) return 'MM/YY';
+
+    return `${month}/${year}`;
+  };
+
+  const cardNumbersFormat = changeCardNumberFormat(cardNumber);
+  const expirationDateFormat = changeExpirationDateFormat(
+    expirationDate.month,
+    expirationDate.year,
+  );
+  const ownerNameFormat = ownerName.length ? ownerName : 'NAME';
+
   return (
     <Style.Wrapper>
       <Style.ICChip />
       <Style.CardNumberContainer>
-        {Object.values(cardNumber).map((number, index) => (
-          <Style.CardNumber index={index}>
-            {index < 2 ? number : '•'.repeat(number.length)}
-          </Style.CardNumber>
+        {cardNumbersFormat.map((cardNumber, index) => (
+          <Style.CardNumber index={index}>{cardNumber}</Style.CardNumber>
         ))}
       </Style.CardNumberContainer>
       <Style.NameAndDateContainer>
-        <Style.Name>{ownerName === '' ? 'NAME' : ownerName}</Style.Name>
-        {expirationDate.month === '' ? (
-          <span>MM/YY</span>
-        ) : (
-          <span>
-            {expirationDate.month}/{expirationDate.year}
-          </span>
-        )}
+        <Style.Name>{ownerNameFormat}</Style.Name>
+        <span>{expirationDateFormat}</span>
       </Style.NameAndDateContainer>
     </Style.Wrapper>
   );
