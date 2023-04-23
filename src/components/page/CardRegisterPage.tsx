@@ -79,9 +79,7 @@ const CardRegisterPage = ({ navigate }: Props) => {
           focus={focus}
         />
         <ButtonWrapper>
-          <SubmitButton type="submit" ref={(el) => insert(10)(el)}>
-            다음
-          </SubmitButton>
+          <SubmitButton type="submit">다음</SubmitButton>
         </ButtonWrapper>
       </InputForm>
     </PageTemplate>
