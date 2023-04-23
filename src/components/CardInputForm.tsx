@@ -10,13 +10,13 @@ import { CardType } from "../types";
 import { Link } from "react-router-dom";
 import { QuestionMark } from "../assets";
 
-interface CardInputFormType {
+interface CardInputFormProps {
   card: CardType;
   setCard: (value: CardType) => void;
   onSubmit: (e: FormEvent) => void;
 }
 
-const CardInputForm = (props: CardInputFormType) => {
+const CardInputForm = (props: CardInputFormProps) => {
   const card = JSON.parse(JSON.stringify(props.card));
   const [isAnswered, setIsAnswered] = useState<boolean>(false);
 

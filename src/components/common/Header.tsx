@@ -2,12 +2,12 @@ import styled from "styled-components";
 import { ArrowLeft } from "../../assets";
 import { Link } from "react-router-dom";
 
-interface HeaderType {
+interface HeaderProps {
   title: string;
   isBack: boolean;
 }
 
-const Header = (props: HeaderType) => {
+const Header = (props: HeaderProps) => {
   return (
     <HeaderWrapper>
       {props.isBack && (

@@ -1,11 +1,11 @@
 import { ReactNode } from "react";
 import styled from "styled-components";
 
-interface PageType {
+interface PageProps {
   children: ReactNode;
 }
 
-const Page = (props: PageType) => {
+const Page = (props: PageProps) => {
   return <PageWrapper>{props.children}</PageWrapper>;
 };
 

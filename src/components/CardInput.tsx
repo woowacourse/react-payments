@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-interface CardInputType {
+interface CardInputProps {
   id: "cardNumber" | "expiredDate" | "ownerName" | "cvc" | "password";
   placeholder?: string;
   width?: string;
@@ -14,7 +14,7 @@ interface CardInputType {
   onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
-const CardInput = (props: CardInputType) => {
+const CardInput = (props: CardInputProps) => {
   return (
     <CardInputWrapper
       id={props.id}
