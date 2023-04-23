@@ -4,7 +4,7 @@ import InputBox from "../common/InputBox";
 import InputGroup from "../common/InputGroup";
 import InputSeparator from "../common/InputSeparator";
 import { isNumber, isOverMaxLength } from "../../utils";
-import { INPUT_LENGTH, NUMBER_OF_INPUT } from "../../constants";
+import { INPUT_LENGTH } from "../../constants";
 
 interface CardNumberInputProps {
   cardNumber: string[];
@@ -41,7 +41,7 @@ const CardNumberInput = ({ cardNumber, setCardNumber, errorMessage, setErrorMess
   };
 
   const isNextInputFocusable = (inputValue: string, inputIndex: number) => {
-    return inputValue.length === INPUT_LENGTH.CARD_NUMBER && inputIndex < NUMBER_OF_INPUT.CARD_NUMBER - 1;
+    return inputValue.length === INPUT_LENGTH.CARD_NUMBER && inputIndex < refs.length - 1;
   };
 
   return (

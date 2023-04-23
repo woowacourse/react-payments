@@ -4,7 +4,7 @@ import InputBox from "../common/InputBox";
 import InputGroup from "../common/InputGroup";
 import InputSeparator from "../common/InputSeparator";
 import { isNumber, isOverMaxLength } from "../../utils";
-import { INPUT_LENGTH, NUMBER_OF_INPUT } from "../../constants";
+import { INPUT_LENGTH } from "../../constants";
 
 interface ExpirationDateInputProps {
   expirationDate: string[];
@@ -64,7 +64,7 @@ const ExpirationDateInput = ({
   };
 
   const isNextInputFocusable = (inputValue: string, inputIndex: number) => {
-    return inputValue.length === INPUT_LENGTH.EXPIRATION_DATE && inputIndex < NUMBER_OF_INPUT.EXPIRATION_DATE - 1;
+    return inputValue.length === INPUT_LENGTH.EXPIRATION_DATE && inputIndex < refs.length - 1;
   };
 
   return (

@@ -5,11 +5,3 @@ export const INPUT_LENGTH = {
   SECURITY_CODE: 3,
   PASSWORD: 1,
 };
-
-export const NUMBER_OF_INPUT = {
-  CARD_NUMBER: 4,
-  EXPIRATION_DATE: 2,
-  NAME: 1,
-  SECURITY_CODE: 1,
-  PASSWORD: 2,
-};
