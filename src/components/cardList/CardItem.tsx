@@ -7,16 +7,24 @@ interface CardProps {
 }
 
 export const CardItem = ({ card }: CardProps) => {
+  const numbers = (numbers: string): string => {
+    const shownNumbers = numbers.slice(0, 8);
+    return (shownNumbers.match(/\d{1,4}|●{1,4}/g) ?? []).join(" ");
+  };
+
   const hideNumbers = (numbers: string): string => {
-    const hiddenNumbers = numbers.slice(0, 8) + "●".repeat(numbers.slice(8).length);
-    return (hiddenNumbers.match(/\d{1,4}|●{1,4}/g) ?? []).join("   ");
+    const hiddenNumbers = "●".repeat(numbers.slice(8).length);
+    return (hiddenNumbers.match(/\d{1,4}|●{1,4}/g) ?? []).join(" ");
   };
 
   return (
     <Card backgroundColor={card.color}>
       <Container>
         <IcChip />
-        <CardNumbers>{hideNumbers(card.numbers)}</CardNumbers>
+        <Numbers>
+          <ShownNumbers>{numbers(card.numbers)}</ShownNumbers>
+          <HiddenNumbers>{hideNumbers(card.numbers)}</HiddenNumbers>
+        </Numbers>
         <InfoWrapper>
           <Name>{card.owner ? card.owner : "NAME"}</Name>
           <ExpiryDate>{card.expiryDate ? card.expiryDate : "MM / YY"}</ExpiryDate>
@@ -29,13 +37,14 @@ export const CardItem = ({ card }: CardProps) => {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: 180px;
-  height: 95px;
+  width: 183px;
+  height: 99px;
   color: white;
 
   font-size: 10px;
-  font-weight: 600;
-  gap: 6px;
+  font-weight: 500;
+
+  white-space: pre;
 `;
 
 const IcChip = styled.div`
@@ -46,10 +55,34 @@ const IcChip = styled.div`
   margin-top: 32px;
 `;
 
-const CardNumbers = styled.div`
+const Numbers = styled.div`
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  justify-content: center;
+
+  margin-top: 7px;
+`;
+
+const ShownNumbers = styled.div`
   text-align: center;
   height: 15px;
-  letter-spacing: 1px;
+
+  margin-left: 2px;
+
+  font-size: 11px;
+  letter-spacing: 3px;
+`;
+
+const HiddenNumbers = styled.div`
+  height: 15px;
+  padding-top: 3px;
+
+  font-size: 10px;
+  letter-spacing: 3.5px;
+
+  margin-left: 7px;
+  zoom: 0.8;
 `;
 
 const InfoWrapper = styled.div`
@@ -63,6 +96,10 @@ const Name = styled.div`
   text-overflow: ellipsis;
   width: 110px;
   height: 10px;
+
+  margin-left: 4px;
 `;
 
-const ExpiryDate = styled.div``;
+const ExpiryDate = styled.div`
+  margin-right: 4px;
+`;
