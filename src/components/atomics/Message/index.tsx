@@ -1,11 +1,15 @@
 import React from 'react';
 
 import styled, { css } from 'styled-components';
-import { HeaderFontStyle, InputFontStyle } from '../../stylesheet/font';
 
 /* types */
 interface MessageStyleProps {
-  type: 'label' | 'header';
+  fontWeight?: number;
+  fontSize?: string;
+  lineHeight?: string;
+  color?: string;
+  opacity?: number;
+  letterSpacing?: string;
 }
 
 interface MessageProps extends MessageStyleProps {
@@ -19,22 +23,20 @@ const Message: React.FC<MessageProps> = ({ children, ...rest }) => {
 
 /* styles */
 const StyledMessage = styled.span<MessageStyleProps>`
-  ${(props) => {
-    return (
-      props.type === 'label' &&
-      css`
-        ${InputFontStyle}
-      `
-    );
-  }}
+  color: #000;
+  line-height: 1.2;
+  font-weight: 400;
+  font-size: 16px;
 
   ${(props) => {
-    return (
-      props.type === 'header' &&
-      css`
-        ${HeaderFontStyle}
-      `
-    );
+    return css`
+      font-weight: ${props.fontWeight};
+      font-size: ${props.fontSize};
+      line-height: ${props.lineHeight};
+      color: ${props.color};
+      opacity: ${props.opacity};
+      letter-spacing: ${props.letterSpacing};
+    `;
   }}
 `;
 
