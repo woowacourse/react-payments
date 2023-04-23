@@ -1,12 +1,21 @@
 export const getLocalStorage = (key: string) => {
   const storedCards = localStorage.getItem(key);
 
-  return storedCards ? JSON.parse(storedCards) : [];
+  if (storedCards) {
+    try {
+      return JSON.parse(storedCards);
+    } catch (error) {
+      console.error('파싱 오류', error);
+      return [];
+    }
+  } else {
+    return [];
+  }
 };
 
 export const setLocalStorage = (key: string, value: object) => {
-  const card = getLocalStorage(key);
-  card.push(value);
+  const storedCards = getLocalStorage(key);
+  storedCards.push(value);
 
-  localStorage.setItem(key, JSON.stringify(card));
+  localStorage.setItem(key, JSON.stringify(storedCards));
 };
