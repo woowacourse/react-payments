@@ -76,6 +76,14 @@ a {
   overflow: hidden;
 }
 
+.flex-jsb {
+  justify-content: space-between !important;
+}
+
+.flex-row-reverse {
+  flex-direction: row-reverse !important;
+}
+
 @media screen and (max-width: 600px) {
   .app {
     margin: 0;

@@ -65,7 +65,7 @@ function CardAddForm({
         changeInputValidation={handleValidationChange}
         values={cardInformation.password}
       />
-      <Button className="submit-button" disabled={!isFormComplete} primary>
+      <Button className="submit-button" variant="primary" disabled={!isFormComplete}>
         완료
       </Button>
     </form>

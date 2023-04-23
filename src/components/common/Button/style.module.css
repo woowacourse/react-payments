@@ -1,36 +1,90 @@
 button {
   width: 100%;
   max-width: 350px;
-  padding: 15px 0;
   border-radius: 7px;
   border: none;
   outline: 0;
   cursor: pointer;
 
   font-weight: 600;
-  font-size: 14px;
 
   transition: all 0.2s ease-in-out;
 }
 
-.primaryButton {
+.iconButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.default {
+  background-color: transparent;
+  color: #0e0e0e;
+  border: 1px solid #d6d6d6;
+}
+
+.default:hover:enabled {
+  background-color: #e7e7e7;
+}
+
+.primary {
   background-color: #2295ff;
   color: white;
 }
 
-.primaryButton:hover:enabled {
+.primary:hover:enabled {
   background-color: #007aea;
 }
 
-.secondaryButton {
+.secondary {
   background-color: #e9f4ff;
   color: #007aea;
 }
 
-.secondaryButton:hover:enabled {
+.secondary:hover:enabled {
   background-color: #d7ecff;
+}
+
+.danger {
+  background-color: #ce0000;
+  color: white;
+}
+
+.danger:hover:enabled {
+  background-color: #9f0000;
+}
+
+.textButton {
+  background-color: transparent;
+  color: #0e0e0e;
+}
+
+.textButton:hover:enabled {
+  background-color: #e7e7e7;
+}
+
+.small {
+  padding: 8px 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.medium {
+  padding: 12px 12px;
+  font-size: 14px;
+}
+
+.large {
+  padding: 16px 14px;
+  font-size: 16px;
 }
 
 button:disabled {
   opacity: 0.3;
+}
+
+.iconButton > img {
+  width: 14px;
+  height: 14px;
 }
