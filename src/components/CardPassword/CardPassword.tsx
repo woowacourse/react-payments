@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { NUMBER_REGEX } from '../../constants/regex';
 import CardInput from '../CardInput/CardInput';
 import CardLabel from '../CardLabel/CardLabel';
 import * as Styled from './CardPassword.styles';
@@ -17,7 +18,7 @@ const CardPassword = ({ password, setPassword }: CardPasswordProps) => {
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const currentOrder = Number(e.target.dataset['order']);
 
-    if (/[^0-9]/g.test(e.target.value)) {
+    if (NUMBER_REGEX.test(e.target.value)) {
       return;
     }
 

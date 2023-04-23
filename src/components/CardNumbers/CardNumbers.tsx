@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import CardInput from '../CardInput/CardInput';
 import CardLabel from '../CardLabel/CardLabel';
 import * as Styled from './CardNumbers.styles';
+import { NUMBER_REGEX } from '../../constants/regex';
 
 interface CardNumbersProps {
   cardNumbers: Record<number, string>;
@@ -20,7 +21,7 @@ const CardNumbers = ({ cardNumbers, setCardNumbers }: CardNumbersProps) => {
     if (!(e.target instanceof HTMLInputElement)) return;
     const currentOrder = Number(e.target.dataset['order']);
 
-    if (/[^0-9]/g.test(e.target.value)) {
+    if (NUMBER_REGEX.test(e.target.value)) {
       return;
     }
 

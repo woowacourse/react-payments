@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { ALPHABET_REGEX } from '../../constants/regex';
 import CardInput from '../CardInput/CardInput';
 import CardLabel from '../CardLabel/CardLabel';
 import * as Styled from './CardOwnerName.styles';
@@ -18,7 +19,7 @@ const CardOwnerName = ({
     if (!(e.target instanceof HTMLInputElement)) return;
 
     if (e.target.value.length === 0) setCardOwnerName('');
-    if (!/[A-Za-z\s]+$/.test(e.target.value)) return;
+    if (!ALPHABET_REGEX.test(e.target.value)) return;
 
     setCardOwnerName(e.target.value.toUpperCase());
   };

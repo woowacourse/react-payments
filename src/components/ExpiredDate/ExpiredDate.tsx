@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { YEAR_REGEX, MONTH_REGEX } from '../../constants/regex';
 import CardInput from '../CardInput/CardInput';
 import CardLabel from '../CardLabel/CardLabel';
 import * as Styled from './ExpiredDate.styles';
@@ -37,14 +38,14 @@ const ExpiredDate = ({ expiredDate, setExpiredDate }: ExpiredDateProps) => {
     if (currentRef.current.value.length !== 2) return;
 
     if (currentOrder === 1) {
-      if (/^[0-9]{2}/g.test(currentRef.current.value)) return;
+      if (YEAR_REGEX.test(currentRef.current.value)) return;
       setExpiredDate({ ...expiredDate, 1: '' });
       return;
     }
 
     cardExpiredDateRefs[currentOrder + 1].current?.focus();
 
-    if (!/^(0[1-9]|1[0-2])/g.test(currentRef.current.value)) {
+    if (!MONTH_REGEX.test(currentRef.current.value)) {
       setExpiredDate({ ...expiredDate, 0: '' });
       currentRef.current.focus();
       return;
