@@ -11,14 +11,10 @@ import { cardDataService } from '../domains/cardDataService';
 
 export const CardRegisterForm = () => {
   const navigate = useNavigate();
+
   const [isInputFinish, setIsInputFinish] = useState(false);
   const [cardNumber, setCardNumber] = useState(['', '', '', '']);
-
-  const [expirationDate, setExpirationDate] = useState({
-    month: '',
-    year: '',
-  });
-
+  const [expirationDate, setExpirationDate] = useState({ month: '', year: '' });
   const [ownerName, setOwnerName] = useState('');
   const [securityCode, setSecurityCode] = useState('');
   const [password, setPassword] = useState(['', '']);

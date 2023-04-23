@@ -4,7 +4,8 @@ import { Input } from './Input';
 import { InputWrapper } from './InputWrapper';
 import { SecurityCode } from '../../types';
 import { hasValidLength, isNumeric } from '../../validator';
-import { ERROR, PASSWORD_TEXT, SECURITY_CODE_LENGTH } from '../../constants';
+import { ERROR, PASSWORD_TEXT, SECURITY_CODE_SIZE } from '../../constants';
+import { isFullInput } from '../../utils';
 
 interface Props {
   securityCode: SecurityCode;
@@ -30,7 +31,7 @@ export function SecurityCodeInput({
   };
 
   const validateSecurityCode = () => {
-    if (!hasValidLength(securityCode, SECURITY_CODE_LENGTH) && securityCode !== '') {
+    if (!hasValidLength(securityCode, SECURITY_CODE_SIZE) && securityCode !== '') {
       alert(ERROR.INVALID_SECURITY_CODE);
 
       setSecurityCode('');
@@ -39,7 +40,7 @@ export function SecurityCodeInput({
   };
 
   useEffect(() => {
-    if (securityCode.length === SECURITY_CODE_LENGTH) moveFocusToPassword();
+    if (isFullInput(securityCode, SECURITY_CODE_SIZE)) moveFocusToPassword();
   }, [securityCode]);
 
   return (
@@ -53,9 +54,9 @@ export function SecurityCodeInput({
           ref={securityCodeInputRef}
           value={securityCode}
           width={84}
-          minLength={SECURITY_CODE_LENGTH}
-          maxLength={SECURITY_CODE_LENGTH}
-          placeholder={PASSWORD_TEXT.repeat(SECURITY_CODE_LENGTH)}
+          minLength={SECURITY_CODE_SIZE}
+          maxLength={SECURITY_CODE_SIZE}
+          placeholder={PASSWORD_TEXT.repeat(SECURITY_CODE_SIZE)}
           onChange={handleInputChange}
           onBlur={validateSecurityCode}
           inputMode='numeric'

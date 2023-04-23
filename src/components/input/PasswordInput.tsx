@@ -4,7 +4,8 @@ import { Input } from './Input';
 import { InputWrapper } from './InputWrapper';
 import { PassWord } from '../../types';
 import { hasValidLength, isNumeric } from '../../validator';
-import { ERROR, PASSWORD_LENGTH, PASSWORD_TEXT } from '../../constants';
+import { ERROR, PASSWORD_SIZE, PASSWORD_TEXT } from '../../constants';
+import { isEmptyInput, isFirst } from '../../utils';
 
 interface Props {
   password: PassWord;
@@ -22,7 +23,7 @@ export const PasswordInput = ({
   const allRef = [passwordInputRef, useRef<HTMLInputElement>(null)];
 
   const handleBackspacePress = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Backspace' && password[index] === '' && index !== 0) {
+    if (e.key === 'Backspace' && isEmptyInput(password[index]) && !isFirst(index)) {
       e.preventDefault();
       allRef[index - 1].current?.focus();
     }
@@ -45,7 +46,7 @@ export const PasswordInput = ({
   };
 
   const validatePassword = (inputs: string) => {
-    if (!isNumeric(inputs) || !hasValidLength(inputs, PASSWORD_LENGTH)) {
+    if (!isNumeric(inputs) || !hasValidLength(inputs, PASSWORD_SIZE)) {
       alert(ERROR.INVALID_PASSWORD);
       setPassword(['', '']);
 

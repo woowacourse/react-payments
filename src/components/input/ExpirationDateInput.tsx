@@ -4,7 +4,8 @@ import { Input } from './Input';
 import { InputWrapper } from './InputWrapper';
 import { ExpirationDate } from '../../types';
 import { isValidDate } from '../../validator';
-import { ERROR, MONTH_LENGTH, YEAR_LENGTH } from '../../constants';
+import { ERROR, MONTH_SIZE, YEAR_SIZE } from '../../constants';
+import { isEmptyInput, isFullInput } from '../../utils';
 
 interface Props {
   monthInputRef: React.RefObject<HTMLInputElement>;
@@ -21,10 +22,8 @@ export function ExpirationDateInput({
 }: Props) {
   const yearInputRef = useRef<HTMLInputElement>(null);
 
-  const isFullInput = (input: string, maxLength: number) => input.length === maxLength;
-
   const handleBackspacePress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Backspace' && expirationDate.year === '') {
+    if (e.key === 'Backspace' && isEmptyInput(expirationDate.year)) {
       e.preventDefault();
       monthInputRef.current?.focus();
     }
@@ -37,7 +36,7 @@ export function ExpirationDateInput({
     });
 
     const month = e.target.value;
-    if (isFullInput(month, MONTH_LENGTH)) yearInputRef.current?.focus();
+    if (isFullInput(month, MONTH_SIZE)) yearInputRef.current?.focus();
   };
 
   const handleYearInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,17 +50,14 @@ export function ExpirationDateInput({
     if (!isValidDate(expirationDate.month, expirationDate.year)) {
       alert(ERROR.INVALID_EXPIRATION_DATE);
 
-      setExpirationDate({
-        month: '',
-        year: '',
-      });
+      setExpirationDate({ month: '', year: '' });
 
       monthInputRef.current?.focus();
     }
   };
 
   useEffect(() => {
-    if (isFullInput(expirationDate.year, YEAR_LENGTH)) moveFocusToOwnerName();
+    if (isFullInput(expirationDate.year, YEAR_SIZE)) moveFocusToOwnerName();
   }, [expirationDate.year]);
 
   return (
@@ -75,8 +71,8 @@ export function ExpirationDateInput({
           ref={monthInputRef}
           value={expirationDate.month}
           width={30}
-          minLength={MONTH_LENGTH}
-          maxLength={MONTH_LENGTH}
+          minLength={MONTH_SIZE}
+          maxLength={MONTH_SIZE}
           required
           inputMode='numeric'
           placeholder='MM'
@@ -87,8 +83,8 @@ export function ExpirationDateInput({
           ref={yearInputRef}
           value={expirationDate.year}
           width={30}
-          minLength={YEAR_LENGTH}
-          maxLength={YEAR_LENGTH}
+          minLength={YEAR_SIZE}
+          maxLength={YEAR_SIZE}
           required
           inputMode='numeric'
           placeholder='YY'

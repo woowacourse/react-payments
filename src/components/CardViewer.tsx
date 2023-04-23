@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { CardNumber, ExpirationDate, OwnerName } from '../types';
-import { PASSWORD_START_INDEX, PASSWORD_TEXT } from '../constants';
+import { DATE_TEXT, OWNER_NAME_TEXT, PASSWORD_START_INDEX, PASSWORD_TEXT } from '../constants';
 
 interface Props {
   cardNumber: CardNumber;
@@ -18,17 +18,17 @@ export function CardViewer({ cardNumber, expirationDate, ownerName }: Props) {
   };
 
   const changeExpirationDateFormat = (month: string, year: string) => {
-    if (!month.length) return 'MM/YY';
+    if (!month.length) return DATE_TEXT;
 
     return `${month}/${year}`;
   };
 
+  const ownerNameFormat = ownerName.length ? ownerName : OWNER_NAME_TEXT;
   const cardNumbersFormat = changeCardNumberFormat(cardNumber);
   const expirationDateFormat = changeExpirationDateFormat(
     expirationDate.month,
     expirationDate.year,
   );
-  const ownerNameFormat = ownerName.length ? ownerName : 'NAME';
 
   return (
     <Style.Wrapper>

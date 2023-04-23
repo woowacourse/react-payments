@@ -3,7 +3,7 @@ import { Input } from './Input';
 import { InputWrapper } from './InputWrapper';
 import { OwnerName } from '../../types';
 import { isEnglish } from '../../validator';
-import { ERROR, MAX_NAME_LENGTH } from '../../constants';
+import { ERROR, MAX_NAME_SIZE } from '../../constants';
 
 interface Props {
   ownerName: OwnerName;
@@ -19,7 +19,7 @@ export function OwnerNameInput({
   moveFocusToSecurityCode,
 }: Props) {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!isEnglish(e.target.value, MAX_NAME_LENGTH)) {
+    if (!isEnglish(e.target.value, MAX_NAME_SIZE)) {
       alert(ERROR.INVALID_OWNER_NAME);
 
       e.target.value = '';
@@ -37,7 +37,7 @@ export function OwnerNameInput({
       <Style.Label htmlFor='ownerName'>
         <Style.Title>카드 소유자 이름(선택)</Style.Title>
         <Style.NameLength>
-          {ownerName.length}/{MAX_NAME_LENGTH}
+          {ownerName.length}/{MAX_NAME_SIZE}
         </Style.NameLength>
       </Style.Label>
       <InputWrapper width={318}>
@@ -46,7 +46,7 @@ export function OwnerNameInput({
           ref={ownerNameInputRef}
           value={ownerName}
           width={318}
-          maxLength={MAX_NAME_LENGTH}
+          maxLength={MAX_NAME_SIZE}
           placeholder='카드에 표시된 이름과 동일하게 입력하세요.'
           onChange={handleInputChange}
           onKeyDown={handleEnterPress}

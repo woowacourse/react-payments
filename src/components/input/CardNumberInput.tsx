@@ -1,10 +1,18 @@
 import styled from 'styled-components';
 import React, { useRef, useState } from 'react';
+import { v4 } from 'uuid';
 import { Input } from './Input';
 import { InputWrapper } from './InputWrapper';
 import { CardNumber } from '../../types';
 import { hasValidLength, isNumeric } from '../../validator';
-import { CARD_NUMBER_DIGITS, ERROR, PASSWORD_START_INDEX } from '../../constants';
+import {
+  CARD_NUMBER_DIGITS,
+  CARD_NUMBER_INPUTS_LENGTH,
+  CARD_NUMBER_INPUT_SIZE,
+  PASSWORD_START_INDEX,
+  ERROR,
+} from '../../constants';
+import { isEmptyInput, isFirst, isFullInput, isLast } from '../../utils';
 
 interface Props {
   cardNumber: CardNumber;
@@ -22,16 +30,9 @@ export function CardNumberInput({ moveFocusToExpirationDate, cardNumber, setCard
   ];
 
   const isPasswordInput = (index: number) => index >= PASSWORD_START_INDEX;
-  const isFirstInput = (index: number) => index === 0;
-  const isLastInput = (index: number) => index === cardNumber.length - 1;
-  const isEmptyInput = (index: number) => !cardNumber[index].length;
-
-  const isFullInput = (target: string) => {
-    return target.length === CARD_NUMBER_DIGITS / cardNumber.length;
-  };
 
   const handleBackspacePress = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Backspace' && isEmptyInput(index) && !isFirstInput(index)) {
+    if (e.key === 'Backspace' && isEmptyInput(cardNumber[index]) && !isFirst(index)) {
       e.preventDefault();
       setIsFullInputs((prev) => [...prev.slice(1), false]);
       allRef[index - 1].current?.focus();
@@ -45,16 +46,16 @@ export function CardNumberInput({ moveFocusToExpirationDate, cardNumber, setCard
       return currentCardNumber;
     });
 
-    if (isFullInput(e.target.value)) {
+    if (isFullInput(e.target.value, CARD_NUMBER_INPUT_SIZE)) {
       setIsFullInputs((prev) => [true, ...prev.slice(0, -1)]);
 
-      if (!isLastInput(index)) allRef[index + 1].current?.focus();
-      if (isLastInput(index)) moveFocusToExpirationDate();
+      if (!isLast(index, CARD_NUMBER_INPUT_SIZE)) allRef[index + 1].current?.focus();
+      if (isLast(index, CARD_NUMBER_INPUT_SIZE)) moveFocusToExpirationDate();
     }
   };
 
   const handleLastInputBlur = (index: number, e: React.FocusEvent<HTMLInputElement>) => {
-    if (!isLastInput(index)) return;
+    if (!isLast(index, CARD_NUMBER_INPUT_SIZE)) return;
 
     const inputs = [...cardNumber.slice(0, -1), e.target.value].join('');
     const isValidCardNumber = isNumeric(inputs) && hasValidLength(inputs, CARD_NUMBER_DIGITS);
@@ -77,14 +78,15 @@ export function CardNumberInput({ moveFocusToExpirationDate, cardNumber, setCard
           return (
             <>
               <Input
+                key={v4()}
                 id={`cardNumber${index}`}
                 value={cardNumber[index]}
                 width={36}
-                minLength={4}
-                maxLength={4}
+                minLength={CARD_NUMBER_INPUT_SIZE}
+                maxLength={CARD_NUMBER_INPUT_SIZE}
                 required
                 inputMode='numeric'
-                autoFocus={isFirstInput(index)}
+                autoFocus={isFirst(index)}
                 type={isPasswordInput(index) ? 'password' : 'text'}
                 ref={allRef[index]}
                 onChange={(e) => handleCardNumberInputChange(index, e)}
@@ -92,7 +94,9 @@ export function CardNumberInput({ moveFocusToExpirationDate, cardNumber, setCard
                 onBlur={(e) => handleLastInputBlur(index, e)}
                 placeholder={isPasswordInput(index) ? '••••' : '0000'}
               />
-              {!isLastInput(index) && <Style.Hyphen visible={isFullInputs[index]}>-</Style.Hyphen>}
+              {!isLast(index, CARD_NUMBER_INPUTS_LENGTH) && (
+                <Style.Hyphen visible={isFullInputs[index]}>-</Style.Hyphen>
+              )}
             </>
           );
         })}
