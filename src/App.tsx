@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, HashRouter } from 'react-router-dom';
 import MyCardPage from './pages/MyCardPage/MyCardPage';
 import CardRegisterPage from './pages/CardRegisterPage/CardRegisterPage';
 import { useState } from 'react';
@@ -37,13 +37,13 @@ const App = () => {
 
   return (
     <div className="App">
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <HashRouter basename={process.env.PUBLIC_URL}>
         <Header />
         <Routes>
           <Route path="/" element={<MyCardPage cardList={cardList} />} />
           <Route path="/register" element={<CardRegisterPage setCardList={setCardList} />} />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 };
