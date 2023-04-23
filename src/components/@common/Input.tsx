@@ -22,7 +22,7 @@ const Input = forwardRef<HTMLInputElement, Props>(function (
     <InputStyle
       value={value}
       onChange={onChange}
-      inputMode={inputmode ?? "none"}
+      inputMode={inputmode ?? "text"}
       placeholder={placeholder}
       ref={ref}
       {...props}
