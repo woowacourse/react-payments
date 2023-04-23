@@ -23,6 +23,9 @@ function Layout(props: Props) {
       case "/card-register":
         setHeadProps({ text: "카드 추가", backButton: true });
         break;
+      default:
+        setHeadProps({ text: "보유카드", backButton: false });
+        break;
     }
   }, [location]);
 
