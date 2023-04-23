@@ -19,10 +19,14 @@ const CVCInfo = {
   $textPosition: "center",
 };
 
+const cannotInput = (text: string): boolean => {
+  return text.length > CVC_MAXLEGNTH || !NUMBER_REGEX.test(text);
+};
+
 export const CVCInput = ({ setIsCompleted }: CVCProps) => {
   const handleInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (e.target.value.length > CVC_MAXLEGNTH || !NUMBER_REGEX.test(e.target.value)) {
+      if (cannotInput(e.target.value)) {
         e.target.value = e.target.value.slice(0, -1);
         return;
       }

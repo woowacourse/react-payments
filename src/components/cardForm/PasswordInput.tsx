@@ -1,7 +1,7 @@
 import { Container } from "../common/Container";
 import { Input } from "../common/Input";
 import { InputLabel } from "../common/InputLabel";
-import { useRef } from "react";
+import { useRef, useCallback } from "react";
 import styled from "styled-components";
 
 import { PASSWORD_MAXLEGNTH, NUMBER_REGEX } from "../../constants";
@@ -19,26 +19,35 @@ const passwordInfo = {
   length: 2,
 };
 
+const cannotInput = (text: string): boolean => {
+  return text.length > PASSWORD_MAXLEGNTH || !NUMBER_REGEX.test(text);
+};
+
 export const PasswordInput = ({ setIsCompleted }: PasswordProps) => {
   const isInputsCompleted = useRef<boolean[]>(new Array(passwordInfo.length).fill(false));
 
-  const handleInput = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.slice(0, -1) === "") {
+  const handleInput = useCallback(
+    (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (e.target.value.slice(0, -1) === "") {
+        isInputsCompleted.current[index] = false;
+        setIsCompleted(false);
+
+        return;
+      }
+
+      if (cannotInput(e.target.value)) {
+        e.target.value = e.target.value.slice(0, -1);
+        return;
+      }
+
       isInputsCompleted.current[index] = false;
+      if (e.target.value.length === PASSWORD_MAXLEGNTH) isInputsCompleted.current[index] = true;
+
       setIsCompleted(false);
-    }
-
-    if (e.target.value.length > 1 || !NUMBER_REGEX.test(e.target.value)) {
-      e.target.value = e.target.value.slice(0, -1);
-      return;
-    }
-
-    isInputsCompleted.current[index] = false;
-    if (e.target.value.length === PASSWORD_MAXLEGNTH) isInputsCompleted.current[index] = true;
-
-    setIsCompleted(false);
-    if (isInputsCompleted.current.every((isCompleted) => isCompleted)) setIsCompleted(true);
-  };
+      if (isInputsCompleted.current.every((isCompleted) => isCompleted)) setIsCompleted(true);
+    },
+    [setIsCompleted]
+  );
 
   return (
     <Container>

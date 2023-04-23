@@ -1,7 +1,7 @@
 import { Container } from "../common/Container";
 import { InputLabel } from "../common/InputLabel";
 import { Input } from "../common/Input";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
 import { CARDNUMBERS_MAXLEGNTH, CARDNUMBERS_REGEX } from "../../constants";
 
@@ -26,6 +26,11 @@ const hideNumbers = (numbers: string): string => {
   return (hiddenNumbers.match(CARDNUMBERS_REGEX) ?? []).join(" - ");
 };
 
+const cannotInput = (text: string): boolean => {
+  const numbers = text.replaceAll(" - ", "");
+  return numbers.length > CARDNUMBERS_MAXLEGNTH || !/\d/g.test(text.slice(-1));
+};
+
 export const CardNumberInput = ({
   cardNumbers,
   isValid,
@@ -35,45 +40,49 @@ export const CardNumberInput = ({
 }: CardNumberInputProps) => {
   const [postText, setPostText] = useState("");
 
-  const saveNumbers = (target: HTMLInputElement, numbers: string) => {
-    setCardNumbers(numbers);
-    setPostText(hideNumbers(numbers));
-    target.value = hideNumbers(numbers);
-  };
+  const saveNumbers = useCallback(
+    (target: HTMLInputElement, numbers: string) => {
+      setCardNumbers(numbers);
+      setPostText(hideNumbers(numbers));
+      target.value = hideNumbers(numbers);
+    },
+    [setCardNumbers, setPostText]
+  );
 
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const text = e.target.value;
+  const handleInput = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const text = e.target.value;
 
-    // 문자열 중간 부분을 수정했을 때
-    if (postText !== text.slice(0, -1) && postText.slice(0, -1) !== text) {
-      e.target.value = postText;
-      return;
-    }
-
-    //문자가 추가됐을 때
-    if (postText.replaceAll(" - ", "").length < text.replaceAll(" - ", "").length) {
-      const numbers = text.replaceAll(" - ", "");
-
-      if (numbers.length > CARDNUMBERS_MAXLEGNTH || !/\d/g.test(text.slice(-1))) {
-        e.target.value = e.target.value.slice(0, -1);
+      // 문자열 중간 부분을 수정했을 때
+      if (postText !== text.slice(0, -1) && postText.slice(0, -1) !== text) {
+        e.target.value = postText;
         return;
       }
 
-      const addNumbers = `${cardNumbers}${text.slice(-1)}`;
-      saveNumbers(e.target, addNumbers);
+      //문자가 추가됐을 때
+      if (postText.replaceAll(" - ", "").length < text.replaceAll(" - ", "").length) {
+        if (cannotInput(text)) {
+          e.target.value = e.target.value.slice(0, -1);
+          return;
+        }
 
-      if (addNumbers.length === CARDNUMBERS_MAXLEGNTH) setIsCompleted(true);
+        const addNumbers = `${cardNumbers}${text.slice(-1)}`;
+        saveNumbers(e.target, addNumbers);
 
-      return;
-    }
+        if (addNumbers.length === CARDNUMBERS_MAXLEGNTH) setIsCompleted(true);
 
-    //문자가 제거 됐을 때
-    const minusNumbers = postText.slice(-1) === "●" ? cardNumbers.slice(0, 8) : cardNumbers.slice(0, -1);
-    saveNumbers(e.target, minusNumbers);
+        return;
+      }
 
-    setIsValid(true);
-    setIsCompleted(false);
-  };
+      //문자가 제거 됐을 때
+      const minusNumbers = postText.slice(-1) === "●" ? cardNumbers.slice(0, 8) : cardNumbers.slice(0, -1);
+      saveNumbers(e.target, minusNumbers);
+
+      setIsValid(true);
+      setIsCompleted(false);
+    },
+    [setIsCompleted, setIsValid, saveNumbers]
+  );
 
   return (
     <Container>
