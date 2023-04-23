@@ -3,6 +3,6 @@ export interface CardType {
   expiredDate: string;
   ownerName: string;
   cvc?: string;
-  password?: string[] | undefined;
+  password?: string[];
   color: string;
 }

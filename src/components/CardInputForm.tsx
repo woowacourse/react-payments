@@ -21,7 +21,6 @@ const CardInputForm = (props: CardInputFormType) => {
   const [isAnswered, setIsAnswered] = useState<boolean>(false);
 
   const handleCardNumberChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value.length);
     e.target.value.length > SEPERATED_CARD_NUMBER_LENGTH.SECOND
       ? (card.cardNumber =
           e.target.value.substring(0, 12) +

@@ -31,13 +31,9 @@ const AddCard = () => {
   });
 
   const registerCard = (e: FormEvent) => {
-    // e.preventDefault();
-    console.log(card);
     const cards = getLocalStorage("card");
     setLocalStorage("card", [...cards, card]);
   };
-
-  // console.log(card);
 
   return (
     <Page>
