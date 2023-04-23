@@ -6,16 +6,11 @@ import NameInput from './FormInputs/NameInput';
 import PasswordInput from './FormInputs/PasswordInput';
 import SecurityCodeInput from './FormInputs/SecurityCodeInput';
 import CardPreview from './CardPreview';
-import { getFormData } from 'utils/formDataGetter';
-import { areValidInfo } from 'validation';
 import Header from '../Header';
-import { useNavigate } from 'react-router-dom';
-import { setLocalStorage } from 'utils/localStorage';
 import { Card } from 'types/Card';
+import { useHandleForm } from 'hooks/useHandleForm';
 
 const CardRegisterForm = () => {
-  const navigate = useNavigate();
-
   const [cardNumber, setCardNumber] = useState({
     number1: '',
     number2: '',
@@ -32,21 +27,7 @@ const CardRegisterForm = () => {
 
   const cardInfo: Card = { ...cardNumber, ...date, name };
 
-  const handleForm = (event: FormEvent) => {
-    event.preventDefault();
-
-    const formData = getFormData(event.target);
-    if (!formData) return;
-    const formDataObject = Object.fromEntries(formData);
-
-    if (areValidInfo(formDataObject)) {
-      setLocalStorage('card', formDataObject);
-
-      navigate('/');
-    } else {
-      alert('값을 모두 입력해 주세요.');
-    }
-  };
+  const { handleForm } = useHandleForm();
 
   return (
     <div>
