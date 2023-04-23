@@ -65,7 +65,7 @@ function OwnerNameInput() {
     <Styled.OwnerNameInputContainer>
       <Styled.LabelContainer>
         <FormLabel>카드 소유자 이름(선택)</FormLabel>
-        <span>{`${cardInput.ownerName.length} / ${MAX_OWNER_NAME}}`}</span>
+        <span>{`${cardInput.ownerName.length} / ${MAX_OWNER_NAME}`}</span>
       </Styled.LabelContainer>
       <Input
         value={cardInput.ownerName}

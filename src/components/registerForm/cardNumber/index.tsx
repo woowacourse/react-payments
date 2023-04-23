@@ -29,7 +29,7 @@ function CardNumber() {
   });
 
   const cardChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    const value = event.currentTarget.value as string;
+    const value = event.currentTarget.value;
     const name = event.currentTarget.dataset["order"] as keyof CardNumberObj;
     const idx = event.currentTarget.dataset["index"];
     if (!name) return;

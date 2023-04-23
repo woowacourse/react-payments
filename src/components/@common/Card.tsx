@@ -16,7 +16,7 @@ function Card({ cardNumber, ownerName, expireDate }: Props) {
   });
   return (
     <CardContainer>
-      <CardChip></CardChip>
+      <CardChip />
       <CardNumberContainer>{cardNumbers}</CardNumberContainer>
       <CardNameContainer>
         <span>{ownerName}</span>
