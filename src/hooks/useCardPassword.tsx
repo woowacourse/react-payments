@@ -14,7 +14,6 @@ function useCardPassword() {
     if (inputID === "second") {
       setCardPassword([cardPassword[0], password]);
     }
-    console.log(cardPassword);
   };
 
   return { cardPassword, changeCardPassword };

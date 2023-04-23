@@ -2,6 +2,8 @@ import React, { useRef } from "react";
 import Style from "./CardPasswordInputStyled";
 import Input from "../../../common/Input/Input";
 import { ThemeProvider } from "styled-components";
+import useWarningText from "../../../../hooks/useWarningText";
+import InputGuide from "../../../common/InputGuide/InputGuide";
 
 type CardPasswordInputProps = {
   changeCardPassword: (e: React.FormEvent<HTMLInputElement>) => void;
@@ -12,12 +14,19 @@ function CardPasswordInput({
   changeCardPassword,
   cardPassword,
 }: CardPasswordInputProps) {
+  const { warningText, isNumber, isRightLength } = useWarningText(1);
+
   const props = {
     type: "password",
     minLength: 1,
     isRequired: true,
-    onInput: changeCardPassword,
+    onInput: (e: React.ChangeEvent<HTMLInputElement>) => {
+      isNumber(e);
+      changeCardPassword(e);
+    },
+    onBlur: isRightLength,
   };
+
   const firstPassword = { id: "first", value: cardPassword[0], ...props };
 
   const secondPassword = { id: "second", value: cardPassword[1], ...props };
@@ -40,6 +49,7 @@ function CardPasswordInput({
         <Style.LastDigits>•</Style.LastDigits>
         <Style.LastDigits>•</Style.LastDigits>
       </Style.Contents>
+      <InputGuide warningText={warningText} />
     </section>
   );
 }

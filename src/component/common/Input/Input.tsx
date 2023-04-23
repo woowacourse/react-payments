@@ -10,6 +10,7 @@ type InputProps = {
   minLength?: number;
   maxLength?: number;
   placeholder?: string;
+  onBlur?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 function Input({ isRequired, ...props }: InputProps) {

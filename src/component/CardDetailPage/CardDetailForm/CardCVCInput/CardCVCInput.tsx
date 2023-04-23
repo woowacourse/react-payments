@@ -1,29 +1,37 @@
 import React, { useState } from "react";
 import Style from "./CardCVCInputStyled";
-import Input from "../../../common/Input/Input";
 import { ThemeProvider } from "styled-components";
 import CVCPopUp from "./CVCPopUp/CVCPopUp";
+import Input from "../../../common/Input/Input";
+import useWarningText from "../../../../hooks/useWarningText";
+import InputGuide from "../../../common/InputGuide/InputGuide";
 
 type CardCVCInputProps = {
   changeCardCVC: (e: React.ChangeEvent<HTMLInputElement>) => void;
   cardCVC: string;
 };
 function CardCVCInput({ changeCardCVC, cardCVC }: CardCVCInputProps) {
+  const { warningText, isNumber, isRightLength } = useWarningText(3);
+  const [popUp, setPopUp] = useState(false);
+
   const props = {
     type: "password",
     value: cardCVC,
     minLength: 3,
     isRequired: true,
-    onInput: changeCardCVC,
+    onInput: (e: React.ChangeEvent<HTMLInputElement>) => {
+      isNumber(e);
+      changeCardCVC(e);
+    },
+    onBlur: isRightLength,
   };
+
   const theme = {
     inputSectionWidth: "30%",
     width: "60%",
     size: "30px",
     spacing: "4px",
   };
-
-  const [popUp, setPopUp] = useState(false);
 
   const openPopup = () => {
     setPopUp(true);
@@ -44,6 +52,7 @@ function CardCVCInput({ changeCardCVC, cardCVC }: CardCVCInputProps) {
         </Style.Button>
         {popUp ? <CVCPopUp closePopup={closePopup} /> : null}
       </Style.Contents>
+      <InputGuide warningText={warningText} />
     </section>
   );
 }
