@@ -10,13 +10,18 @@ type InputProps = {
   minLength?: number;
   maxLength?: number;
   placeholder?: string;
+  inputRef?: React.RefObject<HTMLInputElement>;
   onBlur?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-function Input({ isRequired, ...props }: InputProps) {
+function Input({ isRequired, inputRef, ...props }: InputProps) {
   return (
     <Style.InputSection>
-      <Style.Input {...props} required={isRequired ? true : false} />
+      <Style.Input
+        {...props}
+        required={isRequired ? true : false}
+        ref={inputRef}
+      />
     </Style.InputSection>
   );
 }
