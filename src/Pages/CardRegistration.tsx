@@ -5,11 +5,11 @@ import Header from '../components/Header';
 import PaymentsInputContainer from '../containers/PaymentsInputContainer';
 
 export const useCardNumber = (initialState = ['', '', '', '']) => {
-  const [cardNumber, setValue] = useState<CardNumber>(initialState as CardNumber);
+  const [cardNumber, _setCardNumber] = useState<CardNumber>(initialState as CardNumber);
 
   const setCardNumber = (index: number, value: string) => {
     const newCardNumber = [...cardNumber.slice(0, index), value, ...cardNumber.slice(index + 1)];
-    setValue(newCardNumber as CardNumber);
+    _setCardNumber(newCardNumber as CardNumber);
   };
 
   return { cardNumber, setCardNumber };
