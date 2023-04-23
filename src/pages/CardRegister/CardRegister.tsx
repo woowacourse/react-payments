@@ -26,7 +26,7 @@ export default function CardRegister() {
           <CardNameInput />
           <CardCVCInput />
           <CardPasswordInput />
-          {isAllValid && <Styled.CompleteButton>바로</Styled.CompleteButton>}
+          {isAllValid && <Styled.CompleteButton>다음</Styled.CompleteButton>}
         </Styled.RegisterForm>
       </Styled.InfoSection>
     </Styled.Root>
