@@ -8,9 +8,11 @@ import Input from '../../common/Input';
 interface Props {
   securityCode: CardType['securityCode'];
   setSecurityCode: (securityCode: CardType['securityCode']) => void;
+  insert: (index: number) => (element: HTMLInputElement | null) => void;
+  focus: (index: number) => (go: number) => void;
 }
 
-const SecurityCodeInput = ({ securityCode, setSecurityCode }: Props) => {
+const SecurityCodeInput = ({ securityCode, setSecurityCode, insert, focus }: Props) => {
   return (
     <InputSectionTemplate label="보안 코드(CVC/CVV)">
       <InputBox align="center">
@@ -21,6 +23,8 @@ const SecurityCodeInput = ({ securityCode, setSecurityCode }: Props) => {
           length={3}
           required
           textSecurity
+          insert={insert(7)}
+          focus={focus(7)}
         />
       </InputBox>
       <HelpButton>

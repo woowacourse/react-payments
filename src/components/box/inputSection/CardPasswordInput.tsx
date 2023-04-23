@@ -8,9 +8,11 @@ import Input from '../../common/Input';
 interface Props {
   cardPassword: CardType['cardPassword'];
   setCardPasswordIndex: (index: number) => (value: CardType['cardPassword'][number]) => void;
+  insert: (index: number) => (element: HTMLInputElement | null) => void;
+  focus: (index: number) => (go: number) => void;
 }
 
-const CardPasswordInput = ({ cardPassword, setCardPasswordIndex }: Props) => {
+const CardPasswordInput = ({ cardPassword, setCardPasswordIndex, insert, focus }: Props) => {
   return (
     <InputSectionTemplate label="카드 번호">
       {cardPassword.map((value, index) => (
@@ -21,6 +23,8 @@ const CardPasswordInput = ({ cardPassword, setCardPasswordIndex }: Props) => {
             setValue={setCardPasswordIndex(index)}
             length={1}
             textSecurity
+            insert={insert(8 + index)}
+            focus={focus(8 + index)}
           />
         </InputBox>
       ))}
