@@ -49,7 +49,7 @@ export default function InputBoxSecurityCode(props: Props) {
         ?
       </button>
       <p className={inputStatus === INPUT_STATUS.ERROR ? "visible" : ""}>
-        error message
+        보안 코드는 세 자리의 숫자로 입력해 주세요!!!
       </p>
     </div>
   );

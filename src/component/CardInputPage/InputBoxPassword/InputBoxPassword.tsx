@@ -17,7 +17,7 @@ export default function InputBoxPassword(props: Props) {
     <div className="input-box-card-password">
       <p>카드 비밀번호</p>
       <CardPassword setError={setError} setIsComplete={setIsComplete} />
-      <p className={error ? "visible" : ""}>error message</p>
+      <p className={error ? "visible" : ""}>카드 비밀번호 앞 두 자리를 입력해 주세요!!!</p>
     </div>
   );
 }

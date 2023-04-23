@@ -57,7 +57,7 @@ export default function InputBoxExpirationDate(props: Props) {
         inputMode="numeric"
       ></Input>
       <p className={inputStatus === INPUT_STATUS.ERROR ? "visible" : ""}>
-        error message
+        연과 월은 각각 두 자리의 숫자로 입력해 주세요!!!
       </p>
     </div>
   );

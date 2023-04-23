@@ -20,7 +20,7 @@ export default function InputBoxCardNumber(props: Props) {
         setIsComplete={setIsComplete} 
         setPreviewDataHandler={setPreviewDataHandler}
       />
-      <p className={error ? "visible" : ""}>에러</p>
+      <p className={error ? "visible" : ""}>16자리의 숫자를 입력해 주세요!!!</p>
     </div>
   );
 }
