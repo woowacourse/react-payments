@@ -1,22 +1,24 @@
 import styled from 'styled-components';
-interface Props {
-  cardNumber: string;
+import refineExpirationDate from '../../utils/refineExpirationDate';
+
+interface CardProps {
+  cardNumber: string[];
   ownerName: string;
-  expirationDate: string;
+  expirationDate: string[];
 }
 
-function Card({ cardNumber, ownerName, expirationDate }: Props) {
+const Card = ({ cardNumber, ownerName, expirationDate }: CardProps) => {
   return (
     <CardContainer>
       <CardChip></CardChip>
-      <CardNumberContainer>{cardNumber}</CardNumberContainer>
+      <CardNumberContainer>{cardNumber.join(' ')}</CardNumberContainer>
       <CardNameContainer>
         <span>{ownerName}</span>
-        <span>{expirationDate}</span>
+        <span>{refineExpirationDate(expirationDate)}</span>
       </CardNameContainer>
     </CardContainer>
   );
-}
+};
 
 export default Card;
 

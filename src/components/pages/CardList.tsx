@@ -11,19 +11,18 @@ function CardList() {
 
   const cardLists = useMemo(() => {
     return cardList.length ? (
-      cardList.map((card) => {
-        const { cardNumber, ownerName, expirationDate } = card;
+      cardList.map(({ cardNumber, ownerName, expirationDate }, idx) => {
         return (
           <Card
-            key={cardNumber.join('') + expirationDate.join('')}
-            cardNumber={cardNumber.join(' ')}
+            key={idx}
+            cardNumber={cardNumber}
             ownerName={ownerName}
-            expirationDate={expirationDate.join(' / ')}
+            expirationDate={expirationDate}
           />
         );
       })
     ) : (
-      <CardRegisterParagarph>새로운 카드를 등록해주세요.</CardRegisterParagarph>
+      <CardRegisterParagraph>새로운 카드를 등록해주세요.</CardRegisterParagraph>
     );
   }, [cardList]);
 
@@ -50,7 +49,7 @@ const CardListSection = styled.section`
   align-items: center;
 `;
 
-const CardRegisterParagarph = styled.p`
+const CardRegisterParagraph = styled.p`
   margin-bottom: 9px;
 `;
 

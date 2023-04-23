@@ -1,7 +1,7 @@
-import { useState } from 'react';
 import Card from '../@common/Card';
-import CreditCardContext from '../../contexts/InputValueContext';
+import { CreditCardContext } from '../../contexts/CreditCardContext';
 import CardRegisterForm from '../registerForm/cardRegisterForm/CardRegisterForm';
+import { useState } from 'react';
 import CreditCardInfo from '../../@types/creditCardInfo';
 
 function RegisterPage() {
@@ -13,10 +13,6 @@ function RegisterPage() {
     password: ['', ''],
     bank: '현대카드',
   });
-
-  console.log('>>> REGISTER PAGE ', creditCardEntered);
-
-  const { cardNumber, expirationDate, ownerName } = creditCardEntered;
 
   const setCreditCard = <T extends keyof CreditCardInfo>(
     target: T,
@@ -31,9 +27,9 @@ function RegisterPage() {
   return (
     <CreditCardContext.Provider value={[creditCardEntered, setCreditCard]}>
       <Card
-        cardNumber={cardNumber.join(' ')}
-        expirationDate={expirationDate.join(' / ')}
-        ownerName={ownerName}
+        cardNumber={creditCardEntered.cardNumber}
+        ownerName={creditCardEntered.ownerName}
+        expirationDate={creditCardEntered.expirationDate}
       />
       <CardRegisterForm />
     </CreditCardContext.Provider>
