@@ -4,6 +4,8 @@ import styled from 'styled-components';
 
 import Card from '../common/Card';
 import PageTemplate from '../template/PageTemplate';
+import { LOCAL_STORAGE_KEY } from '../../constants';
+import { getList } from '../../utils/localStorageUtils';
 
 interface Props {
   navigate: (page: Page) => void;
@@ -14,7 +16,7 @@ const CardListPage = ({ navigate }: Props) => {
     navigate(Page.register);
   };
 
-  const cardList: CardType[] = JSON.parse(localStorage.getItem('cardList') || '[]');
+  const cardList: CardType[] = getList(LOCAL_STORAGE_KEY.cardList);
 
   return (
     <PageTemplate title="보유카드">

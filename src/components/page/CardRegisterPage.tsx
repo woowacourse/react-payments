@@ -13,7 +13,8 @@ import Card from '../common/Card';
 
 import useList from '../../utils/useList';
 import useFocusRef from '../../utils/useFocusRef';
-import pushLocalStorageList from '../../utils/pushLocalStorageList';
+import { pushList } from '../../utils/localStorageUtils';
+import { LOCAL_STORAGE_KEY } from '../../constants';
 
 interface Props {
   navigate: (page: Page) => void;
@@ -40,7 +41,7 @@ const CardRegisterPage = ({ navigate }: Props) => {
       cardPassword,
     };
 
-    pushLocalStorageList('cardList', newCard);
+    pushList(LOCAL_STORAGE_KEY.cardList, newCard);
     navigate(Page.list);
   };
 
