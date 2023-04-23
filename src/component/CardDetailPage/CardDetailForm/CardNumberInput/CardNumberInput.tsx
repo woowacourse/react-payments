@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Style from "./CardNumberInputStyled";
 import { ThemeProvider } from "styled-components";
 import Input from "../../../common/Input/Input";
