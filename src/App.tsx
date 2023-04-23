@@ -4,6 +4,8 @@ import { Route, Routes } from 'react-router';
 import HoldingCardsPage from './pages/HoldingCardsPage';
 import CardRegisterPage from './pages/CardRegisterPage';
 
+import { ModalProvider } from './components/common/Modal/ModalContext';
+
 import { CARDS_LOCAL_STORAGE_KEY } from './domain/constants';
 import type { CardInfo } from './domain/types/card';
 
@@ -27,13 +29,15 @@ const App = () => {
   };
 
   return (
-    <Routes>
-      <Route path="/" element={<HoldingCardsPage cards={cards} />} />
-      <Route
-        path="card-register"
-        element={<CardRegisterPage registerCard={registerCard} />}
-      />
-    </Routes>
+    <ModalProvider>
+      <Routes>
+        <Route path="/" element={<HoldingCardsPage cards={cards} />} />
+        <Route
+          path="card-register"
+          element={<CardRegisterPage registerCard={registerCard} />}
+        />
+      </Routes>
+    </ModalProvider>
   );
 };
 
