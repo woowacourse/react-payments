@@ -12,7 +12,9 @@ const CardCVC: React.FC = () => {
   return (
     <StyledCardCVCWrapper>
       <StyledCardLabel>
-        <CardMessage type="label">보안 코드(CVC/CVV)</CardMessage>
+        <CardMessage fontWeight={500} fontSize="12px" color="#525252" lineHeight="14px">
+          보안 코드(CVC/CVV)
+        </CardMessage>
         <CardInput type="password" width="75px" minLength={3} maxLength={3} center={true} />
       </StyledCardLabel>
       <ErrorMessage isError={true}>3자리 숫자를 입력하세요!!</ErrorMessage>
