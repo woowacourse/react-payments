@@ -10,7 +10,7 @@ interface CardIssuerOptionProps {
 
 function CardIssuerOption({ issuer, onClick }: CardIssuerOptionProps) {
   return (
-    <div data-name="issuer" data-value={issuer} className={styles.container} onClick={onClick}>
+    <div data-value={issuer} className={styles.container} onClick={onClick}>
       <img src={CARD_ISSUER_LOGO_IMAGE[issuer]} alt={`${issuer} 로고`}></img>
       <p>{issuer}</p>
     </div>
