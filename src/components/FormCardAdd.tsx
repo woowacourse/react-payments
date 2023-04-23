@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import InputCardData from './InputCardData';
 
 import { fetchNewCardData } from '../utils/fetchData';
@@ -17,6 +17,26 @@ const FormCardAdd = ({
   cardPassword2,
 }: FormCardAddProps) => {
   const navigate = useNavigate();
+  const [inputError, setInputError] = useState(false);
+
+  const handleExpireError = (element: ChangeEvent<HTMLInputElement>) => {
+    const data = element.target.value;
+    if (data.length === 5) {
+      const getMonth = Number(`${data[0]}${data[1]}`);
+      const getYear = Number(`20${data[3]}${data[4]}`);
+      const date = new Date();
+      const nowMonth = date.getMonth();
+      const nowYear = date.getFullYear();
+      if (getYear > nowYear) {
+        return setInputError(false);
+      }
+      if (getYear === nowYear && nowMonth <= getMonth) {
+        return setInputError(false);
+      }
+      element.target.value = '';
+      return setInputError(true);
+    }
+  };
 
   const inputRef = Array.from({ length: 9 }).map(() => React.createRef<HTMLInputElement>());
 
@@ -71,6 +91,7 @@ const FormCardAdd = ({
             Ref={inputRef[0]}
             minDataLength={4}
             maxDataLength={4}
+            handleError={() => {}}
             onFocus={moveFocus}
           />
           <span>-</span>
@@ -83,6 +104,7 @@ const FormCardAdd = ({
             minDataLength={4}
             Ref={inputRef[1]}
             maxDataLength={4}
+            handleError={() => {}}
             onFocus={moveFocus}
           />
           <span>-</span>
@@ -96,6 +118,7 @@ const FormCardAdd = ({
             Ref={inputRef[2]}
             maxDataLength={4}
             isPasswordType={true}
+            handleError={() => {}}
             passwordType="card-number"
             onFocus={moveFocus}
           />
@@ -109,6 +132,7 @@ const FormCardAdd = ({
             minDataLength={4}
             Ref={inputRef[3]}
             maxDataLength={4}
+            handleError={() => {}}
             isPasswordType={true}
             passwordType="card-number"
             onFocus={moveFocus}
@@ -126,8 +150,10 @@ const FormCardAdd = ({
           minDataLength={5}
           maxDataLength={5}
           name="expireDate"
+          handleError={handleExpireError}
           onFocus={moveFocus}
         />
+        {inputError ? <span className="expired-error">오류!</span> : ''}
       </div>
       <div>
         <div className="card-owner-container-header">
@@ -143,6 +169,7 @@ const FormCardAdd = ({
           Ref={inputRef[5]}
           minDataLength={1}
           maxDataLength={30}
+          handleError={() => {}}
           onFocus={moveFocus}
         />
       </div>
@@ -158,6 +185,7 @@ const FormCardAdd = ({
             Ref={inputRef[6]}
             maxDataLength={3}
             minDataLength={3}
+            handleError={() => {}}
             onChange={securityCode.onChange}
             onFocus={moveFocus}
           />
@@ -175,6 +203,7 @@ const FormCardAdd = ({
             Ref={inputRef[7]}
             maxDataLength={1}
             minDataLength={1}
+            handleError={() => {}}
             passwordType="password-single"
             onChange={cardPassword1.onChange}
             onFocus={moveFocus}
@@ -188,6 +217,7 @@ const FormCardAdd = ({
             Ref={inputRef[8]}
             maxDataLength={1}
             minDataLength={1}
+            handleError={() => {}}
             passwordType="password-single"
             onFocus={moveFocus}
           />

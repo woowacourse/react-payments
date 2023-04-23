@@ -11,6 +11,7 @@ export const formatExpireDate = (expireDate: string): string => {
   if (nowLength === 3) {
     return `${expireDate[0]}${expireDate[1]}/${expireDate[2]}`;
   }
+
   return expireDate;
 };
 

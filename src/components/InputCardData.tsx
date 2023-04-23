@@ -11,6 +11,7 @@ export type InputProps = {
   minDataLength: number;
   dataId: number;
   Ref: RefObject<HTMLInputElement>;
+  handleError: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onFocus: (e: ChangeEvent) => void;
 };
@@ -25,6 +26,7 @@ const InputCardData = ({
   className,
   Ref,
   dataId,
+  handleError,
   onChange,
   onFocus,
 }: InputProps) => {
@@ -53,6 +55,7 @@ const InputCardData = ({
       data-id={dataId}
       ref={Ref}
       onChange={(e) => {
+        handleError(e);
         onChange(e);
         onFocus(e);
       }}

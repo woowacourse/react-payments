@@ -108,3 +108,7 @@
   align-items: center;
   font-size: 50px;
 }
+
+.expired-error {
+  color: red;
+}
