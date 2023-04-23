@@ -6,7 +6,10 @@ import SupportingText from '../SupportingText/SupportingText';
 interface InputContainerProps {
   children: ReactNode;
   supportingText?: SupportingTextMessage;
-  characterCounter?: [number, number];
+  characterCounter?: {
+    currentCount: number;
+    maxCount: number;
+  };
   isError?: boolean;
 }
 
@@ -23,7 +26,7 @@ function InputContainer({
         {supportingText && <SupportingText message={supportingText} isError={isError} />}
         {characterCounter && (
           <span className={styles.characterCounter}>
-            {characterCounter[0]}/{characterCounter[1]}
+            {characterCounter.currentCount}/{characterCounter.maxCount}
           </span>
         )}
       </div>

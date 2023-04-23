@@ -35,7 +35,7 @@ export const SupportingText = () => (
 );
 
 export const CharacterCounter = () => (
-  <InputContainer characterCounter={[0, 30]}>
+  <InputContainer characterCounter={{ currentCount: 0, maxCount: 30 }}>
     <InputLabel htmlFor="input">Label</InputLabel>
     <Input id="input" placeholder="Placeholder Text" />
   </InputContainer>

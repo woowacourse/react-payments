@@ -11,7 +11,9 @@ interface CardOwnerNameProps {
 
 function CardOwnerName({ onInputChange, value = '' }: CardOwnerNameProps) {
   return (
-    <InputContainer characterCounter={[value.length, 20]}>
+    <InputContainer
+      characterCounter={{ currentCount: value.length, maxCount: OWNER_NAME_MAX_LENGTH }}
+    >
       <Label htmlFor="ownerName">카드 소유자 이름</Label>
       <Input
         id="ownerName"
