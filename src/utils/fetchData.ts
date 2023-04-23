@@ -1,7 +1,8 @@
 import type { CardType } from '../type';
+import { LOCAL_STORAGE_CARD_LIST } from './constants';
 
-export const fetchData = (data: Omit<CardType, 'id'>): boolean => {
-  const getData = localStorage.getItem('cardList');
+export const fetchNewCardData = (data: Omit<CardType, 'id'>): boolean => {
+  const getData = localStorage.getItem(LOCAL_STORAGE_CARD_LIST);
 
   if (getData) {
     const dataToArr = JSON.parse(getData);

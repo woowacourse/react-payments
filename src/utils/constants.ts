@@ -4,3 +4,4 @@ export const LOCATION = Object.freeze({
   CARD_LIST_PAGE: '/',
   ADD_CARD_PAGE: '/add',
 });
+export const LOCAL_STORAGE_CARD_LIST = 'cardList';

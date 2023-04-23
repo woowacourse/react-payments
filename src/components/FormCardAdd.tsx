@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from 'react';
 import InputCardData from './InputCardData';
 
-import { fetchData } from '../utils/fetchData';
+import { fetchNewCardData } from '../utils/fetchData';
 import { useNavigate } from 'react-router-dom';
 import { CVC_TOOLTIP_DETAIL, CVC_TOOLTIP_TITLE } from '../utils/constants';
 import { CardType, FormCardAddProps } from '../type';
@@ -50,7 +50,7 @@ const FormCardAdd = ({
         second: cardPassword2.value,
       },
     };
-    if (!fetchData(postData)) {
+    if (!fetchNewCardData(postData)) {
       alert('이미 등록된 카드입니다.');
       return;
     }
