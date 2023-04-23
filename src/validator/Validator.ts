@@ -1,7 +1,7 @@
 export const isNumeric = (value: string) => {
-  const REGEX = /^[0-9]*$/;
+  const allowOnlyNumber = /^[0-9]*$/;
 
-  return REGEX.test(value);
+  return allowOnlyNumber.test(value);
 };
 
 export const isValidMonth = (value: string) => {
@@ -13,9 +13,9 @@ export const isValidMonth = (value: string) => {
 };
 
 export const isValidOwnerName = (value: string) => {
-  const REGEX = /^[A-Za-z\s]*$/;
+  const allowAlphabetAndBlank = /^[A-Za-z\s]*$/;
 
-  return REGEX.test(value);
+  return allowAlphabetAndBlank.test(value);
 };
 
 export const isFulfilledObject = (obj: Record<string, string>, length: number) => {
