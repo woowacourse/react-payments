@@ -16,5 +16,6 @@ export const SecurityCodeStory: Story = {
       0: '02',
       1: '32',
     },
+    checkExpiredDate: (order: number, value: string) => true,
   },
 };
