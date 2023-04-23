@@ -108,7 +108,7 @@ const FormCardAdd = ({
             className="card-number"
             name="first"
             dataId={0}
-            Ref={inputRef[0]}
+            refObject={inputRef[0]}
             minDataLength={4}
             maxDataLength={4}
             handleError={() => {}}
@@ -123,7 +123,7 @@ const FormCardAdd = ({
             name="second"
             dataId={1}
             minDataLength={4}
-            Ref={inputRef[1]}
+            refObject={inputRef[1]}
             maxDataLength={4}
             handleError={() => {}}
             onFocus={moveFocus}
@@ -137,7 +137,7 @@ const FormCardAdd = ({
             name="third"
             dataId={2}
             minDataLength={4}
-            Ref={inputRef[2]}
+            refObject={inputRef[2]}
             maxDataLength={4}
             isPasswordType={true}
             handleError={() => {}}
@@ -153,7 +153,7 @@ const FormCardAdd = ({
             name="fourth"
             dataId={3}
             minDataLength={4}
-            Ref={inputRef[3]}
+            refObject={inputRef[3]}
             maxDataLength={4}
             handleError={() => {}}
             isPasswordType={true}
@@ -170,7 +170,7 @@ const FormCardAdd = ({
           onChange={cardExpire.onChange}
           className="card-expired"
           dataId={4}
-          Ref={inputRef[4]}
+          refObject={inputRef[4]}
           minDataLength={1}
           maxDataLength={5}
           name="expireDate"
@@ -191,7 +191,7 @@ const FormCardAdd = ({
           className="card-owner"
           name="owner"
           dataId={5}
-          Ref={inputRef[5]}
+          refObject={inputRef[5]}
           minDataLength={1}
           maxDataLength={15}
           handleError={() => {}}
@@ -208,7 +208,7 @@ const FormCardAdd = ({
             name="cvcData"
             passwordType="password-cvc"
             dataId={6}
-            Ref={inputRef[6]}
+            refObject={inputRef[6]}
             maxDataLength={3}
             minDataLength={3}
             handleError={() => {}}
@@ -227,7 +227,7 @@ const FormCardAdd = ({
             value={cardPassword1.value}
             name="card-password-1"
             dataId={7}
-            Ref={inputRef[7]}
+            refObject={inputRef[7]}
             maxDataLength={1}
             minDataLength={1}
             handleError={() => {}}
@@ -242,7 +242,7 @@ const FormCardAdd = ({
             name="card-password-2"
             onChange={cardPassword2.onChange}
             dataId={8}
-            Ref={inputRef[8]}
+            refObject={inputRef[8]}
             maxDataLength={1}
             minDataLength={1}
             handleError={() => {}}
