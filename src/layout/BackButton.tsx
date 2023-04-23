@@ -5,7 +5,7 @@ interface Props {
   path: string;
 }
 
-export const BackButton = ({ path }: Props) => {
+export function BackButton({ path }: Props) {
   const navigate = useNavigate();
   return (
     <Style.Wrapper
@@ -24,7 +24,7 @@ export const BackButton = ({ path }: Props) => {
       </svg>
     </Style.Wrapper>
   );
-};
+}
 
 const Style = {
   Wrapper: styled.button`

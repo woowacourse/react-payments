@@ -5,7 +5,7 @@ import { BackButton } from '../layout/BackButton';
 const imageUrl =
   'https://user-images.githubusercontent.com/24777828/233794760-2bc92a8d-4439-4dff-a46d-54f9311bffac.JPG';
 
-export const NotFound = () => {
+export function NotFound() {
   return (
     <Layout>
       <Style.Wrapper>
@@ -30,7 +30,7 @@ export const NotFound = () => {
       </Style.Wrapper>
     </Layout>
   );
-};
+}
 
 const Style = {
   Wrapper: styled.div`

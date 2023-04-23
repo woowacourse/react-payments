@@ -9,7 +9,7 @@ import { SecurityCodeInput } from './input/SecurityCodeInput';
 import { PasswordInput } from './input/PasswordInput';
 import { cardDataService } from '../domains/cardDataService';
 
-export const CardRegisterForm = () => {
+export function CardRegisterForm() {
   const navigate = useNavigate();
 
   const [isInputFinish, setIsInputFinish] = useState(false);
@@ -97,7 +97,7 @@ export const CardRegisterForm = () => {
       </Style.ButtonContainer>
     </Style.Wrapper>
   );
-};
+}
 
 const Style = {
   Wrapper: styled.form`

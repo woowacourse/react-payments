@@ -5,13 +5,13 @@ interface Props {
   children: ReactNode;
 }
 
-export const Layout = ({ children }: Props) => {
+export function Layout({ children }: Props) {
   return (
     <Style.Wrapper>
       <Style.ChildrenContainer>{children}</Style.ChildrenContainer>
     </Style.Wrapper>
   );
-};
+}
 
 const Style = {
   Wrapper: styled.div`

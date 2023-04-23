@@ -3,7 +3,7 @@ import { Layout } from '../layout';
 import { BackButton } from '../layout/BackButton';
 import { CardRegisterForm } from '../components/CardRegisterForm';
 
-export const Register = () => {
+export function Register() {
   return (
     <Layout>
       <Style.Header>
@@ -13,7 +13,7 @@ export const Register = () => {
       <CardRegisterForm />
     </Layout>
   );
-};
+}
 
 const Style = {
   Header: styled.div`

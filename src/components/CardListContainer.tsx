@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { CardViewer } from './CardViewer';
 import { cardDataService } from '../domains/cardDataService';
 
-export const CardListContainer = () => {
+export function CardListContainer() {
   const navigate = useNavigate();
   const cardList = cardDataService.getCardList();
 
@@ -27,7 +27,7 @@ export const CardListContainer = () => {
       </Style.CardListWrapper>
     </>
   );
-};
+}
 
 const Style = {
   CardListWrapper: styled.div`

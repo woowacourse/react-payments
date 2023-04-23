@@ -14,12 +14,12 @@ interface Props {
   activateNextButton: () => void;
 }
 
-export const PasswordInput = ({
+export function PasswordInput({
   password,
   passwordInputRef,
   setPassword,
   activateNextButton,
-}: Props) => {
+}: Props) {
   const allRef = [passwordInputRef, useRef<HTMLInputElement>(null)];
 
   const handleBackspacePress = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -87,7 +87,7 @@ export const PasswordInput = ({
       </Style.Wrapper>
     </>
   );
-};
+}
 
 const Style = {
   Wrapper: styled.div`
