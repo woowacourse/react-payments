@@ -6,11 +6,7 @@ export default {
   component: Card,
 };
 
-const Template: StoryFn<typeof Card> = (args: { $backgroundColor?: string }): React.ReactElement => (
-  <Card {...args}>
-    <></>
-  </Card>
-);
+const Template: StoryFn<typeof Card> = (args: { $backgroundColor?: string }): React.ReactElement => <Card {...args} />;
 
 export const Purple = Template.bind({});
 Purple.args = {

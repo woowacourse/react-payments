@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 interface CardProps {
   $backgroundColor?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 export default function Card({ $backgroundColor = "lightGrey", children }: CardProps) {
