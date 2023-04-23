@@ -41,7 +41,7 @@ const CardNumbers = ({ cardNumbers, checkCardNumbers }: CardNumbersProps) => {
           order={0}
           placeholder={'0000'}
           required={true}
-          autofocus={true}
+          autoFocus={true}
         />
         {cardNumberRefs[0].current?.value.length === 4 && (
           <Styled.Pargraph>-</Styled.Pargraph>
