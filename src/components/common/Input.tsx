@@ -1,12 +1,11 @@
+import { HTMLAttributes } from "react";
 import styled from "styled-components";
 
-export interface InputProps {
+export interface InputProps extends HTMLAttributes<HTMLInputElement> {
   label: string;
   width: string;
-  placeholder?: string;
   textPosition: string;
   type: string;
-  maxLength: number;
   error?: { isValid: boolean; errorMessage: string };
   handleInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleChange: (e: React.FocusEvent<HTMLInputElement>) => void;
@@ -19,7 +18,6 @@ export const Input = ({
   textPosition,
   type,
   error = { isValid: true, errorMessage: "" },
-  maxLength,
   handleInput,
   handleChange,
 }: InputProps) => {
@@ -35,7 +33,6 @@ export const Input = ({
         onBlur={handleChange}
         textPosition={textPosition}
         type={type}
-        maxLength={maxLength}
       />
       {<ErrorMessage>{!isValid ? errorMessage : ""}</ErrorMessage>}
     </Colum>

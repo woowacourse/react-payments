@@ -15,7 +15,6 @@ const OwnerInfo = {
   placeholder: "카드에 표시된 이름과 동일하게 입력하세요.",
   textPosition: "left",
   type: "text",
-  maxLength: CARD_INPUT_NUMBER.OWNER,
 };
 
 export const OwnerInput = ({ setOwner }: OwnerInputProps) => {
@@ -23,12 +22,14 @@ export const OwnerInput = ({ setOwner }: OwnerInputProps) => {
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
+
     if (value.length > CARD_INPUT_NUMBER.OWNER) {
       e.target.value = value.slice(0, -1);
       return;
     }
 
     e.target.value = value.toUpperCase();
+
     setOwner(e.target.value);
     setOwnerLength(value.length);
   };

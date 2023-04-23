@@ -4,6 +4,7 @@ import { Input } from "../common/Input";
 import { useState } from "react";
 import styled from "styled-components";
 import { CARD_INPUT_NUMBER } from "../../constant/cardInput";
+import { isInputFilled, isLastLetterNumeric } from "../../utils/validate";
 
 interface CardNumberInputProps {
   setCardNumbers: (index: number, numbers: string) => void;
@@ -11,7 +12,6 @@ interface CardNumberInputProps {
 
 const cardNumberInputInfo = {
   width: "70px",
-  maxLength: CARD_INPUT_NUMBER.CARD_NUMBERS,
   textPosition: "center",
 };
 
@@ -22,7 +22,7 @@ export const CardNumberInput = ({ setCardNumbers }: CardNumberInputProps) => {
     (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;
 
-      if (!/^\d*$/.test(value)) {
+      if (!isLastLetterNumeric(value)) {
         e.target.value = value.slice(0, -1);
         return;
       }
@@ -38,7 +38,7 @@ export const CardNumberInput = ({ setCardNumbers }: CardNumberInputProps) => {
   const handleOutFocusEvent = (e: React.FocusEvent<HTMLInputElement>) => {
     setIsCompleted(false);
 
-    if (e.target.value.length === CARD_INPUT_NUMBER.CARD_NUMBERS) {
+    if (isInputFilled(e.target.value, CARD_INPUT_NUMBER.CARD_NUMBER)) {
       setIsCompleted(true);
     }
   };

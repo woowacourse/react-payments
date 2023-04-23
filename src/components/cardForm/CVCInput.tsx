@@ -4,6 +4,7 @@ import { InputLabel } from "../common/InputLabel";
 import styled from "styled-components";
 import { useState } from "react";
 import { CARD_INPUT_NUMBER } from "../../constant/cardInput";
+import { isInputFilled, isLastLetterNumeric } from "../../utils/validate";
 
 const CVCInfo = {
   label: "cvc",
@@ -11,15 +12,16 @@ const CVCInfo = {
   placeholder: "",
   textPosition: "center",
   type: "password",
-  maxLength: CARD_INPUT_NUMBER.CVC,
 };
 
 export const CVCInput = () => {
   const [isCompleted, setIsCompleted] = useState(true);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.length > 3 || !/\d$/.test(e.target.value)) {
-      e.target.value = e.target.value.slice(0, -1);
+    const value = e.target.value;
+
+    if (!isLastLetterNumeric(value) || value.length > 3) {
+      e.target.value = value.slice(0, -1);
       return;
     }
   };
@@ -29,7 +31,7 @@ export const CVCInput = () => {
 
     setIsCompleted(false);
 
-    if (value.length === 3) {
+    if (isInputFilled(value, CARD_INPUT_NUMBER.CVC)) {
       setIsCompleted(true);
     }
   };

@@ -4,21 +4,23 @@ import { InputLabel } from "../common/InputLabel";
 import styled from "styled-components";
 import { useState } from "react";
 import { CARD_INPUT_NUMBER } from "../../constant/cardInput";
+import { isInputFilled, isLastLetterNumeric } from "../../utils/validate";
 
 const passwordInfo = {
   width: "43px",
   placeholder: "",
   textPosition: "center",
   type: "password",
-  maxLength: CARD_INPUT_NUMBER.PASSWORD,
 };
 
 export const PasswordInput = () => {
   const [isCompleted, setIsCompleted] = useState(true);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.length > 1 || !/\d$/.test(e.target.value)) {
-      e.target.value = e.target.value.slice(0, -1);
+    const value = e.target.value;
+
+    if (value.length > 1 || !isLastLetterNumeric(value)) {
+      e.target.value = value.slice(0, -1);
       return;
     }
   };
@@ -28,7 +30,7 @@ export const PasswordInput = () => {
 
     setIsCompleted(false);
 
-    if (value.length === 1) {
+    if (isInputFilled(value, CARD_INPUT_NUMBER.PASSWORD)) {
       setIsCompleted(true);
     }
   };
