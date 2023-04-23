@@ -6,7 +6,7 @@ import useAutoFocus from '../../../hooks/useAutoFocus';
 import FormLabel from '../../@common/FormLabel';
 import Input from '../../@common/Input';
 import ErrorSpan from '../../@common/ErrorSpan';
-import CreditCardContext from '../../../contexts/InputValueContext';
+import { CreditCardContext } from '../../../contexts/CreditCardContext';
 
 interface Props {}
 
@@ -68,6 +68,17 @@ export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
     }
   };
 
+  const _onBlurLast: React.FocusEventHandler<HTMLInputElement> = () => {
+    refs.forEach(({ current }) => {
+      if (current?.value.length !== 4) {
+        setValidStatus({
+          isValid: false,
+          message: '카드 번호 16자리를 모두 입력해주세요.',
+        });
+      }
+    });
+  };
+
   return (
     <div>
       <FormLabel>카드 번호</FormLabel>
@@ -117,7 +128,7 @@ export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
           data-index="3"
           value={creditCardInfo.cardNumber[3]}
           onChange={_onChange}
-          onBlur={_onBlur}
+          onBlur={_onBlurLast}
           maxLength={4}
           customInputStyle={CardNumberInput}
           inputmode="numeric"
