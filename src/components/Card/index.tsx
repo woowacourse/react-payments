@@ -1,7 +1,12 @@
+import { CardInfo } from '../../types/card';
 import * as styled from './Card.styled';
 
-const Card = ({ cardInfo, bgColor }) => {
-  console.log(cardInfo);
+interface CardProps {
+  cardInfo: CardInfo;
+  bgColor?: string;
+}
+
+const Card = ({ cardInfo, bgColor }: CardProps) => {
   return (
     <styled.Card bgColor={bgColor}>
       <styled.Rectangle />

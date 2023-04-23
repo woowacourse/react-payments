@@ -2,11 +2,15 @@ import * as styled from './MyCardPage.styled';
 
 import { useNavigate } from 'react-router-dom';
 
-import { CardInfo } from '../../App';
+import Card from '../../components/Card';
+import Header from '../../components/Header';
+import { CardInfo } from '../../types/card';
 
-import { Card } from '../../components/';
+interface MyCardPageProps {
+  cardList: CardInfo[];
+}
 
-const MyCardPage = ({ cardList }: { cardList: CardInfo[] }) => {
+const MyCardPage = ({ cardList }: MyCardPageProps) => {
   const navigation = useNavigate();
 
   const handleClick = () => {
@@ -21,6 +25,7 @@ const MyCardPage = ({ cardList }: { cardList: CardInfo[] }) => {
 
   return (
     <styled.MyCardPage>
+      <Header />
       <styled.CardRegisterMessage>새로운 카드를 등록해 주세요</styled.CardRegisterMessage>
       <styled.CardRegisterButton bgColor="#E5E5E5" onClick={handleClick}>
         <styled.ButtonIcon>+</styled.ButtonIcon>

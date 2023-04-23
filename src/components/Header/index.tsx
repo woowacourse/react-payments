@@ -4,10 +4,10 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const { pathname } = useLocation();
-  const navigation = useNavigate();
+  const navigate = useNavigate();
 
   const onClickBackward = () => {
-    navigation('/');
+    navigate('/');
   };
 
   return (
