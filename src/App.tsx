@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import CardRegistration from './Pages/CardRegistration';
 import Home from './Pages/Home';
 import CardListStore from './store';
-import type { CardInformation } from './components/Card';
+import type { CardInformation } from './components/Common/Card/types';
 
 function App() {
   const [cardList, setCardList] = useState<CardInformation[]>([]);

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
-import NamedInputListBox from './NamedInputListBox';
-import type { NamedInputListBoxProps } from './NamedInputListBox';
+import NamedInputListBox from './Common/Input/NamedInputListBox';
+import type { NamedInputListBoxProps } from './Common/Input/NamedInputListBox';
 
 function PaymentsInput({ inputListInformation, name, id }: NamedInputListBoxProps) {
   return (

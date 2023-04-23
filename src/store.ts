@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import type { CardInformation } from './components/Card';
+import type { CardInformation } from './components/Common/Card/types';
 
 interface Store {
   cardList: CardInformation[];
