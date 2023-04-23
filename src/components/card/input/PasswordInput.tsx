@@ -50,6 +50,7 @@ export default function PasswordInput({
           required
           type="password"
           textAlign="center"
+          autoComplete="off"
           tabIndex={8}
           {...firstPassword}
         />
@@ -62,6 +63,7 @@ export default function PasswordInput({
           type="password"
           textAlign="center"
           tabIndex={9}
+          autoComplete="off"
           {...secondPassword}
         />
       </GrayWrapper>

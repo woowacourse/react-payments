@@ -23,6 +23,7 @@ export default function CvcInput({ cvc }: CvcInputProps) {
       <Input
         type="password"
         textAlign="center"
+        autoComplete="off"
         isNumber={true}
         maxLength={3}
         required

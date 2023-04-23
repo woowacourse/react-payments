@@ -60,6 +60,7 @@ export default function CardNumberInput({
         type="password"
         required
         textAlign="center"
+        autoComplete="off"
         tabIndex={2}
         {...thirdNumber}
       />
@@ -68,6 +69,7 @@ export default function CardNumberInput({
         isNumber={true}
         maxLength={4}
         type="password"
+        autoComplete="off"
         required
         textAlign="center"
         tabIndex={3}

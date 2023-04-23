@@ -13,6 +13,5 @@ type Story = StoryObj<typeof AddCardPage>;
 export const AddCard: Story = {
   args: {
     onClick: () => {},
-    onSubmit: () => {},
   },
 };

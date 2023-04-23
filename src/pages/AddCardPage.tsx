@@ -13,12 +13,33 @@ import ToolTip from '../components/common/ToolTip';
 import PasswordInput from '../components/card/input/PasswordInput';
 import NextButton from '../components/common/NextButton';
 import { useFocusInput } from '../hooks/useFocusInput';
-import { isOnlyKoreanAndEnglish } from '../utils';
+import { isNumber, isOnlyKoreanAndEnglish } from '../utils';
+import { CardInfo } from '../types';
+import { HOME_PAGE } from '../constant';
 
 interface AddCardPageProps {
-  onSubmit: (event: FormEvent<HTMLFormElement>) => void;
+  cardList: CardInfo[];
   onClick: () => void;
+  setCardList: (data: CardInfo[]) => void;
+  setPage: React.Dispatch<React.SetStateAction<'homePage' | 'addCardPage'>>;
 }
+
+interface cardInputValueInfo {
+  card: InputDetailInfo;
+  date: InputDetailInfo;
+  owner: InputDetailInfo;
+  cvc: InputDetailInfo;
+  password: InputDetailInfo;
+}
+
+interface InputDetailInfo {
+  data: HTMLInputElement[];
+  maxLength: number;
+  isRequired: boolean;
+  validation: (value: string) => boolean;
+}
+
+type InputKind = 'card' | 'cvc' | 'owner' | 'password' | 'date';
 
 const Page = styled.div`
   position: relative;
@@ -70,7 +91,12 @@ const NextButtonWrapper = styled.div`
   bottom: 25px;
 `;
 
-export default function AddCardPage({ onSubmit, onClick }: AddCardPageProps) {
+export default function AddCardPage({
+  cardList,
+  onClick,
+  setCardList,
+  setPage,
+}: AddCardPageProps) {
   const cardForm = useRef<HTMLFormElement>(null);
   const { onInputKeydown } = useFocusInput(cardForm);
   const firstCardNumber = useInput('', {
@@ -129,6 +155,116 @@ export default function AddCardPage({ onSubmit, onClick }: AddCardPageProps) {
     setIsOpenToolTip((prev) => !prev);
   };
 
+  const onCardInfoSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const {
+      firstCardNumber,
+      secondCardNumber,
+      thirdCardNumber,
+      fourthCardNumber,
+      month,
+      year,
+      owner,
+      cvc,
+      firstPassword,
+      secondPassword,
+    } = event.currentTarget;
+
+    const cardInputValue: cardInputValueInfo = {
+      card: {
+        data: [
+          firstCardNumber,
+          secondCardNumber,
+          thirdCardNumber,
+          fourthCardNumber,
+        ],
+        maxLength: 4,
+        isRequired: true,
+        validation: isNumber,
+      },
+      date: {
+        data: [month, year],
+        maxLength: 2,
+        isRequired: true,
+        validation: isNumber,
+      },
+      cvc: {
+        data: [cvc],
+        maxLength: 3,
+        isRequired: true,
+        validation: isNumber,
+      },
+      owner: {
+        data: [owner],
+        maxLength: 30,
+        isRequired: false,
+        validation: isOnlyKoreanAndEnglish,
+      },
+      password: {
+        data: [firstPassword, secondPassword],
+        maxLength: 1,
+        isRequired: true,
+        validation: isNumber,
+      },
+    };
+
+    const cardInputKey = ['card', 'cvc', 'owner', 'password', 'date'] as const;
+
+    const wrongInputs: HTMLInputElement[] = [];
+
+    const validationResult = cardInputKey.every((key: InputKind) => {
+      const current = cardInputValue[key];
+      const dataList = current.data;
+
+      const result = dataList.every((data) => {
+        const requiredResult = current.isRequired
+          ? data.value.length === current.maxLength
+          : true;
+        const validationResult = current.validation(data.value);
+
+        const dataValidationResult = requiredResult && validationResult;
+
+        if (!dataValidationResult) {
+          wrongInputs.push(data);
+        }
+
+        return dataValidationResult;
+      });
+      return result;
+    });
+
+    if (!validationResult) {
+      wrongInputs[0].focus();
+      return;
+    }
+
+    const newCard: CardInfo = {
+      cardNumber: {
+        fisrt: firstCardNumber.value,
+        second: secondCardNumber.value,
+        third: thirdCardNumber.value,
+        fourth: fourthCardNumber.value,
+      },
+      expiracy: {
+        month: month.value,
+        year: year.value,
+      },
+      owner: owner.value,
+      cvc: cvc.value,
+      password: {
+        first: firstPassword.value,
+        second: secondPassword.value,
+      },
+    };
+
+    const updatedCardList = [...cardList, newCard];
+
+    setCardList(updatedCardList);
+
+    setPage(HOME_PAGE);
+  };
+
   useEffect(() => {
     if (!cardForm.current) return;
     setIsFormfilled(!cardForm.current.checkValidity());
@@ -165,7 +301,7 @@ export default function AddCardPage({ onSubmit, onClick }: AddCardPageProps) {
         />
       </CardWrapper>
       <InputWrapperParent
-        onSubmit={onSubmit}
+        onSubmit={onCardInfoSubmit}
         ref={cardForm}
         onKeyDown={(e) => onInputKeydown(e)}
       >

@@ -17,6 +17,7 @@ const StyledInput = styled.input<{ textAlign?: string }>`
 
 export default function Input({
   textAlign = 'baseline',
+
   isNumber,
   ...rest
 }: InputProps) {
