@@ -1,8 +1,5 @@
-import styled, { DefaultTheme } from 'styled-components';
-
-interface StyledInputProps {
-  inputTheme?: keyof DefaultTheme;
-}
+import styled from "styled-components";
+import { BaseInput } from "../../../@common/Input/InputStyles.styles";
 
 export const Root = styled.div`
   display: flex;
@@ -10,18 +7,9 @@ export const Root = styled.div`
   width: 318px;
 `;
 
-export const Input = styled.input<StyledInputProps>`
-  width: 100%;
-  height: 100%;
-  font-size: 12px;
+export const Input = styled.input`
+  ${BaseInput}
   padding: 0 20px;
-  border: none;
-  border-radius: 7px;
-  outline: none;
-  background-color: ${(props) =>
-    props.inputTheme
-      ? props.theme[props.inputTheme].backgroundColor
-      : props.theme.pale.backgroundColor};};
 `;
 
 export const Label = styled.label`

@@ -1,25 +1,10 @@
-import styled, { DefaultTheme } from 'styled-components';
+import styled from "styled-components";
+import { BaseInput } from "../../../@common/Input/InputStyles.styles";
 
-interface StyledInputProps {
-  inputTheme?: keyof DefaultTheme;
-}
-
-export const Input = styled.input<StyledInputProps>`
+export const Input = styled.input`
+  ${BaseInput}
   width: 20%;
-  height: 100%;
-  font-size: 14px;
   text-align: center;
-  padding: 0;
-  border: none;
-  outline: none;
-  background-color: ${(props) =>
-    props.inputTheme
-      ? props.theme[props.inputTheme].backgroundColor
-      : props.theme.pale.backgroundColor};
-
-  &:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0 1000px #ecebf1 inset !important;
-  }
 `;
 
 export const FieldSet = styled.fieldset`

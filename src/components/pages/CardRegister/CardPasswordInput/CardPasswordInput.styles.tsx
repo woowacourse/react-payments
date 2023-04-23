@@ -1,22 +1,12 @@
-import styled, { DefaultTheme } from 'styled-components';
+import styled from "styled-components";
+import { BaseInput } from "../../../@common/Input/InputStyles.styles";
 
-interface StyledInputProps {
-  inputTheme?: keyof DefaultTheme;
-}
-
-export const Input = styled.input<StyledInputProps>`
+export const Input = styled.input`
+  ${BaseInput}
   width: 43px;
   height: 45px;
-  font-size: 12px;
   text-align: center;
   padding: 0;
-  border: none;
-  border-radius: 7px;
-  outline: none;
-  background-color: ${(props) =>
-    props.inputTheme
-      ? props.theme[props.inputTheme].backgroundColor
-      : props.theme.pale.backgroundColor};};
 `;
 
 export const FieldSet = styled.fieldset`
