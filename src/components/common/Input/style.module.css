@@ -1,6 +1,7 @@
 .input {
   min-width: 10px;
   padding: 12px 12px;
+  font-size: 14px;
   border-radius: 7px;
   background-color: transparent;
   outline: 0;
@@ -9,23 +10,23 @@
 }
 
 .input.outline {
-  border: 1px solid #d6d6d6;
+  border: 1px solid var(--light-gray-2);
 }
 
 .input.underline {
   border-radius: 0;
   border: 0;
-  border-bottom: 1px solid #d6d6d6;
+  border-bottom: 1px solid var(--light-gray-2);
 }
 
 .input:focus {
-  border-color: #8dc9ff;
+  border-color: var(--light-blue-3);
   box-shadow: 0 0 0 3px rgba(141, 201, 255, 0.4);
 }
 
 .input.error {
-  background-color: #fff6f6;
-  border-color: #eb7171;
+  background-color: var(--light-red-1);
+  border-color: var(--light-red-3);
 }
 
 .input.error:focus {

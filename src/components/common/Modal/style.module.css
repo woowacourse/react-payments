@@ -28,7 +28,7 @@
   padding: 24px 16px;
 
   border-radius: 8px;
-  background-color: white;
+  background-color: var(--white);
 
   border: none;
   outline: 0;

@@ -1,9 +1,9 @@
 import styles from './style.module.css';
-import { ReactNode } from 'react';
+import { ComponentPropsWithoutRef, ReactNode } from 'react';
 import { SupportingTextMessage } from '../../../types';
 import SupportingText from '../SupportingText/SupportingText';
 
-interface InputContainerProps {
+interface InputContainerProps extends ComponentPropsWithoutRef<'div'> {
   children: ReactNode;
   supportingText?: SupportingTextMessage;
   characterCounter?: {
@@ -15,12 +15,13 @@ interface InputContainerProps {
 
 function InputContainer({
   children,
+  className,
   supportingText,
   characterCounter,
   isError = false,
 }: InputContainerProps) {
   return (
-    <div className={styles.inputContainer}>
+    <div className={`${className} ${styles.inputContainer}`}>
       {children}
       <div className={styles.subInformation}>
         {supportingText && <SupportingText message={supportingText} isError={isError} />}

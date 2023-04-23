@@ -21,47 +21,47 @@ button {
 .default {
   background-color: transparent;
   color: #0e0e0e;
-  border: 1px solid #d6d6d6;
+  border: 1px solid var(--light-gray-2);
 }
 
 .default:hover:enabled {
-  background-color: #e7e7e7;
+  background-color: var(--light-gray-1);
 }
 
 .primary {
-  background-color: #2295ff;
-  color: white;
+  background-color: var(--blue);
+  color: var(--white);
 }
 
 .primary:hover:enabled {
-  background-color: #007aea;
+  background-color: var(--dark-blue);
 }
 
 .secondary {
-  background-color: #e9f4ff;
-  color: #007aea;
+  background-color: var(--light-blue-1);
+  color: var(--dark-blue);
 }
 
 .secondary:hover:enabled {
-  background-color: #d7ecff;
+  background-color: var(--light-blue-2);
 }
 
 .danger {
-  background-color: #ce0000;
-  color: white;
+  background-color: var(--red);
+  color: var(--white);
 }
 
 .danger:hover:enabled {
-  background-color: #9f0000;
+  background-color: var(--dark-red);
 }
 
 .textButton {
   background-color: transparent;
-  color: #0e0e0e;
+  color: var(--black);
 }
 
 .textButton:hover:enabled {
-  background-color: #e7e7e7;
+  background-color: var(--light-gray-1);
 }
 
 .small {
