@@ -38,3 +38,9 @@
 .add-card-page-header-title {
   margin-left: 36px;
 }
+
+.add-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

@@ -31,9 +31,12 @@ const CardListPage = () => {
             />
           ))
         )}
-        <button className="add-card-button" onClick={onAddButton}>
-          +
-        </button>
+        <div className="add-card">
+          <button type="button" className="add-card-button" onClick={onAddButton}>
+            +
+          </button>
+          <span>카드 등록하기</span>
+        </div>
       </main>
     </div>
   );
