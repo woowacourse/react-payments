@@ -29,7 +29,6 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
 
       - run: npm run build
-
       - uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
