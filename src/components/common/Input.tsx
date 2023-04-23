@@ -1,5 +1,3 @@
-import { RefObject } from "react";
-
 import styled from "styled-components";
 
 export interface InputProps {
@@ -8,14 +6,14 @@ export interface InputProps {
   placeholder: string;
   textPosition: string;
   type: string;
-  error: { isValid: boolean; errorMessage: string };
-  handleInput: (e: any) => void;
+  error?: { isValid: boolean; errorMessage: string };
+  handleInput?: (e: any) => void;
 }
 
 export const Input = ({ label, width, placeholder, textPosition, type, handleInput, error }: InputProps) => {
-  const { isValid, errorMessage } = error;
+  const { isValid, errorMessage } = error ?? { isValid: true, errorMessage: "" };
   return (
-    <Colum>
+    <Column>
       <InputField
         placeholder={placeholder}
         id={label}
@@ -25,12 +23,12 @@ export const Input = ({ label, width, placeholder, textPosition, type, handleInp
         textPosition={textPosition}
         type={type}
       />
-      {<ErrorMessage>{!isValid ? errorMessage : ""}</ErrorMessage>}
-    </Colum>
+      <ErrorMessage>{isValid ? "" : errorMessage}</ErrorMessage>
+    </Column>
   );
 };
 
-const Colum = styled.div`
+const Column = styled.div`
   display: flex;
   flex-direction: column;
 `;
