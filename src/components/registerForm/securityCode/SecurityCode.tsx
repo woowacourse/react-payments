@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 
 import styled, { css } from 'styled-components';
-import CreditCardContext from '../../../contexts/InputValueContext';
+import { CreditCardContext } from '../../../contexts/CreditCardContext';
 import { ONLY_NUMBER_REGEXP } from '../../../utils/regexp';
 import FormLabel from '../../@common/FormLabel';
 import Input from '../../@common/Input';
@@ -9,20 +9,43 @@ import ErrorSpan from '../../@common/ErrorSpan';
 
 function SecurityCode() {
   const [creditCardInfo, setCreditCard] = useContext(CreditCardContext);
-  const [error, setError] = useState(false);
+  const [validStatus, setValidStatus] = useState({
+    isValid: true,
+    message: '',
+  });
 
-  const codeChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+  const _onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+    const enteredCode = event.currentTarget.value as string;
+
+    if (!ONLY_NUMBER_REGEXP.test(enteredCode)) {
+      setValidStatus({
+        isValid: false,
+        message: '숫자만 입력 가능합니다.',
+      });
+
+      return;
+    }
+
+    if (enteredCode.length > 3) return;
+
+    setValidStatus({
+      isValid: true,
+      message: '',
+    });
+
+    if (!setCreditCard) return;
+    setCreditCard('securityCode', enteredCode);
+  };
+
+  const _onBlur: React.FocusEventHandler<HTMLInputElement> = (event) => {
     const enteredValue = event.currentTarget.value as string;
-    if (!ONLY_NUMBER_REGEXP.test(enteredValue)) return;
+    if (enteredValue.length !== 3) {
+      setValidStatus({
+        isValid: false,
+        message: '보안 코드 3자리를 입력해주세요.',
+      });
 
-    try {
-      if (enteredValue.length > 0 && enteredValue.length !== 3) throw new Error();
-      setError(false);
-    } catch {
-      setError(true);
-    } finally {
-      if (!setCreditCard) return;
-      setCreditCard('securityCode', enteredValue);
+      return;
     }
   };
 
@@ -31,12 +54,13 @@ function SecurityCode() {
       <FormLabel>{'보안 코드(CVC/CVV)'}</FormLabel>
       <Input
         value={creditCardInfo.securityCode}
-        onChange={codeChange}
+        onChange={_onChange}
+        onBlur={_onBlur}
         maxLength={3}
         type="password"
         customInputStyle={SecurityInput}
       />
-      {error && <ErrorSpan>보안 코드는 3자리 입니다.</ErrorSpan>}
+      {!validStatus.isValid && <ErrorSpan>{validStatus.message}</ErrorSpan>}
     </SecurityCodeContainer>
   );
 }
