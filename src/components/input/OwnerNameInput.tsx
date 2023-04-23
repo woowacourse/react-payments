@@ -29,12 +29,13 @@ export function OwnerNameInput({
 
   return (
     <>
-      <Style.Label>
+      <Style.Label htmlFor='ownerName'>
         <Style.Title>카드 소유자 이름(선택)</Style.Title>
         <Style.NameLength>{ownerName.length}/30</Style.NameLength>
       </Style.Label>
       <InputWrapper width={318}>
         <Input
+          id='ownerName'
           ref={ownerNameInputRef}
           value={ownerName}
           width={318}
@@ -52,7 +53,7 @@ export function OwnerNameInput({
 }
 
 const Style = {
-  Label: styled.div`
+  Label: styled.label`
     display: flex;
     justify-content: space-between;
 

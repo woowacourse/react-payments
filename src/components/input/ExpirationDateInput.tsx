@@ -62,11 +62,12 @@ export function ExpirationDateInput({
 
   return (
     <>
-      <Style.Label>
+      <Style.Label htmlFor='expirationDate'>
         <Style.Title>만료일</Style.Title>
       </Style.Label>
       <InputWrapper width={137}>
         <Input
+          id='expirationDate'
           ref={monthInputRef}
           value={expirationDate.month}
           width={30}
@@ -97,7 +98,7 @@ export function ExpirationDateInput({
 }
 
 const Style = {
-  Label: styled.div`
+  Label: styled.label`
     display: flex;
     justify-content: space-between;
 

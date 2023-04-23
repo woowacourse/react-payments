@@ -43,11 +43,12 @@ export function SecurityCodeInput({
 
   return (
     <>
-      <Style.Label>
+      <Style.Label htmlFor='CVC'>
         <Style.Title>보안 코드(CVC/CVV)</Style.Title>
       </Style.Label>
       <InputWrapper width={84}>
         <Input
+          id='CVC'
           ref={securityCodeInputRef}
           value={securityCode}
           width={84}
@@ -66,7 +67,7 @@ export function SecurityCodeInput({
 }
 
 const Style = {
-  Label: styled.div`
+  Label: styled.label`
     display: flex;
     justify-content: space-between;
 

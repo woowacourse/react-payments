@@ -57,7 +57,7 @@ export const PasswordInput = ({
 
   return (
     <>
-      <Style.Label>
+      <Style.Label htmlFor='cardPassword0'>
         <Style.Title>카드 비밀번호</Style.Title>
       </Style.Label>
       <Style.Wrapper>
@@ -65,6 +65,7 @@ export const PasswordInput = ({
           return (
             <InputWrapper width={43}>
               <Input
+                id={`cardPassword${index}`}
                 ref={allRef[index]}
                 value={password[index]}
                 width={43}
@@ -94,7 +95,7 @@ const Style = {
     width: 193px;
   `,
 
-  Label: styled.div`
+  Label: styled.label`
     display: flex;
     justify-content: space-between;
 
