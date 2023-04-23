@@ -12,6 +12,7 @@
     "@types/react": "18.0.37",
     "@types/react-dom": "18.0.11",
     "eslint-plugin-functional": "5.0.8",
+    "gh-pages": "5.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "6.10.0",
@@ -27,7 +28,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -70,6 +73,7 @@
     "babel-plugin-named-exports-order": "0.0.2",
     "eslint-config-prettier": "8.8.0",
     "eslint-plugin-prettier": "4.2.1",
+    "prettier": "2.8.7",
     "prop-types": "15.8.1",
     "storybook": "7.0.6",
     "webpack": "5.79.0"
