@@ -7,39 +7,12 @@ import CardNameInput from '../../components/pages/CardRegister/CardNameInput/Car
 import CardNumberInput from '../../components/pages/CardRegister/CardNumberInput/CardNumberInput';
 import CardPasswordInput from '../../components/pages/CardRegister/CardPasswordInput/CardPasswordInput';
 import { useCardRegisterContext } from '../../context/CardRegisterContext';
+import { useMyCardRegister } from '../../hooks/card/card';
 import * as Styled from './CardRegister.styles';
 
 export default function CardRegister() {
-  const navigate = useNavigate();
   const { cardRegisterInfo } = useCardRegisterContext();
-  const [allValid, setAllValid] = useState(false);
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    navigate('/', { state: { cardRegisterInfo } });
-  };
-
-  const handleChange = (e: FormEvent<HTMLFormElement>) => {
-    const form = e.currentTarget as HTMLFormElement;
-    const inputs = Array.from(form.elements).filter((e) => e.tagName === 'INPUT') as HTMLInputElement[];
-
-    inputs.find((input, i) => {
-      if (input !== e.target) return;
-
-      if (input.name === 'name') {
-        if (input.value.length === input.maxLength) inputs[i + 1]?.focus();
-        if (input.value === '') inputs[i - 1]?.focus();
-        return;
-      }
-
-      if (input.validity.valid) inputs[i + 1]?.focus();
-      if (input.value === '') inputs[i - 1]?.focus();
-    });
-
-    const allValid = inputs.every((input, i, inputs) => input.validity.valid);
-
-    setAllValid(allValid);
-  };
+  const { isAllValid, handleSubmit, handleChange } = useMyCardRegister();
 
   return (
     <Styled.Root>
@@ -47,13 +20,13 @@ export default function CardRegister() {
         <Card type="card" {...cardRegisterInfo} />
       </Styled.CardSection>
       <Styled.InfoSection>
-        <Styled.RegisterForm onSubmit={handleSubmit} onChange={handleChange}>
+        <Styled.RegisterForm onSubmit={handleSubmit(cardRegisterInfo)} onChange={handleChange}>
           <CardNumberInput />
           <CardExpirationDateInput />
           <CardNameInput />
           <CardCVCInput />
           <CardPasswordInput />
-          {allValid && <Styled.CompleteButton>바로</Styled.CompleteButton>}
+          {isAllValid && <Styled.CompleteButton>바로</Styled.CompleteButton>}
         </Styled.RegisterForm>
       </Styled.InfoSection>
     </Styled.Root>
