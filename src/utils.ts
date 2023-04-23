@@ -1,5 +1,5 @@
 export const isNumber = (value: string) => {
-  return !Number.isNaN(value);
+  return !Number.isNaN(Number(value));
 };
 
 export const isOnlyKoreanAndEnglish = (value: string) => {

@@ -11,17 +11,22 @@ interface UseInputOptionProps {
   name?: string;
   validate?: (text: string) => boolean;
   errorMessage?: string;
+  maxLength?: number;
 }
 
 export const useInput = (
   initialValue: string,
-  { name, validate = () => true, errorMessage }: UseInputOptionProps
+  { name, validate = () => true, errorMessage, maxLength }: UseInputOptionProps
 ): UseInputProps => {
   const [value, setValue] = useState(initialValue);
   const [error, setError] = useState<string | undefined>('');
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value;
+
+    if (maxLength && maxLength < e.currentTarget.value.length) {
+      return;
+    }
 
     if (validate(value)) {
       setValue(value);

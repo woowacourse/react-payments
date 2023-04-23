@@ -13,6 +13,7 @@ import ToolTip from '../components/common/ToolTip';
 import PasswordInput from '../components/card/input/PasswordInput';
 import NextButton from '../components/common/NextButton';
 import { useFocusInput } from '../hooks/useFocusInput';
+import { isOnlyKoreanAndEnglish } from '../utils';
 
 interface AddCardPageProps {
   onSubmit: (event: FormEvent<HTMLFormElement>) => void;
@@ -72,10 +73,22 @@ const NextButtonWrapper = styled.div`
 export default function AddCardPage({ onSubmit, onClick }: AddCardPageProps) {
   const cardForm = useRef<HTMLFormElement>(null);
   const { onInputKeydown } = useFocusInput(cardForm);
-  const firstCardNumber = useInput('', { name: 'firstCardNumber' });
-  const secondCardNumber = useInput('', { name: 'secondCardNumber' });
-  const thirdCardNumber = useInput('', { name: 'thirdCardNumber' });
-  const fourthCardNumber = useInput('', { name: 'fourthCardNumber' });
+  const firstCardNumber = useInput('', {
+    name: 'firstCardNumber',
+    maxLength: 4,
+  });
+  const secondCardNumber = useInput('', {
+    name: 'secondCardNumber',
+    maxLength: 4,
+  });
+  const thirdCardNumber = useInput('', {
+    name: 'thirdCardNumber',
+    maxLength: 4,
+  });
+  const fourthCardNumber = useInput('', {
+    name: 'fourthCardNumber',
+    maxLength: 4,
+  });
 
   const monthValidate = (month: string) => {
     return Number(month) <= 12 && Number(month) >= 0;
@@ -89,18 +102,24 @@ export default function AddCardPage({ onSubmit, onClick }: AddCardPageProps) {
     name: 'year',
     validate: yearValidate,
     errorMessage: '카드의 연도를 확인해주세요',
+    maxLength: 2,
   });
   const month = useInput('', {
     name: 'month',
     validate: monthValidate,
     errorMessage: '카드의 달을 확인해주세요.',
+    maxLength: 2,
   });
 
-  const owner = useInput('', { name: 'owner' });
-  const cvc = useInput('', { name: 'cvc' });
+  const owner = useInput('', {
+    name: 'owner',
+    validate: isOnlyKoreanAndEnglish,
+    maxLength: 30,
+  });
+  const cvc = useInput('', { name: 'cvc', maxLength: 3 });
 
-  const firstPassword = useInput('', { name: 'firstPassword' });
-  const secondPassword = useInput('', { name: 'secondPassword' });
+  const firstPassword = useInput('', { name: 'firstPassword', maxLength: 1 });
+  const secondPassword = useInput('', { name: 'secondPassword', maxLength: 1 });
 
   const [isOpenToolTip, setIsOpenToolTip] = useState(false);
 

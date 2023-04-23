@@ -1,13 +1,29 @@
 import { KeyboardEvent, RefObject } from 'react';
 import { DISMISS_TAB_INDEX } from '../constant';
+import { isNumber, isOnlyKoreanAndEnglish } from '../utils';
+
+const numberType = 'numeric';
+const textType = 'text';
 
 export const useFocusInput = (formRef: RefObject<HTMLFormElement>) => {
   const onInputKeydown = (event: KeyboardEvent<HTMLFormElement>) => {
     const active = document.activeElement as HTMLInputElement;
     if (!active) return;
+    const curMaxLength = active.getAttribute('maxLength');
+    const curInputKind = active.getAttribute('inputmode');
+
     const curInputLength = active.value.length;
 
-    if (curInputLength > 0 && event.key === 'Enter') {
+    const isValueMaxLength = curInputLength + 1 >= Number(curMaxLength);
+
+    const isNumberRequirement =
+      curInputKind === numberType && isNumber(event.key);
+    const isTextRequirement =
+      curInputKind === textType && isOnlyKoreanAndEnglish(event.key);
+
+    if (!isValueMaxLength) return;
+
+    if (isNumberRequirement || isTextRequirement) {
       setNextInput(event);
     }
   };
@@ -25,7 +41,9 @@ export const useFocusInput = (formRef: RefObject<HTMLFormElement>) => {
         continue;
       }
 
-      currentInput.focus();
+      setTimeout(() => {
+        currentInput.focus();
+      });
       break;
     }
   };
