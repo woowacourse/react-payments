@@ -128,6 +128,7 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
 
   const addCard = (e: React.FormEvent) => {
     e.preventDefault();
+
     const card: Card = {
       cardNumber,
       expirationDate,
@@ -137,7 +138,6 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
     };
 
     onSubmit(card);
-
     navigate(PAGE.CARD_LIST);
   };
 

@@ -30,7 +30,7 @@ function App() {
 
 export const Layout = styled.div`
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
 
   display: flex;
 
@@ -38,6 +38,10 @@ export const Layout = styled.div`
   align-items: center;
 
   background-color: #eeeeee;
+
+  @media screen and (max-width: 400px) {
+    height: 700px;
+  }
 `;
 
 export default App;
