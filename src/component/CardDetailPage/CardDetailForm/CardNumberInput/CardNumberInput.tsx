@@ -22,7 +22,6 @@ function CardNumberInput({
   const props = {
     type: "text",
     value: cardNumberHidden,
-    minLength: 19,
     isRequired: true,
     onInput: (e: React.ChangeEvent<HTMLInputElement>) => {
       isNumber(e);

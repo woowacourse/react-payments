@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 
-function useWarningText(minLength: number, regExp?: RegExp, name?: string) {
+function useWarningText(minLength?: number, regExp?: RegExp, name?: string) {
   const [warningText, setWarningText] = useState("");
-
   const isNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputNumber = e.target.value;
     const lastNumber = inputNumber.slice(-1);
@@ -22,7 +21,7 @@ function useWarningText(minLength: number, regExp?: RegExp, name?: string) {
     let inputNumber = e.target.value;
     if (regExp) inputNumber = inputNumber.replace(regExp, "");
 
-    if (inputNumber.length < minLength) {
+    if (minLength ? inputNumber.length < minLength : 0) {
       name === "date"
         ? setWarningText(`카드 유효기간은 MM/YY 형식이어야 합니다.`)
         : setWarningText(`입력 숫자는 ${minLength}자 이어야 합니다`);
@@ -37,7 +36,25 @@ function useWarningText(minLength: number, regExp?: RegExp, name?: string) {
     }
   };
 
-  return { warningText, isNumber, isRightLength };
+  const isRightForm = (
+    cardNumberHidden: string,
+    cardDate: string,
+    cardCVC: string,
+    cardPassword: [string, string]
+  ) => {
+    let isError = false;
+    if (cardNumberHidden.replace(/[^\d•]/g, "").length !== 16) isError = true;
+    if (cardDate.replace(/[^\d]/g, "").length !== 4) isError = true;
+    if (cardCVC.length !== 3) isError = true;
+    if (cardPassword[0].length !== 1 || cardPassword[1].length !== 1)
+      isError = true;
+
+    if (isError)
+      setWarningText("작성이 완료되지 않은 필수 입력요소가 있습니다.");
+
+    return isError;
+  };
+  return { warningText, isNumber, isRightLength, isRightForm };
 }
 
 export default useWarningText;

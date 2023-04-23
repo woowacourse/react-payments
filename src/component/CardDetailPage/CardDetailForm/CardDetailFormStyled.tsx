@@ -16,6 +16,11 @@ const Style = {
     border: none;
     font: 700 14px/16px "Roboto";
   `,
+  SubmitLayout: styled.div`
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+  `,
 };
 
 export default Style;

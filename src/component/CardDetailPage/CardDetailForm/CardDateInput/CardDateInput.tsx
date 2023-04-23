@@ -20,7 +20,6 @@ function CardDateInput({ changeCardDate, cardDate }: CardDateInputProps) {
   const props = {
     type: "text",
     value: cardDate,
-    minLength: 5,
     isRequired: true,
     placeholder: "MM/YY",
     onInput: (e: React.ChangeEvent<HTMLInputElement>) => {
