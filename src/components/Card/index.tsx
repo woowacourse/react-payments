@@ -2,6 +2,10 @@ import type { CardInfo } from '../../domain/types/card';
 
 import styles from './card.module.css';
 
+type Props = CardInfo & {
+  onClick?: () => void;
+};
+
 const Card = ({
   cardNumber1,
   cardNumber2,
@@ -10,9 +14,10 @@ const Card = ({
   owner,
   expiredMonth,
   expiredYear,
-}: CardInfo) => {
+  onClick,
+}: Props) => {
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onClick={onClick}>
       <svg
         width={31}
         height={24}
