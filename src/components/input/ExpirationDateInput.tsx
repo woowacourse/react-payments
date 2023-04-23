@@ -3,6 +3,7 @@ import { useRef, useEffect } from 'react';
 import { Input } from './Input';
 import { InputWrapper } from './InputWrapper';
 import { ExpirationDate } from '../../types';
+import { isValidDate } from '../../validator';
 
 interface Props {
   monthInputRef: React.RefObject<HTMLInputElement>;
@@ -94,27 +95,6 @@ export function ExpirationDateInput({
     </>
   );
 }
-
-const isValidMonth = (input: string) => {
-  return Number(input) >= 1 && Number(input) <= 12;
-};
-
-const isValidYear = (input: string) => {
-  return /^[0-9]{2}$|^$/.test(input);
-};
-
-const isValidDate = (month: string, year: string) => {
-  if (!isValidMonth(month)) return false;
-  if (!isValidYear(year)) return false;
-
-  const currentDate = new Date();
-  const currentMonth = String(currentDate.getMonth() + 1);
-  const currentYear = String(currentDate.getFullYear()).slice(2);
-
-  if (Number(year) > Number(currentYear)) return true;
-
-  return Number(year) === Number(currentYear) ? Number(month) >= Number(currentMonth) : false;
-};
 
 const Style = {
   Label: styled.div`

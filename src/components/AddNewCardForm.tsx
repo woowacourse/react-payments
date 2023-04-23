@@ -12,7 +12,6 @@ import { cardDataService } from '../domains/cardDataService';
 export const AddNewCardForm = () => {
   const navigate = useNavigate();
   const [isInputFinish, setIsInputFinish] = useState(false);
-
   const [cardNumber, setCardNumber] = useState(['', '', '', '']);
 
   const [expirationDate, setExpirationDate] = useState({
@@ -22,11 +21,7 @@ export const AddNewCardForm = () => {
 
   const [ownerName, setOwnerName] = useState('');
   const [securityCode, setSecurityCode] = useState('');
-
-  const [password, setPassword] = useState({
-    firstPassword: '',
-    secondPassword: '',
-  });
+  const [password, setPassword] = useState(['', '']);
 
   const monthInputRef = useRef<HTMLInputElement>(null);
   const ownerNameInputRef = useRef<HTMLInputElement>(null);

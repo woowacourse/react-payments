@@ -1,6 +1,5 @@
-import React, { useRef, useState } from 'react';
-
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta } from '@storybook/react';
+import { useRef, useState } from 'react';
 
 import { PasswordInput } from '../../components/input/PasswordInput';
 
@@ -14,10 +13,7 @@ export default meta;
 
 export const Password = () => {
   const passwordInputRef = useRef(null);
-  const [password, setPassword] = useState({
-    firstPassword: '',
-    secondPassword: '',
-  });
+  const [password, setPassword] = useState(['', '']);
 
   return (
     <PasswordInput

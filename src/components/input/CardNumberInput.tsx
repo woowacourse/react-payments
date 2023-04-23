@@ -21,11 +21,7 @@ export function CardNumberInput({ moveFocusToExpirationDate, cardNumber, setCard
   const [maxLengthReached, setMaxLengthReached] = useState([false, false, false]);
 
   const handleBackspacePress = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (
-      e.key === 'Backspace' &&
-      cardNumber[index as keyof typeof cardNumber] === '' &&
-      index !== 0
-    ) {
+    if (e.key === 'Backspace' && cardNumber[index] === '' && index !== 0) {
       e.preventDefault();
       setMaxLengthReached((prev) => [...prev.slice(1), false]);
       allRef[index - 1].current?.focus();
@@ -50,16 +46,16 @@ export function CardNumberInput({ moveFocusToExpirationDate, cardNumber, setCard
   };
 
   const handleLastInputBlur = (index: number, e: React.FocusEvent<HTMLInputElement>) => {
-    if (index === 3) {
-      const input = [...cardNumber.slice(0, -1), e.target.value].join('');
-      const isValidCardNumber = isNumeric(input) && hasValidLength(input, 16);
+    if (index < cardNumber.length - 1) return;
 
-      if (!isValidCardNumber) {
-        setCardNumber(['', '', '', '']);
-        alert('유효하지 않은 카드 번호입니다.');
+    const inputs = [...cardNumber.slice(0, -1), e.target.value].join('');
+    const isValidCardNumber = isNumeric(inputs) && hasValidLength(inputs, 16);
 
-        firstInputRef.current?.focus();
-      }
+    if (!isValidCardNumber) {
+      setCardNumber(['', '', '', '']);
+      alert('유효하지 않은 카드 번호입니다.');
+
+      firstInputRef.current?.focus();
     }
   };
 

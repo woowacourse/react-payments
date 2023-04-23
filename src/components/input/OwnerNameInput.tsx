@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Input } from './Input';
 import { InputWrapper } from './InputWrapper';
 import { OwnerName } from '../../types';
+import { isEnglish } from '../../validator';
 
 interface Props {
   ownerName: OwnerName;
@@ -17,7 +18,7 @@ export function OwnerNameInput({
   moveFocusToSecurityCode,
 }: Props) {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!isValidName(e.target.value)) {
+    if (!isEnglish(e.target.value, 30)) {
       alert('유효한 이름이 아닙니다.');
 
       e.target.value = '';
@@ -49,10 +50,6 @@ export function OwnerNameInput({
     </>
   );
 }
-
-const isValidName = (input: string) => {
-  return input.length <= 30 && /^[a-zA-Z]+$/.test(input);
-};
 
 const Style = {
   Label: styled.div`

@@ -3,6 +3,7 @@ import { useRef } from 'react';
 import { Input } from './Input';
 import { InputWrapper } from './InputWrapper';
 import { PassWord } from '../../types';
+import { hasValidLength, isNumeric } from '../../validator';
 
 interface Props {
   password: PassWord;
@@ -17,50 +18,41 @@ export const PasswordInput = ({
   setPassword,
   activateNextButton,
 }: Props) => {
-  const secondInputRef = useRef<HTMLInputElement>(null);
+  const allRef = [passwordInputRef, useRef<HTMLInputElement>(null)];
 
-  const handleBackspacePress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Backspace' && password.secondPassword === '') {
+  const handleBackspacePress = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Backspace' && password[index] === '' && index !== 0) {
       e.preventDefault();
-      passwordInputRef.current?.focus();
+      allRef[index - 1].current?.focus();
     }
   };
 
-  const handleFirstPasswordInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    validatePassword(e);
-
-    setPassword({
-      ...password,
-      firstPassword: e.target.value,
+  const handlePasswordInputChange = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword((prev) => {
+      const currentPassword = [...prev];
+      currentPassword[index] = e.target.value;
+      return currentPassword;
     });
 
-    if (e.target.value.length === 1) secondInputRef.current?.focus();
+    if (index < password.length - 1) {
+      allRef[index + 1].current?.focus();
+      return;
+    }
+
+    const inputs = [...password.slice(0, -1), e.target.value].join('');
+    validatePassword(inputs);
   };
 
-  const handleSecondPasswordInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    validatePassword(e);
-
-    setPassword({
-      ...password,
-      secondPassword: e.target.value,
-    });
-
-    if (e.target.value) activateNextButton();
-  };
-
-  const validatePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!/^[0-9]*$/.test(e.target.value)) {
-      e.preventDefault();
-
+  const validatePassword = (inputs: string) => {
+    if (!isNumeric(inputs) || !hasValidLength(inputs, 2)) {
       alert('유효한 비밀번호가 아닙니다.');
-      e.target.value = '';
-      setPassword({
-        firstPassword: '',
-        secondPassword: '',
-      });
+      setPassword(['', '']);
 
-      passwordInputRef.current?.focus();
+      allRef[0].current?.focus();
+      return;
     }
+
+    activateNextButton();
   };
 
   return (
@@ -69,33 +61,24 @@ export const PasswordInput = ({
         <Style.Title>카드 비밀번호</Style.Title>
       </Style.Label>
       <Style.Wrapper>
-        <InputWrapper width={43}>
-          <Input
-            ref={passwordInputRef}
-            value={password.firstPassword}
-            width={43}
-            maxLength={1}
-            type='password'
-            inputMode='numeric'
-            required
-            onChange={handleFirstPasswordInputChange}
-            placeholder='•'
-          />
-        </InputWrapper>
-        <InputWrapper width={43}>
-          <Input
-            ref={secondInputRef}
-            value={password.secondPassword}
-            width={43}
-            maxLength={1}
-            type='password'
-            inputMode='numeric'
-            required
-            onChange={handleSecondPasswordInputChange}
-            onKeyDown={handleBackspacePress}
-            placeholder='•'
-          />
-        </InputWrapper>
+        {Array.from({ length: 2 }).map((_, index) => {
+          return (
+            <InputWrapper width={43}>
+              <Input
+                ref={allRef[index]}
+                value={password[index]}
+                width={43}
+                maxLength={1}
+                type='password'
+                inputMode='numeric'
+                required
+                onChange={(e) => handlePasswordInputChange(index, e)}
+                onKeyDown={(e) => handleBackspacePress(index, e)}
+                placeholder='•'
+              />
+            </InputWrapper>
+          );
+        })}
         <Style.Dot>•</Style.Dot>
         <Style.Dot>•</Style.Dot>
       </Style.Wrapper>

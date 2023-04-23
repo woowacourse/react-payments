@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { Input } from './Input';
 import { InputWrapper } from './InputWrapper';
 import { SecurityCode } from '../../types';
+import { hasValidLength, isNumeric } from '../../validator';
 
 interface Props {
   securityCode: SecurityCode;
@@ -19,17 +20,17 @@ export function SecurityCodeInput({
 }: Props) {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!isNumeric(e.target.value)) {
-      e.target.value = '';
+      alert('숫자를 입력해주세요.');
 
-      alert('유효한 보안 코드가 아닙니다.');
+      e.target.value = '';
     }
 
     setSecurityCode(e.target.value.toUpperCase());
   };
 
   const validateSecurityCode = () => {
-    if (!isValidSecurityCode(securityCode) && securityCode !== '') {
-      alert('유효한 보안 코드가 아닙니다.');
+    if (!hasValidLength(securityCode, 3) && securityCode !== '') {
+      alert('유효한 보안 코드가 아닙니다. 3자리 숫자를 입력해주세요.');
 
       setSecurityCode('');
       securityCodeInputRef.current?.focus();
@@ -63,14 +64,6 @@ export function SecurityCodeInput({
     </>
   );
 }
-
-const isNumeric = (input: string) => {
-  return /^[0-9]*$/.test(input);
-};
-
-const isValidSecurityCode = (input: string) => {
-  return input.length === 3;
-};
 
 const Style = {
   Label: styled.div`

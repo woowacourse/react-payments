@@ -3,7 +3,7 @@ export const isNumeric = (input: string) => {
 };
 
 export const isEnglish = (input: string, maxLength: number = 30) => {
-  return input.length <= maxLength && /^[a-zA-Z\s]+$/.test(input);
+  return input.length <= maxLength && /^[a-zA-Z\s]*$/.test(input);
 };
 
 export const hasValidLength = (input: string, length: number = 3) => {
