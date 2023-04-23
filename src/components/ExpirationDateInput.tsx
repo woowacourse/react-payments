@@ -31,8 +31,6 @@ export const ExpirationDateInput = (props: ExpirationDateInputProps) => {
   };
 
   const handleYearChange = (value: string) => {
-    if (!/^\d{0,2}$/.test(value)) return;
-
     onChange([month, value]);
   };
 
