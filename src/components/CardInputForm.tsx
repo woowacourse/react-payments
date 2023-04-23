@@ -97,10 +97,10 @@ const CardInputForm = (props: CardInputFormProps) => {
           isAutoFocus={true}
           isRequired={true}
           maxLength={INPUT_MAX_LENGTH.CARD_NUMBER}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          onChange={e => {
             handleCardNumberChanged(e);
           }}
-          onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+          onKeyDown={e => {
             handleCardNumberKey(e);
           }}
         />
@@ -117,8 +117,8 @@ const CardInputForm = (props: CardInputFormProps) => {
           isAutoFocus={false}
           isRequired={true}
           maxLength={INPUT_MAX_LENGTH.EXPIRED_DATE}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleExpiredDateChanged(e)}
-          onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+          onChange={e => handleExpiredDateChanged(e)}
+          onKeyDown={e => {
             handleExpiredDateKey(e);
           }}
         />
@@ -137,7 +137,7 @@ const CardInputForm = (props: CardInputFormProps) => {
           isAutoFocus={false}
           isRequired={false}
           maxLength={INPUT_MAX_LENGTH.OWNER_NAME}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          onChange={e => {
             card.ownerName = e.target.value.toLocaleUpperCase();
             props.setCard(card);
           }}
@@ -155,7 +155,7 @@ const CardInputForm = (props: CardInputFormProps) => {
             isAutoFocus={false}
             isRequired={true}
             maxLength={INPUT_MAX_LENGTH.CVC}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            onChange={e => {
               card.cvc = e.target.value;
               props.setCard(card);
             }}
@@ -175,7 +175,7 @@ const CardInputForm = (props: CardInputFormProps) => {
             isAutoFocus={false}
             isRequired={true}
             maxLength={INPUT_MAX_LENGTH.PASSWORD}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            onChange={e => {
               handlePasswordChanged(e, PASSWORD_DIGIT_INDEX.FIRST);
             }}
           />
@@ -187,7 +187,7 @@ const CardInputForm = (props: CardInputFormProps) => {
             isAutoFocus={false}
             isRequired={true}
             maxLength={INPUT_MAX_LENGTH.PASSWORD}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            onChange={e => {
               handlePasswordChanged(e, PASSWORD_DIGIT_INDEX.SECOND);
             }}
           />

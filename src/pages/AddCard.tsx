@@ -35,7 +35,7 @@ const AddCard = () => {
       <CardInputForm
         card={card}
         setCard={setCard}
-        onSubmit={(e: FormEvent) => registerCard(e)}
+        onSubmit={(e) => registerCard(e)}
       />
     </Page>
   );
