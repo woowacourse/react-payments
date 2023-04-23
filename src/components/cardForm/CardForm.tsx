@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import cardHandler from "../../domain/creditCards";
 import { CardType } from "../../types/card";
 import { CVCInput } from "./CVCInput";
 import { CardNumberInput } from "./CardNumberInput";
@@ -11,18 +12,13 @@ import { useNavigate } from "react-router-dom";
 interface CardFormProps {
   cardInfo: CardType;
   setCardInfo: React.Dispatch<React.SetStateAction<CardType>>;
-  addNewCards: React.Dispatch<React.SetStateAction<CardType[]>>;
 }
 
-export const CardForm = ({
-  cardInfo,
-  setCardInfo,
-  addNewCards,
-}: CardFormProps) => {
-  const history = useNavigate();
+export const CardForm = ({ cardInfo, setCardInfo }: CardFormProps) => {
+  const navigate = useNavigate();
 
   const moveToHome = () => {
-    history("/");
+    navigate("/");
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -45,11 +41,7 @@ export const CardForm = ({
       color: "#de75d0",
     };
 
-    addNewCards((prev: CardType[]) => {
-      const newData = [...prev, newCard];
-      localStorage.setItem("cards", JSON.stringify(newData));
-      return newData;
-    });
+    cardHandler.addNewCard(newCard);
 
     moveToHome();
   };
@@ -58,19 +50,21 @@ export const CardForm = ({
     <Form onSubmit={handleSubmit}>
       <CardNumberInput
         setCardNumbers={(index: number, numbers: string) => {
-          cardInfo.numbers[index] = numbers;
-          setCardInfo({ ...cardInfo, numbers: cardInfo.numbers });
+          setCardInfo((prev) => {
+            prev.numbers[index] = numbers;
+            return { ...prev, numbers: cardInfo.numbers };
+          });
         }}
       />
       <ExpiryDateInput
         setExpiryDate={(date: string) => {
-          setCardInfo({ ...cardInfo, expiryDate: date });
+          setCardInfo((prev) => ({ ...prev, expiryDate: date }));
         }}
       />
       <OwnerInput
         owner={cardInfo.owner}
         setOwner={(owner: string) => {
-          setCardInfo({ ...cardInfo, owner: owner });
+          setCardInfo((prev) => ({ ...prev, owner }));
         }}
       />
       <CVCInput />

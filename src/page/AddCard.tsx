@@ -6,11 +6,7 @@ import styled from "styled-components";
 import { CardForm } from "../components/cardForm/CardForm";
 import { Link } from "react-router-dom";
 
-interface AddCardProps {
-  setCards: React.Dispatch<React.SetStateAction<CardType[]>>;
-}
-
-export const AddCard = ({ setCards }: AddCardProps) => {
+export const AddCard = () => {
   const [newCard, setNewCard] = useState<CardType>({
     numbers: [],
     owner: "",
@@ -30,11 +26,7 @@ export const AddCard = ({ setCards }: AddCardProps) => {
       </HeaderWrapper>
       <Main>
         <CardItem card={newCard} />
-        <CardForm
-          cardInfo={newCard}
-          setCardInfo={setNewCard}
-          addNewCards={setCards}
-        />
+        <CardForm cardInfo={newCard} setCardInfo={setNewCard} />
       </Main>
     </>
   );
@@ -51,7 +43,7 @@ const HeaderWrapper = styled.div`
   flex-direction: row;
 `;
 
-const Main = styled.div`
+const Main = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
