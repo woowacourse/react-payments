@@ -1,3 +1,5 @@
+export { ReactComponent as CardChip } from './card-chip.svg';
+
 export { ReactComponent as BCCardLogo } from './bc.svg';
 export { ReactComponent as ShinhanCardLogo } from './shinhan.svg';
 export { ReactComponent as KakaobankCardLogo } from './kakaobank.svg';
