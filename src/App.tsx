@@ -1,45 +1,32 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import MyCardPage from './pages/MyCardPage/index';
-import CardRegisterPage from './pages/CardRegisterPage/index';
 import { useState } from 'react';
-import { Header } from './components';
-
-export interface CardNumbers {
-  0: string;
-  1: string;
-  2: string;
-  3: string;
-}
-
-export interface CardExpirationDate {
-  month: string;
-  year: string;
-}
-
-export interface CardPassword {
-  0: string;
-  1: string;
-}
-
-export interface CardInfo {
-  id: string;
-  numbers: CardNumbers;
-  expirationDate: CardExpirationDate;
-  securityCode: string;
-  password: CardPassword;
-  ownerName?: string;
-}
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { v4 as uuid } from 'uuid';
+import MyCardPage from './pages/MyCardPage';
+import CardRegisterPage from './pages/CardRegisterPage';
+import { CardInfo } from './types/card';
 
 const App = () => {
   const [cardList, setCardList] = useState<CardInfo[]>([]);
 
+  const onChangeCardList = (values: any) => {
+    setCardList((prev) => [
+      {
+        id: uuid,
+        ...values,
+      },
+      ...prev,
+    ]);
+  };
+
   return (
     <div className="App">
       <BrowserRouter basename={process.env.PUBLIC_URL}>
-        <Header />
         <Routes>
           <Route path="/" element={<MyCardPage cardList={cardList} />} />
-          <Route path="/register" element={<CardRegisterPage setCardList={setCardList} />} />
+          <Route
+            path="/register"
+            element={<CardRegisterPage onChangeCardList={onChangeCardList} />}
+          />
         </Routes>
       </BrowserRouter>
     </div>
