@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 
 import styled, { css } from 'styled-components';
-import CreditCardContext from '../../../contexts/InputValueContext';
+import { CreditCardContext } from '../../../contexts/CreditCardContext';
 import { CONTINUOUS_EMPTY_REGEXP, ONLY_ENG_AND_EMPTY_REGEXP } from '../../../utils/regexp';
 import FormLabel from '../../@common/FormLabel';
 import Input from '../../@common/Input';
@@ -10,43 +10,56 @@ import ErrorSpan from '../../@common/ErrorSpan';
 function OwnerNameInput() {
   const [creditCardInfo, setCreditCardInfo] = useContext(CreditCardContext);
 
-  const [error, setError] = useState({
-    isError: false,
+  const [validationStatus, setValidationStatus] = useState({
+    isValid: true,
     message: '',
   });
 
-  const ownerNameChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    const value = event.currentTarget.value as string;
+  const _onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+    const enteredName = (event.currentTarget.value as string).toUpperCase();
 
-    if (!ONLY_ENG_AND_EMPTY_REGEXP.test(value)) return;
-    try {
-      if (value.length > 0) {
-        if (CONTINUOUS_EMPTY_REGEXP.test(value)) {
-          throw new Error('카드 소유자 이름은 공백을 연속해서 작성할 수 없습니다.');
-        }
-
-        if (value.length < 3 || value.length > 30) {
-          throw new Error('카드 소유자 이름은 3글자 이상 30글자 이하입니다.');
-        }
-      }
-
-      setError({
-        isError: false,
-        message: '',
+    if (!ONLY_ENG_AND_EMPTY_REGEXP.test(enteredName)) {
+      setValidationStatus({
+        isValid: false,
+        message: '영어만 입력 가능합니다.',
       });
-    } catch (error) {
-      if (!(error instanceof Error)) return;
 
-      setError({
-        isError: true,
-        message: error.message,
-      });
-    } finally {
-      if (value.length <= 30) {
-        if (!setCreditCardInfo) return;
-        setCreditCardInfo('ownerName', value.toUpperCase());
-      }
+      return;
     }
+
+    if (CONTINUOUS_EMPTY_REGEXP.test(enteredName)) {
+      setValidationStatus({
+        isValid: false,
+        message: '공백을 연속해서 입력할 수 없습니다.',
+      });
+
+      return;
+    }
+
+    if (enteredName.length > 30) {
+      setValidationStatus({
+        isValid: false,
+        message: '30자 이하로 입력해주세요.',
+      });
+
+      setTimeout(() => {
+        setValidationStatus({
+          isValid: true,
+          message: '',
+        });
+      }, 2000);
+
+      return;
+    }
+
+    if (!setCreditCardInfo) return;
+
+    setValidationStatus({
+      isValid: true,
+      message: '',
+    });
+
+    setCreditCardInfo('ownerName', enteredName);
   };
 
   return (
@@ -57,10 +70,10 @@ function OwnerNameInput() {
       </LabelContainer>
       <Input
         value={creditCardInfo.ownerName}
-        onChange={ownerNameChange}
+        onChange={_onChange}
         customInputStyle={OwnerNameStyle}
       />
-      {error.isError && <ErrorSpan>{error.message}</ErrorSpan>}
+      {!validationStatus.isValid && <ErrorSpan>{validationStatus.message}</ErrorSpan>}
     </OwnerNameInputContainer>
   );
 }
