@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Card = styled.div`
   position: relative;
@@ -44,14 +44,14 @@ export const CardNumberContainer = styled.div`
   letter-spacing: 2.6px;
 `;
 
-interface CardNumberProps  {
+interface CardNumberProps {
   index: number;
 }
 
 export const CardNumber = styled.span<CardNumberProps>`
   font-size: 13px;
   position: absolute;
-  left: ${({ index }) => (index ? index * 4.3 + 'em' : 0)};
+  left: ${({ index }) => (index ? index * 4.3 + "em" : 0)};
 `;
 
 export const CardHolderName = styled.span`
@@ -85,7 +85,7 @@ export const ExpirationDateDivider = styled.span`
   color: #ffffff;
 
   &::after {
-    content: '/';
+    content: "/";
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -99,36 +99,5 @@ interface ExpirationDateTextProps
 
 export const ExpirationDateText = styled.span<ExpirationDateTextProps>`
   position: absolute;
-  left: ${({ index }) => (index ? index * 2.3 + 'em' : 0)};
-`;
-
-export const CardRegisterButton = styled(Card)`
-  position: relative;
-  background: #e5e5e5;
-  cursor: pointer;
-
-  ::before,
-  ::after {
-    content: '';
-    position: absolute;
-    width: 1rem;
-    height: 3px;
-    background-color: #333333;
-  }
-
-  ::before {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  ::after {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotate(90deg);
-  }
-
-  &:hover {
-    opacity: 0.8;
-  }
+  left: ${({ index }) => (index ? index * 2.3 + "em" : 0)};
 `;
