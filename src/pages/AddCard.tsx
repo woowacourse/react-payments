@@ -1,3 +1,6 @@
+import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 import CardNumbers from '../components/CardNumbers/CardNumbers';
 import ExpiredDate from '../components/ExpiredDate/ExpiredDate';
 import CardOwnerName from '../components/CardOwnerName/CardOwnerName';
@@ -6,10 +9,8 @@ import CardPassword from '../components/CardPassword/CardPassword';
 import Card from '../components/Card/Card';
 import Header from '../components/Header/Header';
 import { CardType } from '../types/Card';
-import { useNavigate } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
 import useAddCard from '../hooks/useAddCard';
-import styled from 'styled-components';
+import useCardNumbers from '../hooks/useCardNumbers';
 
 const Wrapper = styled.div`
   display: flex;
@@ -33,9 +34,9 @@ interface SetCardsProps {
 }
 
 const AddCard = ({ cards, setCards }: SetCardsProps) => {
+  const { cardNumbers, checkCardNumbers } = useCardNumbers();
+
   const {
-    cardNumbers,
-    setCardNumbers,
     expiredDate,
     setExpiredDate,
     cardOwnerName,
@@ -70,7 +71,7 @@ const AddCard = ({ cards, setCards }: SetCardsProps) => {
         </Wrapper>
         <CardNumbers
           cardNumbers={cardNumbers}
-          setCardNumbers={setCardNumbers}
+          checkCardNumbers={checkCardNumbers}
         />
         <ExpiredDate
           expiredDate={expiredDate}

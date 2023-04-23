@@ -5,7 +5,6 @@ const meta = {
   component: CardNumbers,
   title: 'Section/CardNumbers',
 } satisfies Meta<typeof CardNumbers>;
-
 export default meta;
 
 type Story = StoryObj<typeof meta>;
@@ -18,5 +17,6 @@ export const CardNumbersStory: Story = {
       2: '3333',
       3: '4444',
     },
+    checkCardNumbers: (order: number, value: string) => true,
   },
 };
