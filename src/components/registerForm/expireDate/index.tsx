@@ -36,6 +36,7 @@ function ExpireDate() {
     } finally {
       if (dateValitation && value.length === NUMBERS.MAX_EXPIREDATE) {
         setCardInput((prev) => ({ ...prev, expireDate: "" }));
+        setExpireError(true);
         return;
       }
       const expire = date.match(EACH_SECOND_CHANCE) ?? [];
