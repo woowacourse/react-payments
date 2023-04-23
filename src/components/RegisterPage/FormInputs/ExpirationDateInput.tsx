@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { changeToValidValue } from 'utils/inputValidator';
 import { HIDDEN_ELEMENT_STYLE, LENGTH, REGEX } from 'constants/constants';
 import { Card } from 'types/Card';
+import { useInputHandler } from 'hooks/useInputHandler';
 
 type Date = Pick<Card, 'month' | 'year'>;
 
@@ -12,25 +13,22 @@ interface Props {
   setDate: Dispatch<SetStateAction<Date>>;
 }
 
-const ExpirationDateInput = ({ date, setDate }: Props) => {
-  const { handleRef, moveFocus } = useFocus();
+const ExpirationDateInput = (props: Props) => {
+  const { date, setDate } = props;
 
-  const handleDate = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    const value = Number(target.value);
-    if ((target.name === 'month' && value > 12) || value < 0) return '';
-
-    setDate((prevState) => {
-      return {
-        ...prevState,
-        [target.name]: changeToValidValue(target.value, {
-          length: LENGTH.EXPIRATION,
-          regex: REGEX.ONLY_NUMBER,
-        }),
-      };
-    });
-
-    moveFocus(target, LENGTH.EXPIRATION);
+  const DateValidatior = (name: string, value: string) => {
+    const ValidDate = Number(value);
+    return name === 'month' && (ValidDate > 12 || ValidDate < 0) ? '' : value;
   };
+
+  const { handleInput: handleDate, handleRef: handleRef } = useInputHandler(
+    setDate,
+    {
+      length: LENGTH.EXPIRATION,
+      regex: REGEX.ONLY_NUMBER,
+      validator: DateValidatior,
+    }
+  );
 
   return (
     <>

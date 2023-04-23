@@ -4,7 +4,7 @@ import { getFormData } from 'utils/formDataGetter';
 import { setLocalStorage } from 'utils/localStorage';
 import { areValidInfo } from 'validation';
 
-export const useHandleForm = () => {
+export const useFormHandler = () => {
   const navigate = useNavigate();
 
   const handleForm = (event: FormEvent) => {

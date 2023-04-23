@@ -2,18 +2,18 @@ import { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 import { changeToValidValue } from 'utils/inputValidator';
 import { HIDDEN_ELEMENT_STYLE, LENGTH, REGEX } from 'constants/constants';
+import { useInputHandler } from 'hooks/useInputHandler';
 
 const SecurityCodeInput = () => {
-  const [code, setCode] = useState('');
+  const [code, setCode] = useState({
+    code: '',
+  });
 
-  const handleCardNumber = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    setCode(
-      changeToValidValue(target.value, {
-        length: LENGTH.SECURITY_CODE,
-        regex: REGEX.ONLY_NUMBER,
-      })
-    );
-  };
+  const { handleInput: handleCardNumber, handleRef: handleRef } =
+    useInputHandler(setCode, {
+      length: LENGTH.SECURITY_CODE,
+      regex: REGEX.ONLY_NUMBER,
+    });
 
   return (
     <>
@@ -27,14 +27,15 @@ const SecurityCodeInput = () => {
           id="code"
           maxLength={LENGTH.SECURITY_CODE}
           inputMode="numeric"
-          value={code}
+          value={code.code}
+          ref={(el) => handleRef(el, 0)}
           onChange={handleCardNumber}
           placeholder="000"
           required
         />
         <S.QuestionMark>?</S.QuestionMark>
       </S.Wrapper>
-      <S.Caption codeLength={code.length}>
+      <S.Caption codeLength={code.code.length}>
         보안 코드 3자리를 모두 입력해 주세요.
       </S.Caption>
     </>

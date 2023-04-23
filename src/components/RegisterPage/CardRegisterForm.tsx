@@ -8,7 +8,7 @@ import SecurityCodeInput from './FormInputs/SecurityCodeInput';
 import CardPreview from './CardPreview';
 import Header from '../Header';
 import { Card } from 'types/Card';
-import { useHandleForm } from 'hooks/useHandleForm';
+import { useFormHandler } from 'hooks/useFormHandler';
 
 const CardRegisterForm = () => {
   const [cardNumber, setCardNumber] = useState({
@@ -27,7 +27,7 @@ const CardRegisterForm = () => {
 
   const cardInfo: Card = { ...cardNumber, ...date, name };
 
-  const { handleForm } = useHandleForm();
+  const { handleForm } = useFormHandler();
 
   return (
     <div>

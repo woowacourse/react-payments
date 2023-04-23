@@ -1,9 +1,8 @@
-import { useFocus } from 'hooks/useFocus';
 import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
-import { changeToValidValue } from 'utils/inputValidator';
 import { HIDDEN_ELEMENT_STYLE, LENGTH, REGEX } from 'constants/constants';
 import { Card } from 'types/Card';
+import { useInputHandler } from 'hooks/useInputHandler';
 
 type CardNumber = Pick<Card, 'number1' | 'number2' | 'number3' | 'number4'>;
 
@@ -12,22 +11,14 @@ interface Props {
   setCardNumber: Dispatch<SetStateAction<CardNumber>>;
 }
 
-const CardNumberInput = ({ cardNumber, setCardNumber }: Props) => {
-  const { handleRef, moveFocus } = useFocus();
+const CardNumberInput = (props: Props) => {
+  const { cardNumber, setCardNumber } = props;
 
-  const handleCardNumber = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    setCardNumber((prevState) => {
-      return {
-        ...prevState,
-        [target.name]: changeToValidValue(target.value, {
-          length: LENGTH.EACH_CARD_NUMBER,
-          regex: REGEX.ONLY_NUMBER,
-        }),
-      };
+  const { handleInput: handleCardNumber, handleRef: handleRef } =
+    useInputHandler(setCardNumber, {
+      length: LENGTH.EACH_CARD_NUMBER,
+      regex: REGEX.ONLY_NUMBER,
     });
-
-    moveFocus(target, LENGTH.EACH_CARD_NUMBER);
-  };
 
   return (
     <>

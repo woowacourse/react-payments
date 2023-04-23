@@ -3,28 +3,21 @@ import { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 import { changeToValidValue } from 'utils/inputValidator';
 import { HIDDEN_ELEMENT_STYLE, LENGTH, REGEX } from 'constants/constants';
+import { useInputHandler } from 'hooks/useInputHandler';
 
 const PasswordInput = () => {
-  const { handleRef, moveFocus } = useFocus();
-
   const [password, setPassword] = useState({
     password1: '',
     password2: '',
   });
 
-  const handlePassword = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    setPassword((prevState) => {
-      return {
-        ...prevState,
-        [target.name]: changeToValidValue(target.value, {
-          length: LENGTH.EACH_PASSWORD,
-          regex: REGEX.ONLY_NUMBER,
-        }),
-      };
-    });
-
-    moveFocus(target, LENGTH.EACH_PASSWORD);
-  };
+  const { handleInput: handlePassword, handleRef: handleRef } = useInputHandler(
+    setPassword,
+    {
+      length: LENGTH.EACH_PASSWORD,
+      regex: REGEX.ONLY_NUMBER,
+    }
+  );
 
   return (
     <>

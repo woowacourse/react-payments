@@ -1,4 +1,5 @@
 import { LENGTH, REGEX } from 'constants/constants';
+import { useInputHandler } from 'hooks/useInputHandler';
 import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import { changeToValidValue } from 'utils/inputValidator';
@@ -10,18 +11,19 @@ interface Props {
   setName: Dispatch<SetStateAction<Name>>;
 }
 
-const NameInput = ({ name, setName }: Props) => {
-  const handleName = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    const value = target.value.toUpperCase().trimStart();
-    if (value.includes('  ')) return;
+const NameInput = (props: Props) => {
+  const { name, setName } = props;
 
-    setName(
-      changeToValidValue(value, {
-        length: LENGTH.NAME,
-        regex: REGEX.ONLY_ENGLISH,
-      })
-    );
+  const NameValidatior = (target: string, value: string) => {
+    const upperValue = value.toUpperCase().trimStart();
+    return upperValue.includes('  ') ? '' : upperValue;
   };
+
+  const { handleInput: handleName } = useInputHandler(setName, {
+    length: LENGTH.NAME,
+    regex: REGEX.ONLY_ENGLISH,
+    validator: NameValidatior,
+  });
 
   return (
     <>
