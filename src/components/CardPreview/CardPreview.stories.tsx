@@ -23,7 +23,7 @@ export const Default = () => (
         },
         ownerName: "aaa",
       }}
-      style={{ transition: "none", transform: "none" }}
+      animation={{ transition: "none", transform: "none" }}
     ></CardPreview>
   </>
 );

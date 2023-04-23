@@ -5,12 +5,12 @@ type PreviewCard = Pick<Card, "cardNumber" | "ownerName" | "expirationDate">;
 
 type CardPreviewProps = {
   card: PreviewCard;
-  style: { transition: string; transform: string };
+  animation?: { transition: string; transform: string };
 };
 
-const CardPreview = ({ card, style }: CardPreviewProps) => {
+const CardPreview = ({ card, animation }: CardPreviewProps) => {
   const { cardNumber, ownerName, expirationDate } = card;
-  const { transition, transform } = style;
+  const { transition = "", transform = "" } = animation ?? {};
 
   return (
     <CardLayout transition={transition} transform={transform}>
@@ -83,10 +83,10 @@ const CardLayout = styled.li<{ transition: string; transform: string }>`
 
   box-shadow: 5px 5px 5px #5f5f5f;
 
-  transition: ${({ transition }) => transition};
+  transition: ${({ transition }) => transition ?? "none"};
 
   &:hover {
-    transform: ${({ transform }) => transform};
+    transform: ${({ transform }) => transform ?? "none"};
   }
 `;
 

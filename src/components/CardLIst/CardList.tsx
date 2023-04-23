@@ -19,7 +19,7 @@ const CardList = ({ cards }: CardListProps) => {
           <CardPreview
             key={key}
             card={{ cardNumber, ownerName, expirationDate }}
-            style={{ transition: "all 0.3s ease", transform: "translate(3px, 3px)" }}
+            animation={{ transition: "all 0.3s ease", transform: "translate(3px, 3px)" }}
           />
         );
       })}

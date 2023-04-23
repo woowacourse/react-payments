@@ -156,21 +156,22 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
     navigate(PAGE.CARD_LIST);
   };
 
-  const isAddButtonVisible = (): boolean => {
-    return (
+  const isAddButtonVisibleConditionFulfilled = (): boolean => {
+    const condition =
       isFulfilledObject(cardNumber, 4) &&
       isFulfilledObject(expirationDate, 2) &&
       isFulfilledObject(password, 1) &&
       isFulfilledString(securityCode, 3) &&
       !error.cardNumberError &&
-      !error.expirationError
-    );
+      !error.expirationError;
+
+    return condition;
   };
 
   return (
     <Container>
       <AppBar title={"카드 추가"} children={<Link to={PAGE.CARD_LIST}>〈</Link>} />
-      <CardPreview card={{ cardNumber, expirationDate, ownerName }} style={{ transition: "none", transform: "none" }} />
+      <CardPreview card={{ cardNumber, expirationDate, ownerName }} />
       <Form onSubmit={addCard}>
         <CardNumberInput
           cardNumber={cardNumber}
@@ -187,7 +188,7 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
         <CardOwnerNameInput ownerName={ownerName} nameLength={ownerName.length} onChange={handleOwnerName} />
         <CardSecurityCodeInput securityCode={securityCode} onChange={handleSecurityCode} />
         <CardPasswordInput password={password} onChange={handlePassword} />
-        <ButtonBox isVisible={isAddButtonVisible()}>
+        <ButtonBox isVisible={isAddButtonVisibleConditionFulfilled()}>
           <Button>다음</Button>
         </ButtonBox>
       </Form>
