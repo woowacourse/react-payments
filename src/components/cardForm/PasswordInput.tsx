@@ -1,7 +1,7 @@
 import { Container } from "../common/Container";
 import { Input } from "../common/Input";
 import { InputLabel } from "../common/InputLabel";
-import { useEffect, useState } from "react";
+import { useRef } from "react";
 import styled from "styled-components";
 
 interface PasswordProps {
@@ -17,11 +17,11 @@ const passwordInfo = {
 };
 
 export const PasswordInput = ({ setIsCompleted }: PasswordProps) => {
-  const [isInputsCompleted, setIsInputsCompleted] = useState<boolean[]>(new Array(passwordInfo.length).fill(false));
+  const isInputsCompleted = useRef<boolean[]>(new Array(passwordInfo.length).fill(false));
 
   const handleInput = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.slice(0, -1) === "") {
-      isInputsCompleted[index] = false;
+      isInputsCompleted.current[index] = false;
       setIsCompleted(false);
     }
 
@@ -30,11 +30,11 @@ export const PasswordInput = ({ setIsCompleted }: PasswordProps) => {
       return;
     }
 
-    isInputsCompleted[index] = false;
-    if (e.target.value.length === 1) isInputsCompleted[index] = true;
+    isInputsCompleted.current[index] = false;
+    if (e.target.value.length === 1) isInputsCompleted.current[index] = true;
 
     setIsCompleted(false);
-    if (isInputsCompleted.every((isCompleted) => isCompleted)) setIsCompleted(true);
+    if (isInputsCompleted.current.every((isCompleted) => isCompleted)) setIsCompleted(true);
   };
 
   return (
