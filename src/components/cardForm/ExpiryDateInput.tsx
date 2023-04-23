@@ -4,8 +4,10 @@ import { InputLabel } from "../common/InputLabel";
 import { useState } from "react";
 
 interface ExpiryDateInputProps {
-  expiryDate: string;
+  isValid: boolean;
+  setIsValid: (isValid: boolean) => void;
   setExpiryDate: (value: string) => void;
+  setIsCompleted: (isCompleted: boolean) => void;
 }
 
 const ExpiryDateInfo = {
@@ -16,13 +18,7 @@ const ExpiryDateInfo = {
   type: "text",
 };
 
-export const ExpiryDateInput = ({
-  setExpiryDate,
-  expiryDate,
-}: ExpiryDateInputProps) => {
-  const [isValid, setIsValid] = useState(true);
-  const [isCompleted, setIsCompleted] = useState(true);
-
+export const ExpiryDateInput = ({ isValid, setExpiryDate, setIsCompleted, setIsValid }: ExpiryDateInputProps) => {
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value.replaceAll(" / ", "");
 
@@ -37,36 +33,12 @@ export const ExpiryDateInput = ({
 
     e.target.value = (value.match(/\d{1,2}/g) ?? []).join(" / ");
     setExpiryDate(e.target.value);
-  };
-
-  const validateExpiryDate = (expiryDate: string): void => {
-    const [month, year] = expiryDate.split(" / ").map((each) => Number(each));
-    if (month < 1 || month > 12) {
-      setIsValid(false);
-    }
-
-    if (year < new Date().getFullYear() % 2000) {
-      setIsValid(false);
-    }
-  };
-
-  const handleOutFocusEvent = (e: any) => {
-    const value = e.target.value.replaceAll(" / ", "");
 
     setIsCompleted(false);
     setIsValid(true);
     if (value.length === 4) {
       setIsCompleted(true);
-      validateExpiryDate(e.target.value);
     }
-  };
-
-  const getValidMessage = (): string => {
-    if (!isCompleted) return "유효기간 입력이 완료되지 않았습니다.";
-
-    if (!isValid) return "유효한 유효기간이 아닙니다";
-
-    return "";
   };
 
   return (
@@ -75,10 +47,9 @@ export const ExpiryDateInput = ({
       <Input
         {...ExpiryDateInfo}
         handleInput={handleInput}
-        handleChange={handleOutFocusEvent}
         error={{
-          isValid: isValid && (isCompleted || !expiryDate),
-          errorMessage: getValidMessage(),
+          isValid: isValid,
+          errorMessage: "유효한 만료일을 입력해주세요.",
         }}
       />
     </Container>

@@ -1,11 +1,13 @@
 import styled from "styled-components";
+import { useState } from "react";
+
 import { CardType } from "../../types/card";
 import { CVCInput } from "./CVCInput";
 import { CardNumberInput } from "./CardNumberInput";
 import { ExpiryDateInput } from "./ExpiryDateInput";
 import { OwnerInput } from "./OwnerInput";
 import { PasswordInput } from "./PasswordInput";
-import { FormEvent } from "react";
+import { FormEvent, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 interface CardFormProps {
@@ -14,12 +16,40 @@ interface CardFormProps {
   addNewCards: React.Dispatch<React.SetStateAction<CardType[]>>;
 }
 
-export const CardForm = ({
-  cardInfo,
-  setCardInfo,
-  addNewCards,
-}: CardFormProps) => {
+const validateExpiryDate = (expiryDate: string): boolean => {
+  const [month, year] = expiryDate.split(" / ").map((each) => Number(each));
+  if (month < 1 || month > 12) {
+    return false;
+  }
+
+  if (year < new Date().getFullYear() % 2000) {
+    return false;
+  }
+
+  return true;
+};
+
+export const CardForm = ({ cardInfo, setCardInfo, addNewCards }: CardFormProps) => {
   const history = useNavigate();
+  const expiryDateInputRef = useRef("AA");
+  const nameInputRef = useRef();
+  const CVCInputRef = useRef();
+  const PasswordRef = useRef();
+
+  const [isInputCompleted, setIsInputCompleted] = useState({
+    isCardNumberCompleted: false,
+    isExpiryDateCompleted: false,
+    isCVCCompleted: false,
+    isPasswordCompleted: false,
+  });
+
+  const isAllCompleted = (): boolean => {
+    return Object.values(isInputCompleted).every((isCompleted) => isCompleted);
+  };
+
+  const [isInputValid, setIsInputValid] = useState({
+    isExpiryDateValid: true,
+  });
 
   const moveToHome = () => {
     history("/");
@@ -27,6 +57,13 @@ export const CardForm = ({
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!isAllCompleted()) return;
+    if (!validateExpiryDate(cardInfo.expiryDate)) {
+      setIsInputValid({ ...isInputValid, isExpiryDateValid: false });
+      return;
+    }
+
     const formData = new FormData(e.target as HTMLFormElement);
     const data = Object.fromEntries(formData.entries());
 
@@ -55,11 +92,20 @@ export const CardForm = ({
         setCardNumbers={(numbers: string) => {
           setCardInfo({ ...cardInfo, numbers: numbers });
         }}
+        setIsCompleted={(isComplete: boolean) => {
+          setIsInputCompleted({ ...isInputCompleted, isCardNumberCompleted: isComplete });
+        }}
       />
       <ExpiryDateInput
-        expiryDate={cardInfo.expiryDate}
+        isValid={isInputValid.isExpiryDateValid}
+        setIsValid={(isValid: boolean) => {
+          setIsInputValid({ ...isInputValid, isExpiryDateValid: isValid });
+        }}
         setExpiryDate={(date: string) => {
           setCardInfo({ ...cardInfo, expiryDate: date });
+        }}
+        setIsCompleted={(isComplete: boolean) => {
+          setIsInputCompleted({ ...isInputCompleted, isExpiryDateCompleted: isComplete });
         }}
       />
       <OwnerInput
@@ -68,9 +114,19 @@ export const CardForm = ({
           setCardInfo({ ...cardInfo, owner: owner });
         }}
       />
-      <CVCInput />
-      <PasswordInput />
-      <SubmitButton type="submit">다음</SubmitButton>
+      <CVCInput
+        setIsCompleted={(isComplete: boolean) => {
+          setIsInputCompleted({ ...isInputCompleted, isCVCCompleted: isComplete });
+        }}
+      />
+      <PasswordInput
+        setIsCompleted={(isComplete: boolean) => {
+          setIsInputCompleted({ ...isInputCompleted, isPasswordCompleted: isComplete });
+        }}
+      />
+      <SubmitButton color={isAllCompleted() ? "#525252" : "#D3D3D3"} type="submit">
+        다음
+      </SubmitButton>
     </Form>
   );
 };
@@ -78,13 +134,15 @@ export const CardForm = ({
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 17px;
   margin-top: 20px;
 `;
 
-const SubmitButton = styled.button`
+const SubmitButton = styled.button<{ color: string }>`
   font-size: 14px;
   font-weight: 700;
   line-height: 16px;
   text-align: right;
+
+  color: ${(props) => props.color};
 `;

@@ -1,3 +1,5 @@
+import { RefObject } from "react";
+
 import styled from "styled-components";
 
 export interface InputProps {
@@ -8,19 +10,9 @@ export interface InputProps {
   type: string;
   error: { isValid: boolean; errorMessage: string };
   handleInput: (e: any) => void;
-  handleChange: (e: any) => void;
 }
 
-export const Input = ({
-  label,
-  width,
-  placeholder,
-  textPosition,
-  type,
-  handleInput,
-  handleChange,
-  error,
-}: InputProps) => {
+export const Input = ({ label, width, placeholder, textPosition, type, handleInput, error }: InputProps) => {
   const { isValid, errorMessage } = error;
   return (
     <Colum>
@@ -30,7 +22,6 @@ export const Input = ({
         name={label}
         width={width}
         onInput={handleInput}
-        onBlur={handleChange}
         textPosition={textPosition}
         type={type}
       />
@@ -67,6 +58,7 @@ const InputField = styled.input<{ textPosition: string; width: string }>`
 `;
 
 const ErrorMessage = styled.div`
+  margin-top: 1px;
   height: 15px;
   color: red;
 `;

@@ -2,7 +2,10 @@ import { Container } from "../common/Container";
 import { Input } from "../common/Input";
 import { InputLabel } from "../common/InputLabel";
 import styled from "styled-components";
-import { useState } from "react";
+
+interface CVCProps {
+  setIsCompleted: (isCompleted: boolean) => void;
+}
 
 const CVCInfo = {
   label: "cvc",
@@ -12,22 +15,16 @@ const CVCInfo = {
   type: "password",
 };
 
-export const CVCInput = () => {
-  const [isCompleted, setIsCompleted] = useState(true);
-
+export const CVCInput = ({ setIsCompleted }: CVCProps) => {
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length > 3 || !/\d$/.test(e.target.value)) {
       e.target.value = e.target.value.slice(0, -1);
       return;
     }
-  };
-
-  const handleOutFocusEvent = (e: any) => {
-    const value = e.target.value;
 
     setIsCompleted(false);
 
-    if (value.length === 3) {
+    if (e.target.value.length === 3) {
       setIsCompleted(true);
     }
   };
@@ -39,9 +36,8 @@ export const CVCInput = () => {
         <Input
           {...CVCInfo}
           handleInput={handleInput}
-          handleChange={handleOutFocusEvent}
           error={{
-            isValid: isCompleted,
+            isValid: true,
             errorMessage: "3자리 숫자를 입력하세요.",
           }}
         />

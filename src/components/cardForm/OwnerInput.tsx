@@ -32,17 +32,9 @@ export const OwnerInput = ({ setOwner, owner }: OwnerInputProps) => {
     <Container>
       <Row>
         <InputLabel text="카드 소유자 이름 (선택)" name="owner" />
-        <InputLabel
-          text={`${owner ? owner.length : "0"}/30`}
-          name="ownerLength"
-        />
+        <InputLabel text={`${owner ? owner.length : "0"}/30`} name="ownerLength" />
       </Row>
-      <Input
-        error={{ isValid: true, errorMessage: "" }}
-        {...OwnerInfo}
-        handleInput={handleInput}
-        handleChange={(e) => {}}
-      />
+      <Input error={{ isValid: true, errorMessage: "" }} {...OwnerInfo} handleInput={handleInput} />
     </Container>
   );
 };
