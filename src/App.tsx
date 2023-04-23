@@ -6,12 +6,10 @@ import RegisterCard from 'pages/RegisterCard';
 function App() {
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
-      <div className="App">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/register" element={<RegisterCard />} />
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/register" element={<RegisterCard />} />
+      </Routes>
     </BrowserRouter>
   );
 }
