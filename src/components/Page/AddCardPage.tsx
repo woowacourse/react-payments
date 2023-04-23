@@ -1,72 +1,32 @@
-import React, { FormEvent, useEffect, useRef, useState } from "react";
-import styled from "styled-components";
-import { useInput } from "../hooks/useInput";
-import Card from "./Card";
-import CardNumberInput from "./CardNumberInput";
-import CvcInput from "./CvcInput";
-import ExpiracyInput from "./ExpiracyInput";
-import InformationButton from "./InformationButton";
-import InputField from "./InputField";
-import NextButton from "./NextButton";
-import OwnerInput from "./OwnerInput";
-import PasswordInput from "./PasswordInput";
-import PrevButton from "./PrevButton";
-import ToolTip from "./ToolTip";
+import { FormEvent, useEffect, useRef, useState } from "react";
+import { useInput } from "../../hooks/useInput";
+import Card from "../Card";
+import CardNumberInput from "../Input/CardNumberInput";
+import CvcInput from "../Input/CvcInput";
+import ExpiracyInput from "../Input/ExpiracyInput";
+import InformationButton from "../Button/InformationButton";
+import InputField from "../common/InputField";
+import NextButton from "../Button/NextButton";
+import OwnerInput from "../Input/OwnerInput";
+import PasswordInput from "../Input/PasswordInput";
+import PrevButton from "../Button/PrevButton";
+import ToolTip from "../ToolTip";
+import {
+  CardWrapper,
+  CvcButtonWrapper,
+  CvcWrapper,
+  InputWrapper,
+  InputWrapperParent,
+  NextButtonWrapper,
+  Page,
+  Title,
+  TitleWrapper,
+} from "./AddCardPage.styles";
 
 interface AddCardPageProps {
   onSubmit: (event: FormEvent<HTMLFormElement>) => void;
   onClick: () => void;
 }
-
-const Page = styled.div`
-  position: relative;
-  width: 375px;
-  border: 1px solid;
-  min-height: 100vh;
-  padding: 20px 28px;
-`;
-
-const TitleWrapper = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const Title = styled.h3`
-  font-size: 16px;
-  font-weight: 400;
-  color: #383838;
-  margin-left: 12px;
-`;
-
-const CardWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-const InputWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-`;
-
-const InputWrapperParent = styled.form`
-  display: flex;
-  justify-content: center;
-  margin-top: 40px;
-`;
-const CvcWrapper = styled.div`
-  display: flex;
-  align-items: center;
-`;
-const CvcButtonWrapper = styled.div`
-  position: relative;
-  margin-left: 11px;
-`;
-const NextButtonWrapper = styled.div`
-  position: absolute;
-  right: 25px;
-  bottom: 25px;
-`;
 
 export default function AddCardPage({ onSubmit, onClick }: AddCardPageProps) {
   const firstCardNumber = useInput("", { name: "firstCardNumber" });
@@ -184,7 +144,7 @@ export default function AddCardPage({ onSubmit, onClick }: AddCardPageProps) {
           </InputField>
         </InputWrapper>
         <NextButtonWrapper>
-          <NextButton isDisable={isFormfilled} />
+          <NextButton disabled={isFormfilled} />
         </NextButtonWrapper>
       </InputWrapperParent>
     </Page>

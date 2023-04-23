@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
-import AddCardPage from "./components/AddCardPage";
-import Homepage from "./components/Homepage";
+import AddCardPage from "./components/Page/AddCardPage";
+import Homepage from "./components/Page/Homepage";
 import { LOCAL_STORAGE_CARD_KEY } from "./constant";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 import "./styles/index.css";
@@ -12,7 +12,7 @@ export default function App() {
     LOCAL_STORAGE_CARD_KEY
   );
 
-  const onCardInfoSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const onCardInfoSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const {

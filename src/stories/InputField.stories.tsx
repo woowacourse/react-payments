@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from "@storybook/react";
-import CardNumberInput from "../components/CardNumberInput";
-import CvcInput from "../components/CvcInput";
-import ExpiracyInput from "../components/ExpiracyInput";
-import InputField from "../components/InputField";
-import OwnerInput from "../components/OwnerInput";
-import PasswordInput from "../components/PasswordInput";
+import CardNumberInput from "../components/Input/CardNumberInput";
+import CvcInput from "../components/Input/CvcInput";
+import ExpiracyInput from "../components/Input/ExpiracyInput";
+import InputField from "../components/common/InputField";
+import OwnerInput from "../components/Input/OwnerInput";
+import PasswordInput from "../components/Input/PasswordInput";
 
 const meta: Meta<typeof InputField> = {
   component: InputField,
