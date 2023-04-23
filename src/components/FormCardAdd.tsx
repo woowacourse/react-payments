@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import InputCardData from './InputCardData';
 
 import { fetchNewCardData } from '../utils/fetchData';
@@ -18,6 +18,8 @@ const FormCardAdd = ({
 }: FormCardAddProps) => {
   const navigate = useNavigate();
   const [inputError, setInputError] = useState(false);
+  const [readyToPending, setReadyToPending] = useState(false);
+  const [fulfilledData, setFulFilledData] = useState(Array.from({ length: 9 }, () => false));
 
   const handleExpireError = (element: ChangeEvent<HTMLInputElement>) => {
     const data = element.target.value;
@@ -39,6 +41,20 @@ const FormCardAdd = ({
   };
 
   const inputRef = Array.from({ length: 9 }).map(() => React.createRef<HTMLInputElement>());
+
+  const handleInputData = (index: number, e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length >= e.target.minLength) {
+      const inputResults = [...fulfilledData];
+      inputResults[index] = true;
+      setFulFilledData([...inputResults]);
+      // if (!fulfilledData.includes(false)) return setReadyToPending(true);
+    } else {
+      const inputResults = [...fulfilledData];
+      inputResults[index] = false;
+      setFulFilledData([...inputResults]);
+      // return setReadyToPending(false);
+    }
+  };
 
   const moveFocus = (e: ChangeEvent) => {
     if (!(e.target instanceof HTMLInputElement)) return;
@@ -77,6 +93,10 @@ const FormCardAdd = ({
     navigate('/');
   };
 
+  useEffect(() => {
+    if (!fulfilledData.includes(false)) setReadyToPending(true);
+  }, [fulfilledData]);
+
   return (
     <form className="add-card-form" onSubmit={onSubmit}>
       <div>
@@ -93,6 +113,7 @@ const FormCardAdd = ({
             maxDataLength={4}
             handleError={() => {}}
             onFocus={moveFocus}
+            handleInputData={handleInputData}
           />
           <span>-</span>
           <InputCardData
@@ -106,6 +127,7 @@ const FormCardAdd = ({
             maxDataLength={4}
             handleError={() => {}}
             onFocus={moveFocus}
+            handleInputData={handleInputData}
           />
           <span>-</span>
           <InputCardData
@@ -121,6 +143,7 @@ const FormCardAdd = ({
             handleError={() => {}}
             passwordType="card-number"
             onFocus={moveFocus}
+            handleInputData={handleInputData}
           />
           <span>-</span>
           <InputCardData
@@ -136,6 +159,7 @@ const FormCardAdd = ({
             isPasswordType={true}
             passwordType="card-number"
             onFocus={moveFocus}
+            handleInputData={handleInputData}
           />
         </div>
       </div>
@@ -147,11 +171,12 @@ const FormCardAdd = ({
           className="card-expired"
           dataId={4}
           Ref={inputRef[4]}
-          minDataLength={5}
+          minDataLength={1}
           maxDataLength={5}
           name="expireDate"
           handleError={handleExpireError}
           onFocus={moveFocus}
+          handleInputData={handleInputData}
         />
         {inputError ? <span className="expired-error">오류!</span> : ''}
       </div>
@@ -171,6 +196,7 @@ const FormCardAdd = ({
           maxDataLength={15}
           handleError={() => {}}
           onFocus={moveFocus}
+          handleInputData={handleInputData}
         />
       </div>
       <div className="card-security-code-container">
@@ -188,6 +214,7 @@ const FormCardAdd = ({
             handleError={() => {}}
             onChange={securityCode.onChange}
             onFocus={moveFocus}
+            handleInputData={handleInputData}
           />
           <Tooltip title={CVC_TOOLTIP_TITLE} detail={CVC_TOOLTIP_DETAIL} />
         </div>
@@ -207,6 +234,7 @@ const FormCardAdd = ({
             passwordType="password-single"
             onChange={cardPassword1.onChange}
             onFocus={moveFocus}
+            handleInputData={handleInputData}
           />
           <InputCardData
             isPasswordType={true}
@@ -220,6 +248,7 @@ const FormCardAdd = ({
             handleError={() => {}}
             passwordType="password-single"
             onFocus={moveFocus}
+            handleInputData={handleInputData}
           />
 
           <span className="passwordDot">ㆍ</span>
@@ -227,7 +256,7 @@ const FormCardAdd = ({
         </div>
       </div>
       <div className="add-card-submit">
-        <button type="submit">다음</button>
+        {readyToPending && !inputError ? <button type="submit">다음</button> : ''}
       </div>
     </form>
   );

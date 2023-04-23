@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 
 const useInput = (
   initialState: string,
@@ -7,7 +7,10 @@ const useInput = (
 ) => {
   const [value, setValue] = useState(initialState);
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    nextCallback?: (dataId: number, e: ChangeEvent) => void
+  ) => {
     if (!prevConditionCallback(e)) return;
 
     setValue(formatCallback(e.target.value));
