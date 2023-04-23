@@ -49,7 +49,7 @@ jobs:
 
       - name: Build storybook
         run: |
-          npm run storybook-build
+          npm run build-storybook
           mv ./storybook-static ./build/storybook
 
       - name: Deploy to gh-pages branch
