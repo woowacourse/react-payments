@@ -1,11 +1,12 @@
 import styles from './style.module.css';
+import { MouseEvent } from 'react';
 import { CARD_ISSUERS } from '../../../../constants';
 import CardIssuerOption from './CardIssuerOption/CardIssuerOption';
 import Button from '../../../common/Button/Button';
 import CloseIcon from '../../../../assets/x-icon.svg';
 
 interface CardIssuerSelectionProps {
-  onOptionClick: CallableFunction;
+  onOptionClick: (event: MouseEvent<HTMLDivElement>) => void;
   close: () => void;
 }
 
