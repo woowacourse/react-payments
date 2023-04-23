@@ -5,7 +5,7 @@ interface ButtonProps extends ComponentPropsWithoutRef<'button'> {
   variant?: 'default' | 'primary' | 'secondary' | 'danger' | 'textButton';
   size?: 'small' | 'medium' | 'large';
   icon?: string;
-  children: string;
+  children?: string;
 }
 
 function Button({
