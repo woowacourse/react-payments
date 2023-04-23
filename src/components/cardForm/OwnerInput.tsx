@@ -11,10 +11,10 @@ interface OwnerInputProps {
 
 const OwnerInfo = {
   label: "owner",
-  width: "318px",
   placeholder: "카드에 표시된 이름과 동일하게 입력하세요.",
-  textPosition: "left",
   type: "text",
+  $width: "318px",
+  $textPosition: "left",
 };
 
 export const OwnerInput = ({ setOwner, owner }: OwnerInputProps) => {

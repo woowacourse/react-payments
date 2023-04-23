@@ -28,7 +28,7 @@ export const CardItem = ({ card }: CardProps) => {
   }, [card.expiryDate]);
 
   return (
-    <Card backgroundColor={card.color}>
+    <Card $backgroundColor={card.color}>
       <Container>
         <IcChip />
         <Numbers>

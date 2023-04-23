@@ -11,10 +11,10 @@ interface CardNumberInputProps {
 
 const cardNumberInputInfo = {
   label: "cardNumber",
-  width: "318px",
   placeholder: "",
-  textPosition: "center",
   type: "text",
+  $width: "318px",
+  $textPosition: "center",
 };
 
 const hideNumbers = (numbers: string): string => {

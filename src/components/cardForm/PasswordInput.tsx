@@ -9,10 +9,11 @@ interface PasswordProps {
 }
 
 const passwordInfo = {
-  width: "43px",
   placeholder: "",
-  textPosition: "center",
   type: "password",
+  $textPosition: "center",
+  $width: "43px",
+
   length: 2,
 };
 

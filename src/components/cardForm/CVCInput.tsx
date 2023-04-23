@@ -11,10 +11,10 @@ interface CVCProps {
 
 const CVCInfo = {
   label: "cvc",
-  width: "84px",
   placeholder: "",
-  textPosition: "center",
   type: "password",
+  $width: "84px",
+  $textPosition: "center",
 };
 
 export const CVCInput = ({ setIsCompleted }: CVCProps) => {
