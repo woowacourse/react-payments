@@ -18,7 +18,10 @@ function CardExpirationDate({ handleInputChange, validateInput, value }: CardExp
   const expirationDate = formatDisplayedExpirationDate(`${value.month}${value.year}`);
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (isError) setIsError(false);
+
     handleInputChange(event.target.name, event.target.value);
+    validateInput(event.target.name, event.target.value);
   };
 
   const onBlur = (event: FocusEvent<HTMLInputElement>) => {
