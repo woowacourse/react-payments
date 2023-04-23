@@ -1,7 +1,7 @@
 import { ReactNode, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
-import useModalAnimation from './useModalAnimation';
+import useModalAnimation from './hooks/useModalAnimation';
 
 import styles from './modal.module.css';
 

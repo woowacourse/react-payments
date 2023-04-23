@@ -7,7 +7,7 @@ import Tooltip from '../Tooltip';
 import TooltipButton from '../TooltipButton';
 
 import useCardRegisterForm from './useCardRegisterForm';
-import useModal from '../common/Modal/useModal';
+import useModal from '../common/Modal/hooks/useModal';
 import { CARD_NUMBER_INPUT_PLACEHOLDER } from '../../domain/constants';
 import type { CardInfo } from '../../domain/types/card';
 

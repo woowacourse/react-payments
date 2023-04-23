@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import CardRegisterForm from '../../components/CardRegisterForm';
 import CardCompanySelectBottomSheet from '../../components/CardCompanySelectBottomSheet';
 
-import useModal from '../../components/common/Modal/useModal';
+import useModal from '../../components/common/Modal/hooks/useModal';
 import type { CardInfo } from '../../domain/types/card';
 
 import styles from './cardRegisterPage.module.css';
