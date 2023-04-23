@@ -19,7 +19,7 @@ const router = createBrowserRouter(
         },
         {
           path: '/*',
-          element: <Navigate to={'card-list'} />,
+          element: <Navigate to={''} />,
         },
       ],
     },

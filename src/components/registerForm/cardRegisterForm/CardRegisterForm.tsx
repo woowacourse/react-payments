@@ -9,7 +9,7 @@ import ExpireDate from '../expireDate/ExpireDate';
 import OwnerNameInput from '../ownerNameInput/OwnerName';
 import SecurityCode from '../securityCode/SecurityCode';
 import CardPassword from '../cardPassword/CardPassword';
-import CreditCardContext from '../../../contexts/InputValueContext';
+import { CreditCardContext } from '../../../contexts/CreditCardContext';
 
 function CardRegisterForm() {
   const navigation = useNavigate();
@@ -36,14 +36,15 @@ function CardRegisterForm() {
     }
   }, [creditCardInfo]);
 
-  const cardInputSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
+  const _onSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
+    console.log('>>> creditCardInfo:', creditCardInfo);
     saveCard(creditCardInfo);
-    navigation('/card-list');
+    navigation('/');
   };
 
   return (
-    <Form onSubmit={cardInputSubmit}>
+    <Form onSubmit={_onSubmit}>
       <CardNumber />
       <ExpireDate />
       <OwnerNameInput />

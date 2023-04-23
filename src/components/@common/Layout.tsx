@@ -13,13 +13,14 @@ function Layout({ children }: Props) {
   let hasBackButton = false;
 
   switch (pathname) {
-    case '/card-list':
+    case '/':
       headingText = '보유카드';
       hasBackButton = false;
       break;
     case '/card-register':
       headingText = '카드 추가';
       hasBackButton = true;
+      break;
   }
 
   return (
