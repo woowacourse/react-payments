@@ -178,7 +178,7 @@ const FormCardAdd = ({
           onFocus={moveFocus}
           handleInputData={handleInputData}
         />
-        {inputError ? <span className="expired-error">오류!</span> : ''}
+        {inputError ? <span className="expired-error">만료일이 초과된 카드입니다!</span> : ''}
       </div>
       <div>
         <div className="card-owner-container-header">
