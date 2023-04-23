@@ -11,7 +11,7 @@ export type CreditCardProps = {
 };
 
 function CreditCard({ fullFilled, creditCard: { expiry, number, owner } }: CreditCardProps) {
-  const isVaild = () => {
+  const isValid = () => {
     if (!fullFilled) return true;
 
     if (number.length !== 16) return false;
@@ -23,7 +23,7 @@ function CreditCard({ fullFilled, creditCard: { expiry, number, owner } }: Credi
   };
 
   return (
-    <S.CreditCardLayout isVaild={isVaild()}>
+    <S.CreditCardLayout isValid={isValid()}>
       <S.CreditCardICChip />
       <S.Box>
         <S.CreditCardNumber>
