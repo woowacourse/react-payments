@@ -17,6 +17,8 @@ import {
   isFulfilledString,
   isValidMonth,
   isValidOwnerName,
+  isTheOtherGroupFulfilled,
+  hasInvalidKey,
 } from "../../validator/Validator";
 import { PAGE } from "../../constant";
 
@@ -52,52 +54,40 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
   const navigate = useNavigate();
 
   const handleCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    const targetGroup = e.target.name;
+    const { value, name } = e.target;
 
     if (!isNumeric(value)) return;
+    setCardNumber({ ...cardNumber, [name]: value });
 
-    setCardNumber({ ...cardNumber, [targetGroup]: value });
-
-    const keys = Object.keys(cardNumber).filter((key) => key !== targetGroup) as (keyof CardNumber)[];
-    const isAllKeysLengthFour = keys.every((key) => cardNumber[key].length === 4);
-
-    if (isAllKeysLengthFour && value.length === 4) setError({ ...error, cardNumberError: false });
+    if (isTheOtherGroupFulfilled(cardNumber, name) && isFulfilledString(value, 4))
+      setError({ ...error, cardNumberError: false });
   };
 
   const handleCardNumberError = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const targetGroup = e.target.name as keyof CardNumber;
+    const { name } = e.target;
 
-    if (cardNumber[targetGroup].length !== 4) {
+    if (isFulfilledString(name, 4)) {
       setError({ ...error, cardNumberError: true });
       return;
     }
 
-    const keys = Object.keys(cardNumber) as (keyof CardNumber)[];
-    const hasInvalidKey = keys.some((key) => cardNumber[key].length !== 0 && cardNumber[key].length !== 4);
-
-    if (hasInvalidKey) {
+    if (hasInvalidKey(cardNumber)) {
       setError({ ...error, cardNumberError: true });
       return;
     }
 
-    if (keys.every((key) => cardNumber[key].length === 4)) setError({ ...error, cardNumberError: false });
+    if (isFulfilledObject(cardNumber, 4)) setError({ ...error, cardNumberError: false });
   };
 
   const handleExpirationDate = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    const dateType = e.target.name;
+    const { value, name } = e.target;
 
     if (!isNumeric(value)) return;
 
-    setExpirationDate({ ...expirationDate, [dateType]: value });
+    setExpirationDate({ ...expirationDate, [name]: value });
 
-    if (dateType === "month") {
-      if (!isValidMonth(value)) {
-        setError({ ...error, expirationError: true });
-        return;
-      }
-      setError({ ...error, expirationError: false });
+    if (name === "month") {
+      setError({ ...error, expirationError: isValidMonth(value) ? false : true });
     }
   };
 
@@ -105,40 +95,35 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
     const { month } = expirationDate;
 
     if (month.length === 1 && month !== "0") setExpirationDate({ ...expirationDate, month: `0${month}` });
-    if (!isValidMonth(month)) {
-      setError({ ...error, expirationError: true });
-      return;
-    }
-    setError({ ...error, expirationError: false });
+    setError({ ...error, expirationError: isValidMonth(month) ? false : true });
   };
 
   const handleOwnerName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const name = e.target.value;
+    const { value } = e.target;
 
-    if (!isValidOwnerName(name)) {
+    if (!isValidOwnerName(value)) {
       return;
     }
-    setOwnerName(name);
+    setOwnerName(value);
     setTimeout(() => {
-      setOwnerName(name.toUpperCase());
+      setOwnerName(value.toUpperCase());
     }, 70);
   };
 
   const handleSecurityCode = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const code = e.target.value;
+    const { value } = e.target;
 
-    if (!isNumeric(code)) return;
+    if (!isNumeric(value)) return;
 
-    setSecurityCode(code);
+    setSecurityCode(value);
   };
 
   const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const pw = e.target.value;
-    const targetDigit = e.target.name;
+    const { value, name } = e.target;
 
-    if (!isNumeric(pw)) return;
+    if (!isNumeric(value)) return;
 
-    setPassword({ ...password, [targetDigit]: pw });
+    setPassword({ ...password, [name]: value });
   };
 
   const addCard = (e: React.FormEvent) => {

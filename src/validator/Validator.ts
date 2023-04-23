@@ -1,3 +1,5 @@
+import { Card, CardNumber } from "../types";
+
 export const isNumeric = (value: string) => {
   const allowOnlyNumber = /^[0-9]*$/;
 
@@ -24,4 +26,16 @@ export const isFulfilledObject = (obj: Record<string, string>, length: number) =
 
 export const isFulfilledString = (value: string, length: number) => {
   return value.length === length;
+};
+
+export const isTheOtherGroupFulfilled = (cardNumber: CardNumber, name: string): boolean => {
+  const keys = Object.keys(cardNumber).filter((key) => key !== name) as (keyof CardNumber)[];
+
+  return keys.every((key) => cardNumber[key].length === 4);
+};
+
+export const hasInvalidKey = (cardNumber: CardNumber) => {
+  const keys = Object.keys(cardNumber) as (keyof CardNumber)[];
+
+  return keys.some((key) => cardNumber[key].length !== 0 && cardNumber[key].length !== 4);
 };
