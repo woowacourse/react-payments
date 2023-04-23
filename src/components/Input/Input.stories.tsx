@@ -2,7 +2,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 import { Story, Meta } from '@storybook/react';
-import Input from '..';
+import Input from './Input';
 
 export default {
   title: 'Input',
