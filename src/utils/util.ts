@@ -41,24 +41,19 @@ export const formatExpireDate = (expireDate: string): string => {
   return expireDate;
 };
 
-const NUMBERS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-
 export const handleNumberInput = (data: string): string => {
-  if (!NUMBERS.includes(data[data.length - 1])) {
+  if (!/[0-9]/.test(data[data.length - 1])) {
     data = data.slice(0, -1);
   }
-
   return data;
 };
 
-const ALPHABET = ' ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-
 export const isAlphabetInput = (data: string): boolean => {
-  return ALPHABET.includes(data);
+  return /[A-Z]/g.test(data);
 };
 
 export const isNumberInput = (data: string): boolean => {
-  return NUMBERS.includes(data);
+  return /[0-9]/g.test(data);
 };
 
 export const changeNumberToMask = (data: string): string => {
