@@ -23,3 +23,13 @@
 .text-card-detail {
   font-size: 11px;
 }
+
+.text-card-company {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: -0.085em;
+  color: #525252;
+}
