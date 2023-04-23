@@ -1,15 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { HTMLAttributes } from 'react';
 import * as S from './style';
 
-export type InputProps<T> = {
-  type: 'string' | 'number' | 'date' | 'datetime' | 'password';
+export interface InputProps<T> extends HTMLAttributes<HTMLInputElement> {
+  type: string;
   value: T,
   width: string,
   textAlign: 'center' | 'start',
   placeholder?: string,
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void,
   onClick?: () => void,
-};
+}
 
 type InputValueType = string | number | readonly string[] | undefined;
 
