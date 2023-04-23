@@ -1,7 +1,7 @@
 import CardList from "./CardList/CardList";
 import "./cardListPage.css";
 
-import CreditCard from "../../type/CreditCard";
+import { CreditCard } from "../../type/CreditCard";
 
 interface Props {
   cardList: CreditCard[];

@@ -1,6 +1,6 @@
 import CardPreview from "../../common/CardPreview";
 import AddCardButton from "../AddCardButton/AddCardButton";
-import CreditCard from "../../../type/CreditCard";
+import { CreditCard } from "../../../type/CreditCard";
 import "./cardList.css";
 
 interface Props {

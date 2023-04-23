@@ -6,7 +6,7 @@ import { useState } from "react";
 
 import CardInputPage from "./component/CardInputPage/CardInputPage";
 import CardListPage from "./component/CardListPage/CardListPage";
-import CreditCard from "./type/CreditCard";
+import { CreditCard } from "./type/CreditCard";
 
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 

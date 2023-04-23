@@ -22,29 +22,40 @@
   border-radius: 4px;
 }
 
+.numberContainer {
+  display: flex;
+  justify-content: space-evenly;
+
+  width: 90%;
+
+  position: relative;
+  top: 55px;
+  left: 10px;
+}
+
 .number {
   color: white;
 
-  width: 90%;
-  position: relative;
-  top: 55px;
-  left: 20px;
-
   letter-spacing: 3px;
+  white-space: pre-wrap;
+}
+
+.nameDateContainer {
+  position: relative;
+  top: 60px;
+  left: 5%;
+
+  display: flex;
+  justify-content: space-between;
+
+  width: 90%;
 }
 
 .name {
   color: white;
 
-  position: relative;
-  top: 60px;
-  left: 20px;
 }
 
 .expireDate {
   color: white;
-
-  position: relative;
-  top: 60px;
-  left: 118px;
 }

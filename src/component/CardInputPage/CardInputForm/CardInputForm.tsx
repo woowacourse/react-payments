@@ -1,4 +1,4 @@
-import CreditCard from "../../../type/CreditCard";
+import { CreditCard , getDefaultCreditCard } from "../../../type/CreditCard";
 import Button from "../../common/Button";
 import CardPreview from "../../common/CardPreview";
 import InputBoxCardNumber from "../InputBoxCardNumber/InputBoxCardNumber";
@@ -15,15 +15,6 @@ import "./cardInputForm.css";
 interface Props {
   addNewCard: (card: CreditCard) => void;
 }
-
-const getDefaultCreditCard = (): CreditCard => ({
-  name: '',
-  date: '',
-  number: [],
-  securityCode: 0,
-  password: 0,
-});
-
 
 const getFormData = (form: HTMLFormElement): CreditCard => {
   const card =  getDefaultCreditCard();

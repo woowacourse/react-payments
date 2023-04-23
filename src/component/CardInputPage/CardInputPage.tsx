@@ -1,7 +1,7 @@
 import CardInputForm from "./CardInputForm/CardInputForm";
 
 import "./cardInputPage.css";
-import CreditCard from "../../type/CreditCard";
+import { CreditCard } from "../../type/CreditCard";
 
 interface Props {
   addNewCard: (card: CreditCard) => void;

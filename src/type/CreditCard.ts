@@ -1,4 +1,4 @@
-export default interface CreditCard {
+export interface CreditCard {
   name: string;
   date: string;
   bank?: string;
@@ -6,3 +6,11 @@ export default interface CreditCard {
   securityCode: number;
   password: number;
 };
+
+export const getDefaultCreditCard = (): CreditCard => ({
+  name: '',
+  date: '',
+  number: ['', '', '', ''],
+  securityCode: 0,
+  password: 0,
+});
