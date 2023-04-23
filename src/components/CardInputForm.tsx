@@ -1,14 +1,20 @@
-import React, { FormEvent, useState } from "react";
-import styled from "styled-components";
-import CardInput from "./CardInput";
+import React, { FormEvent, useState } from 'react';
+import styled from 'styled-components';
+import CardInput from './CardInput';
 import {
+  BACKSPASE_KEY,
+  CARD_NUMBER_ERASE_SYMBOL,
+  INPUT_WIDTH,
   INPUT_MAX_LENGTH,
   PASSWORD_DIGIT_INDEX,
   SEPERATED_CARD_NUMBER_LENGTH,
-} from "../constants";
-import { CardType } from "../types";
-import { Link } from "react-router-dom";
-import { QuestionMark } from "../assets";
+  CARD_ID_VALUE,
+  EXPIRED_DATE_PLUS_SYMBOL,
+  EXPIRED_DATE_ERASE_SYMBOL,
+} from '../constants';
+import { CardType } from '../types';
+import { Link } from 'react-router-dom';
+import { QuestionMark } from '../assets';
 
 interface CardInputFormProps {
   card: CardType;
@@ -23,10 +29,13 @@ const CardInputForm = (props: CardInputFormProps) => {
   const handleCardNumberChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.target.value.length > SEPERATED_CARD_NUMBER_LENGTH.SECOND
       ? (card.cardNumber =
-          e.target.value.substring(0, 12) +
+          e.target.value.substring(
+            SEPERATED_CARD_NUMBER_LENGTH.NUMBER_START,
+            SEPERATED_CARD_NUMBER_LENGTH.SECURE_NUMBER_START
+          ) +
           e.target.value
-            .substring(12, e.target.value.length)
-            .replace(/[0-9]/g, "•"))
+            .substring(SEPERATED_CARD_NUMBER_LENGTH.SECURE_NUMBER_START, e.target.value.length)
+            .replace(/[0-9]/g, '•'))
       : (card.cardNumber = e.target.value);
 
     if (
@@ -34,28 +43,19 @@ const CardInputForm = (props: CardInputFormProps) => {
       e.target.value.length === SEPERATED_CARD_NUMBER_LENGTH.SECOND ||
       e.target.value.length === SEPERATED_CARD_NUMBER_LENGTH.THIRD
     ) {
-      card.cardNumber = card.cardNumber + " - ";
+      card.cardNumber = card.cardNumber + ' - ';
     }
     props.setCard(card);
   };
 
   const handleCardNumberKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Backspace") {
-      if (card.cardNumber.length === 7)
-        card.cardNumber = card.cardNumber.substring(
-          0,
-          SEPERATED_CARD_NUMBER_LENGTH.FIRST
-        );
-      if (card.cardNumber.length === 14)
-        card.cardNumber = card.cardNumber.substring(
-          0,
-          SEPERATED_CARD_NUMBER_LENGTH.SECOND
-        );
-      if (card.cardNumber.length === 21)
-        card.cardNumber = card.cardNumber.substring(
-          0,
-          SEPERATED_CARD_NUMBER_LENGTH.THIRD
-        );
+    if (e.key === BACKSPASE_KEY) {
+      if (card.cardNumber.length === CARD_NUMBER_ERASE_SYMBOL.FIRST)
+        card.cardNumber = card.cardNumber.substring(0, SEPERATED_CARD_NUMBER_LENGTH.FIRST);
+      if (card.cardNumber.length === CARD_NUMBER_ERASE_SYMBOL.SECOND)
+        card.cardNumber = card.cardNumber.substring(0, SEPERATED_CARD_NUMBER_LENGTH.SECOND);
+      if (card.cardNumber.length === CARD_NUMBER_ERASE_SYMBOL.THIRD)
+        card.cardNumber = card.cardNumber.substring(0, SEPERATED_CARD_NUMBER_LENGTH.THIRD);
     }
     props.setCard(card);
   };
@@ -63,25 +63,22 @@ const CardInputForm = (props: CardInputFormProps) => {
   const handleExpiredDateChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
     card.expiredDate = e.target.value;
     props.setCard(card);
-    if (e.target.value.length === 2) {
-      card.expiredDate = card.expiredDate + " / ";
+    if (e.target.value.length === EXPIRED_DATE_PLUS_SYMBOL) {
+      card.expiredDate = card.expiredDate + ' / ';
       props.setCard(card);
     }
   };
 
   const handleExpiredDateKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Backspace") {
-      if (card.expiredDate.length === 5) {
-        card.expiredDate = card.expiredDate.substring(0, 2);
+    if (e.key === BACKSPASE_KEY) {
+      if (card.expiredDate.length === EXPIRED_DATE_ERASE_SYMBOL.SEPATATE) {
+        card.expiredDate = card.expiredDate.substring(EXPIRED_DATE_ERASE_SYMBOL.FROM, EXPIRED_DATE_ERASE_SYMBOL.TO);
         props.setCard(card);
       }
     }
   };
 
-  const handlePasswordChanged = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    digit: number
-  ) => {
+  const handlePasswordChanged = (e: React.ChangeEvent<HTMLInputElement>, digit: number) => {
     const newPassword = [...card.password];
     newPassword[digit] = e.target.value;
     card.password = newPassword;
@@ -91,9 +88,9 @@ const CardInputForm = (props: CardInputFormProps) => {
   return (
     <CardInputFormWrapper>
       <InputSetWrapper>
-        <label htmlFor="cardNumber">카드 번호</label>
+        <label htmlFor={CARD_ID_VALUE.CARD_NUMBER}>카드 번호</label>
         <CardInput
-          id="cardNumber"
+          id={CARD_ID_VALUE.CARD_NUMBER}
           placeholder="카드 번호를 입력해 주세요."
           value={card.cardNumber}
           isSecured={false}
@@ -110,19 +107,17 @@ const CardInputForm = (props: CardInputFormProps) => {
       </InputSetWrapper>
 
       <InputSetWrapper>
-        <label htmlFor="expiredDate">만료일</label>
+        <label htmlFor={CARD_ID_VALUE.EXPIRED_DATE}>만료일</label>
         <CardInput
-          id="expiredDate"
+          id={CARD_ID_VALUE.EXPIRED_DATE}
           placeholder="MM / YY"
-          width="137px"
+          width={INPUT_WIDTH.EXPIRED_DATE}
           value={card.expiredDate}
           isSecured={false}
           isAutoFocus={false}
           isRequired={true}
           maxLength={INPUT_MAX_LENGTH.EXPIRED_DATE}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            handleExpiredDateChanged(e)
-          }
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleExpiredDateChanged(e)}
           onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
             handleExpiredDateKey(e);
           }}
@@ -130,12 +125,12 @@ const CardInputForm = (props: CardInputFormProps) => {
       </InputSetWrapper>
       <InputSetWrapper>
         <OwnerNameLabelWrapper>
-          <label htmlFor="ownerName">카드 소유자 이름 (선택)</label>
+          <label htmlFor={CARD_ID_VALUE.OWNER_NAME}>카드 소유자 이름 (선택)</label>
           <span>{card.ownerName.length}/30</span>
         </OwnerNameLabelWrapper>
 
         <CardInput
-          id="ownerName"
+          id={CARD_ID_VALUE.OWNER_NAME}
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
           value={card.ownerName}
           isSecured={false}
@@ -150,11 +145,11 @@ const CardInputForm = (props: CardInputFormProps) => {
       </InputSetWrapper>
 
       <InputSetWrapper>
-        <label htmlFor="cvc">보안 코드(CVC/CVV)</label>
+        <label htmlFor={CARD_ID_VALUE.CVC}>보안 코드(CVC/CVV)</label>
         <CvcInputWrapper>
           <CardInput
-            id="cvc"
-            width="84px"
+            id={CARD_ID_VALUE.CVC}
+            width={INPUT_WIDTH.CVC}
             value={card.cvc}
             isSecured={true}
             isAutoFocus={false}
@@ -165,20 +160,16 @@ const CardInputForm = (props: CardInputFormProps) => {
               props.setCard(card);
             }}
           />
-          <img
-            src={QuestionMark}
-            alt="도움말"
-            onClick={() => setIsAnswered(!isAnswered)}
-          />
+          <img src={QuestionMark} alt="도움말" onClick={() => setIsAnswered(!isAnswered)} />
         </CvcInputWrapper>
       </InputSetWrapper>
 
       <InputSetWrapper>
-        <label htmlFor="password">카드 비밀번호</label>
+        <label htmlFor={CARD_ID_VALUE.PASSWORD}>카드 비밀번호</label>
         <PasswordInputWrapper>
           <CardInput
-            id="password"
-            width="43px"
+            id={CARD_ID_VALUE.PASSWORD}
+            width={INPUT_WIDTH.PASSWORD}
             value={card.password[PASSWORD_DIGIT_INDEX.FIRST]}
             isSecured={true}
             isAutoFocus={false}
@@ -189,8 +180,8 @@ const CardInputForm = (props: CardInputFormProps) => {
             }}
           />
           <CardInput
-            id="password"
-            width="43px"
+            id={CARD_ID_VALUE.PASSWORD}
+            width={INPUT_WIDTH.PASSWORD}
             value={card.password[PASSWORD_DIGIT_INDEX.SECOND]}
             isSecured={true}
             isAutoFocus={false}
