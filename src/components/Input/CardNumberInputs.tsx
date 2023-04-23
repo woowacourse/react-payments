@@ -1,6 +1,6 @@
 import { Input } from 'components/common';
 import { ValueAndOnChange } from './types';
-import React, { ChangeEvent, ChangeEventHandler } from 'react';
+import React, { ChangeEvent, Fragment } from 'react';
 
 interface CardNumberInputProps {
   valueAndOnChanges: ValueAndOnChange[];
@@ -13,20 +13,20 @@ export function CardNumberInputs({ valueAndOnChanges }: CardNumberInputProps) {
   const handleChange = (
     e: ChangeEvent<HTMLInputElement>,
     index: number,
-    onChange?: ChangeEventHandler<HTMLInputElement>
+    onChange?: ValueAndOnChange['onChange']
   ) => {
     const value = e.target.value;
 
     if (index < valueAndOnChanges.length - 1 && value.length === e.target.maxLength) {
       inputRefs[index + 1].current?.focus();
     }
-    onChange?.(e);
+    onChange?.(value);
   };
 
   return (
     <>
       {valueAndOnChanges.map(({ value, onChange }, index) => (
-        <>
+        <Fragment key={index}>
           <Input
             ref={inputRefs[index]}
             value={value}
@@ -38,7 +38,7 @@ export function CardNumberInputs({ valueAndOnChanges }: CardNumberInputProps) {
             required
           />
           {index < valueAndOnChanges.length - 1 && <span>-</span>}
-        </>
+        </Fragment>
       ))}
     </>
   );

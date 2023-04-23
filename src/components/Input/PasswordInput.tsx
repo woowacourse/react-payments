@@ -1,5 +1,5 @@
 import { Input } from 'components/common';
-import React, { ChangeEvent, ChangeEventHandler } from 'react';
+import React, { ChangeEvent } from 'react';
 import { ValueAndOnChange } from './types';
 
 export interface PasswordInputProps {
@@ -14,14 +14,14 @@ export function PasswordInput(props: PasswordInputProps) {
   const handleChange = (
     e: ChangeEvent<HTMLInputElement>,
     index: number,
-    onChange?: ChangeEventHandler<HTMLInputElement>
+    onChange?: ValueAndOnChange['onChange']
   ) => {
     const value = e.target.value;
 
     if (index < Object.keys(props).length - 1 && value.length === e.target.maxLength) {
       inputRefs[index + 1].current?.focus();
     }
-    onChange?.(e);
+    onChange?.(value);
   };
 
   return (

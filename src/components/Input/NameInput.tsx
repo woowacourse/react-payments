@@ -1,10 +1,7 @@
 import { Input } from 'components/common';
-import { ChangeEventHandler } from 'react';
+import { ValueAndOnChange } from './types';
 
-export interface NameInputProps {
-  value: string;
-  onChange: ChangeEventHandler<HTMLInputElement>;
-}
+export interface NameInputProps extends ValueAndOnChange {}
 
 export function NameInput({ value, onChange }: NameInputProps) {
   return (
@@ -14,7 +11,7 @@ export function NameInput({ value, onChange }: NameInputProps) {
         type="text"
         maxLength={30}
         placeholder="카드에 표시된 이름과 동일하게 입력하세요"
-        onChange={onChange}
+        onChange={() => onChange}
       />
     </>
   );

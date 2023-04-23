@@ -1,10 +1,7 @@
 import { Input } from 'components/common';
-import { ChangeEventHandler } from 'react';
+import { ValueAndOnChange } from './types';
 
-export interface SecurityInputProps {
-  value: string;
-  onChange: ChangeEventHandler<HTMLInputElement>;
-}
+export interface SecurityInputProps extends ValueAndOnChange {}
 
 export function SecurityCodeInput({ value, onChange }: SecurityInputProps) {
   return (
@@ -13,7 +10,7 @@ export function SecurityCodeInput({ value, onChange }: SecurityInputProps) {
         value={value}
         type="password"
         maxLength={3}
-        onChange={onChange}
+        onChange={() => onChange}
         inputMode="numeric"
         required
       />

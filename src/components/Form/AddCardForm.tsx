@@ -45,8 +45,7 @@ function AddCardForm({ onSubmit }: AddCardFormProps) {
 
   const valueAndOnChanges: ValueAndOnChange[] = cardNumbers.map((cardNumber, index) => ({
     value: cardNumber,
-    onChange: (e) => {
-      const { value } = e.target;
+    onChange: (value) => {
       const isNumber = !isNaN(Number(value));
 
       if (!isNumber) return;
@@ -60,55 +59,48 @@ function AddCardForm({ onSubmit }: AddCardFormProps) {
     },
   }));
 
-  const handleMonthInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    const { value } = e.target;
-    const isNumber = !isNaN(Number(value));
+  const handleMonthInputChange: ValueAndOnChange['onChange'] = (inputValue) => {
+    const isNumber = !isNaN(Number(inputValue));
 
     if (!isNumber) return;
 
-    setMonth(value);
+    setMonth(inputValue);
   };
 
-  const handleYearInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    const { value } = e.target;
-    const isNumber = !isNaN(Number(value));
+  const handleYearInputChange: ValueAndOnChange['onChange'] = (inputValue) => {
+    const isNumber = !isNaN(Number(inputValue));
 
     if (!isNumber) return;
 
-    setYear(value);
+    setYear(inputValue);
   };
 
-  const handleNameInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    const value = e.target.value.replace(NOT_ALPHABET_REGEX, '').toUpperCase();
-
-    setName(value);
+  const handleNameInputChange: ValueAndOnChange['onChange'] = (inputValue) => {
+    setName(inputValue.replace(NOT_ALPHABET_REGEX, '').toUpperCase());
   };
 
-  const handleSecurityCodeChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    const { value } = e.target;
-    const isNumber = !isNaN(Number(value));
+  const handleSecurityCodeChange: ValueAndOnChange['onChange'] = (inputValue) => {
+    const isNumber = !isNaN(Number(inputValue));
 
     if (!isNumber) return;
 
-    setSecurityCode(value);
+    setSecurityCode(inputValue);
   };
 
-  const handleFirstPasswordInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    const { value } = e.target;
-    const isNumber = !isNaN(Number(value));
+  const handleFirstPasswordInputChange: ValueAndOnChange['onChange'] = (inputValue) => {
+    const isNumber = !isNaN(Number(inputValue));
 
     if (!isNumber) return;
 
-    setFirstDigit(value);
+    setFirstDigit(inputValue);
   };
 
-  const handleSecondPasswordInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    const { value } = e.target;
-    const isNumber = !isNaN(Number(value));
+  const handleSecondPasswordInputChange: ValueAndOnChange['onChange'] = (inputValue) => {
+    const isNumber = !isNaN(Number(inputValue));
 
     if (!isNumber) return;
 
-    setSecondDigit(value);
+    setSecondDigit(inputValue);
   };
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {

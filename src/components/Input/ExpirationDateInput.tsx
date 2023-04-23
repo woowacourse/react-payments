@@ -15,7 +15,7 @@ export function ExpirationDateInput(props: ExpirationProps) {
   const handleChange = (
     e: ChangeEvent<HTMLInputElement>,
     index: number,
-    onChange?: ChangeEventHandler<HTMLInputElement>
+    onChange?: ValueAndOnChange['onChange']
   ) => {
     const value = e.target.value;
 
@@ -23,7 +23,7 @@ export function ExpirationDateInput(props: ExpirationProps) {
       inputRefs[index + 1].current?.focus();
     }
 
-    onChange?.(e);
+    onChange?.(value);
   };
 
   return (
