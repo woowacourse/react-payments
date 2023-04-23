@@ -8,11 +8,9 @@ type Props = {
 export function Header({ text, onClickBackButton }: Props) {
   return (
     <Container>
-      {onClickBackButton ? (
-        <BackButton onClick={onClickBackButton}>&lt; &nbsp; {text}</BackButton>
-      ) : (
-        <BackButton onClick={onClickBackButton}>&nbsp; {text}</BackButton>
-      )}
+      <BackButton onClick={onClickBackButton}>
+        {onClickBackButton && '<'} &nbsp; {text}
+      </BackButton>
     </Container>
   );
 }
