@@ -13,17 +13,17 @@ function CreditCardNumberInput({ creditCardNumber, setCreditCardNumber }: Props)
   const [markedCreditCardNumber, setMarkedCreditCardNumber] = useState('');
 
   const handleChangeCreditCardNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newCreditCarNumber = event.target.value.replace(/\D/g, '');
+    const newCreditCardNumber = event.target.value.replace(/\D/g, '');
 
-    if (newCreditCarNumber.length > 16) return;
+    if (newCreditCardNumber.length > 16) return;
 
-    const markedNumber = convertSecuredCreditCard(newCreditCarNumber)
+    const markedNumber = convertSecuredCreditCard(newCreditCardNumber)
       .filter((numbers) => !!numbers.length)
       .map((numbers) => numbers.join(''))
       .join(' - ');
 
     setMarkedCreditCardNumber(markedNumber);
-    setCreditCardNumber(newCreditCarNumber);
+    setCreditCardNumber(newCreditCardNumber);
   };
 
   const isError = creditCardNumber.length > 0 && creditCardNumber.length < 16;
