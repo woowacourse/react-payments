@@ -10,7 +10,8 @@ jobs:
     permissions:
       contents: write
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
+      group: ${{ github.workflow }}
+      cancel-in-progress: true
 
     steps:
       - uses: actions/checkout@v3
@@ -30,7 +31,11 @@ jobs:
       - run: npm ci
         if: steps.cache.outputs.cache-hit != 'true'
 
-      - run: npm run build
+      - run: |
+          npm run build
+          cp ./build/index.html ./build/404.html
+        env:
+          PUBLIC_URL: echo $GITHUB_REPOSITORY | sed -r 's/^(.+)\/(.+)$/https:\/\/\1.github.io\/\2\//'
 
       - uses: peaceiris/actions-gh-pages@v3
         with:
