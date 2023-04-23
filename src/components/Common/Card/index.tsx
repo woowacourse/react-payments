@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactComponent as Dot } from '../../../assets/white-dot.svg';
+import getUniqueKey from '../../../utils/getUniqueKey';
 import type { CardInformation } from './types';
 
 interface CardProps {
@@ -25,11 +26,11 @@ function Card({ cardInformation = defaultCardInformation, isAddForm }: CardProps
             <CardNumberTemplate>
               {cardNumber?.map((number, index) =>
                 index < 2 ? (
-                  <CardNumberItem>{number}</CardNumberItem>
+                  <CardNumberItem key={getUniqueKey()}>{number}</CardNumberItem>
                 ) : (
-                  <CardNumberItem>
+                  <CardNumberItem key={getUniqueKey()}>
                     {Array.from({ length: number.length }, () => (
-                      <Dot />
+                      <Dot key={getUniqueKey()} />
                     ))}
                   </CardNumberItem>
                 ),

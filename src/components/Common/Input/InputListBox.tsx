@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import styled from 'styled-components';
+import getUniqueKey from '../../../utils/getUniqueKey';
 import Input from './Input';
 
 interface InputListBoxProps {
@@ -46,6 +47,7 @@ function InputListBox({
             <Input
               {...info}
               onChange={onChange(index)}
+              key={getUniqueKey()}
               ref={(element: HTMLInputElement) => {
                 refs.current[index] = element;
               }}
