@@ -1,8 +1,8 @@
-import styled from 'styled-components';
-import { CardItemInfo } from '../../types/Card';
+import styled from "styled-components";
+import { CardPublicInfo } from "../../types/Card";
 
 interface CardItemProps {
-  card: CardItemInfo;
+  card: CardPublicInfo;
 }
 
 const CardItem = ({ card }: CardItemProps) => {
@@ -14,22 +14,12 @@ const CardItem = ({ card }: CardItemProps) => {
           <CardNumberContainer>
             <p>{card.cardNumber[0]}</p>
             <p>{card.cardNumber[1]}</p>
-            <SecurityCardNumber
-              type='password'
-              value={card.cardNumber[2]}
-              disabled
-            />
-            <SecurityCardNumber
-              type='password'
-              value={card.cardNumber[3]}
-              disabled
-            />
+            <SecurityCardNumber type="password" value={card.cardNumber[2]} disabled />
+            <SecurityCardNumber type="password" value={card.cardNumber[3]} disabled />
           </CardNumberContainer>
           <CardInfoContainer>
-            <CardNameContainer>{card.name || 'NAME'}</CardNameContainer>
-            <p>{`${card.expirationDate[0] || 'MM'}/${
-              card.expirationDate[1] || 'YY'
-            }`}</p>
+            <CardNameContainer>{card.name || "NAME"}</CardNameContainer>
+            <p>{`${card.expirationDate[0] || "MM"}/${card.expirationDate[1] || "YY"}`}</p>
           </CardInfoContainer>
         </>
       )}

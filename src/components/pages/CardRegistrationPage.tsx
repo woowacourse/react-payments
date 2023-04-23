@@ -1,29 +1,25 @@
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import Header from '../common/Header';
-import { LeftArrowIcon } from '../../assets/icons';
-import CardItem from '../common/CardItem';
-import CardForm from '../cardForm/CardForm';
-import { useState } from 'react';
-import { CardItemInfo } from '../../types/Card';
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import Header from "../common/Header";
+import { LeftArrowIcon } from "../../assets/icons";
+import CardItem from "../common/CardItem";
+import CardForm from "../cardForm/CardForm";
+import { useState } from "react";
+import { CardPublicInfo } from "../../types/Card";
 
 interface CardRegistrationPageProps {
-  addCardItem: (cardItem: CardItemInfo) => void;
+  addCardItem: (cardItem: CardPublicInfo) => void;
 }
 
 const CardRegistrationPage = ({ addCardItem }: CardRegistrationPageProps) => {
-  const [cardItem, setCardItem] = useState<CardItemInfo>({
+  const [cardItem, setCardItem] = useState<CardPublicInfo>({
     id: 0,
-    cardNumber: ['', '', '', ''],
-    expirationDate: ['', ''],
-    name: '',
+    cardNumber: ["", "", "", ""],
+    expirationDate: ["", ""],
+    name: "",
   });
 
-  const handleChangeForm = (
-    cardNumber: string[],
-    expirationDate: string[],
-    name: string
-  ) => {
+  const handleChangeForm = (cardNumber: string[], expirationDate: string[], name: string) => {
     const updatedCard = {
       id: Date.now(),
       cardNumber: cardNumber,
@@ -39,21 +35,18 @@ const CardRegistrationPage = ({ addCardItem }: CardRegistrationPageProps) => {
 
   return (
     <>
-      <Header title='카드추가' leftChild={<BackButton />} />
+      <Header title="카드추가" leftChild={<BackButton />} />
       <CardItemContainer>
         <CardItem card={cardItem} />
       </CardItemContainer>
-      <CardForm
-        onSubmitForm={handleSubmitForm}
-        onChangeForm={handleChangeForm}
-      />
+      <CardForm onSubmitForm={handleSubmitForm} onChangeForm={handleChangeForm} />
     </>
   );
 };
 
 const BackButton = () => {
   return (
-    <Link to={'/'}>
+    <Link to={"/"}>
       <LeftArrowIcon />
     </Link>
   );

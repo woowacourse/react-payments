@@ -3,12 +3,12 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import styled from "styled-components";
 import CardListPage from "./components/pages/CardListPage";
 import CardRegistrationPage from "./components/pages/CardRegistrationPage";
-import { CardItemInfo } from "./types/Card";
+import { CardPublicInfo } from "./types/Card";
 
 function App() {
-  const [cardList, setCardList] = useState<CardItemInfo[]>([]);
+  const [cardList, setCardList] = useState<CardPublicInfo[]>([]);
 
-  const addCardItem = (cardItem: CardItemInfo) => {
+  const addCardItem = (cardItem: CardPublicInfo) => {
     const updatedCardList = [...cardList, cardItem];
     setCardList(updatedCardList);
   };

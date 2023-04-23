@@ -1,9 +1,9 @@
-import styled from 'styled-components';
-import { CardItemInfo } from '../../types/Card';
-import CardItem from '../common/CardItem';
+import styled from "styled-components";
+import { CardPublicInfo } from "../../types/Card";
+import CardItem from "../common/CardItem";
 
 interface CardListProps {
-  cardList: CardItemInfo[];
+  cardList: CardPublicInfo[];
 }
 
 const CardList = ({ cardList }: CardListProps) => {
