@@ -2,19 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 
 import './index.css';
-// import App from './App';
 import AddCardPage from './pages/AddCardPage';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import CardListPage from './pages/CardListPage';
+import { LOCATION } from './utils/constants';
 
 const router = createBrowserRouter(
   [
     {
-      path: '/',
+      path: LOCATION.CARD_LIST_PAGE,
       element: <CardListPage />,
     },
     {
-      path: '/add',
+      path: LOCATION.ADD_CARD_PAGE,
       element: <AddCardPage />,
     },
   ],
