@@ -72,6 +72,10 @@ a {
   pointer-events: none;
 }
 
+.hide-overflow {
+  overflow: hidden;
+}
+
 @media screen and (max-width: 600px) {
   .app {
     margin: 0;
