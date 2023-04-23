@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MyCardPage from './pages/MyCardPage/index';
 import CardRegisterPage from './pages/CardRegisterPage/index';
 import { useState } from 'react';
-import Header from './components/Header';
+import { Header } from './components';
 
 export interface CardNumbers {
   0: string;

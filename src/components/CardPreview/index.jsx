@@ -1,8 +1,7 @@
-import { CardInfo } from '../../App';
-import Card from '../Card';
+import { Card } from '../';
 import * as styled from './CardPreview.styled';
 
-const CardPreview = ({ cardInfo, bgColor }: { cardInfo: CardInfo; bgColor: string }) => {
+const CardPreview = ({ cardInfo, bgColor }) => {
   return (
     <styled.CardPreview>
       <Card cardInfo={cardInfo} bgColor={bgColor} />

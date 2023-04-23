@@ -1,18 +1,19 @@
 import { ChangeEvent, useState } from 'react';
 
-import { Input } from '../../index';
+import { Input } from '../../';
 
 import * as styled from './CardPasswordInput.styled';
 import { isNumeric } from '../../../domain/validator';
 import { CardInfo } from '../../../App';
+import LabelHeader from '../LabelHeader';
 
-const PasswordInputBox = ({
-  password,
-  setCardInfo,
-}: {
+interface PasswordInputBoxProps {
+  refs: any;
   password: any;
   setCardInfo: CallableFunction;
-}) => {
+}
+
+const PasswordInputBox = ({ refs, password, setCardInfo }: PasswordInputBoxProps) => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const onChange = ({ target: { name, value } }: ChangeEvent<HTMLInputElement>) => {
@@ -38,14 +39,13 @@ const PasswordInputBox = ({
   return (
     <styled.PasswordInputBox>
       <label>
-        <styled.LabelHeader>
-          <span>카드 비밀번호</span>
-        </styled.LabelHeader>
+        <LabelHeader title="카드 비밀번호" required={true} />
         <styled.InputContainer>
-          {Object.keys(password).map((key) => (
+          {Object.keys(password).map((key, index) => (
             <Input
               key={key}
               name={key}
+              ref={refs[index]}
               value={password[key]}
               onChange={onChange}
               type="password"

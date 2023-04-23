@@ -1,18 +1,23 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, Fragment, useState } from 'react';
 
-import { Input } from '../../index';
+import { Input } from '../../';
 
 import * as styled from './CardExpirationDateInput.styled';
 import { CardInfo } from '../../../App';
 import { isNumeric } from '../../../domain/validator';
+import LabelHeader from '../LabelHeader';
 
-const ExpirationDateInputBox = ({
-  setCardInfo,
-  expirationDate,
-}: {
+interface ExpirationDateInputBoxProps {
+  refs: any;
   setCardInfo: CallableFunction;
   expirationDate: any;
-}) => {
+}
+
+const ExpirationDateInputBox = ({
+  refs,
+  setCardInfo,
+  expirationDate,
+}: ExpirationDateInputBoxProps) => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const onChange = ({ target: { name, value } }: ChangeEvent<HTMLInputElement>) => {
@@ -36,16 +41,14 @@ const ExpirationDateInputBox = ({
   return (
     <styled.ExpirationDateInputBox>
       <label>
-        <styled.LabelHeader>
-          <span>만료일</span>
-        </styled.LabelHeader>
+        <LabelHeader title="만료일" required={true} />
         <styled.InputContainer>
           <styled.Inputs>
             {Object.keys(expirationDate).map((key, index) => (
-              <>
+              <Fragment key={key}>
                 <Input
-                  key={key}
                   name={key}
+                  ref={refs[index]}
                   value={expirationDate[key]}
                   onChange={onChange}
                   type="text"
@@ -55,7 +58,7 @@ const ExpirationDateInputBox = ({
                   placeholder={index === 0 ? 'MM' : 'YY'}
                 />
                 {index === 0 && <styled.ExpirationDateDivision>/</styled.ExpirationDateDivision>}
-              </>
+              </Fragment>
             ))}
           </styled.Inputs>
         </styled.InputContainer>

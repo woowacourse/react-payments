@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { CardInfo } from '../../App';
 
-import Card from '../../components/Card';
+import { Card } from '../../components/';
 
 const MyCardPage = ({ cardList }: { cardList: CardInfo[] }) => {
   const navigation = useNavigate();
@@ -14,11 +14,9 @@ const MyCardPage = ({ cardList }: { cardList: CardInfo[] }) => {
   };
 
   const generateCardList = (cardList: CardInfo[]) => {
-    return cardList.map((cardInfo) => {
-      const key = Object.values(cardInfo.numbers).join('');
-
-      return <Card key={key} cardInfo={cardInfo} bgColor="#333333" />;
-    });
+    return cardList.map((cardInfo) => (
+      <Card key={cardInfo.id} cardInfo={cardInfo} bgColor="#333333" />
+    ));
   };
 
   return (

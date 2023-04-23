@@ -1,18 +1,19 @@
 import { ChangeEvent, useState } from 'react';
 
-import { Input } from '../../index';
+import { Input } from '../../';
 
 import * as styled from './CardSecurityCodeInput.styled';
 import { isNumeric } from '../../../domain/validator';
 import { CardInfo } from '../../../App';
+import LabelHeader from '../LabelHeader';
 
-const SecurityCodeInputBox = ({
-  setCardInfo,
-  securityCode,
-}: {
+interface SecurityCodeInputBoxProps {
+  refs: any;
   setCardInfo: CallableFunction;
   securityCode: any;
-}) => {
+}
+
+const SecurityCodeInputBox = ({ refs, setCardInfo, securityCode }: SecurityCodeInputBoxProps) => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const onChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
@@ -35,12 +36,11 @@ const SecurityCodeInputBox = ({
   return (
     <styled.SecurityCodeInputBox>
       <label>
-        <styled.LabelHeader>
-          <span>보안 코드(CVC/CVV)</span>
-        </styled.LabelHeader>
+        <LabelHeader title="보안 코드(CVC/CVV)" required={true} />
         <styled.InputContainer>
           <Input
             value={securityCode}
+            ref={refs[0]}
             onChange={onChange}
             type="password"
             width="m"

@@ -1,17 +1,18 @@
 import { ChangeEvent, useState } from 'react';
 
-import { Input } from '../../index';
+import { Input } from '../../';
 
 import * as styled from './CardOwnerNameInput.styled';
 import { CardInfo } from '../../../App';
+import LabelHeader from '../LabelHeader';
 
-const OwnerNameInputBox = ({
-  setCardInfo,
-  ownerName,
-}: {
+interface OwnerNameInputBoxProps {
+  refs: any;
   setCardInfo: CallableFunction;
   ownerName: any;
-}) => {
+}
+
+const OwnerNameInputBox = ({ refs, setCardInfo, ownerName }: OwnerNameInputBoxProps) => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const onChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
@@ -34,13 +35,11 @@ const OwnerNameInputBox = ({
   return (
     <styled.OwnerNameInputBox>
       <label>
-        <styled.LabelHeader>
-          <span>카드 소유자 이름(선택)</span>
-          <span>0/30</span>
-        </styled.LabelHeader>
+        <LabelHeader title="카드 소유자 이름(선택)" />
         <styled.InputContainer>
           <Input
             value={ownerName}
+            ref={refs[0]}
             onChange={onChange}
             type="text"
             center={false}

@@ -5,31 +5,20 @@ export const CardNumberInputBox = styled.div`
   margin-bottom: 20px;
 `;
 
-export const LabelHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 5px;
-
-  span {
-    font-size: 13px;
-  }
-`;
-
 export const InputContainer = styled.div`
   display: flex;
   justify-content: center;
 
-  background-color: red;
   background-color: #e5e5e5;
   border-radius: 10px;
 `;
 
 export const Inputs = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   width: 60%;
-  min-width: 280px;
+  min-width: 300px;
 `;
 
 export const CardNumberDivision = styled.span`

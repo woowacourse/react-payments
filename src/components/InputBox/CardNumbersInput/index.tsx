@@ -1,17 +1,19 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, Fragment, useState } from 'react';
 
-import { Input } from '../../index';
+import { Input } from '../../';
 
 import * as styled from './CardNumbersInput.styled';
 import { isNumeric } from '../../../domain/validator';
 import { CardInfo } from '../../../App';
+import LabelHeader from '../LabelHeader';
 
 interface CardNumberInputBoxProps {
+  refs: any;
   setCardInfo: CallableFunction;
   numbers: any;
 }
 
-const CardNumberInputBox = ({ setCardInfo, numbers }: CardNumberInputBoxProps) => {
+const CardNumberInputBox = ({ refs, setCardInfo, numbers }: CardNumberInputBoxProps) => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const onChange = ({ target: { name, value } }: ChangeEvent<HTMLInputElement>) => {
@@ -35,16 +37,14 @@ const CardNumberInputBox = ({ setCardInfo, numbers }: CardNumberInputBoxProps) =
   return (
     <styled.CardNumberInputBox>
       <label>
-        <styled.LabelHeader>
-          <span>카드 번호</span>
-        </styled.LabelHeader>
+        <LabelHeader title="카드 번호" required={true} />
         <styled.InputContainer>
           <styled.Inputs>
             {Object.keys(numbers).map((key, index) => (
-              <>
+              <Fragment key={key}>
                 <Input
-                  key={key}
                   name={key}
+                  ref={refs[index]}
                   value={numbers[key]}
                   onChange={onChange}
                   type={index < 2 ? 'text' : 'password'}
@@ -55,7 +55,7 @@ const CardNumberInputBox = ({ setCardInfo, numbers }: CardNumberInputBoxProps) =
                 <styled.CardNumberDivision>
                   {index !== 3 && numbers[key].length === 4 ? '-' : ''}
                 </styled.CardNumberDivision>
-              </>
+              </Fragment>
             ))}
           </styled.Inputs>
         </styled.InputContainer>

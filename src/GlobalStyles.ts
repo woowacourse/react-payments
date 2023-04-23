@@ -6,6 +6,8 @@ const GlobalStyles = createGlobalStyle`
 
   body{
     padding:28px 24px;
+    margin:0 auto;
+    max-width: 600px;
   }
   a{
       text-decoration: none;
