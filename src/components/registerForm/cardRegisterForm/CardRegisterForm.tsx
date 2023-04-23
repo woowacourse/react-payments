@@ -38,7 +38,6 @@ function CardRegisterForm() {
 
   const _onSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
-    console.log('>>> creditCardInfo:', creditCardInfo);
     saveCard(creditCardInfo);
     navigation('/');
   };
