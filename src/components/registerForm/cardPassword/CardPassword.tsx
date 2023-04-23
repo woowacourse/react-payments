@@ -7,10 +7,13 @@ import { ONLY_NUMBER_REGEXP } from '../../../utils/regexp';
 import FormLabel from '../../@common/FormLabel';
 import Input from '../../@common/Input';
 import ErrorSpan from '../../@common/ErrorSpan';
-import CreditCardContext from '../../../contexts/InputValueContext';
+import { CreditCardContext } from '../../../contexts/CreditCardContext';
 
 function CardPassword() {
-  const [passwordError, setPasswordError] = useState(false);
+  const [validationStatus, setValidationStatus] = useState({
+    isValid: true,
+    message: '',
+  });
   const [creditCardInfo, setCreditCardInfo] = useContext(CreditCardContext);
 
   const refs = [useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null)];
@@ -20,35 +23,42 @@ function CardPassword() {
     maxLength: 1,
   });
 
-  const passwordChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    const enteredValue = event.currentTarget.value as string;
+  const _onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+    const enteredPassword = event.currentTarget.value as string;
     const inputIndex = Number(event.currentTarget.dataset['idx']);
 
-    // 숫자 외 입력 방지
-    if (!ONLY_NUMBER_REGEXP.test(enteredValue)) return;
+    if (!ONLY_NUMBER_REGEXP.test(enteredPassword)) {
+      setValidationStatus({
+        isValid: false,
+        message: '숫자만 입력 가능합니다.',
+      });
 
-    try {
-      // 1. 길이 불통과 -> 에러
-      if (enteredValue.length !== 1) {
-        throw new Error();
-      }
-
-      // 2. 길이 통과 -> password 갱신
-      setPasswordError(false);
-    } catch {
-      // 3. 다시 에러 설정
-      setPasswordError(true);
-    } finally {
-      if (!setCreditCardInfo) return;
-
-      const newValue = creditCardInfo.password;
-      newValue[inputIndex] = enteredValue;
-
-      setCreditCardInfo('password', newValue);
-
-      // focus 조정
-      focusNext(Number(inputIndex));
+      return;
     }
+
+    if (!setCreditCardInfo) return;
+
+    setValidationStatus({
+      isValid: true,
+      message: '',
+    });
+
+    const newValue = [...creditCardInfo.password];
+    newValue[inputIndex] = enteredPassword;
+
+    setCreditCardInfo('password', newValue);
+    focusNext(Number(inputIndex));
+  };
+
+  const _onBlur: React.FocusEventHandler<HTMLInputElement> = () => {
+    refs.forEach(({ current }) => {
+      if (current?.value.length === 0) {
+        setValidationStatus({
+          isValid: false,
+          message: '카드 비밀번호 2자리를 입력해주세요.',
+        });
+      }
+    });
   };
 
   return (
@@ -59,7 +69,7 @@ function CardPassword() {
           data-order="first"
           data-idx="0"
           value={creditCardInfo.password[0]}
-          onChange={passwordChange}
+          onChange={_onChange}
           maxLength={1}
           inputmode="numeric"
           type="password"
@@ -70,7 +80,8 @@ function CardPassword() {
           data-order="second"
           data-idx="1"
           value={creditCardInfo.password[1]}
-          onChange={passwordChange}
+          onChange={_onChange}
+          onBlur={_onBlur}
           maxLength={1}
           inputmode="numeric"
           type="password"
@@ -80,7 +91,7 @@ function CardPassword() {
         <DotParagraph>•</DotParagraph>
         <DotParagraph>•</DotParagraph>
       </PasswordInputContainer>
-      {passwordError && <ErrorSpan>비밀번호 앞 2자리를 입력해주세요.</ErrorSpan>}
+      {!validationStatus.isValid && <ErrorSpan>{validationStatus.message}</ErrorSpan>}
     </CardPasswordContainer>
   );
 }
