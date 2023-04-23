@@ -2,20 +2,14 @@ import { ChangeEvent, useState } from 'react';
 import Input from '../Input/Input';
 import * as styled from './ExpirationDateInputBox.styled';
 import { isNumeric } from '../../validator';
-import { CardInfo } from '../../App';
-
-export interface DateState {
-  month: string;
-  year: string;
-  [key: string]: string;
-}
+import { CardInfo, ExpirationDate } from '../../App';
 
 const ExpirationDateInputBox = ({
-  setCardInfo,
   expirationDate,
+  setCardInfo,
 }: {
+  expirationDate: ExpirationDate;
   setCardInfo: CallableFunction;
-  expirationDate: any;
 }) => {
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -54,6 +48,7 @@ const ExpirationDateInputBox = ({
                 width="s"
                 type="text"
                 maxLength={2}
+                placeholder={key === 'month' ? 'MM' : 'YY'}
               />
             );
           })}

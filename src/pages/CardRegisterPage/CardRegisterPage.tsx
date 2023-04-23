@@ -23,12 +23,12 @@ const CardRegisterPage = ({ setCardList }: { setCardList: CallableFunction }) =>
       month: '',
       year: '',
     },
+    ownerName: '',
+    securityCode: '',
     password: {
       first: '',
       second: '',
     },
-    ownerName: '',
-    securityCode: '',
   });
 
   const navigation = useNavigate();
@@ -43,16 +43,11 @@ const CardRegisterPage = ({ setCardList }: { setCardList: CallableFunction }) =>
       <CardPreview cardInfo={cardInfo} bgColor="#333333" />
       <styled.CardRegisterForm>
         <CardNumberInputBox numbers={cardInfo.numbers} setCardInfo={setCardInfo} />
-        <ExpirationDateInputBox
-          expirationDate={cardInfo.expirationDate}
-          setCardInfo={setCardInfo}
-        />
+        <ExpirationDateInputBox expirationDate={cardInfo.expirationDate} setCardInfo={setCardInfo} />
         <OwnerNameInputBox ownerName={cardInfo.ownerName} setCardInfo={setCardInfo} />
         <SecurityCodeInputBox securityCode={cardInfo.securityCode} setCardInfo={setCardInfo} />
         <PasswordInputBox password={cardInfo.password} setCardInfo={setCardInfo} />
-        <styled.CardInfoSubmitButton onClick={handleOnClickSubmitButton}>
-          다음
-        </styled.CardInfoSubmitButton>
+        <styled.CardInfoSubmitButton onClick={handleOnClickSubmitButton}>다음</styled.CardInfoSubmitButton>
       </styled.CardRegisterForm>
     </>
   );

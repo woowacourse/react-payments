@@ -4,11 +4,11 @@ import * as styled from './OwnerNameInputBox.styled';
 import { CardInfo } from '../../App';
 
 const OwnerNameInputBox = ({
-  setCardInfo,
   ownerName,
+  setCardInfo,
 }: {
+  ownerName: string | undefined;
   setCardInfo: CallableFunction;
-  ownerName: any;
 }) => {
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -38,7 +38,7 @@ const OwnerNameInputBox = ({
         </styled.LabelHeader>
         <styled.InputContainer>
           <Input
-            value={ownerName}
+            value={ownerName ? ownerName : ''}
             onChange={onChange}
             width="xl"
             type="text"

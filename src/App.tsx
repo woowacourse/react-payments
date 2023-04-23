@@ -4,21 +4,24 @@ import CardRegisterPage from './pages/CardRegisterPage/CardRegisterPage';
 import { useState } from 'react';
 import Header from './components/Header/Header';
 
-interface Numbers {
+export interface Numbers {
   first: string;
   second: string;
   third: string;
   fourth: string;
+  [key: string]: string;
 }
 
-interface ExpirationDate {
+export interface ExpirationDate {
   month: string;
   year: string;
+  [key: string]: string;
 }
 
-interface Password {
+export interface Password {
   first: string;
   second: string;
+  [key: string]: string;
 }
 
 export interface CardInfo {

@@ -2,21 +2,9 @@ import { ChangeEvent, useState } from 'react';
 import Input from '../Input/Input';
 import * as styled from './PasswordInputBox.styled';
 import { isNumeric } from '../../validator';
-import { CardInfo } from '../../App';
+import { CardInfo, Password } from '../../App';
 
-export interface PasswordsState {
-  first: string;
-  second: string;
-  [key: string]: string;
-}
-
-const PasswordInputBox = ({
-  password,
-  setCardInfo,
-}: {
-  password: any;
-  setCardInfo: CallableFunction;
-}) => {
+const PasswordInputBox = ({ password, setCardInfo }: { password: Password; setCardInfo: CallableFunction }) => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const onChange = ({ target: { name, value } }: ChangeEvent<HTMLInputElement>) => {
@@ -46,7 +34,7 @@ const PasswordInputBox = ({
           <span>카드 비밀번호</span>
         </styled.LabelHeader>
         <styled.InputContainer>
-          {Object.keys(password).map((key) => {
+          {Object.keys(password).map(key => {
             return (
               <Input
                 key={key}

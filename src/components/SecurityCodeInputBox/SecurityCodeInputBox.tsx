@@ -5,11 +5,11 @@ import { isNumeric } from '../../validator';
 import { CardInfo } from '../../App';
 
 const SecurityCodeInputBox = ({
-  setCardInfo,
   securityCode,
+  setCardInfo,
 }: {
+  securityCode: string;
   setCardInfo: CallableFunction;
-  securityCode: any;
 }) => {
   const [errorMessage, setErrorMessage] = useState('');
 
