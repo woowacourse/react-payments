@@ -1,3 +1,4 @@
+import { Issuer } from '../types';
 import BCCardLogo from '../assets/bc-logo.svg';
 import ShinhanCardLogo from '../assets/shinhan-logo.svg';
 import KakaoBankLogo from '../assets/kakaobank-logo.svg';
@@ -7,7 +8,7 @@ import LotteCardLogo from '../assets/lottecard-logo.svg';
 import HanaCardLogo from '../assets/hanacard-logo.svg';
 import KBCardLogo from '../assets/kbcard-logo.svg';
 
-const CARD_ISSUER_LOGO_IMAGE: Record<string, string> = {
+const CARD_ISSUER_LOGO_IMAGE: Record<Issuer, string> = {
   BC카드: BCCardLogo,
   신한카드: ShinhanCardLogo,
   카카오뱅크: KakaoBankLogo,

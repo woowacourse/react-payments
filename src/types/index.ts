@@ -1,7 +1,11 @@
+import { CARD_ISSUERS } from '../constants';
+
 interface SupportingTextMessage {
   default?: string;
   error?: string;
 }
+
+type Issuer = (typeof CARD_ISSUERS)[number];
 
 interface ExpirationDate {
   month: string;
@@ -26,6 +30,7 @@ type MultipleInputFieldCardInformation = 'password';
 
 export type {
   SupportingTextMessage,
+  Issuer,
   ExpirationDate,
   Card,
   CardInputValidation,
