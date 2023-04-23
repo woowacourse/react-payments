@@ -2,7 +2,7 @@ import React, { useState, useContext, useRef } from "react";
 import Input from "src/components/@common/Input";
 import FormLabel from "src/components/@common/FormLabel";
 import { ONLY_NUMBER_REGEXP } from "src/utils/regexp";
-import { inputValuesContext } from "src/InputValueContext";
+import { cardInfoContext } from "src/context/CardInfoContext";
 import ErrorSpan from "src/components/@common/ErrorSpan";
 import useAutoFocus from "src/hooks/useAutoFocus";
 import { Styled } from "./CardPassword.styles";
@@ -13,7 +13,7 @@ interface CardPasswordObj {
 }
 
 function CardPassword() {
-  const [cardInput, setCardInput] = useContext(inputValuesContext);
+  const [cardInput, setCardInput] = useContext(cardInfoContext);
 
   const [passwordError, setPasswordError] = useState(false);
 

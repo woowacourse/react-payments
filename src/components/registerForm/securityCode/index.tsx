@@ -3,11 +3,11 @@ import ErrorSpan from "src/components/@common/ErrorSpan";
 import FormLabel from "src/components/@common/FormLabel";
 import Input from "src/components/@common/Input";
 import { ONLY_NUMBER_REGEXP } from "src/utils/regexp";
-import { inputValuesContext } from "src/InputValueContext";
+import { cardInfoContext } from "src/context/CardInfoContext";
 import { Styled } from "./SecurityCode.styles";
 
 function SecurityCode() {
-  const [cardInput, setCardInput] = useContext(inputValuesContext);
+  const [cardInput, setCardInput] = useContext(cardInfoContext);
   const [error, setError] = useState(false);
 
   const codeChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {

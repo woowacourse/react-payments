@@ -3,13 +3,13 @@ import Input from "src/components/@common/Input";
 import FormLabel from "src/components/@common/FormLabel";
 import ErrorSpan from "src/components/@common/ErrorSpan";
 import { ONLY_NUMBER_REGEXP } from "src/utils/regexp";
-import { inputValuesContext } from "src/InputValueContext";
+import { cardInfoContext } from "src/context/CardInfoContext";
 import { CardNumberObj } from "src/interfaces";
 import useAutoFocus from "src/hooks/useAutoFocus";
 import { Styled } from "./CardNumber.styles";
 
 function CardNumber() {
-  const [cardInput, setCardInput] = useContext(inputValuesContext);
+  const [cardInput, setCardInput] = useContext(cardInfoContext);
 
   const [cardError, setCardError] = useState({
     isError: false,

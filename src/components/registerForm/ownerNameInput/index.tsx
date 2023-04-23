@@ -6,11 +6,11 @@ import {
   CONTINUOUS_EMPTY_REGEXP,
   ONLY_ENG_AND_EMPTY_REGEXP,
 } from "src/utils/regexp";
-import { inputValuesContext } from "src/InputValueContext";
+import { cardInfoContext } from "src/context/CardInfoContext";
 import { Styled } from "./OwnerNameInput.styles";
 
 function OwnerNameInput() {
-  const [cardInput, setCardInput] = useContext(inputValuesContext);
+  const [cardInput, setCardInput] = useContext(cardInfoContext);
 
   const [error, setError] = useState({
     isError: false,

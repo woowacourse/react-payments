@@ -4,7 +4,7 @@ import ExpireDate from "src/components/registerForm/expireDate";
 import OwnerNameInput from "src/components/registerForm/ownerNameInput";
 import SecurityCode from "src/components/registerForm/securityCode";
 import CardPassword from "src/components/registerForm/cardPassword";
-import { inputValuesContext } from "src/InputValueContext";
+import { cardInfoContext } from "src/context/CardInfoContext";
 import useCardList from "src/hooks/useCardList";
 import { useNavigate } from "react-router-dom";
 import { Styled } from "./CardRegisterForm.styles";
@@ -15,7 +15,7 @@ const objectValueToString = (obj: { [key: string]: string }) => {
 
 function CardRegisterForm() {
   const navigation = useNavigate();
-  const [cardInput] = useContext(inputValuesContext);
+  const [cardInput] = useContext(cardInfoContext);
   const [nextShow, setNextShow] = useState(false);
   const { saveCard } = useCardList({ key: "card-list" });
 
