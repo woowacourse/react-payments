@@ -2,6 +2,12 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactComponent as Dot } from '../assets/white-dot.svg';
 
+const OWNER_VISIBLE_LENGTH = 12;
+const CARD_NUMBER = {
+  VISIBLE_LENGTH: 8,
+  EACH_LENGTH: 4,
+};
+
 // TODO: ObjectValuesUnion 타입이 어디에 있어야 할지?
 type ObjectValuesUnion<T> = T[keyof T];
 
@@ -125,7 +131,7 @@ function Card({ cardInformation = defaultCardInformation, cardType }: CardProps)
           <CardInfoTemplate>
             <CardNumberTemplate>
               {cardNumber?.map((number, index) =>
-                index < 2 ? (
+                index < CARD_NUMBER.VISIBLE_LENGTH / CARD_NUMBER.EACH_LENGTH ? (
                   <CardNumberItem>{number}</CardNumberItem>
                 ) : (
                   <CardNumberItem>
@@ -137,7 +143,7 @@ function Card({ cardInformation = defaultCardInformation, cardType }: CardProps)
               )}
             </CardNumberTemplate>
             <CardDetail>
-              <div>{owner?.slice(0, 12)}</div>
+              <div>{owner?.slice(0, OWNER_VISIBLE_LENGTH)}</div>
               {expirationDate && (
                 <div>
                   {expirationDate.month.padStart(2, '0')}/{expirationDate.year.padStart(2, '0')}
