@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-type ValidateFunctions<Data> = Partial<{
+type ValidateFunctions<Data extends object> = Partial<{
   [K in keyof Data]: (value: Data[K]) => void;
 }>;
 
