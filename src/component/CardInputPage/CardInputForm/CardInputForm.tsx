@@ -45,7 +45,6 @@ export default function CardInputForm(props: Props) {
 
   const [isCardNumberComplete, setIsCardNumberComplete] = useState(false);
   const [isExpirationDateComplete, setIsExpirationDateComplete] = useState(false);
-  const [isOwnerComplete, setIsOwnerComplete] = useState(false);
   const [isSecurityComplete, setIsSecurityComplete] = useState(false);
   const [isPasswordComplete, setIsPasswordComplete] = useState(false);
 
@@ -109,7 +108,6 @@ export default function CardInputForm(props: Props) {
         setPreviewDataHandler={setCardPreviewDataFromForm}
       />
       <InputBoxOwner
-        setIsComplete={setIsOwnerComplete}
         setPreviewDataHandler={setCardPreviewDataFromForm}
       />
       <InputBoxSecurityCode setIsComplete={setIsSecurityComplete} />

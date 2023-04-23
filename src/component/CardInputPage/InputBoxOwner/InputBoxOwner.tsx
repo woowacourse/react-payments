@@ -5,12 +5,11 @@ import "./inputBoxOwner.css";
 import CONSTANT from "../../../Constant";
 
 interface Props {
-  setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
   setPreviewDataHandler: () => void;
 }
 
 export default function InputBoxOwner(props: Props) {
-  const { setIsComplete, setPreviewDataHandler } = props;
+  const { setPreviewDataHandler } = props;
 
   const [nameLength, setNameLength] = useState(0);
 
@@ -22,7 +21,6 @@ export default function InputBoxOwner(props: Props) {
 
     e.target.value = value.slice(0, CONSTANT.OWNER_NAME_MAX_LENGTH);
 
-    setIsComplete(true);
     setNameLength(e.target.value.trim().length);
   };
   
