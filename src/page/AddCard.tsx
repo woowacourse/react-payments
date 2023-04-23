@@ -39,7 +39,7 @@ export const AddCard = ({ addNewCard }: AddCardProps) => {
 const BackButton = styled.button`
   position: absolute;
   font-size: 24px;
-  padding: 13px 0 0 10px;
+  padding: 12px 0 0 12px;
 `;
 
 const HeaderWrapper = styled.div`
