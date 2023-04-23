@@ -1,7 +1,5 @@
 import React from 'react';
 
-import passwordDotImg from '../asset/password_dot.png';
-
 import { fetchData } from '../utils/fetchData';
 import { useNavigate } from 'react-router-dom';
 import './FormCardAdd.css';
@@ -10,6 +8,7 @@ import AddCardNumberInput from './AddCardNumberInput';
 import AddCardExpireDateInput from './AddCardExpireDateInput';
 import AddCardOwnerInput from './AddCardOwnerInput';
 import AddCardSecurityCodeInput from './AddCardSecurityCodeInput';
+import AddCardPasswordInput from './AddCardPasswordInput';
 
 const FormCardAdd = ({
   cardNumber,
@@ -54,31 +53,7 @@ const FormCardAdd = ({
       <AddCardExpireDateInput cardExpire={cardExpire} />
       <AddCardOwnerInput cardOwner={cardOwner} />
       <AddCardSecurityCodeInput securityCode={securityCode} />
-      <div className="card-password-container">
-        <span className="form-label">카드 비밀번호</span>
-        <div className="card-password-input-box">
-          <input
-            className="input-password-container password-single"
-            type="password"
-            maxLength={1}
-            minLength={1}
-            value={cardPassword1.value}
-            onChange={cardPassword1.onChange}
-            required
-          />
-          <input
-            className="input-password-container password-single"
-            type="password"
-            maxLength={1}
-            minLength={1}
-            value={cardPassword2.value}
-            onChange={cardPassword2.onChange}
-            required
-          />
-          <img src={passwordDotImg} alt="비밀번호" />
-          <img src={passwordDotImg} alt="비밀번호" />
-        </div>
-      </div>
+      <AddCardPasswordInput cardPassword1={cardPassword1} cardPassword2={cardPassword2} />
       <div className="add-card-submit">
         <button type="submit">다음</button>
       </div>

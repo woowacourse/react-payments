@@ -28,14 +28,15 @@ export type PasswordInputHook<T> = [T, (e: React.ChangeEvent<HTMLInputElement>) 
 
 export type FormCardAddProps = {
   cardNumber: InputHook<CardNumber>;
-  cardExpire: InputHook;
-  cardOwner: InputHook;
-  securityCode: InputHook;
-  cardPassword1: InputHook;
-  cardPassword2: InputHook;
+  cardExpire: InputHook<string>;
+  cardOwner: InputHook<string>;
+  securityCode: InputHook<string>;
+  cardPassword1: InputHook<string>;
+  cardPassword2: InputHook<string>;
 };
 
 export type AddCardNumberInputProps = Pick<FormCardAddProps, 'cardNumber'>;
 export type AddCardExpireDateInputProps = Pick<FormCardAddProps, 'cardExpire'>;
 export type AddCardOwnerInputProps = Pick<FormCardAddProps, 'cardOwner'>;
 export type AddCardSecurityCodeInputProps = Pick<FormCardAddProps, 'securityCode'>;
+export type AddCardPasswordInputProps = Pick<FormCardAddProps, 'password1', 'password2'>;
