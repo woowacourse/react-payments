@@ -19,8 +19,8 @@ const MainPage = () => {
       <Header navigator={false} title="보유카드" />
 
       {cardInfoArray.length > 0 ? (
-        cardInfoArray.map((cardInfo: Card) => (
-          <CardPreview key={cardInfo.number1} cardInfo={cardInfo}></CardPreview>
+        cardInfoArray.map((cardInfo: Card, index: number) => (
+          <CardPreview key={index} cardInfo={cardInfo}></CardPreview>
         ))
       ) : (
         <S.Message>새로운 카드를 등록해 주세요.</S.Message>
