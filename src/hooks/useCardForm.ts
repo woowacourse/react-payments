@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card } from '../types';
 import formatChecker from '../utils/formatChecker';
@@ -6,7 +6,7 @@ import formatter from '../utils/formatter';
 import { isKeyOfObj } from '../utils/typeUtils';
 import { validateMultipleInputField } from '../utils/validator';
 
-const useCardForm = (addCard: Dispatch<SetStateAction<Card[]>>) => {
+const useCardForm = (addCard: (cardInformation: Card) => void) => {
   const [cardInformation, setCardInformation] = useState<Card>({
     issuer: '',
     cardNumber: '',
@@ -53,9 +53,7 @@ const useCardForm = (addCard: Dispatch<SetStateAction<Card[]>>) => {
   );
 
   const handleSubmit = () => {
-    addCard((cardList) => {
-      return [...cardList, cardInformation];
-    });
+    addCard(cardInformation);
     navigate('/');
   };
 

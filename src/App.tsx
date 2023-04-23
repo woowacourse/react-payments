@@ -1,24 +1,20 @@
-import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { Card } from './types';
 import CardListPage from './pages/CardListPage';
 import CardAddPage from './pages/CardAddPage';
-import { getLocalStorage, saveToLocalStorage } from './utils/localStorage';
+import CardRegisteredPage from './pages/CardRegisteredPage';
+import { PaymentsProvider } from './contexts/PaymentsContext';
 
 function App() {
-  const [cardList, setCardList] = useState<Card[]>(getLocalStorage() ?? []);
-
-  useEffect(() => {
-    saveToLocalStorage(cardList);
-  }, [cardList]);
-
   return (
-    <div className="app">
-      <Routes>
-        <Route path="/" element={<CardListPage cardList={cardList} />} />
-        <Route path="/add-card" element={<CardAddPage addCard={setCardList} />} />
-      </Routes>
-    </div>
+    <PaymentsProvider>
+      <div className="app">
+        <Routes>
+          <Route path="/" element={<CardListPage />} />
+          <Route path="/add-card" element={<CardAddPage />} />
+          <Route path="/registered" element={<CardRegisteredPage />} />
+        </Routes>
+      </div>
+    </PaymentsProvider>
   );
 }
 

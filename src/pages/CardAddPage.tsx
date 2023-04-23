@@ -1,15 +1,12 @@
-import { Dispatch, SetStateAction } from 'react';
-import { Card } from '../types';
+import { useContext } from 'react';
 import Header from '../components/common/Header/Header';
 import CardItem from '../components/CardItem/CardItem';
 import CardAddForm from '../components/CardAddForm/CardAddForm';
 import { useCardForm } from '../hooks/useCardForm';
+import { PaymentsContext } from '../contexts/PaymentsContext';
 
-interface CardAddPageProps {
-  addCard: Dispatch<SetStateAction<Card[]>>;
-}
-
-function CardAddPage({ addCard }: CardAddPageProps) {
+function CardAddPage() {
+  const { addCard } = useContext(PaymentsContext);
   const {
     cardInformation,
     handleSingleInputFieldChange,

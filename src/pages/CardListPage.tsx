@@ -1,14 +1,13 @@
-import { Card } from '../types';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/common/Header/Header';
 import Button from '../components/common/Button/Button';
 import CardList from '../components/CardList/CardList';
+import { PaymentsContext } from '../contexts/PaymentsContext';
 
-interface CardListPageProps {
-  cardList: Card[];
-}
+function CardListPage() {
+  const { cardList } = useContext(PaymentsContext);
 
-function CardListPage({ cardList }: CardListPageProps) {
   return (
     <>
       <Header content="나의 카드" />
