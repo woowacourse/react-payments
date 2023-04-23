@@ -62,9 +62,6 @@ export default function InputBoxExpirationDate(props: Props) {
         onChange={changeExpirationDate}
         placeholder="MM / YY"
         inputMode="numeric"
-        onBlur={(e: ChangeEvent<HTMLInputElement>) => {
-          console.log(e);
-        }}
       ></Input>
       <p className={inputStatus === INPUT_STATUS.ERROR ? "visible" : ""}>
         {CARD_ERROR_MESSAGE.INPUT_CARD_EXPIRATION_DATE}

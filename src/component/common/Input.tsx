@@ -16,7 +16,6 @@ export default function Input(props: Props) {
     defaultValue,
     style,
     className,
-    onBlur,
   } = props;
   return (
     <input
@@ -26,7 +25,6 @@ export default function Input(props: Props) {
       type={type}
       inputMode={inputMode}
       onChange={onChange}
-      onBlur={onBlur}
       placeholder={placeholder}
       value={defaultValue}
     />
