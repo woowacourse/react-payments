@@ -16,8 +16,6 @@ function useCardNumber() {
     }
 
     if (cardNumberOrigin.length > cardNumber.length) {
-      console.log(cardNumber);
-      console.log(cardNumberOrigin);
       setCardNumberOrigin(deleteNumber(realNumber));
     }
   };

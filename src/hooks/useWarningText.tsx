@@ -27,6 +27,7 @@ function useWarningText(minLength?: number, regExp?: RegExp, name?: string) {
         ? setWarningText(`카드 유효기간은 MM/YY 형식이어야 합니다.`)
         : setWarningText(`입력 숫자는 ${minLength}자 이어야 합니다`);
     }
+    if (name === "date") isRightMonth(inputNumber);
   };
 
   const isRightMonth = (inputNumber: string) => {
