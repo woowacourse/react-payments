@@ -12,13 +12,14 @@ import { useNavigate } from "react-router-dom";
 import "./cardInputForm.css";
 
 interface CreditCard {
-  name?: string;
-  date?: string;
+  name: string;
+  date: string;
   bank?: string;
-  number?: number[];
-  securityCode?: number;
-  password?: number;
+  number: number[];
+  securityCode: number;
+  password: number;
 }
+
 interface Props {
   addNewCard: (card: CreditCard) => void;
 }
@@ -28,8 +29,7 @@ export default function CardInputForm(props: Props) {
   const [isFormFilled, setIsFormFilled] = useState(false);
 
   const [isCardNumberComplete, setIsCardNumberComplete] = useState(false);
-  const [isExpirationDateComplete, setIsExpirationDateComplete] =
-    useState(false);
+  const [isExpirationDateComplete, setIsExpirationDateComplete] = useState(false);
   const [isOwnerComplete, setIsOwnerComplete] = useState(false);
   const [isSecurityComplete, setIsSecurityComplete] = useState(false);
   const [isPasswordComplete, setIsPasswordComplete] = useState(false);
@@ -38,17 +38,16 @@ export default function CardInputForm(props: Props) {
 
   const formElement = useRef<HTMLFormElement>(null);
 
-  function event(e: SubmitEvent) {
+  const event = (e: SubmitEvent) => {
     e.preventDefault();
 
     if (!formElement.current) return;
 
-    console.log(formElement.current);
     const formData = new FormData(formElement.current);
 
     const card: CreditCard = {
-      name: formData.get("card-owner")?.toString(),
-      date: formData.get("expiration-date")?.toString(),
+      name: (formData.get("card-owner")|| '').toString(),
+      date: (formData.get("expiration-date") || '').toString(),
       number: [
         formData.get("card-number-1"),
         formData.get("card-number-2"),
