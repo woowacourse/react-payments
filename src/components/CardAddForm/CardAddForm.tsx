@@ -1,6 +1,6 @@
 import styles from './style.module.css';
 import { FormEvent, useEffect, useRef } from 'react';
-import { Card } from '../../types';
+import { CardFormData } from '../../types';
 import CardNumber from './CardNumber/CardNumber';
 import CardExpirationDate from './CardExpirationDate/CardExpirationDate';
 import CardOwnerName from './CardOwnerName/CardOwnerName';
@@ -12,7 +12,7 @@ import { useCardValidator } from '../../hooks/useCardValidation';
 import CardIssuer from './CardIssuer/CardIssuer';
 
 interface CardAddFormProps {
-  cardInformation: Card;
+  cardInformation: CardFormData;
   handleSingleInputFieldChange: (name: string, value: string) => void;
   handleMultipleInputFieldChange: (name: string, value: string, index: number) => void;
   handleCardInformationSubmit: () => void;

@@ -1,11 +1,11 @@
 import styles from './style.module.css';
 import { ComponentPropsWithoutRef } from 'react';
-import { CardInformation } from '../../types';
+import { CardDisplayInformation } from '../../types';
 import { CARD_NUMBER_UNIT_MAX_LENGTH, REGEX, SECURITY_TEXT_ICON } from '../../constants';
 import { CARD_BG_COLOR } from '../../constants/cardColors';
 
 interface CardItemProps extends ComponentPropsWithoutRef<'div'> {
-  information: CardInformation;
+  information: CardDisplayInformation;
 }
 
 function CardItem({ information, className }: CardItemProps) {

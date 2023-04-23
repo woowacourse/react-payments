@@ -1,13 +1,13 @@
 import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Card } from '../types';
+import { CardFormData } from '../types';
 import formatChecker from '../utils/formatChecker';
 import formatter from '../utils/formatter';
 import { isKeyOfObj } from '../utils/typeUtils';
 import { validateMultipleInputField } from '../utils/validator';
 
-const useCardForm = (addCard: (cardInformation: Card) => void) => {
-  const [cardInformation, setCardInformation] = useState<Card>({
+const useCardForm = (addCard: (cardInformation: CardFormData) => void) => {
+  const [cardInformation, setCardInformation] = useState<CardFormData>({
     issuer: '',
     cardNumber: '',
     expirationDate: {

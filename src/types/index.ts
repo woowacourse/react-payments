@@ -13,6 +13,8 @@ interface ExpirationDate {
 }
 
 interface Card {
+  id: string;
+  cardName: string;
   issuer: Issuer | '';
   cardNumber: string;
   expirationDate: ExpirationDate;
@@ -21,11 +23,13 @@ interface Card {
   password: string[];
 }
 
-type CardInputValidation = {
-  [K in keyof Card]: boolean;
-};
+type CardFormData = Omit<Card, 'id' | 'cardName'>;
 
-type CardInformation = Pick<Card, 'issuer' | 'cardNumber' | 'expirationDate' | 'ownerName'>;
+type CardDisplayInformation = Pick<Card, 'issuer' | 'cardNumber' | 'expirationDate' | 'ownerName'>;
+
+type CardInputValidation = {
+  [K in keyof CardFormData]: boolean;
+};
 
 type MultipleInputFieldCardInformation = 'password';
 
@@ -34,7 +38,8 @@ export type {
   Issuer,
   ExpirationDate,
   Card,
+  CardFormData,
+  CardDisplayInformation,
   CardInputValidation,
-  CardInformation,
   MultipleInputFieldCardInformation,
 };
