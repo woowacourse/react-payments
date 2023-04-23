@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { convertSecuredCreditCard } from 'domains/creditCard';
 import Input from '../../../components/Input';
 import * as S from '../style';
@@ -11,7 +11,6 @@ type Props = {
 function CreditCardNumberInput({ creditCardNumber, setCreditCardNumber }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [markedCreditCardNumber, setMarkedCreditCardNumber] = useState('');
-  const [error, setError] = useState(false);
 
   const handleChangeCreditCardNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newCreditCarNumber = event.target.value.replace(/\D/g, '');
@@ -27,13 +26,7 @@ function CreditCardNumberInput({ creditCardNumber, setCreditCardNumber }: Props)
     setCreditCardNumber(newCreditCarNumber);
   };
 
-  useEffect(() => {
-    if (creditCardNumber.length > 0 && creditCardNumber.length < 16) {
-      setError(true);
-    } else {
-      setError(false);
-    }
-  }, [creditCardNumber]);
+  const isError = creditCardNumber.length > 0 && creditCardNumber.length < 16;
 
   return (
     <S.RelativeBox>
@@ -50,7 +43,7 @@ function CreditCardNumberInput({ creditCardNumber, setCreditCardNumber }: Props)
         }}
         onChange={() => { }}
       />
-      {error && <S.ErrorMessage>카드번호는 16자리의 숫자로만 이루어져야 합니다.</S.ErrorMessage>}
+      {isError && <S.ErrorMessage>카드번호는 16자리의 숫자로만 이루어져야 합니다.</S.ErrorMessage>}
       <S.HiddentInput
         ref={inputRef}
         type="string"
