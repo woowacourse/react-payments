@@ -74,6 +74,10 @@ export const NewCreditCardPage = () => {
 
   const navigate = useNavigate();
 
+  const handleClickBackButton = () => {
+    navigate(-1);
+  };
+
   const handleCardNumbersChange = (value: string) => {
     setNewCardField('cardNumbers', value);
   };
@@ -104,7 +108,7 @@ export const NewCreditCardPage = () => {
 
   return (
     <Page>
-      <Page.Header leading={<BackButton />}>카드추가</Page.Header>
+      <Page.Header leading={<BackButton onClick={handleClickBackButton} />}>카드추가</Page.Header>
       <Content>
         <CreditCardView
           name={newCard.name}

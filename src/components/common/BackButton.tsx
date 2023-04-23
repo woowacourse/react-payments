@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Button = styled.button`
@@ -9,12 +8,12 @@ const Button = styled.button`
   transform: rotate(45deg);
 `;
 
-export const BackButton = () => {
-  const navigate = useNavigate();
+type BackButtonProps = {
+  onClick?: () => void;
+};
 
-  const handleOnClickBackButton = () => {
-    navigate(-1);
-  };
+export const BackButton = (props: BackButtonProps) => {
+  const { onClick } = props;
 
-  return <Button onClick={handleOnClickBackButton} />;
+  return <Button onClick={onClick} />;
 };

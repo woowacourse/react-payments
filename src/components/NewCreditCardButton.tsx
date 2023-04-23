@@ -20,10 +20,11 @@ const Button = styled.button`
 
 type NewCreditCardButtonProps = {
   helperText?: boolean;
+  onClick?: () => void;
 };
 
 export const NewCreditCardButton = (props: NewCreditCardButtonProps) => {
-  const { helperText } = props;
+  const { helperText, onClick } = props;
   const navigate = useNavigate();
 
   const handleOnClickNewCreditCardButton = () => {
@@ -37,7 +38,7 @@ export const NewCreditCardButton = (props: NewCreditCardButtonProps) => {
           새로운 카드를 등록해주세요.
         </Text>
       )}
-      <Button onClick={handleOnClickNewCreditCardButton}>+</Button>
+      <Button onClick={onClick}>+</Button>
     </ButtonContainer>
   );
 };

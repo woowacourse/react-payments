@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { usePayments } from '../../hooks/usePayments';
 import { CreditCardView } from '../CreditCardView';
@@ -13,7 +14,12 @@ const Content = styled.main`
 `;
 
 export const CreditCardListPage = () => {
+  const navigate = useNavigate();
   const { creditCards } = usePayments();
+
+  const handleClickNewCreditCardButton = () => {
+    navigate('/register');
+  };
 
   return (
     <Page>
@@ -28,7 +34,10 @@ export const CreditCardListPage = () => {
           />
         ))}
 
-        <NewCreditCardButton helperText={creditCards.length === 0} />
+        <NewCreditCardButton
+          helperText={creditCards.length === 0}
+          onClick={handleClickNewCreditCardButton}
+        />
       </Content>
     </Page>
   );
