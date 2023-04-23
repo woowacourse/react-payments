@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import Card from '../../components/Card';
+import Card, { CARD_TYPE } from '../../components/Card';
 import Header from '../../components/Header';
 import PaymentsInputContainer from '../../containers/PaymentsInputContainer';
 import useCardNumber from './hooks/useCardNumber';
@@ -24,7 +24,7 @@ function CardRegistration() {
     <>
       <Header title="카드 추가" hasBackHistory />
       <MainCardRegistration>
-        <Card isAddForm cardInformation={{ cardNumber, expirationDate, owner }} />
+        <Card cardType={CARD_TYPE.DEFAULT} cardInformation={{ cardNumber, expirationDate, owner }} />
         <PaymentsInputContainer setCardInformation={{ setCardNumber, setExpirationDate, setOwner }} />
       </MainCardRegistration>
     </>

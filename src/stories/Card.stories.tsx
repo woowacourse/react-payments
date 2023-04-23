@@ -1,4 +1,4 @@
-import Card from '../components/Card';
+import Card, { CARD_TYPE } from '../components/Card';
 import type { Meta, StoryObj } from '@storybook/react';
 
 type Story = StoryObj<typeof Card>;
@@ -17,14 +17,14 @@ export const Default: Story = {
       expirationDate: { year: 'YY', month: 'MM' },
       owner: 'NAME',
     },
-    isAddForm: true,
+    cardType: CARD_TYPE.DEFAULT,
   },
 };
 
-export const BlankCard: Story = {
-  args: { isAddForm: true },
+export const RegisterCard: Story = {
+  args: { cardType: CARD_TYPE.REGISTER_BUTTON },
 };
 
-export const AddCard: Story = {
-  args: { isAddForm: false },
+export const DefaultCard: Story = {
+  args: { cardType: CARD_TYPE.DEFAULT },
 };

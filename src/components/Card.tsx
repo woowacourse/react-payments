@@ -2,11 +2,30 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactComponent as Dot } from '../assets/white-dot.svg';
 
-const CardContainer = styled.div<{ isAddFrom: boolean }>`
+// TODO: ObjectValuesUnion 타입이 어디에 있어야 할지?
+type ObjectValuesUnion<T> = T[keyof T];
+
+export const CARD_TYPE = {
+  REGISTER_BUTTON: 'REGISTER_BUTTON',
+  DEFAULT: 'DEFAULT',
+} as const;
+
+type CardTypeUnion = ObjectValuesUnion<typeof CARD_TYPE>;
+
+const BACKGROUND_COLOR = {
+  REGISTER_BUTTON: '#E5E5E5',
+  DEFAULT: '#333333',
+} as const;
+
+type CardConatinerProps = {
+  cardType: CardTypeUnion;
+};
+
+const CardContainer = styled.div<CardConatinerProps>`
   position: relative;
   width: 214px;
   height: 134px;
-  background-color: ${props => (props.isAddFrom ? `#333333` : `#E5E5E5`)};
+  background-color: ${props => BACKGROUND_COLOR[props.cardType]};
   font-size: 18px;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
@@ -66,7 +85,7 @@ const AddButton = styled.button`
 
 interface CardProps {
   cardInformation?: CardInformation;
-  isAddForm: boolean;
+  cardType: CardTypeUnion;
 }
 
 interface CardInformation {
@@ -90,11 +109,17 @@ const defaultCardInformation: CardInformation = {
   owner: 'NAME',
 };
 
-function Card({ cardInformation = defaultCardInformation, isAddForm }: CardProps) {
+function Card({ cardInformation = defaultCardInformation, cardType }: CardProps) {
   const { cardNumber, expirationDate, owner } = cardInformation;
+
   return (
-    <CardContainer isAddFrom={isAddForm}>
-      {isAddForm ? (
+    <CardContainer cardType={cardType}>
+      {cardType === CARD_TYPE.REGISTER_BUTTON && (
+        <Link to="/registration">
+          <AddButton type="button">+</AddButton>
+        </Link>
+      )}
+      {cardType === CARD_TYPE.DEFAULT && (
         <>
           <ICChipTemplate />
           <CardInfoTemplate>
@@ -121,10 +146,6 @@ function Card({ cardInformation = defaultCardInformation, isAddForm }: CardProps
             </CardDetail>
           </CardInfoTemplate>
         </>
-      ) : (
-        <Link to="/registration">
-          <AddButton type="button">+</AddButton>
-        </Link>
       )}
     </CardContainer>
   );

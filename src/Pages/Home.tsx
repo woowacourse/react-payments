@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Card, { CardInformation } from '../components/Card';
+import Card, { CARD_TYPE, CardInformation } from '../components/Card';
 import Header from '../components/Header';
 import useWrappingContext from '../hooks/useWrappingContext';
 import CardListStore from '../store';
@@ -32,9 +32,9 @@ function Home() {
       <MainHome>
         <Message>새로운 카드를 등록해주세요.</Message>
         {cardList?.map((cardInformation: CardInformation) => (
-          <Card cardInformation={cardInformation} isAddForm />
+          <Card cardInformation={cardInformation} cardType={CARD_TYPE.DEFAULT} />
         ))}
-        <Card isAddForm={false} />
+        <Card cardType={CARD_TYPE.REGISTER_BUTTON} />
       </MainHome>
     </>
   );
