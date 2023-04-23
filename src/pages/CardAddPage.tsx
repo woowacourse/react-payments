@@ -10,8 +10,13 @@ interface CardAddPageProps {
 }
 
 function CardAddPage({ addCard }: CardAddPageProps) {
-  const { cardInformation, onSingleInputFieldChange, onMultipleInputFieldsChange, handleSubmit } =
-    useCardForm(addCard);
+  const {
+    cardInformation,
+    handleSingleInputFieldChange,
+    onSingleInputFieldChange,
+    onMultipleInputFieldsChange,
+    handleSubmit,
+  } = useCardForm(addCard);
 
   return (
     <>
@@ -28,6 +33,7 @@ function CardAddPage({ addCard }: CardAddPageProps) {
         <CardAddForm
           cardInformation={cardInformation}
           onSingleInputFieldChange={onSingleInputFieldChange}
+          handleSingleInputFieldChange={handleSingleInputFieldChange}
           onMultipleInputFieldsChange={onMultipleInputFieldsChange}
           handleCardInformationSubmit={handleSubmit}
         />

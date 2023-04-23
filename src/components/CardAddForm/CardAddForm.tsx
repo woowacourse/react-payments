@@ -9,10 +9,12 @@ import CardPassword from './CardPassword/CardPassword';
 import Button from '../common/Button/Button';
 import { useFormComplete } from '../../hooks/useFormComplete';
 import { useCardValidator } from '../../hooks/useCardValidation';
+import CardIssuer from './CardIssuer/CardIssuer';
 
 interface CardAddFormProps {
   cardInformation: Card;
   onSingleInputFieldChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  handleSingleInputFieldChange: (name: string, value: string) => void;
   onMultipleInputFieldsChange: (event: ChangeEvent<HTMLInputElement>) => void;
   handleCardInformationSubmit: () => void;
 }
@@ -20,6 +22,7 @@ interface CardAddFormProps {
 function CardAddForm({
   cardInformation,
   onSingleInputFieldChange,
+  handleSingleInputFieldChange,
   onMultipleInputFieldsChange,
   handleCardInformationSubmit,
 }: CardAddFormProps) {
@@ -44,6 +47,7 @@ function CardAddForm({
 
   return (
     <form ref={formRef} className={styles.form} onSubmit={onSubmit}>
+      <CardIssuer onInputChange={handleSingleInputFieldChange} value={cardInformation.issuer} />
       <CardNumber
         onInputChange={onSingleInputFieldChange}
         changeInputValidation={handleValidationChange}

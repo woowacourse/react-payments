@@ -21,6 +21,19 @@ const useCardForm = (addCard: Dispatch<SetStateAction<Card[]>>) => {
 
   const navigate = useNavigate();
 
+  const handleSingleInputFieldChange = useCallback((name: string, value: string) => {
+    if (isKeyOfObj(formatChecker, name) && !formatChecker[name](value)) return;
+
+    const formattedValue = isKeyOfObj(formatter, name) ? formatter[name](value) : value;
+
+    setCardInformation((information) => {
+      return {
+        ...information,
+        [name]: formattedValue,
+      };
+    });
+  }, []);
+
   const onSingleInputFieldChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     const { name } = event.target;
     const value = event.target.dataset.value ?? event.target.value;
@@ -67,6 +80,7 @@ const useCardForm = (addCard: Dispatch<SetStateAction<Card[]>>) => {
 
   return {
     cardInformation,
+    handleSingleInputFieldChange,
     onSingleInputFieldChange,
     onMultipleInputFieldsChange,
     handleSubmit,
