@@ -29,7 +29,7 @@
 
 .word {
   color: var(--grey-100);
-  font-size: 13px;
+  font-size: 12px;
   height: 16px;
 }
 
@@ -38,8 +38,10 @@
   justify-content: space-between;
 }
 
-.cardNumber {
+.card-number {
   color: var(--grey-100);
-  font-size: large;
+  font-size: 16px;
+  line-height: 23px;
   height: 23px;
+  text-align: center;
 }

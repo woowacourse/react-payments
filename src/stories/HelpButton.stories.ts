@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import HelpButton from '../components/HelpButton/HelpButton';
+import HelpButton from '../components/common/HelpButton/HelpButton';
 
 const meta = {
   component: HelpButton,

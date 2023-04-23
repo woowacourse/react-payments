@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import CardInfoInput from '../CardInfoInput/CardInfoInput';
-import Input from '../Input/Input';
+import Input from '../../common/Input/Input';
 
 type CardNumberInputProps = {
   updateCardNumber: (cardNumber: string) => void;

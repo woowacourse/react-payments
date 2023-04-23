@@ -3,7 +3,6 @@
   flex-direction: column;
   width: 100%;
   height: 70px;
-  background-color: aqua;
 }
 
 .info {
@@ -14,6 +13,7 @@
 }
 
 .children {
+  height: 45px;
   display: flex;
   gap: 10px;
 }

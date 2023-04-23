@@ -1,6 +1,6 @@
 import AddCardButton from '../components/AddCardButton/AddCardButton';
 import CardList from '../components/CardList/CardList';
-import EmptyHeader from '../components/EmptyHeader/EmptyHeader';
+import Header from '../components/common/Header/Header';
 import { CardInfo } from '../types';
 
 type HomeProps = {

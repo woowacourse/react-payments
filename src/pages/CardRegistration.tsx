@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import AddCardForm from '../components/AddCardForm/AddCardForm';
-import ArrowHeader from '../components/ArrowHeader/ArrowHeader';
-import CardPreview from '../components/CardPreview/CardPreview';
+import CardPreview from '../components/common/CardPreview/CardPreview';
 import type { CardInfo } from '../types';
+import Header from '../components/common/Header/Header';
 
 type CardRegistrationProps = {
   registerNewCard: (cardInfo: CardInfo) => void;

@@ -6,8 +6,3 @@
   padding: 28px;
   font-size: small;
 }
-
-.button {
-  display: flex;
-  justify-content: flex-end;
-}

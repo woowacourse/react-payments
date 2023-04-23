@@ -1,4 +1,4 @@
-import CardPreview from '../CardPreview/CardPreview';
+import CardPreview from '../common/CardPreview/CardPreview';
 import { CardInfo } from '../../types';
 import styles from './CardList.module.css';
 

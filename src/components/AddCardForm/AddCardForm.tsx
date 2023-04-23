@@ -1,12 +1,12 @@
 import styles from './AddCardForm.module.css';
-import NextButton from '../NextButton/NextButton';
-import CardNumberInput from '../CardNumberInput/CardNumberInput';
-import ExpirationDateInput from '../ExpirationDateInput/ExpirationDateInput';
-import CardOwnerName from '../CardOwnerName/CardOwnerName';
-import CardSecurityCodeInput from '../CardSecurityCodeInput/CardSecurityCodeInput';
-import CardPasswordInput from '../CardPasswordInput/CardPasswordInput';
+import CardNumberInput from './CardNumberInput/CardNumberInput';
+import ExpirationDateInput from './ExpirationDateInput/ExpirationDateInput';
+import CardOwnerName from './CardOwnerName/CardOwnerName';
+import CardSecurityCodeInput from './CardSecurityCodeInput/CardSecurityCodeInput';
+import CardPasswordInput from './CardPasswordInput/CardPasswordInput';
 import { useNavigate } from 'react-router-dom';
 import type { CardInfo } from '../../types';
+import FooterButton from '../common/FooterButton/FooterButton';
 
 type AddCardFormProps = {
   updateCardNumber: (cardNumber: string) => void;
@@ -59,9 +59,7 @@ const AddCardForm = ({
       <CardOwnerName updateCardOwnerName={updateCardOwnerName} />
       <CardSecurityCodeInput />
       <CardPasswordInput />
-      <div className={styles.button}>
-        <NextButton />
-      </div>
+      <FooterButton title="다음" />
     </form>
   );
 };

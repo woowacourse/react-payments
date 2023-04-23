@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import CardInfoInput from '../CardInfoInput/CardInfoInput';
-import HelpButton from '../HelpButton/HelpButton';
-import Input from '../Input/Input';
+import HelpButton from '../../common/HelpButton/HelpButton';
+import Input from '../../common/Input/Input';
 
 const CardSecurityCodeInput = () => {
   const [securityCode, setSecurityCode] = useState('');
@@ -16,7 +16,7 @@ const CardSecurityCodeInput = () => {
   return (
     <CardInfoInput title="보안 코드(CVC/CVV)">
       <Input width="30%" onChange={updateSecurityCode} maxLength={3} value={securityCode} />
-      <HelpButton message="카드 뒷면 3자리 숫자" />
+      <HelpButton message="보안 코드(CVC/CVV)는 신용카드나 체크카드의 뒷면에 있는 3자리의 번호입니다." />
     </CardInfoInput>
   );
 };
