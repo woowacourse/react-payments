@@ -4,6 +4,8 @@ on:
   push:
     branches: ['step1']
 
+  workflow_dispatch:
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -32,8 +34,8 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
 
       - run: |
-          PUBLIC_URL=$(echo $GITHUB_REPOSITORY | sed -r 's/^(.+)\/(.+)$/https:\/\/\1.github.io\/\2\//')
-          echo $PUBLIC_URL > .env
+          PUBLIC_URL=$(echo $GITHUB_REPOSITORY | sed -r 's/^.+\/(.+)$/\/\1\//')
+          echo PUBLIC_URL=$PUBLIC_URL > .env
           npm run build
           cp ./build/index.html ./build/404.html
 
