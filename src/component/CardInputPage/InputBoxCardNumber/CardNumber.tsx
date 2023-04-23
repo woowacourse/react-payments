@@ -5,9 +5,9 @@ import Input from "../../common/Input";
 import "./cardNumber.css";
 
 interface Props {
-  setCardNumber?: React.Dispatch<React.SetStateAction<number[]>>;
   setError: React.Dispatch<React.SetStateAction<boolean>>;
   setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
+  setPreviewDataHandler: () => void;
 }
 
 const INPUT_STATUS = {
@@ -22,7 +22,7 @@ export default function CardNumber(props: Props) {
   const [inputStatus3, setInputStatus3] = useState(INPUT_STATUS.NOT_COMPLETE);
   const [inputStatus4, setInputStatus4] = useState(INPUT_STATUS.NOT_COMPLETE);
 
-  const { setError, setIsComplete } = props;
+  const { setError, setIsComplete, setPreviewDataHandler } = props;
 
   useEffect(() => {
     const hasError = [
@@ -33,7 +33,9 @@ export default function CardNumber(props: Props) {
     ].includes(INPUT_STATUS.ERROR);
 
     setError(hasError);
+  }, [inputStatus1, inputStatus2, inputStatus3, inputStatus4]);
 
+  useEffect(() => {
     const isComplete = [
       inputStatus1,
       inputStatus2,
@@ -44,7 +46,7 @@ export default function CardNumber(props: Props) {
     setIsComplete(isComplete);
   }, [inputStatus1, inputStatus2, inputStatus3, inputStatus4]);
 
-  const onChangeCardNumber =
+  const getOnChangeCardNumberHandler =
     (setInputStatus: React.Dispatch<React.SetStateAction<number>>) =>
     (e: ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;
@@ -62,6 +64,8 @@ export default function CardNumber(props: Props) {
       } else {
         setInputStatus(INPUT_STATUS.ERROR);
       }
+
+      setPreviewDataHandler();
     };
 
   return (
@@ -71,7 +75,7 @@ export default function CardNumber(props: Props) {
         className="first input-card-number"
         type="text"
         inputMode="numeric"
-        onChange={onChangeCardNumber(setInputStatus1)}
+        onChange={getOnChangeCardNumberHandler(setInputStatus1)}
         placeholder="XXXX"
       />
       <Input
@@ -79,7 +83,7 @@ export default function CardNumber(props: Props) {
         className=" input-card-number"
         type="password"
         inputMode="numeric"
-        onChange={onChangeCardNumber(setInputStatus2)}
+        onChange={getOnChangeCardNumberHandler(setInputStatus2)}
         placeholder="XXXX"
       />
       <Input
@@ -87,7 +91,7 @@ export default function CardNumber(props: Props) {
         className=" input-card-number"
         type="password"
         inputMode="numeric"
-        onChange={onChangeCardNumber(setInputStatus3)}
+        onChange={getOnChangeCardNumberHandler(setInputStatus3)}
         placeholder="XXXX"
       />
       <Input
@@ -95,7 +99,7 @@ export default function CardNumber(props: Props) {
         className="last input-card-number"
         type="text"
         inputMode="numeric"
-        onChange={onChangeCardNumber(setInputStatus4)}
+        onChange={getOnChangeCardNumberHandler(setInputStatus4)}
         placeholder="XXXX"
       />
     </>

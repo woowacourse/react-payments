@@ -5,10 +5,11 @@ import "./inputBoxOwner.css";
 
 interface Props {
   setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
+  setPreviewDataHandler: () => void;
 }
 
 export default function InputBoxOwner(props: Props) {
-  const { setIsComplete } = props;
+  const { setIsComplete, setPreviewDataHandler } = props;
 
   const [nameLength, setNameLength] = useState(0);
 
@@ -23,7 +24,7 @@ export default function InputBoxOwner(props: Props) {
     setIsComplete(true);
     setNameLength(e.target.value.trim().length);
   };
-
+  
   return (
     <div className="input-box-card-owner">
       <p>카드 소유자 이름(선택)</p>
@@ -32,7 +33,10 @@ export default function InputBoxOwner(props: Props) {
         name="card-owner"
         className="input-card-owner"
         type="text"
-        onChange={onChangeCallback}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
+          onChangeCallback(e);
+          setPreviewDataHandler();
+        }}
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
         inputMode="text"
       ></Input>

@@ -11,5 +11,5 @@ const meta: Meta = {
 export default meta;
 
 export const InputTest = (args: any) => (
-  <InputBoxExpirationDate setIsComplete={() => {}}></InputBoxExpirationDate>
+  <InputBoxExpirationDate setIsComplete={() => {}} setPreviewDataHandler={() => {}}></InputBoxExpirationDate>
 );

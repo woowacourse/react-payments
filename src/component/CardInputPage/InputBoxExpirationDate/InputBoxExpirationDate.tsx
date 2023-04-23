@@ -5,6 +5,7 @@ import "./inputBoxExpirationDate.css";
 import { validateExpirationDate } from "../../../validation/ExpirationDate";
 interface Props {
   setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
+  setPreviewDataHandler: () => void;
 }
 
 const INPUT_STATUS = {
@@ -14,7 +15,7 @@ const INPUT_STATUS = {
 };
 
 export default function InputBoxExpirationDate(props: Props) {
-  const { setIsComplete } = props;
+  const { setIsComplete, setPreviewDataHandler } = props;
 
   const [inputStatus, setInputStatus] = useState(INPUT_STATUS.NOT_COMPLETE);
 
@@ -48,7 +49,10 @@ export default function InputBoxExpirationDate(props: Props) {
         name="expiration-date"
         className="input-expiration-date"
         type="text"
-        onChange={changeExpirationDate}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => { 
+          changeExpirationDate(e);
+          setPreviewDataHandler();
+        }}
         placeholder="MM / YY"
         inputMode="numeric"
       ></Input>

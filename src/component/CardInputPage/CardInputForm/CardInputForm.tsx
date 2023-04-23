@@ -6,7 +6,7 @@ import InputBoxOwner from "../InputBoxOwner/InputBoxOwner";
 import InputBoxPassword from "../InputBoxPassword/InputBoxPassword";
 import InputBoxSecurityCode from "../InputBoxSecurityCode/InputBoxSecurityCode";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useReducer } from "react";
 import { useNavigate } from "react-router-dom";
 
 import "./cardInputForm.css";
@@ -24,9 +24,41 @@ interface Props {
   addNewCard: (card: CreditCard) => void;
 }
 
+const getDefaultCreditCard = (): CreditCard => ({
+  name: '',
+  date: '',
+  number: [],
+  securityCode: 0,
+  password: 0,
+});
+
+
+const getFormData = (form: HTMLFormElement): CreditCard => {
+  const card =  getDefaultCreditCard();
+  const formData = new FormData(form);
+
+  card.name = (formData.get("card-owner")|| '').toString();
+  card.date = (formData.get("expiration-date") || '').toString();
+  card.number = [
+      formData.get("card-number-1"),
+      formData.get("card-number-2"),
+      formData.get("card-number-3"),
+      formData.get("card-number-4"),
+  ].map(Number);
+  card.securityCode = Number(formData.get("security-code"));
+  card.password = (
+    Number(formData.get("card-password-1")) * 10 +
+    Number(formData.get("card-password-2")?.toString())
+  );
+
+  return card;
+};
+
 export default function CardInputForm(props: Props) {
   const { addNewCard } = props;
   const [isFormFilled, setIsFormFilled] = useState(false);
+
+  const [cardPreviewData, setCardPreviewData] = useState<CreditCard>(getDefaultCreditCard());
 
   const [isCardNumberComplete, setIsCardNumberComplete] = useState(false);
   const [isExpirationDateComplete, setIsExpirationDateComplete] = useState(false);
@@ -38,27 +70,20 @@ export default function CardInputForm(props: Props) {
 
   const formElement = useRef<HTMLFormElement>(null);
 
+  const setCardPreviewDataFromForm = () => {
+    const data = formElement.current
+      ? getFormData(formElement.current)
+      : getDefaultCreditCard();
+    
+    setCardPreviewData(data);
+  };
+
   const event = (e: SubmitEvent) => {
     e.preventDefault();
 
-    if (!formElement.current) return;
+    const card = formElement.current && getFormData(formElement.current);
 
-    const formData = new FormData(formElement.current);
-
-    const card: CreditCard = {
-      name: (formData.get("card-owner")|| '').toString(),
-      date: (formData.get("expiration-date") || '').toString(),
-      number: [
-        formData.get("card-number-1"),
-        formData.get("card-number-2"),
-        formData.get("card-number-3"),
-        formData.get("card-number-4"),
-      ].map(Number),
-      securityCode: Number(formData.get("security-code")),
-      password:
-        Number(formData.get("card-password-1")) +
-        Number(formData.get("card-password-2")),
-    };
+    if (!card) return;
 
     addNewCard(card);
 
@@ -91,10 +116,19 @@ export default function CardInputForm(props: Props) {
 
   return (
     <form ref={formElement} className="form">
-      <CardPreview card={{}} />
-      <InputBoxCardNumber setIsComplete={setIsCardNumberComplete} />
-      <InputBoxExpirationDate setIsComplete={setIsExpirationDateComplete} />
-      <InputBoxOwner setIsComplete={setIsOwnerComplete} />
+      <CardPreview card={cardPreviewData} />
+      <InputBoxCardNumber
+        setIsComplete={setIsCardNumberComplete}
+        setPreviewDataHandler={setCardPreviewDataFromForm}
+      />
+      <InputBoxExpirationDate
+        setIsComplete={setIsExpirationDateComplete}
+        setPreviewDataHandler={setCardPreviewDataFromForm}
+      />
+      <InputBoxOwner
+        setIsComplete={setIsOwnerComplete}
+        setPreviewDataHandler={setCardPreviewDataFromForm}
+      />
       <InputBoxSecurityCode setIsComplete={setIsSecurityComplete} />
       <InputBoxPassword setIsComplete={setIsPasswordComplete} />
       {isFormFilled && <Button type="submit">다음</Button>}
