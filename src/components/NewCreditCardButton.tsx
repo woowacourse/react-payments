@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Text } from './common/Text';
 
@@ -25,11 +24,6 @@ type NewCreditCardButtonProps = {
 
 export const NewCreditCardButton = (props: NewCreditCardButtonProps) => {
   const { helperText, onClick } = props;
-  const navigate = useNavigate();
-
-  const handleOnClickNewCreditCardButton = () => {
-    navigate('/register');
-  };
 
   return (
     <ButtonContainer>
