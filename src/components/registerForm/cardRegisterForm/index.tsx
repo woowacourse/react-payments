@@ -8,12 +8,17 @@ import { cardInfoContext } from "src/context/CardInfoContext";
 import useCardList from "src/hooks/useCardList";
 import { useNavigate } from "react-router-dom";
 import { Styled } from "./CardRegisterForm.styles";
-
-const objectValueToString = (obj: { [key: string]: string }) => {
-  return Object.values(obj).reduce((acc, cur) => acc + cur, "");
-};
+import { NUMBERS } from "src/utils/constant";
+import { objectValueToString } from "src/utils";
 
 function CardRegisterForm() {
+  const {
+    MAX_CARD,
+    MAX_EXPIREDATE,
+    MAX_SECURITY,
+    MAX_PASSWORD,
+    MIN_OWNER_NAME,
+  } = NUMBERS;
   const navigation = useNavigate();
   const [cardInput] = useContext(cardInfoContext);
   const [nextShow, setNextShow] = useState(false);
@@ -24,12 +29,15 @@ function CardRegisterForm() {
       cardInput;
     try {
       const exceptOwnerName =
-        objectValueToString(cardNumbers).length !== 16 ||
-        expireDate.length !== 5 ||
-        securityCode.length !== 3 ||
-        objectValueToString(password).length !== 2;
+        objectValueToString(cardNumbers).length !== MAX_CARD ||
+        expireDate.length !== MAX_EXPIREDATE ||
+        securityCode.length !== MAX_SECURITY ||
+        objectValueToString(password).length !== MAX_PASSWORD;
 
-      if ((ownerName.length > 0 && ownerName.length < 3) || exceptOwnerName) {
+      if (
+        (ownerName.length > 0 && ownerName.length < MIN_OWNER_NAME) ||
+        exceptOwnerName
+      ) {
         throw new Error();
       }
       setNextShow(true);

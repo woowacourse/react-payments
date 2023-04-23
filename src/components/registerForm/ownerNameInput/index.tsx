@@ -8,8 +8,9 @@ import {
 } from "src/utils/regexp";
 import { cardInfoContext } from "src/context/CardInfoContext";
 import { Styled } from "./OwnerNameInput.styles";
-
+import { NUMBERS } from "src/utils/constant";
 function OwnerNameInput() {
+  const { MIN_OWNER_NAME, MAX_OWNER_NAME } = NUMBERS;
   const [cardInput, setCardInput] = useContext(cardInfoContext);
 
   const [error, setError] = useState({
@@ -31,8 +32,10 @@ function OwnerNameInput() {
           );
         }
 
-        if (value.length < 3 || value.length > 30) {
-          throw new Error("카드 소유자 이름은 3글자 이상 30글자 이하입니다.");
+        if (value.length < MIN_OWNER_NAME || value.length > MAX_OWNER_NAME) {
+          throw new Error(
+            `카드 소유자 이름은 ${MIN_OWNER_NAME}글자 이상 ${MAX_OWNER_NAME}글자 이하입니다.`,
+          );
         }
       }
 
@@ -48,7 +51,7 @@ function OwnerNameInput() {
         message: error.message,
       });
     } finally {
-      if (value.length <= 30) {
+      if (value.length <= MAX_OWNER_NAME) {
         if (!setCardInput) return;
         setCardInput((prev) => ({
           ...prev,
@@ -62,7 +65,7 @@ function OwnerNameInput() {
     <Styled.OwnerNameInputContainer>
       <Styled.LabelContainer>
         <FormLabel>카드 소유자 이름(선택)</FormLabel>
-        <span>{`${cardInput.ownerName.length} / 30`}</span>
+        <span>{`${cardInput.ownerName.length} / ${MAX_OWNER_NAME}}`}</span>
       </Styled.LabelContainer>
       <Input
         value={cardInput.ownerName}

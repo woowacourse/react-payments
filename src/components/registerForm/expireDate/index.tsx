@@ -2,10 +2,14 @@ import React, { useState, useContext } from "react";
 import Input from "src/components/@common/Input";
 import ErrorSpan from "src/components/@common/ErrorSpan";
 import FormLabel from "src/components/@common/FormLabel";
-import { MMYY_REGEXP, ONLY_NUMBER_REGEXP } from "src/utils/regexp";
+import {
+  EACH_SECOND_CHANCE,
+  MMYY_REGEXP,
+  ONLY_NUMBER_REGEXP,
+} from "src/utils/regexp";
 import { cardInfoContext } from "src/context/CardInfoContext";
 import { Styled } from "./ExpireDate.styles";
-
+import { NUMBERS } from "src/utils/constant";
 function ExpireDate() {
   const [cardInput, setCardInput] = useContext(cardInfoContext);
 
@@ -37,11 +41,11 @@ function ExpireDate() {
     } catch {
       setExpireError(true);
     } finally {
-      if (dateValitation && value.length === 5) {
+      if (dateValitation && value.length === NUMBERS.MAX_EXPIREDATE) {
         setCardInput((prev) => ({ ...prev, expireDate: "" }));
         return;
       }
-      const expire = date.match(/.{1,2}/g) ?? [];
+      const expire = date.match(EACH_SECOND_CHANCE) ?? [];
 
       setCardInput((prev) => ({ ...prev, expireDate: expire.join("/") }));
     }
@@ -53,7 +57,7 @@ function ExpireDate() {
       <Input
         value={cardInput.expireDate}
         onChange={expireDateChange}
-        maxLength={5}
+        maxLength={NUMBERS.MAX_EXPIREDATE}
         customInputStyle={Styled.ExpireDateInput}
         placeholder="MM / YY"
       />

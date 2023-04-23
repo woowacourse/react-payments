@@ -6,6 +6,7 @@ import { cardInfoContext } from "src/context/CardInfoContext";
 import ErrorSpan from "src/components/@common/ErrorSpan";
 import useAutoFocus from "src/hooks/useAutoFocus";
 import { Styled } from "./CardPassword.styles";
+import { NUMBERS } from "src/utils/constant";
 
 interface CardPasswordObj {
   first: string;
@@ -13,6 +14,7 @@ interface CardPasswordObj {
 }
 
 function CardPassword() {
+  const { EACH_PASSWORD } = NUMBERS;
   const [cardInput, setCardInput] = useContext(cardInfoContext);
 
   const [passwordError, setPasswordError] = useState(false);
@@ -22,20 +24,20 @@ function CardPassword() {
 
   const { nextInputFocus } = useAutoFocus({
     initialRefs: [firstInputRef, secondInputRef],
-    maxLength: 1,
+    maxLength: EACH_PASSWORD,
   });
 
   const passwordChange: React.ChangeEventHandler<HTMLInputElement> = (
     event,
   ) => {
-    const value = event.currentTarget.value as string;
+    const value = event.currentTarget.value;
     const name = event.currentTarget.dataset["order"] as keyof CardPasswordObj;
-    const idx = event.currentTarget.dataset["idx"] as string;
+    const idx = event.currentTarget.dataset["idx"];
 
     if (!ONLY_NUMBER_REGEXP.test(value)) return;
 
     try {
-      if (value.length !== 1) {
+      if (value.length !== EACH_PASSWORD) {
         throw new Error();
       }
       setPasswordError(false);
@@ -64,7 +66,7 @@ function CardPassword() {
           data-idx="0"
           value={cardInput.password["first"]}
           onChange={passwordChange}
-          maxLength={1}
+          maxLength={EACH_PASSWORD}
           inputmode="numeric"
           type="password"
           customInputStyle={Styled.PasswordInput}
@@ -75,7 +77,7 @@ function CardPassword() {
           data-idx="1"
           value={cardInput.password["second"]}
           onChange={passwordChange}
-          maxLength={1}
+          maxLength={EACH_PASSWORD}
           inputmode="numeric"
           type="password"
           customInputStyle={Styled.PasswordInput}

@@ -7,8 +7,10 @@ import { cardInfoContext } from "src/context/CardInfoContext";
 import { CardNumberObj } from "src/interfaces";
 import useAutoFocus from "src/hooks/useAutoFocus";
 import { Styled } from "./CardNumber.styles";
+import { NUMBERS } from "src/utils/constant";
 
 function CardNumber() {
+  const { EACH_CARD } = NUMBERS;
   const [cardInput, setCardInput] = useContext(cardInfoContext);
 
   const [cardError, setCardError] = useState({
@@ -23,7 +25,7 @@ function CardNumber() {
 
   const { nextInputFocus } = useAutoFocus({
     initialRefs: [firstInputRef, secondInputRef, thirdInputRef, fourthInputRef],
-    maxLength: 4,
+    maxLength: EACH_CARD,
   });
 
   const cardChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
@@ -35,8 +37,8 @@ function CardNumber() {
     if (!ONLY_NUMBER_REGEXP.test(value)) return;
 
     try {
-      if (value.length !== 4) {
-        throw new Error(`4글자를 입력해 주세요`);
+      if (value.length !== EACH_CARD) {
+        throw new Error(`${EACH_CARD}글자를 입력해 주세요`);
       }
 
       setCardError({
@@ -69,7 +71,7 @@ function CardNumber() {
           data-index="0"
           value={cardInput.cardNumbers["first"]}
           onChange={cardChange}
-          maxLength={4}
+          maxLength={EACH_CARD}
           customInputStyle={Styled.CardNumberInput}
           inputmode="numeric"
           ref={firstInputRef}
@@ -80,7 +82,7 @@ function CardNumber() {
           data-index="1"
           value={cardInput.cardNumbers["second"]}
           onChange={cardChange}
-          maxLength={4}
+          maxLength={EACH_CARD}
           customInputStyle={Styled.CardNumberInput}
           inputmode="numeric"
           ref={secondInputRef}
@@ -92,7 +94,7 @@ function CardNumber() {
           data-index="2"
           value={cardInput.cardNumbers["third"]}
           onChange={cardChange}
-          maxLength={4}
+          maxLength={EACH_CARD}
           customInputStyle={Styled.CardNumberInput}
           inputmode="numeric"
           type={"password"}
@@ -106,7 +108,7 @@ function CardNumber() {
           data-index="3"
           value={cardInput.cardNumbers["fourth"]}
           onChange={cardChange}
-          maxLength={4}
+          maxLength={EACH_CARD}
           customInputStyle={Styled.CardNumberInput}
           inputmode="numeric"
           type={"password"}

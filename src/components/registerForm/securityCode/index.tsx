@@ -5,17 +5,19 @@ import Input from "src/components/@common/Input";
 import { ONLY_NUMBER_REGEXP } from "src/utils/regexp";
 import { cardInfoContext } from "src/context/CardInfoContext";
 import { Styled } from "./SecurityCode.styles";
+import { NUMBERS } from "src/utils/constant";
 
 function SecurityCode() {
   const [cardInput, setCardInput] = useContext(cardInfoContext);
   const [error, setError] = useState(false);
 
   const codeChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    const value = event.currentTarget.value as string;
+    const value = event.currentTarget.value;
     if (!ONLY_NUMBER_REGEXP.test(value)) return;
 
     try {
-      if (value.length > 0 && value.length !== 3) throw new Error();
+      if (value.length > 0 && value.length !== NUMBERS.MAX_SECURITY)
+        throw new Error();
       setError(false);
     } catch {
       setError(true);
@@ -31,7 +33,7 @@ function SecurityCode() {
       <Input
         value={cardInput.securityCode}
         onChange={codeChange}
-        maxLength={3}
+        maxLength={NUMBERS.MAX_SECURITY}
         type="password"
         customInputStyle={Styled.SecurityInput}
       />
