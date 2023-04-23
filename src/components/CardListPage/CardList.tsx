@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { CardPublicInfo } from "../../types/Card";
-import CardItem from "../common/CardItem";
+import CardItem from "../Card/CardItem";
 
 interface CardListProps {
   cardList: CardPublicInfo[];

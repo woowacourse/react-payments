@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../common/Header";
 import { LeftArrowIcon } from "../../assets/icons";
-import CardItem from "../common/CardItem";
-import CardForm from "../cardForm/CardForm";
+import CardItem from "../Card/CardItem";
+import CardForm from "../CardRegistrationPage/CardForm";
 import { useState } from "react";
 import { CardPublicInfo } from "../../types/Card";
 

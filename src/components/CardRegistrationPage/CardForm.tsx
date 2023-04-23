@@ -1,51 +1,40 @@
-import { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import CardNumberInput from '../cardForm/CardNumberInput';
-import ExpirationDateInput from '../cardForm/ExpirationDateInput';
-import NameInput from '../cardForm/NameInput';
-import SecurityCodeInput from '../cardForm/SecurityCodeInput';
-import PasswordInput from '../cardForm/PasswordInput';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import styled from "styled-components";
+import CardNumberInput from "./CardNumberInput";
+import ExpirationDateInput from "./ExpirationDateInput";
+import NameInput from "./NameInput";
+import SecurityCodeInput from "./SecurityCodeInput";
+import PasswordInput from "./PasswordInput";
+import { useNavigate } from "react-router-dom";
 
 interface CardFormProps {
   onSubmitForm: () => void;
-  onChangeForm: (
-    cardNumber: string[],
-    expirationDate: string[],
-    name: string
-  ) => void;
+  onChangeForm: (cardNumber: string[], expirationDate: string[], name: string) => void;
 }
 
 const CardForm = ({ onSubmitForm, onChangeForm }: CardFormProps) => {
-  const [cardNumber, setCardNumber] = useState(['', '', '', '']);
-  const [expirationDate, setExpirationDate] = useState(['', '']);
-  const [name, setName] = useState('');
-  const [securityCode, setSecurityCode] = useState('');
-  const [password, setPassword] = useState(['', '']);
+  const [cardNumber, setCardNumber] = useState(["", "", "", ""]);
+  const [expirationDate, setExpirationDate] = useState(["", ""]);
+  const [name, setName] = useState("");
+  const [securityCode, setSecurityCode] = useState("");
+  const [password, setPassword] = useState(["", ""]);
 
-  const [cardNumberError, setCardNumberError] = useState('');
-  const [expirationDateError, setExpirationDateError] = useState('');
-  const [nameError, setNameError] = useState('');
-  const [securityCodeError, setSecurityCodeError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
+  const [cardNumberError, setCardNumberError] = useState("");
+  const [expirationDateError, setExpirationDateError] = useState("");
+  const [nameError, setNameError] = useState("");
+  const [securityCodeError, setSecurityCodeError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
   const [buttonActive, setButtonActive] = useState(false);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (
-      cardNumber.some(
-        (numberValue) => numberValue.length !== 4 || !!cardNumberError
-      )
-    ) {
+    if (cardNumber.some((numberValue) => numberValue.length !== 4 || !!cardNumberError)) {
       setButtonActive(false);
       return;
     }
-    if (
-      expirationDate.some((dateValue) => dateValue.length !== 2) ||
-      !!expirationDateError
-    ) {
+    if (expirationDate.some((dateValue) => dateValue.length !== 2) || !!expirationDateError) {
       setButtonActive(false);
       return;
     }
@@ -59,14 +48,7 @@ const CardForm = ({ onSubmitForm, onChangeForm }: CardFormProps) => {
     }
 
     setButtonActive(true);
-  }, [
-    cardNumber,
-    expirationDate,
-    name,
-    securityCode,
-    password,
-    expirationDateError,
-  ]);
+  }, [cardNumber, expirationDate, name, securityCode, password, expirationDateError]);
 
   useEffect(() => {
     onChangeForm(cardNumber, expirationDate, name);
@@ -75,7 +57,7 @@ const CardForm = ({ onSubmitForm, onChangeForm }: CardFormProps) => {
   const handleSubmitForm = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     onSubmitForm();
-    navigate('/');
+    navigate("/");
   };
 
   return (
@@ -92,12 +74,7 @@ const CardForm = ({ onSubmitForm, onChangeForm }: CardFormProps) => {
         errorMessage={expirationDateError}
         setErrorMessage={setExpirationDateError}
       />
-      <NameInput
-        name={name}
-        setName={setName}
-        errorMessage={nameError}
-        setErrorMessage={setNameError}
-      />
+      <NameInput name={name} setName={setName} errorMessage={nameError} setErrorMessage={setNameError} />
       <SecurityCodeInput
         securityCode={securityCode}
         setSecurityCode={setSecurityCode}
@@ -123,7 +100,7 @@ const FormContainer = styled.form`
 `;
 
 const NextButton = styled.button<{ isActive: boolean }>`
-  visibility: ${({ isActive }) => (isActive ? 'visible' : 'hidden')};
+  visibility: ${({ isActive }) => (isActive ? "visible" : "hidden")};
 
   padding: 10px 20px;
 

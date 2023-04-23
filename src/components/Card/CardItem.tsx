@@ -8,7 +8,7 @@ interface CardItemProps {
 const CardItem = ({ card }: CardItemProps) => {
   return (
     <CardItemContainer>
-      <ICChip></ICChip>
+      <ICChip />
       {card && (
         <>
           <CardNumberContainer>

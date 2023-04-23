@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import Header from "../common/Header";
 import Title from "../common/Title";
-import AddCardButton from "../CardListPageComponents/AddCardButton";
-import CardList from "../CardListPageComponents/CardList";
+import AddCardButton from "../CardListPage/AddCardButton";
+import CardList from "../CardListPage/CardList";
 import { CardPublicInfo } from "../../types/Card";
 
 interface CardListPageProps {
