@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 function useWarningText(minLength?: number, regExp?: RegExp, name?: string) {
   const [warningText, setWarningText] = useState("");
+
   const isNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputNumber = e.target.value;
     const lastNumber = inputNumber.slice(-1);
