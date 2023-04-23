@@ -1,19 +1,12 @@
 export const getLocalStorage = (key: string) => {
-  try {
-    const getCards = localStorage.getItem(key);
-    const cardInfoObject = JSON.parse(getCards as string);
+  const storedCards = localStorage.getItem(key);
 
-    if (getCards) {
-      return cardInfoObject;
-    } else if (getCards === null) {
-      throw new Error('값을 불러올 수 없습니다.');
-    }
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
+  return storedCards ? JSON.parse(storedCards) : [];
 };
 
 export const setLocalStorage = (key: string, value: object) => {
-  localStorage.setItem(key, JSON.stringify(value));
+  const card = getLocalStorage(key);
+  card.push(value);
+
+  localStorage.setItem(key, JSON.stringify(card));
 };

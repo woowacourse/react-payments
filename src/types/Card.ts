@@ -6,6 +6,7 @@ export interface Card {
   month: string;
   year: string;
   name: string;
-  securityCode?: string;
-  password?: string;
+  code?: string;
+  password1?: string;
+  password2?: string;
 }

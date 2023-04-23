@@ -2,6 +2,7 @@ import Header from 'components/Header';
 import CardPreview from 'components/RegisterPage/CardPreview';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { Card } from 'types/Card';
 import { getLocalStorage } from 'utils/localStorage';
 
 const MainPage = () => {
@@ -11,15 +12,19 @@ const MainPage = () => {
     navigate('/register');
   };
 
-  const cardInfoObject = getLocalStorage('card');
+  const cardInfoArray = getLocalStorage('card');
 
   return (
     <div>
       <Header navigator={false} title="보유카드" />
 
-      {cardInfoObject && <CardPreview cardInfo={cardInfoObject}></CardPreview>}
-
-      {!cardInfoObject && <S.Message>새로운 카드를 등록해 주세요.</S.Message>}
+      {cardInfoArray.length > 0 ? (
+        cardInfoArray.map((cardInfo: Card) => (
+          <CardPreview key={cardInfo.number1} cardInfo={cardInfo}></CardPreview>
+        ))
+      ) : (
+        <S.Message>새로운 카드를 등록해 주세요.</S.Message>
+      )}
       <S.Button onClick={goToRegister}>+</S.Button>
     </div>
   );
