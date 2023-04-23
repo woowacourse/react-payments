@@ -1,5 +1,5 @@
 import { forwardRef, ForwardedRef } from 'react';
-import styled from 'styled-components';
+import * as Styled from './CardInput.styles';
 
 interface CardInputProps {
   type: string;
@@ -11,12 +11,6 @@ interface CardInputProps {
   required?: boolean;
   autofocus?: boolean;
 }
-
-const Input = styled.input`
-  width: fill-available;
-  height: 45px;
-  text-align: center;
-`;
 
 const CardInput = forwardRef(
   (
@@ -33,7 +27,7 @@ const CardInput = forwardRef(
     ref: ForwardedRef<HTMLInputElement>
   ) => {
     return (
-      <Input
+      <Styled.Input
         type={type}
         maxLength={maxLength}
         placeholder={placeholder}

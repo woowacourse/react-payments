@@ -1,31 +1,7 @@
+import { useRef } from 'react';
 import CardInput from '../CardInput/CardInput';
 import CardLabel from '../CardLabel/CardLabel';
-import styled from 'styled-components';
-import { useRef } from 'react';
-
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #ecebf1;
-  border-radius: 7px;
-  margin-bottom: 20px;
-`;
-
-const PasswordInputWrapper = styled.div`
-  display: flex;
-  align-items: baseline;
-
-  > * {
-    width: 45px;
-    margin-right: 8px;
-  }
-`;
-
-const Pargraph = styled.p`
-  width: 45px;
-  text-align: center;
-`;
+import * as Styled from './CardPassword.styles';
 
 interface CardPasswordProps {
   password: Record<number, string>;
@@ -55,8 +31,8 @@ const CardPassword = ({ password, setPassword }: CardPasswordProps) => {
   return (
     <>
       <CardLabel labelText="카드 비밀번호" />
-      <PasswordInputWrapper>
-        <Wrapper>
+      <Styled.PasswordInputWrapper>
+        <Styled.Wrapper>
           <CardInput
             type="password"
             maxLength={1}
@@ -67,8 +43,8 @@ const CardPassword = ({ password, setPassword }: CardPasswordProps) => {
             placeholder="•"
             required={true}
           />
-        </Wrapper>
-        <Wrapper>
+        </Styled.Wrapper>
+        <Styled.Wrapper>
           <CardInput
             type="password"
             maxLength={1}
@@ -79,10 +55,10 @@ const CardPassword = ({ password, setPassword }: CardPasswordProps) => {
             placeholder="•"
             required={true}
           />
-        </Wrapper>
-        <Pargraph>•</Pargraph>
-        <Pargraph>•</Pargraph>
-      </PasswordInputWrapper>
+        </Styled.Wrapper>
+        <Styled.Pargraph>•</Styled.Pargraph>
+        <Styled.Pargraph>•</Styled.Pargraph>
+      </Styled.PasswordInputWrapper>
     </>
   );
 };

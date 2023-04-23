@@ -1,21 +1,7 @@
 import { useRef } from 'react';
 import CardInput from '../CardInput/CardInput';
 import CardLabel from '../CardLabel/CardLabel';
-import styled from 'styled-components';
-
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #ecebf1;
-  border-radius: 7px;
-  margin-bottom: 20px;
-`;
-
-const LabelContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
+import * as Styled from './CardOwnerName.styles';
 
 interface CardOwnerNameProps {
   cardOwnerName: string;
@@ -39,11 +25,11 @@ const CardOwnerName = ({
 
   return (
     <>
-      <LabelContainer>
+      <Styled.LabelContainer>
         <CardLabel labelText="카드 소유자 이름(선택)" />
         <CardLabel labelText={`${nameRef.current?.value.length || 0} / 30`} />
-      </LabelContainer>
-      <Wrapper>
+      </Styled.LabelContainer>
+      <Styled.Wrapper>
         <CardInput
           type="text"
           maxLength={30}
@@ -52,7 +38,7 @@ const CardOwnerName = ({
           value={cardOwnerName}
           placeholder="카드에 표시된 영어 이름을 입력하세요."
         />
-      </Wrapper>
+      </Styled.Wrapper>
     </>
   );
 };

@@ -1,20 +1,7 @@
+import { useRef } from 'react';
 import CardInput from '../CardInput/CardInput';
 import CardLabel from '../CardLabel/CardLabel';
-import styled from 'styled-components';
-import { useRef } from 'react';
-
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #ecebf1;
-  border-radius: 7px;
-  margin-bottom: 20px;
-`;
-
-const Pargraph = styled.p`
-  width: 16px;
-`;
+import * as Styled from './ExpiredDate.styles';
 
 interface ExpiredDateProps {
   expiredDate: Record<number, string>;
@@ -67,7 +54,7 @@ const ExpiredDate = ({ expiredDate, setExpiredDate }: ExpiredDateProps) => {
   return (
     <>
       <CardLabel labelText="만료일" />
-      <Wrapper>
+      <Styled.Wrapper>
         <CardInput
           type="text"
           maxLength={2}
@@ -78,7 +65,7 @@ const ExpiredDate = ({ expiredDate, setExpiredDate }: ExpiredDateProps) => {
           placeholder="MM"
           required={true}
         />
-        <Pargraph>/</Pargraph>
+        <Styled.Pargraph>/</Styled.Pargraph>
         <CardInput
           type="text"
           maxLength={2}
@@ -89,7 +76,7 @@ const ExpiredDate = ({ expiredDate, setExpiredDate }: ExpiredDateProps) => {
           placeholder="YY"
           required={true}
         />
-      </Wrapper>
+      </Styled.Wrapper>
     </>
   );
 };

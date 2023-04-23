@@ -1,33 +1,7 @@
+import { useRef } from 'react';
 import CardInput from '../CardInput/CardInput';
 import CardLabel from '../CardLabel/CardLabel';
-import styled from 'styled-components';
-import { useRef } from 'react';
-
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #ecebf1;
-  border-radius: 7px;
-  margin-bottom: 20px;
-`;
-
-const QuestionButton = styled.button`
-  width: 27px;
-  height: 27px;
-  margin-left: 12px;
-  border: 1px solid #969696;
-  color: #969696;
-  border-radius: 50%;
-  text-align: center;
-  cursor: pointer;
-  tab
-`;
-
-const InputWrapper = styled.div`
-  display: flex;
-  align-items: baseline;
-`;
+import * as Styled from './SecurityCode.styles';
 
 interface SecurityCodeProps {
   securityCode: string;
@@ -48,8 +22,8 @@ const SecurityCode = ({ securityCode, setSecurityCode }: SecurityCodeProps) => {
   return (
     <>
       <CardLabel labelText="보안 코드(CVC/CVV)" />
-      <InputWrapper>
-        <Wrapper>
+      <Styled.InputWrapper>
+        <Styled.Wrapper>
           <CardInput
             type="password"
             maxLength={3}
@@ -59,11 +33,11 @@ const SecurityCode = ({ securityCode, setSecurityCode }: SecurityCodeProps) => {
             placeholder="•••"
             required={true}
           />
-        </Wrapper>
-        <QuestionButton type="button" tabIndex={-1}>
+        </Styled.Wrapper>
+        <Styled.QuestionButton type="button" tabIndex={-1}>
           ?
-        </QuestionButton>
-      </InputWrapper>
+        </Styled.QuestionButton>
+      </Styled.InputWrapper>
     </>
   );
 };

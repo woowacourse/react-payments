@@ -1,24 +1,7 @@
 import { useRef } from 'react';
-import styled from 'styled-components';
 import CardInput from '../CardInput/CardInput';
 import CardLabel from '../CardLabel/CardLabel';
-
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #ecebf1;
-  border-radius: 7px;
-  margin-bottom: 20px;
-
-  & > * {
-    width: 100%;
-  }
-`;
-
-const Pargraph = styled.p`
-  width: 32px;
-`;
+import * as Styled from './CardNumbers.styles';
 
 interface CardNumbersProps {
   cardNumbers: Record<number, string>;
@@ -52,7 +35,7 @@ const CardNumbers = ({ cardNumbers, setCardNumbers }: CardNumbersProps) => {
   return (
     <>
       <CardLabel labelText="카드 번호" />
-      <Wrapper>
+      <Styled.Wrapper>
         <CardInput
           type="text"
           maxLength={4}
@@ -65,7 +48,7 @@ const CardNumbers = ({ cardNumbers, setCardNumbers }: CardNumbersProps) => {
           autofocus={true}
         />
         {cardNumberRefs[0].current?.value.length === 4 && (
-          <Pargraph>-</Pargraph>
+          <Styled.Pargraph>-</Styled.Pargraph>
         )}
         <CardInput
           type="text"
@@ -78,7 +61,7 @@ const CardNumbers = ({ cardNumbers, setCardNumbers }: CardNumbersProps) => {
           required={true}
         />
         {cardNumberRefs[1].current?.value.length === 4 && (
-          <Pargraph>-</Pargraph>
+          <Styled.Pargraph>-</Styled.Pargraph>
         )}
         <CardInput
           type="password"
@@ -91,7 +74,7 @@ const CardNumbers = ({ cardNumbers, setCardNumbers }: CardNumbersProps) => {
           required={true}
         />
         {cardNumberRefs[2].current?.value.length === 4 && (
-          <Pargraph>-</Pargraph>
+          <Styled.Pargraph>-</Styled.Pargraph>
         )}
         <CardInput
           type="password"
@@ -103,7 +86,7 @@ const CardNumbers = ({ cardNumbers, setCardNumbers }: CardNumbersProps) => {
           placeholder={'0000'}
           required={true}
         />
-      </Wrapper>
+      </Styled.Wrapper>
     </>
   );
 };
