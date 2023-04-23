@@ -4,6 +4,7 @@ import InputBox from "../common/InputBox";
 import InputGroup from "../common/InputGroup";
 import { DotIcon } from "../../assets/icons";
 import { useRef } from "react";
+import { isNumber, isOverMaxLength } from "../../utils";
 
 interface PasswordInputProps {
   password: string[];
@@ -18,9 +19,9 @@ const PasswordInput = ({ password, setPassword, errorMessage, setErrorMessage }:
   const handleChangeInput = (inputIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
 
-    if (isOverLength(inputValue)) return;
+    if (isOverMaxLength(inputValue, 1)) return;
 
-    if (isNotInputNumber(inputValue)) {
+    if (!isNumber(inputValue)) {
       setErrorMessage("숫자만 입력해주세요");
       return;
     }
@@ -34,15 +35,6 @@ const PasswordInput = ({ password, setPassword, errorMessage, setErrorMessage }:
     if (isNextInputFocusable(inputValue, inputIndex)) {
       refs[inputIndex + 1].current?.focus();
     }
-  };
-
-  const isNotInputNumber = (inputValue: string) => {
-    const regex = /^\d{0,1}$/;
-    return !regex.test(inputValue);
-  };
-
-  const isOverLength = (inputValue: string) => {
-    return inputValue.length > 1;
   };
 
   const isNextInputFocusable = (inputValue: string, inputIndex: number) => {

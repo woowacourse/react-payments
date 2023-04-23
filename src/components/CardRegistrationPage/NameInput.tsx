@@ -1,7 +1,8 @@
-import styled from 'styled-components';
-import Input from '../common/Input';
-import InputBox from '../common/InputBox';
-import InputGroup from '../common/InputGroup';
+import styled from "styled-components";
+import Input from "../common/Input";
+import InputBox from "../common/InputBox";
+import InputGroup from "../common/InputGroup";
+import { isEnglish, isOverMaxLength } from "../../utils";
 
 interface NameInputProps {
   name: string;
@@ -10,46 +11,29 @@ interface NameInputProps {
   setErrorMessage: (errorMessage: string) => void;
 }
 
-const NameInput = ({
-  name,
-  setName,
-  errorMessage,
-  setErrorMessage,
-}: NameInputProps) => {
+const NameInput = ({ name, setName, errorMessage, setErrorMessage }: NameInputProps) => {
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
 
-    if (isOverLength(inputValue)) {
-      setErrorMessage('30자 이하로 입력해주세요');
+    if (isOverMaxLength(inputValue, 30)) {
+      setErrorMessage("30자 이하로 입력해주세요");
       return;
     }
-    if (isNotInputEnglish(inputValue)) {
-      setErrorMessage('영어만 입력해주세요');
+    if (!isEnglish(inputValue)) {
+      setErrorMessage("영어만 입력해주세요");
       return;
     }
 
     setName(inputValue.toUpperCase());
-    setErrorMessage('');
-  };
-
-  const isNotInputEnglish = (inputValue: string) => {
-    const regex = /^[a-zA-Z\s]*$/;
-    return !regex.test(inputValue);
-  };
-
-  const isOverLength = (inputValue: string) => {
-    return inputValue.length > 30;
+    setErrorMessage("");
   };
 
   return (
-    <InputGroup
-      labelValue={<LabelValue length={name.length} />}
-      errorMessage={errorMessage}
-    >
+    <InputGroup labelValue={<LabelValue length={name.length} />} errorMessage={errorMessage}>
       <InputBox isError={!!errorMessage}>
         <Input
-          placeholder='카드에 표시된 이름과 동일하게 입력하세요.'
-          textAlign='start'
+          placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+          textAlign="start"
           value={name}
           onChange={handleChangeInput}
         />

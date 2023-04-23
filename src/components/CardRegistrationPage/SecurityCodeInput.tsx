@@ -1,3 +1,4 @@
+import { isNumber, isOverMaxLength } from "../../utils";
 import Input from "../common/Input";
 import InputBox from "../common/InputBox";
 import InputGroup from "../common/InputGroup";
@@ -18,24 +19,15 @@ const SecurityCodeInput = ({
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
 
-    if (isOverLength(inputValue)) return;
+    if (isOverMaxLength(inputValue, 3)) return;
 
-    if (isNotInputNumber(inputValue)) {
+    if (!isNumber(inputValue)) {
       setErrorMessage("숫자만 입력해주세요");
       return;
     }
 
     setSecurityCode(inputValue.toUpperCase());
     setErrorMessage("");
-  };
-
-  const isNotInputNumber = (inputValue: string) => {
-    const regex = /^\d{0,3}$/;
-    return !regex.test(inputValue);
-  };
-
-  const isOverLength = (inputValue: string) => {
-    return inputValue.length > 3;
   };
 
   return (
