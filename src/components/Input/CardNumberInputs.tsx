@@ -17,9 +17,12 @@ export function CardNumberInputs({ valueAndOnChanges }: CardNumberInputProps) {
     index: number,
     onChange?: ChangeEventHandler<HTMLInputElement>,
   ) => {
-    const value = e.target.value;
+    const { value } = e.target;
+    const isNumber = !isNaN(Number(value));
 
-    if (index < valueAndOnChanges.length - 1 && value.length === e.target.maxLength) {
+    if (!isNumber) return;
+
+    if (index < valueAndOnChanges.length - 1 && value.trim().length === e.target.maxLength) {
       inputRefs[index + 1].current?.focus();
     }
     onChange && onChange(e);

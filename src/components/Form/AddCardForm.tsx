@@ -47,9 +47,6 @@ function AddCardForm({ onSubmit }: AddCardFormProps) {
     value: cardNumber,
     onChange: (e) => {
       const { value } = e.target;
-      const isNumber = !isNaN(Number(value));
-
-      if (!isNumber) return;
 
       setCardNumbers((prev) => {
         const prevCardNumbers = [...prev];
@@ -114,10 +111,6 @@ function AddCardForm({ onSubmit }: AddCardFormProps) {
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
-    if (!isValid) {
-      return alert(Object.values(errorMessages).join('\n'));
-    }
-
     CardDB.registerCard(card);
     onSubmit();
   };
@@ -132,13 +125,17 @@ function AddCardForm({ onSubmit }: AddCardFormProps) {
         <CardNumberContainer>
           <CardNumberInputs valueAndOnChanges={valueAndOnChanges} />
         </CardNumberContainer>
+        {<ErrorCaption>{!isValid && errorMessages.numbers}</ErrorCaption>}
         <InputLabel>만료일</InputLabel>
+
         <ExpirationDateContainer>
           <ExpirationDateInput
             month={{ value: month, onChange: handleMonthInputChange }}
             year={{ value: year, onChange: handleYearInputChange }}
           />
         </ExpirationDateContainer>
+        {<ErrorCaption>{!isValid && errorMessages.expirationDate}</ErrorCaption>}
+
         <NameLabelContainer>
           <InputLabel>카드 소유자 이름(선택)</InputLabel>
           <InputLabel>{`${name.length} / 30`}</InputLabel>
@@ -151,6 +148,7 @@ function AddCardForm({ onSubmit }: AddCardFormProps) {
         <SecurityCodeInputContainer>
           <SecurityCodeInput value={securityCode} onChange={handleSecurityCodeChange} />
         </SecurityCodeInputContainer>
+        {<ErrorCaption>{!isValid && errorMessages.securityCode}</ErrorCaption>}
 
         <InputLabel>카드 비밀번호</InputLabel>
         <PasswordInputContainer>
@@ -161,7 +159,9 @@ function AddCardForm({ onSubmit }: AddCardFormProps) {
           <DotContainer>•</DotContainer>
           <DotContainer>•</DotContainer>
         </PasswordInputContainer>
-        <FormSubmitButton type="submit">다음</FormSubmitButton>
+        {<ErrorCaption>{!isValid && errorMessages.password}</ErrorCaption>}
+
+        {isValid && <FormSubmitButton type="submit">다음</FormSubmitButton>}
       </FormContainer>
     </>
   );
@@ -185,7 +185,7 @@ const InputLabel = styled.span`
   font-weight: 500;
   letter-spacing: -0.085em;
   color: #525252;
-  margin-top: 19px;
+  margin-top: 16px;
   margin-bottom: 3px;
 `;
 
@@ -208,6 +208,7 @@ const ExpirationDateContainer = styled(Container)`
 
 const NameInputContainer = styled(Container)`
   width: 318px;
+  margin-bottom: 16px;
 `;
 
 const SecurityCodeInputContainer = styled(Container)`
@@ -242,10 +243,11 @@ const DotContainer = styled.div`
 
 const FormSubmitButton = styled.button`
   border: none;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
   background-color: #ffffff;
   margin-left: auto;
+  color: black;
   cursor: pointer;
 `;
 
@@ -254,6 +256,13 @@ const NameLabelContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   background-color: rgba(255, 255, 255, 0);
+`;
+
+const ErrorCaption = styled.span`
+  height: 10px;
+  margin-top: 5px;
+  font-size: 10px;
+  color: red;
 `;
 
 export default AddCardForm;
