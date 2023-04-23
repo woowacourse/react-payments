@@ -8,16 +8,23 @@ import { OwnerNameInput } from './input/OwnerNameInput';
 import { SecurityCodeInput } from './input/SecurityCodeInput';
 import { PasswordInput } from './input/PasswordInput';
 import { cardDataService } from '../domains/cardDataService';
+import { useCardRegisterFormValidation } from '../hooks/useCardRegisterFormValidation';
 
 export function CardRegisterForm() {
   const navigate = useNavigate();
 
-  const [isInputFinish, setIsInputFinish] = useState(false);
   const [cardNumber, setCardNumber] = useState(['', '', '', '']);
   const [expirationDate, setExpirationDate] = useState({ month: '', year: '' });
   const [ownerName, setOwnerName] = useState('');
   const [securityCode, setSecurityCode] = useState('');
   const [password, setPassword] = useState(['', '']);
+  const [isValidCardForm] = useCardRegisterFormValidation({
+    cardNumber,
+    expirationDate,
+    ownerName,
+    securityCode,
+    password,
+  });
 
   const monthInputRef = useRef<HTMLInputElement>(null);
   const ownerNameInputRef = useRef<HTMLInputElement>(null);
@@ -54,10 +61,6 @@ export function CardRegisterForm() {
     passwordInputRef.current?.focus();
   };
 
-  const activateNextButton = () => {
-    setIsInputFinish(true);
-  };
-
   return (
     <Style.Wrapper onSubmit={handleCardInfoSubmit}>
       <CardViewer cardNumber={cardNumber} expirationDate={expirationDate} ownerName={ownerName} />
@@ -87,13 +90,12 @@ export function CardRegisterForm() {
         />
         <PasswordInput
           passwordInputRef={passwordInputRef}
-          activateNextButton={activateNextButton}
           password={password}
           setPassword={setPassword}
         />
       </Style.InputContainer>
       <Style.ButtonContainer>
-        {isInputFinish && <Style.NextButton>다음</Style.NextButton>}
+        {isValidCardForm && <Style.NextButton>다음</Style.NextButton>}
       </Style.ButtonContainer>
     </Style.Wrapper>
   );
@@ -109,6 +111,7 @@ const Style = {
 
     gap: 19px;
   `,
+
   InputContainer: styled.div`
     display: flex;
     flex-direction: column;
@@ -117,12 +120,14 @@ const Style = {
 
     gap: 19px;
   `,
+
   ButtonContainer: styled.div`
     display: flex;
     justify-content: flex-end;
 
     width: 100%;
   `,
+
   NextButton: styled.button`
     all: unset;
 

@@ -2,24 +2,18 @@ import styled from 'styled-components';
 import { useRef } from 'react';
 import { Input } from './Input';
 import { InputWrapper } from './InputWrapper';
-import { PassWord } from '../../types';
-import { hasValidLength, isNumeric } from '../../validator';
+import { Password } from '../../types';
+import { hasValidLength, isNumeric } from '../../utils/validator';
 import { ERROR, PASSWORD_SIZE, PASSWORD_TEXT } from '../../constants';
 import { isEmptyInput, isFirst } from '../../utils';
 
 interface Props {
-  password: PassWord;
+  password: Password;
   passwordInputRef: React.RefObject<HTMLInputElement>;
-  setPassword: React.Dispatch<React.SetStateAction<PassWord>>;
-  activateNextButton: () => void;
+  setPassword: React.Dispatch<React.SetStateAction<Password>>;
 }
 
-export function PasswordInput({
-  password,
-  passwordInputRef,
-  setPassword,
-  activateNextButton,
-}: Props) {
+export function PasswordInput({ password, passwordInputRef, setPassword }: Props) {
   const allRef = [passwordInputRef, useRef<HTMLInputElement>(null)];
 
   const handleBackspacePress = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -53,8 +47,6 @@ export function PasswordInput({
       allRef[0].current?.focus();
       return;
     }
-
-    activateNextButton();
   };
 
   return (
