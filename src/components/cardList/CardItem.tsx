@@ -2,32 +2,42 @@ import styled from "styled-components";
 import { CardType } from "../../types/card";
 import Card from "../common/Card";
 
+import { useMemo } from "react";
+
 interface CardProps {
   card: CardType;
 }
 
 export const CardItem = ({ card }: CardProps) => {
-  const numbers = (numbers: string): string => {
-    const shownNumbers = numbers.slice(0, 8);
+  const memorizedNumbers = useMemo((): string => {
+    const shownNumbers = card.numbers.slice(0, 8);
     return (shownNumbers.match(/\d{1,4}|●{1,4}/g) ?? []).join(" ");
-  };
+  }, [card.numbers]);
 
-  const hideNumbers = (numbers: string): string => {
-    const hiddenNumbers = "●".repeat(numbers.slice(8).length);
+  const memorizedHideNumbers = useMemo((): string => {
+    const hiddenNumbers = "●".repeat(card.numbers.slice(8).length);
     return (hiddenNumbers.match(/\d{1,4}|●{1,4}/g) ?? []).join(" ");
-  };
+  }, [card.numbers]);
+
+  const memoizedName = useMemo(() => {
+    return card.owner ? card.owner : "NAME";
+  }, [card.owner]);
+
+  const memoizedExpiryDate = useMemo(() => {
+    return card.expiryDate ? card.expiryDate : "MM / YY";
+  }, [card.expiryDate]);
 
   return (
     <Card backgroundColor={card.color}>
       <Container>
         <IcChip />
         <Numbers>
-          <ShownNumbers>{numbers(card.numbers)}</ShownNumbers>
-          <HiddenNumbers>{hideNumbers(card.numbers)}</HiddenNumbers>
+          <ShownNumbers>{memorizedNumbers}</ShownNumbers>
+          <HiddenNumbers>{memorizedHideNumbers}</HiddenNumbers>
         </Numbers>
         <InfoWrapper>
-          <Name>{card.owner ? card.owner : "NAME"}</Name>
-          <ExpiryDate>{card.expiryDate ? card.expiryDate : "MM / YY"}</ExpiryDate>
+          <Name>{memoizedName}</Name>
+          <ExpiryDate>{memoizedExpiryDate}</ExpiryDate>
         </InfoWrapper>
       </Container>
     </Card>
