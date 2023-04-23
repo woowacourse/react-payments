@@ -80,7 +80,6 @@ const useAddCardForm = ({ cardInfo, addNewCard, setCardInfo }: Props) => {
   const setCardNumbersCompleted = useCallback(
     (isCompleted: boolean) => {
       setIsInputCompleted({ ...isInputCompleted, isCardNumberCompleted: isCompleted });
-      console.log(123);
     },
     [setIsInputCompleted, isInputCompleted]
   );

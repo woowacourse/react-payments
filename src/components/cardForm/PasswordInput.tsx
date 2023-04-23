@@ -41,21 +41,8 @@ export const PasswordInput = ({ setIsCompleted }: PasswordProps) => {
     <Container>
       <InputLabel text="비밀번호" name="password" />
       <Row>
-        <Input
-          error={{
-            isValid: true,
-            errorMessage: "비밀번호를 입력하세요.",
-          }}
-          {...passwordInfo}
-          handleInput={handleInput(0)}
-          label="password1"
-        />
-        <Input
-          error={{ isValid: true, errorMessage: "" }}
-          {...passwordInfo}
-          handleInput={handleInput(1)}
-          label="password2"
-        />
+        <Input {...passwordInfo} handleInput={handleInput(0)} label="password1" />
+        <Input {...passwordInfo} handleInput={handleInput(1)} label="password2" />
         <HiddenPassword>●</HiddenPassword>
         <HiddenPassword>●</HiddenPassword>
       </Row>

@@ -37,14 +37,7 @@ export const CVCInput = ({ setIsCompleted }: CVCProps) => {
     <Container>
       <InputLabel text="보안 코드 (CVC/CVV)" name="CVC" />
       <Wrapper>
-        <Input
-          {...CVCInfo}
-          handleInput={handleInput}
-          error={{
-            isValid: true,
-            errorMessage: "3자리 숫자를 입력하세요.",
-          }}
-        />
+        <Input {...CVCInfo} handleInput={handleInput} />
         <HelpIcon
           onClick={() => {
             console.log("CVC설명");

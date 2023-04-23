@@ -7,9 +7,6 @@ import { ExpiryDateInput } from "./ExpiryDateInput";
 import { OwnerInput } from "./OwnerInput";
 import { PasswordInput } from "./PasswordInput";
 
-import { FormEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
-
 import useAddCardForm from "../../hook/useAddCardForm";
 
 interface CardFormProps {
