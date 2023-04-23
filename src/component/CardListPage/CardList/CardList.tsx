@@ -1,15 +1,7 @@
 import CardPreview from "../../common/CardPreview";
 import AddCardButton from "../AddCardButton/AddCardButton";
+import CreditCard from "../../../type/CreditCard";
 import "./cardList.css";
-
-interface CreditCard {
-  name?: string;
-  date?: string;
-  bank?: string;
-  number?: number[];
-  securityCode?: number;
-  password?: number;
-}
 
 interface Props {
   cardList: CreditCard[];

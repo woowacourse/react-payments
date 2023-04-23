@@ -1,3 +1,4 @@
+import CreditCard from "../../../type/CreditCard";
 import Button from "../../common/Button";
 import CardPreview from "../../common/CardPreview";
 import InputBoxCardNumber from "../InputBoxCardNumber/InputBoxCardNumber";
@@ -6,19 +7,10 @@ import InputBoxOwner from "../InputBoxOwner/InputBoxOwner";
 import InputBoxPassword from "../InputBoxPassword/InputBoxPassword";
 import InputBoxSecurityCode from "../InputBoxSecurityCode/InputBoxSecurityCode";
 
-import { useState, useRef, useEffect, useReducer } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import "./cardInputForm.css";
-
-interface CreditCard {
-  name: string;
-  date: string;
-  bank?: string;
-  number: number[];
-  securityCode: number;
-  password: number;
-}
 
 interface Props {
   addNewCard: (card: CreditCard) => void;

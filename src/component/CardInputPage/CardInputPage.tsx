@@ -1,15 +1,8 @@
 import CardInputForm from "./CardInputForm/CardInputForm";
 
 import "./cardInputPage.css";
+import CreditCard from "../../type/CreditCard";
 
-interface CreditCard {
-  name?: string;
-  date?: string;
-  bank?: string;
-  number?: number[];
-  securityCode?: number;
-  password?: number;
-}
 interface Props {
   addNewCard: (card: CreditCard) => void;
 }

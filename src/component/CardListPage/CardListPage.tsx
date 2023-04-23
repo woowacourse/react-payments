@@ -1,14 +1,8 @@
 import CardList from "./CardList/CardList";
 import "./cardListPage.css";
 
-interface CreditCard {
-  name?: string;
-  date?: string;
-  bank?: string;
-  number?: number[];
-  securityCode?: number;
-  password?: number;
-}
+import CreditCard from "../../type/CreditCard";
+
 interface Props {
   cardList: CreditCard[];
 }
