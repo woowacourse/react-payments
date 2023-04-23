@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import Label from './Label';
+import styled from "styled-components";
+import Label from "./Label";
 
 interface InputGroupProps {
   children: React.ReactNode;
@@ -7,11 +7,7 @@ interface InputGroupProps {
   errorMessage?: string;
 }
 
-const InputGroup = ({
-  children,
-  labelValue,
-  errorMessage,
-}: InputGroupProps) => {
+const InputGroup = ({ children, labelValue, errorMessage }: InputGroupProps) => {
   return (
     <InputGroupContainer>
       <Label>{labelValue}</Label>
@@ -31,7 +27,6 @@ const ErrorMessage = styled.p`
   height: 10px;
   font-weight: 500;
   font-size: 14px;
-  letter-spacing: -0.085em;
   color: #ec2f1b;
 `;
 export default InputGroup;

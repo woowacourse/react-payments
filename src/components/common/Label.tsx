@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Label = styled.label`
   display: flex;
@@ -6,7 +6,6 @@ const Label = styled.label`
 
   font-weight: 500;
   font-size: 14px;
-  letter-spacing: -0.085em;
 
   color: #525252;
 `;
