@@ -2,7 +2,6 @@ import { InputContainer } from "../common/InputContainer";
 import { Input } from "../common/Input";
 import { InputLabel } from "../common/InputLabel";
 import { useState } from "react";
-import { CARD_INPUT_NUMBER } from "../../constant/cardInput";
 import {
   isLastLetterNumeric,
   isMonthValid,

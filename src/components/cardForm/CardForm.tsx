@@ -8,6 +8,7 @@ import { OwnerInput } from "./OwnerInput";
 import { PasswordInput } from "./PasswordInput";
 import { FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
+import { isInputFilled, isMonthValid, isYearValid } from "../../utils/validate";
 
 interface CardFormProps {
   setCardInfo: React.Dispatch<React.SetStateAction<CardType>>;
@@ -20,16 +21,33 @@ export const CardForm = ({ setCardInfo }: CardFormProps) => {
     navigate("/");
   };
 
+  const isInputValid = (newCard: CardType) => {
+    const { numbers, expiryDate, CVC, password } = newCard;
+    const [month, year] = expiryDate.split(" / ");
+
+    const isNumberValid = isInputFilled(numbers.join(""), 16);
+    const isExpiryDateValid =
+      isInputFilled(month + year, 4) &&
+      isMonthValid(Number(month)) &&
+      isYearValid(Number(year));
+    const isCVCValid = isInputFilled(String(CVC), 3);
+    const isPasswordValid = isInputFilled(password.join(""), 2);
+
+    return isNumberValid && isExpiryDateValid && isCVCValid && isPasswordValid;
+  };
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData(e.target as HTMLFormElement);
     const data = Object.fromEntries(formData.entries());
-
     const newCard = cardHandler.formNewCard(data);
-    cardHandler.addNewCard(newCard);
 
-    moveToHome();
+    if (isInputValid(newCard)) {
+      cardHandler.addNewCard(newCard);
+
+      moveToHome();
+    }
   };
 
   return (

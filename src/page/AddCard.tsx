@@ -7,12 +7,13 @@ import { CardForm } from "../components/cardForm/CardForm";
 import { Link } from "react-router-dom";
 
 const initialCard = {
+  id: "demoCard",
   numbers: [],
   owner: "",
   expiryDate: "MM/YY",
   color: "#e07171",
-  CVC: 123,
-  password: [0, 0],
+  CVC: 0,
+  password: [],
 };
 
 export const AddCard = () => {

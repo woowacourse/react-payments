@@ -9,6 +9,7 @@ class CreditCards {
 
   formNewCard(data: { [k: string]: FormDataEntryValue }) {
     return {
+      id: Math.random().toString(16),
       numbers: [
         String(data.cardNumber1),
         String(data.cardNumber2),
@@ -18,7 +19,7 @@ class CreditCards {
       expiryDate: String(data.expiryDate),
       owner: String(data.owner),
       CVC: Number(data.cvc),
-      password: [Number(data.password1), Number(data.password2)],
+      password: [String(data.password1), String(data.password2)],
       color: "#de75d0",
     };
   }
