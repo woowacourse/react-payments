@@ -9,6 +9,7 @@ const useInput = (
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!prevConditionCallback(e)) return;
+
     setValue(formatCallback(e.target.value));
   };
 

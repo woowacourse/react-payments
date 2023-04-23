@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
 import InputCardData from './InputCardData';
-import InputCardPassword from './InputCardPassword';
+
 import { fetchData } from '../utils/fetchData';
 import { useNavigate } from 'react-router-dom';
 import { CVC_TOOLTIP_DETAIL, CVC_TOOLTIP_TITLE } from '../utils/constants';
@@ -86,26 +86,30 @@ const FormCardAdd = ({
             onFocus={moveFocus}
           />
           <span>-</span>
-          <InputCardPassword
+          <InputCardData
             value={cardNumber.value.third}
             onChange={cardNumber.onChange}
+            className="card-number"
             name="third"
             dataId={2}
             minDataLength={4}
-            maxDataLength={4}
             Ref={inputRef[2]}
+            maxDataLength={4}
+            isPasswordType={true}
             passwordType="card-number"
             onFocus={moveFocus}
           />
           <span>-</span>
-          <InputCardPassword
+          <InputCardData
             value={cardNumber.value.fourth}
             onChange={cardNumber.onChange}
+            className="card-number"
             name="fourth"
             dataId={3}
             minDataLength={4}
-            maxDataLength={4}
             Ref={inputRef[3]}
+            maxDataLength={4}
+            isPasswordType={true}
             passwordType="card-number"
             onFocus={moveFocus}
           />
@@ -121,7 +125,7 @@ const FormCardAdd = ({
           Ref={inputRef[4]}
           minDataLength={5}
           maxDataLength={5}
-          name="expire"
+          name="expireDate"
           onFocus={moveFocus}
         />
       </div>
@@ -145,14 +149,16 @@ const FormCardAdd = ({
       <div className="card-security-code-container">
         <span className="form-label">보안코드(CVC/CVV)</span>
         <div className="card-security-code-box">
-          <InputCardPassword
+          <InputCardData
             value={securityCode.value}
-            onChange={securityCode.onChange}
+            isPasswordType={true}
+            name="cvcData"
+            passwordType="password-cvc"
             dataId={6}
             Ref={inputRef[6]}
             maxDataLength={3}
             minDataLength={3}
-            passwordType="password-cvc"
+            onChange={securityCode.onChange}
             onFocus={moveFocus}
           />
           <Tooltip title={CVC_TOOLTIP_TITLE} detail={CVC_TOOLTIP_DETAIL} />
@@ -161,18 +167,22 @@ const FormCardAdd = ({
       <div className="card-password-container">
         <span className="form-label">카드 비밀번호</span>
         <div className="card-password-input-box">
-          <InputCardPassword
+          <InputCardData
+            isPasswordType={true}
             value={cardPassword1.value}
-            onChange={cardPassword1.onChange}
+            name="card-password-1"
             dataId={7}
             Ref={inputRef[7]}
             maxDataLength={1}
             minDataLength={1}
             passwordType="password-single"
+            onChange={cardPassword1.onChange}
             onFocus={moveFocus}
           />
-          <InputCardPassword
+          <InputCardData
+            isPasswordType={true}
             value={cardPassword2.value}
+            name="card-password-2"
             onChange={cardPassword2.onChange}
             dataId={8}
             Ref={inputRef[8]}
