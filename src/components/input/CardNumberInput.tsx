@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import React, { useRef, useState } from 'react';
-import { v4 } from 'uuid';
 import { Input } from './Input';
 import { InputWrapper } from './InputWrapper';
 import { CardNumber } from '../../types';
@@ -78,7 +77,6 @@ export function CardNumberInput({ moveFocusToExpirationDate, cardNumber, setCard
           return (
             <>
               <Input
-                key={v4()}
                 id={`cardNumber${index}`}
                 value={cardNumber[index]}
                 width={36}
