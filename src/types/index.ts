@@ -1,7 +1,7 @@
 export type CardNumber = string[];
 export type OwnerName = string;
 export type SecurityCode = string;
-export type PassWord = string[];
+export type Password = string[];
 
 export interface ExpirationDate {
   month: string;
@@ -13,5 +13,5 @@ export interface Card {
   expirationDate: ExpirationDate;
   ownerName: OwnerName;
   securityCode: SecurityCode;
-  password: PassWord;
+  password: Password;
 }

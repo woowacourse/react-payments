@@ -3,7 +3,7 @@ import { useRef, useEffect } from 'react';
 import { Input } from './Input';
 import { InputWrapper } from './InputWrapper';
 import { ExpirationDate } from '../../types';
-import { isValidDate } from '../../validator';
+import { isValidDate } from '../../utils/validator';
 import { ERROR, MONTH_SIZE, YEAR_SIZE } from '../../constants';
 import { isEmptyInput, isFullInput } from '../../utils';
 

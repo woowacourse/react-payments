@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { Input } from './Input';
 import { InputWrapper } from './InputWrapper';
 import { SecurityCode } from '../../types';
-import { hasValidLength, isNumeric } from '../../validator';
+import { hasValidLength, isNumeric } from '../../utils/validator';
 import { ERROR, PASSWORD_TEXT, SECURITY_CODE_SIZE } from '../../constants';
 import { isFullInput } from '../../utils';
 

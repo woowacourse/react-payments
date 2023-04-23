@@ -18,7 +18,6 @@ export const Password = () => {
   return (
     <PasswordInput
       passwordInputRef={passwordInputRef}
-      activateNextButton={() => {}}
       password={password}
       setPassword={setPassword}
     />

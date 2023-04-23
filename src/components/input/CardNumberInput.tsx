@@ -3,7 +3,7 @@ import React, { useRef, useState } from 'react';
 import { Input } from './Input';
 import { InputWrapper } from './InputWrapper';
 import { CardNumber } from '../../types';
-import { hasValidLength, isNumeric } from '../../validator';
+import { hasValidLength, isNumeric } from '../../utils/validator';
 import {
   CARD_NUMBER_DIGITS,
   CARD_NUMBER_INPUTS_LENGTH,
