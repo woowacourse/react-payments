@@ -1,10 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useMemo } from 'react';
 
 const useFormComplete = <T extends Record<string, boolean>>(validationInformation: T) => {
-  const [isComplete, setIsComplete] = useState(false);
-
-  useEffect(() => {
-    setIsComplete(Object.values(validationInformation).every(Boolean));
+  const isComplete = useMemo(() => {
+    return Object.values(validationInformation).every(Boolean);
   }, [validationInformation]);
 
   return isComplete;
