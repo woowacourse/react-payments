@@ -1,26 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { createHashRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { App } from './components/App';
 import { CreditCardListPage } from './components/pages/CreditCardListPage';
 import { NewCreditCardPage } from './components/pages/NewCreditCardPage';
 
-const router = createHashRouter([
+const router = createBrowserRouter(
+  [
+    {
+      path: '/',
+      element: <App />,
+      children: [
+        {
+          path: '',
+          element: <CreditCardListPage />,
+        },
+        {
+          path: 'register',
+          element: <NewCreditCardPage />,
+        },
+      ],
+    },
+  ],
   {
-    path: '/',
-    element: <App />,
-    children: [
-      {
-        path: '',
-        element: <CreditCardListPage />,
-      },
-      {
-        path: 'register',
-        element: <NewCreditCardPage />,
-      },
-    ],
+    basename: process.env.PUBLIC_URL,
   },
-]);
+);
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
