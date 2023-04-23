@@ -21,17 +21,27 @@ export const initialCardRegisterInfo: CardRegisterInfo = {
   },
 };
 
-export const CardRegisterContext = createContext<{
-  cardRegisterInfo: CardRegisterInfo;
+type CardRegisterContextType = {
+  cardRegisterInfo: CardRegisterInfo | null;
   handleCardInfo<T extends keyof CardRegisterInfo>(
     key: T,
     value: CardRegisterInfo[T]
   ): void;
   initCardRegisterInfo(): void;
-}>({
-  cardRegisterInfo: initialCardRegisterInfo,
-  handleCardInfo() {},
-  initCardRegisterInfo() {},
+};
+
+export const CardRegisterContext = createContext<CardRegisterContextType>({
+  cardRegisterInfo: null,
+  handleCardInfo() {
+    throw new Error(
+      "handleCardInfo 는 아직 적용되지 않았습니다. CardRegisterProvider 를 사용하세요."
+    );
+  },
+  initCardRegisterInfo() {
+    throw new Error(
+      "initCardRegisterInfo 는 아직 적용되지 않았습니다. CardRegisterProvider 를 사용하세요."
+    );
+  },
 });
 
 export const useCardRegisterContext = () => useContext(CardRegisterContext);
