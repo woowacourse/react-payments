@@ -3,9 +3,7 @@ export const convertSecuredCreditCard = (number: string) => {
   const securedCreditNumber = creditCardNumberLength <= 8
     ? number
     : number.slice(0, 8) + '●'.repeat(number.length - 8);
-  return securedCreditNumber.split('').reduce((a, b, i) => {
-    a[Math.floor(i / 4)].push(b);
-    return a;
-  }, [[], [], [], []] as string[][]);
+  const numberArrays = securedCreditNumber.match(/.{1,4}/g) ?? [];
+  return numberArrays.map((n) => n.split(''));
 };
 export default {};
