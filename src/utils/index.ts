@@ -5,6 +5,6 @@ export const getLocalStorage = (key: string) => {
   return data ? JSON.parse(data) : ([] as CardType[]);
 };
 
-export const setLocalStorage = (key: string, data: CardType[]) => {
+export const setLocalStorage = (key: string, data: unknown) => {
   localStorage.setItem(key, JSON.stringify(data));
 };
