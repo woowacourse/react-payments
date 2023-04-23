@@ -1,7 +1,7 @@
 import React from 'react';
 
 import passwordDotImg from '../asset/password_dot.png';
-import cvcInfo from '../asset/cvc_info.png';
+
 import { fetchData } from '../utils/fetchData';
 import { useNavigate } from 'react-router-dom';
 import './FormCardAdd.css';
@@ -9,6 +9,7 @@ import { CardType, FormCardAddProps } from '../type';
 import AddCardNumberInput from './AddCardNumberInput';
 import AddCardExpireDateInput from './AddCardExpireDateInput';
 import AddCardOwnerInput from './AddCardOwnerInput';
+import AddCardSecurityCodeInput from './AddCardSecurityCodeInput';
 
 const FormCardAdd = ({
   cardNumber,
@@ -52,27 +53,7 @@ const FormCardAdd = ({
       <AddCardNumberInput cardNumber={cardNumber} />
       <AddCardExpireDateInput cardExpire={cardExpire} />
       <AddCardOwnerInput cardOwner={cardOwner} />
-      <div className="card-security-code-container">
-        <span className="form-label">보안코드(CVC/CVV)</span>
-        <div className="card-security-code-box">
-          <input
-            className="input-password-container password-cvc"
-            type="password"
-            maxLength={3}
-            minLength={3}
-            value={securityCode.value}
-            onChange={securityCode.onChange}
-            required
-          />
-          <button type="button" className="cvc-info-button">
-            <img src={cvcInfo} alt="cvc_info" />
-          </button>
-          <div className="cvc-info-box">
-            <p>CVC란?</p>
-            <p>카드 뒷면의 3자리 숫자입니다.</p>
-          </div>
-        </div>
-      </div>
+      <AddCardSecurityCodeInput securityCode={securityCode} />
       <div className="card-password-container">
         <span className="form-label">카드 비밀번호</span>
         <div className="card-password-input-box">
