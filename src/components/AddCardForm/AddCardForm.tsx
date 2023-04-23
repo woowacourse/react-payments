@@ -23,12 +23,12 @@ const AddCardForm = ({
 }: AddCardFormProps) => {
   const navigate = useNavigate();
 
-  const handleCardInfo = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleCardInfo = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
-    const cardNumberInput = e.currentTarget.elements.namedItem('cardNumber');
-    const expirationDateInput = e.currentTarget.elements.namedItem('expirationDate');
-    const cardOwnerNameInput = e.currentTarget.elements.namedItem('cardOwnerName');
+    const cardNumberInput = event.currentTarget.elements.namedItem('cardNumber');
+    const expirationDateInput = event.currentTarget.elements.namedItem('expirationDate');
+    const cardOwnerNameInput = event.currentTarget.elements.namedItem('cardOwnerName');
 
     if (
       !(
