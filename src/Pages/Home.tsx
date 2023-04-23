@@ -1,8 +1,7 @@
 import styled from 'styled-components';
+import { useCardListContext } from '../CardListContext';
 import Card, { CARD_TYPE, CardInformation } from '../components/Card';
 import Header from '../components/Header';
-import useWrappingContext from '../hooks/useWrappingContext';
-import CardListStore from '../store';
 
 const MainHome = styled.main`
   display: flex;
@@ -24,7 +23,7 @@ const Message = styled.div`
 `;
 
 function Home() {
-  const { cardList } = useWrappingContext(CardListStore);
+  const { cardList } = useCardListContext();
 
   return (
     <>

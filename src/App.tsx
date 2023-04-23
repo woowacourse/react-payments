@@ -1,30 +1,16 @@
-import { useMemo, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import CardRegistration from './Pages/CardRegistration';
-import Home from './Pages/Home';
-import CardListStore from './store';
-import type { CardInformation } from './components/Card';
+import { CardListProvider } from './CardListContext';
+import CardRegistration from './pages/CardRegistration/CardRegistration';
+import Home from './pages/Home';
 
 function App() {
-  const [cardList, setCardList] = useState<CardInformation[]>([]);
-
-  const value = useMemo(
-    () => ({
-      cardList,
-      dispatchCardList: (card: CardInformation) => {
-        setCardList(prev => [...prev, card]);
-      },
-    }),
-    [cardList],
-  );
-
   return (
-    <CardListStore.Provider value={value}>
+    <CardListProvider>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/registration" element={<CardRegistration />} />
       </Routes>
-    </CardListStore.Provider>
+    </CardListProvider>
   );
 }
 

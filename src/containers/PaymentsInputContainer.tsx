@@ -1,11 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { useCardListContext } from '../CardListContext';
 import { CardInformation } from '../components/Card';
 import PaymentsInput from '../components/PaymentsInput';
 import QuestionToolTip from '../components/QuestionToolTip';
 import checkExpirationDate from '../domain/validator';
-import useWrappingContext from '../hooks/useWrappingContext';
-import CardListStore from '../store';
 import type { ChangeEvent, FormEvent } from 'react';
 
 const CVC_MESSAGE = 'CVV/CVC 번호는 카드 뒷 면에 있는 3자리 숫자이며 카드 보안을 위한 번호입니다.';
@@ -45,7 +44,7 @@ interface PaymentInputContainerProps {
 }
 
 function PaymentsInputContainer({ setCardNumber, setExpirationDate, setOwner }: PaymentInputContainerProps) {
-  const { dispatchCardList } = useWrappingContext(CardListStore);
+  const { setCardList } = useCardListContext();
   const navigate = useNavigate();
   const handleForm = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -65,8 +64,9 @@ function PaymentsInputContainer({ setCardNumber, setExpirationDate, setOwner }: 
       owner,
       cardNumber,
       expirationDate: { month: expirationDate[0], year: expirationDate[1] },
-    };
-    dispatchCardList(cardInformation as CardInformation);
+    } as CardInformation;
+
+    setCardList(prev => [...prev, cardInformation]);
     navigate('/');
   };
 
