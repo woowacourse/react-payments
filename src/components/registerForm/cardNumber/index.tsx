@@ -8,6 +8,7 @@ import { CardNumberObj } from "src/interfaces";
 import useAutoFocus from "src/hooks/useAutoFocus";
 import { Styled } from "./CardNumber.styles";
 import { NUMBERS } from "src/utils/constant";
+import { lengthMatchValidation } from "src/utils/validation";
 
 function CardNumber() {
   const { EACH_CARD } = NUMBERS;
@@ -37,9 +38,7 @@ function CardNumber() {
     if (!ONLY_NUMBER_REGEXP.test(value)) return;
 
     try {
-      if (value.length !== EACH_CARD) {
-        throw new Error(`${EACH_CARD}글자를 입력해 주세요`);
-      }
+      lengthMatchValidation(value, EACH_CARD);
 
       setCardError({
         isError: false,

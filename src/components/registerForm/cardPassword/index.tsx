@@ -7,6 +7,7 @@ import ErrorSpan from "src/components/@common/ErrorSpan";
 import useAutoFocus from "src/hooks/useAutoFocus";
 import { Styled } from "./CardPassword.styles";
 import { NUMBERS } from "src/utils/constant";
+import { lengthMatchValidation } from "src/utils/validation";
 
 interface CardPasswordObj {
   first: string;
@@ -14,7 +15,7 @@ interface CardPasswordObj {
 }
 
 function CardPassword() {
-  const { EACH_PASSWORD } = NUMBERS;
+  const { MAX_PASSWORD, EACH_PASSWORD } = NUMBERS;
   const [cardInput, setCardInput] = useContext(cardInfoContext);
 
   const [passwordError, setPasswordError] = useState(false);
@@ -37,9 +38,12 @@ function CardPassword() {
     if (!ONLY_NUMBER_REGEXP.test(value)) return;
 
     try {
-      if (value.length !== EACH_PASSWORD) {
-        throw new Error();
-      }
+      const firstVal = firstInputRef.current?.value ?? "";
+      const secondVal = secondInputRef.current?.value ?? "";
+      const passwordVal = firstVal + secondVal;
+
+      lengthMatchValidation(passwordVal, MAX_PASSWORD);
+
       setPasswordError(false);
     } catch {
       setPasswordError(true);

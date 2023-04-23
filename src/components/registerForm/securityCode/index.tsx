@@ -6,6 +6,7 @@ import { ONLY_NUMBER_REGEXP } from "src/utils/regexp";
 import { cardInfoContext } from "src/context/CardInfoContext";
 import { Styled } from "./SecurityCode.styles";
 import { NUMBERS } from "src/utils/constant";
+import { lengthMatchValidation } from "src/utils/validation";
 
 function SecurityCode() {
   const [cardInput, setCardInput] = useContext(cardInfoContext);
@@ -16,8 +17,7 @@ function SecurityCode() {
     if (!ONLY_NUMBER_REGEXP.test(value)) return;
 
     try {
-      if (value.length > 0 && value.length !== NUMBERS.MAX_SECURITY)
-        throw new Error();
+      lengthMatchValidation(value, NUMBERS.MAX_SECURITY);
       setError(false);
     } catch {
       setError(true);

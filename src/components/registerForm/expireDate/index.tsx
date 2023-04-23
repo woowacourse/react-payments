@@ -2,14 +2,12 @@ import React, { useState, useContext } from "react";
 import Input from "src/components/@common/Input";
 import ErrorSpan from "src/components/@common/ErrorSpan";
 import FormLabel from "src/components/@common/FormLabel";
-import {
-  EACH_SECOND_CHANCE,
-  MMYY_REGEXP,
-  ONLY_NUMBER_REGEXP,
-} from "src/utils/regexp";
+import { EACH_SECOND_CHANCE, ONLY_NUMBER_REGEXP } from "src/utils/regexp";
 import { cardInfoContext } from "src/context/CardInfoContext";
 import { Styled } from "./ExpireDate.styles";
 import { NUMBERS } from "src/utils/constant";
+import { MMYYValidation } from "src/utils/validation";
+
 function ExpireDate() {
   const [cardInput, setCardInput] = useContext(cardInfoContext);
 
@@ -19,22 +17,17 @@ function ExpireDate() {
     event,
   ) => {
     const value = event.currentTarget.value;
-    const [curMM, _, curYY] = new Date().toLocaleDateString("en-US").split("/");
     const [MM, YY] = value.split("/");
     const date = value.replace("/", "");
 
     if (!ONLY_NUMBER_REGEXP.test(date)) return;
     if (!setCardInput) return;
 
-    const dateValitation =
-      value.length > 0 &&
-      (!MMYY_REGEXP.test(date) ||
-        curYY.slice(2) > YY ||
-        (curYY.slice(2) === YY && curMM > MM));
+    const dateValitation = MMYYValidation(date, [MM, YY]);
 
     try {
       if (dateValitation) {
-        throw new Error();
+        throw new Error("유효한 만료일이 아닙니다.");
       }
 
       setExpireError(false);

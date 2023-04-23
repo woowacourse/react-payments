@@ -2,13 +2,15 @@ import React, { useState, useContext } from "react";
 import FormLabel from "src/components/@common/FormLabel";
 import Input from "src/components/@common/Input";
 import ErrorSpan from "src/components/@common/ErrorSpan";
-import {
-  CONTINUOUS_EMPTY_REGEXP,
-  ONLY_ENG_AND_EMPTY_REGEXP,
-} from "src/utils/regexp";
+import { ONLY_ENG_AND_EMPTY_REGEXP } from "src/utils/regexp";
 import { cardInfoContext } from "src/context/CardInfoContext";
 import { Styled } from "./OwnerNameInput.styles";
 import { NUMBERS } from "src/utils/constant";
+import {
+  checkOwnerNameLength,
+  continuousEmptyValidation,
+} from "src/utils/validation";
+
 function OwnerNameInput() {
   const { MIN_OWNER_NAME, MAX_OWNER_NAME } = NUMBERS;
   const [cardInput, setCardInput] = useContext(cardInfoContext);
@@ -26,17 +28,8 @@ function OwnerNameInput() {
     if (!ONLY_ENG_AND_EMPTY_REGEXP.test(value)) return;
     try {
       if (value.length > 0) {
-        if (CONTINUOUS_EMPTY_REGEXP.test(value)) {
-          throw new Error(
-            "카드 소유자 이름은 공백을 연속해서 작성할 수 없습니다.",
-          );
-        }
-
-        if (value.length < MIN_OWNER_NAME || value.length > MAX_OWNER_NAME) {
-          throw new Error(
-            `카드 소유자 이름은 ${MIN_OWNER_NAME}글자 이상 ${MAX_OWNER_NAME}글자 이하입니다.`,
-          );
-        }
+        continuousEmptyValidation(value);
+        checkOwnerNameLength(value, MIN_OWNER_NAME, MAX_OWNER_NAME);
       }
 
       setError({

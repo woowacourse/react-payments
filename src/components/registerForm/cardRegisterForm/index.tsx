@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useContext } from "react";
 import CardNumber from "src/components/registerForm/cardNumber";
 import ExpireDate from "src/components/registerForm/expireDate";
 import OwnerNameInput from "src/components/registerForm/ownerNameInput";
@@ -18,7 +18,9 @@ function CardRegisterForm() {
     MAX_SECURITY,
     MAX_PASSWORD,
     MIN_OWNER_NAME,
+    MAX_OWNER_NAME,
   } = NUMBERS;
+
   const navigation = useNavigate();
   const [cardInput] = useContext(cardInfoContext);
   const { saveCard } = useCardList({ key: "card-list" });
@@ -27,13 +29,16 @@ function CardRegisterForm() {
     cardInput;
 
   const exceptOwnerName =
-    objectValueToString(cardNumbers).length !== MAX_CARD ||
-    expireDate.length !== MAX_EXPIREDATE ||
-    securityCode.length !== MAX_SECURITY ||
-    objectValueToString(password).length !== MAX_PASSWORD;
+    objectValueToString(cardNumbers).length === MAX_CARD &&
+    expireDate.length === MAX_EXPIREDATE &&
+    securityCode.length === MAX_SECURITY &&
+    objectValueToString(password).length === MAX_PASSWORD;
+
+  const nameLength = ownerName.length;
 
   const isCardComplete =
-    (ownerName.length > 0 && ownerName.length < MIN_OWNER_NAME) ||
+    (nameLength === 0 ||
+      (nameLength <= MAX_OWNER_NAME && nameLength >= MIN_OWNER_NAME)) &&
     exceptOwnerName;
 
   const cardInputSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
@@ -49,7 +54,7 @@ function CardRegisterForm() {
       <OwnerNameInput />
       <SecurityCode />
       <CardPassword />
-      {!isCardComplete && (
+      {isCardComplete && (
         <Styled.ButtonContainer>
           <Styled.NextButton>다음</Styled.NextButton>
         </Styled.ButtonContainer>
