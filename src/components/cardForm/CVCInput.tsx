@@ -58,6 +58,9 @@ const Wrapper = styled.div`
   flex-direction: row;
   align-items: center;
 
+  width: 125px;
+  j
+
   gap: 10px;
 `;
 
@@ -71,6 +74,8 @@ const HelpIcon = styled.div`
   height: 27px;
   border: 1px solid darkgray;
   border-radius: 50%;
+
+  margin-top: -15px;
 
   font-size: 15px;
   font-weight: 700;

@@ -97,9 +97,9 @@ const Name = styled.div`
   width: 110px;
   height: 10px;
 
-  margin-left: 4px;
+  margin-left: 3px;
 `;
 
 const ExpiryDate = styled.div`
-  margin-right: 4px;
+  margin-right: 3px;
 `;
