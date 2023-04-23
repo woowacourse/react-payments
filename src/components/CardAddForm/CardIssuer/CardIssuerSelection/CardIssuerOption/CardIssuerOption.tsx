@@ -1,17 +1,18 @@
 import styles from './style.module.css';
+import { MouseEvent } from 'react';
 import { Issuer } from '../../../../../types';
 import { CARD_ISSUER_LOGO_IMAGE } from '../../../../../constants/images';
 
 interface CardIssuerOptionProps {
   issuer: Issuer;
-  onClick: CallableFunction;
+  onClick: (event: MouseEvent<HTMLDivElement>) => void;
 }
 
 function CardIssuerOption({ issuer, onClick }: CardIssuerOptionProps) {
   return (
-    <div className={styles.container} onClick={() => onClick(issuer)}>
+    <div data-name="issuer" data-value={issuer} className={styles.container} onClick={onClick}>
       <img src={CARD_ISSUER_LOGO_IMAGE[issuer]} alt={`${issuer} 로고`}></img>
-      <caption>{issuer}</caption>
+      <p>{issuer}</p>
     </div>
   );
 }

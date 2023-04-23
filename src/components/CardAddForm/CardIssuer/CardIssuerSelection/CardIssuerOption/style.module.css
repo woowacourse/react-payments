@@ -11,8 +11,10 @@
   height: 40px;
   border-radius: 50%;
   background-color: bisque;
+  pointer-events: none;
 }
 
-.container caption {
+.container p {
   font-size: 12px;
+  pointer-events: none;
 }
