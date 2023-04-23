@@ -8,9 +8,9 @@ import AddCardExpireDateInput from './AddCardExpireDateInput';
 import AddCardOwnerInput from './AddCardOwnerInput';
 import AddCardSecurityCodeInput from './AddCardSecurityCodeInput';
 import AddCardPasswordInput from './AddCardPasswordInput';
-import './FormCardAdd.css';
+import './AddCardForm.css';
 
-const FormCardAdd = ({
+const AddCardForm = ({
   cardNumber,
   cardExpire,
   cardOwner,
@@ -49,4 +49,4 @@ const FormCardAdd = ({
   );
 };
 
-export default FormCardAdd;
+export default AddCardForm;

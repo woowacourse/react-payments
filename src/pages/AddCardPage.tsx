@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import type { CardNumber, InputHook } from '../type';
 import Card from '../components/Card';
-import FormCardAdd from '../components/FormCardAdd';
+import AddCardForm from '../components/AddCardForm';
 import Header from '../components/Header';
 import useInput from '../hooks/useInput';
 import usePasswordInput from '../hooks/usePasswordInput';
@@ -68,7 +68,7 @@ const AddCardPage = () => {
           cardOwner={cardOwner.value}
           expired={cardExpire.value}
         />
-        <FormCardAdd
+        <AddCardForm
           cardNumber={cardNumberProps}
           cardExpire={cardExpire}
           cardOwner={cardOwner}
