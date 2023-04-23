@@ -8,6 +8,7 @@ import { validateMultipleInputField } from '../utils/validator';
 
 const useCardForm = (addCard: Dispatch<SetStateAction<Card[]>>) => {
   const [cardInformation, setCardInformation] = useState<Card>({
+    issuer: '',
     cardNumber: '',
     expirationDate: {
       month: '',

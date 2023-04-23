@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { CardInputValidation } from '../types';
 
 const useCardValidator = () => {
-  const [cardInputValidation, setCardInputValidation] = useState({
+  const [cardInputValidation, setCardInputValidation] = useState<CardInputValidation>({
+    issuer: false,
     cardNumber: false,
     expirationDate: false,
     ownerName: true,

@@ -13,6 +13,7 @@ interface ExpirationDate {
 }
 
 interface Card {
+  issuer: Issuer | '';
   cardNumber: string;
   expirationDate: ExpirationDate;
   ownerName?: string;
