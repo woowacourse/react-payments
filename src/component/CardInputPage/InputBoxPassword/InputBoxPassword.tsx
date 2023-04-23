@@ -1,10 +1,9 @@
-import { useState, ChangeEvent } from "react";
+import { useState } from "react";
 import CardPassword from "./CardPassword";
 
 import "./inputBoxPassword.css";
 
 interface Props {
-  //   setCardNumber?: React.Dispatch<React.SetStateAction<number[]>>
   setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
 }
 

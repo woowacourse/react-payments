@@ -4,6 +4,7 @@ import Input from "../../common/Input";
 import { INPUT_STATUS } from "../../../type/InputStatus";
 
 import "./cardNumber.css";
+import CONSTANT from "../../../Constant";
 
 interface Props {
   setError: React.Dispatch<React.SetStateAction<boolean>>;
@@ -46,13 +47,13 @@ export default function CardNumber(props: Props) {
     (e: ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;
 
-      if (value.length > 4) {
-        e.target.value = value.slice(0, 4);
+      if (value.length > CONSTANT.NUMBER_INPUT_MAX_LENGTH) {
+        e.target.value = value.slice(0, CONSTANT.NUMBER_INPUT_MAX_LENGTH);
       }
 
       if (validateCardNumber(e.target.value)) {
         setInputStatus(
-          e.target.value.length === 4
+          e.target.value.length === CONSTANT.NUMBER_INPUT_MAX_LENGTH
             ? INPUT_STATUS.COMPLETE
             : INPUT_STATUS.NOT_COMPLETE
         );

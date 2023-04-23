@@ -2,6 +2,7 @@ import { useState, ChangeEvent } from "react";
 import Input from "../../common/Input";
 
 import "./inputBoxOwner.css";
+import CONSTANT from "../../../Constant";
 
 interface Props {
   setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
@@ -19,7 +20,7 @@ export default function InputBoxOwner(props: Props) {
       .filter((spelling) => spelling !== "")
       .join(" ");
 
-    e.target.value = value.slice(0, 30);
+    e.target.value = value.slice(0, CONSTANT.OWNER_NAME_MAX_LENGTH);
 
     setIsComplete(true);
     setNameLength(e.target.value.trim().length);
@@ -28,7 +29,7 @@ export default function InputBoxOwner(props: Props) {
   return (
     <div className="input-box-card-owner">
       <p>카드 소유자 이름(선택)</p>
-      <p>{nameLength}/30</p>
+      <p>{nameLength}/{CONSTANT.OWNER_NAME_MAX_LENGTH}</p>
       <Input
         name="card-owner"
         className="input-card-owner"

@@ -1,18 +1,14 @@
 import { useState, useEffect, ChangeEvent } from "react";
 import Input from "../../common/Input";
-
+import { INPUT_STATUS } from "../../../type/InputStatus";
 import "./inputBoxExpirationDate.css";
 import { validateExpirationDate } from "../../../validation/ExpirationDate";
+import CONSTANT from "../../../Constant"
+
 interface Props {
   setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
   setPreviewDataHandler: () => void;
 }
-
-const INPUT_STATUS = {
-  ERROR: 0,
-  NOT_COMPLETE: 1,
-  COMPLETE: 2,
-};
 
 export default function InputBoxExpirationDate(props: Props) {
   const { setIsComplete, setPreviewDataHandler } = props;
@@ -20,10 +16,14 @@ export default function InputBoxExpirationDate(props: Props) {
   const [inputStatus, setInputStatus] = useState(INPUT_STATUS.NOT_COMPLETE);
 
   const changeExpirationDate = (e: ChangeEvent<HTMLInputElement>) => {
-    const originDate = e.target.value.split("/").join("").slice(0, 4);
+    const originDate = e.target.value
+      .split("/")
+      .join("")
+      .slice(0, CONSTANT.MONTH_INPUT_MAX_LENGTH + CONSTANT.YEAR_INPUT_MAX_LENGTH);
+
     const formattedDate =
-      originDate.length > 2
-        ? originDate.slice(0, 2) + "/" + originDate.slice(2)
+      originDate.length > CONSTANT.MONTH_INPUT_MAX_LENGTH
+        ? originDate.slice(0, CONSTANT.MONTH_INPUT_MAX_LENGTH) + "/" + originDate.slice(CONSTANT.YEAR_INPUT_MAX_LENGTH)
         : originDate;
 
     e.target.value = formattedDate;

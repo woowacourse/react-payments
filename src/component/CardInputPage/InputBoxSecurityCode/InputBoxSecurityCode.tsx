@@ -3,6 +3,7 @@ import Input from "../../common/Input";
 import { INPUT_STATUS } from "../../../type/InputStatus";
 import "./inputBoxSecurityCode.css";
 import { validateSecurityNumber } from "../../../validation/securityNumber";
+import CONSTANT from "../../../Constant";
 
 interface Props {
   setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
@@ -14,10 +15,12 @@ export default function InputBoxSecurityCode(props: Props) {
   const [inputStatus, setInputStatus] = useState(INPUT_STATUS.NOT_COMPLETE);
 
   const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.length > 3) e.target.value = e.target.value.slice(0, 3);
+    if (e.target.value.length > CONSTANT.SECURITY_INPUT_MAX_LENGTH) {
+      e.target.value = e.target.value.slice(0, CONSTANT.SECURITY_INPUT_MAX_LENGTH);
+    }
 
     if (validateSecurityNumber(e.target.value)) {
-      e.target.value.length === 3
+      e.target.value.length === CONSTANT.SECURITY_INPUT_MAX_LENGTH
         ? setInputStatus(INPUT_STATUS.COMPLETE)
         : setInputStatus(INPUT_STATUS.NOT_COMPLETE);
     } else {

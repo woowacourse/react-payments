@@ -3,6 +3,7 @@ import Input from "../../common/Input";
 import { INPUT_STATUS } from "../../../type/InputStatus";
 import "./cardPassword.css";
 import { validatePassword } from "../../../validation/password";
+import CONSTANT from "../../../Constant";
 
 interface Props {
   setError: React.Dispatch<React.SetStateAction<boolean>>;
@@ -32,11 +33,11 @@ export default function CardPassword(props: Props) {
       const value = e.target.value;
 
       if (value.length > 1) {
-        e.target.value = value.slice(0, 1);
+        e.target.value = value.slice(0, CONSTANT.PASSWORD_INPUT_MAX_LENGTH);
       }
 
       if (validatePassword(e.target.value))
-        e.target.value.length === 1
+        e.target.value.length === CONSTANT.PASSWORD_INPUT_MAX_LENGTH
           ? setInputStatus(INPUT_STATUS.COMPLETE)
           : setInputStatus(INPUT_STATUS.NOT_COMPLETE);
       else setInputStatus(INPUT_STATUS.ERROR);
