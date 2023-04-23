@@ -11,7 +11,10 @@ import { MMYYValidation } from "src/utils/validation";
 function ExpireDate() {
   const [cardInput, setCardInput] = useContext(cardInfoContext);
 
-  const [expireError, setExpireError] = useState(false);
+  const [expireError, setExpireError] = useState({
+    isError: false,
+    message: "",
+  });
 
   const expireDateChange: React.ChangeEventHandler<HTMLInputElement> = (
     event,
@@ -30,13 +33,24 @@ function ExpireDate() {
         throw new Error("유효한 만료일이 아닙니다.");
       }
 
-      setExpireError(false);
-    } catch {
-      setExpireError(true);
+      setExpireError({
+        isError: false,
+        message: "",
+      });
+    } catch (error) {
+      if (error instanceof Error) {
+        setExpireError({
+          isError: true,
+          message: error.message,
+        });
+      }
     } finally {
       if (dateValitation && value.length === NUMBERS.MAX_EXPIREDATE) {
         setCardInput((prev) => ({ ...prev, expireDate: "" }));
-        setExpireError(true);
+        setExpireError({
+          isError: true,
+          message: `${value}는 유효한 값이 아닙니다.`,
+        });
         return;
       }
       const expire = date.match(EACH_SECOND_CHANCE) ?? [];
@@ -55,7 +69,7 @@ function ExpireDate() {
         customInputStyle={Styled.ExpireDateInput}
         placeholder="MM / YY"
       />
-      {expireError && <ErrorSpan>{"유효한 만료일이 아닙니다."}</ErrorSpan>}
+      {expireError.isError && <ErrorSpan>{expireError.message}</ErrorSpan>}
     </Styled.ExpireDateContainer>
   );
 }
