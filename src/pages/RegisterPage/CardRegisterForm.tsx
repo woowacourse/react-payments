@@ -7,7 +7,7 @@ import PasswordInput from "./FormInputs/PasswordInput";
 import SecurityCodeInput from "./FormInputs/SecurityCodeInput";
 import CardPreview from "components/CardPreview";
 import { getFormData } from "utils/formDataGetter";
-import { areValidInfo } from "validation";
+import { isValidInfo } from "validation";
 import Header from "components/Header";
 import { useNavigate } from "react-router-dom";
 
@@ -37,7 +37,7 @@ const CardRegisterForm = () => {
     if (!formData) return;
     const formDataObject = Object.fromEntries(formData);
 
-    if (areValidInfo(formDataObject)) {
+    if (isValidInfo(formDataObject)) {
       const registeredCards = Object.keys(localStorage).filter((key) =>
         key.startsWith("card")
       );

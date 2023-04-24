@@ -13,7 +13,6 @@ interface ValidInput {
   ONLY_ENGLISH: RegExp;
   INVALID_BLANK: string;
   VALID_MONTH: number;
-  MIN_DATE: number;
 }
 
 export const VALID_INPUT: Readonly<ValidInput> = {
@@ -21,5 +20,4 @@ export const VALID_INPUT: Readonly<ValidInput> = {
   ONLY_ENGLISH: /[^a-z A-Z]/g,
   INVALID_BLANK: "  ",
   VALID_MONTH: 12,
-  MIN_DATE: 0,
 };

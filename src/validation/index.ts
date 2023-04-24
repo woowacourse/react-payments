@@ -1,17 +1,43 @@
-export const areValidInfo = (info: any) => {
+import { ExpirationDate } from "types";
+import { LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
+const { VALID_MONTH } = VALID_INPUT;
+
+export const isInvalidDate = (
+  target: HTMLInputElement,
+  date: ExpirationDate
+) => {
+  const { isInvalidMonth, isExpired } = validation;
+
+  if (isInvalidMonth(target)) return true;
+
+  const isTargetMonth = target.name === "month";
+  const isTargetYear = target.name === "year";
+
+  if (isTargetMonth && isExpired(target.value, date.year)) return true;
+  if (isTargetYear && isExpired(date.month, target.value)) return true;
+};
+
+export const isValidInfo = (info: any) => {
   const { month, year, code, password1, password2 } = info;
+  const { isAllValidLength, isValidLength } = validation;
 
   const cardNumbers = Array.from(
-    { length: 4 },
+    { length: LIMIT_LENGTH.CARD_NUMBER },
     (_, index) => info[`number${index + 1}`]
   );
 
-  const validateCardNumber = validation.isAllValidLength(cardNumbers, 4);
-  const validateDate = validation.isAllValidLength([month, year], 2);
-  const validateCode = validation.isValidLength(code, 3);
-  const validatePassword = validation.isAllValidLength(
+  const validateCardNumber = isAllValidLength(
+    cardNumbers,
+    LIMIT_LENGTH.CARD_NUMBER
+  );
+  const validateDate = isAllValidLength(
+    [month, year],
+    LIMIT_LENGTH.EXPIRATION_DATE
+  );
+  const validateCode = isValidLength(code, LIMIT_LENGTH.SECURITY_CODE);
+  const validatePassword = isAllValidLength(
     [password1, password2],
-    1
+    LIMIT_LENGTH.PASSWORD
   );
 
   const validationResult = [
@@ -31,5 +57,31 @@ const validation = {
 
   isValidLength(value: string, length: number) {
     return value.length === length;
+  },
+
+  isInvalidMonth(target: HTMLInputElement) {
+    const value = target.value;
+    const isValidMonth = target.name === "month" && Number(value) > VALID_MONTH;
+
+    return isValidMonth || value === "00";
+  },
+
+  isExpired(inputMonth: string, inputYear: string) {
+    const current = new Date();
+    const thisYear = String(current.getFullYear()).slice(2, 4);
+    const thisMonth = String(current.getMonth() + 1);
+
+    const isBlank = inputMonth === "" || inputYear === "";
+    const isTyping =
+      inputYear === thisYear[0] ||
+      (thisYear === inputYear && inputMonth.length === 1);
+
+    if (isBlank || isTyping) return false;
+    if (inputYear > thisYear || Number(inputYear) > Number(thisYear))
+      return false;
+
+    return thisYear === inputYear
+      ? Number(thisMonth) > Number(inputMonth)
+      : true;
   },
 };

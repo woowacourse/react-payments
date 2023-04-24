@@ -3,33 +3,27 @@ import { ChangeEvent, Dispatch, SetStateAction, Fragment } from "react";
 import styled from "styled-components";
 import { changeToValidValue } from "utils/inputValidator";
 import { HIDDEN_ELEMENT_STYLE } from "constants/style";
-import { LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
 import Input from "components/Input";
-const { ONLY_NUMBER, VALID_MONTH, MIN_DATE } = VALID_INPUT;
-
-interface Date {
-  month: string;
-  year: string;
-}
+import { isInvalidDate } from "validation";
+import { LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
+import { ExpirationDate } from "types";
+const { ONLY_NUMBER } = VALID_INPUT;
 
 interface Props {
-  date: Date;
-  setDate: Dispatch<SetStateAction<Date>>;
+  date: ExpirationDate;
+  setDate: Dispatch<SetStateAction<ExpirationDate>>;
 }
 
 const ExpirationDateInput = ({ date, setDate }: Props) => {
   const { handleRef, moveFocus } = useFocus();
 
   const handleDate = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    const value = target.value;
-    const NumberValue = Number(value);
-    const isValidMonth = target.name === "month" && NumberValue > VALID_MONTH;
-    if (isValidMonth || NumberValue < MIN_DATE) return "";
+    if (isInvalidDate(target, date)) return;
 
     setDate((prevState) => {
       return {
         ...prevState,
-        [target.name]: changeToValidValue(value, {
+        [target.name]: changeToValidValue(target.value, {
           length: LIMIT_LENGTH.EXPIRATION_DATE,
           regex: ONLY_NUMBER,
         }),
