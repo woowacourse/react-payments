@@ -3,7 +3,7 @@ import { CardType } from '../../types/Card';
 
 const Wrapper = styled.div`
   display: flex;
-  align-items: center;
+  align-items: end;
   width: 212px;
   height: 132px;
   padding: 12px;
@@ -18,6 +18,7 @@ const ChipWrapper = styled.div`
   width: 200px;
   display: flex;
   flex-direction: column;
+  margin-bottom: 12px;
 `;
 
 const Chip = styled.div`
@@ -27,10 +28,12 @@ const Chip = styled.div`
   border-radius: 4px;
 `;
 
-const CardText = styled.span`
-  display: inline-block;
+const CardText = styled.p<{ cardName?: boolean }>`
+  width: ${(props) => (props.cardName ? '120px' : '')};
+  height: ${(props) => (props.cardName ? '32px' : '')};
   color: #ffffff;
   margin: 8px 8px 0 0;
+  word-break: break-all;
 `;
 
 const TextWrapper = styled.div`
@@ -52,7 +55,7 @@ const Card = ({ cardNumbers, expiredDates, cardOwnerName }: CardProps) => {
           <CardText>{'•'.repeat(cardNumbers[3].length)}</CardText>
         </TextWrapper>
         <TextWrapper>
-          <CardText>{cardOwnerName || 'NAME'}</CardText>
+          <CardText cardName>{cardOwnerName || 'NAME'}</CardText>
           <CardText>
             {expiredDates[0] || 'MM'} / {expiredDates[1] || 'YY'}
           </CardText>
