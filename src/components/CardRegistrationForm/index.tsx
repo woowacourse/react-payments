@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactComponent as BlackDot } from '../../assets/black-dot.svg';
+import { CARD_FORM_TITLE, SECURITY_CODE_HELP } from '../../constants';
 import { checkCardNumber, checkExpirationDate, checkPassword, checkSecurityCode } from '../../domain/validator';
 import useWrappingContext from '../../hooks/useWrappingContext';
 import CardListStore from '../../store';
@@ -26,6 +27,8 @@ interface ErrorMessage {
   securityCode?: string | undefined;
   password?: string | undefined;
 }
+
+const { NUMBER, EXPIRATION_DATE, OWNER, SECURITY_CODE, PASSWORD } = CARD_FORM_TITLE;
 
 function CardRegistrationForm({
   card,
@@ -79,7 +82,7 @@ function CardRegistrationForm({
   return (
     <StyledCardRegistrationFrom onSubmit={handleForm}>
       <PaymentsInput
-        name="카드 번호"
+        name={NUMBER}
         inputListInformation={{
           inputInformation: [
             { type: 'string', minLength: 4, maxLength: 4, textAlign: 'center', placeholder: '1234', isRequired: true },
@@ -109,7 +112,7 @@ function CardRegistrationForm({
         errorMessage={errorMessage?.cardNumber}
       />
       <PaymentsInput
-        name="만료일"
+        name={EXPIRATION_DATE}
         inputListInformation={{
           inputInformation: [
             { type: 'string', minLength: 2, maxLength: 2, textAlign: 'center', placeholder: 'MM', isRequired: true },
@@ -130,7 +133,7 @@ function CardRegistrationForm({
         errorMessage={errorMessage?.expirationDate}
       />
       <PaymentsInput
-        name="카드 소유자 이름 (선택)"
+        name={OWNER}
         inputListInformation={{
           inputInformation: [
             { type: 'string', maxLength: 30, placeholder: '카드에 표시된 이름과 동일하게 입력하세요.' },
@@ -142,7 +145,7 @@ function CardRegistrationForm({
         showNumberOfValue
       />
       <PaymentsInput
-        name="보안 코드(CVC/CVV)"
+        name={SECURITY_CODE}
         inputListInformation={{
           inputInformation: [
             {
@@ -156,14 +159,12 @@ function CardRegistrationForm({
           ],
           regExp: /[^0-9]/g,
           getInputListValue: getInputListValue(setSecurityCode),
-          children: (
-            <QuestionToolTip questionMessage="CVV/CVC 번호는 카드 뒷 면에 있는 3자리 숫자이며 카드 보안을 위한 번호입니다." />
-          ),
+          children: <QuestionToolTip questionMessage={SECURITY_CODE_HELP} />,
         }}
         errorMessage={errorMessage?.securityCode}
       />
       <PaymentsInput
-        name="카드 비밀번호"
+        name={PASSWORD}
         inputListInformation={{
           inputInformation: [
             { type: 'password', textAlign: 'center', minLength: 1, maxLength: 1, isRequired: true },

@@ -3,6 +3,7 @@ import Card from '../components/Common/Card';
 import Header from '../components/Common/Header';
 import useWrappingContext from '../hooks/useWrappingContext';
 import CardListStore from '../store';
+import getUniqueKey from '../utils/getUniqueKey';
 import type { CardInformation } from '../components/Common/Card/types';
 
 function Home() {
@@ -14,7 +15,7 @@ function Home() {
       <StyledMain>
         <StyledMessage>새로운 카드를 등록해주세요.</StyledMessage>
         {cardList?.map((cardInformation: CardInformation) => (
-          <Card cardInformation={cardInformation} isAddForm />
+          <Card key={getUniqueKey()} cardInformation={cardInformation} isAddForm />
         ))}
         <Card isAddForm={false} />
       </StyledMain>

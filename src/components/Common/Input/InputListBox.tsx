@@ -52,7 +52,7 @@ function InputListBox({
               }}
             />
           ))
-          .reduce((prev, curr) => [prev, bridgeLetter, curr])}
+          .reduce((prev, current) => [prev, bridgeLetter, current])}
       </div>
       {children}
     </StyledInputListBox>

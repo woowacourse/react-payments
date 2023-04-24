@@ -1,8 +1,7 @@
 import styled, { css } from 'styled-components';
 import NamedInputListBox from './Common/Input/NamedInputListBox';
-import type { NamedInputListBoxProps } from './Common/Input/NamedInputListBox';
 
-type PaymentsInputProps = NamedInputListBoxProps & { errorMessage?: string };
+type PaymentsInputProps = React.ComponentPropsWithoutRef<typeof NamedInputListBox> & { errorMessage?: string };
 
 function PaymentsInput({
   inputListInformation,

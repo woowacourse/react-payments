@@ -4,19 +4,17 @@ import InputListBox from './InputListBox';
 
 interface NamedInputListBoxProps {
   inputListInformation: React.ComponentPropsWithoutRef<typeof InputListBox>;
-  name?: string;
+  name: string;
   id?: string;
   showNumberOfValue?: boolean;
 }
 
-export type { NamedInputListBoxProps };
-
 function NamedInputListBox({ inputListInformation, name, id, showNumberOfValue = false }: NamedInputListBoxProps) {
-  const maxInputLength = inputListInformation.inputInformation.reduce((acc, { maxLength }) => {
+  const maxInputLength = inputListInformation.inputInformation.reduce((accumulator, { maxLength }) => {
     if (maxLength) {
-      return acc + maxLength;
+      return accumulator + maxLength;
     }
-    return acc;
+    return accumulator;
   }, 0);
 
   const inputAmount = inputListInformation.inputInformation.length;
@@ -35,7 +33,8 @@ function NamedInputListBox({ inputListInformation, name, id, showNumberOfValue =
           <span>{name}</span>
           {showNumberOfValue && (
             <span>
-              {inputValue?.join('').length}/{maxInputLength}
+              {inputValue?.join('').length}
+              {maxInputLength !== 0 && `/${maxInputLength}`}
             </span>
           )}
         </StyledLabel>

@@ -2,16 +2,20 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as Question } from '../assets/question.svg';
 
-function QuestionToolTip({ questionMessage }: { questionMessage: string }) {
-  const [show, setShow] = useState(false);
+interface QuestionToolTipProps {
+  questionMessage: string;
+}
 
-  const showMessage = () => setShow(true);
-  const hideMessage = () => setShow(false);
+function QuestionToolTip({ questionMessage }: QuestionToolTipProps) {
+  const [isShow, setIsShow] = useState(false);
+
+  const showMessage = () => setIsShow(true);
+  const hideMessage = () => setIsShow(false);
 
   return (
     <StyledQuestionToolTip onMouseEnter={showMessage} onMouseLeave={hideMessage}>
       <Question />
-      {show && <p>{questionMessage}</p>}
+      {isShow && <p>{questionMessage}</p>}
     </StyledQuestionToolTip>
   );
 }
