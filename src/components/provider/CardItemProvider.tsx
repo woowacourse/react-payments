@@ -1,4 +1,6 @@
 import { createContext, useContext, useState } from "react";
+import { INPUT_LENGTH } from "../../constants";
+import { isInputsSatisfied } from "../../utils";
 
 interface CardItemProviderProps {
   children: React.ReactNode;
@@ -33,27 +35,11 @@ const CardItemProvider = ({ children }: CardItemProviderProps) => {
 
   const isAllInputSatisfied = () => {
     return (
-      isCardNumberInputSatisfied() &&
-      isExpirationDateInputSatisfied() &&
-      isSecurityCodeInputSatisfied() &&
-      isPasswordInputSatisfied()
+      isInputsSatisfied(cardNumber, INPUT_LENGTH.CARD_NUMBER) &&
+      isInputsSatisfied(expirationDate, INPUT_LENGTH.EXPIRATION_DATE) &&
+      securityCode.length === INPUT_LENGTH.SECURITY_CODE &&
+      isInputsSatisfied(password, INPUT_LENGTH.PASSWORD)
     );
-  };
-
-  const isCardNumberInputSatisfied = () => {
-    return cardNumber.every((numberValue) => numberValue.length === 4);
-  };
-
-  const isExpirationDateInputSatisfied = () => {
-    return expirationDate.every((dateValue) => dateValue.length === 2);
-  };
-
-  const isSecurityCodeInputSatisfied = () => {
-    return securityCode.length === 3;
-  };
-
-  const isPasswordInputSatisfied = () => {
-    return password.every((passwordValue) => !!passwordValue);
   };
 
   const cardItem = {
