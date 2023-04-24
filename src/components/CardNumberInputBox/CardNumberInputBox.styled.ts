@@ -10,7 +10,6 @@ export const CardNumberInputBox = styled.div`
 export const LabelHeader = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 5px;
 
   span {
     font-size: 15px;
@@ -21,11 +20,14 @@ export const InputContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-column-gap: 20px;
+
+  margin: 5px 0;
+
   border-radius: 10px;
 `;
 
 export const ErrorMessage = styled.p`
   position: absolute;
-  bottom: -20px;
+
   color: ${COLOR.RED};
 `;

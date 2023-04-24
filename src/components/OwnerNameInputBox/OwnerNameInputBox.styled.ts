@@ -9,7 +9,6 @@ export const OwnerNameInputBox = styled.div`
 export const LabelHeader = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 5px;
 
   span {
     font-size: 15px;
@@ -17,6 +16,8 @@ export const LabelHeader = styled.div`
 `;
 
 export const InputContainer = styled.div`
+  margin: 5px 0;
+
   border-radius: 10px;
 `;
 
