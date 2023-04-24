@@ -1,12 +1,14 @@
 import { useFocus } from "hooks/useFocus";
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import { ChangeEvent, Dispatch, SetStateAction, Fragment } from "react";
 import styled from "styled-components";
 import { changeToValidValue } from "utils/inputValidator";
 import { HIDDEN_ELEMENT_STYLE } from "constants/style";
 import { LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
+import Input from "components/Input";
 const { ONLY_NUMBER } = VALID_INPUT;
 
 interface CardNumber {
+  [key: string]: string;
   number1: string;
   number2: string;
   number3: string;
@@ -35,65 +37,40 @@ const CardNumberInput = ({ cardNumber, setCardNumber }: Props) => {
     moveFocus(target, LIMIT_LENGTH.CARD_NUMBER);
   };
 
+  const inputsCount = 4;
+  const lastInput = inputsCount - 1;
+
   return (
     <>
       <S.Label className="label-text" htmlFor="card-label">
         카드 번호
       </S.Label>
       <S.InputBox>
-        <S.Input
-          type="text"
-          name="number1"
-          id="card-label"
-          aria-labelledby="card-label"
-          maxLength={LIMIT_LENGTH.CARD_NUMBER}
-          inputMode="numeric"
-          value={cardNumber.number1}
-          ref={(el) => handleRef(el, 0)}
-          onChange={handleCardNumber}
-          placeholder="0000"
-          autoFocus
-          required
-        />
-        <S.Hyphen cardNumber={cardNumber.number1}>-</S.Hyphen>
-        <S.Input
-          type="text"
-          name="number2"
-          aria-labelledby="card-label"
-          maxLength={LIMIT_LENGTH.CARD_NUMBER}
-          inputMode="numeric"
-          value={cardNumber.number2}
-          ref={(el) => handleRef(el, 1)}
-          onChange={handleCardNumber}
-          placeholder="0000"
-          required
-        />
-        <S.Hyphen cardNumber={cardNumber.number2}>-</S.Hyphen>
-        <S.Input
-          type="password"
-          name="number3"
-          aria-labelledby="card-label"
-          maxLength={LIMIT_LENGTH.CARD_NUMBER}
-          inputMode="numeric"
-          value={cardNumber.number3}
-          ref={(el) => handleRef(el, 2)}
-          onChange={handleCardNumber}
-          placeholder="0000"
-          required
-        />
-        <S.Hyphen cardNumber={cardNumber.number3}>-</S.Hyphen>
-        <S.Input
-          type="password"
-          name="number4"
-          aria-labelledby="card-label"
-          maxLength={LIMIT_LENGTH.CARD_NUMBER}
-          inputMode="numeric"
-          value={cardNumber.number4}
-          ref={(el) => handleRef(el, 3)}
-          onChange={handleCardNumber}
-          placeholder="0000"
-          required
-        />
+        {Array.from({ length: inputsCount }).map((_, index) => (
+          <Fragment key={index}>
+            <Input
+              type="text"
+              name={`number${index + 1}`}
+              id={index ? undefined : "card-label"}
+              aria-labelledby="card-label"
+              maxLength={LIMIT_LENGTH.CARD_NUMBER}
+              inputMode="numeric"
+              value={cardNumber[`number${index + 1}`]}
+              placeholder="0000"
+              autoFocus={index ? false : true}
+              required
+              onChange={handleCardNumber}
+              ref={(el) => handleRef(el, index)}
+            />
+            {index === lastInput ? (
+              ""
+            ) : (
+              <S.Hyphen cardNumber={cardNumber[`number${index + 1}`]}>
+                -
+              </S.Hyphen>
+            )}
+          </Fragment>
+        ))}
       </S.InputBox>
       <S.Caption cardNumbers={Object.values(cardNumber)}>
         숫자 {LIMIT_LENGTH.ALL_CARD_NUMBERS}자리를 모두 입력해 주세요.
@@ -116,15 +93,6 @@ const S = {
     margin-top: 12px;
     background: var(--input-background);
     border-radius: 8px;
-  `,
-
-  Input: styled.input`
-    background: var(--input-background);
-    width: 14vw;
-    margin: 0 2.2vw;
-    font-size: 14px;
-    text-align: center;
-    letter-spacing: 1px;
   `,
 
   Hyphen: styled.p<{ cardNumber: string }>`
