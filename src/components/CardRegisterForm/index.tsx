@@ -89,7 +89,7 @@ const CardRegisterForm = ({ registerCard }: Props) => {
         expiredYear={expiredYear}
       />
       <form className={styles.form} onSubmit={handleSubmit}>
-        <CardRegisterField label="카드 번호" size='fit'>
+        <CardRegisterField label="카드 번호" size="fit">
           <Input
             type="text"
             minLength={4}
@@ -101,6 +101,7 @@ const CardRegisterForm = ({ registerCard }: Props) => {
             onChange={(e) => handleNumberChange(e, setCardNumber1)}
             ref={inputRefs[0]}
             placeholder="0000"
+            align="center"
           />
           <span>-</span>
           <Input
@@ -113,6 +114,7 @@ const CardRegisterForm = ({ registerCard }: Props) => {
             onChange={(e) => handleNumberChange(e, setCardNumber2)}
             ref={inputRefs[1]}
             placeholder="0000"
+            align="center"
           />
           <span>-</span>
           <Input
@@ -125,6 +127,7 @@ const CardRegisterForm = ({ registerCard }: Props) => {
             onChange={(e) => handleNumberChange(e, setCardNumber3)}
             ref={inputRefs[2]}
             placeholder="0000"
+            align="center"
           />
           <span>-</span>
           <Input
@@ -137,10 +140,11 @@ const CardRegisterForm = ({ registerCard }: Props) => {
             onChange={(e) => handleNumberChange(e, setCardNumber4)}
             ref={inputRefs[3]}
             placeholder="0000"
+            align="center"
           />
         </CardRegisterField>
 
-        <CardRegisterField label="만료일" size='medium'>
+        <CardRegisterField label="만료일" size="medium">
           <Input
             type="text"
             minLength={2}
@@ -151,6 +155,7 @@ const CardRegisterForm = ({ registerCard }: Props) => {
             value={expiredMonth}
             onChange={(e) => handleNumberChange(e, setExpiredMonth)}
             ref={inputRefs[4]}
+            align="center"
           />
           <span>/</span>
           <Input
@@ -163,12 +168,13 @@ const CardRegisterForm = ({ registerCard }: Props) => {
             value={expiredYear}
             onChange={(e) => handleNumberChange(e, setExpiredYear)}
             ref={inputRefs[5]}
+            align="center"
           />
         </CardRegisterField>
 
         <CardRegisterField
           label="카드 소유자 이름(선택)"
-          size='fit'
+          size="fit"
           valueLength={owner.length}
           maxLength={20}
         >
@@ -183,7 +189,7 @@ const CardRegisterForm = ({ registerCard }: Props) => {
           />
         </CardRegisterField>
 
-        <CardRegisterField label="보안코드(CVC/CVV)" size='small' tooltip>
+        <CardRegisterField label="보안코드(CVC/CVV)" size="small" tooltip>
           <Input
             type="password"
             minLength={3}
@@ -193,10 +199,11 @@ const CardRegisterForm = ({ registerCard }: Props) => {
             value={cvc}
             onChange={(e) => handleNumberChange(e, setCvc)}
             ref={inputRefs[7]}
+            align="center"
           />
         </CardRegisterField>
 
-        <CardRegisterField label="카드 비밀번호" size='medium' split>
+        <CardRegisterField label="카드 비밀번호" size="medium" split>
           <Input
             type="password"
             minLength={1}
@@ -206,6 +213,7 @@ const CardRegisterForm = ({ registerCard }: Props) => {
             value={cardPassword1}
             onChange={(e) => handleNumberChange(e, setCardPassword1)}
             ref={inputRefs[8]}
+            align="center"
           />
           <Input
             type="password"
@@ -216,6 +224,7 @@ const CardRegisterForm = ({ registerCard }: Props) => {
             value={cardPassword2}
             onChange={(e) => handleNumberChange(e, setCardPassword2)}
             ref={inputRefs[9]}
+            align="center"
           />
           <p>﹒</p>
           <p>﹒</p>

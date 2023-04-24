@@ -5,13 +5,17 @@ import {
   useRef,
 } from 'react';
 
-type Props = InputHTMLAttributes<HTMLInputElement>;
+import styles from './input.module.css';
+
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
+  align?: 'left' | 'center' | 'right';
+}
 
 export interface Focus {
   focus: () => void;
 }
 
-const Input = forwardRef<Focus, Props>(({ ...props }, ref) => {
+const Input = forwardRef<Focus, Props>(({ align = 'left', ...props }, ref) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useImperativeHandle(
@@ -26,7 +30,13 @@ const Input = forwardRef<Focus, Props>(({ ...props }, ref) => {
     [],
   );
 
-  return <input {...props} ref={inputRef} />;
+  return (
+    <input
+      className={`${styles.input} ${styles[align]}`}
+      {...props}
+      ref={inputRef}
+    />
+  );
 });
 
 export default Input;
