@@ -1,15 +1,11 @@
 import { ChangeEvent, useRef } from 'react';
-import {
-  CARD_NUMBER_INPUT_MAX_LENGTH,
-  CARD_NUMBER_INPUT_UNIT_MAX_LENGTH,
-} from '../../../constants';
+import { CARD_NUMBER_INPUT_MAX_LENGTH } from '../../../constants';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
 import Input from '../../common/Input/Input';
-import { useInputCursorPosition } from '../../../hooks/useInputCursorPosition';
+import { useCardNumber } from '../../../hooks/useCardNumber';
 import { useError } from '../../../hooks/useError';
 import { encryptDisplayedCardNumber, formatDisplayedCardNumber } from '../../../utils/formatter';
-import { checkNumberFormat } from '../../../utils/formatChecker';
 
 interface CardNumberProps {
   onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -19,49 +15,14 @@ interface CardNumberProps {
 
 function CardNumber({ onInputChange, value, isValid }: CardNumberProps) {
   const inputRef = useRef<HTMLInputElement>(null);
-  const setCursor = useInputCursorPosition(inputRef);
+  const { onInputValueChange } = useCardNumber(inputRef);
   const { isError, handleError, removeError } = useError(isValid);
 
   const cardNumber = formatDisplayedCardNumber(value);
 
-  const onInputCursorPositionChange = ({ target, nativeEvent }: ChangeEvent<HTMLInputElement>) => {
-    if (!(nativeEvent instanceof InputEvent) || !target.selectionStart) return;
-
-    const key = nativeEvent.data;
-    const cursor =
-      target.selectionStart +
-      (target.selectionStart % CARD_NUMBER_INPUT_UNIT_MAX_LENGTH === 0 && key ? 1 : 0);
-    setCursor(cursor);
-  };
-
-  const onInputValueChange = ({ target, nativeEvent }: ChangeEvent<HTMLInputElement>) => {
-    if (
-      !(nativeEvent instanceof InputEvent) ||
-      target.dataset.value === undefined ||
-      target.selectionStart === null
-    ) {
-      return;
-    }
-
-    if (nativeEvent.inputType === 'insertText') {
-      const value = nativeEvent.data as string;
-      target.dataset.value = checkNumberFormat(value)
-        ? target.dataset.value + value
-        : target.dataset.value;
-    }
-
-    if (nativeEvent.inputType === 'deleteContentBackward') {
-      const modifiedValue =
-        target.dataset.value.slice(0, target.selectionStart) +
-        target.dataset.value.slice(target.selectionStart + 1);
-      target.dataset.value = modifiedValue;
-    }
-  };
-
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     removeError();
     onInputValueChange(event);
-    onInputCursorPositionChange(event);
     onInputChange(event);
   };
 
