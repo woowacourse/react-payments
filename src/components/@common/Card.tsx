@@ -23,8 +23,8 @@ const Card = ({ cardNumber, ownerName, expirationDate }: CardProps) => {
 export default Card;
 
 const CardContainer = styled.div`
-  width: 213px;
-  height: 133px;
+  width: 233px;
+  height: 143px;
 
   display: flex;
   flex-direction: column;
@@ -36,7 +36,7 @@ const CardContainer = styled.div`
   border-radius: 5px;
 
   padding: 14px;
-  margin: 25px auto;
+  margin: 18px auto;
 
   box-sizing: border-box;
 `;
