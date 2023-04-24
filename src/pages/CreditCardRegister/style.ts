@@ -64,19 +64,24 @@ export const RegisterButton = styled.button`
 `;
 
 export const HiddenInput = styled.input`
-    opacity: 0;
+    pointer-events: none;
+    cursor: not-allowed;
+    caret-color: transparent;
     position: absolute;
     text-align: center;
     bottom: 0;
     left: 0;
     right: 0;
-    outline: none;
     border: none;
-    background: #ECEBF1;
+    background: transparent;
     height: 48px;
     font-size: 18px;
-    color: #ECEBF1;
-    caret-color: black;
+    color: transparent;
+    border-radius: 7px;
+    :focus {
+        outline: none;
+        border: 2px solid gray;
+    }
 `;
 
 export const PasswordBox = styled.div`

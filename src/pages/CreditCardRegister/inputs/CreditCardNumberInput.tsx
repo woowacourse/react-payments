@@ -49,25 +49,27 @@ function CreditCardNumberInput({ name, creditCard, setCreditCard }: Props) {
   const isError = validateNumber(creditCard.number);
 
   return (
-    <S.RelativeBox>
-      <S.CreditCardRegisterLabel>카드 번호</S.CreditCardRegisterLabel>
-      <MaskedViewer
-        onClick={() => {
-          if (inputRef.current) {
-            inputRef.current.focus();
-          }
-        }}
-      >
-        {markedCreditCardNumber}
-      </MaskedViewer>
+    <>
+      <S.RelativeBox>
+        <S.CreditCardRegisterLabel>카드 번호</S.CreditCardRegisterLabel>
+        <MaskedViewer
+          onClick={() => {
+            if (inputRef.current) {
+              inputRef.current.focus();
+            }
+          }}
+        >
+          {markedCreditCardNumber}
+        </MaskedViewer>
+        <S.HiddenInput
+          ref={inputRef}
+          type="string"
+          value={creditCard.number}
+          onChange={handleChangeCreditCardNumber}
+        />
+      </S.RelativeBox>
       {isError && <S.ErrorMessage>카드번호는 16자리의 숫자로만 이루어져야 합니다.</S.ErrorMessage>}
-      <S.HiddenInput
-        ref={inputRef}
-        type="string"
-        value={creditCard.number}
-        onChange={handleChangeCreditCardNumber}
-      />
-    </S.RelativeBox>
+    </>
   );
 }
 
