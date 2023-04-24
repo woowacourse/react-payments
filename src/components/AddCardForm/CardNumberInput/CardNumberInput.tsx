@@ -3,9 +3,11 @@ import { addHyphensInCardNumber } from '../replacers';
 import useValidator from '../../../hooks/useValidator';
 import LabeledInput from '../LabeledInput/LabeledInput';
 import Input from '../../common/Input/Input';
+import { useEffect } from 'react';
+import type { FormInputValueType } from '../../../types';
 
 type CardNumberInputProps = {
-  updateCardNumber: (cardNumber: string) => void;
+  updateCardNumber: (cardNumber: FormInputValueType) => void;
 };
 
 const CardNumberInput = ({ updateCardNumber }: CardNumberInputProps) => {
@@ -16,8 +18,11 @@ const CardNumberInput = ({ updateCardNumber }: CardNumberInputProps) => {
     const cardNumberWithHyphens = addHyphensInCardNumber(cardNumber);
 
     setValueWithValidation(cardNumberWithHyphens);
-    updateCardNumber(cardNumberWithHyphens);
   };
+
+  useEffect(() => {
+    updateCardNumber({ isValid: isValid, value: value });
+  }, [value, isValid, updateCardNumber]);
 
   return (
     <LabeledInput title="카드 번호" errorMessage={errorMessage}>

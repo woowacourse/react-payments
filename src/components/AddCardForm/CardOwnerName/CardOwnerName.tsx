@@ -1,20 +1,24 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import LabeledInput from '../LabeledInput/LabeledInput';
 import Input from '../../common/Input/Input';
+import type { FormInputValueType } from '../../../types';
 
 type CardOwnerNameProps = {
-  updateCardOwnerName: (cardOwnerName: string) => void;
+  updateCardOwnerName: (cardOwnerName: FormInputValueType) => void;
 };
 
 const CardOwnerName = ({ updateCardOwnerName }: CardOwnerNameProps) => {
   const [cardOwnerName, setCardOwnerName] = useState('');
 
   const checkCardOwnerNameLength = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const currentCardOwnerName = event.target.value;
+    const cardOwnerName = event.target.value;
 
-    setCardOwnerName(currentCardOwnerName);
-    updateCardOwnerName(currentCardOwnerName);
+    setCardOwnerName(cardOwnerName);
   };
+
+  useEffect(() => {
+    updateCardOwnerName({ isValid: true, value: cardOwnerName });
+  }, [cardOwnerName, updateCardOwnerName]);
 
   return (
     <LabeledInput title="카드 소유자 이름 (선택)" numberOfLetter={{ current: cardOwnerName.length, max: 30 }}>

@@ -1,11 +1,16 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 import useValidator from '../../../hooks/useValidator';
 import { checkValidCVC } from '../validators';
 import CardInfoInput from '../LabeledInput/LabeledInput';
 import HelpButton from '../../common/HelpButton/HelpButton';
 import Input from '../../common/Input/Input';
+import { FormInputValueType } from '../../../types';
 
-const CardSecurityCodeInput = () => {
+type CardSecurityCodeInputProps = {
+  updateCardSecurityCode: (cardNumber: FormInputValueType) => void;
+};
+
+const CardSecurityCodeInput = ({ updateCardSecurityCode }: CardSecurityCodeInputProps) => {
   const { value, isValid, errorMessage, setValueWithValidation } = useValidator(checkValidCVC);
 
   const updateSecurityCode = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -13,6 +18,10 @@ const CardSecurityCodeInput = () => {
 
     setValueWithValidation(securityCode);
   };
+
+  useEffect(() => {
+    updateCardSecurityCode({ isValid: isValid, value: value });
+  }, [value, isValid, updateCardSecurityCode]);
 
   return (
     <CardInfoInput title="보안 코드(CVC/CVV)" errorMessage={errorMessage}>

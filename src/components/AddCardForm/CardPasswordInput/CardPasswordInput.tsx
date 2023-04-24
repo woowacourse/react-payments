@@ -1,11 +1,16 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import useValidator from '../../../hooks/useValidator';
 import { checkValidPassword } from '../validators';
 import CardInfoInput from '../LabeledInput/LabeledInput';
 import Input from '../../common/Input/Input';
 import MockPasswordInput from './MockPasswordInput/MockPasswordInput';
+import { FormInputValueType } from '../../../types';
 
-const CardPasswordInput = () => {
+type CardPasswordInputProps = {
+  updateCardPassword: (cardNumber: FormInputValueType) => void;
+};
+
+const CardPasswordInput = ({ updateCardPassword }: CardPasswordInputProps) => {
   const [firstDigit, setFirstDigit] = useState('');
   const [secondDigit, setSecondDigit] = useState('');
   const { value, isValid, errorMessage, setValueWithValidation } = useValidator(checkValidPassword);
@@ -32,6 +37,10 @@ const CardPasswordInput = () => {
       return digit;
     });
   };
+
+  useEffect(() => {
+    updateCardPassword({ isValid: isValid, value: value });
+  }, [value, isValid, updateCardPassword]);
 
   return (
     <CardInfoInput title="카드 비밀번호" errorMessage={errorMessage}>

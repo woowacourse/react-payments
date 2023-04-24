@@ -7,19 +7,26 @@ import CardPasswordInput from './CardPasswordInput/CardPasswordInput';
 import { useNavigate } from 'react-router-dom';
 import type { CardInfo } from '../../types';
 import FooterButton from '../common/FooterButton/FooterButton';
+import type { FormInputValueType } from '../../types';
 
 type AddCardFormProps = {
-  updateCardNumber: (cardNumber: string) => void;
-  updateExpirationDate: (expirationDate: string) => void;
-  updateCardOwnerName: (cardOwnerName: string) => void;
+  updateCardNumber: (cardNumber: FormInputValueType) => void;
+  updateExpirationDate: (expirationDate: FormInputValueType) => void;
+  updateCardOwnerName: (cardOwnerName: FormInputValueType) => void;
+  updateCardSecurityCode: (securityCode: FormInputValueType) => void;
+  updateCardPassword: (password: FormInputValueType) => void;
   registerNewCard: (cardInfo: CardInfo) => void;
+  isUnlocked: boolean;
 };
 
 const AddCardForm = ({
   updateCardNumber,
   updateExpirationDate,
   updateCardOwnerName,
+  updateCardSecurityCode,
+  updateCardPassword,
   registerNewCard,
+  isUnlocked,
 }: AddCardFormProps) => {
   const navigate = useNavigate();
 
@@ -57,9 +64,9 @@ const AddCardForm = ({
       <CardNumberInput updateCardNumber={updateCardNumber} />
       <ExpirationDateInput updateExpirationDate={updateExpirationDate} />
       <CardOwnerName updateCardOwnerName={updateCardOwnerName} />
-      <CardSecurityCodeInput />
-      <CardPasswordInput />
-      <FooterButton title="다음" />
+      <CardSecurityCodeInput updateCardSecurityCode={updateCardSecurityCode} />
+      <CardPasswordInput updateCardPassword={updateCardPassword} />
+      <FooterButton title="다음" disabled={!isUnlocked} />
     </form>
   );
 };
