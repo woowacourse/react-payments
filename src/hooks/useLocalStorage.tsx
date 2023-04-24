@@ -7,8 +7,13 @@ export const useLocalStorage = <T,>(
   const [value, setValue] = useState(initialValue);
 
   useEffect(() => {
-    const savedData = JSON.parse(localStorage.getItem(key) || "[]");
-    if (savedData && savedData.length > 0) setValue(savedData);
+    try {
+      const savedData = JSON.parse(localStorage.getItem(key) || "[]");
+      if (savedData && savedData.length > 0) setValue(savedData);
+    } catch (error) {
+      console.error(error);
+      setValue(initialValue);
+    }
   }, []);
 
   const setState = (data: T) => {
