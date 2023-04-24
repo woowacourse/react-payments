@@ -9,7 +9,7 @@ const Card = ({ cardNumber, color, ownerName, expiredDate }: CardType) => {
     <CardWrapper style={{ background: color }}>
       <img src={IcChip} alt="ic-chip" />
       <CardInfoWrapper>
-        <div>
+        <UpInfoWrapper>
           {cardNumberArray.map((cardNumber, index) => {
             return (
               <span
@@ -20,11 +20,11 @@ const Card = ({ cardNumber, color, ownerName, expiredDate }: CardType) => {
               </span>
             );
           })}
-        </div>
-        <div>
+        </UpInfoWrapper>
+        <BottomInfoWrapper>
           <span>{ownerName}</span>
           <span>{expiredDate}</span>
-        </div>
+        </BottomInfoWrapper>
       </CardInfoWrapper>
     </CardWrapper>
   );
@@ -61,14 +61,21 @@ const CardInfoWrapper = styled.div`
   padding: 8px 5px;
   box-sizing: border-box;
 
-  & > div {
-    display: flex;
-    justify-content: space-between;
-
-    & > span {
-      font-weight: 900;
-    }
+  & > div > span {
+    font-weight: 900;
+    padding-right: 6px;
   }
+`;
+
+const UpInfoWrapper = styled.div`
+  display: flex;
+  max-width: max-content;
+`;
+
+const BottomInfoWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  min-width: 100%;
 `;
 
 export default Card;
