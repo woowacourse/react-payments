@@ -12,11 +12,15 @@ export const isOverLength = (inputValue: string, maxLength: number) => {
   return inputValue.length > maxLength;
 };
 
-export const isNextInputFocusable = (
-  inputValue: string,
-  inputIndex: number,
-  maxLength: number
-) => {
+export const isNextInputFocusable = ({
+  inputValue,
+  inputIndex,
+  maxLength,
+}: {
+  inputValue: string;
+  inputIndex: number;
+  maxLength: number;
+}) => {
   return inputValue.length > maxLength - 1 && inputIndex < maxLength - 1;
 };
 

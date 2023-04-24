@@ -59,11 +59,11 @@ const ExpirationDateInput = ({
       setValue(newInputs);
 
       if (
-        isNextInputFocusable(
+        isNextInputFocusable({
           inputValue,
           inputIndex,
-          INPUT_MAX_LENGTH.EXPIRATION_DATE_LENGTH
-        )
+          maxLength: INPUT_MAX_LENGTH.EXPIRATION_DATE_LENGTH,
+        })
       )
         refs[inputIndex + 1].current?.focus();
 

@@ -39,11 +39,11 @@ const PasswordInput = ({
       setErrorMessage('');
 
       if (
-        isNextInputFocusable(
+        isNextInputFocusable({
           inputValue,
           inputIndex,
-          INPUT_MAX_LENGTH.PASSWORD_LENGTH
-        )
+          maxLength: INPUT_MAX_LENGTH.PASSWORD_LENGTH,
+        })
       ) {
         refs[inputIndex + 1].current?.focus();
       }

@@ -36,11 +36,11 @@ const CardNumberInput = ({
         return;
       }
       if (
-        isNextInputFocusable(
+        isNextInputFocusable({
           inputValue,
           inputIndex,
-          INPUT_MAX_LENGTH.CARD_NUMBER_LENGTH
-        )
+          maxLength: INPUT_MAX_LENGTH.CARD_NUMBER_LENGTH,
+        })
       )
         refs[inputIndex + 1].current?.focus();
 
