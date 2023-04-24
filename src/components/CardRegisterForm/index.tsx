@@ -2,12 +2,12 @@ import { FormEventHandler, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Card from '../Card';
-import Input, { Focus } from '../Input';
+import Input, { Focus } from '../common/Input';
 import Tooltip from '../Tooltip';
 import TooltipButton from '../TooltipButton';
 
 import useCardRegisterForm from './useCardRegisterForm';
-import useModal from '../common/Modal/hooks/useModal';
+import { useModal } from '../common/Modal/ModalContext';
 import { CARD_NUMBER_INPUT_PLACEHOLDER } from '../../domain/constants';
 import type { CardInfo } from '../../domain/types/card';
 
@@ -94,6 +94,7 @@ const CardRegisterForm = ({ registerCard }: Props) => {
         owner={owner}
         expiredMonth={expiredMonth}
         expiredYear={expiredYear}
+        onClick={openModal}
       />
       <form className={styles.form} onSubmit={handleSubmit}>
         <label>
