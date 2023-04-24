@@ -3,6 +3,7 @@ import CreditCard from 'components/CreditCard';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import * as Type from 'types';
+import { useCreditCard } from 'hooks/useCreditCard';
 import CreditCardNumberInput from './inputs/CreditCardNumberInput';
 import CreditCardExpiryInput from './inputs/CreditCardExpiryInput';
 import CreditCardOwnerInput from './inputs/CreditCardOwnerInput';
@@ -15,6 +16,7 @@ import {
 
 function CreditCardRegister() {
   const navigate = useNavigate();
+  const { saveCreditCard } = useCreditCard();
 
   const [creditCard, setCreditCard] = useState<Type.CreditCard>({
     number: '',
@@ -47,8 +49,7 @@ function CreditCardRegister() {
         second: creditCard.password.second,
       },
     };
-    const existCreditCard = JSON.parse(localStorage.getItem('creditCards') || '[]');
-    localStorage.setItem('creditCards', JSON.stringify([...existCreditCard, newCreditCard]));
+    saveCreditCard(newCreditCard);
     navigate('/');
   };
 

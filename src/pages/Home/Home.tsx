@@ -1,16 +1,11 @@
 import CreditCard from 'components/CreditCard';
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import * as Type from 'types';
+import { useCreditCard } from 'hooks/useCreditCard';
 import * as S from './style';
 
 function Home() {
   const navigate = useNavigate();
-  const [creditCardList, setCreditCardList] = useState<Type.CreditCard[]>([]);
-
-  useEffect(() => {
-    setCreditCardList(JSON.parse(localStorage.getItem('creditCards') || '[]'));
-  }, []);
+  const { creditCardList } = useCreditCard();
 
   return (
     <S.HomeLayout>

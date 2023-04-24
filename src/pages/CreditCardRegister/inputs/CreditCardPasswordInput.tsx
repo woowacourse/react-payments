@@ -13,7 +13,6 @@ type Props = {
 function CreditCardPasswordInput({ name, creditCard, setCreditCard }: Props) {
   const handleChangeCreditCardPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newPassword = (event.target.value as T.CreditCardPasswordTypeKeys).replace(/\D/g, '');
-    console.log('newPassword', newPassword);
     if (newPassword.length === 1) {
       const updatedCreditCard: T.CreditCard = { ...creditCard };
       (updatedCreditCard[name] as T.CreditCardPasswordType)[event.target.name as T.CreditCardPasswordTypeKeys] = event.target.value;
