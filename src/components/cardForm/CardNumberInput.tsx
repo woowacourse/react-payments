@@ -56,7 +56,7 @@ const CardNumberInput = ({
       <InputBox isError={!!errorMessage}>
         {Array.from({ length: INPUT_MAX_LENGTH.CARD_NUMBER_LENGTH }).map(
           (_, index) => (
-            <React.Fragment key={index}>
+            <React.Fragment key={`card-number-input-${index}`}>
               <Input
                 ref={refs[index]}
                 value={value[index]}
