@@ -66,7 +66,7 @@ const ExpirationDateInput = (props: Props) => {
   );
 };
 
-const S = {
+export const S = {
   InputBox: styled.div`
     display: flex;
     justify-content: center;

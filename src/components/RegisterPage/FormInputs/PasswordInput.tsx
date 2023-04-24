@@ -56,7 +56,7 @@ const PasswordInput = () => {
   );
 };
 
-const S = {
+export const S = {
   InputBox: styled.div`
     display: flex;
     height: 48px;

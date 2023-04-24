@@ -41,7 +41,7 @@ const SecurityCodeInput = () => {
   );
 };
 
-const S = {
+export const S = {
   Wrapper: styled.div`
     display: flex;
     align-items: center;

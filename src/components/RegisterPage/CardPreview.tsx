@@ -24,7 +24,7 @@ const CardPreview = ({ cardInfo }: { cardInfo: Card }) => {
   );
 };
 
-const S = {
+export const S = {
   Card: styled.div`
     display: flex;
     flex-direction: column;

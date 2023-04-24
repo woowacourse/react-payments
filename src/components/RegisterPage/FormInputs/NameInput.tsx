@@ -48,7 +48,7 @@ const NameInput = (props: Props) => {
   );
 };
 
-const S = {
+export const S = {
   Wrapper: styled.div`
     display: flex;
     justify-content: space-between;
