@@ -65,9 +65,9 @@ const CardNumberInput = ({ cardNumber, setCardNumber }: Props) => {
             {index === lastInput ? (
               ""
             ) : (
-              <S.Hyphen cardNumber={cardNumber[`number${index + 1}`]}>
+              <S.Delimiter cardNumber={cardNumber[`number${index + 1}`]}>
                 -
-              </S.Hyphen>
+              </S.Delimiter>
             )}
           </Fragment>
         ))}
@@ -95,7 +95,7 @@ const S = {
     border-radius: 8px;
   `,
 
-  Hyphen: styled.p<{ cardNumber: string }>`
+  Delimiter: styled.p<{ cardNumber: string }>`
     font-weight: 900;
     align-self: center;
     visibility: ${({ cardNumber }) =>

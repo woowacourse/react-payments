@@ -1,9 +1,10 @@
 import { useFocus } from "hooks/useFocus";
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import { ChangeEvent, Dispatch, SetStateAction, Fragment } from "react";
 import styled from "styled-components";
 import { changeToValidValue } from "utils/inputValidator";
 import { HIDDEN_ELEMENT_STYLE } from "constants/style";
 import { LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
+import Input from "components/Input";
 const { ONLY_NUMBER, VALID_MONTH, MIN_DATE } = VALID_INPUT;
 
 interface Date {
@@ -38,38 +39,37 @@ const ExpirationDateInput = ({ date, setDate }: Props) => {
     moveFocus(target, LIMIT_LENGTH.EXPIRATION_DATE);
   };
 
+  const inputsCount = 2;
+  const lastInput = inputsCount - 1;
+
   return (
     <>
       <label className="label-text" htmlFor="date-label">
         만료일
       </label>
       <S.InputBox>
-        <S.Input
-          type="text"
-          name="month"
-          id="date-label"
-          aria-labelledby="date-label"
-          maxLength={LIMIT_LENGTH.EXPIRATION_DATE}
-          inputMode="numeric"
-          value={date.month}
-          ref={(el) => handleRef(el, 0)}
-          onChange={handleDate}
-          placeholder="MM"
-          required
-        />
-        <S.Hyphen month={date.month}>/</S.Hyphen>
-        <S.Input
-          type="text"
-          name="year"
-          aria-labelledby="date-label"
-          maxLength={LIMIT_LENGTH.EXPIRATION_DATE}
-          inputMode="numeric"
-          value={date.year}
-          ref={(el) => handleRef(el, 1)}
-          onChange={handleDate}
-          placeholder="YY"
-          required
-        />
+        {Array.from({ length: inputsCount }).map((_, index) => (
+          <Fragment key={index}>
+            <Input
+              type="text"
+              name={index ? "year" : "month"}
+              id={index ? undefined : "date-label"}
+              aria-labelledby="date-label"
+              maxLength={LIMIT_LENGTH.EXPIRATION_DATE}
+              inputMode="numeric"
+              value={index ? date.year : date.month}
+              placeholder={index ? "YY" : "MM"}
+              required
+              onChange={handleDate}
+              ref={(el) => handleRef(el, index)}
+            />
+            {index === lastInput ? (
+              ""
+            ) : (
+              <S.Delimiter month={date.month}>/</S.Delimiter>
+            )}
+          </Fragment>
+        ))}
       </S.InputBox>
       <S.Caption date={Object.values(date)}>
         카드에 표기된 월/연도 순으로 입력해주세요. ex&#41; 01/28
@@ -89,16 +89,7 @@ const S = {
     border-radius: 8px;
   `,
 
-  Input: styled.input`
-    background: var(--input-background);
-    width: 12vw;
-    margin: 0 2.2vw;
-    text-align: center;
-    font-size: 14px;
-    letter-spacing: 1px;
-  `,
-
-  Hyphen: styled.p<{ month: string }>`
+  Delimiter: styled.p<{ month: string }>`
     font-weight: 900;
     align-self: center;
     visibility: ${({ month }) =>
