@@ -27,6 +27,7 @@ const initialCard: CreditCard = {
 
 export default function CardInputForm(props: Props) {
   const { addNewCard } = props;
+
   const [isFormFilled, setIsFormFilled] = useState(false);
 
   const [nowCardInfo, setNowCardInfo] = useState<CreditCard>(initialCard);
@@ -47,7 +48,6 @@ export default function CardInputForm(props: Props) {
 
     if (!formElement.current) return;
 
-    console.log(formElement.current);
     const formData = new FormData(formElement.current);
 
     const card: CreditCard = {
@@ -89,12 +89,10 @@ export default function CardInputForm(props: Props) {
     }
 
     if (key === "expirationDate") {
-      console.log(isExpirationDateComplete);
       setNowCardInfo({ ...nowCardInfo, [key]: value });
       return;
     }
-    if (key === "owner") console.log(isOwnerComplete);
-    setNowCardInfo({ ...nowCardInfo, [key]: value });
+    if (key === "owner") setNowCardInfo({ ...nowCardInfo, [key]: value });
   };
 
   useEffect(() => {

@@ -2,9 +2,7 @@ import { InputHTMLAttributes } from "react";
 
 import styles from "./Input.module.css";
 
-interface Props extends InputHTMLAttributes<HTMLInputElement> {
-  // className?: string;
-}
+interface Props extends InputHTMLAttributes<HTMLInputElement> {}
 
 export default function Input(props: Props) {
   const {
