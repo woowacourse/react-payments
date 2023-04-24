@@ -15,7 +15,9 @@ function CardListPage() {
       <main>
         <CardList cardList={cardList} />
         <Link to={PATH.ADD}>
-          <Button className="add-button center-hoz-item w-250">카드 추가하기</Button>
+          <Button variant="secondary" className="add-button mg-t-24 center-hoz-item w-250">
+            카드 추가하기
+          </Button>
         </Link>
       </main>
     </>
