@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import type { Meta } from '@storybook/react';
 
 import { OwnerNameInput } from '../../components/input/OwnerNameInput';
@@ -12,16 +12,13 @@ const meta = {
 export default meta;
 
 export const OwnerName = () => {
-  const ownerNameInputRef = useRef(null);
   const [ownerName, setOwnerName] = useState('');
 
   return (
     <OwnerNameInput
-      ownerNameInputRef={ownerNameInputRef}
-      moveFocusToSecurityCode={() => {}}
       ownerName={ownerName}
       setOwnerName={setOwnerName}
-      moveFocusToYearInput={() => {}}
+      focusFirstOwnerNameInput={() => {}}
     />
   );
 };

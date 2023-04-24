@@ -13,16 +13,13 @@ const meta = {
 export default meta;
 
 export const SecurityCode = () => {
-  const securityCodeInputRef = useRef(null);
   const [securityCode, setSecurityCode] = useState('');
 
   return (
     <SecurityCodeInput
-      securityCodeInputRef={securityCodeInputRef}
-      moveFocusToPassword={() => {}}
       securityCode={securityCode}
       setSecurityCode={setSecurityCode}
-      moveFocusToOwnerName={() => {}}
+      focusFirstSecurityCodeInput={() => {}}
     />
   );
 };

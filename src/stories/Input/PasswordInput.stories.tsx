@@ -13,19 +13,15 @@ const meta = {
 export default meta;
 
 export const Password = () => {
-  const passwordInputRef = useRef(null);
-  const [password, setPassword] = useState({
-    firstPassword: '',
-    secondPassword: '',
-  });
+  const [password, setPassword] = useState(['', '']);
 
   return (
     <PasswordInput
-      passwordInputRef={passwordInputRef}
       activateNextButton={() => {}}
       password={password}
       setPassword={setPassword}
-      moveFocusToSecurityCode={() => {}}
+      focusPasswordInputByIndex={(index: number) => {}}
+      focusFirstPasswordInput={() => {}}
     />
   );
 };

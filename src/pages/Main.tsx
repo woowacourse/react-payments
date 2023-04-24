@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { CardViewer } from '../components/CardViewer';
+import { CardViewer } from '../components/cardViewer';
 import { cardDataService } from '../domains/cardDataService';
 import { Layout } from '../layout';
 import { v4 } from 'uuid';

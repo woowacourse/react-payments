@@ -1,132 +1,123 @@
-import React, { useEffect, useRef } from 'react';
-import { InputWrapper } from './InputWrapper';
-import { Input } from './Input';
+import React, { useEffect, forwardRef } from 'react';
+import { InputWrapper } from './template/InputWrapper';
+import { Input } from './template/Input';
 import styled from 'styled-components';
 
 interface Props {
-  moveFocusToExpirationDate: () => void;
-  cardNumber: {
-    0: string;
-    1: string;
-    2: string;
-    3: string;
-  };
-  setCardNumber: React.Dispatch<
-    React.SetStateAction<{
-      0: string;
-      1: string;
-      2: string;
-      3: string;
-    }>
-  >;
-  lastCardNumberInputRef: React.RefObject<HTMLInputElement>;
+  cardNumber: string[];
+  setCardNumber: React.Dispatch<React.SetStateAction<string[]>>;
+  focusCardNumberInputByIndex: (nextIndex: number) => void;
+  focusFirstCardNumberInput: () => void;
 }
 
-const HYPHEN = styled.span``;
+export const CardNumberInput = forwardRef<HTMLInputElement[], Props>(
+  function CardNumberInput(
+    {
+      cardNumber,
+      setCardNumber,
+      focusCardNumberInputByIndex,
+      focusFirstCardNumberInput,
+    },
+    refs
+  ) {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const index = e.target.dataset.index;
 
-export function CardNumberInput({
-  moveFocusToExpirationDate,
-  cardNumber,
-  setCardNumber,
-  lastCardNumberInputRef,
-}: Props) {
-  const allRefs = [
-    useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null),
-    lastCardNumberInputRef,
-  ];
+      if (index === undefined) return;
 
-  useEffect(() => {
-    allRefs[0].current?.click();
-  }, []);
+      validator(e.target.value, Number(index));
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const index = Number(e.target.dataset.index);
+      setCardNumber((current) => {
+        const newCardNumber = [...current];
 
-    setCardNumber({
-      ...cardNumber,
-      [index]: e.target.value,
-    });
+        newCardNumber[Number(index)] = e.target.value;
 
-    if (e.target.value.length === 4) {
-      if (index !== 3) allRefs[index + 1].current?.focus();
-      if (index === 3) moveFocusToExpirationDate();
-    }
-
-    if (!validator(e.target.value)) {
-      setCardNumber({
-        ...cardNumber,
-        [index]: '',
+        return newCardNumber;
       });
+
+      if (e.target.value.length === 4) {
+        focusCardNumberInputByIndex(Number(index) + 1);
+      }
+    };
+
+    const validator = (input: string, index: number) => {
+      if (/^[0-9]+$|^$/.test(input)) return;
+
+      setCardNumber((current) => {
+        const newCardNumber = [...current];
+
+        newCardNumber[Number(index)] = '';
+
+        return newCardNumber;
+      });
+
       alert('유효하지 않은 카드 번호입니다.');
 
-      allRefs[index].current?.focus();
-    }
-  };
+      focusCardNumberInputByIndex(index);
+    };
 
-  const handlePressBackspace = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (!(e.target instanceof HTMLInputElement)) return;
+    const handlePressBackspace = (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (!(e.target instanceof HTMLInputElement)) return;
 
-    const index = Number(e.target.dataset.index);
+      const index = e.target.dataset.index;
 
-    if (
-      e.key === 'Backspace' &&
-      cardNumber[index as keyof typeof cardNumber] === '' &&
-      index !== 0
-    ) {
-      e.preventDefault();
-      allRefs[index - 1].current?.focus();
-    }
-  };
+      if (index === undefined) return;
 
-  return (
-    <>
-      <Style.Label>
-        <Style.Title>카드 번호</Style.Title>
-      </Style.Label>
-      <InputWrapper width={318}>
-        {Array.from({ length: 4 }).map((_, index) => {
-          return (
-            <>
-              <Input
-                value={cardNumber[index as keyof typeof cardNumber]}
-                width={'36'}
-                minLength={4}
-                maxLength={4}
-                required
-                inputMode="numeric"
-                autoFocus={index === 0 ? true : false}
-                type={index > 1 ? 'password' : 'text'}
-                ref={allRefs[index]}
-                data-index={index}
-                onChange={handleInputChange}
-                onKeyDown={handlePressBackspace}
-                placeholder={index < 2 ? '0000' : '••••'}
-              />
-              {index < 3 && (
-                <HYPHEN
-                  style={{
-                    visibility:
-                      cardNumber[index as keyof typeof cardNumber].length === 4
-                        ? 'visible'
-                        : 'hidden',
+      if (e.key === 'Backspace' && cardNumber[Number(index)] === '') {
+        e.preventDefault();
+
+        focusCardNumberInputByIndex(Number(index) - 1);
+      }
+    };
+
+    useEffect(() => {
+      focusFirstCardNumberInput();
+    }, []);
+
+    return (
+      <>
+        <Style.Label>
+          <Style.Title>카드 번호</Style.Title>
+        </Style.Label>
+        <InputWrapper width={318}>
+          {cardNumber.map((_, index) => {
+            return (
+              <>
+                <Input
+                  type={index > 1 ? 'password' : 'text'}
+                  value={cardNumber[index]}
+                  width={'36'}
+                  minLength={4}
+                  maxLength={4}
+                  inputMode="numeric"
+                  ref={(element) => {
+                    if (!(element instanceof HTMLInputElement)) return;
+                    if (typeof refs !== 'object') return;
+                    if (refs?.current) refs.current[index] = element;
                   }}
-                >
-                  &nbsp;-&nbsp;
-                </HYPHEN>
-              )}
-            </>
-          );
-        })}
-      </InputWrapper>
-    </>
-  );
-}
-
-const validator = (input: string) => {
-  return /^[0-9]+$|^$/.test(input);
-};
+                  data-index={index}
+                  onChange={handleInputChange}
+                  onKeyDown={handlePressBackspace}
+                  required
+                />
+                {index < 3 && (
+                  <Style.Hyphen
+                    style={{
+                      visibility:
+                        cardNumber[index].length === 4 ? 'visible' : 'hidden',
+                    }}
+                  >
+                    &nbsp;-&nbsp;
+                  </Style.Hyphen>
+                )}
+              </>
+            );
+          })}
+        </InputWrapper>
+      </>
+    );
+  }
+);
 
 const Style = {
   Label: styled.div`
@@ -140,4 +131,5 @@ const Style = {
   Title: styled.span`
     color: #2f2f2f;
   `,
+  Hyphen: styled.span``,
 };

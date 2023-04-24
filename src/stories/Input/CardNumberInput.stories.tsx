@@ -14,14 +14,14 @@ const meta = {
 export default meta;
 
 export const CardNumber = () => {
-  const [cardNumber, setCardNumber] = useState({ 0: '', 1: '', 2: '', 3: '' });
+  const [cardNumber, setCardNumber] = useState(['', '', '', '']);
 
   return (
     <CardNumberInput
-      moveFocusToExpirationDate={() => {}}
       cardNumber={cardNumber}
       setCardNumber={setCardNumber}
-      lastCardNumberInputRef={React.createRef()}
+      focusFirstCardNumberInput={() => {}}
+      focusCardNumberInputByIndex={() => {}}
     />
   );
 };

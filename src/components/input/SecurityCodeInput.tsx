@@ -1,77 +1,72 @@
-import { useEffect } from 'react';
-import { InputWrapper } from './InputWrapper';
-import { Input } from './Input';
+import { forwardRef, useEffect } from 'react';
+import { InputWrapper } from './template/InputWrapper';
+import { Input } from './template/Input';
 import styled from 'styled-components';
 
 interface Props {
-  securityCodeInputRef: React.RefObject<HTMLInputElement>;
-  moveFocusToPassword: () => void;
   securityCode: string;
   setSecurityCode: React.Dispatch<React.SetStateAction<string>>;
-  moveFocusToOwnerName: () => void;
+  focusFirstSecurityCodeInput: () => void;
 }
 
-export function SecurityCodeInput({
-  securityCodeInputRef,
-  moveFocusToPassword,
-  securityCode,
-  setSecurityCode,
-  moveFocusToOwnerName,
-}: Props) {
-  useEffect(() => {
-    if (securityCode.length === 3) moveFocusToPassword();
-  }, [securityCode]);
+export const SecurityCodeInput = forwardRef<HTMLInputElement[], Props>(
+  function SecurityCodeInput(
+    { securityCode, setSecurityCode, focusFirstSecurityCodeInput },
+    refs
+  ) {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (!isNumeric(e.target.value)) {
+        e.target.value = '';
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!isNumeric(e.target.value)) {
-      e.target.value = '';
+        alert('유효한 보안 코드가 아닙니다.');
+      }
 
-      alert('유효한 보안 코드가 아닙니다.');
-    }
+      setSecurityCode(e.target.value.toUpperCase());
+    };
 
-    setSecurityCode(e.target.value.toUpperCase());
-  };
+    const validateSecurityCode = () => {
+      if (!isValidSecurityCode(securityCode) && securityCode !== '') {
+        alert('유효한 보안 코드가 아닙니다.');
 
-  const validateSecurityCode = () => {
-    if (!isValidSecurityCode(securityCode) && securityCode !== '') {
-      alert('유효한 보안 코드가 아닙니다.');
+        setSecurityCode('');
 
-      setSecurityCode('');
-      securityCodeInputRef.current?.focus();
-    }
-  };
+        if (typeof refs !== 'object') return;
+        if (refs?.current) refs.current[0].focus();
+      }
+    };
 
-  const handleBackspacePress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key !== 'Backspace') return;
-    if (!(e.target instanceof HTMLInputElement)) return;
+    useEffect(() => {
+      focusFirstSecurityCodeInput();
+    }, []);
 
-    if (e.target.value === '') moveFocusToOwnerName();
-  };
-
-  return (
-    <>
-      <Style.Label>
-        <Style.Title>보안 코드(CVC/CVV)</Style.Title>
-      </Style.Label>
-      <InputWrapper width={84}>
-        <Input
-          ref={securityCodeInputRef}
-          value={securityCode}
-          width={'84'}
-          minLength={3}
-          maxLength={3}
-          placeholder="•••"
-          onChange={handleInputChange}
-          onBlur={validateSecurityCode}
-          onKeyDown={handleBackspacePress}
-          inputMode="numeric"
-          type="password"
-          required
-        />
-      </InputWrapper>
-    </>
-  );
-}
+    return (
+      <>
+        <Style.Label>
+          <Style.Title>보안 코드(CVC/CVV)</Style.Title>
+        </Style.Label>
+        <InputWrapper width={84}>
+          <Input
+            ref={(element) => {
+              if (!(element instanceof HTMLInputElement)) return;
+              if (typeof refs !== 'object') return;
+              if (refs?.current) refs.current[0] = element;
+            }}
+            value={securityCode}
+            width={'84'}
+            minLength={3}
+            maxLength={3}
+            placeholder="•••"
+            onChange={handleInputChange}
+            onBlur={validateSecurityCode}
+            inputMode="numeric"
+            type="password"
+            required
+          />
+        </InputWrapper>
+      </>
+    );
+  }
+);
 
 const isNumeric = (input: string) => {
   return /^[0-9]*$/.test(input);

@@ -1,22 +1,14 @@
 const LOCAL_STORAGE_KEY = { CARD_LIST: 'cardList' };
 
 export interface Card {
-  cardNumber: {
-    0: string;
-    1: string;
-    2: string;
-    3: string;
-  };
+  cardNumber: string[];
   expirationDate: {
     month: string;
     year: string;
   };
   ownerName: string;
   securityCode: string;
-  password: {
-    firstPassword: string;
-    secondPassword: string;
-  };
+  password: string[];
 }
 
 export const cardDataService = {

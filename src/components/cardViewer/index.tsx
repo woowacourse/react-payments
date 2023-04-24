@@ -2,12 +2,7 @@ import styled from 'styled-components';
 import { v4 } from 'uuid';
 
 interface Props {
-  cardNumber: {
-    0: string;
-    1: string;
-    2: string;
-    3: string;
-  };
+  cardNumber: string[];
   expirationDate: {
     month: string;
     year: string;
@@ -20,7 +15,7 @@ export function CardViewer({ cardNumber, expirationDate, ownerName }: Props) {
     <Style.Wrapper>
       <Style.ICChip />
       <Style.CardNumberContainer>
-        {Object.values(cardNumber).map((number, index) => (
+        {cardNumber.map((number, index) => (
           <Style.NumberInput
             key={v4()}
             style={{
