@@ -1,13 +1,14 @@
 import styled from 'styled-components';
+import { CardProps } from '../../types/props';
 
-export const Card = styled.div<any>`
+export const Card = styled.div<CardProps>`
   position: relative;
   width: 240px;
   height: 150px;
 
   padding: 12px 18px;
 
-  background-color: ${(props: any) => props.bgColor ?? '#E5E5E5'};
+  background-color: ${props => props.bgColor ?? '#E5E5E5'};
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
 
@@ -74,7 +75,7 @@ export const Ellipse = styled.div`
 
   border-radius: 50%;
 
-  background: ${(props) => (props.color ? props.color : '#ffffff')};
+  background: ${props => (props.color ? props.color : '#ffffff')};
 `;
 
 export const CardNameAndExpirationDateContainer = styled.div`
