@@ -1,5 +1,5 @@
 import { CardChip } from '../../assets/svg';
-import type { CardCompany, CardInfo } from '../../domain/types/card';
+import type { CardInfo } from '../../domain/types/card';
 
 import styles from './card.module.css';
 
@@ -12,11 +12,16 @@ const CARD_COMPANY_CLASSNAMES = {
   롯데카드: 'lotte-card',
   하나카드: 'hana-card',
   국민카드: 'kb-card',
-  default: 'hyundai-card',
 };
 
-type Props = CardInfo & {
-  cardCompany: CardCompany | null;
+type OptionalCardInfo = Pick<
+  CardInfo,
+  Exclude<keyof CardInfo, 'cardCompany'>
+> & {
+  cardCompany: CardInfo['cardCompany'] | null;
+};
+
+type Props = OptionalCardInfo & {
   onClick?: () => void;
 };
 
