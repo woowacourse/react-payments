@@ -1,3 +1,7 @@
+:root {
+  --transparent-black-color: #00000030;
+}
+
 .container {
   display: flex;
   justify-content: flex-end;
@@ -9,4 +13,8 @@
   background: none;
   border: none;
   cursor: pointer;
+}
+
+.button:disabled {
+  color: var(--transparent-black-color);
 }

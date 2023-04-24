@@ -3,13 +3,16 @@ import styles from './FooterButton.module.css';
 
 type FooterButtonProps = {
   title: string;
+  disabled?: boolean;
 };
 
-const FooterButton = ({ title }: FooterButtonProps) => {
+const FooterButton = ({ title, disabled }: FooterButtonProps) => {
   return (
-    <div className={styles.container}>
-      <button className={styles.button}>{title}</button>
-    </div>
+    <footer className={styles.container}>
+      <button className={styles.button} disabled={disabled}>
+        {title}
+      </button>
+    </footer>
   );
 };
 
