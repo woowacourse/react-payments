@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import styled from "styled-components";
 import CardNumberInput from "./CardNumberInput";
 import ExpirationDateInput from "./ExpirationDateInput";
