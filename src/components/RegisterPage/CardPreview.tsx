@@ -28,10 +28,10 @@ const CardPreview = ({ cardInfo }: { cardInfo: Props }) => {
           </S.Secret>
         </S.Numbers>
         <S.Wrapper>
-          <p>{cardInfo.name}</p>
-          <S.Date>{`${cardInfo.month} ${
+          <S.Name>{cardInfo.name}</S.Name>
+          <S.Date>{`${cardInfo.month}${
             cardInfo.month.length === LIMIT_LENGTH.EXPIRATION_DATE ? "/" : ""
-          } ${cardInfo.year}`}</S.Date>
+          }${cardInfo.year}`}</S.Date>
         </S.Wrapper>
       </S.CardInfo>
     </S.Card>
@@ -95,6 +95,10 @@ const S = {
     justify-content: space-between;
     margin-bottom: 16px;
     font-size: 12px;
+  `,
+
+  Name: styled.p`
+    letter-spacing: -0.5px;
   `,
 
   Date: styled.p`
