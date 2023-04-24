@@ -30,7 +30,7 @@ const SecurityCodeInput = () => {
   return (
     <InputGroup labelValue={"보안 코드(CVC/CVV)"} errorMessage={securityCodeErrorMessage}>
       <InputBox width="100px" isError={!!securityCodeErrorMessage}>
-        <Input type="securityCode" value={securityCode} onChange={handleChangeInput} />
+        <Input type="password" value={securityCode} onChange={handleChangeInput} />
       </InputBox>
     </InputGroup>
   );
