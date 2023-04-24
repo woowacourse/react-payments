@@ -23,6 +23,6 @@ const GlobalStyle = createGlobalStyle`
     button, input {
         all:unset;
     }
-}`;
+`;
 
 export default GlobalStyle;
