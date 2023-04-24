@@ -17,7 +17,11 @@ export default function App() {
   return (
     <div className="app">
       {page === 'homePage' && (
-        <Homepage cardList={cardList} onClick={() => setPage('addCardPage')} />
+        <Homepage
+          cardList={cardList}
+          setCardList={setCardList}
+          setPage={setPage}
+        />
       )}
       {page === 'addCardPage' && (
         <AddCardPage

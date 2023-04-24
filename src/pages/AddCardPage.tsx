@@ -12,12 +12,12 @@ import PasswordInput from '../components/card/input/PasswordInput';
 import NextButton from '../components/common/NextButton';
 import { useFocusInput } from '../hooks/useFocusInput';
 import { createUniqueId, isNumber, isOnlyKoreanAndEnglish } from '../utils';
-import { CardInfo } from '../types';
+import { CardInfo, PageInfo } from '../types';
 
 interface AddCardPageProps {
   cardList: CardInfo[];
   setCardList: (data: CardInfo[]) => void;
-  setPage: React.Dispatch<React.SetStateAction<'homePage' | 'addCardPage'>>;
+  setPage: React.Dispatch<React.SetStateAction<PageInfo>>;
 }
 
 interface cardInputValueInfo {
@@ -74,6 +74,7 @@ const InputWrapper = styled.div`
 
 const InputWrapperParent = styled.form`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   margin-top: 40px;
   margin: 40px 0 25px 0;
@@ -84,6 +85,7 @@ const CvcWrapper = styled.div`
 `;
 
 const NextButtonWrapper = styled.div`
+  margin-top: 25px;
   align-self: end;
 `;
 
@@ -373,10 +375,10 @@ export default function AddCardPage({
             />
           </InputField>
         </InputWrapper>
+        <NextButtonWrapper>
+          <NextButton isDisable={isFormfilled} />
+        </NextButtonWrapper>
       </InputWrapperParent>
-      <NextButtonWrapper>
-        <NextButton isDisable={isFormfilled} />
-      </NextButtonWrapper>
     </Page>
   );
 }

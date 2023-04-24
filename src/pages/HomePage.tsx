@@ -1,12 +1,13 @@
-import React, { MouseEvent } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { CardInfo } from '../types';
+import { CardInfo, PageInfo } from '../types';
 import Card from '../components/card/Card';
 import AddCardButton from '../components/card/button/AddCardButton';
 
 interface HomePageProps {
   cardList: CardInfo[];
-  onClick: (event: MouseEvent<HTMLElement>) => void;
+  setCardList: (data: CardInfo[]) => void;
+  setPage: React.Dispatch<React.SetStateAction<PageInfo>>;
 }
 
 const Page = styled.div`
@@ -39,7 +40,28 @@ const CardWrapper = styled.div`
   gap: 46px;
 `;
 
-export default function Homepage({ onClick, cardList }: HomePageProps) {
+export default function Homepage({
+  cardList,
+  setPage,
+  setCardList,
+}: HomePageProps) {
+  const onAddClick = () => {
+    setPage('addCardPage');
+  };
+
+  const onDeleteClick = (index: number) => {
+    const result = window.confirm('정말 삭제하시겠습니까?');
+
+    if (result) {
+      const updatedCardList = [
+        ...cardList.slice(0, index),
+        ...cardList.slice(index + 1),
+      ];
+      console.log(updatedCardList, index);
+      setCardList(updatedCardList);
+    }
+  };
+
   return (
     <Page>
       <Title>보유카드</Title>
@@ -47,15 +69,16 @@ export default function Homepage({ onClick, cardList }: HomePageProps) {
         <AddInformation>새로운 카드를 등록해주세요.</AddInformation>
       )}
       <CardWrapper>
-        {cardList?.map((card) => (
+        {cardList?.map((card, index) => (
           <Card
             key={card.id}
             owner={card.owner}
             cardNumberSet={Object.values(card.cardNumber)}
             expiracy={`${card.expiracy.month}/${card.expiracy.year}`}
+            onDeleteClick={() => onDeleteClick(index)}
           />
         ))}
-        <AddCardButton onClick={onClick} />
+        <AddCardButton onClick={onAddClick} />
       </CardWrapper>
     </Page>
   );
