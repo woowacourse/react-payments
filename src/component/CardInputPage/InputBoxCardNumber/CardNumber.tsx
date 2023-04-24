@@ -1,4 +1,4 @@
-import { ChangeEvent, useState, useEffect } from "react";
+import { ChangeEvent, useState, useEffect, useReducer } from "react";
 import { validateCardNumber } from "../../../validation/cardNumber";
 import Input from "../../common/Input";
 import { INPUT_STATUS } from "../../../type/InputStatus";
@@ -8,8 +8,18 @@ import CONSTANT from "../../../Constant";
 
 interface Props {
   setError: React.Dispatch<React.SetStateAction<boolean>>;
-  setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsComplete: (value: boolean) => void;
   setPreviewDataHandler: () => void;
+}
+
+const reducer = (state: Record<number, INPUT_STATUS>, action: { index: number, status: INPUT_STATUS }) => {
+  state[action.index] = action.status;
+}
+
+const useMultipleInputStatus = (length: number) => {
+  
+
+  const useReducer
 }
 
 export default function CardNumber(props: Props) {

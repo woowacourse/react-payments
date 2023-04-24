@@ -6,7 +6,7 @@ import { validateExpirationDate } from "../../../validation/ExpirationDate";
 import CONSTANT from "../../../Constant"
 
 interface Props {
-  setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsComplete: (value: boolean) => void;
   setPreviewDataHandler: () => void;
 }
 

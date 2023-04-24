@@ -4,7 +4,7 @@ import CardNumber from "./CardNumber";
 import "./inputBoxCardNumber.css";
 
 interface Props {
-  setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsComplete: (value: boolean) => void;
   setPreviewDataHandler: () => void;
 }
 

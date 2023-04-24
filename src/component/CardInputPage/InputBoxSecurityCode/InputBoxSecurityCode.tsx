@@ -6,7 +6,7 @@ import { validateSecurityNumber } from "../../../validation/securityNumber";
 import CONSTANT from "../../../Constant";
 
 interface Props {
-  setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsComplete: (value: boolean) => void;
 }
 
 export default function InputBoxSecurityCode(props: Props) {

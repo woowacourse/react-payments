@@ -4,7 +4,7 @@ import CardPassword from "./CardPassword";
 import "./inputBoxPassword.css";
 
 interface Props {
-  setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsComplete: (value: boolean) => void;
 }
 
 export default function InputBoxPassword(props: Props) {

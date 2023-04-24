@@ -7,7 +7,7 @@ import CONSTANT from "../../../Constant";
 
 interface Props {
   setError: React.Dispatch<React.SetStateAction<boolean>>;
-  setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsComplete: (value: boolean) => void;
 }
 
 export default function CardPassword(props: Props) {

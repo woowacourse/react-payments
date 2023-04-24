@@ -11,6 +11,7 @@ import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import "./cardInputForm.css";
+import useBooleanSeriesConnection from "../../../hook/useBooleanSeriesConnection";
 
 interface Props {
   addNewCard: (card: CreditCard) => void;
@@ -39,14 +40,13 @@ const getFormData = (form: HTMLFormElement): CreditCard => {
 
 export default function CardInputForm(props: Props) {
   const { addNewCard } = props;
-  const [isFormFilled, setIsFormFilled] = useState(false);
 
   const [cardPreviewData, setCardPreviewData] = useState<CreditCard>(getDefaultCreditCard());
 
-  const [isCardNumberComplete, setIsCardNumberComplete] = useState(false);
-  const [isExpirationDateComplete, setIsExpirationDateComplete] = useState(false);
-  const [isSecurityComplete, setIsSecurityComplete] = useState(false);
-  const [isPasswordComplete, setIsPasswordComplete] = useState(false);
+  const { 
+    isAllTrue: isAllComplete,
+    getSetBooleanHandler: getSetCompleteStatus
+  } = useBooleanSeriesConnection(4);
 
   const navigate = useNavigate();
 
@@ -73,46 +73,34 @@ export default function CardInputForm(props: Props) {
   }
 
   useEffect(() => {
-    if (!isFormFilled) {
+    if (!isAllComplete) {
       formElement.current?.removeEventListener("submit", event);
     }
 
     formElement.current?.addEventListener("submit", event);
-  }, [isFormFilled]);
-
-  useEffect(() => {
-    if (
-      isCardNumberComplete &&
-      isExpirationDateComplete &&
-      isSecurityComplete &&
-      isPasswordComplete
-    )
-      setIsFormFilled(true);
-    else setIsFormFilled(false);
-  }, [
-    isCardNumberComplete,
-    isExpirationDateComplete,
-    isSecurityComplete,
-    isPasswordComplete,
-  ]);
+  }, [isAllComplete]);
 
   return (
     <form ref={formElement} className="form">
       <CardPreview card={cardPreviewData} />
       <InputBoxCardNumber
-        setIsComplete={setIsCardNumberComplete}
+        setIsComplete={getSetCompleteStatus(0)}
         setPreviewDataHandler={setCardPreviewDataFromForm}
       />
       <InputBoxExpirationDate
-        setIsComplete={setIsExpirationDateComplete}
+        setIsComplete={getSetCompleteStatus(1)}
         setPreviewDataHandler={setCardPreviewDataFromForm}
       />
       <InputBoxOwner
         setPreviewDataHandler={setCardPreviewDataFromForm}
       />
-      <InputBoxSecurityCode setIsComplete={setIsSecurityComplete} />
-      <InputBoxPassword setIsComplete={setIsPasswordComplete} />
-      {isFormFilled && <Button type="submit">다음</Button>}
+      <InputBoxSecurityCode
+        setIsComplete={getSetCompleteStatus(2)}
+      />
+      <InputBoxPassword
+        setIsComplete={getSetCompleteStatus(3)}
+      />
+      {isAllComplete && <Button type="submit">다음</Button>}
     </form>
   );
 }
