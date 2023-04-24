@@ -27,11 +27,11 @@ const Home = ({ cards }: { cards: CardType[] }) => {
           <EmptyCardText>새로운 카드를 등록해주세요.</EmptyCardText>
         )}
         {cards.map(
-          ({ id, cardNumbers, expiredDate, cardOwnerName }: CardType) => (
+          ({ id, cardNumbers, expiredDates, cardOwnerName }: CardType) => (
             <Card
               key={id}
               cardNumbers={cardNumbers}
-              expiredDate={expiredDate}
+              expiredDates={expiredDates}
               cardOwnerName={cardOwnerName}
             />
           )

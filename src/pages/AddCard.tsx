@@ -36,15 +36,15 @@ const AddCard = ({ cards, setCards }: SetCardsProps) => {
   const {
     cardNumbers,
     setCardNumbers,
-    expiredDate,
-    setExpiredDate,
+    expiredDates,
+    setExpiredDates,
     cardOwnerName,
     setCardOwnerName,
     securityCode,
     setSecurityCode,
-    password,
-    setPassword,
-    disabled,
+    passwords,
+    setPasswords,
+    isCorrectForm,
   } = useAddCard();
 
   const navigate = useNavigate();
@@ -52,7 +52,7 @@ const AddCard = ({ cards, setCards }: SetCardsProps) => {
   const handleSetCards = () => {
     setCards([
       ...cards,
-      { id: uuidv4(), cardNumbers, expiredDate, cardOwnerName },
+      { id: uuidv4(), cardNumbers, expiredDates, cardOwnerName },
     ]);
     navigate('/');
   };
@@ -64,7 +64,7 @@ const AddCard = ({ cards, setCards }: SetCardsProps) => {
         <Wrapper>
           <Card
             cardNumbers={cardNumbers}
-            expiredDate={expiredDate}
+            expiredDates={expiredDates}
             cardOwnerName={cardOwnerName}
           />
         </Wrapper>
@@ -73,8 +73,8 @@ const AddCard = ({ cards, setCards }: SetCardsProps) => {
           setCardNumbers={setCardNumbers}
         />
         <ExpiredDate
-          expiredDate={expiredDate}
-          setExpiredDate={setExpiredDate}
+          expiredDates={expiredDates}
+          setExpiredDates={setExpiredDates}
         />
         <CardOwnerName
           cardOwnerName={cardOwnerName}
@@ -84,9 +84,9 @@ const AddCard = ({ cards, setCards }: SetCardsProps) => {
           securityCode={securityCode}
           setSecurityCode={setSecurityCode}
         />
-        <CardPassword password={password} setPassword={setPassword} />
+        <CardPassword passwords={passwords} setPasswords={setPasswords} />
         <ButtonWrapper>
-          <NextButton disabled={disabled}>다음</NextButton>
+          <NextButton disabled={isCorrectForm}>다음</NextButton>
         </ButtonWrapper>
       </form>
     </>

@@ -12,9 +12,6 @@ type Story = StoryObj<typeof meta>;
 
 export const SecurityCodeStory: Story = {
   args: {
-    expiredDate: {
-      0: '02',
-      1: '32',
-    },
+    expiredDates: ['02', '12'],
   },
 };

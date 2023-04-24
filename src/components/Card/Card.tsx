@@ -40,7 +40,7 @@ const TextWrapper = styled.div`
 
 type CardProps = Omit<CardType, 'id'>;
 
-const Card = ({ cardNumbers, expiredDate, cardOwnerName }: CardProps) => {
+const Card = ({ cardNumbers, expiredDates, cardOwnerName }: CardProps) => {
   return (
     <Wrapper>
       <ChipWrapper>
@@ -54,7 +54,7 @@ const Card = ({ cardNumbers, expiredDate, cardOwnerName }: CardProps) => {
         <TextWrapper>
           <CardText>{cardOwnerName || 'NAME'}</CardText>
           <CardText>
-            {expiredDate[0] || 'MM'} / {expiredDate[1] || 'YY'}
+            {expiredDates[0] || 'MM'} / {expiredDates[1] || 'YY'}
           </CardText>
         </TextWrapper>
       </ChipWrapper>

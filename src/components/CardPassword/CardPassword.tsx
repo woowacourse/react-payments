@@ -28,11 +28,11 @@ const Pargraph = styled.p`
 `;
 
 interface CardPasswordProps {
-  password: Record<number, string>;
-  setPassword: React.Dispatch<React.SetStateAction<Record<number, string>>>;
+  passwords: Array<string>;
+  setPasswords: React.Dispatch<React.SetStateAction<Array<string>>>;
 }
 
-const CardPassword = ({ password, setPassword }: CardPasswordProps) => {
+const CardPassword = ({ passwords, setPasswords }: CardPasswordProps) => {
   const passwordRefs: Record<number, React.RefObject<HTMLInputElement>> = {
     0: useRef<HTMLInputElement>(null),
     1: useRef<HTMLInputElement>(null),
@@ -45,9 +45,9 @@ const CardPassword = ({ password, setPassword }: CardPasswordProps) => {
       return;
     }
 
-    setPassword({ ...password, [currentOrder]: e.target.value });
+    setPasswords({ ...passwords, [currentOrder]: e.target.value });
 
-    if (currentOrder === 0 && password[0].length === 0) {
+    if (currentOrder === 0 && passwords[0].length === 0) {
       passwordRefs[currentOrder + 1].current?.focus();
     }
   };
@@ -62,7 +62,7 @@ const CardPassword = ({ password, setPassword }: CardPasswordProps) => {
             maxLength={1}
             ref={passwordRefs[0]}
             onChange={handleCardInputChange}
-            value={password[0]}
+            value={passwords[0]}
             order={0}
             placeholder="•"
             required={true}
@@ -74,7 +74,7 @@ const CardPassword = ({ password, setPassword }: CardPasswordProps) => {
             maxLength={1}
             ref={passwordRefs[1]}
             onChange={handleCardInputChange}
-            value={password[1]}
+            value={passwords[1]}
             order={1}
             placeholder="•"
             required={true}

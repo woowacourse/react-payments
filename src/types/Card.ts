@@ -1,6 +1,6 @@
 export interface CardType {
   id: string;
-  cardNumbers: Record<number, string>;
-  expiredDate: Record<number, string>;
+  cardNumbers: Array<string>;
+  expiredDates: Array<string>;
   cardOwnerName: string;
 }

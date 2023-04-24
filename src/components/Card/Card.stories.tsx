@@ -11,16 +11,8 @@ type Story = StoryObj<typeof meta>;
 
 export const CardStory: Story = {
   args: {
-    cardNumbers: {
-      0: '1111',
-      1: '2222',
-      2: '3333',
-      3: '4444',
-    },
-    expiredDate: {
-      0: '12',
-      1: '31',
-    },
+    cardNumbers: ['1111', '2222', '3333', '4444'],
+    expiredDates: ['02', '12'],
     cardOwnerName: 'NAME',
   },
 };

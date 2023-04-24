@@ -21,8 +21,8 @@ const Pargraph = styled.p`
 `;
 
 interface CardNumbersProps {
-  cardNumbers: Record<number, string>;
-  setCardNumbers: React.Dispatch<React.SetStateAction<Record<number, string>>>;
+  cardNumbers: Array<string>;
+  setCardNumbers: React.Dispatch<React.SetStateAction<Array<string>>>;
 }
 
 const CardNumbers = ({ cardNumbers, setCardNumbers }: CardNumbersProps) => {

@@ -12,9 +12,6 @@ type Story = StoryObj<typeof meta>;
 
 export const CardPasswordStory: Story = {
   args: {
-    password: {
-      0: '0',
-      1: '2',
-    },
+    passwords: ['1', '2'],
   },
 };

@@ -17,11 +17,11 @@ const Pargraph = styled.p`
 `;
 
 interface ExpiredDateProps {
-  expiredDate: Record<number, string>;
-  setExpiredDate: React.Dispatch<React.SetStateAction<Record<number, string>>>;
+  expiredDates: Array<string>;
+  setExpiredDates: React.Dispatch<React.SetStateAction<Array<string>>>;
 }
 
-const ExpiredDate = ({ expiredDate, setExpiredDate }: ExpiredDateProps) => {
+const ExpiredDate = ({ expiredDates, setExpiredDates }: ExpiredDateProps) => {
   const cardExpiredDateRefs: Record<
     number,
     React.RefObject<HTMLInputElement>
@@ -37,7 +37,7 @@ const ExpiredDate = ({ expiredDate, setExpiredDate }: ExpiredDateProps) => {
     if (/[^0-9]/g.test(e.target.value)) {
       return;
     }
-    setExpiredDate({ ...expiredDate, [currentOrder]: e.target.value });
+    setExpiredDates({ ...expiredDates, [currentOrder]: e.target.value });
 
     validateDate(currentOrder);
   };
@@ -51,14 +51,14 @@ const ExpiredDate = ({ expiredDate, setExpiredDate }: ExpiredDateProps) => {
 
     if (currentOrder === 1) {
       if (/^[0-9]{2}/g.test(currentRef.current.value)) return;
-      setExpiredDate({ ...expiredDate, 1: '' });
+      setExpiredDates({ ...expiredDates, 1: '' });
       return;
     }
 
     cardExpiredDateRefs[currentOrder + 1].current?.focus();
 
     if (!/^(0[1-9]|1[0-2])/g.test(currentRef.current.value)) {
-      setExpiredDate({ ...expiredDate, 0: '' });
+      setExpiredDates({ ...expiredDates, 0: '' });
       currentRef.current.focus();
       return;
     }
@@ -73,7 +73,7 @@ const ExpiredDate = ({ expiredDate, setExpiredDate }: ExpiredDateProps) => {
           maxLength={2}
           ref={cardExpiredDateRefs[0]}
           onChange={handleCardInputChange}
-          value={expiredDate[0]}
+          value={expiredDates[0]}
           order={0}
           placeholder="MM"
           required={true}
@@ -84,7 +84,7 @@ const ExpiredDate = ({ expiredDate, setExpiredDate }: ExpiredDateProps) => {
           maxLength={2}
           ref={cardExpiredDateRefs[1]}
           onChange={handleCardInputChange}
-          value={expiredDate[1]}
+          value={expiredDates[1]}
           order={1}
           placeholder="YY"
           required={true}
