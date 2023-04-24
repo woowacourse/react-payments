@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 
 export interface InputBoxProps {
-  children: ReactElement;
+  children: ReactElement | ReactElement[];
   error: {
     [key: string]: string;
   };

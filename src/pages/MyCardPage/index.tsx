@@ -17,12 +17,6 @@ const MyCardPage = ({ cardList }: MyCardPageProps) => {
     navigation('/register');
   };
 
-  const generateCardList = (cardList: CardInfo[]) => {
-    return cardList.map((cardInfo) => (
-      <Card key={cardInfo.id} cardInfo={cardInfo} bgColor="#333333" />
-    ));
-  };
-
   return (
     <styled.MyCardPage>
       <Header />
@@ -30,7 +24,11 @@ const MyCardPage = ({ cardList }: MyCardPageProps) => {
       <styled.CardRegisterButton bgColor="#E5E5E5" onClick={handleClick}>
         <styled.ButtonIcon>+</styled.ButtonIcon>
       </styled.CardRegisterButton>
-      <styled.CardList>{generateCardList(cardList)}</styled.CardList>
+      <styled.CardList>
+        {cardList.map((cardInfo) => (
+          <Card key={cardInfo.id} cardInfo={cardInfo} bgColor="#333333" />
+        ))}
+      </styled.CardList>
     </styled.MyCardPage>
   );
 };

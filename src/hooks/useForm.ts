@@ -1,79 +1,131 @@
-import { ChangeEvent, RefObject, useState } from 'react';
-import { Validator } from '../types/validator';
+import { ChangeEvent, Dispatch, FormEvent, SetStateAction, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { isNumeric } from '../utils';
 
-interface ValuesState {
+import { Validator } from '../types/validator';
+import { CardInfo } from '../types/card';
+
+import { v4 as uuid } from 'uuid';
+
+interface Error {
+  firstCardNumbers: string;
+  secondCardNumbers: string;
+  thirdCardNumbers: string;
+  fourthCardNumbers: string;
+  expirationMonth: string;
+  expirationYear: string;
+  ownerName: string;
+  securityNumbers: string;
+  firstPassword: string;
+  secondPassword: string;
   [key: string]: string;
 }
 
-interface ErrorState {
-  [key: string]: string;
-}
-
-interface IRefs {
-  [key: string]: RefObject<HTMLInputElement>;
-}
-
-const useForm = (refs: IRefs, validator: Validator) => {
-  const refNames = Object.keys(refs);
-  const valueObj: ValuesState = {};
-  const errorObj: ErrorState = {};
-
-  refNames.forEach((name) => {
-    valueObj[name] = '';
-    errorObj[name] = '';
+const useForm = (setCardList: Dispatch<SetStateAction<CardInfo[]>>, validator: Validator) => {
+  const navigate = useNavigate();
+  const [cardInfo, setCardInfo] = useState<CardInfo>({
+    id: uuid(),
+    firstCardNumbers: '',
+    secondCardNumbers: '',
+    thirdCardNumbers: '',
+    fourthCardNumbers: '',
+    expirationMonth: '',
+    expirationYear: '',
+    ownerName: '',
+    securityNumbers: '',
+    firstPassword: '',
+    secondPassword: '',
+  });
+  const [error, setError] = useState<Error>({
+    firstCardNumbers: '',
+    secondCardNumbers: '',
+    thirdCardNumbers: '',
+    fourthCardNumbers: '',
+    expirationMonth: '',
+    expirationYear: '',
+    ownerName: '',
+    securityNumbers: '',
+    firstPassword: '',
+    secondPassword: '',
   });
 
-  const [values, setValues] = useState<ValuesState>(valueObj);
-  const [error, setError] = useState<ErrorState>(errorObj);
+  const focusToNextFormElement = (
+    formElements: HTMLInputElement[],
+    curElement: HTMLInputElement
+  ) => {
+    formElements.forEach((elem, index: number) => {
+      if (elem !== curElement) return;
 
-  const findError = () => {
-    return Object.keys(validator).some((key) => {
-      const errorMessage = validator[key](values[key]);
+      curElement.blur();
+      formElements[index + 1]?.focus();
+    });
+  };
+
+  const findError = (elements: HTMLInputElement[]) => {
+    return elements.some((elem) => {
+      if (elem.tagName !== 'INPUT') return false;
+
+      const { name, value } = elem;
+      const errorMessage = validator[name](value);
 
       if (errorMessage) {
-        setError((prev) => ({ ...prev, [key]: errorMessage }));
-        refs[key]?.current?.focus();
-
+        elem.focus();
+        setError((prev) => ({
+          ...prev,
+          [name]: errorMessage,
+        }));
         return true;
       }
-
       return false;
     });
   };
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const clearError = (name: keyof typeof error) => {
+    setError((prev) => ({
+      ...prev,
+      [name]: '',
+    }));
+  };
+
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    const elements = (e.target as HTMLFormElement).elements;
+    const hasInputError = findError([...elements] as HTMLInputElement[]);
+    if (hasInputError) return;
+
+    setCardList((prev) => [cardInfo, ...prev]);
+
+    navigate('/');
+  };
+
+  const onChange = ({ target: targetInput }: ChangeEvent<HTMLInputElement>) => {
+    const elements: HTMLFormControlsCollection | undefined = targetInput.closest('form')?.elements;
+    if (!elements) return;
     const {
       name,
       value,
       maxLength,
-      dataset: { type, next },
-    } = e.target;
+      dataset: { type },
+    } = targetInput;
 
-    if (value.length > maxLength) return;
     if ((type === 'number' || type === 'password') && !isNumeric(value)) return;
+    if (value.length > maxLength) return;
 
-    if (error[name]) {
-      setError((prev) => ({
-        ...prev,
-        [name]: '',
-      }));
+    if (error[name]) clearError(name);
+
+    if (value.length >= maxLength) {
+      focusToNextFormElement([...elements] as HTMLInputElement[], targetInput);
     }
 
-    if (value.length >= maxLength && next) {
-      refs[name]?.current?.blur();
-      refs[next]?.current?.focus();
-    }
-
-    setValues((prev) => ({
+    setCardInfo((prev) => ({
       ...prev,
       [name]: value,
     }));
   };
 
-  return { values, onChange, error, findError };
+  return { cardInfo, onSubmit, onChange, error };
 };
 
 export default useForm;
