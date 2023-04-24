@@ -7,23 +7,23 @@
 
 .title {
   text-align: center;
-  color: var(--grey-300);
+  color: var(--gray-300);
   font-weight: 600;
 }
 
 .card {
   margin: 0 auto 0 auto;
-  background-color: var(--grey-200);
+  background-color: var(--gray-200);
   width: 208px;
   height: 123px;
   border-radius: 5px;
   border: none;
   cursor: pointer;
   transition: 0.3s;
-  box-shadow: 3px 3px 10px var(--grey-300);
+  box-shadow: 3px 3px 10px var(--gray-300);
   font-size: 20px;
 }
 
 .card:hover {
-  background-color: var(--grey-100);
+  background-color: var(--gray-100);
 }

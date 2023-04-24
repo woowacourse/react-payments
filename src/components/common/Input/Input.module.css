@@ -2,7 +2,7 @@
   border-style: none;
   border-radius: 5px;
   height: 45px;
-  background-color: var(--purple-color);
+  background-color: var(--gray-with-slight-purple);
   font-size: large;
   text-align: center;
 }
