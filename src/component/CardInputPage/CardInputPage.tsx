@@ -30,7 +30,7 @@ export default function CardInputPage(props: Props) {
             <path
               d="M8.30425 1L1.36475 8.78658L9.15133 15.7261"
               stroke="#525252"
-              stroke-width="1.5"
+              strokeWidth="1.5"
             />
           </svg>
         </button>
