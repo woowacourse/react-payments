@@ -13,14 +13,9 @@ const MyCard = () => {
   return (
     <Page>
       <Header title="보유카드" isBack={false} />
-      {cards.map(({ color, ownerName, expiredDate, cardNumber }: CardType) => (
+      {cards.map((card: CardType) => (
         <CardWrapper key={crypto.randomUUID()}>
-          <Card
-            color={color}
-            ownerName={ownerName}
-            expiredDate={expiredDate}
-            cardNumber={cardNumber}
-          />
+          <Card {...card} />
         </CardWrapper>
       ))}
       <Link to={ROUTER_PATH.AddCard} style={{ textDecoration: "none" }}>

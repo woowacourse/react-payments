@@ -8,7 +8,7 @@ import { CardType } from "../types";
 import { getLocalStorage, setLocalStorage } from "../utils";
 
 const AddCard = () => {
-  const [card, setCard] = useState<CardType>({
+  const [newCard, setNewCard] = useState<CardType>({
     cardNumber: "",
     expiredDate: "",
     ownerName: "",
@@ -19,19 +19,18 @@ const AddCard = () => {
 
   const registerCard = () => {
     const cards = getLocalStorage("card");
-    setLocalStorage("card", [...cards, card]);
+    setLocalStorage("card", [...cards, newCard]);
   };
 
   return (
     <Page>
       <Header title="카드 추가" isBack />
-      <Card
-        color={card.color}
-        ownerName={card.ownerName}
-        expiredDate={card.expiredDate}
-        cardNumber={card.cardNumber}
+      <Card {...newCard} />
+      <CardInputForm
+        card={newCard}
+        setCard={setNewCard}
+        onSubmit={registerCard}
       />
-      <CardInputForm card={card} setCard={setCard} onSubmit={registerCard} />
     </Page>
   );
 };

@@ -105,8 +105,8 @@ const CardInputForm = (props: CardInputFormType) => {
           value={card.cardNumber}
           placeholder="카드 번호를 입력해 주세요."
           width="318px"
-          isAutoFocus={true}
-          isRequired={true}
+          isAutoFocus
+          isRequired
           onChange={handleCardNumberChanged}
           onKeyDown={handleCardNumberKey}
         />
@@ -122,7 +122,7 @@ const CardInputForm = (props: CardInputFormType) => {
           value={card.expiredDate}
           placeholder="MM / YY"
           width="137px"
-          isRequired={true}
+          isRequired
           onChange={handleExpiredDateChanged}
           onKeyDown={handleExpiredDateKey}
         />
@@ -149,8 +149,8 @@ const CardInputForm = (props: CardInputFormType) => {
             id="cvc"
             value={card.cvc}
             width="84px"
-            isSecured={true}
-            isRequired={true}
+            isSecured
+            isRequired
             onChange={handleCvcChanged}
           />
           <img
@@ -168,16 +168,16 @@ const CardInputForm = (props: CardInputFormType) => {
             id="password"
             value={card.password[PASSWORD_DIGIT_INDEX.FIRST]}
             width="42px"
-            isSecured={true}
-            isRequired={true}
+            isSecured
+            isRequired
             onChange={handlePasswordChanged(PASSWORD_DIGIT_INDEX.FIRST)}
           />
           <CardInput
             id="password"
             width="42px"
             value={card.password[PASSWORD_DIGIT_INDEX.SECOND]}
-            isSecured={true}
-            isRequired={true}
+            isSecured
+            isRequired
             onChange={handlePasswordChanged(PASSWORD_DIGIT_INDEX.SECOND)}
           />
           <SecuredPasswordWrapper>●</SecuredPasswordWrapper>
