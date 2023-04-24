@@ -1,18 +1,15 @@
 import { ChangeEvent, useState } from 'react';
-import Input from '../Input/Input';
-import * as styled from './OwnerNameInputBox.styled';
-import { CardInfo } from '../../types/state';
-import { isAlpha } from '../../validator';
+
+import { CardInfo, OwnerName, SetCardInfo } from '../../types/state';
 import { OWNER_NAME } from '../../constants/cardInfo';
 import { ERROR_MESSAGE } from '../../constants/message';
 
-const OwnerNameInputBox = ({
-  ownerName,
-  setCardInfo,
-}: {
-  ownerName: string | undefined;
-  setCardInfo: CallableFunction;
-}) => {
+import { isAlpha } from '../../validator';
+
+import * as styled from './OwnerNameInputBox.styled';
+import Input from '../Input/Input';
+
+const OwnerNameInputBox = ({ ownerName, setCardInfo }: { ownerName: OwnerName; setCardInfo: SetCardInfo }) => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const onChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
@@ -43,7 +40,7 @@ const OwnerNameInputBox = ({
         </styled.LabelHeader>
         <styled.InputContainer>
           <Input
-            value={ownerName ? ownerName : ''}
+            value={ownerName ?? ''}
             onChange={onChange}
             width="xl"
             type="text"

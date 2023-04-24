@@ -1,17 +1,17 @@
-import * as styled from './CardRegisterPage.styled';
-
-import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
+import { CardInfo, SetCardInfoList } from '../../types/state';
+
+import * as styled from './CardRegisterPage.styled';
+import CardPreview from '../../components/CardPreview/CardPreview';
 import CardNumberInputBox from '../../components/CardNumberInputBox/CardNumberInputBox';
 import ExpirationDateInputBox from '../../components/ExpirationDateInputBox/ExpirationDateInputBox';
 import OwnerNameInputBox from '../../components/OwnerNameInputBox/OwnerNameInputBox';
 import SecurityCodeInputBox from '../../components/SecurityCodeInputBox/SecurityCodeInputBox';
 import PasswordInputBox from '../../components/PasswordInputBox/PasswordInputBox';
-import CardPreview from '../../components/CardPreview/CardPreview';
-import { CardInfo } from '../../types/state';
 
-const CardRegisterPage = ({ setCardList }: { setCardList: CallableFunction }) => {
+const CardRegisterPage = ({ setCardInfoList }: { setCardInfoList: SetCardInfoList }) => {
   const [cardInfo, setCardInfo] = useState<CardInfo>({
     cardNumbers: {
       first: '',
@@ -34,7 +34,7 @@ const CardRegisterPage = ({ setCardList }: { setCardList: CallableFunction }) =>
   const navigation = useNavigate();
 
   const handleOnClickSubmitButton = () => {
-    setCardList((prev: CardInfo[]) => [...prev, cardInfo]);
+    setCardInfoList((prev: CardInfo[]) => [...prev, cardInfo]);
     navigation('/');
   };
 

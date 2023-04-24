@@ -1,18 +1,15 @@
 import { ChangeEvent, useState } from 'react';
-import Input from '../Input/Input';
-import * as styled from './SecurityCodeInputBox.styled';
-import { isNumeric } from '../../validator';
-import { CardInfo } from '../../types/state';
+
+import { CardInfo, SetCardInfo } from '../../types/state';
 import { SECURITY_CODE } from '../../constants/cardInfo';
 import { ERROR_MESSAGE } from '../../constants/message';
 
-const SecurityCodeInputBox = ({
-  securityCode,
-  setCardInfo,
-}: {
-  securityCode: string;
-  setCardInfo: CallableFunction;
-}) => {
+import { isNumeric } from '../../validator';
+
+import * as styled from './SecurityCodeInputBox.styled';
+import Input from '../Input/Input';
+
+const SecurityCodeInputBox = ({ securityCode, setCardInfo }: { securityCode: string; setCardInfo: SetCardInfo }) => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const onChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {

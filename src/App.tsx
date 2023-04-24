@@ -1,20 +1,22 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import MyCardPage from './pages/MyCardPage/MyCardPage';
-import CardRegisterPage from './pages/CardRegisterPage/CardRegisterPage';
 import { useState } from 'react';
-import Header from './components/Header/Header';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 import { CardInfo } from './types/state';
 
+import Header from './components/Header/Header';
+import MyCardPage from './pages/MyCardPage/MyCardPage';
+import CardRegisterPage from './pages/CardRegisterPage/CardRegisterPage';
+
 const App = () => {
-  const [cardList, setCardList] = useState<CardInfo[]>([]);
+  const [cardInfoList, setCardInfoList] = useState<CardInfo[]>([]);
 
   return (
     <div className="App">
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Header />
         <Routes>
-          <Route path="/" element={<MyCardPage cardList={cardList} />} />
-          <Route path="/register" element={<CardRegisterPage setCardList={setCardList} />} />
+          <Route path="/" element={<MyCardPage cardInfoList={cardInfoList} />} />
+          <Route path="/register" element={<CardRegisterPage setCardInfoList={setCardInfoList} />} />
         </Routes>
       </BrowserRouter>
     </div>

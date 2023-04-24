@@ -1,18 +1,15 @@
 import { ChangeEvent, useState } from 'react';
-import Input from '../Input/Input';
-import * as styled from './CardNumberInputBox.styled';
-import { isNumeric } from '../../validator';
-import { CardInfo, CardNumbers } from '../../types/state';
+
+import { CardInfo, CardNumbers, SetCardInfo } from '../../types/state';
 import { CARD_NUMBER } from '../../constants/cardInfo';
 import { ERROR_MESSAGE } from '../../constants/message';
 
-const CardNumberInputBox = ({
-  cardNumbers,
-  setCardInfo,
-}: {
-  cardNumbers: CardNumbers;
-  setCardInfo: CallableFunction;
-}) => {
+import { isNumeric } from '../../validator';
+
+import * as styled from './CardNumberInputBox.styled';
+import Input from '../Input/Input';
+
+const CardNumberInputBox = ({ cardNumbers, setCardInfo }: { cardNumbers: CardNumbers; setCardInfo: SetCardInfo }) => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const onChange = ({ target: { name, value } }: ChangeEvent<HTMLInputElement>) => {

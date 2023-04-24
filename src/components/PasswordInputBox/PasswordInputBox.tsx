@@ -1,12 +1,15 @@
 import { ChangeEvent, useState } from 'react';
-import Input from '../Input/Input';
-import * as styled from './PasswordInputBox.styled';
-import { isNumeric } from '../../validator';
-import { CardInfo, Password } from '../../types/state';
+
+import { CardInfo, Password, SetCardInfo } from '../../types/state';
 import { PASSWORD } from '../../constants/cardInfo';
 import { ERROR_MESSAGE } from '../../constants/message';
 
-const PasswordInputBox = ({ password, setCardInfo }: { password: Password; setCardInfo: CallableFunction }) => {
+import { isNumeric } from '../../validator';
+
+import * as styled from './PasswordInputBox.styled';
+import Input from '../Input/Input';
+
+const PasswordInputBox = ({ password, setCardInfo }: { password: Password; setCardInfo: SetCardInfo }) => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const onChange = ({ target: { name, value } }: ChangeEvent<HTMLInputElement>) => {

@@ -1,19 +1,19 @@
-import * as styled from './MyCardPage.styled';
-
 import { useNavigate } from 'react-router-dom';
 
-import Card from '../../components/Card/Card';
 import { CardInfo } from '../../types/state';
 
-const MyCardPage = ({ cardList }: { cardList: CardInfo[] }) => {
+import * as styled from './MyCardPage.styled';
+import Card from '../../components/Card/Card';
+
+const MyCardPage = ({ cardInfoList }: { cardInfoList: CardInfo[] }) => {
   const navigation = useNavigate();
 
   const handleClick = () => {
     navigation('/register');
   };
 
-  const generateCardList = (cardList: CardInfo[]) => {
-    return cardList.map(cardInfo => {
+  const generateCardInfoList = (cardInfoList: CardInfo[]) => {
+    return cardInfoList.map(cardInfo => {
       const key = Object.values(cardInfo.cardNumbers).join('');
 
       return <Card key={key} cardInfo={cardInfo} bgColor="#333333" />;
@@ -26,7 +26,7 @@ const MyCardPage = ({ cardList }: { cardList: CardInfo[] }) => {
       <styled.CardRegisterButton onClick={handleClick}>
         <styled.ButtonIcon>+</styled.ButtonIcon>
       </styled.CardRegisterButton>
-      <styled.CardList>{generateCardList(cardList)}</styled.CardList>
+      <styled.CardList>{generateCardInfoList(cardInfoList)}</styled.CardList>
     </styled.MyCardPage>
   );
 };

@@ -1,6 +1,6 @@
-import * as styled from './Header.styled';
-
 import { useLocation, useNavigate } from 'react-router-dom';
+
+import * as styled from './Header.styled';
 
 const Header = () => {
   const { pathname } = useLocation();
@@ -12,12 +12,8 @@ const Header = () => {
 
   return (
     <styled.Header>
-      {pathname === '/register' && (
-        <styled.BackwardButton onClick={onClickBackward}>{'<'}</styled.BackwardButton>
-      )}
-      <styled.HeaderTitle>
-        {pathname === '/register' ? '카드 추가' : '보유 카드'}
-      </styled.HeaderTitle>
+      {pathname === '/register' && <styled.BackwardButton onClick={onClickBackward}>{'<'}</styled.BackwardButton>}
+      <styled.HeaderTitle>{pathname === '/register' ? '카드 추가' : '보유 카드'}</styled.HeaderTitle>
     </styled.Header>
   );
 };

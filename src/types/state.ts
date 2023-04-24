@@ -1,11 +1,15 @@
 export type CardNumbers = Record<'first' | 'second' | 'third' | 'fourth', string>;
 export type ExpirationDate = Record<'month' | 'year', string>;
+export type OwnerName = string | null;
 export type Password = Record<'first' | 'second', string>;
 
 export interface CardInfo {
   cardNumbers: CardNumbers;
   expirationDate: ExpirationDate;
-  ownerName?: string;
+  ownerName: OwnerName;
   securityCode: string;
   password: Password;
 }
+
+export type SetCardInfoList = React.Dispatch<React.SetStateAction<CardInfo[]>>;
+export type SetCardInfo = React.Dispatch<React.SetStateAction<CardInfo>>;
