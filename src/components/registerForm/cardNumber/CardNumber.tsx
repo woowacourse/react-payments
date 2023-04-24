@@ -106,8 +106,8 @@ export const CardNumber = () => {
           onBlur={_onBlur}
           maxLength={4}
           inputMode="numeric"
-          type={'password'}
-          text-align={'center'}
+          type="password"
+          text-align="center"
           placeholder="●●●●"
           ref={refs[2]}
         />
@@ -119,9 +119,9 @@ export const CardNumber = () => {
           onBlur={_onBlurLast}
           maxLength={4}
           inputMode="numeric"
-          type={'password'}
+          type="password"
           placeholder="●●●●"
-          text-align={'center'}
+          text-align="center"
           ref={refs[3]}
         />
       </CardNumberInputContainer>

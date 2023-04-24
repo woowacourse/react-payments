@@ -12,12 +12,10 @@ const Card = ({ cardNumber, ownerName, expirationDate }: CardProps) => {
     <CardContainer>
       <CardChip></CardChip>
       <CardNumberContainer>
-        {cardNumber.map((numberFraction, index) => {
-          if (index >= 2) {
-            return <span>{'•'.repeat(numberFraction.length)}</span>;
-          }
-          return <span>{numberFraction}</span>;
-        })}
+        <span>{cardNumber[0]}</span>
+        <span>{cardNumber[1]}</span>
+        <span>{'•'.repeat(cardNumber[2].length)}</span>
+        <span>{'•'.repeat(cardNumber[3].length)}</span>
       </CardNumberContainer>
       <CardNameContainer>
         <span>{ownerName}</span>
