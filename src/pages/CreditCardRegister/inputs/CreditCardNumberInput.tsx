@@ -1,9 +1,26 @@
 import { useRef, useState } from 'react';
 import { convertSecuredCreditCard } from 'domains/creditCard';
 import * as T from 'types';
-import Input from '../../../components/Input';
+import styled from 'styled-components';
 import * as S from '../style';
 import { validateNumber } from '../validations';
+
+export const MaskedViewer = styled.p`
+    background-color: #ECEBF1;
+    border-radius: 7px;
+    height: 48px;
+    width: 100%;
+    border: none;
+    font-size: 18px;
+    :focus {
+        outline: none;
+    }
+    margin-right: 10px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+`;
 
 type Props = {
   name: keyof T.CreditCard;
@@ -34,18 +51,15 @@ function CreditCardNumberInput({ name, creditCard, setCreditCard }: Props) {
   return (
     <S.RelativeBox>
       <S.CreditCardRegisterLabel>카드 번호</S.CreditCardRegisterLabel>
-      <Input
-        type="string"
-        value={markedCreditCardNumber}
-        width="100%"
-        textAlign="center"
+      <MaskedViewer
         onClick={() => {
           if (inputRef.current) {
             inputRef.current.focus();
           }
         }}
-        onChange={() => { }}
-      />
+      >
+        {markedCreditCardNumber}
+      </MaskedViewer>
       {isError && <S.ErrorMessage>카드번호는 16자리의 숫자로만 이루어져야 합니다.</S.ErrorMessage>}
       <S.HiddenInput
         ref={inputRef}
