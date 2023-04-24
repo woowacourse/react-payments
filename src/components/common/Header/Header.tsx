@@ -8,11 +8,7 @@ type Props = {
 function Header({ text, onClickBackButton }: Props) {
   return (
     <Container>
-      {onClickBackButton ? (
-        <BackButton onClick={onClickBackButton}>&lt; &nbsp; {text}</BackButton>
-      ) : (
-        <BackButton onClick={onClickBackButton}>&nbsp; {text}</BackButton>
-      )}
+      <BackButton onClick={onClickBackButton}>{onClickBackButton ? `< ${text}` : text}</BackButton>
     </Container>
   );
 }
