@@ -63,7 +63,7 @@ const CardNumberInput = ({
                 type={
                   index >= INPUT.CARD_NUMBER_VISIBLE_INPUT_ORDER
                     ? 'password'
-                    : undefined
+                    : 'text'
                 }
                 onChange={handleChangeInput(index)}
               />
