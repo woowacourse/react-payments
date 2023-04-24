@@ -6,15 +6,16 @@ import { DotIcon } from "../../assets/icons";
 import { useRef } from "react";
 import { isNumber, isOverMaxLength } from "../../utils";
 import { INPUT_LENGTH } from "../../constants";
+import { useCardItemAction, useCardItemValue } from "../provider/CardItemProvider";
+import { useErrorMessageAction, useErrorMessageValue } from "../provider/ErrorMessageProvider";
 
-interface PasswordInputProps {
-  password: string[];
-  setPassword: (password: string[]) => void;
-  errorMessage: string;
-  setErrorMessage: (errorMessage: string) => void;
-}
+const PasswordInput = () => {
+  const { password } = useCardItemValue();
+  const { setPassword } = useCardItemAction();
 
-const PasswordInput = ({ password, setPassword, errorMessage, setErrorMessage }: PasswordInputProps) => {
+  const { passwordErrorMessage } = useErrorMessageValue();
+  const { setPasswordErrorMessage } = useErrorMessageAction();
+
   const refs = [useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null)];
 
   const handleChangeInput = (inputIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,7 +24,7 @@ const PasswordInput = ({ password, setPassword, errorMessage, setErrorMessage }:
     if (isOverMaxLength(inputValue, INPUT_LENGTH.PASSWORD)) return;
 
     if (!isNumber(inputValue)) {
-      setErrorMessage("숫자만 입력해주세요");
+      setPasswordErrorMessage("숫자만 입력해주세요");
       return;
     }
 
@@ -31,7 +32,7 @@ const PasswordInput = ({ password, setPassword, errorMessage, setErrorMessage }:
     newInputs[inputIndex] = inputValue;
 
     setPassword(newInputs);
-    setErrorMessage("");
+    setPasswordErrorMessage("");
 
     if (isNextInputFocusable(inputValue, inputIndex)) {
       refs[inputIndex + 1].current?.focus();
@@ -43,12 +44,12 @@ const PasswordInput = ({ password, setPassword, errorMessage, setErrorMessage }:
   };
 
   return (
-    <InputGroup labelValue="카드 비밀번호" errorMessage={errorMessage}>
+    <InputGroup labelValue="카드 비밀번호" errorMessage={passwordErrorMessage}>
       <BoxContainer>
-        <InputBox width="43px" isError={!!errorMessage}>
+        <InputBox width="43px" isError={!!passwordErrorMessage}>
           <Input type="password" ref={refs[0]} value={password[0]} onChange={handleChangeInput(0)}></Input>
         </InputBox>
-        <InputBox width="43px" isError={!!errorMessage}>
+        <InputBox width="43px" isError={!!passwordErrorMessage}>
           <Input type="password" ref={refs[1]} value={password[1]} onChange={handleChangeInput(1)}></Input>
         </InputBox>
         <DotIconWrapper>

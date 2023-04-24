@@ -5,20 +5,16 @@ import InputGroup from "../common/InputGroup";
 import InputSeparator from "../common/InputSeparator";
 import { isNumber, isOverMaxLength } from "../../utils";
 import { INPUT_LENGTH } from "../../constants";
+import { useCardItemAction, useCardItemValue } from "../provider/CardItemProvider";
+import { useErrorMessageAction, useErrorMessageValue } from "../provider/ErrorMessageProvider";
 
-interface ExpirationDateInputProps {
-  expirationDate: string[];
-  setExpirationDate: (expirationDate: string[]) => void;
-  errorMessage: string;
-  setErrorMessage: (errorMessage: string) => void;
-}
+const ExpirationDateInput = () => {
+  const { expirationDate } = useCardItemValue();
+  const { setExpirationDate } = useCardItemAction();
 
-const ExpirationDateInput = ({
-  expirationDate,
-  setExpirationDate,
-  errorMessage,
-  setErrorMessage,
-}: ExpirationDateInputProps) => {
+  const { expirationDateErrorMessage } = useErrorMessageValue();
+  const { setExpirationDateErrorMessage } = useErrorMessageAction();
+
   const refs = [useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null)];
 
   useEffect(() => {
@@ -28,15 +24,15 @@ const ExpirationDateInput = ({
       expirationDate[0].length < INPUT_LENGTH.EXPIRATION_DATE ||
       expirationDate[1].length < INPUT_LENGTH.EXPIRATION_DATE
     ) {
-      setErrorMessage("만료일은 MM/YY 형식으로 입력해주세요");
+      setExpirationDateErrorMessage("만료일은 MM/YY 형식으로 입력해주세요");
       return;
     }
 
     if (!isValidMonth(expirationDate[0])) {
-      setErrorMessage("유효한 달을 입력해주세요");
+      setExpirationDateErrorMessage("유효한 달을 입력해주세요");
       return;
     }
-  }, [expirationDate, setErrorMessage]);
+  }, [expirationDate, expirationDateErrorMessage]);
 
   const handleChangeInput = (inputIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
@@ -44,7 +40,7 @@ const ExpirationDateInput = ({
     if (isOverMaxLength(inputValue, INPUT_LENGTH.EXPIRATION_DATE)) return;
 
     if (!isNumber(inputValue)) {
-      setErrorMessage("숫자만 입력해주세요");
+      setExpirationDateErrorMessage("숫자만 입력해주세요");
       return;
     }
 
@@ -52,7 +48,7 @@ const ExpirationDateInput = ({
     newInputs[inputIndex] = inputValue;
 
     setExpirationDate(newInputs);
-    setErrorMessage("");
+    setExpirationDateErrorMessage("");
 
     if (isNextInputFocusable(inputValue, inputIndex)) {
       refs[inputIndex + 1].current?.focus();
@@ -68,8 +64,8 @@ const ExpirationDateInput = ({
   };
 
   return (
-    <InputGroup labelValue="만료일" errorMessage={errorMessage}>
-      <InputBox width="137px" isError={!!errorMessage}>
+    <InputGroup labelValue="만료일" errorMessage={expirationDateErrorMessage}>
+      <InputBox width="137px" isError={!!expirationDateErrorMessage}>
         <Input placeholder="MM" ref={refs[0]} value={expirationDate[0]} onChange={handleChangeInput(0)} />
         <InputSeparator color="#737373">/</InputSeparator>
         <Input placeholder="YY" ref={refs[1]} value={expirationDate[1]} onChange={handleChangeInput(1)} />

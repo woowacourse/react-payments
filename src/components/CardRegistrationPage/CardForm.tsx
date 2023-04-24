@@ -6,59 +6,18 @@ import NameInput from "./NameInput";
 import SecurityCodeInput from "./SecurityCodeInput";
 import PasswordInput from "./PasswordInput";
 import { useNavigate } from "react-router-dom";
+import { useCardItemValue } from "../provider/CardItemProvider";
+import { useErrorMessageValue } from "../provider/ErrorMessageProvider";
 
 interface CardFormProps {
   onSubmitForm: () => void;
-  onChangeForm: (cardNumber: string[], expirationDate: string[], name: string) => void;
 }
 
-const CardForm = ({ onSubmitForm, onChangeForm }: CardFormProps) => {
-  const [cardNumber, setCardNumber] = useState(["", "", "", ""]);
-  const [expirationDate, setExpirationDate] = useState(["", ""]);
-  const [name, setName] = useState("");
-  const [securityCode, setSecurityCode] = useState("");
-  const [password, setPassword] = useState(["", ""]);
-
-  const [cardNumberError, setCardNumberError] = useState("");
-  const [expirationDateError, setExpirationDateError] = useState("");
-  const [nameError, setNameError] = useState("");
-  const [securityCodeError, setSecurityCodeError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-
+const CardForm = ({ onSubmitForm }: CardFormProps) => {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    onChangeForm(cardNumber, expirationDate, name);
-  }, [cardNumber, expirationDate, name]);
-
-  const hasError = () => {
-    return cardNumberError || expirationDateError || passwordError || securityCodeError;
-  };
-
-  const isAllInputSatisfied = () => {
-    return (
-      isCardNumberInputSatisfied() &&
-      isExpirationDateInputSatisfied() &&
-      isSecurityCodeInputSatisfied() &&
-      isPasswordInputSatisfied()
-    );
-  };
-
-  const isCardNumberInputSatisfied = () => {
-    return cardNumber.every((numberValue) => numberValue.length === 4);
-  };
-
-  const isExpirationDateInputSatisfied = () => {
-    return expirationDate.every((dateValue) => dateValue.length === 2);
-  };
-
-  const isSecurityCodeInputSatisfied = () => {
-    return securityCode.length === 3;
-  };
-
-  const isPasswordInputSatisfied = () => {
-    return password.every((passwordValue) => !!passwordValue);
-  };
+  const { isAllInputSatisfied } = useCardItemValue();
+  const { hasError } = useErrorMessageValue();
 
   const handleSubmitForm = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -70,31 +29,11 @@ const CardForm = ({ onSubmitForm, onChangeForm }: CardFormProps) => {
 
   return (
     <FormContainer onSubmit={handleSubmitForm}>
-      <CardNumberInput
-        cardNumber={cardNumber}
-        setCardNumber={setCardNumber}
-        errorMessage={cardNumberError}
-        setErrorMessage={setCardNumberError}
-      />
-      <ExpirationDateInput
-        expirationDate={expirationDate}
-        setExpirationDate={setExpirationDate}
-        errorMessage={expirationDateError}
-        setErrorMessage={setExpirationDateError}
-      />
-      <NameInput name={name} setName={setName} errorMessage={nameError} setErrorMessage={setNameError} />
-      <SecurityCodeInput
-        securityCode={securityCode}
-        setSecurityCode={setSecurityCode}
-        errorMessage={securityCodeError}
-        setErrorMessage={setSecurityCodeError}
-      />
-      <PasswordInput
-        password={password}
-        setPassword={setPassword}
-        errorMessage={passwordError}
-        setErrorMessage={setPasswordError}
-      />
+      <CardNumberInput />
+      <ExpirationDateInput />
+      <NameInput />
+      <SecurityCodeInput />
+      <PasswordInput />
       <NextButton isActive={buttonActive}>다음</NextButton>
     </FormContainer>
   );

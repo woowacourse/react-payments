@@ -4,29 +4,21 @@ import Header from "../common/Header";
 import { LeftArrowIcon } from "../../assets/icons";
 import CardItem from "../Card/CardItem";
 import CardForm from "../CardRegistrationPage/CardForm";
-import { useState } from "react";
 import { CardPublicInfo } from "../../types/Card";
+import { useCardItemValue } from "../provider/CardItemProvider";
 
 interface CardRegistrationPageProps {
   addCardItem: (cardItem: CardPublicInfo) => void;
 }
 
 const CardRegistrationPage = ({ addCardItem }: CardRegistrationPageProps) => {
-  const [cardItem, setCardItem] = useState<CardPublicInfo>({
-    id: 0,
-    cardNumber: ["", "", "", ""],
-    expirationDate: ["", ""],
-    name: "",
-  });
+  const { cardNumber, expirationDate, name } = useCardItemValue();
 
-  const handleChangeForm = (cardNumber: string[], expirationDate: string[], name: string) => {
-    const updatedCard = {
-      id: Date.now(),
-      cardNumber: cardNumber,
-      expirationDate: expirationDate,
-      name: name,
-    };
-    setCardItem(updatedCard);
+  const cardItem = {
+    id: Date.now(),
+    cardNumber: cardNumber,
+    expirationDate: expirationDate,
+    name: name,
   };
 
   const handleSubmitForm = () => {
@@ -39,7 +31,7 @@ const CardRegistrationPage = ({ addCardItem }: CardRegistrationPageProps) => {
       <CardItemContainer>
         <CardItem card={cardItem} />
       </CardItemContainer>
-      <CardForm onSubmitForm={handleSubmitForm} onChangeForm={handleChangeForm} />
+      <CardForm onSubmitForm={handleSubmitForm} />
     </>
   );
 };

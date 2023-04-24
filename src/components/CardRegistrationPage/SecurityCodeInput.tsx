@@ -3,38 +3,34 @@ import { isNumber, isOverMaxLength } from "../../utils";
 import Input from "../common/Input";
 import InputBox from "../common/InputBox";
 import InputGroup from "../common/InputGroup";
+import { useCardItemAction, useCardItemValue } from "../provider/CardItemProvider";
+import { useErrorMessageAction, useErrorMessageValue } from "../provider/ErrorMessageProvider";
 
-interface SecurityCodeInputProps {
-  securityCode: string;
-  setSecurityCode: (securityCode: string) => void;
-  errorMessage: string;
-  setErrorMessage: (errorMessage: string) => void;
-}
+const SecurityCodeInput = () => {
+  const { securityCode } = useCardItemValue();
+  const { setSecurityCode } = useCardItemAction();
 
-const SecurityCodeInput = ({
-  securityCode,
-  setSecurityCode,
-  errorMessage,
-  setErrorMessage,
-}: SecurityCodeInputProps) => {
+  const { securityCodeErrorMessage } = useErrorMessageValue();
+  const { setSecurityCodeErrorMessage } = useErrorMessageAction();
+
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
 
     if (isOverMaxLength(inputValue, INPUT_LENGTH.SECURITY_CODE)) return;
 
     if (!isNumber(inputValue)) {
-      setErrorMessage("숫자만 입력해주세요");
+      setSecurityCodeErrorMessage("숫자만 입력해주세요");
       return;
     }
 
     setSecurityCode(inputValue.toUpperCase());
-    setErrorMessage("");
+    setSecurityCodeErrorMessage("");
   };
 
   return (
-    <InputGroup labelValue={"보안 코드(CVC/CVV)"} errorMessage={errorMessage}>
-      <InputBox width="100px" isError={!!errorMessage}>
-        <Input type="password" value={securityCode} onChange={handleChangeInput} />
+    <InputGroup labelValue={"보안 코드(CVC/CVV)"} errorMessage={securityCodeErrorMessage}>
+      <InputBox width="100px" isError={!!securityCodeErrorMessage}>
+        <Input type="securityCode" value={securityCode} onChange={handleChangeInput} />
       </InputBox>
     </InputGroup>
   );

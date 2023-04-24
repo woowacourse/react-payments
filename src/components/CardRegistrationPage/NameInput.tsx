@@ -4,34 +4,35 @@ import InputBox from "../common/InputBox";
 import InputGroup from "../common/InputGroup";
 import { isEnglish, isOverMaxLength } from "../../utils";
 import { INPUT_LENGTH } from "../../constants";
+import { useCardItemAction, useCardItemValue } from "../provider/CardItemProvider";
+import { useErrorMessageAction, useErrorMessageValue } from "../provider/ErrorMessageProvider";
 
-interface NameInputProps {
-  name: string;
-  setName: (name: string) => void;
-  errorMessage: string;
-  setErrorMessage: (errorMessage: string) => void;
-}
+const NameInput = () => {
+  const { name } = useCardItemValue();
+  const { setName } = useCardItemAction();
 
-const NameInput = ({ name, setName, errorMessage, setErrorMessage }: NameInputProps) => {
+  const { nameErrorMessage } = useErrorMessageValue();
+  const { setNameErrorMessage } = useErrorMessageAction();
+
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
 
     if (isOverMaxLength(inputValue, INPUT_LENGTH.NAME)) {
-      setErrorMessage("30자 이하로 입력해주세요");
+      setNameErrorMessage("30자 이하로 입력해주세요");
       return;
     }
     if (!isEnglish(inputValue)) {
-      setErrorMessage("영어만 입력해주세요");
+      setNameErrorMessage("영어만 입력해주세요");
       return;
     }
 
     setName(inputValue.toUpperCase());
-    setErrorMessage("");
+    setNameErrorMessage("");
   };
 
   return (
-    <InputGroup labelValue={<LabelValue length={name.length} />} errorMessage={errorMessage}>
-      <InputBox isError={!!errorMessage}>
+    <InputGroup labelValue={<LabelValue length={name.length} />} errorMessage={nameErrorMessage}>
+      <InputBox isError={!!nameErrorMessage}>
         <Input
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
           textAlign="start"
