@@ -1,8 +1,27 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import CardRegistrationForm from '../components/CardRegistrationForm';
 import Card from '../components/Common/Card';
 import Header from '../components/Common/Header';
 import type { CardInformation } from '../components/Common/Card/types';
+
+function CardRegistration() {
+  const [card, setCard] = useState<CardInformation>({
+    cardNumber: ['', '', '', ''],
+    expirationDate: ['', ''],
+    owner: '',
+  });
+
+  return (
+    <>
+      <Header title="카드 추가" hasBackHistory />
+      <MainCardRegistration>
+        <Card cardInformation={card} isAddForm />
+        <CardRegistrationForm setCard={setCard} />
+      </MainCardRegistration>
+    </>
+  );
+}
 
 const MainCardRegistration = styled.main`
   display: flex;
@@ -12,23 +31,5 @@ const MainCardRegistration = styled.main`
     margin: 12px;
   }
 `;
-
-const cardInformation: CardInformation = {
-  cardNumber: ['1234', '1234', '1234', '1234'],
-  expirationDate: ['YY', 'MM'],
-  owner: 'NAME',
-};
-
-function CardRegistration() {
-  return (
-    <>
-      <Header title="카드 추가" hasBackHistory />
-      <MainCardRegistration>
-        <Card cardInformation={cardInformation} isAddForm />
-        <CardRegistrationForm />
-      </MainCardRegistration>
-    </>
-  );
-}
 
 export default CardRegistration;

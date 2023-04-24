@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactComponent as BlackDot } from '../../assets/black-dot.svg';
@@ -6,16 +7,25 @@ import CardListStore from '../../store';
 import PaymentsInput from '../PaymentsInput';
 import QuestionToolTip from '../QuestionToolTip';
 import useCardForm from './hooks/useCardForm';
+import type { CardInformation } from '../Common/Card/types';
 
-function CardRegistrationForm() {
+interface CardRegistrationFormProps {
+  setCard: (card: CardInformation) => void;
+}
+
+function CardRegistrationForm({ setCard }: CardRegistrationFormProps) {
   const { card, setCardNumber, setExpirationDate, setOwner, setPassword, setSecurityCode } = useCardForm();
-  const { dispatchCardList } = useWrappingContext(CardListStore);
   const navigate = useNavigate();
+  const { dispatchCardList } = useWrappingContext(CardListStore);
   const handleForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatchCardList(card);
     navigate('/');
   };
+
+  useEffect(() => {
+    setCard(card);
+  }, [card, setCard]);
 
   return (
     <StyledCardRegistrationFrom onSubmit={handleForm}>
@@ -115,4 +125,5 @@ const NextButton = styled.button`
   line-height: 16px;
   float: right;
 `;
+
 export default CardRegistrationForm;
