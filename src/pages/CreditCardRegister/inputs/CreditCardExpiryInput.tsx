@@ -6,7 +6,7 @@ import * as S from '../style';
 import { validateExpiry } from '../validations';
 
 type Props = {
-  name: string;
+  name: keyof T.CreditCard;
   creditCard: T.CreditCard;
   setCreditCard: React.Dispatch<React.SetStateAction<T.CreditCard>>;
 };

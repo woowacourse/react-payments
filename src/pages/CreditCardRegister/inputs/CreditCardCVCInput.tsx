@@ -3,7 +3,7 @@ import Input from '../../../components/Input';
 import * as S from '../style';
 
 type Props = {
-  name: string;
+  name: keyof T.CreditCard;
   creditCard: T.CreditCard;
   setCreditCard: React.Dispatch<React.SetStateAction<T.CreditCard>>;
 };
