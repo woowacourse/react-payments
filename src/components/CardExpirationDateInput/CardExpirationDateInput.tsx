@@ -1,14 +1,29 @@
 import styled from "styled-components";
 import { InputContainer, Input, Label } from "../common";
-import { CardExpirationDate } from "../../types";
+import { CardExpirationDate, CardExpirationDateKey } from "../../types";
+import { isNumeric } from "../../validator/Validator";
 
 type CardExpirationDateInputProps = {
   expirationDate: CardExpirationDate;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  setCardExpirationDate: (dateType: CardExpirationDateKey, value: string) => void;
 };
 
-const CardExpirationDateInput = ({ expirationDate, onChange }: CardExpirationDateInputProps) => {
+const CardExpirationDateInput = ({ expirationDate, setCardExpirationDate }: CardExpirationDateInputProps) => {
   const { month, year } = expirationDate;
+
+  const handleCardExpirationDate = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    const dateType = e.target.name;
+
+    if (!isNumeric(value)) return;
+    if (!isCardExpirationDateKeyType(dateType)) return;
+
+    setCardExpirationDate(dateType, value);
+  };
+
+  const isCardExpirationDateKeyType = (dateType: string): dateType is CardExpirationDateKey => {
+    return dateType in expirationDate;
+  };
 
   return (
     <Label>
@@ -25,7 +40,7 @@ const CardExpirationDateInput = ({ expirationDate, onChange }: CardExpirationDat
           minLength={2}
           maxLength={2}
           required
-          onChange={onChange}
+          onChange={handleCardExpirationDate}
         />
         <Span>/</Span>
         <Input
@@ -39,7 +54,7 @@ const CardExpirationDateInput = ({ expirationDate, onChange }: CardExpirationDat
           minLength={2}
           maxLength={2}
           required
-          onChange={onChange}
+          onChange={handleCardExpirationDate}
         />
       </InputContainer>
     </Label>

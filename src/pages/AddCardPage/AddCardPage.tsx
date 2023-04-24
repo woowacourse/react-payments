@@ -9,7 +9,14 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Container } from "../../components/common";
 import { useState } from "react";
-import { Card, CardExpirationDate, CardNumber, CardNumberGroups, CardPassword } from "../../types";
+import {
+  Card,
+  CardExpirationDate,
+  CardExpirationDateKey,
+  CardNumber,
+  CardNumberGroups,
+  CardPassword,
+} from "../../types";
 import { useNavigate } from "react-router-dom";
 import { isAlphabetic, isNumeric, isFulfilledObject, isFulfilledString, isValidMonth } from "../../validator/Validator";
 
@@ -44,13 +51,7 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
     setCardNumber({ ...cardNumber, [targetGroup]: value });
   };
 
-  const handleExpirationDate = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    const dateType = e.target.name;
-
-    if (!isNumeric(value)) return;
-    if (!(dateType in expirationDate)) return;
-
+  const handleExpirationDate = (dateType: CardExpirationDateKey, value: string) => {
     setExpirationDate({ ...expirationDate, [dateType]: value });
   };
 
@@ -115,7 +116,7 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
       <CardPreview card={{ cardNumber, expirationDate, ownerName }} />
       <Form onSubmit={addCard}>
         <CardNumberInput cardNumber={cardNumber} setCardNumber={handleCardNumber} />
-        <CardExpirationDateInput expirationDate={expirationDate} onChange={handleExpirationDate} />
+        <CardExpirationDateInput expirationDate={expirationDate} setCardExpirationDate={handleExpirationDate} />
         <CardOwnerNameInput ownerName={ownerName} nameLength={ownerName.length} onChange={handleOwnerName} />
         <CardSecurityCodeInput securityCode={securityCode} onChange={handleSecurityCode} />
         <CardPasswordInput password={password} onChange={handlePassword} />
