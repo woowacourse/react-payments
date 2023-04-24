@@ -1,33 +1,45 @@
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Card } from '../types';
+import { PATH } from '../constants';
 import CardItem from '../components/CardItem/CardItem';
 import Button from '../components/common/Button/Button';
 import Input from '../components/common/Input/Input';
-import { Issuer } from '../types';
 
 function CardRegisteredPage() {
-  const cardInformation = {
-    issuer: '신한카드' as Issuer,
-    cardNumber: '1234123412341234',
-    expirationDate: {
-      month: '05',
-      year: '23',
-    },
-    ownerName: 'ASHLEY',
-  };
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [cardInformation, setCardInformation] = useState<Card | null>(null);
+
+  useEffect(() => {
+    setCardInformation(location.state);
+  }, [location]);
 
   return (
-    <>
-      <h1>카드 등록이 완료되었습니다</h1>
-      <CardItem
-        information={{
-          issuer: cardInformation.issuer,
-          cardNumber: cardInformation.cardNumber,
-          expirationDate: cardInformation.expirationDate,
-          ownerName: cardInformation.ownerName,
-        }}
-      />
-      <Input variant="underline" />
-      <Button variant="primary">완료</Button>
-    </>
+    <main>
+      {cardInformation && (
+        <>
+          <h2 className="align-center mg-b-24">카드 등록이 완료되었습니다</h2>
+          <CardItem
+            className="mg-b-24 center-hoz-item"
+            information={{
+              issuer: cardInformation.issuer,
+              cardNumber: cardInformation.cardNumber,
+              expirationDate: cardInformation.expirationDate,
+              ownerName: cardInformation.ownerName,
+            }}
+          />
+          <Input variant="underline" maxLength={20} />
+          <Button
+            variant="primary"
+            className="complete-button center-hoz-item w-250"
+            onClick={() => navigate(PATH.ROOT)}
+          >
+            완료
+          </Button>
+        </>
+      )}
+    </main>
   );
 }
 
