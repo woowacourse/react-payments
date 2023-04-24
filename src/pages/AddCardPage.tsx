@@ -15,11 +15,9 @@ import NextButton from '../components/common/NextButton';
 import { useFocusInput } from '../hooks/useFocusInput';
 import { isNumber, isOnlyKoreanAndEnglish } from '../utils';
 import { CardInfo } from '../types';
-import { HOME_PAGE } from '../constant';
 
 interface AddCardPageProps {
   cardList: CardInfo[];
-  onClick: () => void;
   setCardList: (data: CardInfo[]) => void;
   setPage: React.Dispatch<React.SetStateAction<'homePage' | 'addCardPage'>>;
 }
@@ -94,7 +92,6 @@ const NextButtonWrapper = styled.div`
 
 export default function AddCardPage({
   cardList,
-  onClick,
   setCardList,
   setPage,
 }: AddCardPageProps) {
@@ -275,7 +272,14 @@ export default function AddCardPage({
 
     setCardList(updatedCardList);
 
-    setPage(HOME_PAGE);
+    setPage('homePage');
+  };
+
+  const onPrevButtonClick = () => {
+    const result = window.confirm('정말 닫으시겠습니까?');
+    if (result) {
+      setPage('homePage');
+    }
   };
 
   useEffect(() => {
@@ -296,7 +300,7 @@ export default function AddCardPage({
   return (
     <Page>
       <TitleWrapper>
-        <PrevButton onClick={onClick} />
+        <PrevButton onClick={onPrevButtonClick} />
         <Title>카드 추가</Title>
       </TitleWrapper>
       <CardWrapper>
