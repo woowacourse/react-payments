@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+
 import CVCTooltip from '../components/CVCTooltip';
 
 const meta: Meta<typeof CVCTooltip> = {

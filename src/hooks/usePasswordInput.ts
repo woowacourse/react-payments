@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 const usePasswordInput = <T>(initialState: T) => {
   const [value, setValue] = useState(initialState);
 

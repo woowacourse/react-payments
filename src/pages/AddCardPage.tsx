@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import Card from '../components/Card';
 import FormCardAdd from '../components/FormCardAdd';
 import Header from '../components/Header';
 import useInput from '../hooks/useInput';
 import usePasswordInput from '../hooks/usePasswordInput';
-import { isNumberInput, stringToUpperCase } from '../utils/util';
 import type { CardNumber, InputHook } from '../type';
-import './AddCardPage.css';
+import { formatExpireDate, handleNumberInput } from '../utils/processData';
+import { isNumberInput, stringToUpperCase } from '../utils/util';
 import {
   cardExpireCondition,
   cardOwnerCondition,
   cardPasswordCondition,
   securityCodeCondition,
 } from '../utils/validate';
-import { formatExpireDate, handleNumberInput } from '../utils/processData';
+import './AddCardPage.css';
 
 const AddCardPage = () => {
   const navigate = useNavigate();

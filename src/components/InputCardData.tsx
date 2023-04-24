@@ -1,4 +1,5 @@
 import React, { ChangeEvent, RefObject } from 'react';
+
 import './InputCardData.css';
 
 export type InputProps = {

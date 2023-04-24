@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { CardNumber } from '../type';
 import { changeNumberToMask } from '../utils/processData';
 import './Card.css';

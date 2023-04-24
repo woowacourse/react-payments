@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import './index.css';
 import AddCardPage from './pages/AddCardPage';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import CardListPage from './pages/CardListPage';
 import { LOCATION } from './utils/constants';
 

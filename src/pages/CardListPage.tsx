@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import Card from '../components/Card';
 import Header from '../components/Header';
 import type { CardType } from '../type';

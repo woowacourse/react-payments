@@ -1,12 +1,12 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import InputCardData from './InputCardData';
-
-import { fetchNewCardData } from '../utils/fetchData';
 import { useNavigate } from 'react-router-dom';
-import { CVC_TOOLTIP_DETAIL, CVC_TOOLTIP_TITLE } from '../utils/constants';
+
 import { CardType, FormCardAddProps } from '../type';
-import './FormCardAdd.css';
+import { CVC_TOOLTIP_DETAIL, CVC_TOOLTIP_TITLE } from '../utils/constants';
+import { fetchNewCardData } from '../utils/fetchData';
 import Tooltip from './CVCTooltip';
+import './FormCardAdd.css';
+import InputCardData from './InputCardData';
 
 const FormCardAdd = ({
   cardNumber,
