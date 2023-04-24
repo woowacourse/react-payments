@@ -12,7 +12,7 @@ export default meta;
 
 export const InputTest = (args: any) => (
   <InputBoxCardNumber
-    setIsComplete={() => {}}
+    changeCardNumberStatus={() => {}}
     changeNowCardInfo={() => {}}
   ></InputBoxCardNumber>
 );

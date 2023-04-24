@@ -12,8 +12,8 @@ export default meta;
 
 export const InputTest = (args: any) => (
   <CardNumber
-    setInputStatus={() => {}}
-    setIsComplete={() => {}}
+    setHasError={() => {}}
+    changeCardNumberStatus={() => {}}
     changeNowCardInfo={() => {}}
   ></CardNumber>
 );
