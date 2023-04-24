@@ -11,7 +11,7 @@ export default inputMeta;
 
 type Story = StoryObj<typeof inputMeta>;
 
-export const Example1 = {
+export const 가운데정렬_100px = {
   args: {
     type: 'password',
     maxLength: 4,
@@ -21,12 +21,13 @@ export const Example1 = {
   },
 } satisfies Story;
 
-export const Example2 = {
+export const 왼쪽정렬_200px = {
   args: {
     type: 'text',
-    maxLength: 4,
-    width: '100px',
+    maxLength: 10,
+    width: '200px',
     inputMode: 'numeric',
-    placeholder: '●●●●',
+    placeholder: '가나다라마',
+    textAlign: 'left',
   },
 } satisfies Story;
