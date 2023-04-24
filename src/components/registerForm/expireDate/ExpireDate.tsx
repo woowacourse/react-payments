@@ -6,6 +6,7 @@ import Input from '../../@common/Input';
 import ErrorSpan from '../../@common/ErrorSpan';
 import { CreditCardContext } from '../../../contexts/CreditCardContext';
 import { ONLY_NUMBER_OR_SLASH_REGEX } from '../../../utils/regexp';
+import InputWrapper from '../../@common/InputWrapper';
 
 function ExpireDate() {
   const [creditCardInfo, setCreditCardInfo] = useContext(CreditCardContext);
@@ -70,7 +71,7 @@ function ExpireDate() {
     }
   };
   return (
-    <ExpireDateContainer>
+    <InputWrapper>
       <FormLabel>{'만료일'}</FormLabel>
       <Input
         value={refineExpirationDate(creditCardInfo.expirationDate)}
@@ -85,7 +86,7 @@ function ExpireDate() {
         line-height="21px"
       />
       {!validStatus.isValid && <ErrorSpan>{validStatus.message}</ErrorSpan>}
-    </ExpireDateContainer>
+    </InputWrapper>
   );
 }
 

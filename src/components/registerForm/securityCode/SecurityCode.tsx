@@ -6,6 +6,7 @@ import { ONLY_NUMBER_REGEXP } from '../../../utils/regexp';
 import FormLabel from '../../@common/FormLabel';
 import Input from '../../@common/Input';
 import ErrorSpan from '../../@common/ErrorSpan';
+import InputWrapper from '../../@common/InputWrapper';
 
 function SecurityCode() {
   const [creditCardInfo, setCreditCard] = useContext(CreditCardContext);
@@ -50,7 +51,7 @@ function SecurityCode() {
   };
 
   return (
-    <SecurityCodeContainer>
+    <InputWrapper>
       <FormLabel>{'보안 코드(CVC/CVV)'}</FormLabel>
       <Input
         value={creditCardInfo.securityCode}
@@ -63,7 +64,7 @@ function SecurityCode() {
         text-align="center"
       />
       {!validStatus.isValid && <ErrorSpan>{validStatus.message}</ErrorSpan>}
-    </SecurityCodeContainer>
+    </InputWrapper>
   );
 }
 

@@ -8,6 +8,7 @@ import FormLabel from '../../@common/FormLabel';
 import Input from '../../@common/Input';
 import ErrorSpan from '../../@common/ErrorSpan';
 import { CreditCardContext } from '../../../contexts/CreditCardContext';
+import InputWrapper from '../../@common/InputWrapper';
 
 function CardPassword() {
   const [validationStatus, setValidationStatus] = useState({
@@ -62,13 +63,14 @@ function CardPassword() {
   };
 
   return (
-    <CardPasswordContainer>
+    <InputWrapper>
       <FormLabel>{'카드 비밀번호'}</FormLabel>
       <PasswordInputContainer>
         <Input
           data-idx="0"
           value={creditCardInfo.password[0]}
           onChange={_onChange}
+          onBlur={_onBlur}
           maxLength={1}
           inputMode="numeric"
           type="password"
@@ -79,6 +81,7 @@ function CardPassword() {
           data-idx="1"
           value={creditCardInfo.password[1]}
           onChange={_onChange}
+          onBlur={_onBlur}
           maxLength={1}
           inputMode="numeric"
           type="password"
@@ -89,7 +92,7 @@ function CardPassword() {
         <DotParagraph>•</DotParagraph>
       </PasswordInputContainer>
       {!validationStatus.isValid && <ErrorSpan>{validationStatus.message}</ErrorSpan>}
-    </CardPasswordContainer>
+    </InputWrapper>
   );
 }
 
@@ -111,6 +114,7 @@ const DotParagraph = styled.p`
   width: 43px;
   height: 45px;
 
+  box-sizing: border-box;
   margin: 0;
 
   font-size: 28px;

@@ -1,11 +1,12 @@
 import React, { useState, useContext } from 'react';
 
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { CreditCardContext } from '../../../contexts/CreditCardContext';
 import { CONTINUOUS_EMPTY_REGEXP, ONLY_ENG_AND_EMPTY_REGEXP } from '../../../utils/regexp';
 import FormLabel from '../../@common/FormLabel';
 import Input from '../../@common/Input';
 import ErrorSpan from '../../@common/ErrorSpan';
+import InputWrapper from '../../@common/InputWrapper';
 
 function OwnerNameInput() {
   const [creditCardInfo, setCreditCardInfo] = useContext(CreditCardContext);
@@ -63,7 +64,7 @@ function OwnerNameInput() {
   };
 
   return (
-    <OwnerNameInputContainer>
+    <InputWrapper>
       <LabelContainer>
         <FormLabel>카드 소유자 이름(선택)</FormLabel>
         <span>{`${creditCardInfo.ownerName.length} / 30`}</span>
@@ -77,21 +78,16 @@ function OwnerNameInput() {
         textAlign="left"
       />
       {!validationStatus.isValid && <ErrorSpan>{validationStatus.message}</ErrorSpan>}
-    </OwnerNameInputContainer>
+    </InputWrapper>
   );
 }
 
 export default OwnerNameInput;
 
-const OwnerNameInputContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  row-gap: 5px;
-`;
-
 const LabelContainer = styled.div`
   display: flex;
   width: 100%;
+
   justify-content: space-between;
   align-items: center;
 `;

@@ -1,12 +1,13 @@
 import React, { useState, useContext, useRef } from 'react';
 
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import useAutoFocus from '../../../hooks/useAutoFocus';
 import FormLabel from '../../@common/FormLabel';
 import Input from '../../@common/Input';
 import ErrorSpan from '../../@common/ErrorSpan';
 import { CreditCardContext } from '../../../contexts/CreditCardContext';
+import InputWrapper from '../../@common/InputWrapper';
 
 export const CardNumber = () => {
   const [creditCardInfo, setCreditCardInfo] = useContext(CreditCardContext);
@@ -74,7 +75,7 @@ export const CardNumber = () => {
   };
 
   return (
-    <div>
+    <InputWrapper>
       <FormLabel>카드 번호</FormLabel>
       <CardNumberInputContainer>
         <Input
@@ -86,7 +87,7 @@ export const CardNumber = () => {
           inputMode="numeric"
           ref={refs[0]}
         />
-        <p>-</p>
+
         <Input
           data-index="1"
           value={creditCardInfo.cardNumber[1]}
@@ -96,7 +97,6 @@ export const CardNumber = () => {
           inputMode="numeric"
           ref={refs[1]}
         />
-        <p>-</p>
 
         <Input
           data-index="2"
@@ -110,7 +110,6 @@ export const CardNumber = () => {
           placeholder="●●●●"
           ref={refs[2]}
         />
-        <p>-</p>
 
         <Input
           data-index="3"
@@ -121,13 +120,12 @@ export const CardNumber = () => {
           inputMode="numeric"
           type={'password'}
           placeholder="●●●●"
-          width={'60px'}
           text-align={'center'}
           ref={refs[3]}
         />
       </CardNumberInputContainer>
       {!validStatus.isValid && <ErrorSpan>{validStatus.message}</ErrorSpan>}
-    </div>
+    </InputWrapper>
   );
 };
 
@@ -136,14 +134,12 @@ const CardNumberInputContainer = styled.div`
   -webkit-box-align: center;
   align-items: center;
   -webkit-box-pack: justify;
-  justify-content: space-between;
+  justify-content: space-around;
 
+  box-sizing: border-box;
   width: 100%;
   height: 45px;
 
   border-radius: 7px;
-  background-color: #ecebf1;
-  padding: 0 10px;
+  column-gap: 10px;
 `;
-
-const CardNumberInput = css``;
