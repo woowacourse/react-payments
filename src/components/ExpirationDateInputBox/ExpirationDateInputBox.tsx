@@ -1,7 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 
 import { CardInfo, ExpirationDate, SetCardInfo } from '../../types/state';
-import { EXPIRATION_DATE } from '../../constants/cardInfo';
 import { ERROR_MESSAGE } from '../../constants/message';
 
 import { isNumeric } from '../../validator';
@@ -27,17 +26,27 @@ const ExpirationDateInputBox = ({
 
     if (errorMessage) setErrorMessage('');
 
-    if (value.length > EXPIRATION_DATE.MAX_LENGTH) return;
-
-    setCardInfo((prev: CardInfo) => {
-      return {
-        ...prev,
-        expirationDate: {
-          ...expirationDate,
-          [name]: value,
-        },
-      };
-    });
+    if (value.length === 1) {
+      setCardInfo((prev: CardInfo) => {
+        return {
+          ...prev,
+          expirationDate: {
+            ...expirationDate,
+            [name]: `0${value}`,
+          },
+        };
+      });
+    } else {
+      setCardInfo((prev: CardInfo) => {
+        return {
+          ...prev,
+          expirationDate: {
+            ...expirationDate,
+            [name]: value.substring(1),
+          },
+        };
+      });
+    }
   };
 
   return (
@@ -56,7 +65,7 @@ const ExpirationDateInputBox = ({
                 onChange={onChange}
                 width="s"
                 type="text"
-                maxLength={2}
+                maxLength={3}
                 placeholder={key === 'month' ? 'MM' : 'YY'}
               />
             );
