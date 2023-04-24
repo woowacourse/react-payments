@@ -7,15 +7,7 @@ import { ErrorMessage, Label, Input } from '../common';
 
 import { ERROR_MESSAGE } from '../../constants/errors';
 import { matchKeyWithId } from '../../utils/infoKey';
-
-interface InputInfo {
-  value: any;
-  type: string;
-  error: boolean;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  required: boolean;
-  regexp: RegExp;
-}
+import { InputInfo } from '../../type/input';
 interface InputBoxProps extends React.HTMLAttributes<HTMLDivElement> {
   id: string | undefined;
   inputs: InputInfo[];

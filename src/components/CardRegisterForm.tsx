@@ -10,8 +10,12 @@ import { joinValues } from '../utils/infoKey';
 import { getFormFields } from '../utils/formData';
 
 import { Card } from '../type/card';
+import { useNavigate } from 'react-router-dom';
+import { checkInputValdiation } from '../utils/checkInputValidation';
 
 export function CardRegisterForm() {
+  const naviagte = useNavigate();
+
   const inputList = useForm();
 
   const allInputs = [
@@ -22,15 +26,8 @@ export function CardRegisterForm() {
     ...inputList.CARD_PASSWORD,
   ];
 
-  const requiredInputs = allInputs.filter((input) => input.required);
-  const isRequiredInputValid = requiredInputs.every(
-    ({ value, error }) => value && !error
-  );
-
-  const optionalInputs = allInputs.filter((input) => !input.required);
-  const isOptionalInputValid = optionalInputs.every(({ value, error }) =>
-    value ? value && !error : true
-  );
+  const { isRequiredInputValid, isOptionalInputValid } =
+    checkInputValdiation(allInputs);
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -45,6 +42,12 @@ export function CardRegisterForm() {
 
     console.log(submittedCardInfo);
     cardList.updateData(submittedCardInfo as unknown as Card);
+
+    moveCardListPage();
+  }
+
+  function moveCardListPage() {
+    naviagte('/');
   }
 
   return (
