@@ -27,12 +27,19 @@ const Input = (props: Props) => {
     if (target.value.length === 0) focus(-1);
   };
 
-  const onKeyDown = ({ target, key }: React.KeyboardEvent<HTMLInputElement>) => {
+  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const { target, key } = e;
     if (!focus) return;
     if (!(target instanceof HTMLInputElement)) return;
 
-    if (target.selectionStart === 0 && key === 'ArrowLeft') focus(-1);
-    if (target.selectionStart === target.value.length && key === 'ArrowRight') focus(1);
+    if (target.selectionStart === 0 && key === 'ArrowLeft') {
+      focus(-1);
+      e.preventDefault();
+    }
+    if (target.selectionStart === target.value.length && key === 'ArrowRight') {
+      focus(1);
+      e.preventDefault();
+    }
   };
 
   return (
