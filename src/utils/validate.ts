@@ -1,5 +1,5 @@
-export const isLastLetterNumeric = (value: string) => {
-  return /^\d*$/.test(value);
+export const isNumeric = (value: string) => {
+  return /^\d+$/.test(value);
 };
 
 export const isInputFilled = (value: string, fullLength: number) => {

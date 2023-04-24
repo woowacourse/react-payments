@@ -4,7 +4,7 @@ import { Input } from "../common/Input";
 import { useState } from "react";
 import styled from "styled-components";
 import { CARD_INPUT_NUMBER } from "../../constant/cardInput";
-import { isInputFilled, isLastLetterNumeric } from "../../utils/validate";
+import { isInputFilled, isNumeric } from "../../utils/validate";
 
 interface CardNumberInputProps {
   setCardNumbers: (index: number, numbers: string) => void;
@@ -21,9 +21,11 @@ export const CardNumberInput = ({ setCardNumbers }: CardNumberInputProps) => {
   const handleInput =
     (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;
+      console.log(isNumeric(value));
 
-      if (!isLastLetterNumeric(value)) {
-        e.target.value = value.slice(0, -1);
+      if (!isNumeric(value)) {
+        const onlyNumbers = value.match(/\d+/g)?.join("") || "";
+        e.target.value = onlyNumbers;
         return;
       }
 

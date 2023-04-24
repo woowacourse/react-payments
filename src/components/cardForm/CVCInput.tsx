@@ -4,7 +4,7 @@ import { InputLabel } from "../common/InputLabel";
 import styled from "styled-components";
 import { useState } from "react";
 import { CARD_INPUT_NUMBER } from "../../constant/cardInput";
-import { isInputFilled, isLastLetterNumeric } from "../../utils/validate";
+import { isInputFilled, isNumeric } from "../../utils/validate";
 
 const CVCInfo = {
   label: "cvc",
@@ -20,7 +20,13 @@ export const CVCInput = () => {
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
 
-    if (!isLastLetterNumeric(value) || value.length > 3) {
+    if (!isNumeric(value)) {
+      const onlyNumbers = value.match(/\d+/g)?.join("") || "";
+      e.target.value = onlyNumbers;
+      return;
+    }
+
+    if (value.length > CARD_INPUT_NUMBER.CVC) {
       e.target.value = value.slice(0, -1);
       return;
     }

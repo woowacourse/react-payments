@@ -3,9 +3,10 @@ import { Input } from "../common/Input";
 import { InputLabel } from "../common/InputLabel";
 import { useState } from "react";
 import {
-  isLastLetterNumeric,
+  isNumeric,
   isMonthValid,
   isYearValid,
+  isInputFilled,
 } from "../../utils/validate";
 
 interface ExpiryDateInputProps {
@@ -26,7 +27,13 @@ export const ExpiryDateInput = ({ setExpiryDate }: ExpiryDateInputProps) => {
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replace(" / ", "");
 
-    if (!isLastLetterNumeric(value) || value.length > 4) {
+    if (!isNumeric(value)) {
+      const onlyNumbers = value.match(/\d+/g)?.join("") || "";
+      e.target.value = (onlyNumbers.match(/\d{1,2}/g) ?? []).join(" / ");
+      return;
+    }
+
+    if (value.length > 4) {
       e.target.value = e.target.value.slice(0, -1);
       return;
     }
@@ -38,10 +45,10 @@ export const ExpiryDateInput = ({ setExpiryDate }: ExpiryDateInputProps) => {
   const validateExpiryDate = (expiryDate: string): void => {
     const [month, year] = expiryDate.split(" / ").map((each) => Number(each));
 
-    setIsValid(true);
+    setIsValid(false);
 
-    if (!isMonthValid(month) || !isYearValid(year)) {
-      setIsValid(false);
+    if (isMonthValid(month) && isYearValid(year)) {
+      setIsValid(true);
     }
   };
 

@@ -4,7 +4,7 @@ import { InputLabel } from "../common/InputLabel";
 import styled from "styled-components";
 import { useState } from "react";
 import { CARD_INPUT_NUMBER } from "../../constant/cardInput";
-import { isInputFilled, isLastLetterNumeric } from "../../utils/validate";
+import { isInputFilled, isNumeric } from "../../utils/validate";
 
 const passwordInfo = {
   width: "43px",
@@ -19,7 +19,7 @@ export const PasswordInput = () => {
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
 
-    if (value.length > 1 || !isLastLetterNumeric(value)) {
+    if (value.length > 1 || !isNumeric(value)) {
       e.target.value = value.slice(0, -1);
       return;
     }
