@@ -5,7 +5,6 @@ import styled from "styled-components";
 import Card from "../components/Card";
 import { getLocalStorage } from "../utils";
 import { CardType } from "../types";
-import uuid from "react-uuid";
 
 const MyCard = () => {
   const cards = getLocalStorage("card");
@@ -15,7 +14,7 @@ const MyCard = () => {
       <>
         <Header title="보유카드" isBack={false} />
         {cards.map((card: CardType) => (
-          <CardWrapper key={uuid()}>
+          <CardWrapper key={crypto.randomUUID()}>
             <Card
               color={card.color}
               ownerName={card.ownerName}

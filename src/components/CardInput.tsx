@@ -38,7 +38,6 @@ const CardInputWrapper = styled.input`
   height: 45px;
 
   padding: 0 10px;
-  margin-bottom: 20px;
 
   text-align: center;
   font-size: ${(props) => (props.type === "password" ? "32px" : "19px")};

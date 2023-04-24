@@ -1,4 +1,3 @@
-import uuid from "react-uuid";
 import styled from "styled-components";
 import { IcChip } from "../assets";
 import { CardType } from "../types";
@@ -12,12 +11,11 @@ const Card = (props: CardType) => {
       <CardInfoWrapper>
         <div>
           {cardNumberArray.map((cardNumber, index) => {
-            return index > 1 ? (
-              <span key={uuid()} style={{ letterSpacing: "-3px" }}>
-                {cardNumber}
-              </span>
-            ) : (
-              <span key={uuid()} style={{ letterSpacing: "3px" }}>
+            return (
+              <span
+                key={crypto.randomUUID()}
+                style={{ letterSpacing: index > 1 ? "-3px" : "3px" }}
+              >
                 {cardNumber}
               </span>
             );
@@ -56,7 +54,7 @@ const CardInfoWrapper = styled.div`
   width: 100%;
   height: 55px;
 
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   color: white;
 
