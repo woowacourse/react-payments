@@ -13,7 +13,7 @@ import { useModal } from '../common/Modal/ModalContext';
 import { useCardCompany } from './CardCompanyContext';
 import type { CardCompany } from '../../domain/types/card';
 
-import styles from './cardCompany.module.css';
+import styles from './cardCompanyButton.module.css';
 
 const CARD_COMPANY_LOGO = {
   BC카드: <BCCardLogo />,
@@ -40,10 +40,10 @@ const CardCompanyButton = ({ cardCompany }: Props) => {
   };
 
   return (
-    <div className={styles.container} onClick={handleClick}>
+    <button type="button" className={styles.container} onClick={handleClick}>
       {CARD_COMPANY_LOGO[cardCompany]}
       <div className="text-card-company">{cardCompany}</div>
-    </div>
+    </button>
   );
 };
 

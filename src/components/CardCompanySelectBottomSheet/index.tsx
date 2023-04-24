@@ -1,4 +1,4 @@
-import CardCompanyButton from '../CardCompany';
+import CardCompanyButton from '../CardCompanyButton';
 import Modal from '../common/Modal';
 
 import { CARD_COMPANIES } from '../../domain/constants';

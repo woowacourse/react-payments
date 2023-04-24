@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import CardRegisterForm from '../../components/CardRegisterForm';
 import CardCompanySelectBottomSheet from '../../components/CardCompanySelectBottomSheet';
-import { CardCompanyProvider } from '../../components/CardCompany/CardCompanyContext';
+import { CardCompanyProvider } from '../../components/CardCompanyButton/CardCompanyContext';
 
 import { useModal } from '../../components/common/Modal/ModalContext';
 

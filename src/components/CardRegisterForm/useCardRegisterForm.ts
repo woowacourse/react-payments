@@ -8,7 +8,7 @@ import {
 } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { useCardCompany } from '../CardCompany/CardCompanyContext';
+import { useCardCompany } from '../CardCompanyButton/CardCompanyContext';
 import { useCardsContext } from '../../domain/context/CardsContext';
 import { isNotAlphabet, isNotNumber } from '../../utils/validation';
 import type { Focus } from '../common/Input';
