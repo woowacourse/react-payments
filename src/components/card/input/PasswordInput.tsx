@@ -2,11 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 import Input from '../../common/Input';
 import { UseInputProps } from '../../../hooks/useInput';
+import Error from '../../common/Error';
 
 export interface PasswordInputProps {
   firstPassword: UseInputProps;
   secondPassword: UseInputProps;
 }
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
 
 const Wrapper = styled.div`
   display: flex;
@@ -42,34 +49,39 @@ export default function PasswordInput({
   secondPassword,
 }: PasswordInputProps) {
   return (
-    <Wrapper>
-      <GrayWrapper>
-        <Input
-          isNumber={true}
-          maxLength={1}
-          id="password"
-          required
-          type="password"
-          textAlign="center"
-          autoComplete="off"
-          tabIndex={8}
-          {...firstPassword}
-        />
-      </GrayWrapper>
-      <GrayWrapper>
-        <Input
-          isNumber={true}
-          maxLength={1}
-          required
-          type="password"
-          textAlign="center"
-          tabIndex={9}
-          autoComplete="off"
-          {...secondPassword}
-        />
-      </GrayWrapper>
-      <WhiteWrapper>•</WhiteWrapper>
-      <WhiteWrapper>•</WhiteWrapper>
-    </Wrapper>
+    <Container>
+      <Wrapper>
+        <GrayWrapper>
+          <Input
+            isNumber={true}
+            maxLength={1}
+            id="password"
+            required
+            type="password"
+            placeholder="0"
+            textAlign="center"
+            autoComplete="off"
+            tabIndex={8}
+            {...firstPassword}
+          />
+        </GrayWrapper>
+        <GrayWrapper>
+          <Input
+            isNumber={true}
+            maxLength={1}
+            placeholder="0"
+            required
+            type="password"
+            textAlign="center"
+            tabIndex={9}
+            autoComplete="off"
+            {...secondPassword}
+          />
+        </GrayWrapper>
+        <WhiteWrapper>•</WhiteWrapper>
+        <WhiteWrapper>•</WhiteWrapper>
+      </Wrapper>
+      {firstPassword.error && <Error text={firstPassword.error} />}
+    </Container>
   );
 }

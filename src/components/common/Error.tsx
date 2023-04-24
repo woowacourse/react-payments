@@ -8,17 +8,19 @@ interface ErrorProps {
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
-  color: red;
+  color: #ff0033;
+  margin-top: 12px;
 `;
 
 const Svg = styled.svg`
   height: 28px;
-  stroke-width: 2px;
+  stroke-width: 1.5px;
 `;
 
 const Message = styled.span`
   margin-left: 8px;
-  font-weight: 600;
+  font-weight: 400;
+  font-size: 16px;
 `;
 
 export default function Error({ text }: ErrorProps) {

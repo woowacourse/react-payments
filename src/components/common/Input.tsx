@@ -10,11 +10,15 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 const StyledInput = styled.input<{ textAlign?: string; isWrong?: boolean }>`
   border: none;
   background-color: #ecebf1;
-  border: ${({ isWrong }) => (isWrong ? '1px solid red' : '')};
+  border: ${({ isWrong }) => (isWrong ? '1px solid #ff0033' : '')};
   font-size: 18px;
   font-weight: 500;
   width: 100%;
   text-align: ${({ textAlign }) => textAlign};
+
+  &::placeholder {
+    font-size: 16px;
+  }
 `;
 
 export default function Input({

@@ -1,10 +1,12 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, Dispatch, useState } from 'react';
 
 export interface UseInputProps {
   value: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   name: string | undefined;
   error: string | undefined;
+  setError: Dispatch<React.SetStateAction<string | undefined>>;
+  isWrong: boolean;
 }
 
 interface UseInputOptionProps {
@@ -37,5 +39,5 @@ export const useInput = (
     setError(errorMessage);
   };
 
-  return { value, onChange, name, error };
+  return { value, onChange, name, error, setError, isWrong: error !== '' };
 };

@@ -4,6 +4,7 @@ import { DISMISS_TAB_INDEX } from '../../constant';
 
 interface ToolTipProps {
   text: string;
+  onClick: () => void;
   tabIndex?: number;
 }
 
@@ -19,7 +20,12 @@ const Wrapper = styled.div`
 
 export default function ToolTip({
   text,
+  onClick,
   tabIndex = DISMISS_TAB_INDEX,
 }: ToolTipProps) {
-  return <Wrapper tabIndex={tabIndex}>{text}</Wrapper>;
+  return (
+    <Wrapper onClick={onClick} tabIndex={tabIndex}>
+      {text}
+    </Wrapper>
+  );
 }

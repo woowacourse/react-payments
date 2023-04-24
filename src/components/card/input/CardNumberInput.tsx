@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import Input from '../../common/Input';
 import { UseInputProps } from '../../../hooks/useInput';
+import Error from '../../common/Error';
 
 interface CardNumberInputProps {
   firstNumber: UseInputProps;
@@ -8,6 +9,11 @@ interface CardNumberInputProps {
   thirdNumber: UseInputProps;
   fourthNumber: UseInputProps;
 }
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 const Wrapper = styled.div`
   display: flex;
@@ -31,52 +37,59 @@ export default function CardNumberInput({
   fourthNumber,
 }: CardNumberInputProps) {
   return (
-    <Wrapper>
-      <Input
-        isNumber={true}
-        maxLength={4}
-        id="cardNumber"
-        type="text"
-        required
-        textAlign="center"
-        autoFocus
-        autoComplete="off"
-        tabIndex={0}
-        {...firstNumber}
-      />
-      <Dash>-</Dash>
-      <Input
-        isNumber={true}
-        maxLength={4}
-        type="text"
-        required
-        tabIndex={1}
-        autoComplete="off"
-        textAlign="center"
-        {...secondNumber}
-      />
-      <Dash>-</Dash>
-      <Input
-        isNumber={true}
-        maxLength={4}
-        type="password"
-        required
-        textAlign="center"
-        autoComplete="off"
-        tabIndex={2}
-        {...thirdNumber}
-      />
-      <Dash>-</Dash>
-      <Input
-        isNumber={true}
-        maxLength={4}
-        type="password"
-        autoComplete="off"
-        required
-        textAlign="center"
-        tabIndex={3}
-        {...fourthNumber}
-      />
-    </Wrapper>
+    <Container>
+      <Wrapper>
+        <Input
+          isNumber={true}
+          maxLength={4}
+          id="cardNumber"
+          type="text"
+          required
+          textAlign="center"
+          autoFocus
+          placeholder="0000"
+          autoComplete="off"
+          tabIndex={0}
+          {...firstNumber}
+        />
+        <Dash>-</Dash>
+        <Input
+          isNumber={true}
+          maxLength={4}
+          type="text"
+          required
+          placeholder="0000"
+          tabIndex={1}
+          autoComplete="off"
+          textAlign="center"
+          {...secondNumber}
+        />
+        <Dash>-</Dash>
+        <Input
+          isNumber={true}
+          maxLength={4}
+          type="password"
+          placeholder="0000"
+          required
+          textAlign="center"
+          autoComplete="off"
+          tabIndex={2}
+          {...thirdNumber}
+        />
+        <Dash>-</Dash>
+        <Input
+          isNumber={true}
+          maxLength={4}
+          type="password"
+          placeholder="0000"
+          autoComplete="off"
+          required
+          textAlign="center"
+          tabIndex={3}
+          {...fourthNumber}
+        />
+      </Wrapper>
+      {firstNumber.error && <Error text={firstNumber.error} />}
+    </Container>
   );
 }

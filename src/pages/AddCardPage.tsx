@@ -8,8 +8,6 @@ import CardNumberInput from '../components/card/input/CardNumberInput';
 import ExpiracyInput from '../components/card/input/ExpiracyInput';
 import OwnerInput from '../components/card/input/OwnerInput';
 import CvcInput from '../components/card/input/CvcInput';
-import InformationButton from '../components/common/InformationButton';
-import ToolTip from '../components/common/ToolTip';
 import PasswordInput from '../components/card/input/PasswordInput';
 import NextButton from '../components/common/NextButton';
 import { useFocusInput } from '../hooks/useFocusInput';
@@ -36,6 +34,8 @@ interface InputDetailInfo {
   maxLength: number;
   isRequired: boolean;
   validation: (value: string) => boolean;
+  setError: React.Dispatch<React.SetStateAction<string | undefined>>;
+  errorMessage?: string;
 }
 
 type InputKind = 'card' | 'cvc' | 'owner' | 'password' | 'month' | 'year';
@@ -63,6 +63,7 @@ const Title = styled.h3`
 const CardWrapper = styled.div`
   display: flex;
   justify-content: center;
+  margin-top: 25px;
 `;
 
 const InputWrapper = styled.div`
@@ -80,10 +81,7 @@ const CvcWrapper = styled.div`
   display: flex;
   align-items: center;
 `;
-const CvcButtonWrapper = styled.div`
-  position: relative;
-  margin-left: 11px;
-`;
+
 const NextButtonWrapper = styled.div`
   position: absolute;
   right: 25px;
@@ -98,44 +96,47 @@ export default function AddCardPage({
   const cardForm = useRef<HTMLFormElement>(null);
   const { onInputKeydown } = useFocusInput(cardForm);
   const firstCardNumber = useInput('', {
-    name: 'firstCardNumber',
+    name: 'firstCardInput',
     maxLength: 4,
   });
   const secondCardNumber = useInput('', {
-    name: 'secondCardNumber',
+    name: 'secondCardInput',
     maxLength: 4,
   });
   const thirdCardNumber = useInput('', {
-    name: 'thirdCardNumber',
+    name: 'thirdCardInput',
     maxLength: 4,
   });
   const fourthCardNumber = useInput('', {
-    name: 'fourthCardNumber',
+    name: 'fourthCardInput',
     maxLength: 4,
   });
 
   const year = useInput('', {
-    name: 'year',
+    name: 'yearInput',
     errorMessage: '카드의 연도를 확인해주세요',
     maxLength: 2,
   });
   const month = useInput('', {
-    name: 'month',
+    name: 'monthInput',
     errorMessage: '카드의 달을 확인해주세요.',
     maxLength: 2,
   });
 
   const owner = useInput('', {
-    name: 'owner',
-    validate: isOnlyKoreanAndEnglish,
+    name: 'ownerInput',
     maxLength: 30,
   });
-  const cvc = useInput('', { name: 'cvc', maxLength: 3 });
+  const cvc = useInput('', { name: 'cvcInput', maxLength: 3 });
 
-  const firstPassword = useInput('', { name: 'firstPassword', maxLength: 1 });
-  const secondPassword = useInput('', { name: 'secondPassword', maxLength: 1 });
-
-  const [isOpenToolTip, setIsOpenToolTip] = useState(false);
+  const firstPassword = useInput('', {
+    name: 'firstPasswordInput',
+    maxLength: 1,
+  });
+  const secondPassword = useInput('', {
+    name: 'secondPasswordInput',
+    maxLength: 1,
+  });
 
   const [isFormfilled, setIsFormfilled] = useState(true);
 
@@ -148,67 +149,79 @@ export default function AddCardPage({
     return Number(year) >= currentYear && Number(year) <= currentYear + 5;
   };
 
-  const handleToolTip = () => {
-    setIsOpenToolTip((prev) => !prev);
-  };
-
   const onCardInfoSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const {
-      firstCardNumber,
-      secondCardNumber,
-      thirdCardNumber,
-      fourthCardNumber,
-      month,
-      year,
-      owner,
-      cvc,
-      firstPassword,
-      secondPassword,
+      firstCardInput,
+      secondCardInput,
+      thirdCardInput,
+      fourthCardInput,
+      monthInput,
+      yearInput,
+      ownerInput,
+      cvcInput,
+      firstPasswordInput,
+      secondPasswordInput,
     } = event.currentTarget;
+
+    const currentYear = new Date().getFullYear() % 100;
 
     const cardInputValue: cardInputValueInfo = {
       card: {
         data: [
-          firstCardNumber,
-          secondCardNumber,
-          thirdCardNumber,
-          fourthCardNumber,
+          firstCardInput,
+          secondCardInput,
+          thirdCardInput,
+          fourthCardInput,
         ],
         maxLength: 4,
         isRequired: true,
         validation: isNumber,
+        setError: firstCardNumber.setError,
+        errorMessage: '카드 번호는 숫자만 입력 가능합니다.',
       },
       month: {
-        data: [month],
+        data: [monthInput],
         maxLength: 2,
         isRequired: true,
         validation: monthValidate,
+        setError: month.setError,
+        errorMessage: '달의 입력은 1 ~ 12까지 입력 가능합니다.',
       },
       year: {
-        data: [year],
+        data: [yearInput],
         maxLength: 2,
         isRequired: true,
         validation: yearValidate,
+        setError: year.setError,
+        errorMessage: `연도는 ${currentYear} ~ ${
+          currentYear + 5
+        }까지 입력 가능합니다.`,
       },
       cvc: {
-        data: [cvc],
+        data: [cvcInput],
         maxLength: 3,
         isRequired: true,
         validation: isNumber,
+        setError: cvc.setError,
+        errorMessage: 'CVC/CVV는 숫자만 입력 가능합니다.',
       },
       owner: {
-        data: [owner],
+        data: [ownerInput],
         maxLength: 30,
         isRequired: false,
         validation: isOnlyKoreanAndEnglish,
+        setError: owner.setError,
+        errorMessage: '사용자 이름은 한글 혹은 영어로만 입력 가능합니다.',
       },
       password: {
-        data: [firstPassword, secondPassword],
+        data: [firstPasswordInput, secondPasswordInput],
         maxLength: 1,
         isRequired: true,
         validation: isNumber,
+        setError: firstPassword.setError,
+        errorMessage: '비밀번호는 숫자만 입력 가능합니다.',
       },
     };
 
@@ -228,15 +241,26 @@ export default function AddCardPage({
       const dataList = current.data;
 
       const result = dataList.every((data) => {
-        const requiredResult = current.isRequired
+        const isRequiredResult = current.isRequired
           ? data.value.length === current.maxLength
           : true;
         const validationResult = current.validation(data.value);
+        const isOverMaxLength = data.value.length > current.maxLength;
 
-        const dataValidationResult = requiredResult && validationResult;
+        const dataValidationResult =
+          isRequiredResult && validationResult && !isOverMaxLength;
 
         if (!dataValidationResult) {
           wrongInputs.push(data);
+          if (!isRequiredResult) {
+            current.setError('이 값은 필수 값 입니다. 입력해주세요.');
+          } else if (isOverMaxLength) {
+            current.setError(
+              `이 값은 ${current.maxLength} 길이 만큼 입력 가능합니다.`
+            );
+          } else if (!validationResult) {
+            current.setError(current.errorMessage);
+          }
         }
 
         return dataValidationResult;
@@ -251,20 +275,20 @@ export default function AddCardPage({
 
     const newCard: CardInfo = {
       cardNumber: {
-        fisrt: firstCardNumber.value,
-        second: secondCardNumber.value,
-        third: thirdCardNumber.value,
-        fourth: fourthCardNumber.value,
+        fisrt: firstCardInput.value,
+        second: secondCardInput.value,
+        third: thirdCardInput.value,
+        fourth: fourthCardInput.value,
       },
       expiracy: {
-        month: month.value,
-        year: year.value,
+        month: monthInput.value,
+        year: yearInput.value,
       },
-      owner: owner.value,
-      cvc: cvc.value,
+      owner: ownerInput.value,
+      cvc: cvcInput.value,
       password: {
-        first: firstPassword.value,
-        second: secondPassword.value,
+        first: firstPasswordInput.value,
+        second: secondPasswordInput.value,
       },
     };
 
@@ -340,16 +364,6 @@ export default function AddCardPage({
           <InputField kind="cvc">
             <CvcWrapper>
               <CvcInput cvc={cvc} />
-              <CvcButtonWrapper>
-                <InformationButton onClick={handleToolTip} />
-                {isOpenToolTip && (
-                  <ToolTip
-                    text={
-                      'CVC번호는 카드 뒷 면에 있는 3자리 숫자이며 카드 보안을 위한 번호입니다'
-                    }
-                  />
-                )}
-              </CvcButtonWrapper>
             </CvcWrapper>
           </InputField>
           <InputField kind="password">

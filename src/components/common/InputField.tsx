@@ -16,31 +16,25 @@ export interface InputContainerProps {
 const INPUT_INFO = {
   cardNumber: {
     title: '카드 번호',
-    width: '318px',
   },
   expiracy: {
     title: '만료일',
-    width: '137px',
   },
   owner: {
     title: '카드 소유자 이름(선택)',
-    width: '318px',
   },
   cvc: {
     title: '보안 코드(CVC/CVV)',
-    width: '122px',
   },
   password: {
     title: '카드 비밀번호',
-    width: '200px',
   },
 };
 
-const Wrapper = styled.div<{ width: string }>`
+const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 318px;
-  width: ${({ width }) => `${width}`};
 `;
 
 const Label = styled.label`
@@ -64,12 +58,11 @@ export default function InputField({
   inputLength,
 }: InputContainerProps) {
   return (
-    <Wrapper width={INPUT_INFO[kind].width}>
+    <Wrapper>
       <Label htmlFor={kind}>
         <span>{INPUT_INFO[kind].title}</span>
         <InputLengthText>{inputLength}</InputLengthText>
       </Label>
-
       {children}
     </Wrapper>
   );

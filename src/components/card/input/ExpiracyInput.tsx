@@ -2,15 +2,22 @@ import React from 'react';
 import styled from 'styled-components';
 import { UseInputProps } from '../../../hooks/useInput';
 import Input from '../../common/Input';
-import ToolTip from '../../common/ToolTip';
+import Error from '../../common/Error';
 
 interface ExpiracyInputProps {
   year: UseInputProps;
   month: UseInputProps;
 }
 
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+
 const Wrapper = styled.div`
   display: flex;
+  width: 137px;
   justify-content: center;
   align-items: center;
   position: relative;
@@ -33,37 +40,39 @@ const Slash = styled.span`
 `;
 export default function ExpiracyInput({ year, month }: ExpiracyInputProps) {
   return (
-    <Wrapper>
-      <InputWrapper>
-        <Input
-          type="text"
-          maxLength={2}
-          id="expiracy"
-          isNumber={true}
-          required
-          placeholder="MM"
-          textAlign="center"
-          autoComplete="off"
-          tabIndex={4}
-          {...month}
-        />
-      </InputWrapper>
-      <Slash>/</Slash>
-      <InputWrapper>
-        <Input
-          type="text"
-          maxLength={2}
-          isNumber={true}
-          required
-          placeholder="YY"
-          textAlign="center"
-          autoComplete="off"
-          tabIndex={5}
-          {...year}
-        />
-      </InputWrapper>
-      {month.error && <ToolTip text={month.error} />}
-      {year.error && <ToolTip text={year.error} />}
-    </Wrapper>
+    <Container>
+      <Wrapper>
+        <InputWrapper>
+          <Input
+            type="text"
+            maxLength={2}
+            id="expiracy"
+            isNumber={true}
+            required
+            placeholder="MM"
+            textAlign="center"
+            autoComplete="off"
+            tabIndex={4}
+            {...month}
+          />
+        </InputWrapper>
+        <Slash>/</Slash>
+        <InputWrapper>
+          <Input
+            type="text"
+            maxLength={2}
+            isNumber={true}
+            required
+            placeholder="YY"
+            textAlign="center"
+            autoComplete="off"
+            tabIndex={5}
+            {...year}
+          />
+        </InputWrapper>
+      </Wrapper>
+      {month.error && <Error text={month.error} />}
+      {year.error && <Error text={year.error} />}
+    </Container>
   );
 }
