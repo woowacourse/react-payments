@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef } from "react";
+import React, { useState, useContext } from "react";
 import Input from "src/components/@common/Input";
 import FormLabel from "src/components/@common/FormLabel";
 import { ONLY_NUMBER_REGEXP } from "src/utils/regexp";
@@ -6,13 +6,8 @@ import { cardInfoContext } from "src/context/CardInfoContext";
 import ErrorSpan from "src/components/@common/ErrorSpan";
 import useAutoFocus from "src/hooks/useAutoFocus";
 import { Styled } from "./CardPassword.styles";
-import { NUMBERS } from "src/utils/constant";
+import { NUMBERS, PASSWORD_NUMBER_TYPES } from "src/utils/constant";
 import { lengthMatchValidation } from "src/utils/validation";
-
-interface CardPasswordObj {
-  first: string;
-  second: string;
-}
 
 function CardPassword() {
   const { MAX_PASSWORD, EACH_PASSWORD } = NUMBERS;
@@ -20,11 +15,7 @@ function CardPassword() {
 
   const [passwordError, setPasswordError] = useState(false);
 
-  const firstInputRef = useRef<HTMLInputElement>(null);
-  const secondInputRef = useRef<HTMLInputElement>(null);
-
-  const { nextInputFocus } = useAutoFocus({
-    initialRefs: [firstInputRef, secondInputRef],
+  const { refs, nextInputFocus } = useAutoFocus({
     maxLength: EACH_PASSWORD,
   });
 
@@ -32,14 +23,16 @@ function CardPassword() {
     event,
   ) => {
     const value = event.currentTarget.value;
-    const name = event.currentTarget.dataset["order"] as keyof CardPasswordObj;
+    const name = event.currentTarget.dataset[
+      "order"
+    ] as keyof typeof PASSWORD_NUMBER_TYPES;
     const idx = event.currentTarget.dataset["idx"];
 
     if (!ONLY_NUMBER_REGEXP.test(value)) return;
 
     try {
-      const firstVal = firstInputRef.current?.value ?? "";
-      const secondVal = secondInputRef.current?.value ?? "";
+      const firstVal = refs.current[0]?.value ?? "";
+      const secondVal = refs.current[1]?.value ?? "";
       const passwordVal = firstVal + secondVal;
 
       lengthMatchValidation(passwordVal, MAX_PASSWORD);
@@ -61,34 +54,27 @@ function CardPassword() {
     nextInputFocus(Number(idx));
   };
 
+  const inputs = PASSWORD_NUMBER_TYPES.map((key, idx) => (
+    <Input
+      key={key}
+      data-order={key}
+      data-idx="0"
+      value={cardInput.password[key]}
+      onChange={passwordChange}
+      maxLength={EACH_PASSWORD}
+      inputmode="numeric"
+      type="password"
+      customInputStyle={Styled.PasswordInput}
+      placeholder="•"
+      ref={(el) => (refs.current[idx] = el as HTMLInputElement)}
+    />
+  ));
+
   return (
     <Styled.CardPasswordContainer>
       <FormLabel>{"카드 비밀번호"}</FormLabel>
       <Styled.PasswordInputContainer>
-        <Input
-          data-order="first"
-          data-idx="0"
-          value={cardInput.password["first"]}
-          onChange={passwordChange}
-          maxLength={EACH_PASSWORD}
-          inputmode="numeric"
-          type="password"
-          customInputStyle={Styled.PasswordInput}
-          placeholder="•"
-          ref={firstInputRef}
-        />
-        <Input
-          data-order="second"
-          data-idx="1"
-          value={cardInput.password["second"]}
-          onChange={passwordChange}
-          maxLength={EACH_PASSWORD}
-          inputmode="numeric"
-          type="password"
-          customInputStyle={Styled.PasswordInput}
-          placeholder="•"
-          ref={secondInputRef}
-        />
+        {inputs}
         <Styled.DotParagraph>•</Styled.DotParagraph>
         <Styled.DotParagraph>•</Styled.DotParagraph>
       </Styled.PasswordInputContainer>
