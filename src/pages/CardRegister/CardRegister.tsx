@@ -40,8 +40,8 @@ export default function CardRegister() {
       }
     }
 
-    const allValid = inputs.every((input) => input.validity.valid);
-    setAllValid(allValid);
+    const hasInvalidInput = inputs.some((input) => !input.validity.valid);
+    setAllValid(!hasInvalidInput);
   };
 
   return (
