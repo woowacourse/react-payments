@@ -38,6 +38,20 @@ const CardRegisterPage = ({ setCardList }: { setCardList: CallableFunction }) =>
     navigation('/');
   };
 
+  const isFilledCardInfos = () => {
+    return (
+      cardInfo.numbers.first.length === 4 &&
+      cardInfo.numbers.second.length === 4 &&
+      cardInfo.numbers.third.length === 4 &&
+      cardInfo.numbers.fourth.length === 4 &&
+      cardInfo.expirationDate.month.length === 2 &&
+      cardInfo.expirationDate.year.length === 2 &&
+      cardInfo.securityCode.length === 3 &&
+      cardInfo.password.first.length === 1 &&
+      cardInfo.password.second.length === 1
+    );
+  };
+
   return (
     <>
       <CardPreview cardInfo={cardInfo} bgColor="#333333" />
@@ -47,7 +61,9 @@ const CardRegisterPage = ({ setCardList }: { setCardList: CallableFunction }) =>
         <OwnerNameInputBox ownerName={cardInfo.ownerName} setCardInfo={setCardInfo} />
         <SecurityCodeInputBox securityCode={cardInfo.securityCode} setCardInfo={setCardInfo} />
         <PasswordInputBox password={cardInfo.password} setCardInfo={setCardInfo} />
-        <styled.CardInfoSubmitButton onClick={handleOnClickSubmitButton}>다음</styled.CardInfoSubmitButton>
+        {isFilledCardInfos() && (
+          <styled.CardInfoSubmitButton onClick={handleOnClickSubmitButton}>다음</styled.CardInfoSubmitButton>
+        )}
       </styled.CardRegisterForm>
     </>
   );
