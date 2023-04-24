@@ -32,7 +32,7 @@ const INPUT_INFO = {
   },
   password: {
     title: '카드 비밀번호',
-    width: '174px',
+    width: '200px',
   },
 };
 

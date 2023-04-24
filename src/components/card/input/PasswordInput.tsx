@@ -10,7 +10,6 @@ export interface PasswordInputProps {
 
 const Wrapper = styled.div`
   display: flex;
-  justify-content: space-between;
   border-radius: 7px;
   align-items: center;
   gap: 7px;
@@ -33,7 +32,9 @@ const WhiteWrapper = styled.div`
   justify-content: center;
   width: 45px;
   height: 45px;
+  border: solid 1px #ecebf1;
   border-radius: 7px;
+  cursor: not-allowed;
 `;
 
 export default function PasswordInput({
