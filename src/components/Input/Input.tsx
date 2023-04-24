@@ -1,8 +1,17 @@
 import { useEffect, useRef } from 'react';
 
-import { InputProps } from '../../types/props';
-
 import * as styled from './Input.styled';
+
+export interface InputProps {
+  onChange: React.ChangeEventHandler;
+  width: 'xs' | 's' | 'm' | 'l' | 'xl';
+  type: 'password' | 'number' | 'text';
+  maxLength: number;
+  value: string;
+  name?: string;
+  placeholder?: string;
+  isFocus?: boolean;
+}
 
 const Input = (props: InputProps) => {
   const { value, onChange, width, type, name, placeholder, maxLength, isFocus } = props;

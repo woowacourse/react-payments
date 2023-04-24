@@ -2,7 +2,12 @@ import { CardInfo } from '../../types/state';
 
 import * as styled from './Card.styled';
 
-const Card = ({ cardInfo, bgColor }: { cardInfo: CardInfo; bgColor: string }) => {
+export interface CardProps {
+  cardInfo: CardInfo;
+  bgColor: string;
+}
+
+const Card = ({ cardInfo, bgColor }: CardProps) => {
   return (
     <styled.Card bgColor={bgColor}>
       <styled.Rectangle />

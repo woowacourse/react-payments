@@ -9,15 +9,13 @@ import { isNumeric } from '../../validator';
 import * as styled from './PasswordInputBox.styled';
 import Input from '../Input/Input';
 
-const PasswordInputBox = ({
-  password,
-  setPassword,
-  securityCode,
-}: {
+interface PasswordInputBoxProps {
   password: Password;
   setPassword: SetPassword;
   securityCode: string;
-}) => {
+}
+
+const PasswordInputBox = ({ password, setPassword, securityCode }: PasswordInputBoxProps) => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const onChange = ({ target: { name, value } }: ChangeEvent<HTMLInputElement>) => {

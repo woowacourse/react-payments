@@ -1,8 +1,7 @@
 import styled from 'styled-components';
-import { CardProps } from '../../types/props';
 import { COLOR } from '../../constants/cardInfo';
 
-export const Card = styled.div<CardProps>`
+export const Card = styled.div<Record<'bgColor', string>>`
   position: relative;
   width: 240px;
   height: 150px;

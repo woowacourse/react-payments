@@ -9,15 +9,13 @@ import { isAlpha } from '../../validator';
 import * as styled from './OwnerNameInputBox.styled';
 import Input from '../Input/Input';
 
-const OwnerNameInputBox = ({
-  ownerName,
-  setOwnerName,
-  expirationDate,
-}: {
+interface OwnerNameInputBoxProps {
   ownerName: OwnerName;
   setOwnerName: SetOwnerName;
   expirationDate: ExpirationDate;
-}) => {
+}
+
+const OwnerNameInputBox = ({ ownerName, setOwnerName, expirationDate }: OwnerNameInputBoxProps) => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const onChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {

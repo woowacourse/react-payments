@@ -12,7 +12,11 @@ import OwnerNameInputBox from '../../components/OwnerNameInputBox/OwnerNameInput
 import SecurityCodeInputBox from '../../components/SecurityCodeInputBox/SecurityCodeInputBox';
 import PasswordInputBox from '../../components/PasswordInputBox/PasswordInputBox';
 
-const CardRegisterPage = ({ setCardInfoList }: { setCardInfoList: SetCardInfoList }) => {
+interface CardRegisterPageProps {
+  setCardInfoList: SetCardInfoList;
+}
+
+const CardRegisterPage = ({ setCardInfoList }: CardRegisterPageProps) => {
   const [cardNumbers, setCardNumbers] = useState<CardNumbers>({
     first: '',
     second: '',

@@ -6,7 +6,11 @@ import { COLOR } from '../../constants/cardInfo';
 import * as styled from './MyCardPage.styled';
 import Card from '../../components/Card/Card';
 
-const MyCardPage = ({ cardInfoList }: { cardInfoList: CardInfo[] }) => {
+interface MyCardPageProps {
+  cardInfoList: CardInfo[];
+}
+
+const MyCardPage = ({ cardInfoList }: MyCardPageProps) => {
   const navigation = useNavigate();
 
   const handleClick = () => {

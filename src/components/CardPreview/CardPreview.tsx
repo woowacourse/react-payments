@@ -3,7 +3,12 @@ import { CardInfo } from '../../types/state';
 import * as styled from './CardPreview.styled';
 import Card from '../Card/Card';
 
-const CardPreview = ({ cardInfo, bgColor }: { cardInfo: CardInfo; bgColor: string }) => {
+interface CardPreviewProps {
+  cardInfo: CardInfo;
+  bgColor: string;
+}
+
+const CardPreview = ({ cardInfo, bgColor }: CardPreviewProps) => {
   return (
     <styled.CardPreview>
       <Card cardInfo={cardInfo} bgColor={bgColor} />

@@ -9,15 +9,13 @@ import { isNumeric } from '../../validator';
 import * as styled from './ExpirationDateInputBox.styled';
 import Input from '../Input/Input';
 
-const ExpirationDateInputBox = ({
-  expirationDate,
-  setExpirationDate,
-  cardNumbers,
-}: {
+interface ExpirationDateInputBoxProps {
   expirationDate: ExpirationDate;
   setExpirationDate: SetExpirationDate;
   cardNumbers: CardNumbers;
-}) => {
+}
+
+const ExpirationDateInputBox = ({ expirationDate, setExpirationDate, cardNumbers }: ExpirationDateInputBoxProps) => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const onChange = ({ target: { name, value } }: ChangeEvent<HTMLInputElement>) => {

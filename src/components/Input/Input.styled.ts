@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { InputProps } from '../../types/props';
+import { InputProps } from './Input';
 import { COLOR } from '../../constants/cardInfo';
 
 const InputWidth = {

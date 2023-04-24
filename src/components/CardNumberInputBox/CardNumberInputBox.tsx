@@ -9,13 +9,12 @@ import { isNumeric } from '../../validator';
 import * as styled from './CardNumberInputBox.styled';
 import Input from '../Input/Input';
 
-const CardNumberInputBox = ({
-  cardNumbers,
-  setCardNumbers,
-}: {
+interface CardNumberInputBoxProps {
   cardNumbers: CardNumbers;
   setCardNumbers: SetCardNumbers;
-}) => {
+}
+
+const CardNumberInputBox = ({ cardNumbers, setCardNumbers }: CardNumberInputBoxProps) => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const onChange = ({ target: { name, value } }: ChangeEvent<HTMLInputElement>) => {
