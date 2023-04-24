@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 
-import { CardInfo, CardNumbers, SetCardInfo } from '../../types/state';
+import { CardNumbers, SetCardNumbers } from '../../types/state';
 import { CARD_NUMBER } from '../../constants/cardInfo';
 import { ERROR_MESSAGE } from '../../constants/message';
 
@@ -9,7 +9,13 @@ import { isNumeric } from '../../validator';
 import * as styled from './CardNumberInputBox.styled';
 import Input from '../Input/Input';
 
-const CardNumberInputBox = ({ cardNumbers, setCardInfo }: { cardNumbers: CardNumbers; setCardInfo: SetCardInfo }) => {
+const CardNumberInputBox = ({
+  cardNumbers,
+  setCardNumbers,
+}: {
+  cardNumbers: CardNumbers;
+  setCardNumbers: SetCardNumbers;
+}) => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const onChange = ({ target: { name, value } }: ChangeEvent<HTMLInputElement>) => {
@@ -23,14 +29,9 @@ const CardNumberInputBox = ({ cardNumbers, setCardInfo }: { cardNumbers: CardNum
 
     if (value.length > CARD_NUMBER.MAX_LENGTH) return;
 
-    setCardInfo((prev: CardInfo) => {
-      return {
-        ...prev,
-        cardNumbers: {
-          ...cardNumbers,
-          [name]: value,
-        },
-      };
+    setCardNumbers({
+      ...cardNumbers,
+      [name]: value,
     });
   };
 
@@ -52,7 +53,7 @@ const CardNumberInputBox = ({ cardNumbers, setCardInfo }: { cardNumbers: CardNum
                 type={key === 'first' || key === 'second' ? 'text' : 'password'}
                 maxLength={4}
                 placeholder="0000"
-                autoFocus={key === 'first' ? true : false}
+                isFocus={key === 'first' ? true : false}
               />
             );
           })}

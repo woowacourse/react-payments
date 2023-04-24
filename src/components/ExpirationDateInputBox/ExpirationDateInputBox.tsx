@@ -1,19 +1,22 @@
 import { ChangeEvent, useState } from 'react';
 
-import { CardInfo, ExpirationDate, SetCardInfo } from '../../types/state';
+import { CardNumbers, ExpirationDate, SetExpirationDate } from '../../types/state';
 import { ERROR_MESSAGE } from '../../constants/message';
 
 import { isNumeric } from '../../validator';
 
 import * as styled from './ExpirationDateInputBox.styled';
 import Input from '../Input/Input';
+import { EXPIRATION_DATE } from '../../constants/cardInfo';
 
 const ExpirationDateInputBox = ({
   expirationDate,
-  setCardInfo,
+  setExpirationDate,
+  cardNumbers,
 }: {
   expirationDate: ExpirationDate;
-  setCardInfo: SetCardInfo;
+  setExpirationDate: SetExpirationDate;
+  cardNumbers: CardNumbers;
 }) => {
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -26,27 +29,12 @@ const ExpirationDateInputBox = ({
 
     if (errorMessage) setErrorMessage('');
 
-    if (value.length === 1) {
-      setCardInfo((prev: CardInfo) => {
-        return {
-          ...prev,
-          expirationDate: {
-            ...expirationDate,
-            [name]: `0${value}`,
-          },
-        };
-      });
-    } else {
-      setCardInfo((prev: CardInfo) => {
-        return {
-          ...prev,
-          expirationDate: {
-            ...expirationDate,
-            [name]: value.substring(1),
-          },
-        };
-      });
-    }
+    if (value.length > EXPIRATION_DATE.MAX_LENGTH) return;
+
+    setExpirationDate({
+      ...expirationDate,
+      [name]: value,
+    });
   };
 
   return (
@@ -65,8 +53,9 @@ const ExpirationDateInputBox = ({
                 onChange={onChange}
                 width="s"
                 type="text"
-                maxLength={3}
+                maxLength={2}
                 placeholder={key === 'month' ? 'MM' : 'YY'}
+                isFocus={key === 'month' && cardNumbers.fourth.length === 4}
               />
             );
           })}

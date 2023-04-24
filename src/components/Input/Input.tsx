@@ -3,10 +3,13 @@ import { InputProps } from '../../types/props';
 import { useEffect, useRef } from 'react';
 
 const Input = (props: InputProps) => {
-  const { value, onChange, width, type, name, placeholder, maxLength, autoFocus } = props;
+  const { value, onChange, width, type, name, placeholder, maxLength, isFocus } = props;
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
+    if (isFocus) {
+      inputRef.current?.focus();
+    }
     if (value.length >= maxLength) {
       inputRef.current?.blur();
       const nextInput = inputRef.current?.nextElementSibling;
@@ -14,7 +17,7 @@ const Input = (props: InputProps) => {
         nextInput.focus();
       }
     }
-  }, [value, maxLength]);
+  }, [value, isFocus]);
 
   return (
     <styled.Input
@@ -26,7 +29,7 @@ const Input = (props: InputProps) => {
       placeholder={placeholder}
       ref={inputRef}
       maxLength={maxLength}
-      autoFocus={autoFocus}
+      autoFocus={isFocus}
     />
   );
 };

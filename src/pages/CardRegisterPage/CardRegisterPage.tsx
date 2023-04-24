@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { CardInfo, SetCardInfoList } from '../../types/state';
+import { CardInfo, CardNumbers, ExpirationDate, OwnerName, Password, SetCardInfoList } from '../../types/state';
 
 import * as styled from './CardRegisterPage.styled';
 import CardPreview from '../../components/CardPreview/CardPreview';
@@ -13,57 +13,65 @@ import PasswordInputBox from '../../components/PasswordInputBox/PasswordInputBox
 import { COLOR } from '../../constants/cardInfo';
 
 const CardRegisterPage = ({ setCardInfoList }: { setCardInfoList: SetCardInfoList }) => {
-  const [cardInfo, setCardInfo] = useState<CardInfo>({
-    cardNumbers: {
-      first: '',
-      second: '',
-      third: '',
-      fourth: '',
-    },
-    expirationDate: {
-      month: null,
-      year: null,
-    },
-    ownerName: null,
-    securityCode: '',
-    password: {
-      first: '',
-      second: '',
-    },
+  const [cardNumbers, setCardNumbers] = useState<CardNumbers>({
+    first: '',
+    second: '',
+    third: '',
+    fourth: '',
+  });
+  const [expirationDate, setExpirationDate] = useState<ExpirationDate>({
+    month: null,
+    year: null,
+  });
+  const [ownerName, setOwnerName] = useState<OwnerName>(null);
+  const [securityCode, setSecurityCode] = useState('');
+  const [password, setPassword] = useState<Password>({
+    first: '',
+    second: '',
   });
 
   const navigation = useNavigate();
 
   const handleOnClickSubmitButton = () => {
-    setCardInfoList((prev: CardInfo[]) => [...prev, cardInfo]);
+    setCardInfoList((prev: CardInfo[]) => [
+      ...prev,
+      { cardNumbers, expirationDate, ownerName, securityCode, password },
+    ]);
     navigation('/');
   };
 
   const isFilledCardInfos = () => {
     return (
-      cardInfo.cardNumbers.first.length === 4 &&
-      cardInfo.cardNumbers.second.length === 4 &&
-      cardInfo.cardNumbers.third.length === 4 &&
-      cardInfo.cardNumbers.fourth.length === 4 &&
-      cardInfo.expirationDate.month &&
-      cardInfo.expirationDate.month.length === 2 &&
-      cardInfo.expirationDate.year &&
-      cardInfo.expirationDate.year.length === 2 &&
-      cardInfo.securityCode.length === 3 &&
-      cardInfo.password.first.length === 1 &&
-      cardInfo.password.second.length === 1
+      cardNumbers.first.length === 4 &&
+      cardNumbers.second.length === 4 &&
+      cardNumbers.third.length === 4 &&
+      cardNumbers.fourth.length === 4 &&
+      expirationDate.month &&
+      expirationDate.month.length === 1 &&
+      expirationDate.year &&
+      expirationDate.year.length === 2 &&
+      securityCode.length === 3 &&
+      password.first.length === 1 &&
+      password.second.length === 1
     );
   };
 
   return (
     <styled.CardRegisterPage>
-      <CardPreview cardInfo={cardInfo} bgColor={COLOR.GREY200} />
+      <CardPreview
+        cardInfo={{ cardNumbers, expirationDate, ownerName, securityCode, password }}
+        bgColor={COLOR.GREY200}
+      />
       <styled.CardRegisterForm>
-        <CardNumberInputBox cardNumbers={cardInfo.cardNumbers} setCardInfo={setCardInfo} />
-        <ExpirationDateInputBox expirationDate={cardInfo.expirationDate} setCardInfo={setCardInfo} />
-        <OwnerNameInputBox ownerName={cardInfo.ownerName} setCardInfo={setCardInfo} />
-        <SecurityCodeInputBox securityCode={cardInfo.securityCode} setCardInfo={setCardInfo} />
-        <PasswordInputBox password={cardInfo.password} setCardInfo={setCardInfo} />
+        <CardNumberInputBox cardNumbers={cardNumbers} setCardNumbers={setCardNumbers} />
+        <ExpirationDateInputBox
+          expirationDate={expirationDate}
+          setExpirationDate={setExpirationDate}
+          cardNumbers={cardNumbers}
+        />
+        <OwnerNameInputBox ownerName={ownerName} setOwnerName={setOwnerName} expirationDate={expirationDate} />
+        <SecurityCodeInputBox securityCode={securityCode} setSecurityCode={setSecurityCode} ownerName={ownerName} />
+        <PasswordInputBox password={password} setPassword={setPassword} securityCode={securityCode} />
         <styled.CardInfoSubmitButtonContainer>
           {isFilledCardInfos() && (
             <styled.CardInfoSubmitButton onClick={handleOnClickSubmitButton} autoFocus>

@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 
-import { CardInfo, Password, SetCardInfo } from '../../types/state';
+import { CardInfo, Password, SetCardInfo, SetPassword } from '../../types/state';
 import { PASSWORD } from '../../constants/cardInfo';
 import { ERROR_MESSAGE } from '../../constants/message';
 
@@ -9,7 +9,15 @@ import { isNumeric } from '../../validator';
 import * as styled from './PasswordInputBox.styled';
 import Input from '../Input/Input';
 
-const PasswordInputBox = ({ password, setCardInfo }: { password: Password; setCardInfo: SetCardInfo }) => {
+const PasswordInputBox = ({
+  password,
+  setPassword,
+  securityCode,
+}: {
+  password: Password;
+  setPassword: SetPassword;
+  securityCode: string;
+}) => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const onChange = ({ target: { name, value } }: ChangeEvent<HTMLInputElement>) => {
@@ -23,14 +31,9 @@ const PasswordInputBox = ({ password, setCardInfo }: { password: Password; setCa
 
     if (value.length > PASSWORD.MAX_LENGTH) return;
 
-    setCardInfo((prev: CardInfo) => {
-      return {
-        ...prev,
-        password: {
-          ...password,
-          [name]: value,
-        },
-      };
+    setPassword({
+      ...password,
+      [name]: value,
     });
   };
 
@@ -43,7 +46,16 @@ const PasswordInputBox = ({ password, setCardInfo }: { password: Password; setCa
         <styled.InputContainer>
           {Object.entries(password).map(([key, value]) => {
             return (
-              <Input key={key} name={key} value={value} onChange={onChange} width="xs" type="password" maxLength={1} />
+              <Input
+                key={key}
+                name={key}
+                value={value}
+                onChange={onChange}
+                width="xs"
+                type="password"
+                maxLength={1}
+                isFocus={key === 'first' && securityCode.length === 3}
+              />
             );
           })}
         </styled.InputContainer>
