@@ -1,13 +1,12 @@
 import styled from 'styled-components';
 import Card from '../components/Common/Card';
 import Header from '../components/Common/Header';
-import useWrappingContext from '../hooks/useWrappingContext';
-import CardListStore from '../store';
+import { useCardListStore } from '../context/CardListProvider';
 import getUniqueKey from '../utils/getUniqueKey';
 import type { CardInformation } from '../components/Common/Card/types';
 
 function Home() {
-  const { cardList } = useWrappingContext(CardListStore);
+  const { cardList } = useCardListStore();
 
   return (
     <>

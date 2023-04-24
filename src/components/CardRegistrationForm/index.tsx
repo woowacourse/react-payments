@@ -1,8 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { useCardListStore } from '../../context/CardListProvider';
 import { checkCardNumber, checkExpirationDate, checkPassword, checkSecurityCode } from '../../domain/validator';
-import useWrappingContext from '../../hooks/useWrappingContext';
-import CardListStore from '../../store';
 import CardNumberInput from './CardNumberInput';
 import CardPasswordInput from './CardPasswordInput';
 import ExpirationDateInput from './ExpirationDateInput';
@@ -35,7 +34,7 @@ function CardRegistrationForm({
   setPassword,
 }: CardRegistrationFormProps) {
   const navigate = useNavigate();
-  const { dispatchCardList } = useWrappingContext(CardListStore);
+  const { dispatchCardList } = useCardListStore();
   const handleForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
