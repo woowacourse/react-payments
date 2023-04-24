@@ -16,6 +16,14 @@ export const TextInput: Story = {
   },
 };
 
+export const WrongInput: Story = {
+  args: {
+    type: 'text',
+    placeholder: '',
+    isWrong: true,
+  },
+};
+
 export const NumberInput: Story = {
   args: {
     type: 'number',

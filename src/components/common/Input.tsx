@@ -4,20 +4,22 @@ import styled from 'styled-components';
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   textAlign?: string;
   isNumber?: boolean;
+  isWrong?: boolean;
 }
 
-const StyledInput = styled.input<{ textAlign?: string }>`
+const StyledInput = styled.input<{ textAlign?: string; isWrong?: boolean }>`
   border: none;
   background-color: #ecebf1;
+  border: ${({ isWrong }) => (isWrong ? '1px solid red' : '')};
   font-size: 18px;
   font-weight: 500;
   width: 100%;
-  text-align: ${(props) => props.textAlign};
+  text-align: ${({ textAlign }) => textAlign};
 `;
 
 export default function Input({
   textAlign = 'baseline',
-
+  isWrong,
   isNumber,
   ...rest
 }: InputProps) {
@@ -34,6 +36,7 @@ export default function Input({
 
   return (
     <StyledInput
+      isWrong={isWrong}
       textAlign={textAlign}
       inputMode={isNumber ? 'numeric' : 'text'}
       onInput={onInput}
