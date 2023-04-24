@@ -10,8 +10,8 @@ interface CardProps {
 
 const defaultCardInformation: CardInformation = {
   cardNumber: ['', '', '', ''],
-  expirationDate: ['', ''],
-  owner: 'NAME',
+  expirationDate: ['MM', 'YY'],
+  owner: ['NAME'],
 };
 
 function Card({ cardInformation = defaultCardInformation, isAddForm }: CardProps) {
@@ -36,7 +36,7 @@ function Card({ cardInformation = defaultCardInformation, isAddForm }: CardProps
               )}
             </StyledCardNumberTemplate>
             <StyledCardDetail>
-              <div>{owner?.slice(0, 12)}</div>
+              {owner && <div>{owner[0].slice(0, 12)}</div>}
               {expirationDate && (
                 <div>
                   {expirationDate[0]?.padStart(2, '0')}/{expirationDate[1]?.padStart(2, '0')}
