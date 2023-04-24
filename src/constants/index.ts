@@ -1,5 +1,11 @@
 const LOCAL_STORAGE_KEY = 'cardList';
 
+const PATH = {
+  ROOT: '/',
+  ADD: '/add',
+  REGISTER: '/register',
+} as const;
+
 const CARD_ISSUERS = [
   'BC카드',
   '신한카드',
@@ -40,10 +46,11 @@ const REGEX = {
   TWO_CHAR_SEQUENCE: /.{1,2}/g,
   FOUR_CHAR_SEQUENCE: /.{1,4}/g,
   FOUR_NUMBER_SEQUENCE: /(\d{4})/g,
-};
+} as const;
 
 export {
   LOCAL_STORAGE_KEY,
+  PATH,
   CARD_ISSUERS,
   SECURITY_TEXT_ICON,
   DATE_DIVIDER,

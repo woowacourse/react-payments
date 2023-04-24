@@ -2,6 +2,7 @@ import styles from './style.module.css';
 import { ChangeEvent, FormEvent, MouseEvent, memo, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CardFormData, CardFormValidation } from '../../types';
+import { PATH } from '../../constants';
 import CardIssuer from './CardIssuer/CardIssuer';
 import CardNumber from './CardNumber/CardNumber';
 import CardExpirationDate from './CardExpirationDate/CardExpirationDate';
@@ -41,7 +42,7 @@ function CardAddForm({
       cardName: `카드 ${cardList.length + 1}`,
     };
     addCard(newCard);
-    navigate(`/register/${newCard.id}`, { state: newCard });
+    navigate(`${PATH.REGISTER}/${newCard.id}`, { state: newCard });
   };
 
   return (
