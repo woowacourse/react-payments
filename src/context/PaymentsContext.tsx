@@ -1,13 +1,12 @@
 import type { Dispatch, PropsWithChildren } from 'react';
-import { createContext, useState } from 'react';
+import { createContext, useMemo } from 'react';
+import { useCreditCardStorage } from '../hooks/useCreditCardStorage';
 import type { CreditCard } from '../types/CreditCard';
 
 type PaymentsContextValue = {
   creditCards: CreditCard[];
   setCreditCards: Dispatch<CreditCard[]>;
 };
-
-const STORAGE_KEY = 'creditCards' as const;
 
 export const PaymentsContext = createContext<PaymentsContextValue>({
   creditCards: [],
@@ -18,20 +17,16 @@ export const PaymentsContext = createContext<PaymentsContextValue>({
 
 export const PaymentsProvider = (props: PropsWithChildren) => {
   const { children } = props;
-  const [creditCards, setCreditCards] = useState<CreditCard[]>(
-    JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '[]'),
+
+  const { creditCards, internalSetCreditCards } = useCreditCardStorage();
+
+  const value = useMemo(
+    () => ({
+      creditCards,
+      setCreditCards: internalSetCreditCards,
+    }),
+    [creditCards],
   );
 
-  const internalSetCreditCards: Dispatch<CreditCard[]> = (nextCreditCards) => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(nextCreditCards));
-
-    setCreditCards(nextCreditCards);
-  };
-
-  return (
-    // eslint-disable-next-line react/jsx-no-constructed-context-values
-    <PaymentsContext.Provider value={{ creditCards, setCreditCards: internalSetCreditCards }}>
-      {children}
-    </PaymentsContext.Provider>
-  );
+  return <PaymentsContext.Provider value={value}>{children}</PaymentsContext.Provider>;
 };
