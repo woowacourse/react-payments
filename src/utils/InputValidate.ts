@@ -1,4 +1,4 @@
-export const isInputNumber = (inputValue: string, maxLength: number) => {
+export const isInputNumber = (inputValue: string, maxLength: number = 4) => {
   const numberRegex = new RegExp(`^\\d{0,${maxLength}}$`);
   return !numberRegex.test(inputValue);
 };
@@ -8,14 +8,14 @@ export const isInputEnglish = (inputValue: string) => {
   return !englishRegex.test(inputValue);
 };
 
-export const isOverLength = (inputValue: string, maxLength: number) => {
+export const isOverLength = (inputValue: string, maxLength: number = 30) => {
   return inputValue.length > maxLength;
 };
 
 export const isNextInputFocusable = ({
   inputValue,
   inputIndex,
-  maxLength,
+  maxLength = 4,
 }: {
   inputValue: string;
   inputIndex: number;
