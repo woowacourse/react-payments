@@ -12,32 +12,30 @@ const Card = ({ cardInfo, bgColor }: CardProps) => {
       <styled.Rectangle />
       <styled.CardInfos>
         <styled.CardNumbers>
-          <div>{cardInfo?.firstCardNumbers}</div>
-          <div>{cardInfo?.secondCardNumbers}</div>
+          <div>{cardInfo.firstCardNumbers}</div>
+          <div>{cardInfo.secondCardNumbers}</div>
           <styled.EllipseContainer>
-            {Array.from({ length: cardInfo?.thirdCardNumbers.length }).map((_, index) => (
+            {Array.from({ length: cardInfo.thirdCardNumbers.length }).map((_, index) => (
               <styled.Ellipse key={index} />
             ))}
           </styled.EllipseContainer>
           <styled.EllipseContainer>
-            {Array.from({ length: cardInfo?.fourthCardNumbers.length }).map((_, index) => (
+            {Array.from({ length: cardInfo.fourthCardNumbers.length }).map((_, index) => (
               <styled.Ellipse key={index} />
             ))}
           </styled.EllipseContainer>
         </styled.CardNumbers>
         <styled.CardBottomInfos>
           <styled.CardOwnerName>
-            {cardInfo?.ownerName ? cardInfo?.ownerName : 'NAME'}
+            {cardInfo.ownerName ? cardInfo.ownerName : 'NAME'}
           </styled.CardOwnerName>
           <styled.ExpirationDate>
             <styled.ExpirationMonth>
-              {[cardInfo?.expirationMonth ? cardInfo?.expirationMonth : 'MM'].map((char, index) => (
-                <span key={index}>{char}</span>
-              ))}
+              <span>{cardInfo.expirationMonth ? cardInfo.expirationMonth : 'MM'}</span>
             </styled.ExpirationMonth>
             <span>/</span>
             <styled.ExpirationYear>
-              {[cardInfo?.expirationYear ? cardInfo?.expirationYear : 'YY'].map((char, index) => (
+              {[cardInfo.expirationYear ? cardInfo.expirationYear : 'YY'].map((char, index) => (
                 <span key={index}>{char}</span>
               ))}
             </styled.ExpirationYear>
