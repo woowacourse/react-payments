@@ -41,7 +41,8 @@ const MainPage = () => {
 
 const S = {
   Wrapper: styled.div`
-    width: 88vw;
+    max-width: 480px;
+    width: 88%;
   `,
 
   Main: styled.main`

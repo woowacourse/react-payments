@@ -54,7 +54,7 @@ const CardRegisterForm = () => {
   };
 
   return (
-    <div>
+    <S.Wrapper>
       <Header navigator title="카드 추가" />
 
       <CardPreview cardInfo={cardInfo} />
@@ -71,11 +71,16 @@ const CardRegisterForm = () => {
 
         <S.Button>다음</S.Button>
       </form>
-    </div>
+    </S.Wrapper>
   );
 };
 
 const S = {
+  Wrapper: styled.div`
+    max-width: 480px;
+    width: 88%;
+  `,
+
   Button: styled.button`
     display: flex;
     margin: 38px 0 30px auto;

@@ -78,7 +78,7 @@ const S = {
   InputBox: styled.div`
     display: flex;
     justify-content: center;
-    width: 88vw;
+    width: 100%;
     height: 48px;
     margin-top: 12px;
     background: var(--input-background);

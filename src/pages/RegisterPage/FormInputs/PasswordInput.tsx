@@ -50,8 +50,8 @@ const PasswordInput = () => {
           <Fragment key={index}>
             {index < PASSWORD_PART ? (
               <Input
-                width="12vw"
-                margin="0 2.2vw 0 0"
+                width="12%"
+                margin="0 2.2% 0 0"
                 borderRadius="8px"
                 type="password"
                 name={`password${index + 1}`}
@@ -86,8 +86,8 @@ const S = {
   `,
 
   HiddenPassword: styled.p`
-    width: 12vw;
-    margin-right: 2.2vw;
+    width: 12%;
+    margin-right: 2.2%;
     font-size: 30px;
     text-align: center;
     line-height: 48px;

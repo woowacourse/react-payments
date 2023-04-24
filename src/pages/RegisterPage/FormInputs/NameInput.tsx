@@ -35,9 +35,9 @@ const NameInput = ({ name, setName }: Props) => {
       </S.Wrapper>
       <Input
         display="block"
-        width="88vw"
+        width="100%"
         margin="10px 0 36px"
-        padding="0 8vw"
+        padding="0 8%"
         borderRadius="8px"
         type="text"
         name="name"

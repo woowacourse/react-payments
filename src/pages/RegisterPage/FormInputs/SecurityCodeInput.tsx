@@ -26,9 +26,9 @@ const SecurityCodeInput = () => {
       <S.Wrapper>
         <Input
           display="block"
-          width="24vw"
+          width="24%"
           margin="0"
-          padding="0 4vw"
+          padding="0 4%"
           borderRadius="8px"
           type="password"
           name="code"
@@ -62,6 +62,7 @@ const S = {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
     width: 28px;
     height: 28px;
     margin-left: 12px;
@@ -75,8 +76,9 @@ const S = {
       content: "카드 뒷면 서명란에 적힌 끝 번호 3자리를 입력해 주세요.";
       display: block;
       position: absolute;
-      left: 45vw;
-      width: 44vw;
+      right: -678%;
+      width: 560%;
+      max-width: 280px;
       padding: 6px 6px 5px;
       font-size: 10px;
       word-break: keep-all;
@@ -90,8 +92,8 @@ const S = {
       content: "";
       display: block;
       position: absolute;
-      left: 42vw;
-      width: 4vw;
+      right: -26px;
+      width: 20px;
       border: 0.7px solid var(--gray-color-200);
     }
   `,
