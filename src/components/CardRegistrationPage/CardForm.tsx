@@ -25,18 +25,7 @@ const CardForm = ({ onSubmitForm, onChangeForm }: CardFormProps) => {
   const [securityCodeError, setSecurityCodeError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
-  const [buttonActive, setButtonActive] = useState(false);
-
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (hasError() || !isAllInputSatisfied()) {
-      setButtonActive(false);
-      return;
-    }
-
-    setButtonActive(true);
-  }, [cardNumber, expirationDate, securityCode, password, expirationDateError]);
 
   useEffect(() => {
     onChangeForm(cardNumber, expirationDate, name);
@@ -76,6 +65,8 @@ const CardForm = ({ onSubmitForm, onChangeForm }: CardFormProps) => {
     onSubmitForm();
     navigate("/");
   };
+
+  const buttonActive = !hasError() && isAllInputSatisfied();
 
   return (
     <FormContainer onSubmit={handleSubmitForm}>
