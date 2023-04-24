@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { REGEX_PATTERN } from "../../constant";
 import { UseInputProps } from "../../hooks/useInput";
 import Input from "../common/Input";
 
@@ -45,7 +46,7 @@ export default function PasswordInput({
         <Input
           isNumber={true}
           maxLength={1}
-          pattern="^[0-9]$"
+          pattern={REGEX_PATTERN.PASSWORD}
           id="password"
           required
           type="password"
@@ -57,7 +58,7 @@ export default function PasswordInput({
         <Input
           isNumber={true}
           maxLength={1}
-          pattern="^[0-9]$"
+          pattern={REGEX_PATTERN.PASSWORD}
           required
           type="password"
           textAlign="center"

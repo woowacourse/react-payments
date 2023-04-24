@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { REGEX_PATTERN } from "../../constant";
 import { UseInputProps } from "../../hooks/useInput";
 import Input from "../common/Input";
 
@@ -38,7 +39,7 @@ export default function ExpiracyInput({ year, month }: ExpiracyInputProps) {
           maxLength={2}
           id="expiracy"
           isNumber={true}
-          pattern="^0[1-9]|1[0-2]$"
+          pattern={REGEX_PATTERN.MONTH}
           required
           placeholder="MM"
           textAlign="center"
@@ -51,7 +52,7 @@ export default function ExpiracyInput({ year, month }: ExpiracyInputProps) {
           type="text"
           maxLength={2}
           isNumber={true}
-          pattern="^2[3-8]$"
+          pattern={REGEX_PATTERN.YEAR}
           required
           placeholder="YY"
           textAlign="center"

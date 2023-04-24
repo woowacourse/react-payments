@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { REGEX_PATTERN } from "../../constant";
 import { UseInputProps } from "../../hooks/useInput";
 import Input from "../common/Input";
 
@@ -37,7 +38,7 @@ export default function CardNumberInput({
         maxLength={4}
         id="cardNumber"
         type="text"
-        pattern="^\d{4}$"
+        pattern={REGEX_PATTERN.CARD_NUMBER}
         required
         textAlign="center"
         {...firstNumber}
@@ -47,7 +48,7 @@ export default function CardNumberInput({
         isNumber={true}
         maxLength={4}
         type="text"
-        pattern="^\d{4}$"
+        pattern={REGEX_PATTERN.CARD_NUMBER}
         required
         textAlign="center"
         {...secondNumber}
@@ -57,7 +58,7 @@ export default function CardNumberInput({
         isNumber={true}
         maxLength={4}
         type="password"
-        pattern="^\d{4}$"
+        pattern={REGEX_PATTERN.CARD_NUMBER}
         required
         textAlign="center"
         {...thirdNumber}
@@ -67,7 +68,7 @@ export default function CardNumberInput({
         isNumber={true}
         maxLength={4}
         type="password"
-        pattern="^\d{4}$"
+        pattern={REGEX_PATTERN.CARD_NUMBER}
         required
         textAlign="center"
         {...fourthNumber}

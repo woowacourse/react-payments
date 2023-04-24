@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { REGEX_PATTERN } from "../../constant";
 import { UseInputProps } from "../../hooks/useInput";
 import Input from "../common/Input";
 
@@ -22,7 +23,7 @@ export default function OwnerInput({ owner }: OwnerInputProps) {
       <Input
         type="text"
         maxLength={30}
-        pattern="^[a-zA-Z]{0,30}$"
+        pattern={REGEX_PATTERN.OWNER}
         id="owner"
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
         {...owner}

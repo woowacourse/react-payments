@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { REGEX_PATTERN } from "../../constant";
 import { UseInputProps } from "../../hooks/useInput";
 import Input from "../common/Input";
 
@@ -23,7 +24,7 @@ export default function CvcInput({ cvc }: CvcInputProps) {
         type="password"
         textAlign="center"
         isNumber={true}
-        pattern="^\d{3}$"
+        pattern={REGEX_PATTERN.CVC}
         required
         id="cvc"
         {...cvc}

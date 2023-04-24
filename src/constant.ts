@@ -17,3 +17,12 @@ export const ERROR_MESSAGE: ErrorMessage = {
   secondPassword: "0부터 9까지의 숫자 중 하나를 입력해주세요",
   LONG_INPUT: "글자수 제한을 확인해주세요",
 }
+
+export const REGEX_PATTERN = {
+  CARD_NUMBER: "^\\d{4}$",
+  CVC: "^\\d{3}$",
+  MONTH: "^0[1-9]|1[0-2]$",
+  YEAR: "^2[3-8]$",
+  OWNER: "^[a-zA-Z]{0,30}$",
+  PASSWORD: "^[0-9]$"
+}
