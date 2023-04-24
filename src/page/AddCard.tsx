@@ -23,7 +23,7 @@ export const AddCard = () => {
     <>
       <Header text="카드 추가">
         <Link to={"/"}>
-          <BackButton> «</BackButton>
+          <BackButton type="button"> «</BackButton>
         </Link>
       </Header>
       <Main>
