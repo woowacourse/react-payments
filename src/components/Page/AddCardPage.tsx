@@ -1,5 +1,4 @@
-import { useEffect, useRef, useState } from "react";
-import { useInput } from "../../hooks/useInput";
+import { useState } from "react";
 import Card from "../Card";
 import CardNumberInput from "../Input/CardNumberInput";
 import CvcInput from "../Input/CvcInput";
@@ -22,6 +21,7 @@ import {
   Title,
   TitleWrapper,
 } from "./AddCardPage.styles";
+import { useCardForm } from "../../hooks/useCardForm";
 
 interface AddCardPageProps {
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
@@ -29,48 +29,26 @@ interface AddCardPageProps {
 }
 
 export default function AddCardPage({ onSubmit, onClick }: AddCardPageProps) {
-  const firstCardNumber = useInput("", { name: "firstCardNumber" });
-  const secondCardNumber = useInput("", { name: "secondCardNumber" });
-  const thirdCardNumber = useInput("", { name: "thirdCardNumber" });
-  const fourthCardNumber = useInput("", { name: "fourthCardNumber" });
-
-  const year = useInput("", {
-    name: "year",
-  });
-  const month = useInput("", {
-    name: "month",
-  });
-
-  const owner = useInput("", { name: "owner" });
-  const cvc = useInput("", { name: "cvc" });
-
-  const firstPassword = useInput("", { name: "firstPassword" });
-  const secondPassword = useInput("", { name: "secondPassword" });
+  const {
+    firstCardNumber,
+    secondCardNumber,
+    thirdCardNumber,
+    fourthCardNumber,
+    year,
+    month,
+    owner,
+    cvc,
+    firstPassword,
+    secondPassword,
+    formRef,
+    isFormFilled,
+  } = useCardForm();
 
   const [isOpenToolTip, setIsOpenToolTip] = useState(false);
-
-  const [isFormfilled, setIsFormfilled] = useState(true);
 
   const handleToolTip = () => {
     setIsOpenToolTip((prev) => !prev);
   };
-
-  const cardForm = useRef<HTMLFormElement>(null);
-
-  useEffect(() => {
-    if (!cardForm.current) return;
-    setIsFormfilled(!cardForm.current.checkValidity());
-  }, [
-    firstCardNumber.value,
-    secondCardNumber.value,
-    thirdCardNumber.value,
-    fourthCardNumber.value,
-    year.value,
-    month.value,
-    cvc.value,
-    firstPassword.value,
-    secondPassword.value,
-  ]);
 
   return (
     <Page>
@@ -92,7 +70,7 @@ export default function AddCardPage({ onSubmit, onClick }: AddCardPageProps) {
           owner={owner.value.toUpperCase()}
         />
       </CardWrapper>
-      <InputWrapperParent onSubmit={onSubmit} ref={cardForm}>
+      <InputWrapperParent onSubmit={onSubmit} ref={formRef}>
         <InputWrapper>
           <InputField kind="cardNumber">
             <CardNumberInput
@@ -131,7 +109,7 @@ export default function AddCardPage({ onSubmit, onClick }: AddCardPageProps) {
           </InputField>
         </InputWrapper>
         <NextButtonWrapper>
-          <NextButton disabled={isFormfilled} />
+          <NextButton disabled={isFormFilled} />
         </NextButtonWrapper>
       </InputWrapperParent>
     </Page>

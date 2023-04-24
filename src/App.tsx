@@ -1,10 +1,11 @@
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import AddCardPage from "./components/Page/AddCardPage";
 import Homepage from "./components/Page/Homepage";
 import { LOCAL_STORAGE_CARD_KEY } from "./constant";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 import "./styles/index.css";
 import { CardInfo } from "./types";
+
 export default function App() {
   const [pageIndex, setPageIndex] = useState(0);
   const [cardList, setCardList] = useLocalStorage<CardInfo[]>(
