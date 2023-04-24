@@ -1,22 +1,7 @@
-import { createContext, useContext } from 'react';
+import { useContext } from 'react';
 import { REGEX } from '../constants';
 import { useInput } from './useInput';
-import { CardPreviewInfoContext } from '../contexts/cardInfo';
-
-const defaultInput = {
-  type: 'text',
-  required: true,
-};
-
-const optionalInput = {
-  ...defaultInput,
-  required: false,
-};
-
-const passwordInput = {
-  ...defaultInput,
-  type: 'password',
-};
+import { CardPreviewInfoContext, passwordInput } from '../contexts/cardInfo';
 
 export function useForm() {
   const previewInfo = useContext(CardPreviewInfoContext);

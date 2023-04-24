@@ -2,7 +2,7 @@ import { createContext } from 'react';
 import { REGEX } from '../constants';
 import { useInput } from '../hooks/useInput';
 
-const defaultInput = {
+export const defaultInput = {
   type: 'text',
   required: true,
 };
@@ -12,7 +12,7 @@ const optionalInput = {
   required: false,
 };
 
-const passwordInput = {
+export const passwordInput = {
   ...defaultInput,
   type: 'password',
 };
