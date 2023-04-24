@@ -8,6 +8,7 @@ import { isNumber, isOverMaxLength } from "../../utils";
 import { INPUT_LENGTH } from "../../constants";
 import { useCardItemAction, useCardItemValue } from "../provider/CardItemProvider";
 import { useErrorMessageAction, useErrorMessageValue } from "../provider/ErrorMessageProvider";
+import useInputFocus from "../../hooks/useInputFocus";
 
 const PasswordInput = () => {
   const { password } = useCardItemValue();
@@ -17,6 +18,8 @@ const PasswordInput = () => {
   const { setPasswordErrorMessage } = useErrorMessageAction();
 
   const refs = [useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null)];
+
+  const { isNextInputFocusable, focusNextInput } = useInputFocus(refs, INPUT_LENGTH.PASSWORD);
 
   const handleChangeInput = (inputIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
@@ -35,12 +38,8 @@ const PasswordInput = () => {
     setPasswordErrorMessage("");
 
     if (isNextInputFocusable(inputValue, inputIndex)) {
-      refs[inputIndex + 1].current?.focus();
+      focusNextInput(inputIndex);
     }
-  };
-
-  const isNextInputFocusable = (inputValue: string, inputIndex: number) => {
-    return inputIndex === 0 && inputValue.length === INPUT_LENGTH.PASSWORD;
   };
 
   return (

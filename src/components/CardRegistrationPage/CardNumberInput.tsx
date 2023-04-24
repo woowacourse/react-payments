@@ -7,6 +7,7 @@ import { isNumber, isOverMaxLength } from "../../utils";
 import { INPUT_LENGTH } from "../../constants";
 import { useCardItemAction, useCardItemValue } from "../provider/CardItemProvider";
 import { useErrorMessageAction, useErrorMessageValue } from "../provider/ErrorMessageProvider";
+import useInputFocus from "../../hooks/useInputFocus";
 
 const CardNumberInput = () => {
   const { cardNumber } = useCardItemValue();
@@ -21,6 +22,8 @@ const CardNumberInput = () => {
     useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
   ];
+
+  const { isNextInputFocusable, focusNextInput } = useInputFocus(refs, INPUT_LENGTH.CARD_NUMBER);
 
   const handleChangeInput = (inputIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
@@ -38,11 +41,9 @@ const CardNumberInput = () => {
     setCardNumber(newCardNumber);
     setCardNumberErrorMessage("");
 
-    if (isNextInputFocusable(inputValue, inputIndex)) refs[inputIndex + 1].current?.focus();
-  };
-
-  const isNextInputFocusable = (inputValue: string, inputIndex: number) => {
-    return inputValue.length === INPUT_LENGTH.CARD_NUMBER && inputIndex < refs.length - 1;
+    if (isNextInputFocusable(inputValue, inputIndex)) {
+      focusNextInput(inputIndex);
+    }
   };
 
   return (

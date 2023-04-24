@@ -7,6 +7,7 @@ import { isInputsEmpty, isInputsSatisfied, isNumber, isOverMaxLength, isValidMon
 import { INPUT_LENGTH } from "../../constants";
 import { useCardItemAction, useCardItemValue } from "../provider/CardItemProvider";
 import { useErrorMessageAction, useErrorMessageValue } from "../provider/ErrorMessageProvider";
+import useInputFocus from "../../hooks/useInputFocus";
 
 const ExpirationDateInput = () => {
   const { expirationDate } = useCardItemValue();
@@ -16,6 +17,8 @@ const ExpirationDateInput = () => {
   const { setExpirationDateErrorMessage } = useErrorMessageAction();
 
   const refs = [useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null)];
+
+  const { isNextInputFocusable, focusNextInput } = useInputFocus(refs, INPUT_LENGTH.EXPIRATION_DATE);
 
   useEffect(() => {
     if (isInputsEmpty(expirationDate)) return;
@@ -48,12 +51,8 @@ const ExpirationDateInput = () => {
     setExpirationDateErrorMessage("");
 
     if (isNextInputFocusable(inputValue, inputIndex)) {
-      refs[inputIndex + 1].current?.focus();
+      focusNextInput(inputIndex);
     }
-  };
-
-  const isNextInputFocusable = (inputValue: string, inputIndex: number) => {
-    return inputValue.length === INPUT_LENGTH.EXPIRATION_DATE && inputIndex < refs.length - 1;
   };
 
   return (
