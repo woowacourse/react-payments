@@ -9,6 +9,10 @@ interface Props {
   setIsComplete: (value: boolean) => void;
 }
 
+const alertCvcInfo = () => {
+  alert("CVC는 카드 뒷면의 세 자리 숫자를 말합니다!!");
+};
+
 export default function InputBoxSecurityCode(props: Props) {
   const { setIsComplete } = props;
 
@@ -42,7 +46,7 @@ export default function InputBoxSecurityCode(props: Props) {
         onChange={onChangeCallback}
         inputMode="numeric"
       ></Input>
-      <button className="button-security-code" type="button">
+      <button className="button-security-code" type="button" onClick={alertCvcInfo}>
         ?
       </button>
       <p className={inputStatus === INPUT_STATUS.ERROR ? "visible" : ""}>
