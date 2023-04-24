@@ -11,16 +11,18 @@ function CardList({ cardList }: CardListProps) {
     <>
       {cardList.length ? (
         <div className={styles.container}>
-          {cardList.map((card, index) => (
-            <CardItem
-              information={{
-                issuer: card.issuer,
-                cardNumber: card.cardNumber,
-                expirationDate: card.expirationDate,
-                ownerName: card.ownerName,
-              }}
-              key={index}
-            />
+          {cardList.map((card) => (
+            <div className={styles.item} key={card.id}>
+              <CardItem
+                information={{
+                  issuer: card.issuer,
+                  cardNumber: card.cardNumber,
+                  expirationDate: card.expirationDate,
+                  ownerName: card.ownerName,
+                }}
+              />
+              <h5 className={styles.cardName}>{card.cardName}</h5>
+            </div>
           ))}
         </div>
       ) : (

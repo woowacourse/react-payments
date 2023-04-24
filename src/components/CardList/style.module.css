@@ -5,6 +5,14 @@
   gap: 24px;
 }
 
+.cardName {
+  margin-top: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--dark-gray-1);
+  text-align: center;
+}
+
 .emptyListMessage {
   padding: 36px 0;
   font-size: 14px;
