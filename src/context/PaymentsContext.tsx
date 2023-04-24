@@ -26,7 +26,10 @@ export const PaymentsProvider = (props: PropsWithChildren) => {
     setCreditCards(nextCreditCards);
   };
 
-  const contextValue = useMemo(() => ({ creditCards, setCreditCards: internalSetCreditCards }), []);
+  const contextValue = useMemo(
+    () => ({ creditCards, setCreditCards: internalSetCreditCards }),
+    [creditCards],
+  );
 
   return <PaymentsContext.Provider value={contextValue}>{children}</PaymentsContext.Provider>;
 };
