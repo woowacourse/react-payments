@@ -40,6 +40,7 @@ export default function CardNumberInput({
         required
         textAlign="center"
         autoFocus
+        autoComplete="off"
         tabIndex={0}
         {...firstNumber}
       />
@@ -50,6 +51,7 @@ export default function CardNumberInput({
         type="text"
         required
         tabIndex={1}
+        autoComplete="off"
         textAlign="center"
         {...secondNumber}
       />

@@ -43,6 +43,7 @@ export default function ExpiracyInput({ year, month }: ExpiracyInputProps) {
           required
           placeholder="MM"
           textAlign="center"
+          autoComplete="off"
           tabIndex={4}
           {...month}
         />
@@ -56,6 +57,7 @@ export default function ExpiracyInput({ year, month }: ExpiracyInputProps) {
           required
           placeholder="YY"
           textAlign="center"
+          autoComplete="off"
           tabIndex={5}
           {...year}
         />

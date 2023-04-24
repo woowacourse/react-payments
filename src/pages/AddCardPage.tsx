@@ -314,7 +314,7 @@ export default function AddCardPage({
           expiracy={`${month.value ? month.value : 'MM'}/${
             year.value ? year.value : 'YY'
           }`}
-          owner={owner.value}
+          owner={owner.value ? owner.value : 'NAME'}
         />
       </CardWrapper>
       <InputWrapperParent

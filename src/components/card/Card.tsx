@@ -6,44 +6,44 @@ interface CardProps {
   expiracy: string;
 }
 
-const StyledCard = styled.div`
+const Wrapper = styled.div`
   width: 213px;
   height: 133px;
   background: #333;
   box-shadow: 3px 3px 5px #00000040;
   border-radius: 5px;
-  padding: 18px;
+  padding: 10px 18px;
   display: flex;
   flex-direction: column;
   justify-content: end;
   position: relative;
 `;
-const StyledTitle = styled.div`
+const Title = styled.div`
   color: #383838;
   font-size: 12px;
   height: 14px;
   margin-bottom: 22px;
 `;
-const StyledMagnet = styled.div`
+const Magnet = styled.div`
   background: #cbba64;
   position: absolute;
-  top: 60px;
+  top: 40px;
   width: 40px;
   height: 26px;
   margin-bottom: 15px;
   border-radius: 4px;
 `;
-const StyledCardNumber = styled.div`
+const CardNumber = styled.div`
   color: #fff;
   font-weight: bold;
   font-size: 14px;
   width: 100%;
   justify-content: space-between;
-  margin-bottom: 8px;
   display: flex;
+  margin-bottom: 4px;
   align-items: center;
 `;
-const StyledCardNumberItem = styled.span`
+const CardNumberItem = styled.span`
   width: 34px;
   letter-spacing: 3px;
   &:nth-child(3) {
@@ -56,7 +56,9 @@ const StyledCardNumberItem = styled.span`
   }
 `;
 
-const StyledOwnerName = styled.span`
+const OwnerAndExpiracyWrapper = styled.div``;
+
+const Owner = styled.span`
   display: inline-block;
   width: 130px;
   color: #fff;
@@ -65,7 +67,8 @@ const StyledOwnerName = styled.span`
   word-break: break-all;
   font-size: 14px;
 `;
-const StyledExpiracy = styled.span`
+
+const Expiracy = styled.span`
   color: #fff;
   float: right;
   font-weight: bold;
@@ -75,23 +78,26 @@ const StyledExpiracy = styled.span`
 const ENCRYPT_INDEX = 2;
 
 export default function Card({ cardNumberSet, owner, expiracy }: CardProps) {
+  const onwerName = owner.length > 10 ? owner.slice(0, 10) : owner;
   return (
-    <StyledCard>
-      <StyledTitle></StyledTitle>
-      <StyledMagnet />
+    <Wrapper>
+      <Title></Title>
+      <Magnet />
       <div>
-        <StyledCardNumber>
+        <CardNumber>
           {cardNumberSet.map((cardNumberItem: string, index: number) => (
-            <StyledCardNumberItem key={`${index}${cardNumberItem}`}>
+            <CardNumberItem key={`${index}${cardNumberItem}`}>
               {index >= ENCRYPT_INDEX
                 ? '·'.repeat(cardNumberItem.length)
                 : cardNumberItem}
-            </StyledCardNumberItem>
+            </CardNumberItem>
           ))}
-        </StyledCardNumber>
-        <StyledOwnerName>{owner ? owner : 'NAME'}</StyledOwnerName>
-        <StyledExpiracy>{expiracy}</StyledExpiracy>
+        </CardNumber>
+        <OwnerAndExpiracyWrapper>
+          <Owner title={owner}>{onwerName}</Owner>
+          <Expiracy>{expiracy}</Expiracy>
+        </OwnerAndExpiracyWrapper>
       </div>
-    </StyledCard>
+    </Wrapper>
   );
 }
