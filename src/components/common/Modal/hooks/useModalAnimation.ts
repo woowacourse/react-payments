@@ -1,37 +1,44 @@
 import { useEffect, useRef, useState } from 'react';
 
-import useModal from './useModal';
-
 const ANIMATION_DURATION = 300;
 
 const useModalAnimation = () => {
-  const { isModalOpen, closeModal } = useModal();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
-  const [isVisible, setIsVisible] = useState(isModalOpen);
   const timeoutId = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const handleModalClose = () => {
+  const openModal = () => {
+    setIsVisible(true);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
     setIsVisible(false);
 
     setTimeout(() => {
-      closeModal();
-    }, ANIMATION_DURATION);
+      setIsModalOpen(false);
+    }, 300);
   };
 
   useEffect(() => {
-    setIsVisible(isModalOpen);
-
     if (isVisible && !isModalOpen) {
       setIsAnimating(true);
 
       timeoutId.current = setTimeout(() => {
         setIsAnimating(false);
+
+        if (isModalOpen) {
+          setIsVisible(true);
+        }
       }, ANIMATION_DURATION);
     }
 
-    return () => {
+    if (!isModalOpen) {
       setIsVisible(false);
+    }
 
+    return () => {
       if (!timeoutId.current) return;
       clearTimeout(timeoutId.current);
     };
@@ -41,7 +48,8 @@ const useModalAnimation = () => {
     isModalOpen,
     isVisible,
     isAnimating,
-    handleModalClose,
+    openModal,
+    closeModal,
   };
 };
 

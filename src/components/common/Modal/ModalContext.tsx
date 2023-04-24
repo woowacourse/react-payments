@@ -1,28 +1,33 @@
-import { PropsWithChildren, createContext, useState } from 'react';
+import { PropsWithChildren, createContext, useContext } from 'react';
+
+import useModalAnimation from './hooks/useModalAnimation';
 
 import { noop } from '../../../utils/noop';
 
 interface ModalContextProps {
   isModalOpen: boolean;
+  isVisible: boolean;
+  isAnimating: boolean;
   openModal: () => void;
   closeModal: () => void;
 }
 
 export const ModalContext = createContext<ModalContextProps>({
   isModalOpen: false,
+  isVisible: false,
+  isAnimating: false,
   openModal: noop,
   closeModal: noop,
 });
 
 export const ModalProvider = ({ children }: PropsWithChildren) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => setIsModalOpen(true);
-
-  const closeModal = () => setIsModalOpen(false);
+  const { isModalOpen, isVisible, isAnimating, openModal, closeModal } =
+    useModalAnimation();
 
   return (
-    <ModalContext.Provider value={{ isModalOpen, openModal, closeModal }}>
+    <ModalContext.Provider
+      value={{ isModalOpen, isVisible, isAnimating, openModal, closeModal }}
+    >
       {children}
     </ModalContext.Provider>
   );
