@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const initialCard = {
   id: "demoCard",
   numbers: [],
-  owner: "",
+  owner: "NAME",
   expiryDate: "MM/YY",
   color: "#e07171",
   CVC: 0,

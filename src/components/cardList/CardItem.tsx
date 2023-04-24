@@ -24,10 +24,8 @@ export const CardItem = ({ card }: CardProps) => {
         <IcChip />
         <CardNumbers>{hideNumbers(card.numbers)}</CardNumbers>
         <InfoWrapper>
-          <Owner>{card.owner ? card.owner : "NAME"}</Owner>
-          <ExpiryDate>
-            {card.expiryDate ? card.expiryDate : "MM / YY"}
-          </ExpiryDate>
+          <Owner>{card.owner}</Owner>
+          <ExpiryDate>{card.expiryDate}</ExpiryDate>
         </InfoWrapper>
       </Container>
     </Card>
