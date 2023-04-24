@@ -81,10 +81,10 @@ export default function CardInputForm(props: Props) {
     index?: number
   ) => {
     if (key === "number" && index !== undefined) {
-      const result = JSON.parse(JSON.stringify(nowCardInfo));
-      result.number[index] = value;
+      const updateCardInfo = JSON.parse(JSON.stringify(nowCardInfo));
+      updateCardInfo.number[index] = value;
 
-      isCardNumberComplete && setNowCardInfo(result);
+      isCardNumberComplete && setNowCardInfo(updateCardInfo);
       return;
     }
 
