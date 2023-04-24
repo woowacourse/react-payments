@@ -6,8 +6,14 @@ import {
 } from '../constants';
 import type { CardNumber, CardPassword, ExpirationDate, SecurityCode } from '../components/Common/Card/types';
 
-const { FULL_NUMBER, EXPIRATION_DATE, OUT_OF_EXPIRATION_DATE, FULL_PASSWORD, FULL_SECURITY_CODE } =
-  CARD_FORM_ERROR_MESSAGE;
+const {
+  FULL_NUMBER,
+  FULL_EXPIRATION_DATE,
+  EXPIRATION_DATE,
+  OUT_OF_EXPIRATION_DATE,
+  FULL_PASSWORD,
+  FULL_SECURITY_CODE,
+} = CARD_FORM_ERROR_MESSAGE;
 
 export const checkCardNumber = (cardNumber: CardNumber) => {
   if (cardNumber.join('').length !== CARD_NUMBER_LENGTH) {
@@ -30,6 +36,10 @@ export const checkExpirationDate = (expirationDate: ExpirationDate) => {
     }
     return true;
   };
+
+  if (month === 'MM' || year === 'YY') {
+    throw new Error(FULL_EXPIRATION_DATE);
+  }
 
   if (Number(month) > 12 || Number(month) < 1) {
     throw new Error(EXPIRATION_DATE);

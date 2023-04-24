@@ -1,7 +1,10 @@
 import styled, { css } from 'styled-components';
 import NamedInputListBox from './Common/Input/NamedInputListBox';
 
-type PaymentsInputProps = React.ComponentPropsWithoutRef<typeof NamedInputListBox> & { errorMessage?: string };
+type PaymentsInputProps = React.ComponentPropsWithoutRef<typeof NamedInputListBox> & {
+  errorMessage?: string;
+  isVisited?: boolean;
+};
 
 function PaymentsInput({
   inputListInformation,
@@ -9,6 +12,7 @@ function PaymentsInput({
   id,
   errorMessage,
   showNumberOfValue = false,
+  isVisited,
 }: PaymentsInputProps) {
   return (
     <StyledPaymentsInput isBlankBridge={inputListInformation.bridgeLetter === ''}>
@@ -18,7 +22,7 @@ function PaymentsInput({
         id={id}
         showNumberOfValue={showNumberOfValue}
       />
-      <p>{errorMessage}</p>
+      <p>{isVisited && errorMessage}</p>
     </StyledPaymentsInput>
   );
 }

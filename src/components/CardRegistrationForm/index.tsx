@@ -21,11 +21,19 @@ interface CardRegistrationFormProps {
 }
 
 interface ErrorMessage {
-  cardNumber?: string | undefined;
-  expirationDate?: string | undefined;
-  owner?: string | undefined;
-  securityCode?: string | undefined;
-  password?: string | undefined;
+  cardNumber: string;
+  expirationDate: string;
+  owner: string;
+  securityCode: string;
+  password: string;
+}
+
+interface Visited {
+  cardNumber: boolean;
+  expirationDate: boolean;
+  owner?: boolean;
+  securityCode: boolean;
+  password: boolean;
 }
 
 const { NUMBER, EXPIRATION_DATE, OWNER, SECURITY_CODE, PASSWORD } = CARD_FORM_TITLE;
@@ -45,17 +53,26 @@ function CardRegistrationForm({
     securityCode: '',
     password: '',
   });
+  const [isVisited, setIsVisited] = useState<Visited>({
+    cardNumber: false,
+    expirationDate: false,
+    owner: false,
+    securityCode: false,
+    password: false,
+  });
   const navigate = useNavigate();
   const { dispatchCardList } = useWrappingContext(CardListStore);
   const handleForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const { cardNumber, expirationDate, securityCode, password } = errorMessage;
-    if (
-      cardNumber === undefined &&
-      expirationDate === undefined &&
-      securityCode === undefined &&
-      password === undefined
-    ) {
+
+    const error = [
+      checkValidator<CardNumber>(checkCardNumber, card.cardNumber, 'cardNumber')(),
+      checkValidator<ExpirationDate>(checkExpirationDate, card.expirationDate, 'expirationDate')(),
+      checkValidator<SecurityCode>(checkSecurityCode, card.securityCode, 'securityCode')(),
+      checkValidator<CardPassword>(checkPassword, card.password, 'password')(),
+    ];
+
+    if (error.join('') === '') {
       dispatchCardList(card);
       navigate('/');
     }
@@ -69,14 +86,17 @@ function CardRegistrationForm({
   const checkValidator =
     <T,>(validateCallback: (value: T) => void, value: T | undefined, name: string) =>
     () => {
+      setIsVisited(prev => ({ ...prev, [name]: true }));
       try {
         if (value) {
           validateCallback(value);
-          setErrorMessage(prev => ({ ...prev, [name]: undefined }));
+          setErrorMessage(prev => ({ ...prev, [name]: '' }));
         }
       } catch (error) {
         setErrorMessage(prev => ({ ...prev, [name]: getErrorMessage(error) }));
+        return getErrorMessage(error);
       }
+      return '';
     };
 
   return (
@@ -85,15 +105,14 @@ function CardRegistrationForm({
         name={NUMBER}
         inputListInformation={{
           inputInformation: [
-            { type: 'string', minLength: 4, maxLength: 4, textAlign: 'center', placeholder: '1234', isRequired: true },
-            { type: 'string', minLength: 4, maxLength: 4, textAlign: 'center', placeholder: '1234', isRequired: true },
+            { type: 'string', minLength: 4, maxLength: 4, textAlign: 'center', placeholder: '1234' },
+            { type: 'string', minLength: 4, maxLength: 4, textAlign: 'center', placeholder: '1234' },
             {
               type: 'password',
               minLength: 4,
               maxLength: 4,
               textAlign: 'center',
               placeholder: '1234',
-              isRequired: true,
             },
             {
               type: 'password',
@@ -101,7 +120,6 @@ function CardRegistrationForm({
               maxLength: 4,
               textAlign: 'center',
               placeholder: '1234',
-              isRequired: true,
               onBlur: checkValidator<CardNumber>(checkCardNumber, card.cardNumber, 'cardNumber'),
             },
           ],
@@ -109,20 +127,20 @@ function CardRegistrationForm({
           regExp: /[^0-9]/g,
           getInputListValue: getInputListValue(setCardNumber),
         }}
-        errorMessage={errorMessage?.cardNumber}
+        errorMessage={errorMessage.cardNumber}
+        isVisited={isVisited.cardNumber}
       />
       <PaymentsInput
         name={EXPIRATION_DATE}
         inputListInformation={{
           inputInformation: [
-            { type: 'string', minLength: 2, maxLength: 2, textAlign: 'center', placeholder: 'MM', isRequired: true },
+            { type: 'string', minLength: 2, maxLength: 2, textAlign: 'center', placeholder: 'MM' },
             {
               type: 'string',
               minLength: 2,
               maxLength: 2,
               textAlign: 'center',
               placeholder: 'YY',
-              isRequired: true,
               onBlur: checkValidator<ExpirationDate>(checkExpirationDate, card.expirationDate, 'expirationDate'),
             },
           ],
@@ -130,7 +148,8 @@ function CardRegistrationForm({
           regExp: /[^0-9]/g,
           getInputListValue: getInputListValue(setExpirationDate),
         }}
-        errorMessage={errorMessage?.expirationDate}
+        errorMessage={errorMessage.expirationDate}
+        isVisited={isVisited.expirationDate}
       />
       <PaymentsInput
         name={OWNER}
@@ -141,7 +160,8 @@ function CardRegistrationForm({
           regExp: /[^a-z|A-Z]/g,
           getInputListValue: getInputListValue(setOwner),
         }}
-        errorMessage={errorMessage?.owner}
+        errorMessage={errorMessage.owner}
+        isVisited={isVisited.owner}
         showNumberOfValue
       />
       <PaymentsInput
@@ -153,7 +173,6 @@ function CardRegistrationForm({
               textAlign: 'center',
               minLength: 3,
               maxLength: 3,
-              isRequired: true,
               onBlur: checkValidator<SecurityCode>(checkSecurityCode, card.securityCode, 'securityCode'),
             },
           ],
@@ -161,20 +180,20 @@ function CardRegistrationForm({
           getInputListValue: getInputListValue(setSecurityCode),
           children: <QuestionToolTip questionMessage={SECURITY_CODE_HELP} />,
         }}
-        errorMessage={errorMessage?.securityCode}
+        errorMessage={errorMessage.securityCode}
+        isVisited={isVisited.securityCode}
       />
       <PaymentsInput
         name={PASSWORD}
         inputListInformation={{
           inputInformation: [
-            { type: 'password', textAlign: 'center', minLength: 1, maxLength: 1, isRequired: true },
+            { type: 'password', textAlign: 'center', minLength: 1, maxLength: 1 },
             {
               type: 'password',
               textAlign: 'center',
               minLength: 1,
               maxLength: 1,
               onBlur: checkValidator<CardPassword>(checkPassword, card.password, 'password'),
-              isRequired: true,
             },
           ],
           bridgeLetter: '',
@@ -191,7 +210,8 @@ function CardRegistrationForm({
             </>
           ),
         }}
-        errorMessage={errorMessage?.password}
+        errorMessage={errorMessage.password}
+        isVisited={isVisited.securityCode}
       />
       <StyledNextButton type="submit">다음</StyledNextButton>
     </StyledCardRegistrationFrom>
@@ -219,6 +239,7 @@ const StyledNextButton = styled.button`
   font-size: 14px;
   line-height: 16px;
   float: right;
+  cursor: pointer;
 `;
 
 export default CardRegistrationForm;
