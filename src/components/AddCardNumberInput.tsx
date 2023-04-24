@@ -1,10 +1,9 @@
-import { AddCardNumberInputProps } from '../type';
+import React from 'react';
 
-const AddCardNumberInput = ({ cardNumber }: AddCardNumberInputProps) => {
-  const {
-    value: { first, second, third, fourth },
-    onChange,
-  } = cardNumber;
+import type { AddCardNumberInputProps } from '../type';
+
+const AddCardNumberInput = ({ cardNumber, onChange }: AddCardNumberInputProps) => {
+  const { first, second, third, fourth } = cardNumber;
   return (
     <div>
       <span className="form-label">카드 번호</span>
@@ -51,4 +50,4 @@ const AddCardNumberInput = ({ cardNumber }: AddCardNumberInputProps) => {
   );
 };
 
-export default AddCardNumberInput;
+export default React.memo(AddCardNumberInput);

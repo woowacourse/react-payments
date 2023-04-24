@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import type { CardNumber, InputHook } from '../type';
+import type { CardNumber } from '../type';
 import Card from '../components/Card';
 import AddCardForm from '../components/AddCardForm';
 import Header from '../components/Header';
@@ -41,9 +41,8 @@ const AddCardPage = () => {
     navigate('/');
   }, [navigate]);
 
-  const cardNumberProps: InputHook<CardNumber> = {
-    value: cardNumber,
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onCardNumberChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
       const lastWord = e.target.value[e.target.value.length - 1];
 
       if (e.target.value.length > 4) return;
@@ -51,7 +50,8 @@ const AddCardPage = () => {
 
       onChangeCardNumber(e);
     },
-  };
+    [onChangeCardNumber]
+  );
 
   return (
     <div className="add-card-page">
@@ -69,7 +69,8 @@ const AddCardPage = () => {
           expired={cardExpire.value}
         />
         <AddCardForm
-          cardNumber={cardNumberProps}
+          cardNumber={cardNumber}
+          onCardNumberChange={onCardNumberChange}
           cardExpire={cardExpire}
           cardOwner={cardOwner}
           securityCode={securityCode}

@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 const usePasswordInput = <T>(initialState: T) => {
   const [value, setValue] = useState(initialState);
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue({
-      ...value,
-      [e.target.name]: e.target.value,
-    });
-  };
+  const onChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setValue({
+        ...value,
+        [e.target.name]: e.target.value,
+      });
+    },
+    [value]
+  );
 
   return [value, onChange] as const;
 };

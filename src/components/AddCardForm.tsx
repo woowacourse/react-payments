@@ -12,6 +12,7 @@ import './AddCardForm.css';
 
 const AddCardForm = ({
   cardNumber,
+  onCardNumberChange,
   cardExpire,
   cardOwner,
   securityCode,
@@ -23,7 +24,7 @@ const AddCardForm = ({
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      sumbitCard('현대', cardNumber.value, cardOwner.value, cardExpire.value, securityCode.value, {
+      sumbitCard('현대', cardNumber, cardOwner.value, cardExpire.value, securityCode.value, {
         first: cardPassword1.value,
         second: cardPassword2.value,
       });
@@ -37,7 +38,7 @@ const AddCardForm = ({
 
   return (
     <form className="add-card-form" onSubmit={onSubmit}>
-      <AddCardNumberInput cardNumber={cardNumber} />
+      <AddCardNumberInput cardNumber={cardNumber} onChange={onCardNumberChange} />
       <AddCardExpireDateInput cardExpire={cardExpire} />
       <AddCardOwnerInput cardOwner={cardOwner} />
       <AddCardSecurityCodeInput securityCode={securityCode} />

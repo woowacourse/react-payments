@@ -31,19 +31,16 @@ const AddHooks = () => {
     fourth: '',
   });
 
-  const cardNumberProps: InputHook<CardNumber> = {
-    value: cardNumber,
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-      const lastWord = e.target.value[e.target.value.length - 1];
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const lastWord = e.target.value[e.target.value.length - 1];
 
-      if (e.target.value.length > 4) return;
-      if (e.target.value.length > 0 && !isNumberInput(lastWord)) return;
+    if (e.target.value.length > 4) return;
+    if (e.target.value.length > 0 && !isNumberInput(lastWord)) return;
 
-      onChangeCardNumber(e);
-    },
+    onChangeCardNumber(e);
   };
 
-  return <AddCardNumberInput cardNumber={cardNumberProps} />;
+  return <AddCardNumberInput cardNumber={cardNumber} onChange={onChange} />;
 };
 
 export const Primary = {
