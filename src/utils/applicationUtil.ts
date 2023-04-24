@@ -1,5 +1,15 @@
 import type { CardNumber, CardPassword, CardType } from '../type';
 
+const getSerialNumber = (card: CardNumber): string => {
+  let result = '';
+  const keys = Object.keys(card) as ('first' | 'second' | 'third' | 'fourth')[];
+  for (const key of keys) {
+    result += card[key];
+  }
+
+  return result;
+};
+
 export const postLocalStorage = (data: Omit<CardType, 'id'>) => {
   const getData = localStorage.getItem('cardList');
   if (!getData) {
@@ -9,18 +19,13 @@ export const postLocalStorage = (data: Omit<CardType, 'id'>) => {
 
   const dataToArr = JSON.parse(getData);
 
-  // eslint-disable-next-line array-callback-return
   const sameNumbers = dataToArr.filter((card: Omit<CardType, 'id'>) => {
     const { cardNumber } = card;
-    const keys = Object.keys(cardNumber) as ('first' | 'second' | 'third' | 'fourth')[];
-    let cardNumberSerial = '';
-    let fetchCardNumberSerial = '';
-    for (const key of keys) {
-      cardNumberSerial += cardNumber[key];
-      fetchCardNumberSerial += data.cardNumber[key];
-    }
+    let cardNumberSerial = getSerialNumber(cardNumber);
+    let fetchCardNumberSerial = getSerialNumber(data.cardNumber);
 
     if (cardNumberSerial.includes(fetchCardNumberSerial)) return true;
+    return false;
   });
 
   if (sameNumbers.length > 0) throw new Error('이미 등록된 카드');
@@ -36,7 +41,7 @@ export const sumbitCard = (
   securityCode: string,
   cardPassword: CardPassword
 ) => {
-  const postData: Omit<CardType, 'id'> = {
+  const card: Omit<CardType, 'id'> = {
     cardType,
     cardNumber,
     cardOwner,
@@ -47,9 +52,5 @@ export const sumbitCard = (
       second: cardPassword.second,
     },
   };
-  try {
-    postLocalStorage(postData);
-  } catch (err) {
-    throw new Error('Fail POST LocalStorage');
-  }
+  postLocalStorage(card);
 };
