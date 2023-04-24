@@ -16,7 +16,7 @@ const Card = ({ cardNumber, ownerName, expirationDate }: CardProps) => {
       <CardChip></CardChip>
       <CardNumberContainer>
         {cardNumberList.map((numberValue, index) => (
-          <span key={index + numberValue}>{numberValue}</span>
+          <span key={index}>{numberValue}</span>
         ))}
       </CardNumberContainer>
       <CardNameContainer>
