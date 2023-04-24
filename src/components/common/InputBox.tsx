@@ -5,19 +5,19 @@ import styled from 'styled-components';
 import { LABEL } from '../../constants/inputInfo';
 import { LabelOption } from '../../type/input';
 
-export interface InputBoxProps extends React.HTMLAttributes<HTMLDivElement> {
-  type: LabelOption;
+interface InputBoxProps extends React.HTMLAttributes<HTMLDivElement> {
+  key: LabelOption;
   render?: () => JSX.Element;
   children: React.ReactNode;
   error?: string | null;
 }
 
 export function InputBox(props: InputBoxProps) {
-  const { type, render, children, error, ...restProps } = props;
+  const { key, render, children, error, ...restProps } = props;
   return (
     <InputContainer>
       {render && render()}
-      <Label>{LABEL[type]}</Label>
+      <Label>{LABEL[key]}</Label>
       <InputWrapper {...restProps}>{children}</InputWrapper>
       {error && <ErrorMessage>{error}</ErrorMessage>}
     </InputContainer>

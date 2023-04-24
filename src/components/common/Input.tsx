@@ -1,21 +1,15 @@
 import { InputHTMLAttributes } from 'react';
-
 import styled from 'styled-components';
-export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleError?: () => void;
+
+type InputProps = InputHTMLAttributes<HTMLInputElement> & {
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
+
+export function Input({ onChange, ...restProps }: InputProps) {
+  return <_Input onChange={onChange} {...restProps} />;
 }
 
-export function Input(props: InputProps) {
-  const { handleChange, handleError, ...restProps } = props;
-
-  return (
-    <InputUnit onChange={handleChange} onBlur={handleError} {...restProps} />
-  );
-}
-
-const InputUnit = styled.input`
-  width: 100%;
+const _Input = styled.input`
   box-sizing: border-box;
   height: 4.5rem;
 

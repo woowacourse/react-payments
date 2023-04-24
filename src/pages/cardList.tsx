@@ -5,11 +5,11 @@ import { useNavigate } from 'react-router-dom';
 import { getData } from '../utils/localStorage';
 import { useState } from 'react';
 
-import { Header, CardInfo, CardItem } from '../components/common';
+import { Header, CardItem } from '../components/common';
+import { cardList } from '../data/localStorage';
 
 export function CardList() {
-  // const cards = []; //card.length === 0 이면 h3 없어도 됨
-  const [cards, setCards] = useState<CardInfo[]>(getData('cards'));
+  const cards = cardList.getData();
 
   const navigate = useNavigate();
   function moveAddCardPage() {
@@ -25,14 +25,7 @@ export function CardList() {
         </Direction>
         {cards &&
           cards?.map((card) => {
-            return (
-              <CardItem
-                key={card.userName}
-                cardNumber={card?.cardNumber}
-                date={card?.date}
-                userName={card?.userName}
-              ></CardItem>
-            );
+            return <CardItem info={card}></CardItem>;
           })}
         <Button onClick={moveAddCardPage}>+</Button>
       </Section>
