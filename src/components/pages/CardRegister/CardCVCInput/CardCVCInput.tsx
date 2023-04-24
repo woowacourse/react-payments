@@ -1,22 +1,25 @@
-import React from 'react';
-import { useCardRegisterContext } from '../../../../context/CardRegisterContext';
-import { CardRegisterInfo } from '../../../../types/card.type';
-import { useCardCVC } from '../../../../hooks/card/card';
+import React from "react";
+import { useCardRegisterContext } from "../../../../context/CardRegisterContext";
+import { CardRegisterInfo } from "../../../../types/card.type";
+import { useCardCVC } from "../../../../hooks/card/card";
 
-import Flex from '../../../@common/Flex/Flex';
-import Input from '../../../@common/Input/Input';
-import * as Styled from './CardCVCInput.styles';
+import Flex from "../../../@common/Flex/Flex";
+import Input from "../../../@common/Input/Input";
+import * as Styled from "./CardCVCInput.styles";
 
 export default function CardCVCInput() {
-  const {
-    cardRegisterInfo: { cvc },
-    handleCardInfo,
-  } = useCardRegisterContext();
+  const { cardRegisterInfo, handleCardInfo } = useCardRegisterContext();
   const { defaultConditions } = useCardCVC();
 
-  const onChangeValue = (value: CardRegisterInfo['cvc']) => {
-    handleCardInfo('cvc', value);
+  const onChangeValue = (value: CardRegisterInfo["cvc"]) => {
+    handleCardInfo("cvc", value);
   };
+
+  if (!cardRegisterInfo) {
+    return null;
+  }
+
+  const { cvc } = cardRegisterInfo;
 
   return (
     <Styled.Root>
@@ -31,7 +34,8 @@ export default function CardCVCInput() {
               id="cvc"
               value={cvc}
               onChange={({ target: { value } }) => onChangeValue(value)}
-              {...defaultConditions}>
+              {...defaultConditions}
+            >
               <Styled.Input />
             </Input.Field>
           </Styled.InputBackground>

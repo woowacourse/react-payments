@@ -1,20 +1,23 @@
-import React from 'react';
-import { useCardRegisterContext } from '../../../../context/CardRegisterContext';
-import { useCardName } from '../../../../hooks/card/card';
-import { CardRegisterInfo } from '../../../../types/card.type';
-import Flex from '../../../@common/Flex/Flex';
-import Input from '../../../@common/Input/Input';
-import * as Styled from './CardNameInput.styles';
+import React from "react";
+import { useCardRegisterContext } from "../../../../context/CardRegisterContext";
+import { useCardName } from "../../../../hooks/card/card";
+import { CardRegisterInfo } from "../../../../types/card.type";
+import Flex from "../../../@common/Flex/Flex";
+import Input from "../../../@common/Input/Input";
+import * as Styled from "./CardNameInput.styles";
 
 export default function CardNameInput() {
-  const {
-    cardRegisterInfo: { holderName },
-    handleCardInfo,
-  } = useCardRegisterContext();
+  const { cardRegisterInfo, handleCardInfo } = useCardRegisterContext();
   const { defaultConditions } = useCardName();
 
-  const onChangeValue = (value: CardRegisterInfo['holderName']) => {
-    handleCardInfo('holderName', value);
+  if (!cardRegisterInfo) {
+    return null;
+  }
+
+  const { holderName } = cardRegisterInfo;
+
+  const onChangeValue = (value: CardRegisterInfo["holderName"]) => {
+    handleCardInfo("holderName", value);
   };
 
   return (
@@ -40,7 +43,8 @@ export default function CardNameInput() {
             onChange={({ target: { value } }) => {
               onChangeValue(value);
             }}
-            {...defaultConditions}>
+            {...defaultConditions}
+          >
             <Styled.Input />
           </Input.Field>
         </Styled.InputBackground>

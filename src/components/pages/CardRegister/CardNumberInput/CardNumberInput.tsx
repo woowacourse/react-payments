@@ -1,23 +1,26 @@
-import React from 'react';
-import { useCardRegisterContext } from '../../../../context/CardRegisterContext';
-import { useCardNumber } from '../../../../hooks/card/card';
-import { CardNumber } from '../../../../types/card.type';
-import Flex from '../../../@common/Flex/Flex';
-import Input from '../../../@common/Input/Input';
-import * as Styled from './CardNumberInput.styles';
+import React from "react";
+import { useCardRegisterContext } from "../../../../context/CardRegisterContext";
+import { useCardNumber } from "../../../../hooks/card/card";
+import { CardNumber } from "../../../../types/card.type";
+import Flex from "../../../@common/Flex/Flex";
+import Input from "../../../@common/Input/Input";
+import * as Styled from "./CardNumberInput.styles";
 
 export default function CardNumberInput() {
-  const {
-    cardRegisterInfo: { cardNumber },
-    handleCardInfo,
-  } = useCardRegisterContext();
+  const { cardRegisterInfo, handleCardInfo } = useCardRegisterContext();
   const { defaultConditions } = useCardNumber();
+
+  if (!cardRegisterInfo) {
+    return null;
+  }
+
+  const { cardNumber } = cardRegisterInfo;
 
   const onChangeValue: <T extends keyof CardNumber>(
     key: T,
     value: CardNumber[T]
   ) => void = (key, value) => {
-    handleCardInfo('cardNumber', {
+    handleCardInfo("cardNumber", {
       ...cardNumber,
       [key]: value,
     });
@@ -32,58 +35,65 @@ export default function CardNumberInput() {
             <Input.Field
               name="first"
               onChange={({ target: { value } }) => {
-                onChangeValue('first', value);
+                onChangeValue("first", value);
               }}
-              value={cardNumber['first']}
-              {...defaultConditions}>
+              value={cardNumber["first"]}
+              {...defaultConditions}
+            >
               <Styled.Input />
             </Input.Field>
           </Input>
           <Styled.Divider
-            show={Boolean(cardNumber['first'] || cardNumber['second'])}>
+            show={Boolean(cardNumber["first"] || cardNumber["second"])}
+          >
             -
           </Styled.Divider>
           <Input>
             <Input.Field
               name="second"
-              value={cardNumber['second']}
+              value={cardNumber["second"]}
               onChange={({ target: { value } }) =>
-                onChangeValue('second', value)
+                onChangeValue("second", value)
               }
               autoComplete="off"
-              {...defaultConditions}>
+              {...defaultConditions}
+            >
               <Styled.Input />
             </Input.Field>
           </Input>
           <Styled.Divider
-            show={Boolean(cardNumber['second'] || cardNumber['third'])}>
+            show={Boolean(cardNumber["second"] || cardNumber["third"])}
+          >
             -
           </Styled.Divider>
           <Input>
             <Input.Field
               name="third"
               type="password"
-              value={cardNumber['third']}
+              value={cardNumber["third"]}
               onChange={({ target: { value } }) =>
-                onChangeValue('third', value)
+                onChangeValue("third", value)
               }
-              {...defaultConditions}>
+              {...defaultConditions}
+            >
               <Styled.Input />
             </Input.Field>
           </Input>
           <Styled.Divider
-            show={Boolean(cardNumber['third'] || cardNumber['fourth'])}>
+            show={Boolean(cardNumber["third"] || cardNumber["fourth"])}
+          >
             -
           </Styled.Divider>
           <Input>
             <Input.Field
               name="fourth"
               type="password"
-              value={cardNumber['fourth']}
+              value={cardNumber["fourth"]}
               onChange={({ target: { value } }) =>
-                onChangeValue('fourth', value)
+                onChangeValue("fourth", value)
               }
-              {...defaultConditions}>
+              {...defaultConditions}
+            >
               <Styled.Input />
             </Input.Field>
           </Input>

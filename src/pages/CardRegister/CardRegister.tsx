@@ -6,7 +6,10 @@ import CardExpirationDateInput from "../../components/pages/CardRegister/CardExp
 import CardNameInput from "../../components/pages/CardRegister/CardNameInput/CardNameInput";
 import CardNumberInput from "../../components/pages/CardRegister/CardNumberInput/CardNumberInput";
 import CardPasswordInput from "../../components/pages/CardRegister/CardPasswordInput/CardPasswordInput";
-import { useCardRegisterContext } from "../../context/CardRegisterContext";
+import {
+  initialCardRegisterInfo,
+  useCardRegisterContext,
+} from "../../context/CardRegisterContext";
 import * as Styled from "./CardRegister.styles";
 
 export default function CardRegister() {
@@ -46,7 +49,15 @@ export default function CardRegister() {
   return (
     <Styled.Root>
       <Styled.CardSection>
-        <Card {...cardRegisterInfo} />
+        {cardRegisterInfo && (
+          <Card
+            cardNumber={cardRegisterInfo.cardNumber}
+            expirationDate={cardRegisterInfo.expirationDate}
+            holderName={cardRegisterInfo.holderName}
+            cvc={cardRegisterInfo.cvc}
+            password={cardRegisterInfo.password}
+          />
+        )}
       </Styled.CardSection>
       <Styled.InfoSection>
         <Styled.RegisterForm onSubmit={handleSubmit} onChange={handleChange}>

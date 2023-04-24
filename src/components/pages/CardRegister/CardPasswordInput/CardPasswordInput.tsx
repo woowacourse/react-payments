@@ -1,24 +1,27 @@
-import React from 'react';
-import { useCardRegisterContext } from '../../../../context/CardRegisterContext';
-import { Password } from '../../../../types/card.type';
-import { useCardPassword } from '../../../../hooks/card/card';
+import React from "react";
+import { useCardRegisterContext } from "../../../../context/CardRegisterContext";
+import { Password } from "../../../../types/card.type";
+import { useCardPassword } from "../../../../hooks/card/card";
 
-import Flex from '../../../@common/Flex/Flex';
-import Input from '../../../@common/Input/Input';
-import * as Styled from './CardPasswordInput.styles';
+import Flex from "../../../@common/Flex/Flex";
+import Input from "../../../@common/Input/Input";
+import * as Styled from "./CardPasswordInput.styles";
 
 export default function CardPasswordInput() {
-  const {
-    cardRegisterInfo: { password },
-    handleCardInfo,
-  } = useCardRegisterContext();
+  const { cardRegisterInfo, handleCardInfo } = useCardRegisterContext();
   const { defaultConditions } = useCardPassword();
+
+  if (!cardRegisterInfo) {
+    return null;
+  }
+
+  const { password } = cardRegisterInfo;
 
   const onChangeValue: <T extends keyof Password>(
     key: T,
     value: Password[T]
   ) => void = (key, value) => {
-    handleCardInfo('password', {
+    handleCardInfo("password", {
       ...password,
       [key]: value,
     });
@@ -32,11 +35,12 @@ export default function CardPasswordInput() {
           <Input.Field
             name="passwordFirstDigit"
             id="passwordFirstDigit"
-            value={password['passwordFirstDigit']}
+            value={password["passwordFirstDigit"]}
             onChange={({ target: { value } }) =>
-              onChangeValue('passwordFirstDigit', value)
+              onChangeValue("passwordFirstDigit", value)
             }
-            {...defaultConditions}>
+            {...defaultConditions}
+          >
             <Styled.Input />
           </Input.Field>
         </Input>
@@ -44,11 +48,12 @@ export default function CardPasswordInput() {
           <Input.Field
             name="passwordFirstDigit"
             id="passwordFirstDigit"
-            value={password['passwordSecondDigit']}
+            value={password["passwordSecondDigit"]}
             onChange={({ target: { value } }) =>
-              onChangeValue('passwordSecondDigit', value)
+              onChangeValue("passwordSecondDigit", value)
             }
-            {...defaultConditions}>
+            {...defaultConditions}
+          >
             <Styled.Input />
           </Input.Field>
         </Input>
