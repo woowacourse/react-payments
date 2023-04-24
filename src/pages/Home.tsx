@@ -3,7 +3,6 @@ import Header from 'components/common/Header/Header';
 import { useNavigate } from 'react-router-dom';
 import CardDB from 'db/Cards';
 import styled from 'styled-components';
-import { Label } from 'components/common';
 import { PageContainer } from 'components/style/PageContainer';
 
 function Home() {
@@ -17,7 +16,7 @@ function Home() {
       <PageContainer>
         <Header text={'보유카드'} />
         <CardContainer>
-          {CardDB.getCards().length ? '' : <Label text={'새로운 카드를 등록해주세요'} />}
+          {CardDB.getCards().length ? '' : <span>{'새로운 카드를 등록해주세요'}</span>}
           {CardDB.getCards().map((card) => (
             <CreditCard card={card} />
           ))}
