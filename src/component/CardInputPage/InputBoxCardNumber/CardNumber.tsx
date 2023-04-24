@@ -4,12 +4,10 @@ import Input from "../../common/Input";
 
 import "./cardNumber.css";
 import { CreditCard } from "../../../type";
-import { INPUT_STATUS } from "../../../CONSTANT";
 
 interface Props {
-  setCardNumber?: React.Dispatch<React.SetStateAction<number[]>>;
-  setInputStatus: React.Dispatch<React.SetStateAction<number>>;
-  setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
+  setHasError: React.Dispatch<React.SetStateAction<boolean>>;
+  changeCardNumberStatus: (key: "isComplete" | "userInput", value: any) => void;
   changeNowCardInfo: (
     key: keyof CreditCard,
     value: any,
@@ -17,85 +15,46 @@ interface Props {
   ) => void;
 }
 
-const initialEachStatus = {
-  first: 1,
-  seconde: 1,
-  third: 1,
-  fourth: 1,
+const makeAppropriateNumber = (userInput: string) => {
+  if (userInput === "") return "";
+
+  const result = userInput.split("").filter(validateCardNumber);
+  return 1 <= result.length && result.length <= 4
+    ? result.join("")
+    : result.slice(0, 4).join("");
 };
 
-type part = "first" | "second" | "third" | "fourth";
-interface EachStatus {
-  first: 0 | 1 | 2;
-  second: 0 | 1 | 2;
-  third: 0 | 1 | 2;
-  fourth: 0 | 1 | 2;
-}
+export default function CardNumber({
+  setHasError,
+  changeCardNumberStatus,
+  changeNowCardInfo,
+}: Props) {
+  const [cardNumber, setCardNumber] = useState<string[]>([]);
 
-const changeEachStatus = function (
-  nowStatus: EachStatus,
-  part: part,
-  status: 0 | 1 | 2
-) {
-  const updateStatus = JSON.parse(JSON.stringify(nowStatus)) as EachStatus;
-  return (updateStatus[part] = status);
-};
+  const onChangeCardNumber = (partIndex: number) => {
+    return (e: ChangeEvent<HTMLInputElement>) => {
+      const userInputNumber = e.target.value;
+      const appropriateNumber = makeAppropriateNumber(userInputNumber);
 
-export default function CardNumber(props: Props) {
-  const [eacStatues, setEachStatues] = useState(initialEachStatus);
-  const [inputStatus1, setInputStatus1] = useState(INPUT_STATUS.NOT_COMPLETE);
-  const [inputStatus2, setInputStatus2] = useState(INPUT_STATUS.NOT_COMPLETE);
-  const [inputStatus3, setInputStatus3] = useState(INPUT_STATUS.NOT_COMPLETE);
-  const [inputStatus4, setInputStatus4] = useState(INPUT_STATUS.NOT_COMPLETE);
-
-  const { setInputStatus, setIsComplete, changeNowCardInfo } = props;
-
-  useEffect(() => {
-    const hasError = [
-      inputStatus1,
-      inputStatus2,
-      inputStatus3,
-      inputStatus4,
-    ].includes(INPUT_STATUS.ERROR);
-
-    hasError
-      ? setInputStatus(INPUT_STATUS.ERROR)
-      : setInputStatus(INPUT_STATUS.NOT_COMPLETE);
-
-    const isComplete = [
-      inputStatus1,
-      inputStatus2,
-      inputStatus3,
-      inputStatus4,
-    ].every((status) => status === INPUT_STATUS.COMPLETE);
-
-    setIsComplete(isComplete);
-  }, [inputStatus1, inputStatus2, inputStatus3, inputStatus4]);
-
-  const onChangeCardNumber =
-    (
-      setInputStatus: React.Dispatch<React.SetStateAction<number>>,
-      partIndex: number
-    ) =>
-    (e: ChangeEvent<HTMLInputElement>) => {
-      const value = e.target.value;
-
-      if (value.length > 4) {
-        e.target.value = value.slice(0, 4);
-      }
-
-      if (validateCardNumber(e.target.value)) {
-        setInputStatus(
-          e.target.value.length === 4
-            ? INPUT_STATUS.COMPLETE
-            : INPUT_STATUS.NOT_COMPLETE
-        );
-        e.target.value.length === 4 &&
-          changeNowCardInfo("number", e.target.value, partIndex);
+      if (
+        userInputNumber !== appropriateNumber &&
+        appropriateNumber.length !== 4
+      ) {
+        setHasError(true);
+        changeCardNumberStatus("isComplete", 0);
       } else {
-        setInputStatus(INPUT_STATUS.ERROR);
+        setHasError(false);
+        changeCardNumberStatus(
+          "isComplete",
+          appropriateNumber.length === 4 ? 2 : 1
+        );
       }
+
+      const result = [...cardNumber];
+      result[partIndex] = appropriateNumber;
+      setCardNumber(result);
     };
+  };
 
   return (
     <>
@@ -104,32 +63,36 @@ export default function CardNumber(props: Props) {
         className="first input-card-number"
         type="text"
         inputMode="numeric"
-        onChange={onChangeCardNumber(setInputStatus1, 0)}
+        onChange={onChangeCardNumber(0)}
         placeholder="XXXX"
+        value={cardNumber[0]}
       />
       <Input
         name="card-number-2"
         className=" input-card-number"
         type="password"
         inputMode="numeric"
-        onChange={onChangeCardNumber(setInputStatus2, 1)}
+        onChange={onChangeCardNumber(1)}
         placeholder="XXXX"
+        value={cardNumber[1]}
       />
       <Input
         name="card-number-3"
         className=" input-card-number"
         type="password"
         inputMode="numeric"
-        onChange={onChangeCardNumber(setInputStatus3, 2)}
+        onChange={onChangeCardNumber(2)}
         placeholder="XXXX"
+        value={cardNumber[2]}
       />
       <Input
         name="card-number-4"
         className="last input-card-number"
         type="text"
         inputMode="numeric"
-        onChange={onChangeCardNumber(setInputStatus4, 3)}
+        onChange={onChangeCardNumber(3)}
         placeholder="XXXX"
+        value={cardNumber[3]}
       />
     </>
   );

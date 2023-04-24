@@ -6,3 +6,8 @@ export interface CreditCard {
   securityCode: string;
   password: number[];
 }
+
+export interface EachUserInputState {
+  isComplete: boolean;
+  userInput: string | string[];
+}

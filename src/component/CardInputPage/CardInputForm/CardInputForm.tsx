@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 import "./cardInputForm.css";
 import { CreditCard } from "../../../type";
+import { deepCopyObject } from "../../../util/deepCopy";
 
 interface Props {
   addNewCard: (card: CreditCard) => void;
@@ -25,6 +26,17 @@ const initialCard: CreditCard = {
   password: [],
 };
 
+interface EachUserInputState {
+  isComplete: boolean;
+  userInput: string | string[];
+}
+
+const initialEachUserInputState: EachUserInputState = {
+  isComplete: false,
+  userInput: "",
+};
+
+//하나의 inputState에는 {isComplete:true, userInput: value}
 export default function CardInputForm(props: Props) {
   const { addNewCard } = props;
 
@@ -32,7 +44,9 @@ export default function CardInputForm(props: Props) {
 
   const [nowCardInfo, setNowCardInfo] = useState<CreditCard>(initialCard);
 
-  const [isCardNumberComplete, setIsCardNumberComplete] = useState(false);
+  const [cardNumberStatus, setCardNumberStatus] = useState<EachUserInputState>(
+    initialEachUserInputState
+  );
   const [isExpirationDateComplete, setIsExpirationDateComplete] =
     useState(false);
   const [isOwnerComplete, setIsOwnerComplete] = useState(false);
@@ -42,6 +56,10 @@ export default function CardInputForm(props: Props) {
   const navigate = useNavigate();
 
   const formElement = useRef<HTMLFormElement>(null);
+
+  function changeCardNumberStatus(key: "isComplete" | "userInput", value: any) {
+    setCardNumberStatus(deepCopyObject(cardNumberStatus, key, value));
+  }
 
   function submitCardInfo(e: SubmitEvent) {
     e.preventDefault();
@@ -84,7 +102,7 @@ export default function CardInputForm(props: Props) {
       const updateCardInfo = JSON.parse(JSON.stringify(nowCardInfo));
       updateCardInfo.number[index] = value;
 
-      isCardNumberComplete && setNowCardInfo(updateCardInfo);
+      cardNumberStatus && setNowCardInfo(updateCardInfo);
       return;
     }
 
@@ -105,7 +123,7 @@ export default function CardInputForm(props: Props) {
 
   useEffect(() => {
     if (
-      isCardNumberComplete &&
+      cardNumberStatus &&
       isExpirationDateComplete &&
       isSecurityComplete &&
       isPasswordComplete
@@ -113,7 +131,7 @@ export default function CardInputForm(props: Props) {
       setIsFormFilled(true);
     else setIsFormFilled(false);
   }, [
-    isCardNumberComplete,
+    cardNumberStatus,
     isExpirationDateComplete,
     isSecurityComplete,
     isPasswordComplete,
@@ -123,7 +141,7 @@ export default function CardInputForm(props: Props) {
     <form ref={formElement} className="form">
       <CardPreview card={nowCardInfo} />
       <InputBoxCardNumber
-        setIsComplete={setIsCardNumberComplete}
+        changeCardNumberStatus={changeCardNumberStatus}
         changeNowCardInfo={changeNowCardInfo}
       />
       <InputBoxExpirationDate

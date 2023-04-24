@@ -11,9 +11,9 @@ export default function Input(props: Props) {
     onChange,
     placeholder,
     inputMode,
-    defaultValue,
     style,
     className,
+    value,
   } = props;
   return (
     <input
@@ -24,7 +24,7 @@ export default function Input(props: Props) {
       inputMode={inputMode}
       onChange={onChange}
       placeholder={placeholder}
-      value={defaultValue}
+      value={value}
     />
   );
 }

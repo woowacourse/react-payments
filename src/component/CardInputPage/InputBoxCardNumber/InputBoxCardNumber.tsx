@@ -3,10 +3,10 @@ import CardNumber from "./CardNumber";
 import { CARD_ERROR_MESSAGE, INPUT_STATUS } from "../../../CONSTANT";
 
 import "./inputBoxCardNumber.css";
-import { CreditCard } from "../../../type";
+import { CreditCard, EachUserInputState } from "../../../type";
 
 interface Props {
-  setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
+  changeCardNumberStatus: (key: "isComplete" | "userInput", value: any) => void;
   changeNowCardInfo: (
     key: keyof CreditCard,
     value: any,
@@ -15,19 +15,19 @@ interface Props {
 }
 
 export default function InputBoxCardNumber(props: Props) {
-  const { setIsComplete, changeNowCardInfo } = props;
+  const { changeCardNumberStatus, changeNowCardInfo } = props;
 
-  const [inputStatus, setInputStatus] = useState(INPUT_STATUS.NOT_COMPLETE);
+  const [hasError, setHasError] = useState<boolean>(false);
 
   return (
     <div className="input-box-card-number">
       <p>카드번호</p>
       <CardNumber
-        setInputStatus={setInputStatus}
-        setIsComplete={setIsComplete}
+        setHasError={setHasError}
+        changeCardNumberStatus={changeCardNumberStatus}
         changeNowCardInfo={changeNowCardInfo}
       />
-      <p className={inputStatus === INPUT_STATUS.ERROR ? "visible" : ""}>
+      <p className={hasError ? "visible" : ""}>
         {CARD_ERROR_MESSAGE.INPUT_CARD_NUMBER}
       </p>
     </div>
