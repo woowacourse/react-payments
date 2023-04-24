@@ -48,9 +48,9 @@ export default function Homepage({ onClick, cardList }: HomePageProps) {
         <AddInformation>새로운 카드를 등록해주세요.</AddInformation>
       )}
       <CardWrapper>
-        {cardList.map((card, index) => (
+        {cardList.map((card) => (
           <Card
-            key={`${card.owner}${index}`}
+            key={`${card.owner}${card.cardNumber.third}`}
             owner={card.owner}
             cardNumberSet={Object.values(card.cardNumber)}
             expiracy={`${card.expiracy.month}/${card.expiracy.year}`}
