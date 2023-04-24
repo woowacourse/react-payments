@@ -1,14 +1,9 @@
 import styled from "styled-components";
 import { LIMIT_LENGTH } from "constants/limit";
 import { HIDDEN_VALUE, SECURITY_TARGET } from "constants/security";
+import { CardNumber, ExpirationDate } from "types";
 
-interface Props {
-  number1: string;
-  number2: string;
-  number3: string;
-  number4: string;
-  month: string;
-  year: string;
+interface Props extends ExpirationDate, CardNumber {
   name: string;
 }
 

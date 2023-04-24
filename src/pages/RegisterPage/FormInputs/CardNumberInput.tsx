@@ -5,15 +5,8 @@ import { changeToValidValue } from "utils/inputValidator";
 import { HIDDEN_ELEMENT_STYLE } from "constants/style";
 import { LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
 import Input from "components/Input";
+import { CardNumber } from "types";
 const { ONLY_NUMBER } = VALID_INPUT;
-
-interface CardNumber {
-  [key: string]: string;
-  number1: string;
-  number2: string;
-  number3: string;
-  number4: string;
-}
 
 interface Props {
   cardNumber: CardNumber;
