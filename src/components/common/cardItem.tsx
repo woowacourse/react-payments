@@ -1,40 +1,20 @@
-import styled from "styled-components";
-
-interface INumber {
-  first: string;
-  second: string;
-  third: string;
-  fourth: string;
-}
-
-export interface CardInfo {
-  cardNumber: INumber;
-  date: any;
-  userName: string;
-  code?: string;
-  password?: string;
-}
-
+import styled from 'styled-components';
+import { Card } from '../../type/card';
 interface CardItemProps {
-  info: CardInfo;
+  info: Card;
 }
 
-export function CardItem(props: CardInfo) {
-  const { cardNumber, date, userName } = props;
+export function CardItem(props: CardItemProps) {
+  const { CARD_NUMBER, DATE, USERNAME } = props.info;
   return (
     <CardContainer>
       <Magnetic />
       <NumberWrapper>
-        <NumberItem>{cardNumber?.first}</NumberItem>
-        <NumberItem>{cardNumber?.second}</NumberItem>
-        <NumberItem>{"•".repeat(4)}</NumberItem>
-        <NumberItem>{"•".repeat(4)}</NumberItem>
+        <NumberItem>{CARD_NUMBER}</NumberItem>
       </NumberWrapper>
       <InfoWrapper>
-        <Name>{userName}</Name>
-        <Date>
-          {date?.month}/{date?.year}
-        </Date>
+        <Name>{USERNAME}</Name>
+        <Date>{DATE}</Date>
       </InfoWrapper>
     </CardContainer>
   );
