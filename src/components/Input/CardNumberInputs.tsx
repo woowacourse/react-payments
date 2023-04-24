@@ -1,6 +1,7 @@
 import { Input } from 'components/common';
 import { ValueAndOnChange } from './types';
 import React, { ChangeEvent, ChangeEventHandler } from 'react';
+import { validateInput } from 'util/Validation';
 
 interface CardNumberInputProps {
   valueAndOnChanges: ValueAndOnChange[];
@@ -18,10 +19,8 @@ export function CardNumberInputs({ valueAndOnChanges }: CardNumberInputProps) {
     index: number,
     onChange?: ChangeEventHandler<HTMLInputElement>,
   ) => {
-    const { value } = e.target;
-    const isNumber = !isNaN(Number(value));
-
-    if (!isNumber) return;
+    const value = e.target.value;
+    if (validateInput(value)) return;
 
     const isLast = inputRefs.length - 1 === index;
     const isInputMaxLength = value.trim().length === e.target.maxLength;
@@ -29,6 +28,7 @@ export function CardNumberInputs({ valueAndOnChanges }: CardNumberInputProps) {
     if (!isLast && isInputMaxLength) {
       inputRefs[index + 1].current?.focus();
     }
+
     onChange && onChange(e);
   };
 

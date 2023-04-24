@@ -59,18 +59,12 @@ function AddCardForm({ onSubmit }: AddCardFormProps) {
 
   const handleMonthInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { value } = e.target;
-    const isNumber = !isNaN(Number(value));
-
-    if (!isNumber) return;
 
     setMonth(value);
   };
 
   const handleYearInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { value } = e.target;
-    const isNumber = !isNaN(Number(value));
-
-    if (!isNumber) return;
 
     setYear(value);
   };
@@ -83,27 +77,18 @@ function AddCardForm({ onSubmit }: AddCardFormProps) {
 
   const handleSecurityCodeChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { value } = e.target;
-    const isNumber = !isNaN(Number(value));
-
-    if (!isNumber) return;
 
     setSecurityCode(value);
   };
 
   const handleFirstPasswordInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { value } = e.target;
-    const isNumber = !isNaN(Number(value));
-
-    if (!isNumber) return;
 
     setFirstDigit(value);
   };
 
   const handleSecondPasswordInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { value } = e.target;
-    const isNumber = !isNaN(Number(value));
-
-    if (!isNumber) return;
 
     setSecondDigit(value);
   };
