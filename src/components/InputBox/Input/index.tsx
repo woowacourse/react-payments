@@ -1,5 +1,5 @@
-import { ChangeEvent } from 'react';
 import * as styled from './Input.styled';
+import { ChangeEvent } from 'react';
 
 interface InputProps {
   name: string;
