@@ -6,16 +6,13 @@ import CardCompanySelectBottomSheet from '../../components/CardCompanySelectBott
 import { CardCompanyProvider } from '../../components/CardCompany/CardCompanyContext';
 
 import { useModal } from '../../components/common/Modal/ModalContext';
-import type { CardInfo } from '../../domain/types/card';
+import { useCardsContext } from '../../domain/context/CardsContext';
 
 import styles from './cardRegisterPage.module.css';
 
-interface Props {
-  registerCard: (card: CardInfo) => void;
-}
-
-const CardRegisterPage = ({ registerCard }: Props) => {
+const CardRegisterPage = () => {
   const { isModalOpen, openModal } = useModal();
+  const { registerCard } = useCardsContext();
 
   useEffect(() => {
     openModal();

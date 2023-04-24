@@ -3,17 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import Card from '../../components/Card';
 import CardRegisterButton from '../../components/CardRegisterButton';
 
+import { useCardsContext } from '../../domain/context/CardsContext';
 import { uuid } from '../../utils/uuid';
-import type { CardInfo } from '../../domain/types/card';
 
 import styles from './holdingCardsPage.module.css';
 
-interface Props {
-  cards: CardInfo[];
-}
-
-const HoldingCardsPage = ({ cards }: Props) => {
+const HoldingCardsPage = () => {
   const navigate = useNavigate();
+  const { cards } = useCardsContext();
 
   const handleClick = () => {
     navigate('/card-register');
