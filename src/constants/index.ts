@@ -20,10 +20,17 @@ const SEPERATED_CARD_NUMBER_LENGTH: Record<string, number> = {
   THIRD: 18,
 } as const;
 
+const SEPERATED_EXPIRED_DATE_LENGTH = 2;
+
 const PASSWORD_DIGIT_INDEX: Record<string, number> = {
   FIRST: 0,
   SECOND: 1,
 } as const;
+
+const SEPERATOR_STRING = {
+  cardNumber: " - ",
+  expiredDate: " / ",
+};
 
 const CARD_COLOR = [
   "red",
@@ -43,6 +50,10 @@ const ROUTER_PATH = {
   AddCard: "/AddCard",
 };
 
+const REGEX = {
+  number: /[0-9]/g,
+} as const;
+
 export {
   CARD_INPUT_MAX_LENGTH,
   CARD_INPUT_MIN_LENGTH,
@@ -50,4 +61,7 @@ export {
   PASSWORD_DIGIT_INDEX,
   CARD_COLOR,
   ROUTER_PATH,
+  REGEX,
+  SEPERATOR_STRING,
+  SEPERATED_EXPIRED_DATE_LENGTH,
 };
