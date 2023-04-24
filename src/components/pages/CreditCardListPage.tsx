@@ -19,9 +19,10 @@ export const CreditCardListPage = () => {
     <Page>
       <Page.Header>보유카드</Page.Header>
       <Content>
-        {creditCards.map((creditCard) => (
+        {creditCards.map((creditCard, index) => (
           <CreditCardView
-            key={creditCard.cardNumbers}
+            // eslint-disable-next-line react/no-array-index-key
+            key={index}
             name={creditCard.name}
             cardNumbers={creditCard.cardNumbers}
             expirationDate={creditCard.expirationDate}
