@@ -23,10 +23,10 @@ export const MAX_LENGTH: { [key: string]: number } = Object.freeze({
   CARD_PASSWORD: 1,
 });
 
-export const JOIN_SYMBOL: { [key: string]: string } = Object.freeze({
-  CARD_NUMBER: '-',
-  DATE: '/',
-  USERNAME: '',
-  CODE: '',
-  CARD_PASSWORD: '',
-});
+export const SIZE_STYLE: { [key: string]: number } = {
+  CARD_NUMBER: 8,
+  DATE: 7,
+  USERNAME: 50,
+  CODE: 5,
+  CARD_PASSWORD: 1,
+};

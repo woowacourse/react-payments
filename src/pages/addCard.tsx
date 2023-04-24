@@ -8,10 +8,12 @@ export function AddCard() {
   return (
     <AddCardContainer>
       <Header title='카드 추가' render={() => BackButton()} />
-      <CardInfoProvider>
-        <CardPreview></CardPreview>
-        <CardRegisterForm></CardRegisterForm>
-      </CardInfoProvider>
+      <Section>
+        <CardInfoProvider>
+          <CardPreview></CardPreview>
+          <CardRegisterForm></CardRegisterForm>
+        </CardInfoProvider>
+      </Section>
     </AddCardContainer>
   );
 }
@@ -19,7 +21,12 @@ export function AddCard() {
 const AddCardContainer = styled.section`
   display: flex;
   flex-direction: column;
-  align-items: center;
 
   margin: 2rem;
+`;
+
+const Section = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;

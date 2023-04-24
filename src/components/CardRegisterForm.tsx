@@ -55,7 +55,7 @@ export function CardRegisterForm() {
   return (
     <_Form onSubmit={handleSubmit}>
       {Object.entries(inputList).map(([key, inputs]) => (
-        <InputBox id={key} inputs={inputs as any}></InputBox>
+        <InputBox id={key} inputs={inputs as unknown as InputInfo[]}></InputBox>
       ))}
       {isRequiredInputValid && isOptionalInputValid && (
         <ButtonWrapper>
@@ -71,6 +71,7 @@ const _Form = styled.form`
   flex-direction: column;
 
   justify-content: space-between;
+
   gap: 1rem;
 `;
 

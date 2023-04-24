@@ -2,7 +2,12 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-import { LABEL, MAX_LENGTH, PLACEHOLDER } from '../../constants/inputInfo';
+import {
+  LABEL,
+  MAX_LENGTH,
+  PLACEHOLDER,
+  SIZE_STYLE,
+} from '../../constants/inputInfo';
 import { ErrorMessage, Label, Input } from '../common';
 
 import { ERROR_MESSAGE } from '../../constants/errors';
@@ -33,6 +38,7 @@ export function InputBox({ id, inputs }: InputBoxProps) {
                 required={required}
                 placeholder={PLACEHOLDER[matchKeyWithId(`${id}${index}`)]}
                 maxLength={MAX_LENGTH[`${id}`]}
+                size={SIZE_STYLE[`${id}`]}
               />
               <ErrorMessage>
                 {error && ERROR_MESSAGE[matchKeyWithId(`${id}${index}`)]}
@@ -46,9 +52,6 @@ export function InputBox({ id, inputs }: InputBoxProps) {
 }
 
 const _InputContainer = styled.div`
-  position: relative;
-  width: 31.8rem;
-
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -68,7 +71,7 @@ const _TextCount = styled.div``;
 
 const _InputWithErrorMessage = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
 
   gap: 0.7rem;
 `;
