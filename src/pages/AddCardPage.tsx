@@ -266,6 +266,7 @@ export default function AddCardPage({
 
         return dataValidationResult;
       });
+
       return result;
     });
 
@@ -279,19 +280,14 @@ export default function AddCardPage({
       cardNumber: {
         fisrt: firstCardInput.value,
         second: secondCardInput.value,
-        third: thirdCardInput.value,
-        fourth: fourthCardInput.value,
+        third: '&&&&',
+        fourth: '&&&&',
       },
       expiracy: {
         month: monthInput.value,
         year: yearInput.value,
       },
       owner: ownerInput.value,
-      cvc: cvcInput.value,
-      password: {
-        first: firstPasswordInput.value,
-        second: secondPasswordInput.value,
-      },
     };
 
     const updatedCardList = [...cardList, newCard];

@@ -32,6 +32,7 @@ export default function Input({
   textAlign = 'baseline',
   isWrong,
   isNumber,
+  value,
   isPassword,
   ...rest
 }: InputProps) {
@@ -46,13 +47,26 @@ export default function Input({
     }
   };
 
+  if (isPassword) {
+    return (
+      <StyledInput
+        isWrong={isWrong}
+        textAlign={textAlign}
+        inputMode={isNumber ? 'numeric' : 'text'}
+        onInput={onInput}
+        isPassword={isPassword}
+        {...rest}
+      />
+    );
+  }
+
   return (
     <StyledInput
       isWrong={isWrong}
       textAlign={textAlign}
       inputMode={isNumber ? 'numeric' : 'text'}
       onInput={onInput}
-      isPassword={isPassword}
+      value={value}
       {...rest}
     />
   );

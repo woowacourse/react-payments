@@ -13,11 +13,6 @@ export interface CardInfo {
     year: string;
   };
   owner: string;
-  cvc: string;
-  password: {
-    first: string;
-    second: string;
-  };
 }
 
 export type PageInfo = (typeof PAGE)[number];
