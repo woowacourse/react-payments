@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, memo } from 'react';
 import { SECURITY_CODE_MAX_LENGTH, SECURITY_CODE_MIN_LENGTH } from '../../../constants';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
@@ -47,4 +47,4 @@ function CardSecurityCode({ onInputChange, value, isValid }: CardSecurityCodePro
   );
 }
 
-export default CardSecurityCode;
+export default memo(CardSecurityCode);

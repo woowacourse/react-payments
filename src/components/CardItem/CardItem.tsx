@@ -1,5 +1,5 @@
 import styles from './style.module.css';
-import { ComponentPropsWithoutRef } from 'react';
+import { ComponentPropsWithoutRef, memo } from 'react';
 import { CardDisplayInformation } from '../../types';
 import { CARD_NUMBER_UNIT_MAX_LENGTH, REGEX, SECURITY_TEXT_ICON } from '../../constants';
 import { CARD_BG_COLOR } from '../../constants/cardColors';
@@ -39,4 +39,4 @@ function CardItem({ information, className }: CardItemProps) {
   );
 }
 
-export default CardItem;
+export default memo(CardItem);

@@ -1,4 +1,4 @@
-import { ChangeEvent, useRef } from 'react';
+import { ChangeEvent, memo, useRef } from 'react';
 import { CARD_NUMBER_INPUT_MAX_LENGTH } from '../../../constants';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
@@ -53,4 +53,4 @@ function CardNumber({ onInputChange, value, isValid }: CardNumberProps) {
   );
 }
 
-export default CardNumber;
+export default memo(CardNumber);

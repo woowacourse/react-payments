@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, memo } from 'react';
 import { OWNER_NAME_MAX_LENGTH } from '../../../constants';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
@@ -28,4 +28,4 @@ function CardOwnerName({ onInputChange, value = '' }: CardOwnerNameProps) {
   );
 }
 
-export default CardOwnerName;
+export default memo(CardOwnerName);

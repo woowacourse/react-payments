@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, memo } from 'react';
 import { ExpirationDate } from '../../../types';
 import { EXPIRATION_DATE_INPUT_MAX_LENGTH } from '../../../constants';
 import InputContainer from '../../common/InputContainer/InputContainer';
@@ -49,4 +49,4 @@ function CardExpirationDate({ onInputChange, value, isValid }: CardExpirationDat
   );
 }
 
-export default CardExpirationDate;
+export default memo(CardExpirationDate);

@@ -1,5 +1,5 @@
 import styles from './style.module.css';
-import { ChangeEvent, FormEvent, MouseEvent, useContext } from 'react';
+import { ChangeEvent, FormEvent, MouseEvent, memo, useContext } from 'react';
 import { CardFormData, CardFormValidation } from '../../types';
 import CardIssuer from './CardIssuer/CardIssuer';
 import CardNumber from './CardNumber/CardNumber';
@@ -70,4 +70,4 @@ function CardAddForm({
   );
 }
 
-export default CardAddForm;
+export default memo(CardAddForm);

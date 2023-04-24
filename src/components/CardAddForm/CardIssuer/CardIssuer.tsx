@@ -1,5 +1,5 @@
 import styles from './style.module.css';
-import { KeyboardEvent, MouseEvent, useRef } from 'react';
+import { KeyboardEvent, MouseEvent, memo, useRef } from 'react';
 import { Issuer } from '../../../types';
 import CardIssuerSelection from './CardIssuerSelection/CardIssuerSelection';
 import InputContainer from '../../common/InputContainer/InputContainer';
@@ -50,7 +50,6 @@ function CardIssuer({ onInputChange, value, isValid }: CardIssuerProps) {
         className={`select-button flex-jsb flex-row-reverse ${isError ? styles.error : ''} ${
           value ? styles.selected : ''
         }`}
-        value={value}
         icon={DownIcon}
         onClick={openModal}
       >
@@ -65,4 +64,4 @@ function CardIssuer({ onInputChange, value, isValid }: CardIssuerProps) {
   );
 }
 
-export default CardIssuer;
+export default memo(CardIssuer);

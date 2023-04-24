@@ -1,5 +1,5 @@
 import styles from './style.module.css';
-import { ChangeEvent, FocusEvent, useRef } from 'react';
+import { ChangeEvent, FocusEvent, memo, useRef } from 'react';
 import { PASSWORD_UNIT_MAX_LENGTH, SECURITY_TEXT_ICON } from '../../../constants';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
@@ -71,4 +71,4 @@ function CardPassword({ onInputChange, values, isValid }: CardPasswordProps) {
   );
 }
 
-export default CardPassword;
+export default memo(CardPassword);
