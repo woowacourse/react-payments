@@ -10,4 +10,5 @@ export interface InputProps {
   value: string;
   name?: string;
   placeholder?: string;
+  autoFocus?: boolean;
 }

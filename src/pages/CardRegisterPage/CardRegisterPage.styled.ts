@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { COLOR } from '../../constants/cardInfo';
 
 export const CardRegisterPage = styled.div`
   display: flex;
@@ -24,7 +25,15 @@ export const CardInfoSubmitButtonContainer = styled.div`
 
 export const CardInfoSubmitButton = styled.button`
   position: relative;
+
+  width: 50px;
+
   font-size: large;
   font-weight: 700;
+
   cursor: pointer;
+
+  &:focus {
+    outline: solid ${COLOR.BLUE};
+  }
 `;

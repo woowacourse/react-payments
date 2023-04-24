@@ -3,7 +3,7 @@ import { InputProps } from '../../types/props';
 import { useEffect, useRef } from 'react';
 
 const Input = (props: InputProps) => {
-  const { value, onChange, width, type, name, placeholder, maxLength } = props;
+  const { value, onChange, width, type, name, placeholder, maxLength, autoFocus } = props;
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -26,6 +26,7 @@ const Input = (props: InputProps) => {
       placeholder={placeholder}
       ref={inputRef}
       maxLength={maxLength}
+      autoFocus={autoFocus}
     />
   );
 };

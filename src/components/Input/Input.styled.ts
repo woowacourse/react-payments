@@ -25,4 +25,8 @@ export const Input = styled.input<InputProps>`
   text-align: center;
 
   opacity: 0.6;
+
+  &:focus {
+    outline: solid ${COLOR.BLUE};
+  }
 `;

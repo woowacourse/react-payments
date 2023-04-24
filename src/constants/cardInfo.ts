@@ -25,4 +25,5 @@ export const COLOR = {
   GREY200: '#333333',
   GOLD: '#CBBA64',
   RED: '#F04651',
+  BLUE: '#0080FF',
 };

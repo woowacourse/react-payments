@@ -52,6 +52,7 @@ const CardNumberInputBox = ({ cardNumbers, setCardInfo }: { cardNumbers: CardNum
                 type="text"
                 maxLength={4}
                 placeholder="0000"
+                autoFocus={key === 'first' ? true : false}
               />
             );
           })}

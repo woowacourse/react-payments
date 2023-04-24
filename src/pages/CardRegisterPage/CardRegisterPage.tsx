@@ -64,7 +64,9 @@ const CardRegisterPage = ({ setCardInfoList }: { setCardInfoList: SetCardInfoLis
         <PasswordInputBox password={cardInfo.password} setCardInfo={setCardInfo} />
         <styled.CardInfoSubmitButtonContainer>
           {isFilledCardInfos() && (
-            <styled.CardInfoSubmitButton onClick={handleOnClickSubmitButton}>다음</styled.CardInfoSubmitButton>
+            <styled.CardInfoSubmitButton onClick={handleOnClickSubmitButton} autoFocus>
+              다음
+            </styled.CardInfoSubmitButton>
           )}
         </styled.CardInfoSubmitButtonContainer>
       </styled.CardRegisterForm>
