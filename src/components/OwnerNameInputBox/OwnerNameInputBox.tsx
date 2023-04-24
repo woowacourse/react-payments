@@ -36,7 +36,7 @@ const OwnerNameInputBox = ({ ownerName, setCardInfo }: { ownerName: OwnerName; s
       <label>
         <styled.LabelHeader>
           <span>카드 소유자 이름(선택)</span>
-          <span>0/30</span>
+          <span>{ownerName?.length}/30</span>
         </styled.LabelHeader>
         <styled.InputContainer>
           <Input
