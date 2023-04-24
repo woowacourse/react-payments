@@ -91,13 +91,13 @@ function CreditCardRegister() {
           setCreditCardPassword={setCreditCardPassword}
         />
         <S.ButtonWrapper>
-          <S.ResigerButton
+          <S.RegisterButton
             disabled={!isFullFilled}
             type="button"
             onClick={() => handleSubmit()}
           >
             확인
-          </S.ResigerButton>
+          </S.RegisterButton>
         </S.ButtonWrapper>
       </S.CreditCardRegisterForm>
     </S.CreditCardRegisterLayout>

@@ -44,7 +44,7 @@ function CreditCardNumberInput({ creditCardNumber, setCreditCardNumber }: Props)
         onChange={() => { }}
       />
       {isError && <S.ErrorMessage>카드번호는 16자리의 숫자로만 이루어져야 합니다.</S.ErrorMessage>}
-      <S.HiddentInput
+      <S.HiddenInput
         ref={inputRef}
         type="string"
         value={creditCardNumber}

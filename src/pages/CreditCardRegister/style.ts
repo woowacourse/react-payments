@@ -58,12 +58,12 @@ export const ButtonWrapper = styled.div`
     justify-content: flex-end;
 `;
 
-export const ResigerButton = styled.button`
+export const RegisterButton = styled.button`
     font-weight: 700;
     cursor: pointer;
 `;
 
-export const HiddentInput = styled.input`
+export const HiddenInput = styled.input`
     opacity: 0;
     position: absolute;
     text-align: center;
