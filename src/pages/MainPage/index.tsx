@@ -1,5 +1,5 @@
 import Header from "components/Header";
-import CardPreview from "components/RegisterPage/CardPreview";
+import CardPreview from "components/CardPreview";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 

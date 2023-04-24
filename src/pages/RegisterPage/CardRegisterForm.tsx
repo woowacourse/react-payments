@@ -5,10 +5,10 @@ import ExpirationDateInput from "./FormInputs/ExpirationDateInput";
 import NameInput from "./FormInputs/NameInput";
 import PasswordInput from "./FormInputs/PasswordInput";
 import SecurityCodeInput from "./FormInputs/SecurityCodeInput";
-import CardPreview from "./CardPreview";
+import CardPreview from "components/CardPreview";
 import { getFormData } from "utils/formDataGetter";
 import { areValidInfo } from "validation";
-import Header from "../Header";
+import Header from "components/Header";
 import { useNavigate } from "react-router-dom";
 
 const CardRegisterForm = () => {
