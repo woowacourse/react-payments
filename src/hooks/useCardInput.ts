@@ -26,12 +26,7 @@ const useCardInput = () => {
     (event: MouseEvent<HTMLButtonElement>) => {
       const { name, value } = event.currentTarget;
 
-      setCardInformation((information) => {
-        return {
-          ...information,
-          [name]: value,
-        };
-      });
+      setCardInformation((information) => ({ ...information, [name]: value }));
       handleValidationChange(name as keyof CardFormData, value);
     },
     [handleValidationChange]
@@ -46,12 +41,7 @@ const useCardInput = () => {
 
       const formattedValue = isKeyOfObj(formatter, name) ? formatter[name](value) : value;
 
-      setCardInformation((information) => {
-        return {
-          ...information,
-          [name]: formattedValue,
-        };
-      });
+      setCardInformation((information) => ({ ...information, [name]: formattedValue }));
       handleValidationChange(name as keyof CardFormData, value);
     },
     [handleValidationChange]
