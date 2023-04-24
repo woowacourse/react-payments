@@ -55,7 +55,7 @@ const CardRegisterForm = () => {
 
   return (
     <div>
-      <Header navigator={true} title="카드 추가" />
+      <Header navigator title="카드 추가" />
 
       <CardPreview cardInfo={cardInfo} />
 
