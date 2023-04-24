@@ -1,5 +1,7 @@
-import { useState } from 'react';
-import CardInfoInput from '../CardInfoInput/CardInfoInput';
+import useValidator from '../../../hooks/useValidator';
+import { checkValidYearMonth } from '../validators';
+import { addSlashInExpirationDate } from '../replacers';
+import CardInfoInput from '../LabeledInput/LabeledInput';
 import Input from '../../common/Input/Input';
 
 type ExpirationDateInputProps = {
@@ -7,27 +9,26 @@ type ExpirationDateInputProps = {
 };
 
 const ExpirationDateInput = ({ updateExpirationDate }: ExpirationDateInputProps) => {
-  const [expirationDate, setExpirationDate] = useState('');
+  const { value, isValid, errorMessage, setValueWithValidation } = useValidator(checkValidYearMonth);
 
-  const addSlashInExpirationDate = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (/[^0-9/]/.test(e.target.value)) return alert('숫자만 입력이 가능합니다!');
+  const setExpirationDate = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const expirationDate = event.target.value;
+    const expirationDateWithSlash = addSlashInExpirationDate(expirationDate);
 
-    const expirationDate = e.target.value;
-    const slashRemovedExpirationDate = expirationDate.replaceAll('/', '');
-    const expirationDateWithSlash = (slashRemovedExpirationDate.match(/.{1,2}/g) || []).join('/');
-
-    setExpirationDate(expirationDateWithSlash);
+    setValueWithValidation(expirationDateWithSlash);
     updateExpirationDate(expirationDateWithSlash);
   };
 
   return (
-    <CardInfoInput title="만료일">
+    <CardInfoInput title="만료일" errorMessage={errorMessage}>
       <Input
         width="40%"
-        onChange={addSlashInExpirationDate}
-        value={expirationDate}
+        onChange={setExpirationDate}
+        value={value}
         maxLength={5}
         name="expirationDate"
+        placeholder="MM/YY"
+        required={true}
       />
     </CardInfoInput>
   );

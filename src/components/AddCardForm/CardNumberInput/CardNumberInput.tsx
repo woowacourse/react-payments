@@ -1,5 +1,7 @@
-import { useState } from 'react';
-import CardInfoInput from '../CardInfoInput/CardInfoInput';
+import { checkValidCardNumber } from '../validators';
+import { addHyphensInCardNumber } from '../replacers';
+import useValidator from '../../../hooks/useValidator';
+import LabeledInput from '../LabeledInput/LabeledInput';
 import Input from '../../common/Input/Input';
 
 type CardNumberInputProps = {
@@ -7,23 +9,28 @@ type CardNumberInputProps = {
 };
 
 const CardNumberInput = ({ updateCardNumber }: CardNumberInputProps) => {
-  const [cardNumber, setCardNumber] = useState('');
+  const { value, isValid, errorMessage, setValueWithValidation } = useValidator(checkValidCardNumber);
 
-  const addHyphensInCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (/[^0-9-]/.test(e.target.value)) return alert('숫자만 입력이 가능합니다!');
+  const setCardNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const cardNumber = event.target.value;
+    const cardNumberWithHyphens = addHyphensInCardNumber(cardNumber);
 
-    const cardNumber = e.target.value;
-    const hyphenRemovedCardNumber = cardNumber.replaceAll('-', '');
-    const cardNumberWithHyphens = (hyphenRemovedCardNumber.match(/.{1,4}/g) || []).join('-');
-
-    setCardNumber(cardNumberWithHyphens);
-    updateCardNumber(cardNumber);
+    setValueWithValidation(cardNumberWithHyphens);
+    updateCardNumber(cardNumberWithHyphens);
   };
 
   return (
-    <CardInfoInput title="카드 번호">
-      <Input width="100%" onChange={addHyphensInCardNumber} maxLength={19} name="cardNumber" value={cardNumber} />
-    </CardInfoInput>
+    <LabeledInput title="카드 번호" errorMessage={errorMessage}>
+      <Input
+        width="100%"
+        onChange={setCardNumber}
+        maxLength={19}
+        name="cardNumber"
+        value={value}
+        placeholder="XXXX-XXXX-XXXX-XXXX"
+        required={true}
+      />
+    </LabeledInput>
   );
 };
 
