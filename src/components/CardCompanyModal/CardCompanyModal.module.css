@@ -1,0 +1,30 @@
+.modalBackground {
+  position: absolute;
+  background-color: var(--grey-400);
+  width: 370px;
+  height: 700px;
+  border-radius: 10px;
+  opacity: 0.33;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.modalContainer {
+  display: grid;
+  padding: 20px;
+  position: absolute;
+  background-color: var(--white-color);
+  width: 370px;
+  height: 220px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  top: 510px;
+  font-size: small;
+}
+
+.cardContainer {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 20px;
+}
