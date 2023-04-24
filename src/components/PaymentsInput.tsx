@@ -2,10 +2,13 @@ import styled, { css } from 'styled-components';
 import NamedInputListBox from './Common/Input/NamedInputListBox';
 import type { NamedInputListBoxProps } from './Common/Input/NamedInputListBox';
 
-function PaymentsInput({ inputListInformation, name, id }: NamedInputListBoxProps) {
+type PaymentsInputProps = NamedInputListBoxProps & { errorMessage?: string };
+
+function PaymentsInput({ inputListInformation, name, id, errorMessage }: PaymentsInputProps) {
   return (
     <StyledPaymentsInput isBlankBridge={inputListInformation.bridgeLetter === ''}>
       <NamedInputListBox inputListInformation={inputListInformation} name={name} id={id} />
+      <p>{errorMessage}</p>
     </StyledPaymentsInput>
   );
 }
@@ -15,7 +18,8 @@ const StyledPaymentsInput = styled.div<{ isBlankBridge: boolean }>`
   flex-direction: column;
   max-width: 318px;
 
-  & > label {
+  & > label,
+  & > p {
     font-weight: 500;
     font-size: 12px;
     line-height: 14px;
@@ -23,6 +27,13 @@ const StyledPaymentsInput = styled.div<{ isBlankBridge: boolean }>`
     letter-spacing: -0.085em;
     color: #525252;
     margin-bottom: 8px;
+  }
+
+  & > p {
+    margin: 4px 0 0 0;
+    color: red;
+    white-space: nowrap;
+    height: 14px;
   }
 
   & > div > div:first-child {

@@ -1,4 +1,12 @@
-const checkExpirationDate = (expirationDate: [string, string]) => {
+import type { CardNumber, CardPassword, ExpirationDate, SecurityCode } from '../components/Common/Card/types';
+
+export const checkCardNumber = (cardNumber: CardNumber) => {
+  if (cardNumber.join('').length !== 16) {
+    throw new Error('카드 번호 16자를 전부 기입했는지 다시 확인해 주세요.');
+  }
+};
+
+export const checkExpirationDate = (expirationDate: ExpirationDate) => {
   const [month, year] = expirationDate;
   const now = new Date();
   const nowYear = now.getFullYear() % 100;
@@ -23,4 +31,14 @@ const checkExpirationDate = (expirationDate: [string, string]) => {
   }
 };
 
-export default checkExpirationDate;
+export const checkSecurityCode = (securityCode: SecurityCode) => {
+  if (securityCode.join('').length !== 3) {
+    throw new Error('CVC/CVV코드 3자를 전부 기입했는지 다시 확인해 주세요.');
+  }
+};
+
+export const checkPassword = (password: CardPassword) => {
+  if (password.join('').length !== 2) {
+    throw new Error('비밀번호 앞자리 2자를 전부 기입했는지 다시 확인해 주세요.');
+  }
+};
