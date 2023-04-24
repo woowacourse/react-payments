@@ -12,9 +12,9 @@ const CardPreview = ({ cardNumber, cardOwnerName, cardExpirationDate }: CardPrev
       <div className={styles.card}>
         <div className={styles.chip} />
         <span className={styles['card-number']}>{cardNumber}</span>
-        <div className={styles.wrap}>
-          <span className={styles.word}>{cardOwnerName}</span>
-          <span className={styles.word}>{cardExpirationDate}</span>
+        <div className={styles['name-date-container']}>
+          <span className={styles['owner-name']}>{cardOwnerName}</span>
+          <span className={styles['expiration-date']}>{cardExpirationDate}</span>
         </div>
       </div>
     </div>

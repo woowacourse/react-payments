@@ -9,13 +9,13 @@
   flex-direction: column;
   justify-content: flex-end;
   margin: 0 auto 0 auto;
-  background-color: var(--grey-500);
+  background-color: var(--gray-500);
   width: 208px;
   height: 123px;
   border-radius: 5px;
   border: none;
   transition: 0.3s;
-  box-shadow: 3px 3px 10px var(--grey-300);
+  box-shadow: 3px 3px 10px var(--gray-300);
   font-size: 20px;
 }
 
@@ -27,21 +27,32 @@
   margin-top: 31px;
 }
 
-.word {
-  color: var(--grey-100);
-  font-size: 12px;
-  height: 16px;
-}
-
-.wrap {
+.name-date-container {
   display: flex;
   justify-content: space-between;
+  height: 18px;
 }
 
 .card-number {
-  color: var(--grey-100);
+  color: var(--gray-100);
   font-size: 16px;
   line-height: 23px;
   height: 23px;
   text-align: center;
+}
+
+.owner-name,
+.expiration-date {
+  color: var(--gray-100);
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 140px;
+  height: 20px;
+}
+
+.expiration-date {
+  width: 50px;
+  text-align: right;
 }
