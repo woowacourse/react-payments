@@ -1,10 +1,7 @@
-import styled from "styled-components";
+import { PropsWithChildren } from 'react';
+import styled from 'styled-components';
 
-interface Props {
-  children: React.ReactNode;
-}
-
-function FormLabel({ children }: Props) {
+function FormLabel({ children }: PropsWithChildren) {
   return <StyleLabel>{children}</StyleLabel>;
 }
 

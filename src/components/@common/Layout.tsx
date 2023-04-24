@@ -1,12 +1,9 @@
 import styled from 'styled-components';
 import Header from './Header';
 import { useLocation } from 'react-router-dom';
+import { PropsWithChildren } from 'react';
 
-interface Props {
-  children: React.ReactNode;
-}
-
-function Layout({ children }: Props) {
+function Layout({ children }: PropsWithChildren) {
   const pathname = useLocation().pathname;
 
   let headingText = '';
