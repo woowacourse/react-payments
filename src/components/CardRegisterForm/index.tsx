@@ -1,5 +1,4 @@
-import { FormEventHandler, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
 
 import Card from '../Card';
 import Input, { Focus } from '../common/Input';
@@ -8,23 +7,15 @@ import TooltipButton from '../TooltipButton';
 
 import useCardRegisterForm from './useCardRegisterForm';
 import { useModal } from '../common/Modal/ModalContext';
-import { useCardCompany } from '../CardCompany/CardCompanyContext';
-import { useCardsContext } from '../../domain/context/CardsContext';
 import { CARD_NUMBER_INPUT_PLACEHOLDER } from '../../domain/constants';
 
 import styles from './cardRegisterForm.module.css';
 
-const today = new Date();
-const currentYear = today.getFullYear() % 100;
-const currentMonth = today.getMonth() + 1;
-
 const CardRegisterForm = () => {
   const inputRefs = Array.from({ length: 10 }).map(() => useRef<Focus>(null));
-  const navigate = useNavigate();
   const { isModalOpen, openModal } = useModal();
-  const { cardCompany } = useCardCompany();
-  const { registerCard } = useCardsContext();
   const {
+    cardCompany,
     cardNumber1,
     cardNumber2,
     cardNumber3,
@@ -49,46 +40,8 @@ const CardRegisterForm = () => {
     isCardFormFilled,
     handleNumberChange,
     handleOwnerChange,
+    handleSubmit,
   } = useCardRegisterForm(inputRefs);
-
-  const isValidExpiredDate = (month: number, year: number) => {
-    if (month < 1 || month > 12) return false;
-    if (year < currentYear) return false;
-    if (year === currentYear && month <= currentMonth) return false;
-
-    return true;
-  };
-
-  const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
-    event.preventDefault();
-
-    if (!cardCompany) {
-      alert('카드를 터치 후 카드사를 선택해 주세요.');
-
-      return;
-    }
-
-    if (!isValidExpiredDate(Number(expiredMonth), Number(expiredYear))) {
-      const expiredMonthInput = inputRefs[4];
-
-      alert('유효한 만료일이 아닙니다. 다시 입력해주세요.');
-      expiredMonthInput.current?.focus();
-
-      return;
-    }
-
-    const cardData = {
-      cardCompany,
-      cardNumber1,
-      cardNumber2,
-      expiredMonth,
-      expiredYear,
-      owner: owner.trim(),
-    };
-
-    registerCard(cardData);
-    navigate('/card-nickname');
-  };
 
   useEffect(() => {
     if (isModalOpen === false) {

@@ -1,15 +1,27 @@
 import {
   ChangeEvent,
   Dispatch,
+  FormEventHandler,
   RefObject,
   SetStateAction,
   useState,
 } from 'react';
+import { useNavigate } from 'react-router-dom';
 
+import { useCardCompany } from '../CardCompany/CardCompanyContext';
+import { useCardsContext } from '../../domain/context/CardsContext';
 import { isNotAlphabet, isNotNumber } from '../../utils/validation';
 import type { Focus } from '../common/Input';
 
+const today = new Date();
+const currentYear = today.getFullYear() % 100;
+const currentMonth = today.getMonth() + 1;
+
 const useCardRegisterForm = (inputRefs: RefObject<Focus>[]) => {
+  const navigate = useNavigate();
+  const { cardCompany } = useCardCompany();
+  const { registerCard } = useCardsContext();
+
   const [cardNumber1, setCardNumber1] = useState('');
   const [cardNumber2, setCardNumber2] = useState('');
   const [cardNumber3, setCardNumber3] = useState('');
@@ -45,6 +57,14 @@ const useCardRegisterForm = (inputRefs: RefObject<Focus>[]) => {
     }
   };
 
+  const isValidExpiredDate = (month: number, year: number) => {
+    if (month < 1 || month > 12) return false;
+    if (year < currentYear) return false;
+    if (year === currentYear && month <= currentMonth) return false;
+
+    return true;
+  };
+
   const handleNumberChange = (
     event: ChangeEvent<HTMLInputElement>,
     setNumber: Dispatch<SetStateAction<string>>,
@@ -69,7 +89,39 @@ const useCardRegisterForm = (inputRefs: RefObject<Focus>[]) => {
     autoFocusNextInput(event.target);
   };
 
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
+    event.preventDefault();
+
+    if (!cardCompany) {
+      alert('카드를 터치 후 카드사를 선택해 주세요.');
+
+      return;
+    }
+
+    if (!isValidExpiredDate(Number(expiredMonth), Number(expiredYear))) {
+      const expiredMonthInput = inputRefs[4];
+
+      alert('유효한 만료일이 아닙니다. 다시 입력해주세요.');
+      expiredMonthInput.current?.focus();
+
+      return;
+    }
+
+    const cardData = {
+      cardCompany,
+      cardNumber1,
+      cardNumber2,
+      expiredMonth,
+      expiredYear,
+      owner: owner.trim(),
+    };
+
+    registerCard(cardData);
+    navigate('/card-nickname');
+  };
+
   return {
+    cardCompany,
     cardNumber1,
     cardNumber2,
     cardNumber3,
@@ -94,6 +146,7 @@ const useCardRegisterForm = (inputRefs: RefObject<Focus>[]) => {
     isCardFormFilled,
     handleNumberChange,
     handleOwnerChange,
+    handleSubmit,
   };
 };
 
