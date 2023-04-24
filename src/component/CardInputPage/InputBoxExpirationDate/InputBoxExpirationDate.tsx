@@ -19,6 +19,7 @@ export default function InputBoxExpirationDate(props: Props) {
     const originDate = e.target.value
       .split("/")
       .join("")
+      .replace(/\s/g, '')
       .slice(0, CONSTANT.MONTH_INPUT_MAX_LENGTH + CONSTANT.YEAR_INPUT_MAX_LENGTH);
 
     const formattedDate =
