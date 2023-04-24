@@ -2,6 +2,7 @@ import CardInput from '../CardInput/CardInput';
 import CardLabel from '../CardLabel/CardLabel';
 import styled from 'styled-components';
 import { useRef } from 'react';
+import { REG_EXP } from '../../constants/regexp';
 
 const Wrapper = styled.div`
   display: flex;
@@ -41,7 +42,7 @@ const CardPassword = ({ passwords, setPasswords }: CardPasswordProps) => {
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const currentOrder = Number(e.target.dataset['order']);
 
-    if (/[^0-9]/g.test(e.target.value)) {
+    if (REG_EXP.cardNumberLimit.test(e.target.value)) {
       return;
     }
 

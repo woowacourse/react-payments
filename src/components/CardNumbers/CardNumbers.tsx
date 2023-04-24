@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { REG_EXP } from '../../constants/regexp';
 import styled from 'styled-components';
 import CardInput from '../CardInput/CardInput';
 import CardLabel from '../CardLabel/CardLabel';
@@ -37,7 +38,7 @@ const CardNumbers = ({ cardNumbers, setCardNumbers }: CardNumbersProps) => {
     if (!(e.target instanceof HTMLInputElement)) return;
     const currentOrder = Number(e.target.dataset['order']);
 
-    if (/[^0-9]/g.test(e.target.value)) {
+    if (REG_EXP.cardNumberLimit.test(e.target.value)) {
       return;
     }
 

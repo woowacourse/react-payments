@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import CardInput from '../CardInput/CardInput';
 import CardLabel from '../CardLabel/CardLabel';
 import styled from 'styled-components';
+import { REG_EXP } from '../../constants/regexp';
 
 const Wrapper = styled.div`
   display: flex;
@@ -32,7 +33,7 @@ const CardOwnerName = ({
     if (!(e.target instanceof HTMLInputElement)) return;
 
     if (e.target.value.length === 0) setCardOwnerName('');
-    if (!/[A-Za-z\s]+$/.test(e.target.value)) return;
+    if (REG_EXP.cardNameForm.test(e.target.value)) return;
 
     setCardOwnerName(e.target.value.toUpperCase());
   };

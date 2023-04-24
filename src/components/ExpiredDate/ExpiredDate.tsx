@@ -2,6 +2,7 @@ import CardInput from '../CardInput/CardInput';
 import CardLabel from '../CardLabel/CardLabel';
 import styled from 'styled-components';
 import { useRef } from 'react';
+import { REG_EXP } from '../../constants/regexp';
 
 const Wrapper = styled.div`
   display: flex;
@@ -34,7 +35,7 @@ const ExpiredDate = ({ expiredDates, setExpiredDates }: ExpiredDateProps) => {
     if (!(e.target instanceof HTMLInputElement)) return;
     const currentOrder = Number(e.target.dataset['order']);
 
-    if (/[^0-9]/g.test(e.target.value)) {
+    if (REG_EXP.cardNumberLimit.test(e.target.value)) {
       return;
     }
     setExpiredDates({ ...expiredDates, [currentOrder]: e.target.value });
@@ -46,18 +47,18 @@ const ExpiredDate = ({ expiredDates, setExpiredDates }: ExpiredDateProps) => {
     const currentRef = cardExpiredDateRefs[currentOrder];
 
     if (currentRef.current === null) return;
-    // todo
+
     if (currentRef.current.value.length !== 2) return;
 
     if (currentOrder === 1) {
-      if (/^[0-9]{2}/g.test(currentRef.current.value)) return;
+      if (REG_EXP.cardExpiredYearForm.test(currentRef.current.value)) return;
       setExpiredDates({ ...expiredDates, 1: '' });
       return;
     }
 
     cardExpiredDateRefs[currentOrder + 1].current?.focus();
 
-    if (!/^(0[1-9]|1[0-2])/g.test(currentRef.current.value)) {
+    if (!REG_EXP.cardExpiredMonthForm.test(currentRef.current.value)) {
       setExpiredDates({ ...expiredDates, 0: '' });
       currentRef.current.focus();
       return;
