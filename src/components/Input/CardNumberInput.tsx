@@ -37,6 +37,7 @@ export default function CardNumberInput({
         maxLength={4}
         id="cardNumber"
         type="text"
+        pattern="^\d{4}$"
         required
         textAlign="center"
         {...firstNumber}
@@ -46,6 +47,7 @@ export default function CardNumberInput({
         isNumber={true}
         maxLength={4}
         type="text"
+        pattern="^\d{4}$"
         required
         textAlign="center"
         {...secondNumber}
@@ -55,6 +57,7 @@ export default function CardNumberInput({
         isNumber={true}
         maxLength={4}
         type="password"
+        pattern="^\d{4}$"
         required
         textAlign="center"
         {...thirdNumber}
@@ -64,6 +67,7 @@ export default function CardNumberInput({
         isNumber={true}
         maxLength={4}
         type="password"
+        pattern="^\d{4}$"
         required
         textAlign="center"
         {...fourthNumber}

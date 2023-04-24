@@ -1,9 +1,10 @@
-import { ChangeEvent, InputHTMLAttributes } from "react";
+import { InputHTMLAttributes } from "react";
 import styled from "styled-components";
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   textAlign?: string;
   isNumber?: boolean;
+  showError?: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
 
 const StyledInput = styled.input<{ textAlign?: string }>`
@@ -18,22 +19,14 @@ const StyledInput = styled.input<{ textAlign?: string }>`
 export default function Input({
   textAlign = "baseline",
   isNumber,
+  showError,
   ...rest
 }: InputProps) {
-  const onInput = (event: ChangeEvent<HTMLInputElement>) => {
-    if (!event.currentTarget) return;
-    event.currentTarget.value = event.currentTarget.value.replace(
-      /[^0-9]/g,
-      ""
-    );
-  };
-  const defaultOnInput = () => {};
-
   return (
     <StyledInput
       textAlign={textAlign}
       inputMode={isNumber ? "numeric" : "text"}
-      onInput={isNumber ? onInput : defaultOnInput}
+      onBlur={showError}
       {...rest}
     />
   );

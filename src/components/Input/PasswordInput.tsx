@@ -45,6 +45,7 @@ export default function PasswordInput({
         <Input
           isNumber={true}
           maxLength={1}
+          pattern="^[0-9]$"
           id="password"
           required
           type="password"
@@ -56,6 +57,7 @@ export default function PasswordInput({
         <Input
           isNumber={true}
           maxLength={1}
+          pattern="^[0-9]$"
           required
           type="password"
           textAlign="center"

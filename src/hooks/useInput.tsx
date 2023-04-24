@@ -1,36 +1,46 @@
 import { ChangeEvent, useState } from "react";
+import { ERROR_MESSAGE } from "../constant";
 
 export interface UseInputProps {
   value: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   name: string | undefined;
-  error: string | undefined;
+  showError?: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
 
 interface UseInputOptionProps {
   name?: string;
-  validate?: (text: string) => boolean;
-  errorMessage?: string;
 }
 
 export const useInput = (
   initialValue: string,
-  { name, validate = () => true, errorMessage }: UseInputOptionProps
+  { name }: UseInputOptionProps
 ): UseInputProps => {
   const [value, setValue] = useState(initialValue);
-  const [error, setError] = useState<string | undefined>("");
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.currentTarget.value;
+  const onChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
+    const { value, name, pattern } = target;
+    const regex = new RegExp(pattern);
 
-    if (validate(value)) {
-      setValue(value);
-      setError("");
-      return;
+    target.setCustomValidity(ERROR_MESSAGE[name]);
+    if (regex.test(value)) {
+      target.setCustomValidity("");
     }
 
-    setError(errorMessage);
+    const newValue = name === "owner" ? value.toUpperCase() : value;
+
+    setValue(newValue);
   };
 
-  return { value, onChange, name, error };
+  const showError = ({ target }: React.FocusEvent<HTMLInputElement>) => {
+    if (target.validity.patternMismatch) {
+      target.setCustomValidity(ERROR_MESSAGE[target.name]);
+      target.reportValidity();
+    }
+    if (target.validity.tooLong) {
+      target.setCustomValidity(ERROR_MESSAGE["LONG_INPUT"]);
+      target.reportValidity();
+    }
+  };
+  return { value, onChange, name, showError };
 };

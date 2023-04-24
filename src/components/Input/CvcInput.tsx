@@ -23,7 +23,7 @@ export default function CvcInput({ cvc }: CvcInputProps) {
         type="password"
         textAlign="center"
         isNumber={true}
-        maxLength={3}
+        pattern="^\d{3}$"
         required
         id="cvc"
         {...cvc}

@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useInput } from "../../hooks/useInput";
 import Card from "../Card";
 import CardNumberInput from "../Input/CardNumberInput";
@@ -24,7 +24,7 @@ import {
 } from "./AddCardPage.styles";
 
 interface AddCardPageProps {
-  onSubmit: (event: FormEvent<HTMLFormElement>) => void;
+  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   onClick: () => void;
 }
 
@@ -34,24 +34,11 @@ export default function AddCardPage({ onSubmit, onClick }: AddCardPageProps) {
   const thirdCardNumber = useInput("", { name: "thirdCardNumber" });
   const fourthCardNumber = useInput("", { name: "fourthCardNumber" });
 
-  const monthValidate = (month: string) => {
-    return Number(month) <= 12 && Number(month) >= 0;
-  };
-
-  const yearValidate = (year: string) => {
-    const currentYear = new Date().getFullYear();
-    return Number(year) >= 0;
-  };
-
   const year = useInput("", {
     name: "year",
-    validate: yearValidate,
-    errorMessage: "카드의 연도를 확인해주세요",
   });
   const month = useInput("", {
     name: "month",
-    validate: monthValidate,
-    errorMessage: "카드의 달을 확인해주세요.",
   });
 
   const owner = useInput("", { name: "owner" });
@@ -102,7 +89,7 @@ export default function AddCardPage({ onSubmit, onClick }: AddCardPageProps) {
           expiracy={`${month.value ? month.value : "MM"}/${
             year.value ? year.value : "YY"
           }`}
-          owner={owner.value}
+          owner={owner.value.toUpperCase()}
         />
       </CardWrapper>
       <InputWrapperParent onSubmit={onSubmit} ref={cardForm}>
@@ -118,7 +105,7 @@ export default function AddCardPage({ onSubmit, onClick }: AddCardPageProps) {
           <InputField kind="expiracy">
             <ExpiracyInput year={year} month={month} />
           </InputField>
-          <InputField kind="owner" inputLength={`${0}/30`}>
+          <InputField kind="owner" inputLength={`${owner.value.length}/30`}>
             <OwnerInput owner={owner} />
           </InputField>
           <InputField kind="cvc">

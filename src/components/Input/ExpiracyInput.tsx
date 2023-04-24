@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { UseInputProps } from "../../hooks/useInput";
 import Input from "../common/Input";
-import ToolTip from "../ToolTip";
 
 interface ExpiracyInputProps {
   year: UseInputProps;
@@ -39,6 +38,7 @@ export default function ExpiracyInput({ year, month }: ExpiracyInputProps) {
           maxLength={2}
           id="expiracy"
           isNumber={true}
+          pattern="^0[1-9]|1[0-2]$"
           required
           placeholder="MM"
           textAlign="center"
@@ -51,14 +51,13 @@ export default function ExpiracyInput({ year, month }: ExpiracyInputProps) {
           type="text"
           maxLength={2}
           isNumber={true}
+          pattern="^2[3-8]$"
           required
           placeholder="YY"
           textAlign="center"
           {...year}
         />
       </InputWrapper>
-      {month.error && <ToolTip text={month.error} />}
-      {year.error && <ToolTip text={year.error} />}
     </Wrapper>
   );
 }

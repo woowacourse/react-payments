@@ -22,6 +22,7 @@ export default function OwnerInput({ owner }: OwnerInputProps) {
       <Input
         type="text"
         maxLength={30}
+        pattern="^[a-zA-Z]{0,30}$"
         id="owner"
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
         {...owner}

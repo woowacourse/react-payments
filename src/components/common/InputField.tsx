@@ -11,6 +11,7 @@ export interface InputContainerProps {
   kind: InputTitle;
   children: JSX.Element;
   inputLength?: string;
+  errorMessage?: string;
 }
 
 const INPUT_INFO = {
@@ -57,11 +58,15 @@ const Label = styled.label`
 const InputLengthText = styled.span`
   letter-spacing: 1px;
 `;
-
+const ErrorMessage = styled.p`
+  color: red;
+  width: max-content;
+`;
 export default function InputField({
   kind,
   children,
   inputLength,
+  errorMessage,
 }: InputContainerProps) {
   return (
     <Wrapper width={INPUT_INFO[kind].width}>
@@ -69,8 +74,8 @@ export default function InputField({
         <span>{INPUT_INFO[kind].title}</span>
         <InputLengthText>{inputLength}</InputLengthText>
       </Label>
-
       {children}
+      <ErrorMessage>{errorMessage}</ErrorMessage>
     </Wrapper>
   );
 }
