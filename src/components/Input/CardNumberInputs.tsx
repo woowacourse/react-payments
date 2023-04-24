@@ -23,7 +23,10 @@ export function CardNumberInputs({ valueAndOnChanges }: CardNumberInputProps) {
 
     if (!isNumber) return;
 
-    if (index < inputRefs.length - 1 && value.trim().length === e.target.maxLength) {
+    const isLast = inputRefs.length - 1 === index;
+    const isInputMaxLength = value.trim().length === e.target.maxLength;
+
+    if (!isLast && isInputMaxLength) {
       inputRefs[index + 1].current?.focus();
     }
     onChange && onChange(e);
