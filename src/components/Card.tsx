@@ -88,6 +88,13 @@ const AddButton = styled.button`
   background: none;
   border: none;
   font-size: 30px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #eeeeee;
+    border-radius: 5px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  }
 `;
 
 interface CardProps {
