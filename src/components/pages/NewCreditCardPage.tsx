@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { SUCCESS_MESSAGE } from '../../constants/validation';
 import { usePayments } from '../../hooks/usePayments';
 import { useValidation } from '../../hooks/useValidation';
 import type { CreditCard, Month, Year } from '../../types/CreditCard';
@@ -118,9 +117,9 @@ export const NewCreditCardPage = () => {
         <FormGroup>
           <Text size="small">카드 번호</Text>
           <CardNumberInput value={newCard.cardNumbers} onChange={handleCardNumbersChange} />
-          {validationResult.cardNumbers !== SUCCESS_MESSAGE && (
+          {validationResult.cardNumbers?.success === false && (
             <Text size="small" color="red">
-              {validationResult.cardNumbers}
+              {validationResult.cardNumbers.errorMessage}
             </Text>
           )}
         </FormGroup>
@@ -131,9 +130,9 @@ export const NewCreditCardPage = () => {
             value={newCard.expirationDate}
             onChange={handleExpirationDateChange}
           />
-          {validationResult.expirationDate !== SUCCESS_MESSAGE && (
+          {validationResult.expirationDate?.success === false && (
             <Text size="small" color="red">
-              {validationResult.expirationDate}
+              {validationResult.expirationDate.errorMessage}
             </Text>
           )}
         </FormGroup>
@@ -161,9 +160,9 @@ export const NewCreditCardPage = () => {
             center
             type="password"
           />
-          {validationResult.cvc !== SUCCESS_MESSAGE && (
+          {validationResult.cvc?.success === false && (
             <Text size="small" color="red">
-              {validationResult.cvc}
+              {validationResult.cvc.errorMessage}
             </Text>
           )}
         </FormGroup>
@@ -171,9 +170,9 @@ export const NewCreditCardPage = () => {
         <FormGroup>
           <Text size="small">카드 비밀번호</Text>
           <CardPasswordInput value={newCard.password} onChange={handleCardPasswordChange} />
-          {validationResult.password !== SUCCESS_MESSAGE && (
+          {validationResult.password?.success === false && (
             <Text size="small" color="red">
-              {validationResult.password}
+              {validationResult.password.errorMessage}
             </Text>
           )}
         </FormGroup>
