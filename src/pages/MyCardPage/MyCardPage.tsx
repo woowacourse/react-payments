@@ -23,7 +23,7 @@ const MyCardPage = ({ cardInfoList }: { cardInfoList: CardInfo[] }) => {
   return (
     <styled.MyCardPage>
       <styled.CardRegisterMessage>새로운 카드를 등록해 주세요</styled.CardRegisterMessage>
-      <styled.CardRegisterButton onClick={handleClick}>
+      <styled.CardRegisterButton bgColor="#E5E5E5" onClick={handleClick}>
         <styled.ButtonIcon>+</styled.ButtonIcon>
       </styled.CardRegisterButton>
       <styled.CardList>{generateCardInfoList(cardInfoList)}</styled.CardList>
