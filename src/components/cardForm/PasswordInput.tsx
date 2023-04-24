@@ -10,18 +10,13 @@ import {
   isOverLength,
 } from '../../utils/InputValidate';
 import { ERROR_MESSAGE, INPUT_MAX_LENGTH } from '../../utils/Constants';
-import type { Card } from '../../types/Card';
+import type { Card, InputProps } from '../../types/Card';
 
-interface PasswordInputProps {
-  password: Card['password'];
-  setPassword: (password: Card['password']) => void;
-  errorMessage: string;
-  setErrorMessage: (errorMessage: string) => void;
-}
+type PasswordInputProps = InputProps<Card['password']>;
 
 const PasswordInput = ({
-  password,
-  setPassword,
+  value,
+  setValue,
   errorMessage,
   setErrorMessage,
 }: PasswordInputProps) => {
@@ -37,10 +32,10 @@ const PasswordInput = ({
         return;
       }
 
-      const newInputs = [...password];
+      const newInputs = [...value];
       newInputs[inputIndex] = inputValue;
 
-      setPassword(newInputs);
+      setValue(newInputs);
       setErrorMessage('');
 
       if (
@@ -61,7 +56,7 @@ const PasswordInput = ({
           <Input
             type='password'
             ref={refs[0]}
-            value={password[0]}
+            value={value[0]}
             onChange={handleChangeInput(0)}
           ></Input>
         </InputBox>
@@ -69,7 +64,7 @@ const PasswordInput = ({
           <Input
             type='password'
             ref={refs[1]}
-            value={password[1]}
+            value={value[1]}
             onChange={handleChangeInput(1)}
           ></Input>
         </InputBox>

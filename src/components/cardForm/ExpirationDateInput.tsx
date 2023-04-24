@@ -10,42 +10,37 @@ import {
   isValidMonth,
 } from '../../utils/InputValidate';
 import { ERROR_MESSAGE, INPUT_MAX_LENGTH } from '../../utils/Constants';
-import type { CardItemInfo } from '../../types/Card';
+import type { CardItemInfo, InputProps } from '../../types/Card';
 
-interface ExpirationDateInputProps {
-  expirationDate: CardItemInfo['expirationDate'];
-  setExpirationDate: (expirationDate: CardItemInfo['expirationDate']) => void;
-  errorMessage: string;
-  setErrorMessage: (errorMessage: string) => void;
-}
+type ExpirationDateInputProps = InputProps<CardItemInfo['expirationDate']>;
 
 const ExpirationDateInput = ({
-  expirationDate,
-  setExpirationDate,
+  value,
+  setValue,
   errorMessage,
   setErrorMessage,
 }: ExpirationDateInputProps) => {
   const refs = [useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null)];
 
   useEffect(() => {
-    if (!expirationDate[0].length && !expirationDate[1].length) return;
+    if (!value[0].length && !value[1].length) return;
 
     if (
-      expirationDate[0].length < INPUT_MAX_LENGTH.EXPIRATION_DATE_LENGTH ||
-      expirationDate[1].length < INPUT_MAX_LENGTH.EXPIRATION_DATE_LENGTH
+      value[0].length < INPUT_MAX_LENGTH.EXPIRATION_DATE_LENGTH ||
+      value[1].length < INPUT_MAX_LENGTH.EXPIRATION_DATE_LENGTH
     ) {
       setErrorMessage(ERROR_MESSAGE.EXPIRATION_DATE_FORM);
       return;
     }
 
     if (
-      expirationDate[0].length === INPUT_MAX_LENGTH.EXPIRATION_DATE_LENGTH &&
-      !isValidMonth(expirationDate[0])
+      value[0].length === INPUT_MAX_LENGTH.EXPIRATION_DATE_LENGTH &&
+      !isValidMonth(value[0])
     ) {
       setErrorMessage(ERROR_MESSAGE.VALID_MONTH);
       return;
     }
-  }, [expirationDate, setErrorMessage]);
+  }, [value, setErrorMessage]);
 
   const handleChangeInput =
     (inputIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -58,10 +53,10 @@ const ExpirationDateInput = ({
         return;
       }
 
-      const newInputs = [...expirationDate];
+      const newInputs = [...value];
       newInputs[inputIndex] = inputValue;
 
-      setExpirationDate(newInputs);
+      setValue(newInputs);
 
       if (
         isNextInputFocusable(
@@ -81,7 +76,7 @@ const ExpirationDateInput = ({
         <Input
           placeholder='MM'
           ref={refs[0]}
-          value={expirationDate[0]}
+          value={value[0]}
           onChange={handleChangeInput(0)}
         />
         <InputSeparator color='var(--grey-color)' isActive>
@@ -90,7 +85,7 @@ const ExpirationDateInput = ({
         <Input
           placeholder='YY'
           ref={refs[1]}
-          value={expirationDate[1]}
+          value={value[1]}
           onChange={handleChangeInput(1)}
         />
       </InputBox>

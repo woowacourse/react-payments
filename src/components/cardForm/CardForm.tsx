@@ -58,32 +58,32 @@ const CardForm = ({ onSubmitForm, onChangeForm }: CardFormProps) => {
   return (
     <FormContainer onSubmit={handleSubmitForm}>
       <CardNumberInput
-        cardNumber={cardNumber}
-        setCardNumber={setCardNumber}
+        value={cardNumber}
+        setValue={setCardNumber}
         errorMessage={cardNumberError}
         setErrorMessage={setCardNumberError}
       />
       <ExpirationDateInput
-        expirationDate={expirationDate}
-        setExpirationDate={setExpirationDate}
+        value={expirationDate}
+        setValue={setExpirationDate}
         errorMessage={expirationDateError}
         setErrorMessage={setExpirationDateError}
       />
       <NameInput
-        name={name}
-        setName={setName}
+        value={name}
+        setValue={setName}
         errorMessage={nameError}
         setErrorMessage={setNameError}
       />
       <SecurityCodeInput
-        securityCode={securityCode}
-        setSecurityCode={setSecurityCode}
+        value={securityCode}
+        setValue={setSecurityCode}
         errorMessage={securityCodeError}
         setErrorMessage={setSecurityCodeError}
       />
       <PasswordInput
-        password={password}
-        setPassword={setPassword}
+        value={password}
+        setValue={setPassword}
         errorMessage={passwordError}
         setErrorMessage={setPasswordError}
       />
