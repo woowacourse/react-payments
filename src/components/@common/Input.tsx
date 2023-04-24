@@ -39,6 +39,7 @@ const InputStyle = styled.input<StyledProps>`
   border: none;
   font-size: 18px;
   padding: 0 10px;
+  box-sizing: border-box;
   text-align: ${(props) => props.textAlign ?? 'center'};
 
   &:focus {

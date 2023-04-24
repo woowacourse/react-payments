@@ -52,7 +52,7 @@ export default CardRegisterForm;
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  row-gap: 19px;
+  row-gap: 5px;
 `;
 
 const NextButton = styled.button`
@@ -61,6 +61,7 @@ const NextButton = styled.button`
   background: none;
   border: none;
 
+  box-sizing: border-box;
   font-style: normal;
   font-weight: 700;
   font-size: 14px;

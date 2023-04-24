@@ -8,8 +8,8 @@ function ErrorSpan({ children }: PropsWithChildren) {
 export default ErrorSpan;
 
 const StyleSpan = styled.label`
-  font-size: 13px;
+  font-size: 10px;
   font-weight: 600;
-  line-height: 21px;
+
   color: red;
 `;
