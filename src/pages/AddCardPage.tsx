@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import type { CardNumber, InputHook } from '../type';
@@ -37,9 +37,9 @@ const AddCardPage = () => {
   const cardPassword1 = useInput('', cardPasswordCondition, handleNumberInput);
   const cardPassword2 = useInput('', cardPasswordCondition, handleNumberInput);
 
-  const onBackButtonClick = () => {
+  const onBackButtonClick = useCallback(() => {
     navigate('/');
-  };
+  }, [navigate]);
 
   const cardNumberProps: InputHook<CardNumber> = {
     value: cardNumber,

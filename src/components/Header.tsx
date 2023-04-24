@@ -9,4 +9,4 @@ const Header = ({ children }: HeaderType) => {
   return <div className="page-header">{children}</div>;
 };
 
-export default Header;
+export default React.memo(Header);
