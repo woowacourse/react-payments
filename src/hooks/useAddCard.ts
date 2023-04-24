@@ -1,57 +1,49 @@
 import { useEffect, useState } from 'react';
+import {
+  isCorrectCardNumber,
+  isCorrectExpiredDate,
+  isCorrectPassword,
+  isCorrectSecurityCode,
+} from '../validations/validationCardInfo';
 
 const useAddCard = () => {
-  const [cardNumbers, setCardNumbers] = useState<Record<number, string>>({
-    0: '',
-    1: '',
-    2: '',
-    3: '',
-  });
-  const [expiredDate, setExpiredDate] = useState<Record<number, string>>({
-    0: '',
-    1: '',
-  });
-  const [cardOwnerName, setCardOwnerName] = useState('');
-  const [securityCode, setSecurityCode] = useState('');
-  const [password, setPassword] = useState<Record<number, string>>({
-    0: '',
-    1: '',
-  });
-  const [disabled, setDisabled] = useState(true);
+  const [cardNumbers, setCardNumbers] = useState<Array<string>>([
+    '',
+    '',
+    '',
+    '',
+  ]);
+  const [expiredDates, setExpiredDates] = useState<Array<string>>(['', '']);
+  const [cardOwnerName, setCardOwnerName] = useState<string>('');
+  const [securityCode, setSecurityCode] = useState<string>('');
+  const [passwords, setPasswords] = useState<Array<string>>(['', '']);
+  const [isCorrectForm, setIsCorrectForm] = useState(true);
 
   useEffect(() => {
-    const { 0: expiredMonth, 1: expiredYear } = expiredDate;
-    const { 0: first, 1: second, 2: third, 3: fourth } = cardNumbers;
-    const { 0: firstPassword, 1: secondPassword } = password;
     if (
-      first.length !== 4 ||
-      second.length !== 4 ||
-      third.length !== 4 ||
-      fourth.length !== 4 ||
-      expiredMonth.length !== 2 ||
-      expiredYear.length !== 2 ||
-      securityCode.length !== 3 ||
-      !firstPassword ||
-      !secondPassword
+      isCorrectCardNumber(cardNumbers) &&
+      isCorrectExpiredDate(expiredDates) &&
+      isCorrectSecurityCode(securityCode) &&
+      isCorrectPassword(passwords)
     ) {
-      setDisabled(true);
+      setIsCorrectForm(false);
       return;
     }
-    setDisabled(false);
-  }, [expiredDate, cardNumbers, securityCode, password]);
+    setIsCorrectForm(true);
+  }, [cardNumbers, expiredDates, securityCode, passwords]);
 
   return {
     cardNumbers,
     setCardNumbers,
-    expiredDate,
-    setExpiredDate,
+    expiredDates,
+    setExpiredDates,
     cardOwnerName,
     setCardOwnerName,
     securityCode,
     setSecurityCode,
-    password,
-    setPassword,
-    disabled,
+    passwords,
+    setPasswords,
+    isCorrectForm,
   };
 };
 
