@@ -3,7 +3,7 @@ import { COLOR } from '../../constants/cardInfo';
 
 export const ExpirationDateInputBox = styled.div`
   position: relative;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 `;
 
 export const LabelHeader = styled.div`
@@ -12,7 +12,7 @@ export const LabelHeader = styled.div`
   margin-bottom: 5px;
 
   span {
-    font-size: 13px;
+    font-size: 15px;
   }
 `;
 

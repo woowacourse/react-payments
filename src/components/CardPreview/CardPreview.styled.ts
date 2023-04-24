@@ -6,5 +6,5 @@ export const CardPreview = styled.div`
 
   width: 100%;
 
-  margin: 30px 0;
+  margin-bottom: 40px;
 `;
