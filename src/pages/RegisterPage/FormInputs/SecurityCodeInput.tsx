@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { changeToValidValue } from "utils/inputValidator";
 import { HIDDEN_ELEMENT_STYLE } from "constants/style";
 import { LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
+import Input from "components/Input";
 const { ONLY_NUMBER } = VALID_INPUT;
 
 const SecurityCodeInput = () => {
@@ -23,7 +24,12 @@ const SecurityCodeInput = () => {
         보안 코드&#40;CVC/CVV&#41;
       </label>
       <S.Wrapper>
-        <S.Input
+        <Input
+          display="block"
+          width="24vw"
+          margin="0"
+          padding="0 4vw"
+          borderRadius="8px"
           type="password"
           name="code"
           id="code"
@@ -48,18 +54,6 @@ const S = {
     display: flex;
     align-items: center;
     margin-top: 12px;
-  `,
-
-  Input: styled.input`
-    display: block;
-    width: 24vw;
-    height: 48px;
-    padding: 0 4vw;
-    background: var(--input-background);
-    border-radius: 8px;
-    font-size: 14px;
-    text-align: center;
-    letter-spacing: 1px;
   `,
 
   QuestionMark: styled.p`

@@ -2,13 +2,12 @@ import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
 import { changeToValidValue } from "utils/inputValidator";
 import { LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
+import Input from "components/Input";
 const { ONLY_ENGLISH, INVALID_BLANK } = VALID_INPUT;
 
-type Name = string;
-
 interface Props {
-  name: Name;
-  setName: Dispatch<SetStateAction<Name>>;
+  name: string;
+  setName: Dispatch<SetStateAction<string>>;
 }
 
 const NameInput = ({ name, setName }: Props) => {
@@ -34,7 +33,12 @@ const NameInput = ({ name, setName }: Props) => {
           {name.length}/{LIMIT_LENGTH.NAME}
         </p>
       </S.Wrapper>
-      <S.Input
+      <Input
+        display="block"
+        width="88vw"
+        margin="10px 0 36px"
+        padding="0 8vw"
+        borderRadius="8px"
         type="text"
         name="name"
         id="name"
@@ -56,17 +60,6 @@ const S = {
       color: var(--label-color);
       font-size: 12px;
     }
-  `,
-
-  Input: styled.input`
-    display: block;
-    width: 88vw;
-    height: 48px;
-    margin: 10px 0 36px;
-    padding: 0 8vw;
-    font-size: 14px;
-    background: var(--input-background);
-    border-radius: 8px;
   `,
 };
 
