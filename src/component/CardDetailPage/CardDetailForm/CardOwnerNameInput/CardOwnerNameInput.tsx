@@ -22,7 +22,7 @@ function CardOwnerNameInput({
           maxLength={30}
           onInput={changeCardOwnerName}
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-        ></St.Input>
+        />
       </St.InputSection>
     </section>
   );

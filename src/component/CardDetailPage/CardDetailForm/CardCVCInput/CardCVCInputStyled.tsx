@@ -1,34 +1,22 @@
 import styled from "styled-components";
+import { Input, InputSection } from "../../../common/Input";
 
 const St = {
+  InputSection: styled(InputSection)`
+    width: 30%;
+  `,
+
+  Input: styled(Input)`
+    width: 60%;
+
+    font-size: 30px;
+    letter-spacing: 4px;
+  `,
+
   Contents: styled.section`
     display: flex;
     align-items: center;
     gap: 15px;
-  `,
-  InputSection: styled.section`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-
-    width: 30%;
-    height: 7vh;
-
-    border-radius: 7px;
-
-    background: #ecebf1;
-  `,
-
-  Input: styled.input`
-    width: 60%;
-
-    border: none;
-
-    text-align: center;
-    background: inherit;
-    font-size: 30px;
-    letter-spacing: 4px;
   `,
 
   Title: styled.h1`

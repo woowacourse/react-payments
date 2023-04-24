@@ -5,6 +5,7 @@ type CardCVCInputProps = {
   changeCardCVC: (e: React.ChangeEvent<HTMLInputElement>) => void;
   cardCVC: string;
 };
+
 function CardCVCInput({ changeCardCVC, cardCVC }: CardCVCInputProps) {
   return (
     <section>
@@ -17,7 +18,7 @@ function CardCVCInput({ changeCardCVC, cardCVC }: CardCVCInputProps) {
             minLength={3}
             required
             onInput={changeCardCVC}
-          ></St.Input>
+          />
         </St.InputSection>
         <St.Button type="button">?</St.Button>
       </St.Contents>

@@ -1,5 +1,6 @@
 import React from "react";
 import St from "./CardNumberInputStyled";
+import { Input, InputSection } from "../../../common/Input";
 
 type CardNumberInputProps = {
   changeCardNumber: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -13,15 +14,15 @@ function CardNumberInput({
   return (
     <section>
       <St.Title>카드 번호</St.Title>
-      <St.InputSection>
-        <St.Input
+      <InputSection>
+        <Input
           type="text"
           minLength={19}
           required
           value={cardNumberHidden}
           onInput={changeCardNumber}
-        ></St.Input>
-      </St.InputSection>
+        />
+      </InputSection>
     </section>
   );
 }

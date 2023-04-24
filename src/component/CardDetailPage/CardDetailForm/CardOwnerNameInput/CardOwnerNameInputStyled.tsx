@@ -1,28 +1,14 @@
 import styled from "styled-components";
+import { Input, InputSection } from "../../../common/Input";
 
 const St = {
-  InputSection: styled.section`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
+  InputSection: styled(InputSection)``,
 
-    width: 100%;
-    height: 7vh;
-
-    border-radius: 7px;
-
-    background: #ecebf1;
-  `,
-
-  Input: styled.input`
+  Input: styled(Input)`
     width: 100%;
 
-    border: none;
-
-    text-align: center;
-    background: inherit;
     font-size: 15px;
+    letter-spacing: 0;
   `,
 
   Title: styled.h1`

@@ -35,7 +35,7 @@ function CardPasswordInput({
               toNextInput(e);
               changeCardPassword(e);
             }}
-          ></St.Input>
+          />
         </St.InputSection>
         <St.InputSection>
           <St.Input
@@ -46,8 +46,9 @@ function CardPasswordInput({
             minLength={1}
             required
             onInput={changeCardPassword}
-          ></St.Input>
+          />
         </St.InputSection>
+
         <St.LastDigits>•</St.LastDigits>
         <St.LastDigits>•</St.LastDigits>
       </St.Contents>

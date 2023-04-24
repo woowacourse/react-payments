@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Input, InputSection } from "../../../common/Input";
 
 const St = {
   Contents: styled.section`
@@ -6,30 +7,16 @@ const St = {
     align-items: center;
     gap: 8px;
   `,
-  InputSection: styled.section`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
 
+  InputSection: styled(InputSection)`
     width: 17%;
-    height: 7vh;
-
-    border-radius: 7px;
-
-    background: #ecebf1;
   `,
 
-  Input: styled.input`
+  Input: styled(Input)`
     width: 60%;
 
-    border: none;
-
-    text-align: center;
-    background: inherit;
     font-size: 30px;
   `,
-
   Title: styled.h1`
     padding-bottom: 10px;
 
