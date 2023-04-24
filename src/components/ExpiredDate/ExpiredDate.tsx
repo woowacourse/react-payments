@@ -35,10 +35,10 @@ const ExpiredDate = ({ expiredDates, setExpiredDates }: ExpiredDateProps) => {
     if (!(e.target instanceof HTMLInputElement)) return;
     const currentOrder = Number(e.target.dataset['order']);
 
-    validateDate(currentOrder, e.target.value);
+    validateDate(currentOrder);
   };
 
-  const validateDate = (currentOrder: number, targetValue: string) => {
+  const validateDate = (currentOrder: number) => {
     const currentRef = cardExpiredDateRefs[currentOrder];
 
     if (currentRef.current === null) return;
@@ -59,7 +59,7 @@ const ExpiredDate = ({ expiredDates, setExpiredDates }: ExpiredDateProps) => {
 
     setExpiredDates({
       ...expiredDates,
-      [currentOrder]: targetValue,
+      [currentOrder]: currentRef.current.value,
     });
   };
 
