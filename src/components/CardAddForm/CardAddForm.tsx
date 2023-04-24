@@ -1,5 +1,5 @@
 import styles from './style.module.css';
-import { ChangeEvent, FormEvent, MouseEvent, useEffect, useRef } from 'react';
+import { ChangeEvent, FormEvent, MouseEvent, useContext } from 'react';
 import { CardFormData, CardFormValidation } from '../../types';
 import CardIssuer from './CardIssuer/CardIssuer';
 import CardNumber from './CardNumber/CardNumber';
@@ -29,24 +29,14 @@ function CardAddForm({
 }: CardAddFormProps) {
   const isFormComplete = useFormComplete(cardValidation);
 
-  const formRef = useRef<HTMLFormElement>(null);
-
-  useEffect(() => {
-    if (formRef.current && formRef.current[0] instanceof HTMLInputElement) {
-      formRef.current[0].focus();
-    }
-  }, []);
-
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (!isFormComplete) return;
-
-    handleCardInformationSubmit();
+    addCard(cardInformation);
   };
 
   return (
-    <form ref={formRef} className={styles.form} onSubmit={onSubmit}>
+    <form className={styles.form} onSubmit={onSubmit}>
       <CardIssuer
         onInputChange={onButtonInputChange}
         value={cardInformation.issuer}
