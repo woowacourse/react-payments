@@ -11,22 +11,20 @@ const MyCard = () => {
 
   return (
     <Page>
-      <>
-        <Header title="보유카드" isBack={false} />
-        {cards.map((card: CardType) => (
-          <CardWrapper key={crypto.randomUUID()}>
-            <Card
-              color={card.color}
-              ownerName={card.ownerName}
-              expiredDate={card.expiredDate}
-              cardNumber={card.cardNumber}
-            />
-          </CardWrapper>
-        ))}
-        <Link to="/AddCard" style={{ textDecoration: "none" }}>
-          <EmptyCardWrapper>+</EmptyCardWrapper>
-        </Link>
-      </>
+      <Header title="보유카드" isBack={false} />
+      {cards.map(({ color, ownerName, expiredDate, cardNumber }: CardType) => (
+        <CardWrapper key={crypto.randomUUID()}>
+          <Card
+            color={color}
+            ownerName={ownerName}
+            expiredDate={expiredDate}
+            cardNumber={cardNumber}
+          />
+        </CardWrapper>
+      ))}
+      <Link to="/AddCard" style={{ textDecoration: "none" }}>
+        <EmptyCardWrapper>+</EmptyCardWrapper>
+      </Link>
     </Page>
   );
 };
@@ -51,10 +49,7 @@ const EmptyCardWrapper = styled.div`
   text-decoration: none;
 
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+
   :active {
     transform: scale(0.98);
   }

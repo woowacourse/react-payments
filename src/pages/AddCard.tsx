@@ -19,14 +19,13 @@ const AddCard = () => {
   });
 
   const registerCard = (e: FormEvent) => {
-    console.log(card);
     const cards = getLocalStorage("card");
     setLocalStorage("card", [...cards, card]);
   };
 
   return (
     <Page>
-      <Header title="카드 추가" isBack={true} />
+      <Header title="카드 추가" isBack />
       <Card
         color={card.color}
         ownerName={card.ownerName}
