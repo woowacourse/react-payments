@@ -4,10 +4,21 @@ import type { NamedInputListBoxProps } from './Common/Input/NamedInputListBox';
 
 type PaymentsInputProps = NamedInputListBoxProps & { errorMessage?: string };
 
-function PaymentsInput({ inputListInformation, name, id, errorMessage }: PaymentsInputProps) {
+function PaymentsInput({
+  inputListInformation,
+  name,
+  id,
+  errorMessage,
+  showNumberOfValue = false,
+}: PaymentsInputProps) {
   return (
     <StyledPaymentsInput isBlankBridge={inputListInformation.bridgeLetter === ''}>
-      <NamedInputListBox inputListInformation={inputListInformation} name={name} id={id} />
+      <NamedInputListBox
+        inputListInformation={inputListInformation}
+        name={name}
+        id={id}
+        showNumberOfValue={showNumberOfValue}
+      />
       <p>{errorMessage}</p>
     </StyledPaymentsInput>
   );

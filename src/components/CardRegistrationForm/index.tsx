@@ -82,14 +82,23 @@ function CardRegistrationForm({
         name="카드 번호"
         inputListInformation={{
           inputInformation: [
-            { type: 'string', maxLength: 4, textAlign: 'center', placeholder: '1234' },
-            { type: 'string', maxLength: 4, textAlign: 'center', placeholder: '1234' },
-            { type: 'password', maxLength: 4, textAlign: 'center', placeholder: '1234' },
+            { type: 'string', minLength: 4, maxLength: 4, textAlign: 'center', placeholder: '1234', isRequired: true },
+            { type: 'string', minLength: 4, maxLength: 4, textAlign: 'center', placeholder: '1234', isRequired: true },
             {
               type: 'password',
+              minLength: 4,
               maxLength: 4,
               textAlign: 'center',
               placeholder: '1234',
+              isRequired: true,
+            },
+            {
+              type: 'password',
+              minLength: 4,
+              maxLength: 4,
+              textAlign: 'center',
+              placeholder: '1234',
+              isRequired: true,
               onBlur: checkValidator<CardNumber>(checkCardNumber, card.cardNumber, 'cardNumber'),
             },
           ],
@@ -103,12 +112,14 @@ function CardRegistrationForm({
         name="만료일"
         inputListInformation={{
           inputInformation: [
-            { type: 'string', maxLength: 2, textAlign: 'center', placeholder: 'MM' },
+            { type: 'string', minLength: 2, maxLength: 2, textAlign: 'center', placeholder: 'MM', isRequired: true },
             {
               type: 'string',
+              minLength: 2,
               maxLength: 2,
               textAlign: 'center',
               placeholder: 'YY',
+              isRequired: true,
               onBlur: checkValidator<ExpirationDate>(checkExpirationDate, card.expirationDate, 'expirationDate'),
             },
           ],
@@ -128,6 +139,7 @@ function CardRegistrationForm({
           getInputListValue: getInputListValue(setOwner),
         }}
         errorMessage={errorMessage?.owner}
+        showNumberOfValue
       />
       <PaymentsInput
         name="보안 코드(CVC/CVV)"
@@ -136,7 +148,9 @@ function CardRegistrationForm({
             {
               type: 'password',
               textAlign: 'center',
+              minLength: 3,
               maxLength: 3,
+              isRequired: true,
               onBlur: checkValidator<SecurityCode>(checkSecurityCode, card.securityCode, 'securityCode'),
             },
           ],
@@ -152,12 +166,14 @@ function CardRegistrationForm({
         name="카드 비밀번호"
         inputListInformation={{
           inputInformation: [
-            { type: 'password', textAlign: 'center', maxLength: 1 },
+            { type: 'password', textAlign: 'center', minLength: 1, maxLength: 1, isRequired: true },
             {
               type: 'password',
               textAlign: 'center',
+              minLength: 1,
               maxLength: 1,
               onBlur: checkValidator<CardPassword>(checkPassword, card.password, 'password'),
+              isRequired: true,
             },
           ],
           bridgeLetter: '',
