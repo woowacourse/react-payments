@@ -121,6 +121,7 @@ const CardRegisterForm = () => {
           <div className={styles.inputContainer}>
             <Input
               type="text"
+              inputMode="numeric"
               minLength={4}
               maxLength={4}
               required
@@ -134,6 +135,7 @@ const CardRegisterForm = () => {
             <span>-</span>
             <Input
               type="text"
+              inputMode="numeric"
               minLength={4}
               maxLength={4}
               required
@@ -146,6 +148,7 @@ const CardRegisterForm = () => {
             <span>-</span>
             <Input
               type="password"
+              inputMode="numeric"
               minLength={4}
               maxLength={4}
               required
@@ -158,6 +161,7 @@ const CardRegisterForm = () => {
             <span>-</span>
             <Input
               type="password"
+              inputMode="numeric"
               minLength={4}
               maxLength={4}
               required
@@ -175,6 +179,7 @@ const CardRegisterForm = () => {
           <div className={styles.expirationDate}>
             <Input
               type="text"
+              inputMode="numeric"
               minLength={2}
               maxLength={2}
               required
@@ -187,6 +192,7 @@ const CardRegisterForm = () => {
             <span>/</span>
             <Input
               type="text"
+              inputMode="numeric"
               minLength={2}
               maxLength={2}
               required
@@ -223,6 +229,7 @@ const CardRegisterForm = () => {
             <div className={styles.cvc}>
               <Input
                 type="password"
+                inputMode="numeric"
                 minLength={3}
                 maxLength={3}
                 required
@@ -244,6 +251,7 @@ const CardRegisterForm = () => {
           <div className={styles.cardPassword}>
             <Input
               type="password"
+              inputMode="numeric"
               minLength={1}
               maxLength={1}
               required
@@ -254,6 +262,7 @@ const CardRegisterForm = () => {
             />
             <Input
               type="password"
+              inputMode="numeric"
               minLength={1}
               maxLength={1}
               required
