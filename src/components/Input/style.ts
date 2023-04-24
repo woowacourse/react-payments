@@ -16,6 +16,7 @@ export const Input = styled.input<InputProps>`
     padding: 0px 12px;
     :focus {
         outline: none;
+        border: 2px solid gray;
     }
     margin-right: 10px;
 `;
