@@ -1,18 +1,22 @@
+import { useRef } from "react";
+
 interface Props {
-  initialRefs: Array<React.RefObject<HTMLInputElement>>;
   maxLength: number;
 }
 
-function useAutoFocus({ initialRefs, maxLength }: Props) {
-  const nextInputFocus = (index = 0) => {
-    if (index === initialRefs.length - 1) return;
+function useAutoFocus({ maxLength }: Props) {
+  const refs = useRef<HTMLInputElement[]>([]);
 
-    if (initialRefs[index].current?.value.length === maxLength) {
-      initialRefs[index + 1].current?.focus();
+  const nextInputFocus = (index = 0) => {
+    if (index === refs.current.length - 1) return;
+
+    if (refs.current[index]?.value.length === maxLength) {
+      refs.current[index + 1]?.focus();
     }
   };
 
   return {
+    refs,
     nextInputFocus,
   };
 }
