@@ -4,12 +4,14 @@ import { getLocalStorage, saveToLocalStorage } from '../utils/localStorage';
 
 interface PaymentsContextValue {
   cardList: Card[];
-  addCard: (cardInformation: CardFormData) => void;
+  addCard: (cardInformation: Card) => void;
+  updateCardName: (id: number, cardName: string) => void;
 }
 
 export const PaymentsContext = createContext<PaymentsContextValue>({
   cardList: [],
   addCard: (cardInformation: CardFormData) => {},
+  updateCardName: (id: number, cardName: string) => {},
 });
 
 export const PaymentsProvider = ({ children }: PropsWithChildren) => {
@@ -19,16 +21,25 @@ export const PaymentsProvider = ({ children }: PropsWithChildren) => {
     saveToLocalStorage(cardList);
   }, [cardList]);
 
-  const addCard = (cardInformation: CardFormData) => {
-    const newId = (cardList[cardList.length - 1]?.id ?? 0) + 1;
-    const newCard = { ...cardInformation, id: newId, cardName: `카드 ${cardList.length + 1}` };
-
+  const addCard = (newCard: Card) => {
     setCardList((cardList) => {
       return [...cardList, newCard];
     });
   };
 
+  const updateCardName = (id: number, cardName: string) => {
+    setCardList((cardList) => {
+      return cardList.map((card) => {
+        if (card.id === id) card.cardName = cardName;
+
+        return card;
+      });
+    });
+  };
+
   return (
-    <PaymentsContext.Provider value={{ cardList, addCard }}>{children}</PaymentsContext.Provider>
+    <PaymentsContext.Provider value={{ cardList, addCard, updateCardName }}>
+      {children}
+    </PaymentsContext.Provider>
   );
 };
