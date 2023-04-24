@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import CardNumber from "./CardNumber";
-import { CARD_ERROR_MESSAGE } from "../../../CONSTANT";
+import { CARD_ERROR_MESSAGE, INPUT_STATUS } from "../../../CONSTANT";
 
 import "./inputBoxCardNumber.css";
 import { CreditCard } from "../../../type";
@@ -16,12 +16,6 @@ interface Props {
 
 export default function InputBoxCardNumber(props: Props) {
   const { setIsComplete, changeNowCardInfo } = props;
-
-  const INPUT_STATUS = {
-    ERROR: 0,
-    NOT_COMPLETE: 1,
-    COMPLETE: 2,
-  };
 
   const [inputStatus, setInputStatus] = useState(INPUT_STATUS.NOT_COMPLETE);
 

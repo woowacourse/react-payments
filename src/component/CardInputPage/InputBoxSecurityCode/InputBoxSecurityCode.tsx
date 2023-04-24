@@ -3,17 +3,11 @@ import Input from "../../common/Input";
 
 import "./inputBoxSecurityCode.css";
 import { validateSecurityNumber } from "../../../validation/securityNumber";
-import { CARD_ERROR_MESSAGE } from "../../../CONSTANT";
+import { CARD_ERROR_MESSAGE, INPUT_STATUS } from "../../../CONSTANT";
 
 interface Props {
   setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
 }
-
-const INPUT_STATUS = {
-  ERROR: 0,
-  NOT_COMPLETE: 1,
-  COMPLETE: 2,
-};
 
 export default function InputBoxSecurityCode(props: Props) {
   const { setIsComplete } = props;

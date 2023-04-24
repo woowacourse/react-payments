@@ -4,6 +4,7 @@ import Input from "../../common/Input";
 
 import "./cardNumber.css";
 import { CreditCard } from "../../../type";
+import { INPUT_STATUS } from "../../../CONSTANT";
 
 interface Props {
   setCardNumber?: React.Dispatch<React.SetStateAction<number[]>>;
@@ -16,13 +17,32 @@ interface Props {
   ) => void;
 }
 
-const INPUT_STATUS = {
-  ERROR: 0,
-  NOT_COMPLETE: 1,
-  COMPLETE: 2,
+const initialEachStatus = {
+  first: 1,
+  seconde: 1,
+  third: 1,
+  fourth: 1,
+};
+
+type part = "first" | "second" | "third" | "fourth";
+interface EachStatus {
+  first: 0 | 1 | 2;
+  second: 0 | 1 | 2;
+  third: 0 | 1 | 2;
+  fourth: 0 | 1 | 2;
+}
+
+const changeEachStatus = function (
+  nowStatus: EachStatus,
+  part: part,
+  status: 0 | 1 | 2
+) {
+  const updateStatus = JSON.parse(JSON.stringify(nowStatus)) as EachStatus;
+  return (updateStatus[part] = status);
 };
 
 export default function CardNumber(props: Props) {
+  const [eacStatues, setEachStatues] = useState(initialEachStatus);
   const [inputStatus1, setInputStatus1] = useState(INPUT_STATUS.NOT_COMPLETE);
   const [inputStatus2, setInputStatus2] = useState(INPUT_STATUS.NOT_COMPLETE);
   const [inputStatus3, setInputStatus3] = useState(INPUT_STATUS.NOT_COMPLETE);

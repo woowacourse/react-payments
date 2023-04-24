@@ -2,7 +2,7 @@ import { useState, ChangeEvent, useEffect } from "react";
 import Input from "../../common/Input";
 
 import "./inputBoxOwner.css";
-import { CARD_ERROR_MESSAGE } from "../../../CONSTANT";
+import { CARD_ERROR_MESSAGE, INPUT_STATUS } from "../../../CONSTANT";
 import { validateCardOwner } from "../../../validation/cardOwner";
 import { CreditCard } from "../../../type";
 
@@ -14,12 +14,6 @@ interface Props {
     index?: number
   ) => void;
 }
-
-const INPUT_STATUS = {
-  ERROR: 0,
-  NOT_COMPLETE: 1,
-  COMPLETE: 2,
-};
 
 export default function InputBoxOwner(props: Props) {
   const { setIsComplete, changeNowCardInfo } = props;
