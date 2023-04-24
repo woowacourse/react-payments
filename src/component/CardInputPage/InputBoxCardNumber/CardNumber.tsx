@@ -7,7 +7,7 @@ import { CreditCard } from "../../../type";
 
 interface Props {
   setCardNumber?: React.Dispatch<React.SetStateAction<number[]>>;
-  setError: React.Dispatch<React.SetStateAction<boolean>>;
+  setInputStatus: React.Dispatch<React.SetStateAction<number>>;
   setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
   changeNowCardInfo: (
     key: keyof CreditCard,
@@ -28,7 +28,7 @@ export default function CardNumber(props: Props) {
   const [inputStatus3, setInputStatus3] = useState(INPUT_STATUS.NOT_COMPLETE);
   const [inputStatus4, setInputStatus4] = useState(INPUT_STATUS.NOT_COMPLETE);
 
-  const { setError, setIsComplete, changeNowCardInfo } = props;
+  const { setInputStatus, setIsComplete, changeNowCardInfo } = props;
 
   useEffect(() => {
     const hasError = [
@@ -38,7 +38,9 @@ export default function CardNumber(props: Props) {
       inputStatus4,
     ].includes(INPUT_STATUS.ERROR);
 
-    setError(hasError);
+    hasError
+      ? setInputStatus(INPUT_STATUS.ERROR)
+      : setInputStatus(INPUT_STATUS.NOT_COMPLETE);
 
     const isComplete = [
       inputStatus1,

@@ -17,16 +17,23 @@ interface Props {
 export default function InputBoxCardNumber(props: Props) {
   const { setIsComplete, changeNowCardInfo } = props;
 
-  const [error, setError] = useState(true);
+  const INPUT_STATUS = {
+    ERROR: 0,
+    NOT_COMPLETE: 1,
+    COMPLETE: 2,
+  };
+
+  const [inputStatus, setInputStatus] = useState(INPUT_STATUS.NOT_COMPLETE);
+
   return (
     <div className="input-box-card-number">
       <p>카드번호</p>
       <CardNumber
-        setError={setError}
+        setInputStatus={setInputStatus}
         setIsComplete={setIsComplete}
         changeNowCardInfo={changeNowCardInfo}
       />
-      <p className={error ? "visible" : ""}>
+      <p className={inputStatus === INPUT_STATUS.ERROR ? "visible" : ""}>
         {CARD_ERROR_MESSAGE.INPUT_CARD_NUMBER}
       </p>
     </div>
