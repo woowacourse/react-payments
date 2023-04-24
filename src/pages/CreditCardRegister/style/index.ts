@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/indent */
 import styled, { keyframes } from 'styled-components';
 
 export const CreditCardRegisterLayout = styled.div`
