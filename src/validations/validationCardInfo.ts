@@ -14,7 +14,7 @@ export const isCorrectCardNumber = (cardNumbers: Array<string>) => {
 
 export const isCorrectExpiredDate = (expiredDates: Array<string>) => {
   if (
-    Number(expiredDates[0]) >= nowDate.getMonth() + 1 ||
+    Number(expiredDates[0]) > nowDate.getMonth() ||
     Number(expiredDates[1]) > nowDate.getFullYear() % 2000
   ) {
     return true;

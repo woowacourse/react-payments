@@ -35,34 +35,32 @@ const ExpiredDate = ({ expiredDates, setExpiredDates }: ExpiredDateProps) => {
     if (!(e.target instanceof HTMLInputElement)) return;
     const currentOrder = Number(e.target.dataset['order']);
 
-    if (REG_EXP.cardNumberLimit.test(e.target.value)) {
-      return;
-    }
-    setExpiredDates({ ...expiredDates, [currentOrder]: e.target.value });
-
-    validateDate(currentOrder);
+    validateDate(currentOrder, e.target.value);
   };
 
-  const validateDate = (currentOrder: number) => {
+  const validateDate = (currentOrder: number, targetValue: string) => {
     const currentRef = cardExpiredDateRefs[currentOrder];
 
     if (currentRef.current === null) return;
 
-    if (currentRef.current.value.length !== 2) return;
-
-    if (currentOrder === 1) {
-      if (REG_EXP.cardExpiredYearForm.test(currentRef.current.value)) return;
-      setExpiredDates({ ...expiredDates, 1: '' });
+    if (REG_EXP.cardNumberLimit.test(currentRef.current.value)) {
       return;
     }
 
-    cardExpiredDateRefs[currentOrder + 1].current?.focus();
+    if (currentRef.current.value.length === 2 && currentOrder === 0) {
+      cardExpiredDateRefs[currentOrder + 1].current?.focus();
 
-    if (!REG_EXP.cardExpiredMonthForm.test(currentRef.current.value)) {
-      setExpiredDates({ ...expiredDates, 0: '' });
-      currentRef.current.focus();
-      return;
+      if (!/^(0[1-9]|1[0-2])/g.test(currentRef.current.value)) {
+        setExpiredDates({ ...expiredDates, 0: '' });
+        currentRef.current.focus();
+        return;
+      }
     }
+
+    setExpiredDates({
+      ...expiredDates,
+      [currentOrder]: targetValue,
+    });
   };
 
   return (
