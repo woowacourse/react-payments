@@ -10,7 +10,7 @@ type HomeProps = {
 const Home = ({ cardInfo }: HomeProps) => {
   return (
     <>
-      <EmptyHeader />
+      <Header title="보유카드" />
       <CardList cardInfo={cardInfo} />
       <AddCardButton showMessage={cardInfo.length === 0} />
     </>
