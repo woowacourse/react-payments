@@ -4,6 +4,7 @@ import { useCardNumber } from '../../../../hooks/card/card';
 import { CardNumber } from '../../../../types/card.type';
 import Flex from '../../../@common/Flex/Flex';
 import Input from '../../../@common/Input/Input';
+import { StyledCardRegister } from '../@common/CardRegister.styles';
 import * as Styled from './CardNumberInput.styles';
 
 export default function CardNumberInput() {
@@ -13,10 +14,7 @@ export default function CardNumberInput() {
   } = useCardRegisterContext();
   const { defaultConditions } = useCardNumber();
 
-  const onChangeValue: <T extends keyof CardNumber>(
-    key: T,
-    value: CardNumber[T]
-  ) => void = (key, value) => {
+  const onChangeValue: <T extends keyof CardNumber>(key: T, value: CardNumber[T]) => void = (key, value) => {
     handleCardInfo('cardNumber', {
       ...cardNumber,
       [key]: value,
@@ -24,10 +22,10 @@ export default function CardNumberInput() {
   };
 
   return (
-    <Styled.FieldSet>
+    <StyledCardRegister.FieldSet>
       <Flex dir="column" justify="start" width="100%">
-        <Styled.Legend>카드 번호</Styled.Legend>
-        <Styled.InputBackground>
+        <StyledCardRegister.Legend>카드 번호</StyledCardRegister.Legend>
+        <StyledCardRegister.InputBackground>
           <Input>
             <Input.Field
               name="first"
@@ -35,60 +33,49 @@ export default function CardNumberInput() {
                 onChangeValue('first', value);
               }}
               value={cardNumber['first']}
-              {...defaultConditions}>
+              {...defaultConditions}
+            >
               <Styled.Input />
             </Input.Field>
           </Input>
-          <Styled.Divider
-            show={Boolean(cardNumber['first'] || cardNumber['second'])}>
-            -
-          </Styled.Divider>
+          <Styled.Divider show={Boolean(cardNumber['first'] || cardNumber['second'])}>-</Styled.Divider>
           <Input>
             <Input.Field
               name="second"
               value={cardNumber['second']}
-              onChange={({ target: { value } }) =>
-                onChangeValue('second', value)
-              }
+              onChange={({ target: { value } }) => onChangeValue('second', value)}
               autoComplete="off"
-              {...defaultConditions}>
+              {...defaultConditions}
+            >
               <Styled.Input />
             </Input.Field>
           </Input>
-          <Styled.Divider
-            show={Boolean(cardNumber['second'] || cardNumber['third'])}>
-            -
-          </Styled.Divider>
+          <Styled.Divider show={Boolean(cardNumber['second'] || cardNumber['third'])}>-</Styled.Divider>
           <Input>
             <Input.Field
               name="third"
               type="password"
               value={cardNumber['third']}
-              onChange={({ target: { value } }) =>
-                onChangeValue('third', value)
-              }
-              {...defaultConditions}>
+              onChange={({ target: { value } }) => onChangeValue('third', value)}
+              {...defaultConditions}
+            >
               <Styled.Input />
             </Input.Field>
           </Input>
-          <Styled.Divider
-            show={Boolean(cardNumber['third'] || cardNumber['fourth'])}>
-            -
-          </Styled.Divider>
+          <Styled.Divider show={Boolean(cardNumber['third'] || cardNumber['fourth'])}>-</Styled.Divider>
           <Input>
             <Input.Field
               name="fourth"
               type="password"
               value={cardNumber['fourth']}
-              onChange={({ target: { value } }) =>
-                onChangeValue('fourth', value)
-              }
-              {...defaultConditions}>
+              onChange={({ target: { value } }) => onChangeValue('fourth', value)}
+              {...defaultConditions}
+            >
               <Styled.Input />
             </Input.Field>
           </Input>
-        </Styled.InputBackground>
+        </StyledCardRegister.InputBackground>
       </Flex>
-    </Styled.FieldSet>
+    </StyledCardRegister.FieldSet>
   );
 }

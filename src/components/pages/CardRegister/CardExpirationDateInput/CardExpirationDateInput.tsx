@@ -4,6 +4,7 @@ import { useCardExpirationDate } from '../../../../hooks/card/card';
 import { ExpirationDate } from '../../../../types/card.type';
 import Flex from '../../../@common/Flex/Flex';
 import Input from '../../../@common/Input/Input';
+import { StyledCardRegister } from '../@common/CardRegister.styles';
 import * as Styled from './CardExpirationDateInput.styles';
 
 export default function CardExpirationDateInput() {
@@ -24,9 +25,9 @@ export default function CardExpirationDateInput() {
   };
 
   return (
-    <Styled.FieldSet>
+    <StyledCardRegister.FieldSet>
       <Flex dir="column" justify="start">
-        <Styled.Legend>만료일</Styled.Legend>
+        <StyledCardRegister.Legend>만료일</StyledCardRegister.Legend>
         <Styled.InputBackground>
           <Input>
             <Input.Field
@@ -53,6 +54,6 @@ export default function CardExpirationDateInput() {
           </Input>
         </Styled.InputBackground>
       </Flex>
-    </Styled.FieldSet>
+    </StyledCardRegister.FieldSet>
   );
 }

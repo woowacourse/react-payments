@@ -1,24 +1,24 @@
-import { DefaultTheme } from 'styled-components';
+const colors = {
+  gray1: '#ecebf1',
+  gray2: '#525252',
+} as const;
 
-export const theme: DefaultTheme = {
-  light: {
-    border: '#ccc',
-    color: '#333',
-    backgroundColor: '#f8f8f8',
-  },
-  dark: {
-    border: '#333',
-    color: '#fff',
-    backgroundColor: '#111',
-  },
-  blue: {
-    border: 'blue',
-    color: 'white',
-    backgroundColor: 'blue',
-  },
-  pale: {
-    border: '#ccc',
-    color: '#333',
-    backgroundColor: '#ECEBF1',
-  },
+const registerFormInput = {
+  padding: 0,
+
+  borderRadius: '7px',
+  border: 'none',
+  outline: 'none',
+
+  background: colors.gray1,
+} as const;
+
+export type RegisterFormInputType = typeof registerFormInput;
+export type Colors = typeof colors;
+
+const theme = {
+  registerFormInput,
+  colors,
 };
+
+export default theme;

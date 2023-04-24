@@ -1,16 +1,9 @@
 import 'styled-components';
+import { Colors, RegisterFormInputType } from '../styles/theme';
 
 declare module 'styled-components' {
-  interface Theme {
-    border: string;
-    color: string;
-    backgroundColor: string;
-  }
-
   export interface DefaultTheme {
-    light: Theme;
-    dark: Theme;
-    blue: Theme;
-    pale: Theme;
+    registerFormInput: RegisterFormInputType;
+    colors: Colors;
   }
 }

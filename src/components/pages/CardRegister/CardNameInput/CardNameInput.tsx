@@ -4,6 +4,7 @@ import { useCardName } from '../../../../hooks/card/card';
 import { CardRegisterInfo } from '../../../../types/card.type';
 import Flex from '../../../@common/Flex/Flex';
 import Input from '../../../@common/Input/Input';
+import { StyledCardRegister } from '../@common/CardRegister.styles';
 import * as Styled from './CardNameInput.styles';
 
 export default function CardNameInput() {
@@ -22,7 +23,7 @@ export default function CardNameInput() {
       <Input>
         <Flex justify="space-between">
           <Input.Label asChild>
-            <Styled.Label>카드소유자이름(선택)</Styled.Label>
+            <StyledCardRegister.Label>카드소유자이름(선택)</StyledCardRegister.Label>
           </Input.Label>
           <Input.Limit limit={30}>
             {({ value, limit }) => (
@@ -32,7 +33,7 @@ export default function CardNameInput() {
             )}
           </Input.Limit>
         </Flex>
-        <Styled.InputBackground>
+        <StyledCardRegister.InputBackground>
           <Input.Field
             name="name"
             id="name"
@@ -40,10 +41,11 @@ export default function CardNameInput() {
             onChange={({ target: { value } }) => {
               onChangeValue(value);
             }}
-            {...defaultConditions}>
+            {...defaultConditions}
+          >
             <Styled.Input />
           </Input.Field>
-        </Styled.InputBackground>
+        </StyledCardRegister.InputBackground>
       </Input>
     </Flex>
   );

@@ -3,7 +3,7 @@ import { Meta, Story } from '@storybook/react';
 import CardNameInput from './CardNameInput';
 import CardRegisterProvider from '../../../../context/CardRegisterContext';
 import { ThemeProvider } from 'styled-components';
-import { theme } from '../../../../styles/theme';
+import theme from '../../../../styles/theme';
 
 export default {
   title: 'Components/CardNameInput',
