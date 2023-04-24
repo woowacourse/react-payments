@@ -1,4 +1,4 @@
-import React, { FormEvent, useEffect, useRef, useState } from 'react';
+import React, { FormEvent, useRef } from 'react';
 import styled from 'styled-components';
 import { useInput } from '../hooks/useInput';
 import PrevButton from '../components/common/PrevButton';
@@ -138,8 +138,6 @@ export default function AddCardPage({
     name: 'secondPasswordInput',
     maxLength: 1,
   });
-
-  const [isFormfilled, setIsFormfilled] = useState(true);
 
   const monthValidate = (month: string) => {
     return Number(month) <= 12 && Number(month) >= 0;
@@ -304,21 +302,6 @@ export default function AddCardPage({
     }
   };
 
-  useEffect(() => {
-    if (!cardForm.current) return;
-    setIsFormfilled(!cardForm.current.checkValidity());
-  }, [
-    firstCardNumber.value,
-    secondCardNumber.value,
-    thirdCardNumber.value,
-    fourthCardNumber.value,
-    year.value,
-    month.value,
-    cvc.value,
-    firstPassword.value,
-    secondPassword.value,
-  ]);
-
   return (
     <Page>
       <TitleWrapper>
@@ -372,7 +355,11 @@ export default function AddCardPage({
           </InputField>
         </InputWrapper>
         <NextButtonWrapper>
-          <NextButton isDisable={isFormfilled} />
+          <NextButton
+            isDisable={
+              cardForm.current ? !cardForm.current.checkValidity() : true
+            }
+          />
         </NextButtonWrapper>
       </InputWrapperParent>
     </Page>
