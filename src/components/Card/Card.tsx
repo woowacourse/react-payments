@@ -13,10 +13,10 @@ const Card = ({ cardInfo, bgColor }: { cardInfo: CardInfo; bgColor: string }) =>
           <input disabled type="password" defaultValue={cardInfo.cardNumbers.fourth} />
         </styled.CardNumber>
         <styled.CardNameAndExpirationDateContainer>
-          <styled.CardName>{cardInfo.ownerName ? cardInfo.ownerName : 'NAME'}</styled.CardName>
-          <styled.ExpirationDate>{`${cardInfo.expirationDate.month ? cardInfo.expirationDate.month : 'MM'}/${
-            cardInfo.expirationDate.year ? cardInfo.expirationDate.year : 'YY'
-          }`}</styled.ExpirationDate>
+          <styled.CardName>{cardInfo.ownerName ?? 'NAME'}</styled.CardName>
+          <styled.ExpirationDate>{`
+					${cardInfo.expirationDate.month ?? 'MM'}/${cardInfo.expirationDate.year ?? 'YY'}
+					`}</styled.ExpirationDate>
         </styled.CardNameAndExpirationDateContainer>
       </styled.CardInformationContainer>{' '}
     </styled.Card>

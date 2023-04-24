@@ -21,10 +21,10 @@ const CardRegisterPage = ({ setCardInfoList }: { setCardInfoList: SetCardInfoLis
       fourth: '',
     },
     expirationDate: {
-      month: '',
-      year: '',
+      month: null,
+      year: null,
     },
-    ownerName: '',
+    ownerName: null,
     securityCode: '',
     password: {
       first: '',
@@ -45,7 +45,9 @@ const CardRegisterPage = ({ setCardInfoList }: { setCardInfoList: SetCardInfoLis
       cardInfo.cardNumbers.second.length === 4 &&
       cardInfo.cardNumbers.third.length === 4 &&
       cardInfo.cardNumbers.fourth.length === 4 &&
+      cardInfo.expirationDate.month &&
       cardInfo.expirationDate.month.length === 2 &&
+      cardInfo.expirationDate.year &&
       cardInfo.expirationDate.year.length === 2 &&
       cardInfo.securityCode.length === 3 &&
       cardInfo.password.first.length === 1 &&

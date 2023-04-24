@@ -52,7 +52,7 @@ const ExpirationDateInputBox = ({
               <Input
                 key={key}
                 name={key}
-                value={value}
+                value={value ?? ''}
                 onChange={onChange}
                 width="s"
                 type="text"
