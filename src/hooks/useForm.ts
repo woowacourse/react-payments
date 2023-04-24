@@ -1,5 +1,6 @@
 import { ChangeEvent, RefObject, useState } from 'react';
 import { Validator } from '../types/validator';
+import { isNumeric } from '../utils';
 
 interface ValuesState {
   [key: string]: string;
@@ -39,10 +40,6 @@ const useForm = (refs: IRefs, validator: Validator) => {
 
       return false;
     });
-  };
-
-  const isNumeric = (value: string) => {
-    return /^[0-9]*$/.test(value);
   };
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
