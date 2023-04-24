@@ -1,15 +1,15 @@
 export const validateExpirationDate = (date: string) => {
   if (date === "") return true;
 
-  const [month, year] = date.split("/");
+  const [month, year] = date.split("/").map(Number);
 
-  const regExp = /^\d{0,2}$/;
-  const isMonthCorrect =
-    regExp.test(month) && Number(month) <= 12 && Number(month) >= 1;
+  if (1 > month || month > 12) return false;
+  if (year === undefined) return true;
 
-  if (!year) {
-    return isMonthCorrect;
-  }
+  if (year === 2) return true;
 
-  return isMonthCorrect && regExp.test(year) && Number.isInteger(+year);
+  if (month <= 3 && 24 <= year && year <= 28) return true;
+  if (month >= 4 && 23 <= year && year <= 27) return true;
+
+  return false;
 };
