@@ -1,23 +1,25 @@
-import type { Meta } from '@storybook/react';
-import React, { useRef } from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
 import SecurityCode from './SecurityCode';
+import { CreditCardProvider } from '../../../contexts/CreditCardContext';
 
 const securityCode = {
   component: SecurityCode,
   title: 'SecurityCode',
+  decorators: [
+    (Story) => {
+      return (
+        <CreditCardProvider>
+          <Story />
+        </CreditCardProvider>
+      );
+    },
+  ],
 } satisfies Meta<typeof SecurityCode>;
 
 export default securityCode;
 
-export const Example = () => {
-  const registerCard = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-  };
+type Story = StoryObj<typeof securityCode>;
 
-  return (
-    <form onSubmit={registerCard}>
-      <SecurityCode />
-      <button>다음</button>
-    </form>
-  );
-};
+export const Example = {
+  args: {},
+} satisfies Story;

@@ -1,30 +1,25 @@
-import { Meta } from '@storybook/react';
-import React, { useRef } from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { CardNumber } from './CardNumber';
+import { CreditCardProvider } from '../../../contexts/CreditCardContext';
 
 const cardNumber = {
   component: CardNumber,
-  title: 'Card Number Input',
+  title: 'CardNumber',
+  decorators: [
+    (Story) => {
+      return (
+        <CreditCardProvider>
+          <Story />
+        </CreditCardProvider>
+      );
+    },
+  ],
 } satisfies Meta<typeof CardNumber>;
 
 export default cardNumber;
 
-export const Example = () => {
-  const divRef = useRef<HTMLDivElement>(null);
+type Story = StoryObj<typeof cardNumber>;
 
-  const registerCard = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    divRef.current?.childNodes.forEach((elem) => {
-      if (elem instanceof HTMLInputElement) {
-        console.log(elem.value);
-      }
-    });
-  };
-
-  return (
-    <form onSubmit={registerCard}>
-      <CardNumber />
-      <button>다음</button>
-    </form>
-  );
-};
+export const Example = {
+  args: {},
+} satisfies Story;
