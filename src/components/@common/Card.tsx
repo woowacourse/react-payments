@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import refineExpirationDate from '../../utils/refineExpirationDate';
+import useCardNumber from '../../hooks/useCardNumber';
 
 interface CardProps {
   cardNumber: string[];
@@ -8,14 +9,15 @@ interface CardProps {
 }
 
 const Card = ({ cardNumber, ownerName, expirationDate }: CardProps) => {
+  const cardNumberList = useCardNumber(cardNumber);
+
   return (
     <CardContainer>
       <CardChip></CardChip>
       <CardNumberContainer>
-        <span>{cardNumber[0]}</span>
-        <span>{cardNumber[1]}</span>
-        <span>{'•'.repeat(cardNumber[2].length)}</span>
-        <span>{'•'.repeat(cardNumber[3].length)}</span>
+        {cardNumberList.map((numberValue, index) => (
+          <span key={index + numberValue}>{numberValue}</span>
+        ))}
       </CardNumberContainer>
       <CardNameContainer>
         <span>{ownerName}</span>
