@@ -20,7 +20,7 @@ export const PaymentsProvider = ({ children }: PropsWithChildren) => {
   }, [cardList]);
 
   const addCard = (cardInformation: CardFormData) => {
-    const newId = (cardList[cardList.length - 1].id ?? 0) + 1;
+    const newId = (cardList[cardList.length - 1]?.id ?? 0) + 1;
     const newCard = { ...cardInformation, id: newId, cardName: `카드 ${cardList.length + 1}` };
 
     setCardList((cardList) => {
