@@ -28,9 +28,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "build-storybook": "storybook build"
   },
   "eslintConfig": {
     "extends": [
