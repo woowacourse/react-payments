@@ -13,9 +13,13 @@ export const isCorrectCardNumber = (cardNumbers: Array<string>) => {
 };
 
 export const isCorrectExpiredDate = (expiredDates: Array<string>) => {
+  const expiredMonth = Number(expiredDates[0]);
+  const expiredYear = Number(expiredDates[1]);
+
   if (
-    Number(expiredDates[0]) > nowDate.getMonth() ||
-    Number(expiredDates[1]) > nowDate.getFullYear() % 2000
+    (expiredMonth > nowDate.getMonth() &&
+      expiredYear >= nowDate.getFullYear() % 2000) ||
+    expiredYear > nowDate.getFullYear() % 2000
   ) {
     return true;
   }
