@@ -17,4 +17,5 @@
 
 .button:disabled {
   color: var(--transparent-black-color);
+  cursor: not-allowed;
 }
