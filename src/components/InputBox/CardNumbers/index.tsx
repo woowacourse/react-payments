@@ -8,15 +8,15 @@ const CardNumbers = ({ children, error }: InputBoxProps) => {
         <styled.LabelHeader>카드 번호</styled.LabelHeader>
         <styled.CardNumbersInputs>{children}</styled.CardNumbersInputs>
       </label>
-      {(error?.firstCardNumbers ||
-        error?.secondCardNumbers ||
-        error?.thirdCardNumbers ||
-        error?.fourthCardNumbers) && (
+      {(error.firstCardNumbers ||
+        error.secondCardNumbers ||
+        error.thirdCardNumbers ||
+        error.fourthCardNumbers) && (
         <styled.ErrorMessage>
-          {error?.firstCardNumbers ||
-            error?.secondCardNumbers ||
-            error?.thirdCardNumbers ||
-            error?.fourthCardNumbers}
+          {error.firstCardNumbers ||
+            error.secondCardNumbers ||
+            error.thirdCardNumbers ||
+            error.fourthCardNumbers}
         </styled.ErrorMessage>
       )}
     </styled.CardNumbers>

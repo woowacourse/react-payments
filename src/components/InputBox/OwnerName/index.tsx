@@ -18,7 +18,7 @@ const OwnerName = ({ ownerName, maxLength, children, error }: OwnerNameProps) =>
         </styled.LabelHeader>
         {children}
       </label>
-      {error?.ownerName && <styled.ErrorMessage>{error?.ownerName}</styled.ErrorMessage>}
+      {error.ownerName && <styled.ErrorMessage>{error.ownerName}</styled.ErrorMessage>}
     </styled.OwnerName>
   );
 };

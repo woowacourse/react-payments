@@ -8,9 +8,7 @@ const SecurityNumbers = ({ children, error }: InputBoxProps) => {
         <styled.LabelHeader>보안 코드(CVC/CVV)</styled.LabelHeader>
         {children}
       </label>
-      {error?.securityNumbers && (
-        <styled.ErrorMessage>{error?.securityNumbers}</styled.ErrorMessage>
-      )}
+      {error.securityNumbers && <styled.ErrorMessage>{error.securityNumbers}</styled.ErrorMessage>}
     </styled.SecurityNumbers>
   );
 };

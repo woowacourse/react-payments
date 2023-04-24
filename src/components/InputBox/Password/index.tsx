@@ -8,8 +8,8 @@ const Password = ({ children, error }: InputBoxProps) => {
         <styled.LabelHeader>카드 비밀번호</styled.LabelHeader>
         <styled.PasswordInputs>{children}</styled.PasswordInputs>
       </label>
-      {(error?.firstPassword || error?.secondPassword) && (
-        <styled.ErrorMessage>{error?.firstPassword || error?.secondPassword}</styled.ErrorMessage>
+      {(error.firstPassword || error.secondPassword) && (
+        <styled.ErrorMessage>{error.firstPassword || error.secondPassword}</styled.ErrorMessage>
       )}
     </styled.Password>
   );
