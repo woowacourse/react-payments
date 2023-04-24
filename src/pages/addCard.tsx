@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import { BackButton } from '../components/common/backButton';
-import { Header } from '../components/common/Header';
 import { CardRegisterForm } from '../components/CardRegisterForm';
+import { Header, BackButton } from '../components/common';
 
 export function AddCard() {
   return (

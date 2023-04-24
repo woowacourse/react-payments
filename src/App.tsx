@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { GlobalStyle } from './styles/global-style';
 
 import { AddCard, CardList } from './pages';
-import { CardRegisterForm } from './components/CardRegisterForm';
 
 function App() {
   return (
