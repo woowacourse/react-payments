@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Card } from '../../type/card';
+import { makeCardNumber, makeCardDate } from '../../utils/cardInfoFormat';
 interface CardItemProps {
   info: Card;
 }
@@ -10,11 +11,11 @@ export function CardItem(props: CardItemProps) {
     <CardContainer>
       <Magnetic />
       <NumberWrapper>
-        <NumberItem>{CARD_NUMBER}</NumberItem>
+        <NumberItem>{makeCardNumber(CARD_NUMBER)}</NumberItem>
       </NumberWrapper>
       <InfoWrapper>
         <Name>{USERNAME}</Name>
-        <Date>{DATE}</Date>
+        <Date>{makeCardDate(DATE)}</Date>
       </InfoWrapper>
     </CardContainer>
   );
