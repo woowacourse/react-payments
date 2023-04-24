@@ -4,8 +4,8 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import App from './App';
 import CardRegisterPage from './pages/CardRegisterPage';
-import CardNicknamePage from './pages/CardNicknamePage';
 import HoldingCardsPage from './pages/HoldingCardsPage';
+import CardNicknameInputPage from './pages/CardNicknameInputPage';
 
 import './styles/index.css';
 
@@ -24,7 +24,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'card-nickname',
-        element: <CardNicknamePage />,
+        element: <CardNicknameInputPage />,
       },
     ],
   },
