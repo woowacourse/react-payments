@@ -5,7 +5,7 @@ import { changeToValidValue } from "utils/inputValidator";
 import { HIDDEN_ELEMENT_STYLE } from "constants/style";
 import Input from "components/Input";
 import { isInvalidDate } from "validation";
-import { LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
+import { DATE_INPUT, LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
 import { ExpirationDate } from "types";
 const { ONLY_NUMBER } = VALID_INPUT;
 
@@ -33,16 +33,13 @@ const ExpirationDateInput = ({ date, setDate }: Props) => {
     moveFocus(target, LIMIT_LENGTH.EXPIRATION_DATE);
   };
 
-  const inputsCount = 2;
-  const lastInput = inputsCount - 1;
-
   return (
     <>
       <label className="label-text" htmlFor="date-label">
         만료일
       </label>
       <S.InputBox>
-        {Array.from({ length: inputsCount }).map((_, index) => (
+        {Array.from({ length: DATE_INPUT.COUNT }).map((_, index) => (
           <Fragment key={index}>
             <Input
               type="text"
@@ -57,7 +54,7 @@ const ExpirationDateInput = ({ date, setDate }: Props) => {
               onChange={handleDate}
               ref={(el) => handleRef(el, index)}
             />
-            {index === lastInput ? (
+            {index === DATE_INPUT.LAST_PART ? (
               ""
             ) : (
               <S.Delimiter month={date.month}>/</S.Delimiter>

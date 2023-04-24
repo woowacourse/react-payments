@@ -21,3 +21,15 @@ export const VALID_INPUT: Readonly<ValidInput> = {
   INVALID_BLANK: "  ",
   VALID_MONTH: 12,
 };
+
+export const NUMBER_INPUT: Readonly<{ [key: string]: number }> = {
+  COUNT: 4,
+  LAST_PART: 3,
+};
+
+export const DATE_INPUT: Readonly<{ [key: string]: number }> = {
+  COUNT: 2,
+  LAST_PART: 1,
+};
+
+export const PASSWORD_PART: Readonly<number> = 2;

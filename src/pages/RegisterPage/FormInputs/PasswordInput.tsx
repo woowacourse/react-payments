@@ -3,7 +3,12 @@ import { ChangeEvent, useState, Fragment } from "react";
 import styled from "styled-components";
 import { changeToValidValue } from "utils/inputValidator";
 import { HIDDEN_ELEMENT_STYLE } from "constants/style";
-import { LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
+import {
+  NUMBER_INPUT,
+  LIMIT_LENGTH,
+  PASSWORD_PART,
+  VALID_INPUT,
+} from "constants/limit";
 import Input from "components/Input";
 const { ONLY_NUMBER } = VALID_INPUT;
 
@@ -35,18 +40,15 @@ const PasswordInput = () => {
     moveFocus(target, LIMIT_LENGTH.PASSWORD);
   };
 
-  const inputsCount = 4;
-  const passwordPart = inputsCount - 2;
-
   return (
     <>
       <label className="label-text" htmlFor="password-label">
         카드 비밀번호
       </label>
       <S.InputBox>
-        {Array.from({ length: inputsCount }).map((_, index) => (
+        {Array.from({ length: NUMBER_INPUT.COUNT }).map((_, index) => (
           <Fragment key={index}>
-            {index < passwordPart ? (
+            {index < PASSWORD_PART ? (
               <Input
                 width="12vw"
                 margin="0 2.2vw 0 0"

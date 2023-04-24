@@ -3,7 +3,7 @@ import { ChangeEvent, Dispatch, SetStateAction, Fragment } from "react";
 import styled from "styled-components";
 import { changeToValidValue } from "utils/inputValidator";
 import { HIDDEN_ELEMENT_STYLE } from "constants/style";
-import { LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
+import { NUMBER_INPUT, LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
 import Input from "components/Input";
 import { CardNumber } from "types";
 const { ONLY_NUMBER } = VALID_INPUT;
@@ -30,16 +30,13 @@ const CardNumberInput = ({ cardNumber, setCardNumber }: Props) => {
     moveFocus(target, LIMIT_LENGTH.CARD_NUMBER);
   };
 
-  const inputsCount = 4;
-  const lastInput = inputsCount - 1;
-
   return (
     <>
       <S.Label className="label-text" htmlFor="card-label">
         카드 번호
       </S.Label>
       <S.InputBox>
-        {Array.from({ length: inputsCount }).map((_, index) => (
+        {Array.from({ length: NUMBER_INPUT.COUNT }).map((_, index) => (
           <Fragment key={index}>
             <Input
               type="text"
@@ -55,7 +52,7 @@ const CardNumberInput = ({ cardNumber, setCardNumber }: Props) => {
               onChange={handleCardNumber}
               ref={(el) => handleRef(el, index)}
             />
-            {index === lastInput ? (
+            {index === NUMBER_INPUT.LAST_PART ? (
               ""
             ) : (
               <S.Delimiter cardNumber={cardNumber[`number${index + 1}`]}>

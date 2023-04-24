@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Fragment } from "react";
-import { LIMIT_LENGTH } from "constants/limit";
+import { NUMBER_INPUT, LIMIT_LENGTH, PASSWORD_PART } from "constants/limit";
 import { HIDDEN_VALUE, SECURITY_TARGET } from "constants/security";
 import { CardNumber, ExpirationDate } from "types";
 
@@ -8,18 +8,15 @@ interface Props extends ExpirationDate, CardNumber {
   name: string;
 }
 
-const inputsCount = 4;
-const passwordPart = inputsCount - 2;
-
 const CardPreview = ({ cardInfo }: { cardInfo: Props }) => {
   return (
     <S.Card>
       <S.Chip />
       <S.CardInfo>
         <S.Numbers>
-          {Array.from({ length: inputsCount }).map((_, index) => (
+          {Array.from({ length: NUMBER_INPUT.COUNT }).map((_, index) => (
             <Fragment key={index}>
-              {index < passwordPart ? (
+              {index < PASSWORD_PART ? (
                 <S.Span>{cardInfo[`number${index + 1}`]}</S.Span>
               ) : (
                 <S.Secret>
