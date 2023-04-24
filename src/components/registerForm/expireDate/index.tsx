@@ -4,7 +4,7 @@ import ErrorSpan from "src/components/@common/ErrorSpan";
 import FormLabel from "src/components/@common/FormLabel";
 import { EACH_SECOND_CHANCE, ONLY_NUMBER_REGEXP } from "src/utils/regexp";
 import { cardInfoContext } from "src/context/CardInfoContext";
-import { Styled } from "./ExpireDate.styles";
+import { Styled as S } from "./ExpireDate.styles";
 import { NUMBERS } from "src/utils/constant";
 import { MMYYValidation } from "src/utils/validation";
 
@@ -60,17 +60,17 @@ function ExpireDate() {
   };
 
   return (
-    <Styled.ExpireDateContainer>
+    <S.ExpireDateContainer>
       <FormLabel>{"만료일"}</FormLabel>
       <Input
         value={cardInput.expireDate}
         onChange={expireDateChange}
         maxLength={NUMBERS.MAX_EXPIREDATE}
-        customInputStyle={Styled.ExpireDateInput}
+        customInputStyle={S.ExpireDateInput}
         placeholder="MM / YY"
       />
       {expireError.isError && <ErrorSpan>{expireError.message}</ErrorSpan>}
-    </Styled.ExpireDateContainer>
+    </S.ExpireDateContainer>
   );
 }
 export default ExpireDate;

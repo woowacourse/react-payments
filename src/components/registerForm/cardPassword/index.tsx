@@ -5,7 +5,7 @@ import { ONLY_NUMBER_REGEXP } from "src/utils/regexp";
 import { cardInfoContext } from "src/context/CardInfoContext";
 import ErrorSpan from "src/components/@common/ErrorSpan";
 import useAutoFocus from "src/hooks/useAutoFocus";
-import { Styled } from "./CardPassword.styles";
+import { Styled as S } from "./CardPassword.styles";
 import { NUMBERS, PASSWORD_NUMBER_TYPES } from "src/utils/constant";
 import { lengthMatchValidation } from "src/utils/validation";
 
@@ -64,24 +64,24 @@ function CardPassword() {
       maxLength={EACH_PASSWORD}
       inputmode="numeric"
       type="password"
-      customInputStyle={Styled.PasswordInput}
+      customInputStyle={S.PasswordInput}
       placeholder="•"
       ref={(el) => (refs.current[idx] = el as HTMLInputElement)}
     />
   ));
 
   return (
-    <Styled.CardPasswordContainer>
+    <S.CardPasswordContainer>
       <FormLabel>{"카드 비밀번호"}</FormLabel>
-      <Styled.PasswordInputContainer>
+      <S.PasswordInputContainer>
         {inputs}
-        <Styled.DotParagraph>•</Styled.DotParagraph>
-        <Styled.DotParagraph>•</Styled.DotParagraph>
-      </Styled.PasswordInputContainer>
+        <S.DotParagraph>•</S.DotParagraph>
+        <S.DotParagraph>•</S.DotParagraph>
+      </S.PasswordInputContainer>
       {passwordError && (
         <ErrorSpan>비밀번호 앞 2자리를 입력해주세요.</ErrorSpan>
       )}
-    </Styled.CardPasswordContainer>
+    </S.CardPasswordContainer>
   );
 }
 

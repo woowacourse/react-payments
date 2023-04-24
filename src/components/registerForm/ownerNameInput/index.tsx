@@ -4,7 +4,7 @@ import Input from "src/components/@common/Input";
 import ErrorSpan from "src/components/@common/ErrorSpan";
 import { ONLY_ENG_AND_EMPTY_REGEXP } from "src/utils/regexp";
 import { cardInfoContext } from "src/context/CardInfoContext";
-import { Styled } from "./OwnerNameInput.styles";
+import { Styled as S } from "./OwnerNameInput.styles";
 import { NUMBERS } from "src/utils/constant";
 import {
   checkOwnerNameLength,
@@ -55,18 +55,18 @@ function OwnerNameInput() {
   };
 
   return (
-    <Styled.OwnerNameInputContainer>
-      <Styled.LabelContainer>
+    <S.OwnerNameInputContainer>
+      <S.LabelContainer>
         <FormLabel>카드 소유자 이름(선택)</FormLabel>
         <span>{`${cardInput.ownerName.length} / ${MAX_OWNER_NAME}`}</span>
-      </Styled.LabelContainer>
+      </S.LabelContainer>
       <Input
         value={cardInput.ownerName}
         onChange={ownerNameChange}
-        customInputStyle={Styled.OwnerNameStyle}
+        customInputStyle={S.OwnerNameStyle}
       />
       {error.isError && <ErrorSpan>{error.message}</ErrorSpan>}
-    </Styled.OwnerNameInputContainer>
+    </S.OwnerNameInputContainer>
   );
 }
 

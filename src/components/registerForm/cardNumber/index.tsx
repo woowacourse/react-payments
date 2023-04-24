@@ -5,7 +5,7 @@ import ErrorSpan from "src/components/@common/ErrorSpan";
 import { ONLY_NUMBER_REGEXP } from "src/utils/regexp";
 import { cardInfoContext } from "src/context/CardInfoContext";
 import useAutoFocus from "src/hooks/useAutoFocus";
-import { Styled } from "./CardNumber.styles";
+import { Styled as S } from "./CardNumber.styles";
 import { CARD_NUMBER_TYPES, NUMBERS } from "src/utils/constant";
 import { lengthMatchValidation } from "src/utils/validation";
 
@@ -15,7 +15,7 @@ function CardNumber() {
 
   const [cardError, setCardError] = useState({
     isError: false,
-    message: "",
+    message: "initial",
   });
 
   const { refs, nextInputFocus } = useAutoFocus({
@@ -65,7 +65,7 @@ function CardNumber() {
         value={cardInput.cardNumbers[key]}
         onChange={cardChange}
         maxLength={EACH_CARD}
-        customInputStyle={Styled.CardNumberInput}
+        customInputStyle={S.CardNumberInput}
         inputmode="numeric"
         ref={(el) => (refs.current[idx] = el as HTMLInputElement)}
         placeholder={idx > 1 ? "••••" : ""}
@@ -78,9 +78,7 @@ function CardNumber() {
   return (
     <div>
       <FormLabel>카드 번호</FormLabel>
-      <Styled.CardNumberInputContainer>
-        {inputs}
-      </Styled.CardNumberInputContainer>
+      <S.CardNumberInputContainer>{inputs}</S.CardNumberInputContainer>
       {cardError?.isError && <ErrorSpan>{cardError?.message}</ErrorSpan>}
     </div>
   );

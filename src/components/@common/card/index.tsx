@@ -1,5 +1,5 @@
 import { CardNumberObj } from "src/interfaces";
-import { Styled } from "./Card.styles";
+import { Styled as S } from "./Card.styles";
 
 interface Props {
   cardNumber: CardNumberObj;
@@ -16,14 +16,14 @@ function Card({ cardNumber, ownerName, expireDate }: Props) {
   });
 
   return (
-    <Styled.CardContainer>
-      <Styled.CardChip />
-      <Styled.CardNumberContainer>{cardNumbers}</Styled.CardNumberContainer>
-      <Styled.CardNameContainer>
+    <S.CardContainer>
+      <S.CardChip />
+      <S.CardNumberContainer>{cardNumbers}</S.CardNumberContainer>
+      <S.CardNameContainer>
         <span>{ownerName}</span>
         <span>{expireDate}</span>
-      </Styled.CardNameContainer>
-    </Styled.CardContainer>
+      </S.CardNameContainer>
+    </S.CardContainer>
   );
 }
 

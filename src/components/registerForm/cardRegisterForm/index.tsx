@@ -7,7 +7,7 @@ import CardPassword from "src/components/registerForm/cardPassword";
 import { cardInfoContext } from "src/context/CardInfoContext";
 import useCardList from "src/hooks/useCardList";
 import { useNavigate } from "react-router-dom";
-import { Styled } from "./CardRegisterForm.styles";
+import { Styled as S } from "./CardRegisterForm.styles";
 import { NUMBERS } from "src/utils/constant";
 import { objectValueToString } from "src/utils";
 
@@ -48,18 +48,18 @@ function CardRegisterForm() {
   };
 
   return (
-    <Styled.Form onSubmit={cardInputSubmit}>
+    <S.Form onSubmit={cardInputSubmit}>
       <CardNumber />
       <ExpireDate />
       <OwnerNameInput />
       <SecurityCode />
       <CardPassword />
       {isCardComplete && (
-        <Styled.ButtonContainer>
-          <Styled.NextButton>다음</Styled.NextButton>
-        </Styled.ButtonContainer>
+        <S.ButtonContainer>
+          <S.NextButton>다음</S.NextButton>
+        </S.ButtonContainer>
       )}
-    </Styled.Form>
+    </S.Form>
   );
 }
 

@@ -1,6 +1,6 @@
 import backButtonImg from "src/assets/back-button.png";
 import { useNavigate } from "react-router-dom";
-import { Styled } from "./Header.styles";
+import { Styled as S } from "./Header.styles";
 
 interface HeaderProps {
   headingText: string;
@@ -11,14 +11,14 @@ function Header({ headingText, backButton }: HeaderProps) {
   const navigate = useNavigate();
 
   return (
-    <Styled.HeaderContainer>
+    <S.HeaderContainer>
       {backButton && (
-        <Styled.BackButton onClick={() => navigate(-1)}>
+        <S.BackButton onClick={() => navigate(-1)}>
           <img src={backButtonImg} alt="뒤로 가기" />
-        </Styled.BackButton>
+        </S.BackButton>
       )}
-      <Styled.Heading>{headingText}</Styled.Heading>
-    </Styled.HeaderContainer>
+      <S.Heading>{headingText}</S.Heading>
+    </S.HeaderContainer>
   );
 }
 
