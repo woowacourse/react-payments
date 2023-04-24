@@ -11,8 +11,8 @@ interface CardNumberInputProps {
 }
 
 const cardNumberInputInfo = {
-  width: "70px",
-  textPosition: "center",
+  $width: "70px",
+  $textPosition: "center",
 };
 
 export const CardNumberInput = ({ setCardNumbers }: CardNumberInputProps) => {

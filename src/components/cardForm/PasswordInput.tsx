@@ -6,9 +6,8 @@ import { isNumeric } from "../../utils/validate";
 import { useInputCompleted } from "../../hook/useInputComplete";
 
 const passwordInfo = {
-  width: "43px",
-  placeholder: "",
-  textPosition: "center",
+  $width: "43px",
+  $textPosition: "center",
   type: "password",
 };
 

@@ -11,9 +11,9 @@ interface OwnerInputProps {
 
 const OwnerInfo = {
   label: "owner",
-  width: "318px",
+  $width: "318px",
+  $textPosition: "left",
   placeholder: "카드에 표시된 이름과 동일하게 입력하세요.",
-  textPosition: "left",
   type: "text",
 };
 

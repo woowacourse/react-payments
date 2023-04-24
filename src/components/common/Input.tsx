@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 export interface InputProps extends HTMLAttributes<HTMLInputElement> {
   label: string;
-  width: string;
-  textPosition: string;
+  $width: string;
+  $textPosition: string;
   type: string;
   error?: { isValid: boolean; errorMessage: string };
   handleInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -13,9 +13,9 @@ export interface InputProps extends HTMLAttributes<HTMLInputElement> {
 
 export const Input = ({
   label,
-  width,
+  $width,
+  $textPosition,
   placeholder = "",
-  textPosition,
   type,
   error = { isValid: true, errorMessage: "" },
   handleInput,
@@ -24,14 +24,14 @@ export const Input = ({
   const { isValid, errorMessage } = error;
 
   return (
-    <Colum width={width}>
+    <Colum $width={$width}>
       <InputField
         placeholder={placeholder}
         id={label}
         name={label}
         onInput={handleInput}
         onBlur={handleChange}
-        textPosition={textPosition}
+        $textPosition={$textPosition}
         type={type}
       />
       {<ErrorMessage>{!isValid ? errorMessage : ""}</ErrorMessage>}
@@ -39,17 +39,17 @@ export const Input = ({
   );
 };
 
-const Colum = styled.div<{ width: string }>`
-  width: ${(props) => props.width};
+const Colum = styled.div<{ $width: string }>`
+  width: ${(props) => props.$width};
   display: flex;
   flex-direction: column;
 `;
 
-const InputField = styled.input<{ textPosition: string }>`
+const InputField = styled.input<{ $textPosition: string }>`
   height: 45px;
   background-color: #ecebf1;
   border-radius: 7px;
-  text-align: ${(props) => props.textPosition};
+  text-align: ${(props) => props.$textPosition};
 
   font-size: 16px;
   font-weight: 500;

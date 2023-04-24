@@ -8,9 +8,8 @@ import { useInputCompleted } from "../../hook/useInputComplete";
 
 const CVCInfo = {
   label: "cvc",
-  width: "84px",
-  placeholder: "",
-  textPosition: "center",
+  $width: "84px",
+  $textPosition: "center",
   type: "password",
 };
 

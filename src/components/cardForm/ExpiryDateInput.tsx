@@ -10,9 +10,9 @@ interface ExpiryDateInputProps {
 
 const ExpiryDateInfo = {
   label: "expiryDate",
-  width: "137px",
+  $width: "137px",
+  $textPosition: "center",
   placeholder: "MM / YY",
-  textPosition: "center",
   type: "text",
 };
 

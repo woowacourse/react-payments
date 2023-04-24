@@ -14,9 +14,9 @@ export const CardNumberInput = Template.bind({});
 
 CardNumberInput.args = {
   label: "cardNumber",
-  width: "318px",
+  $width: "318px",
   placeholder: "",
-  textPosition: "center",
+  $textPosition: "center",
   handleInput: (e) => {
     const value = e.target.value.replaceAll(" - ", "");
 
@@ -37,9 +37,9 @@ export const ExpiryDateInput = Template.bind({});
 
 ExpiryDateInput.args = {
   label: "expiryDate",
-  width: "137px",
+  $width: "137px",
   placeholder: "MM / YY",
-  textPosition: "center",
+  $textPosition: "center",
   handleInput: (e) => {
     const value = e.target.value.replaceAll(" / ", "");
 
@@ -56,9 +56,9 @@ export const OwnerInput = Template.bind({});
 
 OwnerInput.args = {
   label: "owner",
-  width: "318px",
+  $width: "318px",
   placeholder: "카드에 표시된 이름과 동일하게 입력하세요.",
-  textPosition: "left",
+  $textPosition: "left",
   handleInput: (e) => {
     if (e.target.value.length > 30) {
       e.target.value = e.target.value.slice(0, -1);
@@ -73,9 +73,9 @@ export const CVCInput = Template.bind({});
 
 CVCInput.args = {
   label: "cvc",
-  width: "84px",
+  $width: "84px",
   placeholder: "",
-  textPosition: "center",
+  $textPosition: "center",
   handleInput: (e) => {
     if (e.target.value.length > 3 || !/\d$/.test(e.target.value)) {
       e.target.value = e.target.value.slice(0, -1);
@@ -90,9 +90,9 @@ export const PasswordInput = Template.bind({});
 
 PasswordInput.args = {
   label: "password",
-  width: "43px",
+  $width: "43px",
   placeholder: "",
-  textPosition: "center",
+  $textPosition: "center",
   handleInput: (e) => {
     if (e.target.value.length > 1 || !/\d$/.test(e.target.value)) {
       e.target.value = e.target.value.slice(0, -1);
