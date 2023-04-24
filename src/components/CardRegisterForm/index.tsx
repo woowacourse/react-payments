@@ -1,4 +1,4 @@
-import { FormEventHandler, useRef } from 'react';
+import { FormEventHandler, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Card from '../Card';
@@ -9,8 +9,8 @@ import TooltipButton from '../TooltipButton';
 import useCardRegisterForm from './useCardRegisterForm';
 import { useModal } from '../common/Modal/ModalContext';
 import { useCardCompany } from '../CardCompany/CardCompanyContext';
+import { useCardsContext } from '../../domain/context/CardsContext';
 import { CARD_NUMBER_INPUT_PLACEHOLDER } from '../../domain/constants';
-import type { CardInfo } from '../../domain/types/card';
 
 import styles from './cardRegisterForm.module.css';
 
@@ -18,15 +18,12 @@ const today = new Date();
 const currentYear = today.getFullYear() % 100;
 const currentMonth = today.getMonth() + 1;
 
-interface Props {
-  registerCard: (card: CardInfo) => void;
-}
-
-const CardRegisterForm = ({ registerCard }: Props) => {
-  const navigate = useNavigate();
+const CardRegisterForm = () => {
   const inputRefs = Array.from({ length: 10 }).map(() => useRef<Focus>(null));
-  const { openModal } = useModal();
+  const navigate = useNavigate();
+  const { isModalOpen, openModal } = useModal();
   const { cardCompany } = useCardCompany();
+  const { registerCard } = useCardsContext();
   const {
     cardNumber1,
     cardNumber2,
@@ -65,6 +62,12 @@ const CardRegisterForm = ({ registerCard }: Props) => {
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
 
+    if (!cardCompany) {
+      alert('카드를 터치 후 카드사를 선택해 주세요.');
+
+      return;
+    }
+
     if (!isValidExpiredDate(Number(expiredMonth), Number(expiredYear))) {
       const expiredMonthInput = inputRefs[4];
 
@@ -75,6 +78,7 @@ const CardRegisterForm = ({ registerCard }: Props) => {
     }
 
     const cardData = {
+      cardCompany,
       cardNumber1,
       cardNumber2,
       expiredMonth,
@@ -83,8 +87,16 @@ const CardRegisterForm = ({ registerCard }: Props) => {
     };
 
     registerCard(cardData);
-    navigate('/');
+    navigate('/card-nickname');
   };
+
+  useEffect(() => {
+    if (isModalOpen === false) {
+      const [cardNumberInputRef] = inputRefs;
+
+      cardNumberInputRef.current?.focus();
+    }
+  }, [isModalOpen]);
 
   return (
     <>
