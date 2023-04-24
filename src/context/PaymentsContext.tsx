@@ -1,5 +1,5 @@
 import type { Dispatch, PropsWithChildren } from 'react';
-import { createContext, useState } from 'react';
+import { createContext, useMemo, useState } from 'react';
 import type { CreditCard } from '../types/CreditCard';
 
 type PaymentsContextValue = {
@@ -26,10 +26,7 @@ export const PaymentsProvider = (props: PropsWithChildren) => {
     setCreditCards(nextCreditCards);
   };
 
-  return (
-    // eslint-disable-next-line react/jsx-no-constructed-context-values
-    <PaymentsContext.Provider value={{ creditCards, setCreditCards: internalSetCreditCards }}>
-      {children}
-    </PaymentsContext.Provider>
-  );
+  const contextValue = useMemo(() => ({ creditCards, setCreditCards: internalSetCreditCards }), []);
+
+  return <PaymentsContext.Provider value={contextValue}>{children}</PaymentsContext.Provider>;
 };
