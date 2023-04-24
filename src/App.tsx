@@ -12,7 +12,7 @@ const App = () => {
   return (
     <>
       <GlobalStyle />
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
           <Route path="/" element={<Home cards={cards} />} />
           <Route path="/addCard" element={<AddCard cards={cards} addNewCard={addNewCard} />} />
