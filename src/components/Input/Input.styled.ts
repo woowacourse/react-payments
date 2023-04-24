@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { InputProps } from '../../types/props';
+import { COLOR } from '../../constants/cardInfo';
 
 const InputWidth = {
   xl: '100%',
@@ -10,10 +11,10 @@ const InputWidth = {
 };
 
 export const Input = styled.input<InputProps>`
-  width: ${(props) => InputWidth[props.width]};
+  width: ${props => InputWidth[props.width]};
   height: 45px;
 
-  background-color: #ecebf1;
+  background-color: ${COLOR.GREY100};
 
   border-radius: 10px;
   border: none;

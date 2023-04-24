@@ -17,3 +17,12 @@ export const OWNER_NAME = {
 export const PASSWORD = {
   MAX_LENGTH: 1,
 };
+
+export const COLOR = {
+  DEFAULT: '#E5E5E5',
+  WHITE: '#FFFFFF',
+  GREY100: '#ECEBF1',
+  GREY200: '#333333',
+  GOLD: '#CBBA64',
+  RED: '#F04651',
+};

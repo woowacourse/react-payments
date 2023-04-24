@@ -10,6 +10,7 @@ import ExpirationDateInputBox from '../../components/ExpirationDateInputBox/Expi
 import OwnerNameInputBox from '../../components/OwnerNameInputBox/OwnerNameInputBox';
 import SecurityCodeInputBox from '../../components/SecurityCodeInputBox/SecurityCodeInputBox';
 import PasswordInputBox from '../../components/PasswordInputBox/PasswordInputBox';
+import { COLOR } from '../../constants/cardInfo';
 
 const CardRegisterPage = ({ setCardInfoList }: { setCardInfoList: SetCardInfoList }) => {
   const [cardInfo, setCardInfo] = useState<CardInfo>({
@@ -54,7 +55,7 @@ const CardRegisterPage = ({ setCardInfoList }: { setCardInfoList: SetCardInfoLis
 
   return (
     <styled.CardRegisterPage>
-      <CardPreview cardInfo={cardInfo} bgColor="#333333" />
+      <CardPreview cardInfo={cardInfo} bgColor={COLOR.GREY200} />
       <styled.CardRegisterForm>
         <CardNumberInputBox cardNumbers={cardInfo.cardNumbers} setCardInfo={setCardInfo} />
         <ExpirationDateInputBox expirationDate={cardInfo.expirationDate} setCardInfo={setCardInfo} />

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { COLOR } from '../../constants/cardInfo';
 
 export const PasswordInputBox = styled.div`
   position: relative;
@@ -27,5 +28,5 @@ export const InputContainer = styled.div`
 export const ErrorMessage = styled.p`
   position: absolute;
   bottom: -20px;
-  color: red;
+  color: ${COLOR.RED};
 `;

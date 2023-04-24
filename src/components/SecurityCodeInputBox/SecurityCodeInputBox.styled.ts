@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { COLOR } from '../../constants/cardInfo';
 
 export const SecurityCodeInputBox = styled.div`
   position: relative;
@@ -17,12 +18,11 @@ export const LabelHeader = styled.div`
 
 export const InputContainer = styled.div`
   display: inline-block;
-  background-color: #ecebf1;
   border-radius: 10px;
 `;
 
 export const ErrorMessage = styled.p`
   position: absolute;
   bottom: -20px;
-  color: red;
+  color: ${COLOR.RED};
 `;

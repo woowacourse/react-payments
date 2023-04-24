@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { CardProps } from '../../types/props';
+import { COLOR } from '../../constants/cardInfo';
 
 export const Card = styled.div<CardProps>`
   position: relative;
@@ -8,11 +9,11 @@ export const Card = styled.div<CardProps>`
 
   padding: 12px 18px;
 
-  background-color: ${props => props.bgColor ?? '#E5E5E5'};
+  background-color: ${props => props.bgColor ?? COLOR.DEFAULT};
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
 
-  color: #ffffff;
+  color: ${COLOR.WHITE};
   letter-spacing: 0.1em;
 
   &:not(:last-child) {
@@ -28,7 +29,7 @@ export const Rectangle = styled.div`
   top: 58px;
   left: 18px;
 
-  background: #cbba64;
+  background: ${COLOR.GOLD};
   border-radius: 4px;
 `;
 
@@ -75,7 +76,7 @@ export const Ellipse = styled.div`
 
   border-radius: 50%;
 
-  background: ${props => (props.color ? props.color : '#ffffff')};
+  background: ${props => (props.color ? props.color : COLOR.WHITE)};
 `;
 
 export const CardNameAndExpirationDateContainer = styled.div`

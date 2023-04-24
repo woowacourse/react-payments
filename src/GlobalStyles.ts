@@ -1,8 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
+import { COLOR } from './constants/cardInfo';
 
 const GlobalStyles = createGlobalStyle` 
-
   ${reset}
 	* {
 			box-sizing: border-box;
@@ -14,7 +14,7 @@ const GlobalStyles = createGlobalStyle`
 
 		font-family: "Roboto", sans-serif;
 
-		background-color: #333333;
+		background-color: ${COLOR.GREY200};
   }
 
 	#root {
@@ -33,7 +33,7 @@ const GlobalStyles = createGlobalStyle`
 
 		padding: 28px 24px;
 
-		background-color: #FFFFFF;
+		background-color: ${COLOR.WHITE};
 	}
 
   a {

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { COLOR } from '../../constants/cardInfo';
 
 export const CardNumberInputBox = styled.div`
   position: relative;
@@ -19,12 +20,11 @@ export const InputContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-column-gap: 20px;
-  background-color: #ecebf1;
   border-radius: 10px;
 `;
 
 export const ErrorMessage = styled.p`
   position: absolute;
   bottom: -20px;
-  color: red;
+  color: ${COLOR.RED};
 `;
