@@ -14,16 +14,16 @@ const CARD_INPUT_MIN_LENGTH: Record<string, number> = {
   password: 1,
 } as const;
 
-const SEPERATED_CARD_NUMBER_LENGTH = Object.freeze({
+const SEPERATED_CARD_NUMBER_LENGTH: Record<string, number> = {
   FIRST: 4,
   SECOND: 11,
   THIRD: 18,
-});
+} as const;
 
-const PASSWORD_DIGIT_INDEX = Object.freeze({
+const PASSWORD_DIGIT_INDEX: Record<string, number> = {
   FIRST: 0,
   SECOND: 1,
-});
+} as const;
 
 const CARD_COLOR = [
   "red",
