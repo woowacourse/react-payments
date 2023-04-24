@@ -13,6 +13,7 @@ export default function Input(props: InputHTMLAttributes<HTMLInputElement>) {
     style,
     className,
   } = props;
+
   return (
     <input
       name={name}
