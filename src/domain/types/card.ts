@@ -1,3 +1,5 @@
+import { CARD_COMPANIES } from '../constants';
+
 export interface CardInfo {
   cardNumber1: string;
   cardNumber2: string;
@@ -7,3 +9,5 @@ export interface CardInfo {
   expiredYear: string;
   owner?: string;
 }
+
+export type CardCompany = (typeof CARD_COMPANIES)[number];
