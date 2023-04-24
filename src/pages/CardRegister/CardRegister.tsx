@@ -6,10 +6,7 @@ import CardExpirationDateInput from "../../components/pages/CardRegister/CardExp
 import CardNameInput from "../../components/pages/CardRegister/CardNameInput/CardNameInput";
 import CardNumberInput from "../../components/pages/CardRegister/CardNumberInput/CardNumberInput";
 import CardPasswordInput from "../../components/pages/CardRegister/CardPasswordInput/CardPasswordInput";
-import {
-  initialCardRegisterInfo,
-  useCardRegisterContext,
-} from "../../context/CardRegisterContext";
+import { useCardRegisterContext } from "../../context/CardRegisterContext";
 import * as Styled from "./CardRegister.styles";
 
 export default function CardRegister() {
@@ -28,21 +25,22 @@ export default function CardRegister() {
       (e) => e.tagName === "INPUT"
     ) as HTMLInputElement[];
 
-    inputs.find((input, i) => {
-      if (input !== e.target) return;
+    const activeInput = e.target as HTMLInputElement;
+    const activeIndex = inputs.indexOf(activeInput);
 
-      if (input.name === "name") {
-        if (input.value.length === input.maxLength) inputs[i + 1]?.focus();
-        if (input.value === "") inputs[i - 1]?.focus();
-        return;
+    const isNameInput = activeInput.name === "name";
+    const isMaxLength = activeInput.value.length === activeInput.maxLength;
+    const isEmpty = activeInput.value === "";
+
+    if (isNameInput || !isNameInput) {
+      if (isMaxLength) {
+        inputs[activeIndex + 1]?.focus();
+      } else if (isEmpty) {
+        inputs[activeIndex - 1]?.focus();
       }
+    }
 
-      if (input.validity.valid) inputs[i + 1]?.focus();
-      if (input.value === "") inputs[i - 1]?.focus();
-    });
-
-    const allValid = inputs.every((input, i, inputs) => input.validity.valid);
-
+    const allValid = inputs.every((input) => input.validity.valid);
     setAllValid(allValid);
   };
 
