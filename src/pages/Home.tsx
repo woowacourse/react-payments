@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import CardDB from 'db/Cards';
 import styled from 'styled-components';
-import { CreditCard, Header, Label } from 'components/common';
+import { CreditCard, Header } from 'components/common';
 import { PageContainer } from 'components/style/PageContainer';
 
 const cards = CardDB.getCards();
@@ -17,7 +17,7 @@ function Home() {
       <PageContainer>
         <Header text={'보유카드'} />
         <CardContainer>
-          <Label text="새로운 카드를 등록해주세요" />
+          <span>새로운 카드를 등록해주세요</span>
           {cards.map((card) => (
             <CreditCard card={card} />
           ))}
