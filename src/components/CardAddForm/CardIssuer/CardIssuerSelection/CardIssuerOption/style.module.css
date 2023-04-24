@@ -1,12 +1,13 @@
-.container {
+.button {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 12px;
+  background-color: transparent;
   cursor: pointer;
 }
 
-.container img {
+.button img {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -14,7 +15,7 @@
   pointer-events: none;
 }
 
-.container p {
+.button span {
   font-size: 12px;
   pointer-events: none;
 }

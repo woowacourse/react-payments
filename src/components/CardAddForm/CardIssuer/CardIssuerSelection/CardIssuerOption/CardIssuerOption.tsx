@@ -5,15 +5,15 @@ import { CARD_ISSUER_LOGO_IMAGE } from '../../../../../constants/images';
 
 interface CardIssuerOptionProps {
   issuer: Issuer;
-  onClick: (event: MouseEvent<HTMLDivElement>) => void;
+  onClick: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
 function CardIssuerOption({ issuer, onClick }: CardIssuerOptionProps) {
   return (
-    <div data-value={issuer} className={styles.container} onClick={onClick}>
+    <button type="button" name="issuer" value={issuer} className={styles.button} onClick={onClick}>
       <img src={CARD_ISSUER_LOGO_IMAGE[issuer]} alt={`${issuer} 로고`}></img>
-      <p>{issuer}</p>
-    </div>
+      <span>{issuer}</span>
+    </button>
   );
 }
 
