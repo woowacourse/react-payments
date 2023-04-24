@@ -10,5 +10,5 @@ const meta: Meta = {
 export default meta;
 
 export const InputTest = () => (
-  <InputBoxOwner setIsComplete={() => {}} setPreviewDataHandler={() => {}}></InputBoxOwner>
+  <InputBoxOwner setPreviewDataHandler={() => {}}></InputBoxOwner>
 );
