@@ -20,8 +20,8 @@ export const PaymentsProvider = ({ children }: PropsWithChildren) => {
   }, [cardList]);
 
   const addCard = (cardInformation: CardFormData) => {
-    // need to change id and cardName to unique values!
-    const newCard = { ...cardInformation, id: '', cardName: '' };
+    const newId = (cardList[cardList.length - 1].id ?? 0) + 1;
+    const newCard = { ...cardInformation, id: newId, cardName: `카드 ${cardList.length + 1}` };
 
     setCardList((cardList) => {
       return [...cardList, newCard];
