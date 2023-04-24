@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
-import Header from "./Header";
+import Header from "./index";
 import { withRouter } from "storybook-addon-react-router-v6";
 
 const header = {
