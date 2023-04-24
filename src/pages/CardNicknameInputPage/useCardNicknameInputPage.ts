@@ -15,6 +15,7 @@ const useCardNicknameInputPage = () => {
 
     if (nickname === '') {
       navigate('/');
+      return;
     }
 
     modifyCardNickname(lastRegisteredCard, nickname);
