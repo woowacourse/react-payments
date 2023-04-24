@@ -1,5 +1,5 @@
-import cvcInfo from '../asset/cvc_info.png';
 import type { AddCardSecurityCodeInputProps } from '../type';
+import cvcInfo from '../asset/cvc_info.png';
 
 const AddCardSecurityCodeInput = ({ securityCode }: AddCardSecurityCodeInputProps) => {
   return (

@@ -1,6 +1,6 @@
 import type { Meta } from '@storybook/react';
-import type { CardNumber, InputHook } from '../type';
 
+import type { CardNumber } from '../type';
 import AddCardNumberInput from '../components/AddCardNumberInput';
 import usePasswordInput from '../hooks/usePasswordInput';
 import { isNumberInput } from '../utils/util';

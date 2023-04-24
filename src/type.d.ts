@@ -5,6 +5,13 @@ export type CardNumber = {
   fourth: string;
 };
 
+type CardProps = {
+  cardType: string;
+  cardNumber: CardNumber;
+  cardOwner: string;
+  expired: string;
+};
+
 export type CardPassword = {
   first: string;
   second: string;

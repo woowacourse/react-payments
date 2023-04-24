@@ -1,20 +1,6 @@
-import React from 'react';
-
+import type { CardProps } from '../type';
 import { changeNumberToMask } from '../utils/util';
 import './Card.css';
-
-type CardNumber = {
-  first: string;
-  second: string;
-  third: string;
-  fourth: string;
-};
-type CardProps = {
-  cardType: string;
-  cardNumber: CardNumber;
-  cardOwner: string;
-  expired: string;
-};
 
 const Card = ({ cardType, cardNumber, cardOwner, expired }: CardProps) => {
   return (

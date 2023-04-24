@@ -1,4 +1,4 @@
-import { AddCardOwnerInputProps } from '../type';
+import type { AddCardOwnerInputProps } from '../type';
 
 const AddCardOwnerInput = ({ cardOwner }: AddCardOwnerInputProps) => {
   return (
