@@ -1,5 +1,5 @@
 import { Input } from 'components/common';
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, useRef } from 'react';
 import { ValueAndOnChange } from './types';
 
 export interface PasswordInputProps {
@@ -9,7 +9,7 @@ export interface PasswordInputProps {
 
 export function PasswordInput(props: PasswordInputProps) {
   const { first, second } = props;
-  const inputRefs = Object.keys(props).map(() => React.createRef<HTMLInputElement>());
+  const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement>,
@@ -18,8 +18,8 @@ export function PasswordInput(props: PasswordInputProps) {
   ) => {
     const value = e.target.value;
 
-    if (index < Object.keys(props).length - 1 && value.length === e.target.maxLength) {
-      inputRefs[index + 1].current?.focus();
+    if (index < inputRefs.current.length - 1 && value.length === e.target.maxLength) {
+      inputRefs.current[index + 1]?.focus();
     }
     onChange?.(value);
   };
@@ -27,7 +27,7 @@ export function PasswordInput(props: PasswordInputProps) {
   return (
     <>
       <Input
-        ref={inputRefs[0]}
+        ref={(element) => (inputRefs.current[0] = element)}
         value={first.value}
         type="password"
         maxLength={1}
@@ -36,7 +36,7 @@ export function PasswordInput(props: PasswordInputProps) {
         required
       />
       <Input
-        ref={inputRefs[1]}
+        ref={(element) => (inputRefs.current[1] = element)}
         value={second.value}
         type="password"
         maxLength={1}

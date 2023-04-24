@@ -1,5 +1,5 @@
 import { Input } from 'components/common';
-import React, { ChangeEventHandler, ChangeEvent } from 'react';
+import React, { ChangeEvent, useRef } from 'react';
 import styled from 'styled-components';
 import { ValueAndOnChange } from './types';
 
@@ -10,7 +10,7 @@ export interface ExpirationProps {
 
 export function ExpirationDateInput(props: ExpirationProps) {
   const { month, year } = props;
-  const inputRefs = Object.keys(props).map(() => React.createRef<HTMLInputElement>());
+  const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement>,
@@ -19,8 +19,8 @@ export function ExpirationDateInput(props: ExpirationProps) {
   ) => {
     const value = e.target.value;
 
-    if (index < Object.keys(props).length - 1 && value.length === e.target.maxLength) {
-      inputRefs[index + 1].current?.focus();
+    if (index < inputRefs.current.length - 1 && value.length === e.target.maxLength) {
+      inputRefs.current[index + 1]?.focus();
     }
 
     onChange?.(value);
@@ -29,7 +29,7 @@ export function ExpirationDateInput(props: ExpirationProps) {
   return (
     <>
       <Input
-        ref={inputRefs[0]}
+        ref={(element) => (inputRefs.current[0] = element)}
         value={month.value}
         type="text"
         maxLength={2}
@@ -40,7 +40,7 @@ export function ExpirationDateInput(props: ExpirationProps) {
       />
       <SLASH />
       <Input
-        ref={inputRefs[1]}
+        ref={(element) => (inputRefs.current[1] = element)}
         value={year.value}
         type="text"
         maxLength={2}
