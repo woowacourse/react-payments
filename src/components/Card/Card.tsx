@@ -1,4 +1,5 @@
 import { CardInfo } from '../../types/state';
+
 import * as styled from './Card.styled';
 
 const Card = ({ cardInfo, bgColor }: { cardInfo: CardInfo; bgColor: string }) => {

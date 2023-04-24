@@ -1,6 +1,8 @@
-import * as styled from './Input.styled';
-import { InputProps } from '../../types/props';
 import { useEffect, useRef } from 'react';
+
+import { InputProps } from '../../types/props';
+
+import * as styled from './Input.styled';
 
 const Input = (props: InputProps) => {
   const { value, onChange, width, type, name, placeholder, maxLength, isFocus } = props;

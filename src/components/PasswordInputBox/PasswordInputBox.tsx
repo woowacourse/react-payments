@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 
-import { CardInfo, Password, SetCardInfo, SetPassword } from '../../types/state';
+import { Password, SetPassword } from '../../types/state';
 import { PASSWORD } from '../../constants/cardInfo';
 import { ERROR_MESSAGE } from '../../constants/message';
 

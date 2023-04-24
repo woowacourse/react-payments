@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { CardInfo, CardNumbers, ExpirationDate, OwnerName, Password, SetCardInfoList } from '../../types/state';
+import { COLOR } from '../../constants/cardInfo';
 
 import * as styled from './CardRegisterPage.styled';
 import CardPreview from '../../components/CardPreview/CardPreview';
@@ -10,7 +11,6 @@ import ExpirationDateInputBox from '../../components/ExpirationDateInputBox/Expi
 import OwnerNameInputBox from '../../components/OwnerNameInputBox/OwnerNameInputBox';
 import SecurityCodeInputBox from '../../components/SecurityCodeInputBox/SecurityCodeInputBox';
 import PasswordInputBox from '../../components/PasswordInputBox/PasswordInputBox';
-import { COLOR } from '../../constants/cardInfo';
 
 const CardRegisterPage = ({ setCardInfoList }: { setCardInfoList: SetCardInfoList }) => {
   const [cardNumbers, setCardNumbers] = useState<CardNumbers>({

@@ -1,13 +1,13 @@
 import { ChangeEvent, useState } from 'react';
 
 import { CardNumbers, ExpirationDate, SetExpirationDate } from '../../types/state';
+import { EXPIRATION_DATE } from '../../constants/cardInfo';
 import { ERROR_MESSAGE } from '../../constants/message';
 
 import { isNumeric } from '../../validator';
 
 import * as styled from './ExpirationDateInputBox.styled';
 import Input from '../Input/Input';
-import { EXPIRATION_DATE } from '../../constants/cardInfo';
 
 const ExpirationDateInputBox = ({
   expirationDate,

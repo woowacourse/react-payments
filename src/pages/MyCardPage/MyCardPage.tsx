@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 
 import { CardInfo } from '../../types/state';
+import { COLOR } from '../../constants/cardInfo';
 
 import * as styled from './MyCardPage.styled';
 import Card from '../../components/Card/Card';
-import { COLOR } from '../../constants/cardInfo';
 
 const MyCardPage = ({ cardInfoList }: { cardInfoList: CardInfo[] }) => {
   const navigation = useNavigate();
