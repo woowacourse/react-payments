@@ -105,7 +105,7 @@ function CreditCardRegister() {
         <S.ButtonWrapper>
           <S.RegisterButton
             disabled={isError}
-            type="button"
+            type="submit"
             onClick={() => handleSubmit()}
           >
             확인
