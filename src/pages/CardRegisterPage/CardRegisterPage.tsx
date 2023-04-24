@@ -1,7 +1,6 @@
 import * as styled from './CardRegisterPage.styled';
 
 import { useNavigate } from 'react-router-dom';
-import { CardInfo } from '../../App';
 import { useState } from 'react';
 
 import CardNumberInputBox from '../../components/CardNumberInputBox/CardNumberInputBox';
@@ -10,10 +9,11 @@ import OwnerNameInputBox from '../../components/OwnerNameInputBox/OwnerNameInput
 import SecurityCodeInputBox from '../../components/SecurityCodeInputBox/SecurityCodeInputBox';
 import PasswordInputBox from '../../components/PasswordInputBox/PasswordInputBox';
 import CardPreview from '../../components/CardPreview/CardPreview';
+import { CardInfo } from '../../types/state';
 
 const CardRegisterPage = ({ setCardList }: { setCardList: CallableFunction }) => {
   const [cardInfo, setCardInfo] = useState<CardInfo>({
-    numbers: {
+    cardNumbers: {
       first: '',
       second: '',
       third: '',
@@ -40,10 +40,10 @@ const CardRegisterPage = ({ setCardList }: { setCardList: CallableFunction }) =>
 
   const isFilledCardInfos = () => {
     return (
-      cardInfo.numbers.first.length === 4 &&
-      cardInfo.numbers.second.length === 4 &&
-      cardInfo.numbers.third.length === 4 &&
-      cardInfo.numbers.fourth.length === 4 &&
+      cardInfo.cardNumbers.first.length === 4 &&
+      cardInfo.cardNumbers.second.length === 4 &&
+      cardInfo.cardNumbers.third.length === 4 &&
+      cardInfo.cardNumbers.fourth.length === 4 &&
       cardInfo.expirationDate.month.length === 2 &&
       cardInfo.expirationDate.year.length === 2 &&
       cardInfo.securityCode.length === 3 &&
@@ -56,7 +56,7 @@ const CardRegisterPage = ({ setCardList }: { setCardList: CallableFunction }) =>
     <>
       <CardPreview cardInfo={cardInfo} bgColor="#333333" />
       <styled.CardRegisterForm>
-        <CardNumberInputBox numbers={cardInfo.numbers} setCardInfo={setCardInfo} />
+        <CardNumberInputBox cardNumbers={cardInfo.cardNumbers} setCardInfo={setCardInfo} />
         <ExpirationDateInputBox expirationDate={cardInfo.expirationDate} setCardInfo={setCardInfo} />
         <OwnerNameInputBox ownerName={cardInfo.ownerName} setCardInfo={setCardInfo} />
         <SecurityCodeInputBox securityCode={cardInfo.securityCode} setCardInfo={setCardInfo} />

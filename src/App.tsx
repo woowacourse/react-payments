@@ -3,34 +3,7 @@ import MyCardPage from './pages/MyCardPage/MyCardPage';
 import CardRegisterPage from './pages/CardRegisterPage/CardRegisterPage';
 import { useState } from 'react';
 import Header from './components/Header/Header';
-
-export interface Numbers {
-  first: string;
-  second: string;
-  third: string;
-  fourth: string;
-  [key: string]: string;
-}
-
-export interface ExpirationDate {
-  month: string;
-  year: string;
-  [key: string]: string;
-}
-
-export interface Password {
-  first: string;
-  second: string;
-  [key: string]: string;
-}
-
-export interface CardInfo {
-  numbers: Numbers;
-  expirationDate: ExpirationDate;
-  securityCode: string;
-  password: Password;
-  ownerName?: string;
-}
+import { CardInfo } from './types/state';
 
 const App = () => {
   const [cardList, setCardList] = useState<CardInfo[]>([]);

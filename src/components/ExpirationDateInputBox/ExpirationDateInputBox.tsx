@@ -2,7 +2,7 @@ import { ChangeEvent, useState } from 'react';
 import Input from '../Input/Input';
 import * as styled from './ExpirationDateInputBox.styled';
 import { isNumeric } from '../../validator';
-import { CardInfo, ExpirationDate } from '../../App';
+import { CardInfo, ExpirationDate } from '../../types/state';
 
 const ExpirationDateInputBox = ({
   expirationDate,
@@ -38,12 +38,12 @@ const ExpirationDateInputBox = ({
           <span>만료일</span>
         </styled.LabelHeader>
         <styled.InputContainer>
-          {Object.keys(expirationDate).map(key => {
+          {Object.entries(expirationDate).map(([key, value]) => {
             return (
               <Input
                 key={key}
                 name={key}
-                value={expirationDate[key]}
+                value={value}
                 onChange={onChange}
                 width="s"
                 type="text"

@@ -1,4 +1,4 @@
-import { CardInfo } from '../../App';
+import { CardInfo } from '../../types/state';
 import * as styled from './Card.styled';
 
 const Card = ({ cardInfo, bgColor }: { cardInfo: CardInfo; bgColor: string }) => {
@@ -7,16 +7,14 @@ const Card = ({ cardInfo, bgColor }: { cardInfo: CardInfo; bgColor: string }) =>
       <styled.Rectangle />
       <styled.CardInformationContainer>
         <styled.CardNumber>
-          <input disabled defaultValue={cardInfo.numbers.first} />
-          <input disabled defaultValue={cardInfo.numbers.second} />
-          <input disabled type="password" defaultValue={cardInfo.numbers.third} />
-          <input disabled type="password" defaultValue={cardInfo.numbers.fourth} />
+          <input disabled defaultValue={cardInfo.cardNumbers.first} />
+          <input disabled defaultValue={cardInfo.cardNumbers.second} />
+          <input disabled type="password" defaultValue={cardInfo.cardNumbers.third} />
+          <input disabled type="password" defaultValue={cardInfo.cardNumbers.fourth} />
         </styled.CardNumber>
         <styled.CardNameAndExpirationDateContainer>
           <styled.CardName>{cardInfo.ownerName ? cardInfo.ownerName : 'NAME'}</styled.CardName>
-          <styled.ExpirationDate>{`${
-            cardInfo.expirationDate.month ? cardInfo.expirationDate.month : 'MM'
-          }/${
+          <styled.ExpirationDate>{`${cardInfo.expirationDate.month ? cardInfo.expirationDate.month : 'MM'}/${
             cardInfo.expirationDate.year ? cardInfo.expirationDate.year : 'YY'
           }`}</styled.ExpirationDate>
         </styled.CardNameAndExpirationDateContainer>

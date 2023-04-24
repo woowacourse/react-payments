@@ -2,7 +2,7 @@ import { ChangeEvent, useState } from 'react';
 import Input from '../Input/Input';
 import * as styled from './SecurityCodeInputBox.styled';
 import { isNumeric } from '../../validator';
-import { CardInfo } from '../../App';
+import { CardInfo } from '../../types/state';
 
 const SecurityCodeInputBox = ({
   securityCode,

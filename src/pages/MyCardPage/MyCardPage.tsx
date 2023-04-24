@@ -2,9 +2,8 @@ import * as styled from './MyCardPage.styled';
 
 import { useNavigate } from 'react-router-dom';
 
-import { CardInfo } from '../../App';
-
 import Card from '../../components/Card/Card';
+import { CardInfo } from '../../types/state';
 
 const MyCardPage = ({ cardList }: { cardList: CardInfo[] }) => {
   const navigation = useNavigate();
@@ -14,8 +13,8 @@ const MyCardPage = ({ cardList }: { cardList: CardInfo[] }) => {
   };
 
   const generateCardList = (cardList: CardInfo[]) => {
-    return cardList.map((cardInfo) => {
-      const key = Object.values(cardInfo.numbers).join('');
+    return cardList.map(cardInfo => {
+      const key = Object.values(cardInfo.cardNumbers).join('');
 
       return <Card key={key} cardInfo={cardInfo} bgColor="#333333" />;
     });

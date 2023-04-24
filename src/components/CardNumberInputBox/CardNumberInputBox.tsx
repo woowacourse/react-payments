@@ -2,9 +2,15 @@ import { ChangeEvent, useState } from 'react';
 import Input from '../Input/Input';
 import * as styled from './CardNumberInputBox.styled';
 import { isNumeric } from '../../validator';
-import { CardInfo, Numbers } from '../../App';
+import { CardInfo, CardNumbers } from '../../types/state';
 
-const CardNumberInputBox = ({ numbers, setCardInfo }: { numbers: Numbers; setCardInfo: CallableFunction }) => {
+const CardNumberInputBox = ({
+  cardNumbers,
+  setCardInfo,
+}: {
+  cardNumbers: CardNumbers;
+  setCardInfo: CallableFunction;
+}) => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const onChange = ({ target: { name, value } }: ChangeEvent<HTMLInputElement>) => {
@@ -17,8 +23,8 @@ const CardNumberInputBox = ({ numbers, setCardInfo }: { numbers: Numbers; setCar
     setCardInfo((prev: CardInfo) => {
       return {
         ...prev,
-        numbers: {
-          ...numbers,
+        cardNumbers: {
+          ...cardNumbers,
           [name]: value,
         },
       };
@@ -32,12 +38,12 @@ const CardNumberInputBox = ({ numbers, setCardInfo }: { numbers: Numbers; setCar
           <span>카드 번호</span>
         </styled.LabelHeader>
         <styled.InputContainer>
-          {Object.keys(numbers).map(key => {
+          {Object.entries(cardNumbers).map(([key, value]) => {
             return (
               <Input
                 key={key}
                 name={key}
-                value={numbers[key]}
+                value={value}
                 onChange={onChange}
                 width="xl"
                 type="text"

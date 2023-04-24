@@ -1,4 +1,4 @@
-import { CardInfo } from '../../App';
+import { CardInfo } from '../../types/state';
 import Card from '../Card/Card';
 import * as styled from './CardPreview.styled';
 
