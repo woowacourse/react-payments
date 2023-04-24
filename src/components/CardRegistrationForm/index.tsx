@@ -1,10 +1,8 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { checkCardNumber, checkExpirationDate, checkPassword, checkSecurityCode } from '../../domain/validator';
 import useWrappingContext from '../../hooks/useWrappingContext';
 import CardListStore from '../../store';
-import getErrorMessage from '../../utils/getErrorMessage';
 import CardNumberInput from './CardNumberInput';
 import CardPasswordInput from './CardPasswordInput';
 import ExpirationDateInput from './ExpirationDateInput';
@@ -15,6 +13,9 @@ import type { CardInformation, CardNumber, CardPassword, ExpirationDate, Securit
 
 interface CardRegistrationFormProps {
   card: CardInformation;
+  checkValidator: <T>(validateCallback: (value: T) => void, value: T | undefined, name: string) => string;
+  errorMessage: ErrorMessage;
+  isVisited: Visited;
   setCardNumber: React.Dispatch<React.SetStateAction<string[]>>;
   setExpirationDate: React.Dispatch<React.SetStateAction<string[]>>;
   setOwner: React.Dispatch<React.SetStateAction<string[]>>;
@@ -24,36 +25,25 @@ interface CardRegistrationFormProps {
 
 function CardRegistrationForm({
   card,
+  checkValidator,
+  errorMessage,
+  isVisited,
   setCardNumber,
   setExpirationDate,
   setOwner,
   setSecurityCode,
   setPassword,
 }: CardRegistrationFormProps) {
-  const [errorMessage, setErrorMessage] = useState<ErrorMessage>({
-    cardNumber: '',
-    expirationDate: '',
-    owner: '',
-    securityCode: '',
-    password: '',
-  });
-  const [isVisited, setIsVisited] = useState<Visited>({
-    cardNumber: false,
-    expirationDate: false,
-    owner: false,
-    securityCode: false,
-    password: false,
-  });
   const navigate = useNavigate();
   const { dispatchCardList } = useWrappingContext(CardListStore);
   const handleForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const error = [
-      checkValidator<CardNumber>(checkCardNumber, card.cardNumber, 'cardNumber')(),
-      checkValidator<ExpirationDate>(checkExpirationDate, card.expirationDate, 'expirationDate')(),
-      checkValidator<SecurityCode>(checkSecurityCode, card.securityCode, 'securityCode')(),
-      checkValidator<CardPassword>(checkPassword, card.password, 'password')(),
+      checkValidator<CardNumber>(checkCardNumber, card.cardNumber, 'cardNumber'),
+      checkValidator<ExpirationDate>(checkExpirationDate, card.expirationDate, 'expirationDate'),
+      checkValidator<SecurityCode>(checkSecurityCode, card.securityCode, 'securityCode'),
+      checkValidator<CardPassword>(checkPassword, card.password, 'password'),
     ];
 
     if (error.join('') === '') {
@@ -62,46 +52,32 @@ function CardRegistrationForm({
     }
   };
 
-  const checkValidator =
-    <T,>(validateCallback: (value: T) => void, value: T | undefined, name: string) =>
-    () => {
-      setIsVisited(prev => ({ ...prev, [name]: true }));
-      try {
-        if (value) {
-          validateCallback(value);
-          setErrorMessage(prev => ({ ...prev, [name]: '' }));
-        }
-      } catch (error) {
-        setErrorMessage(prev => ({ ...prev, [name]: getErrorMessage(error) }));
-        return getErrorMessage(error);
-      }
-      return '';
-    };
-
   return (
     <StyledCardRegistrationFrom onSubmit={handleForm}>
       <CardNumberInput
         getInputListValue={setCardNumber}
-        checkValidator={checkValidator<CardNumber>(checkCardNumber, card.cardNumber, 'cardNumber')}
+        checkValidator={() => checkValidator<CardNumber>(checkCardNumber, card.cardNumber, 'cardNumber')}
         errorMessage={errorMessage.cardNumber}
         isVisited={isVisited.cardNumber}
       />
       <ExpirationDateInput
         getInputListValue={setExpirationDate}
-        checkValidator={checkValidator<ExpirationDate>(checkExpirationDate, card.expirationDate, 'expirationDate')}
+        checkValidator={() =>
+          checkValidator<ExpirationDate>(checkExpirationDate, card.expirationDate, 'expirationDate')
+        }
         errorMessage={errorMessage.expirationDate}
         isVisited={isVisited.expirationDate}
       />
       <OwnerInput getInputListValue={setOwner} errorMessage={errorMessage.owner} isVisited={isVisited.owner} />
       <SecurityCodeInput
         getInputListValue={setSecurityCode}
-        checkValidator={checkValidator<SecurityCode>(checkSecurityCode, card.securityCode, 'securityCode')}
+        checkValidator={() => checkValidator<SecurityCode>(checkSecurityCode, card.securityCode, 'securityCode')}
         errorMessage={errorMessage.securityCode}
         isVisited={isVisited.securityCode}
       />
       <CardPasswordInput
         getInputListValue={setPassword}
-        checkValidator={checkValidator<CardPassword>(checkPassword, card.password, 'password')}
+        checkValidator={() => checkValidator<CardPassword>(checkPassword, card.password, 'password')}
         errorMessage={errorMessage.password}
         isVisited={isVisited.password}
       />

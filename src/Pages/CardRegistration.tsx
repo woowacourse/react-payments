@@ -5,7 +5,17 @@ import Card from '../components/Common/Card';
 import Header from '../components/Common/Header';
 
 function CardRegistration() {
-  const { card, setCardNumber, setExpirationDate, setOwner, setPassword, setSecurityCode } = useCardForm();
+  const {
+    card,
+    checkValidator,
+    errorMessage,
+    isVisited,
+    setCardNumber,
+    setExpirationDate,
+    setOwner,
+    setPassword,
+    setSecurityCode,
+  } = useCardForm();
 
   return (
     <>
@@ -14,6 +24,9 @@ function CardRegistration() {
         <Card cardInformation={card} isAddForm />
         <CardRegistrationForm
           card={card}
+          checkValidator={checkValidator}
+          errorMessage={errorMessage}
+          isVisited={isVisited}
           setCardNumber={setCardNumber}
           setExpirationDate={setExpirationDate}
           setOwner={setOwner}
