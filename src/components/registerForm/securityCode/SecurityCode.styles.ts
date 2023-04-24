@@ -19,13 +19,19 @@ export const Styled = {
     gap: 11px;
 
     position: relative;
+
+    img {
+      &:hover + div {
+        display: flex;
+      }
+    }
   `,
 
   CVVInfoContainer: styled.div`
     width: 60%;
     height: 155px;
 
-    display: flex;
+    display: none;
     align-items: center;
     -webkit-box-align: center;
 

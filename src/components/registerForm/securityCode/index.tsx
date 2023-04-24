@@ -9,12 +9,10 @@ import { cardInfoContext } from "src/context/CardInfoContext";
 import { Styled as S } from "./SecurityCode.styles";
 import { NUMBERS } from "src/utils/constant";
 import { lengthMatchValidation } from "src/utils/validation";
-import useTimeoutShow from "src/hooks/useTimeoutShow";
 
 function SecurityCode() {
   const [cardInput, setCardInput] = useContext(cardInfoContext);
   const [error, setError] = useState(false);
-  const { isShow, showForIntervals } = useTimeoutShow(3000);
 
   const codeChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     const value = event.currentTarget.value;
@@ -43,12 +41,8 @@ function SecurityCode() {
           placeholder="•••"
           customInputStyle={S.SecurityInput}
         />
-        <img
-          src={QuestionMark}
-          alt="cvc-question-information"
-          onClick={showForIntervals}
-        />
-        {isShow && (
+        <img src={QuestionMark} alt="cvc-question-information" />
+        {
           <S.CVVInfoContainer>
             <p>
               CVV/CVC 번호는 카드 뒷 면에 있는 3자리 숫자이며 카드 보안을 위한
@@ -57,7 +51,7 @@ function SecurityCode() {
             </p>
             <img src={SecurityIcon} alt="cvc-information" />
           </S.CVVInfoContainer>
-        )}
+        }
       </S.SecurityInfoContainer>
       {error && <ErrorSpan>보안 코드는 3자리 입니다.</ErrorSpan>}
     </S.SecurityCodeContainer>
