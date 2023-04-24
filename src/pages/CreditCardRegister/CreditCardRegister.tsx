@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import CreditCard from 'components/CreditCard';
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import * as Type from 'types';
 import CreditCardNumberInput from './inputs/CreditCardNumberInput';
 import CreditCardExpiryInput from './inputs/CreditCardExpiryInput';
@@ -19,10 +19,20 @@ function CreditCardRegister() {
   const [creditCardCVC, setCreditCardCVC] = useState('');
   const [creditCardPassword, setCreditCardPassword] = useState<Type.CreditCardPasswordType>({ first: '', second: '' });
 
-  const [isFullFilled, setIsFullFilled] = useState(false);
+  const isValidCVC = creditCardCVC === '' || creditCardCVC.length < 3;
+  const isValidExpiry = creditCardExpiry === '' || creditCardExpiry.length < 5;
+  const isValidCardNumber = creditCardNumber === '' || creditCardNumber.length < 16;
+  const isValidCardPassword = creditCardPassword.first === '' || creditCardPassword.second === '';
+
+  const isError = [
+    isValidCVC,
+    isValidExpiry,
+    isValidCardNumber,
+    isValidCardPassword,
+  ].some((v) => v);
 
   const handleSubmit = () => {
-    if (!isFullFilled) return;
+    if (isError) return;
 
     const newCreditCard: Type.CreditCard = {
       number: creditCardNumber,
@@ -38,20 +48,6 @@ function CreditCardRegister() {
     localStorage.setItem('creditCards', JSON.stringify([...existCreditCard, newCreditCard]));
     navigate('/');
   };
-
-  const isValidCVC = (cvc: string): boolean => cvc === '' || cvc.length < 3;
-  const isValidExpiry = (expiry: string): boolean => expiry === '' || expiry.length < 5;
-  const isValidCardNumber = (number: string): boolean => number === '' || number.length < 16;
-  const isValidCardPassword = (first: string, second: string): boolean => first === '' || second === '';
-
-  useEffect(() => {
-    if (isValidCVC(creditCardCVC)) return setIsFullFilled(false);
-    if (isValidExpiry(creditCardExpiry)) return setIsFullFilled(false);
-    if (isValidCardNumber(creditCardNumber)) return setIsFullFilled(false);
-    if (isValidCardPassword(creditCardPassword.first, creditCardPassword.second)) return setIsFullFilled(false);
-
-    return setIsFullFilled(true);
-  }, [creditCardNumber, creditCardExpiry, creditCardCVC, creditCardPassword]);
 
   return (
     <S.CreditCardRegisterLayout>
@@ -92,7 +88,7 @@ function CreditCardRegister() {
         />
         <S.ButtonWrapper>
           <S.RegisterButton
-            disabled={!isFullFilled}
+            disabled={isError}
             type="button"
             onClick={() => handleSubmit()}
           >
