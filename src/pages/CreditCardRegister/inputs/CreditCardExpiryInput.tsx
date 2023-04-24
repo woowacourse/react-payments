@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { useEffect } from 'react';
 import * as T from 'types';
 import Input from '../../../components/Input';
 import * as S from '../style';
@@ -19,7 +17,6 @@ function CreditCardExpiryInput({ name, creditCard, setCreditCard }: Props) {
       .replace(/\D/g, '');
     if (cleanedExpiry.length > 4) return;
     setCreditCard({ ...creditCard, [name]: cleanedExpiry });
-    // }
   };
 
   const markedExpiry = ((expiry: string) => {

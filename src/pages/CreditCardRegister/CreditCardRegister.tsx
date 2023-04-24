@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import CreditCard from 'components/CreditCard';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
@@ -32,9 +31,17 @@ function CreditCardRegister() {
   const isValidCVC = validateCVC(creditCard.cvc);
   const isValidExpiry = validateExpiry(creditCard.expiry);
   const isValidCardNumber = validateNumber(creditCard.number);
-  const isValidCardPassword = validatePassword(creditCard.password.first, creditCard.password.second);
+  const isValidCardPassword = validatePassword(
+    creditCard.password.first,
+    creditCard.password.second
+  );
 
-  const isError = [isValidCVC, isValidExpiry, isValidCardNumber, isValidCardPassword].some((v) => v);
+  const isError = [
+    isValidCVC,
+    isValidExpiry,
+    isValidCardNumber,
+    isValidCardPassword
+  ].some((v) => v);
 
   const handleSubmit = () => {
     if (isError) return;

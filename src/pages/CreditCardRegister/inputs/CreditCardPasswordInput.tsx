@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import * as T from 'types';
 import Input from '../../../components/Input';
 import * as S from '../style';
@@ -15,7 +14,9 @@ function CreditCardPasswordInput({ name, creditCard, setCreditCard }: Props) {
     const newPassword = (event.target.value as T.CreditCardPasswordTypeKeys).replace(/\D/g, '');
     if (newPassword.length === 1) {
       const updatedCreditCard: T.CreditCard = { ...creditCard };
-      (updatedCreditCard[name] as T.CreditCardPasswordType)[event.target.name as T.CreditCardPasswordTypeKeys] = event.target.value;
+      const targetName = event.target.name as T.CreditCardPasswordTypeKeys;
+      const targetValue = event.target.value;
+      (updatedCreditCard[name] as T.CreditCardPasswordType)[targetName] = targetValue;
       setCreditCard(updatedCreditCard);
     }
   };
