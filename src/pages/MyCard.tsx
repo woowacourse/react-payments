@@ -5,6 +5,7 @@ import styled from "styled-components";
 import Card from "../components/Card";
 import { getLocalStorage } from "../utils";
 import { CardType } from "../types";
+import { ROUTER_PATH } from "../constants";
 
 const MyCard = () => {
   const cards = getLocalStorage("card");
@@ -22,7 +23,7 @@ const MyCard = () => {
           />
         </CardWrapper>
       ))}
-      <Link to="/AddCard" style={{ textDecoration: "none" }}>
+      <Link to={ROUTER_PATH.AddCard} style={{ textDecoration: "none" }}>
         <EmptyCardWrapper>+</EmptyCardWrapper>
       </Link>
     </Page>

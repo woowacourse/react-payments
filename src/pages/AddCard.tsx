@@ -1,4 +1,3 @@
-import { FormEvent } from "react";
 import { useState } from "react";
 import Card from "../components/Card";
 import CardInputForm from "../components/CardInputForm";
@@ -18,7 +17,7 @@ const AddCard = () => {
     color: CARD_COLOR[Math.floor(Math.random() * 10)],
   });
 
-  const registerCard = (e: FormEvent) => {
+  const registerCard = () => {
     const cards = getLocalStorage("card");
     setLocalStorage("card", [...cards, card]);
   };
@@ -32,11 +31,7 @@ const AddCard = () => {
         expiredDate={card.expiredDate}
         cardNumber={card.cardNumber}
       />
-      <CardInputForm
-        card={card}
-        setCard={setCard}
-        onSubmit={(e: FormEvent) => registerCard(e)}
-      />
+      <CardInputForm card={card} setCard={setCard} onSubmit={registerCard} />
     </Page>
   );
 };

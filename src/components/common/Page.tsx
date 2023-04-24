@@ -1,3 +1,4 @@
+import React from "react";
 import { ReactNode } from "react";
 import styled from "styled-components";
 
@@ -19,4 +20,4 @@ const PageWrapper = styled.div`
   padding: 100px;
 `;
 
-export default Page;
+export default React.memo(Page);
