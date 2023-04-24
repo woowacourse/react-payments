@@ -1,5 +1,3 @@
-import ArrowLeft from "./arrow-left.svg";
-import IcChip from "./ic-chip.svg";
-import QuestionMark from "./question-mark.svg";
-
-export { ArrowLeft, IcChip, QuestionMark };
+export { default as ArrowLeft } from "./arrow-left.svg";
+export { default as IcChip } from "./ic-chip.svg";
+export { default as QuestionMark } from "./question-mark.svg";
