@@ -12,7 +12,7 @@ export default meta;
 
 export const InputTest = (args: any) => (
   <InputBoxExpirationDate
-    setIsComplete={() => {}}
+    changeCardExpirationDateStatus={() => {}}
     changeNowCardInfo={() => {}}
   ></InputBoxExpirationDate>
 );
