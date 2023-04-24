@@ -1,6 +1,6 @@
 import { PropsWithChildren, createContext, useContext } from 'react';
 
-import useModalAnimation from './hooks/useModalAnimation';
+import useAnimatedModal from './hooks/useAnimatedModal';
 
 import { noop } from '../../../utils/noop';
 
@@ -22,7 +22,7 @@ export const ModalContext = createContext<ModalContextProps>({
 
 export const ModalProvider = ({ children }: PropsWithChildren) => {
   const { isModalOpen, isVisible, isAnimating, openModal, closeModal } =
-    useModalAnimation();
+    useAnimatedModal();
 
   return (
     <ModalContext.Provider

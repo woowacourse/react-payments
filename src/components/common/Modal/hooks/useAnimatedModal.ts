@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 
 const ANIMATION_DURATION = 300;
 
-const useModalAnimation = () => {
+const useAnimatedModal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -53,4 +53,4 @@ const useModalAnimation = () => {
   };
 };
 
-export default useModalAnimation;
+export default useAnimatedModal;
