@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 import styled from 'styled-components';
 import Input from './Input';
 
@@ -7,7 +7,7 @@ interface InputListBoxProps {
   bridgeLetter?: string;
   autoFocus?: boolean;
   regExp?: RegExp;
-  getInputListValue: (value: string[]) => void;
+  getInputListValue: (value: React.SetStateAction<string[]>) => void;
   children?: React.ReactNode;
 }
 
@@ -19,14 +19,14 @@ function InputListBox({
   getInputListValue,
   children,
 }: InputListBoxProps) {
-  const [value, setValue] = useState<string[]>(Array.from({ length: inputInformation.length }));
   const refs = useRef<HTMLInputElement[]>([]);
   const onChange = (currentIndex: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
     const { target } = e;
     if (regExp) {
       target.value = target.value.replace(regExp, '');
     }
-    setValue(prev => prev.map((prevValue, index) => (index === currentIndex ? target.value : prevValue)));
+    getInputListValue(prev => prev.map((prevValue, index) => (index === currentIndex ? target.value : prevValue)));
+
     if (autoFocus) {
       if (target.value.length === 0) {
         refs.current[currentIndex - 1]?.focus();
@@ -36,10 +36,6 @@ function InputListBox({
       }
     }
   };
-
-  useEffect(() => {
-    getInputListValue(value);
-  }, [value, getInputListValue]);
 
   return (
     <StyledInputListBox>

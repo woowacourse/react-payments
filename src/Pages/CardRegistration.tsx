@@ -1,23 +1,25 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 import CardRegistrationForm from '../components/CardRegistrationForm';
+import useCardForm from '../components/CardRegistrationForm/hooks/useCardForm';
 import Card from '../components/Common/Card';
 import Header from '../components/Common/Header';
-import type { CardInformation } from '../components/Common/Card/types';
 
 function CardRegistration() {
-  const [card, setCard] = useState<CardInformation>({
-    cardNumber: ['', '', '', ''],
-    expirationDate: ['', ''],
-    owner: '',
-  });
+  const { card, setCardNumber, setExpirationDate, setOwner, setPassword, setSecurityCode } = useCardForm();
 
   return (
     <>
       <Header title="카드 추가" hasBackHistory />
       <StyledMainCardRegistration>
         <Card cardInformation={card} isAddForm />
-        <CardRegistrationForm setCard={setCard} />
+        <CardRegistrationForm
+          card={card}
+          setCardNumber={setCardNumber}
+          setExpirationDate={setExpirationDate}
+          setOwner={setOwner}
+          setSecurityCode={setSecurityCode}
+          setPassword={setPassword}
+        />
       </StyledMainCardRegistration>
     </>
   );
