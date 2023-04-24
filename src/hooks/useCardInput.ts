@@ -1,12 +1,10 @@
 import { ChangeEvent, MouseEvent, useCallback, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { CardFormData } from '../types';
-import { useCardFormValidation } from './useCardFormValidation';
+import { useCardInputValidation } from './useCardInputValidation';
 import formatChecker from '../utils/formatChecker';
 import formatter from '../utils/formatter';
-import { isKeyOfObj } from '../utils/typeUtils';
 import { validateMultipleInputField } from '../utils/validator';
-import { isElementOfType } from '../utils/eventUtils';
+import { isKeyOfObj } from '../utils/typeUtils';
 
 const initialValue: CardFormData = {
   issuer: '',
@@ -20,17 +18,13 @@ const initialValue: CardFormData = {
   password: ['', ''],
 };
 
-const useCardForm = (addCard: (cardInformation: CardFormData) => void) => {
+const useCardInput = () => {
   const [cardInformation, setCardInformation] = useState(initialValue);
-  const [cardValidation, handleValidationChange] = useCardFormValidation();
-
-  const navigate = useNavigate();
+  const [cardInputValidation, handleValidationChange] = useCardInputValidation();
 
   const onButtonInputChange = useCallback(
     (event: MouseEvent<HTMLButtonElement>) => {
-      if (!isElementOfType<HTMLButtonElement>(event)) return;
-
-      const { name, value } = event.target;
+      const { name, value } = event.currentTarget;
 
       setCardInformation((information) => {
         return {
@@ -51,6 +45,7 @@ const useCardForm = (addCard: (cardInformation: CardFormData) => void) => {
       if (isKeyOfObj(formatChecker, name) && !formatChecker[name](value)) return;
 
       const formattedValue = isKeyOfObj(formatter, name) ? formatter[name](value) : value;
+
       setCardInformation((information) => {
         return {
           ...information,
@@ -64,23 +59,19 @@ const useCardForm = (addCard: (cardInformation: CardFormData) => void) => {
 
   const onMultipleInputChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
-      const {
-        name,
-        value,
-        dataset: { index },
-      } = event.target;
+      const { name, value, dataset } = event.target;
 
-      if (!validateMultipleInputField(name) || index === undefined) return;
-      if (isKeyOfObj(formatChecker, name) && !formatChecker[name](value)) return;
+      if (!validateMultipleInputField(name) || !formatChecker[name](value)) return;
 
       setCardInformation((information) => {
         const changeInformation: string[] = [...information[name]];
-        changeInformation[Number(index)] = value;
+        changeInformation[Number(dataset.index)] = value;
 
         const newInformation = {
           ...information,
           [name]: changeInformation,
         };
+
         handleValidationChange(name, newInformation[name]);
 
         return newInformation;
@@ -89,19 +80,13 @@ const useCardForm = (addCard: (cardInformation: CardFormData) => void) => {
     [handleValidationChange]
   );
 
-  const handleSubmit = () => {
-    addCard(cardInformation);
-    navigate('/');
-  };
-
   return {
     cardInformation,
-    cardValidation,
+    cardInputValidation,
     onButtonInputChange,
     onSingleInputChange,
     onMultipleInputChange,
-    handleSubmit,
   };
 };
 
-export { useCardForm };
+export { useCardInput };

@@ -2,19 +2,17 @@ import { useContext } from 'react';
 import Header from '../components/common/Header/Header';
 import CardItem from '../components/CardItem/CardItem';
 import CardAddForm from '../components/CardAddForm/CardAddForm';
-import { useCardForm } from '../hooks/useCardForm';
-import { PaymentsContext } from '../contexts/PaymentsContext';
+import { useCardInput } from '../hooks/useCardInput';
 
 function CardAddPage() {
   const { addCard } = useContext(PaymentsContext);
   const {
     cardInformation,
-    cardValidation,
+    cardInputValidation,
     onButtonInputChange,
     onSingleInputChange,
     onMultipleInputChange,
-    handleSubmit,
-  } = useCardForm(addCard);
+  } = useCardInput();
 
   return (
     <>
@@ -31,7 +29,7 @@ function CardAddPage() {
         />
         <CardAddForm
           cardInformation={cardInformation}
-          cardValidation={cardValidation}
+          cardInputValidation={cardInputValidation}
           onButtonInputChange={onButtonInputChange}
           onSingleInputChange={onSingleInputChange}
           onMultipleInputChange={onMultipleInputChange}

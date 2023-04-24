@@ -11,8 +11,8 @@ const initialValue: CardFormValidation = {
   password: false,
 };
 
-const useCardFormValidation = () => {
-  const [cardValidation, setCardValidation] = useState(initialValue);
+const useCardInputValidation = () => {
+  const [cardInputValidation, setCardInputValidation] = useState(initialValue);
 
   const handleValidationChange = useCallback(
     (key: keyof CardFormValidation, value: string | string[]) => {
@@ -20,7 +20,7 @@ const useCardFormValidation = () => {
         ? validator[key](value as string)
         : validator[key](value as string[]);
 
-      setCardValidation((cardValidation) => {
+      setCardInputValidation((cardValidation) => {
         return {
           ...cardValidation,
           [key]: isValid,
@@ -32,7 +32,7 @@ const useCardFormValidation = () => {
     []
   );
 
-  return [cardValidation, handleValidationChange] as const;
+  return [cardInputValidation, handleValidationChange] as const;
 };
 
-export { useCardFormValidation };
+export { useCardInputValidation };

@@ -12,7 +12,7 @@ import { useFormComplete } from '../../hooks/useFormComplete';
 
 interface CardAddFormProps {
   cardInformation: CardFormData;
-  cardValidation: CardFormValidation;
+  cardInputValidation: CardFormValidation;
   onButtonInputChange: (event: MouseEvent<HTMLButtonElement>) => void;
   onSingleInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
   onMultipleInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -21,13 +21,13 @@ interface CardAddFormProps {
 
 function CardAddForm({
   cardInformation,
-  cardValidation,
+  cardInputValidation,
   onButtonInputChange,
   onSingleInputChange,
   onMultipleInputChange,
   handleCardInformationSubmit,
 }: CardAddFormProps) {
-  const isFormComplete = useFormComplete(cardValidation);
+  const isFormComplete = useFormComplete(cardInputValidation);
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -40,28 +40,28 @@ function CardAddForm({
       <CardIssuer
         onInputChange={onButtonInputChange}
         value={cardInformation.issuer}
-        isValid={cardValidation.issuer}
+        isValid={cardInputValidation.issuer}
       />
       <CardNumber
         onInputChange={onSingleInputChange}
         value={cardInformation.cardNumber}
-        isValid={cardValidation.cardNumber}
+        isValid={cardInputValidation.cardNumber}
       />
       <CardExpirationDate
         onInputChange={onSingleInputChange}
         value={cardInformation.expirationDate}
-        isValid={cardValidation.expirationDate}
+        isValid={cardInputValidation.expirationDate}
       />
       <CardOwnerName onInputChange={onSingleInputChange} value={cardInformation.ownerName} />
       <CardSecurityCode
         onInputChange={onSingleInputChange}
         value={cardInformation.securityCode}
-        isValid={cardValidation.securityCode}
+        isValid={cardInputValidation.securityCode}
       />
       <CardPassword
         onInputChange={onMultipleInputChange}
         values={cardInformation.password}
-        isValid={cardValidation.password}
+        isValid={cardInputValidation.password}
       />
       <Button className="submit-button" variant="primary" disabled={!isFormComplete}>
         다음
