@@ -49,7 +49,7 @@ const CardNumberInputBox = ({ cardNumbers, setCardInfo }: { cardNumbers: CardNum
                 value={value}
                 onChange={onChange}
                 width="xl"
-                type="text"
+                type={key === 'first' || key === 'second' ? 'text' : 'password'}
                 maxLength={4}
                 placeholder="0000"
                 autoFocus={key === 'first' ? true : false}

@@ -38,7 +38,7 @@ const SecurityCodeInputBox = ({ securityCode, setCardInfo }: { securityCode: str
           <span>보안 코드(CVC/CVV)</span>
         </styled.LabelHeader>
         <styled.InputContainer>
-          <Input value={securityCode} onChange={onChange} width="m" type="text" maxLength={3} />
+          <Input value={securityCode} onChange={onChange} width="m" type="password" maxLength={3} />
         </styled.InputContainer>
       </label>
       <styled.ErrorMessage>{errorMessage}</styled.ErrorMessage>

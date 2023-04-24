@@ -43,7 +43,7 @@ const PasswordInputBox = ({ password, setCardInfo }: { password: Password; setCa
         <styled.InputContainer>
           {Object.entries(password).map(([key, value]) => {
             return (
-              <Input key={key} name={key} value={value} onChange={onChange} width="xs" type="text" maxLength={1} />
+              <Input key={key} name={key} value={value} onChange={onChange} width="xs" type="password" maxLength={1} />
             );
           })}
         </styled.InputContainer>
