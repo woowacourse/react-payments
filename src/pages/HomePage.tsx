@@ -64,7 +64,7 @@ export default function Homepage({
 
   return (
     <Page>
-      <Title>보유카드</Title>
+      <Title>보유카드 {cardList.length > 0 && `(${cardList.length}개)`}</Title>
       {cardList?.length === 0 && (
         <AddInformation>새로운 카드를 등록해주세요.</AddInformation>
       )}
