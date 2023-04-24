@@ -3,7 +3,7 @@ import Input from "../common/Input";
 import InputBox from "../common/InputBox";
 import InputGroup from "../common/InputGroup";
 import InputSeparator from "../common/InputSeparator";
-import { isNumber, isOverMaxLength } from "../../utils";
+import { isInputsEmpty, isInputsSatisfied, isNumber, isOverMaxLength, isValidMonth } from "../../utils";
 import { INPUT_LENGTH } from "../../constants";
 import { useCardItemAction, useCardItemValue } from "../provider/CardItemProvider";
 import { useErrorMessageAction, useErrorMessageValue } from "../provider/ErrorMessageProvider";
@@ -18,12 +18,9 @@ const ExpirationDateInput = () => {
   const refs = [useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null)];
 
   useEffect(() => {
-    if (!expirationDate[0].length && !expirationDate[1].length) return;
+    if (isInputsEmpty(expirationDate)) return;
 
-    if (
-      expirationDate[0].length < INPUT_LENGTH.EXPIRATION_DATE ||
-      expirationDate[1].length < INPUT_LENGTH.EXPIRATION_DATE
-    ) {
+    if (!isInputsSatisfied(expirationDate, INPUT_LENGTH.EXPIRATION_DATE)) {
       setExpirationDateErrorMessage("만료일은 MM/YY 형식으로 입력해주세요");
       return;
     }
@@ -32,7 +29,7 @@ const ExpirationDateInput = () => {
       setExpirationDateErrorMessage("유효한 달을 입력해주세요");
       return;
     }
-  }, [expirationDate, expirationDateErrorMessage]);
+  }, [expirationDate, expirationDateErrorMessage, setExpirationDateErrorMessage]);
 
   const handleChangeInput = (inputIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
@@ -53,10 +50,6 @@ const ExpirationDateInput = () => {
     if (isNextInputFocusable(inputValue, inputIndex)) {
       refs[inputIndex + 1].current?.focus();
     }
-  };
-
-  const isValidMonth = (monthValue: string) => {
-    return Number(monthValue) <= 12 && Number(monthValue) >= 1;
   };
 
   const isNextInputFocusable = (inputValue: string, inputIndex: number) => {
