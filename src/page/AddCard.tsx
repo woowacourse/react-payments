@@ -21,12 +21,11 @@ export const AddCard = () => {
 
   return (
     <>
-      <HeaderWrapper>
+      <Header text="카드 추가">
         <Link to={"/"}>
           <BackButton> «</BackButton>
         </Link>
-        <Header text="카드 추가" />
-      </HeaderWrapper>
+      </Header>
       <Main>
         <CardItem card={newCard} />
         <CardForm setCardInfo={setNewCard} />
@@ -36,14 +35,8 @@ export const AddCard = () => {
 };
 
 const BackButton = styled.button`
-  position: absolute;
   font-size: 24px;
-  padding: 13px 0 0 10px;
-`;
-
-const HeaderWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
+  padding-right: 10px;
 `;
 
 const Main = styled.main`

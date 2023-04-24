@@ -1,20 +1,24 @@
 import styled from "styled-components";
+import { PropsWithChildren } from "react";
 
-interface HeaderProps {
+interface HeaderProps extends PropsWithChildren {
   text: string;
 }
 
-export const Header = ({ text }: HeaderProps) => {
+export const Header = ({ text, children }: HeaderProps) => {
   return (
-    <Container>
+    <HeaderWrapper>
+      {children}
       <Text>{text}</Text>
-    </Container>
+    </HeaderWrapper>
   );
 };
 
-const Container = styled.div`
+const HeaderWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   height: 65px;
-
   padding: 20px 36px;
 `;
 
