@@ -1,9 +1,10 @@
-import { useState, ChangeEvent, useEffect } from "react";
+import { ChangeEvent, useEffect } from "react";
 import Input from "../../common/Input";
 import { INPUT_STATUS } from "../../../type/InputStatus";
 import "./cardPassword.css";
 import { validatePassword } from "../../../validation/password";
 import CONSTANT from "../../../Constant";
+import useMultipleInputStatus from "../../../hook/useMultipleInputStatus";
 
 interface Props {
   setError: React.Dispatch<React.SetStateAction<boolean>>;
@@ -11,24 +12,20 @@ interface Props {
 }
 
 export default function CardPassword(props: Props) {
-  const [inputStatus1, setInputStatus1] = useState(INPUT_STATUS.NOT_COMPLETE);
-  const [inputStatus2, setInputStatus2] = useState(INPUT_STATUS.NOT_COMPLETE);
-
   const { setError, setIsComplete } = props;
 
-  useEffect(() => {
-    setError(
-      inputStatus1 === INPUT_STATUS.ERROR || inputStatus2 === INPUT_STATUS.ERROR
-    );
+  const { hasError, isAllComplete, getSetStateFunction } = useMultipleInputStatus(2);
 
-    setIsComplete(
-      inputStatus1 === INPUT_STATUS.COMPLETE &&
-        inputStatus2 === INPUT_STATUS.COMPLETE
-    );
-  }, [inputStatus1, inputStatus2]);
+  useEffect(() => {
+    setError(hasError);
+  }, [hasError]);
+
+  useEffect(() => {
+    setIsComplete(isAllComplete);
+  }, [isAllComplete]);
 
   const onChangePassword =
-    (setInputStatus: React.Dispatch<React.SetStateAction<number>>) =>
+    (setInputStatus: (status: INPUT_STATUS) => void) =>
     (e: ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;
 
@@ -49,14 +46,14 @@ export default function CardPassword(props: Props) {
         name="card-password-1"
         className="input-password"
         type="password"
-        onChange={onChangePassword(setInputStatus1)}
+        onChange={onChangePassword(getSetStateFunction(0))}
         inputMode="numeric"
       ></Input>
       <Input
         name="card-password-2"
         className="input-password"
         type="password"
-        onChange={onChangePassword(setInputStatus2)}
+        onChange={onChangePassword(getSetStateFunction(1))}
         inputMode="numeric"
       ></Input>
       <input
