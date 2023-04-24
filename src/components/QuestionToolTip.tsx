@@ -10,12 +10,12 @@ const QuestionToolTipStyler = styled.div`
     min-width: 27px;
     min-height: 27px;
     margin: 10px;
+    cursor: pointer;
   }
   & > p {
     position: absolute;
-    font-size: 8px;
+    font-size: 10px;
     left: 42px;
-    top: 4px;
     width: 180px;
   }
 `;
