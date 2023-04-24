@@ -1,69 +1,15 @@
 import styled from 'styled-components';
-import { LABEL, MAX_LENGTH, PLACEHOLDER } from '../constants/inputInfo';
+
+import { InputBox } from './common';
+
 import { useForm } from '../hooks/useForm';
-import { Input, Label, ErrorMessage } from './common';
-import { useEffect } from 'react';
-import { ERROR_MESSAGE } from '../constants/errors';
-import { LabelOption } from '../type/input';
-import { joinValues, matchKeyWithId } from '../utils/infoKey';
+
 import { cardList } from '../data/localStorage';
+
+import { joinValues } from '../utils/infoKey';
 import { getFormFields } from '../utils/formData';
-import { updateData } from '../utils/localStorage';
+
 import { Card } from '../type/card';
-
-interface InputInfo {
-  value: any;
-  type: string;
-  error: boolean;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  required: boolean;
-  regexp: RegExp;
-}
-interface InputBoxProps extends React.HTMLAttributes<HTMLDivElement> {
-  id: string | undefined;
-  inputs: InputInfo[];
-}
-// type FormProps = {};
-function InputBox({ id, inputs }: InputBoxProps) {
-  return (
-    <_InputBox>
-      {inputs.map(({ type, value, handleChange, required, error }, index) => (
-        <>
-          <_InputWrapper>
-            <Input
-              id={`${id}${index}`}
-              name={`${id}${index}`}
-              type={type}
-              value={value}
-              onChange={handleChange}
-              required={required}
-              placeholder={PLACEHOLDER[matchKeyWithId(`${id}${index}`)]}
-              maxLength={MAX_LENGTH[`${id}`]}
-            />
-            <ErrorMessage>
-              {error && ERROR_MESSAGE[matchKeyWithId(`${id}${index}`)]}
-            </ErrorMessage>
-          </_InputWrapper>
-        </>
-      ))}
-    </_InputBox>
-  );
-}
-
-const _InputWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-
-  gap: 1rem;
-`;
-
-const _InputBox = styled.div`
-  display: flex;
-  justify-content: space-between;
-
-  gap: 0.7rem;
-`;
 
 export function CardRegisterForm() {
   const inputList = useForm();
@@ -104,10 +50,7 @@ export function CardRegisterForm() {
   return (
     <_Form onSubmit={handleSubmit}>
       {Object.entries(inputList).map(([key, inputs]) => (
-        <_InputContainer>
-          <Label htmlFor={key}>{LABEL[key]}</Label>
-          <InputBox id={key} inputs={inputs}></InputBox>
-        </_InputContainer>
+        <InputBox id={key} inputs={inputs}></InputBox>
       ))}
       {isRequiredInputValid && isOptionalInputValid && (
         <ButtonWrapper>
@@ -124,17 +67,6 @@ const _Form = styled.form`
 
   justify-content: space-between;
   gap: 1rem;
-`;
-
-const _InputContainer = styled.div`
-  position: relative;
-  width: 31.8rem;
-
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-
-  margin: 1rem;
 `;
 
 const ButtonWrapper = styled.div`

@@ -2,58 +2,76 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-import { LABEL } from '../../constants/inputInfo';
-import { LabelOption } from '../../type/input';
+import { LABEL, MAX_LENGTH, PLACEHOLDER } from '../../constants/inputInfo';
+import { ErrorMessage, Label, Input } from '../common';
 
+import { ERROR_MESSAGE } from '../../constants/errors';
+import { matchKeyWithId } from '../../utils/infoKey';
+
+interface InputInfo {
+  value: any;
+  type: string;
+  error: boolean;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  required: boolean;
+  regexp: RegExp;
+}
 interface InputBoxProps extends React.HTMLAttributes<HTMLDivElement> {
-  key: LabelOption;
-  render?: () => JSX.Element;
-  children: React.ReactNode;
-  error?: string | null;
+  id: string | undefined;
+  inputs: InputInfo[];
 }
 
-export function InputBox(props: InputBoxProps) {
-  const { key, render, children, error, ...restProps } = props;
+export function InputBox({ id, inputs }: InputBoxProps) {
   return (
-    <InputContainer>
-      {render && render()}
-      <Label>{LABEL[key]}</Label>
-      <InputWrapper {...restProps}>{children}</InputWrapper>
-      {error && <ErrorMessage>{error}</ErrorMessage>}
-    </InputContainer>
+    <_InputContainer>
+      <Label htmlFor={`${id}`}>{LABEL[`${id}`]}</Label>
+      <_InputWithErrorMessage>
+        {inputs.map(({ type, value, handleChange, required, error }, index) => (
+          <>
+            <_InputWrapper>
+              <Input
+                id={`${id}${index}`}
+                name={`${id}${index}`}
+                type={type}
+                value={value}
+                onChange={handleChange}
+                required={required}
+                placeholder={PLACEHOLDER[matchKeyWithId(`${id}${index}`)]}
+                maxLength={MAX_LENGTH[`${id}`]}
+              />
+              <ErrorMessage>
+                {error && ERROR_MESSAGE[matchKeyWithId(`${id}${index}`)]}
+              </ErrorMessage>
+            </_InputWrapper>
+          </>
+        ))}
+      </_InputWithErrorMessage>
+    </_InputContainer>
   );
 }
 
-const InputContainer = styled.div`
+const _InputContainer = styled.div`
   position: relative;
-  width: 100%;
+  width: 31.8rem;
 
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
+
+  margin: 1rem;
 `;
 
-const Label = styled.label`
-  font: var(--text-caption);
-  color: var(--grey-300);
-  margin-bottom: 0.3rem;
+const _InputWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  gap: 1rem;
 `;
 
-const InputWrapper = styled.div`
-  width: 100%;
+const _InputWithErrorMessage = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  /* width: 51.8rem; */
-  height: 4.5rem;
 
-  font-size: 1.5rem;
-
-  background: #ecebf1;
-  border-radius: 7px;
-`;
-
-const ErrorMessage = styled.strong`
-  margin-top: 1rem;
-
-  color: red;
+  gap: 0.7rem;
 `;
