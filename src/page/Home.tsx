@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { CardList } from "../components/cardList/CardList";
+import { CardList } from "../components/cardList";
 import { Header } from "../components/common/Header";
 import { CardType } from "../types/card";
 import cardHandler from "../domain/creditCards";
