@@ -2,7 +2,6 @@ import CardInput from '../CardInput/CardInput';
 import CardLabel from '../CardLabel/CardLabel';
 import styled from 'styled-components';
 import { useRef } from 'react';
-import { REG_EXP } from '../../constants/regexp';
 
 const Wrapper = styled.div`
   display: flex;
@@ -43,7 +42,7 @@ const ExpiredDate = ({ expiredDates, setExpiredDates }: ExpiredDateProps) => {
 
     if (currentRef.current === null) return;
 
-    if (REG_EXP.cardNumberLimit.test(currentRef.current.value)) {
+    if (/[^0-9]/g.test(currentRef.current.value)) {
       return;
     }
 
