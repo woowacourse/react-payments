@@ -53,18 +53,12 @@ const CardNumber = styled.div`
 `;
 const CardNumberItem = styled.span`
   width: 34px;
-  letter-spacing: 3px;
-  &:nth-child(3) {
-    font-size: 24px;
-    letter-spacing: 2px;
-  }
-  &:last-child {
-    font-size: 24px;
-    letter-spacing: 2px;
-  }
+  letter-spacing: 2px;
 `;
 
-const OwnerAndExpiracyWrapper = styled.div``;
+const OwnerAndExpiracyWrapper = styled.div`
+  display: flex;
+`;
 
 const Owner = styled.span`
   display: inline-block;
@@ -152,7 +146,7 @@ export default function Card({
             {cardNumberSet.map((cardNumberItem: string, index: number) => (
               <CardNumberItem key={createUniqueId()}>
                 {index >= ENCRYPT_INDEX
-                  ? '·'.repeat(cardNumberItem.length)
+                  ? '•'.repeat(cardNumberItem.length)
                   : cardNumberItem}
               </CardNumberItem>
             ))}
