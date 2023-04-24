@@ -77,7 +77,7 @@ const CardInputForm = ({ card, setCard, onSubmit }: CardInputFormType) => {
           placeholder="카드 번호를 입력해 주세요."
           width="318px"
           isAutoFocus
-          isRequired={true}
+          isRequired
           onChange={handleCardNumberChanged}
           onKeyDown={handleCardNumberKey}
         />
