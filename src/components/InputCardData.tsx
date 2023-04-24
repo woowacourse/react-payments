@@ -3,13 +3,13 @@ import React, { ChangeEvent, RefObject } from 'react';
 import './InputCardData.css';
 
 export type InputProps = {
-  value: string;
   isPasswordType?: boolean;
   passwordType?: string;
   className?: string;
-  name: string;
-  maxDataLength: number;
+  value: string;
   minDataLength: number;
+  maxDataLength: number;
+  name: string;
   dataId: number;
   refObject: RefObject<HTMLInputElement>;
   handleError: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -19,15 +19,15 @@ export type InputProps = {
 };
 
 const InputCardData = ({
-  value,
   isPasswordType,
   passwordType,
-  maxDataLength,
-  minDataLength,
-  name,
   className,
-  refObject: Ref,
+  value,
+  minDataLength,
+  maxDataLength,
+  name,
   dataId,
+  refObject: Ref,
   handleError,
   onChange,
   onFocus,
@@ -37,9 +37,9 @@ const InputCardData = ({
     <input
       className={`input-password-container ${passwordType}`}
       type="password"
+      value={value}
       maxLength={maxDataLength}
       minLength={minDataLength}
-      value={value}
       data-id={dataId}
       ref={Ref}
       onChange={(e) => {

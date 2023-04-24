@@ -103,61 +103,61 @@ const FormCardAdd = ({
         <span className="form-label">카드 번호</span>
         <div className="card-number-input-container">
           <InputCardData
-            value={cardNumber.value.first}
-            onChange={cardNumber.onChange}
             className="card-number"
+            value={cardNumber.value.first}
+            minDataLength={4}
+            maxDataLength={4}
             name="first"
             dataId={0}
             refObject={inputRef[0]}
-            minDataLength={4}
-            maxDataLength={4}
             handleError={() => {}}
+            onChange={cardNumber.onChange}
             onFocus={moveFocus}
             handleInputData={handleInputData}
           />
           <span>-</span>
           <InputCardData
-            value={cardNumber.value.second}
-            onChange={cardNumber.onChange}
             className="card-number"
+            value={cardNumber.value.second}
+            minDataLength={4}
+            maxDataLength={4}
             name="second"
             dataId={1}
-            minDataLength={4}
             refObject={inputRef[1]}
-            maxDataLength={4}
             handleError={() => {}}
+            onChange={cardNumber.onChange}
             onFocus={moveFocus}
             handleInputData={handleInputData}
           />
           <span>-</span>
           <InputCardData
-            value={cardNumber.value.third}
-            onChange={cardNumber.onChange}
+            isPasswordType={true}
+            passwordType="card-number"
             className="card-number"
-            name="third"
+            value={cardNumber.value.third}
             dataId={2}
             minDataLength={4}
-            refObject={inputRef[2]}
             maxDataLength={4}
-            isPasswordType={true}
+            name="third"
+            refObject={inputRef[2]}
             handleError={() => {}}
-            passwordType="card-number"
+            onChange={cardNumber.onChange}
             onFocus={moveFocus}
             handleInputData={handleInputData}
           />
           <span>-</span>
           <InputCardData
-            value={cardNumber.value.fourth}
-            onChange={cardNumber.onChange}
-            className="card-number"
-            name="fourth"
-            dataId={3}
-            minDataLength={4}
-            refObject={inputRef[3]}
-            maxDataLength={4}
-            handleError={() => {}}
             isPasswordType={true}
             passwordType="card-number"
+            className="card-number"
+            value={cardNumber.value.fourth}
+            minDataLength={4}
+            maxDataLength={4}
+            name="fourth"
+            dataId={3}
+            refObject={inputRef[3]}
+            handleError={() => {}}
+            onChange={cardNumber.onChange}
             onFocus={moveFocus}
             handleInputData={handleInputData}
           />
@@ -166,15 +166,15 @@ const FormCardAdd = ({
       <div>
         <span className="form-label">만료일</span>
         <InputCardData
-          value={cardExpire.value}
-          onChange={cardExpire.onChange}
           className="card-expired"
-          dataId={4}
-          refObject={inputRef[4]}
+          value={cardExpire.value}
           minDataLength={1}
           maxDataLength={5}
           name="expireDate"
+          dataId={4}
+          refObject={inputRef[4]}
           handleError={handleExpireError}
+          onChange={cardExpire.onChange}
           onFocus={moveFocus}
           handleInputData={handleInputData}
         />
@@ -186,15 +186,15 @@ const FormCardAdd = ({
           <span className="form-label">{cardOwner.value.length}/15</span>
         </div>
         <InputCardData
-          value={cardOwner.value}
-          onChange={cardOwner.onChange}
           className="card-owner"
+          value={cardOwner.value}
+          minDataLength={1}
+          maxDataLength={15}
           name="owner"
           dataId={5}
           refObject={inputRef[5]}
-          minDataLength={1}
-          maxDataLength={15}
           handleError={() => {}}
+          onChange={cardOwner.onChange}
           onFocus={moveFocus}
           handleInputData={handleInputData}
         />
@@ -203,14 +203,14 @@ const FormCardAdd = ({
         <span className="form-label">보안코드(CVC/CVV)</span>
         <div className="card-security-code-box">
           <InputCardData
-            value={securityCode.value}
             isPasswordType={true}
-            name="cvcData"
             passwordType="password-cvc"
-            dataId={6}
-            refObject={inputRef[6]}
+            value={securityCode.value}
+            name="cvcData"
             maxDataLength={3}
             minDataLength={3}
+            dataId={6}
+            refObject={inputRef[6]}
             handleError={() => {}}
             onChange={securityCode.onChange}
             onFocus={moveFocus}
@@ -224,29 +224,29 @@ const FormCardAdd = ({
         <div className="card-password-input-box">
           <InputCardData
             isPasswordType={true}
+            passwordType="password-single"
             value={cardPassword1.value}
+            maxDataLength={1}
+            minDataLength={1}
             name="card-password-1"
             dataId={7}
             refObject={inputRef[7]}
-            maxDataLength={1}
-            minDataLength={1}
             handleError={() => {}}
-            passwordType="password-single"
             onChange={cardPassword1.onChange}
             onFocus={moveFocus}
             handleInputData={handleInputData}
           />
           <InputCardData
             isPasswordType={true}
+            passwordType="password-single"
             value={cardPassword2.value}
-            name="card-password-2"
-            onChange={cardPassword2.onChange}
-            dataId={8}
-            refObject={inputRef[8]}
             maxDataLength={1}
             minDataLength={1}
+            name="card-password-2"
+            dataId={8}
+            refObject={inputRef[8]}
             handleError={() => {}}
-            passwordType="password-single"
+            onChange={cardPassword2.onChange}
             onFocus={moveFocus}
             handleInputData={handleInputData}
           />
