@@ -27,3 +27,5 @@
 - [x] inputmode 추가로 모바일 사용자 경험을 개선
 - [x] form 제출 버튼의 color를 black으로 변경하여 ios 환경의 오류(fix)
 - [x] 잘못된 입력 시 캡션 등으로 사용자에게 알림
+- [x] CVC 옆 물음표 버튼과 버튼 hover시 안내 문구 표기
+- [x] autofocus를 이용한 사용자 경험 개선
