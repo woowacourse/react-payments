@@ -38,10 +38,16 @@ const CARD_COLOR = [
   "lime",
 ];
 
+const ROUTER_PATH = {
+  MyCard: "/",
+  AddCard: "/AddCard",
+};
+
 export {
   CARD_INPUT_MAX_LENGTH,
   CARD_INPUT_MIN_LENGTH,
   SEPERATED_CARD_NUMBER_LENGTH,
   PASSWORD_DIGIT_INDEX,
   CARD_COLOR,
+  ROUTER_PATH,
 };

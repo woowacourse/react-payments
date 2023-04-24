@@ -1,14 +1,15 @@
 import MyCard from "./pages/MyCard";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AddCard from "./pages/AddCard";
+import { ROUTER_PATH } from "./constants";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: ROUTER_PATH.MyCard,
     element: <MyCard />,
   },
   {
-    path: "/AddCard",
+    path: ROUTER_PATH.AddCard,
     element: <AddCard />,
   },
 ]);

@@ -2,11 +2,11 @@ import styled from "styled-components";
 import { IcChip } from "../assets";
 import { CardType } from "../types";
 
-const Card = (props: CardType) => {
-  const cardNumberArray = props.cardNumber.replaceAll(" - ", " ").split(" ");
+const Card = ({ cardNumber, color, ownerName, expiredDate }: CardType) => {
+  const cardNumberArray = cardNumber.replaceAll(" - ", " ").split(" ");
 
   return (
-    <CardWrapper style={{ background: props.color }}>
+    <CardWrapper style={{ background: color }}>
       <img src={IcChip} alt="ic-chip" />
       <CardInfoWrapper>
         <div>
@@ -22,8 +22,8 @@ const Card = (props: CardType) => {
           })}
         </div>
         <div>
-          <span>{props.ownerName}</span>
-          <span>{props.expiredDate}</span>
+          <span>{ownerName}</span>
+          <span>{expiredDate}</span>
         </div>
       </CardInfoWrapper>
     </CardWrapper>

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import CardInput from "./CardInput";
 import {
   PASSWORD_DIGIT_INDEX,
+  ROUTER_PATH,
   SEPERATED_CARD_NUMBER_LENGTH,
 } from "../constants";
 import { CardType } from "../types";
@@ -35,11 +36,6 @@ const CardInputForm = (props: CardInputFormType) => {
       card.cardNumber = card.cardNumber + " - ";
     }
     props.setCard(card);
-  };
-
-  const getSubCardNumber = (length: number) => {
-    if (card.cardNumber.length === length + 3)
-      return card.cardNumber.substring(0, length);
   };
 
   const handleCardNumberKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -193,7 +189,7 @@ const CardInputForm = (props: CardInputFormType) => {
           <p>카드 뒷면의 보안 3자리 숫자를 입력해 주세요 😊</p>
         </AnswerBoxWrapper>
       )}
-      <NextLink type="submit" onClick={props.onSubmit} to="/">
+      <NextLink type="submit" onClick={props.onSubmit} to={ROUTER_PATH.MyCard}>
         다음
       </NextLink>
     </CardInputFormWrapper>

@@ -1,21 +1,22 @@
 import styled from "styled-components";
 import { ArrowLeft } from "../../assets";
 import { Link } from "react-router-dom";
+import React from "react";
 
 interface HeaderType {
   title: string;
   isBack: boolean;
 }
 
-const Header = (props: HeaderType) => {
+const Header = ({ title, isBack }: HeaderType) => {
   return (
     <HeaderWrapper>
-      {props.isBack && (
+      {isBack && (
         <Link to="/">
           <img src={ArrowLeft} alt={"뒤로가기"} />
         </Link>
       )}
-      <h3>{props.title}</h3>
+      <h3>{title}</h3>
     </HeaderWrapper>
   );
 };
@@ -43,4 +44,4 @@ const HeaderWrapper = styled.div`
   }
 `;
 
-export default Header;
+export default React.memo(Header);
