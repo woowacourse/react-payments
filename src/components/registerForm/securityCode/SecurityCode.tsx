@@ -1,6 +1,5 @@
 import React, { useState, useContext } from 'react';
 
-import styled from 'styled-components';
 import { CreditCardContext } from '../../../contexts/CreditCardContext';
 import { ONLY_NUMBER_REGEXP } from '../../../utils/regexp';
 import FormLabel from '../../@common/FormLabel';
@@ -69,9 +68,3 @@ function SecurityCode() {
 }
 
 export default SecurityCode;
-
-const SecurityCodeContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  row-gap: 5px;
-`;

@@ -11,7 +11,14 @@ const Card = ({ cardNumber, ownerName, expirationDate }: CardProps) => {
   return (
     <CardContainer>
       <CardChip></CardChip>
-      <CardNumberContainer>{cardNumber.join(' ')}</CardNumberContainer>
+      <CardNumberContainer>
+        {cardNumber.map((numberFraction, index) => {
+          if (index >= 2) {
+            return <span>{'•'.repeat(numberFraction.length)}</span>;
+          }
+          return <span>{numberFraction}</span>;
+        })}
+      </CardNumberContainer>
       <CardNameContainer>
         <span>{ownerName}</span>
         <span>{refineExpirationDate(expirationDate)}</span>
@@ -49,7 +56,7 @@ const CardChip = styled.div`
 `;
 const CardNumberContainer = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 
   height: 13px;
 

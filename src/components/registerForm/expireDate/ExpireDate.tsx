@@ -1,6 +1,5 @@
 import React, { useState, useContext } from 'react';
 
-import styled from 'styled-components';
 import FormLabel from '../../@common/FormLabel';
 import Input from '../../@common/Input';
 import ErrorSpan from '../../@common/ErrorSpan';
@@ -91,9 +90,3 @@ function ExpireDate() {
 }
 
 export default ExpireDate;
-
-const ExpireDateContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  row-gap: 5px;
-`;

@@ -4,10 +4,10 @@ const refineExpirationDate = ([month, year]: string[]): string => {
   }
 
   if (!year) {
-    return `${month}/`;
+    return `${month} /`;
   }
 
-  return `${month}/${year}`;
+  return `${month} / ${year}`;
 };
 
 export default refineExpirationDate;

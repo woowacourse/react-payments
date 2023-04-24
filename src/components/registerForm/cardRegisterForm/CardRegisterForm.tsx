@@ -1,8 +1,6 @@
 import React, { useContext } from 'react';
 
-import styled from 'styled-components';
-
-import { useNavigate } from 'react-router-dom';
+import { Form, useNavigate } from 'react-router-dom';
 import useCardList from '../../../hooks/useCardList';
 import { CardNumber } from '../cardNumber/CardNumber';
 import ExpireDate from '../expireDate/ExpireDate';
@@ -10,6 +8,7 @@ import OwnerNameInput from '../ownerNameInput/OwnerName';
 import SecurityCode from '../securityCode/SecurityCode';
 import CardPassword from '../cardPassword/CardPassword';
 import { CreditCardContext } from '../../../contexts/CreditCardContext';
+import { NextButton } from './CardRegisterForm.style';
 
 function CardRegisterForm() {
   const navigation = useNavigate();
@@ -48,26 +47,3 @@ function CardRegisterForm() {
 }
 
 export default CardRegisterForm;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  row-gap: 5px;
-`;
-
-const NextButton = styled.button`
-  width: 51px;
-
-  background: none;
-  border: none;
-
-  box-sizing: border-box;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 16px;
-
-  &:hover {
-    cursor: pointer;
-  }
-`;

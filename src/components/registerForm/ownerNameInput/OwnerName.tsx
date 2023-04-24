@@ -1,12 +1,12 @@
 import React, { useState, useContext } from 'react';
 
-import styled from 'styled-components';
 import { CreditCardContext } from '../../../contexts/CreditCardContext';
 import { CONTINUOUS_EMPTY_REGEXP, ONLY_ENG_AND_EMPTY_REGEXP } from '../../../utils/regexp';
 import FormLabel from '../../@common/FormLabel';
 import Input from '../../@common/Input';
 import ErrorSpan from '../../@common/ErrorSpan';
 import InputWrapper from '../../@common/InputWrapper';
+import LabelContainer from './OwnerName.style';
 
 function OwnerNameInput() {
   const [creditCardInfo, setCreditCardInfo] = useContext(CreditCardContext);
@@ -83,11 +83,3 @@ function OwnerNameInput() {
 }
 
 export default OwnerNameInput;
-
-const LabelContainer = styled.div`
-  display: flex;
-  width: 100%;
-
-  justify-content: space-between;
-  align-items: center;
-`;

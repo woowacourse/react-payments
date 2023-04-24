@@ -1,13 +1,12 @@
 import React, { useState, useContext, useRef } from 'react';
 
-import styled from 'styled-components';
-
 import useAutoFocus from '../../../hooks/useAutoFocus';
 import FormLabel from '../../@common/FormLabel';
 import Input from '../../@common/Input';
 import ErrorSpan from '../../@common/ErrorSpan';
 import { CreditCardContext } from '../../../contexts/CreditCardContext';
 import InputWrapper from '../../@common/InputWrapper';
+import CardNumberInputContainer from './CardNumber.style';
 
 export const CardNumber = () => {
   const [creditCardInfo, setCreditCardInfo] = useContext(CreditCardContext);
@@ -33,10 +32,12 @@ export const CardNumber = () => {
     const inputIndex = Number(event.currentTarget.dataset['index']);
 
     if (isNaN(Number(enteredNumber))) {
-      return setValidStatus({
+      setValidStatus({
         isValid: false,
         message: '숫자만 입력 가능합니다.',
       });
+
+      return;
     }
 
     const newCardNumber = [...creditCardInfo.cardNumber];
@@ -128,18 +129,3 @@ export const CardNumber = () => {
     </InputWrapper>
   );
 };
-
-const CardNumberInputContainer = styled.div`
-  display: flex;
-  -webkit-box-align: center;
-  align-items: center;
-  -webkit-box-pack: justify;
-  justify-content: space-around;
-
-  box-sizing: border-box;
-  width: 100%;
-  height: 45px;
-
-  border-radius: 7px;
-  column-gap: 10px;
-`;

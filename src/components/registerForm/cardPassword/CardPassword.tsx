@@ -1,7 +1,5 @@
 import React, { useState, useRef, useContext } from 'react';
 
-import styled, { css } from 'styled-components';
-
 import useAutoFocus from '../../../hooks/useAutoFocus';
 import { ONLY_NUMBER_REGEXP } from '../../../utils/regexp';
 import FormLabel from '../../@common/FormLabel';
@@ -9,6 +7,7 @@ import Input from '../../@common/Input';
 import ErrorSpan from '../../@common/ErrorSpan';
 import { CreditCardContext } from '../../../contexts/CreditCardContext';
 import InputWrapper from '../../@common/InputWrapper';
+import { DotParagraph, PasswordInputContainer } from './CardPassword.style';
 
 function CardPassword() {
   const [validationStatus, setValidationStatus] = useState({
@@ -97,26 +96,3 @@ function CardPassword() {
 }
 
 export default CardPassword;
-
-const CardPasswordContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  row-gap: 5px;
-`;
-
-const PasswordInputContainer = styled.div`
-  display: flex;
-  align-items: center;
-  column-gap: 7px;
-`;
-
-const DotParagraph = styled.p`
-  width: 43px;
-  height: 45px;
-
-  box-sizing: border-box;
-  margin: 0;
-
-  font-size: 28px;
-  text-align: center;
-`;
