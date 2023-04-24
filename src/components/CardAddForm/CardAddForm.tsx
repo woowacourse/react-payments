@@ -1,6 +1,7 @@
 import styles from './style.module.css';
-import { FormEvent, useEffect, useRef } from 'react';
-import { CardFormData } from '../../types';
+import { ChangeEvent, FormEvent, MouseEvent, useEffect, useRef } from 'react';
+import { CardFormData, CardFormValidation } from '../../types';
+import CardIssuer from './CardIssuer/CardIssuer';
 import CardNumber from './CardNumber/CardNumber';
 import CardExpirationDate from './CardExpirationDate/CardExpirationDate';
 import CardOwnerName from './CardOwnerName/CardOwnerName';
@@ -8,24 +9,25 @@ import CardSecurityCode from './CardSecurityCode/CardSecurityCode';
 import CardPassword from './CardPassword/CardPassword';
 import Button from '../common/Button/Button';
 import { useFormComplete } from '../../hooks/useFormComplete';
-import { useCardValidator } from '../../hooks/useCardValidation';
-import CardIssuer from './CardIssuer/CardIssuer';
 
 interface CardAddFormProps {
   cardInformation: CardFormData;
-  handleSingleInputFieldChange: (name: string, value: string) => void;
-  handleMultipleInputFieldChange: (name: string, value: string, index: number) => void;
+  cardValidation: CardFormValidation;
+  onButtonInputChange: (event: MouseEvent<HTMLButtonElement>) => void;
+  onSingleInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onMultipleInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
   handleCardInformationSubmit: () => void;
 }
 
 function CardAddForm({
   cardInformation,
-  handleSingleInputFieldChange,
-  handleMultipleInputFieldChange,
+  cardValidation,
+  onButtonInputChange,
+  onSingleInputChange,
+  onMultipleInputChange,
   handleCardInformationSubmit,
 }: CardAddFormProps) {
-  const [cardInputValidation, handleValidationChange] = useCardValidator();
-  const isFormComplete = useFormComplete(cardInputValidation);
+  const isFormComplete = useFormComplete(cardValidation);
 
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -46,33 +48,30 @@ function CardAddForm({
   return (
     <form ref={formRef} className={styles.form} onSubmit={onSubmit}>
       <CardIssuer
-        handleInputChange={handleSingleInputFieldChange}
-        validateInput={handleValidationChange}
+        onInputChange={onButtonInputChange}
         value={cardInformation.issuer}
+        isValid={cardValidation.issuer}
       />
       <CardNumber
-        handleInputChange={handleSingleInputFieldChange}
-        validateInput={handleValidationChange}
+        onInputChange={onSingleInputChange}
         value={cardInformation.cardNumber}
+        isValid={cardValidation.cardNumber}
       />
       <CardExpirationDate
-        handleInputChange={handleSingleInputFieldChange}
-        validateInput={handleValidationChange}
+        onInputChange={onSingleInputChange}
         value={cardInformation.expirationDate}
+        isValid={cardValidation.expirationDate}
       />
-      <CardOwnerName
-        handleInputChange={handleSingleInputFieldChange}
-        value={cardInformation.ownerName}
-      />
+      <CardOwnerName onInputChange={onSingleInputChange} value={cardInformation.ownerName} />
       <CardSecurityCode
-        handleInputChange={handleSingleInputFieldChange}
-        validateInput={handleValidationChange}
+        onInputChange={onSingleInputChange}
         value={cardInformation.securityCode}
+        isValid={cardValidation.securityCode}
       />
       <CardPassword
-        handleInputChange={handleMultipleInputFieldChange}
-        validateInput={handleValidationChange}
+        onInputChange={onMultipleInputChange}
         values={cardInformation.password}
+        isValid={cardValidation.password}
       />
       <Button className="submit-button" variant="primary" disabled={!isFormComplete}>
         다음

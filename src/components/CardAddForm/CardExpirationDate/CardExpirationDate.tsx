@@ -1,4 +1,4 @@
-import { ChangeEvent, FocusEvent, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { ExpirationDate } from '../../../types';
 import { EXPIRATION_DATE_INPUT_MAX_LENGTH } from '../../../constants';
 import InputContainer from '../../common/InputContainer/InputContainer';
@@ -7,12 +7,12 @@ import Input from '../../common/Input/Input';
 import { formatDisplayedExpirationDate } from '../../../utils/formatter';
 
 interface CardExpirationDateProps {
-  handleInputChange: (name: string, value: string) => void;
-  validateInput: (key: string, value: string | string[]) => boolean | undefined;
+  onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
   value: ExpirationDate;
+  isValid: boolean;
 }
 
-function CardExpirationDate({ handleInputChange, validateInput, value }: CardExpirationDateProps) {
+function CardExpirationDate({ onInputChange, value, isValid }: CardExpirationDateProps) {
   const [isError, setIsError] = useState(false);
 
   const expirationDate = formatDisplayedExpirationDate(`${value.month}${value.year}`);
@@ -20,12 +20,10 @@ function CardExpirationDate({ handleInputChange, validateInput, value }: CardExp
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (isError) setIsError(false);
 
-    handleInputChange(event.target.name, event.target.value);
-    validateInput(event.target.name, event.target.value);
+    onInputChange(event);
   };
 
-  const onBlur = (event: FocusEvent<HTMLInputElement>) => {
-    const isValid = validateInput(event.target.name, event.target.value);
+  const onBlur = () => {
     setIsError(!isValid);
   };
 

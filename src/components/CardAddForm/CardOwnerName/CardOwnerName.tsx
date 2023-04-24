@@ -5,15 +5,11 @@ import Label from '../../common/Label/Label';
 import Input from '../../common/Input/Input';
 
 interface CardOwnerNameProps {
-  handleInputChange: (name: string, value: string) => void;
+  onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
   value?: string;
 }
 
-function CardOwnerName({ handleInputChange, value = '' }: CardOwnerNameProps) {
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    handleInputChange(event.target.name, event.target.value);
-  };
-
+function CardOwnerName({ onInputChange, value = '' }: CardOwnerNameProps) {
   return (
     <InputContainer
       characterCounter={{ currentCount: value.length, maxCount: OWNER_NAME_MAX_LENGTH }}
@@ -26,7 +22,7 @@ function CardOwnerName({ handleInputChange, value = '' }: CardOwnerNameProps) {
         placeholder="카드에 표시된 이름과 동일하게 입력해주세요"
         maxLength={OWNER_NAME_MAX_LENGTH}
         autoComplete="cc-name"
-        onChange={onChange}
+        onChange={onInputChange}
       />
     </InputContainer>
   );

@@ -1,30 +1,26 @@
 import styles from './style.module.css';
 import { KeyboardEvent, MouseEvent, useRef, useState } from 'react';
-import { CardInputValidation, Issuer } from '../../../types';
+import { Issuer } from '../../../types';
 import CardIssuerSelection from './CardIssuerSelection/CardIssuerSelection';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
 import Button from '../../common/Button/Button';
 import Modal from '../../common/Modal/Modal';
 import { useModal } from '../../../hooks/useModal';
-import { isElementOfType } from '../../../utils/eventUtils';
 import DownIcon from '../../../assets/down-icon.svg';
 
 interface CardIssuerProps {
-  handleInputChange: (name: string, value: string) => void;
-  validateInput: (key: keyof CardInputValidation, value: string | string[]) => boolean | undefined;
+  onInputChange: (event: MouseEvent<HTMLButtonElement>) => void;
   value: Issuer | '';
+  isValid: boolean;
 }
 
-function CardIssuer({ handleInputChange, validateInput, value }: CardIssuerProps) {
+function CardIssuer({ onInputChange, value, isValid }: CardIssuerProps) {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const { isModalOpen, openModal, closeModal } = useModal();
   const [isError, setIsError] = useState(false);
 
   const handleCloseModal = () => {
-    if (!buttonRef.current) return;
-
-    const isValid = validateInput('issuer', buttonRef.current.value);
     setIsError(!isValid);
     closeModal();
   };
@@ -35,15 +31,9 @@ function CardIssuer({ handleInputChange, validateInput, value }: CardIssuerProps
     }
   };
 
-  const onOptionClick = (event: MouseEvent<HTMLDivElement>) => {
-    if (!isElementOfType<HTMLDivElement>(event)) return;
-
-    const value = event.target.dataset.value!;
-
-    if (buttonRef.current) buttonRef.current.value = value;
-
-    handleInputChange('issuer', value);
-    handleCloseModal();
+  const onOptionClick = (event: MouseEvent<HTMLButtonElement>) => {
+    onInputChange(event);
+    setIsError(false);
   };
 
   return (

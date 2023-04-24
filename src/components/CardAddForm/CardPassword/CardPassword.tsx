@@ -4,27 +4,26 @@ import { PASSWORD_UNIT_MAX_LENGTH, SECURITY_TEXT_ICON } from '../../../constants
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
 import Input from '../../common/Input/Input';
-import { isElementOfType } from '../../../utils/eventUtils';
 
 interface CardPasswordProps {
-  handleInputChange: (name: string, value: string, index: number) => void;
-  validateInput: (key: string, value: string | string[]) => boolean | undefined;
+  onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
   values: string[];
+  isValid: boolean;
 }
 
-function CardPassword({ handleInputChange, validateInput, values }: CardPasswordProps) {
+function CardPassword({ onInputChange, values, isValid }: CardPasswordProps) {
   const lastInputRef = useRef<HTMLInputElement>(null);
   const [isError, setIsError] = useState(false);
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    handleInputChange(event.target.name, event.target.value, Number(event.target.dataset.index));
+    if (isError) setIsError(false);
+
+    onInputChange(event);
   };
 
   const onBlur = (event: FocusEvent<HTMLElement>) => {
     if (event.currentTarget.contains(event.relatedTarget)) return;
-    if (!isElementOfType<HTMLInputElement>(event)) return;
 
-    const isValid = validateInput(event.target.name, values);
     setIsError(!isValid);
   };
 

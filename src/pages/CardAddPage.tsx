@@ -9,8 +9,10 @@ function CardAddPage() {
   const { addCard } = useContext(PaymentsContext);
   const {
     cardInformation,
-    handleSingleInputFieldChange,
-    handleMultipleInputFieldChange,
+    cardValidation,
+    onButtonInputChange,
+    onSingleInputChange,
+    onMultipleInputChange,
     handleSubmit,
   } = useCardForm(addCard);
 
@@ -29,8 +31,10 @@ function CardAddPage() {
         />
         <CardAddForm
           cardInformation={cardInformation}
-          handleSingleInputFieldChange={handleSingleInputFieldChange}
-          handleMultipleInputFieldChange={handleMultipleInputFieldChange}
+          cardValidation={cardValidation}
+          onButtonInputChange={onButtonInputChange}
+          onSingleInputChange={onSingleInputChange}
+          onMultipleInputChange={onMultipleInputChange}
           handleCardInformationSubmit={handleSubmit}
         />
       </main>

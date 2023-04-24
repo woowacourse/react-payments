@@ -1,27 +1,25 @@
-import { ChangeEvent, FocusEvent, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { SECURITY_CODE_MAX_LENGTH, SECURITY_CODE_MIN_LENGTH } from '../../../constants';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
 import Input from '../../common/Input/Input';
 
 interface CardSecurityCodeProps {
-  handleInputChange: (name: string, value: string) => void;
-  validateInput: (key: string, value: string | string[]) => boolean | undefined;
+  onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
   value: string;
+  isValid: boolean;
 }
 
-function CardSecurityCode({ handleInputChange, validateInput, value }: CardSecurityCodeProps) {
+function CardSecurityCode({ onInputChange, value, isValid }: CardSecurityCodeProps) {
   const [isError, setIsError] = useState(false);
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (isError) setIsError(false);
 
-    handleInputChange(event.target.name, event.target.value);
-    validateInput(event.target.name, event.target.value);
+    onInputChange(event);
   };
 
-  const onBlur = (event: FocusEvent<HTMLInputElement>) => {
-    const isValid = validateInput(event.target.name, event.target.value);
+  const onBlur = () => {
     setIsError(!isValid);
   };
 

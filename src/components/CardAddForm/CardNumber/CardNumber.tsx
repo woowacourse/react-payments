@@ -1,4 +1,4 @@
-import { ChangeEvent, FocusEvent, useRef, useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 import {
   CARD_NUMBER_INPUT_MAX_LENGTH,
   CARD_NUMBER_INPUT_UNIT_MAX_LENGTH,
@@ -11,12 +11,12 @@ import { encryptDisplayedCardNumber, formatDisplayedCardNumber } from '../../../
 import { checkNumberFormat } from '../../../utils/formatChecker';
 
 interface CardNumberProps {
-  handleInputChange: (name: string, value: string) => void;
-  validateInput: (key: string, value: string | string[]) => boolean | undefined;
+  onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
   value: string;
+  isValid: boolean;
 }
 
-function CardNumber({ handleInputChange, validateInput, value }: CardNumberProps) {
+function CardNumber({ onInputChange, value, isValid }: CardNumberProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const setCursor = useInputCursorPosition(inputRef);
   const [isError, setIsError] = useState(false);
@@ -62,12 +62,10 @@ function CardNumber({ handleInputChange, validateInput, value }: CardNumberProps
 
     onInputValueChange(event);
     onInputCursorPositionChange(event);
-    handleInputChange(event.target.name, event.target.dataset.value || '');
-    validateInput(event.target.name, event.target.value);
+    onInputChange(event);
   };
 
-  const onBlur = (event: FocusEvent<HTMLInputElement>) => {
-    const isValid = validateInput(event.target.name, event.target.value);
+  const onBlur = () => {
     setIsError(!isValid);
   };
 

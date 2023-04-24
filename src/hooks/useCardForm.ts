@@ -1,55 +1,92 @@
-import { useCallback, useState } from 'react';
+import { ChangeEvent, MouseEvent, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CardFormData } from '../types';
+import { useCardFormValidation } from './useCardFormValidation';
 import formatChecker from '../utils/formatChecker';
 import formatter from '../utils/formatter';
 import { isKeyOfObj } from '../utils/typeUtils';
 import { validateMultipleInputField } from '../utils/validator';
+import { isElementOfType } from '../utils/eventUtils';
+
+const initialValue: CardFormData = {
+  issuer: '',
+  cardNumber: '',
+  expirationDate: {
+    month: '',
+    year: '',
+  },
+  ownerName: '',
+  securityCode: '',
+  password: ['', ''],
+};
 
 const useCardForm = (addCard: (cardInformation: CardFormData) => void) => {
-  const [cardInformation, setCardInformation] = useState<CardFormData>({
-    issuer: '',
-    cardNumber: '',
-    expirationDate: {
-      month: '',
-      year: '',
-    },
-    ownerName: '',
-    securityCode: '',
-    password: ['', ''],
-  });
+  const [cardInformation, setCardInformation] = useState(initialValue);
+  const [cardValidation, handleValidationChange] = useCardFormValidation();
 
   const navigate = useNavigate();
 
-  const handleSingleInputFieldChange = useCallback((name: string, value: string) => {
-    if (isKeyOfObj(formatChecker, name) && !formatChecker[name](value)) return;
+  const onButtonInputChange = useCallback(
+    (event: MouseEvent<HTMLButtonElement>) => {
+      if (!isElementOfType<HTMLButtonElement>(event)) return;
 
-    const formattedValue = isKeyOfObj(formatter, name) ? formatter[name](value) : value;
+      const { name, value } = event.target;
 
-    setCardInformation((information) => {
-      return {
-        ...information,
-        [name]: formattedValue,
-      };
-    });
-  }, []);
+      setCardInformation((information) => {
+        return {
+          ...information,
+          [name]: value,
+        };
+      });
+      handleValidationChange(name as keyof CardFormData, value);
+    },
+    [handleValidationChange]
+  );
 
-  const handleMultipleInputFieldChange = useCallback(
-    (name: string, value: string, index: number) => {
-      if (!validateMultipleInputField(name)) return;
+  const onSingleInputChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      const { name } = event.target;
+      const value = event.target.dataset.value ?? event.target.value;
+
+      if (isKeyOfObj(formatChecker, name) && !formatChecker[name](value)) return;
+
+      const formattedValue = isKeyOfObj(formatter, name) ? formatter[name](value) : value;
+      setCardInformation((information) => {
+        return {
+          ...information,
+          [name]: formattedValue,
+        };
+      });
+      handleValidationChange(name as keyof CardFormData, value);
+    },
+    [handleValidationChange]
+  );
+
+  const onMultipleInputChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      const {
+        name,
+        value,
+        dataset: { index },
+      } = event.target;
+
+      if (!validateMultipleInputField(name) || index === undefined) return;
       if (isKeyOfObj(formatChecker, name) && !formatChecker[name](value)) return;
 
       setCardInformation((information) => {
         const changeInformation: string[] = [...information[name]];
-        changeInformation[index] = value;
+        changeInformation[Number(index)] = value;
 
-        return {
+        const newInformation = {
           ...information,
           [name]: changeInformation,
         };
+        handleValidationChange(name, newInformation[name]);
+
+        return newInformation;
       });
     },
-    []
+    [handleValidationChange]
   );
 
   const handleSubmit = () => {
@@ -59,8 +96,10 @@ const useCardForm = (addCard: (cardInformation: CardFormData) => void) => {
 
   return {
     cardInformation,
-    handleSingleInputFieldChange,
-    handleMultipleInputFieldChange,
+    cardValidation,
+    onButtonInputChange,
+    onSingleInputChange,
+    onMultipleInputChange,
     handleSubmit,
   };
 };
