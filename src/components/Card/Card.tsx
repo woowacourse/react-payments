@@ -42,25 +42,23 @@ type CardProps = Omit<CardType, 'id'>;
 
 const Card = ({ cardNumbers, expiredDate, cardOwnerName }: CardProps) => {
   return (
-    <>
-      <Wrapper>
-        <ChipWrapper>
-          <Chip />
-          <TextWrapper>
-            <CardText>{cardNumbers[0]}</CardText>
-            <CardText>{cardNumbers[1]}</CardText>
-            <CardText>{'•'.repeat(cardNumbers[2].length)}</CardText>
-            <CardText>{'•'.repeat(cardNumbers[3].length)}</CardText>
-          </TextWrapper>
-          <TextWrapper>
-            <CardText>{cardOwnerName || 'NAME'}</CardText>
-            <CardText>
-              {expiredDate[0] || 'MM'} / {expiredDate[1] || 'YY'}
-            </CardText>
-          </TextWrapper>
-        </ChipWrapper>
-      </Wrapper>
-    </>
+    <Wrapper>
+      <ChipWrapper>
+        <Chip />
+        <TextWrapper>
+          <CardText>{cardNumbers[0]}</CardText>
+          <CardText>{cardNumbers[1]}</CardText>
+          <CardText>{'•'.repeat(cardNumbers[2].length)}</CardText>
+          <CardText>{'•'.repeat(cardNumbers[3].length)}</CardText>
+        </TextWrapper>
+        <TextWrapper>
+          <CardText>{cardOwnerName || 'NAME'}</CardText>
+          <CardText>
+            {expiredDate[0] || 'MM'} / {expiredDate[1] || 'YY'}
+          </CardText>
+        </TextWrapper>
+      </ChipWrapper>
+    </Wrapper>
   );
 };
 
