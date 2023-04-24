@@ -58,7 +58,7 @@ const PasswordInput = ({
             ref={refs[0]}
             value={value[0]}
             onChange={handleChangeInput(0)}
-          ></Input>
+          />
         </InputBox>
         <InputBox width='43px' isError={!!errorMessage}>
           <Input
@@ -66,7 +66,7 @@ const PasswordInput = ({
             ref={refs[1]}
             value={value[1]}
             onChange={handleChangeInput(1)}
-          ></Input>
+          />
         </InputBox>
         <DotIcon />
         <DotIcon />
