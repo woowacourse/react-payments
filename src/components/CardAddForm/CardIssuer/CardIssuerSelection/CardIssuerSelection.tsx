@@ -6,7 +6,7 @@ import Button from '../../../common/Button/Button';
 import CloseIcon from '../../../../assets/x-icon.svg';
 
 interface CardIssuerSelectionProps {
-  onOptionClick: (event: MouseEvent<HTMLDivElement>) => void;
+  onOptionClick: (event: MouseEvent<HTMLButtonElement>) => void;
   close: () => void;
 }
 
