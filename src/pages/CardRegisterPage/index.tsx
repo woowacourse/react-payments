@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import CardRegisterForm from '../../components/CardRegisterForm';
@@ -6,17 +5,11 @@ import CardCompanySelectBottomSheet from '../../components/CardCompanySelectBott
 import { CardCompanyProvider } from '../../components/CardCompany/CardCompanyContext';
 
 import { useModal } from '../../components/common/Modal/ModalContext';
-import { useCardsContext } from '../../domain/context/CardsContext';
 
 import styles from './cardRegisterPage.module.css';
 
 const CardRegisterPage = () => {
-  const { isModalOpen, openModal } = useModal();
-  const { registerCard } = useCardsContext();
-
-  useEffect(() => {
-    openModal();
-  }, []);
+  const { isModalOpen } = useModal();
 
   return (
     <CardCompanyProvider>
@@ -37,10 +30,10 @@ const CardRegisterPage = () => {
               />
             </svg>
           </Link>
-          <h1 className="text-title">카드 추가</h1>
+          <h1 className="text-header">카드 추가</h1>
         </header>
         <main className={styles.formContainer}>
-          <CardRegisterForm registerCard={registerCard} />
+          <CardRegisterForm />
         </main>
       </div>
       {isModalOpen && <CardCompanySelectBottomSheet />}

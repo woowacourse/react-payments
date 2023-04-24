@@ -19,7 +19,7 @@ const HoldingCardsPage = () => {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <h1 className="text-title">보유 카드</h1>
+        <h1 className="text-header">보유 카드</h1>
       </header>
       <main>
         {cards.length === 0 && (
