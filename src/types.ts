@@ -1,6 +1,7 @@
 import { PAGE } from './constant';
 
 export interface CardInfo {
+  id: string;
   cardNumber: {
     fisrt: string;
     second: string;

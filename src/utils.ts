@@ -7,3 +7,5 @@ export const isOnlyKoreanAndEnglish = (value: string) => {
 
   return !koreanAndEnglishPattern.test(value);
 };
+
+export const createUniqueId = () => 'id' + Math.random().toString(16).slice(2);

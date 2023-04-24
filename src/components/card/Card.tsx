@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { createUniqueId } from '../../utils';
 
 interface CardProps {
   cardNumberSet: string[];
@@ -86,7 +87,7 @@ export default function Card({ cardNumberSet, owner, expiracy }: CardProps) {
       <div>
         <CardNumber>
           {cardNumberSet.map((cardNumberItem: string, index: number) => (
-            <CardNumberItem key={`${index}${cardNumberItem}`}>
+            <CardNumberItem key={createUniqueId()}>
               {index >= ENCRYPT_INDEX
                 ? '·'.repeat(cardNumberItem.length)
                 : cardNumberItem}

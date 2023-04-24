@@ -11,7 +11,7 @@ import CvcInput from '../components/card/input/CvcInput';
 import PasswordInput from '../components/card/input/PasswordInput';
 import NextButton from '../components/common/NextButton';
 import { useFocusInput } from '../hooks/useFocusInput';
-import { isNumber, isOnlyKoreanAndEnglish } from '../utils';
+import { createUniqueId, isNumber, isOnlyKoreanAndEnglish } from '../utils';
 import { CardInfo } from '../types';
 
 interface AddCardPageProps {
@@ -274,6 +274,7 @@ export default function AddCardPage({
     }
 
     const newCard: CardInfo = {
+      id: createUniqueId(),
       cardNumber: {
         fisrt: firstCardInput.value,
         second: secondCardInput.value,
