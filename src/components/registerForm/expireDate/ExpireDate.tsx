@@ -78,6 +78,7 @@ function ExpireDate() {
         onBlur={_onBlur}
         maxLength={5}
         customInputStyle={ExpireDateInput}
+        inputmode="numeric"
         placeholder="MM / YY"
       />
       {!validStatus.isValid && <ErrorSpan>{validStatus.message}</ErrorSpan>}

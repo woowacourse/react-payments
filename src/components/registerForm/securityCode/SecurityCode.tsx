@@ -58,6 +58,7 @@ function SecurityCode() {
         onBlur={_onBlur}
         maxLength={3}
         type="password"
+        inputmode="numeric"
         customInputStyle={SecurityInput}
       />
       {!validStatus.isValid && <ErrorSpan>{validStatus.message}</ErrorSpan>}

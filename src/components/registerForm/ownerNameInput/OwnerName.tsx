@@ -72,6 +72,7 @@ function OwnerNameInput() {
         value={creditCardInfo.ownerName}
         onChange={_onChange}
         customInputStyle={OwnerNameStyle}
+        inputmode="text"
       />
       {!validationStatus.isValid && <ErrorSpan>{validationStatus.message}</ErrorSpan>}
     </OwnerNameInputContainer>
