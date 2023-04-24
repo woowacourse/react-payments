@@ -1,7 +1,5 @@
-import { useFocus } from 'hooks/useFocus';
-import { ChangeEvent, Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
-import { changeToValidValue } from 'utils/inputValidator';
 import { HIDDEN_ELEMENT_STYLE, LENGTH, REGEX } from 'constants/constants';
 import { Card } from 'types/Card';
 import { useInputHandler } from 'hooks/useInputHandler';
@@ -21,14 +19,12 @@ const ExpirationDateInput = (props: Props) => {
     return name === 'month' && (ValidDate > 12 || ValidDate < 0) ? '' : value;
   };
 
-  const { handleInput: handleDate, handleRef: handleRef } = useInputHandler(
-    setDate,
-    {
+  const { handleInput: handleDate, handleRef: handleInputRef } =
+    useInputHandler(setDate, {
       length: LENGTH.EXPIRATION,
       regex: REGEX.ONLY_NUMBER,
       validator: DateValidatior,
-    }
-  );
+    });
 
   return (
     <>
@@ -44,7 +40,7 @@ const ExpirationDateInput = (props: Props) => {
           maxLength={LENGTH.EXPIRATION}
           inputMode="numeric"
           value={date.month}
-          ref={(el) => handleRef(el, 0)}
+          ref={(el) => handleInputRef(el, 0)}
           onChange={handleDate}
           placeholder="MM"
           required
@@ -57,7 +53,7 @@ const ExpirationDateInput = (props: Props) => {
           maxLength={LENGTH.EXPIRATION}
           inputMode="numeric"
           value={date.year}
-          ref={(el) => handleRef(el, 1)}
+          ref={(el) => handleInputRef(el, 1)}
           onChange={handleDate}
           placeholder="YY"
           required

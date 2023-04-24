@@ -1,7 +1,5 @@
-import { useFocus } from 'hooks/useFocus';
-import { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
-import { changeToValidValue } from 'utils/inputValidator';
 import { HIDDEN_ELEMENT_STYLE, LENGTH, REGEX } from 'constants/constants';
 import { useInputHandler } from 'hooks/useInputHandler';
 
@@ -11,13 +9,11 @@ const PasswordInput = () => {
     password2: '',
   });
 
-  const { handleInput: handlePassword, handleRef: handleRef } = useInputHandler(
-    setPassword,
-    {
+  const { handleInput: handlePassword, handleRef: handleInputRef } =
+    useInputHandler(setPassword, {
       length: LENGTH.EACH_PASSWORD,
       regex: REGEX.ONLY_NUMBER,
-    }
-  );
+    });
 
   return (
     <>
@@ -33,7 +29,7 @@ const PasswordInput = () => {
           maxLength={LENGTH.EACH_PASSWORD}
           inputMode="numeric"
           value={password.password1}
-          ref={(el) => handleRef(el, 0)}
+          ref={(el) => handleInputRef(el, 0)}
           onChange={handlePassword}
           placeholder="0"
           required
@@ -45,7 +41,7 @@ const PasswordInput = () => {
           maxLength={LENGTH.EACH_PASSWORD}
           inputMode="numeric"
           value={password.password2}
-          ref={(el) => handleRef(el, 1)}
+          ref={(el) => handleInputRef(el, 1)}
           onChange={handlePassword}
           placeholder="0"
           required

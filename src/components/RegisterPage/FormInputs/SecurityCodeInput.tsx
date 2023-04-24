@@ -1,6 +1,5 @@
-import { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
-import { changeToValidValue } from 'utils/inputValidator';
 import { HIDDEN_ELEMENT_STYLE, LENGTH, REGEX } from 'constants/constants';
 import { useInputHandler } from 'hooks/useInputHandler';
 
@@ -9,7 +8,7 @@ const SecurityCodeInput = () => {
     code: '',
   });
 
-  const { handleInput: handleCardNumber, handleRef: handleRef } =
+  const { handleInput: handleCardNumber, handleRef: handleInputRef } =
     useInputHandler(setCode, {
       length: LENGTH.SECURITY_CODE,
       regex: REGEX.ONLY_NUMBER,
@@ -28,7 +27,7 @@ const SecurityCodeInput = () => {
           maxLength={LENGTH.SECURITY_CODE}
           inputMode="numeric"
           value={code.code}
-          ref={(el) => handleRef(el, 0)}
+          ref={(el) => handleInputRef(el, 0)}
           onChange={handleCardNumber}
           placeholder="000"
           required

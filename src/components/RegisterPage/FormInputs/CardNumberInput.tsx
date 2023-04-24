@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import { HIDDEN_ELEMENT_STYLE, LENGTH, REGEX } from 'constants/constants';
 import { Card } from 'types/Card';
@@ -14,7 +14,7 @@ interface Props {
 const CardNumberInput = (props: Props) => {
   const { cardNumber, setCardNumber } = props;
 
-  const { handleInput: handleCardNumber, handleRef: handleRef } =
+  const { handleInput: handleCardNumber, handleRef: handleInputRef } =
     useInputHandler(setCardNumber, {
       length: LENGTH.EACH_CARD_NUMBER,
       regex: REGEX.ONLY_NUMBER,
@@ -34,7 +34,7 @@ const CardNumberInput = (props: Props) => {
           maxLength={LENGTH.EACH_CARD_NUMBER}
           inputMode="numeric"
           value={cardNumber.number1}
-          ref={(el) => handleRef(el, 0)}
+          ref={(el) => handleInputRef(el, 0)}
           onChange={handleCardNumber}
           placeholder="0000"
           autoFocus
@@ -48,7 +48,7 @@ const CardNumberInput = (props: Props) => {
           maxLength={LENGTH.EACH_CARD_NUMBER}
           inputMode="numeric"
           value={cardNumber.number2}
-          ref={(el) => handleRef(el, 1)}
+          ref={(el) => handleInputRef(el, 1)}
           onChange={handleCardNumber}
           placeholder="0000"
           required
@@ -61,7 +61,7 @@ const CardNumberInput = (props: Props) => {
           maxLength={LENGTH.EACH_CARD_NUMBER}
           inputMode="numeric"
           value={cardNumber.number3}
-          ref={(el) => handleRef(el, 2)}
+          ref={(el) => handleInputRef(el, 2)}
           onChange={handleCardNumber}
           placeholder="0000"
           required
@@ -74,7 +74,7 @@ const CardNumberInput = (props: Props) => {
           maxLength={LENGTH.EACH_CARD_NUMBER}
           inputMode="numeric"
           value={cardNumber.number4}
-          ref={(el) => handleRef(el, 3)}
+          ref={(el) => handleInputRef(el, 3)}
           onChange={handleCardNumber}
           placeholder="0000"
           required
