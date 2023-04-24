@@ -5,7 +5,7 @@ import { useCardsContext } from '../../domain/context/CardsContext';
 
 const useCardNicknameInputPage = () => {
   const navigate = useNavigate();
-  const { lastRegisteredCard, modifyCardNickname } = useCardsContext();
+  const { lastRegisteredCard, modifyLastCardNickname } = useCardsContext();
   const [nickname, setNickname] = useState('');
 
   const handleNicknameSubmit: FormEventHandler<HTMLDivElement> = (event) => {
@@ -18,7 +18,7 @@ const useCardNicknameInputPage = () => {
       return;
     }
 
-    modifyCardNickname(lastRegisteredCard, nickname);
+    modifyLastCardNickname(lastRegisteredCard, nickname);
     navigate('/');
   };
 

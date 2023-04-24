@@ -17,7 +17,7 @@ const useCards = () => {
     setCards((prevCards) => [...prevCards, card]);
   };
 
-  const modifyCardNickname = (card: CardInfo, nickname: string) => {
+  const modifyLastCardNickname = (card: CardInfo, nickname: string) => {
     const cardsWithoutLast = cards.slice(0, -1);
 
     card['nickname'] = nickname;
@@ -31,7 +31,7 @@ const useCards = () => {
     }
   }, [cards]);
 
-  return { cards, registerCard, lastRegisteredCard, modifyCardNickname };
+  return { cards, registerCard, lastRegisteredCard, modifyLastCardNickname };
 };
 
 export default useCards;
