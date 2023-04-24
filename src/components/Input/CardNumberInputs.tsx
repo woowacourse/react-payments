@@ -1,6 +1,7 @@
 import { Input } from 'components/common';
 import { ValueAndOnChange } from './types';
-import React, { ChangeEvent, Fragment, useRef } from 'react';
+import { ChangeEvent, Fragment, useRef } from 'react';
+import { isNumber } from 'utils';
 
 interface CardNumberInputProps {
   valueAndOnChanges: ValueAndOnChange[];
@@ -17,6 +18,8 @@ export function CardNumberInputs({ valueAndOnChanges }: CardNumberInputProps) {
     onChange?: ValueAndOnChange['onChange']
   ) => {
     const value = e.target.value;
+
+    if (!isNumber(value)) return;
 
     if (index < inputRefs.current.length - 1 && value.length === e.target.maxLength) {
       inputRefs.current[index + 1]?.focus();

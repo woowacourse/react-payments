@@ -1,6 +1,7 @@
 import { Input } from 'components/common';
 import React, { ChangeEvent, useRef } from 'react';
 import styled from 'styled-components';
+import { isNumber } from 'utils';
 import { ValueAndOnChange } from './types';
 
 export interface ExpirationProps {
@@ -18,6 +19,8 @@ export function ExpirationDateInput(props: ExpirationProps) {
     onChange?: ValueAndOnChange['onChange']
   ) => {
     const value = e.target.value;
+
+    if (!isNumber(value)) return;
 
     if (index < inputRefs.current.length - 1 && value.length === e.target.maxLength) {
       inputRefs.current[index + 1]?.focus();

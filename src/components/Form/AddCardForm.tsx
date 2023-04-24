@@ -6,7 +6,7 @@ import {
   CardNumberInputs,
 } from 'components/Input';
 import styled from 'styled-components';
-import { ChangeEventHandler, FormEventHandler, useState } from 'react';
+import { FormEventHandler, useState } from 'react';
 import { Container } from 'components/style/InputContainer';
 import CardDB from 'db/Cards';
 import { Card } from 'components/common/Card/types';
@@ -46,10 +46,6 @@ function AddCardForm({ onSubmit }: AddCardFormProps) {
   const valueAndOnChanges: ValueAndOnChange[] = cardNumbers.map((cardNumber, index) => ({
     value: cardNumber,
     onChange: (value) => {
-      const isNumber = !isNaN(Number(value));
-
-      if (!isNumber) return;
-
       setCardNumbers((prev) => {
         const prevCardNumbers = [...prev];
         prevCardNumbers.splice(index, 1, value);
@@ -60,18 +56,10 @@ function AddCardForm({ onSubmit }: AddCardFormProps) {
   }));
 
   const handleMonthInputChange: ValueAndOnChange['onChange'] = (inputValue) => {
-    const isNumber = !isNaN(Number(inputValue));
-
-    if (!isNumber) return;
-
     setMonth(inputValue);
   };
 
   const handleYearInputChange: ValueAndOnChange['onChange'] = (inputValue) => {
-    const isNumber = !isNaN(Number(inputValue));
-
-    if (!isNumber) return;
-
     setYear(inputValue);
   };
 
@@ -80,26 +68,14 @@ function AddCardForm({ onSubmit }: AddCardFormProps) {
   };
 
   const handleSecurityCodeChange: ValueAndOnChange['onChange'] = (inputValue) => {
-    const isNumber = !isNaN(Number(inputValue));
-
-    if (!isNumber) return;
-
     setSecurityCode(inputValue);
   };
 
   const handleFirstPasswordInputChange: ValueAndOnChange['onChange'] = (inputValue) => {
-    const isNumber = !isNaN(Number(inputValue));
-
-    if (!isNumber) return;
-
     setFirstDigit(inputValue);
   };
 
   const handleSecondPasswordInputChange: ValueAndOnChange['onChange'] = (inputValue) => {
-    const isNumber = !isNaN(Number(inputValue));
-
-    if (!isNumber) return;
-
     setSecondDigit(inputValue);
   };
 

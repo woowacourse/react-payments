@@ -1,5 +1,6 @@
 import { Input } from 'components/common';
 import React, { ChangeEvent, useRef } from 'react';
+import { isNumber } from 'utils';
 import { ValueAndOnChange } from './types';
 
 export interface PasswordInputProps {
@@ -17,6 +18,8 @@ export function PasswordInput(props: PasswordInputProps) {
     onChange?: ValueAndOnChange['onChange']
   ) => {
     const value = e.target.value;
+
+    if (!isNumber(value)) return;
 
     if (index < inputRefs.current.length - 1 && value.length === e.target.maxLength) {
       inputRefs.current[index + 1]?.focus();
