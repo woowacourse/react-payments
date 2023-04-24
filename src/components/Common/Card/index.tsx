@@ -1,8 +1,13 @@
 /* eslint-disable react/no-array-index-key */
-
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactComponent as Dot } from '../../../assets/white-dot.svg';
+import {
+  CARD_EXPIRATION_MONTH_LENGTH,
+  CARD_EXPIRATION_YEAR_LENGTH,
+  CARD_NUMBER_LENGTH,
+  CARD_NUMBER_VISIBLE_LENGTH,
+} from '../../../constants';
 import type { CardInformation } from './types';
 
 interface CardProps {
@@ -26,7 +31,7 @@ function Card({ cardInformation = defaultCardInformation, isAddForm }: CardProps
           <StyledCardInfoTemplate>
             <StyledCardNumberTemplate>
               {cardNumber?.map((number, index) =>
-                index < 2 ? (
+                index < CARD_NUMBER_LENGTH / CARD_NUMBER_VISIBLE_LENGTH ? (
                   <StyledCardNumberItem key={index}>{number}</StyledCardNumberItem>
                 ) : (
                   <StyledCardNumberItem key={index}>
@@ -41,7 +46,8 @@ function Card({ cardInformation = defaultCardInformation, isAddForm }: CardProps
               {owner && <div>{owner[0].slice(0, 12)}</div>}
               {expirationDate && (
                 <div>
-                  {expirationDate[0]?.padStart(2, '0')}/{expirationDate[1]?.padStart(2, '0')}
+                  {expirationDate.at(0)?.padStart(CARD_EXPIRATION_MONTH_LENGTH, '0')}/
+                  {expirationDate.at(1)?.padStart(CARD_EXPIRATION_YEAR_LENGTH, '0')}
                 </div>
               )}
             </StyledCardDetail>

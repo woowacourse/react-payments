@@ -18,6 +18,11 @@ export const CARD_FORM_ERROR_MESSAGE = Object.freeze({
 });
 
 export const CARD_EXPIRATION_DATE_LENGTH = 4;
-export const CARD_PASSWORD_LENGTH = 2;
+export const CARD_EXPIRATION_MONTH_LENGTH = 2;
+export const CARD_EXPIRATION_YEAR_LENGTH = 2;
 export const CARD_NUMBER_LENGTH = 16;
+export const CARD_NUMBER_VISIBLE_LENGTH = 8;
+
+export const CARD_VISIBLE_OWNER_LENGTH = 12;
+export const CARD_PASSWORD_LENGTH = 2;
 export const CARD_SECURITY_CODE_LENGTH = 3;
