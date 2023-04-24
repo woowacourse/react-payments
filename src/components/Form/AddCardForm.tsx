@@ -290,18 +290,17 @@ const SecurityCodeButton = styled.span`
 
   :hover + span {
     display: block;
-    padding: 0 2px;
-    width: 170px;
-    color: #969696;
-    font-weight: 600;
   }
 `;
 
 const SecurityCodeNotification = styled.span`
   display: none;
+  width: 170px;
+  padding: 0 2px;
   border-radius: 7px;
   border: 2px solid #bababa;
-  width: 27px;
+  font-weight: 600;
+  color: #969696;
 `;
 
 export default AddCardForm;
