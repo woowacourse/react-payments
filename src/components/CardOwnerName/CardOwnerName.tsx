@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   margin-bottom: 20px;
 `;
 
-const LabelContainer = styled.div`
+const LabelWrapper = styled.div`
   display: flex;
   justify-content: space-between;
 `;
@@ -39,10 +39,10 @@ const CardOwnerName = ({
 
   return (
     <>
-      <LabelContainer>
+      <LabelWrapper>
         <CardLabel labelText="카드 소유자 이름(선택)" />
         <CardLabel labelText={`${nameRef.current?.value.length || 0} / 30`} />
-      </LabelContainer>
+      </LabelWrapper>
       <Wrapper>
         <CardInput
           type="text"
