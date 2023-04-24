@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 
 import CardRegisterForm from '../../components/CardRegisterForm';
 import CardCompanySelectBottomSheet from '../../components/CardCompanySelectBottomSheet';
+import { CardCompanyProvider } from '../../components/CardCompany/CardCompanyContext';
 
-import useModal from '../../components/common/Modal/hooks/useModal';
+import { useModal } from '../../components/common/Modal/ModalContext';
 import type { CardInfo } from '../../domain/types/card';
 
 import styles from './cardRegisterPage.module.css';
@@ -21,7 +22,7 @@ const CardRegisterPage = ({ registerCard }: Props) => {
   }, []);
 
   return (
-    <>
+    <CardCompanyProvider>
       <div className={styles.container}>
         <header className={styles.header}>
           <Link to="/">
@@ -46,7 +47,7 @@ const CardRegisterPage = ({ registerCard }: Props) => {
         </main>
       </div>
       {isModalOpen && <CardCompanySelectBottomSheet />}
-    </>
+    </CardCompanyProvider>
   );
 };
 

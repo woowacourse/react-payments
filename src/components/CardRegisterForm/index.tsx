@@ -8,6 +8,7 @@ import TooltipButton from '../TooltipButton';
 
 import useCardRegisterForm from './useCardRegisterForm';
 import { useModal } from '../common/Modal/ModalContext';
+import { useCardCompany } from '../CardCompany/CardCompanyContext';
 import { CARD_NUMBER_INPUT_PLACEHOLDER } from '../../domain/constants';
 import type { CardInfo } from '../../domain/types/card';
 
@@ -25,6 +26,7 @@ const CardRegisterForm = ({ registerCard }: Props) => {
   const navigate = useNavigate();
   const inputRefs = Array.from({ length: 10 }).map(() => useRef<Focus>(null));
   const { openModal } = useModal();
+  const { cardCompany } = useCardCompany();
   const {
     cardNumber1,
     cardNumber2,
@@ -86,7 +88,12 @@ const CardRegisterForm = ({ registerCard }: Props) => {
 
   return (
     <>
+      <span className={`${styles.subtitle} text-subtitle`}>
+        {cardCompany === null ? '카드 터치 후 카드사를 선택해 주세요.' : ''}
+      </span>
+
       <Card
+        cardCompany={cardCompany}
         cardNumber1={cardNumber1}
         cardNumber2={cardNumber2}
         cardNumber3={cardNumber3}
