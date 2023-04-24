@@ -1,0 +1,15 @@
+.card-list {
+  display: flex;
+  flex-direction: column;
+
+  gap: 5%;
+  padding: 5% 0;
+  
+  overflow-y: auto;
+}
+
+.add-card-button-explanation {
+  text-align: center;
+  margin: 3%;
+  font-weight: bold;
+}

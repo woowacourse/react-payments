@@ -5,9 +5,9 @@
 <p align="middle">React 모바일 페이먼츠 애플리케이션</p>
 </p>
 
-## 🚀 Getting Started
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-> `Component-Driven Development` 에 따라 UI를 구성하고 재사용 가능한 `Component`를 작성합니다.
+## Available Scripts
 
 ✔️ `모바일 타겟`의 웹 앱을 구현하며 컴포넌트가 가지는 의미와 `편리한 모바일 UI/UX`에 대해 고민해봅니다.  
 ✔️ 다른 라이브러리나 프레임워크 없이 오로지 `React`만으로 상태를 관리하고 컴포넌트를 설계합니다.  

@@ -1,0 +1,14 @@
+.add-card-button {
+  display: block;
+  width: 213px;
+  height: 133px;
+  margin: auto;
+  margin-bottom: 10px;
+
+  background: var(--add-card-color);
+
+  border-radius: 5px;
+  font-size: small;
+
+  cursor: pointer;
+}

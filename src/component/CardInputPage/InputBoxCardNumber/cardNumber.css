@@ -1,0 +1,12 @@
+.input-card-number {
+  width: 25%;
+  border-radius: 0;
+}
+
+.first {
+  border-radius: 7px 0 0 7px;
+}
+
+.last {
+  border-radius: 0 7px 7px 0;
+}
