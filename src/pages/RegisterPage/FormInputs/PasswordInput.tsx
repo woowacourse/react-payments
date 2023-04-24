@@ -1,15 +1,22 @@
 import { useFocus } from "hooks/useFocus";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState, Fragment } from "react";
 import styled from "styled-components";
 import { changeToValidValue } from "utils/inputValidator";
 import { HIDDEN_ELEMENT_STYLE } from "constants/style";
 import { LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
+import Input from "components/Input";
 const { ONLY_NUMBER } = VALID_INPUT;
+
+interface Password {
+  [key: string]: string;
+  password1: string;
+  password2: string;
+}
 
 const PasswordInput = () => {
   const { handleRef, moveFocus } = useFocus();
 
-  const [password, setPassword] = useState({
+  const [password, setPassword] = useState<Password>({
     password1: "",
     password2: "",
   });
@@ -28,39 +35,39 @@ const PasswordInput = () => {
     moveFocus(target, LIMIT_LENGTH.PASSWORD);
   };
 
+  const inputsCount = 4;
+  const passwordPart = inputsCount - 2;
+
   return (
     <>
       <label className="label-text" htmlFor="password-label">
         카드 비밀번호
       </label>
       <S.InputBox>
-        <S.Input
-          type="password"
-          name="password1"
-          id="password-label"
-          aria-labelledby="password-label"
-          maxLength={LIMIT_LENGTH.PASSWORD}
-          inputMode="numeric"
-          value={password.password1}
-          ref={(el) => handleRef(el, 0)}
-          onChange={handlePassword}
-          placeholder="0"
-          required
-        />
-        <S.Input
-          type="password"
-          name="password2"
-          aria-labelledby="password-label"
-          maxLength={LIMIT_LENGTH.PASSWORD}
-          inputMode="numeric"
-          value={password.password2}
-          ref={(el) => handleRef(el, 1)}
-          onChange={handlePassword}
-          placeholder="0"
-          required
-        />
-        <S.HiddenPassword>ㆍ</S.HiddenPassword>
-        <S.HiddenPassword>ㆍ</S.HiddenPassword>
+        {Array.from({ length: inputsCount }).map((_, index) => (
+          <Fragment key={index}>
+            {index < passwordPart ? (
+              <Input
+                width="12vw"
+                margin="0 2.2vw 0 0"
+                borderRadius="8px"
+                type="password"
+                name={`password${index + 1}`}
+                id={index ? undefined : "password-label"}
+                aria-labelledby="password-label"
+                maxLength={LIMIT_LENGTH.PASSWORD}
+                inputMode="numeric"
+                value={password[`password${index + 1}`]}
+                placeholder="0"
+                required
+                onChange={handlePassword}
+                ref={(el) => handleRef(el, index)}
+              />
+            ) : (
+              <S.HiddenPassword>ㆍ</S.HiddenPassword>
+            )}
+          </Fragment>
+        ))}
       </S.InputBox>
       <S.Caption password={Object.values(password)}>
         카드 비밀번호 앞 {LIMIT_LENGTH.PASSWORD}자리를 입력해 주세요.
@@ -74,16 +81,6 @@ const S = {
     display: flex;
     height: 48px;
     margin-top: 12px;
-  `,
-
-  Input: styled.input`
-    background: var(--input-background);
-    width: 12vw;
-    margin-right: 2.2vw;
-    font-size: 14px;
-    text-align: center;
-    letter-spacing: 1px;
-    border-radius: 8px;
   `,
 
   HiddenPassword: styled.p`
