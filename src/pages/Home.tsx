@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { CreditCard, Header, Label } from 'components/common';
 import { PageContainer } from 'components/style/PageContainer';
 
+const cards = CardDB.getCards();
+
 function Home() {
   const navigate = useNavigate();
   const goRegister = () => {
@@ -16,7 +18,7 @@ function Home() {
         <Header text={'보유카드'} />
         <CardContainer>
           <Label text="새로운 카드를 등록해주세요" />
-          {CardDB.getCards().map((card) => (
+          {cards.map((card) => (
             <CreditCard card={card} />
           ))}
           <RegisterButton onClick={goRegister}>+</RegisterButton>
