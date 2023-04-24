@@ -14,7 +14,7 @@ function CardList() {
       cardList.map(({ cardNumber, ownerName, expirationDate }, idx) => {
         return (
           <Card
-            key={idx}
+            key={`card-list-${idx}`}
             cardNumber={cardNumber}
             ownerName={ownerName}
             expirationDate={expirationDate}
