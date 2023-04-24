@@ -1,34 +1,33 @@
-import * as Type from 'types';
+/* eslint-disable max-len */
+import * as T from 'types';
 import Input from '../../../components/Input';
 import * as S from '../style';
 
 type Props = {
-  creditCardPassword: {
-    first: string;
-    second: string;
-  },
-  setCreditCardPassword: React.Dispatch<React.SetStateAction<Type.CreditCardPasswordType>>,
+  name: keyof T.CreditCard;
+  creditCard: T.CreditCard;
+  setCreditCard: React.Dispatch<React.SetStateAction<T.CreditCard>>;
 };
 
-function CreditCardPasswordInput({
-  creditCardPassword, setCreditCardPassword
-}: Props) {
+function CreditCardPasswordInput({ name, creditCard, setCreditCard }: Props) {
   const handleChangeCreditCardPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newSecondPassword = event.target.value;
+    const newSecondPassword: T.CreditCardPasswordTypeKeys = event.target.value as T.CreditCardPasswordTypeKeys;
     if (newSecondPassword.length <= 1) {
-      setCreditCardPassword({ ...creditCardPassword, [event.target.name]: event.target.value });
+      const updatedCreditCard: T.CreditCard = { ...creditCard };
+      (updatedCreditCard[name] as T.CreditCardPasswordType)[event.target.name as T.CreditCardPasswordTypeKeys] = event.target.value;
+      setCreditCard(updatedCreditCard);
     }
   };
 
-  const isError = !((creditCardPassword.first.length > 0 && creditCardPassword.second.length > 0)
-    || (creditCardPassword.first.length === 0 && creditCardPassword.second.length === 0));
+  const isError = !((creditCard.password.first.length > 0 && creditCard.password.second.length > 0)
+    || (creditCard.password.first.length === 0 && creditCard.password.second.length === 0));
 
   return (
     <S.Box>
       <S.CreditCardRegisterLabel>카드 비밀번호</S.CreditCardRegisterLabel>
       <S.FlexBox justifyContent="flex-start">
-        <Input type="password" value={creditCardPassword?.first} width="48px" textAlign="center" name="first" onChange={handleChangeCreditCardPassword} />
-        <Input type="password" value={creditCardPassword?.second} width="48px" textAlign="center" name="second" onChange={handleChangeCreditCardPassword} />
+        <Input type="password" value={creditCard.password?.first} width="48px" textAlign="center" name="first" onChange={handleChangeCreditCardPassword} />
+        <Input type="password" value={creditCard.password?.second} width="48px" textAlign="center" name="second" onChange={handleChangeCreditCardPassword} />
         <S.PasswordBox>•</S.PasswordBox>
         <S.PasswordBox>•</S.PasswordBox>
       </S.FlexBox>

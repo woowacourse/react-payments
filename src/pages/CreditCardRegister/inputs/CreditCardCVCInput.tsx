@@ -1,27 +1,29 @@
+import * as T from 'types';
 import Input from '../../../components/Input';
 import * as S from '../style';
 
 type Props = {
-  creditCardCVC: string,
-  setCreditCardCVC: React.Dispatch<React.SetStateAction<string>>,
+  name: string;
+  creditCard: T.CreditCard;
+  setCreditCard: React.Dispatch<React.SetStateAction<T.CreditCard>>;
 };
 
-function CreditCardCVCInput({ creditCardCVC, setCreditCardCVC }: Props) {
+function CreditCardCVCInput({ name, creditCard, setCreditCard }: Props) {
   const handleChangeCreditCardCVC = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newCVC = event.target.value.replace(/\D/g, '');
     if (newCVC.length <= 3) {
-      setCreditCardCVC(newCVC);
+      setCreditCard({ ...creditCard, [name]: newCVC });
     }
   };
 
-  const isError = creditCardCVC.length > 0 && creditCardCVC.length < 3;
+  const isError = creditCard.cvc.length > 0 && creditCard.cvc.length < 3;
 
   return (
     <S.Box>
       <S.CreditCardRegisterLabel>보안 코드(CVC/CVV)</S.CreditCardRegisterLabel>
 
       <S.FlexBox justifyContent="flex-start" alignItems="center">
-        <Input type="password" value={creditCardCVC} width="72px" textAlign="center" onChange={handleChangeCreditCardCVC} />
+        <Input type="password" value={creditCard.cvc} width="72px" textAlign="center" onChange={handleChangeCreditCardCVC} />
         <S.QuestionBox onClick={() => alert('카드 뒷 면을 참고하세요.')}>
           <S.QuestionMark>?</S.QuestionMark>
         </S.QuestionBox>

@@ -13,16 +13,21 @@ import * as S from './style';
 function CreditCardRegister() {
   const navigate = useNavigate();
 
-  const [creditCardNumber, setCreditCardNumber] = useState('');
-  const [creditCardExpiry, setCreditCardExpiry] = useState('');
-  const [creditCardOwner, setCreditCardOwner] = useState('');
-  const [creditCardCVC, setCreditCardCVC] = useState('');
-  const [creditCardPassword, setCreditCardPassword] = useState<Type.CreditCardPasswordType>({ first: '', second: '' });
+  const [creditCard, setCreditCard] = useState<Type.CreditCard>({
+    number: '',
+    expiry: '',
+    owner: '',
+    cvc: '',
+    password: {
+      first: '',
+      second: '',
+    },
+  });
 
-  const isValidCVC = creditCardCVC === '' || creditCardCVC.length < 3;
-  const isValidExpiry = creditCardExpiry === '' || creditCardExpiry.length < 5;
-  const isValidCardNumber = creditCardNumber === '' || creditCardNumber.length < 16;
-  const isValidCardPassword = creditCardPassword.first === '' || creditCardPassword.second === '';
+  const isValidCVC = creditCard.cvc === '' || creditCard.cvc.length < 3;
+  const isValidExpiry = creditCard.expiry === '' || creditCard.expiry.length < 5;
+  const isValidCardNumber = creditCard.number === '' || creditCard.number.length < 16;
+  const isValidCardPassword = creditCard.password.first === '' || creditCard.password.second === '';
 
   const isError = [
     isValidCVC,
@@ -35,13 +40,13 @@ function CreditCardRegister() {
     if (isError) return;
 
     const newCreditCard: Type.CreditCard = {
-      number: creditCardNumber,
-      expiry: creditCardExpiry,
-      owner: creditCardOwner,
-      cvc: creditCardCVC,
+      number: creditCard.number,
+      expiry: creditCard.expiry,
+      owner: creditCard.owner,
+      cvc: creditCard.cvc,
       password: {
-        first: creditCardPassword.first,
-        second: creditCardPassword.second,
+        first: creditCard.password.first,
+        second: creditCard.password.second,
       },
     };
     const existCreditCard = JSON.parse(localStorage.getItem('creditCards') || '[]');
@@ -59,32 +64,37 @@ function CreditCardRegister() {
         <CreditCard
           fullFilled={false}
           creditCard={{
-            number: creditCardNumber,
-            expiry: creditCardExpiry,
-            owner: creditCardOwner,
+            number: creditCard.number,
+            expiry: creditCard.expiry,
+            owner: creditCard.owner,
           }}
         />
       </S.PreviewCreditCard>
       <S.CreditCardRegisterForm>
         <CreditCardNumberInput
-          creditCardNumber={creditCardNumber}
-          setCreditCardNumber={setCreditCardNumber}
+          name="number"
+          creditCard={creditCard}
+          setCreditCard={setCreditCard}
         />
         <CreditCardExpiryInput
-          creditCardExpiry={creditCardExpiry}
-          setCreditCardExpiry={setCreditCardExpiry}
+          name="expiry"
+          creditCard={creditCard}
+          setCreditCard={setCreditCard}
         />
         <CreditCardOwnerInput
-          creditCardOwner={creditCardOwner}
-          setCreditCardOwner={setCreditCardOwner}
+          name="owner"
+          creditCard={creditCard}
+          setCreditCard={setCreditCard}
         />
         <CreditCardCVCInput
-          creditCardCVC={creditCardCVC}
-          setCreditCardCVC={setCreditCardCVC}
+          name="cvc"
+          creditCard={creditCard}
+          setCreditCard={setCreditCard}
         />
         <CreditCardPasswordInput
-          creditCardPassword={creditCardPassword}
-          setCreditCardPassword={setCreditCardPassword}
+          name="password"
+          creditCard={creditCard}
+          setCreditCard={setCreditCard}
         />
         <S.ButtonWrapper>
           <S.RegisterButton

@@ -1,3 +1,5 @@
+export type CreditCardPasswordTypeKeys = keyof CreditCardPasswordType;
+
 export type CreditCardPasswordType = {
   first: string,
   second: string

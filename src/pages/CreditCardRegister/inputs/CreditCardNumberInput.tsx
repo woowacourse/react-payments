@@ -1,14 +1,16 @@
 import { useRef, useState } from 'react';
 import { convertSecuredCreditCard } from 'domains/creditCard';
+import * as T from 'types';
 import Input from '../../../components/Input';
 import * as S from '../style';
 
 type Props = {
-  creditCardNumber: string;
-  setCreditCardNumber: React.Dispatch<React.SetStateAction<string>>;
+  name: string;
+  creditCard: T.CreditCard;
+  setCreditCard: React.Dispatch<React.SetStateAction<T.CreditCard>>;
 };
 
-function CreditCardNumberInput({ creditCardNumber, setCreditCardNumber }: Props) {
+function CreditCardNumberInput({ name, creditCard, setCreditCard }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [markedCreditCardNumber, setMarkedCreditCardNumber] = useState('');
 
@@ -23,10 +25,10 @@ function CreditCardNumberInput({ creditCardNumber, setCreditCardNumber }: Props)
       .join(' - ');
 
     setMarkedCreditCardNumber(markedNumber);
-    setCreditCardNumber(newCreditCardNumber);
+    setCreditCard({ ...creditCard, [name]: newCreditCardNumber });
   };
 
-  const isError = creditCardNumber.length > 0 && creditCardNumber.length < 16;
+  const isError = creditCard.number.length > 0 && creditCard.number.length < 16;
 
   return (
     <S.RelativeBox>
@@ -47,7 +49,7 @@ function CreditCardNumberInput({ creditCardNumber, setCreditCardNumber }: Props)
       <S.HiddenInput
         ref={inputRef}
         type="string"
-        value={creditCardNumber}
+        value={creditCard.number}
         onChange={handleChangeCreditCardNumber}
       />
     </S.RelativeBox>
