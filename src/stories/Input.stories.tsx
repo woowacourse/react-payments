@@ -1,5 +1,6 @@
 import { StoryFn } from "@storybook/react";
 import { Input, InputProps } from "../components/common/Input";
+import { CARDNUMBERS_REGEX, EXPRIYDATE_REGEX } from "../constants";
 
 export default {
   title: "Input",
@@ -26,8 +27,7 @@ CardNumberInput.args = {
     // 카드번호 저장 로직
 
     const numbers = value.slice(0, 8) + "●".repeat(value.slice(8).length);
-
-    e.target.value = (numbers.match(/\d{1,4}|●{1,4}/g) ?? []).join(" - ");
+    e.target.value = (numbers.match(new RegExp(CARDNUMBERS_REGEX)) ?? []).join(" - ");
   },
 };
 
@@ -46,7 +46,7 @@ ExpiryDateInput.args = {
       return;
     }
 
-    e.target.value = (value.match(/\d{1,2}/g) ?? []).join(" / ");
+    e.target.value = (value.match(new RegExp(EXPRIYDATE_REGEX)) ?? []).join(" / ");
   },
 };
 

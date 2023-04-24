@@ -30,7 +30,7 @@ export const ExpiryDateInput = ({ isValid, setExpiryDate, setIsCompleted, setIsV
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replaceAll(" / ", "");
 
-    if (value.length > EXPRIYDATE_MAXLEGNTH) {
+    if (value.length > neEXPRIYDATE_MAXLEGNTH) {
       e.target.value = e.target.value.slice(0, -1);
       return;
     }

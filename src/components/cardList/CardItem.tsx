@@ -12,12 +12,12 @@ interface CardProps {
 export const CardItem = ({ card }: CardProps) => {
   const memorizedNumbers = useMemo((): string => {
     const shownNumbers = card.numbers.slice(0, 8);
-    return (shownNumbers.match(CARDNUMBERS_REGEX) ?? []).join(" ");
+    return (shownNumbers.match(new RegExp(CARDNUMBERS_REGEX)) ?? []).join(" ");
   }, [card.numbers]);
 
   const memorizedHideNumbers = useMemo((): string => {
     const hiddenNumbers = "●".repeat(card.numbers.slice(8).length);
-    return (hiddenNumbers.match(CARDNUMBERS_REGEX) ?? []).join(" ");
+    return (hiddenNumbers.match(new RegExp(CARDNUMBERS_REGEX)) ?? []).join(" ");
   }, [card.numbers]);
 
   const memoizedName = useMemo(() => {

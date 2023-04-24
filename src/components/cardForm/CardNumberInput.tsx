@@ -23,7 +23,7 @@ const cardNumberInputInfo = {
 
 const hideNumbers = (numbers: string): string => {
   const hiddenNumbers = `${numbers.slice(0, 8)}${"●".repeat(numbers.slice(8).length)}`;
-  return (hiddenNumbers.match(CARDNUMBERS_REGEX) ?? []).join(" - ");
+  return (hiddenNumbers.match(new RegExp(CARDNUMBERS_REGEX)) ?? []).join(" - ");
 };
 
 const cannotInput = (text: string): boolean => {

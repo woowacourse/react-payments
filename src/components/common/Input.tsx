@@ -59,4 +59,6 @@ const ErrorMessage = styled.div`
   margin-top: 1px;
   height: 15px;
   color: red;
+
+  font-size: 11px;
 `;
