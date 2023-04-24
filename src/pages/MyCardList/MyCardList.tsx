@@ -5,20 +5,18 @@ import { useCardRegisterContext } from "../../context/CardRegisterContext";
 import * as Styled from "./MyCardList.styles";
 import AddCardButton from "../../components/pages/CardList/AddCardButton/AddCardButton";
 import CardContent from "../../components/pages/CardList/CardContent/CardContent";
-import { getCardList, saveCardList } from "../../utils/localStorage";
+import { getCardList } from "../../utils/localStorage";
 
 export default function MyCardList() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { cardRegisterInfo, initCardRegisterInfo } = useCardRegisterContext();
+  const { initCardRegisterInfo } = useCardRegisterContext();
   const [registeredCards, setRegisteredCards] =
     useState<CardRegisterInfo[]>(getCardList);
 
   useEffect(() => {
-    if (location.state?.isReadyForRegister && cardRegisterInfo !== null) {
-      const newCardList = [cardRegisterInfo, ...registeredCards];
-      saveCardList(newCardList);
-      setRegisteredCards(newCardList);
+    if (location.state?.isReadyForRegister) {
+      setRegisteredCards(getCardList);
       initCardRegisterInfo();
     }
 

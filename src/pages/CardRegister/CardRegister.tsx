@@ -8,13 +8,20 @@ import CardNumberInput from "../../components/pages/CardRegister/CardNumberInput
 import CardPasswordInput from "../../components/pages/CardRegister/CardPasswordInput/CardPasswordInput";
 import { useCardRegisterContext } from "../../context/CardRegisterContext";
 import * as Styled from "./CardRegister.styles";
+import { getCardList, saveCardList } from "../../utils/localStorage";
 
 export default function CardRegister() {
   const navigate = useNavigate();
-  const { cardRegisterInfo } = useCardRegisterContext();
+  const { cardRegisterInfo, initCardRegisterInfo } = useCardRegisterContext();
   const [allValid, setAllValid] = useState(false);
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (cardRegisterInfo !== null) {
+      const newCardList = [cardRegisterInfo, ...getCardList()];
+      saveCardList(newCardList);
+      initCardRegisterInfo();
+    }
 
     navigate("/", { state: { isReadyForRegister: true } });
   };
