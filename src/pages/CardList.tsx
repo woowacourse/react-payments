@@ -3,7 +3,7 @@ import Layout from "src/components/@common/Layout";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import useCardList from "src/hooks/useCardList";
-import Card from "src/components/@common/Card";
+import Card from "src/components/@common/card";
 
 function CardList() {
   const navigation = useNavigate();

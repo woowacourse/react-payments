@@ -97,7 +97,7 @@ function CardNumber() {
           customInputStyle={Styled.CardNumberInput}
           inputmode="numeric"
           type={"password"}
-          placeholder="●●●●"
+          placeholder="••••"
           ref={thirdInputRef}
         />
         <p>-</p>
@@ -111,7 +111,7 @@ function CardNumber() {
           customInputStyle={Styled.CardNumberInput}
           inputmode="numeric"
           type={"password"}
-          placeholder="●●●●"
+          placeholder="••••"
           ref={fourthInputRef}
         />
       </Styled.CardNumberInputContainer>

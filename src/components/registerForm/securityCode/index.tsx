@@ -35,6 +35,7 @@ function SecurityCode() {
         onChange={codeChange}
         maxLength={NUMBERS.MAX_SECURITY}
         type="password"
+        placeholder="•••"
         customInputStyle={Styled.SecurityInput}
       />
       {error && <ErrorSpan>보안 코드는 3자리 입니다.</ErrorSpan>}

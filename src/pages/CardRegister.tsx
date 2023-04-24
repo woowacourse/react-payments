@@ -1,5 +1,5 @@
 import { useContext, useMemo, useState } from "react";
-import Card from "src/components/@common/Card";
+import Card from "src/components/@common/card";
 import Layout from "src/components/@common/Layout";
 import CardRegisterForm from "src/components/registerForm/cardRegisterForm";
 import { cardInfoContext } from "src/context/CardInfoContext";

@@ -74,6 +74,7 @@ function CardPassword() {
           inputmode="numeric"
           type="password"
           customInputStyle={Styled.PasswordInput}
+          placeholder="•"
           ref={firstInputRef}
         />
         <Input
@@ -85,6 +86,7 @@ function CardPassword() {
           inputmode="numeric"
           type="password"
           customInputStyle={Styled.PasswordInput}
+          placeholder="•"
           ref={secondInputRef}
         />
         <Styled.DotParagraph>•</Styled.DotParagraph>
