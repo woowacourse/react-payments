@@ -10,10 +10,9 @@ interface HomePageProps {
 }
 
 const Page = styled.div`
-  width: 375px;
-  border: 1px solid;
   min-height: 100vh;
   padding: 20px 36px;
+  background-color: #fff;
 `;
 
 const Title = styled.h3`

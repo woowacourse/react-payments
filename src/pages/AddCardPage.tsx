@@ -41,11 +41,11 @@ interface InputDetailInfo {
 type InputKind = 'card' | 'cvc' | 'owner' | 'password' | 'month' | 'year';
 
 const Page = styled.div`
+  display: flex;
+  flex-direction: column;
   position: relative;
-  width: 375px;
-  border: 1px solid;
-  min-height: 100vh;
   padding: 20px 28px;
+  min-height: 100vh;
 `;
 
 const TitleWrapper = styled.div`
@@ -76,6 +76,7 @@ const InputWrapperParent = styled.form`
   display: flex;
   justify-content: center;
   margin-top: 40px;
+  margin: 40px 0 25px 0;
 `;
 const CvcWrapper = styled.div`
   display: flex;
@@ -83,9 +84,7 @@ const CvcWrapper = styled.div`
 `;
 
 const NextButtonWrapper = styled.div`
-  position: absolute;
-  right: 25px;
-  bottom: 25px;
+  align-self: end;
 `;
 
 export default function AddCardPage({
@@ -374,10 +373,10 @@ export default function AddCardPage({
             />
           </InputField>
         </InputWrapper>
-        <NextButtonWrapper>
-          <NextButton isDisable={isFormfilled} />
-        </NextButtonWrapper>
       </InputWrapperParent>
+      <NextButtonWrapper>
+        <NextButton isDisable={isFormfilled} />
+      </NextButtonWrapper>
     </Page>
   );
 }

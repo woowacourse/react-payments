@@ -1,6 +1,12 @@
 @import './reset.css';
 
-.app {
+body {
   display: flex;
   justify-content: center;
+}
+
+.app {
+  width: 375px;
+  min-height: 100vh;
+  background-color: #fff;
 }
