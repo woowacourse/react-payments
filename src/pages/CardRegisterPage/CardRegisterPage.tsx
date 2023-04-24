@@ -51,7 +51,7 @@ const CardRegisterPage = ({ setCardInfoList }: CardRegisterPageProps) => {
       cardNumbers.third.length === 4 &&
       cardNumbers.fourth.length === 4 &&
       expirationDate.month &&
-      expirationDate.month.length === 1 &&
+      expirationDate.month.length >= 1 &&
       expirationDate.year &&
       expirationDate.year.length === 2 &&
       securityCode.length === 3 &&
