@@ -1,5 +1,9 @@
 export const isNumeric = (value: string) => {
-  return /^[0-9]*$/.test(value);
+  return /^[0-9]+$/.test(value);
+};
+
+export const isAlpha = (value: string) => {
+  return /^[A-Za-z]+$/.test(value);
 };
 
 export const validateMonth = (value: number) => {
@@ -13,33 +17,7 @@ export const validateExpirationDate = (expirationYear: number, expirationMonth: 
   const currentMonth = new Date().getMonth() + 1;
 
   const isValidDate =
-    expirationYear > currentYear ||
-    (expirationYear === currentYear && expirationMonth >= currentMonth);
+    expirationYear > currentYear || (expirationYear === currentYear && expirationMonth >= currentMonth);
 
   if (!isValidDate) throw new Error('만료일이 지난 카드는 등록할 수 없습니다');
 };
-
-export const validateValidUserName = (userName: string) => {
-  const isEmpty = !userName.length;
-  const isValidFormat = /^([A-Za-z](?:\s?[A-Za-z])*)*$/.test(userName);
-  const isValidLength = userName.length <= 30;
-
-  if (isEmpty) return;
-
-  if (isValidFormat && isValidLength) return;
-
-  throw new Error('영문으로 이루어진 이름을 입력해주세요.');
-};
-
-// export const validateCardExpirationValue = (month: string, year: string) => {
-//   try {
-//     validateNumeric(month);
-//     validateNumeric(year);
-
-//     // Number
-//     validateMonth(Number(month));
-//     validateExpirationDate(Number(year), Number(month));
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };

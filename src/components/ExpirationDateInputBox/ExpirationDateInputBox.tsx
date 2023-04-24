@@ -3,6 +3,8 @@ import Input from '../Input/Input';
 import * as styled from './ExpirationDateInputBox.styled';
 import { isNumeric } from '../../validator';
 import { CardInfo, ExpirationDate } from '../../types/state';
+import { EXPIRATION_DATE } from '../../constants/cardInfo';
+import { ERROR_MESSAGE } from '../../constants/message';
 
 const ExpirationDateInputBox = ({
   expirationDate,
@@ -14,11 +16,15 @@ const ExpirationDateInputBox = ({
   const [errorMessage, setErrorMessage] = useState('');
 
   const onChange = ({ target: { name, value } }: ChangeEvent<HTMLInputElement>) => {
-    if (!isNumeric(value)) return setErrorMessage('숫자만 입력 가능');
+    if (!isNumeric(value) && value.length) {
+      setErrorMessage(ERROR_MESSAGE.SHOULD_NUMBER);
+
+      return;
+    }
 
     if (errorMessage) setErrorMessage('');
 
-    if (value.length > 2) return;
+    if (value.length > EXPIRATION_DATE.MAX_LENGTH) return;
 
     setCardInfo((prev: CardInfo) => {
       return {

@@ -2,6 +2,9 @@ import { ChangeEvent, useState } from 'react';
 import Input from '../Input/Input';
 import * as styled from './OwnerNameInputBox.styled';
 import { CardInfo } from '../../types/state';
+import { isAlpha } from '../../validator';
+import { OWNER_NAME } from '../../constants/cardInfo';
+import { ERROR_MESSAGE } from '../../constants/message';
 
 const OwnerNameInputBox = ({
   ownerName,
@@ -13,18 +16,20 @@ const OwnerNameInputBox = ({
   const [errorMessage, setErrorMessage] = useState('');
 
   const onChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
-    // if (/^[A-Za-z](?:\s?[A-Za-z])*$/.test(ownerName)) {
-    //   return setErrorMessage('영문과 영문 사이 띄어쓰기만 허용됩니다.');
-    // }
+    if (!isAlpha(value) && value.length) {
+      setErrorMessage(ERROR_MESSAGE.SHOULD_ALPHA);
+
+      return;
+    }
 
     if (errorMessage) setErrorMessage('');
 
-    if (value.length > 30) return;
+    if (value.length > OWNER_NAME.MAX_LENGTH) return;
 
     setCardInfo((prev: CardInfo) => {
       return {
         ...prev,
-        ownerName: value,
+        ownerName: value.toUpperCase(),
       };
     });
   };

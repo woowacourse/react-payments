@@ -26,7 +26,6 @@ const Input = (props: InputProps) => {
       placeholder={placeholder}
       ref={inputRef}
       maxLength={maxLength}
-      autoComplete="on"
     />
   );
 };

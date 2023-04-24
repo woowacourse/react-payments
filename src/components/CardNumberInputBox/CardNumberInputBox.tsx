@@ -3,6 +3,8 @@ import Input from '../Input/Input';
 import * as styled from './CardNumberInputBox.styled';
 import { isNumeric } from '../../validator';
 import { CardInfo, CardNumbers } from '../../types/state';
+import { CARD_NUMBER } from '../../constants/cardInfo';
+import { ERROR_MESSAGE } from '../../constants/message';
 
 const CardNumberInputBox = ({
   cardNumbers,
@@ -14,11 +16,15 @@ const CardNumberInputBox = ({
   const [errorMessage, setErrorMessage] = useState('');
 
   const onChange = ({ target: { name, value } }: ChangeEvent<HTMLInputElement>) => {
-    if (!isNumeric(value)) return setErrorMessage('숫자만 입력 가능');
+    if (!isNumeric(value) && value.length) {
+      setErrorMessage(ERROR_MESSAGE.SHOULD_NUMBER);
+
+      return;
+    }
 
     if (errorMessage) setErrorMessage('');
 
-    if (value.length > 4) return;
+    if (value.length > CARD_NUMBER.MAX_LENGTH) return;
 
     setCardInfo((prev: CardInfo) => {
       return {
