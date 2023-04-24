@@ -88,7 +88,7 @@ const ShownNumbers = styled.div`
 
 const HiddenNumbers = styled.div`
   height: 15px;
-  padding-top: 3px;
+  padding-top: 2px;
 
   font-size: 10px;
   letter-spacing: 3.5px;
