@@ -86,6 +86,7 @@ const Style = {
     background-color: #e5e5e5;
     border-radius: 5px;
     font-size: 30px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
     cursor: pointer;
   `,
 };
