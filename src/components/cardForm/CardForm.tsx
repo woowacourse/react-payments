@@ -58,19 +58,15 @@ export const CardForm = ({ setCardInfo }: CardFormProps) => {
     });
   };
 
+  const setCardData = (property: string) => (newData: string) => {
+    setCardInfo((prev) => ({ ...prev, [property]: newData }));
+  };
+
   return (
     <Form onSubmit={handleSubmit}>
       <CardNumberInput setCardNumbers={setCardNumbers} />
-      <ExpiryDateInput
-        setExpiryDate={(expiryDate: string) => {
-          setCardInfo((prev) => ({ ...prev, expiryDate }));
-        }}
-      />
-      <OwnerInput
-        setOwner={(owner: string) => {
-          setCardInfo((prev) => ({ ...prev, owner }));
-        }}
-      />
+      <ExpiryDateInput setExpiryDate={setCardData("expiryDate")} />
+      <OwnerInput setOwner={setCardData("owner")} />
       <CVCInput />
       <PasswordInput />
       <SubmitButton type="submit">다음</SubmitButton>
