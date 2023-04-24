@@ -1,8 +1,11 @@
 .card-list {
-  overflow: scroll;
-  display: grid;
+  display: flex;
+  flex-direction: column;
+
   gap: 5%;
   padding: 5% 0;
+  
+  overflow-y: auto;
 }
 
 .add-card-button-explanation {
