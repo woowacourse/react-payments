@@ -1,18 +1,14 @@
-import React from "react";
+import { HTMLAttributes } from "react";
 import styled from "styled-components";
 import { CARD_INPUT_MAX_LENGTH, CARD_INPUT_MIN_LENGTH } from "../constants";
 
-interface CardInputType {
+interface CardInputType extends HTMLAttributes<HTMLInputElement> {
   id: "cardNumber" | "expiredDate" | "ownerName" | "cvc" | "password";
   value: number | string | undefined;
   width: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-
-  placeholder?: string;
   isSecured?: boolean;
   isAutoFocus?: boolean;
   isRequired?: boolean;
-  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 const CardInput = (props: CardInputType) => {
@@ -21,12 +17,12 @@ const CardInput = (props: CardInputType) => {
       id={props.id}
       value={props.value}
       width={props.width}
-      maxLength={CARD_INPUT_MAX_LENGTH[props.id]}
-      minLength={CARD_INPUT_MIN_LENGTH[props.id]}
-      placeholder={props.placeholder}
       type={props.isSecured ? "password" : "text"}
       autoFocus={props.isAutoFocus}
       required={props.isRequired}
+      maxLength={CARD_INPUT_MAX_LENGTH[props.id]}
+      minLength={CARD_INPUT_MIN_LENGTH[props.id]}
+      placeholder={props.placeholder}
       onChange={props.onChange}
       onKeyDown={props.onKeyDown}
     />

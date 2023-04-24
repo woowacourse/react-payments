@@ -27,7 +27,6 @@ const CardInputForm = (props: CardInputFormType) => {
             .substring(12, e.target.value.length)
             .replace(/[0-9]/g, "•"))
       : (card.cardNumber = e.target.value);
-
     if (
       e.target.value.length === SEPERATED_CARD_NUMBER_LENGTH.FIRST ||
       e.target.value.length === SEPERATED_CARD_NUMBER_LENGTH.SECOND ||
@@ -38,24 +37,30 @@ const CardInputForm = (props: CardInputFormType) => {
     props.setCard(card);
   };
 
+  const getSubCardNumber = (length: number) => {
+    if (card.cardNumber.length === length + 3)
+      return card.cardNumber.substring(0, length);
+  };
+
   const handleCardNumberKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Backspace") {
-      if (card.cardNumber.length === 7)
-        card.cardNumber = card.cardNumber.substring(
-          0,
-          SEPERATED_CARD_NUMBER_LENGTH.FIRST
-        );
-      if (card.cardNumber.length === 14)
-        card.cardNumber = card.cardNumber.substring(
-          0,
-          SEPERATED_CARD_NUMBER_LENGTH.SECOND
-        );
-      if (card.cardNumber.length === 21)
-        card.cardNumber = card.cardNumber.substring(
-          0,
-          SEPERATED_CARD_NUMBER_LENGTH.THIRD
-        );
-    }
+    if (e.key !== "Backspace") return;
+
+    if (card.cardNumber.length === 7)
+      card.cardNumber = card.cardNumber.substring(
+        0,
+        SEPERATED_CARD_NUMBER_LENGTH.FIRST
+      );
+    if (card.cardNumber.length === 14)
+      card.cardNumber = card.cardNumber.substring(
+        0,
+        SEPERATED_CARD_NUMBER_LENGTH.SECOND
+      );
+    if (card.cardNumber.length === 21)
+      card.cardNumber = card.cardNumber.substring(
+        0,
+        SEPERATED_CARD_NUMBER_LENGTH.THIRD
+      );
+
     props.setCard(card);
   };
 
@@ -109,6 +114,9 @@ const CardInputForm = (props: CardInputFormType) => {
           onChange={handleCardNumberChanged}
           onKeyDown={handleCardNumberKey}
         />
+        {!card.cardNumber.match(/[0-9]/g) && card.cardNumber.length !== 0 && (
+          <span>숫자만 입력해주세요.</span>
+        )}
       </InputSetWrapper>
 
       <InputSetWrapper>
@@ -219,6 +227,8 @@ const InputSetWrapper = styled.div`
   display: flex;
   flex-direction: column;
 
+  margin-bottom: 13px;
+
   & > label {
     font-weight: 500;
     font-size: 12px;
@@ -227,6 +237,8 @@ const InputSetWrapper = styled.div`
   }
 
   & > span {
+    margin: 5px 2px;
+    font-size: 10px;
     color: red;
   }
 `;
