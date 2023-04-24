@@ -18,7 +18,7 @@ const defaultState = {
   value: "",
   onChange: () => {},
   name: "",
-  error: "",
+  showError: () => {},
 };
 
 export const CardNumber: Story = {

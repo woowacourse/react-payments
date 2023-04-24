@@ -5,7 +5,7 @@ export interface UseInputProps {
   value: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   name: string | undefined;
-  showError?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  showError: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
 
 interface UseInputOptionProps {
