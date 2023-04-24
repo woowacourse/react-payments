@@ -1,13 +1,28 @@
-import { CardNumber } from "../../types";
+import { CardNumber, CardNumberGroups } from "../../types";
+import { isNumeric } from "../../validator/Validator";
 import { InputContainer, Input, Label } from "../common";
 
 type CardNumberInputProps = {
   cardNumber: CardNumber;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  setCardNumber: (targetGroup: CardNumberGroups, value: string) => void;
 };
 
-const CardNumberInput = ({ cardNumber, onChange }: CardNumberInputProps) => {
+const CardNumberInput = ({ cardNumber, setCardNumber }: CardNumberInputProps) => {
   const { firstGroup, secondGroup, thirdGroup, fourthGroup } = cardNumber;
+
+  const handleCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    const targetGroup = e.target.name;
+
+    if (!isNumeric(value)) return;
+    if (!isCardNumberGroupsType(targetGroup)) return;
+
+    setCardNumber(targetGroup, value);
+  };
+
+  const isCardNumberGroupsType = (targetGroup: string): targetGroup is CardNumberGroups => {
+    return targetGroup in cardNumber;
+  };
 
   return (
     <Label>
@@ -24,7 +39,7 @@ const CardNumberInput = ({ cardNumber, onChange }: CardNumberInputProps) => {
           maxLength={4}
           required
           autoFocus
-          onChange={onChange}
+          onChange={handleCardNumber}
         />
         <span>-</span>
         <Input
@@ -37,7 +52,7 @@ const CardNumberInput = ({ cardNumber, onChange }: CardNumberInputProps) => {
           minLength={4}
           maxLength={4}
           required
-          onChange={onChange}
+          onChange={handleCardNumber}
         />
         <span>-</span>
         <Input
@@ -50,7 +65,7 @@ const CardNumberInput = ({ cardNumber, onChange }: CardNumberInputProps) => {
           minLength={4}
           maxLength={4}
           required
-          onChange={onChange}
+          onChange={handleCardNumber}
         />
         <span>-</span>
         <Input
@@ -63,7 +78,7 @@ const CardNumberInput = ({ cardNumber, onChange }: CardNumberInputProps) => {
           minLength={4}
           maxLength={4}
           required
-          onChange={onChange}
+          onChange={handleCardNumber}
         />
       </InputContainer>
     </Label>
