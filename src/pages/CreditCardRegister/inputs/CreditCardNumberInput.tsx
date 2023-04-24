@@ -3,6 +3,7 @@ import { convertSecuredCreditCard } from 'domains/creditCard';
 import * as T from 'types';
 import Input from '../../../components/Input';
 import * as S from '../style';
+import { validateNumber } from '../validations';
 
 type Props = {
   name: string;
@@ -28,7 +29,7 @@ function CreditCardNumberInput({ name, creditCard, setCreditCard }: Props) {
     setCreditCard({ ...creditCard, [name]: newCreditCardNumber });
   };
 
-  const isError = creditCard.number.length > 0 && creditCard.number.length < 16;
+  const isError = validateNumber(creditCard.number);
 
   return (
     <S.RelativeBox>

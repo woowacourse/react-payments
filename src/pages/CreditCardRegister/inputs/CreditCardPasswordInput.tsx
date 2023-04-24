@@ -2,6 +2,7 @@
 import * as T from 'types';
 import Input from '../../../components/Input';
 import * as S from '../style';
+import { validatePassword } from '../validations';
 
 type Props = {
   name: keyof T.CreditCard;
@@ -11,7 +12,7 @@ type Props = {
 
 function CreditCardPasswordInput({ name, creditCard, setCreditCard }: Props) {
   const handleChangeCreditCardPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newSecondPassword: T.CreditCardPasswordTypeKeys = event.target.value as T.CreditCardPasswordTypeKeys;
+    const newSecondPassword = (event.target.value as T.CreditCardPasswordTypeKeys);
     if (newSecondPassword.length <= 1) {
       const updatedCreditCard: T.CreditCard = { ...creditCard };
       (updatedCreditCard[name] as T.CreditCardPasswordType)[event.target.name as T.CreditCardPasswordTypeKeys] = event.target.value;
@@ -19,8 +20,7 @@ function CreditCardPasswordInput({ name, creditCard, setCreditCard }: Props) {
     }
   };
 
-  const isError = !((creditCard.password.first.length > 0 && creditCard.password.second.length > 0)
-    || (creditCard.password.first.length === 0 && creditCard.password.second.length === 0));
+  const isError = validatePassword(creditCard.password.first, creditCard.password.second);
 
   return (
     <S.Box>

@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import * as T from 'types';
 import Input from '../../../components/Input';
 import * as S from '../style';
+import { validateExpiry } from '../validations';
 
 type Props = {
   name: string;
@@ -29,16 +30,7 @@ function CreditCardExpiryInput({ name, creditCard, setCreditCard }: Props) {
     return newCardExpiryArray.join('');
   })(creditCard.expiry);
 
-  const isError = ((expiry: string) => {
-    const [month, year] = [parseInt(expiry.slice(0, 2), 10), parseInt(expiry.slice(2), 10)];
-    if (month < 1 || month > 12 || year <= 22) {
-      return true;
-    }
-    if (expiry.length > 0 && expiry.length < 4) {
-      return true;
-    }
-    return false;
-  })(creditCard.expiry);
+  const isError = validateExpiry(creditCard.expiry);
 
   return (
     <S.Box>

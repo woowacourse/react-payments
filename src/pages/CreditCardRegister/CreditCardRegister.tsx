@@ -9,6 +9,9 @@ import CreditCardOwnerInput from './inputs/CreditCardOwnerInput';
 import CreditCardCVCInput from './inputs/CreditCardCVCInput';
 import CreditCardPasswordInput from './inputs/CreditCardPasswordInput';
 import * as S from './style';
+import {
+  validateCVC, validateExpiry, validateNumber, validatePassword
+} from './validations';
 
 function CreditCardRegister() {
   const navigate = useNavigate();
@@ -24,17 +27,12 @@ function CreditCardRegister() {
     },
   });
 
-  const isValidCVC = creditCard.cvc === '' || creditCard.cvc.length < 3;
-  const isValidExpiry = creditCard.expiry === '' || creditCard.expiry.length < 5;
-  const isValidCardNumber = creditCard.number === '' || creditCard.number.length < 16;
-  const isValidCardPassword = creditCard.password.first === '' || creditCard.password.second === '';
+  const isValidCVC = validateCVC(creditCard.cvc);
+  const isValidExpiry = validateExpiry(creditCard.expiry);
+  const isValidCardNumber = validateNumber(creditCard.number);
+  const isValidCardPassword = validatePassword(creditCard.password.first, creditCard.password.second);
 
-  const isError = [
-    isValidCVC,
-    isValidExpiry,
-    isValidCardNumber,
-    isValidCardPassword,
-  ].some((v) => v);
+  const isError = [isValidCVC, isValidExpiry, isValidCardNumber, isValidCardPassword].some((v) => v);
 
   const handleSubmit = () => {
     if (isError) return;
