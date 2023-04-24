@@ -53,7 +53,7 @@ const CardRegisterPage = ({ setCardList }: { setCardList: CallableFunction }) =>
   };
 
   return (
-    <>
+    <styled.CardRegisterPage>
       <CardPreview cardInfo={cardInfo} bgColor="#333333" />
       <styled.CardRegisterForm>
         <CardNumberInputBox cardNumbers={cardInfo.cardNumbers} setCardInfo={setCardInfo} />
@@ -61,11 +61,13 @@ const CardRegisterPage = ({ setCardList }: { setCardList: CallableFunction }) =>
         <OwnerNameInputBox ownerName={cardInfo.ownerName} setCardInfo={setCardInfo} />
         <SecurityCodeInputBox securityCode={cardInfo.securityCode} setCardInfo={setCardInfo} />
         <PasswordInputBox password={cardInfo.password} setCardInfo={setCardInfo} />
-        {isFilledCardInfos() && (
-          <styled.CardInfoSubmitButton onClick={handleOnClickSubmitButton}>다음</styled.CardInfoSubmitButton>
-        )}
+        <styled.CardInfoSubmitButtonContainer>
+          {isFilledCardInfos() && (
+            <styled.CardInfoSubmitButton onClick={handleOnClickSubmitButton}>다음</styled.CardInfoSubmitButton>
+          )}
+        </styled.CardInfoSubmitButtonContainer>
       </styled.CardRegisterForm>
-    </>
+    </styled.CardRegisterPage>
   );
 };
 
