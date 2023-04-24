@@ -145,9 +145,15 @@ function AddCardForm({ onSubmit }: AddCardFormProps) {
         </NameInputContainer>
 
         <InputLabel>보안 코드(CVC/CVV)</InputLabel>
-        <SecurityCodeInputContainer>
-          <SecurityCodeInput value={securityCode} onChange={handleSecurityCodeChange} />
-        </SecurityCodeInputContainer>
+        <SecurityCodeContainer>
+          <SecurityCodeInputContainer>
+            <SecurityCodeInput value={securityCode} onChange={handleSecurityCodeChange} />
+          </SecurityCodeInputContainer>
+          <SecurityCodeButton>?</SecurityCodeButton>
+          <SecurityCodeNotification>
+            카드 뒷면의 CVC 번호 3자리 숫자를 입력해주세요
+          </SecurityCodeNotification>
+        </SecurityCodeContainer>
         {<ErrorCaption>{!isValid && errorMessages.securityCode}</ErrorCaption>}
 
         <InputLabel>카드 비밀번호</InputLabel>
@@ -263,6 +269,39 @@ const ErrorCaption = styled.span`
   margin-top: 5px;
   font-size: 10px;
   color: red;
+`;
+
+const SecurityCodeContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 11px;
+`;
+
+const SecurityCodeButton = styled.span`
+  border-radius: 50%;
+  border: 2px solid #bababa;
+  width: 27px;
+  height: 27px;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 500;
+  color: #969696;
+
+  :hover + span {
+    display: block;
+    padding: 0 2px;
+    width: 170px;
+    color: #969696;
+    font-weight: 600;
+  }
+`;
+
+const SecurityCodeNotification = styled.span`
+  display: none;
+  border-radius: 7px;
+  border: 2px solid #bababa;
+  width: 27px;
 `;
 
 export default AddCardForm;

@@ -7,6 +7,7 @@ interface CardNumberInputProps {
 }
 
 const DEFAULT_CARD_NUMBER = '0000';
+const FIRST_BOX = 0;
 const THIRD_BOX = 2;
 
 export function CardNumberInputs({ valueAndOnChanges }: CardNumberInputProps) {
@@ -22,7 +23,7 @@ export function CardNumberInputs({ valueAndOnChanges }: CardNumberInputProps) {
 
     if (!isNumber) return;
 
-    if (index < valueAndOnChanges.length - 1 && value.trim().length === e.target.maxLength) {
+    if (index < inputRefs.length - 1 && value.trim().length === e.target.maxLength) {
       inputRefs[index + 1].current?.focus();
     }
     onChange && onChange(e);
@@ -41,6 +42,7 @@ export function CardNumberInputs({ valueAndOnChanges }: CardNumberInputProps) {
               maxLength={4}
               onChange={(e) => handleChange(e, index, onChange)}
               placeholder={DEFAULT_CARD_NUMBER}
+              autoFocus={index === FIRST_BOX ? true : false}
               required
             />
             {index < valueAndOnChanges.length - 1 && <span>-</span>}
