@@ -2,12 +2,7 @@ import { InputContainer } from "../common/InputContainer";
 import { Input } from "../common/Input";
 import { InputLabel } from "../common/InputLabel";
 import { useState } from "react";
-import {
-  isNumeric,
-  isMonthValid,
-  isYearValid,
-  isInputFilled,
-} from "../../utils/validate";
+import { isNumeric, isMonthValid, isYearValid } from "../../utils/validate";
 
 interface ExpiryDateInputProps {
   setExpiryDate: (value: string) => void;

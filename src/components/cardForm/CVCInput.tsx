@@ -2,9 +2,9 @@ import { InputContainer } from "../common/InputContainer";
 import { Input } from "../common/Input";
 import { InputLabel } from "../common/InputLabel";
 import styled from "styled-components";
-import { useState } from "react";
 import { CARD_INPUT_NUMBER } from "../../constant/cardInput";
-import { isInputFilled, isNumeric } from "../../utils/validate";
+import { isNumeric } from "../../utils/validate";
+import { useInputCompleted } from "../../hook/useInputComplete";
 
 const CVCInfo = {
   label: "cvc",
@@ -15,7 +15,7 @@ const CVCInfo = {
 };
 
 export const CVCInput = () => {
-  const [isCompleted, setIsCompleted] = useState(true);
+  const { isCompleted, checkInputCompleted } = useInputCompleted();
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -33,13 +33,7 @@ export const CVCInput = () => {
   };
 
   const handleOutFocusEvent = (e: React.FocusEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-
-    setIsCompleted(false);
-
-    if (isInputFilled(value, CARD_INPUT_NUMBER.CVC)) {
-      setIsCompleted(true);
-    }
+    checkInputCompleted(e.target.value, CARD_INPUT_NUMBER.CVC);
   };
 
   return (

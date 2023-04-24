@@ -1,10 +1,10 @@
 import { InputContainer } from "../common/InputContainer";
 import { InputLabel } from "../common/InputLabel";
 import { Input } from "../common/Input";
-import { useState } from "react";
 import styled from "styled-components";
 import { CARD_INPUT_NUMBER } from "../../constant/cardInput";
-import { isInputFilled, isNumeric } from "../../utils/validate";
+import { isNumeric } from "../../utils/validate";
+import { useInputCompleted } from "../../hook/useInputComplete";
 
 interface CardNumberInputProps {
   setCardNumbers: (index: number, numbers: string) => void;
@@ -16,12 +16,11 @@ const cardNumberInputInfo = {
 };
 
 export const CardNumberInput = ({ setCardNumbers }: CardNumberInputProps) => {
-  const [isCompleted, setIsCompleted] = useState(true);
+  const { isCompleted, checkInputCompleted } = useInputCompleted();
 
   const handleInput =
     (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;
-      console.log(isNumeric(value));
 
       if (!isNumeric(value)) {
         const onlyNumbers = value.match(/\d+/g)?.join("") || "";
@@ -38,11 +37,7 @@ export const CardNumberInput = ({ setCardNumbers }: CardNumberInputProps) => {
     };
 
   const handleOutFocusEvent = (e: React.FocusEvent<HTMLInputElement>) => {
-    setIsCompleted(false);
-
-    if (isInputFilled(e.target.value, CARD_INPUT_NUMBER.CARD_NUMBER)) {
-      setIsCompleted(true);
-    }
+    checkInputCompleted(e.target.value, CARD_INPUT_NUMBER.CARD_NUMBER);
   };
 
   return (
