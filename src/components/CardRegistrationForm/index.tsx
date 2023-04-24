@@ -1,14 +1,16 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { ReactComponent as BlackDot } from '../../assets/black-dot.svg';
-import { CARD_FORM_TITLE, SECURITY_CODE_HELP } from '../../constants';
 import { checkCardNumber, checkExpirationDate, checkPassword, checkSecurityCode } from '../../domain/validator';
 import useWrappingContext from '../../hooks/useWrappingContext';
 import CardListStore from '../../store';
 import getErrorMessage from '../../utils/getErrorMessage';
-import PaymentsInput from '../PaymentsInput';
-import QuestionToolTip from '../QuestionToolTip';
+import CardNumberInput from './CardNumberInput';
+import CardPasswordInput from './CardPasswordInput';
+import ExpirationDateInput from './ExpirationDateInput';
+import OwnerInput from './OwnerInput';
+import SecurityCodeInput from './SecurityCodeInput';
+import type { ErrorMessage, Visited } from './types';
 import type { CardInformation, CardNumber, CardPassword, ExpirationDate, SecurityCode } from '../Common/Card/types';
 
 interface CardRegistrationFormProps {
@@ -19,24 +21,6 @@ interface CardRegistrationFormProps {
   setSecurityCode: React.Dispatch<React.SetStateAction<string[]>>;
   setPassword: React.Dispatch<React.SetStateAction<string[]>>;
 }
-
-interface ErrorMessage {
-  cardNumber: string;
-  expirationDate: string;
-  owner: string;
-  securityCode: string;
-  password: string;
-}
-
-interface Visited {
-  cardNumber: boolean;
-  expirationDate: boolean;
-  owner?: boolean;
-  securityCode: boolean;
-  password: boolean;
-}
-
-const { NUMBER, EXPIRATION_DATE, OWNER, SECURITY_CODE, PASSWORD } = CARD_FORM_TITLE;
 
 function CardRegistrationForm({
   card,
@@ -78,11 +62,6 @@ function CardRegistrationForm({
     }
   };
 
-  const getInputListValue =
-    (dispatch: React.Dispatch<React.SetStateAction<string[]>>) => (callback: React.SetStateAction<string[]>) => {
-      dispatch(callback);
-    };
-
   const checkValidator =
     <T,>(validateCallback: (value: T) => void, value: T | undefined, name: string) =>
     () => {
@@ -101,117 +80,30 @@ function CardRegistrationForm({
 
   return (
     <StyledCardRegistrationFrom onSubmit={handleForm}>
-      <PaymentsInput
-        name={NUMBER}
-        inputListInformation={{
-          inputInformation: [
-            { type: 'string', minLength: 4, maxLength: 4, textAlign: 'center', placeholder: '1234' },
-            { type: 'string', minLength: 4, maxLength: 4, textAlign: 'center', placeholder: '1234' },
-            {
-              type: 'password',
-              minLength: 4,
-              maxLength: 4,
-              textAlign: 'center',
-              placeholder: '1234',
-            },
-            {
-              type: 'password',
-              minLength: 4,
-              maxLength: 4,
-              textAlign: 'center',
-              placeholder: '1234',
-              onBlur: checkValidator<CardNumber>(checkCardNumber, card.cardNumber, 'cardNumber'),
-            },
-          ],
-          bridgeLetter: '-',
-          regExp: /[^0-9]/g,
-          getInputListValue: getInputListValue(setCardNumber),
-        }}
+      <CardNumberInput
+        getInputListValue={setCardNumber}
+        checkValidator={checkValidator<CardNumber>(checkCardNumber, card.cardNumber, 'cardNumber')}
         errorMessage={errorMessage.cardNumber}
         isVisited={isVisited.cardNumber}
       />
-      <PaymentsInput
-        name={EXPIRATION_DATE}
-        inputListInformation={{
-          inputInformation: [
-            { type: 'string', minLength: 2, maxLength: 2, textAlign: 'center', placeholder: 'MM' },
-            {
-              type: 'string',
-              minLength: 2,
-              maxLength: 2,
-              textAlign: 'center',
-              placeholder: 'YY',
-              onBlur: checkValidator<ExpirationDate>(checkExpirationDate, card.expirationDate, 'expirationDate'),
-            },
-          ],
-          bridgeLetter: '/',
-          regExp: /[^0-9]/g,
-          getInputListValue: getInputListValue(setExpirationDate),
-        }}
+      <ExpirationDateInput
+        getInputListValue={setExpirationDate}
+        checkValidator={checkValidator<ExpirationDate>(checkExpirationDate, card.expirationDate, 'expirationDate')}
         errorMessage={errorMessage.expirationDate}
         isVisited={isVisited.expirationDate}
       />
-      <PaymentsInput
-        name={OWNER}
-        inputListInformation={{
-          inputInformation: [
-            { type: 'string', maxLength: 30, placeholder: '카드에 표시된 이름과 동일하게 입력하세요.' },
-          ],
-          regExp: /[^a-z|A-Z]/g,
-          getInputListValue: getInputListValue(setOwner),
-        }}
-        errorMessage={errorMessage.owner}
-        isVisited={isVisited.owner}
-        showNumberOfValue
-      />
-      <PaymentsInput
-        name={SECURITY_CODE}
-        inputListInformation={{
-          inputInformation: [
-            {
-              type: 'password',
-              textAlign: 'center',
-              minLength: 3,
-              maxLength: 3,
-              onBlur: checkValidator<SecurityCode>(checkSecurityCode, card.securityCode, 'securityCode'),
-            },
-          ],
-          regExp: /[^0-9]/g,
-          getInputListValue: getInputListValue(setSecurityCode),
-          children: <QuestionToolTip questionMessage={SECURITY_CODE_HELP} />,
-        }}
+      <OwnerInput getInputListValue={setOwner} errorMessage={errorMessage.owner} isVisited={isVisited.owner} />
+      <SecurityCodeInput
+        getInputListValue={setSecurityCode}
+        checkValidator={checkValidator<SecurityCode>(checkSecurityCode, card.securityCode, 'securityCode')}
         errorMessage={errorMessage.securityCode}
         isVisited={isVisited.securityCode}
       />
-      <PaymentsInput
-        name={PASSWORD}
-        inputListInformation={{
-          inputInformation: [
-            { type: 'password', textAlign: 'center', minLength: 1, maxLength: 1 },
-            {
-              type: 'password',
-              textAlign: 'center',
-              minLength: 1,
-              maxLength: 1,
-              onBlur: checkValidator<CardPassword>(checkPassword, card.password, 'password'),
-            },
-          ],
-          bridgeLetter: '',
-          regExp: /[^0-9]/g,
-          getInputListValue: getInputListValue(setPassword),
-          children: (
-            <>
-              <div>
-                <BlackDot />
-              </div>
-              <div>
-                <BlackDot />
-              </div>
-            </>
-          ),
-        }}
+      <CardPasswordInput
+        getInputListValue={setPassword}
+        checkValidator={checkValidator<CardPassword>(checkPassword, card.password, 'password')}
         errorMessage={errorMessage.password}
-        isVisited={isVisited.securityCode}
+        isVisited={isVisited.password}
       />
       <StyledNextButton type="submit">다음</StyledNextButton>
     </StyledCardRegistrationFrom>
