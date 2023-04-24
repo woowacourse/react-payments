@@ -34,6 +34,7 @@ function CardIssuer({ onInputChange, value, isValid }: CardIssuerProps) {
 
   const onOptionClick = (event: MouseEvent<HTMLButtonElement>) => {
     removeError();
+    closeModal();
     onInputChange(event);
   };
 
