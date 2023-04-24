@@ -1,12 +1,12 @@
 import styles from './AddCardForm.module.css';
-import NextButton from '../NextButton/NextButton';
 import CardNumberInput from '../CardNumberInput/CardNumberInput';
 import ExpirationDateInput from '../ExpirationDateInput/ExpirationDateInput';
 import CardOwnerName from '../CardOwnerName/CardOwnerName';
 import CardSecurityCodeInput from '../CardSecurityCodeInput/CardSecurityCodeInput';
 import CardPasswordInput from '../CardPasswordInput/CardPasswordInput';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import type { CardInfo } from '../../types';
+import Button from '../Button/Button';
 
 type AddCardFormProps = {
   updateCardNumber: (cardNumber: string) => void;
@@ -59,8 +59,12 @@ const AddCardForm = ({
       <CardOwnerName updateCardOwnerName={updateCardOwnerName} />
       <CardSecurityCodeInput />
       <CardPasswordInput />
-      <div className={styles.button}>
-        <NextButton />
+      <div className={styles.buttonContainer}>
+        <Link to="/card-registration-confirmation">
+          <Button type="submit" className={styles.button}>
+            다음
+          </Button>
+        </Link>
       </div>
     </form>
   );

@@ -5,6 +5,7 @@ import CardRegistration from '../pages/CardRegistration';
 import styles from './App.module.css';
 import { useState } from 'react';
 import type { CardInfo } from '../types';
+import CardRegistrationConfirmation from '../pages/CardRegistrationConfirmation';
 
 const App = () => {
   const [cardInfo, setCardInfo] = useState<CardInfo[]>([]);
@@ -21,6 +22,10 @@ const App = () => {
     {
       path: '/card-registration',
       element: <CardRegistration registerNewCard={registerNewCard} />,
+    },
+    {
+      path: '/card-registration-confirmation',
+      element: <CardRegistrationConfirmation />,
     },
     {
       path: '*',

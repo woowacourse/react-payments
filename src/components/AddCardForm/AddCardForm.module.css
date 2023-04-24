@@ -7,7 +7,15 @@
   font-size: small;
 }
 
-.button {
+.buttonContainer {
   display: flex;
   justify-content: flex-end;
+}
+
+.button {
+  font-size: medium;
+  font-weight: 600;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
