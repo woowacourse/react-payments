@@ -71,8 +71,10 @@ function OwnerNameInput() {
       <Input
         value={creditCardInfo.ownerName}
         onChange={_onChange}
-        customInputStyle={OwnerNameStyle}
-        inputmode="text"
+        font-weight="500"
+        letter-spacing="1px"
+        inputMode="text"
+        textAlign="left"
       />
       {!validationStatus.isValid && <ErrorSpan>{validationStatus.message}</ErrorSpan>}
     </OwnerNameInputContainer>
@@ -92,13 +94,4 @@ const LabelContainer = styled.div`
   width: 100%;
   justify-content: space-between;
   align-items: center;
-`;
-
-const OwnerNameStyle = css`
-  width: 100%;
-
-  font-size: 18px;
-  font-weight: 500;
-
-  letter-spacing: 1px;
 `;

@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import FormLabel from '../../@common/FormLabel';
 import Input from '../../@common/Input';
 import ErrorSpan from '../../@common/ErrorSpan';
@@ -77,9 +77,12 @@ function ExpireDate() {
         onChange={_onChange}
         onBlur={_onBlur}
         maxLength={5}
-        customInputStyle={ExpireDateInput}
-        inputmode="numeric"
+        inputMode="numeric"
         placeholder="MM / YY"
+        width="137px"
+        text-align="center"
+        font-weight="500"
+        line-height="21px"
       />
       {!validStatus.isValid && <ErrorSpan>{validStatus.message}</ErrorSpan>}
     </ExpireDateContainer>
@@ -92,13 +95,4 @@ const ExpireDateContainer = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 5px;
-`;
-
-const ExpireDateInput = css`
-  width: 137px;
-  letter-spacing: 3px;
-  text-align: center;
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 21px;
 `;

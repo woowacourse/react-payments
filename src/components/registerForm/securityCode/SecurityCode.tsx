@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { CreditCardContext } from '../../../contexts/CreditCardContext';
 import { ONLY_NUMBER_REGEXP } from '../../../utils/regexp';
 import FormLabel from '../../@common/FormLabel';
@@ -58,8 +58,9 @@ function SecurityCode() {
         onBlur={_onBlur}
         maxLength={3}
         type="password"
-        inputmode="numeric"
-        customInputStyle={SecurityInput}
+        inputMode="numeric"
+        width="84px"
+        text-align="center"
       />
       {!validStatus.isValid && <ErrorSpan>{validStatus.message}</ErrorSpan>}
     </SecurityCodeContainer>
@@ -72,11 +73,4 @@ const SecurityCodeContainer = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 5px;
-`;
-
-const SecurityInput = css`
-  width: 84px;
-  letter-spacing: 7px;
-  text-align: center;
-  font-size: 28px;
 `;

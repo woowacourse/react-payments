@@ -66,26 +66,23 @@ function CardPassword() {
       <FormLabel>{'카드 비밀번호'}</FormLabel>
       <PasswordInputContainer>
         <Input
-          data-order="first"
           data-idx="0"
           value={creditCardInfo.password[0]}
           onChange={_onChange}
           maxLength={1}
-          inputmode="numeric"
+          inputMode="numeric"
           type="password"
-          customInputStyle={PasswordInput}
+          width="43px"
           ref={refs[0]}
         />
         <Input
-          data-order="second"
           data-idx="1"
           value={creditCardInfo.password[1]}
           onChange={_onChange}
-          onBlur={_onBlur}
           maxLength={1}
-          inputmode="numeric"
+          inputMode="numeric"
           type="password"
-          customInputStyle={PasswordInput}
+          width="43px"
           ref={refs[1]}
         />
         <DotParagraph>•</DotParagraph>
@@ -108,13 +105,6 @@ const PasswordInputContainer = styled.div`
   display: flex;
   align-items: center;
   column-gap: 7px;
-`;
-
-const PasswordInput = css`
-  width: 43px;
-
-  text-align: center;
-  font-size: 28px;
 `;
 
 const DotParagraph = styled.p`

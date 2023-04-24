@@ -78,56 +78,51 @@ export const CardNumber = () => {
       <FormLabel>카드 번호</FormLabel>
       <CardNumberInputContainer>
         <Input
-          data-order="first"
           data-index="0"
           value={creditCardInfo.cardNumber[0]}
           onChange={_onChange}
           onBlur={_onBlur}
           maxLength={4}
-          customInputStyle={CardNumberInput}
-          inputmode="numeric"
+          inputMode="numeric"
           ref={refs[0]}
         />
         <p>-</p>
         <Input
-          data-order="second"
           data-index="1"
           value={creditCardInfo.cardNumber[1]}
           onChange={_onChange}
           onBlur={_onBlur}
           maxLength={4}
-          customInputStyle={CardNumberInput}
-          inputmode="numeric"
+          inputMode="numeric"
           ref={refs[1]}
         />
         <p>-</p>
 
         <Input
-          data-order="third"
           data-index="2"
           value={creditCardInfo.cardNumber[2]}
           onChange={_onChange}
           onBlur={_onBlur}
           maxLength={4}
-          customInputStyle={CardNumberInput}
-          inputmode="numeric"
+          inputMode="numeric"
           type={'password'}
+          text-align={'center'}
           placeholder="●●●●"
           ref={refs[2]}
         />
         <p>-</p>
 
         <Input
-          data-order="fourth"
           data-index="3"
           value={creditCardInfo.cardNumber[3]}
           onChange={_onChange}
           onBlur={_onBlurLast}
           maxLength={4}
-          customInputStyle={CardNumberInput}
-          inputmode="numeric"
+          inputMode="numeric"
           type={'password'}
           placeholder="●●●●"
+          width={'60px'}
+          text-align={'center'}
           ref={refs[3]}
         />
       </CardNumberInputContainer>
@@ -151,9 +146,4 @@ const CardNumberInputContainer = styled.div`
   padding: 0 10px;
 `;
 
-const CardNumberInput = css`
-  width: 60px;
-  letter-spacing: 3px;
-  text-align: center;
-  font-size: 18px;
-`;
+const CardNumberInput = css``;
