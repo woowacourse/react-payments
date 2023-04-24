@@ -1,6 +1,6 @@
 on:
   push:
-    branches: [step1]
+    branches: ['step1']
 
 jobs:
   deploy:
