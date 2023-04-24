@@ -1,12 +1,27 @@
-import type { CardInfo } from '../../domain/types/card';
+import { CardChip } from '../../assets/svg';
+import type { CardCompany, CardInfo } from '../../domain/types/card';
 
 import styles from './card.module.css';
 
+const CARD_COMPANY_CLASSNAMES = {
+  BC카드: 'bc-card',
+  신한카드: 'shinhan-card',
+  카카오뱅크: 'kakaobank-card',
+  현대카드: 'hyundai-card',
+  우리카드: 'woori-card',
+  롯데카드: 'lotte-card',
+  하나카드: 'hana-card',
+  국민카드: 'kb-card',
+  default: 'hyundai-card',
+};
+
 type Props = CardInfo & {
+  cardCompany: CardCompany | null;
   onClick?: () => void;
 };
 
 const Card = ({
+  cardCompany,
   cardNumber1,
   cardNumber2,
   cardNumber3,
