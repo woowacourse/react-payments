@@ -1,3 +1,8 @@
+.subtitle {
+  margin-bottom: 10px;
+  height: 16px;
+}
+
 .form {
   display: flex;
   flex-direction: column;
