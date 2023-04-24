@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import CardDB from 'db/Cards';
+import { CardDB } from 'db/Cards';
 import styled from 'styled-components';
 import { CreditCard, Header } from 'components/common';
 import { PageContainer } from 'components/style/PageContainer';

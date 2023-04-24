@@ -1,6 +1,6 @@
 import { Card } from './../components/common/Card/types';
 
-const CardDB = {
+export const CardDB = {
   registerCard(card: Card) {
     localStorage.setItem('cards', JSON.stringify([...this.getCards(), card]));
   },
@@ -9,5 +9,3 @@ const CardDB = {
     return JSON.parse(localStorage.getItem('cards') ?? '[]');
   },
 };
-
-export default CardDB;

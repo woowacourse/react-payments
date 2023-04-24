@@ -8,7 +8,7 @@ import {
 import styled from 'styled-components';
 import { FormEventHandler, useState } from 'react';
 import { Container } from 'components/style/InputContainer';
-import CardDB from 'db/Cards';
+import { CardDB } from 'db/Cards';
 import { Card } from 'components/common/Card/types';
 import { ValueAndOnChange } from 'components/Input/types';
 import { useCardFormValid } from 'hooks/useCardFormValid';
