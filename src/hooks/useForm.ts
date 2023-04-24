@@ -1,5 +1,7 @@
+import { createContext, useContext } from 'react';
 import { REGEX } from '../constants';
 import { useInput } from './useInput';
+import { CardPreviewInfoContext } from '../contexts/cardInfo';
 
 const defaultInput = {
   type: 'text',
@@ -17,48 +19,10 @@ const passwordInput = {
 };
 
 export function useForm() {
+  const previewInfo = useContext(CardPreviewInfoContext);
+
   const cardRegisterForm = {
-    CARD_NUMBER: [
-      {
-        ...defaultInput,
-        ...useInput(),
-        regexp: REGEX.CARD_NUMBER,
-      },
-      {
-        ...defaultInput,
-        ...useInput(),
-        regexp: REGEX.CARD_NUMBER,
-      },
-      {
-        ...passwordInput,
-        ...useInput(),
-        regexp: REGEX.CARD_NUMBER,
-      },
-      {
-        ...passwordInput,
-        ...useInput(),
-        regexp: REGEX.CARD_NUMBER,
-      },
-    ],
-    DATE: [
-      {
-        ...defaultInput,
-        ...useInput(),
-        regexp: REGEX.MONTH,
-      },
-      {
-        ...defaultInput,
-        ...useInput(),
-        regexp: REGEX.YEAR,
-      },
-    ],
-    USERNAME: [
-      {
-        ...optionalInput,
-        ...useInput(),
-        regexp: REGEX.USERNAME,
-      },
-    ],
+    ...previewInfo,
     CODE: [
       {
         ...passwordInput,

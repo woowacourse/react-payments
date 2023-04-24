@@ -12,6 +12,7 @@ import { getFormFields } from '../utils/formData';
 import { Card } from '../type/card';
 import { useNavigate } from 'react-router-dom';
 import { checkInputValdiation } from '../utils/checkInputValidation';
+import { InputInfo } from '../type/input';
 
 export function CardRegisterForm() {
   const naviagte = useNavigate();
@@ -26,8 +27,9 @@ export function CardRegisterForm() {
     ...inputList.CARD_PASSWORD,
   ];
 
-  const { isRequiredInputValid, isOptionalInputValid } =
-    checkInputValdiation(allInputs);
+  const { isRequiredInputValid, isOptionalInputValid } = checkInputValdiation(
+    allInputs as InputInfo[]
+  );
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -53,7 +55,7 @@ export function CardRegisterForm() {
   return (
     <_Form onSubmit={handleSubmit}>
       {Object.entries(inputList).map(([key, inputs]) => (
-        <InputBox id={key} inputs={inputs}></InputBox>
+        <InputBox id={key} inputs={inputs as any}></InputBox>
       ))}
       {isRequiredInputValid && isOptionalInputValid && (
         <ButtonWrapper>
