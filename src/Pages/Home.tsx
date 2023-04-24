@@ -5,7 +5,24 @@ import useWrappingContext from '../hooks/useWrappingContext';
 import CardListStore from '../store';
 import type { CardInformation } from '../components/Common/Card/types';
 
-const MainHome = styled.main`
+function Home() {
+  const { cardList } = useWrappingContext(CardListStore);
+
+  return (
+    <>
+      <Header title="보유 카드" hasBackHistory={false} />
+      <StyledMain>
+        <StyledMessage>새로운 카드를 등록해주세요.</StyledMessage>
+        {cardList?.map((cardInformation: CardInformation) => (
+          <Card cardInformation={cardInformation} isAddForm />
+        ))}
+        <Card isAddForm={false} />
+      </StyledMain>
+    </>
+  );
+}
+
+const StyledMain = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,28 +34,11 @@ const MainHome = styled.main`
   }
 `;
 
-const Message = styled.div`
+const StyledMessage = styled.div`
   font-size: 14px;
   font-weight: 700;
   line-height: 16px;
   margin: 10px;
 `;
-
-function Home() {
-  const { cardList } = useWrappingContext(CardListStore);
-
-  return (
-    <>
-      <Header title="보유 카드" hasBackHistory={false} />
-      <MainHome>
-        <Message>새로운 카드를 등록해주세요.</Message>
-        {cardList?.map((cardInformation: CardInformation) => (
-          <Card cardInformation={cardInformation} isAddForm />
-        ))}
-        <Card isAddForm={false} />
-      </MainHome>
-    </>
-  );
-}
 
 export default Home;

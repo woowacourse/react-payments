@@ -2,7 +2,21 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as Question } from '../assets/question.svg';
 
-const QuestionToolTipStyler = styled.div`
+function QuestionToolTip({ questionMessage }: { questionMessage: string }) {
+  const [show, setShow] = useState(false);
+
+  const showMessage = () => setShow(true);
+  const hideMessage = () => setShow(false);
+
+  return (
+    <StyledQuestionToolTip onMouseEnter={showMessage} onMouseLeave={hideMessage}>
+      <Question />
+      {show && <p>{questionMessage}</p>}
+    </StyledQuestionToolTip>
+  );
+}
+
+const StyledQuestionToolTip = styled.div`
   position: relative;
   display: flex;
 
@@ -19,19 +33,4 @@ const QuestionToolTipStyler = styled.div`
     width: 180px;
   }
 `;
-
-function QuestionToolTip({ questionMessage }: { questionMessage: string }) {
-  const [show, setShow] = useState(false);
-
-  const showMessage = () => setShow(true);
-  const hideMessage = () => setShow(false);
-
-  return (
-    <QuestionToolTipStyler onMouseEnter={showMessage} onMouseLeave={hideMessage}>
-      <Question />
-      {show && <p>{questionMessage}</p>}
-    </QuestionToolTipStyler>
-  );
-}
-
 export default QuestionToolTip;

@@ -2,25 +2,6 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactComponent as ChevronLeft } from '../../../assets/previous.svg';
 
-const StyledHeader = styled.header`
-  display: flex;
-  padding: 20px;
-  align-items: center;
-  font-size: 16px;
-`;
-
-const BackHistory = styled.div`
-  width: 16px;
-  height: 16px;
-`;
-
-const HeaderTitle = styled.h2`
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 16px;
-  margin: 0 0 0 16px;
-`;
-
 interface HeaderProps {
   title: string;
   hasBackHistory: boolean;
@@ -36,13 +17,32 @@ function Header({ title, hasBackHistory }: HeaderProps) {
   return (
     <StyledHeader>
       {hasBackHistory && (
-        <BackHistory onClick={navigatePrevious}>
+        <StyledBackHistory onClick={navigatePrevious}>
           <ChevronLeft />
-        </BackHistory>
+        </StyledBackHistory>
       )}
-      <HeaderTitle>{title}</HeaderTitle>
+      <StyledHeaderTitle>{title}</StyledHeaderTitle>
     </StyledHeader>
   );
 }
+
+const StyledHeader = styled.header`
+  display: flex;
+  padding: 20px;
+  align-items: center;
+  font-size: 16px;
+`;
+
+const StyledBackHistory = styled.div`
+  width: 16px;
+  height: 16px;
+`;
+
+const StyledHeaderTitle = styled.h2`
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 16px;
+  margin: 0 0 0 16px;
+`;
 
 export default Header;

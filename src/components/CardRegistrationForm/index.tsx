@@ -98,7 +98,7 @@ function CardRegistrationForm({ setCard }: CardRegistrationFormProps) {
           ),
         }}
       />
-      <NextButton type="submit">다음</NextButton>
+      <StyledNextButton type="submit">다음</StyledNextButton>
     </StyledCardRegistrationFrom>
   );
 }
@@ -116,7 +116,7 @@ const StyledCardRegistrationFrom = styled.form`
   }
 `;
 
-const NextButton = styled.button`
+const StyledNextButton = styled.button`
   margin-top: 8px;
   background: none;
   border: none;

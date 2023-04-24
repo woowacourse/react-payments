@@ -15,15 +15,15 @@ function CardRegistration() {
   return (
     <>
       <Header title="카드 추가" hasBackHistory />
-      <MainCardRegistration>
+      <StyledMainCardRegistration>
         <Card cardInformation={card} isAddForm />
         <CardRegistrationForm setCard={setCard} />
-      </MainCardRegistration>
+      </StyledMainCardRegistration>
     </>
   );
 }
 
-const MainCardRegistration = styled.main`
+const StyledMainCardRegistration = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;

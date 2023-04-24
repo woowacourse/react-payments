@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactComponent as Dot } from '../../../assets/white-dot.svg';
-import getUniqueKey from '../../../utils/getUniqueKey';
 import type { CardInformation } from './types';
 
 interface CardProps {
@@ -18,44 +17,44 @@ const defaultCardInformation: CardInformation = {
 function Card({ cardInformation = defaultCardInformation, isAddForm }: CardProps) {
   const { cardNumber, expirationDate, owner } = cardInformation;
   return (
-    <CardContainer isAddFrom={isAddForm}>
+    <StyledCardContainer isAddFrom={isAddForm}>
       {isAddForm ? (
         <>
-          <ICChipTemplate />
-          <CardInfoTemplate>
-            <CardNumberTemplate>
+          <StyledICChipTemplate />
+          <StyledCardInfoTemplate>
+            <StyledCardNumberTemplate>
               {cardNumber?.map((number, index) =>
                 index < 2 ? (
-                  <CardNumberItem key={getUniqueKey()}>{number}</CardNumberItem>
+                  <StyledCardNumberItem>{number}</StyledCardNumberItem>
                 ) : (
-                  <CardNumberItem key={getUniqueKey()}>
-                    {Array.from({ length: number.length }, () => (
-                      <Dot key={getUniqueKey()} />
+                  <StyledCardNumberItem>
+                    {Array.from({ length: number?.length }, () => (
+                      <Dot />
                     ))}
-                  </CardNumberItem>
+                  </StyledCardNumberItem>
                 ),
               )}
-            </CardNumberTemplate>
-            <CardDetail>
+            </StyledCardNumberTemplate>
+            <StyledCardDetail>
               <div>{owner?.slice(0, 12)}</div>
               {expirationDate && (
                 <div>
-                  {expirationDate[0].padStart(2, '0')}/{expirationDate[1].padStart(2, '0')}
+                  {expirationDate[0]?.padStart(2, '0')}/{expirationDate[1]?.padStart(2, '0')}
                 </div>
               )}
-            </CardDetail>
-          </CardInfoTemplate>
+            </StyledCardDetail>
+          </StyledCardInfoTemplate>
         </>
       ) : (
         <Link to="/registration">
-          <AddButton type="button">+</AddButton>
+          <StyledAddButton type="button">+</StyledAddButton>
         </Link>
       )}
-    </CardContainer>
+    </StyledCardContainer>
   );
 }
 
-const CardContainer = styled.div<{ isAddFrom: boolean }>`
+const StyledCardContainer = styled.div<{ isAddFrom: boolean }>`
   position: relative;
   width: 214px;
   height: 134px;
@@ -66,7 +65,7 @@ const CardContainer = styled.div<{ isAddFrom: boolean }>`
   color: white;
 `;
 
-const ICChipTemplate = styled.div`
+const StyledICChipTemplate = styled.div`
   position: absolute;
   width: 40px;
   height: 26px;
@@ -77,7 +76,7 @@ const ICChipTemplate = styled.div`
   border-radius: 4px;
 `;
 
-const CardNumberTemplate = styled.div`
+const StyledCardNumberTemplate = styled.div`
   display: flex;
   height: 18px;
   & > * {
@@ -86,7 +85,7 @@ const CardNumberTemplate = styled.div`
   }
 `;
 
-const CardNumberItem = styled.div`
+const StyledCardNumberItem = styled.div`
   display: flex;
   align-items: center;
   & > * {
@@ -94,7 +93,7 @@ const CardNumberItem = styled.div`
   }
 `;
 
-const CardInfoTemplate = styled.div`
+const StyledCardInfoTemplate = styled.div`
   position: absolute;
   box-sizing: border-box;
   top: 80px;
@@ -102,14 +101,14 @@ const CardInfoTemplate = styled.div`
   padding: 0 18px;
 `;
 
-const CardDetail = styled.div`
+const StyledCardDetail = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 6px;
   font-size: 14px;
 `;
 
-const AddButton = styled.button`
+const StyledAddButton = styled.button`
   width: 100%;
   height: 100%;
   background: none;
