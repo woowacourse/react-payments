@@ -31,11 +31,12 @@ export default function CardCVCInput() {
               id="cvc"
               value={cvc}
               onChange={({ target: { value } }) => onChangeValue(value)}
-              {...defaultConditions}>
+              {...defaultConditions}
+            >
               <Styled.Input />
             </Input.Field>
           </Styled.InputBackground>
-          <Styled.Info>?</Styled.Info>
+          <Styled.Info type="button">?</Styled.Info>
         </Flex>
       </Input>
     </Styled.Root>
