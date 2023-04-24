@@ -9,7 +9,14 @@ interface ButtonProps extends ComponentPropsWithRef<'button'> {
 }
 
 function Button(
-  { children, variant = 'default', size = 'medium', className, icon, ...attributes }: ButtonProps,
+  {
+    children,
+    variant = 'default',
+    size = 'medium',
+    className = '',
+    icon,
+    ...attributes
+  }: ButtonProps,
   ref: ForwardedRef<HTMLButtonElement>
 ) {
   const displayStyle = icon ? styles.iconButton : '';

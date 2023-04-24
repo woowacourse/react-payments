@@ -15,7 +15,7 @@ interface InputContainerProps extends ComponentPropsWithoutRef<'div'> {
 
 function InputContainer({
   children,
-  className,
+  className = '',
   supportingText,
   characterCounter,
   isError = false,
