@@ -7,13 +7,18 @@ const Title = styled.p`
   cursor: pointer;
 `;
 
-const Header = ({ page }: { page: string }) => {
+interface HeaderProps {
+  page: string;
+  titleContent: string;
+}
+
+const Header = ({ page, titleContent }: HeaderProps) => {
   const navigate = useNavigate();
 
   return page === 'home' ? (
-    <Title>보유카드</Title>
+    <Title>{titleContent}</Title>
   ) : (
-    <Title onClick={() => navigate(-1)}>&lt; &nbsp; 카드 추가</Title>
+    <Title onClick={() => navigate(-1)}>{titleContent}</Title>
   );
 };
 

@@ -21,8 +21,7 @@ const EmptyCardText = styled.p`
 const Home = ({ cards }: { cards: CardType[] }) => {
   return (
     <>
-      <Header page="home" />
-
+      <Header page="home" titleContent="보유 카드" />
       <Wrapper>
         {cards.length === 0 && (
           <EmptyCardText>새로운 카드를 등록해주세요.</EmptyCardText>

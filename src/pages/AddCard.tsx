@@ -59,7 +59,7 @@ const AddCard = ({ cards, setCards }: SetCardsProps) => {
 
   return (
     <>
-      <Header page="add-card" />
+      <Header page="add-card" titleContent="&lt; &nbsp; 카드 추가" />
       <form onSubmit={handleSetCards}>
         <Wrapper>
           <Card
