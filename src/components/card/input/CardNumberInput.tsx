@@ -67,9 +67,10 @@ export default function CardNumberInput({
         <Dash>-</Dash>
         <Input
           isNumber={true}
+          type="text"
           maxLength={4}
-          type="password"
           placeholder="0000"
+          isPassword={true}
           required
           textAlign="center"
           autoComplete="off"
@@ -80,9 +81,10 @@ export default function CardNumberInput({
         <Input
           isNumber={true}
           maxLength={4}
-          type="password"
+          type="text"
           placeholder="0000"
           autoComplete="off"
+          isPassword={true}
           required
           textAlign="center"
           tabIndex={3}

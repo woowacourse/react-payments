@@ -49,7 +49,8 @@ export default function CvcInput({ cvc }: CvcInputProps) {
       <InformationAndInputWrapper>
         <Wrapper>
           <Input
-            type="password"
+            type="text"
+            isPassword={true}
             textAlign="center"
             autoComplete="off"
             isNumber={true}

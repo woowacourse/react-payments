@@ -13,7 +13,7 @@ const Container = styled.div`
   position: relative;
 `;
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ isHome: boolean }>`
   width: 213px;
   height: 133px;
   background: #333;
@@ -24,6 +24,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: end;
   position: relative;
+  cursor: ${({ isHome }) => (isHome ? 'pointer' : '')};
 `;
 const Title = styled.div`
   color: #383838;
@@ -143,7 +144,7 @@ export default function Card({
 
   return (
     <Container>
-      <Wrapper onClick={toggleIsClick}>
+      <Wrapper onClick={toggleIsClick} isHome={onDeleteClick ? true : false}>
         <Title></Title>
         <Magnet />
         <div>

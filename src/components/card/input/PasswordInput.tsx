@@ -57,7 +57,8 @@ export default function PasswordInput({
             maxLength={1}
             id="password"
             required
-            type="password"
+            type="text"
+            isPassword={true}
             placeholder="0"
             textAlign="center"
             autoComplete="off"
@@ -71,7 +72,8 @@ export default function PasswordInput({
             maxLength={1}
             placeholder="0"
             required
-            type="password"
+            type="text"
+            isPassword={true}
             textAlign="center"
             tabIndex={9}
             autoComplete="off"
