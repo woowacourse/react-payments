@@ -17,24 +17,32 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
 const Input = (props: Props) => {
   const { textType, setValue, length, required, insert, focus } = props;
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    if (textType === 'number' && isNaN(Number(value))) return;
+  const onChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+    if (textType === 'number' && isNaN(Number(target.value))) return;
 
-    setValue(value);
+    setValue(target.value);
 
     if (!focus) return;
-    if (value.length === length) focus(1);
-    if (value.length === 0) focus(-1);
+    if (target.value.length === length) focus(1);
+    if (target.value.length === 0) focus(-1);
+  };
+
+  const onKeyDown = ({ target, key }: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!focus) return;
+    if (!(target instanceof HTMLInputElement)) return;
+
+    if (target.selectionStart === 0 && key === 'ArrowLeft') focus(-1);
+    if (target.selectionStart === target.value.length && key === 'ArrowRight') focus(1);
   };
 
   return (
     <StyledInput
       {...props}
       onChange={onChange}
+      onKeyDown={onKeyDown}
       minLength={required ? length : 0}
       maxLength={length}
-      ref={(el) => (insert ? insert(el) : el)}
+      ref={insert}
     />
   );
 };
