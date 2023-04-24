@@ -1,5 +1,5 @@
 import * as styled from './Input.styled';
-import { ChangeEvent, forwardRef, Ref } from 'react';
+import { ChangeEvent, forwardRef } from 'react';
 
 interface InputProps {
   name: string;
@@ -13,7 +13,7 @@ interface InputProps {
   dataNext: string;
 }
 
-const Input = forwardRef((props: InputProps, ref: Ref<HTMLInputElement>): JSX.Element => {
+const Input = forwardRef<HTMLInputElement, InputProps>((props, ref): JSX.Element => {
   return (
     <styled.Input
       ref={ref}

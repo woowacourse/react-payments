@@ -1,13 +1,17 @@
 import styled from 'styled-components';
 
-export const Card = styled.div<any>`
+interface CardProps {
+  bgColor?: string;
+}
+
+export const Card = styled.div<CardProps>`
   position: relative;
   width: 240px;
   height: 150px;
 
   padding: 12px 18px;
 
-  background-color: ${(props: any) => props.bgColor};
+  background-color: ${(props) => props.bgColor};
   color: white;
 
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
