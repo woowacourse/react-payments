@@ -1,5 +1,8 @@
-export const ERROR_MESSAGE = Object.freeze({
-  ONLY_NUMBER: "숫자만 입력할 수 있습니다.",
-  ONLY_STRING: "문자만 입력할 수 있습니다.",
-  INVALID_DATE: "잘못된 날짜입니다.",
-});
+export const ERROR_MESSAGE: { [key: string]: string } = {
+  CARD_NUMBER: '4자리 숫자를 입력해주세요.',
+  MONTH: '월은 1부터 12까지 숫자를 입력해주세요',
+  YEAR: '연도는 숫자만 입력주세요',
+  USERNAME: '영문자 또는 한글만 입력해주세요.',
+  CODE: '3자리 숫자를 입력해주세요',
+  CARD_PASSWORD: '숫자만 입력해주세요.',
+};

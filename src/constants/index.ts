@@ -1,4 +1,17 @@
+export interface IRegex {
+  [key: string]: RegExp;
+}
+
 export const PAGE_HEADER = Object.freeze({
-  CARD_LIST: "보유카드",
-  ADD_CARD: "카드 추가",
+  CARD_LIST: '보유카드',
+  ADD_CARD: '카드 추가',
 });
+
+export const REGEX: IRegex = {
+  CARD_NUMBER: /^\d{4}$/,
+  MONTH: /^(1[0-2]|[1-9])$/,
+  YEAR: /^\d{2}$/,
+  USERNAME: /^[a-zA-Z가-힣]{0,30}$/,
+  CODE: /^\d{3}$/,
+  CARD_PASSWORD: /^\d{1}$/,
+};
