@@ -175,7 +175,7 @@ const InputLabel = styled.span`
   font-size: 12px;
   font-weight: 500;
   letter-spacing: -0.085em;
-  color: #525252;
+  color: var(--primary-text-color);
   margin-top: 16px;
   margin-bottom: 3px;
 `;
@@ -221,7 +221,7 @@ const PasswordInputContainer = styled(Container)`
     width: 44px;
     height: 44px;
     text-align: center;
-    background-color: #ecebf1;
+    background-color: var(--primary-color);
     margin-right: 7px;
     border-radius: 7px;
   }
@@ -236,7 +236,7 @@ const FormSubmitButton = styled.button`
   border: none;
   font-size: 16px;
   font-weight: 700;
-  background-color: #ffffff;
+  background-color: white;
   margin-left: auto;
   color: black;
   cursor: pointer;
@@ -253,7 +253,7 @@ const ErrorCaption = styled.span`
   height: 10px;
   margin-top: 5px;
   font-size: 10px;
-  color: red;
+  color: var(--error-text-color);
 `;
 
 const SecurityCodeContainer = styled.div`
@@ -271,7 +271,7 @@ const SecurityCodeButton = styled.span`
   text-align: center;
   font-size: 22px;
   font-weight: 500;
-  color: #969696;
+  color: var(--grey-text-color);
 
   :hover + span {
     display: block;
@@ -283,9 +283,9 @@ const SecurityCodeNotification = styled.span`
   width: 170px;
   padding: 0 2px;
   border-radius: 7px;
-  border: 2px solid #bababa;
+  border: 2px solid var(--light-gray-text-color);
   font-weight: 600;
-  color: #969696;
+  color: var(--gray-text-color);
 `;
 
 export default AddCardForm;
