@@ -6,9 +6,10 @@ interface Props {
   label: string;
   countLength?: number;
   maxLength?: number;
+  message?: string;
 }
 
-const InputSectionTemplate = ({ children, label, countLength, maxLength }: Props) => {
+const InputSectionTemplate = ({ children, label, countLength, maxLength, message }: Props) => {
   return (
     <InputSectionTemplateWrapper>
       <InputLabelWrapper>
@@ -20,6 +21,7 @@ const InputSectionTemplate = ({ children, label, countLength, maxLength }: Props
         )}
       </InputLabelWrapper>
       <ChildrenWrapper>{children}</ChildrenWrapper>
+      <Message>{message}</Message>
     </InputSectionTemplateWrapper>
   );
 };
@@ -31,7 +33,7 @@ const InputSectionTemplateWrapper = styled.div`
   flex-direction: column;
 
   width: 100%;
-  margin-bottom: 19px;
+  margin-bottom: 14px;
 `;
 
 const InputLabelWrapper = styled.div`
@@ -54,4 +56,14 @@ const ChildrenWrapper = styled.div`
   & > *:not(:last-of-type) {
     margin-right: 10px;
   }
+`;
+
+const Message = styled.p`
+  display: flex;
+  align-items: flex-end;
+
+  height: 18px;
+
+  font-size: 12px;
+  color: red;
 `;
