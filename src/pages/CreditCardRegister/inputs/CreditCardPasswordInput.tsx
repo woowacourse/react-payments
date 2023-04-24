@@ -27,8 +27,22 @@ function CreditCardPasswordInput({ name, creditCard, setCreditCard }: Props) {
     <S.Box>
       <S.CreditCardRegisterLabel>카드 비밀번호</S.CreditCardRegisterLabel>
       <S.FlexBox justifyContent="flex-start">
-        <Input type="password" value={creditCard.password?.first} width="48px" textAlign="center" name="first" onChange={handleChangeCreditCardPassword} />
-        <Input type="password" value={creditCard.password?.second} width="48px" textAlign="center" name="second" onChange={handleChangeCreditCardPassword} />
+        <Input
+          type="password"
+          value={creditCard.password?.first}
+          width="48px"
+          textAlign="center"
+          name="first"
+          onChange={handleChangeCreditCardPassword}
+        />
+        <Input
+          type="password"
+          value={creditCard.password?.second}
+          width="48px"
+          textAlign="center"
+          name="second"
+          onChange={handleChangeCreditCardPassword}
+        />
         <S.PasswordBox>•</S.PasswordBox>
         <S.PasswordBox>•</S.PasswordBox>
       </S.FlexBox>
