@@ -47,8 +47,8 @@ export default function CardInputForm(props: Props) {
   const [cardNumberStatus, setCardNumberStatus] = useState<EachUserInputState>(
     initialEachUserInputState
   );
-  const [isExpirationDateComplete, setIsExpirationDateComplete] =
-    useState(false);
+  const [expirationDateStatus, setExpirationDateStatus] =
+    useState<EachUserInputState>(initialEachUserInputState);
   const [isOwnerComplete, setIsOwnerComplete] = useState(false);
   const [isSecurityComplete, setIsSecurityComplete] = useState(false);
   const [isPasswordComplete, setIsPasswordComplete] = useState(false);
@@ -59,6 +59,12 @@ export default function CardInputForm(props: Props) {
 
   function changeCardNumberStatus(key: "isComplete" | "userInput", value: any) {
     setCardNumberStatus(deepCopyObject(cardNumberStatus, key, value));
+  }
+  function changeCardExpirationDateStatus(
+    key: "isComplete" | "userInput",
+    value: any
+  ) {
+    setExpirationDateStatus(deepCopyObject(expirationDateStatus, key, value));
   }
 
   function submitCardInfo(e: SubmitEvent) {
@@ -123,8 +129,8 @@ export default function CardInputForm(props: Props) {
 
   useEffect(() => {
     if (
-      cardNumberStatus &&
-      isExpirationDateComplete &&
+      cardNumberStatus.isComplete &&
+      expirationDateStatus.isComplete &&
       isSecurityComplete &&
       isPasswordComplete
     )
@@ -132,7 +138,7 @@ export default function CardInputForm(props: Props) {
     else setIsFormFilled(false);
   }, [
     cardNumberStatus,
-    isExpirationDateComplete,
+    expirationDateStatus,
     isSecurityComplete,
     isPasswordComplete,
   ]);
@@ -145,7 +151,7 @@ export default function CardInputForm(props: Props) {
         changeNowCardInfo={changeNowCardInfo}
       />
       <InputBoxExpirationDate
-        setIsComplete={setIsExpirationDateComplete}
+        changeCardExpirationDateStatus={changeCardExpirationDateStatus}
         changeNowCardInfo={changeNowCardInfo}
       />
       <InputBoxOwner

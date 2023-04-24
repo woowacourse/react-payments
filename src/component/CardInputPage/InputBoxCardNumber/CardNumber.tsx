@@ -1,5 +1,5 @@
 import { ChangeEvent, useState, useEffect } from "react";
-import { validateCardNumber } from "../../../validation/cardNumber";
+import { validateNumber } from "../../../validation/number";
 import Input from "../../common/Input";
 
 import "./cardNumber.css";
@@ -18,7 +18,7 @@ interface Props {
 const makeAppropriateNumber = (userInput: string) => {
   if (userInput === "") return "";
 
-  return userInput.split("").filter(validateCardNumber).join("");
+  return userInput.split("").filter(validateNumber).join("");
 };
 
 /* setHasError : inputBoxCardNumber가 에러문구를 출력하기 위해 내려보내는 함수
@@ -39,14 +39,15 @@ export default function CardNumber({
 
       if (userInputNumber !== appropriateNumber) {
         setHasError(true);
-        changeCardNumberStatus("isComplete", 0);
+        changeCardNumberStatus("isComplete", false);
       } else if (appropriateNumber.length === 4) {
         setHasError(false);
-        changeCardNumberStatus("isComplete", 2);
+        changeCardNumberStatus("isComplete", true);
+        changeCardNumberStatus("userInput", appropriateNumber);
         changeNowCardInfo("number", appropriateNumber);
       } else {
         setHasError(false);
-        changeCardNumberStatus("isComplete", 1);
+        changeCardNumberStatus("isComplete", false);
       }
 
       const result = [...cardNumber];

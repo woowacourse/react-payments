@@ -5,9 +5,13 @@ import "./inputBoxExpirationDate.css";
 import { CARD_ERROR_MESSAGE, INPUT_STATUS } from "../../../CONSTANT";
 import { validateExpirationDate } from "../../../validation/ExpirationDate";
 import { CreditCard } from "../../../type";
+import { validateNumber } from "../../../validation/number";
 
 interface Props {
-  setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
+  changeCardExpirationDateStatus: (
+    key: "isComplete" | "userInput",
+    value: any
+  ) => void;
   changeNowCardInfo: (
     key: keyof CreditCard,
     value: any,
@@ -15,36 +19,47 @@ interface Props {
   ) => void;
 }
 
-export default function InputBoxExpirationDate(props: Props) {
-  const { setIsComplete, changeNowCardInfo } = props;
+const makeAppropriateExpirationDate = (userInput: string) => {
+  if (userInput === "") return "";
 
-  const [inputStatus, setInputStatus] = useState(INPUT_STATUS.NOT_COMPLETE);
+  const result = userInput
+    .split("")
+    .filter(validateNumber)
+    .slice(0, 4)
+    .join("");
+
+  return result.length >= 3
+    ? result.slice(0, 2) + "/" + result.slice(2)
+    : result;
+};
+
+export default function InputBoxExpirationDate(props: Props) {
+  const { changeCardExpirationDateStatus, changeNowCardInfo } = props;
+
+  const [isError, setIsError] = useState(false);
+  const [expirationDate, setExpirationDate] = useState("");
 
   const changeExpirationDate = (e: ChangeEvent<HTMLInputElement>) => {
-    const originDate = e.target.value.split("/").join("").slice(0, 4);
-    const formattedDate =
-      originDate.length > 2
-        ? originDate.slice(0, 2) + "/" + originDate.slice(2)
-        : originDate;
+    const userInputExpirationDate = e.target.value.slice(0, 5);
+    const appropriateExpirationDate = makeAppropriateExpirationDate(
+      userInputExpirationDate
+    );
 
-    e.target.value = formattedDate;
-    if (e.target.value.length > 5) e.target.value = e.target.value.slice(0, 5);
-
-    if (validateExpirationDate(e.target.value)) {
-      e.target.value.length === 5
-        ? setInputStatus(INPUT_STATUS.COMPLETE)
-        : setInputStatus(INPUT_STATUS.NOT_COMPLETE);
-
-      e.target.value.length === 5 &&
-        changeNowCardInfo("expirationDate", e.target.value);
+    if (!validateExpirationDate(appropriateExpirationDate)) {
+      setIsError(true);
+      changeCardExpirationDateStatus("isComplete", false);
+    } else if (appropriateExpirationDate.length === 5) {
+      setIsError(false);
+      changeCardExpirationDateStatus("isComplete", true);
+      changeCardExpirationDateStatus("userInput", appropriateExpirationDate);
+      changeNowCardInfo("expirationDate", appropriateExpirationDate);
     } else {
-      setInputStatus(INPUT_STATUS.ERROR);
+      setIsError(false);
+      changeCardExpirationDateStatus("isComplete", false);
     }
-  };
 
-  useEffect(() => {
-    setIsComplete(inputStatus === INPUT_STATUS.COMPLETE ? true : false);
-  }, [inputStatus]);
+    setExpirationDate(appropriateExpirationDate);
+  };
 
   return (
     <div className="input-box-expiration-date">
@@ -56,8 +71,9 @@ export default function InputBoxExpirationDate(props: Props) {
         onChange={changeExpirationDate}
         placeholder="MM / YY"
         inputMode="numeric"
+        value={expirationDate}
       ></Input>
-      <p className={inputStatus === INPUT_STATUS.ERROR ? "visible" : ""}>
+      <p className={isError ? "visible" : ""}>
         {CARD_ERROR_MESSAGE.INPUT_CARD_EXPIRATION_DATE}
       </p>
     </div>
