@@ -44,7 +44,7 @@ const AddCard = ({ cards, setCards }: SetCardsProps) => {
     setSecurityCode,
     passwords,
     setPasswords,
-    isCorrectForm,
+    isDisabledForm,
   } = useAddCard();
 
   const navigate = useNavigate();
@@ -86,7 +86,7 @@ const AddCard = ({ cards, setCards }: SetCardsProps) => {
         />
         <CardPassword passwords={passwords} setPasswords={setPasswords} />
         <ButtonWrapper>
-          <NextButton disabled={isCorrectForm}>다음</NextButton>
+          <NextButton disabled={isDisabledForm}>다음</NextButton>
         </ButtonWrapper>
       </form>
     </>
