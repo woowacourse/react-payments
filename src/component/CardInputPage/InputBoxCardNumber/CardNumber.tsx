@@ -18,12 +18,13 @@ interface Props {
 const makeAppropriateNumber = (userInput: string) => {
   if (userInput === "") return "";
 
-  const result = userInput.split("").filter(validateCardNumber);
-  return 1 <= result.length && result.length <= 4
-    ? result.join("")
-    : result.slice(0, 4).join("");
+  return userInput.split("").filter(validateCardNumber).join("");
 };
 
+/* setHasError : inputBoxCardNumber가 에러문구를 출력하기 위해 내려보내는 함수
+ * changeCardNumberStatus : {}형태로 에러여부, 현재 카드넘버 정보를 바꾸는 함수
+ * changeNowCardInfo : 카드 미리보기를 동기화하기 위해 내려보내는 함수
+ */
 export default function CardNumber({
   setHasError,
   changeCardNumberStatus,
@@ -33,21 +34,19 @@ export default function CardNumber({
 
   const onChangeCardNumber = (partIndex: number) => {
     return (e: ChangeEvent<HTMLInputElement>) => {
-      const userInputNumber = e.target.value;
+      const userInputNumber = e.target.value.slice(0, 4);
       const appropriateNumber = makeAppropriateNumber(userInputNumber);
 
-      if (
-        userInputNumber !== appropriateNumber &&
-        appropriateNumber.length !== 4
-      ) {
+      if (userInputNumber !== appropriateNumber) {
         setHasError(true);
         changeCardNumberStatus("isComplete", 0);
+      } else if (appropriateNumber.length === 4) {
+        setHasError(false);
+        changeCardNumberStatus("isComplete", 2);
+        changeNowCardInfo("number", appropriateNumber);
       } else {
         setHasError(false);
-        changeCardNumberStatus(
-          "isComplete",
-          appropriateNumber.length === 4 ? 2 : 1
-        );
+        changeCardNumberStatus("isComplete", 1);
       }
 
       const result = [...cardNumber];
