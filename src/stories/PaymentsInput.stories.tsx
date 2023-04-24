@@ -88,3 +88,20 @@ export const CardPassword: Story = {
     },
   },
 };
+
+export const ErrorCase: Story = {
+  args: {
+    name: '카드 번호',
+    inputListInformation: {
+      inputInformation: [
+        { type: 'string', maxLength: 4, textAlign: 'center', placeholder: '1234' },
+        { type: 'string', maxLength: 4, textAlign: 'center', placeholder: '1234' },
+        { type: 'password', maxLength: 4, textAlign: 'center', placeholder: '1234' },
+        { type: 'password', maxLength: 4, textAlign: 'center', placeholder: '1234' },
+      ],
+      bridgeLetter: '-',
+      getInputListValue: () => {},
+    },
+    errorMessage: '에러가 발생했습니다.',
+  },
+};

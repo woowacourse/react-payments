@@ -13,6 +13,7 @@ export default meta;
 export const Default: Story = {
   args: {
     inputInformation: [{ resetStyle: false }, { resetStyle: false }],
+    getInputListValue: () => {},
   },
 };
 
@@ -20,6 +21,7 @@ export const UseBridge: Story = {
   args: {
     inputInformation: [{}, {}],
     bridgeLetter: '-',
+    getInputListValue: () => {},
   },
 };
 
@@ -32,5 +34,6 @@ export const cardNumber: Story = {
       { type: 'password', maxLength: 4 },
     ],
     bridgeLetter: '-',
+    getInputListValue: () => {},
   },
 };

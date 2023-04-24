@@ -15,7 +15,7 @@ export const Default: Story = {
     cardInformation: {
       cardNumber: ['1234', '1234', '1234', '1234'],
       expirationDate: ['YY', 'MM'],
-      owner: 'NAME',
+      owner: ['NAME'],
     },
     isAddForm: true,
   },
