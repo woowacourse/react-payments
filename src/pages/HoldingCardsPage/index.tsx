@@ -29,16 +29,21 @@ const HoldingCardsPage = () => {
         )}
         <section className={styles.cardContainer}>
           {cards.map((card) => (
-            <Card
-              key={uuid()}
-              cardNumber1={card.cardNumber1}
-              cardNumber2={card.cardNumber2}
-              cardNumber3={card.cardNumber3}
-              cardNumber4={card.cardNumber4}
-              expiredMonth={card.expiredMonth}
-              expiredYear={card.expiredYear}
-              owner={card.owner}
-            />
+            <div key={uuid()} className={styles.cardWrapper}>
+              <Card
+                cardCompany={card.cardCompany}
+                cardNumber1={card.cardNumber1}
+                cardNumber2={card.cardNumber2}
+                cardNumber3={card.cardNumber3}
+                cardNumber4={card.cardNumber4}
+                expiredMonth={card.expiredMonth}
+                expiredYear={card.expiredYear}
+                owner={card.owner}
+              />
+              {card.nickname && (
+                <span className="text-subtitle">{card.nickname}</span>
+              )}
+            </div>
           ))}
           <CardRegisterButton onClick={handleClick} />
         </section>
