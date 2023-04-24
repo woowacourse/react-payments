@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from 'react';
-import type { CardInformation } from './components/Card';
+import type { CardInformation } from './domain/types/card';
 
 const CardListContext = createContext<CardInformation[] | null>(null);
 const CardListUpdateContext = createContext<React.Dispatch<React.SetStateAction<CardInformation[]>> | null>(null);

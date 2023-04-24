@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CardNumber } from '../../../components/Card';
+import type { CardNumber } from '../../../domain/types/card';
 
 const useCardNumber = (initialState = ['', '', '', '']) => {
   const [cardNumber, _setCardNumber] = useState<CardNumber>(initialState as CardNumber);

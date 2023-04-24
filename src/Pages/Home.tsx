@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import { useCardListContext } from '../CardListContext';
-import Card, { CARD_TYPE, CardInformation } from '../components/Card';
+import Card, { CARD_TYPE } from '../components/Card';
 import Header from '../components/Header';
+import type { CardInformation } from '../domain/types/card';
 
 const MainHome = styled.main`
   display: flex;

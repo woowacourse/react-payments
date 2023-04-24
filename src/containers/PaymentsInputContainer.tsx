@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useCardListContext } from '../CardListContext';
-import { CardInformation } from '../components/Card';
 import PaymentsInput from '../components/PaymentsInput';
 import QuestionToolTip from '../components/QuestionToolTip';
 import checkExpirationDate from '../domain/validator';
+import type { CardInformation } from '../domain/types/card';
 import type { ChangeEvent, FormEvent } from 'react';
 
 const CVC_MESSAGE = 'CVV/CVC 번호는 카드 뒷 면에 있는 3자리 숫자이며 카드 보안을 위한 번호입니다.';

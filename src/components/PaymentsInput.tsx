@@ -54,8 +54,6 @@ interface InputInformation {
   placeholder?: string;
 }
 
-export type { PaymentsInputProps };
-
 function PaymentsInput({ title, inputInformationList, inputDivideLetter, onChange }: PaymentsInputProps) {
   const inputAmount = inputInformationList.length;
 

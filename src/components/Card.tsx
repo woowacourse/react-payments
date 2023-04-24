@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactComponent as Dot } from '../assets/white-dot.svg';
+import type { CardInformation } from '../domain/types/card';
 
 const OWNER_VISIBLE_LENGTH = 12;
 const CARD_NUMBER = {
@@ -93,21 +94,6 @@ interface CardProps {
   cardInformation?: CardInformation;
   cardType: CardTypeUnion;
 }
-
-interface CardInformation {
-  cardNumber: CardNumber;
-  expirationDate: ExpirationDate;
-  owner?: string;
-}
-
-type CardNumber = [string, string, string, string];
-
-interface ExpirationDate {
-  year: string;
-  month: string;
-}
-
-export type { CardInformation, CardNumber, ExpirationDate };
 
 const defaultCardInformation: CardInformation = {
   cardNumber: ['', '', '', ''],
