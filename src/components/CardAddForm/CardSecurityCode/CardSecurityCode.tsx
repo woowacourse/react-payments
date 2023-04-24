@@ -1,8 +1,9 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent } from 'react';
 import { SECURITY_CODE_MAX_LENGTH, SECURITY_CODE_MIN_LENGTH } from '../../../constants';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
 import Input from '../../common/Input/Input';
+import { useError } from '../../../hooks/useError';
 
 interface CardSecurityCodeProps {
   onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -11,16 +12,11 @@ interface CardSecurityCodeProps {
 }
 
 function CardSecurityCode({ onInputChange, value, isValid }: CardSecurityCodeProps) {
-  const [isError, setIsError] = useState(false);
+  const { isError, handleError, removeError } = useError(isValid);
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    if (isError) setIsError(false);
-
+    removeError();
     onInputChange(event);
-  };
-
-  const onBlur = () => {
-    setIsError(!isValid);
   };
 
   return (
@@ -45,7 +41,7 @@ function CardSecurityCode({ onInputChange, value, isValid }: CardSecurityCodePro
         inputMode="numeric"
         isError={isError}
         onChange={onChange}
-        onBlur={onBlur}
+        onBlur={handleError}
       />
     </InputContainer>
   );

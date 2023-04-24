@@ -1,4 +1,4 @@
-import { ChangeEvent, useRef, useState } from 'react';
+import { ChangeEvent, useRef } from 'react';
 import {
   CARD_NUMBER_INPUT_MAX_LENGTH,
   CARD_NUMBER_INPUT_UNIT_MAX_LENGTH,
@@ -7,6 +7,7 @@ import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
 import Input from '../../common/Input/Input';
 import { useInputCursorPosition } from '../../../hooks/useInputCursorPosition';
+import { useError } from '../../../hooks/useError';
 import { encryptDisplayedCardNumber, formatDisplayedCardNumber } from '../../../utils/formatter';
 import { checkNumberFormat } from '../../../utils/formatChecker';
 
@@ -19,7 +20,7 @@ interface CardNumberProps {
 function CardNumber({ onInputChange, value, isValid }: CardNumberProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const setCursor = useInputCursorPosition(inputRef);
-  const [isError, setIsError] = useState(false);
+  const { isError, handleError, removeError } = useError(isValid);
 
   const cardNumber = formatDisplayedCardNumber(value);
 
@@ -58,15 +59,10 @@ function CardNumber({ onInputChange, value, isValid }: CardNumberProps) {
   };
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    if (isError) setIsError(false);
-
+    removeError();
     onInputValueChange(event);
     onInputCursorPositionChange(event);
     onInputChange(event);
-  };
-
-  const onBlur = () => {
-    setIsError(!isValid);
   };
 
   return (
@@ -90,7 +86,7 @@ function CardNumber({ onInputChange, value, isValid }: CardNumberProps) {
         inputMode="numeric"
         isError={isError}
         onChange={onChange}
-        onBlur={onBlur}
+        onBlur={handleError}
       />
     </InputContainer>
   );

@@ -1,5 +1,5 @@
 import styles from './style.module.css';
-import { KeyboardEvent, MouseEvent, useRef, useState } from 'react';
+import { KeyboardEvent, MouseEvent, useRef } from 'react';
 import { Issuer } from '../../../types';
 import CardIssuerSelection from './CardIssuerSelection/CardIssuerSelection';
 import InputContainer from '../../common/InputContainer/InputContainer';
@@ -7,6 +7,7 @@ import Label from '../../common/Label/Label';
 import Button from '../../common/Button/Button';
 import Modal from '../../common/Modal/Modal';
 import { useModal } from '../../../hooks/useModal';
+import { useError } from '../../../hooks/useError';
 import DownIcon from '../../../assets/down-icon.svg';
 
 interface CardIssuerProps {
@@ -18,10 +19,10 @@ interface CardIssuerProps {
 function CardIssuer({ onInputChange, value, isValid }: CardIssuerProps) {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const { isModalOpen, openModal, closeModal } = useModal();
-  const [isError, setIsError] = useState(false);
+  const { isError, handleError, removeError } = useError(isValid);
 
   const handleCloseModal = () => {
-    setIsError(!isValid);
+    handleError();
     closeModal();
   };
 
@@ -32,8 +33,8 @@ function CardIssuer({ onInputChange, value, isValid }: CardIssuerProps) {
   };
 
   const onOptionClick = (event: MouseEvent<HTMLButtonElement>) => {
+    removeError();
     onInputChange(event);
-    setIsError(false);
   };
 
   return (

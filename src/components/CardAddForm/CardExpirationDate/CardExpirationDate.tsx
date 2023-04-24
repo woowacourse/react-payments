@@ -1,9 +1,10 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent } from 'react';
 import { ExpirationDate } from '../../../types';
 import { EXPIRATION_DATE_INPUT_MAX_LENGTH } from '../../../constants';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
 import Input from '../../common/Input/Input';
+import { useError } from '../../../hooks/useError';
 import { formatDisplayedExpirationDate } from '../../../utils/formatter';
 
 interface CardExpirationDateProps {
@@ -13,18 +14,13 @@ interface CardExpirationDateProps {
 }
 
 function CardExpirationDate({ onInputChange, value, isValid }: CardExpirationDateProps) {
-  const [isError, setIsError] = useState(false);
+  const { isError, handleError, removeError } = useError(isValid);
 
   const expirationDate = formatDisplayedExpirationDate(`${value.month}${value.year}`);
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    if (isError) setIsError(false);
-
+    removeError();
     onInputChange(event);
-  };
-
-  const onBlur = () => {
-    setIsError(!isValid);
   };
 
   return (
@@ -47,7 +43,7 @@ function CardExpirationDate({ onInputChange, value, isValid }: CardExpirationDat
         inputMode="numeric"
         isError={isError}
         onChange={onChange}
-        onBlur={onBlur}
+        onBlur={handleError}
       />
     </InputContainer>
   );

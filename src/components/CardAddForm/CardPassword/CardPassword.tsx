@@ -1,9 +1,10 @@
 import styles from './style.module.css';
-import { ChangeEvent, FocusEvent, useRef, useState } from 'react';
+import { ChangeEvent, FocusEvent, useRef } from 'react';
 import { PASSWORD_UNIT_MAX_LENGTH, SECURITY_TEXT_ICON } from '../../../constants';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
 import Input from '../../common/Input/Input';
+import { useError } from '../../../hooks/useError';
 
 interface CardPasswordProps {
   onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -13,18 +14,17 @@ interface CardPasswordProps {
 
 function CardPassword({ onInputChange, values, isValid }: CardPasswordProps) {
   const lastInputRef = useRef<HTMLInputElement>(null);
-  const [isError, setIsError] = useState(false);
+  const { isError, handleError, removeError } = useError(isValid);
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    if (isError) setIsError(false);
-
+    removeError();
     onInputChange(event);
   };
 
   const onBlur = (event: FocusEvent<HTMLElement>) => {
     if (event.currentTarget.contains(event.relatedTarget)) return;
 
-    setIsError(!isValid);
+    handleError();
   };
 
   const onFirstInputChange = (event: ChangeEvent<HTMLInputElement>) => {
