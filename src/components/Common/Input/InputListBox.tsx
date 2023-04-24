@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import { useRef } from 'react';
 import styled from 'styled-components';
 import Input from './Input';
@@ -44,6 +45,7 @@ function InputListBox({
           .map<React.ReactNode>((info, index) => (
             <Input
               {...info}
+              key={index}
               onChange={onChange(index)}
               ref={(element: HTMLInputElement) => {
                 refs.current[index] = element;

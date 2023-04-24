@@ -1,3 +1,5 @@
+/* eslint-disable react/no-array-index-key */
+
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactComponent as Dot } from '../../../assets/white-dot.svg';
@@ -25,11 +27,11 @@ function Card({ cardInformation = defaultCardInformation, isAddForm }: CardProps
             <StyledCardNumberTemplate>
               {cardNumber?.map((number, index) =>
                 index < 2 ? (
-                  <StyledCardNumberItem>{number}</StyledCardNumberItem>
+                  <StyledCardNumberItem key={index}>{number}</StyledCardNumberItem>
                 ) : (
-                  <StyledCardNumberItem>
-                    {Array.from({ length: number?.length }, () => (
-                      <Dot />
+                  <StyledCardNumberItem key={index}>
+                    {Array.from({ length: number?.length }, (_, dotIndex) => (
+                      <Dot key={dotIndex} />
                     ))}
                   </StyledCardNumberItem>
                 ),

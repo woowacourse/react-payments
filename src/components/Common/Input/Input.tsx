@@ -3,8 +3,10 @@ import styled, { css } from 'styled-components';
 
 interface InputProps extends React.HTMLAttributes<HTMLInputElement> {
   type?: string;
+  minLength?: number;
   maxLength?: number;
   textAlign?: 'left' | 'center' | 'right';
+  isRequired?: boolean;
   resetStyle?: boolean;
   backgroundColor?: string;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
@@ -13,10 +15,12 @@ interface InputProps extends React.HTMLAttributes<HTMLInputElement> {
 export type { InputProps };
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ backgroundColor, resetStyle = true, maxLength, textAlign, ...props }, ref) => (
+  ({ backgroundColor, resetStyle = true, minLength, maxLength, textAlign, isRequired, ...props }, ref) => (
     <StyledInput
       backgroundColor={backgroundColor}
+      minLength={minLength}
       maxLength={maxLength}
+      required={isRequired}
       {...props}
       ref={ref}
       resetStyle={resetStyle}
