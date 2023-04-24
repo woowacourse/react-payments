@@ -64,8 +64,9 @@ const ExpirationDateInput = ({
           inputIndex,
           maxLength: INPUT_MAX_LENGTH.EXPIRATION_DATE_LENGTH,
         })
-      )
+      ) {
         refs[inputIndex + 1].current?.focus();
+      }
 
       setErrorMessage('');
     };

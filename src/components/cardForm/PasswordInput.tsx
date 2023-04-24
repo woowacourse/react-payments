@@ -45,7 +45,10 @@ const PasswordInput = ({
           maxLength: INPUT_MAX_LENGTH.PASSWORD_LENGTH,
         })
       ) {
-        refs[inputIndex + 1].current?.focus();
+        const nextInputRef = refs.at(inputIndex + 1);
+        if (nextInputRef?.current) {
+          nextInputRef.current.focus();
+        }
       }
     };
 

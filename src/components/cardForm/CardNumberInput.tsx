@@ -35,14 +35,19 @@ const CardNumberInput = ({
         setErrorMessage(ERROR_MESSAGE.ONLY_NUMBER);
         return;
       }
+
       if (
         isNextInputFocusable({
           inputValue,
           inputIndex,
           maxLength: INPUT_MAX_LENGTH.CARD_NUMBER_LENGTH,
         })
-      )
-        refs[inputIndex + 1].current?.focus();
+      ) {
+        const nextInputRef = refs.at(inputIndex + 1);
+        if (nextInputRef?.current) {
+          nextInputRef.current.focus();
+        }
+      }
 
       const newCardNumber = [...value];
       newCardNumber[inputIndex] = inputValue;
@@ -56,7 +61,7 @@ const CardNumberInput = ({
       <InputBox isError={!!errorMessage}>
         {Array.from({ length: INPUT_MAX_LENGTH.CARD_NUMBER_LENGTH }).map(
           (_, index) => (
-            <React.Fragment key={`card-number-input-${index}`}>
+            <React.Fragment key={index}>
               <Input
                 ref={refs[index]}
                 value={value[index]}
