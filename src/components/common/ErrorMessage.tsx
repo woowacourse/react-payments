@@ -9,6 +9,6 @@ export function ErrorMessage({ children, ...props }: ErrorMessageProps) {
 }
 
 const _ErrorMessage = styled.p`
-  height: 0.4rem;
+  height: 1rem;
   color: red;
 `;

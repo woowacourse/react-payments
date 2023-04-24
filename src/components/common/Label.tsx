@@ -13,5 +13,4 @@ export function Label({ children, ...props }: LabelProps) {
 const _Label = styled.label`
   font: var(--text-caption);
   color: var(--grey-300);
-  margin-bottom: 0.3rem;
 `;
