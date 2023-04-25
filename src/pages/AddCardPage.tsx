@@ -165,6 +165,7 @@ export default function AddCardPage({
     } = event.currentTarget;
 
     const currentYear = new Date().getFullYear() % 100;
+    const currentMonth = new Date().getMonth() + 1;
 
     const cardInputValue: cardInputValueInfo = {
       card: {
@@ -273,6 +274,14 @@ export default function AddCardPage({
       return;
     }
 
+    if (
+      Number(yearInput.value) === currentYear &&
+      Number(monthInput.value) < currentMonth
+    ) {
+      monthInput.focus();
+      cardInputValue.month.setError('지난 기간은 입력할 수 없습니다.');
+      return;
+    }
     const newCard: CardInfo = {
       id: createUniqueId(),
       cardNumber: {
