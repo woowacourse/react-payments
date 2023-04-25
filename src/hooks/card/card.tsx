@@ -10,7 +10,7 @@ import React, {
 } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useCardRegisterContext } from '../../context/CardRegisterContext';
-import { CardNumber, CardRegisterInfo, ExpirationDate } from '../../types/card.type';
+import { CardNumber, CardRegisterInfo, ExpirationDate, Password } from '../../types/card.type';
 import { isPatternMatch, isValidateKey } from '../../utils/input';
 import { getCardList, setCardList } from '../../utils/localStorage';
 import { isEnglish, isNumber } from '../../utils/validation';
@@ -86,22 +86,15 @@ export function useCardNumber() {
     handleCardInfo,
   } = useCardRegisterContext();
 
-  const updateCardNumber: <T extends keyof CardNumber>(key: T, value: CardNumber[T]) => void = (
-    key,
-    value
-  ) => {
-    handleCardInfo('cardNumber', {
-      ...cardNumber,
-      [key]: value,
-    });
-  };
-
   const onChangeByKey =
     (key: keyof CardNumber) =>
     ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
       if (value && !isNumber(value)) return;
 
-      updateCardNumber(key, value);
+      handleCardInfo('cardNumber', {
+        ...cardNumber,
+        [key]: value,
+      });
     };
 
   const defaultConditions = useMemo<HTMLAttributes<HTMLInputElement>>(
@@ -123,22 +116,15 @@ export function useCardExpirationDate() {
     handleCardInfo,
   } = useCardRegisterContext();
 
-  const updateExpirationDate: <T extends keyof ExpirationDate>(key: T, value: ExpirationDate[T]) => void = (
-    key,
-    value
-  ) => {
-    handleCardInfo('expirationDate', {
-      ...expirationDate,
-      [key]: value,
-    });
-  };
-
   const onChangeByKey =
     (key: keyof ExpirationDate) =>
     ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
       if (value && !isNumber(value)) return;
 
-      updateExpirationDate(key, value);
+      handleCardInfo('expirationDate', {
+        ...expirationDate,
+        [key]: value,
+      });
     };
 
   const defaultConditions = {
@@ -174,7 +160,9 @@ export function useCardName() {
   } = useCardRegisterContext();
 
   const onChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
-    handleCardInfo('holderName', value);
+    if (value && !isEnglish(value)) return;
+
+    handleCardInfo('holderName', value.toUpperCase());
   };
 
   const defaultConditions = useMemo(
@@ -197,6 +185,8 @@ export function useCardCVC() {
   } = useCardRegisterContext();
 
   const onChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
+    if (value && !isNumber(value)) return;
+
     handleCardInfo('cvc', value);
   };
 
@@ -214,11 +204,21 @@ export function useCardCVC() {
   return { cvc, defaultConditions, onChange };
 }
 export function useCardPassword() {
-  const onKeyDown = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
-    if (isValidateKey(e, '[0-9]')) return;
+  const {
+    cardRegisterInfo: { password },
+    handleCardInfo,
+  } = useCardRegisterContext();
 
-    e.preventDefault();
-  }, []);
+  const onChangeByKey =
+    (key: keyof Password) =>
+    ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
+      if (value && !isNumber(value)) return;
+
+      handleCardInfo('password', {
+        ...password,
+        [key]: value,
+      });
+    };
 
   const defaultConditions = useMemo(
     () => ({
@@ -226,9 +226,8 @@ export function useCardPassword() {
       maxLength: 1,
       asChild: true,
       required: true,
-      onKeyDown,
     }),
     []
   );
-  return { defaultConditions };
+  return { password, defaultConditions, onChangeByKey };
 }

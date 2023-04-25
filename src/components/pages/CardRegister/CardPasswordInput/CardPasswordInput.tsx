@@ -1,24 +1,11 @@
 import React from 'react';
-import { useCardRegisterContext } from '../../../../context/CardRegisterContext';
-import { Password } from '../../../../types/card.type';
 import { useCardPassword } from '../../../../hooks/card/card';
 import Input from '../../../@common/Input/Input';
-import * as Styled from './CardPasswordInput.styles';
 import { StyledCardRegister } from '../@common/CardRegister.styles';
+import * as Styled from './CardPasswordInput.styles';
 
 export default function CardPasswordInput() {
-  const {
-    cardRegisterInfo: { password },
-    handleCardInfo,
-  } = useCardRegisterContext();
-  const { defaultConditions } = useCardPassword();
-
-  const onChangeValue: <T extends keyof Password>(key: T, value: Password[T]) => void = (key, value) => {
-    handleCardInfo('password', {
-      ...password,
-      [key]: value,
-    });
-  };
+  const { password, defaultConditions, onChangeByKey } = useCardPassword();
 
   return (
     <Styled.FieldSet>
@@ -26,10 +13,8 @@ export default function CardPasswordInput() {
       <Styled.InputBackground>
         <Input>
           <Input.Field
-            name="passwordFirstDigit"
-            id="passwordFirstDigit"
             value={password['passwordFirstDigit']}
-            onChange={({ target: { value } }) => onChangeValue('passwordFirstDigit', value)}
+            onChange={onChangeByKey('passwordFirstDigit')}
             {...defaultConditions}
           >
             <Styled.Input />
@@ -37,10 +22,8 @@ export default function CardPasswordInput() {
         </Input>
         <Input>
           <Input.Field
-            name="passwordFirstDigit"
-            id="passwordFirstDigit"
             value={password['passwordSecondDigit']}
-            onChange={({ target: { value } }) => onChangeValue('passwordSecondDigit', value)}
+            onChange={onChangeByKey('passwordSecondDigit')}
             {...defaultConditions}
           >
             <Styled.Input />
