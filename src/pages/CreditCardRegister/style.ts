@@ -1,22 +1,5 @@
 import styled from 'styled-components';
 
-export const CreditCardRegisterTopSheet = styled.div`
-  display: flex;
-  margin-bottom: 25px;
-  font-size: 18px;
-  align-items: center;
-`;
-
-export const HomeButton = styled.button`
-  margin-right: 12px;
-  margin-bottom: 3px;
-  cursor: pointer;
-`;
-
-export const CreditCardRegisterHeader = styled.h3`
-  line-height: 18.75px;
-`;
-
 export const PreviewCreditCard = styled.div`
   display: flex;
   justify-content: center;

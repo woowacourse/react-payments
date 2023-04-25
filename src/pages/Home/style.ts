@@ -1,11 +1,5 @@
 import styled from 'styled-components';
 
-export const HomeHeader = styled.h3`
-  font-size: 18px;
-  line-height: 18.75px;
-  margin-bottom: 25px;
-`;
-
 export const CreditCardList = styled.div`
   display: grid;
   row-gap: 40px;

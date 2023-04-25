@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import CreditCard from '@Components/CreditCard';
+import Header from '@Components/Header';
 
 import creditCardStorage from '@Domains/creditCardStorage';
 
@@ -19,7 +20,7 @@ function Home() {
 
   return (
     <>
-      <S.HomeHeader>보유카드</S.HomeHeader>
+      <Header title="보유카드" />
       <S.CreditCardList>
         {creditCardList.map((creditCard) => (
           <CreditCard

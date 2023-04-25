@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import Button from '@Components/Button';
 import CreditCard from '@Components/CreditCard';
+import Header from '@Components/Header';
 
 import creditCard from '@Domains/creditCard';
 import creditCardStorage from '@Domains/creditCardStorage';
@@ -77,12 +78,7 @@ function CreditCardRegister() {
 
   return (
     <>
-      <S.CreditCardRegisterTopSheet>
-        <S.HomeButton type="button" onClick={() => navigate('/')}>
-          {`${'<'}`}
-        </S.HomeButton>
-        <S.CreditCardRegisterHeader>카드 추가</S.CreditCardRegisterHeader>
-      </S.CreditCardRegisterTopSheet>
+      <Header title="카드 추가" hasBackButton />
       <S.PreviewCreditCard>
         <CreditCard
           fullFilled={false}

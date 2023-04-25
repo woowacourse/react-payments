@@ -12,7 +12,6 @@ export const BackButton = styled.button`
   border: 0;
   background-color: transparent;
   margin-right: 12px;
-  margin-bottom: 3px;
   font-size: 20px;
   cursor: pointer;
 `;
