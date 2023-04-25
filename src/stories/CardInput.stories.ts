@@ -17,7 +17,6 @@ export const CardNumber: Story = {
     isSecured: false,
     isAutoFocus: true,
     isRequired: true,
-    maxLength: 25,
   },
 };
 
@@ -30,7 +29,6 @@ export const ExpiredDate: Story = {
     isSecured: false,
     isAutoFocus: false,
     isRequired: true,
-    maxLength: 7,
   },
 };
 
@@ -42,7 +40,6 @@ export const OwnerName: Story = {
     isSecured: false,
     isAutoFocus: false,
     isRequired: true,
-    maxLength: 7,
   },
 };
 
@@ -54,7 +51,6 @@ export const Cvc: Story = {
     isSecured: true,
     isAutoFocus: false,
     isRequired: true,
-    maxLength: 3,
   },
 };
 
@@ -66,6 +62,5 @@ export const Password: Story = {
     isSecured: true,
     isAutoFocus: false,
     isRequired: true,
-    maxLength: 1,
   },
 };

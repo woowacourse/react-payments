@@ -1,9 +1,17 @@
 const INPUT_MAX_LENGTH = {
-  CARD_NUMBER: 25,
-  EXPIRED_DATE: 7,
-  OWNER_NAME: 30,
-  CVC: 3,
-  PASSWORD: 1,
+  cardNumber: 25,
+  expiredDate: 7,
+  ownerName: 30,
+  cvc: 3,
+  password: 1,
+} as const;
+
+const INPUT_MIN_LENGTH = {
+  cardNumber: 25,
+  expiredDate: 7,
+  ownerName: 1,
+  cvc: 3,
+  password: 1,
 } as const;
 
 const SEPERATED_CARD_NUMBER_LENGTH = {
@@ -53,6 +61,7 @@ const RANDOM_COLOR = ['red', 'pink', 'green', 'blue', 'black', 'gray', 'yellow',
 
 export {
   INPUT_MAX_LENGTH,
+  INPUT_MIN_LENGTH,
   SEPERATED_CARD_NUMBER_LENGTH,
   CARD_NUMBER_ERASE_SYMBOL,
   PASSWORD_DIGIT_INDEX,
