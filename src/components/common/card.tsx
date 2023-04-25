@@ -1,15 +1,15 @@
-import { useContext } from "react";
 import styled from "styled-components";
-import {
-  DateContext,
-  NameContext,
-  NumberContext,
-} from "../../contexts/cardInfo";
+import { CardNumber } from "../../type/input";
 
-export function Card() {
-  const { cardNumber } = useContext(NumberContext);
-  const { month, year } = useContext(DateContext);
-  const { userName } = useContext(NameContext);
+interface CardProps {
+  cardNumber: CardNumber;
+  month: string;
+  year: string;
+  userName: string;
+}
+
+export function Card(props: CardProps) {
+  const { cardNumber, month, year, userName } = props;
 
   return (
     <CardContainer>
