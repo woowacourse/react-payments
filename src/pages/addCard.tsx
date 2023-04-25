@@ -4,7 +4,6 @@ import { Card } from "../components/common/card";
 import { CardInfoProvider } from "../contexts/cardInfo";
 import { BackButton } from "../components/common/backButton";
 import { Header } from "../components/common/Header";
-import { ValidateProvider } from "../contexts/validate";
 
 export function AddCard() {
   return (
@@ -12,9 +11,7 @@ export function AddCard() {
       <Header title="카드 추가" render={() => BackButton()} />
       <CardInfoProvider>
         <Card />
-        <ValidateProvider>
-          <AddCardForm />
-        </ValidateProvider>
+        <AddCardForm />
       </CardInfoProvider>
     </Wrapper>
   );

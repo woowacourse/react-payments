@@ -1,17 +1,29 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { Header } from "../components/common/Header";
-import { getData } from "../utils/localStorage";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CardInfo, CardItem } from "../components/common/cardItem";
 
 export function CardList() {
-  const [cards, setCards] = useState<CardInfo[]>(getData("cards"));
+  const [cards, setCards] = useState<CardInfo[]>();
+
+  function getCardList() {
+    const data = fetch("http://localhost:4002/data/", {
+      method: "GET",
+    }).then((response) => {
+      response.json();
+    });
+
+    return data;
+  }
 
   const navigate = useNavigate();
   function moveAddCardPage() {
     navigate("/add-card");
   }
+  useEffect(() => {
+    console.log(getCardList());
+  }, []);
 
   return (
     <CardListContainer>
