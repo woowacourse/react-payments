@@ -1,15 +1,12 @@
 import React, { InputHTMLAttributes } from 'react';
 import styled from 'styled-components';
 
-export interface InputType {
+export interface InputType extends InputHTMLAttributes<HTMLInputElement> {
   textType: 'text' | 'number';
-  maxLength: number;
-  placeholder?: string;
   textSecurity?: boolean;
-  required?: boolean;
 }
 
-interface InputBoxProps extends InputHTMLAttributes<HTMLInputElement> {
+interface InputBoxProps {
   inputs: InputType[];
   inputValues: string | string[];
   setInputValues: (val: string | string[]) => void;
@@ -43,19 +40,16 @@ const InputBox = ({
 
   return (
     <InputsBoxWrapper isFullWidth={isFullWidth} align={align}>
-      {inputs.map(({ textType, maxLength, placeholder, textSecurity, required }, index) => (
+      {inputs.map((props, index) => (
         <>
           {index > 0 && <Separator>{separator}</Separator>}
           <Input
+            {...props}
             type="text"
             value={typeof inputValues === 'string' ? inputValues : inputValues[index]}
-            onChange={onChangeInput(textType, index)}
-            placeholder={placeholder}
-            minLength={required ? maxLength : 0}
-            maxLength={maxLength}
+            onChange={onChangeInput(props.textType, index)}
+            minLength={props.required ? props.maxLength : 0}
             align={align}
-            textSecurity={textSecurity}
-            required={required}
           />
         </>
       ))}
