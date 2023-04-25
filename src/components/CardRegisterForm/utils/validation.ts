@@ -7,12 +7,12 @@ const today = new Date();
 const currentYear = today.getFullYear() % 100;
 const currentMonth = today.getMonth() + 1;
 
-const isValidMonth = (month: number) => month >= 1 && month <= 12;
+console.log(currentYear);
+
+const isMonthNumber = (month: number) => month >= 1 && month <= 12;
 const isValidYear = (year: number) => year >= currentYear;
-const isValidDateInCurrentYear = (month: number, year: number) =>
-  year === currentYear && month > currentMonth;
+const isValidMonth = (month: number, year: number) =>
+  year === currentYear ? month > currentMonth : isMonthNumber(month);
 
 export const isValidExpiredDate = (month: number, year: number) =>
-  isValidMonth(month) &&
-  isValidYear(year) &&
-  isValidDateInCurrentYear(month, year);
+  isValidYear(year) && isValidMonth(month, year);
