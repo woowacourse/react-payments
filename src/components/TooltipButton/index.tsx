@@ -6,8 +6,13 @@ interface Props {
 
 const TooltipButton = ({ tabIndex }: Props) => {
   return (
-    <button type="button" className={styles.button} tabIndex={tabIndex}>
-      <p className={styles.mark}>?</p>
+    <button
+      type="button"
+      className={styles.button}
+      tabIndex={tabIndex}
+      aria-label="CVC 툴팁 버튼"
+    >
+      <span className={styles.mark}>?</span>
     </button>
   );
 };
