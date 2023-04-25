@@ -6,7 +6,7 @@ interface InputWrapperProps {
 }
 
 export function InputWrapper({ children, width }: InputWrapperProps) {
-  return <Style.Wrapper style={{ width: width }}>{children}</Style.Wrapper>;
+  return <Style.Wrapper style={{ width }}>{children}</Style.Wrapper>;
 }
 
 const Style = {
