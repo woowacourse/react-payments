@@ -1,12 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
-const Header = ({ title }: { title: string }) => {
+const title: Record<string, string> = {
+  '/': '보유카드',
+  '/addCard': '카드 추가',
+};
+
+const Header = () => {
+  const { pathname } = useLocation();
+
   return (
     <StyledHeader>
-      <StyledLeftArrowButton to="/" title={title} />
-      <StyledHeaderTitle>{title}</StyledHeaderTitle>
+      <StyledLeftArrowButton to="/" title={title[pathname]} />
+      <StyledHeaderTitle>{title[pathname]}</StyledHeaderTitle>
     </StyledHeader>
   );
 };
