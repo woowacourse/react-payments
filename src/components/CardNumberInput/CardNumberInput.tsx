@@ -4,10 +4,10 @@ import { InputContainer, Input, Label } from "../common";
 
 type CardNumberInputProps = {
   cardNumber: CardNumber;
-  setCardNumber: (targetGroup: CardNumberGroups, value: string) => void;
+  onChange: (targetGroup: CardNumberGroups, value: string) => void;
 };
 
-const CardNumberInput = ({ cardNumber, setCardNumber }: CardNumberInputProps) => {
+const CardNumberInput = ({ cardNumber, onChange }: CardNumberInputProps) => {
   const { firstGroup, secondGroup, thirdGroup, fourthGroup } = cardNumber;
 
   const handleCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,7 +17,7 @@ const CardNumberInput = ({ cardNumber, setCardNumber }: CardNumberInputProps) =>
     if (!isNumeric(value)) return;
     if (!isCardNumberGroupsType(targetGroup)) return;
 
-    setCardNumber(targetGroup, value);
+    onChange(targetGroup, value);
   };
 
   const isCardNumberGroupsType = (targetGroup: string): targetGroup is CardNumberGroups => {

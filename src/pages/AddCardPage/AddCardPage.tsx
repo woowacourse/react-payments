@@ -115,8 +115,8 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
       <AppBar title={"카드 추가"} leftChild={<Link to="/">〈</Link>} />
       <CardPreview card={{ cardNumber, expirationDate, ownerName }} />
       <Form onSubmit={addCard}>
-        <CardNumberInput cardNumber={cardNumber} setCardNumber={handleCardNumber} />
-        <CardExpirationDateInput expirationDate={expirationDate} setCardExpirationDate={handleExpirationDate} />
+        <CardNumberInput cardNumber={cardNumber} onChange={handleCardNumber} />
+        <CardExpirationDateInput expirationDate={expirationDate} onChange={handleExpirationDate} />
         <CardOwnerNameInput ownerName={ownerName} nameLength={ownerName.length} onChange={handleOwnerName} />
         <CardSecurityCodeInput securityCode={securityCode} onChange={handleSecurityCode} />
         <CardPasswordInput password={password} onChange={handlePassword} />
