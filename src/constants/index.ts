@@ -51,7 +51,8 @@ const ROUTER_PATH = {
 };
 
 const REGEX = {
-  number: /[0-9]/g,
+  number: /^[0-9]+$/,
+  english: /^[a-zA-Z]*$/,
 } as const;
 
 export {

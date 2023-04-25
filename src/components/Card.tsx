@@ -1,9 +1,12 @@
 import styled from "styled-components";
 import { IcChip } from "../assets";
+import { SEPERATOR_STRING } from "../constants";
 import { CardType } from "../types";
 
 const Card = ({ cardNumber, color, ownerName, expiredDate }: CardType) => {
-  const cardNumberArray = cardNumber.replaceAll(" - ", " ").split(" ");
+  const cardNumberArray = cardNumber
+    .replaceAll(SEPERATOR_STRING.cardNumber, " ")
+    .split(" ");
 
   return (
     <CardWrapper style={{ background: color }}>

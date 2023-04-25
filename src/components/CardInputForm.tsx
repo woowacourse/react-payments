@@ -12,6 +12,11 @@ import {
   getSubCardNumber,
   getSubExpiredDate,
 } from "../utils/card";
+import {
+  validateExpiredDate,
+  validateNumber,
+  validateOwnerName,
+} from "../utils/validation";
 
 interface CardInputFormType {
   card: CardType;
@@ -54,6 +59,9 @@ const CardInputForm = ({ card, setCard, onSubmit }: CardInputFormType) => {
       const newPassword = [...newCard.password];
       newPassword[digit] = e.target.value;
       newCard.password = newPassword;
+      if (e.target.nextSibling instanceof HTMLInputElement)
+        e.target.nextSibling.focus();
+
       setCard(newCard);
     };
 
@@ -81,8 +89,7 @@ const CardInputForm = ({ card, setCard, onSubmit }: CardInputFormType) => {
           onChange={handleCardNumberChanged}
           onKeyDown={handleCardNumberKey}
         />
-        {!newCard.cardNumber.match(/[0-9]/g) &&
-          newCard.cardNumber.length !== 0 && <span>숫자만 입력해주세요.</span>}
+        {<span>{validateNumber(newCard.cardNumber)}</span>}
       </InputSetWrapper>
 
       <InputSetWrapper>
@@ -96,6 +103,7 @@ const CardInputForm = ({ card, setCard, onSubmit }: CardInputFormType) => {
           onChange={handleExpiredDateChanged}
           onKeyDown={handleExpiredDateKey}
         />
+        {<span>{validateExpiredDate(newCard.expiredDate)}</span>}
       </InputSetWrapper>
 
       <InputSetWrapper>
@@ -110,6 +118,7 @@ const CardInputForm = ({ card, setCard, onSubmit }: CardInputFormType) => {
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
           onChange={handleOwnerNameChanged}
         />
+        {<span>{validateOwnerName(newCard.ownerName)}</span>}
       </InputSetWrapper>
 
       <InputSetWrapper>
@@ -129,6 +138,7 @@ const CardInputForm = ({ card, setCard, onSubmit }: CardInputFormType) => {
             onClick={() => setIsAnswered(!isAnswered)}
           />
         </CvcInputWrapper>
+        {<span>{validateNumber(newCard.cvc)}</span>}
       </InputSetWrapper>
 
       <InputSetWrapper>
@@ -153,6 +163,7 @@ const CardInputForm = ({ card, setCard, onSubmit }: CardInputFormType) => {
           <SecuredPasswordWrapper>●</SecuredPasswordWrapper>
           <SecuredPasswordWrapper>●</SecuredPasswordWrapper>
         </PasswordInputWrapper>
+        {<span>{validateNumber(newCard.password.join(""))}</span>}
       </InputSetWrapper>
       {isAnswered && (
         <AnswerBoxWrapper>
@@ -193,7 +204,7 @@ const InputSetWrapper = styled.div`
   display: flex;
   flex-direction: column;
 
-  margin-bottom: 13px;
+  margin-bottom: 8px;
 
   & > label {
     font-weight: 500;
