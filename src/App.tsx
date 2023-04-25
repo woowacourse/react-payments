@@ -25,11 +25,7 @@ function App() {
     { basename: process.env.PUBLIC_URL }
   );
 
-  return (
-    <>
-      <RouterProvider router={router} />
-    </>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

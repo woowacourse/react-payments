@@ -15,6 +15,7 @@ function useCardPassword() {
       setCardPassword([cardPassword[0], password]);
     }
   };
+  
   return { cardPassword, changeCardPassword };
 }
 
