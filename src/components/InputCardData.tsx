@@ -3,7 +3,7 @@ import React, { ChangeEvent, RefObject } from 'react';
 import './InputCardData.css';
 
 export type InputProps = {
-  isPasswordType?: boolean;
+  inputType: string;
   passwordType?: string;
   className?: string;
   value: string;
@@ -19,7 +19,7 @@ export type InputProps = {
 };
 
 const InputCardData = ({
-  isPasswordType,
+  inputType,
   passwordType,
   className,
   value,
@@ -33,7 +33,7 @@ const InputCardData = ({
   onFocus,
   handleInputData,
 }: InputProps) => {
-  return isPasswordType ? (
+  return inputType === 'password' ? (
     <input
       className={`input-password-container ${passwordType}`}
       type="password"
@@ -54,6 +54,7 @@ const InputCardData = ({
     <input
       className={`input-box ${className}`}
       value={value}
+      type={inputType}
       maxLength={maxDataLength}
       minLength={minDataLength}
       data-id={dataId}

@@ -103,6 +103,7 @@ const FormCardAdd = ({
         <span className="form-label">카드 번호</span>
         <div className="card-number-input-container">
           <InputCardData
+            inputType="number"
             className="card-number"
             value={cardNumber.value.first}
             minDataLength={4}
@@ -117,6 +118,7 @@ const FormCardAdd = ({
           />
           <span>-</span>
           <InputCardData
+            inputType="number"
             className="card-number"
             value={cardNumber.value.second}
             minDataLength={4}
@@ -131,7 +133,7 @@ const FormCardAdd = ({
           />
           <span>-</span>
           <InputCardData
-            isPasswordType={true}
+            inputType="password"
             passwordType="card-number"
             className="card-number"
             value={cardNumber.value.third}
@@ -147,7 +149,7 @@ const FormCardAdd = ({
           />
           <span>-</span>
           <InputCardData
-            isPasswordType={true}
+            inputType="password"
             passwordType="card-number"
             className="card-number"
             value={cardNumber.value.fourth}
@@ -166,6 +168,7 @@ const FormCardAdd = ({
       <div>
         <span className="form-label">만료일</span>
         <InputCardData
+          inputType="text"
           className="card-expired"
           value={cardExpire.value}
           minDataLength={1}
@@ -186,6 +189,7 @@ const FormCardAdd = ({
           <span className="form-label">{cardOwner.value.length}/15</span>
         </div>
         <InputCardData
+          inputType="text"
           className="card-owner"
           value={cardOwner.value}
           minDataLength={1}
@@ -203,7 +207,7 @@ const FormCardAdd = ({
         <span className="form-label">보안코드(CVC/CVV)</span>
         <div className="card-security-code-box">
           <InputCardData
-            isPasswordType={true}
+            inputType="password"
             passwordType="password-cvc"
             value={securityCode.value}
             name="cvcData"
@@ -223,7 +227,7 @@ const FormCardAdd = ({
         <span className="form-label">카드 비밀번호</span>
         <div className="card-password-input-box">
           <InputCardData
-            isPasswordType={true}
+            inputType="password"
             passwordType="password-single"
             value={cardPassword1.value}
             maxDataLength={1}
@@ -237,7 +241,7 @@ const FormCardAdd = ({
             handleInputData={handleInputData}
           />
           <InputCardData
-            isPasswordType={true}
+            inputType="password"
             passwordType="password-single"
             value={cardPassword2.value}
             maxDataLength={1}
