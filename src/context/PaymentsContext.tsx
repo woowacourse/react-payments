@@ -7,12 +7,7 @@ type PaymentsContextValue = {
   setCreditCards: Dispatch<CreditCard[]>;
 };
 
-export const PaymentsContext = createContext<PaymentsContextValue>({
-  creditCards: [],
-  setCreditCards: () => {
-    throw new Error('No Provider');
-  },
-});
+export const PaymentsContext = createContext<PaymentsContextValue | null>(null);
 
 export const PaymentsProvider = (props: PropsWithChildren) => {
   const { children } = props;
