@@ -44,6 +44,27 @@ export const CharacterCounter = () => (
 export const Error = () => (
   <InputContainer isError>
     <InputLabel htmlFor="input">Label</InputLabel>
-    <Input placeholder="Placeholder Text" isError />
+    <Input id="input" placeholder="Placeholder Text" isError />
+  </InputContainer>
+);
+
+export const UnderlineSupportingText = () => (
+  <InputContainer supportingText={{ default: 'Supporting Text' }}>
+    <InputLabel htmlFor="input">Label</InputLabel>
+    <Input id="input" variant="underline" placeholder="Placeholder Text" />
+  </InputContainer>
+);
+
+export const UnderlineCharacterCounter = () => (
+  <InputContainer characterCounter={{ currentCount: 0, maxCount: 30 }}>
+    <InputLabel htmlFor="input">Label</InputLabel>
+    <Input id="input" variant="underline" placeholder="Placeholder Text" />
+  </InputContainer>
+);
+
+export const UnderlineError = () => (
+  <InputContainer isError>
+    <InputLabel htmlFor="input">Label</InputLabel>
+    <Input id="input" variant="underline" placeholder="Placeholder Text" isError />
   </InputContainer>
 );
