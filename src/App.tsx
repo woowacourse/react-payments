@@ -5,23 +5,18 @@ import CardListPage from './components/pages/CardListPage';
 import CardRegistrationPage from './components/pages/CardRegistrationPage';
 import NotFoundPage from './components/pages/NotFoundPage';
 import BankList from './components/BankList';
+import { useBottomSheet } from './hooks/useBottomSheet';
 import type { CardItemInfo } from './types/Card';
 
 function App() {
   const [cardList, setCardList] = useState<CardItemInfo[]>([]);
-  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
 
   const addCardItem = (cardItem: CardItemInfo) => {
     setCardList((prevCardList) => [...prevCardList, cardItem]);
   };
 
-  const handleBottomSheetOpen = () => {
-    setIsBottomSheetOpen(true);
-  };
-
-  const handleBottomSheetClose = () => {
-    setIsBottomSheetOpen(false);
-  };
+  const { isBottomSheetOpen, handleBottomSheetOpen, handleBottomSheetClose } =
+    useBottomSheet();
 
   return (
     <AppContainer className='App'>
