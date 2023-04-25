@@ -1,8 +1,19 @@
-import React, { FormEvent, KeyboardEvent, useCallback, useEffect, useMemo, useState } from 'react';
+import React, {
+  ChangeEvent,
+  FormEvent,
+  HTMLAttributes,
+  KeyboardEvent,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { CardRegisterInfo } from '../../types/card.type';
-import { isValidateKey } from '../../utils/input';
+import { useCardRegisterContext } from '../../context/CardRegisterContext';
+import { CardNumber, CardRegisterInfo } from '../../types/card.type';
+import { isPatternMatch, isValidateKey } from '../../utils/input';
 import { getCardList, setCardList } from '../../utils/localStorage';
+import { isNumber } from '../../utils/validation';
 
 export function useMyCardRegister() {
   const navigate = useNavigate();
@@ -19,18 +30,19 @@ export function useMyCardRegister() {
     inputs.forEach((input, i) => {
       if (input !== e.target) return;
 
+      const { value, pattern, name, maxLength } = input;
       const nextInput = findInvalidInput(inputs.slice(i + 1)) ?? inputs[i + 1];
       const prevInput = findInvalidInput(inputs.slice(0, i).reverse()) ?? inputs[i - 1];
 
-      if (input.name === 'name') {
-        input.value.length === input.maxLength && nextInput?.focus();
-        !input.value && prevInput?.focus();
+      if (name === 'name') {
+        value.length === maxLength && nextInput?.focus();
+        !value && prevInput?.focus();
 
         return;
       }
 
-      input.validity.valid && nextInput?.focus();
-      !input.value && prevInput?.focus();
+      isPatternMatch(value, pattern) && nextInput?.focus();
+      !value && prevInput?.focus();
     });
 
     setIsAllValid(validateAllInputs(inputs));
@@ -40,7 +52,7 @@ export function useMyCardRegister() {
     return (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
-      navigate('/', { state: { data } });
+      navigate('/', { state: { cardRegisterInfo: data } });
     };
   };
 
@@ -69,23 +81,40 @@ export function useMyCardList() {
 }
 
 export function useCardNumber() {
-  const onKeyDown = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
-    if (isValidateKey(e, '[0-9]')) return;
+  const {
+    cardRegisterInfo: { cardNumber },
+    handleCardInfo,
+  } = useCardRegisterContext();
 
-    e.preventDefault();
-  }, []);
+  const updateCardNumber: <T extends keyof CardNumber>(key: T, value: CardNumber[T]) => void = (
+    key,
+    value
+  ) => {
+    handleCardInfo('cardNumber', {
+      ...cardNumber,
+      [key]: value,
+    });
+  };
 
-  const defaultConditions = useMemo(
+  const onChangeByKey =
+    (key: keyof CardNumber) =>
+    ({ target: { value, name } }: ChangeEvent<HTMLInputElement>) => {
+      if (value && !isNumber(value)) return;
+
+      updateCardNumber(key, value);
+    };
+
+  const defaultConditions = useMemo<HTMLAttributes<HTMLInputElement>>(
     () => ({
-      pattern: '[0-9]{4}',
+      pattern: '^[0-9]{4}$',
       maxLength: 4,
       asChild: true,
       required: true,
-      onKeyDown,
+      inputMode: 'numeric',
     }),
     []
   );
-  return { defaultConditions };
+  return { cardNumber, defaultConditions, onChangeByKey };
 }
 
 export function useCardExpirationDate() {
@@ -124,9 +153,10 @@ export function useCardExpirationDate() {
 
 export function useCardName() {
   const onKeyDown = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
-    if (isValidateKey(e, '^[a-zA-Z]$')) return;
-
-    e.preventDefault();
+    if (!isValidateKey(e, '^[a-zA-Z]$')) {
+      e.key = '';
+      e.preventDefault();
+    }
   }, []);
 
   const defaultConditions = useMemo(
@@ -150,13 +180,14 @@ export function useCardCVC() {
     e.preventDefault();
   }, []);
 
-  const defaultConditions = useMemo(
+  const defaultConditions = useMemo<HTMLAttributes<HTMLInputElement>>(
     () => ({
       pattern: '[0-9]{3}',
-      type: 'password',
+      type: 'number',
       maxLength: 3,
       asChild: true,
       required: true,
+      inputMode: 'numeric',
       onKeyDown,
     }),
     []

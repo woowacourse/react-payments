@@ -1,11 +1,13 @@
 import { flexCenter } from '../../../../styles/mixin';
 import styled from 'styled-components';
 
-export const Input = styled.input`
+export const Input = styled.input<{ masking?: boolean }>`
   width: 100%;
   height: 100%;
   font-size: 12px;
   text-align: center;
+
+  ${({ masking }) => masking && `-webkit-text-security: disc`};
 
   ${({ theme: { registerFormInput } }) => registerFormInput};
 `;
