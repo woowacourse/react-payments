@@ -1,9 +1,5 @@
 import styled from 'styled-components';
 
-export const HomeLayout = styled.div`
-  padding: 20px 36px;
-`;
-
 export const HomeHeader = styled.h3`
   font-size: 18px;
   line-height: 18.75px;

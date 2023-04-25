@@ -76,7 +76,7 @@ function CreditCardRegister() {
   }, [creditCardNumber, creditCardExpiry, creditCardCVC, creditCardPassword]);
 
   return (
-    <S.CreditCardRegisterLayout>
+    <>
       <S.CreditCardRegisterTopSheet>
         <S.HomeButton type="button" onClick={() => navigate('/')}>
           {`${'<'}`}
@@ -124,7 +124,7 @@ function CreditCardRegister() {
           <Button disabled={!isFullFilled} type="button" handleClick={handleSubmit} text="확인" />
         </S.ButtonWrapper>
       </S.CreditCardRegisterForm>
-    </S.CreditCardRegisterLayout>
+    </>
   );
 }
 export default CreditCardRegister;

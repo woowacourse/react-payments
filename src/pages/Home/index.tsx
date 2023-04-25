@@ -18,7 +18,7 @@ function Home() {
   }, []);
 
   return (
-    <S.HomeLayout>
+    <>
       <S.HomeHeader>보유카드</S.HomeHeader>
       <S.CreditCardList>
         {creditCardList.map((creditCard) => (
@@ -40,7 +40,7 @@ function Home() {
           +
         </S.RegisterCreditCardButton>
       </S.RegisterCreditCardContainer>
-    </S.HomeLayout>
+    </>
   );
 }
 export default Home;

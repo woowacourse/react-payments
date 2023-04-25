@@ -27,6 +27,8 @@ export const GlobalLayout = styled.div`
   width: 375px;
   min-height: 100vh;
   margin: 0 auto;
+  padding: 28px 28px;
+  box-sizing: border-box;
 `;
 
 export default GlobalStyle;
