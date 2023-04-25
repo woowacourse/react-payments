@@ -2,8 +2,6 @@ import React from 'react';
 import { useCardRegisterContext } from '../../../../context/CardRegisterContext';
 import { Password } from '../../../../types/card.type';
 import { useCardPassword } from '../../../../hooks/card/card';
-
-import Flex from '../../../@common/Flex/Flex';
 import Input from '../../../@common/Input/Input';
 import * as Styled from './CardPasswordInput.styles';
 import { StyledCardRegister } from '../@common/CardRegister.styles';

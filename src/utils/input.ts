@@ -1,9 +1,6 @@
 import { KeyboardEvent } from 'react';
 
-export const isValidateKey = (
-  event: KeyboardEvent<HTMLInputElement>,
-  pattern: string
-): boolean => {
+export const isValidateKey = (event: KeyboardEvent<HTMLInputElement>, pattern: string): boolean => {
   const validKeys = [
     'Backspace',
     'Delete',
@@ -16,9 +13,11 @@ export const isValidateKey = (
     'End',
   ];
 
-  if (validKeys.includes(event.key) || new RegExp(pattern).test(event.key)) {
+  if (validKeys.includes(event.key) || isPatternMatch(event.key, pattern)) {
     return true;
   }
 
   return false;
 };
+
+export const isPatternMatch = (value: string, pattern: string) => new RegExp(pattern).test(value);
