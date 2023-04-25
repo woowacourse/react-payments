@@ -7,8 +7,6 @@ const today = new Date();
 const currentYear = today.getFullYear() % 100;
 const currentMonth = today.getMonth() + 1;
 
-console.log(currentYear);
-
 const isMonthNumber = (month: number) => month >= 1 && month <= 12;
 const isValidYear = (year: number) => year >= currentYear;
 const isValidMonth = (month: number, year: number) =>
