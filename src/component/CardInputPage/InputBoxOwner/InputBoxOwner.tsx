@@ -1,13 +1,13 @@
-import { useState, ChangeEvent, useEffect } from "react";
+import { useState, ChangeEvent } from "react";
 import Input from "../../common/Input";
 
 import "./inputBoxOwner.css";
-import { CARD_ERROR_MESSAGE, INPUT_STATUS } from "../../../CONSTANT";
-import { validateCardOwner } from "../../../validation/cardOwner";
+import { CARD_ERROR_MESSAGE } from "../../../CONSTANT";
 import { CreditCard } from "../../../type";
+import { makeAppropriateName } from "../../../trans";
 
 interface Props {
-  setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
+  changeCardOwnerStatus: (key: "isComplete" | "userInput", value: any) => void;
   changeNowCardInfo: (
     key: keyof CreditCard,
     value: any,
@@ -16,46 +16,42 @@ interface Props {
 }
 
 export default function InputBoxOwner(props: Props) {
-  const { setIsComplete, changeNowCardInfo } = props;
+  const { changeCardOwnerStatus, changeNowCardInfo } = props;
 
-  const [nameLength, setNameLength] = useState(0);
-  const [inputStatus, setInputStatus] = useState(INPUT_STATUS.NOT_COMPLETE);
+  const [isError, setIsError] = useState(false);
+  const [name, setName] = useState("");
 
-  const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value
-      .split(/\s{2,}/)
-      .filter((spelling) => spelling !== "")
-      .join(" ");
+  const changeName = (e: ChangeEvent<HTMLInputElement>) => {
+    const userInputName = e.target.value.slice(0, 30).toUpperCase();
+    const appropriateName = makeAppropriateName(userInputName);
 
-    e.target.value = value.slice(0, 30).trim().toUpperCase();
-
-    if (validateCardOwner(e.target.value)) {
-      setInputStatus(INPUT_STATUS.COMPLETE);
-      changeNowCardInfo("owner", e.target.value);
+    if (userInputName !== appropriateName) {
+      setIsError(true);
+      changeCardOwnerStatus("isComplete", false);
     } else {
-      setInputStatus(INPUT_STATUS.ERROR);
+      setIsError(false);
+      changeCardOwnerStatus("isComplete", true);
     }
 
-    setNameLength(e.target.value.length);
+    changeNowCardInfo("owner", appropriateName);
+    changeCardOwnerStatus("userInput", appropriateName);
+    setName(appropriateName);
   };
-
-  useEffect(() => {
-    setIsComplete(inputStatus === INPUT_STATUS.COMPLETE ? true : false);
-  }, [inputStatus]);
 
   return (
     <div className="input-box-card-owner">
       <p>카드 소유자 이름(선택)</p>
-      <p>{nameLength}/30</p>
+      <p>{name.length}/30</p>
       <Input
         name="card-owner"
         className="input-card-owner"
         type="text"
-        onChange={onChangeCallback}
+        onChange={changeName}
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
         inputMode="text"
+        value={name}
       ></Input>
-      <p className={inputStatus === INPUT_STATUS.ERROR ? "visible" : ""}>
+      <p className={isError ? "visible" : ""}>
         {CARD_ERROR_MESSAGE.INPUT_CARD_OWNER}
       </p>
     </div>

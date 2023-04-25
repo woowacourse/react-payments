@@ -49,7 +49,7 @@ export default function CardInputForm(props: Props) {
   );
   const [expirationDateStatus, setExpirationDateStatus] =
     useState<EachUserInputState>(initialEachUserInputState);
-  const [isOwnerComplete, setIsOwnerComplete] = useState(false);
+  const [ownerStatus, setOwnerStatus] = useState(initialEachUserInputState);
   const [isSecurityComplete, setIsSecurityComplete] = useState(false);
   const [isPasswordComplete, setIsPasswordComplete] = useState(false);
 
@@ -60,11 +60,16 @@ export default function CardInputForm(props: Props) {
   function changeCardNumberStatus(key: "isComplete" | "userInput", value: any) {
     setCardNumberStatus(deepCopyObject(cardNumberStatus, key, value));
   }
+
   function changeCardExpirationDateStatus(
     key: "isComplete" | "userInput",
     value: any
   ) {
     setExpirationDateStatus(deepCopyObject(expirationDateStatus, key, value));
+  }
+
+  function changeOwnerStatus(key: "isComplete" | "userInput", value: any) {
+    setOwnerStatus(deepCopyObject(ownerStatus, key, value));
   }
 
   function submitCardInfo(e: SubmitEvent) {
@@ -155,7 +160,7 @@ export default function CardInputForm(props: Props) {
         changeNowCardInfo={changeNowCardInfo}
       />
       <InputBoxOwner
-        setIsComplete={setIsOwnerComplete}
+        changeCardOwnerStatus={changeOwnerStatus}
         changeNowCardInfo={changeNowCardInfo}
       />
       <InputBoxSecurityCode setIsComplete={setIsSecurityComplete} />
