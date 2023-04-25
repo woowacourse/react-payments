@@ -5,15 +5,12 @@ import { useNavigate } from 'react-router-dom';
 import Card from '../Card';
 import CardRegisterField from '../CardRegisterField';
 import Input from '../Input';
-import useCardRegisterForm from './hooks/useCardRegisterForm';
 
+import useCardRegisterForm from './hooks/useCardRegisterForm';
+import { isValidExpiredDate } from './utils/validation';
 import type { CardInfo } from '../../types/card';
 
 import styles from './cardRegisterForm.module.css';
-
-const today = new Date();
-const currentYear = today.getFullYear() % 100;
-const currentMonth = today.getMonth() + 1;
 
 interface Props {
   registerCard: (card: CardInfo) => void;
@@ -40,14 +37,6 @@ const CardRegisterForm = ({ registerCard }: Props) => {
     handleNumberChange,
     handleOwnerChange,
   } = useCardRegisterForm(inputRefs);
-
-  const isValidExpiredDate = (month: number, year: number) => {
-    if (month < 1 || month > 12) return false;
-    if (year < currentYear) return false;
-    if (year === currentYear && month <= currentMonth) return false;
-
-    return true;
-  };
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();

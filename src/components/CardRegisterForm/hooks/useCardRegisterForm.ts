@@ -1,7 +1,7 @@
 import type { ChangeEventHandler, RefObject } from 'react';
 
 import useCardRegisterStates from './useCardRegisterStates';
-import { isNotAlphabet, isNotNumber } from '../../../utils/validation';
+import { isNotAlphabet, isNotNumber } from '../utils/validation';
 
 const useCardRegisterForm = (inputRefs: RefObject<HTMLInputElement>[]) => {
   const {
