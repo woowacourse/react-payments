@@ -17,11 +17,12 @@ export const Password = () => {
 
   return (
     <PasswordInput
-      activateNextButton={() => {}}
+      setIsInputFinish={() => {}}
       password={password}
       setPassword={setPassword}
       focusPasswordInputByIndex={(index: number) => {}}
       focusFirstPasswordInput={() => {}}
+      viewPreviousInput={() => {}}
     />
   );
 };

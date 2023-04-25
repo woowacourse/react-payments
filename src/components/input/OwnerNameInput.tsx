@@ -2,37 +2,68 @@ import { forwardRef, useEffect } from 'react';
 import { InputWrapper } from './template/InputWrapper';
 import { Input } from './template/Input';
 import styled from 'styled-components';
+import { useError } from '../../hooks/useError';
 
 interface Props {
   ownerName: string;
   setOwnerName: React.Dispatch<React.SetStateAction<string>>;
   focusFirstOwnerNameInput: () => void;
+  viewNextInput: () => void;
+  viewPreviousInput: () => void;
 }
+
+const ownerNameInputValidator = (input: string | string[]) => {
+  if (typeof input === 'object') throw new Error('입력 객체 에러');
+
+  if (input.length === 0) return;
+
+  if (/\s{2,}/.test(input))
+    throw new Error('공백은 두번 연속 사용할 수 없습니다.');
+
+  if (!/^[A-Z\s]+$/.test(input))
+    throw new Error('이름은 영문으로만 입력 가능합니다.');
+};
 
 export const OwnerNameInput = forwardRef<HTMLInputElement[], Props>(
   function OwnerNameInput(
-    { ownerName, setOwnerName, focusFirstOwnerNameInput },
+    {
+      ownerName,
+      setOwnerName,
+      focusFirstOwnerNameInput,
+      viewNextInput,
+      viewPreviousInput,
+    },
     refs
   ) {
+    const error = useError(ownerName, ownerNameInputValidator);
+
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (!isValidName(e.target.value)) {
-        alert('유효한 이름이 아닙니다.');
-
-        e.target.value = '';
-      }
-
       setOwnerName(e.target.value.toUpperCase());
+    };
+
+    const handlePressKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (!(e.target instanceof HTMLInputElement)) return;
+
+      if (e.key === 'Backspace' && e.target.value === '') viewPreviousInput();
+
+      if (e.key !== 'Enter') return;
+
+      e.preventDefault();
+
+      if (error !== null) return;
+
+      viewNextInput();
     };
 
     useEffect(() => {
       focusFirstOwnerNameInput();
-    }, []);
+    }, [focusFirstOwnerNameInput]);
 
     return (
-      <>
+      <div>
         <Style.Label>
           <Style.Title>카드 소유자 이름(선택)</Style.Title>
-          <Style.NameLength>{ownerName.length}/30</Style.NameLength>
+          <Style.NameLength>{ownerName.length}/20</Style.NameLength>
         </Style.Label>
         <InputWrapper width={318}>
           <Input
@@ -44,19 +75,17 @@ export const OwnerNameInput = forwardRef<HTMLInputElement[], Props>(
             value={ownerName}
             width={'318'}
             minLength={1}
-            maxLength={30}
+            maxLength={20}
             placeholder="카드에 표시된 이름과 동일하게 입력하세요."
             onChange={handleInputChange}
+            onKeyDown={handlePressKey}
           />
         </InputWrapper>
-      </>
+        <Style.ErrorMessage>{error ?? ''}</Style.ErrorMessage>
+      </div>
     );
   }
 );
-
-const isValidName = (input: string) => {
-  return input.length <= 30 && /^[a-zA-Z]+$/.test(input);
-};
 
 const Style = {
   Label: styled.div`
@@ -72,5 +101,14 @@ const Style = {
   `,
   Title: styled.span`
     color: #2f2f2f;
+  `,
+  ErrorMessage: styled.span`
+    width: 318px;
+
+    display: flex;
+    justify-content: flex-end;
+
+    color: red;
+    font-size: 12px;
   `,
 };

@@ -2,45 +2,59 @@ import { forwardRef, useEffect } from 'react';
 import { InputWrapper } from './template/InputWrapper';
 import { Input } from './template/Input';
 import styled from 'styled-components';
+import { useError } from '../../hooks/useError';
 
 interface Props {
   securityCode: string;
   setSecurityCode: React.Dispatch<React.SetStateAction<string>>;
   focusFirstSecurityCodeInput: () => void;
+  viewNextInput: () => void;
+  viewPreviousInput: () => void;
 }
+
+const securityCodeInputValidator = (input: string | string[]) => {
+  if (typeof input === 'object') return;
+
+  if (!/^[0-9]*$/.test(input))
+    throw new Error('보안 코드는 숫자만 입력가능합니다.');
+
+  if (input.length !== 3)
+    throw new Error('보안 코드 세자리를 모두 입력해주세요.');
+};
 
 export const SecurityCodeInput = forwardRef<HTMLInputElement[], Props>(
   function SecurityCodeInput(
-    { securityCode, setSecurityCode, focusFirstSecurityCodeInput },
+    {
+      securityCode,
+      setSecurityCode,
+      focusFirstSecurityCodeInput,
+      viewNextInput,
+      viewPreviousInput,
+    },
     refs
   ) {
+    const error = useError(securityCode, securityCodeInputValidator);
+
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (!isNumeric(e.target.value)) {
-        e.target.value = '';
-
-        alert('유효한 보안 코드가 아닙니다.');
-      }
-
-      setSecurityCode(e.target.value.toUpperCase());
+      setSecurityCode(e.target.value);
     };
 
-    const validateSecurityCode = () => {
-      if (!isValidSecurityCode(securityCode) && securityCode !== '') {
-        alert('유효한 보안 코드가 아닙니다.');
+    const handlePressBackspace = (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (!(e.target instanceof HTMLInputElement)) return;
 
-        setSecurityCode('');
-
-        if (typeof refs !== 'object') return;
-        if (refs?.current) refs.current[0].focus();
-      }
+      if (e.key === 'Backspace' && e.target.value === '') viewPreviousInput();
     };
 
     useEffect(() => {
       focusFirstSecurityCodeInput();
-    }, []);
+    }, [focusFirstSecurityCodeInput]);
+
+    useEffect(() => {
+      if (error === null) viewNextInput();
+    }, [error, viewNextInput]);
 
     return (
-      <>
+      <div>
         <Style.Label>
           <Style.Title>보안 코드(CVC/CVV)</Style.Title>
         </Style.Label>
@@ -57,24 +71,18 @@ export const SecurityCodeInput = forwardRef<HTMLInputElement[], Props>(
             maxLength={3}
             placeholder="•••"
             onChange={handleInputChange}
-            onBlur={validateSecurityCode}
+            onKeyDown={handlePressBackspace}
             inputMode="numeric"
             type="password"
+            autoComplete="off"
             required
           />
         </InputWrapper>
-      </>
+        <Style.ErrorMessage>{error ?? ''}</Style.ErrorMessage>
+      </div>
     );
   }
 );
-
-const isNumeric = (input: string) => {
-  return /^[0-9]*$/.test(input);
-};
-
-const isValidSecurityCode = (input: string) => {
-  return input.length === 3;
-};
 
 const Style = {
   Label: styled.div`
@@ -87,5 +95,11 @@ const Style = {
   `,
   Title: styled.span`
     color: #2f2f2f;
+  `,
+  ErrorMessage: styled.span`
+    width: 318px;
+
+    color: red;
+    font-size: 12px;
   `,
 };

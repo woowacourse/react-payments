@@ -1,14 +1,28 @@
-import React, { useEffect, forwardRef } from 'react';
+import React, { useEffect, forwardRef, Fragment } from 'react';
 import { InputWrapper } from './template/InputWrapper';
 import { Input } from './template/Input';
 import styled from 'styled-components';
+import { useError } from '../../hooks/useError';
 
 interface Props {
   cardNumber: string[];
   setCardNumber: React.Dispatch<React.SetStateAction<string[]>>;
-  focusCardNumberInputByIndex: (nextIndex: number) => void;
+  focusCardNumberInputByIndex: (
+    nextIndex: number,
+    callback?: () => void
+  ) => void;
   focusFirstCardNumberInput: () => void;
+  viewNextInput: () => void;
 }
+
+const cardNumberValidator = (input: string[] | string) => {
+  if (typeof input === 'string') throw new Error('입력 타입이 다릅니다.');
+
+  if (input.some((num) => num.length !== 4))
+    throw new Error('모든 입력창을 채워주세요.');
+  if (input.some((num) => !/^[0-9]+$|^$/.test(num)))
+    throw new Error('카드 번호는 숫자만 입력해주세요.');
+};
 
 export const CardNumberInput = forwardRef<HTMLInputElement[], Props>(
   function CardNumberInput(
@@ -17,15 +31,16 @@ export const CardNumberInput = forwardRef<HTMLInputElement[], Props>(
       setCardNumber,
       focusCardNumberInputByIndex,
       focusFirstCardNumberInput,
+      viewNextInput,
     },
     refs
   ) {
+    const error = useError(cardNumber, cardNumberValidator);
+
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const index = e.target.dataset.index;
 
       if (index === undefined) return;
-
-      validator(e.target.value, Number(index));
 
       setCardNumber((current) => {
         const newCardNumber = [...current];
@@ -35,25 +50,9 @@ export const CardNumberInput = forwardRef<HTMLInputElement[], Props>(
         return newCardNumber;
       });
 
-      if (e.target.value.length === 4) {
+      if (e.target.value.length >= 4) {
         focusCardNumberInputByIndex(Number(index) + 1);
       }
-    };
-
-    const validator = (input: string, index: number) => {
-      if (/^[0-9]+$|^$/.test(input)) return;
-
-      setCardNumber((current) => {
-        const newCardNumber = [...current];
-
-        newCardNumber[Number(index)] = '';
-
-        return newCardNumber;
-      });
-
-      alert('유효하지 않은 카드 번호입니다.');
-
-      focusCardNumberInputByIndex(index);
     };
 
     const handlePressBackspace = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -72,19 +71,26 @@ export const CardNumberInput = forwardRef<HTMLInputElement[], Props>(
 
     useEffect(() => {
       focusFirstCardNumberInput();
-    }, []);
+
+      setCardNumber(['', '', '', '']);
+    }, [focusFirstCardNumberInput, setCardNumber]);
+
+    useEffect(() => {
+      if (error === null) viewNextInput();
+    }, [error, viewNextInput]);
 
     return (
-      <>
+      <div>
         <Style.Label>
           <Style.Title>카드 번호</Style.Title>
         </Style.Label>
         <InputWrapper width={318}>
           {cardNumber.map((_, index) => {
             return (
-              <>
+              <Fragment key={index}>
                 <Input
-                  type={index > 1 ? 'password' : 'text'}
+                  type={index > 1 ? 'password' : 'number'}
+                  autoComplete="off"
                   value={cardNumber[index]}
                   width={'36'}
                   minLength={4}
@@ -110,11 +116,12 @@ export const CardNumberInput = forwardRef<HTMLInputElement[], Props>(
                     &nbsp;-&nbsp;
                   </Style.Hyphen>
                 )}
-              </>
+              </Fragment>
             );
           })}
         </InputWrapper>
-      </>
+        <Style.ErrorMessage>{error ?? ''}</Style.ErrorMessage>
+      </div>
     );
   }
 );
@@ -132,4 +139,13 @@ const Style = {
     color: #2f2f2f;
   `,
   Hyphen: styled.span``,
+  ErrorMessage: styled.span`
+    width: 318px;
+
+    display: flex;
+    justify-content: flex-end;
+
+    color: red;
+    font-size: 12px;
+  `,
 };

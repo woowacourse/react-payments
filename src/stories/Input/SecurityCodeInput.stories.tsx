@@ -20,6 +20,8 @@ export const SecurityCode = () => {
       securityCode={securityCode}
       setSecurityCode={setSecurityCode}
       focusFirstSecurityCodeInput={() => {}}
+      viewNextInput={() => {}}
+      viewPreviousInput={() => {}}
     />
   );
 };

@@ -2,32 +2,45 @@ import { forwardRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { InputWrapper } from './template/InputWrapper';
 import { Input } from './template/Input';
+import { useError } from '../../hooks/useError';
 
 interface Props {
   password: string[];
   setPassword: React.Dispatch<React.SetStateAction<string[]>>;
-  activateNextButton: () => void;
+  setIsInputFinish: React.Dispatch<React.SetStateAction<boolean>>;
   focusPasswordInputByIndex: (index: number) => void;
   focusFirstPasswordInput: () => void;
+  viewPreviousInput: () => void;
 }
+
+const passwordInputValidator = (input: string | string[]) => {
+  if (typeof input === 'string') return;
+
+  if (input.some((num) => !/^[0-9]*$/.test(num)))
+    throw new Error('카드 비밀 번호를 숫자로 입력해주세요.');
+
+  if (input.some((num) => num === ''))
+    throw new Error('모든 입력창을 채워주세요.');
+};
 
 export const PasswordInput = forwardRef<HTMLInputElement[], Props>(
   function PasswordInput(
     {
       password,
       setPassword,
-      activateNextButton,
+      setIsInputFinish,
       focusPasswordInputByIndex,
       focusFirstPasswordInput,
+      viewPreviousInput,
     },
     refs
   ) {
+    const error = useError(password, passwordInputValidator);
+
     const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
       const index = e.target.dataset.index;
 
       if (index === undefined) throw new Error('dataset-index가 없습니다.');
-
-      validatePassword(e);
 
       setPassword((current) => {
         const newPassword = [...current];
@@ -39,7 +52,8 @@ export const PasswordInput = forwardRef<HTMLInputElement[], Props>(
 
       if (e.target.value.length === 1) {
         focusPasswordInputByIndex(Number(index) + 1);
-        if (Number(index) === 1) activateNextButton();
+
+        if (Number(index) === 1) setIsInputFinish(true);
       }
     };
 
@@ -50,30 +64,31 @@ export const PasswordInput = forwardRef<HTMLInputElement[], Props>(
 
       if (index === undefined) return;
 
-      if (e.key === 'Backspace' && password[Number(index)] === '') {
-        e.preventDefault();
+      if (e.key !== 'Backspace') return;
+
+      setIsInputFinish(false);
+
+      if (password[Number(index)] === '') {
+        if (Number(index) === 0) viewPreviousInput();
+
         focusPasswordInputByIndex(Number(index) - 1);
-      }
-    };
-
-    const validatePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (!/^[0-9]*$/.test(e.target.value)) {
-        e.preventDefault();
-
-        alert('유효한 비밀번호가 아닙니다.');
-        e.target.value = '';
-        setPassword(['', '']);
-
-        focusPasswordInputByIndex(0);
       }
     };
 
     useEffect(() => {
       focusFirstPasswordInput();
-    }, []);
+    }, [focusFirstPasswordInput]);
+
+    useEffect(() => {
+      if (error === null) {
+        setIsInputFinish(true);
+        return;
+      }
+      setIsInputFinish(false);
+    }, [error, setIsInputFinish]);
 
     return (
-      <>
+      <div>
         <Style.Label>
           <Style.Title>카드 비밀번호</Style.Title>
         </Style.Label>
@@ -89,6 +104,7 @@ export const PasswordInput = forwardRef<HTMLInputElement[], Props>(
               width={43}
               maxLength={1}
               type="password"
+              autoComplete="off"
               inputMode="numeric"
               required
               data-index="0"
@@ -108,6 +124,7 @@ export const PasswordInput = forwardRef<HTMLInputElement[], Props>(
               width={43}
               maxLength={1}
               type="password"
+              autoComplete="off"
               inputMode="numeric"
               required
               data-index="1"
@@ -119,7 +136,8 @@ export const PasswordInput = forwardRef<HTMLInputElement[], Props>(
           <Style.DotContainer>•</Style.DotContainer>
           <Style.DotContainer>•</Style.DotContainer>
         </Style.Wrapper>
-      </>
+        <Style.ErrorMessage>{error ?? ''}</Style.ErrorMessage>
+      </div>
     );
   }
 );
@@ -156,5 +174,11 @@ const Style = {
   `,
   Title: styled.span`
     color: #2f2f2f;
+  `,
+  ErrorMessage: styled.span`
+    width: 318px;
+
+    color: red;
+    font-size: 12px;
   `,
 };

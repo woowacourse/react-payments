@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { CardNumberInput } from '../input/CardNumberInput';
 import { ExpirationDateInput } from '../input/ExpirationDateInput';
@@ -12,6 +12,8 @@ import { useFocus } from '../../hooks/useFocus';
 
 export const AddNewCardForm = () => {
   const navigate = useNavigate();
+
+  const [inputOrder, setInputOrder] = useState(0);
 
   const [isInputFinish, setIsInputFinish] = useState(false);
 
@@ -32,33 +34,37 @@ export const AddNewCardForm = () => {
     inputRefs: cardNumberInputRefs,
     focusInputByIndex: focusCardNumberInputByIndex,
     autoFocusFirstInput: focusFirstCardNumberInput,
-  } = useFocus();
+  } = useFocus(4);
 
   const {
     inputRefs: expirationDateInputRefs,
     focusInputByIndex: focusExpirationDateInputByIndex,
     autoFocusFirstInput: focusExpirationDateInput,
-  } = useFocus();
+  } = useFocus(2);
 
   const {
     inputRefs: ownerNameInputRefs,
     autoFocusFirstInput: focusFirstOwnerNameInput,
-  } = useFocus();
+  } = useFocus(1);
 
   const {
     inputRefs: securityCodeInputRefs,
     autoFocusFirstInput: focusFirstSecurityCodeInput,
-  } = useFocus();
+  } = useFocus(1);
 
   const {
     inputRefs: passwordInputRefs,
     focusInputByIndex: focusPasswordInputByIndex,
     autoFocusFirstInput: focusFirstPasswordInput,
-  } = useFocus();
+  } = useFocus(2);
 
-  const activateNextButton = () => {
-    setIsInputFinish(true);
-  };
+  const viewNextInput = useCallback(() => {
+    setInputOrder((current) => current + 1);
+  }, []);
+
+  const viewPreviousInput = useCallback(() => {
+    setInputOrder((current) => current - 1);
+  }, []);
 
   return (
     <Style.Wrapper
@@ -82,40 +88,62 @@ export const AddNewCardForm = () => {
         ownerName={ownerName}
       />
       <Style.InputContainer>
-        <CardNumberInput
-          ref={cardNumberInputRefs}
-          cardNumber={cardNumber}
-          setCardNumber={setCardNumber}
-          focusCardNumberInputByIndex={focusCardNumberInputByIndex}
-          focusFirstCardNumberInput={focusFirstCardNumberInput}
-        />
-        <ExpirationDateInput
-          ref={expirationDateInputRefs}
-          expirationDate={expirationDate}
-          setExpirationDate={setExpirationDate}
-          focusNextExpirationDateInput={focusExpirationDateInputByIndex}
-          focusexpirationDateInput={focusExpirationDateInput}
-        />
-        <OwnerNameInput
-          ref={ownerNameInputRefs}
-          ownerName={ownerName}
-          setOwnerName={setOwnerName}
-          focusFirstOwnerNameInput={focusFirstOwnerNameInput}
-        />
-        <SecurityCodeInput
-          ref={securityCodeInputRefs}
-          securityCode={securityCode}
-          setSecurityCode={setSecurityCode}
-          focusFirstSecurityCodeInput={focusFirstSecurityCodeInput}
-        />
-        <PasswordInput
-          ref={passwordInputRefs}
-          password={password}
-          setPassword={setPassword}
-          activateNextButton={activateNextButton}
-          focusPasswordInputByIndex={focusPasswordInputByIndex}
-          focusFirstPasswordInput={focusFirstPasswordInput}
-        />
+        {inputOrder === 0 && (
+          <CardNumberInput
+            ref={cardNumberInputRefs}
+            cardNumber={cardNumber}
+            setCardNumber={setCardNumber}
+            focusCardNumberInputByIndex={focusCardNumberInputByIndex}
+            focusFirstCardNumberInput={focusFirstCardNumberInput}
+            viewNextInput={viewNextInput}
+          />
+        )}
+
+        {inputOrder === 1 && (
+          <ExpirationDateInput
+            ref={expirationDateInputRefs}
+            expirationDate={expirationDate}
+            setExpirationDate={setExpirationDate}
+            focusNextExpirationDateInput={focusExpirationDateInputByIndex}
+            focusexpirationDateInput={focusExpirationDateInput}
+            viewNextInput={viewNextInput}
+            viewPreviousInput={viewPreviousInput}
+          />
+        )}
+
+        {inputOrder === 2 && (
+          <OwnerNameInput
+            ref={ownerNameInputRefs}
+            ownerName={ownerName}
+            setOwnerName={setOwnerName}
+            focusFirstOwnerNameInput={focusFirstOwnerNameInput}
+            viewNextInput={viewNextInput}
+            viewPreviousInput={viewPreviousInput}
+          />
+        )}
+
+        {inputOrder === 3 && (
+          <SecurityCodeInput
+            ref={securityCodeInputRefs}
+            securityCode={securityCode}
+            setSecurityCode={setSecurityCode}
+            focusFirstSecurityCodeInput={focusFirstSecurityCodeInput}
+            viewNextInput={viewNextInput}
+            viewPreviousInput={viewPreviousInput}
+          />
+        )}
+
+        {inputOrder === 4 && (
+          <PasswordInput
+            ref={passwordInputRefs}
+            password={password}
+            setPassword={setPassword}
+            setIsInputFinish={setIsInputFinish}
+            focusPasswordInputByIndex={focusPasswordInputByIndex}
+            focusFirstPasswordInput={focusFirstPasswordInput}
+            viewPreviousInput={viewPreviousInput}
+          />
+        )}
       </Style.InputContainer>
       <Style.ButtonContainer>
         {isInputFinish && <Style.NextButton>다음</Style.NextButton>}

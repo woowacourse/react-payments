@@ -19,6 +19,8 @@ export const OwnerName = () => {
       ownerName={ownerName}
       setOwnerName={setOwnerName}
       focusFirstOwnerNameInput={() => {}}
+      viewNextInput={() => {}}
+      viewPreviousInput={() => {}}
     />
   );
 };

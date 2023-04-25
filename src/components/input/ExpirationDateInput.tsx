@@ -2,6 +2,7 @@ import { forwardRef, useEffect } from 'react';
 import { InputWrapper } from './template/InputWrapper';
 import { Input } from './template/Input';
 import styled from 'styled-components';
+import { useError } from '../../hooks/useError';
 
 interface Props {
   expirationDate: {
@@ -14,9 +15,32 @@ interface Props {
       year: string;
     }>
   >;
-  focusNextExpirationDateInput: (index: number) => void;
+  focusNextExpirationDateInput: (index: number, callback?: () => void) => void;
   focusexpirationDateInput: () => void;
+  viewNextInput: () => void;
+  viewPreviousInput: () => void;
 }
+
+const expirationDateInputValidator = (input: string | string[]) => {
+  if (typeof input === 'string') throw new Error('입력 객체 에러');
+
+  const inputYear = Number(input[1]);
+  const inputMonth = Number(input[0]);
+  const currentYear = new Date().getFullYear() % 100;
+  const currentMonth = new Date().getMonth() + 1;
+
+  if (input.some((num) => num.length === 0))
+    throw new Error('모든 입력창을 채워주세요.');
+
+  if (inputMonth > 12 || inputMonth < 1)
+    throw new Error('유효한 날짜를 입력해주세요');
+
+  if (currentYear > inputYear)
+    throw new Error('만료 일자는 현재 날짜보다 이후여야 합니다.');
+
+  if (currentYear === inputYear && currentMonth > inputMonth)
+    throw new Error('만료 일자는 현재 날짜보다 이후여야 합니다.');
+};
 
 export const ExpirationDateInput = forwardRef<HTMLInputElement[], Props>(
   function ExpirationDateInput(
@@ -25,57 +49,57 @@ export const ExpirationDateInput = forwardRef<HTMLInputElement[], Props>(
       setExpirationDate,
       focusNextExpirationDateInput,
       focusexpirationDateInput,
+      viewNextInput,
+      viewPreviousInput,
     },
     refs
   ) {
+    const error = useError(
+      [expirationDate.month, expirationDate.year],
+      expirationDateInputValidator
+    );
+
     const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
       const inputTarget = e.target.dataset.inputTarget;
       const index = e.target.dataset.index;
 
       if (index === undefined || inputTarget === undefined) return;
 
-      if (e.target.value.length > 2) {
-        focusNextExpirationDateInput(Number(index) + 1);
-        return;
-      }
-
       setExpirationDate({
         ...expirationDate,
         [inputTarget]: e.target.value,
       });
+
+      if (e.target.value.length >= 2)
+        focusNextExpirationDateInput(Number(index) + 1);
     };
 
     const handleBackspacePress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-      if (e.key !== 'Backspace') return;
       if (!(e.target instanceof HTMLInputElement)) return;
 
       const index = e.target.dataset.index;
 
       if (index === undefined) return;
 
-      if (e.target.value === '')
-        focusNextExpirationDateInput(Number(index) - 1);
-    };
-
-    const validator = () => {
-      if (!isValidDate(expirationDate.month, expirationDate.year)) {
-        alert('유효한 날짜가 아닙니다.');
-
-        setExpirationDate({
-          month: '',
-          year: '',
-        });
-
-        (refs as React.MutableRefObject<HTMLInputElement[]>).current[0].focus();
-      }
+      if (e.key === 'Backspace' && e.target.value === '')
+        focusNextExpirationDateInput(Number(index) - 1, viewPreviousInput);
     };
 
     useEffect(() => {
       focusexpirationDateInput();
-    }, []);
+
+      setExpirationDate({
+        month: '',
+        year: '',
+      });
+    }, [focusexpirationDateInput, setExpirationDate]);
+
+    useEffect(() => {
+      if (error === null) viewNextInput();
+    }, [error, viewNextInput]);
 
     return (
-      <>
+      <div>
         <Style.Label>
           <Style.Title>만료일</Style.Title>
         </Style.Label>
@@ -90,10 +114,6 @@ export const ExpirationDateInput = forwardRef<HTMLInputElement[], Props>(
             value={expirationDate.month}
             data-input-target={'month'}
             width={'30'}
-            minLength={2}
-            maxLength={2}
-            max={'12'}
-            min={'1'}
             required
             inputMode="numeric"
             placeholder="MM"
@@ -120,33 +140,19 @@ export const ExpirationDateInput = forwardRef<HTMLInputElement[], Props>(
             value={expirationDate.year}
             data-input-target={'year'}
             width={'30'}
-            maxLength={2}
-            minLength={2}
-            max={(new Date().getFullYear() + 5) % 100}
-            min={new Date().getFullYear() % 100}
             required
             inputMode="numeric"
             placeholder="YY"
             data-index="1"
             onChange={handleChangeInput}
             onKeyDown={handleBackspacePress}
-            onBlur={validator}
           />
         </InputWrapper>
-      </>
+        <Style.ErrorMessage>{error ?? ''}</Style.ErrorMessage>
+      </div>
     );
   }
 );
-
-const isValidDate = (month: string, year: string) => {
-  const currentDate = new Date();
-  const currentMonth = currentDate.getMonth() + 1;
-  const currentYear = currentDate.getFullYear() % 100;
-
-  if (Number(year) > currentYear) return true;
-
-  return Number(year) === currentYear ? Number(month) >= currentMonth : false;
-};
 
 const Style = {
   Label: styled.div`
@@ -159,5 +165,14 @@ const Style = {
   `,
   Title: styled.span`
     color: #2f2f2f;
+  `,
+  ErrorMessage: styled.span`
+    width: 160px;
+
+    display: flex;
+    justify-content: flex-start;
+
+    color: red;
+    font-size: 12px;
   `,
 };

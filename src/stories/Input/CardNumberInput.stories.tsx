@@ -22,6 +22,7 @@ export const CardNumber = () => {
       setCardNumber={setCardNumber}
       focusFirstCardNumberInput={() => {}}
       focusCardNumberInputByIndex={() => {}}
+      viewNextInput={() => {}}
     />
   );
 };
