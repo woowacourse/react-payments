@@ -15,8 +15,8 @@ export default meta;
 
 export const NewCardForm = () => {
   return (
-    <Routes>
-      <Route path="/" element={<AddNewCardForm />}></Route>
-    </Routes>
+    <BrowserRouter>
+      <AddNewCardForm />
+    </BrowserRouter>
   );
 };
