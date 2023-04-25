@@ -7,11 +7,12 @@
   text-align: center;
 
   padding: 2px 0;
-  width: 55px;
+  width: 60px;
   height: 66px;
 
   background-color: rgba(0, 0, 0, 0);
   border: none;
+  border-radius: 4px;
   cursor: pointer;
 
   font-weight: 500;
@@ -20,8 +21,12 @@
   letter-spacing: -0.085em;
 }
 
-.button:hover img{
+.button:hover img {
   animation: rotateAround 1s linear infinite;
+}
+
+.button:active {
+  background-color:rgba(0, 0, 0, 0.1);
 }
 
 @keyframes rotateAround {
