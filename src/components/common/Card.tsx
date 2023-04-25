@@ -2,18 +2,16 @@ import styled from 'styled-components';
 import { CardType } from '../../types';
 
 const Card = ({
-  cardNumber = [],
+  cardNumber,
   ownerName,
-  expireDate = [],
+  expireDate,
 }: Pick<CardType, 'cardNumber' | 'expireDate' | 'ownerName'>) => {
   return (
     <CardWrapper>
-      <CardChip></CardChip>
+      <CardChip />
       <CardNumberArea>
         {cardNumber.map((number, index) => (
-          <CardNumber>
-            {number.length ? (index >= 2 ? '∙'.repeat(number.length) : number) : null}
-          </CardNumber>
+          <CardNumber>{number.length ? (index >= 2 ? '∙'.repeat(number.length) : number) : null}</CardNumber>
         ))}
       </CardNumberArea>
       <CardInfoArea>
