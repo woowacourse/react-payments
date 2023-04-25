@@ -85,6 +85,7 @@ function CreditCardRegister() {
       <S.PreviewCreditCard>
         <CreditCard
           fullFilled={false}
+          company="kb"
           creditCard={{
             number: creditCardNumber,
             expiry: creditCardExpiry,

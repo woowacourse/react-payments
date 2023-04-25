@@ -24,6 +24,7 @@ function Home() {
           <CreditCard
             key={creditCard.number}
             fullFilled
+            company="kb"
             creditCard={{
               number: creditCard.number,
               expiry: creditCard.expiry,

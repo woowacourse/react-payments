@@ -2,12 +2,16 @@ import styled from 'styled-components';
 
 type Props = {
   isValid: boolean;
+  backgroundColor: string;
 };
 
 export const CreditCardLayout = styled.div<Props>`
   width: 213px;
   height: 133px;
-  background-color: #333333;
+  display: grid;
+  grid-template-rows: repeat(1fr, 3);
+  align-items: center;
+  background-color: ${(props) => props.backgroundColor};
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
   padding: 14px;
@@ -21,16 +25,25 @@ export const CreditCardLayout = styled.div<Props>`
   border: ${(props) => (props.isValid ? '' : '2px solid red')};
 `;
 
+export const CreditCardCompanyName = styled.span`
+  align-self: flex-start;
+  font-weight: 400;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: -0.085em;
+`;
+
 export const CreditCardICChip = styled.div`
   width: 40px;
   height: 26px;
   background: #cbba64;
   border-radius: 4px;
-  margin-top: 47px;
-  margin-bottom: 15px;
 `;
 
 export const CreditCardInfoLayout = styled.div`
+  align-self: flex-end;
   display: grid;
   grid-template-rows: 1fr 1fr;
   row-gap: 12px;

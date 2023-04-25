@@ -13,40 +13,40 @@ const Template: Story<CardCompanyType> = (args) => <CardCompany {...args} />;
 
 export const BCCardCompany = Template.bind({});
 BCCardCompany.args = {
-  company: 'BC',
+  company: 'bc',
 };
 
 export const KakaoCardCompany = Template.bind({});
 KakaoCardCompany.args = {
-  company: 'KAKAO',
+  company: 'kakao',
 };
 
 export const ShinhanCardCompany = Template.bind({});
 ShinhanCardCompany.args = {
-  company: 'SHINHAN',
+  company: 'shinhan',
 };
 
 export const HanaCardCompany = Template.bind({});
 HanaCardCompany.args = {
-  company: 'HANA',
+  company: 'hana',
 };
 
 export const HyundaiCardCompany = Template.bind({});
 HyundaiCardCompany.args = {
-  company: 'HYUNDAI',
+  company: 'hyundai',
 };
 
 export const KBCardCompany = Template.bind({});
 KBCardCompany.args = {
-  company: 'KB',
+  company: 'kb',
 };
 
 export const LotteCardCompany = Template.bind({});
 LotteCardCompany.args = {
-  company: 'LOTTE',
+  company: 'lotte',
 };
 
 export const WooriCardCompany = Template.bind({});
 WooriCardCompany.args = {
-  company: 'WOORI',
+  company: 'woori',
 };

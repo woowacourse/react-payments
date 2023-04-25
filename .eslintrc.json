@@ -70,7 +70,7 @@
             "position": "after"
           },
           {
-            "pattern": "@Constant/*",
+            "pattern": "@Constants/*",
             "group": "internal",
             "position": "after"
           }

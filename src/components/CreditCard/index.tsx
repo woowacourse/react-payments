@@ -3,14 +3,17 @@ import * as Type from '@Types/index';
 
 import creditCard from '@Domains/creditCard';
 
-import * as Style from './style';
+import CARD_COMPANY from '@Constants/CardCompany';
+
+import * as S from './style';
 
 export type CreditCardProps = {
   fullFilled: boolean;
+  company: keyof typeof CARD_COMPANY;
   creditCard: Pick<Type.CreditCard, 'number' | 'expiry' | 'owner'>;
 };
 
-function CreditCard({ fullFilled, creditCard: { expiry, number, owner } }: CreditCardProps) {
+function CreditCard({ fullFilled, company, creditCard: { expiry, number, owner } }: CreditCardProps) {
   const isValid = () => {
     if (!fullFilled) return true;
 
@@ -23,20 +26,21 @@ function CreditCard({ fullFilled, creditCard: { expiry, number, owner } }: Credi
   };
 
   return (
-    <Style.CreditCardLayout isValid={isValid()}>
-      <Style.CreditCardICChip />
-      <Style.CreditCardInfoLayout>
-        <Style.CreditCardNumber>
+    <S.CreditCardLayout isValid={isValid()} backgroundColor={CARD_COMPANY[company].uniqueColor}>
+      <S.CreditCardCompanyName>{CARD_COMPANY[company].name}</S.CreditCardCompanyName>
+      <S.CreditCardICChip />
+      <S.CreditCardInfoLayout>
+        <S.CreditCardNumber>
           {creditCard.convertSecuredCreditCard(number).map((num, idx) => (
             <div key={idx}>{num}</div>
           ))}
-        </Style.CreditCardNumber>
-        <Style.CreditCardContainer>
-          <Style.CreditCardBox>{owner}</Style.CreditCardBox>
-          <Style.CreditCardBox>{expiry}</Style.CreditCardBox>
-        </Style.CreditCardContainer>
-      </Style.CreditCardInfoLayout>
-    </Style.CreditCardLayout>
+        </S.CreditCardNumber>
+        <S.CreditCardContainer>
+          <S.CreditCardBox>{owner}</S.CreditCardBox>
+          <S.CreditCardBox>{expiry}</S.CreditCardBox>
+        </S.CreditCardContainer>
+      </S.CreditCardInfoLayout>
+    </S.CreditCardLayout>
   );
 }
 

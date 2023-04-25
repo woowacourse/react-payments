@@ -1,4 +1,4 @@
-import CARD_COMPANY from '@Constant/CardCompany';
+import CARD_COMPANY from '@Constants/CardCompany';
 
 import * as S from './style';
 
