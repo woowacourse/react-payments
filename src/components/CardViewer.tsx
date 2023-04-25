@@ -35,7 +35,9 @@ export function CardViewer({ cardNumber, expirationDate, ownerName }: Props) {
       <Style.ICChip />
       <Style.CardNumberContainer>
         {cardNumbersFormat.map((cardNumber, index) => (
-          <Style.CardNumber index={index}>{cardNumber}</Style.CardNumber>
+          <Style.CardNumber key={`${cardNumber}${index}`} index={index}>
+            {cardNumber}
+          </Style.CardNumber>
         ))}
       </Style.CardNumberContainer>
       <Style.NameAndDateContainer>

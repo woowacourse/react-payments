@@ -57,7 +57,7 @@ export function PasswordInput({ password, passwordInputRef, setPassword }: Props
       <Style.Wrapper>
         {Array.from({ length: 2 }).map((_, index) => {
           return (
-            <InputWrapper width={43}>
+            <InputWrapper key={index} width={43}>
               <Input
                 id={`cardPassword${index}`}
                 ref={allRef[index]}

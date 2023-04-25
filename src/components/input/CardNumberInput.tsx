@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React, { useRef, useState } from 'react';
+import React, { Fragment, useRef, useState } from 'react';
 import { Input } from './Input';
 import { InputWrapper } from './InputWrapper';
 import { CardNumber } from '../../types';
@@ -75,7 +75,7 @@ export function CardNumberInput({ moveFocusToExpirationDate, cardNumber, setCard
       <InputWrapper width={318}>
         {Array.from({ length: cardNumber.length }).map((_, index) => {
           return (
-            <>
+            <Fragment key={index}>
               <Input
                 id={`cardNumber${index}`}
                 value={cardNumber[index]}
@@ -95,7 +95,7 @@ export function CardNumberInput({ moveFocusToExpirationDate, cardNumber, setCard
               {!isLast(index, CARD_NUMBER_INPUTS_LENGTH) && (
                 <Style.Hyphen visible={isFullInputs[index]}>-</Style.Hyphen>
               )}
-            </>
+            </Fragment>
           );
         })}
       </InputWrapper>
