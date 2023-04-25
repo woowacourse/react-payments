@@ -1,5 +1,4 @@
 /* eslint-disable react/function-component-definition */
-/* eslint-disable import/no-extraneous-dependencies */
 
 import { Story, Meta } from '@storybook/react';
 
