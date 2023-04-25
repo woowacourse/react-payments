@@ -7,51 +7,19 @@ import CardDetailForm from "./CardDetailForm/CardDetailForm";
 
 import St from "./CardDetailPageStyled";
 import { CreditCard } from "../../types/card";
+import useCardNumber from "../../hooks/useCardNumber";
 
 type CardDetailPageProps = {
   addCreditCard: (card: CreditCard) => void;
 };
 
 function CardDetailPage({ addCreditCard }: CardDetailPageProps) {
-  const [cardNumberOrigin, setCardNumberOrigin] = useState("");
-  const [cardNumberHidden, setCardNumberHidden] = useState("");
+  const { originNumber, displayNumber, changeCardNumber } = useCardNumber();
   const [cardDate, setCardDate] = useState("");
   const [cardOwnerName, setCardOwnerName] = useState("");
   const [cardCVC, setCardCVC] = useState("");
   const [cardPassword, setCardPassword] = useState<[string, string]>(["", ""]);
   const navigate = useNavigate();
-
-  const changeCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const cardNumber = e.target.value.replace(/[^\d•]/g, "").slice(0, 16); // 16자리 이상은 자르기
-
-    //오리진 저장
-    if (cardNumberOrigin.length > 8) {
-      // 별 표시 출력과 관련된 로직
-      if (cardNumberOrigin.length < cardNumber.length) {
-        // 추가시
-        setCardNumberOrigin(cardNumberOrigin + cardNumber.slice(-1));
-      }
-
-      if (cardNumberOrigin.length > cardNumber.length) {
-        // 제거시
-        setCardNumberOrigin(cardNumberOrigin.slice(0, -1));
-      }
-    }
-
-    if (cardNumberOrigin.length <= 8) {
-      setCardNumberOrigin(cardNumber);
-    }
-
-    //히든 저장
-    const hiddenNumber =
-      cardNumber.length > 8
-        ? cardNumber.slice(0, 8) + "•".repeat(cardNumber.length - 8)
-        : cardNumber;
-    const showNumber = hiddenNumber.match(/.{1,4}/g);
-    const resultNumber = showNumber ? showNumber.join("-") : "";
-
-    setCardNumberHidden(resultNumber);
-  };
 
   const changeCardDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     const dateString = e.target.value.replace(/[^\d]/g, "").slice(0, 4);
@@ -87,8 +55,8 @@ function CardDetailPage({ addCreditCard }: CardDetailPageProps) {
 
   const submitCreditCard = (e: React.FormEvent<HTMLFormElement>) => {
     const newCard: CreditCard = {
-      cardNumberOrigin,
-      cardNumberHidden,
+      originNumber,
+      displayNumber,
       cardDate,
       cardOwnerName,
       cardCVC,
@@ -104,13 +72,13 @@ function CardDetailPage({ addCreditCard }: CardDetailPageProps) {
     <St.Page>
       <CardDetailHeader />
       <CardDetailView
-        cardNumberHidden={cardNumberHidden}
+        cardNumberHidden={displayNumber}
         cardDate={cardDate}
         cardOwnerName={cardOwnerName}
       />
       <CardDetailForm
         changeCardNumber={changeCardNumber}
-        cardNumberHidden={cardNumberHidden}
+        cardNumberHidden={displayNumber}
         changeCardDate={changeCardDate}
         cardDate={cardDate}
         changeCardOwnerName={changeCardOwnerName}

@@ -1,6 +1,6 @@
 export type CreditCard = {
-  cardNumberOrigin: string;
-  cardNumberHidden: string;
+  originNumber: string;
+  displayNumber: string;
   cardDate: string;
   cardOwnerName: string;
   cardCVC: string;
