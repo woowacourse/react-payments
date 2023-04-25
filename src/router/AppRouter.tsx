@@ -1,4 +1,3 @@
-import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import AddCardPage from '../pages/AddCardPage';
@@ -16,11 +15,7 @@ const router = createBrowserRouter([
 ]);
 
 const AppRouter = () => {
-  return (
-    <React.StrictMode>
-      <RouterProvider router={router} />
-    </React.StrictMode>
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default AppRouter;
