@@ -6,7 +6,7 @@ import {
   REGEX,
 } from '../constants';
 
-const validateIssuer = (input: string) => {
+const validateNonEmptyInput = (input: string) => {
   return input !== '';
 };
 
@@ -42,7 +42,7 @@ const validatePassword = (passwordInputs: string[]) => {
 };
 
 const validator = {
-  issuer: validateIssuer,
+  issuer: validateNonEmptyInput,
   cardNumber: validateCardNumber,
   expirationDate: validateExpirationDate,
   ownerName: validateOwnerName,
@@ -56,4 +56,4 @@ const validateMultipleInputField = (key: string): key is MultipleInputFieldCardI
   return ['password'].includes(key);
 };
 
-export { validateMultipleInputField };
+export { validateMultipleInputField, validateNonEmptyInput };
