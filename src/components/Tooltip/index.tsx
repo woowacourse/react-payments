@@ -1,28 +1,26 @@
-import {
-  MouseEventHandler,
-  ReactNode,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import { useEffect, useRef, useState } from 'react';
+import type { MouseEventHandler } from 'react';
 
 import styles from './tooltip.module.css';
 
 interface Props {
-  children: ReactNode;
+  message: string;
 }
 
-const Tooltip = ({ children }: Props) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const [isShow, setIsShow] = useState(false);
+const Tooltip = ({ message }: Props) => {
+  const [toggleShow, setToggleShow] = useState(false);
+  const tooltipRef = useRef<HTMLDivElement>(null);
 
-  const handleClick: MouseEventHandler<HTMLDivElement> = () => {
-    setIsShow((prev) => !prev);
+  const handleTooltipClick: MouseEventHandler<HTMLDivElement> = () => {
+    setToggleShow((prev) => !prev);
   };
 
   const handleOutsideClick = (event: MouseEvent) => {
-    if (ref.current && !ref.current.contains(event.target as Node)) {
-      setIsShow(false);
+    if (
+      tooltipRef.current &&
+      !tooltipRef.current.contains(event.target as Node)
+    ) {
+      setToggleShow(false);
     }
   };
 
@@ -35,11 +33,17 @@ const Tooltip = ({ children }: Props) => {
   }, []);
 
   return (
-    <div className={styles.container} onClick={handleClick} ref={ref}>
-      {children}
-      {isShow && (
+    <div
+      className={styles.container}
+      onClick={handleTooltipClick}
+      ref={tooltipRef}
+    >
+      <button type="button" className={styles.button}>
+        <span className={styles.mark}>?</span>
+      </button>
+      {toggleShow && (
         <div className={styles.message}>
-          <p>카드 뒷면의 서명란에 인쇄된 숫자 끝 3자리가 CVC 번호입니다.</p>
+          <p>{message}</p>
         </div>
       )}
     </div>

@@ -192,7 +192,11 @@ const CardRegisterForm = ({ registerCard }: Props) => {
           />
         </CardRegisterField>
 
-        <CardRegisterField label="보안코드(CVC/CVV)" size="small" tooltip>
+        <CardRegisterField
+          label="보안코드(CVC/CVV)"
+          size="small"
+          tooltipMessage="카드 뒷면의 서명란에 인쇄된 숫자 끝 3자리가 CVC 번호입니다."
+        >
           <Input
             type="password"
             minLength={3}

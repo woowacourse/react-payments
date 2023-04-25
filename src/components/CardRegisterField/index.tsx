@@ -2,14 +2,13 @@ import type { ReactNode } from 'react';
 
 import styles from './cardRegisterField.module.css';
 import Tooltip from '../Tooltip';
-import TooltipButton from '../TooltipButton';
 
 interface Props {
   label: string;
   size: 'small' | 'medium' | 'fit';
   valueLength?: number;
   maxLength?: number;
-  tooltip?: true;
+  tooltipMessage?: string;
   split?: true;
   children: ReactNode;
 }
@@ -19,7 +18,7 @@ const CardRegisterField = ({
   size,
   valueLength,
   maxLength,
-  tooltip,
+  tooltipMessage,
   split,
   children,
 }: Props) => {
@@ -38,11 +37,9 @@ const CardRegisterField = ({
       >
         {children}
       </div>
-      {tooltip && (
+      {tooltipMessage && (
         <div className={`${styles.tooltipContainer} ${styles[size]}`}>
-          <Tooltip>
-            <TooltipButton tabIndex={12} />
-          </Tooltip>
+          <Tooltip message={tooltipMessage} />
         </div>
       )}
     </label>
