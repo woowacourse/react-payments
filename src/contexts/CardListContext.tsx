@@ -1,44 +1,30 @@
-import { PropsWithChildren, createContext, useEffect, useState } from 'react';
-import { Card, CardFormData } from '../types';
-import { getLocalStorage, saveToLocalStorage } from '../utils/localStorage';
+import { PropsWithChildren, createContext } from 'react';
+import { Card } from '../types';
+import { useCard } from '../hooks/useCardList';
 
 interface CardListContextValue {
   cardList: Card[];
+  newCardId: number;
+  cardListLength: number;
   addCard: (cardInformation: Card) => void;
   updateCardName: (id: number, cardName: string) => void;
 }
 
 export const CardListContext = createContext<CardListContextValue>({
   cardList: [],
-  addCard: (cardInformation: CardFormData) => {},
-  updateCardName: (id: number, cardName: string) => {},
+  newCardId: 1,
+  cardListLength: 0,
+  addCard: () => {},
+  updateCardName: () => {},
 });
 
 export const CardListProvider = ({ children }: PropsWithChildren) => {
-  const [cardList, setCardList] = useState<Card[]>(getLocalStorage() ?? []);
-
-  useEffect(() => {
-    saveToLocalStorage(cardList);
-  }, [cardList]);
-
-  const addCard = (newCard: Card) => {
-    setCardList((cardList) => {
-      return [...cardList, newCard];
-    });
-  };
-
-  const updateCardName = (id: number, cardName: string) => {
-    setCardList((cardList) => {
-      return cardList.map((card) => {
-        if (card.id === id) card.cardName = cardName;
-
-        return card;
-      });
-    });
-  };
+  const { cardList, newCardId, cardListLength, addCard, updateCardName } = useCard();
 
   return (
-    <CardListContext.Provider value={{ cardList, addCard, updateCardName }}>
+    <CardListContext.Provider
+      value={{ cardList, newCardId, cardListLength, addCard, updateCardName }}
+    >
       {children}
     </CardListContext.Provider>
   );
