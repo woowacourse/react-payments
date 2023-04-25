@@ -14,7 +14,8 @@ export const EmptyCard: Story = {
   args: {
     cardNumberSet: ['', '', '', ''],
     owner: '',
-    expiracy: 'MM/YY',
+    month: 'MM',
+    year: 'YY',
   },
 };
 
@@ -22,7 +23,8 @@ export const OnlyEightCard: Story = {
   args: {
     cardNumberSet: ['1234', '1234', '', ''],
     owner: 'NAME',
-    expiracy: 'MM/YY',
+    month: 'MM',
+    year: 'YY',
   },
 };
 
@@ -30,7 +32,8 @@ export const OnlyOwnerCard: Story = {
   args: {
     cardNumberSet: ['', '', '', ''],
     owner: '김아무개씨 Victory',
-    expiracy: 'MM/YY',
+    month: 'MM',
+    year: 'YY',
   },
 };
 
@@ -38,7 +41,8 @@ export const OnlyMonthCard: Story = {
   args: {
     cardNumberSet: ['', '', '', ''],
     owner: '',
-    expiracy: '12/YY',
+    month: '12',
+    year: 'YY',
   },
 };
 
@@ -46,7 +50,8 @@ export const nameLengthThirtyCard: Story = {
   args: {
     cardNumberSet: ['', '', '', ''],
     owner: '가나다라마바사아자차가나다라마바사아자차가나다라마바사아자차',
-    expiracy: '12/YY',
+    month: '12',
+    year: 'YY',
   },
 };
 
@@ -54,6 +59,7 @@ export const FullfilledCard: Story = {
   args: {
     cardNumberSet: ['1111', '2222', '····', '····'],
     owner: 'EYK',
-    expiracy: '12/21',
+    month: '12',
+    year: '21',
   },
 };

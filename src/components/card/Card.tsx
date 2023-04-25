@@ -1,13 +1,21 @@
 import styled from 'styled-components';
-import { createUniqueId } from '../../utils';
+import { createUniqueId, isPrevDate } from '../../utils';
 import { useState } from 'react';
+import Error from '../common/Error';
 
 interface CardProps {
   cardNumberSet: string[];
   owner: string;
-  expiracy: string;
   onDeleteClick?: () => void;
+  month: string;
+  year: string;
 }
+
+const CardContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const Container = styled.div`
   position: relative;
@@ -54,10 +62,20 @@ const CardNumber = styled.div`
 const CardNumberItem = styled.span`
   width: 34px;
   letter-spacing: 2px;
+
+  &:nth-child(3) {
+    letter-spacing: -3px;
+  }
+
+  &:nth-child(4) {
+    letter-spacing: -3px;
+  }
 `;
 
 const OwnerAndExpiracyWrapper = styled.div`
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const Owner = styled.span`
@@ -126,7 +144,8 @@ const ENCRYPT_INDEX = 2;
 export default function Card({
   cardNumberSet,
   owner,
-  expiracy,
+  month,
+  year,
   onDeleteClick,
 }: CardProps) {
   const [isClick, setIsClick] = useState(false);
@@ -136,33 +155,37 @@ export default function Card({
     setIsClick((prev) => !prev);
   };
 
+  const isPrevCard = isPrevDate(Number(year), Number(month));
   return (
-    <Container>
-      <Wrapper onClick={toggleIsClick} isHome={onDeleteClick ? true : false}>
-        <Title></Title>
-        <Magnet />
-        <div>
-          <CardNumber>
-            {cardNumberSet.map((cardNumberItem: string, index: number) => (
-              <CardNumberItem key={createUniqueId()}>
-                {index >= ENCRYPT_INDEX
-                  ? '•'.repeat(cardNumberItem.length)
-                  : cardNumberItem}
-              </CardNumberItem>
-            ))}
-          </CardNumber>
-          <OwnerAndExpiracyWrapper>
-            <Owner title={owner}>{onwerName}</Owner>
-            <Expiracy>{expiracy}</Expiracy>
-          </OwnerAndExpiracyWrapper>
-        </div>
-      </Wrapper>
-      {isClick && onDeleteClick && (
-        <QuestionWrapper>
-          <DeleteWrapper onClick={onDeleteClick}>삭제</DeleteWrapper>
-          <CancleWrapper onClick={toggleIsClick}>취소</CancleWrapper>
-        </QuestionWrapper>
-      )}
-    </Container>
+    <CardContainer>
+      <Container>
+        <Wrapper onClick={toggleIsClick} isHome={onDeleteClick ? true : false}>
+          <Title></Title>
+          <Magnet />
+          <div>
+            <CardNumber>
+              {cardNumberSet.map((cardNumberItem: string, index: number) => (
+                <CardNumberItem key={createUniqueId()}>
+                  {index >= ENCRYPT_INDEX
+                    ? '•'.repeat(cardNumberItem.length)
+                    : cardNumberItem}
+                </CardNumberItem>
+              ))}
+            </CardNumber>
+            <OwnerAndExpiracyWrapper>
+              <Owner title={owner}>{onwerName}</Owner>
+              <Expiracy>{`${month}/${year}`}</Expiracy>
+            </OwnerAndExpiracyWrapper>
+          </div>
+        </Wrapper>
+        {isClick && onDeleteClick && (
+          <QuestionWrapper>
+            <DeleteWrapper onClick={onDeleteClick}>삭제</DeleteWrapper>
+            <CancleWrapper onClick={toggleIsClick}>취소</CancleWrapper>
+          </QuestionWrapper>
+        )}
+      </Container>
+      {onDeleteClick && isPrevCard && <Error text="기한이 지난 카드입니다." />}
+    </CardContainer>
   );
 }

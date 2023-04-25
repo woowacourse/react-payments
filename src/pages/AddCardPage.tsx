@@ -11,7 +11,12 @@ import CvcInput from '../components/card/input/CvcInput';
 import PasswordInput from '../components/card/input/PasswordInput';
 import NextButton from '../components/common/Button';
 import { useFocusInput } from '../hooks/useFocusInput';
-import { createUniqueId, isNumber, isOnlyKoreanAndEnglish } from '../utils';
+import {
+  createUniqueId,
+  isNumber,
+  isOnlyKoreanAndEnglish,
+  isPrevDate,
+} from '../utils';
 import { CardInfo, PageInfo } from '../types';
 
 interface AddCardPageProps {
@@ -165,7 +170,6 @@ export default function AddCardPage({
     } = event.currentTarget;
 
     const currentYear = new Date().getFullYear() % 100;
-    const currentMonth = new Date().getMonth() + 1;
 
     const cardInputValue: cardInputValueInfo = {
       card: {
@@ -274,10 +278,7 @@ export default function AddCardPage({
       return;
     }
 
-    if (
-      Number(yearInput.value) === currentYear &&
-      Number(monthInput.value) < currentMonth
-    ) {
+    if (isPrevDate(Number(yearInput.value), Number(monthInput.value))) {
       monthInput.focus();
       cardInputValue.month.setError('지난 기간은 입력할 수 없습니다.');
       return;
@@ -326,9 +327,8 @@ export default function AddCardPage({
             thirdCardNumber.value,
             fourthCardNumber.value,
           ]}
-          expiracy={`${month.value ? month.value : 'MM'}/${
-            year.value ? year.value : 'YY'
-          }`}
+          month={month.value ? month.value : 'MM'}
+          year={year.value ? year.value : 'YY'}
           owner={owner.value ? owner.value : 'NAME'}
         />
       </CardWrapper>

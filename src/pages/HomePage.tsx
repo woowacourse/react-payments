@@ -74,7 +74,8 @@ export default function Homepage({
             key={card.id}
             owner={card.owner}
             cardNumberSet={Object.values(card.cardNumber)}
-            expiracy={`${card.expiracy.month}/${card.expiracy.year}`}
+            month={card.expiracy.month}
+            year={card.expiracy.year}
             onDeleteClick={() => onDeleteClick(index)}
           />
         ))}
