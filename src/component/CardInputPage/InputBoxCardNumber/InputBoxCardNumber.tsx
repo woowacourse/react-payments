@@ -29,7 +29,7 @@ export default function InputBoxCardNumber(props: Props) {
 
   const changeHasError = (partIndex: number, state: nowStatus) => {
     const changedError = [...allStatus];
-    allStatus[partIndex] = state;
+    changedError[partIndex] = state;
     return setAllStatus(changedError);
   };
 

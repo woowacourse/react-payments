@@ -16,7 +16,7 @@ interface Props {
 export default function InputBoxPassword(props: Props) {
   const { changePasswordStatus } = props;
 
-  const [allStatus, setAllStatus] = useState<nowStatus[]>([1, 1, 1, 1]);
+  const [allStatus, setAllStatus] = useState<nowStatus[]>([1, 1]);
   let hasError = false;
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export default function InputBoxPassword(props: Props) {
 
   const changeHasError = (partIndex: number, state: nowStatus) => {
     const changedError = [...allStatus];
-    allStatus[partIndex] = state;
+    changedError[partIndex] = state;
     return setAllStatus(changedError);
   };
 
