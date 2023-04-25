@@ -15,3 +15,9 @@ export const CreditCardPageHeader = Template.bind({});
 CreditCardPageHeader.args = {
   title: '보유 카드',
 };
+
+export const RegisterPageHeader = Template.bind({});
+RegisterPageHeader.args = {
+  title: '카드 추가',
+  hasBackButton: true,
+};
