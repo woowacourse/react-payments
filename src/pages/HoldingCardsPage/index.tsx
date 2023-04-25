@@ -2,10 +2,11 @@ import { useNavigate } from 'react-router-dom';
 
 import Card from '../../components/Card';
 import CardRegisterButton from '../../components/CardRegisterButton';
+import Header from '../../components/common/Header';
+
+import type { CardInfo } from '../../types/card';
 
 import styles from './holdingCardsPage.module.css';
-import type { CardInfo } from '../../types/card';
-import Header from '../../components/Header';
 
 interface Props {
   cards: CardInfo[];

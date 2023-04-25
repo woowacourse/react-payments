@@ -1,7 +1,8 @@
 import type { ReactNode } from 'react';
 
-import styles from './cardRegisterField.module.css';
 import Tooltip from '../Tooltip';
+
+import styles from './textField.module.css';
 
 interface Props {
   label: string;
@@ -13,7 +14,7 @@ interface Props {
   children: ReactNode;
 }
 
-const CardRegisterField = ({
+const TextField = ({
   label,
   size,
   valueLength,
@@ -46,4 +47,4 @@ const CardRegisterField = ({
   );
 };
 
-export default CardRegisterField;
+export default TextField;

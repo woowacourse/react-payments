@@ -4,8 +4,8 @@ import { Route, Routes } from 'react-router';
 import HoldingCardsPage from './HoldingCardsPage';
 import CardRegisterPage from './CardRegisterPage';
 
+import Layout from '../components/common/Layout';
 import type { CardInfo } from '../types/card';
-import Layout from '../components/Layout';
 
 function App() {
   const [cards, setCards] = useState<CardInfo[]>([]);

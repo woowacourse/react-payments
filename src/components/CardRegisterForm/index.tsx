@@ -3,8 +3,8 @@ import type { FormEventHandler } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Card from '../Card';
-import CardRegisterField from '../CardRegisterField';
-import Input from '../Input';
+import TextField from '../common/TextField';
+import Input from '../common/Input';
 
 import useCardRegisterForm from './hooks/useCardRegisterForm';
 import { isValidExpiredDate } from './utils/validation';
@@ -71,7 +71,7 @@ const CardRegisterForm = ({ registerCard }: Props) => {
         expiredYear={expiredYear}
       />
       <form className={styles.form} onSubmit={handleSubmit}>
-        <CardRegisterField label="카드 번호" size="fit">
+        <TextField label="카드 번호" size="fit">
           <Input
             type="text"
             name="cardNumber1"
@@ -128,9 +128,9 @@ const CardRegisterForm = ({ registerCard }: Props) => {
             placeholder="0000"
             align="center"
           />
-        </CardRegisterField>
+        </TextField>
 
-        <CardRegisterField label="만료일" size="medium">
+        <TextField label="만료일" size="medium">
           <Input
             type="text"
             name="expiredMonth"
@@ -158,9 +158,9 @@ const CardRegisterForm = ({ registerCard }: Props) => {
             ref={inputRefs[5]}
             align="center"
           />
-        </CardRegisterField>
+        </TextField>
 
-        <CardRegisterField
+        <TextField
           label="카드 소유자 이름(선택)"
           size="fit"
           valueLength={owner.length}
@@ -176,9 +176,9 @@ const CardRegisterForm = ({ registerCard }: Props) => {
             onChange={handleOwnerChange}
             ref={inputRefs[6]}
           />
-        </CardRegisterField>
+        </TextField>
 
-        <CardRegisterField
+        <TextField
           label="보안코드(CVC/CVV)"
           size="small"
           tooltipMessage="카드 뒷면의 서명란에 인쇄된 숫자 끝 3자리가 CVC 번호입니다."
@@ -195,9 +195,9 @@ const CardRegisterForm = ({ registerCard }: Props) => {
             ref={inputRefs[7]}
             align="center"
           />
-        </CardRegisterField>
+        </TextField>
 
-        <CardRegisterField label="카드 비밀번호" size="medium" split>
+        <TextField label="카드 비밀번호" size="medium" split>
           <Input
             type="password"
             name="cardPassword1"
@@ -224,7 +224,7 @@ const CardRegisterForm = ({ registerCard }: Props) => {
           />
           <p>﹒</p>
           <p>﹒</p>
-        </CardRegisterField>
+        </TextField>
 
         <div className={styles.submitButton}>
           {isValidCardData && <button tabIndex={11}>다음</button>}

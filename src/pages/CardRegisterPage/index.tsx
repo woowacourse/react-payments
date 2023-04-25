@@ -3,7 +3,7 @@ import CardRegisterForm from '../../components/CardRegisterForm';
 import type { CardInfo } from '../../types/card';
 
 import styles from './cardRegisterPage.module.css';
-import Header from '../../components/Header';
+import Header from '../../components/common/Header';
 
 interface Props {
   registerCard: (card: CardInfo) => void;
