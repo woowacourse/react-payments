@@ -5,12 +5,12 @@ import {
   BACKSPASE_KEY,
   CARD_NUMBER_ERASE_SYMBOL,
   INPUT_WIDTH,
-  INPUT_MAX_LENGTH,
   PASSWORD_DIGIT_INDEX,
   SEPERATED_CARD_NUMBER_LENGTH,
   CARD_ID_VALUE,
   EXPIRED_DATE_PLUS_SYMBOL,
   EXPIRED_DATE_ERASE_SYMBOL,
+  ERASE_UNTIL_CARD_NUMBER,
 } from '../constants';
 import { CardType } from '../types';
 import { Link } from 'react-router-dom';
@@ -58,12 +58,14 @@ const CardInputForm = (props: CardInputFormProps) => {
 
   const handleCardNumberKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === BACKSPASE_KEY) {
-      if (card.cardNumber.length === CARD_NUMBER_ERASE_SYMBOL.FIRST)
-        card.cardNumber = card.cardNumber.substring(0, SEPERATED_CARD_NUMBER_LENGTH.FIRST);
-      if (card.cardNumber.length === CARD_NUMBER_ERASE_SYMBOL.SECOND)
-        card.cardNumber = card.cardNumber.substring(0, SEPERATED_CARD_NUMBER_LENGTH.SECOND);
-        if (card.cardNumber.length === CARD_NUMBER_ERASE_SYMBOL.THIRD)
-        card.cardNumber = card.cardNumber.substring(0, SEPERATED_CARD_NUMBER_LENGTH.THIRD);
+      if (card.cardNumber.length < CARD_NUMBER_ERASE_SYMBOL.FIRST)
+        card.cardNumber = card.cardNumber.substring(0, ERASE_UNTIL_CARD_NUMBER.FIRST);
+      if (card.cardNumber.length < CARD_NUMBER_ERASE_SYMBOL.SECOND)
+        card.cardNumber = card.cardNumber.substring(0, ERASE_UNTIL_CARD_NUMBER.SECOND);
+      if (card.cardNumber.length < CARD_NUMBER_ERASE_SYMBOL.THIRD)
+        card.cardNumber = card.cardNumber.substring(0, ERASE_UNTIL_CARD_NUMBER.THIRD);
+      if (card.cardNumber.length < CARD_NUMBER_ERASE_SYMBOL.FOURTH)
+        card.cardNumber = card.cardNumber.substring(0, ERASE_UNTIL_CARD_NUMBER.FOURTH);
     }
     props.setCard(card);
   };
@@ -79,11 +81,14 @@ const CardInputForm = (props: CardInputFormProps) => {
 
   const handleExpiredDateKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === BACKSPASE_KEY) {
-      if (card.expiredDate.length === EXPIRED_DATE_ERASE_SYMBOL.SEPARATE) {
-        card.expiredDate = card.expiredDate.substring(EXPIRED_DATE_ERASE_SYMBOL.FROM, EXPIRED_DATE_ERASE_SYMBOL.TO);
-        props.setCard(card);
+      if (card.expiredDate.length <= EXPIRED_DATE_ERASE_SYMBOL.SEPARATE_FIRST) {
+        card.expiredDate = card.expiredDate.substring(EXPIRED_DATE_ERASE_SYMBOL.FROM, EXPIRED_DATE_ERASE_SYMBOL.TO_FIRST);
+      }
+      if (card.expiredDate.length <= EXPIRED_DATE_ERASE_SYMBOL.SEPARATE_SECOND) {
+        card.expiredDate = card.expiredDate.substring(EXPIRED_DATE_ERASE_SYMBOL.FROM, EXPIRED_DATE_ERASE_SYMBOL.TO_SECOND);
       }
     }
+    props.setCard(card);
   };
 
   const handlePasswordChanged = (digit: number) => (e: React.ChangeEvent<HTMLInputElement>) => {

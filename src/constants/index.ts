@@ -23,9 +23,17 @@ const SEPERATED_CARD_NUMBER_LENGTH = {
 } as const;
 
 const CARD_NUMBER_ERASE_SYMBOL = {
-  FIRST: 7,
-  SECOND: 14,
-  THIRD: 21,
+  FIRST: 8,
+  SECOND: 15,
+  THIRD: 23,
+  FOURTH: 26
+} as const;
+
+const ERASE_UNTIL_CARD_NUMBER = {
+  FIRST: 0,
+  SECOND: 8,
+  THIRD: 15,
+  FOURTH: 22
 } as const;
 
 const PASSWORD_DIGIT_INDEX = {
@@ -36,9 +44,11 @@ const PASSWORD_DIGIT_INDEX = {
 const EXPIRED_DATE_PLUS_SYMBOL = 2 as const;
 
 const EXPIRED_DATE_ERASE_SYMBOL = {
-  SEPARATE: 5,
+  SEPARATE_FIRST: 5,
+  SEPARATE_SECOND: 8,
   FROM: 0,
-  TO: 2,
+  TO_FIRST: 0,
+  TO_SECOND: 6
 } as const;
 
 const INPUT_WIDTH = {
@@ -71,4 +81,5 @@ export {
   CARD_ID_VALUE,
   BACKSPASE_KEY,
   RANDOM_COLOR,
+  ERASE_UNTIL_CARD_NUMBER
 };
