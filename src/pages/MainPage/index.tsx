@@ -2,6 +2,7 @@ import Header from "components/Header";
 import CardPreview from "components/CardPreview";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { AddButton } from "components/ButtonStyle";
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ const MainPage = () => {
           <S.Message>새로운 카드를 등록해 주세요.</S.Message>
         )}
 
-        <S.Button onClick={goToRegister}>+</S.Button>
+        <AddButton onClick={goToRegister}>+</AddButton>
       </S.Main>
     </S.Wrapper>
   );
@@ -57,16 +58,6 @@ const S = {
     & + button {
       margin-top: 0;
     }
-  `,
-
-  Button: styled.button`
-    width: 208px;
-    height: 123px;
-    margin: 30px 0 40px;
-    font-size: 34px;
-    background: #e5e5e5;
-    border-radius: 5px;
-    cursor: pointer;
   `,
 };
 

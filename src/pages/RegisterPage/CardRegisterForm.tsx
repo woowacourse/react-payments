@@ -9,6 +9,7 @@ import CardPreview from "components/CardPreview";
 import { isValidInfo } from "validation";
 import Header from "components/Header";
 import useSetFormData from "hooks/useSetFormData";
+import { NextButton } from "components/ButtonStyle";
 
 const CardRegisterForm = () => {
   const [cardNumber, setCardNumber] = useState({
@@ -45,7 +46,7 @@ const CardRegisterForm = () => {
         <SecurityCodeInput />
         <PasswordInput />
 
-        <S.Button>다음</S.Button>
+        <NextButton>다음</NextButton>
       </form>
     </S.Wrapper>
   );
@@ -55,19 +56,6 @@ const S = {
   Wrapper: styled.div`
     max-width: 480px;
     width: 88%;
-  `,
-
-  Button: styled.button`
-    display: flex;
-    margin: 38px 0 30px auto;
-    padding: 10px 16px;
-    color: var(--darken-color);
-    border: 1px solid var(--darken-color);
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 700;
-    background: none;
-    cursor: pointer;
   `,
 };
 
