@@ -1,18 +1,10 @@
-import React from "react";
+import React, { InputHTMLAttributes } from "react";
 import Style from "./InputStyled";
 
-type InputProps = {
-  type: string;
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   isRequired: boolean;
-  onInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  id?: string;
-  value?: string;
-  minLength?: number;
-  maxLength?: number;
-  placeholder?: string;
   inputRef?: React.RefObject<HTMLInputElement>;
-  onBlur?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-};
+}
 
 function Input({ isRequired, inputRef, ...props }: InputProps) {
   return (
