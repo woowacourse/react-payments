@@ -16,28 +16,43 @@ const CardRegistration = ({ registerNewCard }: CardRegistrationProps) => {
   const [cardExpirationDate, setCardExpirationDate] = useState<string>('');
   const { isUnlocked, setBooleanValueByIndex } = useBooleanLocker(5);
 
-  const updateCardNumber = (newCardNumber: FormInputValueType) => {
-    setCardNumber(() => newCardNumber.value);
-    setBooleanValueByIndex(0, newCardNumber.isValid);
-  };
+  const updateCardNumber = useCallback(
+    (newCardNumber: FormInputValueType) => {
+      setCardNumber(() => newCardNumber.value);
+      setBooleanValueByIndex(0, newCardNumber.isValid);
+    },
+    [setBooleanValueByIndex]
+  );
 
-  const updateCardOwnerName = (newCardOwnerName: FormInputValueType) => {
-    setCardOwnerName(() => newCardOwnerName.value);
-    setBooleanValueByIndex(1, newCardOwnerName.isValid);
-  };
+  const updateCardOwnerName = useCallback(
+    (newCardOwnerName: FormInputValueType) => {
+      setCardOwnerName(() => newCardOwnerName.value);
+      setBooleanValueByIndex(1, newCardOwnerName.isValid);
+    },
+    [setBooleanValueByIndex]
+  );
 
-  const updateCardExpirationDate = (newCardExpirationDate: FormInputValueType) => {
-    setCardExpirationDate(() => newCardExpirationDate.value);
-    setBooleanValueByIndex(2, newCardExpirationDate.isValid);
-  };
+  const updateCardExpirationDate = useCallback(
+    (newCardExpirationDate: FormInputValueType) => {
+      setCardExpirationDate(() => newCardExpirationDate.value);
+      setBooleanValueByIndex(2, newCardExpirationDate.isValid);
+    },
+    [setBooleanValueByIndex]
+  );
 
-  const updateCardSecurityCode = (newCardSecurityCode: FormInputValueType) => {
-    setBooleanValueByIndex(3, newCardSecurityCode.isValid);
-  };
+  const updateCardSecurityCode = useCallback(
+    (newCardSecurityCode: FormInputValueType) => {
+      setBooleanValueByIndex(3, newCardSecurityCode.isValid);
+    },
+    [setBooleanValueByIndex]
+  );
 
-  const updateCardPassword = (newCardPassword: FormInputValueType) => {
-    setBooleanValueByIndex(4, newCardPassword.isValid);
-  };
+  const updateCardPassword = useCallback(
+    (newCardPassword: FormInputValueType) => {
+      setBooleanValueByIndex(4, newCardPassword.isValid);
+    },
+    [setBooleanValueByIndex]
+  );
 
   return (
     <>
