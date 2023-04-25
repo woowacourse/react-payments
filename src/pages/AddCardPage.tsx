@@ -9,7 +9,7 @@ import ExpiracyInput from '../components/card/input/ExpiracyInput';
 import OwnerInput from '../components/card/input/OwnerInput';
 import CvcInput from '../components/card/input/CvcInput';
 import PasswordInput from '../components/card/input/PasswordInput';
-import NextButton from '../components/common/NextButton';
+import NextButton from '../components/common/Button';
 import { useFocusInput } from '../hooks/useFocusInput';
 import { createUniqueId, isNumber, isOnlyKoreanAndEnglish } from '../utils';
 import { CardInfo, PageInfo } from '../types';
@@ -282,6 +282,7 @@ export default function AddCardPage({
       cardInputValue.month.setError('지난 기간은 입력할 수 없습니다.');
       return;
     }
+
     const newCard: CardInfo = {
       id: createUniqueId(),
       cardNumber: {
@@ -368,6 +369,7 @@ export default function AddCardPage({
             isDisable={
               cardForm.current ? !cardForm.current.checkValidity() : true
             }
+            text="다음"
           />
         </NextButtonWrapper>
       </InputWrapperParent>

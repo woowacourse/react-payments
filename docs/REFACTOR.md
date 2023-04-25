@@ -3,7 +3,7 @@
 - [x] 스토리북 defaultViewPort 설정
 - [x] HTML title 설정하기
 - [x] 페이지가 많아지는 것을 고려해서 page를 변경하는 상태를 상수화하여 사용
-- [ ] 범용적으로 사용 가능한 Button 컴포넌트 만들기
+- [x] 범용적으로 사용 가능한 Button 컴포넌트 만들기
 - [x] 일반적인 컨벤션을 맞춰 코드 작성하기
 - [x] 불필요한 코드 삭제하기(Input의 defaultOnInput을 없애기)
 

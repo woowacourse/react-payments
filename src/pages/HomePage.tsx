@@ -57,7 +57,7 @@ export default function Homepage({
         ...cardList.slice(0, index),
         ...cardList.slice(index + 1),
       ];
-      console.log(updatedCardList, index);
+
       setCardList(updatedCardList);
     }
   };

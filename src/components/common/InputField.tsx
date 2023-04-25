@@ -1,3 +1,4 @@
+import { PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
 export type InputTitle =
@@ -9,7 +10,6 @@ export type InputTitle =
 
 export interface InputContainerProps {
   kind: InputTitle;
-  children: JSX.Element;
   inputLength?: string;
 }
 
@@ -56,7 +56,7 @@ export default function InputField({
   kind,
   children,
   inputLength,
-}: InputContainerProps) {
+}: PropsWithChildren<InputContainerProps>) {
   return (
     <Wrapper>
       <Label htmlFor={kind}>

@@ -1,8 +1,8 @@
-import React, { MouseEvent } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 interface AddCardButtonProps {
-  onClick: (event: MouseEvent<HTMLElement>) => void;
+  onClick: () => void;
 }
 
 const Wrapper = styled.button`

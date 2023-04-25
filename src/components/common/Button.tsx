@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { ButtonHTMLAttributes } from 'react';
 import styled from 'styled-components';
 
-interface NextButtonProps {
-  isDisable: boolean;
+interface NextButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  isDisable?: boolean;
+  text: string;
 }
 
-const Wrapper = styled.button<{ isDisable: boolean }>`
+const Wrapper = styled.button<{ isDisable?: boolean }>`
   cursor: ${({ isDisable }) => (isDisable ? 'not-allowed' : 'pointer')};
   border: 0;
   background-color: transparent;
@@ -14,10 +15,10 @@ const Wrapper = styled.button<{ isDisable: boolean }>`
   color: ${({ isDisable }) => (isDisable ? '#bebbbb' : '#000000')};
 `;
 
-export default function NextButton({ isDisable }: NextButtonProps) {
+export default function NextButton({ isDisable, text }: NextButtonProps) {
   return (
     <Wrapper isDisable={isDisable} disabled={isDisable} tabIndex={10}>
-      다음
+      {text}
     </Wrapper>
   );
 }
