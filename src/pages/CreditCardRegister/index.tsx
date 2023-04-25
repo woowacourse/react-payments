@@ -2,6 +2,7 @@ import * as Type from '@Types/index';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import Button from '@Components/Button';
 import CreditCard from '@Components/CreditCard';
 
 import creditCard from '@Domains/creditCard';
@@ -118,9 +119,7 @@ function CreditCardRegister() {
           setCreditCardPassword={setCreditCardPassword}
         />
         <S.ButtonWrapper>
-          <S.RegisterButton disabled={!isFullFilled} type="button" onClick={() => handleSubmit()}>
-            확인
-          </S.RegisterButton>
+          <Button disabled={!isFullFilled} type="button" handleClick={handleSubmit} text="확인" />
         </S.ButtonWrapper>
       </S.CreditCardRegisterForm>
     </S.CreditCardRegisterLayout>

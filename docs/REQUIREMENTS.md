@@ -73,7 +73,7 @@
 
 - [x] refactor: creditCardStorage 도메인 생성
 - [x] refactor: RegisterButton 타입 수정
-- [ ] refactor: 버튼 컴포넌트 생성 및 재사용
+- [x] refactor: 버튼 컴포넌트 생성 및 재사용
 
 ### 카드회사 등록
 
