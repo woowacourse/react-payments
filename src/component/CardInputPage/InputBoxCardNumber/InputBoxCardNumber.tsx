@@ -1,11 +1,11 @@
+import "./inputBoxCardNumber.css";
+
 import { useEffect, useState } from "react";
 import CardNumber from "./CardNumber";
 import { CARD_ERROR_MESSAGE } from "../../../CONSTANT";
-
-import "./inputBoxCardNumber.css";
 import { nowStatus } from "../../../type";
 
-interface Props {
+interface InputBoxNumberProps {
   changeCardNumberStatus: (
     key: "isComplete" | "userInput",
     value: any,
@@ -13,7 +13,7 @@ interface Props {
   ) => void;
 }
 
-export default function InputBoxCardNumber(props: Props) {
+export default function InputBoxCardNumber(props: InputBoxNumberProps) {
   const { changeCardNumberStatus } = props;
 
   const [allStatus, setAllStatus] = useState<nowStatus[]>([1, 1, 1, 1]);

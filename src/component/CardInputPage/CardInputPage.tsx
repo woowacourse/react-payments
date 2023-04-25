@@ -5,11 +5,11 @@ import CardInputForm from "./CardInputForm/CardInputForm";
 
 import "./cardInputPage.css";
 
-interface Props {
+interface CardInputPageProps {
   addNewCard: (card: CreditCard) => void;
 }
 
-export default function CardInputPage(props: Props) {
+export default function CardInputPage(props: CardInputPageProps) {
   const { addNewCard } = props;
 
   return (

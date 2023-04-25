@@ -13,7 +13,7 @@ import "./cardInputForm.css";
 import { CreditCard, InputStatus } from "../../../type";
 import { EachUserInputState } from "../../../type";
 
-interface Props {
+interface CardInputFormProps {
   addNewCard: (card: CreditCard) => void;
 }
 
@@ -43,7 +43,7 @@ const initialInputStatus = {
   password: initialArrayInputState,
 };
 
-export default function CardInputForm(props: Props) {
+export default function CardInputForm(props: CardInputFormProps) {
   const { addNewCard } = props;
 
   const [isFormFilled, setIsFormFilled] = useState(false);

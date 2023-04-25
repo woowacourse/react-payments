@@ -1,16 +1,15 @@
+import "./inputBoxOwner.css";
+
 import { useState, ChangeEvent } from "react";
 import Input from "../../common/Input";
-
-import "./inputBoxOwner.css";
 import { CARD_ERROR_MESSAGE } from "../../../CONSTANT";
-import { CreditCard } from "../../../type";
 import { makeAppropriateName } from "../../../trans";
 
-interface Props {
+interface InputBoxOwnerProps {
   changeCardOwnerStatus: (key: "isComplete" | "userInput", value: any) => void;
 }
 
-export default function InputBoxOwner(props: Props) {
+export default function InputBoxOwner(props: InputBoxOwnerProps) {
   const { changeCardOwnerStatus } = props;
 
   const [isError, setIsError] = useState(false);

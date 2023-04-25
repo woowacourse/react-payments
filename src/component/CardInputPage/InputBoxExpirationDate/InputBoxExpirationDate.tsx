@@ -1,21 +1,21 @@
-import { useState, useEffect, ChangeEvent } from "react";
+import { useState, ChangeEvent } from "react";
 import Input from "../../common/Input";
 
 import "./inputBoxExpirationDate.css";
-import { CARD_ERROR_MESSAGE, INPUT_STATUS } from "../../../CONSTANT";
+import { CARD_ERROR_MESSAGE } from "../../../CONSTANT";
 import { validateExpirationDate } from "../../../validation/ExpirationDate";
-import { CreditCard } from "../../../type";
-import { validateNumber } from "../../../validation/number";
 import { makeAppropriateExpirationDate } from "../../../trans";
 
-interface Props {
+interface InputBoxExpirationDateProps {
   changeCardExpirationDateStatus: (
     key: "isComplete" | "userInput",
     value: any
   ) => void;
 }
 
-export default function InputBoxExpirationDate(props: Props) {
+export default function InputBoxExpirationDate(
+  props: InputBoxExpirationDateProps
+) {
   const { changeCardExpirationDateStatus } = props;
 
   const [isError, setIsError] = useState(false);

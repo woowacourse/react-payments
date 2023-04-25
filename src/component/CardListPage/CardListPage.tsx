@@ -2,12 +2,13 @@ import { CreditCard } from "../../type";
 import CardList from "./CardList/CardList";
 import "./cardListPage.css";
 
-interface Props {
+interface CardListPageProps {
   cardList: CreditCard[];
 }
 
-export default function CardListPage(props: Props) {
+export default function CardListPage(props: CardListPageProps) {
   const { cardList } = props;
+
   return (
     <section className="card-list-section">
       <div className="card-list-section-header">

@@ -5,15 +5,14 @@ import "./inputBoxSecurityCode.css";
 import { CARD_ERROR_MESSAGE } from "../../../CONSTANT";
 import { makeAppropriateSecurityCode } from "../../../trans";
 
-interface Props {
+interface InputBoxSecurityProps {
   changeSecurityCodeStatus: (
     key: "isComplete" | "userInput",
     value: any
   ) => void;
-  // changePasswordStatus: (key: "isComplete" | "userInput", value: any) => void;
 }
 
-export default function InputBoxSecurityCode(props: Props) {
+export default function InputBoxSecurityCode(props: InputBoxSecurityProps) {
   const { changeSecurityCodeStatus } = props;
 
   const [isError, setIsError] = useState(false);

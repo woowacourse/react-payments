@@ -5,7 +5,7 @@ import "./cardPassword.css";
 import { makeAppropriatePassword } from "../../../trans";
 import { nowStatus } from "../../../type";
 
-interface Props {
+interface CardPasswordProps {
   changeHasError: (partIndex: number, state: nowStatus) => void;
   changePasswordStatus: (
     key: "isComplete" | "userInput",
@@ -14,7 +14,7 @@ interface Props {
   ) => void;
 }
 
-export default function CardPassword(props: Props) {
+export default function CardPassword(props: CardPasswordProps) {
   const { changeHasError, changePasswordStatus } = props;
 
   const [passwordStatus, setPasswordStatus] = useState<string[]>([]);

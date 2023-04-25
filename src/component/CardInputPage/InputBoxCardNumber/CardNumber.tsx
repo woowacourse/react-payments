@@ -1,11 +1,11 @@
+import "./cardNumber.css";
+
 import { ChangeEvent, useState } from "react";
 import Input from "../../common/Input";
-
-import "./cardNumber.css";
 import { makeAppropriateNumber } from "../../../trans";
 import { nowStatus } from "../../../type";
 
-interface Props {
+interface CardNumberProps {
   changeHasError: (partIndex: number, state: nowStatus) => void;
   changeCardNumberStatus: (
     key: "isComplete" | "userInput",
@@ -14,14 +14,10 @@ interface Props {
   ) => void;
 }
 
-/* setHasError : inputBoxCardNumber가 에러문구를 출력하기 위해 내려보내는 함수
- * changeCardNumberStatus : {}형태로 에러여부, 현재 카드넘버 정보를 바꾸는 함수
- * changeNowCardInfo : 카드 미리보기를 동기화하기 위해 내려보내는 함수
- */
 export default function CardNumber({
   changeHasError,
   changeCardNumberStatus,
-}: Props) {
+}: CardNumberProps) {
   const [cardNumber, setCardNumber] = useState<string[]>([]);
 
   const onChangeCardNumber = (partIndex: number) => {

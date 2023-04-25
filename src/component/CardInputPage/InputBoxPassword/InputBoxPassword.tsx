@@ -5,7 +5,7 @@ import "./inputBoxPassword.css";
 import { CARD_ERROR_MESSAGE } from "../../../CONSTANT";
 import { nowStatus } from "../../../type";
 
-interface Props {
+interface InputBoxPasswordProps {
   changePasswordStatus: (
     key: "isComplete" | "userInput",
     value: any,
@@ -13,7 +13,7 @@ interface Props {
   ) => void;
 }
 
-export default function InputBoxPassword(props: Props) {
+export default function InputBoxPassword(props: InputBoxPasswordProps) {
   const { changePasswordStatus } = props;
 
   const [allStatus, setAllStatus] = useState<nowStatus[]>([1, 1]);
