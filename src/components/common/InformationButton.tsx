@@ -4,16 +4,18 @@ import { DISMISS_TAB_INDEX } from '../../constant';
 
 interface InformationButtonProps {
   onClick: () => void;
+  text?: string;
   tabIndex?: number;
 }
 
 export default function InformationButton({
   onClick,
+  text = '?',
   tabIndex = DISMISS_TAB_INDEX,
 }: InformationButtonProps) {
   return (
     <Wrapper type="button" onClick={onClick} tabIndex={tabIndex}>
-      ﹖
+      {text}
     </Wrapper>
   );
 }
