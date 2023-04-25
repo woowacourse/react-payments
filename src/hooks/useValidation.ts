@@ -22,20 +22,23 @@ export const useValidation = <Data extends object>(validateFns: NonNullable<Vali
    * @returns {boolean} 검증 성공 여부
    */
   const validate = (data: Data) => {
+    const nextValidationResult = { ...validationResult };
     const allValid = (Object.keys(validateFns) as Array<keyof Data>).reduce((valid, key) => {
       // 각 필드마다 검증을 수행할 함수
       const validateFn = validateFns[key];
 
       try {
         validateFn?.(data[key]);
-        setValidationResult({ ...validationResult, [key]: null });
+        nextValidationResult[key] = null;
         return valid;
       } catch (e) {
         const error = e as Error;
-        setValidationResult({ ...validationResult, [key]: error.message });
+        nextValidationResult[key] = error.message;
       }
       return false;
     }, true);
+
+    setValidationResult(nextValidationResult);
 
     // 검증 성공 여부 반환
     return allValid;
