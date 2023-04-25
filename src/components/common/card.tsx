@@ -1,14 +1,14 @@
 import { useContext } from "react";
 import styled from "styled-components";
 import {
-  DataContext,
+  DateContext,
   NameContext,
   NumberContext,
 } from "../../contexts/cardInfo";
 
 export function Card() {
   const { cardNumber } = useContext(NumberContext);
-  const { month, year } = useContext(DataContext);
+  const { month, year } = useContext(DateContext);
   const { userName } = useContext(NameContext);
 
   return (
