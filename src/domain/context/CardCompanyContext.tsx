@@ -1,7 +1,7 @@
 import { PropsWithChildren, createContext, useContext, useState } from 'react';
 
 import { noop } from '../../utils/noop';
-import type { CardCompany } from '../../domain/types/card';
+import type { CardCompany } from '../types/card';
 
 interface CardCompanyContextProps {
   cardCompany: CardCompany | null;

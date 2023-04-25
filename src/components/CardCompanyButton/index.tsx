@@ -10,7 +10,7 @@ import {
 } from '../../assets/svg';
 
 import { useModal } from '../common/Modal/ModalContext';
-import { useCardCompany } from './CardCompanyContext';
+import { useCardCompany } from '../../domain/context/CardCompanyContext';
 import type { CardCompany } from '../../domain/types/card';
 
 import styles from './cardCompanyButton.module.css';
