@@ -1,6 +1,6 @@
 import { useFocus } from "hooks/useFocus";
 import { ChangeEvent, Dispatch, SetStateAction, Fragment } from "react";
-import { changeToValidValue } from "utils/inputValidator";
+import { changeInvalidValueToBlank } from "utils/inputValidator";
 import Input from "components/Input";
 import { Slash } from "components/DelimiterStyle";
 import { DateCaption } from "components/CaptionStyle";
@@ -24,7 +24,7 @@ const ExpirationDateInput = ({ date, setDate }: Props) => {
     setDate((prevState) => {
       return {
         ...prevState,
-        [target.name]: changeToValidValue(target.value, {
+        [target.name]: changeInvalidValueToBlank(target.value, {
           length: LIMIT_LENGTH.EXPIRATION_DATE,
           regex: ONLY_NUMBER,
         }),

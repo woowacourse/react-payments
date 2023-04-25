@@ -1,6 +1,6 @@
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
-import { changeToValidValue } from "utils/inputValidator";
+import { changeInvalidValueToBlank } from "utils/inputValidator";
 import { LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
 import Input from "components/Input";
 const { ONLY_ENGLISH, INVALID_BLANK } = VALID_INPUT;
@@ -16,7 +16,7 @@ const NameInput = ({ name, setName }: Props) => {
     if (value.includes(INVALID_BLANK)) return;
 
     setName(
-      changeToValidValue(value, {
+      changeInvalidValueToBlank(value, {
         length: LIMIT_LENGTH.NAME,
         regex: ONLY_ENGLISH,
       })

@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import styled from "styled-components";
-import { changeToValidValue } from "utils/inputValidator";
+import { changeInvalidValueToBlank } from "utils/inputValidator";
 import Input from "components/Input";
 import { CodeCaption } from "components/CaptionStyle";
 import { LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
@@ -11,7 +11,7 @@ const SecurityCodeInput = () => {
 
   const handleCardNumber = ({ target }: ChangeEvent<HTMLInputElement>) => {
     setCode(
-      changeToValidValue(target.value, {
+      changeInvalidValueToBlank(target.value, {
         length: LIMIT_LENGTH.SECURITY_CODE,
         regex: ONLY_NUMBER,
       })

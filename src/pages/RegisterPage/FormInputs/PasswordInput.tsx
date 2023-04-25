@@ -1,7 +1,7 @@
 import { useFocus } from "hooks/useFocus";
 import { ChangeEvent, useState, Fragment } from "react";
 import styled from "styled-components";
-import { changeToValidValue } from "utils/inputValidator";
+import { changeInvalidValueToBlank } from "utils/inputValidator";
 import Input from "components/Input";
 import { PasswordCaption } from "components/CaptionStyle";
 import { PasswordInputBox } from "components/InputBoxStyle";
@@ -31,7 +31,7 @@ const PasswordInput = () => {
     setPassword((prevState) => {
       return {
         ...prevState,
-        [target.name]: changeToValidValue(target.value, {
+        [target.name]: changeInvalidValueToBlank(target.value, {
           length: LIMIT_LENGTH.PASSWORD,
           regex: ONLY_NUMBER,
         }),

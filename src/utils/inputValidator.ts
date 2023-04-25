@@ -3,7 +3,7 @@ interface Condition {
   regex: RegExp;
 }
 
-export const changeToValidValue = (
+export const changeInvalidValueToBlank = (
   value: string,
   { length, regex }: Condition
 ) => {

@@ -1,6 +1,6 @@
 import { useFocus } from "hooks/useFocus";
 import { ChangeEvent, Dispatch, SetStateAction, Fragment } from "react";
-import { changeToValidValue } from "utils/inputValidator";
+import { changeInvalidValueToBlank } from "utils/inputValidator";
 import styled from "styled-components";
 import Input from "components/Input";
 import { Hyphen } from "components/DelimiterStyle";
@@ -22,7 +22,7 @@ const CardNumberInput = ({ cardNumber, setCardNumber }: Props) => {
     setCardNumber((prevState) => {
       return {
         ...prevState,
-        [target.name]: changeToValidValue(target.value, {
+        [target.name]: changeInvalidValueToBlank(target.value, {
           length: LIMIT_LENGTH.CARD_NUMBER,
           regex: ONLY_NUMBER,
         }),
