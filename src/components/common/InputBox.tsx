@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { InputHTMLAttributes } from 'react';
 import styled from 'styled-components';
 
 export interface InputType {
@@ -9,7 +9,7 @@ export interface InputType {
   required?: boolean;
 }
 
-interface InputBoxProps {
+interface InputBoxProps extends InputHTMLAttributes<HTMLInputElement> {
   inputs: InputType[];
   inputValues: string | string[];
   setInputValues: (val: string | string[]) => void;
