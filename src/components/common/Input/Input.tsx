@@ -7,7 +7,7 @@ interface InputProps extends ComponentPropsWithRef<'input'> {
 }
 
 function Input(
-  { variant = 'outline', isError = false, ...attributes }: InputProps,
+  { variant = 'outline', className = '', isError = false, ...attributes }: InputProps,
   ref: ForwardedRef<HTMLInputElement>
 ) {
   const visualStyle = variant === 'outline' ? styles.outline : styles.underline;
@@ -15,7 +15,7 @@ function Input(
   return (
     <input
       ref={ref}
-      className={`${styles.input} ${visualStyle} ${isError ? styles.error : ''}`}
+      className={`${className} ${styles.input} ${visualStyle} ${isError ? styles.error : ''}`}
       {...attributes}
     />
   );
