@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CardNumber from "./CardNumber";
 import { CARD_ERROR_MESSAGE } from "../../../CONSTANT";
 
 import "./inputBoxCardNumber.css";
-import { CreditCard } from "../../../type";
+import { nowStatus } from "../../../type";
 
 interface Props {
   changeCardNumberStatus: (
@@ -16,13 +16,29 @@ interface Props {
 export default function InputBoxCardNumber(props: Props) {
   const { changeCardNumberStatus } = props;
 
-  const [hasError, setHasError] = useState<boolean>(false);
+  const [allStatus, setAllStatus] = useState<nowStatus[]>([1, 1, 1, 1]);
+  let hasError = false;
+
+  useEffect(() => {
+    console.log(hasError);
+    hasError = allStatus.includes(0) ? true : false;
+
+    allStatus.every((status) => status === 2)
+      ? changeCardNumberStatus("isComplete", true)
+      : changeCardNumberStatus("isComplete", false);
+  }, [allStatus]);
+
+  const changeHasError = (partIndex: number, state: nowStatus) => {
+    const changedError = [...allStatus];
+    allStatus[partIndex] = state;
+    return setAllStatus(changedError);
+  };
 
   return (
     <div className="input-box-card-number">
       <p>카드번호</p>
       <CardNumber
-        setHasError={setHasError}
+        setHasError={changeHasError}
         changeCardNumberStatus={changeCardNumberStatus}
       />
       <p className={hasError ? "visible" : ""}>

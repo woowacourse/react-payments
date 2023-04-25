@@ -12,6 +12,8 @@ export interface EachUserInputState {
   userInput: string | string[];
 }
 
+export type nowStatus = 0 | 1 | 2;
+
 export interface InputStatus {
   bank?: EachUserInputState;
   cardNumber: EachUserInputState;

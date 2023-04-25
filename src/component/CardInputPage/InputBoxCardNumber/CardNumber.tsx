@@ -1,12 +1,12 @@
-import { ChangeEvent, useState, useEffect } from "react";
+import { ChangeEvent, useState } from "react";
 import Input from "../../common/Input";
 
 import "./cardNumber.css";
-import { CreditCard } from "../../../type";
 import { makeAppropriateNumber } from "../../../trans";
+import { nowStatus } from "../../../type";
 
 interface Props {
-  setHasError: React.Dispatch<React.SetStateAction<boolean>>;
+  setHasError: (partIndex: number, state: nowStatus) => void;
   changeCardNumberStatus: (
     key: "isComplete" | "userInput",
     value: any,
@@ -30,15 +30,12 @@ export default function CardNumber({
       const appropriateNumber = makeAppropriateNumber(userInputNumber);
 
       if (userInputNumber !== appropriateNumber) {
-        setHasError(true);
-        changeCardNumberStatus("isComplete", false);
+        setHasError(partIndex, 0);
       } else if (appropriateNumber.length === 4) {
-        setHasError(false);
-        changeCardNumberStatus("isComplete", true);
+        setHasError(partIndex, 2);
         changeCardNumberStatus("userInput", appropriateNumber, partIndex);
       } else {
-        setHasError(false);
-        changeCardNumberStatus("isComplete", false);
+        setHasError(partIndex, 1);
       }
 
       const result = [...cardNumber];
