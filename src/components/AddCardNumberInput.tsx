@@ -1,31 +1,32 @@
 import React from 'react';
 
 import type { AddCardNumberInputProps } from '../type';
+import './AddCardNumberInput.css';
 
 const AddCardNumberInput = ({ cardNumber, onChange }: AddCardNumberInputProps) => {
   const { first, second, third, fourth } = cardNumber;
   return (
-    <div>
+    <section className="card-number-input-container">
       <span className="form-label">카드 번호</span>
-      <div className="card-number-input-container">
+      <div className="card-number-input">
         <input
-          className="input-box card-number"
+          className="input-element card-number"
           value={first}
           onChange={onChange}
           name="first"
           required
         />
-        <span>-</span>
+        <span className="sperator">-</span>
         <input
-          className="input-box card-number"
+          className="input-element card-number"
           value={second}
           onChange={onChange}
           name="second"
           required
         />
-        <span>-</span>
+        <span className="sperator">-</span>
         <input
-          className="input-password-container card-number"
+          className="input-element input-password-container card-number"
           type="password"
           maxLength={4}
           minLength={4}
@@ -34,9 +35,9 @@ const AddCardNumberInput = ({ cardNumber, onChange }: AddCardNumberInputProps) =
           name="third"
           required
         />
-        <span>-</span>
+        <span className="sperator">-</span>
         <input
-          className="input-password-container card-number"
+          className="input-element input-password-container card-number"
           type="password"
           maxLength={4}
           minLength={4}
@@ -46,7 +47,7 @@ const AddCardNumberInput = ({ cardNumber, onChange }: AddCardNumberInputProps) =
           required
         />
       </div>
-    </div>
+    </section>
   );
 };
 

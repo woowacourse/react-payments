@@ -19,6 +19,7 @@ import {
   cardOwnerCondition,
   cardPasswordCondition,
 } from './cardInputCondition';
+import BackButtonImg from '../asset/back_button.png';
 import './AddCardPage.css';
 
 const AddCardPage = () => {
@@ -56,12 +57,12 @@ const AddCardPage = () => {
   return (
     <div className="add-card-page">
       <Header>
-        <button className="back-button" onClick={onBackButtonClick}>
-          {'<'}
+        <button className="back-button" onClick={onBackButtonClick} aria-label="back-button">
+          <img src={BackButtonImg} alt="뒤로 가기" />
         </button>
-        <h3>카드 추가</h3>
+        <h2>카드 추가</h2>
       </Header>
-      <section className="add-card-page-body">
+      <article className="add-card-page-body">
         <Card
           cardType={cardType}
           cardNumber={cardNumber}
@@ -77,7 +78,7 @@ const AddCardPage = () => {
           cardPassword1={cardPassword1}
           cardPassword2={cardPassword2}
         />
-      </section>
+      </article>
     </div>
   );
 };

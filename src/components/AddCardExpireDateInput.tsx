@@ -1,17 +1,18 @@
 import { AddCardExpireDateInputProps } from '../type';
+import './AddCardExpireDateInput.css';
 
 const AddCardExpireDateInput = ({ cardExpire }: AddCardExpireDateInputProps) => {
   return (
-    <div>
+    <section className="card-expired-input-container">
       <span className="form-label">만료일</span>
       <input
-        className="input-box card-expired"
+        className="input-element card-expired"
         value={cardExpire.value}
         onChange={cardExpire.onChange}
         name="expire"
         required
       />
-    </div>
+    </section>
   );
 };
 

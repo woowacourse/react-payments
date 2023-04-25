@@ -15,11 +15,11 @@ const CardListPage = () => {
   };
 
   return (
-    <div className="add-card-page">
+    <div className="card-list-page">
       <Header>
-        <h3 className="add-card-page-header-title">보유카드</h3>
+        <h3 className="card-list-page-header-title">보유카드</h3>
       </Header>
-      <div className="add-card-page-body">
+      <div className="card-list-page-body">
         {cardList.length === 0 ? (
           <span className="empty-card-list-title">새로운 카드를 등록해주세요.</span>
         ) : (

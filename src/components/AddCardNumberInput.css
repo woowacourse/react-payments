@@ -1,0 +1,19 @@
+.card-number-input-container {
+  width: 318px;
+  margin-top: 20px;
+}
+
+/* 글자를 알맞게 정렬하는 방법이 뭐가 있을까? */
+.card-number-input-container .sperator {
+  height: 47px;
+  line-height: 250%;
+}
+
+.card-number-input {
+  display: flex;
+  background-color: #ecebf1;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+  font-size: 18px;
+}

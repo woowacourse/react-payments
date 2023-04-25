@@ -4,7 +4,7 @@
   width: 208px;
   padding: 49px 0;
   border: none;
-  font-family: 'Roboto';
+  font-family: 'Roboto', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 30px;
@@ -20,7 +20,7 @@
   cursor: pointer;
 }
 
-.add-card-page-body {
+.card-list-page-body {
   display: flex;
   overflow-y: scroll;
   flex-direction: column;
@@ -35,6 +35,6 @@
   color: #575757;
 }
 
-.add-card-page-header-title {
+.card-list-page-header-title {
   margin-left: 36px;
 }

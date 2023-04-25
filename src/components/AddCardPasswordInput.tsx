@@ -1,9 +1,10 @@
 import type { AddCardPasswordInputProps } from '../type';
 import passwordDotImg from '../asset/password_dot.png';
+import './AddCardPasswordInput.css';
 
 const AddCardPasswordInput = ({ cardPassword1, cardPassword2 }: AddCardPasswordInputProps) => {
   return (
-    <div className="card-password-container">
+    <section className="card-password-container">
       <span className="form-label">카드 비밀번호</span>
       <div className="card-password-input-box">
         <input
@@ -27,7 +28,7 @@ const AddCardPasswordInput = ({ cardPassword1, cardPassword2 }: AddCardPasswordI
         <img src={passwordDotImg} alt="비밀번호" />
         <img src={passwordDotImg} alt="비밀번호" />
       </div>
-    </div>
+    </section>
   );
 };
 
