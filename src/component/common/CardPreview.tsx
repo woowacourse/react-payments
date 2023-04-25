@@ -8,10 +8,14 @@ interface Props {
 export default function CardPreview(props: Props) {
   const { card } = props;
 
-  const previewNumber =
-    card.cardNumber.length === 0
-      ? " "
-      : `${card.cardNumber[0]} **** **** ${card.cardNumber[3]}`;
+  const previewNumber = card.cardNumber.map((number, index) => {
+    return 1000 > number && number > 9999
+      ? "   "
+      : index === 1 || index === 2
+      ? " **** "
+      : ` ${number} `;
+  });
+
   return (
     <div className={styles.container}>
       <div className={styles.chip}></div>
