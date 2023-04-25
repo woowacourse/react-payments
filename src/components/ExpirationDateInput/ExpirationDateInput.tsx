@@ -9,16 +9,18 @@ type ExpirationDateInputProps = {
 
 const ExpirationDateInput = ({ updateExpirationDate }: ExpirationDateInputProps) => {
   const [expirationDate, setExpirationDate] = useState('');
+  const [error, setError] = useState('');
 
   const addSlashInExpirationDate = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (NUMBER_REGEX.test(e.target.value)) return alert('숫자만 입력이 가능합니다!');
-
     const expirationDate = e.target.value;
     const slashRemovedExpirationDate = expirationDate.replaceAll('/', '');
+    if (NUMBER_REGEX.test(slashRemovedExpirationDate)) {
+      setError('0부터 9까지 숫자만 입력이 가능합니다.');
+    }
     const expirationDateWithSlash = (slashRemovedExpirationDate.match(/.{1,2}/g) || []).join('/');
-
     setExpirationDate(expirationDateWithSlash);
     updateExpirationDate(expirationDateWithSlash);
+    setError('');
   };
 
   return (
@@ -30,6 +32,7 @@ const ExpirationDateInput = ({ updateExpirationDate }: ExpirationDateInputProps)
         maxLength={5}
         name="expirationDate"
       />
+      {error && <span>{error}</span>}
     </CardInfoInput>
   );
 };
