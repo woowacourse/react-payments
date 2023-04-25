@@ -41,6 +41,7 @@ const CardRegisterButton = styled(Link)`
   background-color: #e5e5e5;
   border: none;
   border-radius: 5px;
+  text-decoration: none;
 
   display: flex;
   align-items: center;
