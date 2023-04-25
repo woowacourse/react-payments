@@ -1,4 +1,7 @@
 export const isNumeric = (value: string) => {
+  if (value === "") {
+    return true;
+  }
   return /^\d+$/.test(value);
 };
 

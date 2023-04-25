@@ -32,7 +32,7 @@ export const PasswordInput = ({
 
       setPassword((prev) => {
         const newPassword = [...prev];
-        newPassword[index] = value || "";
+        newPassword[index] = value;
         return newPassword;
       });
     };
