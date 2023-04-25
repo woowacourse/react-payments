@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
-interface InputSectionTemplateType {
+type InputSectionTemplateType = PropsWithChildren<{
   label: string;
   isCountLength?: boolean;
   children: React.ReactNode;
   inputValues?: string;
   maxLength?: number;
-}
+}>;
 
 const InputSectionTemplate = ({
   label,
