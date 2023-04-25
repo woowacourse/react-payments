@@ -44,33 +44,25 @@ body {
   background-color: whitesmoke;
 }
 
+#root {
+  display: flex;
+  justify-content: center;
+}
+
 .app {
   position: relative;
-  left: 50%;
   width: 375px;
-  min-height: 100%;
-  height: 812px;
   margin: 24px 0;
-  padding: 24px 20px;
   border-radius: 10px;
-
   background-color: var(--white);
-  transform: translateX(-50%);
 }
 
 main {
   position: relative;
-  top: 43px;
-  left: -3px;
-  width: calc(100% + 6px);
-  height: calc(100% - 43px);
-  padding: 0 3px;
-  overflow-y: scroll;
-  scrollbar-width: none;
-}
-
-main::-webkit-scrollbar {
-  display: none;
+  padding: 0 20px;
+  padding-top: 72px;
+  padding-bottom: 24px;
+  overflow-y: auto;
 }
 
 a {
