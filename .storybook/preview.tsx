@@ -26,6 +26,15 @@ const preview: Preview = {
       viewports: { ...customViewports },
       defaultViewport: 'Default',
     },
+    backgrounds: {
+      default: 'Default',
+      values: [
+        {
+          name: 'Default',
+          value: '#ffffff',
+        },
+      ],
+    },
   },
 };
 
