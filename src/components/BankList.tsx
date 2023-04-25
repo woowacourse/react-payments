@@ -8,24 +8,23 @@ const BankList = () => {
 
   return (
     <BottomSheet>
-      <BottomSheetContainer>
+      <BankContainer>
         {bankNames.map((bankName) => {
           return <BankItem key={bankName} bankName={bankName} />;
         })}
-      </BottomSheetContainer>
+      </BankContainer>
     </BottomSheet>
   );
 };
 
-const BottomSheetContainer = styled.div`
-  position: fixed;
-  bottom: 0;
-  width: 406px;
-  height: 227px;
-  padding: 32px 16px;
-  border: none;
-  border-radius: 8px 8px 0px 0px;
-  background: var(--white-color);
+const BankContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-row-gap: 2rem;
+
+  width: 320px;
+  margin: auto;
 `;
 
 export default BankList;

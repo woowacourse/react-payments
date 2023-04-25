@@ -9,7 +9,7 @@ const BottomSheet = ({ children }: BottomSheetProps) => {
   return ReactDOM.createPortal(
     <>
       <BottomSheetBackdrop />
-      {children}
+      <BottomSheetContainer>{children}</BottomSheetContainer>
     </>,
     document.querySelector('#root') as HTMLElement
   );
@@ -22,6 +22,17 @@ const BottomSheetBackdrop = styled.div`
   width: 100%;
   height: 100%;
   background: var(--backdrop-color);
+`;
+
+const BottomSheetContainer = styled.div`
+  position: fixed;
+  bottom: 0;
+  width: 406px;
+  height: 180px;
+  padding: 42px 16px;
+  border: none;
+  border-radius: 8px 8px 0px 0px;
+  background: var(--white-color);
 `;
 
 export default BottomSheet;
