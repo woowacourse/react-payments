@@ -4,11 +4,10 @@ import { isAlphabetic } from "../../validator/Validator";
 
 type CardOwnerNameInputProp = {
   ownerName: string;
-  nameLength: number;
   onChange: (name: string) => void;
 };
 
-const CardOwnerNameInput = ({ ownerName, nameLength, onChange }: CardOwnerNameInputProp) => {
+const CardOwnerNameInput = ({ ownerName, onChange }: CardOwnerNameInputProp) => {
   const handleOwnerName = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.value;
 
@@ -21,7 +20,7 @@ const CardOwnerNameInput = ({ ownerName, nameLength, onChange }: CardOwnerNameIn
     <Label>
       <Div>
         <span>카드 소유자 이름(선택)</span>
-        <span>{nameLength} / 30</span>
+        <span>{ownerName.length} / 30</span>
       </Div>
       <InputContainer width="318px">
         <Input
