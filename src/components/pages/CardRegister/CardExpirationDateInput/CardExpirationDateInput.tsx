@@ -1,28 +1,12 @@
 import React from 'react';
-import { useCardRegisterContext } from '../../../../context/CardRegisterContext';
 import { useCardExpirationDate } from '../../../../hooks/card/card';
-import { ExpirationDate } from '../../../../types/card.type';
 import Flex from '../../../@common/Flex/Flex';
 import Input from '../../../@common/Input/Input';
 import { StyledCardRegister } from '../@common/CardRegister.styles';
 import * as Styled from './CardExpirationDateInput.styles';
 
 export default function CardExpirationDateInput() {
-  const {
-    cardRegisterInfo: { expirationDate },
-    handleCardInfo,
-  } = useCardRegisterContext();
-  const { monthConditions, yearConditions } = useCardExpirationDate();
-
-  const onChangeValue: <T extends keyof ExpirationDate>(key: T, value: ExpirationDate[T]) => void = (
-    key,
-    value
-  ) => {
-    handleCardInfo('expirationDate', {
-      ...expirationDate,
-      [key]: value,
-    });
-  };
+  const { expirationDate, monthConditions, yearConditions, onChangeByKey } = useCardExpirationDate();
 
   return (
     <StyledCardRegister.FieldSet>
@@ -31,11 +15,8 @@ export default function CardExpirationDateInput() {
         <Styled.InputBackground>
           <Input>
             <Input.Field
-              name="month"
               value={expirationDate['month']}
-              onChange={({ target: { value } }) => {
-                onChangeValue('month', value);
-              }}
+              onChange={onChangeByKey('month')}
               {...monthConditions}
             >
               <Styled.Input />
@@ -43,12 +24,7 @@ export default function CardExpirationDateInput() {
           </Input>
           <Styled.Divider>/</Styled.Divider>
           <Input>
-            <Input.Field
-              name="year"
-              value={expirationDate['year']}
-              onChange={({ target: { value } }) => onChangeValue('year', value)}
-              {...yearConditions}
-            >
+            <Input.Field value={expirationDate['year']} onChange={onChangeByKey('year')} {...yearConditions}>
               <Styled.Input />
             </Input.Field>
           </Input>

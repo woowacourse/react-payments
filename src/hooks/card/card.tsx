@@ -10,7 +10,7 @@ import React, {
 } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useCardRegisterContext } from '../../context/CardRegisterContext';
-import { CardNumber, CardRegisterInfo } from '../../types/card.type';
+import { CardNumber, CardRegisterInfo, ExpirationDate } from '../../types/card.type';
 import { isPatternMatch, isValidateKey } from '../../utils/input';
 import { getCardList, setCardList } from '../../utils/localStorage';
 import { isNumber } from '../../utils/validation';
@@ -98,7 +98,7 @@ export function useCardNumber() {
 
   const onChangeByKey =
     (key: keyof CardNumber) =>
-    ({ target: { value, name } }: ChangeEvent<HTMLInputElement>) => {
+    ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
       if (value && !isNumber(value)) return;
 
       updateCardNumber(key, value);
@@ -118,23 +118,39 @@ export function useCardNumber() {
 }
 
 export function useCardExpirationDate() {
-  const onKeyDown = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
-    if (isValidateKey(e, '[0-9]')) return;
+  const {
+    cardRegisterInfo: { expirationDate },
+    handleCardInfo,
+  } = useCardRegisterContext();
 
-    e.preventDefault();
-  }, []);
+  const updateExpirationDate: <T extends keyof ExpirationDate>(key: T, value: ExpirationDate[T]) => void = (
+    key,
+    value
+  ) => {
+    handleCardInfo('expirationDate', {
+      ...expirationDate,
+      [key]: value,
+    });
+  };
+
+  const onChangeByKey =
+    (key: keyof ExpirationDate) =>
+    ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
+      if (value && !isNumber(value)) return;
+
+      updateExpirationDate(key, value);
+    };
 
   const defaultConditions = {
     maxLength: 2,
     asChild: true,
     required: true,
-    onKeyDown,
   };
 
   const monthConditions = useMemo(
     () => ({
       ...defaultConditions,
-      pattern: '^(0[1-9]|1[0-2])$',
+      pattern: '/^(0[1-9]|1[0-2])$/',
       placeholder: 'MM',
     }),
     []
@@ -148,7 +164,7 @@ export function useCardExpirationDate() {
     }),
     []
   );
-  return { monthConditions, yearConditions };
+  return { expirationDate, monthConditions, yearConditions, onChangeByKey };
 }
 
 export function useCardName() {
