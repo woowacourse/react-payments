@@ -30,7 +30,7 @@ const CardRegisterForm = () => {
 
   const [password, setPassword] = useState({ password1: "", password2: "" });
 
-  const cardPreviewInfo = { ...cardNumber, ...date, name };
+  const PreviewCardInfo = { ...cardNumber, ...date, name };
   const requiredCardInfo = { ...cardNumber, ...date, code, ...password };
 
   const { isFormFilled } = useFormState(requiredCardInfo);
@@ -40,7 +40,7 @@ const CardRegisterForm = () => {
     <S.Wrapper>
       <Header navigator title="카드 추가" />
 
-      <CardPreview cardInfo={cardPreviewInfo} />
+      <CardPreview cardInfo={PreviewCardInfo} />
 
       <form onSubmit={handleFormData}>
         <CardNumberInput
