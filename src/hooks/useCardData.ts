@@ -11,19 +11,21 @@ export interface Card {
   password: string[];
 }
 
-export const cardDataService = {
-  getCardList(): Card[] {
+export const useCardData = () => {
+  const getCardList = (): Card[] => {
     const rawCardList = localStorage.getItem(LOCAL_STORAGE_KEY.CARD_LIST);
 
     return JSON.parse(rawCardList ?? '[]');
-  },
+  };
 
-  addNewCard(card: Card) {
-    const storedCardList = this.getCardList();
+  const addNewCard = (card: Card) => {
+    const storedCardList = getCardList();
 
     localStorage.setItem(
       LOCAL_STORAGE_KEY.CARD_LIST,
       JSON.stringify([card, ...storedCardList])
     );
-  },
+  };
+
+  return { getCardList, addNewCard };
 };

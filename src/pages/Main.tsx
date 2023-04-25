@@ -1,13 +1,16 @@
 import styled from 'styled-components';
 import { CardViewer } from '../components/cardViewer';
-import { cardDataService } from '../domains/cardDataService';
 import { Layout } from '../layout';
 import { v4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
+import { useCardData } from '../hooks/useCardData';
 
 export const Main = () => {
   const navigate = useNavigate();
-  const cardList = cardDataService.getCardList();
+
+  const { getCardList, addNewCard } = useCardData();
+
+  const cardList = getCardList();
 
   return (
     <Layout>

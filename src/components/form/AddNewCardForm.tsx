@@ -6,12 +6,14 @@ import { OwnerNameInput } from '../input/OwnerNameInput';
 import { SecurityCodeInput } from '../input/SecurityCodeInput';
 import { PasswordInput } from '../input/PasswordInput';
 import { CardViewer } from '../cardViewer';
-import { cardDataService } from '../../domains/cardDataService';
 import { useNavigate } from 'react-router-dom';
 import { useFocus } from '../../hooks/useFocus';
+import { useCardData } from '../../hooks/useCardData';
 
 export const AddNewCardForm = () => {
   const navigate = useNavigate();
+
+  const { getCardList, addNewCard } = useCardData();
 
   const [inputOrder, setInputOrder] = useState(0);
 
@@ -71,7 +73,7 @@ export const AddNewCardForm = () => {
       onSubmit={(e) => {
         e.preventDefault();
 
-        cardDataService.addNewCard({
+        addNewCard({
           cardNumber,
           expirationDate,
           ownerName,
