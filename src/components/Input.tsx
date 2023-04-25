@@ -30,16 +30,16 @@ export const Input = forwardRef<Ref, InputProps>(
 
 const S = {
   Input: styled.input<InputProps>`
-    display: ${({ display }) => display ?? "initial"};
+    display: ${({ display }) => display || "initial"};
     background: var(--input-background);
-    width: ${({ width }) => width ?? "32%"};
+    width: ${({ width }) => width || "32%"};
     height: 48px;
-    margin: ${({ margin }) => margin ?? "0 4%"};
-    padding: ${({ padding }) => padding ?? "0"};
+    margin: ${({ margin }) => margin || "0 4%"};
+    padding: ${({ padding }) => padding || "0"};
     font-size: 14px;
     text-align: center;
     letter-spacing: 1px;
-    border-radius: ${({ borderRadius }) => borderRadius ?? "0"};
+    border-radius: ${({ borderRadius }) => borderRadius || "0"};
   `,
 };
 

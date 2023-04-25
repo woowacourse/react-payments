@@ -1,12 +1,13 @@
 import { useFocus } from "hooks/useFocus";
 import { ChangeEvent, Dispatch, SetStateAction, Fragment } from "react";
-import styled from "styled-components";
 import { changeToValidValue } from "utils/inputValidator";
-import { HIDDEN_ELEMENT_STYLE } from "constants/style";
+import styled from "styled-components";
 import Input from "components/Input";
+import { Slash } from "components/DelimiterStyle";
+import { DateCaption } from "components/CaptionStyle";
 import { isInvalidDate } from "validation";
-import { DATE_INPUT, LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
 import { ExpirationDate } from "types";
+import { DATE_INPUT, LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
 const { ONLY_NUMBER } = VALID_INPUT;
 
 interface Props {
@@ -57,14 +58,14 @@ const ExpirationDateInput = ({ date, setDate }: Props) => {
             {index === DATE_INPUT.LAST_PART ? (
               ""
             ) : (
-              <S.Delimiter month={date.month}>/</S.Delimiter>
+              <Slash month={date.month}>/</Slash>
             )}
           </Fragment>
         ))}
       </S.InputBox>
-      <S.Caption date={Object.values(date)}>
+      <DateCaption date={Object.values(date)}>
         카드에 표기된 월/연도 순으로 입력해주세요. ex&#41; 01/28
-      </S.Caption>
+      </DateCaption>
     </>
   );
 };
@@ -78,23 +79,6 @@ const S = {
     margin-top: 12px;
     background: var(--input-background);
     border-radius: 8px;
-  `,
-
-  Delimiter: styled.p<{ month: string }>`
-    font-weight: 900;
-    align-self: center;
-    visibility: ${({ month }) =>
-      month.length !== LIMIT_LENGTH.EXPIRATION_DATE &&
-      `${HIDDEN_ELEMENT_STYLE}`};
-  `,
-
-  Caption: styled.p<{ date: string[] }>`
-    color: var(--caption-color);
-    font-size: 12px;
-    margin: 8px 0 16px 4px;
-    visibility: ${({ date }) =>
-      date.join("").length === LIMIT_LENGTH.ALL_EXPIRATION_DATE &&
-      `${HIDDEN_ELEMENT_STYLE}`};
   `,
 };
 

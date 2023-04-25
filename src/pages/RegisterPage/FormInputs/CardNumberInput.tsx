@@ -1,11 +1,12 @@
 import { useFocus } from "hooks/useFocus";
 import { ChangeEvent, Dispatch, SetStateAction, Fragment } from "react";
-import styled from "styled-components";
 import { changeToValidValue } from "utils/inputValidator";
-import { HIDDEN_ELEMENT_STYLE } from "constants/style";
-import { NUMBER_INPUT, LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
+import styled from "styled-components";
 import Input from "components/Input";
+import { Hyphen } from "components/DelimiterStyle";
 import { CardNumber } from "types";
+import { NUMBER_INPUT, LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
+import { CardNumberCaption } from "components/CaptionStyle";
 const { ONLY_NUMBER } = VALID_INPUT;
 
 interface Props {
@@ -55,16 +56,14 @@ const CardNumberInput = ({ cardNumber, setCardNumber }: Props) => {
             {index === NUMBER_INPUT.LAST_PART ? (
               ""
             ) : (
-              <S.Delimiter cardNumber={cardNumber[`number${index + 1}`]}>
-                -
-              </S.Delimiter>
+              <Hyphen cardNumber={cardNumber[`number${index + 1}`]}>-</Hyphen>
             )}
           </Fragment>
         ))}
       </S.InputBox>
-      <S.Caption cardNumbers={Object.values(cardNumber)}>
+      <CardNumberCaption cardNumbers={Object.values(cardNumber)}>
         숫자 {LIMIT_LENGTH.ALL_CARD_NUMBERS}자리를 모두 입력해 주세요.
-      </S.Caption>
+      </CardNumberCaption>
     </>
   );
 };
@@ -81,23 +80,6 @@ const S = {
     margin-top: 12px;
     background: var(--input-background);
     border-radius: 8px;
-  `,
-
-  Delimiter: styled.p<{ cardNumber: string }>`
-    font-weight: 900;
-    align-self: center;
-    visibility: ${({ cardNumber }) =>
-      cardNumber.length !== LIMIT_LENGTH.CARD_NUMBER &&
-      `${HIDDEN_ELEMENT_STYLE}`};
-  `,
-
-  Caption: styled.p<{ cardNumbers: string[] }>`
-    color: var(--caption-color);
-    font-size: 12px;
-    margin: 8px 0 16px 4px;
-    visibility: ${({ cardNumbers }) =>
-      cardNumbers.join("").length === LIMIT_LENGTH.ALL_CARD_NUMBERS &&
-      `${HIDDEN_ELEMENT_STYLE}`};
   `,
 };
 

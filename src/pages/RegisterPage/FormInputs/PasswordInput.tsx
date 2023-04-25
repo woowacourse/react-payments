@@ -2,14 +2,14 @@ import { useFocus } from "hooks/useFocus";
 import { ChangeEvent, useState, Fragment } from "react";
 import styled from "styled-components";
 import { changeToValidValue } from "utils/inputValidator";
-import { HIDDEN_ELEMENT_STYLE } from "constants/style";
+import Input from "components/Input";
+import { PasswordCaption } from "components/CaptionStyle";
 import {
   NUMBER_INPUT,
   LIMIT_LENGTH,
   PASSWORD_PART,
   VALID_INPUT,
 } from "constants/limit";
-import Input from "components/Input";
 const { ONLY_NUMBER } = VALID_INPUT;
 
 interface Password {
@@ -71,9 +71,9 @@ const PasswordInput = () => {
           </Fragment>
         ))}
       </S.InputBox>
-      <S.Caption password={Object.values(password)}>
+      <PasswordCaption password={Object.values(password)}>
         카드 비밀번호 앞 {LIMIT_LENGTH.PASSWORD}자리를 입력해 주세요.
-      </S.Caption>
+      </PasswordCaption>
     </>
   );
 };
@@ -92,14 +92,6 @@ const S = {
     text-align: center;
     line-height: 48px;
     border-radius: 8px;
-  `,
-
-  Caption: styled.p<{ password: string[] }>`
-    color: var(--caption-color);
-    font-size: 12px;
-    margin: 8px 0 16px 4px;
-    visibility: ${({ password }) =>
-      password.join("").length === 2 && `${HIDDEN_ELEMENT_STYLE}`};
   `,
 };
 
