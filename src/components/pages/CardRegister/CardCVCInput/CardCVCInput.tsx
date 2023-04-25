@@ -20,24 +20,26 @@ export default function CardCVCInput() {
   };
 
   return (
-    <Input>
-      <Input.Label asChild>
-        <StyledCardRegister.Label>보안코드(CVC/CVV)</StyledCardRegister.Label>
-      </Input.Label>
-      <Flex align="center">
-        <Styled.InputBackground>
-          <Input.Field
-            name="cvc"
-            id="cvc"
-            value={cvc}
-            onChange={({ target: { value } }) => onChangeValue(value)}
-            {...defaultConditions}
-          >
-            <Styled.Input />
-          </Input.Field>
-        </Styled.InputBackground>
-        <Styled.Info type="button">?</Styled.Info>
-      </Flex>
-    </Input>
+    <Flex dir="column">
+      <Input>
+        <Input.Label asChild>
+          <StyledCardRegister.Label>보안코드(CVC/CVV)</StyledCardRegister.Label>
+        </Input.Label>
+        <Flex align="center">
+          <Styled.InputBackground>
+            <Input.Field
+              name="cvc"
+              id="cvc"
+              value={cvc}
+              onChange={({ target: { value } }) => onChangeValue(value)}
+              {...defaultConditions}
+            >
+              <Styled.Input />
+            </Input.Field>
+          </Styled.InputBackground>
+          <Styled.Info type="button">?</Styled.Info>
+        </Flex>
+      </Input>
+    </Flex>
   );
 }

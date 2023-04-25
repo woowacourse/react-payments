@@ -25,7 +25,7 @@ export default function CardPasswordInput() {
   return (
     <Styled.FieldSet>
       <StyledCardRegister.Legend>카드 비밀번호</StyledCardRegister.Legend>
-      <Flex>
+      <Styled.InputBackground>
         <Input>
           <Input.Field
             name="passwordFirstDigit"
@@ -50,7 +50,7 @@ export default function CardPasswordInput() {
         </Input>
         <Styled.Input type="password" value="0" disabled />
         <Styled.Input type="password" value="0" disabled />
-      </Flex>
+      </Styled.InputBackground>
     </Styled.FieldSet>
   );
 }

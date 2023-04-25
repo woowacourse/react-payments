@@ -23,7 +23,7 @@ export default function CardNumberInput() {
 
   return (
     <StyledCardRegister.FieldSet>
-      <Flex dir="column" justify="start" width="100%">
+      <Flex dir="column" justify="start">
         <StyledCardRegister.Legend>카드 번호</StyledCardRegister.Legend>
         <StyledCardRegister.InputBackground>
           <Input>
