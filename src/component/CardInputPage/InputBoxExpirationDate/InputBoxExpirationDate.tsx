@@ -13,15 +13,10 @@ interface Props {
     key: "isComplete" | "userInput",
     value: any
   ) => void;
-  changeNowCardInfo: (
-    key: keyof CreditCard,
-    value: any,
-    index?: number
-  ) => void;
 }
 
 export default function InputBoxExpirationDate(props: Props) {
-  const { changeCardExpirationDateStatus, changeNowCardInfo } = props;
+  const { changeCardExpirationDateStatus } = props;
 
   const [isError, setIsError] = useState(false);
   const [expirationDate, setExpirationDate] = useState("");
@@ -39,7 +34,6 @@ export default function InputBoxExpirationDate(props: Props) {
       setIsError(false);
       changeCardExpirationDateStatus("isComplete", true);
       changeCardExpirationDateStatus("userInput", appropriateExpirationDate);
-      changeNowCardInfo("expirationDate", appropriateExpirationDate);
     } else {
       setIsError(false);
       changeCardExpirationDateStatus("isComplete", false);

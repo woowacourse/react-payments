@@ -131,16 +131,11 @@ export default function CardInputForm(props: Props) {
       <CardPreview card={nowCardInfo} />
       <InputBoxCardNumber
         changeCardNumberStatus={changeInputStatus("cardNumber")}
-        changeNowCardInfo={changeNowCardInfo}
       />
       <InputBoxExpirationDate
         changeCardExpirationDateStatus={changeInputStatus("expirationDate")}
-        changeNowCardInfo={changeNowCardInfo}
       />
-      <InputBoxOwner
-        changeCardOwnerStatus={changeInputStatus("owner")}
-        changeNowCardInfo={changeNowCardInfo}
-      />
+      <InputBoxOwner changeCardOwnerStatus={changeInputStatus("owner")} />
       <InputBoxSecurityCode
         changeSecurityCodeStatus={changeInputStatus("securityCode")}
       />

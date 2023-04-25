@@ -7,15 +7,10 @@ import { CreditCard } from "../../../type";
 
 interface Props {
   changeCardNumberStatus: (key: "isComplete" | "userInput", value: any) => void;
-  changeNowCardInfo: (
-    key: keyof CreditCard,
-    value: any,
-    index?: number
-  ) => void;
 }
 
 export default function InputBoxCardNumber(props: Props) {
-  const { changeCardNumberStatus, changeNowCardInfo } = props;
+  const { changeCardNumberStatus } = props;
 
   const [hasError, setHasError] = useState<boolean>(false);
 
@@ -25,7 +20,6 @@ export default function InputBoxCardNumber(props: Props) {
       <CardNumber
         setHasError={setHasError}
         changeCardNumberStatus={changeCardNumberStatus}
-        changeNowCardInfo={changeNowCardInfo}
       />
       <p className={hasError ? "visible" : ""}>
         {CARD_ERROR_MESSAGE.INPUT_CARD_NUMBER}

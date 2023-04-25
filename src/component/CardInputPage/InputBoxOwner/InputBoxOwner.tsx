@@ -8,15 +8,10 @@ import { makeAppropriateName } from "../../../trans";
 
 interface Props {
   changeCardOwnerStatus: (key: "isComplete" | "userInput", value: any) => void;
-  changeNowCardInfo: (
-    key: keyof CreditCard,
-    value: any,
-    index?: number
-  ) => void;
 }
 
 export default function InputBoxOwner(props: Props) {
-  const { changeCardOwnerStatus, changeNowCardInfo } = props;
+  const { changeCardOwnerStatus } = props;
 
   const [isError, setIsError] = useState(false);
   const [name, setName] = useState("");
@@ -33,7 +28,6 @@ export default function InputBoxOwner(props: Props) {
       changeCardOwnerStatus("isComplete", true);
     }
 
-    changeNowCardInfo("owner", appropriateName);
     changeCardOwnerStatus("userInput", appropriateName);
     setName(appropriateName);
   };
