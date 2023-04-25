@@ -21,7 +21,7 @@ function App() {
       <Layout>
         <Routes>
           <Route index path={PAGE.CARD_LIST} element={<CardListPage cards={cards} />} />
-          <Route path={PAGE.ADD_CARD} element={<AddCardPage onSubmit={addCard} />} />
+          <Route path={PAGE.ADD_CARD} element={<AddCardPage addCard={addCard} />} />
         </Routes>
       </Layout>
     </>

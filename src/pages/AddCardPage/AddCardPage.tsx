@@ -23,10 +23,10 @@ import {
 import { PAGE } from "../../constant";
 
 type AddCardPageProps = {
-  onSubmit: (card: Card) => void;
+  addCard: (card: Card) => void;
 };
 
-const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
+const AddCardPage = ({ addCard }: AddCardPageProps) => {
   const [cardNumber, setCardNumber] = useState<CardNumber>({
     firstGroup: "",
     secondGroup: "",
@@ -126,7 +126,7 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
     setPassword({ ...password, [name]: value });
   };
 
-  const addCard = (e: React.FormEvent) => {
+  const onSubmitHandler = (e: React.FormEvent) => {
     e.preventDefault();
 
     const card: Card = {
@@ -137,7 +137,7 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
       password,
     };
 
-    onSubmit(card);
+    addCard(card);
     navigate(PAGE.CARD_LIST);
   };
 
@@ -157,7 +157,7 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
     <Container>
       <AppBar title={"카드 추가"} children={<Link to={PAGE.CARD_LIST}>〈</Link>} />
       <CardPreview card={{ cardNumber, expirationDate, ownerName }} />
-      <Form onSubmit={addCard}>
+      <Form onSubmit={onSubmitHandler}>
         <CardNumberInput
           cardNumber={cardNumber}
           error={error.cardNumberError}
