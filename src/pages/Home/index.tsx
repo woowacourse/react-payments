@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import CreditCard from '@Components/CreditCard';
 
-import localStorageHelper from '@Utils/localStorageHelper';
+import creditCardStorage from '@Domains/creditCardStorage';
 
 import * as S from './style';
 
@@ -13,7 +13,7 @@ function Home() {
   const [creditCardList, setCreditCardList] = useState<Type.CreditCard[]>([]);
 
   useEffect(() => {
-    setCreditCardList(localStorageHelper.getValue('creditCard', []));
+    setCreditCardList(creditCardStorage.getCreditCard());
   }, []);
 
   return (

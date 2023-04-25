@@ -5,10 +5,9 @@ import { useNavigate } from 'react-router-dom';
 import CreditCard from '@Components/CreditCard';
 
 import creditCard from '@Domains/creditCard';
+import creditCardStorage from '@Domains/creditCardStorage';
 
 import useInput from '@Hooks/useInput';
-
-import localStorageHelper from '@Utils/localStorageHelper';
 
 import CreditCardCVCInput from './components/CreditCardCVCInput';
 import CreditCardExpiryInput from './components/CreditCardExpiryInput';
@@ -48,9 +47,7 @@ function CreditCardRegister() {
       },
     };
 
-    const existCreditCard = localStorageHelper.getValue('creditCard', []);
-    localStorageHelper.setValue('creditCard', [...existCreditCard, newCreditCard]);
-
+    creditCardStorage.saveCreditCard(newCreditCard);
     navigate('/');
   };
 
@@ -121,12 +118,7 @@ function CreditCardRegister() {
           setCreditCardPassword={setCreditCardPassword}
         />
         <S.ButtonWrapper>
-          <S.RegisterButton
-            isFullFilled={isFullFilled}
-            disabled={!isFullFilled}
-            type="button"
-            onClick={() => handleSubmit()}
-          >
+          <S.RegisterButton disabled={!isFullFilled} type="button" onClick={() => handleSubmit()}>
             확인
           </S.RegisterButton>
         </S.ButtonWrapper>
