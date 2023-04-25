@@ -9,7 +9,8 @@ export const Wrapper = styled.div`
   margin-bottom: 20px;
 `;
 
-export const QuestionButton = styled.button`
+export const Tooltip = styled.button`
+  position: relative;
   width: 27px;
   height: 27px;
   margin-left: 12px;
@@ -18,6 +19,16 @@ export const QuestionButton = styled.button`
   border-radius: 50%;
   text-align: center;
   cursor: pointer;
+
+  &:hover:after {
+    content: 'CVC 번호는 카드 뒤 3자리 입니다.';
+    display: block;
+    width: max-content;
+    position: absolute;
+    left: 36px;
+    top: 8px;
+    font-size: 12px;
+  }
 `;
 
 export const InputWrapper = styled.div`

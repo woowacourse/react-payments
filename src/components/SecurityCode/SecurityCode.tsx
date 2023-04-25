@@ -35,9 +35,9 @@ const SecurityCode = ({
             required={true}
           />
         </Styled.Wrapper>
-        <Styled.QuestionButton type="button" tabIndex={-1}>
+        <Styled.Tooltip type="button" tabIndex={-1}>
           ?
-        </Styled.QuestionButton>
+        </Styled.Tooltip>
       </Styled.InputWrapper>
     </>
   );
