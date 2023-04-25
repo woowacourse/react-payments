@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import styled from 'styled-components';
-import CardInput from '../CardInput/CardInput';
-import CardLabel from '../CardLabel/CardLabel';
+import CardInput from '../@common/CardInput';
+import CardLabel from '../@common/CardLabel';
 
 const Wrapper = styled.div`
   display: flex;

@@ -1,6 +1,6 @@
 import { useRef } from 'react';
-import CardInput from '../CardInput/CardInput';
-import CardLabel from '../CardLabel/CardLabel';
+import CardInput from '../@common/CardInput';
+import CardLabel from '../@common/CardLabel';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
