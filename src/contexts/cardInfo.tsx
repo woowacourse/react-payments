@@ -1,4 +1,4 @@
-import React, { createContext } from "react";
+import React, { createContext, useRef } from "react";
 import { useInputDate } from "../hooks/useInputDate";
 import { useInputName } from "../hooks/useInputName";
 import { useInputNumber } from "../hooks/useInputNumber";
@@ -13,7 +13,7 @@ export const NumberContext = createContext({
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => {},
 });
 
-export const DataContext = createContext({
+export const DateContext = createContext({
   month: "",
   year: "",
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => {},
@@ -24,16 +24,23 @@ export const NameContext = createContext({
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => {},
 });
 
+export const RefContext = createContext<any>({});
+
 export function CardInfoProvider({ children }: { children: React.ReactNode }) {
   const numberInfo = useInputNumber();
   const dateInfo = useInputDate();
   const nameInfo = useInputName();
+  const inputRef = useRef<any>({});
 
   return (
-    <NumberContext.Provider value={numberInfo}>
-      <DataContext.Provider value={dateInfo}>
-        <NameContext.Provider value={nameInfo}>{children}</NameContext.Provider>
-      </DataContext.Provider>
-    </NumberContext.Provider>
+    <RefContext.Provider value={inputRef}>
+      <NumberContext.Provider value={numberInfo}>
+        <DateContext.Provider value={dateInfo}>
+          <NameContext.Provider value={nameInfo}>
+            {children}
+          </NameContext.Provider>
+        </DateContext.Provider>
+      </NumberContext.Provider>
+    </RefContext.Provider>
   );
 }
