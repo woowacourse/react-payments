@@ -10,8 +10,9 @@ import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import "./cardInputForm.css";
-import { CreditCard } from "../../../type";
+import { CreditCard, InputStatus } from "../../../type";
 import { deepCopyObject } from "../../../util/deepCopy";
+import { EachUserInputState } from "../../../type";
 
 interface Props {
   addNewCard: (card: CreditCard) => void;
@@ -21,19 +22,22 @@ const initialCard: CreditCard = {
   owner: "",
   expirationDate: "",
   bank: "",
-  number: [],
+  cardNumber: [],
   securityCode: "",
   password: [],
 };
 
-interface EachUserInputState {
-  isComplete: boolean;
-  userInput: string | string[];
-}
-
 const initialEachUserInputState: EachUserInputState = {
   isComplete: false,
   userInput: "",
+};
+
+const initialInputStatus = {
+  cardNumber: initialEachUserInputState,
+  expirationDate: initialEachUserInputState,
+  owner: initialEachUserInputState,
+  securityCode: initialEachUserInputState,
+  password: initialEachUserInputState,
 };
 
 //하나의 inputState에는 {isComplete:true, userInput: value}
@@ -42,50 +46,23 @@ export default function CardInputForm(props: Props) {
 
   const [isFormFilled, setIsFormFilled] = useState(false);
 
-  const [nowCardInfo, setNowCardInfo] = useState<CreditCard>(initialCard);
-
-  const [cardNumberStatus, setCardNumberStatus] = useState<EachUserInputState>(
-    initialEachUserInputState
-  );
-  const [expirationDateStatus, setExpirationDateStatus] =
-    useState<EachUserInputState>(initialEachUserInputState);
-  const [ownerStatus, setOwnerStatus] = useState(initialEachUserInputState);
-  const [securityCodeStatus, setSecurityCodeStatus] = useState(
-    initialEachUserInputState
-  );
-  const [passwordStatus, setPasswordStatus] = useState(
-    initialEachUserInputState
-  );
+  const nowCardInfo = initialCard;
 
   const navigate = useNavigate();
-
   const formElement = useRef<HTMLFormElement>(null);
 
-  function changeCardNumberStatus(key: "isComplete" | "userInput", value: any) {
-    setCardNumberStatus(deepCopyObject(cardNumberStatus, key, value));
-  }
+  //total user Input status
+  const [inputStatus, setInputStatus] =
+    useState<InputStatus>(initialInputStatus);
+  const changeInputStatus = (inputName: keyof InputStatus) => {
+    return (key: keyof EachUserInputState, value: any) => {
+      const updateResult = JSON.parse(JSON.stringify(inputStatus));
+      updateResult[inputName][key] = value;
+      setInputStatus(updateResult);
 
-  function changeCardExpirationDateStatus(
-    key: "isComplete" | "userInput",
-    value: any
-  ) {
-    setExpirationDateStatus(deepCopyObject(expirationDateStatus, key, value));
-  }
-
-  function changeOwnerStatus(key: "isComplete" | "userInput", value: any) {
-    setOwnerStatus(deepCopyObject(ownerStatus, key, value));
-  }
-
-  function changeSecurityCodeStatus(
-    key: "isComplete" | "userInput",
-    value: any
-  ) {
-    setSecurityCodeStatus(deepCopyObject(ownerStatus, key, value));
-  }
-
-  function changePasswordStatus(key: "isComplete" | "userInput", value: any) {
-    setPasswordStatus(deepCopyObject(passwordStatus, key, value));
-  }
+      nowCardInfo[inputName] = value;
+    };
+  };
 
   function submitCardInfo(e: SubmitEvent) {
     e.preventDefault();
@@ -97,7 +74,7 @@ export default function CardInputForm(props: Props) {
     const card: CreditCard = {
       owner: formData.get("card-owner")?.toString() as string,
       expirationDate: formData.get("expiration-date")?.toString() as string,
-      number: [
+      cardNumber: [
         formData.get("card-number-1"),
         formData.get("card-number-2"),
         formData.get("card-number-3"),
@@ -111,34 +88,36 @@ export default function CardInputForm(props: Props) {
     };
 
     addNewCard(card);
-    resetNowCardInfo();
+    // resetNowCardInfo();
     navigate("/CardListPage");
   }
 
-  const resetNowCardInfo = () => {
-    setNowCardInfo(initialCard);
-  };
+  // const resetNowCardInfo = () => {
+  //   setNowCardInfo(initialCard);
+  // };
 
   const changeNowCardInfo = (
     key: keyof CreditCard,
     value: any,
     index?: number
   ) => {
-    if (key === "number" && index !== undefined) {
-      const updateCardInfo = JSON.parse(JSON.stringify(nowCardInfo));
-      updateCardInfo.number[index] = value;
-
-      cardNumberStatus && setNowCardInfo(updateCardInfo);
-      return;
-    }
-
-    if (key === "expirationDate") {
-      setNowCardInfo({ ...nowCardInfo, [key]: value });
-      return;
-    }
-    if (key === "owner") setNowCardInfo({ ...nowCardInfo, [key]: value });
+    console.log("👍");
   };
 
+  //유저 입력값이 달라지면 complete를 확인해서 formFilled 여부 처리
+  useEffect(() => {
+    const { cardNumber, expirationDate, securityCode, password } = inputStatus;
+    if (
+      cardNumber.isComplete &&
+      expirationDate.isComplete &&
+      securityCode.isComplete &&
+      password.isComplete
+    )
+      setIsFormFilled(true);
+    else setIsFormFilled(false);
+  }, [inputStatus]);
+
+  //formFilled 여부에 따라 제출 이벤트 생성/삭제
   useEffect(() => {
     if (!isFormFilled) {
       formElement.current?.removeEventListener("submit", submitCardInfo);
@@ -147,42 +126,85 @@ export default function CardInputForm(props: Props) {
     formElement.current?.addEventListener("submit", submitCardInfo);
   }, [isFormFilled]);
 
-  useEffect(() => {
-    if (
-      cardNumberStatus.isComplete &&
-      expirationDateStatus.isComplete &&
-      securityCodeStatus.isComplete &&
-      passwordStatus.isComplete
-    )
-      setIsFormFilled(true);
-    else setIsFormFilled(false);
-  }, [
-    cardNumberStatus,
-    expirationDateStatus,
-    securityCodeStatus,
-    passwordStatus,
-  ]);
-
   return (
     <form ref={formElement} className="form">
       <CardPreview card={nowCardInfo} />
       <InputBoxCardNumber
-        changeCardNumberStatus={changeCardNumberStatus}
+        changeCardNumberStatus={changeInputStatus("cardNumber")}
         changeNowCardInfo={changeNowCardInfo}
       />
       <InputBoxExpirationDate
-        changeCardExpirationDateStatus={changeCardExpirationDateStatus}
+        changeCardExpirationDateStatus={changeInputStatus("expirationDate")}
         changeNowCardInfo={changeNowCardInfo}
       />
       <InputBoxOwner
-        changeCardOwnerStatus={changeOwnerStatus}
+        changeCardOwnerStatus={changeInputStatus("owner")}
         changeNowCardInfo={changeNowCardInfo}
       />
       <InputBoxSecurityCode
-        changeSecurityCodeStatus={changeSecurityCodeStatus}
+        changeSecurityCodeStatus={changeInputStatus("securityCode")}
       />
-      <InputBoxPassword changePasswordStatus={changePasswordStatus} />
+      <InputBoxPassword changePasswordStatus={changeInputStatus("password")} />
       {isFormFilled && <Button type="submit">다음</Button>}
     </form>
   );
 }
+
+// const changeNowCardInfo = (
+//   key: keyof CreditCard,
+//   value: any,
+//   index?: number
+// ) => {
+//   if (key === "number" && index !== undefined) {
+//     const updateCardInfo = JSON.parse(JSON.stringify(nowCardInfo));
+//     updateCardInfo.number[index] = value;
+
+//     cardNumberStatus && setNowCardInfo(updateCardInfo);
+//     return;
+//   }
+
+//   if (key === "expirationDate") {
+//     setNowCardInfo({ ...nowCardInfo, [key]: value });
+//     return;
+//   }
+//   if (key === "owner") setNowCardInfo({ ...nowCardInfo, [key]: value });
+// };
+
+// const [cardNumberStatus, setCardNumberStatus] = useState<EachUserInputState>(
+//   initialEachUserInputState
+// );
+// const [expirationDateStatus, setExpirationDateStatus] =
+//   useState<EachUserInputState>(initialEachUserInputState);
+// const [ownerStatus, setOwnerStatus] = useState(initialEachUserInputState);
+// const [securityCodeStatus, setSecurityCodeStatus] = useState(
+//   initialEachUserInputState
+// );
+// const [passwordStatus, setPasswordStatus] = useState(
+//   initialEachUserInputState
+// );
+
+// function changeCardNumberStatus(key: "isComplete" | "userInput", value: any) {
+//   setCardNumberStatus(deepCopyObject(cardNumberStatus, key, value));
+// }
+
+// function changeCardExpirationDateStatus(
+//   key: "isComplete" | "userInput",
+//   value: any
+// ) {
+//   setExpirationDateStatus(deepCopyObject(expirationDateStatus, key, value));
+// }
+
+// function changeOwnerStatus(key: "isComplete" | "userInput", value: any) {
+//   setOwnerStatus(deepCopyObject(ownerStatus, key, value));
+// }
+
+// function changeSecurityCodeStatus(
+//   key: "isComplete" | "userInput",
+//   value: any
+// ) {
+//   setSecurityCodeStatus(deepCopyObject(ownerStatus, key, value));
+// }
+
+// function changePasswordStatus(key: "isComplete" | "userInput", value: any) {
+//   setPasswordStatus(deepCopyObject(passwordStatus, key, value));
+// }
