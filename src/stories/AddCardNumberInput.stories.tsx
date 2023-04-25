@@ -4,6 +4,7 @@ import type { CardNumber } from '../type';
 import AddCardNumberInput from '../components/AddCardNumberInput';
 import useComplicateInput from '../hooks/useComplicateInput';
 import { isNumberInput } from '../utils/util';
+import { APP_WIDTH } from './constants';
 
 export default {
   title: 'AddCardNumberInput',
@@ -12,7 +13,7 @@ export default {
     (Story) => (
       <div
         style={{
-          width: '210px',
+          width: APP_WIDTH,
         }}
       >
         <Story />

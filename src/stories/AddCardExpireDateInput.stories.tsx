@@ -4,6 +4,7 @@ import AddCardExpireDateInput from '../components/AddCardExpireDateInput';
 import useInput from '../hooks/useInput';
 import { cardExpireCondition } from '../pages/cardInputCondition';
 import { formatExpireDate } from '../utils/util';
+import { APP_WIDTH } from './constants';
 
 export default {
   title: 'AddCardExpireDateInput',
@@ -12,7 +13,7 @@ export default {
     (Story) => (
       <div
         style={{
-          width: '210px',
+          width: APP_WIDTH,
         }}
       >
         <Story />
