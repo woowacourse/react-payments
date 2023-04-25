@@ -1,31 +1,20 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
-import Card, { CardProps } from './Card';
-import { CardRegisterInfo } from '../../../types/card.type';
+import type { Meta, StoryObj } from '@storybook/react';
+import Card from './Card';
+import { initialCardRegisterInfo } from '../../../context/CardRegisterContext';
 
-export default {
+const meta: Meta<typeof Card> = {
   title: 'Components/Card',
   component: Card,
-} as Meta;
-
-const Template: Story<CardProps> = (args: CardProps) => <Card {...args} />;
-
-export const AddButton = Template.bind({});
-AddButton.args = {
-  type: 'button',
 };
 
-export const CardContent = Template.bind({});
-CardContent.args = {
-  cardNumber: {
-    first: '1234',
-    second: '5678',
-    third: '9012',
-    fourth: '3456',
+export default meta;
+type Story = StoryObj<typeof Card>;
+
+export const CardStory: Story = {
+  args: {
+    type: 'button',
+    onClick() {},
+    ...initialCardRegisterInfo,
   },
-  expirationDate: {
-    month: '8',
-    year: '25',
-  },
-  holderName: 'John Doe',
 };
