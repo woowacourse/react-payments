@@ -3,9 +3,10 @@ import Input from "../../common/Input";
 
 import "./cardPassword.css";
 import { makeAppropriatePassword } from "../../../trans";
+import { nowStatus } from "../../../type";
 
 interface Props {
-  setIsError: React.Dispatch<React.SetStateAction<boolean>>;
+  changeHasError: (partIndex: number, state: nowStatus) => void;
   changePasswordStatus: (
     key: "isComplete" | "userInput",
     value: any,
@@ -14,7 +15,7 @@ interface Props {
 }
 
 export default function CardPassword(props: Props) {
-  const { setIsError, changePasswordStatus } = props;
+  const { changeHasError, changePasswordStatus } = props;
 
   const [passwordStatus, setPasswordStatus] = useState<string[]>([]);
 
@@ -24,12 +25,12 @@ export default function CardPassword(props: Props) {
       const appropriatePassword = makeAppropriatePassword(userPassword);
 
       if (appropriatePassword !== userPassword) {
-        setIsError(true);
-        changePasswordStatus("isComplete", false);
-      } else {
-        setIsError(false);
-        changePasswordStatus("isComplete", true);
+        changeHasError(partIndex, 0);
+      } else if (appropriatePassword.length === 1) {
+        changeHasError(partIndex, 2);
         changePasswordStatus("userInput", passwordStatus, partIndex);
+      } else {
+        changeHasError(partIndex, 1);
       }
 
       const result = [...passwordStatus];
