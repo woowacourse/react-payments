@@ -1,9 +1,4 @@
-import {
-  InputHTMLAttributes,
-  forwardRef,
-  useImperativeHandle,
-  useRef,
-} from 'react';
+import { InputHTMLAttributes, forwardRef } from 'react';
 
 import styles from './input.module.css';
 
@@ -11,32 +6,16 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   align?: 'left' | 'center' | 'right';
 }
 
-export interface Focus {
-  focus: () => void;
-}
-
-const Input = forwardRef<Focus, Props>(({ align = 'left', ...props }, ref) => {
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  useImperativeHandle(
-    ref,
-    () => {
-      return {
-        focus() {
-          inputRef.current?.focus();
-        },
-      };
-    },
-    [],
-  );
-
-  return (
-    <input
-      className={`${styles.input} ${styles[align]}`}
-      {...props}
-      ref={inputRef}
-    />
-  );
-});
+const Input = forwardRef<HTMLInputElement, Props>(
+  ({ align = 'left', ...props }, ref) => {
+    return (
+      <input
+        className={`${styles.input} ${styles[align]}`}
+        {...props}
+        ref={ref}
+      />
+    );
+  },
+);
 
 export default Input;

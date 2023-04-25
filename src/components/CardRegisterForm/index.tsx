@@ -1,14 +1,15 @@
-import { FormEventHandler, useRef } from 'react';
+import { useRef } from 'react';
+import type { FormEventHandler } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Card from '../Card';
-import Input, { Focus } from '../Input';
+import CardRegisterField from '../CardRegisterField';
+import Input from '../Input';
 import useCardRegisterForm from './useCardRegisterForm';
 
 import type { CardInfo } from '../../types/card';
 
 import styles from './cardRegisterForm.module.css';
-import CardRegisterField from '../CardRegisterField';
 
 const today = new Date();
 const currentYear = today.getFullYear() % 100;
@@ -20,7 +21,9 @@ interface Props {
 
 const CardRegisterForm = ({ registerCard }: Props) => {
   const navigate = useNavigate();
-  const inputRefs = Array.from({ length: 10 }).map(() => useRef<Focus>(null));
+  const inputRefs = Array.from({ length: 10 }).map(() =>
+    useRef<HTMLInputElement>(null),
+  );
   const {
     cardNumber1,
     cardNumber2,
