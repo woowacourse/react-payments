@@ -5,6 +5,7 @@ import CardOwnerNameInput from "../../components/CardOwnerNameInput/CardOwnerNam
 import CardExpirationDateInput from "../../components/CardExpirationDateInput/CardExpirationDateInput";
 import CardSecurityCodeInput from "../../components/CardSecurityCodeInput/CardSecurityCodeInput";
 import CardPasswordInput from "../../components/CardPasswordInput/CardPasswordInput";
+import Modal from "../../components/Modal/Modal";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Container } from "../../components/common";
@@ -20,6 +21,7 @@ import {
 } from "../../types";
 import { useNavigate } from "react-router-dom";
 import { isFulfilledObject, isFulfilledString, isValidMonth } from "../../validator/Validator";
+import useModal from "../../hooks/useModal";
 
 type AddCardPageProps = {
   onSubmit: (card: Card) => void;
@@ -45,6 +47,8 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
     first: "",
     second: "",
   });
+
+  const { isModalOpen, modalClose, modalOpen } = useModal();
 
   const navigate = useNavigate();
 
@@ -114,6 +118,7 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
           </Button>
         </ButtonBox>
       </Form>
+      <Modal isOpen={isModalOpen}></Modal>
     </Container>
   );
 };
