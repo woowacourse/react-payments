@@ -146,7 +146,9 @@ export const AddNewCardForm = () => {
         )}
       </Style.InputContainer>
       <Style.ButtonContainer>
-        {isInputFinish && <Style.NextButton>다음</Style.NextButton>}
+        {isInputFinish && (
+          <Style.NextButton type="submit">다음</Style.NextButton>
+        )}
       </Style.ButtonContainer>
     </Style.Wrapper>
   );
