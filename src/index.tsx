@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { App } from './components/App';
-import { CreditCardListPage } from './components/pages/CreditCardListPage';
-import { NewCreditCardPage } from './components/pages/NewCreditCardPage';
+import { CreditCardListPage } from './pages/CreditCardListPage';
+import { NewCreditCardPage } from './pages/NewCreditCardPage';
 
 const router = createBrowserRouter(
   [

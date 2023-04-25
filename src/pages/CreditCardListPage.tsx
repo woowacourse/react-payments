@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { usePayments } from '../../hooks/usePayments';
-import { CreditCardView } from '../CreditCardView';
-import { NewCreditCardButton } from '../NewCreditCardButton';
-import { Page } from '../common/Page';
+import { CreditCardView } from '../components/CreditCardView';
+import { NewCreditCardButton } from '../components/NewCreditCardButton';
+import { Page } from '../components/common/Page';
+import { usePayments } from '../hooks/usePayments';
 
 const Content = styled.main`
   display: flex;

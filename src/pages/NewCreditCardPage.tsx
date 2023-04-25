@@ -1,24 +1,24 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { usePayments } from '../../hooks/usePayments';
-import { useValidation } from '../../hooks/useValidation';
-import type { CreditCard } from '../../types/CreditCard';
+import { CardNumberInput } from '../components/CardNumberInput';
+import { CardPasswordInput } from '../components/CardPasswordInput';
+import { CreditCardView } from '../components/CreditCardView';
+import { ExpirationDateInput } from '../components/ExpirationDateInput';
+import { BackButton } from '../components/common/BackButton';
+import { Input } from '../components/common/Input';
+import { NumberInput } from '../components/common/NumberInput';
+import { Page } from '../components/common/Page';
+import { Text } from '../components/common/Text';
+import { usePayments } from '../hooks/usePayments';
+import { useValidation } from '../hooks/useValidation';
+import type { CreditCard } from '../types/CreditCard';
 import {
   validateCVC,
   validateCardNumbers,
   validateCardPassword,
   validateExpirationDate,
-} from '../../validations/Validation';
-import { CardNumberInput } from '../CardNumberInput';
-import { CardPasswordInput } from '../CardPasswordInput';
-import { CreditCardView } from '../CreditCardView';
-import { ExpirationDateInput } from '../ExpirationDateInput';
-import { BackButton } from '../common/BackButton';
-import { Input } from '../common/Input';
-import { NumberInput } from '../common/NumberInput';
-import { Page } from '../common/Page';
-import { Text } from '../common/Text';
+} from '../validations/Validation';
 
 const Content = styled.main`
   display: flex;
