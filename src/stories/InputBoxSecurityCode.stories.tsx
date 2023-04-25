@@ -11,5 +11,7 @@ const meta: Meta = {
 export default meta;
 
 export const InputTest = (args: any) => (
-  <InputBoxSecurityCode setIsComplete={() => {}}></InputBoxSecurityCode>
+  <InputBoxSecurityCode
+    changeSecurityCodeStatus={() => {}}
+  ></InputBoxSecurityCode>
 );
