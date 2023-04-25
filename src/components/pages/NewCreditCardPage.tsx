@@ -101,11 +101,9 @@ export const NewCreditCardPage = () => {
             value={newCard.cardNumbers}
             onChange={handleChangeNewCardField('cardNumbers')}
           />
-          {validationResult.cardNumbers && (
-            <Text size="small" color="red">
-              {validationResult.cardNumbers}
-            </Text>
-          )}
+          <Text size="small" color="red">
+            {validationResult.cardNumbers}
+          </Text>
         </FormGroup>
 
         <FormGroup>
@@ -114,11 +112,9 @@ export const NewCreditCardPage = () => {
             value={newCard.expirationDate}
             onChange={handleChangeNewCardField('expirationDate')}
           />
-          {validationResult.expirationDate && (
-            <Text size="small" color="red">
-              {validationResult.expirationDate}
-            </Text>
-          )}
+          <Text size="small" color="red">
+            {validationResult.expirationDate}
+          </Text>
         </FormGroup>
 
         <FormGroup>
@@ -144,11 +140,9 @@ export const NewCreditCardPage = () => {
             center
             type="password"
           />
-          {validationResult.cvc && (
-            <Text size="small" color="red">
-              {validationResult.cvc}
-            </Text>
-          )}
+          <Text size="small" color="red">
+            {validationResult.cvc}
+          </Text>
         </FormGroup>
 
         <FormGroup>
@@ -157,11 +151,9 @@ export const NewCreditCardPage = () => {
             value={newCard.password}
             onChange={handleChangeNewCardField('password')}
           />
-          {validationResult.password && (
-            <Text size="small" color="red">
-              {validationResult.password}
-            </Text>
-          )}
+          <Text size="small" color="red">
+            {validationResult.password}
+          </Text>
         </FormGroup>
 
         <NextButton onClick={handleClickNextButton}>
