@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { usePayments } from '../../hooks/usePayments';
+import type { Validation } from '../../hooks/useValidation';
 import { useValidation } from '../../hooks/useValidation';
 import type { CreditCard } from '../../types/CreditCard';
 import {
@@ -57,12 +58,14 @@ export const NewCreditCardPage = () => {
     cvc: '',
     password: '',
   });
-  const { validationResult, validate } = useValidation<CreditCard>({
+
+  const { validationResult, validate } = useValidation({
     cardNumbers: validateCardNumbers,
     expirationDate: validateExpirationDate,
     cvc: validateCVC,
     password: validateCardPassword,
-  });
+  } satisfies Validation<CreditCard>);
+
   const { addCreditCard } = usePayments();
 
   const handleChangeNewCardField =
