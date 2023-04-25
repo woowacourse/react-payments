@@ -71,7 +71,7 @@ const CardInputForm = (props: CardInputFormProps) => {
 
   const handleExpiredDateKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === BACKSPASE_KEY) {
-      if (card.expiredDate.length === EXPIRED_DATE_ERASE_SYMBOL.SEPATATE) {
+      if (card.expiredDate.length === EXPIRED_DATE_ERASE_SYMBOL.SEPARATE) {
         card.expiredDate = card.expiredDate.substring(EXPIRED_DATE_ERASE_SYMBOL.FROM, EXPIRED_DATE_ERASE_SYMBOL.TO);
         props.setCard(card);
       }
