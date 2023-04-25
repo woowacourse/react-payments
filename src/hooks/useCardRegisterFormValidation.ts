@@ -28,5 +28,5 @@ export const useCardRegisterFormValidation = ({
     setIsValidCardForm(isValidForm);
   }, [cardNumber, expirationDate, ownerName, securityCode, password]);
 
-  return [isValidCardForm];
+  return isValidCardForm;
 };

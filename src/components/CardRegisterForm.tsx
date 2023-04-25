@@ -18,7 +18,7 @@ export function CardRegisterForm() {
   const [ownerName, setOwnerName] = useState('');
   const [securityCode, setSecurityCode] = useState('');
   const [password, setPassword] = useState(['', '']);
-  const [isValidCardForm] = useCardRegisterFormValidation({
+  const isValidCardForm = useCardRegisterFormValidation({
     cardNumber,
     expirationDate,
     ownerName,
