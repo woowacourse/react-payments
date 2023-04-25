@@ -3,7 +3,7 @@ import React, { useState } from "react";
 function useWarningText(minLength?: number, regExp?: RegExp, name?: string) {
   const [warningText, setWarningText] = useState("");
 
-  const isNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const checkNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputNumber = e.target.value;
     const lastNumber = inputNumber.slice(-1);
     setWarningText("");
@@ -13,11 +13,11 @@ function useWarningText(minLength?: number, regExp?: RegExp, name?: string) {
       return;
     }
     if (name === "date") {
-      isRightMonth(inputNumber);
+      checkRightMonth(inputNumber);
     }
   };
 
-  const isRightLength = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const checkRightLength = (e: React.ChangeEvent<HTMLInputElement>) => {
     setWarningText("");
     let inputNumber = e.target.value;
     if (regExp) inputNumber = inputNumber.replace(regExp, "");
@@ -27,10 +27,10 @@ function useWarningText(minLength?: number, regExp?: RegExp, name?: string) {
         ? setWarningText(`카드 유효기간은 MM/YY 형식이어야 합니다.`)
         : setWarningText(`입력 숫자는 ${minLength}자 이어야 합니다`);
     }
-    if (name === "date") isRightMonth(inputNumber);
+    if (name === "date") checkRightMonth(inputNumber);
   };
 
-  const isRightMonth = (inputNumber: string) => {
+  const checkRightMonth = (inputNumber: string) => {
     const month = inputNumber.slice(0, 2);
 
     if (parseInt(month) > 12 || month == "00") {
@@ -56,7 +56,7 @@ function useWarningText(minLength?: number, regExp?: RegExp, name?: string) {
 
     return isError;
   };
-  return { warningText, isNumber, isRightLength, isRightForm };
+  return { warningText, checkNumber, checkRightLength, isRightForm };
 }
 
 export default useWarningText;

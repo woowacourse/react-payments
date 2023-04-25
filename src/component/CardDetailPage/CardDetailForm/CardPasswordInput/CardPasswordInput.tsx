@@ -14,7 +14,7 @@ function CardPasswordInput({
   changeCardPassword,
   cardPassword,
 }: CardPasswordInputProps) {
-  const { warningText, isNumber, isRightLength } = useWarningText(1);
+  const { warningText, checkNumber, checkRightLength } = useWarningText(1);
 
   const inputRef2 = useRef<HTMLInputElement>(null);
 
@@ -23,11 +23,11 @@ function CardPasswordInput({
     minLength: 1,
     isRequired: true,
     onInput: (e: React.ChangeEvent<HTMLInputElement>) => {
-      isNumber(e);
+      checkNumber(e);
       changeCardPassword(e);
       if (!isNaN(parseInt(e.target.value))) inputRef2.current?.focus();
     },
-    onBlur: isRightLength,
+    onBlur: checkRightLength,
   };
   const firstPassword = {
     id: "first",

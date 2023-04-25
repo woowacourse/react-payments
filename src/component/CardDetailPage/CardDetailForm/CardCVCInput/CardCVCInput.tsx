@@ -11,7 +11,7 @@ type CardCVCInputProps = {
   cardCVC: string;
 };
 function CardCVCInput({ changeCardCVC, cardCVC }: CardCVCInputProps) {
-  const { warningText, isNumber, isRightLength } = useWarningText(3);
+  const { warningText, checkNumber, checkRightLength } = useWarningText(3);
   const [popUp, setPopUp] = useState(false);
 
   const props = {
@@ -20,10 +20,10 @@ function CardCVCInput({ changeCardCVC, cardCVC }: CardCVCInputProps) {
     minLength: 3,
     isRequired: true,
     onInput: (e: React.ChangeEvent<HTMLInputElement>) => {
-      isNumber(e);
+      checkNumber(e);
       changeCardCVC(e);
     },
-    onBlur: isRightLength,
+    onBlur: checkRightLength,
   };
 
   const theme = {

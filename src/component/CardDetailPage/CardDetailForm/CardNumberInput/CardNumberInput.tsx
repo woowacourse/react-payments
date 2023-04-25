@@ -15,7 +15,7 @@ function CardNumberInput({
   changeCardNumber,
   cardNumberHidden,
 }: CardNumberInputProps) {
-  const { warningText, isNumber, isRightLength } = useWarningText(
+  const { warningText, checkNumber, checkRightLength } = useWarningText(
     16,
     /[^\d•]/g
   );
@@ -24,10 +24,10 @@ function CardNumberInput({
     value: cardNumberHidden,
     isRequired: true,
     onInput: (e: React.ChangeEvent<HTMLInputElement>) => {
-      isNumber(e);
+      checkNumber(e);
       changeCardNumber(e);
     },
-    onBlur: isRightLength,
+    onBlur: checkRightLength,
   };
 
   const theme = {

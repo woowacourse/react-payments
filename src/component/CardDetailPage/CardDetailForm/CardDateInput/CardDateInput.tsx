@@ -11,7 +11,7 @@ type CardDateInputProps = {
 };
 
 function CardDateInput({ changeCardDate, cardDate }: CardDateInputProps) {
-  const { warningText, isNumber, isRightLength } = useWarningText(
+  const { warningText, checkNumber, checkRightLength } = useWarningText(
     4,
     /[^\d]/g,
     "date"
@@ -23,10 +23,10 @@ function CardDateInput({ changeCardDate, cardDate }: CardDateInputProps) {
     isRequired: true,
     placeholder: "MM/YY",
     onInput: (e: React.ChangeEvent<HTMLInputElement>) => {
-      isNumber(e);
+      checkNumber(e);
       changeCardDate(e);
     },
-    onBlur: isRightLength,
+    onBlur: checkRightLength,
   };
 
   const theme = {
