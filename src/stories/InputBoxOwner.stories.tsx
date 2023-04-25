@@ -12,7 +12,7 @@ export default meta;
 
 export const InputTest = (args: any) => (
   <InputBoxOwner
-    setIsComplete={() => {}}
+    changeCardOwnerStatus={() => {}}
     changeNowCardInfo={() => {}}
   ></InputBoxOwner>
 );
