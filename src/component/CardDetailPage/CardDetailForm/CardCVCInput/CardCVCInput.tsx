@@ -6,10 +6,10 @@ import Input from "../../../common/Input/Input";
 import useWarningText from "../../../../hooks/useWarningText";
 import InputGuide from "../../../common/InputGuide/InputGuide";
 
-type CardCVCInputProps = {
+interface CardCVCInputProps {
   changeCardCVC: (e: React.ChangeEvent<HTMLInputElement>) => void;
   cardCVC: string;
-};
+}
 function CardCVCInput({ changeCardCVC, cardCVC }: CardCVCInputProps) {
   const { warningText, checkNumber, checkRightLength } = useWarningText(3);
   const [popUp, setPopUp] = useState(false);

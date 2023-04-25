@@ -5,10 +5,10 @@ import { ThemeProvider } from "styled-components";
 import useWarningText from "../../../../hooks/useWarningText";
 import InputGuide from "../../../common/InputGuide/InputGuide";
 
-type CardPasswordInputProps = {
+interface CardPasswordInputProps {
   changeCardPassword: (e: React.FormEvent<HTMLInputElement>) => void;
   cardPassword: [string, string];
-};
+}
 
 function CardPasswordInput({
   changeCardPassword,

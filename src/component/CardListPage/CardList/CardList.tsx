@@ -4,9 +4,9 @@ import Style from "./CardListStyled";
 import CardDetailView from "../../CardDetailView/CardDetailView";
 import { CreditCard } from "../../../types/card";
 
-type CardListProps = {
+interface CardListProps {
   creditCardList: CreditCard[];
-};
+}
 
 function CardList({ creditCardList }: CardListProps) {
   return (

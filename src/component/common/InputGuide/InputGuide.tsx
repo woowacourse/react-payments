@@ -1,9 +1,9 @@
 import React from "react";
 import Style from "./InputGuideStyled";
 
-type InputGuideProps = {
+interface InputGuideProps {
   warningText: string;
-};
+}
 function InputGuide({ warningText }: InputGuideProps) {
   return (
     <>

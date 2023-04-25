@@ -6,10 +6,10 @@ import InputGuide from "../../../common/InputGuide/InputGuide";
 
 import useWarningText from "../../../../hooks/useWarningText";
 
-type CardNumberInputProps = {
+interface CardNumberInputProps {
   changeCardNumber: (e: React.ChangeEvent<HTMLInputElement>) => void;
   cardNumberHidden: string;
-};
+}
 
 function CardNumberInput({
   changeCardNumber,

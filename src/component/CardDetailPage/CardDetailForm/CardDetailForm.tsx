@@ -10,7 +10,7 @@ import Style from "./CardDetailFormStyled";
 import useWarningText from "../../../hooks/useWarningText";
 import InputGuide from "../../common/InputGuide/InputGuide";
 
-type CardDetailFormProps = {
+interface CardDetailFormProps {
   changeCardNumber: (e: React.ChangeEvent<HTMLInputElement>) => void;
   cardNumberHidden: string;
 
@@ -27,7 +27,7 @@ type CardDetailFormProps = {
   cardPassword: [string, string];
 
   submitCreditCard: (e: React.FormEvent<HTMLFormElement>) => void;
-};
+}
 
 function CardDetailForm({
   changeCardNumber,

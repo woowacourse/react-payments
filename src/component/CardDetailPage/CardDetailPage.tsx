@@ -14,9 +14,9 @@ import useCardOwnerName from "../../hooks/useCardOwnerName";
 import useCardCVC from "../../hooks/useCardCVC";
 import useCardPassword from "../../hooks/useCardPassword";
 
-type CardDetailPageProps = {
+interface CardDetailPageProps {
   addCreditCard: (card: CreditCard) => void;
-};
+}
 
 function CardDetailPage({ addCreditCard }: CardDetailPageProps) {
   const navigate = useNavigate();

@@ -2,11 +2,11 @@ import React from "react";
 
 import Style from "./CardDetailViewStyled";
 
-type CardDetailViewProps = {
+interface CardDetailViewProps {
   cardNumberHidden: string;
   cardDate: string;
   cardOwnerName: string;
-};
+}
 
 function CardDetailView({
   cardNumberHidden,

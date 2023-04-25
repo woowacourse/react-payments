@@ -5,10 +5,10 @@ import { ThemeProvider } from "styled-components";
 import useWarningText from "../../../../hooks/useWarningText";
 import InputGuide from "../../../common/InputGuide/InputGuide";
 
-type CardDateInputProps = {
+interface CardDateInputProps {
   changeCardDate: (e: React.ChangeEvent<HTMLInputElement>) => void;
   cardDate: string;
-};
+}
 
 function CardDateInput({ changeCardDate, cardDate }: CardDateInputProps) {
   const { warningText, checkNumber, checkRightLength } = useWarningText(

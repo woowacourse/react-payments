@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import Style from "./CVCPopUpStyled";
 
-type CVCPopUpProps = {
+interface CVCPopUpProps {
   closePopup: () => void;
-};
+}
+
 function CVCPopUp({ closePopup }: CVCPopUpProps) {
   useEffect(() => {
     window.addEventListener("keyup", closePopup);
