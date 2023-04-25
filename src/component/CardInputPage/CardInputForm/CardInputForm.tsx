@@ -61,27 +61,28 @@ export default function CardInputForm(props: Props) {
 
   const changeInputStatus = (inputName: keyof InputStatus) => {
     return (key: keyof EachUserInputState, value: any, index?: number) => {
-      const updateResult = JSON.parse(JSON.stringify(inputStatus));
+      setInputStatus((currentInputStatus) => {
+        const updateResult = JSON.parse(JSON.stringify(currentInputStatus));
 
-      if (key === "isComplete") {
+        if (key === "isComplete") {
+          updateResult[inputName][key] = value;
+          console.log(updateResult);
+          return updateResult;
+        }
+
+        if (
+          (inputName === "cardNumber" || inputName === "password") &&
+          index !== undefined
+        ) {
+          updateResult[inputName][key][index] = value;
+          nowCardInfo[inputName][index] = value;
+          return updateResult;
+        }
+
         updateResult[inputName][key] = value;
-        setInputStatus(updateResult);
-        return;
-      }
-
-      if (
-        (inputName === "cardNumber" || inputName === "password") &&
-        index !== undefined
-      ) {
-        updateResult[inputName][key][index] = value;
-        setInputStatus(updateResult);
-        nowCardInfo[inputName][index] = value;
-        return;
-      }
-
-      updateResult[inputName][key] = value;
-      setInputStatus(updateResult);
-      nowCardInfo[inputName] = value;
+        nowCardInfo[inputName] = value;
+        return updateResult;
+      });
     };
   };
 
@@ -128,11 +129,14 @@ export default function CardInputForm(props: Props) {
 
   //formFilled 여부에 따라 제출 이벤트 생성/삭제
   useEffect(() => {
-    if (!isFormFilled) {
-      formElement.current?.removeEventListener("submit", submitCardInfo);
-    }
+    // if (!isFormFilled) {
+    //   formElement.current?.removeEventListener("submit", submitCardInfo);
+    // }
 
-    formElement.current?.addEventListener("submit", submitCardInfo);
+    // formElement.current?.addEventListener("submit", submitCardInfo);
+
+    if (isFormFilled) console.log(nowCardInfo);
+    console.log(inputStatus);
   }, [isFormFilled]);
 
   return (
