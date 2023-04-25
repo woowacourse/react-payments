@@ -10,15 +10,19 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// export const Default: Story = {
-//   args: {
-//     message: 'Supporting Text',
-//   },
-// };
+export const Default: Story = {
+  args: {
+    message: {
+      default: 'Supporting Text',
+    },
+  },
+};
 
-// export const Error: Story = {
-//   args: {
-//     message: 'Error Message',
-//     isError: true,
-//   },
-// };
+export const Error: Story = {
+  args: {
+    message: {
+      error: 'Error Message',
+    },
+    isError: true,
+  },
+};
