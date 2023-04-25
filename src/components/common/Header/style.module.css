@@ -9,6 +9,10 @@
   display: inline-block;
 }
 
+.header button {
+  padding: 0;
+}
+
 .header h3 {
   display: inline-block;
   position: absolute;
