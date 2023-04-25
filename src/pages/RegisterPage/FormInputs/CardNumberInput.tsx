@@ -78,8 +78,6 @@ const S = {
   InputBox: styled.div`
     display: flex;
     justify-content: center;
-    width: 100%;
-    height: 48px;
     margin-top: 12px;
     background: var(--input-background);
     border-radius: 8px;
