@@ -1,3 +1,4 @@
+import { useModal } from 'hooks/useModal';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -22,12 +23,8 @@ border-radius: 8px 8px 0px 0px;
 background: #ffffff;
 `;
 
-interface ModalProps {
-  modalOpen: boolean;
-  closeModal: () => void;
-}
-
-function Modal({ modalOpen, closeModal }: ModalProps) {
+function Modal() {
+  const { modalOpen, closeModal } = useModal();
   return (
     <>
       {

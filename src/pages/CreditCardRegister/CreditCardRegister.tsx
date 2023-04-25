@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import * as Type from 'types';
 import { useCreditCard } from 'hooks/useCreditCard';
 import Modal from 'components/Modal';
-import useModal from 'hooks/useModal';
+import { useModal } from 'hooks/useModal';
 import CreditCardNumberInput from './inputs/CreditCardNumberInput';
 import CreditCardExpiryInput from './inputs/CreditCardExpiryInput';
 import CreditCardOwnerInput from './inputs/CreditCardOwnerInput';
@@ -18,6 +18,7 @@ import {
 function CreditCardRegister() {
   const navigate = useNavigate();
   const { saveCreditCard } = useCreditCard();
+  const { openModal } = useModal();
 
   const [creditCard, setCreditCard] = useState<Type.CreditCard>({
     number: '',
@@ -29,7 +30,6 @@ function CreditCardRegister() {
       second: '',
     },
   });
-  const { modalOpen, openModal, closeModal } = useModal();
 
   const isValidCVC = validateCVC(creditCard.cvc);
   const isValidExpiry = validateExpiry(creditCard.expiry);
@@ -121,7 +121,7 @@ function CreditCardRegister() {
           </S.ButtonWrapper>
         </S.CreditCardRegisterForm>
       </S.CreditCardRegisterLayout>
-      <Modal modalOpen={modalOpen} closeModal={closeModal} />
+      <Modal />
 
     </>
 
