@@ -2,12 +2,11 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import Card from '../components/Card';
 
-const meta: Meta<typeof Card> = {
+export default {
   title: 'Card',
   component: Card,
-};
+} as Meta<typeof Card>;
 
-export default meta;
 type Story = StoryObj<typeof Card>;
 
 export const Primary: Story = {

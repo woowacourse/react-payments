@@ -5,7 +5,7 @@ import AddCardNumberInput from '../components/AddCardNumberInput';
 import useComplicateInput from '../hooks/useComplicateInput';
 import { isNumberInput } from '../utils/util';
 
-const meta: Meta<typeof AddCardNumberInput> = {
+export default {
   title: 'AddCardNumberInput',
   component: AddCardNumberInput,
   decorators: [
@@ -19,9 +19,7 @@ const meta: Meta<typeof AddCardNumberInput> = {
       </div>
     ),
   ],
-};
-
-export default meta;
+} as Meta<typeof AddCardNumberInput>;
 
 const AddHooks = () => {
   const [cardNumber, onChangeCardNumber] = useComplicateInput<CardNumber>({

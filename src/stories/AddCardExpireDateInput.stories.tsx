@@ -5,7 +5,7 @@ import useInput from '../hooks/useInput';
 import { cardExpireCondition } from '../pages/cardInputCondition';
 import { formatExpireDate } from '../utils/util';
 
-const meta: Meta<typeof AddCardExpireDateInput> = {
+export default {
   title: 'AddCardExpireDateInput',
   component: AddCardExpireDateInput,
   decorators: [
@@ -19,9 +19,7 @@ const meta: Meta<typeof AddCardExpireDateInput> = {
       </div>
     ),
   ],
-};
-
-export default meta;
+} as Meta<typeof AddCardExpireDateInput>;
 
 const AddInputHooks = () => {
   const cardExpireDate = useInput('', cardExpireCondition, formatExpireDate);
