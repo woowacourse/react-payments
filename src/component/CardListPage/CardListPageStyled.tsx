@@ -1,15 +1,9 @@
 import styled from "styled-components";
+import { Page } from "../common/Page";
 
 const St = {
-  Page: styled.section`
-    display: flex;
-    flex-direction: column;
+  Page: styled(Page)`
     gap: 25px;
-
-    width: 100vw;
-    height: 100vh;
-
-    padding: 28px;
   `,
 };
 
