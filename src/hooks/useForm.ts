@@ -103,6 +103,7 @@ const useForm = (setCardList: Dispatch<SetStateAction<CardInfo[]>>, validator: V
   const onChange = ({ target: targetInput }: ChangeEvent<HTMLInputElement>) => {
     const elements: HTMLFormControlsCollection | undefined = targetInput.closest('form')?.elements;
     if (!elements) return;
+
     const {
       name,
       value,
