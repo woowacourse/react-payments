@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import St from "./CardCVCInputStyled";
+import CVCHintPopup from "./CVCHintPopup/CVCHintPopup";
 
 type CardCVCInputProps = {
   changeCardCVC: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -7,6 +8,8 @@ type CardCVCInputProps = {
 };
 
 function CardCVCInput({ changeCardCVC, cardCVC }: CardCVCInputProps) {
+  const [isPopup, setIsPopup] = useState(false);
+
   return (
     <section>
       <St.Title>보안 코드(CVC/CVV)</St.Title>
@@ -20,7 +23,15 @@ function CardCVCInput({ changeCardCVC, cardCVC }: CardCVCInputProps) {
             onInput={changeCardCVC}
           />
         </St.InputSection>
-        <St.Button type="button">?</St.Button>
+        <St.Button
+          type="button"
+          onClick={() => {
+            setIsPopup(!isPopup);
+          }}
+        >
+          ?
+        </St.Button>
+        {isPopup ? <CVCHintPopup /> : null}
       </St.Contents>
     </section>
   );
