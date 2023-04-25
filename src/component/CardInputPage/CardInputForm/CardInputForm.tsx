@@ -63,8 +63,6 @@ export default function CardInputForm(props: Props) {
     return (key: keyof EachUserInputState, value: any, index?: number) => {
       const updateResult = JSON.parse(JSON.stringify(inputStatus));
 
-      console.log(nowCardInfo);
-
       if (key === "isComplete") {
         updateResult[inputName][key] = value;
         setInputStatus(updateResult);

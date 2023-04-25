@@ -20,7 +20,6 @@ export default function InputBoxCardNumber(props: Props) {
   let hasError = false;
 
   useEffect(() => {
-    console.log(hasError);
     hasError = allStatus.includes(0) ? true : false;
 
     allStatus.every((status) => status === 2)
@@ -38,7 +37,7 @@ export default function InputBoxCardNumber(props: Props) {
     <div className="input-box-card-number">
       <p>카드번호</p>
       <CardNumber
-        setHasError={changeHasError}
+        changeHasError={changeHasError}
         changeCardNumberStatus={changeCardNumberStatus}
       />
       <p className={hasError ? "visible" : ""}>

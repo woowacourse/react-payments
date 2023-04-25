@@ -6,7 +6,7 @@ import { makeAppropriateNumber } from "../../../trans";
 import { nowStatus } from "../../../type";
 
 interface Props {
-  setHasError: (partIndex: number, state: nowStatus) => void;
+  changeHasError: (partIndex: number, state: nowStatus) => void;
   changeCardNumberStatus: (
     key: "isComplete" | "userInput",
     value: any,
@@ -19,7 +19,7 @@ interface Props {
  * changeNowCardInfo : 카드 미리보기를 동기화하기 위해 내려보내는 함수
  */
 export default function CardNumber({
-  setHasError,
+  changeHasError,
   changeCardNumberStatus,
 }: Props) {
   const [cardNumber, setCardNumber] = useState<string[]>([]);
@@ -30,12 +30,12 @@ export default function CardNumber({
       const appropriateNumber = makeAppropriateNumber(userInputNumber);
 
       if (userInputNumber !== appropriateNumber) {
-        setHasError(partIndex, 0);
+        changeHasError(partIndex, 0);
       } else if (appropriateNumber.length === 4) {
-        setHasError(partIndex, 2);
+        changeHasError(partIndex, 2);
         changeCardNumberStatus("userInput", appropriateNumber, partIndex);
       } else {
-        setHasError(partIndex, 1);
+        changeHasError(partIndex, 1);
       }
 
       const result = [...cardNumber];
