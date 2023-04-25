@@ -86,6 +86,14 @@ h2 {
   margin-top: 24px;
 }
 
+.mg-t-36 {
+  margin-top: 36px;
+}
+
+.mg-t-48 {
+  margin-top: 48px;
+}
+
 .mg-b-24 {
   margin-bottom: 24px;
 }
@@ -119,6 +127,11 @@ h2 {
 
 .flex-row-reverse {
   flex-direction: row-reverse !important;
+}
+
+.register-content {
+  position: relative;
+  top: 100px;
 }
 
 @media screen and (max-width: 600px) {
