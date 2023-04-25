@@ -13,14 +13,21 @@ const Template: Story<ButtonProps> = (args) => <Button {...args} />;
 
 export const ConFirmButton = Template.bind({});
 ConFirmButton.args = {
-  text: '확인',
+  text: '다음',
   disabled: false,
   type: 'button',
 };
 
 export const DisableButton = Template.bind({});
 DisableButton.args = {
-  text: '확인',
+  text: '다음',
   disabled: true,
+  type: 'button',
+};
+
+export const RegisterButton = Template.bind({});
+RegisterButton.args = {
+  text: '확인',
+  disabled: false,
   type: 'button',
 };
