@@ -13,6 +13,22 @@ export interface InputContainerProps {
   inputLength?: string;
 }
 
+export default function InputField({
+  kind,
+  children,
+  inputLength,
+}: PropsWithChildren<InputContainerProps>) {
+  return (
+    <Wrapper>
+      <Label htmlFor={kind}>
+        <span>{INPUT_INFO[kind].title}</span>
+        <InputLengthText>{inputLength}</InputLengthText>
+      </Label>
+      {children}
+    </Wrapper>
+  );
+}
+
 const INPUT_INFO = {
   cardNumber: {
     title: '카드 번호',
@@ -51,19 +67,3 @@ const Label = styled.label`
 const InputLengthText = styled.span`
   letter-spacing: 1px;
 `;
-
-export default function InputField({
-  kind,
-  children,
-  inputLength,
-}: PropsWithChildren<InputContainerProps>) {
-  return (
-    <Wrapper>
-      <Label htmlFor={kind}>
-        <span>{INPUT_INFO[kind].title}</span>
-        <InputLengthText>{inputLength}</InputLengthText>
-      </Label>
-      {children}
-    </Wrapper>
-  );
-}

@@ -10,36 +10,6 @@ interface HomePageProps {
   setPage: React.Dispatch<React.SetStateAction<PageInfo>>;
 }
 
-const Page = styled.div`
-  min-height: 100vh;
-  padding: 20px 36px;
-  background-color: #fff;
-`;
-
-const Title = styled.h3`
-  font-size: 16px;
-  font-weight: 400;
-  color: #383838;
-`;
-
-const AddInformation = styled.h4`
-  font-size: 14px;
-  font-weight: 700;
-  text-align: center;
-  color: #575757;
-  opacity: 0.9;
-  margin-top: 33px;
-  margin-bottom: 9px;
-`;
-
-const CardWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  margin-top: 46px;
-  gap: 46px;
-`;
-
 export default function Homepage({
   cardList,
   setPage,
@@ -84,3 +54,33 @@ export default function Homepage({
     </Page>
   );
 }
+
+const Page = styled.div`
+  min-height: 100vh;
+  padding: 20px 36px;
+  background-color: #fff;
+`;
+
+const Title = styled.h3`
+  font-size: 16px;
+  font-weight: 400;
+  color: #383838;
+`;
+
+const AddInformation = styled.h4`
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  color: #575757;
+  opacity: 0.9;
+  margin-top: 33px;
+  margin-bottom: 9px;
+`;
+
+const CardWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 46px;
+  gap: 46px;
+`;

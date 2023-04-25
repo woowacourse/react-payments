@@ -8,22 +8,6 @@ export interface OwnerInputProps {
   owner: UseInputProps;
 }
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-`;
-
-const Wrapper = styled.div`
-  display: flex;
-  padding: 0 8px;
-  box-sizing: border-box;
-  align-items: center;
-  background-color: #ecebf1;
-  height: 45px;
-  border-radius: 7px;
-`;
-
 export default function OwnerInput({ owner }: OwnerInputProps) {
   return (
     <Container>
@@ -42,3 +26,19 @@ export default function OwnerInput({ owner }: OwnerInputProps) {
     </Container>
   );
 }
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  padding: 0 8px;
+  box-sizing: border-box;
+  align-items: center;
+  background-color: #ecebf1;
+  height: 45px;
+  border-radius: 7px;
+`;

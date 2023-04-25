@@ -9,35 +9,6 @@ interface ExpiracyInputProps {
   month: UseInputProps;
 }
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-`;
-
-const Wrapper = styled.div`
-  display: flex;
-  width: 137px;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  background-color: #ecebf1;
-  height: 45px;
-  border-radius: 7px;
-`;
-
-const InputWrapper = styled.div`
-  width: 40px;
-`;
-
-const Slash = styled.span`
-  position: relative;
-  left: 3px;
-  margin: 0 5px;
-  font-size: 18px;
-  font-weight: 500;
-  color: #737373;
-`;
 export default function ExpiracyInput({ year, month }: ExpiracyInputProps) {
   return (
     <Container>
@@ -76,3 +47,33 @@ export default function ExpiracyInput({ year, month }: ExpiracyInputProps) {
     </Container>
   );
 }
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  width: 137px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-color: #ecebf1;
+  height: 45px;
+  border-radius: 7px;
+`;
+
+const InputWrapper = styled.div`
+  width: 40px;
+`;
+
+const Slash = styled.span`
+  position: relative;
+  left: 3px;
+  margin: 0 5px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #737373;
+`;

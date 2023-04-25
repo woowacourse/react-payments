@@ -5,22 +5,6 @@ interface AddCardButtonProps {
   onClick: () => void;
 }
 
-const Wrapper = styled.button`
-  width: 213px;
-  height: 133px;
-  background: #e5e5e5;
-  margin-bottom: 85px;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-`;
-
-const PlusWrapper = styled.svg`
-  max-height: 36px;
-  max-width: 36px;
-  color: #575757;
-`;
-
 export default function AddCardButton({ onClick }: AddCardButtonProps) {
   return (
     <Wrapper onClick={onClick}>
@@ -40,3 +24,19 @@ export default function AddCardButton({ onClick }: AddCardButtonProps) {
     </Wrapper>
   );
 }
+
+const Wrapper = styled.button`
+  width: 213px;
+  height: 133px;
+  background: #e5e5e5;
+  margin-bottom: 85px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+`;
+
+const PlusWrapper = styled.svg`
+  max-height: 36px;
+  max-width: 36px;
+  color: #575757;
+`;

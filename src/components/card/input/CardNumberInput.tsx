@@ -10,26 +10,6 @@ interface CardNumberInputProps {
   fourthNumber: UseInputProps;
 }
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const Wrapper = styled.div`
-  display: flex;
-  background-color: #ecebf1;
-  justify-content: space-between;
-  height: 45px;
-  border-radius: 7px;
-  align-items: center;
-  padding: 0 40px;
-  box-sizing: border-box;
-`;
-
-const Dash = styled.span`
-  margin: 0 7px;
-`;
-
 export default function CardNumberInput({
   firstNumber,
   secondNumber,
@@ -95,3 +75,23 @@ export default function CardNumberInput({
     </Container>
   );
 }
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  background-color: #ecebf1;
+  justify-content: space-between;
+  height: 45px;
+  border-radius: 7px;
+  align-items: center;
+  padding: 0 40px;
+  box-sizing: border-box;
+`;
+
+const Dash = styled.span`
+  margin: 0 7px;
+`;

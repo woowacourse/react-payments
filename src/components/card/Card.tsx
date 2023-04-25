@@ -11,6 +11,57 @@ interface CardProps {
   year: string;
 }
 
+const ENCRYPT_INDEX = 2;
+
+export default function Card({
+  cardNumberSet,
+  owner,
+  month,
+  year,
+  onDeleteClick,
+}: CardProps) {
+  const [isClick, setIsClick] = useState(false);
+  const onwerName = owner.length > 10 ? owner.slice(0, 10) : owner;
+
+  const toggleIsClick = () => {
+    setIsClick((prev) => !prev);
+  };
+
+  const isPrevCard = isPrevDate(Number(year), Number(month));
+  return (
+    <CardContainer>
+      <Container>
+        <Wrapper onClick={toggleIsClick} isHome={onDeleteClick ? true : false}>
+          <Title></Title>
+          <Magnet />
+          <div>
+            <CardNumber>
+              {cardNumberSet.map((cardNumberItem: string, index: number) => (
+                <CardNumberItem key={createUniqueId()}>
+                  {index >= ENCRYPT_INDEX
+                    ? '•'.repeat(cardNumberItem.length)
+                    : cardNumberItem}
+                </CardNumberItem>
+              ))}
+            </CardNumber>
+            <OwnerAndExpiracyWrapper>
+              <Owner title={owner}>{onwerName}</Owner>
+              <Expiracy>{`${month}/${year}`}</Expiracy>
+            </OwnerAndExpiracyWrapper>
+          </div>
+        </Wrapper>
+        {isClick && onDeleteClick && (
+          <QuestionWrapper>
+            <DeleteWrapper onClick={onDeleteClick}>삭제</DeleteWrapper>
+            <CancleWrapper onClick={toggleIsClick}>취소</CancleWrapper>
+          </QuestionWrapper>
+        )}
+      </Container>
+      {onDeleteClick && isPrevCard && <Error text="기한이 지난 카드입니다." />}
+    </CardContainer>
+  );
+}
+
 const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -139,54 +190,3 @@ const CancleWrapper = styled(Button)`
     background-color: #9e9c9c;
   }
 `;
-
-const ENCRYPT_INDEX = 2;
-
-export default function Card({
-  cardNumberSet,
-  owner,
-  month,
-  year,
-  onDeleteClick,
-}: CardProps) {
-  const [isClick, setIsClick] = useState(false);
-  const onwerName = owner.length > 10 ? owner.slice(0, 10) : owner;
-
-  const toggleIsClick = () => {
-    setIsClick((prev) => !prev);
-  };
-
-  const isPrevCard = isPrevDate(Number(year), Number(month));
-  return (
-    <CardContainer>
-      <Container>
-        <Wrapper onClick={toggleIsClick} isHome={onDeleteClick ? true : false}>
-          <Title></Title>
-          <Magnet />
-          <div>
-            <CardNumber>
-              {cardNumberSet.map((cardNumberItem: string, index: number) => (
-                <CardNumberItem key={createUniqueId()}>
-                  {index >= ENCRYPT_INDEX
-                    ? '•'.repeat(cardNumberItem.length)
-                    : cardNumberItem}
-                </CardNumberItem>
-              ))}
-            </CardNumber>
-            <OwnerAndExpiracyWrapper>
-              <Owner title={owner}>{onwerName}</Owner>
-              <Expiracy>{`${month}/${year}`}</Expiracy>
-            </OwnerAndExpiracyWrapper>
-          </div>
-        </Wrapper>
-        {isClick && onDeleteClick && (
-          <QuestionWrapper>
-            <DeleteWrapper onClick={onDeleteClick}>삭제</DeleteWrapper>
-            <CancleWrapper onClick={toggleIsClick}>취소</CancleWrapper>
-          </QuestionWrapper>
-        )}
-      </Container>
-      {onDeleteClick && isPrevCard && <Error text="기한이 지난 카드입니다." />}
-    </CardContainer>
-  );
-}

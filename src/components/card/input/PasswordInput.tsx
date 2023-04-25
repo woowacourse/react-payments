@@ -9,41 +9,6 @@ export interface PasswordInputProps {
   secondPassword: UseInputProps;
 }
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-`;
-
-const Wrapper = styled.div`
-  display: flex;
-  border-radius: 7px;
-  align-items: center;
-  gap: 7px;
-`;
-
-const GrayWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  box-sizing: border-box;
-  padding: 8px;
-  width: 45px;
-  height: 45px;
-  border-radius: 7px;
-  background-color: #ecebf1;
-`;
-
-const WhiteWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 45px;
-  height: 45px;
-  border: solid 1px #ecebf1;
-  border-radius: 7px;
-  cursor: not-allowed;
-`;
-
 export default function PasswordInput({
   firstPassword,
   secondPassword,
@@ -87,3 +52,38 @@ export default function PasswordInput({
     </Container>
   );
 }
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  border-radius: 7px;
+  align-items: center;
+  gap: 7px;
+`;
+
+const GrayWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 8px;
+  width: 45px;
+  height: 45px;
+  border-radius: 7px;
+  background-color: #ecebf1;
+`;
+
+const WhiteWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  border: solid 1px #ecebf1;
+  border-radius: 7px;
+  cursor: not-allowed;
+`;

@@ -4,17 +4,6 @@ interface PrevButtonProps {
   onClick: () => void;
 }
 
-const Wrapper = styled.button`
-  cursor: pointer;
-  border: 0;
-  background-color: transparent;
-`;
-
-const Svg = styled.svg`
-  width: 20px;
-  height: 20px;
-`;
-
 export default function PrevButton({ onClick }: PrevButtonProps) {
   return (
     <Wrapper onClick={onClick}>
@@ -35,3 +24,14 @@ export default function PrevButton({ onClick }: PrevButtonProps) {
     </Wrapper>
   );
 }
+
+const Wrapper = styled.button`
+  cursor: pointer;
+  border: 0;
+  background-color: transparent;
+`;
+
+const Svg = styled.svg`
+  width: 20px;
+  height: 20px;
+`;

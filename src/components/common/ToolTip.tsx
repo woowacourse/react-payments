@@ -8,15 +8,6 @@ interface ToolTipProps {
   tabIndex?: number;
 }
 
-const Wrapper = styled.div`
-  background-color: white;
-  border: 1px solid #525252;
-  padding: 10px 20px;
-  border-radius: 7px;
-  width: 200px;
-  position: relative;
-`;
-
 export default function ToolTip({
   text,
   onClick,
@@ -28,3 +19,12 @@ export default function ToolTip({
     </Wrapper>
   );
 }
+
+const Wrapper = styled.div`
+  background-color: white;
+  border: 1px solid #525252;
+  padding: 10px 20px;
+  border-radius: 7px;
+  width: 200px;
+  position: relative;
+`;

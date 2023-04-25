@@ -7,6 +7,17 @@ interface InformationButtonProps {
   tabIndex?: number;
 }
 
+export default function InformationButton({
+  onClick,
+  tabIndex = DISMISS_TAB_INDEX,
+}: InformationButtonProps) {
+  return (
+    <Wrapper type="button" onClick={onClick} tabIndex={tabIndex}>
+      ﹖
+    </Wrapper>
+  );
+}
+
 const Wrapper = styled.button`
   cursor: pointer;
   display: flex;
@@ -21,13 +32,3 @@ const Wrapper = styled.button`
   font-size: 20px;
   font-weight: 500;
 `;
-export default function InformationButton({
-  onClick,
-  tabIndex = DISMISS_TAB_INDEX,
-}: InformationButtonProps) {
-  return (
-    <Wrapper type="button" onClick={onClick} tabIndex={tabIndex}>
-      ﹖
-    </Wrapper>
-  );
-}

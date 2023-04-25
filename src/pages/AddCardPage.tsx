@@ -45,55 +45,6 @@ interface InputDetailInfo {
 
 type InputKind = 'card' | 'cvc' | 'owner' | 'password' | 'month' | 'year';
 
-const Page = styled.div`
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  padding: 20px 28px;
-  min-height: 100vh;
-`;
-
-const TitleWrapper = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const Title = styled.h3`
-  font-size: 16px;
-  font-weight: 400;
-  color: #383838;
-  margin-left: 12px;
-`;
-
-const CardWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 25px;
-`;
-
-const InputWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-`;
-
-const InputWrapperParent = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-top: 40px;
-  margin: 40px 0 25px 0;
-`;
-const CvcWrapper = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const NextButtonWrapper = styled.div`
-  margin-top: 25px;
-  align-self: end;
-`;
-
 export default function AddCardPage({
   cardList,
   setCardList,
@@ -376,3 +327,52 @@ export default function AddCardPage({
     </Page>
   );
 }
+
+const Page = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 20px 28px;
+  min-height: 100vh;
+`;
+
+const TitleWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const Title = styled.h3`
+  font-size: 16px;
+  font-weight: 400;
+  color: #383838;
+  margin-left: 12px;
+`;
+
+const CardWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+`;
+
+const InputWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+`;
+
+const InputWrapperParent = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 40px;
+  margin: 40px 0 25px 0;
+`;
+const CvcWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const NextButtonWrapper = styled.div`
+  margin-top: 25px;
+  align-self: end;
+`;

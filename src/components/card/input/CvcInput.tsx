@@ -10,38 +10,6 @@ interface CvcInputProps {
   cvc: UseInputProps;
 }
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-`;
-
-const InformationAndInputWrapper = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 122px;
-  background-color: #ecebf1;
-  height: 45px;
-  border-radius: 7px;
-  padding: 0 16px;
-`;
-
-const CvcButtonWrapper = styled.div`
-  position: relative;
-  margin-left: 11px;
-`;
-
-const ToolTipWrapper = styled.div`
-  position: absolute;
-  bottom: 35px;
-`;
-
 export default function CvcInput({ cvc }: CvcInputProps) {
   const [isOpenToolTip, setIsOpenToolTip] = useState(false);
 
@@ -85,3 +53,35 @@ export default function CvcInput({ cvc }: CvcInputProps) {
     </Container>
   );
 }
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+
+const InformationAndInputWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 122px;
+  background-color: #ecebf1;
+  height: 45px;
+  border-radius: 7px;
+  padding: 0 16px;
+`;
+
+const CvcButtonWrapper = styled.div`
+  position: relative;
+  margin-left: 11px;
+`;
+
+const ToolTipWrapper = styled.div`
+  position: absolute;
+  bottom: 35px;
+`;
