@@ -7,7 +7,11 @@ import { makeAppropriateNumber } from "../../../trans";
 
 interface Props {
   setHasError: React.Dispatch<React.SetStateAction<boolean>>;
-  changeCardNumberStatus: (key: "isComplete" | "userInput", value: any) => void;
+  changeCardNumberStatus: (
+    key: "isComplete" | "userInput",
+    value: any,
+    index?: number
+  ) => void;
 }
 
 /* setHasError : inputBoxCardNumber가 에러문구를 출력하기 위해 내려보내는 함수
@@ -31,7 +35,7 @@ export default function CardNumber({
       } else if (appropriateNumber.length === 4) {
         setHasError(false);
         changeCardNumberStatus("isComplete", true);
-        changeCardNumberStatus("userInput", appropriateNumber);
+        changeCardNumberStatus("userInput", appropriateNumber, partIndex);
       } else {
         setHasError(false);
         changeCardNumberStatus("isComplete", false);

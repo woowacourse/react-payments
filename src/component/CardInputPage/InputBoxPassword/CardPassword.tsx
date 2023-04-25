@@ -6,7 +6,11 @@ import { makeAppropriatePassword } from "../../../trans";
 
 interface Props {
   setIsError: React.Dispatch<React.SetStateAction<boolean>>;
-  changePasswordStatus: (key: "isComplete" | "userInput", value: any) => void;
+  changePasswordStatus: (
+    key: "isComplete" | "userInput",
+    value: any,
+    index?: number
+  ) => void;
 }
 
 export default function CardPassword(props: Props) {
@@ -25,7 +29,7 @@ export default function CardPassword(props: Props) {
       } else {
         setIsError(false);
         changePasswordStatus("isComplete", true);
-        changePasswordStatus("userInput", passwordStatus);
+        changePasswordStatus("userInput", passwordStatus, partIndex);
       }
 
       const result = [...passwordStatus];

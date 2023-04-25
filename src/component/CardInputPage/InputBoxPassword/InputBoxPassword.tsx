@@ -5,7 +5,11 @@ import "./inputBoxPassword.css";
 import { CARD_ERROR_MESSAGE } from "../../../CONSTANT";
 
 interface Props {
-  changePasswordStatus: (key: "isComplete" | "userInput", value: any) => void;
+  changePasswordStatus: (
+    key: "isComplete" | "userInput",
+    value: any,
+    index?: number
+  ) => void;
 }
 
 export default function InputBoxPassword(props: Props) {

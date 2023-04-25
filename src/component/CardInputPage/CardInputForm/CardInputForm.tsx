@@ -27,17 +27,21 @@ const initialCard: CreditCard = {
   password: [],
 };
 
-const initialEachUserInputState: EachUserInputState = {
+const initialArrayInputState: EachUserInputState = {
+  isComplete: false,
+  userInput: [],
+};
+const initialStringInputState: EachUserInputState = {
   isComplete: false,
   userInput: "",
 };
 
 const initialInputStatus = {
-  cardNumber: initialEachUserInputState,
-  expirationDate: initialEachUserInputState,
-  owner: initialEachUserInputState,
-  securityCode: initialEachUserInputState,
-  password: initialEachUserInputState,
+  cardNumber: initialArrayInputState,
+  expirationDate: initialStringInputState,
+  owner: initialStringInputState,
+  securityCode: initialStringInputState,
+  password: initialArrayInputState,
 };
 
 //하나의 inputState에는 {isComplete:true, userInput: value}
@@ -54,12 +58,31 @@ export default function CardInputForm(props: Props) {
   //total user Input status
   const [inputStatus, setInputStatus] =
     useState<InputStatus>(initialInputStatus);
+
   const changeInputStatus = (inputName: keyof InputStatus) => {
-    return (key: keyof EachUserInputState, value: any) => {
+    return (key: keyof EachUserInputState, value: any, index?: number) => {
       const updateResult = JSON.parse(JSON.stringify(inputStatus));
+
+      console.log(nowCardInfo);
+
+      if (key === "isComplete") {
+        updateResult[inputName][key] = value;
+        setInputStatus(updateResult);
+        return;
+      }
+
+      if (
+        (inputName === "cardNumber" || inputName === "password") &&
+        index !== undefined
+      ) {
+        updateResult[inputName][key][index] = value;
+        setInputStatus(updateResult);
+        nowCardInfo[inputName][index] = value;
+        return;
+      }
+
       updateResult[inputName][key] = value;
       setInputStatus(updateResult);
-
       nowCardInfo[inputName] = value;
     };
   };
@@ -91,18 +114,6 @@ export default function CardInputForm(props: Props) {
     // resetNowCardInfo();
     navigate("/CardListPage");
   }
-
-  // const resetNowCardInfo = () => {
-  //   setNowCardInfo(initialCard);
-  // };
-
-  const changeNowCardInfo = (
-    key: keyof CreditCard,
-    value: any,
-    index?: number
-  ) => {
-    console.log("👍");
-  };
 
   //유저 입력값이 달라지면 complete를 확인해서 formFilled 여부 처리
   useEffect(() => {

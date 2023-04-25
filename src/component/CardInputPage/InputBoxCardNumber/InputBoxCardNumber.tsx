@@ -6,7 +6,11 @@ import "./inputBoxCardNumber.css";
 import { CreditCard } from "../../../type";
 
 interface Props {
-  changeCardNumberStatus: (key: "isComplete" | "userInput", value: any) => void;
+  changeCardNumberStatus: (
+    key: "isComplete" | "userInput",
+    value: any,
+    index?: number
+  ) => void;
 }
 
 export default function InputBoxCardNumber(props: Props) {
