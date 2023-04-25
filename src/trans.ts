@@ -24,12 +24,6 @@ export const makeAppropriateExpirationDate = (userInput: string) => {
 export const makeAppropriateName = (userInput: string) => {
   if (userInput === "") return "";
 
-  console.log(
-    userInput
-      .toUpperCase()
-      .split(/\s{2,}/)
-      .filter((elem) => elem.split("").filter(validateCardOwner).join(""))
-  );
   return userInput
     .toUpperCase()
     .split(/\s{2,}/)
@@ -37,4 +31,10 @@ export const makeAppropriateName = (userInput: string) => {
     .split("")
     .filter(validateCardOwner)
     .join("");
+};
+
+export const makeAppropriateSecurityCode = (userInput: string) => {
+  if (userInput === "") return "";
+
+  return userInput.split("").filter(validateNumber).join("");
 };

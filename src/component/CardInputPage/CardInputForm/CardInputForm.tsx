@@ -50,8 +50,12 @@ export default function CardInputForm(props: Props) {
   const [expirationDateStatus, setExpirationDateStatus] =
     useState<EachUserInputState>(initialEachUserInputState);
   const [ownerStatus, setOwnerStatus] = useState(initialEachUserInputState);
-  const [isSecurityComplete, setIsSecurityComplete] = useState(false);
-  const [isPasswordComplete, setIsPasswordComplete] = useState(false);
+  const [securityCodeStatus, setSecurityCodeStatus] = useState(
+    initialEachUserInputState
+  );
+  const [passwordStatus, setPasswordStatus] = useState(
+    initialEachUserInputState
+  );
 
   const navigate = useNavigate();
 
@@ -70,6 +74,17 @@ export default function CardInputForm(props: Props) {
 
   function changeOwnerStatus(key: "isComplete" | "userInput", value: any) {
     setOwnerStatus(deepCopyObject(ownerStatus, key, value));
+  }
+
+  function changeSecurityCodeStatus(
+    key: "isComplete" | "userInput",
+    value: any
+  ) {
+    setSecurityCodeStatus(deepCopyObject(ownerStatus, key, value));
+  }
+
+  function changePasswordStatus(key: "isComplete" | "userInput", value: any) {
+    setPasswordStatus(deepCopyObject(ownerStatus, key, value));
   }
 
   function submitCardInfo(e: SubmitEvent) {
@@ -136,16 +151,16 @@ export default function CardInputForm(props: Props) {
     if (
       cardNumberStatus.isComplete &&
       expirationDateStatus.isComplete &&
-      isSecurityComplete &&
-      isPasswordComplete
+      securityCodeStatus.isComplete &&
+      passwordStatus.isComplete
     )
       setIsFormFilled(true);
     else setIsFormFilled(false);
   }, [
     cardNumberStatus,
     expirationDateStatus,
-    isSecurityComplete,
-    isPasswordComplete,
+    securityCodeStatus,
+    passwordStatus,
   ]);
 
   return (
@@ -163,8 +178,10 @@ export default function CardInputForm(props: Props) {
         changeCardOwnerStatus={changeOwnerStatus}
         changeNowCardInfo={changeNowCardInfo}
       />
-      <InputBoxSecurityCode setIsComplete={setIsSecurityComplete} />
-      <InputBoxPassword setIsComplete={setIsPasswordComplete} />
+      <InputBoxSecurityCode
+        changeSecurityCodeStatus={changeSecurityCodeStatus}
+      />
+      {/* <InputBoxPassword changeCardOwnerStatus={changePasswordStatus} /> */}
       {isFormFilled && <Button type="submit">다음</Button>}
     </form>
   );

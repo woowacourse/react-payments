@@ -1,34 +1,40 @@
-import { useState, ChangeEvent, useEffect } from "react";
+import { useState, ChangeEvent } from "react";
 import Input from "../../common/Input";
 
 import "./inputBoxSecurityCode.css";
-import { validateSecurityNumber } from "../../../validation/securityNumber";
-import { CARD_ERROR_MESSAGE, INPUT_STATUS } from "../../../CONSTANT";
+import { CARD_ERROR_MESSAGE } from "../../../CONSTANT";
+import { makeAppropriateSecurityCode } from "../../../trans";
 
 interface Props {
-  setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
+  changeSecurityCodeStatus: (
+    key: "isComplete" | "userInput",
+    value: any
+  ) => void;
+  // changePasswordStatus: (key: "isComplete" | "userInput", value: any) => void;
 }
 
 export default function InputBoxSecurityCode(props: Props) {
-  const { setIsComplete } = props;
+  const { changeSecurityCodeStatus } = props;
 
-  const [inputStatus, setInputStatus] = useState(INPUT_STATUS.NOT_COMPLETE);
+  const [isError, setIsError] = useState(false);
+  const [securityCode, setSecurityCode] = useState("");
 
-  const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.length > 3) e.target.value = e.target.value.slice(0, 3);
+  const changeSecurityCode = (e: ChangeEvent<HTMLInputElement>) => {
+    const userSecurityCode = e.target.value.slice(0, 3);
+    const appropriateSecurityCode =
+      makeAppropriateSecurityCode(userSecurityCode);
 
-    if (validateSecurityNumber(e.target.value)) {
-      e.target.value.length === 3
-        ? setInputStatus(INPUT_STATUS.COMPLETE)
-        : setInputStatus(INPUT_STATUS.NOT_COMPLETE);
+    if (userSecurityCode !== appropriateSecurityCode) {
+      setIsError(true);
+      changeSecurityCodeStatus("isComplete", false);
     } else {
-      setInputStatus(INPUT_STATUS.ERROR);
+      setIsError(false);
+      changeSecurityCodeStatus("isComplete", true);
+      changeSecurityCodeStatus("userInput", appropriateSecurityCode);
     }
-  };
 
-  useEffect(() => {
-    setIsComplete(inputStatus === INPUT_STATUS.COMPLETE ? true : false);
-  }, [inputStatus]);
+    setSecurityCode(appropriateSecurityCode);
+  };
 
   return (
     <div className="input-box-security-code">
@@ -37,13 +43,14 @@ export default function InputBoxSecurityCode(props: Props) {
         name="security-code"
         className="input-security-code"
         type="password"
-        onChange={onChangeCallback}
+        onChange={changeSecurityCode}
         inputMode="numeric"
+        value={securityCode}
       ></Input>
       <button className="button-security-code" type="button">
         ?
       </button>
-      <p className={inputStatus === INPUT_STATUS.ERROR ? "visible" : ""}>
+      <p className={isError ? "visible" : ""}>
         {CARD_ERROR_MESSAGE.INPUT_CARD_PASSWORD}
       </p>
     </div>
