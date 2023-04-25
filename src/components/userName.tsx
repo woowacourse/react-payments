@@ -1,41 +1,45 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
-import { MAX_LENGTH, PLACEHOLDER } from "../constants/inputInfo";
-import { NameContext } from "../contexts/cardInfo";
-import { ValidateContext } from "../contexts/validate";
-import { useError } from "../hooks/useError";
-import { validation } from "../validation";
-import { CountText } from "./common/countText";
+import { LABEL, MAX_LENGTH, PLACEHOLDER } from "../constants/inputInfo";
+import { NameContext, RefContext } from "../contexts/cardInfo";
 import { Input } from "./common/Input";
 import { InputBox } from "./common/InputBox";
+import { InputLabel } from "./common/inputLabel";
 
 export function UserName() {
   const { userName, handleChange } = useContext(NameContext);
-  const { error, handleError } = useError();
-  const { valid, changeValid } = useContext(ValidateContext);
-
-  useEffect(() => {
-    changeValid("validName", error);
-  }, [userName]);
+  const inputRef = useContext(RefContext);
 
   return (
-    <Wrapper>
-      <InputBox
-        type={"NAME"}
-        error={error}
-        render={() => CountText(MAX_LENGTH.NAME)}>
+    <InputBox inputState={{ userName, handleChange }}>
+      <Wrapper>
+        <InputLabel text={LABEL.NAME} />
         <Input
-          handleChange={handleChange}
-          handleError={() => handleError(userName, validation.isString)}
           maxLength={MAX_LENGTH.NAME}
           placeholder={PLACEHOLDER.NAME}
-          style={{ textAlign: "left" }}
-        />
-      </InputBox>
-    </Wrapper>
+          name="name"
+          inputRef={inputRef}>
+          <NameInput />
+        </Input>
+      </Wrapper>
+    </InputBox>
   );
 }
 
 const Wrapper = styled.section`
   width: 31.8rem;
+`;
+
+const NameInput = styled.input`
+  width: 100%;
+  box-sizing: border-box;
+  height: 4.5rem;
+
+  padding: 0 1rem;
+
+  background: ${({ theme }) => theme.colors.gray200};
+  border-radius: 0.7rem;
+
+  text-align: center;
+  outline: none;
 `;

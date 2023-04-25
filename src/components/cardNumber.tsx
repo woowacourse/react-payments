@@ -1,59 +1,73 @@
 import styled from "styled-components";
-
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { Input } from "./common/Input";
 import { InputBox } from "./common/InputBox";
-import { useError } from "../hooks/useError";
-import { validation } from "../validation";
-import { NumberContext } from "../contexts/cardInfo";
-import { ValidateContext } from "../contexts/validate";
+import { NumberContext, RefContext } from "../contexts/cardInfo";
+import { InputGroup } from "./common/inputGroup";
+import { InputLabel } from "./common/inputLabel";
+import { LABEL } from "../constants/inputInfo";
 
 export function CardNumber() {
   const { cardNumber, handleChange } = useContext(NumberContext);
-  const { error, handleError } = useError();
-  const { valid, changeValid } = useContext(ValidateContext);
+  const inputRef = useContext(RefContext);
 
-  useEffect(() => {
-    changeValid("validCardNumber", error);
-  }, [
-    cardNumber.first,
-    cardNumber.second,
-    cardNumber.third,
-    cardNumber.fourth,
-  ]);
+  function checkIsPasswordType(name: string) {
+    return name === "third" || name === "fourth";
+  }
 
   return (
-    <Wrapper>
-      <InputBox type={"NUMBER"} error={error}>
-        {Object.keys(cardNumber).map((cardInput, index, original) => {
-          return (
-            <>
-              <Input
-                key={cardInput}
-                handleChange={handleChange}
-                handleError={() =>
-                  handleError(
-                    Object.values(cardNumber).join(""),
-                    validation.isNumber
-                  )
-                }
-                name={cardInput}
-                type={
-                  cardInput === "third" || cardInput === "fourth"
-                    ? "password"
-                    : "text"
-                }
-                maxLength={4}
-              />
-              {index < original.length - 1 && "-"}
-            </>
-          );
-        })}
-      </InputBox>
-    </Wrapper>
+    <InputBox inputState={{ value: cardNumber, handleChange: handleChange }}>
+      <Wrapper>
+        <InputLabel text={LABEL.NUMBER} />
+        <InputGroup>
+          {Object.keys(cardNumber).map((cardInput, index, original) => {
+            return (
+              <>
+                <Input
+                  key={cardInput}
+                  name={cardInput}
+                  type={checkIsPasswordType(cardInput) ? "password" : "text"}
+                  maxLength={4}
+                  inputRef={inputRef}>
+                  <CustomInput />
+                </Input>
+                {index < original.length - 1 && "-"}
+              </>
+            );
+          })}
+        </InputGroup>
+      </Wrapper>
+    </InputBox>
   );
 }
 
 const Wrapper = styled.section`
   width: 31.8rem;
+`;
+
+const InputWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 4.5rem;
+
+  ${({ theme }) => theme.fonts.body}
+
+  background: ${({ theme }) => theme.colors.gray200};
+  border-radius: 7px;
+`;
+
+const CustomInput = styled.input`
+  width: 100%;
+  box-sizing: border-box;
+  height: 4.5rem;
+
+  padding: 0 1rem;
+
+  background: ${({ theme }) => theme.colors.gray200};
+  border-radius: 0.7rem;
+
+  text-align: center;
+  outline: none;
 `;

@@ -1,44 +1,54 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
-import { MAX_LENGTH } from "../constants/inputInfo";
-import { ValidateContext } from "../contexts/validate";
-import { useError } from "../hooks/useError";
+import { LABEL, MAX_LENGTH } from "../constants/inputInfo";
+import { RefContext } from "../contexts/cardInfo";
 import { useInputCode } from "../hooks/useInputCode";
-import { validation } from "../validation";
 import { Input } from "./common/Input";
 import { InputBox } from "./common/InputBox";
+import { InputGroup } from "./common/inputGroup";
+import { InputLabel } from "./common/inputLabel";
 
 export function SecurityCode() {
   const { code, handleChange } = useInputCode();
-  const { error, handleError } = useError();
-  const { valid, changeValid } = useContext(ValidateContext);
-
-  useEffect(() => {
-    changeValid("validCode", error);
-  }, [code]);
+  const inputRef = useContext(RefContext);
 
   return (
-    <Wrapper>
-      <InputBox type={"CODE"} error={error}>
-        <Input
-          handleChange={handleChange}
-          handleError={() => handleError(code, validation.isNumber)}
-          maxLength={MAX_LENGTH.CODE}
-          type="password"
-        />
-      </InputBox>
-      <Img src="/assets/helpIc.svg" />
-    </Wrapper>
+    <InputBox inputState={{ code, handleChange }}>
+      <Wrapper>
+        <InputLabel text={LABEL.CODE} />
+        <InputGroup>
+          <Input
+            maxLength={MAX_LENGTH.CODE}
+            type="password"
+            name="code"
+            inputRef={inputRef}>
+            <SecurityCodeInput />
+          </Input>
+          <Img src="/assets/helpIc.svg" />
+        </InputGroup>
+      </Wrapper>
+    </InputBox>
   );
 }
 
 const Wrapper = styled.section`
   width: 15rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 `;
 
 const Img = styled.img`
   margin: 0.7rem;
+`;
+
+const SecurityCodeInput = styled.input`
+  width: 100%;
+  box-sizing: border-box;
+  height: 4.5rem;
+
+  padding: 0 1rem;
+
+  background: ${({ theme }) => theme.colors.gray200};
+  border-radius: 0.7rem;
+
+  text-align: center;
+  outline: none;
 `;
