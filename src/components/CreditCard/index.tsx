@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
-import * as Type from '@Types/index';
-
 import creditCard from '@Domains/creditCard';
+
+import * as Type from '@Types/index';
 
 import CARD_COMPANY from '@Constants/CardCompany';
 

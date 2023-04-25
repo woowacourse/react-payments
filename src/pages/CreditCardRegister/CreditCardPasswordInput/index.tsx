@@ -1,8 +1,8 @@
-import * as Type from '@Types/index';
-
 import Input from '@Components/Input';
 
 import * as CommonStyle from '@Styles/common';
+
+import * as Type from '@Types/index';
 
 import * as S from './style';
 import InputLabel from '../InputLabel';

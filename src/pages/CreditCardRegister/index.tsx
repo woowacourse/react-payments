@@ -1,4 +1,3 @@
-import * as Type from '@Types/index';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -7,6 +6,8 @@ import CreditCard from '@Components/CreditCard';
 
 import creditCard from '@Domains/creditCard';
 import creditCardStorage from '@Domains/creditCardStorage';
+
+import * as Type from '@Types/index';
 
 import useInput from '@Hooks/useInput';
 

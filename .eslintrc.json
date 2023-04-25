@@ -65,6 +65,11 @@
             "position": "after"
           },
           {
+            "pattern": "@Types/*",
+            "group": "internal",
+            "position": "after"
+          },
+          {
             "pattern": "@Hooks/*",
             "group": "internal",
             "position": "after"
