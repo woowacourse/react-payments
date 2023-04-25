@@ -63,6 +63,7 @@ const CardNumberInput = ({
           (_, index) => (
             <React.Fragment key={index}>
               <Input
+                placeholder='0000'
                 ref={refs[index]}
                 value={value[index]}
                 type={
