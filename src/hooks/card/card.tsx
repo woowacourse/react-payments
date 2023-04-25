@@ -173,14 +173,8 @@ export function useCardName() {
     handleCardInfo,
   } = useCardRegisterContext();
 
-  const updateName = (value: CardRegisterInfo['holderName']) => {
-    handleCardInfo('holderName', value);
-  };
-
   const onChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
-    if (value && !isEnglish(value)) return;
-
-    updateName(value.toUpperCase());
+    handleCardInfo('holderName', value);
   };
 
   const defaultConditions = useMemo(
@@ -197,11 +191,14 @@ export function useCardName() {
 }
 
 export function useCardCVC() {
-  const onKeyDown = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
-    if (isValidateKey(e, '[0-9]')) return;
+  const {
+    cardRegisterInfo: { cvc },
+    handleCardInfo,
+  } = useCardRegisterContext();
 
-    e.preventDefault();
-  }, []);
+  const onChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
+    handleCardInfo('cvc', value);
+  };
 
   const defaultConditions = useMemo<HTMLAttributes<HTMLInputElement>>(
     () => ({
@@ -211,11 +208,10 @@ export function useCardCVC() {
       asChild: true,
       required: true,
       inputMode: 'numeric',
-      onKeyDown,
     }),
     []
   );
-  return { defaultConditions };
+  return { cvc, defaultConditions, onChange };
 }
 export function useCardPassword() {
   const onKeyDown = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
