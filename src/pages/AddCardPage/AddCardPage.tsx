@@ -61,11 +61,7 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
     setOwnerName(upperCaseName);
   };
 
-  const handleSecurityCode = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const code = e.target.value;
-
-    if (!isNumeric(code)) return;
-
+  const handleSecurityCode = (code: string) => {
     setSecurityCode(code);
   };
 
