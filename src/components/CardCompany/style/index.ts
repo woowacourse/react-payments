@@ -5,6 +5,7 @@ export const CardCompanyLayout = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 `;
 
 export const CardCompanyLogo = styled.img`
