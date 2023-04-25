@@ -4,7 +4,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@craco/craco": "^7.1.0",
     "@storybook/cli": "^7.0.5",
     "@storybook/react-docgen-typescript-plugin": "^1.0.1",
     "@testing-library/jest-dom": "^5.14.1",
@@ -22,7 +21,6 @@
     "react-router-dom": "^6.10.0",
     "react-scripts": "5.0.1",
     "styled-components": "^5.3.9",
-    "tsconfig-paths-webpack-plugin": "^4.0.1",
     "typescript": "*",
     "web-vitals": "^2.1.0"
   },
@@ -30,7 +28,7 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "eject": "craco eject",
+    "eject": "react-scripts eject",
     "sb": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "predeploy": "npm run build",
@@ -81,7 +79,7 @@
     "@typescript-eslint/eslint-plugin": "^5.43.0",
     "babel-plugin-named-exports-order": "^0.0.2",
     "chromatic": "^6.17.3",
-    "craco-alias": "^3.0.1",
+    "craco": "^0.0.3",
     "eslint": "^8.2.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.0.0",
@@ -91,6 +89,8 @@
     "eslint-plugin-react-hooks": "^4.3.0",
     "gh-pages": "^5.0.0",
     "msw": "^0.42.0",
-    "msw-storybook-addon": "^1.6.3"
+    "msw-storybook-addon": "^1.6.3",
+    "react-app-alias": "^2.2.2",
+    "tsconfig-paths-webpack-plugin": "^4.0.1"
   }
 }
