@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 
-const usePasswordInput = <T>(initialState: T) => {
+const useComplicateInput = <T>(initialState: T) => {
   const [value, setValue] = useState(initialState);
 
   const onChange = useCallback(
@@ -16,4 +16,4 @@ const usePasswordInput = <T>(initialState: T) => {
   return [value, onChange] as const;
 };
 
-export default usePasswordInput;
+export default useComplicateInput;

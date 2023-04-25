@@ -2,7 +2,7 @@ import type { Meta } from '@storybook/react';
 
 import type { CardNumber } from '../type';
 import AddCardNumberInput from '../components/AddCardNumberInput';
-import usePasswordInput from '../hooks/usePasswordInput';
+import useComplicateInput from '../hooks/useComplicateInput';
 import { isNumberInput } from '../utils/util';
 
 const meta: Meta<typeof AddCardNumberInput> = {
@@ -24,7 +24,7 @@ const meta: Meta<typeof AddCardNumberInput> = {
 export default meta;
 
 const AddHooks = () => {
-  const [cardNumber, onChangeCardNumber] = usePasswordInput<CardNumber>({
+  const [cardNumber, onChangeCardNumber] = useComplicateInput<CardNumber>({
     first: '',
     second: '',
     third: '',

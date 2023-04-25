@@ -6,7 +6,7 @@ import Card from '../components/Card';
 import AddCardForm from '../components/AddCardForm';
 import Header from '../components/Header';
 import useInput from '../hooks/useInput';
-import usePasswordInput from '../hooks/usePasswordInput';
+import useComplicateInput from '../hooks/useComplicateInput';
 import {
   formatExpireDate,
   handleNumberInput,
@@ -26,7 +26,7 @@ const AddCardPage = () => {
   const navigate = useNavigate();
   const [cardType] = useState('현대');
 
-  const [cardNumber, onChangeCardNumber] = usePasswordInput<CardNumber>({
+  const [cardNumber, onChangeCardNumber] = useComplicateInput<CardNumber>({
     first: '',
     second: '',
     third: '',
