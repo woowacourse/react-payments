@@ -1,19 +1,16 @@
 import styled from "styled-components";
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import CardNumberInput from "./FormInputs/CardNumberInput";
 import ExpirationDateInput from "./FormInputs/ExpirationDateInput";
 import NameInput from "./FormInputs/NameInput";
 import PasswordInput from "./FormInputs/PasswordInput";
 import SecurityCodeInput from "./FormInputs/SecurityCodeInput";
 import CardPreview from "components/CardPreview";
-import { getFormData } from "utils/formDataGetter";
 import { isValidInfo } from "validation";
 import Header from "components/Header";
-import { useNavigate } from "react-router-dom";
+import useSetFormData from "hooks/useSetFormData";
 
 const CardRegisterForm = () => {
-  const navigate = useNavigate();
-
   const [cardNumber, setCardNumber] = useState({
     number1: "",
     number2: "",
@@ -30,28 +27,7 @@ const CardRegisterForm = () => {
 
   const cardInfo = { ...cardNumber, ...date, name };
 
-  const handleForm = (event: FormEvent) => {
-    event.preventDefault();
-
-    const formData = getFormData(event.target);
-    if (!formData) return;
-    const formDataObject = Object.fromEntries(formData);
-
-    if (isValidInfo(formDataObject)) {
-      const registeredCards = Object.keys(localStorage).filter((key) =>
-        key.startsWith("card")
-      );
-
-      localStorage.setItem(
-        `card${registeredCards.length}`,
-        JSON.stringify(formDataObject)
-      );
-
-      navigate("/");
-    } else {
-      alert("값을 모두 입력해 주세요.");
-    }
-  };
+  const { handleFormData } = useSetFormData(isValidInfo);
 
   return (
     <S.Wrapper>
@@ -59,7 +35,7 @@ const CardRegisterForm = () => {
 
       <CardPreview cardInfo={cardInfo} />
 
-      <form onSubmit={handleForm}>
+      <form onSubmit={handleFormData}>
         <CardNumberInput
           cardNumber={cardNumber}
           setCardNumber={setCardNumber}
