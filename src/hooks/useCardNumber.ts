@@ -7,28 +7,45 @@ function useCardNumber() {
   const changeCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     const cardNumber = e.target.value.replace(/[^\d•]/g, "").slice(0, 16);
 
+    if (cardNumber.length < originNumber.length) removeNumber(cardNumber);
+    if (cardNumber.length > originNumber.length) addNumber(cardNumber);
+  };
+
+  const addNumber = (cardNumber: string) => {
+    setOrginNumber(originNumber + cardNumber.slice(-1));
+    setdisplayNumber(maskNumber(cardNumber));
+  };
+
+  const removeNumber = (cardNumber: string) => {
     if (originNumber.length > 8) {
-      if (originNumber.length < cardNumber.length) {
-        setOrginNumber(originNumber + cardNumber.slice(-1));
-      }
+      removeMaskedNumber();
 
-      if (originNumber.length > cardNumber.length) {
-        setOrginNumber(originNumber.slice(0, -1));
-      }
+      return;
     }
 
-    if (originNumber.length <= 8) {
-      setOrginNumber(cardNumber);
+    setOrginNumber(originNumber.slice(0, -1));
+    setdisplayNumber(cardNumber);
+  };
+
+  const removeMaskedNumber = () => {
+    const frontNumber = originNumber.slice(0, 8);
+
+    setOrginNumber(frontNumber);
+    setdisplayNumber(frontNumber);
+  };
+
+  const maskNumber = (cardNumber: string) => {
+    const splitNumber = [];
+
+    for (let i = 0; i < cardNumber.length; i += 4) {
+      splitNumber.push(cardNumber.slice(i, i + 4));
     }
 
-    const hiddenNumber =
-      cardNumber.length > 8
-        ? cardNumber.slice(0, 8) + "•".repeat(cardNumber.length - 8)
-        : cardNumber;
-    const showNumber = hiddenNumber.match(/.{1,4}/g);
-    const resultNumber = showNumber ? showNumber.join("-") : "";
+    const maskedNumber = splitNumber.map((value, idx) =>
+      idx < 2 ? value : "•".repeat(value.length)
+    );
 
-    setdisplayNumber(resultNumber);
+    return maskedNumber.join("-");
   };
 
   return { originNumber, displayNumber, changeCardNumber };
