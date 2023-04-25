@@ -51,6 +51,7 @@ function CardIssuer({ onInputChange, value, isValid }: CardIssuerProps) {
           value ? styles.selected : ''
         }`}
         icon={DownIcon}
+        autoFocus
         onClick={openModal}
       >
         {value ? `${value}` : '카드사를 선택해주세요'}
