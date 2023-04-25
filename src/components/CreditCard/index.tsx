@@ -26,7 +26,11 @@ function CreditCard({ fullFilled, company, creditCard: { expiry, number, owner }
   };
 
   return (
-    <S.CreditCardLayout isValid={isValid()} backgroundColor={CARD_COMPANY[company].uniqueColor}>
+    <S.CreditCardLayout
+      isValid={isValid()}
+      backgroundColor={CARD_COMPANY[company].uniqueColor}
+      fontColor={CARD_COMPANY[company].fontColor}
+    >
       <S.CreditCardCompanyName>{CARD_COMPANY[company].name}</S.CreditCardCompanyName>
       <S.CreditCardICChip />
       <S.CreditCardInfoLayout>

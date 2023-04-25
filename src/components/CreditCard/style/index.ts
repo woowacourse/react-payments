@@ -3,6 +3,7 @@ import styled from 'styled-components';
 type Props = {
   isValid: boolean;
   backgroundColor: string;
+  fontColor: string;
 };
 
 export const CreditCardLayout = styled.div<Props>`
@@ -12,6 +13,7 @@ export const CreditCardLayout = styled.div<Props>`
   grid-template-rows: repeat(1fr, 3);
   align-items: center;
   background-color: ${(props) => props.backgroundColor};
+  color: ${(props) => props.fontColor};
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
   padding: 14px;
@@ -20,7 +22,6 @@ export const CreditCardLayout = styled.div<Props>`
   font-weight: 500;
   font-size: 12px;
   line-height: 14px;
-  color: #ffffff;
   letter-spacing: 3px;
   border: ${(props) => (props.isValid ? '' : '2px solid red')};
 `;
