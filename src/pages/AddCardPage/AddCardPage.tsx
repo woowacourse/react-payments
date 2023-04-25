@@ -55,10 +55,7 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
     setExpirationDate({ ...expirationDate, [dateType]: value });
   };
 
-  const handleOwnerName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const name = e.target.value;
-
-    if (!isAlphabetic(name)) return;
+  const handleOwnerName = (name: string) => {
     const upperCaseName = name.toUpperCase();
 
     setOwnerName(upperCaseName);

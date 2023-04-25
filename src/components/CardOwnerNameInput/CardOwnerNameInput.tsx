@@ -1,13 +1,22 @@
 import styled from "styled-components";
 import { InputContainer, Input, Label } from "../common";
+import { isAlphabetic } from "../../validator/Validator";
 
 type CardOwnerNameInputProp = {
   ownerName: string;
   nameLength: number;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (name: string) => void;
 };
 
 const CardOwnerNameInput = ({ ownerName, nameLength, onChange }: CardOwnerNameInputProp) => {
+  const handleOwnerName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const name = e.target.value;
+
+    if (!isAlphabetic(name)) return;
+
+    onChange(name);
+  };
+
   return (
     <Label>
       <Div>
@@ -22,7 +31,7 @@ const CardOwnerNameInput = ({ ownerName, nameLength, onChange }: CardOwnerNameIn
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
           type="text"
           maxLength={30}
-          onChange={onChange}
+          onChange={handleOwnerName}
         />
       </InputContainer>
     </Label>
