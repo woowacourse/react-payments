@@ -4,9 +4,10 @@ import { changeToValidValue } from "utils/inputValidator";
 import styled from "styled-components";
 import Input from "components/Input";
 import { Hyphen } from "components/DelimiterStyle";
+import { CardNumberCaption } from "components/CaptionStyle";
+import { CardNumberInputBox } from "components/InputBoxStyle";
 import { CardNumber } from "types";
 import { NUMBER_INPUT, LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
-import { CardNumberCaption } from "components/CaptionStyle";
 const { ONLY_NUMBER } = VALID_INPUT;
 
 interface Props {
@@ -36,7 +37,7 @@ const CardNumberInput = ({ cardNumber, setCardNumber }: Props) => {
       <S.Label className="label-text" htmlFor="card-label">
         카드 번호
       </S.Label>
-      <S.InputBox>
+      <CardNumberInputBox>
         {Array.from({ length: NUMBER_INPUT.COUNT }).map((_, index) => (
           <Fragment key={index}>
             <Input
@@ -60,7 +61,7 @@ const CardNumberInput = ({ cardNumber, setCardNumber }: Props) => {
             )}
           </Fragment>
         ))}
-      </S.InputBox>
+      </CardNumberInputBox>
       <CardNumberCaption cardNumbers={Object.values(cardNumber)}>
         숫자 {LIMIT_LENGTH.ALL_CARD_NUMBERS}자리를 모두 입력해 주세요.
       </CardNumberCaption>
@@ -72,14 +73,6 @@ const S = {
   Label: styled.label`
     display: inline-block;
     margin-top: 26px;
-  `,
-
-  InputBox: styled.div`
-    display: flex;
-    justify-content: center;
-    margin-top: 12px;
-    background: var(--input-background);
-    border-radius: 8px;
   `,
 };
 

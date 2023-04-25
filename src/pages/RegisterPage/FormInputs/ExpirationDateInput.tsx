@@ -1,10 +1,10 @@
 import { useFocus } from "hooks/useFocus";
 import { ChangeEvent, Dispatch, SetStateAction, Fragment } from "react";
 import { changeToValidValue } from "utils/inputValidator";
-import styled from "styled-components";
 import Input from "components/Input";
 import { Slash } from "components/DelimiterStyle";
 import { DateCaption } from "components/CaptionStyle";
+import { DateInputBox } from "components/InputBoxStyle";
 import { isInvalidDate } from "validation";
 import { ExpirationDate } from "types";
 import { DATE_INPUT, LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
@@ -39,7 +39,7 @@ const ExpirationDateInput = ({ date, setDate }: Props) => {
       <label className="label-text" htmlFor="date-label">
         만료일
       </label>
-      <S.InputBox>
+      <DateInputBox>
         {Array.from({ length: DATE_INPUT.COUNT }).map((_, index) => (
           <Fragment key={index}>
             <Input
@@ -62,24 +62,12 @@ const ExpirationDateInput = ({ date, setDate }: Props) => {
             )}
           </Fragment>
         ))}
-      </S.InputBox>
+      </DateInputBox>
       <DateCaption date={Object.values(date)}>
         카드에 표기된 월/연도 순으로 입력해주세요. ex&#41; 01/28
       </DateCaption>
     </>
   );
-};
-
-const S = {
-  InputBox: styled.div`
-    display: flex;
-    justify-content: center;
-    width: 40%;
-    height: 48px;
-    margin-top: 12px;
-    background: var(--input-background);
-    border-radius: 8px;
-  `,
 };
 
 export default ExpirationDateInput;

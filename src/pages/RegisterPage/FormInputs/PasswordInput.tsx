@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { changeToValidValue } from "utils/inputValidator";
 import Input from "components/Input";
 import { PasswordCaption } from "components/CaptionStyle";
+import { PasswordInputBox } from "components/InputBoxStyle";
 import {
   NUMBER_INPUT,
   LIMIT_LENGTH,
@@ -45,7 +46,7 @@ const PasswordInput = () => {
       <label className="label-text" htmlFor="password-label">
         카드 비밀번호
       </label>
-      <S.InputBox>
+      <PasswordInputBox>
         {Array.from({ length: NUMBER_INPUT.COUNT }).map((_, index) => (
           <Fragment key={index}>
             {index < PASSWORD_PART ? (
@@ -70,7 +71,7 @@ const PasswordInput = () => {
             )}
           </Fragment>
         ))}
-      </S.InputBox>
+      </PasswordInputBox>
       <PasswordCaption password={Object.values(password)}>
         카드 비밀번호 앞 {LIMIT_LENGTH.PASSWORD}자리를 입력해 주세요.
       </PasswordCaption>
@@ -79,12 +80,6 @@ const PasswordInput = () => {
 };
 
 const S = {
-  InputBox: styled.div`
-    display: flex;
-    height: 48px;
-    margin-top: 12px;
-  `,
-
   HiddenPassword: styled.p`
     width: 12%;
     margin-right: 2.2%;
