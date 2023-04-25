@@ -11,8 +11,5 @@ const meta: Meta = {
 export default meta;
 
 export const InputTest = (args: any) => (
-  <InputBoxCardNumber
-    changeCardNumberStatus={() => {}}
-    changeNowCardInfo={() => {}}
-  ></InputBoxCardNumber>
+  <InputBoxCardNumber changeCardNumberStatus={() => {}}></InputBoxCardNumber>
 );

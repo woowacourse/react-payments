@@ -14,6 +14,5 @@ export const InputTest = (args: any) => (
   <CardNumber
     setHasError={() => {}}
     changeCardNumberStatus={() => {}}
-    changeNowCardInfo={() => {}}
   ></CardNumber>
 );

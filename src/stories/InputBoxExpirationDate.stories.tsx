@@ -13,6 +13,5 @@ export default meta;
 export const InputTest = (args: any) => (
   <InputBoxExpirationDate
     changeCardExpirationDateStatus={() => {}}
-    changeNowCardInfo={() => {}}
   ></InputBoxExpirationDate>
 );
