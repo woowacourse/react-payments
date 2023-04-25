@@ -1,6 +1,7 @@
-export const getLocalStorage = (key: string) => {
+export const getLocalStorage = <T>(key: string, initialValue: T): T => {
   const item = localStorage.getItem(key);
-  return item ? JSON.parse(item) : [];
+
+  return item ? (JSON.parse(item) as T) : initialValue;
 };
 
 export const setLocalStorage = <T extends Object>(key: string, value: T) => {
