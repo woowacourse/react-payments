@@ -2,7 +2,7 @@ name: NodeJS with Webpack
 
 on:
   push:
-    branches: ['step1']
+    branches: ['step2']
 
 jobs:
   deploy:
@@ -28,7 +28,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-      - run: npm i
+      - run: npm ci
         if: steps.cache.outputs.cache-hit != 'true'
 
       - run: npm run build
