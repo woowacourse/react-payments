@@ -4,20 +4,38 @@ import styled from 'styled-components';
 import CardListPage from './components/pages/CardListPage';
 import CardRegistrationPage from './components/pages/CardRegistrationPage';
 import NotFoundPage from './components/pages/NotFoundPage';
+import BankList from './components/BankList';
 import type { CardItemInfo } from './types/Card';
 
 function App() {
   const [cardList, setCardList] = useState<CardItemInfo[]>([]);
+  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
 
   const addCardItem = (cardItem: CardItemInfo) => {
     setCardList((prevCardList) => [...prevCardList, cardItem]);
+  };
+
+  const handleBottomSheetOpen = () => {
+    setIsBottomSheetOpen(true);
+  };
+
+  const handleBottomSheetClose = () => {
+    setIsBottomSheetOpen(false);
   };
 
   return (
     <AppContainer className='App'>
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
-          <Route path='/' element={<CardListPage cardList={cardList} />} />
+          <Route
+            path='/'
+            element={
+              <CardListPage
+                cardList={cardList}
+                onOpen={handleBottomSheetOpen}
+              />
+            }
+          />
           <Route
             path='/register'
             element={<CardRegistrationPage addCardItem={addCardItem} />}
@@ -25,6 +43,7 @@ function App() {
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
+      {isBottomSheetOpen && <BankList onClose={handleBottomSheetClose} />}
     </AppContainer>
   );
 }

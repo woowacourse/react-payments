@@ -3,12 +3,13 @@ import styled from 'styled-components';
 
 interface BottomSheetProps {
   children: React.ReactNode;
+  onClose: () => void;
 }
 
-const BottomSheet = ({ children }: BottomSheetProps) => {
+const BottomSheet = ({ children, onClose }: BottomSheetProps) => {
   return ReactDOM.createPortal(
     <>
-      <BottomSheetBackdrop />
+      <BottomSheetBackdrop onClick={onClose} />
       <BottomSheetContainer>{children}</BottomSheetContainer>
     </>,
     document.querySelector('#root') as HTMLElement
@@ -27,6 +28,8 @@ const BottomSheetBackdrop = styled.div`
 const BottomSheetContainer = styled.div`
   position: fixed;
   bottom: 0;
+  height: 316px;
+  left: 27%;
   width: 406px;
   height: 180px;
   padding: 42px 16px;

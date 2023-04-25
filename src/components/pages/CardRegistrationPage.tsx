@@ -6,8 +6,6 @@ import CardItem from '../common/CardItem';
 import CardForm from '../cardForm/CardForm';
 import { LeftArrowIcon } from '../../assets/icons';
 import type { CardItemInfo } from '../../types/Card';
-import BottomSheet from '../BottomSheet';
-import BankList from '../BankList';
 
 interface CardRegistrationPageProps {
   addCardItem: (cardItem: CardItemInfo) => void;
@@ -49,7 +47,6 @@ const CardRegistrationPage = ({ addCardItem }: CardRegistrationPageProps) => {
         onSubmitForm={handleSubmitForm}
         onChangeForm={handleChangeForm}
       />
-      <BankList />
     </>
   );
 };
