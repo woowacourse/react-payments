@@ -65,44 +65,20 @@ export const NewCreditCardPage = () => {
   });
   const { addCreditCard } = usePayments();
 
-  const setNewCardField = <Field extends keyof CreditCard>(
-    field: Field,
-    value: CreditCard[Field],
-  ) => {
-    setNewCard({ ...newCard, [field]: value });
-  };
+  const handleChangeNewCardField =
+    <Field extends keyof CreditCard>(field: Field) =>
+    (value: CreditCard[Field]) => {
+      setNewCard({ ...newCard, [field]: value });
+    };
 
   const navigate = useNavigate();
 
-  const handleClickBackButton = () => {
-    navigate(-1);
-  };
-
-  const handleCardNumbersChange = (value: string) => {
-    setNewCardField('cardNumbers', value);
-  };
-
-  const handleExpirationDateChange = (value: [string, string]) => {
-    setNewCardField('expirationDate', value);
-  };
-
-  const handleCardNameChange = (value: string) => {
-    setNewCardField('name', value);
-  };
-
-  const handleCVCNumberChange = (value: string) => {
-    setNewCardField('cvc', value);
-  };
-
-  const handleCardPasswordChange = (value: string) => {
-    setNewCardField('password', value);
-  };
+  const handleClickBackButton = () => navigate(-1);
 
   const handleClickNextButton = () => {
     if (!validate(newCard)) return;
 
     addCreditCard(newCard);
-
     navigate('/');
   };
 
@@ -118,7 +94,10 @@ export const NewCreditCardPage = () => {
 
         <FormGroup>
           <Text size="small">카드 번호</Text>
-          <CardNumberInput value={newCard.cardNumbers} onChange={handleCardNumbersChange} />
+          <CardNumberInput
+            value={newCard.cardNumbers}
+            onChange={handleChangeNewCardField('cardNumbers')}
+          />
           {validationResult.cardNumbers && (
             <Text size="small" color="red">
               {validationResult.cardNumbers}
@@ -130,7 +109,7 @@ export const NewCreditCardPage = () => {
           <Text size="small">만료일</Text>
           <ExpirationDateInput
             value={newCard.expirationDate}
-            onChange={handleExpirationDateChange}
+            onChange={handleChangeNewCardField('expirationDate')}
           />
           {validationResult.expirationDate && (
             <Text size="small" color="red">
@@ -147,7 +126,7 @@ export const NewCreditCardPage = () => {
           <Input
             maxCount={30}
             value={newCard.name}
-            onChange={handleCardNameChange}
+            onChange={handleChangeNewCardField('name')}
             placeholder="카드에 표시된 이름과 동일하게 입력하세요."
           />
         </FormGroup>
@@ -157,7 +136,7 @@ export const NewCreditCardPage = () => {
           <NumberInput
             maxCount={3}
             value={newCard.cvc}
-            onChange={handleCVCNumberChange}
+            onChange={handleChangeNewCardField('cvc')}
             width={8}
             center
             type="password"
@@ -171,7 +150,10 @@ export const NewCreditCardPage = () => {
 
         <FormGroup>
           <Text size="small">카드 비밀번호</Text>
-          <CardPasswordInput value={newCard.password} onChange={handleCardPasswordChange} />
+          <CardPasswordInput
+            value={newCard.password}
+            onChange={handleChangeNewCardField('password')}
+          />
           {validationResult.password && (
             <Text size="small" color="red">
               {validationResult.password}
