@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import useCardList from '../../hooks/useCardList';
 import Card from '../@common/Card';
+import { COLOR_BY_BANK, KOR_BANK_NAME_BY_BANK } from '../../@types/banks';
 
 function CardList() {
   const navigation = useNavigate();
@@ -11,13 +12,18 @@ function CardList() {
 
   const cardLists = useMemo(() => {
     return cardList.length ? (
-      cardList.map(({ cardNumber, ownerName, expirationDate }, idx) => {
+      cardList.map(({ cardNumber, ownerName, expirationDate, bank }, idx) => {
+        const bankName = KOR_BANK_NAME_BY_BANK[bank];
+        const cardColor = COLOR_BY_BANK[bank];
         return (
           <Card
+            onClick={() => {}}
             key={`card-list-${idx}`}
             cardNumber={cardNumber}
             ownerName={ownerName}
             expirationDate={expirationDate}
+            bankName={bankName}
+            cardColor={cardColor}
           />
         );
       })

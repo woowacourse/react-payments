@@ -2,17 +2,31 @@ import styled from 'styled-components';
 import refineExpirationDate from '../../utils/refineExpirationDate';
 import useCardNumber from '../../hooks/useCardNumber';
 
-interface CardProps {
+interface CardContainerProps {
+  cardColor: string;
+}
+interface CardProps extends CardContainerProps {
   cardNumber: string[];
   ownerName: string;
   expirationDate: string[];
+  onClick: React.MouseEventHandler<HTMLDivElement>;
+  bankName: string;
+  cardColor: string;
 }
 
-const Card = ({ cardNumber, ownerName, expirationDate }: CardProps) => {
+const Card = ({
+  cardNumber,
+  ownerName,
+  expirationDate,
+  bankName,
+  cardColor,
+  onClick,
+}: CardProps) => {
   const cardNumberList = useCardNumber(cardNumber);
 
   return (
-    <CardContainer>
+    <CardContainer onClick={onClick} cardColor={cardColor}>
+      <span>{bankName}</span>
       <CardChip></CardChip>
       <CardNumberContainer>
         {cardNumberList.map((numberValue, index) => (
@@ -29,7 +43,7 @@ const Card = ({ cardNumber, ownerName, expirationDate }: CardProps) => {
 
 export default Card;
 
-const CardContainer = styled.div`
+const CardContainer = styled.div<CardContainerProps>`
   width: 233px;
   height: 143px;
 
@@ -38,7 +52,7 @@ const CardContainer = styled.div`
   row-gap: 13px;
   justify-content: flex-end;
 
-  background: #333333;
+  background: ${(props) => props.cardColor};
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
 
