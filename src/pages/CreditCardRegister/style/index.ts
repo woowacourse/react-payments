@@ -59,12 +59,12 @@ export const ButtonWrapper = styled.div`
 `;
 
 type RegisterButtonType = {
-  isFullFilled: boolean;
+  disabled: boolean;
 };
 
 export const RegisterButton = styled.button<RegisterButtonType>`
   font-weight: 700;
-  cursor: ${(props) => (props.isFullFilled ? 'pointer' : 'not-allowed')};
+  cursor: ${(props) => (props.disabled ? 'pointer' : 'not-allowed')};
 `;
 
 const cursorBlink = keyframes`
