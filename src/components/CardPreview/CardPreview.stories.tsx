@@ -11,6 +11,7 @@ export const Default = () => (
     <GlobalStyle />
     <CardPreview
       card={{
+        cardCompany: "현대카드",
         cardNumber: {
           firstGroup: "1234",
           secondGroup: "1234",

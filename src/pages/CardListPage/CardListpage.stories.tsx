@@ -9,6 +9,7 @@ export default {
 };
 
 const card: Card = {
+  cardCompany: "현대카드",
   cardNumber: { firstGroup: "1234", secondGroup: "1234", thirdGroup: "1234", fourthGroup: "1234" },
   ownerName: "KIM",
   expirationDate: { month: "10", year: "96" },

@@ -3,30 +3,28 @@ import styled from "styled-components";
 type CardCompanyIconProps = {
   children: React.ReactNode;
   company: string;
+  onClickHandler: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-const CardCompanyIcon = ({ children, company }: CardCompanyIconProps) => {
+const CardCompanyIcon = ({ children, company, onClickHandler }: CardCompanyIconProps) => {
   return (
-    <Wrapper>
-      <Icon>{children}</Icon>
+    <Wrapper onClick={onClickHandler}>
+      {children}
       <span>{company}</span>
     </Wrapper>
   );
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.button`
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
-`;
 
-const Icon = styled.div`
-  width: 37px;
-  height: 37px;
+  border: none;
+  background-color: transparent;
 
-  border-radius: 100%;
-  background-color: red;
+  cursor: pointer;
 `;
 
 export default CardCompanyIcon;

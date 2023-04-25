@@ -21,12 +21,25 @@ import {
   hasInvalidKey,
 } from "../../validator/Validator";
 import { PAGE } from "../../constant";
+import Modal from "../../components/Modal/Modal";
+import CardCompanyIcon from "../../components/CardCompanyIcon/CardCompanyIcon";
+import { ReactComponent as BCLogo } from "../../assets/bccard-logo.svg";
+import { ReactComponent as HanaLogo } from "../../assets/hanacard-logo.svg";
+import { ReactComponent as HyundaiLogo } from "../../assets/hyundaicard-logo.svg";
+import { ReactComponent as KakaoBankLogo } from "../../assets/kakaobank-logo.svg";
+import { ReactComponent as KbLogo } from "../../assets/kbcard-logo.svg";
+import { ReactComponent as LotteLogo } from "../../assets/lottecard-logo.svg";
+import { ReactComponent as ShinhanLogo } from "../../assets/shinhancard-logo.svg";
+import { ReactComponent as WooriLogo } from "../../assets/wooricard-logo.svg";
 
 type AddCardPageProps = {
   addCard: (card: Card) => void;
 };
 
 const AddCardPage = ({ addCard }: AddCardPageProps) => {
+  const [modalOpen, setModalOpen] = useState(true);
+  const [cardCompany, setCardCompany] = useState<string>("");
+
   const [cardNumber, setCardNumber] = useState<CardNumber>({
     firstGroup: "",
     secondGroup: "",
@@ -52,6 +65,14 @@ const AddCardPage = ({ addCard }: AddCardPageProps) => {
   });
 
   const navigate = useNavigate();
+
+  const handleCardCompany = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const company = e.target as any;
+    console.log(company);
+
+    setModalOpen(false);
+    if (company) setCardCompany(company);
+  };
 
   const handleCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
@@ -130,6 +151,7 @@ const AddCardPage = ({ addCard }: AddCardPageProps) => {
     e.preventDefault();
 
     const card: Card = {
+      cardCompany,
       cardNumber,
       expirationDate,
       ownerName,
@@ -155,8 +177,55 @@ const AddCardPage = ({ addCard }: AddCardPageProps) => {
 
   return (
     <Container>
+      <Modal
+        modalOpen={modalOpen}
+        children={
+          <>
+            <CardCompanyIcon
+              children={<BCLogo width={"37px"} height={"37px"} />}
+              company={"비씨카드"}
+              onClickHandler={handleCardCompany}
+            ></CardCompanyIcon>
+            <CardCompanyIcon
+              children={<HanaLogo width={"37px"} height={"37px"} />}
+              company={"하나카드"}
+              onClickHandler={handleCardCompany}
+            ></CardCompanyIcon>
+            <CardCompanyIcon
+              children={<HyundaiLogo width={"37px"} height={"37px"} />}
+              company={"현대카드"}
+              onClickHandler={handleCardCompany}
+            ></CardCompanyIcon>
+            <CardCompanyIcon
+              children={<KakaoBankLogo width={"37px"} height={"37px"} />}
+              company={"카카오뱅크카드"}
+              onClickHandler={handleCardCompany}
+            ></CardCompanyIcon>
+            <CardCompanyIcon
+              children={<KbLogo width={"37px"} height={"37px"} />}
+              company={"국민카드"}
+              onClickHandler={handleCardCompany}
+            ></CardCompanyIcon>
+            <CardCompanyIcon
+              children={<LotteLogo width={"37px"} height={"37px"} />}
+              company={"롯데카드"}
+              onClickHandler={handleCardCompany}
+            ></CardCompanyIcon>
+            <CardCompanyIcon
+              children={<ShinhanLogo width={"37px"} height={"37px"} />}
+              company={"신한카드"}
+              onClickHandler={handleCardCompany}
+            ></CardCompanyIcon>
+            <CardCompanyIcon
+              children={<WooriLogo width={"37px"} height={"37px"} />}
+              company={"우리카드"}
+              onClickHandler={handleCardCompany}
+            ></CardCompanyIcon>
+          </>
+        }
+      ></Modal>
       <AppBar title={"카드 추가"} children={<Link to={PAGE.CARD_LIST}>〈</Link>} />
-      <CardPreview card={{ cardNumber, expirationDate, ownerName }} />
+      <CardPreview card={{ cardCompany, cardNumber, expirationDate, ownerName }} />
       <Form onSubmit={onSubmitHandler}>
         <CardNumberInput
           cardNumber={cardNumber}

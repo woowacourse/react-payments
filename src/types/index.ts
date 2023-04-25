@@ -14,6 +14,7 @@ export type CardPasswordKey = "first" | "second";
 export type CardPassword = Record<CardPasswordKey, string>;
 
 export type Card = {
+  cardCompany: string;
   cardNumber: CardNumber;
   expirationDate: CardExpirationDate;
   ownerName: string;

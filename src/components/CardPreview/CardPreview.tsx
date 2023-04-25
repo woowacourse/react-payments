@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Card } from "../../types";
 
-type PreviewCard = Pick<Card, "cardNumber" | "ownerName" | "expirationDate">;
+type PreviewCard = Pick<Card, "cardNumber" | "ownerName" | "expirationDate" | "cardCompany">;
 
 type CardPreviewProps = {
   card: PreviewCard;
@@ -9,11 +9,14 @@ type CardPreviewProps = {
 };
 
 const CardPreview = ({ card, animation }: CardPreviewProps) => {
-  const { cardNumber, ownerName, expirationDate } = card;
+  const { cardCompany, cardNumber, ownerName, expirationDate } = card;
   const { transition = "", transform = "" } = animation ?? {};
 
   return (
     <CardLayout transition={transition} transform={transform}>
+      <CardCompany>
+        <span>{cardCompany}</span>
+      </CardCompany>
       <ICChip width={31} height={24} viewBox="0 0 31 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect
           x={0.375}
@@ -88,6 +91,18 @@ const CardLayout = styled.li<{ transition: string; transform: string }>`
   &:hover {
     transform: ${({ transform }) => transform ?? "none"};
   }
+`;
+
+const CardCompany = styled.div`
+  position: absolute;
+
+  top: 12px;
+  left: 12px;
+
+  font-size: 16px;
+  letter-spacing: 1.5px;
+
+  z-index: 2;
 `;
 
 const ICChip = styled.svg`
