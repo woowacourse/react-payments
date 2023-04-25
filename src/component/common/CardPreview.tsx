@@ -9,9 +9,9 @@ export default function CardPreview(props: Props) {
   const { card } = props;
 
   const previewNumber =
-    card.number.length === 0
+    card.cardNumber.length === 0
       ? " "
-      : `${card.number[0]} **** **** ${card.number[3]}`;
+      : `${card.cardNumber[0]} **** **** ${card.cardNumber[3]}`;
   return (
     <div className={styles.container}>
       <div className={styles.chip}></div>

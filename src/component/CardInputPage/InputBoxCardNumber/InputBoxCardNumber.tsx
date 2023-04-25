@@ -1,9 +1,9 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { useState } from "react";
 import CardNumber from "./CardNumber";
-import { CARD_ERROR_MESSAGE, INPUT_STATUS } from "../../../CONSTANT";
+import { CARD_ERROR_MESSAGE } from "../../../CONSTANT";
 
 import "./inputBoxCardNumber.css";
-import { CreditCard, EachUserInputState } from "../../../type";
+import { CreditCard } from "../../../type";
 
 interface Props {
   changeCardNumberStatus: (key: "isComplete" | "userInput", value: any) => void;

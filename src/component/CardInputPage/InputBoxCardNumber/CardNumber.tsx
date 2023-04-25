@@ -38,7 +38,7 @@ export default function CardNumber({
         setHasError(false);
         changeCardNumberStatus("isComplete", true);
         changeCardNumberStatus("userInput", appropriateNumber);
-        changeNowCardInfo("number", appropriateNumber);
+        changeNowCardInfo("cardNumber", appropriateNumber);
       } else {
         setHasError(false);
         changeCardNumberStatus("isComplete", false);
