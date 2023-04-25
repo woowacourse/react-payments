@@ -31,9 +31,9 @@ const CardRegisterForm = () => {
   const [password, setPassword] = useState({ password1: "", password2: "" });
 
   const cardPreviewInfo = { ...cardNumber, ...date, name };
-  const cardAllInfo = { ...cardNumber, ...date, code, ...password };
+  const requiredCardInfo = { ...cardNumber, ...date, code, ...password };
 
-  const { isFormFilled } = useFormState(cardAllInfo);
+  const { isFormFilled } = useFormState(requiredCardInfo);
   const { handleFormData } = useSetFormData("card");
 
   return (
