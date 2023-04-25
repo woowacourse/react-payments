@@ -4,5 +4,8 @@ export type CreditCard = {
   cardDate: string;
   cardOwnerName: string;
   cardCVC: string;
-  cardPassword: [string, string];
+  cardPassword: [FirstPassword, SecondPassword];
 };
+
+export type FirstPassword = string;
+export type SecondPassword = string;

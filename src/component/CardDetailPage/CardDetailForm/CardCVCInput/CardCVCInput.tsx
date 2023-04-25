@@ -6,7 +6,7 @@ import Input from "../../../common/Input/Input";
 import useWarningText from "../../../../hooks/useWarningText";
 import InputGuide from "../../../common/InputGuide/InputGuide";
 
-interface CardCVCInputProps {
+export interface CardCVCInputProps {
   changeCardCVC: (e: React.ChangeEvent<HTMLInputElement>) => void;
   cardCVC: string;
 }

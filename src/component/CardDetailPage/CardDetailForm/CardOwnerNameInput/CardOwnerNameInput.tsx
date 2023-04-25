@@ -3,7 +3,7 @@ import Style from "./CardOwnerNameInputStyled";
 import Input from "../../../common/Input/Input";
 import { ThemeProvider } from "styled-components";
 
-interface CardOwnerNameInputProps {
+export interface CardOwnerNameInputProps {
   changeCardOwnerName: (e: React.ChangeEvent<HTMLInputElement>) => void;
   cardOwnerName: string;
 }

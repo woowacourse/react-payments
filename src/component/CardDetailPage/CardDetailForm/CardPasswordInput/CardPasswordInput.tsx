@@ -4,10 +4,11 @@ import Input from "../../../common/Input/Input";
 import { ThemeProvider } from "styled-components";
 import useWarningText from "../../../../hooks/useWarningText";
 import InputGuide from "../../../common/InputGuide/InputGuide";
+import { FirstPassword, SecondPassword } from "../../../../types/card";
 
-interface CardPasswordInputProps {
+export interface CardPasswordInputProps {
   changeCardPassword: (e: React.FormEvent<HTMLInputElement>) => void;
-  cardPassword: [string, string];
+  cardPassword: [FirstPassword, SecondPassword];
 }
 
 function CardPasswordInput({

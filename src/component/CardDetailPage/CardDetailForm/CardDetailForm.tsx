@@ -1,31 +1,29 @@
 import React from "react";
 
-import CardNumberInput from "./CardNumberInput/CardNumberInput";
-import CardDateInput from "./CardDateInput/CardDateInput";
-import CardOwnerNameInput from "./CardOwnerNameInput/CardOwnerNameInput";
-import CardCVCInput from "./CardCVCInput/CardCVCInput";
-import CardPasswordInput from "./CardPasswordInput/CardPasswordInput";
+import CardNumberInput, {
+  CardNumberInputProps,
+} from "./CardNumberInput/CardNumberInput";
+import CardDateInput, {
+  CardDateInputProps,
+} from "./CardDateInput/CardDateInput";
+import CardOwnerNameInput, {
+  CardOwnerNameInputProps,
+} from "./CardOwnerNameInput/CardOwnerNameInput";
+import CardCVCInput, { CardCVCInputProps } from "./CardCVCInput/CardCVCInput";
+import CardPasswordInput, {
+  CardPasswordInputProps,
+} from "./CardPasswordInput/CardPasswordInput";
 
 import Style from "./CardDetailFormStyled";
 import useWarningText from "../../../hooks/useWarningText";
 import InputGuide from "../../common/InputGuide/InputGuide";
 
-interface CardDetailFormProps {
-  changeCardNumber: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  cardNumberHidden: string;
-
-  changeCardDate: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  cardDate: string;
-
-  changeCardOwnerName: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  cardOwnerName: string;
-
-  changeCardCVC: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  cardCVC: string;
-
-  changeCardPassword: (e: React.FormEvent<HTMLInputElement>) => void;
-  cardPassword: [string, string];
-
+interface CardDetailFormProps
+  extends CardNumberInputProps,
+    CardDateInputProps,
+    CardOwnerNameInputProps,
+    CardCVCInputProps,
+    CardPasswordInputProps {
   submitCreditCard: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 

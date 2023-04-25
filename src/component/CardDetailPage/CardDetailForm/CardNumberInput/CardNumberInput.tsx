@@ -6,7 +6,7 @@ import InputGuide from "../../../common/InputGuide/InputGuide";
 
 import useWarningText from "../../../../hooks/useWarningText";
 
-interface CardNumberInputProps {
+export interface CardNumberInputProps {
   changeCardNumber: (e: React.ChangeEvent<HTMLInputElement>) => void;
   cardNumberHidden: string;
 }

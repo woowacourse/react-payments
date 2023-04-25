@@ -2,15 +2,7 @@ import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CardDetailPage from "./component/CardDetailPage/CardDetailPage";
 import CardListPage from "./component/CardListPage/CardListPage";
-
-type CreditCard = {
-  cardNumberOrigin: string;
-  cardNumberHidden: string;
-  cardDate: string;
-  cardOwnerName: string;
-  cardCVC: string;
-  cardPassword: [string, string];
-};
+import { CreditCard } from "./types/card";
 
 function App() {
   const [creditCardList, setCreditCardList] = useState<CreditCard[]>([]);

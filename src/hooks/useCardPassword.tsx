@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { FirstPassword, SecondPassword } from "../types/card";
 
 function useCardPassword() {
-  const [cardPassword, setCardPassword] = useState<[string, string]>(["", ""]);
+  const [cardPassword, setCardPassword] = useState<
+    [FirstPassword, SecondPassword]
+  >(["", ""]);
 
   const changeCardPassword = (e: React.FormEvent<HTMLInputElement>) => {
     const password = e.currentTarget.value.replace(/[^\d]/g, "").slice(0, 1);

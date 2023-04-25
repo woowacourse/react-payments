@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { FirstPassword, SecondPassword } from "../types/card";
 
 function useWarningText(minLength?: number, regExp?: RegExp, name?: string) {
   const [warningText, setWarningText] = useState("");
@@ -42,7 +43,7 @@ function useWarningText(minLength?: number, regExp?: RegExp, name?: string) {
     cardNumberHidden: string,
     cardDate: string,
     cardCVC: string,
-    cardPassword: [string, string]
+    cardPassword: [FirstPassword, SecondPassword]
   ) => {
     let isError = false;
     if (cardNumberHidden.replace(/[^\d•]/g, "").length !== 16) isError = true;

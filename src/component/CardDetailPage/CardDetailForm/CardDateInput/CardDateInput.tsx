@@ -5,7 +5,7 @@ import { ThemeProvider } from "styled-components";
 import useWarningText from "../../../../hooks/useWarningText";
 import InputGuide from "../../../common/InputGuide/InputGuide";
 
-interface CardDateInputProps {
+export interface CardDateInputProps {
   changeCardDate: (e: React.ChangeEvent<HTMLInputElement>) => void;
   cardDate: string;
 }
