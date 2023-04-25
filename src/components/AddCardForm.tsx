@@ -21,7 +21,7 @@ const AddCardForm = ({
 }: FormCardAddProps) => {
   const navigate = useNavigate();
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       sumbitCard('현대', cardNumber, cardOwner.value, cardExpire.value, securityCode.value, {
