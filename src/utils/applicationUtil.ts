@@ -55,3 +55,7 @@ export const sumbitCard = (
   };
   postLocalStorage(card);
 };
+
+export const fetchLocalStorage = (key: string, initial = '') => {
+  return JSON.parse(localStorage.getItem('cardList') ?? initial);
+};
