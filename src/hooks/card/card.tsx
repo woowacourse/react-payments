@@ -2,9 +2,8 @@ import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useCardRegisterContext } from '../../context/CardRegisterContext';
 import { CardNumber, CardRegisterInfo, ExpirationDate, Password } from '../../types/card.type';
-import { isPatternMatch } from '../../utils/input';
 import { getCardList, setCardList } from '../../utils/localStorage';
-import { isEnglish, isNumber } from '../../utils/validation';
+import { isEnglish, isNumber, isPatternMatch } from '../../utils/validation';
 
 export function useMyCardRegister() {
   const navigate = useNavigate();

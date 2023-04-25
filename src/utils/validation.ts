@@ -11,3 +11,5 @@ export const REGEX = {
 export const isNumber = (value: string) => new RegExp(REGEX.NUMBER).test(value);
 
 export const isEnglish = (value: string) => new RegExp(REGEX.ENGLISH).test(value);
+
+export const isPatternMatch = (value: string, pattern: string) => new RegExp(pattern).test(value);
