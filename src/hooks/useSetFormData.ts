@@ -1,6 +1,6 @@
 import { FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { getFormData } from "utils/formDataGetter";
+import { getFormData } from "utils/formDataObjectGetter";
 
 interface FormData {
   [k: string]: FormDataEntryValue;
