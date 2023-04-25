@@ -1,22 +1,17 @@
 import styled from 'styled-components';
+import BackButtonImage from '../../assets/BackButtonImage';
 
 interface HeaderProps {
   title: string;
   onClickBack?: (e: React.MouseEvent) => void;
 }
 
-const BackBtn = () => (
-  <svg width="10" height="17" viewBox="0 0 10 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M8.30425 1L1.36475 8.78658L9.15133 15.7261" stroke="#525252" stroke-width="1.5" />
-  </svg>
-);
-
 const Header = ({ title, onClickBack }: HeaderProps) => {
   return (
     <HeaderWrapper>
       {onClickBack && (
         <BackButton onClick={onClickBack}>
-          <BackBtn />
+          <BackButtonImage />
         </BackButton>
       )}
       <Title>{title}</Title>
