@@ -62,7 +62,7 @@ const useForm = (setCardList: Dispatch<SetStateAction<CardInfo[]>>, validator: V
     });
   };
 
-  const findError = (elements: HTMLInputElement[]) => {
+  const findInputError = (elements: HTMLInputElement[]) => {
     return elements.some((elem) => {
       if (elem.tagName !== 'INPUT') return false;
 
@@ -90,9 +90,9 @@ const useForm = (setCardList: Dispatch<SetStateAction<CardInfo[]>>, validator: V
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     const elements = (e.target as HTMLFormElement).elements;
-    const hasInputError = findError([...elements] as HTMLInputElement[]);
+
+    const hasInputError = findInputError([...elements] as HTMLInputElement[]);
     if (hasInputError) return;
 
     setCardList((prev) => [cardInfo, ...prev]);

@@ -18,18 +18,6 @@ const validateCardNumbers = (value: string) => {
   return '';
 };
 
-let [month, year] = ['', ''];
-
-const validateExpirationDate = () => {
-  const curYear = String(new Date().getFullYear()).substring(2);
-  const curMonth = new Date().getMonth() + 1;
-
-  if (year === curYear && Number(month) < curMonth) {
-    return ERROR_MESSAGE.EXPIRATION_DATE;
-  }
-  return '';
-};
-
 const validateExpirationMonth = (value: string) => {
   if (value.length < 2) {
     return ERROR_MESSAGE.EXPIRATION;
@@ -38,9 +26,6 @@ const validateExpirationMonth = (value: string) => {
   if (Number(value) < 0 || Number(value) > 12) {
     return ERROR_MESSAGE.EXPIRATION_MONTH;
   }
-
-  month = value;
-  if (month && year) return validateExpirationDate();
 
   return '';
 };
@@ -54,9 +39,6 @@ const validateExpirationYear = (value: string) => {
   if (Number(value) < Number(curYear)) {
     return ERROR_MESSAGE.EXPIRATION_YEAR;
   }
-
-  year = value;
-  if (month && year) return validateExpirationDate();
 
   return '';
 };
