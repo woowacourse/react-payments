@@ -13,12 +13,16 @@ export function Card(props: CardProps) {
 
   return (
     <CardContainer>
-      <Magnetic />
+      <ICcard />
       <NumberWrapper>
-        <NumberItem>{cardNumber["first"]}</NumberItem>
-        <NumberItem>{cardNumber["second"]}</NumberItem>
-        <NumberItem>{"•".repeat(cardNumber["third"].length)}</NumberItem>
-        <NumberItem>{"•".repeat(cardNumber["fourth"].length)}</NumberItem>
+        <NumberItem type="text">{cardNumber["first"]}</NumberItem>
+        <NumberItem type="text">{cardNumber["second"]}</NumberItem>
+        <NumberItem type="password">
+          {"•".repeat(cardNumber["third"].length)}
+        </NumberItem>
+        <NumberItem type="password">
+          {"•".repeat(cardNumber["fourth"].length)}
+        </NumberItem>
       </NumberWrapper>
       <InfoWrapper>
         <Name>{userName}</Name>
@@ -45,11 +49,11 @@ const CardContainer = styled.section`
   border-radius: 0.5rem;
 `;
 
-const Magnetic = styled.div`
+const ICcard = styled.div`
   width: 4rem;
   height: 2.6rem;
 
-  margin-top: 4.7rem;
+  margin-top: 4rem;
   margin-left: 1.4rem;
 
   background-color: ${({ theme }) => theme.colors.card_sub};
@@ -61,18 +65,34 @@ const NumberWrapper = styled.ul`
   display: flex;
   justify-content: space-around;
 
-  margin: 1.5rem 1rem 0;
+  width: 18rem;
+
+  margin-top: 1rem;
+  margin-left: 0.6rem;
 `;
 
-const NumberItem = styled.li``;
+const NumberItem = styled.li<{ type: string }>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 4.5rem;
+  height: 2rem;
+
+  letter-spacing: ${({ type }) => (type === "password" ? -4 : 1)}px;
+`;
 
 const InfoWrapper = styled.div`
   display: flex;
   justify-content: space-between;
 
-  margin: 1rem 1.5em;
+  margin: 0 1.5em;
 `;
 
-const Name = styled.div``;
+const Name = styled.div`
+  width: 15rem;
+  height: 3rem;
+  word-break: break-all;
+`;
 
 const Date = styled.div``;
