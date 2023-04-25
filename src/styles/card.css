@@ -11,10 +11,12 @@
 
 .bc-card {
   background: var(--bc-card);
+  color: #fff;
 }
 
 .shinhan-card {
   background: var(--shinhan-card);
+  color: #fff;
 }
 
 .kakaobank-card {
@@ -24,20 +26,25 @@
 
 .hyundai-card {
   background: var(--hyundai-card);
+  color: #fff;
 }
 
 .woori-card {
   background: var(--woori-card);
+  color: #fff;
 }
 
 .lotte-card {
   background: var(--lotte-card);
+  color: #fff;
 }
 
 .hana-card {
   background: var(--hana-card);
+  color: #fff;
 }
 
 .kb-card {
   background: var(--kb-card);
+  color: #fff;
 }

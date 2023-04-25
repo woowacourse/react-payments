@@ -3,11 +3,9 @@
   flex-direction: column;
   width: 213px;
   height: 133px;
-  background: #333;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
   padding: 11px 14px;
-  color: #fff;
 }
 
 .cardCompany {
