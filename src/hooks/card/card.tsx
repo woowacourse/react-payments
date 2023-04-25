@@ -13,7 +13,7 @@ import { useCardRegisterContext } from '../../context/CardRegisterContext';
 import { CardNumber, CardRegisterInfo, ExpirationDate } from '../../types/card.type';
 import { isPatternMatch, isValidateKey } from '../../utils/input';
 import { getCardList, setCardList } from '../../utils/localStorage';
-import { isNumber } from '../../utils/validation';
+import { isEnglish, isNumber } from '../../utils/validation';
 
 export function useMyCardRegister() {
   const navigate = useNavigate();
@@ -150,7 +150,7 @@ export function useCardExpirationDate() {
   const monthConditions = useMemo(
     () => ({
       ...defaultConditions,
-      pattern: '/^(0[1-9]|1[0-2])$/',
+      pattern: '^(0[1-9]|1[0-2])$',
       placeholder: 'MM',
     }),
     []
@@ -168,12 +168,20 @@ export function useCardExpirationDate() {
 }
 
 export function useCardName() {
-  const onKeyDown = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
-    if (!isValidateKey(e, '^[a-zA-Z]$')) {
-      e.key = '';
-      e.preventDefault();
-    }
-  }, []);
+  const {
+    cardRegisterInfo: { holderName },
+    handleCardInfo,
+  } = useCardRegisterContext();
+
+  const updateName = (value: CardRegisterInfo['holderName']) => {
+    handleCardInfo('holderName', value);
+  };
+
+  const onChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
+    if (value && !isEnglish(value)) return;
+
+    updateName(value.toUpperCase());
+  };
 
   const defaultConditions = useMemo(
     () => ({
@@ -182,11 +190,10 @@ export function useCardName() {
       placeholder: '카드에 표시된 이름과 동일하게 입력하세요.',
       pattern: '^[a-zA-Z]{1,30}$',
       maxLength: 30,
-      onKeyDown,
     }),
     []
   );
-  return { defaultConditions };
+  return { holderName, defaultConditions, onChange };
 }
 
 export function useCardCVC() {
