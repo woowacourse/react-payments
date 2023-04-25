@@ -28,12 +28,11 @@ const AddCardForm = ({
         first: cardPassword1.value,
         second: cardPassword2.value,
       });
+      navigate('/');
     } catch (error) {
       alert('중복된 카드 입니다.');
       return;
     }
-
-    navigate('/');
   };
 
   return (
