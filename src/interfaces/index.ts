@@ -4,3 +4,8 @@ export interface CardNumberObj {
   third: string;
   fourth: string;
 }
+
+export interface CardPasswordObj {
+  first: string;
+  second: string;
+}

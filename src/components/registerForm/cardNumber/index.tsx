@@ -1,60 +1,26 @@
-import React, { useState, useContext } from "react";
+import React from "react";
 import Input from "src/components/@common/Input";
 import FormLabel from "src/components/@common/FormLabel";
 import ErrorSpan from "src/components/@common/ErrorSpan";
-import { ONLY_NUMBER_REGEXP } from "src/utils/regexp";
-import { cardInfoContext } from "src/context/CardInfoContext";
 import useAutoFocus from "src/hooks/useAutoFocus";
 import { Styled as S } from "./CardNumber.styles";
 import { CARD_NUMBER_TYPES, NUMBERS } from "src/utils/constant";
 import { lengthMatchValidation } from "src/utils/validation";
+import useCardInfoInput from "src/hooks/useCardInfoInput";
+import { CardNumberObj } from "src/interfaces";
 
 function CardNumber() {
   const { EACH_CARD } = NUMBERS;
-  const [cardInput, setCardInput] = useContext(cardInfoContext);
-
-  const [cardError, setCardError] = useState({
-    isError: false,
-    message: "initial",
-  });
 
   const { refs, nextInputFocus } = useAutoFocus({
     maxLength: EACH_CARD,
   });
 
-  const cardChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    const value = event.currentTarget.value;
-    const name = event.currentTarget.dataset[
-      "order"
-    ] as keyof typeof CARD_NUMBER_TYPES;
-    const idx = event.currentTarget.dataset["index"];
-    if (!name) return;
-
-    if (!ONLY_NUMBER_REGEXP.test(value)) return;
-
-    try {
-      lengthMatchValidation(value, EACH_CARD);
-
-      setCardError({
-        isError: false,
-        message: "",
-      });
-    } catch (error) {
-      if (error instanceof Error) {
-        setCardError({
-          isError: true,
-          message: error.message,
-        });
-      }
-    } finally {
-      if (!setCardInput) return;
-      setCardInput((prev) => ({
-        ...prev,
-        cardNumbers: { ...prev.cardNumbers, [name]: value },
-      }));
-    }
-    nextInputFocus(Number(idx));
-  };
+  const { value, onChange, error } = useCardInfoInput<CardNumberObj>({
+    contextType: "cardNumbers",
+    validation: (value) => lengthMatchValidation(value, EACH_CARD),
+    nextInputFocus,
+  });
 
   const inputs = CARD_NUMBER_TYPES.map((key, idx) => (
     <>
@@ -62,8 +28,8 @@ function CardNumber() {
         key={key}
         data-order={key}
         data-index={idx}
-        value={cardInput.cardNumbers[key]}
-        onChange={cardChange}
+        value={value[key]}
+        onChange={onChange}
         maxLength={EACH_CARD}
         customInputStyle={S.CardNumberInput}
         inputmode="numeric"
@@ -79,7 +45,7 @@ function CardNumber() {
     <div>
       <FormLabel>카드 번호</FormLabel>
       <S.CardNumberInputContainer>{inputs}</S.CardNumberInputContainer>
-      {cardError?.isError && <ErrorSpan>{cardError?.message}</ErrorSpan>}
+      {error?.isError && <ErrorSpan>{error?.message}</ErrorSpan>}
     </div>
   );
 }

@@ -1,41 +1,27 @@
-import React, { useState, useContext } from "react";
+import React from "react";
 import ErrorSpan from "src/components/@common/ErrorSpan";
 import FormLabel from "src/components/@common/FormLabel";
 import Input from "src/components/@common/Input";
 import QuestionMark from "src/assets/sequrity_question.svg";
 import SecurityIcon from "src/assets/security-icon.svg";
-import { ONLY_NUMBER_REGEXP } from "src/utils/regexp";
-import { cardInfoContext } from "src/context/CardInfoContext";
 import { Styled as S } from "./SecurityCode.styles";
 import { NUMBERS } from "src/utils/constant";
 import { lengthMatchValidation } from "src/utils/validation";
+import useCardInfoInput from "src/hooks/useCardInfoInput";
 
 function SecurityCode() {
-  const [cardInput, setCardInput] = useContext(cardInfoContext);
-  const [error, setError] = useState(false);
-
-  const codeChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    const value = event.currentTarget.value;
-    if (!ONLY_NUMBER_REGEXP.test(value)) return;
-
-    try {
-      lengthMatchValidation(value, NUMBERS.MAX_SECURITY);
-      setError(false);
-    } catch {
-      setError(true);
-    } finally {
-      if (!setCardInput) return;
-      setCardInput((prev) => ({ ...prev, securityCode: value }));
-    }
-  };
+  const { value, onChange, error } = useCardInfoInput<string>({
+    contextType: "securityCode",
+    validation: (value) => lengthMatchValidation(value, NUMBERS.MAX_SECURITY),
+  });
 
   return (
     <S.SecurityCodeContainer>
       <FormLabel>{"보안 코드(CVC/CVV)"}</FormLabel>
       <S.SecurityInfoContainer>
         <Input
-          value={cardInput.securityCode}
-          onChange={codeChange}
+          value={value}
+          onChange={onChange}
           maxLength={NUMBERS.MAX_SECURITY}
           type="password"
           placeholder="•••"
@@ -53,7 +39,7 @@ function SecurityCode() {
           </S.CVVInfoContainer>
         }
       </S.SecurityInfoContainer>
-      {error && <ErrorSpan>보안 코드는 3자리 입니다.</ErrorSpan>}
+      {error.isError && <ErrorSpan>{error.message}</ErrorSpan>}
     </S.SecurityCodeContainer>
   );
 }

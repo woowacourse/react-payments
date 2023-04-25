@@ -1,66 +1,39 @@
-import React, { useState, useContext } from "react";
+import React from "react";
 import Input from "src/components/@common/Input";
 import FormLabel from "src/components/@common/FormLabel";
-import { ONLY_NUMBER_REGEXP } from "src/utils/regexp";
-import { cardInfoContext } from "src/context/CardInfoContext";
 import ErrorSpan from "src/components/@common/ErrorSpan";
 import useAutoFocus from "src/hooks/useAutoFocus";
 import { Styled as S } from "./CardPassword.styles";
 import { NUMBERS, PASSWORD_NUMBER_TYPES } from "src/utils/constant";
 import { lengthMatchValidation } from "src/utils/validation";
+import useCardInfoInput from "src/hooks/useCardInfoInput";
+import { CardPasswordObj } from "src/interfaces";
 
 function CardPassword() {
   const { MAX_PASSWORD, EACH_PASSWORD } = NUMBERS;
-  const [cardInput, setCardInput] = useContext(cardInfoContext);
-
-  const [passwordError, setPasswordError] = useState(false);
-
   const { refs, nextInputFocus } = useAutoFocus({
     maxLength: EACH_PASSWORD,
   });
 
-  const passwordChange: React.ChangeEventHandler<HTMLInputElement> = (
-    event,
-  ) => {
-    const value = event.currentTarget.value;
-    const name = event.currentTarget.dataset[
-      "order"
-    ] as keyof typeof PASSWORD_NUMBER_TYPES;
-    const idx = event.currentTarget.dataset["idx"];
-
-    if (!ONLY_NUMBER_REGEXP.test(value)) return;
-
-    try {
+  const { value, onChange, error } = useCardInfoInput<CardPasswordObj>({
+    contextType: "password",
+    validation: (value) => {
       const firstVal = refs.current[0]?.value ?? "";
       const secondVal = refs.current[1]?.value ?? "";
       const passwordVal = firstVal + secondVal;
 
       lengthMatchValidation(passwordVal, MAX_PASSWORD);
-
-      setPasswordError(false);
-    } catch {
-      setPasswordError(true);
-    } finally {
-      if (!setCardInput) return;
-      setCardInput((prev) => ({
-        ...prev,
-        password: {
-          ...prev.password,
-          [name]: value,
-        },
-      }));
-    }
-
-    nextInputFocus(Number(idx));
-  };
+    },
+    nextInputFocus,
+  });
 
   const inputs = PASSWORD_NUMBER_TYPES.map((key, idx) => (
     <Input
       key={key}
       data-order={key}
-      data-idx="0"
-      value={cardInput.password[key]}
-      onChange={passwordChange}
+      data-index={idx}
+      value={value[key]}
+      onChange={onChange}
       maxLength={EACH_PASSWORD}
       inputmode="numeric"
       type="password"
@@ -78,9 +51,7 @@ function CardPassword() {
         <S.DotParagraph>•</S.DotParagraph>
         <S.DotParagraph>•</S.DotParagraph>
       </S.PasswordInputContainer>
-      {passwordError && (
-        <ErrorSpan>비밀번호 앞 2자리를 입력해주세요.</ErrorSpan>
-      )}
+      {error.isError && <ErrorSpan>{error.message}</ErrorSpan>}
     </S.CardPasswordContainer>
   );
 }

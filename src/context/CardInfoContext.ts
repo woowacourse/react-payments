@@ -1,19 +1,12 @@
 import React, { createContext } from "react";
+import { CardNumberObj, CardPasswordObj } from "src/interfaces";
 
 export interface CardInfoType {
-  cardNumbers: {
-    first: string;
-    second: string;
-    third: string;
-    fourth: string;
-  };
+  cardNumbers: CardNumberObj;
   expireDate: string;
   ownerName: string;
   securityCode: string;
-  password: {
-    first: string;
-    second: string;
-  };
+  password: CardPasswordObj;
 }
 const initialCardInfos = {
   cardNumbers: {
