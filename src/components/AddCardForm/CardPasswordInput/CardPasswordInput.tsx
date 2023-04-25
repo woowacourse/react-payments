@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import useValidator from '../../../hooks/useValidator';
 import { checkValidPassword } from '../validators';
-import CardInfoInput from '../LabeledInput/LabeledInput';
+import LabeledInput from '../LabeledInput/LabeledInput';
 import Input from '../../common/Input/Input';
 import MockPasswordInput from './MockPasswordInput/MockPasswordInput';
 import { FormInputValueType } from '../../../types';
@@ -43,7 +43,7 @@ const CardPasswordInput = ({ updateCardPassword }: CardPasswordInputProps) => {
   }, [value, isValid, updateCardPassword]);
 
   return (
-    <CardInfoInput title="카드 비밀번호" errorMessage={errorMessage}>
+    <LabeledInput title="카드 비밀번호" errorMessage={errorMessage}>
       <Input
         width="15%"
         value={firstDigit}
@@ -63,7 +63,7 @@ const CardPasswordInput = ({ updateCardPassword }: CardPasswordInputProps) => {
       />
       <MockPasswordInput />
       <MockPasswordInput />
-    </CardInfoInput>
+    </LabeledInput>
   );
 };
 

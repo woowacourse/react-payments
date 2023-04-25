@@ -1,10 +1,12 @@
 import { useEffect } from 'react';
-import useValidator from '../../../hooks/useValidator';
-import { checkValidYearMonth } from '../validators';
+
 import { addSlashInExpirationDate } from '../replacers';
-import CardInfoInput from '../LabeledInput/LabeledInput';
-import Input from '../../common/Input/Input';
+import { checkValidYearMonth } from '../validators';
+
 import type { FormInputValueType } from '../../../types';
+import useValidator from '../../../hooks/useValidator';
+import LabeledInput from '../LabeledInput/LabeledInput';
+import Input from '../../common/Input/Input';
 
 type ExpirationDateInputProps = {
   updateExpirationDate: (expirationDate: FormInputValueType) => void;
@@ -25,7 +27,7 @@ const ExpirationDateInput = ({ updateExpirationDate }: ExpirationDateInputProps)
   }, [value, isValid, updateExpirationDate]);
 
   return (
-    <CardInfoInput title="만료일" errorMessage={errorMessage}>
+    <LabeledInput title="만료일" errorMessage={errorMessage}>
       <Input
         width="40%"
         onChange={setExpirationDate}
@@ -35,7 +37,7 @@ const ExpirationDateInput = ({ updateExpirationDate }: ExpirationDateInputProps)
         placeholder="MM/YY"
         required={true}
       />
-    </CardInfoInput>
+    </LabeledInput>
   );
 };
 
