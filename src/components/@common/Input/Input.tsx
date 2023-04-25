@@ -21,9 +21,8 @@ import React, {
 import { getAllChildElement } from '../../../utils/jsx';
 import * as Styled from './InputStyles.styles';
 
-interface InputContext {
+interface InputContext extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
-  value: string;
   onChange(e: ChangeEvent<HTMLInputElement>): void;
 }
 
@@ -118,18 +117,18 @@ function Field(props: PropsWithChildren<FieldProps>) {
   const child = childrenArray[0];
 
   const localOnChange = (e: ChangeEvent<HTMLInputElement>) => {
-    onChange(e);
     onChangeProps?.(e);
+    onChange(e);
   };
 
   if (asChild) validateAsChild(childrenArray);
 
-  if (pattern && new RegExp(pattern).test(value)) {
-    onPatternMatch?.(value);
+  if (pattern && new RegExp(pattern).test(String(value))) {
+    onPatternMatch?.(String(value));
   }
 
-  if (pattern && !new RegExp(pattern).test(value)) {
-    onPatternMismatch?.(value);
+  if (pattern && !new RegExp(pattern).test(String(value))) {
+    onPatternMismatch?.(String(value));
   }
 
   if (asChild && isValidElement<InputContext & { pattern: string }>(child)) {
@@ -137,7 +136,7 @@ function Field(props: PropsWithChildren<FieldProps>) {
       <InputItem>
         {cloneElement(child, {
           onChange: localOnChange,
-          value: valueProps ? String(valueProps) : value,
+          value: valueProps ?? value,
           id: idProps ? `${idProps}-${id}` : id,
           pattern,
           ...restProps,
@@ -203,7 +202,7 @@ interface LimitProps {
 }
 
 interface LimitRenderProps {
-  value: InputContext['value'];
+  value: string;
   limit: LimitProps['limit'];
 }
 
@@ -212,7 +211,7 @@ function Limit(props: PropsWithRenderProps<LimitProps, LimitRenderProps>) {
   const { value } = useInputContext();
 
   const resolvedChildren = getResolvedChildren(children, {
-    value,
+    value: String(value),
     limit,
   });
 
@@ -228,8 +227,8 @@ function Message(props: PropsWithChildren<MessageProps>) {
   const { children, pattern, onInvalid } = props;
   const { value } = useInputContext();
 
-  if (pattern && !new RegExp(pattern).test(value)) {
-    onInvalid?.(value);
+  if (pattern && !new RegExp(pattern).test(String(value))) {
+    onInvalid?.(String(value));
   }
 
   return <div>{children}</div>;
