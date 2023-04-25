@@ -16,6 +16,7 @@ import {
   CardNumber,
   CardNumberGroups,
   CardPassword,
+  CardPasswordKey,
 } from "../../types";
 import { useNavigate } from "react-router-dom";
 import { isAlphabetic, isNumeric, isFulfilledObject, isFulfilledString, isValidMonth } from "../../validator/Validator";
@@ -65,13 +66,7 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
     setSecurityCode(code);
   };
 
-  const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const pw = e.target.value;
-    const targetDigit = e.target.name;
-
-    if (!isNumeric(pw)) return;
-    if (!(targetDigit in password)) return;
-
+  const handlePassword = (pw: string, targetDigit: CardPasswordKey) => {
     setPassword({ ...password, [targetDigit]: pw });
   };
 

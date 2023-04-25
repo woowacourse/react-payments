@@ -1,14 +1,29 @@
 import styled from "styled-components";
 import { InputContainer, Input, Label } from "../common";
-import { CardPassword } from "../../types";
+import { CardPassword, CardPasswordKey } from "../../types";
+import { isNumeric } from "../../validator/Validator";
 
 type CardPasswordInputProps = {
   password: CardPassword;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (pw: string, targetDigit: CardPasswordKey) => void;
 };
 
 const CardPasswordInput = ({ password, onChange }: CardPasswordInputProps) => {
   const { first, second } = password;
+
+  const handleCardPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const pw = e.target.value;
+    const targetDigit = e.target.name;
+
+    if (!isNumeric(pw)) return;
+    if (!isCardPasswordKeyType(targetDigit)) return;
+
+    onChange(pw, targetDigit);
+  };
+
+  const isCardPasswordKeyType = (targetDigit: string): targetDigit is CardPasswordKey => {
+    return targetDigit in password;
+  };
 
   return (
     <Label>
@@ -24,7 +39,7 @@ const CardPasswordInput = ({ password, onChange }: CardPasswordInputProps) => {
             type="password"
             maxLength={1}
             required
-            onChange={onChange}
+            onChange={handleCardPassword}
           />
         </InputContainer>
         <InputContainer width="43px">
@@ -37,7 +52,7 @@ const CardPasswordInput = ({ password, onChange }: CardPasswordInputProps) => {
             type="password"
             maxLength={1}
             required
-            onChange={onChange}
+            onChange={handleCardPassword}
           />
         </InputContainer>
         <PasswordIcon>•</PasswordIcon>
