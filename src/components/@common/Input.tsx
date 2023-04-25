@@ -18,17 +18,7 @@ const Input = forwardRef<HTMLInputElement, Props>(function (
   { value, placeholder, onChange, inputmode, type, ...props }: Props,
   ref,
 ) {
-  return (
-    <InputStyle
-      value={value}
-      onChange={onChange}
-      inputMode={inputmode ?? "text"}
-      placeholder={placeholder}
-      ref={ref}
-      type={type ?? "text"}
-      {...props}
-    />
-  );
+  return <InputStyle ref={ref} {...props} />;
 });
 
 export default Input;
