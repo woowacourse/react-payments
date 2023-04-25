@@ -1,11 +1,19 @@
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
+import BankItem from './common/BankItem';
+import { CONVERT_BANK_NAME } from '../utils/Constants';
 
 const BottomSheet = () => {
+  const bankNames = Object.keys(CONVERT_BANK_NAME);
+
   return ReactDOM.createPortal(
     <>
       <BottomSheetBackdrop />
-      <BottomSheetContainer>hi</BottomSheetContainer>
+      <BottomSheetContainer>
+        {bankNames.map((bankName) => {
+          return <BankItem key={bankName} bankName={bankName} />;
+        })}
+      </BottomSheetContainer>
     </>,
     document.querySelector('#root') as HTMLElement
   );

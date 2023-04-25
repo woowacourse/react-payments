@@ -18,3 +18,14 @@ export const ERROR_MESSAGE: Readonly<{ [key: string]: string }> = {
   VALID_MONTH: '유효한 달을 입력해주세요',
   MAX_INPUT_LENGTH: '30자 이하로 입력해주세요',
 };
+
+export const CONVERT_BANK_NAME: Readonly<{ [key: string]: string }> = {
+  BC카드: 'BC',
+  신한카드: 'Shinhan',
+  카카오뱅크: 'Kakao',
+  현대카드: 'Hyundai',
+  우리카드: 'Woori',
+  롯데카드: 'Lotte',
+  하나카드: 'Hana',
+  국민카드: 'KB',
+};
