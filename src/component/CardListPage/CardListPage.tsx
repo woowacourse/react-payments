@@ -1,6 +1,5 @@
 import React from "react";
 import St from "./CardListPageStyled";
-import CardListHeader from "./CardListHeader/CardListHeader";
 import CardList from "./CardList/CardList";
 import { CreditCard } from "../../types/card";
 
@@ -11,7 +10,7 @@ type CardListPageProps = {
 function CardListPage({ creditCardList }: CardListPageProps) {
   return (
     <St.Page>
-      <CardListHeader />
+      <St.Title>보유 카드</St.Title>
       <CardList creditCardList={creditCardList} />
     </St.Page>
   );
