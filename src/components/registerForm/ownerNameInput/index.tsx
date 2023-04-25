@@ -23,9 +23,15 @@ function OwnerNameInput() {
   const ownerNameChange: React.ChangeEventHandler<HTMLInputElement> = (
     event,
   ) => {
-    const value = event.currentTarget.value as string;
+    const value = event.currentTarget.value;
+    if (!ONLY_ENG_AND_EMPTY_REGEXP.test(value)) {
+      setError({
+        isError: true,
+        message: "영어와 띄어쓰기만 입력할 수 있습니다.",
+      });
+      return;
+    }
 
-    if (!ONLY_ENG_AND_EMPTY_REGEXP.test(value)) return;
     try {
       if (value.length > 0) {
         continuousEmptyValidation(value);
@@ -38,7 +44,6 @@ function OwnerNameInput() {
       });
     } catch (error) {
       if (!(error instanceof Error)) return;
-
       setError({
         isError: true,
         message: error.message,
