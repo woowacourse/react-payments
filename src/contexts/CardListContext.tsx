@@ -2,19 +2,19 @@ import { PropsWithChildren, createContext, useEffect, useState } from 'react';
 import { Card, CardFormData } from '../types';
 import { getLocalStorage, saveToLocalStorage } from '../utils/localStorage';
 
-interface PaymentsContextValue {
+interface CardListContextValue {
   cardList: Card[];
   addCard: (cardInformation: Card) => void;
   updateCardName: (id: number, cardName: string) => void;
 }
 
-export const PaymentsContext = createContext<PaymentsContextValue>({
+export const CardListContext = createContext<CardListContextValue>({
   cardList: [],
   addCard: (cardInformation: CardFormData) => {},
   updateCardName: (id: number, cardName: string) => {},
 });
 
-export const PaymentsProvider = ({ children }: PropsWithChildren) => {
+export const CardListProvider = ({ children }: PropsWithChildren) => {
   const [cardList, setCardList] = useState<Card[]>(getLocalStorage() ?? []);
 
   useEffect(() => {
@@ -38,8 +38,8 @@ export const PaymentsProvider = ({ children }: PropsWithChildren) => {
   };
 
   return (
-    <PaymentsContext.Provider value={{ cardList, addCard, updateCardName }}>
+    <CardListContext.Provider value={{ cardList, addCard, updateCardName }}>
       {children}
-    </PaymentsContext.Provider>
+    </CardListContext.Provider>
   );
 };

@@ -4,10 +4,10 @@ import { PATH } from '../constants';
 import Header from '../components/common/Header/Header';
 import Button from '../components/common/Button/Button';
 import CardList from '../components/CardList/CardList';
-import { PaymentsContext } from '../contexts/PaymentsContext';
+import { CardListContext } from '../contexts/CardListContext';
 
 function CardListPage() {
-  const { cardList } = useContext(PaymentsContext);
+  const { cardList } = useContext(CardListContext);
 
   return (
     <>

@@ -10,7 +10,7 @@ import CardOwnerName from './CardOwnerName/CardOwnerName';
 import CardSecurityCode from './CardSecurityCode/CardSecurityCode';
 import CardPassword from './CardPassword/CardPassword';
 import Button from '../common/Button/Button';
-import { PaymentsContext } from '../../contexts/PaymentsContext';
+import { CardListContext } from '../../contexts/CardListContext';
 import { useFormComplete } from '../../hooks/useFormComplete';
 
 interface CardAddFormProps {
@@ -28,7 +28,7 @@ function CardAddForm({
   onSingleInputChange,
   onMultipleInputChange,
 }: CardAddFormProps) {
-  const { cardList, addCard } = useContext(PaymentsContext);
+  const { cardList, addCard } = useContext(CardListContext);
   const isFormComplete = useFormComplete(cardInputValidation);
   const navigate = useNavigate();
 

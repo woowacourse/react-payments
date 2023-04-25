@@ -2,10 +2,10 @@ import { ChangeEvent, FormEvent, useCallback, useContext, useState } from 'react
 import { useNavigate } from 'react-router-dom';
 import { PATH } from '../constants';
 import { validateNonEmptyInput } from '../utils/validator';
-import { PaymentsContext } from '../contexts/PaymentsContext';
+import { CardListContext } from '../contexts/CardListContext';
 
 const useCardRegisterForm = (id: number) => {
-  const { updateCardName } = useContext(PaymentsContext);
+  const { updateCardName } = useContext(CardListContext);
   const [isValidCardName, setIsValidCardName] = useState(true);
   const [submitError, setSubmitError] = useState(false);
   const navigate = useNavigate();
