@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { Backdrop, BottomSheetContainer } from "./BottomSheet.styles";
 
 interface BottomSheetProps {
@@ -7,14 +7,29 @@ interface BottomSheetProps {
   children?: ReactNode;
 }
 const BottomSheet = ({ isOpened, onClose, children }: BottomSheetProps) => {
-  if (!isOpened) {
+  const [shouldRender, setShouldRender] = useState(isOpened);
+
+  useEffect(() => {
+    if (isOpened) {
+      setShouldRender(true);
+    } else {
+      const timer = setTimeout(() => {
+        setShouldRender(false);
+      }, 250);
+      return () => clearTimeout(timer);
+    }
+  }, [isOpened]);
+
+  if (!shouldRender) {
     return null;
   }
 
   return (
     <>
       <Backdrop onClick={onClose} />
-      <BottomSheetContainer>{children}</BottomSheetContainer>
+      <BottomSheetContainer isOpened={isOpened}>
+        {children}
+      </BottomSheetContainer>
     </>
   );
 };
