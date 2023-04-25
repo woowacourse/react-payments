@@ -6,10 +6,10 @@ import NameInput from "./FormInputs/NameInput";
 import PasswordInput from "./FormInputs/PasswordInput";
 import SecurityCodeInput from "./FormInputs/SecurityCodeInput";
 import CardPreview from "components/CardPreview";
-import { isValidInfo } from "validation";
 import Header from "components/Header";
-import useSetFormData from "hooks/useSetFormData";
 import { NextButton } from "components/ButtonStyle";
+import useSetFormData from "hooks/useSetFormData";
+import useFormState from "hooks/useFormState";
 
 const CardRegisterForm = () => {
   const [cardNumber, setCardNumber] = useState({
@@ -26,15 +26,21 @@ const CardRegisterForm = () => {
 
   const [name, setName] = useState("");
 
-  const cardInfo = { ...cardNumber, ...date, name };
+  const [code, setCode] = useState("");
 
-  const { handleFormData } = useSetFormData(isValidInfo, "card");
+  const [password, setPassword] = useState({ password1: "", password2: "" });
+
+  const cardPreviewInfo = { ...cardNumber, ...date, name };
+  const cardAllInfo = { ...cardNumber, ...date, code, ...password };
+
+  const { isFormFilled } = useFormState(cardAllInfo);
+  const { handleFormData } = useSetFormData("card");
 
   return (
     <S.Wrapper>
       <Header navigator title="카드 추가" />
 
-      <CardPreview cardInfo={cardInfo} />
+      <CardPreview cardInfo={cardPreviewInfo} />
 
       <form onSubmit={handleFormData}>
         <CardNumberInput
@@ -43,10 +49,10 @@ const CardRegisterForm = () => {
         />
         <ExpirationDateInput date={date} setDate={setDate} />
         <NameInput name={name} setName={setName} />
-        <SecurityCodeInput />
-        <PasswordInput />
+        <SecurityCodeInput code={code} setCode={setCode} />
+        <PasswordInput password={password} setPassword={setPassword} />
 
-        <NextButton>다음</NextButton>
+        {isFormFilled && <NextButton>다음</NextButton>}
       </form>
     </S.Wrapper>
   );

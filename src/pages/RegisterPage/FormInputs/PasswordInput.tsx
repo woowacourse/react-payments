@@ -1,5 +1,5 @@
 import { useFocus } from "hooks/useFocus";
-import { ChangeEvent, useState, Fragment } from "react";
+import { ChangeEvent, Dispatch, SetStateAction, Fragment } from "react";
 import styled from "styled-components";
 import { changeInvalidValueToBlank } from "utils/inputValidator";
 import Input from "components/Input";
@@ -19,13 +19,13 @@ interface Password {
   password2: string;
 }
 
-const PasswordInput = () => {
-  const { handleRef, moveFocus } = useFocus();
+interface Props {
+  password: Password;
+  setPassword: Dispatch<SetStateAction<Password>>;
+}
 
-  const [password, setPassword] = useState<Password>({
-    password1: "",
-    password2: "",
-  });
+const PasswordInput = ({ password, setPassword }: Props) => {
+  const { handleRef, moveFocus } = useFocus();
 
   const handlePassword = ({ target }: ChangeEvent<HTMLInputElement>) => {
     setPassword((prevState) => {

@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
 import { changeInvalidValueToBlank } from "utils/inputValidator";
 import Input from "components/Input";
@@ -6,9 +6,12 @@ import { CodeCaption } from "components/CaptionStyle";
 import { LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
 const { ONLY_NUMBER } = VALID_INPUT;
 
-const SecurityCodeInput = () => {
-  const [code, setCode] = useState("");
+interface Props {
+  code: string;
+  setCode: Dispatch<SetStateAction<string>>;
+}
 
+const SecurityCodeInput = ({ code, setCode }: Props) => {
   const handleCardNumber = ({ target }: ChangeEvent<HTMLInputElement>) => {
     setCode(
       changeInvalidValueToBlank(target.value, {

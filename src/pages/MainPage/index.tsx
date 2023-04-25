@@ -1,6 +1,6 @@
+import styled from "styled-components";
 import Header from "components/Header";
 import CardPreview from "components/CardPreview";
-import styled from "styled-components";
 import { AddButton } from "components/ButtonStyle";
 import useInitMainPage from "hooks/useInitMainPage";
 
