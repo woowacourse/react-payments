@@ -4,7 +4,7 @@ import ExpirationDateInput from '../ExpirationDateInput/ExpirationDateInput';
 import CardOwnerName from '../CardOwnerName/CardOwnerName';
 import CardSecurityCodeInput from '../CardSecurityCodeInput/CardSecurityCodeInput';
 import CardPasswordInput from '../CardPasswordInput/CardPasswordInput';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import type { CardInfo } from '../../types';
 import Button from '../Button/Button';
 
@@ -49,7 +49,7 @@ const AddCardForm = ({
 
     registerNewCard(cardInfo);
 
-    navigate('/');
+    navigate('/card-registration-confirmation');
   };
 
   return (
@@ -60,11 +60,9 @@ const AddCardForm = ({
       <CardSecurityCodeInput />
       <CardPasswordInput />
       <div className={styles.buttonContainer}>
-        <Link to="/card-registration-confirmation">
-          <Button type="submit" className={styles.button}>
-            다음
-          </Button>
-        </Link>
+        <Button type="submit" className={styles.button}>
+          다음
+        </Button>
       </div>
     </form>
   );
