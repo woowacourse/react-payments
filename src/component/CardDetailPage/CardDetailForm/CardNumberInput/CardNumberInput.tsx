@@ -4,12 +4,12 @@ import { Input, InputSection } from "../../../common/Input";
 
 type CardNumberInputProps = {
   changeCardNumber: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  cardNumberHidden: string;
+  displayNumber: string;
 };
 
 function CardNumberInput({
   changeCardNumber,
-  cardNumberHidden,
+  displayNumber,
 }: CardNumberInputProps) {
   return (
     <section>
@@ -19,7 +19,7 @@ function CardNumberInput({
           type="text"
           minLength={19}
           required
-          value={cardNumberHidden}
+          value={displayNumber}
           onInput={changeCardNumber}
         />
       </InputSection>

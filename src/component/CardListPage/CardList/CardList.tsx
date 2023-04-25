@@ -19,7 +19,7 @@ function CardList({ creditCardList }: CardListProps) {
         return (
           <li key={originNumber}>
             <CardDetailView
-              cardNumberHidden={displayNumber}
+              displayNumber={displayNumber}
               cardDate={cardDate}
               cardOwnerName={cardOwnerName}
             />

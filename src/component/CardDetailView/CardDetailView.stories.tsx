@@ -12,7 +12,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    cardNumberHidden: "1111-2222-••••-••••",
+    displayNumber: "1111-2222-••••-••••",
     cardDate: "12/25",
     cardOwnerName: "루루&가람",
   },

@@ -15,6 +15,6 @@ export const Primary: Story = {
     changeCardNumber: (e: React.ChangeEvent<HTMLInputElement>) => {
       console.log(e.target.value);
     },
-    cardNumberHidden: "1111-2222-••••-••••",
+    displayNumber: "1111-2222-••••-••••",
   },
 };

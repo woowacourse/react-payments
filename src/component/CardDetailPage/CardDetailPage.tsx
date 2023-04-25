@@ -72,13 +72,13 @@ function CardDetailPage({ addCreditCard }: CardDetailPageProps) {
     <St.Page>
       <CardDetailHeader />
       <CardDetailView
-        cardNumberHidden={displayNumber}
+        displayNumber={displayNumber}
         cardDate={cardDate}
         cardOwnerName={cardOwnerName}
       />
       <CardDetailForm
         changeCardNumber={changeCardNumber}
-        cardNumberHidden={displayNumber}
+        displayNumber={displayNumber}
         changeCardDate={changeCardDate}
         cardDate={cardDate}
         changeCardOwnerName={changeCardOwnerName}

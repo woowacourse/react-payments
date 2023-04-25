@@ -10,7 +10,7 @@ import St from "./CardDetailFormStyled";
 
 type CardDetailFormProps = {
   changeCardNumber: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  cardNumberHidden: string;
+  displayNumber: string;
 
   changeCardDate: (e: React.ChangeEvent<HTMLInputElement>) => void;
   cardDate: string;
@@ -29,7 +29,7 @@ type CardDetailFormProps = {
 
 function CardDetailForm({
   changeCardNumber,
-  cardNumberHidden,
+  displayNumber,
   changeCardDate,
   cardDate,
   changeCardOwnerName,
@@ -44,7 +44,7 @@ function CardDetailForm({
     <St.Form onSubmit={submitCreditCard}>
       <CardNumberInput
         changeCardNumber={changeCardNumber}
-        cardNumberHidden={cardNumberHidden}
+        displayNumber={displayNumber}
       />
       <CardDateInput changeCardDate={changeCardDate} cardDate={cardDate} />
       <CardOwnerNameInput

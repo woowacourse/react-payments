@@ -3,13 +3,13 @@ import React from "react";
 import St from "./CardDetailViewStyled";
 
 type CardDetailViewProps = {
-  cardNumberHidden: string;
+  displayNumber: string;
   cardDate: string;
   cardOwnerName: string;
 };
 
 function CardDetailView({
-  cardNumberHidden,
+  displayNumber,
   cardDate,
   cardOwnerName,
 }: CardDetailViewProps) {
@@ -17,7 +17,7 @@ function CardDetailView({
     <St.CreditCard>
       <St.ICDiv />
       <St.CardNumberSection>
-        <St.CardNumber>{cardNumberHidden.replaceAll("-", " ")}</St.CardNumber>
+        <St.CardNumber>{displayNumber.replaceAll("-", " ")}</St.CardNumber>
       </St.CardNumberSection>
       <St.CardInfoSection>
         <St.CardInfo>{cardOwnerName ? cardOwnerName : "NAME"}</St.CardInfo>
