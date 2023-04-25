@@ -4,15 +4,15 @@ import { Link } from "react-router-dom";
 
 interface HeaderProps {
   title: string;
-  isBack: boolean;
+  goToMainPage: boolean;
 }
 
 const Header = (props: HeaderProps) => {
   return (
     <HeaderWrapper>
-      {props.isBack && (
+      {props.goToMainPage && (
         <Link to="/">
-          <img src={ArrowLeft} alt={"뒤로가기"} />
+          <img src={ArrowLeft} alt={"메인으로 가기"} />
         </Link>
       )}
       <h3>{props.title}</h3>

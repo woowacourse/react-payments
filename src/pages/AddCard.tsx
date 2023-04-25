@@ -25,7 +25,7 @@ const AddCard = () => {
 
   return (
     <Page>
-      <Header title="카드 추가" isBack={true} />
+      <Header title="카드 추가" goToMainPage={true} />
       <Card
         color={card.color}
         ownerName={card.ownerName}

@@ -13,7 +13,7 @@ const MyCard = () => {
   return (
     <Page>
       <>
-        <Header title="보유카드" isBack={false} />
+        <Header title="보유카드" goToMainPage={false} />
         {cards.map((card: CardType) => (
           <CardWrapper key={uuid()}>
             <Card
