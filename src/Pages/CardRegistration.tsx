@@ -3,6 +3,8 @@ import CardRegistrationForm from '../components/CardRegistrationForm';
 import useCardForm from '../components/CardRegistrationForm/hooks/useCardForm';
 import Card from '../components/Common/Card';
 import Header from '../components/Common/Header';
+import Modal from '../components/Common/Modal';
+import useModal from '../hooks/useModal';
 
 function CardRegistration() {
   const {
@@ -16,6 +18,7 @@ function CardRegistration() {
     setPassword,
     setSecurityCode,
   } = useCardForm();
+  const { isModalOpen, closeModal } = useModal(true);
 
   return (
     <>
@@ -33,6 +36,13 @@ function CardRegistration() {
           setSecurityCode={setSecurityCode}
           setPassword={setPassword}
         />
+        {isModalOpen && (
+          <Modal closeModal={closeModal}>
+            <button type="button" onClick={() => closeModal()}>
+              닫기
+            </button>
+          </Modal>
+        )}
       </StyledMainCardRegistration>
     </>
   );
