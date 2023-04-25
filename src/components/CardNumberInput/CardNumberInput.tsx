@@ -15,12 +15,13 @@ const CardNumberInput = ({ updateCardNumber }: CardNumberInputProps) => {
     const cardNumber = e.target.value;
     if (NUMBER_REGEX.test(e.target.value)) {
       setError('0부터 9까지 숫자만 입력 가능합니다.');
-    }
-    const hyphenRemovedCardNumber = cardNumber.replaceAll('-', '');
-    const cardNumberWithHyphens = (hyphenRemovedCardNumber.match(/.{1,4}/g) || []).join('-');
+    } else {
+      const hyphenRemovedCardNumber = cardNumber.replaceAll('-', '');
+      const cardNumberWithHyphens = (hyphenRemovedCardNumber.match(/.{1,4}/g) || []).join('-');
 
-    setCardNumber(cardNumberWithHyphens);
-    updateCardNumber(cardNumber);
+      setCardNumber(cardNumberWithHyphens);
+      updateCardNumber(cardNumber);
+    }
   };
 
   return (

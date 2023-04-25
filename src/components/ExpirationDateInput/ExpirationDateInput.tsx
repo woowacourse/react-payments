@@ -16,11 +16,12 @@ const ExpirationDateInput = ({ updateExpirationDate }: ExpirationDateInputProps)
     const slashRemovedExpirationDate = expirationDate.replaceAll('/', '');
     if (NUMBER_REGEX.test(slashRemovedExpirationDate)) {
       setError('0부터 9까지 숫자만 입력이 가능합니다.');
+    } else {
+      const expirationDateWithSlash = (slashRemovedExpirationDate.match(/.{1,2}/g) || []).join('/');
+      setExpirationDate(expirationDateWithSlash);
+      updateExpirationDate(expirationDateWithSlash);
+      setError('');
     }
-    const expirationDateWithSlash = (slashRemovedExpirationDate.match(/.{1,2}/g) || []).join('/');
-    setExpirationDate(expirationDateWithSlash);
-    updateExpirationDate(expirationDateWithSlash);
-    setError('');
   };
 
   return (
