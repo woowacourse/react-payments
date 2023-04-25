@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Card } from "../../types";
+import { Card, CardCompany } from "../../types";
 
 type PreviewCard = Pick<Card, "cardNumber" | "ownerName" | "expirationDate" | "cardCompany">;
 
@@ -8,15 +8,26 @@ type CardPreviewProps = {
   animation?: { transition: string; transform: string };
 };
 
+const CARD_COMPANY_COLOR = {
+  비씨카드: "#f61f1f",
+  하나카드: "#00b819",
+  현대카드: "#000000",
+  카카오뱅크카드: "#da06ff",
+  국민카드: "#a0a0a0",
+  롯데카드: "#b38f17",
+  신한카드: "#1311ac",
+  우리카드: "#00ddff",
+};
+
 const CardPreview = ({ card, animation }: CardPreviewProps) => {
   const { cardCompany, cardNumber, ownerName, expirationDate } = card;
   const { transition = "", transform = "" } = animation ?? {};
 
   return (
-    <CardLayout transition={transition} transform={transform}>
-      <CardCompany>
+    <CardLayout transition={transition} transform={transform} cardCompany={cardCompany}>
+      <CardHeader>
         <span>{cardCompany}</span>
-      </CardCompany>
+      </CardHeader>
       <ICChip width={31} height={24} viewBox="0 0 31 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect
           x={0.375}
@@ -65,7 +76,7 @@ const CardPreview = ({ card, animation }: CardPreviewProps) => {
 
 export default CardPreview;
 
-const CardLayout = styled.li<{ transition: string; transform: string }>`
+const CardLayout = styled.li<{ transition: string; transform: string; cardCompany: CardCompany }>`
   position: relative;
 
   display: flex;
@@ -73,7 +84,7 @@ const CardLayout = styled.li<{ transition: string; transform: string }>`
   justify-content: flex-end;
   gap: 4px;
 
-  background-color: #333333;
+  background-color: ${({ cardCompany }) => (cardCompany ? CARD_COMPANY_COLOR[cardCompany] : "#333333")};
 
   min-height: 133px;
   width: 213px;
@@ -93,7 +104,7 @@ const CardLayout = styled.li<{ transition: string; transform: string }>`
   }
 `;
 
-const CardCompany = styled.div`
+const CardHeader = styled.div`
   position: absolute;
 
   top: 12px;
