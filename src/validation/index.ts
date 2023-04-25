@@ -17,13 +17,13 @@ export const isInvalidDate = (
   if (isTargetYear && isExpired(date.month, target.value)) return true;
 };
 
-export const isValidInfo = (info: any) => {
-  const { month, year, code, password1, password2 } = info;
+export const isValidInfo = (cardInfo: any) => {
+  const { month, year, code, password1, password2 } = cardInfo;
   const { isAllValidLength, isValidLength } = validation;
 
   const cardNumbers = Array.from(
     { length: LIMIT_LENGTH.CARD_NUMBER },
-    (_, index) => info[`number${index + 1}`]
+    (_, index) => cardInfo[`number${index + 1}`]
   );
 
   const validateCardNumber = isAllValidLength(

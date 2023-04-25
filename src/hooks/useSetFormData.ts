@@ -6,7 +6,10 @@ interface FormData {
   [k: string]: FormDataEntryValue;
 }
 
-const useSetFormData = (isValidInfo: (data: FormData) => boolean) => {
+const useSetFormData = (
+  isValidInfo: (data: FormData) => boolean,
+  dataName: string
+) => {
   const navigate = useNavigate();
 
   const handleFormData = (event: FormEvent) => {
@@ -16,7 +19,7 @@ const useSetFormData = (isValidInfo: (data: FormData) => boolean) => {
     if (!formData) return;
 
     if (isValidInfo(formData)) {
-      setCards(formData);
+      setData(formData, dataName);
 
       navigate("/");
     } else {
@@ -27,13 +30,13 @@ const useSetFormData = (isValidInfo: (data: FormData) => boolean) => {
   return { handleFormData };
 };
 
-const setCards = (formData: FormData) => {
-  const registeredCards = Object.keys(localStorage).filter((key) =>
-    key.startsWith("card")
+const setData = (formData: FormData, dataName: string) => {
+  const dataInLocalStorage = Object.keys(localStorage).filter((key) =>
+    key.startsWith(dataName)
   );
 
   localStorage.setItem(
-    `card${registeredCards.length}`,
+    `${dataName}${dataInLocalStorage.length}`,
     JSON.stringify(formData)
   );
 };

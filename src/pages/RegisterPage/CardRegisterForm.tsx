@@ -28,7 +28,7 @@ const CardRegisterForm = () => {
 
   const cardInfo = { ...cardNumber, ...date, name };
 
-  const { handleFormData } = useSetFormData(isValidInfo);
+  const { handleFormData } = useSetFormData(isValidInfo, "card");
 
   return (
     <S.Wrapper>
