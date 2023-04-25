@@ -1,64 +1,72 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-
-import { updateData } from "../utils/localStorage";
-
-import { ValidateContext } from "../contexts/validate";
-import { Validator } from "../type/validator";
-import { getFormFields, IFormData } from "../utils/formData";
 
 import { CardNumber } from "./cardNumber";
 import { CardPassword } from "./cardPassword";
 import { ExpiredDate } from "./expiredDate";
 import { SecurityCode } from "./securityCode";
 import { UserName } from "./userName";
+import {
+  DateContext,
+  NameContext,
+  NumberContext,
+  RefContext,
+} from "../contexts/cardInfo";
+import { validation } from "../validation/input";
 
 export function AddCardForm() {
   const navigate = useNavigate();
   const [isComplete, setIsComplete] = useState<boolean>(false);
-  const { valid } = useContext(ValidateContext);
+  const inputRef = useContext(RefContext);
 
-  useEffect(() => {
-    checkAllValid();
-  }, [
-    valid.validCardNumber,
-    valid.validDate,
-    valid.validName,
-    valid.validCode,
-    valid.validPassword,
-  ]);
+  const { cardNumber } = useContext(NumberContext);
+  const { month, year } = useContext(DateContext);
+  const { userName } = useContext(NameContext);
 
-  function moveCardList() {
-    navigate("/");
+  function validateInputValue(key: string) {
+    switch (key) {
+      case "first":
+        return inputRef.current[key].value.length === 4;
+      case "second":
+        return inputRef.current[key].value.length === 4;
+      case "third":
+        return inputRef.current[key].value.length === 4;
+      case "fourth":
+        return inputRef.current[key].value.length === 4;
+      case "month":
+        return validation.isCorrectMonth(inputRef.current[key].value);
+      case "year":
+        return validation.isNumber(inputRef.current[key].value);
+      case "code":
+        return inputRef.current[key].value.length === 3;
+      case "name":
+        return inputRef.current[key].value.length < 30;
+      case "firstPassword":
+        return inputRef.current[key].value.length === 1;
+      case "secondPassword":
+        return inputRef.current[key].value.length === 1;
+    }
   }
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const target = e.target as HTMLFormElement;
-    const fields: IFormData = getFormFields(target);
-    updateData(fields, "cards");
-    moveCardList();
-  }
 
-  function checkAllValid() {
-    const isValid = (valid: Validator) =>
-      Object.values(valid).every((x) => x === "");
-    isValid(valid) === true && setIsComplete(true);
+  function checkAllInputs() {
+    const isValidate = Object.keys(inputRef.current).every((input) =>
+      validateInputValue(input)
+    );
+    isValidate && setIsComplete(true);
   }
 
   return (
-    // <ValidateProvider>
-    <Form onSubmit={handleSubmit}>
+    <Form onChange={checkAllInputs}>
       <CardNumber />
       <ExpiredDate />
       <UserName />
       <SecurityCode />
       <CardPassword />
       <ButtonWrapper>
-        <CompleteButton type="submit">다음</CompleteButton>
+        {isComplete && <CompleteButton type="submit">다음</CompleteButton>}
       </ButtonWrapper>
     </Form>
-    // </ValidateProvider>
   );
 }
 
