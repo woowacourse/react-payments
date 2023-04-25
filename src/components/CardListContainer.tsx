@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { v4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
 import { CardViewer } from './CardViewer';
 import { cardDataService } from '../domains/cardDataService';
@@ -12,11 +11,11 @@ export function CardListContainer() {
     <>
       {!cardList.length && <Style.Caption>새로운 카드를 등록해주세요.</Style.Caption>}
       <Style.CardListWrapper>
-        {cardList.map((card) => {
+        {cardList.map((card, index) => {
           const { cardNumber, expirationDate, ownerName } = card;
           return (
             <CardViewer
-              key={v4()}
+              key={`${cardNumber}${index}`}
               cardNumber={cardNumber}
               expirationDate={expirationDate}
               ownerName={ownerName}
