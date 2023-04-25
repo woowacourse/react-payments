@@ -11,10 +11,9 @@ const meta: Meta<typeof Card> = {
 export default meta;
 type Story = StoryObj<typeof Card>;
 
-export const CardStory: Story = {
+export const CreditCard: Story = {
   args: {
-    type: 'button',
-    onClick() {},
+    type: 'card',
     ...initialCardRegisterInfo,
   },
 };
