@@ -1,0 +1,5 @@
+.page-header {
+  display: flex;
+  height: 9vh;
+  align-items: center;
+}

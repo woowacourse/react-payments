@@ -1,0 +1,114 @@
+.add-card-form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-around;
+}
+.add-card-submit {
+  display: flex;
+  flex-direction: row-reverse;
+}
+.card-number-label {
+  color: #525252;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.card-number-input-container {
+  display: flex;
+  background-color: #ecebf1;
+  align-items: center;
+  padding: 5px;
+  border-radius: 7px;
+  font-size: 18px;
+}
+
+.card-number {
+  width: 40px;
+  text-align: center;
+  border: none;
+  background-color: #ecebf1;
+  height: 45px;
+  font-size: 18px;
+}
+
+.card-expired {
+  display: block;
+  text-align: center;
+  border: none;
+  background-color: #ecebf1;
+  width: 80px;
+  height: 45px;
+  border-radius: 7px;
+  font-size: 18px;
+}
+
+.card-owner {
+  display: block;
+  padding-left: 10px;
+  border: none;
+  background-color: #ecebf1;
+  height: 45px;
+  width: 100%;
+  font-size: 18px;
+  border-radius: 7px;
+}
+
+.card-owner-container-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-security-code-box {
+  position: relative;
+  display: flex;
+}
+
+.card-security-code-box button {
+  position: relative;
+  top: 10px;
+  height: 27px;
+  width: 27px;
+  border: 0;
+  padding: 0;
+  margin-left: 14px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.card-security-code-box img {
+  height: 27px;
+  width: 27px;
+}
+
+.card-password-input-box {
+  display: flex;
+}
+
+.card-password-container img {
+  height: 45px;
+  width: 45px;
+}
+
+.add-card-submit button {
+  background-color: white;
+  color: black;
+  border: none;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  cursor: pointer;
+}
+
+.passwordDot {
+  width: 43px;
+  height: 43px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+}
+
+.expired-error {
+  color: red;
+}

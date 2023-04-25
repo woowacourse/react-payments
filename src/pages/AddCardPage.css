@@ -1,0 +1,17 @@
+.back-button {
+  background-color: white;
+  border: none;
+  border-radius: 8px;
+}
+
+.back-button:hover {
+  cursor: pointer;
+  background-color: #ecebf1;
+}
+
+.add-card-page-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 91vh;
+}
