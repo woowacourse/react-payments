@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { InputHTMLAttributes } from 'react';
 import { useCardCVC } from '../../../../hooks/card/card';
 import Flex from '../../../@common/Flex/Flex';
 import Input from '../../../@common/Input/Input';
 import * as Styled from './CardCVCInput.styles';
 import { StyledCardRegister } from '../@common/CardRegister.styles';
+import { REGEX } from '../../../../utils/validation';
 
 export default function CardCVCInput() {
-  const { cvc, defaultConditions, onChange } = useCardCVC();
+  const { cvc, onChange } = useCardCVC();
 
   return (
     <Flex dir="column">
@@ -16,7 +17,7 @@ export default function CardCVCInput() {
         </Input.Label>
         <Flex align="center">
           <Styled.InputBackground>
-            <Input.Field name="cvc" id="cvc" value={cvc} onChange={onChange} {...defaultConditions}>
+            <Input.Field name="cvc" id="cvc" value={cvc} onChange={onChange} {...defaultAttr}>
               <Styled.Input masking />
             </Input.Field>
           </Styled.InputBackground>
@@ -26,3 +27,11 @@ export default function CardCVCInput() {
     </Flex>
   );
 }
+
+const defaultAttr: InputHTMLAttributes<HTMLInputElement> & { asChild: boolean } = {
+  pattern: REGEX.THREE_DIGIT,
+  maxLength: 3,
+  asChild: true,
+  required: true,
+  inputMode: 'numeric',
+};

@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { InputHTMLAttributes } from 'react';
 import { useCardName } from '../../../../hooks/card/card';
+import { REGEX } from '../../../../utils/validation';
 import Flex from '../../../@common/Flex/Flex';
 import Input from '../../../@common/Input/Input';
 import { StyledCardRegister } from '../@common/CardRegister.styles';
 import * as Styled from './CardNameInput.styles';
 
 export default function CardNameInput() {
-  const { holderName, defaultConditions, onChange } = useCardName();
+  const { holderName, onChange } = useCardName();
 
   return (
     <Flex dir="column">
@@ -24,7 +25,7 @@ export default function CardNameInput() {
           </Input.Limit>
         </Flex>
         <StyledCardRegister.InputBackground>
-          <Input.Field name="name" id="name" value={holderName} onChange={onChange} {...defaultConditions}>
+          <Input.Field name="name" id="name" value={holderName} onChange={onChange} {...defaultAttr}>
             <Styled.Input />
           </Input.Field>
         </StyledCardRegister.InputBackground>
@@ -32,3 +33,11 @@ export default function CardNameInput() {
     </Flex>
   );
 }
+
+const defaultAttr: InputHTMLAttributes<HTMLInputElement> & { asChild: boolean } = {
+  asChild: true,
+  required: true,
+  placeholder: '카드에 표시된 이름과 동일하게 입력하세요.',
+  pattern: REGEX.ENGLISH,
+  maxLength: 30,
+};

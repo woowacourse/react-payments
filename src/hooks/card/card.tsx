@@ -1,17 +1,8 @@
-import React, {
-  ChangeEvent,
-  FormEvent,
-  HTMLAttributes,
-  KeyboardEvent,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useCardRegisterContext } from '../../context/CardRegisterContext';
 import { CardNumber, CardRegisterInfo, ExpirationDate, Password } from '../../types/card.type';
-import { isPatternMatch, isValidateKey } from '../../utils/input';
+import { isPatternMatch } from '../../utils/input';
 import { getCardList, setCardList } from '../../utils/localStorage';
 import { isEnglish, isNumber } from '../../utils/validation';
 
@@ -97,17 +88,7 @@ export function useCardNumber() {
       });
     };
 
-  const defaultConditions = useMemo<HTMLAttributes<HTMLInputElement>>(
-    () => ({
-      pattern: '^[0-9]{4}$',
-      maxLength: 4,
-      asChild: true,
-      required: true,
-      inputMode: 'numeric',
-    }),
-    []
-  );
-  return { cardNumber, defaultConditions, onChangeByKey };
+  return { cardNumber, onChangeByKey };
 }
 
 export function useCardExpirationDate() {
@@ -127,30 +108,7 @@ export function useCardExpirationDate() {
       });
     };
 
-  const defaultConditions = {
-    maxLength: 2,
-    asChild: true,
-    required: true,
-  };
-
-  const monthConditions = useMemo(
-    () => ({
-      ...defaultConditions,
-      pattern: '^(0[1-9]|1[0-2])$',
-      placeholder: 'MM',
-    }),
-    []
-  );
-
-  const yearConditions = useMemo(
-    () => ({
-      ...defaultConditions,
-      pattern: '^(2[3-9]|[3-3][0-9]|40)$',
-      placeholder: 'YY',
-    }),
-    []
-  );
-  return { expirationDate, monthConditions, yearConditions, onChangeByKey };
+  return { expirationDate, onChangeByKey };
 }
 
 export function useCardName() {
@@ -165,17 +123,7 @@ export function useCardName() {
     handleCardInfo('holderName', value.toUpperCase());
   };
 
-  const defaultConditions = useMemo(
-    () => ({
-      asChild: true,
-      required: true,
-      placeholder: '카드에 표시된 이름과 동일하게 입력하세요.',
-      pattern: '^[a-zA-Z]{1,30}$',
-      maxLength: 30,
-    }),
-    []
-  );
-  return { holderName, defaultConditions, onChange };
+  return { holderName, onChange };
 }
 
 export function useCardCVC() {
@@ -190,18 +138,7 @@ export function useCardCVC() {
     handleCardInfo('cvc', value);
   };
 
-  const defaultConditions = useMemo<HTMLAttributes<HTMLInputElement>>(
-    () => ({
-      pattern: '[0-9]{3}',
-      type: 'number',
-      maxLength: 3,
-      asChild: true,
-      required: true,
-      inputMode: 'numeric',
-    }),
-    []
-  );
-  return { cvc, defaultConditions, onChange };
+  return { cvc, onChange };
 }
 export function useCardPassword() {
   const {
@@ -220,14 +157,5 @@ export function useCardPassword() {
       });
     };
 
-  const defaultConditions = useMemo(
-    () => ({
-      pattern: '[0-9]',
-      maxLength: 1,
-      asChild: true,
-      required: true,
-    }),
-    []
-  );
-  return { password, defaultConditions, onChangeByKey };
+  return { password, onChangeByKey };
 }
