@@ -1,14 +1,36 @@
+import { useState } from "react";
+import type { Meta, StoryObj } from "@storybook/react";
+
 import GlobalStyle from "../../styles/GlobalStyle";
 import CardOwnerNameInput from "./CardOwnerNameInput";
+import { Card } from "../../types";
 
-export default {
+const meta: Meta<typeof CardOwnerNameInput> = {
   title: "CardOwnerNameInput",
   component: CardOwnerNameInput,
 };
 
-export const Default = () => (
-  <>
-    <GlobalStyle />
-    <CardOwnerNameInput ownerName="" onChange={() => {}}></CardOwnerNameInput>
-  </>
-);
+export default meta;
+type Story = StoryObj<typeof CardOwnerNameInput>;
+
+const CardOwnerNameInputwithHooks = () => {
+  const [ownerName, setOwnerName] = useState<Card["ownerName"]>("");
+
+  const handleOwnerName = (name: string) => {
+    const upperCaseName = name.toUpperCase();
+
+    setOwnerName(upperCaseName);
+  };
+  return <CardOwnerNameInput ownerName={ownerName} onChange={handleOwnerName} />;
+};
+
+export const Default: Story = {
+  render: () => {
+    return (
+      <>
+        <GlobalStyle />
+        <CardOwnerNameInputwithHooks />
+      </>
+    );
+  },
+};
