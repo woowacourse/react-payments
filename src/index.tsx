@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { RouterProvider, createHashRouter } from 'react-router-dom';
 
 import App from './App';
 import CardRegisterPage from './pages/CardRegisterPage';
@@ -9,7 +9,7 @@ import CardNicknameInputPage from './pages/CardNicknameInputPage';
 
 import './styles/index.css';
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: '/',
     element: <App />,
