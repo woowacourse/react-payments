@@ -3,8 +3,8 @@ import { CARD_NUMBER_INPUT_MAX_LENGTH } from '../../../constants';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
 import Input from '../../common/Input/Input';
-import { useCardNumber } from '../../../hooks/useCardNumber';
-import { useError } from '../../../hooks/useError';
+import { useCardNumber } from '../../../hooks/cards/useCardNumber';
+import { useError } from '../../../hooks/common/useError';
 import { encryptDisplayedCardNumber, formatDisplayedCardNumber } from '../../../utils/formatter';
 
 interface CardNumberProps {

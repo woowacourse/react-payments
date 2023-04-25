@@ -1,7 +1,7 @@
 import Header from '../components/common/Header/Header';
 import CardItem from '../components/CardItem/CardItem';
 import CardAddForm from '../components/CardAddForm/CardAddForm';
-import { useCardAddForm } from '../hooks/useCardAddForm';
+import { useCardAddForm } from '../hooks/cards/useCardAddForm';
 
 function CardAddPage() {
   const {

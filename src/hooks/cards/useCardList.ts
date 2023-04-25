@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { getLocalStorage, saveToLocalStorage } from '../utils/localStorage';
-import { Card } from '../types';
+import { getLocalStorage, saveToLocalStorage } from '../../utils/localStorage';
+import { Card } from '../../types';
 
 const useCard = () => {
   const [cardList, setCardList] = useState<Card[]>(getLocalStorage() ?? []);

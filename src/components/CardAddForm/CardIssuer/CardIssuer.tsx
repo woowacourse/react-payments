@@ -7,7 +7,7 @@ import Label from '../../common/Label/Label';
 import Button from '../../common/Button/Button';
 import Modal from '../../common/Modal/Modal';
 import { useModal } from '../../../hooks/useModal';
-import { useError } from '../../../hooks/useError';
+import { useError } from '../../../hooks/common/useError';
 import DownIcon from '../../../assets/down-icon.svg';
 
 interface CardIssuerProps {

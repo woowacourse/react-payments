@@ -1,6 +1,6 @@
 import { PropsWithChildren, createContext } from 'react';
 import { Card } from '../types';
-import { useCard } from '../hooks/useCardList';
+import { useCard } from '../hooks/cards/useCardList';
 
 interface CardListContextValue {
   cardList: Card[];

@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
-import { CardFormValidation } from '../types';
-import validator, { validateMultipleInputField } from '../utils/validator';
+import { CardFormValidation } from '../../types';
+import validator, { validateMultipleInputField } from '../../utils/validator';
 
 const initialValue: CardFormValidation = {
   issuer: false,

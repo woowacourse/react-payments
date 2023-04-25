@@ -4,7 +4,7 @@ import { EXPIRATION_DATE_INPUT_MAX_LENGTH } from '../../../constants';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
 import Input from '../../common/Input/Input';
-import { useError } from '../../../hooks/useError';
+import { useError } from '../../../hooks/common/useError';
 import { formatDisplayedExpirationDate } from '../../../utils/formatter';
 
 interface CardExpirationDateProps {

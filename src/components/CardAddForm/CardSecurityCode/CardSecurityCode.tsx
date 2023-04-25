@@ -3,7 +3,7 @@ import { SECURITY_CODE_MAX_LENGTH, SECURITY_CODE_MIN_LENGTH } from '../../../con
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
 import Input from '../../common/Input/Input';
-import { useError } from '../../../hooks/useError';
+import { useError } from '../../../hooks/common/useError';
 
 interface CardSecurityCodeProps {
   onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;

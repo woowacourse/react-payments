@@ -1,7 +1,7 @@
 import { ChangeEvent, RefObject } from 'react';
-import { CARD_NUMBER_INPUT_UNIT_MAX_LENGTH } from '../constants';
-import { useInputCursorPosition } from './useInputCursorPosition';
-import { checkNumberFormat } from '../utils/formatChecker';
+import { CARD_NUMBER_INPUT_UNIT_MAX_LENGTH } from '../../constants';
+import { useInputCursorPosition } from '../common/useInputCursorPosition';
+import { checkNumberFormat } from '../../utils/formatChecker';
 
 const useCardNumber = (inputRef: RefObject<HTMLInputElement>) => {
   const setCursor = useInputCursorPosition(inputRef);

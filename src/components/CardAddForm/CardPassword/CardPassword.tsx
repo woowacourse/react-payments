@@ -4,7 +4,7 @@ import { PASSWORD_UNIT_MAX_LENGTH, SECURITY_TEXT_ICON } from '../../../constants
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
 import Input from '../../common/Input/Input';
-import { useError } from '../../../hooks/useError';
+import { useError } from '../../../hooks/common/useError';
 
 interface CardPasswordProps {
   onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;

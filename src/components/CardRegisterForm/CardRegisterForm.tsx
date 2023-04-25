@@ -2,8 +2,8 @@ import { ChangeEvent, useEffect, useRef } from 'react';
 import InputContainer from '../common/InputContainer/InputContainer';
 import Input from '../common/Input/Input';
 import Button from '../common/Button/Button';
-import { useCardRegisterForm } from '../../hooks/useCardRegisterForm';
-import { useError } from '../../hooks/useError';
+import { useCardRegisterForm } from '../../hooks/cards/useCardRegisterForm';
+import { useError } from '../../hooks/common/useError';
 
 interface CardNameInputProps {
   id: number;
