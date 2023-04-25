@@ -1,9 +1,9 @@
 import { ChangeEvent, useState, useEffect } from "react";
-import { validateNumber } from "../../../validation/number";
 import Input from "../../common/Input";
 
 import "./cardNumber.css";
 import { CreditCard } from "../../../type";
+import { makeAppropriateNumber } from "../../../trans";
 
 interface Props {
   setHasError: React.Dispatch<React.SetStateAction<boolean>>;
@@ -14,12 +14,6 @@ interface Props {
     index?: number
   ) => void;
 }
-
-const makeAppropriateNumber = (userInput: string) => {
-  if (userInput === "") return "";
-
-  return userInput.split("").filter(validateNumber).join("");
-};
 
 /* setHasError : inputBoxCardNumber가 에러문구를 출력하기 위해 내려보내는 함수
  * changeCardNumberStatus : {}형태로 에러여부, 현재 카드넘버 정보를 바꾸는 함수

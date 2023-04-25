@@ -6,6 +6,7 @@ import { CARD_ERROR_MESSAGE, INPUT_STATUS } from "../../../CONSTANT";
 import { validateExpirationDate } from "../../../validation/ExpirationDate";
 import { CreditCard } from "../../../type";
 import { validateNumber } from "../../../validation/number";
+import { makeAppropriateExpirationDate } from "../../../trans";
 
 interface Props {
   changeCardExpirationDateStatus: (
@@ -18,20 +19,6 @@ interface Props {
     index?: number
   ) => void;
 }
-
-const makeAppropriateExpirationDate = (userInput: string) => {
-  if (userInput === "") return "";
-
-  const result = userInput
-    .split("")
-    .filter(validateNumber)
-    .slice(0, 4)
-    .join("");
-
-  return result.length >= 3
-    ? result.slice(0, 2) + "/" + result.slice(2)
-    : result;
-};
 
 export default function InputBoxExpirationDate(props: Props) {
   const { changeCardExpirationDateStatus, changeNowCardInfo } = props;
