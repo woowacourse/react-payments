@@ -25,3 +25,12 @@ export const isPrevDate = (year: number, month: number) => {
 
   return false;
 };
+
+export const monthValidate = (month: string) => {
+  return Number(month) <= 12 && Number(month) >= 1;
+};
+
+export const yearValidate = (year: string) => {
+  const currentYear = new Date().getFullYear() % 100;
+  return Number(year) >= currentYear && Number(year) <= currentYear + 5;
+};

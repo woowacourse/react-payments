@@ -16,34 +16,17 @@ import {
   isNumber,
   isOnlyKoreanAndEnglish,
   isPrevDate,
+  monthValidate,
+  yearValidate,
 } from '../utils';
 import { CardInfo, PageInfo } from '../types';
+import { InputValidate, formValidate } from '../hooks/formValidate';
 
 interface AddCardPageProps {
   cardList: CardInfo[];
   setCardList: (data: CardInfo[]) => void;
   setPage: React.Dispatch<React.SetStateAction<PageInfo>>;
 }
-
-interface cardInputValueInfo {
-  card: InputDetailInfo;
-  month: InputDetailInfo;
-  year: InputDetailInfo;
-  owner: InputDetailInfo;
-  cvc: InputDetailInfo;
-  password: InputDetailInfo;
-}
-
-interface InputDetailInfo {
-  data: HTMLInputElement[];
-  maxLength: number;
-  isRequired: boolean;
-  validation: (value: string) => boolean;
-  setError: React.Dispatch<React.SetStateAction<string | undefined>>;
-  errorMessage?: string;
-}
-
-type InputKind = 'card' | 'cvc' | 'owner' | 'password' | 'month' | 'year';
 
 export default function AddCardPage({
   cardList,
@@ -68,7 +51,6 @@ export default function AddCardPage({
     name: 'fourthCardInput',
     maxLength: 4,
   });
-
   const year = useInput('', {
     name: 'yearInput',
     errorMessage: '카드의 연도를 확인해주세요',
@@ -79,13 +61,11 @@ export default function AddCardPage({
     errorMessage: '카드의 달을 확인해주세요.',
     maxLength: 2,
   });
-
   const owner = useInput('', {
     name: 'ownerInput',
     maxLength: 30,
   });
   const cvc = useInput('', { name: 'cvcInput', maxLength: 3 });
-
   const firstPassword = useInput('', {
     name: 'firstPasswordInput',
     maxLength: 1,
@@ -94,15 +74,6 @@ export default function AddCardPage({
     name: 'secondPasswordInput',
     maxLength: 1,
   });
-
-  const monthValidate = (month: string) => {
-    return Number(month) <= 12 && Number(month) >= 0;
-  };
-
-  const yearValidate = (year: string) => {
-    const currentYear = new Date().getFullYear() % 100;
-    return Number(year) >= currentYear && Number(year) <= currentYear + 5;
-  };
 
   const onCardInfoSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -122,7 +93,7 @@ export default function AddCardPage({
 
     const currentYear = new Date().getFullYear() % 100;
 
-    const cardInputValue: cardInputValueInfo = {
+    const cardInputValue: InputValidate = {
       card: {
         data: [
           firstCardInput,
@@ -189,40 +160,10 @@ export default function AddCardPage({
       'month',
     ] as const;
 
-    const wrongInputs: HTMLInputElement[] = [];
-
-    const validationResult = cardInputKey.every((key: InputKind) => {
-      const current = cardInputValue[key];
-      const dataList = current.data;
-
-      const result = dataList.every((data) => {
-        const isRequiredResult = current.isRequired
-          ? data.value.length === current.maxLength
-          : true;
-        const validationResult = current.validation(data.value);
-        const isOverMaxLength = data.value.length > current.maxLength;
-
-        const dataValidationResult =
-          isRequiredResult && validationResult && !isOverMaxLength;
-
-        if (!dataValidationResult) {
-          wrongInputs.push(data);
-          if (!isRequiredResult) {
-            current.setError('이 값은 필수 값 입니다. 입력해주세요.');
-          } else if (isOverMaxLength) {
-            current.setError(
-              `이 값은 ${current.maxLength} 길이 만큼 입력 가능합니다.`
-            );
-          } else if (!validationResult) {
-            current.setError(current.errorMessage);
-          }
-        }
-
-        return dataValidationResult;
-      });
-
-      return result;
-    });
+    const { validationResult, wrongInputs } = formValidate(
+      cardInputValue,
+      cardInputKey
+    );
 
     if (!validationResult) {
       wrongInputs[0].focus();
