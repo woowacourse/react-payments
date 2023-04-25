@@ -37,6 +37,11 @@ const CvcButtonWrapper = styled.div`
   margin-left: 11px;
 `;
 
+const ToolTipWrapper = styled.div`
+  position: absolute;
+  bottom: 35px;
+`;
+
 export default function CvcInput({ cvc }: CvcInputProps) {
   const [isOpenToolTip, setIsOpenToolTip] = useState(false);
 
@@ -65,12 +70,14 @@ export default function CvcInput({ cvc }: CvcInputProps) {
         <CvcButtonWrapper>
           <InformationButton onClick={handleToolTip} />
           {isOpenToolTip && (
-            <ToolTip
-              onClick={handleToolTip}
-              text={
-                'CVC번호는 카드 뒷 면에 있는 3자리 숫자이며 카드 보안을 위한 번호입니다'
-              }
-            />
+            <ToolTipWrapper>
+              <ToolTip
+                onClick={handleToolTip}
+                text={
+                  'CVC번호는 카드 뒷 면에 있는 3자리 숫자이며 카드 보안을 위한 번호입니다'
+                }
+              />
+            </ToolTipWrapper>
           )}
         </CvcButtonWrapper>
       </InformationAndInputWrapper>

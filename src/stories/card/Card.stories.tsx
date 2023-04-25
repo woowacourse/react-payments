@@ -13,7 +13,7 @@ type Story = StoryObj<typeof Card>;
 export const EmptyCard: Story = {
   args: {
     cardNumberSet: ['', '', '', ''],
-    owner: '',
+    owner: 'NAME',
     month: 'MM',
     year: 'YY',
   },
@@ -40,7 +40,7 @@ export const OnlyOwnerCard: Story = {
 export const OnlyMonthCard: Story = {
   args: {
     cardNumberSet: ['', '', '', ''],
-    owner: '',
+    owner: 'NAME',
     month: '12',
     year: 'YY',
   },
@@ -60,6 +60,15 @@ export const FullfilledCard: Story = {
     cardNumberSet: ['1111', '2222', '····', '····'],
     owner: 'EYK',
     month: '12',
-    year: '21',
+    year: '28',
+  },
+};
+
+export const PrevCard: Story = {
+  args: {
+    cardNumberSet: ['1111', '2222', '····', '····'],
+    owner: 'EYK',
+    month: '03',
+    year: '23',
   },
 };

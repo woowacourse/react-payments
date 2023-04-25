@@ -14,8 +14,7 @@ const Wrapper = styled.div`
   padding: 10px 20px;
   border-radius: 7px;
   width: 200px;
-  position: absolute;
-  bottom: 35px;
+  position: relative;
 `;
 
 export default function ToolTip({

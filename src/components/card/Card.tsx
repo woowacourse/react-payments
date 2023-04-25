@@ -32,6 +32,7 @@ const Wrapper = styled.div<{ isHome: boolean }>`
   flex-direction: column;
   justify-content: end;
   position: relative;
+  box-sizing: border-box;
   cursor: ${({ isHome }) => (isHome ? 'pointer' : '')};
 `;
 const Title = styled.div`
