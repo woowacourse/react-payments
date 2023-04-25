@@ -1,25 +1,11 @@
 import Header from "components/Header";
 import CardPreview from "components/CardPreview";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { AddButton } from "components/ButtonStyle";
+import useInitMainPage from "hooks/useInitMainPage";
 
 const MainPage = () => {
-  const navigate = useNavigate();
-
-  const goToRegister = () => {
-    navigate("/register");
-  };
-
-  const registeredCards = Object.keys(localStorage).filter((key) =>
-    key.startsWith("card")
-  );
-
-  const cardList = registeredCards.map((_, idx) => {
-    const card = localStorage.getItem(`card${idx}`);
-    if (!card) return [];
-    return JSON.parse(card);
-  });
+  const { goToRegister, cardList } = useInitMainPage();
 
   return (
     <S.Wrapper>

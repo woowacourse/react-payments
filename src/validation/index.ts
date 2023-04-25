@@ -85,3 +85,11 @@ const validation = {
       : true;
   },
 };
+
+export const validateJson = (data: string) => {
+  try {
+    return JSON.parse(data);
+  } catch (error) {
+    if (error instanceof Error) throw Error(error.name);
+  }
+};
