@@ -1,0 +1,16 @@
+.info {
+  display: flex;
+  justify-content: space-between;
+  color: var(--gray-400);
+}
+
+.error-message {
+  height: 15px;
+  color: red;
+}
+
+.children {
+  height: 45px;
+  display: flex;
+  gap: 10px;
+}

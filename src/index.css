@@ -1,0 +1,36 @@
+:root {
+  --gold-color: #cbba64;
+  --gray-with-slight-purple: #ecebf1;
+  --gray-100: #eeeeee;
+  --gray-200: #e5e5e5;
+  --gray-300: #667085;
+  --gray-400: #344054;
+  --gray-500: #000000;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--gray-100);
+}
+
+div,
+span,
+input,
+p,
+button {
+  font-family: 'Pretendard';
+}
+
+ul,
+li {
+  list-style: none;
+}
