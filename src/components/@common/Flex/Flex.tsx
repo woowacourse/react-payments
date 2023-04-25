@@ -14,7 +14,6 @@ const Flex = styled.div<FlexProps>`
   justify-content: ${({ justify = "start" }) => justify};
   align-items: ${({ align = "stretch" }) => align};
   width: ${({ width = "100%" }) => width};
-  overflow: scroll;
 `;
 
 export default Flex;
