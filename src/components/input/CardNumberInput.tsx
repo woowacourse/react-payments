@@ -34,7 +34,7 @@ export function CardNumberInput({ moveFocusToExpirationDate, cardNumber, setCard
     if (e.key === 'Backspace' && isEmptyInput(cardNumber[index]) && !isFirst(index)) {
       e.preventDefault();
       setIsFullInputs((prev) => [...prev.slice(1), false]);
-      allRef[index - 1].current?.focus();
+      allRef.at(index - 1)?.current?.focus();
     }
   };
 
@@ -48,7 +48,7 @@ export function CardNumberInput({ moveFocusToExpirationDate, cardNumber, setCard
     if (isFullInput(e.target.value, CARD_NUMBER_INPUT_SIZE)) {
       setIsFullInputs((prev) => [true, ...prev.slice(0, -1)]);
 
-      if (!isLast(index, CARD_NUMBER_INPUT_SIZE)) allRef[index + 1].current?.focus();
+      if (!isLast(index, CARD_NUMBER_INPUT_SIZE)) allRef.at(index + 1)?.current?.focus();
       if (isLast(index, CARD_NUMBER_INPUT_SIZE)) moveFocusToExpirationDate();
     }
   };

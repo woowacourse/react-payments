@@ -19,7 +19,7 @@ export function PasswordInput({ password, passwordInputRef, setPassword }: Props
   const handleBackspacePress = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Backspace' && isEmptyInput(password[index]) && !isFirst(index)) {
       e.preventDefault();
-      allRef[index - 1].current?.focus();
+      allRef.at(index - 1)?.current?.focus();
     }
   };
 
@@ -31,7 +31,7 @@ export function PasswordInput({ password, passwordInputRef, setPassword }: Props
     });
 
     if (index < password.length - 1) {
-      allRef[index + 1].current?.focus();
+      allRef.at(index + 1)?.current?.focus();
       return;
     }
 
