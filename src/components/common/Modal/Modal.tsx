@@ -1,6 +1,6 @@
 import styles from './style.module.css';
 import { ComponentPropsWithoutRef, ReactNode, useEffect, useRef } from 'react';
-import { useScrollStop } from '../../../hooks/useScrollStop';
+import { useScrollStop } from '../../../hooks/common/useScrollStop';
 
 interface ModalProps extends ComponentPropsWithoutRef<'div'> {
   children: ReactNode;

@@ -6,7 +6,7 @@ import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
 import Button from '../../common/Button/Button';
 import Modal from '../../common/Modal/Modal';
-import { useModal } from '../../../hooks/useModal';
+import { useModal } from '../../../hooks/common/useModal';
 import { useError } from '../../../hooks/common/useError';
 import DownIcon from '../../../assets/down-icon.svg';
 

@@ -8,7 +8,7 @@ import CardOwnerName from './CardOwnerName/CardOwnerName';
 import CardSecurityCode from './CardSecurityCode/CardSecurityCode';
 import CardPassword from './CardPassword/CardPassword';
 import Button from '../common/Button/Button';
-import { useFormComplete } from '../../hooks/useFormComplete';
+import { useFormComplete } from '../../hooks/common/useFormComplete';
 
 interface CardAddFormProps {
   cardInformation: CardFormData;
