@@ -3,7 +3,7 @@
 
 import { Story, Meta } from '@storybook/react';
 
-import Input from '..';
+import Input from '.';
 
 export default {
   title: 'Input',

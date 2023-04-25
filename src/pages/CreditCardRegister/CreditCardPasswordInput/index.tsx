@@ -2,8 +2,11 @@ import * as Type from '@Types/index';
 
 import Input from '@Components/Input';
 
-import InputLayout from './InputLayout';
-import * as S from '../style';
+import * as CommonStyle from '@Styles/common';
+
+import * as S from './style';
+import InputLabel from '../InputLabel';
+import InputLayout from '../InputLayout';
 
 type Props = {
   creditCardPassword: {
@@ -36,8 +39,8 @@ function CreditCardPasswordInput({ creditCardPassword, errorMessage, setCreditCa
   };
   return (
     <InputLayout errorMessage={errorMessage}>
-      <S.CreditCardRegisterLabel>카드 비밀번호</S.CreditCardRegisterLabel>
-      <S.FlexBox justifyContent="flex-start">
+      <InputLabel label="카드 비밀번호" />
+      <CommonStyle.FlexBox justifyContent="flex-start">
         <Input
           type="password"
           value={creditCardPassword?.first}
@@ -56,7 +59,7 @@ function CreditCardPasswordInput({ creditCardPassword, errorMessage, setCreditCa
         />
         <S.PasswordBox>•</S.PasswordBox>
         <S.PasswordBox>•</S.PasswordBox>
-      </S.FlexBox>
+      </CommonStyle.FlexBox>
     </InputLayout>
   );
 }

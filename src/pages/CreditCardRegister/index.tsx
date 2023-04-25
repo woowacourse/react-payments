@@ -10,11 +10,11 @@ import creditCardStorage from '@Domains/creditCardStorage';
 
 import useInput from '@Hooks/useInput';
 
-import CreditCardCVCInput from './components/CreditCardCVCInput';
-import CreditCardExpiryInput from './components/CreditCardExpiryInput';
-import CreditCardNumberInput from './components/CreditCardNumberInput';
-import CreditCardOwnerInput from './components/CreditCardOwnerInput';
-import CreditCardPasswordInput from './components/CreditCardPasswordInput';
+import CreditCardCVCInput from './CreditCardCVCInput';
+import CreditCardExpiryInput from './CreditCardExpiryInput';
+import CreditCardNumberInput from './CreditCardNumberInput';
+import CreditCardOwnerInput from './CreditCardOwnerInput';
+import CreditCardPasswordInput from './CreditCardPasswordInput';
 import * as S from './style';
 
 function CreditCardRegister() {

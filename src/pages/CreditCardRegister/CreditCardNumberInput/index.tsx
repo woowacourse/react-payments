@@ -2,8 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 
 import creditCard from '@Domains/creditCard';
 
-import InputLayout from './InputLayout';
-import * as S from '../style';
+import * as S from './style';
+import InputLabel from '../InputLabel';
+import InputLayout from '../InputLayout';
 
 type Props = {
   creditCardNumber: string;
@@ -48,7 +49,7 @@ function CreditCardNumberInput({ creditCardNumber, errorMessage, setCreditCardNu
 
   return (
     <InputLayout errorMessage={errorMessage}>
-      <S.CreditCardRegisterLabel>카드 번호</S.CreditCardRegisterLabel>
+      <InputLabel label="카드 번호" />
       <S.FakeInput onClick={handleFakeInputClick} isHover={isHoverFakeInput}>
         {markedCreditCardNumber}
       </S.FakeInput>
@@ -60,7 +61,6 @@ function CreditCardNumberInput({ creditCardNumber, errorMessage, setCreditCardNu
         onBlur={handleHiddenInputBlur}
         maxLength={16}
       />
-      {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
     </InputLayout>
   );
 }

@@ -55,6 +55,11 @@
             "position": "after"
           },
           {
+            "pattern": "@Styles/*",
+            "group": "internal",
+            "position": "after"
+          },
+          {
             "pattern": "@Domains/*",
             "group": "internal",
             "position": "after"

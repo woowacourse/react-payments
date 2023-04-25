@@ -2,7 +2,7 @@
 
 import { Meta, Story } from '@storybook/react';
 
-import CardCompany, { CardCompanyType } from '..';
+import CardCompany, { CardCompanyType } from '.';
 
 export default {
   title: 'CardCompany',

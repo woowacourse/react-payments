@@ -1,4 +1,4 @@
-import * as S from '../style';
+import * as S from './style';
 
 type Props = {
   children: React.ReactNode;
@@ -7,10 +7,10 @@ type Props = {
 
 function InputLayout({ children, errorMessage }: Props) {
   return (
-    <S.RelativeBox>
+    <S.InputLayout>
       {children}
       {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
-    </S.RelativeBox>
+    </S.InputLayout>
   );
 }
 

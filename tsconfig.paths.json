@@ -9,7 +9,8 @@
       "@Utils/*": ["./utils/*"],
       "@Types/*": ["./types/*"],
       "@Domains/*": ["./domains/*"],
-      "@Asset/*": ["./assets/*"]
+      "@Asset/*": ["./assets/*"],
+      "@Styles/*": ["./styles/*"]
     }
   }
 }

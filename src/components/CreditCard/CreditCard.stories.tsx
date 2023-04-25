@@ -2,7 +2,7 @@
 
 import { Story, Meta } from '@storybook/react';
 
-import CreditCard, { CreditCardProps } from '..';
+import CreditCard, { CreditCardProps } from '.';
 
 export default {
   title: 'CreditCard',

@@ -1,7 +1,9 @@
 import Input from '@Components/Input';
 
-import InputLayout from './InputLayout';
-import * as S from '../style';
+import * as CommonStyle from '@Styles/common';
+
+import InputLabel from '../InputLabel';
+import InputLayout from '../InputLayout';
 
 type Props = {
   creditCardOwner: string;
@@ -19,13 +21,10 @@ function CreditCardOwnerInput({ creditCardOwner, errorMessage, setCreditCardOwne
 
   return (
     <InputLayout errorMessage={errorMessage}>
-      <S.FlexBox justifyContent="space-between">
-        <S.CreditCardRegisterLabel>카드 소유자 이름 (선택)</S.CreditCardRegisterLabel>
-        <S.CreditCardRegisterLabel>
-          {creditCardOwner.length}
-          /20
-        </S.CreditCardRegisterLabel>
-      </S.FlexBox>
+      <CommonStyle.FlexBox justifyContent="space-between">
+        <InputLabel label="카드 소유자 이름 (선택)" />
+        <InputLabel label={`${creditCardOwner.length} / 20`} />
+      </CommonStyle.FlexBox>
       <Input
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
         type="string"
@@ -35,7 +34,6 @@ function CreditCardOwnerInput({ creditCardOwner, errorMessage, setCreditCardOwne
         onChange={handleChangeCreditCardOwner}
         maxLength={20}
       />
-      {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
     </InputLayout>
   );
 }

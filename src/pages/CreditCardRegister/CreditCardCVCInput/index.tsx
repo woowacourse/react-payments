@@ -2,8 +2,9 @@ import { useState } from 'react';
 
 import Input from '@Components/Input';
 
-import InputLayout from './InputLayout';
-import * as S from '../style';
+import * as S from './style';
+import InputLabel from '../InputLabel';
+import InputLayout from '../InputLayout';
 
 type Props = {
   creditCardCVC: string;
@@ -27,7 +28,7 @@ function CreditCardCVCInput({ creditCardCVC, errorMessage, setCreditCardCVC }: P
 
   return (
     <InputLayout errorMessage={errorMessage}>
-      <S.CreditCardRegisterLabel>보안 코드(CVC/CVV)</S.CreditCardRegisterLabel>
+      <InputLabel label="보안 코드(CVC/CVV" />
       <S.CVCInputLayout>
         <Input
           type="password"

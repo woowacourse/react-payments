@@ -1,7 +1,7 @@
 import Input from '@Components/Input';
 
-import InputLayout from './InputLayout';
-import * as S from '../style';
+import InputLabel from '../InputLabel';
+import InputLayout from '../InputLayout';
 
 type Props = {
   creditCardExpiry: string;
@@ -26,7 +26,7 @@ function CreditCardExpiryInput({ creditCardExpiry, errorMessage, setCreditCardEx
 
   return (
     <InputLayout errorMessage={errorMessage}>
-      <S.CreditCardRegisterLabel>만료일</S.CreditCardRegisterLabel>
+      <InputLabel label="만료일" />
       <Input
         placeholder="MM/YY"
         type="string"
@@ -36,7 +36,6 @@ function CreditCardExpiryInput({ creditCardExpiry, errorMessage, setCreditCardEx
         onChange={handleChangeCreditCardExpiry}
         maxLength={5}
       />
-      {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
     </InputLayout>
   );
 }
