@@ -9,26 +9,23 @@ type InputProps = {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const Input = forwardRef<HTMLInputElement, InputProps>(({ width, value, name, maxLength, onChange, ...rest }, ref) => {
-  return (
-    <>
-      <input
-        className={styles.input}
-        name={name}
-        style={{ width }}
-        value={value}
-        maxLength={maxLength}
-        onChange={onChange}
-        ref={ref}
-        {...rest}
-      />
-    </>
-  );
-});
-
-Input.defaultProps = {
-  onChange: undefined,
-  maxLength: 9999999,
-};
+const Input = forwardRef<HTMLInputElement, InputProps>(
+  ({ width, value, name, maxLength, onChange = undefined, ...rest }, ref) => {
+    return (
+      <>
+        <input
+          className={styles.input}
+          name={name}
+          style={{ width }}
+          value={value}
+          maxLength={maxLength}
+          onChange={onChange}
+          ref={ref}
+          {...rest}
+        />
+      </>
+    );
+  }
+);
 
 export default Input;
