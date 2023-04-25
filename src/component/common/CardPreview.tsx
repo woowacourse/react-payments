@@ -1,11 +1,11 @@
 import { CreditCard } from "../../type";
 import styles from "./CardPreview.module.css";
 
-interface Props {
+interface CardPreviewProps {
   card: CreditCard;
 }
 
-export default function CardPreview(props: Props) {
+export default function CardPreview(props: CardPreviewProps) {
   const { card } = props;
 
   const previewNumber = card.cardNumber.map((number, index) => {
