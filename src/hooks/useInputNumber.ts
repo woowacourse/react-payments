@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { validation } from "../validation/input";
 
 export function useInputNumber() {
-  const [cardNumber, setCardNumber] = useState({
+  const [cardNumber, setCardNumber] = useState<any>({
     first: "",
     second: "",
     third: "",
@@ -10,10 +11,14 @@ export function useInputNumber() {
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
-    setCardNumber({
-      ...cardNumber,
-      [name]: value,
-    });
+    if (!validation.isNumber(value)) {
+      e.target.value = cardNumber[name];
+    } else {
+      setCardNumber({
+        ...cardNumber,
+        [name]: value,
+      });
+    }
   }
 
   return { cardNumber, handleChange };
