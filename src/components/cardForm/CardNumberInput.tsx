@@ -1,13 +1,14 @@
+import { useState } from "react";
 import { InputContainer } from "../common/InputContainer";
 import { InputLabel } from "../common/InputLabel";
 import { Input } from "../common/Input";
 import styled from "styled-components";
 import { CARD_INPUT_NUMBER } from "../../constant/cardInput";
 import { isNumeric } from "../../utils/validate";
-import { useInputCompleted } from "../../hook/useInputComplete";
 
 interface CardNumberInputProps {
   setCardNumbers: (index: number, numbers: string) => void;
+  validateNumbersInput: (numbers: string[]) => boolean;
 }
 
 const cardNumberInputInfo = {
@@ -15,8 +16,12 @@ const cardNumberInputInfo = {
   $textPosition: "center",
 };
 
-export const CardNumberInput = ({ setCardNumbers }: CardNumberInputProps) => {
-  const { isCompleted, checkInputCompleted } = useInputCompleted();
+export const CardNumberInput = ({
+  setCardNumbers,
+  validateNumbersInput,
+}: CardNumberInputProps) => {
+  const [numbers, setNumbers] = useState(["", "", "", ""]);
+  const [isValid, setIsValid] = useState(true);
 
   const handleInput =
     (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,11 +38,17 @@ export const CardNumberInput = ({ setCardNumbers }: CardNumberInputProps) => {
         return;
       }
 
+      setNumbers((prev) => {
+        const newNumbers = [...prev];
+        newNumbers[index - 1] = value;
+        return newNumbers;
+      });
       setCardNumbers(index - 1, value);
     };
 
-  const handleOutFocusEvent = (e: React.FocusEvent<HTMLInputElement>) => {
-    checkInputCompleted(e.target.value, CARD_INPUT_NUMBER.CARD_NUMBER);
+  const handleOutFocusEvent = () => {
+    const validity = validateNumbersInput(numbers);
+    setIsValid(validity);
   };
 
   return (
@@ -46,14 +57,14 @@ export const CardNumberInput = ({ setCardNumbers }: CardNumberInputProps) => {
       <Row>
         <Input
           error={{
-            isValid: isCompleted,
+            isValid: isValid,
             errorMessage: "16자리 숫자를 입력하세요.",
           }}
           {...cardNumberInputInfo}
           type="text"
           label="cardNumber1"
           handleInput={handleInput(1)}
-          handleChange={handleOutFocusEvent}
+          handleChange={() => {}}
         />
         {[2, 3, 4].map((ind) => (
           <Input

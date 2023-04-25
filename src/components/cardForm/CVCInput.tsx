@@ -1,10 +1,10 @@
+import { useState } from "react";
 import { InputContainer } from "../common/InputContainer";
 import { Input } from "../common/Input";
 import { InputLabel } from "../common/InputLabel";
 import styled from "styled-components";
 import { CARD_INPUT_NUMBER } from "../../constant/cardInput";
 import { isNumeric } from "../../utils/validate";
-import { useInputCompleted } from "../../hook/useInputComplete";
 
 const CVCInfo = {
   label: "cvc",
@@ -13,8 +13,12 @@ const CVCInfo = {
   type: "password",
 };
 
-export const CVCInput = () => {
-  const { isCompleted, checkInputCompleted } = useInputCompleted();
+interface CVCInputProps {
+  validateCVCInput: (cvc: number) => boolean;
+}
+
+export const CVCInput = ({ validateCVCInput }: CVCInputProps) => {
+  const [isValid, setIsValid] = useState(true);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -32,7 +36,8 @@ export const CVCInput = () => {
   };
 
   const handleOutFocusEvent = (e: React.FocusEvent<HTMLInputElement>) => {
-    checkInputCompleted(e.target.value, CARD_INPUT_NUMBER.CVC);
+    const validity = validateCVCInput(Number(e.target.value));
+    setIsValid(validity);
   };
 
   return (
@@ -44,7 +49,7 @@ export const CVCInput = () => {
           handleInput={handleInput}
           handleChange={handleOutFocusEvent}
           error={{
-            isValid: isCompleted,
+            isValid: isValid,
             errorMessage: "3자리 숫자를 입력하세요.",
           }}
         />

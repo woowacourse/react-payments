@@ -9,31 +9,30 @@ import { PasswordInput } from "./PasswordInput";
 import { FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { isInputFilled, isMonthValid, isYearValid } from "../../utils/validate";
+import { useValidation } from "../../hook/useValidation";
 
 interface CardFormProps {
   setCardInfo: React.Dispatch<React.SetStateAction<CardType>>;
 }
 
 export const CardForm = ({ setCardInfo }: CardFormProps) => {
+  const {
+    inputValidity,
+    validateCVCInput,
+    validateExpiryDateInput,
+    validateNumbersInput,
+    validatePasswordInput,
+  } = useValidation();
+
   const navigate = useNavigate();
 
   const moveToHome = () => {
     navigate("/");
   };
 
-  const isInputValid = (newCard: CardType) => {
-    const { numbers, expiryDate, CVC, password } = newCard;
-    const [month, year] = expiryDate.split(" / ");
-
-    const isNumberValid = isInputFilled(numbers.join(""), 16);
-    const isExpiryDateValid =
-      isInputFilled(month + year, 4) &&
-      isMonthValid(Number(month)) &&
-      isYearValid(Number(year));
-    const isCVCValid = isInputFilled(String(CVC), 3);
-    const isPasswordValid = isInputFilled(password.join(""), 2);
-
-    return isNumberValid && isExpiryDateValid && isCVCValid && isPasswordValid;
+  const isInputValid = () => {
+    console.log(inputValidity);
+    return Object.entries(inputValidity).every(([_, isValid]) => isValid);
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -43,7 +42,7 @@ export const CardForm = ({ setCardInfo }: CardFormProps) => {
     const data = Object.fromEntries(formData.entries());
     const newCard = cardHandler.formNewCard(data);
 
-    if (isInputValid(newCard)) {
+    if (isInputValid()) {
       cardHandler.addNewCard(newCard);
 
       moveToHome();
@@ -64,11 +63,17 @@ export const CardForm = ({ setCardInfo }: CardFormProps) => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <CardNumberInput setCardNumbers={setCardNumbers} />
-      <ExpiryDateInput setExpiryDate={setCardData("expiryDate")} />
+      <CardNumberInput
+        setCardNumbers={setCardNumbers}
+        validateNumbersInput={validateNumbersInput}
+      />
+      <ExpiryDateInput
+        setExpiryDate={setCardData("expiryDate")}
+        validateExpiryDateInput={validateExpiryDateInput}
+      />
       <OwnerInput setOwner={setCardData("owner")} />
-      <CVCInput />
-      <PasswordInput />
+      <CVCInput validateCVCInput={validateCVCInput} />
+      <PasswordInput validatePasswordInput={validatePasswordInput} />
       <SubmitButton type="submit">다음</SubmitButton>
     </Form>
   );

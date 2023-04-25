@@ -2,10 +2,11 @@ import { InputContainer } from "../common/InputContainer";
 import { Input } from "../common/Input";
 import { InputLabel } from "../common/InputLabel";
 import { useState } from "react";
-import { isNumeric, isMonthValid, isYearValid } from "../../utils/validate";
+import { isNumeric } from "../../utils/validate";
 
 interface ExpiryDateInputProps {
   setExpiryDate: (value: string) => void;
+  validateExpiryDateInput: (expiryDate: string) => boolean;
 }
 
 const ExpiryDateInfo = {
@@ -16,7 +17,10 @@ const ExpiryDateInfo = {
   type: "text",
 };
 
-export const ExpiryDateInput = ({ setExpiryDate }: ExpiryDateInputProps) => {
+export const ExpiryDateInput = ({
+  setExpiryDate,
+  validateExpiryDateInput,
+}: ExpiryDateInputProps) => {
   const [isValid, setIsValid] = useState(true);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,25 +41,9 @@ export const ExpiryDateInput = ({ setExpiryDate }: ExpiryDateInputProps) => {
     setExpiryDate(e.target.value);
   };
 
-  const validateExpiryDate = (expiryDate: string): void => {
-    const [month, year] = expiryDate.split(" / ").map((each) => Number(each));
-
-    setIsValid(false);
-
-    if (isMonthValid(month) && isYearValid(year)) {
-      setIsValid(true);
-    }
-  };
-
   const handleOutFocusEvent = (e: React.FocusEvent<HTMLInputElement>) => {
-    const value = e.target.value.replaceAll(" / ", "");
-
-    if (value.length === 4) {
-      validateExpiryDate(e.target.value);
-      return;
-    }
-
-    setIsValid(false);
+    const validity = validateExpiryDateInput(e.target.value);
+    setIsValid(validity);
   };
 
   return (

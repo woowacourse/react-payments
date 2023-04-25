@@ -1,9 +1,9 @@
+import { useState } from "react";
 import { InputContainer } from "../common/InputContainer";
 import { Input } from "../common/Input";
 import { InputLabel } from "../common/InputLabel";
 import styled from "styled-components";
 import { isNumeric } from "../../utils/validate";
-import { useInputCompleted } from "../../hook/useInputComplete";
 
 const passwordInfo = {
   $width: "43px",
@@ -11,20 +11,36 @@ const passwordInfo = {
   type: "password",
 };
 
-export const PasswordInput = () => {
-  const { isCompleted, checkInputCompleted } = useInputCompleted();
+interface PasswordInputProps {
+  validatePasswordInput: (password: string[]) => boolean;
+}
 
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
+export const PasswordInput = ({
+  validatePasswordInput,
+}: PasswordInputProps) => {
+  const [password, setPassword] = useState(["", ""]);
+  const [isValid, setIsValid] = useState(true);
 
-    if (value.length > 1 || !isNumeric(value)) {
-      e.target.value = value.slice(0, -1);
-      return;
-    }
-  };
+  const handleInput =
+    (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value;
 
-  const handleOutFocusEvent = (e: React.FocusEvent<HTMLInputElement>) => {
-    checkInputCompleted(e.target.value, 1);
+      if (value.length > 1 || !isNumeric(value)) {
+        e.target.value = value.slice(0, -1);
+        return;
+      }
+
+      setPassword((prev) => {
+        const newPassword = [...prev];
+        newPassword[index] = value || "";
+        return newPassword;
+      });
+    };
+
+  const handleOutFocusEvent = () => {
+    console.log(password);
+    const validity = validatePasswordInput(password);
+    setIsValid(validity);
   };
 
   return (
@@ -33,17 +49,17 @@ export const PasswordInput = () => {
       <Row>
         <Input
           {...passwordInfo}
-          handleInput={handleInput}
+          handleInput={handleInput(0)}
           handleChange={handleOutFocusEvent}
           label="password1"
           error={{
-            isValid: isCompleted,
+            isValid: isValid,
             errorMessage: "비밀번호를 입력하세요.",
           }}
         />
         <Input
           {...passwordInfo}
-          handleInput={handleInput}
+          handleInput={handleInput(1)}
           handleChange={handleOutFocusEvent}
           label="password2"
         />
