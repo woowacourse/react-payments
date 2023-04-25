@@ -1,15 +1,33 @@
 import styled from "styled-components";
+import { ReactComponent as BCLogo } from "../../assets/bccard-logo.svg";
+import { ReactComponent as HanaLogo } from "../../assets/hanacard-logo.svg";
+import { ReactComponent as HyundaiLogo } from "../../assets/hyundaicard-logo.svg";
+import { ReactComponent as KakaoBankLogo } from "../../assets/kakaobank-logo.svg";
+import { ReactComponent as KBLogo } from "../../assets/kbcard-logo.svg";
+import { ReactComponent as LotteLogo } from "../../assets/lottecard-logo.svg";
+import { ReactComponent as ShinhanLogo } from "../../assets/shinhancard-logo.svg";
+import { ReactComponent as WooriLogo } from "../../assets/wooricard-logo.svg";
+
+export const CARD_LOGO = {
+  비씨카드: <BCLogo width={"37px"} height={"37px"} />,
+  하나카드: <HanaLogo width={"37px"} height={"37px"} />,
+  현대카드: <HyundaiLogo width={"37px"} height={"37px"} />,
+  카카오뱅크카드: <KakaoBankLogo width={"37px"} height={"37px"} />,
+  국민카드: <KBLogo width={"37px"} height={"37px"} />,
+  롯데카드: <LotteLogo width={"37px"} height={"37px"} />,
+  신한카드: <ShinhanLogo width={"37px"} height={"37px"} />,
+  우리카드: <WooriLogo width={"37px"} height={"37px"} />,
+};
 
 type CardCompanyIconProps = {
-  children: React.ReactNode;
-  company: string;
+  company: keyof typeof CARD_LOGO;
   onClickHandler: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-const CardCompanyIcon = ({ children, company, onClickHandler }: CardCompanyIconProps) => {
+const CardCompanyIcon = ({ company, onClickHandler }: CardCompanyIconProps) => {
   return (
-    <Wrapper onClick={onClickHandler}>
-      {children}
+    <Wrapper name={company} onClick={onClickHandler}>
+      {company && CARD_LOGO[company]}
       <span>{company}</span>
     </Wrapper>
   );

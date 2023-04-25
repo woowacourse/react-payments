@@ -26,7 +26,7 @@ const ModalBackDrop = styled.div<{ modalOpen: boolean }>`
   width: 100%;
   height: 100%;
 
-  z-index: 1;
+  z-index: 3;
 
   background: rgba(0, 0, 0, 0.5);
 `;

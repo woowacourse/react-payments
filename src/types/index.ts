@@ -1,3 +1,5 @@
+import { CARD_LOGO } from "../components/CardCompanyIcon/CardCompanyIcon";
+
 export type CardNumber = {
   firstGroup: string;
   secondGroup: string;
@@ -14,7 +16,7 @@ export type CardPasswordKey = "first" | "second";
 export type CardPassword = Record<CardPasswordKey, string>;
 
 export type Card = {
-  cardCompany: string;
+  cardCompany: keyof typeof CARD_LOGO | undefined;
   cardNumber: CardNumber;
   expirationDate: CardExpirationDate;
   ownerName: string;

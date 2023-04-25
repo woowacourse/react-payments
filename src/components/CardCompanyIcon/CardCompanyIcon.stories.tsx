@@ -9,6 +9,6 @@ export default {
 export const Default = () => (
   <>
     <GlobalStyle />
-    <CardCompanyIcon children={<div></div>} company={"하나카드"} onClickHandler={() => {}}></CardCompanyIcon>
+    <CardCompanyIcon company={"하나카드"} onClickHandler={() => {}}></CardCompanyIcon>
   </>
 );

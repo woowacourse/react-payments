@@ -22,15 +22,7 @@ import {
 } from "../../validator/Validator";
 import { PAGE } from "../../constant";
 import Modal from "../../components/Modal/Modal";
-import CardCompanyIcon from "../../components/CardCompanyIcon/CardCompanyIcon";
-import { ReactComponent as BCLogo } from "../../assets/bccard-logo.svg";
-import { ReactComponent as HanaLogo } from "../../assets/hanacard-logo.svg";
-import { ReactComponent as HyundaiLogo } from "../../assets/hyundaicard-logo.svg";
-import { ReactComponent as KakaoBankLogo } from "../../assets/kakaobank-logo.svg";
-import { ReactComponent as KbLogo } from "../../assets/kbcard-logo.svg";
-import { ReactComponent as LotteLogo } from "../../assets/lottecard-logo.svg";
-import { ReactComponent as ShinhanLogo } from "../../assets/shinhancard-logo.svg";
-import { ReactComponent as WooriLogo } from "../../assets/wooricard-logo.svg";
+import CardCompanyIcon, { CARD_LOGO } from "../../components/CardCompanyIcon/CardCompanyIcon";
 
 type AddCardPageProps = {
   addCard: (card: Card) => void;
@@ -38,7 +30,7 @@ type AddCardPageProps = {
 
 const AddCardPage = ({ addCard }: AddCardPageProps) => {
   const [modalOpen, setModalOpen] = useState(true);
-  const [cardCompany, setCardCompany] = useState<string>("");
+  const [cardCompany, setCardCompany] = useState<keyof typeof CARD_LOGO>();
 
   const [cardNumber, setCardNumber] = useState<CardNumber>({
     firstGroup: "",
@@ -67,11 +59,10 @@ const AddCardPage = ({ addCard }: AddCardPageProps) => {
   const navigate = useNavigate();
 
   const handleCardCompany = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const company = e.target as any;
-    console.log(company);
+    const company = e.currentTarget.name as any;
+    setCardCompany(company);
 
     setModalOpen(false);
-    if (company) setCardCompany(company);
   };
 
   const handleCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -181,46 +172,14 @@ const AddCardPage = ({ addCard }: AddCardPageProps) => {
         modalOpen={modalOpen}
         children={
           <>
-            <CardCompanyIcon
-              children={<BCLogo width={"37px"} height={"37px"} />}
-              company={"비씨카드"}
-              onClickHandler={handleCardCompany}
-            ></CardCompanyIcon>
-            <CardCompanyIcon
-              children={<HanaLogo width={"37px"} height={"37px"} />}
-              company={"하나카드"}
-              onClickHandler={handleCardCompany}
-            ></CardCompanyIcon>
-            <CardCompanyIcon
-              children={<HyundaiLogo width={"37px"} height={"37px"} />}
-              company={"현대카드"}
-              onClickHandler={handleCardCompany}
-            ></CardCompanyIcon>
-            <CardCompanyIcon
-              children={<KakaoBankLogo width={"37px"} height={"37px"} />}
-              company={"카카오뱅크카드"}
-              onClickHandler={handleCardCompany}
-            ></CardCompanyIcon>
-            <CardCompanyIcon
-              children={<KbLogo width={"37px"} height={"37px"} />}
-              company={"국민카드"}
-              onClickHandler={handleCardCompany}
-            ></CardCompanyIcon>
-            <CardCompanyIcon
-              children={<LotteLogo width={"37px"} height={"37px"} />}
-              company={"롯데카드"}
-              onClickHandler={handleCardCompany}
-            ></CardCompanyIcon>
-            <CardCompanyIcon
-              children={<ShinhanLogo width={"37px"} height={"37px"} />}
-              company={"신한카드"}
-              onClickHandler={handleCardCompany}
-            ></CardCompanyIcon>
-            <CardCompanyIcon
-              children={<WooriLogo width={"37px"} height={"37px"} />}
-              company={"우리카드"}
-              onClickHandler={handleCardCompany}
-            ></CardCompanyIcon>
+            <CardCompanyIcon company={"비씨카드"} onClickHandler={handleCardCompany}></CardCompanyIcon>
+            <CardCompanyIcon company={"하나카드"} onClickHandler={handleCardCompany}></CardCompanyIcon>
+            <CardCompanyIcon company={"현대카드"} onClickHandler={handleCardCompany}></CardCompanyIcon>
+            <CardCompanyIcon company={"카카오뱅크카드"} onClickHandler={handleCardCompany}></CardCompanyIcon>
+            <CardCompanyIcon company={"국민카드"} onClickHandler={handleCardCompany}></CardCompanyIcon>
+            <CardCompanyIcon company={"롯데카드"} onClickHandler={handleCardCompany}></CardCompanyIcon>
+            <CardCompanyIcon company={"신한카드"} onClickHandler={handleCardCompany}></CardCompanyIcon>
+            <CardCompanyIcon company={"우리카드"} onClickHandler={handleCardCompany}></CardCompanyIcon>
           </>
         }
       ></Modal>
