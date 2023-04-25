@@ -19,7 +19,7 @@ import {
   CardPasswordKey,
 } from "../../types";
 import { useNavigate } from "react-router-dom";
-import { isAlphabetic, isNumeric, isFulfilledObject, isFulfilledString, isValidMonth } from "../../validator/Validator";
+import { isFulfilledObject, isFulfilledString, isValidMonth } from "../../validator/Validator";
 
 type AddCardPageProps = {
   onSubmit: (card: Card) => void;
@@ -48,11 +48,11 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
 
   const navigate = useNavigate();
 
-  const handleCardNumber = (targetGroup: CardNumberGroups, value: string) => {
+  const handleCardNumber = (value: string, targetGroup: CardNumberGroups) => {
     setCardNumber({ ...cardNumber, [targetGroup]: value });
   };
 
-  const handleExpirationDate = (dateType: CardExpirationDateKey, value: string) => {
+  const handleExpirationDate = (value: string, dateType: CardExpirationDateKey) => {
     setExpirationDate({ ...expirationDate, [dateType]: value });
   };
 

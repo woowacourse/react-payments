@@ -5,7 +5,7 @@ import { isNumeric } from "../../validator/Validator";
 
 type CardExpirationDateInputProps = {
   expirationDate: CardExpirationDate;
-  onChange: (dateType: CardExpirationDateKey, value: string) => void;
+  onChange: (value: string, dateType: CardExpirationDateKey) => void;
 };
 
 const CardExpirationDateInput = ({ expirationDate, onChange }: CardExpirationDateInputProps) => {
@@ -18,7 +18,7 @@ const CardExpirationDateInput = ({ expirationDate, onChange }: CardExpirationDat
     if (!isNumeric(value)) return;
     if (!isCardExpirationDateKeyType(dateType)) return;
 
-    onChange(dateType, value);
+    onChange(value, dateType);
   };
 
   const isCardExpirationDateKeyType = (dateType: string): dateType is CardExpirationDateKey => {

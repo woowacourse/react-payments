@@ -4,7 +4,7 @@ import { InputContainer, Input, Label } from "../common";
 
 type CardNumberInputProps = {
   cardNumber: CardNumber;
-  onChange: (targetGroup: CardNumberGroups, value: string) => void;
+  onChange: (value: string, targetGroup: CardNumberGroups) => void;
 };
 
 const CardNumberInput = ({ cardNumber, onChange }: CardNumberInputProps) => {
@@ -17,7 +17,7 @@ const CardNumberInput = ({ cardNumber, onChange }: CardNumberInputProps) => {
     if (!isNumeric(value)) return;
     if (!isCardNumberGroupsType(targetGroup)) return;
 
-    onChange(targetGroup, value);
+    onChange(value, targetGroup);
   };
 
   const isCardNumberGroupsType = (targetGroup: string): targetGroup is CardNumberGroups => {
