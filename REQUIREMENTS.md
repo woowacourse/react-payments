@@ -1,14 +1,7 @@
 # 구현 할 컴포넌트
 
-## 공용 컴포넌트
+## step2
 
-- [ ] Page 컴포넌트
-- [ ] Page.Header 컴포넌트
-- [ ] Page.Content 컴포넌트
-- [ ] Text 컴포넌트
-
-## 컴포넌트
-
-- [ ] CreditCardListPage 컴포넌트
-  - [ ] NewCreditCardButton 컴포넌트
-- [ ] NewCreditCardPage 컴포넌트
+- [ ] eslint 규칙 무시 없애기
+- [ ] 카드 중간 번호를 빼고 입력 시 위치가 이상한 점 수정하기
+- [ ] Validation을 즉각즉각 하도록 수정하기
