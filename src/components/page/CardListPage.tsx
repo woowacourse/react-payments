@@ -2,22 +2,19 @@ import styled from 'styled-components';
 import { CardType, Page, PageProps } from '../../types';
 import Card from '../common/Card';
 import PageTemplate from '../template/PageTemplate';
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 const CardListPage = ({ navigate }: PageProps) => {
   const onClickAdd = () => {
     navigate(Page.register);
   };
 
-  const cardList: CardType[] = JSON.parse(localStorage.getItem('cardList') || '[]');
+  const { getLocalStorage: cardList } = useLocalStorage<CardType[]>('cardList');
 
   return (
     <PageTemplate title="보유카드">
-      {cardList.length === 0 && <GuideMessage>새로운 카드를 등록해주세요</GuideMessage>}
-      <CardList>
-        {cardList.map((card) => (
-          <Card key={card.id} {...card} />
-        ))}
-      </CardList>
+      {!cardList && <GuideMessage>새로운 카드를 등록해주세요</GuideMessage>}
+      <CardList>{cardList && cardList.map((card) => <Card key={card.id} {...card} />)}</CardList>
       <CardAddButton onClick={onClickAdd}>+</CardAddButton>
     </PageTemplate>
   );

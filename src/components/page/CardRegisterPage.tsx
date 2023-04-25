@@ -8,6 +8,7 @@ import CardPasswordInput from '../box/inputSection/CardPasswordInput';
 import styled from 'styled-components';
 import { CardType, Page, PageProps } from '../../types';
 import PageTemplate from '../template/PageTemplate';
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 interface CardFormState extends Omit<CardType, 'id' | 'cardPassword'> {
   cardPassword1: string;
@@ -24,6 +25,8 @@ const CardRegisterPage = ({ navigate }: PageProps) => {
     cardPassword2: '',
   });
 
+  const { pushLocalStorage } = useLocalStorage<CardType[]>('cardList');
+
   const submitNewCard = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -36,9 +39,7 @@ const CardRegisterPage = ({ navigate }: PageProps) => {
       cardPassword: cardPassword1 + cardPassword2,
     };
 
-    const cardList: CardType[] = JSON.parse(localStorage.getItem('cardList') || '[]');
-    cardList.push(newCard);
-    localStorage.setItem('cardList', JSON.stringify(cardList));
+    pushLocalStorage(newCard);
     navigate(Page.list);
   };
 
