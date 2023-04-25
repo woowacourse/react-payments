@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { CardType } from '../../types';
+import { CardType } from '../../abstracts/types';
 
 const Card = ({
   cardNumber,

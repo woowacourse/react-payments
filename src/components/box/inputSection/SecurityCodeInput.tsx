@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import InputSectionTemplate from '../../template/InputSectionTemplate';
 import InputBox, { InputType } from '../../common/InputBox';
-import { InputStateProps } from '../../../types';
+import { InputStateProps } from '../../../abstracts/types';
 import HelpButtonImage from '../../../assets/HelpButtonImage';
 
 const SecurityCodeInput = (props: InputStateProps) => {

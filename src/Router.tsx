@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Page } from './types';
+import { Page } from './abstracts/types';
 import CardListPage from './components/page/CardListPage';
 import CardRegisterPage from './components/page/CardRegisterPage';
 

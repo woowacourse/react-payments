@@ -1,15 +1,16 @@
 import styled from 'styled-components';
-import { CardType, Page, PageProps } from '../../types';
+import { CardType, Page, PageProps } from '../../abstracts/types';
 import Card from '../common/Card';
 import PageTemplate from '../template/PageTemplate';
 import useLocalStorage from '../../hooks/useLocalStorage';
+import { CARD_LIST_STORAGE_KEY } from '../../abstracts/constants';
 
 const CardListPage = ({ navigate }: PageProps) => {
   const onClickAdd = () => {
     navigate(Page.register);
   };
 
-  const { getLocalStorage: cardList } = useLocalStorage<CardType[]>('cardList');
+  const { getLocalStorage: cardList } = useLocalStorage<CardType[]>(CARD_LIST_STORAGE_KEY);
 
   return (
     <PageTemplate title="보유카드">
