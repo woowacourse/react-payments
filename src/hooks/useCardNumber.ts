@@ -15,7 +15,7 @@ function useCardNumber() {
       setdisplayNumber(maskNumber(cardNumber));
 
     e.currentTarget.setCustomValidity(
-      cardNumber.length === 16 ? "" : "카드 번호는 16자 이어야 합니다."
+      isValid(cardNumber) ? "" : "카드 번호는 16자 이어야 합니다."
     );
   };
 
@@ -54,6 +54,10 @@ function useCardNumber() {
     );
 
     return maskedNumber.join("-");
+  };
+
+  const isValid = (cardNumber: string) => {
+    return cardNumber.length === 16;
   };
 
   return { originNumber, displayNumber, changeCardNumber };
