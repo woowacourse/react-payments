@@ -12,8 +12,9 @@ const getSerialNumber = (card: CardNumber): string => {
 
 export const postLocalStorage = (data: Omit<CardType, 'id'>) => {
   const getData = localStorage.getItem('cardList');
+
   if (!getData) {
-    localStorage.setItem('cardList', JSON.stringify([data]));
+    localStorage.setItem('cardList', JSON.stringify([{ id: 0, ...data }]));
     return;
   }
 
@@ -29,7 +30,7 @@ export const postLocalStorage = (data: Omit<CardType, 'id'>) => {
   });
 
   if (sameNumbers.length > 0) throw new Error('이미 등록된 카드');
-  dataToArr.push(data);
+  dataToArr.push({ id: dataToArr.length, ...data });
   localStorage.setItem('cardList', JSON.stringify(dataToArr));
 };
 

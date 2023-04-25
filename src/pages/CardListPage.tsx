@@ -24,14 +24,13 @@ const CardListPage = () => {
           <span className="empty-card-list-title">새로운 카드를 등록해주세요.</span>
         ) : (
           cardList.map((card: CardType) => (
-            <li key={card.id}>
-              <Card
-                cardType={card.cardType}
-                cardNumber={card.cardNumber}
-                cardOwner={card.cardOwner}
-                expired={card.expired}
-              />
-            </li>
+            <Card
+              key={card.id}
+              cardType={card.cardType}
+              cardNumber={card.cardNumber}
+              cardOwner={card.cardOwner}
+              expired={card.expired}
+            />
           ))
         )}
         <button className="add-card-button" onClick={onAddButton}>
