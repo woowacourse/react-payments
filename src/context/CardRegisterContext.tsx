@@ -19,6 +19,7 @@ export const initialCardRegisterInfo: CardRegisterInfo = {
     passwordFirstDigit: "",
     passwordSecondDigit: "",
   },
+  bankName: "현대카드",
 };
 
 type CardRegisterContextType = {
