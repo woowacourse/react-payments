@@ -1,18 +1,21 @@
 import styled from "styled-components";
 
 type ModalProps = {
+  modalOpen: boolean;
   children: React.ReactNode;
 };
 
-const Modal = ({ children }: ModalProps) => {
+const Modal = ({ modalOpen, children }: ModalProps) => {
   return (
-    <ModalBackDrop>
+    <ModalBackDrop modalOpen={modalOpen}>
       <ModalContent>{children}</ModalContent>
     </ModalBackDrop>
   );
 };
 
-const ModalBackDrop = styled.div`
+const ModalBackDrop = styled.div<{ modalOpen: boolean }>`
+  display: ${({ modalOpen }) => (modalOpen ? "block" : "none")};
+
   position: absolute;
 
   top: 0;
@@ -23,10 +26,17 @@ const ModalBackDrop = styled.div`
   width: 100%;
   height: 100%;
 
+  z-index: 1;
+
   background: rgba(0, 0, 0, 0.5);
 `;
 
 const ModalContent = styled.div`
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+
   position: absolute;
 
   padding: 20px;
