@@ -5,10 +5,18 @@ function useCardNumber() {
   const [displayNumber, setdisplayNumber] = useState("");
 
   const changeCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const cardNumber = e.target.value.replace(/[^\d•]/g, "").slice(0, 16);
+    const cardNumber = e.currentTarget.value
+      .replace(/[^\d•]/g, "")
+      .slice(0, 16);
 
     if (cardNumber.length < originNumber.length) removeNumber(cardNumber);
     if (cardNumber.length > originNumber.length) addNumber(cardNumber);
+    if (cardNumber.length === originNumber.length)
+      setdisplayNumber(maskNumber(cardNumber));
+
+    e.currentTarget.setCustomValidity(
+      cardNumber.length === 16 ? "" : "카드 번호는 16자 이어야 합니다."
+    );
   };
 
   const addNumber = (cardNumber: string) => {
@@ -31,7 +39,7 @@ function useCardNumber() {
     const frontNumber = originNumber.slice(0, 8);
 
     setOrginNumber(frontNumber);
-    setdisplayNumber(frontNumber);
+    setdisplayNumber(maskNumber(frontNumber));
   };
 
   const maskNumber = (cardNumber: string) => {
