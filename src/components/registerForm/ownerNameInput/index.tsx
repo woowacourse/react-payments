@@ -24,13 +24,7 @@ function OwnerNameInput() {
     event,
   ) => {
     const value = event.currentTarget.value;
-    if (!ONLY_ENG_AND_EMPTY_REGEXP.test(value)) {
-      setError({
-        isError: true,
-        message: "영어와 띄어쓰기만 입력할 수 있습니다.",
-      });
-      return;
-    }
+    if (!ONLY_ENG_AND_EMPTY_REGEXP.test(value)) return;
 
     try {
       if (value.length > 0) {
@@ -69,6 +63,7 @@ function OwnerNameInput() {
         value={cardInput.ownerName}
         onChange={ownerNameChange}
         customInputStyle={S.OwnerNameStyle}
+        placeholder="영어와 띄어쓰기만 입력할 수 있습니다."
       />
       {error.isError && <ErrorSpan>{error.message}</ErrorSpan>}
     </S.OwnerNameInputContainer>
