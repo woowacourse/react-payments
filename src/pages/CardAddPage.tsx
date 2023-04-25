@@ -1,7 +1,7 @@
 import Header from '../components/common/Header/Header';
 import CardItem from '../components/CardItem/CardItem';
 import CardAddForm from '../components/CardAddForm/CardAddForm';
-import { useCardInput } from '../hooks/useCardInput';
+import { useCardAddForm } from '../hooks/useCardAddForm';
 
 function CardAddPage() {
   const {
@@ -10,7 +10,8 @@ function CardAddPage() {
     onButtonInputChange,
     onSingleInputChange,
     onMultipleInputChange,
-  } = useCardInput();
+    handleSubmit,
+  } = useCardAddForm();
 
   return (
     <>
@@ -31,6 +32,7 @@ function CardAddPage() {
           onButtonInputChange={onButtonInputChange}
           onSingleInputChange={onSingleInputChange}
           onMultipleInputChange={onMultipleInputChange}
+          handleSubmit={handleSubmit}
         />
       </main>
     </>

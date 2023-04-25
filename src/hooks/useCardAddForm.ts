@@ -1,5 +1,8 @@
-import { ChangeEvent, MouseEvent, useCallback, useState } from 'react';
+import { ChangeEvent, FormEvent, MouseEvent, useCallback, useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { CardFormData } from '../types';
+import { PATH } from '../constants';
+import { CardListContext } from '../contexts/CardListContext';
 import { useCardInputValidation } from './useCardInputValidation';
 import formatChecker from '../utils/formatChecker';
 import formatter from '../utils/formatter';
@@ -18,9 +21,11 @@ const initialValue: CardFormData = {
   password: ['', ''],
 };
 
-const useCardInput = () => {
+const useCardAddForm = () => {
+  const { newCardId, cardListLength, addCard } = useContext(CardListContext);
   const [cardInformation, setCardInformation] = useState(initialValue);
   const [cardInputValidation, handleValidationChange] = useCardInputValidation();
+  const navigate = useNavigate();
 
   const onButtonInputChange = useCallback(
     (event: MouseEvent<HTMLButtonElement>) => {
@@ -70,13 +75,27 @@ const useCardInput = () => {
     [handleValidationChange]
   );
 
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const newCard = {
+      ...cardInformation,
+      id: newCardId,
+      cardName: `카드 ${cardListLength + 1}`,
+    };
+
+    addCard(newCard);
+    navigate(`${PATH.REGISTER}/${newCard.id}`, { state: newCard });
+  };
+
   return {
     cardInformation,
     cardInputValidation,
     onButtonInputChange,
     onSingleInputChange,
     onMultipleInputChange,
+    handleSubmit,
   };
 };
 
-export { useCardInput };
+export { useCardAddForm };
