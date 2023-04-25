@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import CardRegisterButton from '../components/CardRegisterButton';
 
 const meta = {
-  title: 'Example/CardRegisterButton',
+  title: 'components/CardRegisterButton',
   component: CardRegisterButton,
 } satisfies Meta<typeof CardRegisterButton>;
 

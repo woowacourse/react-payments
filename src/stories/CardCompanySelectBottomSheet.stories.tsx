@@ -7,7 +7,7 @@ import {
 } from '../components/common/Modal/ModalContext';
 
 const meta: Meta<typeof CardCompanySelectBottomSheet> = {
-  title: 'Example/CardCompanySelectBottomSheet',
+  title: 'components/CardCompanySelectBottomSheet',
   component: CardCompanySelectBottomSheet,
   decorators: [(Story) => <ModalProvider>{<Story />}</ModalProvider>],
 };

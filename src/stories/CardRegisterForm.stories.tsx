@@ -5,7 +5,7 @@ import CardRegisterForm from '../components/CardRegisterForm';
 import { ModalProvider } from '../components/common/Modal/ModalContext';
 
 const meta: Meta<typeof CardRegisterForm> = {
-  title: 'Example/CardRegisterForm',
+  title: 'components/CardRegisterForm',
   component: CardRegisterForm,
   decorators: [
     (Story) => (
