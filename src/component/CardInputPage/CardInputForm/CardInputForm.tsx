@@ -84,7 +84,7 @@ export default function CardInputForm(props: Props) {
   }
 
   function changePasswordStatus(key: "isComplete" | "userInput", value: any) {
-    setPasswordStatus(deepCopyObject(ownerStatus, key, value));
+    setPasswordStatus(deepCopyObject(passwordStatus, key, value));
   }
 
   function submitCardInfo(e: SubmitEvent) {
@@ -181,7 +181,7 @@ export default function CardInputForm(props: Props) {
       <InputBoxSecurityCode
         changeSecurityCodeStatus={changeSecurityCodeStatus}
       />
-      {/* <InputBoxPassword changeCardOwnerStatus={changePasswordStatus} /> */}
+      <InputBoxPassword changePasswordStatus={changePasswordStatus} />
       {isFormFilled && <Button type="submit">다음</Button>}
     </form>
   );

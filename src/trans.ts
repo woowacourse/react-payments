@@ -38,3 +38,9 @@ export const makeAppropriateSecurityCode = (userInput: string) => {
 
   return userInput.split("").filter(validateNumber).join("");
 };
+
+export const makeAppropriatePassword = (userInput: string) => {
+  if (userInput === "") return "";
+
+  return validateNumber(userInput) ? userInput : "";
+};

@@ -1,47 +1,38 @@
-import { useState, ChangeEvent, useEffect } from "react";
+import { useState, ChangeEvent } from "react";
 import Input from "../../common/Input";
 
 import "./cardPassword.css";
-import { validatePassword } from "../../../validation/password";
-import { INPUT_STATUS } from "../../../CONSTANT";
+import { makeAppropriatePassword } from "../../../trans";
 
 interface Props {
-  setError: React.Dispatch<React.SetStateAction<boolean>>;
-  setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsError: React.Dispatch<React.SetStateAction<boolean>>;
+  changePasswordStatus: (key: "isComplete" | "userInput", value: any) => void;
 }
 
 export default function CardPassword(props: Props) {
-  const [inputStatus1, setInputStatus1] = useState(INPUT_STATUS.NOT_COMPLETE);
-  const [inputStatus2, setInputStatus2] = useState(INPUT_STATUS.NOT_COMPLETE);
+  const { setIsError, changePasswordStatus } = props;
 
-  const { setError, setIsComplete } = props;
+  const [passwordStatus, setPasswordStatus] = useState<string[]>([]);
 
-  useEffect(() => {
-    setError(
-      inputStatus1 === INPUT_STATUS.ERROR || inputStatus2 === INPUT_STATUS.ERROR
-    );
+  const onChangePassword = (partIndex: number) => {
+    return (e: ChangeEvent<HTMLInputElement>) => {
+      const userPassword = e.target.value.slice(0, 1);
+      const appropriatePassword = makeAppropriatePassword(userPassword);
 
-    setIsComplete(
-      inputStatus1 === INPUT_STATUS.COMPLETE &&
-        inputStatus2 === INPUT_STATUS.COMPLETE
-    );
-  }, [inputStatus1, inputStatus2]);
-
-  const onChangePassword =
-    (setInputStatus: React.Dispatch<React.SetStateAction<number>>) =>
-    (e: ChangeEvent<HTMLInputElement>) => {
-      const value = e.target.value;
-
-      if (value.length > 1) {
-        e.target.value = value.slice(0, 1);
+      if (appropriatePassword !== userPassword) {
+        setIsError(true);
+        changePasswordStatus("isComplete", false);
+      } else {
+        setIsError(false);
+        changePasswordStatus("isComplete", true);
+        changePasswordStatus("userInput", passwordStatus);
       }
 
-      if (validatePassword(e.target.value))
-        e.target.value.length === 1
-          ? setInputStatus(INPUT_STATUS.COMPLETE)
-          : setInputStatus(INPUT_STATUS.NOT_COMPLETE);
-      else setInputStatus(INPUT_STATUS.ERROR);
+      const result = [...passwordStatus];
+      result[partIndex] = appropriatePassword;
+      setPasswordStatus(result);
     };
+  };
 
   return (
     <div className="input-box-card-password">
@@ -49,15 +40,17 @@ export default function CardPassword(props: Props) {
         name="card-password-1"
         className="input-password"
         type="password"
-        onChange={onChangePassword(setInputStatus1)}
+        onChange={onChangePassword(0)}
         inputMode="numeric"
+        value={passwordStatus[0]}
       ></Input>
       <Input
         name="card-password-2"
         className="input-password"
         type="password"
-        onChange={onChangePassword(setInputStatus2)}
+        onChange={onChangePassword(1)}
         inputMode="numeric"
+        value={passwordStatus[1]}
       ></Input>
       <input
         className="input-password"
