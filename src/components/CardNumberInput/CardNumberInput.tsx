@@ -33,6 +33,7 @@ const CardNumberInput = ({ cardNumber, onChange }: CardNumberInputProps) => {
         <Input
           value={firstGroup}
           name="firstGroup"
+          placeholder="1234"
           inputMode="numeric"
           textAlign="center"
           width="40px"
@@ -47,6 +48,7 @@ const CardNumberInput = ({ cardNumber, onChange }: CardNumberInputProps) => {
         <Input
           value={secondGroup}
           name="secondGroup"
+          placeholder="1234"
           inputMode="numeric"
           textAlign="center"
           width="40px"
@@ -60,6 +62,7 @@ const CardNumberInput = ({ cardNumber, onChange }: CardNumberInputProps) => {
         <Input
           value={thirdGroup}
           name="thirdGroup"
+          placeholder="1234"
           inputMode="numeric"
           textAlign="center"
           width="40px"
@@ -73,6 +76,7 @@ const CardNumberInput = ({ cardNumber, onChange }: CardNumberInputProps) => {
         <Input
           value={fourthGroup}
           name="fourthGroup"
+          placeholder="1234"
           inputMode="numeric"
           textAlign="center"
           width="40px"
