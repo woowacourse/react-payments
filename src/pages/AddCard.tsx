@@ -6,7 +6,7 @@ import Header from "../components/common/Header";
 import Page from "../components/common/Page";
 import { RANDOM_COLOR } from "../constants";
 import { CardType } from "../types";
-import { getLocalStorage, setLocalStorage } from "../utils";
+import { getLocalStorage, setLocalStorage } from "../utils/localStorage";
 
 const AddCard = () => {
   const [card, setCard] = useState<CardType>({

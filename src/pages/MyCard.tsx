@@ -3,7 +3,7 @@ import Page from "../components/common/Page";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Card from "../components/Card";
-import { getLocalStorage } from "../utils";
+import { getLocalStorage } from "../utils/localStorage";
 import { CardType } from "../types";
 import uuid from "react-uuid";
 
