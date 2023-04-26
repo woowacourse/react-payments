@@ -35,6 +35,7 @@ export const GlobalStyle = createGlobalStyle`
     display: flex;
     -webkit-box-pack: center;
     justify-content: center;
+    margin-bottom: 30px;
   }
 
   .label-text {

@@ -6,7 +6,7 @@ const Button = styled.button`
 
 export const NextButton = styled(Button)`
   display: flex;
-  margin: 38px 0 30px auto;
+  margin: 38px 0 0 auto;
   padding: 10px 16px;
   color: var(--darken-color);
   border: 1px solid var(--darken-color);
