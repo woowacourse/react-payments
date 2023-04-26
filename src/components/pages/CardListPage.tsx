@@ -7,10 +7,17 @@ import type { CardItemInfo } from '../../types/Card';
 
 interface CardListPageProps {
   cardList: CardItemInfo[];
+  cardColor: string;
+  bankName: string;
   onOpen: () => void;
 }
 
-const CardListPage = ({ cardList, onOpen }: CardListPageProps) => {
+const CardListPage = ({
+  cardList,
+  cardColor,
+  bankName,
+  onOpen,
+}: CardListPageProps) => {
   return (
     <>
       <Header title='보유카드' />
@@ -18,7 +25,11 @@ const CardListPage = ({ cardList, onOpen }: CardListPageProps) => {
         {!cardList.length && (
           <Title title='새로운 카드를 등록해주세요.' fontSize={18} />
         )}
-        <CardList cardList={cardList} />
+        <CardList
+          cardList={cardList}
+          cardColor={cardColor}
+          bankName={bankName}
+        />
         <AddCardButton onOpen={onOpen} />
       </ContentContainer>
     </>

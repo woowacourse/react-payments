@@ -5,9 +5,10 @@ import { CONVERT_BANK_NAME } from '../utils/Constants';
 
 interface BankListProps {
   onClose: () => void;
+  onBankInfoChanged: (cardColor: string, bankName: string) => void;
 }
 
-const BankList = ({ onClose }: BankListProps) => {
+const BankList = ({ onClose, onBankInfoChanged }: BankListProps) => {
   const bankNames = Object.keys(CONVERT_BANK_NAME);
 
   return (
@@ -15,7 +16,12 @@ const BankList = ({ onClose }: BankListProps) => {
       <BankContainer>
         {bankNames.map((bankName) => {
           return (
-            <BankItem key={bankName} bankName={bankName} onClose={onClose} />
+            <BankItem
+              key={bankName}
+              bankName={bankName}
+              onClose={onClose}
+              onBankInfoChanged={onBankInfoChanged}
+            />
           );
         })}
       </BankContainer>

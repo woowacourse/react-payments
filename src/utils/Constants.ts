@@ -29,3 +29,14 @@ export const CONVERT_BANK_NAME: Readonly<{ [key: string]: string }> = {
   하나카드: 'Hana',
   국민카드: 'KB',
 };
+
+export const CARD_COLOR: Readonly<{ [key: string]: string }> = {
+  BC카드: '#EA2D41',
+  신한카드: '#0025FE',
+  카카오뱅크: '#FFE409',
+  현대카드: '#000000',
+  우리카드: '#0D65BC',
+  롯데카드: '#E6001D',
+  하나카드: '#11847D',
+  국민카드: '#4B423A',
+};

@@ -4,13 +4,20 @@ import type { CardItemInfo } from '../../types/Card';
 
 interface CardListProps {
   cardList: CardItemInfo[];
+  cardColor: string;
+  bankName: string;
 }
 
-const CardList = ({ cardList }: CardListProps) => {
+const CardList = ({ cardList, cardColor, bankName }: CardListProps) => {
   return (
     <CardListContainer>
       {cardList.map((card, id) => (
-        <CardItem card={card} key={id} />
+        <CardItem
+          card={card}
+          key={id}
+          cardColor={cardColor}
+          bankName={bankName}
+        />
       ))}
     </CardListContainer>
   );

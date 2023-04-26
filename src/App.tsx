@@ -10,6 +10,8 @@ import type { CardItemInfo } from './types/Card';
 
 function App() {
   const [cardList, setCardList] = useState<CardItemInfo[]>([]);
+  const [cardColor, setCardColor] = useState('');
+  const [bankName, setBankName] = useState('카드사를 선택해주세요');
 
   const addCardItem = (cardItem: CardItemInfo) => {
     setCardList((prevCardList) => [...prevCardList, cardItem]);
@@ -17,6 +19,11 @@ function App() {
 
   const { isBottomSheetOpen, handleBottomSheetOpen, handleBottomSheetClose } =
     useBottomSheet();
+
+  const onBankInfoChanged = (cardColor: string, bankName: string) => {
+    setCardColor(cardColor);
+    setBankName(bankName);
+  };
 
   return (
     <AppContainer className='App'>
@@ -28,17 +35,30 @@ function App() {
               <CardListPage
                 cardList={cardList}
                 onOpen={handleBottomSheetOpen}
+                cardColor={cardColor}
+                bankName={bankName}
               />
             }
           />
           <Route
             path='/register'
-            element={<CardRegistrationPage addCardItem={addCardItem} />}
+            element={
+              <CardRegistrationPage
+                addCardItem={addCardItem}
+                cardColor={cardColor}
+                bankName={bankName}
+              />
+            }
           />
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
-      {isBottomSheetOpen && <BankList onClose={handleBottomSheetClose} />}
+      {isBottomSheetOpen && (
+        <BankList
+          onClose={handleBottomSheetClose}
+          onBankInfoChanged={onBankInfoChanged}
+        />
+      )}
     </AppContainer>
   );
 }

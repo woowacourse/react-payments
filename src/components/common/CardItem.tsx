@@ -3,11 +3,14 @@ import type { CardItemInfo } from '../../types/Card';
 
 interface CardItemProps {
   card: CardItemInfo;
+  cardColor: string;
+  bankName: string;
 }
 
-const CardItem = ({ card }: CardItemProps) => {
+const CardItem = ({ card, cardColor, bankName }: CardItemProps) => {
   return (
-    <CardItemContainer>
+    <CardItemContainer cardColor={cardColor}>
+      <span>{bankName}</span>
       <ICChip />
       {card && (
         <>
@@ -37,7 +40,7 @@ const CardItem = ({ card }: CardItemProps) => {
   );
 };
 
-const CardItemContainer = styled.div`
+const CardItemContainer = styled.div<{ cardColor?: string }>`
   width: 213px;
   height: 133px;
 
@@ -45,7 +48,7 @@ const CardItemContainer = styled.div`
 
   box-sizing: border-box;
 
-  background: var(--black-color);
+  background: ${({ cardColor }) => cardColor || 'var(--black-color)'};
   box-shadow: 3px 3px 5px var(--shadow-color);
   border-radius: 5px;
 
@@ -70,8 +73,6 @@ const CardNumberContainer = styled.div`
   justify-content: space-between;
 
   height: 12px;
-
-  margin-top: 12px;
 
   font-size: 14px;
   letter-spacing: 3px;

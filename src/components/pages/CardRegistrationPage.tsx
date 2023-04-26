@@ -9,9 +9,15 @@ import type { CardItemInfo } from '../../types/Card';
 
 interface CardRegistrationPageProps {
   addCardItem: (cardItem: CardItemInfo) => void;
+  cardColor: string;
+  bankName: string;
 }
 
-const CardRegistrationPage = ({ addCardItem }: CardRegistrationPageProps) => {
+const CardRegistrationPage = ({
+  addCardItem,
+  cardColor,
+  bankName,
+}: CardRegistrationPageProps) => {
   const [cardItem, setCardItem] = useState<CardItemInfo>({
     id: 0,
     cardNumber: ['', '', '', ''],
@@ -41,7 +47,7 @@ const CardRegistrationPage = ({ addCardItem }: CardRegistrationPageProps) => {
     <>
       <Header title='카드추가' leading={<BackButton />} />
       <CardItemContainer>
-        <CardItem card={cardItem} />
+        <CardItem card={cardItem} cardColor={cardColor} bankName={bankName} />
       </CardItemContainer>
       <CardForm
         onSubmitForm={handleSubmitForm}
