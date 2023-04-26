@@ -5,12 +5,13 @@ interface CardItemProps {
   card: CardItemInfo;
   cardColor: string;
   bankName: string;
+  onOpen: () => void;
 }
 
-const CardItem = ({ card, cardColor, bankName }: CardItemProps) => {
+const CardItem = ({ card, cardColor, bankName, onOpen }: CardItemProps) => {
   return (
     <CardItemContainer cardColor={cardColor}>
-      <span>{bankName}</span>
+      <BankChangeBtn onClick={onOpen}>{bankName}</BankChangeBtn>
       <ICChip />
       {card && (
         <>
@@ -56,6 +57,16 @@ const CardItemContainer = styled.div<{ cardColor?: string }>`
   font-weight: 700;
 
   color: var(--white-color);
+`;
+
+const BankChangeBtn = styled.button`
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  color: var(--white-color);
+  font-weight: 700;
+
+  cursor: pointer;
 `;
 
 const ICChip = styled.div`

@@ -29,6 +29,7 @@ const CardListPage = ({
           cardList={cardList}
           cardColor={cardColor}
           bankName={bankName}
+          onOpen={onOpen}
         />
         <AddCardButton onOpen={onOpen} />
       </ContentContainer>

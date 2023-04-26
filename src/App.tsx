@@ -45,6 +45,7 @@ function App() {
             element={
               <CardRegistrationPage
                 addCardItem={addCardItem}
+                onOpen={handleBottomSheetOpen}
                 cardColor={cardColor}
                 bankName={bankName}
               />

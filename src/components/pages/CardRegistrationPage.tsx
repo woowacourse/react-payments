@@ -8,15 +8,17 @@ import { LeftArrowIcon } from '../../assets/icons';
 import type { CardItemInfo } from '../../types/Card';
 
 interface CardRegistrationPageProps {
-  addCardItem: (cardItem: CardItemInfo) => void;
   cardColor: string;
   bankName: string;
+  addCardItem: (cardItem: CardItemInfo) => void;
+  onOpen: () => void;
 }
 
 const CardRegistrationPage = ({
-  addCardItem,
   cardColor,
   bankName,
+  addCardItem,
+  onOpen,
 }: CardRegistrationPageProps) => {
   const [cardItem, setCardItem] = useState<CardItemInfo>({
     id: 0,
@@ -47,7 +49,12 @@ const CardRegistrationPage = ({
     <>
       <Header title='카드추가' leading={<BackButton />} />
       <CardItemContainer>
-        <CardItem card={cardItem} cardColor={cardColor} bankName={bankName} />
+        <CardItem
+          card={cardItem}
+          cardColor={cardColor}
+          bankName={bankName}
+          onOpen={onOpen}
+        />
       </CardItemContainer>
       <CardForm
         onSubmitForm={handleSubmitForm}

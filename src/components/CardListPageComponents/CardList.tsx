@@ -6,9 +6,10 @@ interface CardListProps {
   cardList: CardItemInfo[];
   cardColor: string;
   bankName: string;
+  onOpen: () => void;
 }
 
-const CardList = ({ cardList, cardColor, bankName }: CardListProps) => {
+const CardList = ({ cardList, cardColor, bankName, onOpen }: CardListProps) => {
   return (
     <CardListContainer>
       {cardList.map((card, id) => (
@@ -17,6 +18,7 @@ const CardList = ({ cardList, cardColor, bankName }: CardListProps) => {
           key={id}
           cardColor={cardColor}
           bankName={bankName}
+          onOpen={onOpen}
         />
       ))}
     </CardListContainer>
