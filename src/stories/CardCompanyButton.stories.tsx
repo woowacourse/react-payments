@@ -13,9 +13,9 @@ const meta: Meta<typeof CardCompanyButton>= {
       options: CARD_COMPANIES_ENGLISH,
       control: { type: 'inline-radio' },
     },
-    onClick: {
+    clickHandler: {
       action: 'Clicked!!',
-    },
+    }
   },
 };
 
