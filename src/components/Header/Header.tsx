@@ -1,11 +1,5 @@
-import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-
-const Title = styled.p`
-  margin-top: 20px;
-  font-size: 20px;
-  cursor: pointer;
-`;
+import * as Styled from './Header.styles';
 
 interface HeaderProps {
   page: string;
@@ -16,9 +10,9 @@ const Header = ({ page, titleContent }: HeaderProps) => {
   const navigate = useNavigate();
 
   return page === 'home' ? (
-    <Title>{titleContent}</Title>
+    <Styled.Title>{titleContent}</Styled.Title>
   ) : (
-    <Title onClick={() => navigate(-1)}>{titleContent}</Title>
+    <Styled.Title onClick={() => navigate(-1)}>{titleContent}</Styled.Title>
   );
 };
 

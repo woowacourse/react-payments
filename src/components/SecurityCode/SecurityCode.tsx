@@ -1,44 +1,7 @@
 import CardInput from '../@common/CardInput';
 import CardLabel from '../@common/CardLabel';
-import styled from 'styled-components';
 import { useRef, useState } from 'react';
-
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #ecebf1;
-  border-radius: 7px;
-  margin-bottom: 20px;
-`;
-
-const QuestionButton = styled.button`
-  width: 27px;
-  height: 27px;
-  margin-left: 12px;
-  border: 1px solid #969696;
-  color: #969696;
-  border-radius: 50%;
-  text-align: center;
-  cursor: pointer;
-`;
-
-const InputWrapper = styled.div`
-  display: flex;
-  align-items: baseline;
-`;
-
-const ToolTip = styled.p`
-  width: 212px;
-  height: 30px;
-  margin-left: 12px;
-  color: #969696;
-  background-color: #ecebf1;
-  border-radius: 4px;
-  padding: 0 4px;
-  font-size: 12px;
-  cursor: pointer;
-`;
+import * as Styled from './SecurityCode.styles';
 
 interface SecurityCodeProps {
   securityCode: string;
@@ -60,8 +23,8 @@ const SecurityCode = ({ securityCode, setSecurityCode }: SecurityCodeProps) => {
   return (
     <>
       <CardLabel labelText="보안 코드(CVC/CVV)" />
-      <InputWrapper>
-        <Wrapper>
+      <Styled.InputWrapper>
+        <Styled.Wrapper>
           <CardInput
             type="password"
             maxLength={3}
@@ -71,17 +34,17 @@ const SecurityCode = ({ securityCode, setSecurityCode }: SecurityCodeProps) => {
             placeholder="•••"
             required={true}
           />
-        </Wrapper>
+        </Styled.Wrapper>
         {isShowToolTip ? (
-          <ToolTip
+          <Styled.ToolTip
             onClick={() => {
               setIsShowToolTip(false);
             }}
           >
             카드 뒷면의 서명란에 인쇄된 숫자 끝 3자리를 적어주세요.
-          </ToolTip>
+          </Styled.ToolTip>
         ) : (
-          <QuestionButton
+          <Styled.QuestionButton
             type="button"
             tabIndex={-1}
             onClick={() => {
@@ -89,9 +52,9 @@ const SecurityCode = ({ securityCode, setSecurityCode }: SecurityCodeProps) => {
             }}
           >
             ?
-          </QuestionButton>
+          </Styled.QuestionButton>
         )}
-      </InputWrapper>
+      </Styled.InputWrapper>
     </>
   );
 };

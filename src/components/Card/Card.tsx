@@ -1,67 +1,27 @@
-import styled from 'styled-components';
+import * as Styled from './Card.styles';
 import { CardType } from '../../types/Card';
-
-const Wrapper = styled.div`
-  display: flex;
-  align-items: end;
-  width: 212px;
-  height: 132px;
-  padding: 12px;
-  background: #333333;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
-  border-radius: 5px;
-  font-size: 14px;
-  margin-bottom: 32px;
-`;
-
-const ChipWrapper = styled.div`
-  width: 200px;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 12px;
-`;
-
-const Chip = styled.div`
-  width: 40px;
-  height: 26px;
-  background: #cbba64;
-  border-radius: 4px;
-`;
-
-const CardText = styled.p<{ cardName?: boolean }>`
-  width: ${(props) => (props.cardName ? '120px' : '')};
-  height: ${(props) => (props.cardName ? '32px' : '')};
-  color: #ffffff;
-  margin: 8px 8px 0 0;
-  word-break: break-all;
-`;
-
-const TextWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
 
 type CardProps = Omit<CardType, 'id'>;
 
 const Card = ({ cardNumbers, expiredDates, cardOwnerName }: CardProps) => {
   return (
-    <Wrapper>
-      <ChipWrapper>
-        <Chip />
-        <TextWrapper>
-          <CardText>{cardNumbers[0]}</CardText>
-          <CardText>{cardNumbers[1]}</CardText>
-          <CardText>{'•'.repeat(cardNumbers[2].length)}</CardText>
-          <CardText>{'•'.repeat(cardNumbers[3].length)}</CardText>
-        </TextWrapper>
-        <TextWrapper>
-          <CardText cardName>{cardOwnerName || 'NAME'}</CardText>
-          <CardText>
+    <Styled.Wrapper>
+      <Styled.ChipWrapper>
+        <Styled.Chip />
+        <Styled.TextWrapper>
+          <Styled.CardText>{cardNumbers[0]}</Styled.CardText>
+          <Styled.CardText>{cardNumbers[1]}</Styled.CardText>
+          <Styled.CardText>{'•'.repeat(cardNumbers[2].length)}</Styled.CardText>
+          <Styled.CardText>{'•'.repeat(cardNumbers[3].length)}</Styled.CardText>
+        </Styled.TextWrapper>
+        <Styled.TextWrapper>
+          <Styled.CardText cardName>{cardOwnerName || 'NAME'}</Styled.CardText>
+          <Styled.CardText>
             {expiredDates[0] || 'MM'} / {expiredDates[1] || 'YY'}
-          </CardText>
-        </TextWrapper>
-      </ChipWrapper>
-    </Wrapper>
+          </Styled.CardText>
+        </Styled.TextWrapper>
+      </Styled.ChipWrapper>
+    </Styled.Wrapper>
   );
 };
 
