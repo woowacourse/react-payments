@@ -42,7 +42,7 @@ const REGEX = {
   NON_WHITESPACE_CHAR: /[^ ]/g,
   ONLY_NUMBER: /^\d*$/,
   NON_NUMBER: /\D/g,
-  ENGLISH_AND_WHITESPACE: /^[A-Za-z]+[A-Za-z\s]*$/,
+  ENGLISH_AND_WHITESPACE: /^$|^[A-Za-z]+[A-Za-z\s]*$/,
   DATE_FORMAT: /^(?:\d{0,2}\/?\d{0,2})?$/,
   TWO_DIGIT: /(\d{2})/,
   TWO_CHAR_SEQUENCE: /.{1,2}/g,
