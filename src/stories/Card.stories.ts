@@ -11,12 +11,11 @@ type Story = StoryObj<typeof Card>;
 
 export const Primary: Story = {
   args: {
-    cardNumber: {
-      first: '1234',
-      second: '1234',
-      third: '1234',
-      fourth: '1234',
-    },
+    cardType: '현대',
+    cardFirstNumber: '1234',
+    cardSecondNumber: '2345',
+    cardThirdNumber: '4456',
+    cardFourthNumber: '2357',
     cardOwner: 'LEE',
     expireYear: '01',
     expireMonth: '01',

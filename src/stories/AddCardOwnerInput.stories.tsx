@@ -1,14 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import AddCardOwnerInput from '../pages/AddCard/components/AddCardOwnerInput';
-import { stringToUpperCase } from '../utils/util';
-import { cardOwnerCondition } from '../pages/cardInputCondition';
+import OwnerInput from '../pages/AddCard/components/OwnerInput';
 import useInput from '../hooks/useInput';
 import { APP_WIDTH } from './constants';
+import { isValidOwnerName } from '../pages/AddCard/domain/dispatcher';
 
 export default {
   title: 'AddCardOwnerInput',
-  component: AddCardOwnerInput,
+  component: OwnerInput,
   decorators: [
     (Story) => (
       <div
@@ -20,14 +19,14 @@ export default {
       </div>
     ),
   ],
-} as Meta<typeof AddCardOwnerInput>;
+} as Meta<typeof OwnerInput>;
 
-type Story = StoryObj<typeof AddCardOwnerInput>;
+type Story = StoryObj<typeof OwnerInput>;
 
 const AddHooks = () => {
-  const cardOwner = useInput('', cardOwnerCondition, stringToUpperCase);
+  const cardOwner = useInput(isValidOwnerName);
 
-  return <AddCardOwnerInput cardOwner={cardOwner} />;
+  return <OwnerInput cardOwner={cardOwner} />;
 };
 
 export const Primary: Story = {

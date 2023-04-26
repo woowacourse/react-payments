@@ -1,14 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import AddCardPasswordInput from '../pages/AddCard/components/AddCardPasswordInput';
-import { handleNumberInput } from '../utils/util';
-import { cardPasswordCondition } from '../pages/cardInputCondition';
+import PasswordInput from '../pages/AddCard/components/PasswordInput';
 import useInput from '../hooks/useInput';
 import { APP_WIDTH } from './constants';
+import { isValidPassword } from '../pages/AddCard/domain/dispatcher';
 
 export default {
   title: 'AddCardPasswordInput',
-  component: AddCardPasswordInput,
+  component: PasswordInput,
   decorators: [
     (Story) => (
       <div
@@ -20,15 +19,15 @@ export default {
       </div>
     ),
   ],
-} as Meta<typeof AddCardPasswordInput>;
+} as Meta<typeof PasswordInput>;
 
-type Story = StoryObj<typeof AddCardPasswordInput>;
+type Story = StoryObj<typeof PasswordInput>;
 
 const AddHooks = () => {
-  const cardPassword1 = useInput('', cardPasswordCondition, handleNumberInput);
-  const cardPassword2 = useInput('', cardPasswordCondition, handleNumberInput);
+  const cardPassword1 = useInput(isValidPassword);
+  const cardPassword2 = useInput(isValidPassword);
 
-  return <AddCardPasswordInput cardPassword1={cardPassword1} cardPassword2={cardPassword2} />;
+  return <PasswordInput cardPassword1={cardPassword1} cardPassword2={cardPassword2} />;
 };
 
 export const Primary: Story = {

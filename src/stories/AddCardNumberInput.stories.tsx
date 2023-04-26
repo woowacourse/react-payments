@@ -1,14 +1,13 @@
 import type { Meta } from '@storybook/react';
 
-import type { CardNumber } from '../type';
-import AddCardNumberInput from '../pages/AddCard/components/AddCardNumberInput';
-import useComplicateInput from '../hooks/useComplicateInput';
-import { isNumberInput } from '../utils/util';
+import CardNumberInput from '../pages/AddCard/components/CardNumberInput';
 import { APP_WIDTH } from './constants';
+import { isValidCardNumber } from '../pages/AddCard/domain/dispatcher';
+import useInput from '../hooks/useInput';
 
 export default {
-  title: 'AddCardNumberInput',
-  component: AddCardNumberInput,
+  title: 'CardNumberInput',
+  component: CardNumberInput,
   decorators: [
     (Story) => (
       <div
@@ -20,26 +19,22 @@ export default {
       </div>
     ),
   ],
-} as Meta<typeof AddCardNumberInput>;
+} as Meta<typeof CardNumberInput>;
 
 const AddHooks = () => {
-  const [cardNumber, onChangeCardNumber] = useComplicateInput<CardNumber>({
-    first: '',
-    second: '',
-    third: '',
-    fourth: '',
-  });
+  const cardFirstNumber = useInput(isValidCardNumber);
+  const cardSecondNumber = useInput(isValidCardNumber);
+  const cardThirdNumber = useInput(isValidCardNumber);
+  const cardFourthNumber = useInput(isValidCardNumber);
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const lastWord = e.target.value[e.target.value.length - 1];
-
-    if (e.target.value.length > 4) return;
-    if (e.target.value.length > 0 && !isNumberInput(lastWord)) return;
-
-    onChangeCardNumber(e);
-  };
-
-  return <AddCardNumberInput cardNumber={cardNumber} onChange={onChange} />;
+  return (
+    <CardNumberInput
+      cardFirstNumber={cardFirstNumber}
+      cardSecondNumber={cardSecondNumber}
+      cardThirdNumber={cardThirdNumber}
+      cardFourthNumber={cardFourthNumber}
+    />
+  );
 };
 
 export const Primary = {
