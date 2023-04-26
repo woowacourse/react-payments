@@ -7,6 +7,7 @@ import { Input } from "./common/input/Input";
 import { InputBox } from "./common/input/InputBox";
 import { InputGroup } from "./common/input/inputGroup";
 import { InputLabel } from "./common/input/inputLabel";
+import { ReactComponent as WarningIc } from "../assets/helpIc.svg";
 
 export function SecurityCode() {
   const { code, handleChange } = useInputCode();
@@ -27,7 +28,7 @@ export function SecurityCode() {
             <SecurityCodeInput />
           </Input>
         </InputGroup>
-        <WarningImage src="/assets/helpIc.svg" />
+        <WarningIcon />
       </Wrapper>
     </InputBox>
   );
@@ -38,7 +39,7 @@ const Wrapper = styled.section`
   width: 15rem;
 `;
 
-const WarningImage = styled.img`
+const WarningIcon = styled(WarningIc)`
   position: absolute;
   left: 16rem;
 
