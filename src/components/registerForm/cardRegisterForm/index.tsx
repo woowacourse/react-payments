@@ -1,11 +1,10 @@
-import React, { useContext, useRef, useMemo } from "react";
+import React, { useContext, useMemo } from "react";
 import CardNumber from "src/components/registerForm/cardNumber";
 import ExpireDate from "src/components/registerForm/expireDate";
 import OwnerNameInput from "src/components/registerForm/ownerNameInput";
 import SecurityCode from "src/components/registerForm/securityCode";
 import CardPassword from "src/components/registerForm/cardPassword";
 import { CardInfoContext } from "src/context/CardInfoContext";
-import useCardList from "src/hooks/useCardList";
 import { useNavigate } from "react-router-dom";
 import { Styled as S } from "./CardRegisterForm.styles";
 import Card from "src/components/@common/card";
@@ -18,7 +17,6 @@ import { PATHS } from "src/utils/constant";
 function CardRegisterForm() {
   const navigation = useNavigate();
   const [cardInfo] = useContext(CardInfoContext);
-  const { saveCard } = useCardList({ key: "card-list" });
 
   const { cardNumbers, expireDate, cardName, ownerName } = cardInfo;
 
@@ -26,8 +24,7 @@ function CardRegisterForm() {
 
   const cardInputSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
-    saveCard(cardInfo);
-    navigation(PATHS.cardList);
+    navigation(PATHS.cardNickName, { state: cardInfo });
   };
 
   const isValidateValues = isValidateFormValues(cardInfo);
