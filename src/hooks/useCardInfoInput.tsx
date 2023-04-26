@@ -54,7 +54,6 @@ function useCardInfoInput<T>({
   });
 
   const onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    if (!contextType) return;
     const { value } = event.currentTarget;
     const name = event.currentTarget.dataset["order"];
     const idx = event.currentTarget.dataset["index"];

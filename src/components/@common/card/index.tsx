@@ -1,11 +1,8 @@
-import { CardNumberObj } from "src/interfaces";
+import { CardNameObj, CardNumberObj } from "src/interfaces";
 import { Styled as S } from "./Card.styles";
 
 interface Props {
-  cardName?: {
-    id: string;
-    name: string;
-  };
+  cardName?: CardNameObj;
   cardNumber: CardNumberObj;
   ownerName: string;
   expireDate: string;
