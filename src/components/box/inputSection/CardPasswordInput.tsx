@@ -25,6 +25,7 @@ const CardPasswordInput = ({ cardPassword, setCardPasswordIndex, insert, focus }
             textSecurity
             insert={insert(8 + index)}
             focus={focus(8 + index)}
+            required
           />
         </InputBox>
       ))}
