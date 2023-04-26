@@ -8,11 +8,11 @@ import CardNumberInput from '../../components/pages/CardRegister/CardNumberInput
 import CardPasswordInput from '../../components/pages/CardRegister/CardPasswordInput/CardPasswordInput';
 import { useCardRegisterContext } from '../../context/CardRegisterContext';
 import * as Styled from './CardRegister.styles';
-import { getCardList, saveCardList } from '../../utils/localStorage';
+import { getItemFromLocalStorage, setItemInLocalStorage } from '../../utils/localStorage';
 import { useBottomSheet } from '../../context/BottomSheetContext';
 import BankListBottomSheetContent from '../../components/pages/CardRegister/BankListBottomSheetContent/BankListBottomSheetContent';
 import BottomSheet from '../../components/@common/BottomSheet/BottomSheet';
-import { BankNames } from '../../types/card.type';
+import { BankNames, CardRegisterInfo } from '../../types/card.type';
 
 export default function CardRegister() {
   const navigate = useNavigate();
@@ -25,8 +25,9 @@ export default function CardRegister() {
     e.preventDefault();
 
     if (cardRegisterInfo !== null) {
-      const newCardList = [cardRegisterInfo, ...getCardList()];
-      saveCardList(newCardList);
+      const cardList = getItemFromLocalStorage<CardRegisterInfo[]>('CardList');
+      const newCardList = cardList !== null ? [cardRegisterInfo, ...cardList] : [cardRegisterInfo];
+      setItemInLocalStorage('CardList', newCardList);
       initCardRegisterInfo();
     }
 

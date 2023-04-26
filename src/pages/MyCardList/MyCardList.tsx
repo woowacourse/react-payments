@@ -5,17 +5,17 @@ import { useCardRegisterContext } from '../../context/CardRegisterContext';
 import * as Styled from './MyCardList.styles';
 import AddCardButton from '../../components/pages/CardList/AddCardButton/AddCardButton';
 import CardContent from '../../components/pages/CardList/CardContent/CardContent';
-import { getCardList } from '../../utils/localStorage';
+import { getItemFromLocalStorage } from '../../utils/localStorage';
 
 export default function MyCardList() {
   const navigate = useNavigate();
   const location = useLocation();
   const { initCardRegisterInfo } = useCardRegisterContext();
-  const [registeredCards, setRegisteredCards] = useState<CardRegisterInfo[]>(getCardList);
+  const [registeredCards, setRegisteredCards] = useState(getItemFromLocalStorage<CardRegisterInfo[]>('CardList'));
 
   useEffect(() => {
     if (location.state?.isReadyForRegister) {
-      setRegisteredCards(getCardList);
+      setRegisteredCards(getItemFromLocalStorage<CardRegisterInfo[]>('CardList'));
       initCardRegisterInfo();
     }
 
@@ -26,9 +26,7 @@ export default function MyCardList() {
 
   return (
     <Styled.Root dir='column' align='center'>
-      {registeredCards.map((card, index) => (
-        <CardContent key={index} {...card} />
-      ))}
+      {registeredCards && registeredCards.map((card, index) => <CardContent key={index} {...card} />)}
       <AddCardButton onClick={() => navigate('./registerCard')} />
     </Styled.Root>
   );
