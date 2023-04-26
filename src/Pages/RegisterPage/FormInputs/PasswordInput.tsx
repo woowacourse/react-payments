@@ -2,6 +2,8 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { HIDDEN_ELEMENT_STYLE, LENGTH, REGEX } from 'constants/constants';
 import { useInputHandler } from 'hooks/useInputHandler';
+import { StyledInput } from 'components/Input';
+import InputBox from 'components/InputBox';
 
 const PasswordInput = () => {
   const [password, setPassword] = useState({
@@ -20,12 +22,11 @@ const PasswordInput = () => {
       <label className="label-text" htmlFor="password-label">
         카드 비밀번호
       </label>
-      <S.InputBox>
-        <S.Input
+      <InputBox>
+        <StyledPasswordInput
           type="password"
           name="password1"
           id="password-label"
-          aria-labelledby="password-label"
           maxLength={LENGTH.EACH_PASSWORD}
           inputMode="numeric"
           value={password.password1}
@@ -34,10 +35,9 @@ const PasswordInput = () => {
           placeholder="0"
           required
         />
-        <S.Input
+        <StyledPasswordInput
           type="password"
           name="password2"
-          aria-labelledby="password-label"
           maxLength={LENGTH.EACH_PASSWORD}
           inputMode="numeric"
           value={password.password2}
@@ -46,50 +46,37 @@ const PasswordInput = () => {
           placeholder="0"
           required
         />
-        <S.HiddenPassword>ㆍ</S.HiddenPassword>
-        <S.HiddenPassword>ㆍ</S.HiddenPassword>
-      </S.InputBox>
-      <S.Caption password={Object.values(password)}>
+        <HiddenPassword type="text" inputMode="numeric" value={'ㆍ'} disabled />
+        <HiddenPassword type="text" inputMode="numeric" value={'ㆍ'} disabled />
+      </InputBox>
+      <Caption password={Object.values(password)}>
         카드 비밀번호 앞 2자리를 입력해 주세요.
-      </S.Caption>
+      </Caption>
     </>
   );
 };
 
-export const S = {
-  InputBox: styled.div`
-    display: flex;
-    height: 48px;
-    margin-top: 12px;
-  `,
+const StyledPasswordInput = styled(StyledInput)`
+  width: 12vw;
+  font-size: 16px;
+`;
 
-  Input: styled.input`
-    background: var(--input-background);
-    width: 12vw;
-    margin-right: 2.2vw;
-    font-size: 14px;
-    text-align: center;
-    letter-spacing: 1px;
-    border-radius: 8px;
-  `,
+const HiddenPassword = styled(StyledInput)`
+  width: 12vw;
+  margin-right: 2.2vw;
+  font-size: 30px;
+  text-align: center;
+  line-height: 48px;
+  border-radius: 8px;
+`;
 
-  HiddenPassword: styled.p`
-    width: 12vw;
-    margin-right: 2.2vw;
-    font-size: 30px;
-    text-align: center;
-    line-height: 48px;
-    border-radius: 8px;
-  `,
-
-  Caption: styled.p<{ password: string[] }>`
-    color: var(--caption-color);
-    font-size: 12px;
-    margin: 8px 0 16px 4px;
-    visibility: ${({ password }) =>
-      password.join('').length === LENGTH.EACH_PASSWORD * 2 &&
-      `${HIDDEN_ELEMENT_STYLE}`};
-  `,
-};
+const Caption = styled.p<{ password: string[] }>`
+  color: var(--caption-color);
+  font-size: 12px;
+  margin: 8px 0 16px 4px;
+  visibility: ${({ password }) =>
+    password.join('').length === LENGTH.EACH_PASSWORD * 2 &&
+    `${HIDDEN_ELEMENT_STYLE}`};
+`;
 
 export default PasswordInput;

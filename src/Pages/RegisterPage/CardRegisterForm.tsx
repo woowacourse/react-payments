@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import { useState } from 'react';
 import CardNumberInput from './FormInputs/CardNumberInput';
 import ExpirationDateInput from './FormInputs/ExpirationDateInput';
@@ -6,9 +5,10 @@ import NameInput from './FormInputs/NameInput';
 import PasswordInput from './FormInputs/PasswordInput';
 import SecurityCodeInput from './FormInputs/SecurityCodeInput';
 import CardPreview from './CardPreview';
-import Header from '../Header';
 import { Card } from 'types/Card';
 import { useFormHandler } from 'hooks/useFormHandler';
+import Header from 'components/Header';
+import NextButton from 'components/Button';
 
 const CardRegisterForm = () => {
   const [cardNumber, setCardNumber] = useState({
@@ -46,26 +46,10 @@ const CardRegisterForm = () => {
         <NameInput name={name} setName={setName} />
         <SecurityCodeInput />
         <PasswordInput />
-
-        <S.Button>다음</S.Button>
+        <NextButton>다음</NextButton>
       </form>
     </div>
   );
-};
-
-const S = {
-  Button: styled.button`
-    display: flex;
-    margin: 38px 0 30px auto;
-    padding: 10px 16px;
-    color: var(--darken-color);
-    border: 1px solid var(--darken-color);
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 700;
-    background: none;
-    cursor: pointer;
-  `,
 };
 
 export default CardRegisterForm;

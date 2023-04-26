@@ -1,20 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { ThemeProvider } from 'styled-components';
-import { GlobalStyle } from 'styles/GlobalStyle';
-import CardPreview, { S } from './CardPreview';
+
+import CardPreview from './CardPreview';
 
 const CardPreviewMeta = {
   component: CardPreview,
   title: 'CardPreview Component',
-
-  decorators: [
-    (Story) => (
-      <ThemeProvider theme={S}>
-        <GlobalStyle />
-        <Story />
-      </ThemeProvider>
-    ),
-  ],
 } satisfies Meta<typeof CardPreview>;
 
 export default CardPreviewMeta;

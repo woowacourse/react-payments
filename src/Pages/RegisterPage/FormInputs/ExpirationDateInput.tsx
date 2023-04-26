@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { HIDDEN_ELEMENT_STYLE, LENGTH, REGEX } from 'constants/constants';
 import { Card } from 'types/Card';
 import { useInputHandler } from 'hooks/useInputHandler';
+import InputBox from 'components/InputBox';
+import { StyledInput } from 'components/Input';
 
 type Date = Pick<Card, 'month' | 'year'>;
 
@@ -31,8 +33,8 @@ const ExpirationDateInput = (props: Props) => {
       <label className="label-text" htmlFor="date-label">
         만료일
       </label>
-      <S.InputBox>
-        <S.Input
+      <InputBox width={40}>
+        <ExpirationInput
           type="text"
           name="month"
           id="date-label"
@@ -45,8 +47,8 @@ const ExpirationDateInput = (props: Props) => {
           placeholder="MM"
           required
         />
-        <S.Hyphen month={date.month}>/</S.Hyphen>
-        <S.Input
+        <Hyphen month={date.month}>/</Hyphen>
+        <ExpirationInput
           type="text"
           name="year"
           aria-labelledby="date-label"
@@ -58,49 +60,32 @@ const ExpirationDateInput = (props: Props) => {
           placeholder="YY"
           required
         />
-      </S.InputBox>
-      <S.Caption date={Object.values(date)}>
+      </InputBox>
+      <Caption date={Object.values(date)}>
         카드에 표기된 월/연도 순으로 입력해주세요. ex&#41; 01/28
-      </S.Caption>
+      </Caption>
     </>
   );
 };
 
-export const S = {
-  InputBox: styled.div`
-    display: flex;
-    justify-content: center;
-    width: 40vw;
-    height: 48px;
-    margin-top: 12px;
-    background: var(--input-background);
-    border-radius: 8px;
-  `,
+const ExpirationInput = styled(StyledInput)`
+  width: 22vw;
+`;
 
-  Input: styled.input`
-    background: var(--input-background);
-    width: 12vw;
-    margin: 0 2.2vw;
-    text-align: center;
-    font-size: 14px;
-    letter-spacing: 1px;
-  `,
+const Hyphen = styled.p<{ month: string }>`
+  font-weight: 900;
+  align-self: center;
+  visibility: ${({ month }) =>
+    month.length !== LENGTH.EXPIRATION && `${HIDDEN_ELEMENT_STYLE}`};
+`;
 
-  Hyphen: styled.p<{ month: string }>`
-    font-weight: 900;
-    align-self: center;
-    visibility: ${({ month }) =>
-      month.length !== LENGTH.EXPIRATION && `${HIDDEN_ELEMENT_STYLE}`};
-  `,
-
-  Caption: styled.p<{ date: string[] }>`
-    color: var(--caption-color);
-    font-size: 12px;
-    margin: 8px 0 16px 4px;
-    visibility: ${({ date }) =>
-      date.join('').length === LENGTH.EXPIRATION * 2 &&
-      `${HIDDEN_ELEMENT_STYLE}`};
-  `,
-};
+const Caption = styled.p<{ date: string[] }>`
+  color: var(--caption-color);
+  font-size: 12px;
+  margin: 8px 0 16px 4px;
+  visibility: ${({ date }) =>
+    date.join('').length === LENGTH.EXPIRATION * 2 &&
+    `${HIDDEN_ELEMENT_STYLE}`};
+`;
 
 export default ExpirationDateInput;

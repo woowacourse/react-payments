@@ -1,5 +1,5 @@
-import MainPage from 'components/MainPage';
-import CardRegisterForm from 'components/RegisterPage/CardRegisterForm';
+import MainPage from 'Pages/MainPage';
+import CardRegisterForm from 'Pages/RegisterPage/CardRegisterForm';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 const App = () => {

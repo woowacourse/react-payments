@@ -1,5 +1,6 @@
+import CardPreview from 'Pages/RegisterPage/CardPreview';
 import Header from 'components/Header';
-import CardPreview from 'components/RegisterPage/CardPreview';
+import Input from 'components/Input';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Card } from 'types/Card';
@@ -17,32 +18,29 @@ const MainPage = () => {
   return (
     <div>
       <Header navigator={false} title="보유카드" />
-
       {cardInfoArray.length > 0 ? (
         cardInfoArray.map((cardInfo: Card, index: number) => (
           <CardPreview key={index} cardInfo={cardInfo}></CardPreview>
         ))
       ) : (
-        <S.Message>새로운 카드를 등록해 주세요.</S.Message>
+        <Message>새로운 카드를 등록해 주세요.</Message>
       )}
-      <S.Button onClick={goToRegister}>+</S.Button>
+      <AddButton onClick={goToRegister}>+</AddButton>
     </div>
   );
 };
 
-const S = {
-  Message: styled.p`
-    margin: 34px 0 12px;
-  `,
+const Message = styled.p`
+  margin: 34px 0 12px;
+`;
 
-  Button: styled.button`
-    width: 208px;
-    height: 123px;
-    font-size: 34px;
-    background: #e5e5e5;
-    border-radius: 5px;
-    cursor: pointer;
-  `,
-};
+const AddButton = styled.button`
+  width: 208px;
+  height: 123px;
+  font-size: 34px;
+  background: #e5e5e5;
+  border-radius: 5px;
+  cursor: pointer;
+`;
 
 export default MainPage;
