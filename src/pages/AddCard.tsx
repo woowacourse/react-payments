@@ -18,6 +18,10 @@ const AddCard = () => {
   const [newCard, setNewCard] = useState<CardType>(getEmptyCard());
   const { toggleModal } = useContext(Context);
 
+  useEffect(() => {
+    toggleModal();
+  }, []);
+
   const registerCard = () => {
     const cards = getLocalStorage("card");
     setLocalStorage("card", [...cards, newCard]);

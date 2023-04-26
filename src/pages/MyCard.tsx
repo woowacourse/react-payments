@@ -1,5 +1,5 @@
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import { getLocalStorage } from "../utils/localStorage";
 import { CardType } from "../types";
 import { ROUTER_PATH } from "../router/path";
@@ -15,6 +15,7 @@ const MyCard = () => {
       {cards.map((card: CardType) => (
         <CardWrapper key={crypto.randomUUID()}>
           <Card {...card} />
+          <p>{card.name}</p>
         </CardWrapper>
       ))}
       <EmptyCardWrapper onClick={() => navigate(ROUTER_PATH.AddCard)}>
@@ -26,6 +27,14 @@ const MyCard = () => {
 
 const CardWrapper = styled.div`
   margin-bottom: 46px;
+
+  & > p {
+    text-align: center;
+    font-weight: 700;
+    font-size: 14px;
+    color: #575757;
+    margin-top: 17px;
+  }
 `;
 
 const EmptyCardWrapper = styled.div`

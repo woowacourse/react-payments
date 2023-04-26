@@ -1,24 +1,38 @@
 import styled from "styled-components";
 import { ROUTER_PATH } from "../router/path";
 import { useNavigate } from "react-router-dom";
-import { getEmptyCard } from "../utils/card";
 import { Button, Card, Page } from "../components";
+import { getLocalStorage, setLocalStorage } from "../utils";
+import React, { useState } from "react";
 
 const NameCard = () => {
   const navigate = useNavigate();
-  const card = getEmptyCard();
+  const cards = getLocalStorage("card");
+  const targetCard = cards[cards.length - 1];
+  const [name, setName] = useState("");
+
+  const handleNameChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
+  };
+
+  const handleButtonClicked = (routerPath: string) => () => {
+    cards[cards.length - 1].name = name;
+    console.log(cards[cards.length - 1].name);
+    setLocalStorage("card", cards);
+    navigate(routerPath);
+  };
 
   return (
     <Page>
       <TitleWrapper>카드 등록이 완료되었습니다.</TitleWrapper>
-      <Card {...card} />
+      <Card {...targetCard} />
       <NameInputWrapper>
-        <NameInput />
+        <NameInput id="cardName" value={name} onChange={handleNameChanged} />
       </NameInputWrapper>
       <Button
         text="확인"
         type="button"
-        onClick={() => navigate(ROUTER_PATH.MyCard)}
+        onClick={handleButtonClicked(ROUTER_PATH.MyCard)}
       />
     </Page>
   );
@@ -49,7 +63,7 @@ const NameInput = styled.input`
   outline: none;
 
   &:focus {
-    border-bottom: 1.5px solid darkblue;
+    border-bottom: 1.5px solid blue;
   }
 `;
 
