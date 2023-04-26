@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import CardListPage from './components/pages/CardListPage';
 import CardRegistrationPage from './components/pages/CardRegistrationPage';
 import NotFoundPage from './components/pages/NotFoundPage';
-import BankList from './components/BankList';
+import BankList from './components/BottomSheetComponents/BankList';
 import { useBottomSheet } from './hooks/useBottomSheet';
 import type { CardItemInfo } from './types/Card';
 

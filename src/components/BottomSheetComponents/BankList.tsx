@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import BankItem from './common/BankItem';
+import BankItem from '../common/BankItem';
 import BottomSheet from './BottomSheet';
-import { CONVERT_BANK_NAME } from '../utils/Constants';
+import { CONVERT_BANK_NAME } from '../../utils/Constants';
 
 interface BankListProps {
   onClose: () => void;
