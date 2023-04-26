@@ -51,3 +51,8 @@ export const CARD_COMPANY_MODAL_MATRIX = [
     },
   ],
 ];
+
+export const EXPIRE_DATE_VALID_MESSAGE = {
+  invalidMonth: '1월에서 12월 사이로 입력 해주세요',
+  invalidYear: '유효기간은 현재부터 최대 5년입니다.',
+};

@@ -5,6 +5,7 @@ import InputBox from '../../common/InputBox';
 import Input from '../../common/Input';
 
 import { useCardForm } from '../../../context/cardForm';
+import { EXPIRE_DATE_VALID_MESSAGE } from '../../../constants';
 
 interface Props {
   insert: (index: number) => (element: HTMLInputElement | null) => void;
@@ -24,8 +25,8 @@ const ExpireDateInput = ({ insert, focus }: Props) => {
     const [month, year] = expireDate.map(Number);
     const currentYear = new Date().getFullYear() - 2000;
 
-    if (!(month >= 1 && month <= 12)) return '1월에서 12월 사이로 입력 해주세요';
-    if (!(year >= currentYear && year <= currentYear + 5)) return '유효기간은 현재부터 최대 5년입니다.';
+    if (!(month >= 1 && month <= 12)) return EXPIRE_DATE_VALID_MESSAGE.invalidMonth;
+    if (!(year >= currentYear && year <= currentYear + 5)) return EXPIRE_DATE_VALID_MESSAGE.invalidYear;
     return '';
   };
 
