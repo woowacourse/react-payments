@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Card from "src/components/@common/Card";
+import Input from "src/components/@common/Input";
 import useCardList from "src/hooks/useCardList";
 import { PATHS } from "src/utils/constant";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 function CardNickName() {
   const navigation = useNavigate();
@@ -35,9 +36,11 @@ function CardNickName() {
             ownerName={location.state.ownerName}
             expireDate={location.state.expireDate}
           />
-          <Styled.NickNameInput
+          <Input
             type="text"
+            value={nickName}
             onChange={(event) => setNickName(event.target.value)}
+            customInputStyle={Styled.NickNameInput}
           />
           <Styled.ButtonContainer>
             <Styled.NextButton onClick={registerCard}>확인</Styled.NextButton>
@@ -69,12 +72,16 @@ const Styled = {
     color: var(--label-color);
   `,
 
-  NickNameInput: styled.input`
+  NickNameInput: css`
     width: 240px;
 
+    background: none;
+
     margin: 100px 0 0 0;
+
     border: none;
     border-bottom: solid #737373 1.5px;
+    border-radius: 0;
 
     text-align: center;
     font-family: "Roboto";

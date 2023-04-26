@@ -3,7 +3,7 @@ import styled, { CSSProp } from "styled-components";
 
 interface Props extends StyleInputProps {
   value: string;
-  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
   maxLength?: number;
   placeholder?: string;
   type?: string;
