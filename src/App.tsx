@@ -1,23 +1,28 @@
-import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Card, CardContext } from './context/CardContext';
-import AddCardPage from './pages/AddCardPage';
+import PaymentProvider from './components/context/PaymentsProvider';
 
-import MyCardPage from './pages/MyCardPage';
-import { getLocalStorage } from './utils/localStorage';
+import MyCard from './components/pages/MyCard';
+import AddCard from './components/pages/AddCard';
+
+import CardListProvider from './components/context/CardListProvider';
 
 function App() {
-  const [cardList, setCardList] = useState<Card[]>(getLocalStorage('cardList') as Card[]);
-
   return (
-    <CardContext.Provider value={{ cardList, setCardList }}>
-      <BrowserRouter>
+    <BrowserRouter>
+      <CardListProvider>
         <Routes>
-          <Route index element={<MyCardPage />} />
-          <Route path="addCard" element={<AddCardPage />} />
+          <Route index element={<MyCard />} />
+          <Route
+            path="addCard"
+            element={
+              <PaymentProvider>
+                <AddCard />
+              </PaymentProvider>
+            }
+          />
         </Routes>
-      </BrowserRouter>
-    </CardContext.Provider>
+      </CardListProvider>
+    </BrowserRouter>
   );
 }
 
