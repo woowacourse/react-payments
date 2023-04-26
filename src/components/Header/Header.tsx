@@ -1,21 +1,13 @@
-import { useLocation, useNavigate } from 'react-router-dom';
-
-import { PAGE_TITLE, PATHNAME, PageTitle } from '../../constants/pathname';
-
+import { useHeader } from '../../hooks/useHeader';
 import * as styled from './Header.styled';
 
 const Header = () => {
-  const { pathname } = useLocation();
-  const navigation = useNavigate();
-
-  const onClickBackward = () => {
-    navigation('/');
-  };
+  const { isOnHomePage, onClickBackward, pageTitle } = useHeader();
 
   return (
     <styled.Header>
-      {pathname !== PATHNAME.HOME && <styled.BackwardButton onClick={onClickBackward}>{'<'}</styled.BackwardButton>}
-      <styled.HeaderTitle onClick={onClickBackward}>{PAGE_TITLE[pathname as keyof PageTitle]}</styled.HeaderTitle>
+      {!isOnHomePage && <styled.BackwardButton onClick={onClickBackward}>{'<'}</styled.BackwardButton>}
+      <styled.HeaderTitle onClick={onClickBackward}>{pageTitle}</styled.HeaderTitle>
     </styled.Header>
   );
 };
