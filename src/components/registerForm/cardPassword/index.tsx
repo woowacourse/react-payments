@@ -7,7 +7,7 @@ import { Styled as S } from "./CardPassword.styles";
 import { NUMBERS, PASSWORD_NUMBER_TYPES } from "src/utils/constant";
 import { lengthMatchValidation } from "src/utils/validation";
 import useCardInfoInput from "src/hooks/useCardInfoInput";
-import { CardPasswordObj } from "src/interfaces";
+import { CardPasswordProps } from "src/interfaces";
 
 function CardPassword() {
   const { MAX_PASSWORD, EACH_PASSWORD } = NUMBERS;
@@ -15,7 +15,7 @@ function CardPassword() {
     maxLength: EACH_PASSWORD,
   });
 
-  const { value, onChange, error } = useCardInfoInput<CardPasswordObj>({
+  const { value, onChange, error } = useCardInfoInput<CardPasswordProps>({
     contextType: "password",
     validation: (value) => {
       const firstVal = refs.current[0]?.value ?? "";

@@ -1,22 +1,22 @@
 import { useState } from "react";
-import { CardInfoType } from "src/context/CardInfoContext";
+import { CardListProps } from "src/interfaces";
 import { getItem, setItem } from "src/utils/localStorage";
 
 interface Props {
   key: string;
-  initialValue?: Array<CardInfoType>;
+  initialValue?: Array<CardListProps>;
 }
 
 function useCardList({ key, initialValue }: Props) {
   const saved = getItem(key);
-  const savedList = (saved ? JSON.parse(saved) : []) as Array<CardInfoType>;
+  const savedList = (saved ? JSON.parse(saved) : []) as Array<CardListProps>;
 
-  const [cardList, setCardList] = useState<Array<CardInfoType>>([
+  const [cardList, setCardList] = useState<Array<CardListProps>>([
     ...(initialValue ?? []),
     ...savedList,
   ]);
 
-  const saveCard = (cardInfo: CardInfoType) => {
+  const saveCard = (cardInfo: CardListProps) => {
     const savedData = JSON.stringify([...cardList, cardInfo]);
     setItem(key, savedData);
 

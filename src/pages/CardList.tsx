@@ -14,13 +14,16 @@ function CardList() {
       cardList.map((card) => {
         const { cardNumbers, ownerName, expireDate, cardName } = card;
         return (
-          <Card
-            key={cardNumbers + expireDate}
-            cardName={cardName}
-            cardNumber={cardNumbers}
-            ownerName={ownerName}
-            expireDate={expireDate}
-          />
+          <>
+            <Card
+              key={cardNumbers + expireDate}
+              cardName={cardName}
+              cardNumber={cardNumbers}
+              ownerName={ownerName}
+              expireDate={expireDate}
+            />
+            <p></p>
+          </>
         );
       })
     ) : (

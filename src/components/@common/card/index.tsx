@@ -1,9 +1,9 @@
-import { CardNameObj, CardNumberObj } from "src/interfaces";
+import { CardNameProps, CardNumberProps } from "src/interfaces";
 import { Styled as S } from "./Card.styles";
 
 interface Props {
-  cardName?: CardNameObj;
-  cardNumber: CardNumberObj;
+  cardName?: CardNameProps;
+  cardNumber: CardNumberProps;
   ownerName: string;
   expireDate: string;
   onClick?: () => void;

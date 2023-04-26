@@ -1,5 +1,7 @@
-import { CardNumberObj, CardPasswordObj } from "src/interfaces";
+import { CardNumberProps, CardPasswordProps } from "src/interfaces";
 
-export const objectValueToString = (obj: CardNumberObj | CardPasswordObj) => {
+export const objectValueToString = (
+  obj: CardNumberProps | CardPasswordProps,
+) => {
   return Object.values(obj).reduce((acc, cur) => acc + cur, "");
 };

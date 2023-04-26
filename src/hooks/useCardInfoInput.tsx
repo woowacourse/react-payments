@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
-import { CardInfoContext, CardInfoType } from "src/context/CardInfoContext";
+import { CardInfoContext } from "src/context/CardInfoContext";
+import { CardInfoProps } from "src/interfaces";
 import { NUMBERS } from "src/utils/constant";
 import {
   EACH_SECOND_CHANCE,
@@ -9,14 +10,14 @@ import {
 import { MMYYValidation } from "src/utils/validation";
 
 interface Props {
-  contextType: keyof CardInfoType;
+  contextType: keyof CardInfoProps;
   validation?: (value: string) => void;
   nextInputFocus?: (index?: number) => void;
 }
 
 const getValue = (
-  prev: CardInfoType,
-  contextType: keyof CardInfoType,
+  prev: CardInfoProps,
+  contextType: keyof CardInfoProps,
   name: string,
   value: string,
 ) => {

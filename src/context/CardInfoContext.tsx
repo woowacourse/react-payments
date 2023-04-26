@@ -4,20 +4,11 @@ import React, {
   useState,
   PropsWithChildren,
 } from "react";
-import { CardNameObj, CardNumberObj, CardPasswordObj } from "src/interfaces";
+import { CardInfoProps } from "src/interfaces";
 import { initialCardInfos } from "src/utils/constant";
 
-export interface CardInfoType {
-  cardNumbers: CardNumberObj;
-  expireDate: string;
-  ownerName: string;
-  securityCode: string;
-  password: CardPasswordObj;
-  cardName: CardNameObj;
-}
-
 export const CardInfoContext = createContext<
-  [CardInfoType, React.Dispatch<React.SetStateAction<CardInfoType>> | null]
+  [CardInfoProps, React.Dispatch<React.SetStateAction<CardInfoProps>> | null]
 >([initialCardInfos, null]);
 
 export function CardInfoProvider({ children }: PropsWithChildren) {

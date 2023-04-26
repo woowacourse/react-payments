@@ -1,7 +1,7 @@
-import { CardInfoType } from "src/context/CardInfoContext";
 import { CONTINUOUS_EMPTY_REGEXP, MMYY_REGEXP } from "./regexp";
 import { NUMBERS } from "./constant";
 import { objectValueToString } from ".";
+import { CardInfoProps } from "src/interfaces";
 
 export const lengthMatchValidation = (value: string, maxLength: number) => {
   if (value.length > 0 && value.length !== maxLength) {
@@ -38,7 +38,7 @@ export const checkOwnerNameLength = (
   }
 };
 
-export const isValidateFormValues = (cardInfo: CardInfoType) => {
+export const isValidateFormValues = (cardInfo: CardInfoProps) => {
   const {
     MAX_CARD,
     MAX_EXPIREDATE,
