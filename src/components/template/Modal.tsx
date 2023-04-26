@@ -1,12 +1,14 @@
+import { useCardForm } from '../../context/cardForm';
 import type { CardType } from '../../types';
 import styled from 'styled-components';
 
 interface Props {
   closeModal: () => void;
-  setCardCompany: (cardCompany: CardType['cardCompany']) => void;
 }
 
-const Modal = ({ closeModal, setCardCompany }: Props) => {
+const Modal = ({ closeModal }: Props) => {
+  const [, { setCardCompany }] = useCardForm();
+
   const onClickCardCompanyItem = (cardCompany: CardType['cardCompany']) => () => {
     setCardCompany(cardCompany);
     closeModal();

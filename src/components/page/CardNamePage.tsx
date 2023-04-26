@@ -1,16 +1,42 @@
-import { Page } from '../../types';
+import { CardType, Page } from '../../types';
 import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
 import PageTemplate from '../template/PageTemplate';
 import Card from '../common/Card';
 
+import { useCardForm } from '../../context/cardForm';
+import { pushList } from '../../utils/localStorageUtils';
+import { LOCAL_STORAGE_KEY } from '../../constants';
+
 interface Props {
   navigate: (page: Page) => void;
 }
 
 const CardNamePage = ({ navigate }: Props) => {
+  const [
+    { cardCompany, cardNumber, expireDate, ownerName, securityCode, cardPassword, cardName },
+    { setCardName },
+  ] = useCardForm();
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const onChangeCardNameInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCardName(e.target.value);
+  };
+
+  const onClickSubmit = () => {
+    pushList<CardType>(LOCAL_STORAGE_KEY.cardList, {
+      id: Date.now(),
+      cardCompany,
+      cardNumber,
+      expireDate,
+      ownerName,
+      securityCode,
+      cardPassword,
+      cardName,
+    });
+    navigate(Page.list);
+  };
 
   useEffect(() => {
     inputRef.current?.focus();
@@ -19,10 +45,10 @@ const CardNamePage = ({ navigate }: Props) => {
   return (
     <PageTemplate>
       <Title>카드등록이 완료되었습니다.</Title>
-      <Card cardCompany={''} cardNumber={['', '', '', '']} ownerName={''} expireDate={['', '']} />
-      <CardNameInput ref={inputRef} />
+      <Card cardCompany={cardCompany} cardNumber={cardNumber} ownerName={ownerName} expireDate={expireDate} />
+      <CardNameInput ref={inputRef} value={cardName} onChange={onChangeCardNameInput} />
       <ButtonWrapper>
-        <SubmitButton onClick={() => navigate(Page.list)}>확인</SubmitButton>
+        <SubmitButton onClick={onClickSubmit}>확인</SubmitButton>
       </ButtonWrapper>
     </PageTemplate>
   );

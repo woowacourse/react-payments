@@ -1,4 +1,3 @@
-import type { CardType } from '../../types';
 import { Page } from '../../types';
 import { useState } from 'react';
 import styled from 'styled-components';
@@ -12,41 +11,20 @@ import SecurityCodeInput from '../box/inputSection/SecurityCodeInput';
 import CardPasswordInput from '../box/inputSection/CardPasswordInput';
 import Card from '../common/Card';
 
-import useList from '../../utils/useList';
+import { useCardForm } from '../../context/cardForm';
 import useFocusRef from '../../utils/useFocusRef';
-import { pushList } from '../../utils/localStorageUtils';
-import { LOCAL_STORAGE_KEY } from '../../constants';
 
 interface Props {
   navigate: (page: Page) => void;
 }
 
 const CardRegisterPage = ({ navigate }: Props) => {
-  const [cardCompany, setCardCompany] = useState('');
-  const [cardNumber, setCardNumberIndex] = useList(['', '', '', '']);
-  const [expireDate, setExpireDateIndex] = useList(['', '']);
-  const [ownerName, setOwnerName] = useState('');
-  const [securityCode, setSecurityCode] = useState('');
-  const [cardPassword, setCardPasswordIndex] = useList(['', '']);
-
+  const [{ cardCompany, cardNumber, expireDate, ownerName }] = useCardForm();
   const [insert, focus] = useFocusRef();
   const [isModalOpen, setIsModalOpen] = useState(true);
 
   const submitNewCard = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    const newCard: CardType = {
-      id: Date.now(),
-      cardCompany,
-      cardNumber,
-      expireDate,
-      ownerName,
-      securityCode,
-      cardPassword,
-      cardName: '',
-    };
-
-    pushList(LOCAL_STORAGE_KEY.cardList, newCard);
     navigate(Page.name);
   };
 
@@ -72,36 +50,16 @@ const CardRegisterPage = ({ navigate }: Props) => {
         onClick={openModal}
       />
       <InputForm onSubmit={submitNewCard}>
-        <CardNumberInput
-          cardNumber={cardNumber}
-          setCardNumber={setCardNumberIndex}
-          insert={insert}
-          focus={focus}
-        />
-        <ExpireDateInput
-          expireDate={expireDate}
-          setExpireDateIndex={setExpireDateIndex}
-          insert={insert}
-          focus={focus}
-        />
-        <OwnerNameInput ownerName={ownerName} setOwnerName={setOwnerName} insert={insert} focus={focus} />
-        <SecurityCodeInput
-          securityCode={securityCode}
-          setSecurityCode={setSecurityCode}
-          insert={insert}
-          focus={focus}
-        />
-        <CardPasswordInput
-          cardPassword={cardPassword}
-          setCardPasswordIndex={setCardPasswordIndex}
-          insert={insert}
-          focus={focus}
-        />
+        <CardNumberInput insert={insert} focus={focus} />
+        <ExpireDateInput insert={insert} focus={focus} />
+        <OwnerNameInput insert={insert} focus={focus} />
+        <SecurityCodeInput insert={insert} focus={focus} />
+        <CardPasswordInput insert={insert} focus={focus} />
         <ButtonWrapper>
           <SubmitButton type="submit">다음</SubmitButton>
         </ButtonWrapper>
       </InputForm>
-      {isModalOpen && <Modal closeModal={closeModal} setCardCompany={setCardCompany} />}
+      {isModalOpen && <Modal closeModal={closeModal} />}
     </PageTemplate>
   );
 };
