@@ -1,4 +1,7 @@
+import { CardInfoType } from "src/context/CardInfoContext";
 import { CONTINUOUS_EMPTY_REGEXP, MMYY_REGEXP } from "./regexp";
+import { NUMBERS } from "./constant";
+import { objectValueToString } from ".";
 
 export const lengthMatchValidation = (value: string, maxLength: number) => {
   if (value.length > 0 && value.length !== maxLength) {
@@ -33,4 +36,33 @@ export const checkOwnerNameLength = (
       `카드 소유자 이름은 ${min}글자 이상 ${max}글자 이하입니다.`,
     );
   }
+};
+
+export const isValidateFormValues = (cardInfo: CardInfoType) => {
+  const {
+    MAX_CARD,
+    MAX_EXPIREDATE,
+    MAX_SECURITY,
+    MAX_PASSWORD,
+    MIN_OWNER_NAME,
+    MAX_OWNER_NAME,
+  } = NUMBERS;
+
+  const { cardNumbers, expireDate, securityCode, password, ownerName } =
+    cardInfo;
+
+  const exceptOwnerName =
+    objectValueToString(cardNumbers).length === MAX_CARD &&
+    expireDate.length === MAX_EXPIREDATE &&
+    securityCode.length === MAX_SECURITY &&
+    objectValueToString(password).length === MAX_PASSWORD;
+
+  const nameLength = ownerName.length;
+
+  const isCardComplete =
+    (nameLength === 0 ||
+      (nameLength <= MAX_OWNER_NAME && nameLength >= MIN_OWNER_NAME)) &&
+    exceptOwnerName;
+
+  return isCardComplete;
 };

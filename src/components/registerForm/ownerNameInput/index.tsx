@@ -33,7 +33,7 @@ function OwnerNameInput() {
         value={value}
         onChange={onChange}
         customInputStyle={S.OwnerNameStyle}
-        placeholder="영어와 띄어쓰기만 입력할 수 있습니다."
+        placeholder="영어와 띄어쓰기만 입력 가능합니다."
       />
       {error.isError && <ErrorSpan>{error.message}</ErrorSpan>}
     </S.OwnerNameInputContainer>

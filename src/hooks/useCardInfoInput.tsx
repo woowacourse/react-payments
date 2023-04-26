@@ -1,6 +1,5 @@
 import { useContext, useState } from "react";
-import { cardInfoContext } from "src/context/CardInfoContext";
-import { CardInfoType } from "src/context/CardInfoContext";
+import { CardInfoContext, CardInfoType } from "src/context/CardInfoContext";
 import { NUMBERS } from "src/utils/constant";
 import {
   EACH_SECOND_CHANCE,
@@ -11,7 +10,7 @@ import { MMYYValidation } from "src/utils/validation";
 
 interface Props {
   contextType: keyof CardInfoType;
-  validation: (value: string) => void;
+  validation?: (value: string) => void;
   nextInputFocus?: (index?: number) => void;
 }
 
@@ -47,13 +46,15 @@ function useCardInfoInput<T>({
   validation,
   nextInputFocus,
 }: Props) {
-  const [cardInput, setCardInput] = useContext(cardInfoContext);
+  const [cardInput, setCardInput] = useContext(CardInfoContext);
+
   const [error, setError] = useState({
     isError: false,
     message: "",
   });
 
   const onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+    if (!contextType) return;
     const { value } = event.currentTarget;
     const name = event.currentTarget.dataset["order"];
     const idx = event.currentTarget.dataset["index"];
@@ -70,7 +71,8 @@ function useCardInfoInput<T>({
       return;
 
     try {
-      validation(value);
+      if (validation) validation(value);
+
       setError({ isError: false, message: "" });
     } catch (error) {
       if (!(error instanceof Error)) return;
