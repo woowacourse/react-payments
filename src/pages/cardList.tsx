@@ -4,6 +4,7 @@ import { Header } from "../components/common/Header";
 import { useEffect, useState } from "react";
 import { getData } from "../utils/localStorage";
 import { Card, CardProps } from "../components/common/card";
+import { ReactComponent as BackButtonIc } from "../assets/backButtonIc.svg";
 
 export function CardList() {
   const [cards, setCards] = useState<CardProps[]>();
@@ -19,11 +20,14 @@ export function CardList() {
 
   return (
     <CardListContainer>
-      <Header title="보유 카드" />
+      <Header>
+        <BackButtonIc />
+        보유 카드
+      </Header>
       <Section>
         <h3>{cards?.length === 0 ? "새로운 카드를 추가하세요" : ""}</h3>
         {cards &&
-          cards?.map((card) => {
+          cards.map((card) => {
             return (
               <Card
                 key={card.userName}

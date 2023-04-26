@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { ReactComponent as BackButtonIc } from "../../assets/backButtonIc.svg";
 
 export function BackButton() {
   const navigate = useNavigate();
@@ -8,20 +9,9 @@ export function BackButton() {
     navigate(-1);
   }
 
-  return (
-    <Button
-      src="/assets/backButtonIc.svg"
-      alt="back-button"
-      onClick={movePrevPage}
-    />
-  );
+  return <BackButtonIcon onClick={movePrevPage} />;
 }
 
-const Button = styled.img`
-  position: absolute;
-
-  top: 2rem;
-  left: 2.4rem;
-
-  cursor: pot;
+const BackButtonIcon = styled(BackButtonIc)`
+  cursor: pointer;
 `;

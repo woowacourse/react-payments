@@ -1,23 +1,20 @@
 import styled from "styled-components";
 
 interface HeaderProps {
-  title: string;
-  render?: () => JSX.Element;
+  children: React.ReactNode;
 }
 
 export function Header(props: HeaderProps) {
-  const { title, render } = props;
+  const { children } = props;
+
   return (
     <HeaderUnit>
-      {render && render()}
-      <Title>{title}</Title>
+      <Title>{children}</Title>
     </HeaderUnit>
   );
 }
 
 const HeaderUnit = styled.header`
-  position: relative;
-
   display: flex;
   justify-content: start;
   align-items: center;
@@ -30,6 +27,10 @@ const HeaderUnit = styled.header`
 `;
 
 const Title = styled.h2`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 11rem;
   ${({ theme }) => theme.fonts.h2};
 
   margin-left: 5rem;

@@ -3,11 +3,15 @@ import { BackButton } from "../components/common/backButton";
 import { Header } from "../components/common/Header";
 import { AddCardSection } from "../components/addCardSection";
 import { CardInfoProvider } from "../contexts/cardInfo";
+import { ReactComponent as BackButtonIc } from "../assets/backButtonIc.svg";
 
 export function AddCard() {
   return (
     <Wrapper>
-      <Header title="카드 추가" render={() => BackButton()} />
+      <Header>
+        <BackButtonIc />
+        카드추가
+      </Header>
       <CardInfoProvider>
         <AddCardSection />
       </CardInfoProvider>
