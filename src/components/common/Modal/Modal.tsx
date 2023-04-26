@@ -11,7 +11,7 @@ const Modal = ({ children, isOpen, closeModal }: PropsWithChildren<ModalProps>) 
     <>
       {isOpen ? (
         <StyledModalContainer>
-          <StyledModalBackdrop></StyledModalBackdrop>
+          <StyledModalBackdrop onClick={closeModal}></StyledModalBackdrop>
           <StyledModalContentWrapper>
             {children}
             <CloseButton onClick={closeModal}>✖</CloseButton>
@@ -63,6 +63,8 @@ const StyledModalBackdrop = styled.div`
   left: 0;
 
   background: rgba(0, 0, 0, 0.35);
+
+  cursor: pointer;
 `;
 
 export default Modal;
