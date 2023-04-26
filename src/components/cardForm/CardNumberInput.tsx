@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { InputContainer } from "../common/InputContainer";
 import { InputLabel } from "../common/InputLabel";
 import { Input } from "../common/Input";
@@ -58,13 +58,13 @@ export const CardNumberInput = ({
       moveFocusToNext(index, value);
     };
 
-  useEffect(() => {
-    validate();
-  }, [numbers]);
-
   const validate = () => {
-    const validity = validateNumbersInput(numbers);
-    setIsValid(validity);
+    const isEveryInputActivated = numbers.every((number) => number.length > 0);
+
+    if (isEveryInputActivated) {
+      const validity = validateNumbersInput(numbers);
+      setIsValid(validity);
+    }
   };
 
   return (
@@ -80,6 +80,7 @@ export const CardNumberInput = ({
           type="text"
           label="cardNumber1"
           handleInput={handleInput(0)}
+          handleOutFocus={validate}
           ref={allRefs[0]}
         />
         {[2, 3, 4].map((ind) => (
@@ -89,6 +90,7 @@ export const CardNumberInput = ({
             type={ind < 3 ? "text" : "password"}
             label={`cardNumber${ind}`}
             handleInput={handleInput(ind - 1)}
+            handleOutFocus={validate}
             ref={allRefs[ind - 1]}
           />
         ))}
