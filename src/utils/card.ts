@@ -8,7 +8,9 @@ import {
 export const getReplacedCardNumber = (cardNumber: string) => {
   return cardNumber.length > SEPERATED_CARD_NUMBER_LENGTH.SECOND
     ? cardNumber.substring(0, 12) +
-        cardNumber.substring(12, cardNumber.length).replace(REGEX.number, "•")
+        cardNumber
+          .substring(12, cardNumber.length)
+          .replaceAll(REGEX.number, "•")
     : cardNumber;
 };
 

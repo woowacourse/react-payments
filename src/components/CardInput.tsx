@@ -14,17 +14,12 @@ interface CardInputType extends HTMLAttributes<HTMLInputElement> {
 const CardInput = (props: CardInputType) => {
   return (
     <CardInputWrapper
-      id={props.id}
-      value={props.value}
-      width={props.width}
+      {...props}
       type={props.isSecured ? "password" : "text"}
       autoFocus={props.isAutoFocus}
       required={props.isRequired}
       maxLength={CARD_INPUT_MAX_LENGTH[props.id]}
       minLength={CARD_INPUT_MIN_LENGTH[props.id]}
-      placeholder={props.placeholder}
-      onChange={props.onChange}
-      onKeyDown={props.onKeyDown}
     />
   );
 };

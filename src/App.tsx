@@ -2,6 +2,7 @@ import MyCard from "./pages/MyCard";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AddCard from "./pages/AddCard";
 import { ROUTER_PATH } from "./constants";
+import GlobalStyle from "./style/global";
 
 const router = createBrowserRouter([
   {
@@ -15,7 +16,12 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <GlobalStyle />
+      <RouterProvider router={router} />
+    </>
+  );
 };
 
 export default App;

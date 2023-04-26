@@ -5,7 +5,7 @@ import { CardType } from "../types";
 
 const Card = ({ cardNumber, color, ownerName, expiredDate }: CardType) => {
   const cardNumberArray = cardNumber
-    .replace(SEPERATOR_STRING.cardNumber, " ")
+    .replaceAll(SEPERATOR_STRING.cardNumber, " ")
     .split(" ");
 
   return (

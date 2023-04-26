@@ -26,7 +26,7 @@ interface CardInputFormType {
 
 const CardInputForm = ({ card, setCard, onSubmit }: CardInputFormType) => {
   const newCard = JSON.parse(JSON.stringify(card));
-  const [isAnswered, setIsAnswered] = useState<boolean>(false);
+  const [isAnswered, setIsAnswered] = useState(false);
 
   const handleCardNumberChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
     newCard.cardNumber = getSeperatedCardNumber(
@@ -36,10 +36,10 @@ const CardInputForm = ({ card, setCard, onSubmit }: CardInputFormType) => {
   };
 
   const handleCardNumberKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Backspace") {
-      newCard.cardNumber = getSubCardNumber(newCard.cardNumber);
-      setCard(newCard);
-    }
+    if (e.key === "Backspace") return;
+
+    newCard.cardNumber = getSubCardNumber(newCard.cardNumber);
+    setCard(newCard);
   };
 
   const handleExpiredDateChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,10 +48,10 @@ const CardInputForm = ({ card, setCard, onSubmit }: CardInputFormType) => {
   };
 
   const handleExpiredDateKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Backspace") {
-      newCard.expiredDate = getSubExpiredDate(newCard.expiredDate);
-      setCard(newCard);
-    }
+    if (e.key !== "Backspace") return;
+
+    newCard.expiredDate = getSubExpiredDate(newCard.expiredDate);
+    setCard(newCard);
   };
 
   const handlePasswordChanged =
