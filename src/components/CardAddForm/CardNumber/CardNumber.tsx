@@ -15,14 +15,14 @@ interface CardNumberProps {
 
 function CardNumber({ onInputChange, value, isValid }: CardNumberProps) {
   const inputRef = useRef<HTMLInputElement>(null);
-  const { onInputValueChange } = useCardNumber(inputRef);
+  const { handleInputValueChange } = useCardNumber(inputRef);
   const { isError, handleError, removeError } = useError(isValid);
 
   const cardNumber = formatDisplayedCardNumber(value);
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     removeError();
-    onInputValueChange(event);
+    handleInputValueChange(event);
     onInputChange(event);
   };
 

@@ -6,7 +6,10 @@ import { checkNumberFormat } from '../../utils/formatChecker';
 const useCardNumber = (inputRef: RefObject<HTMLInputElement>) => {
   const setCursor = useInputCursorPosition(inputRef);
 
-  const onInputCursorPositionChange = ({ target, nativeEvent }: ChangeEvent<HTMLInputElement>) => {
+  const handleInputCursorPositionChange = ({
+    target,
+    nativeEvent,
+  }: ChangeEvent<HTMLInputElement>) => {
     if (!(nativeEvent instanceof InputEvent) || !target.selectionStart) return;
 
     const key = nativeEvent.data;
@@ -16,7 +19,7 @@ const useCardNumber = (inputRef: RefObject<HTMLInputElement>) => {
     setCursor(cursor);
   };
 
-  const onInputTypeChange = ({ target, nativeEvent }: ChangeEvent<HTMLInputElement>) => {
+  const handleInputTypeChange = ({ target, nativeEvent }: ChangeEvent<HTMLInputElement>) => {
     if (
       !(nativeEvent instanceof InputEvent) ||
       target.dataset.value === undefined ||
@@ -40,12 +43,12 @@ const useCardNumber = (inputRef: RefObject<HTMLInputElement>) => {
     }
   };
 
-  const onInputValueChange = (event: ChangeEvent<HTMLInputElement>) => {
-    onInputCursorPositionChange(event);
-    onInputTypeChange(event);
+  const handleInputValueChange = (event: ChangeEvent<HTMLInputElement>) => {
+    handleInputCursorPositionChange(event);
+    handleInputTypeChange(event);
   };
 
-  return { onInputValueChange };
+  return { handleInputValueChange };
 };
 
 export { useCardNumber };

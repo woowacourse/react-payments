@@ -24,20 +24,20 @@ const initialValue: CardFormData = {
 const useCardAddForm = () => {
   const { newCardId, cardListLength, addCard } = useContext(CardListContext);
   const [cardInformation, setCardInformation] = useState(initialValue);
-  const [cardInputValidation, handleValidationChange] = useCardInputValidation();
+  const [cardInputValidation, updateCardInputValidation] = useCardInputValidation();
   const navigate = useNavigate();
 
-  const onButtonInputChange = useCallback(
+  const handleButtonInputChange = useCallback(
     (event: MouseEvent<HTMLButtonElement>) => {
       const { name, value } = event.currentTarget;
 
       setCardInformation((information) => ({ ...information, [name]: value }));
-      handleValidationChange(name as keyof CardFormData, value);
+      updateCardInputValidation(name as keyof CardFormData, value);
     },
-    [handleValidationChange]
+    [updateCardInputValidation]
   );
 
-  const onSingleInputChange = useCallback(
+  const handleSingleInputChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       const { name } = event.target;
       const value = event.target.dataset.value ?? event.target.value;
@@ -47,12 +47,12 @@ const useCardAddForm = () => {
       const formattedValue = isKeyOfObj(formatter, name) ? formatter[name](value) : value;
 
       setCardInformation((information) => ({ ...information, [name]: formattedValue }));
-      handleValidationChange(name as keyof CardFormData, value);
+      updateCardInputValidation(name as keyof CardFormData, value);
     },
-    [handleValidationChange]
+    [updateCardInputValidation]
   );
 
-  const onMultipleInputChange = useCallback(
+  const handleMultipleInputChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       const { name, value, dataset } = event.target;
 
@@ -67,12 +67,12 @@ const useCardAddForm = () => {
           [name]: changeInformation,
         };
 
-        handleValidationChange(name, newInformation[name]);
+        updateCardInputValidation(name, newInformation[name]);
 
         return newInformation;
       });
     },
-    [handleValidationChange]
+    [updateCardInputValidation]
   );
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -91,9 +91,9 @@ const useCardAddForm = () => {
   return {
     cardInformation,
     cardInputValidation,
-    onButtonInputChange,
-    onSingleInputChange,
-    onMultipleInputChange,
+    handleButtonInputChange,
+    handleSingleInputChange,
+    handleMultipleInputChange,
     handleSubmit,
   };
 };

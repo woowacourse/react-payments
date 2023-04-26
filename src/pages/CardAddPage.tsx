@@ -7,9 +7,9 @@ function CardAddPage() {
   const {
     cardInformation,
     cardInputValidation,
-    onButtonInputChange,
-    onSingleInputChange,
-    onMultipleInputChange,
+    handleButtonInputChange,
+    handleSingleInputChange,
+    handleMultipleInputChange,
     handleSubmit,
   } = useCardAddForm();
 
@@ -29,9 +29,9 @@ function CardAddPage() {
         <CardAddForm
           cardInformation={cardInformation}
           cardInputValidation={cardInputValidation}
-          onButtonInputChange={onButtonInputChange}
-          onSingleInputChange={onSingleInputChange}
-          onMultipleInputChange={onMultipleInputChange}
+          onButtonInputChange={handleButtonInputChange}
+          onSingleInputChange={handleSingleInputChange}
+          onMultipleInputChange={handleMultipleInputChange}
           handleSubmit={handleSubmit}
         />
       </main>
