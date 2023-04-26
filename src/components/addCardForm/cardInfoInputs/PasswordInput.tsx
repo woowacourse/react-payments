@@ -1,13 +1,14 @@
-import { forwardRef, useEffect } from 'react';
+import { forwardRef } from 'react';
 import styled from 'styled-components';
 import { InputWrapper } from './template/InputWrapper';
-import { Input } from './template/Input';
+import { ErrorMessage, Input } from './template/Input';
 import { useError } from '../../../hooks/useError';
+import { MoveInput } from '../MoveInput';
 
 interface Props {
   password: string[];
   setPassword: React.Dispatch<React.SetStateAction<string[]>>;
-  setIsInputFinish: React.Dispatch<React.SetStateAction<boolean>>;
+  handleSubmitNewCardInfo: () => void;
   focusPasswordInputByIndex: (index: number) => void;
   viewPreviousInput: () => void;
 }
@@ -27,7 +28,7 @@ export const PasswordInput = forwardRef<HTMLInputElement[], Props>(
     {
       password,
       setPassword,
-      setIsInputFinish,
+      handleSubmitNewCardInfo,
       focusPasswordInputByIndex,
       viewPreviousInput,
     },
@@ -50,8 +51,6 @@ export const PasswordInput = forwardRef<HTMLInputElement[], Props>(
 
       if (e.target.value.length === 1) {
         focusPasswordInputByIndex(Number(index) + 1);
-
-        if (Number(index) === 1) setIsInputFinish(true);
       }
     };
 
@@ -64,22 +63,12 @@ export const PasswordInput = forwardRef<HTMLInputElement[], Props>(
 
       if (e.key !== 'Backspace') return;
 
-      setIsInputFinish(false);
-
       if (password[Number(index)] === '') {
         if (Number(index) === 0) viewPreviousInput();
 
         focusPasswordInputByIndex(Number(index) - 1);
       }
     };
-
-    useEffect(() => {
-      if (error === null) {
-        setIsInputFinish(true);
-        return;
-      }
-      setIsInputFinish(false);
-    }, [error, setIsInputFinish]);
 
     return (
       <div>
@@ -131,7 +120,14 @@ export const PasswordInput = forwardRef<HTMLInputElement[], Props>(
           <Style.DotContainer>•</Style.DotContainer>
           <Style.DotContainer>•</Style.DotContainer>
         </Style.Wrapper>
-        <Style.ErrorMessage>{error ?? ''}</Style.ErrorMessage>
+        <ErrorMessage>{error ?? ''}</ErrorMessage>
+        <MoveInput
+          isLeftBtnShowed={true}
+          isRightBtnShowed={error === null}
+          viewPreviousInput={viewPreviousInput}
+          viewNextInput={handleSubmitNewCardInfo}
+          progress={'5/5'}
+        />
       </div>
     );
   }
@@ -169,11 +165,5 @@ const Style = {
   `,
   Title: styled.span`
     color: #2f2f2f;
-  `,
-  ErrorMessage: styled.span`
-    width: 318px;
-
-    color: red;
-    font-size: 12px;
   `,
 };

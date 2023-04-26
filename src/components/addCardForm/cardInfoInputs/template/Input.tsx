@@ -27,3 +27,14 @@ export const Input = styled.input`
     margin: 0;
   }
 `;
+
+export const ErrorMessage = styled.div`
+  width: 318px;
+  height: 25px;
+
+  display: flex;
+  align-items: center;
+
+  color: red;
+  font-size: 12px;
+`;

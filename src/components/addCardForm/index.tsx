@@ -54,6 +54,18 @@ export const AddNewCardForm = () => {
     setInputOrder((current) => current - 1);
   }, []);
 
+  const handleSubmitNewCardInfo = () => {
+    addNewCard({
+      cardNumber,
+      expirationDate,
+      ownerName,
+      securityCode,
+      password,
+    });
+
+    navigate('/');
+  };
+
   return (
     <Style.Wrapper
       onSubmit={(e) => {
@@ -122,9 +134,9 @@ export const AddNewCardForm = () => {
             ref={passwordInputRefs}
             password={password}
             setPassword={setPassword}
-            setIsInputFinish={setIsInputFinish}
             focusPasswordInputByIndex={focusPasswordInputByIndex}
             viewPreviousInput={viewPreviousInput}
+            handleSubmitNewCardInfo={handleSubmitNewCardInfo}
           />
         )}
       </Style.InputContainer>

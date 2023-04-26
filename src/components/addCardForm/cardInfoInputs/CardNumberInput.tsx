@@ -1,8 +1,9 @@
-import React, { useEffect, forwardRef, Fragment } from 'react';
+import React, { forwardRef, Fragment } from 'react';
 import { InputWrapper } from './template/InputWrapper';
-import { Input } from './template/Input';
+import { ErrorMessage, Input } from './template/Input';
 import styled from 'styled-components';
 import { useError } from '../../../hooks/useError';
+import { MoveInput } from '../MoveInput';
 
 interface Props {
   cardNumber: string[];
@@ -62,10 +63,6 @@ export const CardNumberInput = forwardRef<HTMLInputElement[], Props>(
       }
     };
 
-    useEffect(() => {
-      if (error === null) viewNextInput();
-    }, [error, viewNextInput]);
-
     return (
       <div>
         <Style.Label>
@@ -108,7 +105,13 @@ export const CardNumberInput = forwardRef<HTMLInputElement[], Props>(
             );
           })}
         </InputWrapper>
-        <Style.ErrorMessage>{error ?? ''}</Style.ErrorMessage>
+        <ErrorMessage>{error ?? ''}</ErrorMessage>
+        <MoveInput
+          isLeftBtnShowed={false}
+          isRightBtnShowed={error === null}
+          viewNextInput={viewNextInput}
+          progress={'1/5'}
+        />
       </div>
     );
   }
@@ -127,13 +130,4 @@ const Style = {
     color: #2f2f2f;
   `,
   Hyphen: styled.span``,
-  ErrorMessage: styled.span`
-    width: 318px;
-
-    display: flex;
-    justify-content: flex-end;
-
-    color: red;
-    font-size: 12px;
-  `,
 };

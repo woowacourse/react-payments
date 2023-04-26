@@ -1,8 +1,9 @@
 import { forwardRef, useEffect } from 'react';
 import { InputWrapper } from './template/InputWrapper';
-import { Input } from './template/Input';
+import { ErrorMessage, Input } from './template/Input';
 import styled from 'styled-components';
 import { useError } from '../../../hooks/useError';
+import { MoveInput } from '../MoveInput';
 
 interface Props {
   securityCode: string;
@@ -38,10 +39,6 @@ export const SecurityCodeInput = forwardRef<HTMLInputElement[], Props>(
       if (e.key === 'Backspace' && e.target.value === '') viewPreviousInput();
     };
 
-    useEffect(() => {
-      if (error === null) viewNextInput();
-    }, [error, viewNextInput]);
-
     return (
       <div>
         <Style.Label>
@@ -68,7 +65,14 @@ export const SecurityCodeInput = forwardRef<HTMLInputElement[], Props>(
             required
           />
         </InputWrapper>
-        <Style.ErrorMessage>{error ?? ''}</Style.ErrorMessage>
+        <ErrorMessage>{error ?? ''}</ErrorMessage>
+        <MoveInput
+          isLeftBtnShowed={true}
+          isRightBtnShowed={error === null}
+          viewNextInput={viewNextInput}
+          viewPreviousInput={viewPreviousInput}
+          progress={'4/5'}
+        />
       </div>
     );
   }
@@ -85,11 +89,5 @@ const Style = {
   `,
   Title: styled.span`
     color: #2f2f2f;
-  `,
-  ErrorMessage: styled.span`
-    width: 318px;
-
-    color: red;
-    font-size: 12px;
   `,
 };

@@ -17,7 +17,7 @@ export const Password = () => {
 
   return (
     <PasswordInput
-      setIsInputFinish={() => {}}
+      handleSubmitNewCardInfo={() => {}}
       password={password}
       setPassword={setPassword}
       focusPasswordInputByIndex={(index: number) => {}}

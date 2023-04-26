@@ -1,8 +1,9 @@
 import { forwardRef, useEffect } from 'react';
 import { InputWrapper } from './template/InputWrapper';
-import { Input } from './template/Input';
+import { ErrorMessage, Input } from './template/Input';
 import styled from 'styled-components';
 import { useError } from '../../../hooks/useError';
+import { MoveInput } from '../MoveInput';
 
 interface Props {
   expirationDate: {
@@ -65,7 +66,7 @@ export const ExpirationDateInput = forwardRef<HTMLInputElement[], Props>(
 
       setExpirationDate({
         ...expirationDate,
-        [inputTarget]: e.target.value,
+        [inputTarget]: e.target.value.slice(0, 2),
       });
 
       if (e.target.value.length >= 2)
@@ -80,12 +81,8 @@ export const ExpirationDateInput = forwardRef<HTMLInputElement[], Props>(
       if (index === undefined) return;
 
       if (e.key === 'Backspace' && e.target.value === '')
-        focusNextExpirationDateInput(Number(index) - 1, viewPreviousInput);
+        focusNextExpirationDateInput(Number(index) - 1);
     };
-
-    useEffect(() => {
-      if (error === null) viewNextInput();
-    }, [error, viewNextInput]);
 
     return (
       <div>
@@ -108,6 +105,7 @@ export const ExpirationDateInput = forwardRef<HTMLInputElement[], Props>(
             inputMode="numeric"
             placeholder="MM"
             data-index="0"
+            maxLength={2}
             onChange={handleChangeInput}
             onKeyDown={handleBackspacePress}
             onBlur={(e) => {
@@ -134,11 +132,19 @@ export const ExpirationDateInput = forwardRef<HTMLInputElement[], Props>(
             inputMode="numeric"
             placeholder="YY"
             data-index="1"
+            maxLength={2}
             onChange={handleChangeInput}
             onKeyDown={handleBackspacePress}
           />
         </InputWrapper>
-        <Style.ErrorMessage>{error ?? ''}</Style.ErrorMessage>
+        <ErrorMessage>{error ?? ''}</ErrorMessage>
+        <MoveInput
+          isLeftBtnShowed={true}
+          isRightBtnShowed={error === null}
+          viewNextInput={viewNextInput}
+          viewPreviousInput={viewPreviousInput}
+          progress={'2/5'}
+        />
       </div>
     );
   }
@@ -155,14 +161,5 @@ const Style = {
   `,
   Title: styled.span`
     color: #2f2f2f;
-  `,
-  ErrorMessage: styled.span`
-    width: 160px;
-
-    display: flex;
-    justify-content: flex-start;
-
-    color: red;
-    font-size: 12px;
   `,
 };
