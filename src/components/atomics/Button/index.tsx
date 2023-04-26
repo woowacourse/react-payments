@@ -1,11 +1,15 @@
 import React from 'react';
 
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 /* type */
 interface ButtonStyleProps {
   type: 'button' | 'submit';
-  kind: 'next' | 'previous' | 'register';
+  width?: string;
+  height?: string;
+  bgColor?: string;
+  borderRadius?: string;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 interface ButtonProps extends ButtonStyleProps {
@@ -13,9 +17,9 @@ interface ButtonProps extends ButtonStyleProps {
 }
 
 /* component */
-const Button: React.FC<ButtonProps> = ({ children, type, kind }) => {
+const Button: React.FC<ButtonProps> = ({ children, type, ...rest }) => {
   return (
-    <StyledButton type={type} kind={kind}>
+    <StyledButton type={type} {...rest}>
       {children}
     </StyledButton>
   );
@@ -26,44 +30,16 @@ const StyledButton = styled.button<ButtonStyleProps>`
   border: none;
   outline: none;
   cursor: pointer;
+  color: #000;
 
-  ${(props) => {
-    return (
-      props.kind === 'previous' &&
-      css`
-        width: 20px;
-        height: 20px;
-      `
-    );
-  }}
+  width: 50%;
+  height: 20px;
+  background-color: #fff;
 
-  ${(props) => {
-    return (
-      props.kind === 'next' &&
-      css`
-        width: 50px;
-        height: 30px;
-        font-weight: 700;
-        font-size: 14px;
-        color: #000;
-        line-height: 16px;
-      `
-    );
-  }}
-  
-  ${(props) => {
-    return (
-      props.kind === 'register' &&
-      css`
-        width: 212px;
-        height: 124px;
-        background: #e5e5e5;
-        border-radius: 5px;
-        font-size: 30px;
-        color: #575757;
-      `
-    );
-  }}
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  background-color: ${(props) => props.bgColor};
+  border-radius: ${(props) => props.borderRadius};
 `;
 
 export default Button;
