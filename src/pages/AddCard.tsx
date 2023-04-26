@@ -6,7 +6,7 @@ import CardOwnerName from '../components/CardOwnerName/CardOwnerName';
 import SecurityCode from '../components/SecurityCode/SecurityCode';
 import CardPassword from '../components/CardPassword/CardPassword';
 import Card from '../components/Card/Card';
-import Header from '../components/Header/Header';
+import Layout from '../components/Layout/Layout';
 import BottomSheet from '../components/BottomSheet/BottomSheet';
 import {
   useAddCard,
@@ -58,42 +58,43 @@ const AddCard = ({ handleSetCards }: SetCardsProps) => {
 
   return (
     <>
-      <Header page="add-card" />
-      <form
-        onSubmit={() => {
-          handleSetCards(cardNumbers, expiredDate, cardOwnerName);
-          navigate('/');
-        }}
-      >
-        <Wrapper>
-          <Card
+      <Layout>
+        <form
+          onSubmit={() => {
+            handleSetCards(cardNumbers, expiredDate, cardOwnerName);
+            navigate('/');
+          }}
+        >
+          <Wrapper>
+            <Card
+              cardNumbers={cardNumbers}
+              expiredDate={expiredDate}
+              cardOwnerName={cardOwnerName}
+            />
+          </Wrapper>
+          <CardNumbers
             cardNumbers={cardNumbers}
-            expiredDate={expiredDate}
-            cardOwnerName={cardOwnerName}
+            checkCardNumbers={checkCardNumbers}
           />
-        </Wrapper>
-        <CardNumbers
-          cardNumbers={cardNumbers}
-          checkCardNumbers={checkCardNumbers}
-        />
-        <ExpiredDate
-          expiredDate={expiredDate}
-          checkExpiredDate={checkExpiredDate}
-          validateDate={validateDate}
-        />
-        <CardOwnerName
-          cardOwnerName={cardOwnerName}
-          checkCardOwnerName={checkCardOwnerName}
-        />
-        <SecurityCode
-          securityCode={securityCode}
-          checkSecurityCode={checkSecurityCode}
-        />
-        <CardPassword password={password} checkPassword={checkPassword} />
-        <ButtonWrapper>
-          <NextButton disabled={disabled}>다음</NextButton>
-        </ButtonWrapper>
-      </form>
+          <ExpiredDate
+            expiredDate={expiredDate}
+            checkExpiredDate={checkExpiredDate}
+            validateDate={validateDate}
+          />
+          <CardOwnerName
+            cardOwnerName={cardOwnerName}
+            checkCardOwnerName={checkCardOwnerName}
+          />
+          <SecurityCode
+            securityCode={securityCode}
+            checkSecurityCode={checkSecurityCode}
+          />
+          <CardPassword password={password} checkPassword={checkPassword} />
+          <ButtonWrapper>
+            <NextButton disabled={disabled}>다음</NextButton>
+          </ButtonWrapper>
+        </form>
+      </Layout>
       <BottomSheet />
     </>
   );

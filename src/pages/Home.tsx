@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import AddCardButton from '../components/AddCardButton/AddCardButton';
 import Card from '../components/Card/Card';
+import Layout from '../components/Layout/Layout';
 import { CardType } from '../types/Card';
-import Header from '../components/Header/Header';
 
 const Wrapper = styled.div`
   display: flex;
@@ -20,9 +20,7 @@ const EmptyCardText = styled.p`
 
 const Home = ({ cards }: { cards: CardType[] }) => {
   return (
-    <>
-      <Header page="home" />
-
+    <Layout>
       <Wrapper>
         {cards.length === 0 && (
           <EmptyCardText>새로운 카드를 등록해주세요.</EmptyCardText>
@@ -39,7 +37,7 @@ const Home = ({ cards }: { cards: CardType[] }) => {
         )}
         <AddCardButton></AddCardButton>
       </Wrapper>
-    </>
+    </Layout>
   );
 };
 
