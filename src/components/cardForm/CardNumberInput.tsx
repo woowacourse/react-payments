@@ -53,7 +53,6 @@ export const CardNumberInput = ({
       setCardNumbers(index, value);
 
       if (value.length === 4 && index < 3) {
-        console.log(index);
         allRefs[index + 1].current?.focus();
       }
     };

@@ -8,7 +8,6 @@ import { OwnerInput } from "./OwnerInput";
 import { PasswordInput } from "./PasswordInput";
 import { FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { isInputFilled, isMonthValid, isYearValid } from "../../utils/validate";
 import { useValidation } from "../../hook/useValidation";
 
 interface CardFormProps {
@@ -31,7 +30,6 @@ export const CardForm = ({ setCardInfo }: CardFormProps) => {
   };
 
   const isInputValid = () => {
-    console.log(inputValidity);
     return Object.entries(inputValidity).every(([_, isValid]) => isValid);
   };
 
