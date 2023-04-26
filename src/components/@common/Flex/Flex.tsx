@@ -1,17 +1,16 @@
+import { DOMAttributes } from 'react';
 import styled from 'styled-components';
 
-const Flex = styled.div<{
+interface Flex extends DOMAttributes<HTMLDivElement> {
   width?: string;
   dir?: 'row' | 'column';
-  justify?:
-    | 'start'
-    | 'center'
-    | 'space-between'
-    | 'space-around'
-    | 'space-evenly';
+  justify?: 'start' | 'center' | 'space-between' | 'space-around' | 'space-evenly';
 
   align?: 'stretch' | 'center' | 'start' | 'end';
-}>`
+  scroll?: boolean;
+}
+
+const Flex = styled.div<Flex>`
   display: flex;
   flex-direction: ${({ dir = 'row' }) => dir};
 
@@ -19,7 +18,7 @@ const Flex = styled.div<{
   align-items: ${({ align = 'stretch' }) => align};
 
   width: ${({ width = '100%' }) => width};
-  overflow: scroll;
+  ${({ scroll }) => (scroll ? `overflow: scroll` : 'overflow: hidden')};
 `;
 
 export default Flex;
