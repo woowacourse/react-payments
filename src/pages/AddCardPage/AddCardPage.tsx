@@ -5,7 +5,7 @@ import CardOwnerNameInput from "../../components/CardOwnerNameInput/CardOwnerNam
 import CardExpirationDateInput from "../../components/CardExpirationDateInput/CardExpirationDateInput";
 import CardSecurityCodeInput from "../../components/CardSecurityCodeInput/CardSecurityCodeInput";
 import CardPasswordInput from "../../components/CardPasswordInput/CardPasswordInput";
-import Modal from "../../components/Modal/Modal";
+import Modal from "../../components/common/Modal/Modal";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Container } from "../../components/common";
