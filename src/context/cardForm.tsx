@@ -1,58 +1,65 @@
-import { createContext, useContext, useState } from 'react';
-import useList from '../utils/useList';
 import { CardType } from '../types';
+import { createContext, useContext, useReducer } from 'react';
 
-interface CardFormValues extends Omit<CardType, 'id'> {}
+interface CardForm extends Omit<CardType, 'id'> {}
 
-interface CardFormActions {
-  setCardCompany: (cardCompany: string) => void;
-  setCardNumberIndex: (index: number) => (value: string) => void;
-  setExpireDateIndex: (index: number) => (value: string) => void;
-  setOwnerName: (cardCompany: string) => void;
-  setSecurityCode: (cardCompany: string) => void;
-  setCardPasswordIndex: (index: number) => (value: string) => void;
-  setCardName: (cardCompany: string) => void;
-}
+type CardFormAction =
+  | {
+      type: 'SET_VALUE';
+      key: keyof CardForm;
+      value: string;
+    }
+  | {
+      type: 'SET_LIST_VALUE';
+      key: keyof CardForm;
+      index: number;
+      value: string;
+    }
+  | {
+      type: 'INIT';
+    };
 
 interface CardFormProviderProps {
   children: React.ReactNode;
 }
 
-const CardFormContext = createContext<readonly [CardFormValues, CardFormActions] | null>(null);
+const initialCardForm: CardForm = {
+  cardCompany: '',
+  cardNumber: ['', '', '', ''],
+  expireDate: ['', ''],
+  ownerName: '',
+  securityCode: '',
+  cardPassword: ['', ''],
+  cardName: '',
+};
 
-export const useCardForm = (): readonly [CardFormValues, CardFormActions] => {
+const cardFormReducer = (cardForm: CardForm, action: CardFormAction) => {
+  switch (action.type) {
+    case 'SET_VALUE': {
+      return { ...cardForm, [action.key]: action.value };
+    }
+    case 'SET_LIST_VALUE': {
+      const newList = cardForm[action.key].slice() as string[];
+      newList[action.index] = action.value;
+      return { ...cardForm, [action.key]: newList };
+    }
+    case 'INIT': {
+      return initialCardForm;
+    }
+  }
+};
+
+const CardFormContext = createContext<readonly [CardForm, React.Dispatch<CardFormAction>] | null>(null);
+
+export const useCardForm = (): readonly [CardForm, React.Dispatch<CardFormAction>] => {
   const context = useContext(CardFormContext);
   if (context === null) throw new Error('context is null');
   return context;
 };
+
 export const CardFormProvider = ({ children }: CardFormProviderProps) => {
-  const [cardCompany, setCardCompany] = useState('');
-  const [cardNumber, setCardNumberIndex] = useList(['', '', '', '']);
-  const [expireDate, setExpireDateIndex] = useList(['', '']);
-  const [ownerName, setOwnerName] = useState('');
-  const [securityCode, setSecurityCode] = useState('');
-  const [cardPassword, setCardPasswordIndex] = useList(['', '']);
-  const [cardName, setCardName] = useState('');
-
-  const values = {
-    cardCompany,
-    cardNumber,
-    expireDate,
-    ownerName,
-    securityCode,
-    cardPassword,
-    cardName,
-  };
-
-  const actions = {
-    setCardCompany,
-    setCardNumberIndex,
-    setExpireDateIndex,
-    setOwnerName,
-    setSecurityCode,
-    setCardPasswordIndex,
-    setCardName,
-  };
-
-  return <CardFormContext.Provider value={[values, actions] as const}>{children}</CardFormContext.Provider>;
+  const [cardForm, dispatch] = useReducer(cardFormReducer, initialCardForm);
+  return (
+    <CardFormContext.Provider value={[cardForm, dispatch] as const}>{children}</CardFormContext.Provider>
+  );
 };
