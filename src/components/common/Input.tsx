@@ -8,6 +8,7 @@ import {
 } from "react";
 import styled from "styled-components";
 import { InputContext } from "../../contexts/inputContext";
+import { useCheckLength } from "../../hooks/useCheckLength";
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   inputRef: any;
   name: string;
@@ -18,29 +19,29 @@ export function Input(props: PropsWithChildren<InputProps>) {
   const { name, inputRef, asChild = false, children, ...restProps } = props;
   const inputState = useContext(InputContext);
   const { handleChange } = inputState;
-  const childrenArray = Children.toArray(children);
-  const child = childrenArray[0];
+  const childrenList = Children.toArray(children);
 
-  return asChild ? (
-    isValidElement<{ name: string; inputRef: any }>(child) ? (
-      cloneElement(child, {
+  return asChild &&
+    isValidElement<{ name: string; inputRef: any }>(childrenList[0]) ? (
+    <>
+      {cloneElement(childrenList[0], {
         name,
         inputRef,
         onChange: handleChange,
         ...restProps,
-      })
-    ) : (
-      <></>
-    )
+      })}
+    </>
   ) : (
-    <InputUnit
-      onChange={handleChange}
-      name={name}
-      ref={(elem) => {
-        inputRef.current[name] = elem;
-      }}
-      {...restProps}
-    />
+    <>
+      <InputUnit
+        onChange={handleChange}
+        name={name}
+        ref={(elem) => {
+          inputRef.current[name] = elem;
+        }}
+        {...restProps}
+      />
+    </>
   );
 }
 
@@ -56,4 +57,9 @@ const InputUnit = styled.input`
 
   text-align: center;
   outline: none;
+`;
+
+const ErrorMessage = styled.strong`
+  ${({ theme }) => theme.fonts.label};
+  color: ${({ theme }) => theme.colors.error};
 `;
