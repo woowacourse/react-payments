@@ -52,6 +52,7 @@
     "@storybook/addon-interactions": "^7.0.5",
     "@storybook/addon-links": "^7.0.5",
     "@storybook/blocks": "^7.0.5",
+    "@storybook/jest": "^0.1.0",
     "@storybook/preset-create-react-app": "^7.0.5",
     "@storybook/react": "^7.0.5",
     "@storybook/react-webpack5": "^7.0.5",
@@ -64,6 +65,8 @@
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
     "babel-plugin-named-exports-order": "^0.0.2",
+    "i": "^0.3.7",
+    "npm": "^9.6.5",
     "prop-types": "^15.8.1",
     "storybook": "^7.0.5",
     "webpack": "^5.79.0"
