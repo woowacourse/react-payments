@@ -41,7 +41,7 @@ function CardExpirationDate({
   return (
     <InputContainer
       supportingText={{
-        error: '카드에 표시된 만료일을 (MM/YY) 순서로 동일하게 입력해주세요',
+        error: '카드에 표시된 유효한 만료일을 (MM/YY) 순서로 동일하게 입력해주세요',
       }}
       isError={isError}
     >

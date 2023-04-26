@@ -38,7 +38,7 @@ function CardSecurityCode({
   return (
     <InputContainer
       supportingText={{
-        default: '카드 뒷면의 CVC 번호 3자리 숫자를 입력해주세요',
+        default: '카드 뒷면의 CVC/CVV 번호 3자리 또는 4자리 숫자를 입력해주세요',
         error: '카드에 표시된 CVC/CVV 번호와 동일하게 입력해주세요',
       }}
       isError={isError}

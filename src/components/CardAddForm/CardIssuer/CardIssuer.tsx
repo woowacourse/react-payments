@@ -57,7 +57,13 @@ function CardIssuer({
   };
 
   return (
-    <InputContainer className={styles.container}>
+    <InputContainer
+      className={styles.container}
+      supportingText={{
+        error: '카드에 표시된 카드사를 선택해주세요',
+      }}
+      isError={isError}
+    >
       <Label htmlFor="issuer" required>
         카드사
       </Label>
