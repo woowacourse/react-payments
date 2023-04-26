@@ -1,64 +1,60 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Card } from '../../../store/type';
 import Message from '../../atomics/Message';
 import { SBetweenStack } from '../../layout/flexbox';
 
-const CardItem: React.FC = () => {
+type CardItemProps = {
+  card: Omit<Card, 'id'>;
+};
+
+const CardItem: React.FC<CardItemProps> = ({ card }) => {
   return (
     <StyledCardItemBox>
       <StyledCardItemGoldBox />
       <CardNumberWrapper>
-        <MessageBox>
-          <Message
-            fontWeight={500}
-            fontSize="16px"
-            lineHeight="14px"
-            color="#fff"
-            letterSpacing="2.5px"
-          >
-            9999
-          </Message>
-        </MessageBox>
-        <MessageBox>
-          <Message
-            fontWeight={500}
-            fontSize="16px"
-            lineHeight="14px"
-            color="#fff"
-            letterSpacing="2.5px"
-          >
-            1111
-          </Message>
-        </MessageBox>
-        <MessageBox>
-          <Message
-            fontWeight={500}
-            fontSize="16px"
-            lineHeight="14px"
-            color="#fff"
-            letterSpacing="2.5px"
-          >
-            1111
-          </Message>
-        </MessageBox>
-        <MessageBox>
-          <Message
-            fontWeight={500}
-            fontSize="16px"
-            lineHeight="14px"
-            color="#fff"
-            letterSpacing="2.5px"
-          >
-            1111
-          </Message>
-        </MessageBox>
+        {Array(4)
+          .fill(0)
+          .map((_, idx) => {
+            if (idx < 2) {
+              return (
+                <MessageBox
+                  key={idx}
+                  fontWeight={500}
+                  fontSize="14px"
+                  lineHeight="14px"
+                  color="#fff"
+                  letterSpacing="2.5px"
+                >
+                  {card.cardNumbers[idx]}
+                </MessageBox>
+              );
+            } else {
+              return (
+                <MessageBox
+                  key={idx}
+                  fontWeight={500}
+                  fontSize="14px"
+                  lineHeight="14px"
+                  color="#fff"
+                  letterSpacing="2.5px"
+                >
+                  {Array(card.cardNumbers[idx].length)
+                    .fill(0)
+                    .map((_, idx) => (
+                      <Dot key={idx} />
+                    ))}
+                </MessageBox>
+              );
+            }
+          })}
       </CardNumberWrapper>
       <CardInfo>
         <Message fontWeight={500} fontSize="12px" lineHeight="14px" color="#fff">
-          Junseung
+          {card.cardOwner[0]}
         </Message>
         <Message fontWeight={500} fontSize="12px" lineHeight="14px" color="#fff">
-          04 / 23
+          {card.cardExpirationDate[0]} / {card.cardExpirationDate[1]}
         </Message>
       </CardInfo>
     </StyledCardItemBox>
@@ -71,15 +67,14 @@ const StyledCardItemBox = styled.div`
   background-color: #333333;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
-
-  padding: 14px;
+  padding: 12px;
 `;
 
 const StyledCardItemGoldBox = styled.div`
   margin-top: 40px;
 
   width: 40px;
-  height: 28px;
+  height: 24px;
   background-color: #cbba64;
   border-radius: 4px;
 `;
@@ -90,12 +85,12 @@ const CardNumberWrapper = styled.ul`
   margin-left: 4px;
 `;
 
-const MessageBox = styled.li`
+const MessageBox = styled(Message)`
   display: flex;
   justify-content: center;
   align-items: center;
 
-  line-height: 1.6;
+  height: 20px;
 
   width: 36px;
 
@@ -109,7 +104,18 @@ const CardInfo = styled.div`
 
   margin-top: 4px;
   margin-left: 4px;
-  margin-right: 6px;
+`;
+
+const Dot = styled.span`
+  display: inline-block;
+  background-color: #fff;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+
+  & + & {
+    margin-left: 4px;
+  }
 `;
 
 export default CardItem;
