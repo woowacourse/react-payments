@@ -4,6 +4,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 import PageTemplate from '../template/PageTemplate';
+import Modal from '../template/Modal';
 import CardNumberInput from '../box/inputSection/CardNumberInput';
 import ExpireDateInput from '../box/inputSection/ExpireDateInput';
 import OwnerNameInput from '../box/inputSection/OwnerNameInput';
@@ -21,6 +22,7 @@ interface Props {
 }
 
 const CardRegisterPage = ({ navigate }: Props) => {
+  const [cardCompany, setCardCompany] = useState('');
   const [cardNumber, setCardNumberIndex] = useList(['', '', '', '']);
   const [expireDate, setExpireDateIndex] = useList(['', '']);
   const [ownerName, setOwnerName] = useState('');
@@ -28,30 +30,47 @@ const CardRegisterPage = ({ navigate }: Props) => {
   const [cardPassword, setCardPasswordIndex] = useList(['', '']);
 
   const [insert, focus] = useFocusRef();
+  const [isModalOpen, setIsModalOpen] = useState(true);
 
   const submitNewCard = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const newCard: CardType = {
       id: Date.now(),
+      cardCompany,
       cardNumber,
       expireDate,
       ownerName,
       securityCode,
       cardPassword,
+      cardName: '',
     };
 
     pushList(LOCAL_STORAGE_KEY.cardList, newCard);
-    navigate(Page.list);
+    navigate(Page.name);
   };
 
   const onClickBack = () => {
     navigate(Page.list);
   };
 
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <PageTemplate title="카드 추가" onClickBack={onClickBack}>
-      <Card cardNumber={cardNumber} ownerName={ownerName} expireDate={expireDate} />
+      <Card
+        cardCompany={cardCompany}
+        cardNumber={cardNumber}
+        ownerName={ownerName}
+        expireDate={expireDate}
+        onClick={openModal}
+      />
       <InputForm onSubmit={submitNewCard}>
         <CardNumberInput
           cardNumber={cardNumber}
@@ -82,6 +101,7 @@ const CardRegisterPage = ({ navigate }: Props) => {
           <SubmitButton type="submit">다음</SubmitButton>
         </ButtonWrapper>
       </InputForm>
+      {isModalOpen && <Modal closeModal={closeModal} setCardCompany={setCardCompany} />}
     </PageTemplate>
   );
 };
@@ -89,27 +109,35 @@ const CardRegisterPage = ({ navigate }: Props) => {
 export default CardRegisterPage;
 
 const InputForm = styled.form`
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
-  margin-top: 28px;
+  width: 100%;
+  height: 100%;
+  margin-top: 38px;
 `;
 
 const ButtonWrapper = styled.div`
-  width: 100%;
   display: flex;
   justify-content: flex-end;
+
+  width: 100%;
 `;
 
 const SubmitButton = styled.button`
-  font-weight: 700;
-  font-size: 14px;
+  cursor: pointer;
+
   display: flex;
   align-items: center;
-  text-align: right;
-  color: #000000;
-  background-color: transparent;
-  border: none;
-  height: 34px;
 
-  cursor: pointer;
+  height: 34px;
+  border: none;
+
+  background-color: transparent;
+
+  text-align: right;
+  font-weight: 700;
+  font-size: 14px;
+  color: #000000;
 `;
