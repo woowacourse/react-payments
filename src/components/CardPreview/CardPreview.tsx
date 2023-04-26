@@ -13,13 +13,14 @@ type CardPreviewProps = {
 const CardPreview = ({ card, onClick }: CardPreviewProps) => {
   const { cardNumber, ownerName, expirationDate, cardCompany } = card;
 
+  const signatureColor = CARD_COMPANIES[cardCompany].signatureColor;
   const companyKoreanName = CARD_COMPANIES[cardCompany].koreanName;
   const ownerNameText = ownerName ? ownerName : "NAME";
   const expirationMonthText = expirationDate.month ? expirationDate.month : "MM";
   const expirationYearText = expirationDate.year ? expirationDate.year : "YY";
 
   return (
-    <CardLayout onClick={onClick}>
+    <CardLayout onClick={onClick} cardColor={signatureColor}>
       <CardCompany>{companyKoreanName}</CardCompany>
       <ICChip src={ICChipIcon} />
       <NumberContainer>
@@ -40,7 +41,7 @@ const CardPreview = ({ card, onClick }: CardPreviewProps) => {
 
 export default CardPreview;
 
-const CardLayout = styled.li`
+const CardLayout = styled.li<{ cardColor: string }>`
   position: relative;
 
   display: flex;
@@ -48,7 +49,7 @@ const CardLayout = styled.li`
   justify-content: flex-end;
   gap: 4px;
 
-  background-color: #333333;
+  background-color: ${(props) => props.cardColor};
 
   width: 213px;
   min-height: 133px;
