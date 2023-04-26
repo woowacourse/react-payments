@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Root = styled.main`
   position: relative;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   padding-top: 45px;
 
   display: flex;
