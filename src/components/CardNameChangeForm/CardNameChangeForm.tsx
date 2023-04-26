@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { CARD_NAME_INPUT_MAX_LENGTH } from '../../constants';
 import InputContainer from '../common/InputContainer/InputContainer';
 import Input from '../common/Input/Input';
 import Button from '../common/Button/Button';
@@ -26,7 +27,7 @@ function CardNameChange({ id, defaultCardName }: CardNameChangeProps) {
           variant="underline"
           placeholder="카드 별칭을 입력해주세요"
           autoFocus
-          maxLength={20}
+          maxLength={CARD_NAME_INPUT_MAX_LENGTH}
         />
       </InputContainer>
       <Button variant="primary" className="complete-button mg-t-48 center-hoz-item w-250">
