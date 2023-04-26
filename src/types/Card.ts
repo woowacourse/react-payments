@@ -3,6 +3,7 @@ export interface CardItemInfo {
   cardNumber: string[];
   expirationDate: string[];
   name: string;
+  bankName: string;
 }
 
 export interface Card extends CardItemInfo {

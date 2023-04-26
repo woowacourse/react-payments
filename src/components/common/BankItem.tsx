@@ -1,17 +1,15 @@
 import styled from 'styled-components';
-import { CARD_COLOR, CONVERT_BANK_NAME } from '../../utils/Constants';
+import { CONVERT_BANK_NAME } from '../../utils/Constants';
 
 interface BankItemProps {
   bankName: string;
   onClose: () => void;
-  onBankInfoChanged: (cardColor: string, bankName: string) => void;
+  onBankInfoChanged: (bankName: string) => void;
 }
 
 const BankItem = ({ bankName, onClose, onBankInfoChanged }: BankItemProps) => {
-  const cardColor = CARD_COLOR[bankName];
-
   const handleBankName = () => {
-    onBankInfoChanged(cardColor, bankName);
+    onBankInfoChanged(bankName);
     onClose();
   };
 

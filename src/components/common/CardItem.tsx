@@ -1,20 +1,21 @@
 import styled from 'styled-components';
+import { CARD_COLOR } from '../../utils/Constants';
 import type { CardItemInfo } from '../../types/Card';
 
 interface CardItemProps {
   card: CardItemInfo;
-  cardColor: string;
-  bankName: string;
   onOpen: () => void;
 }
 
-const CardItem = ({ card, cardColor, bankName, onOpen }: CardItemProps) => {
+const CardItem = ({ card, onOpen }: CardItemProps) => {
+  const cardColor = CARD_COLOR[card.bankName];
+
   return (
     <CardItemContainer cardColor={cardColor}>
-      <BankChangeBtn onClick={onOpen}>{bankName}</BankChangeBtn>
-      <ICChip />
       {card && (
         <>
+          <BankChangeBtn onClick={onOpen}>{card.bankName}</BankChangeBtn>
+          <ICChip />
           <CardNumberContainer>
             <p>{card.cardNumber[0]}</p>
             <p>{card.cardNumber[1]}</p>

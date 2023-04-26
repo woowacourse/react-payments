@@ -5,7 +5,7 @@ import { CONVERT_BANK_NAME } from '../../utils/Constants';
 
 interface BankListProps {
   onClose: () => void;
-  onBankInfoChanged: (cardColor: string, bankName: string) => void;
+  onBankInfoChanged: (bankName: string) => void;
 }
 
 const BankList = ({ onClose, onBankInfoChanged }: BankListProps) => {

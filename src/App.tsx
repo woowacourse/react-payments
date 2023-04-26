@@ -10,7 +10,6 @@ import type { CardItemInfo } from './types/Card';
 
 function App() {
   const [cardList, setCardList] = useState<CardItemInfo[]>([]);
-  const [cardColor, setCardColor] = useState('');
   const [bankName, setBankName] = useState('카드사를 선택해주세요');
 
   const addCardItem = (cardItem: CardItemInfo) => {
@@ -20,8 +19,7 @@ function App() {
   const { isBottomSheetOpen, handleBottomSheetOpen, handleBottomSheetClose } =
     useBottomSheet();
 
-  const onBankInfoChanged = (cardColor: string, bankName: string) => {
-    setCardColor(cardColor);
+  const onBankInfoChanged = (bankName: string) => {
     setBankName(bankName);
   };
 
@@ -35,8 +33,6 @@ function App() {
               <CardListPage
                 cardList={cardList}
                 onOpen={handleBottomSheetOpen}
-                cardColor={cardColor}
-                bankName={bankName}
               />
             }
           />
@@ -46,7 +42,6 @@ function App() {
               <CardRegistrationPage
                 addCardItem={addCardItem}
                 onOpen={handleBottomSheetOpen}
-                cardColor={cardColor}
                 bankName={bankName}
               />
             }

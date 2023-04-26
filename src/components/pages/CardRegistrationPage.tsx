@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from '../common/Header';
@@ -8,14 +8,12 @@ import { LeftArrowIcon } from '../../assets/icons';
 import type { CardItemInfo } from '../../types/Card';
 
 interface CardRegistrationPageProps {
-  cardColor: string;
   bankName: string;
   addCardItem: (cardItem: CardItemInfo) => void;
   onOpen: () => void;
 }
 
 const CardRegistrationPage = ({
-  cardColor,
   bankName,
   addCardItem,
   onOpen,
@@ -25,6 +23,7 @@ const CardRegistrationPage = ({
     cardNumber: ['', '', '', ''],
     expirationDate: ['', ''],
     name: '',
+    bankName: '',
   });
 
   const handleChangeForm = (
@@ -34,9 +33,10 @@ const CardRegistrationPage = ({
   ) => {
     const updatedCard = {
       id: Date.now(),
-      cardNumber: cardNumber,
-      expirationDate: expirationDate,
-      name: name,
+      cardNumber,
+      expirationDate,
+      name,
+      bankName,
     };
     setCardItem(updatedCard);
   };
@@ -45,16 +45,18 @@ const CardRegistrationPage = ({
     addCardItem(cardItem);
   };
 
+  useEffect(() => {
+    setCardItem((prevState) => ({
+      ...prevState,
+      bankName,
+    }));
+  }, [bankName]);
+
   return (
     <>
       <Header title='카드추가' leading={<BackButton />} />
       <CardItemContainer>
-        <CardItem
-          card={cardItem}
-          cardColor={cardColor}
-          bankName={bankName}
-          onOpen={onOpen}
-        />
+        <CardItem card={cardItem} onOpen={onOpen} />
       </CardItemContainer>
       <BankChangeGuide>
         은행사 변경을 원하시면 위 카드의 은행사 이름을 눌러주세요

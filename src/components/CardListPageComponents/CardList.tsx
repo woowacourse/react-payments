@@ -4,22 +4,14 @@ import type { CardItemInfo } from '../../types/Card';
 
 interface CardListProps {
   cardList: CardItemInfo[];
-  cardColor: string;
-  bankName: string;
   onOpen: () => void;
 }
 
-const CardList = ({ cardList, cardColor, bankName, onOpen }: CardListProps) => {
+const CardList = ({ cardList, onOpen }: CardListProps) => {
   return (
     <CardListContainer>
       {cardList.map((card, id) => (
-        <CardItem
-          card={card}
-          key={id}
-          cardColor={cardColor}
-          bankName={bankName}
-          onOpen={onOpen}
-        />
+        <CardItem card={card} key={id} onOpen={onOpen} />
       ))}
     </CardListContainer>
   );
