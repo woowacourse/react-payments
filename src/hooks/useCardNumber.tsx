@@ -1,12 +1,17 @@
 import React, { useState } from "react";
+import { toOnlyNumber, toHiddenNumber } from "../util/replace";
+import { LENGTH, STRING } from "../abstract/constants";
 
 function useCardNumber() {
   const [cardNumberOrigin, setCardNumberOrigin] = useState("");
   const [cardNumberHidden, setCardNumberHidden] = useState("");
 
   const changeCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const cardNumber = e.target.value.replace(/[^\d•]/g, "").slice(0, 16);
-    const realNumber = cardNumber.replace(/[^\d]/g, "");
+    const cardNumber = toHiddenNumber(e.target.value).slice(
+      LENGTH.ZERO,
+      LENGTH.CARD
+    );
+    const realNumber = toOnlyNumber(cardNumber);
 
     const hiddenNumber = changeHidden(realNumber, cardNumber.length);
     setCardNumberHidden(hiddenNumber);
@@ -21,27 +26,32 @@ function useCardNumber() {
   };
 
   const deleteNumber = (realNumber: string) => {
-    if (cardNumberOrigin.length <= 8) return realNumber;
+    if (cardNumberOrigin.length <= LENGTH.CARD_BOUNDARY) return realNumber;
 
-    if (realNumber !== cardNumberOrigin.slice(0, 8))
-      return realNumber + cardNumberOrigin.slice(8, 16);
+    if (
+      realNumber !== cardNumberOrigin.slice(LENGTH.ZERO, LENGTH.CARD_BOUNDARY)
+    )
+      return (
+        realNumber + cardNumberOrigin.slice(LENGTH.CARD_BOUNDARY, LENGTH.CARD)
+      );
 
-    return cardNumberOrigin.slice(0, -1);
+    return cardNumberOrigin.slice(LENGTH.ZERO, -1);
   };
 
   const changeHidden = (realNumber: string, length: number) => {
     const frontNumber =
-      realNumber !== cardNumberOrigin.slice(0, 8)
-        ? realNumber + cardNumberOrigin.slice(8, 16)
+      realNumber !== cardNumberOrigin.slice(LENGTH.ZERO, LENGTH.CARD_BOUNDARY)
+        ? realNumber + cardNumberOrigin.slice(LENGTH.CARD_BOUNDARY, LENGTH.CARD)
         : realNumber;
 
     const hiddenNumber =
-      length > 8
-        ? frontNumber.slice(0, 8) + "•".repeat(length - 8)
+      length > LENGTH.CARD_BOUNDARY
+        ? frontNumber.slice(LENGTH.ZERO, LENGTH.CARD_BOUNDARY) +
+          "•".repeat(length - LENGTH.CARD_BOUNDARY)
         : frontNumber;
 
     const showNumber = hiddenNumber.match(/.{1,4}/g);
-    return showNumber ? showNumber.join("-") : "";
+    return showNumber ? showNumber.join(STRING.DASH) : "";
   };
 
   return {
