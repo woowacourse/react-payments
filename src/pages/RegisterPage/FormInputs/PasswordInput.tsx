@@ -2,7 +2,7 @@ import { useFocus } from "hooks/useFocus";
 import { ChangeEvent, Dispatch, SetStateAction, Fragment } from "react";
 import styled from "styled-components";
 import { changeInvalidValueToBlank } from "utils/inputValidator";
-import Input from "components/Input";
+import Input, { PasswordInputStyle } from "components/Input";
 import { PasswordCaption } from "components/CaptionStyle";
 import { PasswordInputBox } from "components/InputBoxStyle";
 import {
@@ -51,9 +51,6 @@ const PasswordInput = ({ password, setPassword }: Props) => {
           <Fragment key={index}>
             {index < PASSWORD_PART ? (
               <Input
-                width="12%"
-                margin="0 2.2% 0 0"
-                borderRadius="8px"
                 type="password"
                 name={`password${index + 1}`}
                 id={index ? undefined : "password-label"}
@@ -63,6 +60,7 @@ const PasswordInput = ({ password, setPassword }: Props) => {
                 value={password[`password${index + 1}`]}
                 placeholder="0"
                 required
+                inputStyle={PasswordInputStyle}
                 onChange={handlePasswordChange}
                 ref={(el) => handleRef(el, index)}
               />

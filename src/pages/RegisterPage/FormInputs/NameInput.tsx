@@ -2,7 +2,7 @@ import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
 import { changeInvalidValueToBlank } from "utils/inputValidator";
 import { LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
-import Input from "components/Input";
+import Input, { NameInputStyle } from "components/Input";
 const { ONLY_ENGLISH, INVALID_BLANK } = VALID_INPUT;
 
 interface Props {
@@ -34,18 +34,14 @@ const NameInput = ({ name, setName }: Props) => {
         </p>
       </S.Wrapper>
       <Input
-        display="block"
-        width="100%"
-        margin="10px 0 36px"
-        padding="0 8%"
-        borderRadius="8px"
         type="text"
         name="name"
         id="name"
         maxLength={LIMIT_LENGTH.NAME}
         value={name}
-        onChange={handleNameChange}
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+        inputStyle={NameInputStyle}
+        onChange={handleNameChange}
       />
     </>
   );

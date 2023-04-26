@@ -1,7 +1,7 @@
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
 import { changeInvalidValueToBlank } from "utils/inputValidator";
-import Input from "components/Input";
+import Input, { SecurityCodeInputStyle } from "components/Input";
 import { CodeCaption } from "components/CaptionStyle";
 import { LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
 const { ONLY_NUMBER } = VALID_INPUT;
@@ -28,20 +28,16 @@ const SecurityCodeInput = ({ code, setCode }: Props) => {
       </label>
       <S.Wrapper>
         <Input
-          display="block"
-          width="24%"
-          margin="0"
-          padding="0 4%"
-          borderRadius="8px"
           type="password"
           name="code"
           id="code"
           maxLength={LIMIT_LENGTH.SECURITY_CODE}
           inputMode="numeric"
           value={code}
-          onChange={handleCodeChange}
           placeholder="000"
           required
+          inputStyle={SecurityCodeInputStyle}
+          onChange={handleCodeChange}
         />
         <S.QuestionMark>?</S.QuestionMark>
       </S.Wrapper>

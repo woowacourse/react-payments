@@ -2,7 +2,7 @@ import { useFocus } from "hooks/useFocus";
 import { ChangeEvent, Dispatch, SetStateAction, Fragment } from "react";
 import { changeInvalidValueToBlank } from "utils/inputValidator";
 import styled from "styled-components";
-import Input from "components/Input";
+import Input, { CommonInputStyle } from "components/Input";
 import { Hyphen } from "components/DelimiterStyle";
 import { CardNumberCaption } from "components/CaptionStyle";
 import { CardNumberInputBox } from "components/InputBoxStyle";
@@ -53,6 +53,7 @@ const CardNumberInput = ({ cardNumber, setCardNumber }: Props) => {
               placeholder="0000"
               autoFocus={index ? false : true}
               required
+              inputStyle={CommonInputStyle}
               onChange={handleCardNumberChange}
               ref={(el) => handleRef(el, index)}
             />

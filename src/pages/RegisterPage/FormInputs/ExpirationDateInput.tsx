@@ -1,7 +1,7 @@
 import { useFocus } from "hooks/useFocus";
 import { ChangeEvent, Dispatch, SetStateAction, Fragment } from "react";
 import { changeInvalidValueToBlank } from "utils/inputValidator";
-import Input from "components/Input";
+import Input, { CommonInputStyle } from "components/Input";
 import { Slash } from "components/DelimiterStyle";
 import { DateCaption } from "components/CaptionStyle";
 import { DateInputBox } from "components/InputBoxStyle";
@@ -52,6 +52,7 @@ const ExpirationDateInput = ({ date, setDate }: Props) => {
               value={index ? date.year : date.month}
               placeholder={index ? "YY" : "MM"}
               required
+              inputStyle={CommonInputStyle}
               onChange={handleDateChange}
               ref={(el) => handleRef(el, index)}
             />
