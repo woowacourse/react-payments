@@ -1,8 +1,8 @@
 import { Outlet } from 'react-router';
 import styled, { ThemeProvider } from 'styled-components';
-import { PaymentsProvider } from '../context/PaymentsContext';
-import { ResetStyle } from '../styles/ResetStyle';
-import { theme } from '../styles/theme';
+import { PaymentsProvider } from './context/PaymentsContext';
+import { ResetStyle } from './styles/ResetStyle';
+import { theme } from './styles/theme';
 
 const Container = styled.div`
   display: flex;
