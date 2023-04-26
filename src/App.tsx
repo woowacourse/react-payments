@@ -1,20 +1,25 @@
-import MyCard from "./pages/MyCard";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import AddCard from "./pages/AddCard";
+import MyCard from './pages/MyCard';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import AddCard from './pages/AddCard';
+import ModalContextProvider from './store/modalContext';
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <MyCard />,
   },
   {
-    path: "/AddCard",
+    path: '/AddCard',
     element: <AddCard />,
   },
 ]);
 
 const App = () => {
-  return <RouterProvider router={router} />;
+  return (
+    <ModalContextProvider>
+      <RouterProvider router={router} />;
+    </ModalContextProvider>
+  );
 };
 
 export default App;
