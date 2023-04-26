@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import { Card } from './types';
 
-type Props = {
+export type CreditCardProps = {
   card: Card;
 };
 
-export function CreditCard({ card }: Props) {
+export function CreditCard({ card }: CreditCardProps) {
   return (
     <Styled.Wrapper>
       <Styled.Chip />

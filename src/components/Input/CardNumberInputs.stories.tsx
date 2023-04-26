@@ -1,12 +1,20 @@
-import { StoryFn } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import { CardNumberInputs } from './CardNumberInputs';
 
-export default {
-  title: 'CardNumberInputs',
+const meta = {
   component: CardNumberInputs,
+  title: 'Section/CardNumbers',
+} satisfies Meta<typeof CardNumberInputs>;
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const CardNumbersStory: Story = {
+  args: {
+    valueAndOnChanges: [
+      {
+        value: '1234',
+      },
+    ],
+  },
 };
-
-const Template: StoryFn<{}> = (args: {}) => <CardNumberInputs valueAndOnChanges={[]} {...args} />;
-
-export const Default = Template.bind({});
-Default.args = {};

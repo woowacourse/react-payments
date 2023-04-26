@@ -9,6 +9,7 @@ export type Password = {
 };
 
 export type Card = {
+  bank: string;
   numbers: string[];
   expirationDate: ExpirationDate;
   name: string;
