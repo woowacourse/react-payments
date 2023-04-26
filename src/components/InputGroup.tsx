@@ -1,4 +1,3 @@
-import { createRef } from 'react';
 import styled, { css } from 'styled-components';
 
 type InputInfo = {
@@ -14,6 +13,8 @@ type InputInfo = {
 
 type InputGroupProps = {
   labelText: string;
+  insert: (element: HTMLElement | null) => void;
+  autofocus: boolean;
   inputInfoList: InputInfo[];
   children?: React.ReactNode;
 };
@@ -23,16 +24,7 @@ interface InputProps extends React.HTMLAttributes<HTMLInputElement> {
   textCenter: boolean;
 }
 
-function InputGroup({ labelText, inputInfoList, children }: InputGroupProps) {
-  const inputRefs = Array(inputInfoList.length)
-    .fill(0)
-    .map(() => createRef<HTMLInputElement>());
-
-  const moveFocus = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.length === e.target.maxLength && Number(index) + 1 < inputRefs.length)
-      inputRefs[Number(index) + 1].current?.focus();
-  };
-
+const InputGroup = ({ labelText, inputInfoList, children, autofocus, insert }: InputGroupProps) => {
   return (
     <StyledInputGroupWrapper>
       <StyledInputLabel>
@@ -58,9 +50,8 @@ function InputGroup({ labelText, inputInfoList, children }: InputGroupProps) {
                   placeholder={placeholder}
                   value={value}
                   textCenter={center}
-                  ref={inputRefs[index]}
+                  ref={autofocus ? insert : null}
                   onChange={(e) => {
-                    moveFocus(index)(e);
                     onChange(index)(e);
                   }}
                 />
@@ -71,7 +62,7 @@ function InputGroup({ labelText, inputInfoList, children }: InputGroupProps) {
       </StyledInputLabel>
     </StyledInputGroupWrapper>
   );
-}
+};
 
 const StyledInputGroupWrapper = styled.div`
   display: flex;

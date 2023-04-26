@@ -7,6 +7,7 @@ import { useCardDispatch } from '../context/CardContext';
 import { isAlphabet, isNumber, validateMonth, validateYear } from '../utils/validateInput';
 import ErrorMessage from './ErrorMessage';
 import { getUniqueID } from '../utils/key';
+import useMoveFocus from '../hooks/useMoveFocus';
 
 const AddCardContainer = () => {
   const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
@@ -15,6 +16,7 @@ const AddCardContainer = () => {
   const [cardCVC, setCardCVC] = useState<string[]>(['']);
   const [cardPWD, setCardPWD] = useState<string[]>(['', '']);
   const [expirationError, setExpirationError] = useState<boolean>(false);
+  const { insert, move } = useMoveFocus();
   const setCard = useCardDispatch();
   const navigate = useNavigate();
 
@@ -46,6 +48,8 @@ const AddCardContainer = () => {
             );
 
             setState(nextState);
+            if (e.target.value.length === 0) move(-1);
+            if (e.target.value.length === e.target.maxLength) move();
           }
           break;
         case 'text':
@@ -56,6 +60,7 @@ const AddCardContainer = () => {
             );
 
             setState(nextState);
+            move();
           }
           break;
       }
@@ -96,6 +101,8 @@ const AddCardContainer = () => {
       <StyledForm onSubmit={onSubmitCard}>
         <InputGroup
           labelText="카드 번호"
+          autofocus={true}
+          insert={insert}
           inputInfoList={[
             {
               type: 'number',
@@ -137,6 +144,8 @@ const AddCardContainer = () => {
         />
         <InputGroup
           labelText="만료일"
+          autofocus={true}
+          insert={insert}
           inputInfoList={[
             {
               type: 'number',
@@ -163,6 +172,8 @@ const AddCardContainer = () => {
         {expirationError && <ErrorMessage message="유효한 카드 만료일을 입력해주세요." />}
         <InputGroup
           labelText="카드 소유자 이름(선택)"
+          autofocus={false}
+          insert={insert}
           inputInfoList={[
             {
               type: 'text',
@@ -181,6 +192,8 @@ const AddCardContainer = () => {
         <StyledHeightCenter>
           <InputGroup
             labelText="보안 코드(CVC/CVV)"
+            autofocus={true}
+            insert={insert}
             inputInfoList={[
               {
                 type: 'password',
@@ -198,6 +211,8 @@ const AddCardContainer = () => {
         <StyledHeightCenter>
           <InputGroup
             labelText="카드 비밀번호"
+            autofocus={true}
+            insert={insert}
             inputInfoList={[
               {
                 type: 'password',
