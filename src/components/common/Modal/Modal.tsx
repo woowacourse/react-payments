@@ -3,15 +3,19 @@ import styled from "styled-components";
 
 type ModalProps = {
   isOpen: boolean;
+  closeModal: () => void;
 };
 
-const Modal = ({ children, isOpen }: PropsWithChildren<ModalProps>) => {
+const Modal = ({ children, isOpen, closeModal }: PropsWithChildren<ModalProps>) => {
   return (
     <>
       {isOpen ? (
         <StyledModalContainer>
           <StyledModalBackdrop></StyledModalBackdrop>
-          <StyledModalContentWrapper>{children}</StyledModalContentWrapper>
+          <StyledModalContentWrapper>
+            {children}
+            <CloseButton onClick={closeModal}>✖</CloseButton>
+          </StyledModalContentWrapper>
         </StyledModalContainer>
       ) : null}
     </>
@@ -34,6 +38,21 @@ const StyledModalContentWrapper = styled.div`
 
   border-radius: 8px 8px 0px 0px;
   background-color: #fff;
+`;
+
+const CloseButton = styled.button`
+  position: absolute;
+  top: 16px;
+  right: 20px;
+
+  width: 20px;
+  height: 20px;
+
+  border: none;
+
+  background: transparent;
+
+  cursor: pointer;
 `;
 
 const StyledModalBackdrop = styled.div`

@@ -130,7 +130,7 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
           </Button>
         </ButtonBox>
       </Form>
-      <Modal isOpen={isModalOpen}>
+      <Modal isOpen={isModalOpen} closeModal={modalClose}>
         <CardCompanyButtonList
           cardCompanies={Object.keys(CARD_COMPANIES) as CardCompany[]}
           handleCardCompany={handleCardCompany}
