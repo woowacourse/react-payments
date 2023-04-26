@@ -21,7 +21,7 @@ export const CreditCardRegisterContext = createContext({
     },
   },
   update: {
-    company: (arg: Type.CardCompanies) => {},
+    company: (arg: Type.CardCompanies | undefined) => {},
     numbers: (arg: string) => {},
     expiry: (arg: string) => {},
     owner: (arg: string) => {},
@@ -56,7 +56,7 @@ function CreditCardRegisterProvider({ children }: PropsWithChildren) {
   );
   const [alias, setAlias] = useState<string>('');
 
-  const updateCompany = (newCompany: Type.CardCompanies) => {
+  const updateCompany = (newCompany: Type.CardCompanies | undefined) => {
     setCompany(newCompany);
   };
 

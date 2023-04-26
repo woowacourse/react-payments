@@ -80,6 +80,14 @@ function CreditCardRegister() {
             company: creditCard.company,
           }}
         />
+        <S.ReSelectCardCompanyButton
+          onClick={() => {
+            openModal();
+            update.company(undefined);
+          }}
+        >
+          {creditCard.company && '카드 재선택'}
+        </S.ReSelectCardCompanyButton>
       </S.PreviewCreditCard>
       <S.CreditCardRegisterForm>
         <CreditCardNumberInput

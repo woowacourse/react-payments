@@ -1,9 +1,18 @@
 import styled from 'styled-components';
 
 export const PreviewCreditCard = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-rows: auto 18px;
   justify-content: center;
+  row-gap: 10px;
   margin-bottom: 25px;
+`;
+
+export const ReSelectCardCompanyButton = styled.button`
+  justify-self: flex-end;
+  font-size: 12px;
+  color: #666565;
+  cursor: pointer;
 `;
 
 export const CreditCardRegisterForm = styled.form`
