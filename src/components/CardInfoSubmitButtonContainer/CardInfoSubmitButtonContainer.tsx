@@ -1,18 +1,10 @@
-import { CardNumbers, ExpirationDate, OwnerName, Password, SecurityCode } from '../../types/state';
+import { CardInfo } from '../../types/state';
 import { useFormState } from '../../hooks/useFormState';
 
 import * as styled from './CardInfoSubmitButtonContainer.styled';
 
-interface CardInfoSubmitButtonContainerProps {
-  cardNumbers: CardNumbers;
-  expirationDate: ExpirationDate;
-  ownerName: OwnerName;
-  securityCode: SecurityCode;
-  password: Password;
-}
-
-const CardInfoSubmitButtonContainer = (props: CardInfoSubmitButtonContainerProps) => {
-  const { handleOnClickSubmitButton, isFilledCardInfos } = useFormState(props);
+const CardInfoSubmitButtonContainer = ({ cardInfo }: { cardInfo: CardInfo }) => {
+  const { handleOnClickSubmitButton, isFilledCardInfos } = useFormState(cardInfo);
 
   return (
     <styled.CardInfoSubmitButtonContainer>

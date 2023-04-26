@@ -1,5 +1,5 @@
-import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
+import { createGlobalStyle } from 'styled-components';
 
 import { COLOR } from './constants/cardInfo';
 
@@ -49,18 +49,6 @@ const GlobalStyles = createGlobalStyle`
     padding: 0;
     cursor: pointer;
   }
-
-	@media (min-width: 992px) {
-		.App {
-			width: 50%;
-		}
-	}
-
-	@media (min-width: 1200px) {
-		.App {
-			width: 30%;
-		}
-	}
 `;
 
 export default GlobalStyles;

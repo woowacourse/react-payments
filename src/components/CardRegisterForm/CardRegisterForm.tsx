@@ -1,4 +1,4 @@
-import { useFormState } from '../../hooks/useFormState';
+import { CardRegisterFormProps } from '../../types/state';
 
 import * as styled from './CardRegisterForm.styled';
 import CardNumberInputBox from '../CardNumberInputBox/CardNumberInputBox';
@@ -6,32 +6,7 @@ import ExpirationDateInputBox from '../ExpirationDateInputBox/ExpirationDateInpu
 import OwnerNameInputBox from '../OwnerNameInputBox/OwnerNameInputBox';
 import PasswordInputBox from '../PasswordInputBox/PasswordInputBox';
 import SecurityCodeInputBox from '../SecurityCodeInputBox/SecurityCodeInputBox';
-import {
-  CardNumbers,
-  ExpirationDate,
-  OwnerName,
-  Password,
-  SecurityCode,
-  SetCardNumbers,
-  SetExpirationDate,
-  SetOwnerName,
-  SetPassword,
-  SetSecurityCode,
-} from '../../types/state';
 import CardInfoSubmitButtonContainer from '../CardInfoSubmitButtonContainer/CardInfoSubmitButtonContainer';
-
-interface CardRegisterFormProps {
-  cardNumbers: CardNumbers;
-  setCardNumbers: SetCardNumbers;
-  expirationDate: ExpirationDate;
-  setExpirationDate: SetExpirationDate;
-  ownerName: OwnerName;
-  setOwnerName: SetOwnerName;
-  securityCode: SecurityCode;
-  setSecurityCode: SetSecurityCode;
-  password: Password;
-  setPassword: SetPassword;
-}
 
 const CardRegisterForm = (props: CardRegisterFormProps) => {
   const {
@@ -67,11 +42,7 @@ const CardRegisterForm = (props: CardRegisterFormProps) => {
       />
       <PasswordInputBox password={password} setPassword={setPassword} securityCode={securityCode} />
       <CardInfoSubmitButtonContainer
-        cardNumbers={cardNumbers}
-        expirationDate={expirationDate}
-        ownerName={ownerName}
-        securityCode={securityCode}
-        password={password}
+        cardInfo={{ cardNumbers, expirationDate, ownerName, securityCode, password }}
       />
     </styled.CardRegisterForm>
   );

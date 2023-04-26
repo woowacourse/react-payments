@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import { COLOR } from '../../constants/cardInfo';
 
 export const App = styled.div`
@@ -13,4 +14,12 @@ export const App = styled.div`
   background-color: ${COLOR.WHITE};
 
   overflow: auto;
+
+  @media (min-width: 992px) {
+    width: 50%;
+  }
+
+  @media (min-width: 1200px) {
+    width: 30%;
+  }
 `;

@@ -25,3 +25,16 @@ export type SetPassword = React.Dispatch<SetStateAction<Password>>;
 
 export type SetCardInfoList = React.Dispatch<SetStateAction<CardInfo[]>>;
 export type SetCardInfo = React.Dispatch<SetStateAction<CardInfo>>;
+
+export interface CardRegisterFormProps {
+  cardNumbers: CardNumbers;
+  setCardNumbers: SetCardNumbers;
+  expirationDate: ExpirationDate;
+  setExpirationDate: SetExpirationDate;
+  ownerName: OwnerName;
+  setOwnerName: SetOwnerName;
+  securityCode: SecurityCode;
+  setSecurityCode: SetSecurityCode;
+  password: Password;
+  setPassword: SetPassword;
+}
