@@ -1,16 +1,14 @@
 import { Container } from "../common/Container";
 import { InputLabel } from "../common/InputLabel";
 import { Input } from "../common/Input";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useContext } from "react";
 
+import { SubmitManageContext } from "../../contexts/SubmitManageContext";
 import { CARDNUMBERS_MAXLEGNTH, CARDNUMBERS_REGEX } from "../../constants";
 
 interface CardNumberInputProps {
   cardNumbers: string;
-  isValid: boolean;
-  setIsValid: (isValid: boolean) => void;
   setCardNumbers: (numbers: string) => void;
-  setIsCompleted: (isCompleted: boolean) => void;
 }
 
 const cardNumberInputInfo = {
@@ -26,19 +24,40 @@ const hideNumbers = (numbers: string): string => {
   return (hiddenNumbers.match(new RegExp(CARDNUMBERS_REGEX)) ?? []).join(" - ");
 };
 
+const deleteLastNumber = (numbers: string, deletedChar: string): string => {
+  if (deletedChar === "●" && numbers.length > 12) {
+    return numbers.slice(0, 12);
+  }
+
+  if (deletedChar === "●" && numbers.length > 8) {
+    return numbers.slice(0, 8);
+  }
+
+  return numbers.slice(0, -1);
+};
+
 const cannotInput = (text: string): boolean => {
   const numbers = text.replaceAll(" - ", "");
   return numbers.length > CARDNUMBERS_MAXLEGNTH || !/\d/g.test(text.slice(-1));
 };
 
-export const CardNumberInput = ({
-  cardNumbers,
-  isValid,
-  setIsValid,
-  setCardNumbers,
-  setIsCompleted,
-}: CardNumberInputProps) => {
+export const CardNumberInput = ({ cardNumbers, setCardNumbers }: CardNumberInputProps) => {
   const [postText, setPostText] = useState("");
+  const { isInputsCompleted, setIsInputsCompleted, isInputsValid, setIsInputsValid } = useContext(SubmitManageContext);
+
+  const setIsCompleted = useCallback(
+    (isCompleted: boolean) => {
+      setIsInputsCompleted({ ...isInputsCompleted, isCardNumberCompleted: isCompleted });
+    },
+    [isInputsCompleted, setIsInputsCompleted]
+  );
+
+  const setIsValid = useCallback(
+    (isValid: boolean) => {
+      setIsInputsValid({ ...isInputsValid, isCardNumbersValid: isValid });
+    },
+    [isInputsValid, setIsInputsValid]
+  );
 
   const saveNumbers = useCallback(
     (target: HTMLInputElement, numbers: string) => {
@@ -60,7 +79,7 @@ export const CardNumberInput = ({
       }
 
       //문자가 추가됐을 때
-      if (postText.replaceAll(" - ", "").length < text.replaceAll(" - ", "").length) {
+      if (postText.length < text.length) {
         if (cannotInput(text)) {
           e.target.value = e.target.value.slice(0, -1);
           return;
@@ -75,7 +94,7 @@ export const CardNumberInput = ({
       }
 
       //문자가 제거 됐을 때
-      const minusNumbers = postText.slice(-1) === "●" ? cardNumbers.slice(0, 8) : cardNumbers.slice(0, -1);
+      const minusNumbers = deleteLastNumber(cardNumbers, postText.slice(-1));
       saveNumbers(e.target, minusNumbers);
 
       setIsValid(true);
@@ -90,7 +109,7 @@ export const CardNumberInput = ({
       <Input
         {...cardNumberInputInfo}
         handleInput={handleInput}
-        error={{ isValid: isValid, errorMessage: "기존 카드 번호와 중복됩니다." }}
+        error={{ isValid: isInputsValid.isCardNumbersValid, errorMessage: "기존 카드 번호와 중복됩니다." }}
       />
     </Container>
   );

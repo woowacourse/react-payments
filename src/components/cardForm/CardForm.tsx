@@ -7,54 +7,90 @@ import { ExpiryDateInput } from "./ExpiryDateInput";
 import { OwnerInput } from "./OwnerInput";
 import { PasswordInput } from "./PasswordInput";
 
-import useAddCardForm from "../../hook/useAddCardForm";
+import { validateCardNumbers, validateExpiryDate } from "../../validation/validation";
+import { useNavigate } from "react-router-dom";
+import { useCallback, useState, useContext, FormEvent } from "react";
+
+import { CardContext } from "../../contexts/CardContext";
+import { SubmitManageContext } from "../../contexts/SubmitManageContext";
 
 interface CardFormProps {
-  cards: CardType[];
   newCard: CardType;
   setNewCard: (value: CardType) => void;
-  addNewCard: (newCard: CardType) => void;
 }
 
-export const CardForm = (props: CardFormProps) => {
-  const { numbers, owner } = props.newCard;
-  const {
-    handleSubmit,
+export const CardForm = ({ newCard, setNewCard }: CardFormProps) => {
+  const navigate = useNavigate();
+  const { cards, addNewCard } = useContext(CardContext);
 
-    setCardNumbers,
-    setExpiryDate,
-    setOwner,
+  const moveToHome = () => {
+    navigate("/");
+  };
 
-    setCardNumbersCompleted,
-    setExpriyDateCompleted,
-    setCVCCompleted,
-    setPasswordCompleted,
+  const [isInputsCompleted, setIsInputsCompleted] = useState({
+    isCardNumberCompleted: false,
+    isExpiryDateCompleted: false,
+    isCVCCompleted: false,
+    isPasswordCompleted: false,
+  });
 
-    setExpiryDateValid,
-    setCardNumbersValid,
-    isInputValid,
+  const isAllCompleted = (): boolean => {
+    return Object.values(isInputsCompleted).every((isCompleted) => isCompleted);
+  };
 
-    isAllCompleted,
-  } = useAddCardForm(props);
+  const [isInputsValid, setIsInputsValid] = useState({
+    isCardNumbersValid: true,
+    isExpiryDateValid: true,
+  });
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!isAllCompleted()) return;
+
+    if (!validateExpiryDate(newCard.expiryDate)) {
+      setIsInputsValid({ ...isInputsValid, isExpiryDateValid: false });
+      return;
+    }
+
+    if (!validateCardNumbers(newCard, cards)) {
+      setIsInputsValid({ ...isInputsValid, isCardNumbersValid: false });
+      return;
+    }
+
+    const formData = new FormData(e.target as HTMLFormElement);
+    const data = Object.fromEntries(formData.entries());
+    const cardInfo: CardType = {
+      numbers: newCard.numbers,
+      expiryDate: newCard.expiryDate,
+      owner: newCard.owner,
+      color: "#de75d0",
+      CVC: Number(data.cvc),
+      password: [Number(data.password1), Number(data.password2)],
+    };
+
+    addNewCard(cardInfo);
+    moveToHome();
+  };
+
+  const makeSetValue = useCallback(
+    (key: string) => (value: string) => {
+      setNewCard({ ...newCard, [key]: value });
+    },
+    [setNewCard, newCard]
+  );
 
   return (
     <Form onSubmit={handleSubmit}>
-      <CardNumberInput
-        cardNumbers={numbers}
-        isValid={isInputValid.isCardNumbersValid}
-        setIsValid={setCardNumbersValid}
-        setCardNumbers={setCardNumbers}
-        setIsCompleted={setCardNumbersCompleted}
-      />
-      <ExpiryDateInput
-        isValid={isInputValid.isExpiryDateValid}
-        setIsValid={setExpiryDateValid}
-        setExpiryDate={setExpiryDate}
-        setIsCompleted={setExpriyDateCompleted}
-      />
-      <OwnerInput owner={owner} setOwner={setOwner} />
-      <CVCInput setIsCompleted={setCVCCompleted} />
-      <PasswordInput setIsCompleted={setPasswordCompleted} />
+      <SubmitManageContext.Provider
+        value={{ isInputsCompleted, isInputsValid, setIsInputsCompleted, setIsInputsValid }}
+      >
+        <CardNumberInput cardNumbers={newCard.numbers} setCardNumbers={makeSetValue("numbers")} />
+        <ExpiryDateInput setExpiryDate={makeSetValue("expiryDate")} />
+        <OwnerInput owner={newCard.owner} setOwner={makeSetValue("owner")} />
+        <CVCInput />
+        <PasswordInput />
+      </SubmitManageContext.Provider>
       <SubmitButton $color={isAllCompleted() ? "#525252" : "#D3D3D3"} type="submit">
         다음
       </SubmitButton>
