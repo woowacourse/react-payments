@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { InputContainer } from "../common/InputContainer";
 import { Input } from "../common/Input";
 import { InputLabel } from "../common/InputLabel";
@@ -47,7 +47,11 @@ export const PasswordInput = ({
       moveFocusToNext(index, value);
     };
 
-  const handleOutFocusEvent = () => {
+  useEffect(() => {
+    validate();
+  }, [password]);
+
+  const validate = () => {
     const validity = validatePasswordInput(password);
     setIsValid(validity);
   };
@@ -69,7 +73,6 @@ export const PasswordInput = ({
         <Input
           {...passwordInfo}
           handleInput={handleInput(1)}
-          handleOutFocus={handleOutFocusEvent}
           label="password2"
           ref={allRefs[1]}
         />

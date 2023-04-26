@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { InputContainer } from "../common/InputContainer";
 import { InputLabel } from "../common/InputLabel";
 import { Input } from "../common/Input";
@@ -58,7 +58,11 @@ export const CardNumberInput = ({
       moveFocusToNext(index, value);
     };
 
-  const handleOutFocusEvent = (e: React.FocusEvent<HTMLInputElement>) => {
+  useEffect(() => {
+    validate();
+  }, [numbers]);
+
+  const validate = () => {
     const validity = validateNumbersInput(numbers);
     setIsValid(validity);
   };
@@ -85,7 +89,6 @@ export const CardNumberInput = ({
             type={ind < 3 ? "text" : "password"}
             label={`cardNumber${ind}`}
             handleInput={handleInput(ind - 1)}
-            handleOutFocus={ind === 4 ? handleOutFocusEvent : () => {}}
             ref={allRefs[ind - 1]}
           />
         ))}
