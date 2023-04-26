@@ -1,4 +1,4 @@
-const CARD_COMPANIES_ENGLISH = [
+export const CARD_COMPANIES_ENGLISH = [
   'bc',
   'shinhan',
   'kakao',
@@ -25,7 +25,5 @@ export type CardCompany = typeof CARD_COMPANIES_ENGLISH[number];
 export const isCardCompany = (string: string): string is CardCompany => {
   return CARD_COMPANIES_ENGLISH.includes(string as CardCompany);
 };
-
-export const getCardCompanies = () => [...CARD_COMPANIES_ENGLISH];
 
 export const cardCompanyEnglishToKorean = (company: CardCompany) => CARD_COMPANIES[company];
