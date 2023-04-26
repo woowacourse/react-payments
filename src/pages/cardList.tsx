@@ -7,7 +7,7 @@ import { Card, CardProps } from "../components/common/card";
 import { ReactComponent as BackButtonIc } from "../assets/backButtonIc.svg";
 
 export function CardList() {
-  const [cards, setCards] = useState<CardProps[] | undefined>(getData());
+  const [cards] = useState<CardProps[] | undefined>(getData());
   const navigate = useNavigate();
 
   function moveAddCardPage() {
@@ -30,10 +30,11 @@ export function CardList() {
             return (
               <Card
                 key={card.userName}
-                cardNumber={card?.cardNumber}
+                cardNumber={card.cardNumber}
                 month={card.month}
                 year={card.year}
-                userName={card?.userName}></Card>
+                userName={card.userName}
+              />
             );
           })
         ) : (
