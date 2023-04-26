@@ -19,10 +19,6 @@ type CardFormAction =
       type: 'INIT';
     };
 
-interface CardFormProviderProps {
-  children: React.ReactNode;
-}
-
 const initialCardForm: CardForm = {
   cardCompany: '',
   cardNumber: ['', '', '', ''],
@@ -56,6 +52,10 @@ export const useCardForm = (): readonly [CardForm, React.Dispatch<CardFormAction
   if (context === null) throw new Error('context is null');
   return context;
 };
+
+interface CardFormProviderProps {
+  children: React.ReactNode;
+}
 
 export const CardFormProvider = ({ children }: CardFormProviderProps) => {
   const [cardForm, dispatch] = useReducer(cardFormReducer, initialCardForm);
