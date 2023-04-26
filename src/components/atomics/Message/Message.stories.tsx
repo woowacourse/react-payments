@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import CardInputMessage from '.';
 
 const meta: Meta<typeof CardInputMessage> = {
-  title: 'atomics/CardInputMessage',
+  title: 'atomics/Message',
   component: CardInputMessage,
 };
 
@@ -29,6 +29,16 @@ export const CardLabelMessage: Story = {
     lineHeight: '16px',
     color: '#525252',
     children: '카드 번호',
+  },
+};
+
+export const CardInputErrorMessage: Story = {
+  args: {
+    fontSize: '12px',
+    fontWeight: 500,
+    lineHeight: '16px',
+    color: 'red',
+    children: '하지마세요!!',
   },
 };
 
