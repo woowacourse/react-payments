@@ -1,3 +1,14 @@
+import {
+  BcCard,
+  HanaCard,
+  HyundaiCard,
+  KakaoCard,
+  KbCard,
+  LotteCard,
+  ShinhanCard,
+  WooriCard,
+} from "../assets";
+
 const CARD_INPUT_LENGTH: Record<string, number> = {
   cardNumber: 25,
   expiredDate: 7,
@@ -42,6 +53,17 @@ const REGEX = {
   english: /^[a-zA-Z]*$/,
 } as const;
 
+const CARD_COMPANY: Record<string, string> = {
+  BC카드: BcCard,
+  신한카드: ShinhanCard,
+  카카오뱅크: KakaoCard,
+  현대카드: HyundaiCard,
+  우리카드: WooriCard,
+  롯데카드: LotteCard,
+  하나카드: HanaCard,
+  국민카드: KbCard,
+} as const;
+
 export {
   CARD_INPUT_LENGTH,
   SEPERATED_CARD_NUMBER_LENGTH,
@@ -50,4 +72,5 @@ export {
   REGEX,
   SEPERATOR_STRING,
   SEPERATED_EXPIRED_DATE_LENGTH,
+  CARD_COMPANY,
 };

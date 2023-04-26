@@ -1,23 +1,45 @@
-import React from "react";
+import { useContext } from "react";
 import { ReactNode } from "react";
 import styled from "styled-components";
+import { Context } from "../../context";
 
 interface BottomSheetType {
   children: ReactNode;
 }
 
 const BottomSheet = (props: BottomSheetType) => {
-  return <BottomSheetWrapper>{props.children}</BottomSheetWrapper>;
+  const { isModalOpen, toggleModal } = useContext(Context);
+
+  return isModalOpen ? (
+    <>
+      <BackDrop onClick={toggleModal} />
+      <BottomSheetWrapper>{props.children}</BottomSheetWrapper>
+    </>
+  ) : (
+    <></>
+  );
 };
 
 const BottomSheetWrapper = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  height: 227px;
+  width: 100%;
 
-  background: white;
-  padding: 100px;
+  position: fixed;
+  bottom: 0;
+  left: 0px;
+
+  background: #fdfdfd;
+  border-radius: 5px 5px 0px 0px;
 `;
 
-export default React.memo(BottomSheet);
+const BackDrop = styled.div`
+  width: 100%;
+  height: 100%;
+
+  position: fixed;
+  top: 0;
+  background: rgba(0, 0, 0, 0.5);
+`;
+
+export default BottomSheet;
