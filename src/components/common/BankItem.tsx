@@ -35,6 +35,7 @@ const BankItemContainer = styled.div`
 const BankButton = styled.button`
   background-color: transparent;
   border: none;
+  outline: none;
 `;
 
 const BankImage = styled.img`
