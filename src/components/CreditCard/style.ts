@@ -10,7 +10,7 @@ export const CreditCardLayout = styled.div<Props>`
   width: 213px;
   height: 133px;
   display: grid;
-  grid-template-rows: repeat(1fr, 3);
+  grid-template-rows: 30px 45px 1fr;
   align-items: center;
   background-color: ${(props) => props.backgroundColor};
   color: ${(props) => props.fontColor};
