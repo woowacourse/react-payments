@@ -1,14 +1,14 @@
 import styled from "styled-components";
-import cardHandler from "../../domain/creditCards";
 import { CardType } from "../../types/card";
 import { CVCInput } from "./CVCInput";
 import { CardNumberInput } from "./CardNumberInput";
 import { ExpiryDateInput } from "./ExpiryDateInput";
 import { OwnerInput } from "./OwnerInput";
 import { PasswordInput } from "./PasswordInput";
-import { FormEvent } from "react";
+import { FormEvent, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useValidation } from "../../hook/useValidation";
+import { CardContext } from "../../context/cardContext";
 
 interface CardFormProps {
   setCardInfo: React.Dispatch<React.SetStateAction<CardType>>;
@@ -22,7 +22,7 @@ export const CardForm = ({ setCardInfo }: CardFormProps) => {
     validateNumbersInput,
     validatePasswordInput,
   } = useValidation();
-
+  const { setCards } = useContext(CardContext);
   const navigate = useNavigate();
 
   const moveToHome = () => {
@@ -38,11 +38,23 @@ export const CardForm = ({ setCardInfo }: CardFormProps) => {
 
     const formData = new FormData(e.target as HTMLFormElement);
     const data = Object.fromEntries(formData.entries());
-    const newCard = cardHandler.formNewCard(data);
+    const newCard = {
+      id: Math.random().toString(16),
+      numbers: [
+        String(data.cardNumber1),
+        String(data.cardNumber2),
+        String(data.cardNumber3),
+        String(data.cardNumber4),
+      ],
+      expiryDate: String(data.expiryDate),
+      owner: String(data.owner),
+      CVC: Number(data.cvc),
+      password: [String(data.password1), String(data.password2)],
+      color: "#de75d0",
+    };
 
     if (isInputValid()) {
-      cardHandler.addNewCard(newCard);
-
+      setCards(newCard);
       moveToHome();
     }
   };

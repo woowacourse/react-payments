@@ -1,16 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 import { CardList } from "../components/cardList";
 import { Header } from "../components/common/Header";
-import { CardType } from "../types/card";
-import cardHandler from "../domain/creditCards";
+import { CardContext } from "../context/cardContext";
 
 export const Home = () => {
-  const [cards, setCards] = useState<CardType[]>([]);
-
-  useEffect(() => {
-    const savedData = cardHandler.getCards();
-    setCards(savedData);
-  }, []);
+  const { cards } = useContext(CardContext);
 
   return (
     <>
