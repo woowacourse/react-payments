@@ -79,8 +79,8 @@ function CardAddForm({
         moveFocus={moveFocus}
       />
       <CardPassword
-        isError={cardInputError.password}
         values={cardInformation.password}
+        isError={cardInputError.password}
         onInputChange={onMultipleInputChange}
         updateCardInputError={updateCardInputError}
       />

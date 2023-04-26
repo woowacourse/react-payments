@@ -44,6 +44,10 @@ function CardIssuer({
     }
   };
 
+  const onBlur = () => {
+    if (!isModalOpen) updateCardInputError('issuer', value);
+  };
+
   const onOptionClick = (event: MouseEvent<HTMLButtonElement>) => {
     closeModal();
     onInputChange(event);
@@ -72,6 +76,7 @@ function CardIssuer({
         autoFocus
         tabIndex={1}
         onClick={openModal}
+        onBlur={onBlur}
         onKeyDown={onKeyDown}
       >
         {value ? `${value}` : '카드사를 선택해주세요'}
