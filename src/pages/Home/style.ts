@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+export const CreditCardLayout = styled.div``;
+
 export const CreditCardList = styled.div`
   display: grid;
   row-gap: 40px;

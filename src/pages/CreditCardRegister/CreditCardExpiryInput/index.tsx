@@ -1,6 +1,6 @@
 import Input from '@Components/Input';
 
-import InputLabel from '../InputLabel';
+import InputLabel from '../../../components/InputLabel';
 import InputLayout from '../InputLayout';
 
 type Props = {

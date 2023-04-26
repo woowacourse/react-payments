@@ -21,26 +21,28 @@ function Home() {
   return (
     <>
       <Header title="보유카드" />
-      <S.CreditCardList>
-        {creditCardList.map((creditCard) => (
-          <CreditCard
-            key={creditCard.number}
-            fullFilled
-            creditCard={{
-              number: creditCard.number,
-              expiry: creditCard.expiry,
-              owner: creditCard.owner,
-              company: creditCard.company,
-            }}
-          />
-        ))}
-      </S.CreditCardList>
-      <S.RegisterCreditCardContainer>
-        {!creditCardList.length && <S.RegisterCreditCardText>새로운 카드를 등록해주세요.</S.RegisterCreditCardText>}
-        <S.RegisterCreditCardButton type="button" onClick={() => navigate('/register')}>
-          +
-        </S.RegisterCreditCardButton>
-      </S.RegisterCreditCardContainer>
+      <S.CreditCardLayout>
+        <S.CreditCardList>
+          {creditCardList.map((creditCard) => (
+            <CreditCard
+              key={creditCard.number}
+              fullFilled
+              creditCard={{
+                number: creditCard.number,
+                expiry: creditCard.expiry,
+                owner: creditCard.owner,
+                company: creditCard.company,
+              }}
+            />
+          ))}
+        </S.CreditCardList>
+        <S.RegisterCreditCardContainer>
+          {!creditCardList.length && <S.RegisterCreditCardText>새로운 카드를 등록해주세요.</S.RegisterCreditCardText>}
+          <S.RegisterCreditCardButton type="button" onClick={() => navigate('/register')}>
+            +
+          </S.RegisterCreditCardButton>
+        </S.RegisterCreditCardContainer>
+      </S.CreditCardLayout>
     </>
   );
 }

@@ -5,10 +5,6 @@ import Button from '@Components/Button';
 import CreditCard from '@Components/CreditCard';
 import Header from '@Components/Header';
 
-// import creditCardStorage from '@Domains/creditCardStorage';
-
-// import * as Type from '@Types/index';
-
 import useModal from '@Hooks/useModal';
 
 import { CreditCardRegisterContext } from '@Contexts/CreditCardRegisterContext';
@@ -34,20 +30,6 @@ function CreditCardRegister() {
     if (!isFullFilled) return;
     if (!creditCard.company) return;
 
-    // const newCreditCard: Type.CreditCard = {
-    //   number: creditCard.numbers,
-    //   expiry: creditCard.expiry,
-    //   owner: creditCard.owner,
-    //   cvc: creditCard.cvc,
-    //   password: {
-    //     first: creditCard.password.first,
-    //     second: creditCard.password.second,
-    //   },
-    //   company: creditCard.company,
-    // };
-
-    // creditCardStorage.saveCreditCard(newCreditCard);
-    // navigate('/');
     navigate('/register/alias');
   };
 

@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const CreditCardAlias = styled.div`
-  min-height: 100%;
   display: grid;
   align-items: center;
   justify-items: center;
@@ -17,4 +16,15 @@ export const CompleteMessage = styled.span`
   font-size: 24px;
   line-height: 28px;
   color: #383838;
+`;
+
+export const AliasInputLayout = styled.div`
+  width: 80%;
+  display: grid;
+  row-gap: 10px;
+  justify-items: flex-end;
+  input {
+    width: 100%;
+    margin: 0;
+  }
 `;

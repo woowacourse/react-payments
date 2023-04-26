@@ -5,6 +5,11 @@ import Button from '@Components/Button';
 import CreditCard from '@Components/CreditCard';
 import Header from '@Components/Header';
 import Input from '@Components/Input';
+import InputLabel from '@Components/InputLabel';
+
+import creditCardStorage from '@Domains/creditCardStorage';
+
+import * as Type from '@Types/index';
 
 import { CreditCardRegisterContext } from '@Contexts/CreditCardRegisterContext';
 
@@ -13,7 +18,30 @@ import * as S from './style';
 function CreditCardAlias() {
   const navigate = useNavigate();
 
-  const { creditCard } = useContext(CreditCardRegisterContext);
+  const { creditCard, update } = useContext(CreditCardRegisterContext);
+
+  const handleChangeAlias = (event: React.ChangeEvent<HTMLInputElement>) => {
+    update.alias(event.target.value);
+  };
+
+  const handleSubmit = () => {
+    const newCreditCard: Type.CreditCard = {
+      id: Date.now(),
+      number: creditCard.numbers,
+      expiry: creditCard.expiry,
+      owner: creditCard.owner,
+      cvc: creditCard.cvc,
+      password: {
+        first: creditCard.password.first,
+        second: creditCard.password.second,
+      },
+      company: creditCard.company,
+      alias: creditCard.alias,
+    };
+
+    creditCardStorage.saveCreditCard(newCreditCard);
+    navigate('/');
+  };
 
   useEffect(() => {
     if (!creditCard.company) navigate('/register');
@@ -33,17 +61,20 @@ function CreditCardAlias() {
             company: creditCard.company,
           }}
         />
-        <Input
-          type="string"
-          value=""
-          width="80%"
-          textAlign="center"
-          background="#ffffff"
-          underline
-          placeholder="카드 별칭을 등록하세요."
-          onChange={() => {}}
-        />
-        <Button text="확인" disabled type="button" handleClick={() => {}} />
+        <S.AliasInputLayout>
+          <Input
+            type="string"
+            value={creditCard.alias}
+            width="70%"
+            textAlign="center"
+            background="#ffffff"
+            underline
+            placeholder="카드 별칭을 등록하세요."
+            onChange={handleChangeAlias}
+          />
+          <InputLabel label={`${creditCard.alias.length} / 10`} />
+        </S.AliasInputLayout>
+        <Button text="확인" disabled={creditCard.alias.length === 0} type="button" handleClick={handleSubmit} />
       </S.CreditCardAlias>
     </>
   );

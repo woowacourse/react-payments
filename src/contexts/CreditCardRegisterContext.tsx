@@ -14,20 +14,22 @@ export const CreditCardRegisterContext = createContext({
     expiry: '',
     owner: '',
     cvc: '',
+    alias: '',
     password: {
       first: '',
       second: '',
     },
   },
   update: {
-    company: (company: Type.CardCompanies) => {},
-    numbers: (numbers: string) => {},
-    expiry: (numbers: string) => {},
-    owner: (numbers: string) => {},
-    cvc: (numbers: string) => {},
+    company: (arg: Type.CardCompanies) => {},
+    numbers: (arg: string) => {},
+    expiry: (arg: string) => {},
+    owner: (arg: string) => {},
+    cvc: (arg: string) => {},
+    alias: (arg: string) => {},
     password: {
-      first: (numbers: string) => {},
-      second: (numbers: string) => {},
+      first: (arg: string) => {},
+      second: (arg: string) => {},
     },
   },
   errorMessage: {
@@ -52,6 +54,7 @@ function CreditCardRegisterProvider({ children }: PropsWithChildren) {
     { first: '', second: '' },
     passwordValidationFns,
   );
+  const [alias, setAlias] = useState<string>('');
 
   const updateCompany = (newCompany: Type.CardCompanies) => {
     setCompany(newCompany);
@@ -113,14 +116,20 @@ function CreditCardRegisterProvider({ children }: PropsWithChildren) {
     }
   };
 
+  const updateAlias = (newAlias: string) => {
+    if (newAlias.length > 10) return;
+    setAlias(newAlias);
+  };
+
   const initValue = {
-    creditCard: { company, numbers, expiry, owner, cvc, password },
+    creditCard: { company, numbers, expiry, owner, cvc, password, alias },
     update: {
       company: updateCompany,
       numbers: updateNumbers,
       expiry: updateExpiry,
       owner: updateOwner,
       cvc: updateCVC,
+      alias: updateAlias,
       password: {
         first: updateFirstPassword,
         second: updateSecondPassword,

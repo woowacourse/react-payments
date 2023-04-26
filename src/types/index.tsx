@@ -6,12 +6,14 @@ export type CreditCardPasswordType = {
 };
 
 export type CreditCard = {
+  id: number;
   number: string;
   expiry: string;
   owner?: string;
   cvc: string;
   password: CreditCardPasswordType;
   company?: CardCompanies;
+  alias: string;
 };
 
 export type CardCompanies = keyof typeof CARD_COMPANY;

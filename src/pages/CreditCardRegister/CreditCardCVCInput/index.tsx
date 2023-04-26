@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Input from '@Components/Input';
 
 import * as S from './style';
-import InputLabel from '../InputLabel';
+import InputLabel from '../../../components/InputLabel';
 import InputLayout from '../InputLayout';
 
 type Props = {

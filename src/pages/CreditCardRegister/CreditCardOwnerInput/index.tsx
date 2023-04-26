@@ -2,7 +2,7 @@ import Input from '@Components/Input';
 
 import * as CommonStyle from '@Styles/common';
 
-import InputLabel from '../InputLabel';
+import InputLabel from '../../../components/InputLabel';
 import InputLayout from '../InputLayout';
 
 type Props = {
