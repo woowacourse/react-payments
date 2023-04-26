@@ -16,6 +16,7 @@ import {
   validateNumber,
   validateOwnerName,
 } from "../utils/validation";
+import Button from "./common/Button";
 
 interface CardInputFormType {
   card: CardType;
@@ -170,28 +171,10 @@ const CardInputForm = ({ card, setCard, onSubmit }: CardInputFormType) => {
           <p>카드 뒷면의 보안 3자리 숫자를 입력해 주세요 😊</p>
         </AnswerBoxWrapper>
       )}
-      <NextButton type="submit">다음</NextButton>
+      <Button text="다음" type="submit" />
     </CardInputFormWrapper>
   );
 };
-
-const NextButton = styled.button`
-  width: 30px;
-  align-self: flex-end;
-
-  font-weight: 700;
-  font-size: 14px;
-  text-decoration: none;
-  color: black;
-
-  background: transparent;
-  border: none;
-
-  :active {
-    opacity: 50%;
-    transform: scale(0.98);
-  }
-`;
 
 const CardInputFormWrapper = styled.form`
   display: flex;
