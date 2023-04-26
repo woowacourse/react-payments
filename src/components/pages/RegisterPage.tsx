@@ -3,9 +3,9 @@ import { CreditCardContext } from '../../contexts/CreditCardContext';
 import CardRegisterForm from '../registerForm/cardRegisterForm/CardRegisterForm';
 import { useState } from 'react';
 import CreditCardInfo from '../../@types/creditCardInfo';
-import BottomModal from '../@common/BottomModal';
 import BankSelectModal from '../BankSelectModal/BankSelectModal';
 import { Banks, COLOR_BY_BANK, KOR_BANK_NAME_BY_BANK } from '../../@types/banks';
+import useBottomModal from '../../hooks/useBottomModal';
 
 function RegisterPage() {
   const [creditCardInfo, setCreditCardInfo] = useState<CreditCardInfo>({
@@ -17,7 +17,7 @@ function RegisterPage() {
     bank: 'hyundai' as Banks,
   });
 
-  const [showModal, setShowModal] = useState(true);
+  const { BottomModal, closeModal, openModal } = useBottomModal(true);
 
   const setCreditCard = <T extends keyof CreditCardInfo>(
     target: T,
@@ -38,24 +38,13 @@ function RegisterPage() {
         cardNumber={creditCardInfo.cardNumber}
         ownerName={creditCardInfo.ownerName}
         expirationDate={creditCardInfo.expirationDate}
-        onClick={() => {
-          setShowModal(true);
-        }}
+        onClick={openModal}
         bankName={bankName}
         cardColor={cardColor}
       />
       <CardRegisterForm />
-      <BottomModal
-        open={showModal}
-        onClose={() => {
-          setShowModal(false);
-        }}
-      >
-        <BankSelectModal
-          onClose={() => {
-            setShowModal(false);
-          }}
-        ></BankSelectModal>
+      <BottomModal>
+        <BankSelectModal onClose={closeModal}></BankSelectModal>
       </BottomModal>
     </CreditCardContext.Provider>
   );

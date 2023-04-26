@@ -1,24 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 interface Props extends React.PropsWithChildren {
-  open: boolean;
+  isOpen: boolean;
   onClose: React.Dispatch<React.SetStateAction<void>>;
 }
 
-const BottomModal = ({ open, onClose, children }: Props) => {
-  const handleKeyupEscape = (event: KeyboardEvent) => {
-    if (event.key === 'Escape') onClose();
-  };
-
+const BottomModal = ({ isOpen, onClose, children }: Props) => {
   useEffect(() => {
+    const handleKeyupEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose();
+    };
+
     window.addEventListener('keyup', handleKeyupEscape);
+    document.body.style.overflow = 'hidden';
     return () => {
       window.removeEventListener('keyup', handleKeyupEscape);
+      document.body.style.overflow = 'unset';
     };
-  }, []);
+  }, [onClose]);
 
-  return open ? (
+  return isOpen ? (
     <>
       <Backdrop
         className="modal-backdrop"
@@ -46,6 +48,8 @@ const Container = styled.div`
   bottom: 0;
   left: 0;
   width: 100%;
+
+  box-sizing: border-box;
 
   padding: 32px 16px;
 
