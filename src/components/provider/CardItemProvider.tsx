@@ -37,16 +37,24 @@ interface CardItemAction {
   onChangePassword: (inputIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
+interface InputRefs {
+  cardNumberRefs: React.RefObject<HTMLInputElement>[];
+  expirationDateRefs: React.RefObject<HTMLInputElement>[];
+  passwordRefs: React.RefObject<HTMLInputElement>[];
+}
+
 const CardItemValueContext = createContext<CardItemValue | null>(null);
 const CardItemActionContext = createContext<CardItemAction | null>(null);
 const ErrorMessageValueContext = createContext<ErrorMessageValue | null>(null);
+const InputRefsContext = createContext<InputRefs | null>(null);
 
 const CardItemProvider = ({ children }: CardItemProviderProps) => {
-  const { cardNumber, cardNumberErrorMessage, onChangeCardNumber } = useCardNumber();
-  const { expirationDate, expirationDateErrorMessage, onChangeExpirationDate } = useExpirationDate();
+  const { cardNumber, cardNumberErrorMessage, onChangeCardNumber, cardNumberRefs } = useCardNumber();
+  const { expirationDate, expirationDateErrorMessage, onChangeExpirationDate, expirationDateRefs } =
+    useExpirationDate();
   const { name, nameErrorMessage, onChangeName } = useName();
   const { securityCode, securityCodeErrorMessage, onChangeSecurityCode } = useSecurityCode();
-  const { password, passwordErrorMessage, onChangePassword } = usePassword();
+  const { password, passwordErrorMessage, onChangePassword, passwordRefs } = usePassword();
 
   const isAllInputSatisfied = () => {
     return (
@@ -89,10 +97,18 @@ const CardItemProvider = ({ children }: CardItemProviderProps) => {
     passwordErrorMessage,
   };
 
+  const refs = {
+    cardNumberRefs,
+    expirationDateRefs,
+    passwordRefs,
+  };
+
   return (
     <CardItemValueContext.Provider value={cardItem}>
       <CardItemActionContext.Provider value={onChangeCardItem}>
-        <ErrorMessageValueContext.Provider value={errorMessage}>{children}</ErrorMessageValueContext.Provider>
+        <ErrorMessageValueContext.Provider value={errorMessage}>
+          <InputRefsContext.Provider value={refs}>{children}</InputRefsContext.Provider>
+        </ErrorMessageValueContext.Provider>
       </CardItemActionContext.Provider>
     </CardItemValueContext.Provider>
   );
@@ -118,6 +134,14 @@ export const useErrorMessageValue = () => {
   const value = useContext(ErrorMessageValueContext);
   if (value === null) {
     throw new Error("ErrorMessageValue 에러");
+  }
+  return value;
+};
+
+export const useInputRefs = () => {
+  const value = useContext(InputRefsContext);
+  if (value === null) {
+    throw new Error("InputRefsContext 에러");
   }
   return value;
 };
