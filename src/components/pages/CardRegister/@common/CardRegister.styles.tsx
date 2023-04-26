@@ -41,6 +41,13 @@ export const Label = styled.label`
   color: #525252;
 `;
 
+export const Error = styled.div`
+  height: 20px;
+  padding: 5px 0;
+  font-size: 12px;
+  color: crimson;
+`;
+
 export const StyledCardRegister = Object.assign(
   {},
   {
@@ -49,5 +56,6 @@ export const StyledCardRegister = Object.assign(
     InputBackground,
     Legend,
     Label,
+    Error,
   }
 );

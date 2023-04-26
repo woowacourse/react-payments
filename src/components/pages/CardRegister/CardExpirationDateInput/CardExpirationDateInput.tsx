@@ -7,26 +7,37 @@ import { StyledCardRegister } from '../@common/CardRegister.styles';
 import * as Styled from './CardExpirationDateInput.styles';
 
 export default function CardExpirationDateInput() {
-  const { expirationDate, onChangeByKey } = useCardExpirationDate();
+  const { error, expirationDate, onChangeByKey, onBlur } = useCardExpirationDate();
 
   return (
-    <StyledCardRegister.FieldSet>
+    <StyledCardRegister.FieldSet onBlur={onBlur}>
       <Flex dir="column" justify="start">
         <StyledCardRegister.Legend>만료일</StyledCardRegister.Legend>
         <Styled.InputBackground>
           <Input>
-            <Input.Field value={expirationDate['month']} onChange={onChangeByKey('month')} {...monthAttr}>
+            <Input.Field
+              name="month"
+              value={expirationDate['month']}
+              onChange={onChangeByKey('month')}
+              {...monthAttr}
+            >
               <Styled.Input />
             </Input.Field>
           </Input>
           <Styled.Divider>/</Styled.Divider>
           <Input>
-            <Input.Field value={expirationDate['year']} onChange={onChangeByKey('year')} {...yearAttr}>
+            <Input.Field
+              name="year"
+              value={expirationDate['year']}
+              onChange={onChangeByKey('year')}
+              {...yearAttr}
+            >
               <Styled.Input />
             </Input.Field>
           </Input>
         </Styled.InputBackground>
       </Flex>
+      <StyledCardRegister.Error>{error}</StyledCardRegister.Error>
     </StyledCardRegister.FieldSet>
   );
 }

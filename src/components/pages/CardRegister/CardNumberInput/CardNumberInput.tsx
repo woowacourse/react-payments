@@ -7,38 +7,60 @@ import { StyledCardRegister } from '../@common/CardRegister.styles';
 import * as Styled from './CardNumberInput.styles';
 
 export default function CardNumberInput() {
-  const { cardNumber, onChangeByKey } = useCardNumber();
+  const { error, cardNumber, onChangeByKey, onBlur } = useCardNumber();
 
   return (
-    <StyledCardRegister.FieldSet>
+    <StyledCardRegister.FieldSet onBlur={onBlur}>
       <Flex dir="column" justify="start">
         <StyledCardRegister.Legend>카드 번호</StyledCardRegister.Legend>
         <StyledCardRegister.InputBackground>
           <Input>
-            <Input.Field onChange={onChangeByKey('first')} value={cardNumber['first']} {...defaultAttr}>
+            <Input.Field
+              name="first"
+              onChange={onChangeByKey('first')}
+              value={cardNumber['first']}
+              {...defaultAttr}
+            >
               <Styled.Input />
             </Input.Field>
           </Input>
           <Styled.Divider show={Boolean(cardNumber['first'] || cardNumber['second'])}>-</Styled.Divider>
           <Input>
-            <Input.Field value={cardNumber['second']} onChange={onChangeByKey('second')} {...defaultAttr}>
+            <Input.Field
+              name="second"
+              value={cardNumber['second']}
+              onChange={onChangeByKey('second')}
+              {...defaultAttr}
+            >
               <Styled.Input />
             </Input.Field>
           </Input>
           <Styled.Divider show={Boolean(cardNumber['second'] || cardNumber['third'])}>-</Styled.Divider>
           <Input>
-            <Input.Field value={cardNumber['third']} onChange={onChangeByKey('third')} {...defaultAttr}>
+            <Input.Field
+              name="third"
+              value={cardNumber['third']}
+              onChange={onChangeByKey('third')}
+              {...defaultAttr}
+            >
               <Styled.Input masking />
             </Input.Field>
           </Input>
           <Styled.Divider show={Boolean(cardNumber['third'] || cardNumber['fourth'])}>-</Styled.Divider>
           <Input>
-            <Input.Field value={cardNumber['fourth']} onChange={onChangeByKey('fourth')} {...defaultAttr}>
+            <Input.Field
+              name="fourth"
+              value={cardNumber['fourth']}
+              onChange={onChangeByKey('fourth')}
+              {...defaultAttr}
+            >
               <Styled.Input masking />
             </Input.Field>
           </Input>
         </StyledCardRegister.InputBackground>
       </Flex>
+
+      <StyledCardRegister.Error>{error}</StyledCardRegister.Error>
     </StyledCardRegister.FieldSet>
   );
 }

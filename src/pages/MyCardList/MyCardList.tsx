@@ -10,7 +10,7 @@ export default function MyCardList() {
   const { registeredCards } = useMyCardList();
 
   return (
-    <Styled.Root dir="column" align="center">
+    <Styled.Root dir="column" align="center" scroll>
       {registeredCards.map((card, index) => (
         <Card type="card" key={generateCardNumber(card.cardNumber)} {...card} />
       ))}

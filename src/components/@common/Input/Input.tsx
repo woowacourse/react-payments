@@ -21,10 +21,7 @@ import React, {
 import { getAllChildElement } from '../../../utils/jsx';
 import * as Styled from './InputStyles.styles';
 
-interface InputContext extends InputHTMLAttributes<HTMLInputElement> {
-  id: string;
-  onChange(e: ChangeEvent<HTMLInputElement>): void;
-}
+type InputContext = InputHTMLAttributes<HTMLInputElement>;
 
 interface InputItemsContext {
   itemMap: Map<string, { ref: RefObject<HTMLInputElement | null> }>;
@@ -118,7 +115,7 @@ function Field(props: PropsWithChildren<FieldProps>) {
 
   const localOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     onChangeProps?.(e);
-    onChange(e);
+    onChange?.(e);
   };
 
   if (asChild) validateAsChild(childrenArray);

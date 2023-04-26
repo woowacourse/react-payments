@@ -7,10 +7,10 @@ import { StyledCardRegister } from '../@common/CardRegister.styles';
 import { REGEX } from '../../../../utils/validation';
 
 export default function CardCVCInput() {
-  const { cvc, onChange } = useCardCVC();
+  const { error, cvc, onChange, onBlur } = useCardCVC();
 
   return (
-    <Flex dir="column">
+    <Flex dir="column" onBlur={onBlur}>
       <Input>
         <Input.Label asChild>
           <StyledCardRegister.Label>보안코드(CVC/CVV)</StyledCardRegister.Label>
@@ -24,6 +24,7 @@ export default function CardCVCInput() {
           <Styled.Info type="button">?</Styled.Info>
         </Flex>
       </Input>
+      <StyledCardRegister.Error>{error}</StyledCardRegister.Error>
     </Flex>
   );
 }

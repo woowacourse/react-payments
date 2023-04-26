@@ -1,9 +1,11 @@
-import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, FocusEvent, FormEvent, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useCardRegisterContext } from '../../context/CardRegisterContext';
 import { CardNumber, CardRegisterInfo, ExpirationDate, Password } from '../../types/card.type';
+import { isInputElement } from '../../utils/dom';
 import { getCardList, setCardList } from '../../utils/localStorage';
 import { isEnglish, isNumber, isPatternMatch } from '../../utils/validation';
+import useErrors, { INVALID_FORMAT } from '../@common/useError';
 
 export function useMyCardRegister() {
   const navigate = useNavigate();
@@ -20,7 +22,7 @@ export function useMyCardRegister() {
     inputs.forEach((input, i) => {
       if (input !== e.target) return;
 
-      const { value, pattern, name, maxLength } = input;
+      const { value, pattern, name, maxLength, validity } = input;
       const nextInput = findInvalidInput(inputs.slice(i + 1)) ?? inputs[i + 1];
       const prevInput = findInvalidInput(inputs.slice(0, i).reverse()) ?? inputs[i - 1];
 
@@ -75,6 +77,15 @@ export function useCardNumber() {
     cardRegisterInfo: { cardNumber },
     handleCardInfo,
   } = useCardRegisterContext();
+  const { error, reportError } = useErrors<CardNumber>();
+
+  const onBlur = ({ target }: FocusEvent<HTMLElement>) => {
+    if (isInputElement(target)) {
+      target.validity.valid
+        ? reportError({ [target.name]: '' })
+        : reportError({ [target.name]: INVALID_FORMAT });
+    }
+  };
 
   const onChangeByKey =
     (key: keyof CardNumber) =>
@@ -87,7 +98,7 @@ export function useCardNumber() {
       });
     };
 
-  return { cardNumber, onChangeByKey };
+  return { error, cardNumber, onChangeByKey, onBlur };
 }
 
 export function useCardExpirationDate() {
@@ -95,6 +106,15 @@ export function useCardExpirationDate() {
     cardRegisterInfo: { expirationDate },
     handleCardInfo,
   } = useCardRegisterContext();
+  const { error, reportError } = useErrors<CardNumber>();
+
+  const onBlur = ({ target }: FocusEvent<HTMLElement>) => {
+    if (isInputElement(target)) {
+      target.validity.valid
+        ? reportError({ [target.name]: '' })
+        : reportError({ [target.name]: INVALID_FORMAT });
+    }
+  };
 
   const onChangeByKey =
     (key: keyof ExpirationDate) =>
@@ -107,7 +127,7 @@ export function useCardExpirationDate() {
       });
     };
 
-  return { expirationDate, onChangeByKey };
+  return { error, expirationDate, onChangeByKey, onBlur };
 }
 
 export function useCardName() {
@@ -115,6 +135,15 @@ export function useCardName() {
     cardRegisterInfo: { holderName },
     handleCardInfo,
   } = useCardRegisterContext();
+  const { error, reportError } = useErrors<CardNumber>();
+
+  const onBlur = ({ target }: FocusEvent<HTMLElement>) => {
+    if (isInputElement(target)) {
+      target.validity.valid
+        ? reportError({ [target.name]: '' })
+        : reportError({ [target.name]: INVALID_FORMAT });
+    }
+  };
 
   const onChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
     if (value && !isEnglish(value)) return;
@@ -122,7 +151,7 @@ export function useCardName() {
     handleCardInfo('holderName', value.toUpperCase());
   };
 
-  return { holderName, onChange };
+  return { error, holderName, onChange, onBlur };
 }
 
 export function useCardCVC() {
@@ -130,6 +159,15 @@ export function useCardCVC() {
     cardRegisterInfo: { cvc },
     handleCardInfo,
   } = useCardRegisterContext();
+  const { error, reportError } = useErrors<CardNumber>();
+
+  const onBlur = ({ target }: FocusEvent<HTMLElement>) => {
+    if (isInputElement(target)) {
+      target.validity.valid
+        ? reportError({ [target.name]: '' })
+        : reportError({ [target.name]: INVALID_FORMAT });
+    }
+  };
 
   const onChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
     if (value && !isNumber(value)) return;
@@ -137,13 +175,22 @@ export function useCardCVC() {
     handleCardInfo('cvc', value);
   };
 
-  return { cvc, onChange };
+  return { error, cvc, onChange, onBlur };
 }
 export function useCardPassword() {
   const {
     cardRegisterInfo: { password },
     handleCardInfo,
   } = useCardRegisterContext();
+  const { error, reportError } = useErrors<CardNumber>();
+
+  const onBlur = ({ target }: FocusEvent<HTMLElement>) => {
+    if (isInputElement(target)) {
+      target.validity.valid
+        ? reportError({ [target.name]: '' })
+        : reportError({ [target.name]: INVALID_FORMAT });
+    }
+  };
 
   const onChangeByKey =
     (key: keyof Password) =>
@@ -156,5 +203,5 @@ export function useCardPassword() {
       });
     };
 
-  return { password, onChangeByKey };
+  return { error, password, onChangeByKey, onBlur };
 }

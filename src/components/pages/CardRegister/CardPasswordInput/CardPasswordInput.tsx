@@ -6,10 +6,10 @@ import { StyledCardRegister } from '../@common/CardRegister.styles';
 import * as Styled from './CardPasswordInput.styles';
 
 export default function CardPasswordInput() {
-  const { password, onChangeByKey } = useCardPassword();
+  const { error, password, onChangeByKey, onBlur } = useCardPassword();
 
   return (
-    <Styled.FieldSet>
+    <Styled.FieldSet onBlur={onBlur}>
       <StyledCardRegister.Legend>카드 비밀번호</StyledCardRegister.Legend>
       <Styled.InputBackground>
         <Input>
@@ -33,6 +33,7 @@ export default function CardPasswordInput() {
         <Styled.Input type="password" value="0" disabled />
         <Styled.Input type="password" value="0" disabled />
       </Styled.InputBackground>
+      <StyledCardRegister.Error>{error}</StyledCardRegister.Error>
     </Styled.FieldSet>
   );
 }
