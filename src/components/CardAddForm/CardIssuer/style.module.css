@@ -6,6 +6,7 @@
 .container button:focus:enabled {
   border-color: var(--light-blue-3);
   box-shadow: 0 0 0 3px rgba(141, 201, 255, 0.4);
+  outline: 0;
 }
 
 .container button.selected {

@@ -11,6 +11,10 @@ button {
   transition: all 0.2s ease-in-out;
 }
 
+button:focus {
+  outline: 1px solid white;
+}
+
 .iconButton {
   display: flex;
   justify-content: center;
@@ -37,6 +41,10 @@ button {
   background-color: var(--dark-blue);
 }
 
+.primary:focus {
+  box-shadow: 0 0 0 3px var(--blue);
+}
+
 .secondary {
   background-color: var(--light-blue-1);
   color: var(--dark-blue);
@@ -44,6 +52,10 @@ button {
 
 .secondary:hover:enabled {
   background-color: var(--light-blue-2);
+}
+
+.secondary:focus {
+  box-shadow: 0 0 0 3px var(--light-blue-1);
 }
 
 .danger {
@@ -55,6 +67,10 @@ button {
   background-color: var(--dark-red);
 }
 
+.danger:focus {
+  box-shadow: 0 0 0 3px var(--red);
+}
+
 .textButton {
   background-color: transparent;
   color: var(--black);
@@ -62,6 +78,10 @@ button {
 
 .textButton:hover:enabled {
   background-color: var(--light-gray-1);
+}
+
+.textButton:focus {
+  box-shadow: 0 0 0 3px var(--light-gray-1);
 }
 
 .small {
