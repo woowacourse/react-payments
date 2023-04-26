@@ -14,7 +14,6 @@ import { ERROR_MESSAGE } from '../../constants/errors';
 import { matchKeyWithId } from '../../utils/infoKey';
 import { InputInfo } from '../../type/input';
 interface InputBoxProps extends React.HTMLAttributes<HTMLDivElement> {
-  id: string | undefined;
   inputs: InputInfo[];
 }
 
@@ -30,18 +29,15 @@ export function InputBox({ id, inputs }: InputBoxProps) {
                 <div>{id === 'USERNAME' ? `${value.length} / 30` : ''}</div>
                 <Input
                   id={`${id}${index}`}
-                  name={`${id}${index}`}
+                  name={id}
                   type={type}
                   value={value}
                   onChange={handleChange}
                   required={required}
-                  placeholder={PLACEHOLDER[matchKeyWithId(`${id}${index}`)]}
                   maxLength={MAX_LENGTH[`${id}`]}
                   size={SIZE_STYLE[`${id}`]}
                 />
-                <ErrorMessage>
-                  {isError && ERROR_MESSAGE[matchKeyWithId(`${id}${index}`)]}
-                </ErrorMessage>
+                <ErrorMessage>{isError && ERROR_MESSAGE[`${id}`]}</ErrorMessage>
               </_InputWrapper>
             </>
           )
