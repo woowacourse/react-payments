@@ -1,7 +1,6 @@
-import { useState } from 'react';
 import type { Meta } from '@storybook/react';
 import CardExpirationDate from '../../components/CardAddForm/CardExpirationDate/CardExpirationDate';
-import formatter from '../../utils/formatter';
+import { useCardAddForm } from '../../hooks/cards/useCardAddForm';
 
 const meta = {
   title: 'Payments/Cards/CardExpirationDateInput',
@@ -12,17 +11,16 @@ const meta = {
 export default meta;
 
 export const Default = () => {
-  const [expirationDate, setExpirationDate] = useState({ month: '', year: '' });
+  const { cardInformation, inputError, updateInputError, handleSingleInputChange } =
+    useCardAddForm();
 
   return (
     <CardExpirationDate
-      onInputChange={(event) => {
-        const { month, year } = formatter.expirationDate(event.target.value);
-
-        setExpirationDate({ month: month!, year });
-      }}
-      value={expirationDate}
-      isValid={true}
-    ></CardExpirationDate>
+      value={cardInformation.expirationDate}
+      isError={inputError.expirationDate}
+      onInputChange={handleSingleInputChange}
+      updateCardInputError={updateInputError}
+      moveFocus={() => {}}
+    />
   );
 };

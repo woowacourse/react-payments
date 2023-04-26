@@ -13,7 +13,9 @@ export default meta;
 export const Default = () => {
   const {
     cardInformation,
-    cardInputValidation,
+    inputValidation,
+    inputError,
+    updateInputError,
     handleButtonInputChange,
     handleSingleInputChange,
     handleMultipleInputChange,
@@ -23,11 +25,13 @@ export const Default = () => {
   return (
     <CardAddForm
       cardInformation={cardInformation}
-      cardInputValidation={cardInputValidation}
+      cardInputValidation={inputValidation}
+      cardInputError={inputError}
       onButtonInputChange={handleButtonInputChange}
       onSingleInputChange={handleSingleInputChange}
       onMultipleInputChange={handleMultipleInputChange}
+      updateCardInputError={updateInputError}
       handleSubmit={handleSubmit}
-    ></CardAddForm>
+    />
   );
 };

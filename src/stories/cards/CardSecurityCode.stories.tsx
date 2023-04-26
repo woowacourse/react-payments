@@ -10,19 +10,19 @@ const meta = {
 
 export default meta;
 
-export const Default = () => {
-  const [securityCode, setSecurityCode] = useState('');
-  const [isValid, setIsValid] = useState(false);
+// export const Default = () => {
+//   const [securityCode, setSecurityCode] = useState('');
+//   const [isValid, setIsValid] = useState(false);
 
-  return (
-    <CardSecurityCode
-      onInputChange={(event) => {
-        if (event.target.value.length === event.target.maxLength) setIsValid(true);
+//   return (
+//     <CardSecurityCode
+//       onInputChange={(event) => {
+//         if (event.target.value.length === event.target.maxLength) setIsValid(true);
 
-        setSecurityCode(event.target.value);
-      }}
-      value={securityCode}
-      isValid={isValid}
-    ></CardSecurityCode>
-  );
-};
+//         setSecurityCode(event.target.value);
+//       }}
+//       value={securityCode}
+//       isValid={isValid}
+//     ></CardSecurityCode>
+//   );
+// };

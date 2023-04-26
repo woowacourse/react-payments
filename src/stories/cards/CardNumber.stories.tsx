@@ -1,6 +1,6 @@
 import type { Meta } from '@storybook/react';
 import CardNumber from '../../components/CardAddForm/CardNumber/CardNumber';
-import { useState } from 'react';
+import { useCardAddForm } from '../../hooks/cards/useCardAddForm';
 
 const meta = {
   title: 'Payments/Cards/CardNumberInput',
@@ -11,15 +11,16 @@ const meta = {
 export default meta;
 
 export const Default = () => {
-  const [cardNumber, setCardNumber] = useState('');
+  const { cardInformation, inputError, updateInputError, handleSingleInputChange } =
+    useCardAddForm();
 
   return (
     <CardNumber
-      onInputChange={(event) => {
-        setCardNumber(event.target.value);
-      }}
-      value={cardNumber}
-      isValid={true}
-    ></CardNumber>
+      value={cardInformation.cardNumber}
+      isError={inputError.cardNumber}
+      onInputChange={handleSingleInputChange}
+      updateCardInputError={updateInputError}
+      moveFocus={() => {}}
+    />
   );
 };

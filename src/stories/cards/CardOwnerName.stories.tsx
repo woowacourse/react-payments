@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import type { Meta } from '@storybook/react';
 import CardOwnerName from '../../components/CardAddForm/CardOwnerName/CardOwnerName';
+import { useCardAddForm } from '../../hooks/cards/useCardAddForm';
 
 const meta = {
   title: 'Payments/Cards/CardOwnerNameInput',
@@ -11,14 +11,13 @@ const meta = {
 export default meta;
 
 export const Default = () => {
-  const [ownerName, setOwnerName] = useState('');
+  const { cardInformation, handleSingleInputChange } = useCardAddForm();
 
   return (
     <CardOwnerName
-      onInputChange={(event) => {
-        setOwnerName(event.target.value);
-      }}
-      value={ownerName}
-    ></CardOwnerName>
+      value={cardInformation.ownerName}
+      onInputChange={handleSingleInputChange}
+      moveFocus={() => {}}
+    />
   );
 };
