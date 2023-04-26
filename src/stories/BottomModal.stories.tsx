@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import BottomModal from "../component/common/Modal/BottomModal";
-import { useState } from "react";
 
 type Story = StoryObj<typeof BottomModal>;
 
