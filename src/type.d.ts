@@ -11,6 +11,7 @@ type CardProps = {
   cardOwner: string;
   expireMonth: string;
   expireYear: string;
+  onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
 };
 
 export type CardPassword = {
