@@ -21,6 +21,15 @@ export const AddButton = styled(Button)`
   height: 123px;
   margin: 30px 0 40px;
   font-size: 34px;
-  background: #e5e5e5;
+  background: var(--gray-color-100);
   border-radius: 5px;
+`;
+
+export const SelectorButton = styled(Button)`
+  border: 1px solid var(--gray-color-100);
+  margin: 14px auto auto 0;
+  padding: 3px 4px;
+  font-size: 12px;
+  background: transparent;
+  color: var(--gray-color-100);
 `;

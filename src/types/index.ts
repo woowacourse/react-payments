@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 export interface ExpirationDate {
   month: string;
   year: string;
@@ -10,3 +12,9 @@ export interface CardNumber {
   number3: string;
   number4: string;
 }
+
+export interface PreviewCardInfo extends ExpirationDate, CardNumber {
+  name: string;
+}
+
+export type SetModalState = Dispatch<SetStateAction<boolean>>;

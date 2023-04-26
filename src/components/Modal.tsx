@@ -1,5 +1,6 @@
-import { ReactNode } from "react";
+import { ReactNode, useContext } from "react";
 import styled, { CSSProp } from "styled-components";
+import { ModalState } from "pages/RegisterPage/CardRegisterForm";
 
 interface Props {
   modalStyle: CSSProp;
@@ -7,9 +8,18 @@ interface Props {
 }
 
 const Modal = ({ children, modalStyle }: Props) => {
+  const setIsModalOpen = useContext(ModalState);
+
+  const handleModalBackdrop = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <>
-      <S.ModalBackdrop className="modal-backdrop" />
+      <S.ModalBackdrop
+        className="modal-backdrop"
+        onClick={handleModalBackdrop}
+      />
       <S.Modal className="modal" modalStyle={modalStyle}>
         {children}
       </S.Modal>

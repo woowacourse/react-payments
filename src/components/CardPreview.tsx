@@ -1,17 +1,28 @@
 import styled from "styled-components";
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 import { NUMBER_INPUT, LIMIT_LENGTH, PASSWORD_PART } from "constants/limit";
 import { HIDDEN_VALUE, SECURITY_TARGET } from "constants/security";
-import { CardNumber, ExpirationDate } from "types";
+import { PreviewCardInfo } from "types";
+import { SelectorButton } from "./ButtonStyle";
+import { ModalState } from "pages/RegisterPage/CardRegisterForm";
 
-interface Props extends ExpirationDate, CardNumber {
-  name: string;
+interface Props {
+  cardInfo: PreviewCardInfo;
 }
 
-const CardPreview = ({ cardInfo }: { cardInfo: Props }) => {
+const CardPreview = ({ cardInfo }: Props) => {
+  const setIsModalOpen = useContext(ModalState);
+
+  const handleModalOpen = () => {
+    setIsModalOpen(true);
+  };
+
   return (
     <S.Card>
+      <SelectorButton onClick={handleModalOpen}>카드사 선택</SelectorButton>
+
       <S.Chip />
+
       <S.CardInfo>
         <S.Numbers>
           {Array.from({ length: NUMBER_INPUT.COUNT }).map((_, index) => (
@@ -29,6 +40,7 @@ const CardPreview = ({ cardInfo }: { cardInfo: Props }) => {
             </Fragment>
           ))}
         </S.Numbers>
+
         <S.Wrapper>
           <S.Name>{cardInfo.name}</S.Name>
           <S.Date>{`${cardInfo.month}${
@@ -65,11 +77,11 @@ const S = {
   `,
 
   CardInfo: styled.div`
-    color: #fff;
+    color: var(--gray-color-100);
   `,
 
   Numbers: styled.p`
-    margin: 10px 0 12px;
+    margin: 10px 0;
     letter-spacing: 2px;
 
     & span {
