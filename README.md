@@ -23,6 +23,15 @@ npm ci
 npm run start
 ```
 
+### step2
+
+```
+git checkout -b step2
+git pull origin step2
+npm ci
+npm run start
+```
+
 ### 스토리북 실행
 
 ```
