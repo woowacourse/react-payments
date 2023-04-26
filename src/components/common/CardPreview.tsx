@@ -7,7 +7,7 @@ export function CardPreview() {
 
   return (
     <CardContainer>
-      <Magnetic />
+      <_Chip />
       <NumberWrapper>
         <NumberItem>{CARD_NUMBER.first.value}</NumberItem>
         <NumberItem>{CARD_NUMBER.second.value}</NumberItem>
@@ -37,7 +37,7 @@ const CardContainer = styled.section`
   border-radius: 0.5rem;
 `;
 
-const Magnetic = styled.div`
+const _Chip = styled.div`
   width: 4rem;
   height: 2.6rem;
   margin-top: 4.7rem;

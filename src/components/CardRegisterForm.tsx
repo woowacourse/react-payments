@@ -41,7 +41,6 @@ export function CardRegisterForm() {
     <_Form onSubmit={handleSubmit}>
       {Object.entries(cardRegisterForm).map(([key, inputs]) => (
         <InputBox
-          key={key}
           id={key}
           inputs={Object.values(inputs) as unknown as InputInfo[]}
         ></InputBox>
