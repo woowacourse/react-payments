@@ -1,5 +1,5 @@
 import { createRef } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 type InputInfo = {
   type: string;
@@ -9,30 +9,32 @@ type InputInfo = {
   width: string;
   value?: string;
   center: boolean;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-type InputProps = {
+type InputGroupProps = {
   labelText: string;
   inputInfoList: InputInfo[];
   children?: React.ReactNode;
 };
 
-const Input = ({ labelText, inputInfoList, children }: InputProps) => {
+interface InputProps extends React.HTMLAttributes<HTMLInputElement> {
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  center: boolean;
+}
+
+function InputGroup({ labelText, inputInfoList, children }: InputGroupProps) {
   const inputRefs = Array(inputInfoList.length)
     .fill(0)
     .map(() => createRef<HTMLInputElement>());
 
-  const moveFocus = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (
-      e.target.value.length === e.target.maxLength &&
-      Number(e.target.dataset.id) + 1 < inputRefs.length
-    )
-      inputRefs[Number(e.target.dataset.id) + 1].current?.focus();
+  const moveFocus = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length === e.target.maxLength && Number(index) + 1 < inputRefs.length)
+      inputRefs[Number(index) + 1].current?.focus();
   };
 
   return (
-    <StyledInputWrapper>
+    <StyledInputGroupWrapper>
       <StyledInputLabel>
         <StyledInputLabelContainer>
           <span>{labelText}</span>
@@ -54,13 +56,12 @@ const Input = ({ labelText, inputInfoList, children }: InputProps) => {
                   maxLength={maxLength}
                   width={width}
                   placeholder={placeholder}
-                  data-id={index}
                   value={value}
-                  data-center={center}
+                  center={center}
                   ref={inputRefs[index]}
                   onChange={(e) => {
-                    moveFocus(e);
-                    onChange(e);
+                    moveFocus(index)(e);
+                    onChange(index)(e);
                   }}
                 />
               );
@@ -68,11 +69,11 @@ const Input = ({ labelText, inputInfoList, children }: InputProps) => {
           )}
         </StyledInputListWrapper>
       </StyledInputLabel>
-    </StyledInputWrapper>
+    </StyledInputGroupWrapper>
   );
-};
+}
 
-const StyledInputWrapper = styled.div`
+const StyledInputGroupWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
@@ -85,16 +86,18 @@ const StyledInputLabel = styled.label`
   color: #525252;
 `;
 
-const StyledInput = styled.input`
-  width: ${(props) => props.width};
+const StyledInput = styled.input<InputProps>`
+  width: ${({ width }) => width};
   height: 45px;
   background: transparent;
   border: none;
   border-bottom: 1px solid #525252;
   padding: 12px;
-  &[data-center='true'] {
-    text-align: center;
-  }
+  ${({ center }) =>
+    center &&
+    css`
+      text-align: center;
+    `}
 `;
 
 const StyledInputListWrapper = styled.div`
@@ -107,4 +110,4 @@ const StyledInputLabelContainer = styled.div`
   justify-content: space-between;
 `;
 
-export default Input;
+export default InputGroup;

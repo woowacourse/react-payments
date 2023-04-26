@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import Input from '../components/Input';
+import Input from '../components/InputGroup';
 
 const meta: Meta<typeof Input> = {
   title: 'Input',
@@ -21,7 +21,7 @@ export const CardNumber: Story = {
         width: '75px',
         value: '',
         center: true,
-        onChange: () => {},
+        onChange: () => () => {},
       },
       {
         type: 'number',
@@ -30,7 +30,7 @@ export const CardNumber: Story = {
         width: '75px',
         center: true,
         value: '',
-        onChange: () => {},
+        onChange: () => () => {},
       },
       {
         type: 'number',
@@ -39,7 +39,7 @@ export const CardNumber: Story = {
         width: '75px',
         value: '',
         center: true,
-        onChange: () => {},
+        onChange: () => () => {},
       },
       {
         type: 'number',
@@ -48,7 +48,7 @@ export const CardNumber: Story = {
         width: '75px',
         value: '',
         center: true,
-        onChange: () => {},
+        onChange: () => () => {},
       },
     ],
   },
@@ -66,7 +66,7 @@ export const CardExpirationDate: Story = {
         width: '75px',
         value: '',
         center: true,
-        onChange: () => {},
+        onChange: () => () => {},
       },
       {
         type: 'number',
@@ -76,7 +76,7 @@ export const CardExpirationDate: Story = {
         width: '75px',
         value: '',
         center: true,
-        onChange: () => {},
+        onChange: () => () => {},
       },
     ],
   },
@@ -94,7 +94,7 @@ export const CardOwner: Story = {
         width: '250px',
         value: '',
         center: false,
-        onChange: () => {},
+        onChange: () => () => {},
       },
     ],
   },
@@ -111,7 +111,7 @@ export const CardCVC: Story = {
         width: '75px',
         value: '',
         center: true,
-        onChange: () => {},
+        onChange: () => () => {},
       },
     ],
   },
@@ -128,7 +128,7 @@ export const CardPWD: Story = {
         width: '40px',
         value: '',
         center: true,
-        onChange: () => {},
+        onChange: () => () => {},
       },
       {
         type: 'password',
@@ -137,7 +137,7 @@ export const CardPWD: Story = {
         width: '40px',
         value: '',
         center: true,
-        onChange: () => {},
+        onChange: () => () => {},
       },
     ],
   },

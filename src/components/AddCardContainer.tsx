@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import CardPreview from './CardPreview';
-import Input from './Input';
+import InputGroup from './InputGroup';
 import { useCardDispatch } from '../context/CardContext';
 import { isAlphabet, isNumber, validateMonth, validateYear } from '../utils/validateInput';
 import ErrorMessage from './ErrorMessage';
@@ -18,28 +18,29 @@ const AddCardContainer = () => {
   const setCard = useCardDispatch();
   const navigate = useNavigate();
 
-  const onChangeDateState = (e: React.ChangeEvent<HTMLInputElement>) => {
-    switch (e.target.dataset.id) {
-      case '0':
+  const onChangeDateState = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    switch (index) {
+      case 0:
         validateMonth(e.target);
         break;
-      case '1':
+      case 1:
         validateYear(e.target);
         break;
       default:
     }
 
-    onChangeState(cardExpirationDate, setCardExpirationDate, 'number')(e);
+    onChangeState(cardExpirationDate, setCardExpirationDate, 'number')(index)(e);
   };
 
   const onChangeState =
     (state: string[], setState: React.Dispatch<React.SetStateAction<string[]>>, type: string) =>
+    (index: number) =>
     (e: React.ChangeEvent<HTMLInputElement>) => {
       switch (type) {
         case 'number':
         case 'password':
           if (isNumber(e.target.value)) {
-            const targetId = Number(e.target.dataset.id);
+            const targetId = Number(index);
             const nextState = state.map((value, index) =>
               index === targetId ? e.target.value : value,
             );
@@ -49,7 +50,7 @@ const AddCardContainer = () => {
           break;
         case 'text':
           if (isAlphabet(e.target.value)) {
-            const targetId = Number(e.target.dataset.id);
+            const targetId = Number(index);
             const nextState = state.map((value, index) =>
               index === targetId ? e.target.value : value,
             );
@@ -93,7 +94,7 @@ const AddCardContainer = () => {
         cardExpirationDate={cardExpirationDate}
       />
       <StyledForm onSubmit={onSubmitCard}>
-        <Input
+        <InputGroup
           labelText="카드 번호"
           inputInfoList={[
             {
@@ -134,7 +135,7 @@ const AddCardContainer = () => {
             },
           ]}
         />
-        <Input
+        <InputGroup
           labelText="만료일"
           inputInfoList={[
             {
@@ -160,7 +161,7 @@ const AddCardContainer = () => {
           ]}
         />
         {expirationError && <ErrorMessage message="유효한 카드 만료일을 입력해주세요." />}
-        <Input
+        <InputGroup
           labelText="카드 소유자 이름(선택)"
           inputInfoList={[
             {
@@ -176,9 +177,9 @@ const AddCardContainer = () => {
           ]}
         >
           <p>{cardOwner[0].length} / 30</p>
-        </Input>
+        </InputGroup>
         <StyledHeightCenter>
-          <Input
+          <InputGroup
             labelText="보안 코드(CVC/CVV)"
             inputInfoList={[
               {
@@ -195,7 +196,7 @@ const AddCardContainer = () => {
           <StyledHelperButton disabled>?</StyledHelperButton>
         </StyledHeightCenter>
         <StyledHeightCenter>
-          <Input
+          <InputGroup
             labelText="카드 비밀번호"
             inputInfoList={[
               {
