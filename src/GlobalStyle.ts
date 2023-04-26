@@ -20,6 +20,10 @@ export const GlobalStyle = createGlobalStyle`
     display: none;
   }
 
+  body:has(.modal) {
+    overflow: hidden;
+  }
+
   /* Colors *****************************************/
   :root {
     --input-background:#ecebf1;

@@ -10,6 +10,7 @@ import Header from "components/Header";
 import { NextButton } from "components/ButtonStyle";
 import useSetFormData from "hooks/useSetFormData";
 import useFormState from "hooks/useFormState";
+import CardCompanyModal from "./CardCompanyModal";
 
 const CardRegisterForm = () => {
   const [cardNumber, setCardNumber] = useState({
@@ -54,6 +55,8 @@ const CardRegisterForm = () => {
 
         {isFormFilled && <NextButton>다음</NextButton>}
       </form>
+
+      <CardCompanyModal />
     </S.Wrapper>
   );
 };
