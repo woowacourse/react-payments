@@ -15,6 +15,8 @@ import {
 } from "../contexts/cardInfo";
 import { validation } from "../validation/input";
 import { TEXT_LENGTH } from "../constants/inputInfo";
+import { setCardData } from "../utils/localStorage";
+import { SubmitButton } from "./common/submitButton";
 
 export function AddCardForm() {
   const navigate = useNavigate();
@@ -29,16 +31,38 @@ export function AddCardForm() {
     isValid && setIsComplete(true);
   }
 
+  const { cardNumber } = useContext(NumberContext);
+  const { month, year } = useContext(DateContext);
+  const { userName } = useContext(NameContext);
+
+  function saveData(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setCardData(getInputData());
+    navigate("/");
+  }
+
+  function getInputData() {
+    return {
+      cardNumber: {
+        first: cardNumber["first"],
+        second: cardNumber["second"],
+        third: cardNumber["third"],
+        fourth: cardNumber["fourth"],
+      },
+      month: month,
+      year: year,
+      userName: userName,
+    };
+  }
+
   return (
-    <Form onChange={checkAllInputs}>
+    <Form onChange={checkAllInputs} onSubmit={saveData}>
       <CardNumber />
       <ExpiredDate />
       <UserName />
       <SecurityCode />
       <CardPassword />
-      <ButtonWrapper>
-        {isComplete && <CompleteButton type="submit">다음</CompleteButton>}
-      </ButtonWrapper>
+      <SubmitButton />
     </Form>
   );
 }

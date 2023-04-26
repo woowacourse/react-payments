@@ -1,15 +1,20 @@
-export function updateData(data: unknown, id: "cards") {
-  const origin = localStorage.getItem(id);
-  if (origin === null) {
-    localStorage.setItem(id, JSON.stringify([data]));
-    return;
-  }
-  const updatedList = JSON.parse(origin).push(data);
-  localStorage.setItem(id, JSON.stringify(updatedList));
+import { CardProps } from "../components/common/card";
+
+export function setData(initId: number) {
+  let id = initId;
+
+  return (data: CardProps) => {
+    localStorage.setItem(String(id), JSON.stringify(data));
+    id += 1;
+  };
 }
 
-export function getData(id: "cards") {
-  const data = localStorage.getItem(id);
-  if (data === null) return [];
-  return [JSON.parse(data)];
+export const setCardData = setData(0);
+
+export function getData(): CardProps[] | undefined {
+  const cards = Object.values(localStorage).map((card) => JSON.parse(card));
+  if (cards !== null) {
+    return cards;
+  }
+  return;
 }

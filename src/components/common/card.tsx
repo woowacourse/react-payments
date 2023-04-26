@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { CardNumber } from "../../type/input";
 
-interface CardProps {
+export interface CardProps {
   cardNumber: CardNumber;
   month: string;
   year: string;
@@ -15,13 +15,13 @@ export function Card(props: CardProps) {
     <CardContainer>
       <ICcard />
       <NumberWrapper>
-        <NumberItem type="text">{cardNumber["first"]}</NumberItem>
-        <NumberItem type="text">{cardNumber["second"]}</NumberItem>
+        <NumberItem type="text">{cardNumber?.["first"]}</NumberItem>
+        <NumberItem type="text">{cardNumber?.["second"]}</NumberItem>
         <NumberItem type="password">
-          {"•".repeat(cardNumber["third"].length)}
+          {"•".repeat(cardNumber?.["third"].length)}
         </NumberItem>
         <NumberItem type="password">
-          {"•".repeat(cardNumber["fourth"].length)}
+          {"•".repeat(cardNumber?.["fourth"].length)}
         </NumberItem>
       </NumberWrapper>
       <InfoWrapper>

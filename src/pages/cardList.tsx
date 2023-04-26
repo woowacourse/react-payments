@@ -3,27 +3,20 @@ import { useNavigate } from "react-router-dom";
 import { Header } from "../components/common/Header";
 import { useEffect, useState } from "react";
 import { CardInfo, CardItem } from "../components/common/cardItem";
+import { getData } from "../utils/localStorage";
+import { Card, CardProps } from "../components/common/card";
 
 export function CardList() {
-  const [cards, setCards] = useState<CardInfo[]>();
-
-  function getCardList() {
-    const data = fetch("http://localhost:4002/data/", {
-      method: "GET",
-    }).then((response) => {
-      response.json();
-    });
-
-    return data;
-  }
-
+  const [cards, setCards] = useState<CardProps[]>();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setCards(getData());
+  }, []);
+
   function moveAddCardPage() {
     navigate("/add-card");
   }
-  useEffect(() => {
-    console.log(getCardList());
-  }, []);
 
   return (
     <CardListContainer>
@@ -33,11 +26,12 @@ export function CardList() {
         {cards &&
           cards?.map((card) => {
             return (
-              <CardItem
+              <Card
                 key={card.userName}
                 cardNumber={card?.cardNumber}
-                date={card?.date}
-                userName={card?.userName}></CardItem>
+                month={card.month}
+                year={card.year}
+                userName={card?.userName}></Card>
             );
           })}
         <Button onClick={moveAddCardPage}>+</Button>
