@@ -11,7 +11,7 @@ export default function CardPreview(props: Props) {
 
   const cardNumber = number.map((part, index) => {
     if (index === 0 || index === 3) return part + ' '.repeat(4 - part.length);
-    else return '·'.repeat(part.length) + ' '.repeat(4 - part.length);
+    else return '•'.repeat(part.length) + ' '.repeat(4 - part.length);
   });
 
   const c = company ?? 'woori';
