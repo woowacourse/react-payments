@@ -34,6 +34,8 @@ export type InputHook<T> = {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
+export type InputStatus = 'INIT' | 'VALID' | 'INVALID';
+
 export type PasswordInputHook<T> = [T, (e: React.ChangeEvent<HTMLInputElement>) => void];
 
 export type FormCardAddProps = {

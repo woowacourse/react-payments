@@ -1,9 +1,8 @@
 import { useState } from 'react';
+import { InputStatus } from '../type';
 
-type INPUT_STATUS = 'INIT' | 'VALID' | 'INVALID';
-
-const useInputs = (formatDispatcher: (str: string) => INPUT_STATUS, init = '') => {
-  const [status, setStatus] = useState<INPUT_STATUS>('INIT');
+const useInputs = (formatDispatcher: (str: string) => InputStatus, init = '') => {
+  const [status, setStatus] = useState<InputStatus>('INIT');
   const [value, setValue] = useState<string>('');
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
