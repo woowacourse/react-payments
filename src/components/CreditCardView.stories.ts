@@ -13,6 +13,7 @@ export const AllfilledInfo: Story = {
     name: '엽토',
     cardNumbers: '1212-3434-5656-7878',
     expirationDate: ['12', '24'],
+    cardCompany: '카드사'
   },
 };
 
