@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import Card from "src/components/@common/card";
+import Card from "src/components/@common/Card";
 import useCardList from "src/hooks/useCardList";
 import { PATHS } from "src/utils/constant";
 import styled from "styled-components";
