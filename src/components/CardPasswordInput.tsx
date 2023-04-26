@@ -1,6 +1,6 @@
-import { useRef } from 'react';
 import styled from 'styled-components';
-import { useFocusChain } from '../hooks/useFocusChain';
+import { useGroupedFocus } from '../hooks/useGroupedFocus';
+import { useGroupedRef } from '../hooks/useGroupedRef';
 import { NumberInput } from './common/NumberInput';
 
 const StyledCardPasswordInput = styled.div`
@@ -16,13 +16,11 @@ type CardPasswordInputProps = {
 export const CardPasswordInput = (props: CardPasswordInputProps) => {
   const { value, onChange } = props;
 
-  const password1Ref = useRef<HTMLInputElement>(null);
-  const password2Ref = useRef<HTMLInputElement>(null);
-
-  const { next } = useFocusChain([password1Ref, password2Ref]);
+  const { refs, getRef } = useGroupedRef<[HTMLInputElement, HTMLInputElement]>(2);
+  const { focusNext } = useGroupedFocus(refs);
 
   const handleCardPasswordChange = (index: number) => (newValue: string) => {
-    if (newValue.length === 1) next();
+    if (newValue.length === 1) focusNext();
 
     const password = Array.from(value);
     password[index] = newValue;
@@ -32,24 +30,18 @@ export const CardPasswordInput = (props: CardPasswordInputProps) => {
 
   return (
     <StyledCardPasswordInput>
-      <NumberInput
-        ref={password1Ref}
-        maxCount={1}
-        value={value[0] ?? ''}
-        onChange={handleCardPasswordChange(0)}
-        width={5}
-        center
-        type="password"
-      />
-      <NumberInput
-        ref={password2Ref}
-        maxCount={1}
-        value={value[1] ?? ''}
-        onChange={handleCardPasswordChange(1)}
-        width={5}
-        center
-        type="password"
-      />
+      {([0, 1] as const).map((index) => (
+        <NumberInput
+          key={index}
+          ref={getRef(index)}
+          type="password"
+          maxCount={1}
+          value={value[index] ?? ''}
+          onChange={handleCardPasswordChange(index)}
+          width={5}
+          center
+        />
+      ))}
       <NumberInput value="*" width={5} center type="password" disabled />
       <NumberInput value="*" width={5} center type="password" disabled />
     </StyledCardPasswordInput>

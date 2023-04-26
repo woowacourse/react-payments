@@ -1,6 +1,6 @@
-import { useRef } from 'react';
 import styled from 'styled-components';
-import { useFocusChain } from '../hooks/useFocusChain';
+import { useGroupedFocus } from '../hooks/useGroupedFocus';
+import { useGroupedRef } from '../hooks/useGroupedRef';
 import { NumberInput } from './common/NumberInput';
 
 const StyledExpirationDateInput = styled.div`
@@ -19,13 +19,12 @@ export const ExpirationDateInput = (props: ExpirationDateInputProps) => {
     onChange,
   } = props;
 
-  const monthRef = useRef<HTMLInputElement>(null);
-  const yearRef = useRef<HTMLInputElement>(null);
-
-  const { next } = useFocusChain([monthRef, yearRef]);
+  const { refs } = useGroupedRef<[HTMLInputElement, HTMLInputElement]>(2);
+  const [monthRef, yearRef] = refs;
+  const { focusNext } = useGroupedFocus(refs);
 
   const handleMonthChange = (value: string) => {
-    if (value.length === 2) next();
+    if (value.length === 2) focusNext();
 
     onChange([value, year]);
   };

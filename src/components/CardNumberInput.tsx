@@ -1,6 +1,6 @@
-import { useRef } from 'react';
 import styled from 'styled-components';
-import { useFocusChain } from '../hooks/useFocusChain';
+import { useGroupedFocus } from '../hooks/useGroupedFocus';
+import { useGroupedRef } from '../hooks/useGroupedRef';
 import { NumberInput } from './common/NumberInput';
 
 const StyledCardNumberInput = styled.div`
@@ -20,19 +20,16 @@ type CardNumberInputProps = {
 export const CardNumberInput = (props: CardNumberInputProps) => {
   const { value, onChange } = props;
 
-  const cardNumberRef1 = useRef<HTMLInputElement>(null);
-  const cardNumberRef2 = useRef<HTMLInputElement>(null);
-  const cardNumberRef3 = useRef<HTMLInputElement>(null);
-  const cardNumberRef4 = useRef<HTMLInputElement>(null);
-
-  const { next } = useFocusChain([cardNumberRef1, cardNumberRef2, cardNumberRef3, cardNumberRef4]);
+  const { refs, getRef } =
+    useGroupedRef<[HTMLInputElement, HTMLInputElement, HTMLInputElement, HTMLInputElement]>(4);
+  const { focusNext } = useGroupedFocus(refs);
 
   const getPartialCardNumber = (index: number) => {
     return value.split('-')[index] ?? '';
   };
 
   const handleCardNumberChange = (index: number) => (newValue: string) => {
-    if (newValue.length === 4) next();
+    if (newValue.length === 4) focusNext();
 
     const partialCardNumbers = value.split('-');
     partialCardNumbers[index] = newValue;
@@ -42,36 +39,16 @@ export const CardNumberInput = (props: CardNumberInputProps) => {
 
   return (
     <StyledCardNumberInput>
-      <NumberInput
-        ref={cardNumberRef1}
-        maxCount={4}
-        value={getPartialCardNumber(0)}
-        onChange={handleCardNumberChange(0)}
-        center
-      />
-      <NumberInput
-        ref={cardNumberRef2}
-        maxCount={4}
-        value={getPartialCardNumber(1)}
-        onChange={handleCardNumberChange(1)}
-        center
-      />
-      <NumberInput
-        ref={cardNumberRef3}
-        maxCount={4}
-        value={getPartialCardNumber(2)}
-        onChange={handleCardNumberChange(2)}
-        center
-        type="password"
-      />
-      <NumberInput
-        ref={cardNumberRef4}
-        maxCount={4}
-        value={getPartialCardNumber(3)}
-        onChange={handleCardNumberChange(3)}
-        center
-        type="password"
-      />
+      {([0, 1, 2, 3] as const).map((index) => (
+        <NumberInput
+          key={index}
+          ref={getRef(index)}
+          maxCount={4}
+          value={getPartialCardNumber(index)}
+          onChange={handleCardNumberChange(index)}
+          center
+        />
+      ))}
     </StyledCardNumberInput>
   );
 };
