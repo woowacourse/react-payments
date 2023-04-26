@@ -14,12 +14,10 @@ function CardList({ cardList }: CardListProps) {
           {cardList.map((card) => (
             <div className={styles.item} key={card.id}>
               <CardItem
-                information={{
-                  issuer: card.issuer,
-                  cardNumber: card.cardNumber,
-                  expirationDate: card.expirationDate,
-                  ownerName: card.ownerName,
-                }}
+                issuer={card.issuer}
+                cardNumber={card.cardNumber}
+                expirationDate={card.expirationDate}
+                ownerName={card.ownerName}
               />
               <h5 className={styles.cardName}>{card.cardName}</h5>
             </div>
