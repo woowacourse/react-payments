@@ -97,6 +97,8 @@ export default function CardInputForm(props: CardInputFormProps) {
   }, [inputStatus]);
 
   const submitCardInfo = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     if (isFormFilled) {
       addNewCard(nowCardInfo);
       navigate("/CardListPage");
@@ -117,7 +119,9 @@ export default function CardInputForm(props: CardInputFormProps) {
         changeSecurityCodeStatus={changeInputStatus("securityCode")}
       />
       <InputBoxPassword changePasswordStatus={changeInputStatus("password")} />
-      {isFormFilled && <Button type="submit">다음</Button>}
+      <Button type="submit" style={isFormFilled ? {} : { color: "lightgrey" }}>
+        다음
+      </Button>
     </form>
   );
 }
