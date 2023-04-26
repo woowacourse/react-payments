@@ -1,7 +1,7 @@
 const CARD_INPUT_MAX_LENGTH: Record<string, number> = {
   cardNumber: 25,
   expiredDate: 7,
-  ownerName: 30,
+  ownerName: 12,
   cvc: 3,
   password: 1,
 } as const;

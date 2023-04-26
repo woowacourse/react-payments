@@ -5,7 +5,7 @@ import { CardType } from "../types";
 
 const Card = ({ cardNumber, color, ownerName, expiredDate }: CardType) => {
   const cardNumberArray = cardNumber
-    .replaceAll(SEPERATOR_STRING.cardNumber, " ")
+    .replace(SEPERATOR_STRING.cardNumber, " ")
     .split(" ");
 
   return (
@@ -13,16 +13,9 @@ const Card = ({ cardNumber, color, ownerName, expiredDate }: CardType) => {
       <img src={IcChip} alt="ic-chip" />
       <CardInfoWrapper>
         <UpInfoWrapper>
-          {cardNumberArray.map((cardNumber, index) => {
-            return (
-              <span
-                key={crypto.randomUUID()}
-                style={{ letterSpacing: index > 1 ? "-3px" : "3px" }}
-              >
-                {cardNumber}
-              </span>
-            );
-          })}
+          {cardNumberArray.map((cardNumber) => (
+            <span key={crypto.randomUUID()}>{cardNumber}</span>
+          ))}
         </UpInfoWrapper>
         <BottomInfoWrapper>
           <span>{ownerName}</span>

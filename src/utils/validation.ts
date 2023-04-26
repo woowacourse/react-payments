@@ -2,7 +2,7 @@ import { REGEX } from "../constants";
 
 export const validateNumber = (value: string) => {
   if (value.length === 0) return "";
-  if (!REGEX.number.test(value.replaceAll(" - ", "")))
+  if (!REGEX.number.test(value.replace(" - ", "")))
     return "숫자만 입력해 주세요.";
 };
 
@@ -24,6 +24,6 @@ export const validateExpiredDate = (value: string) => {
 
 export const validateOwnerName = (value: string) => {
   if (value.length === 0) return "";
-  if (!REGEX.english.test(value.replaceAll(" - ", "")))
-    return "문자만 입력해 주세요.";
+  if (!REGEX.english.test(value.replace(" - ", "")))
+    return "영어만 입력해 주세요.";
 };
