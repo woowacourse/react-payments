@@ -93,6 +93,8 @@ const Name = styled.div`
   width: 15rem;
   height: 3rem;
   word-break: break-all;
+
+  ${({ theme }) => theme.fonts.text}
 `;
 
 const Date = styled.div``;

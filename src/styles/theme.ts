@@ -37,6 +37,7 @@ const fonts: StyleType = {
   label: FONT({ weight: 500, size: 1.2, lineHeight: 1.4 }),
   card: FONT({ weight: 500, size: 1.3, lineHeight: 1.4 }),
   button: FONT({ weight: 700, size: 1.4, lineHeight: 1.6 }),
+  text: FONT({ weight: 300, size: 1.2, lineHeight: 1.6 }),
 };
 
 export const theme: DefaultTheme = {
