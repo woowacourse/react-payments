@@ -29,9 +29,10 @@ export type CardType = {
   cardPassword: CardPassword;
 };
 
-export type InputHook<T> = {
-  value: T;
+export type InputHook = {
+  value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  status: InputStatus;
 };
 
 export type InputStatus = 'INIT' | 'VALID' | 'INVALID';
@@ -45,8 +46,8 @@ export type FormCardAddProps = {
   cardPassword1: InputHook<string>;
   cardPassword2: InputHook<string>;
   onCardNumberChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  expireMonth: InputHook<string>;
-  expireYear: InputHook<string>;
+  expireMonth: InputHook;
+  expireYear: InputHook;
 };
 
 export type AddCardNumberInputProps = Pick<FormCardAddProps, 'cardNumber'> & {
@@ -61,4 +62,10 @@ export type AddCardPasswordInputProps = Pick<FormCardAddProps, 'password1', 'pas
 export type ErrorMessageProps = {
   inputType: string;
   status: InputStatus;
+};
+
+export type InputContainerProps = {
+  className: string;
+  status: InputStatus;
+  inputType: string;
 };

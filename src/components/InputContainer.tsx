@@ -1,14 +1,17 @@
 import { PropsWithChildren } from 'react';
 import ErrorMessage from './ErrorMessage';
+import { InputContainerProps } from '../type';
 
-type InputContainerProps = {
-  className: string;
-};
-const InputContainer = ({ children, className }: PropsWithChildren<InputContainerProps>) => {
+const InputContainer = ({
+  children,
+  className,
+  status,
+  inputType,
+}: PropsWithChildren<InputContainerProps>) => {
   return (
     <section className={className}>
       {children}
-      <ErrorMessage />
+      <ErrorMessage status={status} inputType={inputType} />
     </section>
   );
 };
