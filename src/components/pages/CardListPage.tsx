@@ -11,6 +11,7 @@ interface CardListPageProps {
 
 const CardListPage = ({ onOpen }: CardListPageProps) => {
   const cardList = cardLocalStorage.getCardList();
+
   return (
     <>
       <Header title='보유카드' />

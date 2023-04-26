@@ -11,11 +11,13 @@ import { cardLocalStorage } from '../domain/CardLocalStorage';
 interface CardRegistrationPageProps {
   bankName: string;
   onOpen: () => void;
+  handleNewCardId: (cardItem: CardItemInfo) => void;
 }
 
 const CardRegistrationPage = ({
   bankName,
   onOpen,
+  handleNewCardId,
 }: CardRegistrationPageProps) => {
   const [cardItem, setCardItem] = useState<CardItemInfo>({
     id: 0,
@@ -42,6 +44,7 @@ const CardRegistrationPage = ({
 
   const handleSubmitForm = () => {
     cardLocalStorage.addCard(cardItem);
+    handleNewCardId(cardItem);
   };
 
   useEffect(() => {

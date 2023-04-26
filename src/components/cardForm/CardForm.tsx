@@ -52,7 +52,7 @@ const CardForm = ({ onSubmitForm, onChangeForm }: CardFormProps) => {
   const handleSubmitForm = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     onSubmitForm();
-    navigate('/');
+    navigate('/complete');
   };
 
   return (

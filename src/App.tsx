@@ -7,17 +7,18 @@ import NotFoundPage from './components/pages/NotFoundPage';
 import BankList from './components/BottomSheetComponents/BankList';
 import CardAdditionCompletionPage from './components/pages/CardAdditionCompletionPage';
 import { useBottomSheet } from './hooks/useBottomSheet';
-import { cardLocalStorage } from './components/domain/CardLocalStorage';
-import type { CardItemInfo } from './types/Card';
+import { CardItemInfo } from './types/Card';
 
 function App() {
-  const [cardList, setCardList] = useState<CardItemInfo[]>(
-    cardLocalStorage.getCardList()
-  );
+  const [newCardId, setNewCardId] = useState(0);
   const [bankName, setBankName] = useState('카드사를 선택해주세요');
 
   const { isBottomSheetOpen, handleBottomSheetOpen, handleBottomSheetClose } =
     useBottomSheet();
+
+  const handleNewCardId = (cardItem: CardItemInfo) => {
+    setNewCardId(cardItem.id);
+  };
 
   const onBankInfoChanged = (bankName: string) => {
     setBankName(bankName);
@@ -37,12 +38,13 @@ function App() {
               <CardRegistrationPage
                 onOpen={handleBottomSheetOpen}
                 bankName={bankName}
+                handleNewCardId={handleNewCardId}
               />
             }
           />
           <Route
             path='/complete'
-            element={<CardAdditionCompletionPage cardList={cardList} />}
+            element={<CardAdditionCompletionPage newCardId={newCardId} />}
           />
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
