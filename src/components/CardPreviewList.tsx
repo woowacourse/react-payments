@@ -4,12 +4,13 @@ import { useCardState } from '../context/CardContext';
 import { setLocalStorage } from '../utils/localStorage';
 
 import CardPreview from './CardPreview';
+import { LOCAL_STORAGE_KEY } from '../constants';
 
 const CardPreviewList = () => {
   const cardList = useCardState();
 
   useEffect(() => {
-    setLocalStorage('cardList', cardList);
+    setLocalStorage(LOCAL_STORAGE_KEY.CARD_LIST, cardList);
   }, [cardList]);
 
   return (
