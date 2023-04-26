@@ -1,9 +1,6 @@
 import styled from 'styled-components';
 
-export const MyCardPage = styled.div`
+export const CardList = styled.ul`
   display: flex;
   flex-direction: column;
-  align-items: center;
-
-  width: 100%;
 `;

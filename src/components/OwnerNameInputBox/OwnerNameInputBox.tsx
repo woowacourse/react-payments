@@ -1,10 +1,9 @@
-import { ChangeEvent, useState } from 'react';
-
 import { ExpirationDate, OwnerName, SetOwnerName } from '../../types/state';
 import { OWNER_NAME } from '../../constants/cardInfo';
 import { ERROR_MESSAGE } from '../../constants/message';
-
 import { isAlpha } from '../validators/validator';
+import { useInputValidator } from '../../hooks/useInputValidator';
+import { useInputBox } from '../../hooks/useInputBox';
 
 import * as styled from './OwnerNameInputBox.styled';
 import Input from '../Input/Input';
@@ -16,21 +15,13 @@ interface OwnerNameInputBoxProps {
 }
 
 const OwnerNameInputBox = ({ ownerName, setOwnerName, expirationDate }: OwnerNameInputBoxProps) => {
-  const [errorMessage, setErrorMessage] = useState('');
+  const { validate, errorMessageState } = useInputValidator(
+    isAlpha,
+    ERROR_MESSAGE.SHOULD_ALPHA,
+    OWNER_NAME.MAX_LENGTH
+  );
 
-  const onChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
-    if (!isAlpha(value) && value.length) {
-      setErrorMessage(ERROR_MESSAGE.SHOULD_ALPHA);
-
-      return;
-    }
-
-    if (errorMessage) setErrorMessage('');
-
-    if (value.length > OWNER_NAME.MAX_LENGTH) return;
-
-    setOwnerName(value.toUpperCase());
-  };
+  const { onChange } = useInputBox(validate, ownerName, setOwnerName);
 
   return (
     <styled.OwnerNameInputBox>
@@ -51,7 +42,7 @@ const OwnerNameInputBox = ({ ownerName, setOwnerName, expirationDate }: OwnerNam
           />
         </styled.InputContainer>
       </label>
-      <styled.ErrorMessage>{errorMessage}</styled.ErrorMessage>
+      <styled.ErrorMessage>{errorMessageState}</styled.ErrorMessage>
     </styled.OwnerNameInputBox>
   );
 };

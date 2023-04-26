@@ -1,10 +1,9 @@
-import { ChangeEvent, useState } from 'react';
-
 import { OwnerName, SetSecurityCode } from '../../types/state';
 import { SECURITY_CODE } from '../../constants/cardInfo';
 import { ERROR_MESSAGE } from '../../constants/message';
-
 import { isNumeric } from '../validators/validator';
+import { useInputValidator } from '../../hooks/useInputValidator';
+import { useInputBox } from '../../hooks/useInputBox';
 
 import * as styled from './SecurityCodeInputBox.styled';
 import Input from '../Input/Input';
@@ -15,22 +14,18 @@ interface SecurityCodeInputBoxProps {
   ownerName: OwnerName;
 }
 
-const SecurityCodeInputBox = ({ securityCode, setSecurityCode, ownerName }: SecurityCodeInputBoxProps) => {
-  const [errorMessage, setErrorMessage] = useState('');
+const SecurityCodeInputBox = ({
+  securityCode,
+  setSecurityCode,
+  ownerName,
+}: SecurityCodeInputBoxProps) => {
+  const { validate, errorMessageState } = useInputValidator(
+    isNumeric,
+    ERROR_MESSAGE.SHOULD_NUMBER,
+    SECURITY_CODE.MAX_LENGTH
+  );
 
-  const onChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
-    if (!isNumeric(value) && value.length) {
-      setErrorMessage(ERROR_MESSAGE.SHOULD_NUMBER);
-
-      return;
-    }
-
-    if (errorMessage) setErrorMessage('');
-
-    if (value.length > SECURITY_CODE.MAX_LENGTH) return;
-
-    setSecurityCode(value);
-  };
+  const { onChange } = useInputBox(validate, securityCode, setSecurityCode);
 
   return (
     <styled.SecurityCodeInputBox>
@@ -49,7 +44,7 @@ const SecurityCodeInputBox = ({ securityCode, setSecurityCode, ownerName }: Secu
           />
         </styled.InputContainer>
       </label>
-      <styled.ErrorMessage>{errorMessage}</styled.ErrorMessage>
+      <styled.ErrorMessage>{errorMessageState}</styled.ErrorMessage>
     </styled.SecurityCodeInputBox>
   );
 };

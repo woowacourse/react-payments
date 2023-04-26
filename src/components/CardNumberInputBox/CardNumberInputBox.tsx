@@ -1,10 +1,9 @@
-import { ChangeEvent, useState } from 'react';
-
 import { CardNumbers, SetCardNumbers } from '../../types/state';
 import { CARD_NUMBER } from '../../constants/cardInfo';
 import { ERROR_MESSAGE } from '../../constants/message';
-
 import { isNumeric } from '../validators/validator';
+import { useInputValidator } from '../../hooks/useInputValidator';
+import { useInputBox } from '../../hooks/useInputBox';
 
 import * as styled from './CardNumberInputBox.styled';
 import Input from '../Input/Input';
@@ -15,24 +14,13 @@ interface CardNumberInputBoxProps {
 }
 
 const CardNumberInputBox = ({ cardNumbers, setCardNumbers }: CardNumberInputBoxProps) => {
-  const [errorMessage, setErrorMessage] = useState('');
+  const { validate, errorMessageState } = useInputValidator(
+    isNumeric,
+    ERROR_MESSAGE.SHOULD_NUMBER,
+    CARD_NUMBER.MAX_LENGTH
+  );
 
-  const onChange = ({ target: { name, value } }: ChangeEvent<HTMLInputElement>) => {
-    if (!isNumeric(value) && value.length) {
-      setErrorMessage(ERROR_MESSAGE.SHOULD_NUMBER);
-
-      return;
-    }
-
-    if (errorMessage) setErrorMessage('');
-
-    if (value.length > CARD_NUMBER.MAX_LENGTH) return;
-
-    setCardNumbers({
-      ...cardNumbers,
-      [name]: value,
-    });
-  };
+  const { onChange } = useInputBox(validate, cardNumbers, setCardNumbers);
 
   return (
     <styled.CardNumberInputBox>
@@ -49,7 +37,7 @@ const CardNumberInputBox = ({ cardNumbers, setCardNumbers }: CardNumberInputBoxP
                 value={value}
                 onChange={onChange}
                 width="xl"
-                type={key === 'first' || key === 'second' ? 'text' : 'password'}
+                type={key === 'firstCardNumber' || key === 'secondCardNumber' ? 'text' : 'password'}
                 maxLength={4}
                 placeholder="0000"
                 isFocus={key === 'first' ? true : false}
@@ -58,7 +46,7 @@ const CardNumberInputBox = ({ cardNumbers, setCardNumbers }: CardNumberInputBoxP
           })}
         </styled.InputContainer>
       </label>
-      <styled.ErrorMessage>{errorMessage}</styled.ErrorMessage>
+      <styled.ErrorMessage>{errorMessageState}</styled.ErrorMessage>
     </styled.CardNumberInputBox>
   );
 };

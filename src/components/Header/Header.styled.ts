@@ -12,6 +12,7 @@ export const Header = styled.header`
 export const BackwardButton = styled.div`
   margin-right: 25px;
 
+  font-weight: bolder;
   cursor: pointer;
 `;
 

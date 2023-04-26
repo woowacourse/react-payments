@@ -1,10 +1,9 @@
-import { ChangeEvent, useState } from 'react';
-
 import { Password, SetPassword } from '../../types/state';
 import { PASSWORD } from '../../constants/cardInfo';
 import { ERROR_MESSAGE } from '../../constants/message';
-
 import { isNumeric } from '../validators/validator';
+import { useInputValidator } from '../../hooks/useInputValidator';
+import { useInputBox } from '../../hooks/useInputBox';
 
 import * as styled from './PasswordInputBox.styled';
 import Input from '../Input/Input';
@@ -16,24 +15,13 @@ interface PasswordInputBoxProps {
 }
 
 const PasswordInputBox = ({ password, setPassword, securityCode }: PasswordInputBoxProps) => {
-  const [errorMessage, setErrorMessage] = useState('');
+  const { validate, errorMessageState } = useInputValidator(
+    isNumeric,
+    ERROR_MESSAGE.SHOULD_NUMBER,
+    PASSWORD.MAX_LENGTH
+  );
 
-  const onChange = ({ target: { name, value } }: ChangeEvent<HTMLInputElement>) => {
-    if (!isNumeric(value) && value.length) {
-      setErrorMessage(ERROR_MESSAGE.SHOULD_NUMBER);
-
-      return;
-    }
-
-    if (errorMessage) setErrorMessage('');
-
-    if (value.length > PASSWORD.MAX_LENGTH) return;
-
-    setPassword({
-      ...password,
-      [name]: value,
-    });
-  };
+  const { onChange } = useInputBox(validate, password, setPassword);
 
   return (
     <styled.PasswordInputBox>
@@ -52,7 +40,7 @@ const PasswordInputBox = ({ password, setPassword, securityCode }: PasswordInput
                 width="xs"
                 type="password"
                 maxLength={1}
-                isFocus={key === 'first' && securityCode.length === 3}
+                isFocus={key === 'firstPassword' && securityCode.length === 3}
               />
             );
           })}
@@ -64,7 +52,7 @@ const PasswordInputBox = ({ password, setPassword, securityCode }: PasswordInput
           </styled.RestPasswordContainer>
         </styled.InputContainer>
       </label>
-      <styled.ErrorMessage>{errorMessage}</styled.ErrorMessage>
+      <styled.ErrorMessage>{errorMessageState}</styled.ErrorMessage>
     </styled.PasswordInputBox>
   );
 };

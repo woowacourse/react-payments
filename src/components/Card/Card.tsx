@@ -13,10 +13,10 @@ const Card = ({ cardInfo, bgColor }: CardProps) => {
       <styled.Rectangle />
       <styled.CardInformationContainer>
         <styled.CardNumber>
-          <input disabled defaultValue={cardInfo.cardNumbers.first} />
-          <input disabled defaultValue={cardInfo.cardNumbers.second} />
-          <input disabled type="password" defaultValue={cardInfo.cardNumbers.third} />
-          <input disabled type="password" defaultValue={cardInfo.cardNumbers.fourth} />
+          <input disabled defaultValue={cardInfo.cardNumbers.firstCardNumber} />
+          <input disabled defaultValue={cardInfo.cardNumbers.secondCardNumber} />
+          <input disabled type="password" defaultValue={cardInfo.cardNumbers.thirdCardNumber} />
+          <input disabled type="password" defaultValue={cardInfo.cardNumbers.fourthCardNumber} />
         </styled.CardNumber>
         <styled.CardNameAndExpirationDateContainer>
           <styled.CardName>{cardInfo.ownerName ?? 'NAME'}</styled.CardName>
@@ -24,7 +24,7 @@ const Card = ({ cardInfo, bgColor }: CardProps) => {
 					${cardInfo.expirationDate.month ?? 'MM'}/${cardInfo.expirationDate.year ?? 'YY'}
 					`}</styled.ExpirationDate>
         </styled.CardNameAndExpirationDateContainer>
-      </styled.CardInformationContainer>{' '}
+      </styled.CardInformationContainer>
     </styled.Card>
   );
 };

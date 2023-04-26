@@ -1,19 +1,14 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import { PAGE_TITLE, PATHNAME } from '../constants/pathname';
 import { isPageTitleKey } from '../types/typeGuard';
 
-export const useHeader = () => {
+export const useHeaderTitle = () => {
   const { pathname } = useLocation();
-  const navigation = useNavigate();
 
   const isOnHomePage = pathname === PATHNAME.HOME;
 
-  const onClickBackward = () => {
-    navigation('/');
-  };
-
   const pageTitle = isPageTitleKey(pathname) ? PAGE_TITLE[pathname] : '404';
 
-  return { isOnHomePage, onClickBackward, pageTitle };
+  return { isOnHomePage, pageTitle };
 };

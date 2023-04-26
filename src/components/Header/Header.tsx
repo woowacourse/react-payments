@@ -1,13 +1,15 @@
-import { useHeader } from '../../hooks/useHeader';
+import { useHeaderTitle } from '../../hooks/useHeaderTitle';
+import { useNavigationTo } from '../../hooks/useNavigationTo';
 import * as styled from './Header.styled';
 
 const Header = () => {
-  const { isOnHomePage, onClickBackward, pageTitle } = useHeader();
+  const { isOnHomePage, pageTitle } = useHeaderTitle();
+  const { handleClick } = useNavigationTo('/');
 
   return (
     <styled.Header>
-      {!isOnHomePage && <styled.BackwardButton onClick={onClickBackward}>{'<'}</styled.BackwardButton>}
-      <styled.HeaderTitle onClick={onClickBackward}>{pageTitle}</styled.HeaderTitle>
+      {!isOnHomePage && <styled.BackwardButton onClick={handleClick}>{`<`}</styled.BackwardButton>}
+      <styled.HeaderTitle onClick={handleClick}>{pageTitle}</styled.HeaderTitle>
     </styled.Header>
   );
 };

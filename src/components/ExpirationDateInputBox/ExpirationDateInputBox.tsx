@@ -1,10 +1,9 @@
-import { ChangeEvent, useState } from 'react';
-
 import { CardNumbers, ExpirationDate, SetExpirationDate } from '../../types/state';
 import { EXPIRATION_DATE } from '../../constants/cardInfo';
 import { ERROR_MESSAGE } from '../../constants/message';
-
 import { isNumeric } from '../validators/validator';
+import { useInputValidator } from '../../hooks/useInputValidator';
+import { useInputBox } from '../../hooks/useInputBox';
 
 import * as styled from './ExpirationDateInputBox.styled';
 import Input from '../Input/Input';
@@ -15,25 +14,18 @@ interface ExpirationDateInputBoxProps {
   cardNumbers: CardNumbers;
 }
 
-const ExpirationDateInputBox = ({ expirationDate, setExpirationDate, cardNumbers }: ExpirationDateInputBoxProps) => {
-  const [errorMessage, setErrorMessage] = useState('');
+const ExpirationDateInputBox = ({
+  expirationDate,
+  setExpirationDate,
+  cardNumbers,
+}: ExpirationDateInputBoxProps) => {
+  const { validate, errorMessageState } = useInputValidator(
+    isNumeric,
+    ERROR_MESSAGE.SHOULD_NUMBER,
+    EXPIRATION_DATE.MAX_LENGTH
+  );
 
-  const onChange = ({ target: { name, value } }: ChangeEvent<HTMLInputElement>) => {
-    if (!isNumeric(value) && value.length) {
-      setErrorMessage(ERROR_MESSAGE.SHOULD_NUMBER);
-
-      return;
-    }
-
-    if (errorMessage) setErrorMessage('');
-
-    if (value.length > EXPIRATION_DATE.MAX_LENGTH) return;
-
-    setExpirationDate({
-      ...expirationDate,
-      [name]: value,
-    });
-  };
+  const { onChange } = useInputBox(validate, expirationDate, setExpirationDate);
 
   return (
     <styled.ExpirationDateInputBox>
@@ -53,13 +45,13 @@ const ExpirationDateInputBox = ({ expirationDate, setExpirationDate, cardNumbers
                 type="text"
                 maxLength={2}
                 placeholder={key === 'month' ? 'MM' : 'YY'}
-                isFocus={key === 'month' && cardNumbers.fourth.length === 4}
+                isFocus={key === 'month' && cardNumbers.fourthCardNumber.length === 4}
               />
             );
           })}
         </styled.InputContainer>
       </label>
-      <styled.ErrorMessage>{errorMessage}</styled.ErrorMessage>
+      <styled.ErrorMessage>{errorMessageState}</styled.ErrorMessage>
     </styled.ExpirationDateInputBox>
   );
 };
