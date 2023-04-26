@@ -56,12 +56,12 @@
 
 .bc {
   background: #e13f45;
-  color: --var(white);
+  color: var(--white);
 }
 
 .shinhan {
   background: #1646c3;
-  color: --var(white);
+  color: var(--white);
 }
 
 .kakaobank {
@@ -71,25 +71,25 @@
 
 .hyundai {
   background: #1e1e1e;
-  color: --var(white);
+  color: var(--white);
 }
 
 .woori {
   background: #0083ca;
-  color: --var(white);
+  color: var(--white);
 }
 
 .lotte {
   background: #b11824;
-  color: --var(white);
+  color: var(--white);
 }
 
 .hana {
   background: #1b9592;
-  color: --var(white);
+  color: var(--white);
 }
 
 .kb {
   background: #776c61;
-  color: --var(white);
+  color: var(--white);
 }
