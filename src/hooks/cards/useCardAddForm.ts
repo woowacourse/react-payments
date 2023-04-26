@@ -24,7 +24,8 @@ const initialValue: CardFormData = {
 const useCardAddForm = () => {
   const { newCardId, cardListLength, addCard } = useContext(CardListContext);
   const [cardInformation, setCardInformation] = useState(initialValue);
-  const [cardInputValidation, updateCardInputValidation] = useCardInputValidation();
+  const { inputValidation, inputError, updateInputValidation, updateInputError } =
+    useCardInputValidation();
   const navigate = useNavigate();
 
   const handleButtonInputChange = useCallback(
@@ -32,9 +33,9 @@ const useCardAddForm = () => {
       const { name, value } = event.currentTarget;
 
       setCardInformation((information) => ({ ...information, [name]: value }));
-      updateCardInputValidation(name as keyof CardFormData, value);
+      updateInputValidation(name as keyof CardFormData, value);
     },
-    [updateCardInputValidation]
+    [updateInputValidation]
   );
 
   const handleSingleInputChange = useCallback(
@@ -47,9 +48,9 @@ const useCardAddForm = () => {
       const formattedValue = isKeyOfObj(formatter, name) ? formatter[name](value) : value;
 
       setCardInformation((information) => ({ ...information, [name]: formattedValue }));
-      updateCardInputValidation(name as keyof CardFormData, value);
+      updateInputValidation(name as keyof CardFormData, value);
     },
-    [updateCardInputValidation]
+    [updateInputValidation]
   );
 
   const handleMultipleInputChange = useCallback(
@@ -67,12 +68,12 @@ const useCardAddForm = () => {
           [name]: changeInformation,
         };
 
-        updateCardInputValidation(name, newInformation[name]);
+        updateInputValidation(name, newInformation[name]);
 
         return newInformation;
       });
     },
-    [updateCardInputValidation]
+    [updateInputValidation]
   );
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -90,8 +91,9 @@ const useCardAddForm = () => {
 
   return {
     cardInformation,
-    cardInputValidation,
-    updateCardInputValidation,
+    inputValidation,
+    inputError,
+    updateInputError,
     handleButtonInputChange,
     handleSingleInputChange,
     handleMultipleInputChange,

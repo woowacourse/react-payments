@@ -1,38 +1,31 @@
 import { ChangeEvent, FocusEvent, memo } from 'react';
-import { CardFormValidation } from '../../../types';
 import { SECURITY_CODE_MAX_LENGTH, SECURITY_CODE_MIN_LENGTH } from '../../../constants';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
 import Input from '../../common/Input/Input';
-import { useError } from '../../../hooks/common/useError';
 
 interface CardSecurityCodeProps {
   value: string;
+  isError: boolean;
   onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  updateCardInputValidation: (key: keyof CardFormValidation, value: string | string[]) => boolean;
+  updateCardInputError: (key: string, value: string | string[]) => void;
   moveFocus: (index: number, value: string, maxLength?: number | undefined) => void;
 }
 
 function CardSecurityCode({
-  onInputChange,
   value,
-  updateCardInputValidation,
+  isError,
+  onInputChange,
+  updateCardInputError,
   moveFocus,
 }: CardSecurityCodeProps) {
-  const { isError, handleError, removeError } = useError();
-
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    removeError();
     onInputChange(event);
     moveFocus(event.target.tabIndex, event.currentTarget.value, event.currentTarget.maxLength);
   };
 
   const onBlur = (event: FocusEvent<HTMLInputElement>) => {
-    const isValid = updateCardInputValidation(
-      event.target.name as keyof CardFormValidation,
-      event.target.value
-    );
-    handleError(isValid);
+    updateCardInputError(event.target.name, event.target.value);
   };
 
   return (

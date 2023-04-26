@@ -1,45 +1,39 @@
 import { ChangeEvent, FocusEvent, memo, useRef } from 'react';
-import { CardFormValidation } from '../../../types';
 import { CARD_NUMBER_INPUT_MAX_LENGTH } from '../../../constants';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
 import Input from '../../common/Input/Input';
 import { useCardNumber } from '../../../hooks/cards/useCardNumber';
-import { useError } from '../../../hooks/common/useError';
 import { encryptDisplayedCardNumber, formatDisplayedCardNumber } from '../../../utils/formatter';
 
 interface CardNumberProps {
   value: string;
+  isError: boolean;
   onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  updateCardInputValidation: (key: keyof CardFormValidation, value: string | string[]) => boolean;
+  updateCardInputError: (key: string, value: string | string[]) => void;
   moveFocus: (index: number, value: string, maxLength?: number | undefined) => void;
 }
 
 function CardNumber({
   value,
+  isError,
   onInputChange,
-  updateCardInputValidation,
+  updateCardInputError,
   moveFocus,
 }: CardNumberProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const { handleInputValueChange } = useCardNumber(inputRef);
-  const { isError, handleError, removeError } = useError();
 
   const cardNumber = formatDisplayedCardNumber(value);
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    removeError();
     handleInputValueChange(event);
     onInputChange(event);
     moveFocus(event.target.tabIndex, event.currentTarget.value, event.currentTarget.maxLength);
   };
 
   const onBlur = (event: FocusEvent<HTMLInputElement>) => {
-    const isValid = updateCardInputValidation(
-      event.target.name as keyof CardFormValidation,
-      event.target.value
-    );
-    handleError(isValid);
+    updateCardInputError(event.target.name, event.target.dataset.value!);
   };
 
   return (

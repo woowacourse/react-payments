@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react';
 import { CardFormValidation } from '../../types';
 import validator, { validateMultipleInputField } from '../../utils/validator';
 
-const initialValue: CardFormValidation = {
+const initialValidationValue: CardFormValidation = {
   issuer: false,
   cardNumber: false,
   expirationDate: false,
@@ -11,23 +11,44 @@ const initialValue: CardFormValidation = {
   password: false,
 };
 
+const initialErrorValue: CardFormValidation = {
+  issuer: false,
+  cardNumber: false,
+  expirationDate: false,
+  ownerName: false,
+  securityCode: false,
+  password: false,
+};
+
 const useCardInputValidation = () => {
-  const [cardInputValidation, setCardInputValidation] = useState(initialValue);
+  const [inputValidation, setInputValidation] = useState(initialValidationValue);
+  const [inputError, setInputError] = useState(initialErrorValue);
 
-  const updateCardInputValidation = useCallback(
+  const validateInput = useCallback((key: keyof CardFormValidation, value: string | string[]) => {
+    return !validateMultipleInputField(key)
+      ? validator[key](value as string)
+      : validator[key](value as string[]);
+  }, []);
+
+  const updateInputValidation = useCallback(
     (key: keyof CardFormValidation, value: string | string[]) => {
-      const isValid = !validateMultipleInputField(key)
-        ? validator[key](value as string)
-        : validator[key](value as string[]);
+      const isValid = validateInput(key, value);
+      setInputValidation((inputValidation) => ({ ...inputValidation, [key]: isValid }));
 
-      setCardInputValidation((cardValidation) => ({ ...cardValidation, [key]: isValid }));
-
-      return isValid;
+      if (isValid) setInputError((inputError) => ({ ...inputError, [key]: !isValid }));
     },
-    []
+    [validateInput]
   );
 
-  return [cardInputValidation, updateCardInputValidation] as const;
+  const updateInputError = useCallback(
+    (key: string, value: string | string[]) => {
+      const isValid = validateInput(key as keyof CardFormValidation, value);
+      setInputError((inputError) => ({ ...inputError, [key]: !isValid }));
+    },
+    [validateInput]
+  );
+
+  return { inputValidation, inputError, updateInputValidation, updateInputError };
 };
 
 export { useCardInputValidation };

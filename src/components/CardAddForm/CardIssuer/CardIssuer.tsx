@@ -7,33 +7,28 @@ import Label from '../../common/Label/Label';
 import Button from '../../common/Button/Button';
 import Modal from '../../common/Modal/Modal';
 import { useModal } from '../../../hooks/common/useModal';
-import { useError } from '../../../hooks/common/useError';
 import DownIcon from '../../../assets/down-icon.svg';
 
 interface CardIssuerProps {
   value: Issuer | '';
+  isError: boolean;
   onInputChange: (event: MouseEvent<HTMLButtonElement>) => void;
-  updateCardInputValidation: (key: keyof CardFormValidation, value: string | string[]) => boolean;
+  updateCardInputError: (key: keyof CardFormValidation, value: string | string[]) => void;
   moveFocus: (index: number, value: string, maxLength?: number | undefined) => void;
 }
 
 function CardIssuer({
   value,
+  isError,
   onInputChange,
-  updateCardInputValidation,
+  updateCardInputError,
   moveFocus,
 }: CardIssuerProps) {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const { isModalOpen, openModal, closeModal } = useModal();
-  const { isError, handleError, removeError } = useError();
-
-  const handleModalError = () => {
-    const isValid = updateCardInputValidation('issuer', value);
-    handleError(isValid);
-  };
 
   const handleCloseModal = () => {
-    handleModalError();
+    updateCardInputError('issuer', value);
     closeModal();
   };
 
@@ -43,17 +38,16 @@ function CardIssuer({
     }
   };
 
+  const onKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
+    if (event.key === 'Tab') {
+      updateCardInputError('issuer', value);
+    }
+  };
+
   const onOptionClick = (event: MouseEvent<HTMLButtonElement>) => {
-    removeError();
     closeModal();
     onInputChange(event);
     moveFocus(1, event.currentTarget.value);
-  };
-
-  const onKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
-    if (event.key === 'Tab') {
-      handleModalError();
-    }
   };
 
   return (

@@ -4,35 +4,29 @@ import { PASSWORD_UNIT_MAX_LENGTH, SECURITY_TEXT_ICON } from '../../../constants
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
 import Input from '../../common/Input/Input';
-import { useError } from '../../../hooks/common/useError';
 
 interface CardPasswordProps {
-  onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
   values: string[];
-  isValid: boolean;
+  isError: boolean;
+  onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  updateCardInputError: (key: string, value: string | string[]) => void;
 }
 
-function CardPassword({ onInputChange, values, isValid }: CardPasswordProps) {
+function CardPassword({ values, isError, onInputChange, updateCardInputError }: CardPasswordProps) {
   const lastInputRef = useRef<HTMLInputElement>(null);
-  const { isError, handleError, removeError } = useError();
 
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    removeError();
+  const onFirstInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     onInputChange(event);
+
+    if (event.target.value.length === PASSWORD_UNIT_MAX_LENGTH && lastInputRef.current) {
+      lastInputRef.current.focus();
+    }
   };
 
   const onBlur = (event: FocusEvent<HTMLElement>) => {
     if (event.currentTarget.contains(event.relatedTarget)) return;
 
-    handleError(isValid);
-  };
-
-  const onFirstInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    onChange(event);
-
-    if (event.target.value.length === PASSWORD_UNIT_MAX_LENGTH && lastInputRef.current) {
-      lastInputRef.current.focus();
-    }
+    updateCardInputError('password', values);
   };
 
   return (
@@ -60,7 +54,7 @@ function CardPassword({ onInputChange, values, isValid }: CardPasswordProps) {
             inputMode="numeric"
             isError={isError}
             tabIndex={6 + index}
-            onChange={index === 0 ? onFirstInputChange : onChange}
+            onChange={index === 0 ? onFirstInputChange : onInputChange}
           />
         ))}
         <div className={styles.passwordPlaceholder}>

@@ -6,11 +6,12 @@ import { useCardAddForm } from '../hooks/cards/useCardAddForm';
 function CardAddPage() {
   const {
     cardInformation,
-    cardInputValidation,
+    inputValidation,
+    inputError,
+    updateInputError,
     handleButtonInputChange,
     handleSingleInputChange,
     handleMultipleInputChange,
-    updateCardInputValidation,
     handleSubmit,
   } = useCardAddForm();
 
@@ -27,11 +28,12 @@ function CardAddPage() {
         />
         <CardAddForm
           cardInformation={cardInformation}
-          cardInputValidation={cardInputValidation}
+          cardInputValidation={inputValidation}
+          cardInputError={inputError}
           onButtonInputChange={handleButtonInputChange}
           onSingleInputChange={handleSingleInputChange}
           onMultipleInputChange={handleMultipleInputChange}
-          updateCardInputValidation={updateCardInputValidation}
+          updateCardInputError={updateInputError}
           handleSubmit={handleSubmit}
         />
       </main>
