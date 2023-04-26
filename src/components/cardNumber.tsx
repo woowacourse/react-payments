@@ -5,7 +5,7 @@ import { InputBox } from "./common/input/InputBox";
 import { NumberContext, RefContext } from "../contexts/cardInfo";
 import { InputGroup } from "./common/input/inputGroup";
 import { InputLabel } from "./common/input/inputLabel";
-import { LABEL } from "../constants/inputInfo";
+import { INPUT_TYPE, LABEL } from "../constants/inputInfo";
 import { CardNumberIndex } from "../type/input";
 
 export function CardNumber() {
@@ -28,13 +28,17 @@ export function CardNumber() {
                 <Input
                   key={cardInput}
                   name={cardInput}
-                  type={checkIsPasswordType(cardInput) ? "password" : "text"}
+                  type={
+                    checkIsPasswordType(cardInput)
+                      ? INPUT_TYPE.PASSWORD
+                      : INPUT_TYPE.TEXT
+                  }
                   maxLength={4}
                   minLength={4}
                   inputRef={inputRef}>
                   <CustomInput />
                 </Input>
-                {index < original.length - 1 && "-"}
+                {index < original.length - 1 && INPUT_TYPE.BAR}
               </>
             );
           })}

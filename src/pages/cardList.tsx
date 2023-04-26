@@ -5,13 +5,15 @@ import { useState } from "react";
 import { getData } from "../utils/localStorage";
 import { Card, CardProps } from "../components/common/card";
 import { ReactComponent as BackButtonIc } from "../assets/backButtonIc.svg";
+import { PAGE_HEADER } from "../constants";
+import { PATH } from "../constants/path";
 
 export function CardList() {
   const [cards] = useState<CardProps[] | undefined>(getData());
   const navigate = useNavigate();
 
   function moveAddCardPage() {
-    navigate("/add-card");
+    navigate(PATH.ADD_CARD);
   }
 
   function checkDataExist() {
@@ -22,7 +24,7 @@ export function CardList() {
     <CardListContainer>
       <Header>
         <BackButtonIc />
-        보유 카드
+        {PAGE_HEADER.CARD_LIST}
       </Header>
       <Section>
         {checkDataExist() ? (

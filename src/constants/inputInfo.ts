@@ -32,9 +32,17 @@ export const ERROR_MESSAGE: ErrorMessage = {
   SECOND: "4개의 숫자를 입력해주세요",
   THIRD: "4개의 숫자를 입력해주세요",
   FOURTH: "4개의 숫자를 입력해주세요",
-  MONTH: "올바른 날짜를 입력해주세요",
-  YAER: "올바른 날짜를 입력해주세요",
+  MONTH: "옳바른 날짜를 입력해주세요",
+  YAER: "옳바른 날짜를 입력해주세요",
   CODE: "3개의 숫자를 입력해주세요",
-  FIRSTPASSWORD: "올바른 비밀번호를 입력해주세요",
-  SECONDPASSWORD: "올바른 비밀번호를 입력해주세요",
+  FIRSTPASSWORD: "옳바른 비밀번호를 입력해주세요",
+  SECONDPASSWORD: "옳바른 비밀번호를 입력해주세요",
+  COMMON: "옳바른 입력값을 넣어주세요.",
+};
+
+export const INPUT_TYPE = {
+  PASSWORD: "password",
+  TEXT: "text",
+  BAR: "-",
+  MAX_LENGTH: 30,
 };

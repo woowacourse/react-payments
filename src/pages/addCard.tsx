@@ -4,13 +4,14 @@ import { Header } from "../components/common/Header";
 import { AddCardSection } from "../components/addCardSection";
 import { CardInfoProvider } from "../contexts/cardInfo";
 import { ReactComponent as BackButtonIc } from "../assets/backButtonIc.svg";
+import { PAGE_HEADER } from "../constants";
 
 export function AddCard() {
   return (
     <Wrapper>
       <Header>
         <BackButtonIc />
-        카드추가
+        {PAGE_HEADER.ADD_CARD}
       </Header>
       <CardInfoProvider>
         <AddCardSection />

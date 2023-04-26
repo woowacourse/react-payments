@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import styled from "styled-components";
-import { LABEL, PLACEHOLDER } from "../constants/inputInfo";
+import { INPUT_TYPE, LABEL, PLACEHOLDER } from "../constants/inputInfo";
 import { NameContext, RefContext } from "../contexts/cardInfo";
 import { useCountText } from "../hooks/useCountText";
 import { Input } from "./common/input/Input";
@@ -17,7 +17,11 @@ export function UserName() {
   }, [count]);
 
   function renderCountText() {
-    return <div>{count}/30</div>;
+    return (
+      <div>
+        {count}/{INPUT_TYPE.MAX_LENGTH}
+      </div>
+    );
   }
 
   return (
@@ -25,7 +29,7 @@ export function UserName() {
       <Wrapper>
         <InputLabel text={LABEL.NAME} render={renderCountText} />
         <Input
-          maxLength={30}
+          maxLength={INPUT_TYPE.MAX_LENGTH}
           placeholder={PLACEHOLDER.NAME}
           name="name"
           inputRef={inputRef}

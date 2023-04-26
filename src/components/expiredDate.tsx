@@ -1,6 +1,11 @@
 import { useContext, useState } from "react";
 import styled from "styled-components";
-import { LABEL, TEXT_LENGTH, PLACEHOLDER } from "../constants/inputInfo";
+import {
+  LABEL,
+  TEXT_LENGTH,
+  PLACEHOLDER,
+  ERROR_MESSAGE,
+} from "../constants/inputInfo";
 import { DateContext, RefContext } from "../contexts/cardInfo";
 import { Date } from "../type/input";
 import { validation } from "../validation/input";
@@ -53,7 +58,7 @@ export function ExpiredDate() {
             <DateInput />
           </Input>
         </InputGroup>
-        {error && <ErrorMessage>옳바른 연도를 입력해주세요</ErrorMessage>}
+        {error && <ErrorMessage>{ERROR_MESSAGE.YEAR}</ErrorMessage>}
       </Wrapper>
     </InputBox>
   );

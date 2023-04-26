@@ -16,6 +16,7 @@ import {
 import { TEXT_LENGTH } from "../constants/inputInfo";
 import { setCardData } from "../utils/localStorage";
 import { SubmitButton } from "./common/submitButton";
+import { PATH } from "../constants/path";
 
 export function AddCardForm() {
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ export function AddCardForm() {
   function saveData(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setCardData(getInputData());
-    navigate("/");
+    navigate(PATH.CARD_LIST);
   }
 
   function getInputData() {

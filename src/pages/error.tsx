@@ -1,3 +1,5 @@
+import { PAGE_HEADER } from "../constants";
+
 export function ErrorPage() {
-  return <div>잘못된 경로입니다.</div>;
+  return <div>{PAGE_HEADER.ERROR}</div>;
 }

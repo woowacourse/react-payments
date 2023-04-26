@@ -1,5 +1,6 @@
 import React, { Children, cloneElement, isValidElement } from "react";
 import styled from "styled-components";
+import { ERROR_MESSAGE } from "../../../constants/inputInfo";
 import { useCheckLength } from "../../../hooks/useCheckLength";
 
 interface InputGroupProps {
@@ -18,12 +19,12 @@ export function InputGroup(props: InputGroupProps) {
       {cloneElement(childrenList[0], {
         children: childrenList[0].props.children,
       })}
-      {error && <ErrorMessage>옳바른 입력값을 넣어주세요</ErrorMessage>}
+      {error && <ErrorMessage>{ERROR_MESSAGE.COMMON}</ErrorMessage>}
     </>
   ) : (
     <>
       <GroupSection onBlur={checkInputLength}>{children}</GroupSection>
-      {error && <ErrorMessage>옳바른 입력값을 넣어주세요</ErrorMessage>}
+      {error && <ErrorMessage>{ERROR_MESSAGE.COMMON}</ErrorMessage>}
     </>
   );
 }
