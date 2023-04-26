@@ -3,7 +3,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 import PageTemplate from '../template/PageTemplate';
-import CardCompanyModal from '../template/CardCompanyModal';
+import CardCompanyModal from '../box/CardCompanyModal';
 import CardNumberInput from '../box/inputSection/CardNumberInput';
 import ExpireDateInput from '../box/inputSection/ExpireDateInput';
 import OwnerNameInput from '../box/inputSection/OwnerNameInput';
