@@ -30,7 +30,7 @@ const StyledModalContentWrapper = styled.div`
   bottom: 0;
   width: 100%;
 
-  padding: 32px 48px;
+  padding: 20px 36px;
 
   border-radius: 8px 8px 0px 0px;
   background-color: #fff;
