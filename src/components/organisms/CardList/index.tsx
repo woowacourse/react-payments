@@ -1,14 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useCardListState } from '../../../hooks/useContextHooks';
+
 import CardItem from '../../molecules/CardItem';
 
 const CardList: React.FC = () => {
+  const cardList = useCardListState();
+
   return (
     <CardPreviewListWrapper>
-      <CardItem />
-      <CardItem />
-      <CardItem />
-      <CardItem />
+      {cardList.map((cardItem) => (
+        <CardItem key={cardItem.id} card={cardItem} />
+      ))}
     </CardPreviewListWrapper>
   );
 };
