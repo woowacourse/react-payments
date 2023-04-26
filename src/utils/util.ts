@@ -1,6 +1,4 @@
-import { ALPHABET } from './constants';
-
-const NUMBERS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+import { ALPHABET, NUMBERS } from './constants';
 
 export const formatExpireDate = (expireDate: string): string => {
   return expireDate;

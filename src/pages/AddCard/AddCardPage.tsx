@@ -16,6 +16,7 @@ import {
   isValidExpiredMonthFormat,
   isValidExpiredYearFormat,
   isValidOwnerName,
+  isValidPassword,
   isValidSecurityCode,
 } from './domain/dispatcher';
 
@@ -29,13 +30,13 @@ const AddCardPage = () => {
     third: '',
     fourth: '',
   });
+  const cardPassword1 = useInputs(isValidPassword);
+  const cardPassword2 = useInputs(isValidPassword);
 
   const expireMonth = useInputs(isValidExpiredMonthFormat);
   const expireYear = useInputs(isValidExpiredYearFormat);
   const securityCode = useInputs(isValidSecurityCode);
   const cardOwner = useInputs(isValidOwnerName);
-  const cardPassword1 = useInput('', cardPasswordCondition, handleNumberInput);
-  const cardPassword2 = useInput('', cardPasswordCondition, handleNumberInput);
 
   const onBackButtonClick = useCallback(() => {
     navigate('/');

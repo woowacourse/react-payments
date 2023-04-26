@@ -1,10 +1,16 @@
 import type { AddCardPasswordInputProps } from '../../../type';
 import passwordDotImg from '../../../asset/password_dot.png';
 import './AddCardPasswordInput.css';
+import InputContainer from '../../../components/InputContainer';
+import { calcMultipleStatus } from '../domain/domain';
 
 const AddCardPasswordInput = ({ cardPassword1, cardPassword2 }: AddCardPasswordInputProps) => {
   return (
-    <section className="card-password-container">
+    <InputContainer
+      className="card-password-container"
+      status={calcMultipleStatus([cardPassword1.status, cardPassword2.status])}
+      inputType="password"
+    >
       <span className="form-label">카드 비밀번호</span>
       <div className="card-password-input-box">
         <input
@@ -28,7 +34,7 @@ const AddCardPasswordInput = ({ cardPassword1, cardPassword2 }: AddCardPasswordI
         <img src={passwordDotImg} alt="비밀번호" />
         <img src={passwordDotImg} alt="비밀번호" />
       </div>
-    </section>
+    </InputContainer>
   );
 };
 
