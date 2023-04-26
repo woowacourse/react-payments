@@ -7,7 +7,7 @@ import lotte from '../assets/lotte.png';
 import hana from '../assets/hana.png';
 import hyundai from '../assets/hyundai.png';
 
-export const KOR_BANK_NAME_BY_BANK = {
+export const KOR_NAME_BY_CARD_COMPANY = {
   bc: 'BC카드',
   shinhan: '신한카드',
   kakao: '카카오뱅크',
@@ -18,7 +18,7 @@ export const KOR_BANK_NAME_BY_BANK = {
   kb: '국민카드',
 } as const;
 
-export const ICON_BY_BANK = {
+export const ICON_BY_CARD_COMPANY = {
   bc,
   shinhan,
   kakao,
@@ -29,7 +29,7 @@ export const ICON_BY_BANK = {
   kb,
 } as const;
 
-export const COLOR_BY_BANK = {
+export const COLOR_BY_CARD_COMPANY = {
   bc: '#F04651',
   shinhan: '#025CFF',
   kakao: '#FFE600',
@@ -40,4 +40,4 @@ export const COLOR_BY_BANK = {
   kb: '#6A6056',
 } as const;
 
-export type Banks = keyof typeof KOR_BANK_NAME_BY_BANK;
+export type CardCompany = keyof typeof KOR_NAME_BY_CARD_COMPANY;

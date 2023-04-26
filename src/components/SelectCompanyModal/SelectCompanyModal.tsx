@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { Banks, KOR_BANK_NAME_BY_BANK } from '../../@types/banks';
-import BankIconBox from '../BankIconBox/BankIconBox';
+import { CardCompany, KOR_NAME_BY_CARD_COMPANY } from '../../@types/cardCompany';
+import BankIconBox from '../cardCompanyIconBox/cardCompanyIconBox';
 
 interface Props {
   onClose: () => void;
@@ -8,12 +8,12 @@ interface Props {
 
 const BankSelectModal = ({ onClose }: Props) => {
   // TODO: type 문제 : Banks로 하고 싶은데...
-  const bankList = [...Object.keys(KOR_BANK_NAME_BY_BANK)] as Banks[];
+  const companyList = [...Object.keys(KOR_NAME_BY_CARD_COMPANY)] as CardCompany[];
 
   return (
     <StyledContainer>
-      {bankList.map((bank, index) => (
-        <BankIconBox key={`bank-icon-box ${index}`} bankName={bank} onClose={onClose} />
+      {companyList.map((company) => (
+        <BankIconBox key={`company-icon-box-${company}`} cardCompany={company} onClose={onClose} />
       ))}
     </StyledContainer>
   );

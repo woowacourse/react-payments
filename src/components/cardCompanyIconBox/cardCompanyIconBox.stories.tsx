@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import BankIconBox from './BankIconBox';
+import BankIconBox from './cardCompanyIconBox';
 
 const meta = {
   component: BankIconBox,
   title: 'BankIconBox',
   argTypes: {
-    bankName: {
+    cardCompany: {
       control: { type: 'radio' },
     },
   },
@@ -17,6 +17,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Example = {
   args: {
-    bankName: 'shinhan',
+    cardCompany: 'shinhan',
   },
 } satisfies Story;

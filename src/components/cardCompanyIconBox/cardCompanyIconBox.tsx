@@ -1,30 +1,34 @@
 import styled from 'styled-components';
-import { Banks, KOR_BANK_NAME_BY_BANK, ICON_BY_BANK } from '../../@types/banks';
+import {
+  CardCompany,
+  KOR_NAME_BY_CARD_COMPANY,
+  ICON_BY_CARD_COMPANY,
+} from '../../@types/cardCompany';
 import { useContext } from 'react';
 import { CreditCardContext } from '../../contexts/CreditCardContext';
 
 type Props = {
-  bankName: Banks;
+  cardCompany: CardCompany;
   onClose: () => void;
 };
 
-const BankIconBox = ({ bankName, onClose }: Props) => {
-  const KoreanName = KOR_BANK_NAME_BY_BANK[bankName];
+const BankIconBox = ({ cardCompany, onClose }: Props) => {
+  const KoreanName = KOR_NAME_BY_CARD_COMPANY[cardCompany];
   const setCreditCardInfo = useContext(CreditCardContext)[1];
 
   const handleClickImage: React.MouseEventHandler<HTMLImageElement> = (event) => {
-    const bankName = event.currentTarget?.dataset['bank'] as Banks;
+    const company = event.currentTarget?.dataset['company'] as CardCompany;
 
     if (!setCreditCardInfo) return;
-    setCreditCardInfo('bank', bankName);
+    setCreditCardInfo('cardCompany', company);
     onClose();
   };
 
   return (
     <ImageContainer>
       <StyledBankImage
-        data-bank={bankName}
-        src={ICON_BY_BANK[bankName]}
+        data-company={cardCompany}
+        src={ICON_BY_CARD_COMPANY[cardCompany]}
         onClick={handleClickImage}
       ></StyledBankImage>
       <p>{KoreanName}</p>
