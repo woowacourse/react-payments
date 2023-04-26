@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import { LABEL, MAX_LENGTH } from "../constants/inputInfo";
+import { LABEL, TEXT_LENGTH } from "../constants/inputInfo";
 import { RefContext } from "../contexts/cardInfo";
 import { useInputPassword } from "../hooks/useInputPassword";
 import { Input } from "./common/Input";
@@ -21,7 +21,8 @@ export function CardPassword() {
               <Input
                 key={cardInput}
                 name={cardInput}
-                maxLength={MAX_LENGTH.PASSWORD}
+                maxLength={TEXT_LENGTH[cardInput.toUpperCase()]}
+                minLength={TEXT_LENGTH[cardInput.toUpperCase()]}
                 type="password"
                 inputRef={inputRef}>
                 <PasswordInput />

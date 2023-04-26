@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import { LABEL, MAX_LENGTH, PLACEHOLDER } from "../constants/inputInfo";
+import { LABEL, TEXT_LENGTH, PLACEHOLDER } from "../constants/inputInfo";
 import { NameContext, RefContext } from "../contexts/cardInfo";
 import { Input } from "./common/Input";
 import { InputBox } from "./common/InputBox";
@@ -15,7 +15,7 @@ export function UserName() {
       <Wrapper>
         <InputLabel text={LABEL.NAME} />
         <Input
-          maxLength={MAX_LENGTH.NAME}
+          maxLength={30}
           placeholder={PLACEHOLDER.NAME}
           name="name"
           inputRef={inputRef}>

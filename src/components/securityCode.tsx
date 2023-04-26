@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import { LABEL, MAX_LENGTH } from "../constants/inputInfo";
+import { LABEL, TEXT_LENGTH } from "../constants/inputInfo";
 import { RefContext } from "../contexts/cardInfo";
 import { useInputCode } from "../hooks/useInputCode";
 import { Input } from "./common/Input";
@@ -18,7 +18,8 @@ export function SecurityCode() {
         <InputLabel text={LABEL.CODE} />
         <InputGroup>
           <Input
-            maxLength={MAX_LENGTH.CODE}
+            maxLength={TEXT_LENGTH.CODE}
+            minLength={TEXT_LENGTH.CODE}
             type="password"
             name="code"
             inputRef={inputRef}>

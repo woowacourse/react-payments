@@ -28,6 +28,7 @@ export function CardNumber() {
                   name={cardInput}
                   type={checkIsPasswordType(cardInput) ? "password" : "text"}
                   maxLength={4}
+                  minLength={4}
                   inputRef={inputRef}>
                   <CustomInput />
                 </Input>
