@@ -3,7 +3,7 @@ import { REGEX } from '../constants';
 import { useInput } from './useInput';
 import { CardPreviewInfoContext, passwordInput } from '../contexts/cardInfo';
 
-export function useForm() {
+export function useCardRegisterForm() {
   const previewInfo = useContext(CardPreviewInfoContext);
 
   const cardRegisterForm = {

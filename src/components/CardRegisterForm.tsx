@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { InputBox } from './common';
 
-import { useForm } from '../hooks/useForm';
+import { useCardRegisterForm } from '../hooks/useCardRegisterForm';
 
 import { cardList } from '../data/localStorage';
 
@@ -17,7 +17,7 @@ import { InputInfo } from '../type/input';
 export function CardRegisterForm() {
   const naviagte = useNavigate();
 
-  const inputList = useForm();
+  const inputList = useCardRegisterForm();
 
   const allInputs = [
     ...inputList.CARD_NUMBER,
@@ -42,7 +42,6 @@ export function CardRegisterForm() {
       ...joinValues(fields, 'CARD_PASSWORD'),
     };
 
-    console.log(submittedCardInfo);
     cardList.updateData(submittedCardInfo as unknown as Card);
 
     moveCardListPage();
