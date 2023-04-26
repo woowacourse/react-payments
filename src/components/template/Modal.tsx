@@ -1,6 +1,8 @@
-import { useCardForm } from '../../context/cardForm';
 import type { CardType } from '../../types';
 import styled from 'styled-components';
+
+import { useCardForm } from '../../context/cardForm';
+import { CARD_COMPANY_MODAL_MATRIX } from '../../constants';
 
 interface Props {
   closeModal: () => void;
@@ -18,7 +20,7 @@ const Modal = ({ closeModal }: Props) => {
     <>
       <ModalBackdrop />
       <ModalWrapper>
-        {CARD_COMPANY_MATRIX.map((row) => (
+        {CARD_COMPANY_MODAL_MATRIX.map((row) => (
           <CardCompanyRow>
             {row.map(({ iconSrc, cardCompany }) => (
               <CardCompanyItem onClick={onClickCardCompanyItem(cardCompany)}>
@@ -86,42 +88,3 @@ const CardCompanyItem = styled.div`
     color: #525252;
   }
 `;
-
-const CARD_COMPANY_MATRIX = [
-  [
-    {
-      iconSrc: './icons/BC카드.svg',
-      cardCompany: 'BC카드',
-    },
-    {
-      iconSrc: './icons/신한카드.svg',
-      cardCompany: '신한카드',
-    },
-    {
-      iconSrc: './icons/카카오뱅크.svg',
-      cardCompany: '카카오뱅크',
-    },
-    {
-      iconSrc: './icons/현대카드.svg',
-      cardCompany: '현대카드',
-    },
-  ],
-  [
-    {
-      iconSrc: './icons/우리카드.svg',
-      cardCompany: '우리카드',
-    },
-    {
-      iconSrc: './icons/롯데카드.svg',
-      cardCompany: '롯데카드',
-    },
-    {
-      iconSrc: './icons/하나카드.svg',
-      cardCompany: '하나카드',
-    },
-    {
-      iconSrc: './icons/국민카드.svg',
-      cardCompany: '국민카드',
-    },
-  ],
-];

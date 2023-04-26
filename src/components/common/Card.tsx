@@ -1,6 +1,8 @@
 import type { CardType } from '../../types';
 import styled from 'styled-components';
 
+import { CARD_COMPANY_COLOR_MAP } from '../../constants';
+
 interface Props extends Pick<CardType, 'cardCompany' | 'cardNumber' | 'expireDate' | 'ownerName'> {
   onClick?: () => void;
 }
@@ -25,17 +27,6 @@ const Card = ({ cardCompany, cardNumber, ownerName, expireDate, onClick }: Props
 
 export default Card;
 
-const CardCompanyColorMap: Record<string, { background: string; color: string }> = {
-  BC카드: { background: 'rgb(222, 84, 86)', color: 'white' },
-  신한카드: { background: 'rgb(19, 74, 245)', color: 'white' },
-  카카오뱅크: { background: 'rgb(251, 230, 77)', color: 'black' },
-  현대카드: { background: 'rgb(51, 51, 51)', color: 'white' },
-  우리카드: { background: 'rgb(187, 223, 245)', color: 'rgb(51, 122, 194)' },
-  롯데카드: { background: 'rgb(240, 240, 240)', color: 'rgb(225, 0, 0)' },
-  하나카드: { background: 'rgb(64, 146, 143)', color: 'white' },
-  국민카드: { background: 'rgb(85, 79, 71)', color: 'rgb(247, 206, 71)' },
-};
-
 const CardWrapper = styled.div<{ cardCompany: string }>`
   position: relative;
   cursor: pointer;
@@ -50,8 +41,8 @@ const CardWrapper = styled.div<{ cardCompany: string }>`
   padding: 12px 18px;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
 
-  background: ${({ cardCompany }) => (cardCompany ? CardCompanyColorMap[cardCompany].background : '#333333')};
-  color: ${({ cardCompany }) => (cardCompany ? CardCompanyColorMap[cardCompany].color : 'white')};
+  background: ${({ cardCompany: key }) => (key ? CARD_COMPANY_COLOR_MAP[key].background : '#333333')};
+  color: ${({ cardCompany: key }) => (key ? CARD_COMPANY_COLOR_MAP[key].color : 'white')};
 `;
 
 const CardCompany = styled.p`
