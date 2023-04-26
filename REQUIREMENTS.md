@@ -46,8 +46,9 @@
 
 ### Bottom Sheet
 
-- [ ] 카드 생성 버튼을 누르면 자동으로 Bottom Sheet가 열린다.
-- [ ] 해당 은행을 누르면 색상을 받고, 카드의 색을 바꾼다.
+- [x] 카드 생성 버튼을 누르면 자동으로 Bottom Sheet가 열린다.
+- [x] 해당 은행을 누르면 색상을 받고, 카드의 색을 바꾼다.
+- [] 선택한 은행 정보를 저장한다.
 
 ### 카드 추가 완료 페이지
 
@@ -73,6 +74,6 @@
     - [x] NameInput 컴포넌트 구현
     - [x] SecurityInput 컴포넌트 구현
     - [x] PasswordInput 컴포넌트 구현
-- [ ] Bottom Sheet 구현
-  - [ ] Bank 컴포넌트 구현
+- [x] Bottom Sheet 구현
+  - [x] Bank 컴포넌트 구현
 - [ ] 카드 추가 완료 페이지 구현
