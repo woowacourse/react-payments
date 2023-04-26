@@ -24,7 +24,7 @@ background: #ffffff;
 `;
 
 function Modal() {
-  const { modalOpen, closeModal } = useModal();
+  const { modalOpen, closeModal, modalContent } = useModal();
   return (
     <>
       {
@@ -32,7 +32,7 @@ function Modal() {
           <ModalContainer>
             <ModalBackDrop onClick={() => closeModal()} />
             <ModalContent>
-              <div>dd</div>
+              {modalContent}
             </ModalContent>
           </ModalContainer>
         )

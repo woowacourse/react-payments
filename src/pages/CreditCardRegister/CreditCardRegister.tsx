@@ -64,7 +64,7 @@ function CreditCardRegister() {
   };
 
   useEffect(() => {
-    openModal();
+    openModal(<div>키키</div>);
   }, []);
 
   return (

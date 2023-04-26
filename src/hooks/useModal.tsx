@@ -2,17 +2,20 @@
 import { useContext } from 'react';
 import { ModalContext } from 'ModalProvider';
 
-interface UseModalProps {
+interface UseModal {
   modalOpen: boolean;
-  openModal: () => void;
+  openModal: (content: React.ReactNode) => void;
   closeModal: () => void;
+  modalContent: React.ReactNode;
 }
-export const useModal = (): UseModalProps => {
+export const useModal = (): UseModal => {
   const modalState = useContext(ModalContext);
-  const { modalOpen, setModalOpen } = modalState;
+  const {
+    modalOpen, setModalOpen, modalContent, setModalContent
+  } = modalState;
 
-  const openModal = () => {
-    console.log('modal is opened');
+  const openModal = (content: React.ReactNode) => {
+    setModalContent(content);
     setModalOpen(true);
   };
 
@@ -20,5 +23,7 @@ export const useModal = (): UseModalProps => {
     setModalOpen(false);
   };
 
-  return { modalOpen, openModal, closeModal };
+  return {
+    modalOpen, openModal, closeModal, modalContent
+  };
 };
