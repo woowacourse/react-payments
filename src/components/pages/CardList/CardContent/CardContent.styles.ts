@@ -1,18 +1,18 @@
-import styled from "styled-components";
+import styled from 'styled-components';
+import { BankNames } from '../../../../types/card.type';
+import { HTMLAttributes } from 'react';
 
-export const Card = styled.div`
+export const Card = styled.div<{ bankName?: BankNames }>`
   position: relative;
   width: 270px;
   aspect-ratio: 213 / 133;
   flex-shrink: 0;
   padding: 14.23px 18.45px;
-
   margin-top: 46px;
-  background: #333333;
+  background: ${({ bankName, theme }) => (bankName ? theme.banks[bankName] : '#ffffff')};
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
-  color: #ffffff;
-
+  color: ${({ bankName }) => (bankName === '카카오뱅크' ? '#000000' : '#ffffff')};
   transition: transform 0.3s, box-shadow 0.3s;
 
   &:hover {
@@ -51,7 +51,8 @@ interface CardNumberProps {
 export const CardNumber = styled.span<CardNumberProps>`
   font-size: 13px;
   position: absolute;
-  left: ${({ index }) => (index ? index * 4.3 + "em" : 0)};
+  left: ${({ index }) => (index ? index * 4.3 + 'em' : 0)};
+  color: inherit;
 `;
 
 export const CardHolderName = styled.span`
@@ -60,7 +61,6 @@ export const CardHolderName = styled.span`
   position: absolute;
   bottom: 10px;
   left: 20px;
-  color: #ffffff;
 `;
 
 export const ExpirationDateContainer = styled.div`
@@ -75,14 +75,14 @@ export const ExpirationDateContainer = styled.div`
   letter-spacing: 2.6px;
 `;
 
-export const ExpirationDateDivider = styled.span`
+export const ExpirationDateDivider = styled.span<{ bankName: BankNames }>`
   position: absolute;
   display: inline-block;
   right: 66px;
   bottom: 12px;
   padding: 0 5px;
   font-size: 1.2em;
-  color: #ffffff;
+  color: ${({ bankName }) => (bankName === '카카오뱅크' ? '#000000' : '#ffffff')}};
 
   &::after {
     content: "/";
@@ -92,12 +92,11 @@ export const ExpirationDateDivider = styled.span`
   }
 `;
 
-interface ExpirationDateTextProps
-  extends React.HTMLAttributes<HTMLSpanElement> {
+interface ExpirationDateTextProps extends HTMLAttributes<HTMLSpanElement> {
   index: number;
 }
 
 export const ExpirationDateText = styled.span<ExpirationDateTextProps>`
   position: absolute;
-  left: ${({ index }) => (index ? index * 2.3 + "em" : 0)};
+  left: ${({ index }) => (index ? index * 2.3 + 'em' : 0)};
 `;
