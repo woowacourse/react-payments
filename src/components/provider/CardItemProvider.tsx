@@ -1,6 +1,11 @@
 import { createContext, useContext, useState } from "react";
-import { INPUT_LENGTH } from "../../constants";
+import { INPUT_MAX_LENGTH } from "../../constants";
 import { isInputsSatisfied } from "../../utils";
+import useCardNumber from "../../hooks/cardItemInputs/useCardNumber";
+import useExpirationDate from "../../hooks/cardItemInputs/useExpirationDate";
+import useName from "../../hooks/cardItemInputs/useName";
+import useSecurityCode from "../../hooks/cardItemInputs/useSecurityCode";
+import usePassword from "../../hooks/cardItemInputs/usePassword";
 
 interface CardItemProviderProps {
   children: React.ReactNode;
@@ -15,30 +20,52 @@ interface CardItemValue {
   password: string[];
 }
 
+interface ErrorMessageValue {
+  hasError: () => boolean;
+  cardNumberErrorMessage: string;
+  expirationDateErrorMessage: string;
+  nameErrorMessage: string;
+  securityCodeErrorMessage: string;
+  passwordErrorMessage: string;
+}
+
 interface CardItemAction {
-  setCardNumber: (cardNumber: string[]) => void;
-  setExpirationDate: (expirationDate: string[]) => void;
-  setName: (name: string) => void;
-  setSecurityCode: (securityCode: string) => void;
-  setPassword: (password: string[]) => void;
+  onChangeCardNumber: (inputIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeExpirationDate: (inputIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeName: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeSecurityCode: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangePassword: (inputIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const CardItemValueContext = createContext<CardItemValue | null>(null);
 const CardItemActionContext = createContext<CardItemAction | null>(null);
+const ErrorMessageValueContext = createContext<ErrorMessageValue | null>(null);
 
 const CardItemProvider = ({ children }: CardItemProviderProps) => {
-  const [cardNumber, setCardNumber] = useState(["", "", "", ""]);
-  const [expirationDate, setExpirationDate] = useState(["", ""]);
-  const [name, setName] = useState("");
-  const [securityCode, setSecurityCode] = useState("");
-  const [password, setPassword] = useState(["", ""]);
+  // const [cardNumber, onChangeCardNumber] = useState(["", "", "", ""]);
+  // const [expirationDate, onChangeExpirationDate] = useState(["", ""]);
+  // const [name, onChangeName] = useState("");
+  // const [securityCode, onChangeSecurityCode] = useState("");
+  // const [password, onChangePassword] = useState(["", ""]);
+
+  const { cardNumber, cardNumberErrorMessage, onChangeCardNumber } = useCardNumber();
+  const { expirationDate, expirationDateErrorMessage, onChangeExpirationDate } = useExpirationDate();
+  const { name, nameErrorMessage, onChangeName } = useName();
+  const { securityCode, securityCodeErrorMessage, onChangeSecurityCode } = useSecurityCode();
+  const { password, passwordErrorMessage, onChangePassword } = usePassword();
 
   const isAllInputSatisfied = () => {
     return (
-      isInputsSatisfied(cardNumber, INPUT_LENGTH.CARD_NUMBER) &&
-      isInputsSatisfied(expirationDate, INPUT_LENGTH.EXPIRATION_DATE) &&
-      securityCode.length === INPUT_LENGTH.SECURITY_CODE &&
-      isInputsSatisfied(password, INPUT_LENGTH.PASSWORD)
+      isInputsSatisfied(cardNumber, INPUT_MAX_LENGTH.CARD_NUMBER) &&
+      isInputsSatisfied(expirationDate, INPUT_MAX_LENGTH.EXPIRATION_DATE) &&
+      securityCode.length === INPUT_MAX_LENGTH.SECURITY_CODE &&
+      isInputsSatisfied(password, INPUT_MAX_LENGTH.PASSWORD)
+    );
+  };
+
+  const hasError = () => {
+    return (
+      !!cardNumberErrorMessage || !!expirationDateErrorMessage || !!passwordErrorMessage || !!securityCodeErrorMessage
     );
   };
 
@@ -51,17 +78,28 @@ const CardItemProvider = ({ children }: CardItemProviderProps) => {
     password,
   };
 
-  const setCardItem = {
-    setCardNumber,
-    setExpirationDate,
-    setName,
-    setSecurityCode,
-    setPassword,
+  const onChangeCardItem = {
+    onChangeCardNumber,
+    onChangeExpirationDate,
+    onChangeName,
+    onChangeSecurityCode,
+    onChangePassword,
+  };
+
+  const errorMessage = {
+    hasError,
+    cardNumberErrorMessage,
+    expirationDateErrorMessage,
+    nameErrorMessage,
+    securityCodeErrorMessage,
+    passwordErrorMessage,
   };
 
   return (
     <CardItemValueContext.Provider value={cardItem}>
-      <CardItemActionContext.Provider value={setCardItem}>{children}</CardItemActionContext.Provider>
+      <CardItemActionContext.Provider value={onChangeCardItem}>
+        <ErrorMessageValueContext.Provider value={errorMessage}>{children}</ErrorMessageValueContext.Provider>
+      </CardItemActionContext.Provider>
     </CardItemValueContext.Provider>
   );
 };
@@ -78,6 +116,14 @@ export const useCardItemAction = () => {
   const value = useContext(CardItemActionContext);
   if (value === null) {
     throw new Error("CardItemAction 에러");
+  }
+  return value;
+};
+
+export const useErrorMessageValue = () => {
+  const value = useContext(ErrorMessageValueContext);
+  if (value === null) {
+    throw new Error("ErrorMessageValue 에러");
   }
   return value;
 };
