@@ -1,6 +1,6 @@
 export const regEx = {
-  notAlphabet: /[^a-zA-Z]*/g,
-  notNumber: /[^0-9]*/g,
+  Alphabet: /^[a-zA-Z\s]*$/,
+  Number: /^[0-9]*$/,
 } as const;
 
 const isMonth = (month: string) => {
@@ -20,9 +20,9 @@ export const validateYear = (target: HTMLInputElement) => {
 };
 
 export const isNumber = (target: string) => {
-  return !regEx.notNumber.test(target);
+  return regEx.Number.test(target);
 };
 
 export const isAlphabet = (target: string) => {
-  return !regEx.notAlphabet.test(target);
+  return regEx.Alphabet.test(target);
 };

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import CardPreview from './CardPreview';
 import Input from './Input';
 import { useCardDispatch } from '../context/CardContext';
-import { isAlphabet, isNumber, regEx, validateMonth, validateYear } from '../utils/validateInput';
+import { isAlphabet, isNumber, validateMonth, validateYear } from '../utils/validateInput';
 import ErrorMessage from './ErrorMessage';
 import { getUniqueID } from '../utils/key';
 
@@ -38,19 +38,26 @@ const AddCardContainer = () => {
       switch (type) {
         case 'number':
         case 'password':
-          if (!isNumber(e.target.value))
-            e.target.value = e.target.value.replace(regEx.notNumber, '');
+          if (isNumber(e.target.value)) {
+            const targetId = Number(e.target.dataset.id);
+            const nextState = state.map((value, index) =>
+              index === targetId ? e.target.value : value,
+            );
+
+            setState(nextState);
+          }
           break;
         case 'text':
-          if (!isAlphabet(e.target.value))
-            e.target.value = e.target.value.replace(regEx.notAlphabet, '');
-          break;
-        default:
-      }
+          if (isAlphabet(e.target.value)) {
+            const targetId = Number(e.target.dataset.id);
+            const nextState = state.map((value, index) =>
+              index === targetId ? e.target.value : value,
+            );
 
-      const copyState = [...state];
-      copyState[Number(e.target.dataset.id)] = e.target.value;
-      setState(copyState);
+            setState(nextState);
+          }
+          break;
+      }
     };
 
   const onSubmitCard = (e: React.FormEvent) => {
@@ -95,6 +102,7 @@ const AddCardContainer = () => {
               maxLength: 4,
               width: '75px',
               center: true,
+              value: cardNumbers[0],
               onChange: onChangeState(cardNumbers, setCardNumbers, 'number'),
             },
             {
@@ -103,6 +111,7 @@ const AddCardContainer = () => {
               maxLength: 4,
               width: '75px',
               center: true,
+              value: cardNumbers[1],
               onChange: onChangeState(cardNumbers, setCardNumbers, 'number'),
             },
             {
@@ -111,6 +120,7 @@ const AddCardContainer = () => {
               maxLength: 4,
               width: '75px',
               center: true,
+              value: cardNumbers[2],
               onChange: onChangeState(cardNumbers, setCardNumbers, 'password'),
             },
             {
@@ -119,6 +129,7 @@ const AddCardContainer = () => {
               maxLength: 4,
               width: '75px',
               center: true,
+              value: cardNumbers[3],
               onChange: onChangeState(cardNumbers, setCardNumbers, 'password'),
             },
           ]}
@@ -133,6 +144,7 @@ const AddCardContainer = () => {
               maxLength: 2,
               width: '75px',
               center: true,
+              value: cardExpirationDate[0],
               onChange: onChangeDateState,
             },
             {
@@ -142,6 +154,7 @@ const AddCardContainer = () => {
               maxLength: 2,
               width: '75px',
               center: true,
+              value: cardExpirationDate[1],
               onChange: onChangeDateState,
             },
           ]}
@@ -157,6 +170,7 @@ const AddCardContainer = () => {
               maxLength: 30,
               width: '100%',
               center: false,
+              value: cardOwner[0],
               onChange: onChangeState(cardOwner, setCardOwner, 'text'),
             },
           ]}
@@ -173,6 +187,7 @@ const AddCardContainer = () => {
                 maxLength: 3,
                 width: '75px',
                 center: false,
+                value: cardCVC[0],
                 onChange: onChangeState(cardCVC, setCardCVC, 'password'),
               },
             ]}
@@ -189,6 +204,7 @@ const AddCardContainer = () => {
                 maxLength: 1,
                 width: '40px',
                 center: false,
+                value: cardPWD[0],
                 onChange: onChangeState(cardPWD, setCardPWD, 'password'),
               },
               {
@@ -197,6 +213,7 @@ const AddCardContainer = () => {
                 maxLength: 1,
                 width: '40px',
                 center: false,
+                value: cardPWD[1],
                 onChange: onChangeState(cardPWD, setCardPWD, 'password'),
               },
             ]}
