@@ -1,11 +1,41 @@
+import { useContext } from "react";
+import { CardInfoContext } from "src/context/CardInfoContext";
 import { BANK_LIST } from "src/utils/constant";
 import styled from "styled-components";
 
-function CardCompany() {
+interface Props {
+  closeEvent: () => void;
+}
+
+function CardCompany({ closeEvent }: Props) {
+  const [_, setCardInfo] = useContext(CardInfoContext);
+
+  const cardClickHandler = (
+    event: React.MouseEvent<HTMLImageElement, MouseEvent>,
+  ) => {
+    const { id, alt } = event.currentTarget;
+    if (setCardInfo) {
+      setCardInfo((prev) => ({
+        ...prev,
+        cardName: {
+          id,
+          name: alt,
+        },
+      }));
+
+      closeEvent();
+    }
+  };
+
   const cardLists = BANK_LIST.map((list) => {
     return (
       <Styled.CardContainer>
-        <img src={list.src} alt={list.name} />
+        <img
+          id={list.id}
+          src={list.src}
+          alt={list.name}
+          onClick={cardClickHandler}
+        />
         <p>{list.name}</p>
       </Styled.CardContainer>
     );

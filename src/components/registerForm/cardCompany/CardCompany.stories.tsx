@@ -10,5 +10,5 @@ const cardNumber = {
 export default cardNumber;
 
 export const Example = () => {
-  return <CardCompany />;
+  return <CardCompany closeEvent={() => {}} />;
 };

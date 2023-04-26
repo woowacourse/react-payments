@@ -10,14 +10,23 @@ export const Styled = {
     row-gap: 13px;
     justify-content: flex-end;
 
-    background: #333333;
+    background: #fff;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
+
+    color: var(--darken-color);
 
     padding: 14px;
     margin: 25px auto;
 
     box-sizing: border-box;
+  `,
+
+  CardName: styled.span`
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
   `,
 
   CardChip: styled.div`
@@ -33,7 +42,6 @@ export const Styled = {
 
     height: 13px;
 
-    color: white;
     font-weight: 600;
     font-size: 10px;
     letter-spacing: 3px;
@@ -53,7 +61,6 @@ export const Styled = {
 
     height: 13px;
 
-    color: white;
     font-weight: 600;
     font-size: 10px;
 

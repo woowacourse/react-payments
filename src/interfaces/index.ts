@@ -9,3 +9,8 @@ export interface CardPasswordObj {
   first: string;
   second: string;
 }
+
+export interface CardNameObj {
+  id: string;
+  name: string;
+}
