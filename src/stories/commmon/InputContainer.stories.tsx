@@ -1,4 +1,7 @@
+import { useState } from 'react';
 import type { Meta } from '@storybook/react';
+import { userEvent, within } from '@storybook/testing-library';
+import { expect } from '@storybook/jest';
 import InputContainer from '../../components/common/InputContainer/InputContainer';
 import InputLabel from '../../components/common/Label/Label';
 import Input from '../../components/common/Input/Input';
@@ -41,6 +44,37 @@ export const CharacterCounter = () => (
   </InputContainer>
 );
 
+export const CharacterCounterInteraction = () => {
+  const [value, setValue] = useState('');
+
+  return (
+    <InputContainer characterCounter={{ currentCount: value.length, maxCount: 50 }}>
+      <InputLabel htmlFor="input">Label</InputLabel>
+      <Input
+        id="input"
+        value={value}
+        placeholder="Placeholder Text"
+        onChange={(event) => setValue(event.target.value)}
+      />
+    </InputContainer>
+  );
+};
+
+CharacterCounterInteraction.play = async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+  const canvas = within(canvasElement);
+
+  const label = canvas.getByText('Label');
+  const input = canvas.getByPlaceholderText('Placeholder Text');
+
+  expect(input).not.toHaveFocus();
+
+  userEvent.click(label);
+
+  expect(input).toHaveFocus();
+
+  await userEvent.type(input, 'Whereas recognition of the inherent dignity', { delay: 100 });
+};
+
 export const Error = () => (
   <InputContainer isError>
     <InputLabel htmlFor="input">Label</InputLabel>
@@ -61,6 +95,42 @@ export const UnderlineCharacterCounter = () => (
     <Input id="input" variant="underline" placeholder="Placeholder Text" />
   </InputContainer>
 );
+
+export const UnderlineCharacterCounterInteraction = () => {
+  const [value, setValue] = useState('');
+
+  return (
+    <InputContainer characterCounter={{ currentCount: value.length, maxCount: 50 }}>
+      <InputLabel htmlFor="input">Label</InputLabel>
+      <Input
+        id="input"
+        variant="underline"
+        value={value}
+        placeholder="Placeholder Text"
+        onChange={(event) => setValue(event.target.value)}
+      />
+    </InputContainer>
+  );
+};
+
+UnderlineCharacterCounterInteraction.play = async ({
+  canvasElement,
+}: {
+  canvasElement: HTMLElement;
+}) => {
+  const canvas = within(canvasElement);
+
+  const label = canvas.getByText('Label');
+  const input = canvas.getByPlaceholderText('Placeholder Text');
+
+  expect(input).not.toHaveFocus();
+
+  userEvent.click(label);
+
+  expect(input).toHaveFocus();
+
+  await userEvent.type(input, 'Whereas recognition of the inherent dignity', { delay: 100 });
+};
 
 export const UnderlineError = () => (
   <InputContainer isError>
