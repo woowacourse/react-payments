@@ -22,7 +22,7 @@ const CardNamePage = ({ navigate }: Props) => {
     dispatch({ type: 'SET_VALUE', key: 'cardName', value });
   };
 
-  const onClickSubmit = () => {
+  const submitCardForm = () => {
     pushList<CardType>(LOCAL_STORAGE_KEY.cardList, {
       id: Date.now(),
       cardCompany,
@@ -37,6 +37,10 @@ const CardNamePage = ({ navigate }: Props) => {
     navigate(Page.list);
   };
 
+  const onKeyDownEnter = ({ key }: React.KeyboardEvent<HTMLInputElement>) => {
+    if (key === 'Enter') submitCardForm();
+  };
+
   useEffect(() => {
     inputRef.current?.focus();
   });
@@ -45,9 +49,14 @@ const CardNamePage = ({ navigate }: Props) => {
     <PageTemplate>
       <Title>카드등록이 완료되었습니다.</Title>
       <Card cardCompany={cardCompany} cardNumber={cardNumber} ownerName={ownerName} expireDate={expireDate} />
-      <CardNameInput ref={inputRef} value={cardName} onChange={onChangeCardNameInput} />
+      <CardNameInput
+        ref={inputRef}
+        value={cardName}
+        onChange={onChangeCardNameInput}
+        onKeyDown={onKeyDownEnter}
+      />
       <ButtonWrapper>
-        <SubmitButton onClick={onClickSubmit}>확인</SubmitButton>
+        <SubmitButton onClick={submitCardForm}>확인</SubmitButton>
       </ButtonWrapper>
     </PageTemplate>
   );
