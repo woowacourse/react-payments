@@ -8,8 +8,7 @@ export function setData(initId: number) {
     id += 1;
   };
 }
-
-export const setCardData = setData(0);
+const setCardData = setData(0);
 
 export function getData(): CardProps[] | undefined {
   const cards = Object.values(localStorage).map((card) => JSON.parse(card));
@@ -18,3 +17,4 @@ export function getData(): CardProps[] | undefined {
   }
   return;
 }
+export { setCardData };

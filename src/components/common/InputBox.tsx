@@ -1,12 +1,15 @@
 import React from "react";
 import { InputProvider } from "../../contexts/inputContext";
 
-export interface InputBoxProps {
+export interface InputBoxProps<T> {
   children: React.ReactNode;
-  inputState: any;
+  inputState: {
+    value: T;
+    handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  };
 }
 
-export function InputBox(props: InputBoxProps) {
+export function InputBox<T>(props: InputBoxProps<T>) {
   const { children, inputState } = props;
 
   return <InputProvider inputState={inputState}>{children}</InputProvider>;

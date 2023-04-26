@@ -6,6 +6,7 @@ import { NumberContext, RefContext } from "../contexts/cardInfo";
 import { InputGroup } from "./common/inputGroup";
 import { InputLabel } from "./common/inputLabel";
 import { LABEL } from "../constants/inputInfo";
+import { CardNumberIndex } from "../type/input";
 
 export function CardNumber() {
   const { cardNumber, handleChange } = useContext(NumberContext);
@@ -16,7 +17,8 @@ export function CardNumber() {
   }
 
   return (
-    <InputBox inputState={{ value: cardNumber, handleChange: handleChange }}>
+    <InputBox<CardNumberIndex>
+      inputState={{ value: cardNumber, handleChange: handleChange }}>
       <Wrapper>
         <InputLabel text={LABEL.NUMBER} />
         <InputGroup>

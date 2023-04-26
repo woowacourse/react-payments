@@ -13,7 +13,7 @@ export function SecurityCode() {
   const inputRef = useContext(RefContext);
 
   return (
-    <InputBox inputState={{ code, handleChange }}>
+    <InputBox<string> inputState={{ value: code, handleChange }}>
       <Wrapper>
         <InputLabel text={LABEL.CODE} />
         <InputGroup>

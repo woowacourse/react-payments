@@ -13,7 +13,6 @@ import {
   NumberContext,
   RefContext,
 } from "../contexts/cardInfo";
-import { validation } from "../validation/input";
 import { TEXT_LENGTH } from "../constants/inputInfo";
 import { setCardData } from "../utils/localStorage";
 import { SubmitButton } from "./common/submitButton";
@@ -22,6 +21,9 @@ export function AddCardForm() {
   const navigate = useNavigate();
   const [isComplete, setIsComplete] = useState<boolean>(false);
   const inputRef = useContext(RefContext);
+  const { cardNumber } = useContext(NumberContext);
+  const { month, year } = useContext(DateContext);
+  const { userName } = useContext(NameContext);
 
   function checkAllInputs() {
     const isValid = Object.keys(inputRef.current).every(
@@ -30,10 +32,6 @@ export function AddCardForm() {
     );
     isValid && setIsComplete(true);
   }
-
-  const { cardNumber } = useContext(NumberContext);
-  const { month, year } = useContext(DateContext);
-  const { userName } = useContext(NameContext);
 
   function saveData(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -62,7 +60,7 @@ export function AddCardForm() {
       <UserName />
       <SecurityCode />
       <CardPassword />
-      <SubmitButton />
+      {isComplete && <SubmitButton />}
     </Form>
   );
 }

@@ -1,6 +1,6 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import styled from "styled-components";
-import { LABEL, TEXT_LENGTH, PLACEHOLDER } from "../constants/inputInfo";
+import { LABEL, PLACEHOLDER } from "../constants/inputInfo";
 import { NameContext, RefContext } from "../contexts/cardInfo";
 import { useCountText } from "../hooks/useCountText";
 import { Input } from "./common/Input";
@@ -12,12 +12,16 @@ export function UserName() {
   const inputRef = useContext(RefContext);
   const { count, countText } = useCountText();
 
+  useEffect(() => {
+    countText(userName);
+  }, [count]);
+
   function renderCountText() {
     return <div>{count}/30</div>;
   }
 
   return (
-    <InputBox inputState={{ userName, handleChange }}>
+    <InputBox<string> inputState={{ value: userName, handleChange }}>
       <Wrapper>
         <InputLabel text={LABEL.NAME} render={renderCountText} />
         <Input
@@ -25,7 +29,6 @@ export function UserName() {
           placeholder={PLACEHOLDER.NAME}
           name="name"
           inputRef={inputRef}
-          onChange={countText}
           asChild>
           <NameInput />
         </Input>

@@ -1,8 +1,9 @@
 import { useState } from "react";
+import { CardNumberIndex } from "../type/input";
 import { validation } from "../validation/input";
 
 export function useInputNumber() {
-  const [cardNumber, setCardNumber] = useState<any>({
+  const [cardNumber, setCardNumber] = useState<CardNumberIndex>({
     first: "",
     second: "",
     third: "",

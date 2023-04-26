@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { CardNumber } from "../../type/input";
+import { CardNumberIndex } from "../../type/input";
 
 export interface CardProps {
-  cardNumber: CardNumber;
+  cardNumber: CardNumberIndex;
   month: string;
   year: string;
   userName: string;
@@ -10,6 +10,8 @@ export interface CardProps {
 
 export function Card(props: CardProps) {
   const { cardNumber, month, year, userName } = props;
+
+  console.log(userName);
 
   return (
     <CardContainer>

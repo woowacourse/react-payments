@@ -1,13 +1,22 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode } from "react";
 
-export const InputContext = createContext<any>(null);
+export const InputContext = createContext<{
+  value: unknown;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}>({
+  value: null,
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => {},
+});
 
-interface InputProviderprops {
+interface InputProviderprops<T> {
   children: ReactNode;
-  inputState: any;
+  inputState: {
+    value: T | null;
+    handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  };
 }
 
-export function InputProvider(props: InputProviderprops) {
+export function InputProvider<T>(props: InputProviderprops<T>) {
   const { children, inputState } = props;
 
   return (

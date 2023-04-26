@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { Header } from "../components/common/Header";
 import { useEffect, useState } from "react";
-import { CardInfo, CardItem } from "../components/common/cardItem";
 import { getData } from "../utils/localStorage";
 import { Card, CardProps } from "../components/common/card";
 

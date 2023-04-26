@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import styled from "styled-components";
 import { LABEL, TEXT_LENGTH, PLACEHOLDER } from "../constants/inputInfo";
 import { DateContext, RefContext } from "../contexts/cardInfo";
+import { Date } from "../type/input";
 import { validation } from "../validation/input";
 import { Input } from "./common/Input";
 import { InputBox } from "./common/InputBox";
@@ -27,7 +28,7 @@ export function ExpiredDate() {
   }
 
   return (
-    <InputBox inputState={{ month, year, handleChange }}>
+    <InputBox<Date> inputState={{ value: { month, year }, handleChange }}>
       <Wrapper>
         <InputLabel text={LABEL.DATE} />
         <InputGroup>

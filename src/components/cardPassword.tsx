@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { LABEL, TEXT_LENGTH } from "../constants/inputInfo";
 import { RefContext } from "../contexts/cardInfo";
 import { useInputPassword } from "../hooks/useInputPassword";
+import { Password } from "../type/input";
 import { Input } from "./common/Input";
 import { InputBox } from "./common/InputBox";
 import { InputLabel } from "./common/inputLabel";
@@ -12,7 +13,7 @@ export function CardPassword() {
   const inputRef = useContext(RefContext);
 
   return (
-    <InputBox inputState={{ password, handleChange }}>
+    <InputBox<Password> inputState={{ value: password, handleChange }}>
       <Wrapper>
         <InputLabel text={LABEL.PASSWORD} />
         <InputWrapper>

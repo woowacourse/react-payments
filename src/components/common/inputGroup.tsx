@@ -1,6 +1,5 @@
 import React, { Children, cloneElement, isValidElement } from "react";
 import styled from "styled-components";
-import { ERROR_MESSAGE } from "../../constants/inputInfo";
 import { useCheckLength } from "../../hooks/useCheckLength";
 
 interface InputGroupProps {
