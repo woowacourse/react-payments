@@ -55,3 +55,8 @@ export type AddCardExpireDateInputProps = Pick<FormCardAddProps, 'expireMonth', 
 export type AddCardOwnerInputProps = Pick<FormCardAddProps, 'cardOwner'>;
 export type AddCardSecurityCodeInputProps = Pick<FormCardAddProps, 'securityCode'>;
 export type AddCardPasswordInputProps = Pick<FormCardAddProps, 'password1', 'password2'>;
+
+export type ErrorMessageProps = {
+  inputType: string;
+  status: InputStatus;
+};
