@@ -22,22 +22,27 @@ export function SecurityCode() {
             minLength={TEXT_LENGTH.CODE}
             type="password"
             name="code"
-            inputRef={inputRef}>
+            inputRef={inputRef}
+            asChild>
             <SecurityCodeInput />
           </Input>
-          <Img src="/assets/helpIc.svg" />
         </InputGroup>
+        <WarningImage src="/assets/helpIc.svg" />
       </Wrapper>
     </InputBox>
   );
 }
 
 const Wrapper = styled.section`
+  position: relative;
   width: 15rem;
 `;
 
-const Img = styled.img`
-  margin: 0.7rem;
+const WarningImage = styled.img`
+  position: absolute;
+  left: 16rem;
+
+  top: 2rem;
 `;
 
 const SecurityCodeInput = styled.input`
