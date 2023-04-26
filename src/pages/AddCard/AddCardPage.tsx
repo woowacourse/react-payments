@@ -13,6 +13,7 @@ import BackButtonImg from '../../asset/back_button.png';
 import './AddCardPage.css';
 import useInputs from '../../hooks/useInputs';
 import {
+  isValidCardNumber,
   isValidExpiredMonthFormat,
   isValidExpiredYearFormat,
   isValidOwnerName,
@@ -24,15 +25,12 @@ const AddCardPage = () => {
   const navigate = useNavigate();
   const [cardType] = useState('현대');
 
-  const [cardNumber, onChangeCardNumber] = useComplicateInput<CardNumber>({
-    first: '',
-    second: '',
-    third: '',
-    fourth: '',
-  });
+  const cardFirstNumber = useInputs(isValidCardNumber);
+  const cardSecondNumber = useInputs(isValidCardNumber);
+  const cardThirdNumber = useInputs(isValidCardNumber);
+  const cardFourthNumber = useInputs(isValidCardNumber);
   const cardPassword1 = useInputs(isValidPassword);
   const cardPassword2 = useInputs(isValidPassword);
-
   const expireMonth = useInputs(isValidExpiredMonthFormat);
   const expireYear = useInputs(isValidExpiredYearFormat);
   const securityCode = useInputs(isValidSecurityCode);
@@ -41,20 +39,6 @@ const AddCardPage = () => {
   const onBackButtonClick = useCallback(() => {
     navigate('/');
   }, [navigate]);
-
-  // TODO: e.target.value.length 가독성 개선 => 변수화
-  // TODO: 이벤트 핸들러 리팩터링.. 네이밍 + 구조
-  const onCardNumberChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const lastWord = e.target.value[e.target.value.length - 1];
-
-      if (e.target.value.length > 4) return;
-      if (e.target.value.length > 0 && !isNumberInput(lastWord)) return;
-
-      onChangeCardNumber(e);
-    },
-    [onChangeCardNumber]
-  );
 
   return (
     <div className="add-card-page">
@@ -67,14 +51,19 @@ const AddCardPage = () => {
       <article className="add-card-page-body">
         <Card
           cardType={cardType}
-          cardNumber={cardNumber}
+          cardFirstNumber={cardFirstNumber.value}
+          cardSecondNumber={cardSecondNumber.value}
+          cardThirdNumber={cardThirdNumber.value}
+          cardFourthNumber={cardFourthNumber.value}
           cardOwner={cardOwner.value}
           expireMonth={expireMonth.value}
           expireYear={expireYear.value}
         />
         <AddCardForm
-          cardNumber={cardNumber}
-          onCardNumberChange={onCardNumberChange}
+          cardFirstNumber={cardFirstNumber}
+          cardSecondNumber={cardSecondNumber}
+          cardThirdNumber={cardThirdNumber}
+          cardFourthNumber={cardFourthNumber}
           expireMonth={expireMonth}
           expireYear={expireYear}
           cardOwner={cardOwner}

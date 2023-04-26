@@ -11,8 +11,10 @@ import './AddCardForm.css';
 import AddCardNumberInput from './AddCardNumberInput';
 
 const AddCardForm = ({
-  cardNumber,
-  onCardNumberChange,
+  cardFirstNumber,
+  cardSecondNumber,
+  cardThirdNumber,
+  cardFourthNumber,
   expireMonth,
   expireYear,
   cardOwner,
@@ -27,7 +29,12 @@ const AddCardForm = ({
     try {
       sumbitCard(
         '현대',
-        cardNumber,
+        {
+          first: cardFirstNumber.value,
+          second: cardSecondNumber.value,
+          third: cardThirdNumber.value,
+          fourth: cardFourthNumber.value,
+        },
         cardOwner.value,
         expireMonth.value,
         expireYear.value,
@@ -46,7 +53,12 @@ const AddCardForm = ({
 
   return (
     <form className="add-card-form" onSubmit={onSubmit}>
-      <AddCardNumberInput cardNumber={cardNumber} onChange={onCardNumberChange} />
+      <AddCardNumberInput
+        cardFirstNumber={cardFirstNumber}
+        cardSecondNumber={cardSecondNumber}
+        cardThirdNumber={cardThirdNumber}
+        cardFourthNumber={cardFourthNumber}
+      />
       <AddCardExpireDateInput expireMonth={expireMonth} expireYear={expireYear} />
       <AddCardOwnerInput cardOwner={cardOwner} />
       <AddCardSecurityCodeInput securityCode={securityCode} />

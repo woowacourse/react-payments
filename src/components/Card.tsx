@@ -2,7 +2,16 @@ import type { CardProps } from '../type';
 import { changeNumberToMask } from '../utils/util';
 import './Card.css';
 
-const Card = ({ cardType, cardNumber, cardOwner, expireYear, expireMonth }: CardProps) => {
+const Card = ({
+  cardType,
+  cardFirstNumber,
+  cardSecondNumber,
+  cardThirdNumber,
+  cardFourthNumber,
+  cardOwner,
+  expireYear,
+  expireMonth,
+}: CardProps) => {
   return (
     <div className="card">
       <div className="card-track-1">
@@ -12,10 +21,10 @@ const Card = ({ cardType, cardNumber, cardOwner, expireYear, expireMonth }: Card
         <div className="ic-chip"></div>
       </div>
       <div className="card-track-3">
-        <span>{cardNumber.first}</span>
-        <span>{cardNumber.second}</span>
-        <span>{changeNumberToMask(cardNumber.third)}</span>
-        <span>{changeNumberToMask(cardNumber.fourth)}</span>
+        <span>{cardFirstNumber}</span>
+        <span>{cardSecondNumber}</span>
+        <span>{changeNumberToMask(cardThirdNumber)}</span>
+        <span>{changeNumberToMask(cardFourthNumber)}</span>
       </div>
       <div className="card-track-4">
         <span className="card-owner-view">{cardOwner}</span>

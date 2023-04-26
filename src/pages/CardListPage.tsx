@@ -27,7 +27,10 @@ const CardListPage = () => {
             <Card
               key={card.id}
               cardType={card.cardType}
-              cardNumber={card.cardNumber}
+              cardFirstNumber={card.cardNumber.first}
+              cardSecondNumber={card.cardNumber.second}
+              cardThirdNumber={card.cardNumber.third}
+              cardFourthNumber={card.cardNumber.fourth}
               cardOwner={card.cardOwner}
               expireMonth={card.expireMonth}
               expireYear={card.expireYear}

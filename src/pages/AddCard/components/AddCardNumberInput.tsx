@@ -2,27 +2,44 @@ import React from 'react';
 
 import type { AddCardNumberInputProps } from '../../../type';
 import './AddCardNumberInput.css';
+import InputContainer from '../../../components/InputContainer';
+import { calcMultipleStatus } from '../domain/domain';
 
-const AddCardNumberInput = ({ cardNumber, onChange }: AddCardNumberInputProps) => {
+const AddCardNumberInput = ({
+  cardFirstNumber,
+  cardSecondNumber,
+  cardThirdNumber,
+  cardFourthNumber,
+}: AddCardNumberInputProps) => {
   // TODO: memo를 적용시키려면 객체를 내리면 안된다.
-  const { first, second, third, fourth } = cardNumber;
   return (
-    <section className="card-number-input-container">
+    <InputContainer
+      className="card-number-input-container"
+      status={calcMultipleStatus([
+        cardFirstNumber.status,
+        cardSecondNumber.status,
+        cardThirdNumber.status,
+        cardFourthNumber.status,
+      ])}
+      inputType="card-number"
+    >
       <span className="form-label">카드 번호</span>
       <div className="card-number-input">
         <input
           className="input-element card-number"
-          value={first}
-          onChange={onChange}
+          value={cardFirstNumber.value}
+          onChange={cardFirstNumber.onChange}
           name="first"
+          maxLength={4}
           required
         />
         <span className="sperator">-</span>
         <input
           className="input-element card-number"
-          value={second}
-          onChange={onChange}
+          value={cardSecondNumber.value}
+          onChange={cardSecondNumber.onChange}
           name="second"
+          maxLength={4}
           required
         />
         <span className="sperator">-</span>
@@ -30,9 +47,8 @@ const AddCardNumberInput = ({ cardNumber, onChange }: AddCardNumberInputProps) =
           className="input-element input-password-container card-number"
           type="password"
           maxLength={4}
-          minLength={4}
-          value={third}
-          onChange={onChange}
+          value={cardThirdNumber.value}
+          onChange={cardThirdNumber.onChange}
           name="third"
           required
         />
@@ -41,14 +57,13 @@ const AddCardNumberInput = ({ cardNumber, onChange }: AddCardNumberInputProps) =
           className="input-element input-password-container card-number"
           type="password"
           maxLength={4}
-          minLength={4}
-          value={fourth}
-          onChange={onChange}
+          value={cardFourthNumber.value}
+          onChange={cardFourthNumber.onChange}
           name="fourth"
           required
         />
       </div>
-    </section>
+    </InputContainer>
   );
 };
 

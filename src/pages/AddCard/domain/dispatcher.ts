@@ -23,3 +23,8 @@ export const isValidOwnerName = (str: string) => {
 export const isValidPassword = (str: string) => {
   return str.length === 1 && NUMBERS.includes(str) ? 'VALID' : 'INVALID';
 };
+
+export const isValidCardNumber = (str: string) => {
+  const strToNum = +str;
+  return str.length === 4 && Number.isInteger(strToNum) ? 'VALID' : 'INVALID';
+};
