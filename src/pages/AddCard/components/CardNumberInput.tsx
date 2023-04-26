@@ -1,16 +1,16 @@
 import React from 'react';
 
-import type { AddCardNumberInputProps } from '../../../type';
-import './AddCardNumberInput.css';
+import type { CardNumberInputProps } from '../../../type';
+import './CardNumberInput.css';
 import InputContainer from '../../../components/InputContainer';
 import { calcMultipleStatus } from '../domain/domain';
 
-const AddCardNumberInput = ({
+const CardNumberInput = ({
   cardFirstNumber,
   cardSecondNumber,
   cardThirdNumber,
   cardFourthNumber,
-}: AddCardNumberInputProps) => {
+}: CardNumberInputProps) => {
   // TODO: memo를 적용시키려면 객체를 내리면 안된다.
   return (
     <InputContainer
@@ -67,4 +67,4 @@ const AddCardNumberInput = ({
   );
 };
 
-export default React.memo(AddCardNumberInput);
+export default React.memo(CardNumberInput);

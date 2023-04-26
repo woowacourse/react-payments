@@ -1,10 +1,10 @@
-import type { AddCardPasswordInputProps } from '../../../type';
+import type { PasswordInputProps } from '../../../type';
 import passwordDotImg from '../../../asset/password_dot.png';
-import './AddCardPasswordInput.css';
+import './PasswordInput.css';
 import InputContainer from '../../../components/InputContainer';
 import { calcMultipleStatus } from '../domain/domain';
 
-const AddCardPasswordInput = ({ cardPassword1, cardPassword2 }: AddCardPasswordInputProps) => {
+const PasswordInput = ({ cardPassword1, cardPassword2 }: PasswordInputProps) => {
   return (
     <InputContainer
       className="card-password-container"
@@ -38,4 +38,4 @@ const AddCardPasswordInput = ({ cardPassword1, cardPassword2 }: AddCardPasswordI
   );
 };
 
-export default AddCardPasswordInput;
+export default PasswordInput;

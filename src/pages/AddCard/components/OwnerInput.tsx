@@ -1,8 +1,8 @@
 import InputContainer from '../../../components/InputContainer';
-import type { AddCardOwnerInputProps } from '../../../type';
-import './AddCardOwnerInput.css';
+import type { OwnerInputProps } from '../../../type';
+import './OwnerInput.css';
 
-const AddCardOwnerInput = ({ cardOwner }: AddCardOwnerInputProps) => {
+const OwnerInput = ({ cardOwner }: OwnerInputProps) => {
   return (
     <InputContainer
       className="card-owner-input-container"
@@ -24,4 +24,4 @@ const AddCardOwnerInput = ({ cardOwner }: AddCardOwnerInputProps) => {
   );
 };
 
-export default AddCardOwnerInput;
+export default OwnerInput;

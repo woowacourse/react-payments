@@ -1,9 +1,9 @@
 import InputContainer from '../../../components/InputContainer';
-import { AddCardExpireDateInputProps } from '../../../type';
+import { ExpireDateInputProps } from '../../../type';
 import { calcMultipleStatus } from '../domain/domain';
-import './AddCardExpireDateInput.css';
+import './ExpireDateInput.css';
 
-const AddCardExpireDateInput = ({ expireMonth, expireYear }: AddCardExpireDateInputProps) => {
+const ExpireDateInput = ({ expireMonth, expireYear }: ExpireDateInputProps) => {
   const status = calcMultipleStatus([expireMonth.status, expireYear.status]);
   return (
     <InputContainer className="card-expired-input-container" status={status} inputType="expired">
@@ -31,4 +31,4 @@ const AddCardExpireDateInput = ({ expireMonth, expireYear }: AddCardExpireDateIn
   );
 };
 
-export default AddCardExpireDateInput;
+export default ExpireDateInput;

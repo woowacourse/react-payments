@@ -1,14 +1,9 @@
 import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import type { CardNumber } from '../../type';
 import Card from '../../components/Card';
 import AddCardForm from './components/AddCardForm';
 import Header from '../../components/Header';
-import useInput from '../../hooks/useInput';
-import useComplicateInput from '../../hooks/useComplicateInput';
-import { handleNumberInput, isNumberInput } from '../../utils/util';
-import { cardPasswordCondition } from '../cardInputCondition';
 import BackButtonImg from '../../asset/back_button.png';
 import './AddCardPage.css';
 import useInputs from '../../hooks/useInputs';
@@ -24,7 +19,6 @@ import {
 const AddCardPage = () => {
   const navigate = useNavigate();
   const [cardType] = useState('현대');
-
   const cardFirstNumber = useInputs(isValidCardNumber);
   const cardSecondNumber = useInputs(isValidCardNumber);
   const cardThirdNumber = useInputs(isValidCardNumber);

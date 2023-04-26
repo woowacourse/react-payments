@@ -1,10 +1,10 @@
-import type { AddCardSecurityCodeInputProps } from '../../../type';
+import type { SecurityCodeInputProps } from '../../../type';
 import cvcInfo from '../../../asset/cvc_info.png';
 
-import './AddCardSecurityCodeInput.css';
+import './SecurityCodeInput.css';
 import InputContainer from '../../../components/InputContainer';
 
-const AddCardSecurityCodeInput = ({ securityCode }: AddCardSecurityCodeInputProps) => {
+const SecurityCodeInput = ({ securityCode }: SecurityCodeInputProps) => {
   return (
     <InputContainer
       className="card-security-code-container"
@@ -34,4 +34,4 @@ const AddCardSecurityCodeInput = ({ securityCode }: AddCardSecurityCodeInputProp
   );
 };
 
-export default AddCardSecurityCodeInput;
+export default SecurityCodeInput;

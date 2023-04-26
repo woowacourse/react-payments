@@ -1,14 +1,14 @@
 import React from 'react';
 
-import type { FormCardAddProps } from '../../../type';
+import type { AddCardFormProps } from '../../../type';
 import { sumbitCard } from '../../../utils/applicationUtil';
 import { useNavigate } from 'react-router-dom';
-import AddCardExpireDateInput from './AddCardExpireDateInput';
-import AddCardOwnerInput from './AddCardOwnerInput';
-import AddCardSecurityCodeInput from './AddCardSecurityCodeInput';
-import AddCardPasswordInput from './AddCardPasswordInput';
+import ExpireDateInput from './ExpireDateInput';
+import OwnerInput from './OwnerInput';
+import SecurityCodeInput from './SecurityCodeInput';
+import PasswordInput from './PasswordInput';
 import './AddCardForm.css';
-import AddCardNumberInput from './AddCardNumberInput';
+import CardNumberInput from './CardNumberInput';
 
 const AddCardForm = ({
   cardFirstNumber,
@@ -21,7 +21,7 @@ const AddCardForm = ({
   securityCode,
   cardPassword1,
   cardPassword2,
-}: FormCardAddProps) => {
+}: AddCardFormProps) => {
   const navigate = useNavigate();
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -53,16 +53,16 @@ const AddCardForm = ({
 
   return (
     <form className="add-card-form" onSubmit={onSubmit}>
-      <AddCardNumberInput
+      <CardNumberInput
         cardFirstNumber={cardFirstNumber}
         cardSecondNumber={cardSecondNumber}
         cardThirdNumber={cardThirdNumber}
         cardFourthNumber={cardFourthNumber}
       />
-      <AddCardExpireDateInput expireMonth={expireMonth} expireYear={expireYear} />
-      <AddCardOwnerInput cardOwner={cardOwner} />
-      <AddCardSecurityCodeInput securityCode={securityCode} />
-      <AddCardPasswordInput cardPassword1={cardPassword1} cardPassword2={cardPassword2} />
+      <ExpireDateInput expireMonth={expireMonth} expireYear={expireYear} />
+      <OwnerInput cardOwner={cardOwner} />
+      <SecurityCodeInput securityCode={securityCode} />
+      <PasswordInput cardPassword1={cardPassword1} cardPassword2={cardPassword2} />
       <div className="add-card-submit">
         <button type="submit">다음</button>
       </div>
