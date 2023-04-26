@@ -18,8 +18,8 @@ const StyledCreditCardView = styled.div`
   border-radius: 4px;
 
   background: #333333;
-  color: white;
-  font-weight: bold;
+  color: 'white';
+  font-weight: ${(props) => props.theme.fontWeight.bold};
 `;
 
 const ICChip = styled.div`

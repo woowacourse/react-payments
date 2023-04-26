@@ -11,10 +11,11 @@ const ButtonContainer = styled.div`
 const Button = styled.button`
   width: 200px;
   height: 120px;
+
   font-size: 20px;
   font-weight: 900;
   border-radius: 5px;
-  background: #e5e5e5;
+  background: ${(props) => props.theme.color.grey2};
 `;
 
 type NewCreditCardButtonProps = {
