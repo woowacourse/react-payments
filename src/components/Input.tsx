@@ -40,7 +40,7 @@ const Input = ({ labelText, inputInfoList, children }: InputProps) => {
           <span>{labelText}</span>
           <div>{children}</div>
         </StyledInputLabelContainer>
-        <div>
+        <StyledInputListWrapper>
           {inputInfoList.map(
             (
               { type, placeholder, minLength, maxLength, width, value, center, onChange },
@@ -68,7 +68,7 @@ const Input = ({ labelText, inputInfoList, children }: InputProps) => {
               );
             },
           )}
-        </div>
+        </StyledInputListWrapper>
       </StyledInputLabel>
     </StyledInputWrapper>
   );
@@ -77,10 +77,6 @@ const Input = ({ labelText, inputInfoList, children }: InputProps) => {
 const StyledInputWrapper = styled.div`
   display: flex;
   flex-direction: column;
-
-  & + & {
-    margin-top: 18px;
-  }
 `;
 
 const StyledInputLabel = styled.label`
@@ -101,9 +97,11 @@ const StyledInput = styled.input`
   &[data-center='true'] {
     text-align: center;
   }
-  & + & {
-    margin-left: 8px;
-  }
+`;
+
+const StyledInputListWrapper = styled.div`
+  display: flex;
+  column-gap: 8px;
 `;
 
 const StyledInputLabelContainer = styled.div`

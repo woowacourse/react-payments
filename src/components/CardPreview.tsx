@@ -51,10 +51,6 @@ const CardPreviewWrapper = styled.div`
   padding: 12px;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
-
-  & + & {
-    margin-top: 44px;
-  }
 `;
 
 const CardChip = styled.div`
@@ -72,6 +68,7 @@ const CardNumberWrapper = styled.ul`
   letter-spacing: 1px;
   font-size: 14px;
   height: 20px;
+  column-gap: 12px;
 `;
 
 const CardNumber = styled.li`
@@ -82,10 +79,7 @@ const CardNumber = styled.li`
   line-height: 1.6;
 
   width: 36px;
-
-  & + & {
-    margin-left: 12px;
-  }
+  column-gap: 4px;
 `;
 
 const CardInfo = styled.div`
@@ -105,10 +99,6 @@ const Dot = styled.span`
   width: 4px;
   height: 4px;
   border-radius: 50%;
-
-  & + & {
-    margin-left: 4px;
-  }
 `;
 
 export default CardPreview;

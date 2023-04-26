@@ -228,6 +228,7 @@ const StyledForm = styled.form`
   margin-top: 28px;
   display: flex;
   flex-direction: column;
+  row-gap: 18px;
 `;
 
 const StyledSubmitButton = styled.button`
@@ -260,8 +261,6 @@ const StyledHelperButton = styled.button`
 const StyledHeightCenter = styled.div`
   display: flex;
   align-items: center;
-
-  margin-top: 18px;
 `;
 
 const StyledDotWrapper = styled.div`

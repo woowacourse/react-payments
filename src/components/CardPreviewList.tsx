@@ -32,6 +32,7 @@ const CardPreviewListWrapper = styled.div`
   align-items: center;
 
   margin-bottom: 44px;
+  row-gap: 44px;
 `;
 
 export default CardPreviewList;
