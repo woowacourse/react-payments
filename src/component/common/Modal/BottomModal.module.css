@@ -1,0 +1,34 @@
+.modal {
+  display: none;
+}
+
+.modal.open {
+  display: block;
+}
+
+.backdrop {
+  position: fixed;
+  left: 0;
+  top: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.container {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  width: 100%;
+  min-height: 227px;
+
+  background-color: #FDFDFD;
+  border-radius: 5px 5px 0px 0px;
+}
