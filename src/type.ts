@@ -34,3 +34,22 @@ export type FormCardAddProps = {
   cardPassword1: InputHook<string>;
   cardPassword2: InputHook<string>;
 };
+
+export type actionName = 'CARDLIST_REQUEST' | 'CARDLIST_SUCCESS' | 'CARDLIST_FAILURE';
+
+// export interface dispatchActions {
+//   type: actionName;
+//   card: CardType;
+//   errorMessage: string;
+// }
+
+// export type dispatchActionsResult = {
+//   type: actionName;
+//   card: CardType[] | never[];
+//   errorMessage: string;
+// };
+
+// export type cardInitialState = {
+//   cardList: CardType[];
+//   errorMessage: string;
+// };
