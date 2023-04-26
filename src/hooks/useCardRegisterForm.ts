@@ -1,7 +1,7 @@
 import { useContext } from 'react';
-import { REGEX } from '../constants';
 import { useInput } from './useInput';
 import { CardPreviewInfoContext, passwordInput } from '../contexts/cardInfo';
+import { cardRegisterValidator } from '../validation/cardRegister';
 
 export function useCardRegisterForm() {
   const previewInfo = useContext(CardPreviewInfoContext);
@@ -11,20 +11,17 @@ export function useCardRegisterForm() {
     CODE: [
       {
         ...passwordInput,
-        ...useInput(),
-        regexp: REGEX.CODE,
+        ...useInput(cardRegisterValidator.code),
       },
     ],
     CARD_PASSWORD: [
       {
         ...passwordInput,
-        ...useInput(),
-        regexp: REGEX.CARD_PASSWORD,
+        ...useInput(cardRegisterValidator.cardPassword),
       },
       {
         ...passwordInput,
-        ...useInput(),
-        regexp: REGEX.CARD_PASSWORD,
+        ...useInput(cardRegisterValidator.cardPassword),
       },
     ],
   };

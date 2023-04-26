@@ -8,7 +8,6 @@ export interface InputInfo {
   isError: boolean;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void | undefined;
   required?: boolean;
-  regexp: RegExp;
 }
 
 export interface DefaultInfo {

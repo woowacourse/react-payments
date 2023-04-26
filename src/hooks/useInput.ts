@@ -1,17 +1,15 @@
 import { useState } from 'react';
-import { REGEX } from '../constants';
-import { matchKeyWithId } from '../utils/infoKey';
 
-export function useInput() {
+type InputValidator = (input: string) => boolean;
+
+export function useInput(validator: InputValidator) {
   const [value, setValue] = useState<string>('');
   const [isError, setIsError] = useState(false);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const { id, value } = e.target;
+    const { value } = e.target;
     setValue(value);
-
-    const key = matchKeyWithId(id);
-    setIsError(!REGEX[key].test(value));
+    setIsError(!validator(value));
   }
 
   return { value, isError, handleChange };
