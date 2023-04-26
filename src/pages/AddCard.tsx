@@ -5,7 +5,6 @@ import CardInputForm from '../components/CardInputForm';
 import Header from '../components/common/Header';
 import Page from '../components/common/Page';
 import ModalPortal from '../components/ModalPortal';
-import { RANDOM_COLOR } from '../constants';
 import { CardType } from '../types';
 import { getLocalStorage, setLocalStorage } from '../utils/localStorage';
 import { ModalContext } from '../store/modalContext'
@@ -32,7 +31,7 @@ const AddCard = () => {
   return (
     <Page>
       <Header title="카드 추가" goToMainPage={true} />
-      <Card color={card.color} ownerName={card.ownerName} expiredDate={card.expiredDate} cardNumber={card.cardNumber} bankName={card.bankName}/>
+      <Card color={card.color} ownerName={card.ownerName} expiredDate={card.expiredDate} cardNumber={card.cardNumber} bankName={card.bankName} />
       <CardInputForm card={card} setCard={setCard} onSubmit={e => registerCard(e)} />
       {modalCtx.isModalOpen && (
         <ModalPortal closeEvent={modalCtx.closeModal}>
