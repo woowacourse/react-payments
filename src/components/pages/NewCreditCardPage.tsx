@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { useModal } from '../../hooks/useModal';
 import { usePayments } from '../../hooks/usePayments';
 import { useValidation } from '../../hooks/useValidation';
 import type { CreditCard, Month, Year } from '../../types/CreditCard';
@@ -10,6 +11,8 @@ import {
   validateCardPassword,
   validateExpirationDate,
 } from '../../validations/Validation';
+import type { CardCompanyButtonProps } from '../CardCompanyButton';
+import { CardCompanyListModal } from '../CardCompanyListModal';
 import { CardNumberInput } from '../CardNumberInput';
 import { CardPasswordInput } from '../CardPasswordInput';
 import { CreditCardView } from '../CreditCardView';
@@ -51,6 +54,7 @@ const NextButton = styled.button`
 
 export const NewCreditCardPage = () => {
   const [newCard, setNewCard] = useState<CreditCard>({
+    cardCompany: undefined,
     cardNumbers: '',
     expirationDate: ['', ''],
     name: '',
@@ -67,6 +71,8 @@ export const NewCreditCardPage = () => {
 
   const { addCreditCard } = usePayments();
 
+  const { isModalOpen, closeModal } = useModal(true);
+
   const setNewCardField = <Field extends keyof CreditCard>(
     field: Field,
     value: CreditCard[Field],
@@ -75,6 +81,11 @@ export const NewCreditCardPage = () => {
   };
 
   const navigate = useNavigate();
+
+  const handleCardCompanyChange = (value: CardCompanyButtonProps['cardCompany']) => {
+    setNewCardField('cardCompany', value);
+    closeModal();
+  };
 
   const handleCardNumbersChange = (value: string) => {
     setNewCardField('cardNumbers', value);
@@ -180,6 +191,8 @@ export const NewCreditCardPage = () => {
         <NextButton onClick={handleClickNextButton}>
           <Text weight="bold">다음</Text>
         </NextButton>
+
+        {isModalOpen && <CardCompanyListModal handleOnClick={handleCardCompanyChange} />}
       </Content>
     </Page>
   );
