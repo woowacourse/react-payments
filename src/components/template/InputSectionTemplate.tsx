@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 
 interface Props {
@@ -33,7 +32,6 @@ const InputSectionTemplateWrapper = styled.div`
   flex-direction: column;
 
   width: 100%;
-  margin-bottom: 14px;
 `;
 
 const InputLabelWrapper = styled.div`
