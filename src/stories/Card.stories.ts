@@ -18,6 +18,7 @@ export const Primary: Story = {
       fourth: '1234',
     },
     cardOwner: 'LEE',
-    expired: '01/01',
+    expireYear: '01',
+    expireMonth: '01',
   },
 };

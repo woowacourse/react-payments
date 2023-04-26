@@ -29,7 +29,8 @@ const CardListPage = () => {
               cardType={card.cardType}
               cardNumber={card.cardNumber}
               cardOwner={card.cardOwner}
-              expired={card.expired}
+              expireMonth={card.expireMonth}
+              expireYear={card.expireYear}
             />
           ))
         )}

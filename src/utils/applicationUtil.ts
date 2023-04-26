@@ -38,7 +38,8 @@ export const sumbitCard = (
   cardType: string,
   cardNumber: CardNumber,
   cardOwner: string,
-  cardExpire: string,
+  expireMonth: string,
+  expireYear: string,
   securityCode: string,
   cardPassword: CardPassword
 ) => {
@@ -46,7 +47,8 @@ export const sumbitCard = (
     cardType,
     cardNumber,
     cardOwner,
-    expired: cardExpire,
+    expireMonth,
+    expireYear,
     securityCode,
     cardPassword: {
       first: cardPassword.first,

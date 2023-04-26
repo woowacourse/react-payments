@@ -13,7 +13,8 @@ import './AddCardForm.css';
 const AddCardForm = ({
   cardNumber,
   onCardNumberChange,
-  cardExpire,
+  expireMonth,
+  expireYear,
   cardOwner,
   securityCode,
   cardPassword1,
@@ -24,10 +25,18 @@ const AddCardForm = ({
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      sumbitCard('현대', cardNumber, cardOwner.value, cardExpire.value, securityCode.value, {
-        first: cardPassword1.value,
-        second: cardPassword2.value,
-      });
+      sumbitCard(
+        '현대',
+        cardNumber,
+        cardOwner.value,
+        expireMonth.value,
+        expireYear.value,
+        securityCode.value,
+        {
+          first: cardPassword1.value,
+          second: cardPassword2.value,
+        }
+      );
       navigate('/');
     } catch (error) {
       alert('중복된 카드 입니다.');
@@ -38,7 +47,7 @@ const AddCardForm = ({
   return (
     <form className="add-card-form" onSubmit={onSubmit}>
       <AddCardNumberInput cardNumber={cardNumber} onChange={onCardNumberChange} />
-      <AddCardExpireDateInput cardExpire={cardExpire} />
+      <AddCardExpireDateInput expireMonth={expireMonth} expireYear={expireYear} />
       <AddCardOwnerInput cardOwner={cardOwner} />
       <AddCardSecurityCodeInput securityCode={securityCode} />
       <AddCardPasswordInput cardPassword1={cardPassword1} cardPassword2={cardPassword2} />

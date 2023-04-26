@@ -2,7 +2,7 @@ import type { CardProps } from '../type';
 import { changeNumberToMask } from '../utils/util';
 import './Card.css';
 
-const Card = ({ cardType, cardNumber, cardOwner, expired }: CardProps) => {
+const Card = ({ cardType, cardNumber, cardOwner, expireYear, expireMonth }: CardProps) => {
   return (
     <div className="card">
       <div className="card-track-1">
@@ -19,10 +19,11 @@ const Card = ({ cardType, cardNumber, cardOwner, expired }: CardProps) => {
       </div>
       <div className="card-track-4">
         <span className="card-owner-view">{cardOwner}</span>
-        <span>{expired}</span>
+        <span>{`${expireYear}/${expireMonth}`}</span>
       </div>
     </div>
   );
 };
+// TODO: 만료일 입력 로직 외부로 분리
 
 export default Card;

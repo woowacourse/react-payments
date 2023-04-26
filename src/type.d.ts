@@ -9,7 +9,8 @@ type CardProps = {
   cardType: string;
   cardNumber: CardNumber;
   cardOwner: string;
-  expired: string;
+  expireMonth: string;
+  expireYear: string;
 };
 
 export type CardPassword = {
@@ -21,7 +22,8 @@ export type CardType = {
   cardType: string;
   cardNumber: CardNumber;
   cardOwner: string;
-  expired: string;
+  expireMonth: string;
+  expireYear: string;
   securityCode: string;
   cardPassword: CardPassword;
 };
@@ -35,18 +37,20 @@ export type PasswordInputHook<T> = [T, (e: React.ChangeEvent<HTMLInputElement>) 
 
 export type FormCardAddProps = {
   cardNumber: CardNumber;
-  cardExpire: InputHook<string>;
   cardOwner: InputHook<string>;
   securityCode: InputHook<string>;
   cardPassword1: InputHook<string>;
   cardPassword2: InputHook<string>;
   onCardNumberChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  expireMonth: InputHook<string>;
+  expireYear: InputHook<string>;
 };
 
 export type AddCardNumberInputProps = Pick<FormCardAddProps, 'cardNumber'> & {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
-export type AddCardExpireDateInputProps = Pick<FormCardAddProps, 'cardExpire'>;
+
+export type AddCardExpireDateInputProps = Pick<FormCardAddProps, 'expireMonth', 'expireYear'>;
 export type AddCardOwnerInputProps = Pick<FormCardAddProps, 'cardOwner'>;
 export type AddCardSecurityCodeInputProps = Pick<FormCardAddProps, 'securityCode'>;
 export type AddCardPasswordInputProps = Pick<FormCardAddProps, 'password1', 'password2'>;

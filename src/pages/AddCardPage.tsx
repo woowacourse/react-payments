@@ -7,17 +7,13 @@ import AddCardForm from '../components/AddCardForm';
 import Header from '../components/Header';
 import useInput from '../hooks/useInput';
 import useComplicateInput from '../hooks/useComplicateInput';
+import { handleNumberInput, identity, isNumberInput, stringToUpperCase } from '../utils/util';
 import {
-  formatExpireDate,
-  handleNumberInput,
-  isNumberInput,
-  stringToUpperCase,
-} from '../utils/util';
-import {
-  cardExpireCondition,
   securityCodeCondition,
   cardOwnerCondition,
   cardPasswordCondition,
+  cardExpireMonthCondition,
+  cardExpireYearCondition,
 } from './cardInputCondition';
 import BackButtonImg from '../asset/back_button.png';
 import './AddCardPage.css';
@@ -32,7 +28,8 @@ const AddCardPage = () => {
     third: '',
     fourth: '',
   });
-  const cardExpire = useInput('', cardExpireCondition, formatExpireDate);
+  const expireMonth = useInput('', cardExpireMonthCondition, identity);
+  const expireYear = useInput('', cardExpireYearCondition, identity);
   const securityCode = useInput('', securityCodeCondition, handleNumberInput);
   const cardOwner = useInput('', cardOwnerCondition, stringToUpperCase);
   const cardPassword1 = useInput('', cardPasswordCondition, handleNumberInput);
@@ -42,6 +39,8 @@ const AddCardPage = () => {
     navigate('/');
   }, [navigate]);
 
+  // TODO: e.target.value.length 가독성 개선 => 변수화
+  // TODO: 이벤트 핸들러 리팩터링.. 네이밍 + 구조
   const onCardNumberChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const lastWord = e.target.value[e.target.value.length - 1];
@@ -67,12 +66,14 @@ const AddCardPage = () => {
           cardType={cardType}
           cardNumber={cardNumber}
           cardOwner={cardOwner.value}
-          expired={cardExpire.value}
+          expireMonth={expireMonth.value}
+          expireYear={expireYear.value}
         />
         <AddCardForm
           cardNumber={cardNumber}
           onCardNumberChange={onCardNumberChange}
-          cardExpire={cardExpire}
+          expireMonth={expireMonth}
+          expireYear={expireYear}
           cardOwner={cardOwner}
           securityCode={securityCode}
           cardPassword1={cardPassword1}

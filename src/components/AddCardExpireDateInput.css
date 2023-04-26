@@ -1,12 +1,22 @@
 .card-expired-input-container {
   margin-top: 20px;
+  width: 137px;
+}
+
+.card-expired-input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ecebf1;
+  width: 100%;
+  height: 47px;
+  border-radius: 7px;
 }
 
 .card-expired {
-  display: block;
   text-align: center;
   border: none;
   background-color: #ecebf1;
-  width: 137px;
-  border-radius: 7px;
+  height: 30px;
+  width: 30px;
 }
