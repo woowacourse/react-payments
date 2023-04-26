@@ -58,9 +58,9 @@ export function CardRegisterForm() {
         <InputBox id={key} inputs={inputs as unknown as InputInfo[]}></InputBox>
       ))}
       {isRequiredInputValid && isOptionalInputValid && (
-        <ButtonWrapper>
-          <CompleteButton type='submit'>다음</CompleteButton>
-        </ButtonWrapper>
+        <_ButtonWrapper>
+          <_CompleteButton type='submit'>다음</_CompleteButton>
+        </_ButtonWrapper>
       )}
     </_Form>
   );
@@ -75,12 +75,12 @@ const _Form = styled.form`
   gap: 1rem;
 `;
 
-const ButtonWrapper = styled.div`
+const _ButtonWrapper = styled.div`
   display: flex;
   justify-content: end;
 `;
 
-const CompleteButton = styled.button`
+const _CompleteButton = styled.button`
   width: 5rem;
   padding: 0.5rem 0.1rem;
   color: black;

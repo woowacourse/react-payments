@@ -19,16 +19,16 @@ export function CardList() {
   return (
     <CardListContainer>
       <Header title='보유 카드' />
-      <Section>
-        <Direction>
+      <_Section>
+        <_Direction>
           {cards?.length === 0 ? '새로운 카드를 추가하세요' : ''}
-        </Direction>
+        </_Direction>
         {cards &&
           cards?.map((card) => {
             return <CardItem info={card}></CardItem>;
           })}
-        <Button onClick={moveAddCardPage}>+</Button>
-      </Section>
+        <_Button onClick={moveAddCardPage}>+</_Button>
+      </_Section>
     </CardListContainer>
   );
 }
@@ -41,7 +41,7 @@ const CardListContainer = styled.div`
   margin: 2rem;
 `;
 
-const Section = styled.section`
+const _Section = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -51,11 +51,11 @@ const Section = styled.section`
   font-size: 1.4rem;
 `;
 
-const Direction = styled.h3`
+const _Direction = styled.h3`
   font: var(--text-subtitle);
   color: #575757;
 `;
-const Button = styled.button`
+const _Button = styled.button`
   background: #e5e5e5;
   border-radius: 5px;
 

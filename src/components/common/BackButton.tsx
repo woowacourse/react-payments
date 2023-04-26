@@ -10,7 +10,7 @@ export function BackButton() {
   }
 
   return (
-    <Button
+    <_Button
       src='/assets/backButtonIc.svg'
       alt='back-button'
       onClick={movePrevPage}
@@ -18,7 +18,7 @@ export function BackButton() {
   );
 }
 
-const Button = styled.img`
+const _Button = styled.img`
   position: absolute;
 
   top: 2rem;

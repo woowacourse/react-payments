@@ -9,13 +9,13 @@ export function CardItem(props: CardItemProps) {
   const { CARD_NUMBER, DATE, USERNAME } = props.info;
   return (
     <CardContainer>
-      <Magnetic />
+      <_Chip />
       <NumberWrapper>
-        <NumberItem>{makeCardNumber(CARD_NUMBER)}</NumberItem>
+        <_NumberItem>{makeCardNumber(CARD_NUMBER)}</_NumberItem>
       </NumberWrapper>
       <InfoWrapper>
-        <Name>{USERNAME}</Name>
-        <Date>{makeCardDate(DATE)}</Date>
+        <_Name>{USERNAME}</_Name>
+        <_Date>{makeCardDate(DATE)}</_Date>
       </InfoWrapper>
     </CardContainer>
   );
@@ -37,7 +37,7 @@ const CardContainer = styled.section`
   border-radius: 0.5rem;
 `;
 
-const Magnetic = styled.div`
+const _Chip = styled.div`
   width: 4rem;
   height: 2.6rem;
 
@@ -56,7 +56,7 @@ const NumberWrapper = styled.ul`
   margin: 1.5rem 1rem 0;
 `;
 
-const NumberItem = styled.li``;
+const _NumberItem = styled.li``;
 
 const InfoWrapper = styled.div`
   display: flex;
@@ -65,6 +65,6 @@ const InfoWrapper = styled.div`
   margin: 1rem 1.5em;
 `;
 
-const Name = styled.div``;
+const _Name = styled.div``;
 
-const Date = styled.div``;
+const _Date = styled.div``;

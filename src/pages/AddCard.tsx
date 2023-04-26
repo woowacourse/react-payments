@@ -6,26 +6,26 @@ import { CardPreview } from '../components/common/CardPreview';
 
 export function AddCard() {
   return (
-    <AddCardContainer>
+    <_AddCardContainer>
       <Header title='카드 추가' render={() => BackButton()} />
-      <Section>
+      <_Section>
         <CardInfoProvider>
           <CardPreview></CardPreview>
           <CardRegisterForm></CardRegisterForm>
         </CardInfoProvider>
-      </Section>
-    </AddCardContainer>
+      </_Section>
+    </_AddCardContainer>
   );
 }
 
-const AddCardContainer = styled.section`
+const _AddCardContainer = styled.section`
   display: flex;
   flex-direction: column;
 
   margin: 2rem;
 `;
 
-const Section = styled.section`
+const _Section = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -8,14 +8,14 @@ interface HeaderProps {
 export function Header(props: HeaderProps) {
   const { title, render } = props;
   return (
-    <HeaderUnit>
+    <_Header>
       {render && render()}
-      <Title>{title}</Title>
-    </HeaderUnit>
+      <_Title>{title}</_Title>
+    </_Header>
   );
 }
 
-const HeaderUnit = styled.header`
+const _Header = styled.header`
   position: relative;
 
   display: flex;
@@ -28,7 +28,7 @@ const HeaderUnit = styled.header`
   width: 100%;
 `;
 
-const Title = styled.h2`
+const _Title = styled.h2`
   font: var(--text-title);
   margin-left: 5rem;
 `;
