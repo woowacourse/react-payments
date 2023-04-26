@@ -6,12 +6,14 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   isNumber?: boolean;
   isWrong?: boolean;
   isPassword?: boolean;
+  bgColor?: string;
 }
 
 export default function Input({
   textAlign = 'baseline',
   isWrong,
   isNumber,
+  bgColor,
   value,
   isPassword,
   ...rest
@@ -30,6 +32,7 @@ export default function Input({
   if (isPassword) {
     return (
       <StyledInput
+        bgColor={bgColor}
         isWrong={isWrong}
         textAlign={textAlign}
         inputMode={isNumber ? 'numeric' : 'text'}
@@ -42,6 +45,7 @@ export default function Input({
 
   return (
     <StyledInput
+      bgColor={bgColor}
       isWrong={isWrong}
       textAlign={textAlign}
       inputMode={isNumber ? 'numeric' : 'text'}
@@ -56,9 +60,10 @@ const StyledInput = styled.input<{
   textAlign?: string;
   isWrong?: boolean;
   isPassword?: boolean;
+  bgColor?: string;
 }>`
   border: none;
-  background-color: #ecebf1;
+  background-color: ${({ bgColor }) => (bgColor ? bgColor : '#ecebf1')};
   border: ${({ isWrong }) => (isWrong ? '1px solid #ff0033' : '')};
   font-size: 18px;
   font-weight: 500;

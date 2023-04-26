@@ -3,7 +3,7 @@ import { createUniqueId, isPrevDate } from '../../utils';
 import { useState } from 'react';
 import Error from '../common/Error';
 
-interface CardProps {
+export interface CardProps {
   cardNumberSet: string[];
   owner: string;
   onDeleteClick?: () => void;

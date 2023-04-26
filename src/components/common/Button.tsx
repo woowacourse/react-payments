@@ -1,12 +1,12 @@
 import React, { ButtonHTMLAttributes } from 'react';
 import styled from 'styled-components';
 
-interface NextButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   isDisable?: boolean;
   text: string;
 }
 
-export default function NextButton({ isDisable, text }: NextButtonProps) {
+export default function Button({ isDisable, text }: ButtonProps) {
   return (
     <Wrapper isDisable={isDisable} disabled={isDisable} tabIndex={10}>
       {text}
