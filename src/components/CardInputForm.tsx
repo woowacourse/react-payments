@@ -2,9 +2,8 @@ import React, { FormEvent, useState } from "react";
 import styled from "styled-components";
 import CardInput from "./CardInput";
 import { CardType } from "../types";
-import { Link } from "react-router-dom";
 import { QuestionMark } from "../assets";
-import { PASSWORD_DIGIT_INDEX, ROUTER_PATH } from "../constants";
+import { PASSWORD_DIGIT_INDEX } from "../constants";
 import {
   getReplacedCardNumber,
   getSeperatedCardNumber,
@@ -36,7 +35,7 @@ const CardInputForm = ({ card, setCard, onSubmit }: CardInputFormType) => {
   };
 
   const handleCardNumberKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Backspace") return;
+    if (e.key !== "Backspace") return;
 
     newCard.cardNumber = getSubCardNumber(newCard.cardNumber);
     setCard(newCard);
@@ -59,6 +58,7 @@ const CardInputForm = ({ card, setCard, onSubmit }: CardInputFormType) => {
       const newPassword = [...newCard.password];
       newPassword[digit] = e.target.value;
       newCard.password = newPassword;
+
       if (e.target.nextSibling instanceof HTMLInputElement)
         e.target.nextSibling.focus();
 
@@ -76,7 +76,7 @@ const CardInputForm = ({ card, setCard, onSubmit }: CardInputFormType) => {
   };
 
   return (
-    <CardInputFormWrapper>
+    <CardInputFormWrapper onSubmit={onSubmit}>
       <InputSetWrapper>
         <label htmlFor="cardNumber">카드 번호</label>
         <CardInput
@@ -170,14 +170,12 @@ const CardInputForm = ({ card, setCard, onSubmit }: CardInputFormType) => {
           <p>카드 뒷면의 보안 3자리 숫자를 입력해 주세요 😊</p>
         </AnswerBoxWrapper>
       )}
-      <NextLink type="submit" onClick={onSubmit} to={ROUTER_PATH.MyCard}>
-        다음
-      </NextLink>
+      <NextButton type="submit">다음</NextButton>
     </CardInputFormWrapper>
   );
 };
 
-const NextLink = styled(Link)`
+const NextButton = styled.button`
   width: 30px;
   align-self: flex-end;
 
@@ -185,6 +183,9 @@ const NextLink = styled(Link)`
   font-size: 14px;
   text-decoration: none;
   color: black;
+
+  background: transparent;
+  border: none;
 
   :active {
     opacity: 50%;

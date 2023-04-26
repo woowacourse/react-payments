@@ -45,11 +45,6 @@ const CARD_COLOR = [
   "lime",
 ];
 
-const ROUTER_PATH = {
-  MyCard: "/",
-  AddCard: "/AddCard",
-};
-
 const REGEX = {
   number: /^[0-9]+$/,
   english: /^[a-zA-Z]*$/,
@@ -61,7 +56,6 @@ export {
   SEPERATED_CARD_NUMBER_LENGTH,
   PASSWORD_DIGIT_INDEX,
   CARD_COLOR,
-  ROUTER_PATH,
   REGEX,
   SEPERATOR_STRING,
   SEPERATED_EXPIRED_DATE_LENGTH,

@@ -1,12 +1,14 @@
+import { useMemo } from "react";
 import styled from "styled-components";
 import { IcChip } from "../assets";
-import { SEPERATOR_STRING } from "../constants";
 import { CardType } from "../types";
+import { getCardNumberArray } from "../utils/card";
 
 const Card = ({ cardNumber, color, ownerName, expiredDate }: CardType) => {
-  const cardNumberArray = cardNumber
-    .replaceAll(SEPERATOR_STRING.cardNumber, " ")
-    .split(" ");
+  const cardNumberArray = useMemo(
+    () => getCardNumberArray(cardNumber),
+    [cardNumber]
+  );
 
   return (
     <CardWrapper style={{ background: color }}>

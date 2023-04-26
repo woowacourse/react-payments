@@ -1,13 +1,14 @@
 import Header from "../components/common/Header";
 import Page from "../components/common/Page";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Card from "../components/Card";
 import { getLocalStorage } from "../utils";
 import { CardType } from "../types";
-import { ROUTER_PATH } from "../constants";
+import { ROUTER_PATH } from "../router/path";
 
 const MyCard = () => {
+  const navigate = useNavigate();
   const cards = getLocalStorage("card");
 
   return (
@@ -18,9 +19,9 @@ const MyCard = () => {
           <Card {...card} />
         </CardWrapper>
       ))}
-      <Link to={ROUTER_PATH.AddCard} style={{ textDecoration: "none" }}>
-        <EmptyCardWrapper>+</EmptyCardWrapper>
-      </Link>
+      <EmptyCardWrapper onClick={() => navigate(ROUTER_PATH.AddCard)}>
+        +
+      </EmptyCardWrapper>
     </Page>
   );
 };

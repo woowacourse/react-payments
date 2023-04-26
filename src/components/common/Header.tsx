@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { ArrowLeft } from "../../assets";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import React from "react";
+import { ROUTER_PATH } from "../../router/path";
 
 interface HeaderType {
   title: string;
@@ -9,12 +10,16 @@ interface HeaderType {
 }
 
 const Header = ({ title, isBack }: HeaderType) => {
+  const navigate = useNavigate();
+
   return (
     <HeaderWrapper>
       {isBack && (
-        <Link to="/">
-          <img src={ArrowLeft} alt={"뒤로가기"} />
-        </Link>
+        <img
+          src={ArrowLeft}
+          alt={"뒤로가기"}
+          onClick={() => navigate(ROUTER_PATH.MyCard)}
+        />
       )}
       <h3>{title}</h3>
     </HeaderWrapper>

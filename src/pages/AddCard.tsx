@@ -1,25 +1,22 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Card from "../components/Card";
 import CardInputForm from "../components/CardInputForm";
 import Header from "../components/common/Header";
 import Page from "../components/common/Page";
-import { CARD_COLOR } from "../constants";
+import { ROUTER_PATH } from "../router/path";
 import { CardType } from "../types";
 import { getLocalStorage, setLocalStorage } from "../utils";
+import { getEmptyCard } from "../utils/card";
 
 const AddCard = () => {
-  const [newCard, setNewCard] = useState<CardType>({
-    cardNumber: "",
-    expiredDate: "",
-    ownerName: "",
-    cvc: "",
-    password: ["", ""],
-    color: CARD_COLOR[Math.floor(Math.random() * 10)],
-  });
+  const navigate = useNavigate();
+  const [newCard, setNewCard] = useState<CardType>(getEmptyCard());
 
   const registerCard = () => {
     const cards = getLocalStorage("card");
     setLocalStorage("card", [...cards, newCard]);
+    navigate(ROUTER_PATH.MyCard);
   };
 
   return (
