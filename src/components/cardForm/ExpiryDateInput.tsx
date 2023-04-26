@@ -41,9 +41,13 @@ export const ExpiryDateInput = ({
     setExpiryDate(e.target.value);
   };
 
-  const handleOutFocusEvent = (e: React.FocusEvent<HTMLInputElement>) => {
+  const validate = (e: React.FocusEvent<HTMLInputElement>) => {
     const validity = validateExpiryDateInput(e.target.value);
     setIsValid(validity);
+  };
+
+  const eraseErrorMessage = () => {
+    setIsValid(true);
   };
 
   return (
@@ -52,7 +56,8 @@ export const ExpiryDateInput = ({
       <Input
         {...ExpiryDateInfo}
         handleInput={handleInput}
-        handleOutFocus={handleOutFocusEvent}
+        handleOutFocus={validate}
+        handleFocus={eraseErrorMessage}
         error={{
           isValid: isValid,
           errorMessage: "유효한 만료일이 아닙니다. ",

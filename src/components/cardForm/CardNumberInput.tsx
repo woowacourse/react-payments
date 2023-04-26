@@ -67,6 +67,10 @@ export const CardNumberInput = ({
     }
   };
 
+  const eraseErrorMessage = () => {
+    setIsValid(true);
+  };
+
   return (
     <InputContainer>
       <InputLabel text="카드 번호" name="cardNumber" />
@@ -81,6 +85,7 @@ export const CardNumberInput = ({
           label="cardNumber1"
           handleInput={handleInput(0)}
           handleOutFocus={validate}
+          handleFocus={eraseErrorMessage}
           ref={allRefs[0]}
         />
         {[2, 3, 4].map((ind) => (
@@ -91,6 +96,7 @@ export const CardNumberInput = ({
             label={`cardNumber${ind}`}
             handleInput={handleInput(ind - 1)}
             handleOutFocus={validate}
+            handleFocus={eraseErrorMessage}
             ref={allRefs[ind - 1]}
           />
         ))}

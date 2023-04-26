@@ -10,6 +10,7 @@ export interface InputProps {
   error?: { isValid: boolean; errorMessage: string };
   handleInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleOutFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  handleFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -23,6 +24,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       error = { isValid: true, errorMessage: "" },
       handleInput,
       handleOutFocus,
+      handleFocus,
     },
     ref
   ) => {
@@ -36,6 +38,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           name={label}
           onInput={handleInput}
           onBlur={handleOutFocus}
+          onFocus={handleFocus}
           $textPosition={$textPosition}
           type={type}
           ref={ref}

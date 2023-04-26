@@ -35,9 +35,13 @@ export const CVCInput = ({ validateCVCInput }: CVCInputProps) => {
     }
   };
 
-  const handleOutFocusEvent = (e: React.FocusEvent<HTMLInputElement>) => {
+  const validate = (e: React.FocusEvent<HTMLInputElement>) => {
     const validity = validateCVCInput(Number(e.target.value));
     setIsValid(validity);
+  };
+
+  const eraseErrorMessage = () => {
+    setIsValid(true);
   };
 
   return (
@@ -47,7 +51,8 @@ export const CVCInput = ({ validateCVCInput }: CVCInputProps) => {
         <Input
           {...CVCInfo}
           handleInput={handleInput}
-          handleOutFocus={handleOutFocusEvent}
+          handleOutFocus={validate}
+          handleFocus={eraseErrorMessage}
           error={{
             isValid: isValid,
             errorMessage: "3자리 숫자를 입력하세요.",

@@ -52,6 +52,10 @@ export const PasswordInput = ({
     setIsValid(validity);
   };
 
+  const eraseErrorMessage = () => {
+    setIsValid(true);
+  };
+
   return (
     <InputContainer>
       <InputLabel text="비밀번호" name="password" />
@@ -60,6 +64,7 @@ export const PasswordInput = ({
           {...passwordInfo}
           handleInput={handleInput(0)}
           handleOutFocus={validate}
+          handleFocus={eraseErrorMessage}
           label="password1"
           error={{
             isValid: isValid,
@@ -71,6 +76,7 @@ export const PasswordInput = ({
           {...passwordInfo}
           handleInput={handleInput(1)}
           handleOutFocus={validate}
+          handleFocus={eraseErrorMessage}
           label="password2"
           ref={allRefs[1]}
         />

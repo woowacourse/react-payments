@@ -40,11 +40,7 @@ export const OwnerInput = ({ setOwner }: OwnerInputProps) => {
         <InputLabel text="카드 소유자 이름 (선택)" name="owner" />
         <InputLabel text={`${ownerLength}/30`} name="ownerLength" />
       </Row>
-      <Input
-        {...OwnerInfo}
-        handleInput={handleInput}
-        handleOutFocus={(e) => {}}
-      />
+      <Input {...OwnerInfo} handleInput={handleInput} />
     </InputContainer>
   );
 };
