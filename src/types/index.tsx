@@ -6,6 +6,7 @@ export type CreditCardPasswordType = {
 };
 
 export type CreditCard = {
+  company: string;
   number: string;
   expiry: string;
   owner?: string;

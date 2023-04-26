@@ -1,9 +1,14 @@
 import styled from 'styled-components';
 import { convertImage } from 'tools/image';
+import * as T from 'types';
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 interface CreditCardCompanyInputProps {
   closeModal: () => void;
+  name: keyof T.CreditCard;
+  creditCard: T.CreditCard;
+  setCreditCard: React.Dispatch<React.SetStateAction<T.CreditCard>>;
+
 }
 const CreditCardCompanyInputLayout = styled.div`
     display: grid;
@@ -13,6 +18,7 @@ const CreditCardCompanyInputLayout = styled.div`
 
 const CreditCardCompanyItem = styled.div`
     text-align: center;
+    cursor:pointer;
 `;
 
 const creditCardCompanies = [
@@ -26,11 +32,20 @@ const creditCardCompanies = [
   { id: 'kookmin', company: '국민카드' },
 ];
 
-function CreditCardCompanyInput({ closeModal }: CreditCardCompanyInputProps) {
+function CreditCardCompanyInput({
+  closeModal, name, creditCard, setCreditCard
+}: CreditCardCompanyInputProps) {
+  const handleChangeCreditCardCompany = (company: string) => {
+    setCreditCard({ ...creditCard, [name]: company });
+    closeModal();
+  };
   return (
     <CreditCardCompanyInputLayout>
       {creditCardCompanies.map((card) => (
-        <CreditCardCompanyItem key={card.id} onClick={closeModal}>
+        <CreditCardCompanyItem
+          key={card.id}
+          onClick={() => handleChangeCreditCardCompany(card.company)}
+        >
           <img
             src={convertImage(card.id)}
             alt={card.company}

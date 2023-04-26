@@ -7,10 +7,14 @@ import * as S from './style';
 
 export type CreditCardProps = {
   fullFilled: boolean;
-  creditCard: Pick<T.CreditCard, 'number' | 'expiry' | 'owner'>;
+  creditCard: Pick<T.CreditCard, 'company' | 'number' | 'expiry' | 'owner'>;
 };
 
-function CreditCard({ fullFilled, creditCard: { expiry, number, owner } }: CreditCardProps) {
+function CreditCard({
+  fullFilled, creditCard: {
+    company, expiry, number, owner
+  }
+}: CreditCardProps) {
   const isValid = () => {
     if (!fullFilled) return true;
 
@@ -24,8 +28,11 @@ function CreditCard({ fullFilled, creditCard: { expiry, number, owner } }: Credi
 
   return (
     <S.CreditCardLayout isValid={isValid()}>
+      <S.CreditCardInfoHeader>
+        <S.CreditCardCompany>{company}</S.CreditCardCompany>
+      </S.CreditCardInfoHeader>
       <S.CreditCardICChip />
-      <S.Box>
+      <S.CreditCardInfoFooter>
         <S.CreditCardNumber>
           {convertSecuredCreditCard(number).map((num, idx) => <div key={idx}>{num}</div>)}
         </S.CreditCardNumber>
@@ -37,7 +44,7 @@ function CreditCard({ fullFilled, creditCard: { expiry, number, owner } }: Credi
             {expiry}
           </S.CreditCardBox>
         </S.CreditCardContainer>
-      </S.Box>
+      </S.CreditCardInfoFooter>
     </S.CreditCardLayout>
   );
 }
