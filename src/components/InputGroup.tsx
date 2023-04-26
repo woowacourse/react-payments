@@ -20,7 +20,7 @@ type InputGroupProps = {
 
 interface InputProps extends React.HTMLAttributes<HTMLInputElement> {
   onChange: React.ChangeEventHandler<HTMLInputElement>;
-  center: boolean;
+  textCenter: boolean;
 }
 
 function InputGroup({ labelText, inputInfoList, children }: InputGroupProps) {
@@ -57,7 +57,7 @@ function InputGroup({ labelText, inputInfoList, children }: InputGroupProps) {
                   width={width}
                   placeholder={placeholder}
                   value={value}
-                  center={center}
+                  textCenter={center}
                   ref={inputRefs[index]}
                   onChange={(e) => {
                     moveFocus(index)(e);
@@ -93,8 +93,8 @@ const StyledInput = styled.input<InputProps>`
   border: none;
   border-bottom: 1px solid #525252;
   padding: 12px;
-  ${({ center }) =>
-    center &&
+  ${({ textCenter }) =>
+    textCenter &&
     css`
       text-align: center;
     `}
