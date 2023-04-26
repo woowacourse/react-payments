@@ -10,7 +10,7 @@ interface CardProps extends CardContainerProps {
   ownerName: string;
   expirationDate: string[];
   onClick: React.MouseEventHandler<HTMLDivElement>;
-  bankName: string;
+  cardCompany: string;
   cardColor: string;
 }
 
@@ -18,7 +18,7 @@ const Card = ({
   cardNumber,
   ownerName,
   expirationDate,
-  bankName,
+  cardCompany,
   cardColor,
   onClick,
 }: CardProps) => {
@@ -26,7 +26,7 @@ const Card = ({
 
   return (
     <CardContainer onClick={onClick} cardColor={cardColor}>
-      <span>{bankName}</span>
+      <span>{cardCompany}</span>
       <CardChip></CardChip>
       <CardNumberContainer>
         {cardNumberList.map((numberValue, index) => (

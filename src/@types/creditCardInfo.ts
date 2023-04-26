@@ -1,4 +1,4 @@
-import { Banks } from './banks';
+import { CardCompany } from './cardCompany';
 
 interface CreditCardInfo {
   cardNumber: string[];
@@ -6,7 +6,8 @@ interface CreditCardInfo {
   ownerName: string;
   securityCode: string;
   password: string[];
-  bank: Banks;
+  cardCompany: CardCompany;
+  cardAlias: string;
 }
 
 export default CreditCardInfo;

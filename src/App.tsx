@@ -1,11 +1,14 @@
 import { Outlet } from 'react-router-dom';
 import Layout from './components/@common/Layout';
+import { CreditCardProvider } from './contexts/CreditCardContext';
 
 const App = () => {
   return (
     <>
       <Layout>
-        <Outlet></Outlet>
+        <CreditCardProvider>
+          <Outlet></Outlet>
+        </CreditCardProvider>
       </Layout>
     </>
   );

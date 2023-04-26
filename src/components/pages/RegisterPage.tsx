@@ -1,52 +1,31 @@
 import Card from '../@common/Card';
 import { CreditCardContext } from '../../contexts/CreditCardContext';
 import CardRegisterForm from '../registerForm/cardRegisterForm/CardRegisterForm';
-import { useState } from 'react';
-import CreditCardInfo from '../../@types/creditCardInfo';
-import BankSelectModal from '../BankSelectModal/BankSelectModal';
-import { Banks, COLOR_BY_BANK, KOR_BANK_NAME_BY_BANK } from '../../@types/banks';
+import { useContext } from 'react';
+
+import BankSelectModal from '../SelectCompanyModal/SelectCompanyModal';
+import { KOR_NAME_BY_CARD_COMPANY, COLOR_BY_CARD_COMPANY } from '../../@types/cardCompany';
 import useBottomModal from '../../hooks/useBottomModal';
 
 function RegisterPage() {
-  const [creditCardInfo, setCreditCardInfo] = useState<CreditCardInfo>({
-    cardNumber: ['', '', '', ''],
-    expirationDate: ['', ''],
-    ownerName: '',
-    securityCode: '',
-    password: ['', ''],
-    bank: 'hyundai' as Banks,
-  });
-
   const { BottomModal, closeModal, openModal } = useBottomModal(true);
-
-  const setCreditCard = <T extends keyof CreditCardInfo>(
-    target: T,
-    newValue: CreditCardInfo[T]
-  ) => {
-    setCreditCardInfo((prev) => ({
-      ...prev,
-      [target]: newValue,
-    }));
-  };
-
-  const bankName = KOR_BANK_NAME_BY_BANK[creditCardInfo.bank];
-  const cardColor = COLOR_BY_BANK[creditCardInfo.bank];
+  const { cardNumber, ownerName, expirationDate, cardCompany } = useContext(CreditCardContext)[0];
 
   return (
-    <CreditCardContext.Provider value={[creditCardInfo, setCreditCard]}>
+    <>
       <Card
-        cardNumber={creditCardInfo.cardNumber}
-        ownerName={creditCardInfo.ownerName}
-        expirationDate={creditCardInfo.expirationDate}
+        cardNumber={cardNumber}
+        ownerName={ownerName}
+        expirationDate={expirationDate}
         onClick={openModal}
-        bankName={bankName}
-        cardColor={cardColor}
+        cardCompany={KOR_NAME_BY_CARD_COMPANY[cardCompany]}
+        cardColor={COLOR_BY_CARD_COMPANY[cardCompany]}
       />
       <CardRegisterForm />
       <BottomModal>
         <BankSelectModal onClose={closeModal}></BankSelectModal>
       </BottomModal>
-    </CreditCardContext.Provider>
+    </>
   );
 }
 

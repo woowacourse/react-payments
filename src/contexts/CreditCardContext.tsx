@@ -1,6 +1,6 @@
 import { PropsWithChildren, createContext, useState } from 'react';
 import CreditCardInfo from '../@types/creditCardInfo';
-import { Banks } from '../@types/banks';
+import { CardCompany } from '../@types/cardCompany';
 
 export const CreditCardContext = createContext<
   [
@@ -14,34 +14,35 @@ export const CreditCardContext = createContext<
     ownerName: '',
     securityCode: '',
     password: ['', ''],
-    bank: 'hyundai' as Banks,
+    cardCompany: 'hyundai' as CardCompany,
+    cardAlias: '',
   },
   null,
 ]);
 
 export const CreditCardProvider = ({ children }: PropsWithChildren) => {
-  const [creditCardEntered, setCreditCardEntered] = useState<CreditCardInfo>({
+  const [creditCardInfo, setCreditCardInfo] = useState<CreditCardInfo>({
     cardNumber: ['', '', '', ''],
     expirationDate: ['', ''],
     ownerName: '',
     securityCode: '',
     password: ['', ''],
-    bank: 'hyundai' as Banks,
+    cardCompany: 'hyundai' as CardCompany,
+    cardAlias: '',
   });
-  console.log('>>> creditCardEntered:', creditCardEntered);
 
   const setCreditCard = <T extends keyof CreditCardInfo>(
     target: T,
     newValue: CreditCardInfo[T]
   ) => {
-    setCreditCardEntered((prev) => ({
+    setCreditCardInfo((prev) => ({
       ...prev,
       [target]: newValue,
     }));
   };
 
   return (
-    <CreditCardContext.Provider value={[creditCardEntered, setCreditCard]}>
+    <CreditCardContext.Provider value={[creditCardInfo, setCreditCard]}>
       {children}
     </CreditCardContext.Provider>
   );
