@@ -12,7 +12,7 @@ export const CARD_LOGO = {
   비씨카드: <BCLogo width={"37px"} height={"37px"} />,
   하나카드: <HanaLogo width={"37px"} height={"37px"} />,
   현대카드: <HyundaiLogo width={"37px"} height={"37px"} />,
-  카카오뱅크카드: <KakaoBankLogo width={"37px"} height={"37px"} />,
+  카카오뱅크: <KakaoBankLogo width={"37px"} height={"37px"} />,
   국민카드: <KBLogo width={"37px"} height={"37px"} />,
   롯데카드: <LotteLogo width={"37px"} height={"37px"} />,
   신한카드: <ShinhanLogo width={"37px"} height={"37px"} />,
