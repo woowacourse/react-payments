@@ -33,6 +33,12 @@ const Button = styled.button`
 const CompanyLogo = styled.img`
   width: 38px;
   height: 38px;
+
+  transition: transform 100ms ease;
+
+  &:hover {
+    transform: scale(1.15);
+  }
 `;
 
 const CompanyName = styled.span`
