@@ -1,14 +1,16 @@
-import type { Meta } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 
-import { getCardCompanies } from "../type/CardCompany";
+import { CARD_COMPANIES_ENGLISH } from "../type/CardCompany";
 import CardCompanyButton from "../component/CardInputPage/InputModalBank/CardCompanyButton";
+
+type Story = StoryObj<typeof CardCompanyButton>;
 
 const meta: Meta<typeof CardCompanyButton>= {
   title: "Card Company Button",
   component: CardCompanyButton,
   argTypes: {
     companyName: {
-      options: getCardCompanies(),
+      options: CARD_COMPANIES_ENGLISH,
       control: { type: 'inline-radio' },
     },
     onClick: {
@@ -19,9 +21,4 @@ const meta: Meta<typeof CardCompanyButton>= {
 
 export default meta;
 
-export const Icons = (args: any) => (
-  <CardCompanyButton
-    companyName={args.companyName ?? 'bc'}
-    onClick={args.onClick}
-  />
-);
+export const Icons: Story = { args: { companyName: 'kakao' } }
