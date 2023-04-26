@@ -19,7 +19,6 @@ const GlobalStyles = createGlobalStyle`
 
 	#root {
 		display: flex;
-		flex-direction: column;
 		justify-content: center;
 		align-items: center;
 
@@ -28,6 +27,9 @@ const GlobalStyles = createGlobalStyle`
 	}
 
 	.App {
+		display: flex;
+		flex-direction: column;
+
 		width: 100%;
 		height: 100%;
 
@@ -62,14 +64,12 @@ const GlobalStyles = createGlobalStyle`
 	@media (min-width: 992px) {
 		.App {
 			width: 50%;
-			height: 100%;
 		}
 	}
 
 	@media (min-width: 1200px) {
 		.App {
 			width: 30%;
-			height: 100%;
 		}
 	}
 `;

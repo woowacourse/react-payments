@@ -1,25 +1,19 @@
 import styled from 'styled-components';
 import { COLOR } from '../../constants/cardInfo';
 
-export const PasswordInputBox = styled.div`
-  position: relative;
-`;
+export const PasswordInputBox = styled.div``;
 
 export const LabelHeader = styled.div`
   display: flex;
   justify-content: space-between;
 
   span {
-    font-size: 15px;
+    font-size: 16px;
   }
 `;
 
 export const InputContainer = styled.div`
-  display: inline-block;
-
-  margin: 5px 0;
-
-  border-radius: 10px;
+  margin: 4px 0;
 
   & > input:not(:last-child) {
     margin-right: 8px;

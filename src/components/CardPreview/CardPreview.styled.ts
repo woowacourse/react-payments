@@ -5,6 +5,4 @@ export const CardPreview = styled.div`
   justify-content: center;
 
   width: 100%;
-
-  margin-bottom: 40px;
 `;

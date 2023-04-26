@@ -4,24 +4,24 @@ import { COLOR } from '../../constants/cardInfo';
 
 const InputWidth = {
   xl: '100%',
-  l: '100px',
-  m: '60px',
-  s: '60px',
-  xs: '45px',
+  l: '110px',
+  m: '90px',
+  s: '70px',
+  xs: '40px',
 };
 
 export const Input = styled.input<InputProps>`
   width: ${props => InputWidth[props.width]};
-  height: 45px;
+  height: 40px;
 
   background-color: ${COLOR.GREY100};
 
-  border-radius: 10px;
+  border-radius: 8px;
   border: none;
 
   font-weight: 600;
-  font-size: 18px;
-  letter-spacing: 2px;
+  font-size: 16px;
+  letter-spacing: 0.5px;
   text-align: center;
 
   opacity: 0.6;
