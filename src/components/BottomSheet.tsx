@@ -29,7 +29,6 @@ const BottomSheetContainer = styled.div`
   position: fixed;
   bottom: 0;
   height: 316px;
-  left: 27%;
   width: 406px;
   height: 180px;
   padding: 42px 16px;
