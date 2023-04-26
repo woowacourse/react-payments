@@ -1,7 +1,7 @@
-export const PAGE_HEADER = Object.freeze({
+export const PAGE_HEADER = {
   CARD_LIST: '보유카드',
   ADD_CARD: '카드 추가',
-});
+} as const;
 
 export const REGEX: {
   [key: string]: RegExp;
@@ -12,8 +12,8 @@ export const REGEX: {
   USERNAME: /^[a-zA-Z가-힣]{0,30}$/,
   CODE: /^\d{3}$/,
   CARD_PASSWORD: /^\d{1}$/,
-};
+} as const;
 
 export const LOCAL_STORAGE_KEY: { [key: string]: string } = {
   CARD_LIST: 'cards',
-};
+} as const;

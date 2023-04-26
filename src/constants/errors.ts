@@ -5,4 +5,4 @@ export const ERROR_MESSAGE: { [key: string]: string } = {
   USERNAME: '영문자 또는 한글만 입력해주세요.',
   CODE: '3자리 숫자를 입력해주세요',
   CARD_PASSWORD: '숫자만 입력해주세요.',
-};
+} as const;
