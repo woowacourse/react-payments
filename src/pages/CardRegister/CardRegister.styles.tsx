@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Root = styled.main`
   position: relative;
@@ -42,4 +42,8 @@ export const CompleteButton = styled.button`
   font-weight: 700;
   font-size: 14px;
   background: white;
+`;
+
+export const CardBankChangeText = styled.p`
+  margin-top: 11px;
 `;
