@@ -2,10 +2,15 @@ import type { AddCardSecurityCodeInputProps } from '../../../type';
 import cvcInfo from '../../../asset/cvc_info.png';
 
 import './AddCardSecurityCodeInput.css';
+import InputContainer from '../../../components/InputContainer';
 
 const AddCardSecurityCodeInput = ({ securityCode }: AddCardSecurityCodeInputProps) => {
   return (
-    <section className="card-security-code-container">
+    <InputContainer
+      className="card-security-code-container"
+      status={securityCode.status}
+      inputType="security-code"
+    >
       <span className="form-label">보안코드(CVC/CVV)</span>
       <div className="card-security-code-box">
         <input
@@ -25,7 +30,7 @@ const AddCardSecurityCodeInput = ({ securityCode }: AddCardSecurityCodeInputProp
           <p>카드 뒷면의 3자리 숫자입니다.</p>
         </div>
       </div>
-    </section>
+    </InputContainer>
   );
 };
 

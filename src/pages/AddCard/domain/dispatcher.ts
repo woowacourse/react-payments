@@ -9,3 +9,7 @@ export const isValidExpiredYearFormat = (str: string) => {
   return Number.isInteger(strToNum) && strToNum >= 0 ? 'VALID' : 'INVALID';
 };
 
+export const isValidSecurityCode = (str: string) => {
+  const strToNum = +str;
+  return str.length === 3 && Number.isInteger(strToNum) ? 'VALID' : 'INVALID';
+};

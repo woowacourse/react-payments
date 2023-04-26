@@ -42,7 +42,7 @@ export type PasswordInputHook<T> = [T, (e: React.ChangeEvent<HTMLInputElement>) 
 export type FormCardAddProps = {
   cardNumber: CardNumber;
   cardOwner: InputHook<string>;
-  securityCode: InputHook<string>;
+  securityCode: InputHook;
   cardPassword1: InputHook<string>;
   cardPassword2: InputHook<string>;
   onCardNumberChange: (e: React.ChangeEvent<HTMLInputElement>) => void;

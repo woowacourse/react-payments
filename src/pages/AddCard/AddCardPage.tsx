@@ -15,6 +15,7 @@ import useInputs from '../../hooks/useInputs';
 import {
   isValidExpiredMonthFormat,
   isValidExpiredYearFormat,
+  isValidSecurityCode,
 } from './domain/dispatcher';
 
 const AddCardPage = () => {
@@ -30,6 +31,7 @@ const AddCardPage = () => {
 
   const expireMonth = useInputs(isValidExpiredMonthFormat);
   const expireYear = useInputs(isValidExpiredYearFormat);
+  const securityCode = useInputs(isValidSecurityCode);
   const cardOwner = useInput('', cardOwnerCondition, stringToUpperCase);
   const cardPassword1 = useInput('', cardPasswordCondition, handleNumberInput);
   const cardPassword2 = useInput('', cardPasswordCondition, handleNumberInput);
