@@ -9,14 +9,14 @@ type CardPreviewProps = {
 };
 
 const CARD_COMPANY_COLOR = {
-  비씨카드: "#f61f1f",
-  하나카드: "#00b819",
+  비씨카드: "#C03841",
+  하나카드: "#009490",
   현대카드: "#000000",
-  카카오뱅크카드: "#da06ff",
-  국민카드: "#a0a0a0",
-  롯데카드: "#b38f17",
-  신한카드: "#1311ac",
-  우리카드: "#00ddff",
+  카카오뱅크카드: "#FFE600",
+  국민카드: "#685E54",
+  롯데카드: "#ED1C24",
+  신한카드: "#0046FF",
+  우리카드: "#007BC8",
 };
 
 const CardPreview = ({ card, animation }: CardPreviewProps) => {
