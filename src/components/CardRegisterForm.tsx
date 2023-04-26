@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { CardViewer } from './CardViewer';
 import { CardNumberInput } from './input/CardNumberInput';
 import { ExpirationDateInput } from './input/ExpirationDateInput';
@@ -8,23 +8,23 @@ import { OwnerNameInput } from './input/OwnerNameInput';
 import { SecurityCodeInput } from './input/SecurityCodeInput';
 import { PasswordInput } from './input/PasswordInput';
 import { cardDataService } from '../domains/cardDataService';
-import { useCardRegisterFormValidation } from '../hooks/useCardRegisterFormValidation';
+import { useCardRegisterForm } from '../hooks/useCardRegisterForm';
 
 export function CardRegisterForm() {
   const navigate = useNavigate();
-
-  const [cardNumber, setCardNumber] = useState(['', '', '', '']);
-  const [expirationDate, setExpirationDate] = useState({ month: '', year: '' });
-  const [ownerName, setOwnerName] = useState('');
-  const [securityCode, setSecurityCode] = useState('');
-  const [password, setPassword] = useState(['', '']);
-  const isValidCardForm = useCardRegisterFormValidation({
+  const {
     cardNumber,
     expirationDate,
     ownerName,
     securityCode,
     password,
-  });
+    setCardNumber,
+    setExpirationDate,
+    setOwnerName,
+    setSecurityCode,
+    setPassword,
+    isValidCardForm,
+  } = useCardRegisterForm();
 
   const monthInputRef = useRef<HTMLInputElement>(null);
   const ownerNameInputRef = useRef<HTMLInputElement>(null);
