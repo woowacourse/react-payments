@@ -13,9 +13,7 @@ interface Props {
   setName: Dispatch<SetStateAction<Name>>;
 }
 
-const NameInput = (props: Props) => {
-  const { name, setName } = props;
-
+const NameInput = ({ name, setName }: Props) => {
   const NameValidatior = (target: string, value: string) => {
     const upperValue = value.toUpperCase().trimStart();
     return upperValue.includes('  ') ? '' : upperValue;
