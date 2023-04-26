@@ -2,7 +2,7 @@ import { FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getFormData } from 'utils/formDataGetter';
 import { setLocalStorage } from 'utils/localStorage';
-import { areValidInfo } from 'validation';
+import { areValidInfo } from 'validator';
 
 export const useFormHandler = () => {
   const navigate = useNavigate();
