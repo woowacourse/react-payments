@@ -1,18 +1,18 @@
-import type { CardType } from '../../../types';
 import styled from 'styled-components';
 
 import InputSectionTemplate from '../../template/InputSectionTemplate';
 import InputBox from '../../common/InputBox';
 import Input from '../../common/Input';
 
+import { useCardForm } from '../../../context/cardForm';
+
 interface Props {
-  securityCode: CardType['securityCode'];
-  setSecurityCode: (securityCode: CardType['securityCode']) => void;
   insert: (index: number) => (element: HTMLInputElement | null) => void;
   focus: (index: number) => (go: number) => void;
 }
 
-const SecurityCodeInput = ({ securityCode, setSecurityCode, insert, focus }: Props) => {
+const SecurityCodeInput = ({ insert, focus }: Props) => {
+  const [{ securityCode }, { setSecurityCode }] = useCardForm();
   return (
     <InputSectionTemplate label="보안 코드(CVC/CVV)">
       <InputBox align="center">

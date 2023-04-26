@@ -1,18 +1,18 @@
-import type { CardType } from '../../../types';
 import styled from 'styled-components';
 
 import InputSectionTemplate from '../../template/InputSectionTemplate';
 import InputBox from '../../common/InputBox';
 import Input from '../../common/Input';
 
+import { useCardForm } from '../../../context/cardForm';
+
 interface Props {
-  cardPassword: CardType['cardPassword'];
-  setCardPasswordIndex: (index: number) => (value: CardType['cardPassword'][number]) => void;
   insert: (index: number) => (element: HTMLInputElement | null) => void;
   focus: (index: number) => (go: number) => void;
 }
 
-const CardPasswordInput = ({ cardPassword, setCardPasswordIndex, insert, focus }: Props) => {
+const CardPasswordInput = ({ insert, focus }: Props) => {
+  const [{ cardPassword }, { setCardPasswordIndex }] = useCardForm();
   return (
     <InputSectionTemplate label="카드 번호">
       {cardPassword.map((value, index) => (

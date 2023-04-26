@@ -1,17 +1,17 @@
-import type { CardType } from '../../../types';
-
 import InputSectionTemplate from '../../template/InputSectionTemplate';
 import InputBox from '../../common/InputBox';
 import Input from '../../common/Input';
 
+import { useCardForm } from '../../../context/cardForm';
+
 interface Props {
-  ownerName: CardType['ownerName'];
-  setOwnerName: (value: CardType['ownerName']) => void;
   insert: (index: number) => (element: HTMLInputElement | null) => void;
   focus: (index: number) => (go: number) => void;
 }
 
-const OwnerNameInput = ({ ownerName, setOwnerName, insert, focus }: Props) => {
+const OwnerNameInput = ({ insert, focus }: Props) => {
+  const [{ ownerName }, { setOwnerName }] = useCardForm();
+
   return (
     <InputSectionTemplate label="카드 소유자 이름(선택)" countLength={ownerName.length} maxLength={30}>
       <InputBox align="left" isFullWidth>

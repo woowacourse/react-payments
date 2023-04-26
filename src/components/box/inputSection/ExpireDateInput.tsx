@@ -4,14 +4,16 @@ import InputSectionTemplate from '../../template/InputSectionTemplate';
 import InputBox from '../../common/InputBox';
 import Input from '../../common/Input';
 
+import { useCardForm } from '../../../context/cardForm';
+
 interface Props {
-  expireDate: CardType['expireDate'];
-  setExpireDateIndex: (index: number) => (value: CardType['expireDate'][number]) => void;
   insert: (index: number) => (element: HTMLInputElement | null) => void;
   focus: (index: number) => (go: number) => void;
 }
 
-const ExpireDateInput = ({ expireDate, setExpireDateIndex, insert, focus }: Props) => {
+const ExpireDateInput = ({ insert, focus }: Props) => {
+  const [{ expireDate }, { setExpireDateIndex }] = useCardForm();
+
   const validExpireDate = (expireDate: CardType['expireDate']) => {
     if (expireDate.join('') === '') return;
 
