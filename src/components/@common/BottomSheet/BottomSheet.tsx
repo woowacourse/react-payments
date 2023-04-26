@@ -1,5 +1,5 @@
-import { ReactNode, useEffect, useState } from "react";
-import { Backdrop, BottomSheetContainer } from "./BottomSheet.styles";
+import { ReactNode, useEffect, useState } from 'react';
+import { Backdrop, BottomSheetContainer } from './BottomSheet.styles';
 
 interface BottomSheetProps {
   isOpened: boolean;
@@ -27,9 +27,7 @@ const BottomSheet = ({ isOpened, onClose, children }: BottomSheetProps) => {
   return (
     <>
       <Backdrop onClick={onClose} />
-      <BottomSheetContainer isOpened={isOpened}>
-        {children}
-      </BottomSheetContainer>
+      <BottomSheetContainer isOpened={isOpened}>{children}</BottomSheetContainer>
     </>
   );
 };

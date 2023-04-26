@@ -1,7 +1,7 @@
-import "styled-components";
-import { BankColors } from "../styles/theme";
+import 'styled-components';
+import { BankColors } from '../styles/theme';
 
-declare module "styled-components" {
+declare module 'styled-components' {
   interface Theme {
     border: string;
     color: string;

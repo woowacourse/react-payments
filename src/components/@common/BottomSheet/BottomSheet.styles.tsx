@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes } from 'styled-components';
 
 const slideUp = keyframes`
   from {
@@ -27,8 +27,7 @@ export const BottomSheetContainer = styled.div<{ isOpened: boolean }>`
   z-index: 1000;
   padding: 1rem 2rem;
   border-top: 1px solid #ccc;
-  animation: ${({ isOpened }) => (isOpened ? slideUp : slideDown)} 250ms
-    ease-out;
+  animation: ${({ isOpened }) => (isOpened ? slideUp : slideDown)} 250ms ease-out;
 `;
 
 export const Backdrop = styled.div`

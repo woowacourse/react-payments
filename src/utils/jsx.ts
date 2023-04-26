@@ -1,15 +1,6 @@
-import {
-  Children,
-  isValidElement,
-  ReactElement,
-  ReactNode,
-  ElementType,
-} from 'react';
+import { Children, isValidElement, ReactElement, ReactNode, ElementType } from 'react';
 
-export const getChildElement = <T extends ElementType>(
-  children: ReactNode,
-  elementType: T
-): ReactElement | null => {
+export const getChildElement = <T extends ElementType>(children: ReactNode, elementType: T): ReactElement | null => {
   let targetChildren: ReactElement | null = null;
   const childrenArray = Children.toArray(children);
 
@@ -27,10 +18,7 @@ export const getChildElement = <T extends ElementType>(
   return targetChildren;
 };
 
-export const getAllChildElement = <T extends ElementType>(
-  children: ReactNode,
-  elementType: T
-): [ReactElement] | null => {
+export const getAllChildElement = <T extends ElementType>(children: ReactNode, elementType: T): [ReactElement] | null => {
   let targetChildren: [ReactElement] | null = null;
   const childrenArray = Children.toArray(children);
 
@@ -42,14 +30,9 @@ export const getAllChildElement = <T extends ElementType>(
     }
 
     if (child.props.children) {
-      const nestedChildren = getAllChildElement(
-        child.props.children,
-        elementType
-      );
+      const nestedChildren = getAllChildElement(child.props.children, elementType);
       if (nestedChildren) {
-        !targetChildren
-          ? (targetChildren = nestedChildren)
-          : targetChildren.push(...nestedChildren);
+        !targetChildren ? (targetChildren = nestedChildren) : targetChildren.push(...nestedChildren);
       }
     }
   });

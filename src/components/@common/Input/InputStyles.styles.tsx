@@ -1,4 +1,4 @@
-import styled, { css, DefaultTheme } from "styled-components";
+import styled, { css, DefaultTheme } from 'styled-components';
 
 interface StyledInputProps {
   inputTheme?: keyof DefaultTheme;
@@ -18,10 +18,7 @@ export const BaseInput = css<StyledInputProps>`
   border-radius: 7px;
   outline: none;
   padding: 0 20px;
-  background-color: ${(props) =>
-    props.inputTheme
-      ? props.theme[props.inputTheme].backgroundColor
-      : props.theme.pale.backgroundColor};
+  background-color: ${(props) => (props.inputTheme ? props.theme[props.inputTheme].backgroundColor : props.theme.pale.backgroundColor)};
 
   &:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 1000px #ecebf1 inset !important;

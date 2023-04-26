@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { BaseInput } from "../../../@common/Input/InputStyles.styles";
+import styled from 'styled-components';
+import { BaseInput } from '../../../@common/Input/InputStyles.styles';
 
 export const Input = styled.input`
   ${BaseInput}

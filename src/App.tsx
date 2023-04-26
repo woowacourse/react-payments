@@ -1,11 +1,11 @@
-import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import CardRegister from "./pages/CardRegister/CardRegister";
-import MyCardList from "./pages/MyCardList/MyCardList";
-import CardRegisterProvider from "./context/CardRegisterContext";
+import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import CardRegister from './pages/CardRegister/CardRegister';
+import MyCardList from './pages/MyCardList/MyCardList';
+import CardRegisterProvider from './context/CardRegisterContext';
 
-import Layout from "./components/@common/Layout/Layout";
-import { BottomSheetProvider } from "./context/BottomSheetContext";
+import Layout from './components/@common/Layout/Layout';
+import { BottomSheetProvider } from './context/BottomSheetContext';
 
 function App() {
   return (
@@ -13,10 +13,10 @@ function App() {
       <BottomSheetProvider>
         <BrowserRouter basename={process.env.PUBLIC_URL}>
           <Routes>
-            <Route path="/" element={<Layout />}>
+            <Route path='/' element={<Layout />}>
               <Route
                 index
-                path="/"
+                path='/'
                 element={
                   <CardRegisterProvider>
                     <MyCardList />
@@ -24,7 +24,7 @@ function App() {
                 }
               />
               <Route
-                path="/registerCard"
+                path='/registerCard'
                 element={
                   <CardRegisterProvider>
                     <CardRegister />

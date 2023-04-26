@@ -1,5 +1,5 @@
-import styled, { DefaultTheme } from "styled-components";
-import { BaseInput } from "../../../@common/Input/InputStyles.styles";
+import styled, { DefaultTheme } from 'styled-components';
+import { BaseInput } from '../../../@common/Input/InputStyles.styles';
 
 interface StyledInputProps {
   inputTheme?: keyof DefaultTheme;

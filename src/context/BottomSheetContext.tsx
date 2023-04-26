@@ -1,10 +1,4 @@
-import {
-  createContext,
-  PropsWithChildren,
-  ReactNode,
-  useContext,
-  useState,
-} from "react";
+import { createContext, PropsWithChildren, ReactNode, useContext, useState } from 'react';
 
 interface BottomSheetContextProps {
   isOpened: boolean;
@@ -19,9 +13,7 @@ export const useBottomSheet = () => {
   const context = useContext(BottomSheetContext);
 
   if (context === null) {
-    throw new Error(
-      "useBottomSheet 은 BottomSheetProvider 를 통해 사용되어야 합니다."
-    );
+    throw new Error('useBottomSheet 은 BottomSheetProvider 를 통해 사용되어야 합니다.');
   }
   return context;
 };
@@ -40,11 +32,5 @@ export const BottomSheetProvider = ({ children }: PropsWithChildren) => {
     setIsOpened(false);
   };
 
-  return (
-    <BottomSheetContext.Provider
-      value={{ isOpened, content, openBottomSheet, closeBottomSheet }}
-    >
-      {children}
-    </BottomSheetContext.Provider>
-  );
+  return <BottomSheetContext.Provider value={{ isOpened, content, openBottomSheet, closeBottomSheet }}>{children}</BottomSheetContext.Provider>;
 };

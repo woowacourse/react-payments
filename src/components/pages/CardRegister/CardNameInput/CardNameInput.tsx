@@ -1,10 +1,10 @@
-import React from "react";
-import { useCardRegisterContext } from "../../../../context/CardRegisterContext";
-import { useCardName } from "../../../../hooks/card/card";
-import { CardRegisterInfo } from "../../../../types/card.type";
-import Flex from "../../../@common/Flex/Flex";
-import Input from "../../../@common/Input/Input";
-import * as Styled from "./CardNameInput.styles";
+import React from 'react';
+import { useCardRegisterContext } from '../../../../context/CardRegisterContext';
+import { useCardName } from '../../../../hooks/card/card';
+import { CardRegisterInfo } from '../../../../types/card.type';
+import Flex from '../../../@common/Flex/Flex';
+import Input from '../../../@common/Input/Input';
+import * as Styled from './CardNameInput.styles';
 
 export default function CardNameInput() {
   const { cardRegisterInfo, handleCardInfo } = useCardRegisterContext();
@@ -16,14 +16,14 @@ export default function CardNameInput() {
 
   const { holderName } = cardRegisterInfo;
 
-  const onChangeValue = (value: CardRegisterInfo["holderName"]) => {
-    handleCardInfo("holderName", value);
+  const onChangeValue = (value: CardRegisterInfo['holderName']) => {
+    handleCardInfo('holderName', value);
   };
 
   return (
-    <Flex dir="column">
+    <Flex dir='column'>
       <Input>
-        <Flex justify="space-between">
+        <Flex justify='space-between'>
           <Input.Label asChild>
             <Styled.Label>카드소유자이름(선택)</Styled.Label>
           </Input.Label>
@@ -37,8 +37,8 @@ export default function CardNameInput() {
         </Flex>
         <Styled.InputBackground>
           <Input.Field
-            name="name"
-            id="name"
+            name='name'
+            id='name'
             value={holderName}
             onChange={({ target: { value } }) => {
               onChangeValue(value);

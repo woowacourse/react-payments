@@ -18,11 +18,7 @@ export default function Header() {
 
   return (
     <Styled.Root>
-      {location.pathname !== '/' && (
-        <Styled.NavigationButton onClick={() => navigate(-1)}>
-          &lt;
-        </Styled.NavigationButton>
-      )}
+      {location.pathname !== '/' && <Styled.NavigationButton onClick={() => navigate(-1)}>&lt;</Styled.NavigationButton>}
       <Styled.HeaderTitle>{content}</Styled.HeaderTitle>
     </Styled.Root>
   );
