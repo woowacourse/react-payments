@@ -4,6 +4,7 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import CardRoutes from "./routes";
 import GlobalStyle from "./GlobalStyles";
+import { ModalProvider } from "./context/ModalContext";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
@@ -11,7 +12,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <GlobalStyle />
-    <CardRoutes />
+    <ModalProvider>
+      <CardRoutes />
+    </ModalProvider>
   </React.StrictMode>,
 );
 

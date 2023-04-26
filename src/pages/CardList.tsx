@@ -4,11 +4,13 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import useCardList from "src/hooks/useCardList";
 import Card from "src/components/@common/Card";
+import useModal from "src/hooks/useModal";
+import { PATHS } from "src/utils/constant";
 
 function CardList() {
   const navigation = useNavigate();
   const { cardList } = useCardList({ key: "card-list" });
-
+  const { openModal } = useModal();
   const cardLists = useMemo(() => {
     return cardList.length ? (
       cardList.map((card) => {
@@ -38,7 +40,8 @@ function CardList() {
         <AddButton
           isFirst={cardList.length ? false : true}
           onClick={() => {
-            navigation("/card-register");
+            openModal();
+            navigation(PATHS.cardRegister);
           }}
         >
           +

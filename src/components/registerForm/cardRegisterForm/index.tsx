@@ -20,7 +20,7 @@ function CardRegisterForm() {
 
   const { cardNumbers, expireDate, cardName, ownerName } = cardInfo;
 
-  const { isModalOpen, setIsModalOpen, modalRef } = useModal();
+  const { openModal, closeModal, modalRef, isModalOpen } = useModal();
 
   const cardInputSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
@@ -36,10 +36,10 @@ function CardRegisterForm() {
         cardNumber={cardNumbers}
         expireDate={expireDate}
         ownerName={ownerName}
-        onClick={() => setIsModalOpen(true)}
+        onClick={openModal}
       />
     ),
-    [cardNumbers, expireDate, ownerName, cardName, setIsModalOpen],
+    [cardNumbers, expireDate, ownerName, cardName, openModal],
   );
 
   return (
@@ -58,8 +58,8 @@ function CardRegisterForm() {
         )}
       </S.Form>
       {isModalOpen && (
-        <Modal closeEvent={() => setIsModalOpen(false)} dialogRef={modalRef}>
-          <CardCompany closeEvent={() => setIsModalOpen(false)} />
+        <Modal closeEvent={closeModal} dialogRef={modalRef}>
+          <CardCompany closeEvent={closeModal} />
         </Modal>
       )}
     </>
