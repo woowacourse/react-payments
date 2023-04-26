@@ -1,7 +1,15 @@
-export const INPUT_LENGTH = {
+export const INPUT_MAX_LENGTH = {
   CARD_NUMBER: 4,
   EXPIRATION_DATE: 2,
   NAME: 30,
   SECURITY_CODE: 3,
   PASSWORD: 1,
+};
+
+export const NUMBER_OF_INPUTS = {
+  CARD_NUMBER: 4,
+  EXPIRATION_DATE: 2,
+  NAME: 1,
+  SECURITY_CODE: 1,
+  PASSWORD: 2,
 };
