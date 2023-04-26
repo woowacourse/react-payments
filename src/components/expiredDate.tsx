@@ -4,10 +4,10 @@ import { LABEL, TEXT_LENGTH, PLACEHOLDER } from "../constants/inputInfo";
 import { DateContext, RefContext } from "../contexts/cardInfo";
 import { Date } from "../type/input";
 import { validation } from "../validation/input";
-import { Input } from "./common/Input";
-import { InputBox } from "./common/InputBox";
-import { InputGroup } from "./common/inputGroup";
-import { InputLabel } from "./common/inputLabel";
+import { Input } from "./common/input/Input";
+import { InputBox } from "./common/input/InputBox";
+import { InputGroup } from "./common/input/inputGroup";
+import { InputLabel } from "./common/input/inputLabel";
 
 export function ExpiredDate() {
   const { month, year, handleChange } = useContext(DateContext);

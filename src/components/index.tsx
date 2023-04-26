@@ -1,1 +1,1 @@
-export * from "./common/InputBox";
+export * from "./common/input/InputBox";

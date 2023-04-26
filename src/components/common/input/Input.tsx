@@ -7,8 +7,8 @@ import {
   useContext,
 } from "react";
 import styled from "styled-components";
-import { InputContext } from "../../contexts/inputContext";
-import { Ref } from "../../type/ref";
+import { InputContext } from "../../../contexts/inputContext";
+import { Ref } from "../../../type/ref";
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   inputRef: React.MutableRefObject<Ref>;

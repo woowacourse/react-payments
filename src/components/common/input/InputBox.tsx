@@ -1,5 +1,5 @@
 import React from "react";
-import { InputProvider } from "../../contexts/inputContext";
+import { InputProvider } from "../../../contexts/inputContext";
 
 export interface InputBoxProps<T> {
   children: React.ReactNode;

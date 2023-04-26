@@ -3,9 +3,9 @@ import styled from "styled-components";
 import { LABEL, PLACEHOLDER } from "../constants/inputInfo";
 import { NameContext, RefContext } from "../contexts/cardInfo";
 import { useCountText } from "../hooks/useCountText";
-import { Input } from "./common/Input";
-import { InputBox } from "./common/InputBox";
-import { InputLabel } from "./common/inputLabel";
+import { Input } from "./common/input/Input";
+import { InputBox } from "./common/input/InputBox";
+import { InputLabel } from "./common/input/inputLabel";
 
 export function UserName() {
   const { userName, handleChange } = useContext(NameContext);

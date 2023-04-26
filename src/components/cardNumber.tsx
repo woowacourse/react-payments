@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { useContext } from "react";
-import { Input } from "./common/Input";
-import { InputBox } from "./common/InputBox";
+import { Input } from "./common/input/Input";
+import { InputBox } from "./common/input/InputBox";
 import { NumberContext, RefContext } from "../contexts/cardInfo";
-import { InputGroup } from "./common/inputGroup";
-import { InputLabel } from "./common/inputLabel";
+import { InputGroup } from "./common/input/inputGroup";
+import { InputLabel } from "./common/input/inputLabel";
 import { LABEL } from "../constants/inputInfo";
 import { CardNumberIndex } from "../type/input";
 
