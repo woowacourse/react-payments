@@ -81,6 +81,17 @@ const BACKSPASE_KEY = 'Backspace' as const;
 
 const RANDOM_COLOR = ['red', 'pink', 'green', 'blue', 'black', 'gray', 'yellow', 'orange', 'aqua', 'lime'] as const;
 
+const CARD_BANK_COLOR_MAP: Record<string, { background: string; color: string }> = {
+  BC카드: { background: 'rgb(222, 84, 86)', color: 'white' },
+  신한카드: { background: 'rgb(19, 74, 245)', color: 'white' },
+  카카오뱅크: { background: 'rgb(251, 230, 77)', color: 'black' },
+  현대카드: { background: 'rgb(51, 51, 51)', color: 'white' },
+  우리카드: { background: 'rgb(187, 223, 245)', color: 'rgb(51, 122, 194)' },
+  롯데카드: { background: 'rgb(240, 240, 240)', color: 'rgb(225, 0, 0)' },
+  하나카드: { background: 'rgb(64, 146, 143)', color: 'white' },
+  국민카드: { background: 'rgb(85, 79, 71)', color: 'rgb(247, 206, 71)' },
+};
+
 export {
   INPUT_MAX_LENGTH,
   INPUT_MIN_LENGTH,
@@ -94,4 +105,5 @@ export {
   BACKSPASE_KEY,
   RANDOM_COLOR,
   ERASE_UNTIL_CARD_NUMBER,
+  CARD_BANK_COLOR_MAP
 };
