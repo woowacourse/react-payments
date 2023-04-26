@@ -45,7 +45,7 @@ export default function InputBoxSecurityCode(props: InputBoxSecurityProps) {
         onChange={changeSecurityCode}
         inputMode="numeric"
         value={securityCode}
-      ></Input>
+      />
       <button className="button-security-code" type="button">
         ?
       </button>

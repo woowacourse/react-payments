@@ -48,7 +48,7 @@ export default function CardPassword(props: CardPasswordProps) {
         onChange={onChangePassword(0)}
         inputMode="numeric"
         value={passwordStatus[0]}
-      ></Input>
+      />
       <Input
         name="card-password-2"
         className="input-password"
@@ -56,7 +56,7 @@ export default function CardPassword(props: CardPasswordProps) {
         onChange={onChangePassword(1)}
         inputMode="numeric"
         value={passwordStatus[1]}
-      ></Input>
+      />
       <input
         className="input-password"
         disabled

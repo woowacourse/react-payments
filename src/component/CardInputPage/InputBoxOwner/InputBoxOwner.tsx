@@ -43,7 +43,7 @@ export default function InputBoxOwner(props: InputBoxOwnerProps) {
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
         inputMode="text"
         value={name}
-      ></Input>
+      />
       <p className={isError ? "visible" : ""}>
         {CARD_ERROR_MESSAGE.INPUT_CARD_OWNER}
       </p>
