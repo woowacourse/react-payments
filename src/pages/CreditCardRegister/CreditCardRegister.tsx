@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import CreditCard from 'components/CreditCard';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import * as Type from 'types';
 import { useCreditCard } from 'hooks/useCreditCard';
 import Modal from 'components/Modal';
-import { useModal } from 'hooks/useModal';
+import useModal from 'hooks/useModal';
 import CreditCardNumberInput from './inputs/CreditCardNumberInput';
 import CreditCardExpiryInput from './inputs/CreditCardExpiryInput';
 import CreditCardOwnerInput from './inputs/CreditCardOwnerInput';
@@ -18,7 +19,7 @@ import {
 function CreditCardRegister() {
   const navigate = useNavigate();
   const { saveCreditCard } = useCreditCard();
-  const { openModal } = useModal();
+  const { modalOpen, openModal, closeModal } = useModal();
 
   const [creditCard, setCreditCard] = useState<Type.CreditCard>({
     number: '',
@@ -121,7 +122,9 @@ function CreditCardRegister() {
           </S.ButtonWrapper>
         </S.CreditCardRegisterForm>
       </S.CreditCardRegisterLayout>
-      <Modal />
+      <Modal modalOpen={modalOpen}>
+        <div>ㅎㅇ</div>
+      </Modal>
 
     </>
 

@@ -1,4 +1,3 @@
-import { useModal } from 'hooks/useModal';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -23,16 +22,20 @@ border-radius: 8px 8px 0px 0px;
 background: #ffffff;
 `;
 
-function Modal() {
-  const { modalOpen, closeModal, modalContent } = useModal();
+interface ModalProps {
+  modalOpen: boolean;
+  closeModal?: () => void;
+  children: React.ReactNode;
+}
+function Modal({ modalOpen, closeModal, children }: ModalProps) {
   return (
     <>
       {
         modalOpen && (
           <ModalContainer>
-            <ModalBackDrop onClick={() => closeModal()} />
+            <ModalBackDrop onClick={() => closeModal && closeModal()} />
             <ModalContent>
-              {modalContent}
+              {children}
             </ModalContent>
           </ModalContainer>
         )

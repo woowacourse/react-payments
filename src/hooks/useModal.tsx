@@ -1,21 +1,14 @@
-/* eslint-disable import/prefer-default-export */
-import { useContext } from 'react';
-import { ModalContext } from 'ModalProvider';
+import { useState } from 'react';
 
 interface UseModal {
   modalOpen: boolean;
   openModal: (content: React.ReactNode) => void;
   closeModal: () => void;
-  modalContent: React.ReactNode;
 }
-export const useModal = (): UseModal => {
-  const modalState = useContext(ModalContext);
-  const {
-    modalOpen, setModalOpen, modalContent, setModalContent
-  } = modalState;
+const useModal = (): UseModal => {
+  const [modalOpen, setModalOpen] = useState(false);
 
-  const openModal = (content: React.ReactNode) => {
-    setModalContent(content);
+  const openModal = () => {
     setModalOpen(true);
   };
 
@@ -24,6 +17,7 @@ export const useModal = (): UseModal => {
   };
 
   return {
-    modalOpen, openModal, closeModal, modalContent
+    modalOpen, openModal, closeModal
   };
 };
+export default useModal;
