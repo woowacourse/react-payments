@@ -9,14 +9,20 @@ import * as S from './style';
 
 type CreditCardCompanyModalProps = {
   setCreditCardCompany: React.Dispatch<React.SetStateAction<Type.CardCompanies | undefined>>;
+  closeModal: () => void;
 };
 
-function CreditCardCompanyModal({ setCreditCardCompany }: CreditCardCompanyModalProps) {
+function CreditCardCompanyModal({ setCreditCardCompany, closeModal }: CreditCardCompanyModalProps) {
+  const handleClickCardCompany = (company: Type.CardCompanies) => {
+    setCreditCardCompany(company);
+    closeModal();
+  };
+
   return (
-    <Modal closeModal={() => {}} isAbleBackdropClick={false}>
+    <Modal closeModal={closeModal} isAbleBackdropClick={false}>
       <S.CardCompanyLayout>
         {(Object.keys(CARD_COMPANY) as Type.CardCompanies[]).map((company) => (
-          <CardCompany company={company} key={company} handleClick={() => setCreditCardCompany(company)} />
+          <CardCompany company={company} key={company} handleClick={() => handleClickCardCompany(company)} />
         ))}
       </S.CardCompanyLayout>
     </Modal>

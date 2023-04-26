@@ -75,6 +75,11 @@
             "position": "after"
           },
           {
+            "pattern": "@Contexts/*",
+            "group": "internal",
+            "position": "after"
+          },
+          {
             "pattern": "@Utils/*",
             "group": "internal",
             "position": "after"

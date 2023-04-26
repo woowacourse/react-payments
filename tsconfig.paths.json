@@ -10,7 +10,8 @@
       "@Types/*": ["./types/*"],
       "@Domains/*": ["./domains/*"],
       "@Asset/*": ["./assets/*"],
-      "@Styles/*": ["./styles/*"]
+      "@Styles/*": ["./styles/*"],
+      "@Contexts/*": ["./contexts/*"]
     }
   }
 }

@@ -11,6 +11,7 @@ import creditCardStorage from '@Domains/creditCardStorage';
 import * as Type from '@Types/index';
 
 import useInput from '@Hooks/useInput';
+import useModal from '@Hooks/useModal';
 
 import CreditCardCVCInput from './CreditCardCVCInput';
 import CreditCardCompanyModal from './CreditCardCompanyModal/CreditCardCompanyModal';
@@ -26,7 +27,12 @@ function CreditCardRegister() {
   const { numberValidationFns, expiryValidationFns, ownerValidationFns, cvcValidationFns, passwordValidationFns } =
     creditCard.getValidationFns();
 
+  const { isModalOpen, openModal, closeModal } = useModal();
+
   const [creditCardCompany, setCreditCardCompany] = useState<Type.CardCompanies | undefined>(undefined);
+
+  console.log(creditCardCompany);
+
   const [creditCardNumber, setCreditCardNumber, numberErrorMessage] = useInput<string>('', numberValidationFns);
   const [creditCardExpiry, setCreditCardExpiry, expiryErrorMessage] = useInput<string>('', expiryValidationFns);
   const [creditCardOwner, setCreditCardOwner, ownerErrorMessage] = useInput<string>('', ownerValidationFns);
@@ -78,13 +84,17 @@ function CreditCardRegister() {
     return setIsFullFilled(true);
   }, [creditCardNumber, creditCardExpiry, creditCardCVC, creditCardPassword]);
 
+  useEffect(() => {
+    openModal();
+  }, []);
+
   return (
     <>
       <Header title="카드 추가" hasBackButton />
       <S.PreviewCreditCard>
         <CreditCard
           fullFilled={false}
-          company="kb"
+          company="kakao"
           creditCard={{
             number: creditCardNumber,
             expiry: creditCardExpiry,
@@ -122,7 +132,7 @@ function CreditCardRegister() {
           <Button disabled={!isFullFilled} type="button" handleClick={handleSubmit} text="확인" />
         </S.ButtonWrapper>
       </S.CreditCardRegisterForm>
-      {!creditCardCompany && <CreditCardCompanyModal setCreditCardCompany={setCreditCardCompany} />}
+      {isModalOpen && <CreditCardCompanyModal setCreditCardCompany={setCreditCardCompany} closeModal={closeModal} />}
     </>
   );
 }

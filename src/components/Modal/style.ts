@@ -1,5 +1,16 @@
 import styled, { keyframes } from 'styled-components';
 
+const ModalLayoutAppear = keyframes`
+  0% {
+    opacity: 0;
+    background-color: transparent;
+  }
+  to {
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+`;
+
 export const ModalLayout = styled.div`
   position: fixed;
   top: 0;
@@ -9,11 +20,16 @@ export const ModalLayout = styled.div`
   width: 375px;
   min-height: 100vh;
   margin: 0 auto;
-  background-color: rgba(0, 0, 0, 0.3);
+  animation: ${ModalLayoutAppear} 0.5s forwards;
 `;
 
-export const Backdrop = styled.div`
+type BackdropProps = {
+  isAbleBackdropClick: boolean;
+};
+
+export const Backdrop = styled.div<BackdropProps>`
   height: 100vh;
+  cursor: ${(props) => props.isAbleBackdropClick && 'pointer'};
 `;
 
 const ModalAppear = keyframes`
@@ -27,11 +43,7 @@ const ModalAppear = keyframes`
   }
 `;
 
-type ModalContentsProps = {
-  isOpen: boolean;
-};
-
-export const ModalContents = styled.div<ModalContentsProps>`
+export const ModalContents = styled.div`
   position: absolute;
   bottom: 0;
   left: 0;
@@ -39,5 +51,5 @@ export const ModalContents = styled.div<ModalContentsProps>`
   padding: 20px;
   background-color: #ffffff;
   border-radius: 5px 5px 0px 0px;
-  animation: ${ModalAppear} 1s;
+  animation: ${ModalAppear} 0.5s;
 `;

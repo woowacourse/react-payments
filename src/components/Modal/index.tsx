@@ -10,14 +10,13 @@ export type ModalProps = {
 function Modal({ isAbleBackdropClick = true, closeModal, children }: PropsWithChildren<ModalProps>) {
   const handleClickBackdrop = () => {
     if (!isAbleBackdropClick) return;
-
     closeModal();
   };
 
   return (
     <S.ModalLayout>
-      <S.Backdrop onClick={handleClickBackdrop} />
-      <S.ModalContents isOpen>{children}</S.ModalContents>
+      <S.Backdrop onClick={handleClickBackdrop} isAbleBackdropClick={isAbleBackdropClick} />
+      <S.ModalContents>{children}</S.ModalContents>
     </S.ModalLayout>
   );
 }
