@@ -3,14 +3,14 @@ import Header from '../common/Header';
 import Title from '../common/Title';
 import AddCardButton from '../CardListPageComponents/AddCardButton';
 import CardList from '../CardListPageComponents/CardList';
-import type { CardItemInfo } from '../../types/Card';
+import { cardLocalStorage } from '../domain/CardLocalStorage';
 
 interface CardListPageProps {
-  cardList: CardItemInfo[];
   onOpen: () => void;
 }
 
-const CardListPage = ({ cardList, onOpen }: CardListPageProps) => {
+const CardListPage = ({ onOpen }: CardListPageProps) => {
+  const cardList = cardLocalStorage.getCardList();
   return (
     <>
       <Header title='보유카드' />

@@ -6,16 +6,15 @@ import CardItem from '../common/CardItem';
 import CardForm from '../cardForm/CardForm';
 import { LeftArrowIcon } from '../../assets/icons';
 import type { CardItemInfo } from '../../types/Card';
+import { cardLocalStorage } from '../domain/CardLocalStorage';
 
 interface CardRegistrationPageProps {
   bankName: string;
-  addCardItem: (cardItem: CardItemInfo) => void;
   onOpen: () => void;
 }
 
 const CardRegistrationPage = ({
   bankName,
-  addCardItem,
   onOpen,
 }: CardRegistrationPageProps) => {
   const [cardItem, setCardItem] = useState<CardItemInfo>({
@@ -42,7 +41,7 @@ const CardRegistrationPage = ({
   };
 
   const handleSubmitForm = () => {
-    addCardItem(cardItem);
+    cardLocalStorage.addCard(cardItem);
   };
 
   useEffect(() => {

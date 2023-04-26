@@ -4,7 +4,7 @@ import type { CardItemInfo } from '../../types/Card';
 
 interface CardItemProps {
   card: CardItemInfo;
-  onOpen: () => void;
+  onOpen?: () => void;
 }
 
 const CardItem = ({ card, onOpen }: CardItemProps) => {

@@ -5,16 +5,16 @@ import CardListPage from './components/pages/CardListPage';
 import CardRegistrationPage from './components/pages/CardRegistrationPage';
 import NotFoundPage from './components/pages/NotFoundPage';
 import BankList from './components/BottomSheetComponents/BankList';
+import CardAdditionCompletionPage from './components/pages/CardAdditionCompletionPage';
 import { useBottomSheet } from './hooks/useBottomSheet';
+import { cardLocalStorage } from './components/domain/CardLocalStorage';
 import type { CardItemInfo } from './types/Card';
 
 function App() {
-  const [cardList, setCardList] = useState<CardItemInfo[]>([]);
+  const [cardList, setCardList] = useState<CardItemInfo[]>(
+    cardLocalStorage.getCardList()
+  );
   const [bankName, setBankName] = useState('카드사를 선택해주세요');
-
-  const addCardItem = (cardItem: CardItemInfo) => {
-    setCardList((prevCardList) => [...prevCardList, cardItem]);
-  };
 
   const { isBottomSheetOpen, handleBottomSheetOpen, handleBottomSheetClose } =
     useBottomSheet();
@@ -29,22 +29,20 @@ function App() {
         <Routes>
           <Route
             path='/'
-            element={
-              <CardListPage
-                cardList={cardList}
-                onOpen={handleBottomSheetOpen}
-              />
-            }
+            element={<CardListPage onOpen={handleBottomSheetOpen} />}
           />
           <Route
             path='/register'
             element={
               <CardRegistrationPage
-                addCardItem={addCardItem}
                 onOpen={handleBottomSheetOpen}
                 bankName={bankName}
               />
             }
+          />
+          <Route
+            path='/complete'
+            element={<CardAdditionCompletionPage cardList={cardList} />}
           />
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
