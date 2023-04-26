@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { INPUT_MAX_LENGTH, NUMBER_OF_INPUTS } from "../../constants";
 import { isInputsEmpty, isInputsSatisfied, isNumber, isOverMaxLength, isValidMonth } from "../../utils";
 import useMultipleInputs from "../useMultipleInputs";
+import useInputFocus from "../useInputFocus";
 
 const expirationDateValidator = (inputValue: string) => {
   if (isOverMaxLength(inputValue, INPUT_MAX_LENGTH.EXPIRATION_DATE)) {
@@ -19,6 +20,8 @@ const useExpirationDate = () => {
     expirationDateValidator
   );
 
+  const refs = [useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null)];
+
   useEffect(() => {
     if (isInputsEmpty(inputValues)) return;
 
@@ -33,7 +36,22 @@ const useExpirationDate = () => {
     }
   }, [inputValues, errorMessage, setErrorMessage]);
 
-  return { expirationDate: inputValues, expirationDateErrorMessage: errorMessage, onChangeExpirationDate: onChange };
+  const { isNextInputFocusable, focusNextInput } = useInputFocus(refs, INPUT_MAX_LENGTH.EXPIRATION_DATE);
+
+  const handleChange = (inputIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = event.target.value;
+
+    onChange(inputIndex)(event);
+
+    if (isNextInputFocusable(inputValue, inputIndex)) focusNextInput(inputIndex);
+  };
+
+  return {
+    expirationDate: inputValues,
+    expirationDateErrorMessage: errorMessage,
+    onChangeExpirationDate: handleChange,
+    expirationDateRefs: refs,
+  };
 };
 
 export default useExpirationDate;

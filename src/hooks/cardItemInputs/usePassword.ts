@@ -1,6 +1,8 @@
+import { useRef } from "react";
 import { INPUT_MAX_LENGTH, NUMBER_OF_INPUTS } from "../../constants";
 import { isNumber, isOverMaxLength } from "../../utils";
 import useMultipleInputs from "../useMultipleInputs";
+import useInputFocus from "../useInputFocus";
 
 const passwordValidator = (inputValue: string) => {
   if (isOverMaxLength(inputValue, INPUT_MAX_LENGTH.PASSWORD)) {
@@ -15,7 +17,24 @@ const passwordValidator = (inputValue: string) => {
 const usePassword = () => {
   const { inputValues, errorMessage, onChange } = useMultipleInputs(NUMBER_OF_INPUTS.PASSWORD, passwordValidator);
 
-  return { password: inputValues, passwordErrorMessage: errorMessage, onChangePassword: onChange };
+  const refs = [useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null)];
+
+  const { isNextInputFocusable, focusNextInput } = useInputFocus(refs, INPUT_MAX_LENGTH.PASSWORD);
+
+  const handleChange = (inputIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = event.target.value;
+
+    onChange(inputIndex)(event);
+
+    if (isNextInputFocusable(inputValue, inputIndex)) focusNextInput(inputIndex);
+  };
+
+  return {
+    password: inputValues,
+    passwordErrorMessage: errorMessage,
+    onChangePassword: handleChange,
+    passwordRefs: refs,
+  };
 };
 
 export default usePassword;
