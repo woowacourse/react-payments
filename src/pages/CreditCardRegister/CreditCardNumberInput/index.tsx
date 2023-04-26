@@ -8,18 +8,12 @@ import InputLayout from '../InputLayout';
 type Props = {
   creditCardNumber: string;
   errorMessage: string | null;
-  setCreditCardNumber: React.Dispatch<React.SetStateAction<string>>;
+  updateNumbers: (numbers: string) => void;
 };
 
-function CreditCardNumberInput({ creditCardNumber, errorMessage, setCreditCardNumber }: Props) {
-  const handleChangeCreditCardNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newCreditCarNumber = creditCard.removeDashInCreditCardNumber(event.target.value);
-    const newAddNumber = newCreditCarNumber[newCreditCarNumber.length - 1];
-
-    if (newCreditCarNumber.length > 16) return;
-
-    if (newCreditCarNumber.length < creditCardNumber.length) setCreditCardNumber('');
-    else setCreditCardNumber((prev) => prev + newAddNumber);
+function CreditCardNumberInput({ creditCardNumber, errorMessage, updateNumbers }: Props) {
+  const handleChangeNumbers = (event: React.ChangeEvent<HTMLInputElement>) => {
+    updateNumbers(event.target.value);
   };
 
   return (
@@ -30,7 +24,7 @@ function CreditCardNumberInput({ creditCardNumber, errorMessage, setCreditCardNu
         value={creditCard.addDashInCreditCardNumber(creditCardNumber)}
         width="100%"
         textAlign="center"
-        onChange={handleChangeCreditCardNumber}
+        onChange={handleChangeNumbers}
       />
     </InputLayout>
   );

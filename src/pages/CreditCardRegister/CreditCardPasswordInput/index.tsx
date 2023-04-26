@@ -2,8 +2,6 @@ import Input from '@Components/Input';
 
 import * as CommonStyle from '@Styles/common';
 
-import * as Type from '@Types/index';
-
 import * as S from './style';
 import InputLabel from '../InputLabel';
 import InputLayout from '../InputLayout';
@@ -14,29 +12,21 @@ type Props = {
     second: string;
   };
   errorMessage: string | null;
-  setCreditCardPassword: React.Dispatch<React.SetStateAction<Type.CreditCardPasswordType>>;
+  updatePassword: {
+    first: (newPassword: string) => void;
+    second: (newPassword: string) => void;
+  };
 };
 
-function CreditCardPasswordInput({ creditCardPassword, errorMessage, setCreditCardPassword }: Props) {
+function CreditCardPasswordInput({ creditCardPassword, errorMessage, updatePassword }: Props) {
   const handleChangeCreditCardFirstPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newFirstPassword = event.target.value;
-    if (newFirstPassword.length <= 1) {
-      setCreditCardPassword({
-        ...creditCardPassword,
-        first: event.target.value,
-      });
-    }
+    updatePassword.first(event.target.value);
   };
 
   const handleChangeCreditCardSecondPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newSecondPassword = event.target.value;
-    if (newSecondPassword.length <= 1) {
-      setCreditCardPassword({
-        ...creditCardPassword,
-        second: event.target.value,
-      });
-    }
+    updatePassword.second(event.target.value);
   };
+
   return (
     <InputLayout errorMessage={errorMessage}>
       <InputLabel label="카드 비밀번호" />

@@ -44,6 +44,8 @@ const ModalAppear = keyframes`
 `;
 
 export const ModalContents = styled.div`
+  overflow: auto;
+  max-height: 90%;
   position: absolute;
   bottom: 0;
   left: 0;

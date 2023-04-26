@@ -9,17 +9,13 @@ import InputLayout from '../InputLayout';
 type Props = {
   creditCardCVC: string;
   errorMessage: string | null;
-  setCreditCardCVC: React.Dispatch<React.SetStateAction<string>>;
+  updateCVC: (newCVC: string) => void;
 };
 
-function CreditCardCVCInput({ creditCardCVC, errorMessage, setCreditCardCVC }: Props) {
+function CreditCardCVCInput({ creditCardCVC, errorMessage, updateCVC }: Props) {
   const [isHoverHelperIcon, setIsHoverHelperIcon] = useState(false);
-
   const handleChangeCreditCardCVC = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newCVC = event.target.value;
-    if (newCVC.length > 3) return;
-
-    setCreditCardCVC(newCVC);
+    updateCVC(event.target.value);
   };
 
   const handleGuideIconMouseEnter = () => setIsHoverHelperIcon(true);

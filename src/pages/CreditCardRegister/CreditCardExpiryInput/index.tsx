@@ -6,22 +6,12 @@ import InputLayout from '../InputLayout';
 type Props = {
   creditCardExpiry: string;
   errorMessage: string | null;
-  setCreditCardExpiry: React.Dispatch<React.SetStateAction<string>>;
+  updateExpiry: (newExpiry: string) => void;
 };
 
-function CreditCardExpiryInput({ creditCardExpiry, errorMessage, setCreditCardExpiry }: Props) {
-  const handleChangeCreditCardExpiry = (event: React.ChangeEvent<HTMLInputElement>) => {
-    let newCardExpiry = event.target.value.replaceAll('/', '');
-
-    if (newCardExpiry.length > 4) return;
-
-    if (newCardExpiry.length >= 3 && newCardExpiry.length <= 4) {
-      const newCardExpiryArray = newCardExpiry.split('');
-      newCardExpiryArray.splice(2, 0, '/').join('');
-      newCardExpiry = newCardExpiryArray.join('');
-    }
-
-    setCreditCardExpiry(newCardExpiry);
+function CreditCardExpiryInput({ creditCardExpiry, errorMessage, updateExpiry }: Props) {
+  const handleChangeExpiry = (event: React.ChangeEvent<HTMLInputElement>) => {
+    updateExpiry(event.target.value.replaceAll('/', ''));
   };
 
   return (
@@ -33,7 +23,7 @@ function CreditCardExpiryInput({ creditCardExpiry, errorMessage, setCreditCardEx
         value={creditCardExpiry}
         width="40%"
         textAlign="center"
-        onChange={handleChangeCreditCardExpiry}
+        onChange={handleChangeExpiry}
         maxLength={5}
       />
     </InputLayout>

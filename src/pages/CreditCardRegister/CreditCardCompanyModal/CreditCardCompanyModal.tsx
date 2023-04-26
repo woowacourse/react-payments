@@ -8,13 +8,13 @@ import CARD_COMPANY from '@Constants/CardCompany';
 import * as S from './style';
 
 type CreditCardCompanyModalProps = {
-  setCreditCardCompany: React.Dispatch<React.SetStateAction<Type.CardCompanies | undefined>>;
+  updateCompany: (company: Type.CardCompanies) => void;
   closeModal: () => void;
 };
 
-function CreditCardCompanyModal({ setCreditCardCompany, closeModal }: CreditCardCompanyModalProps) {
+function CreditCardCompanyModal({ updateCompany, closeModal }: CreditCardCompanyModalProps) {
   const handleClickCardCompany = (company: Type.CardCompanies) => {
-    setCreditCardCompany(company);
+    updateCompany(company);
     closeModal();
   };
 

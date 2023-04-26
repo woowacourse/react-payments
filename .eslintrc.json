@@ -34,6 +34,7 @@
     "max-len": ["error", { "code": 120 }],
     "object-curly-newline": "off",
     "react/button-has-type": "off",
+    "react/jsx-no-constructed-context-values": "off",
     "import/order": [
       "error",
       {

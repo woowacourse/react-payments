@@ -1,17 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Button from '@Components/Button';
 import CreditCard from '@Components/CreditCard';
 import Header from '@Components/Header';
 
-import creditCard from '@Domains/creditCard';
-import creditCardStorage from '@Domains/creditCardStorage';
+// import creditCardStorage from '@Domains/creditCardStorage';
 
-import * as Type from '@Types/index';
+// import * as Type from '@Types/index';
 
-import useInput from '@Hooks/useInput';
 import useModal from '@Hooks/useModal';
+
+import { CreditCardRegisterContext } from '@Contexts/CreditCardRegisterContext';
 
 import CreditCardCVCInput from './CreditCardCVCInput';
 import CreditCardCompanyModal from './CreditCardCompanyModal/CreditCardCompanyModal';
@@ -26,65 +26,63 @@ function CreditCardRegister() {
 
   const { isModalOpen, openModal, closeModal } = useModal();
 
-  const { numberValidationFns, expiryValidationFns, ownerValidationFns, cvcValidationFns, passwordValidationFns } =
-    creditCard.getValidationFns();
-
-  const [creditCardCompany, setCreditCardCompany] = useState<Type.CardCompanies | undefined>(undefined);
-  const [creditCardNumber, setCreditCardNumber, numberErrorMessage] = useInput<string>('', numberValidationFns);
-  const [creditCardExpiry, setCreditCardExpiry, expiryErrorMessage] = useInput<string>('', expiryValidationFns);
-  const [creditCardOwner, setCreditCardOwner, ownerErrorMessage] = useInput<string>('', ownerValidationFns);
-  const [creditCardCVC, setCreditCardCVC, CVCErrorMessage] = useInput<string>('', cvcValidationFns);
-  const [creditCardPassword, setCreditCardPassword, passwordErrorMessage] = useInput<Type.CreditCardPasswordType>(
-    { first: '', second: '' },
-    passwordValidationFns,
-  );
+  const { creditCard, update, errorMessage } = useContext(CreditCardRegisterContext);
 
   const [isFullFilled, setIsFullFilled] = useState(false);
 
   const handleSubmit = () => {
     if (!isFullFilled) return;
-    if (!creditCardCompany) return;
+    if (!creditCard.company) return;
 
-    const newCreditCard: Type.CreditCard = {
-      number: creditCardNumber,
-      expiry: creditCardExpiry,
-      owner: creditCardOwner,
-      cvc: creditCardCVC,
-      password: {
-        first: creditCardPassword.first,
-        second: creditCardPassword.second,
-      },
-      company: creditCardCompany,
-    };
+    // const newCreditCard: Type.CreditCard = {
+    //   number: creditCard.numbers,
+    //   expiry: creditCard.expiry,
+    //   owner: creditCard.owner,
+    //   cvc: creditCard.cvc,
+    //   password: {
+    //     first: creditCard.password.first,
+    //     second: creditCard.password.second,
+    //   },
+    //   company: creditCard.company,
+    // };
 
-    creditCardStorage.saveCreditCard(newCreditCard);
-    navigate('/');
+    // creditCardStorage.saveCreditCard(newCreditCard);
+    // navigate('/');
+    navigate('/register/alias');
   };
 
   useEffect(() => {
-    if (creditCardNumber.length !== 16) return setIsFullFilled(false);
-    if (creditCardExpiry.length !== 5) return setIsFullFilled(false);
+    if (creditCard.numbers.length !== 16) return setIsFullFilled(false);
+    if (creditCard.expiry.length !== 5) return setIsFullFilled(false);
 
-    if (numberErrorMessage || expiryErrorMessage || ownerErrorMessage || CVCErrorMessage || passwordErrorMessage) {
+    if (
+      errorMessage.numbers ||
+      errorMessage.expiry ||
+      errorMessage.owner ||
+      errorMessage.cvc ||
+      errorMessage.password
+    ) {
       return setIsFullFilled(false);
     }
 
     return setIsFullFilled(true);
-  }, [numberErrorMessage, expiryErrorMessage, ownerErrorMessage, CVCErrorMessage, passwordErrorMessage]);
+  }, [errorMessage.numbers, errorMessage.expiry, errorMessage.owner, errorMessage.cvc, errorMessage.password]);
 
   useEffect(() => {
-    if (creditCardNumber.length !== 16) return setIsFullFilled(false);
-    if (creditCardExpiry.length !== 5) return setIsFullFilled(false);
-    if (creditCardCVC.length !== 3) return setIsFullFilled(false);
-    if (creditCardPassword.first.length !== 1 || creditCardPassword.second.length !== 1) {
+    if (creditCard.numbers.length !== 16) return setIsFullFilled(false);
+    if (creditCard.expiry.length !== 5) return setIsFullFilled(false);
+    if (creditCard.cvc.length !== 3) return setIsFullFilled(false);
+    if (creditCard.password.first.length !== 1 || creditCard.password.second.length !== 1) {
       return setIsFullFilled(false);
     }
 
     return setIsFullFilled(true);
-  }, [creditCardNumber, creditCardExpiry, creditCardCVC, creditCardPassword]);
+  }, [creditCard.numbers, creditCard.expiry, creditCard.cvc, creditCard.password]);
 
   useEffect(() => {
-    openModal();
+    if (!creditCard.company) {
+      openModal();
+    }
   }, []);
 
   return (
@@ -93,45 +91,41 @@ function CreditCardRegister() {
       <S.PreviewCreditCard>
         <CreditCard
           fullFilled={false}
-          company={creditCardCompany}
+          company={creditCard.company}
           creditCard={{
-            number: creditCardNumber,
-            expiry: creditCardExpiry,
-            owner: creditCardOwner,
+            number: creditCard.numbers,
+            expiry: creditCard.expiry,
+            owner: creditCard.owner,
           }}
         />
       </S.PreviewCreditCard>
       <S.CreditCardRegisterForm>
         <CreditCardNumberInput
-          creditCardNumber={creditCardNumber}
-          setCreditCardNumber={setCreditCardNumber}
-          errorMessage={numberErrorMessage}
+          creditCardNumber={creditCard.numbers}
+          updateNumbers={update.numbers}
+          errorMessage={errorMessage.numbers}
         />
         <CreditCardExpiryInput
-          creditCardExpiry={creditCardExpiry}
-          setCreditCardExpiry={setCreditCardExpiry}
-          errorMessage={expiryErrorMessage}
+          creditCardExpiry={creditCard.expiry}
+          updateExpiry={update.expiry}
+          errorMessage={errorMessage.expiry}
         />
         <CreditCardOwnerInput
-          creditCardOwner={creditCardOwner}
-          setCreditCardOwner={setCreditCardOwner}
-          errorMessage={ownerErrorMessage}
+          creditCardOwner={creditCard.owner}
+          updateOwner={update.owner}
+          errorMessage={errorMessage.owner}
         />
-        <CreditCardCVCInput
-          creditCardCVC={creditCardCVC}
-          setCreditCardCVC={setCreditCardCVC}
-          errorMessage={CVCErrorMessage}
-        />
+        <CreditCardCVCInput creditCardCVC={creditCard.cvc} updateCVC={update.cvc} errorMessage={errorMessage.cvc} />
         <CreditCardPasswordInput
-          creditCardPassword={creditCardPassword}
-          errorMessage={passwordErrorMessage}
-          setCreditCardPassword={setCreditCardPassword}
+          creditCardPassword={creditCard.password}
+          updatePassword={update.password}
+          errorMessage={errorMessage.password}
         />
         <S.ButtonWrapper>
-          <Button disabled={!isFullFilled} type="button" handleClick={handleSubmit} text="확인" />
+          <Button disabled={!isFullFilled} type="button" handleClick={handleSubmit} text="다음" />
         </S.ButtonWrapper>
       </S.CreditCardRegisterForm>
-      {isModalOpen && <CreditCardCompanyModal setCreditCardCompany={setCreditCardCompany} closeModal={closeModal} />}
+      {isModalOpen && <CreditCardCompanyModal updateCompany={update.company} closeModal={closeModal} />}
     </>
   );
 }

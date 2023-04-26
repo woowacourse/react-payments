@@ -8,15 +8,12 @@ import InputLayout from '../InputLayout';
 type Props = {
   creditCardOwner: string;
   errorMessage: string | null;
-  setCreditCardOwner: React.Dispatch<React.SetStateAction<string>>;
+  updateOwner: (newName: string) => void;
 };
 
-function CreditCardOwnerInput({ creditCardOwner, errorMessage, setCreditCardOwner }: Props) {
-  const handleChangeCreditCardOwner = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newName = event.target.value.toUpperCase();
-    if (newName.length <= 20) {
-      setCreditCardOwner(newName);
-    }
+function CreditCardOwnerInput({ creditCardOwner, errorMessage, updateOwner }: Props) {
+  const handleChangeOwner = (event: React.ChangeEvent<HTMLInputElement>) => {
+    updateOwner(event.target.value);
   };
 
   return (
@@ -31,7 +28,7 @@ function CreditCardOwnerInput({ creditCardOwner, errorMessage, setCreditCardOwne
         value={creditCardOwner}
         width="100%"
         textAlign="start"
-        onChange={handleChangeCreditCardOwner}
+        onChange={handleChangeOwner}
         maxLength={20}
       />
     </InputLayout>
