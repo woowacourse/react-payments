@@ -10,6 +10,8 @@ export type InputProps<T> = {
   maxLength?: number;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onClick?: () => void;
+  background?: string;
+  underline?: boolean;
 };
 
 type InputValueType = string | number | readonly string[] | undefined;
@@ -23,9 +25,13 @@ function Input<T extends InputValueType>({
   maxLength,
   onChange,
   onClick,
+  background,
+  underline = false,
 }: InputProps<T>) {
   return (
     <S.Input
+      background={background}
+      underline={underline}
       width={width}
       textAlign={textAlign}
       type={type}
@@ -38,7 +44,3 @@ function Input<T extends InputValueType>({
   );
 }
 export default Input;
-
-Input.defaultProps = {
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => {},
-};

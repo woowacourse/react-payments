@@ -9,11 +9,10 @@ import * as S from './style';
 
 export type CreditCardProps = {
   fullFilled: boolean;
-  company?: Type.CardCompanies;
-  creditCard: Pick<Type.CreditCard, 'number' | 'expiry' | 'owner'>;
+  creditCard: Pick<Type.CreditCard, 'number' | 'expiry' | 'owner' | 'company'>;
 };
 
-function CreditCard({ fullFilled, company, creditCard: { expiry, number, owner } }: CreditCardProps) {
+function CreditCard({ fullFilled, creditCard: { expiry, number, owner, company } }: CreditCardProps) {
   const isValid = () => {
     if (!fullFilled) return true;
 

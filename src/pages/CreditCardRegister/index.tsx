@@ -91,11 +91,11 @@ function CreditCardRegister() {
       <S.PreviewCreditCard>
         <CreditCard
           fullFilled={false}
-          company={creditCard.company}
           creditCard={{
             number: creditCard.numbers,
             expiry: creditCard.expiry,
             owner: creditCard.owner,
+            company: creditCard.company,
           }}
         />
       </S.PreviewCreditCard>

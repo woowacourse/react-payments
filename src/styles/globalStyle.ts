@@ -29,6 +29,8 @@ export const GlobalLayout = styled.div`
   margin: 0 auto;
   padding: 28px 28px;
   box-sizing: border-box;
+  display: grid;
+  grid-template-rows: auto 1fr;
 `;
 
 export default GlobalStyle;
