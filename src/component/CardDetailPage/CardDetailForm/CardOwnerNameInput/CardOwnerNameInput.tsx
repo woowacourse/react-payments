@@ -1,7 +1,9 @@
 import React from "react";
 import Style from "./CardOwnerNameInputStyled";
-import Input from "../../../common/Input/Input";
 import { ThemeProvider } from "styled-components";
+import { PLACE_HOLDER, TYPE } from "../../../../abstract/constants";
+
+import Input from "../../../common/Input/Input";
 
 export interface CardOwnerNameInputProps {
   changeCardOwnerName: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -13,10 +15,10 @@ function CardOwnerNameInput({
   cardOwnerName,
 }: CardOwnerNameInputProps) {
   const props = {
-    type: "text",
+    type: TYPE.TEXT,
     maxLength: 30,
     isRequired: false,
-    placeholder: "카드에 표시된 이름과 동일하게 입력하세요.",
+    placeholder: PLACE_HOLDER.OWNER_NAME_HINT,
     onInput: changeCardOwnerName,
   };
   const theme = {

@@ -1,4 +1,5 @@
 import React from "react";
+import Style from "./CardDetailFormStyled";
 
 import CardNumberInput, {
   CardNumberInputProps,
@@ -13,10 +14,10 @@ import CardCVCInput, { CardCVCInputProps } from "./CardCVCInput/CardCVCInput";
 import CardPasswordInput, {
   CardPasswordInputProps,
 } from "./CardPasswordInput/CardPasswordInput";
-
-import Style from "./CardDetailFormStyled";
-import useWarningText from "../../../hooks/useWarningText";
 import InputGuide from "../../common/InputGuide/InputGuide";
+
+import useWarningText from "../../../hooks/useWarningText";
+import { TYPE } from "../../../abstract/constants";
 
 interface CardDetailFormProps
   extends CardNumberInputProps,
@@ -75,7 +76,7 @@ function CardDetailForm({
       />
       <Style.SubmitLayout>
         <InputGuide warningText={warningText} />
-        <Style.SubmitButton type="submit" value={"다음"} />
+        <Style.SubmitButton type={TYPE.SUBMIT} value={"다음"} />
       </Style.SubmitLayout>
     </Style.Form>
   );

@@ -1,10 +1,13 @@
 import React from "react";
 import Style from "./CardNumberInputStyled";
 import { ThemeProvider } from "styled-components";
+
 import Input from "../../../common/Input/Input";
 import InputGuide from "../../../common/InputGuide/InputGuide";
 
 import useWarningText from "../../../../hooks/useWarningText";
+
+import { TYPE } from "../../../../abstract/constants";
 
 export interface CardNumberInputProps {
   changeCardNumber: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -17,10 +20,10 @@ function CardNumberInput({
 }: CardNumberInputProps) {
   const { warningText, checkNumber, checkRightLength } = useWarningText(
     16,
-    /[^\d•]/g
+    "cardNumber"
   );
   const props = {
-    type: "text",
+    type: TYPE.TEXT,
     value: cardNumberHidden,
     isRequired: true,
     onInput: (e: React.ChangeEvent<HTMLInputElement>) => {

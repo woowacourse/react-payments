@@ -1,10 +1,14 @@
 import React, { useRef } from "react";
 import Style from "./CardPasswordInputStyled";
-import Input from "../../../common/Input/Input";
 import { ThemeProvider } from "styled-components";
-import useWarningText from "../../../../hooks/useWarningText";
+
+import Input from "../../../common/Input/Input";
 import InputGuide from "../../../common/InputGuide/InputGuide";
+
+import useWarningText from "../../../../hooks/useWarningText";
+
 import { FirstPassword, SecondPassword } from "../../../../types/card";
+import { ID, TYPE } from "../../../../abstract/constants";
 
 export interface CardPasswordInputProps {
   changeCardPassword: (e: React.FormEvent<HTMLInputElement>) => void;
@@ -20,7 +24,7 @@ function CardPasswordInput({
   const inputRef2 = useRef<HTMLInputElement>(null);
 
   const props = {
-    type: "password",
+    type: TYPE.PASSWORD,
     minLength: 1,
     isRequired: true,
     onInput: (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,15 +34,16 @@ function CardPasswordInput({
     },
     onBlur: checkRightLength,
   };
+
   const firstPassword = {
-    id: "first",
+    id: ID.FIRST,
     value: cardPassword[0],
 
     ...props,
   };
 
   const secondPassword = {
-    id: "second",
+    id: ID.SECOND,
     value: cardPassword[1],
     inputRef: inputRef2,
     ...props,

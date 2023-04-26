@@ -1,6 +1,7 @@
 import React from "react";
-
 import Style from "./CardDetailViewStyled";
+
+import { PLACE_HOLDER, STRING } from "../../abstract/constants";
 
 interface CardDetailViewProps {
   cardNumberHidden: string;
@@ -18,14 +19,16 @@ function CardDetailView({
       <Style.ICDiv />
       <Style.CardNumberSection>
         <Style.CardNumber>
-          {cardNumberHidden.replaceAll("-", " ")}
+          {cardNumberHidden.replaceAll(STRING.DASH, " ")}
         </Style.CardNumber>
       </Style.CardNumberSection>
       <Style.CardInfoSection>
         <Style.CardInfo>
-          {cardOwnerName ? cardOwnerName : "NAME"}
+          {cardOwnerName ? cardOwnerName : PLACE_HOLDER.NAME}
         </Style.CardInfo>
-        <Style.CardInfo>{cardDate ? cardDate : "MM/YY"}</Style.CardInfo>
+        <Style.CardInfo>
+          {cardDate ? cardDate : PLACE_HOLDER.MM_YY}
+        </Style.CardInfo>
       </Style.CardInfoSection>
     </Style.CreditCard>
   );

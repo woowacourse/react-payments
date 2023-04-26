@@ -1,10 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import Style from "./CardDetailPageStyled";
 
 import CardDetailHeader from "./CardDetailHeader/CardDetailHeader";
 import CardDetailView from "../CardDetailView/CardDetailView";
 import CardDetailForm from "./CardDetailForm/CardDetailForm";
-import Style from "./CardDetailPageStyled";
 
 import { CreditCard } from "../../types/card";
 
@@ -13,6 +13,7 @@ import useCardDate from "../../hooks/useCardDate";
 import useCardOwnerName from "../../hooks/useCardOwnerName";
 import useCardCVC from "../../hooks/useCardCVC";
 import useCardPassword from "../../hooks/useCardPassword";
+import { NAVIGATE } from "../../abstract/constants";
 
 interface CardDetailPageProps {
   addCreditCard: (card: CreditCard) => void;
@@ -38,7 +39,7 @@ function CardDetailPage({ addCreditCard }: CardDetailPageProps) {
     };
 
     e.preventDefault();
-    navigate("/");
+    navigate(NAVIGATE.HOME);
     addCreditCard(newCard);
   };
 

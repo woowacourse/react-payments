@@ -1,9 +1,13 @@
 import React from "react";
 import Style from "./CardDateInputStyled";
-import Input from "../../../common/Input/Input";
 import { ThemeProvider } from "styled-components";
-import useWarningText from "../../../../hooks/useWarningText";
+
+import Input from "../../../common/Input/Input";
 import InputGuide from "../../../common/InputGuide/InputGuide";
+
+import useWarningText from "../../../../hooks/useWarningText";
+
+import { PLACE_HOLDER, TYPE } from "../../../../abstract/constants";
 
 export interface CardDateInputProps {
   changeCardDate: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -13,15 +17,14 @@ export interface CardDateInputProps {
 function CardDateInput({ changeCardDate, cardDate }: CardDateInputProps) {
   const { warningText, checkNumber, checkRightLength } = useWarningText(
     4,
-    /[^\d]/g,
     "date"
   );
 
   const props = {
-    type: "text",
+    type: TYPE.TEXT,
     value: cardDate,
     isRequired: true,
-    placeholder: "MM/YY",
+    placeholder: PLACE_HOLDER.MM_YY,
     onInput: (e: React.ChangeEvent<HTMLInputElement>) => {
       checkNumber(e);
       changeCardDate(e);

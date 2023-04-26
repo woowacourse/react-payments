@@ -1,12 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Style from "./CardDetailHeaderStyled";
+import { NAVIGATE } from "../../../abstract/constants";
 
 function CardDetailHeader() {
   const navigate = useNavigate();
 
   const goBack = () => {
-    navigate(-1);
+    navigate(NAVIGATE.BACK);
   };
 
   return (
