@@ -1,6 +1,6 @@
 import { KeyboardEvent, RefObject } from 'react';
-import { DISMISS_TAB_INDEX } from '../constant';
 import { isNumber, isOnlyKoreanAndEnglish } from '../utils';
+import { TAB_INDEX_INFO } from '../constant';
 
 const numberType = 'numeric';
 const textType = 'text';
@@ -37,7 +37,7 @@ export const useFocusInput = (formRef: RefObject<HTMLFormElement>) => {
     for (let index = currentInputIndex + 1; index < totalLength; index += 1) {
       const currentInput = formRef.current[index] as HTMLInputElement;
 
-      if (currentInput.tabIndex === DISMISS_TAB_INDEX) {
+      if (currentInput.tabIndex === TAB_INDEX_INFO.dismiss) {
         continue;
       }
 

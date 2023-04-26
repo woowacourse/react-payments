@@ -9,48 +9,90 @@ interface InputDetailInfo {
   errorMessage?: string;
 }
 
+const wrongInputs: HTMLInputElement[] = [];
+
 export const formValidate = (
   inputObject: InputValidate,
   formList: readonly string[]
 ) => {
   type FormListType = (typeof formList)[number];
 
-  const wrongInputs: HTMLInputElement[] = [];
-
-  const validationResult = formList.every((key: FormListType) => {
-    const current = inputObject[key];
-    const dataList = current.data;
-
-    const result = dataList.every((data) => {
-      const isRequiredResult = current.isRequired
-        ? data.value.length === current.maxLength
-        : true;
-
-      const validationResult = current.validation(data.value);
-
-      const isOverMaxLength = data.value.length > current.maxLength;
-
-      const dataValidationResult =
-        isRequiredResult && validationResult && !isOverMaxLength;
-
-      if (!dataValidationResult) {
-        wrongInputs.push(data);
-        if (!isRequiredResult) {
-          current.setError('이 값은 필수 값 입니다. 입력해주세요.');
-        } else if (isOverMaxLength) {
-          current.setError(
-            `이 값은 ${current.maxLength} 길이 만큼 입력 가능합니다.`
-          );
-        } else if (!validationResult) {
-          current.setError(current.errorMessage);
-        }
-      }
-
-      return dataValidationResult;
-    });
-
-    return result;
-  });
+  const validationResult = formList.every((key: FormListType) =>
+    getValidateResult(inputObject[key])
+  );
 
   return { validationResult, wrongInputs };
+};
+
+const getValidateResult = (currentInfo: InputDetailInfo) => {
+  const dataList = currentInfo.data;
+
+  const result = dataList.every((data) => isValueSuccess(currentInfo, data));
+
+  return result;
+};
+
+const isValueSuccess = (
+  currentInfo: InputDetailInfo,
+  data: HTMLInputElement
+) => {
+  const isRequiredResult = getRequireResult(currentInfo, data);
+
+  const validateResult = currentInfo.validation(data.value);
+
+  const isOverMaxLength = data.value.length > currentInfo.maxLength;
+
+  const dataValidationResult =
+    isRequiredResult && validateResult && !isOverMaxLength;
+
+  const validateResultAndData = {
+    isRequiredResult,
+    validateResult,
+    isOverMaxLength,
+    currentInfo: currentInfo,
+  };
+
+  if (!dataValidationResult) {
+    wrongInputs.push(data);
+    setErrorMessage(validateResultAndData);
+  }
+
+  return dataValidationResult;
+};
+
+const getRequireResult = (
+  currentInfo: InputDetailInfo,
+  currentInput: HTMLInputElement
+) => {
+  if (!currentInfo.isRequired) return true;
+
+  return currentInput.value.length === currentInfo.maxLength;
+};
+
+const setErrorMessage = ({
+  isRequiredResult,
+  validateResult,
+  isOverMaxLength,
+  currentInfo,
+}: {
+  isRequiredResult: boolean;
+  validateResult: boolean;
+  isOverMaxLength: boolean;
+  currentInfo: InputDetailInfo;
+}) => {
+  if (!isRequiredResult) {
+    currentInfo.setError('이 값은 필수 값 입니다. 입력해주세요.');
+    return;
+  }
+
+  if (isOverMaxLength) {
+    currentInfo.setError(
+      `이 값은 ${currentInfo.maxLength} 길이 만큼 입력 가능합니다.`
+    );
+
+    return;
+  }
+  if (!validateResult) {
+    currentInfo.setError(currentInfo.errorMessage);
+  }
 };

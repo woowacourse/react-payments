@@ -17,7 +17,7 @@
 - [x] Card의 숫자 - 상수화 선언
 - [x] tabIndex 상수화하여 관리
 - [x] constant 파일에서 공통이 있는 상수들은 묶어서 관리
-- [ ] formValidate hook의 코드 가독성 높이기
+- [x] formValidate hook의 코드 가독성 높이기
 - [ ] useInput을 선언할 때 복잡도가 올라가는데 개선할 점 고민해보기
 
 <!--
