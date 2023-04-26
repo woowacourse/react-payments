@@ -1,14 +1,25 @@
-import Header from "../components/common/Header";
-import Page from "../components/common/Page";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import Card from "../components/Card";
-import { getLocalStorage } from "../utils/localStorage";
-import { CardType } from "../types";
-import uuid from "react-uuid";
+import { useContext } from "react";
+import Header from '../components/common/Header';
+import Page from '../components/common/Page';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import Card from '../components/Card';
+import { getLocalStorage } from '../utils/localStorage';
+import { CardType } from '../types';
+import uuid from 'react-uuid';
+import { ModalContext } from "../store/modalContext";
 
 const MyCard = () => {
-  const cards = getLocalStorage("card");
+  const cards = getLocalStorage('card');
+
+  const modalCtx = useContext(ModalContext);
+  const navigate = useNavigate();
+
+  const registerCard = ()=>{
+    modalCtx.openModal();
+
+    navigate('/AddCard')
+  }
 
   return (
     <Page>
@@ -25,9 +36,7 @@ const MyCard = () => {
             />
           </CardWrapper>
         ))}
-        <Link to="/AddCard" style={{ textDecoration: "none" }}>
-          <EmptyCardWrapper>+</EmptyCardWrapper>
-        </Link>
+        <EmptyCardWrapper onClick={registerCard}>+</EmptyCardWrapper>
       </>
     </Page>
   );
