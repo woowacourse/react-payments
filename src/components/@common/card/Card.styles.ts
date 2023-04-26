@@ -17,7 +17,7 @@ export const Styled = {
     color: var(--darken-color);
 
     padding: 14px;
-    margin: 25px auto;
+    margin: 25px auto 9px auto;
 
     box-sizing: border-box;
   `,

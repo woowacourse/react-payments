@@ -12,7 +12,7 @@ function CardList() {
   const cardLists = useMemo(() => {
     return cardList.length ? (
       cardList.map((card) => {
-        const { cardNumbers, ownerName, expireDate, cardName } = card;
+        const { cardNumbers, ownerName, expireDate, cardName, nickName } = card;
         return (
           <>
             <Card
@@ -22,7 +22,7 @@ function CardList() {
               ownerName={ownerName}
               expireDate={expireDate}
             />
-            <p></p>
+            <CardNickNameSpan>{nickName && nickName}</CardNickNameSpan>
           </>
         );
       })
@@ -58,6 +58,15 @@ const CardListSection = styled.section`
 
 const CardRegisterParagarph = styled.p`
   margin-bottom: 9px;
+`;
+
+const CardNickNameSpan = styled.span`
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  color: #575757;
 `;
 
 const AddButton = styled.button<{ isFirst: boolean }>`
