@@ -13,6 +13,8 @@ import { Card } from 'components/common/Card/types';
 import { ValueAndOnChange } from 'components/Input/types';
 import { CreditCard } from 'components/common/Card/CreditCard';
 import { useCardFormValid } from 'hooks/useCardFormValid';
+import { Modal } from 'components/common/Modal/Modal';
+import ICON_SVG_PATH from 'constants';
 
 export type AddCardFormProps = {
   onSubmit: () => void;
@@ -21,6 +23,8 @@ export type AddCardFormProps = {
 const NOT_ALPHABET_REGEX = /[^A-Za-z\s]/gi;
 
 function AddCardForm({ onSubmit }: AddCardFormProps) {
+  const [bank, setBank] = useState('');
+
   const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
 
   const [month, setMonth] = useState('');
@@ -33,7 +37,10 @@ function AddCardForm({ onSubmit }: AddCardFormProps) {
 
   const [securityCode, setSecurityCode] = useState('');
 
+  const [isOpen, setIsOpen] = useState(true);
+
   const card: Card = {
+    bank: bank,
     numbers: cardNumbers,
     expirationDate: { month: month, year: year },
     name,
@@ -100,8 +107,20 @@ function AddCardForm({ onSubmit }: AddCardFormProps) {
     onSubmit();
   };
 
+  const handleClickCompany = (bank: string) => {
+    setBank(bank);
+    setIsOpen(false);
+  };
+
   return (
     <>
+      {isOpen && (
+        <Modal
+          ImgSources={Object.values(ICON_SVG_PATH) as string[]}
+          names={Object.keys(ICON_SVG_PATH)}
+          onClick={handleClickCompany}
+        />
+      )}
       <CardWrapper>
         <CreditCard card={card} />
       </CardWrapper>
