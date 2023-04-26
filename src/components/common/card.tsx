@@ -11,8 +11,6 @@ export interface CardProps {
 export function Card(props: CardProps) {
   const { cardNumber, month, year, userName } = props;
 
-  console.log(userName);
-
   return (
     <CardContainer>
       <ICcard />
