@@ -56,6 +56,9 @@ const CardRegistrationPage = ({
           onOpen={onOpen}
         />
       </CardItemContainer>
+      <BankChangeGuide>
+        은행사 변경을 원하시면 위 카드의 은행사 이름을 눌러주세요
+      </BankChangeGuide>
       <CardForm
         onSubmitForm={handleSubmitForm}
         onChangeForm={handleChangeForm}
@@ -75,6 +78,14 @@ const BackButton = () => {
 const CardItemContainer = styled.section`
   display: flex;
   justify-content: center;
+`;
+
+const BankChangeGuide = styled.p`
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--red-color);
 `;
 
 export default CardRegistrationPage;
