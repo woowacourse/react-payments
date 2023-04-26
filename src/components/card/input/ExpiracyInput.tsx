@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { UseInputProps } from '../../../hooks/useInput';
 import Input from '../../common/Input';
 import Error from '../../common/Error';
+import { ADD_CARD_PAGE_TAB_INDEX } from '../../../constant';
 
 interface ExpiracyInputProps {
   year: UseInputProps;
@@ -23,7 +24,7 @@ export default function ExpiracyInput({ year, month }: ExpiracyInputProps) {
             placeholder="MM"
             textAlign="center"
             autoComplete="off"
-            tabIndex={4}
+            tabIndex={ADD_CARD_PAGE_TAB_INDEX.month}
             {...month}
           />
         </InputWrapper>
@@ -37,7 +38,7 @@ export default function ExpiracyInput({ year, month }: ExpiracyInputProps) {
             placeholder="YY"
             textAlign="center"
             autoComplete="off"
-            tabIndex={5}
+            tabIndex={ADD_CARD_PAGE_TAB_INDEX.year}
             {...year}
           />
         </InputWrapper>

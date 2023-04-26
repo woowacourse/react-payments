@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Input from '../../common/Input';
 import { UseInputProps } from '../../../hooks/useInput';
 import Error from '../../common/Error';
+import { ADD_CARD_PAGE_TAB_INDEX } from '../../../constant';
 
 export interface PasswordInputProps {
   firstPassword: UseInputProps;
@@ -27,7 +28,7 @@ export default function PasswordInput({
             placeholder="0"
             textAlign="center"
             autoComplete="off"
-            tabIndex={8}
+            tabIndex={ADD_CARD_PAGE_TAB_INDEX.firstPassword}
             {...firstPassword}
           />
         </GrayWrapper>
@@ -40,7 +41,7 @@ export default function PasswordInput({
             type="text"
             isPassword={true}
             textAlign="center"
-            tabIndex={9}
+            tabIndex={ADD_CARD_PAGE_TAB_INDEX.secondPassword}
             autoComplete="off"
             {...secondPassword}
           />

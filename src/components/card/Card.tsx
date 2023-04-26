@@ -12,6 +12,7 @@ interface CardProps {
 }
 
 const ENCRYPT_INDEX = 2;
+const VIEW_LIMIT_LENGTH = 10;
 
 export default function Card({
   cardNumberSet,
@@ -21,7 +22,10 @@ export default function Card({
   onDeleteClick,
 }: CardProps) {
   const [isClick, setIsClick] = useState(false);
-  const onwerName = owner.length > 10 ? owner.slice(0, 10) : owner;
+  const onwerName =
+    owner.length > VIEW_LIMIT_LENGTH
+      ? owner.slice(0, VIEW_LIMIT_LENGTH)
+      : owner;
 
   const toggleIsClick = () => {
     setIsClick((prev) => !prev);

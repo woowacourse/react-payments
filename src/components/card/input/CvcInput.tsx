@@ -5,6 +5,7 @@ import { UseInputProps } from '../../../hooks/useInput';
 import Error from '../../common/Error';
 import InformationButton from '../../common/InformationButton';
 import ToolTip from '../../common/ToolTip';
+import { ADD_CARD_PAGE_TAB_INDEX } from '../../../constant';
 
 interface CvcInputProps {
   cvc: UseInputProps;
@@ -31,7 +32,7 @@ export default function CvcInput({ cvc }: CvcInputProps) {
             required
             id="cvc"
             placeholder="000"
-            tabIndex={7}
+            tabIndex={ADD_CARD_PAGE_TAB_INDEX.cvc}
             {...cvc}
           />
         </Wrapper>
