@@ -86,14 +86,12 @@ export default function CardInputForm(props: CardInputFormProps) {
 
   useEffect(() => {
     const { cardNumber, expirationDate, securityCode, password } = inputStatus;
-    if (
+    setIsFormFilled(
       cardNumber.isComplete &&
-      expirationDate.isComplete &&
-      securityCode.isComplete &&
-      password.isComplete
-    )
-      setIsFormFilled(true);
-    else setIsFormFilled(false);
+        expirationDate.isComplete &&
+        securityCode.isComplete &&
+        password.isComplete
+    );
   }, [inputStatus]);
 
   const submitCardInfo = (e: React.FormEvent<HTMLFormElement>) => {
