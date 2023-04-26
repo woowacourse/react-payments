@@ -3,22 +3,31 @@ import Input from "../common/Input";
 import InputBox from "../common/InputBox";
 import InputGroup from "../common/InputGroup";
 import { DotIcon } from "../../assets/icons";
-import { useCardItemAction, useCardItemValue, useErrorMessageValue, useInputRefs } from "../provider/CardItemProvider";
+import { useCardItemAction, useCardItemValue, useErrorMessageValue } from "../provider/CardItemProvider";
 
 const PasswordInput = () => {
   const { password } = useCardItemValue();
-  const { onChangePassword } = useCardItemAction();
+  const { onChangePassword, registPasswordRef } = useCardItemAction();
   const { passwordErrorMessage } = useErrorMessageValue();
-  const { passwordRefs } = useInputRefs();
 
   return (
     <InputGroup labelValue="카드 비밀번호" errorMessage={passwordErrorMessage}>
       <BoxContainer>
         <InputBox width="43px" isError={!!passwordErrorMessage}>
-          <Input type="password" ref={passwordRefs[0]} value={password[0]} onChange={onChangePassword(0)}></Input>
+          <Input
+            type="password"
+            ref={(element) => registPasswordRef(0, element)}
+            value={password[0]}
+            onChange={onChangePassword(0)}
+          ></Input>
         </InputBox>
         <InputBox width="43px" isError={!!passwordErrorMessage}>
-          <Input type="password" ref={passwordRefs[1]} value={password[1]} onChange={onChangePassword(1)}></Input>
+          <Input
+            type="password"
+            ref={(element) => registPasswordRef(1, element)}
+            value={password[1]}
+            onChange={onChangePassword(1)}
+          ></Input>
         </InputBox>
         <DotIconWrapper>
           <DotIcon />
