@@ -14,46 +14,19 @@ import {
   RefContext,
 } from "../contexts/cardInfo";
 import { validation } from "../validation/input";
+import { TEXT_LENGTH } from "../constants/inputInfo";
 
 export function AddCardForm() {
   const navigate = useNavigate();
   const [isComplete, setIsComplete] = useState<boolean>(false);
   const inputRef = useContext(RefContext);
 
-  const { cardNumber } = useContext(NumberContext);
-  const { month, year } = useContext(DateContext);
-  const { userName } = useContext(NameContext);
-
-  function validateInputValue(key: string) {
-    switch (key) {
-      case "first":
-        return inputRef.current[key].value.length === 4;
-      case "second":
-        return inputRef.current[key].value.length === 4;
-      case "third":
-        return inputRef.current[key].value.length === 4;
-      case "fourth":
-        return inputRef.current[key].value.length === 4;
-      case "month":
-        return validation.isCorrectMonth(inputRef.current[key].value);
-      case "year":
-        return validation.isNumber(inputRef.current[key].value);
-      case "code":
-        return inputRef.current[key].value.length === 3;
-      case "name":
-        return inputRef.current[key].value.length < 30;
-      case "firstPassword":
-        return inputRef.current[key].value.length === 1;
-      case "secondPassword":
-        return inputRef.current[key].value.length === 1;
-    }
-  }
-
   function checkAllInputs() {
-    const isValidate = Object.keys(inputRef.current).every((input) =>
-      validateInputValue(input)
+    const isValid = Object.keys(inputRef.current).every(
+      (input) =>
+        inputRef.current[input].value.length >= TEXT_LENGTH[input.toUpperCase()]
     );
-    isValidate && setIsComplete(true);
+    isValid && setIsComplete(true);
   }
 
   return (
