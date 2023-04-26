@@ -5,7 +5,6 @@ import CardListPage from "./components/pages/CardListPage";
 import CardRegistrationPage from "./components/pages/CardRegistrationPage";
 import { CardPublicInfo } from "./types/Card";
 import CardItemProvider from "./components/provider/CardItemProvider";
-import ErrorMessageProvider from "./components/provider/ErrorMessageProvider";
 
 function App() {
   const [cardList, setCardList] = useState<CardPublicInfo[]>([]);
@@ -24,9 +23,7 @@ function App() {
             path="/register"
             element={
               <CardItemProvider>
-                <ErrorMessageProvider>
-                  <CardRegistrationPage addCardItem={addCardItem} />
-                </ErrorMessageProvider>
+                <CardRegistrationPage addCardItem={addCardItem} />
               </CardItemProvider>
             }
           />
