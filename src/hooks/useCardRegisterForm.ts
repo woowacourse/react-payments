@@ -29,7 +29,7 @@ export function useCardRegisterForm() {
 
   const allInputs = [];
 
-  for (const [key, cardInfos] of Object.entries(cardRegisterForm)) {
+  for (const [_, cardInfos] of Object.entries(cardRegisterForm)) {
     const inputs = Object.values(cardInfos);
     allInputs.push(...inputs);
   }

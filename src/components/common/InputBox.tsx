@@ -11,7 +11,6 @@ import {
 import { ErrorMessage, Label, Input } from '../common';
 
 import { ERROR_MESSAGE } from '../../constants/errors';
-import { matchKeyWithId } from '../../utils/infoKey';
 import { InputInfo } from '../../type/input';
 interface InputBoxProps extends React.HTMLAttributes<HTMLDivElement> {
   inputs: InputInfo[];
