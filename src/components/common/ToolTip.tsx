@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { DISMISS_TAB_INDEX } from '../../constant';
+import { TAB_INDEX_INFO } from '../../constant';
 
 interface ToolTipProps {
   text: string;
@@ -11,7 +11,7 @@ interface ToolTipProps {
 export default function ToolTip({
   text,
   onClick,
-  tabIndex = DISMISS_TAB_INDEX,
+  tabIndex = TAB_INDEX_INFO.dismiss,
 }: ToolTipProps) {
   return (
     <Wrapper onClick={onClick} tabIndex={tabIndex}>

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Input from '../../common/Input';
 import { UseInputProps } from '../../../hooks/useInput';
 import Error from '../../common/Error';
-import { ADD_CARD_PAGE_TAB_INDEX } from '../../../constant';
+import { TAB_INDEX_INFO } from '../../../constant';
 
 interface CardNumberInputProps {
   firstNumber: UseInputProps;
@@ -10,6 +10,8 @@ interface CardNumberInputProps {
   thirdNumber: UseInputProps;
   fourthNumber: UseInputProps;
 }
+
+const { addCardPage } = TAB_INDEX_INFO;
 
 export default function CardNumberInput({
   firstNumber,
@@ -30,7 +32,7 @@ export default function CardNumberInput({
           autoFocus
           placeholder="0000"
           autoComplete="off"
-          tabIndex={ADD_CARD_PAGE_TAB_INDEX.firstCardNumber}
+          tabIndex={addCardPage.firstCardNumber}
           {...firstNumber}
         />
         <Dash>-</Dash>
@@ -40,7 +42,7 @@ export default function CardNumberInput({
           type="text"
           required
           placeholder="0000"
-          tabIndex={ADD_CARD_PAGE_TAB_INDEX.secondCardNumber}
+          tabIndex={addCardPage.secondCardNumber}
           autoComplete="off"
           textAlign="center"
           {...secondNumber}
@@ -55,7 +57,7 @@ export default function CardNumberInput({
           required
           textAlign="center"
           autoComplete="off"
-          tabIndex={ADD_CARD_PAGE_TAB_INDEX.thirdCardNumber}
+          tabIndex={addCardPage.thirdCardNumber}
           {...thirdNumber}
         />
         <Dash>-</Dash>
@@ -68,7 +70,7 @@ export default function CardNumberInput({
           isPassword={true}
           required
           textAlign="center"
-          tabIndex={ADD_CARD_PAGE_TAB_INDEX.fourthCardNumber}
+          tabIndex={addCardPage.fourthCardNumber}
           {...fourthNumber}
         />
       </Wrapper>

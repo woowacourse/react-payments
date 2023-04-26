@@ -3,12 +3,14 @@ import styled from 'styled-components';
 import Input from '../../common/Input';
 import { UseInputProps } from '../../../hooks/useInput';
 import Error from '../../common/Error';
-import { ADD_CARD_PAGE_TAB_INDEX } from '../../../constant';
+import { TAB_INDEX_INFO } from '../../../constant';
 
 export interface PasswordInputProps {
   firstPassword: UseInputProps;
   secondPassword: UseInputProps;
 }
+
+const { addCardPage } = TAB_INDEX_INFO;
 
 export default function PasswordInput({
   firstPassword,
@@ -28,7 +30,7 @@ export default function PasswordInput({
             placeholder="0"
             textAlign="center"
             autoComplete="off"
-            tabIndex={ADD_CARD_PAGE_TAB_INDEX.firstPassword}
+            tabIndex={addCardPage.firstPassword}
             {...firstPassword}
           />
         </GrayWrapper>
@@ -41,7 +43,7 @@ export default function PasswordInput({
             type="text"
             isPassword={true}
             textAlign="center"
-            tabIndex={ADD_CARD_PAGE_TAB_INDEX.secondPassword}
+            tabIndex={addCardPage.secondPassword}
             autoComplete="off"
             {...secondPassword}
           />

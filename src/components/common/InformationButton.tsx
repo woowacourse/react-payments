@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { DISMISS_TAB_INDEX } from '../../constant';
+import { TAB_INDEX_INFO } from '../../constant';
 
 interface InformationButtonProps {
   onClick: () => void;
@@ -11,7 +11,7 @@ interface InformationButtonProps {
 export default function InformationButton({
   onClick,
   text = '?',
-  tabIndex = DISMISS_TAB_INDEX,
+  tabIndex = TAB_INDEX_INFO.dismiss,
 }: InformationButtonProps) {
   return (
     <Wrapper type="button" onClick={onClick} tabIndex={tabIndex}>

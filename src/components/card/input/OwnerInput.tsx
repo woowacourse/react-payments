@@ -3,11 +3,13 @@ import styled from 'styled-components';
 import Input from '../../common/Input';
 import { UseInputProps } from '../../../hooks/useInput';
 import Error from '../../common/Error';
-import { ADD_CARD_PAGE_TAB_INDEX } from '../../../constant';
+import { TAB_INDEX_INFO } from '../../../constant';
 
 export interface OwnerInputProps {
   owner: UseInputProps;
 }
+
+const { addCardPage } = TAB_INDEX_INFO;
 
 export default function OwnerInput({ owner }: OwnerInputProps) {
   return (
@@ -18,7 +20,7 @@ export default function OwnerInput({ owner }: OwnerInputProps) {
           maxLength={30}
           id="owner"
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-          tabIndex={ADD_CARD_PAGE_TAB_INDEX.owner}
+          tabIndex={addCardPage.owner}
           autoComplete="off"
           {...owner}
         />

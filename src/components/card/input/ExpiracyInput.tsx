@@ -3,12 +3,14 @@ import styled from 'styled-components';
 import { UseInputProps } from '../../../hooks/useInput';
 import Input from '../../common/Input';
 import Error from '../../common/Error';
-import { ADD_CARD_PAGE_TAB_INDEX } from '../../../constant';
+import { TAB_INDEX_INFO } from '../../../constant';
 
 interface ExpiracyInputProps {
   year: UseInputProps;
   month: UseInputProps;
 }
+
+const { addCardPage } = TAB_INDEX_INFO;
 
 export default function ExpiracyInput({ year, month }: ExpiracyInputProps) {
   return (
@@ -24,7 +26,7 @@ export default function ExpiracyInput({ year, month }: ExpiracyInputProps) {
             placeholder="MM"
             textAlign="center"
             autoComplete="off"
-            tabIndex={ADD_CARD_PAGE_TAB_INDEX.month}
+            tabIndex={addCardPage.month}
             {...month}
           />
         </InputWrapper>
@@ -38,7 +40,7 @@ export default function ExpiracyInput({ year, month }: ExpiracyInputProps) {
             placeholder="YY"
             textAlign="center"
             autoComplete="off"
-            tabIndex={ADD_CARD_PAGE_TAB_INDEX.year}
+            tabIndex={addCardPage.year}
             {...year}
           />
         </InputWrapper>

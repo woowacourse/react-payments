@@ -5,11 +5,13 @@ import { UseInputProps } from '../../../hooks/useInput';
 import Error from '../../common/Error';
 import InformationButton from '../../common/InformationButton';
 import ToolTip from '../../common/ToolTip';
-import { ADD_CARD_PAGE_TAB_INDEX } from '../../../constant';
+import { TAB_INDEX_INFO } from '../../../constant';
 
 interface CvcInputProps {
   cvc: UseInputProps;
 }
+
+const { addCardPage } = TAB_INDEX_INFO;
 
 export default function CvcInput({ cvc }: CvcInputProps) {
   const [isOpenToolTip, setIsOpenToolTip] = useState(false);
@@ -32,7 +34,7 @@ export default function CvcInput({ cvc }: CvcInputProps) {
             required
             id="cvc"
             placeholder="000"
-            tabIndex={ADD_CARD_PAGE_TAB_INDEX.cvc}
+            tabIndex={addCardPage.cvc}
             {...cvc}
           />
         </Wrapper>
