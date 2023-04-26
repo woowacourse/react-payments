@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { useGroupedFocus } from '../hooks/useGroupedFocus';
-import { useGroupedRef } from '../hooks/useGroupedRef';
-import { NumberInput } from './common/NumberInput';
+import { useGroupedFocus } from '../../hooks/useGroupedFocus';
+import { useGroupedRef } from '../../hooks/useGroupedRef';
+import { NumberInput } from '../common/NumberInput';
 
 const StyledCardPasswordInput = styled.div`
   display: flex;

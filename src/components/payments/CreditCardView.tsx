@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import type { CreditCard } from '../types/CreditCard';
-import { Text } from './common/Text';
+import type { CreditCard } from '../../types/CreditCard';
+import { Text } from '../common/Text';
 
 type CreditCardViewProps = Pick<CreditCard, 'name' | 'cardNumbers' | 'expirationDate'>;
 
