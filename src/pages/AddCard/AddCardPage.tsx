@@ -7,14 +7,15 @@ import AddCardForm from './components/AddCardForm';
 import Header from '../../components/Header';
 import useInput from '../../hooks/useInput';
 import useComplicateInput from '../../hooks/useComplicateInput';
-import { handleNumberInput, isNumberInput, stringToUpperCase } from '../../utils/util';
-import { cardOwnerCondition, cardPasswordCondition } from '../cardInputCondition';
+import { handleNumberInput, isNumberInput } from '../../utils/util';
+import { cardPasswordCondition } from '../cardInputCondition';
 import BackButtonImg from '../../asset/back_button.png';
 import './AddCardPage.css';
 import useInputs from '../../hooks/useInputs';
 import {
   isValidExpiredMonthFormat,
   isValidExpiredYearFormat,
+  isValidOwnerName,
   isValidSecurityCode,
 } from './domain/dispatcher';
 
@@ -32,7 +33,7 @@ const AddCardPage = () => {
   const expireMonth = useInputs(isValidExpiredMonthFormat);
   const expireYear = useInputs(isValidExpiredYearFormat);
   const securityCode = useInputs(isValidSecurityCode);
-  const cardOwner = useInput('', cardOwnerCondition, stringToUpperCase);
+  const cardOwner = useInputs(isValidOwnerName);
   const cardPassword1 = useInput('', cardPasswordCondition, handleNumberInput);
   const cardPassword2 = useInput('', cardPasswordCondition, handleNumberInput);
 
