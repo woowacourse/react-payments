@@ -9,7 +9,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Container } from "../../components/common";
 import { useContext } from "react";
-import { Card } from "../../types";
+import { Card, CardCompany } from "../../types";
 import { useNavigate } from "react-router-dom";
 import {
   isNumeric,
@@ -17,8 +17,6 @@ import {
   isFulfilledString,
   isValidMonth,
   isValidOwnerName,
-  isTheOtherGroupFulfilled,
-  hasInvalidKey,
 } from "../../validator/Validator";
 import { PAGE } from "../../constant";
 import Modal from "../../components/Modal/Modal";
@@ -51,36 +49,10 @@ const AddCardPage = () => {
   const navigate = useNavigate();
 
   const handleCardCompany = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const company = e.currentTarget.name as any;
+    const company = e.currentTarget.name as CardCompany;
     setCardCompany(company);
 
     setModalOpen(false);
-  };
-
-  const handleCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, name } = e.target;
-
-    if (!isNumeric(value)) return;
-    setCardNumber({ ...cardNumber, [name]: value });
-
-    if (isTheOtherGroupFulfilled(cardNumber, name) && isFulfilledString(value, 4))
-      setError({ ...error, cardNumberError: false });
-  };
-
-  const handleCardNumberError = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name } = e.target;
-
-    if (isFulfilledString(name, 4)) {
-      setError({ ...error, cardNumberError: true });
-      return;
-    }
-
-    if (hasInvalidKey(cardNumber)) {
-      setError({ ...error, cardNumberError: true });
-      return;
-    }
-
-    if (isFulfilledObject(cardNumber, 4)) setError({ ...error, cardNumberError: false });
   };
 
   const handleExpirationDate = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -147,7 +119,7 @@ const AddCardPage = () => {
   };
 
   const isAddButtonVisibleConditionFulfilled = (): boolean => {
-    const condition =
+    const addButtonAppearCondition =
       isFulfilledObject(cardNumber, 4) &&
       isFulfilledObject(expirationDate, 2) &&
       isFulfilledObject(password, 1) &&
@@ -155,7 +127,7 @@ const AddCardPage = () => {
       !error.cardNumberError &&
       !error.expirationError;
 
-    return condition;
+    return addButtonAppearCondition;
   };
 
   return (
@@ -167,7 +139,7 @@ const AddCardPage = () => {
             <CardCompanyIcon company={"비씨카드"} onClickHandler={handleCardCompany}></CardCompanyIcon>
             <CardCompanyIcon company={"하나카드"} onClickHandler={handleCardCompany}></CardCompanyIcon>
             <CardCompanyIcon company={"현대카드"} onClickHandler={handleCardCompany}></CardCompanyIcon>
-            <CardCompanyIcon company={"카카오뱅크카드"} onClickHandler={handleCardCompany}></CardCompanyIcon>
+            <CardCompanyIcon company={"카카오뱅크"} onClickHandler={handleCardCompany}></CardCompanyIcon>
             <CardCompanyIcon company={"국민카드"} onClickHandler={handleCardCompany}></CardCompanyIcon>
             <CardCompanyIcon company={"롯데카드"} onClickHandler={handleCardCompany}></CardCompanyIcon>
             <CardCompanyIcon company={"신한카드"} onClickHandler={handleCardCompany}></CardCompanyIcon>
@@ -178,12 +150,7 @@ const AddCardPage = () => {
       <AppBar title={"카드 추가"} children={<Link to={PAGE.CARD_LIST}>〈</Link>} />
       <CardPreview card={{ cardCompany, cardNumber, expirationDate, ownerName }} />
       <Form onSubmit={onSubmitHandler}>
-        <CardNumberInput
-          cardNumber={cardNumber}
-          error={error.cardNumberError}
-          onChange={handleCardNumber}
-          onBlur={handleCardNumberError}
-        />
+        <CardNumberInput cardNumber={cardNumber} error={error} setCardNumber={setCardNumber} setError={setError} />
         <CardExpirationDateInput
           expirationDate={expirationDate}
           error={error.expirationError}
