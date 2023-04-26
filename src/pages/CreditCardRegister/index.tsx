@@ -13,6 +13,7 @@ import * as Type from '@Types/index';
 import useInput from '@Hooks/useInput';
 
 import CreditCardCVCInput from './CreditCardCVCInput';
+import CreditCardCompanyModal from './CreditCardCompanyModal/CreditCardCompanyModal';
 import CreditCardExpiryInput from './CreditCardExpiryInput';
 import CreditCardNumberInput from './CreditCardNumberInput';
 import CreditCardOwnerInput from './CreditCardOwnerInput';
@@ -25,6 +26,7 @@ function CreditCardRegister() {
   const { numberValidationFns, expiryValidationFns, ownerValidationFns, cvcValidationFns, passwordValidationFns } =
     creditCard.getValidationFns();
 
+  const [creditCardCompany, setCreditCardCompany] = useState<Type.CardCompanies | undefined>(undefined);
   const [creditCardNumber, setCreditCardNumber, numberErrorMessage] = useInput<string>('', numberValidationFns);
   const [creditCardExpiry, setCreditCardExpiry, expiryErrorMessage] = useInput<string>('', expiryValidationFns);
   const [creditCardOwner, setCreditCardOwner, ownerErrorMessage] = useInput<string>('', ownerValidationFns);
@@ -120,6 +122,7 @@ function CreditCardRegister() {
           <Button disabled={!isFullFilled} type="button" handleClick={handleSubmit} text="확인" />
         </S.ButtonWrapper>
       </S.CreditCardRegisterForm>
+      {!creditCardCompany && <CreditCardCompanyModal setCreditCardCompany={setCreditCardCompany} />}
     </>
   );
 }
