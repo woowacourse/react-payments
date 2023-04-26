@@ -25,7 +25,14 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 버그를 발견한다면, [Issues](https://github.com/woowacourse/react-payments/issues)에 등록해주세요.
 
+<br>
+<br>
+
 ## [페이지 예시화면](https://chsua.github.io/react-payments/)
+
+<br>
+
+# 1단계
 
 ## 파일 구조
 
@@ -121,4 +128,97 @@ src
  ┣ index.js
  ┣ index.tsx
  ┗ react-app-env.d.ts
+```
+
+<br>
+
+## 2단계
+
+```
+src
+ ┣ component
+ ┃ ┣ CardInputPage
+ ┃ ┃ ┣ CardInputForm
+ ┃ ┃ ┃ ┣ CardInputForm.tsx
+ ┃ ┃ ┃ ┗ cardInputForm.css
+ ┃ ┃ ┃
+ ┃ ┃ ┣ InputBoxCardNumber
+ ┃ ┃ ┃ ┣ CardNumber.tsx
+ ┃ ┃ ┃ ┣ InputBoxCardNumber.tsx
+ ┃ ┃ ┃ ┣ cardNumber.css
+ ┃ ┃ ┃ ┗ inputBoxCardNumber.css
+ ┃ ┃ ┃
+ ┃ ┃ ┣ InputBoxExpirationDate
+ ┃ ┃ ┃ ┣ InputBoxExpirationDate.tsx
+ ┃ ┃ ┃ ┗ inputBoxExpirationDate.css
+ ┃ ┃ ┃
+ ┃ ┃ ┣ InputBoxOwner
+ ┃ ┃ ┃ ┣ InputBoxOwner.tsx
+ ┃ ┃ ┃ ┗ inputBoxOwner.css
+ ┃ ┃ ┃
+ ┃ ┃ ┣ InputBoxPassword
+ ┃ ┃ ┃ ┣ CardPassword.tsx
+ ┃ ┃ ┃ ┣ InputBoxPassword.tsx
+ ┃ ┃ ┃ ┣ cardPassword.css
+ ┃ ┃ ┃ ┗ inputBoxPassword.css
+ ┃ ┃ ┃
+ ┃ ┃ ┣ InputBoxSecurityCode
+ ┃ ┃ ┃ ┣ InputBoxSecurityCode.tsx
+ ┃ ┃ ┃ ┗ inputBoxSecurityCode.css
+ ┃ ┃ ┃
+ ┃ ┃ ┣ CardInputPage.tsx
+ ┃ ┃ ┗ cardInputPage.css
+ ┃ ┃
+ ┃ ┣ CardListPage
+ ┃ ┃ ┣ AddCardButton
+ ┃ ┃ ┃ ┣ AddCardButton.tsx
+ ┃ ┃ ┃ ┗ addCardButton.css
+ ┃ ┃ ┃
+ ┃ ┃ ┣ CardList
+ ┃ ┃ ┃ ┣ CardList.tsx
+ ┃ ┃ ┃ ┗ cardList.css
+ ┃ ┃ ┣ CardListPage.tsx
+ ┃ ┃ ┗ cardListPage.css
+ ┃ ┃
+ ┃ ┗ common
+ ┃   ┣ Button.module.css
+ ┃   ┣ Button.tsx
+ ┃   ┣ CardPreview.module.css
+ ┃   ┣ CardPreview.tsx
+ ┃   ┣ Input.module.css
+ ┃   ┗ Input.tsx
+ ┃
+ ┣ stories
+ ┃ ┣ CardInputForm.stories.tsx
+ ┃ ┣ CardNumber.stories.tsx
+ ┃ ┣ CardPreview.stories.tsx
+ ┃ ┣ Input.stories.tsx
+ ┃ ┣ InputBoxCardNumber.stories.tsx
+ ┃ ┣ InputBoxExpirationDate.stories.tsx
+ ┃ ┣ InputBoxOwner.stories.tsx
+ ┃ ┣ InputBoxPassword.stories.tsx
+ ┃ ┣ InputBoxSecurityCode.stories.tsx
+ ┃ ┗ Introduction.mdx
+ ┃
+ ┣ style
+ ┃ ┣ palette.css
+ ┃ ┗ reset.css
+ ┃
+ ┣ util
+ ┃ ┣ deepCopy.ts
+ ┃ ┗ trans.ts  : 형식에 맞는 input값으로 변환
+ ┃
+ ┣ validation
+ ┃ ┣ ExpirationDate.ts
+ ┃ ┣ cardOwner.ts
+ ┃ ┗ number.ts
+ ┃
+ ┣ App.css
+ ┣ App.tsx
+ ┣ CONSTANT.ts
+ ┣ index.css
+ ┣ index.js
+ ┣ index.tsx
+ ┣ react-app-env.d.ts
+ ┗ type.ts
 ```
