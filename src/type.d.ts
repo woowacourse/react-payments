@@ -41,8 +41,6 @@ export type InputHook = {
 
 export type InputStatus = 'INIT' | 'VALID' | 'INVALID';
 
-export type PasswordInputHook<T> = [T, (e: React.ChangeEvent<HTMLInputElement>) => void];
-
 export type AddCardFormProps = {
   cardFirstNumber: InputHook;
   cardSecondNumber: InputHook;
@@ -69,13 +67,15 @@ export type OwnerInputProps = Pick<AddCardFormProps, 'cardOwner'>;
 export type SecurityCodeInputProps = Pick<AddCardFormProps, 'securityCode'>;
 export type PasswordInputProps = Pick<AddCardFormProps, 'password1', 'password2'>;
 
+export type InputType = 'securityCode' | 'password' | 'owner' | 'expired' | 'cardNumber';
+
 export type ErrorMessageProps = {
-  inputType: string;
+  inputType: InputType;
   status: InputStatus;
 };
 
 export type InputContainerProps = {
   className: string;
   status: InputStatus;
-  inputType: string;
+  inputType: InputType;
 };

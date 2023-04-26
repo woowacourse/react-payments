@@ -1,4 +1,5 @@
 import { InputStatus } from '../../../type';
+import { INVALID_MESSAGE } from '../../../utils/constants';
 
 export const calcMultipleStatus = (arr: InputStatus[]): InputStatus => {
   if (arr.includes('INVALID')) return 'INVALID';
@@ -6,7 +7,6 @@ export const calcMultipleStatus = (arr: InputStatus[]): InputStatus => {
   return 'INIT';
 };
 
-// TODO: 구체화 하기
 export const getErrorMessage = (inputType: string, status: InputStatus) => {
-  return status === 'INVALID' ? '잘못된 입력입니다.' : '';
+  return INVALID_MESSAGE[inputType][status];
 };

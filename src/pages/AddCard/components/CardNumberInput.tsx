@@ -21,7 +21,7 @@ const CardNumberInput = ({
         cardThirdNumber.status,
         cardFourthNumber.status,
       ])}
-      inputType="card-number"
+      inputType="cardNumber"
     >
       <span className="form-label">카드 번호</span>
       <div className="card-number-input">

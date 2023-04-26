@@ -9,7 +9,7 @@ const SecurityCodeInput = ({ securityCode }: SecurityCodeInputProps) => {
     <InputContainer
       className="card-security-code-container"
       status={securityCode.status}
-      inputType="security-code"
+      inputType="securityCode"
     >
       <span className="form-label">보안코드(CVC/CVV)</span>
       <div className="card-security-code-box">
