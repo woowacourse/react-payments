@@ -22,6 +22,7 @@ export const Default = () => (
           year: "12",
         },
         ownerName: "aaa",
+        cardCompany: "BC",
       }}
     ></CardPreview>
   </>

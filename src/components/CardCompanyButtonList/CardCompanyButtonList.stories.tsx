@@ -18,7 +18,10 @@ export const Default: Story = {
     return (
       <>
         <GlobalStyle />
-        <CardCompanyButtonList cardCompanies={Object.keys(CARD_COMPANIES) as CardCompany[]} />
+        <CardCompanyButtonList
+          cardCompanies={Object.keys(CARD_COMPANIES) as CardCompany[]}
+          handleCardCompany={() => {}}
+        />
       </>
     );
   },

@@ -14,6 +14,7 @@ const card: Card = {
   expirationDate: { month: "10", year: "96" },
   securityCode: "123",
   password: { first: "1", second: "2" },
+  cardCompany: "BC",
 };
 
 export const Default = () => (

@@ -11,6 +11,7 @@ const meta: Meta<typeof CardCompanyButton> = {
       options: ["BC", "SHINHAN", "HANA", "HYUNDAI", "KAKAO", "KB", "LOTTE", "WOORI"],
       control: { type: "radio" },
     },
+    onClick: () => {},
   },
 };
 
@@ -18,11 +19,11 @@ export default meta;
 type Story = StoryObj<typeof CardCompanyButton>;
 
 export const Default: Story = {
-  render: ({ cardCompany }) => {
+  render: ({ cardCompany, onClick }) => {
     return (
       <>
         <GlobalStyle />
-        <CardCompanyButton cardCompany={cardCompany} />
+        <CardCompanyButton cardCompany={cardCompany} onClick={onClick} />
       </>
     );
   },
