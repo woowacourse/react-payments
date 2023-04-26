@@ -18,7 +18,7 @@ interface Props {
 const ExpirationDateInput = ({ date, setDate }: Props) => {
   const { handleRef, moveFocus } = useFocus();
 
-  const handleDate = ({ target }: ChangeEvent<HTMLInputElement>) => {
+  const handleDateChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     if (isInvalidDate(target, date)) return;
 
     setDate((prevState) => {
@@ -52,7 +52,7 @@ const ExpirationDateInput = ({ date, setDate }: Props) => {
               value={index ? date.year : date.month}
               placeholder={index ? "YY" : "MM"}
               required
-              onChange={handleDate}
+              onChange={handleDateChange}
               ref={(el) => handleRef(el, index)}
             />
             {index === DATE_INPUT.LAST_PART ? (

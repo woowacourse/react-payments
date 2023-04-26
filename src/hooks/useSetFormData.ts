@@ -9,7 +9,7 @@ interface FormData {
 const useSetFormData = (dataName: string) => {
   const navigate = useNavigate();
 
-  const handleFormData = (event: FormEvent) => {
+  const handleFormDataSubmit = (event: FormEvent) => {
     event.preventDefault();
 
     const formData = getFormData(event.target);
@@ -20,7 +20,7 @@ const useSetFormData = (dataName: string) => {
     navigate("/");
   };
 
-  return { handleFormData };
+  return { handleFormDataSubmit };
 };
 
 const setData = (formData: FormData, dataName: string) => {

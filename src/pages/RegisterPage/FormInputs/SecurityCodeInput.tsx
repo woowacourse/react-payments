@@ -12,7 +12,7 @@ interface Props {
 }
 
 const SecurityCodeInput = ({ code, setCode }: Props) => {
-  const handleCardNumber = ({ target }: ChangeEvent<HTMLInputElement>) => {
+  const handleCodeChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     setCode(
       changeInvalidValueToBlank(target.value, {
         length: LIMIT_LENGTH.SECURITY_CODE,
@@ -39,7 +39,7 @@ const SecurityCodeInput = ({ code, setCode }: Props) => {
           maxLength={LIMIT_LENGTH.SECURITY_CODE}
           inputMode="numeric"
           value={code}
-          onChange={handleCardNumber}
+          onChange={handleCodeChange}
           placeholder="000"
           required
         />

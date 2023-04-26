@@ -11,7 +11,7 @@ interface Props {
 }
 
 const NameInput = ({ name, setName }: Props) => {
-  const handleName = ({ target }: ChangeEvent<HTMLInputElement>) => {
+  const handleNameChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     const value = target.value.toUpperCase().trimStart();
     if (value.includes(INVALID_BLANK)) return;
 
@@ -44,7 +44,7 @@ const NameInput = ({ name, setName }: Props) => {
         id="name"
         maxLength={LIMIT_LENGTH.NAME}
         value={name}
-        onChange={handleName}
+        onChange={handleNameChange}
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
       />
     </>

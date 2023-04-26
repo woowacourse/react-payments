@@ -18,7 +18,9 @@ interface Props {
 const CardNumberInput = ({ cardNumber, setCardNumber }: Props) => {
   const { handleRef, moveFocus } = useFocus();
 
-  const handleCardNumber = ({ target }: ChangeEvent<HTMLInputElement>) => {
+  const handleCardNumberChange = ({
+    target,
+  }: ChangeEvent<HTMLInputElement>) => {
     setCardNumber((prevState) => {
       return {
         ...prevState,
@@ -51,7 +53,7 @@ const CardNumberInput = ({ cardNumber, setCardNumber }: Props) => {
               placeholder="0000"
               autoFocus={index ? false : true}
               required
-              onChange={handleCardNumber}
+              onChange={handleCardNumberChange}
               ref={(el) => handleRef(el, index)}
             />
             {index === NUMBER_INPUT.LAST_PART ? (

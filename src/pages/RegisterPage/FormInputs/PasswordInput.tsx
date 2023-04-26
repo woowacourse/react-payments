@@ -27,7 +27,7 @@ interface Props {
 const PasswordInput = ({ password, setPassword }: Props) => {
   const { handleRef, moveFocus } = useFocus();
 
-  const handlePassword = ({ target }: ChangeEvent<HTMLInputElement>) => {
+  const handlePasswordChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     setPassword((prevState) => {
       return {
         ...prevState,
@@ -63,7 +63,7 @@ const PasswordInput = ({ password, setPassword }: Props) => {
                 value={password[`password${index + 1}`]}
                 placeholder="0"
                 required
-                onChange={handlePassword}
+                onChange={handlePasswordChange}
                 ref={(el) => handleRef(el, index)}
               />
             ) : (

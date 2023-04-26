@@ -34,7 +34,7 @@ const CardRegisterForm = () => {
   const requiredCardInfo = { ...cardNumber, ...date, code, ...password };
 
   const { isFormFilled } = useFormState(requiredCardInfo);
-  const { handleFormData } = useSetFormData("card");
+  const { handleFormDataSubmit } = useSetFormData("card");
 
   return (
     <S.Wrapper>
@@ -42,7 +42,7 @@ const CardRegisterForm = () => {
 
       <CardPreview cardInfo={PreviewCardInfo} />
 
-      <form onSubmit={handleFormData}>
+      <form onSubmit={handleFormDataSubmit}>
         <CardNumberInput
           cardNumber={cardNumber}
           setCardNumber={setCardNumber}
