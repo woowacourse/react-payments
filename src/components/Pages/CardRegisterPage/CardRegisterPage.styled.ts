@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLOR } from '../../constants/cardInfo';
+import { COLOR } from '../../../constants/cardInfo';
 
 export const CardRegisterPage = styled.div`
   display: flex;

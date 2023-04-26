@@ -4,7 +4,7 @@ import { CardNumbers, ExpirationDate, SetExpirationDate } from '../../types/stat
 import { EXPIRATION_DATE } from '../../constants/cardInfo';
 import { ERROR_MESSAGE } from '../../constants/message';
 
-import { isNumeric } from '../../validator';
+import { isNumeric } from '../validators/validator';
 
 import * as styled from './ExpirationDateInputBox.styled';
 import Input from '../Input/Input';

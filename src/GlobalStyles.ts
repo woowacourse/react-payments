@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
+
 import { COLOR } from './constants/cardInfo';
 
 const GlobalStyles = createGlobalStyle` 
@@ -24,20 +25,6 @@ const GlobalStyles = createGlobalStyle`
 
 		width: 100%;
 		height: 100%;
-	}
-
-	.App {
-		display: flex;
-		flex-direction: column;
-
-		width: 100%;
-		height: 100%;
-
-		padding: 28px 24px;
-
-		background-color: ${COLOR.WHITE};
-
-		overflow: auto;
 	}
 
   a {

@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { CardInfo, CardNumbers, ExpirationDate, OwnerName, Password, SetCardInfoList } from '../../types/state';
-import { COLOR } from '../../constants/cardInfo';
+import { CardInfo, CardNumbers, ExpirationDate, OwnerName, Password, SetCardInfoList } from '../../../types/state';
+import { COLOR } from '../../../constants/cardInfo';
 
 import * as styled from './CardRegisterPage.styled';
-import CardPreview from '../../components/CardPreview/CardPreview';
-import CardNumberInputBox from '../../components/CardNumberInputBox/CardNumberInputBox';
-import ExpirationDateInputBox from '../../components/ExpirationDateInputBox/ExpirationDateInputBox';
-import OwnerNameInputBox from '../../components/OwnerNameInputBox/OwnerNameInputBox';
-import SecurityCodeInputBox from '../../components/SecurityCodeInputBox/SecurityCodeInputBox';
-import PasswordInputBox from '../../components/PasswordInputBox/PasswordInputBox';
+import CardPreview from '../../CardPreview/CardPreview';
+import CardNumberInputBox from '../../CardNumberInputBox/CardNumberInputBox';
+import ExpirationDateInputBox from '../../ExpirationDateInputBox/ExpirationDateInputBox';
+import OwnerNameInputBox from '../../OwnerNameInputBox/OwnerNameInputBox';
+import SecurityCodeInputBox from '../../SecurityCodeInputBox/SecurityCodeInputBox';
+import PasswordInputBox from '../../PasswordInputBox/PasswordInputBox';
 
 interface CardRegisterPageProps {
   setCardInfoList: SetCardInfoList;

@@ -4,7 +4,7 @@ import { Password, SetPassword } from '../../types/state';
 import { PASSWORD } from '../../constants/cardInfo';
 import { ERROR_MESSAGE } from '../../constants/message';
 
-import { isNumeric } from '../../validator';
+import { isNumeric } from '../validators/validator';
 
 import * as styled from './PasswordInputBox.styled';
 import Input from '../Input/Input';

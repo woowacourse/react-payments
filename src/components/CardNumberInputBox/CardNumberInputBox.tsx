@@ -4,7 +4,7 @@ import { CardNumbers, SetCardNumbers } from '../../types/state';
 import { CARD_NUMBER } from '../../constants/cardInfo';
 import { ERROR_MESSAGE } from '../../constants/message';
 
-import { isNumeric } from '../../validator';
+import { isNumeric } from '../validators/validator';
 
 import * as styled from './CardNumberInputBox.styled';
 import Input from '../Input/Input';

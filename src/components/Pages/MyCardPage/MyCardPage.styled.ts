@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Card } from '../../components/Card/Card.styled';
+import { Card } from '../../Card/Card.styled';
 
 export const MyCardPage = styled.div`
   display: flex;

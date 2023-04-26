@@ -4,7 +4,7 @@ import { ExpirationDate, OwnerName, SetOwnerName } from '../../types/state';
 import { OWNER_NAME } from '../../constants/cardInfo';
 import { ERROR_MESSAGE } from '../../constants/message';
 
-import { isAlpha } from '../../validator';
+import { isAlpha } from '../validators/validator';
 
 import * as styled from './OwnerNameInputBox.styled';
 import Input from '../Input/Input';

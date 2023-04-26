@@ -4,7 +4,7 @@ import { OwnerName, SetSecurityCode } from '../../types/state';
 import { SECURITY_CODE } from '../../constants/cardInfo';
 import { ERROR_MESSAGE } from '../../constants/message';
 
-import { isNumeric } from '../../validator';
+import { isNumeric } from '../validators/validator';
 
 import * as styled from './SecurityCodeInputBox.styled';
 import Input from '../Input/Input';
