@@ -35,9 +35,7 @@ const Card = ({ cardInfo, bgColor }: CardProps) => {
             </styled.ExpirationMonth>
             <span>/</span>
             <styled.ExpirationYear>
-              {[cardInfo.expirationYear ? cardInfo.expirationYear : 'YY'].map((char, index) => (
-                <span key={index}>{char}</span>
-              ))}
+              <span>{cardInfo?.expirationYear || 'YY'}</span>
             </styled.ExpirationYear>
           </styled.ExpirationDate>
         </styled.CardBottomInfos>
