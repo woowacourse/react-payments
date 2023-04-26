@@ -21,6 +21,7 @@ const MyCard = () => {
               ownerName={card.ownerName}
               expiredDate={card.expiredDate}
               cardNumber={card.cardNumber}
+              bankName={card.bankName}
             />
           </CardWrapper>
         ))}

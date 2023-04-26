@@ -8,6 +8,7 @@ const Card = (props: CardType) => {
 
   return (
     <CardWrapper style={{ background: props.color }}>
+      <span>{props.bankName}</span>
       <img src={IcChip} alt="ic-chip" />
       <CardInfoWrapper>
         <div>
@@ -42,10 +43,16 @@ const CardWrapper = styled.div`
 
   box-sizing: border-box;
 
-  padding: 40px 14px 0 14px;
+  padding: 10px 14px 0 14px;
   border-radius: 5px;
 
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+
+  > span{
+    font-size: 12px;
+    margin-bottom: 28px;
+    color: white;
+  }
 `;
 
 const CardInfoWrapper = styled.div`

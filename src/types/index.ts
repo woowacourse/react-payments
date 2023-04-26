@@ -5,4 +5,5 @@ export interface CardType {
   cvc?: string;
   password?: string[];
   color: string;
+  bankName: string;
 }

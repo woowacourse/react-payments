@@ -18,7 +18,8 @@ const AddCard = () => {
     ownerName: '',
     cvc: '',
     password: ['', ''],
-    color: RANDOM_COLOR[Math.floor(Math.random() * 10)],
+    color: "black",
+    bankName: ""
   });
 
   const registerCard = (e: FormEvent) => {
@@ -31,7 +32,7 @@ const AddCard = () => {
   return (
     <Page>
       <Header title="카드 추가" goToMainPage={true} />
-      <Card color={card.color} ownerName={card.ownerName} expiredDate={card.expiredDate} cardNumber={card.cardNumber} />
+      <Card color={card.color} ownerName={card.ownerName} expiredDate={card.expiredDate} cardNumber={card.cardNumber} bankName={card.bankName}/>
       <CardInputForm card={card} setCard={setCard} onSubmit={e => registerCard(e)} />
       {modalCtx.isModalOpen && (
         <ModalPortal closeEvent={modalCtx.closeModal}>

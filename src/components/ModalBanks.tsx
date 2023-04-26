@@ -8,18 +8,18 @@ interface Props {
   setCard: (value: CardType) => void;
 }
 const ModalBanks = (props: Props) => {
-    const card = JSON.parse(JSON.stringify(props.card));
+  const card = JSON.parse(JSON.stringify(props.card));
 
-    const cardColorHandler = (e:React.MouseEvent<HTMLElement>)=>{
-        card.color=CARD_BANK_COLOR_MAP[e.currentTarget.id].background;
-        
-        props.setCard(card);
-    }
+  const cardColorHandler = (e: React.MouseEvent<HTMLElement>) => {
+    card.color = CARD_BANK_COLOR_MAP[e.currentTarget.id].background;
+    card.bankName = e.currentTarget.id;
+    props.setCard(card);
+  };
   return (
     <ModalContainer>
       <BanksWrapper>
         <BankWrapper id="BC카드" onClick={cardColorHandler}>
-          <img src={BcBank} alt="도움말"/>
+          <img src={BcBank} alt="도움말" />
           <span>BC카드</span>
         </BankWrapper>
         <BankWrapper id="신한카드" onClick={cardColorHandler}>
@@ -28,7 +28,7 @@ const ModalBanks = (props: Props) => {
         </BankWrapper>
         <BankWrapper id="카카오뱅크" onClick={cardColorHandler}>
           <img src={KakaoBank} alt="도움말" />
-          <span style={{marginLeft:"-6px"}}>카카오뱅크</span>
+          <span style={{ marginLeft: '-6px' }}>카카오뱅크</span>
         </BankWrapper>
         <BankWrapper id="현대카드" onClick={cardColorHandler}>
           <img src={HyundaeBank} alt="도움말" />
