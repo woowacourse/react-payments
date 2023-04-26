@@ -1,6 +1,6 @@
+import { useState } from 'react';
 import type { Meta } from '@storybook/react';
 import CardOwnerName from '../../components/CardAddForm/CardOwnerName/CardOwnerName';
-import { useState } from 'react';
 
 const meta = {
   title: 'Payments/Cards/CardOwnerNameInput',
