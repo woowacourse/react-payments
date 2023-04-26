@@ -11,9 +11,9 @@ export function setData(initId: number) {
 const setCardData = setData(0);
 
 export function getData(): CardProps[] | undefined {
-  const cards = Object.values(localStorage).map((card) => JSON.parse(card));
-  if (cards !== null) {
-    return cards;
+  const data = Object.values(localStorage).map((item) => JSON.parse(item));
+  if (data !== null) {
+    return data;
   }
   return;
 }
