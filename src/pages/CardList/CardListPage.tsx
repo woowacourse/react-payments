@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 
-import type { CardType } from '../type';
-import Card from '../components/Card';
-import Header from '../components/Header';
+import type { CardType } from '../../type';
+import Card from '../../components/Card';
+import Header from '../../components/Header';
 import './CardListPage.css';
-import { fetchLocalStorage } from '../utils/applicationUtil';
+import { fetchLocalStorage } from '../../utils/applicationUtil';
 
 const CardListPage = () => {
   const cardList = fetchLocalStorage('cardList', '[]');
