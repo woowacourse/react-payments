@@ -1,29 +1,47 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { validation } from "../validation/input";
+
+type PrevInputSection = "month" | "year";
 
 export function useInputDate() {
   const [month, setMonth] = useState<string>("");
   const [year, setYear] = useState<string>("");
+  const [prevInputSection, setPrevInputSection] =
+    useState<PrevInputSection | null>(null);
+
+  useEffect(() => {
+    prevInputSection === "year" && changeMonthText();
+  }, [prevInputSection]);
+
+  function changeMonthText() {
+    month.length === 1 && setMonth(`0${month}`);
+  }
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
+
     switch (name) {
       case "month":
-        if (!validation.isCorrectMonth(value)) {
+        setPrevInputSection("month");
+        if (value && !validation.isCorrectMonth(value)) {
           e.target.value = month;
-        } else {
-          setMonth(value);
+          return;
         }
+        setMonth(value);
         break;
+
       case "year":
-        if (!validation.isNumber(value)) {
+        setPrevInputSection("year");
+        if (
+          value &&
+          validation.isValueExist(value) &&
+          !validation.isNumber(value)
+        ) {
           e.target.value = year;
-        } else {
-          setYear(value);
+          return;
         }
+        setYear(value);
     }
-    if (name === "month") setMonth(value);
-    else setYear(value);
   }
 
   return { month, year, handleChange };

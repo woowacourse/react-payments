@@ -5,7 +5,7 @@ export function useInputCode() {
   const [code, setCode] = useState<string>("");
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    if (!validation.isNumber(e.target.value)) {
+    if (e.target.value && !validation.isNumber(e.target.value)) {
       e.target.value = code;
     } else {
       setCode(e.target.value);

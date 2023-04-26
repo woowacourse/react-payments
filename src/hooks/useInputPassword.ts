@@ -9,7 +9,7 @@ export function useInputPassword() {
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
-    if (!validation.isNumber(value)) {
+    if (value && !validation.isNumber(value)) {
       e.target.value = password[name];
     } else {
       setPassword({
