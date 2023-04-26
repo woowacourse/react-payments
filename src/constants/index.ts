@@ -1,15 +1,7 @@
-const CARD_INPUT_MAX_LENGTH: Record<string, number> = {
+const CARD_INPUT_LENGTH: Record<string, number> = {
   cardNumber: 25,
   expiredDate: 7,
   ownerName: 12,
-  cvc: 3,
-  password: 1,
-} as const;
-
-const CARD_INPUT_MIN_LENGTH: Record<string, number> = {
-  cardNumber: 25,
-  expiredDate: 7,
-  ownerName: 10,
   cvc: 3,
   password: 1,
 } as const;
@@ -51,8 +43,7 @@ const REGEX = {
 } as const;
 
 export {
-  CARD_INPUT_MAX_LENGTH,
-  CARD_INPUT_MIN_LENGTH,
+  CARD_INPUT_LENGTH,
   SEPERATED_CARD_NUMBER_LENGTH,
   PASSWORD_DIGIT_INDEX,
   CARD_COLOR,

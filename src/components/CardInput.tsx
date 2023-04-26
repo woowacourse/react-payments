@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { CARD_INPUT_MAX_LENGTH, CARD_INPUT_MIN_LENGTH } from "../constants";
+import { CARD_INPUT_LENGTH } from "../constants";
 
 interface CardInputType extends React.InputHTMLAttributes<HTMLInputElement> {
   id: "cardNumber" | "expiredDate" | "ownerName" | "cvc" | "password";
@@ -16,8 +16,7 @@ const CardInput = (props: CardInputType) => {
       type={props.isSecured ? "password" : "text"}
       autoFocus={props.isAutoFocus}
       required={props.isRequired}
-      maxLength={CARD_INPUT_MAX_LENGTH[props.id]}
-      minLength={CARD_INPUT_MIN_LENGTH[props.id]}
+      maxLength={CARD_INPUT_LENGTH[props.id]}
     />
   );
 };
