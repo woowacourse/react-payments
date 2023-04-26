@@ -1,22 +1,31 @@
-import { BANK_LIST, BankNames } from "../../../../constants/bankList";
+import { BANK_LIST } from '../../../../constants/bankList';
+import { BankNames } from '../../../../types/card.type';
+import * as Styled from './BankListBottomSheetContent.styles';
 
 export interface BankListBottomSheetContentProps {
   onChange: (newBankName: BankNames) => void;
+
+  onSelect: () => void;
 }
 
-const BankListBottomSheetContent = ({
-  onChange,
-}: BankListBottomSheetContentProps) => {
+const BankListBottomSheetContent = ({ onChange, onSelect }: BankListBottomSheetContentProps) => {
+  const handleClick = (bankName: BankNames) => {
+    onChange(bankName);
+    onSelect();
+  };
   return (
-    <>
+    <Styled.BankListBottomSheetContentContainer>
       {BANK_LIST.map((bank) => {
         return (
-          <div key={bank.id} onClick={() => onChange(bank.name)}>
-            <h2>{bank.name}</h2>
-          </div>
+          <Styled.BankItem key={bank.id}>
+            <Styled.BankItemContent onClick={() => handleClick(bank.name)}>
+              <Styled.BankLogo src={bank.imgSrc} alt={bank.name} />
+              <Styled.BankName>{bank.name}</Styled.BankName>
+            </Styled.BankItemContent>
+          </Styled.BankItem>
         );
       })}
-    </>
+    </Styled.BankListBottomSheetContentContainer>
   );
 };
 
