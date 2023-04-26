@@ -12,7 +12,15 @@ export default function MyCardList() {
 
   return (
     <Styled.Root dir='column' align='center'>
-      {registeredCards && registeredCards.map((card, index) => <CardContent key={index} {...card} />)}
+      {registeredCards &&
+        registeredCards.map((card, index) => {
+          return (
+            <>
+              <CardContent key={index} {...card} />
+              <p>{card.cardAlias}</p>
+            </>
+          );
+        })}
       <AddCardButton onClick={() => navigate('/registerCard')} />
     </Styled.Root>
   );
