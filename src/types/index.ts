@@ -4,5 +4,6 @@ export interface CardType {
   ownerName: string;
   cvc?: string;
   password?: string[];
-  color: string;
+  cardCompany: string;
+  name: string;
 }

@@ -1,21 +1,22 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Card from "../components/Card";
-import CardCompany from "../components/CardCompany";
-import CardInputForm from "../components/CardInputForm";
-import BottomSheet from "../components/common/BottomSheet";
-import Header from "../components/common/Header";
-import Page from "../components/common/Page";
 import { Context } from "../context";
 import { ROUTER_PATH } from "../router/path";
-import { CardType } from "../types";
-import { getLocalStorage, setLocalStorage } from "../utils";
-import { getEmptyCard } from "../utils/card";
+import type { CardType } from "../types";
+import { getLocalStorage, setLocalStorage, getEmptyCard } from "../utils";
+import {
+  Page,
+  Header,
+  Card,
+  CardInputForm,
+  BottomSheet,
+  CardCompany,
+} from "../components";
 
 const AddCard = () => {
   const navigate = useNavigate();
-  const { toggleModal } = useContext(Context);
   const [newCard, setNewCard] = useState<CardType>(getEmptyCard());
+  const { toggleModal } = useContext(Context);
 
   const registerCard = () => {
     const cards = getLocalStorage("card");
@@ -35,7 +36,7 @@ const AddCard = () => {
         onSubmit={registerCard}
       />
       <BottomSheet>
-        <CardCompany />
+        <CardCompany setCard={setNewCard} />
       </BottomSheet>
     </Page>
   );

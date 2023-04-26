@@ -1,12 +1,26 @@
+import { Dispatch, SetStateAction, useContext } from "react";
 import styled from "styled-components";
 import { CARD_COMPANY } from "../constants";
+import { Context } from "../context";
+import { CardType } from "../types";
 
-const CardCompany = () => {
+interface CardCompanyType {
+  setCard: Dispatch<SetStateAction<CardType>>;
+}
+
+const CardCompany = ({ setCard }: CardCompanyType) => {
+  const { toggleModal } = useContext(Context);
+
+  const handleCardCompany = (companyName: CardType["cardCompany"]) => {
+    setCard((prev): CardType => ({ ...prev, cardCompany: companyName }));
+    toggleModal();
+  };
+
   return (
     <CardCompanyWrapper>
       {Object.keys(CARD_COMPANY).map((companyName) => (
-        <CardCompanyGroup>
-          <img src={CARD_COMPANY[companyName]} alt="카드사로고" />
+        <CardCompanyGroup onClick={() => handleCardCompany(companyName)}>
+          <img src={CARD_COMPANY[companyName].img} alt="카드사로고" />
           <p>{companyName}</p>
         </CardCompanyGroup>
       ))}

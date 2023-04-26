@@ -1,11 +1,9 @@
-import Header from "../components/common/Header";
-import Page from "../components/common/Page";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Card from "../components/Card";
-import { getLocalStorage } from "../utils";
+import { getLocalStorage } from "../utils/localStorage";
 import { CardType } from "../types";
 import { ROUTER_PATH } from "../router/path";
+import { Page, Header, Card } from "../components";
 
 const MyCard = () => {
   const navigate = useNavigate();

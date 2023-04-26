@@ -1,6 +1,6 @@
 import React, { FormEvent, useState } from "react";
 import styled from "styled-components";
-import CardInput from "./CardInput";
+import { CardInput, Button } from "./index";
 import { CardType } from "../types";
 import { QuestionMark } from "../assets";
 import { PASSWORD_DIGIT_INDEX } from "../constants";
@@ -10,13 +10,10 @@ import {
   getSeperatedExpiredDate,
   getSubCardNumber,
   getSubExpiredDate,
-} from "../utils/card";
-import {
   validateExpiredDate,
   validateNumber,
   validateOwnerName,
-} from "../utils/validation";
-import Button from "./common/Button";
+} from "../utils";
 
 interface CardInputFormType {
   card: CardType;

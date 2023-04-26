@@ -1,10 +1,8 @@
-import Page from "../components/common/Page";
 import styled from "styled-components";
 import { ROUTER_PATH } from "../router/path";
-import Button from "../components/common/Button";
 import { useNavigate } from "react-router-dom";
 import { getEmptyCard } from "../utils/card";
-import Card from "../components/Card";
+import { Button, Card, Page } from "../components";
 
 const NameCard = () => {
   const navigate = useNavigate();

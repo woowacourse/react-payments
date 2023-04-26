@@ -1,10 +1,15 @@
-import { CardType } from "../types";
+export { getLocalStorage, setLocalStorage } from "../utils/localStorage";
+export {
+  getReplacedCardNumber,
+  getSeperatedCardNumber,
+  getSeperatedExpiredDate,
+  getSubCardNumber,
+  getSubExpiredDate,
+  getEmptyCard,
+} from "../utils/card";
 
-export const getLocalStorage = (key: string): CardType[] => {
-  const data = localStorage.getItem(key);
-  return data ? JSON.parse(data) : [];
-};
-
-export const setLocalStorage = (key: string, data: CardType[]) => {
-  localStorage.setItem(key, JSON.stringify(data));
-};
+export {
+  validateExpiredDate,
+  validateNumber,
+  validateOwnerName,
+} from "../utils/validation";

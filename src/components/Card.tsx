@@ -1,17 +1,26 @@
 import { useMemo } from "react";
 import styled from "styled-components";
 import { IcChip } from "../assets";
+import { CARD_COMPANY } from "../constants";
 import { CardType } from "../types";
 import { getCardNumberArray } from "../utils/card";
 
-const Card = ({ cardNumber, color, ownerName, expiredDate }: CardType) => {
+const Card = ({
+  cardNumber,
+  ownerName,
+  expiredDate,
+  cardCompany,
+}: CardType) => {
   const cardNumberArray = useMemo(
     () => getCardNumberArray(cardNumber),
     [cardNumber]
   );
 
+  const test = cardCompany ? cardCompany : "BC카드";
+
   return (
-    <CardWrapper style={{ background: color }}>
+    <CardWrapper style={{ background: CARD_COMPANY[test].background }}>
+      <p style={{ color: CARD_COMPANY[test].color }}>{cardCompany}</p>
       <img src={IcChip} alt="ic-chip" />
       <CardInfoWrapper>
         <UpInfoWrapper>
@@ -38,10 +47,16 @@ const CardWrapper = styled.div`
 
   box-sizing: border-box;
 
-  padding: 40px 14px 0 14px;
+  padding: 15px 14px 0 14px;
   border-radius: 5px;
 
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+
+  & > p {
+    font-weight: 500;
+    font-size: 12px;
+    margin-bottom: 17px;
+  }
 `;
 
 const CardInfoWrapper = styled.div`
