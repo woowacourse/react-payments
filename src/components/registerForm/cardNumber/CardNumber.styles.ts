@@ -17,7 +17,7 @@ export const Styled = {
   `,
 
   CardNumberInput: css`
-    width: 60px;
+    width: 70px;
     letter-spacing: 3px;
     text-align: center;
     font-size: 18px;
