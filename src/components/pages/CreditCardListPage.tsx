@@ -27,6 +27,7 @@ export const CreditCardListPage = () => {
             name={creditCard.name}
             cardNumbers={creditCard.cardNumbers}
             expirationDate={creditCard.expirationDate}
+            cardCompany={creditCard.cardCompany}
           />
         ))}
 

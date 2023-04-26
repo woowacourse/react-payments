@@ -5,7 +5,7 @@ export type Month = string;
 export type Year = string;
 
 export type CreditCard = {
-  cardCompany?: CardCompanyButtonProps['cardCompany'];
+  cardCompany: CardCompanyButtonProps['cardCompany'] | '카드사';
   name: string;
   cardNumbers: string;
   expirationDate: [Month, Year];

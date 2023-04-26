@@ -54,7 +54,7 @@ const NextButton = styled.button`
 
 export const NewCreditCardPage = () => {
   const [newCard, setNewCard] = useState<CreditCard>({
-    cardCompany: undefined,
+    cardCompany: '카드사',
     cardNumbers: '',
     expirationDate: ['', ''],
     name: '',
@@ -71,7 +71,7 @@ export const NewCreditCardPage = () => {
 
   const { addCreditCard } = usePayments();
 
-  const { isModalOpen, closeModal } = useModal(true);
+  const { isModalOpen, openModal, closeModal } = useModal(true);
 
   const setNewCardField = <Field extends keyof CreditCard>(
     field: Field,
@@ -120,9 +120,11 @@ export const NewCreditCardPage = () => {
       <Page.Header leading={<BackButton />}>카드추가</Page.Header>
       <Content>
         <CreditCardView
+          cardCompany={newCard.cardCompany}
           name={newCard.name}
           cardNumbers={newCard.cardNumbers}
           expirationDate={newCard.expirationDate}
+          openModal={openModal}
         />
 
         <FormGroup>
