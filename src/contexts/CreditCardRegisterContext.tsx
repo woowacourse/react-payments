@@ -2,6 +2,7 @@
 import { PropsWithChildren, createContext, useState } from 'react';
 
 import creditCard from '@Domains/creditCard';
+import creditCardValidation from '@Domains/creditCard/creditCardValidation';
 
 import * as Type from '@Types/index';
 
@@ -43,7 +44,7 @@ export const CreditCardRegisterContext = createContext({
 
 function CreditCardRegisterProvider({ children }: PropsWithChildren) {
   const { numberValidationFns, expiryValidationFns, ownerValidationFns, cvcValidationFns, passwordValidationFns } =
-    creditCard.getValidationFns();
+    creditCardValidation.getValidationFns();
 
   const [company, setCompany] = useState<Type.CardCompanies | undefined>(undefined);
   const [numbers, setNumbers, numbersErrorMessage] = useInput<string>('', numberValidationFns);

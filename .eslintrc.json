@@ -61,7 +61,7 @@
             "position": "after"
           },
           {
-            "pattern": "@Domains/*",
+            "pattern": "@Domains/**/*",
             "group": "internal",
             "position": "after"
           },

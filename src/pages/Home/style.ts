@@ -10,7 +10,7 @@ export const CreditCardList = styled.ul`
 
 export const CreditCardItem = styled.li`
   display: grid;
-  row-gap: 20px;
+  row-gap: 10px;
   justify-items: center;
 `;
 

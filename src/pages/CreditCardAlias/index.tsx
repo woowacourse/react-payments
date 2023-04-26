@@ -7,7 +7,7 @@ import Header from '@Components/Header';
 import Input from '@Components/Input';
 import InputLabel from '@Components/InputLabel';
 
-import creditCardStorage from '@Domains/creditCardStorage';
+import creditCardStorage from '@Domains/creditCard/creditCardStorage';
 
 import * as Type from '@Types/index';
 

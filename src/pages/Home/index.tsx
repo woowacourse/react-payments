@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import CreditCard from '@Components/CreditCard';
 import Header from '@Components/Header';
 
-import creditCardStorage from '@Domains/creditCardStorage';
+import creditCardStorage from '@Domains/creditCard/creditCardStorage';
 
 import * as Type from '@Types/index';
 
