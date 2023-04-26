@@ -9,7 +9,7 @@ export interface InputProps {
   placeholder?: string;
   error?: { isValid: boolean; errorMessage: string };
   handleInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleOutFocus: (e: React.FocusEvent<HTMLInputElement>) => void;
+  handleOutFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(

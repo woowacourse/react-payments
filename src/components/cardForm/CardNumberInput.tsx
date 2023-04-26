@@ -58,7 +58,7 @@ export const CardNumberInput = ({
       moveFocusToNext(index, value);
     };
 
-  const handleOutFocusEvent = () => {
+  const handleOutFocusEvent = (e: React.FocusEvent<HTMLInputElement>) => {
     const validity = validateNumbersInput(numbers);
     setIsValid(validity);
   };
@@ -76,7 +76,6 @@ export const CardNumberInput = ({
           type="text"
           label="cardNumber1"
           handleInput={handleInput(0)}
-          handleOutFocus={() => {}}
           ref={allRefs[0]}
         />
         {[2, 3, 4].map((ind) => (
@@ -86,7 +85,7 @@ export const CardNumberInput = ({
             type={ind < 3 ? "text" : "password"}
             label={`cardNumber${ind}`}
             handleInput={handleInput(ind - 1)}
-            handleOutFocus={handleOutFocusEvent}
+            handleOutFocus={ind === 4 ? handleOutFocusEvent : () => {}}
             ref={allRefs[ind - 1]}
           />
         ))}

@@ -59,7 +59,6 @@ export const PasswordInput = ({
         <Input
           {...passwordInfo}
           handleInput={handleInput(0)}
-          handleOutFocus={handleOutFocusEvent}
           label="password1"
           error={{
             isValid: isValid,
