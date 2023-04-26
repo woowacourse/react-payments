@@ -12,6 +12,7 @@ import { Container } from "../../components/common";
 import { useState } from "react";
 import {
   Card,
+  CardCompany,
   CardExpirationDate,
   CardExpirationDateKey,
   CardNumber,
@@ -22,6 +23,8 @@ import {
 import { useNavigate } from "react-router-dom";
 import { isFulfilledObject, isFulfilledString, isValidMonth } from "../../validator/Validator";
 import useModal from "../../hooks/useModal";
+import CardCompanyButtonList from "../../components/CardCompanyButtonList/CardCompanyButtonList";
+import CARD_COMPANIES from "../../constants/cardCompanies";
 
 type AddCardPageProps = {
   onSubmit: (card: Card) => void;
@@ -47,6 +50,8 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
     first: "",
     second: "",
   });
+
+  const [cardCompany, setCardCompany] = useState<Card["cardCompany"]>("BC");
 
   const { isModalOpen, modalClose, modalOpen } = useModal();
 
@@ -74,6 +79,12 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
     setPassword({ ...password, [targetDigit]: pw });
   };
 
+  const handleCardCompany = (company: CardCompany) => {
+    setCardCompany(company);
+
+    modalClose();
+  };
+
   const addCard = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -89,6 +100,7 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
       ownerName,
       securityCode,
       password,
+      cardCompany,
     };
 
     onSubmit(card);
@@ -105,7 +117,7 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
   return (
     <Container>
       <AppBar title={"카드 추가"} leftChild={<Link to="/">〈</Link>} />
-      <CardPreview card={{ cardNumber, expirationDate, ownerName }} />
+      <CardPreview card={{ cardNumber, expirationDate, ownerName, cardCompany }} onClick={modalOpen} />
       <Form onSubmit={addCard}>
         <CardNumberInput cardNumber={cardNumber} onChange={handleCardNumber} />
         <CardExpirationDateInput expirationDate={expirationDate} onChange={handleExpirationDate} />
@@ -118,7 +130,12 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
           </Button>
         </ButtonBox>
       </Form>
-      <Modal isOpen={isModalOpen}></Modal>
+      <Modal isOpen={isModalOpen}>
+        <CardCompanyButtonList
+          cardCompanies={Object.keys(CARD_COMPANIES) as CardCompany[]}
+          handleCardCompany={handleCardCompany}
+        />
+      </Modal>
     </Container>
   );
 };

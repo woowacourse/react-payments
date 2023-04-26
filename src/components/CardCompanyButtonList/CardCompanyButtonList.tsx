@@ -4,15 +4,16 @@ import CardCompanyButton from "../CardCompanyButton/CardCompanyButton";
 
 type CardCompanyButtonListProps = {
   cardCompanies: CardCompany[];
+  handleCardCompany: (company: CardCompany) => void;
 };
 
-const CardCompanyButtonList = ({ cardCompanies }: CardCompanyButtonListProps) => {
+const CardCompanyButtonList = ({ cardCompanies, handleCardCompany }: CardCompanyButtonListProps) => {
   return (
     <CardCompanyButtonContainer>
       <Instruction>카드사 선택</Instruction>
       <CardCompanyButtonWrapper>
         {cardCompanies.map((company) => (
-          <CardCompanyButton cardCompany={company} />
+          <CardCompanyButton key={company} cardCompany={company} onClick={() => handleCardCompany(company)} />
         ))}
       </CardCompanyButtonWrapper>
     </CardCompanyButtonContainer>

@@ -4,11 +4,12 @@ import CARD_COMPANIES from "../../constants/cardCompanies";
 
 type CardCompanyButtonProps = {
   cardCompany: CardCompany;
+  onClick: () => void;
 };
 
-const CardCompanyButton = ({ cardCompany }: CardCompanyButtonProps) => {
+const CardCompanyButton = ({ cardCompany, onClick }: CardCompanyButtonProps) => {
   return (
-    <Button type="button">
+    <Button type="button" onClick={onClick}>
       <CompanyLogo src={CARD_COMPANIES[cardCompany].logoFilePath} alt="card-company" />
       <CompanyName>{CARD_COMPANIES[cardCompany].koreanName}</CompanyName>
     </Button>

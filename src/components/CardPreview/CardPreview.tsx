@@ -1,17 +1,20 @@
 import styled from "styled-components";
 import { Card } from "../../types";
+import CARD_COMPANIES from "../../constants/cardCompanies";
 
-type PreviewCard = Pick<Card, "cardNumber" | "ownerName" | "expirationDate">;
+type PreviewCard = Pick<Card, "cardNumber" | "ownerName" | "expirationDate" | "cardCompany">;
 
 type CardPreviewProps = {
   card: PreviewCard;
+  onClick?: () => void;
 };
 
-const CardPreview = ({ card }: CardPreviewProps) => {
-  const { cardNumber, ownerName, expirationDate } = card;
+const CardPreview = ({ card, onClick }: CardPreviewProps) => {
+  const { cardNumber, ownerName, expirationDate, cardCompany } = card;
 
   return (
-    <CardLayout>
+    <CardLayout onClick={onClick}>
+      <CardCompany>{CARD_COMPANIES[cardCompany].koreanName}</CardCompany>
       <ICChip width={31} height={24} viewBox="0 0 31 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect
           x={0.375}
@@ -86,6 +89,13 @@ const CardLayout = styled.li`
   &:hover {
     transform: translate(3px, 3px);
   }
+`;
+
+const CardCompany = styled.span`
+  position: absolute;
+
+  top: 10px;
+  left: 14px;
 `;
 
 const ICChip = styled.svg`
