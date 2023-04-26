@@ -1,0 +1,33 @@
+:root {
+  --rainbow-gradient: linear-gradient(-142deg, #81efff 0%, #b394ff 50%, #fd7ca9 100%);
+  --light-navy: #b394ff;
+}
+
+.button {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 3px;
+  top: 90px;
+  left: 215px;
+  width: 85px;
+  height: 35px;
+  border: none;
+  background: var(--rainbow-gradient);
+  box-shadow: 0 0 20px var(--light-navy);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+.button:hover {
+  transform: scale(105%);
+}
+
+.title {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 35px;
+}

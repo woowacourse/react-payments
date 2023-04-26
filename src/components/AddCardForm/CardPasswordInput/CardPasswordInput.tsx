@@ -1,19 +1,18 @@
-import { useState, useRef, useEffect } from 'react';
-import useValidator from '../../../hooks/useValidator';
+import { useContext, useRef } from 'react';
 import { checkValidPassword } from '../validators';
+import { CardInfoContext } from '../../../CardInfoProvider';
 import LabeledInput from '../LabeledInput/LabeledInput';
 import Input from '../../common/Input/Input';
 import MockPasswordInput from './MockPasswordInput/MockPasswordInput';
-import { FormInputValueType } from '../../../types';
+import useInputUpdater from '../../../hooks/useInputUpdater';
 
-type CardPasswordInputProps = {
-  updateCardPassword: (cardNumber: FormInputValueType) => void;
-};
+const CardPasswordInput = () => {
+  const { setCardPassword } = useContext(CardInfoContext);
+  const { inputValue, errorMessage, setInputValueWithValidation } = useInputUpdater({
+    validator: checkValidPassword,
+    contextSetter: setCardPassword,
+  });
 
-const CardPasswordInput = ({ updateCardPassword }: CardPasswordInputProps) => {
-  const [firstDigit, setFirstDigit] = useState('');
-  const [secondDigit, setSecondDigit] = useState('');
-  const { value, isValid, errorMessage, setValueWithValidation } = useValidator(checkValidPassword);
   const secondDigitRef = useRef<HTMLInputElement>(null);
 
   const updateDigit = (index: number, event: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,29 +23,18 @@ const CardPasswordInput = ({ updateCardPassword }: CardPasswordInputProps) => {
     }
 
     if (index === 1) {
-      setFirstDigit(() => {
-        setValueWithValidation(`${digit}${secondDigit}`);
-        return digit;
-      });
-
+      setInputValueWithValidation(`${digit}${inputValue[1] ?? ''}`);
       return;
     }
 
-    setSecondDigit(() => {
-      setValueWithValidation(`${firstDigit}${digit}`);
-      return digit;
-    });
+    setInputValueWithValidation(`${inputValue[0] ?? ''}${digit}`);
   };
-
-  useEffect(() => {
-    updateCardPassword({ isValid: isValid, value: value });
-  }, [value, isValid, updateCardPassword]);
 
   return (
     <LabeledInput title="카드 비밀번호" errorMessage={errorMessage}>
       <Input
         width="15%"
-        value={firstDigit}
+        value={inputValue[0] ?? ''}
         maxLength={1}
         onChange={event => updateDigit(1, event)}
         required={true}
@@ -54,7 +42,7 @@ const CardPasswordInput = ({ updateCardPassword }: CardPasswordInputProps) => {
       />
       <Input
         width="15%"
-        value={secondDigit}
+        value={inputValue[1] ?? ''}
         maxLength={1}
         onChange={event => updateDigit(2, event)}
         ref={secondDigitRef}

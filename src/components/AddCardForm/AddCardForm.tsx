@@ -1,34 +1,26 @@
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import type { CardInfo } from '../../types';
+import { CardInfoContext } from '../../CardInfoProvider';
 import styles from './AddCardForm.module.css';
 import CardNumberInput from './CardNumberInput/CardNumberInput';
 import ExpirationDateInput from './ExpirationDateInput/ExpirationDateInput';
 import CardOwnerName from './CardOwnerName/CardOwnerName';
 import CardSecurityCodeInput from './CardSecurityCodeInput/CardSecurityCodeInput';
 import CardPasswordInput from './CardPasswordInput/CardPasswordInput';
-import { useNavigate } from 'react-router-dom';
-import type { CardInfo } from '../../types';
 import FooterButton from '../common/FooterButton/FooterButton';
-import type { FormInputValueType } from '../../types';
 
 type AddCardFormProps = {
-  updateCardNumber: (cardNumber: FormInputValueType) => void;
-  updateExpirationDate: (expirationDate: FormInputValueType) => void;
-  updateCardOwnerName: (cardOwnerName: FormInputValueType) => void;
-  updateCardSecurityCode: (securityCode: FormInputValueType) => void;
-  updateCardPassword: (password: FormInputValueType) => void;
   registerNewCard: (cardInfo: CardInfo) => void;
-  isUnlocked: boolean;
 };
 
-const AddCardForm = ({
-  updateCardNumber,
-  updateExpirationDate,
-  updateCardOwnerName,
-  updateCardSecurityCode,
-  updateCardPassword,
-  registerNewCard,
-  isUnlocked,
-}: AddCardFormProps) => {
+const AddCardForm = ({ registerNewCard }: AddCardFormProps) => {
   const navigate = useNavigate();
+  const { cardNumber, cardOwnerName, cardPassword, cardSecurityCode, cardExpirationDate } = useContext(CardInfoContext);
+
+  const isNextButtonUnlocked = [cardNumber, cardOwnerName, cardPassword, cardSecurityCode, cardExpirationDate].every(
+    currentInputValue => currentInputValue.isValid
+  );
 
   const handleCardInfo = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -55,18 +47,17 @@ const AddCardForm = ({
     };
 
     registerNewCard(cardInfo);
-
     navigate('/');
   };
 
   return (
     <form onSubmit={handleCardInfo} className={styles.container}>
-      <CardNumberInput updateCardNumber={updateCardNumber} />
-      <ExpirationDateInput updateExpirationDate={updateExpirationDate} />
-      <CardOwnerName updateCardOwnerName={updateCardOwnerName} />
-      <CardSecurityCodeInput updateCardSecurityCode={updateCardSecurityCode} />
-      <CardPasswordInput updateCardPassword={updateCardPassword} />
-      <FooterButton title="다음" disabled={!isUnlocked} />
+      <CardNumberInput />
+      <ExpirationDateInput />
+      <CardOwnerName />
+      <CardSecurityCodeInput />
+      <CardPasswordInput />
+      <FooterButton title="다음" disabled={!isNextButtonUnlocked} />
     </form>
   );
 };

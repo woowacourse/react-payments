@@ -1,37 +1,25 @@
-import { useEffect } from 'react';
-
 import { addSlashInExpirationDate } from '../replacers';
 import { checkValidYearMonth } from '../validators';
-
-import type { FormInputValueType } from '../../../types';
-import useValidator from '../../../hooks/useValidator';
+import { useContext } from 'react';
+import { CardInfoContext } from '../../../CardInfoProvider';
 import LabeledInput from '../LabeledInput/LabeledInput';
 import Input from '../../common/Input/Input';
+import useInputUpdater from '../../../hooks/useInputUpdater';
 
-type ExpirationDateInputProps = {
-  updateExpirationDate: (expirationDate: FormInputValueType) => void;
-};
-
-const ExpirationDateInput = ({ updateExpirationDate }: ExpirationDateInputProps) => {
-  const { value, isValid, errorMessage, setValueWithValidation } = useValidator(checkValidYearMonth);
-
-  const setExpirationDate = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const expirationDate = event.target.value;
-    const expirationDateWithSlash = addSlashInExpirationDate(expirationDate);
-
-    setValueWithValidation(expirationDateWithSlash);
-  };
-
-  useEffect(() => {
-    updateExpirationDate({ isValid: isValid, value: value });
-  }, [value, isValid, updateExpirationDate]);
+const ExpirationDateInput = () => {
+  const { setCardExpirationDate } = useContext(CardInfoContext);
+  const { inputValue, errorMessage, setInputValueWithValidation } = useInputUpdater({
+    trimmer: addSlashInExpirationDate,
+    validator: checkValidYearMonth,
+    contextSetter: setCardExpirationDate,
+  });
 
   return (
     <LabeledInput title="만료일" errorMessage={errorMessage}>
       <Input
         width="40%"
-        onChange={setExpirationDate}
-        value={value}
+        onChange={setInputValueWithValidation}
+        value={inputValue}
         maxLength={5}
         name="expirationDate"
         placeholder="MM/YY"
