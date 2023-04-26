@@ -111,21 +111,26 @@ interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
 function Label(props: PropsWithChildren<LabelProps>) {
   const { asChild = false, children, ...restProps } = props;
   const { itemMap } = useInputItemsContext();
+  const [fieldId, setFieldId] = useState('');
   const childrenArray = Children.toArray(children);
   const child = childrenArray[0];
-  const fieldItemId = itemMap.get('field')?.ref.current?.id;
 
-  if (asChild) validateAsChild(childrenArray);
+  useEffect(() => {
+    const fieldItem = itemMap.get('field');
+    if (fieldItem && fieldItem.ref.current) {
+      setFieldId(fieldItem.ref.current.id);
+    }
+  }, [itemMap]);
 
   if (asChild && isValidElement<{ htmlFor: string }>(child)) {
     return cloneElement(child, {
       ...restProps,
-      htmlFor: fieldItemId,
+      htmlFor: fieldId,
     });
   }
 
   return (
-    <label {...restProps} htmlFor={fieldItemId}>
+    <label {...restProps} htmlFor={fieldId}>
       {children}
     </label>
   );
