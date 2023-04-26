@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE } from "../constants/errors";
+import { getCurrentYear } from "../utils/date";
 
 const REGEX = Object.freeze({
   NUMBER: /^[0-9]+$/,
@@ -7,6 +7,10 @@ const REGEX = Object.freeze({
 });
 
 export const validation = {
+  isValueExist(input: string) {
+    return input !== "";
+  },
+
   month(input: string) {
     validation.isNumber(input);
     validation.isCorrectMonth(input);
@@ -28,6 +32,13 @@ export const validation = {
 
   isCorrectMonth(input: string) {
     if (!REGEX.MONTH.test(input)) {
+      return false;
+    }
+    return true;
+  },
+
+  isCorrectYear(input: string) {
+    if (getCurrentYear() > Number(input)) {
       return false;
     }
     return true;
