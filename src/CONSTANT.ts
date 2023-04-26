@@ -16,3 +16,9 @@ export const INPUT_STATUS = {
 export const GUIDE_MESSAGE = {
   SECURITY_CODE: "cvc/cvv번호는 카드 뒷면에 기재되어 있는 숫자 3자리입니다",
 };
+
+export const REGULAR_EXPRESSION = {
+  ONE_NUMBER: /^\d{1}$/,
+  SPACE_OVER_TWO: /\s{2,}/,
+  CAPITAL_LETTER_OR_SPACE: /^[A-Z\s]+$/,
+};

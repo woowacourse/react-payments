@@ -1,5 +1,6 @@
-import { validateCardOwner } from "./validation/cardOwner";
-import { validateNumber } from "./validation/number";
+import { REGULAR_EXPRESSION } from "../CONSTANT";
+import { validateCardOwner } from "../validation/cardOwner";
+import { validateNumber } from "../validation/number";
 
 export const makeAppropriateNumber = (userInput: string) => {
   if (userInput === "") return "";
@@ -26,7 +27,7 @@ export const makeAppropriateName = (userInput: string) => {
 
   return userInput
     .toUpperCase()
-    .split(/\s{2,}/)
+    .split(REGULAR_EXPRESSION.SPACE_OVER_TWO)
     .join("")
     .split("")
     .filter(validateCardOwner)

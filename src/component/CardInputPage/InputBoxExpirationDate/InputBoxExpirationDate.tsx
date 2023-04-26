@@ -4,7 +4,7 @@ import Input from "../../common/Input";
 import "./inputBoxExpirationDate.css";
 import { CARD_ERROR_MESSAGE } from "../../../CONSTANT";
 import { validateExpirationDate } from "../../../validation/ExpirationDate";
-import { makeAppropriateExpirationDate } from "../../../trans";
+import { makeAppropriateExpirationDate } from "../../../util/trans";
 
 interface InputBoxExpirationDateProps {
   changeCardExpirationDateStatus: (

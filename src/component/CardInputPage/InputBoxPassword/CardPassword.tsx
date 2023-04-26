@@ -2,7 +2,7 @@ import { useState, ChangeEvent } from "react";
 import Input from "../../common/Input";
 
 import "./cardPassword.css";
-import { makeAppropriatePassword } from "../../../trans";
+import { makeAppropriatePassword } from "../../../util/trans";
 import { nowStatus } from "../../../type";
 
 interface CardPasswordProps {

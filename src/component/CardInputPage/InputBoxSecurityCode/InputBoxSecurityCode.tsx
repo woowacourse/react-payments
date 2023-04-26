@@ -3,7 +3,7 @@ import Input from "../../common/Input";
 
 import "./inputBoxSecurityCode.css";
 import { CARD_ERROR_MESSAGE, GUIDE_MESSAGE } from "../../../CONSTANT";
-import { makeAppropriateSecurityCode } from "../../../trans";
+import { makeAppropriateSecurityCode } from "../../../util/trans";
 
 interface InputBoxSecurityProps {
   changeSecurityCodeStatus: (

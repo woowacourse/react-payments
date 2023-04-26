@@ -2,7 +2,7 @@ import "./cardNumber.css";
 
 import { ChangeEvent, useState } from "react";
 import Input from "../../common/Input";
-import { makeAppropriateNumber } from "../../../trans";
+import { makeAppropriateNumber } from "../../../util/trans";
 import { nowStatus } from "../../../type";
 
 interface CardNumberProps {

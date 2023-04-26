@@ -3,7 +3,7 @@ import "./inputBoxOwner.css";
 import { useState, ChangeEvent } from "react";
 import Input from "../../common/Input";
 import { CARD_ERROR_MESSAGE } from "../../../CONSTANT";
-import { makeAppropriateName } from "../../../trans";
+import { makeAppropriateName } from "../../../util/trans";
 
 interface InputBoxOwnerProps {
   changeCardOwnerStatus: (key: "isComplete" | "userInput", value: any) => void;
