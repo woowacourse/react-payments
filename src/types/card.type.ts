@@ -1,3 +1,5 @@
+import { BANK_LIST } from "../constants/bankList";
+
 export interface CardNumber {
   first: string;
   second: string;
@@ -19,10 +21,13 @@ export interface Password {
   passwordSecondDigit: string;
 }
 
+export type BankNames = (typeof BANK_LIST)[number]["name"];
+
 export interface CardRegisterInfo {
   cardNumber: CardNumber;
   expirationDate: ExpirationDate;
   holderName: HolderName;
   cvc: CVC;
   password: Password;
+  bankName: BankNames;
 }
