@@ -23,27 +23,29 @@ export function InputBox({ id, inputs }: InputBoxProps) {
     <_InputContainer>
       <Label htmlFor={`${id}`}>{LABEL[`${id}`]}</Label>
       <_InputWithErrorMessage>
-        {inputs.map(({ type, value, handleChange, required, error }, index) => (
-          <>
-            <_InputWrapper>
-              <div>{id === 'USERNAME' ? `${value.length} / 30` : ''}</div>
-              <Input
-                id={`${id}${index}`}
-                name={`${id}${index}`}
-                type={type}
-                value={value}
-                onChange={handleChange}
-                required={required}
-                placeholder={PLACEHOLDER[matchKeyWithId(`${id}${index}`)]}
-                maxLength={MAX_LENGTH[`${id}`]}
-                size={SIZE_STYLE[`${id}`]}
-              />
-              <ErrorMessage>
-                {error && ERROR_MESSAGE[matchKeyWithId(`${id}${index}`)]}
-              </ErrorMessage>
-            </_InputWrapper>
-          </>
-        ))}
+        {inputs.map(
+          ({ type, value, handleChange, required, isError }, index) => (
+            <>
+              <_InputWrapper>
+                <div>{id === 'USERNAME' ? `${value.length} / 30` : ''}</div>
+                <Input
+                  id={`${id}${index}`}
+                  name={`${id}${index}`}
+                  type={type}
+                  value={value}
+                  onChange={handleChange}
+                  required={required}
+                  placeholder={PLACEHOLDER[matchKeyWithId(`${id}${index}`)]}
+                  maxLength={MAX_LENGTH[`${id}`]}
+                  size={SIZE_STYLE[`${id}`]}
+                />
+                <ErrorMessage>
+                  {isError && ERROR_MESSAGE[matchKeyWithId(`${id}${index}`)]}
+                </ErrorMessage>
+              </_InputWrapper>
+            </>
+          )
+        )}
       </_InputWithErrorMessage>
     </_InputContainer>
   );

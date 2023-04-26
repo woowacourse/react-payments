@@ -5,7 +5,7 @@ export type LabelOption = keyof typeof LABEL;
 export interface InputInfo {
   value: any;
   type: string;
-  error: boolean;
+  isError: boolean;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void | undefined;
   required?: boolean;
   regexp: RegExp;
