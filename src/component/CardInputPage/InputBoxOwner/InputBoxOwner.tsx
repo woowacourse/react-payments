@@ -12,7 +12,7 @@ interface InputBoxOwnerProps {
 export default function InputBoxOwner(props: InputBoxOwnerProps) {
   const { changeCardOwnerStatus } = props;
 
-  const [isError, setIsError] = useState(false);
+  const [haveError, setHaveError] = useState(false);
   const [name, setName] = useState("");
 
   const changeName = (e: ChangeEvent<HTMLInputElement>) => {
@@ -20,10 +20,10 @@ export default function InputBoxOwner(props: InputBoxOwnerProps) {
     const appropriateName = makeAppropriateName(userInputName);
 
     if (userInputName !== appropriateName) {
-      setIsError(true);
+      setHaveError(true);
       changeCardOwnerStatus("isComplete", false);
     } else {
-      setIsError(false);
+      setHaveError(false);
       changeCardOwnerStatus("isComplete", true);
     }
 
@@ -45,7 +45,7 @@ export default function InputBoxOwner(props: InputBoxOwnerProps) {
         value={name}
       />
       <p className="error-message">
-        {isError && CARD_ERROR_MESSAGE.INPUT_CARD_OWNER}
+        {haveError && CARD_ERROR_MESSAGE.INPUT_CARD_OWNER}
       </p>
     </div>
   );

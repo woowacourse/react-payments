@@ -18,7 +18,7 @@ export default function InputBoxExpirationDate(
 ) {
   const { changeCardExpirationDateStatus } = props;
 
-  const [isError, setIsError] = useState(false);
+  const [haveError, setHaveError] = useState(false);
   const [expirationDate, setExpirationDate] = useState("");
 
   const changeExpirationDate = (e: ChangeEvent<HTMLInputElement>) => {
@@ -28,14 +28,14 @@ export default function InputBoxExpirationDate(
     );
 
     if (!validateExpirationDate(appropriateExpirationDate)) {
-      setIsError(true);
+      setHaveError(true);
       changeCardExpirationDateStatus("isComplete", false);
     } else if (appropriateExpirationDate.length === 5) {
-      setIsError(false);
+      setHaveError(false);
       changeCardExpirationDateStatus("isComplete", true);
       changeCardExpirationDateStatus("userInput", appropriateExpirationDate);
     } else {
-      setIsError(false);
+      setHaveError(false);
       changeCardExpirationDateStatus("isComplete", false);
     }
 
@@ -55,7 +55,7 @@ export default function InputBoxExpirationDate(
         value={expirationDate}
       />
       <p className="error-message">
-        {isError && CARD_ERROR_MESSAGE.INPUT_CARD_EXPIRATION_DATE}
+        {haveError && CARD_ERROR_MESSAGE.INPUT_CARD_EXPIRATION_DATE}
       </p>
     </div>
   );

@@ -15,7 +15,7 @@ interface InputBoxSecurityProps {
 export default function InputBoxSecurityCode(props: InputBoxSecurityProps) {
   const { changeSecurityCodeStatus } = props;
 
-  const [isError, setIsError] = useState(false);
+  const [haveError, setHaveError] = useState(false);
   const [securityCode, setSecurityCode] = useState("");
 
   const changeSecurityCode = (e: ChangeEvent<HTMLInputElement>) => {
@@ -24,10 +24,10 @@ export default function InputBoxSecurityCode(props: InputBoxSecurityProps) {
       makeAppropriateSecurityCode(userSecurityCode);
 
     if (userSecurityCode !== appropriateSecurityCode) {
-      setIsError(true);
+      setHaveError(true);
       changeSecurityCodeStatus("isComplete", false);
     } else {
-      setIsError(false);
+      setHaveError(false);
       changeSecurityCodeStatus("isComplete", true);
       changeSecurityCodeStatus("userInput", appropriateSecurityCode);
     }
@@ -50,7 +50,7 @@ export default function InputBoxSecurityCode(props: InputBoxSecurityProps) {
         ?
       </button>
       <p className="error-message">
-        {isError && CARD_ERROR_MESSAGE.INPUT_CARD_SECURITY}
+        {haveError && CARD_ERROR_MESSAGE.INPUT_CARD_SECURITY}
       </p>
     </div>
   );
