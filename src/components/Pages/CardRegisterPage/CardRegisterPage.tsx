@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { CardInfo, CardNumbers, ExpirationDate, OwnerName, Password } from '../../../types/state';
+import { CardNumbers, ExpirationDate, OwnerName, Password } from '../../../types/state';
 import { COLOR } from '../../../constants/cardInfo';
 
 import * as styled from './CardRegisterPage.styled';
@@ -14,7 +14,7 @@ import PasswordInputBox from '../../PasswordInputBox/PasswordInputBox';
 import CardInfoListContext from '../../../contexts/CardInfoListContext';
 
 const CardRegisterPage = () => {
-  const { setCardInfoList } = useContext(CardInfoListContext);
+  const { cardInfoList, setCardInfoList } = useContext(CardInfoListContext);
 
   const [cardNumbers, setCardNumbers] = useState<CardNumbers>({
     first: '',
@@ -36,10 +36,8 @@ const CardRegisterPage = () => {
   const navigation = useNavigate();
 
   const handleOnClickSubmitButton = () => {
-    setCardInfoList((prev: CardInfo[]) => [
-      ...prev,
-      { cardNumbers, expirationDate, ownerName, securityCode, password },
-    ]);
+    setCardInfoList([...cardInfoList, { cardNumbers, expirationDate, ownerName, securityCode, password }]);
+
     navigation('/');
   };
 
