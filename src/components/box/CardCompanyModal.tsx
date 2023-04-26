@@ -9,7 +9,7 @@ interface Props {
 }
 
 const CardCompanyModal = ({ closeModal }: Props) => {
-  const [, dispatch] = useCardForm();
+  const [{ cardCompany }, dispatch] = useCardForm();
 
   const onClickCardCompanyItem = (cardCompany: CardType['cardCompany']) => () => {
     dispatch({ type: 'SET_VALUE', key: 'cardCompany', value: cardCompany });
@@ -18,7 +18,7 @@ const CardCompanyModal = ({ closeModal }: Props) => {
 
   return (
     <>
-      <ModalBackdrop />
+      <ModalBackdrop onClick={cardCompany ? closeModal : undefined} />
       <ModalWrapper>
         {CARD_COMPANY_MODAL_MATRIX.map((row) => (
           <CardCompanyRow>
