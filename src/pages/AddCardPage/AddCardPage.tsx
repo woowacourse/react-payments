@@ -8,7 +8,7 @@ import CardPasswordInput from "../../components/CardPasswordInput/CardPasswordIn
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Container } from "../../components/common";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Card, CardExpirationDate, CardNumber, CardPassword } from "../../types";
 import { useNavigate } from "react-router-dom";
 import {
@@ -23,12 +23,11 @@ import {
 import { PAGE } from "../../constant";
 import Modal from "../../components/Modal/Modal";
 import CardCompanyIcon, { CARD_LOGO } from "../../components/CardCompanyIcon/CardCompanyIcon";
+import { GlobalContext } from "../../context/GlobalProvider";
 
-type AddCardPageProps = {
-  addCard: (card: Card) => void;
-};
+const AddCardPage = () => {
+  const { addCard } = useContext(GlobalContext);
 
-const AddCardPage = ({ addCard }: AddCardPageProps) => {
   const [modalOpen, setModalOpen] = useState(true);
   const [cardCompany, setCardCompany] = useState<keyof typeof CARD_LOGO>();
 

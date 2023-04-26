@@ -21,7 +21,7 @@ export const Default = () => (
   <>
     <GlobalStyle />
     <Layout>
-      <CardListPage cards={[]} />
+      <CardListPage />
     </Layout>
   </>
 );
@@ -30,7 +30,7 @@ export const CardExist = () => (
   <>
     <GlobalStyle />
     <Layout>
-      <CardListPage cards={[card]} />
+      <CardListPage />
     </Layout>
   </>
 );

@@ -4,24 +4,16 @@ import AddCardPage from "./pages/AddCardPage/AddCardPage";
 import CardListPage from "./pages/CardListPage/CardListPage";
 
 import { Route, Routes } from "react-router-dom";
-import { useState } from "react";
-import { Card } from "./types";
 import { PAGE } from "./constant";
 
 function App() {
-  const [cards, setCards] = useState<Card[]>([]);
-
-  const addCard = (card: Card) => {
-    setCards([...cards, card]);
-  };
-
   return (
     <>
       <GlobalStyle />
       <Layout>
         <Routes>
-          <Route index path={PAGE.CARD_LIST} element={<CardListPage cards={cards} />} />
-          <Route path={PAGE.ADD_CARD} element={<AddCardPage addCard={addCard} />} />
+          <Route index path={PAGE.CARD_LIST} element={<CardListPage />} />
+          <Route path={PAGE.ADD_CARD} element={<AddCardPage />} />
         </Routes>
       </Layout>
     </>
