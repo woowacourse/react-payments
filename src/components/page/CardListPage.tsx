@@ -25,7 +25,7 @@ const CardListPage = ({ navigate }: Props) => {
       {cardList.map((card) => (
         <>
           <Card key={card.id} {...card} />
-          <CardName>{'내카드'}</CardName>
+          <CardName>{card.cardName}</CardName>
         </>
       ))}
       <CardAddButton onClick={onClickAdd}>+</CardAddButton>
