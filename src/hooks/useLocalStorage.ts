@@ -2,15 +2,13 @@ import type { Dispatch } from 'react';
 import { useState } from 'react';
 import type { CreditCard } from '../types/CreditCard';
 
-const STORAGE_KEY = 'creditCards' as const;
-
-export const useCreditCardStorage = () => {
+export const useLocalStorage = (key: string) => {
   const [creditCards, setCreditCards] = useState<CreditCard[]>(
-    JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '[]'),
+    JSON.parse(localStorage.getItem(key) ?? '[]'),
   );
 
   const internalSetCreditCards: Dispatch<CreditCard[]> = (nextCreditCards) => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(nextCreditCards));
+    localStorage.setItem(key, JSON.stringify(nextCreditCards));
 
     setCreditCards(nextCreditCards);
   };

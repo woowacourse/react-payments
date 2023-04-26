@@ -1,7 +1,9 @@
 import type { Dispatch, PropsWithChildren } from 'react';
 import { createContext, useMemo } from 'react';
-import { useCreditCardStorage } from '../hooks/useCreditCardStorage';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 import type { CreditCard } from '../types/CreditCard';
+
+const STORAGE_KEY = 'creditCards' as const;
 
 type PaymentsContextValue = {
   creditCards: CreditCard[];
@@ -18,7 +20,7 @@ export const PaymentsContext = createContext<PaymentsContextValue>({
 export const PaymentsProvider = (props: PropsWithChildren) => {
   const { children } = props;
 
-  const { creditCards, internalSetCreditCards } = useCreditCardStorage();
+  const { creditCards, internalSetCreditCards } = useLocalStorage(STORAGE_KEY);
 
   const value = useMemo(
     () => ({
