@@ -8,7 +8,7 @@ interface Props {
   closeModal: () => void;
 }
 
-const Modal = ({ closeModal }: Props) => {
+const CardCompanyModal = ({ closeModal }: Props) => {
   const [, dispatch] = useCardForm();
 
   const onClickCardCompanyItem = (cardCompany: CardType['cardCompany']) => () => {
@@ -35,7 +35,7 @@ const Modal = ({ closeModal }: Props) => {
   );
 };
 
-export default Modal;
+export default CardCompanyModal;
 
 const ModalBackdrop = styled.div`
   position: absolute;

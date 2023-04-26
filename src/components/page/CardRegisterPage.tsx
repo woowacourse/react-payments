@@ -3,7 +3,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 import PageTemplate from '../template/PageTemplate';
-import Modal from '../template/Modal';
+import CardCompanyModal from '../template/CardCompanyModal';
 import CardNumberInput from '../box/inputSection/CardNumberInput';
 import ExpireDateInput from '../box/inputSection/ExpireDateInput';
 import OwnerNameInput from '../box/inputSection/OwnerNameInput';
@@ -59,7 +59,7 @@ const CardRegisterPage = ({ navigate }: Props) => {
           <SubmitButton type="submit">다음</SubmitButton>
         </ButtonWrapper>
       </InputForm>
-      {isModalOpen && <Modal closeModal={closeModal} />}
+      {isModalOpen && <CardCompanyModal closeModal={closeModal} />}
     </PageTemplate>
   );
 };
