@@ -14,14 +14,12 @@ interface Props {
 }
 
 const CardNamePage = ({ navigate }: Props) => {
-  const [
-    { cardCompany, cardNumber, expireDate, ownerName, securityCode, cardPassword, cardName },
-    { setCardName },
-  ] = useCardForm();
+  const [cardForm, dispatch] = useCardForm();
+  const { cardCompany, cardNumber, expireDate, ownerName, securityCode, cardPassword, cardName } = cardForm;
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const onChangeCardNameInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCardName(e.target.value);
+  const onChangeCardNameInput = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch({ type: 'SET_VALUE', key: 'cardName', value });
   };
 
   const onClickSubmit = () => {
@@ -35,6 +33,7 @@ const CardNamePage = ({ navigate }: Props) => {
       cardPassword,
       cardName,
     });
+    dispatch({ type: 'INIT' });
     navigate(Page.list);
   };
 

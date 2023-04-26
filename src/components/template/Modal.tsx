@@ -7,10 +7,10 @@ interface Props {
 }
 
 const Modal = ({ closeModal }: Props) => {
-  const [, { setCardCompany }] = useCardForm();
+  const [, dispatch] = useCardForm();
 
   const onClickCardCompanyItem = (cardCompany: CardType['cardCompany']) => () => {
-    setCardCompany(cardCompany);
+    dispatch({ type: 'SET_VALUE', key: 'cardCompany', value: cardCompany });
     closeModal();
   };
 
