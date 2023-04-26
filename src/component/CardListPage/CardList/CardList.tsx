@@ -11,11 +11,12 @@ export default function CardList(props: CardListProps) {
   const { cardList } = props;
   return (
     <div className="card-list">
-      {cardList.map((card) => CardPreview({ card }))}
-      {cardList.length === 0 && (
+      {cardList.length === 0 ? (
         <p className="add-card-button-explanation">
           새로운 카드를 등록해주세요.
         </p>
+      ) : (
+        cardList.map((card) => CardPreview({ card }))
       )}
       <AddCardButton />
     </div>
