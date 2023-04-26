@@ -26,9 +26,7 @@ export function InputBox({ id, inputs }: InputBoxProps) {
         {inputs.map(({ type, value, handleChange, required, error }, index) => (
           <>
             <_InputWrapper>
-              <_TextCount>
-                {id === 'USERNAME' ? `${value.length} / 30` : ''}
-              </_TextCount>
+              <div>{id === 'USERNAME' ? `${value.length} / 30` : ''}</div>
               <Input
                 id={`${id}${index}`}
                 name={`${id}${index}`}
@@ -66,8 +64,6 @@ const _InputWrapper = styled.div`
 
   gap: 1rem;
 `;
-
-const _TextCount = styled.div``;
 
 const _InputWithErrorMessage = styled.div`
   display: flex;

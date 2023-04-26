@@ -7,7 +7,7 @@ import { CardPreview } from '../components/common/CardPreview';
 export function AddCard() {
   return (
     <_AddCardContainer>
-      <Header title='카드 추가' render={() => BackButton()} />
+      <Header title='카드 추가' render={BackButton} />
       <_Section>
         <CardInfoProvider>
           <CardPreview></CardPreview>
