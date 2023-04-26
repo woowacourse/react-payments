@@ -9,7 +9,6 @@ const meta: Meta<typeof Card> = {
 export default meta;
 type Story = StoryObj<typeof Card>;
 
-//title,cardNumberSet,owner,expiracy
 export const EmptyCard: Story = {
   args: {
     cardNumberSet: ['', '', '', ''],
