@@ -4,6 +4,10 @@
   height: 100%;
 }
 
+.add-card-form section {
+  width: 318px;
+  height: 100px;
+}
 .form-label {
   color: #525252;
   font-size: 12px;
