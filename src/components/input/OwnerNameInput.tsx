@@ -1,4 +1,4 @@
-import { forwardRef, useEffect } from 'react';
+import { forwardRef } from 'react';
 import { InputWrapper } from './template/InputWrapper';
 import { Input } from './template/Input';
 import styled from 'styled-components';
@@ -7,7 +7,6 @@ import { useError } from '../../hooks/useError';
 interface Props {
   ownerName: string;
   setOwnerName: React.Dispatch<React.SetStateAction<string>>;
-  focusFirstOwnerNameInput: () => void;
   viewNextInput: () => void;
   viewPreviousInput: () => void;
 }
@@ -26,13 +25,7 @@ const ownerNameInputValidator = (input: string | string[]) => {
 
 export const OwnerNameInput = forwardRef<HTMLInputElement[], Props>(
   function OwnerNameInput(
-    {
-      ownerName,
-      setOwnerName,
-      focusFirstOwnerNameInput,
-      viewNextInput,
-      viewPreviousInput,
-    },
+    { ownerName, setOwnerName, viewNextInput, viewPreviousInput },
     refs
   ) {
     const error = useError(ownerName, ownerNameInputValidator);
@@ -55,10 +48,6 @@ export const OwnerNameInput = forwardRef<HTMLInputElement[], Props>(
       viewNextInput();
     };
 
-    useEffect(() => {
-      focusFirstOwnerNameInput();
-    }, [focusFirstOwnerNameInput]);
-
     return (
       <div>
         <Style.Label>
@@ -72,6 +61,7 @@ export const OwnerNameInput = forwardRef<HTMLInputElement[], Props>(
               if (typeof refs !== 'object') return;
               if (refs?.current) refs.current[0] = element;
             }}
+            autoFocus={true}
             value={ownerName}
             width={'318'}
             minLength={1}

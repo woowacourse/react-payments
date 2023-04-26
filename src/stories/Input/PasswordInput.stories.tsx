@@ -21,7 +21,6 @@ export const Password = () => {
       password={password}
       setPassword={setPassword}
       focusPasswordInputByIndex={(index: number) => {}}
-      focusFirstPasswordInput={() => {}}
       viewPreviousInput={() => {}}
     />
   );

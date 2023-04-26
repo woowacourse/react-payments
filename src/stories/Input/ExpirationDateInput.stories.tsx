@@ -21,7 +21,6 @@ export const ExpirationDate = () => {
       expirationDate={expirationDate}
       setExpirationDate={setExpirationDate}
       focusNextExpirationDateInput={(index: number) => {}}
-      focusexpirationDateInput={() => {}}
       viewNextInput={() => {}}
       viewPreviousInput={() => {}}
     />

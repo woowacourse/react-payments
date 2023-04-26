@@ -13,7 +13,7 @@ import { useCardData } from '../../hooks/useCardData';
 export const AddNewCardForm = () => {
   const navigate = useNavigate();
 
-  const { getCardList, addNewCard } = useCardData();
+  const { addNewCard } = useCardData();
 
   const [inputOrder, setInputOrder] = useState(0);
 
@@ -35,29 +35,20 @@ export const AddNewCardForm = () => {
   const {
     inputRefs: cardNumberInputRefs,
     focusInputByIndex: focusCardNumberInputByIndex,
-    autoFocusFirstInput: focusFirstCardNumberInput,
   } = useFocus(4);
 
   const {
     inputRefs: expirationDateInputRefs,
     focusInputByIndex: focusExpirationDateInputByIndex,
-    autoFocusFirstInput: focusExpirationDateInput,
   } = useFocus(2);
 
-  const {
-    inputRefs: ownerNameInputRefs,
-    autoFocusFirstInput: focusFirstOwnerNameInput,
-  } = useFocus(1);
+  const { inputRefs: ownerNameInputRefs } = useFocus(1);
 
-  const {
-    inputRefs: securityCodeInputRefs,
-    autoFocusFirstInput: focusFirstSecurityCodeInput,
-  } = useFocus(1);
+  const { inputRefs: securityCodeInputRefs } = useFocus(1);
 
   const {
     inputRefs: passwordInputRefs,
     focusInputByIndex: focusPasswordInputByIndex,
-    autoFocusFirstInput: focusFirstPasswordInput,
   } = useFocus(2);
 
   const viewNextInput = useCallback(() => {
@@ -96,7 +87,6 @@ export const AddNewCardForm = () => {
             cardNumber={cardNumber}
             setCardNumber={setCardNumber}
             focusCardNumberInputByIndex={focusCardNumberInputByIndex}
-            focusFirstCardNumberInput={focusFirstCardNumberInput}
             viewNextInput={viewNextInput}
           />
         )}
@@ -107,7 +97,6 @@ export const AddNewCardForm = () => {
             expirationDate={expirationDate}
             setExpirationDate={setExpirationDate}
             focusNextExpirationDateInput={focusExpirationDateInputByIndex}
-            focusexpirationDateInput={focusExpirationDateInput}
             viewNextInput={viewNextInput}
             viewPreviousInput={viewPreviousInput}
           />
@@ -118,7 +107,6 @@ export const AddNewCardForm = () => {
             ref={ownerNameInputRefs}
             ownerName={ownerName}
             setOwnerName={setOwnerName}
-            focusFirstOwnerNameInput={focusFirstOwnerNameInput}
             viewNextInput={viewNextInput}
             viewPreviousInput={viewPreviousInput}
           />
@@ -129,7 +117,6 @@ export const AddNewCardForm = () => {
             ref={securityCodeInputRefs}
             securityCode={securityCode}
             setSecurityCode={setSecurityCode}
-            focusFirstSecurityCodeInput={focusFirstSecurityCodeInput}
             viewNextInput={viewNextInput}
             viewPreviousInput={viewPreviousInput}
           />
@@ -142,7 +129,6 @@ export const AddNewCardForm = () => {
             setPassword={setPassword}
             setIsInputFinish={setIsInputFinish}
             focusPasswordInputByIndex={focusPasswordInputByIndex}
-            focusFirstPasswordInput={focusFirstPasswordInput}
             viewPreviousInput={viewPreviousInput}
           />
         )}

@@ -27,7 +27,7 @@ const Style = {
     width: max-content;
     height: max-content;
 
-    padding: 25px;
+    padding-top: 25px;
 
     background-color: white;
   `,

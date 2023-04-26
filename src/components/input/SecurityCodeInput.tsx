@@ -7,7 +7,6 @@ import { useError } from '../../hooks/useError';
 interface Props {
   securityCode: string;
   setSecurityCode: React.Dispatch<React.SetStateAction<string>>;
-  focusFirstSecurityCodeInput: () => void;
   viewNextInput: () => void;
   viewPreviousInput: () => void;
 }
@@ -24,13 +23,7 @@ const securityCodeInputValidator = (input: string | string[]) => {
 
 export const SecurityCodeInput = forwardRef<HTMLInputElement[], Props>(
   function SecurityCodeInput(
-    {
-      securityCode,
-      setSecurityCode,
-      focusFirstSecurityCodeInput,
-      viewNextInput,
-      viewPreviousInput,
-    },
+    { securityCode, setSecurityCode, viewNextInput, viewPreviousInput },
     refs
   ) {
     const error = useError(securityCode, securityCodeInputValidator);
@@ -44,10 +37,6 @@ export const SecurityCodeInput = forwardRef<HTMLInputElement[], Props>(
 
       if (e.key === 'Backspace' && e.target.value === '') viewPreviousInput();
     };
-
-    useEffect(() => {
-      focusFirstSecurityCodeInput();
-    }, [focusFirstSecurityCodeInput]);
 
     useEffect(() => {
       if (error === null) viewNextInput();
@@ -65,6 +54,7 @@ export const SecurityCodeInput = forwardRef<HTMLInputElement[], Props>(
               if (typeof refs !== 'object') return;
               if (refs?.current) refs.current[0] = element;
             }}
+            autoFocus={true}
             value={securityCode}
             width={'84'}
             minLength={3}

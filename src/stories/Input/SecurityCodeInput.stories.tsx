@@ -19,7 +19,6 @@ export const SecurityCode = () => {
     <SecurityCodeInput
       securityCode={securityCode}
       setSecurityCode={setSecurityCode}
-      focusFirstSecurityCodeInput={() => {}}
       viewNextInput={() => {}}
       viewPreviousInput={() => {}}
     />

@@ -18,7 +18,6 @@ export const OwnerName = () => {
     <OwnerNameInput
       ownerName={ownerName}
       setOwnerName={setOwnerName}
-      focusFirstOwnerNameInput={() => {}}
       viewNextInput={() => {}}
       viewPreviousInput={() => {}}
     />

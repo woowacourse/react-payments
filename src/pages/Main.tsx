@@ -8,7 +8,7 @@ import { useCardData } from '../hooks/useCardData';
 export const Main = () => {
   const navigate = useNavigate();
 
-  const { getCardList, addNewCard } = useCardData();
+  const { getCardList } = useCardData();
 
   const cardList = getCardList();
 

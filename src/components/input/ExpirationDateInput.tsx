@@ -16,7 +16,6 @@ interface Props {
     }>
   >;
   focusNextExpirationDateInput: (index: number, callback?: () => void) => void;
-  focusexpirationDateInput: () => void;
   viewNextInput: () => void;
   viewPreviousInput: () => void;
 }
@@ -48,7 +47,6 @@ export const ExpirationDateInput = forwardRef<HTMLInputElement[], Props>(
       expirationDate,
       setExpirationDate,
       focusNextExpirationDateInput,
-      focusexpirationDateInput,
       viewNextInput,
       viewPreviousInput,
     },
@@ -86,15 +84,6 @@ export const ExpirationDateInput = forwardRef<HTMLInputElement[], Props>(
     };
 
     useEffect(() => {
-      focusexpirationDateInput();
-
-      setExpirationDate({
-        month: '',
-        year: '',
-      });
-    }, [focusexpirationDateInput, setExpirationDate]);
-
-    useEffect(() => {
       if (error === null) viewNextInput();
     }, [error, viewNextInput]);
 
@@ -110,6 +99,7 @@ export const ExpirationDateInput = forwardRef<HTMLInputElement[], Props>(
               if (typeof refs !== 'object') return;
               if (refs?.current) refs.current[0] = element;
             }}
+            autoFocus={true}
             type="number"
             value={expirationDate.month}
             data-input-target={'month'}

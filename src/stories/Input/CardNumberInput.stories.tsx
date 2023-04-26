@@ -20,7 +20,6 @@ export const CardNumber = () => {
     <CardNumberInput
       cardNumber={cardNumber}
       setCardNumber={setCardNumber}
-      focusFirstCardNumberInput={() => {}}
       focusCardNumberInputByIndex={() => {}}
       viewNextInput={() => {}}
     />

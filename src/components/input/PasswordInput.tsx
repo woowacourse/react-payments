@@ -9,7 +9,6 @@ interface Props {
   setPassword: React.Dispatch<React.SetStateAction<string[]>>;
   setIsInputFinish: React.Dispatch<React.SetStateAction<boolean>>;
   focusPasswordInputByIndex: (index: number) => void;
-  focusFirstPasswordInput: () => void;
   viewPreviousInput: () => void;
 }
 
@@ -30,7 +29,6 @@ export const PasswordInput = forwardRef<HTMLInputElement[], Props>(
       setPassword,
       setIsInputFinish,
       focusPasswordInputByIndex,
-      focusFirstPasswordInput,
       viewPreviousInput,
     },
     refs
@@ -76,10 +74,6 @@ export const PasswordInput = forwardRef<HTMLInputElement[], Props>(
     };
 
     useEffect(() => {
-      focusFirstPasswordInput();
-    }, [focusFirstPasswordInput]);
-
-    useEffect(() => {
       if (error === null) {
         setIsInputFinish(true);
         return;
@@ -100,6 +94,7 @@ export const PasswordInput = forwardRef<HTMLInputElement[], Props>(
                 if (element === null) return;
                 if (refs?.current) refs.current[0] = element;
               }}
+              autoFocus={true}
               value={password[0]}
               width={43}
               maxLength={1}

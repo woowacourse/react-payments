@@ -1,4 +1,4 @@
-import { useRef, useCallback } from 'react';
+import { useRef } from 'react';
 
 export const useFocus = (focusTargetCount: number) => {
   const inputRefs = useRef<HTMLInputElement[]>([]);
@@ -22,19 +22,8 @@ export const useFocus = (focusTargetCount: number) => {
     inputElement.select();
   };
 
-  const autoFocusFirstInput = useCallback(() => {
-    const firstInputRef = inputRefs.current[0];
-
-    if (firstInputRef === undefined) return;
-
-    firstInputRef.focus();
-    firstInputRef.click();
-    firstInputRef.select();
-  }, []);
-
   return {
     inputRefs,
     focusInputByIndex,
-    autoFocusFirstInput,
   };
 };

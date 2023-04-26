@@ -11,7 +11,6 @@ interface Props {
     nextIndex: number,
     callback?: () => void
   ) => void;
-  focusFirstCardNumberInput: () => void;
   viewNextInput: () => void;
 }
 
@@ -26,13 +25,7 @@ const cardNumberValidator = (input: string[] | string) => {
 
 export const CardNumberInput = forwardRef<HTMLInputElement[], Props>(
   function CardNumberInput(
-    {
-      cardNumber,
-      setCardNumber,
-      focusCardNumberInputByIndex,
-      focusFirstCardNumberInput,
-      viewNextInput,
-    },
+    { cardNumber, setCardNumber, focusCardNumberInputByIndex, viewNextInput },
     refs
   ) {
     const error = useError(cardNumber, cardNumberValidator);
@@ -70,12 +63,6 @@ export const CardNumberInput = forwardRef<HTMLInputElement[], Props>(
     };
 
     useEffect(() => {
-      focusFirstCardNumberInput();
-
-      setCardNumber(['', '', '', '']);
-    }, [focusFirstCardNumberInput, setCardNumber]);
-
-    useEffect(() => {
       if (error === null) viewNextInput();
     }, [error, viewNextInput]);
 
@@ -89,18 +76,19 @@ export const CardNumberInput = forwardRef<HTMLInputElement[], Props>(
             return (
               <Fragment key={index}>
                 <Input
-                  type={index > 1 ? 'password' : 'number'}
-                  autoComplete="off"
-                  value={cardNumber[index]}
-                  width={'36'}
-                  minLength={4}
-                  maxLength={4}
-                  inputMode="numeric"
                   ref={(element) => {
                     if (!(element instanceof HTMLInputElement)) return;
                     if (typeof refs !== 'object') return;
                     if (refs?.current) refs.current[index] = element;
                   }}
+                  autoFocus={index === 0}
+                  type={index > 1 ? 'password' : 'number'}
+                  autoComplete="off"
+                  value={cardNumber[index]}
+                  width={'40'}
+                  minLength={4}
+                  maxLength={4}
+                  inputMode="numeric"
                   data-index={index}
                   onChange={handleInputChange}
                   onKeyDown={handlePressBackspace}
