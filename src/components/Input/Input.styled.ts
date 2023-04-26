@@ -11,6 +11,8 @@ const InputWidth = {
 };
 
 export const Input = styled.input<InputProps>`
+  display: block;
+
   width: ${props => InputWidth[props.width]};
   height: 40px;
 

@@ -27,11 +27,13 @@ const MyCardPage = ({ cardInfoList }: MyCardPageProps) => {
 
   return (
     <styled.MyCardPage>
-      <styled.CardRegisterMessage>새로운 카드를 등록해 주세요</styled.CardRegisterMessage>
-      <styled.CardRegisterButton bgColor={COLOR.DEFAULT} onClick={handleClick}>
-        <styled.ButtonIcon>+</styled.ButtonIcon>
-      </styled.CardRegisterButton>
       <styled.CardList>{generateCardInfoList(cardInfoList)}</styled.CardList>
+      <styled.CardRegisterButtonContainer>
+        <styled.CardRegisterMessage>새로운 카드를 등록해 주세요</styled.CardRegisterMessage>
+        <styled.CardRegisterButton bgColor={COLOR.DEFAULT} onClick={handleClick}>
+          <styled.ButtonIcon>+</styled.ButtonIcon>
+        </styled.CardRegisterButton>
+      </styled.CardRegisterButtonContainer>
     </styled.MyCardPage>
   );
 };

@@ -36,6 +36,8 @@ const GlobalStyles = createGlobalStyle`
 		padding: 28px 24px;
 
 		background-color: ${COLOR.WHITE};
+
+		overflow: auto;
 	}
 
   a {

@@ -16,7 +16,7 @@ export const Card = styled.div<Record<'bgColor', string>>`
   letter-spacing: 0.1em;
 
   &:not(:last-child) {
-    margin-bottom: 50px;
+    margin-bottom: 48px;
   }
 `;
 

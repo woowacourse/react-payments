@@ -56,6 +56,12 @@ const PasswordInputBox = ({ password, setPassword, securityCode }: PasswordInput
               />
             );
           })}
+          <styled.RestPasswordContainer>
+            <styled.RestPassword />
+          </styled.RestPasswordContainer>
+          <styled.RestPasswordContainer>
+            <styled.RestPassword />
+          </styled.RestPasswordContainer>
         </styled.InputContainer>
       </label>
       <styled.ErrorMessage>{errorMessage}</styled.ErrorMessage>
