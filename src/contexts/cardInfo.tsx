@@ -1,11 +1,13 @@
 import { createContext } from 'react';
-import { REGEX } from '../constants';
+
 import { useInput } from '../hooks/useInput';
 import { cardRegisterValidator } from '../validation/cardRegister';
 
 export const defaultInput = {
   type: 'text',
   required: true,
+  value: '',
+  isError: false,
 };
 
 const optionalInput = {
@@ -19,85 +21,61 @@ export const passwordInput = {
 };
 
 export const CardPreviewInfoContext = createContext({
-  CARD_NUMBER: [
-    {
-      ...defaultInput,
-      value: '',
-      isError: false,
-    },
-    {
-      ...defaultInput,
-      value: '',
-      isError: false,
-    },
-    {
-      ...passwordInput,
-      value: '',
-      isError: false,
-    },
-    {
-      ...passwordInput,
-      value: '',
-      isError: false,
-    },
-  ],
-  DATE: [
-    {
-      ...defaultInput,
-      value: '',
-      isError: false,
-    },
-    {
-      ...defaultInput,
-      value: '',
-      isError: false,
-    },
-  ],
-  USERNAME: [
-    {
-      ...optionalInput,
-      value: '',
-      isError: false,
-    },
-  ],
+  CARD_NUMBER: {
+    first: { ...defaultInput },
+    second: { ...defaultInput },
+    third: { ...passwordInput },
+    fourth: { ...passwordInput },
+  },
+  DATE: {
+    month: { ...defaultInput },
+    year: { ...defaultInput },
+  },
+  USERNAME: {
+    first: { ...optionalInput },
+  },
 });
 
 export function CardInfoProvider({ children }: { children: React.ReactNode }) {
+  const cardNumberDefaultInput = {
+    ...defaultInput,
+    ...useInput(cardRegisterValidator.cardNumber),
+  };
+
   const preivewInfo = {
-    CARD_NUMBER: [
-      {
+    CARD_NUMBER: {
+      first: {
+        ...cardNumberDefaultInput,
+      },
+      second: {
         ...defaultInput,
         ...useInput(cardRegisterValidator.cardNumber),
       },
-      {
-        ...defaultInput,
-        ...useInput(cardRegisterValidator.cardNumber),
-      },
-      {
+      third: {
         ...passwordInput,
         ...useInput(cardRegisterValidator.cardNumber),
       },
-      {
+      fourth: {
         ...passwordInput,
         ...useInput(cardRegisterValidator.cardNumber),
       },
-    ],
-    DATE: [
-      {
+    },
+    DATE: {
+      month: {
         ...defaultInput,
         ...useInput(cardRegisterValidator.month),
       },
-      {
+      year: {
         ...defaultInput,
         ...useInput(cardRegisterValidator.year),
       },
-    ],
-    USERNAME: [
-      {
+    },
+    USERNAME: {
+      first: {
         ...optionalInput,
         ...useInput(cardRegisterValidator.username),
       },
-    ],
+    },
   };
 
   return (

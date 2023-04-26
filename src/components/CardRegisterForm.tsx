@@ -23,7 +23,7 @@ export function CardRegisterForm() {
     const submittedCardInfo = {} as unknown as Card;
 
     for (const [key, inputs] of Object.entries(cardRegisterForm)) {
-      submittedCardInfo[key as CardInfoOption] = inputs
+      submittedCardInfo[key as CardInfoOption] = Object.values(inputs)
         .map((input) => input.value)
         .join('');
     }
@@ -40,7 +40,11 @@ export function CardRegisterForm() {
   return (
     <_Form onSubmit={handleSubmit}>
       {Object.entries(cardRegisterForm).map(([key, inputs]) => (
-        <InputBox id={key} inputs={inputs as unknown as InputInfo[]}></InputBox>
+        <InputBox
+          key={key}
+          id={key}
+          inputs={Object.values(inputs) as unknown as InputInfo[]}
+        ></InputBox>
       ))}
       {isRequiredInputValid && isOptionalInputValid && (
         <_ButtonWrapper>

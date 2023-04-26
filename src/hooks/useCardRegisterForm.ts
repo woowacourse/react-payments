@@ -8,29 +8,29 @@ import { InputInfo } from '../type/input';
 export function useCardRegisterForm() {
   const previewInfo = useContext(CardPreviewInfoContext);
 
+  const cardPasswordInput = {
+    ...passwordInput,
+    ...useInput(cardRegisterValidator.cardPassword),
+  };
+
   const cardRegisterForm = {
     ...previewInfo,
-    CODE: [
-      {
+    CODE: {
+      first: {
         ...passwordInput,
         ...useInput(cardRegisterValidator.code),
       },
-    ],
-    CARD_PASSWORD: [
-      {
-        ...passwordInput,
-        ...useInput(cardRegisterValidator.cardPassword),
-      },
-      {
-        ...passwordInput,
-        ...useInput(cardRegisterValidator.cardPassword),
-      },
-    ],
+    },
+    CARD_PASSWORD: {
+      first: cardPasswordInput,
+      second: cardPasswordInput,
+    },
   };
 
   const allInputs = [];
 
-  for (const [key, inputs] of Object.entries(cardRegisterForm)) {
+  for (const [key, cardInfos] of Object.entries(cardRegisterForm)) {
+    const inputs = Object.values(cardInfos);
     allInputs.push(...inputs);
   }
 

@@ -9,15 +9,15 @@ export function CardPreview() {
     <CardContainer>
       <Magnetic />
       <NumberWrapper>
-        <NumberItem>{CARD_NUMBER[0].value}</NumberItem>
-        <NumberItem>{CARD_NUMBER[1].value}</NumberItem>
-        <NumberItem>{'•'.repeat(CARD_NUMBER[2].value.length)}</NumberItem>
-        <NumberItem>{'•'.repeat(CARD_NUMBER[3].value.length)}</NumberItem>
+        <NumberItem>{CARD_NUMBER.first.value}</NumberItem>
+        <NumberItem>{CARD_NUMBER.second.value}</NumberItem>
+        <NumberItem>{'•'.repeat(CARD_NUMBER.third.value.length)}</NumberItem>
+        <NumberItem>{'•'.repeat(CARD_NUMBER.fourth.value.length)}</NumberItem>
       </NumberWrapper>
       <InfoWrapper>
-        <Name>{USERNAME[0].value}</Name>
+        <Name>{USERNAME.first.value}</Name>
         <Date>
-          {DATE[0].value}/{DATE[1].value}
+          {DATE.month.value}/{DATE.year.value}
         </Date>
       </InfoWrapper>
     </CardContainer>
