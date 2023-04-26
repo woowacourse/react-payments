@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import CreditCard from 'components/CreditCard';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -15,6 +14,7 @@ import * as S from './style';
 import {
   validateCVC, validateExpiry, validateNumber, validatePassword
 } from './validations';
+import CreditCardCompanyInput from './inputs/CreditCardCompanyInput';
 
 function CreditCardRegister() {
   const navigate = useNavigate();
@@ -123,7 +123,7 @@ function CreditCardRegister() {
         </S.CreditCardRegisterForm>
       </S.CreditCardRegisterLayout>
       <Modal modalOpen={modalOpen}>
-        <div>ㅎㅇ</div>
+        <CreditCardCompanyInput closeModal={closeModal} />
       </Modal>
 
     </>
