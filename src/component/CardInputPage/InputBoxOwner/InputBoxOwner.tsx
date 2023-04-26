@@ -1,7 +1,7 @@
 import { useState, ChangeEvent } from "react";
 import Input from "../../common/Input";
 
-import "./inputBoxOwner.css";
+import styles from "./inputBoxOwner.module.css";
 import CONSTANT from "../../../Constant";
 
 interface Props {
@@ -25,12 +25,12 @@ export default function InputBoxOwner(props: Props) {
   };
   
   return (
-    <div className="input-box-card-owner">
+    <div className={styles.inputBox}>
       <p>카드 소유자 이름(선택)</p>
       <p>{nameLength}/{CONSTANT.OWNER_NAME_MAX_LENGTH}</p>
       <Input
         name="card-owner"
-        className="input-card-owner"
+        className={styles.input}
         type="text"
         onChange={(e: ChangeEvent<HTMLInputElement>) => {
           onChangeCallback(e);

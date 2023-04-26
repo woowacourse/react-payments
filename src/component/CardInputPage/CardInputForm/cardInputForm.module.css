@@ -1,15 +1,19 @@
+@import "../../../style/palette.css";
+
 .form {
   display: grid;
   grid-template-columns: 1fr;
   gap: 3%;
+
+  min-width: 375px;
 }
 
-p {
+.form p {
   color: var(--input-text);
   font-size: 12px;
 }
 
-.next-button {
+.nextButton {
   width: 30%;
 
   margin-left: auto;

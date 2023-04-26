@@ -1,7 +1,7 @@
 import { useState, ChangeEvent, useEffect } from "react";
 import Input from "../../common/Input";
 import { INPUT_STATUS } from "../../../type/InputStatus";
-import "./inputBoxSecurityCode.css";
+import styles from "./inputBoxSecurityCode.module.css";
 import { validateSecurityNumber } from "../../../validation/securityNumber";
 import CONSTANT from "../../../Constant";
 
@@ -37,19 +37,19 @@ export default function InputBoxSecurityCode(props: Props) {
   }, [inputStatus]);
 
   return (
-    <div className="input-box-security-code">
+    <div className={styles.inputBox}>
       <p>보안 코드(CVC/CVV)</p>
       <Input
         name="security-code"
-        className="input-security-code"
+        className={styles.input}
         type="password"
         onChange={onChangeCallback}
         inputMode="numeric"
       ></Input>
-      <button className="button-security-code" type="button" onClick={alertCvcInfo}>
+      <button className={styles.button} type="button" onClick={alertCvcInfo}>
         ?
       </button>
-      <p className={inputStatus === INPUT_STATUS.ERROR ? "visible" : ""}>
+      <p className={inputStatus === INPUT_STATUS.ERROR ? styles.visible : ""}>
         보안 코드는 세 자리의 숫자로 입력해 주세요!!!
       </p>
     </div>

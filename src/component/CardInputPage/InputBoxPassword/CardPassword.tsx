@@ -1,7 +1,7 @@
 import { ChangeEvent, useEffect } from "react";
 import Input from "../../common/Input";
 import { INPUT_STATUS } from "../../../type/InputStatus";
-import "./cardPassword.css";
+import styles from "./cardPassword.module.css";
 import { validatePassword } from "../../../validation/password";
 import CONSTANT from "../../../Constant";
 import useMultipleInputStatus from "../../../hook/useMultipleInputStatus";
@@ -41,29 +41,29 @@ export default function CardPassword(props: Props) {
     };
 
   return (
-    <div className="input-box-card-password">
+    <div className={styles.inputBox}>
       <Input
         name="card-password-1"
-        className="input-password"
+        className={styles.input}
         type="password"
         onChange={onChangePassword(getSetStateFunction(0))}
         inputMode="numeric"
       ></Input>
       <Input
         name="card-password-2"
-        className="input-password"
+        className={styles.input}
         type="password"
         onChange={onChangePassword(getSetStateFunction(1))}
         inputMode="numeric"
       ></Input>
       <input
-        className="input-password"
+        className={styles.input}
         disabled
         type="password"
         defaultValue={0}
       />
       <input
-        className="input-password"
+        className={styles.input}
         disabled
         type="password"
         defaultValue={0}

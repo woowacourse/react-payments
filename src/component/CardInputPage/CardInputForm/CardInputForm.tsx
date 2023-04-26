@@ -10,7 +10,7 @@ import InputBoxSecurityCode from "../InputBoxSecurityCode/InputBoxSecurityCode";
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import "./cardInputForm.css";
+import styles from "./cardInputForm.module.css";
 import useBooleanSeriesConnection from "../../../hook/useBooleanSeriesConnection";
 
 interface Props {
@@ -81,7 +81,7 @@ export default function CardInputForm(props: Props) {
   }, [isAllComplete]);
 
   return (
-    <form ref={formElement} className="form">
+    <form ref={formElement} className={styles.form}>
       <CardPreview card={cardPreviewData} />
       <InputBoxCardNumber
         setIsComplete={getSetCompleteStatus(0)}
@@ -100,7 +100,7 @@ export default function CardInputForm(props: Props) {
       <InputBoxPassword
         setIsComplete={getSetCompleteStatus(3)}
       />
-      {isAllComplete && <Button type="submit">다음</Button>}
+      {isAllComplete && <Button className={styles.nextButton} type="submit">다음</Button>}
     </form>
   );
 }

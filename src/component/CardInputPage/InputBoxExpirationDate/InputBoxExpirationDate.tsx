@@ -1,7 +1,7 @@
 import { useState, useEffect, ChangeEvent } from "react";
 import Input from "../../common/Input";
 import { INPUT_STATUS } from "../../../type/InputStatus";
-import "./inputBoxExpirationDate.css";
+import styles from "./inputBoxExpirationDate.module.css";
 import { validateExpirationDate } from "../../../validation/ExpirationDate";
 import CONSTANT from "../../../Constant"
 
@@ -44,7 +44,7 @@ export default function InputBoxExpirationDate(props: Props) {
   }, [inputStatus]);
 
   return (
-    <div className="input-box-expiration-date">
+    <div className={styles.inputBox}>
       <p>만료일</p>
       <Input
         name="expiration-date"
@@ -57,7 +57,7 @@ export default function InputBoxExpirationDate(props: Props) {
         placeholder="MM / YY"
         inputMode="numeric"
       ></Input>
-      <p className={inputStatus === INPUT_STATUS.ERROR ? "visible" : ""}>
+      <p className={inputStatus === INPUT_STATUS.ERROR ? styles.visible : ""}>
         연과 월은 각각 두 자리의 숫자로 입력해 주세요!!!
       </p>
     </div>

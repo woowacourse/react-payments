@@ -1,9 +1,9 @@
-.input-box-card-owner {
+.inputBox {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
 
-.input-box-card-owner p:last-child {
+.inputBox p:last-child {
   margin-left: 2%;
   color: red;
   font-weight: bold;
@@ -11,16 +11,16 @@
   grid-column: 1/3;
 }
 
-.input-box-card-owner p:nth-child(2) {
+.inputBox p:nth-child(2) {
   text-align: right;
   font-weight: bold;
 }
 
-.input-box-card-owner p:last-child.visible {
+.inputBox p:last-child.visible {
   visibility: visible;
 }
 
-.input-card-owner {
+.input {
   grid-column: 1/3;
   width: 100%;
 

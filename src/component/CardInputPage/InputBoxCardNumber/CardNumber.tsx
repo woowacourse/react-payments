@@ -1,9 +1,8 @@
-import { ChangeEvent, useState, useEffect, useReducer } from "react";
+import { ChangeEvent, useEffect } from "react";
 import { validateCardNumber } from "../../../validation/cardNumber";
 import Input from "../../common/Input";
 import { INPUT_STATUS } from "../../../type/InputStatus";
-
-import "./cardNumber.css";
+import styles from "./cardNumber.module.css";
 import CONSTANT from "../../../Constant";
 import useMultipleInputStatus from "../../../hook/useMultipleInputStatus";
 
@@ -52,7 +51,7 @@ export default function CardNumber(props: Props) {
     <>
       <Input
         name="card-number-1"
-        className="first input-card-number"
+        className={`${styles.input} ${styles.first}`}
         type="text"
         inputMode="numeric"
         onChange={getOnChangeCardNumberHandler(getSetStateFunction(0))}
@@ -60,7 +59,7 @@ export default function CardNumber(props: Props) {
       />
       <Input
         name="card-number-2"
-        className=" input-card-number"
+        className={styles.input}
         type="password"
         inputMode="numeric"
         onChange={getOnChangeCardNumberHandler(getSetStateFunction(1))}
@@ -68,7 +67,7 @@ export default function CardNumber(props: Props) {
       />
       <Input
         name="card-number-3"
-        className=" input-card-number"
+        className={styles.input}
         type="password"
         inputMode="numeric"
         onChange={getOnChangeCardNumberHandler(getSetStateFunction(2))}
@@ -76,7 +75,7 @@ export default function CardNumber(props: Props) {
       />
       <Input
         name="card-number-4"
-        className="last input-card-number"
+        className={`${styles.input} ${styles.last}`}
         type="text"
         inputMode="numeric"
         onChange={getOnChangeCardNumberHandler(getSetStateFunction(3))}
