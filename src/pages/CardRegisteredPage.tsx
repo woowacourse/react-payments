@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Card } from '../types';
 import CardItem from '../components/CardItem/CardItem';
-import CardRegisterForm from '../components/CardRegisterForm/CardRegisterForm';
+import CardNameChangeForm from '../components/CardNameChangeForm/CardNameChangeForm';
 
 function CardRegisteredPage() {
   const location = useLocation();
@@ -24,7 +24,7 @@ function CardRegisteredPage() {
             expirationDate={cardInformation.expirationDate}
             ownerName={cardInformation.ownerName}
           />
-          <CardRegisterForm id={cardInformation.id} defaultCardName={cardInformation.cardName} />
+          <CardNameChangeForm id={cardInformation.id} defaultCardName={cardInformation.cardName} />
         </div>
       )}
     </main>

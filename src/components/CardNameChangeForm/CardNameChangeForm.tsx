@@ -2,17 +2,17 @@ import { ChangeEvent, useEffect, useRef } from 'react';
 import InputContainer from '../common/InputContainer/InputContainer';
 import Input from '../common/Input/Input';
 import Button from '../common/Button/Button';
-import { useCardRegisterForm } from '../../hooks/cards/useCardRegisterForm';
+import { useCardNameChangeForm } from '../../hooks/cards/useCardNameChangeForm';
 import { useError } from '../../hooks/common/useError';
 
-interface CardNameInputProps {
+interface CardNameChangeProps {
   id: number;
   defaultCardName: string;
 }
 
-function CardRegister({ id, defaultCardName }: CardNameInputProps) {
+function CardNameChange({ id, defaultCardName }: CardNameChangeProps) {
   const { isValidCardName, submitError, handleCardNameChange, handleSubmit } =
-    useCardRegisterForm(id);
+    useCardNameChangeForm(id);
   const { isError, handleError, removeError } = useError(isValidCardName);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -57,4 +57,4 @@ function CardRegister({ id, defaultCardName }: CardNameInputProps) {
   );
 }
 
-export default CardRegister;
+export default CardNameChange;

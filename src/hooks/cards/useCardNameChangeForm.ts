@@ -4,7 +4,7 @@ import { PATH } from '../../constants';
 import { validateNonEmptyInput } from '../../utils/validator';
 import { CardListContext } from '../../contexts/CardListContext';
 
-const useCardRegisterForm = (id: number) => {
+const useCardNameChangeForm = (id: number) => {
   const { updateCardName } = useContext(CardListContext);
   const [isValidCardName, setIsValidCardName] = useState(true);
   const [submitError, setSubmitError] = useState(false);
@@ -31,4 +31,4 @@ const useCardRegisterForm = (id: number) => {
   return { isValidCardName, submitError, handleCardNameChange, handleSubmit };
 };
 
-export { useCardRegisterForm };
+export { useCardNameChangeForm };
