@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Card from '../../components/Card';
@@ -6,7 +6,7 @@ import AddCardForm from './components/AddCardForm';
 import Header from '../../components/Header';
 import BackButtonImg from '../../asset/back_button.png';
 import './AddCardPage.css';
-import useInputs from '../../hooks/useInputs';
+import useInput from '../../hooks/useInput';
 import {
   isValidCardNumber,
   isValidExpiredMonthFormat,
@@ -19,16 +19,16 @@ import {
 const AddCardPage = () => {
   const navigate = useNavigate();
   const [cardType] = useState('현대');
-  const cardFirstNumber = useInputs(isValidCardNumber);
-  const cardSecondNumber = useInputs(isValidCardNumber);
-  const cardThirdNumber = useInputs(isValidCardNumber);
-  const cardFourthNumber = useInputs(isValidCardNumber);
-  const cardPassword1 = useInputs(isValidPassword);
-  const cardPassword2 = useInputs(isValidPassword);
-  const expireMonth = useInputs(isValidExpiredMonthFormat);
-  const expireYear = useInputs(isValidExpiredYearFormat);
-  const securityCode = useInputs(isValidSecurityCode);
-  const cardOwner = useInputs(isValidOwnerName);
+  const cardFirstNumber = useInput(isValidCardNumber);
+  const cardSecondNumber = useInput(isValidCardNumber);
+  const cardThirdNumber = useInput(isValidCardNumber);
+  const cardFourthNumber = useInput(isValidCardNumber);
+  const cardPassword1 = useInput(isValidPassword);
+  const cardPassword2 = useInput(isValidPassword);
+  const expireMonth = useInput(isValidExpiredMonthFormat);
+  const expireYear = useInput(isValidExpiredYearFormat);
+  const securityCode = useInput(isValidSecurityCode);
+  const cardOwner = useInput(isValidOwnerName);
 
   const onBackButtonClick = useCallback(() => {
     navigate('/');
