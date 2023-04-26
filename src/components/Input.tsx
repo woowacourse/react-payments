@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import { createRef } from 'react';
 import styled from 'styled-components';
 
 type InputInfo = {
@@ -9,7 +9,7 @@ type InputInfo = {
   width: string;
   value?: string;
   center: boolean;
-  onChange: (e: ChangeEvent) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 type InputProps = {
@@ -21,9 +21,9 @@ type InputProps = {
 const Input = ({ labelText, inputInfoList, children }: InputProps) => {
   const inputRefs = Array(inputInfoList.length)
     .fill(0)
-    .map(() => React.createRef<HTMLInputElement>());
+    .map(() => createRef<HTMLInputElement>());
 
-  const moveFocus = (e: ChangeEvent) => {
+  const moveFocus = (e: React.ChangeEvent) => {
     if (!(e.target instanceof HTMLInputElement)) return;
 
     if (

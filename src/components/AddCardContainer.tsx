@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import CardPreview from './CardPreview';
@@ -18,9 +18,7 @@ const AddCardContainer = () => {
   const setCard = useCardDispatch();
   const navigate = useNavigate();
 
-  const onChangeDateState = (e: ChangeEvent) => {
-    if (!(e.target instanceof HTMLInputElement)) return;
-
+  const onChangeDateState = (e: React.ChangeEvent<HTMLInputElement>) => {
     switch (e.target.dataset.id) {
       case '0':
         validateMonth(e.target);
@@ -36,9 +34,7 @@ const AddCardContainer = () => {
 
   const onChangeState =
     (state: string[], setState: React.Dispatch<React.SetStateAction<string[]>>, type: string) =>
-    (e: ChangeEvent) => {
-      if (!(e.target instanceof HTMLInputElement)) return;
-
+    (e: React.ChangeEvent<HTMLInputElement>) => {
       switch (type) {
         case 'number':
         case 'password':
@@ -47,7 +43,7 @@ const AddCardContainer = () => {
           break;
         case 'text':
           if (!isAlphabet(e.target.value))
-            e.target.value = e.target.value.replace(regEx.notAlphbet, '');
+            e.target.value = e.target.value.replace(regEx.notAlphabet, '');
           break;
         default:
       }

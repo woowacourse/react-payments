@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import { useCardState } from '../context/CardContext';
 import { setLocalStorage } from '../utils/localStorage';

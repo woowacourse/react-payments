@@ -1,5 +1,5 @@
 export const regEx = {
-  notAlphbet: /[^a-zA-Z]*/g,
+  notAlphabet: /[^a-zA-Z]*/g,
   notNumber: /[^0-9]*/g,
 } as const;
 
@@ -24,5 +24,5 @@ export const isNumber = (target: string) => {
 };
 
 export const isAlphabet = (target: string) => {
-  return !regEx.notAlphbet.test(target);
+  return !regEx.notAlphabet.test(target);
 };

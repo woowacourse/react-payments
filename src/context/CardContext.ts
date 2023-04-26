@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { createContext, useContext } from 'react';
 
 export type Card = {
   id: string;
@@ -14,7 +14,7 @@ export type CardContextState = {
   setCardList: React.Dispatch<React.SetStateAction<Card[]>>;
 };
 
-export const CardContext = React.createContext<CardContextState | null>(null);
+export const CardContext = createContext<CardContextState | null>(null);
 
 export const useCardState = () => {
   const state = useContext(CardContext);
