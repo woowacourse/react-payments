@@ -23,3 +23,16 @@
 
   margin-left: 3%;
 }
+
+.guide-security-code {
+  display: inline-block;
+  width: 200px;
+  margin-left: 10px;
+  border: 1px solid lightgray;
+  border-radius: 7px;
+  padding: 2%;
+  position: relative;
+  top: 3px;
+  /* color: lightgrey; */
+  font-size: 10px;
+}
