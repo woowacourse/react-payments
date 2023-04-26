@@ -8,8 +8,8 @@ import CardPasswordInput from "../../components/CardPasswordInput/CardPasswordIn
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Container } from "../../components/common";
-import { useContext, useState } from "react";
-import { Card, CardExpirationDate, CardNumber, CardPassword } from "../../types";
+import { useContext } from "react";
+import { Card } from "../../types";
 import { useNavigate } from "react-router-dom";
 import {
   isNumeric,
@@ -22,38 +22,31 @@ import {
 } from "../../validator/Validator";
 import { PAGE } from "../../constant";
 import Modal from "../../components/Modal/Modal";
-import CardCompanyIcon, { CARD_LOGO } from "../../components/CardCompanyIcon/CardCompanyIcon";
+import CardCompanyIcon from "../../components/CardCompanyIcon/CardCompanyIcon";
 import { GlobalContext } from "../../context/GlobalProvider";
+import { AddCardContext } from "../../context/AddCardProvider";
 
 const AddCardPage = () => {
   const { addCard } = useContext(GlobalContext);
 
-  const [modalOpen, setModalOpen] = useState(true);
-  const [cardCompany, setCardCompany] = useState<keyof typeof CARD_LOGO>();
-
-  const [cardNumber, setCardNumber] = useState<CardNumber>({
-    firstGroup: "",
-    secondGroup: "",
-    thirdGroup: "",
-    fourthGroup: "",
-  });
-
-  const [expirationDate, setExpirationDate] = useState<CardExpirationDate>({
-    month: "",
-    year: "",
-  });
-
-  const [ownerName, setOwnerName] = useState<string>("");
-  const [securityCode, setSecurityCode] = useState<string>("");
-  const [password, setPassword] = useState<CardPassword>({
-    first: "",
-    second: "",
-  });
-
-  const [error, setError] = useState<{ cardNumberError: boolean; expirationError: boolean }>({
-    cardNumberError: false,
-    expirationError: false,
-  });
+  const {
+    modalOpen,
+    error,
+    cardCompany,
+    cardNumber,
+    expirationDate,
+    ownerName,
+    securityCode,
+    password,
+    setModalOpen,
+    setError,
+    setCardCompany,
+    setCardNumber,
+    setExpirationDate,
+    setOwnerName,
+    setSecurityCode,
+    setPassword,
+  } = useContext(AddCardContext);
 
   const navigate = useNavigate();
 

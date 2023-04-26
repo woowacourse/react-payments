@@ -5,6 +5,7 @@ import CardListPage from "./pages/CardListPage/CardListPage";
 
 import { Route, Routes } from "react-router-dom";
 import { PAGE } from "./constant";
+import { AddCardContextProvider } from "./context/AddCardProvider";
 
 function App() {
   return (
@@ -13,7 +14,14 @@ function App() {
       <Layout>
         <Routes>
           <Route index path={PAGE.CARD_LIST} element={<CardListPage />} />
-          <Route path={PAGE.ADD_CARD} element={<AddCardPage />} />
+          <Route
+            path={PAGE.ADD_CARD}
+            element={
+              <AddCardContextProvider>
+                <AddCardPage />
+              </AddCardContextProvider>
+            }
+          />
         </Routes>
       </Layout>
     </>
