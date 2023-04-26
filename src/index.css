@@ -52,17 +52,18 @@ body {
 .app {
   position: relative;
   width: 375px;
+  height: 815px;
   margin: 24px 0;
+  padding-bottom: 20px;
   border-radius: 10px;
   background-color: var(--white);
 }
 
 main {
   position: relative;
+  height: calc(100% - 67px);
   padding: 0 20px;
-  padding-top: 72px;
-  padding-bottom: 24px;
-  overflow-y: auto;
+  overflow-y: scroll;
 }
 
 a {
@@ -128,6 +129,17 @@ h2 {
 
 @media screen and (max-width: 600px) {
   .app {
+    width: 100vw;
+    height: 100%;
     margin: 0;
+    padding-bottom: 0;
+    border-radius: 0;
+  }
+
+  main {
+    height: calc(100% - 20px);
+    padding: 0 20px;
+    padding-top: 72px;
+    padding-bottom: 24px;
   }
 }

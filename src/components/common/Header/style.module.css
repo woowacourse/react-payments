@@ -1,7 +1,6 @@
 .header {
-  position: fixed;
   padding: 24px 20px;
-  width: inherit;
+  width: 100%;
   background-color: var(--white);
   border-radius: 10px 10px 0 0;
   z-index: 999;
@@ -22,4 +21,10 @@
   font-weight: 600;
   text-align: center;
   color: var(--dark-gray-2);
+}
+
+@media screen and (max-width: 600px) {
+  .header {
+    position: fixed;
+  }
 }

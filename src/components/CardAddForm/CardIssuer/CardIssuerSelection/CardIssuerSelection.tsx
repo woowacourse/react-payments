@@ -12,17 +12,17 @@ interface CardIssuerSelectionProps {
 
 function CardIssuerSelection({ onOptionClick, close }: CardIssuerSelectionProps) {
   return (
-    <>
+    <div className={styles.container}>
       <div className={styles.header}>
         <h3 className={styles.title}>카드사 선택</h3>
         <Button variant="textButton" size="small" icon={CloseIcon} onClick={close} />
       </div>
-      <div className={styles.container}>
+      <div className={styles.issuerContainer}>
         {CARD_ISSUERS.map((cardIssuer, index) => (
           <CardIssuerOption key={index} issuer={cardIssuer} onClick={onOptionClick} />
         ))}
       </div>
-    </>
+    </div>
   );
 }
 

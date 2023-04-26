@@ -1,3 +1,10 @@
+.container {
+  position: relative;
+  left: 50%;
+  width: calc(375px - 40px);
+  transform: translateX(-50%);
+}
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -19,10 +26,19 @@
   background-color: transparent;
 }
 
-.container {
+.issuerContainer {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(2, 1fr);
   row-gap: 24px;
   column-gap: 16px;
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    position: relative;
+    left: 0;
+    width: 100%;
+    transform: none;
+  }
 }

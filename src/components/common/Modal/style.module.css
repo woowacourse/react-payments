@@ -14,7 +14,6 @@
   left: 0;
 
   background: rgba(0, 0, 0, 0.15);
-  border-radius: 10px;
 
   cursor: pointer;
 }
@@ -23,14 +22,25 @@
   position: fixed;
   left: 0;
   bottom: 0;
-  width: calc(100% - 40px);
+  width: 100%;
 
-  margin: 20px;
-  padding: 24px 16px;
+  padding: 36px 16px;
+  padding-bottom: 48px;
 
-  border-radius: 8px;
   background-color: var(--white);
 
   border: none;
   outline: 0;
+}
+
+@media screen and (max-width: 600px) {
+  .content {
+    width: calc(100% - 40px);
+    margin: 20px;
+    margin-bottom: 40px;
+    padding-top: 24px;
+    padding-bottom: 24px;
+
+    border-radius: 8px;
+  }
 }
