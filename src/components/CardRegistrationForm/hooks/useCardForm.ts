@@ -4,6 +4,7 @@ import type { CardInformation } from '../../Common/Card/types';
 import type { ErrorMessage, Visited } from '../types';
 
 function useCardForm() {
+  const [bankName, setBankName] = useState('');
   const [cardNumber, setCardNumber] = useState<string[]>(['', '', '', '']);
   const [expirationDate, setExpirationDate] = useState<string[]>(['MM', 'YY']);
   const [owner, setOwner] = useState<string[]>(['NAME']);
@@ -39,10 +40,11 @@ function useCardForm() {
   };
 
   return {
-    card: { cardNumber, expirationDate, owner, securityCode, password } as unknown as CardInformation,
+    card: { bankName, cardNumber, expirationDate, owner, securityCode, password } as unknown as CardInformation,
     checkValidator,
     errorMessage,
     isVisited,
+    setBankName,
     setCardNumber,
     setExpirationDate,
     setOwner,

@@ -6,16 +6,16 @@ import type { Bank } from '../../data/bankList';
 
 interface BankProfileButtonListProps {
   bankList: Bank[];
-  onClick: React.MouseEventHandler<HTMLButtonElement>;
+  getBankName: (name: string) => void;
   profileSize?: number;
 }
 
-function BankProfileButtonList({ bankList, onClick, profileSize }: BankProfileButtonListProps) {
+function BankProfileButtonList({ bankList, getBankName, profileSize }: BankProfileButtonListProps) {
   return (
     <StyledList>
       {bankList.map(({ logo, name }, index) => (
         <StyledListItem>
-          <TransParentButton onClick={onClick} key={index}>
+          <TransParentButton onClick={() => getBankName(name)} key={index}>
             <Profile iconUrl={logo} name={name} size={profileSize} />
           </TransParentButton>
         </StyledListItem>

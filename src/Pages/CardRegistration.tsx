@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import BankProfileButtonList from '../components/BankProfileButtonList';
 import CardRegistrationForm from '../components/CardRegistrationForm';
 import useCardForm from '../components/CardRegistrationForm/hooks/useCardForm';
+import TransParentButton from '../components/Common/Button/TransParentButton';
 import Card from '../components/Common/Card';
 import Header from '../components/Common/Header';
 import Modal from '../components/Common/Modal';
@@ -14,19 +15,27 @@ function CardRegistration() {
     checkValidator,
     errorMessage,
     isVisited,
+    setBankName,
     setCardNumber,
     setExpirationDate,
     setOwner,
     setPassword,
     setSecurityCode,
   } = useCardForm();
-  const { isModalOpen, closeModal } = useModal(true);
+  const { isModalOpen, openModal, closeModal } = useModal(true);
+
+  const handleBankName = (name: string) => {
+    setBankName(name);
+    closeModal();
+  };
 
   return (
     <>
       <Header title="카드 추가" hasBackHistory />
       <StyledMainCardRegistration>
-        <Card cardInformation={card} isAddForm />
+        <TransParentButton onClick={openModal}>
+          <Card cardInformation={card} isAddForm />
+        </TransParentButton>
         <CardRegistrationForm
           card={card}
           checkValidator={checkValidator}
@@ -40,7 +49,7 @@ function CardRegistration() {
         />
         {isModalOpen && (
           <Modal closeModal={closeModal}>
-            <BankProfileButtonList bankList={bankList} onClick={closeModal} profileSize={37} />
+            <BankProfileButtonList bankList={bankList} getBankName={handleBankName} profileSize={37} />
           </Modal>
         )}
       </StyledMainCardRegistration>

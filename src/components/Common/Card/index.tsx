@@ -1,13 +1,14 @@
 /* eslint-disable react/no-array-index-key */
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { ReactComponent as Dot } from '../../../assets/white-dot.svg';
+import { ReactComponent as Dot } from '../../../assets/dot.svg';
 import {
   CARD_EXPIRATION_MONTH_LENGTH,
   CARD_EXPIRATION_YEAR_LENGTH,
   CARD_NUMBER_LENGTH,
   CARD_NUMBER_VISIBLE_LENGTH,
 } from '../../../constants';
+import { CARD_COMPANY_COLOR_MAP } from '../../../data/bankList';
 import type { CardInformation } from './types';
 
 interface CardProps {
@@ -16,17 +17,21 @@ interface CardProps {
 }
 
 const defaultCardInformation: CardInformation = {
+  bankName: '',
   cardNumber: ['', '', '', ''],
   expirationDate: ['MM', 'YY'],
   owner: ['NAME'],
 };
 
 function Card({ cardInformation = defaultCardInformation, isAddForm }: CardProps) {
-  const { cardNumber, expirationDate, owner } = cardInformation;
+  const { bankName, cardNumber, expirationDate, owner } = cardInformation;
+  const { color, background } = CARD_COMPANY_COLOR_MAP[bankName === '' ? 'default' : bankName];
+
   return (
-    <StyledCardContainer isAddFrom={isAddForm}>
+    <StyledCardContainer isAddFrom={isAddForm} textColor={color} backgroundColor={background}>
       {isAddForm ? (
         <>
+          <StyledBankName>{bankName}</StyledBankName>
           <StyledICChipTemplate />
           <StyledCardInfoTemplate>
             <StyledCardNumberTemplate>
@@ -36,7 +41,7 @@ function Card({ cardInformation = defaultCardInformation, isAddForm }: CardProps
                 ) : (
                   <StyledCardNumberItem key={index}>
                     {Array.from({ length: number?.length }, (_, dotIndex) => (
-                      <Dot key={dotIndex} />
+                      <Dot key={dotIndex} fill={color} />
                     ))}
                   </StyledCardNumberItem>
                 ),
@@ -62,11 +67,18 @@ function Card({ cardInformation = defaultCardInformation, isAddForm }: CardProps
   );
 }
 
-const StyledCardContainer = styled.div<{ isAddFrom: boolean }>`
+const StyledCardContainer = styled.div<{
+  isAddFrom: boolean;
+  textColor?: string;
+  backgroundColor?: string;
+}>`
   position: relative;
   width: 214px;
   height: 134px;
-  background-color: ${props => (props.isAddFrom ? `#333333` : `#E5E5E5`)};
+  & > * {
+    color: ${({ textColor }) => textColor ?? `#FFFFFF`};
+  }
+  background-color: ${({ isAddFrom, backgroundColor }) => (isAddFrom ? backgroundColor ?? `#525252` : `#E5E5E5`)};
   font-size: 18px;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
@@ -82,6 +94,13 @@ const StyledICChipTemplate = styled.div`
 
   background: #cbba64;
   border-radius: 4px;
+`;
+
+const StyledBankName = styled.div`
+  position: absolute;
+  top: 12px;
+  left: 14px;
+  font-size: 12px;
 `;
 
 const StyledCardNumberTemplate = styled.div`

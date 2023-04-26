@@ -13,6 +13,7 @@ export default meta;
 export const Default: Story = {
   args: {
     cardInformation: {
+      bankName: 'OO카드',
       cardNumber: ['1234', '1234', '1234', '1234'],
       expirationDate: ['YY', 'MM'],
       owner: ['NAME'],
