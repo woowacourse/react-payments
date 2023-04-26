@@ -1,2 +1,2 @@
-export * from './addCard';
-export * from './cardList';
+export * from './AddCard';
+export * from './CardList';
