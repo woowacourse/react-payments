@@ -8,31 +8,18 @@ import CardNumberInput from '../../components/pages/CardRegister/CardNumberInput
 import CardPasswordInput from '../../components/pages/CardRegister/CardPasswordInput/CardPasswordInput';
 import { useCardRegisterContext } from '../../context/CardRegisterContext';
 import * as Styled from './CardRegister.styles';
-import { getItemFromLocalStorage, setItemInLocalStorage } from '../../utils/localStorage';
 import { useBottomSheet } from '../../context/BottomSheetContext';
 import BankListBottomSheetContent from '../../components/pages/CardRegister/BankListBottomSheetContent/BankListBottomSheetContent';
 import BottomSheet from '../../components/@common/BottomSheet/BottomSheet';
-import { BankNames, CardRegisterInfo } from '../../types/card.type';
+import { BankNames } from '../../types/card.type';
 
 export default function CardRegister() {
   const navigate = useNavigate();
-  const { cardRegisterInfo, initCardRegisterInfo, handleCardInfo } = useCardRegisterContext();
+  const { cardRegisterInfo, handleCardInfo } = useCardRegisterContext();
 
   const { isOpened, content, openBottomSheet, closeBottomSheet } = useBottomSheet();
-  const [bankName, setBankName] = useState<BankNames>('현대카드');
+  const [bankName, setBankName] = useState<BankNames>('');
   const [allValid, setAllValid] = useState(false);
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    if (cardRegisterInfo !== null) {
-      const cardList = getItemFromLocalStorage<CardRegisterInfo[]>('CardList');
-      const newCardList = cardList !== null ? [cardRegisterInfo, ...cardList] : [cardRegisterInfo];
-      setItemInLocalStorage('CardList', newCardList);
-      initCardRegisterInfo();
-    }
-
-    navigate('/', { state: { isReadyForRegister: true } });
-  };
 
   const handleChange = (e: FormEvent<HTMLFormElement>) => {
     const form = e.currentTarget as HTMLFormElement;
@@ -83,13 +70,13 @@ export default function CardRegister() {
       </Styled.CardSection>
       <Styled.CardBankChangeText>카드사를 변경하려면 카드를 클릭해주세요. 💳</Styled.CardBankChangeText>
       <Styled.InfoSection>
-        <Styled.RegisterForm onSubmit={handleSubmit} onChange={handleChange}>
+        <Styled.RegisterForm onChange={handleChange}>
           <CardNumberInput />
           <CardExpirationDateInput />
           <CardNameInput />
           <CardCVCInput />
           <CardPasswordInput />
-          {allValid && <Styled.CompleteButton>다음</Styled.CompleteButton>}
+          {allValid && <Styled.CompleteButton onClick={() => navigate('alias', { state: { from: 'registerCard' } })}>다음</Styled.CompleteButton>}
         </Styled.RegisterForm>
       </Styled.InfoSection>
       <BottomSheet isOpened={isOpened} onClose={closeBottomSheet}>
