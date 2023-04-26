@@ -36,7 +36,7 @@ function CardPassword({ values, isError, onInputChange, updateCardInputError }: 
       }}
       isError={isError}
     >
-      <Label htmlFor="password" required>
+      <Label htmlFor="password" id="password-label" required>
         비밀번호
       </Label>
       <div className={styles.container} onBlur={onBlur}>
@@ -52,6 +52,7 @@ function CardPassword({ values, isError, onInputChange, updateCardInputError }: 
             maxLength={PASSWORD_UNIT_MAX_LENGTH}
             autoComplete="off"
             inputMode="numeric"
+            aria-labelledby={index === 0 ? undefined : 'password-label'}
             isError={isError}
             tabIndex={6 + index}
             onChange={index === 0 ? onFirstInputChange : onInputChange}
