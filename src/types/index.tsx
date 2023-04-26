@@ -11,6 +11,7 @@ export type CreditCard = {
   owner?: string;
   cvc: string;
   password: CreditCardPasswordType;
+  company: CardCompanies;
 };
 
 export type CardCompanies = keyof typeof CARD_COMPANY;

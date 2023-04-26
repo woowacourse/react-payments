@@ -24,15 +24,12 @@ import * as S from './style';
 function CreditCardRegister() {
   const navigate = useNavigate();
 
+  const { isModalOpen, openModal, closeModal } = useModal();
+
   const { numberValidationFns, expiryValidationFns, ownerValidationFns, cvcValidationFns, passwordValidationFns } =
     creditCard.getValidationFns();
 
-  const { isModalOpen, openModal, closeModal } = useModal();
-
   const [creditCardCompany, setCreditCardCompany] = useState<Type.CardCompanies | undefined>(undefined);
-
-  console.log(creditCardCompany);
-
   const [creditCardNumber, setCreditCardNumber, numberErrorMessage] = useInput<string>('', numberValidationFns);
   const [creditCardExpiry, setCreditCardExpiry, expiryErrorMessage] = useInput<string>('', expiryValidationFns);
   const [creditCardOwner, setCreditCardOwner, ownerErrorMessage] = useInput<string>('', ownerValidationFns);
@@ -46,6 +43,7 @@ function CreditCardRegister() {
 
   const handleSubmit = () => {
     if (!isFullFilled) return;
+    if (!creditCardCompany) return;
 
     const newCreditCard: Type.CreditCard = {
       number: creditCardNumber,
@@ -56,6 +54,7 @@ function CreditCardRegister() {
         first: creditCardPassword.first,
         second: creditCardPassword.second,
       },
+      company: creditCardCompany,
     };
 
     creditCardStorage.saveCreditCard(newCreditCard);
@@ -94,7 +93,7 @@ function CreditCardRegister() {
       <S.PreviewCreditCard>
         <CreditCard
           fullFilled={false}
-          company="kakao"
+          company={creditCardCompany}
           creditCard={{
             number: creditCardNumber,
             expiry: creditCardExpiry,

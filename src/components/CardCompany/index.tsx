@@ -1,9 +1,11 @@
+import * as Type from '@Types/index';
+
 import CARD_COMPANY from '@Constants/CardCompany';
 
 import * as S from './style';
 
 export type CardCompanyType = {
-  company: keyof typeof CARD_COMPANY;
+  company: Type.CardCompanies;
   handleClick: () => void;
 };
 

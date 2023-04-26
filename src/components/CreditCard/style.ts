@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 type Props = {
   isValid: boolean;
-  backgroundColor: string;
-  fontColor: string;
+  backgroundColor?: string;
+  fontColor?: string;
 };
 
 export const CreditCardLayout = styled.div<Props>`

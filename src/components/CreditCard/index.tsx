@@ -9,7 +9,7 @@ import * as S from './style';
 
 export type CreditCardProps = {
   fullFilled: boolean;
-  company: keyof typeof CARD_COMPANY;
+  company?: Type.CardCompanies;
   creditCard: Pick<Type.CreditCard, 'number' | 'expiry' | 'owner'>;
 };
 
@@ -28,10 +28,10 @@ function CreditCard({ fullFilled, company, creditCard: { expiry, number, owner }
   return (
     <S.CreditCardLayout
       isValid={isValid()}
-      backgroundColor={CARD_COMPANY[company].uniqueColor}
-      fontColor={CARD_COMPANY[company].fontColor}
+      backgroundColor={company && CARD_COMPANY[company].uniqueColor}
+      fontColor={company && CARD_COMPANY[company].fontColor}
     >
-      <S.CreditCardCompanyName>{CARD_COMPANY[company].name}</S.CreditCardCompanyName>
+      <S.CreditCardCompanyName>{company && CARD_COMPANY[company].name}</S.CreditCardCompanyName>
       <S.CreditCardICChip />
       <S.CreditCardInfoLayout>
         <S.CreditCardNumber>
