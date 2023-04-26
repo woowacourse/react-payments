@@ -1,7 +1,9 @@
+import { CardCompany } from "./CardCompany";
+
 export interface CreditCard {
   name: string;
   date: string;
-  bank?: string;
+  company?: CardCompany;
   number: string[];
   securityCode: number;
   password: number;
@@ -13,4 +15,5 @@ export const getDefaultCreditCard = (): CreditCard => ({
   number: ['', '', '', ''],
   securityCode: 0,
   password: 0,
+  company: 'woori',
 });
