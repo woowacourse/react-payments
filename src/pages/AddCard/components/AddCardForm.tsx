@@ -1,14 +1,14 @@
 import React from 'react';
 
-import type { FormCardAddProps } from '../type';
-import { sumbitCard } from '../utils/applicationUtil';
+import type { FormCardAddProps } from '../../../type';
+import { sumbitCard } from '../../../utils/applicationUtil';
 import { useNavigate } from 'react-router-dom';
-import AddCardNumberInput from './AddCardNumberInput';
 import AddCardExpireDateInput from './AddCardExpireDateInput';
 import AddCardOwnerInput from './AddCardOwnerInput';
 import AddCardSecurityCodeInput from './AddCardSecurityCodeInput';
 import AddCardPasswordInput from './AddCardPasswordInput';
 import './AddCardForm.css';
+import AddCardNumberInput from './AddCardNumberInput';
 
 const AddCardForm = ({
   cardNumber,

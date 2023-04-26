@@ -1,6 +1,6 @@
 import type { Meta } from '@storybook/react';
 
-import AddCardExpireDateInput from '../components/AddCardExpireDateInput';
+import AddCardExpireDateInput from '../pages/AddCard/components/AddCardExpireDateInput';
 import useInput from '../hooks/useInput';
 import { cardExpireCondition } from '../pages/cardInputCondition';
 import { formatExpireDate } from '../utils/util';

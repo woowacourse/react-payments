@@ -1,7 +1,7 @@
 import type { Meta } from '@storybook/react';
 
 import type { CardNumber } from '../type';
-import AddCardNumberInput from '../components/AddCardNumberInput';
+import AddCardNumberInput from '../pages/AddCard/components/AddCardNumberInput';
 import useComplicateInput from '../hooks/useComplicateInput';
 import { isNumberInput } from '../utils/util';
 import { APP_WIDTH } from './constants';

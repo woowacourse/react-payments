@@ -1,5 +1,5 @@
-import type { AddCardPasswordInputProps } from '../type';
-import passwordDotImg from '../asset/password_dot.png';
+import type { AddCardPasswordInputProps } from '../../../type';
+import passwordDotImg from '../../../asset/password_dot.png';
 import './AddCardPasswordInput.css';
 
 const AddCardPasswordInput = ({ cardPassword1, cardPassword2 }: AddCardPasswordInputProps) => {

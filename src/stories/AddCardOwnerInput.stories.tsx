@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import AddCardOwnerInput from '../components/AddCardOwnerInput';
+import AddCardOwnerInput from '../pages/AddCard/components/AddCardOwnerInput';
 import { stringToUpperCase } from '../utils/util';
 import { cardOwnerCondition } from '../pages/cardInputCondition';
 import useInput from '../hooks/useInput';

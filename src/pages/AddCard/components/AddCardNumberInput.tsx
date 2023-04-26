@@ -1,9 +1,10 @@
 import React from 'react';
 
-import type { AddCardNumberInputProps } from '../type';
+import type { AddCardNumberInputProps } from '../../../type';
 import './AddCardNumberInput.css';
 
 const AddCardNumberInput = ({ cardNumber, onChange }: AddCardNumberInputProps) => {
+  // TODO: memo를 적용시키려면 객체를 내리면 안된다.
   const { first, second, third, fourth } = cardNumber;
   return (
     <section className="card-number-input-container">

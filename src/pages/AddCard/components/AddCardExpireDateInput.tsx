@@ -1,4 +1,4 @@
-import { AddCardExpireDateInputProps } from '../type';
+import { AddCardExpireDateInputProps } from '../../../type';
 import './AddCardExpireDateInput.css';
 
 const AddCardExpireDateInput = ({ expireMonth, expireYear }: AddCardExpireDateInputProps) => {

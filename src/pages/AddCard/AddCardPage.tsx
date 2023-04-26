@@ -1,21 +1,21 @@
 import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import type { CardNumber } from '../type';
-import Card from '../components/Card';
-import AddCardForm from '../components/AddCardForm';
-import Header from '../components/Header';
-import useInput from '../hooks/useInput';
-import useComplicateInput from '../hooks/useComplicateInput';
-import { handleNumberInput, identity, isNumberInput, stringToUpperCase } from '../utils/util';
+import type { CardNumber } from '../../type';
+import Card from '../../components/Card';
+import AddCardForm from './components/AddCardForm';
+import Header from '../../components/Header';
+import useInput from '../../hooks/useInput';
+import useComplicateInput from '../../hooks/useComplicateInput';
+import { handleNumberInput, identity, isNumberInput, stringToUpperCase } from '../../utils/util';
 import {
   securityCodeCondition,
   cardOwnerCondition,
   cardPasswordCondition,
   cardExpireMonthCondition,
   cardExpireYearCondition,
-} from './cardInputCondition';
-import BackButtonImg from '../asset/back_button.png';
+} from '../cardInputCondition';
+import BackButtonImg from '../../asset/back_button.png';
 import './AddCardPage.css';
 
 const AddCardPage = () => {

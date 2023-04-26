@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import AddCardSecurityCodeInput from '../components/AddCardSecurityCodeInput';
+import AddCardSecurityCodeInput from '../pages/AddCard/components/AddCardSecurityCodeInput';
 import { handleNumberInput } from '../utils/util';
 import { securityCodeCondition } from '../pages/cardInputCondition';
 import useInput from '../hooks/useInput';

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import AddCardPasswordInput from '../components/AddCardPasswordInput';
+import AddCardPasswordInput from '../pages/AddCard/components/AddCardPasswordInput';
 import { handleNumberInput } from '../utils/util';
 import { cardPasswordCondition } from '../pages/cardInputCondition';
 import useInput from '../hooks/useInput';
