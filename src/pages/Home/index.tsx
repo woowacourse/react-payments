@@ -24,16 +24,18 @@ function Home() {
       <S.CreditCardLayout>
         <S.CreditCardList>
           {creditCardList.map((creditCard) => (
-            <CreditCard
-              key={creditCard.number}
-              fullFilled
-              creditCard={{
-                number: creditCard.number,
-                expiry: creditCard.expiry,
-                owner: creditCard.owner,
-                company: creditCard.company,
-              }}
-            />
+            <S.CreditCardItem key={creditCard.id}>
+              <CreditCard
+                fullFilled
+                creditCard={{
+                  number: creditCard.number,
+                  expiry: creditCard.expiry,
+                  owner: creditCard.owner,
+                  company: creditCard.company,
+                }}
+              />
+              <S.CreditCardAlias>{creditCard.alias}</S.CreditCardAlias>
+            </S.CreditCardItem>
           ))}
         </S.CreditCardList>
         <S.RegisterCreditCardContainer>
