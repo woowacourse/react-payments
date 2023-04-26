@@ -2,13 +2,20 @@ import { Container } from "../common/Container";
 import { Input } from "../common/Input";
 import { InputLabel } from "../common/InputLabel";
 import { EXPRIYDATE_MAXLEGNTH, EXPRIYDATE_REGEX, TWO_TO_NINE_REGEX } from "../../constants";
+import { SubmitManageContext } from "../../contexts/SubmitManageContext";
 
+import { useCallback, useContext } from "react";
 interface ExpiryDateInputProps {
-  isValid: boolean;
-  setIsValid: (isValid: boolean) => void;
   setExpiryDate: (value: string) => void;
-  setIsCompleted: (isCompleted: boolean) => void;
 }
+
+const paddingSingleDigitMonth = (expriyDate: string) => {
+  if (expriyDate.length === 2 && !new RegExp(TWO_TO_NINE_REGEX).test(expriyDate[0])) {
+    return `${"0"}${expriyDate}`;
+  }
+
+  return expriyDate;
+};
 
 const ExpiryDateInfo = {
   label: "expiryDate",
@@ -18,14 +25,22 @@ const ExpiryDateInfo = {
   $textPosition: "center",
 };
 
-export const ExpiryDateInput = ({ isValid, setExpiryDate, setIsCompleted, setIsValid }: ExpiryDateInputProps) => {
-  const paddingSingleDigitMonth = (expriyDate: string) => {
-    if (expriyDate.length === 2 && !new RegExp(TWO_TO_NINE_REGEX).test(expriyDate[0])) {
-      return `${"0"}${expriyDate}`;
-    }
+export const ExpiryDateInput = ({ setExpiryDate }: ExpiryDateInputProps) => {
+  const { isInputsCompleted, setIsInputsCompleted, isInputsValid, setIsInputsValid } = useContext(SubmitManageContext);
 
-    return expriyDate;
-  };
+  const setIsCompleted = useCallback(
+    (isCompleted: boolean) => {
+      setIsInputsCompleted({ ...isInputsCompleted, isExpiryDateCompleted: isCompleted });
+    },
+    [isInputsCompleted, setIsInputsCompleted]
+  );
+
+  const setIsValid = useCallback(
+    (isValid: boolean) => {
+      setIsInputsValid({ ...isInputsValid, isExpiryDateValid: isValid });
+    },
+    [isInputsValid, setIsInputsValid]
+  );
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replaceAll(" / ", "");
@@ -54,7 +69,7 @@ export const ExpiryDateInput = ({ isValid, setExpiryDate, setIsCompleted, setIsV
         {...ExpiryDateInfo}
         handleInput={handleInput}
         error={{
-          isValid: isValid,
+          isValid: isInputsValid.isExpiryDateValid,
           errorMessage: "유효한 만료일을 입력해주세요.",
         }}
       />

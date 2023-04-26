@@ -1,14 +1,11 @@
 import { Container } from "../common/Container";
 import { Input } from "../common/Input";
 import { InputLabel } from "../common/InputLabel";
-import { useRef, useCallback } from "react";
+import { useRef, useCallback, useContext } from "react";
 import styled from "styled-components";
+import { SubmitManageContext } from "../../contexts/SubmitManageContext";
 
 import { PASSWORD_MAXLEGNTH, NUMBER_REGEX } from "../../constants";
-
-interface PasswordProps {
-  setIsCompleted: (isCompleted: boolean) => void;
-}
 
 const passwordInfo = {
   placeholder: "",
@@ -23,14 +20,22 @@ const cannotInput = (text: string): boolean => {
   return text.length > PASSWORD_MAXLEGNTH || !/\d/g.test(text);
 };
 
-export const PasswordInput = ({ setIsCompleted }: PasswordProps) => {
-  const isInputsCompleted = useRef<boolean[]>(new Array(passwordInfo.length).fill(false));
+export const PasswordInput = () => {
+  const isPassWordsCompleted = useRef<boolean[]>(new Array(passwordInfo.length).fill(false));
+  const { setIsInputsCompleted, isInputsCompleted } = useContext(SubmitManageContext);
+
+  const setIsCompleted = useCallback(
+    (isCompleted: boolean) => {
+      setIsInputsCompleted({ ...isInputsCompleted, isPasswordCompleted: isCompleted });
+    },
+    [isInputsCompleted, setIsInputsCompleted]
+  );
 
   const handleInput = useCallback(
     (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
       const text = e.target.value;
       if (text.length === 0) {
-        isInputsCompleted.current[index] = false;
+        isPassWordsCompleted.current[index] = false;
         setIsCompleted(false);
       }
 
@@ -40,13 +45,13 @@ export const PasswordInput = ({ setIsCompleted }: PasswordProps) => {
         return;
       }
 
-      isInputsCompleted.current[index] = false;
-      if (text.length === PASSWORD_MAXLEGNTH) isInputsCompleted.current[index] = true;
+      isPassWordsCompleted.current[index] = false;
+      if (text.length === PASSWORD_MAXLEGNTH) isPassWordsCompleted.current[index] = true;
 
       setIsCompleted(false);
-      if (isInputsCompleted.current.every((isCompleted) => isCompleted)) setIsCompleted(true);
+      if (isPassWordsCompleted.current.every((isCompleted) => isCompleted)) setIsCompleted(true);
     },
-    [setIsCompleted, cannotInput, isInputsCompleted]
+    [setIsCompleted, cannotInput, isPassWordsCompleted]
   );
 
   return (

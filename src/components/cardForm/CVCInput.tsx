@@ -2,14 +2,10 @@ import { Container } from "../common/Container";
 import { Input } from "../common/Input";
 import { InputLabel } from "../common/InputLabel";
 import styled from "styled-components";
-
-import { useCallback } from "react";
+import { useCallback, useContext } from "react";
+import { SubmitManageContext } from "../../contexts/SubmitManageContext";
 
 import { CVC_MAXLEGNTH, NUMBER_REGEX } from "../../constants";
-
-interface CVCProps {
-  setIsCompleted: (isCompleted: boolean) => void;
-}
 
 const CVCInfo = {
   label: "CVC",
@@ -23,7 +19,16 @@ const cannotInput = (text: string): boolean => {
   return text.length > CVC_MAXLEGNTH || !NUMBER_REGEX.test(text);
 };
 
-export const CVCInput = ({ setIsCompleted }: CVCProps) => {
+export const CVCInput = () => {
+  const { setIsInputsCompleted, isInputsCompleted } = useContext(SubmitManageContext);
+
+  const setIsCompleted = useCallback(
+    (isCompleted: boolean) => {
+      setIsInputsCompleted({ ...isInputsCompleted, isCVCCompleted: isCompleted });
+    },
+    [isInputsCompleted, setIsInputsCompleted]
+  );
+
   const handleInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       if (cannotInput(e.target.value)) {
