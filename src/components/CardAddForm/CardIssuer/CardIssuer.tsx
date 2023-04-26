@@ -27,9 +27,13 @@ function CardIssuer({
   const { isModalOpen, openModal, closeModal } = useModal();
   const { isError, handleError, removeError } = useError();
 
-  const handleCloseModal = () => {
+  const handleModalError = () => {
     const isValid = updateCardInputValidation('issuer', value);
     handleError(isValid);
+  };
+
+  const handleCloseModal = () => {
+    handleModalError();
     closeModal();
   };
 
@@ -48,8 +52,7 @@ function CardIssuer({
 
   const onKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
     if (event.key === 'Tab') {
-      const isValid = updateCardInputValidation('issuer', value);
-      handleError(isValid);
+      handleModalError();
     }
   };
 
