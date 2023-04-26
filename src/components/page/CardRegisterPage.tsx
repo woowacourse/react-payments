@@ -21,7 +21,7 @@ interface Props {
 const CardRegisterPage = ({ navigate }: Props) => {
   const [{ cardCompany, cardNumber, expireDate, ownerName }] = useCardForm();
   const [insert, focus] = useFocusRef();
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(!cardCompany);
 
   const submitNewCard = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
