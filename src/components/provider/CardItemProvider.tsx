@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext } from "react";
 import { INPUT_MAX_LENGTH } from "../../constants";
 import { isInputsSatisfied } from "../../utils";
 import useCardNumber from "../../hooks/cardItemInputs/useCardNumber";
@@ -42,12 +42,6 @@ const CardItemActionContext = createContext<CardItemAction | null>(null);
 const ErrorMessageValueContext = createContext<ErrorMessageValue | null>(null);
 
 const CardItemProvider = ({ children }: CardItemProviderProps) => {
-  // const [cardNumber, onChangeCardNumber] = useState(["", "", "", ""]);
-  // const [expirationDate, onChangeExpirationDate] = useState(["", ""]);
-  // const [name, onChangeName] = useState("");
-  // const [securityCode, onChangeSecurityCode] = useState("");
-  // const [password, onChangePassword] = useState(["", ""]);
-
   const { cardNumber, cardNumberErrorMessage, onChangeCardNumber } = useCardNumber();
   const { expirationDate, expirationDateErrorMessage, onChangeExpirationDate } = useExpirationDate();
   const { name, nameErrorMessage, onChangeName } = useName();
