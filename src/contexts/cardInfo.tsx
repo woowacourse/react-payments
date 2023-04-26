@@ -37,15 +37,11 @@ export const CardPreviewInfoContext = createContext({
 });
 
 export function CardInfoProvider({ children }: { children: React.ReactNode }) {
-  const cardNumberDefaultInput = {
-    ...defaultInput,
-    ...useInput(cardRegisterValidator.cardNumber),
-  };
-
   const preivewInfo = {
     CARD_NUMBER: {
       first: {
-        ...cardNumberDefaultInput,
+        ...defaultInput,
+        ...useInput(cardRegisterValidator.cardNumber),
       },
       second: {
         ...defaultInput,
