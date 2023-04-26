@@ -1,9 +1,9 @@
 export const LOCAL_STORAGE_CARD_KEY = 'cardList';
 
-export const PAGE_KIND = {
+export const PAGE_KIND = Object.freeze({
   home: 'homePage',
   addCard: 'addCardPage',
-};
+});
 
 export const PAGE = [PAGE_KIND.home, PAGE_KIND.addCard] as const;
 

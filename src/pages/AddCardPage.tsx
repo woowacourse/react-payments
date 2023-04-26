@@ -1,6 +1,5 @@
 import React, { FormEvent, useRef } from 'react';
 import styled from 'styled-components';
-import { useInput } from '../hooks/useInput';
 import PrevButton from '../components/common/PrevButton';
 import Card from '../components/card/Card';
 import InputField from '../components/common/InputField';
@@ -21,6 +20,7 @@ import {
 } from '../utils';
 import { CardInfo, PageInfo } from '../types';
 import { InputValidate, formValidate } from '../hooks/formValidate';
+import { useFormInputs } from '../hooks/useFormInputs';
 
 interface AddCardPageProps {
   cardList: CardInfo[];
@@ -35,45 +35,20 @@ export default function AddCardPage({
 }: AddCardPageProps) {
   const cardForm = useRef<HTMLFormElement>(null);
   const { onInputKeydown } = useFocusInput(cardForm);
-  const firstCardNumber = useInput('', {
-    name: 'firstCardInput',
-    maxLength: 4,
-  });
-  const secondCardNumber = useInput('', {
-    name: 'secondCardInput',
-    maxLength: 4,
-  });
-  const thirdCardNumber = useInput('', {
-    name: 'thirdCardInput',
-    maxLength: 4,
-  });
-  const fourthCardNumber = useInput('', {
-    name: 'fourthCardInput',
-    maxLength: 4,
-  });
-  const year = useInput('', {
-    name: 'yearInput',
-    errorMessage: '카드의 연도를 확인해주세요',
-    maxLength: 2,
-  });
-  const month = useInput('', {
-    name: 'monthInput',
-    errorMessage: '카드의 달을 확인해주세요.',
-    maxLength: 2,
-  });
-  const owner = useInput('', {
-    name: 'ownerInput',
-    maxLength: 30,
-  });
-  const cvc = useInput('', { name: 'cvcInput', maxLength: 3 });
-  const firstPassword = useInput('', {
-    name: 'firstPasswordInput',
-    maxLength: 1,
-  });
-  const secondPassword = useInput('', {
-    name: 'secondPasswordInput',
-    maxLength: 1,
-  });
+  const { formInputs } = useFormInputs();
+
+  const {
+    firstCardNumber,
+    secondCardNumber,
+    thirdCardNumber,
+    fourthCardNumber,
+    month,
+    year,
+    owner,
+    cvc,
+    firstPassword,
+    secondPassword,
+  } = formInputs.addCardPage;
 
   const onCardInfoSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
