@@ -73,7 +73,7 @@ const ICChip = styled.div`
   width: 40px;
   height: 26px;
 
-  margin-top: 33px;
+  margin: 20px 0 10px 0;
 
   background: var(--yellow-color);
   border-radius: 4px;
@@ -98,7 +98,7 @@ const CardInfoContainer = styled.div`
   display: flex;
   justify-content: space-between;
 
-  margin-top: 7px;
+  margin-top: 10px;
 `;
 
 const CardNameContainer = styled.p`

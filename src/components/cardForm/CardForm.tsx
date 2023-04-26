@@ -95,7 +95,7 @@ const CardForm = ({ onSubmitForm, onChangeForm }: CardFormProps) => {
 const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 7px;
   padding: 28px;
 `;
 
