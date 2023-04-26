@@ -14,7 +14,9 @@ const BankList = ({ onClose }: BankListProps) => {
     <BottomSheet onClose={onClose}>
       <BankContainer>
         {bankNames.map((bankName) => {
-          return <BankItem key={bankName} bankName={bankName} />;
+          return (
+            <BankItem key={bankName} bankName={bankName} onClose={onClose} />
+          );
         })}
       </BankContainer>
     </BottomSheet>
