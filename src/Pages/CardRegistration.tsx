@@ -1,9 +1,11 @@
 import styled from 'styled-components';
+import BankProfileButtonList from '../components/BankProfileButtonList';
 import CardRegistrationForm from '../components/CardRegistrationForm';
 import useCardForm from '../components/CardRegistrationForm/hooks/useCardForm';
 import Card from '../components/Common/Card';
 import Header from '../components/Common/Header';
 import Modal from '../components/Common/Modal';
+import bankList from '../data/bankList';
 import useModal from '../hooks/useModal';
 
 function CardRegistration() {
@@ -38,9 +40,7 @@ function CardRegistration() {
         />
         {isModalOpen && (
           <Modal closeModal={closeModal}>
-            <button type="button" onClick={() => closeModal()}>
-              닫기
-            </button>
+            <BankProfileButtonList bankList={bankList} onClick={closeModal} profileSize={37} />
           </Modal>
         )}
       </StyledMainCardRegistration>
