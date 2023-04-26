@@ -4,6 +4,7 @@ import { Input } from "../common/Input";
 import { InputLabel } from "../common/InputLabel";
 import styled from "styled-components";
 import { isNumeric } from "../../utils/validate";
+import { useFocusChain } from "../../hook/useFocusChain";
 
 const passwordInfo = {
   $width: "43px",
@@ -26,6 +27,8 @@ export const PasswordInput = ({
     useRef<HTMLInputElement>(null),
   ];
 
+  const { moveFocusToNext } = useFocusChain(allRefs, 1);
+
   const handleInput =
     (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;
@@ -41,14 +44,10 @@ export const PasswordInput = ({
         return newPassword;
       });
 
-      if (value.length === 1 && index < allRefs.length - 1) {
-        console.log(allRefs[index + 1].current);
-        allRefs[index + 1].current?.focus();
-      }
+      moveFocusToNext(index, value);
     };
 
   const handleOutFocusEvent = () => {
-    console.log(password);
     const validity = validatePasswordInput(password);
     setIsValid(validity);
   };

@@ -5,6 +5,7 @@ import { Input } from "../common/Input";
 import styled from "styled-components";
 import { CARD_INPUT_NUMBER } from "../../constant/cardInput";
 import { isNumeric } from "../../utils/validate";
+import { useFocusChain } from "../../hook/useFocusChain";
 
 interface CardNumberInputProps {
   setCardNumbers: (index: number, numbers: string) => void;
@@ -30,6 +31,8 @@ export const CardNumberInput = ({
     useRef<HTMLInputElement>(null),
   ];
 
+  const { moveFocusToNext } = useFocusChain(allRefs, 4);
+
   const handleInput =
     (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;
@@ -52,9 +55,7 @@ export const CardNumberInput = ({
       });
       setCardNumbers(index, value);
 
-      if (value.length === 4 && index < 3) {
-        allRefs[index + 1].current?.focus();
-      }
+      moveFocusToNext(index, value);
     };
 
   const handleOutFocusEvent = () => {
@@ -80,6 +81,7 @@ export const CardNumberInput = ({
         />
         {[2, 3, 4].map((ind) => (
           <Input
+            key={ind}
             {...cardNumberInputInfo}
             type={ind < 3 ? "text" : "password"}
             label={`cardNumber${ind}`}
