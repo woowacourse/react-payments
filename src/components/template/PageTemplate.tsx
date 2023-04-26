@@ -25,7 +25,8 @@ const PageTemplateWrapper = styled.div`
   min-width: 375px;
   width: 375px;
 
-  padding: 72px 28px 28px 28px;
+  padding: 28px;
+  padding-top: 72px;
 `;
 
 const Main = styled.div`
