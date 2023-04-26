@@ -1,42 +1,57 @@
-import Header from "../components/common/Header";
 import Page from "../components/common/Page";
 import styled from "styled-components";
-import Card from "../components/Card";
-import { getLocalStorage } from "../utils";
-import { CardType } from "../types";
 import { ROUTER_PATH } from "../router/path";
+import Button from "../components/common/Button";
+import { useNavigate } from "react-router-dom";
+import { getEmptyCard } from "../utils/card";
+import Card from "../components/Card";
 
 const NameCard = () => {
+  const navigate = useNavigate();
+  const card = getEmptyCard();
+
   return (
     <Page>
-      <h1>카드 등록이 완료되었습니다.</h1>
+      <TitleWrapper>카드 등록이 완료되었습니다.</TitleWrapper>
+      <Card {...card} />
+      <NameInputWrapper>
+        <NameInput />
+      </NameInputWrapper>
+      <Button
+        text="확인"
+        type="button"
+        onClick={() => navigate(ROUTER_PATH.MyCard)}
+      />
     </Page>
   );
 };
 
-const CardWrapper = styled.div`
-  margin-bottom: 46px;
+const TitleWrapper = styled.h3`
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 40px;
 `;
 
-const EmptyCardWrapper = styled.div`
+const NameInputWrapper = styled.div`
   display: flex;
-  justify-content: center;
+  height: 280px;
   align-items: center;
+  text-align: center;
+`;
 
-  color: #575757;
-  font-size: 30px;
+const NameInput = styled.input`
+  width: 50vw;
+  height: 30px;
+  text-align: center;
+  border: none;
 
-  width: 208px;
-  height: 123px;
+  font-size: 18px;
 
-  background: #e5e5e5;
-  border-radius: 5px;
-  text-decoration: none;
+  border-bottom: 1.5px solid #737373;
+  outline: none;
 
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
-
-  :active {
-    transform: scale(0.98);
+  &:focus {
+    border-bottom: 1.5px solid darkblue;
   }
 `;
 

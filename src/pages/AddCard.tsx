@@ -16,7 +16,7 @@ const AddCard = () => {
   const registerCard = () => {
     const cards = getLocalStorage("card");
     setLocalStorage("card", [...cards, newCard]);
-    navigate(ROUTER_PATH.MyCard);
+    navigate(ROUTER_PATH.NameCard);
   };
 
   return (
