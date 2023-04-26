@@ -8,3 +8,11 @@ export interface CardNumber {
   third: string;
   fourth: string;
 }
+
+export interface TextLength {
+  [key: string]: number;
+}
+
+export interface ErrorMessage {
+  [key: string]: string;
+}
