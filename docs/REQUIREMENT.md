@@ -14,7 +14,6 @@
   - 공통되는 페이지를 관리한다.
 - Header
   - Header 문구와 뒤로가기 버튼을 관리한다.
-- Button
 - Card
   - input form에 입력되고 있는 카드 정보를 보여준다.
 - CardInput
@@ -41,3 +40,4 @@
 - CardInputForm
   - input 종류에 맞는 예외를 보여준다.
   - card input들을 관리한다.
+- BottomSheet
