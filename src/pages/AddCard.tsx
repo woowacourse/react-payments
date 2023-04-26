@@ -7,6 +7,7 @@ import SecurityCode from '../components/SecurityCode/SecurityCode';
 import CardPassword from '../components/CardPassword/CardPassword';
 import Card from '../components/Card/Card';
 import Header from '../components/Header/Header';
+import BottomSheet from '../components/BottomSheet/BottomSheet';
 import {
   useAddCard,
   useCardNumbers,
@@ -93,6 +94,7 @@ const AddCard = ({ handleSetCards }: SetCardsProps) => {
           <NextButton disabled={disabled}>다음</NextButton>
         </ButtonWrapper>
       </form>
+      <BottomSheet />
     </>
   );
 };

@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { BottomSheet } from './BottomSheet';
+import BottomSheet from './BottomSheet';
 
 const meta = {
   component: BottomSheet,
