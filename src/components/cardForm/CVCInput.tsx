@@ -47,7 +47,7 @@ export const CVCInput = ({ validateCVCInput }: CVCInputProps) => {
         <Input
           {...CVCInfo}
           handleInput={handleInput}
-          handleChange={handleOutFocusEvent}
+          handleOutFocus={handleOutFocusEvent}
           error={{
             isValid: isValid,
             errorMessage: "3자리 숫자를 입력하세요.",

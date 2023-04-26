@@ -52,7 +52,7 @@ export const ExpiryDateInput = ({
       <Input
         {...ExpiryDateInfo}
         handleInput={handleInput}
-        handleChange={handleOutFocusEvent}
+        handleOutFocus={handleOutFocusEvent}
         error={{
           isValid: isValid,
           errorMessage: "유효한 만료일이 아닙니다. ",

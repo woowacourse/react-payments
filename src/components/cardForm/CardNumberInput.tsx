@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { InputContainer } from "../common/InputContainer";
 import { InputLabel } from "../common/InputLabel";
 import { Input } from "../common/Input";
@@ -23,6 +23,13 @@ export const CardNumberInput = ({
   const [numbers, setNumbers] = useState(["", "", "", ""]);
   const [isValid, setIsValid] = useState(true);
 
+  const allRefs = [
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+  ];
+
   const handleInput =
     (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;
@@ -40,10 +47,15 @@ export const CardNumberInput = ({
 
       setNumbers((prev) => {
         const newNumbers = [...prev];
-        newNumbers[index - 1] = value;
+        newNumbers[index] = value;
         return newNumbers;
       });
-      setCardNumbers(index - 1, value);
+      setCardNumbers(index, value);
+
+      if (value.length === 4 && index < 3) {
+        console.log(index);
+        allRefs[index + 1].current?.focus();
+      }
     };
 
   const handleOutFocusEvent = () => {
@@ -63,16 +75,18 @@ export const CardNumberInput = ({
           {...cardNumberInputInfo}
           type="text"
           label="cardNumber1"
-          handleInput={handleInput(1)}
-          handleChange={() => {}}
+          handleInput={handleInput(0)}
+          handleOutFocus={() => {}}
+          ref={allRefs[0]}
         />
         {[2, 3, 4].map((ind) => (
           <Input
             {...cardNumberInputInfo}
             type={ind < 3 ? "text" : "password"}
             label={`cardNumber${ind}`}
-            handleInput={handleInput(ind)}
-            handleChange={handleOutFocusEvent}
+            handleInput={handleInput(ind - 1)}
+            handleOutFocus={handleOutFocusEvent}
+            ref={allRefs[ind - 1]}
           />
         ))}
       </Row>

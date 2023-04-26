@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { InputContainer } from "../common/InputContainer";
 import { Input } from "../common/Input";
 import { InputLabel } from "../common/InputLabel";
@@ -21,6 +21,11 @@ export const PasswordInput = ({
   const [password, setPassword] = useState(["", ""]);
   const [isValid, setIsValid] = useState(true);
 
+  const allRefs = [
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+  ];
+
   const handleInput =
     (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;
@@ -35,6 +40,11 @@ export const PasswordInput = ({
         newPassword[index] = value;
         return newPassword;
       });
+
+      if (value.length === 1 && index < allRefs.length - 1) {
+        console.log(allRefs[index + 1].current);
+        allRefs[index + 1].current?.focus();
+      }
     };
 
   const handleOutFocusEvent = () => {
@@ -50,18 +60,20 @@ export const PasswordInput = ({
         <Input
           {...passwordInfo}
           handleInput={handleInput(0)}
-          handleChange={handleOutFocusEvent}
+          handleOutFocus={handleOutFocusEvent}
           label="password1"
           error={{
             isValid: isValid,
             errorMessage: "비밀번호를 입력하세요.",
           }}
+          ref={allRefs[0]}
         />
         <Input
           {...passwordInfo}
           handleInput={handleInput(1)}
-          handleChange={handleOutFocusEvent}
+          handleOutFocus={handleOutFocusEvent}
           label="password2"
+          ref={allRefs[1]}
         />
         <HiddenPassword>●</HiddenPassword>
         <HiddenPassword>●</HiddenPassword>

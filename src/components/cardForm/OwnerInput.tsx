@@ -43,7 +43,7 @@ export const OwnerInput = ({ setOwner }: OwnerInputProps) => {
       <Input
         {...OwnerInfo}
         handleInput={handleInput}
-        handleChange={(e) => {}}
+        handleOutFocus={(e) => {}}
       />
     </InputContainer>
   );
