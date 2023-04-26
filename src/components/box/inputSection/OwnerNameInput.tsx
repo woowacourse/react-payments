@@ -10,7 +10,11 @@ interface Props {
 }
 
 const OwnerNameInput = ({ insert, focus }: Props) => {
-  const [{ ownerName }, { setOwnerName }] = useCardForm();
+  const [{ ownerName }, dispatch] = useCardForm();
+
+  const setOwnerName = (value: string) => {
+    dispatch({ type: 'SET_VALUE', key: 'ownerName', value });
+  };
 
   return (
     <InputSectionTemplate label="카드 소유자 이름(선택)" countLength={ownerName.length} maxLength={30}>

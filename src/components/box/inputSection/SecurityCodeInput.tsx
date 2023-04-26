@@ -12,7 +12,12 @@ interface Props {
 }
 
 const SecurityCodeInput = ({ insert, focus }: Props) => {
-  const [{ securityCode }, { setSecurityCode }] = useCardForm();
+  const [{ securityCode }, dispatch] = useCardForm();
+
+  const setSecurityCode = (value: string) => {
+    dispatch({ type: 'SET_VALUE', key: 'securityCode', value });
+  };
+
   return (
     <InputSectionTemplate label="보안 코드(CVC/CVV)">
       <InputBox align="center">

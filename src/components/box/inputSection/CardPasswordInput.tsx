@@ -12,7 +12,12 @@ interface Props {
 }
 
 const CardPasswordInput = ({ insert, focus }: Props) => {
-  const [{ cardPassword }, { setCardPasswordIndex }] = useCardForm();
+  const [{ cardPassword }, dispatch] = useCardForm();
+
+  const setCardPasswordIndex = (index: number) => (value: string) => {
+    dispatch({ type: 'SET_LIST_VALUE', key: 'cardPassword', index, value });
+  };
+
   return (
     <InputSectionTemplate label="카드 번호">
       {cardPassword.map((value, index) => (

@@ -12,7 +12,11 @@ interface Props {
 }
 
 const ExpireDateInput = ({ insert, focus }: Props) => {
-  const [{ expireDate }, { setExpireDateIndex }] = useCardForm();
+  const [{ expireDate }, dispatch] = useCardForm();
+
+  const setExpireDateIndex = (index: number) => (value: string) => {
+    dispatch({ type: 'SET_LIST_VALUE', key: 'expireDate', index, value });
+  };
 
   const validExpireDate = (expireDate: CardType['expireDate']) => {
     if (expireDate.join('') === '') return;

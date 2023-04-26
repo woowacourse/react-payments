@@ -10,7 +10,11 @@ interface Props {
 }
 
 const CardNumberInput = ({ insert, focus }: Props) => {
-  const [{ cardNumber }, { setCardNumberIndex }] = useCardForm();
+  const [{ cardNumber }, dispatch] = useCardForm();
+
+  const setCardNumberIndex = (index: number) => (value: string) => {
+    dispatch({ type: 'SET_LIST_VALUE', key: 'cardNumber', index, value });
+  };
 
   return (
     <InputSectionTemplate label="카드 번호">
