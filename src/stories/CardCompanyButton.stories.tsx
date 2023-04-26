@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { CARD_COMPANIES_ENGLISH } from "../type/CardCompany";
-import CardCompanyButton from "../component/CardInputPage/InputModalBank/CardCompanyButton";
+import CardCompanyButton from "../component/CardInputPage/CardCompany/CardCompanyButton";
 
 type Story = StoryObj<typeof CardCompanyButton>;
 
@@ -21,4 +21,4 @@ const meta: Meta<typeof CardCompanyButton>= {
 
 export default meta;
 
-export const Icons: Story = { args: { companyName: 'kakao' } }
+export const Icons: Story = { args: { companyName: 'kakao' } };
