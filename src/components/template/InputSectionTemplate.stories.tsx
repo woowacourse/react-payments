@@ -1,9 +1,9 @@
-import InputBox from '../common/InputBox';
 import InputSectionTemplate from './InputSectionTemplate';
+import InputBox from '../common/InputBox';
+import Input from '../common/Input';
 
 import useList from '../../utils/useList';
 import useFocusRef from '../../utils/useFocusRef';
-import Input from '../common/Input';
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
