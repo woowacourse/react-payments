@@ -40,8 +40,8 @@ export default function InputBoxPassword(props: InputBoxPasswordProps) {
         changeHasError={changeHasError}
         changePasswordStatus={changePasswordStatus}
       />
-      <p className={hasError ? "visible" : ""}>
-        {CARD_ERROR_MESSAGE.INPUT_CARD_PASSWORD}
+      <p className="error-message">
+        {hasError && CARD_ERROR_MESSAGE.INPUT_CARD_PASSWORD}
       </p>
     </div>
   );

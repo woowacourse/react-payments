@@ -40,8 +40,8 @@ export default function InputBoxCardNumber(props: InputBoxNumberProps) {
         changeHasError={changeHasError}
         changeCardNumberStatus={changeCardNumberStatus}
       />
-      <p className={hasError ? "visible" : ""}>
-        {CARD_ERROR_MESSAGE.INPUT_CARD_NUMBER}
+      <p className="error-message">
+        {hasError && CARD_ERROR_MESSAGE.INPUT_CARD_NUMBER}
       </p>
     </div>
   );

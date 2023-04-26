@@ -44,8 +44,8 @@ export default function InputBoxOwner(props: InputBoxOwnerProps) {
         inputMode="text"
         value={name}
       />
-      <p className={isError ? "visible" : ""}>
-        {CARD_ERROR_MESSAGE.INPUT_CARD_OWNER}
+      <p className="error-message">
+        {isError && CARD_ERROR_MESSAGE.INPUT_CARD_OWNER}
       </p>
     </div>
   );

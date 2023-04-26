@@ -54,8 +54,8 @@ export default function InputBoxExpirationDate(
         inputMode="numeric"
         value={expirationDate}
       />
-      <p className={isError ? "visible" : ""}>
-        {CARD_ERROR_MESSAGE.INPUT_CARD_EXPIRATION_DATE}
+      <p className="error-message">
+        {isError && CARD_ERROR_MESSAGE.INPUT_CARD_EXPIRATION_DATE}
       </p>
     </div>
   );

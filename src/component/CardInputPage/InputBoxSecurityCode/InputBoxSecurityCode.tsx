@@ -49,8 +49,8 @@ export default function InputBoxSecurityCode(props: InputBoxSecurityProps) {
       <button className="button-security-code" type="button">
         ?
       </button>
-      <p className={isError ? "visible" : ""}>
-        {CARD_ERROR_MESSAGE.INPUT_CARD_PASSWORD}
+      <p className="error-message">
+        {isError && CARD_ERROR_MESSAGE.INPUT_CARD_SECURITY}
       </p>
     </div>
   );

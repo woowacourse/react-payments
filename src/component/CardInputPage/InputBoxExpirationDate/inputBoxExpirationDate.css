@@ -1,12 +1,8 @@
 .input-box-expiration-date p:last-child {
-  margin-left: 2%;
+  margin: 1% 0 0 2%;
   color: red;
   font-weight: bold;
-  visibility: hidden;
-}
-
-.input-box-expiration-date p:last-child.visible {
-  visibility: visible;
+  height: 15px;
 }
 
 .input-expiration-date {
