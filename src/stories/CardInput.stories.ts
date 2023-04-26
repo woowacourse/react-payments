@@ -56,7 +56,7 @@ export const Cvc: Story = {
 
 export const Password: Story = {
   args: {
-    id: "password",
+    id: "passwordFirst",
     width: "42px",
     value: "",
     isSecured: true,

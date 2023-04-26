@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { INPUT_MAX_LENGTH, INPUT_MIN_LENGTH } from "../constants";
 
 interface CardInputProps extends HTMLAttributes<HTMLInputElement>{
-  id: "cardNumber" | "expiredDate" | "ownerName" | "cvc" | "password";
+  id: "cardNumber" | "expiredDate" | "ownerName" | "cvc" | "passwordFirst" | "passwordSecond";
   width?: string;
   value: number | string | undefined;
   isSecured: boolean;

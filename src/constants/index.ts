@@ -3,7 +3,8 @@ const INPUT_MAX_LENGTH = {
   expiredDate: 7,
   ownerName: 30,
   cvc: 3,
-  password: 1,
+  passwordFirst: 1,
+  passwordSecond: 1,
 } as const;
 
 const INPUT_MIN_LENGTH = {
@@ -12,6 +13,8 @@ const INPUT_MIN_LENGTH = {
   ownerName: 1,
   cvc: 3,
   password: 1,
+  passwordFirst: 1,
+  passwordSecond: 1,
 } as const;
 
 const SEPERATED_CARD_NUMBER_LENGTH = {
@@ -26,14 +29,22 @@ const CARD_NUMBER_ERASE_SYMBOL = {
   FIRST: 8,
   SECOND: 15,
   THIRD: 23,
-  FOURTH: 26
+  FOURTH: 26,
+  REAL_FIRST: 5,
+  REAL_SECOND: 9,
+  REAL_THIRD: 13,
+  REAL_FOURTH: 16
 } as const;
 
 const ERASE_UNTIL_CARD_NUMBER = {
   FIRST: 0,
   SECOND: 8,
   THIRD: 15,
-  FOURTH: 22
+  FOURTH: 22,
+  REAL_FIRST: 0,
+  REAL_SECOND: 4,
+  REAL_THIRD: 8,
+  REAL_FOURTH: 12
 } as const;
 
 const PASSWORD_DIGIT_INDEX = {
@@ -48,7 +59,7 @@ const EXPIRED_DATE_ERASE_SYMBOL = {
   SEPARATE_SECOND: 8,
   FROM: 0,
   TO_FIRST: 0,
-  TO_SECOND: 6
+  TO_SECOND: 6,
 } as const;
 
 const INPUT_WIDTH = {
@@ -62,7 +73,8 @@ const CARD_ID_VALUE = {
   EXPIRED_DATE: 'expiredDate',
   OWNER_NAME: 'ownerName',
   CVC: 'cvc',
-  PASSWORD: 'password',
+  PASSWORD_FIRST: 'passwordFirst',
+  PASSWORD_SECOND: 'passwordSecond',
 } as const;
 
 const BACKSPASE_KEY = 'Backspace' as const;
@@ -81,5 +93,5 @@ export {
   CARD_ID_VALUE,
   BACKSPASE_KEY,
   RANDOM_COLOR,
-  ERASE_UNTIL_CARD_NUMBER
+  ERASE_UNTIL_CARD_NUMBER,
 };

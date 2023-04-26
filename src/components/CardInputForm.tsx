@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import CardInput from './CardInput';
 import {
@@ -15,6 +15,7 @@ import {
 import { CardType } from '../types';
 import { Link } from 'react-router-dom';
 import { QuestionMark } from '../assets';
+import { cardNumberValidation, expiredDateValidation } from '../utils/validation';
 
 interface CardInputFormProps {
   card: CardType;
@@ -25,8 +26,11 @@ interface CardInputFormProps {
 const CardInputForm = (props: CardInputFormProps) => {
   const card = JSON.parse(JSON.stringify(props.card));
   const [isAnswered, setIsAnswered] = useState<boolean>(false);
+  const [realCardNumber, setRealCardNumber] = useState<string>('');
 
   const handleCardNumberChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setRealCardNumber(realCardNumber + e.target.value[e.target.value.length - 1]);
+
     cardNumberSecureMode(e);
 
     cardNumberPlusSymbol(e);
@@ -66,6 +70,15 @@ const CardInputForm = (props: CardInputFormProps) => {
         card.cardNumber = card.cardNumber.substring(0, ERASE_UNTIL_CARD_NUMBER.THIRD);
       if (card.cardNumber.length < CARD_NUMBER_ERASE_SYMBOL.FOURTH)
         card.cardNumber = card.cardNumber.substring(0, ERASE_UNTIL_CARD_NUMBER.FOURTH);
+
+      if (realCardNumber.length <= CARD_NUMBER_ERASE_SYMBOL.REAL_FOURTH)
+        setRealCardNumber(realCardNumber.substring(0, ERASE_UNTIL_CARD_NUMBER.REAL_FOURTH).trim());
+      if (realCardNumber.length <= CARD_NUMBER_ERASE_SYMBOL.REAL_THIRD)
+        setRealCardNumber(realCardNumber.substring(0, ERASE_UNTIL_CARD_NUMBER.REAL_THIRD).trim());
+      if (realCardNumber.length <= CARD_NUMBER_ERASE_SYMBOL.REAL_SECOND)
+        setRealCardNumber(realCardNumber.substring(0, ERASE_UNTIL_CARD_NUMBER.REAL_SECOND).trim());
+      if (realCardNumber.length <= CARD_NUMBER_ERASE_SYMBOL.REAL_FIRST)
+        setRealCardNumber(realCardNumber.substring(0, ERASE_UNTIL_CARD_NUMBER.REAL_FIRST).trim());
     }
     props.setCard(card);
   };
@@ -82,10 +95,16 @@ const CardInputForm = (props: CardInputFormProps) => {
   const handleExpiredDateKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === BACKSPASE_KEY) {
       if (card.expiredDate.length <= EXPIRED_DATE_ERASE_SYMBOL.SEPARATE_FIRST) {
-        card.expiredDate = card.expiredDate.substring(EXPIRED_DATE_ERASE_SYMBOL.FROM, EXPIRED_DATE_ERASE_SYMBOL.TO_FIRST);
+        card.expiredDate = card.expiredDate.substring(
+          EXPIRED_DATE_ERASE_SYMBOL.FROM,
+          EXPIRED_DATE_ERASE_SYMBOL.TO_FIRST
+        );
       }
       if (card.expiredDate.length <= EXPIRED_DATE_ERASE_SYMBOL.SEPARATE_SECOND) {
-        card.expiredDate = card.expiredDate.substring(EXPIRED_DATE_ERASE_SYMBOL.FROM, EXPIRED_DATE_ERASE_SYMBOL.TO_SECOND);
+        card.expiredDate = card.expiredDate.substring(
+          EXPIRED_DATE_ERASE_SYMBOL.FROM,
+          EXPIRED_DATE_ERASE_SYMBOL.TO_SECOND
+        );
       }
     }
     props.setCard(card);
@@ -108,6 +127,8 @@ const CardInputForm = (props: CardInputFormProps) => {
     props.setCard(card);
   };
 
+  useEffect(() => {
+  }, [realCardNumber, card.cardNumber]);
   return (
     <CardInputFormWrapper>
       <InputSetWrapper>
@@ -122,6 +143,7 @@ const CardInputForm = (props: CardInputFormProps) => {
           onChange={handleCardNumberChanged}
           onKeyDown={handleCardNumberKey}
         />
+        <span>{cardNumberValidation(realCardNumber)}</span>
       </InputSetWrapper>
 
       <InputSetWrapper>
@@ -137,6 +159,7 @@ const CardInputForm = (props: CardInputFormProps) => {
           onChange={handleExpiredDateChanged}
           onKeyDown={handleExpiredDateKey}
         />
+        <span>{expiredDateValidation(card.expiredDate)}</span>
       </InputSetWrapper>
       <InputSetWrapper>
         <OwnerNameLabelWrapper>
@@ -172,10 +195,10 @@ const CardInputForm = (props: CardInputFormProps) => {
       </InputSetWrapper>
 
       <InputSetWrapper>
-        <label htmlFor={CARD_ID_VALUE.PASSWORD}>카드 비밀번호</label>
+        <label htmlFor={CARD_ID_VALUE.PASSWORD_FIRST}>카드 비밀번호</label>
         <PasswordInputWrapper>
           <CardInput
-            id={CARD_ID_VALUE.PASSWORD}
+            id={CARD_ID_VALUE.PASSWORD_FIRST}
             width={INPUT_WIDTH.PASSWORD}
             value={card.password[PASSWORD_DIGIT_INDEX.FIRST]}
             isSecured={true}
@@ -184,7 +207,7 @@ const CardInputForm = (props: CardInputFormProps) => {
             onChange={handlePasswordChanged(PASSWORD_DIGIT_INDEX.FIRST)}
           />
           <CardInput
-            id={CARD_ID_VALUE.PASSWORD}
+            id={CARD_ID_VALUE.PASSWORD_SECOND}
             width={INPUT_WIDTH.PASSWORD}
             value={card.password[PASSWORD_DIGIT_INDEX.SECOND]}
             isSecured={true}
