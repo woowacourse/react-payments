@@ -14,6 +14,15 @@ const creditCard = {
     );
   },
 
+  addDashInCreditCardNumber(number: string) {
+    return this.convertSecuredCreditCard(number)
+      .filter((numbers) => !!numbers.length)
+      .map((numbers) => numbers.join(''))
+      .join(' - ');
+  },
+
+  removeDashInCreditCardNumber: (number: string) => number.replaceAll(' - ', ''),
+
   numberValidation: {
     checkChar: (numbers: string) => {
       if (numbers.match(/\D/g)) {

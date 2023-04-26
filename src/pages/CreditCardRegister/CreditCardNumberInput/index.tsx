@@ -1,8 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
+import Input from '@Components/Input';
 
 import creditCard from '@Domains/creditCard';
 
-import * as S from './style';
 import InputLabel from '../InputLabel';
 import InputLayout from '../InputLayout';
 
@@ -13,53 +12,25 @@ type Props = {
 };
 
 function CreditCardNumberInput({ creditCardNumber, errorMessage, setCreditCardNumber }: Props) {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const [markedCreditCardNumber, setMarkedCreditCardNumber] = useState('');
-  const [isHoverFakeInput, setIsHoverFakeInput] = useState(true);
-
   const handleChangeCreditCardNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newCreditCarNumber = event.target.value;
+    const newCreditCarNumber = creditCard.removeDashInCreditCardNumber(event.target.value);
+    const newAddNumber = newCreditCarNumber[newCreditCarNumber.length - 1];
 
     if (newCreditCarNumber.length > 16) return;
 
-    const markedNumber = creditCard
-      .convertSecuredCreditCard(newCreditCarNumber)
-      .filter((numbers) => !!numbers.length)
-      .map((numbers) => numbers.join(''))
-      .join(' - ');
-
-    setMarkedCreditCardNumber(markedNumber);
-    setCreditCardNumber(newCreditCarNumber);
-    setIsHoverFakeInput(true);
+    if (newCreditCarNumber.length < creditCardNumber.length) setCreditCardNumber('');
+    else setCreditCardNumber((prev) => prev + newAddNumber);
   };
-
-  const handleFakeInputClick = () => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  };
-
-  const handleHiddenInputBlur = () => setIsHoverFakeInput(false);
-
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, []);
 
   return (
     <InputLayout errorMessage={errorMessage}>
       <InputLabel label="카드 번호" />
-      <S.FakeInput onClick={handleFakeInputClick} isHover={isHoverFakeInput}>
-        {markedCreditCardNumber}
-      </S.FakeInput>
-      <S.HiddenInput
-        ref={inputRef}
+      <Input
         type="string"
-        value={creditCardNumber}
+        value={creditCard.addDashInCreditCardNumber(creditCardNumber)}
+        width="100%"
+        textAlign="center"
         onChange={handleChangeCreditCardNumber}
-        onBlur={handleHiddenInputBlur}
-        maxLength={16}
       />
     </InputLayout>
   );
