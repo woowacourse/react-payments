@@ -1,5 +1,4 @@
 import CardCompany from '@Components/CardCompany';
-import Modal from '@Components/Modal';
 
 import * as Type from '@Types/index';
 
@@ -19,13 +18,11 @@ function CreditCardCompanyModal({ updateCompany, closeModal }: CreditCardCompany
   };
 
   return (
-    <Modal closeModal={closeModal} isAbleBackdropClick={false}>
-      <S.CardCompanyLayout>
-        {(Object.keys(CARD_COMPANY) as Type.CardCompanies[]).map((company) => (
-          <CardCompany company={company} key={company} handleClick={() => handleClickCardCompany(company)} />
-        ))}
-      </S.CardCompanyLayout>
-    </Modal>
+    <S.CardCompanyLayout>
+      {(Object.keys(CARD_COMPANY) as Type.CardCompanies[]).map((company) => (
+        <CardCompany company={company} key={company} handleClick={() => handleClickCardCompany(company)} />
+      ))}
+    </S.CardCompanyLayout>
   );
 }
 

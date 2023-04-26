@@ -4,8 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import Button from '@Components/Button';
 import CreditCard from '@Components/CreditCard';
 import Header from '@Components/Header';
+import Modal from '@Components/Modal';
 
-import useModal from '@Hooks/useModal';
+import useAnimationModal from '@Hooks/useAnimationModal';
 
 import { CreditCardRegisterContext } from '@Contexts/CreditCardRegisterContext';
 
@@ -20,7 +21,7 @@ import * as S from './style';
 function CreditCardRegister() {
   const navigate = useNavigate();
 
-  const { isModalOpen, openModal, closeModal } = useModal();
+  const { isModalOpen, animation, openModal, closeModal } = useAnimationModal();
 
   const { creditCard, update, errorMessage } = useContext(CreditCardRegisterContext);
 
@@ -115,7 +116,11 @@ function CreditCardRegister() {
           <Button disabled={!isFullFilled} type="button" handleClick={handleSubmit} text="다음" />
         </S.ButtonWrapper>
       </S.CreditCardRegisterForm>
-      {isModalOpen && <CreditCardCompanyModal updateCompany={update.company} closeModal={closeModal} />}
+      {isModalOpen && (
+        <Modal closeModal={closeModal} isAbleBackdropClick={false} animation={animation}>
+          <CreditCardCompanyModal updateCompany={update.company} closeModal={closeModal} />
+        </Modal>
+      )}
     </>
   );
 }

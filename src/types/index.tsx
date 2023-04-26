@@ -1,3 +1,4 @@
+import ANIMATION from '@Constants/Animation';
 import CARD_COMPANY from '@Constants/CardCompany';
 
 export type CreditCardPasswordType = {
@@ -17,3 +18,5 @@ export type CreditCard = {
 };
 
 export type CardCompanies = keyof typeof CARD_COMPANY;
+
+export type AnimationTypes = keyof typeof ANIMATION;

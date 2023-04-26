@@ -1,5 +1,9 @@
 import styled, { keyframes } from 'styled-components';
 
+import { AnimationTypes } from '@Types/index';
+
+import ANIMATION from '@Constants/Animation';
+
 const ModalLayoutAppear = keyframes`
   0% {
     opacity: 0;
@@ -11,7 +15,22 @@ const ModalLayoutAppear = keyframes`
   }
 `;
 
-export const ModalLayout = styled.div`
+const ModalLayoutDisAppear = keyframes`
+  0% {
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+  to {
+    opacity: 0;
+    background-color: transparent;
+  }
+`;
+
+type ModalLayoutType = {
+  animation: AnimationTypes;
+};
+
+export const ModalLayout = styled.div<ModalLayoutType>`
   position: fixed;
   top: 0;
   border: 0;
@@ -20,7 +39,8 @@ export const ModalLayout = styled.div`
   width: 375px;
   min-height: 100vh;
   margin: 0 auto;
-  animation: ${ModalLayoutAppear} 0.5s forwards;
+  animation: ${(props) => (props.animation === ANIMATION.appear ? ModalLayoutAppear : ModalLayoutDisAppear)} 0.5s
+    forwards;
 `;
 
 type BackdropProps = {
@@ -34,16 +54,31 @@ export const Backdrop = styled.div<BackdropProps>`
 
 const ModalAppear = keyframes`
   0% {
-      opacity: 0;
-      transform: translate3d(0, 100%, 0);
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
   }
   to {
-      opacity: 1;
-      transform: translateZ(0);
+    opacity: 1;
+    transform: translateZ(0);
   }
 `;
 
-export const ModalContents = styled.div`
+const ModalDisAppear = keyframes`
+  0% {
+    opacity: 1;
+    transform: translateZ(0);
+  }
+  to {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+  }
+`;
+
+type ModalContentsProps = {
+  animation: AnimationTypes;
+};
+
+export const ModalContents = styled.div<ModalContentsProps>`
   overflow: auto;
   max-height: 90%;
   position: absolute;
@@ -53,5 +88,5 @@ export const ModalContents = styled.div`
   padding: 20px;
   background-color: #ffffff;
   border-radius: 5px 5px 0px 0px;
-  animation: ${ModalAppear} 0.5s;
+  animation: ${(props) => (props.animation === ANIMATION.appear ? ModalAppear : ModalDisAppear)} 0.5s;
 `;
