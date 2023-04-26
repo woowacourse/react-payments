@@ -1,11 +1,7 @@
-import styled, { DefaultTheme } from 'styled-components';
+import styled from 'styled-components';
 import { BaseInput } from '../../../@common/Input/InputStyles.styles';
 
-interface StyledInputProps {
-  inputTheme?: keyof DefaultTheme;
-}
-
-export const Input = styled.input<StyledInputProps>`
+export const Input = styled.input`
   ${BaseInput}
   padding: 0 20px;
 `;
@@ -34,5 +30,5 @@ export const InputBackground = styled.div`
 export const Divider = styled.span<{
   show?: boolean;
 }>`
-  ${({ show }) => !show && `visibility: hidden`}
+  ${({ show }) => !show && 'visibility: hidden'}
 `;
