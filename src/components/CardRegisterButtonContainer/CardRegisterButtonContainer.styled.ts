@@ -9,7 +9,7 @@ export const CardRegisterButtonContainer = styled.div`
 
   cursor: pointer;
 
-  margin-top: 48px;
+  margin: 48px 0;
 `;
 
 export const CardRegisterMessage = styled.p`
