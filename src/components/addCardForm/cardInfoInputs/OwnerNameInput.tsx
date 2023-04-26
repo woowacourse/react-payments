@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 import { InputWrapper } from './template/InputWrapper';
 import { Input } from './template/Input';
 import styled from 'styled-components';
-import { useError } from '../../hooks/useError';
+import { useError } from '../../../hooks/useError';
 
 interface Props {
   ownerName: string;

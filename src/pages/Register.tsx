@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { AddNewCardForm } from '../components/form/AddNewCardForm';
+import { AddNewCardForm } from '../components/addCardForm';
 import { Layout } from '../layout';
 import { BackButton } from '../layout/BackButton';
 

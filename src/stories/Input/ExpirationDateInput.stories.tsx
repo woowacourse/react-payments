@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { Meta } from '@storybook/react';
-import { ExpirationDateInput } from '../../components/input/ExpirationDateInput';
+import { ExpirationDateInput } from '../../components/addCardForm/cardInfoInputs/ExpirationDateInput';
 
 const meta = {
   title: 'Example/Input',

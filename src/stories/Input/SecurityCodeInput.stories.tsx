@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 
 import type { Meta } from '@storybook/react';
 
-import { SecurityCodeInput } from '../../components/input/SecurityCodeInput';
+import { SecurityCodeInput } from '../../components/addCardForm/cardInfoInputs/SecurityCodeInput';
 
 const meta = {
   title: 'Example/Input',

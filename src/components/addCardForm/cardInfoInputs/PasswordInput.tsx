@@ -2,7 +2,7 @@ import { forwardRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { InputWrapper } from './template/InputWrapper';
 import { Input } from './template/Input';
-import { useError } from '../../hooks/useError';
+import { useError } from '../../../hooks/useError';
 
 interface Props {
   password: string[];

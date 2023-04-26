@@ -2,7 +2,7 @@ import React from 'react';
 
 import type { Meta } from '@storybook/react';
 
-import { AddNewCardForm } from '../../components/form/AddNewCardForm';
+import { AddNewCardForm } from '../../components/addCardForm';
 import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
 
 const meta = {

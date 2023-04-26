@@ -1,10 +1,10 @@
 import { useState, useCallback } from 'react';
 import styled from 'styled-components';
-import { CardNumberInput } from '../input/CardNumberInput';
-import { ExpirationDateInput } from '../input/ExpirationDateInput';
-import { OwnerNameInput } from '../input/OwnerNameInput';
-import { SecurityCodeInput } from '../input/SecurityCodeInput';
-import { PasswordInput } from '../input/PasswordInput';
+import { CardNumberInput } from './cardInfoInputs/CardNumberInput';
+import { ExpirationDateInput } from './cardInfoInputs/ExpirationDateInput';
+import { OwnerNameInput } from './cardInfoInputs/OwnerNameInput';
+import { SecurityCodeInput } from './cardInfoInputs/SecurityCodeInput';
+import { PasswordInput } from './cardInfoInputs/PasswordInput';
 import { CardViewer } from '../cardViewer';
 import { useNavigate } from 'react-router-dom';
 import { useFocus } from '../../hooks/useFocus';
@@ -16,20 +16,15 @@ export const AddNewCardForm = () => {
   const { addNewCard } = useCardData();
 
   const [inputOrder, setInputOrder] = useState(0);
-
   const [isInputFinish, setIsInputFinish] = useState(false);
 
   const [cardNumber, setCardNumber] = useState(['', '', '', '']);
-
   const [expirationDate, setExpirationDate] = useState({
     month: '',
     year: '',
   });
-
   const [ownerName, setOwnerName] = useState('');
-
   const [securityCode, setSecurityCode] = useState('');
-
   const [password, setPassword] = useState(['', '']);
 
   const {

@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 
 import type { Meta } from '@storybook/react';
 
-import { PasswordInput } from '../../components/input/PasswordInput';
+import { PasswordInput } from '../../components/addCardForm/cardInfoInputs/PasswordInput';
 
 const meta = {
   title: 'Example/Input',
