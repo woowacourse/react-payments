@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 interface UseModal {
   modalOpen: boolean;
-  openModal: (content: React.ReactNode) => void;
+  openModal: () => void;
   closeModal: () => void;
 }
 const useModal = (): UseModal => {
