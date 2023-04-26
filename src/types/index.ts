@@ -17,5 +17,5 @@ export type Card = {
   ownerName: string;
   securityCode: string;
   password: CardPassword;
-  cardCompany?: CardCompany;
+  cardCompany: CardCompany;
 };
