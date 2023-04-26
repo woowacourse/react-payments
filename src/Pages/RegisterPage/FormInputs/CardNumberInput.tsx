@@ -101,8 +101,8 @@ const Caption = styled.p<{ cardNumbers: string[] }>`
   font-size: 12px;
   margin: 8px 0 16px 4px;
   visibility: ${({ cardNumbers }) =>
-    cardNumbers.join('').length ===
-      LENGTH.EACH_CARD_NUMBER * LENGTH.EACH_CARD_NUMBER &&
+    (cardNumbers.join('').length === LENGTH.EACH_CARD_NUMBER * 4 ||
+      cardNumbers.join('').length === 0) &&
     `${HIDDEN_ELEMENT_STYLE}`};
 `;
 

@@ -84,7 +84,8 @@ const Caption = styled.p<{ date: string[] }>`
   font-size: 12px;
   margin: 8px 0 16px 4px;
   visibility: ${({ date }) =>
-    date.join('').length === LENGTH.EXPIRATION * 2 &&
+    (date.join('').length === LENGTH.EXPIRATION * 2 ||
+      date.join('').length === 0) &&
     `${HIDDEN_ELEMENT_STYLE}`};
 `;
 

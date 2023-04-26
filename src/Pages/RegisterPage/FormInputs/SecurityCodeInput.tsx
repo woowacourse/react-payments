@@ -106,7 +106,8 @@ const Caption = styled.p<{ codeLength: number }>`
   font-size: 12px;
   margin: 8px 0 16px 4px;
   visibility: ${({ codeLength }) =>
-    codeLength === LENGTH.SECURITY_CODE && `${HIDDEN_ELEMENT_STYLE}`};
+    (codeLength === LENGTH.SECURITY_CODE || codeLength === 0) &&
+    `${HIDDEN_ELEMENT_STYLE}`};
 `;
 
 export default SecurityCodeInput;

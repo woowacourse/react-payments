@@ -75,7 +75,8 @@ const Caption = styled.p<{ password: string[] }>`
   font-size: 12px;
   margin: 8px 0 16px 4px;
   visibility: ${({ password }) =>
-    password.join('').length === LENGTH.EACH_PASSWORD * 2 &&
+    (password.join('').length === LENGTH.EACH_PASSWORD * 2 ||
+      password.join('').length === 0) &&
     `${HIDDEN_ELEMENT_STYLE}`};
 `;
 
