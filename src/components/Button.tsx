@@ -5,6 +5,11 @@ interface ButtonProps {
   onClick?: (value: any) => void;
 }
 
+const NextButton = (props: ButtonProps) => {
+  const { children, onClick } = props;
+  return <StyledButton children={children} onClick={onClick}></StyledButton>;
+};
+
 export const StyledButton = styled.button`
   display: flex;
   margin: 24px 0 24px auto;
@@ -18,10 +23,5 @@ export const StyledButton = styled.button`
   text-align: center;
   cursor: pointer;
 `;
-
-const NextButton = (props: ButtonProps) => {
-  const { children, onClick } = props;
-  return <StyledButton children={children} onClick={onClick}></StyledButton>;
-};
 
 export default NextButton;

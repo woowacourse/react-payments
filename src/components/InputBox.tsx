@@ -6,6 +6,12 @@ interface InputboxProps {
   width?: number;
 }
 
+const InputBox = (props: InputboxProps) => {
+  const { children } = props;
+
+  return <StyledInputBox children={children}></StyledInputBox>;
+};
+
 export const StyledInputBox = styled.div`
   display: flex;
   justify-content: center;
@@ -14,11 +20,5 @@ export const StyledInputBox = styled.div`
   background: var(--input-background);
   border-radius: 8px;
 `;
-
-const InputBox = (props: InputboxProps) => {
-  const { children } = props;
-
-  return <StyledInputBox children={children}></StyledInputBox>;
-};
 
 export default InputBox;

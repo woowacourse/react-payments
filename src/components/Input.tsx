@@ -14,14 +14,6 @@ interface InputProps {
   required?: boolean;
 }
 
-export const StyledInput = styled.input`
-  background: var(--input-background);
-  margin: 0 2.2vw;
-  font-size: 14px;
-  text-align: center;
-  letter-spacing: 1px;
-`;
-
 const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const {
     type,
@@ -52,5 +44,13 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     ></StyledInput>
   );
 });
+
+export const StyledInput = styled.input`
+  background: var(--input-background);
+  margin: 0 2.2vw;
+  font-size: 14px;
+  text-align: center;
+  letter-spacing: 1px;
+`;
 
 export default Input;
