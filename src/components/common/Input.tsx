@@ -7,11 +7,18 @@ export interface InputProps {
   $textPosition: string;
   type: string;
   error?: { isValid: boolean; errorMessage: string };
-  handleInput?: (e: any) => void;
+  handleInput?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const Input = ({ label, $width, placeholder, $textPosition, type, handleInput, error }: InputProps) => {
-  const { isValid, errorMessage } = error ?? { isValid: true, errorMessage: "" };
+export const Input = ({
+  label,
+  $width,
+  placeholder,
+  $textPosition,
+  type,
+  handleInput,
+  error = { isValid: true, errorMessage: "" },
+}: InputProps) => {
   return (
     <Column>
       <InputField
@@ -23,7 +30,7 @@ export const Input = ({ label, $width, placeholder, $textPosition, type, handleI
         $textPosition={$textPosition}
         type={type}
       />
-      <ErrorMessage>{isValid ? "" : errorMessage}</ErrorMessage>
+      <ErrorMessage>{error.isValid ? "" : error.errorMessage}</ErrorMessage>
     </Column>
   );
 };
