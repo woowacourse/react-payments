@@ -27,10 +27,14 @@ const Header = ({ title, onClickBack }: Props) => {
 export default Header;
 
 const HeaderWrapper = styled.header`
-  height: 72px;
+  position: absolute;
+  top: 0;
+
   display: flex;
-  width: 100%;
   align-items: center;
+
+  width: 100%;
+  height: 72px;
   margin-bottom: 12px;
 `;
 
