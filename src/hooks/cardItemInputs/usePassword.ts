@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import { INPUT_MAX_LENGTH, NUMBER_OF_INPUTS } from "../../constants";
 import { isNumber, isOverMaxLength } from "../../utils";
 import useMultipleInputs from "../useMultipleInputs";
@@ -17,9 +16,7 @@ const passwordValidator = (inputValue: string) => {
 const usePassword = () => {
   const { inputValues, errorMessage, onChange } = useMultipleInputs(NUMBER_OF_INPUTS.PASSWORD, passwordValidator);
 
-  const refs = [useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null)];
-
-  const { isNextInputFocusable, focusNextInput } = useInputFocus(refs, INPUT_MAX_LENGTH.PASSWORD);
+  const { registRef, isNextInputFocusable, focusNextInput } = useInputFocus(INPUT_MAX_LENGTH.PASSWORD);
 
   const handleChange = (inputIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
@@ -33,7 +30,7 @@ const usePassword = () => {
     password: inputValues,
     passwordErrorMessage: errorMessage,
     onChangePassword: handleChange,
-    passwordRefs: refs,
+    registPasswordRef: registRef,
   };
 };
 

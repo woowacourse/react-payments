@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import { INPUT_MAX_LENGTH, NUMBER_OF_INPUTS } from "../../constants";
 import { isNumber, isOverMaxLength } from "../../utils";
 import useMultipleInputs from "../useMultipleInputs";
@@ -17,14 +16,7 @@ const cardNumberValidator = (inputValue: string) => {
 const useCardNumber = () => {
   const { inputValues, errorMessage, onChange } = useMultipleInputs(NUMBER_OF_INPUTS.CARD_NUMBER, cardNumberValidator);
 
-  const refs = [
-    useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null),
-  ];
-
-  const { isNextInputFocusable, focusNextInput } = useInputFocus(refs, INPUT_MAX_LENGTH.CARD_NUMBER);
+  const { registRef, isNextInputFocusable, focusNextInput } = useInputFocus(INPUT_MAX_LENGTH.CARD_NUMBER);
 
   const handleChange = (inputIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
@@ -38,7 +30,7 @@ const useCardNumber = () => {
     cardNumber: inputValues,
     cardNumberErrorMessage: errorMessage,
     onChangeCardNumber: handleChange,
-    cardNumberRefs: refs,
+    registCardNumberRef: registRef,
   };
 };
 
