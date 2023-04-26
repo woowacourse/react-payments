@@ -3,9 +3,9 @@ import { useState } from "react";
 export function useCountText() {
   const [count, setCount] = useState<number>(0);
 
-  function handleChange(text: string) {
-    setCount(count + 1);
+  function countText(e: React.ChangeEvent<HTMLInputElement>) {
+    setCount(e.target.value.length);
   }
 
-  return { count, handleChange };
+  return { count, countText };
 }
