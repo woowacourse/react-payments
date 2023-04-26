@@ -1,5 +1,4 @@
 .card-list {
-  overflow: scroll;
   display: grid;
   gap: 5%;
   padding: 5% 0;
