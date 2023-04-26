@@ -14,7 +14,7 @@ interface CardPasswordProps {
 
 function CardPassword({ onInputChange, values, isValid }: CardPasswordProps) {
   const lastInputRef = useRef<HTMLInputElement>(null);
-  const { isError, handleError, removeError } = useError(isValid);
+  const { isError, handleError, removeError } = useError();
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     removeError();
@@ -24,7 +24,7 @@ function CardPassword({ onInputChange, values, isValid }: CardPasswordProps) {
   const onBlur = (event: FocusEvent<HTMLElement>) => {
     if (event.currentTarget.contains(event.relatedTarget)) return;
 
-    handleError();
+    handleError(isValid);
   };
 
   const onFirstInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -59,6 +59,7 @@ function CardPassword({ onInputChange, values, isValid }: CardPasswordProps) {
             autoComplete="off"
             inputMode="numeric"
             isError={isError}
+            tabIndex={6 + index}
             onChange={index === 0 ? onFirstInputChange : onChange}
           />
         ))}

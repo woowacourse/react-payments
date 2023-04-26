@@ -1,6 +1,6 @@
 import styles from './style.module.css';
 import { KeyboardEvent, MouseEvent, memo, useRef } from 'react';
-import { Issuer } from '../../../types';
+import { CardFormValidation, Issuer } from '../../../types';
 import CardIssuerSelection from './CardIssuerSelection/CardIssuerSelection';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
@@ -11,18 +11,25 @@ import { useError } from '../../../hooks/common/useError';
 import DownIcon from '../../../assets/down-icon.svg';
 
 interface CardIssuerProps {
-  onInputChange: (event: MouseEvent<HTMLButtonElement>) => void;
   value: Issuer | '';
-  isValid: boolean;
+  onInputChange: (event: MouseEvent<HTMLButtonElement>) => void;
+  updateCardInputValidation: (key: keyof CardFormValidation, value: string | string[]) => boolean;
+  moveFocus: (index: number, value: string, maxLength?: number | undefined) => void;
 }
 
-function CardIssuer({ onInputChange, value, isValid }: CardIssuerProps) {
+function CardIssuer({
+  value,
+  onInputChange,
+  updateCardInputValidation,
+  moveFocus,
+}: CardIssuerProps) {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const { isModalOpen, openModal, closeModal } = useModal();
-  const { isError, handleError, removeError } = useError(isValid);
+  const { isError, handleError, removeError } = useError();
 
   const handleCloseModal = () => {
-    handleError();
+    const isValid = updateCardInputValidation('issuer', value);
+    handleError(isValid);
     closeModal();
   };
 
@@ -36,6 +43,14 @@ function CardIssuer({ onInputChange, value, isValid }: CardIssuerProps) {
     removeError();
     closeModal();
     onInputChange(event);
+    moveFocus(1, event.currentTarget.value);
+  };
+
+  const onKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
+    if (event.key === 'Tab') {
+      const isValid = updateCardInputValidation('issuer', value);
+      handleError(isValid);
+    }
   };
 
   return (
@@ -52,7 +67,9 @@ function CardIssuer({ onInputChange, value, isValid }: CardIssuerProps) {
         }`}
         icon={DownIcon}
         autoFocus
+        tabIndex={1}
         onClick={openModal}
+        onKeyDown={onKeyDown}
       >
         {value ? `${value}` : '카드사를 선택해주세요'}
       </Button>

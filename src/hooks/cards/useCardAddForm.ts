@@ -91,6 +91,7 @@ const useCardAddForm = () => {
   return {
     cardInformation,
     cardInputValidation,
+    updateCardInputValidation,
     handleButtonInputChange,
     handleSingleInputChange,
     handleMultipleInputChange,

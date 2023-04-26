@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
-const useError = (isValid: boolean) => {
+const useError = () => {
   const [isError, setIsError] = useState(false);
 
-  const handleError = () => {
+  const handleError = (isValid: boolean) => {
     setIsError(!isValid);
   };
 

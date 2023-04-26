@@ -6,10 +6,16 @@ import Input from '../../common/Input/Input';
 
 interface CardOwnerNameProps {
   onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  moveFocus: (index: number, value: string, maxLength?: number | undefined) => void;
   value?: string;
 }
 
-function CardOwnerName({ onInputChange, value = '' }: CardOwnerNameProps) {
+function CardOwnerName({ onInputChange, moveFocus, value = '' }: CardOwnerNameProps) {
+  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+    onInputChange(event);
+    moveFocus(event.target.tabIndex, event.currentTarget.value, event.currentTarget.maxLength);
+  };
+
   return (
     <InputContainer
       characterCounter={{ currentCount: value.length, maxCount: OWNER_NAME_MAX_LENGTH }}
@@ -22,7 +28,8 @@ function CardOwnerName({ onInputChange, value = '' }: CardOwnerNameProps) {
         placeholder="카드에 표시된 이름과 동일하게 입력해주세요"
         maxLength={OWNER_NAME_MAX_LENGTH}
         autoComplete="cc-name"
-        onChange={onInputChange}
+        tabIndex={4}
+        onChange={onChange}
       />
     </InputContainer>
   );

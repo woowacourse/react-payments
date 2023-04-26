@@ -1,5 +1,5 @@
-import { ChangeEvent, memo } from 'react';
-import { ExpirationDate } from '../../../types';
+import { ChangeEvent, FocusEvent, memo } from 'react';
+import { CardFormValidation, ExpirationDate } from '../../../types';
 import { EXPIRATION_DATE_INPUT_MAX_LENGTH } from '../../../constants';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
@@ -8,19 +8,34 @@ import { useError } from '../../../hooks/common/useError';
 import { formatDisplayedExpirationDate } from '../../../utils/formatter';
 
 interface CardExpirationDateProps {
-  onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
   value: ExpirationDate;
-  isValid: boolean;
+  onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  updateCardInputValidation: (key: keyof CardFormValidation, value: string | string[]) => boolean;
+  moveFocus: (index: number, value: string, maxLength?: number | undefined) => void;
 }
 
-function CardExpirationDate({ onInputChange, value, isValid }: CardExpirationDateProps) {
-  const { isError, handleError, removeError } = useError(isValid);
+function CardExpirationDate({
+  onInputChange,
+  value,
+  updateCardInputValidation,
+  moveFocus,
+}: CardExpirationDateProps) {
+  const { isError, handleError, removeError } = useError();
 
   const expirationDate = formatDisplayedExpirationDate(`${value.month}${value.year}`);
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     removeError();
     onInputChange(event);
+    moveFocus(event.target.tabIndex, event.currentTarget.value, event.currentTarget.maxLength);
+  };
+
+  const onBlur = (event: FocusEvent<HTMLInputElement>) => {
+    const isValid = updateCardInputValidation(
+      event.target.name as keyof CardFormValidation,
+      event.target.value
+    );
+    handleError(isValid);
   };
 
   return (
@@ -41,9 +56,10 @@ function CardExpirationDate({ onInputChange, value, isValid }: CardExpirationDat
         maxLength={EXPIRATION_DATE_INPUT_MAX_LENGTH}
         autoComplete="cc-exp"
         inputMode="numeric"
+        tabIndex={3}
         isError={isError}
         onChange={onChange}
-        onBlur={handleError}
+        onBlur={onBlur}
       />
     </InputContainer>
   );

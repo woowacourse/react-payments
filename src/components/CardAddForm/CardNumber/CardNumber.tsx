@@ -1,4 +1,5 @@
-import { ChangeEvent, memo, useRef } from 'react';
+import { ChangeEvent, FocusEvent, memo, useRef } from 'react';
+import { CardFormValidation } from '../../../types';
 import { CARD_NUMBER_INPUT_MAX_LENGTH } from '../../../constants';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
@@ -8,15 +9,21 @@ import { useError } from '../../../hooks/common/useError';
 import { encryptDisplayedCardNumber, formatDisplayedCardNumber } from '../../../utils/formatter';
 
 interface CardNumberProps {
-  onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
   value: string;
-  isValid: boolean;
+  onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  updateCardInputValidation: (key: keyof CardFormValidation, value: string | string[]) => boolean;
+  moveFocus: (index: number, value: string, maxLength?: number | undefined) => void;
 }
 
-function CardNumber({ onInputChange, value, isValid }: CardNumberProps) {
+function CardNumber({
+  value,
+  onInputChange,
+  updateCardInputValidation,
+  moveFocus,
+}: CardNumberProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const { handleInputValueChange } = useCardNumber(inputRef);
-  const { isError, handleError, removeError } = useError(isValid);
+  const { isError, handleError, removeError } = useError();
 
   const cardNumber = formatDisplayedCardNumber(value);
 
@@ -24,6 +31,15 @@ function CardNumber({ onInputChange, value, isValid }: CardNumberProps) {
     removeError();
     handleInputValueChange(event);
     onInputChange(event);
+    moveFocus(event.target.tabIndex, event.currentTarget.value, event.currentTarget.maxLength);
+  };
+
+  const onBlur = (event: FocusEvent<HTMLInputElement>) => {
+    const isValid = updateCardInputValidation(
+      event.target.name as keyof CardFormValidation,
+      event.target.value
+    );
+    handleError(isValid);
   };
 
   return (
@@ -45,9 +61,10 @@ function CardNumber({ onInputChange, value, isValid }: CardNumberProps) {
         maxLength={CARD_NUMBER_INPUT_MAX_LENGTH}
         autoComplete="cc-number"
         inputMode="numeric"
+        tabIndex={2}
         isError={isError}
         onChange={onChange}
-        onBlur={handleError}
+        onBlur={onBlur}
       />
     </InputContainer>
   );

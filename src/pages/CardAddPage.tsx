@@ -10,6 +10,7 @@ function CardAddPage() {
     handleButtonInputChange,
     handleSingleInputChange,
     handleMultipleInputChange,
+    updateCardInputValidation,
     handleSubmit,
   } = useCardAddForm();
 
@@ -30,6 +31,7 @@ function CardAddPage() {
           onButtonInputChange={handleButtonInputChange}
           onSingleInputChange={handleSingleInputChange}
           onMultipleInputChange={handleMultipleInputChange}
+          updateCardInputValidation={updateCardInputValidation}
           handleSubmit={handleSubmit}
         />
       </main>
