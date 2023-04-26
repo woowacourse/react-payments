@@ -1,13 +1,13 @@
-import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import MyCardPage from './pages/MyCardPage';
 import CardRegisterPage from './pages/CardRegisterPage';
+import useCardState from './hooks/useCardState';
 
 import { CardInfo } from './types/card';
 
 const App = () => {
-  const [cardList, setCardList] = useState<CardInfo[]>([]);
+  const [cardList, setCardList] = useCardState<CardInfo>();
 
   return (
     <div className="App">

@@ -1,18 +1,17 @@
 import type { Meta } from '@storybook/react';
 
-import { useState } from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
 import { Input } from '../../../components/InputBox';
 import validator from '../../../domain/validator';
+import useCardState from '../../../hooks/useCardState';
 
 import useForm from '../../../hooks/useForm';
-
 import { CardInfo } from '../../../types/card';
 
 const InputStories = () => {
-  const [cardList, setCardList] = useState<CardInfo[]>([]);
-  const { cardInfo, onChange } = useForm(setCardList, validator);
+  const [cardList, setCardList] = useCardState();
+  const { cardInfo, onChange } = useForm(setCardList as (data: CardInfo) => void, validator);
 
   return (
     <form>

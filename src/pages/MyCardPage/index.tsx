@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import Card from '../../components/Card';
 import Header from '../../components/Header';
+
 import { CardInfo } from '../../types/card';
 
 interface MyCardPageProps {

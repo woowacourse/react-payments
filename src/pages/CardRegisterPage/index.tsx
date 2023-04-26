@@ -1,4 +1,3 @@
-import { Dispatch, SetStateAction } from 'react';
 import * as styled from './CardRegisterPage.styled';
 
 import useForm from '../../hooks/useForm';
@@ -16,10 +15,11 @@ import {
 
 import validator from '../../domain/validator';
 
+import { SetCardList } from '../../types';
 import { CardInfo } from '../../types/card';
 
 interface CardRegisterPageProps {
-  setCardList: Dispatch<SetStateAction<CardInfo[]>>;
+  setCardList: SetCardList<CardInfo>;
 }
 
 const CardRegisterPage = ({ setCardList }: CardRegisterPageProps) => {

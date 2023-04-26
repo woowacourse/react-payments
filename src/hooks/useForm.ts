@@ -1,12 +1,13 @@
-import { ChangeEvent, Dispatch, FormEvent, SetStateAction, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { isNumeric } from '../utils';
 
+import { v4 as uuid } from 'uuid';
+
 import { Validator } from '../types/validator';
 import { CardInfo } from '../types/card';
-
-import { v4 as uuid } from 'uuid';
+import { SetCardList } from '../types';
 
 interface Error {
   firstCardNumbers: string;
@@ -22,7 +23,7 @@ interface Error {
   [key: string]: string;
 }
 
-const useForm = (setCardList: Dispatch<SetStateAction<CardInfo[]>>, validator: Validator) => {
+const useForm = (setCardList: SetCardList<CardInfo>, validator: Validator) => {
   const navigate = useNavigate();
   const [cardInfo, setCardInfo] = useState<CardInfo>({
     id: uuid(),
@@ -90,7 +91,7 @@ const useForm = (setCardList: Dispatch<SetStateAction<CardInfo[]>>, validator: V
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const elements = (e.target as HTMLFormElement).elements;
+    const elements = e.currentTarget.elements;
 
     const hasInputError = findInputError([...elements] as HTMLInputElement[]);
     if (hasInputError) return;
@@ -101,7 +102,7 @@ const useForm = (setCardList: Dispatch<SetStateAction<CardInfo[]>>, validator: V
   };
 
   const onChange = ({ target: targetInput }: ChangeEvent<HTMLInputElement>) => {
-    const elements: HTMLFormControlsCollection | undefined = targetInput.closest('form')?.elements;
+    const elements = targetInput.closest('form')?.elements;
     if (!elements) return;
 
     const {
