@@ -19,14 +19,16 @@
 
 .container {
   position: fixed;
-  left: 0;
+  left: 50%;
   bottom: 0;
+  transform: translate(-50%, 0);
 
   display: flex;
   justify-content: center;
   align-items: center;
   
-  width: 100%;
+  width: 50%;
+  min-width: 375px;
   min-height: 227px;
 
   background-color: #FDFDFD;

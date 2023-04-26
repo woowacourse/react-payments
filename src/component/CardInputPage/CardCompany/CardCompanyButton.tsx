@@ -14,7 +14,8 @@ import { ButtonHTMLAttributes } from "react";
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement>{
   companyName: CardCompany;
-};
+  clickHandler: (value: CardCompany) => void;
+}
 
 const cardImage = {
   bc: BC_CARD,
@@ -27,11 +28,11 @@ const cardImage = {
   kb: KB_CARD
 };
 
-const BankIconButton = (props: Props) => {
-  const { companyName, onClick } = props;
+const CardCompanyButton = (props: Props) => {
+  const { companyName, clickHandler } = props;
 
   return (
-    <button className={style.button} type="button" onClick={onClick}>
+    <button className={style.button} type="button" onClick={() => clickHandler(companyName)}>
       <img
         className={style.image}
         src={cardImage[companyName]}
@@ -42,4 +43,4 @@ const BankIconButton = (props: Props) => {
   );
 };
 
-export default BankIconButton;
+export default CardCompanyButton;

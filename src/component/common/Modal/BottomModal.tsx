@@ -2,12 +2,12 @@ import { PropsWithChildren, useEffect } from "react";
 
 import style from "./BottomModal.module.css";
 
-interface Props extends PropsWithChildren {
+export interface BottomModalProps extends PropsWithChildren {
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
 }
 
-export default function Button(props: Props) {
+export default function BottomModal(props: BottomModalProps) {
   const { children, isOpen, setIsOpen } = props;
 
   const escCloseHandler = (e: KeyboardEvent) => {
