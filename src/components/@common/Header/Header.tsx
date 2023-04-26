@@ -8,12 +8,21 @@ export default function Header() {
 
   let content;
 
-  if (location.pathname === '/') {
-    content = '보유카드';
-  } else if (location.pathname === '/registerCard') {
-    content = '카드 추가';
-  } else {
-    content = 'Page not found';
+  switch (location.pathname) {
+    case '/':
+      content = '보유카드';
+      break;
+
+    case '/registerCard':
+      content = '카드 추가';
+      break;
+
+    case '/registerCard/alias':
+      return null;
+
+    default:
+      content = 'Page Not Found :(';
+      break;
   }
 
   return (

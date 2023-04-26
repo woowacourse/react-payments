@@ -48,5 +48,6 @@ export default function CardRegisterProvider({ children }: PropsWithChildren) {
   const handleCardInfo: <T extends keyof CardRegisterInfo>(key: T, value: CardRegisterInfo[T]) => void = (key, value) => {
     setCardRegisterInfo((prev) => ({ ...prev, [key]: value }));
   };
+
   return <CardRegisterContext.Provider value={{ cardRegisterInfo, handleCardInfo, initCardRegisterInfo }}>{children}</CardRegisterContext.Provider>;
 }
