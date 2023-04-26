@@ -1,5 +1,4 @@
-import { ChangeEvent } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta } from "@storybook/react";
 
 import InputBoxSecurityCode from "../component/CardInputPage/InputBoxSecurityCode/InputBoxSecurityCode";
 
@@ -10,7 +9,7 @@ const meta: Meta = {
 
 export default meta;
 
-export const InputTest = (args: any) => (
+export const InputTest = () => (
   <InputBoxSecurityCode
     changeSecurityCodeStatus={() => {}}
   ></InputBoxSecurityCode>

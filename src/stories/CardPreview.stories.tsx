@@ -1,5 +1,5 @@
 import { ChangeEvent } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta } from "@storybook/react";
 
 import CardPreview from "../component/common/CardPreview";
 
@@ -9,10 +9,6 @@ const meta: Meta = {
 };
 
 export default meta;
-
-const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-  const target = e.target.value;
-};
 
 export const emptyCard = (args: any) => <CardPreview {...args}></CardPreview>;
 emptyCard.args = {
