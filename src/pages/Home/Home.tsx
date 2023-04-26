@@ -16,7 +16,7 @@ function Home() {
             key={creditCard.number}
             fullFilled
             creditCard={{
-              company: creditCard.company,
+              companyId: creditCard.companyId,
               number: creditCard.number,
               expiry: creditCard.expiry,
               owner: creditCard.owner,

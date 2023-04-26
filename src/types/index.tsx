@@ -6,10 +6,13 @@ export type CreditCardPasswordType = {
 };
 
 export type CreditCard = {
-  company: string;
+  companyId: string;
   number: string;
   expiry: string;
   owner?: string;
   cvc: string;
   password: CreditCardPasswordType;
 };
+
+export type CreditCardCompanyKeys = 'id' | 'name' | 'color' | 'backgroundColor';
+export type CreditCardCompany = Record<CreditCardCompanyKeys, string>;

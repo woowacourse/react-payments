@@ -1,3 +1,4 @@
+import creditCardCompanies from 'assets/data/creditCardCompanies';
 import styled from 'styled-components';
 import { convertImage } from 'tools/image';
 import * as T from 'types';
@@ -21,36 +22,25 @@ const CreditCardCompanyItem = styled.div`
     cursor:pointer;
 `;
 
-const creditCardCompanies = [
-  { id: 'bc', company: 'BC카드' },
-  { id: 'shinhan', company: '신한카드' },
-  { id: 'kakao', company: '카카오뱅크' },
-  { id: 'hyundai', company: '현대카드' },
-  { id: 'woori', company: '우리카드' },
-  { id: 'lotte', company: '롯데카드' },
-  { id: 'hana', company: '하나카드' },
-  { id: 'kookmin', company: '국민카드' },
-];
-
 function CreditCardCompanyInput({
   closeModal, name, creditCard, setCreditCard
 }: CreditCardCompanyInputProps) {
-  const handleChangeCreditCardCompany = (company: string) => {
-    setCreditCard({ ...creditCard, [name]: company });
+  const handleChangeCreditCardCompany = (companyId: string) => {
+    setCreditCard({ ...creditCard, [name]: companyId });
     closeModal();
   };
   return (
     <CreditCardCompanyInputLayout>
-      {creditCardCompanies.map((card) => (
+      {creditCardCompanies.map((creditCardCompany) => (
         <CreditCardCompanyItem
-          key={card.id}
-          onClick={() => handleChangeCreditCardCompany(card.company)}
+          key={creditCardCompany.id}
+          onClick={() => handleChangeCreditCardCompany(creditCardCompany.id)}
         >
           <img
-            src={convertImage(card.id)}
-            alt={card.company}
+            src={convertImage(creditCardCompany.id)}
+            alt={creditCardCompany.name}
           />
-          <div>{card.company}</div>
+          <div>{creditCardCompany.name}</div>
         </CreditCardCompanyItem>
       ))}
     </CreditCardCompanyInputLayout>

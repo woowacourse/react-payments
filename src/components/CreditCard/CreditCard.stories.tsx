@@ -16,7 +16,7 @@ export const PerfectCreditCard = Template.bind({});
 PerfectCreditCard.args = {
   fullFilled: true,
   creditCard: {
-    company: '신한카드',
+    companyId: 'shinhan',
     number: '1234123412341234',
     expiry: '03/45',
     owner: 'NOAH',
@@ -27,7 +27,7 @@ export const OwnerLessCreditCard = Template.bind({});
 OwnerLessCreditCard.args = {
   fullFilled: true,
   creditCard: {
-    company: '국민카드',
+    companyId: 'kookmin',
     number: '1234123412341234',
     expiry: '03/45',
   },
@@ -37,7 +37,7 @@ export const invaildCreditCard = Template.bind({});
 invaildCreditCard.args = {
   fullFilled: true,
   creditCard: {
-    company: '우리카드',
+    companyId: 'woori',
     number: '12341234123',
     expiry: '03/45',
   },

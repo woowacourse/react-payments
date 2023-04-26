@@ -2,17 +2,17 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
 import * as T from 'types';
-import { convertSecuredCreditCard } from 'domains/creditCard';
+import { convertCreditCardById, convertSecuredCreditCard } from 'domains/creditCard';
 import * as S from './style';
 
 export type CreditCardProps = {
   fullFilled: boolean;
-  creditCard: Pick<T.CreditCard, 'company' | 'number' | 'expiry' | 'owner'>;
+  creditCard: Pick<T.CreditCard, 'companyId' | 'number' | 'expiry' | 'owner'>;
 };
 
 function CreditCard({
   fullFilled, creditCard: {
-    company, expiry, number, owner
+    companyId, expiry, number, owner
   }
 }: CreditCardProps) {
   const isValid = () => {
@@ -29,7 +29,7 @@ function CreditCard({
   return (
     <S.CreditCardLayout isValid={isValid()}>
       <S.CreditCardInfoHeader>
-        <S.CreditCardCompany>{company}</S.CreditCardCompany>
+        <S.CreditCardCompany>{convertCreditCardById(companyId).name}</S.CreditCardCompany>
       </S.CreditCardInfoHeader>
       <S.CreditCardICChip />
       <S.CreditCardInfoFooter>

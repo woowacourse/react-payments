@@ -22,7 +22,7 @@ function CreditCardRegister() {
   const { modalOpen, openModal, closeModal } = useModal();
 
   const [creditCard, setCreditCard] = useState<Type.CreditCard>({
-    company: '',
+    companyId: '',
     number: '',
     expiry: '',
     owner: '',
@@ -52,7 +52,7 @@ function CreditCardRegister() {
     if (isError) return;
 
     const newCreditCard: Type.CreditCard = {
-      company: creditCard.company,
+      companyId: creditCard.companyId,
       number: creditCard.number,
       expiry: creditCard.expiry,
       owner: creditCard.owner,
@@ -81,7 +81,7 @@ function CreditCardRegister() {
           <CreditCard
             fullFilled={false}
             creditCard={{
-              company: creditCard.company,
+              companyId: creditCard.companyId,
               number: creditCard.number,
               expiry: creditCard.expiry,
               owner: creditCard.owner,
@@ -128,7 +128,7 @@ function CreditCardRegister() {
       <Modal modalOpen={modalOpen}>
         <CreditCardCompanyInput
           closeModal={closeModal}
-          name="company"
+          name="companyId"
           creditCard={creditCard}
           setCreditCard={setCreditCard}
         />
