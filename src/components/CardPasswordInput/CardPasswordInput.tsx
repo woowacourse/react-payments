@@ -1,5 +1,7 @@
 import styled from "styled-components";
-import { InputContainer, Input, Label } from "../common";
+import { InputContainer, Input, Label, RequiredInputIcon } from "../common";
+import requiredInputIcon from "../../assets/requiredInputIcon.png";
+
 import { CardPassword, CardPasswordKey } from "../../types";
 import { isNumeric } from "../../validator/Validator";
 
@@ -28,6 +30,7 @@ const CardPasswordInput = ({ password, onChange }: CardPasswordInputProps) => {
   return (
     <Label>
       카드 비밀번호
+      <RequiredInputIcon src={requiredInputIcon} />
       <Div>
         <InputContainer width="43px">
           <Input

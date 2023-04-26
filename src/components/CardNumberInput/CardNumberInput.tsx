@@ -1,6 +1,7 @@
 import { CardNumber, CardNumberGroups } from "../../types";
 import { isNumeric } from "../../validator/Validator";
-import { InputContainer, Input, Label } from "../common";
+import { InputContainer, Input, Label, RequiredInputIcon } from "../common";
+import requiredInputIcon from "../../assets/requiredInputIcon.png";
 
 type CardNumberInputProps = {
   cardNumber: CardNumber;
@@ -27,6 +28,7 @@ const CardNumberInput = ({ cardNumber, onChange }: CardNumberInputProps) => {
   return (
     <Label>
       카드번호
+      <RequiredInputIcon src={requiredInputIcon} />
       <InputContainer width="318px">
         <Input
           value={firstGroup}

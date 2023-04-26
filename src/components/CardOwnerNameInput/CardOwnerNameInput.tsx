@@ -19,7 +19,7 @@ const CardOwnerNameInput = ({ ownerName, onChange }: CardOwnerNameInputProp) => 
   return (
     <Label>
       <Div>
-        <span>카드 소유자 이름(선택)</span>
+        <span>카드 소유자 이름</span>
         <span>{ownerName.length} / 30</span>
       </Div>
       <InputContainer width="318px">

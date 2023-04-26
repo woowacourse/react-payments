@@ -1,7 +1,8 @@
 import styled from "styled-components";
-import { InputContainer, Input, Label } from "../common";
+import { InputContainer, Input, Label, RequiredInputIcon } from "../common";
 import { CardExpirationDate, CardExpirationDateKey } from "../../types";
 import { isNumeric } from "../../validator/Validator";
+import requiredInputIcon from "../../assets/requiredInputIcon.png";
 
 type CardExpirationDateInputProps = {
   expirationDate: CardExpirationDate;
@@ -28,6 +29,7 @@ const CardExpirationDateInput = ({ expirationDate, onChange }: CardExpirationDat
   return (
     <Label>
       만료일
+      <RequiredInputIcon src={requiredInputIcon} />
       <InputContainer width="137px">
         <Input
           value={month}

@@ -1,5 +1,6 @@
 import { isNumeric } from "../../validator/Validator";
-import { InputContainer, Input, Label } from "../common";
+import { InputContainer, Input, Label, RequiredInputIcon } from "../common";
+import requiredInputIcon from "../../assets/requiredInputIcon.png";
 
 type CardSecurityCodeInputProp = {
   securityCode: string;
@@ -18,6 +19,7 @@ const CardSecurityCodeInput = ({ securityCode, onChange }: CardSecurityCodeInput
   return (
     <Label>
       보안 코드(CVC/CVV)
+      <RequiredInputIcon src={requiredInputIcon} />
       <InputContainer width="84px">
         <Input
           value={securityCode}
