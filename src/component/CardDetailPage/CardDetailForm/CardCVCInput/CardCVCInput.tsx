@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Style from "./CardCVCInputStyled";
 import { ThemeProvider } from "styled-components";
 
@@ -7,15 +7,13 @@ import Input from "../../../common/Input/Input";
 import InputGuide from "../../../common/InputGuide/InputGuide";
 
 import useWarningText from "../../../../hooks/useWarningText";
+import { CardDetailContext } from "../../../../context/CardDetailContext";
 
 import { TYPE } from "../../../../abstract/constants";
 
-export interface CardCVCInputProps {
-  changeCardCVC: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  cardCVC: string;
-}
-function CardCVCInput({ changeCardCVC, cardCVC }: CardCVCInputProps) {
+function CardCVCInput() {
   const { warningText, checkNumber, checkRightLength } = useWarningText(3);
+  const { cardCVC, changeCardCVC } = useContext(CardDetailContext);
   const [popUp, setPopUp] = useState(false);
 
   const props = {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Style from "./CardDateInputStyled";
 import { ThemeProvider } from "styled-components";
 
@@ -6,19 +6,16 @@ import Input from "../../../common/Input/Input";
 import InputGuide from "../../../common/InputGuide/InputGuide";
 
 import useWarningText from "../../../../hooks/useWarningText";
+import { CardDetailContext } from "../../../../context/CardDetailContext";
 
 import { PLACE_HOLDER, TYPE } from "../../../../abstract/constants";
 
-export interface CardDateInputProps {
-  changeCardDate: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  cardDate: string;
-}
-
-function CardDateInput({ changeCardDate, cardDate }: CardDateInputProps) {
+function CardDateInput() {
   const { warningText, checkNumber, checkRightLength } = useWarningText(
     4,
     "date"
   );
+  const { cardDate, changeCardDate } = useContext(CardDetailContext);
 
   const props = {
     type: TYPE.TEXT,

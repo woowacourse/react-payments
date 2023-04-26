@@ -11,7 +11,7 @@
 
 ## 요구사항
 
-- [] Controlled & Uncontrolled Components에 입각하여 Form을 핸들링
+- [x] Controlled & Uncontrolled Components에 입각하여 Form을 핸들링
 - [] 주요 컴포넌트에 대한 Storybook 상호 작용 테스트
   - [] storyBook 배포
   - [] 변동 가능한 값에 대해 사용자가 직접 조작해볼 수 있게

@@ -11,7 +11,7 @@ function CVCPopUp({ closePopup }: CVCPopUpProps) {
     window.addEventListener("keyup", closePopup);
 
     return () => window.removeEventListener("keyup", closePopup);
-  });
+  }, []);
 
   return (
     <>

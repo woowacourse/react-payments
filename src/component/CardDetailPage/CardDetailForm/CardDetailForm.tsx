@@ -1,47 +1,51 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import Style from "./CardDetailFormStyled";
 
-import CardNumberInput, {
-  CardNumberInputProps,
-} from "./CardNumberInput/CardNumberInput";
-import CardDateInput, {
-  CardDateInputProps,
-} from "./CardDateInput/CardDateInput";
-import CardOwnerNameInput, {
-  CardOwnerNameInputProps,
-} from "./CardOwnerNameInput/CardOwnerNameInput";
-import CardCVCInput, { CardCVCInputProps } from "./CardCVCInput/CardCVCInput";
-import CardPasswordInput, {
-  CardPasswordInputProps,
-} from "./CardPasswordInput/CardPasswordInput";
+import CardNumberInput from "./CardNumberInput/CardNumberInput";
+import CardDateInput from "./CardDateInput/CardDateInput";
+import CardOwnerNameInput from "./CardOwnerNameInput/CardOwnerNameInput";
+import CardCVCInput from "./CardCVCInput/CardCVCInput";
+import CardPasswordInput from "./CardPasswordInput/CardPasswordInput";
 import InputGuide from "../../common/InputGuide/InputGuide";
 
 import useWarningText from "../../../hooks/useWarningText";
-import { TYPE } from "../../../abstract/constants";
+import { TYPE, NAVIGATE } from "../../../abstract/constants";
+import { CardDetailContext } from "../../../context/CardDetailContext";
+import CardDetailView from "../../CardDetailView/CardDetailView";
+import { CreditCard } from "../../../types/card";
 
-interface CardDetailFormProps
-  extends CardNumberInputProps,
-    CardDateInputProps,
-    CardOwnerNameInputProps,
-    CardCVCInputProps,
-    CardPasswordInputProps {
-  submitCreditCard: (e: React.FormEvent<HTMLFormElement>) => void;
+interface CardDetailFormProps {
+  addCreditCard: (card: CreditCard) => void;
 }
 
-function CardDetailForm({
-  changeCardNumber,
-  cardNumberHidden,
-  changeCardDate,
-  cardDate,
-  changeCardOwnerName,
-  cardOwnerName,
-  changeCardCVC,
-  cardCVC,
-  changeCardPassword,
-  cardPassword,
-  submitCreditCard,
-}: CardDetailFormProps) {
+function CardDetailForm({ addCreditCard }: CardDetailFormProps) {
+  const navigate = useNavigate();
   const { warningText, isRightForm } = useWarningText();
+  const {
+    cardNumberOrigin,
+    cardNumberHidden,
+    cardDate,
+    cardOwnerName,
+    cardCVC,
+    cardPassword,
+  } = useContext(CardDetailContext);
+
+  const submitCreditCard = (e: React.FormEvent<HTMLFormElement>) => {
+    const newCard: CreditCard = {
+      cardNumberOrigin,
+      cardNumberHidden,
+      cardDate,
+      cardOwnerName,
+      cardCVC,
+      cardPassword,
+    };
+
+    e.preventDefault();
+    navigate(NAVIGATE.HOME);
+    addCreditCard(newCard);
+  };
+
   const handelChange = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const isError = isRightForm(
@@ -59,26 +63,24 @@ function CardDetailForm({
   };
 
   return (
-    <Style.Form onSubmit={handelChange}>
-      <CardNumberInput
-        changeCardNumber={changeCardNumber}
+    <>
+      <CardDetailView
         cardNumberHidden={cardNumberHidden}
-      />
-      <CardDateInput changeCardDate={changeCardDate} cardDate={cardDate} />
-      <CardOwnerNameInput
-        changeCardOwnerName={changeCardOwnerName}
+        cardDate={cardDate}
         cardOwnerName={cardOwnerName}
       />
-      <CardCVCInput changeCardCVC={changeCardCVC} cardCVC={cardCVC} />
-      <CardPasswordInput
-        changeCardPassword={changeCardPassword}
-        cardPassword={cardPassword}
-      />
-      <Style.SubmitLayout>
-        <InputGuide warningText={warningText} />
-        <Style.SubmitButton type={TYPE.SUBMIT} value={"다음"} />
-      </Style.SubmitLayout>
-    </Style.Form>
+      <Style.Form onSubmit={handelChange}>
+        <CardNumberInput />
+        <CardDateInput />
+        <CardOwnerNameInput />
+        <CardCVCInput />
+        <CardPasswordInput />
+        <Style.SubmitLayout>
+          <InputGuide warningText={warningText} />
+          <Style.SubmitButton type={TYPE.SUBMIT} value={"다음"} />
+        </Style.SubmitLayout>
+      </Style.Form>
+    </>
   );
 }
 

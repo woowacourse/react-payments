@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FirstPassword, SecondPassword } from "../types/card";
 import { ID, LENGTH } from "../abstract/constants";
-import { toOnlyNumber } from "../util/replace";
+import { toOnlyNumber } from "../util/InputUtil";
 
 function useCardPassword() {
   const [cardPassword, setCardPassword] = useState<

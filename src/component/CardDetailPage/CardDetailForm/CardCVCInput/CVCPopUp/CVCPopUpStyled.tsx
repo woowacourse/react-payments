@@ -6,7 +6,7 @@ const Style = {
     flex-direction: column;
     position: fixed;
     align-items: center;
-    bottom: 26%;
+    bottom: 28%;
     left: 38%;
 
     padding: 1px;

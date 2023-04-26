@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FirstPassword, SecondPassword } from "../types/card";
-import { toHiddenNumber, toOnlyNumber } from "../util/replace";
+import { toHiddenNumber, toOnlyNumber } from "../util/InputUtil";
 import { LENGTH, WARNING_TEXT } from "../abstract/constants";
 
 function useWarningText(minLength?: number, name?: string) {

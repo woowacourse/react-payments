@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Style from "./CardNumberInputStyled";
 import { ThemeProvider } from "styled-components";
 
@@ -6,22 +6,17 @@ import Input from "../../../common/Input/Input";
 import InputGuide from "../../../common/InputGuide/InputGuide";
 
 import useWarningText from "../../../../hooks/useWarningText";
+import { CardDetailContext } from "../../../../context/CardDetailContext";
 
 import { TYPE } from "../../../../abstract/constants";
 
-export interface CardNumberInputProps {
-  changeCardNumber: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  cardNumberHidden: string;
-}
-
-function CardNumberInput({
-  changeCardNumber,
-  cardNumberHidden,
-}: CardNumberInputProps) {
+function CardNumberInput() {
   const { warningText, checkNumber, checkRightLength } = useWarningText(
     16,
     "cardNumber"
   );
+  const { cardNumberHidden, changeCardNumber } = useContext(CardDetailContext);
+
   const props = {
     type: TYPE.TEXT,
     value: cardNumberHidden,

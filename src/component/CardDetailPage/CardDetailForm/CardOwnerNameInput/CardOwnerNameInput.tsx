@@ -1,19 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import Style from "./CardOwnerNameInputStyled";
 import { ThemeProvider } from "styled-components";
-import { PLACE_HOLDER, TYPE } from "../../../../abstract/constants";
 
 import Input from "../../../common/Input/Input";
 
-export interface CardOwnerNameInputProps {
-  changeCardOwnerName: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  cardOwnerName: string;
-}
+import { CardDetailContext } from "../../../../context/CardDetailContext";
 
-function CardOwnerNameInput({
-  changeCardOwnerName,
-  cardOwnerName,
-}: CardOwnerNameInputProps) {
+import { PLACE_HOLDER, TYPE } from "../../../../abstract/constants";
+
+function CardOwnerNameInput() {
+  const { cardOwnerName, changeCardOwnerName } = useContext(CardDetailContext);
+
   const props = {
     type: TYPE.TEXT,
     maxLength: 30,
@@ -26,6 +23,7 @@ function CardOwnerNameInput({
     width: "100%",
     size: "15px",
   };
+
   return (
     <section>
       <Style.Title>

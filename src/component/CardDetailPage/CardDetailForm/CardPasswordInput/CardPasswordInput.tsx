@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useContext } from "react";
 import Style from "./CardPasswordInputStyled";
 import { ThemeProvider } from "styled-components";
 
@@ -7,19 +7,12 @@ import InputGuide from "../../../common/InputGuide/InputGuide";
 
 import useWarningText from "../../../../hooks/useWarningText";
 
-import { FirstPassword, SecondPassword } from "../../../../types/card";
 import { ID, TYPE } from "../../../../abstract/constants";
+import { CardDetailContext } from "../../../../context/CardDetailContext";
 
-export interface CardPasswordInputProps {
-  changeCardPassword: (e: React.FormEvent<HTMLInputElement>) => void;
-  cardPassword: [FirstPassword, SecondPassword];
-}
-
-function CardPasswordInput({
-  changeCardPassword,
-  cardPassword,
-}: CardPasswordInputProps) {
+function CardPasswordInput() {
   const { warningText, checkNumber, checkRightLength } = useWarningText(1);
+  const { cardPassword, changeCardPassword } = useContext(CardDetailContext);
 
   const inputRef2 = useRef<HTMLInputElement>(null);
 

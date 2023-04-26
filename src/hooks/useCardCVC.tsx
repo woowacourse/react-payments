@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { toOnlyNumber } from "../util/replace";
+import { toOnlyNumber } from "../util/InputUtil";
 import { LENGTH } from "../abstract/constants";
 
 function useCardCVC() {
