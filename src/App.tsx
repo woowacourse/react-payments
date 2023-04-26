@@ -4,6 +4,9 @@ import styled from 'styled-components';
 
 import CardListPage from './components/page/CardListPage';
 import CardRegisterPage from './components/page/CardRegisterPage';
+import CardNamePage from './components/page/CardNamePage';
+
+import { CardFormProvider } from './context/cardForm';
 
 function App() {
   const [currentPage, setCurrentPage] = useState<Page>(Page.list);
@@ -14,9 +17,14 @@ function App() {
   const pageRoute: Record<Page, React.ReactNode> = {
     list: <CardListPage navigate={navigate} />,
     register: <CardRegisterPage navigate={navigate} />,
+    name: <CardNamePage navigate={navigate} />,
   };
 
-  return <AppWrapper>{pageRoute[currentPage]}</AppWrapper>;
+  return (
+    <CardFormProvider>
+      <AppWrapper>{pageRoute[currentPage]}</AppWrapper>
+    </CardFormProvider>
+  );
 }
 
 export default App;
