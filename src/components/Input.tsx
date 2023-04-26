@@ -23,9 +23,7 @@ const Input = ({ labelText, inputInfoList, children }: InputProps) => {
     .fill(0)
     .map(() => createRef<HTMLInputElement>());
 
-  const moveFocus = (e: React.ChangeEvent) => {
-    if (!(e.target instanceof HTMLInputElement)) return;
-
+  const moveFocus = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (
       e.target.value.length === e.target.maxLength &&
       Number(e.target.dataset.id) + 1 < inputRefs.length

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
 
-const title: Record<string, string> = {
+const title: { [key: string]: string } = {
   '/': '보유카드',
   '/addCard': '카드 추가',
 };
