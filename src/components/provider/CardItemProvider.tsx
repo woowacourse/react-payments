@@ -1,4 +1,4 @@
-import { useState, createContext, useContext } from "react";
+import { createContext, useContext } from "react";
 import { INPUT_MAX_LENGTH } from "../../constants";
 import { isInputsSatisfied } from "../../utils";
 import useCardNumber from "../../hooks/cardItemInputs/useCardNumber";
@@ -73,7 +73,11 @@ const CardItemProvider = ({ children }: CardItemProviderProps) => {
 
   const hasError = () => {
     return (
-      !!cardNumberErrorMessage || !!expirationDateErrorMessage || !!passwordErrorMessage || !!securityCodeErrorMessage
+      !!companyErrorMessage ||
+      !!cardNumberErrorMessage ||
+      !!expirationDateErrorMessage ||
+      !!passwordErrorMessage ||
+      !!securityCodeErrorMessage
     );
   };
 
