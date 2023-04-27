@@ -1,11 +1,15 @@
 import styled from 'styled-components';
 
+export const CreditCardRegister = styled.div`
+  align-items: flex-start;
+`;
+
 export const PreviewCreditCard = styled.div`
   display: grid;
   grid-template-rows: auto 18px;
   justify-content: center;
   row-gap: 10px;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 `;
 
 export const ReSelectCardCompanyButton = styled.button`
@@ -17,7 +21,7 @@ export const ReSelectCardCompanyButton = styled.button`
 
 export const CreditCardRegisterForm = styled.form`
   display: grid;
-  row-gap: 30px;
+  row-gap: 20px;
 `;
 
 export const Box = styled.div``;

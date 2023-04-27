@@ -24,7 +24,7 @@ function CreditCardCVCInput({ creditCardCVC, errorMessage, updateCVC }: Props) {
 
   return (
     <InputLayout errorMessage={errorMessage}>
-      <InputLabel label="보안 코드(CVC/CVV" />
+      <InputLabel label="보안 코드(CVC/CVV)" />
       <S.CVCInputLayout>
         <Input
           type="password"

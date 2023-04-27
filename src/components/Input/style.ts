@@ -18,7 +18,8 @@ export const Input = styled.input<InputProps>`
   text-align: ${(props) => props.textAlign};
   padding: 0px 12px;
   :focus {
-    outline: none;
+    outline: ${(props) => (props.underline ? 'none' : '2px solid #32a1ce')};
+    transition: outline ease 0.1s;
   }
   margin-right: 10px;
   ::placeholder {

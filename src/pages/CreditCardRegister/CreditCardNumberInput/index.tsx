@@ -25,6 +25,7 @@ function CreditCardNumberInput({ creditCardNumber, errorMessage, updateNumbers }
         width="100%"
         textAlign="center"
         onChange={handleChangeNumbers}
+        placeholder="카드 번호 16자를 입력하세요."
       />
     </InputLayout>
   );

@@ -1,17 +1,18 @@
 import styled from 'styled-components';
 
 export const CreditCardAlias = styled.div`
-  display: grid;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-items: center;
-  row-gap: 20px;
   button {
-    justify-self: flex-end;
+    align-self: flex-end;
   }
 `;
 
 export const CompleteMessage = styled.span`
-  align-self: flex-end;
+  margin-top: 80px;
+  margin-bottom: 35px;
+  text-align: center;
   font-weight: 400;
   font-size: 24px;
   line-height: 28px;
@@ -19,6 +20,8 @@ export const CompleteMessage = styled.span`
 `;
 
 export const AliasInputLayout = styled.div`
+  margin-top: 80px;
+  margin-bottom: 40px;
   width: 80%;
   display: grid;
   row-gap: 10px;

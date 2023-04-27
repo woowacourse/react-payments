@@ -6,7 +6,7 @@ const GlobalStyle = createGlobalStyle`
   ${resetStyle}
 
   body {
-    background-color: #E5E5E5;
+  
   }
 
   input {
@@ -24,7 +24,7 @@ const GlobalStyle = createGlobalStyle`
 
 export const GlobalLayout = styled.div`
   background-color: white;
-  width: 375px;
+  max-width: 375px;
   min-height: 100vh;
   margin: 0 auto;
   padding: 28px 28px;
