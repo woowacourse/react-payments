@@ -8,11 +8,12 @@ const useCards = () => {
   const handleSetCards = (
     cardNumbers: Record<number, string>,
     expiredDate: Record<number, string>,
-    cardOwnerName: string
+    cardOwnerName: string,
+    cardCompany: string
   ) => {
     setCards([
       ...cards,
-      { id: uuidv4(), cardNumbers, expiredDate, cardOwnerName },
+      { id: uuidv4(), cardNumbers, expiredDate, cardOwnerName, cardCompany },
     ]);
   };
 

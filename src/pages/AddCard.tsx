@@ -15,6 +15,8 @@ import {
   useCardPassword,
   useExpiredDate,
   useSecurityCode,
+  useCardCompany,
+  useBottomSheet,
 } from '../hooks';
 
 const Wrapper = styled.div`
@@ -37,7 +39,8 @@ interface SetCardsProps {
   handleSetCards: (
     cardNumbers: Record<number, string>,
     expiredDate: Record<number, string>,
-    cardOwnerName: string
+    cardOwnerName: string,
+    cardCompany: string
   ) => void;
 }
 
@@ -47,6 +50,10 @@ const AddCard = ({ handleSetCards }: SetCardsProps) => {
   const { password, checkPassword } = useCardPassword();
   const { securityCode, checkSecurityCode } = useSecurityCode();
   const { expiredDate, checkExpiredDate, validateDate } = useExpiredDate();
+  const { cardCompany, checkCardCompany } = useCardCompany();
+
+  const { isBottomSheetOpen, closeBottomSheet } = useBottomSheet();
+
   const { disabled } = useAddCard(
     cardNumbers,
     expiredDate,
@@ -61,7 +68,12 @@ const AddCard = ({ handleSetCards }: SetCardsProps) => {
       <Layout>
         <form
           onSubmit={() => {
-            handleSetCards(cardNumbers, expiredDate, cardOwnerName);
+            handleSetCards(
+              cardNumbers,
+              expiredDate,
+              cardOwnerName,
+              cardCompany
+            );
             navigate('/');
           }}
         >
@@ -70,6 +82,7 @@ const AddCard = ({ handleSetCards }: SetCardsProps) => {
               cardNumbers={cardNumbers}
               expiredDate={expiredDate}
               cardOwnerName={cardOwnerName}
+              cardCompany={cardCompany}
             />
           </Wrapper>
           <CardNumbers
@@ -95,7 +108,12 @@ const AddCard = ({ handleSetCards }: SetCardsProps) => {
           </ButtonWrapper>
         </form>
       </Layout>
-      <BottomSheet />
+      {isBottomSheetOpen && (
+        <BottomSheet
+          checkCardCompany={checkCardCompany}
+          closeBottomSheet={closeBottomSheet}
+        />
+      )}
     </>
   );
 };
