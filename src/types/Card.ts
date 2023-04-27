@@ -3,4 +3,5 @@ export interface CardType {
   cardNumbers: Record<number, string>;
   expiredDate: Record<number, string>;
   cardOwnerName: string;
+  cardCompany: string;
 }
