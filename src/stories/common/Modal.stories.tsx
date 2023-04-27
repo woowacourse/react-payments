@@ -16,6 +16,6 @@ export const Default: Story = {
 
 export const Bank: Story = {
   args: {
-    children: <SelectBank />,
+    children: <SelectBank onClick={() => {}} />,
   },
 };

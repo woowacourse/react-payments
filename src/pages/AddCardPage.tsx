@@ -18,9 +18,12 @@ import {
   monthValidate,
   yearValidate,
 } from '../utils';
-import { CardInfo, PageInfo } from '../types';
+import { BankType, CardInfo, PageInfo } from '../types';
 import { InputValidate, formValidate } from '../hooks/formValidate';
 import { useFormInputs } from '../hooks/useFormInputs';
+import Modal from '../components/common/Modal';
+import SelectBank from '../components/card/SelectBank';
+import { useHideScrollState } from '../hooks/useHideScrollState';
 
 interface AddCardPageProps {
   cardList: CardInfo[];
@@ -36,6 +39,13 @@ export default function AddCardPage({
   const cardForm = useRef<HTMLFormElement>(null);
   const { onInputKeydown } = useFocusInput(cardForm);
   const { formInputs } = useFormInputs();
+  const [bank, setBank] = useHideScrollState<BankType>('default', (value) => {
+    return value === 'default';
+  });
+
+  const onBankHanlder = (value: BankType) => {
+    setBank(value);
+  };
 
   const {
     firstCardNumber,
@@ -48,6 +58,7 @@ export default function AddCardPage({
     cvc,
     firstPassword,
     secondPassword,
+    cardTitle,
   } = formInputs.addCardPage;
 
   const onCardInfoSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -181,71 +192,81 @@ export default function AddCardPage({
   };
 
   return (
-    <Page>
-      <TitleWrapper>
-        <PrevButton onClick={onPrevButtonClick} />
-        <Title>카드 추가</Title>
-      </TitleWrapper>
-      <CardWrapper>
-        <Card
-          cardNumberSet={[
-            firstCardNumber.value,
-            secondCardNumber.value,
-            thirdCardNumber.value,
-            fourthCardNumber.value,
-          ]}
-          month={month.value ? month.value : 'MM'}
-          year={year.value ? year.value : 'YY'}
-          owner={owner.value ? owner.value : 'NAME'}
-        />
-      </CardWrapper>
-      <InputWrapperParent
-        onSubmit={onCardInfoSubmit}
-        ref={cardForm}
-        onKeyDown={(e) => onInputKeydown(e)}
-      >
-        <InputWrapper>
-          <InputField text="카드 번호">
-            <CardNumberInput
-              firstNumber={firstCardNumber}
-              secondNumber={secondCardNumber}
-              thirdNumber={thirdCardNumber}
-              fourthNumber={fourthCardNumber}
-            />
-          </InputField>
-          <InputField text="만료일">
-            <ExpiracyInput year={year} month={month} />
-          </InputField>
-          <InputField
-            text="카드 소유자 이름(선택)"
-            inputLength={`${owner.value.length}/30`}
-          >
-            <OwnerInput owner={owner} />
-          </InputField>
-          <InputField text="보안 코드(CVC/CVV)">
-            <CvcWrapper>
-              <CvcInput cvc={cvc} />
-            </CvcWrapper>
-          </InputField>
-          <InputField text="카드 비밀번호">
-            <PasswordInput
-              firstPassword={firstPassword}
-              secondPassword={secondPassword}
-            />
-          </InputField>
-        </InputWrapper>
-        <NextButtonWrapper>
-          <NextButton
-            isDisable={
-              cardForm.current ? !cardForm.current.checkValidity() : true
-            }
-            text="다음"
+    <Container>
+      <Page>
+        <TitleWrapper>
+          <PrevButton onClick={onPrevButtonClick} />
+          <Title>카드 추가</Title>
+        </TitleWrapper>
+        <CardWrapper>
+          <Card
+            bankKind={bank}
+            cardNumberSet={[
+              firstCardNumber.value,
+              secondCardNumber.value,
+              thirdCardNumber.value,
+              fourthCardNumber.value,
+            ]}
+            month={month.value ? month.value : 'MM'}
+            year={year.value ? year.value : 'YY'}
+            owner={owner.value ? owner.value : 'NAME'}
           />
-        </NextButtonWrapper>
-      </InputWrapperParent>
-    </Page>
+        </CardWrapper>
+        <InputWrapperParent
+          onSubmit={onCardInfoSubmit}
+          ref={cardForm}
+          onKeyDown={(e) => onInputKeydown(e)}
+        >
+          <InputWrapper>
+            <InputField text="카드 번호">
+              <CardNumberInput
+                firstNumber={firstCardNumber}
+                secondNumber={secondCardNumber}
+                thirdNumber={thirdCardNumber}
+                fourthNumber={fourthCardNumber}
+              />
+            </InputField>
+            <InputField text="만료일">
+              <ExpiracyInput year={year} month={month} />
+            </InputField>
+            <InputField
+              text="카드 소유자 이름(선택)"
+              inputLength={`${owner.value.length}/30`}
+            >
+              <OwnerInput owner={owner} />
+            </InputField>
+            <InputField text="보안 코드(CVC/CVV)">
+              <CvcWrapper>
+                <CvcInput cvc={cvc} />
+              </CvcWrapper>
+            </InputField>
+            <InputField text="카드 비밀번호">
+              <PasswordInput
+                firstPassword={firstPassword}
+                secondPassword={secondPassword}
+              />
+            </InputField>
+          </InputWrapper>
+          <NextButtonWrapper>
+            <NextButton
+              isDisable={
+                cardForm.current ? !cardForm.current.checkValidity() : true
+              }
+              text="다음"
+            />
+          </NextButtonWrapper>
+        </InputWrapperParent>
+      </Page>
+      {bank === 'default' && (
+        <Modal>
+          <SelectBank onClick={onBankHanlder} />
+        </Modal>
+      )}
+    </Container>
   );
 }
+
+const Container = styled.div``;
 
 const Page = styled.div`
   display: flex;

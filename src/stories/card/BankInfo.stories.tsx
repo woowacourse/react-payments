@@ -5,14 +5,14 @@ import BankInfo from '../../components/card/BankInfo';
 function BankDummy() {
   return (
     <div>
-      <BankInfo kind="bc" />
-      <BankInfo kind="kakao" />
-      <BankInfo kind="hana" />
-      <BankInfo kind="hyundai" />
-      <BankInfo kind="kb" />
-      <BankInfo kind="lotte" />
-      <BankInfo kind="shinhan" />
-      <BankInfo kind="woori" />
+      <BankInfo kind="bc" onClick={() => {}} />
+      <BankInfo kind="kakao" onClick={() => {}} />
+      <BankInfo kind="hana" onClick={() => {}} />
+      <BankInfo kind="hyundai" onClick={() => {}} />
+      <BankInfo kind="kb" onClick={() => {}} />
+      <BankInfo kind="lotte" onClick={() => {}} />
+      <BankInfo kind="shinhan" onClick={() => {}} />
+      <BankInfo kind="woori" onClick={() => {}} />
     </div>
   );
 }

@@ -17,9 +17,6 @@ function AddCardPageStories() {
 
   return (
     <div className="app">
-      <Modal>
-        <SelectBank />
-      </Modal>
       <AddCardPage
         cardList={cardList}
         setCardList={setCardList}

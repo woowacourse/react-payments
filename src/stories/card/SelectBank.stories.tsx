@@ -10,5 +10,7 @@ export default meta;
 type Story = StoryObj<typeof SelectBank>;
 
 export const Default: Story = {
-  args: {},
+  args: {
+    onClick: () => {},
+  },
 };

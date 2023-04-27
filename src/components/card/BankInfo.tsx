@@ -7,6 +7,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  cursor: pointer;
 `;
 
 const Image = styled.img`
@@ -27,11 +28,12 @@ const Title = styled.span`
 
 interface BankInfoProps {
   kind: BankType;
+  onClick: () => void;
 }
 
-export default function BankInfo({ kind }: BankInfoProps) {
+export default function BankInfo({ kind, onClick }: BankInfoProps) {
   return (
-    <Wrapper>
+    <Wrapper onClick={onClick}>
       <Image src={BANK_DATA[kind].source} />
       <Title>{BANK_DATA[kind].title}</Title>
     </Wrapper>

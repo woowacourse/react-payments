@@ -5,6 +5,10 @@ body {
   justify-content: center;
 }
 
+body[data-hide-scroll='true'] {
+  overflow: hidden;
+}
+
 .app {
   width: 375px;
   min-height: 100vh;

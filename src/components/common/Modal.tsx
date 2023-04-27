@@ -2,6 +2,8 @@ import React, { PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
   position: fixed;
   top: 0;
   left: 0;

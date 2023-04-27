@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import BankInfo from './BankInfo';
+import { BankType } from '../../types';
 
 const Wrapper = styled.div`
   position: absolute;
   bottom: 0;
-  width: 100%;
+  width: 375px;
   box-sizing: border-box;
   height: 227px;
   padding: 34px 50px;
@@ -19,18 +20,28 @@ const GridWrapper = styled.div`
   row-gap: 26px;
 `;
 
-export default function SelectBank() {
+const BANK_KIND: BankType[] = [
+  'bc',
+  'shinhan',
+  'kakao',
+  'hyundai',
+  'woori',
+  'lotte',
+  'hana',
+  'kb',
+];
+
+interface SelectBankProps {
+  onClick: (value: BankType) => void;
+}
+
+export default function SelectBank({ onClick }: SelectBankProps) {
   return (
     <Wrapper>
       <GridWrapper>
-        <BankInfo kind="bc" />
-        <BankInfo kind="shinhan" />
-        <BankInfo kind="kakao" />
-        <BankInfo kind="hyundai" />
-        <BankInfo kind="woori" />
-        <BankInfo kind="lotte" />
-        <BankInfo kind="hana" />
-        <BankInfo kind="kb" />
+        {BANK_KIND.map((bank) => (
+          <BankInfo key={bank} kind={bank} onClick={() => onClick(bank)} />
+        ))}
       </GridWrapper>
     </Wrapper>
   );

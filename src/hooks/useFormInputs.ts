@@ -50,6 +50,10 @@ export const useFormInputs = () => {
         name: 'secondPasswordInput',
         maxLength: 1,
       }),
+      cardTitle: useInput('', {
+        name: 'cardTitleInput',
+        maxLength: 20,
+      }),
     },
   };
 
