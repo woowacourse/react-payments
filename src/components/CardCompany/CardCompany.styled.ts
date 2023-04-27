@@ -6,15 +6,15 @@ export const CardCompany = styled.li`
   justify-content: center;
   align-items: center;
 
-  width: 60px;
+  width: 80px;
   height: 80px;
 
   cursor: pointer;
 
   svg {
-    width: 50px;
-    height: 50px;
-    margin-bottom: 12px;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 20px;
   }
 
   p {

@@ -53,7 +53,9 @@ export const BottomSheetContainer = styled.div`
   transform: translateX(-50%);
 
   width: 100%;
-  height: 30%;
+  height: 40%;
+
+  border-radius: 8px;
 
   background-color: ${COLOR.WHITE};
 
