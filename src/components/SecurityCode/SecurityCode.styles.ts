@@ -23,10 +23,10 @@ export const Tooltip = styled.button`
   &:hover:after {
     content: 'CVC 번호는 카드 뒤 3자리 입니다.';
     display: block;
-    width: max-content;
+    width: 100px;
     position: absolute;
     left: 36px;
-    top: 8px;
+    top: 0px;
     font-size: 12px;
   }
 `;

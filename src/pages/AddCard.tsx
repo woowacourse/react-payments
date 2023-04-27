@@ -21,11 +21,20 @@ import {
   useBottomSheet,
 } from '../hooks';
 import { v4 as uuidv4 } from 'uuid';
+import theme from '../styles/theme';
 
-const Wrapper = styled.div`
+const CardWrapper = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   margin: 32px 0;
+  cursor: pointer;
+
+  & > p {
+    font-size: 12px;
+    color: ${theme.color.grey300};
+    margin-bottom: 4px;
+  }
 `;
 
 const NextButton = styled.button<{ disabled: boolean }>`
@@ -46,7 +55,8 @@ const AddCard = () => {
   const { expiredDate, checkExpiredDate, validateDate } = useExpiredDate();
   const { cardCompany, checkCardCompany } = useCardCompany();
 
-  const { isBottomSheetOpen, closeBottomSheet } = useBottomSheet();
+  const { isBottomSheetOpen, openBottomSheet, closeBottomSheet } =
+    useBottomSheet();
 
   const { disabled } = useAddCard(
     cardNumbers,
@@ -75,14 +85,15 @@ const AddCard = () => {
     <>
       <Layout>
         <form onSubmit={handleSubmitCard}>
-          <Wrapper>
+          <CardWrapper onClick={openBottomSheet}>
+            <p>카드를 클릭해 카드사를 변경할 수 있습니다.</p>
             <Card
               cardNumbers={cardNumbers}
               expiredDate={expiredDate}
               cardOwnerName={cardOwnerName}
               cardCompany={cardCompany}
             />
-          </Wrapper>
+          </CardWrapper>
           <CardNumbers
             cardNumbers={cardNumbers}
             checkCardNumbers={checkCardNumbers}

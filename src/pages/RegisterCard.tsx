@@ -38,7 +38,7 @@ const RegisterCard = () => {
         <Input
           value={nickname}
           onChange={handleNicknameInputChange}
-          placeholder="카드 별칭을 입력해주세요."
+          placeholder="카드 별칭을 입력해주세요.(선택)"
         />
       </Wrapper>
       <ButtonWrapper>
@@ -63,6 +63,7 @@ const Input = styled.input`
   width: 244px;
   margin-top: 124px;
   border-bottom: 1px solid black;
+  text-align: center;
 `;
 
 const ButtonWrapper = styled.div`
@@ -70,6 +71,7 @@ const ButtonWrapper = styled.div`
   -webkit-box-pack: end;
   justify-content: flex-end;
   margin-top: 172px;
+  cursor: pointer;
 `;
 
 export default RegisterCard;
