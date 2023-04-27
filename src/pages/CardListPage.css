@@ -23,7 +23,6 @@
 
 .add-card-page-body {
   display: flex;
-  overflow-y: scroll;
   flex-direction: column;
   gap: 46px;
   align-items: center;

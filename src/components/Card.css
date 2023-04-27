@@ -44,7 +44,7 @@
   font-size: 12px;
   font-weight: 500;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
-  transform: rotateY(180deg);
+  transform: perspective(600px) rotateY(180deg);
 }
 
 .front {
@@ -80,7 +80,7 @@
 }
 
 .flip:hover .card {
-  transform: rotateY(180deg);
+  transform: perspective(600px) rotateY(180deg);
 }
 
 .card-track-1 {
