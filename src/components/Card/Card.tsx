@@ -2,7 +2,7 @@ import * as Styled from './Card.styles';
 import { CardType } from '../../types/Card';
 import { cardCompanies } from '../../constants/cards';
 
-type CardProps = Omit<CardType, 'id'>;
+type CardProps = Omit<CardType, 'id' | 'nickname'> & { nickname?: string };
 
 const Card = ({
   cardNumbers,

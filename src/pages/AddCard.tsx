@@ -20,6 +20,7 @@ import {
   useCardCompany,
   useBottomSheet,
 } from '../hooks';
+import { v4 as uuidv4 } from 'uuid';
 
 const Wrapper = styled.div`
   display: flex;
@@ -56,10 +57,17 @@ const AddCard = () => {
 
   const navigate = useNavigate();
 
-  const { handleSetCards } = useContext(CardContext);
+  const { setCard } = useContext(CardContext);
 
   const handleSubmitCard = () => {
-    handleSetCards(cardNumbers, expiredDate, cardOwnerName, cardCompany);
+    const newCard = {
+      id: uuidv4(),
+      cardNumbers,
+      expiredDate,
+      cardOwnerName,
+      cardCompany,
+    };
+    setCard(newCard);
     navigate('/register-card');
   };
 

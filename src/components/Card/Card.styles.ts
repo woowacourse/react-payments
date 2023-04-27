@@ -10,7 +10,7 @@ export const CardWrapper = styled.div<{ cardColor?: string }>`
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
   font-size: 14px;
-  margin-bottom: 32px;
+  margin-bottom: 12px;
 `;
 
 export const ChipWrapper = styled.div`

@@ -35,14 +35,18 @@ const Home = () => {
             expiredDate,
             cardOwnerName,
             cardCompany,
+            nickname,
           }: CardType) => (
-            <Card
-              key={id}
-              cardNumbers={cardNumbers}
-              expiredDate={expiredDate}
-              cardOwnerName={cardOwnerName}
-              cardCompany={cardCompany}
-            />
+            <>
+              <Card
+                key={id}
+                cardNumbers={cardNumbers}
+                expiredDate={expiredDate}
+                cardOwnerName={cardOwnerName}
+                cardCompany={cardCompany}
+              />
+              <p>{nickname}</p>
+            </>
           )
         )}
         <AddCardButton></AddCardButton>

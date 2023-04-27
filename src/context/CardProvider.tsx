@@ -5,7 +5,6 @@ import {
   SetStateAction,
   useState,
 } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import { CardType } from '../types/Card';
 
 const initialState: CardType = {
@@ -14,6 +13,7 @@ const initialState: CardType = {
   expiredDate: { 0: '', 1: '' },
   cardOwnerName: '',
   cardCompany: '',
+  nickname: '',
 };
 
 export const CardContext = createContext<CardState>({
@@ -24,10 +24,10 @@ export const CardContext = createContext<CardState>({
     expiredDate: { 0: '', 1: '' },
     cardOwnerName: '',
     cardCompany: '',
+    nickname: '',
   },
   setCard: () => {},
   setCards: () => {},
-  handleSetCards: () => {},
 });
 
 interface CardState {
@@ -35,41 +35,17 @@ interface CardState {
   cards: CardType[];
   setCard: Dispatch<SetStateAction<CardType>>;
   setCards: Dispatch<SetStateAction<CardType[]>>;
-  handleSetCards: (
-    cardNumbers: Record<number, string>,
-    expiredDate: Record<number, string>,
-    cardOwnerName: string,
-    cardCompany: string
-  ) => void;
 }
 
 const CardProvider = ({ children }: PropsWithChildren) => {
   const [card, setCard] = useState<CardType>(initialState);
   const [cards, setCards] = useState<CardType[]>([]);
 
-  const handleSetCards = (
-    cardNumbers: Record<number, string>,
-    expiredDate: Record<number, string>,
-    cardOwnerName: string,
-    cardCompany: string
-  ) => {
-    const newCard = {
-      id: uuidv4(),
-      cardNumbers,
-      expiredDate,
-      cardOwnerName,
-      cardCompany,
-    };
-    setCard(newCard);
-    setCards([...cards, newCard]);
-  };
-
   const state: CardState = {
     card,
     cards,
     setCard,
     setCards,
-    handleSetCards,
   };
 
   return <CardContext.Provider value={state}>{children}</CardContext.Provider>;

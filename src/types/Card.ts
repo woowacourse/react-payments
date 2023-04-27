@@ -4,4 +4,5 @@ export interface CardType {
   expiredDate: Record<number, string>;
   cardOwnerName: string;
   cardCompany: string;
+  nickname?: string;
 }
