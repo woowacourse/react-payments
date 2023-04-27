@@ -6,12 +6,12 @@ export const CardWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   height: 192px;
-  margin-top: 28px;
+  margin-top: 24px;
   font-size: 14px;
 `;
 
 export const CardLabelWrapper = styled.div`
-  height: 16px;
+  height: 20px;
 `;
 
 export const NextButton = styled.button<{ disabled: boolean }>`
