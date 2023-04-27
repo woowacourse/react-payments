@@ -11,16 +11,19 @@ const CardList = ({ cards }: CardListProps) => {
   return (
     <Ul>
       {cards.map((card) => {
-        const { cardCompany, cardNumber, ownerName, expirationDate } = card;
+        const { cardName, cardCompany, cardNumber, ownerName, expirationDate } = card;
         const { firstGroup, secondGroup, thirdGroup, fourthGroup } = cardNumber;
         const key = `${firstGroup}${secondGroup}${thirdGroup}${fourthGroup}`;
 
         return (
-          <CardPreview
-            key={key}
-            card={{ cardCompany, cardNumber, ownerName, expirationDate }}
-            animation={{ transition: "all 0.3s ease", transform: "translate(3px, 3px)" }}
-          />
+          <>
+            <CardPreview
+              key={key}
+              card={{ cardCompany, cardNumber, ownerName, expirationDate }}
+              animation={{ transition: "all 0.3s ease", transform: "translate(3px, 3px)" }}
+            />
+            <span>{cardName}</span>
+          </>
         );
       })}
 

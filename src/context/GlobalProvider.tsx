@@ -3,19 +3,23 @@ import { Card } from "../types";
 
 interface GlobalState {
   cards: Card[];
-  addCard: (value: Card) => void;
+  currentIndex: number;
+  setCards: (value: Card[]) => void;
+  setCurrentIndex: (value: number) => void;
 }
 
 export const GlobalContext = createContext<GlobalState>({
   cards: [],
-  addCard: () => {},
+  currentIndex: 0,
+  setCards: () => {},
+  setCurrentIndex: () => {},
 });
 
 export const GlobalContextProvider = ({ children }: React.PropsWithChildren) => {
   const [cards, setCards] = useState<Card[]>([]);
-  const addCard = (card: Card) => setCards([...cards, card]);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const value = { cards, addCard };
+  const value = { cards, currentIndex, setCards, setCurrentIndex };
 
   return <GlobalContext.Provider value={value}>{children}</GlobalContext.Provider>;
 };

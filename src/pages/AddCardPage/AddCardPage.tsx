@@ -19,7 +19,7 @@ import { GlobalContext } from "../../context/GlobalProvider";
 import { AddCardContext } from "../../context/AddCardProvider";
 
 const AddCardPage = () => {
-  const { addCard } = useContext(GlobalContext);
+  const { cards, setCards, setCurrentIndex } = useContext(GlobalContext);
 
   const {
     modalOpen,
@@ -53,6 +53,7 @@ const AddCardPage = () => {
     e.preventDefault();
 
     const card: Card = {
+      cardName: "",
       cardCompany,
       cardNumber,
       expirationDate,
@@ -61,8 +62,9 @@ const AddCardPage = () => {
       password,
     };
 
-    addCard(card);
-    navigate(PAGE.CARD_LIST);
+    setCards([...cards, card]);
+    setCurrentIndex(cards.length);
+    navigate(PAGE.NAME_CARD);
   };
 
   const isAddButtonVisibleConditionFulfilled = (): boolean => {
@@ -76,6 +78,8 @@ const AddCardPage = () => {
 
     return addButtonAppearCondition;
   };
+
+  // const cardCompanyList = ["비씨카드","하나카드","현대카드","카카오뱅크","국민카드","롯데카드","신한카드","우리카드"]
 
   return (
     <Container>
@@ -132,13 +136,16 @@ const Form = styled.form`
   }
 `;
 
-const ButtonBox = styled.div<{ isVisible: boolean }>`
+export const ButtonBox = styled.div<{ isVisible: boolean }>`
   display: flex;
   justify-content: flex-end;
+
+  width: 100%;
+
   visibility: ${({ isVisible }) => (isVisible ? "visible" : "hidden")};
 `;
 
-const Button = styled.button`
+export const Button = styled.button`
   background-color: transparent;
   border: none;
 
