@@ -10,6 +10,8 @@ import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import useAddCard from '../hooks/useAddCard';
 import styled from 'styled-components';
+import CardCompanyModal from '../components/CardCompanyModal/CardCompanyModal';
+import { useEffect, useState } from 'react';
 
 const Wrapper = styled.div`
   display: flex;
@@ -46,7 +48,7 @@ const AddCard = ({ cards, setCards }: SetCardsProps) => {
     setPasswords,
     isDisabledForm,
   } = useAddCard();
-
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const handleSetCards = () => {
@@ -56,6 +58,10 @@ const AddCard = ({ cards, setCards }: SetCardsProps) => {
     ]);
     navigate('/');
   };
+
+  useEffect(() => {
+    setIsOpen(true);
+  }, []);
 
   return (
     <>
@@ -89,6 +95,7 @@ const AddCard = ({ cards, setCards }: SetCardsProps) => {
           <NextButton disabled={isDisabledForm}>다음</NextButton>
         </ButtonWrapper>
       </form>
+      {isOpen && <CardCompanyModal setIsOpen={setIsOpen} />}
     </>
   );
 };
