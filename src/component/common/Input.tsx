@@ -1,29 +1,40 @@
-import { InputHTMLAttributes } from "react";
+import { ChangeEvent, InputHTMLAttributes, useEffect, useState } from "react";
 
 import styles from "./Input.module.css";
 
-export default function Input(props: InputHTMLAttributes<HTMLInputElement>) {
-  const {
-    name,
-    type,
-    onChange,
-    placeholder,
-    inputMode,
-    defaultValue,
-    style,
-    className,
-  } = props;
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
+  valueChangeSubscribers?: ((value: string) => void)[];
+  parsers?: ((value: string) => string)[];
+  defaultValue?: string;
+}
+
+export default function Input(props: Props) {
+  const { valueChangeSubscribers, parsers, defaultValue, className } = props;
+
+  const [value, setValue] = useState(defaultValue ?? "");
+
+  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+
+    const validatedValue = parsers?.reduce(
+      (prev, validator) => validator(prev), newValue
+    );
+
+    setValue(validatedValue ?? newValue);
+  };
+
+  useEffect(() => {
+    valueChangeSubscribers?.forEach((subscriberFunction) => {
+      subscriberFunction(value);
+    });
+  }, [value, valueChangeSubscribers]);
 
   return (
     <input
-      name={name}
-      className={`${styles.input} ${className}`}
-      style={style}
-      type={type}
-      inputMode={inputMode}
-      onChange={onChange}
-      placeholder={placeholder}
-      value={defaultValue}
+      {...props}
+      value={value}
+      onChange={onChangeHandler}
+      className={`${className} ${styles.input}`}
     />
   );
 }
