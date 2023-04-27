@@ -38,6 +38,7 @@ const CardPasswordInput = () => {
         maxLength={1}
         onChange={event => updateDigit(1, event)}
         required={true}
+        name="cardPasswordFirstLetter"
         type="password"
       />
       <Input
@@ -47,6 +48,7 @@ const CardPasswordInput = () => {
         onChange={event => updateDigit(2, event)}
         ref={secondDigitRef}
         required={true}
+        name="cardPasswordSecondLetter"
         type="password"
       />
       <MockPasswordInput />
