@@ -28,8 +28,8 @@ export const Styled = {
   `,
 
   CVVInfoContainer: styled.div`
-    width: 60%;
-    height: 155px;
+    width: 62%;
+    height: 171px;
 
     display: none;
     align-items: center;
@@ -37,7 +37,7 @@ export const Styled = {
 
     position: absolute;
     right: 0;
-    top: -50px;
+    top: -63px;
 
     background: rgba(0, 0, 0, 0.55);
     border-radius: 7px;
