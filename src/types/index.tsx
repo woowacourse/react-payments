@@ -16,6 +16,4 @@ export type CreditCardCompany = Record<CreditCardCompanyKeys, string>;
 
 export interface CreditCardInputProps {
   name: CreditCardKeys;
-  creditCard: CreditCard;
-  setCreditCard: React.Dispatch<React.SetStateAction<CreditCard>>;
 }

@@ -1,6 +1,7 @@
 import creditCardCompanies from 'assets/data/creditCardCompanies';
 import { convertImage } from 'tools/image';
 import * as T from 'types';
+import useCreditCard from 'hooks/useCreditCard';
 import {
   CreditCardCompanyImage, CreditCardCompanyInputLayout,
   CreditCardCompanyItem, CreditCardCompanyTitle
@@ -10,9 +11,9 @@ interface CreditCardCompanyInputProps extends T.CreditCardInputProps {
   closeModal: () => void;
 }
 
-function CreditCardCompanyInput({
-  closeModal, name, creditCard, setCreditCard
-}: CreditCardCompanyInputProps) {
+function CreditCardCompanyInput({ closeModal, name }: CreditCardCompanyInputProps) {
+  const { creditCard, setCreditCard } = useCreditCard();
+
   const handleChangeCreditCardCompany = (companyId: string) => {
     setCreditCard({ ...creditCard, [name]: companyId });
     closeModal();

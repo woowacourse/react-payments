@@ -1,4 +1,8 @@
 import creditCardCompanies from 'assets/data/creditCardCompanies';
+import { CreditCard } from 'types';
+import {
+  validateCVC, validateExpiry, validateNumber, validatePassword
+} from './validations';
 
 export const convertSecuredCreditCard = (number: string) => {
   const creditCardNumberLength = number.length;
@@ -21,4 +25,24 @@ export const findCreditCardCompanyById = (id: string) => {
   }
   return creditCardCompanies[index];
 };
+
+export const checkCreditCardValidations = (creditCard: CreditCard) => {
+  const isValidCVC = validateCVC(creditCard.cvc);
+  const isValidExpiry = validateExpiry(creditCard.expiry);
+  const isValidCardNumber = validateNumber(creditCard.number);
+  const isValidCardPassword = validatePassword(
+    creditCard.password.first,
+    creditCard.password.second
+  );
+
+  const isCreditCardError = [
+    isValidCVC,
+    isValidExpiry,
+    isValidCardNumber,
+    isValidCardPassword
+  ].some((v) => v);
+
+  return isCreditCardError;
+};
+
 export default {};

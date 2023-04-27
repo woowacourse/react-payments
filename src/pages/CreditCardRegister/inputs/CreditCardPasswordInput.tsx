@@ -1,11 +1,12 @@
 import * as T from 'types';
+import useCreditCard from 'hooks/useCreditCard';
 import Input from '../../../components/Input';
 import * as S from '../style';
 import { validatePassword } from '../../../domains/validations';
 
-function CreditCardPasswordInput(
-  { name, creditCard, setCreditCard }: T.CreditCardInputProps
-) {
+function CreditCardPasswordInput({ name }: T.CreditCardInputProps) {
+  const { creditCard, setCreditCard } = useCreditCard();
+
   const handleChangeCreditCardPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newPassword = (event.target.value as T.CreditCardPasswordTypeKeys).replace(/\D/g, '');
     if (newPassword.length === 1) {

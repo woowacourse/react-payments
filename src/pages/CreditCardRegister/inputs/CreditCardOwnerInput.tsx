@@ -1,10 +1,11 @@
 import * as T from 'types';
+import useCreditCard from 'hooks/useCreditCard';
 import Input from '../../../components/Input';
 import * as S from '../style';
 
-function CreditCardOwnerInput(
-  { name, creditCard, setCreditCard }: T.CreditCardInputProps
-) {
+function CreditCardOwnerInput({ name }: T.CreditCardInputProps) {
+  const { creditCard, setCreditCard } = useCreditCard();
+
   const handleChangeCreditCardOwner = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newName = (event.target.value).toUpperCase();
     if (newName.length <= 30) {
