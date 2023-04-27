@@ -22,6 +22,7 @@
   position: relative;
   transition: 0.4s;
   transform-style: preserve-3d;
+  z-index: 1;
 }
 
 .front,
