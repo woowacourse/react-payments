@@ -6,6 +6,7 @@ export const Wrapper = styled.div`
   align-items: center;
   width: 52px;
   height: 64px;
+  cursor: pointer;
 `;
 
 export const Text = styled.span`

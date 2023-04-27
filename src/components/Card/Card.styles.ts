@@ -10,6 +10,7 @@ export const Wrapper = styled.div<{ background: string }>`
   font-size: 14px;
   margin-bottom: 32px;
   overflow: hidden;
+  cursor: pointer;
 `;
 
 export const CardItemWrapper = styled.div`
