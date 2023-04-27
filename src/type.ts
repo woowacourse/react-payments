@@ -27,6 +27,7 @@ export type InputHook<T> = {
 export type PasswordInputHook<T> = [T, (e: React.ChangeEvent<HTMLInputElement>) => void];
 
 export type FormCardAddProps = {
+  cardType: string;
   cardNumber: InputHook<CardNumber>;
   cardExpire: InputHook<string>;
   cardOwner: InputHook<string>;
@@ -36,20 +37,3 @@ export type FormCardAddProps = {
 };
 
 export type actionName = 'CARDLIST_REQUEST' | 'CARDLIST_SUCCESS' | 'CARDLIST_FAILURE';
-
-// export interface dispatchActions {
-//   type: actionName;
-//   card: CardType;
-//   errorMessage: string;
-// }
-
-// export type dispatchActionsResult = {
-//   type: actionName;
-//   card: CardType[] | never[];
-//   errorMessage: string;
-// };
-
-// export type cardInitialState = {
-//   cardList: CardType[];
-//   errorMessage: string;
-// };
