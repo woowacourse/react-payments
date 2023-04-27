@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Card } from './types';
+import { Card, CardName } from './types';
 
 export type CreditCardProps = {
   card: Partial<Card>;
@@ -9,7 +9,7 @@ export function CreditCard({ card }: CreditCardProps) {
   const { numbers, expirationDate, name, bankCode } = card;
 
   return (
-    <Styled.Wrapper>
+    <Styled.Wrapper card={card}>
       <Styled.BankName>{bankCode && CardName[bankCode]}</Styled.BankName>
       <Styled.Chip />
       <Styled.CardNumbers>
@@ -31,14 +31,28 @@ export function CreditCard({ card }: CreditCardProps) {
 }
 
 const Styled = {
-  Wrapper: styled.div`
+  Wrapper: styled.div<CreditCardProps>`
     position: relative;
     width: 213px;
     height: 133px;
-    background: #333333;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
+    background: ${({ card, theme: { colors } }) =>
+      card.bankCode ? colors.card.background[card.bankCode] : 'white'};
+    color: ${({ card, theme: { colors } }) =>
+      card.bankCode ? colors.card.font[card.bankCode] : 'black'};
   `,
+
+  BankName: styled.span`
+    position: absolute;
+    left: 13px;
+    top: 11px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+  `,
+
   Chip: styled.div`
     position: absolute;
     width: 40px;
@@ -61,7 +75,6 @@ const Styled = {
 
     span {
       width: 34px;
-      color: #ffffff;
       font-size: 14px;
     }
   `,
@@ -76,11 +89,9 @@ const Styled = {
     justify-content: space-between;
   `,
   Name: styled.span`
-    color: #ffffff;
     font-size: 12px;
   `,
   ExpirationDate: styled.div`
-    color: #ffffff;
     font-size: 12px;
     width: 36px;
     height: 10px;
