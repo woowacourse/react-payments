@@ -16,6 +16,7 @@ type CardInfoContextType = {
   setCardSecurityCode: (securityCode: FormInputValueType) => void;
   setCardExpirationDate: (expirationDate: FormInputValueType) => void;
   setHasCheckedValidation: (hasChecked: boolean) => void;
+  reset: () => void;
 };
 
 const emptyFormInputValue = { isValid: false, value: '' };
@@ -35,6 +36,7 @@ const CardInfoContext = createContext<CardInfoContextType>({
   setCardSecurityCode: () => {},
   setCardExpirationDate: () => {},
   setHasCheckedValidation: () => {},
+  reset: () => {},
 });
 
 interface CardInfoProviderProps {
@@ -49,6 +51,16 @@ const CardInfoProvider = ({ children }: CardInfoProviderProps) => {
   const [cardSecurityCode, setCardSecurityCode] = useState(emptyFormInputValue);
   const [cardExpirationDate, setCardExpirationDate] = useState(emptyFormInputValue);
   const [hasCheckedValidation, setHasCheckedValidation] = useState(false);
+
+  const reset = () => {
+    setCardIssuer(() => 'BC카드');
+    setCardNumber(() => emptyFormInputValue);
+    setCardOwnerName(() => emptyFormInputValue);
+    setCardPassword(() => emptyFormInputValue);
+    setCardSecurityCode(() => emptyFormInputValue);
+    setCardExpirationDate(() => emptyFormInputValue);
+    setHasCheckedValidation(() => false);
+  };
 
   return (
     <CardInfoContext.Provider
@@ -67,6 +79,7 @@ const CardInfoProvider = ({ children }: CardInfoProviderProps) => {
         setCardSecurityCode,
         setCardExpirationDate,
         setHasCheckedValidation,
+        reset,
       }}
     >
       {children}
