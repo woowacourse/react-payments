@@ -7,7 +7,7 @@ import { useLocalStorage } from '../../hooks/useLocalStorage';
 const STORIES_CARD_KEY = 'storiesCardkey';
 
 function AddCardPageStories() {
-  const [page, setPage] = useState<PageInfo>('homePage');
+  const [page, setPage] = useState<PageInfo>('addCardPage');
   const [cardList, setCardList] = useLocalStorage<CardInfo[]>(
     [],
     STORIES_CARD_KEY
