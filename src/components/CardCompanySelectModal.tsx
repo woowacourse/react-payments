@@ -46,4 +46,7 @@ const Container = styled.div`
   padding: 3.2rem 1.6rem;
   border-radius: 0.8rem 0.8rem 0rem 0rem;
   background: #fdfdfd;
+
+  display: flex;
+  justify-content: center;
 `;

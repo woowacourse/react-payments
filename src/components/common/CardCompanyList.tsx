@@ -1,9 +1,8 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import styled from 'styled-components';
 
 import { CARD_COMPANY, imgSrc } from '../../constants/cardCompany';
 import { CardPreviewInfoContext } from '../../contexts/cardInfo';
-import { useCompany } from '../../hooks/useCompany';
 
 export function CardCompanyList() {
   const { COMPANY } = useContext(CardPreviewInfoContext);
