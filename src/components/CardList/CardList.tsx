@@ -15,7 +15,8 @@ const CardList = ({ cardInfo }: CardListProps) => {
             <CardPreview
               cardNumber={card.cardNumber}
               cardOwnerName={card.cardOwnerName}
-              cardExpirationDate={card.cardExpirationDate}
+              expirationDate={card.expirationDate}
+              selectedCard={card.selectedCard}
             />
           </li>
         ))}

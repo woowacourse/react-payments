@@ -1,5 +1,5 @@
 import styles from './CardCompanyModal.module.css';
-import cards from '../../images/images';
+import cardIcons from '../../images/cardIcon/cardIconImages';
 import CardCompany from '../CardCompany/CardCompany';
 
 type CardCompanyModalProps = {
@@ -12,16 +12,16 @@ const CardCompanyModal = ({ onClose }: CardCompanyModalProps) => {
       <section className={styles.modalBackground} onClick={onClose} />
       <section className={styles.modalContainer}>
         <section className={styles.cardContainer}>
-          <CardCompany image={cards.bcCard} cardName="BC카드" />
-          <CardCompany image={cards.hanaCard} cardName="하나카드" />
-          <CardCompany image={cards.hyundaiCard} cardName="현대카드" />
-          <CardCompany image={cards.citiCard} cardName="씨티카드" />
+          <CardCompany image={cardIcons.bcCardIcon} cardName="비씨카드" onClose={onClose} />
+          <CardCompany image={cardIcons.shinhanCardIcon} cardName="신한카드" onClose={onClose} />
+          <CardCompany image={cardIcons.kakaoCardIcon} cardName="카카오뱅크" onClose={onClose} />
+          <CardCompany image={cardIcons.hyundaiCardIcon} cardName="현대카드" onClose={onClose} />
         </section>
         <section className={styles.cardContainer}>
-          <CardCompany image={cards.lotteCard} cardName="롯데카드" />
-          <CardCompany image={cards.wooriCard} cardName="우리카드" />
-          <CardCompany image={cards.shinhanCard} cardName="신한카드" />
-          <CardCompany image={cards.visaCard} cardName="비자카드" />
+          <CardCompany image={cardIcons.wooriCardIcon} cardName="우리카드" onClose={onClose} />
+          <CardCompany image={cardIcons.lotteCardIcon} cardName="롯데카드" onClose={onClose} />
+          <CardCompany image={cardIcons.hanaCardIcon} cardName="하나카드" onClose={onClose} />
+          <CardCompany image={cardIcons.kbCardIcon} cardName="국민카드" onClose={onClose} />
         </section>
       </section>
     </>
