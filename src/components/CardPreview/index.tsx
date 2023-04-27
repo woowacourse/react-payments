@@ -4,13 +4,13 @@ import * as styled from './CardPreview.styled';
 
 interface CardPreviewProps {
   cardInfo: CardInfo;
-  bgColor?: string;
+  openModal: () => void;
 }
 
-const CardPreview = ({ cardInfo, bgColor }: CardPreviewProps) => {
+const CardPreview = ({ cardInfo, openModal }: CardPreviewProps) => {
   return (
-    <styled.CardPreview>
-      <Card cardInfo={cardInfo} bgColor={bgColor} />
+    <styled.CardPreview onClick={openModal}>
+      <Card cardInfo={cardInfo} />
     </styled.CardPreview>
   );
 };
