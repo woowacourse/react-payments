@@ -17,6 +17,7 @@ export type CardType = {
   expired: string;
   securityCode: string;
   cardPassword: CardPassword;
+  cardNickName: string;
 };
 
 export type InputHook<T> = {

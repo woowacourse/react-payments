@@ -45,3 +45,15 @@
   flex-direction: column;
   align-items: center;
 }
+
+.card-data-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.card-nickname {
+  margin-top: 10px;
+}

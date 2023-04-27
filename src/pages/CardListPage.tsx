@@ -31,13 +31,16 @@ const CardListPage = () => {
             <span className="empty-card-list-title">새로운 카드를 등록해주세요.</span>
           ) : (
             mainCardListData.map((card: CardType) => (
-              <Card
-                key={card.id}
-                cardType={card.cardType}
-                cardNumber={card.cardNumber}
-                cardOwner={card.cardOwner}
-                expired={card.expired}
-              />
+              <div className="card-data-item">
+                <Card
+                  key={card.id}
+                  cardType={card.cardType}
+                  cardNumber={card.cardNumber}
+                  cardOwner={card.cardOwner}
+                  expired={card.expired}
+                />
+                <div className="card-nickname">{card.cardNickName}</div>
+              </div>
             ))
           )}
           <div className="add-card">
