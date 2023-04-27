@@ -4,10 +4,10 @@ import CardInfoContext from '../../../contexts/CardInfoContext';
 import { useCardInfoList } from '../../../hooks/useCardInfoList';
 import { useCardInfo } from '../../../hooks/useCardInfo';
 
-import * as styled from './CardPage.styled';
+import * as styled from './CardPages.styled';
 import MyCardPage from '../MyCardPage/MyCardPage';
 import CardRegisterPage from '../CardRegisterPage/CardRegisterPage';
-import CardAliasPages from '../CardAliasPages/CardAliasPages';
+import CardAliasPage from '../CardAliasPage/CardAliasPage';
 
 const CardPages = () => {
   const { cardInfoList, setCardInfoList } = useCardInfoList();
@@ -53,7 +53,7 @@ const CardPages = () => {
         <Routes>
           <Route path="/" element={<MyCardPage />} />
           <Route path="/register" element={<CardRegisterPage />} />
-          <Route path="/alias" element={<CardAliasPages />} />
+          <Route path="/alias" element={<CardAliasPage />} />
         </Routes>
       </CardInfoContext.Provider>
     </styled.CardPages>

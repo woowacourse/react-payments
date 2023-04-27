@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { CardInfoSubmitButton } from '../../CardInfoSubmitButtonContainer/CardInfoSubmitButtonContainer.styled';
 
-export const CardAliasPages = styled.section`
+export const CardAliasPage = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
