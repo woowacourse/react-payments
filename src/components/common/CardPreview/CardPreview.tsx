@@ -1,15 +1,14 @@
 import styles from './CardPreview.module.css';
 
 type CardPreviewProps = {
+  cardName?: string;
   cardNumber: string;
   cardOwnerName: string;
   cardExpirationDate: string;
   image?: string;
 };
 
-const CardPreview = ({ cardNumber, cardOwnerName, cardExpirationDate, image }: CardPreviewProps) => {
-  console.log('image', image);
-
+const CardPreview = ({ cardName, cardNumber, cardOwnerName, cardExpirationDate, image }: CardPreviewProps) => {
   return (
     <div className={styles.container}>
       <div className={styles.card} style={{ background: `url(${image})` }}>
@@ -20,6 +19,7 @@ const CardPreview = ({ cardNumber, cardOwnerName, cardExpirationDate, image }: C
           <span className={styles['expiration-date']}>{cardExpirationDate}</span>
         </div>
       </div>
+      <div className={styles['card-name']}>{cardName}</div>
     </div>
   );
 };
