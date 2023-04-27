@@ -2,7 +2,7 @@ name: Deploy
 
 on:
   push:
-    branches: ['step1']
+    branches: ['step2']
 
 jobs:
   deploy:
@@ -32,7 +32,15 @@ jobs:
 
       - run: npm run build
 
+      - run: npx build-storybook
+
       - uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
+
+      - uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./storybook-static
+          destination_dir: storybook
