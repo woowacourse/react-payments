@@ -1,27 +1,35 @@
 import styled from "styled-components";
+import theme from "src/styles/theme";
+import { CARD_ID } from "src/utils/constant";
+
+interface CardColorProps {
+  cardName?: (typeof CARD_ID)[number] | null;
+}
+
+export const CardContainer = styled.div<CardColorProps>`
+  width: 213px;
+  height: 133px;
+
+  display: flex;
+  flex-direction: column;
+  row-gap: 13px;
+  justify-content: flex-end;
+
+  background: ${(props) =>
+    props.cardName ? theme.cardColors[props.cardName].background : "#fff"};
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+
+  color: ${(props) =>
+    props.cardName ? theme.cardColors[props.cardName].color : "#333"};
+
+  padding: 14px;
+  margin: 25px auto 9px auto;
+
+  box-sizing: border-box;
+`;
 
 export const Styled = {
-  CardContainer: styled.div`
-    width: 213px;
-    height: 133px;
-
-    display: flex;
-    flex-direction: column;
-    row-gap: 13px;
-    justify-content: flex-end;
-
-    background: #fff;
-    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
-    border-radius: 5px;
-
-    color: var(--darken-color);
-
-    padding: 14px;
-    margin: 25px auto 9px auto;
-
-    box-sizing: border-box;
-  `,
-
   CardName: styled.span`
     font-style: normal;
     font-weight: 500;

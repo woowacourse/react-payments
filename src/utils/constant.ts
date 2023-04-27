@@ -27,44 +27,55 @@ export const CARD_NUMBER_TYPES = [
 
 export const PASSWORD_NUMBER_TYPES = ["first", "second"] as const;
 
+export const CARD_ID = [
+  "bc-card",
+  "shinhan-card",
+  "kakao-bank",
+  "hyundai-card",
+  "woori-card",
+  "lottee-card",
+  "hana-card",
+  "kookmin-card",
+] as const;
+
 export const BANK_LIST = [
   {
-    id: "bc-card",
+    id: CARD_ID[0],
     src: BCCard,
     name: "BC 카드",
   },
   {
-    id: "shinhan-card",
+    id: CARD_ID[1],
     src: ShinhanCard,
     name: "신한 카드",
   },
   {
-    id: "kakao-bank",
+    id: CARD_ID[2],
     src: KakaoBank,
     name: "카카오 뱅크",
   },
   {
-    id: "hyundai-card",
+    id: CARD_ID[3],
     src: HyundaiCard,
     name: "현대 카드",
   },
   {
-    id: "woori-card",
+    id: CARD_ID[4],
     src: WooriCard,
     name: "우리 카드",
   },
   {
-    id: "lottee-card",
+    id: CARD_ID[5],
     src: LotteCard,
     name: "롯데 카드",
   },
   {
-    id: "hana-card",
+    id: CARD_ID[6],
     src: HanaCard,
     name: "하나 카드",
   },
   {
-    id: "kookmin-card",
+    id: CARD_ID[7],
     src: KookminCard,
     name: "국민 카드",
   },
@@ -85,8 +96,8 @@ export const initialCardInfos = {
     second: "",
   },
   cardName: {
+    id: null,
     name: "",
-    id: "",
   },
 };
 

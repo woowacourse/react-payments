@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { CardInfoContext } from "src/context/CardInfoContext";
-import { BANK_LIST } from "src/utils/constant";
+import { BANK_LIST, CARD_ID } from "src/utils/constant";
 import styled from "styled-components";
 
 interface Props {
@@ -18,7 +18,7 @@ function CardCompany({ closeEvent }: Props) {
       setCardInfo((prev) => ({
         ...prev,
         cardName: {
-          id,
+          id: id as (typeof CARD_ID)[number],
           name: alt,
         },
       }));
@@ -50,13 +50,14 @@ const Styled = {
   WholeCardContainer: styled.div`
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 26px;
+    column-gap: 20px;
   `,
 
   CardContainer: styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 12px 0 0 0;
 
     p {
       font-family: "Roboto";
@@ -70,6 +71,10 @@ const Styled = {
       letter-spacing: -0.085em;
 
       color: #525252;
+    }
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.1);
     }
   `,
 };

@@ -1,20 +1,22 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import CardRoutes from "./routes";
 import GlobalStyle from "./styles/GlobalStyles";
 import { ModalProvider } from "./context/ModalContext";
-
+import { ThemeProvider } from "styled-components";
+import theme from "./styles/theme";
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
 );
 root.render(
   <React.StrictMode>
-    <GlobalStyle />
-    <ModalProvider>
-      <CardRoutes />
-    </ModalProvider>
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <ModalProvider>
+        <CardRoutes />
+      </ModalProvider>
+    </ThemeProvider>
   </React.StrictMode>,
 );
 

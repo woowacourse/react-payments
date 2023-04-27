@@ -1,3 +1,5 @@
+import { CARD_ID } from "src/utils/constant";
+
 export interface CardNumberProps {
   first: string;
   second: string;
@@ -11,7 +13,7 @@ export interface CardPasswordProps {
 }
 
 export interface CardNameProps {
-  id: string;
+  id: (typeof CARD_ID)[number] | null;
   name: string;
 }
 

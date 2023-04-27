@@ -6,10 +6,21 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: "Helvetica", "Arial", sans-serif,"Roboto";
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif ,"Helvetica", "Arial", sans-serif,"Roboto";
     line-height: 1.5;
     padding:0;
     margin:0;
+    
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+  }
+
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
   }
 
   body::-webkit-scrollbar {
@@ -34,49 +45,6 @@ const GlobalStyle = createGlobalStyle`
     --hana-card: #009490;
     --kookmin-card: #6F655B;
   }
-
-
-  .bc-card {
-    background:var(--bc-card);
-    color:white;
-  }
-    
-  .shinhan-card {
-    background:var(--shinhan-card);
-    color:white;
-  }
-      
-  .kakao-bank {
-    background:var(--kakao-bank);
-    color: #282828;
-  }
-    
-  .hyundai-card {
-    background:var(--hyundai-card);
-    color:white;
-  }
-      
-  .woori-card {
-    background:var(--woori-card);
-    color:white;
-  }
-      
-  .lottee-card {
-    background:var(--lottee-card);
-    color:white;
-  }
-      
-  .hana-card {
-    background:var(--hana-card);
-    color:white;
-  }
-      
-  .kookmin-card {
-    background:var(--kookmin-card);
-    color:white;
-  }
-      
-
 
 
   #modal-root {

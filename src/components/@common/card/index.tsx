@@ -1,5 +1,5 @@
 import { CardNameProps, CardNumberProps } from "src/interfaces";
-import { Styled as S } from "./Card.styles";
+import { CardContainer, Styled as S } from "./Card.styles";
 
 interface Props {
   cardName?: CardNameProps;
@@ -18,7 +18,7 @@ function Card({ cardName, cardNumber, ownerName, expireDate, onClick }: Props) {
   });
 
   return (
-    <S.CardContainer onClick={onClick} className={cardName && cardName.id}>
+    <CardContainer onClick={onClick} cardName={cardName?.id}>
       <S.CardName>{cardName?.name}</S.CardName>
       <S.CardChip />
       <S.CardNumberContainer>{CardNumbers}</S.CardNumberContainer>
@@ -26,7 +26,7 @@ function Card({ cardName, cardNumber, ownerName, expireDate, onClick }: Props) {
         <span>{ownerName}</span>
         <span>{expireDate}</span>
       </S.CardNameContainer>
-    </S.CardContainer>
+    </CardContainer>
   );
 }
 
