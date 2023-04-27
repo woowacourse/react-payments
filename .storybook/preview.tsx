@@ -1,6 +1,8 @@
 import type { Preview } from '@storybook/react';
 import React from 'react';
+import { ThemeProvider } from 'styled-components';
 import { ResetStyle } from '../src/styles/ResetStyle';
+import { theme } from '../src/styles/theme';
 
 const preview: Preview = {
   parameters: {
@@ -14,10 +16,10 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => (
-      <>
+      <ThemeProvider theme={theme}>
         <ResetStyle />
         <Story />
-      </>
+      </ThemeProvider>
     ),
   ],
 };
