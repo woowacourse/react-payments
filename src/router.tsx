@@ -42,7 +42,7 @@ const router = createBrowserRouter(
     },
   ],
   {
-    basename: '/',
+    basename: '/react-payments',
   },
 );
 
