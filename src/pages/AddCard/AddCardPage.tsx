@@ -55,6 +55,7 @@ const AddCardPage = () => {
             cardOwner={cardOwner.value}
             expireMonth={expireMonth.value}
             expireYear={expireYear.value}
+            onClick={() => setIsOpen(!isOpen)}
           />
           <AddCardForm
             cardFirstNumber={cardFirstNumber}

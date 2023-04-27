@@ -1,5 +1,5 @@
 import type { CardProps } from '../type';
-import { changeNumberToMask } from '../utils/util';
+import { changeNumberToMask, getBackgroundStyleByCardType } from '../utils/util';
 import './Card.css';
 
 const Card = ({
@@ -11,9 +11,10 @@ const Card = ({
   cardOwner,
   expireYear,
   expireMonth,
+  onClick = () => {},
 }: CardProps) => {
   return (
-    <div className="card">
+    <div className={`card ${getBackgroundStyleByCardType(cardType)}`} onClick={onClick}>
       <div className="card-track-1">
         <span className="card-type">{cardType}</span>
       </div>
