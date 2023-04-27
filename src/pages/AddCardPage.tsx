@@ -16,6 +16,7 @@ import {
   isOnlyEnglish,
   isPrevDate,
   monthValidate,
+  setNextInputFocus,
   yearValidate,
 } from '../utils';
 import { BankType, CardInfo, PageInfo } from '../types';
@@ -40,7 +41,7 @@ export default function AddCardPage({
   setPage,
 }: AddCardPageProps) {
   const cardForm = useRef<HTMLFormElement>(null);
-  const { onInputKeydown, setNextInput } = useFocusInput(cardForm);
+  const { onInputKeydown } = useFocusInput(cardForm);
   const { formInputs } = useFormInputs();
   const [isRegister, setIsRegister] = useState(false);
   const [bank, setBank] = useHideScrollState<BankType>('default', (value) => {
@@ -48,7 +49,7 @@ export default function AddCardPage({
   });
 
   const onBankHanlder = (value: BankType) => {
-    setNextInput();
+    setNextInputFocus(cardForm.current);
     setBank(value);
   };
 

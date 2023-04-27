@@ -1,6 +1,5 @@
 import { KeyboardEvent, RefObject } from 'react';
-import { isNumber, isOnlyKoreanAndEnglish } from '../utils';
-import { TAB_INDEX_INFO } from '../constant';
+import { isNumber, isOnlyKoreanAndEnglish, setNextInputFocus } from '../utils';
 
 const numberType = 'numeric';
 const textType = 'text';
@@ -8,7 +7,9 @@ const textType = 'text';
 export const useFocusInput = (formRef: RefObject<HTMLFormElement>) => {
   const onInputKeydown = (event: KeyboardEvent<HTMLFormElement>) => {
     const active = document.activeElement as HTMLInputElement;
+
     if (!active) return;
+
     const curMaxLength = active.getAttribute('maxLength');
     const curInputKind = active.getAttribute('inputmode');
 
@@ -24,35 +25,9 @@ export const useFocusInput = (formRef: RefObject<HTMLFormElement>) => {
     if (!isValueMaxLength) return;
 
     if (isNumberRequirement || isTextRequirement) {
-      setNextInput();
+      setNextInputFocus(formRef.current);
     }
   };
 
-  const setNextInput = () => {
-    if (!formRef.current) return;
-    const form = formRef.current;
-    const active = document.activeElement as HTMLInputElement;
-    const currentInputIndex = Array.prototype.indexOf.call(form, active);
-
-    const totalLength = formRef.current.length;
-
-    for (let index = currentInputIndex + 1; index < totalLength; index += 1) {
-      const currentInput = formRef.current[index] as HTMLInputElement;
-
-      const { maxLength, value, tabIndex } = currentInput;
-
-      if (tabIndex === TAB_INDEX_INFO.dismiss) {
-        continue;
-      }
-      if (maxLength === value.length) {
-        continue;
-      }
-      setTimeout(() => {
-        currentInput.focus();
-      });
-      break;
-    }
-  };
-
-  return { onInputKeydown, setNextInput };
+  return { onInputKeydown };
 };

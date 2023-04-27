@@ -24,6 +24,7 @@ export default function OwnerInput({ owner }: OwnerInputProps) {
           autoComplete="off"
           autoCapitalize="characters"
           lang="en"
+          enterKeyHint="next"
           {...owner}
         />
       </Wrapper>

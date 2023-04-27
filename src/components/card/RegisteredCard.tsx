@@ -98,6 +98,7 @@ export default function RegisteredCard({
               type="text"
               bgColor="#fff"
               textAlign="center"
+              enterKeyHint="done"
               required
               autoComplete="off"
               maxLength={20}

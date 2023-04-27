@@ -1,5 +1,6 @@
-import { ChangeEvent, InputHTMLAttributes } from 'react';
+import { ChangeEvent, InputHTMLAttributes, KeyboardEvent } from 'react';
 import styled from 'styled-components';
+import { setNextInputFocus } from '../../utils';
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   textAlign?: string;
@@ -29,6 +30,12 @@ export default function Input({
     }
   };
 
+  const convertEnterToTab = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      setNextInputFocus(event.currentTarget.form);
+    }
+  };
+
   if (isPassword) {
     return (
       <StyledInput
@@ -37,6 +44,7 @@ export default function Input({
         textAlign={textAlign}
         inputMode={isNumber ? 'numeric' : 'text'}
         onInput={onInput}
+        onKeyDown={convertEnterToTab}
         isPassword={isPassword}
         {...rest}
       />
@@ -48,6 +56,7 @@ export default function Input({
       bgColor={bgColor}
       isWrong={isWrong}
       textAlign={textAlign}
+      onKeyDown={convertEnterToTab}
       inputMode={isNumber ? 'numeric' : 'text'}
       onInput={onInput}
       value={value}
