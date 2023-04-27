@@ -1,5 +1,4 @@
 import 'styled-components';
-import { BankColors } from '../styles/theme';
 
 declare module 'styled-components' {
   interface Theme {
