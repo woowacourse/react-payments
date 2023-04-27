@@ -101,6 +101,7 @@ const AddCardPage = () => {
 
     navigate("/alias", {
       state: card,
+      replace: true,
     });
   };
 

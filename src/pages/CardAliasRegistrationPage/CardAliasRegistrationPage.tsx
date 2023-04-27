@@ -31,7 +31,7 @@ const CardAliasRegistrationPage = ({ onSubmit }: CardAliasRegistrationPageProps)
 
     onSubmit(newCard);
 
-    navigate("/");
+    navigate("/", { replace: true });
   };
 
   const isAddCardButtonVisible = cardAlias.length === 0 ? false : true;
