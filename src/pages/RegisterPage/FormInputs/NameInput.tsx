@@ -1,9 +1,10 @@
 import { ChangeEvent, useContext } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { changeInvalidValueToBlank } from "utils/inputValidator";
-import { LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
 import Input, { NameInputStyle } from "components/Input";
+import LengthLimit from "components/LengthLimit";
 import { CardInfoContext } from "App";
+import { LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
 const { ONLY_ENGLISH, INVALID_BLANK } = VALID_INPUT;
 
 const NameInput = () => {
@@ -31,9 +32,10 @@ const NameInput = () => {
         <label className="label-text" htmlFor="name">
           카드 소유자 이름&#40;선택&#41;
         </label>
-        <p>
-          {name.length}/{LIMIT_LENGTH.NAME}
-        </p>
+        <LengthLimit
+          length={name.length}
+          lengthLimitStyle={nicknameLimitStyle}
+        />
       </S.Wrapper>
       <Input
         type="text"
@@ -60,5 +62,9 @@ const S = {
     }
   `,
 };
+
+const nicknameLimitStyle = css`
+  font-size: 12px;
+`;
 
 export default NameInput;

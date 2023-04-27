@@ -1,37 +1,66 @@
-import styled from "styled-components";
+import { ChangeEvent, useState } from "react";
+import styled, { css } from "styled-components";
 import { NextButton } from "components/ButtonStyle";
 import CardPreview from "components/CardPreview";
 import Input, { CardNickname } from "components/Input";
+import LengthLimit from "components/LengthLimit";
+import GotLost from "pages/GotLost";
 import { CardInfo } from "types";
+import { LIMIT_LENGTH } from "constants/limit";
 
 interface Props {
   cardInfo: CardInfo;
 }
 
 const LastPage = ({ cardInfo }: Props) => {
+  const [nickname, setNickname] = useState("");
+
+  const handleNicknameChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
+    const validNickname = target.value.slice(0, LIMIT_LENGTH.NAME);
+
+    setNickname(validNickname);
+  };
+
   return (
     <>
-      <S.CompletionMessage>카드 등록이 완료되었습니다.</S.CompletionMessage>
-      <S.Wrapper>
-        <CardPreview cardInfo={cardInfo}></CardPreview>
-        <Input inputStyle={CardNickname}></Input>
-        <NextButton>확인</NextButton>
-      </S.Wrapper>
+      {cardInfo.cardCompany !== "" ? (
+        <S.Wrapper>
+          <CardPreview cardInfo={cardInfo}></CardPreview>
+          <Input
+            value={nickname}
+            inputStyle={CardNickname}
+            onChange={handleNicknameChange}
+          ></Input>
+          <LengthLimit
+            length={nickname.length}
+            lengthLimitStyle={nicknameLimitStyle}
+          />
+          <NextButton>확인</NextButton>
+        </S.Wrapper>
+      ) : (
+        <GotLost />
+      )}
     </>
   );
 };
 
 const S = {
   Wrapper: styled.div`
-    margin-top: 194px;
+    margin-top: 144px;
   `,
 
   CompletionMessage: styled.p`
     position: fixed;
-    top: 130px;
+    top: 110px;
     font-size: 24px;
     text-align: center;
   `,
 };
+
+const nicknameLimitStyle = css`
+  font-size: 12px;
+  text-align: right;
+  margin: 4px 0 122px;
+`;
 
 export default LastPage;
