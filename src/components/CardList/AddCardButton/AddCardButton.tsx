@@ -3,7 +3,7 @@ import styles from './AddCardButton.module.css';
 import { GrAdd } from 'react-icons/gr';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CardInfoContext } from '../../CardInfoProvider';
+import { CardInfoContext } from '../../../CardInfoProvider';
 
 type AddCardButtonProps = {
   showMessage: boolean;

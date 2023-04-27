@@ -2,6 +2,7 @@ import CardPreview from '../common/CardPreview/CardPreview';
 import { CardInfo } from '../../types';
 import styles from './CardList.module.css';
 import { cardImages } from '../../pages/cardImages';
+import AddCardButton from './AddCardButton/AddCardButton';
 
 type CardListProps = {
   cardInfo: CardInfo[];
@@ -22,6 +23,7 @@ const CardList = ({ cardInfo }: CardListProps) => {
           </li>
         ))}
       </ul>
+      <AddCardButton showMessage={cardInfo.length === 0} />
     </div>
   );
 };
