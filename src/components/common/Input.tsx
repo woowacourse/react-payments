@@ -31,16 +31,11 @@ const Input = (props: Props) => {
     if (!focus) return;
     if (!(target instanceof HTMLInputElement)) return;
 
-    console.log(key);
+    if (target.selectionStart === 0 && key === 'Backspace') focus(-1);
     if (target.selectionStart === 0 && key === 'ArrowLeft') {
       focus(-1);
       e.preventDefault();
     }
-
-    if (target.selectionStart === 0 && key === 'Backspace') {
-      focus(-1);
-    }
-
     if (target.selectionStart === target.value.length && key === 'ArrowRight') {
       focus(1);
       e.preventDefault();
