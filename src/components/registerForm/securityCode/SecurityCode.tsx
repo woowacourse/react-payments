@@ -6,9 +6,10 @@ import FormLabel from '../../@common/FormLabel';
 import Input from '../../@common/Input';
 import ErrorSpan from '../../@common/ErrorSpan';
 import InputWrapper from '../../@common/InputWrapper';
+import CreditCardContextType from '../../../@types/creditCardContextType';
 
 function SecurityCode() {
-  const { creditCard, setCreditCard } = useContext(CreditCardContext);
+  const { creditCard, setCreditCard } = useContext(CreditCardContext) as CreditCardContextType;
   const [validStatus, setValidStatus] = useState({
     isValid: true,
     message: '',

@@ -7,9 +7,10 @@ import Input from '../../@common/Input';
 import ErrorSpan from '../../@common/ErrorSpan';
 import InputWrapper from '../../@common/InputWrapper';
 import LabelContainer from './OwnerName.style';
+import CreditCardContextType from '../../../@types/creditCardContextType';
 
 function OwnerNameInput() {
-  const { creditCard, setCreditCard } = useContext(CreditCardContext);
+  const { creditCard, setCreditCard } = useContext(CreditCardContext) as CreditCardContextType;
 
   const [validationStatus, setValidationStatus] = useState({
     isValid: true,

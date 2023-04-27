@@ -8,10 +8,11 @@ import SecurityCode from '../securityCode/SecurityCode';
 import CardPassword from '../cardPassword/CardPassword';
 import { CreditCardContext } from '../../../contexts/CreditCardContext';
 import { NextButton } from './CardRegisterForm.style';
+import CreditCardContextType from '../../../@types/creditCardContextType';
 
 function CardRegisterForm() {
   const navigation = useNavigate();
-  const { creditCard } = useContext(CreditCardContext);
+  const { creditCard } = useContext(CreditCardContext) as CreditCardContextType;
   const { cardNumber, securityCode, password, expirationDate } = creditCard;
 
   const hasShowButton =

@@ -7,11 +7,14 @@ import Card from '../@common/Card';
 import { COLOR_BY_CARD_COMPANY, KOR_NAME_BY_CARD_COMPANY } from '../../@types/cardCompany';
 import { CreditCardContext } from '../../contexts/CreditCardContext';
 import Input from '../@common/Input';
+import CreditCardContextType from '../../@types/creditCardContextType';
 
 function SuccessPage() {
   const navigation = useNavigate();
   const { saveCard } = useCardList({ key: 'card-list' });
-  const { creditCard, setCreditCard, initCreditCard } = useContext(CreditCardContext);
+  const { creditCard, setCreditCard, initCreditCard } = useContext(
+    CreditCardContext
+  ) as CreditCardContextType;
   const { cardNumber, cardCompany, ownerName, expirationDate } = creditCard;
 
   return (
@@ -35,7 +38,9 @@ function SuccessPage() {
       <button
         onClick={() => {
           saveCard({ ...creditCard });
+
           initCreditCard();
+
           navigation('/');
         }}
       >

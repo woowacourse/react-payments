@@ -6,6 +6,7 @@ import {
 } from '../../@types/cardCompany';
 import { useContext } from 'react';
 import { CreditCardContext } from '../../contexts/CreditCardContext';
+import CreditCardContextType from '../../@types/creditCardContextType';
 
 type Props = {
   cardCompany: CardCompany;
@@ -14,7 +15,7 @@ type Props = {
 
 const BankIconBox = ({ cardCompany, onClose }: Props) => {
   const KoreanName = KOR_NAME_BY_CARD_COMPANY[cardCompany];
-  const { setCreditCard } = useContext(CreditCardContext);
+  const { setCreditCard } = useContext(CreditCardContext) as CreditCardContextType;
 
   const handleClickImage: React.MouseEventHandler<HTMLImageElement> = (event) => {
     const company = event.currentTarget?.dataset['company'] as CardCompany;

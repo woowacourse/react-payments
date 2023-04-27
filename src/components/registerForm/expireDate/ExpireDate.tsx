@@ -6,9 +6,10 @@ import ErrorSpan from '../../@common/ErrorSpan';
 import { CreditCardContext } from '../../../contexts/CreditCardContext';
 import { ONLY_NUMBER_OR_SLASH_REGEX } from '../../../utils/regexp';
 import InputWrapper from '../../@common/InputWrapper';
+import CreditCardContextType from '../../../@types/creditCardContextType';
 
 function ExpireDate() {
-  const { creditCard, setCreditCard } = useContext(CreditCardContext);
+  const { creditCard, setCreditCard } = useContext(CreditCardContext) as CreditCardContextType;
 
   const [validStatus, setValidStatus] = useState({
     isValid: true,

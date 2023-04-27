@@ -6,10 +6,11 @@ import { useContext } from 'react';
 import BankSelectModal from '../SelectCompanyModal/SelectCompanyModal';
 import { KOR_NAME_BY_CARD_COMPANY, COLOR_BY_CARD_COMPANY } from '../../@types/cardCompany';
 import useBottomModal from '../../hooks/useBottomModal';
+import CreditCardContextType from '../../@types/creditCardContextType';
 
 function RegisterPage() {
   const { BottomModal, closeModal, openModal } = useBottomModal(true);
-  const { creditCard } = useContext(CreditCardContext);
+  const { creditCard } = useContext(CreditCardContext) as CreditCardContextType;
   const { cardNumber, cardCompany, ownerName, expirationDate } = creditCard;
 
   return (

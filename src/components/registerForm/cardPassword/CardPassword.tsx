@@ -8,13 +8,14 @@ import ErrorSpan from '../../@common/ErrorSpan';
 import { CreditCardContext } from '../../../contexts/CreditCardContext';
 import InputWrapper from '../../@common/InputWrapper';
 import { DotParagraph, PasswordInputContainer } from './CardPassword.style';
+import CreditCardContextType from '../../../@types/creditCardContextType';
 
 function CardPassword() {
   const [validationStatus, setValidationStatus] = useState({
     isValid: true,
     message: '',
   });
-  const { creditCard, setCreditCard } = useContext(CreditCardContext);
+  const { creditCard, setCreditCard } = useContext(CreditCardContext) as CreditCardContextType;
 
   const refs = [useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null)];
 
