@@ -14,6 +14,7 @@ import type { CardInformation } from './types';
 interface CardProps {
   cardInformation?: CardInformation;
   isAddForm: boolean;
+  isShowName?: boolean;
 }
 
 const defaultCardInformation: CardInformation = {
@@ -23,51 +24,60 @@ const defaultCardInformation: CardInformation = {
   owner: ['NAME'],
 };
 
-function Card({ cardInformation = defaultCardInformation, isAddForm }: CardProps) {
-  const { bankName, cardNumber, expirationDate, owner } = cardInformation;
+function Card({ cardInformation = defaultCardInformation, isAddForm, isShowName = false }: CardProps) {
+  const { cardName, bankName, cardNumber, expirationDate, owner } = cardInformation;
   const { color, background } = CARD_COMPANY_COLOR_MAP[bankName === '' ? 'default' : bankName];
 
   return (
-    <StyledCardContainer isAddFrom={isAddForm} textColor={color} backgroundColor={background}>
-      {isAddForm ? (
-        <>
-          <StyledBankName>{bankName}</StyledBankName>
-          <StyledICChipTemplate />
-          <StyledCardInfoTemplate>
-            <StyledCardNumberTemplate>
-              {cardNumber?.map((number, index) =>
-                index < CARD_NUMBER_LENGTH / CARD_NUMBER_VISIBLE_LENGTH ? (
-                  <StyledCardNumberItem key={index}>{number}</StyledCardNumberItem>
-                ) : (
-                  <StyledCardNumberItem key={index}>
-                    {Array.from({ length: number?.length }, (_, dotIndex) => (
-                      <Dot key={dotIndex} fill={color} />
-                    ))}
-                  </StyledCardNumberItem>
-                ),
-              )}
-            </StyledCardNumberTemplate>
-            <StyledCardDetail>
-              {owner && <div>{owner[0].slice(0, 12)}</div>}
-              {expirationDate && (
-                <div>
-                  {expirationDate.at(0)?.padStart(CARD_EXPIRATION_MONTH_LENGTH, '0')}/
-                  {expirationDate.at(1)?.padStart(CARD_EXPIRATION_YEAR_LENGTH, '0')}
-                </div>
-              )}
-            </StyledCardDetail>
-          </StyledCardInfoTemplate>
-        </>
-      ) : (
-        <Link to="/registration">
-          <StyledAddButton type="button">+</StyledAddButton>
-        </Link>
-      )}
+    <StyledCardContainer>
+      <StyledCard isAddFrom={isAddForm} textColor={color} backgroundColor={background}>
+        {isAddForm ? (
+          <>
+            <StyledBankName>{bankName}</StyledBankName>
+            <StyledICChipTemplate />
+            <StyledCardInfoTemplate>
+              <StyledCardNumberTemplate>
+                {cardNumber?.map((number, index) =>
+                  index < CARD_NUMBER_LENGTH / CARD_NUMBER_VISIBLE_LENGTH ? (
+                    <StyledCardNumberItem key={index}>{number}</StyledCardNumberItem>
+                  ) : (
+                    <StyledCardNumberItem key={index}>
+                      {Array.from({ length: number?.length }, (_, dotIndex) => (
+                        <Dot key={dotIndex} fill={color} />
+                      ))}
+                    </StyledCardNumberItem>
+                  ),
+                )}
+              </StyledCardNumberTemplate>
+              <StyledCardDetail>
+                {owner && <div>{owner[0].slice(0, 12)}</div>}
+                {expirationDate && (
+                  <div>
+                    {expirationDate.at(0)?.padStart(CARD_EXPIRATION_MONTH_LENGTH, '0')}/
+                    {expirationDate.at(1)?.padStart(CARD_EXPIRATION_YEAR_LENGTH, '0')}
+                  </div>
+                )}
+              </StyledCardDetail>
+            </StyledCardInfoTemplate>
+          </>
+        ) : (
+          <Link to="/registration">
+            <StyledAddButton type="button">+</StyledAddButton>
+          </Link>
+        )}
+      </StyledCard>
+      {isShowName && cardName && <StyledCardName>{cardName}</StyledCardName>}
     </StyledCardContainer>
   );
 }
 
-const StyledCardContainer = styled.div<{
+const StyledCardContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 9px;
+`;
+
+const StyledCard = styled.div<{
   isAddFrom: boolean;
   textColor?: string;
   backgroundColor?: string;
@@ -133,6 +143,13 @@ const StyledCardDetail = styled.div`
   justify-content: space-between;
   margin-top: 6px;
   font-size: 14px;
+`;
+
+const StyledCardName = styled.div`
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: center;
 `;
 
 const StyledAddButton = styled.button`

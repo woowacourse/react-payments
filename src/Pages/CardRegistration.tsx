@@ -1,27 +1,16 @@
 import styled from 'styled-components';
 import BankProfileButtonList from '../components/BankProfileButtonList';
 import CardRegistrationForm from '../components/CardRegistrationForm';
-import useCardForm from '../components/CardRegistrationForm/hooks/useCardForm';
 import TransParentButton from '../components/Common/Button/TransParentButton';
 import Card from '../components/Common/Card';
 import Header from '../components/Common/Header';
 import Modal from '../components/Common/Modal';
+import { useCardInformationStore } from '../context/CardInformationProvider';
 import bankList from '../data/bankList';
 import useModal from '../hooks/useModal';
 
 function CardRegistration() {
-  const {
-    card,
-    checkValidator,
-    errorMessage,
-    isVisited,
-    setBankName,
-    setCardNumber,
-    setExpirationDate,
-    setOwner,
-    setPassword,
-    setSecurityCode,
-  } = useCardForm();
+  const { card, setBankName } = useCardInformationStore();
   const { isModalOpen, openModal, closeModal } = useModal(true);
 
   const handleBankName = (name: string) => {
@@ -36,17 +25,7 @@ function CardRegistration() {
         <TransParentButton onClick={openModal}>
           <Card cardInformation={card} isAddForm />
         </TransParentButton>
-        <CardRegistrationForm
-          card={card}
-          checkValidator={checkValidator}
-          errorMessage={errorMessage}
-          isVisited={isVisited}
-          setCardNumber={setCardNumber}
-          setExpirationDate={setExpirationDate}
-          setOwner={setOwner}
-          setSecurityCode={setSecurityCode}
-          setPassword={setPassword}
-        />
+        <CardRegistrationForm />
         {isModalOpen && (
           <Modal closeModal={closeModal}>
             <BankProfileButtonList bankList={bankList} getBankName={handleBankName} profileSize={37} />

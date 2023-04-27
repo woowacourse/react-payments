@@ -1,40 +1,29 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { useCardListStore } from '../../context/CardListProvider';
+import { useCardInformationStore } from '../../context/CardInformationProvider';
 import { checkCardNumber, checkExpirationDate, checkPassword, checkSecurityCode } from '../../domain/validator';
+import TransParentButton from '../Common/Button/TransParentButton';
 import CardNumberInput from './CardNumberInput';
 import CardPasswordInput from './CardPasswordInput';
 import ExpirationDateInput from './ExpirationDateInput';
 import OwnerInput from './OwnerInput';
 import SecurityCodeInput from './SecurityCodeInput';
-import type { ErrorMessage, Visited } from './types';
-import type { CardInformation, CardNumber, CardPassword, ExpirationDate, SecurityCode } from '../Common/Card/types';
+import type { CardNumber, CardPassword, ExpirationDate, SecurityCode } from '../Common/Card/types';
 
-interface CardRegistrationFormProps {
-  card: CardInformation;
-  checkValidator: <T>(validateCallback: (value: T) => void, value: T | undefined, name: string) => string;
-  errorMessage: ErrorMessage;
-  isVisited: Visited;
-  setCardNumber: React.Dispatch<React.SetStateAction<string[]>>;
-  setExpirationDate: React.Dispatch<React.SetStateAction<string[]>>;
-  setOwner: React.Dispatch<React.SetStateAction<string[]>>;
-  setSecurityCode: React.Dispatch<React.SetStateAction<string[]>>;
-  setPassword: React.Dispatch<React.SetStateAction<string[]>>;
-}
-
-function CardRegistrationForm({
-  card,
-  checkValidator,
-  errorMessage,
-  isVisited,
-  setCardNumber,
-  setExpirationDate,
-  setOwner,
-  setSecurityCode,
-  setPassword,
-}: CardRegistrationFormProps) {
+function CardRegistrationForm() {
+  const {
+    card,
+    checkValidator,
+    errorMessage,
+    isVisited,
+    setCardNumber,
+    setExpirationDate,
+    setOwner,
+    setPassword,
+    setSecurityCode,
+    resetValidateForm,
+  } = useCardInformationStore();
   const navigate = useNavigate();
-  const { dispatchCardList } = useCardListStore();
   const handleForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -46,8 +35,8 @@ function CardRegistrationForm({
     ];
 
     if (error.join('') === '') {
-      dispatchCardList(card);
-      navigate('/');
+      resetValidateForm();
+      navigate('/registration/complete');
     }
   };
 
@@ -80,7 +69,7 @@ function CardRegistrationForm({
         errorMessage={errorMessage.password}
         isVisited={isVisited.password}
       />
-      <StyledNextButton type="submit">다음</StyledNextButton>
+      <TransParentButton type="submit">다음</TransParentButton>
     </StyledCardRegistrationFrom>
   );
 }
@@ -88,7 +77,7 @@ function CardRegistrationForm({
 const StyledCardRegistrationFrom = styled.form`
   width: 318px;
   & > * {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
   & > *:nth-child(2) {
     width: 138px;
@@ -96,17 +85,15 @@ const StyledCardRegistrationFrom = styled.form`
   & > *:nth-child(4) {
     width: 86px;
   }
-`;
-
-const StyledNextButton = styled.button`
-  margin-top: 8px;
-  background: none;
-  border: none;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 16px;
-  float: right;
-  cursor: pointer;
+  & > button {
+    margin-top: 8px;
+    background: none;
+    border: none;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 16px;
+    float: right;
+  }
 `;
 
 export default CardRegistrationForm;

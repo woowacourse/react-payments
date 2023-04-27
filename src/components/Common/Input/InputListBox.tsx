@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import { useRef } from 'react';
 import styled from 'styled-components';
-import Input from './Input';
+import Input from '.';
 
 interface InputListBoxProps {
   inputInformation: React.ComponentPropsWithRef<typeof Input>[];
