@@ -10,6 +10,7 @@ import { PasswordInput } from './input/PasswordInput';
 import { cardDataService } from '../domains/cardDataService';
 import { useCardRegisterForm } from '../hooks/useCardRegisterForm';
 import { CardSelectModal } from './Modal/CardSelect/CardSelectModal';
+import { Button } from './Button/Button';
 
 export function CardRegisterForm() {
   const navigate = useNavigate();
@@ -117,7 +118,7 @@ export function CardRegisterForm() {
         />
       </Style.InputContainer>
       <Style.ButtonContainer>
-        {isValidCardForm && <Style.NextButton>다음</Style.NextButton>}
+        {isValidCardForm && <Button designType={'text'}>다음</Button>}
       </Style.ButtonContainer>
     </Style.Wrapper>
   );
@@ -164,12 +165,5 @@ const Style = {
     justify-content: flex-end;
 
     width: 100%;
-  `,
-
-  NextButton: styled.button`
-    all: unset;
-
-    font-weight: bold;
-    cursor: pointer;
   `,
 };
