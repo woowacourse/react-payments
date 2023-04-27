@@ -23,5 +23,6 @@ export const InputContainer = styled.div`
 `;
 
 export const ErrorMessage = styled.p`
+  position: absolute;
   color: ${COLOR.RED};
 `;

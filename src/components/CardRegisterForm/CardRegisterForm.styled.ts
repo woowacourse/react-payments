@@ -9,6 +9,6 @@ export const CardRegisterForm = styled.div`
   height: 70%;
 
   & > *:not(:last-child) {
-    margin-bottom: 20px;
+    margin-bottom: 28px;
   }
 `;

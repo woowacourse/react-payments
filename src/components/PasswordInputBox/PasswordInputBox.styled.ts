@@ -37,5 +37,6 @@ export const RestPassword = styled(Ellipse)`
 `;
 
 export const ErrorMessage = styled.p`
+  position: absolute;
   color: ${COLOR.RED};
 `;
