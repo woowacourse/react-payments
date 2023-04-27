@@ -41,7 +41,7 @@ const CardPreview = ({ card, onClick }: CardPreviewProps) => {
 
 export default CardPreview;
 
-const CardLayout = styled.li<{ cardColor: string }>`
+const CardLayout = styled.div<{ cardColor: string }>`
   position: relative;
 
   display: flex;
@@ -51,8 +51,8 @@ const CardLayout = styled.li<{ cardColor: string }>`
 
   background-color: ${(props) => props.cardColor};
 
-  width: 213px;
-  min-height: 133px;
+  width: 250px;
+  min-height: 150px;
 
   border-radius: 5px;
   padding: 14px;
