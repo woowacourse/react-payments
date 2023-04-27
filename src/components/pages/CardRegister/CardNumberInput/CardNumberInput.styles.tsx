@@ -36,5 +36,5 @@ export const InputBackground = styled.div`
 export const Divider = styled.span<{
   show?: boolean;
 }>`
-  ${({ show }) => !show && `visibility: hidden`}
+  ${({ show }) => !show && 'visibility: hidden'}
 `;
