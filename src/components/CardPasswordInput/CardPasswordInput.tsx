@@ -1,11 +1,12 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useContext } from 'react';
 import CardInfoInput from '../CardInfoInput/CardInfoInput';
 import Input from '../Input/Input';
 import { NUMBER_REGEX } from '../../constant/regex';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import { CardInfoContext } from '../../context/CardInfoContext';
 
 const CardPasswordInput = () => {
-  const [firstDigit, setFirstDigit] = useState('');
-  const [secondDigit, setSecondDigit] = useState('');
+  const { firstDigit, setFirstDigit, secondDigit, setSecondDigit } = useContext(CardInfoContext);
   const secondDigitRef = useRef<HTMLInputElement>(null);
   const [error, setError] = useState('');
 
@@ -24,13 +25,13 @@ const CardPasswordInput = () => {
   };
 
   return (
-    <>
+    <div>
       <CardInfoInput title="카드 비밀번호">
         <Input width="15%" value={firstDigit} maxLength={1} onChange={e => updateDigit(1, e)} />
         <Input width="15%" value={secondDigit} maxLength={1} onChange={e => updateDigit(2, e)} ref={secondDigitRef} />
       </CardInfoInput>
-      {error && <span>{error}</span>}
-    </>
+      <ErrorMessage>{error}</ErrorMessage>
+    </div>
   );
 };
 

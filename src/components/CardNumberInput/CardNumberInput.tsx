@@ -1,14 +1,12 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import CardInfoInput from '../CardInfoInput/CardInfoInput';
 import Input from '../Input/Input';
 import { NUMBER_REGEX } from '../../constant/regex';
+import { CardInfoContext } from '../../context/CardInfoContext';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
-type CardNumberInputProps = {
-  updateCardNumber: (cardNumber: string) => void;
-};
-
-const CardNumberInput = ({ updateCardNumber }: CardNumberInputProps) => {
-  const [cardNumber, setCardNumber] = useState('');
+const CardNumberInput = () => {
+  const { cardNumber, setCardNumber } = useContext(CardInfoContext);
   const [error, setError] = useState('');
 
   const addHyphensInCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,15 +18,17 @@ const CardNumberInput = ({ updateCardNumber }: CardNumberInputProps) => {
       const cardNumberWithHyphens = (hyphenRemovedCardNumber.match(/.{1,4}/g) || []).join('-');
 
       setCardNumber(cardNumberWithHyphens);
-      updateCardNumber(cardNumber);
+      setError('');
     }
   };
 
   return (
-    <CardInfoInput title="카드 번호">
-      <Input width="100%" onChange={addHyphensInCardNumber} maxLength={19} name="cardNumber" value={cardNumber} />
-      {error && <span>{error}</span>}
-    </CardInfoInput>
+    <div>
+      <CardInfoInput title="카드 번호">
+        <Input width="100%" onChange={addHyphensInCardNumber} maxLength={19} name="cardNumber" value={cardNumber} />
+      </CardInfoInput>
+      <ErrorMessage>{error}</ErrorMessage>
+    </div>
   );
 };
 

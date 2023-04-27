@@ -1,11 +1,13 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import CardInfoInput from '../CardInfoInput/CardInfoInput';
 import HelpButton from '../HelpButton/HelpButton';
 import Input from '../Input/Input';
 import { NUMBER_REGEX } from '../../constant/regex';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import { CardInfoContext } from '../../context/CardInfoContext';
 
 const CardSecurityCodeInput = () => {
-  const [securityCode, setSecurityCode] = useState('');
+  const { securityCode, setSecurityCode } = useContext(CardInfoContext);
   const [error, setError] = useState('');
 
   const updateSecurityCode = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,13 +22,13 @@ const CardSecurityCodeInput = () => {
   };
 
   return (
-    <>
+    <div>
       <CardInfoInput title="보안 코드(CVC/CVV)">
         <Input width="30%" onChange={updateSecurityCode} maxLength={3} value={securityCode} />
         <HelpButton message="카드 뒷면 3자리 숫자" />
-        {error && <span>{error}</span>}
       </CardInfoInput>
-    </>
+      <ErrorMessage>{error}</ErrorMessage>
+    </div>
   );
 };
 

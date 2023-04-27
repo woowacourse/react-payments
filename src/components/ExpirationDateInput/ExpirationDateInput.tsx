@@ -1,14 +1,12 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import CardInfoInput from '../CardInfoInput/CardInfoInput';
 import Input from '../Input/Input';
 import { NUMBER_REGEX } from '../../constant/regex';
+import { CardInfoContext } from '../../context/CardInfoContext';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
-type ExpirationDateInputProps = {
-  updateExpirationDate: (expirationDate: string) => void;
-};
-
-const ExpirationDateInput = ({ updateExpirationDate }: ExpirationDateInputProps) => {
-  const [expirationDate, setExpirationDate] = useState('');
+const ExpirationDateInput = () => {
+  const { expirationDate, setExpirationDate } = useContext(CardInfoContext);
   const [error, setError] = useState('');
 
   const addSlashInExpirationDate = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,22 +17,23 @@ const ExpirationDateInput = ({ updateExpirationDate }: ExpirationDateInputProps)
     } else {
       const expirationDateWithSlash = (slashRemovedExpirationDate.match(/.{1,2}/g) || []).join('/');
       setExpirationDate(expirationDateWithSlash);
-      updateExpirationDate(expirationDateWithSlash);
       setError('');
     }
   };
 
   return (
-    <CardInfoInput title="만료일">
-      <Input
-        width="40%"
-        onChange={addSlashInExpirationDate}
-        value={expirationDate}
-        maxLength={5}
-        name="expirationDate"
-      />
-      {error && <span>{error}</span>}
-    </CardInfoInput>
+    <div>
+      <CardInfoInput title="만료일">
+        <Input
+          width="40%"
+          onChange={addSlashInExpirationDate}
+          value={expirationDate}
+          maxLength={5}
+          name="expirationDate"
+        />
+      </CardInfoInput>
+      <ErrorMessage>{error}</ErrorMessage>
+    </div>
   );
 };
 

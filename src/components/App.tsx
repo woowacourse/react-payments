@@ -1,17 +1,18 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import NotFound from '../pages/NotFound';
-import Home from '../pages/Home';
-import CardRegistration from '../pages/CardRegistration';
+import NotFound from '../pages/NotFound/NotFound';
+import Home from '../pages/Home/Home';
+import CardRegistration from '../pages/CardRegistration/CardRegistration';
 import styles from './App.module.css';
 import { useState } from 'react';
 import type { CardInfo } from '../types';
-import CardRegistrationConfirmation from '../pages/CardRegistrationConfirmation';
+import CardRegistrationConfirmation from '../pages/CardRegistrationConfirmation/CardRegistrationConfirmation';
+import { CardInfoProvider } from '../context/CardInfoContext';
 
 const App = () => {
   const [cardInfo, setCardInfo] = useState<CardInfo[]>([]);
 
-  const registerNewCard = ({ cardNumber, cardExpirationDate, cardOwnerName }: CardInfo) => {
-    setCardInfo([...cardInfo, { cardNumber, cardExpirationDate, cardOwnerName }]);
+  const registerNewCard = ({ cardNumber, expirationDate, cardOwnerName, selectedCard }: CardInfo) => {
+    setCardInfo([...cardInfo, { cardNumber, expirationDate, cardOwnerName, selectedCard }]);
   };
 
   const router = createBrowserRouter([
@@ -21,11 +22,19 @@ const App = () => {
     },
     {
       path: '/card-registration',
-      element: <CardRegistration registerNewCard={registerNewCard} />,
+      element: (
+        <CardInfoProvider>
+          <CardRegistration registerNewCard={registerNewCard} />,
+        </CardInfoProvider>
+      ),
     },
     {
       path: '/card-registration-confirmation',
-      element: <CardRegistrationConfirmation />,
+      element: (
+        <CardInfoProvider>
+          <CardRegistrationConfirmation />,
+        </CardInfoProvider>
+      ),
     },
     {
       path: '*',
