@@ -1,16 +1,19 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Header from "./index";
-import { withRouter } from "storybook-addon-react-router-v6";
+import { BrowserRouter } from "react-router-dom";
 
 const header = {
   component: Header,
   title: "Header",
-  decorators: [withRouter],
-  parameters: {
-    reactRouter: {
-      routePath: "/card-list",
+  decorators: [
+    (Story) => {
+      return (
+        <BrowserRouter>
+          <Story />
+        </BrowserRouter>
+      );
     },
-  },
+  ],
 } satisfies Meta<typeof Header>;
 
 export default header;
