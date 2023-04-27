@@ -1,9 +1,16 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Card from '../components/Card';
 import './CardNicknameInputPage.css';
 
 const CardNicknameInputChange = () => {
+  const navigate = useNavigate();
+
+  const onSubmitButton = () => {
+    navigate('/');
+  };
+
   const mockData = {
     cardType: 'string',
     cardNumber: {
@@ -29,7 +36,7 @@ const CardNicknameInputChange = () => {
         </div>
         <input className="nickname-input" autoFocus type="text" maxLength={10} />
 
-        <button className="card-submit-button" type="button">
+        <button onClick={onSubmitButton} className="card-submit-button" type="button">
           확인
         </button>
       </div>
