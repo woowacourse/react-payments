@@ -10,7 +10,7 @@ const Style = {
     width: 280px;
     height: 160px;
 
-    background: #333333;
+    background: ${(props) => props.theme.background};
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
 
@@ -52,4 +52,9 @@ const Style = {
   `,
 };
 
+Style.CreditCard.defaultProps = {
+  theme: {
+    background: "#778899",
+  },
+};
 export default Style;

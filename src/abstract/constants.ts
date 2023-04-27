@@ -75,6 +75,17 @@ const COMPANY_LIST = [
   "국민카드",
 ] as const;
 
+const BACKGROUND: Record<CardCompany, string> = {
+  BC카드: "#DC143C",
+  신한카드: "#0000CD",
+  카카오뱅크: "#FEE500",
+  현대카드: "#333333",
+  우리카드: "#00BFFF",
+  롯데카드: "#FF0000",
+  하나카드: "#008B8B",
+  국민카드: "#696969",
+} as const;
+
 export {
   IMG,
   TYPE,
@@ -86,4 +97,5 @@ export {
   WARNING_TEXT,
   COMPANY_SRC,
   COMPANY_LIST,
+  BACKGROUND,
 };

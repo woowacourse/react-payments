@@ -15,5 +15,6 @@ export const Primary: Story = {
     cardNumberHidden: "1111-2222-••••-••••",
     cardDate: "12/25",
     cardOwnerName: "루루&가람",
+    cardCompany: "롯데카드",
   },
 };

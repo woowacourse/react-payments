@@ -23,6 +23,7 @@ function CardList({ creditCardList }: CardListProps) {
           cardDate,
           cardOwnerName,
           cardName,
+          cardCompany,
         } = card;
         return (
           <li key={cardNumberOrigin}>
@@ -30,6 +31,7 @@ function CardList({ creditCardList }: CardListProps) {
               cardNumberHidden={cardNumberHidden}
               cardDate={cardDate}
               cardOwnerName={cardOwnerName}
+              cardCompany={cardCompany}
             />
             <Style.CardName>{cardName}</Style.CardName>
           </li>

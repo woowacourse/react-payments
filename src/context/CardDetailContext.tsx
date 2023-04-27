@@ -4,6 +4,8 @@ import useCardDate from "../hooks/useCardDate";
 import useCardOwnerName from "../hooks/useCardOwnerName";
 import useCardCVC from "../hooks/useCardCVC";
 import useCardPassword from "../hooks/useCardPassword";
+import useCardCompany from "../hooks/useCardCompany";
+import { CardCompany } from "../types/card";
 
 const CardDetailContext = createContext({
   changeCardNumber: (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,6 +29,10 @@ const CardDetailContext = createContext({
     console.log(e);
   },
   cardPassword: ["", ""] as [string, string],
+  cardCompany: "없음" as CardCompany,
+  changeCompany: (card: CardCompany) => {
+    console.log(card);
+  },
 });
 
 const CardDetailProvider = ({ children }: PropsWithChildren) => {
@@ -36,6 +42,7 @@ const CardDetailProvider = ({ children }: PropsWithChildren) => {
   const { cardOwnerName, changeCardOwnerName } = useCardOwnerName();
   const { cardCVC, changeCardCVC } = useCardCVC();
   const { cardPassword, changeCardPassword } = useCardPassword();
+  const { cardCompany, changeCompany } = useCardCompany();
 
   return (
     <CardDetailContext.Provider
@@ -51,6 +58,8 @@ const CardDetailProvider = ({ children }: PropsWithChildren) => {
         cardCVC,
         changeCardPassword,
         cardPassword,
+        cardCompany,
+        changeCompany,
       }}
     >
       {children}

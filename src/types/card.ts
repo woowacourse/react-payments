@@ -5,6 +5,7 @@ export type Card = {
   cardOwnerName: string;
   cardCVC: string;
   cardPassword: [FirstPassword, SecondPassword];
+  cardCompany: CardCompany;
 };
 
 export type CreditCard = Card & {

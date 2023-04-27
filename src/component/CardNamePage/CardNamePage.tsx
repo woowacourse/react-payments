@@ -22,7 +22,7 @@ function CardNamePage({ lastCard, addCreditCard }: CardNamePageProps) {
   const { cardName, changeCardName } = useCardName();
   const { warningText, isRightCardName } = useWarningText();
 
-  const { cardNumberHidden, cardDate, cardOwnerName } = lastCard;
+  const { cardNumberHidden, cardDate, cardOwnerName, cardCompany } = lastCard;
 
   const registerCard = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -47,6 +47,7 @@ function CardNamePage({ lastCard, addCreditCard }: CardNamePageProps) {
             cardNumberHidden={cardNumberHidden}
             cardDate={cardDate}
             cardOwnerName={cardOwnerName}
+            cardCompany={cardCompany}
           />
         </Style.TopSection>
         <Style.Form onSubmit={registerCard}>

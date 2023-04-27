@@ -30,6 +30,7 @@ function CardDetailForm({ setLastCard, openModal }: CardDetailFormProps) {
     cardOwnerName,
     cardCVC,
     cardPassword,
+    cardCompany,
   } = useContext(CardDetailContext);
 
   const submitCreditCard = () => {
@@ -40,6 +41,7 @@ function CardDetailForm({ setLastCard, openModal }: CardDetailFormProps) {
       cardOwnerName,
       cardCVC,
       cardPassword,
+      cardCompany,
     };
 
     setLastCard(newCard);
@@ -70,6 +72,7 @@ function CardDetailForm({ setLastCard, openModal }: CardDetailFormProps) {
           cardNumberHidden={cardNumberHidden}
           cardDate={cardDate}
           cardOwnerName={cardOwnerName}
+          cardCompany={cardCompany}
         />
       </Style.CardViewSection>
       <Style.Form onSubmit={handelChange}>
