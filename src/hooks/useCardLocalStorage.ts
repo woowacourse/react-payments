@@ -15,9 +15,10 @@ const isCardsInfo = (cards: unknown): cards is CardInfo[] => {
       typeof card.cardOwnerName === 'string' &&
       typeof card.cardSecurityCode === 'string' &&
       typeof card.cardPassword === 'string' &&
-      (!card.cardName || typeof card.cardName !== 'string')
+      (!card.cardName || typeof card.cardName === 'string')
   );
 
+  console.log('validaity', isValid);
   return isValid;
 };
 
