@@ -1,13 +1,9 @@
 import { useNavigate } from 'react-router-dom';
-
 import styled from 'styled-components';
 
 import { InputBox } from './common';
-
-import { useCardRegisterForm } from '../hooks/useCardRegisterForm';
-
 import { cardList } from '../data/localStorage';
-
+import { useCardRegisterForm } from '../hooks/useCardRegisterForm';
 import { Card, CardInfoOption } from '../type/card';
 import { InputInfo } from '../type/input';
 
@@ -41,9 +37,10 @@ export function CardRegisterForm() {
     <_Form onSubmit={handleSubmit}>
       {Object.entries(cardRegisterForm).map(([key, inputs]) => (
         <InputBox
+          key={key}
           id={key}
           inputs={Object.values(inputs) as unknown as InputInfo[]}
-        ></InputBox>
+        />
       ))}
       {isRequiredInputValid && isOptionalInputValid && (
         <_ButtonWrapper>

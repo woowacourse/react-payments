@@ -1,17 +1,10 @@
 import React from 'react';
-
 import styled from 'styled-components';
 
-import {
-  LABEL,
-  MAX_LENGTH,
-  PLACEHOLDER,
-  SIZE_STYLE,
-} from '../../constants/inputInfo';
-import { ErrorMessage, Label, Input } from '../common';
-
 import { ERROR_MESSAGE } from '../../constants/errors';
+import { LABEL, MAX_LENGTH, SIZE_STYLE } from '../../constants/inputInfo';
 import { InputInfo } from '../../type/input';
+import { ErrorMessage, Label, Input } from '../common';
 interface InputBoxProps extends React.HTMLAttributes<HTMLDivElement> {
   inputs: InputInfo[];
 }

@@ -1,8 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import { GlobalStyle } from './styles/global-style';
-
 import { AddCard, CardList } from './pages';
+import { GlobalStyle } from './styles/global-style';
 
 function App() {
   return (

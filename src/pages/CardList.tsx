@@ -1,6 +1,5 @@
-import styled from 'styled-components';
-
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 
 import { Header, CardItem } from '../components/common';
 import { cardList } from '../data/localStorage';
