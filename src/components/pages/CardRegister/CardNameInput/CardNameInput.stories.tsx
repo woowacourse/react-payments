@@ -8,6 +8,7 @@ import { theme } from '../../../../styles/theme';
 export default {
   title: 'Components/CardNameInput',
   component: CardNameInput,
+  tags: ['autodocs'],
   decorators: [
     (Story) => (
       <ThemeProvider theme={theme}>

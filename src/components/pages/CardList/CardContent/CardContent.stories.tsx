@@ -10,6 +10,7 @@ import { BankNames } from '../../../../types/card.type';
 export default {
   title: 'Components/CardContent',
   component: CardContent,
+  tags: ['autodocs'],
   argTypes: {
     onClick: { action: 'clicked' },
     bankName: {
