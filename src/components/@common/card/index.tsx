@@ -1,3 +1,4 @@
+import React from "react";
 import { CardNameProps, CardNumberProps } from "src/interfaces";
 import { CardContainer, Styled as S } from "./Card.styles";
 
