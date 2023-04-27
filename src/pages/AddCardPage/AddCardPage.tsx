@@ -55,25 +55,6 @@ const AddCardPage = () => {
     setModalOpen(false);
   };
 
-  const handleExpirationDate = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, name } = e.target;
-
-    if (!isNumeric(value)) return;
-
-    setExpirationDate({ ...expirationDate, [name]: value });
-
-    if (name === "month") {
-      setError({ ...error, expirationError: isValidMonth(value) ? false : true });
-    }
-  };
-
-  const handleExpirationDateError = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { month } = expirationDate;
-
-    if (month.length === 1 && month !== "0") setExpirationDate({ ...expirationDate, month: `0${month}` });
-    setError({ ...error, expirationError: isValidMonth(month) ? false : true });
-  };
-
   const handleOwnerName = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
 
@@ -153,9 +134,9 @@ const AddCardPage = () => {
         <CardNumberInput cardNumber={cardNumber} error={error} setCardNumber={setCardNumber} setError={setError} />
         <CardExpirationDateInput
           expirationDate={expirationDate}
-          error={error.expirationError}
-          onChange={handleExpirationDate}
-          onBlur={handleExpirationDateError}
+          error={error}
+          setExpirationDate={setExpirationDate}
+          setError={setError}
         />
         <CardOwnerNameInput ownerName={ownerName} nameLength={ownerName.length} onChange={handleOwnerName} />
         <CardSecurityCodeInput securityCode={securityCode} onChange={handleSecurityCode} />
