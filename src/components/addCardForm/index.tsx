@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { CardNumberInput } from './cardInfoInputs/CardNumberInput';
 import { ExpirationDateInput } from './cardInfoInputs/ExpirationDateInput';
@@ -73,10 +73,6 @@ export const AddNewCardForm = () => {
 
     navigate('/');
   };
-
-  useEffect(() => {
-    console.log(inputOrder);
-  }, [inputOrder]);
 
   return (
     <Style.Wrapper
