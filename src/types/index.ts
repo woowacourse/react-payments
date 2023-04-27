@@ -18,4 +18,5 @@ export type Card = {
   securityCode: string;
   password: CardPassword;
   cardCompany: CardCompany;
+  alias: string;
 };
