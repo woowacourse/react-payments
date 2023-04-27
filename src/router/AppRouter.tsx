@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import AddCardPage from '../pages/AddCard/AddCardPage';
-import CardListPage from '../pages/CardList/CardListPage';
+import AddCardPage from '../pages/AddCard';
+import CardListPage from '../pages/CardList';
 import CardAliasPage from '../pages/CardAlias';
 import { CurrentCardProvider } from '../context/CurrentCardProvider';
 import { IsAccessAliasPageProvider } from '../context/IsAccessAliasPageProvider';

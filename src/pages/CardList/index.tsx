@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import type { CardType } from '../../type';
 import Card from '../../components/Card';
 import Header from '../../components/Header';
-import './CardListPage.css';
+import './index.css';
 import { fetchLocalStorage } from '../../utils/applicationUtil';
 
 const CardListPage = () => {
@@ -24,17 +24,19 @@ const CardListPage = () => {
           <span className="empty-card-list-title">새로운 카드를 등록해주세요.</span>
         ) : (
           cardList.map((card: CardType) => (
-            <Card
-              key={card.id}
-              cardType={card.cardType}
-              cardFirstNumber={card.cardNumber.first}
-              cardSecondNumber={card.cardNumber.second}
-              cardThirdNumber={card.cardNumber.third}
-              cardFourthNumber={card.cardNumber.fourth}
-              cardOwner={card.cardOwner}
-              expireMonth={card.expireMonth}
-              expireYear={card.expireYear}
-            />
+            <div key={card.id}>
+              <Card
+                cardType={card.cardType}
+                cardFirstNumber={card.cardNumber.first}
+                cardSecondNumber={card.cardNumber.second}
+                cardThirdNumber={card.cardNumber.third}
+                cardFourthNumber={card.cardNumber.fourth}
+                cardOwner={card.cardOwner}
+                expireMonth={card.expireMonth}
+                expireYear={card.expireYear}
+              />
+              <p>{card.alias}</p>
+            </div>
           ))
         )}
         <button className="add-card-button" onClick={onAddButton}>

@@ -5,7 +5,7 @@ import Card from '../../components/Card';
 import AddCardForm from './components/AddCardForm';
 import Header from '../../components/Header';
 import BackButtonImg from '../../asset/back_button.png';
-import './AddCardPage.css';
+import './index.css';
 import useInput from '../../hooks/useInput';
 import {
   isValidCardNumber,

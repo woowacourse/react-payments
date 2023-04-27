@@ -4,6 +4,24 @@ import { useCurrentCardContext } from '../../context/CurrentCardProvider';
 import useInput from '../../hooks/useInput';
 import { isValidCardAlias } from '../AddCard/domain/dispatcher';
 import { useIsAccessAliasPageContext } from '../../context/IsAccessAliasPageProvider';
+import { CardNumber, CardType } from '../../type';
+import { fetchLocalStorage, getSerialNumber } from '../../utils/applicationUtil';
+
+const registerCardAlias = (alias: string, cardNumber: CardNumber) => {
+  const registerdCardNumber = getSerialNumber(cardNumber);
+  const cardList = fetchLocalStorage('cardList', '[]');
+  const currentCard = cardList.find(
+    (card: CardType) => getSerialNumber(card.cardNumber) === registerdCardNumber
+  );
+  const addedAliasCard = { alias, ...currentCard };
+  const restCardList = cardList.filter(
+    (card: CardType) => getSerialNumber(card.cardNumber) !== registerdCardNumber
+  );
+
+  const newCardList = [...restCardList, addedAliasCard];
+
+  localStorage.setItem('cardList', JSON.stringify(newCardList));
+};
 
 const CardAliasPage = () => {
   const navigate = useNavigate();
@@ -11,7 +29,7 @@ const CardAliasPage = () => {
   const { value, onChange } = useInput(isValidCardAlias);
   const { setIsAccessAliasPage } = useIsAccessAliasPageContext();
   const onClick = () => {
-    // 별칭 등록
+    registerCardAlias(value, currentCard.cardNumber);
     setIsAccessAliasPage(false);
     navigate('/');
   };
