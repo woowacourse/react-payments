@@ -18,13 +18,11 @@ export default function InputBoxSecurityCode(props: Props) {
 
   const [inputStatus, setInputStatus] = useState(INPUT_STATUS.NOT_COMPLETE);
 
-  const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.length > CONSTANT.SECURITY_INPUT_MAX_LENGTH) {
-      e.target.value = e.target.value.slice(0, CONSTANT.SECURITY_INPUT_MAX_LENGTH);
-    }
+  const lengthParser = (value: string) => value.slice(0, CONSTANT.SECURITY_INPUT_MAX_LENGTH);
 
-    if (validateSecurityNumber(e.target.value)) {
-      e.target.value.length === CONSTANT.SECURITY_INPUT_MAX_LENGTH
+  const inputStatusHandler = (value: string) => {
+    if (validateSecurityNumber(value)) {
+      value.length === CONSTANT.SECURITY_INPUT_MAX_LENGTH
         ? setInputStatus(INPUT_STATUS.COMPLETE)
         : setInputStatus(INPUT_STATUS.NOT_COMPLETE);
     } else {
@@ -34,7 +32,7 @@ export default function InputBoxSecurityCode(props: Props) {
 
   useEffect(() => {
     setIsComplete(inputStatus === INPUT_STATUS.COMPLETE ? true : false);
-  }, [inputStatus]);
+  }, [inputStatus, setIsComplete]);
 
   return (
     <div className={styles.inputBox}>
@@ -43,8 +41,9 @@ export default function InputBoxSecurityCode(props: Props) {
         name="security-code"
         className={styles.input}
         type="password"
-        onChange={onChangeCallback}
         inputMode="numeric"
+        parsers={[lengthParser]}
+        valueChangeSubscribers={[inputStatusHandler]}
       ></Input>
       <button className={styles.button} type="button" onClick={alertCvcInfo}>
         ?
