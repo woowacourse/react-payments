@@ -34,27 +34,7 @@ export const postLocalStorage = (data: Omit<CardType, 'id'>) => {
   localStorage.setItem('cardList', JSON.stringify(dataToArr));
 };
 
-export const sumbitCard = (
-  cardType: string,
-  cardNumber: CardNumber,
-  cardOwner: string,
-  expireMonth: string,
-  expireYear: string,
-  securityCode: string,
-  cardPassword: CardPassword
-) => {
-  const card: Omit<CardType, 'id'> = {
-    cardType,
-    cardNumber,
-    cardOwner,
-    expireMonth,
-    expireYear,
-    securityCode,
-    cardPassword: {
-      first: cardPassword.first,
-      second: cardPassword.second,
-    },
-  };
+export const sumbitCard = (card: Omit<CardType, 'id'>) => {
   postLocalStorage(card);
 };
 

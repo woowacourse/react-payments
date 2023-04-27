@@ -1,6 +1,6 @@
 import React from 'react';
 
-import type { AddCardFormProps } from '../../../type';
+import type { AddCardFormProps, CardType } from '../../../type';
 import { sumbitCard } from '../../../utils/applicationUtil';
 import { useNavigate } from 'react-router-dom';
 import ExpireDateInput from './ExpireDateInput';
@@ -9,6 +9,7 @@ import SecurityCodeInput from './SecurityCodeInput';
 import PasswordInput from './PasswordInput';
 import './AddCardForm.css';
 import CardNumberInput from './CardNumberInput';
+import { useCurrentCardContext } from '../../../context/CurrentCardProvider';
 
 const AddCardForm = ({
   cardType,
@@ -24,28 +25,31 @@ const AddCardForm = ({
   cardPassword2,
 }: AddCardFormProps) => {
   const navigate = useNavigate();
+  const { currentCard, setCurrentCard } = useCurrentCardContext();
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const submitData: Omit<CardType, 'id'> = {
+      cardType,
+      cardNumber: {
+        first: cardFirstNumber.value,
+        second: cardSecondNumber.value,
+        third: cardThirdNumber.value,
+        fourth: cardFourthNumber.value,
+      },
+      cardOwner: cardOwner.value,
+      expireMonth: expireMonth.value,
+      expireYear: expireYear.value,
+      securityCode: securityCode.value,
+      cardPassword: {
+        first: cardPassword1.value,
+        second: cardPassword2.value,
+      },
+    };
     try {
-      sumbitCard(
-        cardType,
-        {
-          first: cardFirstNumber.value,
-          second: cardSecondNumber.value,
-          third: cardThirdNumber.value,
-          fourth: cardFourthNumber.value,
-        },
-        cardOwner.value,
-        expireMonth.value,
-        expireYear.value,
-        securityCode.value,
-        {
-          first: cardPassword1.value,
-          second: cardPassword2.value,
-        }
-      );
-      navigate('/');
+      sumbitCard(submitData);
+      setCurrentCard(submitData);
+      navigate('/alias');
     } catch (error) {
       alert('중복된 카드 입니다.');
       return;
