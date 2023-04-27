@@ -2,8 +2,8 @@ import * as S from './style';
 
 interface ControlButtonProps {
   type?: 'button' | 'submit' | 'reset' | undefined;
-  disabled: boolean | undefined;
-  onClick: () => void;
+  disabled?: boolean | undefined;
+  onClick?: () => void;
   label: string;
 }
 function ControlButton({
@@ -14,7 +14,7 @@ function ControlButton({
       <S.RegisterButton
         disabled={disabled}
         type={type}
-        onClick={() => onClick()}
+        onClick={() => onClick && onClick()}
       >
         {label}
       </S.RegisterButton>
