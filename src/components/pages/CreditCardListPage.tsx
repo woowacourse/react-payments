@@ -11,6 +11,7 @@ const Content = styled.main`
   align-items: center;
   flex: 1;
   overflow: scroll;
+  padding-bottom: 25px;
 `;
 
 export const CreditCardListPage = () => {
