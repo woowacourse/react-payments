@@ -9,6 +9,7 @@
   flex-direction: column;
   justify-content: flex-end;
   margin: 0 auto 0 auto;
+  background-size: 208px 122px;
   background-color: var(--grey-200);
   width: 208px;
   height: 123px;
