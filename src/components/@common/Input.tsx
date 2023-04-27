@@ -33,7 +33,7 @@ export default Input;
 const InputStyle = styled.input<StyledProps>`
   width: ${(props) => props.width ?? '100%'};
   height: 45px;
-  letter-spacing: 3px;
+  letter-spacing: 1.5px;
   background-color: #ecebf1;
   border-radius: 7px;
   border: none;

@@ -74,7 +74,6 @@ function OwnerNameInput() {
         value={creditCard.ownerName}
         onChange={_onChange}
         font-weight="500"
-        letter-spacing="1px"
         inputMode="text"
         textAlign="left"
       />
