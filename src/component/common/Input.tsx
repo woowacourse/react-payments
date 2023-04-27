@@ -34,7 +34,7 @@ export default function Input(props: Props) {
       {...props}
       value={value}
       onChange={onChangeHandler}
-      className={`${className} ${styles.input}`}
+      className={`${styles.input} ${className}`}
     />
   );
 }

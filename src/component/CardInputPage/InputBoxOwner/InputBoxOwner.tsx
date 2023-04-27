@@ -5,7 +5,7 @@ import styles from "./inputBoxOwner.module.css";
 import CONSTANT from "../../../Constant";
 
 interface Props {
-  setPreviewDataHandler: () => void;
+  setPreviewDataHandler?: () => void;
 }
 
 export default function InputBoxOwner(props: Props) {
@@ -13,15 +13,14 @@ export default function InputBoxOwner(props: Props) {
 
   const [nameLength, setNameLength] = useState(0);
 
-  const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value
-      .split(/\s{2,}/)
-      .filter((spelling) => spelling !== "")
-      .join(" ");
+  const whiteSpaceParser = (value: string) => (
+    value.split(/\s{2,}/).filter((spelling) => spelling !== "").join(" ")
+  );
 
-    e.target.value = value.slice(0, CONSTANT.OWNER_NAME_MAX_LENGTH);
+  const lengthParser = (value: string) => value.slice(0, CONSTANT.OWNER_NAME_MAX_LENGTH);
 
-    setNameLength(e.target.value.trim().length);
+  const nameLengthHandler = (value: string) => {
+    setNameLength(value.length);
   };
   
   return (
@@ -32,12 +31,10 @@ export default function InputBoxOwner(props: Props) {
         name="card-owner"
         className={styles.input}
         type="text"
-        onChange={(e: ChangeEvent<HTMLInputElement>) => {
-          onChangeCallback(e);
-          setPreviewDataHandler();
-        }}
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
         inputMode="text"
+        parsers={[whiteSpaceParser, lengthParser]}
+        valueChangeSubscribers={[nameLengthHandler]}
       ></Input>
       <p>TBD</p>
     </div>

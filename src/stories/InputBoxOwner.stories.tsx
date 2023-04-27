@@ -1,14 +1,13 @@
-import type { Meta } from "@storybook/react";
-
+import type { Meta, StoryObj } from "@storybook/react";
 import InputBoxOwner from "../component/CardInputPage/InputBoxOwner/InputBoxOwner";
 
+type Story = StoryObj<typeof InputBoxOwner>;
+
 const meta: Meta = {
-  title: "InputBoxOwner component",
+  title: "Input Box Owner",
   component: InputBoxOwner,
 };
 
 export default meta;
 
-export const InputTest = () => (
-  <InputBoxOwner setPreviewDataHandler={() => {}}></InputBoxOwner>
-);
+export const InputTest: Story = {};
