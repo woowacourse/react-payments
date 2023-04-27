@@ -1,23 +1,15 @@
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import CardItem from '../common/CardItem';
 import Title from '../common/Title';
 import Input from '../common/Input';
 import { cardLocalStorage } from '../domain/CardLocalStorage';
-import type { CardItemInfo } from '../../types/Card';
+import { CardContext } from '../../context/CardContext';
 
-interface CardAdditionCompletionPageProps {
-  card: CardItemInfo;
-  cardName: string;
-  setCardName(value: string): void;
-}
-
-const CardAdditionCompletionPage = ({
-  card,
-  cardName,
-  setCardName,
-}: CardAdditionCompletionPageProps) => {
+const CardAdditionCompletionPage = () => {
   const navigate = useNavigate();
+  const { card, cardName, setCardName } = useContext(CardContext);
 
   if (!card) {
     throw new Error('카드를 찾을 수 없습니다.');
@@ -38,7 +30,7 @@ const CardAdditionCompletionPage = ({
     <CompletionContainer>
       <Title title='카드등록이 완료되었습니다.' fontSize={24} />
       <CardItemContainer>
-        <CardItem card={card} />
+        <CardItem />
       </CardItemContainer>
       <form onSubmit={handleComplete}>
         <Input

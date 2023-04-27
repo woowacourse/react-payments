@@ -13,7 +13,7 @@ const CardList = ({ cardList, onOpen }: CardListProps) => {
     <CardListContainer>
       {cardList.map((card, id) => (
         <>
-          <CardItem card={card} key={id} onOpen={onOpen} />
+          <CardItem key={id} onOpen={onOpen} />
           <Title title={card.cardName} fontSize={14} />
         </>
       ))}

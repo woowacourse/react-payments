@@ -1,13 +1,14 @@
+import { useContext } from 'react';
 import styled from 'styled-components';
 import { CARD_COLOR } from '../../utils/Constants';
-import type { CardItemInfo } from '../../types/Card';
+import { CardContext } from '../../context/CardContext';
 
 interface CardItemProps {
-  card: CardItemInfo;
   onOpen?: () => void;
 }
 
-const CardItem = ({ card, onOpen }: CardItemProps) => {
+const CardItem = ({ onOpen }: CardItemProps) => {
+  const { card } = useContext(CardContext);
   const cardColor = CARD_COLOR[card.bankName];
 
   return (
