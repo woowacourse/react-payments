@@ -1,10 +1,11 @@
 import CreditCard from 'components/CreditCard';
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import * as Type from 'types';
 import { useCreditCard } from 'hooks/useCreditCard';
 import Modal from 'components/Modal';
 import useModal from 'hooks/useModal';
+import { CardContext } from 'CardProvider';
 import CreditCardNumberInput from './inputs/CreditCardNumberInput';
 import CreditCardExpiryInput from './inputs/CreditCardExpiryInput';
 import CreditCardOwnerInput from './inputs/CreditCardOwnerInput';
@@ -21,17 +22,7 @@ function CreditCardRegister() {
   const { saveCreditCard } = useCreditCard();
   const { modalOpen, openModal, closeModal } = useModal();
 
-  const [creditCard, setCreditCard] = useState<Type.CreditCard>({
-    companyId: '',
-    number: '',
-    expiry: '',
-    owner: '',
-    cvc: '',
-    password: {
-      first: '',
-      second: '',
-    },
-  });
+  const { creditCard, setCreditCard } = useContext(CardContext);
 
   const isValidCVC = validateCVC(creditCard.cvc);
   const isValidExpiry = validateExpiry(creditCard.expiry);
