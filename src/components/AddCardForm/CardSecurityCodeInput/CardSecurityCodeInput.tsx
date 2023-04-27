@@ -20,6 +20,7 @@ const CardSecurityCodeInput = () => {
         onChange={setInputValueWithValidation}
         maxLength={3}
         value={inputValue}
+        name="cardSecurityCode"
         required={true}
         type="password"
       />

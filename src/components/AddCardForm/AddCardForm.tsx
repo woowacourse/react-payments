@@ -1,8 +1,14 @@
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import type { CardInfo } from '../../types';
 import { CardInfoContext } from '../../CardInfoProvider';
 import { cardSelectButtonInfos } from '../../pages/cardImages';
+import {
+  checkValidCardNumber,
+  checkValidYearMonth,
+  checkOwnerNameLength,
+  checkValidCVC,
+  checkValidPassword,
+} from './validators';
 import styles from './AddCardForm.module.css';
 import CardSwitchButton from './CardSwitchButton/CardSwitchButton';
 import CardNumberInput from './CardNumberInput/CardNumberInput';
@@ -13,48 +19,79 @@ import CardPasswordInput from './CardPasswordInput/CardPasswordInput';
 import FooterButton from '../common/FooterButton/FooterButton';
 import CardSelectButtonPack from '../CardSelectButtonPack/CardSelectButtonPack';
 
-type AddCardFormProps = {
-  registerNewCard: (cardInfo: CardInfo) => void;
-};
-
-const AddCardForm = ({ registerNewCard }: AddCardFormProps) => {
+const AddCardForm = () => {
   const navigate = useNavigate();
-  const { cardNumber, cardOwnerName, cardPassword, cardSecurityCode, cardExpirationDate } = useContext(CardInfoContext);
+  const {
+    cardNumber,
+    cardOwnerName,
+    cardPassword,
+    cardSecurityCode,
+    cardExpirationDate,
+    setCardNumber,
+    setCardOwnerName,
+    setCardPassword,
+    setCardSecurityCode,
+    setCardExpirationDate,
+    setHasCheckedValidation,
+  } = useContext(CardInfoContext);
 
   const isNextButtonUnlocked = [cardNumber, cardOwnerName, cardPassword, cardSecurityCode, cardExpirationDate].every(
     currentInputValue => currentInputValue.isValid
   );
 
-  const handleCardInfo = (event: React.FormEvent<HTMLFormElement>) => {
+  const validateCardInfo = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const cardNumberInput = event.currentTarget.elements.namedItem('cardNumber');
     const expirationDateInput = event.currentTarget.elements.namedItem('expirationDate');
     const cardOwnerNameInput = event.currentTarget.elements.namedItem('cardOwnerName');
+    const cardSecurityCodeInput = event.currentTarget.elements.namedItem('cardSecurityCode');
+    const cardPasswordInputFirstLetter = event.currentTarget.elements.namedItem('cardPasswordFirstLetter');
+    const cardPasswordInputSecondLetter = event.currentTarget.elements.namedItem('cardPasswordSecondLetter');
 
     if (
       !(
         cardNumberInput instanceof HTMLInputElement &&
         expirationDateInput instanceof HTMLInputElement &&
-        cardOwnerNameInput instanceof HTMLInputElement
+        cardOwnerNameInput instanceof HTMLInputElement &&
+        cardSecurityCodeInput instanceof HTMLInputElement &&
+        cardPasswordInputFirstLetter instanceof HTMLInputElement &&
+        cardPasswordInputSecondLetter instanceof HTMLInputElement
       )
     ) {
-      alert('폼 전송에 실패했습니다.');
-      return false;
+      setHasCheckedValidation(false);
+      return;
     }
 
-    const cardInfo: CardInfo = {
-      cardNumber: cardNumberInput.value,
-      cardExpirationDate: expirationDateInput.value,
-      cardOwnerName: cardOwnerNameInput.value,
-    };
+    const cardPasswordValue = cardPasswordInputFirstLetter.value + cardPasswordInputSecondLetter.value;
 
-    registerNewCard(cardInfo);
+    const validationResults = [
+      checkValidCardNumber(cardNumberInput.value),
+      checkValidYearMonth(expirationDateInput.value),
+      checkOwnerNameLength(cardOwnerNameInput.value),
+      checkValidCVC(cardSecurityCodeInput.value),
+      checkValidPassword(cardPasswordValue),
+    ];
+
+    const isValidationSuccess = validationResults.every(validationResult => validationResult.result);
+
+    if (!isValidationSuccess) {
+      setHasCheckedValidation(false);
+      return;
+    }
+
+    setCardNumber({ value: cardNumberInput.value, isValid: true });
+    setCardExpirationDate({ value: cardExpirationDate.value, isValid: true });
+    setCardOwnerName({ value: cardOwnerNameInput.value, isValid: true });
+    setCardSecurityCode({ value: cardSecurityCode.value, isValid: true });
+    setCardPassword({ value: cardPasswordValue, isValid: true });
+    setHasCheckedValidation(true);
+
     navigate('/card-name-decision');
   };
 
   return (
-    <form onSubmit={handleCardInfo} className={styles.container}>
+    <form onSubmit={validateCardInfo} className={styles.container}>
       <CardSwitchButton
         modalContent={<CardSelectButtonPack width="290px" cardSelectButtonInfos={cardSelectButtonInfos} />}
       />
