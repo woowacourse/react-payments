@@ -3,6 +3,7 @@ import { AddCard } from "./page/AddCard";
 import { GlobalStyle } from "./style/resetStyle";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { CardProvider } from "./context/cardContext";
+import { Nickname } from "./page/Nickname";
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/addCard" element={<AddCard />} />
+          <Route path="/nickname" element={<Nickname />} />
         </Routes>
       </BrowserRouter>
     </CardProvider>

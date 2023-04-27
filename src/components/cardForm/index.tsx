@@ -9,7 +9,6 @@ import { FormEvent, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useValidation } from "../../hook/useValidation";
 import { CardContext } from "../../context/cardContext";
-import { getRandomId } from "../../utils/randomId";
 
 interface CardFormProps {
   setCardInfo: React.Dispatch<React.SetStateAction<CardType>>;
@@ -36,7 +35,7 @@ export const CardForm = ({ setCardInfo, newCard }: CardFormProps) => {
 
     if (isInputValid()) {
       setCards(newCard);
-      moveTo("/");
+      moveTo("/nickname");
     }
   };
 
