@@ -42,9 +42,9 @@ export const CurrentCardProvider = ({ children }: PropsWithChildren) => {
 };
 
 export const useCurrentCardContext = () => {
-  const toggleContext = useContext(CurrentCardContext);
-  if (toggleContext === null) {
+  const currentCardContext = useContext(CurrentCardContext);
+  if (currentCardContext === null) {
     throw new Error('Context가 존재하지 않습니다.');
   }
-  return toggleContext;
+  return currentCardContext;
 };

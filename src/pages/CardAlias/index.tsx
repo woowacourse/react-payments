@@ -3,13 +3,16 @@ import Card from '../../components/Card';
 import { useCurrentCardContext } from '../../context/CurrentCardProvider';
 import useInput from '../../hooks/useInput';
 import { isValidCardAlias } from '../AddCard/domain/dispatcher';
+import { useIsAccessAliasPageContext } from '../../context/IsAccessAliasPageProvider';
 
 const CardAliasPage = () => {
   const navigate = useNavigate();
   const { currentCard } = useCurrentCardContext();
   const { value, onChange } = useInput(isValidCardAlias);
+  const { setIsAccessAliasPage } = useIsAccessAliasPageContext();
   const onClick = () => {
     // 별칭 등록
+    setIsAccessAliasPage(false);
     navigate('/');
   };
   return (

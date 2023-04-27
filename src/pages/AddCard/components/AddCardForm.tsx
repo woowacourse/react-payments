@@ -10,6 +10,7 @@ import PasswordInput from './PasswordInput';
 import './AddCardForm.css';
 import CardNumberInput from './CardNumberInput';
 import { useCurrentCardContext } from '../../../context/CurrentCardProvider';
+import { useIsAccessAliasPageContext } from '../../../context/IsAccessAliasPageProvider';
 
 const AddCardForm = ({
   cardType,
@@ -25,7 +26,8 @@ const AddCardForm = ({
   cardPassword2,
 }: AddCardFormProps) => {
   const navigate = useNavigate();
-  const { currentCard, setCurrentCard } = useCurrentCardContext();
+  const { setCurrentCard } = useCurrentCardContext();
+  const { setIsAccessAliasPage } = useIsAccessAliasPageContext();
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -49,6 +51,7 @@ const AddCardForm = ({
     try {
       sumbitCard(submitData);
       setCurrentCard(submitData);
+      setIsAccessAliasPage(true);
       navigate('/alias');
     } catch (error) {
       alert('중복된 카드 입니다.');

@@ -4,6 +4,8 @@ import AddCardPage from '../pages/AddCard/AddCardPage';
 import CardListPage from '../pages/CardList/CardListPage';
 import CardAliasPage from '../pages/CardAlias';
 import { CurrentCardProvider } from '../context/CurrentCardProvider';
+import { IsAccessAliasPageProvider } from '../context/IsAccessAliasPageProvider';
+import PrivateRoute from './PrivateRoute';
 
 const router = createBrowserRouter([
   {
@@ -13,17 +15,23 @@ const router = createBrowserRouter([
   {
     path: '/add',
     element: (
-      <CurrentCardProvider>
-        <AddCardPage />
-      </CurrentCardProvider>
+      <IsAccessAliasPageProvider>
+        <CurrentCardProvider>
+          <AddCardPage />
+        </CurrentCardProvider>
+      </IsAccessAliasPageProvider>
     ),
   },
   {
     path: '/alias',
     element: (
-      <CurrentCardProvider>
-        <CardAliasPage />
-      </CurrentCardProvider>
+      <IsAccessAliasPageProvider>
+        <CurrentCardProvider>
+          <PrivateRoute>
+            <CardAliasPage />
+          </PrivateRoute>
+        </CurrentCardProvider>
+      </IsAccessAliasPageProvider>
     ),
   },
 ]);
