@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import { CardNumberInput } from './cardInfoInputs/CardNumberInput';
 import { ExpirationDateInput } from './cardInfoInputs/ExpirationDateInput';
@@ -18,7 +18,7 @@ export const AddNewCardForm = () => {
 
   const { addNewCard } = useCardData();
 
-  const [inputOrder, setInputOrder] = useState<number>();
+  const [inputOrder, setInputOrder] = useState(0);
 
   const [isModalOpen, setIsModalOpen] = useState(true);
 
@@ -54,15 +54,11 @@ export const AddNewCardForm = () => {
   } = useFocus(2);
 
   const viewNextInput = useCallback(() => {
-    setInputOrder((current) => {
-      if (current) return current + 1;
-    });
+    setInputOrder((current) => current + 1);
   }, []);
 
   const viewPreviousInput = useCallback(() => {
-    setInputOrder((current) => {
-      if (current) return current - 1;
-    });
+    setInputOrder((current) => current - 1);
   }, []);
 
   const handleSubmitNewCardInfo = () => {
@@ -77,6 +73,10 @@ export const AddNewCardForm = () => {
 
     navigate('/');
   };
+
+  useEffect(() => {
+    console.log(inputOrder);
+  }, [inputOrder]);
 
   return (
     <Style.Wrapper
@@ -99,10 +99,7 @@ export const AddNewCardForm = () => {
         <BottomSheet setIsOpen={setIsModalOpen}>
           <SelectCardCompanyModal
             setSelectedCardCompany={setSelectedCardCompany}
-            closeModal={() => {
-              setIsModalOpen(false);
-              setInputOrder(0);
-            }}
+            closeModal={() => setIsModalOpen(false)}
           />
         </BottomSheet>
       )}
@@ -113,59 +110,61 @@ export const AddNewCardForm = () => {
         companyId={selectedCardCompany}
         handleClick={() => setIsModalOpen(true)}
       />
-      <Style.InputContainer>
-        {inputOrder === 0 && (
-          <CardNumberInput
-            ref={cardNumberInputRefs}
-            cardNumber={cardNumber}
-            setCardNumber={setCardNumber}
-            focusCardNumberInputByIndex={focusCardNumberInputByIndex}
-            viewNextInput={viewNextInput}
-          />
-        )}
+      {selectedCardCompany && (
+        <Style.InputContainer>
+          {inputOrder === 0 && (
+            <CardNumberInput
+              ref={cardNumberInputRefs}
+              cardNumber={cardNumber}
+              setCardNumber={setCardNumber}
+              focusCardNumberInputByIndex={focusCardNumberInputByIndex}
+              viewNextInput={viewNextInput}
+            />
+          )}
 
-        {inputOrder === 1 && (
-          <ExpirationDateInput
-            ref={expirationDateInputRefs}
-            expirationDate={expirationDate}
-            setExpirationDate={setExpirationDate}
-            focusNextExpirationDateInput={focusExpirationDateInputByIndex}
-            viewNextInput={viewNextInput}
-            viewPreviousInput={viewPreviousInput}
-          />
-        )}
+          {inputOrder === 1 && (
+            <ExpirationDateInput
+              ref={expirationDateInputRefs}
+              expirationDate={expirationDate}
+              setExpirationDate={setExpirationDate}
+              focusNextExpirationDateInput={focusExpirationDateInputByIndex}
+              viewNextInput={viewNextInput}
+              viewPreviousInput={viewPreviousInput}
+            />
+          )}
 
-        {inputOrder === 2 && (
-          <OwnerNameInput
-            ref={ownerNameInputRefs}
-            ownerName={ownerName}
-            setOwnerName={setOwnerName}
-            viewNextInput={viewNextInput}
-            viewPreviousInput={viewPreviousInput}
-          />
-        )}
+          {inputOrder === 2 && (
+            <OwnerNameInput
+              ref={ownerNameInputRefs}
+              ownerName={ownerName}
+              setOwnerName={setOwnerName}
+              viewNextInput={viewNextInput}
+              viewPreviousInput={viewPreviousInput}
+            />
+          )}
 
-        {inputOrder === 3 && (
-          <SecurityCodeInput
-            ref={securityCodeInputRefs}
-            securityCode={securityCode}
-            setSecurityCode={setSecurityCode}
-            viewNextInput={viewNextInput}
-            viewPreviousInput={viewPreviousInput}
-          />
-        )}
+          {inputOrder === 3 && (
+            <SecurityCodeInput
+              ref={securityCodeInputRefs}
+              securityCode={securityCode}
+              setSecurityCode={setSecurityCode}
+              viewNextInput={viewNextInput}
+              viewPreviousInput={viewPreviousInput}
+            />
+          )}
 
-        {inputOrder === 4 && (
-          <PasswordInput
-            ref={passwordInputRefs}
-            password={password}
-            setPassword={setPassword}
-            focusPasswordInputByIndex={focusPasswordInputByIndex}
-            viewPreviousInput={viewPreviousInput}
-            handleSubmitNewCardInfo={handleSubmitNewCardInfo}
-          />
-        )}
-      </Style.InputContainer>
+          {inputOrder === 4 && (
+            <PasswordInput
+              ref={passwordInputRefs}
+              password={password}
+              setPassword={setPassword}
+              focusPasswordInputByIndex={focusPasswordInputByIndex}
+              viewPreviousInput={viewPreviousInput}
+              handleSubmitNewCardInfo={handleSubmitNewCardInfo}
+            />
+          )}
+        </Style.InputContainer>
+      )}
     </Style.Wrapper>
   );
 };
