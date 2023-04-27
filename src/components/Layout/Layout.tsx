@@ -3,7 +3,7 @@ import Header from '../Header/Header';
 import * as Styled from './Layout.styles';
 
 const Layout = (props: PropsWithChildren) => {
-  const { children, ...rest } = props;
+  const { children } = props;
   return (
     <Styled.LayoutWrapper>
       <Header />
