@@ -1,6 +1,6 @@
 import { PropsWithChildren, createContext } from 'react';
 import CreditCardInfo from '../@types/creditCardInfo';
-import { CardCompany } from '../@types/cardCompany';
+import { CardCompanyEng } from '../@types/cardCompany';
 import useCreditCard from '../hooks/useCreditCard';
 import CreditCardContextType from '../@types/creditCardContextType';
 
@@ -10,7 +10,7 @@ const initialCreditCardInfo: CreditCardInfo = {
   ownerName: '',
   securityCode: '',
   password: ['', ''],
-  cardCompany: 'hyundai' as CardCompany,
+  cardCompany: 'hyundai' as CardCompanyEng,
   cardAlias: '',
 };
 

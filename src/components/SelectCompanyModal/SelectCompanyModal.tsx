@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { CardCompany, KOR_NAME_BY_CARD_COMPANY } from '../../@types/cardCompany';
+import { CardCompanyEng, KOR_NAME_BY_CARD_COMPANY } from '../../@types/cardCompany';
 import BankIconBox from '../cardCompanyIconBox/cardCompanyIconBox';
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
 
 const BankSelectModal = ({ onClose }: Props) => {
   // TODO: type 문제 : Banks로 하고 싶은데...
-  const companyList = [...Object.keys(KOR_NAME_BY_CARD_COMPANY)] as CardCompany[];
+  const companyList = [...Object.keys(KOR_NAME_BY_CARD_COMPANY)] as CardCompanyEng[];
 
   return (
     <StyledContainer>

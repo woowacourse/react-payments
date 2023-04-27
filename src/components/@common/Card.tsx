@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import refineExpirationDate from '../../utils/refineExpirationDate';
 import useCardNumber from '../../hooks/useCardNumber';
+import { CardCompanyKor } from '../../@types/cardCompany';
 
 interface CardContainerProps {
   cardColor: string;
@@ -10,7 +11,7 @@ interface CardProps extends CardContainerProps {
   ownerName: string;
   expirationDate: string[];
   onClick?: React.MouseEventHandler<HTMLDivElement>;
-  cardCompany: string;
+  cardCompany: CardCompanyKor;
   cardColor: string;
 }
 

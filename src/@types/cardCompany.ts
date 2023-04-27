@@ -40,4 +40,6 @@ export const COLOR_BY_CARD_COMPANY = {
   kb: '#6A6056',
 } as const;
 
-export type CardCompany = keyof typeof KOR_NAME_BY_CARD_COMPANY;
+export type CardCompanyKor =
+  (typeof KOR_NAME_BY_CARD_COMPANY)[keyof typeof KOR_NAME_BY_CARD_COMPANY];
+export type CardCompanyEng = keyof typeof KOR_NAME_BY_CARD_COMPANY;

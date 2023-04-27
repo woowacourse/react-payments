@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import {
-  CardCompany,
+  CardCompanyEng,
   KOR_NAME_BY_CARD_COMPANY,
   ICON_BY_CARD_COMPANY,
 } from '../../@types/cardCompany';
@@ -9,7 +9,7 @@ import { CreditCardContext } from '../../contexts/CreditCardContext';
 import CreditCardContextType from '../../@types/creditCardContextType';
 
 type Props = {
-  cardCompany: CardCompany;
+  cardCompany: CardCompanyEng;
   onClose: () => void;
 };
 
@@ -18,7 +18,7 @@ const BankIconBox = ({ cardCompany, onClose }: Props) => {
   const { setCreditCard } = useContext(CreditCardContext) as CreditCardContextType;
 
   const handleClickImage: React.MouseEventHandler<HTMLImageElement> = (event) => {
-    const company = event.currentTarget?.dataset['company'] as CardCompany;
+    const company = event.currentTarget?.dataset['company'] as CardCompanyEng;
 
     if (!setCreditCard) return;
     setCreditCard('cardCompany', company);
