@@ -31,7 +31,7 @@ export const AddCard = () => {
       </Header>
       <Main>
         <CardItem card={newCard} />
-        <CardForm setCardInfo={setNewCard} />
+        <CardForm setCardInfo={setNewCard} newCard={newCard} />
       </Main>
       {isModalOpen && <CompanySelectModal />}
     </>

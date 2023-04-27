@@ -13,10 +13,12 @@ const passwordInfo = {
 };
 
 interface PasswordInputProps {
+  setNewPassword: (index: number, value: string) => void;
   validatePasswordInput: (password: string[]) => boolean;
 }
 
 export const PasswordInput = ({
+  setNewPassword,
   validatePasswordInput,
 }: PasswordInputProps) => {
   const [password, setPassword] = useState(["", ""]);
@@ -43,6 +45,7 @@ export const PasswordInput = ({
         newPassword[index] = value;
         return newPassword;
       });
+      setNewPassword(index, value);
 
       moveFocusToNext(index, value);
     };

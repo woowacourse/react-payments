@@ -9,12 +9,14 @@ import { FormEvent, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useValidation } from "../../hook/useValidation";
 import { CardContext } from "../../context/cardContext";
+import { getRandomId } from "../../utils/randomId";
 
 interface CardFormProps {
   setCardInfo: React.Dispatch<React.SetStateAction<CardType>>;
+  newCard: CardType;
 }
 
-export const CardForm = ({ setCardInfo }: CardFormProps) => {
+export const CardForm = ({ setCardInfo, newCard }: CardFormProps) => {
   const {
     inputValidity,
     validateCVCInput,
@@ -23,11 +25,7 @@ export const CardForm = ({ setCardInfo }: CardFormProps) => {
     validatePasswordInput,
   } = useValidation();
   const { setCards } = useContext(CardContext);
-  const navigate = useNavigate();
-
-  const moveToHome = () => {
-    navigate("/");
-  };
+  const moveTo = useNavigate();
 
   const isInputValid = () => {
     return Object.entries(inputValidity).every(([_, isValid]) => isValid);
@@ -36,46 +34,29 @@ export const CardForm = ({ setCardInfo }: CardFormProps) => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const formData = new FormData(e.target as HTMLFormElement);
-    const data = Object.fromEntries(formData.entries());
-    const newCard = {
-      id: Math.random().toString(16),
-      numbers: [
-        String(data.cardNumber1),
-        String(data.cardNumber2),
-        String(data.cardNumber3),
-        String(data.cardNumber4),
-      ],
-      expiryDate: String(data.expiryDate),
-      owner: String(data.owner),
-      CVC: Number(data.cvc),
-      password: [String(data.password1), String(data.password2)],
-      color: "#de75d0",
-      company: "temp",
-    };
-
     if (isInputValid()) {
       setCards(newCard);
-      moveToHome();
+      moveTo("/");
     }
   };
 
-  const setCardNumbers = (index: number, numbers: string) => {
-    setCardInfo((prev) => {
-      const newNumbers = [...prev.numbers];
-      newNumbers[index] = numbers;
-      return { ...prev, numbers: newNumbers };
-    });
-  };
+  const setCardArrayData =
+    (key: "numbers" | "password") => (index: number, value: string) => {
+      setCardInfo((prev) => {
+        const newData = [...prev[key]];
+        newData[index] = value;
+        return { ...prev, [key]: newData };
+      });
+    };
 
-  const setCardData = (property: string) => (newData: string) => {
-    setCardInfo((prev) => ({ ...prev, [property]: newData }));
+  const setCardData = (key: string) => (value: string | number) => {
+    setCardInfo((prev) => ({ ...prev, [key]: value }));
   };
 
   return (
     <Form onSubmit={handleSubmit}>
       <CardNumberInput
-        setCardNumbers={setCardNumbers}
+        setCardNumbers={setCardArrayData("numbers")}
         validateNumbersInput={validateNumbersInput}
       />
       <ExpiryDateInput
@@ -83,8 +64,14 @@ export const CardForm = ({ setCardInfo }: CardFormProps) => {
         validateExpiryDateInput={validateExpiryDateInput}
       />
       <OwnerInput setOwner={setCardData("owner")} />
-      <CVCInput validateCVCInput={validateCVCInput} />
-      <PasswordInput validatePasswordInput={validatePasswordInput} />
+      <CVCInput
+        setCVC={setCardData("CVC")}
+        validateCVCInput={validateCVCInput}
+      />
+      <PasswordInput
+        setNewPassword={setCardArrayData("password")}
+        validatePasswordInput={validatePasswordInput}
+      />
       <SubmitButton type="submit">다음</SubmitButton>
     </Form>
   );

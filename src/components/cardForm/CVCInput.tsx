@@ -14,10 +14,11 @@ const CVCInfo = {
 };
 
 interface CVCInputProps {
+  setCVC: (value: number) => void;
   validateCVCInput: (cvc: number) => boolean;
 }
 
-export const CVCInput = ({ validateCVCInput }: CVCInputProps) => {
+export const CVCInput = ({ validateCVCInput, setCVC }: CVCInputProps) => {
   const [isValid, setIsValid] = useState(true);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,6 +34,8 @@ export const CVCInput = ({ validateCVCInput }: CVCInputProps) => {
       e.target.value = value.slice(0, -1);
       return;
     }
+
+    setCVC(Number(value));
   };
 
   const validate = (e: React.FocusEvent<HTMLInputElement>) => {
