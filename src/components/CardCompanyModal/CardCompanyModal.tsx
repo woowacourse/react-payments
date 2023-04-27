@@ -4,19 +4,19 @@ import { IMAGE_PATH } from '../../types/images';
 import { Dispatch, SetStateAction } from 'react';
 
 interface cardCompanyModalProps {
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  setIsModalOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 const getCompanyInfos = () => {
   return Object.entries(IMAGE_PATH);
 };
 
-const CardCompanyModal = ({ setIsOpen }: cardCompanyModalProps) => {
+const CardCompanyModal = ({ setIsModalOpen }: cardCompanyModalProps) => {
   return (
     <>
       <Styled.ModalBackdrop
         onClick={() => {
-          setIsOpen(false);
+          setIsModalOpen(false);
         }}
       ></Styled.ModalBackdrop>
       <Styled.Modal>

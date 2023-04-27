@@ -48,7 +48,7 @@ const AddCard = ({ cards, setCards }: SetCardsProps) => {
     setPasswords,
     isDisabledForm,
   } = useAddCard();
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const handleSetCards = () => {
@@ -60,7 +60,7 @@ const AddCard = ({ cards, setCards }: SetCardsProps) => {
   };
 
   useEffect(() => {
-    setIsOpen(true);
+    setIsModalOpen(true);
   }, []);
 
   return (
@@ -95,7 +95,7 @@ const AddCard = ({ cards, setCards }: SetCardsProps) => {
           <NextButton disabled={isDisabledForm}>다음</NextButton>
         </ButtonWrapper>
       </form>
-      {isOpen && <CardCompanyModal setIsOpen={setIsOpen} />}
+      {isModalOpen && <CardCompanyModal setIsModalOpen={setIsModalOpen} />}
     </>
   );
 };
