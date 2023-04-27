@@ -1,4 +1,4 @@
-import { ChangeEvent, FocusEvent, memo, useRef } from 'react';
+import { ChangeEvent, FocusEvent, memo } from 'react';
 import { CARD_NUMBER_INPUT_MAX_LENGTH } from '../../../constants';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
@@ -21,15 +21,14 @@ function CardNumber({
   updateCardInputError,
   moveFocus,
 }: CardNumberProps) {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const { handleInputValueChange } = useCardNumber(inputRef);
+  const { handleInputTypeChange } = useCardNumber();
 
   const cardNumber = formatDisplayedCardNumber(value);
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    handleInputValueChange(event);
+    handleInputTypeChange(event);
     onInputChange(event);
-    moveFocus(event.target.tabIndex, event.currentTarget.value, event.currentTarget.maxLength);
+    moveFocus(event.target.tabIndex, event.target.value, event.target.maxLength);
   };
 
   const onBlur = (event: FocusEvent<HTMLInputElement>) => {
@@ -47,7 +46,6 @@ function CardNumber({
         카드 번호
       </Label>
       <Input
-        ref={inputRef}
         id="cardNumber"
         name="cardNumber"
         value={encryptDisplayedCardNumber(cardNumber)}
