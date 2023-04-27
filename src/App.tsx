@@ -3,7 +3,7 @@ import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
 import GlobalStyle from './styles/GlobalStyle';
 import Home from './pages/Home';
 import AddCard from './pages/AddCard';
-import { CardType } from './types/Card';
+import CardType from './types/Card';
 import { getLoacalStorage, setLocalStorage } from './utils/setLocalStorge';
 
 const initCards = () => {

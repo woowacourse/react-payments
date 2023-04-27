@@ -5,7 +5,7 @@ import SecurityCode from '../components/SecurityCode/SecurityCode';
 import CardPassword from '../components/CardPassword/CardPassword';
 import Card from '../components/Card/Card';
 import Header from '../components/Header/Header';
-import { CardType } from '../types/Card';
+import CardType from '../types/Card';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import useAddCard from '../hooks/useAddCard';

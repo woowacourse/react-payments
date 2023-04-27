@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import AddCardButton from '../components/AddCardButton/AddCardButton';
 import Card from '../components/Card/Card';
-import { CardType } from '../types/Card';
+import CardType from '../types/Card';
 import Header from '../components/Header/Header';
 
 const Wrapper = styled.div`

@@ -1,5 +1,5 @@
 import * as Styled from './Card.styles';
-import { CardType } from '../../types/Card';
+import CardType from '../../types/Card';
 
 type CardProps = Omit<CardType, 'id'>;
 
