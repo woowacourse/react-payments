@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import CardPreview from '../components/CardPreview/CardPreview';
+import cardImages from '../images/cardBackground/cardImages';
 
 const meta = {
   component: CardPreview,
@@ -10,8 +11,9 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     cardNumber: '1111-2222-3333-4444',
-    cardExpirationDate: '12/25',
+    expirationDate: '12/25',
     cardOwnerName: '🎴🐇',
+    selectedCard: cardImages.비씨카드,
   },
 };
 
