@@ -34,6 +34,7 @@ const CardOwnerNameInput = ({ ownerName, onChange }: CardOwnerNameInputProp) => 
           placeholder="카드에 표시된 영문 이름을 입력하세요."
           type="text"
           maxLength={MAX_NAME_LENGTH}
+          autoComplete="cc-name"
           onChange={handleOwnerName}
         />
       </InputContainer>

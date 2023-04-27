@@ -42,6 +42,7 @@ const CardNumberInput = ({ cardNumber, onChange }: CardNumberInputProps) => {
           maxLength={4}
           required
           autoFocus
+          autoComplete="cc-number"
           onChange={handleCardNumber}
         />
         <span>-</span>
@@ -56,6 +57,7 @@ const CardNumberInput = ({ cardNumber, onChange }: CardNumberInputProps) => {
           minLength={4}
           maxLength={4}
           required
+          autoComplete="cc-number"
           onChange={handleCardNumber}
         />
         <span>-</span>
@@ -70,6 +72,7 @@ const CardNumberInput = ({ cardNumber, onChange }: CardNumberInputProps) => {
           minLength={4}
           maxLength={4}
           required
+          autoComplete="cc-number"
           onChange={handleCardNumber}
         />
         <span>-</span>
@@ -84,6 +87,7 @@ const CardNumberInput = ({ cardNumber, onChange }: CardNumberInputProps) => {
           minLength={4}
           maxLength={4}
           required
+          autoComplete="cc-number"
           onChange={handleCardNumber}
         />
       </InputContainer>
