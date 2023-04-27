@@ -1,74 +1,25 @@
 import { useEffect, useState } from 'react';
 
-import creditCardValidation from '@Domains/creditCard/creditCardValidation';
-
 import * as Type from '@Types/index';
 
-type Props = Partial<Pick<Type.CreditCard, 'number' | 'expiry' | 'owner' | 'cvc' | 'password' | 'company' | 'alias'>>;
-
-const useCreditCardValidation = ({ number, expiry, owner, cvc, password, company, alias }: Props) => {
+const useCreditCardValidation = (creditCard: Omit<Type.CreditCard, 'id'>, errorMessages: (string | null)[]) => {
   const [isValid, setIsValid] = useState(false);
 
-  const judgeValid = (value: string, fns: Record<string, (value: string) => { ok: boolean }>) =>
-    Object.values(fns).every((fn) => {
-      const { ok } = fn(value);
-      if (ok) return false;
+  useEffect(() => {
+    const result = errorMessages.every((errorMessage) => {
+      if (errorMessage) return false;
       return true;
     });
+    setIsValid(result);
 
-  useEffect(() => {
-    if (!number) return;
+    if (creditCard.numbers.length !== 16) setIsValid(false);
 
-    if (judgeValid(number, creditCardValidation.numberValidation)) setIsValid(true);
-    else setIsValid(false);
-  }, [number]);
+    if (creditCard.expiry.length !== 5) setIsValid(false);
 
-  useEffect(() => {
-    if (!expiry) return;
+    if (creditCard.cvc.length !== 3) setIsValid(false);
 
-    if (judgeValid(expiry, creditCardValidation.expiryValidation)) setIsValid(true);
-    else setIsValid(false);
-  }, [expiry]);
-
-  useEffect(() => {
-    if (!owner) return;
-
-    if (judgeValid(owner, creditCardValidation.ownerValidation)) setIsValid(true);
-    else setIsValid(false);
-  }, [owner]);
-
-  useEffect(() => {
-    if (!cvc) return;
-
-    if (judgeValid(cvc, creditCardValidation.cvcValidation)) setIsValid(true);
-    else setIsValid(false);
-  }, [cvc]);
-
-  useEffect(() => {
-    if (!password) return;
-
-    const result = Object.values(creditCardValidation.passwordValidation).some((fn) => {
-      const { ok } = fn(password);
-      if (ok) return true;
-      return false;
-    });
-
-    if (result) setIsValid(true);
-    else setIsValid(false);
-  }, [password]);
-
-  useEffect(() => {
-    if (!company) setIsValid(false);
-    else setIsValid(true);
-  }, [company]);
-
-  useEffect(() => {
-    if (!alias) return;
-
-    if (alias.length === 0) setIsValid(false);
-    else if (alias.length > 10) setIsValid(false);
-    else setIsValid(true);
-  });
+    if (creditCard.password.first.length !== 1 || creditCard.password.second.length !== 1) setIsValid(false);
+  }, [errorMessages]);
 
   return isValid;
 };

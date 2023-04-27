@@ -27,13 +27,7 @@ function CreditCardRegister() {
   const { isModalOpen, animation, openModal, closeModal } = useAnimationModal();
 
   const { creditCard, update, errorMessage } = useContext(CreditCardRegisterContext);
-  const isValid = useCreditCardValidation({
-    number: creditCard.numbers,
-    owner: creditCard.owner,
-    cvc: creditCard.cvc,
-    expiry: creditCard.expiry,
-    password: creditCard.password,
-  });
+  const isValid = useCreditCardValidation(creditCard, Object.values(errorMessage));
 
   const handleSubmit = () => {
     if (!isValid) return;
@@ -57,7 +51,7 @@ function CreditCardRegister() {
           <CreditCard
             fullFilled={false}
             creditCard={{
-              number: creditCard.numbers,
+              numbers: creditCard.numbers,
               expiry: creditCard.expiry,
               owner: creditCard.owner,
               company: creditCard.company,

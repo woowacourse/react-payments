@@ -27,7 +27,7 @@ function CreditCardAlias() {
   const registerCreditCard = () => {
     const newCreditCard: Type.CreditCard = {
       id: Date.now(),
-      number: creditCard.numbers,
+      numbers: creditCard.numbers,
       expiry: creditCard.expiry,
       owner: creditCard.owner,
       cvc: creditCard.cvc,
@@ -55,7 +55,7 @@ function CreditCardAlias() {
         <CreditCard
           fullFilled={false}
           creditCard={{
-            number: creditCard.numbers,
+            numbers: creditCard.numbers,
             expiry: creditCard.expiry,
             owner: creditCard.owner,
             company: creditCard.company,

@@ -8,7 +8,7 @@ export type CreditCardPasswordType = {
 
 export type CreditCard = {
   id: number;
-  number: string;
+  numbers: string;
   expiry: string;
   owner?: string;
   cvc: string;

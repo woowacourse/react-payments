@@ -6,12 +6,12 @@ import CARD_COMPANY from '@Constants/cardCompany';
 import * as S from './style';
 import { CreditCardProps } from './type';
 
-function CreditCard({ fullFilled, creditCard: { expiry, number, owner, company } }: CreditCardProps) {
+function CreditCard({ fullFilled, creditCard: { expiry, numbers, owner, company } }: CreditCardProps) {
   const isValid = () => {
     if (!fullFilled) return true;
 
-    if (number.length !== 16) return false;
-    if (!number) return false;
+    if (numbers.length !== 16) return false;
+    if (!numbers) return false;
 
     if (!expiry) return false;
 
@@ -28,7 +28,7 @@ function CreditCard({ fullFilled, creditCard: { expiry, number, owner, company }
       <S.CreditCardICChip />
       <S.CreditCardInfoLayout>
         <S.CreditCardNumber>
-          {creditCard.convertSecuredCreditCard(number).map((num, idx) => (
+          {creditCard.convertSecuredCreditCard(numbers).map((num, idx) => (
             <div key={idx}>{num}</div>
           ))}
         </S.CreditCardNumber>

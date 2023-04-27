@@ -28,7 +28,7 @@ function Home() {
               <CreditCard
                 fullFilled
                 creditCard={{
-                  number: creditCard.number,
+                  numbers: creditCard.numbers,
                   expiry: creditCard.expiry,
                   owner: creditCard.owner,
                   company: creditCard.company,
