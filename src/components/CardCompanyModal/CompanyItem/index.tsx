@@ -1,7 +1,8 @@
-import * as Company from '../../assets/images/company';
-import type { CompanyName } from '../../constants/company';
+import { MouseEventHandler } from 'react';
+import * as Company from '../../../assets/images/company';
+import type { CompanyName } from '../../../constants/company';
 
-import styles from './companyIcon.module.css';
+import styles from './companyItem.module.css';
 
 const companyIcons: Record<CompanyName, JSX.Element> = {
   BC카드: <Company.BCIcon width={37} height={37} />,
@@ -16,12 +17,13 @@ const companyIcons: Record<CompanyName, JSX.Element> = {
 
 interface Props {
   name: CompanyName;
+  onClick: MouseEventHandler<HTMLButtonElement>;
 }
 
-const CompanyItem = ({ name }: Props) => {
+const CompanyItem = ({ name, onClick }: Props) => {
   return (
     <li>
-      <button type="button" className={styles.button}>
+      <button type="button" className={styles.button} onClick={onClick}>
         {companyIcons[name]}
         <span className={styles.name}>{name}</span>
       </button>

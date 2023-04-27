@@ -1,0 +1,16 @@
+.container {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 36px 16px;
+  border-radius: 4px 4px 0 0;
+  background-color: var(--background-white);
+}
+
+.companyList {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  row-gap: 24px;
+  max-width: 420px;
+  margin: 0 auto;
+}
