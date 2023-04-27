@@ -13,14 +13,12 @@ const RegisterCardName = (props: Props) => {
 
   const handleRegisterCardNameChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
     props.card.cardName = e.target.value;
-    console.log(props.card.cardName, e.target.value);
   };
 
   const registerCardNameHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     const cards = getLocalStorage('card');
     const card = cards.pop();
     card.cardName = props.card.cardName;
-    console.log(card);
     setLocalStorage('card', [...cards, card]);
 
     navigator('/');

@@ -12,7 +12,6 @@ const INPUT_MIN_LENGTH = {
   expiredDate: 7,
   ownerName: 1,
   cvc: 3,
-  password: 1,
   passwordFirst: 1,
   passwordSecond: 1,
 } as const;
