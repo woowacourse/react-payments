@@ -5,10 +5,18 @@
 }
 
 input {
+  border: none;
   background: transparent;
 }
 
 button {
+  border: none;
   background: transparent;
   cursor: pointer;
+}
+
+ul,
+ol,
+li {
+  list-style: none;
 }
