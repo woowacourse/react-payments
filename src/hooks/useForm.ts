@@ -3,11 +3,10 @@ import { useNavigate } from 'react-router-dom';
 
 import { isNumeric } from '../utils';
 
-import { v4 as uuid } from 'uuid';
-
 import { Validator } from '../types/validator';
 import { CardInfo } from '../types/card';
 import { SetCardList } from '../types';
+import { useCardInfoActions } from '../context/CardInfoContext';
 
 interface Error {
   firstCardNumbers: string;
@@ -24,20 +23,9 @@ interface Error {
 }
 
 const useForm = (setCardList: SetCardList<CardInfo>, validator: Validator) => {
+  const { updateInputValue } = useCardInfoActions();
+
   const navigate = useNavigate();
-  const [cardInfo, setCardInfo] = useState<CardInfo>({
-    id: uuid(),
-    firstCardNumbers: '',
-    secondCardNumbers: '',
-    thirdCardNumbers: '',
-    fourthCardNumbers: '',
-    expirationMonth: '',
-    expirationYear: '',
-    ownerName: '',
-    securityNumbers: '',
-    firstPassword: '',
-    secondPassword: '',
-  });
   const [error, setError] = useState<Error>({
     firstCardNumbers: '',
     secondCardNumbers: '',
@@ -96,9 +84,7 @@ const useForm = (setCardList: SetCardList<CardInfo>, validator: Validator) => {
     const hasInputError = findInputError([...elements] as HTMLInputElement[]);
     if (hasInputError) return;
 
-    setCardList((prev) => [cardInfo, ...prev]);
-
-    navigate('/');
+    navigate('/register/nickname');
   };
 
   const onChange = ({ target: targetInput }: ChangeEvent<HTMLInputElement>) => {
@@ -121,13 +107,10 @@ const useForm = (setCardList: SetCardList<CardInfo>, validator: Validator) => {
       focusToNextFormElement([...elements] as HTMLInputElement[], targetInput);
     }
 
-    setCardInfo((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    updateInputValue(name, value);
   };
 
-  return { cardInfo, onSubmit, onChange, error };
+  return { onSubmit, onChange, error };
 };
 
 export default useForm;

@@ -4,6 +4,7 @@ import useForm from '../../hooks/useForm';
 
 import CardPreview from '../../components/CardPreview';
 import Header from '../../components/Header';
+import SelectBank from '../../components/SelectBank';
 import {
   Input,
   CardNumbers,
@@ -17,18 +18,23 @@ import validator from '../../domain/validator';
 
 import { SetCardList } from '../../types';
 import { CardInfo } from '../../types/card';
+import PortalModal from '../../portal/PortalModal';
+import useModalSwitch from '../../hooks/useModalSwitch';
+import { useCardInfoValue } from '../../context/CardInfoContext';
 
 interface CardRegisterPageProps {
   setCardList: SetCardList<CardInfo>;
 }
 
 const CardRegisterPage = ({ setCardList }: CardRegisterPageProps) => {
-  const { cardInfo, onSubmit, onChange, error } = useForm(setCardList, validator);
+  const cardInfo = useCardInfoValue();
+  const { onSubmit, onChange, error } = useForm(setCardList, validator);
+  const { showModal, openModal, closeModal } = useModalSwitch();
 
   return (
     <styled.CardRegisterPage>
       <Header />
-      <CardPreview cardInfo={cardInfo} bgColor="#333333" />
+      <CardPreview cardInfo={cardInfo} openModal={openModal} />
       <styled.CardRegisterForm onSubmit={onSubmit}>
         <CardNumbers error={error}>
           <Input
@@ -136,6 +142,11 @@ const CardRegisterPage = ({ setCardList }: CardRegisterPageProps) => {
           <styled.CardInfoSubmitButton>다음</styled.CardInfoSubmitButton>
         </styled.CardInfoSubmitButtonContainer>
       </styled.CardRegisterForm>
+      {showModal && (
+        <PortalModal closeModal={closeModal}>
+          <SelectBank />
+        </PortalModal>
+      )}
     </styled.CardRegisterPage>
   );
 };
