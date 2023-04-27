@@ -25,7 +25,7 @@ const StyledInput = styled.input<StyledInputProps>`
 
   border: none;
   border-radius: 8px;
-  background: ${(props) => (props.disabled ? 'none' : props.theme.color.grey1)};
+  background: ${(props) => (props.disabled ? 'none' : props.theme.color.grey2)};
 
   font-size: ${(props) => props.theme.fontSize.xlarge};
   text-align: ${(props) => (props.$center ? 'center' : 'initial')};
