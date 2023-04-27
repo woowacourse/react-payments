@@ -7,4 +7,8 @@ export const CardRegisterForm = styled.div`
 
   width: 100%;
   height: 70%;
+
+  & > *:not(:last-child) {
+    margin-bottom: 20px;
+  }
 `;

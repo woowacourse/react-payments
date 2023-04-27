@@ -1,9 +1,12 @@
+import { createPortal } from 'react-dom';
+
 import { COLOR } from '../../../constants/cardInfo';
 import { useCardInfo } from '../../../hooks/useCardInfo';
 
 import * as styled from './CardRegisterPage.styled';
 import CardPreview from '../../CardPreview/CardPreview';
 import CardRegisterForm from '../../CardRegisterForm/CardRegisterForm';
+import BottomSheet from '../../BottomSheet/BottomSheet';
 
 const CardRegisterPage = () => {
   const {

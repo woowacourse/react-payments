@@ -21,6 +21,7 @@ export const PASSWORD = {
 export const COLOR = {
   DEFAULT: '#E5E5E5',
   WHITE: '#FFFFFF',
+  BLACK: 'black',
   GREY100: '#ECEBF1',
   GREY200: '#333333',
   GOLD: '#CBBA64',
