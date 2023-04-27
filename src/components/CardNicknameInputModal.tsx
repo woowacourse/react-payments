@@ -91,11 +91,10 @@ const CardNicknameInputModal = ({
             type="text"
             maxLength={10}
           />
+          <button className="card-submit-button" type="submit">
+            확인
+          </button>
         </form>
-
-        <button className="card-submit-button" type="button">
-          확인
-        </button>
       </div>
     </>,
     document.body
