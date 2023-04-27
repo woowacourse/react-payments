@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { RegisterButtonStyleProps } from './type';
+
 export const CreditCardRegister = styled.div`
   align-items: flex-start;
 `;
@@ -31,11 +33,7 @@ export const ButtonWrapper = styled.div`
   justify-content: flex-end;
 `;
 
-type RegisterButtonType = {
-  disabled: boolean;
-};
-
-export const RegisterButton = styled.button<RegisterButtonType>`
+export const RegisterButton = styled.button<RegisterButtonStyleProps>`
   font-weight: 700;
   cursor: ${(props) => (props.disabled ? 'pointer' : 'not-allowed')};
 `;

@@ -1,11 +1,7 @@
 import * as S from './style';
+import { InputLayoutProps } from './type';
 
-type Props = {
-  children: React.ReactNode;
-  errorMessage: string | null;
-};
-
-function InputLayout({ children, errorMessage }: Props) {
+function InputLayout({ children, errorMessage }: InputLayoutProps) {
   return (
     <S.InputLayout>
       {children}

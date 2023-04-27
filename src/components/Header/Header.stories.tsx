@@ -3,7 +3,9 @@
 import { Story, Meta } from '@storybook/react';
 import { withRouter } from 'storybook-addon-react-router-v6';
 
-import Header, { HeaderProps } from '.';
+import { HeaderProps } from './type';
+
+import Header from '.';
 
 export default {
   title: 'Header',

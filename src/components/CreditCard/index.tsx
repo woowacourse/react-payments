@@ -1,16 +1,10 @@
 /* eslint-disable react/no-array-index-key */
 import creditCard from '@Domains/creditCard';
 
-import * as Type from '@Types/index';
-
 import CARD_COMPANY from '@Constants/CardCompany';
 
 import * as S from './style';
-
-export type CreditCardProps = {
-  fullFilled: boolean;
-  creditCard: Pick<Type.CreditCard, 'number' | 'expiry' | 'owner' | 'company'>;
-};
+import { CreditCardProps } from './type';
 
 function CreditCard({ fullFilled, creditCard: { expiry, number, owner, company } }: CreditCardProps) {
   const isValid = () => {

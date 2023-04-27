@@ -10,7 +10,7 @@ import useInput from '@Hooks/useInput';
 
 export const CreditCardRegisterContext = createContext({
   creditCard: {
-    company: undefined as Type.CardCompanies | undefined,
+    company: undefined as Type.CreditCardCompanies | undefined,
     numbers: '',
     expiry: '',
     owner: '',
@@ -22,7 +22,7 @@ export const CreditCardRegisterContext = createContext({
     },
   },
   update: {
-    company: (arg: Type.CardCompanies | undefined) => {},
+    company: (arg: Type.CreditCardCompanies | undefined) => {},
     numbers: (arg: string) => {},
     expiry: (arg: string) => {},
     owner: (arg: string) => {},
@@ -46,7 +46,7 @@ function CreditCardRegisterProvider({ children }: PropsWithChildren) {
   const { numberValidationFns, expiryValidationFns, ownerValidationFns, cvcValidationFns, passwordValidationFns } =
     creditCardValidation.getValidationFns();
 
-  const [company, setCompany] = useState<Type.CardCompanies | undefined>(undefined);
+  const [company, setCompany] = useState<Type.CreditCardCompanies | undefined>(undefined);
   const [numbers, setNumbers, numbersErrorMessage] = useInput<string>('', numberValidationFns);
   const [expiry, setExpiry, expiryErrorMessage] = useInput<string>('', expiryValidationFns);
   const [owner, setOwner, ownerErrorMessage] = useInput<string>('', ownerValidationFns);
@@ -57,7 +57,7 @@ function CreditCardRegisterProvider({ children }: PropsWithChildren) {
   );
   const [alias, setAlias] = useState<string>('');
 
-  const updateCompany = (newCompany: Type.CardCompanies | undefined) => {
+  const updateCompany = (newCompany: Type.CreditCardCompanies | undefined) => {
     setCompany(newCompany);
   };
 

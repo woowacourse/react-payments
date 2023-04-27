@@ -1,13 +1,8 @@
 import styled from 'styled-components';
 
-type InputProps = {
-  width: string;
-  textAlign: string;
-  background?: string;
-  underline: boolean;
-};
+import { InputStyleProps } from './type';
 
-export const Input = styled.input<InputProps>`
+export const Input = styled.input<InputStyleProps>`
   background-color: ${(props) => props.background || '#ecebf1'};
   border: none;
   border-bottom: ${(props) => (props.underline ? '1px solid #666565' : 'none')};

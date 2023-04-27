@@ -1,17 +1,12 @@
 import Input from '@Components/Input';
+import InputLabel from '@Components/InputLabel';
+import InputLayout from '@Components/InputLayout';
 
 import * as CommonStyle from '@Styles/common';
 
-import InputLabel from '../../../components/InputLabel';
-import InputLayout from '../InputLayout';
+import { CreditCardOwnerInputProps } from './type';
 
-type Props = {
-  creditCardOwner: string;
-  errorMessage: string | null;
-  updateOwner: (newName: string) => void;
-};
-
-function CreditCardOwnerInput({ creditCardOwner, errorMessage, updateOwner }: Props) {
+function CreditCardOwnerInput({ creditCardOwner, errorMessage, updateOwner }: CreditCardOwnerInputProps) {
   const handleChangeOwner = (event: React.ChangeEvent<HTMLInputElement>) => {
     updateOwner(event.target.value);
   };

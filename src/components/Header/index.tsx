@@ -1,11 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
 import * as S from './style';
-
-export type HeaderProps = {
-  title: string;
-  hasBackButton?: boolean;
-};
+import { HeaderProps } from './type';
 
 function Header({ title, hasBackButton }: HeaderProps) {
   const navigate = useNavigate();

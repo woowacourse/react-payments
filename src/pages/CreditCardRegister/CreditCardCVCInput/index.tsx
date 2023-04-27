@@ -1,18 +1,13 @@
 import { useState } from 'react';
 
 import Input from '@Components/Input';
+import InputLabel from '@Components/InputLabel';
+import InputLayout from '@Components/InputLayout';
 
 import * as S from './style';
-import InputLabel from '../../../components/InputLabel';
-import InputLayout from '../InputLayout';
+import { CreditCardCVCInputProps } from './type';
 
-type Props = {
-  creditCardCVC: string;
-  errorMessage: string | null;
-  updateCVC: (newCVC: string) => void;
-};
-
-function CreditCardCVCInput({ creditCardCVC, errorMessage, updateCVC }: Props) {
+function CreditCardCVCInput({ creditCardCVC, errorMessage, updateCVC }: CreditCardCVCInputProps) {
   const [isHoverHelperIcon, setIsHoverHelperIcon] = useState(false);
   const handleChangeCreditCardCVC = (event: React.ChangeEvent<HTMLInputElement>) => {
     updateCVC(event.target.value);

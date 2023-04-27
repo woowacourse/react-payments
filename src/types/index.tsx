@@ -13,10 +13,10 @@ export type CreditCard = {
   owner?: string;
   cvc: string;
   password: CreditCardPasswordType;
-  company?: CardCompanies;
+  company?: CreditCardCompanies;
   alias: string;
 };
 
-export type CardCompanies = keyof typeof CARD_COMPANY;
+export type CreditCardCompanies = keyof typeof CARD_COMPANY;
 
 export type AnimationTypes = keyof typeof ANIMATION;

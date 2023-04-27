@@ -1,14 +1,7 @@
 import { PropsWithChildren } from 'react';
 
-import { AnimationTypes } from '@Types/index';
-
 import * as S from './style';
-
-export type ModalProps = {
-  animation: AnimationTypes;
-  isAbleBackdropClick?: boolean;
-  closeModal: () => void;
-};
+import { ModalProps } from './type';
 
 function Modal({ animation, isAbleBackdropClick = true, closeModal, children }: PropsWithChildren<ModalProps>) {
   const handleClickBackdrop = () => {

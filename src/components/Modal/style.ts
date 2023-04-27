@@ -1,36 +1,17 @@
-import styled, { keyframes } from 'styled-components';
-
-import { AnimationTypes } from '@Types/index';
+import styled from 'styled-components';
 
 import ANIMATION from '@Constants/Animation';
 
-const ModalLayoutAppear = keyframes`
-  0% {
-    opacity: 0;
-    background-color: transparent;
-  }
-  to {
-    opacity: 1;
-    background-color: rgba(0, 0, 0, 0.3);
-  }
-`;
+import {
+  ModalContentsAppear,
+  ModalContentsDisAppear,
+  ModalLayoutAppear,
+  ModalLayoutDisAppear,
+} from '@Animations/modalAnimations';
 
-const ModalLayoutDisAppear = keyframes`
-  0% {
-    opacity: 1;
-    background-color: rgba(0, 0, 0, 0.3);
-  }
-  to {
-    opacity: 0;
-    background-color: transparent;
-  }
-`;
+import { AnimationType, BackdropStyleProps } from './type';
 
-type ModalLayoutType = {
-  animation: AnimationTypes;
-};
-
-export const ModalLayout = styled.div<ModalLayoutType>`
+export const ModalLayout = styled.div<AnimationType>`
   position: fixed;
   top: 0;
   border: 0;
@@ -43,42 +24,12 @@ export const ModalLayout = styled.div<ModalLayoutType>`
     forwards;
 `;
 
-type BackdropProps = {
-  isAbleBackdropClick: boolean;
-};
-
-export const Backdrop = styled.div<BackdropProps>`
+export const Backdrop = styled.div<BackdropStyleProps>`
   height: 100vh;
   cursor: ${(props) => props.isAbleBackdropClick && 'pointer'};
 `;
 
-const ModalAppear = keyframes`
-  0% {
-    opacity: 0;
-    transform: translate3d(0, 100%, 0);
-  }
-  to {
-    opacity: 1;
-    transform: translateZ(0);
-  }
-`;
-
-const ModalDisAppear = keyframes`
-  0% {
-    opacity: 1;
-    transform: translateZ(0);
-  }
-  to {
-    opacity: 0;
-    transform: translate3d(0, 100%, 0);
-  }
-`;
-
-type ModalContentsProps = {
-  animation: AnimationTypes;
-};
-
-export const ModalContents = styled.div<ModalContentsProps>`
+export const ModalContents = styled.div<AnimationType>`
   overflow: auto;
   max-height: 90%;
   position: absolute;
@@ -88,5 +39,5 @@ export const ModalContents = styled.div<ModalContentsProps>`
   padding: 20px;
   background-color: #ffffff;
   border-radius: 5px 5px 0px 0px;
-  animation: ${(props) => (props.animation === ANIMATION.appear ? ModalAppear : ModalDisAppear)} 0.5s;
+  animation: ${(props) => (props.animation === ANIMATION.appear ? ModalContentsAppear : ModalContentsDisAppear)} 0.5s;
 `;

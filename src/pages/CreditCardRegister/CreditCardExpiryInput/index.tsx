@@ -1,15 +1,10 @@
 import Input from '@Components/Input';
+import InputLabel from '@Components/InputLabel';
+import InputLayout from '@Components/InputLayout';
 
-import InputLabel from '../../../components/InputLabel';
-import InputLayout from '../InputLayout';
+import { CreditCardExpiryInputProps } from './type';
 
-type Props = {
-  creditCardExpiry: string;
-  errorMessage: string | null;
-  updateExpiry: (newExpiry: string) => void;
-};
-
-function CreditCardExpiryInput({ creditCardExpiry, errorMessage, updateExpiry }: Props) {
+function CreditCardExpiryInput({ creditCardExpiry, errorMessage, updateExpiry }: CreditCardExpiryInputProps) {
   const handleChangeExpiry = (event: React.ChangeEvent<HTMLInputElement>) => {
     updateExpiry(event.target.value.replaceAll('/', ''));
   };

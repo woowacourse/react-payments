@@ -1,10 +1,8 @@
 import styled from 'styled-components';
 
-type FlexBoxProps = {
-  justifyContent: 'center' | 'flex-start' | 'flex-end' | 'space-between' | 'space-around';
-};
+import { FlexBoxStyleProps } from './type';
 
-export const FlexBox = styled.div<FlexBoxProps>`
+export const FlexBox = styled.div<FlexBoxStyleProps>`
   display: flex;
   justify-content: ${(props) => props.justifyContent};
 `;

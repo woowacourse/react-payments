@@ -11,7 +11,8 @@
       "@Domains/*": ["./domains/*"],
       "@Asset/*": ["./assets/*"],
       "@Styles/*": ["./styles/*"],
-      "@Contexts/*": ["./contexts/*"]
+      "@Contexts/*": ["./contexts/*"],
+      "@Animations/*": ["./animations/*"]
     }
   }
 }

@@ -1,10 +1,7 @@
 import * as S from './style';
+import { InputLabelProps } from './type';
 
-type InputLabelType = {
-  label: string;
-};
-
-function InputLabel({ label }: InputLabelType) {
+function InputLabel({ label }: InputLabelProps) {
   return <S.LabelWrapper>{label}</S.LabelWrapper>;
 }
 

@@ -1,10 +1,8 @@
 import styled from 'styled-components';
 
-type ButtonType = {
-  disabled: boolean;
-};
+import { ButtonStyleProps } from './type';
 
-export const Button = styled.button<ButtonType>`
+export const Button = styled.button<ButtonStyleProps>`
   background-color: ${(props) => (props.disabled ? '#E7E7E7' : '#21273e')};
   color: ${(props) => (props.disabled ? '#B0B3BF' : '#FBFEFE')};
   transition: background-color 0.2s ease, color 0.2s ease;

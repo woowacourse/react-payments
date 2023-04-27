@@ -1,24 +1,13 @@
 import Input from '@Components/Input';
+import InputLabel from '@Components/InputLabel';
+import InputLayout from '@Components/InputLayout';
 
 import * as CommonStyle from '@Styles/common';
 
 import * as S from './style';
-import InputLabel from '../../../components/InputLabel';
-import InputLayout from '../InputLayout';
+import { CreditCardPasswordInputProps } from './type';
 
-type Props = {
-  creditCardPassword: {
-    first: string;
-    second: string;
-  };
-  errorMessage: string | null;
-  updatePassword: {
-    first: (newPassword: string) => void;
-    second: (newPassword: string) => void;
-  };
-};
-
-function CreditCardPasswordInput({ creditCardPassword, errorMessage, updatePassword }: Props) {
+function CreditCardPasswordInput({ creditCardPassword, errorMessage, updatePassword }: CreditCardPasswordInputProps) {
   const handleChangeCreditCardFirstPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     updatePassword.first(event.target.value);
   };

@@ -89,6 +89,11 @@
             "pattern": "@Constants/*",
             "group": "internal",
             "position": "after"
+          },
+          {
+            "pattern": "@Animations/*",
+            "group": "internal",
+            "position": "after"
           }
         ],
         "pathGroupsExcludedImportTypes": [],

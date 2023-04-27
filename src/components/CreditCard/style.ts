@@ -1,12 +1,8 @@
 import styled from 'styled-components';
 
-type Props = {
-  isValid: boolean;
-  backgroundColor?: string;
-  fontColor?: string;
-};
+import { CreditCardLayoutStyleProps } from './type';
 
-export const CreditCardLayout = styled.div<Props>`
+export const CreditCardLayout = styled.div<CreditCardLayoutStyleProps>`
   width: 213px;
   height: 133px;
   display: grid;

@@ -1,11 +1,5 @@
 import * as S from './style';
-
-export type ButtonProps = {
-  text: string;
-  disabled: boolean;
-  type: 'button' | 'submit' | 'reset';
-  handleClick: () => void;
-};
+import { ButtonProps } from './type';
 
 function Button({ disabled, text, type, handleClick }: ButtonProps) {
   return (

@@ -1,17 +1,12 @@
 import Input from '@Components/Input';
+import InputLabel from '@Components/InputLabel';
+import InputLayout from '@Components/InputLayout';
 
 import creditCard from '@Domains/creditCard';
 
-import InputLabel from '../../../components/InputLabel';
-import InputLayout from '../InputLayout';
+import { CreditCardNumberInputProps } from './type';
 
-type Props = {
-  creditCardNumber: string;
-  errorMessage: string | null;
-  updateNumbers: (numbers: string) => void;
-};
-
-function CreditCardNumberInput({ creditCardNumber, errorMessage, updateNumbers }: Props) {
+function CreditCardNumberInput({ creditCardNumber, errorMessage, updateNumbers }: CreditCardNumberInputProps) {
   const handleChangeNumbers = (event: React.ChangeEvent<HTMLInputElement>) => {
     updateNumbers(event.target.value);
   };

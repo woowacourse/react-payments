@@ -1,15 +1,9 @@
-import * as Type from '@Types/index';
-
 import CARD_COMPANY from '@Constants/CardCompany';
 
 import * as S from './style';
+import { CreditCardCompanyProps } from './type';
 
-export type CreditCardCompanyType = {
-  company: Type.CardCompanies;
-  handleClick: () => void;
-};
-
-function CreditCardCompany({ company, handleClick }: CreditCardCompanyType) {
+function CreditCardCompany({ company, handleClick }: CreditCardCompanyProps) {
   return (
     <S.CardCompanyLayout onClick={handleClick}>
       <S.CardCompanyLogo src={CARD_COMPANY[company].logo} alt={CARD_COMPANY[company].name} />
