@@ -4,12 +4,12 @@ import Input from '../../../components/Input';
 import * as S from '../style';
 
 function CreditCardOwnerInput({ name }: T.CreditCardInputProps) {
-  const { creditCard, setCreditCard } = useCreditCardForm();
+  const { creditCardForm, setCreditCardForm } = useCreditCardForm();
 
   const handleChangeCreditCardOwner = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newName = (event.target.value).toUpperCase();
     if (newName.length <= 30) {
-      setCreditCard({ ...creditCard, [name]: newName });
+      setCreditCardForm({ ...creditCardForm, [name]: newName });
     }
   };
 
@@ -18,14 +18,14 @@ function CreditCardOwnerInput({ name }: T.CreditCardInputProps) {
       <S.FlexBox justifyContent="space-between">
         <S.CreditCardRegisterLabel>카드 소유자 이름 (선택)</S.CreditCardRegisterLabel>
         <S.CreditCardRegisterLabel>
-          {creditCard.owner?.length}
+          {creditCardForm.owner?.length}
           /30
         </S.CreditCardRegisterLabel>
       </S.FlexBox>
       <Input
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
         type="string"
-        value={creditCard.owner}
+        value={creditCardForm.owner}
         width="100%"
         textAlign="start"
         onChange={handleChangeCreditCardOwner}

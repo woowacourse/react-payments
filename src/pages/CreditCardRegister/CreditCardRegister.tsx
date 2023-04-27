@@ -1,7 +1,7 @@
 import CreditCard from 'components/CreditCard';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import * as Type from 'types';
+// import * as Type from 'types';
 import useCreditCardList from 'hooks/useCreditCardList';
 import Modal from 'components/Modal';
 import useModal from 'hooks/useModal';
@@ -19,23 +19,12 @@ function CreditCardRegister() {
   const { saveCreditCard } = useCreditCardList();
   const { modalOpen, openModal, closeModal } = useModal();
 
-  const { creditCard, isCreditCardError } = useCreditCardForm();
+  const { creditCardForm, isCreditCardError } = useCreditCardForm();
 
   const handleSubmit = () => {
     if (isCreditCardError) return;
 
-    const newCreditCard: Type.CreditCard = {
-      companyId: creditCard.companyId,
-      number: creditCard.number,
-      expiry: creditCard.expiry,
-      owner: creditCard.owner,
-      cvc: creditCard.cvc,
-      password: {
-        first: creditCard.password.first,
-        second: creditCard.password.second,
-      },
-    };
-    saveCreditCard(newCreditCard);
+    saveCreditCard(creditCardForm);
     navigate('/');
   };
 
@@ -54,10 +43,10 @@ function CreditCardRegister() {
           <CreditCard
             fullFilled={false}
             creditCard={{
-              companyId: creditCard.companyId,
-              number: creditCard.number,
-              expiry: creditCard.expiry,
-              owner: creditCard.owner,
+              companyId: creditCardForm.companyId,
+              number: creditCardForm.number,
+              expiry: creditCardForm.expiry,
+              owner: creditCardForm.owner,
             }}
           />
         </S.PreviewCreditCard>

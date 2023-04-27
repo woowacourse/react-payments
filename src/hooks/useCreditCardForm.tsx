@@ -3,10 +3,10 @@ import { checkCreditCardValidations } from 'domains/creditCard';
 import { useContext } from 'react';
 
 const useCreditCardForm = () => {
-  const { creditCard, setCreditCard } = useContext(CardContext);
-  const isCreditCardError = checkCreditCardValidations(creditCard);
+  const { creditCardForm, setCreditCardForm } = useContext(CardContext);
+  const isCreditCardError = checkCreditCardValidations(creditCardForm);
 
-  return { creditCard, setCreditCard, isCreditCardError };
+  return { creditCardForm, setCreditCardForm, isCreditCardError };
 };
 
 export default useCreditCardForm;

@@ -5,7 +5,7 @@ import * as S from '../style';
 import { validateExpiry } from '../../../domains/validations';
 
 function CreditCardExpiryInput({ name }: T.CreditCardInputProps) {
-  const { creditCard, setCreditCard } = useCreditCardForm();
+  const { creditCardForm, setCreditCardForm } = useCreditCardForm();
 
   const handleChangeCreditCardExpiry = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newCardExpiry = event.target.value;
@@ -13,7 +13,7 @@ function CreditCardExpiryInput({ name }: T.CreditCardInputProps) {
       .replaceAll('/', '')
       .replace(/\D/g, '');
     if (cleanedExpiry.length > 4) return;
-    setCreditCard({ ...creditCard, [name]: cleanedExpiry });
+    setCreditCardForm({ ...creditCardForm, [name]: cleanedExpiry });
   };
 
   const markedExpiry = ((expiry: string) => {
@@ -22,9 +22,9 @@ function CreditCardExpiryInput({ name }: T.CreditCardInputProps) {
       newCardExpiryArray.splice(2, 0, '/');
     }
     return newCardExpiryArray.join('');
-  })(creditCard.expiry);
+  })(creditCardForm.expiry);
 
-  const isError = validateExpiry(creditCard.expiry);
+  const isError = validateExpiry(creditCardForm.expiry);
 
   return (
     <S.Box>

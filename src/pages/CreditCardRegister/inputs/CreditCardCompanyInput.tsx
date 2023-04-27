@@ -12,10 +12,10 @@ interface CreditCardCompanyInputProps extends T.CreditCardInputProps {
 }
 
 function CreditCardCompanyInput({ closeModal, name }: CreditCardCompanyInputProps) {
-  const { creditCard, setCreditCard } = useCreditCardForm();
+  const { creditCardForm, setCreditCardForm } = useCreditCardForm();
 
   const handleChangeCreditCardCompany = (companyId: string) => {
-    setCreditCard({ ...creditCard, [name]: companyId });
+    setCreditCardForm({ ...creditCardForm, [name]: companyId });
     closeModal();
   };
 

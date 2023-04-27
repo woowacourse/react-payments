@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import * as Type from 'types';
 
-const initCreditCard: Type.CreditCard = {
+const initCreditCardForm: Type.CreditCard = {
   companyId: '',
   number: '',
   expiry: '',
@@ -15,27 +15,24 @@ const initCreditCard: Type.CreditCard = {
   },
 };
 
-export interface CardState {
-  creditCard: Type.CreditCard;
-  setCreditCard: React.Dispatch<React.SetStateAction<Type.CreditCard>>;
+export interface CardFormState {
+  creditCardForm: Type.CreditCard;
+  setCreditCardForm: React.Dispatch<React.SetStateAction<Type.CreditCard>>;
 }
 
-export const CardContext = React.createContext<CardState>({
-  creditCard: initCreditCard,
-  setCreditCard: () => { },
+export const CardContext = React.createContext<CardFormState>({
+  creditCardForm: initCreditCardForm,
+  setCreditCardForm: () => { },
 });
 
 interface CardProviderProps {
   children: React.ReactNode;
 }
 
-function ModalProvider({ children }: CardProviderProps) {
-  const [creditCard, setCreditCard] = useState<Type.CreditCard>(initCreditCard);
+function CardFormProvider({ children }: CardProviderProps) {
+  const [creditCardForm, setCreditCardForm] = useState<Type.CreditCard>(initCreditCardForm);
 
-  const state = {
-    creditCard,
-    setCreditCard,
-  };
+  const state = { creditCardForm, setCreditCardForm, };
 
   return (
     <CardContext.Provider value={state}>
@@ -44,4 +41,4 @@ function ModalProvider({ children }: CardProviderProps) {
   );
 }
 
-export default ModalProvider;
+export default CardFormProvider;

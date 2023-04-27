@@ -25,7 +25,7 @@ export const MaskedViewer = styled.p`
 
 function CreditCardNumberInput({ name }: T.CreditCardInputProps) {
   const inputRef = useRef<HTMLInputElement>(null);
-  const { creditCard, setCreditCard } = useCreditCardForm();
+  const { creditCardForm, setCreditCardForm } = useCreditCardForm();
   const [markedCreditCardNumber, setMarkedCreditCardNumber] = useState('');
 
   const handleChangeCreditCardNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,10 +39,10 @@ function CreditCardNumberInput({ name }: T.CreditCardInputProps) {
       .join(' - ');
 
     setMarkedCreditCardNumber(markedNumber);
-    setCreditCard({ ...creditCard, [name]: newCreditCardNumber });
+    setCreditCardForm({ ...creditCardForm, [name]: newCreditCardNumber });
   };
 
-  const isError = validateNumber(creditCard.number);
+  const isError = validateNumber(creditCardForm.number);
 
   return (
     <>
@@ -60,7 +60,7 @@ function CreditCardNumberInput({ name }: T.CreditCardInputProps) {
         <S.HiddenInput
           ref={inputRef}
           type="string"
-          value={creditCard.number}
+          value={creditCardForm.number}
           onChange={handleChangeCreditCardNumber}
         />
       </S.RelativeBox>

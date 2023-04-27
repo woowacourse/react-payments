@@ -5,20 +5,20 @@ import * as S from '../style';
 import { validatePassword } from '../../../domains/validations';
 
 function CreditCardPasswordInput({ name }: T.CreditCardInputProps) {
-  const { creditCard, setCreditCard } = useCreditCardForm();
+  const { creditCardForm, setCreditCardForm } = useCreditCardForm();
 
   const handleChangeCreditCardPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newPassword = (event.target.value as T.CreditCardPasswordTypeKeys).replace(/\D/g, '');
     if (newPassword.length === 1) {
-      const updatedCreditCard: T.CreditCard = { ...creditCard };
+      const updatedCreditCard: T.CreditCard = { ...creditCardForm };
       const targetName = event.target.name as T.CreditCardPasswordTypeKeys;
       const targetValue = event.target.value;
       (updatedCreditCard[name] as T.CreditCardPasswordType)[targetName] = targetValue;
-      setCreditCard(updatedCreditCard);
+      setCreditCardForm(updatedCreditCard);
     }
   };
 
-  const isError = validatePassword(creditCard.password.first, creditCard.password.second);
+  const isError = validatePassword(creditCardForm.password.first, creditCardForm.password.second);
 
   return (
     <S.Box>
@@ -26,7 +26,7 @@ function CreditCardPasswordInput({ name }: T.CreditCardInputProps) {
       <S.FlexBox justifyContent="flex-start">
         <Input
           type="password"
-          value={creditCard.password?.first}
+          value={creditCardForm.password?.first}
           width="48px"
           textAlign="center"
           name="first"
@@ -34,7 +34,7 @@ function CreditCardPasswordInput({ name }: T.CreditCardInputProps) {
         />
         <Input
           type="password"
-          value={creditCard.password?.second}
+          value={creditCardForm.password?.second}
           width="48px"
           textAlign="center"
           name="second"

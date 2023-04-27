@@ -4,23 +4,23 @@ import Input from '../../../components/Input';
 import * as S from '../style';
 
 function CreditCardCVCInput({ name }: T.CreditCardInputProps) {
-  const { creditCard, setCreditCard } = useCreditCardForm();
+  const { creditCardForm, setCreditCardForm } = useCreditCardForm();
 
   const handleChangeCreditCardCVC = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newCVC = event.target.value.replace(/\D/g, '');
     if (newCVC.length <= 3) {
-      setCreditCard({ ...creditCard, [name]: newCVC });
+      setCreditCardForm({ ...creditCardForm, [name]: newCVC });
     }
   };
 
-  const isError = creditCard.cvc.length > 0 && creditCard.cvc.length < 3;
+  const isError = creditCardForm.cvc.length > 0 && creditCardForm.cvc.length < 3;
 
   return (
     <S.Box>
       <S.CreditCardRegisterLabel>보안 코드(CVC/CVV)</S.CreditCardRegisterLabel>
 
       <S.FlexBox justifyContent="flex-start" alignItems="center">
-        <Input type="password" value={creditCard.cvc} width="72px" textAlign="center" onChange={handleChangeCreditCardCVC} />
+        <Input type="password" value={creditCardForm.cvc} width="72px" textAlign="center" onChange={handleChangeCreditCardCVC} />
         <S.QuestionBox onClick={() => alert('카드 뒷 면을 참고하세요.')}>
           <S.QuestionMark>?</S.QuestionMark>
         </S.QuestionBox>
