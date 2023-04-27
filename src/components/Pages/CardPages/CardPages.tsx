@@ -6,6 +6,7 @@ import { useCardInfoList } from '../../../hooks/useCardInfoList';
 import * as styled from './CardPage.styled';
 import MyCardPage from '../MyCardPage/MyCardPage';
 import CardRegisterPage from '../CardRegisterPage/CardRegisterPage';
+import AliasSettingPages from '../AliasSettingPages/AliasSettingPages';
 
 const CardPages = () => {
   const { cardInfoList, setCardInfoList } = useCardInfoList();
@@ -16,6 +17,7 @@ const CardPages = () => {
         <Routes>
           <Route path="/" element={<MyCardPage />} />
           <Route path="/register" element={<CardRegisterPage />} />
+          <Route path="/alias" element={<AliasSettingPages />} />
         </Routes>
       </CardInfoListContext.Provider>
     </styled.CardPages>

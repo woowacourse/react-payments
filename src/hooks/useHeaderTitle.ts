@@ -6,9 +6,9 @@ import { isPageTitleKey } from '../types/typeGuard';
 export const useHeaderTitle = () => {
   const { pathname } = useLocation();
 
-  const isOnHomePage = pathname === PATHNAME.HOME;
+  const isOnRegisterPage = pathname === PATHNAME.REGISTER;
 
   const pageTitle = isPageTitleKey(pathname) ? PAGE_TITLE[pathname] : '404';
 
-  return { isOnHomePage, pageTitle };
+  return { isOnRegisterPage, pageTitle };
 };

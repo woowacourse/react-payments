@@ -18,6 +18,6 @@ export const BackwardButton = styled.div`
   cursor: pointer;
 `;
 
-export const HeaderTitle = styled.div`
+export const HeaderTitle = styled.h1`
   cursor: pointer;
 `;
