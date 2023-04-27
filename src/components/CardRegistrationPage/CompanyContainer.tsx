@@ -2,7 +2,7 @@ import styled from "styled-components";
 import InputGroup from "../common/InputGroup";
 import { useCardItemValue, useErrorMessageValue } from "../provider/CardItemProvider";
 
-const CardCompanyContainer = () => {
+const CardCompany = () => {
   const { company } = useCardItemValue();
   const { companyErrorMessage } = useErrorMessageValue();
 
@@ -44,4 +44,4 @@ const ChangeButton = styled.button`
   cursor: pointer;
 `;
 
-export default CardCompanyContainer;
+export default CardCompany;

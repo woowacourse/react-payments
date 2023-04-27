@@ -6,7 +6,7 @@ import SecurityCodeInput from "./SecurityCodeInput";
 import PasswordInput from "./PasswordInput";
 import { useNavigate } from "react-router-dom";
 import { useCardItemValue, useErrorMessageValue } from "../provider/CardItemProvider";
-import CardCompanyButton from "./CardCompanyContainer";
+import CardCompany from "./CompanyContainer";
 
 interface CardFormProps {
   onSubmitForm: () => void;
@@ -28,7 +28,7 @@ const CardForm = ({ onSubmitForm }: CardFormProps) => {
 
   return (
     <FormContainer onSubmit={handleSubmitForm}>
-      <CardCompanyButton />
+      <CardCompany />
       <CardNumberInput />
       <ExpirationDateInput />
       <NameInput />
