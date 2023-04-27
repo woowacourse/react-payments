@@ -1,3 +1,5 @@
+import { Company } from "../types/Card";
+
 export const WooriCardLogo = () => (
   <svg width="37" height="37" viewBox="0 0 101 101" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
@@ -383,3 +385,14 @@ export const KBCardLogo = () => (
     />
   </svg>
 );
+
+export const companyLogo = {
+  BC카드: <BCCardLogo />,
+  신한카드: <ShinhanCardLogo />,
+  카카오뱅크: <KakaoBankLogo />,
+  현대카드: <HyundaiCardLogo />,
+  우리카드: <WooriCardLogo />,
+  롯데카드: <LotteCardLogo />,
+  하나카드: <HanaCardLogo />,
+  국민카드: <KBCardLogo />,
+};
