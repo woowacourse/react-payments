@@ -1,4 +1,4 @@
-import { ReactComponent as BlackDot } from '../assets/black-dot.svg';
+import { ReactComponent as Dot } from '../assets/dot.svg';
 import PaymentsInput from '../components/PaymentsInput';
 import QuestionToolTip from '../components/QuestionToolTip';
 import type { Meta, StoryObj } from '@storybook/react';
@@ -78,10 +78,10 @@ export const CardPassword: Story = {
       children: (
         <>
           <div>
-            <BlackDot />
+            <Dot />
           </div>
           <div>
-            <BlackDot />
+            <Dot />
           </div>
         </>
       ),
@@ -103,5 +103,6 @@ export const ErrorCase: Story = {
       getInputListValue: () => {},
     },
     errorMessage: '에러가 발생했습니다.',
+    isVisited: true,
   },
 };

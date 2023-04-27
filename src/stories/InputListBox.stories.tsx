@@ -10,7 +10,7 @@ const meta: Meta<typeof InputListBox> = {
 
 export default meta;
 
-export const Default: Story = {
+export const TwoInput: Story = {
   args: {
     inputInformation: [{ resetStyle: false }, { resetStyle: false }],
     getInputListValue: () => {},
@@ -19,20 +19,7 @@ export const Default: Story = {
 
 export const UseBridge: Story = {
   args: {
-    inputInformation: [{}, {}],
-    bridgeLetter: '-',
-    getInputListValue: () => {},
-  },
-};
-
-export const cardNumber: Story = {
-  args: {
-    inputInformation: [
-      { type: 'string', maxLength: 4 },
-      { type: 'string', maxLength: 4 },
-      { type: 'password', maxLength: 4 },
-      { type: 'password', maxLength: 4 },
-    ],
+    inputInformation: [{ resetStyle: false }, { resetStyle: false }],
     bridgeLetter: '-',
     getInputListValue: () => {},
   },

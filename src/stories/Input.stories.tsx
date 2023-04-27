@@ -22,6 +22,6 @@ export const UnResetStyle: Story = {
 
 export const PaintedInput: Story = {
   args: {
-    backgroundColor: 'blue',
+    backgroundColor: '#525252',
   },
 };
