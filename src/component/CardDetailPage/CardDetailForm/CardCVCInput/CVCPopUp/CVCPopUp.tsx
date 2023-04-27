@@ -14,12 +14,10 @@ function CVCPopUp({ closePopup }: CVCPopUpProps) {
   }, []);
 
   return (
-    <>
-      <Style.Layout>
-        <Style.Button onClick={closePopup}>x</Style.Button>
-        <Style.Img src={process.env.PUBLIC_URL + IMG.CVV} alt="CVC hint" />
-      </Style.Layout>
-    </>
+    <Style.Layout>
+      <Style.Button onClick={closePopup}>x</Style.Button>
+      <Style.Img src={process.env.PUBLIC_URL + IMG.CVV} alt="CVC hint" />
+    </Style.Layout>
   );
 }
 

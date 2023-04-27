@@ -17,8 +17,13 @@ function CardList({ creditCardList }: CardListProps) {
         <Style.Title>새로운 카드를 등록해주세요.</Style.Title>
       ) : null}
       {creditCardList.map((card) => {
-        const { cardNumberOrigin, cardNumberHidden, cardDate, cardOwnerName } =
-          card;
+        const {
+          cardNumberOrigin,
+          cardNumberHidden,
+          cardDate,
+          cardOwnerName,
+          cardName,
+        } = card;
         return (
           <li key={cardNumberOrigin}>
             <CardDetailView
@@ -26,6 +31,7 @@ function CardList({ creditCardList }: CardListProps) {
               cardDate={cardDate}
               cardOwnerName={cardOwnerName}
             />
+            <Style.CardName>{cardName}</Style.CardName>
           </li>
         );
       })}

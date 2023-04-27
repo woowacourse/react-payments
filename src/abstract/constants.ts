@@ -13,6 +13,7 @@ const PLACE_HOLDER = {
   MM_YY: "MM/YY",
   OWNER_NAME_HINT: "카드에 표시된 이름과 동일하게 입력하세요.",
   NAME: "NAME",
+  CARD_NAME_HINT: "카드 별명을 입력하세요.",
 } as const;
 
 const ID = {
@@ -24,6 +25,7 @@ const NAVIGATE = {
   BACK: -1,
   HOME: "/",
   ADD_CARD_FORM: "/addCardForm",
+  ADD_CARD_NAME: "/addCardName",
 } as const;
 
 const STRING = {

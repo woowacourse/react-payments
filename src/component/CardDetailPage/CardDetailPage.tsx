@@ -4,20 +4,20 @@ import Style from "./CardDetailPageStyled";
 import CardDetailHeader from "./CardDetailHeader/CardDetailHeader";
 import CardDetailForm from "./CardDetailForm/CardDetailForm";
 
-import { CreditCard } from "../../types/card";
+import { Card } from "../../types/card";
 
 import { CardDetailProvider } from "../../context/CardDetailContext";
 
 interface CardDetailPageProps {
-  addCreditCard: (card: CreditCard) => void;
+  setLastCard: (card: Card) => void;
 }
 
-function CardDetailPage({ addCreditCard }: CardDetailPageProps) {
+function CardDetailPage({ setLastCard }: CardDetailPageProps) {
   return (
     <Style.Page>
       <CardDetailHeader />
       <CardDetailProvider>
-        <CardDetailForm addCreditCard={addCreditCard} />
+        <CardDetailForm setLastCard={setLastCard} />
       </CardDetailProvider>
     </Style.Page>
   );

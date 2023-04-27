@@ -13,15 +13,15 @@ import useWarningText from "../../../hooks/useWarningText";
 import { TYPE, NAVIGATE } from "../../../abstract/constants";
 import { CardDetailContext } from "../../../context/CardDetailContext";
 import CardDetailView from "../../CardDetailView/CardDetailView";
-import { CreditCard } from "../../../types/card";
+import { Card } from "../../../types/card";
 
 interface CardDetailFormProps {
-  addCreditCard: (card: CreditCard) => void;
+  setLastCard: (card: Card) => void;
 }
 
-function CardDetailForm({ addCreditCard }: CardDetailFormProps) {
+function CardDetailForm({ setLastCard }: CardDetailFormProps) {
   const navigate = useNavigate();
-  const { warningText, isRightForm } = useWarningText();
+  const { warningText, isWrongForm } = useWarningText();
   const {
     cardNumberOrigin,
     cardNumberHidden,
@@ -31,8 +31,8 @@ function CardDetailForm({ addCreditCard }: CardDetailFormProps) {
     cardPassword,
   } = useContext(CardDetailContext);
 
-  const submitCreditCard = (e: React.FormEvent<HTMLFormElement>) => {
-    const newCard: CreditCard = {
+  const submitCreditCard = () => {
+    const newCard: Card = {
       cardNumberOrigin,
       cardNumberHidden,
       cardDate,
@@ -41,14 +41,14 @@ function CardDetailForm({ addCreditCard }: CardDetailFormProps) {
       cardPassword,
     };
 
-    e.preventDefault();
-    navigate(NAVIGATE.HOME);
-    addCreditCard(newCard);
+    setLastCard(newCard);
+
+    navigate(NAVIGATE.ADD_CARD_NAME);
   };
 
   const handelChange = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const isError = isRightForm(
+    const isError = isWrongForm(
       cardNumberHidden,
       cardDate,
       cardCVC,
@@ -56,7 +56,7 @@ function CardDetailForm({ addCreditCard }: CardDetailFormProps) {
     );
 
     if (!isError) {
-      submitCreditCard(e);
+      submitCreditCard();
     }
 
     return;
