@@ -1,8 +1,13 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Page } from '../components/common/Page';
 import { CreditCardView } from '../components/payments/CreditCardView';
 import { NewCreditCardButton } from '../components/payments/NewCreditCardButton';
+import { NewCreditCardVendorBottomSheet } from '../components/payments/NewCreditCardVendorBottomSheet';
+import { VendorIcon } from '../components/payments/VendorIcon';
+import type { CreditCardVendorName } from '../domain/CreditCardVendor';
+import { CreditCardVendors } from '../domain/CreditCardVendor';
 import { usePayments } from '../hooks/usePayments';
 
 const Content = styled.main`
@@ -17,8 +22,16 @@ export const CreditCardListPage = () => {
   const navigate = useNavigate();
   const { creditCards } = usePayments();
 
+  const [isVendorBottomSheetOpened, setIsVendorBottomSheetOpened] = useState(false);
+
   const handleClickNewCreditCardButton = () => {
-    navigate('/register');
+    setIsVendorBottomSheetOpened(true);
+  };
+
+  const handleClickCreditCardVendor = (vendor: CreditCardVendorName) => {
+    navigate('/register', {
+      state: { vendor },
+    });
   };
 
   return (
@@ -28,9 +41,12 @@ export const CreditCardListPage = () => {
         {creditCards.map((creditCard) => (
           <CreditCardView
             key={creditCard.cardNumbers}
-            name={creditCard.name}
+            vendor={creditCard.vendor}
+            owner={creditCard.owner}
             cardNumbers={creditCard.cardNumbers}
             expirationDate={creditCard.expirationDate}
+            color={CreditCardVendors[creditCard.vendor].color}
+            icon={<VendorIcon vendor={creditCard.vendor} />}
           />
         ))}
 
@@ -39,6 +55,12 @@ export const CreditCardListPage = () => {
           onClick={handleClickNewCreditCardButton}
         />
       </Content>
+
+      <NewCreditCardVendorBottomSheet
+        open={isVendorBottomSheetOpened}
+        onClose={() => setIsVendorBottomSheetOpened(false)}
+        onClickVendor={handleClickCreditCardVendor}
+      />
     </Page>
   );
 };
