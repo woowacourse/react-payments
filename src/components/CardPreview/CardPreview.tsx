@@ -50,7 +50,7 @@ const CardPreview = ({ card, animation }: CardPreviewProps) => {
 
 export default CardPreview;
 
-const CardLayout = styled.li<{ transition: string; transform: string; cardCompany: CardCompany }>`
+const CardLayout = styled.div<{ transition: string; transform: string; cardCompany: CardCompany }>`
   position: relative;
 
   display: flex;
