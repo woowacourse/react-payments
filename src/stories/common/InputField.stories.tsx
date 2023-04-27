@@ -9,33 +9,15 @@ const meta: Meta<typeof InputField> = {
 export default meta;
 type Story = StoryObj<typeof InputField>;
 
-export const CardNumber: Story = {
+export const Default: Story = {
   args: {
-    kind: 'cardNumber',
+    text: '보안 코드(CVC/CVV)',
   },
 };
 
-export const Expiracy: Story = {
+export const LengthOption: Story = {
   args: {
-    kind: 'expiracy',
-  },
-};
-
-export const Owner: Story = {
-  args: {
-    kind: 'owner',
+    text: '보안 코드(CVC/CVV)',
     inputLength: '0/30',
-  },
-};
-
-export const Cvc: Story = {
-  args: {
-    kind: 'cvc',
-  },
-};
-
-export const Password: Story = {
-  args: {
-    kind: 'password',
   },
 };

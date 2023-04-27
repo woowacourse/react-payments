@@ -205,7 +205,7 @@ export default function AddCardPage({
         onKeyDown={(e) => onInputKeydown(e)}
       >
         <InputWrapper>
-          <InputField kind="cardNumber">
+          <InputField text="카드 번호">
             <CardNumberInput
               firstNumber={firstCardNumber}
               secondNumber={secondCardNumber}
@@ -213,18 +213,21 @@ export default function AddCardPage({
               fourthNumber={fourthCardNumber}
             />
           </InputField>
-          <InputField kind="expiracy">
+          <InputField text="만료일">
             <ExpiracyInput year={year} month={month} />
           </InputField>
-          <InputField kind="owner" inputLength={`${owner.value.length}/30`}>
+          <InputField
+            text="카드 소유자 이름(선택)"
+            inputLength={`${owner.value.length}/30`}
+          >
             <OwnerInput owner={owner} />
           </InputField>
-          <InputField kind="cvc">
+          <InputField text="보안 코드(CVC/CVV)">
             <CvcWrapper>
               <CvcInput cvc={cvc} />
             </CvcWrapper>
           </InputField>
-          <InputField kind="password">
+          <InputField text="카드 비밀번호">
             <PasswordInput
               firstPassword={firstPassword}
               secondPassword={secondPassword}

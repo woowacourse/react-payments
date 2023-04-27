@@ -71,3 +71,13 @@ export const PrevCard: Story = {
     year: '23',
   },
 };
+
+export const CardTitle: Story = {
+  args: {
+    cardNumberSet: ['1111', '2222', '····', '····'],
+    owner: 'EYK',
+    month: '04',
+    year: '23',
+    title: '카카오뱅크 내 카드',
+  },
+};

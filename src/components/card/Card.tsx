@@ -9,6 +9,7 @@ export interface CardProps {
   onDeleteClick?: () => void;
   month: string;
   year: string;
+  title?: string;
 }
 
 const ENCRYPT_INDEX = 2;
@@ -20,6 +21,7 @@ export default function Card({
   month,
   year,
   onDeleteClick,
+  title,
 }: CardProps) {
   const [isClick, setIsClick] = useState(false);
   const onwerName =
@@ -61,6 +63,7 @@ export default function Card({
           </QuestionWrapper>
         )}
       </Container>
+      {title && <CardTitle>{title}</CardTitle>}
       {onDeleteClick && isPrevCard && <Error text="기한이 지난 카드입니다." />}
     </CardContainer>
   );
@@ -193,4 +196,14 @@ const CancleWrapper = styled(Button)`
   &:hover {
     background-color: #9e9c9c;
   }
+`;
+
+const CardTitle = styled.span`
+  margin-top: 9px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: center;
+  color: #575757;
+  opacity: 0.9;
 `;

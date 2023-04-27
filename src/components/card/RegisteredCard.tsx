@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import Card, { CardProps } from './Card';
 import Input from '../common/Input';
 import Button from '../common/Button';
+import InputField from '../common/InputField';
+import { UseInputProps } from '../../hooks/useInput';
 
 const Wrapper = styled.div`
   display: flex;
@@ -32,20 +34,33 @@ const ButtonWrapper = styled.div`
   bottom: 25px;
 `;
 
-interface RegistredCardProps extends CardProps {}
+interface RegistredCardProps extends CardProps {
+  cardTitle: UseInputProps;
+}
 
-export default function RegisteredCard({ ...rest }: RegistredCardProps) {
+export default function RegisteredCard({
+  cardTitle,
+  ...rest
+}: RegistredCardProps) {
   return (
     <Wrapper>
       <FinishMessage>카드등록이 완료되었습니다.</FinishMessage>
       <Card {...rest} />
       <InputWrapper>
-        <Input
-          type="text"
-          bgColor="#fff"
-          textAlign="center"
-          placeholder="카드 별칭을 입력해주세요."
-        />
+        <InputField
+          text="카드 별칭"
+          inputLength={`${cardTitle.value.length}/20`}
+        >
+          <Input
+            {...cardTitle}
+            type="text"
+            bgColor="#fff"
+            textAlign="center"
+            required
+            maxLength={20}
+            placeholder="카드 별칭을 입력해주세요."
+          />
+        </InputField>
       </InputWrapper>
       <ButtonWrapper>
         <Button text="확인" />
