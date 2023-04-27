@@ -3,7 +3,11 @@ import St from "./CardCVCInputStyled";
 import CVCHintPopup from "./CVCHintPopup/CVCHintPopup";
 import useCardCVC from "../../../../hooks/useCardCVC";
 
-function CardCVCInput() {
+interface CardDateInputProps {
+  inputRefs: React.MutableRefObject<(HTMLInputElement | null)[]>;
+}
+
+function CardCVCInput({ inputRefs }: CardDateInputProps) {
   const [isPopup, setIsPopup] = useState(false);
   const { cardCVC, changeCardCVC } = useCardCVC();
 
@@ -17,7 +21,11 @@ function CardCVCInput() {
             value={cardCVC}
             minLength={3}
             required
-            onInput={changeCardCVC}
+            ref={(ref) => (inputRefs.current[3] = ref)}
+            onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
+              e.currentTarget.validity.valid && inputRefs.current[4]?.focus();
+              changeCardCVC(e);
+            }}
           />
         </St.InputSection>
         <St.Button

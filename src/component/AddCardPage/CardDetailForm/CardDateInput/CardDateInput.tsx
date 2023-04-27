@@ -2,7 +2,11 @@ import React from "react";
 import St from "./CardDateInputStyled";
 import useCardDate from "../../../../hooks/useCardDate";
 
-function CardDateInput() {
+interface CardDateInputProps {
+  inputRefs: React.MutableRefObject<(HTMLInputElement | null)[]>;
+}
+
+function CardDateInput({ inputRefs }: CardDateInputProps) {
   const { cardDate, changeCardDate } = useCardDate();
 
   return (
@@ -14,8 +18,12 @@ function CardDateInput() {
           value={cardDate}
           minLength={5}
           required
-          onInput={changeCardDate}
           placeholder="MM/YY"
+          ref={(ref) => (inputRefs.current[1] = ref)}
+          onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
+            !e.currentTarget.validity.tooShort && inputRefs.current[2]?.focus();
+            changeCardDate(e);
+          }}
         ></St.Input>
       </St.InputSection>
     </section>

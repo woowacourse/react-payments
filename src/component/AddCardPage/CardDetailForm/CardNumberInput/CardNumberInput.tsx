@@ -3,7 +3,11 @@ import St from "./CardNumberInputStyled";
 import { Input, InputSection } from "../../../common/Input";
 import useCardNumber from "../../../../hooks/useCardNumber";
 
-function CardNumberInput() {
+interface CardNumberInputProps {
+  inputRefs: React.MutableRefObject<(HTMLInputElement | null)[]>;
+}
+
+function CardNumberInput({ inputRefs }: CardNumberInputProps) {
   const { displayNumber, changeCardNumber } = useCardNumber();
 
   return (
@@ -15,7 +19,12 @@ function CardNumberInput() {
           minLength={19}
           required
           value={displayNumber}
-          onInput={changeCardNumber}
+          autoFocus
+          ref={(ref) => (inputRefs.current[0] = ref)}
+          onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
+            !e.currentTarget.validity.tooShort && inputRefs.current[1]?.focus();
+            changeCardNumber(e);
+          }}
         />
       </InputSection>
     </section>
