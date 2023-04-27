@@ -63,7 +63,9 @@ const ExpiredDate = ({ expiredDates, setExpiredDates }: ExpiredDateProps) => {
           placeholder="MM"
           required={true}
         />
-        <Styled.Pargraph>/</Styled.Pargraph>
+        {cardExpiredDateRefs[0].current?.value.length === 2 && (
+          <Styled.Pargraph>/</Styled.Pargraph>
+        )}
         <CardInput
           type="text"
           maxLength={2}
