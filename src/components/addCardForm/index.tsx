@@ -9,14 +9,18 @@ import { CardViewer } from '../cardViewer';
 import { useNavigate } from 'react-router-dom';
 import { useFocus } from '../../hooks/useFocus';
 import { useCardData } from '../../hooks/useCardData';
+import { COMPANIES } from '../../constants/cardCompany';
+import { BottomSheet } from '../modal/template/BottomSheet';
+import { SelectCardCompanyModal } from '../modal/content/selectCardCompany';
 
 export const AddNewCardForm = () => {
   const navigate = useNavigate();
 
   const { addNewCard } = useCardData();
 
-  const [inputOrder, setInputOrder] = useState(0);
-  const [isInputFinish, setIsInputFinish] = useState(false);
+  const [inputOrder, setInputOrder] = useState<number>();
+
+  const [isModalOpen, setIsModalOpen] = useState(true);
 
   const [cardNumber, setCardNumber] = useState(['', '', '', '']);
   const [expirationDate, setExpirationDate] = useState({
@@ -26,6 +30,9 @@ export const AddNewCardForm = () => {
   const [ownerName, setOwnerName] = useState('');
   const [securityCode, setSecurityCode] = useState('');
   const [password, setPassword] = useState(['', '']);
+
+  const [selectedCardCompany, setSelectedCardCompany] =
+    useState<keyof typeof COMPANIES>();
 
   const {
     inputRefs: cardNumberInputRefs,
@@ -47,11 +54,15 @@ export const AddNewCardForm = () => {
   } = useFocus(2);
 
   const viewNextInput = useCallback(() => {
-    setInputOrder((current) => current + 1);
+    setInputOrder((current) => {
+      if (current) return current + 1;
+    });
   }, []);
 
   const viewPreviousInput = useCallback(() => {
-    setInputOrder((current) => current - 1);
+    setInputOrder((current) => {
+      if (current) return current - 1;
+    });
   }, []);
 
   const handleSubmitNewCardInfo = () => {
@@ -61,6 +72,7 @@ export const AddNewCardForm = () => {
       ownerName,
       securityCode,
       password,
+      selectedCardCompany: selectedCardCompany ?? '',
     });
 
     navigate('/');
@@ -77,15 +89,29 @@ export const AddNewCardForm = () => {
           ownerName,
           securityCode,
           password,
+          selectedCardCompany: selectedCardCompany ?? '',
         });
 
         navigate('/');
       }}
     >
+      {isModalOpen && (
+        <BottomSheet setIsOpen={setIsModalOpen}>
+          <SelectCardCompanyModal
+            setSelectedCardCompany={setSelectedCardCompany}
+            closeModal={() => {
+              setIsModalOpen(false);
+              setInputOrder(0);
+            }}
+          />
+        </BottomSheet>
+      )}
       <CardViewer
         cardNumber={cardNumber}
         expirationDate={expirationDate}
         ownerName={ownerName}
+        companyId={selectedCardCompany}
+        handleClick={() => setIsModalOpen(true)}
       />
       <Style.InputContainer>
         {inputOrder === 0 && (
@@ -140,11 +166,6 @@ export const AddNewCardForm = () => {
           />
         )}
       </Style.InputContainer>
-      <Style.ButtonContainer>
-        {isInputFinish && (
-          <Style.NextButton type="submit">다음</Style.NextButton>
-        )}
-      </Style.ButtonContainer>
     </Style.Wrapper>
   );
 };
@@ -165,17 +186,5 @@ const Style = {
     width: max-content;
 
     gap: 19px;
-  `,
-  ButtonContainer: styled.div`
-    display: flex;
-    justify-content: flex-end;
-
-    width: 100%;
-  `,
-  NextButton: styled.button`
-    all: unset;
-
-    font-weight: bold;
-    cursor: pointer;
   `,
 };

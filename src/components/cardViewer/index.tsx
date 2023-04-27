@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { v4 } from 'uuid';
+import { COMPANIES } from '../../constants/cardCompany';
+import { isCompanyId } from '../modal/content/selectCardCompany';
 
 interface Props {
   cardNumber: string[];
@@ -8,15 +10,29 @@ interface Props {
     year: string;
   };
   ownerName: string;
+  companyId?: string;
+  handleClick?: () => void;
 }
 
-export function CardViewer({ cardNumber, expirationDate, ownerName }: Props) {
+export function CardViewer({
+  cardNumber,
+  expirationDate,
+  ownerName,
+  handleClick,
+  companyId,
+}: Props) {
   return (
-    <Style.Wrapper>
+    <Style.Wrapper
+      onClick={handleClick}
+      color={isCompanyId(companyId) ? COMPANIES[companyId].color : ''}
+    >
+      <Style.CompanyName>
+        {isCompanyId(companyId) && COMPANIES[companyId].name}
+      </Style.CompanyName>
       <Style.ICChip />
       <Style.CardNumberContainer>
         {cardNumber.map((number, index) => (
-          <Style.NumberInput
+          <Style.CardNumber
             key={v4()}
             style={{
               letterSpacing:
@@ -24,7 +40,7 @@ export function CardViewer({ cardNumber, expirationDate, ownerName }: Props) {
             }}
           >
             {index < 2 ? number : '•'.repeat(number.length)}
-          </Style.NumberInput>
+          </Style.CardNumber>
         ))}
       </Style.CardNumberContainer>
       <Style.NameAndDateContainer>
@@ -50,11 +66,18 @@ const Style = {
 
     border: none;
     border-radius: 5px;
-    background-color: #333333;
+    background-color: ${(props) =>
+      props.color === '' ? '#333333' : props.color};
 
     color: white;
     padding: 14px;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+  `,
+  CompanyName: styled.div`
+    position: absolute;
+    top: 10px;
+    left: 10px;
   `,
   ICChip: styled.div`
     width: 40px;
@@ -75,7 +98,7 @@ const Style = {
 
     width: 100%;
   `,
-  NumberInput: styled.div`
+  CardNumber: styled.div`
     all: unset;
 
     width: 30px;

@@ -25,13 +25,19 @@ export const Main = () => {
           </Style.EmptyCardListWrapper>
         ) : (
           cardList.map((card) => {
-            const { cardNumber, expirationDate, ownerName } = card;
+            const {
+              cardNumber,
+              expirationDate,
+              ownerName,
+              selectedCardCompany,
+            } = card;
             return (
               <CardViewer
                 key={v4()}
                 cardNumber={cardNumber}
                 expirationDate={expirationDate}
                 ownerName={ownerName}
+                companyId={selectedCardCompany}
               />
             );
           })
