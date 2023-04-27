@@ -1,4 +1,7 @@
+import type { CompanyName } from '../constants/company';
+
 export interface CardInfo {
+  company?: CompanyName;
   cardNumber1: string;
   cardNumber2: string;
   cardNumber3?: string;

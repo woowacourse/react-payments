@@ -1,7 +1,6 @@
 .container {
   width: 213px;
   height: 133px;
-  background: var(--gray-3);
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
   padding: 47px 14px 0px;
@@ -30,4 +29,37 @@
   display: flex;
   justify-content: space-between;
   font-size: 11px;
+}
+
+.container.bc {
+  background: var(--card-bc);
+}
+
+.container.shinhan {
+  background: var(--card-shinhan);
+}
+
+.container.kakaobank {
+  background: var(--card-kakaobank);
+  color: var(--text-primary);
+}
+
+.container.hyundai {
+  background: var(--card-hyundai);
+}
+
+.container.woori {
+  background: var(--card-woori);
+}
+
+.container.lotte {
+  background: var(--card-lotte);
+}
+
+.container.hana {
+  background: var(--card-hana);
+}
+
+.container.kb {
+  background: var(--card-kb);
 }
