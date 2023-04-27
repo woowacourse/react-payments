@@ -3,16 +3,29 @@ import { createContext, useMemo } from 'react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import type { CreditCard } from '../types/CreditCard';
 
-const STORAGE_KEY = 'creditCards' as const;
-
 type PaymentsContextValue = {
   creditCards: CreditCard[];
+  creditCardForm: CreditCard;
   setCreditCards: Dispatch<CreditCard[]>;
+  setCreditCardForm: Dispatch<CreditCard>;
 };
 
 export const PaymentsContext = createContext<PaymentsContextValue>({
   creditCards: [],
+  creditCardForm: {
+    cardCompany: '카드사',
+    cardNumbers: '',
+    cvc: '',
+    expirationDate: ['', ''],
+    name: '',
+    password: '',
+    nickName: '',
+  },
+
   setCreditCards: () => {
+    throw new Error('No Provider');
+  },
+  setCreditCardForm: () => {
     throw new Error('No Provider');
   },
 });
@@ -20,14 +33,17 @@ export const PaymentsContext = createContext<PaymentsContextValue>({
 export const PaymentsProvider = (props: PropsWithChildren) => {
   const { children } = props;
 
-  const { creditCards, internalSetCreditCards } = useLocalStorage(STORAGE_KEY);
+  const { creditCards, internalSetCreditCards, creditCardForm, internalSetCreditCardForm } =
+    useLocalStorage();
 
   const value = useMemo(
     () => ({
       creditCards,
       setCreditCards: internalSetCreditCards,
+      creditCardForm,
+      setCreditCardForm: internalSetCreditCardForm,
     }),
-    [creditCards],
+    [creditCards, creditCardForm],
   );
 
   return <PaymentsContext.Provider value={value}>{children}</PaymentsContext.Provider>;

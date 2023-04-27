@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useModal } from '../../hooks/useModal';
+import { usePayments } from '../../hooks/usePayments';
 import { useValidation } from '../../hooks/useValidation';
 import type { CreditCard, Month, Year } from '../../types/CreditCard';
 import {
@@ -71,14 +72,16 @@ export const NewCreditCardPage = () => {
 
   const { isModalOpen, openModal, closeModal } = useModal(true);
 
+  const { setNewCreditCard } = usePayments();
+
+  const navigate = useNavigate();
+
   const setNewCardField = <Field extends keyof CreditCard>(
     field: Field,
     value: CreditCard[Field],
   ) => {
     setNewCard({ ...newCard, [field]: value });
   };
-
-  const navigate = useNavigate();
 
   const handleCardCompanyChange = (value: CardCompanyButtonProps['cardCompany']) => {
     setNewCardField('cardCompany', value);
@@ -108,7 +111,9 @@ export const NewCreditCardPage = () => {
   const handleClickNextButton = () => {
     if (!validate(newCard)) return;
 
-    navigate('/addnickname', { state: { ...newCard } });
+    setNewCreditCard(newCard);
+
+    navigate('/addnickname');
   };
 
   return (

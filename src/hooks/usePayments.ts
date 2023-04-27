@@ -3,11 +3,16 @@ import { PaymentsContext } from '../context/PaymentsContext';
 import type { CreditCard } from '../types/CreditCard';
 
 export const usePayments = () => {
-  const { creditCards, setCreditCards } = useContext(PaymentsContext);
+  const { creditCards, setCreditCards, creditCardForm, setCreditCardForm } =
+    useContext(PaymentsContext);
 
   const addCreditCard = (newCard: CreditCard) => {
     setCreditCards([...creditCards, newCard]);
   };
 
-  return { creditCards, addCreditCard };
+  const setNewCreditCard = (newCard: CreditCard) => {
+    setCreditCardForm(newCard);
+  };
+
+  return { creditCards, addCreditCard, creditCardForm, setNewCreditCard };
 };

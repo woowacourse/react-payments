@@ -1,6 +1,6 @@
 import type { ChangeEvent } from 'react';
 import { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { usePayments } from '../../hooks/usePayments';
 import type { CreditCard } from '../../types/CreditCard';
@@ -37,11 +37,9 @@ const NextButton = styled.button`
 `;
 
 export const AddNickNamePage = () => {
-  const location = useLocation();
+  const { addCreditCard, creditCardForm } = usePayments();
 
-  const [newCard, setNewCard] = useState<CreditCard>(location.state);
-
-  const { addCreditCard } = usePayments();
+  const [newCard, setNewCard] = useState<CreditCard>(creditCardForm);
 
   const navigate = useNavigate();
 
