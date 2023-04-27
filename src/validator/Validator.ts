@@ -1,4 +1,4 @@
-import { Card, CardNumber } from "../types";
+import { CardNumber } from "../types";
 
 export const isNumeric = (value: string) => {
   const allowOnlyNumber = /^[0-9]*$/;
