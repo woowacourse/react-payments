@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import * as Type from 'types';
 
-const initCreditCardForm: Type.CreditCard = {
+export const defaultCreditCardForm: Type.CreditCard = {
   companyId: '',
   number: '',
   expiry: '',
@@ -21,7 +21,7 @@ export interface CardFormState {
 }
 
 export const CardContext = React.createContext<CardFormState>({
-  creditCardForm: initCreditCardForm,
+  creditCardForm: defaultCreditCardForm,
   setCreditCardForm: () => { },
 });
 
@@ -30,7 +30,7 @@ interface CardProviderProps {
 }
 
 function CardFormProvider({ children }: CardProviderProps) {
-  const [creditCardForm, setCreditCardForm] = useState<Type.CreditCard>(initCreditCardForm);
+  const [creditCardForm, setCreditCardForm] = useState<Type.CreditCard>(defaultCreditCardForm);
 
   const state = { creditCardForm, setCreditCardForm, };
 

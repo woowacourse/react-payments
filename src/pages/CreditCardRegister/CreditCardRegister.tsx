@@ -19,7 +19,7 @@ function CreditCardRegister() {
   const { saveCreditCard } = useCreditCardList();
   const { modalOpen, openModal, closeModal } = useModal();
 
-  const { creditCardForm, isCreditCardError } = useCreditCardForm();
+  const { creditCardForm, initCreditCardForm, isCreditCardError } = useCreditCardForm();
 
   const handleSubmit = () => {
     if (isCreditCardError) return;
@@ -29,6 +29,7 @@ function CreditCardRegister() {
   };
 
   useEffect(() => {
+    initCreditCardForm();
     openModal();
   }, []);
 
