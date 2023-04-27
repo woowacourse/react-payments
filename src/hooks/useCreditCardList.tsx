@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import * as T from 'types';
 
 interface UseCreditCard {
-  creditCardList: T.CreditCard[]
-  saveCreditCard: (creditCard: T.CreditCard) => void
+  creditCardList: T.CreditCard[];
+  saveCreditCard: (creditCard: T.CreditCard) => void;
 }
-export const useCreditCard = (): UseCreditCard => {
+
+const useCreditCardList = (): UseCreditCard => {
   const [creditCardList, setCreditCardList] = useState<T.CreditCard[]>([]);
 
   const existCreditCards = (() => JSON.parse(localStorage.getItem('creditCards') || '[]'))();
@@ -21,4 +22,4 @@ export const useCreditCard = (): UseCreditCard => {
   return { creditCardList, saveCreditCard };
 };
 
-export default {};
+export default useCreditCardList;

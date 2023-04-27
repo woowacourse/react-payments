@@ -2,7 +2,7 @@ import CreditCard from 'components/CreditCard';
 import { useNavigate } from 'react-router-dom';
 import { useContext, useEffect } from 'react';
 import * as Type from 'types';
-import { useCreditCard } from 'hooks/useCreditCard';
+import useCreditCardList from 'hooks/useCreditCardList';
 import Modal from 'components/Modal';
 import useModal from 'hooks/useModal';
 import { CardContext } from 'CardProvider';
@@ -19,7 +19,7 @@ import CreditCardCompanyInput from './inputs/CreditCardCompanyInput';
 
 function CreditCardRegister() {
   const navigate = useNavigate();
-  const { saveCreditCard } = useCreditCard();
+  const { saveCreditCard } = useCreditCardList();
   const { modalOpen, openModal, closeModal } = useModal();
 
   const { creditCard, setCreditCard } = useContext(CardContext);

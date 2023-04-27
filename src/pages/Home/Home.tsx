@@ -1,11 +1,11 @@
 import CreditCard from 'components/CreditCard';
 import { useNavigate } from 'react-router-dom';
-import { useCreditCard } from 'hooks/useCreditCard';
+import useCreditCardList from 'hooks/useCreditCardList';
 import * as S from './style';
 
 function Home() {
   const navigate = useNavigate();
-  const { creditCardList } = useCreditCard();
+  const { creditCardList } = useCreditCardList();
 
   return (
     <S.HomeLayout>
