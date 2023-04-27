@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 
 import { CardInfo } from '../../types/state';
-import { COLOR } from '../../constants/cardInfo';
 import CardInfoListContext from '../../contexts/CardInfoListContext';
 
 import * as styled from './CardList.styled';
@@ -14,7 +13,13 @@ const CardList = () => {
     return cardInfoList.map(cardInfo => {
       const key = Object.values(cardInfo.cardNumbers).join('');
 
-      return <Card key={key} cardInfo={cardInfo} theme={COLOR.GREY200} />;
+      return (
+        <Card
+          key={cardInfo.cardCompany.name + key}
+          cardInfo={cardInfo}
+          theme={cardInfo.cardCompany.theme}
+        />
+      );
     });
   };
 

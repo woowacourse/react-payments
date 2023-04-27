@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import { COLOR } from '../../constants/cardInfo';
 
-export const Card = styled.div<Record<'theme', string>>`
+export const Card = styled.div`
   position: relative;
-  width: 240px;
-  height: 150px;
+  width: 220px;
+  height: 140px;
 
-  padding: 12px 18px;
+  padding: 12px 16px;
 
   background-color: ${props => props.theme ?? COLOR.DEFAULT};
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
@@ -31,7 +31,7 @@ export const Rectangle = styled.div`
   height: 26px;
 
   position: absolute;
-  top: 58px;
+  top: 52px;
   left: 18px;
 
   background: ${COLOR.GOLD};
@@ -47,31 +47,19 @@ export const CardInformationContainer = styled.div`
 `;
 
 export const CardNumber = styled.div`
-  justify-content: space-between;
-  align-items: center;
-
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 
   letter-spacing: 0.2em;
-  height: 20px;
 
   input {
     width: 25%;
-    font-size: 14px;
-    letter-spacing: 4px;
+    font-size: 12px;
+    letter-spacing: 2px;
     color: white;
+    color: ${props => (props.theme === '#FFE600' ? COLOR.BLACK : COLOR.WHITE)};
     background-color: inherit;
     border: none;
-  }
-`;
-
-export const EllipseContainer = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-
-  & > div {
-    margin-right: 5px;
+    text-align: center;
   }
 `;
 
@@ -88,8 +76,16 @@ export const CardNameAndExpirationDateContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: end;
+
+  padding: 0 4px;
 `;
 
-export const OwnerName = styled.p``;
+export const OwnerName = styled.p`
+  width: 50%;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
 
 export const ExpirationDate = styled.p``;

@@ -4,7 +4,7 @@ import * as styled from './Card.styled';
 
 export interface CardProps {
   cardInfo: CardInfo;
-  theme: string;
+  theme: string | null;
 }
 
 const Card = ({ cardInfo, theme }: CardProps) => {
@@ -13,7 +13,7 @@ const Card = ({ cardInfo, theme }: CardProps) => {
       <styled.CardName>{cardInfo.cardCompany.name}</styled.CardName>
       <styled.Rectangle />
       <styled.CardInformationContainer>
-        <styled.CardNumber>
+        <styled.CardNumber theme={theme}>
           <input disabled defaultValue={cardInfo.cardNumbers.firstCardNumber} />
           <input disabled defaultValue={cardInfo.cardNumbers.secondCardNumber} />
           <input disabled type="password" defaultValue={cardInfo.cardNumbers.thirdCardNumber} />
