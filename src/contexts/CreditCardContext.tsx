@@ -1,6 +1,7 @@
 import { PropsWithChildren, createContext, useState } from 'react';
 import CreditCardInfo from '../@types/creditCardInfo';
 import { CardCompany } from '../@types/cardCompany';
+import useCreditCard from '../hooks/useCreditCard';
 
 const initialCreditCardInfo: CreditCardInfo = {
   cardNumber: ['', '', '', ''],
@@ -21,34 +22,10 @@ export const CreditCardContext = createContext<{
 }>({ creditCard: initialCreditCardInfo, setCreditCard: null, initCreditCard: () => {} });
 
 export const CreditCardProvider = ({ children }: PropsWithChildren) => {
-  const [creditCard, setCreditCard] = useState<CreditCardInfo>({
-    cardNumber: ['', '', '', ''],
-    expirationDate: ['', ''],
-    ownerName: '',
-    securityCode: '',
-    password: ['', ''],
-    cardCompany: 'hyundai' as CardCompany,
-    cardAlias: '',
-  });
-
-  const setCreditCardBy = <T extends keyof CreditCardInfo>(
-    target: T,
-    newValue: CreditCardInfo[T]
-  ) => {
-    setCreditCard((prev) => ({
-      ...prev,
-      [target]: newValue,
-    }));
-  };
-
-  const initCreditCard = () => {
-    setCreditCard(initialCreditCardInfo);
-  };
+  const { creditCard, setCreditCard, initCreditCard } = useCreditCard(initialCreditCardInfo);
 
   return (
-    <CreditCardContext.Provider
-      value={{ creditCard, setCreditCard: setCreditCardBy, initCreditCard }}
-    >
+    <CreditCardContext.Provider value={{ creditCard, setCreditCard, initCreditCard }}>
       {children}
     </CreditCardContext.Provider>
   );
