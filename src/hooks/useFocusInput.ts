@@ -24,23 +24,29 @@ export const useFocusInput = (formRef: RefObject<HTMLFormElement>) => {
     if (!isValueMaxLength) return;
 
     if (isNumberRequirement || isTextRequirement) {
-      setNextInput(event);
+      setNextInput();
     }
   };
 
-  const setNextInput = (event: KeyboardEvent<HTMLFormElement>) => {
+  const setNextInput = () => {
     if (!formRef.current) return;
-    const form = event.currentTarget;
-    const currentInputIndex = Array.prototype.indexOf.call(form, event.target);
+    const form = formRef.current;
+    const active = document.activeElement as HTMLInputElement;
+    const currentInputIndex = Array.prototype.indexOf.call(form, active);
+
     const totalLength = formRef.current.length;
 
     for (let index = currentInputIndex + 1; index < totalLength; index += 1) {
       const currentInput = formRef.current[index] as HTMLInputElement;
 
-      if (currentInput.tabIndex === TAB_INDEX_INFO.dismiss) {
+      const { maxLength, value, tabIndex } = currentInput;
+
+      if (tabIndex === TAB_INDEX_INFO.dismiss) {
         continue;
       }
-
+      if (maxLength === value.length) {
+        continue;
+      }
       setTimeout(() => {
         currentInput.focus();
       });
@@ -48,5 +54,5 @@ export const useFocusInput = (formRef: RefObject<HTMLFormElement>) => {
     }
   };
 
-  return { onInputKeydown };
+  return { onInputKeydown, setNextInput };
 };

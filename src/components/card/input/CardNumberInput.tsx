@@ -29,7 +29,6 @@ export default function CardNumberInput({
           type="text"
           required
           textAlign="center"
-          autoFocus
           placeholder="0000"
           autoComplete="off"
           tabIndex={addCardPage.firstCardNumber}

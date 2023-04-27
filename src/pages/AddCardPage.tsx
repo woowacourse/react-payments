@@ -40,7 +40,7 @@ export default function AddCardPage({
   setPage,
 }: AddCardPageProps) {
   const cardForm = useRef<HTMLFormElement>(null);
-  const { onInputKeydown } = useFocusInput(cardForm);
+  const { onInputKeydown, setNextInput } = useFocusInput(cardForm);
   const { formInputs } = useFormInputs();
   const [isRegister, setIsRegister] = useState(false);
   const [bank, setBank] = useHideScrollState<BankType>('default', (value) => {
@@ -48,6 +48,7 @@ export default function AddCardPage({
   });
 
   const onBankHanlder = (value: BankType) => {
+    setNextInput();
     setBank(value);
   };
 
