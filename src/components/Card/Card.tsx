@@ -1,5 +1,6 @@
 import * as Styled from './Card.styles';
 import CardType from '../../types/Card';
+import CardLabel from '../@common/CardLabel';
 
 type CardProps = Omit<CardType, 'id'> & {
   setIsModalOpen?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -34,6 +35,7 @@ const Card = ({
         setIsModalOpen && setIsModalOpen(true);
       }}
     >
+      <CardLabel labelText={cardCompany} />
       <Styled.ChipWrapper>
         <Styled.Chip />
         <Styled.TextWrapper>
