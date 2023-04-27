@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { CardViewer } from './CardViewer';
 import { CardNumberInput } from './input/CardNumberInput';
 import { ExpirationDateInput } from './input/ExpirationDateInput';
@@ -9,15 +9,19 @@ import { SecurityCodeInput } from './input/SecurityCodeInput';
 import { PasswordInput } from './input/PasswordInput';
 import { cardDataService } from '../domains/cardDataService';
 import { useCardRegisterForm } from '../hooks/useCardRegisterForm';
+import { CardSelectModal } from './Modal/CardSelect/CardSelectModal';
 
 export function CardRegisterForm() {
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const {
+    cardCompany,
     cardNumber,
     expirationDate,
     ownerName,
     securityCode,
     password,
+    setCardCompany,
     setCardNumber,
     setExpirationDate,
     setOwnerName,
@@ -35,6 +39,7 @@ export function CardRegisterForm() {
     e.preventDefault();
 
     cardDataService.addNewCard({
+      cardCompany,
       cardNumber,
       expirationDate,
       ownerName,
@@ -61,9 +66,26 @@ export function CardRegisterForm() {
     passwordInputRef.current?.focus();
   };
 
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
   return (
     <Style.Wrapper onSubmit={handleCardInfoSubmit}>
-      <CardViewer cardNumber={cardNumber} expirationDate={expirationDate} ownerName={ownerName} />
+      <CardSelectModal
+        isOpen={isModalOpen}
+        setIsOpen={setIsModalOpen}
+        setCardCompany={setCardCompany}
+      />
+      <Style.CardCompanySelectButton type={'button'} onClick={openModal}>
+        <CardViewer
+          cardCompany={cardCompany}
+          cardNumber={cardNumber}
+          expirationDate={expirationDate}
+          ownerName={ownerName}
+        />
+        카드사를 선택해주세요.
+      </Style.CardCompanySelectButton>
       <Style.InputContainer>
         <CardNumberInput
           moveFocusToExpirationDate={moveFocusToExpirationDate}
@@ -110,6 +132,22 @@ const Style = {
     width: max-content;
 
     gap: 19px;
+  `,
+
+  CardCompanySelectButton: styled.button`
+    all: unset;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    color: #9a9a9a;
+
+    cursor: pointer;
+    &:hover {
+      transition: all 0.2s linear;
+      transform: scale(1.01);
+    }
   `,
 
   InputContainer: styled.div`

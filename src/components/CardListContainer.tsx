@@ -12,10 +12,12 @@ export function CardListContainer() {
       {!cardList.length && <Style.Caption>새로운 카드를 등록해주세요.</Style.Caption>}
       <Style.CardListWrapper>
         {cardList.map((card, index) => {
-          const { cardNumber, expirationDate, ownerName } = card;
+          const { cardCompany, cardNumber, expirationDate, ownerName } = card;
+
           return (
             <CardViewer
               key={`${cardNumber}${index}`}
+              cardCompany={cardCompany}
               cardNumber={cardNumber}
               expirationDate={expirationDate}
               ownerName={ownerName}

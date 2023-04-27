@@ -6,8 +6,10 @@ import {
   isValidPassword,
   isValidSecurityCode,
 } from '../cardInputValidator';
+import { CardCompany } from '../types';
 
 export const useCardRegisterForm = () => {
+  const [cardCompany, setCardCompany] = useState<CardCompany>('현대카드');
   const [cardNumber, setCardNumber] = useState(['', '', '', '']);
   const [expirationDate, setExpirationDate] = useState({ month: '', year: '' });
   const [ownerName, setOwnerName] = useState('');
@@ -22,11 +24,13 @@ export const useCardRegisterForm = () => {
     isValidPassword(password);
 
   return {
+    cardCompany,
     cardNumber,
     expirationDate,
     ownerName,
     securityCode,
     password,
+    setCardCompany,
     setCardNumber,
     setExpirationDate,
     setOwnerName,

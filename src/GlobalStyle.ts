@@ -19,6 +19,10 @@ const GlobalStyle = createGlobalStyle`
   body {
     background-color: white;
   }
+
+  body:has(dialog[open]) {
+    overflow: hidden;
+  }
 `;
 
 export default GlobalStyle;

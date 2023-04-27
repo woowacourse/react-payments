@@ -1,14 +1,22 @@
 import styled from 'styled-components';
-import { CardNumber, ExpirationDate, OwnerName } from '../types';
-import { DATE_TEXT, OWNER_NAME_TEXT, PASSWORD_START_INDEX, PASSWORD_TEXT } from '../constants';
+import { CardCompany, CardNumber, ExpirationDate, OwnerName } from '../types';
+import {
+  CARD_COMPANY,
+  CARD_COMPANY_KEY,
+  DATE_TEXT,
+  OWNER_NAME_TEXT,
+  PASSWORD_START_INDEX,
+  PASSWORD_TEXT,
+} from '../constants';
 
 interface Props {
+  cardCompany: CardCompany;
   cardNumber: CardNumber;
   expirationDate: ExpirationDate;
   ownerName: OwnerName;
 }
 
-export function CardViewer({ cardNumber, expirationDate, ownerName }: Props) {
+export function CardViewer({ cardCompany, cardNumber, expirationDate, ownerName }: Props) {
   const changeCardNumberFormat = (rawCardNumbers: string[]) => {
     const cardNumbersFormat = rawCardNumbers.map((rawCardNumber, index) =>
       index < PASSWORD_START_INDEX ? rawCardNumber : PASSWORD_TEXT.repeat(rawCardNumber.length),
@@ -22,7 +30,7 @@ export function CardViewer({ cardNumber, expirationDate, ownerName }: Props) {
 
     return `${month}/${year}`;
   };
-
+  const cardColor = CARD_COMPANY[CARD_COMPANY_KEY[cardCompany]].color;
   const ownerNameFormat = ownerName.length ? ownerName : OWNER_NAME_TEXT;
   const cardNumbersFormat = changeCardNumberFormat(cardNumber);
   const expirationDateFormat = changeExpirationDateFormat(
@@ -31,7 +39,8 @@ export function CardViewer({ cardNumber, expirationDate, ownerName }: Props) {
   );
 
   return (
-    <Style.Wrapper>
+    <Style.Wrapper cardColor={cardColor}>
+      <Style.CardCompany>{cardCompany}</Style.CardCompany>
       <Style.ICChip />
       <Style.CardNumberContainer>
         {cardNumbersFormat.map((cardNumber, index) => (
@@ -49,7 +58,7 @@ export function CardViewer({ cardNumber, expirationDate, ownerName }: Props) {
 }
 
 const Style = {
-  Wrapper: styled.div`
+  Wrapper: styled.div<{ cardColor: string }>`
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -62,11 +71,21 @@ const Style = {
     padding: 14px;
     border: none;
     border-radius: 5px;
-    background-color: #333333;
+    background-color: ${(props) => props.cardColor};
+
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
 
     font-size: 14px;
     color: white;
+  `,
+
+  CardCompany: styled.h2`
+    position: absolute;
+    top: 15px;
+    left: 15px;
+
+    font-size: 14px;
+    font-weight: 500;
   `,
 
   ICChip: styled.div`

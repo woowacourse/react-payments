@@ -47,5 +47,10 @@
   - [x] 숫자가 아닌 경우 에러 발생
   - [x] `type="password"`로 지정
 - [x] 다음 버튼 컴포넌트 (그냥 styled component로 대체 가능)
+- [x] CardSelectModal 컴포넌트
+  - [x] UI
+  - [x] 닫기 버튼 클릭으로 닫기
+  - [x] ESC키로 닫기
+  - [x] 배경 클릭으로 닫기
 
 <br/>
