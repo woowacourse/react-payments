@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Card from '../components/Card';
+import CardSelectModal from '../components/CardSelectModal';
 import FormCardAdd from '../components/FormCardAdd';
 import Header from '../components/Header';
 import useInput from '../hooks/useInput';
@@ -19,7 +20,8 @@ import './AddCardPage.css';
 
 const AddCardPage = () => {
   const navigate = useNavigate();
-  const [cardType] = useState('');
+  const [cardType, setCardType] = useState('');
+  const [modalOpen, setModalOpen] = useState(true);
 
   const [cardNumber, onChangeCardNumber] = usePasswordInput<CardNumber>({
     first: '',
@@ -50,25 +52,34 @@ const AddCardPage = () => {
   };
 
   return (
-    <div className="add-card-page">
-      <Header headerTitle="뒤로가기" clickHandler={onBackButtonClick} />
-      <section className="add-card-page-body">
-        <Card
-          cardType={cardType}
-          cardNumber={cardNumber}
-          cardOwner={cardOwner.value}
-          expired={cardExpire.value}
-        />
-        <FormCardAdd
-          cardNumber={cardNumberProps}
-          cardExpire={cardExpire}
-          cardOwner={cardOwner}
-          securityCode={securityCode}
-          cardPassword1={cardPassword1}
-          cardPassword2={cardPassword2}
-        />
-      </section>
-    </div>
+    <>
+      <div className="add-card-page">
+        <Header headerTitle="뒤로가기" clickHandler={onBackButtonClick} />
+        <section className="add-card-page-body">
+          <Card
+            cardType={cardType}
+            cardNumber={cardNumber}
+            cardOwner={cardOwner.value}
+            expired={cardExpire.value}
+            openCardSelectModal={setModalOpen}
+          />
+          <FormCardAdd
+            cardType={cardType}
+            cardNumber={cardNumberProps}
+            cardExpire={cardExpire}
+            cardOwner={cardOwner}
+            securityCode={securityCode}
+            cardPassword1={cardPassword1}
+            cardPassword2={cardPassword2}
+          />
+        </section>
+      </div>
+      {modalOpen ? (
+        <CardSelectModal determineCardType={setCardType} closeModal={setModalOpen} />
+      ) : (
+        ''
+      )}
+    </>
   );
 };
 
