@@ -1,3 +1,12 @@
+import BC from "../src/asset/bc_logo.svg"
+import HYUNDAI from "../src/asset/hyundai_logo.svg"
+import HANA from "../src/asset/hana_logo.svg"
+import KAKAO from "../src/asset/kakao_logo.svg"
+import KOOKMIN from "../src/asset/kookmin_logo.svg"
+import LOTTE from "../src/asset/lotte_logo.svg"
+import SINHAN from "../src/asset/sinhan_logo.svg"
+import WOORI from "../src/asset/woori_logo.svg"
+
 export const LOCAL_STORAGE_CARD_KEY = "cardList";
 
 interface ErrorMessage {
@@ -26,3 +35,65 @@ export const REGEX_PATTERN = {
   OWNER: "^[a-zA-Z]{0,30}$",
   PASSWORD: "^[0-9]$"
 }
+
+export interface CardCompanyData {
+  src: string;
+  title: string;
+  color: string;
+  backgroundColor: string;
+}
+
+type CardCompanys = {
+  [key: string]: CardCompanyData
+};
+
+export const CARD_COMPANYS: CardCompanys = {
+  BC: {
+    src: BC,
+    title: 'BC카드',
+    color: '#FFF',
+    backgroundColor: '#333',
+  },
+  HYUNDAI: {
+    src: HYUNDAI,
+    title: '현대카드',
+    color: '#FFF',
+    backgroundColor: '#333',
+  },
+  HANA: {
+    src: HANA,
+    title: '하나카드',
+    color: '#FFF',
+    backgroundColor: '#333',
+  },
+  KAKAO: {
+    src: KAKAO,
+    title: '카카오뱅크',
+    color: '#FFF',
+    backgroundColor: '#333',
+  },
+  KOOKMIN: {
+    src: KOOKMIN,
+    title: '국민카드',
+    color: '#FFF',
+    backgroundColor: '#333',
+  },
+  LOTTE: {
+    src: LOTTE,
+    title: '롯데카드',
+    color: '#FFF',
+    backgroundColor: '#333',
+  },
+  SINHAN: {
+    src: SINHAN,
+    title: '신한카드',
+    color: '#FFF',
+    backgroundColor: '#333',
+  },
+  WOORI: {
+    src: WOORI,
+    title: '우리카드',
+    color: '#FFF',
+    backgroundColor: '#333',
+  }
+};
