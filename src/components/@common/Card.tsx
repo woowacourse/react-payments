@@ -9,7 +9,7 @@ interface CardProps extends CardContainerProps {
   cardNumber: string[];
   ownerName: string;
   expirationDate: string[];
-  onClick: React.MouseEventHandler<HTMLDivElement>;
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
   cardCompany: string;
   cardColor: string;
 }

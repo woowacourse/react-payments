@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 
 import { Form, useNavigate } from 'react-router-dom';
-import useCardList from '../../../hooks/useCardList';
 import { CardNumber } from '../cardNumber/CardNumber';
 import ExpireDate from '../expireDate/ExpireDate';
 import OwnerNameInput from '../ownerNameInput/OwnerName';
@@ -12,22 +11,21 @@ import { NextButton } from './CardRegisterForm.style';
 
 function CardRegisterForm() {
   const navigation = useNavigate();
-  const creditCardInfo = useContext(CreditCardContext)[0];
-
-  const { saveCard } = useCardList({ key: 'card-list' });
-  const { cardNumber, expirationDate, securityCode, password } = creditCardInfo;
+  const { creditCard } = useContext(CreditCardContext);
+  const { cardNumber, securityCode, password, expirationDate } = creditCard;
 
   const hasShowButton =
     cardNumber.join('').length === 16 &&
-    /^(0[1-9]|1[0-2])$/.test(expirationDate[0]) &&
+    /^(0[1-9]|1[0-2]|2[0-9]|3[0-1])$/.test(expirationDate[0]) &&
     /^\d{2}$/.test(expirationDate[1]) &&
     securityCode.length === 3 &&
     password.join('').length === 2;
 
+  console.log('>>> hasShowButton:', hasShowButton);
   const _onSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
-    saveCard(creditCardInfo);
-    navigation('/');
+    // TODO: 검증
+    navigation('/register-success');
   };
 
   return (

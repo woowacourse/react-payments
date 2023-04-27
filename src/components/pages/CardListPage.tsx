@@ -6,25 +6,27 @@ import useCardList from '../../hooks/useCardList';
 import Card from '../@common/Card';
 import { COLOR_BY_CARD_COMPANY, KOR_NAME_BY_CARD_COMPANY } from '../../@types/cardCompany';
 
-function CardList() {
+function CardListPage() {
   const navigation = useNavigate();
   const { cardList } = useCardList({ key: 'card-list' });
 
   const cardLists = useMemo(() => {
     return cardList.length ? (
-      cardList.map(({ cardNumber, ownerName, expirationDate, cardCompany }) => {
+      cardList.map(({ cardNumber, ownerName, expirationDate, cardCompany, cardAlias }) => {
         const companyName = KOR_NAME_BY_CARD_COMPANY[cardCompany];
         const cardColor = COLOR_BY_CARD_COMPANY[cardCompany];
         return (
-          <Card
-            onClick={() => {}}
-            key={`card-list-${ownerName}-${expirationDate}-${cardCompany}`}
-            cardNumber={cardNumber}
-            ownerName={ownerName}
-            expirationDate={expirationDate}
-            cardCompany={companyName}
-            cardColor={cardColor}
-          />
+          <div key={`card-list-${ownerName}-${expirationDate}-${cardCompany}`}>
+            <Card
+              onClick={() => {}}
+              cardNumber={cardNumber}
+              ownerName={ownerName}
+              expirationDate={expirationDate}
+              cardCompany={companyName}
+              cardColor={cardColor}
+            />
+            <p>{cardAlias}</p>
+          </div>
         );
       })
     ) : (
@@ -47,7 +49,7 @@ function CardList() {
   );
 }
 
-export default CardList;
+export default CardListPage;
 
 const CardListSection = styled.section`
   display: flex;

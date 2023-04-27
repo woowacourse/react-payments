@@ -14,7 +14,7 @@ function CardPassword() {
     isValid: true,
     message: '',
   });
-  const [creditCardInfo, setCreditCardInfo] = useContext(CreditCardContext);
+  const { creditCard, setCreditCard } = useContext(CreditCardContext);
 
   const refs = [useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null)];
 
@@ -36,17 +36,17 @@ function CardPassword() {
       return;
     }
 
-    if (!setCreditCardInfo) return;
+    if (!setCreditCard) return;
 
     setValidationStatus({
       isValid: true,
       message: '',
     });
 
-    const newValue = [...creditCardInfo.password];
+    const newValue = [...creditCard.password];
     newValue[inputIndex] = enteredPassword;
 
-    setCreditCardInfo('password', newValue);
+    setCreditCard('password', newValue);
     focusNext(Number(inputIndex));
   };
 
@@ -67,7 +67,7 @@ function CardPassword() {
       <PasswordInputContainer>
         <Input
           data-idx="0"
-          value={creditCardInfo.password[0]}
+          value={creditCard.password[0]}
           onChange={_onChange}
           onBlur={_onBlur}
           maxLength={1}
@@ -78,7 +78,7 @@ function CardPassword() {
         />
         <Input
           data-idx="1"
-          value={creditCardInfo.password[1]}
+          value={creditCard.password[1]}
           onChange={_onChange}
           onBlur={_onBlur}
           maxLength={1}

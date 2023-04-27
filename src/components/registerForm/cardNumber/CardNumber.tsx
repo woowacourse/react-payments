@@ -9,7 +9,8 @@ import InputWrapper from '../../@common/InputWrapper';
 import CardNumberInputContainer from './CardNumber.style';
 
 export const CardNumber = () => {
-  const [creditCardInfo, setCreditCardInfo] = useContext(CreditCardContext);
+  const { creditCard, setCreditCard } = useContext(CreditCardContext);
+
   const [validStatus, setValidStatus] = useState({
     isValid: false,
     message: '',
@@ -27,31 +28,31 @@ export const CardNumber = () => {
     maxLength: 4,
   });
 
-  const _onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    const enteredNumber = event.currentTarget.value as string;
-    const inputIndex = Number(event.currentTarget.dataset['index']);
+  const generateChangeHandler: (index: number) => React.ChangeEventHandler<HTMLInputElement> =
+    (index) => (event) => {
+      const enteredNumber = event.currentTarget.value as string;
 
-    if (isNaN(Number(enteredNumber))) {
+      if (isNaN(Number(enteredNumber))) {
+        setValidStatus({
+          isValid: false,
+          message: '숫자만 입력 가능합니다.',
+        });
+
+        return;
+      }
+
+      const newCardNumber = [...creditCard.cardNumber];
+      newCardNumber[index] = enteredNumber;
+
+      if (!setCreditCard) return;
+
+      setCreditCard('cardNumber', newCardNumber);
       setValidStatus({
-        isValid: false,
-        message: '숫자만 입력 가능합니다.',
+        isValid: true,
+        message: '',
       });
-
-      return;
-    }
-
-    const newCardNumber = [...creditCardInfo.cardNumber];
-    newCardNumber[inputIndex] = enteredNumber;
-
-    if (!setCreditCardInfo) return;
-
-    setCreditCardInfo('cardNumber', newCardNumber);
-    setValidStatus({
-      isValid: true,
-      message: '',
-    });
-    focusNext(inputIndex);
-  };
+      focusNext(index);
+    };
 
   const _onBlur: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     const enteredNumber = event.currentTarget.value as string;
@@ -80,9 +81,8 @@ export const CardNumber = () => {
       <FormLabel>카드 번호</FormLabel>
       <CardNumberInputContainer>
         <Input
-          data-index="0"
-          value={creditCardInfo.cardNumber[0]}
-          onChange={_onChange}
+          value={creditCard.cardNumber[0]}
+          onChange={generateChangeHandler(0)}
           onBlur={_onBlur}
           maxLength={4}
           inputMode="numeric"
@@ -90,9 +90,8 @@ export const CardNumber = () => {
         />
 
         <Input
-          data-index="1"
-          value={creditCardInfo.cardNumber[1]}
-          onChange={_onChange}
+          value={creditCard.cardNumber[1]}
+          onChange={generateChangeHandler(1)}
           onBlur={_onBlur}
           maxLength={4}
           inputMode="numeric"
@@ -100,9 +99,8 @@ export const CardNumber = () => {
         />
 
         <Input
-          data-index="2"
-          value={creditCardInfo.cardNumber[2]}
-          onChange={_onChange}
+          value={creditCard.cardNumber[2]}
+          onChange={generateChangeHandler(2)}
           onBlur={_onBlur}
           maxLength={4}
           inputMode="numeric"
@@ -113,9 +111,8 @@ export const CardNumber = () => {
         />
 
         <Input
-          data-index="3"
-          value={creditCardInfo.cardNumber[3]}
-          onChange={_onChange}
+          value={creditCard.cardNumber[3]}
+          onChange={generateChangeHandler(3)}
           onBlur={_onBlurLast}
           maxLength={4}
           inputMode="numeric"

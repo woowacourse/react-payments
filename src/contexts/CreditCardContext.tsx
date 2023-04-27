@@ -2,26 +2,26 @@ import { PropsWithChildren, createContext, useState } from 'react';
 import CreditCardInfo from '../@types/creditCardInfo';
 import { CardCompany } from '../@types/cardCompany';
 
-export const CreditCardContext = createContext<
-  [
-    CreditCardInfo,
-    (<T extends keyof CreditCardInfo>(target: T, newValue: CreditCardInfo[T]) => void) | null
-  ]
->([
-  {
-    cardNumber: ['', '', '', ''],
-    expirationDate: ['', ''],
-    ownerName: '',
-    securityCode: '',
-    password: ['', ''],
-    cardCompany: 'hyundai' as CardCompany,
-    cardAlias: '',
-  },
-  null,
-]);
+const initialCreditCardInfo: CreditCardInfo = {
+  cardNumber: ['', '', '', ''],
+  expirationDate: ['', ''],
+  ownerName: '',
+  securityCode: '',
+  password: ['', ''],
+  cardCompany: 'hyundai' as CardCompany,
+  cardAlias: '',
+};
+
+export const CreditCardContext = createContext<{
+  creditCard: CreditCardInfo;
+  setCreditCard:
+    | (<T extends keyof CreditCardInfo>(target: T, newValue: CreditCardInfo[T]) => void)
+    | null;
+  initCreditCard: () => void;
+}>({ creditCard: initialCreditCardInfo, setCreditCard: null, initCreditCard: () => {} });
 
 export const CreditCardProvider = ({ children }: PropsWithChildren) => {
-  const [creditCardInfo, setCreditCardInfo] = useState<CreditCardInfo>({
+  const [creditCard, setCreditCard] = useState<CreditCardInfo>({
     cardNumber: ['', '', '', ''],
     expirationDate: ['', ''],
     ownerName: '',
@@ -31,18 +31,24 @@ export const CreditCardProvider = ({ children }: PropsWithChildren) => {
     cardAlias: '',
   });
 
-  const setCreditCard = <T extends keyof CreditCardInfo>(
+  const setCreditCardBy = <T extends keyof CreditCardInfo>(
     target: T,
     newValue: CreditCardInfo[T]
   ) => {
-    setCreditCardInfo((prev) => ({
+    setCreditCard((prev) => ({
       ...prev,
       [target]: newValue,
     }));
   };
 
+  const initCreditCard = () => {
+    setCreditCard(initialCreditCardInfo);
+  };
+
   return (
-    <CreditCardContext.Provider value={[creditCardInfo, setCreditCard]}>
+    <CreditCardContext.Provider
+      value={{ creditCard, setCreditCard: setCreditCardBy, initCreditCard }}
+    >
       {children}
     </CreditCardContext.Provider>
   );

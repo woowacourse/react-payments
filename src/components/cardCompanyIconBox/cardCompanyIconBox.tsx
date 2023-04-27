@@ -14,13 +14,13 @@ type Props = {
 
 const BankIconBox = ({ cardCompany, onClose }: Props) => {
   const KoreanName = KOR_NAME_BY_CARD_COMPANY[cardCompany];
-  const setCreditCardInfo = useContext(CreditCardContext)[1];
+  const { setCreditCard } = useContext(CreditCardContext);
 
   const handleClickImage: React.MouseEventHandler<HTMLImageElement> = (event) => {
     const company = event.currentTarget?.dataset['company'] as CardCompany;
 
-    if (!setCreditCardInfo) return;
-    setCreditCardInfo('cardCompany', company);
+    if (!setCreditCard) return;
+    setCreditCard('cardCompany', company);
     onClose();
   };
 

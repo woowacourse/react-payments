@@ -8,7 +8,8 @@ import { ONLY_NUMBER_OR_SLASH_REGEX } from '../../../utils/regexp';
 import InputWrapper from '../../@common/InputWrapper';
 
 function ExpireDate() {
-  const [creditCardInfo, setCreditCardInfo] = useContext(CreditCardContext);
+  const { creditCard, setCreditCard } = useContext(CreditCardContext);
+
   const [validStatus, setValidStatus] = useState({
     isValid: true,
     message: '',
@@ -37,14 +38,14 @@ function ExpireDate() {
       return;
     }
 
-    if (!setCreditCardInfo) return;
+    if (!setCreditCard) return;
 
     setValidStatus({
       isValid: true,
       message: '',
     });
 
-    setCreditCardInfo('expirationDate', enteredDate.split('/') as [string, string]);
+    setCreditCard('expirationDate', enteredDate.split('/') as [string, string]);
   };
 
   const refineExpirationDate = ([month, year]: string[]): string => {
@@ -73,7 +74,7 @@ function ExpireDate() {
     <InputWrapper>
       <FormLabel>{'만료일'}</FormLabel>
       <Input
-        value={refineExpirationDate(creditCardInfo.expirationDate)}
+        value={refineExpirationDate(creditCard.expirationDate)}
         onChange={_onChange}
         onBlur={_onBlur}
         maxLength={5}

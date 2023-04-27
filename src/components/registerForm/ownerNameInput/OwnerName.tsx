@@ -9,7 +9,7 @@ import InputWrapper from '../../@common/InputWrapper';
 import LabelContainer from './OwnerName.style';
 
 function OwnerNameInput() {
-  const [creditCardInfo, setCreditCardInfo] = useContext(CreditCardContext);
+  const { creditCard, setCreditCard } = useContext(CreditCardContext);
 
   const [validationStatus, setValidationStatus] = useState({
     isValid: true,
@@ -53,24 +53,24 @@ function OwnerNameInput() {
       return;
     }
 
-    if (!setCreditCardInfo) return;
+    if (!setCreditCard) return;
 
     setValidationStatus({
       isValid: true,
       message: '',
     });
 
-    setCreditCardInfo('ownerName', enteredName);
+    setCreditCard('ownerName', enteredName);
   };
 
   return (
     <InputWrapper>
       <LabelContainer>
         <FormLabel>카드 소유자 이름(선택)</FormLabel>
-        <span>{`${creditCardInfo.ownerName.length} / 30`}</span>
+        <span>{`${creditCard.ownerName.length} / 30`}</span>
       </LabelContainer>
       <Input
-        value={creditCardInfo.ownerName}
+        value={creditCard.ownerName}
         onChange={_onChange}
         font-weight="500"
         letter-spacing="1px"

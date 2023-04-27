@@ -9,7 +9,8 @@ import useBottomModal from '../../hooks/useBottomModal';
 
 function RegisterPage() {
   const { BottomModal, closeModal, openModal } = useBottomModal(true);
-  const { cardNumber, ownerName, expirationDate, cardCompany } = useContext(CreditCardContext)[0];
+  const { creditCard } = useContext(CreditCardContext);
+  const { cardNumber, cardCompany, ownerName, expirationDate } = creditCard;
 
   return (
     <>

@@ -8,7 +8,7 @@ import ErrorSpan from '../../@common/ErrorSpan';
 import InputWrapper from '../../@common/InputWrapper';
 
 function SecurityCode() {
-  const [creditCardInfo, setCreditCard] = useContext(CreditCardContext);
+  const { creditCard, setCreditCard } = useContext(CreditCardContext);
   const [validStatus, setValidStatus] = useState({
     isValid: true,
     message: '',
@@ -53,7 +53,7 @@ function SecurityCode() {
     <InputWrapper>
       <FormLabel>{'보안 코드(CVC/CVV)'}</FormLabel>
       <Input
-        value={creditCardInfo.securityCode}
+        value={creditCard.securityCode}
         onChange={_onChange}
         onBlur={_onBlur}
         maxLength={3}
