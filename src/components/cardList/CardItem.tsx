@@ -21,6 +21,7 @@ export const CardItem = ({ card }: CardProps) => {
   return (
     <Card backgroundColor={card.color}>
       <Container>
+        <Company>{card.company}</Company>
         <IcChip />
         <CardNumbers>{hideNumbers(card.numbers)}</CardNumbers>
         <InfoWrapper>
@@ -43,6 +44,11 @@ const Container = styled.div`
   font-size: 10px;
   font-weight: 600;
   gap: 6px;
+`;
+
+const Company = styled.div`
+  color: white;
+  height: 25px;
 `;
 
 const IcChip = styled.div`

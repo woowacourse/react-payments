@@ -51,6 +51,7 @@ export const CardForm = ({ setCardInfo }: CardFormProps) => {
       CVC: Number(data.cvc),
       password: [String(data.password1), String(data.password2)],
       color: "#de75d0",
+      company: "temp",
     };
 
     if (isInputValid()) {

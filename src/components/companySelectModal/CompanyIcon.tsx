@@ -14,7 +14,7 @@ export const CompanyIcon = ({ companyName, imgSrc }: CompanyProps) => {
   );
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.button`
   display: flex;
   flex-direction: column;
   width: 60px;

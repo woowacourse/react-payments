@@ -5,6 +5,7 @@ import { CardType } from "../types/card";
 import styled from "styled-components";
 import { CardForm } from "../components/cardForm";
 import { Link } from "react-router-dom";
+import { CompanySelectModal } from "../components/companySelectModal";
 
 const initialCard = {
   id: "demoCard",
@@ -14,10 +15,12 @@ const initialCard = {
   color: "#e07171",
   CVC: 0,
   password: [],
+  company: "hjh",
 };
 
 export const AddCard = () => {
   const [newCard, setNewCard] = useState<CardType>(initialCard);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <>
@@ -30,6 +33,7 @@ export const AddCard = () => {
         <CardItem card={newCard} />
         <CardForm setCardInfo={setNewCard} />
       </Main>
+      {isModalOpen && <CompanySelectModal />}
     </>
   );
 };
