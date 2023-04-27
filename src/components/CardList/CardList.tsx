@@ -14,7 +14,7 @@ const CardList = () => {
     return cardInfoList.map(cardInfo => {
       const key = Object.values(cardInfo.cardNumbers).join('');
 
-      return <Card key={key} cardInfo={cardInfo} bgColor={COLOR.GREY200} />;
+      return <Card key={key} cardInfo={cardInfo} theme={COLOR.GREY200} />;
     });
   };
 

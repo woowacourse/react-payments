@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const CardCompany = styled.li`
+export const CardCompanyButton = styled.li`
   display: flex;
   flex-direction: column;
   justify-content: center;

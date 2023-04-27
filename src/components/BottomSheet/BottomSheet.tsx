@@ -1,16 +1,8 @@
 import { ReactNode } from 'react';
 
-import { setCardCompany } from '../../types/state';
-
 import * as styled from './BottomSheet.styled';
 
-const BottomSheet = ({
-  CardCompanyContents,
-  setCardCompany,
-}: {
-  CardCompanyContents: ReactNode;
-  setCardCompany: setCardCompany;
-}) => {
+const BottomSheet = ({ CardCompanyContents }: { CardCompanyContents: ReactNode }) => {
   return (
     <styled.BottomSheet>
       <styled.Backdrop />

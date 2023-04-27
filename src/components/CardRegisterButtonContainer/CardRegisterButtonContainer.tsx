@@ -11,7 +11,7 @@ const CardRegisterButtonContainer = () => {
   return (
     <styled.CardRegisterButtonContainer>
       <styled.CardRegisterMessage>새로운 카드를 등록해 주세요</styled.CardRegisterMessage>
-      <styled.CardRegisterButton bgColor={COLOR.DEFAULT} onClick={handleClick}>
+      <styled.CardRegisterButton theme={COLOR.DEFAULT} onClick={handleClick}>
         <styled.ButtonIcon>+</styled.ButtonIcon>
       </styled.CardRegisterButton>
     </styled.CardRegisterButtonContainer>

@@ -1,17 +1,21 @@
+import { setCardCompany } from '../../types/state';
 import { CARD_COMPANY_INFO } from '../../constants/cardCompany';
 
 import * as styled from './CardCompanyContents.styled';
-import CardCompany from '../CardCompany/CardCompany';
+import CardCompanyButton from '../CardCompanyButton/CardCompanyButton';
 
-const CardCompanyContents = () => {
+const CardCompanyContents = ({ setCardCompany }: { setCardCompany: setCardCompany }) => {
   const generateCardCompanyList = () => {
-    const cardCompanyList = Object.entries(CARD_COMPANY_INFO);
-
-    return cardCompanyList.map(info => {
-      const name = info[0];
-      const Logo = info[1].LOGO;
-
-      return <CardCompany key={name} CardLogo={<Logo />} cardName={name} />;
+    return CARD_COMPANY_INFO.map(companyInfo => {
+      return (
+        <CardCompanyButton
+          key={companyInfo.NAME}
+          Logo={<companyInfo.LOGO />}
+          name={companyInfo.NAME}
+          theme={companyInfo.THEME}
+          setCardCompany={setCardCompany}
+        />
+      );
     });
   };
 

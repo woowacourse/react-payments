@@ -1,18 +1,20 @@
 import styled from 'styled-components';
 import { COLOR } from '../../constants/cardInfo';
 
-export const Card = styled.div<Record<'bgColor', string>>`
+export const Card = styled.div<Record<'theme', string>>`
   position: relative;
   width: 240px;
   height: 150px;
 
   padding: 12px 18px;
 
-  background-color: ${props => props.bgColor ?? COLOR.DEFAULT};
+  background-color: ${props => props.theme ?? COLOR.DEFAULT};
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
 
-  color: ${COLOR.WHITE};
+  color: ${props => (props.theme === '#FFE600' ? COLOR.BLACK : COLOR.WHITE)};
+
+  font-size: 12px;
   letter-spacing: 0.1em;
 
   &:not(:last-child) {
@@ -20,11 +22,15 @@ export const Card = styled.div<Record<'bgColor', string>>`
   }
 `;
 
-export const Rectangle = styled.div`
+export const CardName = styled.p`
   position: absolute;
+`;
+
+export const Rectangle = styled.div`
   width: 40px;
   height: 26px;
 
+  position: absolute;
   top: 58px;
   left: 18px;
 
@@ -82,10 +88,8 @@ export const CardNameAndExpirationDateContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: end;
-
-  font-size: 11px;
 `;
 
-export const CardName = styled.p``;
+export const OwnerName = styled.p``;
 
 export const ExpirationDate = styled.p``;

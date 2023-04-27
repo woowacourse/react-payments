@@ -4,12 +4,13 @@ import * as styled from './Card.styled';
 
 export interface CardProps {
   cardInfo: CardInfo;
-  bgColor: string;
+  theme: string;
 }
 
-const Card = ({ cardInfo, bgColor }: CardProps) => {
+const Card = ({ cardInfo, theme }: CardProps) => {
   return (
-    <styled.Card bgColor={bgColor}>
+    <styled.Card theme={theme}>
+      <styled.CardName>{cardInfo.cardCompany.name}</styled.CardName>
       <styled.Rectangle />
       <styled.CardInformationContainer>
         <styled.CardNumber>
@@ -19,7 +20,7 @@ const Card = ({ cardInfo, bgColor }: CardProps) => {
           <input disabled type="password" defaultValue={cardInfo.cardNumbers.fourthCardNumber} />
         </styled.CardNumber>
         <styled.CardNameAndExpirationDateContainer>
-          <styled.CardName>{cardInfo.ownerName ?? 'NAME'}</styled.CardName>
+          <styled.OwnerName>{cardInfo.ownerName ?? 'NAME'}</styled.OwnerName>
           <styled.ExpirationDate>{`
 					${cardInfo.expirationDate.month ?? 'MM'}/${cardInfo.expirationDate.year ?? 'YY'}
 					`}</styled.ExpirationDate>

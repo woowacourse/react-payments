@@ -1,6 +1,5 @@
 import { createPortal } from 'react-dom';
 
-import { COLOR } from '../../../constants/cardInfo';
 import { useCardInfo } from '../../../hooks/useCardInfo';
 
 import * as styled from './CardRegisterPage.styled';
@@ -23,13 +22,13 @@ const CardRegisterPage = () => {
     setPassword,
     cardCompany,
     setCardCompany,
+    isOpenBottomSheet,
   } = useCardInfo();
 
   return (
     <styled.CardRegisterPage>
       <CardPreview
         cardInfo={{ cardNumbers, expirationDate, ownerName, securityCode, password, cardCompany }}
-        bgColor={COLOR.GREY200}
       />
       <CardRegisterForm
         cardNumbers={cardNumbers}
@@ -44,12 +43,10 @@ const CardRegisterPage = () => {
         setPassword={setPassword}
         cardCompany={cardCompany}
       />
-      {!cardCompany.name &&
-        !cardCompany.theme &&
+      {isOpenBottomSheet &&
         createPortal(
           <BottomSheet
-            CardCompanyContents={<CardCompanyContents />}
-            setCardCompany={setCardCompany}
+            CardCompanyContents={<CardCompanyContents setCardCompany={setCardCompany} />}
           />,
           document.body
         )}
