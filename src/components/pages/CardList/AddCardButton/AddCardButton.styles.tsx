@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { Card } from '../CardContent/CardContent.styles';
+import styled from "styled-components";
+import { Card } from "../CardContent/CardContent.styles";
 
 export const CardRegisterButton = styled(Card)`
   position: relative;
@@ -8,7 +8,7 @@ export const CardRegisterButton = styled(Card)`
 
   ::before,
   ::after {
-    content: '';
+    content: "";
     position: absolute;
     width: 1rem;
     height: 3px;
