@@ -1,14 +1,24 @@
+import { useContext } from 'react';
 import styles from './CardCompany.module.css';
+import { CardInfoContext } from '../../context/CardInfoContext';
 
 type CardCompanyProps = {
   image: string;
   cardName: string;
+  onClose: () => void;
 };
 
-const CardCompany = ({ image, cardName }: CardCompanyProps) => {
+const CardCompany = ({ image, cardName, onClose }: CardCompanyProps) => {
+  const { setSelectedCard } = useContext(CardInfoContext);
+
+  const handleClick = () => {
+    setSelectedCard(cardName);
+    onClose();
+  };
+
   return (
-    <article className={styles.cardLogoContainer}>
-      <figure>
+    <article className={styles.cardLogoContainer} onClick={handleClick}>
+      <figure className={styles.cardCompanyLogo}>
         <img src={image} alt="cardCompanyLogo" className={styles.cardLogo} />
         <figcaption>{cardName}</figcaption>
       </figure>
