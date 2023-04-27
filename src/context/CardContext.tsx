@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from 'react';
 import { getLocalStorage } from '../utils/localStorage';
 import { LOCAL_STORAGE_KEY } from '../constants';
-import type { Card } from '../types';
+import type { Card } from '../@types';
 
 export type CardContextState = {
   cardList: Card[];
