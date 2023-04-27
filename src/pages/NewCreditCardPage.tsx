@@ -101,7 +101,7 @@ export const NewCreditCardPage = () => {
             value={newCard.cardNumbers}
             onChange={handleChangeNewCardField('cardNumbers')}
           />
-          <Text size="small" color="red">
+          <Text size="small" color="warning">
             {validationResult.cardNumbers}
           </Text>
         </FormGroup>
@@ -112,7 +112,7 @@ export const NewCreditCardPage = () => {
             value={newCard.expirationDate}
             onChange={handleChangeNewCardField('expirationDate')}
           />
-          <Text size="small" color="red">
+          <Text size="small" color="warning">
             {validationResult.expirationDate}
           </Text>
         </FormGroup>
@@ -140,7 +140,7 @@ export const NewCreditCardPage = () => {
             center
             type="password"
           />
-          <Text size="small" color="red">
+          <Text size="small" color="warning">
             {validationResult.cvc}
           </Text>
         </FormGroup>
@@ -151,7 +151,7 @@ export const NewCreditCardPage = () => {
             value={newCard.password}
             onChange={handleChangeNewCardField('password')}
           />
-          <Text size="small" color="red">
+          <Text size="small" color="warning">
             {validationResult.password}
           </Text>
         </FormGroup>
