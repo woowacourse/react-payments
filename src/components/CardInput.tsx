@@ -2,7 +2,13 @@ import styled from "styled-components";
 import { CARD_INPUT_LENGTH } from "../constants";
 
 interface CardInputType extends React.InputHTMLAttributes<HTMLInputElement> {
-  id: "cardNumber" | "expiredDate" | "ownerName" | "cvc" | "password";
+  id:
+    | "cardNumber"
+    | "expiredDate"
+    | "ownerName"
+    | "cvc"
+    | "password1"
+    | "password2";
   width: string;
   isSecured?: boolean;
   isAutoFocus?: boolean;

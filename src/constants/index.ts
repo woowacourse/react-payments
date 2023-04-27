@@ -14,7 +14,7 @@ const CARD_INPUT_LENGTH: Record<string, number> = {
   expiredDate: 7,
   ownerName: 12,
   cvc: 3,
-  password: 1,
+  password1: 1,
 } as const;
 
 const SEPERATED_CARD_NUMBER_LENGTH: Record<string, number> = {
@@ -83,6 +83,10 @@ const CARD_COMPANY: Record<
   },
 } as const;
 
+const CARD_COMPANY_NOT_SELECTED_STRING = "카드사선택필요";
+
+const VALID_CARD_INPUT_FORM_LENGTH = 477;
+
 export {
   CARD_INPUT_LENGTH,
   SEPERATED_CARD_NUMBER_LENGTH,
@@ -91,4 +95,6 @@ export {
   SEPERATOR_STRING,
   SEPERATED_EXPIRED_DATE_LENGTH,
   CARD_COMPANY,
+  CARD_COMPANY_NOT_SELECTED_STRING,
+  VALID_CARD_INPUT_FORM_LENGTH,
 };

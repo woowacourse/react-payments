@@ -1,9 +1,14 @@
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { CardInput, Button } from "./index";
 import { CardType } from "../types";
 import { QuestionMark } from "../assets";
-import { PASSWORD_DIGIT_INDEX } from "../constants";
+import {
+  CARD_COMPANY_NOT_SELECTED_STRING,
+  CARD_INPUT_LENGTH,
+  PASSWORD_DIGIT_INDEX,
+  VALID_CARD_INPUT_FORM_LENGTH,
+} from "../constants";
 import {
   getReplacedCardNumber,
   getSeperatedCardNumber,
@@ -23,9 +28,24 @@ interface CardInputFormType {
 }
 
 const CardInputForm = ({ card, setCard, onSubmit }: CardInputFormType) => {
-  const emptyCard = JSON.parse(JSON.stringify(card));
+  const [newCard, setNewCard] = useCard(
+    JSON.parse(JSON.stringify(card)),
+    setCard
+  );
   const [isAnswered, setIsAnswered] = useState(false);
-  const [newCard, setNewCard] = useCard(emptyCard, setCard);
+  const [isValidForm, setIsValidForm] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    if (
+      newCard.cardNumber.length === CARD_INPUT_LENGTH.cardNumber &&
+      newCard.expiredDate.length === CARD_INPUT_LENGTH.expiredDate &&
+      newCard.password.length === CARD_INPUT_LENGTH.password1 &&
+      formRef.current?.offsetHeight === VALID_CARD_INPUT_FORM_LENGTH
+    ) {
+      setIsValidForm(true);
+    }
+  }, [newCard]);
 
   const handleInputChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
     switch (e.target.id) {
@@ -40,6 +60,7 @@ const CardInputForm = ({ card, setCard, onSubmit }: CardInputFormType) => {
       case "ownerName":
         e.target.value = e.target.value.toLocaleUpperCase();
     }
+
     setNewCard(e.target.id, e.target.value);
   };
 
@@ -68,8 +89,17 @@ const CardInputForm = ({ card, setCard, onSubmit }: CardInputFormType) => {
         e.target.nextSibling.focus();
     };
 
+  const handelFormSubmited = (e: FormEvent<HTMLFormElement>) => {
+    if (newCard.cardCompany === CARD_COMPANY_NOT_SELECTED_STRING) {
+      alert("카드사를 선택해 주세요.");
+      return;
+    }
+
+    onSubmit(e);
+  };
+
   return (
-    <CardInputFormWrapper onSubmit={onSubmit}>
+    <CardInputFormWrapper ref={formRef} onSubmit={handelFormSubmited}>
       <InputSetWrapper>
         <label htmlFor="cardNumber">카드 번호</label>
         <CardInput
@@ -83,6 +113,7 @@ const CardInputForm = ({ card, setCard, onSubmit }: CardInputFormType) => {
           onKeyDown={handleInputKeyDown}
         />
         {<span>{validateNumber(newCard.cardNumber)}</span>}
+        {/* {<span>{validateLength(newCard.cardNumber)}</span>} */}
       </InputSetWrapper>
 
       <InputSetWrapper>
@@ -138,7 +169,7 @@ const CardInputForm = ({ card, setCard, onSubmit }: CardInputFormType) => {
         <label htmlFor="password">카드 비밀번호</label>
         <PasswordInputWrapper>
           <CardInput
-            id="password"
+            id="password1"
             value={newCard.password[PASSWORD_DIGIT_INDEX.FIRST]}
             width="42px"
             isSecured
@@ -146,7 +177,7 @@ const CardInputForm = ({ card, setCard, onSubmit }: CardInputFormType) => {
             onChange={handlePasswordChanged(PASSWORD_DIGIT_INDEX.FIRST)}
           />
           <CardInput
-            id="password"
+            id="password2"
             width="42px"
             value={newCard.password[PASSWORD_DIGIT_INDEX.SECOND]}
             isSecured
@@ -163,7 +194,7 @@ const CardInputForm = ({ card, setCard, onSubmit }: CardInputFormType) => {
           <p>카드 뒷면의 보안 3자리 숫자를 입력해 주세요 😊</p>
         </AnswerBoxWrapper>
       )}
-      <Button text="다음" type="submit" />
+      <Button isShown={isValidForm} text="다음" type="submit" />
     </CardInputFormWrapper>
   );
 };

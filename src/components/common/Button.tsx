@@ -3,13 +3,15 @@ import styled from "styled-components";
 
 interface ButtonType extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
+  isShown: boolean;
 }
 
 const Button = (props: ButtonType) => {
   return <ButtonWrapper {...props}>{props.text}</ButtonWrapper>;
 };
 
-const ButtonWrapper = styled.button`
+const ButtonWrapper = styled.button<{ isShown: boolean }>`
+  visibility: ${(props) => (props.isShown ? "visible" : "hidden")};
   align-self: flex-end;
   width: 30px;
 
@@ -20,6 +22,7 @@ const ButtonWrapper = styled.button`
 
   background: transparent;
   border: none;
+  /* transition: all 0.5s ease; */
 
   :active {
     opacity: 50%;
