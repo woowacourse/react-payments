@@ -4,12 +4,12 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 52px;
+  width: 60px;
   height: 64px;
   cursor: pointer;
 `;
 
 export const Text = styled.span`
-  font-size: 12px;
+  font-size: 13px;
   margin-top: 8px;
 `;

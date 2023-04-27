@@ -11,13 +11,13 @@ interface cardCompanyColorsType {
 }
 
 const cardCompanyColors: cardCompanyColorsType = {
-  BC카드: '#F04651',
+  BC카드: '#F04679',
   하나카드: '#009490',
   현대카드: '#333333',
-  카카오뱅크: '#F4DC00',
+  카카오뱅크: '#F1D900',
   롯데카드: '#ED1C24',
   신한카드: '#0046FF',
-  우리카드: '#007BC8',
+  우리카드: '#4BC2F1',
   국민카드: '#5D544B',
 };
 
