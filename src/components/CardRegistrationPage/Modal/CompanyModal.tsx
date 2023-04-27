@@ -8,7 +8,7 @@ import {
   LotteCardLogo,
   ShinhanCardLogo,
   WooriCardLogo,
-} from "../../assets/companyLogo";
+} from "../../../assets/companyLogo";
 
 const CompanyModal = () => {
   return (

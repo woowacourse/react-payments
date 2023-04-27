@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import CardNumberInput from "./CardNumberInput";
-import ExpirationDateInput from "./ExpirationDateInput";
-import NameInput from "./NameInput";
-import SecurityCodeInput from "./SecurityCodeInput";
-import PasswordInput from "./PasswordInput";
+import CardNumberInput from "./FormContents/CardNumberInput";
+import ExpirationDateInput from "./FormContents/ExpirationDateInput";
+import NameInput from "./FormContents/NameInput";
+import SecurityCodeInput from "./FormContents/SecurityCodeInput";
+import PasswordInput from "./FormContents/PasswordInput";
 import { useNavigate } from "react-router-dom";
 import { useCardItemValue, useErrorMessageValue } from "../provider/CardItemProvider";
-import CardCompany from "./CompanyContainer";
+import CardCompany from "./FormContents/CompanyContainer";
 
 interface CardFormProps {
   onSubmitForm: () => void;

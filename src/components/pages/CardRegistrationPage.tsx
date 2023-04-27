@@ -6,7 +6,7 @@ import CardItem from "../Card/CardItem";
 import CardForm from "../CardRegistrationPage/CardForm";
 import { CardPublicInfo } from "../../types/Card";
 import { useCardItemValue } from "../provider/CardItemProvider";
-import CompanyModal from "../CardRegistrationPage/CompanyModal";
+import CompanyModal from "../CardRegistrationPage/Modal/CompanyModal";
 
 interface CardRegistrationPageProps {
   addCardItem: (cardItem: CardPublicInfo) => void;

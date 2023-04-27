@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import InputGroup from "../common/InputGroup";
-import { useCardItemValue, useErrorMessageValue } from "../provider/CardItemProvider";
+import InputGroup from "../../common/InputGroup";
+import { useCardItemValue, useErrorMessageValue } from "../../provider/CardItemProvider";
 
 const CardCompany = () => {
   const { company } = useCardItemValue();

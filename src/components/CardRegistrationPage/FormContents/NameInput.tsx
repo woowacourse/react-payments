@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import Input from "../common/Input";
-import InputBox from "../common/InputBox";
-import InputGroup from "../common/InputGroup";
-import { INPUT_MAX_LENGTH } from "../../constants";
-import { useCardItemAction, useCardItemValue, useErrorMessageValue } from "../provider/CardItemProvider";
+import Input from "../../common/Input";
+import InputBox from "../../common/InputBox";
+import InputGroup from "../../common/InputGroup";
+import { INPUT_MAX_LENGTH } from "../../../constants";
+import { useCardItemAction, useCardItemValue, useErrorMessageValue } from "../../provider/CardItemProvider";
 
 const NameInput = () => {
   const { name } = useCardItemValue();
