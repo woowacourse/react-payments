@@ -1,12 +1,7 @@
-export type CreditCardPasswordTypeKeys = keyof CreditCardPasswordType;
-
-export type CreditCardPasswordType = {
-  first: string,
-  second: string
-};
+export type CreditCardPasswordTypeKeys = 'first' | 'second';
+export type CreditCardPasswordType = Record<CreditCardPasswordTypeKeys, string>;
 
 export type CreditCardKeys = keyof CreditCard;
-
 export type CreditCard = {
   companyId: string;
   number: string;
