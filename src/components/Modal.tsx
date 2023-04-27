@@ -34,6 +34,16 @@ const S = {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.35);
+    animation: modal-backdrop-show 0.8s;
+
+    @keyframes modal-backdrop-show {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
   `,
 
   Modal: styled.div<{ modalStyle: CSSProp }>`

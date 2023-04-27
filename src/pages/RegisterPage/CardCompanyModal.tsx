@@ -29,6 +29,20 @@ const modalStyle = css`
   padding: 34px 20px;
   border-radius: 5px 5px 0px 0px;
   background: #fdfdfd;
+
+  animation: modal-show 0.6s;
+  overflow: hidden;
+
+  @keyframes modal-show {
+    from {
+      opacity: 0;
+      bottom: -600px;
+    }
+    to {
+      opacity: 1;
+      bottom: 0;
+    }
+  }
 `;
 
 export default CardCompanyModal;
