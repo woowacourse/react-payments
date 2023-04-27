@@ -32,6 +32,7 @@ export function CardViewer({ cardCompany, cardNumber, expirationDate, ownerName 
   };
 
   const cardCompanyKey = CARD_COMPANY_KEY[cardCompany];
+  console.log(cardCompanyKey);
   const cardColor = CARD_COMPANY[cardCompanyKey].color;
   const ownerNameFormat = ownerName.length ? ownerName : OWNER_NAME_TEXT;
   const cardNumbersFormat = changeCardNumberFormat(cardNumber);
