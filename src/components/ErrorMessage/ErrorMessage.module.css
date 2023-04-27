@@ -1,0 +1,7 @@
+.errorContainer {
+  height: 5px;
+}
+
+.color {
+  color: var(--primary-color);
+}
