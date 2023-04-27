@@ -39,7 +39,7 @@ export const CardNumberInput = forwardRef<HTMLInputElement[], Props>(
       setCardNumber((current) => {
         const newCardNumber = [...current];
 
-        newCardNumber[Number(index)] = e.target.value;
+        newCardNumber[Number(index)] = e.target.value.slice(0, 4);
 
         return newCardNumber;
       });

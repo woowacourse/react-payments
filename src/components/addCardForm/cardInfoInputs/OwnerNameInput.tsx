@@ -32,13 +32,11 @@ export const OwnerNameInput = forwardRef<HTMLInputElement[], Props>(
     const error = useError(ownerName, ownerNameInputValidator);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      setOwnerName(e.target.value.toUpperCase());
+      setOwnerName(e.target.value.toUpperCase().slice(0, 20));
     };
 
     const handlePressKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
       if (!(e.target instanceof HTMLInputElement)) return;
-
-      if (e.key === 'Backspace' && e.target.value === '') viewPreviousInput();
 
       if (e.key !== 'Enter') return;
 

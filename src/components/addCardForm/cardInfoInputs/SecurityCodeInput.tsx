@@ -30,13 +30,7 @@ export const SecurityCodeInput = forwardRef<HTMLInputElement[], Props>(
     const error = useError(securityCode, securityCodeInputValidator);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      setSecurityCode(e.target.value);
-    };
-
-    const handlePressBackspace = (e: React.KeyboardEvent<HTMLInputElement>) => {
-      if (!(e.target instanceof HTMLInputElement)) return;
-
-      if (e.key === 'Backspace' && e.target.value === '') viewPreviousInput();
+      setSecurityCode(e.target.value.slice(0, 3));
     };
 
     return (
@@ -58,7 +52,6 @@ export const SecurityCodeInput = forwardRef<HTMLInputElement[], Props>(
             maxLength={3}
             placeholder="•••"
             onChange={handleInputChange}
-            onKeyDown={handlePressBackspace}
             inputMode="numeric"
             type="password"
             autoComplete="off"

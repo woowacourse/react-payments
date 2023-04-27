@@ -44,7 +44,7 @@ export const PasswordInput = forwardRef<HTMLInputElement[], Props>(
       setPassword((current) => {
         const newPassword = [...current];
 
-        newPassword[Number(index)] = e.target.value;
+        newPassword[Number(index)] = e.target.value.slice(0, 1);
 
         return newPassword;
       });
@@ -63,11 +63,8 @@ export const PasswordInput = forwardRef<HTMLInputElement[], Props>(
 
       if (e.key !== 'Backspace') return;
 
-      if (password[Number(index)] === '') {
-        if (Number(index) === 0) viewPreviousInput();
-
+      if (password[Number(index)] === '')
         focusPasswordInputByIndex(Number(index) - 1);
-      }
     };
 
     return (
