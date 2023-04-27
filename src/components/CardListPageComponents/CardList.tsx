@@ -24,7 +24,7 @@ const CardList = ({ cardList, onOpen }: CardListProps) => {
 const CardListContainer = styled.section`
   display: flex;
   flex-direction: column;
-  gap: 45px;
+  gap: 9px;
 
   margin-bottom: 45px;
 

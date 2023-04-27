@@ -44,7 +44,6 @@ const CardAdditionCompletionPage = ({
         <Input
           value={cardName}
           borderBottom='1px solid var(--black-color)'
-          width={'60%'}
           onChange={handleInputChange}
         />
         <CheckBtn>확인</CheckBtn>
@@ -67,8 +66,9 @@ const CardItemContainer = styled.div`
 
 const CheckBtn = styled.button`
   position: absolute;
+  right: 0;
   bottom: 0;
-  margin-bottom: 1rem;
+  margin: 0 26px 16px 0;
 
   padding: 10px 20px;
 

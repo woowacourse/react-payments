@@ -90,6 +90,7 @@ function App() {
 }
 
 const AppContainer = styled.div`
+  position: relative;
   min-height: 100vh;
   box-sizing: border-box;
   background-color: var(--white-color);

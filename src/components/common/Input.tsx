@@ -3,9 +3,8 @@ import styled from 'styled-components';
 const Input = styled.input<{
   textAlign?: string;
   borderBottom?: string;
-  width?: string;
 }>`
-  width: ${({ width }) => width || '100%'};
+  width: 100%;
   height: 100%;
   padding-bottom: 0.5rem;
 
