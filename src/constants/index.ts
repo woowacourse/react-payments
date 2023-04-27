@@ -1,6 +1,6 @@
 import { bc, hana, hyundai, kakao, kookmin, lotte, sinhan, woori } from '../images';
 
-const CARD_COMPANIES = {
+const BANKS = {
   bc: {
     name: 'BC카드',
     logo: bc,
@@ -51,4 +51,4 @@ const CARD_COMPANIES = {
   },
 };
 
-export { CARD_COMPANIES };
+export { BANKS };
