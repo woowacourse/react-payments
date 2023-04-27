@@ -1,8 +1,14 @@
-import { useState } from "react";
+import { useCardDispatch, useCardState } from "./useCard";
 
 function useCardNumber() {
-  const [originNumber, setOrginNumber] = useState("");
-  const [displayNumber, setdisplayNumber] = useState("");
+  const dispatch = useCardDispatch();
+
+  const { originNumber, displayNumber } = useCardState();
+  const setOrginNumber = (value: string) =>
+    dispatch({ type: "SET_ORIGIN_NUMBER", originNumber: value });
+
+  const setdisplayNumber = (value: string) =>
+    dispatch({ type: "SET_DISPLAY_NUMBER", displayNumber: value });
 
   const changeCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     const cardNumber = e.currentTarget.value

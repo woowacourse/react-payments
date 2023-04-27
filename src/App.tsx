@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import CardDetailPage from "./component/CardDetailPage/CardDetailPage";
 import CardListPage from "./component/CardListPage/CardListPage";
 import { CreditCard } from "./types/card";
+import { CardProvier } from "./contexts/CardContext";
 
 function App() {
   const [creditCardList, setCreditCardList] = useState<CreditCard[]>([]);
@@ -25,7 +26,11 @@ function App() {
     { basename: process.env.PUBLIC_URL }
   );
 
-  return <RouterProvider router={router} />;
+  return (
+    <CardProvier>
+      <RouterProvider router={router} />
+    </CardProvier>
+  );
 }
 
 export default App;
