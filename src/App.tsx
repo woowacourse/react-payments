@@ -7,10 +7,11 @@ import CardRegisterProvider from './context/CardRegisterContext';
 import Layout from './components/@common/Layout/Layout';
 import { BottomSheetProvider } from './context/BottomSheetContext';
 import CardAlias from './pages/CardRegister/CardAlias/CardAlias';
+import { ToastProvider } from './context/ToastMessageContext';
 
 function App() {
   return (
-    <>
+    <ToastProvider>
       <BottomSheetProvider>
         <CardRegisterProvider>
           <BrowserRouter basename={process.env.PUBLIC_URL}>
@@ -31,7 +32,7 @@ function App() {
           </BrowserRouter>
         </CardRegisterProvider>
       </BottomSheetProvider>
-    </>
+    </ToastProvider>
   );
 }
 
