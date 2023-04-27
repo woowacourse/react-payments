@@ -10,8 +10,6 @@ interface HomePageProps {
 }
 
 const Page = styled.div`
-  width: 375px;
-  border: 1px solid;
   min-height: 100vh;
   padding: 20px 36px;
 `;
@@ -48,7 +46,7 @@ export default function Homepage({ onClick, cardList }: HomePageProps) {
         <AddInformation>새로운 카드를 등록해주세요.</AddInformation>
       )}
       <CardWrapper>
-        {cardList.map((card) => (
+        {cardList.map((card: CardInfo) => (
           <Card
             key={`${card.owner}${card.cardNumber.third}`}
             owner={card.owner}

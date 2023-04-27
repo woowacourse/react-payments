@@ -22,6 +22,7 @@ import {
   TitleWrapper,
 } from "./AddCardPage.styles";
 import { useCardForm } from "../../hooks/useCardForm";
+import CardTypeDrawer from "../CardTypeDrawer";
 
 interface AddCardPageProps {
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
@@ -51,67 +52,70 @@ export default function AddCardPage({ onSubmit, onClick }: AddCardPageProps) {
   };
 
   return (
-    <Page>
-      <TitleWrapper>
-        <PrevButton onClick={onClick} />
-        <Title>카드 추가</Title>
-      </TitleWrapper>
-      <CardWrapper>
-        <Card
-          cardNumberSet={[
-            firstCardNumber.value,
-            secondCardNumber.value,
-            thirdCardNumber.value,
-            fourthCardNumber.value,
-          ]}
-          expiracy={`${month.value ? month.value : "MM"}/${
-            year.value ? year.value : "YY"
-          }`}
-          owner={owner.value.toUpperCase()}
-        />
-      </CardWrapper>
-      <InputWrapperParent onSubmit={onSubmit} ref={formRef}>
-        <InputWrapper>
-          <InputField kind="cardNumber">
-            <CardNumberInput
-              firstNumber={firstCardNumber}
-              secondNumber={secondCardNumber}
-              thirdNumber={thirdCardNumber}
-              fourthNumber={fourthCardNumber}
-            />
-          </InputField>
-          <InputField kind="expiracy">
-            <ExpiracyInput year={year} month={month} />
-          </InputField>
-          <InputField kind="owner" inputLength={`${owner.value.length}/30`}>
-            <OwnerInput owner={owner} />
-          </InputField>
-          <InputField kind="cvc">
-            <CvcWrapper>
-              <CvcInput cvc={cvc} />
-              <CvcButtonWrapper>
-                <InformationButton onClick={handleToolTip} />
-                {isOpenToolTip && (
-                  <ToolTip
-                    text={
-                      "CVC번호는 카드 뒷 면에 있는 3자리 숫자이며 카드 보안을 위한 번호입니다"
-                    }
-                  />
-                )}
-              </CvcButtonWrapper>
-            </CvcWrapper>
-          </InputField>
-          <InputField kind="password">
-            <PasswordInput
-              firstPassword={firstPassword}
-              secondPassword={secondPassword}
-            />
-          </InputField>
-        </InputWrapper>
-        <NextButtonWrapper>
-          <NextButton disabled={isFormFilled} />
-        </NextButtonWrapper>
-      </InputWrapperParent>
-    </Page>
+    <>
+      <Page>
+        <TitleWrapper>
+          <PrevButton onClick={onClick} />
+          <Title>카드 추가</Title>
+        </TitleWrapper>
+        <CardWrapper>
+          <Card
+            cardNumberSet={[
+              firstCardNumber.value,
+              secondCardNumber.value,
+              thirdCardNumber.value,
+              fourthCardNumber.value,
+            ]}
+            expiracy={`${month.value ? month.value : "MM"}/${
+              year.value ? year.value : "YY"
+            }`}
+            owner={owner.value.toUpperCase()}
+          />
+        </CardWrapper>
+        <InputWrapperParent onSubmit={onSubmit} ref={formRef}>
+          <InputWrapper>
+            <InputField kind="cardNumber">
+              <CardNumberInput
+                firstNumber={firstCardNumber}
+                secondNumber={secondCardNumber}
+                thirdNumber={thirdCardNumber}
+                fourthNumber={fourthCardNumber}
+              />
+            </InputField>
+            <InputField kind="expiracy">
+              <ExpiracyInput year={year} month={month} />
+            </InputField>
+            <InputField kind="owner" inputLength={`${owner.value.length}/30`}>
+              <OwnerInput owner={owner} />
+            </InputField>
+            <InputField kind="cvc">
+              <CvcWrapper>
+                <CvcInput cvc={cvc} />
+                <CvcButtonWrapper>
+                  <InformationButton onClick={handleToolTip} />
+                  {isOpenToolTip && (
+                    <ToolTip
+                      text={
+                        "CVC번호는 카드 뒷 면에 있는 3자리 숫자이며 카드 보안을 위한 번호입니다"
+                      }
+                    />
+                  )}
+                </CvcButtonWrapper>
+              </CvcWrapper>
+            </InputField>
+            <InputField kind="password">
+              <PasswordInput
+                firstPassword={firstPassword}
+                secondPassword={secondPassword}
+              />
+            </InputField>
+          </InputWrapper>
+          <NextButtonWrapper>
+            <NextButton disabled={isFormFilled} />
+          </NextButtonWrapper>
+        </InputWrapperParent>
+        <CardTypeDrawer />
+      </Page>
+    </>
   );
 }

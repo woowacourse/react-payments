@@ -2,8 +2,7 @@ import styled from "styled-components";
 
 export const Page = styled.div`
   position: relative;
-  width: 375px;
-  border: 1px solid;
+  box-sizing: border-box;
   min-height: 100vh;
   padding: 20px 28px;
 `;
