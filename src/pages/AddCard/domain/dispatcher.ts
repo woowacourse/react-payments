@@ -28,3 +28,7 @@ export const isValidCardNumber = (str: string) => {
   const strToNum = +str;
   return str.length === 4 && Number.isInteger(strToNum) ? 'VALID' : 'INVALID';
 };
+
+export const isValidCardAlias = (str: string) => {
+  return str.length !== 0 ? 'VALID' : 'INVALID';
+};
