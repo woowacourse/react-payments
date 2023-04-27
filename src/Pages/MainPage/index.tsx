@@ -1,6 +1,8 @@
 import CardPreview from 'Pages/RegisterPage/CardPreview';
 import Header from 'components/Header';
 import Input from 'components/Input';
+import Modal from 'components/Modal';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Card } from 'types/Card';
@@ -18,6 +20,7 @@ const MainPage = () => {
   return (
     <div>
       <Header navigator={false} title="보유카드" />
+
       {cardInfoArray.length > 0 ? (
         cardInfoArray.map((cardInfo: Card, index: number) => (
           <CardPreview key={index} cardInfo={cardInfo}></CardPreview>

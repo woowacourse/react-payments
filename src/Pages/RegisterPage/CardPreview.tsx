@@ -2,9 +2,9 @@ import { LENGTH } from 'constants/constants';
 import styled from 'styled-components';
 import { Card } from 'types/Card';
 
-const CardPreview = ({ cardInfo }: { cardInfo: Card }) => {
+const CardPreview = ({ cardInfo, handleModal }: any) => {
   return (
-    <StyledCard>
+    <StyledCard onClick={handleModal}>
       <Chip />
       <CardInfo>
         <Numbers>
@@ -37,6 +37,7 @@ const StyledCard = styled.div`
   font-size: 14px;
   background: var(--darken-color);
   box-shadow: rgba(0, 0, 0, 0.25) 3px 3px 5px;
+  cursor: pointer;
 `;
 
 const Chip = styled.div`
