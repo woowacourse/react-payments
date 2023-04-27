@@ -1,11 +1,22 @@
 import * as Styled from './Card.styles';
 import CardType from '../../types/Card';
 
-type CardProps = Omit<CardType, 'id'>;
+type CardProps = Omit<CardType, 'id'> & {
+  setIsModalOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
-const Card = ({ cardNumbers, expiredDates, cardOwnerName }: CardProps) => {
+const Card = ({
+  cardNumbers,
+  expiredDates,
+  cardOwnerName,
+  setIsModalOpen,
+}: CardProps) => {
   return (
-    <Styled.Wrapper>
+    <Styled.Wrapper
+      onClick={() => {
+        setIsModalOpen && setIsModalOpen(true);
+      }}
+    >
       <Styled.ChipWrapper>
         <Styled.Chip />
         <Styled.TextWrapper>

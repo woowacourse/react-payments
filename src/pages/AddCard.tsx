@@ -12,10 +12,12 @@ import useAddCard from '../hooks/useAddCard';
 import styled from 'styled-components';
 import CardCompanyModal from '../components/CardCompanyModal/CardCompanyModal';
 import { useEffect, useState } from 'react';
+import CardLabel from '../components/@common/CardLabel';
 
 const Wrapper = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   margin: 32px 0;
 `;
 
@@ -72,7 +74,9 @@ const AddCard = ({ cards, setCards }: SetCardsProps) => {
             cardNumbers={cardNumbers}
             expiredDates={expiredDates}
             cardOwnerName={cardOwnerName}
+            setIsModalOpen={setIsModalOpen}
           />
+          <CardLabel labelText="카드사를 수정하려면 카드를 클릭하세요." />
         </Wrapper>
         <CardNumbers
           cardNumbers={cardNumbers}
