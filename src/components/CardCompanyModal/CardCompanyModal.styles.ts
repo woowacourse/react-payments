@@ -9,9 +9,9 @@ export const Modal = styled.div`
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   display: grid;
-  grid-template-columns: repeat(4, 60px);
+  grid-template-columns: repeat(4, 66px);
   gap: 24px;
-  padding: 32px 32px;
+  padding: 32px 20px;
 `;
 
 export const ModalBackdrop = styled.div`
