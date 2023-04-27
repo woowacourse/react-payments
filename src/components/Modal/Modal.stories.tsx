@@ -1,5 +1,4 @@
 /* eslint-disable react/function-component-definition */
-
 import { Story, Meta } from '@storybook/react';
 
 import { ModalProps } from './type';

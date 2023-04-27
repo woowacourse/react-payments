@@ -1,16 +1,15 @@
 import { useState } from 'react';
 
-type ErrorType = { message: string; type: 'char' | 'length' | 'range' };
-type ValidFn<T> = (value: T) => { ok: true } | { ok: false; error: ErrorType };
+import * as Type from '@Types/index';
 
-function useInput<T>(initValue: T, validFns: ValidFn<T>[]): [T, (newValue: T) => void, string | null] {
+function useInput<T>(initValue: T, validFns: Type.ValidationFn<T>[]): [T, (newValue: T) => void, string | null] {
   const [value, setValue] = useState(initValue);
   const [errorMessage, setErrorMessage] = useState<null | string>(null);
 
   const updateValue = (newValue: T) => {
     setErrorMessage(null);
 
-    let error: undefined | ErrorType;
+    let error: undefined | Type.ValidationErrorType;
 
     validFns.every((fn) => {
       const result = fn(newValue);

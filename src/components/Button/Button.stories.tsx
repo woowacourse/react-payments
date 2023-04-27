@@ -1,5 +1,4 @@
 /* eslint-disable react/function-component-definition */
-
 import { Meta, Story } from '@storybook/react';
 
 import { ButtonProps } from './type';

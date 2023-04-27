@@ -20,3 +20,9 @@ export type CreditCard = {
 export type CreditCardCompanies = keyof typeof CARD_COMPANY;
 
 export type AnimationTypes = keyof typeof ANIMATION;
+
+export type ValidationErrorType = { message: string; type: 'char' | 'length' | 'range' };
+
+export type ValidationFnReturnType = { ok: true } | { ok: false; error: ValidationErrorType };
+
+export type ValidationFn<T> = (value: T) => ValidationFnReturnType;

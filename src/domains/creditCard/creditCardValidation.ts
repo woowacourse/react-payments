@@ -1,11 +1,8 @@
 import * as Type from '@Types/index';
 
-type ErrorType = { message: string; type: 'char' | 'length' | 'range' };
-type ValidationReturnType = { ok: true } | { ok: false; error: ErrorType };
-
 const creditCardValidation = {
   numberValidation: {
-    checkChar: (numbers: string): ValidationReturnType => {
+    checkChar: (numbers: string): Type.ValidationFnReturnType => {
       if (numbers.match(/\D/g)) {
         return {
           ok: false,
@@ -19,7 +16,7 @@ const creditCardValidation = {
       return { ok: true };
     },
 
-    checkLength: (numbers: string): ValidationReturnType => {
+    checkLength: (numbers: string): Type.ValidationFnReturnType => {
       if (!numbers.length) return { ok: true };
 
       if (numbers.length !== 16) {
@@ -37,7 +34,7 @@ const creditCardValidation = {
   },
 
   expiryValidation: {
-    checkChar: (numbers: string): ValidationReturnType => {
+    checkChar: (numbers: string): Type.ValidationFnReturnType => {
       const convertedNumbers = numbers.replaceAll('/', '');
       if (convertedNumbers.match(/\D/g)) {
         return {
@@ -52,7 +49,7 @@ const creditCardValidation = {
       return { ok: true };
     },
 
-    checkMonth: (numbers: string): ValidationReturnType => {
+    checkMonth: (numbers: string): Type.ValidationFnReturnType => {
       if (numbers.length < 2) return { ok: true };
 
       const month = Number(numbers.slice(0, 2));
@@ -70,7 +67,7 @@ const creditCardValidation = {
       return { ok: true };
     },
 
-    checkYear: (numbers: string): ValidationReturnType => {
+    checkYear: (numbers: string): Type.ValidationFnReturnType => {
       if (numbers.length < 5) return { ok: true };
 
       const year = Number(numbers.slice(3));
@@ -99,7 +96,7 @@ const creditCardValidation = {
       return { ok: true };
     },
 
-    checkLength: (numbers: string): ValidationReturnType => {
+    checkLength: (numbers: string): Type.ValidationFnReturnType => {
       if (numbers.length !== 5) {
         return {
           ok: false,
@@ -115,7 +112,7 @@ const creditCardValidation = {
   },
 
   ownerValidation: {
-    checkChar: (owner: string): ValidationReturnType => {
+    checkChar: (owner: string): Type.ValidationFnReturnType => {
       if (!owner.match(/^[a-zA-Z\s]*$/g)) {
         return {
           ok: false,
@@ -129,7 +126,7 @@ const creditCardValidation = {
       return { ok: true };
     },
 
-    checkLength: (owner: string): ValidationReturnType => {
+    checkLength: (owner: string): Type.ValidationFnReturnType => {
       if (owner.length > 20) {
         return {
           ok: false,
@@ -145,7 +142,7 @@ const creditCardValidation = {
   },
 
   cvcValidation: {
-    checkChar: (numbers: string): ValidationReturnType => {
+    checkChar: (numbers: string): Type.ValidationFnReturnType => {
       if (numbers.match(/\D/g)) {
         return {
           ok: false,
@@ -158,7 +155,7 @@ const creditCardValidation = {
 
       return { ok: true };
     },
-    checkLength: (numbers: string): ValidationReturnType => {
+    checkLength: (numbers: string): Type.ValidationFnReturnType => {
       if (numbers.length !== 3) {
         return {
           ok: false,
@@ -174,7 +171,7 @@ const creditCardValidation = {
   },
 
   passwordValidation: {
-    checkChar: (numbers: Type.CreditCardPasswordType): ValidationReturnType => {
+    checkChar: (numbers: Type.CreditCardPasswordType): Type.ValidationFnReturnType => {
       if (numbers.first.match(/\D/g)) {
         return {
           ok: false,
@@ -198,7 +195,7 @@ const creditCardValidation = {
       return { ok: true };
     },
 
-    checkLength: (numbers: Type.CreditCardPasswordType): ValidationReturnType => {
+    checkLength: (numbers: Type.CreditCardPasswordType): Type.ValidationFnReturnType => {
       if (numbers.first.length !== 1) {
         return {
           ok: false,
