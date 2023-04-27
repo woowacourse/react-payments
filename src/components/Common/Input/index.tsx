@@ -14,11 +14,9 @@ interface InputProps extends React.HTMLAttributes<HTMLInputElement> {
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ backgroundColor, resetStyle = true, minLength, maxLength, textAlign, isRequired, name, ...props }, ref) => (
+  ({ backgroundColor, resetStyle = true, textAlign, isRequired, ...props }, ref) => (
     <StyledInput
       backgroundColor={backgroundColor}
-      minLength={minLength}
-      maxLength={maxLength}
       required={isRequired}
       {...props}
       ref={ref}
@@ -29,7 +27,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 );
 
 const StyledInput = styled.input<InputProps>`
-  background-color: ${({ backgroundColor }) => backgroundColor ?? 'none'};
+  background-color: ${({ backgroundColor }) => backgroundColor ?? 'grey'};
   width: ${({ maxLength }) => (maxLength ? `${maxLength * 16}px` : '100%')};
   text-align: ${({ textAlign }) => textAlign ?? 'left'};
   ${({ resetStyle }) =>
