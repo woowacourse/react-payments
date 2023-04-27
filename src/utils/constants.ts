@@ -13,6 +13,7 @@ export const LOCATION = Object.freeze({
   CARD_LIST_PAGE: '/',
   ADD_CARD_PAGE: '/add',
   CARD_NICKNAME_INPUT_PAGRE: '/nickname',
+  PAGE_NOT_FOUND: '/404',
 });
 export const LOCAL_STORAGE_CARD_LIST = 'cardList';
 export const SECURITY_MAX_NUMBER_LENGTH = 3;
