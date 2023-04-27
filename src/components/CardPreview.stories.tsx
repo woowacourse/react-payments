@@ -21,6 +21,9 @@ export const CardPreviewStory: Story = {
       month: "02",
       year: "24",
       name: "YUMMY",
+      code: "",
+      password1: "",
+      password2: "",
     },
   },
 };

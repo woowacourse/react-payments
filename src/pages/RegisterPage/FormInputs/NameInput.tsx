@@ -1,26 +1,28 @@
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import { ChangeEvent, useContext } from "react";
 import styled from "styled-components";
 import { changeInvalidValueToBlank } from "utils/inputValidator";
 import { LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
 import Input, { NameInputStyle } from "components/Input";
+import { CardInfoContext } from "App";
 const { ONLY_ENGLISH, INVALID_BLANK } = VALID_INPUT;
 
-interface Props {
-  name: string;
-  setName: Dispatch<SetStateAction<string>>;
-}
+const NameInput = () => {
+  const { name } = useContext(CardInfoContext).cardInfo;
+  const setName = useContext(CardInfoContext).setCardInfo;
 
-const NameInput = ({ name, setName }: Props) => {
   const handleNameChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     const value = target.value.toUpperCase().trimStart();
     if (value.includes(INVALID_BLANK)) return;
 
-    setName(
-      changeInvalidValueToBlank(value, {
-        length: LIMIT_LENGTH.NAME,
-        regex: ONLY_ENGLISH,
-      })
-    );
+    setName((prevState) => {
+      return {
+        ...prevState,
+        name: changeInvalidValueToBlank(value, {
+          length: LIMIT_LENGTH.NAME,
+          regex: ONLY_ENGLISH,
+        }),
+      };
+    });
   };
 
   return (

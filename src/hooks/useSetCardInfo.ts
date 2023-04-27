@@ -1,21 +1,17 @@
-import { FormEvent } from "react";
+import { CardInfoContext } from "App";
+import { FormEvent, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { getFormData } from "utils/formDataObjectGetter";
 
 interface FormData {
   [k: string]: FormDataEntryValue;
 }
 
-const useSetCardInfo = (dataName: string, cardCompany: string) => {
+const useSetCardInfo = (dataName: string) => {
+  const allCardInfo = useContext(CardInfoContext).cardInfo;
   const navigate = useNavigate();
 
   const handleFormDataSubmit = (event: FormEvent) => {
     event.preventDefault();
-
-    const formData = getFormData(event.target);
-    if (!formData) return;
-
-    const allCardInfo = { ...formData, cardCompany };
 
     setData(allCardInfo, dataName);
     navigate("/");

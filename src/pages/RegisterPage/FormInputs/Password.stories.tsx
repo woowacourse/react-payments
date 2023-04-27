@@ -16,7 +16,5 @@ export const PasswordStory: Story = {
       password1: "2",
       password2: "3",
     },
-
-    setPassword: () => {},
   },
 };

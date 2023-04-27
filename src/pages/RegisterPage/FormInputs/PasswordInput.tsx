@@ -1,5 +1,5 @@
 import { useFocus } from "hooks/useFocus";
-import { ChangeEvent, Dispatch, SetStateAction, Fragment } from "react";
+import { ChangeEvent, Fragment, useContext } from "react";
 import styled from "styled-components";
 import { changeInvalidValueToBlank } from "utils/inputValidator";
 import Input, { PasswordInputStyle } from "components/Input";
@@ -11,20 +11,14 @@ import {
   PASSWORD_PART,
   VALID_INPUT,
 } from "constants/limit";
+import { Password } from "types";
+import { CardInfoContext } from "App";
 const { ONLY_NUMBER } = VALID_INPUT;
 
-interface Password {
-  [key: string]: string;
-  password1: string;
-  password2: string;
-}
-
-interface Props {
-  password: Password;
-  setPassword: Dispatch<SetStateAction<Password>>;
-}
-
-const PasswordInput = ({ password, setPassword }: Props) => {
+const PasswordInput = () => {
+  const { password1, password2 } = useContext(CardInfoContext).cardInfo;
+  const password: Password = { password1, password2 };
+  const setPassword = useContext(CardInfoContext).setCardInfo;
   const { handleRef, moveFocus } = useFocus();
 
   const handlePasswordChange = ({ target }: ChangeEvent<HTMLInputElement>) => {

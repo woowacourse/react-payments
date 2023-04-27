@@ -1,4 +1,4 @@
-import { ExpirationDate } from "types";
+import { CardInfo, ExpirationDate } from "types";
 import { LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
 const { VALID_MONTH } = VALID_INPUT;
 
@@ -17,7 +17,7 @@ export const isInvalidDate = (
   if (isTargetYear && isExpired(date.month, target.value)) return true;
 };
 
-export const isValidInfo = (cardInfo: any) => {
+export const isValidInfo = (cardInfo: CardInfo) => {
   const { cardCompany, month, year, code, password1, password2 } = cardInfo;
   const { isAllValidLength, isValidLength, isValidCardCompany } = validation;
 

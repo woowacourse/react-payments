@@ -16,7 +16,5 @@ export const ExpirationDateStory: Story = {
       month: "11",
       year: "26",
     },
-
-    setDate: () => {},
   },
 };

@@ -13,7 +13,5 @@ type Story = StoryObj<typeof meta>;
 export const NameStory: Story = {
   args: {
     name: "YUMMY",
-
-    setName: () => {},
   },
 };

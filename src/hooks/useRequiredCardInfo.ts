@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { CardInfoContext } from "App";
+import { useContext, useEffect, useState } from "react";
 import { isValidInfo } from "validation";
 
-const useRequiredCardInfo = (requiredCardInfo: {}) => {
-  const areAllInputsFilled = isValidInfo(requiredCardInfo);
+const useRequiredCardInfo = () => {
+  const allCardInfo = useContext(CardInfoContext).cardInfo;
+  const areAllInputsFilled = isValidInfo(allCardInfo);
 
   const [isFormFilled, setIsFormFilled] = useState(false);
 

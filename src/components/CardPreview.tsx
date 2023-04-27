@@ -2,13 +2,13 @@ import styled from "styled-components";
 import { Fragment, useContext } from "react";
 import { NUMBER_INPUT, LIMIT_LENGTH, PASSWORD_PART } from "constants/limit";
 import { HIDDEN_VALUE, SECURITY_TARGET } from "constants/security";
-import { PreviewCardInfo } from "types";
+import { CardInfo } from "types";
 import { SelectorButton } from "./ButtonStyle";
 import { ModalState } from "pages/RegisterPage/CardRegisterForm";
 import { CARD_COLORS } from "constants/cardCompanies";
 
 interface Props {
-  cardInfo: PreviewCardInfo;
+  cardInfo: CardInfo;
 }
 
 const CardPreview = ({ cardInfo }: Props) => {

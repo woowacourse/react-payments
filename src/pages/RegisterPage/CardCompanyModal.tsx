@@ -7,7 +7,7 @@ const CardCompanyModal = () => {
   return (
     <Modal modalStyle={modalStyle}>
       {Object.keys(CARD_COMPANIES).map((company) => (
-        <CardCompany key={company} cardCompany={company} />
+        <CardCompany key={company} cardCompanyName={company} />
       ))}
     </Modal>
   );

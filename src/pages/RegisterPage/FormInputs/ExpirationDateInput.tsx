@@ -1,5 +1,5 @@
 import { useFocus } from "hooks/useFocus";
-import { ChangeEvent, Dispatch, SetStateAction, Fragment } from "react";
+import { ChangeEvent, Fragment, useContext } from "react";
 import { changeInvalidValueToBlank } from "utils/inputValidator";
 import Input, { CommonInputStyle } from "components/Input";
 import { Slash } from "components/DelimiterStyle";
@@ -8,14 +8,13 @@ import { DateInputBox } from "components/InputBoxStyle";
 import { isInvalidDate } from "validation";
 import { ExpirationDate } from "types";
 import { DATE_INPUT, LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
+import { CardInfoContext } from "App";
 const { ONLY_NUMBER } = VALID_INPUT;
 
-interface Props {
-  date: ExpirationDate;
-  setDate: Dispatch<SetStateAction<ExpirationDate>>;
-}
-
-const ExpirationDateInput = ({ date, setDate }: Props) => {
+const ExpirationDateInput = () => {
+  const { month, year } = useContext(CardInfoContext).cardInfo;
+  const date: ExpirationDate = { month, year };
+  const setDate = useContext(CardInfoContext).setCardInfo;
   const { handleRef, moveFocus } = useFocus();
 
   const handleDateChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
@@ -49,7 +48,7 @@ const ExpirationDateInput = ({ date, setDate }: Props) => {
               aria-labelledby="date-label"
               maxLength={LIMIT_LENGTH.EXPIRATION_DATE}
               inputMode="numeric"
-              value={index ? date.year : date.month}
+              value={index ? year : month}
               placeholder={index ? "YY" : "MM"}
               required
               inputStyle={CommonInputStyle}
@@ -59,7 +58,7 @@ const ExpirationDateInput = ({ date, setDate }: Props) => {
             {index === DATE_INPUT.LAST_PART ? (
               ""
             ) : (
-              <Slash month={date.month}>/</Slash>
+              <Slash month={month}>/</Slash>
             )}
           </Fragment>
         ))}

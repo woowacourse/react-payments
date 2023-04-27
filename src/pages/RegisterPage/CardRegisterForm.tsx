@@ -11,59 +11,30 @@ import { NextButton } from "components/ButtonStyle";
 import useSetCardInfo from "hooks/useSetCardInfo";
 import useRequiredCardInfo from "hooks/useRequiredCardInfo";
 import CardCompanyModal from "./CardCompanyModal";
-import { SetCardCompany, SetModalState } from "types";
+import { CardInfo, SetModalState } from "types";
 
-const CardRegisterForm = () => {
-  const [cardCompany, setCardCompany] = useState("");
-  const [cardNumber, setCardNumber] = useState({
-    number1: "",
-    number2: "",
-    number3: "",
-    number4: "",
-  });
-  const [date, setDate] = useState({
-    month: "",
-    year: "",
-  });
-  const [name, setName] = useState("");
-  const [code, setCode] = useState("");
-  const [password, setPassword] = useState({ password1: "", password2: "" });
-
+const CardRegisterForm = ({ allCardInfo }: { allCardInfo: CardInfo }) => {
   const [isModalOpen, setIsModalOpen] = useState(true);
 
-  const PreviewCardInfo = { cardCompany, ...cardNumber, ...date, name };
-  const requiredCardInfo = {
-    cardCompany,
-    ...cardNumber,
-    ...date,
-    code,
-    ...password,
-  };
-
-  const { isFormFilled } = useRequiredCardInfo(requiredCardInfo);
-  const { handleFormDataSubmit } = useSetCardInfo("card", cardCompany);
+  const { isFormFilled } = useRequiredCardInfo();
+  const { handleFormDataSubmit } = useSetCardInfo("card");
 
   return (
     <S.Wrapper>
       <Header navigator title="카드 추가" />
 
       <ModalState.Provider value={setIsModalOpen}>
-        <SelectedCardCompany.Provider value={setCardCompany}>
-          <CardPreview cardInfo={PreviewCardInfo} />
+        <CardPreview cardInfo={allCardInfo} />
 
-          {isModalOpen && <CardCompanyModal />}
-        </SelectedCardCompany.Provider>
+        {isModalOpen && <CardCompanyModal />}
       </ModalState.Provider>
 
       <form onSubmit={handleFormDataSubmit}>
-        <CardNumberInput
-          cardNumber={cardNumber}
-          setCardNumber={setCardNumber}
-        />
-        <ExpirationDateInput date={date} setDate={setDate} />
-        <NameInput name={name} setName={setName} />
-        <SecurityCodeInput code={code} setCode={setCode} />
-        <PasswordInput password={password} setPassword={setPassword} />
+        <CardNumberInput />
+        <ExpirationDateInput />
+        <NameInput />
+        <SecurityCodeInput />
+        <PasswordInput />
 
         {isFormFilled && <NextButton>다음</NextButton>}
       </form>
@@ -81,4 +52,3 @@ const S = {
 export default CardRegisterForm;
 
 export const ModalState = createContext<SetModalState>(() => {});
-export const SelectedCardCompany = createContext<SetCardCompany>(() => {});

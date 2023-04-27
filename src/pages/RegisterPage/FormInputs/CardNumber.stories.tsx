@@ -18,7 +18,5 @@ export const CardNumbersStory: Story = {
       number3: "3333",
       number4: "4444",
     },
-
-    setCardNumber: () => {},
   },
 };

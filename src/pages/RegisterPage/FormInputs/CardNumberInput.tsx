@@ -1,5 +1,5 @@
 import { useFocus } from "hooks/useFocus";
-import { ChangeEvent, Dispatch, SetStateAction, Fragment } from "react";
+import { ChangeEvent, Fragment, useContext } from "react";
 import { changeInvalidValueToBlank } from "utils/inputValidator";
 import styled from "styled-components";
 import Input, { CommonInputStyle } from "components/Input";
@@ -8,14 +8,15 @@ import { CardNumberCaption } from "components/CaptionStyle";
 import { CardNumberInputBox } from "components/InputBoxStyle";
 import { CardNumber } from "types";
 import { NUMBER_INPUT, LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
+import { CardInfoContext } from "App";
 const { ONLY_NUMBER } = VALID_INPUT;
 
-interface Props {
-  cardNumber: CardNumber;
-  setCardNumber: Dispatch<SetStateAction<CardNumber>>;
-}
+const CardNumberInput = () => {
+  const { number1, number2, number3, number4 } =
+    useContext(CardInfoContext).cardInfo;
+  const cardNumber: CardNumber = { number1, number2, number3, number4 };
+  const setCardNumber = useContext(CardInfoContext).setCardInfo;
 
-const CardNumberInput = ({ cardNumber, setCardNumber }: Props) => {
   const { handleRef, moveFocus } = useFocus();
 
   const handleCardNumberChange = ({

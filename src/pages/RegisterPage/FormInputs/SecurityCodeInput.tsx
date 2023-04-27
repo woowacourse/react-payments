@@ -1,24 +1,26 @@
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import { ChangeEvent, useContext } from "react";
 import styled from "styled-components";
 import { changeInvalidValueToBlank } from "utils/inputValidator";
 import Input, { SecurityCodeInputStyle } from "components/Input";
 import { CodeCaption } from "components/CaptionStyle";
 import { LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
+import { CardInfoContext } from "App";
 const { ONLY_NUMBER } = VALID_INPUT;
 
-interface Props {
-  code: string;
-  setCode: Dispatch<SetStateAction<string>>;
-}
+const SecurityCodeInput = () => {
+  const { code } = useContext(CardInfoContext).cardInfo;
+  const setCode = useContext(CardInfoContext).setCardInfo;
 
-const SecurityCodeInput = ({ code, setCode }: Props) => {
   const handleCodeChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    setCode(
-      changeInvalidValueToBlank(target.value, {
-        length: LIMIT_LENGTH.SECURITY_CODE,
-        regex: ONLY_NUMBER,
-      })
-    );
+    setCode((prevState) => {
+      return {
+        ...prevState,
+        code: changeInvalidValueToBlank(target.value, {
+          length: LIMIT_LENGTH.SECURITY_CODE,
+          regex: ONLY_NUMBER,
+        }),
+      };
+    });
   };
 
   return (
