@@ -11,6 +11,7 @@ export const useFormState = ({
   ownerName,
   securityCode,
   password,
+  cardCompany,
 }: CardInfo) => {
   const { cardInfoList, setCardInfoList } = useContext(CardInfoListContext);
   const { handleClick } = useNavigationTo(PATHNAME.HOME);
@@ -18,7 +19,7 @@ export const useFormState = ({
   const handleOnClickSubmitButton = () => {
     setCardInfoList([
       ...cardInfoList,
-      { cardNumbers, expirationDate, ownerName, securityCode, password },
+      { cardNumbers, expirationDate, ownerName, securityCode, password, cardCompany },
     ]);
 
     handleClick();

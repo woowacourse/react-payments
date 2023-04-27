@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { CardNumbers, ExpirationDate, OwnerName, Password } from '../types/state';
+import { CardNumbers, ExpirationDate, OwnerName, Password, CardCompany } from '../types/state';
 
 export const useCardInfo = () => {
   const [cardNumbers, setCardNumbers] = useState<CardNumbers>({
@@ -19,6 +19,10 @@ export const useCardInfo = () => {
     firstPassword: '',
     secondPassword: '',
   });
+  const [cardCompany, setCardCompany] = useState<CardCompany>({
+    name: '',
+    theme: '',
+  });
 
   return {
     cardNumbers,
@@ -31,5 +35,7 @@ export const useCardInfo = () => {
     setSecurityCode,
     password,
     setPassword,
+    cardCompany,
+    setCardCompany,
   };
 };

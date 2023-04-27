@@ -20,6 +20,7 @@ const CardRegisterForm = (props: CardRegisterFormProps) => {
     setSecurityCode,
     password,
     setPassword,
+    cardCompany,
   } = props;
 
   return (
@@ -42,7 +43,7 @@ const CardRegisterForm = (props: CardRegisterFormProps) => {
       />
       <PasswordInputBox password={password} setPassword={setPassword} securityCode={securityCode} />
       <CardInfoSubmitButtonContainer
-        cardInfo={{ cardNumbers, expirationDate, ownerName, securityCode, password }}
+        cardInfo={{ cardNumbers, expirationDate, ownerName, securityCode, password, cardCompany }}
       />
     </styled.CardRegisterForm>
   );

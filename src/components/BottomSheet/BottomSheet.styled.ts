@@ -10,20 +10,36 @@ export const BottomSheet = styled.div`
 
   width: 100%;
   height: 100%;
+
+  @media (min-width: 992px) {
+    width: 50%;
+  }
+
+  @media (min-width: 1200px) {
+    width: 30%;
+  }
 `;
 
 export const Backdrop = styled.div`
   position: fixed;
   top: 0;
-  left: 0;
   bottom: 0;
-  right: 0;
+  left: 50%;
+  transform: translateX(-50%);
 
   width: 100%;
   height: 100%;
 
   background-color: ${COLOR.BLACK};
   opacity: 0.6;
+
+  @media (min-width: 992px) {
+    width: 50%;
+  }
+
+  @media (min-width: 1200px) {
+    width: 30%;
+  }
 `;
 
 export const BottomSheetContainer = styled.div`
@@ -32,12 +48,20 @@ export const BottomSheetContainer = styled.div`
   align-items: center;
 
   position: fixed;
-  left: 0;
   bottom: 0;
-  right: 0;
+  left: 50%;
+  transform: translateX(-50%);
 
   width: 100%;
   height: 30%;
 
   background-color: ${COLOR.WHITE};
+
+  @media (min-width: 992px) {
+    width: 50%;
+  }
+
+  @media (min-width: 1200px) {
+    width: 30%;
+  }
 `;
