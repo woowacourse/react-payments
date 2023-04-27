@@ -11,7 +11,7 @@ import { Container } from "../../components/common";
 import { useContext } from "react";
 import { Card, CardCompany } from "../../types";
 import { useNavigate } from "react-router-dom";
-import { isNumeric, isFulfilledObject, isFulfilledString } from "../../validator/Validator";
+import { isFulfilledObject, isFulfilledString } from "../../validator/Validator";
 import { PAGE } from "../../constant";
 import Modal from "../../components/Modal/Modal";
 import CardCompanyIcon from "../../components/CardCompanyIcon/CardCompanyIcon";
@@ -47,14 +47,6 @@ const AddCardPage = () => {
     setCardCompany(company);
 
     setModalOpen(false);
-  };
-
-  const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, name } = e.target;
-
-    if (!isNumeric(value)) return;
-
-    setPassword({ ...password, [name]: value });
   };
 
   const onSubmitHandler = (e: React.FormEvent) => {
@@ -114,7 +106,7 @@ const AddCardPage = () => {
         />
         <CardOwnerNameInput ownerName={ownerName} nameLength={ownerName.length} setOwnerName={setOwnerName} />
         <CardSecurityCodeInput securityCode={securityCode} setSecurityCode={setSecurityCode} />
-        <CardPasswordInput password={password} onChange={handlePassword} />
+        <CardPasswordInput password={password} setPassword={setPassword} />
         <ButtonBox isVisible={isAddButtonVisibleConditionFulfilled()}>
           <Button>다음</Button>
         </ButtonBox>

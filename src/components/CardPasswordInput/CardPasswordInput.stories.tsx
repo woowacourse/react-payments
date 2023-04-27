@@ -9,6 +9,6 @@ export default {
 export const Default = () => (
   <>
     <GlobalStyle />
-    <CardPasswordInput password={{ first: "", second: "" }} onChange={() => {}}></CardPasswordInput>
+    <CardPasswordInput password={{ first: "", second: "" }} setPassword={() => {}}></CardPasswordInput>
   </>
 );
