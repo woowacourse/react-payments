@@ -1,4 +1,4 @@
-import { useState, useEffect, ChangeEvent } from "react";
+import { useState, useEffect } from "react";
 import Input from "../../common/Input";
 import { INPUT_STATUS } from "../../../type/InputStatus";
 import styles from "./inputBoxExpirationDate.module.css";
@@ -15,23 +15,19 @@ export default function InputBoxExpirationDate(props: Props) {
 
   const [inputStatus, setInputStatus] = useState(INPUT_STATUS.NOT_COMPLETE);
 
-  const changeExpirationDate = (e: ChangeEvent<HTMLInputElement>) => {
-    const originDate = e.target.value
-      .split("/")
-      .join("")
-      .replace(/\s/g, '')
-      .slice(0, CONSTANT.MONTH_INPUT_MAX_LENGTH + CONSTANT.YEAR_INPUT_MAX_LENGTH);
+  const removeSlashParser = (value: string) => value.split("/").join("").replace(/\s/g, '');
 
-    const formattedDate =
-      originDate.length > CONSTANT.MONTH_INPUT_MAX_LENGTH
-        ? originDate.slice(0, CONSTANT.MONTH_INPUT_MAX_LENGTH) + "/" + originDate.slice(CONSTANT.YEAR_INPUT_MAX_LENGTH)
-        : originDate;
+  const lengthParser = (value: string) => value.slice(0, CONSTANT.MONTH_INPUT_MAX_LENGTH + CONSTANT.YEAR_INPUT_MAX_LENGTH)
 
-    e.target.value = formattedDate;
-    if (e.target.value.length > 5) e.target.value = e.target.value.slice(0, 5);
+  const dateFormatter = (value: string) => (
+    value.length > CONSTANT.MONTH_INPUT_MAX_LENGTH
+    ? value.slice(0, CONSTANT.MONTH_INPUT_MAX_LENGTH) + "/" + value.slice(CONSTANT.YEAR_INPUT_MAX_LENGTH)
+    : value
+  );
 
-    if (validateExpirationDate(e.target.value)) {
-      e.target.value.length === 5
+  const inputStatusHandler = (value: string) => {
+    if (validateExpirationDate(value)) {
+      value.length === 5
         ? setInputStatus(INPUT_STATUS.COMPLETE)
         : setInputStatus(INPUT_STATUS.NOT_COMPLETE);
     } else {
@@ -41,7 +37,7 @@ export default function InputBoxExpirationDate(props: Props) {
 
   useEffect(() => {
     setIsComplete(inputStatus === INPUT_STATUS.COMPLETE ? true : false);
-  }, [inputStatus]);
+  }, [inputStatus, setIsComplete]);
 
   return (
     <div className={styles.inputBox}>
@@ -50,10 +46,8 @@ export default function InputBoxExpirationDate(props: Props) {
         name="expiration-date"
         className="input-expiration-date"
         type="text"
-        onChange={(e: ChangeEvent<HTMLInputElement>) => { 
-          changeExpirationDate(e);
-          setPreviewDataHandler();
-        }}
+        parsers={[removeSlashParser, lengthParser, dateFormatter]}
+        valueChangeSubscribers={[inputStatusHandler]}
         placeholder="MM / YY"
         inputMode="numeric"
       ></Input>
