@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import CardItem from '../common/CardItem';
 import Title from '../common/Title';
 import Input from '../common/Input';
-import { CardItemInfo } from '../../types/Card';
 import { cardLocalStorage } from '../domain/CardLocalStorage';
+import type { CardItemInfo } from '../../types/Card';
 
 interface CardAdditionCompletionPageProps {
   card: CardItemInfo;

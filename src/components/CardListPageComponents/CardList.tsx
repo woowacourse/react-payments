@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import CardItem from '../common/CardItem';
-import type { CardItemInfo } from '../../types/Card';
 import Title from '../common/Title';
+import type { CardItemInfo } from '../../types/Card';
 
 interface CardListProps {
   cardList: CardItemInfo[];
