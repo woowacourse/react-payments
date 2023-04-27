@@ -1,4 +1,7 @@
-import { OwnerName, SetSecurityCode } from '../../types/state';
+import { useContext } from 'react';
+
+import CardInfoContext from '../../contexts/CardInfoContext';
+
 import { SECURITY_CODE } from '../../constants/cardInfo';
 import { ERROR_MESSAGE } from '../../constants/message';
 import { isNumeric } from '../validators/validator';
@@ -8,17 +11,8 @@ import { useInputBox } from '../../hooks/useInputBox';
 import * as styled from './SecurityCodeInputBox.styled';
 import Input from '../Input/Input';
 
-interface SecurityCodeInputBoxProps {
-  securityCode: string;
-  setSecurityCode: SetSecurityCode;
-  ownerName: OwnerName;
-}
-
-const SecurityCodeInputBox = ({
-  securityCode,
-  setSecurityCode,
-  ownerName,
-}: SecurityCodeInputBoxProps) => {
+const SecurityCodeInputBox = () => {
+  const { securityCode, setSecurityCode, ownerName } = useContext(CardInfoContext);
   const { validate, errorMessageState } = useInputValidator(
     isNumeric,
     ERROR_MESSAGE.SHOULD_NUMBER,
@@ -26,6 +20,7 @@ const SecurityCodeInputBox = ({
   );
 
   const { onChange } = useInputBox(validate, securityCode, setSecurityCode);
+  const isOwnerNameFull = ownerName?.length === 30;
 
   return (
     <styled.SecurityCodeInputBox>
@@ -40,7 +35,7 @@ const SecurityCodeInputBox = ({
             width="m"
             type="password"
             maxLength={3}
-            isFocus={ownerName?.length === 30}
+            isFocus={isOwnerNameFull}
           />
         </styled.InputContainer>
       </label>

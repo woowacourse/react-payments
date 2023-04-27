@@ -1,10 +1,15 @@
-import { setCardCompany } from '../../types/state';
+import { useContext } from 'react';
+
+import CardInfoContext from '../../contexts/CardInfoContext';
+
 import { CARD_COMPANY_INFO } from '../../constants/cardCompany';
 
 import * as styled from './CardCompanyContents.styled';
 import CardCompanyButton from '../CardCompanyButton/CardCompanyButton';
 
-const CardCompanyContents = ({ setCardCompany }: { setCardCompany: setCardCompany }) => {
+const CardCompanyContents = () => {
+  const { setCardCompany } = useContext(CardInfoContext);
+
   const generateCardCompanyList = () => {
     return CARD_COMPANY_INFO.map(companyInfo => {
       return (

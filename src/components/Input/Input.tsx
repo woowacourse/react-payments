@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useInputFocus } from '../../hooks/useInputFocus';
 
 import * as styled from './Input.styled';
 
@@ -7,33 +7,28 @@ export interface InputProps {
   width: 'xs' | 's' | 'm' | 'l' | 'xl';
   type: 'password' | 'number' | 'text';
   maxLength: number;
-  value: string;
+  value: string | null;
   name?: string;
   placeholder?: string;
   isFocus?: boolean;
 }
 
-const Input = (props: InputProps) => {
-  const { value, onChange, width, type, name, placeholder, maxLength, isFocus } = props;
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    if (isFocus) {
-      inputRef.current?.focus();
-    }
-    if (value.length >= maxLength) {
-      inputRef.current?.blur();
-      const nextInput = inputRef.current?.nextElementSibling;
-      if (nextInput && nextInput instanceof HTMLElement) {
-        nextInput.focus();
-      }
-    }
-  }, [value, isFocus]);
+const Input = ({
+  value,
+  onChange,
+  width,
+  type,
+  name,
+  placeholder,
+  maxLength,
+  isFocus,
+}: InputProps) => {
+  const inputRef = useInputFocus(isFocus, value, maxLength);
 
   return (
     <styled.Input
       name={name}
-      value={value}
+      value={value ?? ''}
       onChange={onChange}
       width={width}
       type={type}

@@ -1,4 +1,7 @@
-import { CardNumbers, SetCardNumbers } from '../../types/state';
+import { useContext } from 'react';
+
+import CardInfoContext from '../../contexts/CardInfoContext';
+
 import { CARD_NUMBER } from '../../constants/cardInfo';
 import { ERROR_MESSAGE } from '../../constants/message';
 import { isNumeric } from '../validators/validator';
@@ -8,12 +11,8 @@ import { useInputBox } from '../../hooks/useInputBox';
 import * as styled from './CardNumberInputBox.styled';
 import Input from '../Input/Input';
 
-interface CardNumberInputBoxProps {
-  cardNumbers: CardNumbers;
-  setCardNumbers: SetCardNumbers;
-}
-
-const CardNumberInputBox = ({ cardNumbers, setCardNumbers }: CardNumberInputBoxProps) => {
+const CardNumberInputBox = () => {
+  const { cardNumbers, setCardNumbers } = useContext(CardInfoContext);
   const { validate, errorMessageState } = useInputValidator(
     isNumeric,
     ERROR_MESSAGE.SHOULD_NUMBER,
@@ -30,6 +29,10 @@ const CardNumberInputBox = ({ cardNumbers, setCardNumbers }: CardNumberInputBoxP
         </styled.LabelHeader>
         <styled.InputContainer>
           {Object.entries(cardNumbers).map(([key, value]) => {
+            const type =
+              key === 'firstCardNumber' || key === 'secondCardNumber' ? 'text' : 'password';
+            const isFirstInput = key === 'firstCardNumber' ? true : false;
+
             return (
               <Input
                 key={key}
@@ -37,10 +40,10 @@ const CardNumberInputBox = ({ cardNumbers, setCardNumbers }: CardNumberInputBoxP
                 value={value}
                 onChange={onChange}
                 width="xl"
-                type={key === 'firstCardNumber' || key === 'secondCardNumber' ? 'text' : 'password'}
+                type={type}
                 maxLength={4}
                 placeholder="0000"
-                isFocus={key === 'first' ? true : false}
+                isFocus={isFirstInput}
               />
             );
           })}

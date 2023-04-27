@@ -1,4 +1,7 @@
-import { CardNumbers, ExpirationDate, SetExpirationDate } from '../../types/state';
+import { useContext } from 'react';
+
+import CardInfoContext from '../../contexts/CardInfoContext';
+
 import { EXPIRATION_DATE } from '../../constants/cardInfo';
 import { ERROR_MESSAGE } from '../../constants/message';
 import { isNumeric } from '../validators/validator';
@@ -8,17 +11,8 @@ import { useInputBox } from '../../hooks/useInputBox';
 import * as styled from './ExpirationDateInputBox.styled';
 import Input from '../Input/Input';
 
-interface ExpirationDateInputBoxProps {
-  expirationDate: ExpirationDate;
-  setExpirationDate: SetExpirationDate;
-  cardNumbers: CardNumbers;
-}
-
-const ExpirationDateInputBox = ({
-  expirationDate,
-  setExpirationDate,
-  cardNumbers,
-}: ExpirationDateInputBoxProps) => {
+const ExpirationDateInputBox = () => {
+  const { expirationDate, setExpirationDate, cardNumbers } = useContext(CardInfoContext);
   const { validate, errorMessageState } = useInputValidator(
     isNumeric,
     ERROR_MESSAGE.SHOULD_NUMBER,
@@ -35,6 +29,10 @@ const ExpirationDateInputBox = ({
         </styled.LabelHeader>
         <styled.InputContainer>
           {Object.entries(expirationDate).map(([key, value]) => {
+            const placeholder = key === 'month' ? 'MM' : 'YY';
+            const isMonthInput = key === 'month';
+            const isCardNumbersFull = cardNumbers.fourthCardNumber.length === 4;
+
             return (
               <Input
                 key={key}
@@ -44,8 +42,8 @@ const ExpirationDateInputBox = ({
                 width="s"
                 type="text"
                 maxLength={2}
-                placeholder={key === 'month' ? 'MM' : 'YY'}
-                isFocus={key === 'month' && cardNumbers.fourthCardNumber.length === 4}
+                placeholder={placeholder}
+                isFocus={isMonthInput && isCardNumbersFull}
               />
             );
           })}

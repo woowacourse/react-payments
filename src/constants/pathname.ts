@@ -1,7 +1,7 @@
 export const PATHNAME = {
   HOME: '/',
   REGISTER: '/register',
-  ALIAS: '/alias',
+  CARD_ALIAS: '/alias',
 } as const;
 
 export type PageTitle = Record<'/' | '/register' | '/alias', string>;

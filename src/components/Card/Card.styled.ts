@@ -16,10 +16,6 @@ export const Card = styled.div`
 
   font-size: 12px;
   letter-spacing: 0.1em;
-
-  &:not(:last-child) {
-    margin-bottom: 48px;
-  }
 `;
 
 export const CardName = styled.p`

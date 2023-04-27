@@ -1,29 +1,9 @@
 import { useContext } from 'react';
 
-import CardInfoListContext from '../contexts/CardInfoListContext';
-import { CardInfo } from '../types/state';
-import { PATHNAME } from '../constants/pathname';
-import { useNavigationTo } from './useNavigationTo';
+import CardInfoContext from '../contexts/CardInfoContext';
 
-export const useFormState = ({
-  cardNumbers,
-  expirationDate,
-  ownerName,
-  securityCode,
-  password,
-  cardCompany,
-}: CardInfo) => {
-  const { cardInfoList, setCardInfoList } = useContext(CardInfoListContext);
-  const { handleClick } = useNavigationTo(PATHNAME.ALIAS);
-
-  const handleOnClickSubmitButton = () => {
-    setCardInfoList([
-      ...cardInfoList,
-      { cardNumbers, expirationDate, ownerName, securityCode, password, cardCompany },
-    ]);
-
-    handleClick();
-  };
+export const useFormState = () => {
+  const { cardNumbers, expirationDate, securityCode, password } = useContext(CardInfoContext);
 
   const isFilledCardInfos = () => {
     return (
@@ -41,5 +21,5 @@ export const useFormState = ({
     );
   };
 
-  return { handleOnClickSubmitButton, isFilledCardInfos };
+  return { isFilledCardInfos };
 };

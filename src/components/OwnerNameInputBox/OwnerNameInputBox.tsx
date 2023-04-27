@@ -1,4 +1,7 @@
-import { ExpirationDate, OwnerName, SetOwnerName } from '../../types/state';
+import { useContext } from 'react';
+
+import CardInfoContext from '../../contexts/CardInfoContext';
+
 import { OWNER_NAME } from '../../constants/cardInfo';
 import { ERROR_MESSAGE } from '../../constants/message';
 import { isAlpha } from '../validators/validator';
@@ -8,20 +11,15 @@ import { useInputBox } from '../../hooks/useInputBox';
 import * as styled from './OwnerNameInputBox.styled';
 import Input from '../Input/Input';
 
-interface OwnerNameInputBoxProps {
-  ownerName: OwnerName;
-  setOwnerName: SetOwnerName;
-  expirationDate: ExpirationDate;
-}
-
-const OwnerNameInputBox = ({ ownerName, setOwnerName, expirationDate }: OwnerNameInputBoxProps) => {
+const OwnerNameInputBox = () => {
+  const { ownerName, setOwnerName, expirationDate } = useContext(CardInfoContext);
   const { validate, errorMessageState } = useInputValidator(
     isAlpha,
     ERROR_MESSAGE.SHOULD_ALPHA,
     OWNER_NAME.MAX_LENGTH
   );
-
   const { onChange } = useInputBox(validate, ownerName, setOwnerName);
+  const isExpirationDateFull = expirationDate.year?.length === 2;
 
   return (
     <styled.OwnerNameInputBox>
@@ -38,7 +36,7 @@ const OwnerNameInputBox = ({ ownerName, setOwnerName, expirationDate }: OwnerNam
             type="text"
             placeholder="카드에 표시된 이름과 동일하게 입력하세요."
             maxLength={30}
-            isFocus={expirationDate.year?.length === 2}
+            isFocus={isExpirationDateFull}
           />
         </styled.InputContainer>
       </label>

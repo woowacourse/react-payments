@@ -2,16 +2,12 @@ import styled from 'styled-components';
 
 import { COLOR } from '../../constants/cardInfo';
 
-export const CardInfoSubmitButtonContainer = styled.div`
-  display: flex;
-  justify-content: end;
+export const CardInfoSubmitButton = styled.button`
+  position: absolute;
+  bottom: 28px;
+  right: 28px;
 
   height: 40px;
-`;
-
-export const CardInfoSubmitButton = styled.button`
-  position: relative;
-
   width: 50px;
 
   font-size: large;

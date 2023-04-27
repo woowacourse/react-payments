@@ -1,4 +1,7 @@
-import { Password, SetPassword } from '../../types/state';
+import { useContext } from 'react';
+
+import CardInfoContext from '../../contexts/CardInfoContext';
+
 import { PASSWORD } from '../../constants/cardInfo';
 import { ERROR_MESSAGE } from '../../constants/message';
 import { isNumeric } from '../validators/validator';
@@ -8,13 +11,8 @@ import { useInputBox } from '../../hooks/useInputBox';
 import * as styled from './PasswordInputBox.styled';
 import Input from '../Input/Input';
 
-interface PasswordInputBoxProps {
-  password: Password;
-  setPassword: SetPassword;
-  securityCode: string;
-}
-
-const PasswordInputBox = ({ password, setPassword, securityCode }: PasswordInputBoxProps) => {
+const PasswordInputBox = () => {
+  const { password, setPassword, securityCode } = useContext(CardInfoContext);
   const { validate, errorMessageState } = useInputValidator(
     isNumeric,
     ERROR_MESSAGE.SHOULD_NUMBER,
@@ -31,6 +29,9 @@ const PasswordInputBox = ({ password, setPassword, securityCode }: PasswordInput
         </styled.LabelHeader>
         <styled.InputContainer>
           {Object.entries(password).map(([key, value]) => {
+            const isFirstInput = key === 'firstPassword';
+            const isSecurityCodeFull = securityCode.length === 3;
+
             return (
               <Input
                 key={key}
@@ -40,7 +41,7 @@ const PasswordInputBox = ({ password, setPassword, securityCode }: PasswordInput
                 width="xs"
                 type="password"
                 maxLength={1}
-                isFocus={key === 'firstPassword' && securityCode.length === 3}
+                isFocus={isFirstInput && isSecurityCodeFull}
               />
             );
           })}

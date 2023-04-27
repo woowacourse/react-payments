@@ -1,19 +1,21 @@
-import { CardInfo } from '../../types/state';
+import { PATHNAME } from '../../constants/pathname';
 import { useFormState } from '../../hooks/useFormState';
+import { useNavigationTo } from '../../hooks/useNavigationTo';
 
 import * as styled from './CardInfoSubmitButtonContainer.styled';
 
-const CardInfoSubmitButtonContainer = ({ cardInfo }: { cardInfo: CardInfo }) => {
-  const { handleOnClickSubmitButton, isFilledCardInfos } = useFormState(cardInfo);
+const CardInfoSubmitButtonContainer = () => {
+  const { isFilledCardInfos } = useFormState();
+  const { handleClick } = useNavigationTo(PATHNAME.CARD_ALIAS);
 
   return (
-    <styled.CardInfoSubmitButtonContainer>
+    <>
       {isFilledCardInfos() && (
-        <styled.CardInfoSubmitButton onClick={handleOnClickSubmitButton} autoFocus>
+        <styled.CardInfoSubmitButton onClick={handleClick} autoFocus>
           다음
         </styled.CardInfoSubmitButton>
       )}
-    </styled.CardInfoSubmitButtonContainer>
+    </>
   );
 };
 

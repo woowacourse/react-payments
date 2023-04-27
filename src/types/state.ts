@@ -9,6 +9,7 @@ export type OwnerName = string | null;
 export type SecurityCode = string;
 export type Password = Record<'firstPassword' | 'secondPassword', string>;
 export type CardCompany = Record<'name' | 'theme', string | null>;
+export type CardAlias = string | null;
 
 export type SetCardNumbers = React.Dispatch<SetStateAction<CardNumbers>>;
 export type SetExpirationDate = React.Dispatch<SetStateAction<ExpirationDate>>;
@@ -16,6 +17,7 @@ export type SetOwnerName = React.Dispatch<SetStateAction<OwnerName>>;
 export type SetSecurityCode = React.Dispatch<SetStateAction<SecurityCode>>;
 export type SetPassword = React.Dispatch<SetStateAction<Password>>;
 export type setCardCompany = React.Dispatch<SetStateAction<CardCompany>>;
+export type SetCardAlias = React.Dispatch<SetStateAction<CardAlias>>;
 
 export interface CardInfo {
   cardNumbers: CardNumbers;
@@ -24,21 +26,18 @@ export interface CardInfo {
   securityCode: SecurityCode;
   password: Password;
   cardCompany: CardCompany;
+  cardAlias: CardAlias;
 }
 
 export type SetCardInfo = React.Dispatch<SetStateAction<CardInfo>>;
 export type SetCardInfoList = React.Dispatch<SetStateAction<CardInfo[]>>;
 
-export interface CardRegisterFormProps {
+export interface CardContext {
   cardNumbers: CardNumbers;
-  setCardNumbers: SetCardNumbers;
   expirationDate: ExpirationDate;
-  setExpirationDate: SetExpirationDate;
   ownerName: OwnerName;
-  setOwnerName: SetOwnerName;
   securityCode: SecurityCode;
-  setSecurityCode: SetSecurityCode;
   password: Password;
-  setPassword: SetPassword;
   cardCompany: CardCompany;
+  cardAlias: CardAlias;
 }
