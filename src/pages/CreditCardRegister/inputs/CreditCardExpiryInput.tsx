@@ -1,11 +1,11 @@
 import * as T from 'types';
-import useCreditCard from 'hooks/useCreditCard';
+import useCreditCardForm from 'hooks/useCreditCardForm';
 import Input from '../../../components/Input';
 import * as S from '../style';
 import { validateExpiry } from '../../../domains/validations';
 
 function CreditCardExpiryInput({ name }: T.CreditCardInputProps) {
-  const { creditCard, setCreditCard } = useCreditCard();
+  const { creditCard, setCreditCard } = useCreditCardForm();
 
   const handleChangeCreditCardExpiry = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newCardExpiry = event.target.value;

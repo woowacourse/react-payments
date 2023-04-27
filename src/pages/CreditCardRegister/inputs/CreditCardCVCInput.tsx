@@ -1,10 +1,10 @@
 import * as T from 'types';
-import useCreditCard from 'hooks/useCreditCard';
+import useCreditCardForm from 'hooks/useCreditCardForm';
 import Input from '../../../components/Input';
 import * as S from '../style';
 
 function CreditCardCVCInput({ name }: T.CreditCardInputProps) {
-  const { creditCard, setCreditCard } = useCreditCard();
+  const { creditCard, setCreditCard } = useCreditCardForm();
 
   const handleChangeCreditCardCVC = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newCVC = event.target.value.replace(/\D/g, '');

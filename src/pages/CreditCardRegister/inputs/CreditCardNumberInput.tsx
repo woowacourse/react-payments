@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { convertSecuredCreditCard } from 'domains/creditCard';
 import * as T from 'types';
 import styled from 'styled-components';
-import useCreditCard from 'hooks/useCreditCard';
+import useCreditCardForm from 'hooks/useCreditCardForm';
 import * as S from '../style';
 import { validateNumber } from '../../../domains/validations';
 
@@ -25,7 +25,7 @@ export const MaskedViewer = styled.p`
 
 function CreditCardNumberInput({ name }: T.CreditCardInputProps) {
   const inputRef = useRef<HTMLInputElement>(null);
-  const { creditCard, setCreditCard } = useCreditCard();
+  const { creditCard, setCreditCard } = useCreditCardForm();
   const [markedCreditCardNumber, setMarkedCreditCardNumber] = useState('');
 
   const handleChangeCreditCardNumber = (event: React.ChangeEvent<HTMLInputElement>) => {

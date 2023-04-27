@@ -5,7 +5,7 @@ import * as Type from 'types';
 import useCreditCardList from 'hooks/useCreditCardList';
 import Modal from 'components/Modal';
 import useModal from 'hooks/useModal';
-import useCreditCard from 'hooks/useCreditCard';
+import useCreditCardForm from 'hooks/useCreditCardForm';
 import CreditCardNumberInput from './inputs/CreditCardNumberInput';
 import CreditCardExpiryInput from './inputs/CreditCardExpiryInput';
 import CreditCardOwnerInput from './inputs/CreditCardOwnerInput';
@@ -19,7 +19,7 @@ function CreditCardRegister() {
   const { saveCreditCard } = useCreditCardList();
   const { modalOpen, openModal, closeModal } = useModal();
 
-  const { creditCard, isCreditCardError } = useCreditCard();
+  const { creditCard, isCreditCardError } = useCreditCardForm();
 
   const handleSubmit = () => {
     if (isCreditCardError) return;
