@@ -6,7 +6,7 @@ export const Wrapper = styled.div<{ background: string }>`
   width: 212px;
   height: 132px;
   padding: 12px;
-  background: ${(props) => props.background || '#333333'};
+  background: ${(props) => props.background || '#ffffff'};
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
   font-size: 14px;
