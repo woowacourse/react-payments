@@ -11,7 +11,7 @@ import type { CardItemInfo } from './types/Card';
 
 function App() {
   const [cardName, setCardName] = useState('');
-  const [bankName, setBankName] = useState('카드사를 선택해주세요');
+  const [bankName, setBankName] = useState('기타 은행');
   const [cardItem, setCardItem] = useState<CardItemInfo>({
     id: 0,
     cardNumber: ['', '', '', ''],
