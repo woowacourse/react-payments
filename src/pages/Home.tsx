@@ -3,14 +3,18 @@ import { CardDB } from 'db/Cards';
 import styled from 'styled-components';
 import { CreditCard, Header } from 'components/common';
 import { PageContainer } from 'components/style/PageContainer';
-
-const cards = CardDB.getCards();
+import { useEffect, useState } from 'react';
+import { Card } from 'components/common/Card/types';
 
 function Home() {
+  const [cards, setCards] = useState<Card[]>(CardDB.getCards());
   const navigate = useNavigate();
+
   const goRegister = () => {
     navigate('/register');
   };
+
+  useEffect(() => {}, [cards]);
 
   return (
     <>

@@ -10,7 +10,7 @@ export const BankCodeList = {
 } as const;
 
 export const CardName = {
-  [BankCodeList.BCCard]: '비씨카드',
+  [BankCodeList.BCCard]: 'BC카드',
   [BankCodeList.ShinHanCard]: '신한카드',
   [BankCodeList.KakaoBank]: '카카오뱅크',
   [BankCodeList.HyunDaiCard]: '현대카드',

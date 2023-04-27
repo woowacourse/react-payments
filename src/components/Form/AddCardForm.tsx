@@ -13,6 +13,10 @@ import { BankCode, Card, isCard } from 'components/common/Card/types';
 import { ValueAndOnChange } from 'components/Input/types';
 import { useCardFormValid } from 'hooks/useCardFormValid';
 import { CreditCard } from 'components/common';
+import {
+  CardBottomSheet,
+  CardBottomSheetProps,
+} from 'components/common/BottomSheet/CardBottomSheet';
 
 export type AddCardFormProps = {
   onSubmit: () => void;
@@ -32,6 +36,7 @@ function AddCardForm({ onSubmit }: AddCardFormProps) {
   const [securityCode, setSecurityCode] = useState('');
 
   const [bankCode, setBankCode] = useState<BankCode>();
+  const [isBottomSheetActive, setBottomSheetActive] = useState<boolean>(true);
 
   const card: Partial<Card> = {
     numbers: cardNumbers,
@@ -93,6 +98,11 @@ function AddCardForm({ onSubmit }: AddCardFormProps) {
     }
   };
 
+  const handleClickBankImage: CardBottomSheetProps['onClickBankImage'] = (bankCode) => {
+    setBankCode(bankCode);
+    setBottomSheetActive((prevIsBottomSheetActive) => !prevIsBottomSheetActive);
+  };
+
   return (
     <>
       <CardWrapper>
@@ -134,6 +144,7 @@ function AddCardForm({ onSubmit }: AddCardFormProps) {
         </PasswordInputContainer>
         <FormSubmitButton type="submit">다음</FormSubmitButton>
       </FormContainer>
+      <CardBottomSheet onClickBankImage={handleClickBankImage} active={isBottomSheetActive} />
     </>
   );
 }
