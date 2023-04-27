@@ -56,5 +56,5 @@ export const useInputBox = (
     }
   };
 
-  return { onChange };
+  return onChange;
 };

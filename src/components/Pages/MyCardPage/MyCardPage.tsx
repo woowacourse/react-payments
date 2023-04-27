@@ -7,10 +7,8 @@ import CardList from '../../CardList/CardList';
 import CardRegisterButtonContainer from '../../CardRegisterButtonContainer/CardRegisterButtonContainer';
 
 const MyCardPage = () => {
-  const { resetCardInfo } = useResetCardInfo();
-
   useEffect(() => {
-    resetCardInfo();
+    useResetCardInfo();
   }, []);
 
   return (

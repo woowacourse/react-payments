@@ -19,8 +19,6 @@ const CardNumberInputBox = () => {
     CARD_NUMBER.MAX_LENGTH
   );
 
-  const { onChange } = useInputBox(validate, cardNumbers, setCardNumbers);
-
   return (
     <styled.CardNumberInputBox>
       <label>
@@ -39,7 +37,7 @@ const CardNumberInputBox = () => {
                 key={key}
                 name={key}
                 value={value}
-                onChange={onChange}
+                onChange={useInputBox(validate, cardNumbers, setCardNumbers)}
                 width="xl"
                 type={type}
                 maxLength={4}

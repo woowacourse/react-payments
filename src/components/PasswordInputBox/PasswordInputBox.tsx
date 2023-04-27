@@ -19,8 +19,6 @@ const PasswordInputBox = () => {
     PASSWORD.MAX_LENGTH
   );
 
-  const { onChange } = useInputBox(validate, password, setPassword);
-
   return (
     <styled.PasswordInputBox>
       <label>
@@ -37,7 +35,7 @@ const PasswordInputBox = () => {
                 key={key}
                 name={key}
                 value={value}
-                onChange={onChange}
+                onChange={useInputBox(validate, password, setPassword)}
                 width="xs"
                 type="password"
                 maxLength={1}

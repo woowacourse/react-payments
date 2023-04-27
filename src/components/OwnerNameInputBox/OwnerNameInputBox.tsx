@@ -18,7 +18,6 @@ const OwnerNameInputBox = () => {
     ERROR_MESSAGE.SHOULD_ALPHA,
     OWNER_NAME.MAX_LENGTH
   );
-  const { onChange } = useInputBox(validate, ownerName, setOwnerName);
   const isExpirationDateFull = expirationDate.year?.length === 2;
 
   return (
@@ -31,7 +30,7 @@ const OwnerNameInputBox = () => {
         <styled.InputContainer>
           <Input
             value={ownerName ?? ''}
-            onChange={onChange}
+            onChange={useInputBox(validate, ownerName, setOwnerName)}
             width="xl"
             type="text"
             placeholder="카드에 표시된 이름과 동일하게 입력하세요."

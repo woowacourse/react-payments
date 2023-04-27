@@ -1,17 +1,14 @@
 import { PATHNAME } from '../../constants/pathname';
-import { useFormState } from '../../hooks/useFormState';
+import { useIsFilledForm } from '../../hooks/useIsFilledForm';
 import { useNavigationTo } from '../../hooks/useNavigationTo';
 
 import * as styled from './CardInfoSubmitButtonContainer.styled';
 
 const CardInfoSubmitButtonContainer = () => {
-  const { isFilledCardInfos } = useFormState();
-  const { handleClick } = useNavigationTo(PATHNAME.CARD_ALIAS);
-
   return (
     <>
-      {isFilledCardInfos() && (
-        <styled.CardInfoSubmitButton onClick={handleClick} autoFocus>
+      {useIsFilledForm() && (
+        <styled.CardInfoSubmitButton onClick={() => useNavigationTo(PATHNAME.CARD_ALIAS)} autoFocus>
           다음
         </styled.CardInfoSubmitButton>
       )}

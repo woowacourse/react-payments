@@ -19,7 +19,6 @@ const SecurityCodeInputBox = () => {
     SECURITY_CODE.MAX_LENGTH
   );
 
-  const { onChange } = useInputBox(validate, securityCode, setSecurityCode);
   const isOwnerNameFull = ownerName?.length === 30;
 
   return (
@@ -31,7 +30,7 @@ const SecurityCodeInputBox = () => {
         <styled.InputContainer>
           <Input
             value={securityCode}
-            onChange={onChange}
+            onChange={useInputBox(validate, securityCode, setSecurityCode)}
             width="m"
             type="password"
             maxLength={3}

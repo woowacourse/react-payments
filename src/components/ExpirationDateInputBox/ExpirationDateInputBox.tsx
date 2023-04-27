@@ -19,8 +19,6 @@ const ExpirationDateInputBox = () => {
     EXPIRATION_DATE.MAX_LENGTH
   );
 
-  const { onChange } = useInputBox(validate, expirationDate, setExpirationDate);
-
   return (
     <styled.ExpirationDateInputBox>
       <label>
@@ -38,7 +36,7 @@ const ExpirationDateInputBox = () => {
                 key={key}
                 name={key}
                 value={value ?? ''}
-                onChange={onChange}
+                onChange={useInputBox(validate, expirationDate, setExpirationDate)}
                 width="s"
                 type="text"
                 maxLength={2}
