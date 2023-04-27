@@ -14,6 +14,7 @@ const card: Card = {
   securityCode: "123",
   password: { first: "1", second: "2" },
   cardCompany: "BC",
+  alias: "",
 };
 
 export const Default = () => (
