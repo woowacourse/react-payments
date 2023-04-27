@@ -1,4 +1,4 @@
-import Input from '../components/Common/Input/Input';
+import Input from '../components/Common/Input';
 import type { Meta, StoryObj } from '@storybook/react';
 
 type Story = StoryObj<typeof Input>;
