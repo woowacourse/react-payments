@@ -4,12 +4,15 @@ type CardPreviewProps = {
   cardNumber: string;
   cardOwnerName: string;
   cardExpirationDate: string;
+  image?: string;
 };
 
-const CardPreview = ({ cardNumber, cardOwnerName, cardExpirationDate }: CardPreviewProps) => {
+const CardPreview = ({ cardNumber, cardOwnerName, cardExpirationDate, image }: CardPreviewProps) => {
+  console.log('image', image);
+
   return (
     <div className={styles.container}>
-      <div className={styles.card}>
+      <div className={styles.card} style={{ background: `url(${image})` }}>
         <div className={styles.chip} />
         <span className={styles['card-number']}>{cardNumber}</span>
         <div className={styles['name-date-container']}>
