@@ -62,9 +62,7 @@ function useCardInfoInput<T>({
 
     if (
       contextType !== "ownerName" &&
-      !ONLY_NUMBER_REGEXP.test(
-        contextType === "expireDate" ? value.replace("/", "") : value,
-      )
+      !ONLY_NUMBER_REGEXP.test(contextType === "expireDate" ? date : value)
     )
       return;
     if (contextType === "ownerName" && !ONLY_ENG_AND_EMPTY_REGEXP.test(value))
@@ -86,6 +84,7 @@ function useCardInfoInput<T>({
         const dateValitation = MMYYValidation(date, [MM, YY]);
 
         if (dateValitation && value.length === NUMBERS.MAX_EXPIREDATE) {
+          console.log(dateValitation);
           setCardInput((prev) => ({ ...prev, expireDate: "" }));
           setError({
             isError: true,

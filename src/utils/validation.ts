@@ -15,7 +15,9 @@ export const MMYYValidation = (date: string, [MM, YY]: [string, string]) => {
 
   const isMMYYVal =
     date.length > 0 &&
-    (!MMYY_REGEXP.test(date) || years > YY || (years === YY && curMM > MM));
+    (!MMYY_REGEXP.test(date) ||
+      years > YY ||
+      (years === YY && Number(curMM) > Number(MM)));
 
   return isMMYYVal;
 };
