@@ -18,8 +18,6 @@ export type AddCardFormProps = {
   onSubmit: () => void;
 };
 
-const NOT_ALPHABET_REGEX = /[^A-Za-z\s]/gi;
-
 function AddCardForm({ onSubmit }: AddCardFormProps) {
   const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
 
@@ -64,7 +62,7 @@ function AddCardForm({ onSubmit }: AddCardFormProps) {
   };
 
   const handleNameInputChange: ValueAndOnChange['onChange'] = (inputValue) => {
-    setName(inputValue.replace(NOT_ALPHABET_REGEX, '').toUpperCase());
+    setName(inputValue);
   };
 
   const handleSecurityCodeChange: ValueAndOnChange['onChange'] = (inputValue) => {

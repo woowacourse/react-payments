@@ -4,10 +4,11 @@ import { ValueAndOnChange } from './types';
 
 export interface NameInputProps extends ValueAndOnChange {}
 
+const NOT_ALPHABET_REGEX = /[^A-Za-z\s]/gi;
+
 export function NameInput({ value, onChange }: NameInputProps) {
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    const value = e.target.value;
-
+    const value = e.target.value.replace(NOT_ALPHABET_REGEX, '').toUpperCase();
     onChange?.(value);
   };
 
