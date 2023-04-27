@@ -1,14 +1,21 @@
-import type { Meta } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 
 import InputBoxCardNumber from "../component/CardInputPage/InputBoxCardNumber/InputBoxCardNumber";
 
+type Story = StoryObj<typeof InputBoxCardNumber>;
+
 const meta: Meta = {
-  title: "InputBoxCardNumber component",
+  title: "Card Number Input Box",
   component: InputBoxCardNumber,
+  argTypes: {
+    setIsComplete: { action: "Is all four inputs complete?" },
+  }
 };
 
 export default meta;
 
-export const InputTest = () => (
-  <InputBoxCardNumber setIsComplete={() => {}} setPreviewDataHandler={() => {}}></InputBoxCardNumber>
-);
+export const Input: Story = {
+  args: {
+    setPreviewDataHandler: () => {},
+  },
+};
