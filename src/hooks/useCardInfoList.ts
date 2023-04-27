@@ -9,16 +9,9 @@ export const useCardInfoList = () => {
   );
 
   useEffect(() => {
-    const handleBeforeUnload = () => {
+    if (cardInfoList.length) {
       setLocalStorageItem('cardInfoList', cardInfoList);
-    };
-
-    window.addEventListener('beforeunload', handleBeforeUnload);
-
-    return () => {
-      setLocalStorageItem('cardInfoList', cardInfoList);
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-    };
+    }
   }, [cardInfoList]);
 
   return { cardInfoList, setCardInfoList };
