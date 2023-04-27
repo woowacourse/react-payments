@@ -15,11 +15,13 @@ function HomepageStories() {
 
   return (
     <div className="app">
-      <Homepage
-        cardList={cardList}
-        setCardList={setCardList}
-        setPage={setPage}
-      />
+      {page === 'homePage' && (
+        <Homepage
+          cardList={cardList}
+          setCardList={setCardList}
+          setPage={setPage}
+        />
+      )}
     </div>
   );
 }

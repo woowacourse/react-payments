@@ -24,6 +24,8 @@ import { useFormInputs } from '../hooks/useFormInputs';
 import Modal from '../components/common/Modal';
 import SelectBank from '../components/card/SelectBank';
 import { useHideScrollState } from '../hooks/useHideScrollState';
+import ChangeButton from '../components/common/ChangeButton';
+import { BANK_DATA } from '../constant';
 
 interface AddCardPageProps {
   cardList: CardInfo[];
@@ -211,6 +213,14 @@ export default function AddCardPage({
             year={year.value ? year.value : 'YY'}
             owner={owner.value ? owner.value : 'NAME'}
           />
+          <ChangeButtonWrapper>
+            <ChangeButton
+              color={BANK_DATA[bank].color}
+              bgColor={BANK_DATA[bank].backgroundColor}
+              text="카드 변경"
+              onClick={() => setBank('default')}
+            />
+          </ChangeButtonWrapper>
         </CardWrapper>
         <InputWrapperParent
           onSubmit={onCardInfoSubmit}
@@ -290,8 +300,14 @@ const Title = styled.h3`
 
 const CardWrapper = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   margin-top: 25px;
+`;
+
+const ChangeButtonWrapper = styled.div`
+  margin-top: 20px;
+  opacity: 0.9;
 `;
 
 const InputWrapper = styled.div`
@@ -304,8 +320,7 @@ const InputWrapperParent = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 40px;
-  margin: 40px 0 25px 0;
+  margin: 20px 0 25px 0;
 `;
 const CvcWrapper = styled.div`
   display: flex;

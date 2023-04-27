@@ -3,8 +3,6 @@ import { Meta, StoryObj } from '@storybook/react';
 import AddCardPage from '../../pages/AddCardPage';
 import { CardInfo, PageInfo } from '../../types';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
-import SelectBank from '../../components/card/SelectBank';
-import Modal from '../../components/common/Modal';
 
 const STORIES_CARD_KEY = 'storiesCardkey';
 
@@ -17,11 +15,13 @@ function AddCardPageStories() {
 
   return (
     <div className="app">
-      <AddCardPage
-        cardList={cardList}
-        setCardList={setCardList}
-        setPage={setPage}
-      />
+      {page === 'addCardPage' && (
+        <AddCardPage
+          cardList={cardList}
+          setCardList={setCardList}
+          setPage={setPage}
+        />
+      )}
     </div>
   );
 }
