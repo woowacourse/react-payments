@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect } from "react";
+import { useEffect } from "react";
 import { validateCardNumber } from "../../../validation/cardNumber";
 import Input from "../../common/Input";
 import { INPUT_STATUS } from "../../../type/InputStatus";
@@ -19,24 +19,20 @@ export default function CardNumber(props: Props) {
 
   useEffect(() => {
     setError(hasError);
-  }, [hasError]);
+  }, [hasError, setError]);
 
   useEffect(() => {
     setIsComplete(isAllComplete);
-  }, [isAllComplete]);
+  }, [isAllComplete, setIsComplete]);
 
-  const getOnChangeCardNumberHandler =
+  const lengthParser = (value: string) => value.slice(0, CONSTANT.NUMBER_INPUT_MAX_LENGTH);
+
+  const getInputStatusSetter =
     (setInputStatus: (status: INPUT_STATUS) => void) =>
-    (e: ChangeEvent<HTMLInputElement>) => {
-      const value = e.target.value;
-
-      if (value.length > CONSTANT.NUMBER_INPUT_MAX_LENGTH) {
-        e.target.value = value.slice(0, CONSTANT.NUMBER_INPUT_MAX_LENGTH);
-      }
-
-      if (validateCardNumber(e.target.value)) {
+    (value: string) => {
+      if (validateCardNumber(value)) {
         setInputStatus(
-          e.target.value.length === CONSTANT.NUMBER_INPUT_MAX_LENGTH
+          value.length === CONSTANT.NUMBER_INPUT_MAX_LENGTH
             ? INPUT_STATUS.COMPLETE
             : INPUT_STATUS.NOT_COMPLETE
         );
@@ -54,7 +50,8 @@ export default function CardNumber(props: Props) {
         className={`${styles.input} ${styles.first}`}
         type="text"
         inputMode="numeric"
-        onChange={getOnChangeCardNumberHandler(getSetStateFunction(0))}
+        valueChangeSubscribers={[getInputStatusSetter(getSetStateFunction(0))]}
+        parsers={[lengthParser]}
         placeholder="XXXX"
       />
       <Input
@@ -62,7 +59,8 @@ export default function CardNumber(props: Props) {
         className={styles.input}
         type="password"
         inputMode="numeric"
-        onChange={getOnChangeCardNumberHandler(getSetStateFunction(1))}
+        valueChangeSubscribers={[getInputStatusSetter(getSetStateFunction(1))]}
+        parsers={[lengthParser]}
         placeholder="XXXX"
       />
       <Input
@@ -70,7 +68,8 @@ export default function CardNumber(props: Props) {
         className={styles.input}
         type="password"
         inputMode="numeric"
-        onChange={getOnChangeCardNumberHandler(getSetStateFunction(2))}
+        valueChangeSubscribers={[getInputStatusSetter(getSetStateFunction(2))]}
+        parsers={[lengthParser]}
         placeholder="XXXX"
       />
       <Input
@@ -78,7 +77,8 @@ export default function CardNumber(props: Props) {
         className={`${styles.input} ${styles.last}`}
         type="text"
         inputMode="numeric"
-        onChange={getOnChangeCardNumberHandler(getSetStateFunction(3))}
+        valueChangeSubscribers={[getInputStatusSetter(getSetStateFunction(3))]}
+        parsers={[lengthParser]}
         placeholder="XXXX"
       />
     </>
