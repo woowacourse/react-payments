@@ -13,7 +13,7 @@ const InputSectionTemplate = ({ children, label, countLength, maxLength, message
     <InputSectionTemplateWrapper>
       <InputLabelWrapper>
         <p>{label}</p>
-        {countLength && maxLength && (
+        {maxLength && (
           <p>
             {countLength} / {maxLength}
           </p>
