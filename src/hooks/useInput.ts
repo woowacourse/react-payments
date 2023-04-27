@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const useInput = (validator: (inputValue: string) => void) => {
+const useInput = (validator?: (inputValue: string) => void) => {
   const [inputValue, setInputValue] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -8,7 +8,7 @@ const useInput = (validator: (inputValue: string) => void) => {
     const inputValue = event.target.value;
 
     try {
-      validator(inputValue);
+      validator && validator(inputValue);
       setInputValue(inputValue);
       setErrorMessage("");
     } catch (error) {
