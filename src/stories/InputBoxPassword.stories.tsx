@@ -1,14 +1,17 @@
-import type { Meta } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 
 import InputBoxPassword from "../component/CardInputPage/InputBoxPassword/InputBoxPassword";
 
+type Story = StoryObj<typeof InputBoxPassword>;
+
 const meta: Meta = {
-  title: "InputBoxPassword component",
+  title: "Password Input Box",
   component: InputBoxPassword,
+  argTypes: {
+    setIsComplete: { action: "Is input Complete?" },
+  },
 };
 
 export default meta;
 
-export const InputTest = (args: any) => (
-  <InputBoxPassword setIsComplete={() => {}}></InputBoxPassword>
-);
+export const Input: Story = {};

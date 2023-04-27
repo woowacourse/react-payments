@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect } from "react";
+import { useEffect } from "react";
 import Input from "../../common/Input";
 import { INPUT_STATUS } from "../../../type/InputStatus";
 import styles from "./cardPassword.module.css";
@@ -18,26 +18,24 @@ export default function CardPassword(props: Props) {
 
   useEffect(() => {
     setError(hasError);
-  }, [hasError]);
+  }, [hasError, setError]);
 
   useEffect(() => {
     setIsComplete(isAllComplete);
-  }, [isAllComplete]);
+  }, [isAllComplete, setIsComplete]);
 
-  const onChangePassword =
+  const lengthParser = (value: string) => value.slice(0, CONSTANT.PASSWORD_INPUT_MAX_LENGTH);
+
+  const getInputStatusSetter =
     (setInputStatus: (status: INPUT_STATUS) => void) =>
-    (e: ChangeEvent<HTMLInputElement>) => {
-      const value = e.target.value;
-
-      if (value.length > 1) {
-        e.target.value = value.slice(0, CONSTANT.PASSWORD_INPUT_MAX_LENGTH);
-      }
-
-      if (validatePassword(e.target.value))
-        e.target.value.length === CONSTANT.PASSWORD_INPUT_MAX_LENGTH
+    (value: string) => {
+      if (validatePassword(value)) {
+        value.length === CONSTANT.PASSWORD_INPUT_MAX_LENGTH
           ? setInputStatus(INPUT_STATUS.COMPLETE)
           : setInputStatus(INPUT_STATUS.NOT_COMPLETE);
-      else setInputStatus(INPUT_STATUS.ERROR);
+      } else {
+        setInputStatus(INPUT_STATUS.ERROR);
+      }
     };
 
   return (
@@ -46,14 +44,16 @@ export default function CardPassword(props: Props) {
         name="card-password-1"
         className={styles.input}
         type="password"
-        onChange={onChangePassword(getSetStateFunction(0))}
+        parsers={[lengthParser]}
+        valueChangeSubscribers={[getInputStatusSetter(getSetStateFunction(0))]}
         inputMode="numeric"
       ></Input>
       <Input
         name="card-password-2"
         className={styles.input}
         type="password"
-        onChange={onChangePassword(getSetStateFunction(1))}
+        parsers={[lengthParser]}
+        valueChangeSubscribers={[getInputStatusSetter(getSetStateFunction(1))]}
         inputMode="numeric"
       ></Input>
       <input
