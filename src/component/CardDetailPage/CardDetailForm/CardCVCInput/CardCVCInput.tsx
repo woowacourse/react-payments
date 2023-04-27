@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import St from "./CardCVCInputStyled";
 import CVCHintPopup from "./CVCHintPopup/CVCHintPopup";
+import useCardCVC from "../../../../hooks/useCardCVC";
 
-type CardCVCInputProps = {
-  changeCardCVC: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  cardCVC: string;
-};
-
-function CardCVCInput({ changeCardCVC, cardCVC }: CardCVCInputProps) {
+function CardCVCInput() {
   const [isPopup, setIsPopup] = useState(false);
+  const { cardCVC, changeCardCVC } = useCardCVC();
 
   return (
     <section>

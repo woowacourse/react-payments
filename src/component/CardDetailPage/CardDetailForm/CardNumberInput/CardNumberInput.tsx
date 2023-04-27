@@ -1,16 +1,11 @@
 import React from "react";
 import St from "./CardNumberInputStyled";
 import { Input, InputSection } from "../../../common/Input";
+import useCardNumber from "../../../../hooks/useCardNumber";
 
-type CardNumberInputProps = {
-  changeCardNumber: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  displayNumber: string;
-};
+function CardNumberInput() {
+  const { displayNumber, changeCardNumber } = useCardNumber();
 
-function CardNumberInput({
-  changeCardNumber,
-  displayNumber,
-}: CardNumberInputProps) {
   return (
     <section>
       <St.Title>카드 번호</St.Title>

@@ -1,15 +1,9 @@
 import React from "react";
 import St from "./CardOwnerNameInputStyled";
+import useCardOwnerName from "../../../../hooks/useCardOwnerName";
 
-type CardOwnerNameInputProps = {
-  changeCardOwnerName: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  cardOwnerName: string;
-};
-
-function CardOwnerNameInput({
-  changeCardOwnerName,
-  cardOwnerName,
-}: CardOwnerNameInputProps) {
+function CardOwnerNameInput() {
+  const { cardOwnerName, changeCardOwnerName } = useCardOwnerName();
   return (
     <section>
       <St.Title>

@@ -1,15 +1,9 @@
 import React, { useRef } from "react";
 import St from "./CardPasswordInputStyled";
+import useCardPassword from "../../../../hooks/useCardPassword";
 
-type CardPasswordInputProps = {
-  changeCardPassword: (e: React.FormEvent<HTMLInputElement>) => void;
-  cardPassword: [string, string];
-};
-
-function CardPasswordInput({
-  changeCardPassword,
-  cardPassword,
-}: CardPasswordInputProps) {
+function CardPasswordInput() {
+  const { cardPassword, changeCardPassword } = useCardPassword();
   const inputRef1 = useRef<HTMLInputElement>(null);
   const inputRef2 = useRef<HTMLInputElement>(null);
 

@@ -1,12 +1,10 @@
 import React from "react";
 import St from "./CardDateInputStyled";
+import useCardDate from "../../../../hooks/useCardDate";
 
-type CardDateInputProps = {
-  changeCardDate: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  cardDate: string;
-};
+function CardDateInput() {
+  const { cardDate, changeCardDate } = useCardDate();
 
-function CardDateInput({ changeCardDate, cardDate }: CardDateInputProps) {
   return (
     <section>
       <St.Title>만료일</St.Title>

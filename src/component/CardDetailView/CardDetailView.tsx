@@ -1,18 +1,14 @@
 import React from "react";
 
 import St from "./CardDetailViewStyled";
+import { CreditCard } from "../../types/card";
 
 type CardDetailViewProps = {
-  displayNumber: string;
-  cardDate: string;
-  cardOwnerName: string;
+  creditcard: CreditCard;
 };
 
-function CardDetailView({
-  displayNumber,
-  cardDate,
-  cardOwnerName,
-}: CardDetailViewProps) {
+function CardDetailView({ creditcard }: CardDetailViewProps) {
+  const { displayNumber, cardOwnerName, cardDate } = creditcard;
   return (
     <St.CreditCard>
       <St.ICDiv />
