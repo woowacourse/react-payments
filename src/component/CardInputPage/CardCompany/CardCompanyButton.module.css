@@ -21,8 +21,12 @@
   letter-spacing: -0.085em;
 }
 
+.button img {
+  animation: rotateAround 3s linear infinite;
+}
+
 .button:hover img {
-  animation: rotateAround 1s linear infinite;
+  animation-play-state: paused;
 }
 
 .button:active {
