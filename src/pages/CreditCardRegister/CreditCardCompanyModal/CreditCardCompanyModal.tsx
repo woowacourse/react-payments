@@ -2,7 +2,7 @@ import CreditCardCompanyType from '@Components/CreditCardCompany';
 
 import * as Type from '@Types/index';
 
-import CARD_COMPANY from '@Constants/CardCompany';
+import CARD_COMPANY from '@Constants/cardCompany';
 
 import * as S from './style';
 import { CreditCardCompanyModalProps } from './type';

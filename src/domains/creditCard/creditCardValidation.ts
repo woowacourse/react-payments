@@ -1,25 +1,34 @@
 import * as Type from '@Types/index';
 
+type ErrorType = { message: string; type: 'char' | 'length' | 'range' };
+type ValidationReturnType = { ok: true } | { ok: false; error: ErrorType };
+
 const creditCardValidation = {
   numberValidation: {
-    checkChar: (numbers: string) => {
+    checkChar: (numbers: string): ValidationReturnType => {
       if (numbers.match(/\D/g)) {
         return {
           ok: false,
-          errorMessage: '카드 번호는 숫자만 가능합니다.',
+          error: {
+            message: '카드 번호는 숫자만 가능합니다.',
+            type: 'char',
+          },
         };
       }
 
       return { ok: true };
     },
 
-    checkLength: (numbers: string) => {
+    checkLength: (numbers: string): ValidationReturnType => {
       if (!numbers.length) return { ok: true };
 
       if (numbers.length !== 16) {
         return {
           ok: false,
-          errorMessage: '카드는 16자리이어야 합니다.',
+          error: {
+            message: '카드는 16자리이어야 합니다.',
+            type: 'length',
+          },
         };
       }
 
@@ -28,18 +37,22 @@ const creditCardValidation = {
   },
 
   expiryValidation: {
-    checkChar: (numbers: string) => {
-      if (numbers.replaceAll('/', '').match(/\D/g)) {
+    checkChar: (numbers: string): ValidationReturnType => {
+      const convertedNumbers = numbers.replaceAll('/', '');
+      if (convertedNumbers.match(/\D/g)) {
         return {
           ok: false,
-          errorMessage: '만료일은 숫자만 가능합니다.',
+          error: {
+            message: '만료일은 숫자만 가능합니다.',
+            type: 'char',
+          },
         };
       }
 
       return { ok: true };
     },
 
-    checkMonth: (numbers: string) => {
+    checkMonth: (numbers: string): ValidationReturnType => {
       if (numbers.length < 2) return { ok: true };
 
       const month = Number(numbers.slice(0, 2));
@@ -47,14 +60,17 @@ const creditCardValidation = {
       if (month > 12) {
         return {
           ok: false,
-          errorMessage: 'MM의 형식이 올바르지 않습니다.(12이하의 숫자로 입력하세요)',
+          error: {
+            message: 'MM에는 12이하의 숫자로 입력하세요)',
+            type: 'range',
+          },
         };
       }
 
       return { ok: true };
     },
 
-    checkYear: (numbers: string) => {
+    checkYear: (numbers: string): ValidationReturnType => {
       if (numbers.length < 5) return { ok: true };
 
       const year = Number(numbers.slice(3));
@@ -63,14 +79,34 @@ const creditCardValidation = {
       if (year < currentYear) {
         return {
           ok: false,
-          errorMessage: `YY에는 ${currentYear}보다 작은 숫자를 입력할 수 없습니다.`,
+          error: {
+            message: `YY에는 ${currentYear}보다 작은 숫자를 입력할 수 없습니다.`,
+            type: 'range',
+          },
         };
       }
 
       if (year > currentYear + 5) {
         return {
           ok: false,
-          errorMessage: `YY에는 ${currentYear + 5}보다 큰 숫자를 입력할 수 없습니다.`,
+          error: {
+            message: `YY에는 ${currentYear + 5}보다 큰 숫자를 입력할 수 없습니다.`,
+            type: 'range',
+          },
+        };
+      }
+
+      return { ok: true };
+    },
+
+    checkLength: (numbers: string): ValidationReturnType => {
+      if (numbers.length !== 5) {
+        return {
+          ok: false,
+          error: {
+            message: '만료일은 MM/YY의 형식이여야 합니다.',
+            type: 'length',
+          },
         };
       }
 
@@ -79,11 +115,28 @@ const creditCardValidation = {
   },
 
   ownerValidation: {
-    checkChar: (owner: string) => {
+    checkChar: (owner: string): ValidationReturnType => {
       if (!owner.match(/^[a-zA-Z\s]*$/g)) {
         return {
           ok: false,
-          errorMessage: '카드 소유자는 영문자 또는 공백만 가능합니다.',
+          error: {
+            message: '카드 소유자는 영문자 또는 공백만 가능합니다.',
+            type: 'char',
+          },
+        };
+      }
+
+      return { ok: true };
+    },
+
+    checkLength: (owner: string): ValidationReturnType => {
+      if (owner.length > 20) {
+        return {
+          ok: false,
+          error: {
+            message: '카드 소유자는 20자 이하이여야 합니다.',
+            type: 'length',
+          },
         };
       }
 
@@ -92,11 +145,27 @@ const creditCardValidation = {
   },
 
   cvcValidation: {
-    checkChar: (numbers: string) => {
+    checkChar: (numbers: string): ValidationReturnType => {
       if (numbers.match(/\D/g)) {
         return {
           ok: false,
-          errorMessage: '보안코드는 숫자만 가능합니다.',
+          error: {
+            message: '보안코드는 숫자만 가능합니다.',
+            type: 'char',
+          },
+        };
+      }
+
+      return { ok: true };
+    },
+    checkLength: (numbers: string): ValidationReturnType => {
+      if (numbers.length !== 3) {
+        return {
+          ok: false,
+          error: {
+            message: '보안 코드는 3자리어야 합니다.',
+            type: 'length',
+          },
         };
       }
 
@@ -105,18 +174,48 @@ const creditCardValidation = {
   },
 
   passwordValidation: {
-    checkChar: (numbers: Type.CreditCardPasswordType) => {
+    checkChar: (numbers: Type.CreditCardPasswordType): ValidationReturnType => {
       if (numbers.first.match(/\D/g)) {
         return {
           ok: false,
-          errorMessage: '비밀번호는 숫자만 가능합니다.',
+          error: {
+            message: '비밀번호는 숫자만 가능합니다.',
+            type: 'char',
+          },
         };
       }
 
       if (numbers.second.match(/\D/g)) {
         return {
           ok: false,
-          errorMessage: '비밀번호는 숫자만 가능합니다.',
+          error: {
+            message: '비밀번호는 숫자만 가능합니다.',
+            type: 'char',
+          },
+        };
+      }
+
+      return { ok: true };
+    },
+
+    checkLength: (numbers: Type.CreditCardPasswordType): ValidationReturnType => {
+      if (numbers.first.length !== 1) {
+        return {
+          ok: false,
+          error: {
+            message: '각 비밀번호는 한 자리 숫자이어야 합니다.',
+            type: 'length',
+          },
+        };
+      }
+
+      if (numbers.second.length !== 1) {
+        return {
+          ok: false,
+          error: {
+            message: '각 비밀번호는 한 자리 숫자이어야 합니다.',
+            type: 'length',
+          },
         };
       }
 

@@ -69,7 +69,7 @@ function CreditCardRegisterProvider({ children }: PropsWithChildren) {
     if (removeDashNumbers.length < numbers.length) setNumbers('');
     else {
       const newAddNumber = removeDashNumbers[removeDashNumbers.length - 1];
-      setNumbers((prev) => prev + newAddNumber);
+      setNumbers(numbers + newAddNumber);
     }
   };
 

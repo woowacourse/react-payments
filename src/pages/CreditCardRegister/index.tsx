@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Button from '@Components/Button';
@@ -7,6 +7,7 @@ import Header from '@Components/Header';
 import Modal from '@Components/Modal';
 
 import useAnimationModal from '@Hooks/useAnimationModal';
+import useCreditCardValidation from '@Hooks/useCreditCardValidation';
 
 import { CreditCardRegisterContext } from '@Contexts/CreditCardRegisterContext';
 
@@ -26,43 +27,20 @@ function CreditCardRegister() {
   const { isModalOpen, animation, openModal, closeModal } = useAnimationModal();
 
   const { creditCard, update, errorMessage } = useContext(CreditCardRegisterContext);
-
-  const [isFullFilled, setIsFullFilled] = useState(false);
+  const isValid = useCreditCardValidation({
+    number: creditCard.numbers,
+    owner: creditCard.owner,
+    cvc: creditCard.cvc,
+    expiry: creditCard.expiry,
+    password: creditCard.password,
+  });
 
   const handleSubmit = () => {
-    if (!isFullFilled) return;
+    if (!isValid) return;
     if (!creditCard.company) return;
 
     navigate('/register/alias');
   };
-
-  useEffect(() => {
-    if (creditCard.numbers.length !== 16) return setIsFullFilled(false);
-    if (creditCard.expiry.length !== 5) return setIsFullFilled(false);
-
-    if (
-      errorMessage.numbers ||
-      errorMessage.expiry ||
-      errorMessage.owner ||
-      errorMessage.cvc ||
-      errorMessage.password
-    ) {
-      return setIsFullFilled(false);
-    }
-
-    return setIsFullFilled(true);
-  }, [errorMessage.numbers, errorMessage.expiry, errorMessage.owner, errorMessage.cvc, errorMessage.password]);
-
-  useEffect(() => {
-    if (creditCard.numbers.length !== 16) return setIsFullFilled(false);
-    if (creditCard.expiry.length !== 5) return setIsFullFilled(false);
-    if (creditCard.cvc.length !== 3) return setIsFullFilled(false);
-    if (creditCard.password.first.length !== 1 || creditCard.password.second.length !== 1) {
-      return setIsFullFilled(false);
-    }
-
-    return setIsFullFilled(true);
-  }, [creditCard.numbers, creditCard.expiry, creditCard.cvc, creditCard.password]);
 
   useEffect(() => {
     scrollWindow.toTo();
@@ -117,7 +95,7 @@ function CreditCardRegister() {
             errorMessage={errorMessage.password}
           />
           <S.ButtonWrapper>
-            <Button disabled={!isFullFilled} type="button" handleClick={handleSubmit} text="다음" />
+            <Button disabled={!isValid} type="button" handleClick={handleSubmit} text="다음" />
           </S.ButtonWrapper>
         </S.CreditCardRegisterForm>
       </S.CreditCardRegister>

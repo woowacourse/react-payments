@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { AnimationTypes } from '@Types/index';
 
-import ANIMATION from '@Constants/Animation';
+import ANIMATION from '@Constants/animation';
 
 const useAnimationModal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

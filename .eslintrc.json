@@ -4,7 +4,7 @@
     "es6": true,
     "node": true
   },
-  "extends": ["airbnb", "airbnb-typescript"],
+  "extends": ["airbnb", "airbnb-typescript", ""],
   "parserOptions": {
     "project": "./tsconfig.json"
   },
@@ -22,6 +22,7 @@
       }
     ],
     "linebreak-style": "off",
+    "implicit-arrow-linebreak": "off",
     "react/react-in-jsx-scope": 0,
     "react/jsx-uses-react": 0,
     "react/prop-types": 0,

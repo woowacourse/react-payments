@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import creditCard from '@Domains/creditCard';
 
-import CARD_COMPANY from '@Constants/CardCompany';
+import CARD_COMPANY from '@Constants/cardCompany';
 
 import * as S from './style';
 import { CreditCardProps } from './type';

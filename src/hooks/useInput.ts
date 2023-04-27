@@ -1,30 +1,37 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-type ValidFn<T> = (value: T) => { ok: boolean; errorMessage?: string };
+type ErrorType = { message: string; type: 'char' | 'length' | 'range' };
+type ValidFn<T> = (value: T) => { ok: true } | { ok: false; error: ErrorType };
 
-function useInput<T>(
-  initValue: T,
-  validFns: ValidFn<T>[],
-): [T, React.Dispatch<React.SetStateAction<T>>, string | null] {
+function useInput<T>(initValue: T, validFns: ValidFn<T>[]): [T, (newValue: T) => void, string | null] {
   const [value, setValue] = useState(initValue);
   const [errorMessage, setErrorMessage] = useState<null | string>(null);
 
-  useEffect(() => {
-    let newErrorMessage = null;
-    validFns.some((fn) => {
-      const result = fn(value);
+  const updateValue = (newValue: T) => {
+    setErrorMessage(null);
+
+    let error: undefined | ErrorType;
+
+    validFns.every((fn) => {
+      const result = fn(newValue);
       if (!result.ok) {
-        newErrorMessage = result.errorMessage;
-        return true;
+        error = result.error;
+        return false;
       }
 
-      return false;
+      return true;
     });
 
-    setErrorMessage(newErrorMessage);
-  }, [value]);
+    if (!error) setValue(newValue);
+    else if (error && error.type === 'length') {
+      setValue(newValue);
+      setErrorMessage(error.message);
+    } else {
+      setErrorMessage(error.message);
+    }
+  };
 
-  return [value, setValue, errorMessage];
+  return [value, updateValue, errorMessage];
 }
 
 export default useInput;
