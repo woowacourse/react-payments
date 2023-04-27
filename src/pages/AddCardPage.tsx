@@ -1,4 +1,4 @@
-import React, { FormEvent, useRef, useState } from 'react';
+import React, { FormEvent, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import PrevButton from '../components/common/PrevButton';
 import Card from '../components/card/Card';
@@ -201,6 +201,16 @@ export default function AddCardPage({
       setPage('homePage');
     }
   };
+
+  useEffect(() => {
+    window.history.pushState(null, '', window.location.href);
+
+    window.addEventListener('popstate', onPrevButtonClick);
+
+    return () => {
+      window.removeEventListener('popstate', onPrevButtonClick);
+    };
+  }, []);
 
   if (isRegister) {
     return (

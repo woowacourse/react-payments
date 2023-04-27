@@ -12,6 +12,10 @@ export const useHideScrollState = <Type>(
 
   useEffect(() => {
     document.body.dataset.hideScroll = predicate(value) ? 'true' : 'false';
+
+    return () => {
+      document.body.dataset.hideScroll = 'false';
+    };
   }, [value, predicate]);
 
   return [value, setValue];

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { CardInfo, PageInfo } from '../types';
 import Card from '../components/card/Card';
@@ -29,6 +29,15 @@ export default function Homepage({
       ];
 
       setCardList(updatedCardList);
+    }
+  };
+
+  const onCloseApp = () => {
+    window.history.pushState(null, '', window.location.href);
+    const result = window.confirm('정말 종료하시겠습니까?');
+    if (result) {
+      console.log('H');
+      // window.history.back();
     }
   };
 

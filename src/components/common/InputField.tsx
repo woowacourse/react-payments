@@ -25,7 +25,6 @@ export default function InputField({
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 318px;
 `;
 
 const Label = styled.label`

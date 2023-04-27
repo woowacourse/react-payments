@@ -30,6 +30,9 @@ const FinishMessage = styled.h2`
 `;
 
 const InputWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
   margin-top: 124px;
   border-bottom: 1px solid black;
 `;
@@ -102,11 +105,11 @@ export default function RegisteredCard({
             />
           </InputField>
         </InputWrapper>
-        {cardTitle.error && <Error text={cardTitle.error} />}
         <ButtonWrapper>
           <Button text="확인" />
         </ButtonWrapper>
       </Form>
+      {cardTitle.error && <Error text={cardTitle.error} />}
     </Wrapper>
   );
 }
