@@ -1,0 +1,23 @@
+.card-select-button {
+  display: flex;
+  padding: 0;
+  flex-direction: column;
+  align-items: center;
+  border: none;
+  width: 60px;
+  height: 62px;
+  background-color: white;
+  cursor: pointer;
+  justify-content: space-between;
+}
+
+.card-select-button img {
+  width: 35px;
+  height: 35px;
+}
+
+.card-select-button p {
+  margin: 0;
+  font-size: 12px;
+  color: #525252;
+}

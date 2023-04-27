@@ -1,3 +1,12 @@
+import BcCardIcon from '../asset/bc_card.png';
+import HanaCardIcon from '../asset/hana_card.png';
+import HyundaiCardIcon from '../asset/hyundai_card.png';
+import KakaoBankIcon from '../asset/kakao_bank.png';
+import KookminCardIcon from '../asset/kookmin_card.png';
+import LotteCardIcon from '../asset/lotte_card.png';
+import SinhanCardIcon from '../asset/sinhan_card.png';
+import WooriCardIcon from '../asset/woori_card.png';
+
 export const MONTH_DATA = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
 
 export const ALPHABET = ' ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
@@ -20,4 +29,15 @@ export const INVALID_MESSAGE: { [key: string]: { [key: string]: string } } = {
   cardNumber: {
     INVALID: '카드번호는 숫자 0~9를 사용해 각 4자리로 이루어져야 합니다.',
   },
+};
+
+export const CARD_NAME_IMAGE_SRCS: { [key: string]: string } = {
+  BC카드: BcCardIcon,
+  하나카드: HanaCardIcon,
+  현대카드: HyundaiCardIcon,
+  신한카드: SinhanCardIcon,
+  국민카드: KookminCardIcon,
+  우리카드: WooriCardIcon,
+  카카오뱅크: KakaoBankIcon,
+  롯데카드: LotteCardIcon,
 };
