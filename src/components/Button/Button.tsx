@@ -22,14 +22,18 @@ const Style = {
     outline: 0;
     background-color: #1e77a8ac;
 
+    color: white;
     font-size: 24px;
     font-weight: 600;
-    color: white;
 
     cursor: pointer;
 
     &.text {
+      min-width: min-content;
+      min-height: min-content;
+
       color: black;
+      font-size: 16px;
       font-weight: bold;
       background-color: transparent;
     }
