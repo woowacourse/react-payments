@@ -23,6 +23,7 @@
   animation-timing-function: ease-in-out;
   animation-delay: 0s;
   animation-fill-mode: both;
+  border-radius: 20px;
 }
 
 @keyframes modal-view {
