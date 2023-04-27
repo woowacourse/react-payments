@@ -84,7 +84,6 @@ function useCardInfoInput<T>({
         const dateValitation = MMYYValidation(date, [MM, YY]);
 
         if (dateValitation && value.length === NUMBERS.MAX_EXPIREDATE) {
-          console.log(dateValitation);
           setCardInput((prev) => ({ ...prev, expireDate: "" }));
           setError({
             isError: true,
@@ -104,6 +103,13 @@ function useCardInfoInput<T>({
       nextInputFocus(Number(idx));
     }
   };
+
+  /**
+   * 문제 1 onChange가 너무 복잡하다.
+   * 문제 2 상태 값을 하나의 객체에서 사용하다 관심사 분리가 되어있지 않다.
+   *  -> 모든 컴포넌트의 상태를 하나의 객체에서 관리할 필요가 없다고 생각한다. 분리된 상태를 적용해보자
+   *
+   */
 
   return {
     value: cardInput[contextType] as T,

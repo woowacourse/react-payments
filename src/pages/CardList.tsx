@@ -11,6 +11,7 @@ function CardList() {
   const navigation = useNavigate();
   const { cardList } = useCardList({ key: "card-list" });
   const { openModal } = useModal();
+
   const cardLists = useMemo(() => {
     return cardList.length ? (
       cardList.map((card) => {
