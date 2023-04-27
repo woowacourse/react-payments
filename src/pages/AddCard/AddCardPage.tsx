@@ -15,10 +15,11 @@ import {
   isValidPassword,
   isValidSecurityCode,
 } from './domain/dispatcher';
+import CardNameBottomSheet from './components/CardNameBottomSheet';
 
 const AddCardPage = () => {
   const navigate = useNavigate();
-  const [cardType] = useState('현대');
+  const [cardType, setCardType] = useState('현대');
   const cardFirstNumber = useInput(isValidCardNumber);
   const cardSecondNumber = useInput(isValidCardNumber);
   const cardThirdNumber = useInput(isValidCardNumber);
@@ -29,44 +30,52 @@ const AddCardPage = () => {
   const expireYear = useInput(isValidExpiredYearFormat);
   const securityCode = useInput(isValidSecurityCode);
   const cardOwner = useInput(isValidOwnerName);
+  const [isOpen, setIsOpen] = useState(true);
 
   const onBackButtonClick = useCallback(() => {
     navigate('/');
   }, [navigate]);
 
   return (
-    <div className="add-card-page">
-      <Header>
-        <button className="back-button" onClick={onBackButtonClick} aria-label="back-button">
-          <img src={BackButtonImg} alt="뒤로 가기" />
-        </button>
-        <h2>카드 추가</h2>
-      </Header>
-      <article className="add-card-page-body">
-        <Card
-          cardType={cardType}
-          cardFirstNumber={cardFirstNumber.value}
-          cardSecondNumber={cardSecondNumber.value}
-          cardThirdNumber={cardThirdNumber.value}
-          cardFourthNumber={cardFourthNumber.value}
-          cardOwner={cardOwner.value}
-          expireMonth={expireMonth.value}
-          expireYear={expireYear.value}
-        />
-        <AddCardForm
-          cardFirstNumber={cardFirstNumber}
-          cardSecondNumber={cardSecondNumber}
-          cardThirdNumber={cardThirdNumber}
-          cardFourthNumber={cardFourthNumber}
-          expireMonth={expireMonth}
-          expireYear={expireYear}
-          cardOwner={cardOwner}
-          securityCode={securityCode}
-          cardPassword1={cardPassword1}
-          cardPassword2={cardPassword2}
-        />
-      </article>
-    </div>
+    <>
+      <div className="add-card-page">
+        <Header>
+          <button className="back-button" onClick={onBackButtonClick} aria-label="back-button">
+            <img src={BackButtonImg} alt="뒤로 가기" />
+          </button>
+          <h2>카드 추가</h2>
+        </Header>
+        <article className="add-card-page-body">
+          <Card
+            cardType={cardType}
+            cardFirstNumber={cardFirstNumber.value}
+            cardSecondNumber={cardSecondNumber.value}
+            cardThirdNumber={cardThirdNumber.value}
+            cardFourthNumber={cardFourthNumber.value}
+            cardOwner={cardOwner.value}
+            expireMonth={expireMonth.value}
+            expireYear={expireYear.value}
+          />
+          <AddCardForm
+            cardFirstNumber={cardFirstNumber}
+            cardSecondNumber={cardSecondNumber}
+            cardThirdNumber={cardThirdNumber}
+            cardFourthNumber={cardFourthNumber}
+            expireMonth={expireMonth}
+            expireYear={expireYear}
+            cardOwner={cardOwner}
+            securityCode={securityCode}
+            cardPassword1={cardPassword1}
+            cardPassword2={cardPassword2}
+          />
+        </article>
+      </div>
+      <CardNameBottomSheet
+        isOpen={isOpen}
+        onToggleOpen={() => setIsOpen(!isOpen)}
+        setCardType={setCardType}
+      />
+    </>
   );
 };
 
