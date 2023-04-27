@@ -1,7 +1,8 @@
 import CardLogo from '../@common/CardLogo';
 import * as Styled from './CardCompanyModal.styles';
-import { IMAGE_PATH } from '../../types/images';
+import { IMAGE_PATH } from '../../types/Image';
 import { Dispatch, SetStateAction } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 interface cardCompanyModalProps {
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;
@@ -26,6 +27,7 @@ const CardCompanyModal = ({
       <Styled.Modal>
         {getCompanyInfos().map(([companyName, companyImage]) => (
           <CardLogo
+            key={uuidv4()}
             companyImage={companyImage}
             companyName={companyName}
             setCardCompany={setCardCompany}
