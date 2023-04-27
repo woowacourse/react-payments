@@ -3,7 +3,24 @@ import getErrorMessage from '../../../utils/getErrorMessage';
 import type { CardInformation } from '../../Common/Card/types';
 import type { ErrorMessage, Visited } from '../types';
 
+const initialErrorMessage = {
+  cardNumber: '',
+  expirationDate: '',
+  owner: '',
+  securityCode: '',
+  password: '',
+};
+
+const initialVisited = {
+  cardNumber: false,
+  expirationDate: false,
+  owner: false,
+  securityCode: false,
+  password: false,
+};
+
 function useCardForm() {
+  const [cardName, setCardName] = useState('');
   const [bankName, setBankName] = useState('');
   const [cardNumber, setCardNumber] = useState<string[]>(['', '', '', '']);
   const [expirationDate, setExpirationDate] = useState<string[]>(['MM', 'YY']);
@@ -25,6 +42,21 @@ function useCardForm() {
     password: false,
   });
 
+  const resetCardInformation = () => {
+    setCardName('');
+    setBankName('');
+    setCardNumber(['', '', '', '']);
+    setExpirationDate(['MM', 'YY']);
+    setOwner(['NAME']);
+    setSecurityCode(['']);
+    setPassword(['', '']);
+  };
+
+  const resetValidateForm = () => {
+    setIsVisited(initialVisited);
+    setErrorMessage(initialErrorMessage);
+  };
+
   const checkValidator = <T>(validateCallback: (value: T) => void, value: T | undefined, name: string) => {
     setIsVisited(prev => ({ ...prev, [name]: true }));
     try {
@@ -40,16 +72,27 @@ function useCardForm() {
   };
 
   return {
-    card: { bankName, cardNumber, expirationDate, owner, securityCode, password } as unknown as CardInformation,
+    card: {
+      cardName,
+      bankName,
+      cardNumber,
+      expirationDate,
+      owner,
+      securityCode,
+      password,
+    } as CardInformation,
     checkValidator,
     errorMessage,
     isVisited,
+    setCardName,
     setBankName,
     setCardNumber,
     setExpirationDate,
     setOwner,
     setSecurityCode,
     setPassword,
+    resetCardInformation,
+    resetValidateForm,
   };
 }
 
