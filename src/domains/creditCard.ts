@@ -45,4 +45,12 @@ export const checkCreditCardValidations = (creditCard: CreditCard) => {
   return isCreditCardError;
 };
 
+export const markExpiry = (expiry: string) => {
+  const newCardExpiryArray = expiry.split('');
+  if (newCardExpiryArray.length > 2) {
+    newCardExpiryArray.splice(2, 0, '/');
+  }
+  return newCardExpiryArray.join('');
+};
+
 export default {};

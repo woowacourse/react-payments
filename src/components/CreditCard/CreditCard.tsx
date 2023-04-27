@@ -2,7 +2,7 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
 import * as T from 'types';
-import { findCreditCardCompanyById, convertSecuredCreditCard } from 'domains/creditCard';
+import { findCreditCardCompanyById, convertSecuredCreditCard, markExpiry } from 'domains/creditCard';
 import * as S from './style';
 
 export type CreditCardProps = {
@@ -47,7 +47,7 @@ function CreditCard({
             {owner}
           </S.CreditCardBox>
           <S.CreditCardBox>
-            {expiry}
+            {markExpiry(expiry)}
           </S.CreditCardBox>
         </S.CreditCardContainer>
       </S.CreditCardInfoFooter>

@@ -1,5 +1,6 @@
 import * as T from 'types';
 import useCreditCardForm from 'hooks/useCreditCardForm';
+import { markExpiry } from 'domains/creditCard';
 import Input from '../../../components/Input';
 import * as S from '../style';
 import { validateExpiry } from '../../../domains/validations';
@@ -16,14 +17,7 @@ function CreditCardExpiryInput({ name }: T.CreditCardInputProps) {
     setCreditCardForm({ ...creditCardForm, [name]: cleanedExpiry });
   };
 
-  const markedExpiry = ((expiry: string) => {
-    const newCardExpiryArray = expiry.split('');
-    if (newCardExpiryArray.length > 2) {
-      newCardExpiryArray.splice(2, 0, '/');
-    }
-    return newCardExpiryArray.join('');
-  })(creditCardForm.expiry);
-
+  const markedExpiry = markExpiry(creditCardForm.expiry);
   const isError = validateExpiry(creditCardForm.expiry);
 
   return (
