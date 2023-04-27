@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { PaymentsContext } from '../context/PaymentsContext';
-import type { CreditCard } from '../types/CreditCard';
+import type { CreditCard } from '../domain/CreditCard';
 
 export const usePayments = () => {
   const context = useContext(PaymentsContext);

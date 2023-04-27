@@ -1,6 +1,6 @@
 import type { Dispatch, PropsWithChildren } from 'react';
 import { createContext, useMemo, useState } from 'react';
-import type { CreditCard } from '../types/CreditCard';
+import type { CreditCard } from '../domain/CreditCard';
 
 type PaymentsContextValue = {
   creditCards: CreditCard[];
