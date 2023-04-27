@@ -1,13 +1,13 @@
 .cardLogoContainer {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 10px;
+}
+
+.cardCompanyLogo {
+  text-align: center;
+  cursor: pointer;
 }
 
 .cardLogo {
-  width: 37px;
-  height: 37px;
-  border-radius: 50%;
+  width: 45px;
+  height: 45px;
 }
