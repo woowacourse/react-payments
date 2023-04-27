@@ -4,6 +4,13 @@ import CardNumbers from './CardNumbers';
 const meta = {
   component: CardNumbers,
   title: 'Section/CardNumbers',
+  argTypes: {
+    checkCardNumbers: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 } satisfies Meta<typeof CardNumbers>;
 export default meta;
 
@@ -17,6 +24,6 @@ export const CardNumbersStory: Story = {
       2: '3333',
       3: '4444',
     },
-    checkCardNumbers: (order: number, value: string) => true,
+    checkCardNumbers: () => true,
   },
 };

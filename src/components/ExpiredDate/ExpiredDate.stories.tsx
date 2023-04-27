@@ -4,6 +4,13 @@ import ExpiredDate from './ExpiredDate';
 const meta = {
   component: ExpiredDate,
   title: 'Section/ExpiredDate',
+  argTypes: {
+    checkExpiredDate: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 } satisfies Meta<typeof ExpiredDate>;
 
 export default meta;

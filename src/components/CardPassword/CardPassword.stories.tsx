@@ -4,6 +4,13 @@ import CardPassword from './CardPassword';
 const meta = {
   component: CardPassword,
   title: 'Section/CardPassword',
+  argTypes: {
+    checkPassword: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 } satisfies Meta<typeof CardPassword>;
 
 export default meta;
