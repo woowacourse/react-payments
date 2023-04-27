@@ -18,6 +18,20 @@
   left: 0;
   right: 0;
   bottom: 0;
+  animation-name: modal-view;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0s;
+  animation-fill-mode: both;
+}
+
+@keyframes modal-view {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
 
 .card-icon {
