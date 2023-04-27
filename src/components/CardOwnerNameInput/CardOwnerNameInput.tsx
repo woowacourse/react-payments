@@ -40,7 +40,6 @@ const CardOwnerNameInput = ({ ownerName, nameLength, setOwnerName }: CardOwnerNa
           placeholder="카드에 표시된 영문 이름과 동일하게 입력하세요."
           type="text"
           maxLength={30}
-          required
           onChange={onChangeOwnerNameHandler}
           onBlur={onBlurOwnerNameHandler}
           autoComplete="name"

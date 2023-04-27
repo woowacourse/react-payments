@@ -56,7 +56,7 @@ const CardExpirationDateInput = ({
           onChange={onChangeExpirationDatehandler}
           onBlur={handleExpirationDateError}
         />
-        <Span>/</Span>
+        <Slash>/</Slash>
         <Input
           value={year}
           name="year"
@@ -89,7 +89,7 @@ export const ErrorMessage = styled.div`
   color: rgb(33, 33, 33);
 `;
 
-const Span = styled.span`
+const Slash = styled.span`
   color: #737373;
 `;
 

@@ -7,6 +7,7 @@ type PreviewCard = Pick<Card, "cardNumber" | "ownerName" | "expirationDate" | "c
 type CardPreviewProps = {
   card: PreviewCard;
   animation?: { transition: string; transform: string };
+  defaultOwnerName?: string;
 };
 
 const CARD_COMPANY_COLOR = {
@@ -20,7 +21,7 @@ const CARD_COMPANY_COLOR = {
   우리카드: "#007BC8",
 };
 
-const CardPreview = ({ card, animation }: CardPreviewProps) => {
+const CardPreview = ({ card, animation, defaultOwnerName = "NAME" }: CardPreviewProps) => {
   const { cardCompany, cardNumber, ownerName, expirationDate } = card;
   const { transition = "", transform = "" } = animation ?? {};
 
@@ -39,7 +40,7 @@ const CardPreview = ({ card, animation }: CardPreviewProps) => {
         <NumberBox space={"-5px"}>{"•".repeat(cardNumber.fourthGroup.length)}</NumberBox>
       </NumberContainer>
       <InfoContainer>
-        <Span>{ownerName ? ownerName : "NAME"}</Span>
+        <OwnerName>{ownerName ? ownerName : defaultOwnerName}</OwnerName>
         <span>
           {expirationDate.month ? expirationDate.month : "MM"} / {expirationDate.year ? expirationDate.year : "YY"}
         </span>
@@ -119,7 +120,7 @@ const InfoContainer = styled.div`
   font-size: 12px;
 `;
 
-const Span = styled.span`
+const OwnerName = styled.span`
   width: 100px;
   overflow: hidden;
 `;
