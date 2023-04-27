@@ -1,14 +1,24 @@
 import styles from './style.module.css';
-import { ComponentPropsWithoutRef, ReactNode, useEffect, useRef } from 'react';
+import {
+  ComponentPropsWithRef,
+  ForwardedRef,
+  ReactNode,
+  forwardRef,
+  useEffect,
+  useRef,
+} from 'react';
 import { useScrollStop } from '../../../hooks/common/useScrollStop';
 
-interface ModalProps extends ComponentPropsWithoutRef<'div'> {
+interface ModalProps extends ComponentPropsWithRef<'div'> {
   children: ReactNode;
   isOpen: boolean;
   close: () => void;
 }
 
-function Modal({ isOpen, children, close, onKeyDown }: ModalProps) {
+function Modal(
+  { isOpen, children, close, onKeyDown }: ModalProps,
+  ref: ForwardedRef<HTMLDivElement>
+) {
   const modalContainerRef = useRef<HTMLDivElement>(null);
   useScrollStop(isOpen);
 
@@ -19,7 +29,7 @@ function Modal({ isOpen, children, close, onKeyDown }: ModalProps) {
   }, []);
 
   return (
-    <div className={styles.container}>
+    <div ref={ref} className={styles.container}>
       <div className={styles.backdrop} onClick={close} />
       <div ref={modalContainerRef} className={styles.content} onKeyDown={onKeyDown} tabIndex={0}>
         {children}
@@ -28,4 +38,4 @@ function Modal({ isOpen, children, close, onKeyDown }: ModalProps) {
   );
 }
 
-export default Modal;
+export default forwardRef(Modal);

@@ -1,5 +1,5 @@
 import styles from './style.module.css';
-import { KeyboardEvent, MouseEvent, memo, useRef } from 'react';
+import { FocusEvent, KeyboardEvent, MouseEvent, memo, useRef } from 'react';
 import { CardFormValidation, Issuer } from '../../../types';
 import CardIssuerSelection from './CardIssuerSelection/CardIssuerSelection';
 import InputContainer from '../../common/InputContainer/InputContainer';
@@ -26,6 +26,7 @@ function CardIssuer({
 }: CardIssuerProps) {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const { isModalOpen, openModal, closeModal } = useModal();
+  const modalRef = useRef<HTMLDivElement>(null);
 
   const handleCloseModal = () => {
     updateCardInputError('issuer', value);
@@ -44,8 +45,10 @@ function CardIssuer({
     }
   };
 
-  const onBlur = () => {
-    if (!isModalOpen) updateCardInputError('issuer', value);
+  const onBlur = (event: FocusEvent<HTMLButtonElement>) => {
+    if (modalRef.current && modalRef.current.contains(event.relatedTarget)) return;
+
+    updateCardInputError('issuer', value);
   };
 
   const onOptionClick = (event: MouseEvent<HTMLButtonElement>) => {
@@ -82,7 +85,12 @@ function CardIssuer({
         {value ? `${value}` : '카드사를 선택해주세요'}
       </Button>
       {isModalOpen && (
-        <Modal isOpen={isModalOpen} close={handleCloseModal} onKeyDown={onClosePress}>
+        <Modal
+          ref={modalRef}
+          isOpen={isModalOpen}
+          close={handleCloseModal}
+          onKeyDown={onClosePress}
+        >
           <CardIssuerSelection onOptionClick={onOptionClick} close={handleCloseModal} />
         </Modal>
       )}
