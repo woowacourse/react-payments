@@ -12,9 +12,8 @@ const CardListPage = ({ cards }: CardListPageProps) => {
   return (
     <Container>
       <AppBar title="보유카드" />
-
-      {!cards.length && <HelperText>새로운 카드 등록하기👆</HelperText>}
       <CardList cards={cards} />
+      {!cards.length && <HelperText>새로운 카드 등록하기👆</HelperText>}
     </Container>
   );
 };
