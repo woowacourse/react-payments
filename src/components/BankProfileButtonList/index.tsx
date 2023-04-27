@@ -14,8 +14,8 @@ function BankProfileButtonList({ bankList, getBankName, profileSize }: BankProfi
   return (
     <StyledList>
       {bankList.map(({ logo, name }, index) => (
-        <StyledListItem>
-          <TransParentButton onClick={() => getBankName(name)} key={index}>
+        <StyledListItem key={index}>
+          <TransParentButton onClick={() => getBankName(name)}>
             <Profile iconUrl={logo} name={name} size={profileSize} />
           </TransParentButton>
         </StyledListItem>
