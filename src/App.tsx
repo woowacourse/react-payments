@@ -29,7 +29,10 @@ function App() {
           path="/add-card"
           element={<AddCard cards={cards} setCards={setCards} />}
         />
-        <Route path="/add-card-alias" element={<AddCardAlias />} />
+        <Route
+          path="/add-card-alias"
+          element={<AddCardAlias card={cards[0]} />}
+        />
       </Routes>
     </Router>
   );
