@@ -3,7 +3,7 @@ import { convertSecuredCreditCard } from 'domains/creditCard';
 import * as T from 'types';
 import styled from 'styled-components';
 import * as S from '../style';
-import { validateNumber } from '../validations';
+import { validateNumber } from '../../../domains/validations';
 
 export const MaskedViewer = styled.p`
     background-color: #ECEBF1;

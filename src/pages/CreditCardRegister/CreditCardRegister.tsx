@@ -14,7 +14,7 @@ import CreditCardPasswordInput from './inputs/CreditCardPasswordInput';
 import * as S from './style';
 import {
   validateCVC, validateExpiry, validateNumber, validatePassword
-} from './validations';
+} from '../../domains/validations';
 import CreditCardCompanyInput from './inputs/CreditCardCompanyInput';
 
 function CreditCardRegister() {

@@ -1,7 +1,7 @@
 import * as T from 'types';
 import Input from '../../../components/Input';
 import * as S from '../style';
-import { validateExpiry } from '../validations';
+import { validateExpiry } from '../../../domains/validations';
 
 type Props = {
   name: keyof T.CreditCard;
