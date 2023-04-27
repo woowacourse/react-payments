@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext } from 'react';
 import Header from '../components/common/Header';
 import Page from '../components/common/Page';
 import { useNavigate } from 'react-router-dom';
@@ -7,7 +7,7 @@ import Card from '../components/Card';
 import { getLocalStorage } from '../utils/localStorage';
 import { CardType } from '../types';
 import uuid from 'react-uuid';
-import { ModalContext } from "../store/modalContext";
+import { ModalContext } from '../store/modalContext';
 
 const MyCard = () => {
   const cards = getLocalStorage('card');
@@ -15,11 +15,11 @@ const MyCard = () => {
   const modalCtx = useContext(ModalContext);
   const navigate = useNavigate();
 
-  const registerCard = ()=>{
+  const registerCard = () => {
     modalCtx.openModal();
 
-    navigate('/AddCard')
-  }
+    navigate('/AddCard');
+  };
 
   return (
     <Page>
@@ -34,6 +34,7 @@ const MyCard = () => {
               cardNumber={card.cardNumber}
               bankName={card.bankName}
             />
+            {card.cardName && <CardNameWrapper>{card.cardName}</CardNameWrapper>}
           </CardWrapper>
         ))}
         <EmptyCardWrapper onClick={registerCard}>+</EmptyCardWrapper>
@@ -43,7 +44,7 @@ const MyCard = () => {
 };
 
 const CardWrapper = styled.div`
-  margin-bottom: 46px;
+  margin-bottom: 30px;
 `;
 
 const EmptyCardWrapper = styled.div`
@@ -69,6 +70,19 @@ const EmptyCardWrapper = styled.div`
   :active {
     transform: scale(0.98);
   }
+`;
+
+const CardNameWrapper = styled.span`
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 15px;
 `;
 
 export default MyCard;

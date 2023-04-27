@@ -7,8 +7,9 @@ import Page from '../components/common/Page';
 import ModalPortal from '../components/ModalPortal';
 import { CardType } from '../types';
 import { getLocalStorage, setLocalStorage } from '../utils/localStorage';
-import { ModalContext } from '../store/modalContext'
+import { ModalContext } from '../store/modalContext';
 import ModalBanks from '../components/ModalBanks';
+import { useNavigate } from 'react-router-dom';
 
 const AddCard = () => {
   const [card, setCard] = useState<CardType>({
@@ -17,13 +18,17 @@ const AddCard = () => {
     ownerName: '',
     cvc: '',
     password: ['', ''],
-    color: "black",
-    bankName: ""
+    color: 'black',
+    bankName: '',
   });
+
+  const navigate = useNavigate();
 
   const registerCard = (e: FormEvent) => {
     const cards = getLocalStorage('card');
     setLocalStorage('card', [...cards, card]);
+
+    navigate('/CardName');
   };
 
   const modalCtx = useContext(ModalContext);
@@ -31,11 +36,17 @@ const AddCard = () => {
   return (
     <Page>
       <Header title="카드 추가" goToMainPage={true} />
-      <Card color={card.color} ownerName={card.ownerName} expiredDate={card.expiredDate} cardNumber={card.cardNumber} bankName={card.bankName} />
+      <Card
+        color={card.color}
+        ownerName={card.ownerName}
+        expiredDate={card.expiredDate}
+        cardNumber={card.cardNumber}
+        bankName={card.bankName}
+      />
       <CardInputForm card={card} setCard={setCard} onSubmit={e => registerCard(e)} />
       {modalCtx.isModalOpen && (
         <ModalPortal closeEvent={modalCtx.closeModal}>
-          <ModalBanks setCard={setCard} card={card}/>
+          <ModalBanks setCard={setCard} card={card} />
         </ModalPortal>
       )}
     </Page>

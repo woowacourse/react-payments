@@ -6,4 +6,5 @@ export interface CardType {
   password?: string[];
   color: string;
   bankName: string;
+  cardName?: string;
 }
