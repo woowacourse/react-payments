@@ -4,6 +4,7 @@ import CardSelectModal from '../components/CardSelectModal';
 
 const meta: Meta<typeof CardSelectModal> = {
   title: 'CardSelectModal',
+  tags: ['autodocs'],
   component: CardSelectModal,
 };
 

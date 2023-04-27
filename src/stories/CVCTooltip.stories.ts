@@ -4,6 +4,7 @@ import CVCTooltip from '../components/CVCTooltip';
 
 const meta: Meta<typeof CVCTooltip> = {
   title: 'CVCTooltip',
+  tags: ['autodocs'],
   component: CVCTooltip,
 };
 

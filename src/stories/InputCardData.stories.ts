@@ -4,6 +4,7 @@ import InputCardData from '../components/InputCardData';
 
 const meta: Meta<typeof InputCardData> = {
   title: 'InputCardData',
+  tags: ['autodocs'],
   component: InputCardData,
 };
 
