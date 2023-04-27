@@ -11,7 +11,6 @@ import {
   VALID_CARD_INPUT_FORM_LENGTH,
 } from "../constants";
 import {
-  getReplacedCardNumber,
   getSeperatedCardNumber,
   getSeperatedExpiredDate,
   getSubCardNumber,
@@ -40,8 +39,7 @@ const CardInputForm = ({ card, setCard, onSubmit }: CardInputFormType) => {
     newCard.cardNumber.length === CARD_INPUT_LENGTH.cardNumber &&
     newCard.expiredDate.length === CARD_INPUT_LENGTH.expiredDate &&
     newCard.password.join("").length === CARD_INPUT_LENGTH.password1 * 2 &&
-    newCard.cardCompany !== CARD_COMPANY_NOT_SELECTED_STRING &&
-    formRef.current?.offsetHeight === VALID_CARD_INPUT_FORM_LENGTH
+    newCard.cardCompany !== CARD_COMPANY_NOT_SELECTED_STRING
       ? setIsValidForm(true)
       : setIsValidForm(false);
   }, [newCard]);
