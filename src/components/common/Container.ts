@@ -1,10 +1,13 @@
 import styled from "styled-components";
 
-const Container = styled.div`
+const Container = styled.div<{ justify?: string }>`
+  position: relative;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 19px;
+  justify-content: ${(props) => props.justify};
 
   width: 375px;
   height: 700px;
