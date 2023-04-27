@@ -3,6 +3,7 @@ import React from "react";
 import CardRegisterForm from ".";
 import { withRouter } from "storybook-addon-react-router-v6";
 import { CardInfoProvider } from "src/context/CardInfoContext";
+import { ModalProvider } from "src/context/ModalContext";
 
 const cardRegister = {
   component: CardRegisterForm,
@@ -11,11 +12,16 @@ const cardRegister = {
     withRouter,
     (Story) => {
       return (
-        <CardInfoProvider>
-          <div style={{ width: "375px", margin: "0 auto" }}>
-            <Story />
-          </div>
-        </CardInfoProvider>
+        <div>
+          <ModalProvider>
+            <CardInfoProvider>
+              <div style={{ width: "375px", margin: "0 auto" }}>
+                <Story />
+              </div>
+            </CardInfoProvider>
+          </ModalProvider>
+          <div id="modal-root"></div>
+        </div>
       );
     },
   ],
