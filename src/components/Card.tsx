@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { CardNumber } from '../type';
+import { CARD_BACKGROUND_COLORS, CARD_FONT_COLOR } from '../utils/constants';
 import { changeNumberToMask } from '../utils/processData';
 import './Card.css';
 
@@ -9,11 +10,21 @@ type CardProps = {
   cardNumber: CardNumber;
   cardOwner: string;
   expired: string;
+  openCardSelectModal?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const Card = ({ cardType, cardNumber, cardOwner, expired }: CardProps) => {
+const Card = ({ cardType, cardNumber, cardOwner, expired, openCardSelectModal }: CardProps) => {
   return (
-    <div className="card">
+    <div
+      className="card"
+      style={{
+        backgroundColor: CARD_BACKGROUND_COLORS[cardType],
+        color: CARD_FONT_COLOR[cardType],
+      }}
+      onClick={() => {
+        if (openCardSelectModal) openCardSelectModal(true);
+      }}
+    >
       <div className="card-track-1">
         <span className="card-type">{cardType}</span>
       </div>
