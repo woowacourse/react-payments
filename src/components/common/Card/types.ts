@@ -35,7 +35,7 @@ export type Password = {
 export type Card = {
   numbers: string[];
   expirationDate: ExpirationDate;
-  name: string;
+  name?: string;
   securityCode: string;
   password: Password;
   bankCode: BankCode;
