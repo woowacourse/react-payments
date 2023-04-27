@@ -9,6 +9,6 @@ export default {
 export const Default = () => (
   <>
     <GlobalStyle />
-    <CardSecurityCodeInput securityCode={""} onChange={() => {}}></CardSecurityCodeInput>
+    <CardSecurityCodeInput securityCode={""} setSecurityCode={() => {}}></CardSecurityCodeInput>
   </>
 );

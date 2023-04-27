@@ -49,14 +49,6 @@ const AddCardPage = () => {
     setModalOpen(false);
   };
 
-  const handleSecurityCode = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-
-    if (!isNumeric(value)) return;
-
-    setSecurityCode(value);
-  };
-
   const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
 
@@ -121,7 +113,7 @@ const AddCardPage = () => {
           setError={setError}
         />
         <CardOwnerNameInput ownerName={ownerName} nameLength={ownerName.length} setOwnerName={setOwnerName} />
-        <CardSecurityCodeInput securityCode={securityCode} onChange={handleSecurityCode} />
+        <CardSecurityCodeInput securityCode={securityCode} setSecurityCode={setSecurityCode} />
         <CardPasswordInput password={password} onChange={handlePassword} />
         <ButtonBox isVisible={isAddButtonVisibleConditionFulfilled()}>
           <Button>다음</Button>
