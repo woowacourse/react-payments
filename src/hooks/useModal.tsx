@@ -7,11 +7,13 @@ function useModal() {
 
   const closeModal = () => {
     if (!setIsModalOpen) return;
+    modalRef.current?.close();
     setIsModalOpen(false);
   };
 
   const openModal = () => {
     if (!setIsModalOpen) return;
+    modalRef.current?.showModal();
     setIsModalOpen(true);
   };
 
