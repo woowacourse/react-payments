@@ -1,8 +1,28 @@
 import styled from "styled-components";
 import { CompanyIcon } from "./CompanyIcon";
 import { CARD_COMPANIES } from "../../constant/cardCompany";
+import { CardType } from "../../types/card";
+import { Company } from "../../types/company";
 
-export const CompanySelectModal = () => {
+interface CompanySelectModalProps {
+  setCardInfo: React.Dispatch<React.SetStateAction<CardType>>;
+  closeModal: () => void;
+}
+
+export const CompanySelectModal = ({
+  setCardInfo,
+  closeModal,
+}: CompanySelectModalProps) => {
+  const selectCompany = (company: Company) => {
+    setCardInfo((prev) => ({
+      ...prev,
+      color: company.color,
+      company: company.name,
+    }));
+
+    closeModal();
+  };
+
   return (
     <>
       <BackDrop />
@@ -11,8 +31,8 @@ export const CompanySelectModal = () => {
           {CARD_COMPANIES.map((company) => (
             <CompanyIcon
               key={company.name}
-              companyName={company.name}
-              imgSrc={company.imgSrc}
+              company={company}
+              handleClick={selectCompany}
             />
           ))}
         </IconWrapper>

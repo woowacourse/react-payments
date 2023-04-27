@@ -16,6 +16,6 @@ export const CARD_COMPANIES = [
   { name: "하나카드", imgSrc: hanaLogo, color: "purple" },
   { name: "우리카드", imgSrc: wooriLogo, color: "blue" },
   { name: "비씨카드", imgSrc: bcLogo, color: "grey" },
-  { name: "롯데카드", imgSrc: lotteLogo, color: "rose" },
+  { name: "롯데카드", imgSrc: lotteLogo, color: "brown" },
   { name: "현대카드", imgSrc: hdLogo, color: "navy" },
 ];

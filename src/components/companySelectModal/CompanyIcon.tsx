@@ -1,15 +1,16 @@
 import styled from "styled-components";
+import { Company } from "../../types/company";
 
 interface CompanyProps {
-  companyName: string;
-  imgSrc: string;
+  company: Company;
+  handleClick: (company: Company) => void;
 }
 
-export const CompanyIcon = ({ companyName, imgSrc }: CompanyProps) => {
+export const CompanyIcon = ({ company, handleClick }: CompanyProps) => {
   return (
-    <Wrapper>
-      <CompanyImg src={imgSrc} alt={companyName} />
-      <Name>{companyName}</Name>
+    <Wrapper onClick={() => handleClick(company)}>
+      <CompanyImg src={company.imgSrc} alt={company.name} />
+      <Name>{company.name}</Name>
     </Wrapper>
   );
 };

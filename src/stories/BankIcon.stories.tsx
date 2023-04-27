@@ -1,6 +1,7 @@
 import { StoryFn } from "@storybook/react";
 import { CompanyIcon } from "../components/companySelectModal/CompanyIcon";
 import { kakaoLogo, shinhanLogo } from "../assets/card_company";
+import { Company } from "../types/company";
 
 export default {
   title: "CompanyIcon",
@@ -8,20 +9,26 @@ export default {
 };
 
 const Template: StoryFn<typeof CompanyIcon> = (args: {
-  companyName: string;
-  imgSrc: string;
+  company: Company;
+  handleClick: (company: Company) => void;
 }): React.ReactElement => <CompanyIcon {...args} />;
 
 export const KakaoBank = Template.bind({});
 
 KakaoBank.args = {
-  companyName: "카카오뱅크",
-  imgSrc: kakaoLogo,
+  company: {
+    name: "카카오카드",
+    imgSrc: kakaoLogo,
+    color: "blue",
+  },
 };
 
 export const ShinhanBank = Template.bind({});
 
 ShinhanBank.args = {
-  companyName: "신한은행",
-  imgSrc: shinhanLogo,
+  company: {
+    name: "신한은행",
+    imgSrc: shinhanLogo,
+    color: "green",
+  },
 };
