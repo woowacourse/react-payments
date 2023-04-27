@@ -1,9 +1,9 @@
-import React, { HTMLAttributes } from "react";
-import styled from "styled-components";
-import { INPUT_MAX_LENGTH, INPUT_MIN_LENGTH } from "../constants";
+import React, { HTMLAttributes } from 'react';
+import styled from 'styled-components';
+import { INPUT_MAX_LENGTH, INPUT_MIN_LENGTH } from '../constants';
 
-interface CardInputProps extends HTMLAttributes<HTMLInputElement>{
-  id: "cardNumber" | "expiredDate" | "ownerName" | "cvc" | "passwordFirst" | "passwordSecond";
+interface CardInputProps extends HTMLAttributes<HTMLInputElement> {
+  id: 'cardNumber' | 'expiredDate' | 'ownerName' | 'cvc' | 'passwordFirst' | 'passwordSecond';
   width?: string;
   value: number | string | undefined;
   isSecured: boolean;
@@ -18,10 +18,10 @@ const CardInput = (props: CardInputProps) => {
       placeholder={props.placeholder}
       style={{
         width: props.width,
-        marginRight: `${props.isSecured && "6px"}`,
+        marginRight: `${props.isSecured && '6px'}`,
       }}
       value={props.value}
-      type={props.isSecured ? "password" : "text"}
+      type={props.isSecured ? 'password' : 'text'}
       autoFocus={props.isAutoFocus}
       required={props.isRequired}
       maxLength={INPUT_MAX_LENGTH[props.id]}
@@ -37,7 +37,6 @@ const CardInputWrapper = styled.input`
   height: 45px;
 
   padding: 0 10px;
-  margin-bottom: 20px;
 
   text-align: center;
   background: #ecebf1;
