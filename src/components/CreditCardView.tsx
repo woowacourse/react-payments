@@ -16,12 +16,19 @@ const CREDIT_CARD_VIEW_BACKGROUND_COLOR = {
 
 type CreditCardViewProps = Pick<
   CreditCard,
-  'cardCompany' | 'name' | 'cardNumbers' | 'expirationDate'
+  'cardCompany' | 'name' | 'cardNumbers' | 'expirationDate' | 'nickName'
 > & { openModal?: () => void };
 
 type StyledCreditCardViewProps = {
   $background?: (typeof CREDIT_CARD_VIEW_BACKGROUND_COLOR)[keyof typeof CREDIT_CARD_VIEW_BACKGROUND_COLOR];
 };
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+`;
 
 const StyledCreditCardView = styled.div<StyledCreditCardViewProps>`
   display: flex;
@@ -66,7 +73,7 @@ const CardAdditionalInfo = styled.div`
 `;
 
 export const CreditCardView = (props: CreditCardViewProps) => {
-  const { cardCompany, name, cardNumbers, expirationDate, openModal} = props;
+  const { cardCompany, name, cardNumbers, expirationDate, openModal, nickName } = props;
 
   const getPartialCardNumber = (index: number) => {
     const partialCardNumber = cardNumbers.split('-')[index] ?? '';
@@ -77,26 +84,31 @@ export const CreditCardView = (props: CreditCardViewProps) => {
   const partialCardNumbers = [0, 1, 2, 3].map(getPartialCardNumber);
 
   return (
-    <StyledCreditCardView
-      $background={CREDIT_CARD_VIEW_BACKGROUND_COLOR[cardCompany]}
-      onClick={openModal}
-    >
+    <Container>
+      <StyledCreditCardView
+        $background={CREDIT_CARD_VIEW_BACKGROUND_COLOR[cardCompany]}
+        onClick={openModal}
+      >
+        <Text size="large" weight="bold">
+          {cardCompany}
+        </Text>
+        <ICChip />
+        <CardNumber>
+          {partialCardNumbers.map((partialCardNumber, index) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <Text size="small" key={index}>
+              {partialCardNumber}
+            </Text>
+          ))}
+        </CardNumber>
+        <CardAdditionalInfo>
+          <Text size="small">{name}</Text>
+          {expirationDate.some(Boolean) && <Text size="small">{expirationDate.join('/')}</Text>}
+        </CardAdditionalInfo>
+      </StyledCreditCardView>
       <Text size="large" weight="bold">
-        {cardCompany}
+        {nickName}
       </Text>
-      <ICChip />
-      <CardNumber>
-        {partialCardNumbers.map((partialCardNumber, index) => (
-          // eslint-disable-next-line react/no-array-index-key
-          <Text size="small" key={index}>
-            {partialCardNumber}
-          </Text>
-        ))}
-      </CardNumber>
-      <CardAdditionalInfo>
-        <Text size="small">{name}</Text>
-        {expirationDate.some(Boolean) && <Text size="small">{expirationDate.join('/')}</Text>}
-      </CardAdditionalInfo>
-    </StyledCreditCardView>
+    </Container>
   );
 };

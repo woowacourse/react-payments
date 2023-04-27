@@ -7,7 +7,7 @@ import { Page } from '../common/Page';
 const Content = styled.main`
   display: flex;
   flex-direction: column;
-  gap: 46px;
+  gap: 25px;
   align-items: center;
   flex: 1;
   overflow: scroll;
@@ -28,6 +28,7 @@ export const CreditCardListPage = () => {
             cardNumbers={creditCard.cardNumbers}
             expirationDate={creditCard.expirationDate}
             cardCompany={creditCard.cardCompany}
+            nickName={creditCard.nickName}
           />
         ))}
 

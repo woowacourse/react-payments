@@ -2,8 +2,8 @@ import type { PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
 type TextProps = PropsWithChildren<{
-  size?: 'small' | 'medium' | 'large';
-  weight?: 'normal' | 'bold';
+  size?: 'small' | 'medium' | 'large' | 'largest';
+  weight?: 'light' | 'normal' | 'bold';
   color?: string;
 }>;
 
@@ -17,9 +17,11 @@ const fontSizes: Record<StyledTextProps['$size'], string> = {
   small: '12px',
   medium: '14px',
   large: '16px',
+  largest: '24px',
 };
 
 const fontWeights: Record<StyledTextProps['$weight'], number> = {
+  light: 400,
   normal: 500,
   bold: 700,
 };

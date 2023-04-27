@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useModal } from '../../hooks/useModal';
-import { usePayments } from '../../hooks/usePayments';
 import { useValidation } from '../../hooks/useValidation';
 import type { CreditCard, Month, Year } from '../../types/CreditCard';
 import {
@@ -60,6 +59,7 @@ export const NewCreditCardPage = () => {
     name: '',
     cvc: '',
     password: '',
+    nickName: '',
   });
 
   const { validationResult, validate } = useValidation<CreditCard>({
@@ -68,8 +68,6 @@ export const NewCreditCardPage = () => {
     cvc: validateCVC,
     password: validateCardPassword,
   });
-
-  const { addCreditCard } = usePayments();
 
   const { isModalOpen, openModal, closeModal } = useModal(true);
 
@@ -110,9 +108,7 @@ export const NewCreditCardPage = () => {
   const handleClickNextButton = () => {
     if (!validate(newCard)) return;
 
-    addCreditCard(newCard);
-
-    navigate('/');
+    navigate('/addnickname', { state: { ...newCard } });
   };
 
   return (
