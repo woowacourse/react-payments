@@ -13,7 +13,6 @@ import {
   ERASE_UNTIL_CARD_NUMBER,
 } from '../constants';
 import { CardType } from '../types';
-import { Link } from 'react-router-dom';
 import { QuestionMark } from '../assets';
 import { cardNumberValidation, expiredDateValidation } from '../utils/validation';
 
@@ -29,7 +28,7 @@ const CardInputForm = (props: CardInputFormProps) => {
   const [realCardNumber, setRealCardNumber] = useState<string>('');
 
   const handleCardNumberChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setRealCardNumber(realCardNumber + e.target.value[e.target.value.length - 1]);
+    setRealCardNumber(realCardNumber + e.target.value[e.target.value.length - 1].trim());
 
     cardNumberSecureMode(e);
 
@@ -130,7 +129,7 @@ const CardInputForm = (props: CardInputFormProps) => {
   useEffect(() => {
   }, [realCardNumber, card.cardNumber]);
   return (
-    <CardInputFormWrapper>
+    <CardInputFormWrapper  onSubmit={props.onSubmit}>
       <InputSetWrapper>
         <label htmlFor={CARD_ID_VALUE.CARD_NUMBER}>카드 번호</label>
         <CardInput
@@ -226,28 +225,13 @@ const CardInputForm = (props: CardInputFormProps) => {
       )}
       {/* <button type="submit">
         다음 */}
-      <NextLink type="submit" onClick={props.onSubmit} to="/">
+      <button type="submit">
         다음
-      </NextLink>
+      </button>
       {/* </button> */}
     </CardInputFormWrapper>
   );
 };
-
-const NextLink = styled(Link)`
-  width: 30px;
-  align-self: flex-end;
-
-  font-weight: 700;
-  font-size: 14px;
-  text-decoration: none;
-  color: black;
-
-  :active {
-    opacity: 50%;
-    transform: scale(0.98);
-  }
-`;
 
 const CardInputFormWrapper = styled.form`
   display: flex;
