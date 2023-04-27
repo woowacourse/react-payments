@@ -1,9 +1,10 @@
 import { useContext } from 'react';
+
 import { useInput } from './useInput';
 import { CardPreviewInfoContext, passwordInput } from '../contexts/cardInfo';
-import { cardRegisterValidator } from '../validation/cardRegister';
-import { checkInputValdiation } from '../utils/checkInputValidation';
 import { InputInfo } from '../type/input';
+import { checkInputValdiation } from '../utils/checkInputValidation';
+import { cardRegisterValidator } from '../validation/cardRegister';
 
 export function useCardRegisterForm() {
   const previewInfo = useContext(CardPreviewInfoContext);
@@ -22,8 +23,8 @@ export function useCardRegisterForm() {
       },
     },
     CARD_PASSWORD: {
-      first: cardPasswordInput,
-      second: cardPasswordInput,
+      first: { ...cardPasswordInput },
+      second: { ...cardPasswordInput },
     },
   };
 

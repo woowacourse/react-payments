@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import styled from 'styled-components';
+
 import { CardPreviewInfoContext } from '../../contexts/cardInfo';
 
 export function CardPreview() {
