@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import CardItem from '../common/CardItem';
 import type { CardItemInfo } from '../../types/Card';
+import Title from '../common/Title';
 
 interface CardListProps {
   cardList: CardItemInfo[];
@@ -11,7 +12,10 @@ const CardList = ({ cardList, onOpen }: CardListProps) => {
   return (
     <CardListContainer>
       {cardList.map((card, id) => (
-        <CardItem card={card} key={id} onOpen={onOpen} />
+        <>
+          <CardItem card={card} key={id} onOpen={onOpen} />
+          <Title title={card.cardName} fontSize={14} />
+        </>
       ))}
     </CardListContainer>
   );

@@ -9,7 +9,6 @@ import PasswordInput from '../cardForm/PasswordInput';
 import { useFormValidation } from '../../hooks/useFormValidation';
 
 interface CardFormProps {
-  onSubmitForm: () => void;
   onChangeForm: (
     cardNumber: string[],
     expirationDate: string[],
@@ -17,7 +16,7 @@ interface CardFormProps {
   ) => void;
 }
 
-const CardForm = ({ onSubmitForm, onChangeForm }: CardFormProps) => {
+const CardForm = ({ onChangeForm }: CardFormProps) => {
   const navigate = useNavigate();
   const [buttonActive, setButtonActive] = useState(false);
 
@@ -51,7 +50,6 @@ const CardForm = ({ onSubmitForm, onChangeForm }: CardFormProps) => {
 
   const handleSubmitForm = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    onSubmitForm();
     navigate('/complete');
   };
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
 import CardListPage from './components/pages/CardListPage';
@@ -7,22 +7,46 @@ import NotFoundPage from './components/pages/NotFoundPage';
 import BankList from './components/BottomSheetComponents/BankList';
 import CardAdditionCompletionPage from './components/pages/CardAdditionCompletionPage';
 import { useBottomSheet } from './hooks/useBottomSheet';
-import { CardItemInfo } from './types/Card';
+import type { CardItemInfo } from './types/Card';
 
 function App() {
-  const [newCardId, setNewCardId] = useState(0);
+  const [cardName, setCardName] = useState('');
   const [bankName, setBankName] = useState('카드사를 선택해주세요');
+  const [cardItem, setCardItem] = useState<CardItemInfo>({
+    id: 0,
+    cardNumber: ['', '', '', ''],
+    expirationDate: ['', ''],
+    name: '',
+    bankName: '',
+    cardName: '',
+  });
 
   const { isBottomSheetOpen, handleBottomSheetOpen, handleBottomSheetClose } =
     useBottomSheet();
 
-  const handleNewCardId = (cardItem: CardItemInfo) => {
-    setNewCardId(cardItem.id);
+  const handleChangeForm = (
+    cardNumber: string[],
+    expirationDate: string[],
+    name: string
+  ) => {
+    const updatedCard = {
+      id: Date.now(),
+      cardNumber,
+      expirationDate,
+      name,
+      bankName,
+      cardName,
+    };
+    setCardItem(updatedCard);
   };
 
-  const onBankInfoChanged = (bankName: string) => {
-    setBankName(bankName);
-  };
+  useEffect(() => {
+    setCardItem((prevState) => ({
+      ...prevState,
+      bankName,
+      cardName,
+    }));
+  }, [bankName, cardName]);
 
   return (
     <AppContainer className='App'>
@@ -36,15 +60,21 @@ function App() {
             path='/register'
             element={
               <CardRegistrationPage
+                card={cardItem}
                 onOpen={handleBottomSheetOpen}
-                bankName={bankName}
-                handleNewCardId={handleNewCardId}
+                onChangeForm={handleChangeForm}
               />
             }
           />
           <Route
             path='/complete'
-            element={<CardAdditionCompletionPage newCardId={newCardId} />}
+            element={
+              <CardAdditionCompletionPage
+                card={cardItem}
+                cardName={cardName}
+                setCardName={setCardName}
+              />
+            }
           />
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
@@ -52,7 +82,7 @@ function App() {
       {isBottomSheetOpen && (
         <BankList
           onClose={handleBottomSheetClose}
-          onBankInfoChanged={onBankInfoChanged}
+          onBankInfoChanged={setBankName}
         />
       )}
     </AppContainer>
