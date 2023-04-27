@@ -1,54 +1,41 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Card from "src/components/@common/Card";
 import Input from "src/components/@common/Input";
-import useCardList from "src/hooks/useCardList";
-import useRegisterCardInfo from "src/hooks/useRegisterCardInfo";
-import { PATHS } from "src/utils/constant";
+import useSaveNickName from "src/hooks/useSaveNickName";
 import styled, { css } from "styled-components";
 
 function CardNickName() {
-  const navigation = useNavigate();
-  const { cardInfo } = useRegisterCardInfo();
-
-  const { saveCard } = useCardList({ key: "card-list" });
-
-  const [nickName, setNickName] = useState("");
-
-  useEffect(() => {
-    if (!cardInfo) {
-      alert("잘못된 접근입니다. 보유 카드로 이동합니다.");
-      navigation(PATHS.cardList);
-    }
-  });
-
-  const registerCard: React.MouseEventHandler<HTMLButtonElement> = () => {
-    saveCard({ ...cardInfo, nickName });
-    navigation(PATHS.cardList);
-  };
+  const {
+    cardName,
+    cardNumbers,
+    ownerName,
+    expireDate,
+    nickName,
+    onChange,
+    registerCard,
+  } = useSaveNickName();
 
   return (
     <>
-      {cardInfo && (
+      {
         <Styled.NickNameContainer>
           <Styled.Title>카드 등록이 완료되었습니다.</Styled.Title>
           <Card
-            cardName={cardInfo.cardName}
-            cardNumber={cardInfo.cardNumbers}
-            ownerName={cardInfo.ownerName}
-            expireDate={cardInfo.expireDate}
+            cardName={cardName}
+            cardNumber={cardNumbers}
+            ownerName={ownerName}
+            expireDate={expireDate}
           />
           <Input
             type="text"
             value={nickName}
-            onChange={(event) => setNickName(event.target.value)}
+            onChange={onChange}
             customInputStyle={Styled.NickNameInput}
           />
           <Styled.ButtonContainer>
             <Styled.NextButton onClick={registerCard}>확인</Styled.NextButton>
           </Styled.ButtonContainer>
         </Styled.NickNameContainer>
-      )}
+      }
     </>
   );
 }
