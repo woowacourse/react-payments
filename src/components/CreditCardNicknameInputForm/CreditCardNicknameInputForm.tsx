@@ -1,20 +1,27 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import CreditCard from 'components/CreditCard/CreditCard';
+import useCreditCardList from 'hooks/useCreditCardList';
 import { useEffect, useState } from 'react';
+import * as T from 'types';
 
 interface CreditCardNicknameInputFormProps {
   cardNumber: string;
 }
 function CreditCardNicknameInputForm({ cardNumber }: CreditCardNicknameInputFormProps) {
-  const [creditCard, setCreditCard] = useState({
+  const [creditCard, setCreditCard] = useState<Pick<T.CreditCard, 'companyId' | 'number' | 'expiry' | 'owner'>>({
     companyId: '',
     number: '',
     expiry: '',
     owner: '',
   });
 
-  useEffect(() => {
+  const { findCreditCardByNumber } = useCreditCardList();
 
+  useEffect(() => {
+    const foundCreditCard = findCreditCardByNumber(cardNumber);
+    if (foundCreditCard) {
+      setCreditCard(foundCreditCard);
+    }
   }, []);
 
   return (
