@@ -23,7 +23,7 @@ export const CardForm = ({ setCardInfo, newCard }: CardFormProps) => {
     validateNumbersInput,
     validatePasswordInput,
   } = useValidation();
-  const { setCards } = useContext(CardContext);
+  const { addNewCard } = useContext(CardContext);
   const moveTo = useNavigate();
 
   const isInputValid = () => {
@@ -34,7 +34,7 @@ export const CardForm = ({ setCardInfo, newCard }: CardFormProps) => {
     e.preventDefault();
 
     if (isInputValid()) {
-      setCards(newCard);
+      addNewCard(newCard);
       moveTo("/nickname");
     }
   };

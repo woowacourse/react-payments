@@ -10,6 +10,7 @@ import { getRandomId } from "../utils/randomId";
 
 const initialCard = {
   id: "",
+  nickname: "",
   numbers: [],
   owner: "NAME",
   expiryDate: "MM/YY",

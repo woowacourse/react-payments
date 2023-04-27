@@ -3,12 +3,14 @@ import { CardType } from "../types/card";
 
 type CardContextType = {
   cards: CardType[];
-  setCards: (newCard: CardType) => void;
+  addNewCard: (newCard: CardType) => void;
+  updateCard: (id: string, updatedData: Partial<CardType>) => void;
 };
 
 export const CardContext = createContext<CardContextType>({
   cards: [],
-  setCards: () => {},
+  addNewCard: () => {},
+  updateCard: () => {},
 });
 
 export const CardProvider = ({ children }: PropsWithChildren) => {
@@ -24,12 +26,20 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
     setCards((prev) => [...prev, newCard]);
   };
 
+  const updateCard = (id: string, updatedData: Partial<CardType>) => {
+    setCards((prev) => {
+      return prev.map((card) =>
+        card.id === id ? { ...card, ...updatedData } : card
+      );
+    });
+  };
+
   const saveInLocalStorage = (newCards: CardType[]) => {
     localStorage.setItem("cards", JSON.stringify(newCards));
   };
 
   return (
-    <CardContext.Provider value={{ cards, setCards: addNewCard }}>
+    <CardContext.Provider value={{ cards, addNewCard, updateCard }}>
       {children}
     </CardContext.Provider>
   );
