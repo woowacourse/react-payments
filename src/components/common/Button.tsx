@@ -10,13 +10,13 @@ const Button = (props: ButtonType) => {
 };
 
 const ButtonWrapper = styled.button`
-  width: 30px;
   align-self: flex-end;
+  width: 30px;
 
   font-weight: 700;
   font-size: 14px;
-  text-decoration: none;
   color: black;
+  text-decoration: none;
 
   background: transparent;
   border: none;

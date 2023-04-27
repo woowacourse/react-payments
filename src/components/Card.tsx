@@ -16,13 +16,11 @@ const Card = ({
     [cardNumber]
   );
 
-  const test = cardCompany ? cardCompany : "BC카드";
-
   return (
-    <CardWrapper style={{ background: CARD_COMPANY[test].background }}>
-      <p style={{ color: CARD_COMPANY[test].color }}>{cardCompany}</p>
+    <CardWrapper cardCompany={cardCompany}>
+      <p>{cardCompany}</p>
       <img src={IcChip} alt="ic-chip" />
-      <CardInfoWrapper>
+      <CardInfoWrapper cardCompany={cardCompany}>
         <UpInfoWrapper>
           {cardNumberArray.map((cardNumber) => (
             <span key={crypto.randomUUID()}>{cardNumber}</span>
@@ -37,45 +35,44 @@ const Card = ({
   );
 };
 
-const CardWrapper = styled.div`
+const CardWrapper = styled.div<{ cardCompany: string }>`
   display: flex;
   flex-direction: column;
-
   align-items: flex-start;
-  width: 208px;
-  height: 123px;
-
-  box-sizing: border-box;
+  width: 213px;
+  height: 133px;
 
   padding: 15px 14px 0 14px;
-  border-radius: 5px;
+  box-sizing: border-box;
 
+  border-radius: 5px;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  background: ${(props) => CARD_COMPANY[props.cardCompany].background};
 
   & > p {
     font-weight: 500;
     font-size: 12px;
+    color: ${(props) => CARD_COMPANY[props.cardCompany].color};
+
     margin-bottom: 17px;
   }
 `;
 
-const CardInfoWrapper = styled.div`
+const CardInfoWrapper = styled.div<{ cardCompany: string }>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
   width: 100%;
   height: 55px;
-
-  font-size: 14px;
-  font-weight: 600;
-  color: white;
 
   padding: 8px 5px;
   box-sizing: border-box;
 
+  font-size: 14px;
+  color: ${(props) => CARD_COMPANY[props.cardCompany].color};
+
   & > div > span {
-    font-weight: 900;
+    font-weight: 600;
     padding-right: 6px;
   }
 `;

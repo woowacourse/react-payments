@@ -209,6 +209,7 @@ const OwnerNameLabelWrapper = styled.div`
     font-weight: 500;
     font-size: 12px;
     color: #525252;
+
     margin-bottom: 6px;
   }
 
@@ -220,21 +221,24 @@ const OwnerNameLabelWrapper = styled.div`
 
 const CvcInputWrapper = styled.div`
   display: flex;
+
   & > img {
-    margin: 8px 0 0 10px;
     width: 27px;
     height: 27px;
+
+    margin: 8px 0 0 10px;
+
     cursor: pointer;
-    :hover {
-    }
   }
 `;
 
 const PasswordInputWrapper = styled.div`
   display: flex;
+
   & > :first-child {
     margin-right: 5px;
   }
+
   & > :nth-child(2) {
     margin-right: 7px;
   }
@@ -246,19 +250,20 @@ const SecuredPasswordWrapper = styled.div`
   justify-content: center;
   width: 35px;
   height: 48px;
+
   font-size: 12px;
 `;
 
 const AnswerBoxWrapper = styled.div`
   display: flex;
-  padding: 10px;
+  width: 180px;
+  height: 6%;
 
   position: absolute;
   top: 520px;
   right: 75px;
 
-  width: 180px;
-  height: 6%;
+  padding: 10px;
 
   background: #ecebf1;
   border-radius: 8px;

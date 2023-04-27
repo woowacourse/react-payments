@@ -26,7 +26,7 @@ const MyCard = () => {
 };
 
 const CardWrapper = styled.div`
-  margin-bottom: 46px;
+  margin-bottom: 30px;
 
   & > p {
     text-align: center;

@@ -35,28 +35,20 @@ const SEPERATOR_STRING = {
   expiredDate: " / ",
 };
 
-const CARD_COLOR = [
-  "red",
-  "pink",
-  "green",
-  "blue",
-  "black",
-  "gray",
-  "yellow",
-  "orange",
-  "aqua",
-  "lime",
-];
-
 const REGEX = {
-  number: /^[0-9]+$/,
+  // globalNumber: /[^0-9]/g,
+  number: /^[0-9]+$/g,
   english: /^[a-zA-Z]*$/,
 } as const;
 
 const CARD_COMPANY: Record<
   string,
-  { img: string; background: string; color: string }
+  { img?: string; background: string; color: string }
 > = {
+  카드사선택필요: {
+    background: "gray",
+    color: "white",
+  },
   BC카드: {
     img: BcCard,
     background: "rgb(222, 84, 86)",
@@ -95,7 +87,6 @@ export {
   CARD_INPUT_LENGTH,
   SEPERATED_CARD_NUMBER_LENGTH,
   PASSWORD_DIGIT_INDEX,
-  CARD_COLOR,
   REGEX,
   SEPERATOR_STRING,
   SEPERATED_EXPIRED_DATE_LENGTH,

@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { ReactNode } from "react";
 import styled from "styled-components";
 import { Context } from "../../context";
+import { slideBottomToUp, slideUpToBottom } from "../../style/keyframe";
 
 interface BottomSheetType {
   children: ReactNode;
@@ -10,18 +11,18 @@ interface BottomSheetType {
 const BottomSheet = (props: BottomSheetType) => {
   const { isModalOpen, toggleModal } = useContext(Context);
 
-  return isModalOpen ? (
+  return (
     <>
-      <BackDrop onClick={toggleModal} />
-      <BottomSheetWrapper>{props.children}</BottomSheetWrapper>
+      <BackDrop isModalOpen={isModalOpen} onClick={toggleModal} />
+      <BottomSheetWrapper isModalOpen={isModalOpen}>
+        {props.children}
+      </BottomSheetWrapper>
     </>
-  ) : (
-    <></>
   );
 };
 
-const BottomSheetWrapper = styled.div`
-  display: flex;
+const BottomSheetWrapper = styled.div<{ isModalOpen: boolean }>`
+  display: ${(props) => (props.isModalOpen ? "flex" : "none")};
   height: 227px;
   width: 100%;
 
@@ -31,9 +32,14 @@ const BottomSheetWrapper = styled.div`
 
   background: #fdfdfd;
   border-radius: 5px 5px 0px 0px;
+
+  animation: ${(props) =>
+      props.isModalOpen ? slideBottomToUp : slideUpToBottom}
+    0.7s;
 `;
 
-const BackDrop = styled.div`
+const BackDrop = styled.div<{ isModalOpen: boolean }>`
+  visibility: ${(props) => (props.isModalOpen ? "visible" : "hidden")};
   width: 100%;
   height: 100%;
 

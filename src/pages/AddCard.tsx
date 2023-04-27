@@ -15,6 +15,7 @@ import {
 
 const AddCard = () => {
   const navigate = useNavigate();
+
   const [newCard, setNewCard] = useState<CardType>(getEmptyCard());
   const { toggleModal } = useContext(Context);
 
@@ -22,7 +23,7 @@ const AddCard = () => {
     toggleModal();
   }, []);
 
-  const registerCard = () => {
+  const handleFormSubmited = () => {
     const cards = getLocalStorage("card");
     setLocalStorage("card", [...cards, newCard]);
     navigate(ROUTER_PATH.NameCard);
@@ -37,7 +38,7 @@ const AddCard = () => {
       <CardInputForm
         card={newCard}
         setCard={setNewCard}
-        onSubmit={registerCard}
+        onSubmit={handleFormSubmited}
       />
       <BottomSheet>
         <CardCompany setCard={setNewCard} />

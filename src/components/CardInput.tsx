@@ -16,6 +16,7 @@ const CardInput = (props: CardInputType) => {
       type={props.isSecured ? "password" : "text"}
       autoFocus={props.isAutoFocus}
       required={props.isRequired}
+      minLength={CARD_INPUT_LENGTH[props.id]}
       maxLength={CARD_INPUT_LENGTH[props.id]}
     />
   );

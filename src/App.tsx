@@ -8,7 +8,6 @@ const App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleModal = (): void => {
-    console.log(isModalOpen);
     setIsModalOpen(!isModalOpen);
   };
 
