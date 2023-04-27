@@ -53,16 +53,6 @@ export const CreditCardRegisterLabel = styled.div`
     margin-bottom: 5px;
 `;
 
-export const ButtonWrapper = styled.div`
-    display: flex;
-    justify-content: flex-end;
-`;
-
-export const RegisterButton = styled.button`
-    font-weight: 700;
-    cursor: pointer;
-`;
-
 export const HiddenInput = styled.input`
     pointer-events: none;
     cursor: not-allowed;

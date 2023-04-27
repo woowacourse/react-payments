@@ -6,6 +6,7 @@ import useCreditCardList from 'hooks/useCreditCardList';
 import Modal from 'components/Modal';
 import useModal from 'hooks/useModal';
 import useCreditCardForm from 'hooks/useCreditCardForm';
+import ControlButton from 'components/ControlButton';
 import CreditCardNumberInput from './inputs/CreditCardNumberInput';
 import CreditCardExpiryInput from './inputs/CreditCardExpiryInput';
 import CreditCardOwnerInput from './inputs/CreditCardOwnerInput';
@@ -25,7 +26,7 @@ function CreditCardRegister() {
     if (isCreditCardError) return;
 
     saveCreditCard(creditCardForm);
-    navigate('/');
+    navigate('/register-done');
   };
 
   useEffect(() => {
@@ -67,15 +68,12 @@ function CreditCardRegister() {
           <CreditCardPasswordInput
             name="password"
           />
-          <S.ButtonWrapper>
-            <S.RegisterButton
-              disabled={isCreditCardError}
-              type="submit"
-              onClick={() => handleSubmit()}
-            >
-              확인
-            </S.RegisterButton>
-          </S.ButtonWrapper>
+          <ControlButton
+            disabled={isCreditCardError}
+            type="submit"
+            onClick={handleSubmit}
+            label="다음"
+          />
         </S.CreditCardRegisterForm>
       </S.CreditCardRegisterLayout>
       <Modal modalOpen={modalOpen}>
