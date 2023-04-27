@@ -35,7 +35,7 @@ const Card = ({
         setIsModalOpen && setIsModalOpen(true);
       }}
     >
-      <CardLabel labelText={cardCompany || '00카드'} />
+      <CardLabel labelText={cardCompany || '00카드'} color="#ffffff" />
       <Styled.CardItemWrapper>
         <Styled.Chip />
         <Styled.TextWrapper>
