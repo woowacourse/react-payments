@@ -1,7 +1,7 @@
 .add-card-form {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 70vh;
   justify-content: space-around;
 }
 .add-card-submit {
