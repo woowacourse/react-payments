@@ -14,11 +14,18 @@ import CardCompanyModal from '../components/CardCompanyModal/CardCompanyModal';
 import { useEffect, useState } from 'react';
 import CardLabel from '../components/@common/CardLabel';
 
-const Wrapper = styled.div`
+const CardWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  margin: 32px 0;
+  height: 192px;
+  margin-top: 28px;
+  font-size: 14px;
+`;
+
+const CardLabelWrapper = styled.div`
+  height: 16px;
 `;
 
 const NextButton = styled.button<{ disabled: boolean }>`
@@ -70,7 +77,15 @@ const AddCard = ({ cards, setCards }: SetCardsProps) => {
     <>
       <Header page="add-card" titleContent="&lt; &nbsp; 카드 추가" />
       <form onSubmit={handleSetCards}>
-        <Wrapper>
+        <CardWrapper>
+          <CardLabelWrapper>
+            {!isModalOpen && (
+              <CardLabel
+                labelText="카드사를 수정하려면 카드를 클릭하세요."
+                color="#969696"
+              />
+            )}
+          </CardLabelWrapper>
           <Card
             cardNumbers={cardNumbers}
             expiredDates={expiredDates}
@@ -78,10 +93,7 @@ const AddCard = ({ cards, setCards }: SetCardsProps) => {
             cardCompany={cardCompany}
             setIsModalOpen={setIsModalOpen}
           />
-          {!isModalOpen && (
-            <CardLabel labelText="카드사를 수정하려면 카드를 클릭하세요." />
-          )}
-        </Wrapper>
+        </CardWrapper>
         <CardNumbers
           cardNumbers={cardNumbers}
           setCardNumbers={setCardNumbers}
