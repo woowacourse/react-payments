@@ -28,9 +28,9 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: { value: '' },
-  render: ({ value: _, ...args }) => {
-    const [value, setValue] = useState('다람쥐 헌 쳇바퀴 돌듯이');
+  args: { value: '다람쥐 헌 쳇바퀴 돌듯이' },
+  render: ({ value: initialValue, ...args }) => {
+    const [value, setValue] = useState(initialValue);
 
     return (
       <>
