@@ -1,6 +1,6 @@
 import React, { useState, useContext, useRef } from 'react';
 
-import useAutoFocus from '../../../hooks/useAutoFocus';
+import useInputListRef from '../../../hooks/useInputListRef';
 import FormLabel from '../../@common/FormLabel';
 import Input from '../../@common/Input';
 import ErrorSpan from '../../@common/ErrorSpan';
@@ -17,19 +17,9 @@ export const CardNumber = () => {
     message: '',
   });
 
-  const refs = [
-    useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null),
-  ];
+  const { inputListRef, focusNext } = useInputListRef(4);
 
-  const { focusNext } = useAutoFocus({
-    refs: refs,
-    maxLength: 4,
-  });
-
-  const generateChangeHandler: (index: number) => React.ChangeEventHandler<HTMLInputElement> =
+  const changeHandlerByIndex: (index: number) => React.ChangeEventHandler<HTMLInputElement> =
     (index) => (event) => {
       const enteredNumber = event.currentTarget.value as string;
 
@@ -67,8 +57,8 @@ export const CardNumber = () => {
   };
 
   const _onBlurLast: React.FocusEventHandler<HTMLInputElement> = () => {
-    refs.forEach(({ current }) => {
-      if (current?.value.length !== 4) {
+    inputListRef.current.forEach((ref) => {
+      if (ref?.value.length !== 4) {
         setValidStatus({
           isValid: false,
           message: '카드 번호 16자리를 모두 입력해주세요.',
@@ -83,44 +73,52 @@ export const CardNumber = () => {
       <CardNumberInputContainer>
         <Input
           value={creditCard.cardNumber[0]}
-          onChange={generateChangeHandler(0)}
+          onChange={changeHandlerByIndex(0)}
           onBlur={_onBlur}
           maxLength={4}
           inputMode="numeric"
-          ref={refs[0]}
+          ref={(el: HTMLInputElement) => {
+            inputListRef.current[0] = el;
+          }}
         />
 
         <Input
           value={creditCard.cardNumber[1]}
-          onChange={generateChangeHandler(1)}
+          onChange={changeHandlerByIndex(1)}
           onBlur={_onBlur}
           maxLength={4}
           inputMode="numeric"
-          ref={refs[1]}
+          ref={(el: HTMLInputElement) => {
+            inputListRef.current[1] = el;
+          }}
         />
 
         <Input
           value={creditCard.cardNumber[2]}
-          onChange={generateChangeHandler(2)}
+          onChange={changeHandlerByIndex(2)}
           onBlur={_onBlur}
           maxLength={4}
           inputMode="numeric"
           type="password"
           text-align="center"
           placeholder="●●●●"
-          ref={refs[2]}
+          ref={(el: HTMLInputElement) => {
+            inputListRef.current[2] = el;
+          }}
         />
 
         <Input
           value={creditCard.cardNumber[3]}
-          onChange={generateChangeHandler(3)}
+          onChange={changeHandlerByIndex(3)}
           onBlur={_onBlurLast}
           maxLength={4}
           inputMode="numeric"
           type="password"
           placeholder="●●●●"
           text-align="center"
-          ref={refs[3]}
+          ref={(el: HTMLInputElement) => {
+            inputListRef.current[3] = el;
+          }}
         />
       </CardNumberInputContainer>
       {!validStatus.isValid && <ErrorSpan>{validStatus.message}</ErrorSpan>}

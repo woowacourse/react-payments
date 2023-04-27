@@ -1,6 +1,6 @@
-import React, { useState, useRef, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 
-import useAutoFocus from '../../../hooks/useAutoFocus';
+import useInputListRef from '../../../hooks/useInputListRef';
 import { ONLY_NUMBER_REGEXP } from '../../../utils/regexp';
 import FormLabel from '../../@common/FormLabel';
 import Input from '../../@common/Input';
@@ -17,43 +17,37 @@ function CardPassword() {
   });
   const { creditCard, setCreditCard } = useContext(CreditCardContext) as CreditCardContextType;
 
-  const refs = [useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null)];
+  const { inputListRef, focusNext } = useInputListRef(1);
 
-  const { focusNext } = useAutoFocus({
-    refs: refs,
-    maxLength: 1,
-  });
+  const changeInputByIndex: (index: number) => React.ChangeEventHandler<HTMLInputElement> =
+    (index) => (event) => {
+      const enteredPassword = event.currentTarget.value as string;
 
-  const _onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    const enteredPassword = event.currentTarget.value as string;
-    const inputIndex = Number(event.currentTarget.dataset['idx']);
+      if (!ONLY_NUMBER_REGEXP.test(enteredPassword)) {
+        setValidationStatus({
+          isValid: false,
+          message: '숫자만 입력 가능합니다.',
+        });
 
-    if (!ONLY_NUMBER_REGEXP.test(enteredPassword)) {
+        return;
+      }
+
+      if (!setCreditCard) return;
+
+      const newValue = [...creditCard.password];
+      newValue[index] = enteredPassword;
+
+      focusNext(index);
       setValidationStatus({
-        isValid: false,
-        message: '숫자만 입력 가능합니다.',
+        isValid: true,
+        message: '',
       });
-
-      return;
-    }
-
-    if (!setCreditCard) return;
-
-    setValidationStatus({
-      isValid: true,
-      message: '',
-    });
-
-    const newValue = [...creditCard.password];
-    newValue[inputIndex] = enteredPassword;
-
-    setCreditCard('password', newValue);
-    focusNext(Number(inputIndex));
-  };
+      setCreditCard('password', newValue);
+    };
 
   const _onBlur: React.FocusEventHandler<HTMLInputElement> = () => {
-    refs.forEach(({ current }) => {
-      if (current?.value.length === 0) {
+    inputListRef.current.forEach((ref) => {
+      if (ref.value.length === 0) {
         setValidationStatus({
           isValid: false,
           message: '카드 비밀번호 2자리를 입력해주세요.',
@@ -67,26 +61,28 @@ function CardPassword() {
       <FormLabel>{'카드 비밀번호'}</FormLabel>
       <PasswordInputContainer>
         <Input
-          data-idx="0"
           value={creditCard.password[0]}
-          onChange={_onChange}
+          onChange={changeInputByIndex(0)}
           onBlur={_onBlur}
           maxLength={1}
           inputMode="numeric"
           type="password"
           width="43px"
-          ref={refs[0]}
+          ref={(el: HTMLInputElement) => {
+            inputListRef.current[0] = el;
+          }}
         />
         <Input
-          data-idx="1"
           value={creditCard.password[1]}
-          onChange={_onChange}
+          onChange={changeInputByIndex(1)}
           onBlur={_onBlur}
           maxLength={1}
           inputMode="numeric"
           type="password"
           width="43px"
-          ref={refs[1]}
+          ref={(el: HTMLInputElement) => {
+            inputListRef.current[1] = el;
+          }}
         />
         <DotParagraph>•</DotParagraph>
         <DotParagraph>•</DotParagraph>
