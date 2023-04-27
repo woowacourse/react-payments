@@ -1,0 +1,17 @@
+.bottom-sheet {
+  position: absolute;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.back-drop {
+  background-color: rgba(0, 0, 0, 0.25);
+  height: 70%;
+}
+
+.bottom-sheet-body {
+  background-color: white;
+  height: 30%;
+}
