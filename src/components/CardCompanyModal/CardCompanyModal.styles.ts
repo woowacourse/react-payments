@@ -8,7 +8,10 @@ export const Modal = styled.div`
   background-color: white;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  transition: 0.5s all;
+  display: grid;
+  grid-template-columns: repeat(4, 52px);
+  gap: 24px;
+  padding: 32px 48px;
 `;
 
 export const ModalBackdrop = styled.div`
