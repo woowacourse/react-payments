@@ -7,6 +7,7 @@ import { CARD_ID } from "src/utils/constant";
 const card: Meta<typeof Card> = {
   component: Card,
   title: "Card",
+  tags: ["autodocs"],
 };
 
 export default card;
