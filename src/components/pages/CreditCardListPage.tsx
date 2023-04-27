@@ -10,7 +10,6 @@ const Content = styled.main`
   gap: 25px;
   align-items: center;
   flex: 1;
-  overflow: scroll;
   padding-bottom: 25px;
 `;
 
