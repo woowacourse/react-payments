@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { isValidOwnerName } from "../../validator/Validator";
+import { isEndsWithSpace, isValidOwnerName } from "../../validator/Validator";
 import { InputContainer, Input, Label } from "../common";
 
 type CardOwnerNameInputProp = {
@@ -12,13 +12,18 @@ const CardOwnerNameInput = ({ ownerName, nameLength, setOwnerName }: CardOwnerNa
   const onChangeOwnerNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
 
-    if (!isValidOwnerName(value)) {
-      return;
-    }
+    if (!isValidOwnerName(value)) return;
+
     setOwnerName(value);
     setTimeout(() => {
       setOwnerName(value.toUpperCase());
     }, 70);
+  };
+
+  const onBlurOwnerNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+
+    if (isEndsWithSpace(value)) setOwnerName(value.slice(0, -1));
   };
 
   return (
@@ -32,11 +37,12 @@ const CardOwnerNameInput = ({ ownerName, nameLength, setOwnerName }: CardOwnerNa
           value={ownerName}
           width="100%"
           textAlign="left"
-          placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+          placeholder="카드에 표시된 영문 이름과 동일하게 입력하세요."
           type="text"
           maxLength={30}
           required
           onChange={onChangeOwnerNameHandler}
+          onBlur={onBlurOwnerNameHandler}
           autoComplete="name"
         />
       </InputContainer>

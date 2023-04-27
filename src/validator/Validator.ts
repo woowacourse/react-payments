@@ -16,8 +16,19 @@ export const isValidMonth = (value: string) => {
 
 export const isValidOwnerName = (value: string) => {
   const allowAlphabetAndBlank = /^[A-Za-z\s]*$/;
+  const regexStartsWithSpace = /^\s/;
+  const regexDuplicateSpaces = /\s{2,}/g;
 
-  return allowAlphabetAndBlank.test(value);
+  const isValid =
+    allowAlphabetAndBlank.test(value) || regexStartsWithSpace.test(value) || regexDuplicateSpaces.test(value);
+
+  return isValid;
+};
+
+export const isEndsWithSpace = (value: string) => {
+  const regexEndsWithSpace = /\s$/;
+
+  return regexEndsWithSpace.test(value);
 };
 
 export const isFulfilledObject = (obj: Record<string, string>, length: number) => {
