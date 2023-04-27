@@ -2,6 +2,7 @@ import styled from "styled-components";
 import GlobalStyle from "./styles/GlobalStyle";
 import AddCardPage from "./pages/AddCardPage/AddCardPage";
 import CardListPage from "./pages/CardListPage/CardListPage";
+import CardAliasRegistrationPage from "./pages/CardAliasRegistrationPage/CardAliasRegistrationPage";
 
 import { Route, Routes } from "react-router-dom";
 import { useState } from "react";
@@ -19,8 +20,9 @@ function App() {
       <GlobalStyle />
       <Layout>
         <Routes>
-          <Route index path="/" element={<CardListPage cards={cards} />} />
-          <Route path="/addCard" element={<AddCardPage onSubmit={addCard} />} />
+          <Route index element={<CardListPage cards={cards} />} />
+          <Route path="addCard" element={<AddCardPage />} />
+          <Route path="alias" element={<CardAliasRegistrationPage onSubmit={addCard} />} />
         </Routes>
       </Layout>
     </>

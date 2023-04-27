@@ -26,11 +26,7 @@ import useModal from "../../hooks/useModal";
 import CardCompanyButtonList from "../../components/CardCompanyButtonList/CardCompanyButtonList";
 import CARD_COMPANIES from "../../constants/cardCompanies";
 
-type AddCardPageProps = {
-  onSubmit: (card: Card) => void;
-};
-
-const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
+const AddCardPage = () => {
   const [cardNumber, setCardNumber] = useState<CardNumber>({
     firstGroup: "",
     secondGroup: "",
@@ -94,7 +90,7 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
       return;
     }
 
-    const card: Card = {
+    const card: Omit<Card, "alias"> = {
       cardNumber,
       expirationDate,
       ownerName,
@@ -103,9 +99,9 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
       cardCompany,
     };
 
-    onSubmit(card);
-
-    navigate("/");
+    navigate("/alias", {
+      state: card,
+    });
   };
 
   const isAddButtonVisible: boolean =
