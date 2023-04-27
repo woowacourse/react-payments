@@ -1,54 +1,21 @@
 import styled from "styled-components";
-import {
-  BCCardLogo,
-  HanaCardLogo,
-  HyundaiCardLogo,
-  KBCardLogo,
-  KakaoBankLogo,
-  LotteCardLogo,
-  ShinhanCardLogo,
-  WooriCardLogo,
-} from "../../../assets/companyLogo";
+import CompanyButton from "./CompanyButton";
 
 const CompanyModal = () => {
   return (
     <BackDrop>
       <ModalContainer>
         <CompanyListColumn>
-          <CompanyButton>
-            <BCCardLogo />
-            BC카드
-          </CompanyButton>
-          <CompanyButton>
-            <ShinhanCardLogo />
-            신한카드
-          </CompanyButton>
-          <CompanyButton>
-            <KakaoBankLogo />
-            카카오뱅크
-          </CompanyButton>
-          <CompanyButton>
-            <HyundaiCardLogo />
-            현대카드
-          </CompanyButton>
+          <CompanyButton company="BC카드" />
+          <CompanyButton company="신한카드" />
+          <CompanyButton company="카카오뱅크" />
+          <CompanyButton company="현대카드" />
         </CompanyListColumn>
         <CompanyListColumn>
-          <CompanyButton>
-            <WooriCardLogo />
-            우리카드
-          </CompanyButton>
-          <CompanyButton>
-            <LotteCardLogo />
-            롯데카드
-          </CompanyButton>
-          <CompanyButton>
-            <HanaCardLogo />
-            하나카드
-          </CompanyButton>
-          <CompanyButton>
-            <KBCardLogo />
-            국민카드
-          </CompanyButton>
+          <CompanyButton company="우리카드" />
+          <CompanyButton company="롯데카드" />
+          <CompanyButton company="하나카드" />
+          <CompanyButton company="국민카드" />
         </CompanyListColumn>
       </ModalContainer>
     </BackDrop>
@@ -93,24 +60,6 @@ const ModalContainer = styled.div`
 const CompanyListColumn = styled.div`
   display: flex;
   justify-content: space-between;
-`;
-
-const CompanyButton = styled.button`
-  width: 70px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-
-  background: none;
-  border: none;
-
-  font-weight: 500;
-  font-size: 12px;
-  color: #525252;
-
-  cursor: pointer;
 `;
 
 export default CompanyModal;
