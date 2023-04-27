@@ -19,4 +19,3 @@ const useInputFocus = (inputLength: number) => {
 };
 
 export default useInputFocus;
-// refs: React.RefObject<HTMLInputElement>[],
