@@ -42,7 +42,7 @@ const AddCard = ({ cards, setCards }: SetCardsProps) => {
       ...cards,
       { id: uuidv4(), cardNumbers, expiredDates, cardOwnerName, cardCompany },
     ]);
-    navigate('/');
+    navigate('/add-alias');
   };
 
   useEffect(() => {
