@@ -44,3 +44,8 @@ export const Default: Story = {
     );
   },
 };
+
+export const Underlined: Story = {
+  ...Default,
+  args: { ...Default.args, variant: 'underlined' },
+};
