@@ -26,9 +26,10 @@ function CardRegisterForm() {
         expireDate={expireDate}
         ownerName={ownerName}
         onClick={openModal}
+        isOpen={isModalOpen}
       />
     ),
-    [cardNumbers, expireDate, ownerName, cardName, openModal],
+    [cardNumbers, expireDate, ownerName, cardName, openModal, isModalOpen],
   );
 
   return (

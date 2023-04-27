@@ -7,9 +7,11 @@ interface Props {
 }
 
 function CardCompany({ closeEvent }: Props) {
-  const { cardClickHandler } = useCardCompanySelect({ closeEvent });
+  const { cardClickHandler, onMouseOver } = useCardCompanySelect({
+    closeEvent,
+  });
 
-  const cardLists = BANK_LIST.map((list) => {
+  const cardLists = BANK_LIST.map((list, idx) => {
     return (
       <S.CardContainer>
         <img
@@ -17,6 +19,7 @@ function CardCompany({ closeEvent }: Props) {
           src={list.src}
           alt={list.name}
           onClick={cardClickHandler}
+          onMouseOver={onMouseOver}
         />
         <p>{list.name}</p>
       </S.CardContainer>

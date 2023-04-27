@@ -6,10 +6,18 @@ interface Props {
   cardNumber: CardNumberProps;
   ownerName: string;
   expireDate: string;
+  isOpen?: boolean;
   onClick?: () => void;
 }
 
-function Card({ cardName, cardNumber, ownerName, expireDate, onClick }: Props) {
+function Card({
+  cardName,
+  cardNumber,
+  ownerName,
+  expireDate,
+  onClick,
+  isOpen,
+}: Props) {
   const CardNumbers = Object.values(cardNumber).map((value, index) => {
     if (index === 2 || index === 3) {
       return <span>{"•".repeat(value.length)}</span>;
@@ -18,7 +26,11 @@ function Card({ cardName, cardNumber, ownerName, expireDate, onClick }: Props) {
   });
 
   return (
-    <CardContainer onClick={onClick} cardName={cardName?.id}>
+    <CardContainer
+      onClick={onClick}
+      cardName={cardName?.id}
+      isModalOpen={isOpen}
+    >
       <S.CardName>{cardName?.name}</S.CardName>
       <S.CardChip />
       <S.CardNumberContainer>{CardNumbers}</S.CardNumberContainer>

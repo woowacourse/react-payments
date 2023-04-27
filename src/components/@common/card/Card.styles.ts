@@ -4,9 +4,12 @@ import { CARD_ID } from "src/utils/constant";
 
 interface CardColorProps {
   cardName?: (typeof CARD_ID)[number] | null;
+  isModalOpen?: boolean;
 }
 
 export const CardContainer = styled.div<CardColorProps>`
+  position: relative;
+
   width: 213px;
   height: 133px;
 
@@ -27,6 +30,8 @@ export const CardContainer = styled.div<CardColorProps>`
   margin: 25px auto 9px auto;
 
   box-sizing: border-box;
+
+  z-index: ${(props) => (props.isModalOpen ? 1000 : 1)};
 `;
 
 export const Styled = {
