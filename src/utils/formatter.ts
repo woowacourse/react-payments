@@ -31,12 +31,10 @@ const formatter = {
 export default formatter;
 
 const formatDisplayedCardNumber = (input: string) => {
-  const value = input
-    .replace(REGEX.NON_NUMBER, '')
+  return input
     .replace(REGEX.FOUR_NUMBER_SEQUENCE, '$1 ')
-    .slice(0, CARD_NUMBER_INPUT_MAX_LENGTH);
-
-  return value;
+    .slice(0, CARD_NUMBER_INPUT_MAX_LENGTH)
+    .trim();
 };
 
 const encryptDisplayedCardNumber = (input: string) => {
