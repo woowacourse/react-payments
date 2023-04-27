@@ -1,4 +1,4 @@
-import React, { FormEvent, useEffect, useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import styled from 'styled-components';
 import CardInput from './CardInput';
 import {
@@ -14,7 +14,7 @@ import {
 } from '../constants';
 import { CardType } from '../types';
 import { QuestionMark } from '../assets';
-import { cardNumberValidation, expiredDateValidation } from '../utils/validation';
+import { cardNumberValidation, cvcValidation, expiredDateValidation, inputFormValidation, ownerNameValidation, passwordValidation } from '../utils/validation';
 
 interface CardInputFormProps {
   card: CardType;
@@ -126,8 +126,6 @@ const CardInputForm = (props: CardInputFormProps) => {
     props.setCard(card);
   };
 
-  useEffect(() => {
-  }, [realCardNumber, card.cardNumber]);
   return (
     <CardInputFormWrapper  onSubmit={props.onSubmit}>
       <InputSetWrapper>
@@ -142,7 +140,7 @@ const CardInputForm = (props: CardInputFormProps) => {
           onChange={handleCardNumberChanged}
           onKeyDown={handleCardNumberKey}
         />
-        <span>{cardNumberValidation(realCardNumber)}</span>
+        <span>{cardNumberValidation(realCardNumber) ? '':'카드 번호에는 숫자만 입력 가능합니다.'}</span>
       </InputSetWrapper>
 
       <InputSetWrapper>
@@ -158,7 +156,7 @@ const CardInputForm = (props: CardInputFormProps) => {
           onChange={handleExpiredDateChanged}
           onKeyDown={handleExpiredDateKey}
         />
-        <span>{expiredDateValidation(card.expiredDate)}</span>
+        <span>{expiredDateValidation(card.expiredDate) ? '':"유효하지 않은 입력(월/연)입니다."}</span>
       </InputSetWrapper>
       <InputSetWrapper>
         <OwnerNameLabelWrapper>
@@ -175,6 +173,7 @@ const CardInputForm = (props: CardInputFormProps) => {
           isRequired={false}
           onChange={handleOwnerChanged}
         />
+        <span>{ownerNameValidation(card.ownerName) ? "" : "카드 소유자 이름은 영어만 가능합니다."}</span>
       </InputSetWrapper>
 
       <InputSetWrapper>
@@ -191,6 +190,7 @@ const CardInputForm = (props: CardInputFormProps) => {
           />
           <img src={QuestionMark} alt="도움말" onClick={() => setIsAnswered(!isAnswered)} />
         </CvcInputWrapper>
+        <span>{cvcValidation(card.cvc) ? '':"cvc는 번호만 입력 가능합니다."}</span> 
       </InputSetWrapper>
 
       <InputSetWrapper>
@@ -217,17 +217,16 @@ const CardInputForm = (props: CardInputFormProps) => {
           <span>●</span>
           <span>●</span>
         </PasswordInputWrapper>
+        <span>{passwordValidation(card.password[PASSWORD_DIGIT_INDEX.FIRST], card.password[PASSWORD_DIGIT_INDEX.SECOND]) ? '':"비밀번호에는 숫자만 입력 가능합니다."}</span>
       </InputSetWrapper>
       {isAnswered && (
         <AnswerBoxWrapper>
           <p>카드 뒷면의 보안 3자리 숫자를 입력해 주세요.</p>
         </AnswerBoxWrapper>
       )}
-      {/* <button type="submit">
-        다음 */}
-      <button type="submit">
+      {(inputFormValidation(realCardNumber, card)) && <button type="submit">
         다음
-      </button>
+      </button>}
       {/* </button> */}
     </CardInputFormWrapper>
   );
@@ -259,6 +258,7 @@ const CardInputFormWrapper = styled.form`
 const InputSetWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  margin-bottom: 20px;
 
   & > label {
     font-weight: 500;
@@ -269,6 +269,8 @@ const InputSetWrapper = styled.div`
 
   & > span {
     color: red;
+    font-size: 12px;
+    margin-top: 6px;
   }
 `;
 

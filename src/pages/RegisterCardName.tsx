@@ -19,6 +19,8 @@ const CardName = () => {
               expiredDate={card.expiredDate}
               cardNumber={card.cardNumber}
               bankName={card.bankName}
+              cvc={card.cvc}
+              password={card.password}
             />
           )}
         </CardWrapper>

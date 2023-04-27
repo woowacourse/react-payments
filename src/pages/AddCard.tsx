@@ -42,6 +42,8 @@ const AddCard = () => {
         expiredDate={card.expiredDate}
         cardNumber={card.cardNumber}
         bankName={card.bankName}
+        cvc={card.cvc}
+        password={card.password}
       />
       <CardInputForm card={card} setCard={setCard} onSubmit={e => registerCard(e)} />
       {modalCtx.isModalOpen && (

@@ -33,6 +33,8 @@ const MyCard = () => {
               expiredDate={card.expiredDate}
               cardNumber={card.cardNumber}
               bankName={card.bankName}
+              cvc={card.cvc}
+              password={card.password}
             />
             {card.cardName && <CardNameWrapper>{card.cardName}</CardNameWrapper>}
           </CardWrapper>

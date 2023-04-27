@@ -15,7 +15,9 @@ export const RedCard: Story = {
     cardNumber: "1111-2222-3333-4444",
     ownerName: "LIGHT",
     expiredDate: "12 / 24",
-    bankName: "우리은행"
+    bankName: "우리은행",
+    cvc:"342",
+    password: ["1", "2"]
   },
 };
 
@@ -25,6 +27,8 @@ export const PinkCard: Story = {
     cardNumber: "9999-9999-9999-9999",
     ownerName: "PATRICK",
     expiredDate: "08 / 25",
-    bankName: "카카오뱅크"
+    bankName: "카카오뱅크",
+    cvc:"342",
+    password: ["1", "2"]
   },
 };
