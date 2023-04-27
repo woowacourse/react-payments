@@ -1,11 +1,12 @@
 import { forwardRef } from 'react';
 import styled from 'styled-components';
 import { Icon } from '../Icon/Icon';
+import { COMPANY_NAME } from '../Card/types';
 
 export interface ModalProps {
   ImgSources?: string[];
-  names?: string[];
-  onClick: (bank: string) => void;
+  names?: COMPANY_NAME[];
+  onClick: (bank: COMPANY_NAME) => void;
 }
 
 type Ref = HTMLDivElement;
@@ -31,24 +32,24 @@ export const Modal = forwardRef<Ref, ModalProps>(
 
 const Styled = {
   Modal: styled.div`
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    align-content: flex-start;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 80px 80px 80px 80px;
+    justify-content: center;
     position: fixed;
-    left: 0;
     bottom: 0;
     width: 375px;
     height: 227px;
-    z-index: 2;
-    border-radius: 7px 7px 0 0;
+    z-index: 100;
+    border-radius: 10px 10px 0 0;
     background-color: white;
     overflow: scroll;
   `,
   ModalBackdrop: styled.div`
-    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100vw;

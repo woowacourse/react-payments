@@ -24,7 +24,7 @@ const Styled = {
     align-items: center;
     width: 37px;
     height: 37px;
-    margin: 20px;
+    margin: 30px 20px 35px 20px;
     cursor: pointer;
   `,
   CardName: styled.span`
