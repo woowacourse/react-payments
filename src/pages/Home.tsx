@@ -6,7 +6,7 @@ import * as Styled from './Home.styles';
 
 const Home = ({ cards }: { cards: CardType[] }) => {
   return (
-    <>
+    <Styled.PageWrapper>
       <Header page="home" titleContent="보유 카드" />
       <Styled.Wrapper>
         {cards.length === 0 && (
@@ -33,7 +33,7 @@ const Home = ({ cards }: { cards: CardType[] }) => {
         )}
         <AddCardButton></AddCardButton>
       </Styled.Wrapper>
-    </>
+    </Styled.PageWrapper>
   );
 };
 

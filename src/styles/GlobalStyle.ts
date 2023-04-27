@@ -12,14 +12,6 @@ const GlobalStyle = createGlobalStyle`
     li {
         list-style: none;
     }
-    html,
-    body {
-        width: 375px;
-        margin: 0 auto;
-        font-family: sans-serif;
-        font-size: 16px;
-    }
-
     button, input {
         all:unset;
     }

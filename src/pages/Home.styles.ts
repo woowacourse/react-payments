@@ -1,5 +1,12 @@
 import styled from 'styled-components';
 
+export const PageWrapper = styled.div`
+  width: 375px;
+  margin: 0 auto;
+  font-family: sans-serif;
+  font-size: 16px;
+`;
+
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;

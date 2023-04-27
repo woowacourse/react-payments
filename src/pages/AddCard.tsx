@@ -51,46 +51,50 @@ const AddCard = ({ cards, setCards }: SetCardsProps) => {
 
   return (
     <>
-      <Header page="add-card" titleContent="&lt; &nbsp; 카드 추가" />
-      <form onSubmit={handleSetCards}>
-        <Styled.CardWrapper>
-          <Styled.CardLabelWrapper>
-            {!isModalOpen && (
-              <CardLabel
-                labelText="카드사를 수정하려면 카드를 클릭하세요."
-                color="#969696"
-              />
-            )}
-          </Styled.CardLabelWrapper>
-          <Card
+      <Styled.PageWrapper>
+        <Header page="add-card" titleContent="&lt; &nbsp; 카드 추가" />
+        <form onSubmit={handleSetCards}>
+          <Styled.CardWrapper>
+            <Styled.CardLabelWrapper>
+              {!isModalOpen && (
+                <CardLabel
+                  labelText="카드사를 수정하려면 카드를 클릭하세요."
+                  color="#969696"
+                />
+              )}
+            </Styled.CardLabelWrapper>
+            <Card
+              cardNumbers={cardNumbers}
+              expiredDates={expiredDates}
+              cardOwnerName={cardOwnerName}
+              cardCompany={cardCompany}
+              setIsModalOpen={setIsModalOpen}
+            />
+          </Styled.CardWrapper>
+          <CardNumbers
             cardNumbers={cardNumbers}
-            expiredDates={expiredDates}
-            cardOwnerName={cardOwnerName}
-            cardCompany={cardCompany}
-            setIsModalOpen={setIsModalOpen}
+            setCardNumbers={setCardNumbers}
           />
-        </Styled.CardWrapper>
-        <CardNumbers
-          cardNumbers={cardNumbers}
-          setCardNumbers={setCardNumbers}
-        />
-        <ExpiredDate
-          expiredDates={expiredDates}
-          setExpiredDates={setExpiredDates}
-        />
-        <CardOwnerName
-          cardOwnerName={cardOwnerName}
-          setCardOwnerName={setCardOwnerName}
-        />
-        <SecurityCode
-          securityCode={securityCode}
-          setSecurityCode={setSecurityCode}
-        />
-        <CardPassword passwords={passwords} setPasswords={setPasswords} />
-        <Styled.ButtonWrapper>
-          <Styled.NextButton disabled={isDisabledForm}>다음</Styled.NextButton>
-        </Styled.ButtonWrapper>
-      </form>
+          <ExpiredDate
+            expiredDates={expiredDates}
+            setExpiredDates={setExpiredDates}
+          />
+          <CardOwnerName
+            cardOwnerName={cardOwnerName}
+            setCardOwnerName={setCardOwnerName}
+          />
+          <SecurityCode
+            securityCode={securityCode}
+            setSecurityCode={setSecurityCode}
+          />
+          <CardPassword passwords={passwords} setPasswords={setPasswords} />
+          <Styled.ButtonWrapper>
+            <Styled.NextButton disabled={isDisabledForm}>
+              다음
+            </Styled.NextButton>
+          </Styled.ButtonWrapper>
+        </form>
+      </Styled.PageWrapper>
       {isModalOpen && (
         <CardCompanyModal
           setIsModalOpen={setIsModalOpen}
