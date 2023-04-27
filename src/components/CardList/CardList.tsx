@@ -11,11 +11,14 @@ const CardList = ({ cards }: CardListProps) => {
   return (
     <Ul>
       {cards.map((card) => {
-        const { cardNumber, ownerName, expirationDate, cardCompany } = card;
-        const { firstGroup, secondGroup, thirdGroup, fourthGroup } = cardNumber;
-        const key = `${firstGroup}${secondGroup}${thirdGroup}${fourthGroup}`;
+        const { cardNumber, ownerName, expirationDate, cardCompany, alias } = card;
 
-        return <CardPreview key={key} card={{ cardNumber, ownerName, expirationDate, cardCompany }} />;
+        return (
+          <FlexContainer key={crypto.randomUUID()}>
+            <CardPreview card={{ cardNumber, ownerName, expirationDate, cardCompany }} />
+            <CardAlias>{alias}</CardAlias>
+          </FlexContainer>
+        );
       })}
 
       <AddCardButton />
@@ -40,6 +43,19 @@ const Ul = styled.ul`
     height: 0;
     background-color: transparent;
   }
+`;
+
+const FlexContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+const CardAlias = styled.p`
+  font-size: 14px;
+  font-weight: 700;
+
+  text-align: center;
 `;
 
 export default CardList;
