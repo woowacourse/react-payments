@@ -40,3 +40,13 @@ export type Card = {
   password: Password;
   bankCode: BankCode;
 };
+
+export const isCard = (card: Partial<Card>): card is Card => {
+  return (
+    'numbers' in card &&
+    'expirationDate' in card &&
+    'securityCode' in card &&
+    'password' in card &&
+    'bankCode' in card
+  );
+};

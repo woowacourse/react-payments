@@ -9,7 +9,7 @@ import styled from 'styled-components';
 import { FormEventHandler, useState } from 'react';
 import { Container } from 'components/style/InputContainer';
 import { CardDB } from 'db/Cards';
-import { Card } from 'components/common/Card/types';
+import { BankCode, Card, isCard } from 'components/common/Card/types';
 import { ValueAndOnChange } from 'components/Input/types';
 import { useCardFormValid } from 'hooks/useCardFormValid';
 import { CreditCard } from 'components/common';
@@ -31,15 +31,18 @@ function AddCardForm({ onSubmit }: AddCardFormProps) {
 
   const [securityCode, setSecurityCode] = useState('');
 
-  const card: Card = {
+  const [bankCode, setBankCode] = useState<BankCode>();
+
+  const card: Partial<Card> = {
     numbers: cardNumbers,
     expirationDate: { month: month, year: year },
     name,
     securityCode: securityCode,
     password: { first: firstDigit, second: secondDigit },
+    bankCode,
   };
 
-  const [isValid, errorMessages] = useCardFormValid(card);
+  const { isValid, errorMessages } = useCardFormValid(card);
 
   const valueAndOnChanges: ValueAndOnChange[] = cardNumbers.map((cardNumber, index) => ({
     value: cardNumber,
@@ -84,8 +87,10 @@ function AddCardForm({ onSubmit }: AddCardFormProps) {
       return alert(Object.values(errorMessages).join('\n'));
     }
 
-    CardDB.registerCard(card);
-    onSubmit();
+    if (isCard(card)) {
+      CardDB.registerCard(card);
+      onSubmit();
+    }
   };
 
   return (

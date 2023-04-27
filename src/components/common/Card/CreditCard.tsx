@@ -1,26 +1,29 @@
 import styled from 'styled-components';
 import { Card } from './types';
 
-type Props = {
-  card: Card;
+export type CreditCardProps = {
+  card: Partial<Card>;
 };
 
-export function CreditCard({ card }: Props) {
+export function CreditCard({ card }: CreditCardProps) {
+  const { numbers, expirationDate, name, bankCode } = card;
+
   return (
     <Styled.Wrapper>
+      <Styled.BankName>{bankCode && CardName[bankCode]}</Styled.BankName>
       <Styled.Chip />
       <Styled.CardNumbers>
-        <span>{card.numbers[0]}</span>
-        <span>{card.numbers[1]}</span>
+        <span>{numbers?.[0]}</span>
+        <span>{numbers?.[1]}</span>
         <span>••••</span>
         <span>••••</span>
       </Styled.CardNumbers>
       <Styled.Container>
-        <Styled.Name>{card.name}</Styled.Name>
+        <Styled.Name>{name}</Styled.Name>
         <Styled.ExpirationDate>
-          <Styled.Month>{card.expirationDate.month}</Styled.Month>
+          <Styled.Month>{expirationDate?.month}</Styled.Month>
           <Styled.DateSeparator>/</Styled.DateSeparator>
-          <Styled.Year>{card.expirationDate.year}</Styled.Year>
+          <Styled.Year>{expirationDate?.year}</Styled.Year>
         </Styled.ExpirationDate>
       </Styled.Container>
     </Styled.Wrapper>
