@@ -1,0 +1,10 @@
+.input-box-expiration-date p:last-child {
+  margin: 1% 0 0 2%;
+  color: red;
+  font-weight: bold;
+  height: 15px;
+}
+
+.input-expiration-date {
+  width: 40%;
+}

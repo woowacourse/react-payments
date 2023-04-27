@@ -1,0 +1,38 @@
+.input-box-security-code p:last-child {
+  margin: 1% 0 0 2%;
+  color: red;
+  font-weight: bold;
+  height: 15px;
+}
+
+.input-security-code {
+  width: 23%;
+}
+
+.button-security-code {
+  border: 1px solid var(--security-code-button-border);
+  border-radius: 50%;
+  color: var(--security-code-button-text);
+  background-color: rgba(0, 0, 0, 0);
+  cursor: pointer;
+
+  width: 27px;
+  height: 27px;
+
+  font-size: 1.3rem;
+
+  margin-left: 3%;
+}
+
+.guide-security-code {
+  display: inline-block;
+  width: 200px;
+  margin-left: 10px;
+  border: 1px solid lightgray;
+  border-radius: 7px;
+  padding: 2%;
+  position: relative;
+  top: 3px;
+  /* color: lightgrey; */
+  font-size: 10px;
+}

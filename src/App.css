@@ -1,0 +1,10 @@
+.App {
+  margin: 0 auto;
+  width: 50%;
+  min-width: 375px;
+
+  height: 830px;
+  padding: 1% 3%;
+
+  background-color: white;
+}

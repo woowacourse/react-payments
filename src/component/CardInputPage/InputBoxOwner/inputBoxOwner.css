@@ -1,0 +1,27 @@
+.input-box-card-owner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.input-box-card-owner p:last-child {
+  margin: 1% 0 0 2%;
+  color: red;
+  font-weight: bold;
+  height: 15px;
+  grid-column: 1/3;
+}
+
+.input-box-card-owner p:nth-child(2) {
+  text-align: right;
+  font-weight: bold;
+}
+
+.input-card-owner {
+  grid-column: 1/3;
+  width: 100%;
+
+  text-align: left;
+  letter-spacing: normal;
+
+  padding-left: 3%;
+}

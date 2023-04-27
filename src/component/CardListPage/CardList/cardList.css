@@ -1,0 +1,11 @@
+.card-list {
+  display: grid;
+  gap: 5%;
+  padding: 5% 0;
+}
+
+.add-card-button-explanation {
+  text-align: center;
+  margin: 3%;
+  font-weight: bold;
+}
