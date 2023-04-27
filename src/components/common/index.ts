@@ -6,3 +6,4 @@ export * from './Input';
 export * from './InputBox';
 export * from './ErrorMessage';
 export * from './Label';
+export * from './CardCompanyList';

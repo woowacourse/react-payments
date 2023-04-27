@@ -1,3 +1,5 @@
+import { CARD_COMPANY } from '../constants';
+
 export interface Card {
   CARD_NUMBER: string;
   DATE: string;
@@ -7,3 +9,5 @@ export interface Card {
 }
 
 export type CardInfoOption = keyof Card;
+
+export type CardCompanyOption = keyof typeof CARD_COMPANY;

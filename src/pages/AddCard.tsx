@@ -49,9 +49,12 @@ const _Section = styled.section`
 `;
 
 const _CompanySelectButton = styled.button`
-  padding: 1rem;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 0.4rem;
   border-radius: 1rem;
 
-  color: white;
-  background-color: blue;
+  color: black;
+  background-color: var(--grey-100);
 `;
