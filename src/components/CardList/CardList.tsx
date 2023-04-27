@@ -15,6 +15,7 @@ const CardList = ({ cardInfo }: CardListProps) => {
         {cardInfo.map(card => (
           <li className={styles.card} key={crypto.randomUUID()}>
             <CardPreview
+              cardName={card.cardName}
               cardNumber={card.cardNumber}
               cardOwnerName={card.cardOwnerName}
               cardExpirationDate={card.cardExpirationDate}
