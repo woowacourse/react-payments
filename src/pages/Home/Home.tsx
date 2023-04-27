@@ -1,7 +1,7 @@
-import AddCardButton from '../components/AddCardButton/AddCardButton';
-import CardList from '../components/CardList/CardList';
-import EmptyHeader from '../components/EmptyHeader/EmptyHeader';
-import { CardInfo } from '../types';
+import AddCardButton from '../../components/AddCardButton/AddCardButton';
+import CardList from '../../components/CardList/CardList';
+import EmptyHeader from '../../components/EmptyHeader/EmptyHeader';
+import { CardInfo } from '../../types';
 
 type HomeProps = {
   cardInfo: CardInfo[];
