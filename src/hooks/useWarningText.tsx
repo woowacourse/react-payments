@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FirstPassword, SecondPassword } from "../types/card";
-import { toHiddenNumber, toOnlyNumber } from "../util/InputUtil";
+import { toHiddenNumber, toOnlyNumber } from "../util/replace";
 import { LENGTH, WARNING_TEXT } from "../abstract/constants";
 
 function useWarningText(minLength?: number, name?: string) {
@@ -50,7 +50,7 @@ function useWarningText(minLength?: number, name?: string) {
     }
   };
 
-  const isRightForm = (
+  const isWrongForm = (
     cardNumberHidden: string,
     cardDate: string,
     cardCVC: string,
@@ -70,7 +70,21 @@ function useWarningText(minLength?: number, name?: string) {
 
     return isError;
   };
-  return { warningText, checkNumber, checkRightLength, isRightForm };
+
+  const isRightCardName = (cardName: string) => {
+    if (cardName.length === 0) {
+      setWarningText("카드 별명을 입력해주세요");
+      return false;
+    }
+    return true;
+  };
+  return {
+    warningText,
+    checkNumber,
+    checkRightLength,
+    isWrongForm,
+    isRightCardName,
+  };
 }
 
 export default useWarningText;
