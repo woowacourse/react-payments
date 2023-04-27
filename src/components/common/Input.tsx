@@ -7,6 +7,7 @@ const Input = styled.input<{
 }>`
   width: ${({ width }) => width || '100%'};
   height: 100%;
+  padding-bottom: 0.5rem;
 
   border: none;
   background: none;
