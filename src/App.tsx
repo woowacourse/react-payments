@@ -1,5 +1,6 @@
 import MainPage from "pages/MainPage";
 import CardRegisterForm from "pages/RegisterPage/CardRegisterForm";
+import LastPage from "pages/LastPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useState } from "react";
 import { INITIAL_CARD_INFO } from "constants/initialCardInfo";
@@ -25,6 +26,7 @@ const App = () => {
             </>
           }
         />
+        <Route path="/completion" element={<LastPage cardInfo={cardInfo}/>} />
       </Routes>
     </BrowserRouter>
   );

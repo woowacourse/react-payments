@@ -14,13 +14,13 @@ export const Input = forwardRef<Ref, InputProps>(({ ...props }, ref) => {
 
 const S = {
   Input: styled.input<{ inputStyle: CSSProp }>`
-    ${(props) => props.inputStyle}
-
     background: var(--input-background);
     height: 48px;
     font-size: 14px;
     text-align: center;
     letter-spacing: 1px;
+
+    ${(props) => props.inputStyle}
   `,
 };
 
@@ -49,6 +49,15 @@ export const SecurityCodeInputStyle = css`
   margin: 0;
   padding: 0 4%;
   border-radius: 8px;
+`;
+
+export const CardNickname = css`
+  display: block;
+  width: 100%;
+  height: 28px;
+  margin: 124px 0 172px;
+  border-bottom: 1px solid var(--darken-color);
+  background: transparent;
 `;
 
 export default Input;

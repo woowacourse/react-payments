@@ -14,7 +14,7 @@ const useSetCardInfo = (dataName: string) => {
     event.preventDefault();
 
     setData(allCardInfo, dataName);
-    navigate("/");
+    navigate("/completion");
   };
 
   return { handleFormDataSubmit };
