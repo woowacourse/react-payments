@@ -26,7 +26,6 @@ function Home() {
           {creditCardList.map((creditCard) => (
             <S.CreditCardItem key={creditCard.id}>
               <CreditCard
-                fullFilled
                 creditCard={{
                   numbers: creditCard.numbers,
                   expiry: creditCard.expiry,

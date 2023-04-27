@@ -4,6 +4,8 @@ import Input from '@Components/Input';
 import InputLabel from '@Components/InputLabel';
 import InputLayout from '@Components/InputLayout';
 
+import { CREDIT_CARD_LENGTH } from '@Constants/creditCard';
+
 import * as S from './style';
 import { CreditCardCVCInputProps } from './type';
 
@@ -27,7 +29,7 @@ function CreditCardCVCInput({ creditCardCVC, errorMessage, updateCVC }: CreditCa
           width="72px"
           textAlign="center"
           onChange={handleChangeCreditCardCVC}
-          maxLength={3}
+          maxLength={CREDIT_CARD_LENGTH.cvc}
         />
         <S.GuideLayout>
           <S.GuideIcon onMouseEnter={handleGuideIconMouseEnter} onMouseLeave={handleGuideIconMouseLeave}>

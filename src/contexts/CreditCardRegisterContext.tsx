@@ -8,6 +8,8 @@ import * as Type from '@Types/index';
 
 import useInput from '@Hooks/useInput';
 
+import { CREDIT_CARD_LENGTH, CREDIT_CARD_MAX_LENGTH } from '@Constants/creditCard';
+
 export const CreditCardRegisterContext = createContext({
   creditCard: {
     company: undefined as Type.CreditCardCompanies | undefined,
@@ -64,7 +66,7 @@ function CreditCardRegisterProvider({ children }: PropsWithChildren) {
   const updateNumbers = (newCreditCarNumber: string) => {
     const removeDashNumbers = creditCard.removeDashInCreditCardNumber(newCreditCarNumber);
 
-    if (removeDashNumbers.length > 16) return;
+    if (removeDashNumbers.length > CREDIT_CARD_LENGTH.numbers) return;
 
     if (removeDashNumbers.length < numbers.length) setNumbers('');
     else {
@@ -76,11 +78,11 @@ function CreditCardRegisterProvider({ children }: PropsWithChildren) {
   const updateExpiry = (newExpiry: string) => {
     let processExpiry = newExpiry;
 
-    if (newExpiry.length > 4) return;
+    if (newExpiry.length > CREDIT_CARD_LENGTH.expiry) return;
 
-    if (newExpiry.length >= 3 && newExpiry.length <= 4) {
+    if (newExpiry.length > CREDIT_CARD_LENGTH.monthExpiry && newExpiry.length < CREDIT_CARD_LENGTH.expiry) {
       const newExpiryArray = newExpiry.split('');
-      newExpiryArray.splice(2, 0, '/').join('');
+      newExpiryArray.splice(CREDIT_CARD_LENGTH.monthExpiry, 0, '/').join('');
       processExpiry = newExpiryArray.join('');
     }
 
@@ -88,19 +90,19 @@ function CreditCardRegisterProvider({ children }: PropsWithChildren) {
   };
 
   const updateOwner = (newOwner: string) => {
-    if (newOwner.length <= 20) {
+    if (newOwner.length <= CREDIT_CARD_MAX_LENGTH.owner) {
       setOwner(newOwner.toUpperCase());
     }
   };
 
   const updateCVC = (newCVC: string) => {
-    if (newCVC.length > 3) return;
+    if (newCVC.length > CREDIT_CARD_LENGTH.cvc) return;
 
     setCVC(newCVC);
   };
 
   const updateFirstPassword = (newFirstPassword: string) => {
-    if (newFirstPassword.length <= 1) {
+    if (newFirstPassword.length <= CREDIT_CARD_LENGTH.password) {
       setPassword({
         ...password,
         first: newFirstPassword,
@@ -109,7 +111,7 @@ function CreditCardRegisterProvider({ children }: PropsWithChildren) {
   };
 
   const updateSecondPassword = (newSecondPassword: string) => {
-    if (newSecondPassword.length <= 1) {
+    if (newSecondPassword.length <= CREDIT_CARD_LENGTH.password) {
       setPassword({
         ...password,
         second: newSecondPassword,
@@ -118,7 +120,7 @@ function CreditCardRegisterProvider({ children }: PropsWithChildren) {
   };
 
   const updateAlias = (newAlias: string) => {
-    if (newAlias.length > 10) return;
+    if (newAlias.length > CREDIT_CARD_MAX_LENGTH.alias) return;
     setAlias(newAlias);
   };
 

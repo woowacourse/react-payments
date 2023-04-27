@@ -14,7 +14,6 @@ const Template: Story<CreditCardProps> = (args) => <CreditCard {...args} />;
 
 export const PerfectCreditCard = Template.bind({});
 PerfectCreditCard.args = {
-  fullFilled: true,
   creditCard: {
     numbers: '1234123412341234',
     expiry: '03/45',
@@ -25,7 +24,6 @@ PerfectCreditCard.args = {
 
 export const OwnerLessCreditCard = Template.bind({});
 OwnerLessCreditCard.args = {
-  fullFilled: true,
   creditCard: {
     numbers: '1234123412341234',
     expiry: '03/45',
@@ -35,7 +33,6 @@ OwnerLessCreditCard.args = {
 
 export const invaildCreditCard = Template.bind({});
 invaildCreditCard.args = {
-  fullFilled: true,
   creditCard: {
     numbers: '12341234123',
     expiry: '03/45',
@@ -45,7 +42,6 @@ invaildCreditCard.args = {
 
 export const BCCreditCardCompany = Template.bind({});
 BCCreditCardCompany.args = {
-  fullFilled: true,
   creditCard: {
     numbers: '1234123412341234',
     expiry: '03/45',
@@ -56,7 +52,6 @@ BCCreditCardCompany.args = {
 
 export const KakaoCreditCardCompany = Template.bind({});
 KakaoCreditCardCompany.args = {
-  fullFilled: true,
   creditCard: {
     numbers: '1234123412341234',
     expiry: '03/45',
@@ -67,7 +62,6 @@ KakaoCreditCardCompany.args = {
 
 export const ShinhanCreditCardCompany = Template.bind({});
 ShinhanCreditCardCompany.args = {
-  fullFilled: true,
   creditCard: {
     numbers: '1234123412341234',
     company: 'shinhan',
@@ -78,7 +72,6 @@ ShinhanCreditCardCompany.args = {
 
 export const HanaCreditCardCompany = Template.bind({});
 HanaCreditCardCompany.args = {
-  fullFilled: true,
   creditCard: {
     numbers: '1234123412341234',
     company: 'hana',
@@ -89,7 +82,6 @@ HanaCreditCardCompany.args = {
 
 export const HyundaiCreditCardCompany = Template.bind({});
 HyundaiCreditCardCompany.args = {
-  fullFilled: true,
   creditCard: {
     numbers: '1234123412341234',
     company: 'hyundai',
@@ -100,7 +92,6 @@ HyundaiCreditCardCompany.args = {
 
 export const KBCreditCardCompany = Template.bind({});
 KBCreditCardCompany.args = {
-  fullFilled: true,
   creditCard: {
     numbers: '1234123412341234',
     company: 'kb',
@@ -111,7 +102,6 @@ KBCreditCardCompany.args = {
 
 export const LotteCreditCardCompany = Template.bind({});
 LotteCreditCardCompany.args = {
-  fullFilled: true,
   creditCard: {
     numbers: '1234123412341234',
     company: 'lotte',
@@ -122,7 +112,6 @@ LotteCreditCardCompany.args = {
 
 export const WooriCreditCardCompany = Template.bind({});
 WooriCreditCardCompany.args = {
-  fullFilled: true,
   creditCard: {
     numbers: '1234123412341234',
     expiry: '03/45',

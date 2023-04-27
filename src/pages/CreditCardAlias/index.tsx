@@ -53,7 +53,6 @@ function CreditCardAlias() {
       <S.CreditCardAlias>
         <S.CompleteMessage>카드등록이 완료되었습니다.</S.CompleteMessage>
         <CreditCard
-          fullFilled={false}
           creditCard={{
             numbers: creditCard.numbers,
             expiry: creditCard.expiry,

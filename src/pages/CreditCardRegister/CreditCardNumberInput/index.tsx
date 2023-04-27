@@ -16,7 +16,7 @@ function CreditCardNumberInput({ creditCardNumber, errorMessage, updateNumbers }
       <InputLabel label="카드 번호" />
       <Input
         type="string"
-        value={creditCard.addDashInCreditCardNumber(creditCardNumber)}
+        value={creditCard.addDashInCreditCardNumbers(creditCardNumber)}
         width="100%"
         textAlign="center"
         onChange={handleChangeNumbers}

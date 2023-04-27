@@ -2,7 +2,12 @@ import { useEffect, useState } from 'react';
 
 import * as Type from '@Types/index';
 
-const useCreditCardValidation = (creditCard: Omit<Type.CreditCard, 'id'>, errorMessages: (string | null)[]) => {
+import { CREDIT_CARD_LENGTH } from '@Constants/creditCard';
+
+const useCreditCardValidation = (
+  creditCard: Partial<Omit<Type.CreditCard, 'id'>>,
+  errorMessages: (string | null)[],
+) => {
   const [isValid, setIsValid] = useState(false);
 
   useEffect(() => {
@@ -12,13 +17,18 @@ const useCreditCardValidation = (creditCard: Omit<Type.CreditCard, 'id'>, errorM
     });
     setIsValid(result);
 
-    if (creditCard.numbers.length !== 16) setIsValid(false);
+    if (creditCard.numbers && creditCard.numbers.length !== CREDIT_CARD_LENGTH.numbers) setIsValid(false);
 
-    if (creditCard.expiry.length !== 5) setIsValid(false);
+    if (creditCard.expiry && creditCard.expiry.length !== CREDIT_CARD_LENGTH.expiry) setIsValid(false);
 
-    if (creditCard.cvc.length !== 3) setIsValid(false);
+    if (creditCard.cvc && creditCard.cvc.length !== CREDIT_CARD_LENGTH.cvc) setIsValid(false);
 
-    if (creditCard.password.first.length !== 1 || creditCard.password.second.length !== 1) setIsValid(false);
+    if (
+      (creditCard.password && creditCard.password.first.length !== CREDIT_CARD_LENGTH.password) ||
+      (creditCard.password && creditCard.password.second.length !== CREDIT_CARD_LENGTH.password)
+    ) {
+      setIsValid(false);
+    }
   }, [errorMessages]);
 
   return isValid;

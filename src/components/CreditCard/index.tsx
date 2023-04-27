@@ -1,26 +1,19 @@
 /* eslint-disable react/no-array-index-key */
 import creditCard from '@Domains/creditCard';
 
+import useCreditCardValidation from '@Hooks/useCreditCardValidation';
+
 import CARD_COMPANY from '@Constants/cardCompany';
 
 import * as S from './style';
 import { CreditCardProps } from './type';
 
-function CreditCard({ fullFilled, creditCard: { expiry, numbers, owner, company } }: CreditCardProps) {
-  const isValid = () => {
-    if (!fullFilled) return true;
-
-    if (numbers.length !== 16) return false;
-    if (!numbers) return false;
-
-    if (!expiry) return false;
-
-    return true;
-  };
+function CreditCard({ fullFilled = true, creditCard: { expiry, numbers, owner, company } }: CreditCardProps) {
+  const isValid = useCreditCardValidation({ expiry, numbers, owner, company }, []);
 
   return (
     <S.CreditCardLayout
-      isValid={isValid()}
+      isValid={!fullFilled || isValid}
       backgroundColor={company && CARD_COMPANY[company].uniqueColor}
       fontColor={company && CARD_COMPANY[company].fontColor}
     >

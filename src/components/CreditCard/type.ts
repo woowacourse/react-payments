@@ -1,7 +1,7 @@
 import * as Type from '@Types/index';
 
 export type CreditCardProps = {
-  fullFilled: boolean;
+  fullFilled?: boolean;
   creditCard: Pick<Type.CreditCard, 'numbers' | 'expiry' | 'owner' | 'company'>;
 };
 

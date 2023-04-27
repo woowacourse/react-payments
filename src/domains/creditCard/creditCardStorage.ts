@@ -2,7 +2,7 @@ import * as Type from '@Types/index';
 
 import localStorageHelper from '@Utils/localStorageHelper';
 
-const CREDIT_CARD = 'creditCard';
+import { CREDIT_CARD } from '@Constants/creditCard';
 
 const creditCardStorage = {
   getCreditCard: () => localStorageHelper.getValue(CREDIT_CARD, []),

@@ -4,6 +4,8 @@ import InputLayout from '@Components/InputLayout';
 
 import * as CommonStyle from '@Styles/common';
 
+import { CREDIT_CARD_LENGTH } from '@Constants/creditCard';
+
 import * as S from './style';
 import { CreditCardPasswordInputProps } from './type';
 
@@ -26,7 +28,7 @@ function CreditCardPasswordInput({ creditCardPassword, errorMessage, updatePassw
           width="48px"
           textAlign="center"
           onChange={handleChangeCreditCardFirstPassword}
-          maxLength={1}
+          maxLength={CREDIT_CARD_LENGTH.password}
         />
         <Input
           type="password"
@@ -34,7 +36,7 @@ function CreditCardPasswordInput({ creditCardPassword, errorMessage, updatePassw
           width="48px"
           textAlign="center"
           onChange={handleChangeCreditCardSecondPassword}
-          maxLength={1}
+          maxLength={CREDIT_CARD_LENGTH.password}
         />
         <S.PasswordBox>•</S.PasswordBox>
         <S.PasswordBox>•</S.PasswordBox>

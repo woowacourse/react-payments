@@ -1,8 +1,12 @@
+import { CREDIT_CARD_NUMBER } from '@Constants/creditCard';
+
 const creditCard = {
   convertSecuredCreditCard: (number: string) => {
     const creditCardNumberLength = number.length;
     const securedCreditNumber =
-      creditCardNumberLength <= 8 ? number : number.slice(0, 8) + '●'.repeat(number.length - 8);
+      creditCardNumberLength <= CREDIT_CARD_NUMBER.iilLength
+        ? number
+        : number.slice(0, CREDIT_CARD_NUMBER.iilLength) + '●'.repeat(number.length - CREDIT_CARD_NUMBER.iilLength);
     return securedCreditNumber.split('').reduce(
       (a, b, i) => {
         a[Math.floor(i / 4)].push(b);
@@ -12,7 +16,7 @@ const creditCard = {
     );
   },
 
-  addDashInCreditCardNumber(number: string) {
+  addDashInCreditCardNumbers(number: string) {
     return this.convertSecuredCreditCard(number)
       .filter((numbers) => !!numbers.length)
       .map((numbers) => numbers.join(''))

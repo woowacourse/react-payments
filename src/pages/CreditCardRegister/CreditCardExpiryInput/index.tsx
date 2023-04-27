@@ -2,6 +2,8 @@ import Input from '@Components/Input';
 import InputLabel from '@Components/InputLabel';
 import InputLayout from '@Components/InputLayout';
 
+import { CREDIT_CARD_LENGTH } from '@Constants/creditCard';
+
 import { CreditCardExpiryInputProps } from './type';
 
 function CreditCardExpiryInput({ creditCardExpiry, errorMessage, updateExpiry }: CreditCardExpiryInputProps) {
@@ -19,7 +21,7 @@ function CreditCardExpiryInput({ creditCardExpiry, errorMessage, updateExpiry }:
         width="40%"
         textAlign="center"
         onChange={handleChangeExpiry}
-        maxLength={5}
+        maxLength={CREDIT_CARD_LENGTH.expiry}
       />
     </InputLayout>
   );

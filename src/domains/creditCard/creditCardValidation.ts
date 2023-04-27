@@ -1,9 +1,12 @@
 import * as Type from '@Types/index';
 
+import { CREDIT_CARD_LENGTH, CREDIT_CARD_MAX_LENGTH } from '@Constants/creditCard';
+import { NOT_NUMBERS, ONLY_ENGLISH } from '@Constants/regex';
+
 const creditCardValidation = {
   numberValidation: {
     checkChar: (numbers: string): Type.ValidationFnReturnType => {
-      if (numbers.match(/\D/g)) {
+      if (numbers.match(NOT_NUMBERS)) {
         return {
           ok: false,
           error: {
@@ -19,7 +22,7 @@ const creditCardValidation = {
     checkLength: (numbers: string): Type.ValidationFnReturnType => {
       if (!numbers.length) return { ok: true };
 
-      if (numbers.length !== 16) {
+      if (numbers.length !== CREDIT_CARD_LENGTH.numbers) {
         return {
           ok: false,
           error: {
@@ -36,7 +39,7 @@ const creditCardValidation = {
   expiryValidation: {
     checkChar: (numbers: string): Type.ValidationFnReturnType => {
       const convertedNumbers = numbers.replaceAll('/', '');
-      if (convertedNumbers.match(/\D/g)) {
+      if (convertedNumbers.match(NOT_NUMBERS)) {
         return {
           ok: false,
           error: {
@@ -50,11 +53,11 @@ const creditCardValidation = {
     },
 
     checkMonth: (numbers: string): Type.ValidationFnReturnType => {
-      if (numbers.length < 2) return { ok: true };
+      if (numbers.length < CREDIT_CARD_LENGTH.monthExpiry) return { ok: true };
 
       const month = Number(numbers.slice(0, 2));
 
-      if (month > 12) {
+      if (month > CREDIT_CARD_MAX_LENGTH.monthExpiry) {
         return {
           ok: false,
           error: {
@@ -68,7 +71,7 @@ const creditCardValidation = {
     },
 
     checkYear: (numbers: string): Type.ValidationFnReturnType => {
-      if (numbers.length < 5) return { ok: true };
+      if (numbers.length < CREDIT_CARD_LENGTH.expiry) return { ok: true };
 
       const year = Number(numbers.slice(3));
       const currentYear = Number(String(new Date().getFullYear()).slice(2));
@@ -83,11 +86,11 @@ const creditCardValidation = {
         };
       }
 
-      if (year > currentYear + 5) {
+      if (year > currentYear + CREDIT_CARD_MAX_LENGTH.yearExpiry) {
         return {
           ok: false,
           error: {
-            message: `YY에는 ${currentYear + 5}보다 큰 숫자를 입력할 수 없습니다.`,
+            message: `YY에는 ${currentYear + CREDIT_CARD_MAX_LENGTH.yearExpiry}보다 큰 숫자를 입력할 수 없습니다.`,
             type: 'range',
           },
         };
@@ -97,7 +100,7 @@ const creditCardValidation = {
     },
 
     checkLength: (numbers: string): Type.ValidationFnReturnType => {
-      if (numbers.length !== 5) {
+      if (numbers.length !== CREDIT_CARD_LENGTH.expiry) {
         return {
           ok: false,
           error: {
@@ -113,7 +116,7 @@ const creditCardValidation = {
 
   ownerValidation: {
     checkChar: (owner: string): Type.ValidationFnReturnType => {
-      if (!owner.match(/^[a-zA-Z\s]*$/g)) {
+      if (!owner.match(ONLY_ENGLISH)) {
         return {
           ok: false,
           error: {
@@ -127,7 +130,7 @@ const creditCardValidation = {
     },
 
     checkLength: (owner: string): Type.ValidationFnReturnType => {
-      if (owner.length > 20) {
+      if (owner.length > CREDIT_CARD_MAX_LENGTH.owner) {
         return {
           ok: false,
           error: {
@@ -143,7 +146,7 @@ const creditCardValidation = {
 
   cvcValidation: {
     checkChar: (numbers: string): Type.ValidationFnReturnType => {
-      if (numbers.match(/\D/g)) {
+      if (numbers.match(NOT_NUMBERS)) {
         return {
           ok: false,
           error: {
@@ -156,7 +159,7 @@ const creditCardValidation = {
       return { ok: true };
     },
     checkLength: (numbers: string): Type.ValidationFnReturnType => {
-      if (numbers.length !== 3) {
+      if (numbers.length !== CREDIT_CARD_LENGTH.cvc) {
         return {
           ok: false,
           error: {
@@ -172,7 +175,7 @@ const creditCardValidation = {
 
   passwordValidation: {
     checkChar: (numbers: Type.CreditCardPasswordType): Type.ValidationFnReturnType => {
-      if (numbers.first.match(/\D/g)) {
+      if (numbers.first.match(NOT_NUMBERS)) {
         return {
           ok: false,
           error: {
@@ -182,7 +185,7 @@ const creditCardValidation = {
         };
       }
 
-      if (numbers.second.match(/\D/g)) {
+      if (numbers.second.match(NOT_NUMBERS)) {
         return {
           ok: false,
           error: {
@@ -195,8 +198,8 @@ const creditCardValidation = {
       return { ok: true };
     },
 
-    checkLength: (numbers: Type.CreditCardPasswordType): Type.ValidationFnReturnType => {
-      if (numbers.first.length !== 1) {
+    checkFirstLength: (numbers: Type.CreditCardPasswordType): Type.ValidationFnReturnType => {
+      if (numbers.first.length !== CREDIT_CARD_LENGTH.password) {
         return {
           ok: false,
           error: {
@@ -206,7 +209,7 @@ const creditCardValidation = {
         };
       }
 
-      if (numbers.second.length !== 1) {
+      if (numbers.second.length !== CREDIT_CARD_LENGTH.password) {
         return {
           ok: false,
           error: {

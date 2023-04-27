@@ -101,5 +101,5 @@
 
 - [x] refactor: 디자인 다듬기(버튼)
 - [ ] refactor: 상수화
-- [ ] refactor: 지난 코드 리뷰 리마인드
+- [x] refactor: 지난 코드 리뷰 리마인드
 - [ ] docs: 리뷰 작성

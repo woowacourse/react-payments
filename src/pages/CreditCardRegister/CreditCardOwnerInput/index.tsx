@@ -4,6 +4,8 @@ import InputLayout from '@Components/InputLayout';
 
 import * as CommonStyle from '@Styles/common';
 
+import { CREDIT_CARD_MAX_LENGTH } from '@Constants/creditCard';
+
 import { CreditCardOwnerInputProps } from './type';
 
 function CreditCardOwnerInput({ creditCardOwner, errorMessage, updateOwner }: CreditCardOwnerInputProps) {
@@ -24,7 +26,7 @@ function CreditCardOwnerInput({ creditCardOwner, errorMessage, updateOwner }: Cr
         width="100%"
         textAlign="start"
         onChange={handleChangeOwner}
-        maxLength={20}
+        maxLength={CREDIT_CARD_MAX_LENGTH.owner}
       />
     </InputLayout>
   );
