@@ -6,6 +6,7 @@ import GlobalStyle from "./styles/GlobalStyles";
 import { ModalProvider } from "./context/ModalContext";
 import { ThemeProvider } from "styled-components";
 import theme from "./styles/theme";
+import { CardInfoProvider } from "./context/CardInfoContext";
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
 );
@@ -14,7 +15,9 @@ root.render(
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <ModalProvider>
-        <CardRoutes />
+        <CardInfoProvider>
+          <CardRoutes />
+        </CardInfoProvider>
       </ModalProvider>
     </ThemeProvider>
   </React.StrictMode>,

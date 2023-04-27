@@ -11,7 +11,7 @@ function useRegisterCardInfo() {
 
   const onSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
-    navigation(PATHS.cardNickName, { state: cardInfo });
+    navigation(PATHS.cardNickName);
   };
 
   const isValidateInfo = useMemo(

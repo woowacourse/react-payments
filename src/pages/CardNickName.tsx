@@ -1,40 +1,42 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Card from "src/components/@common/Card";
 import Input from "src/components/@common/Input";
 import useCardList from "src/hooks/useCardList";
+import useRegisterCardInfo from "src/hooks/useRegisterCardInfo";
 import { PATHS } from "src/utils/constant";
 import styled, { css } from "styled-components";
 
 function CardNickName() {
   const navigation = useNavigate();
-  const location = useLocation();
+  const { cardInfo } = useRegisterCardInfo();
+
   const { saveCard } = useCardList({ key: "card-list" });
 
   const [nickName, setNickName] = useState("");
 
   useEffect(() => {
-    if (!location.state) {
+    if (!cardInfo) {
       alert("잘못된 접근입니다. 보유 카드로 이동합니다.");
       navigation(PATHS.cardList);
     }
   });
 
   const registerCard: React.MouseEventHandler<HTMLButtonElement> = () => {
-    saveCard({ ...location.state, nickName });
+    saveCard({ ...cardInfo, nickName });
     navigation(PATHS.cardList);
   };
 
   return (
     <>
-      {location.state && (
+      {cardInfo && (
         <Styled.NickNameContainer>
           <Styled.Title>카드 등록이 완료되었습니다.</Styled.Title>
           <Card
-            cardName={location.state.cardName}
-            cardNumber={location.state.cardNumbers}
-            ownerName={location.state.ownerName}
-            expireDate={location.state.expireDate}
+            cardName={cardInfo.cardName}
+            cardNumber={cardInfo.cardNumbers}
+            ownerName={cardInfo.ownerName}
+            expireDate={cardInfo.expireDate}
           />
           <Input
             type="text"
