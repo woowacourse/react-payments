@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const CardRegisterPage = styled.div`
+export const CardRegisterPage = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;

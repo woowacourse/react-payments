@@ -6,6 +6,8 @@ export const Header = styled.header`
 
   width: 100%;
 
+  margin-bottom: 28px;
+
   font-size: 20px;
 `;
 

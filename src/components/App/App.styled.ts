@@ -9,7 +9,7 @@ export const App = styled.div`
   width: 100%;
   height: 100%;
 
-  padding: 28px 24px;
+  padding: 28px 28px;
 
   background-color: ${COLOR.WHITE};
 
