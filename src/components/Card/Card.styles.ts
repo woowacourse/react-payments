@@ -1,28 +1,21 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div<{ background: string }>`
-  display: flex;
-  align-items: end;
   width: 212px;
   height: 132px;
   padding: 12px;
   background: ${(props) => props.background || '#ffffff'};
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
-  border-radius: 5px;
+  border-radius: 4px;
   font-size: 14px;
   margin-bottom: 32px;
+  overflow: hidden;
 `;
 
-export const ChipWrapper = styled.div`
-  width: 200px;
+export const CardItemWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 12px;
-`;
-
-export const TextWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
+  align-items: start;
 `;
 
 export const Chip = styled.div`
@@ -30,6 +23,13 @@ export const Chip = styled.div`
   height: 26px;
   background: #cbba64;
   border-radius: 4px;
+  margin-top: 8px;
+`;
+
+export const TextWrapper = styled.div`
+  width: 188px;
+  display: flex;
+  justify-content: space-between;
 `;
 
 export const CardText = styled.p<{ cardName?: boolean }>`
@@ -38,4 +38,8 @@ export const CardText = styled.p<{ cardName?: boolean }>`
   color: #ffffff;
   margin: 8px 8px 0 0;
   word-break: break-all;
+
+  &:last-child {
+    margin-right: 0;
+  }
 `;

@@ -35,8 +35,8 @@ const Card = ({
         setIsModalOpen && setIsModalOpen(true);
       }}
     >
-      <CardLabel labelText={cardCompany} />
-      <Styled.ChipWrapper>
+      <CardLabel labelText={cardCompany || '00카드'} />
+      <Styled.CardItemWrapper>
         <Styled.Chip />
         <Styled.TextWrapper>
           <Styled.CardText>{cardNumbers[0]}</Styled.CardText>
@@ -50,7 +50,7 @@ const Card = ({
             {expiredDates[0] || 'MM'} / {expiredDates[1] || 'YY'}
           </Styled.CardText>
         </Styled.TextWrapper>
-      </Styled.ChipWrapper>
+      </Styled.CardItemWrapper>
     </Styled.Wrapper>
   );
 };
