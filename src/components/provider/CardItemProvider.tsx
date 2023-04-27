@@ -41,6 +41,7 @@ interface CardItemAction {
   onChangeName: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeSecurityCode: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onChangePassword: (inputIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => void;
+  setCompany: (company: Company) => void;
 
   registCardNumberRef: (inputIndex: number, element: HTMLInputElement | null) => void;
   registExpirationDateRef: (inputIndex: number, element: HTMLInputElement | null) => void;
