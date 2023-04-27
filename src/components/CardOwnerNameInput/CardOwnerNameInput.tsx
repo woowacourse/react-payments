@@ -1,13 +1,26 @@
 import styled from "styled-components";
+import { isValidOwnerName } from "../../validator/Validator";
 import { InputContainer, Input, Label } from "../common";
 
 type CardOwnerNameInputProp = {
   ownerName: string;
   nameLength: number;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  setOwnerName: (value: string) => void;
 };
 
-const CardOwnerNameInput = ({ ownerName, nameLength, onChange }: CardOwnerNameInputProp) => {
+const CardOwnerNameInput = ({ ownerName, nameLength, setOwnerName }: CardOwnerNameInputProp) => {
+  const onChangeOwnerNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+
+    if (!isValidOwnerName(value)) {
+      return;
+    }
+    setOwnerName(value);
+    setTimeout(() => {
+      setOwnerName(value.toUpperCase());
+    }, 70);
+  };
+
   return (
     <Label>
       <Div>
@@ -23,7 +36,7 @@ const CardOwnerNameInput = ({ ownerName, nameLength, onChange }: CardOwnerNameIn
           type="text"
           maxLength={30}
           required
-          onChange={onChange}
+          onChange={onChangeOwnerNameHandler}
           autoComplete="name"
         />
       </InputContainer>

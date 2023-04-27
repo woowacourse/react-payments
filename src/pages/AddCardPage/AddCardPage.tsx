@@ -11,13 +11,7 @@ import { Container } from "../../components/common";
 import { useContext } from "react";
 import { Card, CardCompany } from "../../types";
 import { useNavigate } from "react-router-dom";
-import {
-  isNumeric,
-  isFulfilledObject,
-  isFulfilledString,
-  isValidMonth,
-  isValidOwnerName,
-} from "../../validator/Validator";
+import { isNumeric, isFulfilledObject, isFulfilledString } from "../../validator/Validator";
 import { PAGE } from "../../constant";
 import Modal from "../../components/Modal/Modal";
 import CardCompanyIcon from "../../components/CardCompanyIcon/CardCompanyIcon";
@@ -53,18 +47,6 @@ const AddCardPage = () => {
     setCardCompany(company);
 
     setModalOpen(false);
-  };
-
-  const handleOwnerName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-
-    if (!isValidOwnerName(value)) {
-      return;
-    }
-    setOwnerName(value);
-    setTimeout(() => {
-      setOwnerName(value.toUpperCase());
-    }, 70);
   };
 
   const handleSecurityCode = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -138,7 +120,7 @@ const AddCardPage = () => {
           setExpirationDate={setExpirationDate}
           setError={setError}
         />
-        <CardOwnerNameInput ownerName={ownerName} nameLength={ownerName.length} onChange={handleOwnerName} />
+        <CardOwnerNameInput ownerName={ownerName} nameLength={ownerName.length} setOwnerName={setOwnerName} />
         <CardSecurityCodeInput securityCode={securityCode} onChange={handleSecurityCode} />
         <CardPasswordInput password={password} onChange={handlePassword} />
         <ButtonBox isVisible={isAddButtonVisibleConditionFulfilled()}>
