@@ -25,6 +25,7 @@ export function CardViewer({
     <Style.Wrapper
       onClick={handleClick}
       color={isCompanyId(companyId) ? COMPANIES[companyId].color : ''}
+      aria-label="카드사 선택 버튼"
     >
       <Style.CompanyName>
         {isCompanyId(companyId) && COMPANIES[companyId].name}
