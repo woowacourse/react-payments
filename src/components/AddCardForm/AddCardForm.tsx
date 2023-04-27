@@ -2,13 +2,16 @@ import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { CardInfo } from '../../types';
 import { CardInfoContext } from '../../CardInfoProvider';
+import { cardSelectButtonInfos } from '../../pages/cardImages';
 import styles from './AddCardForm.module.css';
+import CardSwitchButton from './CardSwitchButton/CardSwitchButton';
 import CardNumberInput from './CardNumberInput/CardNumberInput';
 import ExpirationDateInput from './ExpirationDateInput/ExpirationDateInput';
 import CardOwnerName from './CardOwnerName/CardOwnerName';
 import CardSecurityCodeInput from './CardSecurityCodeInput/CardSecurityCodeInput';
 import CardPasswordInput from './CardPasswordInput/CardPasswordInput';
 import FooterButton from '../common/FooterButton/FooterButton';
+import CardSelectButtonPack from '../CardSelectButtonPack/CardSelectButtonPack';
 
 type AddCardFormProps = {
   registerNewCard: (cardInfo: CardInfo) => void;
@@ -47,11 +50,14 @@ const AddCardForm = ({ registerNewCard }: AddCardFormProps) => {
     };
 
     registerNewCard(cardInfo);
-    navigate('/');
+    navigate('/card-name-decision');
   };
 
   return (
     <form onSubmit={handleCardInfo} className={styles.container}>
+      <CardSwitchButton
+        modalContent={<CardSelectButtonPack width="290px" cardSelectButtonInfos={cardSelectButtonInfos} />}
+      />
       <CardNumberInput />
       <ExpirationDateInput />
       <CardOwnerName />
