@@ -4,7 +4,7 @@ import BankInfo from './BankInfo';
 import { BankType } from '../../types';
 
 const Wrapper = styled.div`
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 375px;
   box-sizing: border-box;

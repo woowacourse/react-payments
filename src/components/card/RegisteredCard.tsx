@@ -15,7 +15,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   position: relative;
-  padding: 130px 48px 48px 0;
+  padding: 130px 0 0 0;
 `;
 
 const Form = styled.form``;
@@ -96,6 +96,7 @@ export default function RegisteredCard({
               bgColor="#fff"
               textAlign="center"
               required
+              autoComplete="off"
               maxLength={20}
               placeholder="카드 별칭을 입력해주세요."
             />
