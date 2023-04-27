@@ -15,10 +15,11 @@ const StyledCardNumberInput = styled.div`
 type CardNumberInputProps = {
   value: string;
   onChange: (value: string) => void;
+  masks?: [boolean, boolean, boolean, boolean];
 };
 
 export const CardNumberInput = (props: CardNumberInputProps) => {
-  const { value, onChange } = props;
+  const { value, onChange, masks = [false, false, true, true] } = props;
 
   const { refs, getRef } =
     useGroupedRef<[HTMLInputElement, HTMLInputElement, HTMLInputElement, HTMLInputElement]>(4);
@@ -43,6 +44,7 @@ export const CardNumberInput = (props: CardNumberInputProps) => {
         <NumberInput
           key={index}
           ref={getRef(index)}
+          type={masks[index] ? 'password' : 'text'}
           maxCount={4}
           value={getPartialCardNumber(index)}
           onChange={handleCardNumberChange(index)}

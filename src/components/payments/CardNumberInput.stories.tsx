@@ -4,6 +4,10 @@ import styled from 'styled-components';
 import { CardNumberInput } from './CardNumberInput';
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
   width: 320px;
 `;
 
@@ -23,11 +27,17 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const WithMasks: Story = {
   args: { value: '' },
   render: () => {
-    const [value, setValue] = useState('');
+    const [value, setValue] = useState('9908-1121-1992-7328');
 
-    return <CardNumberInput value={value} onChange={setValue} />;
+    return (
+      <>
+        <CardNumberInput value={value} onChange={setValue} />
+        <CardNumberInput value={value} onChange={setValue} masks={[false, false, false, false]} />
+        <CardNumberInput value={value} onChange={setValue} masks={[true, true, true, true]} />
+      </>
+    );
   },
 };
