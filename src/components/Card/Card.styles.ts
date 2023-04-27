@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import theme from '../../styles/theme';
 
 export const CardWrapper = styled.div<{ cardColor?: string }>`
   display: flex;
@@ -9,7 +10,7 @@ export const CardWrapper = styled.div<{ cardColor?: string }>`
   color: ${(props) => props.cardColor !== '#FFE600' && '#fff'};
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
-  font-size: 14px;
+  font: ${theme.font.subtitle};
   margin-bottom: 12px;
 `;
 

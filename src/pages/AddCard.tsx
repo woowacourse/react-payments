@@ -31,7 +31,7 @@ const CardWrapper = styled.div`
   cursor: pointer;
 
   & > p {
-    font-size: 12px;
+    font: ${theme.font.body};
     color: ${theme.color.grey300};
     margin-bottom: 4px;
   }

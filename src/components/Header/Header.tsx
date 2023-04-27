@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 import { useNavigate, useLocation } from 'react-router-dom';
+import theme from '../../styles/theme';
 
 const Title = styled.p`
   margin-top: 20px;
-  font-size: 20px;
+  font: ${theme.font.title};
   cursor: pointer;
 `;
 
