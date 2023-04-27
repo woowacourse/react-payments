@@ -1,9 +1,7 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
-import { CardType, FormCardAddProps } from '../type';
-import { CVC_TOOLTIP_DETAIL, CVC_TOOLTIP_TITLE, LOCATION } from '../utils/constants';
-import { fetchNewCardData } from '../utils/fetchData';
+import { FormCardAddProps } from '../type';
+import { CVC_TOOLTIP_DETAIL, CVC_TOOLTIP_TITLE } from '../utils/constants';
 import Tooltip from './CVCTooltip';
 import CardNicknameInputModal from './CardNicknameInputModal';
 import './FormCardAdd.css';
@@ -66,32 +64,6 @@ const FormCardAdd = ({
     }
   };
 
-  // const onSubmit = (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   const { first, second, third, fourth } = cardNumber.value;
-
-  //   const postData: Omit<CardType, 'id'> = {
-  //     cardType,
-  //     cardNumber: {
-  //       first,
-  //       second,
-  //       third,
-  //       fourth,
-  //     },
-  //     cardOwner: cardOwner.value,
-  //     expired: cardExpire.value,
-  //     securityCode: securityCode.value,
-  //     cardPassword: {
-  //       first: cardPassword1.value,
-  //       second: cardPassword2.value,
-  //     },
-  //   };
-  //   if (!fetchNewCardData(postData)) {
-  //     alert('이미 등록된 카드입니다.');
-  //     return;
-  //   }
-  //   navigate(LOCATION.CARD_NICKNAME_INPUT_PAGRE);
-  // };
   const viewAddNicknameModal = () => {
     setNicknameModalOpen(true);
   };
