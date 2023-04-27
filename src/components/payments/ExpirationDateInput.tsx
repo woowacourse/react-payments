@@ -10,27 +10,34 @@ const StyledExpirationDateInput = styled.div`
 
 type ExpirationDateInputProps = {
   value: [string, string];
-  onChange: (value: [string, string]) => void;
+  onChange?: (value: [string, string]) => void;
+  onFocus?: () => void;
+  onBlur?: () => void;
 };
 
 export const ExpirationDateInput = (props: ExpirationDateInputProps) => {
   const {
     value: [month, year],
     onChange,
+    onFocus,
+    onBlur,
   } = props;
 
   const { refs } = useGroupedRef<[HTMLInputElement, HTMLInputElement]>(2);
   const [monthRef, yearRef] = refs;
-  const { focusNext } = useGroupedFocus(refs);
+  const { focusNext } = useGroupedFocus(refs, {
+    onBlur,
+    onFocus,
+  });
 
   const handleMonthChange = (value: string) => {
     if (value.length === 2) focusNext();
 
-    onChange([value, year]);
+    onChange?.([value, year]);
   };
 
   const handleYearChange = (value: string) => {
-    onChange([month, value]);
+    onChange?.([month, value]);
   };
 
   return (
