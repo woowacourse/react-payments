@@ -27,11 +27,9 @@ const NameCardPage = () => {
       <h2>카드등록이 완료되었습니다.</h2>
       <CardPreview card={cards[currentIndex]} />
       <Input placeholder={"카드이름을 지어주세요."} onChange={onChangeHandler} />
-      <form onSubmit={onSubmitHandler}>
-        <ButtonBox isVisible={true}>
-          <Button>다음</Button>
-        </ButtonBox>
-      </form>
+      <ButtonBox isVisible={true}>
+        <Button onClick={onSubmitHandler}>다음</Button>
+      </ButtonBox>
     </Container>
   );
 };
