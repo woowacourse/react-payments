@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 
-interface ButtonWrapperProps extends React.HTMLAttributes<HTMLButtonElement> {
+interface TransParentButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
+  type?: 'button' | 'submit' | 'reset';
   children: React.ReactNode | string;
-  onClick: React.MouseEventHandler<HTMLButtonElement>;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-function TransParentButton({ children, onClick }: ButtonWrapperProps) {
+function TransParentButton({ type = 'button', children, onClick, ...props }: TransParentButtonProps) {
   return (
-    <StyledButton type="button" onClick={onClick}>
+    <StyledButton type={type} onClick={onClick} {...props}>
       {children}
     </StyledButton>
   );
