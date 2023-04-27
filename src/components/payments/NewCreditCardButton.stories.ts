@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { NewCreditCardButton } from './NewCreditCardButton';
 
 const meta = {
-  title: 'NewCreditCardButton',
+  title: 'payments/NewCreditCardButton',
   component: NewCreditCardButton,
 } satisfies Meta<typeof NewCreditCardButton>;
 

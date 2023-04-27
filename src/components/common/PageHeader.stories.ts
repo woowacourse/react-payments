@@ -4,7 +4,7 @@ import { BackButton } from './BackButton';
 import { PageHeader } from './PageHeader';
 
 const meta = {
-  title: 'PageHeader',
+  title: 'common/Page.Header',
   component: PageHeader,
 } satisfies Meta<typeof PageHeader>;
 

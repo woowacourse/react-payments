@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { CreditCardView } from './CreditCardView';
 
 const meta = {
-  title: 'CreditCardView',
+  title: 'payments/CreditCardView',
   component: CreditCardView,
 } satisfies Meta<typeof CreditCardView>;
 
