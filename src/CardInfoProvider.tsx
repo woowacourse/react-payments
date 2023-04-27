@@ -1,36 +1,40 @@
 import { createContext, useState } from 'react';
-import type { FormInputValueType } from './types';
+import type { FormInputValueType, CardIssuerType } from './types';
 
 type CardInfoContextType = {
-  cardIssuer: FormInputValueType;
+  cardIssuer: CardIssuerType;
   cardNumber: FormInputValueType;
   cardOwnerName: FormInputValueType;
   cardPassword: FormInputValueType;
   cardSecurityCode: FormInputValueType;
   cardExpirationDate: FormInputValueType;
-  setCardIssuer: (cardIssuer: FormInputValueType) => void;
+  hasCheckedValidation: boolean;
+  setCardIssuer: (cardIssuer: CardIssuerType) => void;
   setCardNumber: (cardNumber: FormInputValueType) => void;
   setCardOwnerName: (cardOwnerName: FormInputValueType) => void;
   setCardPassword: (password: FormInputValueType) => void;
   setCardSecurityCode: (securityCode: FormInputValueType) => void;
   setCardExpirationDate: (expirationDate: FormInputValueType) => void;
+  setHasCheckedValidation: (hasChecked: boolean) => void;
 };
 
 const emptyFormInputValue = { isValid: false, value: '' };
 
 const CardInfoContext = createContext<CardInfoContextType>({
-  cardIssuer: emptyFormInputValue,
+  cardIssuer: 'BC카드',
   cardNumber: emptyFormInputValue,
   cardOwnerName: emptyFormInputValue,
   cardPassword: emptyFormInputValue,
   cardSecurityCode: emptyFormInputValue,
   cardExpirationDate: emptyFormInputValue,
+  hasCheckedValidation: false,
   setCardIssuer: () => {},
   setCardNumber: () => {},
   setCardOwnerName: () => {},
   setCardPassword: () => {},
   setCardSecurityCode: () => {},
   setCardExpirationDate: () => {},
+  setHasCheckedValidation: () => {},
 });
 
 interface CardInfoProviderProps {
@@ -38,12 +42,13 @@ interface CardInfoProviderProps {
 }
 
 const CardInfoProvider = ({ children }: CardInfoProviderProps) => {
-  const [cardIssuer, setCardIssuer] = useState(emptyFormInputValue);
+  const [cardIssuer, setCardIssuer] = useState<CardIssuerType>('BC카드');
   const [cardNumber, setCardNumber] = useState(emptyFormInputValue);
   const [cardOwnerName, setCardOwnerName] = useState(emptyFormInputValue);
   const [cardPassword, setCardPassword] = useState(emptyFormInputValue);
   const [cardSecurityCode, setCardSecurityCode] = useState(emptyFormInputValue);
   const [cardExpirationDate, setCardExpirationDate] = useState(emptyFormInputValue);
+  const [hasCheckedValidation, setHasCheckedValidation] = useState(false);
 
   return (
     <CardInfoContext.Provider
@@ -54,12 +59,14 @@ const CardInfoProvider = ({ children }: CardInfoProviderProps) => {
         cardPassword,
         cardSecurityCode,
         cardExpirationDate,
+        hasCheckedValidation,
         setCardIssuer,
         setCardNumber,
         setCardOwnerName,
         setCardPassword,
         setCardSecurityCode,
         setCardExpirationDate,
+        setHasCheckedValidation,
       }}
     >
       {children}
