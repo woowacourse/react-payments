@@ -10,6 +10,7 @@ type CardListProps = {
 const CardList = ({ cards }: CardListProps) => {
   return (
     <Ul>
+      <AddCardButton />
       {cards.map((card) => {
         const { cardNumber, ownerName, expirationDate, cardCompany, alias } = card;
 
@@ -20,8 +21,6 @@ const CardList = ({ cards }: CardListProps) => {
           </FlexContainer>
         );
       })}
-
-      <AddCardButton />
     </Ul>
   );
 };
@@ -45,7 +44,7 @@ const Ul = styled.ul`
   }
 `;
 
-const FlexContainer = styled.div`
+const FlexContainer = styled.li`
   display: flex;
   flex-direction: column;
   gap: 10px;
