@@ -2,13 +2,14 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { CardType, FormCardAddProps } from '../type';
-import { CVC_TOOLTIP_DETAIL, CVC_TOOLTIP_TITLE } from '../utils/constants';
+import { CVC_TOOLTIP_DETAIL, CVC_TOOLTIP_TITLE, LOCATION } from '../utils/constants';
 import { fetchNewCardData } from '../utils/fetchData';
 import Tooltip from './CVCTooltip';
 import './FormCardAdd.css';
 import InputCardData from './InputCardData';
 
 const FormCardAdd = ({
+  cardType,
   cardNumber,
   cardExpire,
   cardOwner,
@@ -17,6 +18,7 @@ const FormCardAdd = ({
   cardPassword2,
 }: FormCardAddProps) => {
   const navigate = useNavigate();
+
   const [inputError, setInputError] = useState(false);
   const [readyToPending, setReadyToPending] = useState(false);
   const [fulfilledData, setFulFilledData] = useState(Array.from({ length: 9 }, () => false));
@@ -47,12 +49,10 @@ const FormCardAdd = ({
       const inputResults = [...fulfilledData];
       inputResults[index] = true;
       setFulFilledData([...inputResults]);
-      // if (!fulfilledData.includes(false)) return setReadyToPending(true);
     } else {
       const inputResults = [...fulfilledData];
       inputResults[index] = false;
       setFulFilledData([...inputResults]);
-      // return setReadyToPending(false);
     }
   };
 
@@ -71,7 +71,7 @@ const FormCardAdd = ({
     const { first, second, third, fourth } = cardNumber.value;
 
     const postData: Omit<CardType, 'id'> = {
-      cardType: '현대',
+      cardType,
       cardNumber: {
         first,
         second,
@@ -90,10 +90,12 @@ const FormCardAdd = ({
       alert('이미 등록된 카드입니다.');
       return;
     }
-    navigate('/');
+    navigate(LOCATION.CARD_NICKNAME_INPUT_PAGRE);
   };
 
   useEffect(() => {
+    if (!fulfilledData.includes(false)) setReadyToPending(true);
+    fulfilledData[5] = true;
     if (!fulfilledData.includes(false)) setReadyToPending(true);
   }, [fulfilledData]);
 
@@ -103,6 +105,7 @@ const FormCardAdd = ({
         <span className="form-label">카드 번호</span>
         <div className="card-number-input-container">
           <InputCardData
+            required={true}
             inputType="number"
             className="card-number"
             value={cardNumber.value.first}
@@ -118,6 +121,7 @@ const FormCardAdd = ({
           />
           <span>-</span>
           <InputCardData
+            required={true}
             inputType="number"
             className="card-number"
             value={cardNumber.value.second}
@@ -133,6 +137,7 @@ const FormCardAdd = ({
           />
           <span>-</span>
           <InputCardData
+            required={true}
             inputType="password"
             passwordType="card-number"
             className="card-number"
@@ -149,6 +154,7 @@ const FormCardAdd = ({
           />
           <span>-</span>
           <InputCardData
+            required={true}
             inputType="password"
             passwordType="card-number"
             className="card-number"
@@ -168,6 +174,7 @@ const FormCardAdd = ({
       <div>
         <span className="form-label">만료일</span>
         <InputCardData
+          required={true}
           inputType="text"
           className="card-expired"
           value={cardExpire.value}
@@ -189,10 +196,11 @@ const FormCardAdd = ({
           <span className="form-label">{cardOwner.value.length}/15</span>
         </div>
         <InputCardData
+          required={false}
           inputType="text"
           className="card-owner"
           value={cardOwner.value}
-          minDataLength={1}
+          minDataLength={0}
           maxDataLength={15}
           name="owner"
           dataId={5}
@@ -207,6 +215,7 @@ const FormCardAdd = ({
         <span className="form-label">보안코드(CVC/CVV)</span>
         <div className="card-security-code-box">
           <InputCardData
+            required={true}
             inputType="password"
             passwordType="password-cvc"
             value={securityCode.value}
@@ -227,6 +236,7 @@ const FormCardAdd = ({
         <span className="form-label">카드 비밀번호</span>
         <div className="card-password-input-box">
           <InputCardData
+            required={true}
             inputType="password"
             passwordType="password-single"
             value={cardPassword1.value}
@@ -241,6 +251,7 @@ const FormCardAdd = ({
             handleInputData={handleInputData}
           />
           <InputCardData
+            required={true}
             inputType="password"
             passwordType="password-single"
             value={cardPassword2.value}

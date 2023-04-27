@@ -3,6 +3,7 @@ import React, { ChangeEvent, RefObject } from 'react';
 import './InputCardData.css';
 
 export type InputProps = {
+  required: boolean;
   inputType: string;
   passwordType?: string;
   className?: string;
@@ -19,6 +20,7 @@ export type InputProps = {
 };
 
 const InputCardData = ({
+  required,
   inputType,
   passwordType,
   className,
@@ -48,7 +50,7 @@ const InputCardData = ({
         handleInputData(dataId, e);
       }}
       name={name}
-      required
+      required={required}
     />
   ) : (
     <input
@@ -66,7 +68,7 @@ const InputCardData = ({
         handleInputData(dataId, e);
       }}
       name={name}
-      required
+      required={required}
     />
   );
 };
