@@ -20,11 +20,11 @@ const StyledProfile = styled.div<{ size: number | undefined }>`
   flex-direction: column;
   align-items: center;
   row-gap: 10px;
-  width: ${({ size }) => size ?? '24px'};
+  width: ${({ size }) => size ?? 24}px;
 `;
 
 const StyledName = styled.p<{ size: number | undefined }>`
-  font-size: ${({ size }) => (size ? size / 3 : '10px')};
+  font-size: ${({ size }) => (size ? size / 3 : 10)}px;
 `;
 
 export default Profile;

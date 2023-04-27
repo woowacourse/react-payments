@@ -26,7 +26,7 @@ const defaultCardInformation: CardInformation = {
 
 function Card({ cardInformation = defaultCardInformation, isAddForm, isShowName = false }: CardProps) {
   const { cardName, bankName, cardNumber, expirationDate, owner } = cardInformation;
-  const { color, background } = CARD_COMPANY_COLOR_MAP[bankName === '' ? 'default' : bankName];
+  const { color, background } = CARD_COMPANY_COLOR_MAP[bankName] || { color: 'white', background: 'black' };
 
   return (
     <StyledCardContainer>
@@ -74,6 +74,7 @@ function Card({ cardInformation = defaultCardInformation, isAddForm, isShowName 
 const StyledCardContainer = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   row-gap: 9px;
 `;
 

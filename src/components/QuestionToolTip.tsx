@@ -15,7 +15,7 @@ function QuestionToolTip({ questionMessage }: QuestionToolTipProps) {
   return (
     <StyledQuestionToolTip onMouseEnter={showMessage} onMouseLeave={hideMessage}>
       <Question />
-      {isShow && <p>{questionMessage}</p>}
+      {isShow && <StyledMessage>{questionMessage}</StyledMessage>}
     </StyledQuestionToolTip>
   );
 }
@@ -27,14 +27,16 @@ const StyledQuestionToolTip = styled.div`
   & > svg {
     min-width: 27px;
     min-height: 27px;
-    margin: 10px;
-  }
-  & > p {
-    position: absolute;
-    font-size: 8px;
-    left: 42px;
-    top: 4px;
-    width: 180px;
   }
 `;
+
+const StyledMessage = styled.p`
+  position: absolute;
+  font-size: 8px;
+  left: 42px;
+  width: 180px;
+  background-color: '#525252';
+  border-radius: 8px;
+`;
+
 export default QuestionToolTip;

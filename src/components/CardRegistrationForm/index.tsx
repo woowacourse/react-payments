@@ -83,7 +83,7 @@ const StyledCardRegistrationFrom = styled.form`
     width: 138px;
   }
   & > *:nth-child(4) {
-    width: 86px;
+    width: 146px;
   }
   & > button {
     margin-top: 8px;

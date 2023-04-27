@@ -36,5 +36,4 @@ export const CARD_COMPANY_COLOR_MAP: Record<string, { background: string; color:
   롯데카드: { background: 'rgb(240, 240, 240)', color: 'rgb(225, 0, 0)' },
   하나카드: { background: 'rgb(64, 146, 143)', color: 'white' },
   국민카드: { background: 'rgb(85, 79, 71)', color: 'rgb(247, 206, 71)' },
-  default: { background: 'rgb(82, 82, 82)', color: 'white' },
 };
