@@ -12,13 +12,14 @@ interface CardRegistrationPageProps {
 }
 
 const CardRegistrationPage = ({ addCardItem }: CardRegistrationPageProps) => {
-  const { cardNumber, expirationDate, name } = useCardItemValue();
+  const { cardNumber, expirationDate, name, company } = useCardItemValue();
 
   const cardItem = {
     id: Date.now(),
     cardNumber: cardNumber,
     expirationDate: expirationDate,
     name: name,
+    company: company,
   };
 
   const handleSubmitForm = () => {
