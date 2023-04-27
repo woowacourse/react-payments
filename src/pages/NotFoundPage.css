@@ -1,0 +1,24 @@
+.not-found-image {
+  width: 70%;
+  height: 40%;
+}
+
+.not-found-main {
+  display: flex;
+  height: 80vh;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+}
+
+.home-button {
+  background-color: #ffffff;
+  border: 1px solid;
+  border-radius: 5px;
+  width: 30%;
+  height: 10%;
+  font-size: 20px;
+  margin-top: 10%;
+}
