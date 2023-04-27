@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import { createUniqueId, isPrevDate } from '../../utils';
 import { useState } from 'react';
 import Error from '../common/Error';
+import { BankType } from '../../types';
+import { BANK_DATA } from '../../constant';
 
 export interface CardProps {
   cardNumberSet: string[];
@@ -10,6 +12,7 @@ export interface CardProps {
   month: string;
   year: string;
   title?: string;
+  bankKind?: BankType;
 }
 
 const ENCRYPT_INDEX = 2;
@@ -22,6 +25,7 @@ export default function Card({
   year,
   onDeleteClick,
   title,
+  bankKind = 'default',
 }: CardProps) {
   const [isClick, setIsClick] = useState(false);
   const onwerName =
@@ -37,8 +41,13 @@ export default function Card({
   return (
     <CardContainer>
       <Container>
-        <Wrapper onClick={toggleIsClick} isHome={onDeleteClick ? true : false}>
-          <Title></Title>
+        <Wrapper
+          onClick={toggleIsClick}
+          isHome={onDeleteClick ? true : false}
+          bgColor={BANK_DATA[bankKind].backgroundColor}
+          fontColor={BANK_DATA[bankKind].color}
+        >
+          <Title>{BANK_DATA[bankKind].title}</Title>
           <Magnet />
           <div>
             <CardNumber>
@@ -79,25 +88,34 @@ const Container = styled.div`
   position: relative;
 `;
 
-const Wrapper = styled.div<{ isHome: boolean }>`
-  width: 213px;
-  height: 133px;
-  background: #333;
-  box-shadow: 3px 3px 5px #00000040;
-  border-radius: 5px;
-  padding: 10px 18px;
+interface WrapperProps {
+  isHome: boolean;
+  bgColor: string;
+  fontColor: string;
+}
+
+const Wrapper = styled.div<WrapperProps>`
   display: flex;
   flex-direction: column;
   justify-content: end;
   position: relative;
+  width: 213px;
+  height: 133px;
+  border-radius: 5px;
+  padding: 10px 18px;
   box-sizing: border-box;
+  color: ${({ fontColor }) => fontColor};
+  background: ${({ bgColor }) => bgColor};
+  box-shadow: 3px 3px 5px #00000040;
   cursor: ${({ isHome }) => (isHome ? 'pointer' : '')};
 `;
+
 const Title = styled.div`
-  color: #383838;
+  position: absolute;
+  top: 12px;
+  font-weight: 500;
   font-size: 12px;
-  height: 14px;
-  margin-bottom: 22px;
+  letter-spacing: -0.085em;
 `;
 const Magnet = styled.div`
   background: #cbba64;
@@ -109,7 +127,6 @@ const Magnet = styled.div`
   border-radius: 4px;
 `;
 const CardNumber = styled.div`
-  color: #fff;
   font-weight: bold;
   font-size: 14px;
   width: 100%;
@@ -140,7 +157,6 @@ const OwnerAndExpiracyWrapper = styled.div`
 const Owner = styled.span`
   display: inline-block;
   width: 130px;
-  color: #fff;
   font-weight: bold;
   overflow-x: hidden;
   word-break: break-all;
@@ -148,7 +164,6 @@ const Owner = styled.span`
 `;
 
 const Expiracy = styled.span`
-  color: #fff;
   float: right;
   font-weight: bold;
   font-size: 14px;

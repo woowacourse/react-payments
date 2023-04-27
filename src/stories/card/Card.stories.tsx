@@ -72,12 +72,93 @@ export const PrevCard: Story = {
   },
 };
 
-export const CardTitle: Story = {
+export const TitleCard: Story = {
   args: {
     cardNumberSet: ['1111', '2222', '····', '····'],
     owner: 'EYK',
     month: '04',
     year: '23',
+    bankKind: 'kakao',
     title: '카카오뱅크 내 카드',
+  },
+};
+
+export const KakaoCard: Story = {
+  args: {
+    cardNumberSet: ['1111', '2222', '····', '····'],
+    owner: 'EYK',
+    month: '04',
+    year: '23',
+    bankKind: 'kakao',
+  },
+};
+
+export const HyundaiCard: Story = {
+  args: {
+    cardNumberSet: ['1111', '2222', '····', '····'],
+    owner: 'EYK',
+    month: '04',
+    year: '23',
+    bankKind: 'hyundai',
+  },
+};
+
+export const HanaCard: Story = {
+  args: {
+    cardNumberSet: ['1111', '2222', '····', '····'],
+    owner: 'EYK',
+    month: '04',
+    year: '23',
+    bankKind: 'hana',
+  },
+};
+
+export const BcCard: Story = {
+  args: {
+    cardNumberSet: ['1111', '2222', '····', '····'],
+    owner: 'EYK',
+    month: '04',
+    year: '23',
+    bankKind: 'bc',
+  },
+};
+
+export const KbCard: Story = {
+  args: {
+    cardNumberSet: ['1111', '2222', '····', '····'],
+    owner: 'EYK',
+    month: '04',
+    year: '23',
+    bankKind: 'kb',
+  },
+};
+
+export const ShinhanCard: Story = {
+  args: {
+    cardNumberSet: ['1111', '2222', '····', '····'],
+    owner: 'EYK',
+    month: '04',
+    year: '23',
+    bankKind: 'shinhan',
+  },
+};
+
+export const WooriCard: Story = {
+  args: {
+    cardNumberSet: ['1111', '2222', '····', '····'],
+    owner: 'EYK',
+    month: '04',
+    year: '23',
+    bankKind: 'woori',
+  },
+};
+
+export const LotteCard: Story = {
+  args: {
+    cardNumberSet: ['1111', '2222', '····', '····'],
+    owner: 'EYK',
+    month: '04',
+    year: '23',
+    bankKind: 'lotte',
   },
 };
