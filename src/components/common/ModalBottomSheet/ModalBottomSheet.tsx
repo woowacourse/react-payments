@@ -1,20 +1,15 @@
 import styles from './ModalBottomSheet.module.css';
-import { ReactNode } from 'react';
+import { useContext } from 'react';
+import { ModalContext } from '../../../ModalProvider';
+const ModalBottomSheet = () => {
+  const { isOpen, content, closeModal } = useContext(ModalContext);
 
-type ModalBottomSheetProps = {
-  isModalOpen: boolean;
-  sheetHeight: string;
-  children?: ReactNode;
-};
-
-const ModalBottomSheet = ({ isModalOpen, sheetHeight, children }: ModalBottomSheetProps) => {
-  return isModalOpen ? (
-    <div className={styles.container}>
-      <div className={styles.modal} style={{ height: sheetHeight }}>
-        {children}
-      </div>
-    </div>
-  ) : null;
+  return (
+    <dialog className={styles.modal} open={isOpen}>
+      <div className={styles['modal-backdrop']} onClick={closeModal}></div>
+      <div className={styles['modal-body']}>{content}</div>
+    </dialog>
+  );
 };
 
 export default ModalBottomSheet;
