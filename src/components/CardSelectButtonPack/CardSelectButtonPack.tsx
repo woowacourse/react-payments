@@ -1,8 +1,9 @@
 import styles from './CardSelectButtonPack.module.css';
 import CardSelectButton from './CardSelectButton/CardSelectButton';
+import { CardIssuerType } from '../../types';
 
 type CardSelectButtonInfo = {
-  title: string;
+  title: CardIssuerType;
   src: string;
 };
 
