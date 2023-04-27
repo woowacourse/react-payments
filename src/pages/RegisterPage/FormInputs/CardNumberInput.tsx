@@ -51,7 +51,6 @@ const CardNumberInput = ({ cardNumber, setCardNumber }: Props) => {
               inputMode="numeric"
               value={cardNumber[`number${index + 1}`]}
               placeholder="0000"
-              autoFocus={index ? false : true}
               required
               inputStyle={CommonInputStyle}
               onChange={handleCardNumberChange}
