@@ -11,4 +11,5 @@ export type CreditCard = {
   expirationDate: [Month, Year];
   cvc: string;
   password: string;
+  nickName?: string;
 };
