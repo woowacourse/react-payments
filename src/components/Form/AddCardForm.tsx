@@ -1,6 +1,6 @@
 import {
   ExpirationDateInput,
-  NameInput,
+  OwnerNameInput,
   SecurityCodeInput,
   PasswordInput,
   CardNumberInputs,
@@ -9,12 +9,12 @@ import styled from 'styled-components';
 import { ChangeEventHandler, FormEventHandler, useState } from 'react';
 import { Container } from 'components/style/InputContainer';
 import CardDB from 'db/Cards';
-import { Card } from 'components/common/Card/types';
+import { COMPANY_NAME, Card } from 'components/common/Card/types';
 import { ValueAndOnChange } from 'components/Input/types';
 import { CreditCard } from 'components/common/Card/CreditCard';
 import { useCardFormValid } from 'hooks/useCardFormValid';
 import { Modal } from 'components/common/Modal/Modal';
-import ICON_SVG_PATH from 'constants';
+import { COMPANY_LIST, ICON_SVG_PATH } from '../../constants';
 
 export type AddCardFormProps = {
   onSubmit: () => void;
@@ -23,14 +23,14 @@ export type AddCardFormProps = {
 const NOT_ALPHABET_REGEX = /[^A-Za-z\s]/gi;
 
 function AddCardForm({ onSubmit }: AddCardFormProps) {
-  const [bank, setBank] = useState('');
+  const [bank, setBank] = useState<COMPANY_NAME>('현대카드');
 
   const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
 
   const [month, setMonth] = useState('');
   const [year, setYear] = useState('');
 
-  const [name, setName] = useState('');
+  const [ownerName, setOwnerName] = useState('');
 
   const [firstDigit, setFirstDigit] = useState('');
   const [secondDigit, setSecondDigit] = useState('');
@@ -43,7 +43,7 @@ function AddCardForm({ onSubmit }: AddCardFormProps) {
     bank: bank,
     numbers: cardNumbers,
     expirationDate: { month: month, year: year },
-    name,
+    ownerName,
     securityCode: securityCode,
     password: { first: firstDigit, second: secondDigit },
   };
@@ -76,10 +76,10 @@ function AddCardForm({ onSubmit }: AddCardFormProps) {
     setYear(value);
   };
 
-  const handleNameInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+  const handleOwnerNameInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const value = e.target.value.replace(NOT_ALPHABET_REGEX, '').toUpperCase();
 
-    setName(value);
+    setOwnerName(value);
   };
 
   const handleSecurityCodeChange: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -107,7 +107,7 @@ function AddCardForm({ onSubmit }: AddCardFormProps) {
     onSubmit();
   };
 
-  const handleClickCompany = (bank: string) => {
+  const handleClickCompany = (bank: COMPANY_NAME) => {
     setBank(bank);
     setIsOpen(false);
   };
@@ -117,7 +117,7 @@ function AddCardForm({ onSubmit }: AddCardFormProps) {
       {isOpen && (
         <Modal
           ImgSources={Object.values(ICON_SVG_PATH) as string[]}
-          names={Object.keys(ICON_SVG_PATH)}
+          names={COMPANY_LIST}
           onClick={handleClickCompany}
         />
       )}
@@ -140,13 +140,13 @@ function AddCardForm({ onSubmit }: AddCardFormProps) {
         </ExpirationDateContainer>
         {<ErrorCaption>{!isValid && errorMessages.expirationDate}</ErrorCaption>}
 
-        <NameLabelContainer>
+        <OwnerNameLabelContainer>
           <InputLabel>카드 소유자 이름(선택)</InputLabel>
-          <InputLabel>{`${name.length} / 30`}</InputLabel>
-        </NameLabelContainer>
-        <NameInputContainer>
-          <NameInput value={name} onChange={handleNameInputChange} />
-        </NameInputContainer>
+          <InputLabel>{`${ownerName.length} / 30`}</InputLabel>
+        </OwnerNameLabelContainer>
+        <OwnerNameInputContainer>
+          <OwnerNameInput value={ownerName} onChange={handleOwnerNameInputChange} />
+        </OwnerNameInputContainer>
 
         <InputLabel>보안 코드(CVC/CVV)</InputLabel>
         <SecurityCodeContainer>
@@ -216,7 +216,7 @@ const ExpirationDateContainer = styled(Container)`
   }
 `;
 
-const NameInputContainer = styled(Container)`
+const OwnerNameInputContainer = styled(Container)`
   width: 318px;
   margin-bottom: 16px;
 `;
@@ -261,7 +261,7 @@ const FormSubmitButton = styled.button`
   cursor: pointer;
 `;
 
-const NameLabelContainer = styled.div`
+const OwnerNameLabelContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;

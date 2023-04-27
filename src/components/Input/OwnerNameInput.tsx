@@ -1,12 +1,12 @@
 import { Input } from 'components/common';
 import { ChangeEventHandler } from 'react';
 
-export interface NameInputProps {
+export interface OwnerNameInputProps {
   value: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
 }
 
-export function NameInput({ value, onChange }: NameInputProps) {
+export function OwnerNameInput({ value, onChange }: OwnerNameInputProps) {
   return (
     <Input
       value={value}
