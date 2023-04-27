@@ -19,7 +19,7 @@ function CardPassword() {
 
   const { inputListRef, focusNext } = useInputListRef(1);
 
-  const changeInputByIndex: (index: number) => React.ChangeEventHandler<HTMLInputElement> =
+  const handleChangeByIndex: (index: number) => React.ChangeEventHandler<HTMLInputElement> =
     (index) => (event) => {
       const enteredPassword = event.currentTarget.value as string;
 
@@ -45,9 +45,9 @@ function CardPassword() {
       setCreditCard('password', newValue);
     };
 
-  const _onBlur: React.FocusEventHandler<HTMLInputElement> = () => {
-    inputListRef.current.forEach((ref) => {
-      if (ref.value.length === 0) {
+  const handleBlur: React.FocusEventHandler<HTMLInputElement> = () => {
+    creditCard.password.forEach((numberInput) => {
+      if (numberInput.length === 0) {
         setValidationStatus({
           isValid: false,
           message: '카드 비밀번호 2자리를 입력해주세요.',
@@ -60,30 +60,21 @@ function CardPassword() {
     <InputWrapper>
       <FormLabel>{'카드 비밀번호'}</FormLabel>
       <PasswordInputContainer>
-        <Input
-          value={creditCard.password[0]}
-          onChange={changeInputByIndex(0)}
-          onBlur={_onBlur}
-          maxLength={1}
-          inputMode="numeric"
-          type="password"
-          width="43px"
-          ref={(el: HTMLInputElement) => {
-            inputListRef.current[0] = el;
-          }}
-        />
-        <Input
-          value={creditCard.password[1]}
-          onChange={changeInputByIndex(1)}
-          onBlur={_onBlur}
-          maxLength={1}
-          inputMode="numeric"
-          type="password"
-          width="43px"
-          ref={(el: HTMLInputElement) => {
-            inputListRef.current[1] = el;
-          }}
-        />
+        {Array.from({ length: 2 }, (_, index) => (
+          <Input
+            key={`card-password-${index}`}
+            value={creditCard.password[index]}
+            onChange={handleChangeByIndex(index)}
+            onBlur={handleBlur}
+            maxLength={1}
+            inputMode="numeric"
+            type="password"
+            width="43px"
+            ref={(el: HTMLInputElement) => {
+              inputListRef.current[index] = el;
+            }}
+          />
+        ))}
         <DotParagraph>•</DotParagraph>
         <DotParagraph>•</DotParagraph>
       </PasswordInputContainer>

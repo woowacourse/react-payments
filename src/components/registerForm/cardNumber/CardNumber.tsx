@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef } from 'react';
+import React, { useState, useContext } from 'react';
 
 import useInputListRef from '../../../hooks/useInputListRef';
 import FormLabel from '../../@common/FormLabel';
@@ -19,7 +19,7 @@ export const CardNumber = () => {
 
   const { inputListRef, focusNext } = useInputListRef(4);
 
-  const changeHandlerByIndex: (index: number) => React.ChangeEventHandler<HTMLInputElement> =
+  const handleChangeByIndex: (index: number) => React.ChangeEventHandler<HTMLInputElement> =
     (index) => (event) => {
       const enteredNumber = event.currentTarget.value as string;
 
@@ -45,7 +45,7 @@ export const CardNumber = () => {
       focusNext(index);
     };
 
-  const _onBlur: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+  const handleBlur: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     const enteredNumber = event.currentTarget.value as string;
 
     if (enteredNumber.length !== 4) {
@@ -56,7 +56,7 @@ export const CardNumber = () => {
     }
   };
 
-  const _onBlurLast: React.FocusEventHandler<HTMLInputElement> = () => {
+  const handleBlurLast: React.FocusEventHandler<HTMLInputElement> = () => {
     inputListRef.current.forEach((ref) => {
       if (ref?.value.length !== 4) {
         setValidStatus({
@@ -71,55 +71,19 @@ export const CardNumber = () => {
     <InputWrapper>
       <FormLabel>카드 번호</FormLabel>
       <CardNumberInputContainer>
-        <Input
-          value={creditCard.cardNumber[0]}
-          onChange={changeHandlerByIndex(0)}
-          onBlur={_onBlur}
-          maxLength={4}
-          inputMode="numeric"
-          ref={(el: HTMLInputElement) => {
-            inputListRef.current[0] = el;
-          }}
-        />
-
-        <Input
-          value={creditCard.cardNumber[1]}
-          onChange={changeHandlerByIndex(1)}
-          onBlur={_onBlur}
-          maxLength={4}
-          inputMode="numeric"
-          ref={(el: HTMLInputElement) => {
-            inputListRef.current[1] = el;
-          }}
-        />
-
-        <Input
-          value={creditCard.cardNumber[2]}
-          onChange={changeHandlerByIndex(2)}
-          onBlur={_onBlur}
-          maxLength={4}
-          inputMode="numeric"
-          type="password"
-          text-align="center"
-          placeholder="●●●●"
-          ref={(el: HTMLInputElement) => {
-            inputListRef.current[2] = el;
-          }}
-        />
-
-        <Input
-          value={creditCard.cardNumber[3]}
-          onChange={changeHandlerByIndex(3)}
-          onBlur={_onBlurLast}
-          maxLength={4}
-          inputMode="numeric"
-          type="password"
-          placeholder="●●●●"
-          text-align="center"
-          ref={(el: HTMLInputElement) => {
-            inputListRef.current[3] = el;
-          }}
-        />
+        {Array.from({ length: 4 }, (_, index) => (
+          <Input
+            key={`card-number-${index}`}
+            value={creditCard.cardNumber[index]}
+            onChange={handleChangeByIndex(index)}
+            onBlur={index === 3 ? handleBlurLast : handleBlur}
+            maxLength={4}
+            inputMode="numeric"
+            ref={(el: HTMLInputElement) => {
+              inputListRef.current[index] = el;
+            }}
+          />
+        ))}
       </CardNumberInputContainer>
       {!validStatus.isValid && <ErrorSpan>{validStatus.message}</ErrorSpan>}
     </InputWrapper>
