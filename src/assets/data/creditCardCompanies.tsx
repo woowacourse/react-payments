@@ -8,7 +8,7 @@ const creditCardCompanies: CreditCardCompany[] = [
     id: 'shinhan', name: '신한카드', color: 'white', backgroundColor: 'blue'
   },
   {
-    id: 'kakao', name: '카카오뱅크', color: 'white', backgroundColor: 'yellow'
+    id: 'kakao', name: '카카오뱅크', color: 'black', backgroundColor: 'yellow'
   },
   {
     id: 'hyundai', name: '현대카드', color: 'white', backgroundColor: 'black'
@@ -23,7 +23,7 @@ const creditCardCompanies: CreditCardCompany[] = [
     id: 'hana', name: '하나카드', color: 'white', backgroundColor: 'green'
   },
   {
-    id: 'kookmin', name: '국민카드', color: 'white', backgroundColor: 'yellow'
+    id: 'kookmin', name: '국민카드', color: 'black', backgroundColor: 'yellow'
   },
 ];
 export default creditCardCompanies;

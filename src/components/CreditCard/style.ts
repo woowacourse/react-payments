@@ -1,13 +1,15 @@
 import styled from 'styled-components';
 
 type CreditCardLayoutProps = {
-  isValid: boolean
+  isValid: boolean;
+  color?: string;
+  backgroundColor?: string;
 };
 
 export const CreditCardLayout = styled.div<CreditCardLayoutProps>`
     width: 213px;
     height: 133px;
-    background-color: #333333;
+    background-color: ${({ backgroundColor }) => backgroundColor};
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
     padding: 14px;
@@ -20,9 +22,9 @@ export const CreditCardLayout = styled.div<CreditCardLayoutProps>`
     font-weight: 500;
     font-size: 12px;
     line-height: 14px;
-    color: #FFFFFF;
+    color: ${({ color }) => color};
     letter-spacing: 3px;
-    border: ${(props) => (props.isValid ? '0' : '2px solid red')};
+    border: ${({ isValid }) => (isValid ? '0' : '2px solid red')};
 `;
 
 export const CreditCardICChip = styled.div`

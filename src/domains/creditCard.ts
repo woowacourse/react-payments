@@ -9,11 +9,14 @@ export const convertSecuredCreditCard = (number: string) => {
   return numberArrays.map((n) => n.split(''));
 };
 
-export const convertCreditCardById = (id: string) => {
+export const findCreditCardCompanyById = (id: string) => {
   const index = creditCardCompanies.findIndex((c) => c.id === id);
   if (index === -1) {
     return {
-      id: 'default', name: 'COMPANY', color: 'white', backgroundColor: 'black'
+      id: 'default',
+      name: 'COMPANY',
+      color: 'white',
+      backgroundColor: 'black'
     };
   }
   return creditCardCompanies[index];

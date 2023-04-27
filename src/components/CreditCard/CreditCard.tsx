@@ -2,7 +2,7 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
 import * as T from 'types';
-import { convertCreditCardById, convertSecuredCreditCard } from 'domains/creditCard';
+import { findCreditCardCompanyById, convertSecuredCreditCard } from 'domains/creditCard';
 import * as S from './style';
 
 export type CreditCardProps = {
@@ -26,10 +26,16 @@ function CreditCard({
     return true;
   };
 
+  const cardCompany = findCreditCardCompanyById(companyId);
+
   return (
-    <S.CreditCardLayout isValid={isValid()}>
+    <S.CreditCardLayout
+      isValid={isValid()}
+      color={cardCompany.color}
+      backgroundColor={cardCompany.backgroundColor}
+    >
       <S.CreditCardInfoHeader>
-        <S.CreditCardCompany>{convertCreditCardById(companyId).name}</S.CreditCardCompany>
+        <S.CreditCardCompany>{cardCompany.name}</S.CreditCardCompany>
       </S.CreditCardInfoHeader>
       <S.CreditCardICChip />
       <S.CreditCardInfoFooter>
