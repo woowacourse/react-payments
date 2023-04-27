@@ -1,32 +1,23 @@
-import { useContext } from "react";
-import uuid from "react-uuid";
-import styled from "styled-components";
-import { IcChip } from "../assets";
-import { ModalContext } from "../store/modalContext";
-import { CardType } from "../types";
+import { useContext } from 'react';
+import styled from 'styled-components';
+import { IcChip } from '../assets';
+import { ModalContext } from '../store/modalContext';
+import { CardType } from '../types';
 
 const Card = (props: CardType) => {
-  const cardNumberArray = props.cardNumber.replaceAll(" - ", " ").split(" ");
+  const cardNumberArray = props.cardNumber.replaceAll(' - ', ' ').split(' ');
 
   const modalCtx = useContext(ModalContext);
-  
+
   return (
-    <CardWrapper style={{ background: props.color }} onClick={()=>modalCtx.openModal()}>
+    <CardWrapper style={{ background: props.color }} onClick={() => modalCtx.openModal()}>
       <span>{props.bankName}</span>
       <img src={IcChip} alt="ic-chip" />
       <CardInfoWrapper>
         <div>
-          {cardNumberArray.map((cardNumber, index) => {
-            return index > 1 ? (
-              <span key={uuid()} style={{ letterSpacing: "-3px" }}>
-                {cardNumber}
-              </span>
-            ) : (
-              <span key={uuid()} style={{ letterSpacing: "4px" }}>
-                {cardNumber}
-              </span>
-            );
-          })}
+          {cardNumberArray.map((cardNumber, idx) => (
+            <span key={idx}>{cardNumber}</span>
+          ))}
         </div>
         <div>
           <span>{props.ownerName}</span>
@@ -52,7 +43,7 @@ const CardWrapper = styled.div`
 
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
 
-  > span{
+  > span {
     font-size: 12px;
     margin-bottom: 28px;
     color: white;
