@@ -17,9 +17,10 @@ import { Card } from "../../../types/card";
 
 interface CardDetailFormProps {
   setLastCard: (card: Card) => void;
+  openModal: () => void;
 }
 
-function CardDetailForm({ setLastCard }: CardDetailFormProps) {
+function CardDetailForm({ setLastCard, openModal }: CardDetailFormProps) {
   const navigate = useNavigate();
   const { warningText, isWrongForm } = useWarningText();
   const {
@@ -64,11 +65,13 @@ function CardDetailForm({ setLastCard }: CardDetailFormProps) {
 
   return (
     <>
-      <CardDetailView
-        cardNumberHidden={cardNumberHidden}
-        cardDate={cardDate}
-        cardOwnerName={cardOwnerName}
-      />
+      <Style.CardViewSection onClick={openModal}>
+        <CardDetailView
+          cardNumberHidden={cardNumberHidden}
+          cardDate={cardDate}
+          cardOwnerName={cardOwnerName}
+        />
+      </Style.CardViewSection>
       <Style.Form onSubmit={handelChange}>
         <CardNumberInput />
         <CardDateInput />

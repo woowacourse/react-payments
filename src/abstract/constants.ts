@@ -1,3 +1,5 @@
+import { CardCompany } from "../types/card";
+
 const IMG = {
   CVV: "/img/CVV.png",
 } as const;
@@ -50,4 +52,38 @@ const WARNING_TEXT = {
   WRONG_MONTH: "잘못된 달을 입력했습니다. 유효한 달을 입력해주세요.",
   NO_COMPLETED_FORM: "작성이 완료되지 않은 필수 입력요소가 있습니다.",
 };
-export { IMG, TYPE, ID, NAVIGATE, PLACE_HOLDER, STRING, LENGTH, WARNING_TEXT };
+
+const COMPANY_SRC: Record<CardCompany, string> = {
+  BC카드: "/img/bc-logo.svg",
+  신한카드: "/img/shinhan-logo.svg",
+  카카오뱅크: "/img/kakaobank-logo.svg",
+  현대카드: "/img/hyundaicard-logo.svg",
+  우리카드: "/img/worricard-logo.svg",
+  롯데카드: "/img/lottecard-logo.svg",
+  하나카드: "/img/hanacard-logo.svg",
+  국민카드: "/img/kbcard-logo.svg",
+};
+
+const COMPANY_LIST = [
+  "BC카드",
+  "신한카드",
+  "카카오뱅크",
+  "현대카드",
+  "우리카드",
+  "롯데카드",
+  "하나카드",
+  "국민카드",
+] as const;
+
+export {
+  IMG,
+  TYPE,
+  ID,
+  NAVIGATE,
+  PLACE_HOLDER,
+  STRING,
+  LENGTH,
+  WARNING_TEXT,
+  COMPANY_SRC,
+  COMPANY_LIST,
+};
