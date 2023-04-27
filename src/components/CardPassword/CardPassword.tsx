@@ -30,8 +30,8 @@ const CardPassword = ({ passwords, setPasswords }: CardPasswordProps) => {
   return (
     <>
       <CardLabel labelText="카드 비밀번호" />
-      <Styled.PasswordInputWrapper>
-        <Styled.Wrapper>
+      <Styled.Wrapper>
+        <Styled.PasswordInputWrapper>
           <CardInput
             type="password"
             maxLength={1}
@@ -42,8 +42,8 @@ const CardPassword = ({ passwords, setPasswords }: CardPasswordProps) => {
             placeholder="•"
             required={true}
           />
-        </Styled.Wrapper>
-        <Styled.Wrapper>
+        </Styled.PasswordInputWrapper>
+        <Styled.PasswordInputWrapper>
           <CardInput
             type="password"
             maxLength={1}
@@ -54,10 +54,10 @@ const CardPassword = ({ passwords, setPasswords }: CardPasswordProps) => {
             placeholder="•"
             required={true}
           />
-        </Styled.Wrapper>
+        </Styled.PasswordInputWrapper>
         <Styled.Pargraph>•</Styled.Pargraph>
         <Styled.Pargraph>•</Styled.Pargraph>
-      </Styled.PasswordInputWrapper>
+      </Styled.Wrapper>
     </>
   );
 };

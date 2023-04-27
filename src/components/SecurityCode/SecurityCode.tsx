@@ -23,8 +23,8 @@ const SecurityCode = ({ securityCode, setSecurityCode }: SecurityCodeProps) => {
   return (
     <>
       <CardLabel labelText="보안 코드(CVC/CVV)" />
-      <Styled.InputWrapper>
-        <Styled.Wrapper>
+      <Styled.Wrapper>
+        <Styled.InputWrapper>
           <CardInput
             type="password"
             maxLength={3}
@@ -34,7 +34,7 @@ const SecurityCode = ({ securityCode, setSecurityCode }: SecurityCodeProps) => {
             placeholder="•••"
             required={true}
           />
-        </Styled.Wrapper>
+        </Styled.InputWrapper>
         {isShowToolTip ? (
           <Styled.ToolTip
             onClick={() => {
@@ -54,7 +54,7 @@ const SecurityCode = ({ securityCode, setSecurityCode }: SecurityCodeProps) => {
             ?
           </Styled.QuestionButton>
         )}
-      </Styled.InputWrapper>
+      </Styled.Wrapper>
     </>
   );
 };

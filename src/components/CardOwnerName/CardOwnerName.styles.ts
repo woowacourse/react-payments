@@ -7,6 +7,10 @@ export const Wrapper = styled.div`
   background: #ecebf1;
   border-radius: 7px;
   margin-bottom: 20px;
+
+  & > * {
+    width: 100%;
+  }
 `;
 
 export const LabelWrapper = styled.div`

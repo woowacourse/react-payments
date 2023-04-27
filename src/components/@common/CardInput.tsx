@@ -6,10 +6,10 @@ interface CardInputProps {
   value: string;
   maxLength?: number;
   placeholder?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   order?: number;
   required?: boolean;
   autofocus?: boolean;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const CardInput = forwardRef(
