@@ -3,7 +3,7 @@ import { InputWrapper } from './template/InputWrapper';
 import { ErrorMessage, Input } from './template/Input';
 import styled from 'styled-components';
 import { useError } from '../../../hooks/useError';
-import { MoveInput } from '../MoveInput';
+import { MoveInputContainer } from '../MoveInputContainer';
 
 interface Props {
   cardNumber: string[];
@@ -106,7 +106,7 @@ export const CardNumberInput = forwardRef<HTMLInputElement[], Props>(
           })}
         </InputWrapper>
         <ErrorMessage>{error ?? ''}</ErrorMessage>
-        <MoveInput
+        <MoveInputContainer
           isLeftBtnShowed={false}
           isRightBtnShowed={error === null}
           viewNextInput={viewNextInput}

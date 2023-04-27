@@ -3,7 +3,7 @@ import { InputWrapper } from './template/InputWrapper';
 import { ErrorMessage, Input } from './template/Input';
 import styled from 'styled-components';
 import { useError } from '../../../hooks/useError';
-import { MoveInput } from '../MoveInput';
+import { MoveInputContainer } from '../MoveInputContainer';
 
 interface Props {
   securityCode: string;
@@ -59,7 +59,7 @@ export const SecurityCodeInput = forwardRef<HTMLInputElement[], Props>(
           />
         </InputWrapper>
         <ErrorMessage>{error ?? ''}</ErrorMessage>
-        <MoveInput
+        <MoveInputContainer
           isLeftBtnShowed={true}
           isRightBtnShowed={error === null}
           viewNextInput={viewNextInput}

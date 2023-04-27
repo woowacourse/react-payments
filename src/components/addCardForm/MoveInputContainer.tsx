@@ -10,7 +10,7 @@ interface Props {
   progress: ReactNode;
 }
 
-export const MoveInput = ({
+export const MoveInputContainer = ({
   isLeftBtnShowed,
   isRightBtnShowed,
   viewNextInput,
@@ -21,13 +21,21 @@ export const MoveInput = ({
     <Style.Wrapper>
       <Style.ButtonWrapper>
         {isLeftBtnShowed && (
-          <LeftArrowButton handleButtonClick={viewPreviousInput} />
+          <Style.Button
+            src={`${process.env.PUBLIC_URL}/arrow-left.svg`}
+            onClick={viewPreviousInput}
+            alt="이전 입력창"
+          />
         )}
       </Style.ButtonWrapper>
       {progress}
       <Style.ButtonWrapper>
         {isRightBtnShowed && (
-          <RightArrowButton handleButtonClick={viewNextInput} />
+          <Style.Button
+            src={`${process.env.PUBLIC_URL}/arrow-right.svg`}
+            onClick={viewNextInput}
+            alt="이전 입력창"
+          />
         )}
       </Style.ButtonWrapper>
     </Style.Wrapper>
@@ -46,7 +54,13 @@ const Style = {
     margin-top: 20px;
   `,
   ButtonWrapper: styled.div`
-    width: 50px;
-    height: 50px;
+    width: 20px;
+    height: 20px;
+  `,
+  Button: styled.img`
+    width: 100%;
+    height: 100%;
+
+    cursor: pointer;
   `,
 };

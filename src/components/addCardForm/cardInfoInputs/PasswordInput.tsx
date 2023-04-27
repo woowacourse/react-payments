@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { InputWrapper } from './template/InputWrapper';
 import { ErrorMessage, Input } from './template/Input';
 import { useError } from '../../../hooks/useError';
-import { MoveInput } from '../MoveInput';
+import { MoveInputContainer } from '../MoveInputContainer';
 
 interface Props {
   password: string[];
@@ -118,7 +118,7 @@ export const PasswordInput = forwardRef<HTMLInputElement[], Props>(
           <Style.DotContainer>•</Style.DotContainer>
         </Style.Wrapper>
         <ErrorMessage>{error ?? ''}</ErrorMessage>
-        <MoveInput
+        <MoveInputContainer
           isLeftBtnShowed={true}
           isRightBtnShowed={error === null}
           viewPreviousInput={viewPreviousInput}
