@@ -6,21 +6,29 @@ import styled from "styled-components";
 import { CardForm } from "../components/cardForm";
 import { Link } from "react-router-dom";
 import { CompanySelectModal } from "../components/companySelectModal";
+import { getRandomId } from "../utils/randomId";
 
 const initialCard = {
-  id: "demoCard",
+  id: "",
   numbers: [],
   owner: "NAME",
   expiryDate: "MM/YY",
   color: "#e07171",
   CVC: 0,
   password: [],
-  company: "hjh",
+  company: "",
 };
 
 export const AddCard = () => {
-  const [newCard, setNewCard] = useState<CardType>(initialCard);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [newCard, setNewCard] = useState<CardType>({
+    ...initialCard,
+    id: getRandomId(),
+  });
+  const [isModalOpen, setIsModalOpen] = useState(true);
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <>
@@ -33,7 +41,9 @@ export const AddCard = () => {
         <CardItem card={newCard} />
         <CardForm setCardInfo={setNewCard} newCard={newCard} />
       </Main>
-      {isModalOpen && <CompanySelectModal />}
+      {isModalOpen && (
+        <CompanySelectModal setCardInfo={setNewCard} closeModal={closeModal} />
+      )}
     </>
   );
 };
