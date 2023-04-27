@@ -18,8 +18,8 @@ export const isInvalidDate = (
 };
 
 export const isValidInfo = (cardInfo: any) => {
-  const { month, year, code, password1, password2 } = cardInfo;
-  const { isAllValidLength, isValidLength } = validation;
+  const { cardCompany, month, year, code, password1, password2 } = cardInfo;
+  const { isAllValidLength, isValidLength, isValidCardCompany } = validation;
 
   const cardNumbers = Array.from(
     { length: LIMIT_LENGTH.CARD_NUMBER },
@@ -39,12 +39,14 @@ export const isValidInfo = (cardInfo: any) => {
     [password1, password2],
     LIMIT_LENGTH.PASSWORD
   );
+  const validateCardCompany = isValidCardCompany(cardCompany);
 
   const validationResult = [
     validateCardNumber,
     validateDate,
     validateCode,
     validatePassword,
+    validateCardCompany,
   ];
 
   return validationResult.every((result) => result === true);
@@ -83,6 +85,10 @@ const validation = {
     return thisYear === inputYear
       ? Number(thisMonth) > Number(inputMonth)
       : true;
+  },
+
+  isValidCardCompany(cardCompany: string) {
+    return Boolean(cardCompany.length);
   },
 };
 

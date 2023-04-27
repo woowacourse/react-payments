@@ -1,6 +1,6 @@
 import CardCompany from "components/CardCompany";
 import Modal from "components/Modal";
-import { CARD_COMPANIES } from "constants/image";
+import { CARD_COMPANIES } from "constants/cardCompanies";
 import { css } from "styled-components";
 
 const CardCompanyModal = () => {
@@ -21,6 +21,7 @@ const modalStyle = css`
   position: fixed;
   bottom: 0;
   left: 50%;
+  z-index: 999;
   transform: translateX(-50%);
   max-width: 480px;
   width: 100%;

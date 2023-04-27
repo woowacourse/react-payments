@@ -14,7 +14,10 @@ export interface CardNumber {
 }
 
 export interface PreviewCardInfo extends ExpirationDate, CardNumber {
+  cardCompany: string;
   name: string;
 }
 
 export type SetModalState = Dispatch<SetStateAction<boolean>>;
+
+export type SetCardCompany = Dispatch<SetStateAction<string>>;

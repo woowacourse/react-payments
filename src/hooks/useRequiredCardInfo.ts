@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { isValidInfo } from "validation";
 
-const useFormState = (requiredCardInfo: {}) => {
+const useRequiredCardInfo = (requiredCardInfo: {}) => {
   const areAllInputsFilled = isValidInfo(requiredCardInfo);
 
   const [isFormFilled, setIsFormFilled] = useState(false);
@@ -13,4 +13,4 @@ const useFormState = (requiredCardInfo: {}) => {
   return { isFormFilled };
 };
 
-export default useFormState;
+export default useRequiredCardInfo;

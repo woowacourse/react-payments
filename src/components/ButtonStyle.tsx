@@ -26,10 +26,17 @@ export const AddButton = styled(Button)`
 `;
 
 export const SelectorButton = styled(Button)`
-  border: 1px solid var(--gray-color-100);
-  margin: 14px auto auto 0;
-  padding: 3px 4px;
+  margin: 12px auto auto 0;
   font-size: 12px;
+  color: #fff;
   background: transparent;
-  color: var(--gray-color-100);
+
+  &.카드사선택 {
+    padding: 3px 4px;
+    border: 1px solid #fff;
+  }
+
+  &.카카오뱅크 {
+    color: #000;
+  }
 `;

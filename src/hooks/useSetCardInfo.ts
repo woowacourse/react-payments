@@ -6,17 +6,18 @@ interface FormData {
   [k: string]: FormDataEntryValue;
 }
 
-const useSetFormData = (dataName: string) => {
+const useSetCardInfo = (dataName: string, cardCompany: string) => {
   const navigate = useNavigate();
 
   const handleFormDataSubmit = (event: FormEvent) => {
     event.preventDefault();
 
     const formData = getFormData(event.target);
-
     if (!formData) return;
 
-    setData(formData, dataName);
+    const allCardInfo = { ...formData, cardCompany };
+
+    setData(allCardInfo, dataName);
     navigate("/");
   };
 
@@ -34,4 +35,4 @@ const setData = (formData: FormData, dataName: string) => {
   );
 };
 
-export default useSetFormData;
+export default useSetCardInfo;

@@ -13,6 +13,7 @@ type Story = StoryObj<typeof meta>;
 export const CardPreviewStory: Story = {
   args: {
     cardInfo: {
+      cardCompany: "현대카드",
       number1: "1234",
       number2: "1234",
       number3: "1234",

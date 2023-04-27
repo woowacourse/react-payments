@@ -5,6 +5,7 @@ import { HIDDEN_VALUE, SECURITY_TARGET } from "constants/security";
 import { PreviewCardInfo } from "types";
 import { SelectorButton } from "./ButtonStyle";
 import { ModalState } from "pages/RegisterPage/CardRegisterForm";
+import { CARD_COLORS } from "constants/cardCompanies";
 
 interface Props {
   cardInfo: PreviewCardInfo;
@@ -17,13 +18,20 @@ const CardPreview = ({ cardInfo }: Props) => {
     setIsModalOpen(true);
   };
 
+  const isUnselected = cardInfo.cardCompany === "";
+
   return (
-    <S.Card>
-      <SelectorButton onClick={handleModalOpen}>카드사 선택</SelectorButton>
+    <S.Card cardCompany={cardInfo.cardCompany}>
+      <SelectorButton
+        className={isUnselected ? "카드사선택" : cardInfo.cardCompany}
+        onClick={handleModalOpen}
+      >
+        {isUnselected ? "카드사 선택" : cardInfo.cardCompany}
+      </SelectorButton>
 
-      <S.Chip />
+      <S.Chip cardCompany={cardInfo.cardCompany} />
 
-      <S.CardInfo>
+      <S.CardInfo cardCompany={cardInfo.cardCompany}>
         <S.Numbers>
           {Array.from({ length: NUMBER_INPUT.COUNT }).map((_, index) => (
             <Fragment key={index}>
@@ -53,7 +61,7 @@ const CardPreview = ({ cardInfo }: Props) => {
 };
 
 const S = {
-  Card: styled.div`
+  Card: styled.div<{ cardCompany: string }>`
     display: flex;
     flex-direction: column;
     justify-content: end;
@@ -64,11 +72,14 @@ const S = {
     margin: 30px auto 0;
     border-radius: 5px;
     font-size: 14px;
-    background: var(--darken-color);
+    background: ${(props) =>
+      props.cardCompany === ""
+        ? "var(--darken-color)"
+        : CARD_COLORS[props.cardCompany]};
     box-shadow: rgba(0, 0, 0, 0.25) 3px 3px 5px;
   `,
 
-  Chip: styled.div`
+  Chip: styled.div<{ cardCompany: string }>`
     width: 40px;
     height: 26px;
     margin: 0 auto 0 1px;
@@ -76,13 +87,16 @@ const S = {
     border-radius: 4px;
   `,
 
-  CardInfo: styled.div`
-    color: var(--gray-color-100);
+  CardInfo: styled.div<{ cardCompany: string }>`
+    color: ${(props) =>
+      props.cardCompany === "카카오뱅크"
+        ? "var(--darken-color)"
+        : "var(--white-color)"};
   `,
 
   Numbers: styled.p`
-    margin: 10px 0;
-    letter-spacing: 2px;
+    margin: 10px 0 12px;
+    letter-spacing: 1.6px;
 
     & span {
       display: inline-block;
@@ -107,11 +121,13 @@ const S = {
   Wrapper: styled.div`
     display: flex;
     justify-content: space-between;
+    height: 12px;
     margin-bottom: 16px;
     font-size: 12px;
   `,
 
   Name: styled.p`
+    padding-left: 0.8px;
     letter-spacing: -0.5px;
   `,
 
@@ -119,4 +135,5 @@ const S = {
     text-align: right;
   `,
 };
+
 export default CardPreview;
