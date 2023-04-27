@@ -1,7 +1,11 @@
 type CardInfo = {
+  cardIssuer: CardIssuerType;
   cardNumber: string;
   cardExpirationDate: string;
   cardOwnerName: string;
+  cardSecurityCode: string;
+  cardPassword: string;
+  cardName?: string;
 };
 
 type ValidatorResponseType = { result: boolean; errorMessage: string };
