@@ -164,7 +164,6 @@ const CardNumberContainer = styled(Container)`
   justify-content: center;
   width: 318px;
   Input {
-    width: 15%;
     text-align: center;
   }
 `;

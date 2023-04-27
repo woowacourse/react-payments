@@ -15,8 +15,8 @@ export function CreditCard({ card }: CreditCardProps) {
       <Styled.CardNumbers>
         <span>{numbers?.[0]}</span>
         <span>{numbers?.[1]}</span>
-        <span>••••</span>
-        <span>••••</span>
+        <Styled.Dots>••••</Styled.Dots>
+        <Styled.Dots>••••</Styled.Dots>
       </Styled.CardNumbers>
       <Styled.Container>
         <Styled.Name>{name}</Styled.Name>
@@ -47,7 +47,6 @@ const Styled = {
     position: absolute;
     left: 13px;
     top: 11px;
-    font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
@@ -77,6 +76,10 @@ const Styled = {
       width: 34px;
       font-size: 14px;
     }
+  `,
+
+  Dots: styled.span`
+    letter-spacing: -5.5px;
   `,
 
   Container: styled.div`
