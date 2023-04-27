@@ -15,7 +15,7 @@ export const CardItem = ({ card }: CardProps) => {
         }
         return number;
       })
-      .join("  ");
+      .join("   ");
   };
 
   return (
@@ -62,7 +62,7 @@ const CardNumbers = styled.div`
   height: 12px;
   font-size: 12px;
   text-align: left;
-  letter-spacing: 1.1px;
+  letter-spacing: 3.2px;
 `;
 
 const InfoWrapper = styled.div`
