@@ -26,16 +26,21 @@ const St = {
 
   CardNumberSection: styled.section`
     display: flex;
-    gap: 12px;
+    gap: 7px;
 
     height: 25px;
+
+    font: 400 19px "Roboto";
+    text-align: center;
+    color: white;
   `,
 
-  CardNumber: styled.h2`
-    text-align: center;
-    font: 400 19px "Roboto";
-    color: white;
-    letter-spacing: 3.5px;
+  CardNumber: styled.div`
+    letter-spacing: 3px;
+  `,
+
+  MaskedNumber: styled.div`
+    letter-spacing: -2px;
   `,
 
   CardInfoSection: styled.section`

@@ -9,12 +9,19 @@ type CardDetailViewProps = {
 
 function CardDetailView({ creditcard }: CardDetailViewProps) {
   const { displayNumber, cardOwnerName, cardDate } = creditcard;
+
+  const splitNumber = displayNumber.split("-");
+
   return (
     <St.CreditCard>
       <St.ICDiv />
       <St.CardNumberSection>
-        <St.CardNumber>{displayNumber.replaceAll("-", " ")}</St.CardNumber>
+        <St.CardNumber>{splitNumber[0]}</St.CardNumber>
+        <St.CardNumber>{splitNumber[1]}</St.CardNumber>
+        <St.MaskedNumber>{splitNumber[2]}</St.MaskedNumber>
+        <St.MaskedNumber>{splitNumber[3]}</St.MaskedNumber>
       </St.CardNumberSection>
+
       <St.CardInfoSection>
         <St.CardInfo>{cardOwnerName ? cardOwnerName : "NAME"}</St.CardInfo>
         <St.CardInfo>{cardDate ? cardDate : "MM/YY"}</St.CardInfo>
