@@ -31,9 +31,7 @@ export function CardViewer({ cardCompany, cardNumber, expirationDate, ownerName 
     return `${month}/${year}`;
   };
 
-  const cardCompanyKey = CARD_COMPANY_KEY[cardCompany];
-  console.log(cardCompanyKey);
-  const cardColor = CARD_COMPANY[cardCompanyKey].color;
+  const cardColor = CARD_COMPANY[CARD_COMPANY_KEY[cardCompany]].color;
   const ownerNameFormat = ownerName.length ? ownerName : OWNER_NAME_TEXT;
   const cardNumbersFormat = changeCardNumberFormat(cardNumber);
   const expirationDateFormat = changeExpirationDateFormat(
