@@ -1,5 +1,6 @@
 import { createContext } from 'react';
 
+import { useCompany } from '../hooks/useCompany';
 import { useInput } from '../hooks/useInput';
 import { cardRegisterValidator } from '../validation/cardRegister';
 
@@ -33,6 +34,9 @@ export const CardPreviewInfoContext = createContext({
   },
   USERNAME: {
     first: { ...optionalInput },
+  },
+  COMPANY: {
+    clicked: {} as ReturnType<typeof useCompany>,
   },
 });
 
@@ -71,6 +75,9 @@ export function CardInfoProvider({ children }: { children: React.ReactNode }) {
         ...optionalInput,
         ...useInput(cardRegisterValidator.username),
       },
+    },
+    COMPANY: {
+      clicked: { ...useCompany() },
     },
   };
 

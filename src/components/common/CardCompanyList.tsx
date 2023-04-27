@@ -1,38 +1,38 @@
+import { useContext, useState } from 'react';
 import styled from 'styled-components';
 
-import { CARD_COMPANY } from '../../constants';
-import { imgSrc } from '../../utils/imageSrc';
+import { CARD_COMPANY, imgSrc } from '../../constants/cardCompany';
+import { CardPreviewInfoContext } from '../../contexts/cardInfo';
+import { useCompany } from '../../hooks/useCompany';
 
 export function CardCompanyList() {
-  function handleClickLogo(e: React.MouseEvent<HTMLImageElement>) {
-    if (e.target instanceof HTMLImageElement) alert(e.target.id);
-  }
+  const { COMPANY } = useContext(CardPreviewInfoContext);
+  const clickedCompany = COMPANY.clicked;
 
   return (
     <Wrapper>
       {Object.entries(CARD_COMPANY).map(([key, value]) => (
-        <>
-          <Container>
-            <_CompanyIcon
-              id={key}
-              key={key}
-              src={imgSrc[value]}
-              onClick={handleClickLogo}
-            />
-            <_CompanyName>{value}</_CompanyName>
-          </Container>
-        </>
+        <Container key={key}>
+          <_CompanyIcon
+            id={key}
+            src={imgSrc[value.name]}
+            onClick={clickedCompany?.handleClick}
+          />
+          <_CompanyName>{value.name}</_CompanyName>
+        </Container>
       ))}
     </Wrapper>
   );
 }
 
 const Wrapper = styled.div`
+  width: 80%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(2, 1fr);
-  gap: 3.5rem;
-  margin: 0rem 0rem 3rem 3.2rem;
+  gap: 3rem;
+
+  margin-left: 3rem;
 `;
 
 const Container = styled.div`

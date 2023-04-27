@@ -1,4 +1,4 @@
-import { CARD_COMPANY } from '../constants';
+import { CARD_COMPANY } from '../constants/cardCompany';
 
 export interface Card {
   CARD_NUMBER: string;
@@ -11,3 +11,8 @@ export interface Card {
 export type CardInfoOption = keyof Card;
 
 export type CardCompanyOption = keyof typeof CARD_COMPANY;
+
+export interface CompanyDetail {
+  name: string;
+  color: string;
+}

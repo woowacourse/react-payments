@@ -14,23 +14,23 @@ export function AddCard() {
 
   return (
     <>
-      <_AddCardContainer>
-        <Header title='카드 추가' render={BackButton} />
-        <_Section>
-          <CardInfoProvider>
+      <CardInfoProvider>
+        <_AddCardContainer>
+          <Header title='카드 추가' render={BackButton} />
+          <_Section>
             <CardPreview></CardPreview>
             <CardRegisterForm></CardRegisterForm>
             <_CompanySelectButton onClick={handleClickButton}>
               카드 회사 고르기
             </_CompanySelectButton>
-          </CardInfoProvider>
-        </_Section>
-      </_AddCardContainer>
-      {isModalOpen && (
-        <CardCompanySelectModal
-          onModalClose={setIsModalOpen}
-        ></CardCompanySelectModal>
-      )}
+          </_Section>
+        </_AddCardContainer>
+        {isModalOpen && (
+          <CardCompanySelectModal
+            onModalClose={setIsModalOpen}
+          ></CardCompanySelectModal>
+        )}
+      </CardInfoProvider>
     </>
   );
 }

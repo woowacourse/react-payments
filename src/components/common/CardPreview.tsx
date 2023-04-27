@@ -1,13 +1,19 @@
 import { useContext } from 'react';
 import styled from 'styled-components';
 
+import { CARD_COMPANY } from '../../constants/cardCompany';
 import { CardPreviewInfoContext } from '../../contexts/cardInfo';
 
 export function CardPreview() {
-  const { CARD_NUMBER, USERNAME, DATE } = useContext(CardPreviewInfoContext);
+  const { CARD_NUMBER, USERNAME, DATE, COMPANY } = useContext(
+    CardPreviewInfoContext
+  );
+  const companyName = COMPANY.clicked.value;
+  const companyColor = CARD_COMPANY[companyName].color;
 
   return (
-    <CardContainer>
+    <CardContainer color={companyColor}>
+      <p>{companyName}</p>
       <_Chip />
       <NumberWrapper>
         <NumberItem>{CARD_NUMBER.first.value}</NumberItem>
@@ -31,7 +37,7 @@ const CardContainer = styled.section`
   width: 21.3rem;
   height: 13.3rem;
   margin-bottom: 3.5rem;
-  background-color: #333333;
+  background-color: ${(props) => props.color || 'gray'};
   color: white;
   font-size: 1.3rem;
   letter-spacing: 0.2rem;

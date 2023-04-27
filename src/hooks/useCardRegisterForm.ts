@@ -8,14 +8,10 @@ import { cardRegisterValidator } from '../validation/cardRegister';
 
 export function useCardRegisterForm() {
   const previewInfo = useContext(CardPreviewInfoContext);
-
-  const cardPasswordInput = {
-    ...passwordInput,
-    ...useInput(cardRegisterValidator.cardPassword),
-  };
+  const { COMPANY, ...previewInfoWithForm } = previewInfo;
 
   const cardRegisterForm = {
-    ...previewInfo,
+    ...previewInfoWithForm,
     CODE: {
       first: {
         ...passwordInput,
@@ -23,8 +19,14 @@ export function useCardRegisterForm() {
       },
     },
     CARD_PASSWORD: {
-      first: { ...cardPasswordInput },
-      second: { ...cardPasswordInput },
+      first: {
+        ...passwordInput,
+        ...useInput(cardRegisterValidator.cardPassword),
+      },
+      second: {
+        ...passwordInput,
+        ...useInput(cardRegisterValidator.cardPassword),
+      },
     },
   };
 

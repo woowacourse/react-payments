@@ -17,14 +17,3 @@ export const REGEX: {
 export const LOCAL_STORAGE_KEY: { [key: string]: string } = {
   CARD_LIST: 'cards',
 } as const;
-
-export const CARD_COMPANY: { [key: string]: string } = {
-  BC: 'BC카드',
-  SINHAN: '신한카드',
-  KAKAO: '카카오뱅크',
-  HYUNDAI: '현대카드',
-  WOORI: '우리카드',
-  LOTTE: '롯데카드',
-  HANA: '하나카드',
-  KOOKMIN: '국민카드',
-} as const;
