@@ -1,4 +1,4 @@
-import CardCompany from '@Components/CardCompany';
+import CreditCardCompanyType from '@Components/CreditCardCompany';
 
 import * as Type from '@Types/index';
 
@@ -20,7 +20,7 @@ function CreditCardCompanyModal({ updateCompany, closeModal }: CreditCardCompany
   return (
     <S.CardCompanyLayout>
       {(Object.keys(CARD_COMPANY) as Type.CardCompanies[]).map((company) => (
-        <CardCompany company={company} key={company} handleClick={() => handleClickCardCompany(company)} />
+        <CreditCardCompanyType company={company} key={company} handleClick={() => handleClickCardCompany(company)} />
       ))}
     </S.CardCompanyLayout>
   );

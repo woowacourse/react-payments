@@ -2,14 +2,14 @@
 
 import { Meta, Story } from '@storybook/react';
 
-import CardCompany, { CardCompanyType } from '.';
+import CardCompany, { CreditCardCompanyType } from '.';
 
 export default {
   title: 'CardCompany',
   component: CardCompany,
 } as Meta;
 
-const Template: Story<CardCompanyType> = (args) => <CardCompany {...args} />;
+const Template: Story<CreditCardCompanyType> = (args) => <CardCompany {...args} />;
 
 export const BCCardCompany = Template.bind({});
 BCCardCompany.args = {

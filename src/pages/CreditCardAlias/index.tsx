@@ -24,7 +24,7 @@ function CreditCardAlias() {
     update.alias(event.target.value);
   };
 
-  const handleSubmit = () => {
+  const registerCreditCard = () => {
     const newCreditCard: Type.CreditCard = {
       id: Date.now(),
       number: creditCard.numbers,
@@ -74,7 +74,7 @@ function CreditCardAlias() {
           />
           <InputLabel label={`${creditCard.alias.length} / 10`} />
         </S.AliasInputLayout>
-        <Button text="확인" disabled={creditCard.alias.length === 0} type="button" handleClick={handleSubmit} />
+        <Button text="확인" disabled={creditCard.alias.length === 0} type="button" handleClick={registerCreditCard} />
       </S.CreditCardAlias>
     </>
   );

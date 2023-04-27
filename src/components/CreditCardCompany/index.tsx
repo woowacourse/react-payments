@@ -4,12 +4,12 @@ import CARD_COMPANY from '@Constants/CardCompany';
 
 import * as S from './style';
 
-export type CardCompanyType = {
+export type CreditCardCompanyType = {
   company: Type.CardCompanies;
   handleClick: () => void;
 };
 
-function CardCompany({ company, handleClick }: CardCompanyType) {
+function CreditCardCompany({ company, handleClick }: CreditCardCompanyType) {
   return (
     <S.CardCompanyLayout onClick={handleClick}>
       <S.CardCompanyLogo src={CARD_COMPANY[company].logo} alt={CARD_COMPANY[company].name} />
@@ -18,4 +18,4 @@ function CardCompany({ company, handleClick }: CardCompanyType) {
   );
 }
 
-export default CardCompany;
+export default CreditCardCompany;
