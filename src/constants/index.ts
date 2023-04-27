@@ -36,8 +36,8 @@ const SEPERATOR_STRING = {
 };
 
 const REGEX = {
-  // globalNumber: /[^0-9]/g,
-  number: /^[0-9]+$/g,
+  globalNumber: /[^0-9]/g,
+  number: /^[0-9]+$/,
   english: /^[a-zA-Z]*$/,
 } as const;
 
