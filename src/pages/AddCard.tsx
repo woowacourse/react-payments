@@ -51,12 +51,13 @@ const AddCard = ({ cards, setCards }: SetCardsProps) => {
     isDisabledForm,
   } = useAddCard();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [cardCompany, setCardCompany] = useState<string>('');
   const navigate = useNavigate();
 
   const handleSetCards = () => {
     setCards([
       ...cards,
-      { id: uuidv4(), cardNumbers, expiredDates, cardOwnerName },
+      { id: uuidv4(), cardNumbers, expiredDates, cardOwnerName, cardCompany },
     ]);
     navigate('/');
   };
@@ -74,9 +75,12 @@ const AddCard = ({ cards, setCards }: SetCardsProps) => {
             cardNumbers={cardNumbers}
             expiredDates={expiredDates}
             cardOwnerName={cardOwnerName}
+            cardCompany={cardCompany}
             setIsModalOpen={setIsModalOpen}
           />
-          <CardLabel labelText="카드사를 수정하려면 카드를 클릭하세요." />
+          {!isModalOpen && (
+            <CardLabel labelText="카드사를 수정하려면 카드를 클릭하세요." />
+          )}
         </Wrapper>
         <CardNumbers
           cardNumbers={cardNumbers}
@@ -99,7 +103,12 @@ const AddCard = ({ cards, setCards }: SetCardsProps) => {
           <NextButton disabled={isDisabledForm}>다음</NextButton>
         </ButtonWrapper>
       </form>
-      {isModalOpen && <CardCompanyModal setIsModalOpen={setIsModalOpen} />}
+      {isModalOpen && (
+        <CardCompanyModal
+          setIsModalOpen={setIsModalOpen}
+          setCardCompany={setCardCompany}
+        />
+      )}
     </>
   );
 };

@@ -5,13 +5,17 @@ import { Dispatch, SetStateAction } from 'react';
 
 interface cardCompanyModalProps {
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;
+  setCardCompany: Dispatch<SetStateAction<string>>;
 }
 
 const getCompanyInfos = () => {
   return Object.entries(IMAGE_PATH);
 };
 
-const CardCompanyModal = ({ setIsModalOpen }: cardCompanyModalProps) => {
+const CardCompanyModal = ({
+  setIsModalOpen,
+  setCardCompany,
+}: cardCompanyModalProps) => {
   return (
     <>
       <Styled.ModalBackdrop
@@ -21,7 +25,12 @@ const CardCompanyModal = ({ setIsModalOpen }: cardCompanyModalProps) => {
       ></Styled.ModalBackdrop>
       <Styled.Modal>
         {getCompanyInfos().map(([companyName, companyImage]) => (
-          <CardLogo companyImage={companyImage} companyName={companyName} />
+          <CardLogo
+            companyImage={companyImage}
+            companyName={companyName}
+            setCardCompany={setCardCompany}
+            setIsModalOpen={setIsModalOpen}
+          />
         ))}
       </Styled.Modal>
     </>

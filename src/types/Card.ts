@@ -3,4 +3,5 @@ export default interface CardType {
   cardNumbers: Array<string>;
   expiredDates: Array<string>;
   cardOwnerName: string;
+  cardCompany: string;
 }

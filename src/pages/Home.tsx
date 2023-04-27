@@ -27,12 +27,19 @@ const Home = ({ cards }: { cards: CardType[] }) => {
           <EmptyCardText>새로운 카드를 등록해주세요.</EmptyCardText>
         )}
         {cards.map(
-          ({ id, cardNumbers, expiredDates, cardOwnerName }: CardType) => (
+          ({
+            id,
+            cardNumbers,
+            expiredDates,
+            cardOwnerName,
+            cardCompany,
+          }: CardType) => (
             <Card
               key={id}
               cardNumbers={cardNumbers}
               expiredDates={expiredDates}
               cardOwnerName={cardOwnerName}
+              cardCompany={cardCompany}
             />
           )
         )}

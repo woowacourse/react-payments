@@ -5,14 +5,31 @@ type CardProps = Omit<CardType, 'id'> & {
   setIsModalOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+interface cardCompanyColorsType {
+  [cardName: string]: string;
+}
+
+const cardCompanyColors: cardCompanyColorsType = {
+  BC카드: '#F04651',
+  하나카드: '#009490',
+  현대카드: '#333333',
+  카카오뱅크: '#F4DC00',
+  롯데카드: '#ED1C24',
+  신한카드: '#0046FF',
+  우리카드: '#007BC8',
+  국민카드: '#5D544B',
+};
+
 const Card = ({
   cardNumbers,
   expiredDates,
   cardOwnerName,
+  cardCompany,
   setIsModalOpen,
 }: CardProps) => {
   return (
     <Styled.Wrapper
+      background={cardCompanyColors[cardCompany]}
       onClick={() => {
         setIsModalOpen && setIsModalOpen(true);
       }}
