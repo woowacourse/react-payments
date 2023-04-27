@@ -3,13 +3,9 @@ import Input from '../../../components/Input';
 import * as S from '../style';
 import { validatePassword } from '../../../domains/validations';
 
-type Props = {
-  name: keyof T.CreditCard;
-  creditCard: T.CreditCard;
-  setCreditCard: React.Dispatch<React.SetStateAction<T.CreditCard>>;
-};
-
-function CreditCardPasswordInput({ name, creditCard, setCreditCard }: Props) {
+function CreditCardPasswordInput(
+  { name, creditCard, setCreditCard }: T.CreditCardInputProps
+) {
   const handleChangeCreditCardPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newPassword = (event.target.value as T.CreditCardPasswordTypeKeys).replace(/\D/g, '');
     if (newPassword.length === 1) {

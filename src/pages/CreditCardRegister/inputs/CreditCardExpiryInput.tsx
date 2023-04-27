@@ -3,13 +3,9 @@ import Input from '../../../components/Input';
 import * as S from '../style';
 import { validateExpiry } from '../../../domains/validations';
 
-type Props = {
-  name: keyof T.CreditCard;
-  creditCard: T.CreditCard;
-  setCreditCard: React.Dispatch<React.SetStateAction<T.CreditCard>>;
-};
-
-function CreditCardExpiryInput({ name, creditCard, setCreditCard }: Props) {
+function CreditCardExpiryInput(
+  { name, creditCard, setCreditCard }: T.CreditCardInputProps
+) {
   const handleChangeCreditCardExpiry = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newCardExpiry = event.target.value;
     const cleanedExpiry = newCardExpiry

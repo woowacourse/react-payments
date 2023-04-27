@@ -2,13 +2,9 @@ import * as T from 'types';
 import Input from '../../../components/Input';
 import * as S from '../style';
 
-type Props = {
-  name: keyof T.CreditCard;
-  creditCard: T.CreditCard;
-  setCreditCard: React.Dispatch<React.SetStateAction<T.CreditCard>>;
-};
-
-function CreditCardOwnerInput({ name, creditCard, setCreditCard }: Props) {
+function CreditCardOwnerInput(
+  { name, creditCard, setCreditCard }: T.CreditCardInputProps
+) {
   const handleChangeCreditCardOwner = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newName = (event.target.value).toUpperCase();
     if (newName.length <= 30) {

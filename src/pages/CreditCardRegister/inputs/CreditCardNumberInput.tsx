@@ -22,13 +22,9 @@ export const MaskedViewer = styled.p`
     justify-content: center;
 `;
 
-type Props = {
-  name: keyof T.CreditCard;
-  creditCard: T.CreditCard;
-  setCreditCard: React.Dispatch<React.SetStateAction<T.CreditCard>>;
-};
-
-function CreditCardNumberInput({ name, creditCard, setCreditCard }: Props) {
+function CreditCardNumberInput(
+  { name, creditCard, setCreditCard }: T.CreditCardInputProps
+) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [markedCreditCardNumber, setMarkedCreditCardNumber] = useState('');
 

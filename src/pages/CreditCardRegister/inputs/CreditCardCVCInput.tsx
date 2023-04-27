@@ -2,13 +2,9 @@ import * as T from 'types';
 import Input from '../../../components/Input';
 import * as S from '../style';
 
-type Props = {
-  name: keyof T.CreditCard;
-  creditCard: T.CreditCard;
-  setCreditCard: React.Dispatch<React.SetStateAction<T.CreditCard>>;
-};
-
-function CreditCardCVCInput({ name, creditCard, setCreditCard }: Props) {
+function CreditCardCVCInput(
+  { name, creditCard, setCreditCard }: T.CreditCardInputProps
+) {
   const handleChangeCreditCardCVC = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newCVC = event.target.value.replace(/\D/g, '');
     if (newCVC.length <= 3) {

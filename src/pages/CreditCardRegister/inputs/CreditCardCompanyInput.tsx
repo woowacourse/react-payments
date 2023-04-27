@@ -6,13 +6,8 @@ import {
   CreditCardCompanyItem, CreditCardCompanyTitle
 } from '../style';
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
-interface CreditCardCompanyInputProps {
+interface CreditCardCompanyInputProps extends T.CreditCardInputProps {
   closeModal: () => void;
-  name: keyof T.CreditCard;
-  creditCard: T.CreditCard;
-  setCreditCard: React.Dispatch<React.SetStateAction<T.CreditCard>>;
-
 }
 
 function CreditCardCompanyInput({

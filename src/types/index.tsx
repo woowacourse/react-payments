@@ -5,6 +5,8 @@ export type CreditCardPasswordType = {
   second: string
 };
 
+export type CreditCardKeys = keyof CreditCard;
+
 export type CreditCard = {
   companyId: string;
   number: string;
@@ -16,3 +18,9 @@ export type CreditCard = {
 
 export type CreditCardCompanyKeys = 'id' | 'name' | 'color' | 'backgroundColor';
 export type CreditCardCompany = Record<CreditCardCompanyKeys, string>;
+
+export interface CreditCardInputProps {
+  name: CreditCardKeys;
+  creditCard: CreditCard;
+  setCreditCard: React.Dispatch<React.SetStateAction<CreditCard>>;
+}
