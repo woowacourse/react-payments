@@ -24,6 +24,7 @@ export type CardPassword = {
 
 export type CardType = {
   id: number;
+  alias?: string;
   cardType: string;
   cardNumber: CardNumber;
   cardOwner: string;

@@ -1,6 +1,6 @@
-import type { CardNumber, CardPassword, CardType } from '../type';
+import type { CardNumber, CardType } from '../type';
 
-const getSerialNumber = (card: CardNumber): string => {
+export const getSerialNumber = (card: CardNumber): string => {
   let result = '';
   const keys = Object.keys(card) as ('first' | 'second' | 'third' | 'fourth')[];
   for (const key of keys) {
