@@ -15,7 +15,9 @@ function RegisteredCardStories() {
     year: '28',
   };
 
-  return <RegisteredCard cardTitle={cardTitle} {...cardInfo} />;
+  return (
+    <RegisteredCard createCard={() => {}} cardTitle={cardTitle} {...cardInfo} />
+  );
 }
 
 const meta: Meta<typeof RegisteredCardStories> = {

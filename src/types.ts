@@ -2,6 +2,8 @@ import { PAGE } from './constant';
 
 export interface CardInfo {
   id: string;
+  bank: BankType;
+  title: string;
   cardNumber: {
     fisrt: string;
     second: string;

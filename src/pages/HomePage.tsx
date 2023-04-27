@@ -41,6 +41,8 @@ export default function Homepage({
       <CardWrapper>
         {cardList?.map((card, index) => (
           <Card
+            bankKind={card.bank}
+            title={card.title}
             key={card.id}
             owner={card.owner}
             cardNumberSet={Object.values(card.cardNumber)}

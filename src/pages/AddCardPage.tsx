@@ -1,4 +1,4 @@
-import React, { FormEvent, useRef } from 'react';
+import React, { FormEvent, useRef, useState } from 'react';
 import styled from 'styled-components';
 import PrevButton from '../components/common/PrevButton';
 import Card from '../components/card/Card';
@@ -26,6 +26,7 @@ import SelectBank from '../components/card/SelectBank';
 import { useHideScrollState } from '../hooks/useHideScrollState';
 import ChangeButton from '../components/common/ChangeButton';
 import { BANK_DATA } from '../constant';
+import RegisteredCard from '../components/card/RegisteredCard';
 
 interface AddCardPageProps {
   cardList: CardInfo[];
@@ -41,6 +42,7 @@ export default function AddCardPage({
   const cardForm = useRef<HTMLFormElement>(null);
   const { onInputKeydown } = useFocusInput(cardForm);
   const { formInputs } = useFormInputs();
+  const [isRegister, setIsRegister] = useState(false);
   const [bank, setBank] = useHideScrollState<BankType>('default', (value) => {
     return value === 'default';
   });
@@ -164,19 +166,25 @@ export default function AddCardPage({
       return;
     }
 
+    setIsRegister(true);
+  };
+
+  const createCard = () => {
     const newCard: CardInfo = {
       id: createUniqueId(),
+      bank,
+      title: cardTitle.value,
       cardNumber: {
-        fisrt: firstCardInput.value,
-        second: secondCardInput.value,
+        fisrt: firstCardNumber.value,
+        second: secondCardNumber.value,
         third: '&&&&',
         fourth: '&&&&',
       },
       expiracy: {
-        month: monthInput.value,
-        year: yearInput.value,
+        month: month.value,
+        year: year.value,
       },
-      owner: ownerInput.value,
+      owner: owner.value,
     };
 
     const updatedCardList = [...cardList, newCard];
@@ -192,6 +200,25 @@ export default function AddCardPage({
       setPage('homePage');
     }
   };
+
+  if (isRegister) {
+    return (
+      <RegisteredCard
+        createCard={createCard}
+        cardTitle={cardTitle}
+        bankKind={bank}
+        cardNumberSet={[
+          firstCardNumber.value,
+          secondCardNumber.value,
+          thirdCardNumber.value,
+          fourthCardNumber.value,
+        ]}
+        month={month.value ? month.value : 'MM'}
+        year={year.value ? year.value : 'YY'}
+        owner={owner.value ? owner.value : 'NAME'}
+      />
+    );
+  }
 
   return (
     <Container>
