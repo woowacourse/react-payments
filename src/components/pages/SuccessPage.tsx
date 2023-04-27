@@ -11,7 +11,7 @@ import CreditCardContextType from '../../@types/creditCardContextType';
 
 function SuccessPage() {
   const navigation = useNavigate();
-  const { saveCard } = useCardList({ key: 'card-list' });
+  const { saveCard } = useCardList();
   const { creditCard, setCreditCard, initCreditCard } = useContext(
     CreditCardContext
   ) as CreditCardContextType;

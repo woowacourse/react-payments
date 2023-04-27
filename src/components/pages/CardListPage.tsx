@@ -8,11 +8,11 @@ import { COLOR_BY_CARD_COMPANY, KOR_NAME_BY_CARD_COMPANY } from '../../@types/ca
 
 function CardListPage() {
   const navigation = useNavigate();
-  const { cardList } = useCardList({ key: 'card-list' });
+  const { savedCardList } = useCardList();
 
   const cardLists = useMemo(() => {
-    return cardList.length ? (
-      cardList.map(({ cardNumber, ownerName, expirationDate, cardCompany, cardAlias }) => {
+    return savedCardList.length ? (
+      savedCardList.map(({ cardNumber, ownerName, expirationDate, cardCompany, cardAlias }) => {
         const companyName = KOR_NAME_BY_CARD_COMPANY[cardCompany];
         const cardColor = COLOR_BY_CARD_COMPANY[cardCompany];
         return (
@@ -32,13 +32,13 @@ function CardListPage() {
     ) : (
       <CardRegisterParagraph>새로운 카드를 등록해주세요.</CardRegisterParagraph>
     );
-  }, [cardList]);
+  }, [savedCardList]);
 
   return (
     <CardListSection>
       {cardLists}
       <AddButton
-        isFirst={cardList.length ? false : true}
+        isFirst={savedCardList.length ? false : true}
         onClick={() => {
           navigation('/card-register');
         }}

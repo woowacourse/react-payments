@@ -22,7 +22,6 @@ function CardRegisterForm() {
     securityCode.length === 3 &&
     password.join('').length === 2;
 
-  console.log('>>> hasShowButton:', hasShowButton);
   const _onSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
     // TODO: 검증

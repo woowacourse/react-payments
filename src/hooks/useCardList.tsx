@@ -1,28 +1,48 @@
-import { useState } from 'react';
 import CreditCardInfo from '../@types/creditCardInfo';
+import localStorageUtil from '../utils/localStorageUtil';
 
-interface Props {
-  key: string;
-  initialValue?: Array<CreditCardInfo>;
+interface CreditCardInfoWithId extends CreditCardInfo {
+  cardId: number;
 }
 
-function useCardList({ key, initialValue }: Props) {
-  const saved = localStorage.getItem(key);
-  const savedList = (saved ? JSON.parse(saved) : []) as Array<CreditCardInfo>;
+const key = 'card-list';
+const initialValue: CreditCardInfo[] = [];
 
-  const [cardList, setCardList] = useState<Array<CreditCardInfo>>([
-    ...(initialValue ?? []),
-    ...savedList,
-  ]);
+const getSavedCardList = (): CreditCardInfo[] => {
+  try {
+    return localStorageUtil.getItem(key);
+  } catch {
+    return initialValue;
+  }
+};
+
+const getNextId = (dataList: any[]): number => {
+  if (dataList.length === 0) return 1;
+
+  return (
+    Math.max(
+      ...dataList.map((data) => {
+        return data.cardId;
+      })
+    ) + 1
+  );
+};
+
+const useCardList = () => {
+  const savedCardList = getSavedCardList();
 
   const saveCard = (cardInfo: CreditCardInfo) => {
-    const savedData = JSON.stringify([...cardList, cardInfo]);
-    localStorage.setItem(key, savedData);
+    const newCard: CreditCardInfoWithId = {
+      ...cardInfo,
+      cardId: getNextId(savedCardList),
+    };
 
-    setCardList((prev) => [...prev, cardInfo]);
+    const newCardList = [...savedCardList, newCard];
+
+    localStorageUtil.setItem(key, newCardList);
   };
 
-  return { cardList, saveCard };
-}
+  return { savedCardList, saveCard };
+};
 
 export default useCardList;

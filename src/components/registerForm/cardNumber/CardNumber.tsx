@@ -4,10 +4,10 @@ import useAutoFocus from '../../../hooks/useAutoFocus';
 import FormLabel from '../../@common/FormLabel';
 import Input from '../../@common/Input';
 import ErrorSpan from '../../@common/ErrorSpan';
-import { CreditCardContext } from '../../../contexts/CreditCardContext';
 import InputWrapper from '../../@common/InputWrapper';
 import CardNumberInputContainer from './CardNumber.style';
 import CreditCardContextType from '../../../@types/creditCardContextType';
+import { CreditCardContext } from '../../../contexts/CreditCardContext';
 
 export const CardNumber = () => {
   const { creditCard, setCreditCard } = useContext(CreditCardContext) as CreditCardContextType;
