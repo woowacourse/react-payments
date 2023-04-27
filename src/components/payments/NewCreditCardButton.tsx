@@ -15,7 +15,7 @@ const Button = styled.button`
   font-size: 20px;
   font-weight: 900;
   border-radius: 5px;
-  background: ${(props) => props.theme.color.grey2};
+  background: ${(props) => props.theme.color.grey3};
 `;
 
 type NewCreditCardButtonProps = {
