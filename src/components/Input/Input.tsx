@@ -7,6 +7,7 @@ type InputProps = {
   name?: string;
   maxLength?: number;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  className?: string;
 };
 
 const Input = forwardRef<HTMLInputElement, InputProps>(

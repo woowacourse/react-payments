@@ -17,6 +17,8 @@ type CardInfoContextType = {
   setSelectedCard: (selectedCard: string) => void;
   isModalOpen: boolean;
   setIsModalOpen: (isModalOpen: boolean) => void;
+  cardNickName: string;
+  setCardNickName: (cardNickName: string) => void;
 };
 
 export const CardInfoContext = createContext<CardInfoContextType>({
@@ -36,6 +38,8 @@ export const CardInfoContext = createContext<CardInfoContextType>({
   setSelectedCard: () => {},
   isModalOpen: true,
   setIsModalOpen: () => {},
+  cardNickName: '',
+  setCardNickName: () => {},
 });
 
 export const CardInfoProvider = ({ children }: PropsWithChildren) => {
@@ -47,6 +51,7 @@ export const CardInfoProvider = ({ children }: PropsWithChildren) => {
   const [secondDigit, setSecondDigit] = useState('');
   const [selectedCard, setSelectedCard] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(true);
+  const [cardNickName, setCardNickName] = useState('');
 
   return (
     <CardInfoContext.Provider
@@ -67,6 +72,8 @@ export const CardInfoProvider = ({ children }: PropsWithChildren) => {
         setSelectedCard,
         isModalOpen,
         setIsModalOpen,
+        cardNickName,
+        setCardNickName,
       }}
     >
       {children}
