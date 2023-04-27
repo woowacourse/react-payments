@@ -1,23 +1,28 @@
-import { Meta } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import CardNumber from ".";
+import { CardInfoProvider } from "src/context/CardInfoContext";
 
 const cardNumber = {
   component: CardNumber,
   title: "Card Number Input",
+  decorators: [
+    (Story) => {
+      return (
+        <CardInfoProvider>
+          <div style={{ width: "375px", margin: "0 auto" }}>
+            <Story />
+          </div>
+        </CardInfoProvider>
+      );
+    },
+  ],
 } satisfies Meta<typeof CardNumber>;
 
 export default cardNumber;
 
-export const Example = () => {
-  const registerCard = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-  };
+type Story = StoryObj<typeof cardNumber>;
 
-  return (
-    <form onSubmit={registerCard}>
-      <CardNumber />
-      <button>다음</button>
-    </form>
-  );
-};
+export const Example = {
+  args: {},
+} satisfies Story;
