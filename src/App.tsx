@@ -5,7 +5,7 @@ import Home from './pages/Home';
 import AddCard from './pages/AddCard';
 import CardType from './types/Card';
 import { getLoacalStorage, setLocalStorage } from './utils/setLocalStorge';
-import AddAlias from './pages/AddAlias';
+import AddCardAlias from './pages/AddCardAlias';
 
 const initCards = () => {
   const localStorageCards = getLoacalStorage('cards');
@@ -29,7 +29,7 @@ function App() {
           path="/add-card"
           element={<AddCard cards={cards} setCards={setCards} />}
         />
-        <Route path="/add-alias" element={<AddAlias />} />
+        <Route path="/add-card-alias" element={<AddCardAlias />} />
       </Routes>
     </Router>
   );
