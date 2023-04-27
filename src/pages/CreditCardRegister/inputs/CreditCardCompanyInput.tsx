@@ -1,7 +1,10 @@
 import creditCardCompanies from 'assets/data/creditCardCompanies';
-import styled from 'styled-components';
 import { convertImage } from 'tools/image';
 import * as T from 'types';
+import {
+  CreditCardCompanyImage, CreditCardCompanyInputLayout,
+  CreditCardCompanyItem, CreditCardCompanyTitle
+} from '../style';
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 interface CreditCardCompanyInputProps {
@@ -11,16 +14,6 @@ interface CreditCardCompanyInputProps {
   setCreditCard: React.Dispatch<React.SetStateAction<T.CreditCard>>;
 
 }
-const CreditCardCompanyInputLayout = styled.div`
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap:15px;
-`;
-
-const CreditCardCompanyItem = styled.div`
-    text-align: center;
-    cursor:pointer;
-`;
 
 function CreditCardCompanyInput({
   closeModal, name, creditCard, setCreditCard
@@ -29,6 +22,7 @@ function CreditCardCompanyInput({
     setCreditCard({ ...creditCard, [name]: companyId });
     closeModal();
   };
+
   return (
     <CreditCardCompanyInputLayout>
       {creditCardCompanies.map((creditCardCompany) => (
@@ -36,11 +30,11 @@ function CreditCardCompanyInput({
           key={creditCardCompany.id}
           onClick={() => handleChangeCreditCardCompany(creditCardCompany.id)}
         >
-          <img
+          <CreditCardCompanyImage
             src={convertImage(creditCardCompany.id)}
             alt={creditCardCompany.name}
           />
-          <div>{creditCardCompany.name}</div>
+          <CreditCardCompanyTitle>{creditCardCompany.name}</CreditCardCompanyTitle>
         </CreditCardCompanyItem>
       ))}
     </CreditCardCompanyInputLayout>

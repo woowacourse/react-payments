@@ -117,3 +117,23 @@ export const ErrorMessage = styled.div`
 `;
 
 export const Box = styled.div``;
+
+export const CreditCardCompanyInputLayout = styled.div`
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap:20px;
+`;
+
+export const CreditCardCompanyItem = styled.div`
+    text-align: center;
+    cursor:pointer;
+`;
+
+export const CreditCardCompanyImage = styled.img`
+    margin-bottom:10px;
+`;
+
+export const CreditCardCompanyTitle = styled.div`
+    text-overflow:ellipsis;
+    white-space:nowrap;
+`;
