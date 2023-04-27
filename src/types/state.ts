@@ -31,13 +31,3 @@ export interface CardInfo {
 
 export type SetCardInfo = React.Dispatch<SetStateAction<CardInfo>>;
 export type SetCardInfoList = React.Dispatch<SetStateAction<CardInfo[]>>;
-
-export interface CardContext {
-  cardNumbers: CardNumbers;
-  expirationDate: ExpirationDate;
-  ownerName: OwnerName;
-  securityCode: SecurityCode;
-  password: Password;
-  cardCompany: CardCompany;
-  cardAlias: CardAlias;
-}

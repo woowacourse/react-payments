@@ -67,8 +67,8 @@ const CardInfoContext = createContext<{
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   setPassword: () => {},
   cardCompany: {
-    name: '',
-    theme: '',
+    name: null,
+    theme: null,
   },
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   setCardCompany: () => {},
