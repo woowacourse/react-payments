@@ -25,14 +25,14 @@ const GlobalStyle = createGlobalStyle`
     --gray-color-400: #727272;
     --caption-color: #ee3507;
     --darken-color: #333;
-    --bc-card: #F04651;
+    --bc-card: #F04652;
     --shinhan-card: #0046FF;
     --kakao-bank: #FFE600;
-    --hyundai-card: #000000;
-    --woori-card: #007BC8;
-    --lottee-card: #ED1C24;
+    --hyundai-card: #333;
+    --woori-card: #027BC8;
+    --lottee-card: #ED1C23;
     --hana-card: #009490;
-    --kookmin-card: #6E655A;
+    --kookmin-card: #6F655B;
   }
 
 

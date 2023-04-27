@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import CardRoutes from "./routes";
-import GlobalStyle from "./GlobalStyles";
+import GlobalStyle from "./styles/GlobalStyles";
 import { ModalProvider } from "./context/ModalContext";
 
 const root = ReactDOM.createRoot(
