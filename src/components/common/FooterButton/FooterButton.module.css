@@ -3,8 +3,14 @@
 }
 
 .container {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 100%;
   display: flex;
   justify-content: flex-end;
+  padding: 30px;
+  transform: translateY(-100%);
 }
 
 .button {
