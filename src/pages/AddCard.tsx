@@ -15,7 +15,6 @@ import {
 
 const AddCard = () => {
   const navigate = useNavigate();
-
   const [newCard, setNewCard] = useState<CardType>(getEmptyCard());
   const { toggleModal } = useContext(Context);
 

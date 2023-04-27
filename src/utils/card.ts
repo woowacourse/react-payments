@@ -1,16 +1,31 @@
 import {
+  CARD_COMPANY_NOT_SELECTED_STRING,
   REGEX,
   SEPERATED_CARD_NUMBER_LENGTH,
   SEPERATED_EXPIRED_DATE_LENGTH,
   SEPERATOR_STRING,
 } from "../constants";
+import { CardType } from "../types";
+
+export const getEmptyCard = (): CardType => {
+  return {
+    cardNumber: "",
+    expiredDate: "",
+    ownerName: "",
+    cvc: "",
+    password: ["", ""],
+    cardCompany: CARD_COMPANY_NOT_SELECTED_STRING,
+    name: "",
+  };
+};
 
 export const getReplacedCardNumber = (cardNumber: string) => {
+  const test = cardNumber;
   return cardNumber.length > SEPERATED_CARD_NUMBER_LENGTH.SECOND
-    ? cardNumber.substring(0, 12) +
-        cardNumber
+    ? test.substring(0, 12) +
+        test
           .substring(12, cardNumber.length)
-          .replaceAll(REGEX.number, "•")
+          .replaceAll(REGEX.globalNumber, "•")
     : cardNumber;
 };
 
@@ -20,6 +35,10 @@ export const getSeperatedCardNumber = (cardNumber: string) => {
     cardNumber.length === SEPERATED_CARD_NUMBER_LENGTH.THIRD
     ? cardNumber + SEPERATOR_STRING.cardNumber
     : cardNumber;
+};
+
+export const getCardNumberArray = (cardNumber: string) => {
+  return cardNumber.replaceAll(SEPERATOR_STRING.cardNumber, " ").split(" ");
 };
 
 export const getSubCardNumber = (cardNumber: string) => {

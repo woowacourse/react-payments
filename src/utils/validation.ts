@@ -13,6 +13,8 @@ export const validateExpiredDate = (value: string) => {
   const yearNumber = Number("20" + year);
 
   if (!month) return "";
+  if (!REGEX.number.test(value.replaceAll(" / ", "")))
+    return "숫자만 입력해 주세요.";
   if (monthNumber < 1 || monthNumber > 12)
     return "유효한 달(월)을 입력해 주세요.";
   if (!year) return "";

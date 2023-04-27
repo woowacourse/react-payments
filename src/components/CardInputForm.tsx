@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { CardInput, Button } from "./index";
 import { CardType } from "../types";
 import { QuestionMark } from "../assets";
+import { useCard } from "../hooks";
 import {
   CARD_COMPANY_NOT_SELECTED_STRING,
   CARD_INPUT_LENGTH,
@@ -19,7 +20,6 @@ import {
   validateNumber,
   validateOwnerName,
 } from "../utils";
-import { useCard } from "../hooks";
 
 interface CardInputFormType {
   card: CardType;
@@ -37,22 +37,20 @@ const CardInputForm = ({ card, setCard, onSubmit }: CardInputFormType) => {
   const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
-    if (
-      newCard.cardNumber.length === CARD_INPUT_LENGTH.cardNumber &&
-      newCard.expiredDate.length === CARD_INPUT_LENGTH.expiredDate &&
-      newCard.password.length === CARD_INPUT_LENGTH.password1 &&
-      formRef.current?.offsetHeight === VALID_CARD_INPUT_FORM_LENGTH
-    ) {
-      setIsValidForm(true);
-    }
+    newCard.cardNumber.length === CARD_INPUT_LENGTH.cardNumber &&
+    newCard.expiredDate.length === CARD_INPUT_LENGTH.expiredDate &&
+    newCard.password.join("").length === CARD_INPUT_LENGTH.password1 * 2 &&
+    newCard.cardCompany !== CARD_COMPANY_NOT_SELECTED_STRING &&
+    formRef.current?.offsetHeight === VALID_CARD_INPUT_FORM_LENGTH
+      ? setIsValidForm(true)
+      : setIsValidForm(false);
   }, [newCard]);
 
   const handleInputChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
     switch (e.target.id) {
       case "cardNumber":
-        e.target.value = getSeperatedCardNumber(
-          getReplacedCardNumber(e.target.value)
-        );
+        e.target.value = getSeperatedCardNumber(e.target.value);
+
         break;
       case "expiredDate":
         e.target.value = getSeperatedExpiredDate(e.target.value);
@@ -67,6 +65,10 @@ const CardInputForm = ({ card, setCard, onSubmit }: CardInputFormType) => {
   const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (!(e.target instanceof HTMLInputElement) || e.key !== "Backspace")
       return;
+
+    const value = e.target.value;
+    e.target.value = "";
+    e.target.value = value;
 
     switch (e.target.id) {
       case "cardNumber":
@@ -89,17 +91,8 @@ const CardInputForm = ({ card, setCard, onSubmit }: CardInputFormType) => {
         e.target.nextSibling.focus();
     };
 
-  const handelFormSubmited = (e: FormEvent<HTMLFormElement>) => {
-    if (newCard.cardCompany === CARD_COMPANY_NOT_SELECTED_STRING) {
-      alert("카드사를 선택해 주세요.");
-      return;
-    }
-
-    onSubmit(e);
-  };
-
   return (
-    <CardInputFormWrapper ref={formRef} onSubmit={handelFormSubmited}>
+    <CardInputFormWrapper ref={formRef} onSubmit={onSubmit}>
       <InputSetWrapper>
         <label htmlFor="cardNumber">카드 번호</label>
         <CardInput
@@ -113,7 +106,6 @@ const CardInputForm = ({ card, setCard, onSubmit }: CardInputFormType) => {
           onKeyDown={handleInputKeyDown}
         />
         {<span>{validateNumber(newCard.cardNumber)}</span>}
-        {/* {<span>{validateLength(newCard.cardNumber)}</span>} */}
       </InputSetWrapper>
 
       <InputSetWrapper>
