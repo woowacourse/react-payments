@@ -16,7 +16,12 @@ function RegisteredCardStories() {
   };
 
   return (
-    <RegisteredCard createCard={() => {}} cardTitle={cardTitle} {...cardInfo} />
+    <RegisteredCard
+      bankKind="default"
+      createCard={() => {}}
+      cardTitle={cardTitle}
+      {...cardInfo}
+    />
   );
 }
 

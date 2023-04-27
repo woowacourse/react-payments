@@ -13,7 +13,7 @@ import { useFocusInput } from '../hooks/useFocusInput';
 import {
   createUniqueId,
   isNumber,
-  isOnlyKoreanAndEnglish,
+  isOnlyEnglish,
   isPrevDate,
   monthValidate,
   yearValidate,
@@ -128,7 +128,7 @@ export default function AddCardPage({
         data: [ownerInput],
         maxLength: 30,
         isRequired: false,
-        validation: isOnlyKoreanAndEnglish,
+        validation: isOnlyEnglish,
         setError: owner.setError,
         errorMessage: '사용자 이름은 한글 혹은 영어로만 입력 가능합니다.',
       },
@@ -185,7 +185,7 @@ export default function AddCardPage({
         month: month.value,
         year: year.value,
       },
-      owner: owner.value,
+      owner: owner.value.toUpperCase(),
     };
 
     const updatedCardList = [...cardList, newCard];

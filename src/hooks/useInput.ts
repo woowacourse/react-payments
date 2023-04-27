@@ -7,6 +7,7 @@ export interface UseInputProps {
   error: string | undefined;
   setError: Dispatch<React.SetStateAction<string | undefined>>;
   isWrong: boolean;
+  onBlur: () => void;
 }
 
 interface UseInputOptionProps {
@@ -14,11 +15,18 @@ interface UseInputOptionProps {
   validate?: (text: string) => boolean;
   errorMessage?: string;
   maxLength?: number;
+  convertValue?: (text: string) => string;
 }
 
 export const useInput = (
   initialValue: string,
-  { name, validate = () => true, errorMessage, maxLength }: UseInputOptionProps
+  {
+    name,
+    validate = () => true,
+    errorMessage,
+    maxLength,
+    convertValue = (value: string) => value,
+  }: UseInputOptionProps
 ): UseInputProps => {
   const [value, setValue] = useState(initialValue);
   const [error, setError] = useState<string | undefined>('');
@@ -31,7 +39,8 @@ export const useInput = (
     }
 
     if (validate(value)) {
-      setValue(value);
+      const convertResult = convertValue(value);
+      setValue(convertResult);
       setError('');
       return;
     }
@@ -39,5 +48,17 @@ export const useInput = (
     setError(errorMessage);
   };
 
-  return { value, onChange, name, error, setError, isWrong: error !== '' };
+  const onBlur = () => {
+    setError('');
+  };
+
+  return {
+    value,
+    onChange,
+    name,
+    error,
+    setError,
+    isWrong: error !== '',
+    onBlur,
+  };
 };

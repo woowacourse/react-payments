@@ -12,7 +12,7 @@ export interface CardProps {
   month: string;
   year: string;
   title?: string;
-  bankKind?: BankType;
+  bankKind: BankType;
 }
 
 const ENCRYPT_INDEX = 2;

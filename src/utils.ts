@@ -2,6 +2,12 @@ export const isNumber = (value: string) => {
   return !Number.isNaN(Number(value));
 };
 
+export const isOnlyEnglish = (value: string) => {
+  const englishPattern = /[^a-zA-Z\s]/;
+
+  return !englishPattern.test(value);
+};
+
 export const isOnlyKoreanAndEnglish = (value: string) => {
   const koreanAndEnglishPattern = /[^ㄱ-ㅎ|ㅏ-ㅣ|가-힣a-zA-Z\s]/;
 
@@ -33,4 +39,12 @@ export const monthValidate = (month: string) => {
 export const yearValidate = (year: string) => {
   const currentYear = new Date().getFullYear() % 100;
   return Number(year) >= currentYear && Number(year) <= currentYear + 5;
+};
+
+export const lengthValidate = (maxLength: number) => (value: string) => {
+  return value.length <= maxLength;
+};
+
+export const convertUpperCase = (text: string) => {
+  return text.toUpperCase();
 };

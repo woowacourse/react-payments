@@ -1,4 +1,10 @@
 import { PageInfo } from '../types';
+import {
+  convertUpperCase,
+  isNumber,
+  isOnlyEnglish,
+  lengthValidate,
+} from '../utils';
 import { UseInputProps, useInput } from './useInput';
 
 type UseFormInputsProps = {
@@ -14,6 +20,8 @@ export const useFormInputs = () => {
       firstCardNumber: useInput('', {
         name: 'firstCardInput',
         maxLength: 4,
+        validate: isNumber,
+        errorMessage: '오직 숫자만 입력 가능합니다.',
       }),
       secondCardNumber: useInput('', {
         name: 'secondCardInput',
@@ -40,6 +48,9 @@ export const useFormInputs = () => {
       owner: useInput('', {
         name: 'ownerInput',
         maxLength: 30,
+        validate: isOnlyEnglish,
+        errorMessage: '영문만 입력할 수 있어요.',
+        convertValue: convertUpperCase,
       }),
       cvc: useInput('', { name: 'cvcInput', maxLength: 3 }),
       firstPassword: useInput('', {
@@ -53,6 +64,8 @@ export const useFormInputs = () => {
       cardTitle: useInput('', {
         name: 'cardTitleInput',
         maxLength: 20,
+        validate: lengthValidate(20),
+        errorMessage: '20 글자 이하로만 입력 가능해요.',
       }),
     },
   };

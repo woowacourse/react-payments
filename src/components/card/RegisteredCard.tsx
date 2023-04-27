@@ -6,7 +6,7 @@ import Button from '../common/Button';
 import InputField from '../common/InputField';
 import { UseInputProps } from '../../hooks/useInput';
 import { InputValidate, formValidate } from '../../hooks/formValidate';
-import { isOnlyKoreanAndEnglish } from '../../utils';
+import { lengthValidate } from '../../utils';
 import Error from '../common/Error';
 
 const Wrapper = styled.div`
@@ -63,9 +63,9 @@ export default function RegisteredCard({
         data: [cardTitleInput],
         maxLength: 20,
         isRequired: false,
-        validation: isOnlyKoreanAndEnglish,
+        validation: lengthValidate(20),
         setError: cardTitle.setError,
-        errorMessage: '카드 별칭은 한글 혹은 영어로만 입력 가능합니다.',
+        errorMessage: '20 글자 이하로만 입력 가능합니다.',
       },
     };
     const cardTitleKey = ['cardTitle'] as const;

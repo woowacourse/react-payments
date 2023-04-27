@@ -32,15 +32,6 @@ export default function Homepage({
     }
   };
 
-  const onCloseApp = () => {
-    window.history.pushState(null, '', window.location.href);
-    const result = window.confirm('정말 종료하시겠습니까?');
-    if (result) {
-      console.log('H');
-      // window.history.back();
-    }
-  };
-
   return (
     <Page>
       <Title>보유카드 {cardList.length > 0 && `(${cardList.length}개)`}</Title>
