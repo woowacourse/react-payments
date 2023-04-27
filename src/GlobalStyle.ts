@@ -49,4 +49,27 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 12px;
     font-weight: 500;
   }
+
+  #got-lost {
+    text-align: center;
+
+    & h2 {
+      font-size: 24px;
+      font-weight: 700;
+      margin: 100px 0 46px;
+    }
+
+    & a {
+      display: inherit;
+      width: calc(100% - 64px);
+      padding: 14px 50px;
+      margin: 0 32px;
+      line-height: 1.6;
+      color: var(--white-color);
+      border-radius: 20px;
+      word-break: keep-all;
+      text-decoration: none;
+      background: #c9b7e5;
+    }
+  }
 `;
