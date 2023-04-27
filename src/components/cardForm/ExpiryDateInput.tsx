@@ -3,6 +3,7 @@ import { Input } from "../common/Input";
 import { InputLabel } from "../common/InputLabel";
 import { useState } from "react";
 import { isNumeric } from "../../utils/validate";
+import { ERROR_MESSAGE, INPUT_FULL_LENGTH } from "../../constant/cardInput";
 
 interface ExpiryDateInputProps {
   setExpiryDate: (value: string) => void;
@@ -32,7 +33,7 @@ export const ExpiryDateInput = ({
       return;
     }
 
-    if (value.length > 4) {
+    if (value.length > INPUT_FULL_LENGTH.EXPIRY_DATE) {
       e.target.value = e.target.value.slice(0, -1);
       return;
     }
@@ -60,7 +61,7 @@ export const ExpiryDateInput = ({
         handleFocus={eraseErrorMessage}
         error={{
           isValid: isValid,
-          errorMessage: "유효한 만료일이 아닙니다. ",
+          errorMessage: ERROR_MESSAGE.EXPIRY_DATE,
         }}
       />
     </InputContainer>

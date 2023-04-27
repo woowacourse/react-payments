@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { CompanySelectModal } from "../components/companySelectModal";
 import { getRandomId } from "../utils/randomId";
 
-const initialCard = {
+const defaultCard = {
   id: "",
   nickname: "",
   numbers: [],
@@ -22,7 +22,7 @@ const initialCard = {
 
 export const AddCard = () => {
   const [newCard, setNewCard] = useState<CardType>({
-    ...initialCard,
+    ...defaultCard,
     id: getRandomId(),
   });
   const [isModalOpen, setIsModalOpen] = useState(true);

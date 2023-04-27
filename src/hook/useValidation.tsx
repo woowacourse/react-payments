@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { isInputFilled, isMonthValid, isYearValid } from "../utils/validate";
+import { INPUT_FULL_LENGTH } from "../constant/cardInput";
 
 export const useValidation = () => {
   const [inputValidity, setInputValidity] = useState({
@@ -10,7 +11,10 @@ export const useValidation = () => {
   });
 
   const validateNumbersInput = (numbers: string[]) => {
-    const isNumbersValid = isInputFilled(numbers.join(""), 16);
+    const isNumbersValid = isInputFilled(
+      numbers.join(""),
+      INPUT_FULL_LENGTH.CARD_NUMBERS
+    );
     setInputValidity((prev) => ({ ...prev, numbers: isNumbersValid }));
 
     return isNumbersValid;
@@ -20,7 +24,7 @@ export const useValidation = () => {
     const [month, year] = expiryDate.split(" / ");
 
     const isExpiryDateValid =
-      isInputFilled(month + year, 4) &&
+      isInputFilled(month + year, INPUT_FULL_LENGTH.EXPIRY_DATE) &&
       isMonthValid(Number(month)) &&
       isYearValid(Number(year));
 
@@ -30,14 +34,17 @@ export const useValidation = () => {
   };
 
   const validateCVCInput = (CVC: number) => {
-    const isCVCValid = isInputFilled(String(CVC), 3);
+    const isCVCValid = isInputFilled(String(CVC), INPUT_FULL_LENGTH.CVC);
     setInputValidity((prev) => ({ ...prev, CVC: isCVCValid }));
 
     return isCVCValid;
   };
 
   const validatePasswordInput = (password: string[]) => {
-    const isPasswordValid = isInputFilled(password.join(""), 2);
+    const isPasswordValid = isInputFilled(
+      password.join(""),
+      INPUT_FULL_LENGTH.PASSWORDS
+    );
     setInputValidity((prev) => ({ ...prev, password: isPasswordValid }));
 
     return isPasswordValid;

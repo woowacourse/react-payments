@@ -3,8 +3,8 @@ import { InputContainer } from "../common/InputContainer";
 import { Input } from "../common/Input";
 import { InputLabel } from "../common/InputLabel";
 import styled from "styled-components";
-import { CARD_INPUT_NUMBER } from "../../constant/cardInput";
 import { isNumeric } from "../../utils/validate";
+import { ERROR_MESSAGE, INPUT_FULL_LENGTH } from "../../constant/cardInput";
 
 const CVCInfo = {
   label: "cvc",
@@ -30,7 +30,7 @@ export const CVCInput = ({ validateCVCInput, setCVC }: CVCInputProps) => {
       return;
     }
 
-    if (value.length > CARD_INPUT_NUMBER.CVC) {
+    if (value.length > INPUT_FULL_LENGTH.CVC) {
       e.target.value = value.slice(0, -1);
       return;
     }
@@ -58,7 +58,7 @@ export const CVCInput = ({ validateCVCInput, setCVC }: CVCInputProps) => {
           handleFocus={eraseErrorMessage}
           error={{
             isValid: isValid,
-            errorMessage: "3자리 숫자를 입력하세요.",
+            errorMessage: ERROR_MESSAGE.CVC,
           }}
         />
         <HelpIcon

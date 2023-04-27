@@ -2,7 +2,7 @@ import { InputContainer } from "../common/InputContainer";
 import { Input } from "../common/Input";
 import { InputLabel } from "../common/InputLabel";
 import styled from "styled-components";
-import { CARD_INPUT_NUMBER } from "../../constant/cardInput";
+import { INPUT_FULL_LENGTH } from "../../constant/cardInput";
 import { useState } from "react";
 
 interface OwnerInputProps {
@@ -23,15 +23,15 @@ export const OwnerInput = ({ setOwner }: OwnerInputProps) => {
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
 
-    if (value.length > CARD_INPUT_NUMBER.OWNER) {
+    if (value.length > INPUT_FULL_LENGTH.OWNER) {
       e.target.value = value.slice(0, -1);
       return;
     }
 
     e.target.value = value.toUpperCase();
 
-    setOwner(e.target.value);
     setOwnerLength(value.length);
+    setOwner(e.target.value);
   };
 
   return (

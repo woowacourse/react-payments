@@ -3,9 +3,9 @@ import { InputContainer } from "../common/InputContainer";
 import { InputLabel } from "../common/InputLabel";
 import { Input } from "../common/Input";
 import styled from "styled-components";
-import { CARD_INPUT_NUMBER } from "../../constant/cardInput";
 import { isNumeric } from "../../utils/validate";
 import { useFocusChain } from "../../hook/useFocusChain";
+import { ERROR_MESSAGE, INPUT_FULL_LENGTH } from "../../constant/cardInput";
 
 interface CardNumberInputProps {
   setCardNumbers: (index: number, numbers: string) => void;
@@ -31,7 +31,10 @@ export const CardNumberInput = ({
     useRef<HTMLInputElement>(null),
   ];
 
-  const { moveFocusToNext } = useFocusChain(allRefs, 4);
+  const { moveFocusToNext } = useFocusChain(
+    allRefs,
+    INPUT_FULL_LENGTH.CARD_NUMBER
+  );
 
   const handleInput =
     (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,7 +46,7 @@ export const CardNumberInput = ({
         return;
       }
 
-      if (value.length > CARD_INPUT_NUMBER.CARD_NUMBER) {
+      if (value.length > INPUT_FULL_LENGTH.CARD_NUMBER) {
         e.target.value = value.slice(0, -1);
         return;
       }
@@ -78,7 +81,7 @@ export const CardNumberInput = ({
         <Input
           error={{
             isValid: isValid,
-            errorMessage: "16자리 숫자를 입력하세요.",
+            errorMessage: ERROR_MESSAGE.CARD_NUMBERS,
           }}
           {...cardNumberInputInfo}
           type="text"

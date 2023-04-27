@@ -5,6 +5,7 @@ import { InputLabel } from "../common/InputLabel";
 import styled from "styled-components";
 import { isNumeric } from "../../utils/validate";
 import { useFocusChain } from "../../hook/useFocusChain";
+import { ERROR_MESSAGE, INPUT_FULL_LENGTH } from "../../constant/cardInput";
 
 const passwordInfo = {
   $width: "43px",
@@ -35,7 +36,7 @@ export const PasswordInput = ({
     (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;
 
-      if (value.length > 1 || !isNumeric(value)) {
+      if (value.length > INPUT_FULL_LENGTH.PASSWORD || !isNumeric(value)) {
         e.target.value = value.slice(0, -1);
         return;
       }
@@ -71,7 +72,7 @@ export const PasswordInput = ({
           label="password1"
           error={{
             isValid: isValid,
-            errorMessage: "비밀번호를 입력하세요.",
+            errorMessage: ERROR_MESSAGE.PASSWORDS,
           }}
           ref={allRefs[0]}
         />
