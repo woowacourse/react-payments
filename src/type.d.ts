@@ -42,6 +42,7 @@ export type InputHook = {
 export type InputStatus = 'INIT' | 'VALID' | 'INVALID';
 
 export type AddCardFormProps = {
+  cardType: string;
   cardFirstNumber: InputHook;
   cardSecondNumber: InputHook;
   cardThirdNumber: InputHook;

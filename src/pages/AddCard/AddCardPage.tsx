@@ -32,6 +32,7 @@ const AddCardPage = () => {
   const cardOwner = useInput(isValidOwnerName);
   const [isOpen, setIsOpen] = useState(true);
 
+  // TODO: BottomSheet CustomHook 제작
   const onBackButtonClick = useCallback(() => {
     navigate('/');
   }, [navigate]);
@@ -58,6 +59,7 @@ const AddCardPage = () => {
             onClick={() => setIsOpen(!isOpen)}
           />
           <AddCardForm
+            cardType={cardType}
             cardFirstNumber={cardFirstNumber}
             cardSecondNumber={cardSecondNumber}
             cardThirdNumber={cardThirdNumber}

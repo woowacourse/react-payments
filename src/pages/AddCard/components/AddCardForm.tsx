@@ -11,6 +11,7 @@ import './AddCardForm.css';
 import CardNumberInput from './CardNumberInput';
 
 const AddCardForm = ({
+  cardType,
   cardFirstNumber,
   cardSecondNumber,
   cardThirdNumber,
@@ -28,7 +29,7 @@ const AddCardForm = ({
     e.preventDefault();
     try {
       sumbitCard(
-        '현대',
+        cardType,
         {
           first: cardFirstNumber.value,
           second: cardSecondNumber.value,
