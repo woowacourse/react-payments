@@ -110,12 +110,12 @@ const Authorization = styled.div`
 const SignArea = styled.div`
   flex: 1;
   padding: 2px 8px;
+  padding-left: 20px;
 
   background: #f5f5f5;
   color: grey;
   font-size: 10px;
   font-weight: normal;
-  text-align: right;
 `;
 
 const SignAreaDescription = styled.div`
@@ -192,7 +192,7 @@ export const CreditCardView = (props: CreditCardViewProps) => {
       <CreditCardBackFace $color={color.adjustLightness(10).toString()}>
         <Magnet />
         <Authorization>
-          <SignArea>{cvc?.replaceAll(/./g, '●') ?? ''}</SignArea>
+          <SignArea>●●●● {cvc?.replaceAll(/./g, '●') ?? ''}</SignArea>
           <SignAreaDescription>
             {['서명', 'AUTHORIZED', 'SIGNATURE'].map((line) => (
               // eslint-disable-next-line react/jsx-key
