@@ -1,9 +1,10 @@
 import CardLogo from '../@common/CardLogo';
 import * as Styled from './CardCompanyModal.styles';
 import { IMAGE_PATH } from '../../types/images';
+import { Dispatch, SetStateAction } from 'react';
 
 interface cardCompanyModalProps {
-  setIsOpen: any;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 const getCompanyInfos = () => {
