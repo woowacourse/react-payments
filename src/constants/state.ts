@@ -1,3 +1,5 @@
+import { COLOR } from './cardInfo';
+
 export const DEFAULT_STATE = {
   CARD_NUMBERS: {
     firstCardNumber: '',
@@ -16,8 +18,8 @@ export const DEFAULT_STATE = {
     secondPassword: '',
   },
   CARD_COMPANY: {
-    name: null,
-    theme: null,
+    name: '',
+    theme: COLOR.DEFAULT,
   },
   CARD_ALIAS: null,
 };

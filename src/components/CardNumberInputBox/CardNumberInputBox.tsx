@@ -12,7 +12,7 @@ import * as styled from './CardNumberInputBox.styled';
 import Input from '../Input/Input';
 
 const CardNumberInputBox = () => {
-  const { cardNumbers, setCardNumbers } = useContext(CardInfoContext);
+  const { cardNumbers, setCardNumbers, cardCompany } = useContext(CardInfoContext);
   const { validate, errorMessageState } = useInputValidator(
     isNumeric,
     ERROR_MESSAGE.SHOULD_NUMBER,
@@ -32,6 +32,7 @@ const CardNumberInputBox = () => {
             const type =
               key === 'firstCardNumber' || key === 'secondCardNumber' ? 'text' : 'password';
             const isFirstInput = key === 'firstCardNumber' ? true : false;
+            const isCloseModal = cardCompany.name !== '';
 
             return (
               <Input
@@ -43,7 +44,7 @@ const CardNumberInputBox = () => {
                 type={type}
                 maxLength={4}
                 placeholder="0000"
-                isFocus={isFirstInput}
+                isFocus={isFirstInput && isCloseModal}
               />
             );
           })}

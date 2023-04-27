@@ -18,6 +18,7 @@ import {
   CardAlias,
   SetCardAlias,
 } from '../types/state';
+import { DEFAULT_STATE } from '../constants/state';
 
 const CardInfoContext = createContext<{
   cardInfoList: CardInfo[];
@@ -40,39 +41,25 @@ const CardInfoContext = createContext<{
   cardInfoList: [],
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   setCardInfoList: () => {},
-  cardNumbers: {
-    firstCardNumber: '',
-    secondCardNumber: '',
-    thirdCardNumber: '',
-    fourthCardNumber: '',
-  },
+  cardNumbers: DEFAULT_STATE.CARD_NUMBERS,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   setCardNumbers: () => {},
-  expirationDate: {
-    month: null,
-    year: null,
-  },
+  expirationDate: DEFAULT_STATE.EXPIRATION_DATE,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   setExpirationDate: () => {},
-  ownerName: null,
+  ownerName: DEFAULT_STATE.OWNER_NAME,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   setOwnerName: () => {},
-  securityCode: '',
+  securityCode: DEFAULT_STATE.SECURITY_CODE,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   setSecurityCode: () => {},
-  password: {
-    firstPassword: '',
-    secondPassword: '',
-  },
+  password: DEFAULT_STATE.PASSWORD,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   setPassword: () => {},
-  cardCompany: {
-    name: null,
-    theme: null,
-  },
+  cardCompany: DEFAULT_STATE.CARD_COMPANY,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   setCardCompany: () => {},
-  cardAlias: null,
+  cardAlias: DEFAULT_STATE.CARD_ALIAS,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   setCardAlias: () => {},
 });

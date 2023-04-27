@@ -22,7 +22,7 @@ const CardPreview = () => {
           cardCompany,
           cardAlias,
         }}
-        theme={cardCompany.theme ?? COLOR.GREY200}
+        theme={cardCompany.theme}
       />
     </styled.CardPreview>
   );

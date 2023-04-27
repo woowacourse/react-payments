@@ -10,7 +10,7 @@ import CardInfoContext from '../../../contexts/CardInfoContext';
 
 const CardRegisterPage = () => {
   const { cardCompany } = useContext(CardInfoContext);
-  const isOpenBottomSheet = !cardCompany.name && !cardCompany.theme;
+  const isOpenBottomSheet = !cardCompany.name;
 
   return (
     <styled.CardRegisterPage>
