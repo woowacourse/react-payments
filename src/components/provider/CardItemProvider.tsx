@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { useState, createContext, useContext } from "react";
 import { INPUT_MAX_LENGTH } from "../../constants";
 import { isInputsSatisfied } from "../../utils";
 import useCardNumber from "../../hooks/cardItemInputs/useCardNumber";
@@ -6,6 +6,9 @@ import useExpirationDate from "../../hooks/cardItemInputs/useExpirationDate";
 import useName from "../../hooks/cardItemInputs/useName";
 import useSecurityCode from "../../hooks/cardItemInputs/useSecurityCode";
 import usePassword from "../../hooks/cardItemInputs/usePassword";
+import useInput from "../../hooks/useInput";
+import { Company } from "../../types/Card";
+import useCompany from "../../hooks/cardItemInputs/useCompany";
 
 interface CardItemProviderProps {
   children: React.ReactNode;
@@ -18,6 +21,8 @@ interface CardItemValue {
   name: string;
   securityCode: string;
   password: string[];
+  company: Company;
+  nickname?: string;
 }
 
 interface ErrorMessageValue {
@@ -27,6 +32,7 @@ interface ErrorMessageValue {
   nameErrorMessage: string;
   securityCodeErrorMessage: string;
   passwordErrorMessage: string;
+  companyErrorMessage: string;
 }
 
 interface CardItemAction {
@@ -53,6 +59,9 @@ const CardItemProvider = ({ children }: CardItemProviderProps) => {
   const { securityCode, securityCodeErrorMessage, onChangeSecurityCode } = useSecurityCode();
   const { password, passwordErrorMessage, onChangePassword, registPasswordRef } = usePassword();
 
+  const { company, companyErrorMessage, setCompany } = useCompany();
+  const { inputValue: nickName, onChange: onChangeNickName } = useInput();
+
   const isAllInputSatisfied = () => {
     return (
       isInputsSatisfied(cardNumber, INPUT_MAX_LENGTH.CARD_NUMBER) &&
@@ -75,6 +84,8 @@ const CardItemProvider = ({ children }: CardItemProviderProps) => {
     name,
     securityCode,
     password,
+    company,
+    nickName,
   };
 
   const cardItemAction = {
@@ -83,6 +94,8 @@ const CardItemProvider = ({ children }: CardItemProviderProps) => {
     onChangeName,
     onChangeSecurityCode,
     onChangePassword,
+    onChangeNickName,
+    setCompany,
 
     registCardNumberRef,
     registExpirationDateRef,
@@ -96,6 +109,7 @@ const CardItemProvider = ({ children }: CardItemProviderProps) => {
     nameErrorMessage,
     securityCodeErrorMessage,
     passwordErrorMessage,
+    companyErrorMessage,
   };
 
   return (
