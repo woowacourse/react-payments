@@ -5,15 +5,15 @@ import CardDetailHeader from "./CardDetailHeader/CardDetailHeader";
 import CardDetailView from "../CardDetailView/CardDetailView";
 import CardDetailForm from "./CardDetailForm/CardDetailForm";
 
-import St from "./CardDetailPageStyled";
+import St from "./AddCardPageStyled";
 import { CreditCard } from "../../types/card";
 import { useCardDispatch, useCardState } from "../../hooks/useCard";
 
-type CardDetailPageProps = {
+type AddCardPageProps = {
   addCreditCard: (card: CreditCard) => void;
 };
 
-function CardDetailPage({ addCreditCard }: CardDetailPageProps) {
+function AddCardPage({ addCreditCard }: AddCardPageProps) {
   const navigate = useNavigate();
 
   const creditCard = useCardState();
@@ -36,4 +36,4 @@ function CardDetailPage({ addCreditCard }: CardDetailPageProps) {
   );
 }
 
-export default CardDetailPage;
+export default AddCardPage;

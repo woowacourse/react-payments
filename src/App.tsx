@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import CardDetailPage from "./component/CardDetailPage/CardDetailPage";
+import AddCardPage from "./component/AddCardPage/AddCardPage";
 import CardListPage from "./component/CardListPage/CardListPage";
 import { CreditCard } from "./types/card";
 import { CardProvier } from "./contexts/CardContext";
@@ -20,7 +20,7 @@ function App() {
       },
       {
         path: "addCardForm",
-        element: <CardDetailPage addCreditCard={addCreditCard} />,
+        element: <AddCardPage addCreditCard={addCreditCard} />,
       },
     ],
     { basename: process.env.PUBLIC_URL }
