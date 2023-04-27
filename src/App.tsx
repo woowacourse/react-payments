@@ -1,27 +1,38 @@
+import { useContext } from 'react';
 import { HashRouter, Routes, Route } from 'react-router-dom';
+import { CardInfoProvider } from './CardInfoProvider';
+import type { CardInfo } from './types';
+import { ModalProvider } from './ModalProvider';
+import { CardInfoContext } from './CardInfoProvider';
+import styles from './App.module.css';
+import CardNameDecision from './pages/CardNameDecision';
 import NotFound from './pages/NotFound';
 import Home from './pages/Home';
 import CardRegistration from './pages/CardRegistration';
-import styles from './App.module.css';
-import { useState } from 'react';
-import type { CardInfo } from './types';
+import useCardLocalStorage from './hooks/useCardLocalStorage';
+import ModalBottomSheet from './components/common/ModalBottomSheet/ModalBottomSheet';
 
 const App = () => {
-  const [cardInfo, setCardInfo] = useState<CardInfo[]>([]);
-
-  const registerNewCard = ({ cardNumber, cardExpirationDate, cardOwnerName }: CardInfo) => {
-    setCardInfo(cardInfo => [...cardInfo, { cardNumber, cardExpirationDate, cardOwnerName }]);
-  };
+  const { cards, saveCardToLocalStorage } = useCardLocalStorage();
 
   return (
     <div className={styles.container}>
-      <HashRouter>
-        <Routes>
-          <Route path="/" element={<Home cardInfo={cardInfo} />}></Route>
-          <Route path="/card-registration" element={<CardRegistration registerNewCard={registerNewCard} />}></Route>
-          <Route path="*" element={<NotFound />}></Route>
-        </Routes>
-      </HashRouter>
+      <CardInfoProvider>
+        <ModalProvider>
+          <HashRouter>
+            <Routes>
+              <Route path="/" element={<Home cardInfo={cards} />}></Route>
+              <Route path="/card-registration" element={<CardRegistration />}></Route>
+              <Route
+                path="/card-name-decision"
+                element={<CardNameDecision saveCardToLocalStorage={saveCardToLocalStorage} />}
+              ></Route>
+              <Route path="*" element={<NotFound />}></Route>
+            </Routes>
+          </HashRouter>
+          <ModalBottomSheet />
+        </ModalProvider>
+      </CardInfoProvider>
     </div>
   );
 };
