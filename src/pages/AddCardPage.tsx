@@ -20,7 +20,7 @@ import './AddCardPage.css';
 
 const AddCardPage = () => {
   const navigate = useNavigate();
-  const [cardType, setCardType] = useState('');
+  const [cardType, setCardType] = useState('BC카드');
   const [modalOpen, setModalOpen] = useState(true);
 
   const [cardNumber, onChangeCardNumber] = usePasswordInput<CardNumber>({
