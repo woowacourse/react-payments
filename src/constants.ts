@@ -13,7 +13,7 @@ export const CARD_COMPANY_COLOR_MAP: Record<string, { background: string; color:
   국민카드: { background: 'rgb(85, 79, 71)', color: 'rgb(247, 206, 71)' },
 };
 
-export const CARD_COMPANY_MODAL_MATRIX = [
+export const CARD_COMPANY_OPTION_MATRIX = [
   [
     {
       iconSrc: './icons/BC카드.svg',
