@@ -1,7 +1,9 @@
+import { useContext } from 'react';
 import styled from 'styled-components';
 import AddCardButton from '../components/AddCardButton/AddCardButton';
 import Card from '../components/Card/Card';
 import Layout from '../components/Layout/Layout';
+import { CardContext } from '../context/CardProvider';
 import { CardType } from '../types/Card';
 
 const Wrapper = styled.div`
@@ -18,7 +20,8 @@ const EmptyCardText = styled.p`
   margin-bottom: 8px;
 `;
 
-const Home = ({ cards }: { cards: CardType[] }) => {
+const Home = () => {
+  const { cards } = useContext(CardContext);
   return (
     <Layout>
       <Wrapper>

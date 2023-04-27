@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import CardNumbers from '../components/CardNumbers/CardNumbers';
@@ -8,6 +9,7 @@ import CardPassword from '../components/CardPassword/CardPassword';
 import Card from '../components/Card/Card';
 import Layout from '../components/Layout/Layout';
 import BottomSheet from '../components/BottomSheet/BottomSheet';
+import { CardContext } from '../context/CardProvider';
 import {
   useAddCard,
   useCardNumbers,
@@ -35,16 +37,7 @@ const ButtonWrapper = styled.div`
   justify-content: flex-end;
 `;
 
-interface SetCardsProps {
-  handleSetCards: (
-    cardNumbers: Record<number, string>,
-    expiredDate: Record<number, string>,
-    cardOwnerName: string,
-    cardCompany: string
-  ) => void;
-}
-
-const AddCard = ({ handleSetCards }: SetCardsProps) => {
+const AddCard = () => {
   const { cardNumbers, checkCardNumbers } = useCardNumbers();
   const { cardOwnerName, checkCardOwnerName } = useCardOwnerName();
   const { password, checkPassword } = useCardPassword();
@@ -63,20 +56,17 @@ const AddCard = ({ handleSetCards }: SetCardsProps) => {
 
   const navigate = useNavigate();
 
+  const { handleSetCards } = useContext(CardContext);
+
+  const handleSubmitCard = () => {
+    handleSetCards(cardNumbers, expiredDate, cardOwnerName, cardCompany);
+    navigate('/register-card');
+  };
+
   return (
     <>
       <Layout>
-        <form
-          onSubmit={() => {
-            handleSetCards(
-              cardNumbers,
-              expiredDate,
-              cardOwnerName,
-              cardCompany
-            );
-            navigate('/');
-          }}
-        >
+        <form onSubmit={handleSubmitCard}>
           <Wrapper>
             <Card
               cardNumbers={cardNumbers}

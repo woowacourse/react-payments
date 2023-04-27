@@ -4,22 +4,22 @@ import { ThemeProvider } from 'styled-components';
 import theme from './styles/theme';
 import Home from './pages/Home';
 import AddCard from './pages/AddCard';
-import { useCards } from './hooks';
+import RegisterCard from './pages/RegisterCard';
+import CardProvider from './context/CardProvider';
 
 function App() {
-  const { cards, handleSetCards } = useCards();
   return (
     <ThemeProvider theme={theme}>
-      <Router basename={process.env.PUBLIC_URL}>
-        <GlobalStyle />
-        <Routes>
-          <Route path="/" element={<Home cards={cards} />}></Route>
-          <Route
-            path="/add-card"
-            element={<AddCard handleSetCards={handleSetCards} />}
-          ></Route>
-        </Routes>
-      </Router>
+      <CardProvider>
+        <Router basename={process.env.PUBLIC_URL}>
+          <GlobalStyle />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/add-card" element={<AddCard />} />
+            <Route path="/register-card" element={<RegisterCard />} />
+          </Routes>
+        </Router>
+      </CardProvider>
     </ThemeProvider>
   );
 }
