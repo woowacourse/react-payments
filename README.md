@@ -10,7 +10,6 @@
 
 <img width="1313" alt="스크린샷 2023-04-29 00 48 05" src="https://user-images.githubusercontent.com/69189073/235194311-0e32c104-c983-49bb-82ba-c1344d9f1477.png">
 
-
 <br>
 
 ### 🧑‍🤝‍🧑 페어 (페어 프로그래밍으로 개발)
@@ -52,10 +51,9 @@
 
 <br>
 <br>
-
-### 🎯 기능 목록
-
 <br>
+
+# 1단계 요구사항
 
 ### 📝 필수 요구 사항
 
@@ -77,6 +75,29 @@
 
 - 각 스토리에 명확한 이름을 지정하고, 스토리 이름을 통해 컴포넌트의 사용 사례를 쉽게 이해할 수 있도록 한다.
 - 변동 가능한 값에 대해 사용자가 직접 조작해볼 수 있게 하여 컴포넌트를 더욱 쉽게 이해할 수 있도록 한다.
+
+# 2단계 요구사항
+
+🚀 Getting Started
+Component-Driven Development 에 따라 UI를 구성하고 재사용 가능한 Component를 작성합니다.
+
+✔️ 모바일 타겟의 웹 앱을 구현하며 사용하기 편리한 모바일 UI/UX에 대해 고민해봅니다.
+
+✔️ 다른 라이브러리나 프레임워크 없이 오로지 React만으로 상태를 관리하고 컴포넌트를 설계합니다.
+
+✔️ React Hooks API를 활용합니다.
+
+✔️ 재사용 가능한 Component를 직접 작성하고 사용합니다.
+
+✔️ Controlled & Uncontrolled Components에 입각하여 Form을 핸들링합니다.
+
+- 카드 등록 과정에서 발생할 수 있는 여러 스토리를 고려하여 구현한다.
+
+- 주요 컴포넌트에 대한 Storybook 상호 작용 테스트
+
+- Controlled & Uncontrolled Components에 입각하여 Form 핸들링
+
+- Context API를 활용해 전역 상태 관리 및 계층 재구성
 
 <br>
 
