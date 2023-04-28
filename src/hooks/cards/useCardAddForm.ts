@@ -54,7 +54,7 @@ const useCardAddForm = () => {
     };
 
     addCard(newCard);
-    navigate(`${PATH.REGISTER}/${newCard.id}`, { state: newCard });
+    navigate(`${PATH.REGISTER}/${newCard.id}`);
   };
 
   return {
