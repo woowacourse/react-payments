@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta } from '@storybook/react';
 import styled from 'styled-components';
 import { CreditCardVendorNames } from '../../domain/CreditCardVendor';
 import { VendorIcon } from './VendorIcon';
@@ -15,8 +15,6 @@ const meta = {
 } satisfies Meta<typeof VendorIcon>;
 
 export default meta;
-
-type Story = StoryObj<typeof meta>;
 
 export const Default = () => {
   return (

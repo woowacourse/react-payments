@@ -10,7 +10,7 @@ export const useMediaQuery = (query: string) => {
     mediaQuery.addEventListener('change', handleMediaQueryChange);
 
     return () => mediaQuery.removeEventListener('change', handleMediaQueryChange);
-  }, []);
+  }, [query]);
 
   return matches;
 };

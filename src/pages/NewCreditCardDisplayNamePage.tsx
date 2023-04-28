@@ -47,7 +47,6 @@ export const NewCreditCardDisplayNamePage = () => {
   const creditCard = getCreditCardById(Number(id));
 
   if (!creditCard) {
-    // eslint-disable-next-line no-throw-literal
     throw {
       message: `존재하지 않는 신용카드입니다. (id=${id})`,
     };

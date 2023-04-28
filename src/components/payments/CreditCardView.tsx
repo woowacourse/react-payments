@@ -227,12 +227,12 @@ export const CreditCardView = (props: CreditCardViewProps) => {
         <Authorization>
           <SignArea>●●●● {cvc?.replaceAll(/./g, '●') ?? ''}</SignArea>
           <SignAreaDescription>
-            {['서명', 'AUTHORIZED', 'SIGNATURE'].map((line) => (
-              // eslint-disable-next-line react/jsx-key
-              <div>
-                {line.split('').map((char) => (
-                  // eslint-disable-next-line react/jsx-key
-                  <span>{char}</span>
+            {['서명', 'AUTHORIZED', 'SIGNATURE'].map((line, i) => (
+              // eslint-disable-next-line react/no-array-index-key
+              <div key={i}>
+                {line.split('').map((char, j) => (
+                  // eslint-disable-next-line react/no-array-index-key
+                  <span key={j}>{char}</span>
                 ))}
               </div>
             ))}

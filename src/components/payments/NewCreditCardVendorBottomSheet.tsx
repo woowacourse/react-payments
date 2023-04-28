@@ -27,11 +27,11 @@ const VendorButton = styled.button`
   gap: 10px;
 `;
 
-type NewCreditCardVendorBottomSheet = ComponentProps<typeof BottomSheet> & {
+type NewCreditCardVendorBottomSheetProps = ComponentProps<typeof BottomSheet> & {
   onClickVendor?: (vendor: CreditCardVendorName) => void;
 };
 
-export const NewCreditCardVendorBottomSheet = (props: NewCreditCardVendorBottomSheet) => {
+export const NewCreditCardVendorBottomSheet = (props: NewCreditCardVendorBottomSheetProps) => {
   const { onClickVendor, ...bottomSheetProps } = props;
 
   return (

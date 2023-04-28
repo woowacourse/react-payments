@@ -31,11 +31,12 @@ export const useGroupedFocus = (
     });
 
     return () => unregisters.forEach((unregister) => unregister());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, refs);
 
   useEffect(() => {
     (focused ? option.onFocus : option.onBlur)?.();
-  }, [focused]);
+  }, [focused, option]);
 
   const focusNext = () => {
     const focusedRef = refs.find((ref) => ref.current === document.activeElement);

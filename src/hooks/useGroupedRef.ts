@@ -10,6 +10,10 @@ export const useGroupedRef = <
 >(
   length: Length,
 ) => {
+  // 항상 동일한 횟수만큼 호출되는 것을 TypeScript로 어느정도 보장했기 때문에
+  // 아래와 같은 사용에선 문제가 되지 않는다
+  //
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const refs = Array.from({ length }, () => useRef(null)) as RefsOf<Elements>;
 
   const getRef = <Index extends number>(index: Index) => {

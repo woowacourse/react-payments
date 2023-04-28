@@ -2,8 +2,11 @@
   "parser": "@typescript-eslint/parser",
   "extends": [
     "airbnb",
+    "react-app",
+    "react-app/jest",
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
+    "plugin:storybook/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
     "prettier"
@@ -14,11 +17,9 @@
     "es2021": true
   },
   "rules": {
-    "class-methods-use-this": "off",
     "prettier/prettier": "off",
-    "@typescript-eslint/no-non-null-assertion": "off",
+    "no-throw-literal": "off",
     "@typescript-eslint/consistent-type-imports": "error",
-    "import/no-extraneous-dependencies": "off",
     "import/prefer-default-export": "off",
     "import/no-unresolved": "off",
     "import/extensions": "off",
@@ -33,9 +34,8 @@
         ]
       }
     ],
-    "react/prefer-stateless-function": "off",
-    "react/destructuring-assignment": "off",
-    "react/no-unused-state": "off",
+    "react/display-name": "off",
+    "react/prop-types": "off",
     "react/require-default-props": "off",
     "react/jsx-props-no-spreading": "off",
     "react/function-component-definition": [
@@ -43,8 +43,17 @@
       {
         "namedComponents": "arrow-function"
       }
-    ],
-    "react/prop-types": "off",
-    "react/display-name": "off"
-  }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/*.stories.*"
+      ],
+      "rules": {
+        "import/no-anonymous-default-export": "off",
+        "react-hooks/rules-of-hooks": "off"
+      }
+    }
+  ]
 }
