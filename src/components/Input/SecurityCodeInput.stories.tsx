@@ -1,12 +1,25 @@
-import { StoryFn } from '@storybook/react';
-import { SecurityCodeInput, SecurityInputProps } from './SecurityCodeInput';
+import { Meta, StoryObj } from '@storybook/react';
+import { theme } from 'components/style/theme';
+import { ThemeProvider } from 'styled-components';
+import { SecurityCodeInput } from './SecurityCodeInput';
 
-export default {
+const meta = {
+  tags: ['autodocs'],
   title: 'SecurityCodeInput',
   component: SecurityCodeInput,
+  decorators: [
+    (Story) => (
+      <ThemeProvider theme={theme}>
+        <Story />
+      </ThemeProvider>
+    ),
+  ],
+} satisfies Meta<typeof SecurityCodeInput>;
+
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: {},
 };
-
-const Template: StoryFn<SecurityInputProps> = (args) => <SecurityCodeInput {...args} />;
-
-export const Default = Template.bind({});
-Default.args = {};

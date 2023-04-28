@@ -1,12 +1,25 @@
-import { StoryFn } from '@storybook/react';
-import { NameInput, NameInputProps } from './NameInput';
+import { Meta, StoryObj } from '@storybook/react';
+import { theme } from 'components/style/theme';
+import { ThemeProvider } from 'styled-components';
+import { NameInput } from './NameInput';
 
-export default {
+const meta = {
+  tags: ['autodocs'],
   title: 'NameInput',
   component: NameInput,
+  decorators: [
+    (Story) => (
+      <ThemeProvider theme={theme}>
+        <Story />
+      </ThemeProvider>
+    ),
+  ],
+} satisfies Meta<typeof NameInput>;
+
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: {},
 };
-
-const Template: StoryFn<NameInputProps> = (args) => <NameInput {...args} />;
-
-export const Default = Template.bind({});
-Default.args = {};

@@ -1,4 +1,4 @@
-import { Input } from 'components/common';
+import { PaymentsInput } from 'components/common';
 import { ValueAndOnChange } from './types';
 import { ChangeEvent, Fragment, useRef } from 'react';
 import { isNumber } from 'utils';
@@ -31,7 +31,7 @@ export function CardNumberInputs({ valueAndOnChanges }: CardNumberInputProps) {
     <>
       {valueAndOnChanges.map(({ value, onChange }, index) => (
         <Fragment key={index}>
-          <Input
+          <PaymentsInput
             ref={(element) => (inputRefs.current[index] = element)}
             value={value}
             type={index < 2 ? 'text' : 'password'}

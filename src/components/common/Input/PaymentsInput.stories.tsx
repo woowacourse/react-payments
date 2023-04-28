@@ -1,16 +1,17 @@
 import { StoryFn } from '@storybook/react';
-import { Input, InputProps } from './Input';
+import { PaymentsInput, InputProps } from './PaymentsInput';
 
 export default {
-  title: 'Input',
-  component: Input,
+  tags: ['autodocs'],
+  title: 'PaymentsInput',
+  component: PaymentsInput,
 };
 
-const Template: StoryFn<InputProps> = (args: InputProps) => <Input {...args} />;
+const Template: StoryFn<InputProps> = (args: InputProps) => <PaymentsInput {...args} />;
 
 export const ColoredInput = Template.bind({});
 ColoredInput.args = {
-  backgroundColor: 'blue',
+  backgroundColor: 'skyblue',
 };
 
 export const leftAlignedInput = Template.bind({});
@@ -26,4 +27,9 @@ centerAlignedInput.args = {
 export const rightAlignedInput = Template.bind({});
 rightAlignedInput.args = {
   align: 'right',
+};
+
+export const hundredPixelInput = Template.bind({});
+hundredPixelInput.args = {
+  width: '100px',
 };

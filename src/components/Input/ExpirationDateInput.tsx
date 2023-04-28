@@ -1,4 +1,4 @@
-import { Input } from 'components/common';
+import { PaymentsInput } from 'components/common';
 import React, { ChangeEvent, useRef } from 'react';
 import styled from 'styled-components';
 import { isNumber } from 'utils';
@@ -31,7 +31,7 @@ export function ExpirationDateInput(props: ExpirationProps) {
 
   return (
     <>
-      <Input
+      <PaymentsInput
         ref={(element) => (inputRefs.current[0] = element)}
         value={month.value}
         type="text"
@@ -42,7 +42,7 @@ export function ExpirationDateInput(props: ExpirationProps) {
         required
       />
       <SLASH />
-      <Input
+      <PaymentsInput
         ref={(element) => (inputRefs.current[1] = element)}
         value={year.value}
         type="text"

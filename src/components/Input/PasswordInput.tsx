@@ -1,4 +1,4 @@
-import { Input } from 'components/common';
+import { PaymentsInput } from 'components/common';
 import React, { ChangeEvent, useRef } from 'react';
 import { isNumber } from 'utils';
 import { ValueAndOnChange } from './types';
@@ -29,7 +29,7 @@ export function PasswordInput(props: PasswordInputProps) {
 
   return (
     <>
-      <Input
+      <PaymentsInput
         ref={(element) => (inputRefs.current[0] = element)}
         value={first.value}
         type="password"
@@ -38,7 +38,7 @@ export function PasswordInput(props: PasswordInputProps) {
         inputMode="numeric"
         required
       />
-      <Input
+      <PaymentsInput
         ref={(element) => (inputRefs.current[1] = element)}
         value={second.value}
         type="password"
