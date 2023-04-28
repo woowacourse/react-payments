@@ -1,8 +1,6 @@
 import { Outlet } from 'react-router';
-import styled, { ThemeProvider } from 'styled-components';
+import styled from 'styled-components';
 import { PaymentsProvider } from './context/PaymentsContext';
-import { ResetStyle } from './styles/ResetStyle';
-import { theme } from './styles/theme';
 
 const Container = styled.div`
   display: flex;
@@ -15,14 +13,10 @@ const Container = styled.div`
 
 export const App = () => {
   return (
-    <ThemeProvider theme={theme}>
-      <PaymentsProvider>
-        <Container>
-          <ResetStyle />
-
-          <Outlet />
-        </Container>
-      </PaymentsProvider>
-    </ThemeProvider>
+    <PaymentsProvider>
+      <Container>
+        <Outlet />
+      </Container>
+    </PaymentsProvider>
   );
 };
