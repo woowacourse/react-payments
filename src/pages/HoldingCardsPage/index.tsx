@@ -29,6 +29,7 @@ const HoldingCardsPage = ({ cards }: Props) => {
         <section className={styles.cardContainer}>
           {cards.map((card, index) => (
             <Card
+              company={card.company}
               cardNumber1={card.cardNumber1}
               cardNumber2={card.cardNumber2}
               cardNumber3={card.cardNumber3}

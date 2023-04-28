@@ -20,7 +20,7 @@ interface Props {
 }
 
 const CardRegisterForm = ({ registerCard }: Props) => {
-  const [cardCompany, setCardCompany] = useState<CompanyName>();
+  const [company, setCompany] = useState<CompanyName>();
   const navigate = useNavigate();
   const { toggleModal, openModal, closeModal } = useModal();
   const inputRefs = Array.from({ length: 10 }).map(() =>
@@ -48,12 +48,18 @@ const CardRegisterForm = ({ registerCard }: Props) => {
 
     if (!name || !isCompanyName(name)) return;
 
-    setCardCompany(name);
+    setCompany(name);
     closeModal();
   };
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
+
+    if (!company) {
+      alert('현재 카드사를 선택하지 않았습니다. 카드사를 선택해주세요.');
+      openModal();
+      return;
+    }
 
     if (!isValidExpiredDate(Number(expiredMonth), Number(expiredYear))) {
       alert('유효한 만료일이 아닙니다. 다시 입력해주세요.');
@@ -62,6 +68,7 @@ const CardRegisterForm = ({ registerCard }: Props) => {
     }
 
     const cardData = {
+      company,
       cardNumber1,
       cardNumber2,
       expiredMonth,
@@ -76,7 +83,7 @@ const CardRegisterForm = ({ registerCard }: Props) => {
   return (
     <>
       <Card
-        company={cardCompany}
+        company={company}
         cardNumber1={cardNumber1}
         cardNumber2={cardNumber2}
         cardNumber3={cardNumber3}
