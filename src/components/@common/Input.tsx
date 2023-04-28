@@ -25,7 +25,7 @@ interface StyledProps {
 }
 
 const Input = forwardRef<HTMLInputElement, Props>(function ({ ...props }: Props, ref) {
-  return <InputStyle autoComplete="off" ref={ref} {...props} />;
+  return <InputStyle ref={ref} {...props} />;
 });
 
 export default Input;
