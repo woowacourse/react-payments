@@ -9,6 +9,7 @@ type PaymentsContextValue = {
   getCreditCardById: (id: number) => CreditCard | null;
   assignCreditCardId: () => number;
   updateCreditCard: (creditCard: CreditCard) => void;
+  recommendCreditCardDisplayName: (owner: string) => string;
 };
 
 export const PaymentsContext = createContext<PaymentsContextValue | null>(null);
@@ -35,6 +36,19 @@ export const PaymentsProvider = (props: PropsWithChildren) => {
     );
   };
 
+  const recommendCreditCardDisplayName = (owner: string) => {
+    const displayName = owner ? `${owner}의 카드` : '카드';
+    let alterDisplayName = displayName;
+    let count = 2;
+
+    // eslint-disable-next-line no-loop-func
+    while (creditCards.find((creditCard) => creditCard.displayName === alterDisplayName)) {
+      alterDisplayName = `${displayName} ${count}`;
+      count += 1;
+    }
+    return alterDisplayName;
+  };
+
   const contextValue = useMemo(
     () => ({
       creditCards,
@@ -42,6 +56,7 @@ export const PaymentsProvider = (props: PropsWithChildren) => {
       getCreditCardById,
       assignCreditCardId,
       updateCreditCard,
+      recommendCreditCardDisplayName,
     }),
     [creditCards],
   );

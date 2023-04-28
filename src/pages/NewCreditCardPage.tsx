@@ -70,7 +70,8 @@ export const NewCreditCardPage = () => {
   const location = useLocation();
   const vendor = location.state.vendor ?? '현대카드';
 
-  const { creditCards, setCreditCards, assignCreditCardId } = usePayments();
+  const { creditCards, setCreditCards, assignCreditCardId, recommendCreditCardDisplayName } =
+    usePayments();
 
   const [newCard, setNewCard] = useState<Omit<CreditCard, 'id'>>({
     owner: '',
@@ -105,7 +106,7 @@ export const NewCreditCardPage = () => {
     const newCardWithDisplayName: CreditCard = {
       ...newCard,
       id: assignCreditCardId(),
-      displayName: newCard.owner ? `${newCard.owner}의 카드` : '',
+      displayName: recommendCreditCardDisplayName(newCard.owner),
     };
 
     if (!validate(newCardWithDisplayName)) return;
