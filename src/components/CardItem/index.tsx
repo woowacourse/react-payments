@@ -1,7 +1,7 @@
 import { CardChipIcon } from '../../assets/images';
-import type { CardInfo } from '../../types/card';
+import useCardFormValue from '../../hooks/useCardFormValue';
 
-import styles from './card.module.css';
+import styles from './cardItem.module.css';
 
 const COMPANY_NAME = {
   BC카드: 'bc',
@@ -14,16 +14,9 @@ const COMPANY_NAME = {
   국민카드: 'kb',
 };
 
-const Card = ({
-  company,
-  cardNumber1,
-  cardNumber2,
-  cardNumber3,
-  cardNumber4,
-  owner,
-  expiredMonth,
-  expiredYear,
-}: CardInfo) => {
+const CardItem = () => {
+  const { company, number, owner, expiredDate } = useCardFormValue();
+
   return (
     <div
       className={`${styles.container} ${
@@ -33,29 +26,29 @@ const Card = ({
       <p className={styles.company}>{company}</p>
       <CardChipIcon width={31} height={27} />
       <div className={styles.cardNumber}>
-        <span className={styles.number}>{cardNumber1}</span>
-        <span className={styles.number}>{cardNumber2}</span>
+        <span className={styles.number}>{number.first}</span>
+        <span className={styles.number}>{number.second}</span>
         <span className={styles.password}>
-          {cardNumber3 !== undefined
-            ? '﹒'.repeat(cardNumber3.length)
+          {number.third !== undefined
+            ? '﹒'.repeat(number.third.length)
             : '﹒﹒﹒﹒'}
         </span>
         <span className={styles.password}>
-          {cardNumber4 !== undefined
-            ? '﹒'.repeat(cardNumber4.length)
+          {number.fourth !== undefined
+            ? '﹒'.repeat(number.fourth.length)
             : '﹒﹒﹒﹒'}
         </span>
       </div>
       <div className={styles.detailContainer}>
         <p>{owner}</p>
         <p>
-          {expiredMonth}
-          {expiredMonth.length === 2 && <span>/</span>}
-          {expiredYear}
+          {expiredDate.month}
+          {expiredDate.month.length === 2 && <span>/</span>}
+          {expiredDate.year}
         </p>
       </div>
     </div>
   );
 };
 
-export default Card;
+export default CardItem;
