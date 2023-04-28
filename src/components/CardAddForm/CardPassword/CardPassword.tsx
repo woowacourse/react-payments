@@ -5,6 +5,7 @@ import { PASSWORD_UNIT_MAX_LENGTH, SECURITY_TEXT_ICON } from '../../../constants
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
 import Input from '../../common/Input/Input';
+import { formatNumber } from '../../../utils/formatter';
 
 interface CardPasswordProps {
   isError: boolean;
@@ -19,6 +20,8 @@ function CardPassword({ isError, updateInputValue, updateInputError }: CardPassw
   const onChange = () => {
     if (!firstInputRef.current || !lastInputRef.current) return;
 
+    firstInputRef.current.value = formatNumber(firstInputRef.current.value);
+    lastInputRef.current.value = formatNumber(lastInputRef.current.value);
     updateInputValue('password', [firstInputRef.current.value, lastInputRef.current.value]);
   };
 

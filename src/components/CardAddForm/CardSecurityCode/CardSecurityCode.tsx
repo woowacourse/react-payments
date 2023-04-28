@@ -4,6 +4,7 @@ import { SECURITY_CODE_MAX_LENGTH, SECURITY_CODE_MIN_LENGTH } from '../../../con
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
 import Input from '../../common/Input/Input';
+import { formatNumber } from '../../../utils/formatter';
 
 interface CardSecurityCodeProps {
   isError: boolean;
@@ -12,8 +13,9 @@ interface CardSecurityCodeProps {
 }
 
 function CardSecurityCode({ isError, updateInputValue, updateInputError }: CardSecurityCodeProps) {
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    updateInputValue('securityCode', event.target.value);
+  const onChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
+    target.value = formatNumber(target.value);
+    updateInputValue('securityCode', target.value);
   };
 
   const onBlur = (event: FocusEvent<HTMLInputElement>) => {
