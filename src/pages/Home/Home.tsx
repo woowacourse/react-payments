@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Box from 'components/Box';
 import FlexBox from 'components/FlexBox';
 import { creditCardListStore } from 'stores/creditCardListStore';
-import { useSyncExternalStore } from 'react';
+import { useEffect, useSyncExternalStore } from 'react';
 import * as S from './style';
 
 function Home() {
@@ -12,6 +12,9 @@ function Home() {
     creditCardListStore.subscribe,
     creditCardListStore.getSnapshot
   );
+  useEffect(() => {
+    creditCardListStore.restoreCreditCardsFromLocalStorage();
+  }, []);
 
   return (
     <S.HomeLayout>
