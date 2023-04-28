@@ -25,7 +25,7 @@ export const formValidate = (
     return getValidateResult(current);
   });
 
-  if (wrongInputs) {
+  if (wrongInputs.length > 0) {
     wrongInputs[0].focus();
   }
 
