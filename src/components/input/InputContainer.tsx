@@ -16,7 +16,7 @@ const Style = {
     align-items: center;
 
     width: ${(props) => `${props.width}`};
-    height: 49px;
+    height: 40px;
 
     border-radius: 7px;
     background-color: #ecebf1;

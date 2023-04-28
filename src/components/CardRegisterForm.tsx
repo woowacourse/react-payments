@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useRef, useState } from 'react';
+import { cardDataService } from '../domains/cardDataService';
 import { CardViewer } from './CardViewer';
 import { CardNumberInput } from './input/CardNumberInput';
 import { ExpirationDateInput } from './input/ExpirationDateInput';
 import { OwnerNameInput } from './input/OwnerNameInput';
 import { SecurityCodeInput } from './input/SecurityCodeInput';
 import { PasswordInput } from './input/PasswordInput';
-import { cardDataService } from '../domains/cardDataService';
 import { useCardRegisterForm } from '../hooks/useCardRegisterForm';
 import { CardSelectModal } from './Modal/CardSelect/CardSelectModal';
 import { Button } from './Button/Button';
@@ -16,6 +16,8 @@ export function CardRegisterForm() {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const {
+    id,
+    alias,
     cardCompany,
     cardNumber,
     expirationDate,
@@ -40,6 +42,8 @@ export function CardRegisterForm() {
     e.preventDefault();
 
     cardDataService.addNewCard({
+      id,
+      alias,
       cardCompany,
       cardNumber,
       expirationDate,
@@ -48,7 +52,7 @@ export function CardRegisterForm() {
       password,
     });
 
-    navigate('/');
+    navigate('/add-alias');
   };
 
   const moveFocusToExpirationDate = () => {
@@ -118,7 +122,9 @@ export function CardRegisterForm() {
         />
       </Style.InputContainer>
       <Style.ButtonContainer>
-        {isValidCardForm && <Button designType={'text'}>다음</Button>}
+        <Button designType={'text'} disabled={!isValidCardForm}>
+          다음
+        </Button>
       </Style.ButtonContainer>
     </Style.Wrapper>
   );

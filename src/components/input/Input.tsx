@@ -21,7 +21,7 @@ const Style = {
     align-items: center;
 
     width: ${(props) => (props.width ? `${props.width}` : '36px')};
-    height: ${(props) => (props.height ? `${props.height}` : '45px')};
+    height: ${(props) => (props.height ? `${props.height}` : '15px')};
 
     padding: 0;
     border: 0;

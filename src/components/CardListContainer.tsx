@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CardViewer } from './CardViewer';
 import { cardDataService } from '../domains/cardDataService';
@@ -11,17 +12,19 @@ export function CardListContainer() {
     <>
       {!cardList.length && <Style.Caption>새로운 카드를 등록해주세요.</Style.Caption>}
       <Style.CardListWrapper>
-        {cardList.map((card, index) => {
-          const { cardCompany, cardNumber, expirationDate, ownerName } = card;
+        {cardList.map((card) => {
+          const { id, alias, cardCompany, cardNumber, expirationDate, ownerName } = card;
 
           return (
-            <CardViewer
-              key={`${cardNumber}${index}`}
-              cardCompany={cardCompany}
-              cardNumber={cardNumber}
-              expirationDate={expirationDate}
-              ownerName={ownerName}
-            />
+            <Fragment key={id}>
+              <CardViewer
+                cardCompany={cardCompany}
+                cardNumber={cardNumber}
+                expirationDate={expirationDate}
+                ownerName={ownerName}
+              />
+              <Style.CardAlias>{alias}</Style.CardAlias>
+            </Fragment>
           );
         })}
         <Style.AddCardButton onClick={() => navigate('/register')}>+</Style.AddCardButton>
@@ -35,7 +38,6 @@ const Style = {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 45px;
 
     width: 318px;
     min-height: 600px;
@@ -45,6 +47,16 @@ const Style = {
     margin-bottom: 10px;
 
     font-size: 14px;
+    text-align: center;
+    color: #575757;
+  `,
+
+  CardAlias: styled.p`
+    margin-top: 10px;
+    margin-bottom: 35px;
+
+    font-size: 14px;
+    font-weight: bold;
     text-align: center;
     color: #575757;
   `,
@@ -67,5 +79,9 @@ const Style = {
     color: #3a3a3a;
 
     cursor: pointer;
+    &:hover {
+      transition: all 0.2s linear;
+      transform: scale(1.01);
+    }
   `,
 };

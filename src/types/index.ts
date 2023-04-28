@@ -19,6 +19,8 @@ export interface ExpirationDate {
 }
 
 export interface Card {
+  id: string;
+  alias: string;
   cardCompany: CardCompany;
   cardNumber: CardNumber;
   expirationDate: ExpirationDate;

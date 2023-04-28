@@ -42,5 +42,9 @@ const Style = {
       font-weight: bold;
       background-color: transparent;
     }
+
+    &:disabled {
+      color: #aeadb0;
+    }
   `,
 };
