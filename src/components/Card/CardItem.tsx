@@ -57,6 +57,8 @@ const CardItemContainer = styled.div<{ background?: string; fontColor?: string }
   font-weight: 700;
 
   color: ${({ fontColor }) => fontColor || "#ffffff"};
+
+  transition: 0.2s;
 `;
 
 const CompanyName = styled.p`
