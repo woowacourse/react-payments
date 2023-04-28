@@ -92,6 +92,10 @@ const BankWrapper = styled.div`
     width: 70px;
     align-items: center;
   }
+  > img:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+  }
 `;
 
 export default ModalBanks;
