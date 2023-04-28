@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import useCardList from '../../hooks/useCardList';
 import Card from '../@common/Card';
-import { COLOR_BY_CARD_COMPANY, KOR_NAME_BY_CARD_COMPANY } from '../../@types/cardCompany';
 
 function CardListPage() {
   const navigation = useNavigate();
@@ -13,8 +12,6 @@ function CardListPage() {
   const cardLists = useMemo(() => {
     return savedCardList.length ? (
       savedCardList.map(({ cardNumber, ownerName, expirationDate, cardCompany, cardAlias }) => {
-        const companyName = KOR_NAME_BY_CARD_COMPANY[cardCompany];
-        const cardColor = COLOR_BY_CARD_COMPANY[cardCompany];
         return (
           <div key={`card-list-${ownerName}-${expirationDate}-${cardCompany}`}>
             <Card
@@ -22,10 +19,9 @@ function CardListPage() {
               cardNumber={cardNumber}
               ownerName={ownerName}
               expirationDate={expirationDate}
-              cardCompany={companyName}
-              cardColor={cardColor}
+              cardCompany={cardCompany}
             />
-            <p>{cardAlias}</p>
+            <CardAlias>{cardAlias}</CardAlias>
           </div>
         );
       })
@@ -62,8 +58,8 @@ const CardRegisterParagraph = styled.p`
 `;
 
 const AddButton = styled.button<{ isFirst: boolean }>`
-  width: 208px;
-  height: 123px;
+  width: 233px;
+  height: 143px;
 
   background: #e5e5e5;
   border-radius: 5px;
@@ -74,5 +70,13 @@ const AddButton = styled.button<{ isFirst: boolean }>`
   font-size: 30px;
   line-height: 35px;
 
-  margin: ${(props) => (props.isFirst ? '' : '25px auto')};
+  margin: ${(props) => (props.isFirst ? '' : '20px auto')};
+`;
+
+const CardAlias = styled.p`
+  margin-top: 0px;
+  margin-bottom: 5px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
 `;

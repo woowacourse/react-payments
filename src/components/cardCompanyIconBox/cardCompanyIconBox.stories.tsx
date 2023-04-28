@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import BankIconBox from './cardCompanyIconBox';
+import { CreditCardProvider } from '../../contexts/CreditCardContext';
 
 const meta = {
   component: BankIconBox,
@@ -9,6 +10,15 @@ const meta = {
       control: { type: 'radio' },
     },
   },
+  decorators: [
+    (Story) => {
+      return (
+        <CreditCardProvider>
+          <Story />
+        </CreditCardProvider>
+      );
+    },
+  ],
 } satisfies Meta<typeof BankIconBox>;
 
 export default meta;

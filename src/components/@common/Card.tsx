@@ -1,33 +1,31 @@
 import styled from 'styled-components';
 import refineExpirationDate from '../../utils/refineExpirationDate';
 import useCardNumber from '../../hooks/useCardNumber';
-import { CardCompanyKor } from '../../@types/cardCompany';
+import { CardCompanyEng } from '../../@types/cardCompany';
+import { KOR_NAME_BY_CARD_COMPANY, COLOR_BY_CARD_COMPANY } from '../../@types/cardCompany';
 
 interface CardContainerProps {
+  cardCompany: CardCompanyEng;
   cardColor: string;
 }
-interface CardProps extends CardContainerProps {
+interface CardProps {
   cardNumber: string[];
   ownerName: string;
   expirationDate: string[];
   onClick?: React.MouseEventHandler<HTMLDivElement>;
-  cardCompany: CardCompanyKor;
-  cardColor: string;
+  cardCompany: CardCompanyEng;
 }
 
-const Card = ({
-  cardNumber,
-  ownerName,
-  expirationDate,
-  cardCompany,
-  cardColor,
-  onClick,
-}: CardProps) => {
+const Card = ({ cardNumber, ownerName, expirationDate, cardCompany, onClick }: CardProps) => {
   const cardNumberList = useCardNumber(cardNumber);
 
   return (
-    <CardContainer onClick={onClick} cardColor={cardColor}>
-      <span>{cardCompany}</span>
+    <CardContainer
+      onClick={onClick}
+      cardColor={COLOR_BY_CARD_COMPANY[cardCompany]}
+      cardCompany={cardCompany}
+    >
+      <span>{KOR_NAME_BY_CARD_COMPANY[cardCompany]}</span>
       <CardChip></CardChip>
       <CardNumberContainer>
         {cardNumberList.map((numberValue, index) => (
@@ -58,7 +56,7 @@ const CardContainer = styled.div<CardContainerProps>`
   border-radius: 5px;
 
   padding: 14px;
-  margin: 18px auto;
+  margin: 10px auto;
 
   box-sizing: border-box;
 `;
@@ -75,7 +73,6 @@ const CardNumberContainer = styled.div`
 
   height: 13px;
 
-  color: white;
   font-weight: 600;
   font-size: 10px;
   letter-spacing: 3px;
