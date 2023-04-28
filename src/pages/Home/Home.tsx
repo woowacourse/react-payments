@@ -1,13 +1,17 @@
 import CreditCard from 'components/CreditCard';
 import { useNavigate } from 'react-router-dom';
-import useCreditCardList from 'hooks/useCreditCardList';
 import Box from 'components/Box';
 import FlexBox from 'components/FlexBox';
+import { creditCardListStore } from 'stores/creditCardListStore';
+import { useSyncExternalStore } from 'react';
 import * as S from './style';
 
 function Home() {
   const navigate = useNavigate();
-  const { creditCardList } = useCreditCardList();
+  const creditCardList = useSyncExternalStore(
+    creditCardListStore.subscribe,
+    creditCardListStore.getSnapshot
+  );
 
   return (
     <S.HomeLayout>

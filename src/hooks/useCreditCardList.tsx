@@ -26,6 +26,10 @@ const useCreditCardList = (): UseCreditCard => {
       const copiedCreditCards = [...existCreditCards];
       copiedCreditCards[targetIndex].nickname = newNickname;
       localStorage.setItem('creditCards', JSON.stringify(copiedCreditCards));
+
+      alert('업데이트 성공!');
+    } else {
+      alert('업데이트 실패!');
     }
   };
 

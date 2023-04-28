@@ -2,7 +2,7 @@ import CreditCard from 'components/CreditCard';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 // import * as Type from 'types';
-import useCreditCardList from 'hooks/useCreditCardList';
+// import useCreditCardList from 'hooks/useCreditCardList';
 import Modal from 'components/Modal';
 import useModal from 'hooks/useModal';
 import useCreditCardForm from 'hooks/useCreditCardForm';
@@ -11,6 +11,7 @@ import CreditCardRegisterLayout from 'components/CreditCardRegisterLayout';
 import CreditCardRegisterTopSheet from 'components/CreditCardRegisterTopSheet';
 import FlexBox from 'components/FlexBox';
 import Box from 'components/Box';
+import { creditCardListStore } from 'stores/creditCardListStore';
 import CreditCardNumberInput from './inputs/CreditCardNumberInput';
 import CreditCardExpiryInput from './inputs/CreditCardExpiryInput';
 import CreditCardOwnerInput from './inputs/CreditCardOwnerInput';
@@ -21,7 +22,7 @@ import CreditCardCompanyInput from './inputs/CreditCardCompanyInput';
 
 function CreditCardRegister() {
   const navigate = useNavigate();
-  const { saveCreditCard } = useCreditCardList();
+  // const { saveCreditCard } = useCreditCardList();
   const { modalOpen, openModal, closeModal } = useModal();
 
   const { creditCardForm, initCreditCardForm, isCreditCardError } = useCreditCardForm();
@@ -29,7 +30,9 @@ function CreditCardRegister() {
   const handleSubmit = () => {
     if (isCreditCardError) return;
 
-    saveCreditCard(creditCardForm);
+    creditCardListStore.addCreditCard(creditCardForm);
+
+    // saveCreditCard(creditCardForm);
     navigate('/register-done');
   };
 

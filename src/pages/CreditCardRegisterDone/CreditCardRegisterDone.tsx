@@ -6,16 +6,18 @@ import CreditCardRegisterTitle from 'components/CreditCardRegisterTitle';
 import FlexBox from 'components/FlexBox';
 import Box from 'components/Box';
 import { useState } from 'react';
-import useCreditCardList from 'hooks/useCreditCardList';
+// import useCreditCardList from 'hooks/useCreditCardList';
 import { useNavigate } from 'react-router-dom';
+import { creditCardListStore } from 'stores/creditCardListStore';
 
 function CreditCardRegisterDone() {
   const { creditCardForm } = useCreditCardForm();
-  const { updateCreditCardNickname } = useCreditCardList();
+  // const { updateCreditCardNickname } = useCreditCardList();
   const [nickname, setNickname] = useState('');
   const navigate = useNavigate();
   const handleNicknameInput = () => {
-    updateCreditCardNickname(creditCardForm.number, nickname);
+    // updateCreditCardNickname(creditCardForm.number, nickname);
+    creditCardListStore.updateNickname(creditCardForm.number, nickname);
     navigate('/');
   };
 
