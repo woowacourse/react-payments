@@ -15,13 +15,11 @@ const Template: Story = (args) => {
 export const Default = Template.bind({});
 Default.args = {
   isError: false,
-  style: { background: '#ecebf1' },
 };
 
 export const Error = Template.bind({});
 Error.args = {
   isError: true,
-  style: { background: '#ecebf1' },
 };
 
 export default meta;
