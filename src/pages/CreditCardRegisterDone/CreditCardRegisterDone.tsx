@@ -7,7 +7,7 @@ function CreditCardRegisterDone() {
   return (
     <div>
       <div>카드 등록이 완료되었습니다.</div>
-      <CreditCardNicknameInputForm cardNumber={creditCardForm.number} />
+      <CreditCardNicknameInputForm creditCardForm={creditCardForm} />
       <ControlButton
         onClick={() => alert('ㅎㅇ')}
         label="확인"

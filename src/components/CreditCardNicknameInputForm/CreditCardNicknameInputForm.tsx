@@ -5,33 +5,17 @@ import { useEffect, useState } from 'react';
 import * as T from 'types';
 
 interface CreditCardNicknameInputFormProps {
-  cardNumber: string;
+  creditCardForm: T.CreditCard;
 }
-function CreditCardNicknameInputForm({ cardNumber }: CreditCardNicknameInputFormProps) {
-  const [creditCard, setCreditCard] = useState<Pick<T.CreditCard, 'companyId' | 'number' | 'expiry' | 'owner'>>({
-    companyId: '',
-    number: '',
-    expiry: '',
-    owner: '',
-  });
-
-  const { findCreditCardByNumber } = useCreditCardList();
-
-  useEffect(() => {
-    const foundCreditCard = findCreditCardByNumber(cardNumber);
-    if (foundCreditCard) {
-      setCreditCard(foundCreditCard);
-    }
-  }, []);
-
+function CreditCardNicknameInputForm({ creditCardForm }: CreditCardNicknameInputFormProps) {
   return (
     <CreditCard
       fullFilled
       creditCard={{
-        companyId: creditCard.companyId,
-        number: creditCard.number,
-        expiry: creditCard.expiry,
-        owner: creditCard.owner,
+        companyId: creditCardForm.companyId,
+        number: creditCardForm.number,
+        expiry: creditCardForm.expiry,
+        owner: creditCardForm.owner,
       }}
     />
   );

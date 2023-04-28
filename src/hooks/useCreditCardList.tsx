@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { useState } from 'react';
 import * as T from 'types';
 
 interface UseCreditCard {
@@ -6,11 +7,10 @@ interface UseCreditCard {
   saveCreditCard: (creditCard: T.CreditCard) => void;
   findCreditCardByNumber: (number: string) => T.CreditCard | undefined;
 }
+const existCreditCards = (() => JSON.parse(localStorage.getItem('creditCards') || '[]'))();
 
 const useCreditCardList = (): UseCreditCard => {
-  const [creditCardList, setCreditCardList] = useState<T.CreditCard[]>([]);
-
-  const existCreditCards = (() => JSON.parse(localStorage.getItem('creditCards') || '[]'))();
+  const [creditCardList, setCreditCardList] = useState<T.CreditCard[]>(existCreditCards);
 
   const saveCreditCard = (creditCard: T.CreditCard): void => {
     localStorage.setItem('creditCards', JSON.stringify([...existCreditCards, creditCard]));
@@ -19,10 +19,6 @@ const useCreditCardList = (): UseCreditCard => {
   const findCreditCardByNumber = (
     number: string
   ) => creditCardList.find((c: T.CreditCard) => c.number === number);
-
-  useEffect(() => {
-    setCreditCardList(existCreditCards);
-  }, []);
 
   return { creditCardList, saveCreditCard, findCreditCardByNumber };
 };
