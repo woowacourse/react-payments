@@ -6,9 +6,9 @@ export default {
   component: AddCardButton,
 };
 
-export const CardListPage = () => (
+export const Default = () => (
   <>
     <GlobalStyle />
-    <AddCardButton></AddCardButton>
+    <AddCardButton />
   </>
 );

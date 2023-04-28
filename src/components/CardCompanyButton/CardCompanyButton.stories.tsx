@@ -8,22 +8,22 @@ const meta: Meta<typeof CardCompanyButton> = {
   component: CardCompanyButton,
   argTypes: {
     cardCompany: {
-      options: ["BC", "SHINHAN", "HANA", "HYUNDAI", "KAKAO", "KB", "LOTTE", "WOORI"],
       control: { type: "radio" },
     },
-    onClick: () => {},
   },
+
+  args: { cardCompany: "BC" },
 };
 
 export default meta;
 type Story = StoryObj<typeof CardCompanyButton>;
 
 export const Default: Story = {
-  render: ({ cardCompany, onClick }) => {
+  render: ({ cardCompany }) => {
     return (
       <>
         <GlobalStyle />
-        <CardCompanyButton cardCompany={cardCompany} onClick={onClick} />
+        <CardCompanyButton cardCompany={cardCompany} onClick={() => {}} />
       </>
     );
   },
