@@ -29,10 +29,7 @@ export const CVCInput = () => {
         return;
       }
 
-      setIsCVCCompleted(false);
-      if (e.target.value.length === CVC_MAXLEGNTH) {
-        setIsCVCCompleted(true);
-      }
+      setIsCVCCompleted(e.target.value.length === CVC_MAXLEGNTH);
     },
     [setIsCVCCompleted]
   );
