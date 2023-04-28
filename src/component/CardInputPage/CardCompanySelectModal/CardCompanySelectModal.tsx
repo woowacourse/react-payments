@@ -4,7 +4,7 @@ import CardCompanyButton from "../CardCompany/CardCompanyButton";
 import styles from "./CardCompanySelectModal.module.css";
 
 interface Props extends BottomModalProps {
-  companyClickHandler: (value: any) => void;
+  companyClickHandler: (value: CardCompany) => void;
 }
 
 const CardCompanySelectModal = (props: Props) => {

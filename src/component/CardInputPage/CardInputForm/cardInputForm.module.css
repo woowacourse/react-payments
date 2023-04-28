@@ -13,11 +13,12 @@
   font-size: 12px;
 }
 
-.nextButton {
-  width: 30%;
+.companySelectButton {
+  margin: 0 auto;
+  width: 150px;
+}
 
+.nextButton {
   margin-left: auto;
   margin-right: 0;
-
-  text-align: right;
 }
