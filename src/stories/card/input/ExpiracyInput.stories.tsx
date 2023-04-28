@@ -5,14 +5,6 @@ import styled from 'styled-components';
 import ExpiracyInput from '../../../components/card/input/ExpiracyInput';
 import { useFormInputs } from '../../../hooks/useFormInputs';
 
-const InputWrapperParent = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-top: 40px;
-  margin: 40px 0 25px 0;
-`;
-
 function ExpiracyStories() {
   const cardForm = useRef<HTMLFormElement>(null);
   const { onInputKeydown } = useFocusInput(cardForm);
@@ -49,3 +41,11 @@ type Story = StoryObj<typeof ExpiracyStories>;
 export const Expiracy: Story = {
   args: {},
 };
+
+const InputWrapperParent = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 40px;
+  margin: 40px 0 25px 0;
+`;

@@ -1,27 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Wrapper = styled.button<{ bgColor: string; color: string }>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: none;
-  padding: 8px;
-  border-radius: 8px;
-  color: ${({ color }) => color};
-  background-color: ${({ bgColor }) => bgColor};
-  cursor: pointer;
-`;
-
-const Svg = styled.svg`
-  height: 24px;
-`;
-
-const Message = styled.span`
-  margin-left: 8px;
-  font-size: 14px;
-`;
-
 interface ChangeButtonProps {
   text: string;
   onClick: () => void;
@@ -55,3 +34,24 @@ export default function ChangeButton({
     </Wrapper>
   );
 }
+
+const Wrapper = styled.button<{ bgColor: string; color: string }>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  padding: 8px;
+  border-radius: 8px;
+  color: ${({ color }) => color};
+  background-color: ${({ bgColor }) => bgColor};
+  cursor: pointer;
+`;
+
+const Svg = styled.svg`
+  height: 24px;
+`;
+
+const Message = styled.span`
+  margin-left: 8px;
+  font-size: 14px;
+`;

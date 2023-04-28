@@ -5,14 +5,6 @@ import styled from 'styled-components';
 import PasswordInput from '../../../components/card/input/PasswordInput';
 import { useFormInputs } from '../../../hooks/useFormInputs';
 
-const InputWrapperParent = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-top: 40px;
-  margin: 40px 0 25px 0;
-`;
-
 function PasswordStories() {
   const cardForm = useRef<HTMLFormElement>(null);
   const { onInputKeydown } = useFocusInput(cardForm);
@@ -52,3 +44,11 @@ type Story = StoryObj<typeof PasswordStories>;
 export const Password: Story = {
   args: {},
 };
+
+const InputWrapperParent = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 40px;
+  margin: 40px 0 25px 0;
+`;

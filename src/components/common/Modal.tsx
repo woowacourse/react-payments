@@ -1,6 +1,10 @@
 import React, { PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
+export default function Modal({ children }: PropsWithChildren) {
+  return <Wrapper>{children}</Wrapper>;
+}
+
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -12,7 +16,3 @@ const Wrapper = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1;
 `;
-
-export default function Modal({ children }: PropsWithChildren) {
-  return <Wrapper>{children}</Wrapper>;
-}

@@ -5,14 +5,6 @@ import { useFocusInput } from '../../../hooks/useFocusInput';
 import styled from 'styled-components';
 import { useFormInputs } from '../../../hooks/useFormInputs';
 
-const InputWrapperParent = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-top: 40px;
-  margin: 40px 0 25px 0;
-`;
-
 function CardNumberStories() {
   const cardForm = useRef<HTMLFormElement>(null);
   const { onInputKeydown } = useFocusInput(cardForm);
@@ -59,3 +51,11 @@ type Story = StoryObj<typeof CardNumberStories>;
 export const CardNumber: Story = {
   args: {},
 };
+
+const InputWrapperParent = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 40px;
+  margin: 40px 0 25px 0;
+`;
