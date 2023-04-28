@@ -40,7 +40,7 @@ export const NewCreditCardVendorBottomSheet = (props: NewCreditCardVendorBottomS
         <VendorButtonGroup>
           {CreditCardVendorNames.map((vendor) => (
             <VendorButton key={vendor} onClick={() => onClickVendor?.(vendor)}>
-              <VendorIcon vendor={vendor} size={3.6} />
+              <VendorIcon vendor={vendor} size={4.5} />
 
               <Text size="small">{vendor}</Text>
             </VendorButton>

@@ -1,3 +1,5 @@
+import { useTheme } from 'styled-components';
+
 type IconProps = {
   src: string;
   alt: string;
@@ -6,6 +8,7 @@ type IconProps = {
 
 export const Icon = (props: IconProps) => {
   const { src, alt, size } = props;
+  const theme = useTheme();
 
-  return <img src={src} alt={alt} width={size * 10} height={size * 10} />;
+  return <img src={src} alt={alt} width={theme.size(size)} height={theme.size(size)} />;
 };

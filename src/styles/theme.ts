@@ -1,6 +1,10 @@
 import { Color } from '../utils/Color';
 
+const SIZE_UNIT = 8;
+
 export const theme = {
+  size: (unit: number) => unit * SIZE_UNIT,
+
   fontSize: {
     '0': '10px',
     '1': '12px',
@@ -39,14 +43,12 @@ export const theme = {
   },
 } as const;
 
-type ExtractTheme<T extends object> = {
-  [Key in keyof T]: T[Key] extends object
+type ExtractTheme<T extends Record<string, unknown>> = {
+  [Key in keyof T]: T[Key] extends Record<string, unknown>
     ? ExtractTheme<T[Key]>
     : T[Key] extends string
     ? string
-    : T[Key] extends number
-    ? number
-    : never;
+    : T[Key];
 };
 
 export type Theme = ExtractTheme<typeof theme>;

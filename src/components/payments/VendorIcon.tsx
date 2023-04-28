@@ -30,6 +30,6 @@ export const VendorIcon = (props: VendorIconProps) => {
   const { vendor, size, ...iconProps } = props;
 
   return (
-    <Icon src={CreditCardVendorIcons[vendor]} alt={vendor} size={size ?? 3.6} {...iconProps} />
+    <Icon src={CreditCardVendorIcons[vendor]} alt={vendor} size={size ?? 4.5} {...iconProps} />
   );
 };
