@@ -10,12 +10,12 @@ import PasswordField from './PasswordField';
 
 import useCardRegisterForm from './hooks/useCardRegisterForm';
 import { isValidExpiredDate } from './utils/validation';
-import type { CardInfo } from '../../types/card';
+import type { CardData } from '../../types/card';
 
 import styles from './cardRegisterForm.module.css';
 
 interface Props {
-  registerCard: (card: CardInfo) => void;
+  registerCard: (card: CardData) => void;
 }
 
 const CardRegisterForm = ({ registerCard }: Props) => {

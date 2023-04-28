@@ -5,12 +5,12 @@ import CardCompanyModal from '../../components/CardCompanyModal';
 
 import CardFormProvider from '../../contexts/CardFormContext';
 import useModal from '../../hooks/useModal';
-import type { CardInfo } from '../../types/card';
+import type { CardData } from '../../types/card';
 
 import styles from './cardRegisterPage.module.css';
 
 interface Props {
-  registerCard: (card: CardInfo) => void;
+  registerCard: (card: CardData) => void;
 }
 
 const CardRegisterPage = ({ registerCard }: Props) => {

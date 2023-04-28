@@ -5,10 +5,10 @@ import HoldingCardsPage from './HoldingCardsPage';
 import CardRegisterPage from './CardRegisterPage';
 
 import Layout from '../components/common/Layout';
-import type { CardInfo } from '../types/card';
+import type { CardData } from '../types/card';
 
 function App() {
-  const [cards, setCards] = useState<CardInfo[]>([]);
+  const [cards, setCards] = useState<CardData[]>([]);
 
   useEffect(() => {
     const cardsData = localStorage.getItem('cards');
@@ -24,7 +24,7 @@ function App() {
     }
   }, [cards]);
 
-  const registerCard = (card: CardInfo) => {
+  const registerCard = (card: CardData) => {
     setCards([...cards, card]);
   };
 

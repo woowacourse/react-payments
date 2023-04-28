@@ -7,11 +7,19 @@ const initialCardInfo: CardInfo = {
   number: {
     first: '',
     second: '',
+    third: '',
+    fourth: ''
   },
   expiredDate: {
     month: '',
     year: '',
   },
+  owner: '',
+  cvc: '',
+  password: {
+    first: '',
+    second: ''
+  }
 };
 
 export interface InputAction {

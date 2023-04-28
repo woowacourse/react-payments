@@ -1,15 +1,15 @@
 import { useNavigate } from 'react-router-dom';
 
-import Card from '../../components/Card';
-import CardRegisterButton from '../../components/CardRegisterButton';
 import Header from '../../components/common/Header';
+import CardRegisterButton from '../../components/CardRegisterButton';
 
-import type { CardInfo } from '../../types/card';
+import type { CardData } from '../../types/card';
 
 import styles from './holdingCardsPage.module.css';
+import CardItem from '../../components/CardItem';
 
 interface Props {
-  cards: CardInfo[];
+  cards: CardData[];
 }
 
 const HoldingCardsPage = ({ cards }: Props) => {
@@ -28,16 +28,9 @@ const HoldingCardsPage = ({ cards }: Props) => {
         )}
         <section className={styles.cardContainer}>
           {cards.map((card, index) => (
-            <Card
-              company={card.company}
-              cardNumber1={card.cardNumber1}
-              cardNumber2={card.cardNumber2}
-              cardNumber3={card.cardNumber3}
-              cardNumber4={card.cardNumber4}
-              expiredMonth={card.expiredMonth}
-              expiredYear={card.expiredYear}
-              owner={card.owner}
-              key={index}
+            <CardItem
+              key={`${card.company}-${card.owner}-${index}`}
+              cardData={card}
             />
           ))}
           <CardRegisterButton onClick={handleClick} />

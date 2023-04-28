@@ -1,12 +1,32 @@
 import type { CompanyName } from '../constants/company';
+interface CardNumber {
+  first: string;
+  second: string;
+  third: string;
+  fourth: string;
+}
 
+interface ExpiredDate {
+  month: string;
+  year: string;
+}
+
+interface CardPassword {
+  first: string;
+  second: string;
+}
 export interface CardInfo {
+  number: CardNumber;
+  expiredDate: ExpiredDate;
   company?: CompanyName;
-  cardNumber1: string;
-  cardNumber2: string;
-  cardNumber3?: string;
-  cardNumber4?: string;
-  expiredMonth: string;
-  expiredYear: string;
+  owner: string;
+  cvc: string;
+  password: CardPassword;
+}
+
+export interface CardData {
+  company: CompanyName;
+  number: Pick<CardNumber, 'first' | 'second'>;
+  expiredDate: ExpiredDate;
   owner?: string;
 }

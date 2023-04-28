@@ -1,5 +1,6 @@
 import { CardChipIcon } from '../../assets/images';
 import useCardFormValue from '../../hooks/useCardFormValue';
+import type { CardData } from '../../types/card';
 
 import styles from './cardItem.module.css';
 
@@ -14,8 +15,13 @@ const COMPANY_NAME = {
   국민카드: 'kb',
 };
 
-const CardItem = () => {
-  const { company, number, owner, expiredDate } = useCardFormValue();
+interface Props {
+  cardData?: CardData;
+}
+
+const CardItem = ({ cardData }: Props) => {
+  const { company, number, owner, expiredDate } =
+    cardData ?? useCardFormValue();
 
   return (
     <div
@@ -29,14 +35,10 @@ const CardItem = () => {
         <span className={styles.number}>{number.first}</span>
         <span className={styles.number}>{number.second}</span>
         <span className={styles.password}>
-          {number.third !== undefined
-            ? '﹒'.repeat(number.third.length)
-            : '﹒﹒﹒﹒'}
+          {'third' in number ? '﹒'.repeat(number.third.length) : '﹒﹒﹒﹒'}
         </span>
         <span className={styles.password}>
-          {number.fourth !== undefined
-            ? '﹒'.repeat(number.fourth.length)
-            : '﹒﹒﹒﹒'}
+          {'fourth' in number ? '﹒'.repeat(number.fourth.length) : '﹒﹒﹒﹒'}
         </span>
       </div>
       <div className={styles.detailContainer}>
