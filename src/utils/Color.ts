@@ -1,52 +1,77 @@
 /* eslint-disable no-nested-ternary */
 export class Color {
-  readonly h: number;
+  readonly hue: number;
 
-  readonly s: number;
+  readonly saturation: number;
 
-  readonly l: number;
+  readonly lightness: number;
 
-  constructor(h: number, s: number, l: number) {
-    this.h = h;
-    this.s = s;
-    this.l = l;
+  readonly alpha: number;
+
+  constructor(hue: number, saturation: number, lightness: number, alpha = 1) {
+    this.hue = hue;
+    this.saturation = saturation;
+    this.lightness = lightness;
+    this.alpha = alpha;
   }
 
-  setHue(h: number) {
-    return new Color(h, this.s, this.l);
+  setHue(hue: number) {
+    return new Color(hue, this.saturation, this.lightness, this.alpha);
   }
 
-  setSaturation(s: number) {
-    return new Color(this.h, s, this.l);
+  setSaturation(saturation: number) {
+    return new Color(this.hue, saturation, this.lightness, this.alpha);
   }
 
-  setLightness(l: number) {
-    return new Color(this.h, this.s, l);
+  setLightness(lightness: number) {
+    return new Color(this.hue, this.saturation, lightness, this.alpha);
+  }
+
+  setAlpha(alpha: number) {
+    return new Color(this.hue, this.saturation, this.lightness, alpha);
   }
 
   adjustHue(offset: number) {
-    return new Color(this.h + offset, this.s, this.l);
+    return new Color(this.hue + offset, this.saturation, this.lightness, this.alpha);
   }
 
   adjustSaturation(offset: number) {
-    return new Color(this.h, this.s + offset, this.l);
+    return new Color(this.hue, this.saturation + offset, this.lightness, this.alpha);
   }
 
   adjustLightness(offset: number) {
-    return new Color(this.h, this.s, this.l + offset);
+    return new Color(this.hue, this.saturation, this.lightness + offset, this.alpha);
+  }
+
+  adjustAlpha(offset: number) {
+    return new Color(this.hue, this.saturation, this.lightness, this.alpha + offset);
+  }
+
+  oppositeWithLightness() {
+    return new Color(this.hue, this.saturation, 100 - this.lightness);
   }
 
   normalize() {
     return new Color(
-      ((Math.round(this.h) % 360) + 360) % 360, // 0 ~ 360, positive modulo
-      Math.max(0, Math.min(100, Math.round(this.s))), // 0 ~ 100
-      Math.max(0, Math.min(100, Math.round(this.l))), // 0 ~ 100
+      ((Math.round(this.hue) % 360) + 360) % 360, // 0 ~ 360, positive modulo
+      Math.max(0, Math.min(100, Math.round(this.saturation))), // 0 ~ 100
+      Math.max(0, Math.min(100, Math.round(this.lightness))), // 0 ~ 100
+      this.alpha,
     );
   }
 
   toString(): string {
     const normalizedColor = this.normalize();
-    return `hsl(${normalizedColor.h}, ${normalizedColor.s}%, ${normalizedColor.l}%)`;
+    const [h, s, l, a] = [
+      normalizedColor.hue,
+      normalizedColor.saturation,
+      normalizedColor.lightness,
+      normalizedColor.alpha,
+    ];
+
+    if (a === 1) return `hsl(${h}, ${s}%, ${l}%)`;
+
+    return `hsla(${h}, ${s}%, ${l}%, ${a})`;
   }
 
   static fromHex(color: string) {
@@ -88,5 +113,16 @@ export class Color {
     const a = s * Math.min(l, 1 - l);
     const f = (n: number) => l - a * Math.max(-1, Math.min(k(n) - 3, Math.min(9 - k(n), 1)));
     return [255 * f(0), 255 * f(8), 255 * f(4)];
+  }
+
+  /**
+   * Implementation source code from https://stackoverflow.com/a/3943023
+   */
+  getContrastFontColor(fontColorOnLightBackground: Color = new Color(0, 0, 0)) {
+    const [r, g, b] = Color.convertHSL2RGB(this.hue, this.saturation, this.lightness);
+
+    return r * 0.299 + g * 0.587 + b * 0.114 > 186
+      ? fontColorOnLightBackground
+      : fontColorOnLightBackground.oppositeWithLightness();
   }
 }
