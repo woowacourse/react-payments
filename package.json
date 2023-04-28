@@ -4,9 +4,6 @@
   "homepage": "https://ukkodeveloper.github.io/react-payments/",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^29.5.0",
     "@types/node": "^18.15.11",
     "@types/react": "^18.0.37",
@@ -66,8 +63,6 @@
     "@storybook/react": "^7.0.5",
     "@storybook/react-webpack5": "^7.0.5",
     "@storybook/testing-library": "^0.0.14-next.2",
-    "@testing-library/dom": "^9.2.0",
-    "@testing-library/react-hooks": "^8.0.1",
     "@types/styled-components": "^5.1.26",
     "babel-plugin-named-exports-order": "^0.0.2",
     "chromatic": "^6.17.3",
