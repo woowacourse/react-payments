@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { CardPublicInfo } from "../../types/Card";
 import CardItem from "../Card/CardItem";
@@ -10,12 +10,19 @@ import InputGroup from "../common/InputGroup";
 
 interface CardCompletePageProps {
   getCardItem: (id: number) => CardPublicInfo | undefined;
+  setCardNickName: (id: number, nickName: string) => void;
 }
 
-const CardCompletePage = ({ getCardItem }: CardCompletePageProps) => {
+const CardCompletePage = ({ getCardItem, setCardNickName }: CardCompletePageProps) => {
+  const navigate = useNavigate();
   const { nickName, onChangeNickName, errorMessage } = useNickName();
   const { id } = useParams();
   const card = getCardItem(Number(id));
+
+  const handleClickButton = () => {
+    setCardNickName(Number(id), nickName);
+    navigate("/");
+  };
 
   return (
     <PageContainer>
@@ -35,7 +42,9 @@ const CardCompletePage = ({ getCardItem }: CardCompletePageProps) => {
         <Title title="카드 등록에 실패했습니다." size="large" />
       )}
       <ButtonContainer>
-        <Button isActive>확인</Button>
+        <Button onClick={handleClickButton} isActive>
+          확인
+        </Button>
       </ButtonContainer>
     </PageContainer>
   );

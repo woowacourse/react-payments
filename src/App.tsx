@@ -20,6 +20,15 @@ function App() {
     return cardList.find((card) => card.id === id);
   };
 
+  const setCardNickName = (id: number, nickName: string) => {
+    setCardList((prevCardList) =>
+      prevCardList.map((card) => {
+        if (card.id === id) card.nickName = nickName;
+        return card;
+      })
+    );
+  };
+
   return (
     <AppContainer className="App">
       <BrowserRouter basename={process.env.PUBLIC_URL}>
@@ -35,7 +44,10 @@ function App() {
               </ModalProvider>
             }
           />
-          <Route path="/complete/:id" element={<CardCompletePage getCardItem={getCardItem} />} />
+          <Route
+            path="/complete/:id"
+            element={<CardCompletePage getCardItem={getCardItem} setCardNickName={setCardNickName} />}
+          />
         </Routes>
       </BrowserRouter>
     </AppContainer>

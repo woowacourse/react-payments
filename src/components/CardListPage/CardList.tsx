@@ -10,7 +10,10 @@ const CardList = ({ cardList }: CardListProps) => {
   return (
     <CardListContainer>
       {cardList.map((card, id) => (
-        <CardItem card={card} key={id} />
+        <CardItemContainer>
+          <CardItem card={card} key={id} />
+          <CardNickName>{card.nickName}</CardNickName>
+        </CardItemContainer>
       ))}
     </CardListContainer>
   );
@@ -19,13 +22,28 @@ const CardList = ({ cardList }: CardListProps) => {
 const CardListContainer = styled.section`
   display: flex;
   flex-direction: column;
-  gap: 45px;
+  gap: 25px;
 
   margin-bottom: 45px;
 
   &:empty {
     margin-bottom: 0;
   }
+`;
+
+const CardItemContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+`;
+
+const CardNickName = styled.div`
+  height: 26px;
+
+  font-weight: 700;
+  font-size: 18px;
+  color: #575757;
 `;
 
 export default CardList;
