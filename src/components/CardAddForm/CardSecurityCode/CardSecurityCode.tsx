@@ -5,23 +5,18 @@ import Label from '../../common/Label/Label';
 import Input from '../../common/Input/Input';
 
 interface CardSecurityCodeProps {
-  value: string;
   isError: boolean;
-  onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  updateInputValue: (key: string, value: any) => void;
   updateCardInputError: (key: string, value: string | string[]) => void;
-  moveFocus: (index: number, value: string, maxLength?: number | undefined) => void;
 }
 
 function CardSecurityCode({
-  value,
   isError,
-  onInputChange,
+  updateInputValue,
   updateCardInputError,
-  moveFocus,
 }: CardSecurityCodeProps) {
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    onInputChange(event);
-    moveFocus(event.target.tabIndex, event.currentTarget.value, event.currentTarget.maxLength);
+    updateInputValue(event.target.name, event.target.value);
   };
 
   const onBlur = (event: FocusEvent<HTMLInputElement>) => {
@@ -43,7 +38,6 @@ function CardSecurityCode({
         type="password"
         id="securityCode"
         name="securityCode"
-        value={value}
         minLength={SECURITY_CODE_MIN_LENGTH}
         maxLength={SECURITY_CODE_MAX_LENGTH}
         autoComplete="cc-csc"
