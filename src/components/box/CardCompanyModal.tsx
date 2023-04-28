@@ -1,8 +1,8 @@
 import type { CardType } from '../../types';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 import { useCardForm } from '../../context/cardForm';
-import { CARD_COMPANY_MODAL_MATRIX } from '../../constants';
+import { CARD_COMPANY_OPTION_MATRIX } from '../../constants';
 
 interface Props {
   closeModal: () => void;
@@ -20,7 +20,7 @@ const CardCompanyModal = ({ closeModal }: Props) => {
     <>
       <ModalBackdrop onClick={cardCompany ? closeModal : undefined} />
       <ModalWrapper>
-        {CARD_COMPANY_MODAL_MATRIX.map((row) => (
+        {CARD_COMPANY_OPTION_MATRIX.map((row) => (
           <CardCompanyRow>
             {row.map(({ iconSrc, cardCompany }) => (
               <CardCompanyItem onClick={onClickCardCompanyItem(cardCompany)}>
@@ -37,7 +37,18 @@ const CardCompanyModal = ({ closeModal }: Props) => {
 
 export default CardCompanyModal;
 
+const darkening = keyframes`
+  from { background-color: rgba(0, 0, 0, 0.0); }
+  to { background-color: rgba(0, 0, 0, 0.6); }
+`;
+
+const drawer = keyframes`
+  from { bottom: -20% }
+  to { bottom: 0; }
+`;
+
 const ModalBackdrop = styled.div`
+  animation: ${darkening} 0.4s;
   position: absolute;
   top: 0;
 
@@ -47,6 +58,7 @@ const ModalBackdrop = styled.div`
 `;
 
 const ModalWrapper = styled.div`
+  animation: ${drawer} 0.4s;
   position: absolute;
   bottom: 0;
 
