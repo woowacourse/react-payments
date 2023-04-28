@@ -46,8 +46,7 @@ const FormContainer = styled.form`
 `;
 
 const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: end;
+  align-self: flex-end;
 `;
 
 export default CardForm;

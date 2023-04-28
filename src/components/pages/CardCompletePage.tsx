@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { CardPublicInfo } from "../../types/Card";
 import CardItem from "../Card/CardItem";
 import Title from "../common/Title";
+import Button from "../common/Button";
 
 interface CardCompletePageProps {
   getCardItem: (id: number) => CardPublicInfo | undefined;
@@ -22,6 +23,9 @@ const CardCompletePage = ({ getCardItem }: CardCompletePageProps) => {
       ) : (
         <Title title="카드 등록에 실패했습니다." size="large" />
       )}
+      <ButtonContainer>
+        <Button isActive>확인</Button>
+      </ButtonContainer>
     </PageContainer>
   );
 };
@@ -31,7 +35,11 @@ const PageContainer = styled.div`
   flex-direction: column;
   align-items: center;
 
-  padding: 130px 0;
+  padding: 130px 27px;
+`;
+
+const ButtonContainer = styled.div`
+  align-self: flex-end;
 `;
 
 export default CardCompletePage;
