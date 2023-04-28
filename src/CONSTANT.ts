@@ -23,7 +23,7 @@ export const REGULAR_EXPRESSION = {
   CAPITAL_LETTER_OR_SPACE: /^[A-Z\s]+$/,
 };
 
-export const BANK_NAME = {
+export const CardCo_NAME = {
   woori: "우리카드",
   lotte: "롯데카드",
   hana: "하나카드",

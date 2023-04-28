@@ -15,7 +15,7 @@ export interface EachUserInputState {
 export type nowStatus = 0 | 1 | 2;
 
 export interface InputStatus {
-  bank?: EachUserInputState;
+  CardCo?: EachUserInputState;
   cardNumber: EachUserInputState;
   expirationDate: EachUserInputState;
   owner: EachUserInputState;
@@ -23,7 +23,7 @@ export interface InputStatus {
   password: EachUserInputState;
 }
 
-export type Bank =
+export type CardCo =
   | "woori"
   | "lotte"
   | "hana"

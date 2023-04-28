@@ -6,9 +6,9 @@ import { ReactComponent as BcCard } from "../asset/BcCard.svg";
 import { ReactComponent as KakaoCard } from "../asset/KakaoCard.svg";
 import { ReactComponent as ShinhanCard } from "../asset/ShinhanCard.svg";
 import { ReactComponent as HyundaiCard } from "../asset/HyundaiCard.svg";
-import { Bank } from "../type";
+import { CardCo } from "../type";
 
-const bankIcon = {
+const CardCoIcon = {
   woori: WooriCard,
   lotte: LotteCard,
   hana: HanaCard,
@@ -19,7 +19,7 @@ const bankIcon = {
   hyundai: HyundaiCard,
 };
 
-export const GetBankIcon = (bank: Bank) => {
-  const Icon = bankIcon[bank];
+export const GetCardCoIcon = (cardCo: CardCo) => {
+  const Icon = CardCoIcon[cardCo];
   return <Icon />;
 };
