@@ -8,30 +8,27 @@ import {
   SECURITY_TEXT_ICON,
 } from '../constants';
 
-const formatCardNumber = (input: string) => {
+const formatNumber = (input: string) => {
   return input.replace(REGEX.NON_NUMBER, '');
 };
 
+const formatSentence = (input: string) => {
+  return input.trim();
+};
+
+const formatEnglishCapitalization = (input: string) => {
+  return input.replace(/^[^a-zA-Z]+|[^a-zA-Z\s]+|[\s]{2,}/g, '').toUpperCase();
+};
+
 const formatExpirationDate = (input: string) => {
-  const [month, year] = input.replace(DATE_DIVIDER, '').match(REGEX.TWO_CHAR_SEQUENCE) ?? [];
+  const [month, year] = input.replace(DATE_DIVIDER, '').match(REGEX.TWO_CHAR_SEQUENCE) ?? [''];
 
   return { month, year };
 };
 
-const formatEnglishCapitalization = (input: string) => {
-  return input.toUpperCase();
-};
-
-const formatter = {
-  cardNumber: formatCardNumber,
-  expirationDate: formatExpirationDate,
-  ownerName: formatEnglishCapitalization,
-};
-
-export default formatter;
-
 const formatDisplayedCardNumber = (input: string) => {
   return input
+    .replace(REGEX.NON_NUMBER, '')
     .replace(REGEX.FOUR_NUMBER_SEQUENCE, '$1 ')
     .slice(0, CARD_NUMBER_INPUT_MAX_LENGTH)
     .trim();
@@ -54,4 +51,12 @@ const formatDisplayedExpirationDate = (input: string) => {
   return formattedValue.slice(0, EXPIRATION_DATE_INPUT_MAX_LENGTH);
 };
 
-export { formatDisplayedExpirationDate, formatDisplayedCardNumber, encryptDisplayedCardNumber };
+export {
+  formatNumber,
+  formatSentence,
+  formatEnglishCapitalization,
+  formatExpirationDate,
+  formatDisplayedExpirationDate,
+  formatDisplayedCardNumber,
+  encryptDisplayedCardNumber,
+};
