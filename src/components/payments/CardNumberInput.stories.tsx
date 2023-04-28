@@ -28,9 +28,9 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const WithMasks: Story = {
-  args: { value: '' },
-  render: () => {
-    const [value, setValue] = useState('9908-1121-1992-7328');
+  args: { value: '9908-1121-1992-7328' },
+  render: (args) => {
+    const [value, setValue] = useState(args.value);
 
     return (
       <>
