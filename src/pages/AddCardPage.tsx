@@ -22,6 +22,7 @@ const AddCardPage = () => {
   const navigate = useNavigate();
   const [cardType, setCardType] = useState('BC카드');
   const [modalOpen, setModalOpen] = useState(true);
+  const [cardFlip, setCardFlip] = useState(false);
 
   const [cardNumber, onChangeCardNumber] = usePasswordInput<CardNumber>({
     first: '',
@@ -61,6 +62,8 @@ const AddCardPage = () => {
             cardNumber={cardNumber}
             cardOwner={cardOwner.value}
             expired={cardExpire.value}
+            securityCode={securityCode.value}
+            cardFlipped={cardFlip}
             openCardSelectModal={setModalOpen}
           />
           <FormCardAdd
@@ -71,6 +74,7 @@ const AddCardPage = () => {
             securityCode={securityCode}
             cardPassword1={cardPassword1}
             cardPassword2={cardPassword2}
+            cardFlipper={setCardFlip}
           />
         </section>
       </div>

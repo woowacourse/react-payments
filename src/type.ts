@@ -35,6 +35,7 @@ export type FormCardAddProps = {
   securityCode: InputHook<string>;
   cardPassword1: InputHook<string>;
   cardPassword2: InputHook<string>;
+  cardFlipper: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export type actionName = 'CARDLIST_REQUEST' | 'CARDLIST_SUCCESS' | 'CARDLIST_FAILURE';

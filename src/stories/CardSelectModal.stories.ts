@@ -11,4 +11,13 @@ const meta: Meta<typeof CardSelectModal> = {
 export default meta;
 type Story = StoryObj<typeof CardSelectModal>;
 
-export const Primary: Story = {};
+export const Primary: Story = {
+  args: {
+    closeModal: () => {
+      console.log('닫힘!');
+    },
+    determineCardType: () => {
+      console.log('카드 바뀜');
+    },
+  },
+};

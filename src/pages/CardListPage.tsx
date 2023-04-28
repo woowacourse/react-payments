@@ -38,6 +38,7 @@ const CardListPage = () => {
                   cardNumber={card.cardNumber}
                   cardOwner={card.cardOwner}
                   expired={card.expired}
+                  securityCode={card.securityCode}
                 />
                 <div className="card-nickname">{card.cardNickName}</div>
               </div>

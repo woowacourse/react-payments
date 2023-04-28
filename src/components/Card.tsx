@@ -10,10 +10,24 @@ type CardProps = {
   cardNumber: CardNumber;
   cardOwner: string;
   expired: string;
+  securityCode: string;
+  cardFlipped?: boolean;
   openCardSelectModal?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const Card = ({ cardType, cardNumber, cardOwner, expired, openCardSelectModal }: CardProps) => {
+const Card = ({
+  cardType,
+  cardNumber,
+  cardOwner,
+  expired,
+  securityCode,
+  cardFlipped,
+  openCardSelectModal,
+}: CardProps) => {
+  const flipHandler = () => {
+    return cardFlipped ? 'card flipped' : 'card';
+  };
+
   return (
     <>
       <div
@@ -22,7 +36,7 @@ const Card = ({ cardType, cardNumber, cardOwner, expired, openCardSelectModal }:
           if (openCardSelectModal) openCardSelectModal(true);
         }}
       >
-        <div className="card">
+        <div className={flipHandler()}>
           <div
             className="front"
             style={{
@@ -56,7 +70,7 @@ const Card = ({ cardType, cardNumber, cardOwner, expired, openCardSelectModal }:
           >
             <div className="card-back-track-1"></div>
             <div className="card-back-track-2">
-              <div></div>
+              <div>* * * * {securityCode}</div>
               {cardOwner}
             </div>
             <div className="card-back-track-3">

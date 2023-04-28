@@ -9,6 +9,7 @@ import InputCardData from './InputCardData';
 
 const FormCardAdd = ({
   cardType,
+  cardFlipper,
   cardNumber,
   cardExpire,
   cardOwner,
@@ -68,6 +69,14 @@ const FormCardAdd = ({
     setNicknameModalOpen(true);
   };
 
+  const handleCardFlip = () => {
+    cardFlipper(true);
+  };
+
+  const handleCardUnflip = () => {
+    cardFlipper(false);
+  };
+
   useEffect(() => {
     if (!fulfilledData.includes(false)) setReadyToPending(true);
     fulfilledData[5] = true;
@@ -92,7 +101,10 @@ const FormCardAdd = ({
               refObject={inputRef[0]}
               handleError={() => {}}
               onChange={cardNumber.onChange}
-              onFocus={moveFocus}
+              nextFocus={moveFocus}
+              onFlip={() => {
+                handleCardUnflip();
+              }}
               handleInputData={handleInputData}
             />
             <span>-</span>
@@ -108,7 +120,10 @@ const FormCardAdd = ({
               refObject={inputRef[1]}
               handleError={() => {}}
               onChange={cardNumber.onChange}
-              onFocus={moveFocus}
+              nextFocus={moveFocus}
+              onFlip={() => {
+                handleCardUnflip();
+              }}
               handleInputData={handleInputData}
             />
             <span>-</span>
@@ -125,7 +140,10 @@ const FormCardAdd = ({
               refObject={inputRef[2]}
               handleError={() => {}}
               onChange={cardNumber.onChange}
-              onFocus={moveFocus}
+              nextFocus={moveFocus}
+              onFlip={() => {
+                handleCardUnflip();
+              }}
               handleInputData={handleInputData}
             />
             <span>-</span>
@@ -142,7 +160,10 @@ const FormCardAdd = ({
               refObject={inputRef[3]}
               handleError={() => {}}
               onChange={cardNumber.onChange}
-              onFocus={moveFocus}
+              nextFocus={moveFocus}
+              onFlip={() => {
+                handleCardUnflip();
+              }}
               handleInputData={handleInputData}
             />
           </div>
@@ -161,7 +182,10 @@ const FormCardAdd = ({
             refObject={inputRef[4]}
             handleError={handleExpireError}
             onChange={cardExpire.onChange}
-            onFocus={moveFocus}
+            nextFocus={moveFocus}
+            onFlip={() => {
+              handleCardUnflip();
+            }}
             handleInputData={handleInputData}
           />
           {inputError ? <span className="expired-error">만료일이 초과된 카드입니다!</span> : ''}
@@ -183,7 +207,10 @@ const FormCardAdd = ({
             refObject={inputRef[5]}
             handleError={() => {}}
             onChange={cardOwner.onChange}
-            onFocus={moveFocus}
+            nextFocus={moveFocus}
+            onFlip={() => {
+              handleCardUnflip();
+            }}
             handleInputData={handleInputData}
           />
         </div>
@@ -202,7 +229,10 @@ const FormCardAdd = ({
               refObject={inputRef[6]}
               handleError={() => {}}
               onChange={securityCode.onChange}
-              onFocus={moveFocus}
+              nextFocus={moveFocus}
+              onFlip={() => {
+                handleCardFlip();
+              }}
               handleInputData={handleInputData}
             />
             <Tooltip title={CVC_TOOLTIP_TITLE} detail={CVC_TOOLTIP_DETAIL} />
@@ -223,7 +253,10 @@ const FormCardAdd = ({
               refObject={inputRef[7]}
               handleError={() => {}}
               onChange={cardPassword1.onChange}
-              onFocus={moveFocus}
+              nextFocus={moveFocus}
+              onFlip={() => {
+                handleCardUnflip();
+              }}
               handleInputData={handleInputData}
             />
             <InputCardData
@@ -238,7 +271,10 @@ const FormCardAdd = ({
               refObject={inputRef[8]}
               handleError={() => {}}
               onChange={cardPassword2.onChange}
-              onFocus={moveFocus}
+              nextFocus={moveFocus}
+              onFlip={() => {
+                handleCardUnflip();
+              }}
               handleInputData={handleInputData}
             />
 

@@ -80,6 +80,7 @@ const CardNicknameInputModal = ({
             cardNumber={cardNumber.value}
             cardOwner={cardOwner.value}
             expired={cardExpire.value}
+            securityCode={securityCode.value}
           />
         </div>
         <form onSubmit={onSubmit}>

@@ -15,7 +15,8 @@ export type InputProps = {
   refObject: RefObject<HTMLInputElement>;
   handleError: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onFocus: (e: ChangeEvent) => void;
+  nextFocus: (e: ChangeEvent) => void;
+  onFlip: () => void;
   handleInputData: (index: number, e: ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -32,7 +33,8 @@ const InputCardData = ({
   refObject: Ref,
   handleError,
   onChange,
-  onFocus,
+  nextFocus,
+  onFlip,
   handleInputData,
 }: InputProps) => {
   return inputType === 'password' ? (
@@ -46,9 +48,11 @@ const InputCardData = ({
       ref={Ref}
       onChange={(e) => {
         onChange(e);
-        onFocus(e);
+        nextFocus(e);
+
         handleInputData(dataId, e);
       }}
+      onFocus={onFlip}
       name={name}
       required={required}
     />
@@ -64,9 +68,10 @@ const InputCardData = ({
       onChange={(e) => {
         onChange(e);
         handleError(e);
-        onFocus(e);
+        nextFocus(e);
         handleInputData(dataId, e);
       }}
+      onFocus={onFlip}
       name={name}
       required={required}
     />

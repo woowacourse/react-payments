@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { userEvent, within } from '@storybook/testing-library';
 
+// import { expect } from '@storybook/jest';
 import CVCTooltip from '../components/CVCTooltip';
 
 const meta: Meta<typeof CVCTooltip> = {
@@ -10,6 +12,10 @@ const meta: Meta<typeof CVCTooltip> = {
 
 export default meta;
 type Story = StoryObj<typeof CVCTooltip>;
+
+// export const check = ()=>{
+//   <CVCTool
+// }
 
 export const Primary: Story = {
   args: {
