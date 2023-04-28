@@ -1,6 +1,5 @@
-import React, { useContext } from "react";
+import React from "react";
 import Style from "./ImgButtonStyled";
-import { CardDetailContext } from "../../../context/CardDetailContext";
 import { CardCompany } from "../../../types/card";
 interface ImgButtonProps {
   onClick: () => void;
@@ -9,14 +8,9 @@ interface ImgButtonProps {
 }
 
 function ImgButton({ onClick, alt, src }: ImgButtonProps) {
-  const { changeCompany } = useContext(CardDetailContext);
-  const handelOnClick = () => {
-    changeCompany(alt);
-    onClick();
-  };
   return (
     <Style.ImgButtonSection>
-      <Style.Button type="button" onClick={handelOnClick}>
+      <Style.Button type="button" onClick={onClick}>
         <Style.Img src={process.env.PUBLIC_URL + src} alt={alt} />
         <Style.Title>{alt}</Style.Title>
       </Style.Button>

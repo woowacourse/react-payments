@@ -78,6 +78,7 @@ function useWarningText(minLength?: number, name?: string) {
     }
     return true;
   };
+
   return {
     warningText,
     checkNumber,
