@@ -17,6 +17,7 @@ import Modal from "../../components/Modal/Modal";
 import CardCompanyIcon from "../../components/CardCompanyIcon/CardCompanyIcon";
 import { GlobalContext } from "../../context/GlobalProvider";
 import { AddCardContext } from "../../context/AddCardProvider";
+import { Button } from "../../components/common/Button";
 
 const AddCardPage = () => {
   const { cards, setCards, setCurrentIndex } = useContext(GlobalContext);
@@ -111,9 +112,7 @@ const AddCardPage = () => {
         <CardOwnerNameInput ownerName={ownerName} nameLength={ownerName.length} setOwnerName={setOwnerName} />
         <CardSecurityCodeInput securityCode={securityCode} setSecurityCode={setSecurityCode} />
         <CardPasswordInput password={password} setPassword={setPassword} />
-        <ButtonBox isVisible={isAddButtonVisibleConditionFulfilled()}>
-          <Button>다음</Button>
-        </ButtonBox>
+        <Button isVisible={isAddButtonVisibleConditionFulfilled()}>다음</Button>
       </Form>
     </Container>
   );
@@ -134,25 +133,6 @@ const Form = styled.form`
     height: 0;
     background-color: transparent;
   }
-`;
-
-export const ButtonBox = styled.div<{ isVisible: boolean }>`
-  display: flex;
-  justify-content: flex-end;
-
-  width: 100%;
-
-  visibility: ${({ isVisible }) => (isVisible ? "visible" : "hidden")};
-`;
-
-export const Button = styled.button`
-  background-color: transparent;
-  border: none;
-
-  font-size: 14px;
-  font-weight: 700;
-
-  cursor: pointer;
 `;
 
 export default AddCardPage;
