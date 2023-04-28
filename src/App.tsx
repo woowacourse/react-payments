@@ -1,4 +1,4 @@
-import { useEffect, useState, createContext } from 'react';
+import { useEffect, useState } from 'react';
 import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
 import GlobalStyle from './styles/GlobalStyle';
 import Home from './pages/Home';
@@ -13,8 +13,6 @@ const initCards = () => {
   return [];
 };
 
-export const Context = createContext<CardType[] | null>(null);
-
 function App() {
   const [cards, setCards] = useState<CardType[] | []>(initCards());
 
@@ -23,22 +21,20 @@ function App() {
   }, [cards]);
 
   return (
-    <Context.Provider value={cards}>
-      <Router basename={process.env.PUBLIC_URL}>
-        <GlobalStyle />
-        <Routes>
-          <Route path="/" element={<Home cards={cards} />} />
-          <Route
-            path="/add-card"
-            element={<AddCard cards={cards} setCards={setCards} />}
-          />
-          <Route
-            path="/add-card-alias"
-            element={<AddCardAlias cards={cards} setCards={setCards} />}
-          />
-        </Routes>
-      </Router>
-    </Context.Provider>
+    <Router basename={process.env.PUBLIC_URL}>
+      <GlobalStyle />
+      <Routes>
+        <Route path="/" element={<Home cards={cards} />} />
+        <Route
+          path="/add-card"
+          element={<AddCard cards={cards} setCards={setCards} />}
+        />
+        <Route
+          path="/add-card-alias"
+          element={<AddCardAlias cards={cards} setCards={setCards} />}
+        />
+      </Routes>
+    </Router>
   );
 }
 
