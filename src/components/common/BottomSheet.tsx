@@ -9,7 +9,7 @@ const Backdrop = styled.div<BackdropProps>`
   display: ${(props) => (props.$open ? 'flex' : 'none')};
   align-items: flex-end;
 
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
