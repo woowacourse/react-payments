@@ -7,6 +7,7 @@ import { CardForm } from "../components/cardForm";
 import { Link } from "react-router-dom";
 import { CompanySelectModal } from "../components/companySelectModal";
 import { getRandomId } from "../utils/randomId";
+import { useModal } from "../hook/useModal";
 
 const defaultCard = {
   id: "",
@@ -25,15 +26,7 @@ export const AddCard = () => {
     ...defaultCard,
     id: getRandomId(),
   });
-  const [isModalOpen, setIsModalOpen] = useState(true);
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const changeCompany = () => {
-    setIsModalOpen(true);
-  };
+  const { isModalOpen, closeModal, openModal } = useModal(true);
 
   return (
     <>
@@ -43,7 +36,7 @@ export const AddCard = () => {
         </Link>
       </Header>
       <Main>
-        <CardWrapper onClick={changeCompany}>
+        <CardWrapper onClick={openModal}>
           <GuideText>카드를 클릭해 카드사를 변경할 수 있습니다.</GuideText>
           <CardItem card={newCard} />
         </CardWrapper>
