@@ -31,6 +31,8 @@ export default App;
 
 const AppWrapper = styled.div`
   display: flex;
-  width: 100%;
   justify-content: center;
+
+  width: 100%;
+  height: 100%;
 `;
