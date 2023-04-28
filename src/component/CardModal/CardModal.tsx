@@ -1,6 +1,10 @@
 import React, { useContext, useEffect } from "react";
 import Style from "./CardModalStyled";
-import { COMPANY_LIST, COMPANY_SRC } from "../../abstract/constants";
+import {
+  COMPANY_LIST,
+  COMPANY_SRC,
+  DEFAULT_COMPANY,
+} from "../../abstract/constants";
 import ImgButton from "../common/ImgButton/ImgButton";
 import { CardCompany } from "../../types/card";
 import { CardDetailContext } from "../../context/CardDetailContext";
@@ -26,17 +30,20 @@ function CardModal({ closeModal }: CardModalProps) {
       <Style.Backdrop onClick={closeModal} />
       <Style.PopUp>
         <Style.Detail>
-          {COMPANY_LIST.map((company: CardCompany) => (
-            <ImgButton
-              key={company}
-              onClick={() => {
-                changeCompany(company);
-                closeModal();
-              }}
-              src={COMPANY_SRC[company]}
-              alt={company}
-            />
-          ))}
+          {COMPANY_LIST.map(
+            (company: CardCompany) =>
+              company !== DEFAULT_COMPANY && (
+                <ImgButton
+                  key={company}
+                  onClick={() => {
+                    changeCompany(company);
+                    closeModal();
+                  }}
+                  src={COMPANY_SRC[company]}
+                  alt={company}
+                />
+              )
+          )}
         </Style.Detail>
       </Style.PopUp>
     </>

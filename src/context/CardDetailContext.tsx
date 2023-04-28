@@ -6,6 +6,7 @@ import useCardCVC from "../hooks/useCardCVC";
 import useCardPassword from "../hooks/useCardPassword";
 import useCardCompany from "../hooks/useCardCompany";
 import { CardCompany } from "../types/card";
+import { DEFAULT_COMPANY } from "../abstract/constants";
 
 const CardDetailContext = createContext({
   changeCardNumber: (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,7 +30,7 @@ const CardDetailContext = createContext({
     console.log(e);
   },
   cardPassword: ["", ""] as [string, string],
-  cardCompany: "없음" as CardCompany,
+  cardCompany: DEFAULT_COMPANY as CardCompany,
   changeCompany: (card: CardCompany) => {
     console.log(card);
   },

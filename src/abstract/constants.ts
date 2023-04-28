@@ -53,7 +53,7 @@ const WARNING_TEXT = {
   NO_COMPLETED_FORM: "작성이 완료되지 않은 필수 입력요소가 있습니다.",
 };
 
-const COMPANY_SRC: Record<CardCompany, string> = {
+const COMPANY_SRC: Record<(typeof COMPANY_LIST)[number], string> = {
   BC카드: "/img/bc-logo.svg",
   신한카드: "/img/shinhan-logo.svg",
   카카오뱅크: "/img/kakaobank-logo.svg",
@@ -76,15 +76,18 @@ const COMPANY_LIST = [
 ] as const;
 
 const BACKGROUND: Record<CardCompany, string> = {
-  BC카드: "#DC143C",
-  신한카드: "#0000CD",
-  카카오뱅크: "#FEE500",
+  없음: "#c0c0c2",
+  BC카드: "#e03a5c",
+  신한카드: "#090999",
+  카카오뱅크: "#f2db02",
   현대카드: "#333333",
-  우리카드: "#00BFFF",
-  롯데카드: "#FF0000",
+  우리카드: "#0099e0",
+  롯데카드: "#ba0000",
   하나카드: "#008B8B",
   국민카드: "#696969",
 } as const;
+
+const DEFAULT_COMPANY = "없음" as const;
 
 export {
   IMG,
@@ -98,4 +101,5 @@ export {
   COMPANY_SRC,
   COMPANY_LIST,
   BACKGROUND,
+  DEFAULT_COMPANY,
 };

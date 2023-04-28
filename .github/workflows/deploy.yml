@@ -2,7 +2,7 @@ name: NodeJS with Webpack
 
 on:
   push:
-    branches: [step1]
+    branches: [step2]
 
 jobs:
   deploy:
@@ -25,4 +25,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
-          publish_branch: step1-pg
+          publish_branch: step2-pg

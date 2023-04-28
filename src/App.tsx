@@ -14,7 +14,7 @@ function App() {
     cardOwnerName: "",
     cardCVC: "",
     cardPassword: ["", ""],
-    cardCompany: "BC카드",
+    cardCompany: "없음",
   });
   const addCreditCard = (card: CreditCard) => {
     setCreditCardList([...creditCardList, card]);

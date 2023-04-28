@@ -1,7 +1,12 @@
 import React from "react";
 import Style from "./CardDetailViewStyled";
 
-import { BACKGROUND, PLACE_HOLDER, STRING } from "../../abstract/constants";
+import {
+  BACKGROUND,
+  DEFAULT_COMPANY,
+  PLACE_HOLDER,
+  STRING,
+} from "../../abstract/constants";
 import { ThemeProvider } from "styled-components";
 import { CardCompany } from "../../types/card";
 
@@ -24,6 +29,11 @@ function CardDetailView({
   return (
     <ThemeProvider theme={theme}>
       <Style.CreditCard>
+        {cardCompany === DEFAULT_COMPANY ? (
+          <Style.CompanyHint>카드사를 선택하세요</Style.CompanyHint>
+        ) : (
+          <Style.Company>{cardCompany}</Style.Company>
+        )}
         <Style.ICDiv />
         <Style.CardNumberSection>
           <Style.CardNumber>
