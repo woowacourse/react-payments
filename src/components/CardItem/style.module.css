@@ -7,11 +7,11 @@
   padding: 15px;
   justify-content: flex-end;
   gap: 12px;
-
   background-color: #0085ff;
   color: var(--white);
   border-radius: 7px;
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease;
 }
 
 .cardIssuer {
@@ -56,40 +56,40 @@
 
 .bc {
   background: #e13f45;
-  color: var(--white);
+  color: #6f0004;
 }
 
 .shinhan {
-  background: #1646c3;
-  color: var(--white);
+  background: #5881ec;
+  color: #072473;
 }
 
 .kakaobank {
   background: #ffd600;
-  color: #282828;
+  color: #38320f;
 }
 
 .hyundai {
-  background: #1e1e1e;
-  color: var(--white);
+  background: #f1f1f1;
+  color: #6a6a6a;
 }
 
 .woori {
   background: #0083ca;
-  color: var(--white);
+  color: #002d45;
 }
 
 .lotte {
   background: #b11824;
-  color: var(--white);
+  color: #460005;
 }
 
 .hana {
   background: #1b9592;
-  color: var(--white);
+  color: #023c3a;
 }
 
 .kb {
   background: #776c61;
-  color: var(--white);
+  color: #26201a;
 }
