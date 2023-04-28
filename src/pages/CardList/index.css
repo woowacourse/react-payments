@@ -29,6 +29,11 @@
   margin-bottom: 36px;
 }
 
+.card-list-page-body .card-alias {
+  color: #525252;
+  text-align: center;
+}
+
 .empty-card-list-title {
   font-weight: 700;
   font-size: 14px;

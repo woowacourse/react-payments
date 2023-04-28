@@ -35,7 +35,7 @@ const CardListPage = () => {
                 expireMonth={card.expireMonth}
                 expireYear={card.expireYear}
               />
-              <p>{card.alias}</p>
+              <p className="card-alias">{card.alias || card.cardType}</p>
             </div>
           ))
         )}

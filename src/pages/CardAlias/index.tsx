@@ -6,6 +6,7 @@ import { isValidCardAlias } from '../AddCard/domain/dispatcher';
 import { useIsAccessAliasPageContext } from '../../context/IsAccessAliasPageProvider';
 import { CardNumber, CardType } from '../../type';
 import { fetchLocalStorage, getSerialNumber } from '../../utils/applicationUtil';
+import './index.css';
 
 const registerCardAlias = (alias: string, cardNumber: CardNumber) => {
   const registerdCardNumber = getSerialNumber(cardNumber);
@@ -34,7 +35,7 @@ const CardAliasPage = () => {
     navigate('/');
   };
   return (
-    <div>
+    <div className="card-alias-page">
       <h2>카드 등록이 완료되었습니다.</h2>
       <Card
         cardType={currentCard.cardType}
@@ -46,8 +47,10 @@ const CardAliasPage = () => {
         expireMonth={currentCard.expireMonth}
         expireYear={currentCard.expireYear}
       />
-      <input value={value} onChange={onChange} />
-      <button onClick={onClick}>확인</button>
+      <input value={value} onChange={onChange} placeholder="별칭을 입력해주세요." />
+      <div className="card-alias-footer">
+        <button onClick={onClick}>확인</button>
+      </div>
     </div>
   );
 };
