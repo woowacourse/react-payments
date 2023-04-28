@@ -39,32 +39,30 @@ export const CardItem = ({ card, handleClick }: CardProps) => {
   const { numbers, expiryDate, owner = DEFAULT_NAME, brand = DEFAULT_BRAND } = card;
 
   const memorizedNumbers = useMemo((): string => {
-    const shownNumbers = card.numbers.slice(0, 8);
+    const shownNumbers = numbers.slice(0, 8);
     return (shownNumbers.match(new RegExp(CARDNUMBERS_REGEX)) ?? []).join(" ");
-  }, [card.numbers]);
+  }, [numbers]);
 
   const memorizedHideNumbers = useMemo((): string => {
-    const hiddenNumbers = "●".repeat(card.numbers.slice(8).length);
+    const hiddenNumbers = "●".repeat(numbers.slice(8).length);
     return (hiddenNumbers.match(new RegExp(CARDNUMBERS_REGEX)) ?? []).join(" ");
-  }, [card.numbers]);
-
-  const memoizedName = useMemo(() => {
-    return card.owner ? card.owner : DEFAULT_NAME;
-  }, [card.owner]);
+  }, [numbers]);
 
   const memoizedExpiryDate = useMemo(() => {
-    return card.expiryDate ? card.expiryDate : DEFAULT_EXPRIYDATE;
-  }, [card.expiryDate]);
+    return expiryDate ? expiryDate : DEFAULT_EXPRIYDATE;
+  }, [expiryDate]);
 
   return (
+    <Card $backgroundColor={backgroundColorMap[brand]}>
       <Container $color={fontColorMap[brand]} onClick={handleClick}>
+        <Brand>{brand}</Brand>
         <IcChip />
         <Numbers>
           <ShownNumbers>{memorizedNumbers}</ShownNumbers>
           <HiddenNumbers>{memorizedHideNumbers}</HiddenNumbers>
         </Numbers>
         <InfoWrapper>
-          <Name>{memoizedName}</Name>
+          <Name>{owner}</Name>
           <ExpiryDate>{memoizedExpiryDate}</ExpiryDate>
         </InfoWrapper>
       </Container>
@@ -72,17 +70,18 @@ export const CardItem = ({ card, handleClick }: CardProps) => {
   );
 };
 
-const Container = styled.div`
+const Container = styled.div<{ $color: string }>`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+
   width: 183px;
   height: 100px;
-  color: white;
 
   font-size: 10px;
   font-weight: 500;
+  color: ${(props) => props.$color};
 
-  gap: 4px;
   white-space: pre;
 `;
 
@@ -91,7 +90,13 @@ const IcChip = styled.div`
   height: 26px;
   border-radius: 4px;
   background-color: #cbba64;
-  margin-top: 32px;
+
+  margin-top: 17px;
+`;
+
+const Brand = styled.div`
+  font-size: 11px;
+  font-weight: 400;
 `;
 
 const Numbers = styled.div`

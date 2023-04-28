@@ -2,22 +2,24 @@ import styled from "styled-components";
 
 export interface InputProps {
   label: string;
-  $width: string;
   placeholder: string;
-  $textPosition: string;
   type: string;
+  ref?: React.RefObject<HTMLInputElement>;
   error?: { isValid: boolean; errorMessage: string };
   handleInput?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  $width: string;
+  $textPosition: string;
 }
 
 export const Input = ({
   label,
-  $width,
   placeholder,
-  $textPosition,
   type,
+  ref,
   handleInput,
   error = { isValid: true, errorMessage: "" },
+  $width,
+  $textPosition,
 }: InputProps) => {
   return (
     <Column>
@@ -25,10 +27,11 @@ export const Input = ({
         placeholder={placeholder}
         id={label}
         name={label}
-        $width={$width}
         onInput={handleInput}
-        $textPosition={$textPosition}
         type={type}
+        ref={ref}
+        $width={$width}
+        $textPosition={$textPosition}
       />
       <ErrorMessage>{error.isValid ? "" : error.errorMessage}</ErrorMessage>
     </Column>
@@ -40,10 +43,12 @@ const Column = styled.div`
   flex-direction: column;
 `;
 
-const InputField = styled.input<{ $textPosition: string; $width: string }>`
+const InputField = styled.input<{
+  $textPosition: string;
+  $width: string;
+}>`
   height: 45px;
   width: ${(props) => props.$width};
-  background-color: #ecebf1;
   border-radius: 7px;
   text-align: ${(props) => props.$textPosition};
 
@@ -51,6 +56,8 @@ const InputField = styled.input<{ $textPosition: string; $width: string }>`
   font-weight: 500;
 
   padding: 0 10px;
+
+  background-color: #ecebf1;
 
   &::-webkit-inner-spin-button {
     -webkit-appearance: none;
