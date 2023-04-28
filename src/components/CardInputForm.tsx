@@ -189,6 +189,11 @@ const CardInputForm = (props: CardInputFormProps) => {
             onChange={handleCvcChanged}
           />
           <img src={QuestionMark} alt="도움말" onClick={() => setIsAnswered(!isAnswered)} />
+          {isAnswered && (
+        <AnswerBoxWrapper>
+          <p>카드 뒷면의 보안 3자리 숫자를 입력해 주세요.</p>
+        </AnswerBoxWrapper>
+      )}
         </CvcInputWrapper>
         <span>{cvcValidation(card.cvc) ? '':"cvc는 번호만 입력 가능합니다."}</span> 
       </InputSetWrapper>
@@ -219,11 +224,6 @@ const CardInputForm = (props: CardInputFormProps) => {
         </PasswordInputWrapper>
         <span>{passwordValidation(card.password[PASSWORD_DIGIT_INDEX.FIRST], card.password[PASSWORD_DIGIT_INDEX.SECOND]) ? '':"비밀번호에는 숫자만 입력 가능합니다."}</span>
       </InputSetWrapper>
-      {isAnswered && (
-        <AnswerBoxWrapper>
-          <p>카드 뒷면의 보안 3자리 숫자를 입력해 주세요.</p>
-        </AnswerBoxWrapper>
-      )}
       {(inputFormValidation(realCardNumber, card)) && <button type="submit">
         다음
       </button>}
@@ -317,13 +317,11 @@ const AnswerBoxWrapper = styled.div`
   display: flex;
   padding: 10px;
 
-  position: absolute;
-  top: 515px;
-  right: 60px;
+  margin-left: 1rem;
 
-  width: 43%;
-  height: 6%;
-
+  width: 10rem;
+  height: 2.5rem;
+ 
   background: #ecebf1;
 
   border-radius: 8px;

@@ -77,6 +77,6 @@ export const inputFormValidation = (realCardNumber:string, card: CardType) => {
     inputLengthValidation(card)
   )
     return true;
-    console.log(cardNumberValidation(card.cardNumber))
+
   return false;
 };
