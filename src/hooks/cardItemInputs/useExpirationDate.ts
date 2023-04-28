@@ -32,7 +32,7 @@ const useExpirationDate = () => {
       setErrorMessage("유효한 달을 입력해주세요");
       return;
     }
-  }, [inputValues, errorMessage, setErrorMessage]);
+  }, [inputValues, setErrorMessage]);
 
   const { registRef, isNextInputFocusable, focusNextInput } = useInputFocus(INPUT_MAX_LENGTH.EXPIRATION_DATE);
 

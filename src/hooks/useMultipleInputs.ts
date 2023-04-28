@@ -17,7 +17,7 @@ const useMultipleInputs = (numberOfInputs: number, validator: (inputValue: strin
       });
       setErrorMessage("");
     } catch (error) {
-      if (!(error instanceof Error)) return;
+      if (!(error instanceof Error) || !error.message) return;
       setErrorMessage(error.message);
     }
   };
