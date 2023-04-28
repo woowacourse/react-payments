@@ -17,7 +17,7 @@ const Card = ({
   return (
     <div className={`card ${getBackgroundStyleByCardType(cardType)}`} onClick={onClick}>
       <div className="card-track-1">
-        <span className="card-type">{cardType}</span>
+        <span className="card-type">{cardType || '카드회사를 선택해 주세요.'}</span>
       </div>
       <div className="card-track-2">
         <div className="ic-chip"></div>

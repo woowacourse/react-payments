@@ -15,6 +15,7 @@ import useTotalStatus from '../../../hooks/useTotalStatus';
 
 const AddCardForm = ({
   cardType,
+  cardCompanyStatus,
   cardFirstNumber,
   cardSecondNumber,
   cardThirdNumber,
@@ -30,6 +31,7 @@ const AddCardForm = ({
   const { setCurrentCard } = useCurrentCardContext();
   const { setIsAccessAliasPage } = useIsAccessAliasPageContext();
   const isActive = useTotalStatus([
+    cardCompanyStatus,
     cardFirstNumber.status,
     cardSecondNumber.status,
     cardThirdNumber.status,
@@ -43,7 +45,6 @@ const AddCardForm = ({
   ]);
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     const submitData: Omit<CardType, 'id'> = {
       cardType,
       cardNumber: {

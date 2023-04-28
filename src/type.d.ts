@@ -54,6 +54,7 @@ export type CardCompany =
 
 export type AddCardFormProps = {
   cardType: string;
+  cardCompanyStatus: InputStatus;
   cardFirstNumber: InputHook;
   cardSecondNumber: InputHook;
   cardThirdNumber: InputHook;

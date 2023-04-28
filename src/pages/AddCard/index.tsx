@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Card from '../../components/Card';
@@ -8,6 +8,7 @@ import BackButtonImg from '../../asset/back_button.png';
 import './index.css';
 import useInput from '../../hooks/useInput';
 import {
+  isSelectCardType,
   isValidCardNumber,
   isValidExpiredMonthFormat,
   isValidExpiredYearFormat,
@@ -17,10 +18,15 @@ import {
 } from './domain/dispatcher';
 import CardNameBottomSheet from './components/CardNameBottomSheet';
 import useBottomSheet from '../../hooks/useBottomSheet';
+import useSelectCardType from '../../hooks/useSelectCardType';
 
 const AddCardPage = () => {
   const navigate = useNavigate();
-  const [cardType, setCardType] = useState('');
+  const {
+    cardCompany,
+    status: cardCompanyStatus,
+    changeCardCompany,
+  } = useSelectCardType(isSelectCardType);
   const cardFirstNumber = useInput(isValidCardNumber);
   const cardSecondNumber = useInput(isValidCardNumber);
   const cardThirdNumber = useInput(isValidCardNumber);
@@ -48,7 +54,7 @@ const AddCardPage = () => {
         </Header>
         <article className="add-card-page-body">
           <Card
-            cardType={cardType}
+            cardType={cardCompany}
             cardFirstNumber={cardFirstNumber.value}
             cardSecondNumber={cardSecondNumber.value}
             cardThirdNumber={cardThirdNumber.value}
@@ -59,7 +65,8 @@ const AddCardPage = () => {
             onClick={toggleOpen}
           />
           <AddCardForm
-            cardType={cardType}
+            cardType={cardCompany}
+            cardCompanyStatus={cardCompanyStatus}
             cardFirstNumber={cardFirstNumber}
             cardSecondNumber={cardSecondNumber}
             cardThirdNumber={cardThirdNumber}
@@ -73,7 +80,11 @@ const AddCardPage = () => {
           />
         </article>
       </div>
-      <CardNameBottomSheet isOpen={isOpen} onToggleOpen={toggleOpen} setCardType={setCardType} />
+      <CardNameBottomSheet
+        isOpen={isOpen}
+        onToggleOpen={toggleOpen}
+        setCardType={changeCardCompany}
+      />
     </>
   );
 };
