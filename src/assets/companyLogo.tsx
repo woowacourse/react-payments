@@ -1,5 +1,3 @@
-import { Company } from "../types/Card";
-
 export const WooriCardLogo = () => (
   <svg width="37" height="37" viewBox="0 0 101 101" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
