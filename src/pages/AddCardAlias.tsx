@@ -1,14 +1,15 @@
+import { useContext } from 'react';
 import CardLabel from '../components/@common/CardLabel';
 import Card from '../components/Card/Card';
-import CardType from '../types/Card';
 import * as Styled from './AddCardAlias.styles';
+import { Context } from '../App';
+import CardType from '../types/Card';
 
-interface CardProps {
-  card: CardType;
-}
+const AddAlias = () => {
+  const currentCard = useContext<CardType[] | null>(Context);
 
-const AddAlias = ({ card }: CardProps) => {
-  console.log(card);
+  if (!currentCard) return <></>;
+
   return (
     <Styled.PageWrapper>
       <Styled.CardLabelWrapper>
@@ -16,10 +17,10 @@ const AddAlias = ({ card }: CardProps) => {
       </Styled.CardLabelWrapper>
       <Styled.CardWrapper>
         <Card
-          cardNumbers={card.cardNumbers}
-          expiredDates={card.expiredDates}
-          cardOwnerName={card.cardOwnerName}
-          cardCompany={card.cardCompany}
+          cardNumbers={currentCard[currentCard.length - 1].cardNumbers}
+          expiredDates={currentCard[currentCard.length - 1].expiredDates}
+          cardOwnerName={currentCard[currentCard.length - 1].cardOwnerName}
+          cardCompany={currentCard[currentCard.length - 1].cardCompany}
         />
       </Styled.CardWrapper>
     </Styled.PageWrapper>
