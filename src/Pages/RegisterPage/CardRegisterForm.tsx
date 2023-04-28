@@ -5,12 +5,12 @@ import NameInput from './FormInputs/NameInput';
 import PasswordInput from './FormInputs/PasswordInput';
 import SecurityCodeInput from './FormInputs/SecurityCodeInput';
 import CardPreview from './CardPreview';
-import { Card } from 'types/Card';
 import { useFormHandler } from 'hooks/useFormHandler';
 import Header from 'components/Header';
 import NextButton from 'components/Button';
 import Modal from 'components/Modal';
 import CardBankList from './CardBankList';
+import { Card } from 'types/Card';
 
 const CardRegisterForm = () => {
   const [isModalActive, setIsModalActive] = useState(true);
@@ -35,8 +35,13 @@ const CardRegisterForm = () => {
     name: '',
   });
 
-  const cardInfo: Card = { ...cardNumber, ...date, ...name };
+  const [bank, setBank] = useState({
+    bank: '',
+    color: '',
+  });
 
+  const cardInfo: Card = { ...cardNumber, ...date, ...name, ...bank };
+  console.log(cardInfo);
   const { handleForm } = useFormHandler();
 
   return (
@@ -59,7 +64,12 @@ const CardRegisterForm = () => {
         </form>
       </div>
       {isModalActive && (
-        <Modal modal={isModalActive} height="300" element={<CardBankList />} />
+        <Modal
+          modal={isModalActive}
+          setModal={handleModal}
+          height="300"
+          element={<CardBankList setBank={setBank} setModal={handleModal} />}
+        />
       )}
     </>
   );

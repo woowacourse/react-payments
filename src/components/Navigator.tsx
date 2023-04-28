@@ -1,4 +1,4 @@
-import React, { SVGProps } from 'react';
+import { SVGProps } from 'react';
 import styled from 'styled-components';
 
 type NavigatorProps = Omit<SVGProps<SVGSVGElement>, 'ref'> & {

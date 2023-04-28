@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useRef } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import { HIDDEN_ELEMENT_STYLE, LENGTH, REGEX } from 'constants/constants';
 import { Card } from 'types/Card';

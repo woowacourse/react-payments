@@ -7,23 +7,37 @@ import { ReactComponent as KookminIcon } from '../../assets/kookmin_icon.svg';
 import { ReactComponent as LotteIcon } from '../../assets/lotte_icon.svg';
 import { ReactComponent as ShinhanIcon } from '../../assets/shinhan_icon.svg';
 import { ReactComponent as WooriIcon } from '../../assets/woori_icon.svg';
+import { Dispatch, SetStateAction } from 'react';
+import { Bank } from 'types/Card';
+
+interface CardBankListProps {
+  setBank: Dispatch<SetStateAction<Bank>>;
+  setModal: Dispatch<SetStateAction<boolean>>;
+}
 
 const banks = [
-  { Icon: BCIcon, name: 'BC카드' },
-  { Icon: HyundaiIcon, name: '현대카드' },
-  { Icon: HanaIcon, name: '하나카드' },
-  { Icon: KakaoIcon, name: '카카오뱅크' },
-  { Icon: KookminIcon, name: '국민카드' },
-  { Icon: LotteIcon, name: '롯데카드' },
-  { Icon: ShinhanIcon, name: '신한카드' },
-  { Icon: WooriIcon, name: '우리카드' },
+  { Icon: BCIcon, name: 'BC카드', color: '#C03841' },
+  { Icon: HyundaiIcon, name: '현대카드', color: '#222222' },
+  { Icon: HanaIcon, name: '하나카드', color: '#009490' },
+  { Icon: KakaoIcon, name: '카카오뱅크', color: '#fae20c' },
+  { Icon: KookminIcon, name: '국민카드', color: '#685E54' },
+  { Icon: LotteIcon, name: '롯데카드', color: '#ED1C24' },
+  { Icon: ShinhanIcon, name: '신한카드', color: '#0046FF' },
+  { Icon: WooriIcon, name: '우리카드', color: '#007BC8' },
 ];
 
-const CardBankList = () => {
+const CardBankList = (props: CardBankListProps) => {
+  const { setBank, setModal } = props;
+
+  const handleBank = (name: string, color: string) => {
+    setBank({ bank: name, color: color });
+    setModal(false);
+  };
+
   return (
     <Container>
-      {banks.map(({ Icon, name }) => (
-        <IconContainer key={name}>
+      {banks.map(({ Icon, name, color }) => (
+        <IconContainer key={name} onClick={() => handleBank(name, color)}>
           <Icon />
           <IconName>{name}</IconName>
         </IconContainer>

@@ -9,4 +9,11 @@ export interface Card {
   code?: string;
   password1?: string;
   password2?: string;
+  bank: string;
+  color: string;
+}
+
+export interface Bank {
+  bank: string;
+  color: string;
 }

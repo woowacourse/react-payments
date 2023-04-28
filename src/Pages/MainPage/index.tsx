@@ -1,8 +1,5 @@
 import CardPreview from 'Pages/RegisterPage/CardPreview';
 import Header from 'components/Header';
-import Input from 'components/Input';
-import Modal from 'components/Modal';
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Card } from 'types/Card';

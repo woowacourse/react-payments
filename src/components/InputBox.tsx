@@ -1,4 +1,3 @@
-import { InputHTMLAttributes, forwardRef } from 'react';
 import styled from 'styled-components';
 
 interface InputboxProps {
