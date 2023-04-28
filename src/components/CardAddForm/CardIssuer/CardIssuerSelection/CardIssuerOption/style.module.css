@@ -18,3 +18,8 @@
   font-size: 12px;
   pointer-events: none;
 }
+
+.button:focus:enabled {
+  box-shadow: 0 0 0 3px var(--light-gray-1);
+  outline: 0;
+}
