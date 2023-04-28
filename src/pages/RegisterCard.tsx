@@ -10,11 +10,15 @@ function RegisterCard() {
     navigate('/');
   };
 
+  const goRegisterName = () => {
+    navigate('/register-name');
+  };
+
   return (
     <PageContainer>
       <Header onClickBackButton={goHome} text={'카드 추가'} />
       <CardFormContainer>
-        <AddCardForm onSubmit={goHome} />
+        <AddCardForm onSubmit={goRegisterName} />
       </CardFormContainer>
     </PageContainer>
   );
