@@ -8,7 +8,7 @@ export default function Button(props: Props) {
   const { type, children, className, ...buttonProps } = props;
   return (
     <button
-      className={`${className} ${styles.button}`}
+      className={`${styles.button} ${className}`}
       type={type}
       {...buttonProps}
     >

@@ -3,7 +3,7 @@
 .container {
   width: 213px;
   height: 133px;
-  margin: auto;
+  margin: 0 auto;
   margin-bottom: 10px;
 
   background: var(--card-color);

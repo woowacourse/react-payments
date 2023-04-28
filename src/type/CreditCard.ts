@@ -7,6 +7,7 @@ export interface CreditCard {
   number: string[];
   securityCode: string;
   password: string;
+  nickname: string;
 };
 
 export const getDefaultCreditCard = (): CreditCard => ({
@@ -16,4 +17,5 @@ export const getDefaultCreditCard = (): CreditCard => ({
   securityCode: '',
   password: '',
   company: 'hana',
+  nickname: ''
 });

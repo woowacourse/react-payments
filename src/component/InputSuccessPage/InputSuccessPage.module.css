@@ -1,0 +1,34 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  height: 100vh;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28px;
+}
+
+.input {
+  margin: 0 auto;
+  width: 242px;
+
+  border-bottom: 1.5px solid #737373;
+  border-radius: 0;
+
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.button {
+  margin: 0 0 0 auto;
+}
+
