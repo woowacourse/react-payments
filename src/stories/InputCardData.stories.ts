@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-// import '..public/storybook.css';
 import '../../public/storybook.css';
 import InputCardData from '../components/InputCardData';
 
