@@ -11,7 +11,7 @@ const PrivateRoute = ({ children }: PropsWithChildren) => {
     if (!isAccessAliasPage) {
       navigate('/');
     }
-  }, []);
+  }, [isAccessAliasPage, navigate]);
 
   return <>{children}</>;
 };
