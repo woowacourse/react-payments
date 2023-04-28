@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import BankIconBox from './cardCompanyIconBox';
+import CardCompanyIconBox from './CardCompanyIconBox';
 import { CreditCardProvider } from '../../contexts/CreditCardContext';
 
 const meta = {
-  component: BankIconBox,
+  component: CardCompanyIconBox,
   title: 'BankIconBox',
   argTypes: {
     cardCompany: {
@@ -19,7 +19,7 @@ const meta = {
       );
     },
   ],
-} satisfies Meta<typeof BankIconBox>;
+} satisfies Meta<typeof CardCompanyIconBox>;
 
 export default meta;
 

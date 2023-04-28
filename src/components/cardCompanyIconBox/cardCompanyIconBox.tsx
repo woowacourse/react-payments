@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import {
   CardCompanyEng,
   KOR_NAME_BY_CARD_COMPANY,
@@ -7,20 +6,20 @@ import {
 import { useContext } from 'react';
 import { CreditCardContext } from '../../contexts/CreditCardContext';
 import CreditCardContextType from '../../@types/creditCardContextType';
+import { ImageContainer, StyledBankImage } from './CardCompanyIconBox.style';
 
 type Props = {
   cardCompany: CardCompanyEng;
   onClose: () => void;
 };
 
-const BankIconBox = ({ cardCompany, onClose }: Props) => {
+const CardCompanyIconBox = ({ cardCompany, onClose }: Props) => {
   const KoreanName = KOR_NAME_BY_CARD_COMPANY[cardCompany];
   const { setCreditCard } = useContext(CreditCardContext) as CreditCardContextType;
 
   const handleClickImage: React.MouseEventHandler<HTMLImageElement> = (event) => {
-    const company = event.currentTarget?.dataset['company'] as CardCompanyEng;
+    const company = event.currentTarget.dataset['company'] as CardCompanyEng;
 
-    if (!setCreditCard) return;
     setCreditCard('cardCompany', company);
     onClose();
   };
@@ -37,17 +36,4 @@ const BankIconBox = ({ cardCompany, onClose }: Props) => {
   );
 };
 
-const ImageContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const StyledBankImage = styled.img`
-  width: 37px;
-  height: 37px;
-  margin: auto;
-`;
-
-export default BankIconBox;
+export default CardCompanyIconBox;

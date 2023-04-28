@@ -1,9 +1,9 @@
-import Card from '../@common/Card';
+import Card from '../@common/card/Card';
 import { CreditCardContext } from '../../contexts/CreditCardContext';
 import CardRegisterForm from '../registerForm/cardRegisterForm/CardRegisterForm';
 import { useContext } from 'react';
 
-import BankSelectModal from '../SelectCompanyModal/SelectCompanyModal';
+import BankSelectModal from '../selectCompanyModal/SelectCompanyModal';
 import useBottomModal from '../../hooks/useBottomModal';
 import CreditCardContextType from '../../@types/creditCardContextType';
 

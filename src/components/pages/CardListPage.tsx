@@ -1,15 +1,13 @@
-import { useMemo } from 'react';
-
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import useCardList from '../../hooks/useCardList';
-import Card from '../@common/Card';
+import Card from '../@common/card/Card';
 
 function CardListPage() {
   const navigation = useNavigate();
   const { savedCardList } = useCardList();
 
-  const cardLists = useMemo(() => {
+  const cardLists = () => {
     return savedCardList.length ? (
       savedCardList.map(({ cardNumber, ownerName, expirationDate, cardCompany, cardAlias }) => {
         return (
@@ -28,11 +26,11 @@ function CardListPage() {
     ) : (
       <CardRegisterParagraph>새로운 카드를 등록해주세요.</CardRegisterParagraph>
     );
-  }, [savedCardList]);
+  };
 
   return (
     <CardListSection>
-      {cardLists}
+      {cardLists()}
       <AddButton
         isFirst={savedCardList.length ? false : true}
         onClick={() => {

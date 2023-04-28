@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 
 import FormLabel from '../../@common/FormLabel';
-import Input from '../../@common/Input';
+import Input from '../../@common/input/Input';
 import ErrorSpan from '../../@common/ErrorSpan';
 import { CreditCardContext } from '../../../contexts/CreditCardContext';
 import { ONLY_NUMBER_REGEXP } from '../../../utils/regexp';

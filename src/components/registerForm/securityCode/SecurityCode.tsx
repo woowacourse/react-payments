@@ -3,7 +3,7 @@ import React, { useState, useContext } from 'react';
 import { CreditCardContext } from '../../../contexts/CreditCardContext';
 import { ONLY_NUMBER_REGEXP } from '../../../utils/regexp';
 import FormLabel from '../../@common/FormLabel';
-import Input from '../../@common/Input';
+import Input from '../../@common/input/Input';
 import ErrorSpan from '../../@common/ErrorSpan';
 import InputWrapper from '../../@common/InputWrapper';
 import CreditCardContextType from '../../../@types/creditCardContextType';

@@ -3,10 +3,10 @@ import { useContext, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import useCardList from '../../hooks/useCardList';
-import Card from '../@common/Card';
+import Card from '../@common/card/Card';
 
 import { CreditCardContext } from '../../contexts/CreditCardContext';
-import Input from '../@common/Input';
+import Input from '../@common/input/Input';
 import CreditCardContextType from '../../@types/creditCardContextType';
 
 function SuccessPage() {

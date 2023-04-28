@@ -8,7 +8,7 @@ export const PasswordInputContainer = styled.div`
 
 export const DotParagraph = styled.p`
   width: 43px;
-  height: 45px;
+  height: 32px;
 
   box-sizing: border-box;
   margin: 0;
