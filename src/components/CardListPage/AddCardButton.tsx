@@ -19,12 +19,13 @@ const AddCardButtonBox = styled.button`
   border-radius: 5px;
 
   font-size: 30px;
+  color: #000000;
 
   cursor: pointer;
-  transition: 0.3s;
+  transition: 0.2s;
 
   &:hover {
-    background: #a8a8a8;
+    background: #c4c4c4;
   }
 `;
 
