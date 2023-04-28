@@ -1,11 +1,11 @@
 import { PATHNAME } from '../../constants/pathname';
-import { useHeaderTitle } from '../../hooks/useHeaderTitle';
+import { useHeader } from '../../hooks/useHeader';
 import { useNavigationTo } from '../../hooks/useNavigationTo';
 
 import * as styled from './Header.styled';
 
 const Header = () => {
-  const { isOnRegisterPage, pageTitle } = useHeaderTitle();
+  const { isOnRegisterPage, pageTitle } = useHeader();
   const { navigationTo } = useNavigationTo(PATHNAME.HOME);
 
   return (

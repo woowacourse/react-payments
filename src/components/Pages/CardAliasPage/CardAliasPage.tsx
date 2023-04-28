@@ -1,3 +1,5 @@
+import { ChangeEvent, useContext } from 'react';
+
 import { PATHNAME } from '../../../constants/pathname';
 import { useCardAliasPage } from '../../../hooks/useCardAliasPage';
 import { useTitle } from '../../../hooks/useTitle';
@@ -6,9 +8,11 @@ import { useNavigationTo } from '../../../hooks/useNavigationTo';
 import * as styled from './CardAliasPage.styled';
 import CardPreview from '../../CardPreview/CardPreview';
 import Input from '../../Input/Input';
+import CardInfoContext from '../../../contexts/CardInfoContext';
 
 const CardAliasPage = () => {
-  const { onChange, onClick, cardAlias, buttonRef } = useCardAliasPage();
+  const { cardAlias, setCardAlias } = useContext(CardInfoContext);
+  const { onClick, buttonRef } = useCardAliasPage();
   const { navigationTo, history } = useNavigationTo(PATHNAME.HOME);
   const isFromRegisterPage = history.at(-1) === '/register';
   const title = useTitle(
@@ -21,7 +25,7 @@ const CardAliasPage = () => {
       <CardPreview />
       <styled.CardAliasInputBox>
         <Input
-          onChange={onChange}
+          onChange={({ target: { value } }: ChangeEvent<HTMLInputElement>) => setCardAlias(value)}
           width="xl"
           type="text"
           maxLength={15}

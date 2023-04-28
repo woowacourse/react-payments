@@ -1,4 +1,4 @@
-import { ChangeEvent, useContext, useEffect, useRef } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 
 import CardInfoContext from '../contexts/CardInfoContext';
 
@@ -13,7 +13,6 @@ export const useCardAliasPage = () => {
     password,
     cardCompany,
     cardAlias,
-    setCardAlias,
     setCardInfoList,
   } = useContext(CardInfoContext);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -23,10 +22,6 @@ export const useCardAliasPage = () => {
       buttonRef.current?.focus();
     }
   }, [cardAlias]);
-
-  const onChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
-    setCardAlias(value);
-  };
 
   const onClick = () => {
     setCardInfoList(prev => {
@@ -48,5 +43,5 @@ export const useCardAliasPage = () => {
     });
   };
 
-  return { onChange, onClick, cardAlias, buttonRef };
+  return { onClick, buttonRef };
 };

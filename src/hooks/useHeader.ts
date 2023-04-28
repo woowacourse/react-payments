@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { PAGE_TITLE, PATHNAME } from '../constants/pathname';
 import { isPageTitleKey } from '../types/typeGuard';
 
-export const useHeaderTitle = () => {
+export const useHeader = () => {
   const { pathname } = useLocation();
 
   const isOnRegisterPage = pathname === PATHNAME.REGISTER;
