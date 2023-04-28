@@ -3,7 +3,7 @@ import Header from '../components/common/Header';
 import { LeftArrowIcon } from '../assets/icons';
 
 const meta = {
-  title: 'Payment/Header',
+  title: 'Payment/common/Header',
   component: Header,
   tags: ['autodocs'],
   argTypes: {},

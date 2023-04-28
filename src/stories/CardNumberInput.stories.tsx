@@ -4,7 +4,7 @@ import CardNumberInput from '../components/cardForm/CardNumberInput';
 import type { CardItemInfo, InputProps } from '../types/Card';
 
 export default {
-  title: 'Payment/CardNumberInput',
+  title: 'Payment/cardForm/CardNumberInput',
   component: CardNumberInput,
 };
 
