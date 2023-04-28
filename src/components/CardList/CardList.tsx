@@ -18,6 +18,9 @@ const CardList = ({ cardInfo }: CardListProps) => {
               expirationDate={card.expirationDate}
               selectedCard={card.selectedCard}
             />
+            <div className={styles.cardNicknameBox}>
+              <span>{card.cardNickName}</span>
+            </div>
           </li>
         ))}
       </ul>

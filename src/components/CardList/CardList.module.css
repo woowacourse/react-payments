@@ -6,3 +6,11 @@
 .card {
   margin-bottom: 20px;
 }
+
+.cardNicknameBox {
+  display: flex;
+  margin-top: 15px;
+  font-weight: 600;
+  justify-content: center;
+  align-items: center;
+}
