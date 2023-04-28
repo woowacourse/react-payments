@@ -93,6 +93,8 @@ const AddCardForm = () => {
   return (
     <form onSubmit={validateCardInfo} className={styles.container}>
       <CardSwitchButton
+        top="90px"
+        left="215px"
         modalContent={<CardSelectButtonPack width="290px" cardSelectButtonInfos={cardSelectButtonInfos} />}
       />
       <CardNumberInput />
