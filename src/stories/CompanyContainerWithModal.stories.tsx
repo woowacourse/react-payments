@@ -15,7 +15,7 @@ const meta = {
 
 export default meta;
 
-export const Company = () => {
+export const CompanyWithModal = () => {
   return (
     <CardItemProvider>
       <ModalProvider>
@@ -37,6 +37,6 @@ const CompanyContainerWithModal = () => {
 };
 
 const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 438px;
+  height: 100%;
 `;
