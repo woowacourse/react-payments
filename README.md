@@ -2,9 +2,13 @@
 
 ## FE 5기 레벨2 React 모바일 페이먼츠 애플리케이션
 
-<img width="1704" alt="image" src="https://user-images.githubusercontent.com/69189073/233289234-b1d09ba3-58ea-4f64-9080-f846c5cbea67.png">
+<img width="1313" alt="스크린샷 2023-04-29 00 50 23" src="https://user-images.githubusercontent.com/69189073/235194743-75373f7e-08af-4113-87ad-1416f60cf7a1.png">
 
-<img width="856" alt="image" src="https://user-images.githubusercontent.com/69189073/233289025-58cbef02-efaa-4e25-b46e-3196cf751582.png">
+<img width="1313" alt="스크린샷 2023-04-29 00 45 13" src="https://user-images.githubusercontent.com/69189073/235193888-d9377aac-4847-46bf-945b-92120012cf45.png">
+
+<img width="1313" alt="스크린샷 2023-04-29 00 47 28" src="https://user-images.githubusercontent.com/69189073/235194129-a0a66fed-8716-4ecf-b09c-8baebbe65e03.png">
+
+<img width="1313" alt="스크린샷 2023-04-29 00 48 05" src="https://user-images.githubusercontent.com/69189073/235194311-0e32c104-c983-49bb-82ba-c1344d9f1477.png">
 
 
 <br>
