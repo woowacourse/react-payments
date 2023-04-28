@@ -4,7 +4,7 @@ type InScope<T = object> = { inScope: boolean } & T;
 const useContextInScope: <T extends InScope>(context: Context<T>) => InScope<T> = (context) => {
   const value = useContext(context);
 
-  if (!value.inScope) throw new Error(`Muse use in ${context.displayName}`);
+  if (!value.inScope) throw new Error(`Muse use in ${context.displayName || 'root component'}`);
 
   return value;
 };
