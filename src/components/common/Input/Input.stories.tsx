@@ -8,19 +8,22 @@ export default {
 
 const Template: StoryFn<InputProps> = (args: InputProps) => <Input {...args} />;
 
-export const CardNumbersInput = Template.bind({});
-CardNumbersInput.args = {
-  type: 'text',
-  maxLength: 4,
-};
-
-export const HiddenInput = Template.bind({});
-HiddenInput.args = {
-  type: 'password',
-};
-
 export const ColoredInput = Template.bind({});
 ColoredInput.args = {
-  type: 'text',
   backgroundColor: 'blue',
+};
+
+export const leftAlignedInput = Template.bind({});
+leftAlignedInput.args = {
+  align: 'left',
+};
+
+export const centerAlignedInput = Template.bind({});
+centerAlignedInput.args = {
+  align: 'center',
+};
+
+export const rightAlignedInput = Template.bind({});
+rightAlignedInput.args = {
+  align: 'right',
 };
