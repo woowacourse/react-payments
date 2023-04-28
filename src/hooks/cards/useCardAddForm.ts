@@ -33,13 +33,7 @@ const useCardAddForm = () => {
 
   const updateInputValue = useCallback(
     <K extends keyof CardFormData>(key: K, value: CardFormData[K]) => {
-      setCardInformation((information) => {
-        const newInfo = { ...information, [key]: value };
-
-        console.log(newInfo);
-
-        return newInfo;
-      });
+      setCardInformation((information) => ({ ...information, [key]: value }));
       updateInputValidation(key, value);
     },
     [updateInputValidation]
