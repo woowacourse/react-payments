@@ -59,7 +59,9 @@ export const NewCreditCardPage = () => {
   const location = useLocation();
   const vendor = location.state.vendor ?? '현대카드';
 
-  const [newCard, setNewCard] = useState<CreditCard>({
+  const { creditCards, setCreditCards, assignCreditCardId } = usePayments();
+
+  const [newCard, setNewCard] = useState<Omit<CreditCard, 'id'>>({
     owner: '',
     displayName: '',
     vendor,
@@ -77,8 +79,6 @@ export const NewCreditCardPage = () => {
     password: validateCardPassword,
   });
 
-  const { addCreditCard } = usePayments();
-
   const handleChangeNewCardField =
     <Field extends keyof CreditCard>(field: Field) =>
     (value: CreditCard[Field]) => {
@@ -93,13 +93,14 @@ export const NewCreditCardPage = () => {
   const handleClickNextButton = () => {
     const newCardWithDisplayName: CreditCard = {
       ...newCard,
+      id: assignCreditCardId(),
       displayName: newCard.owner ? `${newCard.owner}의 카드` : '',
     };
 
     if (!validate(newCardWithDisplayName)) return;
 
-    addCreditCard(newCardWithDisplayName);
-    navigate('/');
+    setCreditCards([...creditCards, newCardWithDisplayName]);
+    navigate(`/complete?id=${newCardWithDisplayName.id}`);
   };
 
   return (

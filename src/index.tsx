@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { App } from './App';
 import { CreditCardListPage } from './pages/CreditCardListPage';
 import { ErrorPage } from './pages/ErrorPage';
+import { NewCreditCardDisplayNamePage } from './pages/NewCreditCardDisplayNamePage';
 import { NewCreditCardPage } from './pages/NewCreditCardPage';
 
 const router = createBrowserRouter(
@@ -20,6 +21,10 @@ const router = createBrowserRouter(
         {
           path: 'register',
           element: <NewCreditCardPage />,
+        },
+        {
+          path: 'complete',
+          element: <NewCreditCardDisplayNamePage />,
         },
       ],
     },
