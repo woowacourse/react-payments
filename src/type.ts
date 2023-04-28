@@ -22,3 +22,13 @@ export interface InputStatus {
   securityCode: EachUserInputState;
   password: EachUserInputState;
 }
+
+export type Bank =
+  | "woori"
+  | "lotte"
+  | "hana"
+  | "kb"
+  | "kakao"
+  | "bc"
+  | "shinhan"
+  | "hyundai";
