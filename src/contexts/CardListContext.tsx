@@ -1,4 +1,4 @@
-import { PropsWithChildren, createContext } from 'react';
+import { PropsWithChildren, createContext, useContext } from 'react';
 import { Card } from '../types';
 import { useCard } from '../hooks/cards/useCardList';
 
@@ -30,4 +30,14 @@ export const CardListProvider = ({ children }: PropsWithChildren) => {
       {children}
     </CardListContext.Provider>
   );
+};
+
+export const useCardListContext = () => {
+  const context = useContext(CardListContext);
+
+  if (context === undefined) {
+    throw new Error('useCardListContext needs to be used inside the CardListProvider');
+  }
+
+  return context;
 };

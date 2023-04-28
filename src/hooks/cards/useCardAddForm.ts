@@ -1,8 +1,8 @@
-import { FormEvent, useCallback, useContext, useState } from 'react';
+import { FormEvent, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { CardFormData } from '../../types';
 import { PATH } from '../../constants';
-import { CardListContext } from '../../contexts/CardListContext';
+import { useCardListContext } from '../../contexts/CardListContext';
 import { useCardInputValidation } from './useCardInputValidation';
 import { useFormComplete } from '../common/useFormComplete';
 
@@ -19,7 +19,7 @@ const initialValue: CardFormData = {
 };
 
 const useCardAddForm = () => {
-  const { newCardId, cardListLength, addCard } = useContext(CardListContext);
+  const { newCardId, cardListLength, addCard } = useCardListContext();
   const [cardInformation, setCardInformation] = useState(initialValue);
   const {
     inputValidation,

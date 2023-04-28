@@ -29,7 +29,7 @@ export const useModalContext = () => {
   const context = useContext(ModalContext);
 
   if (context === undefined) {
-    throw new Error("useModalContext need's to be used within a ModalProvider");
+    throw new Error('useModalContext needs to be used inside the ModalProvider');
   }
 
   return context;

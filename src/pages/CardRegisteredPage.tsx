@@ -1,10 +1,9 @@
-import { useContext } from 'react';
-import { CardListContext } from '../contexts/CardListContext';
+import { useCardListContext } from '../contexts/CardListContext';
 import CardItem from '../components/CardItem/CardItem';
 import CardNameChangeForm from '../components/CardNameChangeForm/CardNameChangeForm';
 
 function CardRegisteredPage() {
-  const { newCard } = useContext(CardListContext);
+  const { newCard } = useCardListContext();
 
   return (
     <main>

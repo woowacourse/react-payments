@@ -1,13 +1,12 @@
-import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PATH } from '../constants';
+import { useCardListContext } from '../contexts/CardListContext';
 import Header from '../components/common/Header/Header';
 import Button from '../components/common/Button/Button';
 import CardList from '../components/CardList/CardList';
-import { CardListContext } from '../contexts/CardListContext';
 
 function CardListPage() {
-  const { cardList } = useContext(CardListContext);
+  const { cardList } = useCardListContext();
   const navigate = useNavigate();
 
   return (
