@@ -11,7 +11,7 @@ export const isSelectCardType = (str: string) => {
 
 export const isValidExpiredYearFormat = (str: string) => {
   const strToNum = +str;
-  return Number.isInteger(strToNum) && strToNum >= 0 ? 'VALID' : 'INVALID';
+  return Number.isInteger(strToNum) && strToNum > 0 ? 'VALID' : 'INVALID';
 };
 
 export const isValidSecurityCode = (str: string) => {

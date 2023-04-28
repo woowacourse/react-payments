@@ -15,6 +15,7 @@ const ExpireDateInput = ({ expireMonth, expireYear }: ExpireDateInputProps) => {
           onChange={expireMonth.onChange}
           name="month"
           maxLength={2}
+          placeholder="MM"
           required
         />
         <span>/</span>
@@ -24,6 +25,7 @@ const ExpireDateInput = ({ expireMonth, expireYear }: ExpireDateInputProps) => {
           onChange={expireYear.onChange}
           maxLength={2}
           name="year"
+          placeholder="YY"
           required
         />
       </div>
