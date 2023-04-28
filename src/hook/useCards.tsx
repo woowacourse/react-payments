@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { CardType } from "../types/card";
 
-const useCards = () => {
+export const useCards = () => {
   const [cards, setCards] = useState<CardType[]>([]);
 
   useEffect(() => {
@@ -21,7 +21,15 @@ const useCards = () => {
     setCards(newData);
   };
 
-  return { cards, addNewCard };
-};
+  const setAlias = (cardNumbers: string, alias: string) => {
+    const index = cards.findIndex((card) => card.numbers === cardNumbers);
+    if (index === -1) return;
 
-export default useCards;
+    cards[index].alias = alias;
+
+    localStorage.setItem("cards", JSON.stringify(cards));
+    setCards(cards);
+  };
+
+  return { cards, addNewCard, setAlias };
+};

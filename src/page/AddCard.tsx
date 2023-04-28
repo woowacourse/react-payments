@@ -1,23 +1,45 @@
 import { useState } from "react";
 import { CardItem } from "../components/cardList/CardItem";
 import { Header } from "../components/common/Header";
-import { CardType } from "../types/card";
+import { CardType, BrandType } from "../types/card";
 import styled from "styled-components";
 import { CardForm } from "../components/cardForm/CardForm";
 import { Link } from "react-router-dom";
 
+import { BrandSelectModal } from "../components/modal/BrandSelectModal";
+import { NewCardContext } from "../contexts/NewCardContext";
+
 export const AddCard = () => {
   const [newCard, setNewCard] = useState<CardType>({
     numbers: "",
-    owner: "",
     expiryDate: "",
-    color: "#333333",
+    brand: undefined,
     CVC: 0,
     password: [0, 0],
   });
 
+  const setNumbers = (numbers: string) => {
+    setNewCard({ ...newCard, numbers });
+  };
+
+  const setExpiryDate = (expiryDate: string) => {
+    setNewCard({ ...newCard, expiryDate });
+  };
+
   const setBrand = (brand: BrandType) => {
     setNewCard({ ...newCard, brand });
+  };
+
+  const setCVC = (CVC: number) => {
+    setNewCard({ ...newCard, CVC });
+  };
+
+  const setPassword = (password: number[]) => {
+    setNewCard({ ...newCard, password });
+  };
+
+  const setOwner = (owner: string) => {
+    setNewCard({ ...newCard, owner });
   };
 
   const [isModalOpen, setIsModalOpen] = useState(true);
@@ -45,11 +67,11 @@ export const AddCard = () => {
         <Header text="카드 추가" />
       </HeaderWrapper>
       <NewCardContext.Provider value={{ newCard, setNumbers, setExpiryDate, setBrand, setCVC, setPassword, setOwner }}>
-      <Main>
+        <Main>
           <CardItem card={newCard} handleClick={handleClickOpenModalButton} />
           <CardForm />
           {isModalOpen && <BrandSelectModal closeModal={closeModal} />}
-      </Main>
+        </Main>
       </NewCardContext.Provider>
     </>
   );
