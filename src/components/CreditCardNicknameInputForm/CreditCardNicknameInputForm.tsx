@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import Box from 'components/Box';
 import CreditCard from 'components/CreditCard/CreditCard';
-import PreviewCreditCard from 'components/PreviewCreditCard';
+import FlexBox from 'components/FlexBox';
 import useCreditCardList from 'hooks/useCreditCardList';
 import { useEffect, useState } from 'react';
 import * as T from 'types';
@@ -10,7 +11,7 @@ interface CreditCardNicknameInputFormProps {
 }
 function CreditCardNicknameInputForm({ creditCardForm }: CreditCardNicknameInputFormProps) {
   return (
-    <PreviewCreditCard>
+    <FlexBox justifyContent="center">
       <CreditCard
         fullFilled
         creditCard={{
@@ -20,7 +21,7 @@ function CreditCardNicknameInputForm({ creditCardForm }: CreditCardNicknameInput
           owner: creditCardForm.owner,
         }}
       />
-    </PreviewCreditCard>
+    </FlexBox>
 
   );
 }

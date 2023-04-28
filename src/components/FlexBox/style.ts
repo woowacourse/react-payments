@@ -1,13 +1,10 @@
 import styled from 'styled-components';
+import * as T from './type';
 
-type FlexBoxProps = {
-  justifyContent?: 'center' | 'flex-start' | 'flex-end' | 'space-between' | 'space-around';
-  alignItems?: 'center' | 'flex-start' | 'flex-end' | 'center';
-};
-
-export const FlexBox = styled.div<FlexBoxProps>`
+export const FlexBox = styled.div<T.FlexBox>`
       display: flex;
       justify-content: ${(props) => props.justifyContent};
       align-items: ${(props) => props.alignItems};
+      flex-direction: ${(props) => props.direction};
   `;
 export default {};

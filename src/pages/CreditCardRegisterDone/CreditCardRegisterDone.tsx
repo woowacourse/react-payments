@@ -15,7 +15,9 @@ function CreditCardRegisterDone() {
           <CreditCardRegisterTitle>카드 등록이 완료되었습니다.</CreditCardRegisterTitle>
         </Box>
       </FlexBox>
-      <CreditCardNicknameInputForm creditCardForm={creditCardForm} />
+      <Box mb={15}>
+        <CreditCardNicknameInputForm creditCardForm={creditCardForm} />
+      </Box>
       <ControlButton
         onClick={() => alert('ㅎㅇ')}
         label="확인"

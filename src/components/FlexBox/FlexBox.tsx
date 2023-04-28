@@ -5,9 +5,11 @@ interface FlexBoxProps extends T.FlexBox {
   children: React.ReactNode;
 }
 
-function FlexBox({ children, justifyContent, alignItems }: FlexBoxProps) {
+function FlexBox({
+  children, direction, justifyContent, alignItems
+}: FlexBoxProps) {
   return (
-    <S.FlexBox justifyContent={justifyContent} alignItems={alignItems}>
+    <S.FlexBox direction={direction} justifyContent={justifyContent} alignItems={alignItems}>
       {children}
     </S.FlexBox>
   );

@@ -9,7 +9,8 @@ import useCreditCardForm from 'hooks/useCreditCardForm';
 import ControlButton from 'components/ControlButton';
 import CreditCardRegisterLayout from 'components/CreditCardRegisterLayout';
 import CreditCardRegisterTopSheet from 'components/CreditCardRegisterTopSheet';
-import { PreviewCreditCard } from 'components/PreviewCreditCard/style';
+import FlexBox from 'components/FlexBox';
+import Box from 'components/Box';
 import CreditCardNumberInput from './inputs/CreditCardNumberInput';
 import CreditCardExpiryInput from './inputs/CreditCardExpiryInput';
 import CreditCardOwnerInput from './inputs/CreditCardOwnerInput';
@@ -44,17 +45,19 @@ function CreditCardRegister() {
           <S.HomeButton type="button" onClick={() => navigate('/')}>{`${'<'}`}</S.HomeButton>
           <S.CreditCardRegisterHeader>카드 추가</S.CreditCardRegisterHeader>
         </CreditCardRegisterTopSheet>
-        <PreviewCreditCard>
-          <CreditCard
-            fullFilled={false}
-            creditCard={{
-              companyId: creditCardForm.companyId,
-              number: creditCardForm.number,
-              expiry: creditCardForm.expiry,
-              owner: creditCardForm.owner,
-            }}
-          />
-        </PreviewCreditCard>
+        <FlexBox justifyContent="center">
+          <Box mb={3}>
+            <CreditCard
+              fullFilled={false}
+              creditCard={{
+                companyId: creditCardForm.companyId,
+                number: creditCardForm.number,
+                expiry: creditCardForm.expiry,
+                owner: creditCardForm.owner,
+              }}
+            />
+          </Box>
+        </FlexBox>
         <S.CreditCardRegisterForm>
           <CreditCardNumberInput
             name="number"
