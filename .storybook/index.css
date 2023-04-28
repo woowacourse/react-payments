@@ -1,0 +1,17 @@
+body {
+  min-height: 100vh;
+  box-sizing: border-box;
+  background-color: white;
+
+  @media (min-width: 440px) {
+    width: 438px;
+  }
+  @media (max-width: 440px) {
+    width: 100vw;
+  }
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
