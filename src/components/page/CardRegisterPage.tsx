@@ -1,5 +1,5 @@
 import { Page } from '../../types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import PageTemplate from '../template/PageTemplate';
@@ -12,6 +12,7 @@ import CardPasswordInput from '../box/inputSection/CardPasswordInput';
 import Card from '../common/Card';
 
 import { useCardForm } from '../../context/cardForm';
+import { validExpireDate } from '../../domain/validator';
 import useFocusRef from '../../utils/useFocusRef';
 
 interface Props {
@@ -40,24 +41,30 @@ const CardRegisterPage = ({ navigate }: Props) => {
     setIsModalOpen(false);
   };
 
+  useEffect(() => {
+    focus(0)(0);
+  }, [focus]);
+
+  const isValid = validExpireDate(expireDate) === '';
+
   return (
     <PageTemplate title="카드 추가" onClickBack={onClickBack}>
-      <Card
-        cardCompany={cardCompany}
-        cardNumber={cardNumber}
-        ownerName={ownerName}
-        expireDate={expireDate}
-        onClick={openModal}
-      />
+      <PointerBox>
+        <Card
+          cardCompany={cardCompany}
+          cardNumber={cardNumber}
+          ownerName={ownerName}
+          expireDate={expireDate}
+          onClick={openModal}
+        />
+      </PointerBox>
       <InputForm onSubmit={submitNewCard}>
         <CardNumberInput insert={insert} focus={focus} />
         <ExpireDateInput insert={insert} focus={focus} />
         <OwnerNameInput insert={insert} focus={focus} />
         <SecurityCodeInput insert={insert} focus={focus} />
         <CardPasswordInput insert={insert} focus={focus} />
-        <ButtonWrapper>
-          <SubmitButton type="submit">다음</SubmitButton>
-        </ButtonWrapper>
+        <ButtonWrapper>{isValid && <SubmitButton type="submit">다음</SubmitButton>}</ButtonWrapper>
       </InputForm>
       {isModalOpen && <CardCompanyModal closeModal={closeModal} />}
     </PageTemplate>
@@ -65,6 +72,10 @@ const CardRegisterPage = ({ navigate }: Props) => {
 };
 
 export default CardRegisterPage;
+
+const PointerBox = styled.div`
+  cursor: pointer;
+`;
 
 const InputForm = styled.form`
   display: flex;
@@ -81,6 +92,9 @@ const ButtonWrapper = styled.div`
   justify-content: flex-end;
 
   width: 100%;
+  height: 34px;
+  margin-top: auto;
+  margin-bottom: 24px;
 `;
 
 const SubmitButton = styled.button`
