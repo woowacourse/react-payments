@@ -8,7 +8,6 @@ import {
 import styled from 'styled-components';
 import { FormEventHandler, useState } from 'react';
 import { Container } from 'components/style/InputContainer';
-import { CardDB } from 'db/Cards';
 import { BankCode, Card, isCard } from 'components/common/Card/types';
 import { ValueAndOnChange } from 'components/Input/types';
 import { useCardFormValid } from 'hooks/useCardFormValid';
@@ -19,7 +18,7 @@ import {
 } from 'components/common/BottomSheet/CardBottomSheet';
 
 export type AddCardFormProps = {
-  onSubmit: () => void;
+  onSubmit: (card: Card) => void;
 };
 
 function AddCardForm({ onSubmit }: AddCardFormProps) {
@@ -93,8 +92,7 @@ function AddCardForm({ onSubmit }: AddCardFormProps) {
     }
 
     if (isCard(card)) {
-      CardDB.registerCard(card);
-      onSubmit();
+      onSubmit(card);
     }
   };
 

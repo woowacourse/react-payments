@@ -3,7 +3,7 @@ import { CardDB } from 'db/Cards';
 import styled from 'styled-components';
 import { CreditCard, Header } from 'components/common';
 import { PageContainer } from 'components/style/PageContainer';
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { Card } from 'components/common/Card/types';
 
 function Home() {
@@ -17,20 +17,25 @@ function Home() {
   useEffect(() => {}, [cards]);
 
   return (
-    <>
-      <PageContainer>
-        <Header text={'보유카드'} />
-        <CardContainer>
-          <span>새로운 카드를 등록해주세요</span>
-          {cards.map((card) => (
+    <PageContainer>
+      <Header text={'보유카드'} />
+      <CardContainer>
+        {cards.length <= 0 && <Text>새로운 카드를 등록해주세요</Text>}
+        {cards.map((card) => (
+          <Fragment>
             <CreditCard card={card} />
-          ))}
-          <RegisterButton onClick={goRegister}>+</RegisterButton>
-        </CardContainer>
-      </PageContainer>
-    </>
+            <CardNickName>{card.nickName}</CardNickName>
+          </Fragment>
+        ))}
+        <RegisterButton onClick={goRegister}>+</RegisterButton>
+      </CardContainer>
+    </PageContainer>
   );
 }
+
+const Text = styled.span`
+  margin-bottom: 20px;
+`;
 
 const RegisterButton = styled.button`
   width: 208px;
@@ -47,7 +52,10 @@ const CardContainer = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 22px;
-  gap: 35px;
+`;
+
+const CardNickName = styled.span`
+  padding: 20px;
 `;
 
 export default Home;

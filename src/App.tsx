@@ -5,6 +5,7 @@ import RegisterCard from 'pages/RegisterCard';
 import { GlobalStyles } from 'GlobalStyles';
 import { ThemeProvider } from 'styled-components';
 import { theme } from 'components/style/theme';
+import { RegisterCardNickName } from 'pages/RegisterCardNickName';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/register" element={<RegisterCard />} />
+            <Route path="/register-nickname" element={<RegisterCardNickName />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
