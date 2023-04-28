@@ -18,7 +18,6 @@ const isCardsInfo = (cards: unknown): cards is CardInfo[] => {
       (!card.cardName || typeof card.cardName === 'string')
   );
 
-  console.log('validaity', isValid);
   return isValid;
 };
 
