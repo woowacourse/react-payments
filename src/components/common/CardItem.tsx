@@ -9,20 +9,20 @@ interface CardItemProps {
 }
 
 export function CardItem(props: CardItemProps) {
-  const { CARD_NUMBER, DATE, USERNAME, COMPANY } = props.info;
+  const { card_number, expired_date, username, company } = props.info;
+  const companyColor = company ? CARD_COMPANY[company].color : 'gray';
+  const companyName = company ? CARD_COMPANY[company].name : '';
 
-  const companyColor = COMPANY ? CARD_COMPANY[COMPANY].color : 'gray';
-  const companyName = COMPANY ? CARD_COMPANY[COMPANY].name : '';
   return (
     <CardContainer color={companyColor}>
       <_CompanyName>{companyName}</_CompanyName>
       <_Chip />
       <NumberWrapper>
-        <_NumberItem>{makeCardNumber(CARD_NUMBER)}</_NumberItem>
+        <_NumberItem>{makeCardNumber(card_number)}</_NumberItem>
       </NumberWrapper>
       <InfoWrapper>
-        <_Name>{USERNAME}</_Name>
-        <_Date>{makeCardDate(DATE)}</_Date>
+        <_Name>{username}</_Name>
+        <_Date>{makeCardDate(expired_date)}</_Date>
       </InfoWrapper>
     </CardContainer>
   );

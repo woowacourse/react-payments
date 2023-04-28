@@ -2,7 +2,6 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { InputBox } from './common';
-import { cardList } from '../data/localStorage';
 import { useCardRegisterForm } from '../hooks/useCardRegisterForm';
 import { Card, CardInfoOption } from '../type/card';
 import { InputInfo } from '../type/input';
@@ -12,7 +11,7 @@ export function CardRegisterForm() {
 
   const {
     cardRegisterForm,
-    COMPANY,
+    company,
     isRequiredInputValid,
     isOptionalInputValid,
   } = useCardRegisterForm();
@@ -26,8 +25,8 @@ export function CardRegisterForm() {
         .map((input) => input.value)
         .join('');
     }
-    if (COMPANY.clicked.value) {
-      submittedCardInfo.COMPANY = COMPANY.clicked.value;
+    if (company.clicked.value) {
+      submittedCardInfo.company = company.clicked.value;
 
       moveAddCardNamePage(submittedCardInfo);
     } else {

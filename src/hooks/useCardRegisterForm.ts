@@ -8,17 +8,17 @@ import { cardRegisterValidator } from '../validation/cardRegister';
 
 export function useCardRegisterForm() {
   const previewInfo = useContext(CardPreviewInfoContext);
-  const { COMPANY, ...previewInfoWithForm } = previewInfo;
+  const { company, ...previewInfoWithForm } = previewInfo;
 
   const cardRegisterForm = {
     ...previewInfoWithForm,
-    CODE: {
+    code: {
       first: {
         ...passwordInput,
         ...useInput(cardRegisterValidator.code),
       },
     },
-    CARD_PASSWORD: {
+    password: {
       first: {
         ...passwordInput,
         ...useInput(cardRegisterValidator.cardPassword),
@@ -42,7 +42,7 @@ export function useCardRegisterForm() {
   );
   return {
     cardRegisterForm,
-    COMPANY,
+    company,
     isRequiredInputValid,
     isOptionalInputValid,
   };

@@ -24,7 +24,7 @@ export function CardList() {
             return (
               <>
                 <CardItem info={card}></CardItem>
-                <_CardNickName>{card.NICKNAME}</_CardNickName>
+                <_CardNickName>{card.nickname}</_CardNickName>
               </>
             );
           })}

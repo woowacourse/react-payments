@@ -22,27 +22,27 @@ export const passwordInput = {
 };
 
 export const CardPreviewInfoContext = createContext({
-  CARD_NUMBER: {
+  card_number: {
     first: { ...defaultInput },
     second: { ...defaultInput },
     third: { ...passwordInput },
     fourth: { ...passwordInput },
   },
-  DATE: {
+  expired_date: {
     month: { ...defaultInput },
     year: { ...defaultInput },
   },
-  USERNAME: {
+  username: {
     first: { ...optionalInput },
   },
-  COMPANY: {
+  company: {
     clicked: {} as ReturnType<typeof useCompany>,
   },
 });
 
 export function CardInfoProvider({ children }: { children: React.ReactNode }) {
   const preivewInfo = {
-    CARD_NUMBER: {
+    card_number: {
       first: {
         ...defaultInput,
         ...useInput(cardRegisterValidator.cardNumber),
@@ -60,7 +60,7 @@ export function CardInfoProvider({ children }: { children: React.ReactNode }) {
         ...useInput(cardRegisterValidator.cardNumber),
       },
     },
-    DATE: {
+    expired_date: {
       month: {
         ...defaultInput,
         ...useInput(cardRegisterValidator.month),
@@ -70,13 +70,13 @@ export function CardInfoProvider({ children }: { children: React.ReactNode }) {
         ...useInput(cardRegisterValidator.year),
       },
     },
-    USERNAME: {
+    username: {
       first: {
         ...optionalInput,
         ...useInput(cardRegisterValidator.username),
       },
     },
-    COMPANY: {
+    company: {
       clicked: { ...useCompany() },
     },
   };

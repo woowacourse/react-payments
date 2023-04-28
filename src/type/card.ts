@@ -1,13 +1,13 @@
 import { CARD_COMPANY } from '../constants/cardCompany';
 
 export interface Card {
-  CARD_NUMBER: string;
-  DATE: string;
-  USERNAME?: string;
-  CODE: string;
-  CARD_PASSWORD: string;
-  COMPANY: string;
-  NICKNAME?: string;
+  card_number: string;
+  expired_date: string;
+  username?: string;
+  code: string;
+  password: string;
+  company: string;
+  nickname?: string;
 }
 
 export type CardInfoOption = keyof Card;

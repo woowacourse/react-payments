@@ -5,8 +5,8 @@ import { CARD_COMPANY, imgSrc } from '../../constants/cardCompany';
 import { CardPreviewInfoContext } from '../../contexts/cardInfo';
 
 export function CardCompanyList() {
-  const { COMPANY } = useContext(CardPreviewInfoContext);
-  const clickedCompany = COMPANY.clicked;
+  const { company } = useContext(CardPreviewInfoContext);
+  const clickedCompany = company.clicked;
 
   return (
     <Wrapper>

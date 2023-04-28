@@ -5,30 +5,33 @@ import { CARD_COMPANY } from '../../constants/cardCompany';
 import { CardPreviewInfoContext } from '../../contexts/cardInfo';
 
 export function CardPreview() {
-  const { CARD_NUMBER, USERNAME, DATE, COMPANY } = useContext(
+  const { card_number, username, expired_date, company } = useContext(
     CardPreviewInfoContext
   );
 
-  const company = COMPANY.clicked.value;
-  const companyName = company in CARD_COMPANY ? CARD_COMPANY[company].name : '';
+  const clickedCompany = company.clicked.value;
+  const companyName =
+    clickedCompany in CARD_COMPANY ? CARD_COMPANY[clickedCompany].name : '';
 
   const companyColor =
-    company in CARD_COMPANY ? CARD_COMPANY[company].color : 'gray';
+    clickedCompany in CARD_COMPANY
+      ? CARD_COMPANY[clickedCompany].color
+      : 'gray';
 
   return (
     <CardContainer color={companyColor}>
       <_CompanyName>{companyName}</_CompanyName>
       <_Chip />
       <NumberWrapper>
-        <NumberItem>{CARD_NUMBER.first.value}</NumberItem>
-        <NumberItem>{CARD_NUMBER.second.value}</NumberItem>
-        <NumberItem>{'•'.repeat(CARD_NUMBER.third.value.length)}</NumberItem>
-        <NumberItem>{'•'.repeat(CARD_NUMBER.fourth.value.length)}</NumberItem>
+        <NumberItem>{card_number.first.value}</NumberItem>
+        <NumberItem>{card_number.second.value}</NumberItem>
+        <NumberItem>{'•'.repeat(card_number.third.value.length)}</NumberItem>
+        <NumberItem>{'•'.repeat(card_number.fourth.value.length)}</NumberItem>
       </NumberWrapper>
       <InfoWrapper>
-        <Name>{USERNAME.first.value}</Name>
+        <Name>{username.first.value}</Name>
         <Date>
-          {DATE.month.value}/{DATE.year.value}
+          {expired_date.month.value}/{expired_date.year.value}
         </Date>
       </InfoWrapper>
     </CardContainer>
@@ -63,6 +66,7 @@ const _CompanyName = styled.p`
   font-family: 'Roboto';
   line-height: 1.4rem;
 `;
+
 const _Chip = styled.div`
   width: 4rem;
   height: 2.6rem;
