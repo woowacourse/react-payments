@@ -12,7 +12,7 @@ type CardFormProps = {
 };
 
 const meta: Meta<CardFormProps> = {
-  title: 'Payment/cardForm',
+  title: 'Payment/CardForm',
   component: CardForm,
   tags: ['autodocs'],
 };
