@@ -100,7 +100,9 @@ const AddCardPage = () => {
         }
       ></Modal>
       <AppBar title={"카드 추가"} children={<Link to={PAGE.CARD_LIST}>〈</Link>} />
-      <CardPreview card={{ cardCompany, cardNumber, expirationDate, ownerName }} />
+      <CardPreviewButton onClick={() => setModalOpen(true)}>
+        <CardPreview card={{ cardCompany, cardNumber, expirationDate, ownerName }} />
+      </CardPreviewButton>
       <Form onSubmit={onSubmitHandler}>
         <CardNumberInput cardNumber={cardNumber} error={error} setCardNumber={setCardNumber} setError={setError} />
         <CardExpirationDateInput
@@ -117,6 +119,12 @@ const AddCardPage = () => {
     </Container>
   );
 };
+
+const CardPreviewButton = styled.button`
+  all: unset;
+
+  cursor: pointer;
+`;
 
 const Form = styled.form`
   display: flex;
