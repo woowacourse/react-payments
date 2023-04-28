@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import ExpireDate from './ExpireDate';
+import ExpirationDate from './ExpirationDate';
 import { CreditCardProvider } from '../../../contexts/CreditCardContext';
 
 const expireDate = {
-  component: ExpireDate,
+  component: ExpirationDate,
   title: 'ExpireDate',
   decorators: [
     (Story) => {
@@ -14,7 +14,7 @@ const expireDate = {
       );
     },
   ],
-} satisfies Meta<typeof ExpireDate>;
+} satisfies Meta<typeof ExpirationDate>;
 
 export default expireDate;
 
