@@ -16,10 +16,11 @@ import {
   isValidSecurityCode,
 } from './domain/dispatcher';
 import CardNameBottomSheet from './components/CardNameBottomSheet';
+import useBottomSheet from '../../hooks/useBottomSheet';
 
 const AddCardPage = () => {
   const navigate = useNavigate();
-  const [cardType, setCardType] = useState('현대');
+  const [cardType, setCardType] = useState('');
   const cardFirstNumber = useInput(isValidCardNumber);
   const cardSecondNumber = useInput(isValidCardNumber);
   const cardThirdNumber = useInput(isValidCardNumber);
@@ -30,9 +31,8 @@ const AddCardPage = () => {
   const expireYear = useInput(isValidExpiredYearFormat);
   const securityCode = useInput(isValidSecurityCode);
   const cardOwner = useInput(isValidOwnerName);
-  const [isOpen, setIsOpen] = useState(true);
+  const { isOpen, toggleOpen } = useBottomSheet(true);
 
-  // TODO: BottomSheet CustomHook 제작
   const onBackButtonClick = useCallback(() => {
     navigate('/');
   }, [navigate]);
@@ -56,7 +56,7 @@ const AddCardPage = () => {
             cardOwner={cardOwner.value}
             expireMonth={expireMonth.value}
             expireYear={expireYear.value}
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={toggleOpen}
           />
           <AddCardForm
             cardType={cardType}
@@ -73,11 +73,7 @@ const AddCardPage = () => {
           />
         </article>
       </div>
-      <CardNameBottomSheet
-        isOpen={isOpen}
-        onToggleOpen={() => setIsOpen(!isOpen)}
-        setCardType={setCardType}
-      />
+      <CardNameBottomSheet isOpen={isOpen} onToggleOpen={toggleOpen} setCardType={setCardType} />
     </>
   );
 };
