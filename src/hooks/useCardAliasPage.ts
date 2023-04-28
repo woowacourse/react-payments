@@ -17,6 +17,7 @@ export const useCardAliasPage = () => {
     setCardAlias,
     setCardInfoList,
   } = useContext(CardInfoContext);
+  const navigationToHome = useNavigationTo(PATHNAME.HOME);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -37,7 +38,7 @@ export const useCardAliasPage = () => {
       ];
     });
 
-    useNavigationTo(PATHNAME.HOME);
+    navigationToHome();
   };
 
   return { onChange, onClick, cardAlias, buttonRef };

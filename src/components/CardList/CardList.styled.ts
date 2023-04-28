@@ -11,6 +11,8 @@ export const CardContainer = styled.div`
   justify-content: center;
   align-items: center;
 
+  cursor: pointer;
+
   &:not(:last-child) {
     margin-bottom: 36px;
   }
