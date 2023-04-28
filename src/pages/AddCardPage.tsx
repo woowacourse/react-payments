@@ -10,7 +10,12 @@ import CvcInput from '../components/card/input/CvcInput';
 import PasswordInput from '../components/card/input/PasswordInput';
 import NextButton from '../components/common/Button';
 import { useFocusInput } from '../hooks/useFocusInput';
-import { createUniqueId, isPrevDate, setNextInputFocus } from '../utils';
+import {
+  createUniqueId,
+  isPrevDate,
+  setNextInputFocus,
+  userConfirm,
+} from '../utils';
 import { BankType, CardInfo, PageInfo } from '../types';
 import { formValidate } from '../hooks/formValidate';
 import { useFormInputs } from '../hooks/useFormInputs';
@@ -140,18 +145,16 @@ export default function AddCardPage({
   };
 
   const onPrevButtonClick = () => {
-    const result = window.confirm('정말 닫으시겠습니까?');
-    if (result) {
-      setPage('homePage');
-    }
+    userConfirm('정말 닫으시겠습니까?', setHome);
+  };
+
+  const setHome = () => {
+    setPage('homePage');
   };
 
   useEffect(() => {
     const setHomepage = () => {
-      const result = window.confirm('정말 닫으시겠습니까?');
-      if (result) {
-        setPage('homePage');
-      }
+      userConfirm('정말 닫으시겠습니까?', () => setPage('homePage'));
     };
 
     window.history.pushState(null, '', window.location.href);

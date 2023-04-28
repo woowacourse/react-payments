@@ -76,3 +76,11 @@ export const setNextInputFocus = (form: HTMLFormElement | null) => {
     break;
   }
 };
+
+export const userConfirm = (message: string, callback: () => void) => {
+  const result = window.confirm(message);
+
+  if (result) {
+    callback();
+  }
+};
