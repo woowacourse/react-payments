@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { AddNewCardForm } from '../components/addCardForm';
-import { Layout } from '../layout';
-import { BackButton } from '../layout/BackButton';
+import { AddNewCardForm } from '../../components/addCardForm';
+import { Layout } from '../../layout';
+import { BackButton } from '../../layout/BackButton';
 
 export const Register = () => {
   return (

@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { LeftArrowButton, RightArrowButton } from '../../layout/ArrowButton';
 import { ReactNode } from 'react';
 
 interface Props {
@@ -7,6 +6,7 @@ interface Props {
   isRightBtnShowed: boolean;
   viewPreviousInput?: () => void;
   viewNextInput?: () => void;
+  isAllInputDone?: boolean;
   progress: ReactNode;
 }
 
@@ -15,6 +15,7 @@ export const MoveInputContainer = ({
   isRightBtnShowed,
   viewNextInput,
   viewPreviousInput,
+  isAllInputDone,
   progress,
 }: Props) => {
   return (
@@ -32,7 +33,11 @@ export const MoveInputContainer = ({
       <Style.ButtonWrapper>
         {isRightBtnShowed && (
           <Style.Button
-            src={`${process.env.PUBLIC_URL}/arrow-right.svg`}
+            src={
+              isAllInputDone
+                ? `${process.env.PUBLIC_URL}/done.svg`
+                : `${process.env.PUBLIC_URL}/arrow-right.svg`
+            }
             onClick={viewNextInput}
             alt="이전 입력창"
           />

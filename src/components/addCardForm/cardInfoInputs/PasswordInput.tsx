@@ -123,6 +123,7 @@ export const PasswordInput = forwardRef<HTMLInputElement[], Props>(
           isRightBtnShowed={error === null}
           viewPreviousInput={viewPreviousInput}
           viewNextInput={handleSubmitNewCardInfo}
+          isAllInputDone={true}
           progress={'5/5'}
         />
       </div>
