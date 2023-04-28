@@ -13,46 +13,25 @@ const meta = {
 export default meta;
 
 export const Default = () => {
-  const { cardInformation, inputError, updateInputError, handleSingleInputChange } =
-    useCardAddForm();
+  const { inputError, updateInputValue, updateInputError } = useCardAddForm();
 
   return (
     <CardSecurityCode
-      value={cardInformation.securityCode}
       isError={inputError.securityCode}
-      onInputChange={handleSingleInputChange}
-      updateCardInputError={updateInputError}
-      moveFocus={() => {}}
-    />
-  );
-};
-
-export const ErrorInteraction = () => {
-  const { cardInformation, inputError, updateInputError, handleSingleInputChange } =
-    useCardAddForm();
-
-  return (
-    <CardSecurityCode
-      value={cardInformation.securityCode}
-      isError={inputError.securityCode}
-      onInputChange={handleSingleInputChange}
-      updateCardInputError={updateInputError}
-      moveFocus={() => {}}
+      updateInputValue={updateInputValue}
+      updateInputError={updateInputError}
     />
   );
 };
 
 export const SuccessInteraction = () => {
-  const { cardInformation, inputError, updateInputError, handleSingleInputChange } =
-    useCardAddForm();
+  const { inputError, updateInputValue, updateInputError } = useCardAddForm();
 
   return (
     <CardSecurityCode
-      value={cardInformation.securityCode}
       isError={inputError.securityCode}
-      onInputChange={handleSingleInputChange}
-      updateCardInputError={updateInputError}
-      moveFocus={() => {}}
+      updateInputValue={updateInputValue}
+      updateInputError={updateInputError}
     />
   );
 };
@@ -75,6 +54,18 @@ SuccessInteraction.play = async ({ canvasElement }: { canvasElement: HTMLElement
   expect(input).toHaveValue('123');
 
   userEvent.tab();
+};
+
+export const ErrorInteraction = () => {
+  const { inputError, updateInputValue, updateInputError } = useCardAddForm();
+
+  return (
+    <CardSecurityCode
+      isError={inputError.securityCode}
+      updateInputValue={updateInputValue}
+      updateInputError={updateInputError}
+    />
+  );
 };
 
 ErrorInteraction.play = async ({ canvasElement }: { canvasElement: HTMLElement }) => {

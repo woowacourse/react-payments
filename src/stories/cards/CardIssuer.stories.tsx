@@ -13,31 +13,25 @@ const meta = {
 export default meta;
 
 export const Default = () => {
-  const { cardInformation, inputError, updateInputError, handleButtonInputChange } =
-    useCardAddForm();
+  const { inputError, updateInputValue, updateInputError } = useCardAddForm();
 
   return (
     <CardIssuer
-      value={cardInformation.issuer}
       isError={inputError.issuer}
-      onInputChange={handleButtonInputChange}
-      updateCardInputError={updateInputError}
-      moveFocus={() => {}}
+      updateInputValue={updateInputValue}
+      updateInputError={updateInputError}
     />
   );
 };
 
 export const SuccessInteraction = () => {
-  const { cardInformation, inputError, updateInputError, handleButtonInputChange } =
-    useCardAddForm();
+  const { inputError, updateInputValue, updateInputError } = useCardAddForm();
 
   return (
     <CardIssuer
-      value={cardInformation.issuer}
       isError={inputError.issuer}
-      onInputChange={handleButtonInputChange}
-      updateCardInputError={updateInputError}
-      moveFocus={() => {}}
+      updateInputValue={updateInputValue}
+      updateInputError={updateInputError}
     />
   );
 };
@@ -61,16 +55,13 @@ SuccessInteraction.play = async ({ canvasElement }: { canvasElement: HTMLElement
 };
 
 export const ErrorInteraction = () => {
-  const { cardInformation, inputError, updateInputError, handleButtonInputChange } =
-    useCardAddForm();
+  const { inputError, updateInputValue, updateInputError } = useCardAddForm();
 
   return (
     <CardIssuer
-      value={cardInformation.issuer}
       isError={inputError.issuer}
-      onInputChange={handleButtonInputChange}
-      updateCardInputError={updateInputError}
-      moveFocus={() => {}}
+      updateInputValue={updateInputValue}
+      updateInputError={updateInputError}
     />
   );
 };

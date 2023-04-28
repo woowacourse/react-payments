@@ -13,27 +13,15 @@ const meta = {
 export default meta;
 
 export const Default = () => {
-  const { cardInformation, handleSingleInputChange } = useCardAddForm();
+  const { updateInputValue } = useCardAddForm();
 
-  return (
-    <CardOwnerName
-      value={cardInformation.ownerName}
-      onInputChange={handleSingleInputChange}
-      moveFocus={() => {}}
-    />
-  );
+  return <CardOwnerName updateInputValue={updateInputValue} />;
 };
 
 export const Interaction = () => {
-  const { cardInformation, handleSingleInputChange } = useCardAddForm();
+  const { updateInputValue } = useCardAddForm();
 
-  return (
-    <CardOwnerName
-      value={cardInformation.ownerName}
-      onInputChange={handleSingleInputChange}
-      moveFocus={() => {}}
-    />
-  );
+  return <CardOwnerName updateInputValue={updateInputValue} />;
 };
 
 Interaction.play = async ({ canvasElement }: { canvasElement: HTMLElement }) => {

@@ -13,29 +13,25 @@ const meta = {
 export default meta;
 
 export const Default = () => {
-  const { cardInformation, inputError, updateInputError, handleMultipleInputChange } =
-    useCardAddForm();
+  const { inputError, updateInputValue, updateInputError } = useCardAddForm();
 
   return (
     <CardPassword
-      values={cardInformation.password}
       isError={inputError.password}
-      onInputChange={handleMultipleInputChange}
-      updateCardInputError={updateInputError}
+      updateInputValue={updateInputValue}
+      updateInputError={updateInputError}
     />
   );
 };
 
 export const SuccessInteraction = () => {
-  const { cardInformation, inputError, updateInputError, handleMultipleInputChange } =
-    useCardAddForm();
+  const { inputError, updateInputValue, updateInputError } = useCardAddForm();
 
   return (
     <CardPassword
-      values={cardInformation.password}
       isError={inputError.password}
-      onInputChange={handleMultipleInputChange}
-      updateCardInputError={updateInputError}
+      updateInputValue={updateInputValue}
+      updateInputError={updateInputError}
     />
   );
 };
@@ -63,15 +59,13 @@ SuccessInteraction.play = async ({ canvasElement }: { canvasElement: HTMLElement
 };
 
 export const ErrorInteraction = () => {
-  const { cardInformation, inputError, updateInputError, handleMultipleInputChange } =
-    useCardAddForm();
+  const { inputError, updateInputValue, updateInputError } = useCardAddForm();
 
   return (
     <CardPassword
-      values={cardInformation.password}
       isError={inputError.password}
-      onInputChange={handleMultipleInputChange}
-      updateCardInputError={updateInputError}
+      updateInputValue={updateInputValue}
+      updateInputError={updateInputError}
     />
   );
 };

@@ -13,48 +13,26 @@ const meta = {
 export default meta;
 
 export const Default = () => {
-  const {
-    cardInformation,
-    inputError,
-    updateInputError,
-    handleButtonInputChange,
-    handleSingleInputChange,
-    handleMultipleInputChange,
-    handleSubmit,
-  } = useCardAddForm();
+  const { inputError, updateInputValue, updateInputError, handleSubmit } = useCardAddForm();
 
   return (
     <CardAddForm
-      cardInformation={cardInformation}
       cardInputError={inputError}
-      onButtonInputChange={handleButtonInputChange}
-      onSingleInputChange={handleSingleInputChange}
-      onMultipleInputChange={handleMultipleInputChange}
-      updateCardInputError={updateInputError}
+      updateInputValue={updateInputValue}
+      updateInputError={updateInputError}
       handleSubmit={handleSubmit}
     />
   );
 };
 
 export const SuccessInteraction = () => {
-  const {
-    cardInformation,
-    inputError,
-    updateInputError,
-    handleButtonInputChange,
-    handleSingleInputChange,
-    handleMultipleInputChange,
-    handleSubmit,
-  } = useCardAddForm();
+  const { inputError, updateInputValue, updateInputError, handleSubmit } = useCardAddForm();
 
   return (
     <CardAddForm
-      cardInformation={cardInformation}
       cardInputError={inputError}
-      onButtonInputChange={handleButtonInputChange}
-      onSingleInputChange={handleSingleInputChange}
-      onMultipleInputChange={handleMultipleInputChange}
-      updateCardInputError={updateInputError}
+      updateInputValue={updateInputValue}
+      updateInputError={updateInputError}
       handleSubmit={handleSubmit}
     />
   );
@@ -131,24 +109,13 @@ SuccessInteraction.play = async ({ canvasElement }: { canvasElement: HTMLElement
 };
 
 export const ErrorInteraction = () => {
-  const {
-    cardInformation,
-    inputError,
-    updateInputError,
-    handleButtonInputChange,
-    handleSingleInputChange,
-    handleMultipleInputChange,
-    handleSubmit,
-  } = useCardAddForm();
+  const { inputError, updateInputValue, updateInputError, handleSubmit } = useCardAddForm();
 
   return (
     <CardAddForm
-      cardInformation={cardInformation}
       cardInputError={inputError}
-      onButtonInputChange={handleButtonInputChange}
-      onSingleInputChange={handleSingleInputChange}
-      onMultipleInputChange={handleMultipleInputChange}
-      updateCardInputError={updateInputError}
+      updateInputValue={updateInputValue}
+      updateInputError={updateInputError}
       handleSubmit={handleSubmit}
     />
   );
