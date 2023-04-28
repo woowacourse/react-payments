@@ -3,15 +3,20 @@
   height: 133px;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
-  padding: 47px 14px 0px;
+  padding: 12px 14px;
   color: var(--text-white);
+}
+
+.company {
+  height: 36px;
+  font-size: 12px;
 }
 
 .cardNumber {
   display: flex;
   column-gap: 10px;
-  height: 16px;
-  margin: 10px 0 8px;
+  height: 14px;
+  margin: 8px 0;
   font-size: 13px;
 }
 

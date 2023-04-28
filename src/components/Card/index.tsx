@@ -3,7 +3,6 @@ import type { CardInfo } from '../../types/card';
 
 import styles from './card.module.css';
 
-
 const COMPANY_NAME = {
   BC카드: 'bc',
   신한카드: 'shinhan',
@@ -31,6 +30,7 @@ const Card = ({
         company ? styles[COMPANY_NAME[company]] : ''
       }`}
     >
+      <p className={styles.company}>{company}</p>
       <CardChipIcon width={31} height={27} />
       <div className={styles.cardNumber}>
         <span className={styles.number}>{cardNumber1}</span>

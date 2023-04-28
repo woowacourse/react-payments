@@ -10,3 +10,5 @@ export const COMPANY_NAMES = [
 ] as const;
 
 export type CompanyName = (typeof COMPANY_NAMES)[number];
+
+export const isCompanyName = (name: string): name is CompanyName => !!COMPANY_NAMES.find((companyName) => companyName === name)

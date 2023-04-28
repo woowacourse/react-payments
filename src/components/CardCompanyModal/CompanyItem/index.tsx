@@ -17,16 +17,14 @@ const companyIcons: Record<CompanyName, JSX.Element> = {
 
 interface Props {
   name: CompanyName;
-  onClick: MouseEventHandler<HTMLButtonElement>;
+  onClick: MouseEventHandler<HTMLLIElement>;
 }
 
 const CompanyItem = ({ name, onClick }: Props) => {
   return (
-    <li>
-      <button type="button" className={styles.button} onClick={onClick}>
-        {companyIcons[name]}
-        <span className={styles.name}>{name}</span>
-      </button>
+    <li className={styles.item} onClick={onClick} data-name={name}>
+      {companyIcons[name]}
+      <span className={styles.name}>{name}</span>
     </li>
   );
 };

@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { MouseEventHandler, useRef, useState } from 'react';
 import type { FormEventHandler } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,13 +11,18 @@ import { isValidExpiredDate } from './utils/validation';
 import type { CardInfo } from '../../types/card';
 
 import styles from './cardRegisterForm.module.css';
+import CardCompanyModal from '../CardCompanyModal';
+import useModal from '../../hooks/useModal';
+import { CompanyName, isCompanyName } from '../../constants/company';
 
 interface Props {
   registerCard: (card: CardInfo) => void;
 }
 
 const CardRegisterForm = ({ registerCard }: Props) => {
+  const [cardCompany, setCardCompany] = useState<CompanyName>();
   const navigate = useNavigate();
+  const { toggleModal, openModal, closeModal } = useModal();
   const inputRefs = Array.from({ length: 10 }).map(() =>
     useRef<HTMLInputElement>(null),
   );
@@ -37,6 +42,15 @@ const CardRegisterForm = ({ registerCard }: Props) => {
     handleNumberChange,
     handleOwnerChange,
   } = useCardRegisterForm(inputRefs);
+
+  const handleCompanyClick: MouseEventHandler<HTMLLIElement> = (event) => {
+    const { name } = event.currentTarget.dataset;
+
+    if (!name || !isCompanyName(name)) return;
+
+    setCardCompany(name);
+    closeModal();
+  };
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
@@ -62,6 +76,7 @@ const CardRegisterForm = ({ registerCard }: Props) => {
   return (
     <>
       <Card
+        company={cardCompany}
         cardNumber1={cardNumber1}
         cardNumber2={cardNumber2}
         cardNumber3={cardNumber3}
@@ -70,6 +85,9 @@ const CardRegisterForm = ({ registerCard }: Props) => {
         expiredMonth={expiredMonth}
         expiredYear={expiredYear}
       />
+      <button type="button" onClick={openModal}>
+        카드사 선택
+      </button>
       <form className={styles.form} onSubmit={handleSubmit}>
         <TextField label="카드 번호" size="fit">
           <Input
@@ -230,6 +248,12 @@ const CardRegisterForm = ({ registerCard }: Props) => {
           {isValidCardData && <button tabIndex={11}>다음</button>}
         </div>
       </form>
+      {toggleModal && (
+        <CardCompanyModal
+          onClose={closeModal}
+          onClickCompany={handleCompanyClick}
+        />
+      )}
     </>
   );
 };
