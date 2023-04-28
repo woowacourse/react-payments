@@ -1,6 +1,5 @@
 import styles from './style.module.css';
-import { FocusEvent, KeyboardEvent, MouseEvent, memo, useRef } from 'react';
-import { CardFormValidation, Issuer } from '../../../types';
+import { FocusEvent, KeyboardEvent, MouseEvent, memo, useRef, useState } from 'react';
 import CardIssuerSelection from './CardIssuerSelection/CardIssuerSelection';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
@@ -10,22 +9,14 @@ import { useModal } from '../../../hooks/common/useModal';
 import DownIcon from '../../../assets/down-icon.svg';
 
 interface CardIssuerProps {
-  value: Issuer | '';
   isError: boolean;
-  onInputChange: (event: MouseEvent<HTMLButtonElement>) => void;
-  updateCardInputError: (key: keyof CardFormValidation, value: string | string[]) => void;
-  moveFocus: (index: number, value: string, maxLength?: number | undefined) => void;
+  updateInputValue: (key: string, value: any) => void;
+  updateCardInputError: (key: string, value: any) => void;
 }
 
-function CardIssuer({
-  value,
-  isError,
-  onInputChange,
-  updateCardInputError,
-  moveFocus,
-}: CardIssuerProps) {
-  const buttonRef = useRef<HTMLButtonElement>(null);
+function CardIssuer({ isError, updateInputValue, updateCardInputError }: CardIssuerProps) {
   const { isModalOpen, openModal, closeModal } = useModal();
+  const [value, setValue] = useState('');
   const modalRef = useRef<HTMLDivElement>(null);
 
   const handleCloseModal = () => {
@@ -48,13 +39,13 @@ function CardIssuer({
   const onBlur = (event: FocusEvent<HTMLButtonElement>) => {
     if (modalRef.current && modalRef.current.contains(event.relatedTarget)) return;
 
-    updateCardInputError('issuer', value);
+    updateCardInputError(event.currentTarget.name, event.currentTarget.value);
   };
 
   const onOptionClick = (event: MouseEvent<HTMLButtonElement>) => {
+    setValue(event.currentTarget.value);
+    updateInputValue('issuer', event.currentTarget.value);
     closeModal();
-    onInputChange(event);
-    moveFocus(1, event.currentTarget.value);
   };
 
   return (
@@ -69,13 +60,14 @@ function CardIssuer({
         카드사
       </Label>
       <Button
-        ref={buttonRef}
         type="button"
         id="issuer"
+        name="issuer"
         className={`select-button flex-jsb flex-row-reverse ${isError ? styles.error : ''} ${
           value ? styles.selected : ''
         }`}
         icon={DownIcon}
+        value={value}
         autoFocus
         tabIndex={1}
         onClick={openModal}
