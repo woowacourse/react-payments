@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import { ReactComponent as ArrowDownIcon } from '../assets/common/arrow-down.svg';
 import { Button } from '../components/common/Button';
 import { Input } from '../components/common/Input';
-import { NumberInput } from '../components/common/NumberInput';
 import { Page } from '../components/common/Page';
 import { Text } from '../components/common/Text';
+import { CardCVCInput } from '../components/payments/CardCVCInput';
 import { CardNumberInput } from '../components/payments/CardNumberInput';
 import { CardPasswordInput } from '../components/payments/CardPasswordInput';
 import { CreditCardView } from '../components/payments/CreditCardView';
@@ -171,15 +171,12 @@ export const NewCreditCardPage = () => {
 
         <FormGroup>
           <Text size="small">보안 코드</Text>
-          <NumberInput
-            maxCount={3}
+          <CardCVCInput
             value={newCard.cvc}
             onChange={handleChangeNewCardField('cvc')}
-            width={8}
-            center
-            type="password"
             onFocus={() => setShowBackface(true)}
             onBlur={() => setShowBackface(false)}
+            helperTooltip
           />
           <FormGroupErrorMessage>{validationResult.cvc}</FormGroupErrorMessage>
         </FormGroup>
