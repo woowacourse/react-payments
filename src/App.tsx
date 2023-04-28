@@ -32,7 +32,10 @@ function App() {
             path="/add-card"
             element={<AddCard cards={cards} setCards={setCards} />}
           />
-          <Route path="/add-card-alias" element={<AddCardAlias />} />
+          <Route
+            path="/add-card-alias"
+            element={<AddCardAlias cards={cards} />}
+          />
         </Routes>
       </Router>
     </Context.Provider>

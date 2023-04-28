@@ -5,8 +5,10 @@ import * as Styled from './AddCardAlias.styles';
 import { Context } from '../App';
 import CardType from '../types/Card';
 
-const AddAlias = () => {
-  const currentCard = useContext<CardType[] | null>(Context);
+const AddAlias = ({ cards }: { cards: CardType[] }) => {
+  // const currentCard = useContext<CardType[] | null>(Context);
+
+  const currentCard = cards;
 
   if (!currentCard) return <></>;
 
