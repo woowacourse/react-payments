@@ -4,7 +4,6 @@ import type { CardFormData } from '../../types';
 import { PATH } from '../../constants';
 import { useCardListContext } from '../../contexts/CardListContext';
 import { useCardInputValidation } from './useCardInputValidation';
-import { useFormComplete } from '../common/useFormComplete';
 
 const initialValue: CardFormData = {
   issuer: '',
@@ -22,13 +21,12 @@ const useCardAddForm = () => {
   const { newCardId, cardListLength, addCard } = useCardListContext();
   const [cardInformation, setCardInformation] = useState(initialValue);
   const {
-    inputValidation,
+    isFormComplete,
     inputError,
     updateInputValidation,
     updateInputError,
     triggerAllInputErrors,
   } = useCardInputValidation();
-  const isFormComplete = useFormComplete(inputValidation);
   const navigate = useNavigate();
 
   const updateInputValue = useCallback(
