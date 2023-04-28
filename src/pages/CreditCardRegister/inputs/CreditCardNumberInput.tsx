@@ -42,7 +42,7 @@ function CreditCardNumberInput({ name }: T.CreditCardInputProps) {
     setCreditCardForm({ ...creditCardForm, [name]: newCreditCardNumber });
   };
 
-  const isError = validateNumber(creditCardForm.number);
+  const isError = creditCardForm.number.length > 0 && validateNumber(creditCardForm.number);
 
   return (
     <>

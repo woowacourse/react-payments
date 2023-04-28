@@ -2,6 +2,7 @@ import * as T from 'types';
 import useCreditCardForm from 'hooks/useCreditCardForm';
 import FlexBox from 'components/FlexBox';
 import Box from 'components/Box';
+import { validateCVC } from 'domains/validations';
 import Input from '../../../components/Input';
 import * as S from '../style';
 
@@ -15,7 +16,7 @@ function CreditCardCVCInput({ name }: T.CreditCardInputProps) {
     }
   };
 
-  const isError = creditCardForm.cvc.length > 0 && creditCardForm.cvc.length < 3;
+  const isError = creditCardForm.cvc.length > 0 && validateCVC(creditCardForm.cvc);
 
   return (
     <Box>

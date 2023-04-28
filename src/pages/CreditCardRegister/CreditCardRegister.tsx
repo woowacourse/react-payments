@@ -21,7 +21,6 @@ import CreditCardCompanyInput from './inputs/CreditCardCompanyInput';
 function CreditCardRegister() {
   const navigate = useNavigate();
   const { modalOpen, openModal, closeModal } = useModal();
-
   const { creditCardForm, initCreditCardForm, isCreditCardError } = useCreditCardForm();
 
   const handleSubmit = () => {
