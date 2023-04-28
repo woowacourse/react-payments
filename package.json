@@ -75,6 +75,7 @@
     "prettier": "2.8.7",
     "prop-types": "15.8.1",
     "storybook": "7.0.6",
+    "test-library": "1.0.0",
     "webpack": "5.79.0"
   }
 }

@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 
 import CardInfoContext from '../../contexts/CardInfoContext';
-import { COLOR } from '../../constants/cardInfo';
 
 import * as styled from './CardPreview.styled';
 import Card from '../Card/Card';
