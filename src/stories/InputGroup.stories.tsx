@@ -29,6 +29,11 @@ const Template: Story<InputGroupProps> = (args) => {
 export const Default = Template.bind({});
 Default.args = {
   labelValue: '보안 코드(CVC/CVV)',
+};
+
+export const Error = Template.bind({});
+Error.args = {
+  labelValue: '보안 코드(CVC/CVV)',
   errorMessage: '에러 발생',
 };
 
