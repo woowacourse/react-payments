@@ -183,6 +183,7 @@ const Style = {
   Caption: styled.span`
     margin-top: -10px;
     font-size: 20px;
-    font-weight: bold;
+
+    color: grey;
   `,
 };
