@@ -6,7 +6,6 @@ import { useCardAddForm } from '../hooks/cards/useCardAddForm';
 function CardAddPage() {
   const {
     cardInformation,
-    inputValidation,
     inputError,
     updateInputError,
     handleButtonInputChange,
@@ -17,7 +16,7 @@ function CardAddPage() {
 
   return (
     <>
-      <Header content="카드 추가" isOverlayPage={true} />
+      <Header content="카드 추가" isOverlayPage />
       <main>
         <CardItem
           className="mg-b-24 center-hoz-item"
@@ -28,7 +27,6 @@ function CardAddPage() {
         />
         <CardAddForm
           cardInformation={cardInformation}
-          cardInputValidation={inputValidation}
           cardInputError={inputError}
           onButtonInputChange={handleButtonInputChange}
           onSingleInputChange={handleSingleInputChange}
