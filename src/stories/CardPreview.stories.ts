@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import CardPreview from '../components/common/CardPreview/CardPreview';
-import * as cards from '../images/cards';
+import { cardImages } from '../pages/cardImages';
 
 const meta = {
   title: 'CardPreview',
@@ -16,7 +16,7 @@ export const Standard: Story = {
     cardNumber: '1234-5678-9012-3456',
     cardExpirationDate: '01/21',
     cardOwnerName: '요술토끼',
-    image: cards.shinhanCard,
+    image: cardImages['신한카드'],
   },
 };
 
@@ -35,7 +35,7 @@ export const EmptyWithImage: Story = {
     cardNumber: '',
     cardExpirationDate: '',
     cardOwnerName: '',
-    image: cards.shinhanCard,
+    image: cardImages['신한카드'],
   },
 };
 
@@ -46,7 +46,7 @@ export const ExtraName: Story = {
     cardNumber: '1234-5678-9012-3456',
     cardExpirationDate: '01/21',
     cardOwnerName: '요술토끼',
-    image: cards.shinhanCard,
+    image: cardImages['신한카드'],
   },
 };
 
@@ -59,7 +59,7 @@ export const Overflow: Story = {
     cardExpirationDate: '01/21',
     cardOwnerName:
       '여기에 이제 카드 사용자의 이름을 적어야 할 텐데 여기에 오는 이름이 너무 길어서 전부 표시하기가 힘든 상황입니다.',
-    image: cards.shinhanCard,
+    image: cardImages['신한카드'],
   },
 };
 
