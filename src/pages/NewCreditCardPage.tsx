@@ -170,7 +170,7 @@ export const NewCreditCardPage = () => {
         </FormGroup>
 
         <FormGroup>
-          <Text size="small">보안 코드</Text>
+          <Text size="small">보안 코드(CVC/CVV)</Text>
           <CardCVCInput
             value={newCard.cvc}
             onChange={handleChangeNewCardField('cvc')}
