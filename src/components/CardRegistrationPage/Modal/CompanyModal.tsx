@@ -1,10 +1,17 @@
 import styled from "styled-components";
 import CompanyButton from "./CompanyButton";
+import { useModalAction } from "../../provider/ModalProvider";
 
 const CompanyModal = () => {
+  const { closeModal } = useModalAction();
+
+  const handleClickModalContainer = (event: React.MouseEvent) => {
+    event.stopPropagation();
+  };
+
   return (
-    <BackDrop>
-      <ModalContainer>
+    <BackDrop onClick={closeModal}>
+      <ModalContainer onClick={handleClickModalContainer}>
         <CompanyListColumn>
           <CompanyButton company="BC카드" />
           <CompanyButton company="신한카드" />

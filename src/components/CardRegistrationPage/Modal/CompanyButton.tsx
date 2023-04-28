@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Company } from "../../../types/Card";
 import { useCardItemAction } from "../../provider/CardItemProvider";
 import { companyLogo } from "../../../assets/companyLogo";
+import { useModalAction } from "../../provider/ModalProvider";
 
 interface CompanyButtonProps {
   company: Company;
@@ -9,9 +10,11 @@ interface CompanyButtonProps {
 
 const CompanyButton = ({ company }: CompanyButtonProps) => {
   const { setCompany } = useCardItemAction();
+  const { closeModal } = useModalAction();
 
   const handleClickButton = () => {
     setCompany(company);
+    closeModal();
   };
 
   return (

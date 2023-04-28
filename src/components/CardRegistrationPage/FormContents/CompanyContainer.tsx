@@ -1,16 +1,20 @@
 import styled from "styled-components";
 import InputGroup from "../../common/InputGroup";
 import { useCardItemValue, useErrorMessageValue } from "../../provider/CardItemProvider";
+import { useModalAction } from "../../provider/ModalProvider";
 
 const CardCompany = () => {
   const { company } = useCardItemValue();
   const { companyErrorMessage } = useErrorMessageValue();
+  const { openModal } = useModalAction();
 
   return (
     <InputGroup labelValue={"카드사"} errorMessage={companyErrorMessage}>
       <CompanyContainer isError={!!companyErrorMessage}>
         <p>{company}</p>
-        <ChangeButton type="button">{company ? "변경" : "카드사 선택"}</ChangeButton>
+        <ChangeButton type="button" onClick={openModal}>
+          {company ? "변경" : "카드사 선택"}
+        </ChangeButton>
       </CompanyContainer>
     </InputGroup>
   );

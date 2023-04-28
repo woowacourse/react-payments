@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../common/Header";
@@ -7,6 +8,7 @@ import CardForm from "../CardRegistrationPage/CardForm";
 import { CardPublicInfo } from "../../types/Card";
 import { useCardItemValue } from "../provider/CardItemProvider";
 import CompanyModal from "../CardRegistrationPage/Modal/CompanyModal";
+import { useModalAction } from "../provider/ModalProvider";
 
 interface CardRegistrationPageProps {
   addCardItem: (cardItem: CardPublicInfo) => void;
@@ -14,6 +16,7 @@ interface CardRegistrationPageProps {
 
 const CardRegistrationPage = ({ addCardItem }: CardRegistrationPageProps) => {
   const { cardNumber, expirationDate, name, company } = useCardItemValue();
+  const { isOpenModal } = useModalAction();
 
   const cardItem = {
     id: Date.now(),
@@ -34,7 +37,7 @@ const CardRegistrationPage = ({ addCardItem }: CardRegistrationPageProps) => {
         <CardItem card={cardItem} />
       </CardItemContainer>
       <CardForm onSubmitForm={handleSubmitForm} />
-      <CompanyModal />
+      {isOpenModal && <CompanyModal />}
     </>
   );
 };

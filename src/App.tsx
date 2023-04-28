@@ -5,6 +5,7 @@ import CardListPage from "./components/pages/CardListPage";
 import CardRegistrationPage from "./components/pages/CardRegistrationPage";
 import { CardPublicInfo } from "./types/Card";
 import CardItemProvider from "./components/provider/CardItemProvider";
+import ModalProvider from "./components/provider/ModalProvider";
 
 function App() {
   const [cardList, setCardList] = useState<CardPublicInfo[]>([]);
@@ -22,9 +23,11 @@ function App() {
           <Route
             path="/register"
             element={
-              <CardItemProvider>
-                <CardRegistrationPage addCardItem={addCardItem} />
-              </CardItemProvider>
+              <ModalProvider>
+                <CardItemProvider>
+                  <CardRegistrationPage addCardItem={addCardItem} />
+                </CardItemProvider>
+              </ModalProvider>
             }
           />
         </Routes>
