@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import React from 'react';
-import { BackButton } from './BackButton';
+import { ReactComponent as ArrowDownIcon } from '../../assets/common/arrow-down.svg';
+import { Button } from './Button';
 import { PageHeader } from './PageHeader';
 
 const meta = {
@@ -18,7 +18,11 @@ export const Default: Story = {
 
 export const WithBackButton: Story = {
   args: {
-    leading: React.createElement(BackButton),
+    leading: (
+      <Button>
+        <ArrowDownIcon />
+      </Button>
+    ),
     children: '카드 추가',
   },
 };
