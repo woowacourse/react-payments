@@ -19,10 +19,11 @@ const context: Record<keyof Card, React.Context<any>> = {
   cardCompany: CardCompanyContext,
   alias: CardAliasContext,
 };
-const useCardRegistrationInfoWithContext = (infoType: keyof Card) => {
+
+const useCardRegistrationInfoValue = (infoType: keyof Card) => {
   const value = useContext(context[infoType]);
 
   return value;
 };
 
-export default useCardRegistrationInfoWithContext;
+export default useCardRegistrationInfoValue;
