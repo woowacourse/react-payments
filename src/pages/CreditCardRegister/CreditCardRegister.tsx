@@ -88,7 +88,6 @@ function CreditCardRegister() {
       </Modal>
 
     </>
-
   );
 }
 export default CreditCardRegister;
