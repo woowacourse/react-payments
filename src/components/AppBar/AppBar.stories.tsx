@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import GlobalStyle from "../../styles/GlobalStyle";
 import AppBar from "./AppBar";
 
@@ -7,16 +6,16 @@ export default {
   component: AppBar,
 };
 
-export const CardListPage = () => (
+export const Default = () => (
   <>
     <GlobalStyle />
     <AppBar title="보유카드"></AppBar>
   </>
 );
 
-export const AddCardPage = () => (
+export const UsePrevButton = () => (
   <>
     <GlobalStyle />
-    <AppBar title="카드추가" leftChild={<Link to="/">〈</Link>}></AppBar>
+    <AppBar title="카드추가" prevButton></AppBar>
   </>
 );
