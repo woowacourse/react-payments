@@ -26,9 +26,8 @@ function CardNumber() {
     <>
       <Input
         key={key}
-        data-order={key}
         data-index={idx}
-        value={value[key]}
+        value={value[idx]}
         onChange={onChange}
         maxLength={EACH_CARD}
         customInputStyle={S.CardNumberInput}

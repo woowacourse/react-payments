@@ -1,33 +1,26 @@
 import { useContext } from "react";
 import { CardInfoContext } from "src/context/CardInfoContext";
-import { CARD_ID } from "src/utils/constant";
 
 function useCardCompanySelect({ closeEvent }: { closeEvent: () => void }) {
-  const [_, setCardInfo] = useContext(CardInfoContext);
+  const [_, dispatch] = useContext(CardInfoContext);
 
-  const changeCardColor = (id: (typeof CARD_ID)[number], name: string) => {
-    if (setCardInfo) {
-      setCardInfo((prev) => ({
-        ...prev,
-        cardName: {
-          id,
-          name,
-        },
-      }));
+  const changeCardColor = (id: string) => {
+    if (dispatch) {
+      dispatch({ type: "cardName", payload: id });
     }
   };
 
   const cardClickHandler: React.MouseEventHandler<HTMLImageElement> = (
     event,
   ) => {
-    const { id, alt } = event.currentTarget;
-    changeCardColor(id as (typeof CARD_ID)[number], alt);
+    const { id } = event.currentTarget;
+    changeCardColor(id);
     closeEvent();
   };
 
   const onMouseOver: React.MouseEventHandler<HTMLImageElement> = (event) => {
-    const { id, alt } = event.currentTarget;
-    changeCardColor(id as (typeof CARD_ID)[number], alt);
+    const { id } = event.currentTarget;
+    changeCardColor(id);
   };
 
   return { cardClickHandler, onMouseOver };

@@ -30,9 +30,8 @@ function CardPassword() {
   const inputs = PASSWORD_NUMBER_TYPES.map((key, idx) => (
     <Input
       key={key}
-      data-order={key}
       data-index={idx}
-      value={value[key]}
+      value={value[idx]}
       onChange={onChange}
       maxLength={EACH_PASSWORD}
       inputmode="numeric"

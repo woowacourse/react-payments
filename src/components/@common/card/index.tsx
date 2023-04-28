@@ -1,9 +1,10 @@
 import React from "react";
-import { CardNameProps, CardNumberProps } from "src/interfaces";
+import { CardIDProps, CardNumberProps } from "src/interfaces";
 import { CardContainer, Styled as S } from "./Card.styles";
+import { BANK_LIST } from "src/utils/constant";
 
 interface Props {
-  cardName?: CardNameProps;
+  cardName?: CardIDProps;
   cardNumber: CardNumberProps;
   ownerName: string;
   expireDate: string;
@@ -19,20 +20,19 @@ function Card({
   onClick,
   isOpen,
 }: Props) {
-  const CardNumbers = Object.values(cardNumber).map((value, index) => {
-    if (index === 2 || index === 3) {
-      return <span>{"•".repeat(value.length)}</span>;
-    }
-    return <span>{value}</span>;
+  const CardNumbers = cardNumber.map((value, index) => {
+    return (
+      <span>
+        {index === 2 || index === 3 ? "•".repeat(value.length) : value}
+      </span>
+    );
   });
 
+  const name = BANK_LIST.find(({ id }) => id === cardName)?.name;
+
   return (
-    <CardContainer
-      onClick={onClick}
-      cardName={cardName?.id}
-      isModalOpen={isOpen}
-    >
-      <S.CardName>{cardName?.name}</S.CardName>
+    <CardContainer onClick={onClick} cardName={cardName} isModalOpen={isOpen}>
+      <S.CardName>{name}</S.CardName>
       <S.CardChip />
       <S.CardNumberContainer>{CardNumbers}</S.CardNumberContainer>
       <S.CardNameContainer>

@@ -1,21 +1,9 @@
 import { CARD_ID } from "src/utils/constant";
 
-export interface CardNumberProps {
-  first: string;
-  second: string;
-  third: string;
-  fourth: string;
-}
+export type CardNumberProps = [string, string, string, string];
 
-export interface CardPasswordProps {
-  first: string;
-  second: string;
-}
-
-export interface CardNameProps {
-  id: (typeof CARD_ID)[number] | null;
-  name: string;
-}
+export type CardPasswordProps = [string, string];
+export type CardIDProps = (typeof CARD_ID)[number] | null;
 
 export interface CardInfoProps {
   cardNumbers: CardNumberProps;
@@ -23,7 +11,7 @@ export interface CardInfoProps {
   ownerName: string;
   securityCode: string;
   password: CardPasswordProps;
-  cardName: CardNameProps;
+  cardName: CardIDProps;
 }
 
 export interface CardListProps extends CardInfoProps {

@@ -6,6 +6,7 @@ import KookminCard from "src/assets/kookmin_card.svg";
 import LotteCard from "src/assets/lotte_card.svg";
 import ShinhanCard from "src/assets/shinhan_card.svg";
 import WooriCard from "src/assets/woori_card.svg";
+import { CardInfoProps } from "src/interfaces";
 
 export const NUMBERS = {
   MAX_CARD: 16,
@@ -81,24 +82,13 @@ export const BANK_LIST = [
   },
 ] as const;
 
-export const initialCardInfos = {
-  cardNumbers: {
-    first: "",
-    second: "",
-    third: "",
-    fourth: "",
-  },
+export const initialCardInfos: CardInfoProps = {
+  cardNumbers: ["", "", "", ""],
   expireDate: "",
   ownerName: "",
   securityCode: "",
-  password: {
-    first: "",
-    second: "",
-  },
-  cardName: {
-    id: null,
-    name: "",
-  },
+  password: ["", ""],
+  cardName: null,
 };
 
 export const PATHS = {
