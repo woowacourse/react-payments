@@ -78,8 +78,6 @@ export const ErrorMessage = styled.div`
     margin-bottom: 5px;
 `;
 
-export const Box = styled.div``;
-
 export const CreditCardCompanyInputLayout = styled.div`
     display: grid;
     grid-template-columns: repeat(4, 1fr);

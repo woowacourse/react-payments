@@ -1,6 +1,7 @@
 import * as T from 'types';
 import useCreditCardForm from 'hooks/useCreditCardForm';
 import FlexBox from 'components/FlexBox';
+import Box from 'components/Box';
 import Input from '../../../components/Input';
 import * as S from '../style';
 
@@ -15,7 +16,7 @@ function CreditCardOwnerInput({ name }: T.CreditCardInputProps) {
   };
 
   return (
-    <S.Box>
+    <Box>
       <FlexBox justifyContent="space-between">
         <S.CreditCardRegisterLabel>카드 소유자 이름 (선택)</S.CreditCardRegisterLabel>
         <S.CreditCardRegisterLabel>
@@ -31,7 +32,7 @@ function CreditCardOwnerInput({ name }: T.CreditCardInputProps) {
         textAlign="start"
         onChange={handleChangeCreditCardOwner}
       />
-    </S.Box>
+    </Box>
   );
 }
 

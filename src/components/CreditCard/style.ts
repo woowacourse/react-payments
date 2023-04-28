@@ -34,14 +34,6 @@ export const CreditCardICChip = styled.div`
     border-radius: 4px;
 `;
 
-export const Box = styled.div`
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-    row-gap: 12px;
-    align-items: center;
-    min-width: 100%;
-`;
-
 export const CreditCardContainer = styled.div`
     margin-top: 10px;
     min-width: 100%;
