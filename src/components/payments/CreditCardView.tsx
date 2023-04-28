@@ -128,7 +128,7 @@ const SignArea = styled.div`
   padding: 2px 8px;
   padding-left: 20px;
 
-  background: ${(props) => props.theme.color.grey2};
+  background: #ecebf1;
   color: ${(props) => props.theme.fontColor.secondary};
   font-size: 10px;
   font-weight: normal;
