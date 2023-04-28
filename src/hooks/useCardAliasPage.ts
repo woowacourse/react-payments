@@ -2,8 +2,7 @@ import { ChangeEvent, useContext, useEffect, useRef } from 'react';
 
 import CardInfoContext from '../contexts/CardInfoContext';
 
-import { PATHNAME } from '../constants/pathname';
-import { useNavigationTo } from './useNavigationTo';
+import { generateCardKey } from '../domains/keyGenerator';
 
 export const useCardAliasPage = () => {
   const {
@@ -17,7 +16,6 @@ export const useCardAliasPage = () => {
     setCardAlias,
     setCardInfoList,
   } = useContext(CardInfoContext);
-  const navigationToHome = useNavigationTo(PATHNAME.HOME);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -32,13 +30,22 @@ export const useCardAliasPage = () => {
 
   const onClick = () => {
     setCardInfoList(prev => {
-      return [
-        ...prev,
-        { cardNumbers, expirationDate, ownerName, securityCode, password, cardCompany, cardAlias },
-      ];
-    });
+      const cardInfo = {
+        cardNumbers,
+        expirationDate,
+        ownerName,
+        securityCode,
+        password,
+        cardCompany,
+        cardAlias,
+      };
+      const key = generateCardKey(cardInfo);
 
-    navigationToHome();
+      return {
+        ...prev,
+        [key]: cardInfo,
+      };
+    });
   };
 
   return { onChange, onClick, cardAlias, buttonRef };

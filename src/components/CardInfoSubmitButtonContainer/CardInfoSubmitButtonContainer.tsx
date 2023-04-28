@@ -5,12 +5,12 @@ import { useNavigationTo } from '../../hooks/useNavigationTo';
 import * as styled from './CardInfoSubmitButtonContainer.styled';
 
 const CardInfoSubmitButtonContainer = () => {
-  const navigationToAliasPage = useNavigationTo(PATHNAME.CARD_ALIAS);
+  const { navigationTo } = useNavigationTo(PATHNAME.CARD_ALIAS);
 
   return (
     <>
       {useIsFilledForm() && (
-        <styled.CardInfoSubmitButton onClick={navigationToAliasPage} autoFocus>
+        <styled.CardInfoSubmitButton onClick={navigationTo} autoFocus>
           다음
         </styled.CardInfoSubmitButton>
       )}

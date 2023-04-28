@@ -6,14 +6,14 @@ import * as styled from './Header.styled';
 
 const Header = () => {
   const { isOnRegisterPage, pageTitle } = useHeaderTitle();
-  const navigationToHome = useNavigationTo(PATHNAME.HOME);
+  const { navigationTo } = useNavigationTo(PATHNAME.HOME);
 
   return (
     <styled.Header>
       {isOnRegisterPage && (
-        <styled.BackwardButton onClick={navigationToHome}>{`<`}</styled.BackwardButton>
+        <styled.BackwardButton onClick={navigationTo}>{`<`}</styled.BackwardButton>
       )}
-      <styled.HeaderTitle onClick={navigationToHome}>{pageTitle}</styled.HeaderTitle>
+      <styled.HeaderTitle onClick={navigationTo}>{pageTitle}</styled.HeaderTitle>
     </styled.Header>
   );
 };

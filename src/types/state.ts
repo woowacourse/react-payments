@@ -19,7 +19,7 @@ export type SetPassword = React.Dispatch<SetStateAction<Password>>;
 export type setCardCompany = React.Dispatch<SetStateAction<CardCompany>>;
 export type SetCardAlias = React.Dispatch<SetStateAction<CardAlias>>;
 
-export interface CardInfo {
+export type CardInfo = {
   cardNumbers: CardNumbers;
   expirationDate: ExpirationDate;
   ownerName: OwnerName;
@@ -27,7 +27,8 @@ export interface CardInfo {
   password: Password;
   cardCompany: CardCompany;
   cardAlias: CardAlias;
-}
-
+};
 export type SetCardInfo = React.Dispatch<SetStateAction<CardInfo>>;
-export type SetCardInfoList = React.Dispatch<SetStateAction<CardInfo[]>>;
+
+export type CardInfoList = Record<string, CardInfo>;
+export type SetCardInfoList = React.Dispatch<React.SetStateAction<CardInfoList>>;

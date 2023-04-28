@@ -6,7 +6,7 @@ import { useNavigationTo } from '../../hooks/useNavigationTo';
 import * as styled from './CardRegisterButtonContainer.styled';
 
 const CardRegisterButtonContainer = () => {
-  const navigationTo = useNavigationTo(PATHNAME.REGISTER);
+  const { navigationTo } = useNavigationTo(PATHNAME.REGISTER);
 
   return (
     <styled.CardRegisterButtonContainer>

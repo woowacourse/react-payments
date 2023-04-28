@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
 
-import { CardInfo } from '../types/state';
+import { CardInfoList } from '../types/state';
 import { getLocalStorageItem, setLocalStorageItem } from '../utils/localStorage';
 
 export const useCardInfoList = () => {
-  const [cardInfoList, setCardInfoList] = useState<CardInfo[]>(
-    getLocalStorageItem('cardInfoList') ?? []
+  const [cardInfoList, setCardInfoList] = useState<CardInfoList>(
+    getLocalStorageItem('cardInfoList') ?? {}
   );
 
   useEffect(() => {
-    if (cardInfoList.length) {
+    if (cardInfoList && Object.keys(cardInfoList).length) {
       setLocalStorageItem('cardInfoList', cardInfoList);
     }
   }, [cardInfoList]);

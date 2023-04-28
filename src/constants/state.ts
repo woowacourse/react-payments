@@ -1,6 +1,6 @@
 import { COLOR } from './cardInfo';
 
-export const DEFAULT_STATE = {
+export const DEFAULT_CARD_INFO_STATE = {
   CARD_NUMBERS: {
     firstCardNumber: '',
     secondCardNumber: '',
