@@ -110,8 +110,8 @@ OwnerLessCreditCard.args = {
   },
 };
 
-export const invaildCreditCard = Template.bind({});
-invaildCreditCard.args = {
+export const invalidCreditCard = Template.bind({});
+invalidCreditCard.args = {
   fullFilled: true,
   creditCard: {
     companyId: 'woori',
