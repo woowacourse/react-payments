@@ -14,7 +14,14 @@ import {
 } from '../constants';
 import { CardType } from '../types';
 import { QuestionMark } from '../assets';
-import { cardNumberValidation, cvcValidation, expiredDateValidation, inputFormValidation, ownerNameValidation, passwordValidation } from '../utils/validation';
+import {
+  cardNumberValidation,
+  cvcValidation,
+  expiredDateValidation,
+  inputFormValidation,
+  ownerNameValidation,
+  passwordValidation,
+} from '../utils/validation';
 
 interface CardInputFormProps {
   card: CardType;
@@ -70,16 +77,20 @@ const CardInputForm = (props: CardInputFormProps) => {
       if (card.cardNumber.length < CARD_NUMBER_ERASE_SYMBOL.FOURTH)
         card.cardNumber = card.cardNumber.substring(0, ERASE_UNTIL_CARD_NUMBER.FOURTH);
 
-      if (realCardNumber.length <= CARD_NUMBER_ERASE_SYMBOL.REAL_FOURTH)
-        setRealCardNumber(realCardNumber.substring(0, ERASE_UNTIL_CARD_NUMBER.REAL_FOURTH).trim());
-      if (realCardNumber.length <= CARD_NUMBER_ERASE_SYMBOL.REAL_THIRD)
-        setRealCardNumber(realCardNumber.substring(0, ERASE_UNTIL_CARD_NUMBER.REAL_THIRD).trim());
-      if (realCardNumber.length <= CARD_NUMBER_ERASE_SYMBOL.REAL_SECOND)
-        setRealCardNumber(realCardNumber.substring(0, ERASE_UNTIL_CARD_NUMBER.REAL_SECOND).trim());
-      if (realCardNumber.length <= CARD_NUMBER_ERASE_SYMBOL.REAL_FIRST)
-        setRealCardNumber(realCardNumber.substring(0, ERASE_UNTIL_CARD_NUMBER.REAL_FIRST).trim());
+      realCardNumberKey();
     }
     props.setCard(card);
+  };
+
+  const realCardNumberKey = () => {
+    if (realCardNumber.length <= CARD_NUMBER_ERASE_SYMBOL.REAL_FOURTH)
+      setRealCardNumber(realCardNumber.substring(0, ERASE_UNTIL_CARD_NUMBER.REAL_FOURTH).trim());
+    if (realCardNumber.length <= CARD_NUMBER_ERASE_SYMBOL.REAL_THIRD)
+      setRealCardNumber(realCardNumber.substring(0, ERASE_UNTIL_CARD_NUMBER.REAL_THIRD).trim());
+    if (realCardNumber.length <= CARD_NUMBER_ERASE_SYMBOL.REAL_SECOND)
+      setRealCardNumber(realCardNumber.substring(0, ERASE_UNTIL_CARD_NUMBER.REAL_SECOND).trim());
+    if (realCardNumber.length <= CARD_NUMBER_ERASE_SYMBOL.REAL_FIRST)
+      setRealCardNumber(realCardNumber.substring(0, ERASE_UNTIL_CARD_NUMBER.REAL_FIRST).trim());
   };
 
   const handleExpiredDateChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -127,7 +138,7 @@ const CardInputForm = (props: CardInputFormProps) => {
   };
 
   return (
-    <CardInputFormWrapper  onSubmit={props.onSubmit}>
+    <CardInputFormWrapper onSubmit={props.onSubmit}>
       <InputSetWrapper>
         <label htmlFor={CARD_ID_VALUE.CARD_NUMBER}>카드 번호</label>
         <CardInput
@@ -140,7 +151,7 @@ const CardInputForm = (props: CardInputFormProps) => {
           onChange={handleCardNumberChanged}
           onKeyDown={handleCardNumberKey}
         />
-        <span>{cardNumberValidation(realCardNumber) ? '':'카드 번호에는 숫자만 입력 가능합니다.'}</span>
+        <span>{cardNumberValidation(realCardNumber) ? '' : '카드 번호에는 숫자만 입력 가능합니다.'}</span>
       </InputSetWrapper>
 
       <InputSetWrapper>
@@ -156,7 +167,7 @@ const CardInputForm = (props: CardInputFormProps) => {
           onChange={handleExpiredDateChanged}
           onKeyDown={handleExpiredDateKey}
         />
-        <span>{expiredDateValidation(card.expiredDate) ? '':"유효하지 않은 입력(월/연)입니다."}</span>
+        <span>{expiredDateValidation(card.expiredDate) ? '' : '유효하지 않은 입력(월/연)입니다.'}</span>
       </InputSetWrapper>
       <InputSetWrapper>
         <OwnerNameLabelWrapper>
@@ -173,7 +184,7 @@ const CardInputForm = (props: CardInputFormProps) => {
           isRequired={false}
           onChange={handleOwnerChanged}
         />
-        <span>{ownerNameValidation(card.ownerName) ? "" : "카드 소유자 이름은 영어만 가능합니다."}</span>
+        <span>{ownerNameValidation(card.ownerName) ? '' : '카드 소유자 이름은 영어만 가능합니다.'}</span>
       </InputSetWrapper>
 
       <InputSetWrapper>
@@ -190,12 +201,12 @@ const CardInputForm = (props: CardInputFormProps) => {
           />
           <img src={QuestionMark} alt="도움말" onClick={() => setIsAnswered(!isAnswered)} />
           {isAnswered && (
-        <AnswerBoxWrapper>
-          <p>카드 뒷면의 보안 3자리 숫자를 입력해 주세요.</p>
-        </AnswerBoxWrapper>
-      )}
+            <AnswerBoxWrapper>
+              <p>카드 뒷면의 보안 3자리 숫자를 입력해 주세요.</p>
+            </AnswerBoxWrapper>
+          )}
         </CvcInputWrapper>
-        <span>{cvcValidation(card.cvc) ? '':"cvc는 번호만 입력 가능합니다."}</span> 
+        <span>{cvcValidation(card.cvc) ? '' : 'cvc는 번호만 입력 가능합니다.'}</span>
       </InputSetWrapper>
 
       <InputSetWrapper>
@@ -222,11 +233,13 @@ const CardInputForm = (props: CardInputFormProps) => {
           <span>●</span>
           <span>●</span>
         </PasswordInputWrapper>
-        <span>{passwordValidation(card.password[PASSWORD_DIGIT_INDEX.FIRST], card.password[PASSWORD_DIGIT_INDEX.SECOND]) ? '':"비밀번호에는 숫자만 입력 가능합니다."}</span>
+        <span>
+          {passwordValidation(card.password[PASSWORD_DIGIT_INDEX.FIRST], card.password[PASSWORD_DIGIT_INDEX.SECOND])
+            ? ''
+            : '비밀번호에는 숫자만 입력 가능합니다.'}
+        </span>
       </InputSetWrapper>
-      {(inputFormValidation(realCardNumber, card)) && <button type="submit">
-        다음
-      </button>}
+      {inputFormValidation(realCardNumber, card) && <button type="submit">다음</button>}
       {/* </button> */}
     </CardInputFormWrapper>
   );
@@ -321,7 +334,7 @@ const AnswerBoxWrapper = styled.div`
 
   width: 10rem;
   height: 2.5rem;
- 
+
   background: #ecebf1;
 
   border-radius: 8px;
