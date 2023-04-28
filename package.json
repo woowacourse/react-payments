@@ -25,7 +25,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "chromatic": "npx chromatic --project-token=b26d1901d8b0"
   },
   "eslintConfig": {
     "extends": [
@@ -69,9 +70,12 @@
     "@testing-library/react-hooks": "^8.0.1",
     "@types/styled-components": "^5.1.26",
     "babel-plugin-named-exports-order": "^0.0.2",
+    "chromatic": "^6.17.3",
     "prop-types": "^15.8.1",
     "storybook": "^7.0.5",
     "storybook-addon-react-router-v6": "^0.3.5",
     "webpack": "^5.79.0"
-  }
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "react-payments@0.1.0"
 }
