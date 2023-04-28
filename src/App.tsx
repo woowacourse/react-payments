@@ -1,9 +1,6 @@
-import { useContext } from 'react';
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import { CardInfoProvider } from './CardInfoProvider';
-import type { CardInfo } from './types';
 import { ModalProvider } from './ModalProvider';
-import { CardInfoContext } from './CardInfoProvider';
 import styles from './App.module.css';
 import CardNameDecision from './pages/CardNameDecision';
 import NotFound from './pages/NotFound';
