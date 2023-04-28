@@ -1,6 +1,8 @@
 import CreditCard from 'components/CreditCard';
 import { useNavigate } from 'react-router-dom';
 import useCreditCardList from 'hooks/useCreditCardList';
+import Box from 'components/Box';
+import FlexBox from 'components/FlexBox';
 import * as S from './style';
 
 function Home() {
@@ -12,16 +14,22 @@ function Home() {
       <S.HomeHeader>보유카드</S.HomeHeader>
       <S.CreditCardList>
         {creditCardList.map((creditCard) => (
-          <CreditCard
-            key={creditCard.number}
-            fullFilled
-            creditCard={{
-              companyId: creditCard.companyId,
-              number: creditCard.number,
-              expiry: creditCard.expiry,
-              owner: creditCard.owner,
-            }}
-          />
+          <Box key={creditCard.number}>
+            <CreditCard
+              fullFilled
+              creditCard={{
+                companyId: creditCard.companyId,
+                number: creditCard.number,
+                expiry: creditCard.expiry,
+                owner: creditCard.owner,
+              }}
+            />
+            <Box mt={2}>
+              <FlexBox justifyContent="center">
+                {creditCard.nickname}
+              </FlexBox>
+            </Box>
+          </Box>
         ))}
       </S.CreditCardList>
       <S.RegisterCreditCardContainer>
