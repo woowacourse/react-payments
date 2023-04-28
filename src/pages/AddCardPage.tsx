@@ -17,7 +17,6 @@ import {
   userConfirm,
 } from '../utils';
 import { BankType, CardInfo, PageInfo } from '../types';
-import { formValidate } from '../hooks/formValidate';
 import { useFormInputs } from '../hooks/useFormInputs';
 import Modal from '../components/common/Modal';
 import SelectBank from '../components/card/SelectBank';
@@ -25,10 +24,8 @@ import { useHideScrollState } from '../hooks/useHideScrollState';
 import ChangeButton from '../components/common/ChangeButton';
 import { BANK_DATA } from '../constant';
 import RegisteredCard from '../components/card/RegisteredCard';
-import {
-  createFormInputValue,
-  InputValuesInformationProps,
-} from '../hooks/createFormInputValue';
+import { InputValuesInformationProps } from '../hooks/createFormInputValue';
+import { getFormValidateResult } from '../hooks/getFormValidateResult';
 
 interface AddCardPageProps {
   cardList: CardInfo[];
@@ -97,16 +94,9 @@ export default function AddCardPage({
       { ...secondPassword, element: secondPasswordInput },
     ];
 
-    const { inputValueInfomation, inputKey } =
-      createFormInputValue(inputInformation);
+    const { validationResult } = getFormValidateResult(inputInformation);
 
-    const { validationResult, wrongInputs } = formValidate(
-      inputValueInfomation,
-      inputKey
-    );
-
-    if (!validationResult && wrongInputs) {
-      wrongInputs[0].focus();
+    if (!validationResult) {
       return;
     }
 

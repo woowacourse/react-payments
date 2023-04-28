@@ -25,7 +25,11 @@ export const formValidate = (
     return getValidateResult(current);
   });
 
-  return { validationResult, wrongInputs };
+  if (wrongInputs) {
+    wrongInputs[0].focus();
+  }
+
+  return { validationResult };
 };
 
 const getValidateResult = (currentInfo: InputDetailInfo) => {

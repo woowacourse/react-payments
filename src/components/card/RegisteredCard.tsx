@@ -5,46 +5,9 @@ import Input from '../common/Input';
 import Button from '../common/Button';
 import InputField from '../common/InputField';
 import { UseInputProps } from '../../hooks/useInput';
-import { formValidate } from '../../hooks/formValidate';
 import Error from '../common/Error';
-import {
-  InputValuesInformationProps,
-  createFormInputValue,
-} from '../../hooks/createFormInputValue';
-
-const Wrapper = styled.div`
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  padding: 130px 0 0 0;
-`;
-
-const Form = styled.form``;
-
-const FinishMessage = styled.h2`
-  margin-bottom: 36px;
-  font-weight: 400;
-  font-size: 24px;
-  line-height: 28px;
-  text-align: center;
-  color: #383838;
-`;
-
-const InputWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  margin-top: 124px;
-  border-bottom: 1px solid black;
-`;
-
-const ButtonWrapper = styled.div`
-  position: absolute;
-  right: 25px;
-  bottom: 25px;
-`;
+import { InputValuesInformationProps } from '../../hooks/createFormInputValue';
+import { getFormValidateResult } from '../../hooks/getFormValidateResult';
 
 interface RegistredCardProps extends CardProps {
   cardTitle: UseInputProps;
@@ -65,16 +28,9 @@ export default function RegisteredCard({
       { ...cardTitle, element: cardTitleInput },
     ];
 
-    const { inputValueInfomation, inputKey } =
-      createFormInputValue(inputInformation);
-
-    const { validationResult, wrongInputs } = formValidate(
-      inputValueInfomation,
-      inputKey
-    );
+    const { validationResult } = getFormValidateResult(inputInformation);
 
     if (!validationResult) {
-      wrongInputs[0].focus();
       return;
     }
 
@@ -112,3 +68,37 @@ export default function RegisteredCard({
     </Wrapper>
   );
 }
+
+const Wrapper = styled.div`
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding: 130px 0 0 0;
+`;
+
+const Form = styled.form``;
+
+const FinishMessage = styled.h2`
+  margin-bottom: 36px;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28px;
+  text-align: center;
+  color: #383838;
+`;
+
+const InputWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 124px;
+  border-bottom: 1px solid black;
+`;
+
+const ButtonWrapper = styled.div`
+  position: absolute;
+  right: 25px;
+  bottom: 25px;
+`;
