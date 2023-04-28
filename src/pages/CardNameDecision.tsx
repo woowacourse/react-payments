@@ -26,6 +26,7 @@ const CardNameDecision = ({ saveCardToLocalStorage }: CardNameDecisionProps) => 
     <>
       <h2 className={styles['complete-message']}>카드 등록이 완료되었습니다.</h2>
       <CardPreview
+        cardIssuer={cardIssuer}
         cardNumber={cardNumber.value}
         cardOwnerName={cardOwnerName.value}
         cardExpirationDate={cardExpirationDate.value}

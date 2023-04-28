@@ -11,6 +11,7 @@ const CardRegistration = () => {
     <>
       <Header title="카드 추가" hasBackButton={true} />
       <CardPreview
+        cardIssuer={cardIssuer}
         cardNumber={cardNumber.value}
         cardOwnerName={cardOwnerName.value}
         cardExpirationDate={cardExpirationDate.value}

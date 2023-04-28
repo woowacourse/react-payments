@@ -21,17 +21,13 @@
   background-size: 100% !important;
 }
 
-.test {
-  background-color: #fb7780;
-}
-
 .chip {
   width: 40px;
   height: 29.5px;
   background-image: url('../../../images/cards/chip.png');
   background-size: 100%;
   border-radius: 4px;
-  margin-top: 33px;
+  margin-top: 16px;
 }
 
 .name-date-container {
@@ -48,18 +44,18 @@
   text-align: center;
 }
 
+.issuer-name,
 .owner-name,
 .expiration-date {
   color: var(--gray-100);
   font-size: 12px;
   overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
   width: 140px;
   height: 20px;
 }
 
 .card-number,
+.issuer-name,
 .owner-name,
 .expiration-date {
   font-weight: 800;
@@ -75,9 +71,21 @@
 }
 
 .card-name {
-  height: 16px;
+  width: 250px;
+  height: 20px;
+  margin: 0 auto;
   font-size: 16px;
   text-align: center;
   font-weight: 600;
   color: var(--gray-300);
+}
+
+.card-number,
+.issuer-name,
+.owner-name,
+.expiration-date,
+.card-name {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
