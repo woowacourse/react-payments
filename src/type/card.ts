@@ -7,6 +7,7 @@ export interface Card {
   CODE: string;
   CARD_PASSWORD: string;
   COMPANY: string;
+  NICKNAME?: string;
 }
 
 export type CardInfoOption = keyof Card;

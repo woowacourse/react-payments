@@ -36,7 +36,6 @@ const CardContainer = styled.section`
 
   width: 21.3rem;
   height: 13.3rem;
-  margin-bottom: 3.5rem;
 
   background-color: ${(props) => props.color || 'gray'};
   color: white;
