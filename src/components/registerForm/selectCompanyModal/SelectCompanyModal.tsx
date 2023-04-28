@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { CardCompanyEng, KOR_NAME_BY_CARD_COMPANY } from '../../@types/cardCompany';
-import CardCompanyIconBox from '../cardCompanyIconBox/CardCompanyIconBox';
+import { CardCompanyEng, KOR_NAME_BY_CARD_COMPANY } from '../../../@types/cardCompany';
+import CardCompanyIconBox from '../../cardCompanyIconBox/CardCompanyIconBox';
 
 interface Props {
   onClose: () => void;

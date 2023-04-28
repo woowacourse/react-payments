@@ -3,9 +3,9 @@ import { CreditCardContext } from '../../contexts/CreditCardContext';
 import CardRegisterForm from '../registerForm/cardRegisterForm/CardRegisterForm';
 import { useContext } from 'react';
 
-import SelectCompanyModal from '../selectCompanyModal/SelectCompanyModal';
 import useBottomModal from '../../hooks/useBottomModal';
 import CreditCardContextType from '../../@types/creditCardContextType';
+import SelectCompanyModal from '../registerForm/selectCompanyModal/SelectCompanyModal';
 
 function RegisterPage() {
   const { BottomModal, closeModal, openModal } = useBottomModal(true);
