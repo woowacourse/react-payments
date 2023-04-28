@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 
 import { Form, useNavigate } from 'react-router-dom';
 import { CardNumber } from '../cardNumber/CardNumber';
-import ExpireDate from '../expireDate/ExpireDate';
+import ExpirationDate from '../expirationDate/ExpirationDate';
 import OwnerNameInput from '../ownerNameInput/OwnerName';
 import SecurityCode from '../securityCode/SecurityCode';
 import CardPassword from '../cardPassword/CardPassword';
@@ -17,21 +17,21 @@ function CardRegisterForm() {
 
   const hasShowButton =
     cardNumber.join('').length === 16 &&
-    /^(0[1-9]|1[0-2]|2[0-9]|3[0-1])$/.test(expirationDate[0]) &&
+    /^(0[1-9]|1[0-2])$/.test(expirationDate[0]) &&
     /^\d{2}$/.test(expirationDate[1]) &&
     securityCode.length === 3 &&
     password.join('').length === 2;
 
   const _onSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
-    // TODO: 검증
+
     navigation('/register-success');
   };
 
   return (
     <Form onSubmit={_onSubmit}>
       <CardNumber />
-      <ExpireDate />
+      <ExpirationDate />
       <OwnerNameInput />
       <SecurityCode />
       <CardPassword />
