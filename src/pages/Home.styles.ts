@@ -20,3 +20,8 @@ export const EmptyCardText = styled.p`
   font-weight: 700;
   margin-bottom: 8px;
 `;
+
+export const CardAlias = styled.p`
+  height: 20px;
+  margin: 8px 0 24px 0;
+`;

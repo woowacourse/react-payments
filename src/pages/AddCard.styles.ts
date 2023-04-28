@@ -12,8 +12,8 @@ export const CardWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 192px;
-  margin-top: 24px;
+  height: 160px;
+  margin: 32px 0 48px 0;
   font-size: 14px;
 `;
 

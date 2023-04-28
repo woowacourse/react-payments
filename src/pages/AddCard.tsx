@@ -13,6 +13,7 @@ import CardCompanyModal from '../components/CardCompanyModal/CardCompanyModal';
 import { useEffect, useState } from 'react';
 import CardLabel from '../components/@common/CardLabel';
 import * as Styled from './AddCard.styles';
+import SubmitButton from '../components/@common/SubmitButton';
 
 interface SetCardsProps {
   cards: CardType[];
@@ -89,9 +90,11 @@ const AddCard = ({ cards, setCards }: SetCardsProps) => {
           />
           <CardPassword passwords={passwords} setPasswords={setPasswords} />
           <Styled.ButtonWrapper>
-            <Styled.NextButton disabled={isDisabledForm}>
-              다음
-            </Styled.NextButton>
+            <SubmitButton
+              textContent="다음"
+              cursor={!isDisabledForm}
+              color={!isDisabledForm}
+            />
           </Styled.ButtonWrapper>
         </form>
       </Styled.PageWrapper>

@@ -8,7 +8,6 @@ export const Wrapper = styled.div<{ background: string }>`
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
   font-size: 14px;
-  margin-bottom: 32px;
   overflow: hidden;
   cursor: pointer;
 `;
