@@ -16,6 +16,9 @@ export const AddCard = () => {
     password: [0, 0],
   });
 
+  const setBrand = (brand: BrandType) => {
+    setNewCard({ ...newCard, brand });
+  };
   return (
     <>
       <HeaderWrapper>

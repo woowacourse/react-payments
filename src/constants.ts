@@ -11,3 +11,16 @@ export const PASSWORD_MAXLEGNTH = 1;
 
 export const DEFAULT_NAME = "NAME";
 export const DEFAULT_EXPRIYDATE = "MM / YY";
+
+export const BRANDS = [
+  "현대카드",
+  "BC카드",
+  "신한카드",
+  "카카오뱅크",
+  "하나카드",
+  "우리카드",
+  "KB카드",
+  "롯데카드",
+] as const;
+
+export const DEFAULT_BRAND = "";
