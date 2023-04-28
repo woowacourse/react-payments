@@ -71,12 +71,20 @@ const ICChip = styled.div`
   background: #cbba64;
 `;
 
+const CardNumberDigit = styled.div`
+  width: 8px;
+
+  font-size: 10px;
+  text-align: center;
+`;
+
 const CardNumber = styled.div`
   display: flex;
-  gap: 10px;
-  letter-spacing: 2px;
-
   height: 12px;
+
+  & > ${CardNumberDigit}:nth-child(4n) {
+    margin-right: 10px;
+  }
 `;
 
 const CardAdditionalInfo = styled.div`
@@ -160,13 +168,21 @@ export const CreditCardView = (props: CreditCardViewProps) => {
   } = props;
   const color = Color.fromHex(hexColor).adjustSaturation(10);
 
-  const getPartialCardNumber = (index: number) => {
-    const partialCardNumber = cardNumbers.split('-')[index] ?? '';
+  const digits = [0, 1, 2, 3].flatMap((index) => {
+    const isSensitive = [2, 3].includes(index);
 
-    return [0, 1].includes(index) ? partialCardNumber : partialCardNumber.replaceAll(/\d/g, '•');
-  };
+    const userDigits = (cardNumbers.split('-')[index] ?? '').split('');
+    const partialDigits = Array(4)
+      .fill('')
+      .map((digit, i) => userDigits[i] ?? '')
+      .map((digit) => {
+        if (!digit) return digit;
 
-  const partialCardNumbers = [0, 1, 2, 3].map(getPartialCardNumber);
+        return isSensitive ? '•' : digit;
+      });
+
+    return partialDigits;
+  });
 
   return (
     <CreditCardFaces $showBackface={showBackface}>
@@ -179,11 +195,9 @@ export const CreditCardView = (props: CreditCardViewProps) => {
 
         <ICChip />
         <CardNumber>
-          {partialCardNumbers.map((partialCardNumber, index) => (
+          {digits.map((digit, index) => (
             // eslint-disable-next-line react/no-array-index-key
-            <Text size="small" key={index}>
-              {partialCardNumber}
-            </Text>
+            <CardNumberDigit key={index}>{digit}</CardNumberDigit>
           ))}
         </CardNumber>
         <CardAdditionalInfo>
