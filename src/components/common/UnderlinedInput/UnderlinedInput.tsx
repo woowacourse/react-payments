@@ -4,7 +4,6 @@ type UnderlinedInputProps = {
   width?: string;
   name?: string;
   placeholder?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 const UnderlinedInput = ({ width, name, placeholder }: UnderlinedInputProps) => {
