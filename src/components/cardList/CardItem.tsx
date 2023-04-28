@@ -8,6 +8,7 @@ import { useMemo } from "react";
 
 interface CardProps {
   card: CardType;
+  handleClick?: (e: React.MouseEvent<HTMLElement> | React.TouchEvent<HTMLElement>) => void;
 }
 
 const backgroundColorMap: Record<BrandType | typeof DEFAULT_BRAND, string> = {
@@ -56,8 +57,7 @@ export const CardItem = ({ card, handleClick }: CardProps) => {
   }, [card.expiryDate]);
 
   return (
-    <Card $backgroundColor={card.color}>
-      <Container>
+      <Container $color={fontColorMap[brand]} onClick={handleClick}>
         <IcChip />
         <Numbers>
           <ShownNumbers>{memorizedNumbers}</ShownNumbers>

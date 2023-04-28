@@ -19,6 +19,23 @@ export const AddCard = () => {
   const setBrand = (brand: BrandType) => {
     setNewCard({ ...newCard, brand });
   };
+
+  const [isModalOpen, setIsModalOpen] = useState(true);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleClickOpenModalButton = (e: React.MouseEvent<HTMLElement> | React.TouchEvent<HTMLElement>) => {
+    e.preventDefault();
+
+    openModal();
+  };
+
   return (
     <>
       <HeaderWrapper>
@@ -28,8 +45,9 @@ export const AddCard = () => {
         <Header text="카드 추가" />
       </HeaderWrapper>
       <Main>
-        <CardItem card={newCard} />
-        <CardForm newCard={newCard} setNewCard={setNewCard} />
+          <CardItem card={newCard} handleClick={handleClickOpenModalButton} />
+          <CardForm />
+          {isModalOpen && <BrandSelectModal closeModal={closeModal} />}
       </Main>
     </>
   );
