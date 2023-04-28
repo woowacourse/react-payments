@@ -1,10 +1,10 @@
 import React, { forwardRef } from 'react';
-import styled from 'styled-components';
+import styled, { CSSProperties } from 'styled-components';
 
 export interface InputProps extends React.ComponentPropsWithRef<'input'> {
-  backgroundColor?: string;
-  align?: 'left' | 'center' | 'right';
-  width?: string;
+  backgroundColor?: CSSProperties['backgroundColor'];
+  align?: CSSProperties['textAlign'];
+  width?: CSSProperties['width'];
 }
 
 export const PaymentsInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
@@ -29,5 +29,5 @@ const Input = styled.input<InputProps>`
   border: none;
   outline: none;
   font-size: 16px;
-  text-align: ${({ align }) => align ?? 'left'};
+  text-align: ${({ align }) => align};
 `;
