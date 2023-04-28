@@ -5,9 +5,13 @@ import * as T from 'types';
 interface UseCreditCard {
   creditCardList: T.CreditCard[];
   saveCreditCard: (creditCard: T.CreditCard) => void;
-  findCreditCardByNumber: (number: string) => T.CreditCard | undefined;
+  updateCreditCardNickname: (number: string, newName: string) => void;
 }
-const existCreditCards = (() => JSON.parse(localStorage.getItem('creditCards') || '[]'))();
+const existCreditCards: T.CreditCard[] = (() => JSON.parse(localStorage.getItem('creditCards') || '[]'))();
+
+const findCreditCardIndexByNumber = (
+  number: string
+) => existCreditCards.findIndex((c: T.CreditCard) => c.number === number);
 
 const useCreditCardList = (): UseCreditCard => {
   const [creditCardList, setCreditCardList] = useState<T.CreditCard[]>(existCreditCards);
@@ -16,11 +20,16 @@ const useCreditCardList = (): UseCreditCard => {
     localStorage.setItem('creditCards', JSON.stringify([...existCreditCards, creditCard]));
   };
 
-  const findCreditCardByNumber = (
-    number: string
-  ) => creditCardList.find((c: T.CreditCard) => c.number === number);
+  const updateCreditCardNickname = (number: string, newNickname: string) => {
+    const targetIndex = findCreditCardIndexByNumber(number);
+    if (targetIndex !== -1) {
+      const copiedCreditCards = [...existCreditCards];
+      copiedCreditCards[targetIndex].nickname = newNickname;
+      localStorage.setItem('creditCards', JSON.stringify(copiedCreditCards));
+    }
+  };
 
-  return { creditCardList, saveCreditCard, findCreditCardByNumber };
+  return { creditCardList, saveCreditCard, updateCreditCardNickname };
 };
 
 export default useCreditCardList;

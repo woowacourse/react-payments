@@ -9,6 +9,7 @@ export type CreditCard = {
   owner?: string;
   cvc: string;
   password: CreditCardPasswordType;
+  nickname: string;
 };
 
 export type CreditCardCompanyKeys = 'id' | 'name' | 'color' | 'backgroundColor';

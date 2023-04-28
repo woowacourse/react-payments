@@ -13,6 +13,7 @@ export const defaultCreditCardForm: Type.CreditCard = {
     first: '',
     second: '',
   },
+  nickname: '',
 };
 
 export interface CardFormState {

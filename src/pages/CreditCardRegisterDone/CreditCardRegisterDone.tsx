@@ -6,10 +6,18 @@ import CreditCardRegisterTitle from 'components/CreditCardRegisterTitle';
 import FlexBox from 'components/FlexBox';
 import Box from 'components/Box';
 import { useState } from 'react';
+import useCreditCardList from 'hooks/useCreditCardList';
+import { useNavigate } from 'react-router-dom';
 
 function CreditCardRegisterDone() {
   const { creditCardForm } = useCreditCardForm();
+  const { updateCreditCardNickname } = useCreditCardList();
   const [nickname, setNickname] = useState('');
+  const navigate = useNavigate();
+  const handleNicknameInput = () => {
+    updateCreditCardNickname(creditCardForm.number, nickname);
+    navigate('/');
+  };
 
   return (
     <CreditCardRegisterLayout>
@@ -26,7 +34,7 @@ function CreditCardRegisterDone() {
         />
       </Box>
       <ControlButton
-        onClick={() => alert('ㅎㅇ')}
+        onClick={handleNicknameInput}
         label={nickname.length > 0 ? '확인' : '건너뛰기'}
       />
     </CreditCardRegisterLayout>
