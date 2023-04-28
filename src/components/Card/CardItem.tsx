@@ -1,14 +1,19 @@
 import styled from "styled-components";
 import { DotIcon } from "../../assets/icons";
 import { CardPublicInfo } from "../../types/Card";
+import { CARD_BACKGROUND_COLOR } from "../../constants";
 
 interface CardItemProps {
   card: CardPublicInfo;
 }
 
 const CardItem = ({ card }: CardItemProps) => {
+  const cardBackground = CARD_BACKGROUND_COLOR[card.company];
+  const cardFontColor = card.company === "카카오뱅크" ? "#5d4545" : "#ffffff";
+
   return (
-    <CardItemContainer>
+    <CardItemContainer background={cardBackground} fontColor={cardFontColor}>
+      <CompanyName>{card.company}</CompanyName>
       <ICChip />
       {card && (
         <>
@@ -36,7 +41,7 @@ const CardItem = ({ card }: CardItemProps) => {
   );
 };
 
-const CardItemContainer = styled.div`
+const CardItemContainer = styled.div<{ background?: string; fontColor?: string }>`
   width: 213px;
   height: 133px;
 
@@ -44,21 +49,25 @@ const CardItemContainer = styled.div`
 
   box-sizing: border-box;
 
-  background: #333333;
+  background: ${({ background }) => background || "#000000"};
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
 
   font-size: 12px;
   font-weight: 700;
 
-  color: #ffffff;
+  color: ${({ fontColor }) => fontColor || "#ffffff"};
+`;
+
+const CompanyName = styled.p`
+  height: 14px;
 `;
 
 const ICChip = styled.div`
   width: 40px;
   height: 26px;
 
-  margin-top: 33px;
+  margin-top: 22px;
 
   background: #cbba64;
   border-radius: 4px;

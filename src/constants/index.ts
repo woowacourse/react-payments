@@ -13,3 +13,15 @@ export const NUMBER_OF_INPUTS = {
   SECURITY_CODE: 1,
   PASSWORD: 2,
 };
+
+export const CARD_BACKGROUND_COLOR = {
+  현대카드: "#030303",
+  BC카드: "#F04651",
+  신한카드: "#0046ff",
+  카카오뱅크: "#fee300",
+  하나카드: "#1DB8B3",
+  우리카드: "#42add7",
+  국민카드: "#8C8176",
+  롯데카드: "#e60013",
+  "": "#000000",
+};
