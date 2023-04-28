@@ -21,7 +21,7 @@ export default function CardPreview(props: Props) {
       <div className={styles.company}>{cardCompanyEnglishToKorean(c)}</div>
       <div className={styles.chip}></div>
       <div className={styles.numberContainer}>
-        {cardNumber.map((numberPart) => <span className={styles.number}>{numberPart}</span>)}
+        {cardNumber.map((numberPart, idx) => <span key={idx} className={styles.number}>{numberPart}</span>)}
       </div>
       <div className={styles.nameDateContainer}>
         <span className={styles.name}>{name.length ? name.slice(0, 12) : "NAME"}</span>
