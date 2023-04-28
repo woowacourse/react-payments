@@ -18,7 +18,10 @@ function Home() {
         <CardContainer>
           {CardDB.getCards().length ? '' : <span>{'새로운 카드를 등록해주세요'}</span>}
           {CardDB.getCards().map((card) => (
-            <CreditCard card={card} />
+            <>
+              <CreditCard card={card} />
+              {card.cardName ?? <span>{card.cardName}</span>}
+            </>
           ))}
           <RegisterButton onClick={goRegister}>+</RegisterButton>
         </CardContainer>

@@ -6,15 +6,15 @@ import {
   CardNumberInputs,
 } from 'components/Input';
 import styled from 'styled-components';
-import { ChangeEventHandler, FormEventHandler, useState } from 'react';
+import { ChangeEventHandler, FormEventHandler, useContext, useEffect, useState } from 'react';
 import { Container } from 'components/style/InputContainer';
-import CardDB from 'db/Cards';
 import { COMPANY_NAME, Card } from 'components/common/Card/types';
 import { ValueAndOnChange } from 'components/Input/types';
 import { CreditCard } from 'components/common/Card/CreditCard';
 import { useCardFormValid } from 'hooks/useCardFormValid';
-import { Modal } from 'components/common/Modal/Modal';
+import { Modal } from 'components/Modal/CardCompanyModal';
 import { COMPANY_LIST, ICON_SVG_PATH } from '../../constants';
+import { CardFormContext, defaultCardForm } from 'context/CardForm';
 
 export type AddCardFormProps = {
   onSubmit: () => void;
@@ -23,43 +23,27 @@ export type AddCardFormProps = {
 const NOT_ALPHABET_REGEX = /[^A-Za-z\s]/gi;
 
 function AddCardForm({ onSubmit }: AddCardFormProps) {
-  const [bank, setBank] = useState<COMPANY_NAME>('현대카드');
-
-  const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
-
-  const [month, setMonth] = useState('');
-  const [year, setYear] = useState('');
-
-  const [ownerName, setOwnerName] = useState('');
-
-  const [firstDigit, setFirstDigit] = useState('');
-  const [secondDigit, setSecondDigit] = useState('');
-
-  const [securityCode, setSecurityCode] = useState('');
+  const { setNewCard } = useContext(CardFormContext);
+  const [card, setCard] = useState<Card>(defaultCardForm);
 
   const [isOpen, setIsOpen] = useState(true);
 
-  const card: Card = {
-    bank: bank,
-    numbers: cardNumbers,
-    expirationDate: { month: month, year: year },
-    ownerName,
-    securityCode: securityCode,
-    password: { first: firstDigit, second: secondDigit },
-  };
-
   const [isValid, errorMessages] = useCardFormValid(card);
 
-  const valueAndOnChanges: ValueAndOnChange[] = cardNumbers.map((cardNumber, index) => ({
+  useEffect(() => {
+    setNewCard(card);
+  }, [isValid]);
+
+  const valueAndOnChanges: ValueAndOnChange[] = card.numbers.map((cardNumber, index) => ({
     value: cardNumber,
     onChange: (e) => {
       const { value } = e.target;
 
-      setCardNumbers((prev) => {
-        const prevCardNumbers = [...prev];
+      setCard((prev) => {
+        const prevCardNumbers = [...prev.numbers];
         prevCardNumbers.splice(index, 1, value);
 
-        return prevCardNumbers;
+        return { ...prev, numbers: prevCardNumbers };
       });
     },
   }));
@@ -67,49 +51,59 @@ function AddCardForm({ onSubmit }: AddCardFormProps) {
   const handleMonthInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { value } = e.target;
 
-    setMonth(value);
+    setCard((prev) => ({
+      ...prev,
+      expirationDate: { month: value, year: prev.expirationDate.year },
+    }));
   };
 
   const handleYearInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { value } = e.target;
 
-    setYear(value);
+    setCard((prev) => ({
+      ...prev,
+      expirationDate: { month: prev.expirationDate.month, year: value },
+    }));
   };
 
   const handleOwnerNameInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const value = e.target.value.replace(NOT_ALPHABET_REGEX, '').toUpperCase();
 
-    setOwnerName(value);
+    setCard((prev) => ({
+      ...prev,
+      ownerName: value,
+    }));
   };
 
   const handleSecurityCodeChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { value } = e.target;
 
-    setSecurityCode(value);
+    setCard((prev) => ({
+      ...prev,
+      securityCode: value,
+    }));
   };
 
   const handleFirstPasswordInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { value } = e.target;
 
-    setFirstDigit(value);
+    setCard((prev) => ({ ...prev, password: { first: value, second: prev.password.second } }));
   };
 
   const handleSecondPasswordInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { value } = e.target;
 
-    setSecondDigit(value);
+    setCard((prev) => ({ ...prev, password: { first: prev.password.first, second: value } }));
   };
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-
-    CardDB.registerCard(card);
     onSubmit();
   };
 
   const handleClickCompany = (bank: COMPANY_NAME) => {
-    setBank(bank);
-    setIsOpen(false);
+    setCard((prev) => ({ ...prev, bank: bank }));
+    setIsOpen(!isOpen);
   };
 
   return (
@@ -122,7 +116,7 @@ function AddCardForm({ onSubmit }: AddCardFormProps) {
         />
       )}
       <CardWrapper>
-        <CreditCard card={card} />
+        <CreditCard card={card} onClick={handleClickCompany} />
       </CardWrapper>
       <FormContainer onSubmit={handleSubmit}>
         <InputLabel>카드 번호</InputLabel>
@@ -134,24 +128,24 @@ function AddCardForm({ onSubmit }: AddCardFormProps) {
 
         <ExpirationDateContainer>
           <ExpirationDateInput
-            month={{ value: month, onChange: handleMonthInputChange }}
-            year={{ value: year, onChange: handleYearInputChange }}
+            month={{ value: card.expirationDate.month, onChange: handleMonthInputChange }}
+            year={{ value: card.expirationDate.year, onChange: handleYearInputChange }}
           />
         </ExpirationDateContainer>
         {<ErrorCaption>{!isValid && errorMessages.expirationDate}</ErrorCaption>}
 
         <OwnerNameLabelContainer>
           <InputLabel>카드 소유자 이름(선택)</InputLabel>
-          <InputLabel>{`${ownerName.length} / 30`}</InputLabel>
+          <InputLabel>{`${card.ownerName.length} / 30`}</InputLabel>
         </OwnerNameLabelContainer>
         <OwnerNameInputContainer>
-          <OwnerNameInput value={ownerName} onChange={handleOwnerNameInputChange} />
+          <OwnerNameInput value={card.ownerName} onChange={handleOwnerNameInputChange} />
         </OwnerNameInputContainer>
 
         <InputLabel>보안 코드(CVC/CVV)</InputLabel>
         <SecurityCodeContainer>
           <SecurityCodeInputContainer>
-            <SecurityCodeInput value={securityCode} onChange={handleSecurityCodeChange} />
+            <SecurityCodeInput value={card.securityCode} onChange={handleSecurityCodeChange} />
           </SecurityCodeInputContainer>
           <SecurityCodeButton>?</SecurityCodeButton>
           <SecurityCodeNotification>
@@ -163,8 +157,8 @@ function AddCardForm({ onSubmit }: AddCardFormProps) {
         <InputLabel>카드 비밀번호</InputLabel>
         <PasswordInputContainer>
           <PasswordInput
-            first={{ value: firstDigit, onChange: handleFirstPasswordInputChange }}
-            second={{ value: secondDigit, onChange: handleSecondPasswordInputChange }}
+            first={{ value: card.password.first, onChange: handleFirstPasswordInputChange }}
+            second={{ value: card.password.second, onChange: handleSecondPasswordInputChange }}
           />
           <DotContainer>•</DotContainer>
           <DotContainer>•</DotContainer>
