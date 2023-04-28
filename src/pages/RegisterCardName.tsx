@@ -21,6 +21,7 @@ function RegisterCardName() {
 const CardNameFormContainer = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 
 export default RegisterCardName;

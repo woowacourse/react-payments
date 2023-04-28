@@ -2,9 +2,7 @@ import { ChangeEventHandler, FormEventHandler, useContext, useState } from 'reac
 import { CardNameInput } from 'components/Input/CardNameInput';
 import { CreditCard } from 'components/common/Card/CreditCard';
 import { CardFormContext, CardFormProvider } from 'context/CardForm';
-
 import CardDB from 'db/Cards';
-
 import styled from 'styled-components';
 
 export type RegisterCardNameFormProps = {
@@ -32,9 +30,12 @@ export function RegisterCardNameForm({ onSubmit }: RegisterCardNameFormProps) {
   return (
     <CardFormProvider>
       <FormContainer onSubmit={handleSubmit}>
+        <CompleteMsgSpan>카드 등록이 완료되었습니다</CompleteMsgSpan>
         <CreditCard card={newCard} />
-        <CardNameInput value={cardName} onChange={handleCardNameInput} />
-        <button type="submit">확인</button>
+        <CardNameInputWrapper>
+          <CardNameInput value={cardName} onChange={handleCardNameInput} />
+        </CardNameInputWrapper>
+        <CardNameFormButton type="submit">확인</CardNameFormButton>
       </FormContainer>
     </CardFormProvider>
   );
@@ -43,4 +44,35 @@ export function RegisterCardNameForm({ onSubmit }: RegisterCardNameFormProps) {
 const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
+  align-items: center;
+`;
+
+const CompleteMsgSpan = styled.span`
+  margin-top: 130px;
+  margin-bottom: 36px;
+  font-size: 24px;
+  font-weight: 400;
+  text-align: center;
+`;
+
+const CardNameInputWrapper = styled.div`
+  display: flex;
+  input {
+    margin-top: 125px;
+    width: 240px;
+    text-align: center;
+    border: none;
+    border-bottom: 1px solid black;
+    font-size: 18px;
+  }
+`;
+
+const CardNameFormButton = styled.button`
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  border: none;
+  background: white;
+  font-size: 14px;
+  font-weight: 700;
 `;
