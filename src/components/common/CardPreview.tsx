@@ -9,7 +9,8 @@ export function CardPreview() {
     CardPreviewInfoContext
   );
   const companyName = COMPANY.clicked.value;
-  const companyColor = CARD_COMPANY[companyName].color;
+  const companyColor =
+    companyName in CARD_COMPANY ? CARD_COMPANY[companyName].color : 'gray';
 
   return (
     <CardContainer color={companyColor}>

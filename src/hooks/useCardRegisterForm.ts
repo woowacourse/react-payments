@@ -40,5 +40,10 @@ export function useCardRegisterForm() {
   const { isRequiredInputValid, isOptionalInputValid } = checkInputValdiation(
     allInputs as InputInfo[]
   );
-  return { cardRegisterForm, isRequiredInputValid, isOptionalInputValid };
+  return {
+    cardRegisterForm,
+    COMPANY,
+    isRequiredInputValid,
+    isOptionalInputValid,
+  };
 }

@@ -10,12 +10,16 @@ import { InputInfo } from '../type/input';
 export function CardRegisterForm() {
   const naviagte = useNavigate();
 
-  const { cardRegisterForm, isRequiredInputValid, isOptionalInputValid } =
-    useCardRegisterForm();
+  const {
+    cardRegisterForm,
+    COMPANY,
+    isRequiredInputValid,
+    isOptionalInputValid,
+  } = useCardRegisterForm();
 
+  console.log(COMPANY);
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-
     const submittedCardInfo = {} as unknown as Card;
 
     for (const [key, inputs] of Object.entries(cardRegisterForm)) {
@@ -23,10 +27,15 @@ export function CardRegisterForm() {
         .map((input) => input.value)
         .join('');
     }
+    if (COMPANY.clicked.value) {
+      submittedCardInfo.COMPANY = COMPANY.clicked.value;
 
-    cardList.updateData(submittedCardInfo);
+      cardList.updateData(submittedCardInfo);
 
-    moveCardListPage();
+      moveCardListPage();
+    } else {
+      alert('카드 회사를 선택해주세요!');
+    }
   }
 
   function moveCardListPage() {

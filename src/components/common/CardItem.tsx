@@ -1,15 +1,23 @@
 import styled from 'styled-components';
 
+import { CARD_COMPANY } from '../../constants/cardCompany';
 import { Card } from '../../type/card';
 import { makeCardNumber, makeCardDate } from '../../utils/cardInfoFormat';
+
 interface CardItemProps {
   info: Card;
 }
 
 export function CardItem(props: CardItemProps) {
-  const { CARD_NUMBER, DATE, USERNAME } = props.info;
+  const { CARD_NUMBER, DATE, USERNAME, COMPANY } = props.info;
+  const companyName = COMPANY;
+
+  const companyColor = companyName ? CARD_COMPANY[COMPANY].color : 'gray';
+
   return (
-    <CardContainer>
+    <CardContainer color={companyColor}>
+      <p>{companyName}</p>
+
       <_Chip />
       <NumberWrapper>
         <_NumberItem>{makeCardNumber(CARD_NUMBER)}</_NumberItem>
@@ -30,7 +38,7 @@ const CardContainer = styled.section`
   height: 13.3rem;
   margin-bottom: 3.5rem;
 
-  background-color: #333333;
+  background-color: ${(props) => props.color || 'gray'};
   color: white;
   font-size: 1.3rem;
   letter-spacing: 0.2rem;
