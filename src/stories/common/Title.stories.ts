@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import Title from "../components/common/Title";
+import Title from "../../components/common/Title";
 
 const meta = {
-  title: "Payment/Title",
+  title: "Payment/Common",
   component: Title,
   tags: ["autodocs"],
   argTypes: {},
@@ -12,14 +12,14 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Large: Story = {
+export const LargeTitle: Story = {
   args: {
     title: "타이틀입니다.",
     size: "large",
   },
 };
 
-export const Medium: Story = {
+export const DefaulTitle: Story = {
   args: {
     title: "타이틀입니다.",
     size: "medium",

@@ -1,9 +1,9 @@
 import type { Meta } from "@storybook/react";
 
-import CompanyContainer from "../components/CardRegistrationPage/FormContents/CompanyContainer";
-import CardItemProvider from "../components/provider/CardItemProvider";
-import ModalProvider, { useModalAction } from "../components/provider/ModalProvider";
-import CompanyModal from "../components/CardRegistrationPage/Modal/CompanyModal";
+import CompanyContainer from "../../components/CardRegistrationPage/FormContents/CompanyContainer";
+import CardItemProvider from "../../components/provider/CardItemProvider";
+import ModalProvider, { useModalAction } from "../../components/provider/ModalProvider";
+import CompanyModal from "../../components/CardRegistrationPage/Modal/CompanyModal";
 import styled from "styled-components";
 
 const meta = {

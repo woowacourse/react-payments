@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import InputGroup from "../components/common/InputGroup";
-import InputBox from "../components/common/InputBox";
-import Input from "../components/common/Input";
+import InputGroup from "../../components/common/InputGroup";
+import InputBox from "../../components/common/InputBox";
+import Input from "../../components/common/Input";
 
 interface InputGroupProps {
   placeholder?: string;

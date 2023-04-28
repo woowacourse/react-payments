@@ -2,10 +2,10 @@ import type { Meta } from "@storybook/react";
 import { MemoryRouter } from "react-router-dom";
 import styled from "styled-components";
 
-import CardListPage from "../components/pages/CardListPage";
-import CardItemProvider from "../components/provider/CardItemProvider";
-import ModalProvider from "../components/provider/ModalProvider";
-import { CardPublicInfo } from "../types/Card";
+import CardListPage from "../../components/pages/CardListPage";
+import CardItemProvider from "../../components/provider/CardItemProvider";
+import ModalProvider from "../../components/provider/ModalProvider";
+import { CardPublicInfo } from "../../types/Card";
 
 const meta = {
   title: "Payment/Pages",

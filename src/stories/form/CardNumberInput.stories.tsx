@@ -1,7 +1,7 @@
 import type { Meta } from "@storybook/react";
 
-import CardNumberInput from "../components/CardRegistrationPage/FormContents/CardNumberInput";
-import CardItemProvider from "../components/provider/CardItemProvider";
+import CardNumberInput from "../../components/CardRegistrationPage/FormContents/CardNumberInput";
+import CardItemProvider from "../../components/provider/CardItemProvider";
 
 const meta = {
   title: "Payment/FormContents",

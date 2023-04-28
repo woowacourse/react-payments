@@ -1,8 +1,8 @@
 import type { Meta } from "@storybook/react";
 
-import CardForm from "../components/CardRegistrationPage/CardForm";
-import CardItemProvider from "../components/provider/CardItemProvider";
-import ModalProvider from "../components/provider/ModalProvider";
+import CardForm from "../../components/CardRegistrationPage/CardForm";
+import CardItemProvider from "../../components/provider/CardItemProvider";
+import ModalProvider from "../../components/provider/ModalProvider";
 
 const meta = {
   title: "Payment/Form",
