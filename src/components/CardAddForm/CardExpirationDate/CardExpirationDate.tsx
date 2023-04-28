@@ -25,7 +25,7 @@ function CardExpirationDate({
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     onInputChange(event);
-    moveFocus(event.target.tabIndex, event.currentTarget.value, event.currentTarget.maxLength);
+    moveFocus(event.target.tabIndex, event.target.value, event.target.maxLength);
   };
 
   const onBlur = (event: FocusEvent<HTMLInputElement>) => {
