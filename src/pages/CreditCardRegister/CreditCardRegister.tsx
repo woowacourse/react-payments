@@ -7,6 +7,8 @@ import Modal from 'components/Modal';
 import useModal from 'hooks/useModal';
 import useCreditCardForm from 'hooks/useCreditCardForm';
 import ControlButton from 'components/ControlButton';
+import CreditCardRegisterLayout from 'components/CreditCardRegisterLayout';
+import CreditCardRegisterTopSheet from 'components/CreditCardRegisterTopSheet';
 import CreditCardNumberInput from './inputs/CreditCardNumberInput';
 import CreditCardExpiryInput from './inputs/CreditCardExpiryInput';
 import CreditCardOwnerInput from './inputs/CreditCardOwnerInput';
@@ -36,11 +38,11 @@ function CreditCardRegister() {
 
   return (
     <>
-      <S.CreditCardRegisterLayout>
-        <S.CreditCardRegisterTopSheet>
+      <CreditCardRegisterLayout>
+        <CreditCardRegisterTopSheet>
           <S.HomeButton type="button" onClick={() => navigate('/')}>{`${'<'}`}</S.HomeButton>
           <S.CreditCardRegisterHeader>카드 추가</S.CreditCardRegisterHeader>
-        </S.CreditCardRegisterTopSheet>
+        </CreditCardRegisterTopSheet>
         <S.PreviewCreditCard>
           <CreditCard
             fullFilled={false}
@@ -75,7 +77,7 @@ function CreditCardRegister() {
             label="다음"
           />
         </S.CreditCardRegisterForm>
-      </S.CreditCardRegisterLayout>
+      </CreditCardRegisterLayout>
       <Modal modalOpen={modalOpen}>
         <CreditCardCompanyInput
           closeModal={closeModal}
