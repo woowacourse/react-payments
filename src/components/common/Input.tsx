@@ -41,7 +41,7 @@ const BaseInput = styled.input<StyledInputProps>`
   transition-duration: 0.1s;
 
   &:focus {
-    background: ${(props) => Color.fromHex(props.theme.color.primary).setLightness(95).toString()};
+    background: ${(props) => Color.fromHex(props.theme.color.primary).setAlpha(0.1).toString()};
     border-color: ${(props) => props.theme.color.primary};
   }
 `;
