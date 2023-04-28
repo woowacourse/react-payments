@@ -20,7 +20,7 @@ export function CardList() {
           {cards?.length === 0 ? '새로운 카드를 추가하세요' : ''}
         </_Direction>
         {cards &&
-          cards?.map((card) => {
+          cards?.reverse().map((card) => {
             return (
               <>
                 <CardItem info={card}></CardItem>
