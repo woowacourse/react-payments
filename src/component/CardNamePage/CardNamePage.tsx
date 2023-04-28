@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { useNavigate } from "react-router";
 import Style from "./CardNamePageStyled";
 
@@ -18,12 +18,16 @@ interface CardNamePageProps {
 
 function CardNamePage({ lastCard, addCreditCard }: CardNamePageProps) {
   const navigate = useNavigate();
+  const nameInputRef = useRef<HTMLInputElement>(null);
 
   const { cardName, changeCardName } = useCardName();
   const { warningText, isRightCardName } = useWarningText();
 
   const { cardNumberHidden, cardDate, cardOwnerName, cardCompany } = lastCard;
 
+  useEffect(() => {
+    nameInputRef.current?.focus();
+  }, []);
   const registerCard = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!isRightCardName(cardName)) return;
@@ -54,6 +58,7 @@ function CardNamePage({ lastCard, addCreditCard }: CardNamePageProps) {
           <Style.Input
             type={TYPE.TEXT}
             placeholder={PLACE_HOLDER.CARD_NAME_HINT}
+            ref={nameInputRef}
             onChange={changeCardName}
           />
           <Style.SubmitLayout>
