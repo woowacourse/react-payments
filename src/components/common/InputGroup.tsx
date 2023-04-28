@@ -3,7 +3,7 @@ import Label from "./Label";
 
 interface InputGroupProps {
   children: React.ReactNode;
-  labelValue: string | React.ReactElement;
+  labelValue?: string | React.ReactElement;
   errorMessage?: string;
 }
 
