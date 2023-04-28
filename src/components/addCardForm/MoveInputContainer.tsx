@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { LeftArrowButton, RightArrowButton } from '../../layout/ArrowButton';
 import { ReactNode } from 'react';
 
 interface Props {

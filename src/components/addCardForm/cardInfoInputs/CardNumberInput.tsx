@@ -2,7 +2,7 @@ import React, { forwardRef, Fragment } from 'react';
 import { InputWrapper } from './template/InputWrapper';
 import { ErrorMessage, Input } from './template/Input';
 import styled from 'styled-components';
-import { useError } from '../../../hooks/useError';
+import { useErrorMessage } from '../../../hooks/useError';
 import { MoveInputContainer } from '../MoveInputContainer';
 
 interface Props {
@@ -29,7 +29,7 @@ export const CardNumberInput = forwardRef<HTMLInputElement[], Props>(
     { cardNumber, setCardNumber, focusCardNumberInputByIndex, viewNextInput },
     refs
   ) {
-    const error = useError(cardNumber, cardNumberValidator);
+    const error = useErrorMessage(cardNumber, cardNumberValidator);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const index = e.target.dataset.index;

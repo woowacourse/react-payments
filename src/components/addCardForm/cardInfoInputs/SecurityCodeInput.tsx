@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 import { InputWrapper } from './template/InputWrapper';
 import { ErrorMessage, Input } from './template/Input';
 import styled from 'styled-components';
-import { useError } from '../../../hooks/useError';
+import { useErrorMessage } from '../../../hooks/useError';
 import { MoveInputContainer } from '../MoveInputContainer';
 
 interface Props {
@@ -27,7 +27,7 @@ export const SecurityCodeInput = forwardRef<HTMLInputElement[], Props>(
     { securityCode, setSecurityCode, viewNextInput, viewPreviousInput },
     refs
   ) {
-    const error = useError(securityCode, securityCodeInputValidator);
+    const error = useErrorMessage(securityCode, securityCodeInputValidator);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       setSecurityCode(e.target.value.slice(0, 3));

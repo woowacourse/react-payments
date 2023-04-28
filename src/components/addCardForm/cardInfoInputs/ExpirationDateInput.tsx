@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 import { InputWrapper } from './template/InputWrapper';
 import { ErrorMessage, Input } from './template/Input';
 import styled from 'styled-components';
-import { useError } from '../../../hooks/useError';
+import { useErrorMessage } from '../../../hooks/useError';
 import { MoveInputContainer } from '../MoveInputContainer';
 
 interface Props {
@@ -53,7 +53,7 @@ export const ExpirationDateInput = forwardRef<HTMLInputElement[], Props>(
     },
     refs
   ) {
-    const error = useError(
+    const error = useErrorMessage(
       [expirationDate.month, expirationDate.year],
       expirationDateInputValidator
     );

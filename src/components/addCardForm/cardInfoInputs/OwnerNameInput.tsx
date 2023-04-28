@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 import { InputWrapper } from './template/InputWrapper';
 import { ErrorMessage, Input } from './template/Input';
 import styled from 'styled-components';
-import { useError } from '../../../hooks/useError';
+import { useErrorMessage } from '../../../hooks/useError';
 import { MoveInputContainer } from '../MoveInputContainer';
 
 interface Props {
@@ -29,7 +29,7 @@ export const OwnerNameInput = forwardRef<HTMLInputElement[], Props>(
     { ownerName, setOwnerName, viewNextInput, viewPreviousInput },
     refs
   ) {
-    const error = useError(ownerName, ownerNameInputValidator);
+    const error = useErrorMessage(ownerName, ownerNameInputValidator);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       setOwnerName(e.target.value.toUpperCase().slice(0, 20));

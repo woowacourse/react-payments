@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 import styled from 'styled-components';
 import { InputWrapper } from './template/InputWrapper';
 import { ErrorMessage, Input } from './template/Input';
-import { useError } from '../../../hooks/useError';
+import { useErrorMessage } from '../../../hooks/useError';
 import { MoveInputContainer } from '../MoveInputContainer';
 
 interface Props {
@@ -34,7 +34,7 @@ export const PasswordInput = forwardRef<HTMLInputElement[], Props>(
     },
     refs
   ) {
-    const error = useError(password, passwordInputValidator);
+    const error = useErrorMessage(password, passwordInputValidator);
 
     const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
       const index = e.target.dataset.index;

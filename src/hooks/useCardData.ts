@@ -1,18 +1,6 @@
-import { COMPANIES } from '../constants/cardCompany';
+import { Card } from '../types/card';
 
 const LOCAL_STORAGE_KEY = { CARD_LIST: 'cardList' };
-
-export interface Card {
-  cardNumber: string[];
-  expirationDate: {
-    month: string;
-    year: string;
-  };
-  ownerName: string;
-  securityCode: string;
-  password: string[];
-  selectedCardCompany: keyof typeof COMPANIES | '';
-}
 
 export const useCardData = () => {
   const getCardList = (): Card[] => {

@@ -31,8 +31,7 @@ export const AddNewCardForm = () => {
   const [securityCode, setSecurityCode] = useState('');
   const [password, setPassword] = useState(['', '']);
 
-  const [selectedCardCompany, setSelectedCardCompany] =
-    useState<keyof typeof COMPANIES>();
+  const [companyId, setCompanyId] = useState<keyof typeof COMPANIES>();
 
   const {
     inputRefs: cardNumberInputRefs,
@@ -68,7 +67,7 @@ export const AddNewCardForm = () => {
       ownerName,
       securityCode,
       password,
-      selectedCardCompany: selectedCardCompany ?? '',
+      companyId,
     });
 
     navigate('/');
@@ -85,7 +84,7 @@ export const AddNewCardForm = () => {
           ownerName,
           securityCode,
           password,
-          selectedCardCompany: selectedCardCompany ?? '',
+          companyId,
         });
 
         navigate('/');
@@ -94,19 +93,16 @@ export const AddNewCardForm = () => {
       {isModalOpen && (
         <BottomSheet setIsOpen={setIsModalOpen}>
           <SelectCardCompanyModal
-            setSelectedCardCompany={setSelectedCardCompany}
+            setSelectedCardCompany={setCompanyId}
             closeModal={() => setIsModalOpen(false)}
           />
         </BottomSheet>
       )}
       <CardViewer
-        cardNumber={cardNumber}
-        expirationDate={expirationDate}
-        ownerName={ownerName}
-        companyId={selectedCardCompany}
+        cardInfo={{ cardNumber, expirationDate, ownerName, companyId }}
         handleClick={() => setIsModalOpen(true)}
       />
-      {selectedCardCompany && (
+      {companyId ? (
         <Style.InputContainer>
           {inputOrder === 0 && (
             <CardNumberInput
@@ -160,6 +156,8 @@ export const AddNewCardForm = () => {
             />
           )}
         </Style.InputContainer>
+      ) : (
+        <Style.Caption>{isModalOpen || '카드 클릭!'}</Style.Caption>
       )}
     </Style.Wrapper>
   );
@@ -181,5 +179,10 @@ const Style = {
     width: max-content;
 
     gap: 19px;
+  `,
+  Caption: styled.span`
+    margin-top: -10px;
+    font-size: 20px;
+    font-weight: bold;
   `,
 };
