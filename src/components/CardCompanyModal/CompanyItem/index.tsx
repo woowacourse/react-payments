@@ -1,8 +1,9 @@
 import { MouseEventHandler } from 'react';
 import * as Company from '../../../assets/images/company';
-import type { CompanyName } from '../../../constants/company';
+import { CompanyName, isCompanyName } from '../../../constants/company';
 
 import styles from './companyItem.module.css';
+import useCardFormAction from '../../../hooks/useCardFormAction';
 
 const companyIcons: Record<CompanyName, JSX.Element> = {
   BC카드: <Company.BCIcon width={37} height={37} />,
@@ -17,12 +18,23 @@ const companyIcons: Record<CompanyName, JSX.Element> = {
 
 interface Props {
   name: CompanyName;
-  onClick: MouseEventHandler<HTMLLIElement>;
+  onClose: () => void;
 }
 
-const CompanyItem = ({ name, onClick }: Props) => {
+const CompanyItem = ({ name, onClose }: Props) => {
+  const { setCompany } = useCardFormAction();
+
+  const handleItemClick: MouseEventHandler<HTMLLIElement> = (event) => {
+    const { name } = event.currentTarget.dataset;
+
+    if (!name || !isCompanyName(name)) return;
+
+    setCompany(name);
+    onClose();
+  };
+
   return (
-    <li className={styles.item} onClick={onClick} data-name={name}>
+    <li className={styles.item} onClick={handleItemClick} data-name={name}>
       {companyIcons[name]}
       <span className={styles.name}>{name}</span>
     </li>

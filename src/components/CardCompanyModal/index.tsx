@@ -1,5 +1,3 @@
-import type { MouseEventHandler } from 'react';
-
 import CompanyItem from './CompanyItem';
 import Modal from '../common/Modal';
 
@@ -9,16 +7,15 @@ import styles from './cardCompanyModal.module.css';
 
 interface Props {
   onClose: () => void;
-  onClickCompany: MouseEventHandler<HTMLLIElement>
 }
 
-const CardCompanyModal = ({ onClose, onClickCompany }: Props) => {
+const CardCompanyModal = ({ onClose }: Props) => {
   return (
     <Modal onClose={onClose}>
       <main className={styles.container}>
         <ul className={styles.companyList}>
           {COMPANY_NAMES.map((name) => (
-            <CompanyItem key={name} name={name} onClick={onClickCompany} />
+            <CompanyItem key={name} name={name} onClose={onClose}/>
           ))}
         </ul>
       </main>
