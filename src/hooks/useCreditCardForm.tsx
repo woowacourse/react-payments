@@ -1,4 +1,5 @@
-import { CardContext, defaultCreditCardForm } from 'CardFormProvider';
+import { CardContext } from 'CardFormProvider';
+import { defaultCreditCardForm } from 'data/creditCard';
 import { checkCreditCardValidations } from 'domains/creditCard';
 import { useContext } from 'react';
 
@@ -7,7 +8,7 @@ const useCreditCardForm = () => {
   const isCreditCardError = checkCreditCardValidations(creditCardForm);
 
   const initCreditCardForm = () => {
-    setCreditCardForm(defaultCreditCardForm);
+    setCreditCardForm({ ...defaultCreditCardForm, password: ['', ''] });
   };
 
   return {

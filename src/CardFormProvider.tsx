@@ -1,17 +1,8 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable react/jsx-no-constructed-context-values */
+import { defaultCreditCardForm } from 'data/creditCard';
 import React, { useState } from 'react';
 import * as Type from 'types';
-
-export const defaultCreditCardForm: Type.CreditCard = {
-  companyId: '',
-  number: '',
-  expiry: '',
-  owner: '',
-  cvc: '',
-  password: ['', ''],
-  nickname: '',
-};
 
 export interface CardFormState {
   creditCardForm: Type.CreditCard;

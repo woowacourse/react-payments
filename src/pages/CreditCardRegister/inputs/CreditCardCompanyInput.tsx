@@ -1,4 +1,4 @@
-import creditCardCompanies from 'assets/data/creditCardCompanies';
+import { creditCardCompanies } from 'data/creditCard';
 import { convertImage } from 'tools/image';
 import * as T from 'types';
 import useCreditCardForm from 'hooks/useCreditCardForm';
