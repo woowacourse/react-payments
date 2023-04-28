@@ -18,12 +18,12 @@ import CardCompanyIcon from "../../components/CardCompanyIcon/CardCompanyIcon";
 import { GlobalContext } from "../../context/GlobalProvider";
 import { AddCardContext } from "../../context/AddCardProvider";
 import { Button } from "../../components/common/Button";
+import useModal from "../../hooks/useModal";
 
 const AddCardPage = () => {
   const { cards, setCards, setCurrentIndex } = useContext(GlobalContext);
-
+  const { modalOpen, closeModal, openModal } = useModal(true);
   const {
-    modalOpen,
     error,
     cardCompany,
     cardNumber,
@@ -31,7 +31,6 @@ const AddCardPage = () => {
     ownerName,
     securityCode,
     password,
-    setModalOpen,
     setError,
     setCardCompany,
     setCardNumber,
@@ -47,7 +46,7 @@ const AddCardPage = () => {
     const company = e.currentTarget.name as CardCompany;
     setCardCompany(company);
 
-    setModalOpen(false);
+    closeModal();
   };
 
   const onSubmitHandler = (e: React.FormEvent) => {
@@ -100,7 +99,7 @@ const AddCardPage = () => {
         }
       ></Modal>
       <AppBar title={"카드 추가"} children={<Link to={PAGE.CARD_LIST}>〈</Link>} />
-      <CardPreviewButton onClick={() => setModalOpen(true)}>
+      <CardPreviewButton onClick={() => openModal()}>
         <CardPreview card={{ cardCompany, cardNumber, expirationDate, ownerName }} />
       </CardPreviewButton>
       <Form onSubmit={onSubmitHandler}>

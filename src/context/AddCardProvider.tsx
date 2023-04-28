@@ -3,7 +3,6 @@ import { CARD_LOGO } from "../components/CardCompanyIcon/CardCompanyIcon";
 import { CardCompany, CardExpirationDate, CardNumber, CardPassword } from "../types";
 
 interface AddCardState {
-  modalOpen: boolean;
   error: { cardNumberError: boolean; expirationError: boolean };
   cardCompany: CardCompany;
   cardNumber: CardNumber;
@@ -11,7 +10,6 @@ interface AddCardState {
   ownerName: string;
   securityCode: string;
   password: CardPassword;
-  setModalOpen: (value: boolean) => void;
   setError: (value: { cardNumberError: boolean; expirationError: boolean }) => void;
   setCardCompany: (value: CardCompany) => void;
   setCardNumber: (value: CardNumber) => void;
@@ -54,7 +52,6 @@ const initialValue = {
 export const AddCardContext = createContext<AddCardState>(initialValue);
 
 export const AddCardContextProvider = ({ children }: React.PropsWithChildren) => {
-  const [modalOpen, setModalOpen] = useState(true);
   const [error, setError] = useState<{ cardNumberError: boolean; expirationError: boolean }>({
     cardNumberError: false,
     expirationError: false,
@@ -78,7 +75,6 @@ export const AddCardContextProvider = ({ children }: React.PropsWithChildren) =>
   });
 
   const value = {
-    modalOpen,
     error,
     cardCompany,
     cardNumber,
@@ -86,7 +82,6 @@ export const AddCardContextProvider = ({ children }: React.PropsWithChildren) =>
     ownerName,
     securityCode,
     password,
-    setModalOpen,
     setError,
     setCardCompany,
     setCardNumber,
