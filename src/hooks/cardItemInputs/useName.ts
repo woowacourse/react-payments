@@ -15,7 +15,12 @@ const nameValidator = (inputValue: string) => {
 const useName = () => {
   const { inputValue, errorMessage, onChange } = useInput(nameValidator);
 
-  return { name: inputValue, nameErrorMessage: errorMessage, onChangeName: onChange };
+  const handleChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.target.value = event.target.value.toLocaleUpperCase();
+    onChange(event);
+  };
+
+  return { name: inputValue, nameErrorMessage: errorMessage, onChangeName: handleChangeName };
 };
 
 export default useName;

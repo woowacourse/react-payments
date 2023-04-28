@@ -22,12 +22,12 @@ const CardItem = ({ card }: CardItemProps) => {
             <p>{card.cardNumber[1]}</p>
             <SecurityCardNumber>
               {[...Array(card.cardNumber[2].length)].map((_, i) => (
-                <DotIcon key={i} color="white" />
+                <DotIcon key={i} color={cardFontColor} />
               ))}
             </SecurityCardNumber>
             <SecurityCardNumber>
               {[...Array(card.cardNumber[3].length)].map((_, i) => (
-                <DotIcon key={i} color="white" />
+                <DotIcon key={i} color={cardFontColor} />
               ))}
             </SecurityCardNumber>
           </CardNumberContainer>
