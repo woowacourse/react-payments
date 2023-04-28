@@ -2,9 +2,9 @@ import { createContext, useState } from 'react';
 import { Card } from 'components/common/Card/types';
 
 export type CardFormContextType = {
-  newCard: Card;
-  setNewCard: (card: Card) => void;
-  setNewCardName: (cardName: string) => void;
+  cardForm: Card;
+  setCardForm: (card: Card) => void;
+  setCardFormName: (cardName: string) => void;
 };
 
 export interface ContextProps {
@@ -14,7 +14,7 @@ export interface ContextProps {
 export const defaultCardForm: Card = {
   bank: '현대카드',
   numbers: ['', '', '', ''],
-  expirationDate: { year: '', month: '' },
+  expirationDate: { month: '', year: '' },
   ownerName: '',
   securityCode: '',
   password: {
@@ -24,16 +24,16 @@ export const defaultCardForm: Card = {
 };
 
 export const CardFormContext = createContext<CardFormContextType>({
-  newCard: defaultCardForm,
-  setNewCard: () => {},
-  setNewCardName: () => {},
+  cardForm: defaultCardForm,
+  setCardForm: () => {},
+  setCardFormName: () => {},
 });
 
 export const CardFormProvider = ({ children }: ContextProps) => {
-  const [newCard, setNewCard] = useState<Card>(defaultCardForm);
+  const [cardForm, setCardForm] = useState<Card>(defaultCardForm);
 
   const updateCard = (card: Card) => {
-    setNewCard((prev) => ({
+    setCardForm((prev) => ({
       ...prev,
       bank: card.bank,
       numbers: card.numbers,
@@ -45,12 +45,12 @@ export const CardFormProvider = ({ children }: ContextProps) => {
   };
 
   const updateCardName = (cardName: string) => {
-    setNewCard((prev) => ({ ...prev, cardName: cardName }));
+    setCardForm((prev) => ({ ...prev, cardName: cardName }));
   };
 
   return (
     <CardFormContext.Provider
-      value={{ newCard, setNewCard: updateCard, setNewCardName: updateCardName }}
+      value={{ cardForm, setCardForm: updateCard, setCardFormName: updateCardName }}
     >
       {children}
     </CardFormContext.Provider>

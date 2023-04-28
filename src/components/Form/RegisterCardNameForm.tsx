@@ -10,20 +10,20 @@ export type RegisterCardNameFormProps = {
 };
 
 export function RegisterCardNameForm({ onSubmit }: RegisterCardNameFormProps) {
-  const { newCard, setNewCardName } = useContext(CardFormContext);
+  const { cardForm, setCardFormName } = useContext(CardFormContext);
   const [cardName, setCardName] = useState('');
 
   const handleCardNameInput: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { value } = e.target;
 
     setCardName(value);
-    setNewCardName(value);
+    setCardFormName(value);
   };
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
-    CardDB.registerCard(newCard);
+    CardDB.registerCard(cardForm);
     onSubmit();
   };
 
@@ -31,7 +31,7 @@ export function RegisterCardNameForm({ onSubmit }: RegisterCardNameFormProps) {
     <CardFormProvider>
       <FormContainer onSubmit={handleSubmit}>
         <CompleteMsgSpan>카드 등록이 완료되었습니다</CompleteMsgSpan>
-        <CreditCard card={newCard} />
+        <CreditCard card={cardForm} />
         <CardNameInput value={cardName} onChange={handleCardNameInput} />
         <CardNameFormButton type="submit">확인</CardNameFormButton>
       </FormContainer>

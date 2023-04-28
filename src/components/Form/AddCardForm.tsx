@@ -6,7 +6,14 @@ import {
   CardNumberInputs,
 } from 'components/Input';
 import styled from 'styled-components';
-import { ChangeEventHandler, FormEventHandler, useContext, useEffect, useState } from 'react';
+import {
+  ChangeEvent,
+  ChangeEventHandler,
+  FormEventHandler,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import { COMPANY_NAME, Card } from 'components/common/Card/types';
 import { ValueAndOnChange } from 'components/Input/types';
 import { CreditCard } from 'components/common/Card/CreditCard';
@@ -14,6 +21,7 @@ import { useCardFormValid } from 'hooks/useCardFormValid';
 import { Modal } from 'components/Modal/CardCompanyModal';
 import { COMPANY_LIST, ICON_SVG_PATH } from '../../constants';
 import { CardFormContext, defaultCardForm } from 'context/CardForm';
+import FormLabel from 'components/common/FormLabel/FormLabel';
 
 export type AddCardFormProps = {
   onSubmit: () => void;
@@ -22,7 +30,7 @@ export type AddCardFormProps = {
 const NOT_ALPHABET_REGEX = /[^A-Za-z\s]/gi;
 
 function AddCardForm({ onSubmit }: AddCardFormProps) {
-  const { setNewCard } = useContext(CardFormContext);
+  const { setCardForm } = useContext(CardFormContext);
   const [card, setCard] = useState<Card>(defaultCardForm);
 
   const [isOpen, setIsOpen] = useState(true);
@@ -30,22 +38,26 @@ function AddCardForm({ onSubmit }: AddCardFormProps) {
   const [isValid, errorMessages] = useCardFormValid(card);
 
   useEffect(() => {
-    setNewCard(card);
+    setCardForm(card);
   }, [isValid]);
 
-  const valueAndOnChanges: ValueAndOnChange[] = card.numbers.map((cardNumber, index) => ({
+  const handleCardNumbersChange: ValueAndOnChange[] = card.numbers.map((cardNumber, index) => ({
     value: cardNumber,
     onChange: (e) => {
-      const { value } = e.target;
-
-      setCard((prev) => {
-        const prevCardNumbers = [...prev.numbers];
-        prevCardNumbers.splice(index, 1, value);
-
-        return { ...prev, numbers: prevCardNumbers };
-      });
+      handleCardNumberChange(e, index);
     },
   }));
+
+  const handleCardNumberChange = (e: ChangeEvent<HTMLInputElement>, index: number): void => {
+    const { value } = e.target;
+
+    setCard((prev) => {
+      const prevCardNumbers = [...prev.numbers];
+      prevCardNumbers.splice(index, 1, value);
+
+      return { ...prev, numbers: prevCardNumbers };
+    });
+  };
 
   const handleMonthInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { value } = e.target;
@@ -110,15 +122,16 @@ function AddCardForm({ onSubmit }: AddCardFormProps) {
       {isOpen && (
         <Modal
           ImgSources={Object.values(ICON_SVG_PATH) as string[]}
-          names={COMPANY_LIST}
+          companyNames={COMPANY_LIST}
           onClick={handleClickCompany}
         />
       )}
       <CardWrapper>
         <CreditCard card={card} onClick={handleClickCompany} />
+        <FormLabel>카드 이미지를 터치하여 카드사를 변경할 수 있습니다.</FormLabel>
       </CardWrapper>
       <FormContainer onSubmit={handleSubmit}>
-        <CardNumberInputs valueAndOnChanges={valueAndOnChanges} />
+        <CardNumberInputs valueAndOnChanges={handleCardNumbersChange} />
         {<ErrorCaption>{!isValid && errorMessages.numbers}</ErrorCaption>}
 
         <ExpirationDateInput

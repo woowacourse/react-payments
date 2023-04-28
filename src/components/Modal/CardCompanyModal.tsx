@@ -1,27 +1,36 @@
-import { forwardRef } from 'react';
+import { MouseEventHandler, forwardRef } from 'react';
 import styled from 'styled-components';
 import { Icon } from '../common/Icon/Icon';
 import { COMPANY_NAME } from '../common/Card/types';
 
 export interface ModalProps {
   ImgSources?: string[];
-  names?: COMPANY_NAME[];
+  companyNames?: COMPANY_NAME[];
+
   onClick: (bank: COMPANY_NAME) => void;
 }
 
 type Ref = HTMLDivElement;
 
 export const Modal = forwardRef<Ref, ModalProps>(
-  ({ names, ImgSources, onClick, ...props }, ref) => {
+  ({ companyNames, ImgSources, onClick, ...props }, ref) => {
+    const handleCloseModalWithBackDrop: MouseEventHandler<HTMLDivElement> = () => {
+      console.log('hi');
+    };
+
     return (
       <>
-        <Styled.ModalBackdrop />
+        <Styled.ModalBackdrop onClick={handleCloseModalWithBackDrop} />
         <Styled.Modal {...props} ref={ref}>
           {ImgSources &&
-            names &&
+            companyNames &&
             ImgSources?.map((value, index) => {
               return (
-                <Icon imgSrc={value} name={names[index]} onClick={() => onClick(names[index])} />
+                <Icon
+                  imgSrc={value}
+                  name={companyNames[index]}
+                  onClick={() => onClick(companyNames[index])}
+                />
               );
             })}
         </Styled.Modal>

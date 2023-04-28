@@ -13,6 +13,6 @@ type Story = StoryObj<typeof meta>;
 export const ModalStory: Story = {
   args: {
     ImgSources: Object.values(ICON_SVG_PATH) as string[],
-    names: COMPANY_LIST,
+    companyNames: COMPANY_LIST,
   },
 };
