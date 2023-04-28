@@ -73,14 +73,15 @@ const ICChip = styled.div`
 
 const CardNumberDigit = styled.div`
   width: 8px;
-
-  font-size: 10px;
   text-align: center;
 `;
 
 const CardNumber = styled.div`
   display: flex;
   height: 12px;
+
+  font-size: 12px;
+  font-weight: bold;
 
   & > ${CardNumberDigit}:nth-child(4n) {
     margin-right: 10px;
@@ -90,8 +91,20 @@ const CardNumber = styled.div`
 const CardAdditionalInfo = styled.div`
   display: flex;
   justify-content: space-between;
+  gap: 8px;
 
-  height: 12px;
+  height: 14px;
+
+  font-size: 12px;
+  font-weight: bold;
+`;
+
+const CardOwner = styled.div`
+  flex: 1;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 const CreditCardBackFace = styled(CreditCardFrontFace)<PropsWithColor>`
@@ -201,9 +214,7 @@ export const CreditCardView = (props: CreditCardViewProps) => {
           ))}
         </CardNumber>
         <CardAdditionalInfo>
-          <Text size="small" weight="bold">
-            {owner}
-          </Text>
+          <CardOwner>{owner}</CardOwner>
           {expirationDate.some(Boolean) && (
             <Text size="small" weight="bold">
               {expirationDate.join('/')}
