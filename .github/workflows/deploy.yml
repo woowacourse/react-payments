@@ -29,6 +29,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
+      - run: npm config set legacy-peer-deps true
+
       - run: npm ci
         if: steps.cache.outputs.cache-hit != 'true'
 
