@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
-import { CardFormData, CardFormValidation } from '../../types';
-import validator, { ValidatorArgs } from '../../utils/validator';
+import type { CardFormData, CardFormValidation, ValidatorArgs } from '../../types';
+import validator from '../../utils/validator';
 
 const initialValidationValue: CardFormValidation = {
   issuer: false,

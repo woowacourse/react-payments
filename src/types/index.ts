@@ -18,7 +18,7 @@ interface Card {
   issuer: Issuer | '';
   cardNumber: string;
   expirationDate: ExpirationDate;
-  ownerName?: string;
+  ownerName: string;
   securityCode: string;
   password: string[];
 }
@@ -33,6 +33,19 @@ type CardFormValidation = {
 
 type MultipleInputFieldCardInformation = 'password';
 
+type ValidatorArgs = {
+  issuer: string;
+  cardNumber: string;
+  expirationDate: ExpirationDate;
+  ownerName: string;
+  securityCode: string;
+  password: string[];
+};
+
+type Validator = {
+  [K in keyof CardFormData]: (value: ValidatorArgs[K]) => boolean;
+};
+
 export type {
   SupportingTextMessage,
   Issuer,
@@ -42,4 +55,6 @@ export type {
   CardDisplayInformation,
   CardFormValidation,
   MultipleInputFieldCardInformation,
+  ValidatorArgs,
+  Validator,
 };
