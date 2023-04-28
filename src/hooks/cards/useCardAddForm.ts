@@ -4,6 +4,7 @@ import type { CardFormData } from '../../types';
 import { PATH } from '../../constants';
 import { useCardListContext } from '../../contexts/CardListContext';
 import { useCardInputValidation } from './useCardInputValidation';
+import { useFormComplete } from '../common/useFormComplete';
 
 const initialValue: CardFormData = {
   issuer: '',
@@ -21,12 +22,14 @@ const useCardAddForm = () => {
   const { newCardId, cardListLength, addCard } = useCardListContext();
   const [cardInformation, setCardInformation] = useState(initialValue);
   const {
-    isFormComplete,
+    inputValidation,
     inputError,
     updateInputValidation,
     updateInputError,
     triggerAllInputErrors,
   } = useCardInputValidation();
+  const isFormComplete = useFormComplete(inputValidation);
+
   const navigate = useNavigate();
 
   const updateInputValue = useCallback(
@@ -37,11 +40,26 @@ const useCardAddForm = () => {
     [updateInputValidation]
   );
 
+  const focusErrorInput = (errorInputs: (HTMLButtonElement | HTMLInputElement)[]) => {
+    if (!inputValidation.issuer) {
+      errorInputs[0].focus();
+    } else {
+      errorInputs[1].focus();
+    }
+  };
+
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (!isFormComplete) {
+      const errorInputs = Array.from(event.currentTarget.elements).filter(
+        (element): element is HTMLButtonElement | HTMLInputElement =>
+          element.tagName === 'BUTTON' || !(element as HTMLInputElement).validity.valid
+      );
+
       triggerAllInputErrors();
+      focusErrorInput(errorInputs);
+
       return;
     }
 

@@ -1,6 +1,5 @@
 import { useCallback, useState } from 'react';
 import type { CardFormData, CardFormValidation, ValidatorArgs } from '../../types';
-import { useFormComplete } from '../common/useFormComplete';
 import validator from '../../utils/validator';
 
 const initialValidationValue: CardFormValidation = {
@@ -24,7 +23,6 @@ const initialErrorValue: CardFormValidation = {
 const useCardInputValidation = () => {
   const [inputValidation, setInputValidation] = useState(initialValidationValue);
   const [inputError, setInputError] = useState(initialErrorValue);
-  const isFormComplete = useFormComplete(inputValidation);
 
   const validateInput = useCallback(
     <K extends keyof CardFormValidation>(key: K, value: CardFormData[K]) => {
@@ -65,7 +63,7 @@ const useCardInputValidation = () => {
   }, [inputValidation]);
 
   return {
-    isFormComplete,
+    inputValidation,
     inputError,
     updateInputValidation,
     updateInputError,
