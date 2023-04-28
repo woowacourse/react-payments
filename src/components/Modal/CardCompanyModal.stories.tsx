@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { Modal } from './Modal';
-import { ICON_SVG_PATH, COMPANY_LIST } from '../../../constants';
+import { Modal } from './CardCompanyModal';
+import { ICON_SVG_PATH, COMPANY_LIST } from '../../constants';
 
 const meta = {
   component: Modal,

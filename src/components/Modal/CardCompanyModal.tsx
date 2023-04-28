@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 import styled from 'styled-components';
-import { Icon } from '../Icon/Icon';
-import { COMPANY_NAME } from '../Card/types';
+import { Icon } from '../common/Icon/Icon';
+import { COMPANY_NAME } from '../common/Card/types';
 
 export interface ModalProps {
   ImgSources?: string[];
@@ -37,7 +37,7 @@ const Styled = {
     justify-content: center;
     position: fixed;
     bottom: 0;
-    width: 375px;
+    width: 100%;
     height: 227px;
     z-index: 100;
     border-radius: 10px 10px 0 0;
@@ -52,8 +52,8 @@ const Styled = {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     z-index: 1;
     background-color: rgba(0, 0, 0, 0.5);
     overflow: hidden;
