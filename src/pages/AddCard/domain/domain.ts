@@ -1,4 +1,4 @@
-import { InputStatus } from '../../../type';
+import { CardInfoInput, InputStatus } from '../../../type';
 import { INVALID_MESSAGE } from '../../../utils/constants';
 
 export const calcMultipleStatus = (arr: InputStatus[]): InputStatus => {
@@ -7,6 +7,6 @@ export const calcMultipleStatus = (arr: InputStatus[]): InputStatus => {
   return 'INIT';
 };
 
-export const getErrorMessage = (inputType: string, status: InputStatus) => {
+export const getErrorMessage = (inputType: CardInfoInput, status: InputStatus) => {
   return INVALID_MESSAGE[inputType][status];
 };

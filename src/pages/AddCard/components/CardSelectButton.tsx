@@ -1,8 +1,9 @@
+import { CardCompany } from '../../../type';
 import { CARD_NAME_IMAGE_SRCS } from '../../../utils/constants';
 import './CardSelectButton.css';
 
 type CardSelectButtonProps = {
-  cardName: string;
+  cardName: CardCompany;
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 const CardSelectButton = ({ onClick, cardName }: CardSelectButtonProps) => {

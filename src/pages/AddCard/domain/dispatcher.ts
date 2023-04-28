@@ -1,10 +1,14 @@
 import { ALPHABET, MONTH_DATA, NUMBERS } from '../../../utils/constants';
 
 export const isValidExpiredMonthFormat = (str: string) => {
-  return MONTH_DATA.includes(str) ? 'VALID' : 'INVALID';
+  if (!MONTH_DATA.includes(str)) return 'INVALID';
+
+  return 'VALID';
 };
 
 export const isValidExpiredYearFormat = (str: string) => {
+  // TODO: 유효 월 검증
+
   const strToNum = +str;
   return Number.isInteger(strToNum) && strToNum >= 0 ? 'VALID' : 'INVALID';
 };

@@ -41,6 +41,16 @@ export type InputHook = {
 };
 
 export type InputStatus = 'INIT' | 'VALID' | 'INVALID';
+export type CardInfoInput = 'securityCode' | 'password' | 'owner' | 'expired' | 'cardNumber';
+export type CardCompany =
+  | 'BC카드'
+  | '하나카드'
+  | '현대카드'
+  | '신한카드'
+  | '국민카드'
+  | '우리카드'
+  | '카카오뱅크'
+  | '롯데카드';
 
 export type AddCardFormProps = {
   cardType: string;
