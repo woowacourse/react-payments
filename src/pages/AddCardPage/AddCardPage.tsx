@@ -105,14 +105,14 @@ const AddCardPage = () => {
     });
   };
 
-  const isAddButtonVisible: boolean =
+  const isFormFilled =
     isFulfilledObject(cardNumber, 4) &&
     isFulfilledObject(expirationDate, 2) &&
     isFulfilledObject(password, 1) &&
     isFulfilledString(securityCode, 3);
 
   return (
-    <Container>
+    <AddCardPageContainer>
       <AppBar title={"카드 추가"} leftChild={<Link to="/">〈</Link>} />
       <CardPreview card={{ cardNumber, expirationDate, ownerName, cardCompany }} onClick={modalOpen} />
       <HelperText>카드사 선택하기👆</HelperText>
@@ -122,11 +122,9 @@ const AddCardPage = () => {
         <CardOwnerNameInput ownerName={ownerName} onChange={handleOwnerName} />
         <CardSecurityCodeInput securityCode={securityCode} onChange={handleSecurityCode} />
         <CardPasswordInput password={password} onChange={handlePassword} />
-        <ButtonBox>
-          <Button type="submit" isVisible={isAddButtonVisible}>
-            다음
-          </Button>
-        </ButtonBox>
+        <NextButton type="submit" isFormFilled={isFormFilled}>
+          입력 완료
+        </NextButton>
       </Form>
       <Modal isOpen={isModalOpen} closeModal={modalClose}>
         <CardCompanyButtonList
@@ -134,9 +132,13 @@ const AddCardPage = () => {
           handleCardCompany={handleCardCompany}
         />
       </Modal>
-    </Container>
+    </AddCardPageContainer>
   );
 };
+
+const AddCardPageContainer = styled(Container)`
+  height: initial;
+`;
 
 const HelperText = styled.span`
   font-size: 12px;
@@ -145,22 +147,22 @@ const HelperText = styled.span`
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 19px;
+  gap: 20px;
+
+  height: 100%;
 `;
 
-const ButtonBox = styled.div`
-  display: flex;
-  justify-content: flex-end;
-`;
+const NextButton = styled.button<{ isFormFilled: boolean }>`
+  width: 100%;
+  height: 50px;
 
-const Button = styled.button<{ isVisible: boolean }>`
-  background-color: transparent;
   border: none;
+  border-radius: 4px;
 
   font-size: 14px;
   font-weight: 700;
 
-  visibility: ${({ isVisible }) => (isVisible ? "visible" : "hidden")};
+  background-color: ${(props) => (props.isFormFilled ? "#d4e7fd" : "#ececec")};
 
   cursor: pointer;
 `;

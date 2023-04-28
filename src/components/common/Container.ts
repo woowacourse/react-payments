@@ -6,7 +6,7 @@ const Container = styled.div<{ justify?: string }>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 19px;
+  gap: 18px;
   justify-content: ${(props) => props.justify};
 
   width: 375px;

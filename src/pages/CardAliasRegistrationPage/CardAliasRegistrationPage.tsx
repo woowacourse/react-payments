@@ -34,7 +34,7 @@ const CardAliasRegistrationPage = ({ onSubmit }: CardAliasRegistrationPageProps)
     navigate("/", { replace: true });
   };
 
-  const isAddCardButtonVisible = cardAlias.length === 0 ? false : true;
+  const isAliasInputFilled = !!cardAlias.length;
 
   return (
     <Container justify="center">
@@ -55,7 +55,7 @@ const CardAliasRegistrationPage = ({ onSubmit }: CardAliasRegistrationPageProps)
           width="240px"
           textAlign="center"
         />
-        <AddCardButton type="submit" isVisible={isAddCardButtonVisible}>
+        <AddCardButton type="submit" isAliasInputFilled={isAliasInputFilled}>
           등록 완료
         </AddCardButton>
       </AliasForm>
@@ -86,7 +86,7 @@ const AliasInput = styled(Input)`
   line-height: 30px;
 `;
 
-const AddCardButton = styled.button<{ isVisible: boolean }>`
+const AddCardButton = styled.button<{ isAliasInputFilled: boolean }>`
   position: absolute;
   bottom: 26px;
 
@@ -99,9 +99,9 @@ const AddCardButton = styled.button<{ isVisible: boolean }>`
   font-size: 14px;
   font-weight: 700;
 
-  background-color: #ececec;
+  background-color: ${(props) => (props.isAliasInputFilled ? "#d4e7fd" : "#ececec")};
 
-  visibility: ${({ isVisible }) => (isVisible ? "visible" : "hidden")};
+  cursor: pointer;
 `;
 
 export default CardAliasRegistrationPage;
