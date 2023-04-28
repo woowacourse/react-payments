@@ -11,7 +11,7 @@ function CreditCardPasswordInput({ name }: T.CreditCardInputProps) {
 
   const handleChangeCreditCardPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newPassword = event.target.value.replace(/\D/g, '');
-    if (newPassword.length === 1) {
+    if (newPassword.length <= 1) {
       const { password }: T.CreditCard = { ...creditCardForm };
       const targetName = event.target.name;
       if (targetName === 'first') {
