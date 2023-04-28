@@ -1,6 +1,7 @@
 import type { CreditCardVendorName } from './CreditCardVendor';
 
 export type CreditCard = {
+  id: number;
   owner: string;
   displayName: string;
   vendor: CreditCardVendorName;
