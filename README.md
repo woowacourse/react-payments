@@ -50,7 +50,7 @@
 
 ### 📝 실행 방법
 
-- <a href="woo-jk.github.io/react-payments">앱 바로 실행하기</a>
+- <a href="https://woo-jk.github.io/react-payments">앱 바로 실행하기</a>
 
 - 터미널에서 npm 설치(`npm install`) 후 `npm start` 커맨드로 앱을 실행할 수 있다.
 
@@ -58,7 +58,7 @@
 
 ### 📝 실행 방법
 
-- <a href="[woo-jk.github.io/react-payments](https://644c07750ea1cea860282338-fmfkdgqhso.chromatic.com/?path=/docs/payment-common--docs)">스토리북 보기</a>
+- <a href="https://644c07750ea1cea860282338-fmfkdgqhso.chromatic.com/?path=/docs/payment-common--docs">스토리북 보기</a>
 
 - 터미널에서 npm 설치(`npm install`) 후 `npm run storybook` 커맨드로 스토리북을 실행할 수 있다.
 
