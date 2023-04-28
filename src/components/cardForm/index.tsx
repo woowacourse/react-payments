@@ -35,7 +35,7 @@ export const CardForm = ({ setCardInfo, newCard }: CardFormProps) => {
 
     if (isEveryInputValid()) {
       addNewCard(newCard);
-      moveTo("/nickname");
+      moveTo("/registerCard");
     }
   };
 

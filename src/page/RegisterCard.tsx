@@ -4,7 +4,7 @@ import { useContext, useRef } from "react";
 import { CardContext } from "../context/cardContext";
 import { useNavigate } from "react-router-dom";
 
-export const Nickname = () => {
+export const RegisterCard = () => {
   const { cards, updateCard } = useContext(CardContext);
   const newCard = cards[cards.length - 1];
 
