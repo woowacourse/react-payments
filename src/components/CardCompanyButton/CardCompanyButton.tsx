@@ -10,7 +10,7 @@ type CardCompanyButtonProps = {
 const CardCompanyButton = ({ cardCompany, onClick }: CardCompanyButtonProps) => {
   return (
     <Button type="button" onClick={onClick}>
-      <CompanyLogo src={CARD_COMPANIES[cardCompany].logoFilePath} alt="card-company" />
+      <CompanyLogo src={CARD_COMPANIES[cardCompany].logoFilePath} alt={`card-company-${cardCompany}`} />
       <CompanyName>{CARD_COMPANIES[cardCompany].koreanName}</CompanyName>
     </Button>
   );
