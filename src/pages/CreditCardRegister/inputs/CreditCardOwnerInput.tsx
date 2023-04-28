@@ -1,5 +1,6 @@
 import * as T from 'types';
 import useCreditCardForm from 'hooks/useCreditCardForm';
+import FlexBox from 'components/FlexBox';
 import Input from '../../../components/Input';
 import * as S from '../style';
 
@@ -15,13 +16,13 @@ function CreditCardOwnerInput({ name }: T.CreditCardInputProps) {
 
   return (
     <S.Box>
-      <S.FlexBox justifyContent="space-between">
+      <FlexBox justifyContent="space-between">
         <S.CreditCardRegisterLabel>카드 소유자 이름 (선택)</S.CreditCardRegisterLabel>
         <S.CreditCardRegisterLabel>
           {creditCardForm.owner?.length}
           /30
         </S.CreditCardRegisterLabel>
-      </S.FlexBox>
+      </FlexBox>
       <Input
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
         type="string"

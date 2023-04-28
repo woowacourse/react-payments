@@ -9,6 +9,7 @@ import useCreditCardForm from 'hooks/useCreditCardForm';
 import ControlButton from 'components/ControlButton';
 import CreditCardRegisterLayout from 'components/CreditCardRegisterLayout';
 import CreditCardRegisterTopSheet from 'components/CreditCardRegisterTopSheet';
+import { PreviewCreditCard } from 'components/PreviewCreditCard/style';
 import CreditCardNumberInput from './inputs/CreditCardNumberInput';
 import CreditCardExpiryInput from './inputs/CreditCardExpiryInput';
 import CreditCardOwnerInput from './inputs/CreditCardOwnerInput';
@@ -43,7 +44,7 @@ function CreditCardRegister() {
           <S.HomeButton type="button" onClick={() => navigate('/')}>{`${'<'}`}</S.HomeButton>
           <S.CreditCardRegisterHeader>카드 추가</S.CreditCardRegisterHeader>
         </CreditCardRegisterTopSheet>
-        <S.PreviewCreditCard>
+        <PreviewCreditCard>
           <CreditCard
             fullFilled={false}
             creditCard={{
@@ -53,7 +54,7 @@ function CreditCardRegister() {
               owner: creditCardForm.owner,
             }}
           />
-        </S.PreviewCreditCard>
+        </PreviewCreditCard>
         <S.CreditCardRegisterForm>
           <CreditCardNumberInput
             name="number"

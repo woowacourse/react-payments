@@ -1,5 +1,6 @@
 import * as T from 'types';
 import useCreditCardForm from 'hooks/useCreditCardForm';
+import FlexBox from 'components/FlexBox';
 import Input from '../../../components/Input';
 import * as S from '../style';
 import { validatePassword } from '../../../domains/validations';
@@ -23,7 +24,7 @@ function CreditCardPasswordInput({ name }: T.CreditCardInputProps) {
   return (
     <S.Box>
       <S.CreditCardRegisterLabel>카드 비밀번호</S.CreditCardRegisterLabel>
-      <S.FlexBox justifyContent="flex-start">
+      <FlexBox justifyContent="flex-start">
         <Input
           type="password"
           value={creditCardForm.password?.first}
@@ -42,7 +43,7 @@ function CreditCardPasswordInput({ name }: T.CreditCardInputProps) {
         />
         <S.PasswordBox>•</S.PasswordBox>
         <S.PasswordBox>•</S.PasswordBox>
-      </S.FlexBox>
+      </FlexBox>
       {isError && <S.ErrorMessage>비밀 번호는 앞 2자리를 입력하셔야 합니다.</S.ErrorMessage>}
     </S.Box>
   );

@@ -1,5 +1,6 @@
 import * as T from 'types';
 import useCreditCardForm from 'hooks/useCreditCardForm';
+import FlexBox from 'components/FlexBox';
 import Input from '../../../components/Input';
 import * as S from '../style';
 
@@ -19,12 +20,12 @@ function CreditCardCVCInput({ name }: T.CreditCardInputProps) {
     <S.Box>
       <S.CreditCardRegisterLabel>보안 코드(CVC/CVV)</S.CreditCardRegisterLabel>
 
-      <S.FlexBox justifyContent="flex-start" alignItems="center">
+      <FlexBox justifyContent="flex-start" alignItems="center">
         <Input type="password" value={creditCardForm.cvc} width="72px" textAlign="center" onChange={handleChangeCreditCardCVC} />
         <S.QuestionBox onClick={() => alert('카드 뒷 면을 참고하세요.')}>
           <S.QuestionMark>?</S.QuestionMark>
         </S.QuestionBox>
-      </S.FlexBox>
+      </FlexBox>
       {isError && <S.ErrorMessage>CVC/CVV 번호는 3자리 숫자여야 합니다.</S.ErrorMessage>}
     </S.Box>
   );

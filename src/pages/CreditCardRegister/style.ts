@@ -10,12 +10,6 @@ export const CreditCardRegisterHeader = styled.h3`
     line-height: 18.75px;
 `;
 
-export const PreviewCreditCard = styled.div`
-    display: flex;
-    justify-content: center;
-    margin-bottom: 25px;
-`;
-
 export const CreditCardRegisterForm = styled.form`
     display: grid;
     row-gap: 20px;
@@ -23,17 +17,6 @@ export const CreditCardRegisterForm = styled.form`
 
 export const RelativeBox = styled.div`
     position: relative;
-`;
-
-type FlexBoxProps = {
-  justifyContent?: 'center' | 'flex-start' | 'flex-end' | 'space-between' | 'space-around';
-  alignItems?: 'center' | 'flex-start' | 'flex-end' | 'center';
-};
-
-export const FlexBox = styled.div<FlexBoxProps>`
-    display: flex;
-    justify-content: ${(props) => props.justifyContent};
-    align-items: ${(props) => props.alignItems};
 `;
 
 export const CreditCardRegisterLabel = styled.div`
