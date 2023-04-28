@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
-import { CardInfoContext } from '../../CardInfoProvider';
+import { CardInfoContext } from '../../contexts/CardInfoProvider';
 import { CardInfo } from '../../types';
 import styles from './CardNameDecisionForm.module.css';
 import FooterButton from '../common/FooterButton/FooterButton';

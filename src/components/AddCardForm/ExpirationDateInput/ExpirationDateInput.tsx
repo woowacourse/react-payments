@@ -1,7 +1,7 @@
-import { addSlashInExpirationDate } from '../replacers';
-import { checkValidYearMonth } from '../validators';
+import { addSlashInExpirationDate } from '../../../domains/replacers';
+import { checkValidYearMonth } from '../../../domains/validators';
 import { useContext } from 'react';
-import { CardInfoContext } from '../../../CardInfoProvider';
+import { CardInfoContext } from '../../../contexts/CardInfoProvider';
 import LabeledInput from '../LabeledInput/LabeledInput';
 import Input from '../../common/Input/Input';
 import useInputUpdater from '../../../hooks/useInputUpdater';

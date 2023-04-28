@@ -1,5 +1,5 @@
 import { ReactNode, useContext } from 'react';
-import { ModalContext } from '../../../ModalProvider';
+import { ModalContext } from '../../../contexts/ModalProvider';
 import { FaCreditCard } from 'react-icons/fa';
 import styles from './CardSwitchButton.module.css';
 

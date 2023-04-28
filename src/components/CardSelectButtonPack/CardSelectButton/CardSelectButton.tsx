@@ -1,7 +1,7 @@
 import React from 'react';
 import { useContext, useCallback } from 'react';
-import { ModalContext } from '../../../ModalProvider';
-import { CardInfoContext } from '../../../CardInfoProvider';
+import { ModalContext } from '../../../contexts/ModalProvider';
+import { CardInfoContext } from '../../../contexts/CardInfoProvider';
 import styles from './CardSelectButton.module.css';
 import { CardIssuerType } from '../../../types';
 

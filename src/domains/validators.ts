@@ -1,4 +1,4 @@
-import { ValidatorResponseType } from '../../types';
+import { ValidatorResponseType } from '../types';
 
 const CARD_NUMBER_FORMAT = /^(?:\d{4}-){3}\d{4}$/;
 const YEAR_MONTH_FORMAT = /^\d{2}\/\d{2}$/;

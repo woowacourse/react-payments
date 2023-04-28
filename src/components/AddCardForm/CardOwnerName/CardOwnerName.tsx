@@ -1,8 +1,8 @@
 import LabeledInput from '../LabeledInput/LabeledInput';
 import Input from '../../common/Input/Input';
 import { useContext } from 'react';
-import { CardInfoContext } from '../../../CardInfoProvider';
-import { checkOwnerNameLength } from '../validators';
+import { CardInfoContext } from '../../../contexts/CardInfoProvider';
+import { checkOwnerNameLength } from '../../../domains/validators';
 import useInputUpdater from '../../../hooks/useInputUpdater';
 
 const CardOwnerName = () => {

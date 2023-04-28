@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import { checkValidCVC } from '../validators';
-import { CardInfoContext } from '../../../CardInfoProvider';
+import { checkValidCVC } from '../../../domains/validators';
+import { CardInfoContext } from '../../../contexts/CardInfoProvider';
 import HelpButton from '../../common/HelpButton/HelpButton';
 import Input from '../../common/Input/Input';
 import LabeledInput from '../LabeledInput/LabeledInput';

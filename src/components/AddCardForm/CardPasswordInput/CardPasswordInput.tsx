@@ -1,6 +1,6 @@
 import { useContext, useRef } from 'react';
-import { checkValidPassword } from '../validators';
-import { CardInfoContext } from '../../../CardInfoProvider';
+import { checkValidPassword } from '../../../domains/validators';
+import { CardInfoContext } from '../../../contexts/CardInfoProvider';
 import LabeledInput from '../LabeledInput/LabeledInput';
 import Input from '../../common/Input/Input';
 import MockPasswordInput from './MockPasswordInput/MockPasswordInput';

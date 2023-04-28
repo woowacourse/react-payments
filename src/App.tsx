@@ -1,11 +1,11 @@
 import { HashRouter, Routes, Route } from 'react-router-dom';
-import { CardInfoProvider } from './CardInfoProvider';
-import { ModalProvider } from './ModalProvider';
+import { CardInfoProvider } from './contexts/CardInfoProvider';
+import { ModalProvider } from './contexts/ModalProvider';
 import styles from './App.module.css';
-import CardNameDecision from './pages/CardNameDecision';
-import NotFound from './pages/NotFound';
-import Home from './pages/Home';
-import CardRegistration from './pages/CardRegistration';
+import CardNameDecision from './pages/CardNameDecision/CardNameDecision';
+import NotFound from './pages/NotFound/NotFound';
+import Home from './pages/Home/Home';
+import CardRegistration from './pages/CardRegistration/CardRegistration';
 import useCardLocalStorage from './hooks/useCardLocalStorage';
 import ModalBottomSheet from './components/common/ModalBottomSheet/ModalBottomSheet';
 

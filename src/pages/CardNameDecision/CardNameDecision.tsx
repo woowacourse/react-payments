@@ -1,11 +1,11 @@
 import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { cardImages } from './cardImages';
-import { CardInfoContext } from '../CardInfoProvider';
+import { cardImages } from '../cardImages';
+import { CardInfoContext } from '../../contexts/CardInfoProvider';
 import styles from './CardNameDecision.module.css';
-import CardPreview from '../components/common/CardPreview/CardPreview';
-import CardNameDecisionForm from '../components/CardNameDecisionForm/CardNameDecisionForm';
-import type { CardInfo } from '../types';
+import CardPreview from '../../components/common/CardPreview/CardPreview';
+import CardNameDecisionForm from '../../components/CardNameDecisionForm/CardNameDecisionForm';
+import type { CardInfo } from '../../types';
 
 type CardNameDecisionProps = {
   saveCardToLocalStorage: (newCard: CardInfo) => void;

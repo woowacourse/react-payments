@@ -1,10 +1,10 @@
-import { checkValidCardNumber } from '../validators';
-import { addHyphensInCardNumber } from '../replacers';
+import { checkValidCardNumber } from '../../../domains/validators';
+import { addHyphensInCardNumber } from '../../../domains/replacers';
 import LabeledInput from '../LabeledInput/LabeledInput';
 import Input from '../../common/Input/Input';
 import { useContext } from 'react';
 import useInputUpdater from '../../../hooks/useInputUpdater';
-import { CardInfoContext } from '../../../CardInfoProvider';
+import { CardInfoContext } from '../../../contexts/CardInfoProvider';
 
 const CardNumberInput = () => {
   const { setCardNumber } = useContext(CardInfoContext);

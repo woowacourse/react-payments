@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CardInfoContext } from '../../CardInfoProvider';
+import { CardInfoContext } from '../../contexts/CardInfoProvider';
 import { cardSelectButtonInfos } from '../../pages/cardImages';
 import {
   checkValidCardNumber,
@@ -8,7 +8,7 @@ import {
   checkOwnerNameLength,
   checkValidCVC,
   checkValidPassword,
-} from './validators';
+} from '../../domains/validators';
 import styles from './AddCardForm.module.css';
 import CardSwitchButton from './CardSwitchButton/CardSwitchButton';
 import CardNumberInput from './CardNumberInput/CardNumberInput';

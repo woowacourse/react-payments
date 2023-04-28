@@ -1,6 +1,6 @@
-import CardList from '../components/CardList/CardList';
-import Header from '../components/common/Header/Header';
-import { CardInfo } from '../types';
+import CardList from '../../components/CardList/CardList';
+import Header from '../../components/common/Header/Header';
+import { CardInfo } from '../../types';
 
 type HomeProps = {
   cardInfo: CardInfo[];
