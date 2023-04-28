@@ -17,7 +17,6 @@ export function CardRegisterForm() {
     isOptionalInputValid,
   } = useCardRegisterForm();
 
-  console.log(COMPANY);
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const submittedCardInfo = {} as unknown as Card;
@@ -30,16 +29,14 @@ export function CardRegisterForm() {
     if (COMPANY.clicked.value) {
       submittedCardInfo.COMPANY = COMPANY.clicked.value;
 
-      cardList.updateData(submittedCardInfo);
-
-      moveCardListPage();
+      moveAddCardNamePage(submittedCardInfo);
     } else {
       alert('카드 회사를 선택해주세요!');
     }
   }
 
-  function moveCardListPage() {
-    naviagte('/');
+  function moveAddCardNamePage(formState: Card) {
+    naviagte('/add-card-name', { state: { ...formState } });
   }
 
   return (

@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import { AddCard, CardList } from './pages';
+import { AddCard, CardList, AddCardName } from './pages';
 import { GlobalStyle } from './styles/global-style';
 
 function App() {
@@ -12,6 +12,7 @@ function App() {
           <Routes>
             <Route path='/' element={<CardList />}></Route>
             <Route path='/add-card' element={<AddCard />}></Route>
+            <Route path='/add-card-name' element={<AddCardName />}></Route>
           </Routes>
         </Router>
       </div>

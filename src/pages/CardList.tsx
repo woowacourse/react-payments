@@ -21,7 +21,12 @@ export function CardList() {
         </_Direction>
         {cards &&
           cards?.map((card) => {
-            return <CardItem info={card}></CardItem>;
+            return (
+              <>
+                <CardItem info={card}></CardItem>
+                <_CardNickName>{card.NICKNAME}</_CardNickName>
+              </>
+            );
           })}
         <_Button onClick={moveAddCardPage}>+</_Button>
       </_Section>
@@ -49,6 +54,13 @@ const _Section = styled.section`
 
 const _Direction = styled.h3`
   font: var(--text-subtitle);
+  color: #575757;
+`;
+
+const _CardNickName = styled.p`
+  font-weight: 700;
+  font-size: 1.4rem;
+
   color: #575757;
 `;
 const _Button = styled.button`
