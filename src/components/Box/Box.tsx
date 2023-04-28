@@ -10,7 +10,6 @@ function Box({
   m, mt, mb, ml, mr, mx, my,
   p, pt, pb, pl, pr, px, py
 }: BoxProps) {
-  console.log(m, mt, mb, ml, mr,);
   return (
     <S.Box
       m={m}

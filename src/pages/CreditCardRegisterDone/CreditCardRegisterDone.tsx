@@ -5,9 +5,12 @@ import CreditCardRegisterLayout from 'components/CreditCardRegisterLayout';
 import CreditCardRegisterTitle from 'components/CreditCardRegisterTitle';
 import FlexBox from 'components/FlexBox';
 import Box from 'components/Box';
+import { useState } from 'react';
 
 function CreditCardRegisterDone() {
   const { creditCardForm } = useCreditCardForm();
+  const [nickname, setNickname] = useState('');
+
   return (
     <CreditCardRegisterLayout>
       <FlexBox justifyContent="center">
@@ -16,11 +19,15 @@ function CreditCardRegisterDone() {
         </Box>
       </FlexBox>
       <Box mb={15}>
-        <CreditCardNicknameInputForm creditCardForm={creditCardForm} />
+        <CreditCardNicknameInputForm
+          creditCardForm={creditCardForm}
+          nickname={nickname}
+          setNickname={setNickname}
+        />
       </Box>
       <ControlButton
         onClick={() => alert('ㅎㅇ')}
-        label="확인"
+        label={nickname.length > 0 ? '확인' : '건너뛰기'}
       />
     </CreditCardRegisterLayout>
   );
