@@ -1,10 +1,14 @@
-export const CREDIT_CARD_COMPANY_LOGO = {
-  BC_CARD: `${process.env.PUBLIC_URL}/assets/logo-bc-card.svg`,
-  HANA_CARD: `${process.env.PUBLIC_URL}/assets/logo-hana-card.svg`,
-  HYUNDAI_CARD: `${process.env.PUBLIC_URL}/assets/logo-hyundai-card.svg`,
-  KAKAOBANK: `${process.env.PUBLIC_URL}/assets/logo-kakaobank.svg`,
-  KOOKMIN_CARD: `${process.env.PUBLIC_URL}/assets/logo-kookmin-card.svg`,
-  LOTTE_CARD: `${process.env.PUBLIC_URL}/assets/logo-lotte-card.svg`,
-  SHINHAN_CARD: `${process.env.PUBLIC_URL}/assets/logo-shinhan-card.svg`,
-  WOORI_CARD: `${process.env.PUBLIC_URL}/assets/logo-woori-card.svg`,
+import { CREDIT_CARD_COMPANY } from "../types/card";
+
+export const CREDIT_CARD_COMPANY_LOGO: {
+  [key in CREDIT_CARD_COMPANY]: string;
+} = {
+  BC카드: `${process.env.PUBLIC_URL}/assets/logo-bc-card.svg`,
+  하나카드: `${process.env.PUBLIC_URL}/assets/logo-hana-card.svg`,
+  현대카드: `${process.env.PUBLIC_URL}/assets/logo-hyundai-card.svg`,
+  카카오뱅크: `${process.env.PUBLIC_URL}/assets/logo-kakaobank.svg`,
+  국민카드: `${process.env.PUBLIC_URL}/assets/logo-kookmin-card.svg`,
+  롯데카드: `${process.env.PUBLIC_URL}/assets/logo-lotte-card.svg`,
+  신한카드: `${process.env.PUBLIC_URL}/assets/logo-shinhan-card.svg`,
+  우리카드: `${process.env.PUBLIC_URL}/assets/logo-woori-card.svg`,
 };

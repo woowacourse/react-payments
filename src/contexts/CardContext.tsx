@@ -1,5 +1,5 @@
 import React, { Dispatch, createContext, useReducer } from "react";
-import { CreditCard } from "../types/card";
+import { CreditCard, CREDIT_CARD_COMPANY } from "../types/card";
 
 type Action =
   | { type: "SET_ORIGIN_NUMBER"; originNumber: string }
@@ -8,6 +8,7 @@ type Action =
   | { type: "SET_CARD_OWNER_NAME"; cardOwnerName: string }
   | { type: "SET_CARD_CVC"; cardCVC: string }
   | { type: "SET_PASSWORD"; cardPassword: [string, string] }
+  | { type: "SET_CARD_COMPANY"; cardCompany: CREDIT_CARD_COMPANY | null }
   | { type: "RESET" };
 
 type CardDispatch = Dispatch<Action>;
@@ -19,6 +20,7 @@ const initialState: CreditCard = {
   cardOwnerName: "",
   cardCVC: "",
   cardPassword: ["", ""],
+  cardCompany: null,
 };
 
 export const CardContext = createContext<CreditCard | null>(null);
@@ -55,6 +57,11 @@ function cardReducer(state: CreditCard, action: Action): CreditCard {
       return {
         ...state,
         cardPassword: action.cardPassword,
+      };
+    case "SET_CARD_COMPANY":
+      return {
+        ...state,
+        cardCompany: action.cardCompany,
       };
     case "RESET":
       return initialState;
