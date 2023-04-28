@@ -6,6 +6,7 @@ import CardRegistrationPage from "./components/pages/CardRegistrationPage";
 import { CardPublicInfo } from "./types/Card";
 import CardItemProvider from "./components/provider/CardItemProvider";
 import ModalProvider from "./components/provider/ModalProvider";
+import CardCompletePage from "./components/pages/CardCompletePage";
 
 function App() {
   const [cardList, setCardList] = useState<CardPublicInfo[]>([]);
@@ -13,6 +14,10 @@ function App() {
   const addCardItem = (cardItem: CardPublicInfo) => {
     const updatedCardList = [...cardList, cardItem];
     setCardList(updatedCardList);
+  };
+
+  const getCardItem = (id: number) => {
+    return cardList.find((card) => card.id === id);
   };
 
   return (
@@ -30,6 +35,7 @@ function App() {
               </ModalProvider>
             }
           />
+          <Route path="/complete/:id" element={<CardCompletePage getCardItem={getCardItem} />} />
         </Routes>
       </BrowserRouter>
     </AppContainer>
