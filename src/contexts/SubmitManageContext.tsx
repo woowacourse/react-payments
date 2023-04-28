@@ -1,22 +1,17 @@
 import { createContext } from "react";
-
-interface CompleteFlagsValue {
-  isCardNumberCompleted: boolean;
-  isExpiryDateCompleted: boolean;
-  isCVCCompleted: boolean;
-  isPasswordCompleted: boolean;
-}
-
-interface ValidFlagVlaue {
-  isCardNumbersValid: boolean;
-  isExpiryDateValid: boolean;
-}
+import { ValidFlagType, CompleteFlagsType } from "../types/input";
 
 interface SubmitManageContextValue {
-  isInputsCompleted: CompleteFlagsValue;
-  setIsInputsCompleted: React.Dispatch<CompleteFlagsValue>;
-  isInputsValid: ValidFlagVlaue;
-  setIsInputsValid: React.Dispatch<ValidFlagVlaue>;
+  isInputsCompleted: CompleteFlagsType;
+  isInputsValid: ValidFlagType;
+
+  setIsNumbersCompleted: (flag: boolean) => void;
+  setExpriyDateCompleted: (flag: boolean) => void;
+  setIsCVCCompleted: (flag: boolean) => void;
+  setIsPassWordCompleted: (flag: boolean) => void;
+
+  setIsNumbersValid: (flag: boolean) => void;
+  setIsExpiryDateValid: (flag: boolean) => void;
 }
 
 const defaultValue = {
@@ -26,12 +21,19 @@ const defaultValue = {
     isCVCCompleted: false,
     isPasswordCompleted: false,
   },
-  setIsInputsCompleted: () => {},
+
   isInputsValid: {
     isCardNumbersValid: true,
     isExpiryDateValid: true,
   },
-  setIsInputsValid: () => {},
+
+  setIsNumbersCompleted: () => {},
+  setExpriyDateCompleted: () => {},
+  setIsCVCCompleted: () => {},
+  setIsPassWordCompleted: () => {},
+
+  setIsNumbersValid: () => {},
+  setIsExpiryDateValid: () => {},
 };
 
 export const SubmitManageContext = createContext<SubmitManageContextValue>(defaultValue);

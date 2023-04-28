@@ -9,52 +9,49 @@ import { PasswordInput } from "./PasswordInput";
 
 import { validateCardNumbers, validateExpiryDate } from "../../validation/validation";
 import { useNavigate } from "react-router-dom";
-import { useCallback, useState, useContext, FormEvent } from "react";
+import { useContext, FormEvent } from "react";
 
-import { CardContext } from "../../contexts/CardContext";
+import { useCheckForm } from "../../hook/useCheckForm";
+
+import { CardsContext } from "../../contexts/CardsContext";
+import { NewCardContext } from "../../contexts/NewCardContext";
 import { SubmitManageContext } from "../../contexts/SubmitManageContext";
 
-interface CardFormProps {
-  newCard: CardType;
-  setNewCard: (value: CardType) => void;
-}
+export const CardForm = () => {
+  const { cards, addNewCard } = useContext(CardsContext);
+  const { newCard } = useContext(NewCardContext);
 
-export const CardForm = ({ newCard, setNewCard }: CardFormProps) => {
+  const {
+    isInputsCompleted,
+    setIsNumbersCompleted,
+    setExpriyDateCompleted,
+    setIsCVCCompleted,
+    setIsPassWordCompleted,
+
+    isInputsValid,
+    setIsNumbersValid,
+    setIsExpiryDateValid,
+
+    isAllCompleted,
+  } = useCheckForm();
+
   const navigate = useNavigate();
-  const { cards, addNewCard } = useContext(CardContext);
-
   const moveToHome = () => {
-    navigate("/");
+    navigate("/setAlias", { state: { newCard } });
   };
-
-  const [isInputsCompleted, setIsInputsCompleted] = useState({
-    isCardNumberCompleted: false,
-    isExpiryDateCompleted: false,
-    isCVCCompleted: false,
-    isPasswordCompleted: false,
-  });
-
-  const isAllCompleted = (): boolean => {
-    return Object.values(isInputsCompleted).every((isCompleted) => isCompleted);
-  };
-
-  const [isInputsValid, setIsInputsValid] = useState({
-    isCardNumbersValid: true,
-    isExpiryDateValid: true,
-  });
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!isAllCompleted()) return;
 
-    if (!validateExpiryDate(newCard.expiryDate)) {
-      setIsInputsValid({ ...isInputsValid, isExpiryDateValid: false });
+    if (!validateCardNumbers(newCard, cards)) {
+      setIsNumbersValid(false);
       return;
     }
 
-    if (!validateCardNumbers(newCard, cards)) {
-      setIsInputsValid({ ...isInputsValid, isCardNumbersValid: false });
+    if (!validateExpiryDate(newCard.expiryDate)) {
+      setIsExpiryDateValid(false);
       return;
     }
 
@@ -63,9 +60,9 @@ export const CardForm = ({ newCard, setNewCard }: CardFormProps) => {
     const cardInfo: CardType = {
       numbers: newCard.numbers,
       expiryDate: newCard.expiryDate,
-      owner: newCard.owner,
-      color: "#de75d0",
-      CVC: Number(data.cvc),
+      owner: newCard.owner ?? "",
+      brand: newCard.brand,
+      CVC: Number(data.CVC),
       password: [Number(data.password1), Number(data.password2)],
     };
 
@@ -73,21 +70,24 @@ export const CardForm = ({ newCard, setNewCard }: CardFormProps) => {
     moveToHome();
   };
 
-  const makeSetValue = useCallback(
-    (key: string) => (value: string) => {
-      setNewCard({ ...newCard, [key]: value });
-    },
-    [setNewCard, newCard]
-  );
-
   return (
     <Form onSubmit={handleSubmit}>
       <SubmitManageContext.Provider
-        value={{ isInputsCompleted, isInputsValid, setIsInputsCompleted, setIsInputsValid }}
+        value={{
+          isInputsCompleted,
+          setIsNumbersCompleted,
+          setExpriyDateCompleted,
+          setIsCVCCompleted,
+          setIsPassWordCompleted,
+
+          isInputsValid,
+          setIsNumbersValid,
+          setIsExpiryDateValid,
+        }}
       >
-        <CardNumberInput cardNumbers={newCard.numbers} setCardNumbers={makeSetValue("numbers")} />
-        <ExpiryDateInput setExpiryDate={makeSetValue("expiryDate")} />
-        <OwnerInput owner={newCard.owner} setOwner={makeSetValue("owner")} />
+        <CardNumberInput />
+        <ExpiryDateInput />
+        <OwnerInput />
         <CVCInput />
         <PasswordInput />
       </SubmitManageContext.Provider>

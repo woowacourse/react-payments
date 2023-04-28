@@ -1,13 +1,15 @@
 import { Home } from "./page/Home";
 import { AddCard } from "./page/AddCard";
+import { SetAlias } from "./page/SetAlias";
+
 import { GlobalStyle } from "./style/resetStyle";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 
-import useCards from "./hook/useCards";
-import { CardContext } from "./contexts/CardContext";
+import { useCards } from "./hook/useCards";
+import { CardsContext } from "./contexts/CardsContext";
 
 const App = () => {
-  const { cards, addNewCard } = useCards();
+  const { cards, addNewCard, setAlias } = useCards();
 
   return (
     <>
@@ -17,20 +19,21 @@ const App = () => {
           <Route
             path="/"
             element={
-              <CardContext.Provider value={{ cards, addNewCard }}>
+              <CardsContext.Provider value={{ cards, addNewCard }}>
                 <Home />
-              </CardContext.Provider>
+              </CardsContext.Provider>
             }
           />
           <Route
             path="/addCard"
             element={
-              <CardContext.Provider value={{ cards, addNewCard }}>
+              <CardsContext.Provider value={{ cards, addNewCard }}>
                 {" "}
                 <AddCard />
-              </CardContext.Provider>
+              </CardsContext.Provider>
             }
           />
+          <Route path="/setAlias" element={<SetAlias setAlias={setAlias} />} />
         </Routes>
       </BrowserRouter>
     </>

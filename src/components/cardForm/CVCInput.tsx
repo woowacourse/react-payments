@@ -16,18 +16,11 @@ const CVCInfo = {
 };
 
 const cannotInput = (text: string): boolean => {
-  return text.length > CVC_MAXLEGNTH || !NUMBER_REGEX.test(text);
+  return text.length > CVC_MAXLEGNTH || !new RegExp(NUMBER_REGEX).test(text);
 };
 
 export const CVCInput = () => {
-  const { setIsInputsCompleted, isInputsCompleted } = useContext(SubmitManageContext);
-
-  const setIsCompleted = useCallback(
-    (isCompleted: boolean) => {
-      setIsInputsCompleted({ ...isInputsCompleted, isCVCCompleted: isCompleted });
-    },
-    [isInputsCompleted, setIsInputsCompleted]
-  );
+  const { setIsCVCCompleted } = useContext(SubmitManageContext);
 
   const handleInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,12 +29,12 @@ export const CVCInput = () => {
         return;
       }
 
-      setIsCompleted(false);
+      setIsCVCCompleted(false);
       if (e.target.value.length === CVC_MAXLEGNTH) {
-        setIsCompleted(true);
+        setIsCVCCompleted(true);
       }
     },
-    [setIsCompleted]
+    [setIsCVCCompleted]
   );
 
   return (

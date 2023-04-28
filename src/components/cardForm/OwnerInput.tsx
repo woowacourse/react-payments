@@ -6,11 +6,9 @@ import styled from "styled-components";
 
 import { NAME_MAXLEGNTH } from "../../constants";
 
-interface OwnerInputProps {
-  setOwner: (value: string) => void;
-  owner: string | undefined;
-}
+import { NewCardContext } from "../../contexts/NewCardContext";
 
+import { useContext } from "react";
 const OwnerInfo = {
   label: "owner",
   placeholder: "카드에 표시된 이름과 동일하게 입력하세요.",
@@ -19,7 +17,9 @@ const OwnerInfo = {
   $textPosition: "left",
 };
 
-export const OwnerInput = ({ setOwner, owner }: OwnerInputProps) => {
+export const OwnerInput = () => {
+  const { setOwner, newCard } = useContext(NewCardContext);
+
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length > NAME_MAXLEGNTH) {
       e.target.value = e.target.value.slice(0, -1);
@@ -34,7 +34,7 @@ export const OwnerInput = ({ setOwner, owner }: OwnerInputProps) => {
     <Container>
       <Row>
         <InputLabel text="카드 소유자 이름 (선택)" name="owner" />
-        <InputLabel text={`${owner ? owner.length : "0"}/${NAME_MAXLEGNTH}`} name="ownerLength" />
+        <InputLabel text={`${newCard.owner ? newCard.owner.length : "0"}/${NAME_MAXLEGNTH}`} name="ownerLength" />
       </Row>
       <Input error={{ isValid: true, errorMessage: "" }} {...OwnerInfo} handleInput={handleInput} />
     </Container>

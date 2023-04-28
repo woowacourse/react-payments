@@ -3,11 +3,9 @@ import { Input } from "../common/Input";
 import { InputLabel } from "../common/InputLabel";
 import { EXPRIYDATE_MAXLEGNTH, EXPRIYDATE_REGEX, TWO_TO_NINE_REGEX } from "../../constants";
 import { SubmitManageContext } from "../../contexts/SubmitManageContext";
+import { NewCardContext } from "../../contexts/NewCardContext";
 
-import { useCallback, useContext } from "react";
-interface ExpiryDateInputProps {
-  setExpiryDate: (value: string) => void;
-}
+import { useContext } from "react";
 
 const paddingSingleDigitMonth = (expriyDate: string) => {
   if (expriyDate.length === 2 && !new RegExp(TWO_TO_NINE_REGEX).test(expriyDate[0])) {
@@ -25,22 +23,9 @@ const ExpiryDateInfo = {
   $textPosition: "center",
 };
 
-export const ExpiryDateInput = ({ setExpiryDate }: ExpiryDateInputProps) => {
-  const { isInputsCompleted, setIsInputsCompleted, isInputsValid, setIsInputsValid } = useContext(SubmitManageContext);
-
-  const setIsCompleted = useCallback(
-    (isCompleted: boolean) => {
-      setIsInputsCompleted({ ...isInputsCompleted, isExpiryDateCompleted: isCompleted });
-    },
-    [isInputsCompleted, setIsInputsCompleted]
-  );
-
-  const setIsValid = useCallback(
-    (isValid: boolean) => {
-      setIsInputsValid({ ...isInputsValid, isExpiryDateValid: isValid });
-    },
-    [isInputsValid, setIsInputsValid]
-  );
+export const ExpiryDateInput = () => {
+  const { isInputsValid, setExpriyDateCompleted, setIsExpiryDateValid } = useContext(SubmitManageContext);
+  const { setExpiryDate } = useContext(NewCardContext);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replaceAll(" / ", "");
@@ -55,10 +40,10 @@ export const ExpiryDateInput = ({ setExpiryDate }: ExpiryDateInputProps) => {
     e.target.value = (expriyDate.match(new RegExp(EXPRIYDATE_REGEX)) ?? []).join(" / ");
     setExpiryDate(e.target.value);
 
-    setIsCompleted(false);
-    setIsValid(true);
+    setExpriyDateCompleted(false);
+    setIsExpiryDateValid(true);
     if (value.length === EXPRIYDATE_MAXLEGNTH) {
-      setIsCompleted(true);
+      setExpriyDateCompleted(true);
     }
   };
 

@@ -4,12 +4,9 @@ import { Input } from "../common/Input";
 import { useState, useCallback, useContext } from "react";
 
 import { SubmitManageContext } from "../../contexts/SubmitManageContext";
-import { CARDNUMBERS_MAXLEGNTH, CARDNUMBERS_REGEX } from "../../constants";
+import { NewCardContext } from "../../contexts/NewCardContext";
 
-interface CardNumberInputProps {
-  cardNumbers: string;
-  setCardNumbers: (numbers: string) => void;
-}
+import { CARDNUMBERS_MAXLEGNTH, CARDNUMBERS_REGEX } from "../../constants";
 
 const cardNumberInputInfo = {
   label: "cardNumbers",
@@ -24,12 +21,12 @@ const hideNumbers = (numbers: string): string => {
   return (hiddenNumbers.match(new RegExp(CARDNUMBERS_REGEX)) ?? []).join(" - ");
 };
 
-const deleteLastNumber = (numbers: string, deletedChar: string): string => {
-  if (deletedChar === "●" && numbers.length > 12) {
+const deleteLastNumber = (numbers: string): string => {
+  if (numbers.length > 12) {
     return numbers.slice(0, 12);
   }
 
-  if (deletedChar === "●" && numbers.length > 8) {
+  if (numbers.length > 8) {
     return numbers.slice(0, 8);
   }
 
@@ -41,31 +38,18 @@ const cannotInput = (text: string): boolean => {
   return numbers.length > CARDNUMBERS_MAXLEGNTH || !/\d/g.test(text.slice(-1));
 };
 
-export const CardNumberInput = ({ cardNumbers, setCardNumbers }: CardNumberInputProps) => {
+export const CardNumberInput = () => {
   const [postText, setPostText] = useState("");
-  const { isInputsCompleted, setIsInputsCompleted, isInputsValid, setIsInputsValid } = useContext(SubmitManageContext);
-
-  const setIsCompleted = useCallback(
-    (isCompleted: boolean) => {
-      setIsInputsCompleted({ ...isInputsCompleted, isCardNumberCompleted: isCompleted });
-    },
-    [isInputsCompleted, setIsInputsCompleted]
-  );
-
-  const setIsValid = useCallback(
-    (isValid: boolean) => {
-      setIsInputsValid({ ...isInputsValid, isCardNumbersValid: isValid });
-    },
-    [isInputsValid, setIsInputsValid]
-  );
+  const { isInputsValid, setIsNumbersCompleted, setIsNumbersValid } = useContext(SubmitManageContext);
+  const { setNumbers, newCard } = useContext(NewCardContext);
 
   const saveNumbers = useCallback(
     (target: HTMLInputElement, numbers: string) => {
-      setCardNumbers(numbers);
+      setNumbers(numbers);
       setPostText(hideNumbers(numbers));
       target.value = hideNumbers(numbers);
     },
-    [setCardNumbers, setPostText]
+    [setNumbers, setPostText]
   );
 
   const handleInput = useCallback(
@@ -85,22 +69,22 @@ export const CardNumberInput = ({ cardNumbers, setCardNumbers }: CardNumberInput
           return;
         }
 
-        const addNumbers = `${cardNumbers}${text.slice(-1)}`;
+        const addNumbers = `${newCard.numbers}${text.slice(-1)}`;
         saveNumbers(e.target, addNumbers);
 
-        if (addNumbers.length === CARDNUMBERS_MAXLEGNTH) setIsCompleted(true);
+        if (addNumbers.length === CARDNUMBERS_MAXLEGNTH) setIsNumbersCompleted(true);
 
         return;
       }
 
       //문자가 제거 됐을 때
-      const minusNumbers = deleteLastNumber(cardNumbers, postText.slice(-1));
+      const minusNumbers = deleteLastNumber(newCard.numbers);
       saveNumbers(e.target, minusNumbers);
 
-      setIsValid(true);
-      setIsCompleted(false);
+      setIsNumbersValid(true);
+      setIsNumbersCompleted(false);
     },
-    [setIsCompleted, setIsValid, saveNumbers]
+    [setIsNumbersCompleted, setIsNumbersValid, saveNumbers]
   );
 
   return (

@@ -17,30 +17,22 @@ const passwordInfo = {
 };
 
 const cannotInput = (text: string): boolean => {
-  return text.length > PASSWORD_MAXLEGNTH || !/\d/g.test(text);
+  return text.length > PASSWORD_MAXLEGNTH || !new RegExp(NUMBER_REGEX).test(text);
 };
 
 export const PasswordInput = () => {
   const isPassWordsCompleted = useRef<boolean[]>(new Array(passwordInfo.length).fill(false));
-  const { setIsInputsCompleted, isInputsCompleted } = useContext(SubmitManageContext);
-
-  const setIsCompleted = useCallback(
-    (isCompleted: boolean) => {
-      setIsInputsCompleted({ ...isInputsCompleted, isPasswordCompleted: isCompleted });
-    },
-    [isInputsCompleted, setIsInputsCompleted]
-  );
+  const { setIsPassWordCompleted } = useContext(SubmitManageContext);
 
   const handleInput = useCallback(
     (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
       const text = e.target.value;
       if (text.length === 0) {
         isPassWordsCompleted.current[index] = false;
-        setIsCompleted(false);
+        setIsPassWordCompleted(false);
       }
 
       if (cannotInput(text)) {
-        console.log(text.length > PASSWORD_MAXLEGNTH || !NUMBER_REGEX.test(text));
         e.target.value = text.slice(0, -1);
         return;
       }
@@ -48,10 +40,10 @@ export const PasswordInput = () => {
       isPassWordsCompleted.current[index] = false;
       if (text.length === PASSWORD_MAXLEGNTH) isPassWordsCompleted.current[index] = true;
 
-      setIsCompleted(false);
-      if (isPassWordsCompleted.current.every((isCompleted) => isCompleted)) setIsCompleted(true);
+      setIsPassWordCompleted(false);
+      if (isPassWordsCompleted.current.every((isCompleted) => isCompleted)) setIsPassWordCompleted(true);
     },
-    [setIsCompleted, cannotInput, isPassWordsCompleted]
+    [setIsPassWordCompleted, cannotInput, isPassWordsCompleted]
   );
 
   return (

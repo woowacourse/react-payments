@@ -40,15 +40,17 @@ export const AddCard = () => {
     <>
       <HeaderWrapper>
         <Link to={"/"}>
-          <BackButton> «</BackButton>
+          <BackButton>«</BackButton>
         </Link>
         <Header text="카드 추가" />
       </HeaderWrapper>
+      <NewCardContext.Provider value={{ newCard, setNumbers, setExpiryDate, setBrand, setCVC, setPassword, setOwner }}>
       <Main>
           <CardItem card={newCard} handleClick={handleClickOpenModalButton} />
           <CardForm />
           {isModalOpen && <BrandSelectModal closeModal={closeModal} />}
       </Main>
+      </NewCardContext.Provider>
     </>
   );
 };
