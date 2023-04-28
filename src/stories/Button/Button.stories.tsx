@@ -14,6 +14,8 @@ export const BasicButton: Story = {
   args: {
     designType: 'basic',
     children: 'Button',
+    color: 'white',
+    backgroundColor: '#1e77a8ac',
   },
 };
 
@@ -21,5 +23,6 @@ export const TextButton: Story = {
   args: {
     designType: 'text',
     children: 'Button',
+    color: '#1e77a8ac',
   },
 };

@@ -2,12 +2,13 @@ import styled from 'styled-components';
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   designType?: 'basic' | 'text';
+  backgroundColor?: string;
   children?: React.ReactNode;
 }
 
-export function Button({ type = 'submit', designType = 'basic', children, ...props }: Props) {
+export function Button({ designType = 'basic', backgroundColor, children, ...props }: Props) {
   return (
-    <Style.Button type={type} className={designType} {...props}>
+    <Style.Button className={designType} backgroundColor={backgroundColor} {...props}>
       {children}
     </Style.Button>
   );
@@ -20,9 +21,9 @@ const Style = {
     border: none;
     border-radius: 7px;
     outline: 0;
-    background-color: #1e77a8ac;
+    background-color: ${(props) => (props.backgroundColor ? props.backgroundColor : '#1e77a8ac')};
 
-    color: white;
+    color: ${(props) => (props.color ? props.color : 'white')};
     font-size: 24px;
     font-weight: 600;
 
@@ -32,7 +33,7 @@ const Style = {
       min-width: min-content;
       min-height: min-content;
 
-      color: black;
+      color: ${(props) => (props.color ? props.color : 'black')};
       font-size: 16px;
       font-weight: bold;
       background-color: transparent;
