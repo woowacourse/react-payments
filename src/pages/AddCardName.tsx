@@ -16,11 +16,9 @@ export function AddCardName() {
     cardRegisterValidator.nickname
   );
 
-  console.log(location.state);
-
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    currentCardInfo.NICKNAME = value;
+    currentCardInfo.nickname = value;
 
     cardList.updateData(currentCardInfo);
 
