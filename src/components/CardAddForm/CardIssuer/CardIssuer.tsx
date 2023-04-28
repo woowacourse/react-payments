@@ -1,5 +1,5 @@
 import styles from './style.module.css';
-import { FocusEvent, KeyboardEvent, MouseEvent, memo, useState } from 'react';
+import { FocusEvent, KeyboardEvent, MouseEvent, memo, useRef, useState } from 'react';
 import type { CardFormData, CardFormValidation, Issuer } from '../../../types';
 import { useModalContext } from '../../../contexts/ModalContext';
 import CardIssuerSelection from './CardIssuerSelection/CardIssuerSelection';
@@ -18,10 +18,16 @@ interface CardIssuerProps {
 function CardIssuer({ isError, updateInputValue, updateInputError }: CardIssuerProps) {
   const { isModalOpen, openModal, closeModal } = useModalContext();
   const [value, setValue] = useState<Issuer | ''>('');
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  const focusButton = () => {
+    buttonRef.current?.focus();
+  };
 
   const handleCloseModal = () => {
     updateInputError('issuer', value);
     closeModal();
+    focusButton();
   };
 
   const onClosePress = (event: KeyboardEvent<HTMLElement>) => {
@@ -46,6 +52,7 @@ function CardIssuer({ isError, updateInputValue, updateInputError }: CardIssuerP
     setValue(event.currentTarget.value as Issuer);
     updateInputValue('issuer', event.currentTarget.value as Issuer);
     closeModal();
+    focusButton();
   };
 
   return (
@@ -60,6 +67,7 @@ function CardIssuer({ isError, updateInputValue, updateInputError }: CardIssuerP
         카드사
       </Label>
       <Button
+        ref={buttonRef}
         type="button"
         id="issuer"
         name="issuer"
@@ -69,7 +77,6 @@ function CardIssuer({ isError, updateInputValue, updateInputError }: CardIssuerP
         icon={DownIcon}
         value={value}
         autoFocus
-        tabIndex={1}
         onClick={openModal}
         onBlur={onBlur}
         onKeyDown={onKeyDown}
