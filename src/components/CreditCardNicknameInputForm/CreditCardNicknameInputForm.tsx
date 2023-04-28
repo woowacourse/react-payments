@@ -1,7 +1,28 @@
 import Box from 'components/Box';
 import CreditCard from 'components/CreditCard/CreditCard';
 import FlexBox from 'components/FlexBox';
+import styled from 'styled-components';
 import * as T from 'types';
+
+const NicknameInput = styled.input`
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-top-width: 0px;
+    border-bottom-width: 1px;
+
+    width: 100%;
+    
+    padding: 10px;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+`;
 
 interface CreditCardNicknameInputFormProps {
   creditCardForm: T.CreditCard;
@@ -34,7 +55,13 @@ function CreditCardNicknameInputForm(
       <Box mt={3} mb={3}>
 
         <FlexBox justifyContent="center">
-          <input value={nickname} onChange={handleNicknameInput} />
+          <Box mt={6} mb={3}>
+            <NicknameInput
+              value={nickname}
+              onChange={handleNicknameInput}
+              placeholder="카드 별명을 입력하세요"
+            />
+          </Box>
         </FlexBox>
       </Box>
     </Box>
