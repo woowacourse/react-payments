@@ -1,4 +1,3 @@
-import type { PropsWithChildren } from 'react';
 import { useMemo } from 'react';
 import { RouterProvider } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
@@ -19,8 +18,7 @@ const Container = styled.div`
   height: 100vh;
 `;
 
-const PaymentsThemeProvider = (props: PropsWithChildren) => {
-  const { children } = props;
+export const App = () => {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
   const theme = useMemo(() => (prefersDarkMode ? dark : light), [prefersDarkMode]);
 
@@ -29,19 +27,11 @@ const PaymentsThemeProvider = (props: PropsWithChildren) => {
       <ResetStyle />
       <GlobalStyle />
 
-      {children}
-    </ThemeProvider>
-  );
-};
-
-export const App = () => {
-  return (
-    <PaymentsProvider>
-      <PaymentsThemeProvider>
+      <PaymentsProvider>
         <Container>
           <RouterProvider router={router} />
         </Container>
-      </PaymentsThemeProvider>
-    </PaymentsProvider>
+      </PaymentsProvider>
+    </ThemeProvider>
   );
 };
