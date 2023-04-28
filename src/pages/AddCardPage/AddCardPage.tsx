@@ -7,7 +7,6 @@ import CardSecurityCodeInput from "../../components/CardSecurityCodeInput/CardSe
 import CardPasswordInput from "../../components/CardPasswordInput/CardPasswordInput";
 import Modal from "../../components/common/Modal/Modal";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import { Container } from "../../components/common";
 import { useState } from "react";
 import {
