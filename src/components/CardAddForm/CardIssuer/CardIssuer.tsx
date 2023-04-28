@@ -1,12 +1,12 @@
 import styles from './style.module.css';
-import { FocusEvent, KeyboardEvent, MouseEvent, memo, useRef, useState } from 'react';
+import { FocusEvent, KeyboardEvent, MouseEvent, memo, useState } from 'react';
 import type { CardFormData, CardFormValidation, Issuer } from '../../../types';
+import { useModalContext } from '../../../contexts/ModalContext';
 import CardIssuerSelection from './CardIssuerSelection/CardIssuerSelection';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
 import Button from '../../common/Button/Button';
 import Modal from '../../common/Modal/Modal';
-import { useModal } from '../../../hooks/common/useModal';
 import DownIcon from '../../../assets/down-icon.svg';
 
 interface CardIssuerProps {
@@ -16,9 +16,8 @@ interface CardIssuerProps {
 }
 
 function CardIssuer({ isError, updateInputValue, updateInputError }: CardIssuerProps) {
-  const { isModalOpen, openModal, closeModal } = useModal();
+  const { isModalOpen, openModal, closeModal } = useModalContext();
   const [value, setValue] = useState<Issuer | ''>('');
-  const modalRef = useRef<HTMLDivElement>(null);
 
   const handleCloseModal = () => {
     updateInputError('issuer', value);
@@ -38,7 +37,7 @@ function CardIssuer({ isError, updateInputValue, updateInputError }: CardIssuerP
   };
 
   const onBlur = (event: FocusEvent<HTMLButtonElement>) => {
-    if (modalRef.current && modalRef.current.contains(event.relatedTarget)) return;
+    if (isModalOpen) return;
 
     updateInputError('issuer', event.currentTarget.value as Issuer);
   };
@@ -78,12 +77,7 @@ function CardIssuer({ isError, updateInputValue, updateInputError }: CardIssuerP
         {value ? `${value}` : '카드사를 선택해주세요'}
       </Button>
       {isModalOpen && (
-        <Modal
-          ref={modalRef}
-          isOpen={isModalOpen}
-          close={handleCloseModal}
-          onKeyDown={onClosePress}
-        >
+        <Modal onKeyDown={onClosePress}>
           <CardIssuerSelection onOptionClick={onOptionClick} close={handleCloseModal} />
         </Modal>
       )}
