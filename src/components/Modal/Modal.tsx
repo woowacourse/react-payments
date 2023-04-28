@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import styled from 'styled-components';
+import { Button } from '../Button/Button';
 
 interface Props {
   isOpen: boolean;
@@ -27,12 +28,21 @@ export function Modal({ isOpen, setIsOpen, children }: Props) {
   return (
     <>
       <Style.Backdrop isOpen={isOpen} onClick={closeModal} />
-      <Style.Wrapper open={isOpen}>
-        <Style.CloseButton type={'button'} aria-label={'카드사 선택창 닫기'} onClick={closeModal}>
-          x
-        </Style.CloseButton>
+      <Style.Container open={isOpen}>
         {children}
-      </Style.Wrapper>
+        <Style.ButtonWrapper>
+          <Button
+            type={'button'}
+            onClick={closeModal}
+            width={'368px'}
+            height={'45px'}
+            backgroundColor=' #75c4d2;'
+            fontSize={'14px'}
+          >
+            카드사 선택 완료
+          </Button>
+        </Style.ButtonWrapper>
+      </Style.Container>
     </>
   );
 }
@@ -61,9 +71,9 @@ const Style = {
     }
   `,
 
-  Wrapper: styled.dialog<{ open: boolean }>`
+  Container: styled.dialog<{ open: boolean }>`
     display: ${(props) => (props.open ? 'flex' : 'none')};
-
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 
@@ -91,15 +101,14 @@ const Style = {
     }
   `,
 
-  CloseButton: styled.button`
-    all: unset;
+  ButtonWrapper: styled.div`
+    display: flex;
+    justify-content: center;
 
-    position: absolute;
-    top: 10px;
-    right: 10px;
+    width: 100%;
+    margin-top: 20px;
 
     font-size: 20px;
-    color: #7d7d7d;
 
     cursor: pointer;
   `,

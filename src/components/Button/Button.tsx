@@ -25,10 +25,10 @@ const Style = {
     border: none;
     border-radius: 7px;
     outline: 0;
-    background-color: ${(props) => (props.backgroundColor ? props.backgroundColor : '#1e77a8ac')};
+    background-color: ${(props) => (props.backgroundColor ? props.backgroundColor : '#75c4d2')};
 
     color: ${(props) => (props.color ? props.color : 'white')};
-    font-size: 24px;
+    font-size: ${(props) => (props.fontSize ? props.fontSize : '24px')};
     font-weight: 600;
 
     cursor: pointer;
@@ -45,6 +45,11 @@ const Style = {
 
     &:disabled {
       color: #aeadb0;
+    }
+
+    &:hover {
+      transition: all 0.2s linear;
+      transform: scale(1.01);
     }
   `,
 };
