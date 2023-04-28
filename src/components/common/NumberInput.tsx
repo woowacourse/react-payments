@@ -13,5 +13,13 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>((props
     onChange?.(value);
   };
 
-  return <Input ref={ref} onChange={handleInputChange} {...inputProps} />;
+  return (
+    <Input
+      ref={ref}
+      type="number"
+      inputMode="numeric"
+      onChange={handleInputChange}
+      {...inputProps}
+    />
+  );
 });
