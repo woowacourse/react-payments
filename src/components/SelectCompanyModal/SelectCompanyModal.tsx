@@ -6,7 +6,7 @@ interface Props {
   onClose: () => void;
 }
 
-const BankSelectModal = ({ onClose }: Props) => {
+const SelectCompanyModal = ({ onClose }: Props) => {
   const companyList = [...Object.keys(KOR_NAME_BY_CARD_COMPANY)] as CardCompanyEng[];
 
   return (
@@ -22,7 +22,7 @@ const BankSelectModal = ({ onClose }: Props) => {
   );
 };
 
-export default BankSelectModal;
+export default SelectCompanyModal;
 
 const StyledContainer = styled.div`
   display: grid;

@@ -3,7 +3,7 @@ import { CreditCardContext } from '../../contexts/CreditCardContext';
 import CardRegisterForm from '../registerForm/cardRegisterForm/CardRegisterForm';
 import { useContext } from 'react';
 
-import BankSelectModal from '../selectCompanyModal/SelectCompanyModal';
+import SelectCompanyModal from '../selectCompanyModal/SelectCompanyModal';
 import useBottomModal from '../../hooks/useBottomModal';
 import CreditCardContextType from '../../@types/creditCardContextType';
 
@@ -23,7 +23,7 @@ function RegisterPage() {
       />
       <CardRegisterForm />
       <BottomModal>
-        <BankSelectModal onClose={closeModal}></BankSelectModal>
+        <SelectCompanyModal onClose={closeModal}></SelectCompanyModal>
       </BottomModal>
     </>
   );
