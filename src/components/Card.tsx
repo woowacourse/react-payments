@@ -1,5 +1,6 @@
 import type { CardProps } from '../type';
 import { changeNumberToMask, getBackgroundStyleByCardType } from '../utils/util';
+import { formatExpireDate } from './format';
 import './Card.css';
 
 const Card = ({
@@ -29,11 +30,10 @@ const Card = ({
       </div>
       <div className="card-track-4">
         <span className="card-owner-view">{cardOwner}</span>
-        <span>{`${expireYear}/${expireMonth}`}</span>
+        <span>{formatExpireDate(expireYear, expireMonth)}</span>
       </div>
     </div>
   );
 };
-// TODO: 만료일 입력 로직 외부로 분리
 
 export default Card;
