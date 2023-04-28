@@ -1,5 +1,5 @@
 import styles from './style.module.css';
-import { FormEvent, useEffect, useRef } from 'react';
+import { FormEvent, useRef } from 'react';
 import { CardFormData, CardFormValidation } from '../../types';
 import CardIssuer from './CardIssuer/CardIssuer';
 import CardNumber from './CardNumber/CardNumber';
@@ -23,13 +23,6 @@ function CardAddForm({
   handleSubmit,
 }: CardAddFormProps) {
   const formRef = useRef<HTMLFormElement>(null);
-  const inputRefs = useRef<(HTMLInputElement | HTMLButtonElement)[]>([]);
-
-  useEffect(() => {
-    if (formRef.current) {
-      inputRefs.current = Array.from(formRef.current.querySelectorAll('input, button'));
-    }
-  }, [formRef]);
 
   return (
     <form ref={formRef} className={styles.form} noValidate onSubmit={handleSubmit}>
