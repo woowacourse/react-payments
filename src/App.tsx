@@ -30,6 +30,7 @@ export default function App() {
     } = event.currentTarget;
 
     const newCard: CardInfo = {
+      cardTitle: "BC",
       cardNumber: {
         fisrt: firstCardNumber.value,
         second: secondCardNumber.value,

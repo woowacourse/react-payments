@@ -23,6 +23,7 @@ import {
 } from "./AddCardPage.styles";
 import { useCardForm } from "../../hooks/useCardForm";
 import CardTypeDrawer from "../CardTypeDrawer";
+import { CARD_COMPANYS } from "../../constant";
 
 interface AddCardPageProps {
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
@@ -60,6 +61,8 @@ export default function AddCardPage({ onSubmit, onClick }: AddCardPageProps) {
         </TitleWrapper>
         <CardWrapper>
           <Card
+            cardColor={CARD_COMPANYS["BC"].backgroundColor}
+            cardTitle={CARD_COMPANYS["BC"].title}
             cardNumberSet={[
               firstCardNumber.value,
               secondCardNumber.value,

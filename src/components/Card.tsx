@@ -1,16 +1,18 @@
 import styled from "styled-components";
 
 interface CardProps {
+  cardColor: string;
+  cardTitle: string;
   cardNumberSet: string[];
   owner: string;
   expiracy: string;
 }
 
-const StyledCard = styled.div`
+const StyledCard = styled.div<{ cardColor: string }>`
   width: 213px;
   height: 133px;
-  background: #333;
   box-shadow: 3px 3px 5px #00000040;
+  background: ${(props) => props.cardColor ?? "#333"};
   border-radius: 5px;
   padding: 18px;
   display: flex;
@@ -19,10 +21,10 @@ const StyledCard = styled.div`
   position: relative;
 `;
 const StyledTitle = styled.div`
-  color: #383838;
+  color: rgb(255, 255, 255);
   font-size: 12px;
   height: 14px;
-  margin-bottom: 22px;
+  margin-bottom: 82px;
 `;
 const StyledMagnet = styled.div`
   background: #cbba64;
@@ -74,10 +76,16 @@ const StyledExpiracy = styled.span`
 
 const ENCRYPT_INDEX = 2;
 
-export default function Card({ cardNumberSet, owner, expiracy }: CardProps) {
+export default function Card({
+  cardColor,
+  cardTitle,
+  cardNumberSet,
+  owner,
+  expiracy,
+}: CardProps) {
   return (
-    <StyledCard>
-      <StyledTitle></StyledTitle>
+    <StyledCard cardColor={cardColor}>
+      <StyledTitle>{cardTitle}</StyledTitle>
       <StyledMagnet />
       <div>
         <StyledCardNumber>

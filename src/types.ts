@@ -1,4 +1,5 @@
 export interface CardInfo {
+  cardTitle: string,
   cardNumber: {
     fisrt: string,
     second: string,

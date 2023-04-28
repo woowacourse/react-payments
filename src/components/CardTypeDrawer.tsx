@@ -37,7 +37,7 @@ export default function CardTypeDrawer() {
     <Drawer isOpenDrawer>
       <Wrapper>
         {COMPANY_LIST.map((company) => (
-          <CardLogo onClick={() => {}} cardName={company} />
+          <CardLogo key={`${company}`} onClick={() => {}} cardName={company} />
         ))}
       </Wrapper>
     </Drawer>
