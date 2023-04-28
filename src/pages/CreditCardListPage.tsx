@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Page } from '../components/common/Page';
+import { Text } from '../components/common/Text';
 import { CreditCardView } from '../components/payments/CreditCardView';
 import { NewCreditCardButton } from '../components/payments/NewCreditCardButton';
 import { NewCreditCardVendorBottomSheet } from '../components/payments/NewCreditCardVendorBottomSheet';
@@ -12,10 +13,26 @@ import { usePayments } from '../hooks/usePayments';
 
 const Content = styled.main`
   display: flex;
-  flex-direction: column;
-  gap: 46px;
   align-items: center;
+  flex-direction: column;
+  gap: 24px;
+
   flex: 1;
+
+  padding-bottom: 48px;
+`;
+
+const CreditCardList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+`;
+
+const CreditCardListItem = styled.li`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
 `;
 
 export const CreditCardListPage = () => {
@@ -38,17 +55,21 @@ export const CreditCardListPage = () => {
     <Page>
       <Page.Header>보유카드</Page.Header>
       <Content>
-        {creditCards.map((creditCard) => (
-          <CreditCardView
-            key={creditCard.cardNumbers}
-            vendor={creditCard.vendor}
-            owner={creditCard.owner}
-            cardNumbers={creditCard.cardNumbers}
-            expirationDate={creditCard.expirationDate}
-            color={CreditCardVendors[creditCard.vendor].color}
-            icon={<VendorIcon vendor={creditCard.vendor} />}
-          />
-        ))}
+        <CreditCardList>
+          {creditCards.map((creditCard) => (
+            <CreditCardListItem key={creditCard.cardNumbers}>
+              <CreditCardView
+                vendor={creditCard.vendor}
+                owner={creditCard.owner}
+                cardNumbers={creditCard.cardNumbers}
+                expirationDate={creditCard.expirationDate}
+                color={CreditCardVendors[creditCard.vendor].color}
+                icon={<VendorIcon vendor={creditCard.vendor} />}
+              />
+              <Text weight="bold">{creditCard.displayName}</Text>
+            </CreditCardListItem>
+          ))}
+        </CreditCardList>
 
         <NewCreditCardButton
           helperText={creditCards.length === 0}
