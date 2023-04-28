@@ -6,11 +6,11 @@ import { Header, BackButton, CardPreview } from '../components/common';
 import { CardInfoProvider } from '../contexts/cardInfo';
 
 export function AddCard() {
+  const [isModalOpen, setIsModalOpen] = useState(true);
+
   function handleClickButton() {
     setIsModalOpen(!isModalOpen);
   }
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <CardInfoProvider>
@@ -20,7 +20,7 @@ export function AddCard() {
           <CardPreview></CardPreview>
           <CardRegisterForm></CardRegisterForm>
           <_CompanySelectButton onClick={handleClickButton}>
-            카드 회사 고르기
+            카드사 재선택
           </_CompanySelectButton>
         </_Section>
       </_AddCardContainer>
