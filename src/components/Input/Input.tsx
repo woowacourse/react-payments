@@ -36,6 +36,7 @@ const Input = ({
       ref={inputRef}
       maxLength={maxLength}
       autoFocus={isFocus}
+      autoComplete="on"
     />
   );
 };
