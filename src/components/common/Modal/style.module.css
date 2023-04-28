@@ -1,9 +1,11 @@
 .container {
+  position: relative;
   background: transparent;
   border: none;
   z-index: 10000;
   width: 100%;
   height: 100%;
+  z-index: 999999;
 }
 
 .backdrop {
@@ -31,6 +33,73 @@
 
   border: none;
   outline: 0;
+
+  opacity: 0;
+  transform: translate(0, 100%);
+}
+
+.openModal {
+  animation: openModalAnimation 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) 0.2s forwards;
+}
+
+.closeModal {
+  opacity: 1;
+  transform: translate(0, 0);
+  animation: closeModalAnimation 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) 0.1s forwards;
+}
+
+.openBackdrop {
+  animation: showBackdropAnimation 0.2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+.closeBackdrop {
+  animation: hideBackdropAnimation 0.2s cubic-bezier(0.165, 0.84, 0.44, 1) 0.2s forwards;
+}
+
+@keyframes openModalAnimation {
+  0% {
+    opacity: 0;
+    transform: translate(0, 100%);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes closeModalAnimation {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(0, 100%);
+  }
+}
+
+@keyframes showBackdropAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes hideBackdropAnimation {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 @media screen and (max-width: 600px) {

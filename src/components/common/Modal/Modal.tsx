@@ -1,41 +1,41 @@
 import styles from './style.module.css';
-import {
-  ComponentPropsWithRef,
-  ForwardedRef,
-  ReactNode,
-  forwardRef,
-  useEffect,
-  useRef,
-} from 'react';
+import { ComponentPropsWithoutRef, ReactNode, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
+import { useModalContext } from '../../../contexts/ModalContext';
 import { useScrollStop } from '../../../hooks/common/useScrollStop';
 
-interface ModalProps extends ComponentPropsWithRef<'div'> {
+interface ModalProps extends ComponentPropsWithoutRef<'div'> {
   children: ReactNode;
-  isOpen: boolean;
-  close: () => void;
 }
 
-function Modal(
-  { isOpen, children, close, onKeyDown }: ModalProps,
-  ref: ForwardedRef<HTMLDivElement>
-) {
-  const modalContainerRef = useRef<HTMLDivElement>(null);
-  useScrollStop(isOpen);
+function Modal({ children, onKeyDown }: ModalProps) {
+  const { isModalOpen, isVisible, closeModal } = useModalContext();
+  const containerRef = useRef<HTMLDivElement>(null);
+  useScrollStop(isModalOpen);
 
   useEffect(() => {
-    if (modalContainerRef.current) {
-      modalContainerRef.current.focus();
+    if (containerRef.current) {
+      containerRef.current.focus();
     }
   }, []);
 
-  return (
-    <div ref={ref} className={styles.container}>
-      <div className={styles.backdrop} onClick={close} />
-      <div ref={modalContainerRef} className={styles.content} onKeyDown={onKeyDown} tabIndex={0}>
+  return createPortal(
+    <div role="dialog" aria-modal className={styles.container}>
+      <div
+        className={`${styles.backdrop} ${isVisible ? styles.openBackdrop : styles.closeBackdrop}`}
+        onClick={closeModal}
+      />
+      <div
+        ref={containerRef}
+        className={`${styles.content} ${isVisible ? styles.openModal : styles.closeModal}`}
+        onKeyDown={onKeyDown}
+        tabIndex={0}
+      >
         {children}
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 
-export default forwardRef(Modal);
+export default Modal;
