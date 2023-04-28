@@ -1,12 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
-import styled from 'styled-components';
 import { BottomSheet } from './BottomSheet';
+import { Button } from './Button';
 import { Text } from './Text';
-
-const Button = styled.button`
-  padding: 8px;
-`;
 
 const meta = {
   title: 'common/BottomSheet',
