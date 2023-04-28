@@ -46,6 +46,10 @@ const ChangeButton = styled.button`
   border-radius: 7px;
 
   cursor: pointer;
+  transition: 0.3s;
+  &:hover {
+    background-color: #cecece;
+  }
 `;
 
 export default CardCompany;

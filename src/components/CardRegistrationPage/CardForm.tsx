@@ -31,9 +31,7 @@ const CardForm = ({ onSubmitForm }: CardFormProps) => {
       <NameInput />
       <SecurityCodeInput />
       <PasswordInput />
-      <ButtonWrapper>
-        <Button isActive={buttonActive}>다음</Button>
-      </ButtonWrapper>
+      <Button disabled={!buttonActive}>다음</Button>
     </FormContainer>
   );
 };
@@ -43,10 +41,6 @@ const FormContainer = styled.form`
   flex-direction: column;
   gap: 12px;
   padding: 28px;
-`;
-
-const ButtonWrapper = styled.div`
-  align-self: flex-end;
 `;
 
 export default CardForm;

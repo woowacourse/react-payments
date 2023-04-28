@@ -1,17 +1,29 @@
 import styled from "styled-components";
 
-const Button = styled.button<{ isActive: boolean }>`
-  visibility: ${({ isActive }) => (isActive ? "visible" : "hidden")};
+const Button = styled.button`
+  width: 100%;
+  height: 45px;
 
-  padding: 10px 20px;
-
-  background-color: transparent;
+  background-color: #383838;
   border: none;
+  border-radius: 7px;
 
   font-weight: 700;
   font-size: 14px;
+  color: white;
 
   cursor: pointer;
+
+  transition: 0.3s;
+
+  &:disabled {
+    background-color: #d1d1d1;
+    cursor: not-allowed;
+  }
+
+  &:hover:enabled {
+    opacity: 0.8;
+  }
 `;
 
 export default Button;

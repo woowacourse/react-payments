@@ -42,9 +42,7 @@ const CardCompletePage = ({ getCardItem, setCardNickName }: CardCompletePageProp
         <Title title="카드 등록에 실패했습니다." size="large" />
       )}
       <ButtonContainer>
-        <Button onClick={handleClickButton} isActive>
-          확인
-        </Button>
+        <Button onClick={handleClickButton}>확인</Button>
       </ButtonContainer>
     </PageContainer>
   );
@@ -68,7 +66,7 @@ const InputWrapper = styled.div`
 `;
 
 const ButtonContainer = styled.div`
-  align-self: flex-end;
+  width: 100%;
   margin-top: 120px;
 `;
 

@@ -1,9 +1,9 @@
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 const AddCardButton = () => {
   return (
-    <Link to={'/register'}>
+    <Link to={"/register"}>
       <AddCardButtonBox>+</AddCardButtonBox>
     </Link>
   );
@@ -21,6 +21,11 @@ const AddCardButtonBox = styled.button`
   font-size: 30px;
 
   cursor: pointer;
+  transition: 0.3s;
+
+  &:hover {
+    background: #a8a8a8;
+  }
 `;
 
 export default AddCardButton;
