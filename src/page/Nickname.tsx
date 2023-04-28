@@ -13,8 +13,10 @@ export const Nickname = () => {
   const moveTo = useNavigate();
 
   const handleClick = () => {
-    const nickname = nicknameRef.current?.value;
-    updateCard(newCard.id, { nickname });
+    const nickname = nicknameRef.current?.value.trim();
+    if (nickname) {
+      updateCard(newCard.id, { nickname });
+    }
 
     moveTo("/");
   };
@@ -22,7 +24,7 @@ export const Nickname = () => {
   return (
     <Container>
       <Title>카드 등록이 완료되었습니다.</Title>
-      <SubTitle>닉네임을 정할 수 있습니다.</SubTitle>
+      <SubTitle>닉네임을 설정할 수 있습니다.</SubTitle>
       <CardItem card={newCard} />
       <NickNameInput autoFocus ref={nicknameRef} />
       <SubmitButton onClick={handleClick}>확인</SubmitButton>
@@ -47,8 +49,9 @@ const Title = styled.h1`
 `;
 
 const SubTitle = styled.h4`
-  font-size: 15px;
+  font-size: 14px;
   margin-bottom: 10px;
+  color: gray;
 `;
 
 const NickNameInput = styled.input`
