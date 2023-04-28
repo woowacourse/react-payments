@@ -21,6 +21,7 @@ const Card = ({ cardNumber, ownerName, expirationDate, cardCompany, onClick }: C
       cardColor={COLOR_BY_CARD_COMPANY[cardCompany]}
       cardCompany={cardCompany}
       color={cardCompany === 'hyundai' ? 'white' : 'black'}
+      data-testid={'card-image'}
     >
       <span>{KOR_NAME_BY_CARD_COMPANY[cardCompany]}</span>
       <StyleCardChip />

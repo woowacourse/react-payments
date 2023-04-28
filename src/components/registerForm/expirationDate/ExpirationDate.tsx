@@ -81,6 +81,7 @@ function ExpirationDate() {
       <FormLabel>{'만료일'}</FormLabel>
       <div style={{ display: 'flex', columnGap: '10px' }}>
         <Input
+          data-testid="expiration-date-0"
           value={creditCard.expirationDate[0]}
           ref={(el: HTMLInputElement) => {
             inputListRef.current[0] = el;
@@ -96,6 +97,7 @@ function ExpirationDate() {
         />
 
         <Input
+          data-testid="expiration-date-1"
           value={creditCard.expirationDate[1]}
           ref={(el: HTMLInputElement) => {
             inputListRef.current[1] = el;

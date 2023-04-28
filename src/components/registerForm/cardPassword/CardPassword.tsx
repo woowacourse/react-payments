@@ -62,6 +62,7 @@ function CardPassword() {
       <PasswordInputContainer>
         {Array.from({ length: 2 }, (_, index) => (
           <Input
+            data-testid={`password-${index}`}
             key={`card-password-${index}`}
             value={creditCard.password[index]}
             onChange={handleChangeByIndex(index)}

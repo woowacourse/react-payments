@@ -5,6 +5,14 @@ import Card from './Card';
 const meta = {
   component: Card,
   title: 'Card',
+  tags: ['autodocs'],
+  argTypes: {
+    cardCompany: {
+      defaultValue: 'hyundai',
+      control: { type: 'radio' },
+    },
+    onClick: { action: 'clicked' },
+  },
 } satisfies Meta<typeof Card>;
 
 export default meta;
@@ -13,11 +21,10 @@ type Story = StoryObj<typeof meta>;
 
 export const Example = {
   args: {
-    ownerName: 'Ukko',
-    cardNumber: ['1234', '1234', '1234', '1234'],
+    cardCompany: 'hyundai',
+    ownerName: 'UKKO',
+    cardNumber: ['1111', '2222', '3333', '4444'],
     expirationDate: ['12', '24'],
-    cardCompany: 'shinhan',
-    onClick: () => {},
   },
 
   render: (args) => <Card {...args}></Card>,

@@ -30,6 +30,7 @@ const CardCompanyIconBox = ({ cardCompany, onClose }: Props) => {
         data-company={cardCompany}
         src={ICON_BY_CARD_COMPANY[cardCompany]}
         onClick={handleClickImage}
+        data-testid={`company-icon-${cardCompany}`}
       ></StyledBankImage>
       <p>{KoreanName}</p>
     </ImageContainer>

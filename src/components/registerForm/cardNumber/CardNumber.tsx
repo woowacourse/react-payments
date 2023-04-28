@@ -73,6 +73,7 @@ export const CardNumber = () => {
       <CardNumberInputContainer>
         {Array.from({ length: 4 }, (_, index) => (
           <Input
+            data-testid={`card-number-${index}`}
             key={`card-number-${index}`}
             value={creditCard.cardNumber[index]}
             onChange={handleChangeByIndex(index)}

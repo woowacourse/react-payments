@@ -54,6 +54,7 @@ function SecurityCode() {
     <InputWrapper>
       <FormLabel>{'보안 코드(CVC/CVV)'}</FormLabel>
       <Input
+        data-testid="security-code"
         value={creditCard.securityCode}
         onChange={_onChange}
         onBlur={_onBlur}

@@ -37,7 +37,7 @@ function CardRegisterForm() {
       <CardPassword />
       {hasShowButton && (
         <div style={{ display: 'flex', justifyContent: 'end' }}>
-          <NextButton>다음</NextButton>
+          <NextButton role="button">다음</NextButton>
         </div>
       )}
     </Form>

@@ -71,6 +71,7 @@ function OwnerNameInput() {
         <span>{`${creditCard.ownerName.length} / 30`}</span>
       </LabelContainer>
       <Input
+        data-testid="owner-name"
         value={creditCard.ownerName}
         onChange={_onChange}
         font-weight="500"
