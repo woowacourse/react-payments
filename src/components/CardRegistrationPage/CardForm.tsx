@@ -6,6 +6,7 @@ import SecurityCodeInput from "./FormContents/SecurityCodeInput";
 import PasswordInput from "./FormContents/PasswordInput";
 import { useCardItemValue, useErrorMessageValue } from "../provider/CardItemProvider";
 import CardCompany from "./FormContents/CompanyContainer";
+import Button from "../common/Button";
 
 interface CardFormProps {
   onSubmitForm: () => void;
@@ -30,7 +31,9 @@ const CardForm = ({ onSubmitForm }: CardFormProps) => {
       <NameInput />
       <SecurityCodeInput />
       <PasswordInput />
-      <NextButton isActive={buttonActive}>다음</NextButton>
+      <ButtonWrapper>
+        <Button isActive={buttonActive}>다음</Button>
+      </ButtonWrapper>
     </FormContainer>
   );
 };
@@ -42,19 +45,9 @@ const FormContainer = styled.form`
   padding: 28px;
 `;
 
-const NextButton = styled.button<{ isActive: boolean }>`
-  visibility: ${({ isActive }) => (isActive ? "visible" : "hidden")};
-
-  padding: 10px 20px;
-
-  background-color: transparent;
-  border: none;
-
-  font-weight: 700;
-  font-size: 14px;
-
-  align-self: flex-end;
-  cursor: pointer;
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: end;
 `;
 
 export default CardForm;
