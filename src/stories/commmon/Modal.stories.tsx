@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import Modal from '../../components/common/Modal/Modal';
 
 const meta = {
@@ -8,9 +8,15 @@ const meta = {
 } satisfies Meta<typeof Modal>;
 
 export default meta;
+type Story = StoryObj<typeof Modal>;
 
-export const Default = () => (
-  <Modal isOpen={true} close={() => {}}>
-    <div>Modal Content</div>
-  </Modal>
-);
+export const Default: Story = {
+  render: ({ ...args }) => (
+    <Modal {...args}>
+      <div>Modal Content</div>
+    </Modal>
+  ),
+  args: {
+    isOpen: true,
+  },
+};

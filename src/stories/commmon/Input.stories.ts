@@ -6,6 +6,12 @@ const meta = {
   title: 'Payments/Common/Input',
   component: Input,
   tags: ['autodocs'],
+  argTypes: {
+    variant: {
+      control: { type: 'radio' },
+      options: ['outline', 'underline'],
+    },
+  },
 } satisfies Meta<typeof Input>;
 
 export default meta;

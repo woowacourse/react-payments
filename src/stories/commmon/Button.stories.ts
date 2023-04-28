@@ -6,6 +6,16 @@ const meta = {
   title: 'Payments/Common/Button',
   component: Button,
   tags: ['autodocs'],
+  argTypes: {
+    variant: {
+      control: { type: 'radio' },
+      options: ['default', 'primary', 'secondary', 'danger', 'textButton'],
+    },
+    size: {
+      control: { type: 'radio' },
+      options: ['small', 'medium', 'large'],
+    },
+  },
 } satisfies Meta<typeof Button>;
 
 export default meta;

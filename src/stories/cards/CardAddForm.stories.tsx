@@ -15,7 +15,6 @@ export default meta;
 export const Default = () => {
   const {
     cardInformation,
-    inputValidation,
     inputError,
     updateInputError,
     handleButtonInputChange,
@@ -27,7 +26,6 @@ export const Default = () => {
   return (
     <CardAddForm
       cardInformation={cardInformation}
-      cardInputValidation={inputValidation}
       cardInputError={inputError}
       onButtonInputChange={handleButtonInputChange}
       onSingleInputChange={handleSingleInputChange}
@@ -41,7 +39,6 @@ export const Default = () => {
 export const SuccessInteraction = () => {
   const {
     cardInformation,
-    inputValidation,
     inputError,
     updateInputError,
     handleButtonInputChange,
@@ -53,7 +50,6 @@ export const SuccessInteraction = () => {
   return (
     <CardAddForm
       cardInformation={cardInformation}
-      cardInputValidation={inputValidation}
       cardInputError={inputError}
       onButtonInputChange={handleButtonInputChange}
       onSingleInputChange={handleSingleInputChange}
@@ -137,7 +133,6 @@ SuccessInteraction.play = async ({ canvasElement }: { canvasElement: HTMLElement
 export const ErrorInteraction = () => {
   const {
     cardInformation,
-    inputValidation,
     inputError,
     updateInputError,
     handleButtonInputChange,
@@ -149,7 +144,6 @@ export const ErrorInteraction = () => {
   return (
     <CardAddForm
       cardInformation={cardInformation}
-      cardInputValidation={inputValidation}
       cardInputError={inputError}
       onButtonInputChange={handleButtonInputChange}
       onSingleInputChange={handleSingleInputChange}
