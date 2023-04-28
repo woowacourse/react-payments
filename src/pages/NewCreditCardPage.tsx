@@ -37,14 +37,25 @@ const FormGroup = styled.section`
   flex-direction: column;
   gap: 8px;
 
-  width: 100%;
+  position: relative;
 
+  width: 100%;
   margin: 10px 0px;
+  margin-bottom: 24px;
+  padding-bottom: 8px;
 `;
 
 const FormGroupLabel = styled.div`
   display: flex;
   justify-content: space-between;
+`;
+
+const FormGroupErrorMessage = styled.div`
+  position: absolute;
+  top: 100%;
+
+  font-size: ${(props) => props.theme.fontSize.small};
+  color: ${(props) => props.theme.fontColor.warning};
 `;
 
 const ButtonGroup = styled.div`
@@ -132,9 +143,7 @@ export const NewCreditCardPage = () => {
             value={newCard.cardNumbers}
             onChange={handleChangeNewCardField('cardNumbers')}
           />
-          <Text size="small" color="warning">
-            {validationResult.cardNumbers}
-          </Text>
+          <FormGroupErrorMessage>{validationResult.cardNumbers}</FormGroupErrorMessage>
         </FormGroup>
 
         <FormGroup>
@@ -143,9 +152,7 @@ export const NewCreditCardPage = () => {
             value={newCard.expirationDate}
             onChange={handleChangeNewCardField('expirationDate')}
           />
-          <Text size="small" color="warning">
-            {validationResult.expirationDate}
-          </Text>
+          <FormGroupErrorMessage>{validationResult.expirationDate}</FormGroupErrorMessage>
         </FormGroup>
 
         <FormGroup>
@@ -173,9 +180,7 @@ export const NewCreditCardPage = () => {
             onFocus={() => setShowBackface(true)}
             onBlur={() => setShowBackface(false)}
           />
-          <Text size="small" color="warning">
-            {validationResult.cvc}
-          </Text>
+          <FormGroupErrorMessage>{validationResult.cvc}</FormGroupErrorMessage>
         </FormGroup>
 
         <FormGroup>
@@ -184,9 +189,7 @@ export const NewCreditCardPage = () => {
             value={newCard.password}
             onChange={handleChangeNewCardField('password')}
           />
-          <Text size="small" color="warning">
-            {validationResult.password}
-          </Text>
+          <FormGroupErrorMessage>{validationResult.password}</FormGroupErrorMessage>
         </FormGroup>
 
         <ButtonGroup>
