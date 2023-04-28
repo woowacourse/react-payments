@@ -1,35 +1,28 @@
 import { ChangeEvent, FocusEvent, memo } from 'react';
-import { ExpirationDate } from '../../../types';
 import { EXPIRATION_DATE_INPUT_MAX_LENGTH } from '../../../constants';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
 import Input from '../../common/Input/Input';
-import { formatDisplayedExpirationDate } from '../../../utils/formatter';
+import { formatDisplayedExpirationDate, formatExpirationDate } from '../../../utils/formatter';
 
 interface CardExpirationDateProps {
-  value: ExpirationDate;
   isError: boolean;
-  onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  updateCardInputError: (key: string, value: string | string[]) => void;
-  moveFocus: (index: number, value: string, maxLength?: number | undefined) => void;
+  updateInputValue: (key: string, value: any) => void;
+  updateCardInputError: (key: string, value: any) => void;
 }
 
 function CardExpirationDate({
-  value,
   isError,
-  onInputChange,
+  updateInputValue,
   updateCardInputError,
-  moveFocus,
 }: CardExpirationDateProps) {
-  const expirationDate = formatDisplayedExpirationDate(`${value.month}${value.year}`);
-
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    onInputChange(event);
-    moveFocus(event.target.tabIndex, event.target.value, event.target.maxLength);
+  const onChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
+    target.value = formatDisplayedExpirationDate(target.value);
+    updateInputValue(target.name, formatExpirationDate(target.value));
   };
 
-  const onBlur = (event: FocusEvent<HTMLInputElement>) => {
-    updateCardInputError(event.target.name, event.target.value);
+  const onBlur = ({ target }: FocusEvent<HTMLInputElement>) => {
+    updateCardInputError(target.name, formatExpirationDate(target.value));
   };
 
   return (
@@ -45,7 +38,6 @@ function CardExpirationDate({
       <Input
         id="expirationDate"
         name="expirationDate"
-        value={expirationDate}
         placeholder="월/년도(MM/YY) 순서로 4자리 숫자를 입력해주세요"
         maxLength={EXPIRATION_DATE_INPUT_MAX_LENGTH}
         autoComplete="cc-exp"
