@@ -10,17 +10,21 @@ function CreditCardPasswordInput({ name }: T.CreditCardInputProps) {
   const { creditCardForm, setCreditCardForm } = useCreditCardForm();
 
   const handleChangeCreditCardPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newPassword = (event.target.value as T.CreditCardPasswordTypeKeys).replace(/\D/g, '');
+    const newPassword = event.target.value.replace(/\D/g, '');
     if (newPassword.length === 1) {
-      const updatedCreditCard: T.CreditCard = { ...creditCardForm };
-      const targetName = event.target.name as T.CreditCardPasswordTypeKeys;
-      const targetValue = event.target.value;
-      (updatedCreditCard[name] as T.CreditCardPasswordType)[targetName] = targetValue;
-      setCreditCardForm(updatedCreditCard);
+      const { password }: T.CreditCard = { ...creditCardForm };
+      const targetName = event.target.name;
+      if (targetName === 'first') {
+        password[0] = newPassword;
+      }
+      if (targetName === 'second') {
+        password[1] = newPassword;
+      }
+      setCreditCardForm({ ...creditCardForm, [name]: password });
     }
   };
 
-  const isError = validatePassword(creditCardForm.password.first, creditCardForm.password.second);
+  const isError = validatePassword(creditCardForm.password[0], creditCardForm.password[1]);
 
   return (
     <Box>
@@ -28,7 +32,7 @@ function CreditCardPasswordInput({ name }: T.CreditCardInputProps) {
       <FlexBox justifyContent="flex-start">
         <Input
           type="password"
-          value={creditCardForm.password?.first}
+          value={creditCardForm.password[0]}
           width="48px"
           textAlign="center"
           name="first"
@@ -36,7 +40,7 @@ function CreditCardPasswordInput({ name }: T.CreditCardInputProps) {
         />
         <Input
           type="password"
-          value={creditCardForm.password?.second}
+          value={creditCardForm.password[1]}
           width="48px"
           textAlign="center"
           name="second"

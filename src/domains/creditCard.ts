@@ -31,8 +31,8 @@ export const checkCreditCardValidations = (creditCard: CreditCard) => {
   const isValidExpiry = validateExpiry(creditCard.expiry);
   const isValidCardNumber = validateNumber(creditCard.number);
   const isValidCardPassword = validatePassword(
-    creditCard.password.first,
-    creditCard.password.second
+    creditCard.password[0],
+    creditCard.password[1]
   );
 
   const isCreditCardError = [

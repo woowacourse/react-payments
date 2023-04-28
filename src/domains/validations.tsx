@@ -11,7 +11,6 @@ export const validateExpiry = (expiry: string) => {
 export const validateCVC = (cvc: string) => cvc === '' || cvc.length < 3;
 export const validateNumber = (number: string) => number.length > 0 && number.length < 16;
 export const validatePassword = (first: string, second: string) => !(
-  (first.length > 0 && second.length > 0)
-  || (first.length === 0 && second.length === 0)
+  (first.length > 0 && second.length > 0) || (first.length === 0 && second.length === 0)
 );
 export default {};

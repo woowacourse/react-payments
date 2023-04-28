@@ -1,5 +1,4 @@
-export type CreditCardPasswordTypeKeys = 'first' | 'second';
-export type CreditCardPasswordType = Record<CreditCardPasswordTypeKeys, string>;
+export type CreditCardPasswordType = [string, string];
 
 export type CreditCardKeys = keyof CreditCard;
 export type CreditCard = {

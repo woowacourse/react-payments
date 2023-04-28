@@ -9,10 +9,7 @@ export const defaultCreditCardForm: Type.CreditCard = {
   expiry: '',
   owner: '',
   cvc: '',
-  password: {
-    first: '',
-    second: '',
-  },
+  password: ['', ''],
   nickname: '',
 };
 
