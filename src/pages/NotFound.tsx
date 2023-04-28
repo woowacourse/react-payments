@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Layout } from '../layout';
-import { BackButton } from '../layout/BackButton';
+import { BackButton } from '../components/Button/BackButton';
 
 const imageUrl =
   'https://user-images.githubusercontent.com/24777828/233794760-2bc92a8d-4439-4dff-a46d-54f9311bffac.JPG';
