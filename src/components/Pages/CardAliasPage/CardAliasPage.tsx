@@ -1,18 +1,36 @@
 import { ChangeEvent, useContext } from 'react';
 
+import CardInfoContext from '../../../contexts/CardInfoContext';
+
 import { PATHNAME } from '../../../constants/pathname';
-import { useCardAliasPage } from '../../../hooks/useCardAliasPage';
 import { useTitle } from '../../../hooks/useTitle';
 import { useNavigationTo } from '../../../hooks/useNavigationTo';
+import { useUpdateCardInfoList } from '../../../hooks/useUpdateCardInfoList';
+import { useFocusButtonOnTextStateLength } from '../../../hooks/useFocusButtonOnTextStateLength';
+import { useCheckFormCompletion } from '../../../hooks/useCheckFormCompletion';
 
 import * as styled from './CardAliasPage.styled';
 import CardPreview from '../../CardPreview/CardPreview';
 import Input from '../../Input/Input';
-import CardInfoContext from '../../../contexts/CardInfoContext';
 
 const CardAliasPage = () => {
-  const { cardAlias, setCardAlias } = useContext(CardInfoContext);
-  const { onClick, buttonRef } = useCardAliasPage();
+  const {
+    setCardInfoList,
+    cardNumbers,
+    expirationDate,
+    ownerName,
+    securityCode,
+    password,
+    cardCompany,
+    cardAlias,
+    setCardAlias,
+  } = useContext(CardInfoContext);
+  const buttonRef = useFocusButtonOnTextStateLength(cardAlias, 15);
+  const updateCardInfoList = useUpdateCardInfoList(
+    { cardNumbers, expirationDate, ownerName, securityCode, password, cardCompany, cardAlias },
+    setCardInfoList
+  );
+  useCheckFormCompletion();
   const { navigationTo, history } = useNavigationTo(PATHNAME.HOME);
   const isFromRegisterPage = history.at(-1) === '/register';
   const title = useTitle(
@@ -36,7 +54,7 @@ const CardAliasPage = () => {
       <styled.CardAliasSubmitButton
         ref={buttonRef}
         onClick={() => {
-          onClick();
+          updateCardInfoList();
           navigationTo();
         }}
       >

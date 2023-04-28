@@ -9,7 +9,7 @@ export type OwnerName = string | null;
 export type SecurityCode = string;
 export type Password = Record<'firstPassword' | 'secondPassword', string>;
 export type CardCompany = Record<'name' | 'theme', string>;
-export type CardAlias = string | null;
+export type CardAlias = string;
 
 export type SetCardNumbers = React.Dispatch<SetStateAction<CardNumbers>>;
 export type SetExpirationDate = React.Dispatch<SetStateAction<ExpirationDate>>;

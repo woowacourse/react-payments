@@ -21,5 +21,5 @@ export const DEFAULT_CARD_INFO_STATE = {
     name: '',
     theme: COLOR.DEFAULT,
   },
-  CARD_ALIAS: null,
+  CARD_ALIAS: '',
 };
