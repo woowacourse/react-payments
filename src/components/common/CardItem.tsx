@@ -32,7 +32,7 @@ const CardContainer = styled.section`
   flex-direction: column;
   width: 21.3rem;
   height: 13.3rem;
-  margin-bottom: 3.5rem;
+
   background-color: ${(props) => props.color || 'gray'};
   color: ${(props) => (props.color === '#FFE600' ? 'black' : 'white')};
   font-size: 1.3rem;
