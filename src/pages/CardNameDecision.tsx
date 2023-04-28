@@ -17,7 +17,7 @@ const CardNameDecision = ({ saveCardToLocalStorage }: CardNameDecisionProps) => 
 
   useEffect(() => {
     if (!cardNumber.isValid) {
-      alert('카드 정보도 입력 안 됐는데 이름 설정을 하려고 해?!');
+      alert('카드 정보가 아직 입력되지 않았습니다. 먼저 카드 정보를 입력해 주세요. 메인 페이지로 돌아갑니다.');
       navigate('/');
     }
   }, [navigate, cardNumber]);
