@@ -4,7 +4,6 @@ import ExpirationDateInput from "./FormContents/ExpirationDateInput";
 import NameInput from "./FormContents/NameInput";
 import SecurityCodeInput from "./FormContents/SecurityCodeInput";
 import PasswordInput from "./FormContents/PasswordInput";
-import { useNavigate } from "react-router-dom";
 import { useCardItemValue, useErrorMessageValue } from "../provider/CardItemProvider";
 import CardCompany from "./FormContents/CompanyContainer";
 
@@ -13,15 +12,12 @@ interface CardFormProps {
 }
 
 const CardForm = ({ onSubmitForm }: CardFormProps) => {
-  const navigate = useNavigate();
-
   const { isAllInputSatisfied } = useCardItemValue();
   const { hasError } = useErrorMessageValue();
 
   const handleSubmitForm = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     onSubmitForm();
-    navigate("/");
   };
 
   const buttonActive = !hasError() && isAllInputSatisfied();

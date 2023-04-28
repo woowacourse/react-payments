@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../common/Header";
@@ -14,6 +15,7 @@ interface CardRegistrationPageProps {
 }
 
 const CardRegistrationPage = ({ addCardItem }: CardRegistrationPageProps) => {
+  const navigate = useNavigate();
   const { cardNumber, expirationDate, name, company } = useCardItemValue();
   const { isOpenModal } = useModalAction();
 
@@ -27,6 +29,7 @@ const CardRegistrationPage = ({ addCardItem }: CardRegistrationPageProps) => {
 
   const handleSubmitForm = () => {
     addCardItem(cardItem);
+    navigate(`/complete/${cardItem.id}`);
   };
 
   return (
