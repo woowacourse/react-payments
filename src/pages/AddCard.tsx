@@ -32,10 +32,11 @@ const AddCard = ({ cards, setCards }: SetCardsProps) => {
     setSecurityCode,
     passwords,
     setPasswords,
+    cardCompany,
+    setCardCompany,
     isDisabledForm,
   } = useAddCard();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [cardCompany, setCardCompany] = useState<string>('');
   const navigate = useNavigate();
 
   const handleSetCards = () => {
