@@ -21,14 +21,18 @@ const Home = ({ cards }: { cards: CardType[] }) => {
             expiredDates,
             cardOwnerName,
             cardCompany,
+            cardAlias,
           }: CardType) => (
-            <Card
-              key={id}
-              cardNumbers={cardNumbers}
-              expiredDates={expiredDates}
-              cardOwnerName={cardOwnerName}
-              cardCompany={cardCompany}
-            />
+            <>
+              <Card
+                key={id}
+                cardNumbers={cardNumbers}
+                expiredDates={expiredDates}
+                cardOwnerName={cardOwnerName}
+                cardCompany={cardCompany}
+              />
+              <Styled.CardAlias>{cardAlias}</Styled.CardAlias>
+            </>
           )
         )}
         <AddCardButton></AddCardButton>
