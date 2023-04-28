@@ -5,6 +5,7 @@ import CardPreview from "../common/CardPreview";
 import Input from "../common/Input";
 import { cardCompanyEnglishToKorean } from "../../type/CardCompany";
 import styles from "./InputSuccessPage.module.css";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   card: CreditCard;
@@ -15,11 +16,14 @@ const InputSuccessPage = (props: Props) => {
   const { card, setCardInfo } = props;
 
   const [nickname, setNickname] = useState('');
+  const navigate = useNavigate();
 
   const lengthParser = (value: string) => value.slice(0, 12);
   const clickHandler = () => {
     if (nickname) setCardInfo({ nickname });
     else setCardInfo({ nickname: `${cardCompanyEnglishToKorean(card.company)} ${card.number[3]}` });
+  
+    navigate("/");
   };
 
   return (
