@@ -20,7 +20,7 @@ const Wrapper = styled.div<InputProps>`
   background-color: ${({ backgroundColor }) => backgroundColor ?? '#ecebf1'};
   border-radius: 7px;
   padding: 12px;
-  width: ${({ width }) => width};
+  width: ${({ width, maxLength }) => width ?? `calc(${maxLength} * 44px)`};
 `;
 
 const Input = styled.input<InputProps>`
