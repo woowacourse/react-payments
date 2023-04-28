@@ -1,10 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Input from "../../common/Input";
 import { INPUT_STATUS } from "../../../type/InputStatus";
 import styles from "./cardPassword.module.css";
 import { validatePassword } from "../../../validation/password";
 import CONSTANT from "../../../Constant";
 import useMultipleInputStatus from "../../../hook/useMultipleInputStatus";
+import { useCreditCardContext } from "../../../context/CreditCardContext";
 
 interface Props {
   setError: React.Dispatch<React.SetStateAction<boolean>>;
@@ -14,29 +15,45 @@ interface Props {
 export default function CardPassword(props: Props) {
   const { setError, setIsComplete } = props;
 
+  const [password, setPassword] = useState(['', '']);
   const { hasError, isAllComplete, getSetStateFunction } = useMultipleInputStatus(2);
-
-  useEffect(() => {
-    setError(hasError);
-  }, [hasError, setError]);
-
-  useEffect(() => {
-    setIsComplete(isAllComplete);
-  }, [isAllComplete, setIsComplete]);
+  const { setCardInfo } = useCreditCardContext();
 
   const lengthParser = (value: string) => value.slice(0, CONSTANT.PASSWORD_INPUT_MAX_LENGTH);
 
-  const getInputStatusSetter =
-    (setInputStatus: (status: INPUT_STATUS) => void) =>
+  const setInputStatus =(value: string, index: number) => {
+    if (validatePassword(value)) {
+      value.length === CONSTANT.PASSWORD_INPUT_MAX_LENGTH
+        ? getSetStateFunction(index)(INPUT_STATUS.COMPLETE)
+        : getSetStateFunction(index)(INPUT_STATUS.NOT_COMPLETE);
+    } else {
+      getSetStateFunction(index)(INPUT_STATUS.ERROR);
+    }
+  };
+
+  const makePasswordSetter =
+    (index: number) =>
     (value: string) => {
-      if (validatePassword(value)) {
-        value.length === CONSTANT.PASSWORD_INPUT_MAX_LENGTH
-          ? setInputStatus(INPUT_STATUS.COMPLETE)
-          : setInputStatus(INPUT_STATUS.NOT_COMPLETE);
-      } else {
-        setInputStatus(INPUT_STATUS.ERROR);
-      }
+      const newPassword = [...password];
+      newPassword[index] = value;
+      setPassword(newPassword);
     };
+
+  useEffect(() => {
+    setError(hasError);
+  }, [hasError]);
+
+  useEffect(() => {
+    password.forEach((value, index) => setInputStatus(value, index));
+  }, [password]);
+
+  useEffect(() => {
+    setIsComplete(isAllComplete);
+  }, [isAllComplete]);
+
+  useEffect(() => {
+    setCardInfo({ password: password.join('') });
+  }, [password]);
 
   return (
     <div className={styles.inputBox}>
@@ -45,17 +62,17 @@ export default function CardPassword(props: Props) {
         className={styles.input}
         type="password"
         parsers={[lengthParser]}
-        valueChangeSubscribers={[getInputStatusSetter(getSetStateFunction(0))]}
+        valueChangeSubscribers={[makePasswordSetter(0)]}
         inputMode="numeric"
-      ></Input>
+      />
       <Input
         name="card-password-2"
         className={styles.input}
         type="password"
         parsers={[lengthParser]}
-        valueChangeSubscribers={[getInputStatusSetter(getSetStateFunction(1))]}
+        valueChangeSubscribers={[makePasswordSetter(1)]}
         inputMode="numeric"
-      ></Input>
+      />
       <input
         className={styles.input}
         disabled

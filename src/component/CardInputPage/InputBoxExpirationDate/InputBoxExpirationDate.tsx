@@ -4,16 +4,17 @@ import { INPUT_STATUS } from "../../../type/InputStatus";
 import styles from "./inputBoxExpirationDate.module.css";
 import { validateExpirationDate } from "../../../validation/ExpirationDate";
 import CONSTANT from "../../../Constant"
+import { useCreditCardContext } from "../../../context/CreditCardContext";
 
 interface Props {
   setIsComplete: (value: boolean) => void;
-  setPreviewDataHandler: () => void;
 }
 
 export default function InputBoxExpirationDate(props: Props) {
-  const { setIsComplete, setPreviewDataHandler } = props;
+  const { setIsComplete } = props;
 
   const [inputStatus, setInputStatus] = useState(INPUT_STATUS.NOT_COMPLETE);
+  const { setCardInfo } = useCreditCardContext();
 
   const removeSlashParser = (value: string) => value.split("/").join("").replace(/\s/g, '');
 
@@ -35,9 +36,11 @@ export default function InputBoxExpirationDate(props: Props) {
     }
   };
 
+  const dateSetter = (value: string) => setCardInfo({ date: value });
+
   useEffect(() => {
     setIsComplete(inputStatus === INPUT_STATUS.COMPLETE ? true : false);
-  }, [inputStatus, setIsComplete]);
+  }, [inputStatus]);
 
   return (
     <div className={styles.inputBox}>
@@ -47,7 +50,7 @@ export default function InputBoxExpirationDate(props: Props) {
         className="input-expiration-date"
         type="text"
         parsers={[removeSlashParser, lengthParser, dateFormatter]}
-        valueChangeSubscribers={[inputStatusHandler]}
+        valueChangeSubscribers={[inputStatusHandler, dateSetter]}
         placeholder="MM / YY"
         inputMode="numeric"
       ></Input>

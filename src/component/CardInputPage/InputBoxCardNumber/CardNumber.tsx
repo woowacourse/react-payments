@@ -5,21 +5,22 @@ import { INPUT_STATUS } from "../../../type/InputStatus";
 import styles from "./cardNumber.module.css";
 import CONSTANT from "../../../Constant";
 import useMultipleInputStatus from "../../../hook/useMultipleInputStatus";
+import { useCreditCardContext } from "../../../context/CreditCardContext";
 
 interface Props {
   setError: React.Dispatch<React.SetStateAction<boolean>>;
   setIsComplete: (value: boolean) => void;
-  setPreviewDataHandler: () => void;
 }
 
 export default function CardNumber(props: Props) {
-  const { setError, setIsComplete, setPreviewDataHandler } = props;
+  const { setError, setIsComplete } = props;
 
   const { hasError, isAllComplete, getSetStateFunction } = useMultipleInputStatus(4);
+  const { card, setCardInfo } = useCreditCardContext();
 
   useEffect(() => {
     setError(hasError);
-  }, [hasError, setError]);
+  }, [hasError]);
 
   useEffect(() => {
     setIsComplete(isAllComplete);
@@ -27,7 +28,7 @@ export default function CardNumber(props: Props) {
 
   const lengthParser = (value: string) => value.slice(0, CONSTANT.NUMBER_INPUT_MAX_LENGTH);
 
-  const getInputStatusSetter =
+  const makeInputStatusSetter =
     (setInputStatus: (status: INPUT_STATUS) => void) =>
     (value: string) => {
       if (validateCardNumber(value)) {
@@ -39,8 +40,14 @@ export default function CardNumber(props: Props) {
       } else {
         setInputStatus(INPUT_STATUS.ERROR);
       }
+    };
 
-      setPreviewDataHandler();
+  const makeSetCardInfoSetter =
+    (index: number) =>
+    (value: string) => {
+      const newNumber = [...card.number];
+      newNumber[index] = value;
+      setCardInfo({ number: newNumber });
     };
 
   return (
@@ -50,7 +57,10 @@ export default function CardNumber(props: Props) {
         className={`${styles.input} ${styles.first}`}
         type="text"
         inputMode="numeric"
-        valueChangeSubscribers={[getInputStatusSetter(getSetStateFunction(0))]}
+        valueChangeSubscribers={[
+          makeInputStatusSetter(getSetStateFunction(0)),
+          makeSetCardInfoSetter(0),
+        ]}
         parsers={[lengthParser]}
         placeholder="XXXX"
       />
@@ -59,7 +69,10 @@ export default function CardNumber(props: Props) {
         className={styles.input}
         type="password"
         inputMode="numeric"
-        valueChangeSubscribers={[getInputStatusSetter(getSetStateFunction(1))]}
+        valueChangeSubscribers={[
+          makeInputStatusSetter(getSetStateFunction(1)),
+          makeSetCardInfoSetter(1),
+        ]}
         parsers={[lengthParser]}
         placeholder="XXXX"
       />
@@ -68,7 +81,10 @@ export default function CardNumber(props: Props) {
         className={styles.input}
         type="password"
         inputMode="numeric"
-        valueChangeSubscribers={[getInputStatusSetter(getSetStateFunction(2))]}
+        valueChangeSubscribers={[
+          makeInputStatusSetter(getSetStateFunction(2)),
+          makeSetCardInfoSetter(2),
+        ]}
         parsers={[lengthParser]}
         placeholder="XXXX"
       />
@@ -77,7 +93,10 @@ export default function CardNumber(props: Props) {
         className={`${styles.input} ${styles.last}`}
         type="text"
         inputMode="numeric"
-        valueChangeSubscribers={[getInputStatusSetter(getSetStateFunction(3))]}
+        valueChangeSubscribers={[
+          makeInputStatusSetter(getSetStateFunction(3)),
+          makeSetCardInfoSetter(3),
+        ]}
         parsers={[lengthParser]}
         placeholder="XXXX"
       />

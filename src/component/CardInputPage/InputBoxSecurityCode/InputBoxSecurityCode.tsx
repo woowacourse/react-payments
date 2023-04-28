@@ -1,9 +1,10 @@
-import { useState, ChangeEvent, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Input from "../../common/Input";
 import { INPUT_STATUS } from "../../../type/InputStatus";
 import styles from "./inputBoxSecurityCode.module.css";
 import { validateSecurityNumber } from "../../../validation/securityNumber";
 import CONSTANT from "../../../Constant";
+import { useCreditCardContext } from "../../../context/CreditCardContext";
 
 interface Props {
   setIsComplete: (value: boolean) => void;
@@ -17,6 +18,7 @@ export default function InputBoxSecurityCode(props: Props) {
   const { setIsComplete } = props;
 
   const [inputStatus, setInputStatus] = useState(INPUT_STATUS.NOT_COMPLETE);
+  const { setCardInfo } = useCreditCardContext();
 
   const lengthParser = (value: string) => value.slice(0, CONSTANT.SECURITY_INPUT_MAX_LENGTH);
 
@@ -31,8 +33,12 @@ export default function InputBoxSecurityCode(props: Props) {
   };
 
   useEffect(() => {
-    setIsComplete(inputStatus === INPUT_STATUS.COMPLETE ? true : false);
-  }, [inputStatus, setIsComplete]);
+    setIsComplete(inputStatus === INPUT_STATUS.COMPLETE);
+  }, [inputStatus]);
+
+  const securityCodeSetter = (value: string) => {
+    setCardInfo({ securityCode: value });
+  };
 
   return (
     <div className={styles.inputBox}>
@@ -43,7 +49,7 @@ export default function InputBoxSecurityCode(props: Props) {
         type="password"
         inputMode="numeric"
         parsers={[lengthParser]}
-        valueChangeSubscribers={[inputStatusHandler]}
+        valueChangeSubscribers={[inputStatusHandler, securityCodeSetter]}
       ></Input>
       <button className={styles.button} type="button" onClick={alertCvcInfo}>
         ?

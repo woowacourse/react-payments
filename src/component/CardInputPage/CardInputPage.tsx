@@ -1,4 +1,5 @@
 import CardInputForm from "./CardInputForm/CardInputForm";
+import { CreditCardProvider } from "../../context/CreditCardContext";
 
 import "./cardInputPage.css";
 import { CreditCard } from "../../type/CreditCard";
@@ -36,7 +37,9 @@ export default function CardInputPage(props: Props) {
         </button>
         <span className="page-explanation">카드 추가</span>
       </div>
-      <CardInputForm addNewCard={addNewCard} />
+      <CreditCardProvider>
+        <CardInputForm addNewCard={addNewCard} />
+      </CreditCardProvider>
     </section>
   );
 }
