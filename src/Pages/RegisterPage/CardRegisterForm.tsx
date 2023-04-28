@@ -10,6 +10,7 @@ import { useFormHandler } from 'hooks/useFormHandler';
 import Header from 'components/Header';
 import NextButton from 'components/Button';
 import Modal from 'components/Modal';
+import CardBankList from './CardBankList';
 
 const CardRegisterForm = () => {
   const [isModalActive, setIsModalActive] = useState(true);
@@ -58,11 +59,7 @@ const CardRegisterForm = () => {
         </form>
       </div>
       {isModalActive && (
-        <Modal
-          modal={isModalActive}
-          height="300"
-          element={<div>카드추가</div>}
-        />
+        <Modal modal={isModalActive} height="300" element={<CardBankList />} />
       )}
     </>
   );
