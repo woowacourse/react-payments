@@ -2,7 +2,7 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
 import * as T from 'types';
-import { findCreditCardCompanyById, convertSecuredCreditCard, markExpiry } from 'domains/creditCard';
+import { convertSecuredCreditCard, findCreditCardCompanyById, markExpiry } from '../../domains/creditCard';
 import * as S from './style';
 
 export type CreditCardProps = {

@@ -1,5 +1,5 @@
-import creditCardCompanies from 'assets/data/creditCardCompanies';
 import { CreditCard } from 'types';
+import creditCardCompanies from '../assets/data/creditCardCompanies';
 import {
   validateCVC, validateExpiry, validateNumber, validatePassword
 } from './validations';
