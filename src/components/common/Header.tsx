@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import { PropsWithChildren } from "react";
 
-interface HeaderProps extends PropsWithChildren {
+interface HeaderProps {
   text: string;
 }
 
-export const Header = ({ text, children }: HeaderProps) => {
+export const Header = ({ text, children }: PropsWithChildren<HeaderProps>) => {
   return (
     <HeaderWrapper>
       {children}
