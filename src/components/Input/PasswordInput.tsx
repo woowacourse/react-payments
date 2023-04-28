@@ -1,5 +1,6 @@
 import { PaymentsInput } from 'components/common';
 import React, { ChangeEvent, useRef } from 'react';
+import styled from 'styled-components';
 import { isNumber } from 'utils';
 import { ValueAndOnChange } from './types';
 
@@ -28,7 +29,7 @@ export function PasswordInput(props: PasswordInputProps) {
   };
 
   return (
-    <>
+    <Container>
       <PaymentsInput
         ref={(element) => (inputRefs.current[0] = element)}
         value={first.value}
@@ -36,6 +37,7 @@ export function PasswordInput(props: PasswordInputProps) {
         maxLength={1}
         onChange={(e) => handleChange(e, 0, first.onChange)}
         inputMode="numeric"
+        align="center"
         required
       />
       <PaymentsInput
@@ -45,8 +47,14 @@ export function PasswordInput(props: PasswordInputProps) {
         maxLength={1}
         onChange={(e) => handleChange(e, 1, second.onChange)}
         inputMode="numeric"
+        align="center"
         required
       />
-    </>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  display: flex;
+  gap: 7px;
+`;
