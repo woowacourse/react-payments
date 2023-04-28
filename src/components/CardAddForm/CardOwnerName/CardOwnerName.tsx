@@ -1,24 +1,28 @@
-import { ChangeEvent, memo } from 'react';
+import { ChangeEvent, memo, useState } from 'react';
 import { OWNER_NAME_MAX_LENGTH } from '../../../constants';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
 import Input from '../../common/Input/Input';
+import { formatEnglishCapitalization, formatSentence } from '../../../utils/formatter';
 
 interface CardOwnerNameProps {
-  onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  moveFocus: (index: number, value: string, maxLength?: number | undefined) => void;
-  value?: string;
+  updateInputValue: (key: string, value: any) => void;
 }
 
-function CardOwnerName({ onInputChange, moveFocus, value = '' }: CardOwnerNameProps) {
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    onInputChange(event);
-    moveFocus(event.target.tabIndex, event.currentTarget.value, event.currentTarget.maxLength);
+function CardOwnerName({ updateInputValue }: CardOwnerNameProps) {
+  const [value, setValue] = useState('');
+
+  const onChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
+    setValue(formatEnglishCapitalization(target.value));
+    updateInputValue(target.name, formatSentence(target.value));
   };
 
   return (
     <InputContainer
-      characterCounter={{ currentCount: value.length, maxCount: OWNER_NAME_MAX_LENGTH }}
+      characterCounter={{
+        currentCount: value.length,
+        maxCount: OWNER_NAME_MAX_LENGTH,
+      }}
     >
       <Label htmlFor="ownerName">카드 소유자 이름</Label>
       <Input
