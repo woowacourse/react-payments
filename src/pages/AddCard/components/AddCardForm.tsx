@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import type { AddCardFormProps, CardType } from '../../../type';
 import { sumbitCard } from '../../../utils/applicationUtil';
@@ -11,6 +11,7 @@ import './AddCardForm.css';
 import CardNumberInput from './CardNumberInput';
 import { useCurrentCardContext } from '../../../context/CurrentCardProvider';
 import { useIsAccessAliasPageContext } from '../../../context/IsAccessAliasPageProvider';
+import useTotalStatus from '../../../hooks/useTotalStatus';
 
 const AddCardForm = ({
   cardType,
@@ -28,9 +29,21 @@ const AddCardForm = ({
   const navigate = useNavigate();
   const { setCurrentCard } = useCurrentCardContext();
   const { setIsAccessAliasPage } = useIsAccessAliasPageContext();
-
+  const isActive = useTotalStatus([
+    cardFirstNumber.status,
+    cardSecondNumber.status,
+    cardThirdNumber.status,
+    cardFourthNumber.status,
+    cardOwner.status,
+    expireMonth.status,
+    expireYear.status,
+    securityCode.status,
+    cardPassword1.status,
+    cardPassword2.status,
+  ]);
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     const submitData: Omit<CardType, 'id'> = {
       cardType,
       cardNumber: {
@@ -71,9 +84,7 @@ const AddCardForm = ({
       <OwnerInput cardOwner={cardOwner} />
       <SecurityCodeInput securityCode={securityCode} />
       <PasswordInput cardPassword1={cardPassword1} cardPassword2={cardPassword2} />
-      <div className="add-card-submit">
-        <button type="submit">다음</button>
-      </div>
+      <div className="add-card-submit">{isActive && <button type="submit">다음</button>}</div>
     </form>
   );
 };
