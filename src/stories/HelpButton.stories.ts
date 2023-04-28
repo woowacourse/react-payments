@@ -1,6 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import HelpButton from '../components/common/HelpButton/HelpButton';
 
+/**
+ * `HelpButton` 은 사용자에게 툴팁을 보여주기 위한 컴포넌트입니다.
+ */
 const meta = {
   component: HelpButton,
   title: 'HelpButton',

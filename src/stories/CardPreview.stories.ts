@@ -2,14 +2,20 @@ import type { Meta, StoryObj } from '@storybook/react';
 import CardPreview from '../components/common/CardPreview/CardPreview';
 import { cardImages } from '../pages/cardImages';
 
+/**
+ * `CardPreview` 는 카드에 대한 정보를 카드 모형으로 만들어 화면에 보여주기 위한 컴포넌트입니다.
+ * 카드 목록을 보여줄 때 사용되거나, 카드 정보 작성 메뉴에서 미리 카드의 결과를 보여주는 데 사용됩니다.
+ */
 const meta = {
   title: 'CardPreview',
   component: CardPreview,
-  tags: ['autodocs'],
 } satisfies Meta<typeof CardPreview>;
 
 type Story = StoryObj<typeof meta>;
 
+/**
+ * 카드 정보 작성 메뉴에서는 아직 카드의 이름이 결정되지 않았으므로, 카드의 이름은 보여주지 않습니다.
+ */
 export const Standard: Story = {
   args: {
     cardIssuer: '신한은행',
