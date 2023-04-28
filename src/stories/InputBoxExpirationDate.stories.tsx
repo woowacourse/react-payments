@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import InputBoxExpirationDate from "../component/CardInputPage/InputBoxExpirationDate/InputBoxExpirationDate";
+import { CreditCardProvider } from "../context/CreditCardContext";
 
 type Story = StoryObj<typeof InputBoxExpirationDate>;
 
@@ -10,12 +11,15 @@ const meta: Meta = {
   argTypes: {
     setIsComplete: { action: 'Is input complete?' },
   },
+  decorators: [
+    (Story) => (
+      <CreditCardProvider>
+        <Story />
+      </CreditCardProvider>
+    ),
+  ],
 };
 
 export default meta;
 
-export const InputTest: Story = {
-  args: {
-    setPreviewDataHandler: () => {},
-  },
-};
+export const InputTest: Story = {};

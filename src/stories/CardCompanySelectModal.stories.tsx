@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import CardCompanySelectModal from "../component/CardInputPage/CardCompanySelectModal/CardCompanySelectModal";
+import { CreditCardProvider } from "../context/CreditCardContext";
 
 type Story = StoryObj<typeof CardCompanySelectModal>;
 
@@ -20,9 +21,9 @@ const meta: Meta = {
   },
   decorators: [
     (Story) => (
-      <div style={{ width: '375px' }}>
+      <CreditCardProvider>
         <Story />
-      </div>
+      </CreditCardProvider>
     ),
   ],
 };

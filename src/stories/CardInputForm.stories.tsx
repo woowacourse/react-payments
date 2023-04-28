@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import CardInputForm from "../component/CardInputPage/CardInputForm/CardInputForm";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
+import { CreditCardProvider } from "../context/CreditCardContext";
 
 type Story = StoryObj<typeof CardInputForm>;
 
@@ -18,7 +19,9 @@ const meta: Meta  = {
   decorators: [
     (Story) => (
       <BrowserRouter>
-        <Story />
+        <CreditCardProvider>
+          <Story />
+        </CreditCardProvider>
       </BrowserRouter>
     ),
   ],
