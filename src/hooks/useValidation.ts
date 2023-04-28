@@ -45,7 +45,13 @@ export const useValidation = <Data extends object>(validateFns: Validation<Data>
 
     try {
       validateFn?.(value);
-      setValidationResult({ ...validationResult, [field]: null });
+
+      // validate 성공했으므로 validationResult에서 삭제
+      setValidationResult(
+        Object.fromEntries(
+          Object.entries(validationResult).filter(([itField]) => itField !== field),
+        ) as ValidationResult<Data>,
+      );
       return true;
     } catch (e) {
       const error = e as Error;
