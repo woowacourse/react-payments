@@ -34,7 +34,7 @@ function App() {
           />
           <Route
             path="/add-card-alias"
-            element={<AddCardAlias cards={cards} />}
+            element={<AddCardAlias cards={cards} setCards={setCards} />}
           />
         </Routes>
       </Router>
