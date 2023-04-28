@@ -11,8 +11,8 @@ import { CardInfoProvider } from '../context/CardInfoContext';
 const App = () => {
   const [cardInfo, setCardInfo] = useState<CardInfo[]>([]);
 
-  const registerNewCard = ({ cardNumber, expirationDate, cardOwnerName, selectedCard }: CardInfo) => {
-    setCardInfo([...cardInfo, { cardNumber, expirationDate, cardOwnerName, selectedCard }]);
+  const registerNewCard = ({ cardNumber, expirationDate, cardOwnerName, selectedCard, cardNickName }: CardInfo) => {
+    setCardInfo([...cardInfo, { cardNumber, expirationDate, cardOwnerName, selectedCard, cardNickName }]);
   };
 
   const router = createBrowserRouter([
@@ -24,7 +24,7 @@ const App = () => {
       path: '/card-registration',
       element: (
         <CardInfoProvider>
-          <CardRegistration registerNewCard={registerNewCard} />,
+          <CardRegistration />,
         </CardInfoProvider>
       ),
     },
@@ -32,7 +32,7 @@ const App = () => {
       path: '/card-registration-confirmation',
       element: (
         <CardInfoProvider>
-          <CardRegistrationConfirmation />,
+          <CardRegistrationConfirmation registerNewCard={registerNewCard} />,
         </CardInfoProvider>
       ),
     },
