@@ -33,18 +33,12 @@ const BackDrop = styled.div<{ isOpenModal: boolean }>`
   position: fixed;
   top: 0;
 
+  width: inherit;
   height: 100vh;
 
   background: rgba(0, 0, 0, 0.5);
 
   animation: ${({ isOpenModal }) => (isOpenModal ? fadeIn : fadeOut)} 0.2s ease-out;
-
-  @media (min-width: 440px) {
-    width: 438px;
-  }
-  @media (max-width: 440px) {
-    width: 100vw;
-  }
 `;
 
 const ModalContainer = styled.div<{ isOpenModal: boolean }>`
