@@ -3,12 +3,16 @@ import { Company } from "../../types/company";
 
 interface CompanyProps {
   company: Company;
-  handleClick: (company: Company) => void;
+  selectCompany: (company: Company) => void;
 }
 
-export const CompanyIcon = ({ company, handleClick }: CompanyProps) => {
+export const CompanyIcon = ({ company, selectCompany }: CompanyProps) => {
+  const handleClick = () => {
+    selectCompany(company);
+  };
+
   return (
-    <Wrapper onClick={() => handleClick(company)}>
+    <Wrapper onClick={handleClick}>
       <CompanyImg src={company.imgSrc} alt={company.name} />
       <Name>{company.name}</Name>
     </Wrapper>

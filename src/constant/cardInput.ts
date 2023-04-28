@@ -1,4 +1,4 @@
-export const INPUT_FULL_LENGTH: Readonly<{ [key: string]: number }> = {
+export const INPUT_FULL_LENGTH: Readonly<Record<string, number>> = {
   CARD_NUMBER: 4,
   CARD_NUMBERS: 16,
   CVC: 3,
@@ -8,7 +8,7 @@ export const INPUT_FULL_LENGTH: Readonly<{ [key: string]: number }> = {
   PASSWORDS: 2,
 };
 
-export const ERROR_MESSAGE: Readonly<{ [key: string]: string }> = {
+export const ERROR_MESSAGE: Readonly<Record<string, string>> = {
   CARD_NUMBERS: "16자리 숫자를 입력하세요.",
   CVC: "3자리 숫자를 입력하세요.",
   EXPIRY_DATE: "유효한 만료일이 아닙니다. ",

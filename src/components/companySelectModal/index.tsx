@@ -32,7 +32,7 @@ export const CompanySelectModal = ({
             <CompanyIcon
               key={company.name}
               company={company}
-              handleClick={selectCompany}
+              selectCompany={selectCompany}
             />
           ))}
         </IconWrapper>

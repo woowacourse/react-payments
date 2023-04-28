@@ -10,7 +10,7 @@ export default {
 
 const Template: StoryFn<typeof CompanyIcon> = (args: {
   company: Company;
-  handleClick: (company: Company) => void;
+  selectCompany: (company: Company) => void;
 }): React.ReactElement => <CompanyIcon {...args} />;
 
 export const KakaoBank = Template.bind({});

@@ -26,14 +26,14 @@ export const CardForm = ({ setCardInfo, newCard }: CardFormProps) => {
   const { addNewCard } = useContext(CardContext);
   const moveTo = useNavigate();
 
-  const isInputValid = () => {
+  const isEveryInputValid = () => {
     return Object.entries(inputValidity).every(([_, isValid]) => isValid);
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (isInputValid()) {
+    if (isEveryInputValid()) {
       addNewCard(newCard);
       moveTo("/nickname");
     }
@@ -80,7 +80,7 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 15px;
-  margin-top: 20px;
+  margin-top: 10px;
 `;
 
 const SubmitButton = styled.button`
