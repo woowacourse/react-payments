@@ -1,6 +1,6 @@
 import { CardType, Page } from '../../types';
 import { useEffect, useRef } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 import PageTemplate from '../template/PageTemplate';
 import Card from '../common/Card';
@@ -43,7 +43,7 @@ const CardNamePage = ({ navigate }: Props) => {
 
   useEffect(() => {
     inputRef.current?.focus();
-  });
+  }, []);
 
   return (
     <PageTemplate>
@@ -64,8 +64,22 @@ const CardNamePage = ({ navigate }: Props) => {
 
 export default CardNamePage;
 
+const narrowing = keyframes`
+  from { 
+    transform: translate(0, -100px);
+    margin-bottom: 100px;
+  }
+  
+  to { 
+    transform: translate(0, 0); 
+    margin-bottom: 40px;
+  }
+`;
+
 const Title = styled.h2`
-  margin-top: 130px;
+  animation: ${narrowing} 3s;
+
+  margin-top: 10vh;
   margin-bottom: 40px;
 
   text-align: center;
@@ -79,7 +93,7 @@ const CardNameInput = styled.input`
 
   width: 240px;
   height: 34px;
-  margin-top: 124px;
+  margin-top: 20vh;
   border: none;
   border-bottom: 1.5px solid #737373;
   padding: 6px 0;
@@ -88,14 +102,16 @@ const CardNameInput = styled.input`
 
   text-align: center;
   font-size: 18px;
+  color: #383838;
 `;
 
 const ButtonWrapper = styled.div`
-  margin-top: auto;
-
-  width: 100%;
   display: flex;
   justify-content: flex-end;
+
+  width: 100%;
+  margin-top: auto;
+  margin-bottom: 24px;
 `;
 
 const SubmitButton = styled.button`
