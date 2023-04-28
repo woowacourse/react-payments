@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { BackButton } from '../components/common/BackButton';
+import { ReactComponent as ArrowDownIcon } from '../assets/common/arrow-down.svg';
+import { Button } from '../components/common/Button';
 import { Input } from '../components/common/Input';
 import { NumberInput } from '../components/common/NumberInput';
 import { Page } from '../components/common/Page';
@@ -46,9 +47,12 @@ const FormGroupLabel = styled.div`
   justify-content: space-between;
 `;
 
-const NextButton = styled.button`
-  align-self: flex-end;
+const ButtonGroup = styled.div`
+  display: flex;
+  justify-content: flex-end;
+
   margin-top: auto;
+  width: 100%;
 `;
 
 export const NewCreditCardPage = () => {
@@ -100,7 +104,15 @@ export const NewCreditCardPage = () => {
 
   return (
     <Page>
-      <Page.Header leading={<BackButton onClick={handleClickBackButton} />}>카드추가</Page.Header>
+      <Page.Header
+        leading={
+          <Button onClick={handleClickBackButton}>
+            <ArrowDownIcon />
+          </Button>
+        }
+      >
+        카드추가
+      </Page.Header>
       <Content>
         <CreditCardView
           owner={newCard.owner}
@@ -176,9 +188,9 @@ export const NewCreditCardPage = () => {
           </Text>
         </FormGroup>
 
-        <NextButton onClick={handleClickNextButton}>
-          <Text weight="bold">다음</Text>
-        </NextButton>
+        <ButtonGroup>
+          <Button onClick={handleClickNextButton}>다음</Button>
+        </ButtonGroup>
       </Content>
     </Page>
   );
