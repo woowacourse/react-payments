@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
+import { modalContextType } from '../types';
 
-export const ModalContext = React.createContext<{
-  isModalOpen: boolean;
-  openModal: () => void;
-  closeModal: () => void;
-}>({
+export const ModalContext = React.createContext<modalContextType>({
   isModalOpen: false,
   openModal: () => {},
   closeModal: () => {},
@@ -21,11 +18,7 @@ const ModalContextProvider = (props: { children: React.ReactNode }) => {
     setIsModalOpen(false);
   };
 
-  const contextValue: {
-    isModalOpen: boolean;
-    openModal: () => void;
-    closeModal: () => void;
-  } = {
+  const contextValue: modalContextType = {
     isModalOpen: isModalOpen,
     openModal: openModal,
     closeModal: closeModal,
