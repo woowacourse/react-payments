@@ -50,15 +50,13 @@ const CardFormContext = createContext<readonly [CardForm, React.Dispatch<CardFor
 export const useCardForm = (): readonly [CardForm, React.Dispatch<CardFormAction>] => {
   const context = useContext(CardFormContext);
   if (context === null) throw new Error('context is null');
+
   return context;
 };
 
-interface CardFormProviderProps {
-  children: React.ReactNode;
-}
-
-export const CardFormProvider = ({ children }: CardFormProviderProps) => {
+export const CardFormProvider = ({ children }: { children: React.ReactNode }) => {
   const [cardForm, dispatch] = useReducer(cardFormReducer, initialCardForm);
+
   return (
     <CardFormContext.Provider value={[cardForm, dispatch] as const}>{children}</CardFormContext.Provider>
   );
