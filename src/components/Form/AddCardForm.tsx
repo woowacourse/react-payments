@@ -122,14 +122,11 @@ function AddCardForm({ onSubmit }: AddCardFormProps) {
           <InputLabel>카드 소유자 이름(선택)</InputLabel>
           <InputLabel>{`${name.length} / 30`}</InputLabel>
         </NameLabelContainer>
-        <NameInputContainer>
-          <NameInput value={name} onChange={handleNameInputChange} />
-        </NameInputContainer>
+
+        <NameInput value={name} onChange={handleNameInputChange} width="100%" />
 
         <InputLabel>보안 코드(CVC/CVV)</InputLabel>
-        <SecurityCodeInputContainer>
-          <SecurityCodeInput value={securityCode} onChange={handleSecurityCodeChange} />
-        </SecurityCodeInputContainer>
+        <SecurityCodeInput value={securityCode} onChange={handleSecurityCodeChange} />
 
         <InputLabel>카드 비밀번호</InputLabel>
         <PasswordInputContainer>
@@ -185,38 +182,14 @@ const ExpirationDateContainer = styled(Container)`
   }
 `;
 
-const NameInputContainer = styled(Container)`
-  width: 318px;
-`;
-
-const SecurityCodeInputContainer = styled(Container)`
-  width: 84px;
-
-  Input {
-    text-align: center;
-    margin-left: 0.5rem;
-    letter-spacing: 0.5rem;
-  }
-`;
-
-const PasswordInputContainer = styled(Container)`
-  background-color: rgba(255, 255, 255, 0);
-  width: 60%;
-  padding: 0;
+const PasswordInputContainer = styled.div`
+  display: flex;
   align-items: center;
-  Input {
-    width: 44px;
-    height: 44px;
-    text-align: center;
-    background-color: #ecebf1;
-    margin-right: 7px;
-    border-radius: 7px;
-  }
 `;
 
 const DotContainer = styled.div`
   padding: 0 20px;
-  font-size: 19px;
+  font-size: 16px;
 `;
 
 const FormSubmitButton = styled.button`
