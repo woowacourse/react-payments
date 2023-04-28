@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Input } from './Input';
-import { InputWrapper } from './InputWrapper';
+import { InputContainer } from './InputContainer';
 import { OwnerName } from '../../types';
 import { isEnglish } from '../../utils/validator';
 import { ERROR, MAX_NAME_SIZE } from '../../constants';
@@ -40,18 +40,18 @@ export function OwnerNameInput({
           {ownerName.length}/{MAX_NAME_SIZE}
         </Style.NameLength>
       </Style.Label>
-      <InputWrapper width={318}>
+      <InputContainer width={'318px'}>
         <Input
           id='ownerName'
           ref={ownerNameInputRef}
           value={ownerName}
-          width={318}
+          width={'318px'}
           maxLength={MAX_NAME_SIZE}
           placeholder='카드에 표시된 이름과 동일하게 입력하세요.'
           onChange={handleInputChange}
           onKeyDown={handleEnterPress}
         />
-      </InputWrapper>
+      </InputContainer>
     </>
   );
 }

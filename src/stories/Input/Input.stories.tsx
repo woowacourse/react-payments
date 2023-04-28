@@ -13,13 +13,13 @@ type Story = StoryObj<typeof meta>;
 export const BasicInput: Story = {
   args: {
     designType: 'basic',
-    width: 200,
+    width: '200px',
   },
 };
 
 export const UnderlineInput: Story = {
   args: {
     designType: 'underline',
-    width: 200,
+    width: '200px',
   },
 };

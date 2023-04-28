@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useEffect } from 'react';
 import { Input } from './Input';
-import { InputWrapper } from './InputWrapper';
+import { InputContainer } from './InputContainer';
 import { SecurityCode } from '../../types';
 import { hasValidLength, isNumeric } from '../../utils/validator';
 import { ERROR, PASSWORD_TEXT, SECURITY_CODE_SIZE } from '../../constants';
@@ -48,12 +48,12 @@ export function SecurityCodeInput({
       <Style.Label htmlFor='CVC'>
         <Style.Title>보안 코드(CVC/CVV)</Style.Title>
       </Style.Label>
-      <InputWrapper width={84}>
+      <InputContainer width={'84px'}>
         <Input
           id='CVC'
           ref={securityCodeInputRef}
           value={securityCode}
-          width={84}
+          width={'84px'}
           minLength={SECURITY_CODE_SIZE}
           maxLength={SECURITY_CODE_SIZE}
           placeholder={PASSWORD_TEXT.repeat(SECURITY_CODE_SIZE)}
@@ -63,7 +63,7 @@ export function SecurityCodeInput({
           type='password'
           required
         />
-      </InputWrapper>
+      </InputContainer>
     </>
   );
 }

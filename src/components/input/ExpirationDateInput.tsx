@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useRef, useEffect } from 'react';
 import { Input } from './Input';
-import { InputWrapper } from './InputWrapper';
+import { InputContainer } from './InputContainer';
 import { ExpirationDate } from '../../types';
 import { isValidDate } from '../../utils/validator';
 import { ERROR, MONTH_SIZE, YEAR_SIZE } from '../../constants';
@@ -65,12 +65,12 @@ export function ExpirationDateInput({
       <Style.Label htmlFor='expirationDate'>
         <Style.Title>만료일</Style.Title>
       </Style.Label>
-      <InputWrapper width={137}>
+      <InputContainer width={'137px'}>
         <Input
           id='expirationDate'
           ref={monthInputRef}
           value={expirationDate.month}
-          width={30}
+          width={'30px'}
           minLength={MONTH_SIZE}
           maxLength={MONTH_SIZE}
           required
@@ -82,7 +82,7 @@ export function ExpirationDateInput({
         <Input
           ref={yearInputRef}
           value={expirationDate.year}
-          width={30}
+          width={'30px'}
           minLength={YEAR_SIZE}
           maxLength={YEAR_SIZE}
           required
@@ -92,7 +92,7 @@ export function ExpirationDateInput({
           onKeyDown={handleBackspacePress}
           onBlur={validateDate}
         />
-      </InputWrapper>
+      </InputContainer>
     </>
   );
 }

@@ -20,8 +20,8 @@ const Style = {
     display: flex;
     align-items: center;
 
-    width: ${(props) => (props.width ? `${props.width}px` : '36px')};
-    height: ${(props) => (props.height ? `${props.height}px` : '45px')};
+    width: ${(props) => (props.width ? `${props.width}` : '36px')};
+    height: ${(props) => (props.height ? `${props.height}` : '45px')};
 
     padding: 0;
     border: 0;

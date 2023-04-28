@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useRef } from 'react';
 import { Input } from './Input';
-import { InputWrapper } from './InputWrapper';
+import { InputContainer } from './InputContainer';
 import { Password } from '../../types';
 import { hasValidLength, isNumeric } from '../../utils/validator';
 import { ERROR, PASSWORD_SIZE, PASSWORD_TEXT } from '../../constants';
@@ -57,12 +57,12 @@ export function PasswordInput({ password, passwordInputRef, setPassword }: Props
       <Style.Wrapper>
         {Array.from({ length: 2 }).map((_, index) => {
           return (
-            <InputWrapper key={index} width={43}>
+            <InputContainer key={index} width={'43px'}>
               <Input
                 id={`cardPassword${index}`}
                 ref={allRef[index]}
                 value={password[index]}
-                width={43}
+                width={'43px'}
                 maxLength={1}
                 type='password'
                 inputMode='numeric'
@@ -71,7 +71,7 @@ export function PasswordInput({ password, passwordInputRef, setPassword }: Props
                 onKeyDown={(e) => handleBackspacePress(index, e)}
                 placeholder={PASSWORD_TEXT}
               />
-            </InputWrapper>
+            </InputContainer>
           );
         })}
         <Style.Dot>•</Style.Dot>

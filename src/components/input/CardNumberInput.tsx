@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React, { Fragment, useRef, useState } from 'react';
 import { Input } from './Input';
-import { InputWrapper } from './InputWrapper';
+import { InputContainer } from './InputContainer';
 import { CardNumber } from '../../types';
 import { hasValidLength, isNumeric } from '../../utils/validator';
 import {
@@ -72,14 +72,14 @@ export function CardNumberInput({ moveFocusToExpirationDate, cardNumber, setCard
       <Style.Label htmlFor='cardNumber0'>
         <Style.Title>카드 번호</Style.Title>
       </Style.Label>
-      <InputWrapper width={318}>
+      <InputContainer width={'318px'}>
         {Array.from({ length: cardNumber.length }).map((_, index) => {
           return (
             <Fragment key={index}>
               <Input
                 id={`cardNumber${index}`}
                 value={cardNumber[index]}
-                width={36}
+                width={'36px'}
                 minLength={CARD_NUMBER_INPUT_SIZE}
                 maxLength={CARD_NUMBER_INPUT_SIZE}
                 required
@@ -98,7 +98,7 @@ export function CardNumberInput({ moveFocusToExpirationDate, cardNumber, setCard
             </Fragment>
           );
         })}
-      </InputWrapper>
+      </InputContainer>
     </>
   );
 }
