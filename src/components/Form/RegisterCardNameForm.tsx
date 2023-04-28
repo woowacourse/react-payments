@@ -1,5 +1,5 @@
 import { ChangeEventHandler, FormEventHandler, useContext, useState } from 'react';
-import { CardNameInput } from 'components/Input/CardNameInput';
+import { CardNameInput } from 'components/Input/CardNameInput/CardNameInput';
 import { CreditCard } from 'components/common/Card/CreditCard';
 import { CardFormContext, CardFormProvider } from 'context/CardForm';
 import CardDB from 'db/Cards';
@@ -32,9 +32,7 @@ export function RegisterCardNameForm({ onSubmit }: RegisterCardNameFormProps) {
       <FormContainer onSubmit={handleSubmit}>
         <CompleteMsgSpan>카드 등록이 완료되었습니다</CompleteMsgSpan>
         <CreditCard card={newCard} />
-        <CardNameInputWrapper>
-          <CardNameInput value={cardName} onChange={handleCardNameInput} />
-        </CardNameInputWrapper>
+        <CardNameInput value={cardName} onChange={handleCardNameInput} />
         <CardNameFormButton type="submit">확인</CardNameFormButton>
       </FormContainer>
     </CardFormProvider>
@@ -55,24 +53,10 @@ const CompleteMsgSpan = styled.span`
   text-align: center;
 `;
 
-const CardNameInputWrapper = styled.div`
-  display: flex;
-  input {
-    margin-top: 125px;
-    width: 240px;
-    text-align: center;
-    border: none;
-    border-bottom: 1px solid black;
-    font-size: 18px;
-  }
-`;
-
 const CardNameFormButton = styled.button`
-  position: absolute;
-  right: 20px;
-  bottom: 20px;
   border: none;
   background: white;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 700;
+  cursor: pointer;
 `;

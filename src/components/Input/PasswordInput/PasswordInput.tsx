@@ -1,7 +1,9 @@
 import { Input } from 'components/common';
 import React, { ChangeEvent, ChangeEventHandler } from 'react';
-import { ValueAndOnChange } from './types';
+import { ValueAndOnChange } from '../types';
 import { validateInput } from 'util/Validation';
+import { Styled as S } from './PasswordInput.styles';
+import FormLabel from 'components/common/FormLabel/FormLabel';
 
 export interface PasswordInputProps {
   first: ValueAndOnChange;
@@ -28,24 +30,29 @@ export function PasswordInput(props: PasswordInputProps) {
 
   return (
     <>
-      <Input
-        ref={inputRefs[0]}
-        inputMode="numeric"
-        value={first.value}
-        type="password"
-        maxLength={1}
-        onChange={(e) => handleChange(e, 0, first.onChange)}
-        required
-      />
-      <Input
-        ref={inputRefs[1]}
-        inputMode="numeric"
-        value={second.value}
-        type="password"
-        maxLength={1}
-        onChange={(e) => handleChange(e, 1, second.onChange)}
-        required
-      />
+      <FormLabel>카드 비밀번호</FormLabel>
+      <S.PasswordInputContainer>
+        <Input
+          ref={inputRefs[0]}
+          inputMode="numeric"
+          value={first.value}
+          type="password"
+          maxLength={1}
+          onChange={(e) => handleChange(e, 0, first.onChange)}
+          required
+        />
+        <Input
+          ref={inputRefs[1]}
+          inputMode="numeric"
+          value={second.value}
+          type="password"
+          maxLength={1}
+          onChange={(e) => handleChange(e, 1, second.onChange)}
+          required
+        />
+        <S.DotContainer>•</S.DotContainer>
+        <S.DotContainer>•</S.DotContainer>
+      </S.PasswordInputContainer>
     </>
   );
 }

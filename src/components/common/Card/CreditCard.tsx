@@ -54,7 +54,6 @@ const Styled = {
     height: 26px;
     left: 14px;
     top: 47px;
-
     background: #cbba64;
     border-radius: 4px;
   `,
@@ -67,10 +66,8 @@ const Styled = {
     height: 10px;
     left: 24px;
     top: 84px;
-
     span {
       width: 34px;
-
       font-size: 14px;
     }
   `,
@@ -89,7 +86,6 @@ const Styled = {
     position: absolute;
     top: 11px;
     left: 13px;
-
     font-size: 12px;
   `,
 

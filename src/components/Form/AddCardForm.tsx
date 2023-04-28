@@ -7,7 +7,6 @@ import {
 } from 'components/Input';
 import styled from 'styled-components';
 import { ChangeEventHandler, FormEventHandler, useContext, useEffect, useState } from 'react';
-import { Container } from 'components/style/InputContainer';
 import { COMPANY_NAME, Card } from 'components/common/Card/types';
 import { ValueAndOnChange } from 'components/Input/types';
 import { CreditCard } from 'components/common/Card/CreditCard';
@@ -119,50 +118,24 @@ function AddCardForm({ onSubmit }: AddCardFormProps) {
         <CreditCard card={card} onClick={handleClickCompany} />
       </CardWrapper>
       <FormContainer onSubmit={handleSubmit}>
-        <InputLabel>카드 번호</InputLabel>
-        <CardNumberContainer>
-          <CardNumberInputs valueAndOnChanges={valueAndOnChanges} />
-        </CardNumberContainer>
+        <CardNumberInputs valueAndOnChanges={valueAndOnChanges} />
         {<ErrorCaption>{!isValid && errorMessages.numbers}</ErrorCaption>}
-        <InputLabel>만료일</InputLabel>
 
-        <ExpirationDateContainer>
-          <ExpirationDateInput
-            month={{ value: card.expirationDate.month, onChange: handleMonthInputChange }}
-            year={{ value: card.expirationDate.year, onChange: handleYearInputChange }}
-          />
-        </ExpirationDateContainer>
+        <ExpirationDateInput
+          month={{ value: card.expirationDate.month, onChange: handleMonthInputChange }}
+          year={{ value: card.expirationDate.year, onChange: handleYearInputChange }}
+        />
         {<ErrorCaption>{!isValid && errorMessages.expirationDate}</ErrorCaption>}
 
-        <OwnerNameLabelContainer>
-          <InputLabel>카드 소유자 이름(선택)</InputLabel>
-          <InputLabel>{`${card.ownerName.length} / 30`}</InputLabel>
-        </OwnerNameLabelContainer>
-        <OwnerNameInputContainer>
-          <OwnerNameInput value={card.ownerName} onChange={handleOwnerNameInputChange} />
-        </OwnerNameInputContainer>
+        <OwnerNameInput value={card.ownerName} onChange={handleOwnerNameInputChange} />
 
-        <InputLabel>보안 코드(CVC/CVV)</InputLabel>
-        <SecurityCodeContainer>
-          <SecurityCodeInputContainer>
-            <SecurityCodeInput value={card.securityCode} onChange={handleSecurityCodeChange} />
-          </SecurityCodeInputContainer>
-          <SecurityCodeButton>?</SecurityCodeButton>
-          <SecurityCodeNotification>
-            카드 뒷면의 CVC 번호 3자리 숫자를 입력해주세요
-          </SecurityCodeNotification>
-        </SecurityCodeContainer>
+        <SecurityCodeInput value={card.securityCode} onChange={handleSecurityCodeChange} />
         {<ErrorCaption>{!isValid && errorMessages.securityCode}</ErrorCaption>}
 
-        <InputLabel>카드 비밀번호</InputLabel>
-        <PasswordInputContainer>
-          <PasswordInput
-            first={{ value: card.password.first, onChange: handleFirstPasswordInputChange }}
-            second={{ value: card.password.second, onChange: handleSecondPasswordInputChange }}
-          />
-          <DotContainer>•</DotContainer>
-          <DotContainer>•</DotContainer>
-        </PasswordInputContainer>
+        <PasswordInput
+          first={{ value: card.password.first, onChange: handleFirstPasswordInputChange }}
+          second={{ value: card.password.second, onChange: handleSecondPasswordInputChange }}
+        />
         {<ErrorCaption>{!isValid && errorMessages.password}</ErrorCaption>}
 
         {isValid && <FormSubmitButton type="submit">다음</FormSubmitButton>}
@@ -184,67 +157,6 @@ const FormContainer = styled.form`
   }
 `;
 
-const InputLabel = styled.span`
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: -0.085em;
-  color: var(--primary-text-color);
-  margin-top: 16px;
-  margin-bottom: 3px;
-`;
-
-const CardNumberContainer = styled(Container)`
-  justify-content: center;
-  width: 318px;
-  Input {
-    width: 15%;
-    text-align: center;
-  }
-`;
-
-const ExpirationDateContainer = styled(Container)`
-  width: 137px;
-  justify-content: center;
-  Input {
-    text-align: center;
-  }
-`;
-
-const OwnerNameInputContainer = styled(Container)`
-  width: 318px;
-  margin-bottom: 16px;
-`;
-
-const SecurityCodeInputContainer = styled(Container)`
-  width: 84px;
-
-  Input {
-    text-align: center;
-    margin-left: 0.5rem;
-    letter-spacing: 0.5rem;
-  }
-`;
-
-const PasswordInputContainer = styled(Container)`
-  background-color: rgba(255, 255, 255, 0);
-  width: 60%;
-  padding: 0;
-  align-items: center;
-  Input {
-    width: 44px;
-    height: 44px;
-    text-align: center;
-    background-color: var(--primary-color);
-    margin-right: 7px;
-    border-radius: 7px;
-  }
-`;
-
-const DotContainer = styled.div`
-  padding: 0 20px;
-  font-size: 19px;
-`;
-
 const FormSubmitButton = styled.button`
   border: none;
   font-size: 16px;
@@ -255,50 +167,11 @@ const FormSubmitButton = styled.button`
   cursor: pointer;
 `;
 
-const OwnerNameLabelContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  background-color: rgba(255, 255, 255, 0);
-`;
-
 const ErrorCaption = styled.span`
   height: 10px;
   margin-top: 5px;
   font-size: 10px;
   color: var(--error-text-color);
-`;
-
-const SecurityCodeContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 11px;
-`;
-
-const SecurityCodeButton = styled.span`
-  border-radius: 50%;
-  border: 2px solid #bababa;
-  width: 27px;
-  height: 27px;
-  text-align: center;
-  font-size: 22px;
-  font-weight: 500;
-  color: var(--grey-text-color);
-
-  :hover + span {
-    display: block;
-  }
-`;
-
-const SecurityCodeNotification = styled.span`
-  display: none;
-  width: 170px;
-  padding: 0 2px;
-  border-radius: 7px;
-  border: 2px solid var(--light-gray-text-color);
-  font-weight: 600;
-  color: var(--gray-text-color);
 `;
 
 export default AddCardForm;
