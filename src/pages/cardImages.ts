@@ -34,4 +34,4 @@ const cardSelectButtonInfos: { title: CardIssuerType; src: string }[] = [
   { title: '국민카드', src: cardIcons['국민카드'] },
 ];
 
-export { cardImages, cardSelectButtonInfos };
+export { cardImages, cardIcons, cardSelectButtonInfos };
