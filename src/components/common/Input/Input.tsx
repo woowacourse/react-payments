@@ -3,7 +3,8 @@ import styled from 'styled-components';
 
 export interface InputProps extends React.ComponentPropsWithRef<'input'> {
   backgroundColor?: string;
-  align?: string;
+  align?: 'left' | 'center' | 'right';
+  outline?: boolean;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
@@ -14,5 +15,6 @@ const Styled = {
   Input: styled.input<InputProps>`
     background-color: ${({ backgroundColor }) => backgroundColor ?? 'white'};
     text-align: ${({ align }) => align ?? 'left'};
+    outline: ${({ outline }) => (outline ? 'solid' : 'none')};
   `,
 };
