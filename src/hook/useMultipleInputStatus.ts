@@ -10,7 +10,10 @@ const useMultipleInputStatus = (length: number) => {
 
   const getSetStateFunction = (index: number) => (status: INPUT_STATUS) => {
     const newStates = { ...states };
-    newStates[index] = status;
+    
+    if (newStates[index.toString()] === status) return;
+
+    newStates[index.toString()] = status;
 
     setStates(newStates);
   }
