@@ -52,7 +52,7 @@ function CardAddForm({
         updateInputValue={updateInputValue}
         updateInputError={updateInputError}
       />
-      <Button className="submit-button" variant="primary" tabIndex={8}>
+      <Button className="submit-button" variant="primary">
         다음
       </Button>
     </form>
