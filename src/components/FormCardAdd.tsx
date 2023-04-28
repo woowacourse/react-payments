@@ -65,7 +65,8 @@ const FormCardAdd = ({
     }
   };
 
-  const viewAddNicknameModal = () => {
+  const viewAddNicknameModal = (e: React.FormEvent) => {
+    e.preventDefault();
     setNicknameModalOpen(true);
   };
 
@@ -85,7 +86,12 @@ const FormCardAdd = ({
 
   return (
     <>
-      <form className="add-card-form">
+      <form
+        className="add-card-form"
+        onSubmit={(e) => {
+          viewAddNicknameModal(e);
+        }}
+      >
         <div>
           <span className="form-label">카드 번호</span>
           <div className="card-number-input-container">
@@ -283,13 +289,7 @@ const FormCardAdd = ({
           </div>
         </div>
         <div className="add-card-submit ">
-          {readyToPending && !inputError ? (
-            <button type="button" onClick={viewAddNicknameModal}>
-              다음
-            </button>
-          ) : (
-            ''
-          )}
+          {readyToPending && !inputError ? <button type="submit">다음</button> : ''}
         </div>
       </form>
       {nicknameModalOpen ? (
