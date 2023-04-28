@@ -74,7 +74,11 @@ export const useInput = (
     }
   }, [isNumber, setError, maxLength, errorMessage, validate, value]);
 
-  const onBlur = () => {};
+  const onBlur = () => {
+    if (validate(value)) {
+      setError('');
+    }
+  };
 
   return {
     value,
