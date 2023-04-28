@@ -6,6 +6,7 @@ const useCard = () => {
   const [cardList, setCardList] = useState<Card[]>(getLocalStorage() ?? []);
 
   const newCardId = (cardList.at(-1)?.id ?? 0) + 1;
+  const newCard = cardList.at(-1);
   const cardListLength = cardList.length;
 
   useEffect(() => {
@@ -26,7 +27,7 @@ const useCard = () => {
     });
   };
 
-  return { cardList, newCardId, cardListLength, addCard, updateCardName };
+  return { cardList, newCardId, newCard, cardListLength, addCard, updateCardName };
 };
 
 export { useCard };

@@ -1,30 +1,24 @@
-import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import { Card } from '../types';
+import { useContext } from 'react';
+import { CardListContext } from '../contexts/CardListContext';
 import CardItem from '../components/CardItem/CardItem';
 import CardNameChangeForm from '../components/CardNameChangeForm/CardNameChangeForm';
 
 function CardRegisteredPage() {
-  const location = useLocation();
-  const [cardInformation, setCardInformation] = useState<Card | null>(null);
-
-  useEffect(() => {
-    setCardInformation(location.state);
-  }, [location]);
+  const { newCard } = useContext(CardListContext);
 
   return (
     <main>
-      {cardInformation && (
+      {newCard && (
         <div className="register-content">
           <h2 className="align-center mg-b-24">카드 등록이 완료되었습니다</h2>
           <CardItem
             className="center-hoz-item"
-            issuer={cardInformation.issuer}
-            cardNumber={cardInformation.cardNumber}
-            expirationDate={cardInformation.expirationDate}
-            ownerName={cardInformation.ownerName}
+            issuer={newCard.issuer}
+            cardNumber={newCard.cardNumber}
+            expirationDate={newCard.expirationDate}
+            ownerName={newCard.ownerName}
           />
-          <CardNameChangeForm id={cardInformation.id} defaultCardName={cardInformation.cardName} />
+          <CardNameChangeForm id={newCard.id} defaultCardName={newCard.cardName} />
         </div>
       )}
     </main>

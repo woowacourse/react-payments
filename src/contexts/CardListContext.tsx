@@ -5,6 +5,7 @@ import { useCard } from '../hooks/cards/useCardList';
 interface CardListContextValue {
   cardList: Card[];
   newCardId: number;
+  newCard: Card | undefined;
   cardListLength: number;
   addCard: (cardInformation: Card) => void;
   updateCardName: (id: number, cardName: string) => void;
@@ -13,17 +14,18 @@ interface CardListContextValue {
 export const CardListContext = createContext<CardListContextValue>({
   cardList: [],
   newCardId: 1,
+  newCard: undefined,
   cardListLength: 0,
   addCard: () => {},
   updateCardName: () => {},
 });
 
 export const CardListProvider = ({ children }: PropsWithChildren) => {
-  const { cardList, newCardId, cardListLength, addCard, updateCardName } = useCard();
+  const { cardList, newCardId, newCard, cardListLength, addCard, updateCardName } = useCard();
 
   return (
     <CardListContext.Provider
-      value={{ cardList, newCardId, cardListLength, addCard, updateCardName }}
+      value={{ cardList, newCardId, newCard, cardListLength, addCard, updateCardName }}
     >
       {children}
     </CardListContext.Provider>
