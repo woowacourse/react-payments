@@ -40,10 +40,12 @@ function CardExpirationDate({
         id="expirationDate"
         name="expirationDate"
         placeholder="월/년도(MM/YY) 순서로 4자리 숫자를 입력해주세요"
+        minLength={EXPIRATION_DATE_INPUT_MAX_LENGTH}
         maxLength={EXPIRATION_DATE_INPUT_MAX_LENGTH}
         autoComplete="cc-exp"
         inputMode="numeric"
-        tabIndex={3}
+        pattern="^(0[1-9]|1[0-2])\/(2[3-8]|[4-9][0-9])$"
+        required
         isError={isError}
         onChange={onChange}
         onBlur={onBlur}

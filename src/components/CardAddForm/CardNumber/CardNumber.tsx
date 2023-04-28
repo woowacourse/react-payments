@@ -44,7 +44,8 @@ function CardNumber({ isError, updateInputValue, updateInputError }: CardNumberP
         maxLength={CARD_NUMBER_INPUT_MAX_LENGTH}
         autoComplete="cc-number"
         inputMode="numeric"
-        tabIndex={2}
+        pattern="^\d{4} \d{4} •{4} •{4}$"
+        required
         isError={isError}
         onChange={onChange}
         onBlur={onBlur}

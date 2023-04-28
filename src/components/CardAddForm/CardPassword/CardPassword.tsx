@@ -62,9 +62,10 @@ function CardPassword({ isError, updateInputValue, updateInputError }: CardPassw
             maxLength={PASSWORD_UNIT_MAX_LENGTH}
             autoComplete="off"
             inputMode="numeric"
+            pattern="^\d$"
+            required
             aria-labelledby={index === 0 ? undefined : 'password-label'}
             isError={isError}
-            tabIndex={6 + index}
             onChange={index === 0 ? onFirstInputChange : onChange}
           />
         ))}

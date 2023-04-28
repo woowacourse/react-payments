@@ -41,7 +41,8 @@ function CardSecurityCode({ isError, updateInputValue, updateInputError }: CardS
         maxLength={SECURITY_CODE_MAX_LENGTH}
         autoComplete="cc-csc"
         inputMode="numeric"
-        tabIndex={5}
+        pattern="^\d{3,4}$"
+        required
         isError={isError}
         onChange={onChange}
         onBlur={onBlur}

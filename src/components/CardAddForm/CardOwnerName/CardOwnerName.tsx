@@ -34,7 +34,7 @@ function CardOwnerName({ updateInputValue }: CardOwnerNameProps) {
         placeholder="카드에 표시된 이름과 동일하게 입력해주세요"
         maxLength={OWNER_NAME_MAX_LENGTH}
         autoComplete="cc-name"
-        tabIndex={4}
+        // tabIndex={4}
         onChange={onChange}
       />
     </InputContainer>
