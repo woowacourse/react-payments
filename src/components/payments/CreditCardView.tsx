@@ -5,7 +5,7 @@ import { Color } from '../../utils/Color';
 import { Text } from '../common/Text';
 
 type PropsWithColor<T = unknown> = T & {
-  $color: string;
+  $color: Color;
 };
 
 type CreditCardFacesProps = {
@@ -44,9 +44,12 @@ const CreditCardFrontFace = styled.div<PropsWithColor>`
 
   border-radius: 4px;
 
-  background: ${(props) => props.$color};
+  background: linear-gradient(
+    ${(props) => props.$color.toString()},
+    ${(props) => props.$color.adjustLightness(10).toString()}
+  );
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
-  color: white;
+  color: ${(props) => props.$color.getContrastFontColor().toString()};
   font-weight: ${(props) => props.theme.fontWeight.bold};
 
   backface-visibility: hidden;
@@ -85,7 +88,12 @@ const CardAdditionalInfo = styled.div`
 
 const CreditCardBackFace = styled(CreditCardFrontFace)<PropsWithColor>`
   justify-content: flex-start;
-  background: ${(props) => props.$color};
+
+  background: linear-gradient(
+    ${(props) => props.$color.toString()},
+    ${(props) => props.$color.adjustLightness(10).toString()}
+  );
+  color: ${(props) => props.$color.getContrastFontColor().toString()};
 
   transform: rotateY(180deg);
 `;
@@ -162,7 +170,7 @@ export const CreditCardView = (props: CreditCardViewProps) => {
 
   return (
     <CreditCardFaces $showBackface={showBackface}>
-      <CreditCardFrontFace $color={color.adjustLightness(-5).toString()}>
+      <CreditCardFrontFace $color={color.adjustLightness(-5)}>
         <CardVendor>
           <Text size="small">{vendor}</Text>
 
@@ -189,7 +197,7 @@ export const CreditCardView = (props: CreditCardViewProps) => {
           )}
         </CardAdditionalInfo>
       </CreditCardFrontFace>
-      <CreditCardBackFace $color={color.adjustLightness(10).toString()}>
+      <CreditCardBackFace $color={color.adjustLightness(10)}>
         <Magnet />
         <Authorization>
           <SignArea>●●●● {cvc?.replaceAll(/./g, '●') ?? ''}</SignArea>
