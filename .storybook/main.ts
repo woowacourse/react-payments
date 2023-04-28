@@ -4,7 +4,7 @@
 import type { StorybookConfig } from '@storybook/react-webpack5';
 
 const config: StorybookConfig = {
-  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
+  stories: ['../src/**/*.stories.@(js|jsx|ts|tsx)'],
   staticDirs: ['../public'],
   addons: [
     '@storybook/addon-links',
@@ -12,6 +12,8 @@ const config: StorybookConfig = {
     '@storybook/preset-create-react-app',
     '@storybook/addon-interactions',
     '@storybook/addon-actions',
+    'storybook-addon-react-router-v6',
+    '@storybook/testing-library',
   ],
   typescript: {
     check: false,
