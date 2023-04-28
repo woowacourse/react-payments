@@ -1,7 +1,8 @@
-export type InputValidate = Record<string, InputDetailInfo>;
+export type InputValidate = Record<string, InputDetailInfo>[];
 
-interface InputDetailInfo {
-  data: HTMLInputElement[];
+export interface InputDetailInfo {
+  element: HTMLInputElement;
+  name: string;
   maxLength: number;
   isRequired: boolean;
   validation: (value: string) => boolean;
@@ -12,22 +13,25 @@ interface InputDetailInfo {
 const wrongInputs: HTMLInputElement[] = [];
 
 export const formValidate = (
-  inputObject: InputValidate,
+  inputObject: InputDetailInfo[],
   formList: readonly string[]
 ) => {
   type FormListType = (typeof formList)[number];
 
-  const validationResult = formList.every((key: FormListType) =>
-    getValidateResult(inputObject[key])
-  );
+  const validationResult = formList.every((key: FormListType) => {
+    const current = inputObject.find((item) => item.name === key);
+    if (!current) return false;
+
+    return getValidateResult(current);
+  });
 
   return { validationResult, wrongInputs };
 };
 
 const getValidateResult = (currentInfo: InputDetailInfo) => {
-  const dataList = currentInfo.data;
+  const data = currentInfo.element;
 
-  const result = dataList.every((data) => isValueSuccess(currentInfo, data));
+  const result = isValueSuccess(currentInfo, data);
 
   return result;
 };
@@ -49,7 +53,7 @@ const isValueSuccess = (
     isRequiredResult,
     validateResult,
     isOverMaxLength,
-    currentInfo: currentInfo,
+    currentInfo,
   };
 
   if (!dataValidationResult) {

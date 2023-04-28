@@ -17,7 +17,6 @@ export default function OwnerInput({ owner }: OwnerInputProps) {
       <Wrapper>
         <Input
           type="text"
-          maxLength={30}
           id="owner"
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
           tabIndex={addCardPage.owner}

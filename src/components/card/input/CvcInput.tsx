@@ -30,8 +30,6 @@ export default function CvcInput({ cvc }: CvcInputProps) {
             textAlign="center"
             autoComplete="off"
             isNumber={true}
-            maxLength={3}
-            required
             id="cvc"
             placeholder="000"
             tabIndex={addCardPage.cvc}

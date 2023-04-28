@@ -22,9 +22,7 @@ export default function PasswordInput({
         <GrayWrapper>
           <Input
             isNumber={true}
-            maxLength={1}
             id="password"
-            required
             type="text"
             isPassword={true}
             placeholder="0"
@@ -37,9 +35,7 @@ export default function PasswordInput({
         <GrayWrapper>
           <Input
             isNumber={true}
-            maxLength={1}
             placeholder="0"
-            required
             type="text"
             isPassword={true}
             textAlign="center"

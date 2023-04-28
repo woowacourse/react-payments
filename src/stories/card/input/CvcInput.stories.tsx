@@ -1,9 +1,9 @@
 import React, { FormEvent, useRef } from 'react';
-import { useInput } from '../../../hooks/useInput';
 import { Meta, StoryObj } from '@storybook/react';
 import { useFocusInput } from '../../../hooks/useFocusInput';
 import styled from 'styled-components';
 import CvcInput from '../../../components/card/input/CvcInput';
+import { useFormInputs } from '../../../hooks/useFormInputs';
 
 const InputWrapperParent = styled.form`
   display: flex;
@@ -17,7 +17,11 @@ function CvcStories() {
   const cardForm = useRef<HTMLFormElement>(null);
   const { onInputKeydown } = useFocusInput(cardForm);
 
-  const cvc = useInput('', { name: 'cvcInput', maxLength: 3 });
+  const {
+    formInputs: { addCardPage },
+  } = useFormInputs();
+
+  const { cvc } = addCardPage;
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();

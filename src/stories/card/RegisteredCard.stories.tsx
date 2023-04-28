@@ -1,12 +1,13 @@
 import { Meta, StoryObj } from '@storybook/react';
 import RegisteredCard from '../../components/card/RegisteredCard';
-import { useInput } from '../../hooks/useInput';
+import { useFormInputs } from '../../hooks/useFormInputs';
 
 function RegisteredCardStories() {
-  const cardTitle = useInput('', {
-    name: 'cardTitleInput',
-    maxLength: 20,
-  });
+  const {
+    formInputs: { addCardPage },
+  } = useFormInputs();
+
+  const { cardTitle } = addCardPage;
 
   const cardInfo = {
     cardNumberSet: ['1111', '2222', '····', '····'],

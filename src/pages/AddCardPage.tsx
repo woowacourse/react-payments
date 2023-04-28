@@ -10,17 +10,9 @@ import CvcInput from '../components/card/input/CvcInput';
 import PasswordInput from '../components/card/input/PasswordInput';
 import NextButton from '../components/common/Button';
 import { useFocusInput } from '../hooks/useFocusInput';
-import {
-  createUniqueId,
-  isNumber,
-  isOnlyEnglish,
-  isPrevDate,
-  monthValidate,
-  setNextInputFocus,
-  yearValidate,
-} from '../utils';
+import { createUniqueId, isPrevDate, setNextInputFocus } from '../utils';
 import { BankType, CardInfo, PageInfo } from '../types';
-import { InputValidate, formValidate } from '../hooks/formValidate';
+import { formValidate } from '../hooks/formValidate';
 import { useFormInputs } from '../hooks/useFormInputs';
 import Modal from '../components/common/Modal';
 import SelectBank from '../components/card/SelectBank';
@@ -28,6 +20,10 @@ import { useHideScrollState } from '../hooks/useHideScrollState';
 import ChangeButton from '../components/common/ChangeButton';
 import { BANK_DATA } from '../constant';
 import RegisteredCard from '../components/card/RegisteredCard';
+import {
+  createFormInputValue,
+  InputValuesInformationProps,
+} from '../hooks/createFormInputValue';
 
 interface AddCardPageProps {
   cardList: CardInfo[];
@@ -83,88 +79,35 @@ export default function AddCardPage({
       secondPasswordInput,
     } = event.currentTarget;
 
-    const currentYear = new Date().getFullYear() % 100;
+    const inputInformation: InputValuesInformationProps[] = [
+      { ...firstCardNumber, element: firstCardInput },
+      { ...secondCardNumber, element: secondCardInput },
+      { ...thirdCardNumber, element: thirdCardInput },
+      { ...fourthCardNumber, element: fourthCardInput },
+      { ...month, element: monthInput },
+      { ...year, element: yearInput },
+      { ...owner, element: ownerInput },
+      { ...cvc, element: cvcInput },
+      { ...firstPassword, element: firstPasswordInput },
+      { ...secondPassword, element: secondPasswordInput },
+    ];
 
-    const cardInputValue: InputValidate = {
-      card: {
-        data: [
-          firstCardInput,
-          secondCardInput,
-          thirdCardInput,
-          fourthCardInput,
-        ],
-        maxLength: 4,
-        isRequired: true,
-        validation: isNumber,
-        setError: firstCardNumber.setError,
-        errorMessage: '카드 번호는 숫자만 입력 가능합니다.',
-      },
-      month: {
-        data: [monthInput],
-        maxLength: 2,
-        isRequired: true,
-        validation: monthValidate,
-        setError: month.setError,
-        errorMessage: '달의 입력은 1 ~ 12까지 입력 가능합니다.',
-      },
-      year: {
-        data: [yearInput],
-        maxLength: 2,
-        isRequired: true,
-        validation: yearValidate,
-        setError: year.setError,
-        errorMessage: `연도는 ${currentYear} ~ ${
-          currentYear + 5
-        }까지 입력 가능합니다.`,
-      },
-      cvc: {
-        data: [cvcInput],
-        maxLength: 3,
-        isRequired: true,
-        validation: isNumber,
-        setError: cvc.setError,
-        errorMessage: 'CVC/CVV는 숫자만 입력 가능합니다.',
-      },
-      owner: {
-        data: [ownerInput],
-        maxLength: 30,
-        isRequired: false,
-        validation: isOnlyEnglish,
-        setError: owner.setError,
-        errorMessage: '사용자 이름은 한글 혹은 영어로만 입력 가능합니다.',
-      },
-      password: {
-        data: [firstPasswordInput, secondPasswordInput],
-        maxLength: 1,
-        isRequired: true,
-        validation: isNumber,
-        setError: firstPassword.setError,
-        errorMessage: '비밀번호는 숫자만 입력 가능합니다.',
-      },
-    };
-
-    const cardInputKey = [
-      'card',
-      'cvc',
-      'owner',
-      'password',
-      'year',
-      'month',
-    ] as const;
+    const { inputValueInfomation, inputKey } =
+      createFormInputValue(inputInformation);
 
     const { validationResult, wrongInputs } = formValidate(
-      cardInputValue,
-      cardInputKey
+      inputValueInfomation,
+      inputKey
     );
 
-    if (!validationResult) {
+    if (!validationResult && wrongInputs) {
       wrongInputs[0].focus();
       return;
     }
 
     if (isPrevDate(Number(yearInput.value), Number(monthInput.value))) {
       monthInput.focus();
-      cardInputValue.month.setError('지난 기간은 입력할 수 없습니다.');
+      month.setError('지난 기간은 입력할 수 없습니다.');
       return;
     }
 
@@ -204,14 +147,21 @@ export default function AddCardPage({
   };
 
   useEffect(() => {
+    const setHomepage = () => {
+      const result = window.confirm('정말 닫으시겠습니까?');
+      if (result) {
+        setPage('homePage');
+      }
+    };
+
     window.history.pushState(null, '', window.location.href);
 
-    window.addEventListener('popstate', onPrevButtonClick);
+    window.addEventListener('popstate', setHomepage);
 
     return () => {
-      window.removeEventListener('popstate', onPrevButtonClick);
+      window.removeEventListener('popstate', setHomepage);
     };
-  }, []);
+  }, [setPage]);
 
   if (isRegister) {
     return (

@@ -19,10 +19,8 @@ export default function ExpiracyInput({ year, month }: ExpiracyInputProps) {
         <InputWrapper>
           <Input
             type="text"
-            maxLength={2}
             id="expiracy"
             isNumber={true}
-            required
             placeholder="MM"
             textAlign="center"
             autoComplete="off"
@@ -34,9 +32,7 @@ export default function ExpiracyInput({ year, month }: ExpiracyInputProps) {
         <InputWrapper>
           <Input
             type="text"
-            maxLength={2}
             isNumber={true}
-            required
             placeholder="YY"
             textAlign="center"
             autoComplete="off"

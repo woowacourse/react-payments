@@ -5,9 +5,12 @@ import Input from '../common/Input';
 import Button from '../common/Button';
 import InputField from '../common/InputField';
 import { UseInputProps } from '../../hooks/useInput';
-import { InputValidate, formValidate } from '../../hooks/formValidate';
-import { lengthValidate } from '../../utils';
+import { formValidate } from '../../hooks/formValidate';
 import Error from '../common/Error';
+import {
+  InputValuesInformationProps,
+  createFormInputValue,
+} from '../../hooks/createFormInputValue';
 
 const Wrapper = styled.div`
   display: flex;
@@ -58,21 +61,16 @@ export default function RegisteredCard({
 
     const { cardTitleInput } = event.currentTarget;
 
-    const cardTitleValue: InputValidate = {
-      cardTitle: {
-        data: [cardTitleInput],
-        maxLength: 20,
-        isRequired: false,
-        validation: lengthValidate(20),
-        setError: cardTitle.setError,
-        errorMessage: '20 글자 이하로만 입력 가능합니다.',
-      },
-    };
-    const cardTitleKey = ['cardTitle'] as const;
+    const inputInformation: InputValuesInformationProps[] = [
+      { ...cardTitle, element: cardTitleInput },
+    ];
+
+    const { inputValueInfomation, inputKey } =
+      createFormInputValue(inputInformation);
 
     const { validationResult, wrongInputs } = formValidate(
-      cardTitleValue,
-      cardTitleKey
+      inputValueInfomation,
+      inputKey
     );
 
     if (!validationResult) {

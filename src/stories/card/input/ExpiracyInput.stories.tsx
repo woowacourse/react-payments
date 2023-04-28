@@ -1,9 +1,9 @@
 import React, { FormEvent, useRef } from 'react';
-import { useInput } from '../../../hooks/useInput';
 import { Meta, StoryObj } from '@storybook/react';
 import { useFocusInput } from '../../../hooks/useFocusInput';
 import styled from 'styled-components';
 import ExpiracyInput from '../../../components/card/input/ExpiracyInput';
+import { useFormInputs } from '../../../hooks/useFormInputs';
 
 const InputWrapperParent = styled.form`
   display: flex;
@@ -17,17 +17,11 @@ function ExpiracyStories() {
   const cardForm = useRef<HTMLFormElement>(null);
   const { onInputKeydown } = useFocusInput(cardForm);
 
-  const year = useInput('', {
-    name: 'yearInput',
-    errorMessage: '카드의 연도를 확인해주세요',
-    maxLength: 2,
-  });
+  const {
+    formInputs: { addCardPage },
+  } = useFormInputs();
 
-  const month = useInput('', {
-    name: 'monthInput',
-    errorMessage: '카드의 달을 확인해주세요.',
-    maxLength: 2,
-  });
+  const { year, month } = addCardPage;
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();

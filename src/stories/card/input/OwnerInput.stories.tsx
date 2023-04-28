@@ -1,9 +1,9 @@
 import React, { FormEvent, useRef } from 'react';
-import { useInput } from '../../../hooks/useInput';
 import { Meta, StoryObj } from '@storybook/react';
 import { useFocusInput } from '../../../hooks/useFocusInput';
 import styled from 'styled-components';
 import OwnerInput from '../../../components/card/input/OwnerInput';
+import { useFormInputs } from '../../../hooks/useFormInputs';
 
 const InputWrapperParent = styled.form`
   display: flex;
@@ -20,11 +20,11 @@ function OwnerStories() {
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
   };
+  const {
+    formInputs: { addCardPage },
+  } = useFormInputs();
 
-  const owner = useInput('', {
-    name: 'ownerInput',
-    maxLength: 30,
-  });
+  const { owner } = addCardPage;
 
   return (
     <InputWrapperParent

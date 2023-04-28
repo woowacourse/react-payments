@@ -1,20 +1,25 @@
-import { ChangeEvent, Dispatch, useState } from 'react';
+import { ChangeEvent, Dispatch, useEffect, useState } from 'react';
 
 export interface UseInputProps {
   value: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  name: string | undefined;
+  name: string;
   error: string | undefined;
   setError: Dispatch<React.SetStateAction<string | undefined>>;
   isWrong: boolean;
   onBlur: () => void;
+  maxLength: number;
+  required: boolean;
+  validate: (text: string) => boolean;
 }
 
 interface UseInputOptionProps {
-  name?: string;
-  validate?: (text: string) => boolean;
+  name: string;
+  validate: (text: string) => boolean;
   errorMessage?: string;
-  maxLength?: number;
+  maxLength: number;
+  isRequired: boolean;
+  isNumber?: boolean;
   convertValue?: (text: string) => string;
 }
 
@@ -25,6 +30,8 @@ export const useInput = (
     validate = () => true,
     errorMessage,
     maxLength,
+    isRequired,
+    isNumber = false,
     convertValue = (value: string) => value,
   }: UseInputOptionProps
 ): UseInputProps => {
@@ -38,6 +45,13 @@ export const useInput = (
       return;
     }
 
+    if (isNumber) {
+      const convertResult = convertValue(value);
+      setValue(convertResult);
+      setError('');
+      return;
+    }
+
     if (validate(value)) {
       const convertResult = convertValue(value);
       setValue(convertResult);
@@ -48,9 +62,19 @@ export const useInput = (
     setError(errorMessage);
   };
 
-  const onBlur = () => {
-    setError('');
-  };
+  useEffect(() => {
+    if (isNumber && maxLength === value.length) {
+      const isSuccess = validate(value);
+
+      if (isSuccess) {
+        setError('');
+      } else {
+        setError(errorMessage);
+      }
+    }
+  }, [isNumber, setError, maxLength, errorMessage, validate, value]);
+
+  const onBlur = () => {};
 
   return {
     value,
@@ -60,5 +84,8 @@ export const useInput = (
     setError,
     isWrong: error !== '',
     onBlur,
+    required: isRequired,
+    validate,
+    maxLength,
   };
 };

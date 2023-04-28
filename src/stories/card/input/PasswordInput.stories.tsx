@@ -1,9 +1,9 @@
 import React, { FormEvent, useRef } from 'react';
-import { useInput } from '../../../hooks/useInput';
 import { Meta, StoryObj } from '@storybook/react';
 import { useFocusInput } from '../../../hooks/useFocusInput';
 import styled from 'styled-components';
 import PasswordInput from '../../../components/card/input/PasswordInput';
+import { useFormInputs } from '../../../hooks/useFormInputs';
 
 const InputWrapperParent = styled.form`
   display: flex;
@@ -17,14 +17,11 @@ function PasswordStories() {
   const cardForm = useRef<HTMLFormElement>(null);
   const { onInputKeydown } = useFocusInput(cardForm);
 
-  const firstPassword = useInput('', {
-    name: 'firstPasswordInput',
-    maxLength: 1,
-  });
-  const secondPassword = useInput('', {
-    name: 'secondPasswordInput',
-    maxLength: 1,
-  });
+  const {
+    formInputs: { addCardPage },
+  } = useFormInputs();
+
+  const { firstPassword, secondPassword } = addCardPage;
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();

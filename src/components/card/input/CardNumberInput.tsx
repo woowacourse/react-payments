@@ -24,10 +24,8 @@ export default function CardNumberInput({
       <Wrapper>
         <Input
           isNumber={true}
-          maxLength={4}
           id="cardNumber"
           type="text"
-          required
           textAlign="center"
           placeholder="0000"
           autoComplete="off"
@@ -37,9 +35,7 @@ export default function CardNumberInput({
         <Dash>-</Dash>
         <Input
           isNumber={true}
-          maxLength={4}
           type="text"
-          required
           placeholder="0000"
           tabIndex={addCardPage.secondCardNumber}
           autoComplete="off"
@@ -50,10 +46,8 @@ export default function CardNumberInput({
         <Input
           isNumber={true}
           type="text"
-          maxLength={4}
           placeholder="0000"
           isPassword={true}
-          required
           textAlign="center"
           autoComplete="off"
           tabIndex={addCardPage.thirdCardNumber}
@@ -62,12 +56,10 @@ export default function CardNumberInput({
         <Dash>-</Dash>
         <Input
           isNumber={true}
-          maxLength={4}
           type="text"
           placeholder="0000"
           autoComplete="off"
           isPassword={true}
-          required
           textAlign="center"
           tabIndex={addCardPage.fourthCardNumber}
           {...fourthNumber}

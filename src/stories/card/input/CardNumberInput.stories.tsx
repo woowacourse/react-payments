@@ -1,9 +1,9 @@
 import React, { FormEvent, useRef } from 'react';
-import { useInput } from '../../../hooks/useInput';
 import { Meta, StoryObj } from '@storybook/react';
 import CardNumberInput from '../../../components/card/input/CardNumberInput';
 import { useFocusInput } from '../../../hooks/useFocusInput';
 import styled from 'styled-components';
+import { useFormInputs } from '../../../hooks/useFormInputs';
 
 const InputWrapperParent = styled.form`
   display: flex;
@@ -17,22 +17,16 @@ function CardNumberStories() {
   const cardForm = useRef<HTMLFormElement>(null);
   const { onInputKeydown } = useFocusInput(cardForm);
 
-  const firstCardNumber = useInput('', {
-    name: 'firstCardInput',
-    maxLength: 4,
-  });
-  const secondCardNumber = useInput('', {
-    name: 'secondCardInput',
-    maxLength: 4,
-  });
-  const thirdCardNumber = useInput('', {
-    name: 'thirdCardInput',
-    maxLength: 4,
-  });
-  const fourthCardNumber = useInput('', {
-    name: 'fourthCardInput',
-    maxLength: 4,
-  });
+  const {
+    formInputs: { addCardPage },
+  } = useFormInputs();
+
+  const {
+    firstCardNumber,
+    secondCardNumber,
+    thirdCardNumber,
+    fourthCardNumber,
+  } = addCardPage;
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
