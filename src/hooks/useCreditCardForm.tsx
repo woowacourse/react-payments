@@ -1,4 +1,4 @@
-import { CardContext, defaultCreditCardForm } from 'CardProvider';
+import { CardContext, defaultCreditCardForm } from 'CardFormProvider';
 import { checkCreditCardValidations } from 'domains/creditCard';
 import { useContext } from 'react';
 
