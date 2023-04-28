@@ -1,32 +1,39 @@
-import { ChangeEvent } from 'react';
-import { checkNumberFormat } from '../../utils/formatChecker';
+import { ChangeEvent, MutableRefObject } from 'react';
+import {
+  encryptDisplayedCardNumber,
+  formatDisplayedCardNumber,
+  formatNumber,
+} from '../../utils/formatter';
 
 const useCardNumber = () => {
-  const handleInputTypeChange = ({ target, nativeEvent }: ChangeEvent<HTMLInputElement>) => {
-    if (
-      !(nativeEvent instanceof InputEvent) ||
-      target.dataset.value === undefined ||
-      target.selectionStart === null
-    ) {
+  const handleInputValueChange = (
+    { target, nativeEvent }: ChangeEvent<HTMLInputElement>,
+    cardNumberRef: MutableRefObject<string>
+  ) => {
+    if (!(nativeEvent instanceof InputEvent) || target.selectionStart === null) {
       return;
     }
 
-    if (nativeEvent.inputType === 'insertText') {
-      const value = nativeEvent.data as string;
-      target.dataset.value = checkNumberFormat(value)
-        ? target.dataset.value + value
-        : target.dataset.value;
+    if (
+      nativeEvent.inputType === 'insertText' ||
+      nativeEvent.inputType === 'insertCompositionText'
+    ) {
+      const newCardNumber = cardNumberRef.current + formatNumber(target.value.at(-1) || '');
+      cardNumberRef.current = formatDisplayedCardNumber(newCardNumber);
+      target.value = encryptDisplayedCardNumber(cardNumberRef.current);
     }
 
     if (nativeEvent.inputType === 'deleteContentBackward') {
       const modifiedValue =
-        target.dataset.value.slice(0, target.selectionStart) +
-        target.dataset.value.slice(target.selectionStart + 1);
-      target.dataset.value = modifiedValue;
+        cardNumberRef.current.slice(0, target.selectionStart) +
+        cardNumberRef.current.slice(target.selectionStart + 1);
+
+      cardNumberRef.current = formatDisplayedCardNumber(modifiedValue);
+      target.value = encryptDisplayedCardNumber(cardNumberRef.current);
     }
   };
 
-  return { handleInputTypeChange };
+  return { handleInputValueChange };
 };
 
 export { useCardNumber };
