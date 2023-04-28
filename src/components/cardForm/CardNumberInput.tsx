@@ -33,9 +33,13 @@ const deleteLastNumber = (numbers: string): string => {
   return numbers.slice(0, -1);
 };
 
-const cannotInput = (text: string): boolean => {
-  const numbers = text.replaceAll(" - ", "");
-  return numbers.length > CARDNUMBERS_MAXLEGNTH || !new RegExp(NUMBER_REGEX).test(text.slice(-1));
+const cannotInput = (postText: string, text: string): boolean => {
+  if (postText.length < text.length) {
+    const numbers = text.replaceAll(" - ", "");
+    return numbers.length > CARDNUMBERS_MAXLEGNTH || !new RegExp(NUMBER_REGEX).test(text.slice(-1));
+  }
+
+  return false;
 };
 
 export const CardNumberInput = () => {
@@ -55,7 +59,7 @@ export const CardNumberInput = () => {
   const updateInputFlags = useCallback(
     (postText: string, text: string) => {
       if (postText.length < text.length) {
-        if (postText.length + 1 === CARDNUMBERS_MAXLEGNTH) setIsNumbersCompleted(true);
+        setIsNumbersCompleted(postText.length + 1 === CARDNUMBERS_MAXLEGNTH);
         return;
       }
       setIsNumbersValid(true);
@@ -67,15 +71,24 @@ export const CardNumberInput = () => {
   const handleInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const text = e.target.value;
+      if (cannotInput(postText, text)) {
+        e.target.value = postText;
+
+        return;
+      }
+
+      updateInputFlags(text, postText);
 
       if (postText !== text.slice(0, -1) && postText.slice(0, -1) !== text) {
         e.target.value = postText;
+
         return;
       }
 
       if (postText.length < text.length) {
         const addNumbers = `${newCard.numbers}${text.slice(-1)}`;
         saveNumbers(e.target, addNumbers);
+
         return;
       }
 
