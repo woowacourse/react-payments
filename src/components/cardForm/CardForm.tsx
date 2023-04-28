@@ -7,7 +7,7 @@ import { ExpiryDateInput } from "./ExpiryDateInput";
 import { OwnerInput } from "./OwnerInput";
 import { PasswordInput } from "./PasswordInput";
 
-import { validateCardNumbers, validateExpiryDate } from "../../validation/validation";
+import { validateCardNumbers, validateExpiryDate } from "../../validation";
 import { useNavigate } from "react-router-dom";
 import { useContext, FormEvent } from "react";
 
