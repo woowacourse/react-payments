@@ -9,9 +9,9 @@ interface CardListProps {
 const CardList = ({ cardList }: CardListProps) => {
   return (
     <CardListContainer>
-      {cardList.map((card, id) => (
-        <CardItemContainer>
-          <CardItem card={card} key={id} />
+      {cardList.map((card) => (
+        <CardItemContainer key={card.id}>
+          <CardItem card={card} />
           <CardNickName>{card.nickName}</CardNickName>
         </CardItemContainer>
       ))}
