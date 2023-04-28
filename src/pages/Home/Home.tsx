@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Box from 'components/Box';
 import FlexBox from 'components/FlexBox';
 import { creditCardListStore } from 'stores/creditCardListStore';
+import { useEffect, useSyncExternalStore } from 'react';
 import * as S from './style';
 
 function Home() {
