@@ -24,6 +24,7 @@ const Card = ({ cardNumber, ownerName, expirationDate, cardCompany, onClick }: C
       onClick={onClick}
       cardColor={COLOR_BY_CARD_COMPANY[cardCompany]}
       cardCompany={cardCompany}
+      color={cardCompany === 'hyundai' ? 'white' : 'black'}
     >
       <span>{KOR_NAME_BY_CARD_COMPANY[cardCompany]}</span>
       <CardChip></CardChip>
@@ -45,6 +46,8 @@ export default Card;
 const CardContainer = styled.div<CardContainerProps>`
   width: 233px;
   height: 143px;
+
+  color: ${(props) => props.color};
 
   display: flex;
   flex-direction: column;
@@ -90,7 +93,6 @@ const CardNameContainer = styled.div`
 
   height: 13px;
 
-  color: white;
   font-weight: 600;
   font-size: 10px;
 `;
