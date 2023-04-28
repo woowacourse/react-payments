@@ -2,6 +2,7 @@ import { useContext } from 'react';
 
 import CardInfoContext from '../../contexts/CardInfoContext';
 
+import { QSMark } from '../../assets/svgs';
 import { SECURITY_CODE } from '../../constants/cardInfo';
 import { ERROR_MESSAGE } from '../../constants/message';
 import { isNumeric } from '../validators/validator';
@@ -10,6 +11,7 @@ import { useInputBox } from '../../hooks/useInputBox';
 
 import * as styled from './SecurityCodeInputBox.styled';
 import Input from '../Input/Input';
+import Tooltip from '../Tooltip/Tooltip';
 
 const SecurityCodeInputBox = () => {
   const { securityCode, setSecurityCode, ownerName } = useContext(CardInfoContext);
@@ -36,6 +38,9 @@ const SecurityCodeInputBox = () => {
             maxLength={3}
             isFocus={isOwnerNameFull}
           />
+          <Tooltip message="CVV/CVC 번호는 카드 뒷 면에 있는 3자리 숫자입니다.">
+            <QSMark />
+          </Tooltip>
         </styled.InputContainer>
       </label>
       <styled.ErrorMessage>{errorMessageState}</styled.ErrorMessage>

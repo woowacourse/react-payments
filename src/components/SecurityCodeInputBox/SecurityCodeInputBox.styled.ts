@@ -13,6 +13,9 @@ export const LabelHeader = styled.div`
 `;
 
 export const InputContainer = styled.div`
+  display: flex;
+  align-items: center;
+
   margin: 4px 0;
 `;
 
