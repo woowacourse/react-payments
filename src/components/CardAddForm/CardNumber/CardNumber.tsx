@@ -1,4 +1,5 @@
-import { ChangeEvent, FocusEvent, memo, useRef } from 'react';
+import { ChangeEvent, memo, useRef } from 'react';
+import type { CardFormData, CardFormValidation } from '../../../types';
 import { CARD_NUMBER_INPUT_MAX_LENGTH } from '../../../constants';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
@@ -8,21 +9,21 @@ import { formatNumber } from '../../../utils/formatter';
 
 interface CardNumberProps {
   isError: boolean;
-  updateInputValue: (key: string, value: any) => void;
-  updateCardInputError: (key: string, value: string | string[]) => void;
+  updateInputValue: <K extends keyof CardFormData>(key: K, value: CardFormData[K]) => void;
+  updateInputError: <K extends keyof CardFormValidation>(key: K, value: CardFormData[K]) => void;
 }
 
-function CardNumber({ isError, updateInputValue, updateCardInputError }: CardNumberProps) {
+function CardNumber({ isError, updateInputValue, updateInputError }: CardNumberProps) {
   const { handleInputValueChange } = useCardNumber();
   const cardNumberRef = useRef('');
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     handleInputValueChange(event, cardNumberRef);
-    updateInputValue(event.target.name, formatNumber(cardNumberRef.current));
+    updateInputValue('cardNumber', formatNumber(cardNumberRef.current));
   };
 
-  const onBlur = (event: FocusEvent<HTMLInputElement>) => {
-    updateCardInputError(event.target.name, formatNumber(cardNumberRef.current));
+  const onBlur = () => {
+    updateInputError('cardNumber', formatNumber(cardNumberRef.current));
   };
 
   return (

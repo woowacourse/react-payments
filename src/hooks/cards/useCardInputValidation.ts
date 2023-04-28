@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
-import { CardFormValidation } from '../../types';
-import validator, { validateMultipleInputField } from '../../utils/validator';
+import { CardFormData, CardFormValidation } from '../../types';
+import validator, { ValidatorArgs } from '../../utils/validator';
 
 const initialValidationValue: CardFormValidation = {
   issuer: false,
@@ -24,14 +24,17 @@ const useCardInputValidation = () => {
   const [inputValidation, setInputValidation] = useState(initialValidationValue);
   const [inputError, setInputError] = useState(initialErrorValue);
 
-  const validateInput = useCallback((key: keyof CardFormValidation, value: string | string[]) => {
-    return !validateMultipleInputField(key)
-      ? validator[key](value as string)
-      : validator[key](value as string[]);
-  }, []);
+  const validateInput = useCallback(
+    <K extends keyof CardFormValidation>(key: K, value: CardFormData[K]) => {
+      const isValid = validator[key](value as ValidatorArgs[K]);
+
+      return isValid as ReturnType<(typeof validator)[K]>;
+    },
+    []
+  );
 
   const updateInputValidation = useCallback(
-    (key: keyof CardFormValidation, value: string | string[]) => {
+    <K extends keyof CardFormValidation>(key: K, value: CardFormData[K]) => {
       const isValid = validateInput(key, value);
       setInputValidation((inputValidation) => ({ ...inputValidation, [key]: isValid }));
 
@@ -41,14 +44,31 @@ const useCardInputValidation = () => {
   );
 
   const updateInputError = useCallback(
-    (key: string, value: string | string[]) => {
-      const isValid = validateInput(key as keyof CardFormValidation, value);
+    <K extends keyof CardFormValidation>(key: K, value: CardFormData[K]) => {
+      const isValid = validateInput(key, value);
       setInputError((inputError) => ({ ...inputError, [key]: !isValid }));
     },
     [validateInput]
   );
 
-  return { inputValidation, inputError, updateInputValidation, updateInputError };
+  const triggerAllInputErrors = useCallback(() => {
+    setInputError((inputError) => {
+      const updatedInputError = Object.keys(inputError).reduce(
+        (acc, key) => ({ ...acc, [key]: !inputValidation[key as keyof typeof inputValidation] }),
+        {}
+      ) as CardFormValidation;
+
+      return updatedInputError;
+    });
+  }, [inputValidation]);
+
+  return {
+    inputValidation,
+    inputError,
+    updateInputValidation,
+    updateInputError,
+    triggerAllInputErrors,
+  };
 };
 
 export { useCardInputValidation };

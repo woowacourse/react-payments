@@ -1,5 +1,6 @@
 import styles from './style.module.css';
 import { FocusEvent, KeyboardEvent, MouseEvent, memo, useRef, useState } from 'react';
+import type { CardFormData, CardFormValidation, Issuer } from '../../../types';
 import CardIssuerSelection from './CardIssuerSelection/CardIssuerSelection';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
@@ -10,17 +11,17 @@ import DownIcon from '../../../assets/down-icon.svg';
 
 interface CardIssuerProps {
   isError: boolean;
-  updateInputValue: (key: string, value: any) => void;
-  updateCardInputError: (key: string, value: any) => void;
+  updateInputValue: <K extends keyof CardFormData>(key: K, value: CardFormData[K]) => void;
+  updateInputError: <K extends keyof CardFormValidation>(key: K, value: CardFormData[K]) => void;
 }
 
-function CardIssuer({ isError, updateInputValue, updateCardInputError }: CardIssuerProps) {
+function CardIssuer({ isError, updateInputValue, updateInputError }: CardIssuerProps) {
   const { isModalOpen, openModal, closeModal } = useModal();
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState<Issuer | ''>('');
   const modalRef = useRef<HTMLDivElement>(null);
 
   const handleCloseModal = () => {
-    updateCardInputError('issuer', value);
+    updateInputError('issuer', value);
     closeModal();
   };
 
@@ -32,19 +33,19 @@ function CardIssuer({ isError, updateInputValue, updateCardInputError }: CardIss
 
   const onKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
     if (event.key === 'Tab') {
-      updateCardInputError('issuer', value);
+      updateInputError('issuer', value);
     }
   };
 
   const onBlur = (event: FocusEvent<HTMLButtonElement>) => {
     if (modalRef.current && modalRef.current.contains(event.relatedTarget)) return;
 
-    updateCardInputError(event.currentTarget.name, event.currentTarget.value);
+    updateInputError('issuer', event.currentTarget.value as Issuer);
   };
 
   const onOptionClick = (event: MouseEvent<HTMLButtonElement>) => {
-    setValue(event.currentTarget.value);
-    updateInputValue('issuer', event.currentTarget.value);
+    setValue(event.currentTarget.value as Issuer);
+    updateInputValue('issuer', event.currentTarget.value as Issuer);
     closeModal();
   };
 

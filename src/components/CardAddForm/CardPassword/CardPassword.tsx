@@ -1,22 +1,29 @@
 import styles from './style.module.css';
 import { ChangeEvent, FocusEvent, memo, useRef } from 'react';
+import type { CardFormData, CardFormValidation } from '../../../types';
 import { PASSWORD_UNIT_MAX_LENGTH, SECURITY_TEXT_ICON } from '../../../constants';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
 import Input from '../../common/Input/Input';
 
 interface CardPasswordProps {
-  values: string[];
   isError: boolean;
-  onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  updateCardInputError: (key: string, value: string | string[]) => void;
+  updateInputValue: <K extends keyof CardFormData>(key: K, value: CardFormData[K]) => void;
+  updateInputError: <K extends keyof CardFormValidation>(key: K, value: CardFormData[K]) => void;
 }
 
-function CardPassword({ values, isError, onInputChange, updateCardInputError }: CardPasswordProps) {
+function CardPassword({ isError, updateInputValue, updateInputError }: CardPasswordProps) {
+  const firstInputRef = useRef<HTMLInputElement>(null);
   const lastInputRef = useRef<HTMLInputElement>(null);
 
+  const onChange = () => {
+    if (!firstInputRef.current || !lastInputRef.current) return;
+
+    updateInputValue('password', [firstInputRef.current.value, lastInputRef.current.value]);
+  };
+
   const onFirstInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    onInputChange(event);
+    onChange();
 
     if (event.target.value.length === PASSWORD_UNIT_MAX_LENGTH && lastInputRef.current) {
       lastInputRef.current.focus();
@@ -25,8 +32,9 @@ function CardPassword({ values, isError, onInputChange, updateCardInputError }: 
 
   const onBlur = (event: FocusEvent<HTMLElement>) => {
     if (event.currentTarget.contains(event.relatedTarget)) return;
+    if (!firstInputRef.current || !lastInputRef.current) return;
 
-    updateCardInputError('password', values);
+    updateInputError('password', [firstInputRef.current.value, lastInputRef.current.value]);
   };
 
   return (
@@ -40,14 +48,13 @@ function CardPassword({ values, isError, onInputChange, updateCardInputError }: 
         비밀번호
       </Label>
       <div className={styles.container} onBlur={onBlur}>
-        {values.map((password, index) => (
+        {Array.from({ length: 2 }, (_, index) => (
           <Input
-            ref={index === 0 ? undefined : lastInputRef}
+            ref={index === 0 ? firstInputRef : lastInputRef}
             key={index}
             type="password"
             id={index === 0 ? 'password' : `password${index}`}
             name="password"
-            value={password}
             data-index={index}
             maxLength={PASSWORD_UNIT_MAX_LENGTH}
             autoComplete="off"
@@ -55,7 +62,7 @@ function CardPassword({ values, isError, onInputChange, updateCardInputError }: 
             aria-labelledby={index === 0 ? undefined : 'password-label'}
             isError={isError}
             tabIndex={6 + index}
-            onChange={index === 0 ? onFirstInputChange : onInputChange}
+            onChange={index === 0 ? onFirstInputChange : onChange}
           />
         ))}
         <div className={styles.passwordPlaceholder}>

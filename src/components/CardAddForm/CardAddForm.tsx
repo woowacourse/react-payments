@@ -1,5 +1,5 @@
 import styles from './style.module.css';
-import { ChangeEvent, FormEvent, MouseEvent, memo, useEffect, useRef } from 'react';
+import { FormEvent, memo, useEffect, useRef } from 'react';
 import { CardFormData, CardFormValidation } from '../../types';
 import CardIssuer from './CardIssuer/CardIssuer';
 import CardNumber from './CardNumber/CardNumber';
@@ -8,34 +8,22 @@ import CardOwnerName from './CardOwnerName/CardOwnerName';
 import CardSecurityCode from './CardSecurityCode/CardSecurityCode';
 import CardPassword from './CardPassword/CardPassword';
 import Button from '../common/Button/Button';
-import { useFormComplete } from '../../hooks/common/useFormComplete';
-import { useFormFocus } from '../../hooks/common/useFormFocusMove';
 
 interface CardAddFormProps {
-  cardInformation: CardFormData;
-  cardInputValidation: CardFormValidation;
   cardInputError: CardFormValidation;
-  onButtonInputChange: (event: MouseEvent<HTMLButtonElement>) => void;
-  onSingleInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  onMultipleInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  updateCardInputError: (key: string, value: string | string[]) => void;
+  updateInputValue: <K extends keyof CardFormData>(key: K, value: CardFormData[K]) => void;
+  updateInputError: <K extends keyof CardFormValidation>(key: K, value: CardFormData[K]) => void;
   handleSubmit: (event: FormEvent<HTMLFormElement>) => void;
 }
 
 function CardAddForm({
-  cardInformation,
-  cardInputValidation,
   cardInputError,
-  onButtonInputChange,
-  onSingleInputChange,
-  onMultipleInputChange,
-  updateCardInputError,
+  updateInputValue,
+  updateInputError,
   handleSubmit,
 }: CardAddFormProps) {
-  const isFormComplete = useFormComplete(cardInputValidation);
   const formRef = useRef<HTMLFormElement>(null);
   const inputRefs = useRef<(HTMLInputElement | HTMLButtonElement)[]>([]);
-  const { moveFocus } = useFormFocus(inputRefs);
 
   useEffect(() => {
     if (formRef.current) {
@@ -44,47 +32,34 @@ function CardAddForm({
   }, [formRef]);
 
   return (
-    <form ref={formRef} className={styles.form} onSubmit={handleSubmit}>
+    <form ref={formRef} className={styles.form} noValidate onSubmit={handleSubmit}>
       <CardIssuer
-        value={cardInformation.issuer}
         isError={cardInputError.issuer}
-        onInputChange={onButtonInputChange}
-        updateCardInputError={updateCardInputError}
-        moveFocus={moveFocus}
+        updateInputValue={updateInputValue}
+        updateInputError={updateInputError}
       />
       <CardNumber
-        value={cardInformation.cardNumber}
         isError={cardInputError.cardNumber}
-        onInputChange={onSingleInputChange}
-        updateCardInputError={updateCardInputError}
-        moveFocus={moveFocus}
+        updateInputValue={updateInputValue}
+        updateInputError={updateInputError}
       />
       <CardExpirationDate
-        value={cardInformation.expirationDate}
         isError={cardInputError.expirationDate}
-        onInputChange={onSingleInputChange}
-        updateCardInputError={updateCardInputError}
-        moveFocus={moveFocus}
+        updateInputValue={updateInputValue}
+        updateInputError={updateInputError}
       />
-      <CardOwnerName
-        value={cardInformation.ownerName}
-        onInputChange={onSingleInputChange}
-        moveFocus={moveFocus}
-      />
+      <CardOwnerName updateInputValue={updateInputValue} />
       <CardSecurityCode
-        value={cardInformation.securityCode}
         isError={cardInputError.securityCode}
-        onInputChange={onSingleInputChange}
-        updateCardInputError={updateCardInputError}
-        moveFocus={moveFocus}
+        updateInputValue={updateInputValue}
+        updateInputError={updateInputError}
       />
       <CardPassword
-        values={cardInformation.password}
         isError={cardInputError.password}
-        onInputChange={onMultipleInputChange}
-        updateCardInputError={updateCardInputError}
+        updateInputValue={updateInputValue}
+        updateInputError={updateInputError}
       />
-      <Button className="submit-button" variant="primary" tabIndex={8} disabled={!isFormComplete}>
+      <Button className="submit-button" variant="primary" tabIndex={8}>
         다음
       </Button>
     </form>

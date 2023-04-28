@@ -1,4 +1,5 @@
 import { ChangeEvent, FocusEvent, memo } from 'react';
+import { CardFormData, CardFormValidation } from '../../../types';
 import { SECURITY_CODE_MAX_LENGTH, SECURITY_CODE_MIN_LENGTH } from '../../../constants';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
@@ -6,21 +7,17 @@ import Input from '../../common/Input/Input';
 
 interface CardSecurityCodeProps {
   isError: boolean;
-  updateInputValue: (key: string, value: any) => void;
-  updateCardInputError: (key: string, value: string | string[]) => void;
+  updateInputValue: <K extends keyof CardFormData>(key: K, value: CardFormData[K]) => void;
+  updateInputError: <K extends keyof CardFormValidation>(key: K, value: CardFormData[K]) => void;
 }
 
-function CardSecurityCode({
-  isError,
-  updateInputValue,
-  updateCardInputError,
-}: CardSecurityCodeProps) {
+function CardSecurityCode({ isError, updateInputValue, updateInputError }: CardSecurityCodeProps) {
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    updateInputValue(event.target.name, event.target.value);
+    updateInputValue('securityCode', event.target.value);
   };
 
   const onBlur = (event: FocusEvent<HTMLInputElement>) => {
-    updateCardInputError(event.target.name, event.target.value);
+    updateInputError('securityCode', event.target.value);
   };
 
   return (

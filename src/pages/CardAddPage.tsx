@@ -4,15 +4,8 @@ import CardAddForm from '../components/CardAddForm/CardAddForm';
 import { useCardAddForm } from '../hooks/cards/useCardAddForm';
 
 function CardAddPage() {
-  const {
-    cardInformation,
-    inputError,
-    updateInputError,
-    handleButtonInputChange,
-    handleSingleInputChange,
-    handleMultipleInputChange,
-    handleSubmit,
-  } = useCardAddForm();
+  const { cardInformation, inputError, updateInputValue, updateInputError, handleSubmit } =
+    useCardAddForm();
 
   return (
     <>
@@ -26,12 +19,9 @@ function CardAddPage() {
           ownerName={cardInformation.ownerName}
         />
         <CardAddForm
-          cardInformation={cardInformation}
           cardInputError={inputError}
-          onButtonInputChange={handleButtonInputChange}
-          onSingleInputChange={handleSingleInputChange}
-          onMultipleInputChange={handleMultipleInputChange}
-          updateCardInputError={updateInputError}
+          updateInputValue={updateInputValue}
+          updateInputError={updateInputError}
           handleSubmit={handleSubmit}
         />
       </main>
