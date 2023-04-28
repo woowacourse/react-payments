@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
+// import '..public/storybook.css';
+import '../../public/storybook.css';
 import InputCardData from '../components/InputCardData';
 
 const meta: Meta<typeof InputCardData> = {
@@ -11,15 +13,7 @@ const meta: Meta<typeof InputCardData> = {
 export default meta;
 type Story = StoryObj<typeof InputCardData>;
 
-export const Primary: Story = {
-  args: {
-    value: '입력값!',
-    onChange: (e) => {},
-    className: 'asdf',
-  },
-};
-
-export const Primary2: Story = {
+export const CardNumberInput: Story = {
   args: {
     value: '1234',
     required: true,
@@ -31,16 +25,12 @@ export const Primary2: Story = {
     dataId: 0,
   },
 };
-
-export const Primary3: Story = {
+export const CardNumberPassword: Story = {
   args: {
-    value: '1234',
     required: true,
     inputType: 'password',
-    className: 'card-password',
-    minDataLength: 4,
-    maxDataLength: 4,
-    name: 'third',
-    dataId: 2,
+    passwordType: 'card-number',
+    className: 'card-number',
+    value: '1234',
   },
 };
