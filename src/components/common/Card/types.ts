@@ -39,6 +39,7 @@ export type Card = {
   securityCode: string;
   password: Password;
   bankCode: BankCode;
+  nickName?: string;
 };
 
 export const isCard = (card: Partial<Card>): card is Card => {
