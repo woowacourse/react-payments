@@ -47,7 +47,9 @@ const CardRegistrationPage = ({ addCardItem }: CardRegistrationPageProps) => {
 const BackButton = () => {
   return (
     <Link to={"/"}>
-      <LeftArrowIcon />
+      <LeftArrowIconWrapper>
+        <LeftArrowIcon />
+      </LeftArrowIconWrapper>
     </Link>
   );
 };
@@ -55,6 +57,21 @@ const BackButton = () => {
 const CardItemContainer = styled.section`
   display: flex;
   justify-content: center;
+`;
+
+const LeftArrowIconWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 9px 14px;
+  border-radius: 50%;
+
+  transition: 0.2s;
+
+  &:hover {
+    background-color: #e4e4e4;
+  }
 `;
 
 export default CardRegistrationPage;

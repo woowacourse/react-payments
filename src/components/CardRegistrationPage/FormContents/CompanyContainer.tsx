@@ -10,11 +10,9 @@ const CardCompany = () => {
 
   return (
     <InputGroup labelValue={"카드사"} errorMessage={companyErrorMessage}>
-      <CompanyContainer isError={!!companyErrorMessage}>
+      <CompanyContainer isError={!!companyErrorMessage} onClick={openModal}>
         <p>{company}</p>
-        <ChangeButton type="button" onClick={openModal}>
-          {company ? "변경" : "카드사 선택"}
-        </ChangeButton>
+        <ChangeButton type="button">{company ? "변경" : "카드사 선택"}</ChangeButton>
       </CompanyContainer>
     </InputGroup>
   );
@@ -35,6 +33,11 @@ const CompanyContainer = styled.div<{ isError: boolean }>`
 
   font-weight: 600;
   font-size: 18px;
+  cursor: pointer;
+
+  &:hover > button {
+    background-color: #cecece;
+  }
 `;
 
 const ChangeButton = styled.button`
@@ -47,9 +50,6 @@ const ChangeButton = styled.button`
 
   cursor: pointer;
   transition: 0.3s;
-  &:hover {
-    background-color: #cecece;
-  }
 `;
 
 export default CardCompany;

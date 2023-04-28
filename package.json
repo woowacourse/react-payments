@@ -15,6 +15,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.10.0",
     "react-scripts": "5.0.1",
+    "storybook": "^7.0.7",
     "styled-components": "^5.3.9",
     "testing-library": "0.0.2",
     "typescript": "^4.9.5",
@@ -68,7 +69,6 @@
     "@types/styled-components": "^5.1.26",
     "babel-plugin-named-exports-order": "^0.0.2",
     "prop-types": "^15.8.1",
-    "storybook": "^7.0.5",
     "webpack": "^5.79.0"
   }
 }
