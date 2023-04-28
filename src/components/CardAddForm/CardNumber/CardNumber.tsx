@@ -1,38 +1,28 @@
-import { ChangeEvent, FocusEvent, memo } from 'react';
+import { ChangeEvent, FocusEvent, memo, useRef } from 'react';
 import { CARD_NUMBER_INPUT_MAX_LENGTH } from '../../../constants';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
 import Input from '../../common/Input/Input';
 import { useCardNumber } from '../../../hooks/cards/useCardNumber';
-import { encryptDisplayedCardNumber, formatDisplayedCardNumber } from '../../../utils/formatter';
+import { formatNumber } from '../../../utils/formatter';
 
 interface CardNumberProps {
-  value: string;
   isError: boolean;
-  onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  updateInputValue: (key: string, value: any) => void;
   updateCardInputError: (key: string, value: string | string[]) => void;
-  moveFocus: (index: number, value: string, maxLength?: number | undefined) => void;
 }
 
-function CardNumber({
-  value,
-  isError,
-  onInputChange,
-  updateCardInputError,
-  moveFocus,
-}: CardNumberProps) {
-  const { handleInputTypeChange } = useCardNumber();
-
-  const cardNumber = formatDisplayedCardNumber(value);
+function CardNumber({ isError, updateInputValue, updateCardInputError }: CardNumberProps) {
+  const { handleInputValueChange } = useCardNumber();
+  const cardNumberRef = useRef('');
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    handleInputTypeChange(event);
-    onInputChange(event);
-    moveFocus(event.target.tabIndex, event.target.value, event.target.maxLength);
+    handleInputValueChange(event, cardNumberRef);
+    updateInputValue(event.target.name, formatNumber(cardNumberRef.current));
   };
 
   const onBlur = (event: FocusEvent<HTMLInputElement>) => {
-    updateCardInputError(event.target.name, event.target.dataset.value!);
+    updateCardInputError(event.target.name, formatNumber(cardNumberRef.current));
   };
 
   return (
@@ -48,8 +38,8 @@ function CardNumber({
       <Input
         id="cardNumber"
         name="cardNumber"
-        value={encryptDisplayedCardNumber(cardNumber)}
-        data-value={cardNumber}
+        data-value=""
+        minLength={CARD_NUMBER_INPUT_MAX_LENGTH}
         maxLength={CARD_NUMBER_INPUT_MAX_LENGTH}
         autoComplete="cc-number"
         inputMode="numeric"
