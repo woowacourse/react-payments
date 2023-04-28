@@ -1,3 +1,8 @@
+:root {
+  --light-gray: rgb(183, 183, 183);
+  --dark-gray: rgb(58, 58, 58);
+}
+
 .input {
   display: block;
   width: 100%;
@@ -7,11 +12,11 @@
   background-color: transparent;
   outline: none;
   text-align: center;
-  border-bottom: 1px solid rgb(183, 183, 183);
+  border-bottom: 1px solid var(--light-gray);
   font-size: 16px;
   transition: 0.2s;
 }
 
 .input:focus {
-  border-bottom-color: rgb(58, 58, 58);
+  border-bottom-color: var(--dark-gray);
 }

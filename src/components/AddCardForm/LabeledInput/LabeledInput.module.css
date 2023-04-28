@@ -1,3 +1,7 @@
+:root {
+  --slight-bright-red: #ff3939;
+}
+
 .info {
   display: flex;
   justify-content: space-between;
@@ -6,7 +10,7 @@
 
 .error-message {
   height: 15px;
-  color: red;
+  color: var(--slight-bright-red);
 }
 
 .children {

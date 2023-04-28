@@ -1,7 +1,11 @@
+:root {
+  --pure-white: #ffffff;
+}
+
 .container {
   position: relative;
   margin-top: 30px;
-  background-color: white;
+  background-color: var(--pure-white);
   width: 370px;
   height: 700px;
   border-radius: 10px;

@@ -1,3 +1,7 @@
+:root {
+  --pure-black: #000000;
+}
+
 .container {
   display: flex;
   gap: 9px;
@@ -59,9 +63,9 @@
 .owner-name,
 .expiration-date {
   font-weight: 800;
-  -webkit-text-stroke: 0.7px black;
-  -moz-text-stroke: 0.7px black;
-  -ms-text-stroke: 0.7px black;
+  -webkit-text-stroke: 0.7px var(--pure-black);
+  -moz-text-stroke: 0.7px var(--pure-black);
+  -ms-text-stroke: 0.7px var(--pure-black);
   paint-order: stroke fill;
 }
 
