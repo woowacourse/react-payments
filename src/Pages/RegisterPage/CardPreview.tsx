@@ -6,7 +6,7 @@ const CardPreview = ({ cardInfo, handleModal }: any) => {
   return (
     <StyledCard onClick={handleModal} $background={cardInfo.color}>
       <Chip />
-      <CardInfo>
+      <CardInfo $background={cardInfo.color}>
         <Numbers>
           <Span>{cardInfo.number1}</Span>
           <Span>{cardInfo.number2}</Span>
@@ -39,6 +39,7 @@ const StyledCard = styled.div<StyledCardProps>`
   margin: 30px auto 26px;
   border-radius: 5px;
   background: ${(props) => props.$background};
+
   font-size: 14px;
   box-shadow: rgba(0, 0, 0, 0.25) 3px 3px 5px;
   cursor: pointer;
@@ -52,8 +53,9 @@ const Chip = styled.div`
   border-radius: 4px;
 `;
 
-const CardInfo = styled.div`
-  color: #fff;
+const CardInfo = styled.div<StyledCardProps>`
+  color: ${(props) =>
+    props.$background === '#fae20c' ? '#000000' : '#ffffff'};
 `;
 
 const Numbers = styled.p`
