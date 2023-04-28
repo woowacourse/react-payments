@@ -9,7 +9,7 @@
   top: 100%;
   display: flex;
   justify-content: flex-end;
-  padding: 30px;
+  padding: 0 30px 30px 30px;
   transform: translateY(-100%);
 }
 
