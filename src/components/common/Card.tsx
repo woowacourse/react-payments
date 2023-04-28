@@ -29,7 +29,6 @@ export default Card;
 
 const CardWrapper = styled.div<{ cardCompany: string }>`
   position: relative;
-  cursor: pointer;
 
   display: flex;
   flex-direction: column;
@@ -39,10 +38,15 @@ const CardWrapper = styled.div<{ cardCompany: string }>`
   min-height: 134px;
   border-radius: 5px;
   padding: 12px 18px;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.25);
 
   background: ${({ cardCompany }) => CARD_COMPANY_COLOR_MAP[cardCompany]?.background || '#333333'};
   color: ${({ cardCompany }) => CARD_COMPANY_COLOR_MAP[cardCompany]?.color || 'white'};
+
+  transition: margin 0.2s;
+  &:hover {
+    margin-left: 32px;
+  }
 `;
 
 const CardCompany = styled.p`
@@ -82,7 +86,6 @@ const CardInfoArea = styled.div`
   justify-content: space-between;
 
   width: 100%;
-
   margin-top: 10px;
 
   font-size: 11px;

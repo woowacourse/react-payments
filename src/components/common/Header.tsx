@@ -34,20 +34,23 @@ const HeaderWrapper = styled.header`
   align-items: center;
 
   width: 100%;
-  height: 72px;
-  margin-bottom: 12px;
+  height: 64px;
+  padding: 0 28px;
 `;
 
 const BackButton = styled.button`
-  font-size: 16px;
-  background-color: transparent;
-  border: none;
   cursor: pointer;
+
+  border: none;
+  background-color: transparent;
+
+  font-size: 16px;
 `;
 
 const Title = styled.h1`
+  margin-left: 16px;
+
   font-size: 16px;
   letter-spacing: -0.085em;
   color: #383838;
-  margin-left: 16px;
 `;

@@ -45,7 +45,7 @@ const GuideMessage = styled.p`
 
 const CardName = styled.p`
   margin-top: 16px;
-  margin-bottom: 42px;
+  margin-bottom: 32px;
 
   text-align: center;
   font-weight: 700;
@@ -60,6 +60,7 @@ const CardAddButton = styled.button`
 
   width: 214px;
   min-height: 134px;
+  margin-bottom: 24px;
   border: none;
   background: #e5e5e5;
   border-radius: 5px;
