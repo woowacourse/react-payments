@@ -19,6 +19,7 @@ export type COMPANY_NAME =
   | '우리카드';
 
 export type Card = {
+  cardName?: string;
   bank: COMPANY_NAME;
   numbers: string[];
   expirationDate: ExpirationDate;
