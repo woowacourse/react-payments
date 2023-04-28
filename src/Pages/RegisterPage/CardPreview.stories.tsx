@@ -21,6 +21,7 @@ export const Primary: Story = {
       month: '12',
       year: '23',
       name: 'AIDEN',
+      color: '#333333',
     },
   },
 };

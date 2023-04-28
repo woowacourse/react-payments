@@ -41,8 +41,8 @@ const CardRegisterForm = () => {
   });
 
   const cardInfo: Card = { ...cardNumber, ...date, ...name, ...bank };
-  console.log(cardInfo);
-  const { handleForm } = useFormHandler();
+
+  const { handleForm } = useFormHandler(cardInfo);
 
   return (
     <>

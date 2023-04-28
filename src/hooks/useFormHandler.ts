@@ -1,11 +1,13 @@
 import { FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Card } from 'types/Card';
 import { getFormData } from 'utils/formDataGetter';
 import { setLocalStorage } from 'utils/localStorage';
 import { areValidInfo } from 'validator';
 
-export const useFormHandler = () => {
+export const useFormHandler = (cardInfo: Card) => {
   const navigate = useNavigate();
+  const color = cardInfo.color;
 
   const handleForm = (event: FormEvent) => {
     event.preventDefault();
@@ -15,7 +17,7 @@ export const useFormHandler = () => {
     const formDataObject = Object.fromEntries(formData);
 
     if (areValidInfo(formDataObject)) {
-      setLocalStorage('card', formDataObject);
+      setLocalStorage('card', { ...formDataObject, color });
 
       navigate('/');
     } else {
