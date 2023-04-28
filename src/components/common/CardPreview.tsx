@@ -8,13 +8,16 @@ export function CardPreview() {
   const { CARD_NUMBER, USERNAME, DATE, COMPANY } = useContext(
     CardPreviewInfoContext
   );
-  const companyName = COMPANY.clicked.value;
+
+  const company = COMPANY.clicked.value;
+  const companyName = company in CARD_COMPANY ? CARD_COMPANY[company].name : '';
+
   const companyColor =
-    companyName in CARD_COMPANY ? CARD_COMPANY[companyName].color : 'gray';
+    company in CARD_COMPANY ? CARD_COMPANY[company].color : 'gray';
 
   return (
     <CardContainer color={companyColor}>
-      <p>{companyName}</p>
+      <_CompanyName>{companyName}</_CompanyName>
       <_Chip />
       <NumberWrapper>
         <NumberItem>{CARD_NUMBER.first.value}</NumberItem>
@@ -39,25 +42,40 @@ const CardContainer = styled.section`
   height: 13.3rem;
   margin-bottom: 3.5rem;
   background-color: ${(props) => props.color || 'gray'};
-  color: white;
+  color: ${(props) => (props.color === '#FFE600' ? 'black' : 'white')};
   font-size: 1.3rem;
-  letter-spacing: 0.2rem;
+  font-weight: 500;
+
+  letter-spacing: 0.1rem;
   border-radius: 0.5rem;
+
+  box-shadow: 0.4rem 0.4rem 0.4rem rgba(0, 0, 0, 0.25);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+  &:hover {
+    box-shadow: 1rem 1rem 0.7rem rgba(0, 0, 0, 0.25);
+  }
 `;
 
+const _CompanyName = styled.p`
+  margin: 1.1rem 0 2.2rem 1.3rem;
+
+  font-family: 'Roboto';
+  line-height: 1.4rem;
+`;
 const _Chip = styled.div`
   width: 4rem;
   height: 2.6rem;
-  margin-top: 4.7rem;
   margin-left: 1.4rem;
   background-color: #cbba64;
   border-radius: 0.4rem;
 `;
 
 const NumberWrapper = styled.ul`
-  display: flex;
-  justify-content: space-around;
-  margin: 1.5rem 1rem 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  margin: 1.3rem 1rem 0 2rem;
 `;
 
 const NumberItem = styled.li``;
@@ -65,7 +83,7 @@ const NumberItem = styled.li``;
 const InfoWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 1rem 1.5em;
+  margin: 0.8rem 1.5em;
 `;
 
 const Name = styled.div``;
