@@ -1,8 +1,27 @@
 import { useNavigate, useRouteError } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+import PaymentsIcon from '../assets/payments/payments-icon.png';
 import { Button } from '../components/common/Button';
 import { Page } from '../components/common/Page';
 import { Text } from '../components/common/Text';
+
+const HeaderIconWave = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(-3deg);
+  }
+
+  75% {
+    transform: rotate(3deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+`;
 
 const Content = styled.main`
   display: flex;
@@ -15,6 +34,20 @@ const Content = styled.main`
   padding-top: 130px;
 
   flex: 1;
+`;
+
+const Header = styled.header`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+`;
+
+const HeaderIcon = styled.img`
+  width: 200px;
+  height: 200px;
+
+  animation: 2s ease-in-out infinite ${HeaderIconWave};
 `;
 
 const ErrorDetail = styled.div`
@@ -45,7 +78,11 @@ export const ErrorPage = () => {
   return (
     <Page>
       <Content>
-        <Text size="xxlarge">Oops! 문제가 생겼습니다</Text>
+        <Header>
+          <HeaderIcon src={PaymentsIcon} alt="payments-icon" />
+
+          <Text size="xxlarge">Oops! 문제가 생겼습니다</Text>
+        </Header>
 
         <ErrorDetail>
           <Text size="small">자세한 에러 내용입니다.</Text>
