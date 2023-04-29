@@ -7,8 +7,6 @@ const useScrollStop = (
   ref: BodyRef | RefObject<HTMLElement> = { current: document.body }
 ) => {
   useEffect(() => {
-    if (!shouldStop) return;
-
     const node = ref.current;
     if (node) node.classList.add('hide-overflow');
 
