@@ -40,7 +40,7 @@ export function CardViewer({ cardCompany, cardNumber, expirationDate, ownerName 
   );
 
   return (
-    <Style.Wrapper cardColor={cardColor}>
+    <Style.Container cardColor={cardColor} aria-label={`${ownerName}의 ${cardCompany} 이미지`}>
       <Style.CardCompany>{cardCompany}</Style.CardCompany>
       <Style.ICChip />
       <Style.CardNumberContainer>
@@ -54,12 +54,12 @@ export function CardViewer({ cardCompany, cardNumber, expirationDate, ownerName 
         <Style.Name>{ownerNameFormat}</Style.Name>
         <span>{expirationDateFormat}</span>
       </Style.NameAndDateContainer>
-    </Style.Wrapper>
+    </Style.Container>
   );
 }
 
 const Style = {
-  Wrapper: styled.div<{ cardColor: string }>`
+  Container: styled.div<{ cardColor: string }>`
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
