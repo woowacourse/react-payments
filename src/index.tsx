@@ -5,6 +5,7 @@ import App from './App';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import MyCardPage from './pages/MyCardPage';
 import AddCardPage from './pages/AddCardPage';
+import AddCardNamePage from './pages/AddCardNamePage';
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
       {
         path: 'addCard',
         element: <AddCardPage />,
+      },
+      {
+        path: 'addCardName',
+        element: <AddCardNamePage />,
       },
     ],
   },

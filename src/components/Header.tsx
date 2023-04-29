@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 const title: { [key: string]: string } = {
   '/': '보유카드',
   '/addCard': '카드 추가',
+  '/addCardPage': '',
 };
 
 const Header = () => {
@@ -18,7 +19,7 @@ const Header = () => {
 };
 
 const StyledLeftArrowButton = styled(Link)`
-  display: ${(props) => (props.title === '보유카드' ? 'none' : 'block')};
+  display: ${(props) => (props.title === '카드 추가' ? 'block' : 'none')};
 
   position: relative;
   border: none;
