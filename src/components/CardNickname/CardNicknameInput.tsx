@@ -10,7 +10,7 @@ const CardNicknameInput = () => {
     const inputCardNickName = e.target.value;
     setCardNickName(inputCardNickName);
   };
-  return <Input width="200px" value={cardNickName} onChange={handleNickNameChange} className={styles.input} />;
+  return <Input width="200px" value={cardNickName} onChange={handleNickNameChange} className={styles.input} required />;
 };
 
 export default CardNicknameInput;

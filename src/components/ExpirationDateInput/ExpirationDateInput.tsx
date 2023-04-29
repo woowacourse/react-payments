@@ -30,6 +30,7 @@ const ExpirationDateInput = () => {
           value={expirationDate}
           maxLength={5}
           name="expirationDate"
+          required
         />
       </CardInfoInput>
       <ErrorMessage>{error}</ErrorMessage>

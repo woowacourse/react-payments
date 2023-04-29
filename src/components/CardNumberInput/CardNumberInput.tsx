@@ -25,7 +25,14 @@ const CardNumberInput = () => {
   return (
     <section>
       <CardInfoInput title="카드 번호">
-        <Input width="100%" onChange={addHyphensInCardNumber} maxLength={19} name="cardNumber" value={cardNumber} />
+        <Input
+          width="100%"
+          onChange={addHyphensInCardNumber}
+          maxLength={19}
+          name="cardNumber"
+          value={cardNumber}
+          required
+        />
       </CardInfoInput>
       <ErrorMessage>{error}</ErrorMessage>
     </section>

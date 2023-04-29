@@ -8,11 +8,12 @@ type InputProps = {
   maxLength?: number;
   className?: string;
   type?: string;
+  required?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ width, value, name, maxLength, onChange = undefined, ...rest }, ref) => {
+  ({ width, value, name, maxLength, onChange = undefined, required = false, ...rest }, ref) => {
     return (
       <>
         <input
@@ -23,6 +24,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           maxLength={maxLength}
           onChange={onChange}
           ref={ref}
+          required={required}
           {...rest}
         />
       </>

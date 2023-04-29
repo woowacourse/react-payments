@@ -4,10 +4,21 @@ import ExpirationDateInput from '../ExpirationDateInput/ExpirationDateInput';
 import CardOwnerName from '../CardOwnerName/CardOwnerName';
 import CardSecurityCodeInput from '../CardSecurityCodeInput/CardSecurityCodeInput';
 import CardPasswordInput from '../CardPasswordInput/CardPasswordInput';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Button from '../Button/Button';
+import { useContext } from 'react';
+import { CardInfoContext } from '../../context/CardInfoContext';
 
 const AddCardForm = () => {
+  const { cardNumber, expirationDate, securityCode, firstDigit, secondDigit } = useContext(CardInfoContext);
+  const navigate = useNavigate();
+
+  const handleNextButtonClick = () => {
+    if (!cardNumber || !expirationDate || !securityCode || !firstDigit || !secondDigit) {
+      return;
+    }
+    navigate('/card-registration-confirmation');
+  };
   return (
     <form className={styles.container} aria-label="카드 등록 양식">
       <CardNumberInput />
@@ -16,11 +27,9 @@ const AddCardForm = () => {
       <CardSecurityCodeInput />
       <CardPasswordInput />
       <div className={styles.buttonContainer} role="group" aria-label="다음 단계 버튼">
-        <Link to="/card-registration-confirmation">
-          <Button type="button" className={styles.button}>
-            다음
-          </Button>
-        </Link>
+        <Button type="submit" className={styles.button} onClick={handleNextButtonClick}>
+          다음
+        </Button>
       </div>
     </form>
   );
