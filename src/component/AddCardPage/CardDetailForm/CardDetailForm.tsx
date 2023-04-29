@@ -7,16 +7,20 @@ import CardOwnerNameInput from "./CardOwnerNameInput/CardOwnerNameInput";
 import CardCVCInput from "./CardCVCInput/CardCVCInput";
 import CardPasswordInput from "./CardPasswordInput/CardPasswordInput";
 import { SubmitButton } from "../../common/Button";
+import { useNavigate } from "react-router";
 
-type CardDetailFormProps = {
-  submitCreditCard: (e: React.FormEvent<HTMLFormElement>) => void;
-};
-
-function CardDetailForm({ submitCreditCard }: CardDetailFormProps) {
+function CardDetailForm() {
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const navigate = useNavigate();
+
+  const goToResultPage = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    navigate("result", { replace: true });
+  };
 
   return (
-    <St.Form onSubmit={submitCreditCard}>
+    <St.Form onSubmit={goToResultPage}>
       <CardCompanyInput inputRefs={inputRefs} />
       <CardNumberInput inputRefs={inputRefs} />
       <CardDateInput inputRefs={inputRefs} />

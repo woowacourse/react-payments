@@ -5,13 +5,13 @@ import St from "./CardAddButtonStyled";
 function CardAddButton() {
   const navigate = useNavigate();
 
-  const moveToAddCardForm = () => {
-    navigate("/addCardForm");
+  const moveToAddCardPage = () => {
+    navigate("addCard");
   };
 
   return (
     <St.AddButtonSection>
-      <St.CardAddButton onClick={moveToAddCardForm}>+</St.CardAddButton>
+      <St.CardAddButton onClick={moveToAddCardPage}>+</St.CardAddButton>
     </St.AddButtonSection>
   );
 }
