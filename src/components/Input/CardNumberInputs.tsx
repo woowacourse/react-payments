@@ -2,6 +2,7 @@ import { PaymentsInput } from 'components/common';
 import { ValueAndOnChange } from './types';
 import { ChangeEvent, Fragment, useRef } from 'react';
 import { isNumber } from 'utils';
+import styled from 'styled-components';
 
 interface CardNumberInputProps {
   valueAndOnChanges: ValueAndOnChange[];
@@ -28,7 +29,7 @@ export function CardNumberInputs({ valueAndOnChanges }: CardNumberInputProps) {
   };
 
   return (
-    <>
+    <Container>
       {valueAndOnChanges.map(({ value, onChange }, index) => (
         <Fragment key={index}>
           <PaymentsInput
@@ -39,11 +40,22 @@ export function CardNumberInputs({ valueAndOnChanges }: CardNumberInputProps) {
             onChange={(e) => handleChange(e, index, onChange)}
             placeholder={DEFAULT_CARD_NUMBER}
             inputMode="numeric"
+            align="center"
             required
           />
           {index < valueAndOnChanges.length - 1 && <span>-</span>}
         </Fragment>
       ))}
-    </>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  span {
+    font-size: 20px;
+    margin: 0 4px;
+  }
+`;

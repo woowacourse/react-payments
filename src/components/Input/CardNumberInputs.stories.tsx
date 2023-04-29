@@ -21,6 +21,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    valueAndOnChanges: [{ value: '0000' }],
+    valueAndOnChanges: [{ value: '0000' }, { value: '0000' }, { value: '0000' }, { value: '0000' }],
   },
 };
