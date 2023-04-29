@@ -1,17 +1,18 @@
 import { CARD_CO_NAME } from "../../CONSTANT";
 import { CreditCard } from "../../type";
 import { colorMatch } from "../../util/colorMatch";
-import CardNumber from "../CardInputPage/InputBoxCardNumber/CardNumber";
 import "./cardPreview.css";
 
 interface CardPreviewProps {
   card: CreditCard;
+  style?: object;
   openCardCoModal?: () => void;
 }
 
 export default function CardPreview({
   card,
   openCardCoModal,
+  style,
 }: CardPreviewProps) {
   const { cardCo, cardNumber, expirationDate, owner } = card;
 
@@ -29,7 +30,7 @@ export default function CardPreview({
     <div
       className="card-preview-container"
       onClick={openCardCoModal}
-      style={{ backgroundColor: backgroundColor }}
+      style={{ ...{ backgroundColor: backgroundColor }, ...style }}
     >
       <p className="card-preview-card-co" style={{ color: color }}>
         {cardCoName}
