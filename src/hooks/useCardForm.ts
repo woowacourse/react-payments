@@ -19,14 +19,34 @@ const initialVisited = {
   password: false,
 };
 
+const initialCardInformation = {
+  cardName: '',
+  bankName: '',
+  cardNumber: ['', '', '', ''],
+  expirationDate: ['MM', 'YY'],
+  owner: ['NAME'],
+  securityCode: [''],
+  password: ['', ''],
+};
+
 function useCardForm() {
-  const [cardName, setCardName] = useState('');
-  const [bankName, setBankName] = useState('');
-  const [cardNumber, setCardNumber] = useState<string[]>(['', '', '', '']);
-  const [expirationDate, setExpirationDate] = useState<string[]>(['MM', 'YY']);
-  const [owner, setOwner] = useState<string[]>(['NAME']);
-  const [securityCode, setSecurityCode] = useState<string[]>(['']);
-  const [password, setPassword] = useState<string[]>(['', '']);
+  const {
+    cardName: CARD_NAME,
+    bankName: BANK_NAME,
+    cardNumber: CARD_NUMBER,
+    expirationDate: EXPIRATION_DATE,
+    owner: OWNER,
+    securityCode: SECURITY_CODE,
+    password: PASSWORD,
+  } = initialCardInformation;
+
+  const [cardName, setCardName] = useState(CARD_NAME);
+  const [bankName, setBankName] = useState(BANK_NAME);
+  const [cardNumber, setCardNumber] = useState<string[]>(CARD_NUMBER);
+  const [expirationDate, setExpirationDate] = useState<string[]>(EXPIRATION_DATE);
+  const [owner, setOwner] = useState<string[]>(OWNER);
+  const [securityCode, setSecurityCode] = useState<string[]>(SECURITY_CODE);
+  const [password, setPassword] = useState<string[]>(PASSWORD);
   const [errorMessage, setErrorMessage] = useState<ErrorMessage>({
     cardNumber: '',
     expirationDate: '',
@@ -43,13 +63,13 @@ function useCardForm() {
   });
 
   const resetCardInformation = () => {
-    setCardName('');
-    setBankName('');
-    setCardNumber(['', '', '', '']);
-    setExpirationDate(['MM', 'YY']);
-    setOwner(['NAME']);
-    setSecurityCode(['']);
-    setPassword(['', '']);
+    setCardName(CARD_NAME);
+    setBankName(BANK_NAME);
+    setCardNumber(CARD_NUMBER);
+    setExpirationDate(EXPIRATION_DATE);
+    setOwner(OWNER);
+    setSecurityCode(SECURITY_CODE);
+    setPassword(PASSWORD);
   };
 
   const resetValidateForm = () => {
