@@ -5,6 +5,7 @@ import {
   isValidExpiredMonthFormat,
   isValidExpiredYearFormat,
   isValidOwnerName,
+  isValidSecurityCode,
 } from '../../pages/AddCard/domain/dispatcher';
 import { act } from 'react-dom/test-utils';
 import { mockEventTarget } from '../utils/util';
@@ -104,5 +105,27 @@ describe('카드 소유자 이름 테스트', () => {
     });
     expect(result.current.status).toBe('VALID');
     expect(result.current.value).toBe('');
+  });
+});
+
+describe('보안코드(CVC/CVV) 테스트', () => {
+  it('보안코드(CVC/CVV) Hook의 초기 상태는 INIT를 가진다.', () => {
+    const { result } = renderHook(() => useInput(isValidSecurityCode));
+    expect(result.current.status).toBe('INIT');
+  });
+  it('보안코드(CVC/CVV) 입력이 들어오면, 보안코드(CVC/CVV)의 상태가 유효한 상태로 변경된다.', () => {
+    const { result } = renderHook(() => useInput(isValidSecurityCode));
+    act(() => {
+      result.current.onChange(mockEventTarget('123') as React.ChangeEvent<HTMLInputElement>);
+    });
+    expect(result.current.status).toBe('VALID');
+    expect(result.current.value).toBe('123');
+  });
+  it('유효하지 않은 보안코드(CVC/CVV) 입력이 들어오면, 보안코드(CVC/CVV)의 상태가 유효하지 않는 상태로 변경된다.', () => {
+    const { result } = renderHook(() => useInput(isValidSecurityCode));
+    act(() => {
+      result.current.onChange(mockEventTarget('13') as React.ChangeEvent<HTMLInputElement>);
+    });
+    expect(result.current.status).toBe('INVALID');
   });
 });
