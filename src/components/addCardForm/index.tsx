@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import { CardNumberInput } from './cardInfoInputs/CardNumberInput';
 import { ExpirationDateInput } from './cardInfoInputs/ExpirationDateInput';
@@ -6,17 +6,21 @@ import { OwnerNameInput } from './cardInfoInputs/OwnerNameInput';
 import { SecurityCodeInput } from './cardInfoInputs/SecurityCodeInput';
 import { PasswordInput } from './cardInfoInputs/PasswordInput';
 import { useNavigate } from 'react-router-dom';
-import { useCardData } from '../../hooks/useCardData';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 import {
   useCardInfoActionContext,
   useCardInfoValueContext,
 } from '../../hooks/cardInfoContext';
 import { useModalStateContext } from '../../hooks/useModalContext';
+import { v4 } from 'uuid';
+import { useCardList } from '../../hooks/useCardList';
 
 export const AddNewCardForm = () => {
   const navigate = useNavigate();
 
-  const { addNewCard } = useCardData();
+  const { addCardListToLocalStorage: addNewCardToLocalStorage } =
+    useLocalStorage();
+  const { addNewCard } = useCardList();
 
   const {
     cardNumber,
@@ -25,8 +29,9 @@ export const AddNewCardForm = () => {
     securityCode,
     password,
     companyId,
+    cardId,
   } = useCardInfoValueContext();
-  const { resetAll } = useCardInfoActionContext();
+  const { setCardId } = useCardInfoActionContext();
 
   const { isOpen } = useModalStateContext();
 
@@ -41,19 +46,24 @@ export const AddNewCardForm = () => {
   }, []);
 
   const handleSubmitNewCardInfo = () => {
-    addNewCard({
+    const newCard = {
       cardNumber,
       expirationDate,
       ownerName,
       securityCode,
       password,
       companyId,
-    });
+      cardId,
+    };
 
-    resetAll();
+    addNewCard(newCard);
 
-    navigate('/');
+    navigate('/register/nickName');
   };
+
+  useEffect(() => {
+    setCardId(v4());
+  }, [setCardId]);
 
   return (
     <Style.Wrapper>

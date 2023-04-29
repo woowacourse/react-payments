@@ -10,22 +10,26 @@ import {
 } from '../../hooks/useModalContext';
 import { useEffect } from 'react';
 import { CardViewer } from '../../components/cardViewer';
-import { useCardInfoValueContext } from '../../hooks/cardInfoContext';
+import {
+  useCardInfoActionContext,
+  useCardInfoValueContext,
+} from '../../hooks/cardInfoContext';
 
 export const Register = () => {
   const { openModal } = useModalActionContext();
   const { isOpen } = useModalStateContext();
   const { cardNumber, expirationDate, ownerName, companyId } =
     useCardInfoValueContext();
+  const { resetAll } = useCardInfoActionContext();
 
   useEffect(() => {
     openModal();
-  }, []);
+  }, [openModal]);
 
   return (
     <Layout>
       <Style.Header>
-        <BackButton path="/" />
+        <BackButton path="/" callback={resetAll} />
         <Style.Title>카드추가</Style.Title>
       </Style.Header>
       <Style.CardContainer>

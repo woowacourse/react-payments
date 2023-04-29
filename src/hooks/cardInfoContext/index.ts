@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import {
   CardInfoActionsContext,
   CardInfoValuesContext,
-} from '../../components/cardInfoProvider';
+} from '../../components/provider/CardInfoProvider';
 
 export const useCardInfoValueContext = () => {
   const value = useContext(CardInfoValuesContext);

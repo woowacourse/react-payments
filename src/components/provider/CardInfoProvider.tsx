@@ -1,6 +1,7 @@
 import { ReactNode, createContext, useMemo, useState } from 'react';
 import { Card } from '../../types/card';
 import { COMPANIES } from '../../constants/cardCompany';
+import { v4 } from 'uuid';
 
 interface CardInfoAction {
   setCardNumber(index: number, userInput: string): void;
@@ -10,6 +11,7 @@ interface CardInfoAction {
   setPassword(index: number, userInput: string): void;
   setCompanyId(selectedCompanyId: keyof typeof COMPANIES): void;
   setNickName(userInput: string): void;
+  setCardId(id: string): void;
   resetAll(): void;
 }
 
@@ -25,6 +27,7 @@ export const CardInfoActionsContext = createContext<CardInfoAction>({
   setPassword: () => {},
   setCompanyId: () => {},
   setNickName: () => {},
+  setCardId: () => {},
   resetAll: () => {},
 });
 
@@ -39,6 +42,7 @@ export const CardInfoValuesContext = createContext<Card>({
   password: ['', ''],
   companyId: undefined,
   nickName: undefined,
+  cardId: '',
 });
 
 export const CardInfoProvider = ({ children }: Props) => {
@@ -50,6 +54,7 @@ export const CardInfoProvider = ({ children }: Props) => {
     password: ['', ''],
     companyId: undefined,
     nickName: undefined,
+    cardId: '',
   });
 
   const actions = useMemo(
@@ -108,6 +113,12 @@ export const CardInfoProvider = ({ children }: Props) => {
           nickName: userInput,
         }));
       },
+      setCardId(id: string) {
+        setCardInfo((prev) => ({
+          ...prev,
+          cardId: id,
+        }));
+      },
       resetAll() {
         setCardInfo({
           cardNumber: ['', '', '', ''],
@@ -117,6 +128,7 @@ export const CardInfoProvider = ({ children }: Props) => {
           password: ['', ''],
           companyId: undefined,
           nickName: undefined,
+          cardId: v4(),
         });
       },
     }),

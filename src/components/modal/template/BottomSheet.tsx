@@ -1,4 +1,4 @@
-import { Fragment, ReactNode, SetStateAction } from 'react';
+import { Fragment, ReactNode } from 'react';
 import styled from 'styled-components';
 import { useModalActionContext } from '../../../hooks/useModalContext';
 

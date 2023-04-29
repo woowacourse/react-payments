@@ -3,14 +3,11 @@ import { CardViewer } from '../components/cardViewer';
 import { Layout } from '../layout';
 import { v4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
-import { useCardData } from '../hooks/useCardData';
+import { useCardList } from '../hooks/useCardList';
 
 export const Main = () => {
   const navigate = useNavigate();
-
-  const { getCardList } = useCardData();
-
-  const cardList = getCardList();
+  const { cardList } = useCardList();
 
   return (
     <Layout>
@@ -27,10 +24,18 @@ export const Main = () => {
           cardList.map((card) => {
             const { cardNumber, expirationDate, ownerName, companyId } = card;
             return (
-              <CardViewer
-                key={v4()}
-                cardInfo={{ cardNumber, expirationDate, ownerName, companyId }}
-              />
+              <div key={v4()}>
+                <CardViewer
+                  key={v4()}
+                  cardInfo={{
+                    cardNumber,
+                    expirationDate,
+                    ownerName,
+                    companyId,
+                  }}
+                />
+                <Style.CardNickName>{card.nickName ?? ''}</Style.CardNickName>
+              </div>
             );
           })
         )}
@@ -69,6 +74,13 @@ const Style = {
     align-items: center;
 
     gap: 9px;
+  `,
+  CardNickName: styled.span`
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    font-size: 15px;
+    font-weight: 500;
   `,
   Caption: styled.span`
     color: #575757;

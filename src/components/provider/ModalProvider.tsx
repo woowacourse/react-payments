@@ -28,10 +28,6 @@ export const ModalProvider = ({ children }: ModalProps) => {
     []
   );
 
-  useEffect(() => {
-    console.log(isOpen);
-  }, [isOpen]);
-
   return (
     <ModalActionContext.Provider value={action}>
       <ModalStateContext.Provider value={{ isOpen }}>

@@ -14,4 +14,5 @@ export interface Card extends CardViewerProps {
   securityCode: string;
   password: string[];
   nickName?: string;
+  cardId: string;
 }
