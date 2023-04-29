@@ -4,6 +4,7 @@ import St from "./AddCardResultPageStyled";
 import { CreditCard } from "../../types/card";
 import { useCardDispatch, useCardState } from "../../hooks/useCard";
 import CardDetailView from "../CardDetailView/CardDetailView";
+import useCardAlias from "../../hooks/useCardAlias";
 
 type AddCardResultPageProps = {
   addCreditCard: (card: CreditCard) => void;
@@ -14,6 +15,7 @@ function AddCardResultPage({ addCreditCard }: AddCardResultPageProps) {
 
   const creditCard = useCardState();
   const dispatch = useCardDispatch();
+  const { cardAlias, changeCardAlias } = useCardAlias();
 
   const submitCreditCard = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -30,9 +32,11 @@ function AddCardResultPage({ addCreditCard }: AddCardResultPageProps) {
       <St.CardAliasForm onSubmit={submitCreditCard}>
         <St.CardAlias
           type="text"
+          value={cardAlias || ""}
           maxLength={10}
           required
           placeholder="카드 별칭"
+          onChange={changeCardAlias}
         ></St.CardAlias>
         <St.SubmitButton type="submit" value={"확인"} />
       </St.CardAliasForm>

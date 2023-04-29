@@ -15,9 +15,10 @@ function CardList({ creditCardList }: CardListProps) {
         <St.Title>새로운 카드를 등록해주세요.</St.Title>
       ) : null}
       {creditCardList.map((card) => (
-        <li key={card.originNumber}>
+        <St.List key={card.originNumber}>
           <CardDetailView creditcard={card} />
-        </li>
+          <St.Title>{card.cardAlias}</St.Title>
+        </St.List>
       ))}
       <CardAddButton />
     </St.ListSection>
