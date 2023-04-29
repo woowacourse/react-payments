@@ -18,7 +18,7 @@ export const RegisterCard = () => {
       updateCard(newCard.id, { nickname });
     }
 
-    moveTo("/");
+    moveTo(PAGE.home);
   };
 
   return (

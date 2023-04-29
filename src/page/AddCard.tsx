@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { CompanySelectModal } from "../components/companySelectModal";
 import { getRandomId } from "../utils/randomId";
 import { useModal } from "../hook/useModal";
+import { PAGE } from "../constant/routePath";
 
 const defaultCard = {
   id: "",
@@ -31,7 +32,7 @@ export const AddCard = () => {
   return (
     <>
       <Header text="카드 추가">
-        <Link to={"/"}>
+        <Link to={PAGE.home}>
           <BackButton type="button"> «</BackButton>
         </Link>
       </Header>

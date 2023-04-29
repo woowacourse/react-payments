@@ -9,6 +9,7 @@ import { FormEvent, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useValidation } from "../../hook/useValidation";
 import { CardContext } from "../../context/cardContext";
+import { PAGE } from "../../constant/routePath";
 
 interface CardFormProps {
   setCardInfo: React.Dispatch<React.SetStateAction<CardType>>;
@@ -17,7 +18,7 @@ interface CardFormProps {
 
 export const CardForm = ({ setCardInfo, newCard }: CardFormProps) => {
   const {
-    inputValidity,
+    isEveryInputValid,
     validateCVCInput,
     validateExpiryDateInput,
     validateNumbersInput,
@@ -26,16 +27,12 @@ export const CardForm = ({ setCardInfo, newCard }: CardFormProps) => {
   const { addNewCard } = useContext(CardContext);
   const moveTo = useNavigate();
 
-  const isEveryInputValid = () => {
-    return Object.entries(inputValidity).every(([_, isValid]) => isValid);
-  };
-
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (isEveryInputValid()) {
       addNewCard(newCard);
-      moveTo("/registerCard");
+      moveTo(PAGE.registerCard);
     }
   };
 

@@ -50,8 +50,12 @@ export const useValidation = () => {
     return isPasswordValid;
   };
 
+  const isEveryInputValid = () => {
+    return Object.entries(inputValidity).every(([_, isValid]) => isValid);
+  };
+
   return {
-    inputValidity,
+    isEveryInputValid,
     validateNumbersInput,
     validateExpiryDateInput,
     validateCVCInput,
