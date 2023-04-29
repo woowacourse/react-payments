@@ -82,7 +82,7 @@ export function CardRegisterForm() {
   }, [isModalOpen]);
 
   return (
-    <Style.Wrapper onSubmit={handleCardInfoSubmit}>
+    <Style.Container onSubmit={handleCardInfoSubmit}>
       <CardSelectModal
         isOpen={isModalOpen}
         setIsOpen={setIsModalOpen}
@@ -132,12 +132,12 @@ export function CardRegisterForm() {
           다음
         </Button>
       </Style.ButtonContainer>
-    </Style.Wrapper>
+    </Style.Container>
   );
 }
 
 const Style = {
-  Wrapper: styled.form`
+  Container: styled.form`
     display: flex;
     flex-direction: column;
     align-items: center;

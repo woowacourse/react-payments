@@ -54,7 +54,7 @@ export function PasswordInput({ password, passwordInputRef, setPassword }: Props
       <Style.Label htmlFor='cardPassword0'>
         <Style.Title>카드 비밀번호</Style.Title>
       </Style.Label>
-      <Style.Wrapper>
+      <Style.Container>
         {Array.from({ length: 2 }).map((_, index) => {
           return (
             <InputContainer key={index} width={'43px'}>
@@ -76,13 +76,13 @@ export function PasswordInput({ password, passwordInputRef, setPassword }: Props
         })}
         <Style.Dot>•</Style.Dot>
         <Style.Dot>•</Style.Dot>
-      </Style.Wrapper>
+      </Style.Container>
     </>
   );
 }
 
 const Style = {
-  Wrapper: styled.div`
+  Container: styled.div`
     display: flex;
     justify-content: space-between;
 
