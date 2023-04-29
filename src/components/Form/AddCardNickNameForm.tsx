@@ -1,7 +1,7 @@
 import { Card } from 'components/common/Card/types';
 import { CreditCard } from 'components/common';
 import styled from 'styled-components';
-import { FormEventHandler, useEffect, useRef } from 'react';
+import { FormEventHandler, useRef } from 'react';
 
 type Props = { card: Card; onSubmit: (card: Card) => void };
 
