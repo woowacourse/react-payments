@@ -30,7 +30,8 @@ export function CardAliasAddForm() {
         <Input
           designType='underline'
           name='alias'
-          placeholder='카드 별칭을 입력해주세요.'
+          placeholder='카드 별칭을 입력해주세요.(선택)'
+          maxLength={20}
           autoFocus
           width={'240px'}
           height={'45px'}

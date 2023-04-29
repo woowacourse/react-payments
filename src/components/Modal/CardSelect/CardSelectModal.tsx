@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { CardCompany } from '../../../types';
-import { Modal } from '../Modal';
-import { CARD_COMPANY } from '../../../constants';
-import { CardCompanyItem } from './CardCompanyItem';
 import { isCardCompany } from '../../../types/guard';
+import { CARD_COMPANY } from '../../../constants';
+import { ModalWithCloseButton } from '../ModalWithCloseButton';
+import { CardCompanyItem } from './CardCompanyItem';
 
 interface Props {
   isOpen: boolean;
@@ -14,9 +14,15 @@ interface Props {
 
 export function CardSelectModal({ isOpen, setIsOpen, setCardCompany }: Props) {
   const cardCompanies = Object.values(CARD_COMPANY);
+  const buttonText = '카드사 선택 완료';
 
   return (
-    <Modal isOpen={isOpen} setIsOpen={setIsOpen} aria-labelledby='title-dialog'>
+    <ModalWithCloseButton
+      isOpen={isOpen}
+      setIsOpen={setIsOpen}
+      buttonText={buttonText}
+      aria-labelledby='title-dialog'
+    >
       <Style.Title id='title-dialog'>카드사를 선택해주세요.</Style.Title>
       <Style.GridContainer>
         {cardCompanies.map((cardCompany) => {
@@ -29,7 +35,7 @@ export function CardSelectModal({ isOpen, setIsOpen, setCardCompany }: Props) {
           );
         })}
       </Style.GridContainer>
-    </Modal>
+    </ModalWithCloseButton>
   );
 }
 

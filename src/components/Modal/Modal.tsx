@@ -1,6 +1,5 @@
 import { DialogHTMLAttributes, useEffect } from 'react';
 import styled from 'styled-components';
-import { Button } from '../Button/Button';
 
 interface Props extends DialogHTMLAttributes<HTMLDialogElement> {
   isOpen: boolean;
@@ -28,21 +27,7 @@ export function Modal({ isOpen, setIsOpen, children, ...props }: Props) {
   return (
     <>
       <Style.Backdrop isOpen={isOpen} onClick={closeModal} />
-      <Style.Container open={isOpen}>
-        {children}
-        <Style.ButtonWrapper>
-          <Button
-            type={'button'}
-            onClick={closeModal}
-            width={'368px'}
-            height={'45px'}
-            backgroundColor=' #75c4d2;'
-            fontSize={'14px'}
-          >
-            카드사 선택 완료
-          </Button>
-        </Style.ButtonWrapper>
-      </Style.Container>
+      <Style.Container open={isOpen}>{children}</Style.Container>
     </>
   );
 }
@@ -103,17 +88,5 @@ const Style = {
     }
 
     z-index: 1000;
-  `,
-
-  ButtonWrapper: styled.div`
-    display: flex;
-    justify-content: center;
-
-    width: 100%;
-    margin-top: 20px;
-
-    font-size: 20px;
-
-    cursor: pointer;
   `,
 };
