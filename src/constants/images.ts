@@ -3,7 +3,7 @@ import BCCardLogo from '../assets/bc-logo.svg';
 import ShinhanCardLogo from '../assets/shinhan-logo.svg';
 import KakaoBankLogo from '../assets/kakaobank-logo.svg';
 import HyundaiCardLogo from '../assets/hyundaicard-logo.svg';
-import WooriCardLogo from '../assets/worricard-logo.svg';
+import WooriCardLogo from '../assets/wooricard-logo.svg';
 import LotteCardLogo from '../assets/lottecard-logo.svg';
 import HanaCardLogo from '../assets/hanacard-logo.svg';
 import KBCardLogo from '../assets/kbcard-logo.svg';
