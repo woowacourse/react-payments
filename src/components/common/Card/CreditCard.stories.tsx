@@ -5,6 +5,7 @@ import { theme } from 'components/style/theme';
 import { ThemeProvider } from 'styled-components';
 
 const meta = {
+  tags: ['autodocs'],
   title: 'CreditCard',
   component: CreditCard,
   decorators: [
