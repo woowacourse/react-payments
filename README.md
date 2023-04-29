@@ -8,8 +8,8 @@
 
 ## [💳 페이먼츠 페이지 링크](https://hyeryongchoi.github.io/react-payments/)
 
-<img width="400px" alt="페이먼츠 페이지 실행 화면" src="https://user-images.githubusercontent.com/24777828/233854470-be2d6bdf-b598-4062-bad6-bc90f022cac1.gif">
-<img width="400px" alt="페이먼츠 404 페이지" src="https://user-images.githubusercontent.com/24777828/233854475-1fb5e32f-a598-46e8-97c0-9231050fb80a.gif">
+<img width="300px" height="600px" alt="페이먼츠 페이지 실행 화면" src="https://user-images.githubusercontent.com/24777828/235288287-9c066402-e389-47a9-b807-af51f25d2af3.gif">
+<img width="500px" height="600px" alt="페이먼츠 404 페이지" src="https://user-images.githubusercontent.com/24777828/233854475-1fb5e32f-a598-46e8-97c0-9231050fb80a.gif">
 
 ## 📍 학습 목표
 
@@ -23,9 +23,9 @@
 
 ✔️ `모바일 타겟`의 웹 앱을 구현하며 컴포넌트가 가지는 의미와 `편리한 모바일 UI/UX`에 대해 고민해봅니다.  
 ✔️ 다른 라이브러리나 프레임워크 없이 오로지 `React`만으로 상태를 관리하고 컴포넌트를 설계합니다.  
-✔️ `Controlled` & `Uncontrolled Components`에 입각하여 `Form`을 핸들링합니다.  
-✔️ `재사용 가능한 Component`를 직접 작성하고 사용합니다.  
 ✔️ React `Hooks API`를 활용합니다.
+✔️ `재사용 가능한 Component`를 직접 작성하고 사용합니다.  
+✔️ `Controlled` & `Uncontrolled Components`에 입각하여 `Form`을 핸들링합니다.
 
 ## 🚀 Step1 - Component-Driven Development
 
@@ -80,49 +80,86 @@
 - 각 스토리에 명확한 이름을 지정하고, 스토리 이름을 통해 컴포넌트 사용 사례를 쉽게 이해할 수 있도록 한다.
 - 변동 가능한 값에 대해 사용자가 직접 조작해볼 수 있게 하여 컴포넌트를 더욱 쉽게 이해할 수 있도록 한다.
 
-### 🏗 프로그램 구조도
+## 🚀 Step2 - Component & State
 
-<img width="600px" alt="프로그램 구조도" src="https://user-images.githubusercontent.com/24777828/233303190-6100c05e-e8a9-42aa-905a-57c191bc1641.png">
+### 📝 필수 요구사항
+
+**카드 등록 과정에서 발생할 수 있는 여러 스토리를 고려하여 구현한다.**
+
+- 주요 컴포넌트에 대한 `Storybook` 상호 작용 테스트
+- `Controlled` & `Uncontrolled Components`에 입각하여 `Form` 핸들링
+- `Context API`를 활용해 전역 상태 관리 및 계층 재구성
+
+### ✅ 프로그래밍 요구사항
+
+이전 미션의 프로그래밍 요구사항은 기본으로 포함한다.
+
+#### **Performance**
+
+- react에서 제공하는 hook을 이용하여 성능 최적화를 고려한다.
+- Controlled & Uncontrolled Components를 고려하여 Form을 핸들링한다.
 
 ### 🗂 디렉터리 구조
 
 ```
 📦src
  ┣ 📂components
+ ┃ ┣ 📂Button
+ ┃ ┃ ┣ 📜BackButton.tsx
+ ┃ ┃ ┗ 📜Button.tsx
+ ┃ ┣ 📂Form
+ ┃ ┃ ┣ 📜CardAliasAddForm.tsx
+ ┃ ┃ ┗ 📜CardRegisterForm.tsx
+ ┃ ┣ 📂Modal
+ ┃ ┃ ┣ 📂CardSelect
+ ┃ ┃ ┃ ┣ 📜CardCompanyItem.tsx
+ ┃ ┃ ┃ ┗ 📜CardSelectModal.tsx
+ ┃ ┃ ┣ 📜Modal.tsx
+ ┃ ┃ ┗ 📜ModalWithCloseButton.tsx
+ ┃ ┣ 📂Tooltip
+ ┃ ┃ ┗ 📜Tooptip.tsx
  ┃ ┣ 📂input
  ┃ ┃ ┣ 📜CardNumberInput.tsx
  ┃ ┃ ┣ 📜ExpirationDateInput.tsx
  ┃ ┃ ┣ 📜Input.tsx
- ┃ ┃ ┣ 📜InputWrapper.tsx
+ ┃ ┃ ┣ 📜InputContainer.tsx
  ┃ ┃ ┣ 📜OwnerNameInput.tsx
  ┃ ┃ ┣ 📜PasswordInput.tsx
  ┃ ┃ ┗ 📜SecurityCodeInput.tsx
  ┃ ┣ 📜CardListContainer.tsx
- ┃ ┣ 📜CardRegisterForm.tsx
- ┃ ┗ 📜CardViewer.tsx
+ ┃ ┣ 📜CardViewer.tsx
+ ┃ ┗ 📜ScrollToTop.tsx
  ┣ 📂constants
  ┃ ┗ 📜index.ts
  ┣ 📂domains
  ┃ ┗ 📜cardDataService.ts
  ┣ 📂hooks
- ┃ ┗ 📜useCardRegisterFormValidation.ts
+ ┃ ┗ 📜useCardRegisterForm.ts
  ┣ 📂layout
- ┃ ┣ 📜BackButton.tsx
  ┃ ┗ 📜index.tsx
  ┣ 📂pages
+ ┃ ┣ 📜AliasAddition.tsx
  ┃ ┣ 📜Main.tsx
  ┃ ┣ 📜NotFound.tsx
  ┃ ┗ 📜Register.tsx
  ┣ 📂stories
+ ┃ ┣ 📂Button
+ ┃ ┃ ┗ 📜Button.stories.tsx
  ┃ ┣ 📂Form
  ┃ ┃ ┗ 📜CardRegisterForm.stories.tsx
- ┃ ┗ 📂Input
+ ┃ ┣ 📂Input
  ┃ ┃ ┣ 📜CardNumberInput.stories.tsx
  ┃ ┃ ┣ 📜ExpirationDateInput.stories.tsx
+ ┃ ┃ ┣ 📜Input.stories.tsx
  ┃ ┃ ┣ 📜OwnerNameInput.stories.tsx
  ┃ ┃ ┣ 📜PasswordInput.stories.tsx
  ┃ ┃ ┗ 📜SecurityCodeInput.stories.tsx
+ ┃ ┣ 📂Modal
+ ┃ ┃ ┗ 📜Modal.stories.tsx
+ ┃ ┗ 📂Tooltip
+ ┃ ┃ ┗ 📜Tooltip.stories.tsx
  ┣ 📂types
+ ┃ ┣ 📜guard.ts
  ┃ ┗ 📜index.ts
  ┣ 📂utils
  ┃ ┣ 📜index.ts
