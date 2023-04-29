@@ -1,5 +1,5 @@
 export interface CreditCard {
-  bank?: string;
+  cardCo: string;
   cardNumber: number[];
   expirationDate: string;
   owner: string;
@@ -15,7 +15,7 @@ export interface EachUserInputState {
 export type nowStatus = 0 | 1 | 2;
 
 export interface InputStatus {
-  CardCo?: EachUserInputState;
+  cardCo: EachUserInputState;
   cardNumber: EachUserInputState;
   expirationDate: EachUserInputState;
   owner: EachUserInputState;
