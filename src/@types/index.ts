@@ -1,6 +1,6 @@
 type Card = {
   id: string;
-  cardName: string;
+  cardName: string[];
   cardCompany: string;
   cardNumbers: string[];
   cardExpirationDate: string[];

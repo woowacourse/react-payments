@@ -13,7 +13,7 @@ type InputInfo = {
 
 type InputGroupProps = {
   labelText: string;
-  insert: (element: HTMLElement | null) => void;
+  insert?: (element: HTMLElement | null) => void;
   autofocus: boolean;
   inputInfoList: InputInfo[];
   children?: React.ReactNode;
