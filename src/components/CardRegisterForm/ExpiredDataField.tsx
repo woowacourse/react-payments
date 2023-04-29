@@ -1,15 +1,13 @@
-import type { ChangeEventHandler } from 'react';
-
 import Input from '../common/Input';
 import TextField from '../common/TextField';
+import type { CardFormNumberFieldProps } from './types';
 
 import useCardFormValue from '../../hooks/useCardFormValue';
 
-interface Props {
-  handleNumberChange: ChangeEventHandler<HTMLInputElement>;
-}
-
-const ExpiredDateField = ({ handleNumberChange }: Props) => {
+const ExpiredDateField = ({
+  handleNumberChange,
+  inputRefs,
+}: CardFormNumberFieldProps) => {
   const { expiredDate } = useCardFormValue();
 
   return (
@@ -24,7 +22,7 @@ const ExpiredDateField = ({ handleNumberChange }: Props) => {
         placeholder="MM"
         value={expiredDate.month}
         onChange={handleNumberChange}
-        //  ref={inputRefs[4]}
+        ref={inputRefs[4]}
         align="center"
         data-set-value="setExpiredMonth"
       />
@@ -39,7 +37,7 @@ const ExpiredDateField = ({ handleNumberChange }: Props) => {
         placeholder="YY"
         value={expiredDate.year}
         onChange={handleNumberChange}
-        //  ref={inputRefs[5]}
+        ref={inputRefs[5]}
         align="center"
         data-set-value="setExpiredYear"
       />

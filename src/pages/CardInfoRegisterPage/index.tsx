@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import Header from '../../components/common/Header';
 import CardItem from '../../components/CardItem';
 import CardRegisterForm from '../../components/CardRegisterForm';
@@ -9,6 +11,10 @@ import styles from './cardRegisterPage.module.css';
 
 const CardInfoRegisterPage = () => {
   const { toggleModal, openModal, closeModal } = useModal();
+
+  useEffect(() => {
+    openModal();
+  }, []);
 
   return (
     <>

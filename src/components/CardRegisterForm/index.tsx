@@ -11,7 +11,6 @@ import PasswordField from './PasswordField';
 import useCardRegisterForm from './hooks/useCardRegisterForm';
 import useCardFormValidation from './hooks/useCardFormValidation';
 
-
 import styles from './cardRegisterForm.module.css';
 
 const CardRegisterForm = () => {
@@ -42,11 +41,20 @@ const CardRegisterForm = () => {
 
   return (
     <form className={styles.form} onSubmit={handleFormSubmit}>
-      <NumberField handleNumberChange={handleNumberChange} />
-      <ExpiredDateField handleNumberChange={handleNumberChange} />
-      <OwnerField handleOwnerChange={handleOwnerChange} />
-      <CvcField handleNumberChange={handleNumberChange} />
-      <PasswordField handleNumberChange={handleNumberChange} />
+      <NumberField
+        handleNumberChange={handleNumberChange}
+        inputRefs={inputRefs}
+      />
+      <ExpiredDateField
+        handleNumberChange={handleNumberChange}
+        inputRefs={inputRefs}
+      />
+      <OwnerField handleOwnerChange={handleOwnerChange} inputRefs={inputRefs} />
+      <CvcField handleNumberChange={handleNumberChange} inputRefs={inputRefs} />
+      <PasswordField
+        handleNumberChange={handleNumberChange}
+        inputRefs={inputRefs}
+      />
       <div className={styles.submitButton}>
         {isValidCardData && <button tabIndex={11}>다음</button>}
       </div>

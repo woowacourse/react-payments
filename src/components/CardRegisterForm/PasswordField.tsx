@@ -1,15 +1,13 @@
-import type { ChangeEventHandler } from 'react';
-
 import Input from '../common/Input';
 import TextField from '../common/TextField';
+import type { CardFormNumberFieldProps } from './types';
 
 import useCardFormValue from '../../hooks/useCardFormValue';
 
-interface Props {
-  handleNumberChange: ChangeEventHandler<HTMLInputElement>;
-}
-
-const PasswordField = ({ handleNumberChange }: Props) => {
+const PasswordField = ({
+  handleNumberChange,
+  inputRefs,
+}: CardFormNumberFieldProps) => {
   const { password } = useCardFormValue();
 
   return (
@@ -23,7 +21,7 @@ const PasswordField = ({ handleNumberChange }: Props) => {
         tabIndex={9}
         value={password?.first}
         onChange={handleNumberChange}
-        //ref={inputRefs[8]}
+        ref={inputRefs[8]}
         align="center"
         data-set-value="setFirstPassword"
       />
@@ -36,7 +34,7 @@ const PasswordField = ({ handleNumberChange }: Props) => {
         tabIndex={10}
         value={password?.second}
         onChange={handleNumberChange}
-        //ref={inputRefs[9]}
+        ref={inputRefs[9]}
         align="center"
         data-set-value="setSecondPassword"
       />

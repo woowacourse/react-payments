@@ -1,15 +1,10 @@
-import type { ChangeEventHandler } from 'react';
-
 import Input from '../common/Input';
 import TextField from '../common/TextField';
+import type {  CardFormNumberFieldProps } from './types';
 
 import useCardFormValue from '../../hooks/useCardFormValue';
 
-interface Props {
-  handleNumberChange: ChangeEventHandler<HTMLInputElement>;
-}
-
-const CvcField = ({ handleNumberChange }: Props) => {
+const CvcField = ({ handleNumberChange, inputRefs }: CardFormNumberFieldProps) => {
   const { cvc } = useCardFormValue();
 
   return (
@@ -27,7 +22,7 @@ const CvcField = ({ handleNumberChange }: Props) => {
         tabIndex={8}
         value={cvc}
         onChange={handleNumberChange}
-        //ref={inputRefs[7]}
+        ref={inputRefs[7]}
         align="center"
         data-set-value="setCvc"
       />

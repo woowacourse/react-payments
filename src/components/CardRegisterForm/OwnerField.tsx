@@ -1,15 +1,13 @@
-import type { ChangeEventHandler } from 'react';
-
 import Input from '../common/Input';
 import TextField from '../common/TextField';
+import type { CardFormOwnerFieldProps } from './types';
 
 import useCardFormValue from '../../hooks/useCardFormValue';
 
-interface Props {
-  handleOwnerChange: ChangeEventHandler<HTMLInputElement>;
-}
-
-const OwnerField = ({ handleOwnerChange }: Props) => {
+const OwnerField = ({
+  handleOwnerChange,
+  inputRefs,
+}: CardFormOwnerFieldProps) => {
   const { owner } = useCardFormValue();
 
   return (
@@ -26,7 +24,7 @@ const OwnerField = ({ handleOwnerChange }: Props) => {
         tabIndex={7}
         value={owner}
         onChange={handleOwnerChange}
-        //  ref={inputRefs[6]}
+        ref={inputRefs[6]}
         data-set-value="setOwner"
       />
     </TextField>
