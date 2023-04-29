@@ -14,9 +14,7 @@ const CardRegistrationConfirmation = ({ registerNewCard }: CardRegistrationConfi
   const navigate = useNavigate();
   const { cardNumber, cardOwnerName, expirationDate, selectedCard, cardNickName } = useCardInfoContext();
 
-  const handleCardInfo = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
+  const handleCardInfo = (e: React.MouseEvent<HTMLButtonElement>) => {
     const cardInfo: CardInfo = {
       cardNumber: cardNumber,
       expirationDate: expirationDate,
@@ -31,23 +29,21 @@ const CardRegistrationConfirmation = ({ registerNewCard }: CardRegistrationConfi
   };
 
   return (
-    <form onSubmit={handleCardInfo}>
-      <section className={styles.container}>
-        <article className={styles.box}>
-          <h2 className={styles.registrationLetter}>카드등록이 완료되었습니다.</h2>
-          <CardPreview
-            cardNumber={cardNumber}
-            cardOwnerName={cardOwnerName}
-            expirationDate={expirationDate}
-            selectedCard={selectedCard}
-          />
-          <CardNicknameInput />
-          <Button type="submit" className={styles.confirmButton}>
-            확인
-          </Button>
-        </article>
-      </section>
-    </form>
+    <section className={styles.container}>
+      <article className={styles.box}>
+        <h2 className={styles.registrationLetter}>카드등록이 완료되었습니다.</h2>
+        <CardPreview
+          cardNumber={cardNumber}
+          cardOwnerName={cardOwnerName}
+          expirationDate={expirationDate}
+          selectedCard={selectedCard}
+        />
+        <CardNicknameInput />
+        <Button type="button" className={styles.confirmButton} onClick={handleCardInfo}>
+          확인
+        </Button>
+      </article>
+    </section>
   );
 };
 
