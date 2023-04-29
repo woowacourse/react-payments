@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router';
 
 import HoldingCardsPage from './HoldingCardsPage';
@@ -7,28 +6,10 @@ import CardNameRegisterPage from './CardNameRegisterPage';
 import CardPage from './contexts/CardForm';
 
 import Layout from '../components/common/Layout';
-import type { CardData } from '../types/card';
+import useCards from '../hooks/useCards';
 
 function App() {
-  const [cards, setCards] = useState<CardData[]>([]);
-
-  useEffect(() => {
-    const cardsData = localStorage.getItem('cards');
-
-    if (cardsData === null) return;
-
-    setCards(JSON.parse(cardsData));
-  }, []);
-
-  useEffect(() => {
-    if (cards.length > 0) {
-      localStorage.setItem('cards', JSON.stringify(cards));
-    }
-  }, [cards]);
-
-  const registerCard = (card: CardData) => {
-    setCards([...cards, card]);
-  };
+  const { cards, registerCard } = useCards();
 
   return (
     <Routes>
