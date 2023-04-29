@@ -15,8 +15,8 @@ export function CreditCard({ card }: CreditCardProps) {
       <Styled.CardNumbers>
         <span>{numbers?.[0]}</span>
         <span>{numbers?.[1]}</span>
-        <Styled.Dots>••••</Styled.Dots>
-        <Styled.Dots>••••</Styled.Dots>
+        <Styled.Dots>{'•'.repeat(numbers?.[2].length ?? 0)}</Styled.Dots>
+        <Styled.Dots>{'•'.repeat(numbers?.[3].length ?? 0)}</Styled.Dots>
       </Styled.CardNumbers>
       <Styled.Container>
         <Styled.Name>{name}</Styled.Name>
