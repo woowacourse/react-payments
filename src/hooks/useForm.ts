@@ -1,113 +1,87 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
-import { isNumeric } from '../utils';
-
-import { Validator } from '../types/validator';
-import { CardInfo } from '../types/card';
-import { SetCardList } from '../types';
-import { useCardInfoActions } from '../context/CardInfoContext';
-
-interface Error {
-  firstCardNumbers: string;
-  secondCardNumbers: string;
-  thirdCardNumbers: string;
-  fourthCardNumbers: string;
-  expirationMonth: string;
-  expirationYear: string;
-  ownerName: string;
-  securityNumbers: string;
-  firstPassword: string;
-  secondPassword: string;
-  [key: string]: string;
+interface Props {
+  submitAction: () => void;
+  changeAction: (name: string, value: string) => void;
+  errorOptions: any;
 }
 
-const useForm = (setCardList: SetCardList<CardInfo>, validator: Validator) => {
-  const { updateInputValue } = useCardInfoActions();
+const useForm = ({ submitAction, changeAction, errorOptions = '' }: Props) => {
+  const [error, setError] = useState(errorOptions?.initState);
 
-  const navigate = useNavigate();
-  const [error, setError] = useState<Error>({
-    firstCardNumbers: '',
-    secondCardNumbers: '',
-    thirdCardNumbers: '',
-    fourthCardNumbers: '',
-    expirationMonth: '',
-    expirationYear: '',
-    ownerName: '',
-    securityNumbers: '',
-    firstPassword: '',
-    secondPassword: '',
-  });
+  const checkFormValidity = (elements: HTMLInputElement[]) => {
+    if (!error) return true;
 
-  const focusToNextFormElement = (
-    formElements: HTMLInputElement[],
-    curElement: HTMLInputElement
-  ) => {
-    formElements.forEach((elem, index: number) => {
-      if (elem !== curElement) return;
-
-      curElement.blur();
-      formElements[index + 1]?.focus();
-    });
-  };
-
-  const findInputError = (elements: HTMLInputElement[]) => {
-    return elements.some((elem) => {
-      if (elem.tagName !== 'INPUT') return false;
+    return elements.every((elem) => {
+      if (elem.tagName !== 'INPUT') return true;
 
       const { name, value } = elem;
-      const errorMessage = validator[name](value);
 
+      const errorMessage = errorOptions.validator[name]?.(value);
       if (errorMessage) {
+        setError((prev: any) => ({ ...prev, [name]: errorMessage }));
         elem.focus();
-        setError((prev) => ({
-          ...prev,
-          [name]: errorMessage,
-        }));
-        return true;
-      }
-      return false;
-    });
-  };
 
-  const clearError = (name: keyof typeof error) => {
-    setError((prev) => ({
-      ...prev,
-      [name]: '',
-    }));
+        return false;
+      }
+
+      return true;
+    });
   };
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const elements = e.currentTarget.elements;
 
-    const hasInputError = findInputError([...elements] as HTMLInputElement[]);
-    if (hasInputError) return;
+    const formElements = (e.target as HTMLFormElement).elements;
+    const elements = formElements ? ([...formElements] as HTMLInputElement[]) : [];
 
-    navigate('/register/nickname');
+    const ok = checkFormValidity(elements);
+    if (!ok) return;
+
+    submitAction();
   };
 
-  const onChange = ({ target: targetInput }: ChangeEvent<HTMLInputElement>) => {
-    const elements = targetInput.closest('form')?.elements;
-    if (!elements) return;
+  const onChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
+    const { name, value, maxLength } = target;
 
-    const {
-      name,
-      value,
-      maxLength,
-      dataset: { type },
-    } = targetInput;
+    if (!canChange(target)) return;
 
-    if ((type === 'number' || type === 'password') && !isNumeric(value)) return;
-    if (value.length > maxLength) return;
+    setError((prev: any) => ({ ...prev, [name]: '' }));
 
-    if (error[name]) clearError(name);
-
-    if (value.length >= maxLength) {
-      focusToNextFormElement([...elements] as HTMLInputElement[], targetInput);
+    if (value.length === maxLength) {
+      const formElements = target.closest('form')?.elements;
+      const elements = formElements ? ([...formElements] as HTMLInputElement[]) : [];
+      focusToNextFormElement(elements, target);
     }
 
-    updateInputValue(name, value);
+    changeAction(name, value);
+  };
+
+  const focusToNextFormElement = (elements: HTMLInputElement[], target: HTMLInputElement) => {
+    elements.forEach((elem, index) => {
+      if (elem !== target) return;
+
+      elements[index + 1]?.focus();
+    });
+  };
+
+  const canChange = (target: HTMLInputElement) => {
+    const {
+      value,
+      maxLength,
+      dataset: { numeric },
+    } = target;
+
+    if (value.length > maxLength) return false;
+    if (numeric) {
+      if (!isNumeric(value)) return false;
+    }
+
+    return true;
+  };
+
+  const isNumeric = (value: string) => {
+    return /^[0-9]*$/.test(value);
   };
 
   return { onSubmit, onChange, error };
