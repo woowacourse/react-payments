@@ -1,14 +1,27 @@
+import { useContext } from 'react';
+
 import Input from '@Components/Input';
 import InputLabel from '@Components/InputLabel';
 import InputLayout from '@Components/InputLayout';
 
+import {
+  CreditCardRegisterContext,
+  CreditCardRegisterUpdateContext,
+} from '@Contexts/CreditCardRegister/CreditCardRegisterContext';
+
 import { CREDIT_CARD_LENGTH } from '@Constants/creditCard';
 
-import { CreditCardExpiryInputProps } from './type';
+function CreditCardExpiryInput() {
+  const {
+    creditCard: { expiry },
+    errorMessage: { expiry: errorMessage },
+  } = useContext(CreditCardRegisterContext);
+  const {
+    update: { expiry: update },
+  } = useContext(CreditCardRegisterUpdateContext);
 
-function CreditCardExpiryInput({ creditCardExpiry, errorMessage, updateExpiry }: CreditCardExpiryInputProps) {
   const handleChangeExpiry = (event: React.ChangeEvent<HTMLInputElement>) => {
-    updateExpiry(event.target.value.replaceAll('/', ''));
+    update(event.target.value.replaceAll('/', ''));
   };
 
   return (
@@ -17,7 +30,7 @@ function CreditCardExpiryInput({ creditCardExpiry, errorMessage, updateExpiry }:
       <Input
         placeholder="MM/YY"
         type="string"
-        value={creditCardExpiry}
+        value={expiry}
         width="40%"
         textAlign="center"
         onChange={handleChangeExpiry}

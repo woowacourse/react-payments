@@ -12,14 +12,18 @@ import creditCardStorage from '@Domains/creditCard/creditCardStorage';
 
 import * as Type from '@Types/index';
 
-import CreditCardRegisterContext from '@Contexts/CreditCardRegister/CreditCardRegisterContext';
+import {
+  CreditCardRegisterContext,
+  CreditCardRegisterUpdateContext,
+} from '@Contexts/CreditCardRegister/CreditCardRegisterContext';
 
 import * as S from './style';
 
 function CreditCardAlias() {
   const navigate = useNavigate();
 
-  const { creditCard: creditCardState, update } = useContext(CreditCardRegisterContext);
+  const { creditCard: creditCardState } = useContext(CreditCardRegisterContext);
+  const { update } = useContext(CreditCardRegisterUpdateContext);
 
   const handleChangeAlias = (event: React.ChangeEvent<HTMLInputElement>) => {
     update.alias(event.target.value);

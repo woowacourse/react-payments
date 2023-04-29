@@ -8,7 +8,10 @@ import Header from '@Components/Header';
 import useAnimationModal from '@Hooks/useAnimationModal';
 import useCreditCardValidation from '@Hooks/useCreditCardValidation';
 
-import CreditCardRegisterContext from '@Contexts/CreditCardRegister/CreditCardRegisterContext';
+import {
+  CreditCardRegisterContext,
+  CreditCardRegisterUpdateContext,
+} from '@Contexts/CreditCardRegister/CreditCardRegisterContext';
 
 import scrollWindow from '@Utils/scrollWindow';
 
@@ -23,9 +26,10 @@ import * as S from './style';
 function CreditCardRegister() {
   const navigate = useNavigate();
 
-  const { isModalOpen, openModal } = useAnimationModal();
+  const { creditCard, errorMessage } = useContext(CreditCardRegisterContext);
+  const { update } = useContext(CreditCardRegisterUpdateContext);
 
-  const { creditCard, update, errorMessage } = useContext(CreditCardRegisterContext);
+  const { isModalOpen, openModal } = useAnimationModal();
   const isValid = useCreditCardValidation(creditCard, Object.values(errorMessage));
 
   const handleSubmit = () => {
@@ -33,6 +37,11 @@ function CreditCardRegister() {
     if (!creditCard.company) return;
 
     navigate('/register/alias');
+  };
+
+  const handleClickSelectCreditCompanyButton = () => {
+    openModal();
+    update.company(undefined);
   };
 
   useEffect(() => {
@@ -56,43 +65,22 @@ function CreditCardRegister() {
               company: creditCard.company,
             }}
           />
-          <S.ReSelectCardCompanyButton
-            onClick={() => {
-              openModal();
-              update.company(undefined);
-            }}
-          >
+          <S.ReSelectCardCompanyButton onClick={handleClickSelectCreditCompanyButton}>
             {creditCard.company && '카드 재선택'}
           </S.ReSelectCardCompanyButton>
         </S.PreviewCreditCard>
         <S.CreditCardRegisterForm>
-          <CreditCardNumberInput
-            creditCardNumber={creditCard.numbers}
-            updateNumbers={update.numbers}
-            errorMessage={errorMessage.numbers}
-          />
-          <CreditCardExpiryInput
-            creditCardExpiry={creditCard.expiry}
-            updateExpiry={update.expiry}
-            errorMessage={errorMessage.expiry}
-          />
-          <CreditCardOwnerInput
-            creditCardOwner={creditCard.owner}
-            updateOwner={update.owner}
-            errorMessage={errorMessage.owner}
-          />
-          <CreditCardCVCInput creditCardCVC={creditCard.cvc} updateCVC={update.cvc} errorMessage={errorMessage.cvc} />
-          <CreditCardPasswordInput
-            creditCardPassword={creditCard.password}
-            updatePassword={update.password}
-            errorMessage={errorMessage.password}
-          />
+          <CreditCardNumberInput />
+          <CreditCardExpiryInput />
+          <CreditCardOwnerInput />
+          <CreditCardCVCInput />
+          <CreditCardPasswordInput />
           <S.ButtonWrapper>
             <Button disabled={!isValid} type="button" handleClick={handleSubmit} text="다음" />
           </S.ButtonWrapper>
         </S.CreditCardRegisterForm>
       </S.CreditCardRegister>
-      {isModalOpen && <CreditCardCompanyModal updateCompany={update.company} />}
+      {isModalOpen && <CreditCardCompanyModal />}
     </>
   );
 }

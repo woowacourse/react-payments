@@ -1,18 +1,31 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import Input from '@Components/Input';
 import InputLabel from '@Components/InputLabel';
 import InputLayout from '@Components/InputLayout';
 
+import {
+  CreditCardRegisterContext,
+  CreditCardRegisterUpdateContext,
+} from '@Contexts/CreditCardRegister/CreditCardRegisterContext';
+
 import { CREDIT_CARD_LENGTH } from '@Constants/creditCard';
 
 import * as S from './style';
-import { CreditCardCVCInputProps } from './type';
 
-function CreditCardCVCInput({ creditCardCVC, errorMessage, updateCVC }: CreditCardCVCInputProps) {
+function CreditCardCVCInput() {
   const [isHoverHelperIcon, setIsHoverHelperIcon] = useState(false);
+
+  const {
+    creditCard: { cvc },
+    errorMessage: { cvc: errorMessage },
+  } = useContext(CreditCardRegisterContext);
+  const {
+    update: { cvc: update },
+  } = useContext(CreditCardRegisterUpdateContext);
+
   const handleChangeCreditCardCVC = (event: React.ChangeEvent<HTMLInputElement>) => {
-    updateCVC(event.target.value);
+    update(event.target.value);
   };
 
   const handleGuideIconMouseEnter = () => setIsHoverHelperIcon(true);
@@ -25,7 +38,7 @@ function CreditCardCVCInput({ creditCardCVC, errorMessage, updateCVC }: CreditCa
       <S.CVCInputLayout>
         <Input
           type="password"
-          value={creditCardCVC}
+          value={cvc}
           width="72px"
           textAlign="center"
           onChange={handleChangeCreditCardCVC}

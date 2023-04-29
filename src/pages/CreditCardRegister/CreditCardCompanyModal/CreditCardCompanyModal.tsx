@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+
 import CreditCardCompanyType from '@Components/CreditCardCompany';
 import Modal from '@Components/Modal';
 
@@ -5,16 +7,21 @@ import * as Type from '@Types/index';
 
 import useAnimationModal from '@Hooks/useAnimationModal';
 
+import { CreditCardRegisterUpdateContext } from '@Contexts/CreditCardRegister/CreditCardRegisterContext';
+
 import CARD_COMPANY from '@Constants/cardCompany';
 
 import * as S from './style';
-import { CreditCardCompanyModalProps } from './type';
 
-function CreditCardCompanyModal({ updateCompany }: CreditCardCompanyModalProps) {
+function CreditCardCompanyModal() {
   const { closeModal } = useAnimationModal();
 
+  const {
+    update: { company: update },
+  } = useContext(CreditCardRegisterUpdateContext);
+
   const handleClickCardCompany = (company: Type.CreditCardCompanies) => {
-    updateCompany(company);
+    update(company);
     closeModal();
   };
 

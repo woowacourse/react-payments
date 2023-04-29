@@ -1,21 +1,35 @@
+import { useContext } from 'react';
+
 import Input from '@Components/Input';
 import InputLabel from '@Components/InputLabel';
 import InputLayout from '@Components/InputLayout';
 
 import * as CommonStyle from '@Styles/common';
 
+import {
+  CreditCardRegisterContext,
+  CreditCardRegisterUpdateContext,
+} from '@Contexts/CreditCardRegister/CreditCardRegisterContext';
+
 import { CREDIT_CARD_LENGTH } from '@Constants/creditCard';
 
 import * as S from './style';
-import { CreditCardPasswordInputProps } from './type';
 
-function CreditCardPasswordInput({ creditCardPassword, errorMessage, updatePassword }: CreditCardPasswordInputProps) {
+function CreditCardPasswordInput() {
+  const {
+    creditCard: { password },
+    errorMessage: { password: errorMessage },
+  } = useContext(CreditCardRegisterContext);
+  const {
+    update: { password: update },
+  } = useContext(CreditCardRegisterUpdateContext);
+
   const handleChangeCreditCardFirstPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
-    updatePassword.first(event.target.value);
+    update.first(event.target.value);
   };
 
   const handleChangeCreditCardSecondPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
-    updatePassword.second(event.target.value);
+    update.second(event.target.value);
   };
 
   return (
@@ -24,7 +38,7 @@ function CreditCardPasswordInput({ creditCardPassword, errorMessage, updatePassw
       <CommonStyle.FlexBox justifyContent="flex-start">
         <Input
           type="password"
-          value={creditCardPassword?.first}
+          value={password?.first}
           width="48px"
           textAlign="center"
           onChange={handleChangeCreditCardFirstPassword}
@@ -32,7 +46,7 @@ function CreditCardPasswordInput({ creditCardPassword, errorMessage, updatePassw
         />
         <Input
           type="password"
-          value={creditCardPassword?.second}
+          value={password?.second}
           width="48px"
           textAlign="center"
           onChange={handleChangeCreditCardSecondPassword}

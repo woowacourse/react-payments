@@ -3,19 +3,7 @@ import { createContext } from 'react';
 
 import * as Type from '@Types/index';
 
-const CreditCardRegisterContext = createContext({
-  creditCard: {
-    company: undefined as Type.CreditCardCompanies | undefined,
-    numbers: '',
-    expiry: '',
-    owner: '',
-    cvc: '',
-    alias: '',
-    password: {
-      first: '',
-      second: '',
-    },
-  },
+export const CreditCardRegisterUpdateContext = createContext({
   update: {
     company: (arg: Type.CreditCardCompanies | undefined) => {},
     numbers: (arg: string) => {},
@@ -28,6 +16,22 @@ const CreditCardRegisterContext = createContext({
       second: (arg: string) => {},
     },
   },
+});
+
+export const CreditCardRegisterContext = createContext({
+  creditCard: {
+    company: undefined as Type.CreditCardCompanies | undefined,
+    numbers: '',
+    expiry: '',
+    owner: '',
+    cvc: '',
+    alias: '',
+    password: {
+      first: '',
+      second: '',
+    },
+  },
+
   errorMessage: {
     numbers: null as null | string,
     expiry: null as null | string,
@@ -36,5 +40,3 @@ const CreditCardRegisterContext = createContext({
     password: null as null | string,
   },
 });
-
-export default CreditCardRegisterContext;

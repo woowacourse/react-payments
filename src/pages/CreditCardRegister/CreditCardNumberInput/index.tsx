@@ -1,14 +1,27 @@
+import { useContext } from 'react';
+
 import Input from '@Components/Input';
 import InputLabel from '@Components/InputLabel';
 import InputLayout from '@Components/InputLayout';
 
 import creditCard from '@Domains/creditCard';
 
-import { CreditCardNumberInputProps } from './type';
+import {
+  CreditCardRegisterContext,
+  CreditCardRegisterUpdateContext,
+} from '@Contexts/CreditCardRegister/CreditCardRegisterContext';
 
-function CreditCardNumberInput({ creditCardNumber, errorMessage, updateNumbers }: CreditCardNumberInputProps) {
+function CreditCardNumberInput() {
+  const {
+    creditCard: { numbers },
+    errorMessage: { numbers: errorMessage },
+  } = useContext(CreditCardRegisterContext);
+  const {
+    update: { numbers: update },
+  } = useContext(CreditCardRegisterUpdateContext);
+
   const handleChangeNumbers = (event: React.ChangeEvent<HTMLInputElement>) => {
-    updateNumbers(event.target.value);
+    update(event.target.value);
   };
 
   return (
@@ -16,7 +29,7 @@ function CreditCardNumberInput({ creditCardNumber, errorMessage, updateNumbers }
       <InputLabel label="카드 번호" />
       <Input
         type="string"
-        value={creditCard.addDashInCreditCardNumbers(creditCardNumber)}
+        value={creditCard.addDashInCreditCardNumbers(numbers)}
         width="100%"
         textAlign="center"
         onChange={handleChangeNumbers}

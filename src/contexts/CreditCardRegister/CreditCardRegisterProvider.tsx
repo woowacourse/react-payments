@@ -9,7 +9,7 @@ import useInput from '@Hooks/useInput';
 
 import { CREDIT_CARD_LENGTH, CREDIT_CARD_MAX_LENGTH } from '@Constants/creditCard';
 
-import CreditCardRegisterContext from './CreditCardRegisterContext';
+import { CreditCardRegisterContext, CreditCardRegisterUpdateContext } from './CreditCardRegisterContext';
 
 function CreditCardRegisterProvider({ children }: PropsWithChildren) {
   const { numberValidationFns, expiryValidationFns, ownerValidationFns, cvcValidationFns, passwordValidationFns } =
@@ -93,6 +93,17 @@ function CreditCardRegisterProvider({ children }: PropsWithChildren) {
 
   const initValue = {
     creditCard: { company, numbers, expiry, owner, cvc, password, alias },
+
+    errorMessage: {
+      numbers: numbersErrorMessage,
+      expiry: expiryErrorMessage,
+      owner: ownerErrorMessage,
+      cvc: CVCErrorMessage,
+      password: passwordErrorMessage,
+    },
+  };
+
+  const initUpdateValue = {
     update: {
       company: updateCompany,
       numbers: updateNumbers,
@@ -105,16 +116,15 @@ function CreditCardRegisterProvider({ children }: PropsWithChildren) {
         second: updateSecondPassword,
       },
     },
-    errorMessage: {
-      numbers: numbersErrorMessage,
-      expiry: expiryErrorMessage,
-      owner: ownerErrorMessage,
-      cvc: CVCErrorMessage,
-      password: passwordErrorMessage,
-    },
   };
 
-  return <CreditCardRegisterContext.Provider value={initValue}>{children}</CreditCardRegisterContext.Provider>;
+  return (
+    <CreditCardRegisterContext.Provider value={initValue}>
+      <CreditCardRegisterUpdateContext.Provider value={initUpdateValue}>
+        {children}
+      </CreditCardRegisterUpdateContext.Provider>
+    </CreditCardRegisterContext.Provider>
+  );
 }
 
 export default CreditCardRegisterProvider;
