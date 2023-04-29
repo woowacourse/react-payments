@@ -14,13 +14,9 @@ import { useEffect, useState } from 'react';
 import CardLabel from '../components/@common/CardLabel';
 import * as Styled from './AddCard.styles';
 import SubmitButton from '../components/@common/SubmitButton';
+import CardList from '../types/CardList';
 
-interface SetCardsProps {
-  cards: CardType[];
-  setCards: React.Dispatch<React.SetStateAction<CardType[]>>;
-}
-
-const AddCard = ({ cards, setCards }: SetCardsProps) => {
+const AddCard = ({ cards, setCards }: CardList) => {
   const {
     cardNumbers,
     setCardNumbers,

@@ -6,13 +6,9 @@ import CardAliasInput from '../components/@common/CardAliasInput';
 import React, { useState } from 'react';
 import SubmitButton from '../components/@common/SubmitButton';
 import { useNavigate } from 'react-router-dom';
+import CardList from '../types/CardList';
 
-interface SetCardsProps {
-  cards: CardType[];
-  setCards: React.Dispatch<React.SetStateAction<CardType[]>>;
-}
-
-const AddAlias = ({ cards, setCards }: SetCardsProps) => {
+const AddAlias = ({ cards, setCards }: CardList) => {
   const [cardAlias, setCardAlias] = useState('');
   const navigate = useNavigate();
 
