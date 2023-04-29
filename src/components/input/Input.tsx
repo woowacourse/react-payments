@@ -21,7 +21,7 @@ const Style = {
     align-items: center;
 
     width: ${(props) => (props.width ? `${props.width}` : '36px')};
-    height: ${(props) => (props.height ? `${props.height}` : '15px')};
+    height: ${(props) => (props.height ? `${props.height}` : '100%')};
 
     padding: 0;
     border: 0;
@@ -33,6 +33,8 @@ const Style = {
 
     :focus {
       outline: none;
+      border-color: #75c4d2;
+      box-shadow: 0 0 4px #75c4d2;
     }
 
     ::placeholder {
