@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { SyntheticEvent, useContext } from "react";
 import { CARD_COMPANIES } from "constants/cardCompanies";
-import { CardInfoContext } from "App";
+import { CardInfoContext } from "components/CardInfoProvider";
 
 interface Props {
   cardCompanyName: string;

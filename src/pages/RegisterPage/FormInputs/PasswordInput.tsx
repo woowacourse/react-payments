@@ -5,6 +5,7 @@ import { changeInvalidValueToBlank } from "utils/inputValidator";
 import Input, { PasswordInputStyle } from "components/Input";
 import { PasswordCaption } from "components/CaptionStyle";
 import { PasswordInputBox } from "components/InputBoxStyle";
+import { CardInfoContext } from "components/CardInfoProvider";
 import {
   NUMBER_INPUT,
   LIMIT_LENGTH,
@@ -12,7 +13,6 @@ import {
   VALID_INPUT,
 } from "constants/limit";
 import { Password } from "types";
-import { CardInfoContext } from "App";
 const { ONLY_NUMBER } = VALID_INPUT;
 
 const PasswordInput = () => {

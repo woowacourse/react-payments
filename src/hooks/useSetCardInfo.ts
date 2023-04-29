@@ -1,4 +1,4 @@
-import { CardInfoContext } from "App";
+import { CardInfoContext } from "../components/CardInfoProvider";
 import { FormEvent, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 

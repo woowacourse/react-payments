@@ -1,12 +1,21 @@
 import CardCompany from "components/CardCompany";
+import { CardInfoContext } from "components/CardInfoProvider";
 import Modal from "components/Modal";
 import { CARD_COMPANIES } from "constants/cardCompanies";
+import { useContext } from "react";
 import { css } from "styled-components";
 
 const CardCompanyModal = () => {
+  const { cardCompany } = useContext(CardInfoContext).cardInfo;
+
   return (
     <>
-      <Modal modalStyle={modalStyle} closeButtonName="나중에 선택할래요">
+      <Modal
+        modalStyle={modalStyle}
+        closeButtonName={
+          cardCompany === "" ? "나중에 선택할래요" : "카드사를 선택했어요"
+        }
+      >
         {Object.keys(CARD_COMPANIES).map((company) => (
           <CardCompany key={company} cardCompanyName={company} />
         ))}

@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 import { changeInvalidValueToBlank } from "utils/inputValidator";
 import Input, { NameInputStyle } from "components/Input";
 import LengthLimit from "components/LengthLimit";
-import { CardInfoContext } from "App";
+import { CardInfoContext } from "components/CardInfoProvider";
 import { LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
 const { ONLY_ENGLISH, INVALID_BLANK } = VALID_INPUT;
 

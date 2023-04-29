@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState, createContext } from "react";
+import { useState, createContext, useContext } from "react";
 import CardNumberInput from "./FormInputs/CardNumberInput";
 import ExpirationDateInput from "./FormInputs/ExpirationDateInput";
 import NameInput from "./FormInputs/NameInput";
@@ -8,12 +8,14 @@ import SecurityCodeInput from "./FormInputs/SecurityCodeInput";
 import CardPreview from "components/CardPreview";
 import Header from "components/Header";
 import { NextButton } from "components/ButtonStyle";
+import { CardInfoContext } from "components/CardInfoProvider";
 import useSetCardInfo from "hooks/useSetCardInfo";
 import useRequiredCardInfo from "hooks/useRequiredCardInfo";
 import CardCompanyModal from "./CardCompanyModal";
-import { CardInfo, SetModalState } from "types";
+import { SetModalState } from "types";
 
-const CardRegisterForm = ({ allCardInfo }: { allCardInfo: CardInfo }) => {
+const CardRegisterForm = () => {
+  const allCardInfo = useContext(CardInfoContext).cardInfo;
   const [isModalOpen, setIsModalOpen] = useState(true);
 
   const { isFormFilled } = useRequiredCardInfo();

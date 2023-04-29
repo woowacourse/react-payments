@@ -8,7 +8,7 @@ import { CardNumberCaption } from "components/CaptionStyle";
 import { CardNumberInputBox } from "components/InputBoxStyle";
 import { CardNumber } from "types";
 import { NUMBER_INPUT, LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
-import { CardInfoContext } from "App";
+import { CardInfoContext } from "components/CardInfoProvider";
 const { ONLY_NUMBER } = VALID_INPUT;
 
 const CardNumberInput = () => {

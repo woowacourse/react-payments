@@ -5,10 +5,10 @@ import Input, { CommonInputStyle } from "components/Input";
 import { Slash } from "components/DelimiterStyle";
 import { DateCaption } from "components/CaptionStyle";
 import { DateInputBox } from "components/InputBoxStyle";
+import { CardInfoContext } from "components/CardInfoProvider";
 import { isInvalidDate } from "validation";
 import { ExpirationDate } from "types";
 import { DATE_INPUT, LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
-import { CardInfoContext } from "App";
 const { ONLY_NUMBER } = VALID_INPUT;
 
 const ExpirationDateInput = () => {

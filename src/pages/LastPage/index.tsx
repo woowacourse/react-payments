@@ -1,18 +1,15 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useContext, useState } from "react";
 import styled, { css } from "styled-components";
 import { NextButton } from "components/ButtonStyle";
 import CardPreview from "components/CardPreview";
 import Input, { CardNickname } from "components/Input";
 import LengthLimit from "components/LengthLimit";
 import GotLost from "pages/GotLost";
-import { CardInfo } from "types";
 import { LIMIT_LENGTH } from "constants/limit";
+import { CardInfoContext } from "components/CardInfoProvider";
 
-interface Props {
-  cardInfo: CardInfo;
-}
-
-const LastPage = ({ cardInfo }: Props) => {
+const LastPage = () => {
+  const cardInfo = useContext(CardInfoContext).cardInfo;
   const [nickname, setNickname] = useState("");
 
   const handleNicknameChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
