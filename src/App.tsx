@@ -2,7 +2,6 @@ import { useMemo } from 'react';
 import { RouterProvider } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 import { PaymentsProvider } from './context/PaymentsContext';
-
 import { useMediaQuery } from './hooks/useMediaQuery';
 import { router } from './router';
 import { GlobalStyle } from './styles/GlobalStyle';
