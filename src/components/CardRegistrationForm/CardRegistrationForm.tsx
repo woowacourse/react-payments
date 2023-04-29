@@ -8,11 +8,18 @@ import SecurityCodeInput from '../SecurityCodeInput';
 import styled from 'styled-components';
 import useOnChangeHandler from './hooks/useOnChangeHandler';
 import type { CardInformation } from '../../domain/types/card';
+import { useCardListContext } from '../../contexts/CardListContexts';
 
-const CardRegistrationForm = () => {
+type CardRegistrationFormProps = {
+  setPageCardList: () => void;
+};
+
+const CardRegistrationForm = ({ setPageCardList }: CardRegistrationFormProps) => {
   const [cardNumber, setCardNumber] = useState<CardInformation['cardNumber']>(['', '', '', '']);
   const [expirationDate, setExpirationDate] = useState<CardInformation['expirationDate']>(['', '']);
   const [owner, setOwner] = useState<CardInformation['owner']>('');
+
+  const { setCardList } = useCardListContext();
 
   const onChangeCardNumber = useOnChangeHandler({
     setState: setCardNumber,
@@ -24,8 +31,15 @@ const CardRegistrationForm = () => {
     count: 2,
   });
 
+  const onSubmitCard: React.FormEventHandler = (e) => {
+    e.preventDefault();
+
+    setCardList((prev) => [...prev, { cardNumber, expirationDate, owner, cardType: '우리카드' }]);
+    setPageCardList();
+  };
+
   return (
-    <Styled.FormWrapper>
+    <Styled.FormWrapper onSubmit={onSubmitCard}>
       <Styled.CardWrapper>
         <Card cardType="우리카드" owner={owner} cardNumber={cardNumber} expirationDate={expirationDate} />
       </Styled.CardWrapper>
