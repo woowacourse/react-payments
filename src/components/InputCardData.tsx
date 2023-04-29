@@ -1,28 +1,10 @@
-import React, { ChangeEvent, RefObject } from 'react';
-
+import { InputProps } from '../type';
 import './InputCardData.css';
-
-export type InputProps = {
-  required: boolean;
-  inputType: string;
-  passwordType?: string;
-  className?: string;
-  value: string;
-  minDataLength: number;
-  maxDataLength: number;
-  name: string;
-  dataId: number;
-  refObject: RefObject<HTMLInputElement>;
-  handleError: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  nextFocus: (e: ChangeEvent) => void;
-  onFlip: () => void;
-  handleInputData: (index: number, e: ChangeEvent<HTMLInputElement>) => void;
-};
 
 const InputCardData = ({
   required,
   inputType,
+  inputMode,
   passwordType,
   className,
   value,
@@ -42,6 +24,7 @@ const InputCardData = ({
       className={`input-password-container ${passwordType}`}
       type="password"
       value={value}
+      inputMode={inputMode}
       maxLength={maxDataLength}
       minLength={minDataLength}
       data-id={dataId}
@@ -61,6 +44,7 @@ const InputCardData = ({
       className={`input-box ${className}`}
       value={value}
       type={inputType}
+      inputMode={inputMode}
       maxLength={maxDataLength}
       minLength={minDataLength}
       data-id={dataId}

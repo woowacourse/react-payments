@@ -98,6 +98,7 @@ const FormCardAdd = ({
             <InputCardData
               required={true}
               inputType="number"
+              inputMode="numeric"
               className="card-number"
               value={cardNumber.value.first}
               minDataLength={4}
@@ -117,6 +118,7 @@ const FormCardAdd = ({
             <InputCardData
               required={true}
               inputType="number"
+              inputMode="numeric"
               className="card-number"
               value={cardNumber.value.second}
               minDataLength={4}
@@ -136,6 +138,7 @@ const FormCardAdd = ({
             <InputCardData
               required={true}
               inputType="password"
+              inputMode="numeric"
               passwordType="card-number"
               className="card-number"
               value={cardNumber.value.third}
@@ -156,6 +159,7 @@ const FormCardAdd = ({
             <InputCardData
               required={true}
               inputType="password"
+              inputMode="numeric"
               passwordType="card-number"
               className="card-number"
               value={cardNumber.value.fourth}
@@ -179,6 +183,7 @@ const FormCardAdd = ({
           <InputCardData
             required={true}
             inputType="text"
+            inputMode="numeric"
             className="card-expired"
             value={cardExpire.value}
             minDataLength={1}
@@ -204,6 +209,7 @@ const FormCardAdd = ({
           <InputCardData
             required={false}
             inputType="text"
+            inputMode="text"
             className="card-owner"
             value={cardOwner.value}
             minDataLength={0}
@@ -226,6 +232,7 @@ const FormCardAdd = ({
             <InputCardData
               required={true}
               inputType="password"
+              inputMode="numeric"
               passwordType="password-cvc"
               value={securityCode.value}
               name="cvcData"
@@ -250,6 +257,7 @@ const FormCardAdd = ({
             <InputCardData
               required={true}
               inputType="password"
+              inputMode="numeric"
               passwordType="password-single"
               value={cardPassword1.value}
               maxDataLength={1}
@@ -268,6 +276,7 @@ const FormCardAdd = ({
             <InputCardData
               required={true}
               inputType="password"
+              inputMode="numeric"
               passwordType="password-single"
               value={cardPassword2.value}
               maxDataLength={1}
