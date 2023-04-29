@@ -32,10 +32,12 @@ const StyledQuestionToolTip = styled.div`
 
 const StyledMessage = styled.p`
   position: absolute;
-  font-size: 8px;
+  font-size: 12px;
+  line-height: 1.2;
   left: 42px;
   width: 180px;
-  background-color: '#525252';
+  padding: 8px;
+  background-color: #f5f5f5;
   border-radius: 8px;
 `;
 
