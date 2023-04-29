@@ -33,7 +33,7 @@ export default function CardLogo({ cardName }: CardLogoProps) {
     });
     cardAction({
       type: "SET_CARD_TITLE",
-      title: CARD_COMPANYS[cardName].title,
+      title: cardName,
     });
   };
   return (

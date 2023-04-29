@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import { useCardState } from "../context/CardContext";
+import useDrawer from "../hooks/useDrawer";
 
 interface CardProps {
+  type: string;
   cardColor: string;
   cardTitle: string;
   cardNumberSet: string[];
@@ -11,7 +13,6 @@ interface CardProps {
 
 const StyledCard = styled.div<{ cardColor: string }>`
   width: 213px;
-  height: 133px;
   box-shadow: 3px 3px 5px #00000040;
   background: ${(props) => props.cardColor ?? "#333"};
   border-radius: 5px;
@@ -76,20 +77,26 @@ const StyledExpiracy = styled.span`
 `;
 
 const ENCRYPT_INDEX = 2;
-//
-//cardColor => cardContext.cardColor
-//cardTitle => cardContext.cardTitle
+
 export default function Card({
-  // const { cardNumber, cardOwnerName, validDate, cardKind, setCardKind } =
-  //  useContext(CardContext);
   cardNumberSet,
   owner,
   expiracy,
+  type,
+  cardColor,
+  cardTitle,
 }: CardProps) {
   const cardState = useCardState();
+  const { openDrawer } = useDrawer();
+
+  const isHomePage = type === "homepage";
+  const cardColorToShow = isHomePage ? cardColor : cardState.color;
+  const cardTitleToShow = isHomePage ? cardTitle : cardState.title;
+  const onClickCard = isHomePage ? () => {} : openDrawer;
+
   return (
-    <StyledCard cardColor={cardState.color}>
-      <StyledTitle>{cardState.title}</StyledTitle>
+    <StyledCard cardColor={cardColorToShow} onClick={onClickCard}>
+      <StyledTitle>{cardTitleToShow}</StyledTitle>
       <StyledMagnet />
       <div>
         <StyledCardNumber>

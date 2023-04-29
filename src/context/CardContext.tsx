@@ -48,7 +48,7 @@ function cardTypeReducer(state: CardState, action: Action) {
 export function CardContextProvider({ children }: PropsWithChildren) {
   const [cardCompany, setCardCompany] = useReducer(cardTypeReducer, {
     color: "",
-    title: "BC카드",
+    title: "",
   });
 
   return (

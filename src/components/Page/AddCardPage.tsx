@@ -24,6 +24,8 @@ import {
 import { useCardForm } from "../../hooks/useCardForm";
 import CardTypeDrawer from "../CardTypeDrawer";
 import { CARD_COMPANYS } from "../../constant";
+import { DrawerContextProvider } from "../../context/DrawerContext";
+import { useCardState } from "../../context/CardContext";
 
 interface AddCardPageProps {
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
@@ -51,7 +53,7 @@ export default function AddCardPage({ onSubmit, onClick }: AddCardPageProps) {
   const handleToolTip = () => {
     setIsOpenToolTip((prev) => !prev);
   };
-
+  const { color, title } = useCardState();
   return (
     <>
       <Page>
@@ -61,8 +63,9 @@ export default function AddCardPage({ onSubmit, onClick }: AddCardPageProps) {
         </TitleWrapper>
         <CardWrapper>
           <Card
-            cardColor={CARD_COMPANYS["BC"].backgroundColor}
-            cardTitle={CARD_COMPANYS["BC"].title}
+            type="addCard"
+            cardColor={color}
+            cardTitle={title}
             cardNumberSet={[
               firstCardNumber.value,
               secondCardNumber.value,
@@ -117,8 +120,11 @@ export default function AddCardPage({ onSubmit, onClick }: AddCardPageProps) {
             <NextButton disabled={isFormFilled} />
           </NextButtonWrapper>
         </InputWrapperParent>
+
         <CardTypeDrawer />
       </Page>
     </>
   );
 }
+
+// onClick = { handleModalOpen };

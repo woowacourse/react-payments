@@ -2,10 +2,11 @@ import { useState } from "react";
 import AddCardPage from "./components/Page/AddCardPage";
 import Homepage from "./components/Page/Homepage";
 import { LOCAL_STORAGE_CARD_KEY } from "./constant";
-import { CardContextProvider } from "./context/CardContext";
+import { CardContextProvider, useCardState } from "./context/CardContext";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 import "./styles/index.css";
 import { CardInfo } from "./types";
+import { DrawerContextProvider } from "./context/DrawerContext";
 
 export default function App() {
   const [pageIndex, setPageIndex] = useState(0);
@@ -13,6 +14,7 @@ export default function App() {
     [],
     LOCAL_STORAGE_CARD_KEY
   );
+  const { title } = useCardState();
 
   const onCardInfoSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -29,9 +31,8 @@ export default function App() {
       firstPassword,
       secondPassword,
     } = event.currentTarget;
-
     const newCard: CardInfo = {
-      cardTitle: "BC",
+      cardTitle: title,
       cardNumber: {
         fisrt: firstCardNumber.value,
         second: secondCardNumber.value,
@@ -56,8 +57,8 @@ export default function App() {
   };
 
   return (
-    <CardContextProvider>
-      <div className="app">
+    <div className="app">
+      <DrawerContextProvider>
         {pageIndex === 0 && (
           <Homepage cardList={cardList} onClick={() => setPageIndex(1)} />
         )}
@@ -67,7 +68,7 @@ export default function App() {
             onSubmit={onCardInfoSubmit}
           />
         )}
-      </div>
-    </CardContextProvider>
+      </DrawerContextProvider>
+    </div>
   );
 }
