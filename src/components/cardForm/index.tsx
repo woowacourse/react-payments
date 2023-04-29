@@ -5,11 +5,11 @@ import { CardNumberInput } from "./CardNumberInput";
 import { ExpiryDateInput } from "./ExpiryDateInput";
 import { OwnerInput } from "./OwnerInput";
 import { PasswordInput } from "./PasswordInput";
-import { FormEvent, useContext } from "react";
+import { FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { useValidation } from "../../hook/useValidation";
-import { CardContext } from "../../context/cardContext";
 import { PAGE } from "../../constant/routePath";
+import { useCardList } from "../../hook/useCardList";
 
 interface CardFormProps {
   setCardInfo: React.Dispatch<React.SetStateAction<CardType>>;
@@ -17,6 +17,7 @@ interface CardFormProps {
 }
 
 export const CardForm = ({ setCardInfo, newCard }: CardFormProps) => {
+  const { cardListActions } = useCardList();
   const {
     isEveryInputValid,
     validateCVCInput,
@@ -24,14 +25,13 @@ export const CardForm = ({ setCardInfo, newCard }: CardFormProps) => {
     validateNumbersInput,
     validatePasswordInput,
   } = useValidation();
-  const { addNewCard } = useContext(CardContext);
   const moveTo = useNavigate();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (isEveryInputValid()) {
-      addNewCard(newCard);
+      cardListActions.addNewCard(newCard);
       moveTo(PAGE.registerCard);
     }
   };

@@ -9,7 +9,7 @@ export default {
 
 const shinhanCard = {
   id: "shinhanCard",
-  nickname: "nickname",
+  name: "nickname",
   color: "purple",
   company: "신한카드",
   numbers: ["1234", "1234", "1234", "1234"],

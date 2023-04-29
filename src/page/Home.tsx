@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import { CardList } from "../components/cardList";
 import { Header } from "../components/common/Header";
-import { CardContext } from "../context/cardContext";
+import { CardListContext } from "../context/cardListContext";
 
 export const Home = () => {
-  const { cards } = useContext(CardContext);
+  const { cards } = useContext(CardListContext);
 
   return (
     <>

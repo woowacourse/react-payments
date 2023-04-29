@@ -2,12 +2,12 @@ import { Home } from "./page/Home";
 import { AddCard } from "./page/AddCard";
 import { GlobalStyle } from "./style/resetStyle";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import { CardProvider } from "./context/cardContext";
+import { CardListProvider } from "./context/cardListContext";
 import { RegisterCard } from "./page/RegisterCard";
 
 const App = () => {
   return (
-    <CardProvider>
+    <CardListProvider>
       <GlobalStyle />
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
@@ -16,7 +16,7 @@ const App = () => {
           <Route path="/registerCard" element={<RegisterCard />} />
         </Routes>
       </BrowserRouter>
-    </CardProvider>
+    </CardListProvider>
   );
 };
 

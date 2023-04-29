@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import { CardItem } from "../components/cardList/CardItem";
-import { useContext, useRef } from "react";
-import { CardContext } from "../context/cardContext";
+import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { PAGE } from "../constant/routePath";
+import { useCardList } from "../hook/useCardList";
 
 export const RegisterCard = () => {
-  const { cards, updateCard } = useContext(CardContext);
+  const { cards, cardListActions } = useCardList();
   const newCard = cards[cards.length - 1];
 
   const nicknameRef = useRef<HTMLInputElement>(null);
@@ -13,9 +14,9 @@ export const RegisterCard = () => {
   const moveTo = useNavigate();
 
   const handleClick = () => {
-    const nickname = nicknameRef.current?.value.trim();
-    if (nickname) {
-      updateCard(newCard.id, { nickname });
+    const name = nicknameRef.current?.value.trim();
+    if (name) {
+      cardListActions.updateCard(newCard.id, { name });
     }
 
     moveTo(PAGE.home);
@@ -24,7 +25,7 @@ export const RegisterCard = () => {
   return (
     <Container>
       <Title>카드 등록이 완료되었습니다.</Title>
-      <SubTitle>닉네임을 설정할 수 있습니다.</SubTitle>
+      <SubTitle>카드 이름을 설정할 수 있습니다.</SubTitle>
       <CardItem card={newCard} />
       <NickNameInput autoFocus ref={nicknameRef} />
       <SubmitButton onClick={handleClick}>확인</SubmitButton>

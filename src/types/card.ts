@@ -1,6 +1,6 @@
 export interface CardType {
   id: string;
-  nickname: string;
+  name: string;
   company: string;
   numbers: string[];
   expiryDate: string;

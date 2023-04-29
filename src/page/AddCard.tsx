@@ -11,8 +11,7 @@ import { useModal } from "../hook/useModal";
 import { PAGE } from "../constant/routePath";
 
 const defaultCard = {
-  id: "",
-  nickname: "",
+  name: "",
   numbers: [],
   owner: "NAME",
   expiryDate: "MM/YY",
@@ -24,8 +23,8 @@ const defaultCard = {
 
 export const AddCard = () => {
   const [newCard, setNewCard] = useState<CardType>({
-    ...defaultCard,
     id: getRandomId(),
+    ...defaultCard,
   });
   const { isModalOpen, closeModal, openModal } = useModal(true);
 
