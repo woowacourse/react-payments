@@ -3,9 +3,8 @@ import { Fragment, useContext } from "react";
 import { NUMBER_INPUT, LIMIT_LENGTH, PASSWORD_PART } from "constants/limit";
 import { HIDDEN_VALUE, SECURITY_TARGET } from "constants/security";
 import { CardInfo } from "types";
-import { SelectorButton } from "./ButtonStyle";
 import { ModalState } from "pages/RegisterPage/CardRegisterForm";
-import { CARD_COLORS } from "constants/cardCompanies";
+import { CARD_COLORS, CARD_COMPANIES, UNSELECTED_CARD_COMPANY } from "constants/cardCompanies";
 
 interface Props {
   cardInfo: CardInfo;
@@ -18,16 +17,15 @@ const CardPreview = ({ cardInfo }: Props) => {
     setIsModalOpen(true);
   };
 
-  const isUnselected = cardInfo.cardCompany === "";
+  const isSelected = Object.keys(CARD_COMPANIES).includes(cardInfo.cardCompany);
 
   return (
-    <S.Card cardCompany={cardInfo.cardCompany}>
-      <SelectorButton
-        className={isUnselected ? "카드사선택" : cardInfo.cardCompany}
-        onClick={handleModalOpen}
+    <S.Card cardCompany={cardInfo.cardCompany} onClick={handleModalOpen}>
+      <S.CardCompany
+        className={isSelected ? cardInfo.cardCompany : UNSELECTED_CARD_COMPANY}
       >
-        {isUnselected ? "카드사 선택" : cardInfo.cardCompany}
-      </SelectorButton>
+        {isSelected ? cardInfo.cardCompany : UNSELECTED_CARD_COMPANY}
+      </S.CardCompany>
 
       <S.Chip cardCompany={cardInfo.cardCompany} />
 
@@ -77,6 +75,18 @@ const S = {
         ? "var(--darken-color)"
         : CARD_COLORS[props.cardCompany]};
     box-shadow: rgba(0, 0, 0, 0.25) 3px 3px 5px;
+    cursor: pointer;
+  `,
+
+  CardCompany: styled.p`
+    margin: 14px auto auto 0;
+    font-size: 12px;
+    color: #fff;
+    background: transparent;
+
+    &.카카오뱅크 {
+      color: #000;
+    }
   `,
 
   Chip: styled.div<{ cardCompany: string }>`

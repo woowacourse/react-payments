@@ -25,18 +25,27 @@ export const AddButton = styled(Button)`
   border-radius: 5px;
 `;
 
-export const SelectorButton = styled(Button)`
-  margin: 12px auto auto 0;
-  font-size: 12px;
-  color: #fff;
+export const CloseButton = styled(Button)`
+  grid-area: 3 / 1 / auto / 5;
+  width: 100%;
+  position: fixed;
+  bottom: 32px;
+  padding: 12px 0;
+  font-size: 14px;
+  border: 1px solid var(--darken-color);
+  border-radius: 8px;
   background: transparent;
 
-  &.카드사선택 {
-    padding: 3px 4px;
-    border: 1px solid #fff;
+  &:hover {
+    background: #fefefe;
+    color: var(--label-color);
+    border: 1px solid var(--label-color);
+    transform: scale(1.014);
   }
 
-  &.카카오뱅크 {
-    color: #000;
+  &:active {
+    position: fixed;
+    bottom: 26px;
+    padding: 14px 0;
   }
 `;
