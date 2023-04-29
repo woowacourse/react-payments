@@ -8,6 +8,7 @@ import { areValidInfo } from 'validator';
 export const useFormHandler = (cardInfo: Card) => {
   const navigate = useNavigate();
   const color = cardInfo.color;
+  const bank = cardInfo.bank;
 
   const handleForm = (event: FormEvent) => {
     event.preventDefault();
@@ -17,7 +18,7 @@ export const useFormHandler = (cardInfo: Card) => {
     const formDataObject = Object.fromEntries(formData);
 
     if (areValidInfo(formDataObject)) {
-      setLocalStorage('card', { ...formDataObject, color });
+      setLocalStorage('card', { ...formDataObject, color, bank });
 
       navigate('/');
     } else {
