@@ -1,4 +1,4 @@
-import { ChangeEvent, useContext, useState } from "react";
+import { ChangeEvent, KeyboardEventHandler, useContext, useState } from "react";
 import styled, { css } from "styled-components";
 import { NextButton } from "components/ButtonStyle";
 import CardPreview from "components/CardPreview";
@@ -7,9 +7,11 @@ import LengthLimit from "components/LengthLimit";
 import GotLost from "pages/GotLost";
 import { LIMIT_LENGTH } from "constants/limit";
 import { CardInfoContext } from "components/CardInfoProvider";
+import useSetCardInfo from "hooks/useSetCardInfo";
 
 const LastPage = () => {
   const cardInfo = useContext(CardInfoContext).cardInfo;
+
   const [nickname, setNickname] = useState("");
 
   const handleNicknameChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
@@ -18,21 +20,31 @@ const LastPage = () => {
     setNickname(validNickname);
   };
 
+  const { handleSave } = useSetCardInfo(nickname, "card");
+
+  const handleEnterKeyDown: KeyboardEventHandler<HTMLInputElement> = ({
+    key,
+  }) => {
+    if (key === "Enter") handleSave();
+  };
+
   return (
     <>
       {cardInfo.cardCompany !== "" ? (
         <S.Wrapper>
-          <CardPreview cardInfo={cardInfo}></CardPreview>
+          <CardPreview cardInfo={cardInfo} />
           <Input
+            autoFocus
             value={nickname}
             inputStyle={CardNickname}
             onChange={handleNicknameChange}
-          ></Input>
+            onKeyDown={handleEnterKeyDown}
+          />
           <LengthLimit
             length={nickname.length}
             lengthLimitStyle={nicknameLimitStyle}
           />
-          <NextButton>확인</NextButton>
+          <NextButton onClick={handleSave}>확인</NextButton>
         </S.Wrapper>
       ) : (
         <GotLost />

@@ -19,7 +19,7 @@ export const NextButton = styled(Button)`
 export const AddButton = styled(Button)`
   width: 208px;
   height: 123px;
-  margin: 30px 0 40px;
+  margin: 36px 0 40px;
   font-size: 34px;
   background: var(--gray-color-100);
   border-radius: 5px;

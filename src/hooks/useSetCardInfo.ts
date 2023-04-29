@@ -1,14 +1,21 @@
-import { CardInfoContext } from "../components/CardInfoProvider";
 import { useContext } from "react";
+import { useNavigate } from "react-router";
+import { CardInfoContext } from "../components/CardInfoProvider";
 
 interface FormData {
   [k: string]: FormDataEntryValue;
 }
 
-const useSetCardInfo = (dataName: string) => {
-  const allCardInfo = useContext(CardInfoContext).cardInfo;
+const useSetCardInfo = (nickname: string, dataName: string) => {
+  const cardInfo = useContext(CardInfoContext).cardInfo;
+  const allCardInfo = { nickname, ...cardInfo };
 
-  const handleSave = () => setData(allCardInfo, dataName);
+  const navigate = useNavigate();
+
+  const handleSave = () => {
+    setData(allCardInfo, dataName);
+    navigate("/");
+  };
 
   return { handleSave };
 };

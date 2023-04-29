@@ -13,7 +13,10 @@ const MainPage = () => {
 
       <S.Main>
         {cardList.map((card, index) => (
-          <CardPreview key={index} cardInfo={card} />
+          <>
+            <CardPreview key={index} cardInfo={card} />
+            <S.Nickname>{card.nickname}</S.Nickname>
+          </>
         ))}
 
         {!cardList.length && (
@@ -36,6 +39,11 @@ const S = {
     display: flex;
     flex-direction: column;
     align-items: center;
+  `,
+
+  Nickname: styled.p`
+    margin: 16px 0 8px;
+    font-size: 14px;
   `,
 
   Message: styled.p`
