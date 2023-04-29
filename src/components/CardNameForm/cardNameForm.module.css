@@ -1,0 +1,9 @@
+.inputContainer {
+  height: 45px;
+}
+
+.buttonContainer {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+}
