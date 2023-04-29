@@ -71,6 +71,7 @@
     "@storybook/react-webpack5": "7.0.6",
     "@storybook/testing-library": "^0.0.14-next.2",
     "@types/styled-components": "5.1.26",
+    "@testing-library/react-hooks": "^8.0.1",
     "@types/uuid": "^9.0.1",
     "babel-plugin-named-exports-order": "0.0.2",
     "eslint-config-prettier": "8.8.0",
