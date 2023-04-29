@@ -19,10 +19,9 @@ function CardNumberInput({ inputRefs }: CardNumberInputProps) {
           minLength={19}
           required
           value={displayNumber}
-          autoFocus
-          ref={(ref) => (inputRefs.current[0] = ref)}
+          ref={(ref) => (inputRefs.current[1] = ref)}
           onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
-            !e.currentTarget.validity.tooShort && inputRefs.current[1]?.focus();
+            !e.currentTarget.validity.tooShort && inputRefs.current[2]?.focus();
             changeCardNumber(e);
           }}
         />

@@ -21,9 +21,9 @@ function CardCVCInput({ inputRefs }: CardDateInputProps) {
             value={cardCVC}
             minLength={3}
             required
-            ref={(ref) => (inputRefs.current[3] = ref)}
+            ref={(ref) => (inputRefs.current[4] = ref)}
             onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
-              e.currentTarget.validity.valid && inputRefs.current[4]?.focus();
+              e.currentTarget.validity.valid && inputRefs.current[5]?.focus();
               changeCardCVC(e);
             }}
           />

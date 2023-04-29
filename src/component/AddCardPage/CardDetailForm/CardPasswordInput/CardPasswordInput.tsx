@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import St from "./CardPasswordInputStyled";
 import useCardPassword from "../../../../hooks/useCardPassword";
 
@@ -21,9 +21,9 @@ function CardPasswordInput({ inputRefs }: CardPasswordInputProps) {
             value={cardPassword[0]}
             minLength={1}
             required
-            ref={(ref) => (inputRefs.current[4] = ref)}
+            ref={(ref) => (inputRefs.current[5] = ref)}
             onInput={(e) => {
-              e.currentTarget.validity.valid && inputRefs.current[5]?.focus();
+              e.currentTarget.validity.valid && inputRefs.current[6]?.focus();
               changeCardPassword(e);
             }}
           />

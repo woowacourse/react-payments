@@ -19,9 +19,9 @@ function CardDateInput({ inputRefs }: CardDateInputProps) {
           minLength={5}
           required
           placeholder="MM/YY"
-          ref={(ref) => (inputRefs.current[1] = ref)}
+          ref={(ref) => (inputRefs.current[2] = ref)}
           onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
-            !e.currentTarget.validity.tooShort && inputRefs.current[2]?.focus();
+            !e.currentTarget.validity.tooShort && inputRefs.current[3]?.focus();
             changeCardDate(e);
           }}
         ></St.Input>
