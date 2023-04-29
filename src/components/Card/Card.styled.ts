@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 interface CardProps {
   bgColor?: string;
+  color?: string;
 }
 
 export const Card = styled.div<CardProps>`
@@ -9,10 +10,10 @@ export const Card = styled.div<CardProps>`
   width: 240px;
   height: 150px;
 
-  padding: 12px 18px;
+  padding: 15px 18px;
 
-  background-color: ${(props) => props.bgColor};
-  color: white;
+  background-color: ${(props) => (props.bgColor ? props.bgColor : 'black')};
+  color: ${(props) => (props.color ? props.color : 'white')};
 
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
 
@@ -40,10 +41,17 @@ export const Rectangle = styled.div`
 export const CardInfos = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: space-between;
 
   height: 100%;
 `;
+
+export const BankName = styled.div`
+  font-size: 12px;
+  font-weight: 400;
+`;
+
+export const Bottom = styled.div``;
 
 export const CardNumbers = styled.div`
   display: flex;
@@ -71,12 +79,12 @@ export const Ellipse = styled.div`
 
   border-radius: 50%;
 
-  background-color: white;
+  background-color: ${(props) => (props.color ? props.color : 'white')};
 
   margin-right: 5px;
 `;
 
-export const CardBottomInfos = styled.div`
+export const ExtraInfos = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: end;
