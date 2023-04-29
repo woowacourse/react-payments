@@ -1,9 +1,8 @@
 import styled from 'styled-components';
+import ProfileData from './types';
 
-interface ProfileProps {
-  iconUrl: string;
+interface ProfileProps extends ProfileData {
   size?: number;
-  name?: string;
 }
 
 function Profile({ iconUrl, name, size }: ProfileProps) {
@@ -25,6 +24,7 @@ const StyledProfile = styled.div<{ size: number | undefined }>`
 
 const StyledName = styled.p<{ size: number | undefined }>`
   font-size: ${({ size }) => (size ? size / 3 : 10)}px;
+  width: ${({ size }) => (size ? size * 1.5 : 32)}px;
 `;
 
 export default Profile;

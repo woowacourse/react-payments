@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import BankProfileButtonList from '../components/BankProfileButtonList';
 import CardRegistrationForm from '../components/CardRegistrationForm';
 import TransParentButton from '../components/Common/Button/TransParentButton';
 import Card from '../components/Common/Card';
 import Header from '../components/Common/Header';
 import Modal from '../components/Common/Modal';
+import ProfileButtonList from '../components/Common/Profile/ProfileButtonList';
 import { useCardInformationStore } from '../context/CardInformationProvider';
 import bankList from '../data/bankList';
 import useModal from '../hooks/useModal';
@@ -28,7 +28,12 @@ function CardRegistration() {
         <CardRegistrationForm />
         {isModalOpen && (
           <Modal closeModal={closeModal}>
-            <BankProfileButtonList bankList={bankList} getBankName={handleBankName} profileSize={37} />
+            <ProfileButtonList
+              profileList={bankList}
+              getProfileName={handleBankName}
+              profileSize={37}
+              severalPerLine={4}
+            />
           </Modal>
         )}
       </StyledMainCardRegistration>
