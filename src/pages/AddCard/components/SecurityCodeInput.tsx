@@ -1,8 +1,7 @@
 import type { SecurityCodeInputProps } from '../../../type';
 import cvcInfo from '../../../asset/cvc_info.png';
-
-import './SecurityCodeInput.css';
 import InputContainer from '../../../components/InputContainer';
+import './SecurityCodeInput.css';
 
 const SecurityCodeInput = ({ securityCode }: SecurityCodeInputProps) => {
   return (

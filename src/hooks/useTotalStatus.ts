@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+
 import { InputStatus } from '../type';
 
 const useTotalStatus = (statusList: InputStatus[]): boolean => {

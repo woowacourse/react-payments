@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import { InputStatus } from '../type';
 
 const useSelectCardCompany = (statusDispather: (str: string) => InputStatus, init = '') => {

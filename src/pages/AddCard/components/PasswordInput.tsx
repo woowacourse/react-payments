@@ -1,8 +1,8 @@
 import type { PasswordInputProps } from '../../../type';
-import passwordDotImg from '../../../asset/password_dot.png';
-import './PasswordInput.css';
 import InputContainer from '../../../components/InputContainer';
 import { calcMultipleStatus } from '../domain/domain';
+import passwordDotImg from '../../../asset/password_dot.png';
+import './PasswordInput.css';
 
 const PasswordInput = ({ cardPassword1, cardPassword2 }: PasswordInputProps) => {
   return (

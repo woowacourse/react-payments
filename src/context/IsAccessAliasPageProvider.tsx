@@ -7,6 +7,7 @@ import {
   useState,
 } from 'react';
 
+// TODO: 타입.ts로 분리
 type IsAccessAliasPage = {
   isAccessAliasPage: boolean;
   setIsAccessAliasPage: Dispatch<SetStateAction<boolean>>;
