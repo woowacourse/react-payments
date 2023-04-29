@@ -1,5 +1,4 @@
 import { Meta, StoryObj } from "@storybook/react";
-import GlobalStyle from "../../styles/GlobalStyle";
 import CardPreview from "./CardPreview";
 
 const meta: Meta<typeof CardPreview> = {
@@ -28,11 +27,6 @@ type Story = StoryObj<typeof CardPreview>;
 
 export const Default: Story = {
   render: ({ card }) => {
-    return (
-      <>
-        <GlobalStyle />
-        <CardPreview card={card} />
-      </>
-    );
+    return <CardPreview card={card} />;
   },
 };

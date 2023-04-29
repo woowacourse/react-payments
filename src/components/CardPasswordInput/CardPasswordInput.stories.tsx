@@ -1,7 +1,6 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import GlobalStyle from "../../styles/GlobalStyle";
 import CardPasswordInput from "./CardPasswordInput";
 import { CardPassword, CardPasswordKey } from "../../types";
 
@@ -28,11 +27,6 @@ const CardPasswordInputwithHooks = () => {
 
 export const Default: Story = {
   render: () => {
-    return (
-      <>
-        <GlobalStyle />
-        <CardPasswordInputwithHooks />
-      </>
-    );
+    return <CardPasswordInputwithHooks />;
   },
 };

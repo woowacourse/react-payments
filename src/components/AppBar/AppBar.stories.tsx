@@ -1,4 +1,3 @@
-import GlobalStyle from "../../styles/GlobalStyle";
 import AppBar from "./AppBar";
 
 export default {
@@ -6,16 +5,6 @@ export default {
   component: AppBar,
 };
 
-export const Default = () => (
-  <>
-    <GlobalStyle />
-    <AppBar title="보유카드" />
-  </>
-);
+export const Default = () => <AppBar title="보유카드" />;
 
-export const UsePrevButton = () => (
-  <>
-    <GlobalStyle />
-    <AppBar title="카드추가" prevButton />
-  </>
-);
+export const UsePrevButton = () => <AppBar title="카드추가" prevButton />;

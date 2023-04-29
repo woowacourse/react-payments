@@ -1,4 +1,3 @@
-import GlobalStyle from "../../styles/GlobalStyle";
 import { Card } from "../../types";
 import CardList from "./CardList";
 
@@ -17,23 +16,8 @@ const card: Card = {
   alias: "",
 };
 
-export const Default = () => (
-  <>
-    <GlobalStyle />
-    <CardList cards={[]} />
-  </>
-);
+export const Default = () => <CardList cards={[]} />;
 
-export const SingleCard = () => (
-  <>
-    <GlobalStyle />
-    <CardList cards={[card]} />
-  </>
-);
+export const SingleCard = () => <CardList cards={[card]} />;
 
-export const ManyCards = () => (
-  <>
-    <GlobalStyle />
-    <CardList cards={[card, card, card, card, card]} />
-  </>
-);
+export const ManyCards = () => <CardList cards={[card, card, card, card, card]} />;

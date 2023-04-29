@@ -1,7 +1,6 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import GlobalStyle from "../../styles/GlobalStyle";
 import CardOwnerNameInput from "./CardOwnerNameInput";
 import { Card } from "../../types";
 
@@ -26,11 +25,6 @@ const CardOwnerNameInputwithHooks = () => {
 
 export const Default: Story = {
   render: () => {
-    return (
-      <>
-        <GlobalStyle />
-        <CardOwnerNameInputwithHooks />
-      </>
-    );
+    return <CardOwnerNameInputwithHooks />;
   },
 };

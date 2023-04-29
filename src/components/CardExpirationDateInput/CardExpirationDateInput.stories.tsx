@@ -1,7 +1,6 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import GlobalStyle from "../../styles/GlobalStyle";
 import CardExpirationDateInput from "./CardExpirationDateInput";
 import { CardExpirationDate, CardExpirationDateKey } from "../../types";
 
@@ -28,11 +27,6 @@ const CardExpirationDateInputwithHooks = () => {
 
 export const Default: Story = {
   render: () => {
-    return (
-      <>
-        <GlobalStyle />
-        <CardExpirationDateInputwithHooks />
-      </>
-    );
+    return <CardExpirationDateInputwithHooks />;
   },
 };

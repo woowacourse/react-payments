@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import CardCompanyButton from "./CardCompanyButton";
-import GlobalStyle from "../../styles/GlobalStyle";
 
 const meta: Meta<typeof CardCompanyButton> = {
   title: "CardCompanyButton",
@@ -20,11 +19,6 @@ type Story = StoryObj<typeof CardCompanyButton>;
 
 export const Default: Story = {
   render: ({ cardCompany }) => {
-    return (
-      <>
-        <GlobalStyle />
-        <CardCompanyButton cardCompany={cardCompany} onClick={() => {}} />
-      </>
-    );
+    return <CardCompanyButton cardCompany={cardCompany} onClick={() => {}} />;
   },
 };

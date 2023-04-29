@@ -1,7 +1,6 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import GlobalStyle from "../../styles/GlobalStyle";
 import CardSecurityCodeInput from "./CardSecurityCodeInput";
 
 import type { Card } from "../../types";
@@ -26,11 +25,6 @@ const CardSecurityCodeInputwithHooks = () => {
 
 export const Default: Story = {
   render: () => {
-    return (
-      <>
-        <GlobalStyle />
-        <CardSecurityCodeInputwithHooks />
-      </>
-    );
+    return <CardSecurityCodeInputwithHooks />;
   },
 };
