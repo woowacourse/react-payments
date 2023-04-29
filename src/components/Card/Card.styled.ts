@@ -20,10 +20,6 @@ export const Card = styled.div<CardProps>`
   border-radius: 5px;
 
   letter-spacing: 1.5px;
-
-  &:not(:last-child) {
-    margin-bottom: 50px;
-  }
 `;
 
 export const Rectangle = styled.div`
