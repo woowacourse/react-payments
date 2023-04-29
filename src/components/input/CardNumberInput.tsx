@@ -14,15 +14,21 @@ import {
 import { isEmptyInput, isFirst, isFullInput, isLast } from '../../utils';
 
 interface Props {
+  cardNumberInputRef: React.RefObject<HTMLInputElement>;
   cardNumber: CardNumber;
   setCardNumber: React.Dispatch<React.SetStateAction<CardNumber>>;
   moveFocusToExpirationDate: () => void;
 }
 
-export function CardNumberInput({ moveFocusToExpirationDate, cardNumber, setCardNumber }: Props) {
+export function CardNumberInput({
+  cardNumberInputRef,
+  cardNumber,
+  setCardNumber,
+  moveFocusToExpirationDate,
+}: Props) {
   const [isFullInputs, setIsFullInputs] = useState([false, false, false]);
   const allRef = [
-    useRef<HTMLInputElement>(null),
+    cardNumberInputRef,
     useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
@@ -84,7 +90,6 @@ export function CardNumberInput({ moveFocusToExpirationDate, cardNumber, setCard
                 maxLength={CARD_NUMBER_INPUT_SIZE}
                 required
                 inputMode='numeric'
-                autoFocus={isFirst(index)}
                 type={isPasswordInput(index) ? 'password' : 'text'}
                 ref={allRef[index]}
                 onChange={(e) => handleCardNumberInputChange(index, e)}

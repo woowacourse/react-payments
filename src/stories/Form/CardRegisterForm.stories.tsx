@@ -1,5 +1,5 @@
 import type { Meta } from '@storybook/react';
-import { CardRegisterForm } from '../../components/CardRegisterForm';
+import { CardRegisterForm } from '../../components/Form/CardRegisterForm';
 import { BrowserRouter } from 'react-router-dom';
 
 const meta = {

@@ -1,20 +1,20 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { useRef, useState } from 'react';
-import { cardDataService } from '../domains/cardDataService';
-import { CardViewer } from './CardViewer';
-import { CardNumberInput } from './input/CardNumberInput';
-import { ExpirationDateInput } from './input/ExpirationDateInput';
-import { OwnerNameInput } from './input/OwnerNameInput';
-import { SecurityCodeInput } from './input/SecurityCodeInput';
-import { PasswordInput } from './input/PasswordInput';
-import { useCardRegisterForm } from '../hooks/useCardRegisterForm';
-import { CardSelectModal } from './Modal/CardSelect/CardSelectModal';
-import { Button } from './Button/Button';
+import { useEffect, useRef, useState } from 'react';
+import { cardDataService } from '../../domains/cardDataService';
+import { CardViewer } from '../CardViewer';
+import { CardNumberInput } from '../input/CardNumberInput';
+import { ExpirationDateInput } from '../input/ExpirationDateInput';
+import { OwnerNameInput } from '../input/OwnerNameInput';
+import { SecurityCodeInput } from '../input/SecurityCodeInput';
+import { PasswordInput } from '../input/PasswordInput';
+import { useCardRegisterForm } from '../../hooks/useCardRegisterForm';
+import { CardSelectModal } from '../Modal/CardSelect/CardSelectModal';
+import { Button } from '../Button/Button';
 
 export function CardRegisterForm() {
   const navigate = useNavigate();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(true);
   const {
     id,
     alias,
@@ -33,6 +33,7 @@ export function CardRegisterForm() {
     isValidCardForm,
   } = useCardRegisterForm();
 
+  const cardNumberInputRef = useRef<HTMLInputElement>(null);
   const monthInputRef = useRef<HTMLInputElement>(null);
   const ownerNameInputRef = useRef<HTMLInputElement>(null);
   const securityCodeInputRef = useRef<HTMLInputElement>(null);
@@ -75,6 +76,11 @@ export function CardRegisterForm() {
     setIsModalOpen(true);
   };
 
+  useEffect(() => {
+    if (isModalOpen) return;
+    cardNumberInputRef.current?.focus();
+  }, [isModalOpen]);
+
   return (
     <Style.Wrapper onSubmit={handleCardInfoSubmit}>
       <CardSelectModal
@@ -89,10 +95,10 @@ export function CardRegisterForm() {
           expirationDate={expirationDate}
           ownerName={ownerName}
         />
-        카드사를 선택해주세요.
       </Style.CardCompanySelectButton>
       <Style.InputContainer>
         <CardNumberInput
+          cardNumberInputRef={cardNumberInputRef}
           moveFocusToExpirationDate={moveFocusToExpirationDate}
           cardNumber={cardNumber}
           setCardNumber={setCardNumber}

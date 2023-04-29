@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Layout } from '../layout';
 import { BackButton } from '../components/Button/BackButton';
-import { CardRegisterForm } from '../components/CardRegisterForm';
+import { CardRegisterForm } from '../components/Form/CardRegisterForm';
 
 export function Register() {
   return (

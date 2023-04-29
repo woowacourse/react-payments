@@ -1,5 +1,5 @@
 import type { Meta } from '@storybook/react';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { CardNumberInput } from '../../components/input/CardNumberInput';
 
 const meta = {
@@ -11,10 +11,12 @@ const meta = {
 export default meta;
 
 export const CardNumber = () => {
+  const cardNumberInputRef = useRef(null);
   const [cardNumber, setCardNumber] = useState(['', '', '', '']);
 
   return (
     <CardNumberInput
+      cardNumberInputRef={cardNumberInputRef}
       moveFocusToExpirationDate={() => {}}
       cardNumber={cardNumber}
       setCardNumber={setCardNumber}
