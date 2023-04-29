@@ -1,12 +1,12 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import AddCardForm from '../../components/AddCardForm/AddCardForm';
 import ArrowHeader from '../../components/ArrowHeader/ArrowHeader';
 import CardPreview from '../../components/CardPreview/CardPreview';
 import CardCompanyModal from '../../components/CardCompanyModal/CardCompanyModal';
-import { CardInfoContext } from '../../context/CardInfoContext';
+import { useCardInfoContext } from '../../context/CardInfoContext';
 
 const CardRegistration = () => {
-  const { cardNumber, expirationDate, cardOwnerName, selectedCard } = useContext(CardInfoContext);
+  const { cardNumber, expirationDate, cardOwnerName, selectedCard } = useCardInfoContext();
   const [isModalOpen, setIsModalOpen] = useState(true);
 
   const handleOpenModal = () => {

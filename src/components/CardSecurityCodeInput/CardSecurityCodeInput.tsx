@@ -1,13 +1,13 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import CardInfoInput from '../CardInfoInput/CardInfoInput';
 import HelpButton from '../HelpButton/HelpButton';
 import Input from '../Input/Input';
 import { NUMBER_REGEX } from '../../constant/regex';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import { CardInfoContext } from '../../context/CardInfoContext';
+import { useCardInfoContext } from '../../context/CardInfoContext';
 
 const CardSecurityCodeInput = () => {
-  const { securityCode, setSecurityCode } = useContext(CardInfoContext);
+  const { securityCode, setSecurityCode } = useCardInfoContext();
   const [error, setError] = useState('');
 
   const updateSecurityCode = (e: React.ChangeEvent<HTMLInputElement>) => {

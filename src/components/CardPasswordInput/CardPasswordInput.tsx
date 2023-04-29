@@ -1,12 +1,12 @@
-import { useState, useRef, useContext } from 'react';
+import { useState, useRef } from 'react';
 import CardInfoInput from '../CardInfoInput/CardInfoInput';
 import Input from '../Input/Input';
 import { NUMBER_REGEX } from '../../constant/regex';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import { CardInfoContext } from '../../context/CardInfoContext';
+import { useCardInfoContext } from '../../context/CardInfoContext';
 
 const CardPasswordInput = () => {
-  const { firstDigit, setFirstDigit, secondDigit, setSecondDigit } = useContext(CardInfoContext);
+  const { firstDigit, setFirstDigit, secondDigit, setSecondDigit } = useCardInfoContext();
   const secondDigitRef = useRef<HTMLInputElement>(null);
   const [error, setError] = useState('');
 

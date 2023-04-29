@@ -1,12 +1,12 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import CardInfoInput from '../CardInfoInput/CardInfoInput';
 import Input from '../Input/Input';
 import { NUMBER_REGEX } from '../../constant/regex';
-import { CardInfoContext } from '../../context/CardInfoContext';
+import { useCardInfoContext } from '../../context/CardInfoContext';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
 const ExpirationDateInput = () => {
-  const { expirationDate, setExpirationDate } = useContext(CardInfoContext);
+  const { expirationDate, setExpirationDate } = useCardInfoContext();
   const [error, setError] = useState('');
 
   const addSlashInExpirationDate = (e: React.ChangeEvent<HTMLInputElement>) => {

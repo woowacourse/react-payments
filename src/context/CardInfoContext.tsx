@@ -1,4 +1,4 @@
-import { PropsWithChildren, createContext, useState } from 'react';
+import { createContext, PropsWithChildren, useContext, useState } from 'react';
 
 type CardInfoContextType = {
   cardNumber: string;
@@ -15,32 +15,19 @@ type CardInfoContextType = {
   setSecondDigit: (secondDigit: string) => void;
   selectedCard: string;
   setSelectedCard: (selectedCard: string) => void;
-  isModalOpen: boolean;
-  setIsModalOpen: (isModalOpen: boolean) => void;
   cardNickName: string;
   setCardNickName: (cardNickName: string) => void;
 };
 
-export const CardInfoContext = createContext<CardInfoContextType>({
-  cardNumber: '',
-  setCardNumber: () => {},
-  expirationDate: '',
-  setExpirationDate: () => {},
-  cardOwnerName: '',
-  setCardOwnerName: () => {},
-  securityCode: '',
-  setSecurityCode: () => {},
-  firstDigit: '',
-  setFirstDigit: () => {},
-  secondDigit: '',
-  setSecondDigit: () => {},
-  selectedCard: '',
-  setSelectedCard: () => {},
-  isModalOpen: true,
-  setIsModalOpen: () => {},
-  cardNickName: '',
-  setCardNickName: () => {},
-});
+export const CardInfoContext = createContext<CardInfoContextType | undefined>(undefined);
+
+export const useCardInfoContext = () => {
+  const context = useContext(CardInfoContext);
+  if (!context) {
+    throw new Error('useCardInfoContext는 CardInfoProvider안에서 사용해야 합니다.');
+  }
+  return context;
+};
 
 export const CardInfoProvider = ({ children }: PropsWithChildren) => {
   const [cardNumber, setCardNumber] = useState('');
@@ -50,33 +37,26 @@ export const CardInfoProvider = ({ children }: PropsWithChildren) => {
   const [firstDigit, setFirstDigit] = useState('');
   const [secondDigit, setSecondDigit] = useState('');
   const [selectedCard, setSelectedCard] = useState('');
-  const [isModalOpen, setIsModalOpen] = useState(true);
   const [cardNickName, setCardNickName] = useState('');
 
-  return (
-    <CardInfoContext.Provider
-      value={{
-        cardNumber,
-        setCardNumber,
-        expirationDate,
-        setExpirationDate,
-        cardOwnerName,
-        setCardOwnerName,
-        securityCode,
-        setSecurityCode,
-        firstDigit,
-        setFirstDigit,
-        secondDigit,
-        setSecondDigit,
-        selectedCard,
-        setSelectedCard,
-        isModalOpen,
-        setIsModalOpen,
-        cardNickName,
-        setCardNickName,
-      }}
-    >
-      {children}
-    </CardInfoContext.Provider>
-  );
+  const contextValue = {
+    cardNumber,
+    setCardNumber,
+    expirationDate,
+    setExpirationDate,
+    cardOwnerName,
+    setCardOwnerName,
+    securityCode,
+    setSecurityCode,
+    firstDigit,
+    setFirstDigit,
+    secondDigit,
+    setSecondDigit,
+    selectedCard,
+    setSelectedCard,
+    cardNickName,
+    setCardNickName,
+  };
+
+  return <CardInfoContext.Provider value={contextValue}>{children}</CardInfoContext.Provider>;
 };

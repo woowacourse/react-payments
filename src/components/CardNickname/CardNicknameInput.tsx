@@ -1,10 +1,9 @@
-import { useContext } from 'react';
 import Input from '../Input/Input';
-import { CardInfoContext } from '../../context/CardInfoContext';
+import { useCardInfoContext } from '../../context/CardInfoContext';
 import styles from './CardNicknameInput.module.css';
 
 const CardNicknameInput = () => {
-  const { cardNickName, setCardNickName } = useContext(CardInfoContext);
+  const { cardNickName, setCardNickName } = useCardInfoContext();
 
   const handleNickNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputCardNickName = e.target.value;

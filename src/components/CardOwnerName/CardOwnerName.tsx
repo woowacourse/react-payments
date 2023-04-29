@@ -1,10 +1,9 @@
-import { useContext } from 'react';
 import CardInfoInput from '../CardInfoInput/CardInfoInput';
 import Input from '../Input/Input';
-import { CardInfoContext } from '../../context/CardInfoContext';
+import { useCardInfoContext } from '../../context/CardInfoContext';
 
 const CardOwnerName = () => {
-  const { cardOwnerName, setCardOwnerName } = useContext(CardInfoContext);
+  const { cardOwnerName, setCardOwnerName } = useCardInfoContext();
 
   const checkCardOwnerNameLength = (e: React.ChangeEvent<HTMLInputElement>) => {
     const currentCardOwnerName = e.target.value;

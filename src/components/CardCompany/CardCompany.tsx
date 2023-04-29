@@ -1,6 +1,5 @@
-import { useContext } from 'react';
 import styles from './CardCompany.module.css';
-import { CardInfoContext } from '../../context/CardInfoContext';
+import { useCardInfoContext } from '../../context/CardInfoContext';
 
 type CardCompanyProps = {
   image: string;
@@ -9,7 +8,7 @@ type CardCompanyProps = {
 };
 
 const CardCompany = ({ image, cardName, onClose }: CardCompanyProps) => {
-  const { setSelectedCard } = useContext(CardInfoContext);
+  const { setSelectedCard } = useCardInfoContext();
 
   const handleClick = () => {
     setSelectedCard(cardName);

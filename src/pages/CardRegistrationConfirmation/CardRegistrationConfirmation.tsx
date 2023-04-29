@@ -1,6 +1,5 @@
-import { useContext } from 'react';
 import CardPreview from '../../components/CardPreview/CardPreview';
-import { CardInfoContext } from '../../context/CardInfoContext';
+import { useCardInfoContext } from '../../context/CardInfoContext';
 import styles from './CardRegistrationConfirmation.module.css';
 import CardNicknameInput from '../../components/CardNickname/CardNicknameInput';
 import Button from '../../components/Button/Button';
@@ -13,7 +12,7 @@ type CardRegistrationConfirmationProps = {
 
 const CardRegistrationConfirmation = ({ registerNewCard }: CardRegistrationConfirmationProps) => {
   const navigate = useNavigate();
-  const { cardNumber, cardOwnerName, expirationDate, selectedCard, cardNickName } = useContext(CardInfoContext);
+  const { cardNumber, cardOwnerName, expirationDate, selectedCard, cardNickName } = useCardInfoContext();
 
   const handleCardInfo = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
