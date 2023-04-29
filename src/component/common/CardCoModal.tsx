@@ -6,15 +6,21 @@ import "./cardCoModal.css";
 
 interface CardCoModalProps extends DialogHTMLAttributes<HTMLDialogElement> {
   cardCoList: CardCo[];
+  closeCardCoModal: () => void;
 }
 
-export default function CardCoModal({ cardCoList }: CardCoModalProps) {
+export default function CardCoModal({
+  cardCoList,
+  closeCardCoModal,
+}: CardCoModalProps) {
   return (
     <>
-      <div className="cardCo-modal-background"></div>
+      <div className="cardCo-modal-background" onClick={closeCardCoModal}></div>
       <div className="cardCo-modal-container">
         <div className="cardCo-button-container">
-          {cardCoList.map((cardCo) => CardCoButton(cardCo))}
+          {cardCoList.map((cardCo) =>
+            CardCoButton({ cardCo, closeCardCoModal })
+          )}
         </div>
       </div>
     </>
