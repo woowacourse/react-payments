@@ -78,7 +78,9 @@ export function CardNumberInput({
   return (
     <>
       <Style.Label htmlFor='cardNumber0'>
-        <Style.Title>카드 번호</Style.Title>
+        <Style.Title>
+          카드 번호<Style.Essential>*</Style.Essential>
+        </Style.Title>
       </Style.Label>
       <InputContainer width={'318px'}>
         {Array.from({ length: cardNumber.length }).map((_, index) => {
@@ -122,6 +124,10 @@ const Style = {
 
   Title: styled.span`
     color: #2f2f2f;
+  `,
+
+  Essential: styled.span`
+    color: red;
   `,
 
   Hyphen: styled.span<{ visible: boolean }>`

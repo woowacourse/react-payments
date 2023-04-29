@@ -52,7 +52,9 @@ export function PasswordInput({ password, passwordInputRef, setPassword }: Props
   return (
     <>
       <Style.Label htmlFor='cardPassword0'>
-        <Style.Title>카드 비밀번호</Style.Title>
+        <Style.Title>
+          카드 비밀번호<Style.Essential>*</Style.Essential>
+        </Style.Title>
       </Style.Label>
       <Style.Container>
         {Array.from({ length: 2 }).map((_, index) => {
@@ -100,6 +102,10 @@ const Style = {
 
   Title: styled.span`
     color: #2f2f2f;
+  `,
+
+  Essential: styled.span`
+    color: red;
   `,
 
   Dot: styled.div`

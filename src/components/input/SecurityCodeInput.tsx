@@ -49,7 +49,9 @@ export function SecurityCodeInput({
   return (
     <>
       <Style.Label htmlFor='CVC'>
-        <Style.Title>보안 코드(CVC/CVV)</Style.Title>
+        <Style.Title>
+          보안 코드(CVC/CVV)<Style.Essential>*</Style.Essential>
+        </Style.Title>
       </Style.Label>
       <Style.TooltipContainer>
         <InputContainer width={'84px'}>
@@ -86,6 +88,10 @@ const Style = {
 
   Title: styled.span`
     color: #2f2f2f;
+  `,
+
+  Essential: styled.span`
+    color: red;
   `,
 
   TooltipContainer: styled.div`

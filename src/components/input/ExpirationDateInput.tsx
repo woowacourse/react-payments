@@ -63,7 +63,9 @@ export function ExpirationDateInput({
   return (
     <>
       <Style.Label htmlFor='expirationDate'>
-        <Style.Title>만료일</Style.Title>
+        <Style.Title>
+          만료일<Style.Essential>*</Style.Essential>
+        </Style.Title>
       </Style.Label>
       <InputContainer width={'137px'}>
         <Input
@@ -109,6 +111,10 @@ const Style = {
 
   Title: styled.span`
     color: #2f2f2f;
+  `,
+
+  Essential: styled.span`
+    color: red;
   `,
 
   Slash: styled.span`
