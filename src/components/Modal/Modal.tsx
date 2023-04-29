@@ -1,14 +1,14 @@
-import { useEffect } from 'react';
+import { DialogHTMLAttributes, useEffect } from 'react';
 import styled from 'styled-components';
 import { Button } from '../Button/Button';
 
-interface Props {
+interface Props extends DialogHTMLAttributes<HTMLDialogElement> {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   children?: React.ReactNode;
 }
 
-export function Modal({ isOpen, setIsOpen, children }: Props) {
+export function Modal({ isOpen, setIsOpen, children, ...props }: Props) {
   const handleEscPress = (e: KeyboardEvent) => {
     if (e.key === 'Escape') closeModal();
   };
