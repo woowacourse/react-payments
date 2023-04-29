@@ -1,5 +1,11 @@
-import { Dispatch, SetStateAction, createContext, useState } from 'react';
-import { Bank, CardNumber, Expiration, Name } from 'types/Card';
+import {
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  createContext,
+  useState,
+} from 'react';
+import { Bank, CardName, CardNumber, Expiration, Name } from 'types/Card';
 
 interface CardContext {
   isModalActive: boolean;
@@ -7,11 +13,13 @@ interface CardContext {
   date: Expiration;
   name: Name;
   bank: Bank;
+  cardName: CardName;
   setIsModalActive: (value: boolean) => void;
   setCardNumber: Dispatch<SetStateAction<CardNumber>>;
   setDate: Dispatch<SetStateAction<Expiration>>;
   setName: Dispatch<SetStateAction<Name>>;
   setBank: Dispatch<SetStateAction<Bank>>;
+  setCardName: Dispatch<SetStateAction<CardName>>;
 }
 
 const initialValue = {
@@ -33,16 +41,24 @@ const initialValue = {
     bank: '',
     color: '',
   },
+  cardName: {
+    cardName: '',
+  },
   setIsModalActive: (value: boolean) => {},
   setCardNumber: () => {},
   setDate: () => {},
   setName: () => {},
   setBank: () => {},
+  setCardName: () => {},
 };
 
 export const AddCardContext = createContext<CardContext>(initialValue);
 
-export const AddCardContextProvider = ({ children }: any) => {
+export const AddCardContextProvider = ({
+  children,
+}: {
+  children: ReactNode;
+}) => {
   const [isModalActive, setIsModalActive] = useState(true);
 
   const [cardNumber, setCardNumber] = useState<CardNumber>({
@@ -66,17 +82,23 @@ export const AddCardContextProvider = ({ children }: any) => {
     color: '',
   });
 
+  const [cardName, setCardName] = useState<CardName>({
+    cardName: '',
+  });
+
   const value = {
     isModalActive,
     cardNumber,
     date,
     name,
     bank,
+    cardName,
     setIsModalActive,
     setCardNumber,
     setDate,
     setName,
     setBank,
+    setCardName,
   };
 
   return (

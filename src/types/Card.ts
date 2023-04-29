@@ -11,6 +11,7 @@ export interface Card {
   password2?: string;
   bank: string;
   color: string;
+  cardName?: string;
 }
 
 export interface CardNumber {
@@ -32,4 +33,8 @@ export interface Name {
 export interface Bank {
   bank: string;
   color: string;
+}
+
+export interface CardName {
+  cardName: string;
 }

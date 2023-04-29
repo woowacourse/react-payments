@@ -21,7 +21,9 @@ export const Primary: Story = {
       month: '12',
       year: '23',
       name: 'AIDEN',
+      bank: '현대카드',
       color: '#333333',
+      cardName: '아빠카드',
     },
   },
 };

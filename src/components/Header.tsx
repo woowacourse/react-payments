@@ -38,7 +38,7 @@ const Header = ({ title, navigator }: HeaderProps) => {
   );
 };
 
-const StyledHeader = styled.header`
+export const StyledHeader = styled.header`
   display: flex;
   align-items: center;
   margin-top: 24px;

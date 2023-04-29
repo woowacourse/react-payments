@@ -20,11 +20,14 @@ const MainPage = () => {
 
       {cardInfoArray.length > 0 ? (
         cardInfoArray.map((cardInfo: Card, index: number) => (
-          <CardPreview key={index} cardInfo={cardInfo}></CardPreview>
+          <>
+            <CardPreview key={index} cardInfo={cardInfo}></CardPreview>
+          </>
         ))
       ) : (
         <Message>새로운 카드를 등록해 주세요.</Message>
       )}
+
       <AddButton onClick={goToRegister}>+</AddButton>
     </div>
   );

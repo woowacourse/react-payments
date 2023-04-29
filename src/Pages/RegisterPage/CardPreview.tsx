@@ -1,32 +1,46 @@
 import { LENGTH } from 'constants/constants';
 import styled from 'styled-components';
+import { Card } from 'types/Card';
 
-const CardPreview = ({ cardInfo, handleModal }: any) => {
+interface CardPreviewProps {
+  cardInfo: Card;
+  handleModal?: () => void;
+}
+
+const CardPreview = ({ cardInfo, handleModal }: CardPreviewProps) => {
   return (
-    <StyledCard onClick={handleModal} $background={cardInfo.color}>
-      <BankName $background={cardInfo.color}>{cardInfo.bank}</BankName>
-      <Chip />
-      <CardInfo $background={cardInfo.color}>
-        <Numbers>
-          <Span>{cardInfo.number1}</Span>
-          <Span>{cardInfo.number2}</Span>
-          <Secret>{cardInfo.number3.replaceAll(/[0-9]/gi, 'ㆍ')}</Secret>
-          <Secret>{cardInfo.number4.replaceAll(/[0-9]/gi, 'ㆍ')}</Secret>
-        </Numbers>
-        <Wrapper>
-          <p>{cardInfo.name}</p>
-          <Date>{`${cardInfo.month} ${
-            cardInfo.month.length === LENGTH.EXPIRATION ? '/' : ''
-          } ${cardInfo.year}`}</Date>
-        </Wrapper>
-      </CardInfo>
-    </StyledCard>
+    <>
+      <StyledCard onClick={handleModal} $background={cardInfo.color}>
+        <BankName $background={cardInfo.color}>{cardInfo.bank}</BankName>
+        <Chip />
+        <CardInfo $background={cardInfo.color}>
+          <Numbers>
+            <Span>{cardInfo.number1}</Span>
+            <Span>{cardInfo.number2}</Span>
+            <Secret>{cardInfo.number3.replaceAll(/[0-9]/gi, 'ㆍ')}</Secret>
+            <Secret>{cardInfo.number4.replaceAll(/[0-9]/gi, 'ㆍ')}</Secret>
+          </Numbers>
+          <Wrapper>
+            <p>{cardInfo.name}</p>
+            <Date>{`${cardInfo.month} ${
+              cardInfo.month.length === LENGTH.EXPIRATION ? '/' : ''
+            } ${cardInfo.year}`}</Date>
+          </Wrapper>
+        </CardInfo>
+      </StyledCard>
+      <CardName>{cardInfo.cardName}</CardName>
+    </>
   );
 };
 
 type StyledCardProps = {
   $background: string;
 };
+
+const CardName = styled.p`
+  text-align: center;
+  margin-bottom: 24px;
+`;
 
 const StyledCard = styled.div<StyledCardProps>`
   display: flex;
@@ -36,7 +50,7 @@ const StyledCard = styled.div<StyledCardProps>`
   width: 213px;
   height: 133px;
   padding: 0 15px;
-  margin: 30px auto 26px;
+  margin: 30px auto 14px;
   border-radius: 5px;
   background: ${(props) => props.$background};
   font-size: 14px;

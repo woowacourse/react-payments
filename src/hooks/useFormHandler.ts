@@ -7,7 +7,6 @@ import { areValidInfo } from 'validator';
 
 export const useFormHandler = (cardInfo: Card) => {
   const navigate = useNavigate();
-  const color = cardInfo.color;
   const bank = cardInfo.bank;
 
   const handleForm = (event: FormEvent) => {
@@ -23,8 +22,6 @@ export const useFormHandler = (cardInfo: Card) => {
     }
 
     if (areValidInfo(formDataObject)) {
-      setLocalStorage('card', { ...formDataObject, color, bank });
-
       navigate('/register-name');
     } else {
       alert('값을 모두 입력해 주세요.');
