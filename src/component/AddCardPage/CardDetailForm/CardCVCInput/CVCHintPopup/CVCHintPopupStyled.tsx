@@ -3,7 +3,7 @@ import styled from "styled-components";
 const St = {
   PopupSection: styled.section`
     display: flex;
-    position: fixed;
+    position: absolute;
 
     left: 50%;
   `,
