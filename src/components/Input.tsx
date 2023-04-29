@@ -55,7 +55,7 @@ export const CardNickname = css`
   display: block;
   width: 100%;
   height: 28px;
-  margin-top: 104px;
+  margin-top: 72px;
   border-bottom: 1px solid var(--darken-color);
   background: transparent;
 `;

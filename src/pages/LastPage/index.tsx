@@ -76,7 +76,7 @@ const S = {
 const nicknameLimitStyle = css`
   font-size: 12px;
   text-align: right;
-  margin: 4px 0 122px;
+  margin: 4px 0 142px;
 `;
 
 export default LastPage;
