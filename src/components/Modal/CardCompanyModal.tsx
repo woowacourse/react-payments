@@ -1,7 +1,8 @@
-import { MouseEventHandler, forwardRef } from 'react';
+import { MouseEventHandler, forwardRef, useContext } from 'react';
 import styled from 'styled-components';
 import { Icon } from '../common/Icon/Icon';
 import { COMPANY_NAME } from '../common/Card/types';
+import { ModalContext } from 'context/ModalContext';
 
 export interface ModalProps {
   ImgSources?: string[];
@@ -14,13 +15,19 @@ type Ref = HTMLDivElement;
 
 export const Modal = forwardRef<Ref, ModalProps>(
   ({ companyNames, ImgSources, onClick, ...props }, ref) => {
+    const { isModalOpen, setIsModalOpen } = useContext(ModalContext);
+
     const handleCloseModalWithBackDrop: MouseEventHandler<HTMLDivElement> = () => {
-      console.log('hi');
+      setIsModalOpen(!isModalOpen);
     };
 
+    const handleCloseModalWithCloseButton: MouseEventHandler<HTMLButtonElement> = () => {
+      setIsModalOpen(!isModalOpen);
+    };
     return (
       <>
         <Styled.ModalBackdrop onClick={handleCloseModalWithBackDrop} />
+
         <Styled.Modal {...props} ref={ref}>
           {ImgSources &&
             companyNames &&
@@ -33,6 +40,9 @@ export const Modal = forwardRef<Ref, ModalProps>(
                 />
               );
             })}
+          <Styled.ModalCloseButton onClick={handleCloseModalWithCloseButton}>
+            X
+          </Styled.ModalCloseButton>
         </Styled.Modal>
       </>
     );
@@ -52,6 +62,11 @@ const Styled = {
     border-radius: 10px 10px 0 0;
     background-color: white;
     overflow: scroll;
+
+    button {
+      position: absolute;
+      right: 0;
+    }
   `,
   ModalBackdrop: styled.div`
     display: flex;
@@ -66,5 +81,15 @@ const Styled = {
     z-index: 1;
     background-color: rgba(0, 0, 0, 0.5);
     overflow: hidden;
+  `,
+
+  ModalCloseButton: styled.button`
+    width: 20px;
+    height: 20px;
+    border: none;
+    margin: 10px;
+    font-size: 20px;
+    background-color: rgba(0, 0, 0, 0);
+    cursor: pointer;
   `,
 };

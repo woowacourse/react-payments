@@ -20,8 +20,9 @@ import { CreditCard } from 'components/common/Card/CreditCard';
 import { useCardFormValid } from 'hooks/useCardFormValid';
 import { Modal } from 'components/Modal/CardCompanyModal';
 import { COMPANY_LIST, ICON_SVG_PATH } from '../../constants';
-import { CardFormContext, defaultCardForm } from 'context/CardForm';
+import { CardInfoContext, defaultCardInfo } from 'context/CardInfoContext';
 import FormLabel from 'components/common/FormLabel/FormLabel';
+import { ModalContext } from 'context/ModalContext';
 
 export type AddCardFormProps = {
   onSubmit: () => void;
@@ -29,16 +30,15 @@ export type AddCardFormProps = {
 
 const NOT_ALPHABET_REGEX = /[^A-Za-z\s]/gi;
 
-function AddCardForm({ onSubmit }: AddCardFormProps) {
-  const { setCardForm } = useContext(CardFormContext);
-  const [card, setCard] = useState<Card>(defaultCardForm);
-
-  const [isOpen, setIsOpen] = useState(true);
+function AddCardInfo({ onSubmit }: AddCardFormProps) {
+  const { isModalOpen, setIsModalOpen } = useContext(ModalContext);
+  const { setCardInfo } = useContext(CardInfoContext);
+  const [card, setCard] = useState<Card>(defaultCardInfo);
 
   const [isValid, errorMessages] = useCardFormValid(card);
 
   useEffect(() => {
-    setCardForm(card);
+    setCardInfo(card);
   }, [isValid]);
 
   const handleCardNumbersChange: ValueAndOnChange[] = card.numbers.map((cardNumber, index) => ({
@@ -114,12 +114,12 @@ function AddCardForm({ onSubmit }: AddCardFormProps) {
 
   const handleClickCompany = (bank: COMPANY_NAME) => {
     setCard((prev) => ({ ...prev, bank: bank }));
-    setIsOpen(!isOpen);
+    setIsModalOpen(!isModalOpen);
   };
 
   return (
     <>
-      {isOpen && (
+      {isModalOpen && (
         <Modal
           ImgSources={Object.values(ICON_SVG_PATH) as string[]}
           companyNames={COMPANY_LIST}
@@ -187,4 +187,4 @@ const ErrorCaption = styled.span`
   color: var(--error-text-color);
 `;
 
-export default AddCardForm;
+export default AddCardInfo;

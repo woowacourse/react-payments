@@ -1,17 +1,17 @@
 import { createContext, useState } from 'react';
 import { Card } from 'components/common/Card/types';
 
-export type CardFormContextType = {
-  cardForm: Card;
-  setCardForm: (card: Card) => void;
-  setCardFormName: (cardName: string) => void;
+export type CardInfoContextType = {
+  cardInfo: Card;
+  setCardInfo: (card: Card) => void;
+  setCardInfoName: (cardName: string) => void;
 };
 
 export interface ContextProps {
   children: JSX.Element | JSX.Element[];
 }
 
-export const defaultCardForm: Card = {
+export const defaultCardInfo: Card = {
   bank: '현대카드',
   numbers: ['', '', '', ''],
   expirationDate: { month: '', year: '' },
@@ -23,17 +23,17 @@ export const defaultCardForm: Card = {
   },
 };
 
-export const CardFormContext = createContext<CardFormContextType>({
-  cardForm: defaultCardForm,
-  setCardForm: () => {},
-  setCardFormName: () => {},
+export const CardInfoContext = createContext<CardInfoContextType>({
+  cardInfo: defaultCardInfo,
+  setCardInfo: () => {},
+  setCardInfoName: () => {},
 });
 
-export const CardFormProvider = ({ children }: ContextProps) => {
-  const [cardForm, setCardForm] = useState<Card>(defaultCardForm);
+export const CardInfoProvider = ({ children }: ContextProps) => {
+  const [cardInfo, setCardInfo] = useState<Card>(defaultCardInfo);
 
   const updateCard = (card: Card) => {
-    setCardForm((prev) => ({
+    setCardInfo((prev) => ({
       ...prev,
       bank: card.bank,
       numbers: card.numbers,
@@ -45,14 +45,14 @@ export const CardFormProvider = ({ children }: ContextProps) => {
   };
 
   const updateCardName = (cardName: string) => {
-    setCardForm((prev) => ({ ...prev, cardName: cardName }));
+    setCardInfo((prev) => ({ ...prev, cardName: cardName }));
   };
 
   return (
-    <CardFormContext.Provider
-      value={{ cardForm, setCardForm: updateCard, setCardFormName: updateCardName }}
+    <CardInfoContext.Provider
+      value={{ cardInfo, setCardInfo: updateCard, setCardInfoName: updateCardName }}
     >
       {children}
-    </CardFormContext.Provider>
+    </CardInfoContext.Provider>
   );
 };

@@ -1,7 +1,7 @@
 import { ChangeEventHandler, FormEventHandler, useContext, useState } from 'react';
 import { CardNameInput } from 'components/Input/CardNameInput/CardNameInput';
 import { CreditCard } from 'components/common/Card/CreditCard';
-import { CardFormContext, CardFormProvider } from 'context/CardForm';
+import { CardInfoContext, CardInfoProvider } from 'context/CardInfoContext';
 import CardDB from 'db/Cards';
 import styled from 'styled-components';
 
@@ -10,32 +10,32 @@ export type RegisterCardNameFormProps = {
 };
 
 export function RegisterCardNameForm({ onSubmit }: RegisterCardNameFormProps) {
-  const { cardForm, setCardFormName } = useContext(CardFormContext);
+  const { cardInfo, setCardInfoName } = useContext(CardInfoContext);
   const [cardName, setCardName] = useState('');
 
   const handleCardNameInput: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { value } = e.target;
 
     setCardName(value);
-    setCardFormName(value);
+    setCardInfoName(value);
   };
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
-    CardDB.registerCard(cardForm);
+    CardDB.registerCard(cardInfo);
     onSubmit();
   };
 
   return (
-    <CardFormProvider>
+    <CardInfoProvider>
       <FormContainer onSubmit={handleSubmit}>
         <CompleteMsgSpan>카드 등록이 완료되었습니다</CompleteMsgSpan>
-        <CreditCard card={cardForm} />
+        <CreditCard card={cardInfo} />
         <CardNameInput value={cardName} onChange={handleCardNameInput} />
         <CardNameFormButton type="submit">확인</CardNameFormButton>
       </FormContainer>
-    </CardFormProvider>
+    </CardInfoProvider>
   );
 }
 
