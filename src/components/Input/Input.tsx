@@ -25,6 +25,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           onChange={onChange}
           ref={ref}
           required={required}
+          autoComplete="off"
           {...rest}
         />
       </>
