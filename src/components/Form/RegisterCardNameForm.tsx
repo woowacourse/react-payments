@@ -64,6 +64,7 @@ const CardNameFormButton = styled.button`
   background: white;
   font-size: 18px;
   font-weight: 700;
+  color: black;
   cursor: pointer;
 `;
 

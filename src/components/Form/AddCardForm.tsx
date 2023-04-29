@@ -6,14 +6,7 @@ import {
   CardNumberInputs,
 } from 'components/Input';
 import styled from 'styled-components';
-import {
-  ChangeEvent,
-  ChangeEventHandler,
-  FormEventHandler,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import { ChangeEvent, ChangeEventHandler, FormEventHandler, useContext, useState } from 'react';
 import { COMPANY_NAME, Card } from 'components/common/Card/types';
 import { ValueAndOnChange } from 'components/Input/types';
 import { CreditCard } from 'components/common/Card/CreditCard';
@@ -36,10 +29,6 @@ function AddCardInfo({ onSubmit }: AddCardFormProps) {
   const [card, setCard] = useState<Card>(defaultCardInfo);
 
   const [isValid, errorMessages] = useCardFormValid(card);
-
-  useEffect(() => {
-    setCardInfo(card);
-  }, [isValid]);
 
   const handleCardNumbersChange: ValueAndOnChange[] = card.numbers.map((cardNumber, index) => ({
     value: cardNumber,
@@ -109,6 +98,7 @@ function AddCardInfo({ onSubmit }: AddCardFormProps) {
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
+    setCardInfo(card);
     onSubmit();
   };
 
