@@ -1,3 +1,4 @@
+import { CARD_CO_NAME } from "../../CONSTANT";
 import { CreditCard } from "../../type";
 import { colorMatch } from "../../util/colorMatch";
 import "./cardPreview.css";
@@ -12,6 +13,7 @@ export default function CardPreview({
   openCardCoModal,
 }: CardPreviewProps) {
   const { cardCo, cardNumber, expirationDate, owner } = card;
+
   const previewNumber = cardNumber.map((number, index) => {
     return 1000 > number && number > 9999
       ? "   "
@@ -21,8 +23,8 @@ export default function CardPreview({
   });
 
   const { backgroundColor, color } = colorMatch[cardCo];
+  const cardCoName = CARD_CO_NAME[cardCo];
 
-  console.log(cardCo, backgroundColor, color);
   return (
     <div
       className="card-preview-container"
@@ -30,7 +32,7 @@ export default function CardPreview({
       style={{ backgroundColor: backgroundColor }}
     >
       <p className="card-preview-card-co" style={{ color: color }}>
-        {cardCo}
+        {cardCoName}
       </p>
       <div className="card-preview-chip"></div>
 
