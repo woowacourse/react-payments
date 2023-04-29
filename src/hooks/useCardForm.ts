@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import getErrorMessage from '../../../utils/getErrorMessage';
-import type { CardInformation } from '../../Common/Card/types';
-import type { ErrorMessage, Visited } from '../types';
+import getErrorMessage from '../utils/getErrorMessage';
+import type { ErrorMessage, Visited } from '../components/CardRegistrationForm/types';
+import type { CardInformation } from '../components/Common/Card/types';
 
 const initialErrorMessage = {
   cardNumber: '',

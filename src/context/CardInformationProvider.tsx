@@ -1,5 +1,5 @@
 import { createContext, useMemo } from 'react';
-import useCardForm from '../components/CardRegistrationForm/hooks/useCardForm';
+import useCardForm from '../hooks/useCardForm';
 import useWrappingContext from '../hooks/useWrappingContext';
 
 export const CardInformationStore = createContext<ReturnType<typeof useCardForm> | null>(null);
