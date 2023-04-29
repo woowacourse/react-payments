@@ -10,6 +10,7 @@ import { getUniqueID } from '../utils/key';
 import useMoveFocus from '../hooks/useMoveFocus';
 import CardCompanyModal from './CardCompanyModal';
 import useModal from '../hooks/useModal';
+import Tooltip from './Tooltip';
 
 const AddCardContainer = () => {
   const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
@@ -238,7 +239,9 @@ const AddCardContainer = () => {
               },
             ]}
           />
-          <StyledHelperButton disabled>?</StyledHelperButton>
+          <Tooltip text="카드 뒷면에 있는 3자리 숫자입니다.">
+            <StyledHelperButton disabled>?</StyledHelperButton>
+          </Tooltip>
         </StyledHeightCenter>
         <StyledHeightCenter>
           <InputGroup

@@ -1,19 +1,22 @@
 import styled from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
 
-const title: { [key: string]: string } = {
+const title = {
   '/': '보유카드',
   '/addCard': '카드 추가',
   '/addCardPage': '',
 };
 
+type Pathname = '/' | '/addCard' | '/addCardPage';
+
 const Header = () => {
   const { pathname } = useLocation();
+  const pageTitle = title[pathname as Pathname];
 
   return (
     <StyledHeader>
-      <StyledLeftArrowButton to="/" title={title[pathname]} />
-      <StyledHeaderTitle>{title[pathname]}</StyledHeaderTitle>
+      <StyledLeftArrowButton to="/" title={pageTitle} />
+      <StyledHeaderTitle>{pageTitle}</StyledHeaderTitle>
     </StyledHeader>
   );
 };

@@ -19,7 +19,6 @@ const cardCompanies = [
     name: '신한카드',
     logo: shinhanLogo,
   },
-
   {
     name: '카카오뱅크',
     logo: kakaoLogo,
