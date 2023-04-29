@@ -37,9 +37,9 @@ function App() {
           <Route path="/" element={<HoldingCardsPage cards={cards} />} />
           <Route
             path="card-register"
-            element={<CardRegisterPage registerCard={registerCard} />}
+            element={<CardRegisterPage />}
           />
-          <Route path="card-name-register" element={<CardNameRegisterPage />} />
+          <Route path="card-name-register" element={<CardNameRegisterPage registerCard={registerCard}  />} />
         </Route>
       </Routes>
     </CardFormProvider>

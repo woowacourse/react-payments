@@ -4,15 +4,10 @@ import CardRegisterForm from '../../components/CardRegisterForm';
 import CardCompanyModal from '../../components/CardCompanyModal';
 
 import useModal from '../../hooks/useModal';
-import type { CardData } from '../../types/card';
 
 import styles from './cardRegisterPage.module.css';
 
-interface Props {
-  registerCard: (card: CardData) => void;
-}
-
-const CardRegisterPage = ({ registerCard }: Props) => {
+const CardRegisterPage = () => {
   const { toggleModal, openModal, closeModal } = useModal();
 
   return (
@@ -30,7 +25,7 @@ const CardRegisterPage = ({ registerCard }: Props) => {
           </button>
         </section>
         <section className={styles.formSection}>
-          <CardRegisterForm registerCard={registerCard} />
+          <CardRegisterForm />
         </section>
         {toggleModal && <CardCompanyModal onClose={closeModal} />}
       </main>
