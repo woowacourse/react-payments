@@ -16,6 +16,7 @@ const PasswordField = ({ handleNumberChange }: Props) => {
     <TextField label="카드 비밀번호" size="medium" split>
       <Input
         type="password"
+        inputMode="numeric"
         minLength={1}
         maxLength={1}
         required
@@ -28,6 +29,7 @@ const PasswordField = ({ handleNumberChange }: Props) => {
       />
       <Input
         type="password"
+        inputMode="numeric"
         minLength={1}
         maxLength={1}
         required

@@ -16,6 +16,7 @@ const ExpiredDateField = ({ handleNumberChange }: Props) => {
     <TextField label="만료일" size="medium">
       <Input
         type="text"
+        inputMode="numeric"
         minLength={2}
         maxLength={2}
         required
@@ -30,6 +31,7 @@ const ExpiredDateField = ({ handleNumberChange }: Props) => {
       <span>/</span>
       <Input
         type="text"
+        inputMode="numeric"
         minLength={2}
         maxLength={2}
         required

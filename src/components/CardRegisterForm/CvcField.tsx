@@ -20,6 +20,7 @@ const CvcField = ({ handleNumberChange }: Props) => {
     >
       <Input
         type="password"
+        inputMode="numeric"
         minLength={3}
         maxLength={3}
         required

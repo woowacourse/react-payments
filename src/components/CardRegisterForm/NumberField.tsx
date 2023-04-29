@@ -16,6 +16,7 @@ const NumberField = ({ handleNumberChange }: Props) => {
     <TextField label="카드 번호" size="fit">
       <Input
         type="text"
+        inputMode='numeric'
         minLength={4}
         maxLength={4}
         required
@@ -30,6 +31,7 @@ const NumberField = ({ handleNumberChange }: Props) => {
       <span>-</span>
       <Input
         type="text"
+        inputMode='numeric'
         minLength={4}
         maxLength={4}
         required
@@ -44,6 +46,7 @@ const NumberField = ({ handleNumberChange }: Props) => {
       <span>-</span>
       <Input
         type="password"
+        inputMode='numeric'
         minLength={4}
         maxLength={4}
         required
@@ -58,6 +61,7 @@ const NumberField = ({ handleNumberChange }: Props) => {
       <span>-</span>
       <Input
         type="password"
+        inputMode='numeric'
         minLength={4}
         maxLength={4}
         required
