@@ -13,8 +13,12 @@ const CardPreview = ({ cardNumber, cardOwnerName, expirationDate, selectedCard, 
   return (
     <div className={styles.container} onClick={onClick}>
       <div className={styles.card} style={{ backgroundImage: `url(${cardImages[selectedCard]})` }}>
-        <div className={styles.chip} />
-        <span className={styles.cardNumber}>{cardNumber}</span>
+        <div>
+          <div className={styles.chip} />
+        </div>
+        <div className={styles.cardNumberBox}>
+          <span className={styles.cardNumber}>{cardNumber}</span>
+        </div>
         <div className={styles.wrap}>
           <span className={styles.word}>{cardOwnerName}</span>
           <span className={styles.word}>{expirationDate}</span>

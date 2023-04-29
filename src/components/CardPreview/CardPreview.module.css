@@ -5,12 +5,12 @@
 
 .card {
   display: flex;
-  padding: 8px 12px;
+  padding: 3px 12px;
   flex-direction: column;
   justify-content: flex-end;
   margin: 0 auto 0 auto;
   background-size: 208px 122px;
-  background-color: var(--grey-200);
+  background-color: var(--grey-300);
   width: 208px;
   height: 123px;
   border-radius: 5px;
@@ -23,25 +23,38 @@
 
 .chip {
   width: 40px;
-  height: 26px;
-  background-color: var(--gold-color);
+  height: 30px;
+  background-image: url(../../images/cardChip/cardChip.png);
+  background-size: contain;
   border-radius: 4px;
-  margin-top: 31px;
 }
 
 .word {
   color: var(--grey-100);
+  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
+  font-weight: 600;
   font-size: 13px;
   height: 16px;
+  align-items: flex-end;
 }
 
 .wrap {
   display: flex;
   justify-content: space-between;
+  padding: 0 4px 0 2px;
 }
 
 .cardNumber {
   color: var(--grey-100);
+  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
+  font-weight: 900;
   font-size: large;
   height: 23px;
+  letter-spacing: 2px;
+}
+
+.cardNumberBox {
+  display: flex;
+  justify-content: center;
+  padding-top: 5px;
 }
