@@ -77,7 +77,7 @@
             "position": "after"
           },
           {
-            "pattern": "@Contexts/*",
+            "pattern": "@Contexts/**/*",
             "group": "internal",
             "position": "after"
           },

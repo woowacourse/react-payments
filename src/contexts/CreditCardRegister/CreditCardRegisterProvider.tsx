@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { PropsWithChildren, createContext, useState } from 'react';
+import { PropsWithChildren, useState } from 'react';
 
 import creditCard from '@Domains/creditCard';
 import creditCardValidation from '@Domains/creditCard/creditCardValidation';
@@ -10,39 +9,7 @@ import useInput from '@Hooks/useInput';
 
 import { CREDIT_CARD_LENGTH, CREDIT_CARD_MAX_LENGTH } from '@Constants/creditCard';
 
-export const CreditCardRegisterContext = createContext({
-  creditCard: {
-    company: undefined as Type.CreditCardCompanies | undefined,
-    numbers: '',
-    expiry: '',
-    owner: '',
-    cvc: '',
-    alias: '',
-    password: {
-      first: '',
-      second: '',
-    },
-  },
-  update: {
-    company: (arg: Type.CreditCardCompanies | undefined) => {},
-    numbers: (arg: string) => {},
-    expiry: (arg: string) => {},
-    owner: (arg: string) => {},
-    cvc: (arg: string) => {},
-    alias: (arg: string) => {},
-    password: {
-      first: (arg: string) => {},
-      second: (arg: string) => {},
-    },
-  },
-  errorMessage: {
-    numbers: null as null | string,
-    expiry: null as null | string,
-    owner: null as null | string,
-    cvc: null as null | string,
-    password: null as null | string,
-  },
-});
+import CreditCardRegisterContext from './CreditCardRegisterContext';
 
 function CreditCardRegisterProvider({ children }: PropsWithChildren) {
   const { numberValidationFns, expiryValidationFns, ownerValidationFns, cvcValidationFns, passwordValidationFns } =

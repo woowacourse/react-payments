@@ -5,7 +5,7 @@ import CreditCardAlias from '@Pages/CreditCardAlias';
 import CreditCardRegister from '@Pages/CreditCardRegister';
 import Home from '@Pages/Home';
 
-import CreditCardRegisterProvider from '@Contexts/CreditCardRegisterContext';
+import CreditCardRegisterProvider from '@Contexts/CreditCardRegister/CreditCardRegisterProvider';
 
 const router = createBrowserRouter(
   [

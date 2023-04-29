@@ -8,7 +8,7 @@ import Header from '@Components/Header';
 import useAnimationModal from '@Hooks/useAnimationModal';
 import useCreditCardValidation from '@Hooks/useCreditCardValidation';
 
-import { CreditCardRegisterContext } from '@Contexts/CreditCardRegisterContext';
+import CreditCardRegisterContext from '@Contexts/CreditCardRegister/CreditCardRegisterContext';
 
 import scrollWindow from '@Utils/scrollWindow';
 

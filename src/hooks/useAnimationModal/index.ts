@@ -1,5 +1,6 @@
-import ModalContext from '@Contexts/Modal/ModalContext';
 import { useContext } from 'react';
+
+import ModalContext from '@Contexts/Modal/ModalContext';
 
 import ANIMATION from '@Constants/animation';
 

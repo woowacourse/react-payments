@@ -11,7 +11,7 @@ import creditCardStorage from '@Domains/creditCard/creditCardStorage';
 
 import * as Type from '@Types/index';
 
-import { CreditCardRegisterContext } from '@Contexts/CreditCardRegisterContext';
+import CreditCardRegisterContext from '@Contexts/CreditCardRegister/CreditCardRegisterContext';
 
 import * as S from './style';
 
