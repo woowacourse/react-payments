@@ -13,6 +13,7 @@ interface CardProps {
 
 const StyledCard = styled.div<{ cardColor: string }>`
   width: 213px;
+  height: 133px;
   box-shadow: 3px 3px 5px #00000040;
   background: ${(props) => props.cardColor ?? "#333"};
   border-radius: 5px;
@@ -26,7 +27,7 @@ const StyledTitle = styled.div`
   color: rgb(255, 255, 255);
   font-size: 12px;
   height: 14px;
-  margin-bottom: 82px;
+  margin-bottom: 59px;
 `;
 const StyledMagnet = styled.div`
   background: #cbba64;
@@ -42,6 +43,7 @@ const StyledCardNumber = styled.div`
   font-weight: bold;
   font-size: 14px;
   width: 100%;
+  height: 25px;
   justify-content: space-between;
   margin-bottom: 8px;
   display: flex;

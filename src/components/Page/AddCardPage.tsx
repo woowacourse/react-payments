@@ -23,8 +23,6 @@ import {
 } from "./AddCardPage.styles";
 import { useCardForm } from "../../hooks/useCardForm";
 import CardTypeDrawer from "../CardTypeDrawer";
-import { CARD_COMPANYS } from "../../constant";
-import { DrawerContextProvider } from "../../context/DrawerContext";
 import { useCardState } from "../../context/CardContext";
 
 interface AddCardPageProps {
@@ -126,5 +124,3 @@ export default function AddCardPage({ onSubmit, onClick }: AddCardPageProps) {
     </>
   );
 }
-
-// onClick = { handleModalOpen };
