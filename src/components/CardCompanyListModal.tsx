@@ -20,10 +20,9 @@ export const CardCompanyListModal = (props: CardCompanyListModalProps) => {
   return (
     <Modal>
       <Contents>
-        {CARD_COMPANY.map((cardCompany, index) => (
+        {CARD_COMPANY.map((cardCompany) => (
           <CardCompanyButton
-          // eslint-disable-next-line react/no-array-index-key
-            key={index}
+            key={cardCompany}
             handleOnClick={handleOnClick}
             cardCompany={cardCompany}
           />
