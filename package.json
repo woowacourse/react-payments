@@ -1,25 +1,22 @@
 {
   "name": "react-payments",
-  "homepage": "https://xodms0309.github.io/react-payments/",
   "version": "0.1.0",
+  "homepage": "https://ukkodeveloper.github.io/react-payments/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.23",
+    "@types/jest": "^29.5.0",
+    "@types/node": "^18.15.11",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
-    "@types/react-router-dom": "^5.3.3",
-    "@types/styled-components": "^5.1.26",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.10.0",
     "react-scripts": "5.0.1",
     "styled-components": "^5.3.9",
     "typescript": "^4.9.5",
-    "uuid": "^9.0.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -28,8 +25,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "chromatic": "npx chromatic --project-token=55531fd30591"
+    "build-storybook": "storybook build"
   },
   "eslintConfig": {
     "extends": [
@@ -63,29 +59,15 @@
     "@storybook/addon-essentials": "^7.0.5",
     "@storybook/addon-interactions": "^7.0.5",
     "@storybook/addon-links": "^7.0.5",
-    "@storybook/addon-styling": "^1.0.1",
     "@storybook/blocks": "^7.0.5",
     "@storybook/preset-create-react-app": "^7.0.5",
     "@storybook/react": "^7.0.5",
     "@storybook/react-webpack5": "^7.0.5",
     "@storybook/testing-library": "^0.0.14-next.2",
-    "@types/uuid": "^9.0.1",
-    "@typescript-eslint/eslint-plugin": "^5.58.0",
-    "@typescript-eslint/parser": "^5.58.0",
+    "@types/styled-components": "^5.1.26",
     "babel-plugin-named-exports-order": "^0.0.2",
-    "chromatic": "^6.17.3",
-    "eslint": "^8.38.0",
-    "eslint-config-prettier": "^8.8.0",
-    "eslint-plugin-storybook": "^0.6.11",
-    "prettier": "^2.8.7",
     "prop-types": "^15.8.1",
     "storybook": "^7.0.5",
-    "typescript": "^5.0.4",
     "webpack": "^5.79.0"
-  },
-  "overrides": {
-    "typescript": "^5.0.4"
-  },
-  "readme": "ERROR: No README data found!",
-  "_id": "react-payments@0.1.0"
+  }
 }
