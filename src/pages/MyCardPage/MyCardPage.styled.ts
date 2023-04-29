@@ -4,7 +4,6 @@ import { Card } from '../../components/Card/Card.styled';
 export const MyCardPage = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 
   width: 100%;
@@ -14,10 +13,6 @@ export const MyCardPage = styled.div`
 export const CardList = styled.ul`
   display: flex;
   flex-direction: column;
-
-  & > button:not(:last-child) {
-    margin-bottom: 50px;
-  }
 `;
 
 export const CardRegisterMessage = styled.p`
@@ -30,6 +25,7 @@ export const CardRegisterButton = styled(Card)`
   justify-content: center;
   align-items: center;
 
+  background-color: #e5e5e5;
   color: black;
 
   margin-bottom: 50px;
@@ -41,4 +37,13 @@ export const ButtonIcon = styled.div`
   font-size: 30px;
 
   opacity: 0.6;
+`;
+
+export const Nickname = styled.div`
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+
+  margin-top: 20px;
+  margin-bottom: 40px;
 `;
