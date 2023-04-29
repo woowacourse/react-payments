@@ -1,5 +1,5 @@
-import { createContext, useContext, useState } from 'react';
-import { getLocalStorage } from '../utils/localStorage';
+import { createContext, useContext, useEffect, useState } from 'react';
+import { getLocalStorage, setLocalStorage } from '../utils/localStorage';
 import { LOCAL_STORAGE_KEY } from '../constants';
 import type { Card } from '../@types';
 
@@ -34,6 +34,10 @@ export const CardListProvider = ({ children }: { children: React.ReactNode }) =>
   const [cardList, setCardList] = useState<Card[]>(
     getLocalStorage(LOCAL_STORAGE_KEY.CARD_LIST, []),
   );
+
+  useEffect(() => {
+    setLocalStorage(LOCAL_STORAGE_KEY.CARD_LIST, cardList);
+  }, [cardList]);
 
   return <CardContext.Provider value={{ cardList, setCardList }}>{children}</CardContext.Provider>;
 };
