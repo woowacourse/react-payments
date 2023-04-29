@@ -6,12 +6,10 @@
 
 ---
 
-## [💳 페이먼츠 페이지 링크](https://hyeryongchoi.github.io/react-payments/)
+## [💳 페이먼츠 페이지 링크](https://hyeryongchoi.github.io/react-payments/) / [📕 스토리북 페이지 링크](https://hyeryongchoi.github.io/react-payments/storybook/)
 
-## [📕 스토리북 페이지 링크](https://hyeryongchoi.github.io/react-payments/storybook/)
-
-<img width="300px" height="550px" alt="페이먼츠 페이지 실행 화면" src="https://user-images.githubusercontent.com/24777828/235288287-9c066402-e389-47a9-b807-af51f25d2af3.gif">
-<img width="400px" height="550px" alt="페이먼츠 404 페이지" src="https://user-images.githubusercontent.com/24777828/233854475-1fb5e32f-a598-46e8-97c0-9231050fb80a.gif">
+<img width="200px" height="400px" alt="페이먼츠 페이지 실행 화면" src="https://user-images.githubusercontent.com/24777828/235288287-9c066402-e389-47a9-b807-af51f25d2af3.gif">
+<img width="300px" height="400px" alt="페이먼츠 404 페이지" src="https://user-images.githubusercontent.com/24777828/233854475-1fb5e32f-a598-46e8-97c0-9231050fb80a.gif">
 
 ## 📍 학습 목표
 
