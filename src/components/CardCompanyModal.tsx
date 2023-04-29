@@ -1,48 +1,48 @@
 import Modal from './Modal';
 
-import bcCard from '../assets/company-bc.png';
-import hanaCard from '../assets/company-hana.png';
-import hyundaiCard from '../assets/company-hyundai.png';
-import kakaoCard from '../assets/company-kakao.png';
-import kbCard from '../assets/company-kb.png';
-import lotteCard from '../assets/company-lotte.png';
-import shinhanCard from '../assets/company-shinhan.png';
-import wooriCard from '../assets/company-woori.png';
+import bcLogo from '../assets/bc-logo.svg';
+import hanaLogo from '../assets/hana-logo.svg';
+import hyundaiLogo from '../assets/hyundai-logo.svg';
+import kakaoLogo from '../assets/kakao-logo.svg';
+import kbLogo from '../assets/kb-logo.svg';
+import lotteLogo from '../assets/lotte-logo.svg';
+import shinhanLogo from '../assets/shinhan-logo.svg';
+import wooriLogo from '../assets/woori-logo.svg';
 import styled from 'styled-components';
 
 const cardCompanies = [
   {
     name: 'BC카드',
-    imageSrc: bcCard,
+    logo: bcLogo,
   },
   {
     name: '신한카드',
-    imageSrc: shinhanCard,
+    logo: shinhanLogo,
   },
 
   {
     name: '카카오뱅크',
-    imageSrc: kakaoCard,
+    logo: kakaoLogo,
   },
   {
     name: '현대카드',
-    imageSrc: hyundaiCard,
+    logo: hyundaiLogo,
   },
   {
     name: '우리카드',
-    imageSrc: wooriCard,
+    logo: wooriLogo,
   },
   {
     name: '롯데카드',
-    imageSrc: lotteCard,
+    logo: lotteLogo,
   },
   {
     name: '하나카드',
-    imageSrc: hanaCard,
+    logo: hanaLogo,
   },
   {
     name: '국민카드',
-    imageSrc: kbCard,
+    logo: kbLogo,
   },
 ];
 
@@ -69,7 +69,7 @@ const CardCompanyModal = ({ onClickLogo, isModalOpen, closeModal }: CardCompanyM
                 key={index}
                 onClick={() => handleClickLogo(company.name)}
               >
-                <img src={company.imageSrc} alt={company.name} />
+                <img src={company.logo} alt={company.name} />
                 <CardCompanyName>{company.name}</CardCompanyName>
               </CardCompanyButton>
             ))}
