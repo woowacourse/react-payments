@@ -7,6 +7,7 @@ import Header from '@Components/Header';
 import Input from '@Components/Input';
 import InputLabel from '@Components/InputLabel';
 
+import creditCard from '@Domains/creditCard';
 import creditCardStorage from '@Domains/creditCard/creditCardStorage';
 
 import * as Type from '@Types/index';
@@ -18,7 +19,7 @@ import * as S from './style';
 function CreditCardAlias() {
   const navigate = useNavigate();
 
-  const { creditCard, update } = useContext(CreditCardRegisterContext);
+  const { creditCard: creditCardState, update } = useContext(CreditCardRegisterContext);
 
   const handleChangeAlias = (event: React.ChangeEvent<HTMLInputElement>) => {
     update.alias(event.target.value);
@@ -26,17 +27,17 @@ function CreditCardAlias() {
 
   const registerCreditCard = () => {
     const newCreditCard: Type.CreditCard = {
-      id: Date.now(),
-      numbers: creditCard.numbers,
-      expiry: creditCard.expiry,
-      owner: creditCard.owner,
-      cvc: creditCard.cvc,
+      id: creditCard.issueCreditCardId(),
+      numbers: creditCardState.numbers,
+      expiry: creditCardState.expiry,
+      owner: creditCardState.owner,
+      cvc: creditCardState.cvc,
       password: {
-        first: creditCard.password.first,
-        second: creditCard.password.second,
+        first: creditCardState.password.first,
+        second: creditCardState.password.second,
       },
-      company: creditCard.company,
-      alias: creditCard.alias,
+      company: creditCardState.company,
+      alias: creditCardState.alias,
     };
 
     creditCardStorage.saveCreditCard(newCreditCard);
@@ -44,7 +45,7 @@ function CreditCardAlias() {
   };
 
   useEffect(() => {
-    if (!creditCard.company) navigate('/register');
+    if (!creditCardState.company) navigate('/register');
   }, []);
 
   return (
@@ -54,16 +55,16 @@ function CreditCardAlias() {
         <S.CompleteMessage>카드등록이 완료되었습니다.</S.CompleteMessage>
         <CreditCard
           creditCard={{
-            numbers: creditCard.numbers,
-            expiry: creditCard.expiry,
-            owner: creditCard.owner,
-            company: creditCard.company,
+            numbers: creditCardState.numbers,
+            expiry: creditCardState.expiry,
+            owner: creditCardState.owner,
+            company: creditCardState.company,
           }}
         />
         <S.AliasInputLayout>
           <Input
             type="string"
-            value={creditCard.alias}
+            value={creditCardState.alias}
             width="70%"
             textAlign="center"
             background="#ffffff"
@@ -71,9 +72,14 @@ function CreditCardAlias() {
             placeholder="카드 별칭을 등록하세요."
             onChange={handleChangeAlias}
           />
-          <InputLabel label={`${creditCard.alias.length} / 10`} />
+          <InputLabel label={`${creditCardState.alias.length} / 10`} />
         </S.AliasInputLayout>
-        <Button text="확인" disabled={creditCard.alias.length === 0} type="button" handleClick={registerCreditCard} />
+        <Button
+          text="확인"
+          disabled={creditCardState.alias.length === 0}
+          type="button"
+          handleClick={registerCreditCard}
+        />
       </S.CreditCardAlias>
     </>
   );

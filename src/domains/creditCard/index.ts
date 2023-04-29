@@ -24,6 +24,8 @@ const creditCard = {
   },
 
   removeDashInCreditCardNumber: (number: string) => number.replaceAll(' - ', ''),
+
+  issueCreditCardId: () => Date.now(),
 };
 
 export default creditCard;
