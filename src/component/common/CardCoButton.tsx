@@ -4,9 +4,22 @@ import { GetCardCoIcon } from "../../util/getCardCoIcon";
 
 import "./cardCoButton.css";
 
-export default function CardCoButton(cardCo: CardCo) {
+interface CardCoButtonProps {
+  cardCo: CardCo;
+  closeCardCoModal: () => void;
+}
+
+export default function CardCoButton({
+  cardCo,
+  closeCardCoModal,
+}: CardCoButtonProps) {
   return (
-    <button key={cardCo} className="cardCo-button" type="button">
+    <button
+      key={cardCo}
+      className="cardCo-button"
+      type="button"
+      onClick={closeCardCoModal}
+    >
       {GetCardCoIcon(cardCo)}
       <p className="cardCo-name">{CardCo_NAME[cardCo]}</p>
     </button>
