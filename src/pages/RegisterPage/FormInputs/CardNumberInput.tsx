@@ -82,7 +82,7 @@ const CardNumberInput = () => {
 const S = {
   Label: styled.label`
     display: inline-block;
-    margin-top: 26px;
+    margin-top: 24px;
   `,
 };
 
