@@ -32,27 +32,23 @@ const CardRegistrationConfirmation = ({ registerNewCard }: CardRegistrationConfi
   };
 
   return (
-    <section className={styles.container}>
-      <div className={styles.box}>
-        <h2 className={styles.registrationLetter}>카드등록이 완료되었습니다.</h2>
-        <CardPreview
-          cardNumber={cardNumber}
-          cardOwnerName={cardOwnerName}
-          expirationDate={expirationDate}
-          selectedCard={selectedCard}
-        />
-        <form onSubmit={handleCardInfo}>
-          <div>
-            <CardNicknameInput />
-          </div>
-          <div>
-            <Button type="submit" className={styles.confirmButton}>
-              확인
-            </Button>
-          </div>
-        </form>
-      </div>
-    </section>
+    <form onSubmit={handleCardInfo}>
+      <section className={styles.container}>
+        <article className={styles.box}>
+          <h2 className={styles.registrationLetter}>카드등록이 완료되었습니다.</h2>
+          <CardPreview
+            cardNumber={cardNumber}
+            cardOwnerName={cardOwnerName}
+            expirationDate={expirationDate}
+            selectedCard={selectedCard}
+          />
+          <CardNicknameInput />
+          <Button type="submit" className={styles.confirmButton}>
+            확인
+          </Button>
+        </article>
+      </section>
+    </form>
   );
 };
 

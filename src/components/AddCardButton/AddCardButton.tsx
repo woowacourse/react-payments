@@ -9,14 +9,14 @@ type AddCardButtonProps = {
 
 const AddCardButton = ({ showMessage }: AddCardButtonProps) => {
   return (
-    <div className={styles.container}>
-      {showMessage && <p className={styles.title}>새로운 카드를 등록해주세요.</p>}
+    <section className={styles.container}>
+      {showMessage && <h3 className={styles.title}>새로운 카드를 등록해주세요.</h3>}
       <Link to="/card-registration">
         <button className={styles.card}>
           <GrAdd />
         </button>
       </Link>
-    </div>
+    </section>
   );
 };
 

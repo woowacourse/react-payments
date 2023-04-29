@@ -25,7 +25,7 @@ const CardPasswordInput = () => {
   };
 
   return (
-    <div>
+    <section>
       <CardInfoInput title="카드 비밀번호">
         <Input type="password" width="15%" value={firstDigit} maxLength={1} onChange={e => updateDigit(1, e)} />
         <Input
@@ -38,7 +38,7 @@ const CardPasswordInput = () => {
         />
       </CardInfoInput>
       <ErrorMessage>{error}</ErrorMessage>
-    </div>
+    </section>
   );
 };
 

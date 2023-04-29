@@ -9,17 +9,19 @@ type CardInfoInputProps = {
 
 const CardInfoInput = ({ title, numberOfLetter, children }: CardInfoInputProps) => {
   return (
-    <div>
-      <div className={styles.info}>
-        <div>{title}</div>
+    <section>
+      <header className={styles.info}>
+        <h5>{title}</h5>
         {numberOfLetter && (
           <div>
-            {numberOfLetter[0]}/{numberOfLetter[1]}
+            <span>{numberOfLetter[0]}</span>
+            <span>/</span>
+            <span>{numberOfLetter[1]}</span>
           </div>
         )}
-      </div>
+      </header>
       <div className={styles.children}>{children}</div>
-    </div>
+    </section>
   );
 };
 

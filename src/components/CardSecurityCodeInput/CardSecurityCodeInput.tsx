@@ -22,13 +22,13 @@ const CardSecurityCodeInput = () => {
   };
 
   return (
-    <div>
+    <section>
       <CardInfoInput title="보안 코드(CVC/CVV)">
         <Input type="password" width="30%" onChange={updateSecurityCode} maxLength={3} value={securityCode} />
         <HelpButton message="카드 뒷면 3자리 숫자" />
       </CardInfoInput>
       <ErrorMessage>{error}</ErrorMessage>
-    </div>
+    </section>
   );
 };
 

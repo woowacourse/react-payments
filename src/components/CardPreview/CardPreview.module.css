@@ -5,7 +5,7 @@
 
 .card {
   display: flex;
-  padding: 3px 12px;
+  padding: 0px 12px 4px 12px;
   flex-direction: column;
   justify-content: flex-end;
   margin: 0 auto 0 auto;

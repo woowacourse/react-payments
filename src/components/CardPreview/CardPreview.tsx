@@ -11,8 +11,8 @@ type CardPreviewProps = {
 
 const CardPreview = ({ cardNumber, cardOwnerName, expirationDate, selectedCard, onClick }: CardPreviewProps) => {
   return (
-    <div className={styles.container} onClick={onClick}>
-      <div className={styles.card} style={{ backgroundImage: `url(${cardImages[selectedCard]})` }}>
+    <article className={styles.container} onClick={onClick}>
+      <section className={styles.card} style={{ backgroundImage: `url(${cardImages[selectedCard]})` }}>
         <div>
           <div className={styles.chip} />
         </div>
@@ -23,8 +23,8 @@ const CardPreview = ({ cardNumber, cardOwnerName, expirationDate, selectedCard, 
           <span className={styles.word}>{cardOwnerName}</span>
           <span className={styles.word}>{expirationDate}</span>
         </div>
-      </div>
-    </div>
+      </section>
+    </article>
   );
 };
 

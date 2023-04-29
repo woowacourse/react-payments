@@ -8,14 +8,14 @@ type HelpButtonProps = {
 
 const HelpButton = React.memo(({ message }: HelpButtonProps) => {
   return (
-    <div className={styles.container}>
+    <section className={styles.container}>
       <BsQuestionCircle className={styles.button} />
-      <div className={styles.balloonMessageContainer}>
+      <aside className={styles.balloonMessageContainer}>
         <div className={styles.messageBox}>
           <p>{message}</p>
         </div>
-      </div>
-    </div>
+      </aside>
+    </section>
   );
 });
 

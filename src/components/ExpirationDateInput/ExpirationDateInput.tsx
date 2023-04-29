@@ -22,7 +22,7 @@ const ExpirationDateInput = () => {
   };
 
   return (
-    <div>
+    <section>
       <CardInfoInput title="만료일">
         <Input
           width="40%"
@@ -33,7 +33,7 @@ const ExpirationDateInput = () => {
         />
       </CardInfoInput>
       <ErrorMessage>{error}</ErrorMessage>
-    </div>
+    </section>
   );
 };
 

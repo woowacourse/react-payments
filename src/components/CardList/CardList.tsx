@@ -8,7 +8,7 @@ type CardListProps = {
 
 const CardList = ({ cardInfo }: CardListProps) => {
   return (
-    <div className={styles.container}>
+    <section className={styles.container}>
       <ul>
         {cardInfo.map(card => (
           <li className={styles.card} key={crypto.randomUUID()}>
@@ -19,12 +19,12 @@ const CardList = ({ cardInfo }: CardListProps) => {
               selectedCard={card.selectedCard}
             />
             <div className={styles.cardNicknameBox}>
-              <span>{card.cardNickName}</span>
+              <h4>{card.cardNickName}</h4>
             </div>
           </li>
         ))}
       </ul>
-    </div>
+    </section>
   );
 };
 
