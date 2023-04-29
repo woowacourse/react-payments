@@ -4,6 +4,7 @@ import {
   isValidCardNumber,
   isValidExpiredMonthFormat,
   isValidExpiredYearFormat,
+  isValidOwnerName,
 } from '../../pages/AddCard/domain/dispatcher';
 import { act } from 'react-dom/test-utils';
 import { mockEventTarget } from '../utils/util';
@@ -71,5 +72,37 @@ describe('만료일(월) 테스트', () => {
       result.current.onChange(mockEventTarget('13') as React.ChangeEvent<HTMLInputElement>);
     });
     expect(result.current.status).toBe('INVALID');
+  });
+});
+
+describe('카드 소유자 이름 테스트', () => {
+  it('카드 소유자 이름 Hook의 초기 상태는 INIT를 가진다.', () => {
+    const { result } = renderHook(() => useInput(isValidOwnerName));
+    expect(result.current.status).toBe('INIT');
+  });
+  it('카드 소유자 이름 입력이 들어오면, 카드 소유자 이름의 상태가 유효한 상태로 변경된다.', () => {
+    const { result } = renderHook(() => useInput(isValidOwnerName));
+    act(() => {
+      result.current.onChange(mockEventTarget('YUNSEONG') as React.ChangeEvent<HTMLInputElement>);
+    });
+    expect(result.current.status).toBe('VALID');
+    expect(result.current.value).toBe('YUNSEONG');
+  });
+  it('유효하지 않은 카드 소유자 이름 입력이 들어오면, 카드 소유자 이름의 상태가 유효하지 않는 상태로 변경된다.', () => {
+    const { result } = renderHook(() => useInput(isValidOwnerName));
+    act(() => {
+      result.current.onChange(mockEventTarget('이윤성') as React.ChangeEvent<HTMLInputElement>);
+    });
+    expect(result.current.status).toBe('INVALID');
+  });
+
+  it('소유자 이름을 작성했다가 지웠을 경우에는, 카드 소유자 이름은 선택이므로 유효한 값이다.', () => {
+    const { result } = renderHook(() => useInput(isValidOwnerName));
+    act(() => {
+      result.current.onChange(mockEventTarget('YUNSEONG') as React.ChangeEvent<HTMLInputElement>);
+      result.current.onChange(mockEventTarget('') as React.ChangeEvent<HTMLInputElement>);
+    });
+    expect(result.current.status).toBe('VALID');
+    expect(result.current.value).toBe('');
   });
 });
