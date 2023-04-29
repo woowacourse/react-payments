@@ -35,9 +35,13 @@ const initialStringInputState: EachUserInputState = {
   isComplete: false,
   userInput: "",
 };
+const initialCardCoInputState: EachUserInputState = {
+  isComplete: false,
+  userInput: "woori",
+};
 
 const initialInputStatus = {
-  cardCo: initialStringInputState,
+  cardCo: initialCardCoInputState,
   cardNumber: initialArrayInputState,
   expirationDate: initialStringInputState,
   owner: initialStringInputState,
@@ -74,13 +78,12 @@ export default function CardInputForm(props: CardInputFormProps) {
     return (key: keyof EachUserInputState, value: any, index?: number) => {
       setInputStatus((currentInputStatus) => {
         const updateResult = JSON.parse(JSON.stringify(currentInputStatus));
+        const originNowCard = JSON.parse(JSON.stringify(nowCardInfo));
 
         if (key === "isComplete") {
           updateResult[inputName][key] = value;
           return updateResult;
         }
-
-        const originNowCard = JSON.parse(JSON.stringify(nowCardInfo));
 
         if (
           (inputName === "cardNumber" || inputName === "password") &&
@@ -90,7 +93,7 @@ export default function CardInputForm(props: CardInputFormProps) {
           originNowCard[inputName][index] = value;
           setNowCardInfo(originNowCard);
           return updateResult;
-        } else if ((inputName = "cardCo")) {
+        } else if (inputName === "cardCo") {
           closeCardCoModal();
         }
 
