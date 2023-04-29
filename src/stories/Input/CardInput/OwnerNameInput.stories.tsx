@@ -1,10 +1,9 @@
 import type { Meta } from '@storybook/react';
 import { useRef, useState } from 'react';
-
-import { OwnerNameInput } from '../../components/input/OwnerNameInput';
+import { OwnerNameInput } from '../../../components/input/OwnerNameInput';
 
 const meta = {
-  title: 'Example/Input',
+  title: 'Example/Input/CardInput',
   component: OwnerNameInput,
   tags: ['autodocs'],
 } satisfies Meta<typeof OwnerNameInput>;

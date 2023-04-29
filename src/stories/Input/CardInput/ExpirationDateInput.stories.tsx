@@ -1,9 +1,9 @@
 import type { Meta } from '@storybook/react';
 import { useState, useRef } from 'react';
-import { ExpirationDateInput } from '../../components/input/ExpirationDateInput';
+import { ExpirationDateInput } from '../../../components/input/ExpirationDateInput';
 
 const meta = {
-  title: 'Example/Input',
+  title: 'Example/Input/CardInput',
   component: ExpirationDateInput,
   tags: ['autodocs'],
 } satisfies Meta<typeof ExpirationDateInput>;
