@@ -1,7 +1,8 @@
 import { Outlet } from 'react-router-dom';
+
 import CardFormProvider from '../../../contexts/CardFormContext';
 
-const CardPage = () => {
+const CardFormContext = () => {
   return (
     <CardFormProvider>
       <Outlet />
@@ -9,4 +10,4 @@ const CardPage = () => {
   );
 };
 
-export default CardPage;
+export default CardFormContext;
