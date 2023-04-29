@@ -5,7 +5,7 @@ import CardDetailView from "../CardDetailView/CardDetailView";
 import CardDetailForm from "./CardDetailForm/CardDetailForm";
 
 import St from "./AddCardPageStyled";
-import { useCardState } from "../../hooks/useCard";
+import { useCardState } from "../../hooks/card/useCard";
 
 function AddCardPage() {
   const creditCard = useCardState();

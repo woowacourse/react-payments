@@ -1,7 +1,7 @@
 import React from "react";
 import St from "./CardNumberInputStyled";
 import { Input, InputSection } from "../../../common/Input";
-import useCardNumber from "../../../../hooks/useCardNumber";
+import useCardNumber from "../../../../hooks/card/useCardNumber";
 
 interface CardNumberInputProps {
   inputRefs: React.MutableRefObject<(HTMLInputElement | null)[]>;

@@ -1,6 +1,6 @@
 import React from "react";
 import St from "./CardPasswordInputStyled";
-import useCardPassword from "../../../../hooks/useCardPassword";
+import useCardPassword from "../../../../hooks/card/useCardPassword";
 
 interface CardPasswordInputProps {
   inputRefs: React.MutableRefObject<(HTMLInputElement | null)[]>;

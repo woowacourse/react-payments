@@ -2,7 +2,7 @@ import React from "react";
 import Modal from "../common/Modal";
 import { CREDIT_CARD_COMPANY_LOGO } from "../../data/creditCard";
 import St from "./CardCompanyModalStyled";
-import useCardCompany from "../../hooks/useCardCompany";
+import useCardCompany from "../../hooks/card/useCardCompany";
 import { CREDIT_CARD_COMPANY } from "../../types/card";
 
 interface CardCompanyModalProps {

@@ -1,6 +1,6 @@
 import React from "react";
 import St from "./CardOwnerNameInputStyled";
-import useCardOwnerName from "../../../../hooks/useCardOwnerName";
+import useCardOwnerName from "../../../../hooks/card/useCardOwnerName";
 
 interface CardOwnerNameInputProps {
   inputRefs: React.MutableRefObject<(HTMLInputElement | null)[]>;

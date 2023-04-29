@@ -1,4 +1,4 @@
-import { CREDIT_CARD_COMPANY } from "../types/card";
+import { CREDIT_CARD_COMPANY } from "../../types/card";
 import { useCardDispatch, useCardState } from "./useCard";
 
 function useCardCompany() {

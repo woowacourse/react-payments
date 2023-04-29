@@ -2,9 +2,9 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import St from "./AddCardResultPageStyled";
 import { CreditCard } from "../../types/card";
-import { useCardDispatch, useCardState } from "../../hooks/useCard";
+import { useCardDispatch, useCardState } from "../../hooks/card/useCard";
 import CardDetailView from "../CardDetailView/CardDetailView";
-import useCardAlias from "../../hooks/useCardAlias";
+import useCardAlias from "../../hooks/card/useCardAlias";
 
 type AddCardResultPageProps = {
   addCreditCard: (card: CreditCard) => void;

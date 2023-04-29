@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import St from "./CardCompanyInputStyled";
-import useCardCompany from "../../../../hooks/useCardCompany";
+import useCardCompany from "../../../../hooks/card/useCardCompany";
 import useModal from "../../../../hooks/useModal";
 import CardCompanyModal from "../../../CardCompanyModal/CardCompanyModal";
 

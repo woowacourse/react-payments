@@ -1,6 +1,6 @@
 import React from "react";
 import St from "./CardDateInputStyled";
-import useCardDate from "../../../../hooks/useCardDate";
+import useCardDate from "../../../../hooks/card/useCardDate";
 
 interface CardDateInputProps {
   inputRefs: React.MutableRefObject<(HTMLInputElement | null)[]>;

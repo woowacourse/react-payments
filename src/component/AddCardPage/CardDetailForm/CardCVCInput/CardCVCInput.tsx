@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import St from "./CardCVCInputStyled";
 import CVCHintPopup from "./CVCHintPopup/CVCHintPopup";
-import useCardCVC from "../../../../hooks/useCardCVC";
+import useCardCVC from "../../../../hooks/card/useCardCVC";
 
 interface CardDateInputProps {
   inputRefs: React.MutableRefObject<(HTMLInputElement | null)[]>;
