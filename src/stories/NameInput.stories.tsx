@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import NameInput from './NameInput';
+import NameInput from 'Pages/RegisterPage/FormInputs/NameInput';
 
 const NameInputMeta = {
   component: NameInput,

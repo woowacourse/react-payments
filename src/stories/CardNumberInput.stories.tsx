@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import CardNumberInput from './CardNumberInput';
-import { GlobalStyle } from 'styles/GlobalStyle';
+import CardNumberInput from '../Pages/RegisterPage/FormInputs/CardNumberInput';
 
 const CardNumberInputMeta = {
   component: CardNumberInput,
