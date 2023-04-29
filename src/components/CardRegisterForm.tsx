@@ -25,13 +25,15 @@ export function CardRegisterForm() {
         .map((input) => input.value)
         .join('');
     }
+
     if (company.clicked.value) {
       submittedCardInfo.company = company.clicked.value;
-
       moveAddCardNamePage(submittedCardInfo);
-    } else {
-      alert('카드 회사를 선택해주세요!');
+
+      return;
     }
+
+    alert('카드 회사를 선택해주세요!');
   }
 
   function moveAddCardNamePage(formState: Card) {
@@ -40,9 +42,9 @@ export function CardRegisterForm() {
 
   return (
     <_Form onSubmit={handleSubmit}>
-      {Object.entries(cardRegisterForm).map(([key, inputs]) => (
+      {Object.entries(cardRegisterForm).map(([key, inputs], index) => (
         <InputBox
-          key={key}
+          key={index}
           id={key}
           inputs={Object.values(inputs) as unknown as InputInfo[]}
         />
