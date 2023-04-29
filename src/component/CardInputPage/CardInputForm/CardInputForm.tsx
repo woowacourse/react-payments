@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import "./cardInputForm.css";
 import { CreditCard, InputStatus } from "../../../type";
 import { EachUserInputState } from "../../../type";
+import CardCoModal from "../../common/CardCoModal";
 
 interface CardInputFormProps {
   addNewCard: (card: CreditCard) => void;
@@ -20,7 +21,7 @@ interface CardInputFormProps {
 const initialCard: CreditCard = {
   owner: "",
   expirationDate: "",
-  bank: "",
+  cardCo: "",
   cardNumber: [],
   securityCode: "",
   password: [],
@@ -41,6 +42,20 @@ const initialInputStatus = {
   owner: initialStringInputState,
   securityCode: initialStringInputState,
   password: initialArrayInputState,
+};
+
+const useCardCoModalState = () => {
+  const [modalOpen, setModalOpen] = useState(true);
+
+  function openCardCoModal() {
+    setModalOpen(true);
+  }
+
+  function closeCardCoModal() {
+    setModalOpen(false);
+  }
+
+  return { modalOpen, openCardCoModal, closeCardCoModal };
 };
 
 export default function CardInputForm(props: CardInputFormProps) {
@@ -103,9 +118,18 @@ export default function CardInputForm(props: CardInputFormProps) {
     }
   };
 
+  const { modalOpen, openCardCoModal, closeCardCoModal } =
+    useCardCoModalState();
+
   return (
     <form onSubmit={(e) => submitCardInfo(e)} className="form">
-      <CardPreview card={nowCardInfo} />
+      {modalOpen && (
+        <CardCoModal
+          cardCoList={["woori", "shinhan", "hana", "woori", "lotte"]}
+          closeCardCoModal={closeCardCoModal}
+        />
+      )}
+      <CardPreview card={nowCardInfo} openCardCoModal={openCardCoModal} />
       <InputBoxCardNumber
         changeCardNumberStatus={changeInputStatus("cardNumber")}
       />
