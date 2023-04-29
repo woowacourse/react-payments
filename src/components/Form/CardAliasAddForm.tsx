@@ -31,6 +31,7 @@ export function CardAliasAddForm() {
           designType='underline'
           name='alias'
           placeholder='카드 별칭을 입력해주세요.'
+          autoFocus
           width={'240px'}
           height={'45px'}
         />
