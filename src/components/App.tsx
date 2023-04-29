@@ -1,6 +1,5 @@
 import { Outlet } from 'react-router';
 import styled from 'styled-components';
-import { PaymentsProvider } from '../context/PaymentsContext';
 import { ResetStyle } from '../styles/ResetStyle';
 
 const Container = styled.div`
@@ -14,12 +13,10 @@ const Container = styled.div`
 
 export const App = () => {
   return (
-    <PaymentsProvider>
-      <Container>
-        <ResetStyle />
+    <Container>
+      <ResetStyle />
 
-        <Outlet />
-      </Container>
-    </PaymentsProvider>
+      <Outlet />
+    </Container>
   );
 };
