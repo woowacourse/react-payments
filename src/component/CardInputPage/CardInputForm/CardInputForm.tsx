@@ -21,7 +21,7 @@ interface CardInputFormProps {
 const initialCard: CreditCard = {
   owner: "",
   expirationDate: "",
-  cardCo: "",
+  cardCo: "woori",
   cardNumber: [],
   securityCode: "",
   password: [],
@@ -97,7 +97,6 @@ export default function CardInputForm(props: CardInputFormProps) {
         updateResult[inputName][key] = value;
         originNowCard[inputName] = value;
         setNowCardInfo(originNowCard);
-        console.log(nowCardInfo);
 
         return updateResult;
       });
@@ -127,7 +126,16 @@ export default function CardInputForm(props: CardInputFormProps) {
     <form onSubmit={(e) => submitCardInfo(e)} className="form">
       {modalOpen && (
         <CardCoModal
-          cardCoList={["woori", "shinhan", "hana", "woori", "lotte"]}
+          cardCoList={[
+            "woori",
+            "shinhan",
+            "hana",
+            "hyundai",
+            "lotte",
+            "bc",
+            "kb",
+            "kakao",
+          ]}
           changeCardCoStatus={changeInputStatus("cardCo")}
         />
       )}
