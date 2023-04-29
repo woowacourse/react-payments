@@ -52,7 +52,7 @@ const CardLayout = styled.div<{ cardColor: string }>`
   background-color: ${(props) => props.cardColor};
 
   width: 250px;
-  min-height: 150px;
+  height: 150px;
 
   border-radius: 5px;
   padding: 14px;
