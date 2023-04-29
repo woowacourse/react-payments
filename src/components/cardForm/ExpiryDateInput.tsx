@@ -1,6 +1,7 @@
-import { Container } from "../common/Container";
-import { Input } from "../common/Input";
-import { InputLabel } from "../common/InputLabel";
+import Container from "../common/Container";
+import Input from "../common/Input";
+import InputLabel from "../common/InputLabel";
+
 import { EXPRIYDATE_MAXLEGNTH, EXPRIYDATE_REGEX, TWO_TO_NINE_REGEX } from "../../constants";
 import { SubmitManageContext } from "../../contexts/SubmitManageContext";
 import { NewCardContext } from "../../contexts/NewCardContext";
@@ -23,7 +24,7 @@ const ExpiryDateInfo = {
   $textPosition: "center",
 };
 
-export const ExpiryDateInput = () => {
+const ExpiryDateInput = () => {
   const { isInputsValid, setExpriyDateCompleted, setIsExpiryDateValid } = useContext(SubmitManageContext);
   const { setExpiryDate } = useContext(NewCardContext);
 
@@ -58,3 +59,5 @@ export const ExpiryDateInput = () => {
     </Container>
   );
 };
+
+export default ExpiryDateInput;

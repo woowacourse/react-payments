@@ -1,7 +1,7 @@
-import { Container } from "../common/Container";
+import Container from "../common/Container";
 import styled from "styled-components";
 
-export const AliasInput = () => {
+const AliasInput = () => {
   return (
     <Container>
       <InputField name="alias" placeholder="카드별명" maxLength={20} />
@@ -30,3 +30,5 @@ const InputField = styled.input`
     font-size: 18px;
   }
 `;
+
+export default AliasInput;

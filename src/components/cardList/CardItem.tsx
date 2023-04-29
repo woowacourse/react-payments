@@ -35,7 +35,7 @@ const fontColorMap: Record<BrandType | typeof DEFAULT_BRAND, string> = {
   [DEFAULT_BRAND]: "#FFFFFF",
 } as const;
 
-export const CardItem = ({ card, handleClick }: CardProps) => {
+const CardItem = ({ card, handleClick }: CardProps) => {
   const { numbers, expiryDate, owner = DEFAULT_NAME, brand = DEFAULT_BRAND } = card;
 
   const memorizedNumbers = useMemo((): string => {
@@ -150,3 +150,5 @@ const ExpiryDate = styled.div`
   margin-right: 2px;
   font-size: 11px;
 `;
+
+export default CardItem;

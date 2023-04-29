@@ -1,6 +1,7 @@
+import CardItem from "./CardItem";
+import EmptyCard from "./EmptyCard";
+
 import styled from "styled-components";
-import { CardItem } from "./CardItem";
-import { EmptyCard } from "./EmptyCard";
 
 import { useContext } from "react";
 import { CardsContext } from "../../contexts/CardsContext";
@@ -58,3 +59,5 @@ const Alias = styled.div`
   font-weight: 600;
   color: #525252;
 `;
+
+export default CardList;

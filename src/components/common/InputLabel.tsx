@@ -5,7 +5,7 @@ interface InputLabelProps {
   text: string;
 }
 
-export const InputLabel = ({ name, text }: InputLabelProps) => {
+const InputLabel = ({ name, text }: InputLabelProps) => {
   return <Label htmlFor={name}>{text}</Label>;
 };
 
@@ -14,3 +14,5 @@ const Label = styled.label`
   font-weight: 600;
   margin-bottom: 5px;
 `;
+
+export default InputLabel;

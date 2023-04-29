@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { CardItem } from "../components/cardList/CardItem";
-import { Header } from "../components/common/Header";
+import CardItem from "../components/cardList/CardItem";
+import Header from "../components/common/Header";
 import { CardType, BrandType } from "../types/card";
 import styled from "styled-components";
-import { CardForm } from "../components/cardForm/CardForm";
+import CardForm from "../components/cardForm/CardForm";
 import { Link } from "react-router-dom";
 
 import { BrandSelectModal } from "../components/modal/BrandSelectModal";

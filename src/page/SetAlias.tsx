@@ -1,7 +1,9 @@
 import { useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { CardItem } from "../components/cardList/CardItem";
-import { AliasInput } from "../components/cardForm/AliasInput";
+
+import CardItem from "../components/cardList/CardItem";
+import AliasInput from "../components/cardForm/AliasInput";
+
 import { FormEvent } from "react";
 
 import styled from "styled-components";

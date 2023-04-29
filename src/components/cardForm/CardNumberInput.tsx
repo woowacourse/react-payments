@@ -1,6 +1,7 @@
-import { Container } from "../common/Container";
-import { InputLabel } from "../common/InputLabel";
-import { Input } from "../common/Input";
+import Container from "../common/Container";
+import InputLabel from "../common/InputLabel";
+import Input from "../common/Input";
+
 import { useState, useCallback, useContext } from "react";
 
 import { SubmitManageContext } from "../../contexts/SubmitManageContext";
@@ -42,7 +43,7 @@ const cannotInput = (postText: string, text: string): boolean => {
   return false;
 };
 
-export const CardNumberInput = () => {
+const CardNumberInput = () => {
   const [postText, setPostText] = useState("");
   const { isInputsValid, setIsNumbersCompleted, setIsNumbersValid } = useContext(SubmitManageContext);
   const { setNumbers, newCard } = useContext(NewCardContext);
@@ -109,3 +110,5 @@ export const CardNumberInput = () => {
     </Container>
   );
 };
+
+export default CardNumberInput;

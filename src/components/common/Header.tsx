@@ -4,7 +4,7 @@ interface HeaderProps {
   text: string;
 }
 
-export const Header = ({ text }: HeaderProps) => {
+const Header = ({ text }: HeaderProps) => {
   return (
     <Container>
       <Text>{text}</Text>
@@ -22,3 +22,5 @@ const Text = styled.div`
   font-size: 16px;
   font-weight: 400;
 `;
+
+export default Header;

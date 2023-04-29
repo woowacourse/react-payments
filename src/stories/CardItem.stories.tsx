@@ -1,5 +1,5 @@
 import { StoryFn } from "@storybook/react";
-import { CardItem } from "../components/cardList/CardItem";
+import CardItem from "../components/cardList/CardItem";
 import { CardType } from "../types/card";
 
 export default {

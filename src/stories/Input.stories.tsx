@@ -1,6 +1,17 @@
 import { StoryFn } from "@storybook/react";
-import { Input, InputProps } from "../components/common/Input";
+import Input from "../components/common/Input";
 import { CARDNUMBERS_REGEX, EXPRIYDATE_REGEX } from "../constants";
+
+interface InputProps {
+  label: string;
+  placeholder: string;
+  type: string;
+  ref?: React.RefObject<HTMLInputElement>;
+  error?: { isValid: boolean; errorMessage: string };
+  handleInput?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  $width: string;
+  $textPosition: string;
+}
 
 export default {
   title: "Input",

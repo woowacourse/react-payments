@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export interface InputProps {
+interface InputProps {
   label: string;
   placeholder: string;
   type: string;
@@ -11,7 +11,7 @@ export interface InputProps {
   $textPosition: string;
 }
 
-export const Input = ({
+const Input = ({
   label,
   placeholder,
   type,
@@ -76,3 +76,5 @@ const ErrorMessage = styled.div`
 
   font-size: 11px;
 `;
+
+export default Input;

@@ -1,8 +1,11 @@
-import { Container } from "../common/Container";
-import { Input } from "../common/Input";
-import { InputLabel } from "../common/InputLabel";
+import Container from "../common/Container";
+import Input from "../common/Input";
+import InputLabel from "../common/InputLabel";
+
 import { useRef, useCallback, useContext } from "react";
+
 import styled from "styled-components";
+
 import { SubmitManageContext } from "../../contexts/SubmitManageContext";
 
 import { PASSWORD_MAXLEGNTH, NUMBER_REGEX } from "../../constants";
@@ -20,7 +23,7 @@ const cannotInput = (text: string): boolean => {
   return text.length > PASSWORD_MAXLEGNTH || !new RegExp(NUMBER_REGEX).test(text);
 };
 
-export const PasswordInput = () => {
+const PasswordInput = () => {
   const isPassWordsCompleted = useRef<boolean[]>(new Array(passwordInfo.length).fill(false));
   const { setIsPassWordCompleted } = useContext(SubmitManageContext);
 
@@ -76,3 +79,5 @@ const HiddenPassword = styled.div`
   font-size: 9px;
   font-weight: 500;
 `;
+
+export default PasswordInput;

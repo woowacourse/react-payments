@@ -2,11 +2,11 @@ import styled from "styled-components";
 import { CardType } from "../../types/card";
 import { ValidFlagType } from "../../types/input";
 
-import { CVCInput } from "./CVCInput";
-import { CardNumberInput } from "./CardNumberInput";
-import { ExpiryDateInput } from "./ExpiryDateInput";
-import { OwnerInput } from "./OwnerInput";
-import { PasswordInput } from "./PasswordInput";
+import CVCInput from "./CVCInput";
+import CardNumberInput from "./CardNumberInput";
+import ExpiryDateInput from "./ExpiryDateInput";
+import OwnerInput from "./OwnerInput";
+import PasswordInput from "./PasswordInput";
 
 import { validateCardNumbers, validateExpiryDate } from "../../validation";
 import { useNavigate } from "react-router-dom";
@@ -18,7 +18,7 @@ import { CardsContext } from "../../contexts/CardsContext";
 import { NewCardContext } from "../../contexts/NewCardContext";
 import { SubmitManageContext } from "../../contexts/SubmitManageContext";
 
-export const CardForm = () => {
+const CardForm = () => {
   const { cards, addNewCard } = useContext(CardsContext);
   const { newCard } = useContext(NewCardContext);
 
@@ -115,3 +115,5 @@ const SubmitButton = styled.button<{ $color: string }>`
 
   color: ${(props) => props.$color};
 `;
+
+export default CardForm;

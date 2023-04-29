@@ -1,7 +1,7 @@
-import { Container } from "../common/Container";
+import Container from "../common/Container";
+import Input from "../common/Input";
+import InputLabel from "../common/InputLabel";
 
-import { Input } from "../common/Input";
-import { InputLabel } from "../common/InputLabel";
 import styled from "styled-components";
 
 import { NAME_MAXLEGNTH } from "../../constants";
@@ -17,7 +17,7 @@ const OwnerInfo = {
   $textPosition: "left",
 };
 
-export const OwnerInput = () => {
+const OwnerInput = () => {
   const { setOwner, newCard } = useContext(NewCardContext);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,3 +47,5 @@ const Row = styled.div`
   width: 100%;
   justify-content: space-between;
 `;
+
+export default OwnerInput;

@@ -1,7 +1,9 @@
-import { Container } from "../common/Container";
-import { Input } from "../common/Input";
-import { InputLabel } from "../common/InputLabel";
+import Container from "../common/Container";
+import Input from "../common/Input";
+import InputLabel from "../common/InputLabel";
+
 import styled from "styled-components";
+
 import { useCallback, useContext } from "react";
 import { SubmitManageContext } from "../../contexts/SubmitManageContext";
 
@@ -19,7 +21,7 @@ const cannotInput = (text: string): boolean => {
   return text.length > CVC_MAXLEGNTH || !new RegExp(NUMBER_REGEX).test(text);
 };
 
-export const CVCInput = () => {
+const CVCInput = () => {
   const { setIsCVCCompleted } = useContext(SubmitManageContext);
 
   const handleInput = useCallback(
@@ -78,3 +80,5 @@ const HelpIcon = styled.div`
   font-weight: 700;
   color: darkgray;
 `;
+
+export default CVCInput;
