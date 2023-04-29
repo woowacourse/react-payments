@@ -4,23 +4,17 @@ import CardLabel from '../@common/CardLabel';
 import * as Styled from './CardOwnerName.styles';
 
 interface CardOwnerNameProps {
-  cardOwnerName: string;
-  setCardOwnerName: React.Dispatch<React.SetStateAction<string>>;
+  ownerName: string;
+  isSetOwnerName: (value: string) => boolean;
 }
 
-const CardOwnerName = ({
-  cardOwnerName,
-  setCardOwnerName,
-}: CardOwnerNameProps) => {
+const CardOwnerName = ({ ownerName, isSetOwnerName }: CardOwnerNameProps) => {
   const nameRef = useRef<HTMLInputElement>(null);
 
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!(e.target instanceof HTMLInputElement)) return;
 
-    if (e.target.value.length === 0) setCardOwnerName('');
-    if (/[^A-Za-z\s]+$/.test(e.target.value)) return;
-
-    setCardOwnerName(e.target.value.toUpperCase());
+    if (!isSetOwnerName(e.target.value.toUpperCase())) return;
   };
 
   return (
@@ -35,7 +29,7 @@ const CardOwnerName = ({
           maxLength={30}
           ref={nameRef}
           onChange={handleCardInputChange}
-          value={cardOwnerName}
+          value={ownerName}
           placeholder="카드에 표시된 영어 이름을 입력하세요."
         />
       </Styled.Wrapper>

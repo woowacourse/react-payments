@@ -7,10 +7,9 @@ import {
 } from '../validations/validationCardInfo';
 import useCardNumbers from './useCardNumbers';
 import useExpiredDates from './useExpiredDates';
+import useOwnerName from './useOwnerName';
 
 const useAddCard = () => {
-  // const [expiredDates, setExpiredDates] = useState<Array<string>>(['', '']);
-  const [cardOwnerName, setCardOwnerName] = useState<string>('');
   const [securityCode, setSecurityCode] = useState<string>('');
   const [passwords, setPasswords] = useState<Array<string>>(['', '']);
   const [cardCompany, setCardCompany] = useState<string>('');
@@ -18,6 +17,7 @@ const useAddCard = () => {
 
   const { cardNumbers, isSetCardNumbers } = useCardNumbers();
   const { expiredDates, isSetExpiredDates } = useExpiredDates();
+  const { ownerName, isSetOwnerName } = useOwnerName();
 
   useEffect(() => {
     if (
@@ -38,8 +38,8 @@ const useAddCard = () => {
     isSetCardNumbers,
     expiredDates,
     isSetExpiredDates,
-    cardOwnerName,
-    setCardOwnerName,
+    ownerName,
+    isSetOwnerName,
     securityCode,
     setSecurityCode,
     passwords,

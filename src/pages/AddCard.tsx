@@ -21,8 +21,8 @@ const AddCard = ({ cards, setCards }: CardList) => {
     isSetCardNumbers,
     expiredDates,
     isSetExpiredDates,
-    cardOwnerName,
-    setCardOwnerName,
+    ownerName,
+    isSetOwnerName,
     securityCode,
     setSecurityCode,
     passwords,
@@ -37,7 +37,13 @@ const AddCard = ({ cards, setCards }: CardList) => {
   const handleSetCards = () => {
     setCards([
       ...cards,
-      { id: uuidv4(), cardNumbers, expiredDates, cardOwnerName, cardCompany },
+      {
+        id: uuidv4(),
+        cardNumbers,
+        expiredDates,
+        cardOwnerName: ownerName,
+        cardCompany,
+      },
     ]);
     navigate('/add-card-alias');
   };
@@ -63,7 +69,7 @@ const AddCard = ({ cards, setCards }: CardList) => {
             <Card
               cardNumbers={cardNumbers}
               expiredDates={expiredDates}
-              cardOwnerName={cardOwnerName}
+              cardOwnerName={ownerName}
               cardCompany={cardCompany}
               setIsModalOpen={setIsModalOpen}
             />
@@ -77,8 +83,8 @@ const AddCard = ({ cards, setCards }: CardList) => {
             isSetExpiredDates={isSetExpiredDates}
           />
           <CardOwnerName
-            cardOwnerName={cardOwnerName}
-            setCardOwnerName={setCardOwnerName}
+            ownerName={ownerName}
+            isSetOwnerName={isSetOwnerName}
           />
           <SecurityCode
             securityCode={securityCode}
