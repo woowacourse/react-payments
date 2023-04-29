@@ -3,17 +3,12 @@ import NotFound from '../pages/NotFound/NotFound';
 import Home from '../pages/Home/Home';
 import CardRegistration from '../pages/CardRegistration/CardRegistration';
 import styles from './App.module.css';
-import { useState } from 'react';
-import type { CardInfo } from '../types';
 import CardRegistrationConfirmation from '../pages/CardRegistrationConfirmation/CardRegistrationConfirmation';
 import { CardInfoProvider } from '../context/CardInfoContext';
+import useCardInfo from '../hook/useCardInfo';
 
 const App = () => {
-  const [cardInfo, setCardInfo] = useState<CardInfo[]>([]);
-
-  const registerNewCard = ({ cardNumber, expirationDate, cardOwnerName, selectedCard, cardNickName }: CardInfo) => {
-    setCardInfo([...cardInfo, { cardNumber, expirationDate, cardOwnerName, selectedCard, cardNickName }]);
-  };
+  const { cardInfo, registerNewCard } = useCardInfo();
 
   const router = createBrowserRouter([
     {
