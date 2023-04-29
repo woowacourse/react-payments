@@ -4,10 +4,12 @@ import { NextButton } from "components/ButtonStyle";
 import CardPreview from "components/CardPreview";
 import Input, { CardNickname } from "components/Input";
 import LengthLimit from "components/LengthLimit";
-import GotLost from "pages/GotLost";
-import { LIMIT_LENGTH } from "constants/limit";
 import { CardInfoContext } from "components/CardInfoProvider";
+import GotLost from "pages/GotLost";
 import useSetCardInfo from "hooks/useSetCardInfo";
+import { changeInvalidValueToBlank } from "utils/inputValidator";
+import { LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
+const { NOT_ONLY_BLANK } = VALID_INPUT;
 
 const LastPage = () => {
   const cardInfo = useContext(CardInfoContext).cardInfo;
@@ -17,7 +19,12 @@ const LastPage = () => {
   const handleNicknameChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     const validNickname = target.value.slice(0, LIMIT_LENGTH.NAME);
 
-    setNickname(validNickname);
+    setNickname(
+      changeInvalidValueToBlank(validNickname, {
+        length: LIMIT_LENGTH.NAME,
+        regex: NOT_ONLY_BLANK,
+      })
+    );
   };
 
   const { handleSave } = useSetCardInfo(nickname, "card");

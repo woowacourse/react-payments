@@ -13,6 +13,8 @@ const useSetCardInfo = (nickname: string, dataName: string) => {
   const navigate = useNavigate();
 
   const handleSave = () => {
+    if (nickname === "") return alert("카드 별칭을 입력해 주세요.");
+
     setData(allCardInfo, dataName);
     navigate("/");
   };
