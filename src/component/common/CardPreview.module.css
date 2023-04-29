@@ -9,6 +9,8 @@
 
   border-radius: 5px;
   font-size: small;
+
+  cursor: pointer;
 }
 
 .chip {

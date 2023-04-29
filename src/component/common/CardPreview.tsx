@@ -3,11 +3,13 @@ import styles from "./CardPreview.module.css";
 
 interface CardPreviewProps {
   card: CreditCard;
+  openCardCoModal?: () => void;
 }
 
-export default function CardPreview(props: CardPreviewProps) {
-  const { card } = props;
-
+export default function CardPreview({
+  card,
+  openCardCoModal,
+}: CardPreviewProps) {
   const previewNumber = card.cardNumber.map((number, index) => {
     return 1000 > number && number > 9999
       ? "   "
@@ -17,7 +19,7 @@ export default function CardPreview(props: CardPreviewProps) {
   });
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onClick={openCardCoModal}>
       <div className={styles.chip}></div>
       <p className={styles.number}>{previewNumber}</p>
       <span className={styles.name}>
