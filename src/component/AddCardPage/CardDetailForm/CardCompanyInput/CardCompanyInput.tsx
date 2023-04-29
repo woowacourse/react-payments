@@ -22,7 +22,7 @@ function CardCompanyInput({ inputRefs }: CardCompanyInputProps) {
       <St.InputSection>
         <St.Input
           type="text"
-          value={cardCompany || ""}
+          defaultValue={cardCompany || ""}
           required
           autoFocus
           placeholder="카드사 선택"

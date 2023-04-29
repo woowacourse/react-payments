@@ -35,7 +35,7 @@ function CardPasswordInput({ inputRefs }: CardPasswordInputProps) {
             value={cardPassword[1]}
             minLength={1}
             required
-            ref={(ref) => (inputRefs.current[5] = ref)}
+            ref={(ref) => (inputRefs.current[6] = ref)}
             onInput={changeCardPassword}
           />
         </St.InputSection>
