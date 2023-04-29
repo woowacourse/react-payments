@@ -5,5 +5,4 @@ export * from './Header';
 export * from './Input/Input';
 export * from './InputBox';
 export * from './ErrorMessage';
-export * from './Label';
-export * from './CardCompanyList';
+export * from './Label/Label';

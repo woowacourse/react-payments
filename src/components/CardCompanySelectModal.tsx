@@ -1,7 +1,7 @@
 import { Dispatch, useRef } from 'react';
 import styled from 'styled-components';
 
-import { CardCompanyList } from './common';
+import { CardCompanyList } from './CardCompanyList';
 import { useClickEvent } from '../hooks/useClickEvent';
 
 interface ModalProps {
