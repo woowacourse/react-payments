@@ -5,6 +5,23 @@ const meta = {
   title: 'Payments/Cards/CardItem',
   component: CardItem,
   tags: ['autodocs'],
+  argTypes: {
+    cardNumber: {
+      control: {
+        type: 'text',
+        maxLength: 16,
+      },
+    },
+    expirationDate: {
+      control: { type: 'object' },
+    },
+    ownerName: {
+      control: {
+        type: 'text',
+        maxLength: 20,
+      },
+    },
+  },
 } satisfies Meta<typeof CardItem>;
 
 export default meta;

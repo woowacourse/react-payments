@@ -1,13 +1,21 @@
 import type { Meta } from '@storybook/react';
 import { userEvent, within } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
-import { useCardAddForm } from '../../hooks/cards/useCardAddForm';
+import { ModalProvider } from '../../contexts/ModalContext';
 import CardIssuer from '../../components/CardAddForm/CardIssuer/CardIssuer';
+import { useCardAddForm } from '../../hooks/cards/useCardAddForm';
 
 const meta = {
   title: 'Payments/Cards/CardIssuerInput',
   component: CardIssuer,
   tags: ['autodocs'],
+  decorators: [
+    (Story) => (
+      <ModalProvider>
+        <Story />
+      </ModalProvider>
+    ),
+  ],
 } satisfies Meta<typeof CardIssuer>;
 
 export default meta;

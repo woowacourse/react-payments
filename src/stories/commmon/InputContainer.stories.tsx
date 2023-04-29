@@ -30,12 +30,6 @@ const meta = {
     },
     characterCounter: {
       control: { type: 'object' },
-      defaultValue: {
-        characterCounter: {
-          currentCount: 0,
-          maxCount: 20,
-        },
-      },
     },
   },
 } satisfies Meta<typeof InputContainer>;
