@@ -11,7 +11,7 @@ export function CardListContainer() {
   return (
     <>
       {!cardList.length && <Style.Caption>새로운 카드를 등록해주세요.</Style.Caption>}
-      <Style.CardListWrapper>
+      <Style.CardListContainer>
         {cardList.map((card) => {
           const { id, alias, cardCompany, cardNumber, expirationDate, ownerName } = card;
 
@@ -28,13 +28,13 @@ export function CardListContainer() {
           );
         })}
         <Style.AddCardButton onClick={() => navigate('/register')}>+</Style.AddCardButton>
-      </Style.CardListWrapper>
+      </Style.CardListContainer>
     </>
   );
 }
 
 const Style = {
-  CardListWrapper: styled.div`
+  CardListContainer: styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;

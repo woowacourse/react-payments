@@ -69,6 +69,8 @@ const Style = {
         opacity: 1;
       }
     }
+
+    z-index: 999;
   `,
 
   Container: styled.dialog<{ open: boolean }>`
@@ -99,6 +101,8 @@ const Style = {
         transform: translateY(0);
       }
     }
+
+    z-index: 1000;
   `,
 
   ButtonWrapper: styled.div`
