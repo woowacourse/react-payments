@@ -6,15 +6,10 @@ import {
   isCorrectSecurityCode,
 } from '../validations/validationCardInfo';
 import useCardNumbers from './useCardNumbers';
+import useExpiredDates from './useExpiredDates';
 
 const useAddCard = () => {
-  // const [cardNumbers, setCardNumbers] = useState<Array<string>>([
-  //   '',
-  //   '',
-  //   '',
-  //   '',
-  // ]);
-  const [expiredDates, setExpiredDates] = useState<Array<string>>(['', '']);
+  // const [expiredDates, setExpiredDates] = useState<Array<string>>(['', '']);
   const [cardOwnerName, setCardOwnerName] = useState<string>('');
   const [securityCode, setSecurityCode] = useState<string>('');
   const [passwords, setPasswords] = useState<Array<string>>(['', '']);
@@ -22,6 +17,7 @@ const useAddCard = () => {
   const [isDisabledForm, setIsDisabledForm] = useState(true);
 
   const { cardNumbers, isSetCardNumbers } = useCardNumbers();
+  const { expiredDates, isSetExpiredDates } = useExpiredDates();
 
   useEffect(() => {
     if (
@@ -41,7 +37,7 @@ const useAddCard = () => {
     cardNumbers,
     isSetCardNumbers,
     expiredDates,
-    setExpiredDates,
+    isSetExpiredDates,
     cardOwnerName,
     setCardOwnerName,
     securityCode,

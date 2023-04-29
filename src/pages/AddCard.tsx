@@ -20,7 +20,7 @@ const AddCard = ({ cards, setCards }: CardList) => {
     cardNumbers,
     isSetCardNumbers,
     expiredDates,
-    setExpiredDates,
+    isSetExpiredDates,
     cardOwnerName,
     setCardOwnerName,
     securityCode,
@@ -74,7 +74,7 @@ const AddCard = ({ cards, setCards }: CardList) => {
           />
           <ExpiredDate
             expiredDates={expiredDates}
-            setExpiredDates={setExpiredDates}
+            isSetExpiredDates={isSetExpiredDates}
           />
           <CardOwnerName
             cardOwnerName={cardOwnerName}

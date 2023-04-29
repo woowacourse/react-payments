@@ -13,5 +13,6 @@ type Story = StoryObj<typeof meta>;
 export const SecurityCodeStory: Story = {
   args: {
     expiredDates: ['02', '12'],
+    isSetExpiredDates: () => true,
   },
 };

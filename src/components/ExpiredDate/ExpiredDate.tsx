@@ -5,10 +5,10 @@ import * as Styled from './ExpiredDate.styles';
 
 interface ExpiredDateProps {
   expiredDates: Array<string>;
-  setExpiredDates: React.Dispatch<React.SetStateAction<Array<string>>>;
+  isSetExpiredDates: (order: number, value: string) => boolean;
 }
 
-const ExpiredDate = ({ expiredDates, setExpiredDates }: ExpiredDateProps) => {
+const ExpiredDate = ({ expiredDates, isSetExpiredDates }: ExpiredDateProps) => {
   const cardExpiredDateRefs: Record<
     number,
     React.RefObject<HTMLInputElement>
@@ -21,32 +21,12 @@ const ExpiredDate = ({ expiredDates, setExpiredDates }: ExpiredDateProps) => {
     if (!(e.target instanceof HTMLInputElement)) return;
     const currentOrder = Number(e.target.dataset['order']);
 
-    validateDate(currentOrder);
-  };
+    if (!isSetExpiredDates(currentOrder, e.target.value)) return;
 
-  const validateDate = (currentOrder: number) => {
-    const currentRef = cardExpiredDateRefs[currentOrder];
-
-    if (currentRef.current === null) return;
-
-    if (/[^0-9]/g.test(currentRef.current.value)) {
-      return;
-    }
-
-    if (currentRef.current.value.length === 2 && currentOrder === 0) {
+    if (cardExpiredDateRefs[currentOrder].current?.value.length === 2) {
+      if (currentOrder === 1) return;
       cardExpiredDateRefs[currentOrder + 1].current?.focus();
-
-      if (!/^(0[1-9]|1[0-2])/g.test(currentRef.current.value)) {
-        setExpiredDates({ ...expiredDates, 0: '' });
-        currentRef.current.focus();
-        return;
-      }
     }
-
-    setExpiredDates({
-      ...expiredDates,
-      [currentOrder]: currentRef.current.value,
-    });
   };
 
   return (
