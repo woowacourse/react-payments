@@ -52,6 +52,10 @@ const S = {
     & > header {
       margin-bottom: 4px;
     }
+
+    & > header + div:nth-child(2) {
+      cursor: pointer;
+    }
   `,
 };
 

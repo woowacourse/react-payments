@@ -87,7 +87,7 @@ const S = {
         ? "var(--darken-color)"
         : CARD_COLORS[props.cardCompany]};
     box-shadow: rgba(0, 0, 0, 0.25) 3px 3px 5px;
-    cursor: pointer;
+    cursor: default;
   `,
 
   CardCompany: styled.p`
