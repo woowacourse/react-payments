@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './AddCardButton.module.css';
 import { GrAdd } from 'react-icons/gr';
 import { Link } from 'react-router-dom';
