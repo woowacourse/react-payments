@@ -13,8 +13,8 @@ export const CardList = () => {
       {!cards.length && <GuideText>새로운 카드를 등록해주세요.</GuideText>}
       <List>
         {cards.map((card) => (
-          <li>
-            <CardItem key={card.numbers} card={card} />
+          <li key={card.numbers}>
+            <CardItem card={card} />
             <Alias>{card.alias}</Alias>
           </li>
         ))}
