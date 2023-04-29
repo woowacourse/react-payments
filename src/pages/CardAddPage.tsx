@@ -1,11 +1,18 @@
+import { useEffect } from 'react';
+import { useModalContext } from '../contexts/ModalContext';
 import Header from '../components/common/Header/Header';
 import CardItem from '../components/CardItem/CardItem';
 import CardAddForm from '../components/CardAddForm/CardAddForm';
 import { useCardAddForm } from '../hooks/cards/useCardAddForm';
 
 function CardAddPage() {
+  const { resetModal } = useModalContext();
   const { cardInformation, inputError, updateInputValue, updateInputError, handleSubmit } =
     useCardAddForm();
+
+  useEffect(() => {
+    return () => resetModal();
+  }, [resetModal]);
 
   return (
     <>
