@@ -35,6 +35,7 @@ const CardNamePage = () => {
             autoFocus
             value={cardName.cardName}
             onChange={handleCardName}
+            required
           ></CardNameInput>
           <AddButton>등록</AddButton>
         </form>
