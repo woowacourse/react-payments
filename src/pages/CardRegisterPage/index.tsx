@@ -19,13 +19,21 @@ const CardRegisterPage = ({ registerCard }: Props) => {
   return (
     <>
       <Header title="카드 추가" previousButton />
-      <main className={styles.formContainer}>
+      <main className={styles.main}>
         <CardFormProvider>
-          <CardItem />
-          <button type="button" onClick={openModal}>
-            카드사 설정하기
-          </button>
-          <CardRegisterForm registerCard={registerCard} />
+          <section className={styles.cardSection}>
+            <CardItem />
+            <button
+              type="button"
+              className={styles.companySelectButton}
+              onClick={openModal}
+            >
+              카드사 설정하기
+            </button>
+          </section>
+          <section className={styles.formSection}>
+            <CardRegisterForm registerCard={registerCard} />
+          </section>
           {toggleModal && <CardCompanyModal onClose={closeModal} />}
         </CardFormProvider>
       </main>
