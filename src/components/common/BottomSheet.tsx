@@ -16,6 +16,8 @@ const Backdrop = styled.div<BackdropProps>`
   bottom: 0;
 
   background: rgba(0, 0, 0, 0.4);
+
+  z-index: 1000;
 `;
 
 const StyledBottomSheet = styled.div`
