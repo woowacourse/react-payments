@@ -9,7 +9,7 @@ const CardOwnerInput = () => {
         <Label htmlFor="owner">카드 소유자 이름 (선택)</Label>
         <Label>0/30</Label>
       </Styled.LabelWrapper>
-      <Styled.Wrapper marginTop="10px">
+      <Styled.Box marginTop="10px">
         <Input
           id="owner"
           type="text"
@@ -18,14 +18,14 @@ const CardOwnerInput = () => {
           placeholder="이름을 입력해주세요."
           textAlign="center"
         />
-      </Styled.Wrapper>
+      </Styled.Box>
     </p>
   );
 };
 
 export default CardOwnerInput;
 
-const Wrapper = styled(InputBox)``;
+const Box = styled(InputBox)``;
 
 const LabelWrapper = styled.div`
   display: flex;
@@ -33,6 +33,6 @@ const LabelWrapper = styled.div`
 `;
 
 const Styled = {
-  Wrapper,
+  Box,
   LabelWrapper,
 };

@@ -6,7 +6,7 @@ const ExpirationDateInput = () => {
   return (
     <p>
       <Label htmlFor="expiration-date">만료일</Label>
-      <Styled.Wrapper marginTop="10px">
+      <Styled.Box marginTop="10px">
         <Input
           id="expiration-date"
           type="text"
@@ -18,14 +18,14 @@ const ExpirationDateInput = () => {
         />
         <Slash />
         <Input type="text" width="65px" maxLength={2} placeholder="YY" textAlign="left" inputMode="numeric" />
-      </Styled.Wrapper>
+      </Styled.Box>
     </p>
   );
 };
 
 export default ExpirationDateInput;
 
-const Wrapper = styled(InputBox)`
+const Box = styled(InputBox)`
   width: 140px;
 `;
 
@@ -37,7 +37,7 @@ const SlashWrapper = styled.div`
 `;
 
 const Styled = {
-  Wrapper,
+  Box,
   SlashWrapper,
 };
 
