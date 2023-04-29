@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import { CARD_COMPANYS } from "../constant";
+import { useCardAction } from "../context/CardContext";
 
 interface CardLogoProps {
-  onClick: React.MouseEventHandler;
+  // onClick: React.MouseEventHandler;
   cardName: string;
 }
 
@@ -23,9 +24,20 @@ const CardTitle = styled.p`
   font-size: 12px;
 `;
 
-export default function CardLogo({ onClick, cardName }: CardLogoProps) {
+export default function CardLogo({ cardName }: CardLogoProps) {
+  const cardAction = useCardAction();
+  const setColor = () => {
+    cardAction({
+      type: "SET_CARD_COLOR",
+      color: CARD_COMPANYS[cardName].backgroundColor,
+    });
+    cardAction({
+      type: "SET_CARD_TITLE",
+      title: CARD_COMPANYS[cardName].title,
+    });
+  };
   return (
-    <Wrapper onClick={onClick}>
+    <Wrapper onClick={setColor}>
       <Image src={CARD_COMPANYS[cardName].src} />
       <CardTitle>{CARD_COMPANYS[cardName].title}</CardTitle>
     </Wrapper>

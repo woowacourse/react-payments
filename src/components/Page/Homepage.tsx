@@ -49,8 +49,8 @@ export default function Homepage({ onClick, cardList }: HomePageProps) {
       <CardWrapper>
         {cardList.map((card: CardInfo) => (
           <Card
-            cardColor={CARD_COMPANYS[card.cardTitle].backgroundColor}
-            cardTitle={CARD_COMPANYS[card.cardTitle].title}
+            cardColor={CARD_COMPANYS[card.cardTitle]?.backgroundColor}
+            cardTitle={CARD_COMPANYS[card.cardTitle]?.title}
             key={`${card.owner}${card.cardNumber.third}`}
             owner={card.owner}
             cardNumberSet={Object.values(card.cardNumber)}

@@ -2,6 +2,7 @@ import { useState } from "react";
 import AddCardPage from "./components/Page/AddCardPage";
 import Homepage from "./components/Page/Homepage";
 import { LOCAL_STORAGE_CARD_KEY } from "./constant";
+import { CardContextProvider } from "./context/CardContext";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 import "./styles/index.css";
 import { CardInfo } from "./types";
@@ -55,16 +56,18 @@ export default function App() {
   };
 
   return (
-    <div className="app">
-      {pageIndex === 0 && (
-        <Homepage cardList={cardList} onClick={() => setPageIndex(1)} />
-      )}
-      {pageIndex === 1 && (
-        <AddCardPage
-          onClick={() => setPageIndex(0)}
-          onSubmit={onCardInfoSubmit}
-        />
-      )}
-    </div>
+    <CardContextProvider>
+      <div className="app">
+        {pageIndex === 0 && (
+          <Homepage cardList={cardList} onClick={() => setPageIndex(1)} />
+        )}
+        {pageIndex === 1 && (
+          <AddCardPage
+            onClick={() => setPageIndex(0)}
+            onSubmit={onCardInfoSubmit}
+          />
+        )}
+      </div>
+    </CardContextProvider>
   );
 }

@@ -12,7 +12,7 @@ type Story = StoryObj<typeof CardLogo>;
 
 export const CardType: Story = {
   args: {
-    onClick: () => {},
+    // onClick: () => {},
     cardName: "BC",
   },
 };

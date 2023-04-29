@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useCardState } from "../context/CardContext";
 
 interface CardProps {
   cardColor: string;
@@ -75,17 +76,20 @@ const StyledExpiracy = styled.span`
 `;
 
 const ENCRYPT_INDEX = 2;
-
+//
+//cardColor => cardContext.cardColor
+//cardTitle => cardContext.cardTitle
 export default function Card({
-  cardColor,
-  cardTitle,
+  // const { cardNumber, cardOwnerName, validDate, cardKind, setCardKind } =
+  //  useContext(CardContext);
   cardNumberSet,
   owner,
   expiracy,
 }: CardProps) {
+  const cardState = useCardState();
   return (
-    <StyledCard cardColor={cardColor}>
-      <StyledTitle>{cardTitle}</StyledTitle>
+    <StyledCard cardColor={cardState.color}>
+      <StyledTitle>{cardState.title}</StyledTitle>
       <StyledMagnet />
       <div>
         <StyledCardNumber>
