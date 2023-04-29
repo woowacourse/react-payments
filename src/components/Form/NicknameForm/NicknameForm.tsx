@@ -38,7 +38,7 @@ const NicknameForm = () => {
         ref={nicknameInputRef}
         type="text"
         center={true}
-        maxLength={6}
+        maxLength={8}
         value={cardInfo.nickname}
         name="nickname"
         onChange={onChange}
