@@ -27,8 +27,8 @@ const LastPage = () => {
     );
   };
 
-  const { handleSave } = useSetCardInfo(nickname, "card");
-
+  const { handleSave, isCompleted } = useSetCardInfo(nickname, "card");
+  console.log(isCompleted);
   const handleEnterKeyDown: KeyboardEventHandler<HTMLInputElement> = ({
     key,
   }) => {
@@ -39,6 +39,9 @@ const LastPage = () => {
     <>
       {cardInfo.cardCompany !== "" ? (
         <S.Wrapper>
+          {isCompleted && (
+            <S.CompletionMessage>카드 등록 완료!</S.CompletionMessage>
+          )}
           <CardPreview cardInfo={cardInfo} />
           <Input
             autoFocus
@@ -68,6 +71,8 @@ const S = {
   CompletionMessage: styled.p`
     position: fixed;
     top: 110px;
+    left: 50%;
+    transform: translateX(-50%);
     font-size: 24px;
     text-align: center;
   `,
