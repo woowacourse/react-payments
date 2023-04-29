@@ -14,6 +14,10 @@ export const isValidMonth = (input: string) => {
   return Number(input) >= 1 && Number(input) <= 12;
 };
 
+export const isOverMaxLength = (input: string, maxLength: number) => {
+  return input.length > maxLength;
+};
+
 export const isValidYear = (input: string) => {
   return /^[0-9]{2}$|^$/.test(input);
 };

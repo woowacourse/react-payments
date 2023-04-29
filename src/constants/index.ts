@@ -10,6 +10,7 @@ export const SECURITY_CODE_SIZE = 3;
 export const PASSWORD_SIZE = 2;
 export const PASSWORD_START_INDEX = 2;
 export const PASSWORD_TEXT = '•';
+export const CARD_ALIAS_SIZE = 20;
 
 export const IMAGE_PATH = {
   BC: `${process.env.PUBLIC_URL}/assets/logo-bc.svg`,
@@ -51,4 +52,5 @@ export const ERROR = {
   INVALID_OWNER_NAME: `유효하지 않은 이름입니다. 최대 ${MAX_NAME_SIZE}자의 영문으로 입력해주세요.`,
   INVALID_SECURITY_CODE: `유효하지 않은 보안코드입니다. ${SECURITY_CODE_SIZE}자리의 숫자를 입력해주세요.`,
   INVALID_PASSWORD: `유효하지 않은 비밀번호입니다. ${PASSWORD_SIZE}자리의 숫자를 입력해주세요.`,
+  INVALID_CARD_ALIAS: `카드 별칭은 최대 ${CARD_ALIAS_SIZE}자까지 입력 가능합니다.`,
 } as const;

@@ -1,14 +1,28 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Input } from '../input/Input';
 import { Button } from '../Button/Button';
-import { cardDataService } from '../../domains/cardDataService';
 import { CardViewer } from '../CardViewer';
+import { cardDataService } from '../../domains/cardDataService';
+import { isOverMaxLength } from '../../utils/validator';
+import { CARD_ALIAS_SIZE, ERROR } from '../../constants';
 
 export function CardAliasAddForm() {
   const navigate = useNavigate();
+  const [cardAlias, setCardAlias] = useState('');
   const recentRegisteredCard = cardDataService.getRecentRegisteredCard();
   const { cardCompany, cardNumber, expirationDate, ownerName } = recentRegisteredCard;
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (isOverMaxLength(e.target.value, CARD_ALIAS_SIZE)) {
+      alert(ERROR.INVALID_CARD_ALIAS);
+
+      e.target.value = '';
+    }
+
+    setCardAlias(e.target.value);
+  };
 
   const handleAliasSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -28,6 +42,7 @@ export function CardAliasAddForm() {
       />
       <Style.Form onSubmit={handleAliasSubmit}>
         <Input
+          value={cardAlias}
           designType='underline'
           name='alias'
           placeholder='카드 별칭을 입력해주세요.(선택)'
@@ -35,7 +50,11 @@ export function CardAliasAddForm() {
           autoFocus
           width={'240px'}
           height={'45px'}
+          onChange={handleInputChange}
         />
+        <Style.AliasLength aria-label='카드 별칭 입력 길이 표시'>
+          {cardAlias.length}/{CARD_ALIAS_SIZE}
+        </Style.AliasLength>
         <Style.ButtonWrapper>
           <Button designType='text'>확인</Button>
         </Style.ButtonWrapper>
@@ -61,6 +80,8 @@ const Style = {
 
     width: 100%;
     height: 100%;
+
+    position: relative;
     margin-top: 100px;
   `,
 
@@ -70,5 +91,14 @@ const Style = {
 
     width: 100%;
     margin-top: 270px;
+  `,
+
+  AliasLength: styled.span`
+    position: absolute;
+    top: 15px;
+    left: 290px;
+
+    font-size: 12px;
+    color: #727272;
   `,
 };
