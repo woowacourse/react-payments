@@ -12,21 +12,14 @@ interface Props {
 const Modal = ({ closeButtonName, children, modalStyle }: Props) => {
   const setIsModalOpen = useContext(ModalState);
 
-  const handleModalBackdrop = () => {
-    setIsModalOpen(false);
-  };
+  const handleModalClose = () => setIsModalOpen(false);
 
   return (
     <>
-      <S.ModalBackdrop
-        className="modal-backdrop"
-        onClick={handleModalBackdrop}
-      />
+      <S.ModalBackdrop className="modal-backdrop" onClick={handleModalClose} />
       <S.Modal className="modal" modalStyle={modalStyle}>
         {children}
-        <CloseButton onClick={handleModalBackdrop}>
-          {closeButtonName}
-        </CloseButton>
+        <CloseButton onClick={handleModalClose}>{closeButtonName}</CloseButton>
       </S.Modal>
     </>
   );

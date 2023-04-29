@@ -1,5 +1,5 @@
 import { CardInfoContext } from "../components/CardInfoProvider";
-import { FormEvent, useContext } from "react";
+import { useContext } from "react";
 
 interface FormData {
   [k: string]: FormDataEntryValue;
@@ -8,13 +8,9 @@ interface FormData {
 const useSetCardInfo = (dataName: string) => {
   const allCardInfo = useContext(CardInfoContext).cardInfo;
 
-  const handleFormDataSubmit = (event: FormEvent) => {
-    event.preventDefault();
+  const handleSave = () => setData(allCardInfo, dataName);
 
-    setData(allCardInfo, dataName);
-  };
-
-  return { handleFormDataSubmit };
+  return { handleSave };
 };
 
 const setData = (formData: FormData, dataName: string) => {

@@ -16,11 +16,13 @@ import { useNavigate } from "react-router";
 
 const CardRegisterForm = () => {
   const allCardInfo = useContext(CardInfoContext).cardInfo;
+
   const [isModalOpen, setIsModalOpen] = useState(true);
-  const navigate = useNavigate();
 
   const { isFormFilled } = useRequiredCardInfo();
-  const handleFormSubmit = () => navigate("/completion");
+
+  const navigate = useNavigate();
+  const handlePageChange = () => navigate("/completion");
 
   return (
     <S.Wrapper>
@@ -32,7 +34,7 @@ const CardRegisterForm = () => {
         {isModalOpen && <CardCompanyModal />}
       </ModalState.Provider>
 
-      <form onSubmit={handleFormSubmit}>
+      <form onSubmit={handlePageChange}>
         <CardNumberInput />
         <ExpirationDateInput />
         <NameInput />

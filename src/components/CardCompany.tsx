@@ -10,7 +10,7 @@ interface Props {
 const CardCompany = ({ cardCompanyName }: Props) => {
   const setCardCompany = useContext(CardInfoContext).setCardInfo;
 
-  const handleCompanySelect = ({
+  const handleCompanySelection = ({
     target,
   }: SyntheticEvent<HTMLImageElement>) => {
     if (!(target instanceof HTMLImageElement)) return;
@@ -28,7 +28,7 @@ const CardCompany = ({ cardCompanyName }: Props) => {
       <S.Logo
         src={`${process.env.PUBLIC_URL}/assets/${CARD_COMPANIES[cardCompanyName]}.svg`}
         alt={cardCompanyName}
-        onClick={handleCompanySelect}
+        onClick={handleCompanySelection}
       />
       <S.CardCompany>{cardCompanyName}</S.CardCompany>
     </S.Wrapper>
