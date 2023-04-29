@@ -53,7 +53,7 @@ export function CardRegisterForm() {
       password,
     });
 
-    navigate('/add-alias');
+    navigate('/add-alias', { state: { cardId: id } });
   };
 
   const moveFocusToExpirationDate = () => {

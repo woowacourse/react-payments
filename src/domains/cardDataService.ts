@@ -3,15 +3,17 @@ import { Card } from '../types';
 const LOCAL_STORAGE_KEY = { CARD_LIST: 'cardList' };
 
 export const cardDataService = {
+  getCard(id: string): Card | undefined {
+    const storedCardList = this.getCardList();
+    for (let index = 0; index < storedCardList.length; index++) {
+      if (id === storedCardList[index].id) return storedCardList[index];
+    }
+  },
+
   getCardList(): Card[] {
     const rawCardList = localStorage.getItem(LOCAL_STORAGE_KEY.CARD_LIST);
 
     return JSON.parse(rawCardList ?? '[]');
-  },
-
-  getRecentRegisteredCard(): Card {
-    const storedCardList = this.getCardList();
-    return storedCardList[0];
   },
 
   addNewCard(card: Card) {
@@ -20,11 +22,15 @@ export const cardDataService = {
     localStorage.setItem(LOCAL_STORAGE_KEY.CARD_LIST, JSON.stringify([card, ...storedCardList]));
   },
 
-  addAliasToRecentCard(alias: string) {
+  addAliasToCard(id: string, alias: string) {
     const storedCardList = this.getCardList();
 
-    if (storedCardList.length === 0) return;
-    storedCardList[0].alias = alias;
+    for (let index = 0; index < storedCardList.length; index++) {
+      if (id === storedCardList[index].id) {
+        storedCardList[index].alias = alias;
+        break;
+      }
+    }
 
     localStorage.setItem(LOCAL_STORAGE_KEY.CARD_LIST, JSON.stringify(storedCardList));
   },

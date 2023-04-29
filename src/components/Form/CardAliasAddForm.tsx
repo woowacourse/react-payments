@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Input } from '../input/Input';
 import { Button } from '../Button/Button';
@@ -10,9 +10,16 @@ import { CARD_ALIAS_SIZE, ERROR } from '../../constants';
 
 export function CardAliasAddForm() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [cardAlias, setCardAlias] = useState('');
-  const recentRegisteredCard = cardDataService.getRecentRegisteredCard();
-  const { cardCompany, cardNumber, expirationDate, ownerName } = recentRegisteredCard;
+
+  if (!location.state) return null;
+  const cardId = location.state.cardId;
+
+  const card = cardDataService.getCard(cardId);
+
+  if (!card) return null;
+  const { cardCompany, cardNumber, expirationDate, ownerName } = card;
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (isOverMaxLength(e.target.value, CARD_ALIAS_SIZE)) {
@@ -28,7 +35,7 @@ export function CardAliasAddForm() {
     e.preventDefault();
     if (!(e.target instanceof HTMLFormElement)) return;
 
-    cardDataService.addAliasToRecentCard(e.target.alias.value);
+    cardDataService.addAliasToCard(cardId, e.target.alias.value);
     navigate('/');
   };
 
