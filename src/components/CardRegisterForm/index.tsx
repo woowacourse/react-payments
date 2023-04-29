@@ -7,9 +7,10 @@ import ExpiredDateField from './ExpiredDataField';
 import OwnerField from './OwnerField';
 import CvcField from './CvcField';
 import PasswordField from './PasswordField';
-
 import useCardRegisterForm from './hooks/useCardRegisterForm';
-import { isValidExpiredDate } from './utils/validation';
+import useCardFormValidation from './hooks/useCardFormValidation';
+
+import useCardFormValue from '../../hooks/useCardFormValue';
 import type { CardData } from '../../types/card';
 
 import styles from './cardRegisterForm.module.css';
@@ -19,52 +20,50 @@ interface Props {
 }
 
 const CardRegisterForm = ({ registerCard }: Props) => {
-  const navigate = useNavigate();
-
   const inputRefs = Array.from({ length: 10 }).map(() =>
     useRef<HTMLInputElement>(null),
   );
+  const navigate = useNavigate();
+
+  const { number, owner } = useCardFormValue();
+  const { isValidCardData, validateCompany, validateExpiredDate } =
+    useCardFormValidation();
   const { handleNumberChange, handleOwnerChange } =
     useCardRegisterForm(inputRefs);
 
-  //const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
-  //  event.preventDefault();
+  const handleFormSubmit: FormEventHandler<HTMLFormElement> = (event) => {
+    event.preventDefault();
 
-  //  if (!company) {
-  //    alert('현재 카드사를 선택하지 않았습니다. 카드사를 선택해주세요.');
-  //    openModal();
-  //    return;
-  //  }
+    try {
+      const validCompany = validateCompany();
+      const validExpiredDate = validateExpiredDate();
 
-  //  if (!isValidExpiredDate(Number(expiredMonth), Number(expiredYear))) {
-  //    alert('유효한 만료일이 아닙니다. 다시 입력해주세요.');
-  //    inputRefs[4].current?.focus();
-  //    return;
-  //  }
+      const cardData = {
+        company: validCompany,
+        number: { first: number.first, second: number.second },
+        expiredDate: validExpiredDate,
+        owner,
+      };
 
-  //  const cardData = {
-  //    company,
-  //    cardNumber1,
-  //    cardNumber2,
-  //    expiredMonth,
-  //    expiredYear,
-  //    owner: owner.trim(),
-  //  };
-
-  //  registerCard(cardData);
-  //  navigate('/');
-  //};
+      registerCard(cardData);
+      navigate('/');
+    } catch (error) {
+      if (error instanceof Error) {
+        alert(error.message);
+      }
+    }
+  };
 
   return (
-    <form className={styles.form}>
+    <form className={styles.form} onSubmit={handleFormSubmit}>
       <NumberField handleNumberChange={handleNumberChange} />
       <ExpiredDateField handleNumberChange={handleNumberChange} />
       <OwnerField handleOwnerChange={handleOwnerChange} />
       <CvcField handleNumberChange={handleNumberChange} />
       <PasswordField handleNumberChange={handleNumberChange} />
-      {/*<div className={styles.submitButton}>
+      <div className={styles.submitButton}>
         {isValidCardData && <button tabIndex={11}>다음</button>}
-      </div>*/}
+      </div>
     </form>
   );
 };

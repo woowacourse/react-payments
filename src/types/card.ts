@@ -16,9 +16,9 @@ interface CardPassword {
   second: string;
 }
 export interface CardInfo {
+  company?: CompanyName;
   number: CardNumber;
   expiredDate: ExpiredDate;
-  company?: CompanyName;
   owner: string;
   cvc: string;
   password: CardPassword;

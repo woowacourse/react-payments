@@ -7,17 +7,6 @@ import { InputAction } from '../../../contexts/CardFormContext';
 const useCardRegisterForm = (inputRefs: RefObject<HTMLInputElement>[]) => {
   const { inputAction } = useCardFormAction();
 
-  //const isValidCardData =
-  //  cardNumber1.length === 4 &&
-  //  cardNumber2.length === 4 &&
-  //  cardNumber3.length === 4 &&
-  //  cardNumber4.length === 4 &&
-  //  expiredMonth.length === 2 &&
-  //  expiredYear.length === 2 &&
-  //  cvc.length === 3 &&
-  //  cardPassword1.length === 1 &&
-  //  cardPassword2.length === 1;
-
   const autoFocusNextInput = (target: HTMLInputElement) => {
     const { value, maxLength, tabIndex } = target;
 
