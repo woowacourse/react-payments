@@ -7,7 +7,7 @@ import useModal from '../../hooks/useModal';
 
 import styles from './cardRegisterPage.module.css';
 
-const CardRegisterPage = () => {
+const CardInfoRegisterPage = () => {
   const { toggleModal, openModal, closeModal } = useModal();
 
   return (
@@ -33,4 +33,4 @@ const CardRegisterPage = () => {
   );
 };
 
-export default CardRegisterPage;
+export default CardInfoRegisterPage;

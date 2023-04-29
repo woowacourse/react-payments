@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router';
 
 import HoldingCardsPage from './HoldingCardsPage';
-import CardRegisterPage from './CardRegisterPage';
+import CardInfoRegisterPage from './CardInfoRegisterPage';
+import CardNameRegisterPage from './CardNameRegisterPage';
+import CardPage from './contexts/CardForm';
 
 import Layout from '../components/common/Layout';
 import type { CardData } from '../types/card';
-import CardNameRegisterPage from './CardNameRegisterPage';
-import CardFormProvider from '../contexts/CardFormContext';
 
 function App() {
   const [cards, setCards] = useState<CardData[]>([]);
@@ -31,18 +31,18 @@ function App() {
   };
 
   return (
-    <CardFormProvider>
-      <Routes>
-        <Route element={<Layout />}>
-          <Route path="/" element={<HoldingCardsPage cards={cards} />} />
+    <Routes>
+      <Route element={<Layout />}>
+        <Route path="/" element={<HoldingCardsPage cards={cards} />} />
+        <Route element={<CardPage />}>
+          <Route path="card-info-register" element={<CardInfoRegisterPage />} />
           <Route
-            path="card-register"
-            element={<CardRegisterPage />}
+            path="card-name-register"
+            element={<CardNameRegisterPage registerCard={registerCard} />}
           />
-          <Route path="card-name-register" element={<CardNameRegisterPage registerCard={registerCard}  />} />
         </Route>
-      </Routes>
-    </CardFormProvider>
+      </Route>
+    </Routes>
   );
 }
 

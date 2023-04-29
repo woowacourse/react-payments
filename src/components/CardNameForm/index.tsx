@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import type { FormEventHandler } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Input from '../common/Input';
 
@@ -7,7 +8,6 @@ import useCardFormValue from '../../hooks/useCardFormValue';
 import type { CardData } from '../../types/card';
 
 import styles from './cardNameForm.module.css';
-import { useNavigate } from 'react-router-dom';
 
 interface Props {
   registerCard: (card: CardData) => void;
@@ -19,6 +19,7 @@ const CardNameForm = ({ registerCard }: Props) => {
   const { company, number, owner, expiredDate } = useCardFormValue();
   const navigate = useNavigate();
 
+
   const handleNameFormSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
 
@@ -27,10 +28,10 @@ const CardNameForm = ({ registerCard }: Props) => {
     }
 
     if (!company) {
-      return;
+        return;
     }
 
-    const cardData = {
+    const cardData: CardData = {
       name: nameInputRef.current.value,
       company,
       number: { first: number.first, second: number.second },
