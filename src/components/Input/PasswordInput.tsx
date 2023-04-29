@@ -1,16 +1,17 @@
 import { PaymentsInput } from 'components/common';
 import React, { ChangeEvent, useRef } from 'react';
-import styled from 'styled-components';
+import styled, { CSSProperties } from 'styled-components';
 import { isNumber } from 'utils';
 import { ValueAndOnChange } from './types';
 
 export interface PasswordInputProps {
   first: ValueAndOnChange;
   second: ValueAndOnChange;
+  width?: CSSProperties['width'];
 }
 
 export function PasswordInput(props: PasswordInputProps) {
-  const { first, second } = props;
+  const { first, second, width } = props;
   const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
 
   const handleChange = (
@@ -38,6 +39,7 @@ export function PasswordInput(props: PasswordInputProps) {
         onChange={(e) => handleChange(e, 0, first.onChange)}
         inputMode="numeric"
         align="center"
+        width={width}
         required
       />
       <PaymentsInput
@@ -48,6 +50,7 @@ export function PasswordInput(props: PasswordInputProps) {
         onChange={(e) => handleChange(e, 1, second.onChange)}
         inputMode="numeric"
         align="center"
+        width={width}
         required
       />
     </Container>

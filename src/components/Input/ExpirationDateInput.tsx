@@ -1,16 +1,17 @@
 import { PaymentsInput } from 'components/common';
 import React, { ChangeEvent, useRef } from 'react';
-import styled from 'styled-components';
+import styled, { CSSProperties } from 'styled-components';
 import { isNumber } from 'utils';
 import { ValueAndOnChange } from './types';
 
 export interface ExpirationProps {
   month: ValueAndOnChange;
   year: ValueAndOnChange;
+  width?: CSSProperties['width'];
 }
 
 export function ExpirationDateInput(props: ExpirationProps) {
-  const { month, year } = props;
+  const { month, year, width } = props;
   const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
 
   const handleChange = (
@@ -30,7 +31,7 @@ export function ExpirationDateInput(props: ExpirationProps) {
   };
 
   return (
-    <>
+    <Container>
       <PaymentsInput
         ref={(element) => (inputRefs.current[0] = element)}
         value={month.value}
@@ -39,6 +40,8 @@ export function ExpirationDateInput(props: ExpirationProps) {
         placeholder="MM"
         onChange={(e) => handleChange(e, 0, month.onChange)}
         inputMode="numeric"
+        width={width}
+        align="center"
         required
       />
       <SLASH />
@@ -50,14 +53,23 @@ export function ExpirationDateInput(props: ExpirationProps) {
         placeholder="YY"
         onChange={(e) => handleChange(e, 1, year.onChange)}
         inputMode="numeric"
+        width={width}
+        align="center"
         required
       />
-    </>
+    </Container>
   );
 }
 
 const SLASH = styled.span`
+  margin: 0 3px;
   &::before {
     content: '/';
   }
+`;
+
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
 `;

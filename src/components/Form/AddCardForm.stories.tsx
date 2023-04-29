@@ -1,13 +1,25 @@
-import { StoryFn } from '@storybook/react';
-import AddCardForm, { AddCardFormProps } from './AddCardForm';
+import { Meta, StoryObj } from '@storybook/react';
+import { theme } from 'components/style/theme';
+import { ThemeProvider } from 'styled-components';
+import { AddCardForm } from './AddCardForm';
 
-export default {
+const meta = {
+  tags: ['autodocs'],
   title: 'AddCardForm',
   component: AddCardForm,
+  decorators: [
+    (Story) => (
+      <ThemeProvider theme={theme}>
+        <Story />
+      </ThemeProvider>
+    ),
+  ],
+} satisfies Meta<typeof AddCardForm>;
+
+export default meta;
+
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: { onSubmit: () => {} },
 };
-
-const Template: StoryFn<AddCardFormProps> = (args) => <AddCardForm {...args} />;
-
-export const Default = Template.bind({});
-
-Default.args = {};
