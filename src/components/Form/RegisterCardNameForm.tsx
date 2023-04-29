@@ -4,6 +4,7 @@ import { CreditCard } from 'components/common/Card/CreditCard';
 import { CardInfoContext, CardInfoProvider } from 'context/CardInfoContext';
 import CardDB from 'db/Cards';
 import styled from 'styled-components';
+import { ModalContext } from 'context/ModalContext';
 
 export type RegisterCardNameFormProps = {
   onSubmit: () => void;
@@ -11,6 +12,7 @@ export type RegisterCardNameFormProps = {
 
 export function RegisterCardNameForm({ onSubmit }: RegisterCardNameFormProps) {
   const { cardInfo, setCardInfoName } = useContext(CardInfoContext);
+  const { setIsModalOpen } = useContext(ModalContext);
   const [cardName, setCardName] = useState('');
 
   const handleCardNameInput: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -23,6 +25,7 @@ export function RegisterCardNameForm({ onSubmit }: RegisterCardNameFormProps) {
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
+    setIsModalOpen(true);
     CardDB.registerCard(cardInfo);
     onSubmit();
   };
@@ -32,8 +35,10 @@ export function RegisterCardNameForm({ onSubmit }: RegisterCardNameFormProps) {
       <FormContainer onSubmit={handleSubmit}>
         <CompleteMsgSpan>카드 등록이 완료되었습니다</CompleteMsgSpan>
         <CreditCard card={cardInfo} />
-        <CardNameInput value={cardName} onChange={handleCardNameInput} />
-        <CardNameFormButton type="submit">확인</CardNameFormButton>
+        <CardNameInputContainer>
+          <CardNameInput value={cardName} onChange={handleCardNameInput} />
+          <CardNameFormButton type="submit">확인</CardNameFormButton>
+        </CardNameInputContainer>
       </FormContainer>
     </CardInfoProvider>
   );
@@ -54,9 +59,17 @@ const CompleteMsgSpan = styled.span`
 `;
 
 const CardNameFormButton = styled.button`
+  height: fit-content;
   border: none;
   background: white;
   font-size: 18px;
   font-weight: 700;
   cursor: pointer;
+`;
+
+const CardNameInputContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-top: 100px;
 `;

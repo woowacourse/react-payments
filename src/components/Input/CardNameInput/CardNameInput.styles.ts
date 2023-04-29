@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const Styled = {
   CardNameInputWrapper: styled.div`
     display: flex;
-    margin-top: 125px;
     input {
       width: 240px;
       text-align: center;
