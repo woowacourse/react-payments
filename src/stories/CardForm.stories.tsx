@@ -1,7 +1,6 @@
-import { action } from '@storybook/addon-actions';
 import { Meta, Story } from '@storybook/react';
-import CardForm from '../components/cardForm/CardForm';
 import { BrowserRouter } from 'react-router-dom';
+import CardForm from '../components/cardForm/CardForm';
 
 type CardFormProps = {
   onChangeForm: (
@@ -26,11 +25,6 @@ const Template: Story<CardFormProps> = ({ onChangeForm }) => (
 export const Primary: Story<CardFormProps> = Template.bind({});
 Primary.args = {
   onChangeForm: () => {},
-};
-
-export const InputChange = Template.bind({});
-InputChange.args = {
-  onChangeForm: action('onChangeForm'),
 };
 
 export default meta;
