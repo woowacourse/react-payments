@@ -18,3 +18,15 @@
 .right {
   text-align: right;
 }
+
+.underlined {
+  border-radius: 0;
+  background: transparent;
+  border-bottom: 1px solid var(--gray-e);
+}
+
+.underlined:focus {
+  outline: none;
+  border-radius: 0;
+  border-bottom: 1px solid var(--gray-3);
+}
