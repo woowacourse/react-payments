@@ -13,10 +13,22 @@
   cursor: pointer;
 }
 
+.card-preview-card-co {
+  position: relative;
+  left: 14px;
+  top: 10px;
+
+  color: white;
+  height: 15px;
+  width: 172px;
+
+  letter-spacing: 2px;
+}
+
 .card-preview-chip {
   position: relative;
   left: 14px;
-  top: 47px;
+  top: 37px;
 
   width: 40px;
   height: 26px;
@@ -28,7 +40,7 @@
 .card-preview-number {
   position: relative;
   left: 14px;
-  top: 60px;
+  top: 50px;
 
   color: white;
   height: 15px;
@@ -40,7 +52,7 @@
 .card-preview-name {
   position: relative;
   left: 14px;
-  top: 65px;
+  top: 55px;
 
   display: inline-block;
   width: 150px;
@@ -50,7 +62,7 @@
 .card-preview-expireDate {
   position: relative;
   left: 10px;
-  top: 65px;
+  top: 55px;
 
   display: inline-block;
   width: 35px;

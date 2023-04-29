@@ -29,7 +29,11 @@ export default function CardPreview({
       onClick={openCardCoModal}
       style={{ backgroundColor: backgroundColor }}
     >
+      <p className="card-preview-card-co" style={{ color: color }}>
+        {cardCo}
+      </p>
       <div className="card-preview-chip"></div>
+
       <p className="card-preview-number" style={{ color: color }}>
         {previewNumber}
       </p>
