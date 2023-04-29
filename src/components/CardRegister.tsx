@@ -19,6 +19,7 @@ const CardRegisterWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 44px;
   color: #575757;
 `;
 

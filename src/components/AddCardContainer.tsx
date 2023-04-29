@@ -280,6 +280,14 @@ const CardCompanyButton = styled.button`
   border: none;
   background-color: transparent;
   text-align: left;
+
+  transform: scale(1);
+  transition-duration: 0.2s;
+
+  &:hover {
+    transform: scale(1.03);
+    transition-duration: 0.2s;
+  }
 `;
 
 const AddCardContainerWrapper = styled.section`
