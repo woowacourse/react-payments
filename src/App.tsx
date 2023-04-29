@@ -1,11 +1,13 @@
+import { Route, Routes } from "react-router-dom";
+import { useState } from "react";
 import styled from "styled-components";
+
 import GlobalStyle from "./styles/GlobalStyle";
 import AddCardPage from "./pages/AddCardPage/AddCardPage";
 import CardListPage from "./pages/CardListPage/CardListPage";
 import CardAliasRegistrationPage from "./pages/CardAliasRegistrationPage/CardAliasRegistrationPage";
+import ROUTE_PATH from "./constants/routePath";
 
-import { Route, Routes } from "react-router-dom";
-import { useState } from "react";
 import { Card } from "./types";
 
 function App() {
@@ -20,9 +22,9 @@ function App() {
       <GlobalStyle />
       <Layout>
         <Routes>
-          <Route index element={<CardListPage cards={cards} />} />
-          <Route path="addCard" element={<AddCardPage />} />
-          <Route path="alias" element={<CardAliasRegistrationPage onSubmit={addCard} />} />
+          <Route index path={ROUTE_PATH.root} element={<CardListPage cards={cards} />} />
+          <Route path={ROUTE_PATH.addCard} element={<AddCardPage />} />
+          <Route path={ROUTE_PATH.cardAlias} element={<CardAliasRegistrationPage onSubmit={addCard} />} />
         </Routes>
       </Layout>
     </>
