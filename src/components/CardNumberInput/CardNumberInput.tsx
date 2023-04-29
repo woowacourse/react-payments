@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import CardInfoInput from '../CardInfoInput/CardInfoInput';
 import Input from '../Input/Input';
-import { NUMBER_REGEX } from '../../constant/regex';
+import { NUMBER_REGEX, ONE_TO_FOUR_NUMBER_REGEX } from '../../constant/regex';
 import { useCardInfoContext } from '../../context/CardInfoContext';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
@@ -15,7 +15,7 @@ const CardNumberInput = () => {
       setError('0부터 9까지 숫자만 입력 가능합니다.');
     } else {
       const hyphenRemovedCardNumber = cardNumber.replaceAll('-', '');
-      const cardNumberWithHyphens = (hyphenRemovedCardNumber.match(/.{1,4}/g) || []).join('-');
+      const cardNumberWithHyphens = (hyphenRemovedCardNumber.match(ONE_TO_FOUR_NUMBER_REGEX) || []).join('-');
 
       setCardNumber(cardNumberWithHyphens);
       setError('');
