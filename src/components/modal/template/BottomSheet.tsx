@@ -1,15 +1,13 @@
 import { Fragment, ReactNode, SetStateAction } from 'react';
 import styled from 'styled-components';
+import { useModalActionContext } from '../../../hooks/useModalContext';
 
 interface Props {
   children: ReactNode;
-  setIsOpen: React.Dispatch<SetStateAction<boolean>>;
 }
 
-export const BottomSheet = ({ children, setIsOpen }: Props) => {
-  const closeModal = () => {
-    setIsOpen(false);
-  };
+export const BottomSheet = ({ children }: Props) => {
+  const { closeModal } = useModalActionContext();
 
   return (
     <Fragment>

@@ -5,15 +5,13 @@ import { ExpirationDateInput } from './cardInfoInputs/ExpirationDateInput';
 import { OwnerNameInput } from './cardInfoInputs/OwnerNameInput';
 import { SecurityCodeInput } from './cardInfoInputs/SecurityCodeInput';
 import { PasswordInput } from './cardInfoInputs/PasswordInput';
-import { CardViewer } from '../cardViewer';
 import { useNavigate } from 'react-router-dom';
 import { useCardData } from '../../hooks/useCardData';
-import { BottomSheet } from '../modal/template/BottomSheet';
-import { SelectCardCompanyModal } from '../modal/content/selectCardCompany';
 import {
   useCardInfoActionContext,
   useCardInfoValueContext,
 } from '../../hooks/cardInfoContext';
+import { useModalStateContext } from '../../hooks/useModalContext';
 
 export const AddNewCardForm = () => {
   const navigate = useNavigate();
@@ -30,8 +28,9 @@ export const AddNewCardForm = () => {
   } = useCardInfoValueContext();
   const { resetAll } = useCardInfoActionContext();
 
+  const { isOpen } = useModalStateContext();
+
   const [inputOrder, setInputOrder] = useState(0);
-  const [isModalOpen, setIsModalOpen] = useState(true);
 
   const viewNextInput = useCallback(() => {
     setInputOrder((current) => current + 1);
@@ -58,15 +57,6 @@ export const AddNewCardForm = () => {
 
   return (
     <Style.Wrapper>
-      {isModalOpen && (
-        <BottomSheet setIsOpen={setIsModalOpen}>
-          <SelectCardCompanyModal closeModal={() => setIsModalOpen(false)} />
-        </BottomSheet>
-      )}
-      <CardViewer
-        cardInfo={{ cardNumber, expirationDate, ownerName, companyId }}
-        handleClick={() => setIsModalOpen(true)}
-      />
       {companyId ? (
         <Style.InputContainer>
           {inputOrder === 0 && (
@@ -102,7 +92,7 @@ export const AddNewCardForm = () => {
           )}
         </Style.InputContainer>
       ) : (
-        <Style.Caption>{isModalOpen || '카드 클릭!'}</Style.Caption>
+        <Style.Caption>{isOpen || '카드 클릭!'}</Style.Caption>
       )}
     </Style.Wrapper>
   );
@@ -126,9 +116,13 @@ const Style = {
     gap: 19px;
   `,
   Caption: styled.span`
-    margin-top: -10px;
-    font-size: 20px;
+    width: 241px;
 
+    display: flex;
+    justify-content: center;
+
+    font-size: 20px;
+    margin-top: 5px;
     color: grey;
   `,
 };

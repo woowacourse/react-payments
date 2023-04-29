@@ -14,5 +14,5 @@ export default meta;
 export const BottomSheetStory = () => {
   const [isOpen, setIsOpen] = useState<boolean>(true);
 
-  return <>{isOpen && <BottomSheet setIsOpen={setIsOpen}>""</BottomSheet>}</>;
+  return <>{isOpen && <BottomSheet>{}</BottomSheet>}</>;
 };

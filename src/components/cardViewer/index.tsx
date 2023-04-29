@@ -63,8 +63,8 @@ const Style = {
     border-radius: 5px;
     background-color: ${(props) =>
       props.color === '' ? '#333333' : props.color};
-
-    color: white;
+    color: ${(props) =>
+      props.color === COMPANIES['KAKAO'].color ? '#5c210d3' : 'white'};
     padding: 14px;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
     cursor: pointer;

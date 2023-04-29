@@ -19,8 +19,8 @@ export const SelectCardCompanyModalStory = () => {
   return (
     <>
       {isOpen && (
-        <BottomSheet setIsOpen={setIsOpen}>
-          <SelectCardCompanyModal closeModal={() => setIsOpen(false)} />
+        <BottomSheet>
+          <SelectCardCompanyModal />
         </BottomSheet>
       )}
     </>

@@ -3,10 +3,7 @@ import { COMPANIES } from '../../../../constants/cardCompany';
 import { CardCompany } from './CardCompany';
 import { v4 } from 'uuid';
 import { useCardInfoActionContext } from '../../../../hooks/cardInfoContext';
-
-interface Props {
-  closeModal: () => void;
-}
+import { useModalActionContext } from '../../../../hooks/useModalContext';
 
 export const isCompanyId = (
   id: string | undefined
@@ -16,8 +13,9 @@ export const isCompanyId = (
   return Object.keys(COMPANIES).includes(id);
 };
 
-export const SelectCardCompanyModal = ({ closeModal }: Props) => {
+export const SelectCardCompanyModal = () => {
   const { setCompanyId } = useCardInfoActionContext();
+  const { closeModal } = useModalActionContext();
 
   const handleClick: React.MouseEventHandler = (e) => {
     if (!(e.target instanceof HTMLElement)) return;
