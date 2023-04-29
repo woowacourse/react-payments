@@ -1,4 +1,5 @@
 /** @type { import('@storybook/react-webpack5').StorybookConfig } */
+
 const config = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
@@ -6,6 +7,9 @@ const config = {
     "@storybook/addon-essentials",
     "@storybook/preset-create-react-app",
     "@storybook/addon-interactions",
+    "storybook-addon-styled-component-theme/dist/preset",
+    "@storybook/addon-actions",
+    "@storybook/addon-controls",
   ],
   framework: {
     name: "@storybook/react-webpack5",
