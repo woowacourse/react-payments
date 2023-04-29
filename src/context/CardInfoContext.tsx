@@ -1,11 +1,30 @@
-import { createContext, useContext, useMemo, useState } from 'react';
+import {
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useContext,
+  useMemo,
+  useState,
+} from 'react';
 
 import { v4 as uuid } from 'uuid';
+import { CardInfo } from '../types/card';
 
-const CardInfoValueContext = createContext();
-const CardInfoActionsContext = createContext();
+interface Actions {
+  updateBank: (bank: string, closeModal: () => void) => void;
+  setCardInfo: Dispatch<SetStateAction<CardInfo>>;
+  initCardInfo: () => void;
+}
 
-export const CardInfoProvider = ({ children }) => {
+interface Props {
+  children: ReactNode;
+}
+
+const CardInfoValueContext = createContext<CardInfo>({} as CardInfo);
+const CardInfoActionsContext = createContext<Actions>({} as Actions);
+
+export const CardInfoProvider = ({ children }: Props) => {
   const getInit = () => {
     return {
       id: uuid(),
@@ -28,7 +47,7 @@ export const CardInfoProvider = ({ children }) => {
 
   const actions = useMemo(
     () => ({
-      updateBank(bank, closeModal) {
+      updateBank(bank: string, closeModal: () => void) {
         setCardInfo((prev) => ({
           ...prev,
           bank,
@@ -36,19 +55,7 @@ export const CardInfoProvider = ({ children }) => {
         closeModal();
       },
 
-      updateInputValue(name, value) {
-        setCardInfo((prev) => ({
-          ...prev,
-          [name]: value,
-        }));
-      },
-
-      updateNickname(nickname) {
-        setCardInfo((prev) => ({
-          ...prev,
-          nickname,
-        }));
-      },
+      setCardInfo,
 
       initCardInfo() {
         setCardInfo(getInit());

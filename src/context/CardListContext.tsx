@@ -1,22 +1,41 @@
-import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import {
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
+
 import handleLocalStorage from '../utils/handleLocalStorage';
+import { CardInfo } from '../types/card';
 
-const CardListValueContext = createContext();
-const CardListActionsContext = createContext();
+interface Actions {
+  setCardList: Dispatch<SetStateAction<CardInfo[]>>;
+}
 
-export const CardListProvider = ({ children }) => {
+interface Props {
+  children: ReactNode;
+}
+
+const CardListValueContext = createContext<CardInfo[]>([] as CardInfo[]);
+const CardListActionsContext = createContext<Actions>({} as Actions);
+
+export const CardListProvider = ({ children }: Props) => {
   const [localData, setLocalData] = handleLocalStorage('react-payments-card-info');
   const [cardList, setCardList] = useState(localData);
 
   useEffect(() => {
     setLocalData(cardList);
-  }, [cardList]);
+  }, [cardList, setLocalData]);
 
   const actions = useMemo(
     () => ({
       setCardList,
     }),
-    []
+    [setCardList]
   );
 
   return (
