@@ -17,7 +17,7 @@ const CurrentCardContext = createContext<CurrentCard | null>(null);
 
 export const CurrentCardProvider = ({ children }: PropsWithChildren) => {
   const [currentCard, setCurrentCard] = useState<Omit<CardType, 'id'>>({
-    cardType: '',
+    cardCompany: '',
     cardNumber: {
       first: '',
       second: '',

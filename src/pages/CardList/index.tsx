@@ -26,7 +26,7 @@ const CardListPage = () => {
           cardList.map((card: CardType) => (
             <div key={card.id}>
               <Card
-                cardType={card.cardType}
+                cardCompany={card.cardCompany}
                 cardFirstNumber={card.cardNumber.first}
                 cardSecondNumber={card.cardNumber.second}
                 cardThirdNumber={card.cardNumber.third}
@@ -35,7 +35,7 @@ const CardListPage = () => {
                 expireMonth={card.expireMonth}
                 expireYear={card.expireYear}
               />
-              <p className="card-alias">{card.alias || card.cardType}</p>
+              <p className="card-alias">{card.alias || card.cardCompany}</p>
             </div>
           ))
         )}

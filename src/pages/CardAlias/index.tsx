@@ -38,7 +38,7 @@ const CardAliasPage = () => {
     <div className="card-alias-page">
       <h2>카드 등록이 완료되었습니다.</h2>
       <Card
-        cardType={currentCard.cardType}
+        cardCompany={currentCard.cardCompany}
         cardFirstNumber={currentCard.cardNumber.first}
         cardSecondNumber={currentCard.cardNumber.second}
         cardThirdNumber={currentCard.cardNumber.third}

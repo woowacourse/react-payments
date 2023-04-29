@@ -11,7 +11,7 @@ type Story = StoryObj<typeof Card>;
 
 export const Primary: Story = {
   args: {
-    cardType: '현대',
+    cardCompany: '현대',
     cardFirstNumber: '1234',
     cardSecondNumber: '2345',
     cardThirdNumber: '4456',

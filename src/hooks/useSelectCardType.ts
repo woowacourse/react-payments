@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { InputStatus } from '../type';
 
-const useSelectCardType = (statusDispather: (str: string) => InputStatus, init = '') => {
+const useSelectCardCompany = (statusDispather: (str: string) => InputStatus, init = '') => {
   const [cardCompany, setCardCompany] = useState(init);
   const [status, setStatus] = useState<InputStatus>('INIT');
 
@@ -13,4 +13,4 @@ const useSelectCardType = (statusDispather: (str: string) => InputStatus, init =
   return { cardCompany, status, changeCardCompany };
 };
 
-export default useSelectCardType;
+export default useSelectCardCompany;

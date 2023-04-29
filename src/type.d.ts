@@ -6,7 +6,7 @@ export type CardNumber = {
 };
 
 type CardProps = {
-  cardType: string;
+  cardCompany: string;
   cardFirstNumber: string;
   cardSecondNumber: string;
   cardThirdNumber: string;
@@ -25,7 +25,7 @@ export type CardPassword = {
 export type CardType = {
   id: number;
   alias?: string;
-  cardType: string;
+  cardCompany: string;
   cardNumber: CardNumber;
   cardOwner: string;
   expireMonth: string;
@@ -53,7 +53,7 @@ export type CardCompany =
   | '롯데카드';
 
 export type AddCardFormProps = {
-  cardType: string;
+  cardCompany: string;
   cardCompanyStatus: InputStatus;
   cardFirstNumber: InputHook;
   cardSecondNumber: InputHook;

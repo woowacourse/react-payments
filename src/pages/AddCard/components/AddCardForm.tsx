@@ -14,7 +14,7 @@ import { useIsAccessAliasPageContext } from '../../../context/IsAccessAliasPageP
 import useTotalStatus from '../../../hooks/useTotalStatus';
 
 const AddCardForm = ({
-  cardType,
+  cardCompany,
   cardCompanyStatus,
   cardFirstNumber,
   cardSecondNumber,
@@ -46,7 +46,7 @@ const AddCardForm = ({
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const submitData: Omit<CardType, 'id'> = {
-      cardType,
+      cardCompany,
       cardNumber: {
         first: cardFirstNumber.value,
         second: cardSecondNumber.value,

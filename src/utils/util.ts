@@ -30,8 +30,8 @@ export const stringToUpperCase = (data: string): string => {
 
 export const identity = (v: any) => v;
 
-export const getBackgroundStyleByCardType = (cardType: string) => {
-  switch (cardType) {
+export const getBackgroundStyleByCardCompany = (cardCompany: string) => {
+  switch (cardCompany) {
     case '현대카드':
       return 'hyundai';
     case 'BC카드':

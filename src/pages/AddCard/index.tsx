@@ -18,7 +18,7 @@ import {
 } from './domain/dispatcher';
 import CardNameBottomSheet from './components/CardNameBottomSheet';
 import useBottomSheet from '../../hooks/useBottomSheet';
-import useSelectCardType from '../../hooks/useSelectCardType';
+import useSelectCardCompany from '../../hooks/useSelectCardType';
 
 const AddCardPage = () => {
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ const AddCardPage = () => {
     cardCompany,
     status: cardCompanyStatus,
     changeCardCompany,
-  } = useSelectCardType(isSelectCardType);
+  } = useSelectCardCompany(isSelectCardType);
   const cardFirstNumber = useInput(isValidCardNumber);
   const cardSecondNumber = useInput(isValidCardNumber);
   const cardThirdNumber = useInput(isValidCardNumber);
@@ -54,7 +54,7 @@ const AddCardPage = () => {
         </Header>
         <article className="add-card-page-body">
           <Card
-            cardType={cardCompany}
+            cardCompany={cardCompany}
             cardFirstNumber={cardFirstNumber.value}
             cardSecondNumber={cardSecondNumber.value}
             cardThirdNumber={cardThirdNumber.value}
@@ -65,7 +65,7 @@ const AddCardPage = () => {
             onClick={toggleOpen}
           />
           <AddCardForm
-            cardType={cardCompany}
+            cardCompany={cardCompany}
             cardCompanyStatus={cardCompanyStatus}
             cardFirstNumber={cardFirstNumber}
             cardSecondNumber={cardSecondNumber}
