@@ -26,7 +26,7 @@ const AddCardForm = () => {
       <CardSecurityCodeInput />
       <CardPasswordInput />
       <div className={styles.buttonContainer} role="group" aria-label="다음 단계 버튼">
-        <Button type="submit" className={styles.button} onClick={handleNextButtonClick}>
+        <Button type="button" className={styles.button} onClick={handleNextButtonClick}>
           다음
         </Button>
       </div>
