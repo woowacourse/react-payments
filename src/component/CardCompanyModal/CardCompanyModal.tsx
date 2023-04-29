@@ -1,6 +1,6 @@
 import React from "react";
 import Modal from "../common/Modal";
-import { CREDIT_CARD_COMPANY_LOGO } from "../../data/images";
+import { CREDIT_CARD_COMPANY_LOGO } from "../../data/creditCard";
 import St from "./CardCompanyModalStyled";
 import useCardCompany from "../../hooks/useCardCompany";
 import { CREDIT_CARD_COMPANY } from "../../types/card";
@@ -15,7 +15,12 @@ function CardCompanyModal({ closeModal }: CardCompanyModalProps) {
   return (
     <Modal closeModal={closeModal}>
       <St.CardCompanyModal>
-        <St.CardCompanies onChange={changeCardCompany}>
+        <St.CardCompanies
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            closeModal();
+            changeCardCompany(e);
+          }}
+        >
           {Object.values(CREDIT_CARD_COMPANY).map((value) => (
             <React.Fragment key={value}>
               <St.Input
