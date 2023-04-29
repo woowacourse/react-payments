@@ -2,7 +2,13 @@ import { Input, InputBox } from '../Input';
 import styled from 'styled-components';
 import Label from '../Label';
 
-const ExpirationDateInput = () => {
+type ExpirationDateInputProps = {
+  onChange: React.ChangeEventHandler<HTMLInputElement>[];
+};
+
+const ExpirationDateInput = ({ onChange }: ExpirationDateInputProps) => {
+  const [onMonthChange, onYearChange] = onChange;
+
   return (
     <p>
       <Label htmlFor="expiration-date">만료일</Label>
@@ -15,9 +21,18 @@ const ExpirationDateInput = () => {
           placeholder="MM"
           textAlign="right"
           inputMode="numeric"
+          onChange={onMonthChange}
         />
         <Slash />
-        <Input type="text" width="65px" maxLength={2} placeholder="YY" textAlign="left" inputMode="numeric" />
+        <Input
+          type="text"
+          width="65px"
+          maxLength={2}
+          placeholder="YY"
+          textAlign="left"
+          inputMode="numeric"
+          onChange={onYearChange}
+        />
       </Styled.Box>
     </p>
   );

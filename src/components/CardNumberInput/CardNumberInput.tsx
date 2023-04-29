@@ -2,7 +2,13 @@ import { Input, InputBox } from '../Input';
 import styled from 'styled-components';
 import Label from '../Label';
 
-const CardNumberInput = () => {
+type CardNumberInputProps = {
+  onChange: React.ChangeEventHandler<HTMLInputElement>[];
+};
+
+const CardNumberInput = ({ onChange }: CardNumberInputProps) => {
+  const [onFirstChange, onSecondChange, onThirdChange, onFourthChange] = onChange;
+
   return (
     <p>
       <Label htmlFor="CardNumber">카드 번호</Label>
@@ -15,13 +21,38 @@ const CardNumberInput = () => {
           placeholder="0000"
           textAlign="center"
           inputMode="numeric"
+          onChange={onFirstChange}
         />
         <Dash />
-        <Input type="text" width="65px" maxLength={4} placeholder="0000" textAlign="center" inputMode="numeric" />
+        <Input
+          type="text"
+          width="65px"
+          maxLength={4}
+          placeholder="0000"
+          textAlign="center"
+          inputMode="numeric"
+          onChange={onSecondChange}
+        />
         <Dash />
-        <Input type="password" width="65px" maxLength={4} placeholder="0000" textAlign="center" inputMode="numeric" />
+        <Input
+          type="password"
+          width="65px"
+          maxLength={4}
+          placeholder="0000"
+          textAlign="center"
+          inputMode="numeric"
+          onChange={onThirdChange}
+        />
         <Dash />
-        <Input type="password" width="65px" maxLength={4} placeholder="0000" textAlign="center" inputMode="numeric" />
+        <Input
+          type="password"
+          width="65px"
+          maxLength={4}
+          placeholder="0000"
+          textAlign="center"
+          inputMode="numeric"
+          onChange={onFourthChange}
+        />
       </Styled.Box>
     </p>
   );

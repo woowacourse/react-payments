@@ -2,12 +2,17 @@ import Label from '../Label';
 import { Input, InputBox } from '../Input';
 import styled from 'styled-components';
 
-const CardOwnerInput = () => {
+type CardOwnerInputProps = {
+  owner: string;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
+};
+
+const CardOwnerInput = ({ owner, onChange }: CardOwnerInputProps) => {
   return (
     <p>
       <Styled.LabelWrapper>
         <Label htmlFor="owner">카드 소유자 이름 (선택)</Label>
-        <Label>0/30</Label>
+        <Label>{owner.length}/30</Label>
       </Styled.LabelWrapper>
       <Styled.Box marginTop="10px">
         <Input
@@ -17,6 +22,7 @@ const CardOwnerInput = () => {
           maxLength={30}
           placeholder="이름을 입력해주세요."
           textAlign="center"
+          onChange={onChange}
         />
       </Styled.Box>
     </p>
