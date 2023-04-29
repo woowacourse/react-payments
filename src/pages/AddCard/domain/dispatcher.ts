@@ -22,7 +22,9 @@ export const isValidSecurityCode = (str: string) => {
 export const isValidOwnerName = (str: string) => {
   const charList = str.split('').filter((char) => ALPHABET.includes(char));
 
-  return str.length > 0 && str.length <= 30 && charList.length === str.length ? 'VALID' : 'INVALID';
+  return str.length >= 0 && str.length <= 30 && charList.length === str.length
+    ? 'VALID'
+    : 'INVALID';
 };
 
 export const isValidPassword = (str: string) => {
