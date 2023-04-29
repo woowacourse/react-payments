@@ -4,6 +4,7 @@ import { CARD_COMPANYS } from "../../constant";
 import { CardInfo } from "../../types";
 import AddCardButton from "../Button/AddCardButton";
 import Card from "../Card";
+import { useResetCardContext } from "../../hooks/useResetCardContext";
 
 interface HomePageProps {
   cardList: CardInfo[];
@@ -40,6 +41,8 @@ const CardWrapper = styled.div`
 `;
 
 export default function Homepage({ onClick, cardList }: HomePageProps) {
+  useResetCardContext();
+
   return (
     <Page>
       <Title>보유카드</Title>

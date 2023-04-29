@@ -21,7 +21,11 @@ interface SetCardTitleAction {
   title: string;
 }
 
-type Action = SetCardColorAction | SetCardTitleAction;
+interface ResetCardContext {
+  type: "RESET_CARD_CONTEXT";
+}
+
+type Action = SetCardColorAction | SetCardTitleAction | ResetCardContext;
 
 type CardDispatch = Dispatch<Action>;
 
@@ -39,6 +43,11 @@ function cardTypeReducer(state: CardState, action: Action) {
       return {
         ...state,
         title: action.title,
+      };
+    case "RESET_CARD_CONTEXT":
+      return {
+        title: "",
+        color: "",
       };
     default:
       throw new Error("unhandled Action");
