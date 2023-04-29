@@ -1,33 +1,16 @@
 import type { Dispatch } from 'react';
 import { useState } from 'react';
-import type { CreditCard } from '../types/CreditCard';
 
-const CREDIT_CARDS_KEY = 'creditCards' as const;
-
-const CREDIT_CARD_FORM_KEY = 'creditCardForm' as const;
-
-export const useLocalStorage = () => {
-  const [creditCards, setCreditCards] = useState<CreditCard[]>(
-    JSON.parse(localStorage.getItem(CREDIT_CARDS_KEY) ?? '[]'),
+export const useLocalStorage = <T>(key: string, initialType: object[] | object) => {
+  const [localStorageData, setLocalStorageData] = useState<T>(
+    JSON.parse(localStorage.getItem(key) ?? `${JSON.stringify(initialType)}`),
   );
 
-  const [creditCardForm, setCreditCardForm] = useState<CreditCard>(
-    JSON.parse(localStorage.getItem(CREDIT_CARD_FORM_KEY) ?? '{}'),
-  );
+  const internalSetLocalStorageData: Dispatch<T> = (nextLocalStorageData) => {
+    localStorage.setItem(key, JSON.stringify(nextLocalStorageData));
 
-  const internalSetCreditCards: Dispatch<CreditCard[]> = (nextCreditCards) => {
-    localStorage.setItem(CREDIT_CARDS_KEY, JSON.stringify(nextCreditCards));
-
-    setCreditCards(nextCreditCards);
-
-    return { creditCards, internalSetCreditCards };
+    setLocalStorageData(nextLocalStorageData);
   };
 
-  const internalSetCreditCardForm: Dispatch<CreditCard> = (newCreditCardForm) => {
-    localStorage.setItem(CREDIT_CARD_FORM_KEY, JSON.stringify(newCreditCardForm));
-
-    setCreditCardForm(newCreditCardForm);
-  };
-
-  return { creditCards, internalSetCreditCards, creditCardForm, internalSetCreditCardForm };
+  return { localStorageData, internalSetLocalStorageData };
 };
