@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { CARD_COMPANYS } from "../constant";
 import { useCardAction } from "../context/CardContext";
+import useDrawer from "../hooks/useDrawer";
 
 interface CardLogoProps {
   // onClick: React.MouseEventHandler;
@@ -25,8 +26,10 @@ const CardTitle = styled.p`
 `;
 
 export default function CardLogo({ cardName }: CardLogoProps) {
+  const { closeDrawer } = useDrawer();
+
   const cardAction = useCardAction();
-  const setColor = () => {
+  const setSelectedCard = () => {
     cardAction({
       type: "SET_CARD_COLOR",
       color: CARD_COMPANYS[cardName].backgroundColor,
@@ -35,9 +38,10 @@ export default function CardLogo({ cardName }: CardLogoProps) {
       type: "SET_CARD_TITLE",
       title: cardName,
     });
+    closeDrawer();
   };
   return (
-    <Wrapper onClick={setColor}>
+    <Wrapper onClick={setSelectedCard}>
       <Image src={CARD_COMPANYS[cardName].src} />
       <CardTitle>{CARD_COMPANYS[cardName].title}</CardTitle>
     </Wrapper>
