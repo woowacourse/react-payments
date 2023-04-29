@@ -161,6 +161,8 @@ const Style = {
       transition: all 0.2s linear;
       transform: scale(1.01);
     }
+
+    z-index: 1000;
   `,
 
   InputContainer: styled.div`
