@@ -20,7 +20,7 @@ const CardNumbers = ({ cardNumbers, isSetCardNumbers }: CardNumbersProps) => {
     if (!(e.target instanceof HTMLInputElement)) return;
     const currentOrder = Number(e.target.dataset['order']);
 
-    isSetCardNumbers(currentOrder, e.target.value);
+    if (!isSetCardNumbers(currentOrder, e.target.value)) return;
 
     if (cardNumberRefs[currentOrder].current?.value.length === 4) {
       if (currentOrder === 3) return;
