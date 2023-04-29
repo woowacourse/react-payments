@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import useDrawer from "../../hooks/useDrawer";
 
 interface DrawerProps {
   isOpenDrawer: boolean;
@@ -29,13 +30,12 @@ const ModalContainer = styled.div`
   transform: translateX(-50%);
 `;
 
-const Drawer = ({
-  isOpenDrawer,
-  children,
-}: React.PropsWithChildren<DrawerProps>) => {
+const Drawer = ({ children }: React.PropsWithChildren) => {
+  const { isDrawerOpen, closeDrawer } = useDrawer();
+
   return (
-    <Wrapper isOpenDrawer={isOpenDrawer}>
-      <BackDrop></BackDrop>
+    <Wrapper isOpenDrawer={isDrawerOpen}>
+      <BackDrop onClick={closeDrawer}></BackDrop>
       <ModalContainer>{children}</ModalContainer>
     </Wrapper>
   );

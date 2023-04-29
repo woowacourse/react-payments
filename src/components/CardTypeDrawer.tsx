@@ -34,7 +34,7 @@ const COMPANY_LIST = [
 ];
 export default function CardTypeDrawer() {
   return (
-    <Drawer isOpenDrawer>
+    <Drawer>
       <Wrapper>
         {COMPANY_LIST.map((company) => (
           <CardLogo key={`${company}`} cardName={company} />
