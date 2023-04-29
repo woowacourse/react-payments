@@ -19,7 +19,7 @@ import CardList from '../types/CardList';
 const AddCard = ({ cards, setCards }: CardList) => {
   const {
     cardNumbers,
-    setCardNumbers,
+    isSetCardNumbers,
     expiredDates,
     setExpiredDates,
     cardOwnerName,
@@ -71,7 +71,7 @@ const AddCard = ({ cards, setCards }: CardList) => {
           </Styled.CardWrapper>
           <CardNumbers
             cardNumbers={cardNumbers}
-            setCardNumbers={setCardNumbers}
+            isSetCardNumbers={isSetCardNumbers}
           />
           <ExpiredDate
             expiredDates={expiredDates}

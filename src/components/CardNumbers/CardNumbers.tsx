@@ -5,10 +5,10 @@ import CardLabel from '../@common/CardLabel';
 
 interface CardNumbersProps {
   cardNumbers: Array<string>;
-  setCardNumbers: React.Dispatch<React.SetStateAction<Array<string>>>;
+  isSetCardNumbers: (order: number, value: string) => boolean;
 }
 
-const CardNumbers = ({ cardNumbers, setCardNumbers }: CardNumbersProps) => {
+const CardNumbers = ({ cardNumbers, isSetCardNumbers }: CardNumbersProps) => {
   const cardNumberRefs: Record<number, React.RefObject<HTMLInputElement>> = {
     0: useRef<HTMLInputElement>(null),
     1: useRef<HTMLInputElement>(null),
@@ -20,11 +20,7 @@ const CardNumbers = ({ cardNumbers, setCardNumbers }: CardNumbersProps) => {
     if (!(e.target instanceof HTMLInputElement)) return;
     const currentOrder = Number(e.target.dataset['order']);
 
-    if (/[^0-9]/g.test(e.target.value)) {
-      return;
-    }
-
-    setCardNumbers({ ...cardNumbers, [currentOrder]: e.target.value });
+    isSetCardNumbers(currentOrder, e.target.value);
 
     if (cardNumberRefs[currentOrder].current?.value.length === 4) {
       if (currentOrder === 3) return;

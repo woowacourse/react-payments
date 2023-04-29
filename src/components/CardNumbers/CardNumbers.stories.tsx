@@ -13,5 +13,6 @@ type Story = StoryObj<typeof meta>;
 export const CardNumbersStory: Story = {
   args: {
     cardNumbers: ['1111', '2222', '3333', '4444'],
+    isSetCardNumbers: () => true,
   },
 };
