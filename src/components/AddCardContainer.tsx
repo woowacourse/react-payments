@@ -18,6 +18,7 @@ const AddCardContainer = () => {
   const [cardCVC, setCardCVC] = useState<string[]>(['']);
   const [cardPWD, setCardPWD] = useState<string[]>(['', '']);
   const [expirationError, setExpirationError] = useState<boolean>(false);
+  const [cardCompanyError, setCardCompanyError] = useState(false);
   const [cardCompany, setCardCompany] = useState('');
   const { isModalOpen, openModal, closeModal } = useModal(true);
   const { insert, move } = useMoveFocus();
@@ -76,6 +77,14 @@ const AddCardContainer = () => {
     const today = new Date();
     const expirationDate = new Date(`20${[...cardExpirationDate].reverse().join('-')}`);
 
+    console.log(cardCompany);
+    if (cardCompany === '') {
+      setCardCompanyError(true);
+      return;
+    } else {
+      setCardCompanyError(false);
+    }
+
     if (today > expirationDate) {
       setExpirationError(true);
     } else {
@@ -120,6 +129,7 @@ const AddCardContainer = () => {
           cardExpirationDate={cardExpirationDate}
         />
       </CardCompanyButton>
+      {cardCompanyError && <ErrorMessage message="카드사를 선택해주세요." />}
       <StyledForm onSubmit={onSubmitCard}>
         <InputGroup
           labelText="카드 번호"
