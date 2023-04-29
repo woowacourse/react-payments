@@ -11,17 +11,23 @@ const St = {
 
     width: 280px;
     height: 160px;
+    border-radius: 5px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+    padding: 15px 20px 15px 20px;
 
+    color: ${(props) =>
+      props.company === CREDIT_CARD_COMPANY.KAKAOBANK ? "black" : "white"};
     background: ${(props) =>
       props.company ? CREDIT_CARD_BACKGROUND_COLOR[props.company] : "#333333"};
-    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
-    border-radius: 5px;
-
-    padding: 40px 20px 15px 20px;
   `,
+
+  CardCompany: styled.h2`
+    font: 400 16px "Roboto";
+  `,
+
   ICDiv: styled.div`
-    width: 53px;
-    height: 36px;
+    width: 50px;
+    height: 33px;
 
     background: #cbba64;
     border-radius: 4px;
@@ -35,7 +41,6 @@ const St = {
 
     font: 400 19px "Roboto";
     text-align: center;
-    color: white;
   `,
 
   CardNumber: styled.div`
@@ -56,7 +61,6 @@ const St = {
   CardInfo: styled.h2`
     text-align: center;
     font: 400 16px "Roboto";
-    color: white;
   `,
 };
 

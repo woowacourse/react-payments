@@ -14,6 +14,7 @@ function CardDetailView({ creditcard }: CardDetailViewProps) {
 
   return (
     <St.CreditCard company={cardCompany}>
+      <St.CardCompany>{cardCompany}</St.CardCompany>
       <St.ICDiv />
       <St.CardNumberSection>
         <St.CardNumber>{splitNumber[0]}</St.CardNumber>
