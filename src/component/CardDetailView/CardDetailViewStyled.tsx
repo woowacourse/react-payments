@@ -1,7 +1,9 @@
 import styled from "styled-components";
+import { CREDIT_CARD_BACKGROUND_COLOR } from "../../data/creditCard";
+import { CREDIT_CARD_COMPANY } from "../../types/card";
 
 const St = {
-  CreditCard: styled.section`
+  CreditCard: styled.section<{ company: CREDIT_CARD_COMPANY | null }>`
     display: flex;
     flex-direction: column;
     align-self: center;
@@ -10,7 +12,8 @@ const St = {
     width: 280px;
     height: 160px;
 
-    background: #333333;
+    background: ${(props) =>
+      props.company ? CREDIT_CARD_BACKGROUND_COLOR[props.company] : "#333333"};
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
 
