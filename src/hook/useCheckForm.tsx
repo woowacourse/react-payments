@@ -30,9 +30,11 @@ export const useCheckForm = () => {
   const useMakeSetInputValid = (key: keyof ValidFlagType) =>
     useCallback(
       (isValid: boolean) => {
-        setIsInputsValid({ ...isInputsValid, [key]: isValid });
+        setIsInputsValid((isInputsValid) => {
+          return { ...isInputsValid, [key]: isValid };
+        });
       },
-      [isInputsCompleted, setIsInputsValid]
+      [isInputsValid, setIsInputsValid]
     );
 
   const setIsNumbersValid = useMakeSetInputValid("isCardNumbersValid");

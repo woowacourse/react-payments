@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { CardType } from "../../types/card";
+import { ValidFlagType } from "../../types/input";
 
 import { CVCInput } from "./CVCInput";
 import { CardNumberInput } from "./CardNumberInput";
@@ -45,13 +46,14 @@ export const CardForm = () => {
 
     if (!isAllCompleted()) return;
 
-    if (!validateCardNumbers(newCard, cards)) {
-      setIsNumbersValid(false);
-      return;
-    }
+    const validations: ValidFlagType = {
+      isCardNumbersValid: validateCardNumbers(newCard, cards),
+      isExpiryDateValid: validateExpiryDate(newCard.expiryDate),
+    };
 
-    if (!validateExpiryDate(newCard.expiryDate)) {
-      setIsExpiryDateValid(false);
+    if (!Object.values(validations).every((valid) => valid)) {
+      setIsNumbersValid(validations.isCardNumbersValid);
+      setIsExpiryDateValid(validations.isExpiryDateValid);
       return;
     }
 

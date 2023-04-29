@@ -59,7 +59,7 @@ export const CardNumberInput = () => {
   const updateInputFlags = useCallback(
     (postText: string, text: string) => {
       if (postText.length < text.length) {
-        setIsNumbersCompleted(postText.length + 1 === CARDNUMBERS_MAXLEGNTH);
+        setIsNumbersCompleted(text.replaceAll(" - ", "").length === CARDNUMBERS_MAXLEGNTH);
         return;
       }
       setIsNumbersValid(true);
@@ -77,7 +77,7 @@ export const CardNumberInput = () => {
         return;
       }
 
-      updateInputFlags(text, postText);
+      updateInputFlags(postText, text);
 
       if (postText !== text.slice(0, -1) && postText.slice(0, -1) !== text) {
         e.target.value = postText;

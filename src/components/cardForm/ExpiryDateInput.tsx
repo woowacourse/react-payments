@@ -40,6 +40,7 @@ export const ExpiryDateInput = () => {
     e.target.value = (expriyDate.match(new RegExp(EXPRIYDATE_REGEX)) ?? []).join(" / ");
     setExpiryDate(e.target.value);
 
+    setIsExpiryDateValid(true);
     setExpriyDateCompleted(value.length === EXPRIYDATE_MAXLEGNTH);
   };
 
