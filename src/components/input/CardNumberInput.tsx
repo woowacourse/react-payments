@@ -17,7 +17,7 @@ interface Props {
   cardNumberInputRef: React.RefObject<HTMLInputElement>;
   cardNumber: CardNumber;
   setCardNumber: React.Dispatch<React.SetStateAction<CardNumber>>;
-  moveFocusToExpirationDate: () => void;
+  moveFocusToExpirationDate?: () => void;
 }
 
 export function CardNumberInput({
@@ -55,7 +55,9 @@ export function CardNumberInput({
       setIsFullInputs((prev) => [true, ...prev.slice(0, -1)]);
 
       if (!isLast(index, CARD_NUMBER_INPUT_SIZE)) allRef.at(index + 1)?.current?.focus();
-      if (isLast(index, CARD_NUMBER_INPUT_SIZE)) moveFocusToExpirationDate();
+      if (isLast(index, CARD_NUMBER_INPUT_SIZE) && moveFocusToExpirationDate) {
+        moveFocusToExpirationDate();
+      }
     }
   };
 

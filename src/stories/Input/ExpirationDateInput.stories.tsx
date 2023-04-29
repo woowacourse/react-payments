@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta } from '@storybook/react';
+import { useState, useRef } from 'react';
 import { ExpirationDateInput } from '../../components/input/ExpirationDateInput';
 
 const meta = {
@@ -9,7 +9,6 @@ const meta = {
 } satisfies Meta<typeof ExpirationDateInput>;
 
 export default meta;
-type Story = StoryObj<typeof meta>;
 
 export const ExpirationDate = () => {
   const monthInputRef = useRef(null);
@@ -21,7 +20,6 @@ export const ExpirationDate = () => {
   return (
     <ExpirationDateInput
       monthInputRef={monthInputRef}
-      moveFocusToOwnerName={() => {}}
       expirationDate={expirationDate}
       setExpirationDate={setExpirationDate}
     />

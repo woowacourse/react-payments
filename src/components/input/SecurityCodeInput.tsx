@@ -12,7 +12,7 @@ interface Props {
   securityCode: SecurityCode;
   securityCodeInputRef: React.RefObject<HTMLInputElement>;
   setSecurityCode: React.Dispatch<React.SetStateAction<SecurityCode>>;
-  moveFocusToPassword: () => void;
+  moveFocusToPassword?: () => void;
 }
 
 export function SecurityCodeInput({
@@ -43,7 +43,7 @@ export function SecurityCodeInput({
   };
 
   useEffect(() => {
-    if (isFullInput(securityCode, SECURITY_CODE_SIZE)) moveFocusToPassword();
+    if (isFullInput(securityCode, SECURITY_CODE_SIZE) && moveFocusToPassword) moveFocusToPassword();
   }, [securityCode]);
 
   return (

@@ -17,7 +17,6 @@ export const CardNumber = () => {
   return (
     <CardNumberInput
       cardNumberInputRef={cardNumberInputRef}
-      moveFocusToExpirationDate={() => {}}
       cardNumber={cardNumber}
       setCardNumber={setCardNumber}
     />

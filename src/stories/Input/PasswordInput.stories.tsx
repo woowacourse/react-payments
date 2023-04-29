@@ -1,6 +1,5 @@
 import type { Meta } from '@storybook/react';
 import { useRef, useState } from 'react';
-
 import { PasswordInput } from '../../components/input/PasswordInput';
 
 const meta = {

@@ -11,7 +11,7 @@ interface Props {
   monthInputRef: React.RefObject<HTMLInputElement>;
   expirationDate: ExpirationDate;
   setExpirationDate: React.Dispatch<React.SetStateAction<ExpirationDate>>;
-  moveFocusToOwnerName: () => void;
+  moveFocusToOwnerName?: () => void;
 }
 
 export function ExpirationDateInput({
@@ -57,7 +57,7 @@ export function ExpirationDateInput({
   };
 
   useEffect(() => {
-    if (isFullInput(expirationDate.year, YEAR_SIZE)) moveFocusToOwnerName();
+    if (isFullInput(expirationDate.year, YEAR_SIZE) && moveFocusToOwnerName) moveFocusToOwnerName();
   }, [expirationDate.year]);
 
   return (

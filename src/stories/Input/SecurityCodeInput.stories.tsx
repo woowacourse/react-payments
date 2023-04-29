@@ -1,7 +1,5 @@
-import React, { useRef, useState } from 'react';
-
-import type { Meta, StoryObj } from '@storybook/react';
-
+import type { Meta } from '@storybook/react';
+import { useRef, useState } from 'react';
 import { SecurityCodeInput } from '../../components/input/SecurityCodeInput';
 
 const meta = {
@@ -19,7 +17,6 @@ export const SecurityCode = () => {
   return (
     <SecurityCodeInput
       securityCodeInputRef={securityCodeInputRef}
-      moveFocusToPassword={() => {}}
       securityCode={securityCode}
       setSecurityCode={setSecurityCode}
     />

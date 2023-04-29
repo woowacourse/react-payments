@@ -9,7 +9,7 @@ interface Props {
   ownerName: OwnerName;
   ownerNameInputRef: React.RefObject<HTMLInputElement>;
   setOwnerName: React.Dispatch<React.SetStateAction<OwnerName>>;
-  moveFocusToSecurityCode: () => void;
+  moveFocusToSecurityCode?: () => void;
 }
 
 export function OwnerNameInput({
@@ -29,7 +29,7 @@ export function OwnerNameInput({
   };
 
   const handleEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') moveFocusToSecurityCode();
+    if (e.key === 'Enter' && moveFocusToSecurityCode) moveFocusToSecurityCode();
   };
 
   return (
