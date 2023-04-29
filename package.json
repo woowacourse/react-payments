@@ -25,7 +25,8 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "chromatic": "npx chromatic --project-token=5cdf322ad992"
   },
   "eslintConfig": {
     "extends": [
@@ -80,5 +81,7 @@
     "storybook": "^7.0.5",
     "styled-components": "^5.3.9",
     "webpack": "^5.79.0"
-  }
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "react-payments@0.1.0"
 }
