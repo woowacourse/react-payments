@@ -13,14 +13,7 @@ const meta = {
 export default meta;
 
 export const SecurityCode = () => {
-  const [securityCode, setSecurityCode] = useState('');
-
   return (
-    <SecurityCodeInput
-      securityCode={securityCode}
-      setSecurityCode={setSecurityCode}
-      viewNextInput={() => {}}
-      viewPreviousInput={() => {}}
-    />
+    <SecurityCodeInput viewNextInput={() => {}} viewPreviousInput={() => {}} />
   );
 };

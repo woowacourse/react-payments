@@ -2,12 +2,9 @@ import styled from 'styled-components';
 import { COMPANIES } from '../../../../constants/cardCompany';
 import { CardCompany } from './CardCompany';
 import { v4 } from 'uuid';
-import { SetStateAction } from 'react';
+import { useCardInfoActionContext } from '../../../../hooks/cardInfoContext';
 
 interface Props {
-  setSelectedCardCompany: React.Dispatch<
-    SetStateAction<keyof typeof COMPANIES | undefined>
-  >;
   closeModal: () => void;
 }
 
@@ -19,10 +16,9 @@ export const isCompanyId = (
   return Object.keys(COMPANIES).includes(id);
 };
 
-export const SelectCardCompanyModal = ({
-  setSelectedCardCompany,
-  closeModal,
-}: Props) => {
+export const SelectCardCompanyModal = ({ closeModal }: Props) => {
+  const { setCompanyId } = useCardInfoActionContext();
+
   const handleClick: React.MouseEventHandler = (e) => {
     if (!(e.target instanceof HTMLElement)) return;
 
@@ -35,7 +31,7 @@ export const SelectCardCompanyModal = ({
     if (!isCompanyId(companyId)) return;
 
     closeModal();
-    setSelectedCardCompany(companyId);
+    setCompanyId(companyId);
   };
 
   return (

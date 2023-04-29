@@ -12,14 +12,7 @@ const meta = {
 export default meta;
 
 export const OwnerName = () => {
-  const [ownerName, setOwnerName] = useState('');
-
   return (
-    <OwnerNameInput
-      ownerName={ownerName}
-      setOwnerName={setOwnerName}
-      viewNextInput={() => {}}
-      viewPreviousInput={() => {}}
-    />
+    <OwnerNameInput viewNextInput={() => {}} viewPreviousInput={() => {}} />
   );
 };

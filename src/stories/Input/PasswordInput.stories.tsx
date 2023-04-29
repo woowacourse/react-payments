@@ -13,14 +13,9 @@ const meta = {
 export default meta;
 
 export const Password = () => {
-  const [password, setPassword] = useState(['', '']);
-
   return (
     <PasswordInput
       handleSubmitNewCardInfo={() => {}}
-      password={password}
-      setPassword={setPassword}
-      focusPasswordInputByIndex={(index: number) => {}}
       viewPreviousInput={() => {}}
     />
   );

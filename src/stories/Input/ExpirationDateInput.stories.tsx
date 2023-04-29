@@ -11,16 +11,8 @@ const meta = {
 export default meta;
 
 export const ExpirationDate = () => {
-  const [expirationDate, setExpirationDate] = useState({
-    month: '',
-    year: '',
-  });
-
   return (
     <ExpirationDateInput
-      expirationDate={expirationDate}
-      setExpirationDate={setExpirationDate}
-      focusNextExpirationDateInput={(index: number) => {}}
       viewNextInput={() => {}}
       viewPreviousInput={() => {}}
     />

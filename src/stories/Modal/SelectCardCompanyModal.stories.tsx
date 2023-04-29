@@ -20,10 +20,7 @@ export const SelectCardCompanyModalStory = () => {
     <>
       {isOpen && (
         <BottomSheet setIsOpen={setIsOpen}>
-          <SelectCardCompanyModal
-            setSelectedCardCompany={() => {}}
-            closeModal={() => setIsOpen(false)}
-          />
+          <SelectCardCompanyModal closeModal={() => setIsOpen(false)} />
         </BottomSheet>
       )}
     </>

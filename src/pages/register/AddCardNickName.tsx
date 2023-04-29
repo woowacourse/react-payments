@@ -1,1 +1,3 @@
-export const AddCardNickName = () => {};
+export const AddCardNickName = () => {
+  return <></>;
+};

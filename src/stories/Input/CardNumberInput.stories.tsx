@@ -14,14 +14,5 @@ const meta = {
 export default meta;
 
 export const CardNumber = () => {
-  const [cardNumber, setCardNumber] = useState(['', '', '', '']);
-
-  return (
-    <CardNumberInput
-      cardNumber={cardNumber}
-      setCardNumber={setCardNumber}
-      focusCardNumberInputByIndex={() => {}}
-      viewNextInput={() => {}}
-    />
-  );
+  return <CardNumberInput viewNextInput={() => {}} />;
 };

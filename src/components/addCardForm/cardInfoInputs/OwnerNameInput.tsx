@@ -1,13 +1,14 @@
-import { forwardRef } from 'react';
 import { InputWrapper } from './template/InputWrapper';
 import { ErrorMessage, Input } from './template/Input';
 import styled from 'styled-components';
 import { useErrorMessage } from '../../../hooks/useError';
 import { MoveInputContainer } from '../MoveInputContainer';
+import {
+  useCardInfoActionContext,
+  useCardInfoValueContext,
+} from '../../../hooks/cardInfoContext';
 
 interface Props {
-  ownerName: string;
-  setOwnerName: React.Dispatch<React.SetStateAction<string>>;
   viewNextInput: () => void;
   viewPreviousInput: () => void;
 }
@@ -24,64 +25,54 @@ const ownerNameInputValidator = (input: string | string[]) => {
     throw new Error('이름은 영문으로만 입력 가능합니다.');
 };
 
-export const OwnerNameInput = forwardRef<HTMLInputElement[], Props>(
-  function OwnerNameInput(
-    { ownerName, setOwnerName, viewNextInput, viewPreviousInput },
-    refs
-  ) {
-    const error = useErrorMessage(ownerName, ownerNameInputValidator);
+export const OwnerNameInput = ({ viewNextInput, viewPreviousInput }: Props) => {
+  const { ownerName } = useCardInfoValueContext();
+  const { setOwnerName } = useCardInfoActionContext();
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      setOwnerName(e.target.value.toUpperCase().slice(0, 20));
-    };
+  const error = useErrorMessage(ownerName, ownerNameInputValidator);
 
-    const handlePressKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
-      if (!(e.target instanceof HTMLInputElement)) return;
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setOwnerName(e.target.value.toUpperCase());
+  };
 
-      if (e.key !== 'Enter') return;
+  const handlePressKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!(e.target instanceof HTMLInputElement)) return;
+    if (e.key !== 'Enter') return;
+    if (error !== null) return;
 
-      e.preventDefault();
+    e.preventDefault();
+    viewNextInput();
+  };
 
-      if (error !== null) return;
-
-      viewNextInput();
-    };
-
-    return (
-      <div>
-        <Style.Label>
-          <Style.Title>카드 소유자 이름(선택)</Style.Title>
-          <Style.NameLength>{ownerName.length}/20</Style.NameLength>
-        </Style.Label>
-        <InputWrapper width={318}>
-          <Input
-            ref={(element) => {
-              if (!(element instanceof HTMLInputElement)) return;
-              if (typeof refs !== 'object') return;
-              if (refs?.current) refs.current[0] = element;
-            }}
-            autoFocus={true}
-            value={ownerName}
-            width={'318'}
-            minLength={1}
-            maxLength={20}
-            placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-            onChange={handleInputChange}
-            onKeyDown={handlePressKey}
-          />
-        </InputWrapper>
-        <ErrorMessage>{error ?? ''}</ErrorMessage>
-        <MoveInputContainer
-          isLeftBtnShowed={true}
-          isRightBtnShowed={error === null}
-          viewNextInput={viewNextInput}
-          viewPreviousInput={viewPreviousInput}
-          progress={'3/5'}
+  return (
+    <div>
+      <Style.Label>
+        <Style.Title>카드 소유자 이름(선택)</Style.Title>
+        <Style.NameLength>{ownerName.length}/20</Style.NameLength>
+      </Style.Label>
+      <InputWrapper width={318}>
+        <Input
+          autoFocus={true}
+          value={ownerName}
+          width={'318'}
+          minLength={1}
+          maxLength={20}
+          placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+          onChange={handleInputChange}
+          onKeyDown={handlePressKey}
         />
-      </div>
-    );
-  }
-);
+      </InputWrapper>
+      <ErrorMessage>{error ?? ''}</ErrorMessage>
+      <MoveInputContainer
+        isLeftBtnShowed={true}
+        isRightBtnShowed={error === null}
+        viewNextInput={viewNextInput}
+        viewPreviousInput={viewPreviousInput}
+        progress={'3/5'}
+      />
+    </div>
+  );
+};
 
 const Style = {
   Label: styled.div`
