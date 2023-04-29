@@ -20,8 +20,8 @@ export const ModalLayout = styled.div<AnimationType>`
   width: 375px;
   min-height: 100vh;
   margin: 0 auto;
-  animation: ${(props) => (props.animation === ANIMATION.appear ? ModalLayoutAppear : ModalLayoutDisAppear)} 0.5s
-    forwards;
+  animation: ${(props) => (props.animation === ANIMATION.appear ? ModalLayoutAppear : ModalLayoutDisAppear)}
+    ${(props) => `${props.delayMsTime / 1000}s`} forwards;
 `;
 
 export const Backdrop = styled.div<BackdropStyleProps>`
@@ -39,5 +39,6 @@ export const ModalContents = styled.div<AnimationType>`
   padding: 20px;
   background-color: #ffffff;
   border-radius: 5px 5px 0px 0px;
-  animation: ${(props) => (props.animation === ANIMATION.appear ? ModalContentsAppear : ModalContentsDisAppear)} 0.5s;
+  animation: ${(props) => (props.animation === ANIMATION.appear ? ModalContentsAppear : ModalContentsDisAppear)}
+    ${(props) => `${props.delayMsTime / 1000}s`} forwards;
 `;

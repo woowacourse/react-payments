@@ -24,7 +24,7 @@ import * as S from './style';
 function CreditCardRegister() {
   const navigate = useNavigate();
 
-  const { isModalOpen, animation, openModal, closeModal } = useAnimationModal();
+  const { isModalOpen, animation, openModal, closeModal, delayMsTime } = useAnimationModal();
 
   const { creditCard, update, errorMessage } = useContext(CreditCardRegisterContext);
   const isValid = useCreditCardValidation(creditCard, Object.values(errorMessage));
@@ -94,7 +94,7 @@ function CreditCardRegister() {
         </S.CreditCardRegisterForm>
       </S.CreditCardRegister>
       {isModalOpen && (
-        <Modal closeModal={closeModal} isAbleBackdropClick={false} animation={animation}>
+        <Modal closeModal={closeModal} isAbleBackdropClick={false} animation={animation} delayMsTime={delayMsTime}>
           <CreditCardCompanyModal updateCompany={update.company} closeModal={closeModal} />
         </Modal>
       )}

@@ -4,7 +4,7 @@ import { AnimationTypes } from '@Types/index';
 
 import ANIMATION from '@Constants/animation';
 
-const useAnimationModal = () => {
+const useAnimationModal = (delayMsTime: number = 500) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [animation, setAnimation] = useState<AnimationTypes>(ANIMATION.appear);
 
@@ -15,10 +15,10 @@ const useAnimationModal = () => {
     setTimeout(() => {
       setIsModalOpen(false);
       setAnimation(ANIMATION.appear);
-    }, 500);
+    }, delayMsTime);
   };
 
-  return { isModalOpen, animation, openModal, closeModal };
+  return { isModalOpen, animation, openModal, closeModal, delayMsTime };
 };
 
 export default useAnimationModal;
