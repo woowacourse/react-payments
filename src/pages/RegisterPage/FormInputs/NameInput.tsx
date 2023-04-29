@@ -1,19 +1,22 @@
 import { ChangeEvent, useContext } from "react";
 import styled, { css } from "styled-components";
-import { changeInvalidValueToBlank } from "utils/inputValidator";
+import {
+  changeInvalidValueToBlank,
+  preventInvalidBlank,
+} from "utils/inputValidator";
 import Input, { NameInputStyle } from "components/Input";
 import LengthLimit from "components/LengthLimit";
 import { CardInfoContext } from "components/CardInfoProvider";
 import { LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
-const { ONLY_ENGLISH, INVALID_BLANK } = VALID_INPUT;
+const { ONLY_ENGLISH } = VALID_INPUT;
 
 const NameInput = () => {
   const { name } = useContext(CardInfoContext).cardInfo;
   const setName = useContext(CardInfoContext).setCardInfo;
 
   const handleNameChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    const value = target.value.toUpperCase().trimStart();
-    if (value.includes(INVALID_BLANK)) return;
+    const value = preventInvalidBlank(target.value.toUpperCase());
+    if (value === undefined) return;
 
     setName((prevState) => {
       return {
