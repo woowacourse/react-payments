@@ -40,7 +40,7 @@ export const Modal = (props: PropsWithChildren<ModalProps>) => {
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  });
+  }, []);
 
   return (
     <BackDrop>
