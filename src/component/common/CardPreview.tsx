@@ -1,6 +1,7 @@
 import { CARD_CO_NAME } from "../../CONSTANT";
 import { CreditCard } from "../../type";
 import { colorMatch } from "../../util/colorMatch";
+import CardNumber from "../CardInputPage/InputBoxCardNumber/CardNumber";
 import "./cardPreview.css";
 
 interface CardPreviewProps {
@@ -14,13 +15,12 @@ export default function CardPreview({
 }: CardPreviewProps) {
   const { cardCo, cardNumber, expirationDate, owner } = card;
 
-  const previewNumber = cardNumber.map((number, index) => {
-    return 1000 > number && number > 9999
-      ? "   "
-      : index === 1 || index === 2
-      ? " **** "
-      : ` ${number} `;
-  });
+  const previewNumber =
+    cardNumber.length === 4 &&
+    cardNumber.every((number) => {
+      return 1000 <= number && number <= 9999;
+    }) &&
+    cardNumber.join(" ");
 
   const { backgroundColor, color } = colorMatch[cardCo];
   const cardCoName = CARD_CO_NAME[cardCo];
