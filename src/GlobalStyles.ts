@@ -5,7 +5,6 @@ const GlobalStyles = createGlobalStyle`
   ${reset}
 
   body{
-    padding:28px 24px;
     margin:0 auto;
     max-width: 600px;
     height:100%;
@@ -33,6 +32,14 @@ const GlobalStyles = createGlobalStyle`
     padding: 0;
     cursor: pointer;
   }
+
+  .App {
+    padding:28px 24px;
+  }
+
+  .overflowHidden {
+    overflow: hidden;
+  };
 `;
 
 export default GlobalStyles;
