@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1"
+    />
+    <meta name="theme-color" content="#000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <meta name="author" content="dain lee" />
+    <title>페이먼츠</title>
+    <link
+      rel="shortcut icon"
+      href="https://png.pngtree.com/png-vector/20190115/ourmid/pngtree-vector-credit-card-icon-png-image_319760.jpg"
+    />
+    <style>
+      main {
+        position: relative;
+        margin: 46px auto 0;
+      }
+
+      img[alt="Iphone Mockup"] {
+        width: 590px;
+        height: 834px;
+        position: absolute;
+        left: 50%;
+        top: -12px;
+        z-index: 1;
+        transform: translateX(-50%);
+      }
+
+      .iframe-box {
+        position: absolute;
+        left: 50%;
+        top: 38px;
+        z-index: 1;
+        transform: translateX(-50%);
+        margin-left: 2px;
+      }
+
+      iframe {
+        width: 375px;
+        height: 732px;
+        border-radius: 0 0 44px 44px;
+      }
+
+      @media screen and (max-width: 480px) {
+        * {
+          margin: 0;
+          height: 100% !important;
+        }
+
+        main {
+          margin: 0;
+        }
+
+        img[alt="Iphone Mockup"] {
+          display: none;
+        }
+
+        .iframe-box {
+          position: initial;
+          width: 100%;
+          transform: none;
+        }
+
+        iframe {
+          width: 100%;
+          border-radius: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <img src="assets/iphone-mockup.png" alt="Iphone Mockup" />
+      <div class="iframe-box">
+        <iframe
+          src="https://feb-dain.github.io/react-payments/"
+          frameborder="0"
+        ></iframe>
+      </div>
+    </main>
+  </body>
+</html>
