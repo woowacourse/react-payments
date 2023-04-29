@@ -10,7 +10,7 @@
 ## step2
 
 <p align="middle" >
-  <img src="https://user-images.githubusercontent.com/108778921/235308873-de21d192-118f-4216-a49d-9313cdcc743b.png">
+  <img src="https://user-images.githubusercontent.com/108778921/235309605-d1758c3b-fe18-46a6-abb4-6ede24e5d604.png">
 </p>
 
 ### 📝 실행 방법
