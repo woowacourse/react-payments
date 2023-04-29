@@ -1,4 +1,4 @@
-import { CardInfoContext } from "../components/CardInfoProvider";
+import { CardInfoContext } from "../components/provider/CardInfoProvider";
 import { useContext, useEffect, useState } from "react";
 import { isValidInfo } from "validation";
 

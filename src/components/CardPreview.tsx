@@ -5,8 +5,8 @@ import {
   CARD_COMPANIES,
   UNSELECTED_CARD_COMPANY,
 } from "constants/cardCompanies";
-import { ModalStateContext } from "./ModalStateProvider";
-import { CardCompanyCaption } from "./CaptionStyle";
+import { ModalStateContext } from "./provider/ModalStateProvider";
+import { CardCompanyCaption } from "./style/CaptionStyle";
 import { CardInfo } from "types";
 import { NUMBER_INPUT, LIMIT_LENGTH, PASSWORD_PART } from "constants/limit";
 import { HIDDEN_VALUE, SECURITY_TARGET } from "constants/security";

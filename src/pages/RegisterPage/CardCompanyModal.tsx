@@ -1,5 +1,5 @@
 import CardCompany from "components/CardCompany";
-import { CardInfoContext } from "components/CardInfoProvider";
+import { CardInfoContext } from "components/provider/CardInfoProvider";
 import Modal from "components/Modal";
 import { CARD_COMPANIES } from "constants/cardCompanies";
 import { useContext } from "react";

@@ -6,7 +6,7 @@ import {
 } from "utils/inputValidator";
 import Input, { NameInputStyle } from "components/Input";
 import LengthLimit from "components/LengthLimit";
-import { CardInfoContext } from "components/CardInfoProvider";
+import { CardInfoContext } from "components/provider/CardInfoProvider";
 import { LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
 const { ONLY_ENGLISH } = VALID_INPUT;
 

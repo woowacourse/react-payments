@@ -3,8 +3,8 @@ import CardRegisterForm from "pages/RegisterPage/CardRegisterForm";
 import LastPage from "pages/LastPage";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import GotLost from "pages/GotLost";
-import CardInfoProvider from "components/CardInfoProvider";
-import ModalStateProvider from "components/ModalStateProvider";
+import CardInfoProvider from "components/provider/CardInfoProvider";
+import ModalStateProvider from "components/provider/ModalStateProvider";
 
 const App = () => {
   return (

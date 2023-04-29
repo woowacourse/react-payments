@@ -3,13 +3,13 @@ import { ChangeEvent, Fragment, useContext } from "react";
 import { changeInvalidValueToBlank } from "utils/inputValidator";
 import styled from "styled-components";
 import Input, { CommonInputStyle } from "components/Input";
-import { Hyphen } from "components/DelimiterStyle";
-import { CardNumberCaption } from "components/CaptionStyle";
-import { CardNumberInputBox } from "components/InputBoxStyle";
-import { CardInfoContext } from "components/CardInfoProvider";
+import { Hyphen } from "components/style/DelimiterStyle";
+import { CardNumberCaption } from "components/style/CaptionStyle";
+import { CardNumberInputBox } from "components/style/InputBoxStyle";
+import { CardInfoContext } from "components/provider/CardInfoProvider";
 import { CardNumber } from "types";
 import { NUMBER_INPUT, LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
-import { ModalStateContext } from "components/ModalStateProvider";
+import { ModalStateContext } from "components/provider/ModalStateProvider";
 const { ONLY_NUMBER } = VALID_INPUT;
 
 const CardNumberInput = () => {

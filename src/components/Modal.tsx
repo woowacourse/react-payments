@@ -1,7 +1,7 @@
 import { ReactNode, useContext } from "react";
 import styled, { CSSProp } from "styled-components";
-import { CloseButton } from "./ButtonStyle";
-import { ModalStateContext } from "./ModalStateProvider";
+import { CloseButton } from "./style/ButtonStyle";
+import { ModalStateContext } from "./provider/ModalStateProvider";
 
 interface Props {
   modalStyle: CSSProp;

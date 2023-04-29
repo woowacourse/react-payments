@@ -7,12 +7,12 @@ import PasswordInput from "./FormInputs/PasswordInput";
 import SecurityCodeInput from "./FormInputs/SecurityCodeInput";
 import CardPreview from "components/CardPreview";
 import Header from "components/Header";
-import { NextButton } from "components/ButtonStyle";
-import { CardInfoContext } from "components/CardInfoProvider";
+import { NextButton } from "components/style/ButtonStyle";
+import { CardInfoContext } from "components/provider/CardInfoProvider";
 import useRequiredCardInfo from "hooks/useRequiredCardInfo";
 import CardCompanyModal from "./CardCompanyModal";
 import { useNavigate } from "react-router";
-import { ModalStateContext } from "components/ModalStateProvider";
+import { ModalStateContext } from "components/provider/ModalStateProvider";
 
 const CardRegisterForm = () => {
   const allCardInfo = useContext(CardInfoContext).cardInfo;

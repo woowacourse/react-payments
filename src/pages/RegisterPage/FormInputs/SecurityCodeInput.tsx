@@ -2,8 +2,8 @@ import { ChangeEvent, useContext } from "react";
 import styled from "styled-components";
 import { changeInvalidValueToBlank } from "utils/inputValidator";
 import Input, { SecurityCodeInputStyle } from "components/Input";
-import { CodeCaption } from "components/CaptionStyle";
-import { CardInfoContext } from "components/CardInfoProvider";
+import { CodeCaption } from "components/style/CaptionStyle";
+import { CardInfoContext } from "components/provider/CardInfoProvider";
 import { LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
 const { ONLY_NUMBER } = VALID_INPUT;
 

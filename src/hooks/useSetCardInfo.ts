@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router";
-import { CardInfoContext } from "../components/CardInfoProvider";
+import { CardInfoContext } from "../components/provider/CardInfoProvider";
 
 interface FormData {
   [k: string]: FormDataEntryValue;

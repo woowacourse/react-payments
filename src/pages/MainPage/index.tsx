@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Header from "components/Header";
 import CardPreview from "components/CardPreview";
-import { AddButton } from "components/ButtonStyle";
+import { AddButton } from "components/style/ButtonStyle";
 import useInitMainPage from "hooks/useInitMainPage";
 
 const MainPage = () => {

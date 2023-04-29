@@ -3,9 +3,9 @@ import { ChangeEvent, Fragment, useContext } from "react";
 import styled from "styled-components";
 import { changeInvalidValueToBlank } from "utils/inputValidator";
 import Input, { PasswordInputStyle } from "components/Input";
-import { PasswordCaption } from "components/CaptionStyle";
-import { PasswordInputBox } from "components/InputBoxStyle";
-import { CardInfoContext } from "components/CardInfoProvider";
+import { PasswordCaption } from "components/style/CaptionStyle";
+import { PasswordInputBox } from "components/style/InputBoxStyle";
+import { CardInfoContext } from "components/provider/CardInfoProvider";
 import {
   NUMBER_INPUT,
   LIMIT_LENGTH,
