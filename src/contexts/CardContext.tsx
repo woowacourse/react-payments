@@ -9,6 +9,7 @@ type Action =
   | { type: "SET_CARD_CVC"; cardCVC: string }
   | { type: "SET_PASSWORD"; cardPassword: [string, string] }
   | { type: "SET_CARD_COMPANY"; cardCompany: CREDIT_CARD_COMPANY | null }
+  | { type: "SET_CARD_ALIAS"; cardAlias: string }
   | { type: "RESET" };
 
 type CardDispatch = Dispatch<Action>;
@@ -62,6 +63,11 @@ function cardReducer(state: CreditCard, action: Action): CreditCard {
       return {
         ...state,
         cardCompany: action.cardCompany,
+      };
+    case "SET_CARD_ALIAS":
+      return {
+        ...state,
+        cardAlias: action.cardAlias,
       };
     case "RESET":
       return initialState;

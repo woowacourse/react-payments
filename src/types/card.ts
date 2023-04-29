@@ -17,4 +17,5 @@ export interface CreditCard {
   cardCVC: string;
   cardPassword: [string, string];
   cardCompany: CREDIT_CARD_COMPANY | null;
+  cardAlias?: string;
 }
