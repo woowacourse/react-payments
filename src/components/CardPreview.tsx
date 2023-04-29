@@ -1,14 +1,21 @@
 import styled from 'styled-components';
 
 type CardPreviewProps = {
+  cardCompany: string;
   cardNumbers: string[];
   cardOwner: string[];
   cardExpirationDate: string[];
 };
 
-const CardPreview = ({ cardNumbers, cardOwner, cardExpirationDate }: CardPreviewProps) => {
+const CardPreview = ({
+  cardCompany,
+  cardNumbers,
+  cardOwner,
+  cardExpirationDate,
+}: CardPreviewProps) => {
   return (
     <CardPreviewWrapper>
+      <CardCompany>{cardCompany}</CardCompany>
       <CardChip />
       <CardNumberWrapper>
         {cardNumbers.map((cardNumber, index) => {
@@ -52,8 +59,16 @@ const CardPreviewWrapper = styled.div`
   border-radius: 5px;
 `;
 
+const CardCompany = styled.p`
+  height: 14px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  color: #fff;
+`;
+
 const CardChip = styled.div`
-  margin-top: 40px;
+  margin-top: 22px;
   width: 40px;
   height: 24px;
   background-color: #cbba64;

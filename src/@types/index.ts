@@ -1,5 +1,7 @@
 type Card = {
   id: string;
+  cardName: string;
+  cardCompany: string;
   cardNumbers: string[];
   cardExpirationDate: string[];
   cardOwner: string[];
@@ -7,4 +9,6 @@ type Card = {
   cardPWD: string[];
 };
 
-export type { Card };
+type CardRegisterForm = Omit<Card, 'cardName' | 'cardCompany'>;
+
+export type { Card, CardRegisterForm };

@@ -8,6 +8,7 @@ import { isAlphabet, isNumber, validateMonth, validateYear } from '../utils/vali
 import ErrorMessage from './ErrorMessage';
 import { getUniqueID } from '../utils/key';
 import useMoveFocus from '../hooks/useMoveFocus';
+import CardCompanyModal from './CardCompanyModal';
 
 const AddCardContainer = () => {
   const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
@@ -16,6 +17,8 @@ const AddCardContainer = () => {
   const [cardCVC, setCardCVC] = useState<string[]>(['']);
   const [cardPWD, setCardPWD] = useState<string[]>(['', '']);
   const [expirationError, setExpirationError] = useState<boolean>(false);
+  const [cardCompany, setCardCompany] = useState('');
+
   const { insert, move } = useMoveFocus();
   const setCard = useCardDispatch();
   const navigate = useNavigate();
@@ -84,16 +87,30 @@ const AddCardContainer = () => {
     setCard((prev) => {
       return [
         ...prev,
-        { id: getUniqueID(), cardNumbers, cardExpirationDate, cardOwner, cardCVC, cardPWD },
+        {
+          id: getUniqueID(),
+          cardName: '',
+          cardCompany,
+          cardNumbers,
+          cardExpirationDate,
+          cardOwner,
+          cardCVC,
+          cardPWD,
+        },
       ];
     });
     navigate('/');
     setExpirationError(false);
   };
 
+  const onClickLogo = (cardCompanyName: string) => {
+    setCardCompany(cardCompanyName);
+  };
+
   return (
     <AddCardContainerWrapper>
       <CardPreview
+        cardCompany={cardCompany}
         cardNumbers={cardNumbers}
         cardOwner={cardOwner}
         cardExpirationDate={cardExpirationDate}
@@ -243,6 +260,7 @@ const AddCardContainer = () => {
         </StyledHeightCenter>
         <StyledSubmitButton type="submit">다음</StyledSubmitButton>
       </StyledForm>
+      <CardCompanyModal onClickLogo={onClickLogo} />
     </AddCardContainerWrapper>
   );
 };
