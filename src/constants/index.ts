@@ -1,6 +1,15 @@
 import { bc, hana, hyundai, kakao, kookmin, lotte, sinhan, woori } from '../images';
 
-const BANKS = {
+interface IBANKS {
+  [key: string]: {
+    name: string;
+    logo: any;
+    bgColor: string;
+    color: string;
+  };
+}
+
+const BANKS: IBANKS = {
   bc: {
     name: 'BC카드',
     logo: bc,
