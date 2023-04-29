@@ -9,10 +9,10 @@ import {
 } from 'react';
 
 import { v4 as uuid } from 'uuid';
+
 import { CardInfo } from '../types/card';
 
 interface Actions {
-  updateBank: (bank: string, closeModal: () => void) => void;
   setCardInfo: Dispatch<SetStateAction<CardInfo>>;
   initCardInfo: () => void;
 }
@@ -47,14 +47,6 @@ export const CardInfoProvider = ({ children }: Props) => {
 
   const actions = useMemo(
     () => ({
-      updateBank(bank: string, closeModal: () => void) {
-        setCardInfo((prev) => ({
-          ...prev,
-          bank,
-        }));
-        closeModal();
-      },
-
       setCardInfo,
 
       initCardInfo() {
