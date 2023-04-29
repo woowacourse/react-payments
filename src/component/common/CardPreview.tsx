@@ -1,5 +1,5 @@
 import { CreditCard } from "../../type";
-import "./CardPreview.css";
+import "./cardPreview.css";
 
 interface CardPreviewProps {
   card: CreditCard;

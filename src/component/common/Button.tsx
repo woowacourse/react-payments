@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes } from "react";
 
-import "./Button.css";
+import "./button.css";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
 
