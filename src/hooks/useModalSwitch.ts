@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-const useModalSwitch = () => {
-  const [showModal, setShowModal] = useState(false);
+const useModalSwitch = (initValue: boolean) => {
+  const [showModal, setShowModal] = useState(initValue);
 
   const openModal = () => {
     setShowModal(true);
