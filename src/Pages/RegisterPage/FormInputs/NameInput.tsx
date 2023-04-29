@@ -1,19 +1,14 @@
 import { StyledInput } from 'components/Input';
 import { StyledInputBox } from 'components/InputBox';
 import { LENGTH, REGEX } from 'constants/constants';
+import { AddCardContext } from 'context/CardContext';
 import { useInputHandler } from 'hooks/useInputHandler';
-import { Dispatch, SetStateAction } from 'react';
+import { useContext } from 'react';
 import styled from 'styled-components';
-import { Card } from 'types/Card';
 
-type Name = Pick<Card, 'name'>;
+const NameInput = () => {
+  const { name, setName } = useContext(AddCardContext);
 
-interface Props {
-  name: Name;
-  setName: Dispatch<SetStateAction<Name>>;
-}
-
-const NameInput = ({ name, setName }: Props) => {
   const NameValidatior = (target: string, value: string) => {
     const upperValue = value.toUpperCase().trimStart();
     return upperValue.includes('  ') ? '' : upperValue;

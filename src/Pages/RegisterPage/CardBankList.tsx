@@ -7,11 +7,10 @@ import { ReactComponent as KookminIcon } from '../../assets/kookmin_icon.svg';
 import { ReactComponent as LotteIcon } from '../../assets/lotte_icon.svg';
 import { ReactComponent as ShinhanIcon } from '../../assets/shinhan_icon.svg';
 import { ReactComponent as WooriIcon } from '../../assets/woori_icon.svg';
-import { Dispatch, SetStateAction } from 'react';
-import { Bank } from 'types/Card';
+import { Dispatch, SetStateAction, useContext } from 'react';
+import { AddCardContext } from 'context/CardContext';
 
 interface CardBankListProps {
-  setBank: Dispatch<SetStateAction<Bank>>;
   setModal: Dispatch<SetStateAction<boolean>>;
 }
 
@@ -27,7 +26,9 @@ const banks = [
 ];
 
 const CardBankList = (props: CardBankListProps) => {
-  const { setBank, setModal } = props;
+  const { setModal } = props;
+
+  const { setBank } = useContext(AddCardContext);
 
   const handleBank = (name: string, color: string) => {
     setBank({ bank: name, color: color });

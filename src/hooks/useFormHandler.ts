@@ -17,10 +17,15 @@ export const useFormHandler = (cardInfo: Card) => {
     if (!formData) return;
     const formDataObject = Object.fromEntries(formData);
 
+    if (!bank) {
+      alert('카드사를 선택해주세요.');
+      return;
+    }
+
     if (areValidInfo(formDataObject)) {
       setLocalStorage('card', { ...formDataObject, color, bank });
 
-      navigate('/');
+      navigate('/register-name');
     } else {
       alert('값을 모두 입력해 주세요.');
     }

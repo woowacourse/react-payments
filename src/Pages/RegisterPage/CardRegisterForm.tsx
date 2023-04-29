@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext } from 'react';
 import CardNumberInput from './FormInputs/CardNumberInput';
 import ExpirationDateInput from './FormInputs/ExpirationDateInput';
 import NameInput from './FormInputs/NameInput';
@@ -11,34 +11,15 @@ import NextButton from 'components/Button';
 import Modal from 'components/Modal';
 import CardBankList from './CardBankList';
 import { Card } from 'types/Card';
+import { AddCardContext } from 'context/CardContext';
 
 const CardRegisterForm = () => {
-  const [isModalActive, setIsModalActive] = useState(true);
+  const { cardNumber, date, name, bank, isModalActive, setIsModalActive } =
+    useContext(AddCardContext);
 
   const handleModal = () => {
     setIsModalActive(!isModalActive);
   };
-
-  const [cardNumber, setCardNumber] = useState({
-    number1: '',
-    number2: '',
-    number3: '',
-    number4: '',
-  });
-
-  const [date, setDate] = useState({
-    month: '',
-    year: '',
-  });
-
-  const [name, setName] = useState({
-    name: '',
-  });
-
-  const [bank, setBank] = useState({
-    bank: '',
-    color: '',
-  });
 
   const cardInfo: Card = { ...cardNumber, ...date, ...name, ...bank };
 
@@ -52,12 +33,9 @@ const CardRegisterForm = () => {
         <CardPreview cardInfo={cardInfo} handleModal={handleModal} />
 
         <form onSubmit={handleForm}>
-          <CardNumberInput
-            cardNumber={cardNumber}
-            setCardNumber={setCardNumber}
-          />
-          <ExpirationDateInput date={date} setDate={setDate} />
-          <NameInput name={name} setName={setName} />
+          <CardNumberInput />
+          <ExpirationDateInput />
+          <NameInput />
           <SecurityCodeInput />
           <PasswordInput />
           <NextButton>다음</NextButton>
@@ -68,7 +46,7 @@ const CardRegisterForm = () => {
           modal={isModalActive}
           setModal={handleModal}
           height="300"
-          element={<CardBankList setBank={setBank} setModal={handleModal} />}
+          element={<CardBankList setModal={handleModal} />}
         />
       )}
     </>

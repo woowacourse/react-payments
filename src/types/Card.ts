@@ -13,6 +13,22 @@ export interface Card {
   color: string;
 }
 
+export interface CardNumber {
+  number1: string;
+  number2: string;
+  number3: string;
+  number4: string;
+}
+
+export interface Expiration {
+  month: string;
+  year: string;
+}
+
+export interface Name {
+  name: string;
+}
+
 export interface Bank {
   bank: string;
   color: string;

@@ -1,20 +1,13 @@
-import { Dispatch, SetStateAction } from 'react';
+import { useContext } from 'react';
 import styled from 'styled-components';
 import { HIDDEN_ELEMENT_STYLE, LENGTH, REGEX } from 'constants/constants';
-import { Card } from 'types/Card';
 import { useInputHandler } from 'hooks/useInputHandler';
 import { StyledInput } from 'components/Input';
 import InputBox from 'components/InputBox';
+import { AddCardContext } from 'context/CardContext';
 
-type CardNumber = Pick<Card, 'number1' | 'number2' | 'number3' | 'number4'>;
-
-interface Props {
-  cardNumber: CardNumber;
-  setCardNumber: Dispatch<SetStateAction<CardNumber>>;
-}
-
-const CardNumberInput = (props: Props) => {
-  const { cardNumber, setCardNumber } = props;
+const CardNumberInput = () => {
+  const { cardNumber, setCardNumber } = useContext(AddCardContext);
 
   const { handleInput: handleCardNumber, handleRef: handleInputRef } =
     useInputHandler(setCardNumber, {

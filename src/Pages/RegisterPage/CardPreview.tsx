@@ -1,6 +1,5 @@
 import { LENGTH } from 'constants/constants';
 import styled from 'styled-components';
-import { Card } from 'types/Card';
 
 const CardPreview = ({ cardInfo, handleModal }: any) => {
   return (

@@ -1,20 +1,13 @@
-import { Dispatch, SetStateAction } from 'react';
+import { useContext } from 'react';
 import styled from 'styled-components';
 import { HIDDEN_ELEMENT_STYLE, LENGTH, REGEX } from 'constants/constants';
-import { Card } from 'types/Card';
 import { useInputHandler } from 'hooks/useInputHandler';
 import InputBox from 'components/InputBox';
 import { StyledInput } from 'components/Input';
+import { AddCardContext } from 'context/CardContext';
 
-type Date = Pick<Card, 'month' | 'year'>;
-
-interface Props {
-  date: Date;
-  setDate: Dispatch<SetStateAction<Date>>;
-}
-
-const ExpirationDateInput = (props: Props) => {
-  const { date, setDate } = props;
+const ExpirationDateInput = () => {
+  const { date, setDate } = useContext(AddCardContext);
 
   const DateValidatior = (name: string, value: string) => {
     const ValidDate = Number(value);
