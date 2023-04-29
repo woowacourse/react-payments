@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import React, { ChangeEvent, forwardRef } from 'react';
 
 import * as styled from './Input.styled';
 
@@ -14,9 +14,10 @@ interface InputProps {
   pattern?: string;
 }
 
-const Input = (props: InputProps) => {
+const Input = forwardRef((props: InputProps, ref: React.Ref<HTMLInputElement>) => {
   return (
     <styled.Input
+      ref={ref}
       name={props.name}
       value={props.value}
       onChange={props.onChange}
@@ -27,6 +28,6 @@ const Input = (props: InputProps) => {
       data-numeric={props.numeric}
     />
   );
-};
+});
 
 export default Input;

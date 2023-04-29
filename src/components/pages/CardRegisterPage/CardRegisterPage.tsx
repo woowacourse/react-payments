@@ -18,7 +18,7 @@ const CardRegisterPage = () => {
       {showCardForm ? (
         <>
           <CardPreview openModal={openModal} />
-          <CardRegisterForm turnToNicknameForm={turnToNicknameForm} />
+          <CardRegisterForm showModal={showModal} turnToNicknameForm={turnToNicknameForm} />
         </>
       ) : (
         <styled.NicknameFormContainer>

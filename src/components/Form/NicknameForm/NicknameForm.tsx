@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-
 import { useEffect, useRef } from 'react';
 
 import * as styled from './NicknameForm.styled';
@@ -8,12 +7,18 @@ import { useCardInfoActions, useCardInfoValue } from '../../../context/CardInfoC
 import { useCardListActions } from '../../../context/CardListContext';
 import useForm from '../../../hooks/useForm';
 
+import { Input } from '../../Form';
+
 const NicknameForm = () => {
   const navigate = useNavigate();
   const [cardInfo, { setCardInfo, initCardInfo }] = [useCardInfoValue(), useCardInfoActions()];
   const { setCardList } = useCardListActions();
 
   const nicknameInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    nicknameInputRef.current?.focus();
+  }, []);
 
   const { onChange, onSubmit } = useForm({
     submitAction: () => {
@@ -27,14 +32,14 @@ const NicknameForm = () => {
     errorOptions: {},
   });
 
-  useEffect(() => {
-    nicknameInputRef.current?.focus();
-  }, []);
-
   return (
     <styled.NicknameForm onSubmit={onSubmit}>
-      <styled.NicknameInput
+      <Input
         ref={nicknameInputRef}
+        type="text"
+        center={true}
+        maxLength={6}
+        value={cardInfo.nickname}
         name="nickname"
         onChange={onChange}
         placeholder="카드 별칭 (선택)"

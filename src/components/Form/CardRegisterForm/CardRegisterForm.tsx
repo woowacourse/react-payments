@@ -6,13 +6,23 @@ import useForm from '../../../hooks/useForm';
 import { CardNumbers, ExpirationDate, Input, OwnerName, Password, SecurityNumbers } from '../';
 
 import validator from '../../../domain/validator';
+import { useEffect, useRef } from 'react';
 
 interface Props {
+  showModal: boolean;
   turnToNicknameForm: () => void;
 }
 
-const CardRegisterForm = ({ turnToNicknameForm }: Props) => {
+const CardRegisterForm = ({ showModal, turnToNicknameForm }: Props) => {
   const [cardInfo, { setCardInfo }] = [useCardInfoValue(), useCardInfoActions()];
+
+  const firstInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (showModal) return;
+
+    firstInputRef.current?.focus();
+  }, [showModal]);
 
   const { onSubmit, onChange, error } = useForm({
     submitAction: () => turnToNicknameForm(),
@@ -40,6 +50,7 @@ const CardRegisterForm = ({ turnToNicknameForm }: Props) => {
     <styled.CardRegisterForm onSubmit={onSubmit}>
       <CardNumbers error={error}>
         <Input
+          ref={firstInputRef}
           name="firstCardNumbers"
           value={cardInfo?.firstCardNumbers}
           onChange={onChange}

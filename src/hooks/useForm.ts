@@ -6,18 +6,16 @@ interface Props {
   errorOptions: any;
 }
 
-const useForm = ({ submitAction, changeAction, errorOptions = '' }: Props) => {
+const useForm = ({ submitAction, changeAction, errorOptions }: Props) => {
   const [error, setError] = useState(errorOptions?.initState);
 
   const checkFormValidity = (elements: HTMLInputElement[]) => {
-    if (!error) return true;
-
     return elements.every((elem) => {
       if (elem.tagName !== 'INPUT') return true;
 
       const { name, value } = elem;
 
-      const errorMessage = errorOptions.validator[name]?.(value);
+      const errorMessage = errorOptions?.validator && errorOptions?.validator[name]?.(value);
       if (errorMessage) {
         setError((prev: any) => ({ ...prev, [name]: errorMessage }));
         elem.focus();
