@@ -1,13 +1,14 @@
-import styles from './style.module.css';
-import { FocusEvent, KeyboardEvent, MouseEvent, memo, useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
+import type { FocusEvent, KeyboardEvent, MouseEvent } from 'react';
 import type { CardFormData, CardFormValidation, Issuer } from '../../../types';
-import { useModalContext } from '../../../contexts/ModalContext';
+import Button from '../../common/Button/Button';
 import CardIssuerSelection from './CardIssuerSelection/CardIssuerSelection';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
-import Button from '../../common/Button/Button';
 import Modal from '../../common/Modal/Modal';
+import { useModalContext } from '../../../contexts/ModalContext';
 import DownIcon from '../../../assets/down-icon.svg';
+import styles from './style.module.css';
 
 interface CardIssuerProps {
   isError: boolean;
@@ -15,7 +16,7 @@ interface CardIssuerProps {
   updateInputError: <K extends keyof CardFormValidation>(key: K, value: CardFormData[K]) => void;
 }
 
-function CardIssuer({ isError, updateInputValue, updateInputError }: CardIssuerProps) {
+const CardIssuer = ({ isError, updateInputValue, updateInputError }: CardIssuerProps) => {
   const { isModalOpen, isModalClosed, openModal, closeModal } = useModalContext();
   const [value, setValue] = useState<Issuer | ''>('');
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -80,6 +81,6 @@ function CardIssuer({ isError, updateInputValue, updateInputError }: CardIssuerP
       )}
     </InputContainer>
   );
-}
+};
 
 export default memo(CardIssuer);

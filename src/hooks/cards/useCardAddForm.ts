@@ -1,10 +1,11 @@
-import { FormEvent, useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import type { FormEvent } from 'react';
 import type { CardFormData } from '../../types';
-import { PATH } from '../../constants';
 import { useCardListContext } from '../../contexts/CardListContext';
 import { useCardInputValidation } from './useCardInputValidation';
 import { useFormComplete } from '../common/useFormComplete';
+import { PATH } from '../../constants';
 
 const initialValue: CardFormData = {
   issuer: '',
@@ -34,7 +35,7 @@ const useCardAddForm = () => {
 
   const updateInputValue = useCallback(
     <K extends keyof CardFormData>(key: K, value: CardFormData[K]) => {
-      setCardInformation((information) => ({ ...information, [key]: value }));
+      setCardInformation((prevCardInformation) => ({ ...prevCardInformation, [key]: value }));
       updateInputValidation(key, value);
     },
     [updateInputValidation]

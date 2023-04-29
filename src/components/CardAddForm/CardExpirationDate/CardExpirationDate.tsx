@@ -1,9 +1,10 @@
-import { ChangeEvent, FocusEvent, memo } from 'react';
+import { memo } from 'react';
+import type { ChangeEvent, FocusEvent } from 'react';
 import type { CardFormData, CardFormValidation } from '../../../types';
-import { EXPIRATION_DATE_INPUT_MAX_LENGTH } from '../../../constants';
+import Input from '../../common/Input/Input';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
-import Input from '../../common/Input/Input';
+import { EXPIRATION_DATE_INPUT_MAX_LENGTH } from '../../../constants';
 import { formatDisplayedExpirationDate, formatExpirationDate } from '../../../utils/formatter';
 
 interface CardExpirationDateProps {
@@ -12,11 +13,11 @@ interface CardExpirationDateProps {
   updateInputError: <K extends keyof CardFormValidation>(key: K, value: CardFormData[K]) => void;
 }
 
-function CardExpirationDate({
+const CardExpirationDate = ({
   isError,
   updateInputValue,
   updateInputError: updateCardInputError,
-}: CardExpirationDateProps) {
+}: CardExpirationDateProps) => {
   const onChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     target.value = formatDisplayedExpirationDate(target.value);
     updateInputValue('expirationDate', formatExpirationDate(target.value));
@@ -52,6 +53,6 @@ function CardExpirationDate({
       />
     </InputContainer>
   );
-}
+};
 
 export default memo(CardExpirationDate);

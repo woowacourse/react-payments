@@ -1,4 +1,5 @@
-import { KeyboardEvent, useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
+import type { KeyboardEvent } from 'react';
 
 const useModal = () => {
   const [isOpen, setIsOpen] = useState(false);

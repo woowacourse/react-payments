@@ -1,4 +1,4 @@
-import { Issuer } from '../types';
+import type { Issuer } from '../types';
 import BCCardLogo from '../assets/bc-logo.svg';
 import ShinhanCardLogo from '../assets/shinhan-logo.svg';
 import KakaoBankLogo from '../assets/kakaobank-logo.svg';

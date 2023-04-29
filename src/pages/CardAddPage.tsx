@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
-import { useModalContext } from '../contexts/ModalContext';
-import Header from '../components/common/Header/Header';
-import CardItem from '../components/CardItem/CardItem';
 import CardAddForm from '../components/CardAddForm/CardAddForm';
+import CardItem from '../components/CardItem/CardItem';
+import Header from '../components/common/Header/Header';
+import { useModalContext } from '../contexts/ModalContext';
 import { useCardAddForm } from '../hooks/cards/useCardAddForm';
 
-function CardAddPage() {
+const CardAddPage = () => {
   const { resetModal } = useModalContext();
   const { cardInformation, inputError, updateInputValue, updateInputError, handleSubmit } =
     useCardAddForm();
@@ -34,6 +34,6 @@ function CardAddPage() {
       </main>
     </>
   );
-}
+};
 
 export default CardAddPage;

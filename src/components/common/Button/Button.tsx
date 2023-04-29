@@ -1,5 +1,6 @@
+import { forwardRef } from 'react';
+import type { ComponentPropsWithRef, ForwardedRef } from 'react';
 import styles from './style.module.css';
-import { ComponentPropsWithRef, ForwardedRef, forwardRef } from 'react';
 
 interface ButtonProps extends ComponentPropsWithRef<'button'> {
   variant?: 'default' | 'primary' | 'secondary' | 'danger' | 'textButton';
@@ -8,7 +9,7 @@ interface ButtonProps extends ComponentPropsWithRef<'button'> {
   children?: string;
 }
 
-function Button(
+const Button = (
   {
     children,
     variant = 'default',
@@ -18,7 +19,7 @@ function Button(
     ...attributes
   }: ButtonProps,
   ref: ForwardedRef<HTMLButtonElement>
-) {
+) => {
   const displayStyle = icon ? styles.iconButton : '';
 
   return (
@@ -31,6 +32,6 @@ function Button(
       {children}
     </button>
   );
-}
+};
 
 export default forwardRef(Button);

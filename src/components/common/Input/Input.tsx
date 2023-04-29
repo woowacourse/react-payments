@@ -1,15 +1,16 @@
+import { forwardRef } from 'react';
+import type { ComponentPropsWithRef, ForwardedRef } from 'react';
 import styles from './style.module.css';
-import { ComponentPropsWithRef, ForwardedRef, forwardRef } from 'react';
 
 interface InputProps extends ComponentPropsWithRef<'input'> {
   variant?: 'outline' | 'underline';
   isError?: boolean;
 }
 
-function Input(
+const Input = (
   { variant = 'outline', className = '', isError = false, ...attributes }: InputProps,
   ref: ForwardedRef<HTMLInputElement>
-) {
+) => {
   const visualStyle = variant === 'outline' ? styles.outline : styles.underline;
 
   return (
@@ -19,6 +20,6 @@ function Input(
       {...attributes}
     />
   );
-}
+};
 
 export default forwardRef(Input);

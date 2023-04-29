@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom';
-import { PATH } from '../constants';
-import { useCardListContext } from '../contexts/CardListContext';
-import Header from '../components/common/Header/Header';
 import Button from '../components/common/Button/Button';
 import CardList from '../components/CardList/CardList';
+import Header from '../components/common/Header/Header';
+import { useCardListContext } from '../contexts/CardListContext';
+import { PATH } from '../constants';
 
-function CardListPage() {
+const CardListPage = () => {
   const { cardList } = useCardListContext();
   const navigate = useNavigate();
 
@@ -24,6 +24,6 @@ function CardListPage() {
       </main>
     </>
   );
-}
+};
 
 export default CardListPage;

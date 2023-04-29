@@ -1,12 +1,13 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 import styles from './style.module.css';
-import { Card } from '../../types';
+import type { Card } from '../../types';
 import CardItem from '../CardItem/CardItem';
 
 interface CardListProps {
   cardList: Card[];
 }
 
-function CardList({ cardList }: CardListProps) {
+const CardList = ({ cardList }: CardListProps) => {
   return (
     <>
       {cardList.length ? (
@@ -28,6 +29,6 @@ function CardList({ cardList }: CardListProps) {
       )}
     </>
   );
-}
+};
 
 export default CardList;

@@ -1,4 +1,4 @@
-import { ChangeEvent, MutableRefObject } from 'react';
+import type { ChangeEvent, MutableRefObject } from 'react';
 import {
   encryptDisplayedCardNumber,
   formatDisplayedCardNumber,

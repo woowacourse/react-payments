@@ -1,7 +1,7 @@
-import styles from './style.module.css';
-import { ComponentPropsWithoutRef, ReactNode } from 'react';
-import { SupportingTextMessage } from '../../../types';
+import type { ComponentPropsWithoutRef, ReactNode } from 'react';
+import type { SupportingTextMessage } from '../../../types';
 import SupportingText from '../SupportingText/SupportingText';
+import styles from './style.module.css';
 
 interface InputContainerProps extends ComponentPropsWithoutRef<'div'> {
   children: ReactNode;
@@ -13,13 +13,13 @@ interface InputContainerProps extends ComponentPropsWithoutRef<'div'> {
   isError?: boolean;
 }
 
-function InputContainer({
+const InputContainer = ({
   children,
   className = '',
   supportingText,
   characterCounter,
   isError = false,
-}: InputContainerProps) {
+}: InputContainerProps) => {
   return (
     <div className={`${className} ${styles.inputContainer}`}>
       {children}
@@ -33,6 +33,6 @@ function InputContainer({
       </div>
     </div>
   );
-}
+};
 
 export default InputContainer;

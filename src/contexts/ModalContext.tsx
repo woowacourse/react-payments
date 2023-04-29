@@ -1,4 +1,5 @@
-import { KeyboardEvent, PropsWithChildren, createContext, useContext } from 'react';
+import { createContext, useContext, useMemo } from 'react';
+import type { KeyboardEvent, PropsWithChildren } from 'react';
 import { useModal } from '../hooks/common/useModal';
 
 interface ModalContextProps {
@@ -11,15 +12,7 @@ interface ModalContextProps {
   handleClosePress: (event: KeyboardEvent<HTMLElement>) => void;
 }
 
-export const ModalContext = createContext<ModalContextProps>({
-  isModalOpen: false,
-  isModalClosed: false,
-  isVisible: false,
-  openModal: () => {},
-  closeModal: () => {},
-  resetModal: () => {},
-  handleClosePress: () => {},
-});
+export const ModalContext = createContext<ModalContextProps | null>(null);
 
 export const ModalProvider = ({ children }: PropsWithChildren) => {
   const {
@@ -32,27 +25,26 @@ export const ModalProvider = ({ children }: PropsWithChildren) => {
     handleClosePress,
   } = useModal();
 
-  return (
-    <ModalContext.Provider
-      value={{
-        isModalOpen,
-        isModalClosed,
-        isVisible,
-        openModal,
-        closeModal,
-        resetModal,
-        handleClosePress,
-      }}
-    >
-      {children}
-    </ModalContext.Provider>
+  const contextValue = useMemo(
+    () => ({
+      isModalOpen,
+      isModalClosed,
+      isVisible,
+      openModal,
+      closeModal,
+      resetModal,
+      handleClosePress,
+    }),
+    [isModalOpen, isModalClosed, isVisible, openModal, closeModal, resetModal, handleClosePress]
   );
+
+  return <ModalContext.Provider value={contextValue}>{children}</ModalContext.Provider>;
 };
 
 export const useModalContext = () => {
   const context = useContext(ModalContext);
 
-  if (context === undefined) {
+  if (context === null) {
     throw new Error('useModalContext needs to be used inside the ModalProvider');
   }
 

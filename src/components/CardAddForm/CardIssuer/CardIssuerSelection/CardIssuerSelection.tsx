@@ -1,16 +1,16 @@
-import styles from './style.module.css';
-import { MouseEvent } from 'react';
+import type { MouseEvent } from 'react';
 import { CARD_ISSUERS } from '../../../../constants';
-import CardIssuerOption from './CardIssuerOption/CardIssuerOption';
 import Button from '../../../common/Button/Button';
+import CardIssuerOption from './CardIssuerOption/CardIssuerOption';
 import CloseIcon from '../../../../assets/x-icon.svg';
+import styles from './style.module.css';
 
 interface CardIssuerSelectionProps {
   onOptionClick: (event: MouseEvent<HTMLButtonElement>) => void;
   close: () => void;
 }
 
-function CardIssuerSelection({ onOptionClick, close }: CardIssuerSelectionProps) {
+const CardIssuerSelection = ({ onOptionClick, close }: CardIssuerSelectionProps) => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -18,12 +18,12 @@ function CardIssuerSelection({ onOptionClick, close }: CardIssuerSelectionProps)
         <Button variant="textButton" size="small" icon={CloseIcon} onClick={close} />
       </div>
       <div className={styles.issuerContainer}>
-        {CARD_ISSUERS.map((cardIssuer, index) => (
-          <CardIssuerOption key={index} issuer={cardIssuer} onClick={onOptionClick} />
+        {CARD_ISSUERS.map((cardIssuer) => (
+          <CardIssuerOption key={cardIssuer} issuer={cardIssuer} onClick={onOptionClick} />
         ))}
       </div>
     </div>
   );
-}
+};
 
 export default CardIssuerSelection;

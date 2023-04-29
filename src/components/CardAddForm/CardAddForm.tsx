@@ -1,13 +1,14 @@
-import styles from './style.module.css';
-import { FormEvent, useRef } from 'react';
-import { CardFormData, CardFormValidation } from '../../types';
+import { useRef } from 'react';
+import type { FormEvent } from 'react';
+import type { CardFormData, CardFormValidation } from '../../types';
+import Button from '../common/Button/Button';
+import CardExpirationDate from './CardExpirationDate/CardExpirationDate';
 import CardIssuer from './CardIssuer/CardIssuer';
 import CardNumber from './CardNumber/CardNumber';
-import CardExpirationDate from './CardExpirationDate/CardExpirationDate';
 import CardOwnerName from './CardOwnerName/CardOwnerName';
-import CardSecurityCode from './CardSecurityCode/CardSecurityCode';
 import CardPassword from './CardPassword/CardPassword';
-import Button from '../common/Button/Button';
+import CardSecurityCode from './CardSecurityCode/CardSecurityCode';
+import styles from './style.module.css';
 
 interface CardAddFormProps {
   cardInputError: CardFormValidation;
@@ -16,12 +17,12 @@ interface CardAddFormProps {
   handleSubmit: (event: FormEvent<HTMLFormElement>) => void;
 }
 
-function CardAddForm({
+const CardAddForm = ({
   cardInputError,
   updateInputValue,
   updateInputError,
   handleSubmit,
-}: CardAddFormProps) {
+}: CardAddFormProps) => {
   const formRef = useRef<HTMLFormElement>(null);
 
   return (
@@ -57,6 +58,6 @@ function CardAddForm({
       </Button>
     </form>
   );
-}
+};
 
 export default CardAddForm;

@@ -1,4 +1,4 @@
-import { Issuer } from '../types';
+import type { Issuer } from '../types';
 
 const ISSUER_CLASS_NAME: Record<Issuer, string> = {
   BC카드: 'bc',

@@ -1,14 +1,15 @@
-import styles from './style.module.css';
-import { ComponentPropsWithoutRef, ReactNode, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
+import type { ComponentPropsWithoutRef, ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { useModalContext } from '../../../contexts/ModalContext';
 import { useScrollStop } from '../../../hooks/common/useScrollStop';
+import styles from './style.module.css';
 
 interface ModalProps extends ComponentPropsWithoutRef<'div'> {
   children: ReactNode;
 }
 
-function Modal({ children }: ModalProps) {
+const Modal = ({ children }: ModalProps) => {
   const { isModalOpen, isVisible, closeModal, handleClosePress } = useModalContext();
   const containerRef = useRef<HTMLDivElement>(null);
   useScrollStop(isModalOpen);
@@ -34,6 +35,6 @@ function Modal({ children }: ModalProps) {
     </div>,
     document.body
   );
-}
+};
 
 export default Modal;

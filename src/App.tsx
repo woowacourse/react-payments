@@ -1,12 +1,12 @@
 import { Routes, Route } from 'react-router-dom';
-import { PATH } from './constants';
-import CardListPage from './pages/CardListPage';
 import CardAddPage from './pages/CardAddPage';
+import CardListPage from './pages/CardListPage';
 import CardRegisteredPage from './pages/CardRegisteredPage';
 import { CardListProvider } from './contexts/CardListContext';
 import { ModalProvider } from './contexts/ModalContext';
+import { PATH } from './constants';
 
-function App() {
+const App = () => {
   return (
     <ModalProvider>
       <CardListProvider>
@@ -20,6 +20,6 @@ function App() {
       </CardListProvider>
     </ModalProvider>
   );
-}
+};
 
 export default App;

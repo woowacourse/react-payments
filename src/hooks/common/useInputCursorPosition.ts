@@ -1,4 +1,5 @@
-import { RefObject, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import type { RefObject } from 'react';
 
 const useInputCursorPosition = (ref: RefObject<HTMLInputElement>) => {
   const [cursor, setCursor] = useState<number | null>(null);

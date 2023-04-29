@@ -36,9 +36,9 @@ const useCardInputValidation = () => {
   const updateInputValidation = useCallback(
     <K extends keyof CardFormValidation>(key: K, value: CardFormData[K]) => {
       const isValid = validateInput(key, value);
-      setInputValidation((inputValidation) => ({ ...inputValidation, [key]: isValid }));
+      setInputValidation((prevInputValidation) => ({ ...prevInputValidation, [key]: isValid }));
 
-      if (isValid) setInputError((inputError) => ({ ...inputError, [key]: !isValid }));
+      if (isValid) setInputError((prevInputError) => ({ ...prevInputError, [key]: !isValid }));
     },
     [validateInput]
   );
@@ -46,14 +46,14 @@ const useCardInputValidation = () => {
   const updateInputError = useCallback(
     <K extends keyof CardFormValidation>(key: K, value: CardFormData[K]) => {
       const isValid = validateInput(key, value);
-      setInputError((inputError) => ({ ...inputError, [key]: !isValid }));
+      setInputError((prevInputError) => ({ ...prevInputError, [key]: !isValid }));
     },
     [validateInput]
   );
 
   const triggerAllInputErrors = useCallback(() => {
-    setInputError((inputError) => {
-      const updatedInputError = Object.keys(inputError).reduce(
+    setInputError((prevInputError) => {
+      const updatedInputError = Object.keys(prevInputError).reduce(
         (acc, key) => ({ ...acc, [key]: !inputValidation[key as keyof typeof inputValidation] }),
         {}
       ) as CardFormValidation;

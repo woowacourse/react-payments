@@ -1,41 +1,34 @@
-import { PropsWithChildren, createContext, useContext } from 'react';
-import { Card } from '../types';
+import { createContext, useContext, useMemo } from 'react';
+import type { PropsWithChildren } from 'react';
+import type { Card } from '../types';
 import { useCard } from '../hooks/cards/useCardList';
 
 interface CardListContextValue {
   cardList: Card[];
   newCardId: number;
-  newCard: Card | undefined;
+  newestCard: Card | undefined;
   cardListLength: number;
   addCard: (cardInformation: Card) => void;
   updateCardName: (id: number, cardName: string) => void;
 }
 
-export const CardListContext = createContext<CardListContextValue>({
-  cardList: [],
-  newCardId: 1,
-  newCard: undefined,
-  cardListLength: 0,
-  addCard: () => {},
-  updateCardName: () => {},
-});
+export const CardListContext = createContext<CardListContextValue | null>(null);
 
 export const CardListProvider = ({ children }: PropsWithChildren) => {
-  const { cardList, newCardId, newCard, cardListLength, addCard, updateCardName } = useCard();
+  const { cardList, newCardId, newestCard, cardListLength, addCard, updateCardName } = useCard();
 
-  return (
-    <CardListContext.Provider
-      value={{ cardList, newCardId, newCard, cardListLength, addCard, updateCardName }}
-    >
-      {children}
-    </CardListContext.Provider>
+  const contextValue = useMemo(
+    () => ({ cardList, newCardId, newestCard, cardListLength, addCard, updateCardName }),
+    [cardList, newCardId, newestCard, cardListLength, addCard, updateCardName],
   );
+
+  return <CardListContext.Provider value={contextValue}>{children}</CardListContext.Provider>;
 };
 
 export const useCardListContext = () => {
   const context = useContext(CardListContext);
 
-  if (context === undefined) {
+  if (context === null) {
     throw new Error('useCardListContext needs to be used inside the CardListProvider');
   }
 

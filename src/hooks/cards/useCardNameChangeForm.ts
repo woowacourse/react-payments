@@ -1,10 +1,10 @@
-import { FormEvent, useContext } from 'react';
+import type { FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useCardListContext } from '../../contexts/CardListContext';
 import { PATH } from '../../constants';
-import { CardListContext } from '../../contexts/CardListContext';
 
 const useCardNameChangeForm = (id: number) => {
-  const { updateCardName } = useContext(CardListContext);
+  const { updateCardName } = useCardListContext();
   const navigate = useNavigate();
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {

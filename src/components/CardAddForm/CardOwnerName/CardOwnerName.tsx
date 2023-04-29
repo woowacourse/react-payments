@@ -1,4 +1,5 @@
-import { ChangeEvent, memo, useState } from 'react';
+import { memo, useState } from 'react';
+import type { ChangeEvent } from 'react';
 import type { CardFormData } from '../../../types';
 import { OWNER_NAME_MAX_LENGTH } from '../../../constants';
 import InputContainer from '../../common/InputContainer/InputContainer';
@@ -10,7 +11,7 @@ interface CardOwnerNameProps {
   updateInputValue: <K extends keyof CardFormData>(key: K, value: CardFormData[K]) => void;
 }
 
-function CardOwnerName({ updateInputValue }: CardOwnerNameProps) {
+const CardOwnerName = ({ updateInputValue }: CardOwnerNameProps) => {
   const [value, setValue] = useState('');
 
   const onChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
@@ -39,6 +40,6 @@ function CardOwnerName({ updateInputValue }: CardOwnerNameProps) {
       />
     </InputContainer>
   );
-}
+};
 
 export default memo(CardOwnerName);

@@ -1,11 +1,12 @@
-import styles from './style.module.css';
-import { ChangeEvent, FocusEvent, memo, useRef } from 'react';
+import { memo, useRef } from 'react';
+import type { ChangeEvent, FocusEvent } from 'react';
 import type { CardFormData, CardFormValidation } from '../../../types';
-import { PASSWORD_UNIT_MAX_LENGTH, SECURITY_TEXT_ICON } from '../../../constants';
+import Input from '../../common/Input/Input';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
-import Input from '../../common/Input/Input';
+import { PASSWORD_UNIT_MAX_LENGTH, SECURITY_TEXT_ICON } from '../../../constants';
 import { formatNumber } from '../../../utils/formatter';
+import styles from './style.module.css';
 
 interface CardPasswordProps {
   isError: boolean;
@@ -13,7 +14,7 @@ interface CardPasswordProps {
   updateInputError: <K extends keyof CardFormValidation>(key: K, value: CardFormData[K]) => void;
 }
 
-function CardPassword({ isError, updateInputValue, updateInputError }: CardPasswordProps) {
+const CardPassword = ({ isError, updateInputValue, updateInputError }: CardPasswordProps) => {
   const firstInputRef = useRef<HTMLInputElement>(null);
   const lastInputRef = useRef<HTMLInputElement>(null);
 
@@ -76,6 +77,6 @@ function CardPassword({ isError, updateInputValue, updateInputError }: CardPassw
       </div>
     </InputContainer>
   );
-}
+};
 
 export default memo(CardPassword);

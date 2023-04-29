@@ -1,10 +1,11 @@
-import { ChangeEvent, memo, useRef } from 'react';
+import { memo, useRef } from 'react';
+import type { ChangeEvent } from 'react';
 import type { CardFormData, CardFormValidation } from '../../../types';
-import { CARD_NUMBER_INPUT_MAX_LENGTH } from '../../../constants';
+import Input from '../../common/Input/Input';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
-import Input from '../../common/Input/Input';
 import { useCardNumber } from '../../../hooks/cards/useCardNumber';
+import { CARD_NUMBER_INPUT_MAX_LENGTH } from '../../../constants';
 import { formatNumber } from '../../../utils/formatter';
 
 interface CardNumberProps {
@@ -13,7 +14,7 @@ interface CardNumberProps {
   updateInputError: <K extends keyof CardFormValidation>(key: K, value: CardFormData[K]) => void;
 }
 
-function CardNumber({ isError, updateInputValue, updateInputError }: CardNumberProps) {
+const CardNumber = ({ isError, updateInputValue, updateInputError }: CardNumberProps) => {
   const { handleInputValueChange } = useCardNumber();
   const cardNumberRef = useRef('');
 
@@ -52,6 +53,6 @@ function CardNumber({ isError, updateInputValue, updateInputError }: CardNumberP
       />
     </InputContainer>
   );
-}
+};
 
 export default memo(CardNumber);

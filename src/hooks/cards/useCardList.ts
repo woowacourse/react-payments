@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
+import type { Card } from '../../types';
 import { getLocalStorage, saveToLocalStorage } from '../../utils/localStorage';
-import { Card } from '../../types';
 
 const useCard = () => {
   const [cardList, setCardList] = useState<Card[]>(getLocalStorage() ?? []);
 
   const newCardId = (cardList.at(-1)?.id ?? 0) + 1;
-  const newCard = cardList.at(-1);
+  const newestCard = cardList.at(-1);
   const cardListLength = cardList.length;
 
   useEffect(() => {
@@ -14,12 +14,12 @@ const useCard = () => {
   }, [cardList]);
 
   const addCard = (newCard: Card) => {
-    setCardList((cardList) => [...cardList, newCard]);
+    setCardList((prevCardList) => [...prevCardList, newCard]);
   };
 
   const updateCardName = (id: number, cardName: string) => {
-    setCardList((cardList) => {
-      return cardList.map((card) => {
+    setCardList((prevCardList) => {
+      return prevCardList.map((card) => {
         if (card.id === id) card.cardName = cardName;
 
         return card;
@@ -27,7 +27,7 @@ const useCard = () => {
     });
   };
 
-  return { cardList, newCardId, newCard, cardListLength, addCard, updateCardName };
+  return { cardList, newCardId, newestCard, cardListLength, addCard, updateCardName };
 };
 
 export { useCard };

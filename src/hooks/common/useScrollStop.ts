@@ -1,4 +1,5 @@
-import { RefObject, useEffect } from 'react';
+import { useEffect } from 'react';
+import type { RefObject } from 'react';
 
 type BodyRef = { current: HTMLElement };
 
@@ -8,6 +9,7 @@ const useScrollStop = (
 ) => {
   useEffect(() => {
     const node = ref.current;
+
     if (node) node.classList.add('hide-overflow');
 
     return () => {
