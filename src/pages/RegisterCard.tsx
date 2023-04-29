@@ -1,4 +1,4 @@
-import AddCardForm, { AddCardFormProps } from 'components/Form/AddCardForm';
+import { AddCardForm, AddCardFormProps } from 'components/Form/AddCardForm';
 import { Header } from 'components/common/';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
