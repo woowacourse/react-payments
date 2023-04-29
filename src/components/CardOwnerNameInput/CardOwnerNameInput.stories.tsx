@@ -7,6 +7,17 @@ import { Card } from "../../types";
 const meta: Meta<typeof CardOwnerNameInput> = {
   title: "CardOwnerNameInput",
   component: CardOwnerNameInput,
+  tags: ["autodocs"],
+
+  argTypes: {
+    ownerName: {
+      description: "카드 소유자 상태입니다.",
+    },
+
+    onChange: {
+      description: "카드 소유자 상태 변경 함수입니다.",
+    },
+  },
 };
 
 export default meta;

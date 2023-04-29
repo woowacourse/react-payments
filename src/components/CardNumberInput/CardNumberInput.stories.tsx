@@ -7,6 +7,26 @@ import { CardNumber, CardNumberGroups } from "../../types";
 const meta: Meta<typeof CardNumberInput> = {
   title: "CardNumberInput",
   component: CardNumberInput,
+  tags: ["autodocs"],
+
+  args: {
+    cardNumber: {
+      firstGroup: "",
+      secondGroup: "",
+      thirdGroup: "",
+      fourthGroup: "",
+    },
+  },
+
+  argTypes: {
+    cardNumber: {
+      description: "카드 번호 상태입니다.",
+    },
+
+    onChange: {
+      description: "카드 번호 상태 변경 함수입니다.",
+    },
+  },
 };
 
 export default meta;

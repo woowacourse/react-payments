@@ -7,6 +7,16 @@ import { CardExpirationDate, CardExpirationDateKey } from "../../types";
 const meta: Meta<typeof CardExpirationDateInput> = {
   title: "CardExpirationDateInput",
   component: CardExpirationDateInput,
+  tags: ["autodocs"],
+
+  argTypes: {
+    expirationDate: {
+      description: "만료일 입력 상태입니다.",
+    },
+    onChange: {
+      description: "만료일 입력 상태 변경 함수입니다.",
+    },
+  },
 };
 
 export default meta;

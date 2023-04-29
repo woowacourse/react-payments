@@ -7,6 +7,16 @@ import { CardPassword, CardPasswordKey } from "../../types";
 const meta: Meta<typeof CardPasswordInput> = {
   title: "CardPasswordInput",
   component: CardPasswordInput,
+  tags: ["autodocs"],
+
+  argTypes: {
+    password: {
+      description: "비밀번호 상태입니다.",
+    },
+    onChange: {
+      description: "비밀번호 상태 변경 함수입니다.",
+    },
+  },
 };
 
 export default meta;
