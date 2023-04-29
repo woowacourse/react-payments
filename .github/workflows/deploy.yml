@@ -29,8 +29,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
       - run: npm ci
-        if: steps.cache.outputs.cache-hit != 'true'
-
       - run: npm run build
 
       - uses: peaceiris/actions-gh-pages@v3
