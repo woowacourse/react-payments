@@ -1,4 +1,4 @@
-import { CardCo_NAME } from "../../CONSTANT";
+import { CARD_CO_NAME } from "../../CONSTANT";
 import { CardCo, EachUserInputState } from "../../type";
 import { GetCardCoIcon } from "../../util/getCardCoIcon";
 
@@ -30,7 +30,7 @@ export default function CardCoButton({
       onClick={submitCardCo}
     >
       {GetCardCoIcon(cardCo)}
-      <p className="cardCo-name">{CardCo_NAME[cardCo]}</p>
+      <p className="cardCo-name">{CARD_CO_NAME[cardCo]}</p>
     </button>
   );
 }
