@@ -6,6 +6,7 @@ import type { CardItemInfo, InputProps } from '../types/Card';
 export default {
   title: 'Payment/cardForm/CardNumberInput',
   component: CardNumberInput,
+  tags: ['autodocs'],
 };
 
 type CardNumberInputProps = InputProps<CardItemInfo['cardNumber']>;
