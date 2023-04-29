@@ -20,6 +20,7 @@ export const CardInfoProvider = ({ children }) => {
       firstPassword: '',
       secondPassword: '',
       bank: '',
+      nickname: '',
     };
   };
 
@@ -27,24 +28,28 @@ export const CardInfoProvider = ({ children }) => {
 
   const actions = useMemo(
     () => ({
-      updateBank(bank) {
+      updateBank(bank, closeModal) {
         setCardInfo((prev) => ({
           ...prev,
           bank,
         }));
+        closeModal();
       },
+
       updateInputValue(name, value) {
         setCardInfo((prev) => ({
           ...prev,
           [name]: value,
         }));
       },
+
       updateNickname(nickname) {
         setCardInfo((prev) => ({
           ...prev,
           nickname,
         }));
       },
+
       initCardInfo() {
         setCardInfo(getInit());
       },
