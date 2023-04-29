@@ -12,42 +12,42 @@ import {
 export const bank: BankItem[] = [
   {
     id: 0,
-    logo: () => <BCIc />,
+    logo: () => <BCIc width="3.8rem" height="3.8rem" />,
     logoName: "BC카드",
   },
   {
     id: 1,
-    logo: () => <HanaIc />,
+    logo: () => <HanaIc width="3.8rem" height="3.8rem" />,
     logoName: "하나카드",
   },
   {
     id: 2,
-    logo: () => <HyundaiIc />,
+    logo: () => <HyundaiIc width="3.8rem" height="3.8rem" />,
     logoName: "현대카드",
   },
   {
     id: 3,
-    logo: () => <KakaoIc />,
+    logo: () => <KakaoIc width="3.8rem" height="3.8rem" />,
     logoName: "카카오뱅크",
   },
   {
     id: 4,
-    logo: () => <KbIc />,
+    logo: () => <KbIc width="3.8rem" height="3.8rem" />,
     logoName: "국민카드",
   },
   {
     id: 5,
-    logo: () => <LotteIc />,
+    logo: () => <LotteIc width="3.8rem" height="3.8rem" />,
     logoName: "롯데카드",
   },
   {
     id: 5,
-    logo: () => <ShinhanIc />,
+    logo: () => <ShinhanIc width="3.8rem" height="3.8rem" />,
     logoName: "신한카드",
   },
   {
     id: 7,
-    logo: () => <WorriIc />,
+    logo: () => <WorriIc width="3.8rem" height="3.8rem" />,
     logoName: "우리카드",
   },
 ];

@@ -9,15 +9,21 @@ export function BankItem(props: BankItemProps) {
   const { logo, logoName } = props;
 
   return (
-    <Wrapper>
+    <Container>
       {logo()}
-      <strong>{logoName}</strong>
-    </Wrapper>
+      <LogoName>{logoName}</LogoName>
+    </Container>
   );
 }
 
-const Wrapper = styled.li`
+const Container = styled.li`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  margin: 1.3rem 1.8rem;
+`;
+
+const LogoName = styled.strong`
+  margin-top: 1rem;
 `;
