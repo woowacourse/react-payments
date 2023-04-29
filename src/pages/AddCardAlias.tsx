@@ -1,7 +1,6 @@
 import CardLabel from '../components/@common/CardLabel';
 import Card from '../components/Card/Card';
 import * as Styled from './AddCardAlias.styles';
-import CardType from '../types/Card';
 import CardAliasInput from '../components/@common/CardAliasInput';
 import React, { useState } from 'react';
 import SubmitButton from '../components/@common/SubmitButton';
