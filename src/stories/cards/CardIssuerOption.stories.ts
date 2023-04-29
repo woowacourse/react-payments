@@ -4,7 +4,6 @@ import CardIssuerOption from '../../components/CardAddForm/CardIssuer/CardIssuer
 const meta = {
   title: 'Payments/Cards/CardIssuerOption',
   component: CardIssuerOption,
-  tags: ['autodocs'],
   argTypes: {
     issuer: {
       control: { type: 'select' },

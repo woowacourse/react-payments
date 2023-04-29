@@ -5,7 +5,6 @@ import LeftIcon from '../../assets/left-icon.svg';
 const meta = {
   title: 'Payments/Common/Button',
   component: Button,
-  tags: ['autodocs'],
   argTypes: {
     variant: {
       control: { type: 'radio' },

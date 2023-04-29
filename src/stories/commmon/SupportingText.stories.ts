@@ -4,7 +4,6 @@ import SupportingText from '../../components/common/SupportingText/SupportingTex
 const meta = {
   title: 'Payments/Common/SupportingText',
   component: SupportingText,
-  tags: ['autodocs'],
   argTypes: {
     isError: {
       control: { type: 'boolean' },

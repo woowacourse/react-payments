@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { ModalProvider } from '../../contexts/ModalContext';
 import Modal from '../../components/common/Modal/Modal';
 import { useModalContext } from '../../contexts/ModalContext';
@@ -6,7 +6,6 @@ import { useModalContext } from '../../contexts/ModalContext';
 const meta = {
   title: 'Payments/Common/Modal',
   component: Modal,
-  tags: ['autodocs'],
   decorators: [
     (Story) => (
       <ModalProvider>
@@ -17,15 +16,18 @@ const meta = {
 } satisfies Meta<typeof Modal>;
 
 export default meta;
+type Story = StoryObj<typeof Modal>;
 
-export const Default = () => {
-  const { openModal } = useModalContext();
+export const Default: Story = {
+  args: {
+    children: <div>Modal Content</div>,
+  },
 
-  openModal();
+  render: ({ children }) => {
+    const { openModal } = useModalContext();
 
-  return (
-    <Modal>
-      <div>Modal Content</div>
-    </Modal>
-  );
+    openModal();
+
+    return <Modal>{children}</Modal>;
+  },
 };

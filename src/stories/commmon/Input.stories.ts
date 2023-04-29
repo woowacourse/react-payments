@@ -5,7 +5,6 @@ import Input from '../../components/common/Input/Input';
 const meta = {
   title: 'Payments/Common/Input',
   component: Input,
-  tags: ['autodocs'],
   argTypes: {
     variant: {
       control: { type: 'radio' },

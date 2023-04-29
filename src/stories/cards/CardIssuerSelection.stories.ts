@@ -4,7 +4,6 @@ import CardIssuerSelection from '../../components/CardAddForm/CardIssuer/CardIss
 const meta = {
   title: 'Payments/Cards/CardIssuerSelection',
   component: CardIssuerSelection,
-  tags: ['autodocs'],
 } satisfies Meta<typeof CardIssuerSelection>;
 
 export default meta;

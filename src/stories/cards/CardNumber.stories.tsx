@@ -1,89 +1,103 @@
-import type { Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { userEvent, within } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
 import CardNumber from '../../components/CardAddForm/CardNumber/CardNumber';
+import { CardListProvider } from '../../contexts/CardListContext';
 import { useCardAddForm } from '../../hooks/cards/useCardAddForm';
 
 const meta = {
   title: 'Payments/Cards/CardNumberInput',
   component: CardNumber,
-  tags: ['autodocs'],
+  decorators: [
+    (Story) => (
+      <CardListProvider>
+        <Story />
+      </CardListProvider>
+    ),
+  ],
 } satisfies Meta<typeof CardNumber>;
 
 export default meta;
+type Story = StoryObj<typeof CardNumber>;
 
-export const Default = () => {
-  const { inputError, updateInputValue, updateInputError } = useCardAddForm();
+export const Default: Story = {
+  render: () => {
+    const { inputError, updateInputValue, updateInputError } = useCardAddForm();
 
-  return (
-    <CardNumber
-      isError={inputError.cardNumber}
-      updateInputValue={updateInputValue}
-      updateInputError={updateInputError}
-    />
-  );
+    return (
+      <CardNumber
+        isError={inputError.cardNumber}
+        updateInputValue={updateInputValue}
+        updateInputError={updateInputError}
+      />
+    );
+  },
 };
 
-export const SuccessInteraction = () => {
-  const { inputError, updateInputValue, updateInputError } = useCardAddForm();
+export const SuccessInteraction: Story = {
+  render: () => {
+    const { inputError, updateInputValue, updateInputError } = useCardAddForm();
 
-  return (
-    <CardNumber
-      isError={inputError.cardNumber}
-      updateInputValue={updateInputValue}
-      updateInputError={updateInputError}
-    />
-  );
+    return (
+      <CardNumber
+        isError={inputError.cardNumber}
+        updateInputValue={updateInputValue}
+        updateInputError={updateInputError}
+      />
+    );
+  },
+
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const label = canvas.getByText('카드 번호');
+    const input = canvas.getByLabelText('카드 번호', {
+      exact: false,
+      selector: 'input',
+    });
+    expect(input).not.toHaveFocus();
+
+    userEvent.click(label);
+
+    expect(input).toHaveFocus();
+
+    await userEvent.type(input, '1234123412341234', { delay: 200 });
+    expect(input).toHaveValue('1234 1234 •••• ••••');
+
+    userEvent.tab();
+  },
 };
 
-SuccessInteraction.play = async ({ canvasElement }: { canvasElement: HTMLElement }) => {
-  const canvas = within(canvasElement);
+export const ErrorInteraction: Story = {
+  render: () => {
+    const { inputError, updateInputValue, updateInputError } = useCardAddForm();
 
-  const label = canvas.getByText('카드 번호');
-  const input = canvas.getByLabelText('카드 번호', {
-    exact: false,
-    selector: 'input',
-  });
+    return (
+      <CardNumber
+        isError={inputError.cardNumber}
+        updateInputValue={updateInputValue}
+        updateInputError={updateInputError}
+      />
+    );
+  },
 
-  expect(input).not.toHaveFocus();
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
 
-  userEvent.click(label);
-  expect(input).toHaveFocus();
+    const label = canvas.getByText('카드 번호');
+    const input = canvas.getByLabelText('카드 번호', {
+      exact: false,
+      selector: 'input',
+    });
+    expect(input).not.toHaveFocus();
 
-  await userEvent.type(input, '1234123412341234', { delay: 200 });
-  expect(input).toHaveValue('1234 1234 •••• ••••');
+    userEvent.click(label);
 
-  userEvent.tab();
-};
+    expect(input).toHaveFocus();
 
-export const ErrorInteraction = () => {
-  const { inputError, updateInputValue, updateInputError } = useCardAddForm();
+    await userEvent.type(input, '12345', { delay: 200 });
+    expect(input).toHaveValue('1234 5');
 
-  return (
-    <CardNumber
-      isError={inputError.cardNumber}
-      updateInputValue={updateInputValue}
-      updateInputError={updateInputError}
-    />
-  );
-};
-
-ErrorInteraction.play = async ({ canvasElement }: { canvasElement: HTMLElement }) => {
-  const canvas = within(canvasElement);
-
-  const label = canvas.getByText('카드 번호');
-  const input = canvas.getByLabelText('카드 번호', {
-    exact: false,
-    selector: 'input',
-  });
-
-  expect(input).not.toHaveFocus();
-
-  userEvent.click(label);
-  expect(input).toHaveFocus();
-
-  await userEvent.type(input, '12345', { delay: 200 });
-  expect(input).toHaveValue('1234 5');
-
-  userEvent.tab();
+    userEvent.tab();
+  },
 };

@@ -1,91 +1,106 @@
-import type { Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { userEvent, within } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
 import CardPassword from '../../components/CardAddForm/CardPassword/CardPassword';
+import { CardListProvider } from '../../contexts/CardListContext';
 import { useCardAddForm } from '../../hooks/cards/useCardAddForm';
 
 const meta = {
   title: 'Payments/Cards/CardPasswordInput',
   component: CardPassword,
-  tags: ['autodocs'],
+  decorators: [
+    (Story) => (
+      <CardListProvider>
+        <Story />
+      </CardListProvider>
+    ),
+  ],
 } satisfies Meta<typeof CardPassword>;
 
 export default meta;
+type Story = StoryObj<typeof CardPassword>;
 
-export const Default = () => {
-  const { inputError, updateInputValue, updateInputError } = useCardAddForm();
+export const Default: Story = {
+  render: () => {
+    const { inputError, updateInputValue, updateInputError } = useCardAddForm();
 
-  return (
-    <CardPassword
-      isError={inputError.password}
-      updateInputValue={updateInputValue}
-      updateInputError={updateInputError}
-    />
-  );
+    return (
+      <CardPassword
+        isError={inputError.password}
+        updateInputValue={updateInputValue}
+        updateInputError={updateInputError}
+      />
+    );
+  },
 };
 
-export const SuccessInteraction = () => {
-  const { inputError, updateInputValue, updateInputError } = useCardAddForm();
+export const SuccessInteraction: Story = {
+  render: () => {
+    const { inputError, updateInputValue, updateInputError } = useCardAddForm();
 
-  return (
-    <CardPassword
-      isError={inputError.password}
-      updateInputValue={updateInputValue}
-      updateInputError={updateInputError}
-    />
-  );
+    return (
+      <CardPassword
+        isError={inputError.password}
+        updateInputValue={updateInputValue}
+        updateInputError={updateInputError}
+      />
+    );
+  },
+
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const label = canvas.getByText('비밀번호');
+    const input = canvas.queryAllByLabelText('비밀번호', {
+      exact: false,
+      selector: 'input',
+    });
+    expect(input[0]).not.toHaveFocus();
+
+    userEvent.click(label);
+
+    expect(input[0]).toHaveFocus();
+    expect(input[1]).not.toHaveFocus();
+
+    await userEvent.type(input[0], '1', { delay: 200 });
+    expect(input[1]).toHaveFocus();
+
+    await userEvent.type(input[1], '2', { delay: 200 });
+
+    userEvent.tab();
+  },
 };
 
-SuccessInteraction.play = async ({ canvasElement }: { canvasElement: HTMLElement }) => {
-  const canvas = within(canvasElement);
+export const ErrorInteraction: Story = {
+  render: () => {
+    const { inputError, updateInputValue, updateInputError } = useCardAddForm();
 
-  const label = canvas.getByText('비밀번호');
-  const input = canvas.queryAllByLabelText('비밀번호', {
-    exact: false,
-    selector: 'input',
-  });
+    return (
+      <CardPassword
+        isError={inputError.password}
+        updateInputValue={updateInputValue}
+        updateInputError={updateInputError}
+      />
+    );
+  },
 
-  expect(input[0]).not.toHaveFocus();
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
 
-  userEvent.click(label);
-  expect(input[0]).toHaveFocus();
-  expect(input[1]).not.toHaveFocus();
+    const label = canvas.getByText('비밀번호');
+    const input = canvas.queryAllByLabelText('비밀번호', {
+      exact: false,
+      selector: 'input',
+    });
+    expect(input[0]).not.toHaveFocus();
 
-  await userEvent.type(input[0], '1', { delay: 200 });
-  expect(input[1]).toHaveFocus();
+    userEvent.click(label);
 
-  await userEvent.type(input[1], '2', { delay: 200 });
-  userEvent.tab();
-};
+    expect(input[0]).toHaveFocus();
+    expect(input[1]).not.toHaveFocus();
 
-export const ErrorInteraction = () => {
-  const { inputError, updateInputValue, updateInputError } = useCardAddForm();
+    await userEvent.type(input[0], '1', { delay: 200 });
 
-  return (
-    <CardPassword
-      isError={inputError.password}
-      updateInputValue={updateInputValue}
-      updateInputError={updateInputError}
-    />
-  );
-};
-
-ErrorInteraction.play = async ({ canvasElement }: { canvasElement: HTMLElement }) => {
-  const canvas = within(canvasElement);
-
-  const label = canvas.getByText('비밀번호');
-  const input = canvas.queryAllByLabelText('비밀번호', {
-    exact: false,
-    selector: 'input',
-  });
-
-  expect(input[0]).not.toHaveFocus();
-
-  userEvent.click(label);
-  expect(input[0]).toHaveFocus();
-  expect(input[1]).not.toHaveFocus();
-
-  await userEvent.type(input[0], '1', { delay: 200 });
-
-  userEvent.tab();
+    userEvent.tab();
+  },
 };
