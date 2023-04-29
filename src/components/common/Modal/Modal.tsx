@@ -8,15 +8,13 @@ interface ModalProps extends ComponentPropsWithoutRef<'div'> {
   children: ReactNode;
 }
 
-function Modal({ children, onKeyDown }: ModalProps) {
-  const { isModalOpen, isVisible, closeModal } = useModalContext();
+function Modal({ children }: ModalProps) {
+  const { isModalOpen, isVisible, closeModal, handleClosePress } = useModalContext();
   const containerRef = useRef<HTMLDivElement>(null);
   useScrollStop(isModalOpen);
 
   useEffect(() => {
-    if (containerRef.current) {
-      containerRef.current.focus();
-    }
+    containerRef.current?.focus();
   }, []);
 
   return createPortal(
@@ -28,7 +26,7 @@ function Modal({ children, onKeyDown }: ModalProps) {
       <div
         ref={containerRef}
         className={`${styles.content} ${isVisible ? styles.openModal : styles.closeModal}`}
-        onKeyDown={onKeyDown}
+        onKeyDown={handleClosePress}
         tabIndex={0}
       >
         {children}

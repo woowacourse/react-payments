@@ -1,7 +1,8 @@
-import { useCallback, useState } from 'react';
+import { KeyboardEvent, useCallback, useState } from 'react';
 
 const useModal = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isClosed, setIsClosed] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
   const open = useCallback(() => {
@@ -14,14 +15,31 @@ const useModal = () => {
 
     setTimeout(() => {
       setIsOpen(false);
+      setIsClosed(true);
     }, 600);
   }, []);
 
+  const reset = useCallback(() => {
+    setIsClosed(false);
+  }, []);
+
+  const handleClosePress = useCallback(
+    (event: KeyboardEvent<HTMLElement>) => {
+      if (event.key === 'Escape') {
+        close();
+      }
+    },
+    [close]
+  );
+
   return {
     isModalOpen: isOpen,
+    isModalClosed: isClosed,
     isVisible,
     openModal: open,
     closeModal: close,
+    resetModal: reset,
+    handleClosePress,
   };
 };
 

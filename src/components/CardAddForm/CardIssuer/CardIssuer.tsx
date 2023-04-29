@@ -1,5 +1,5 @@
 import styles from './style.module.css';
-import { FocusEvent, KeyboardEvent, MouseEvent, memo, useRef, useState } from 'react';
+import { FocusEvent, KeyboardEvent, MouseEvent, memo, useEffect, useRef, useState } from 'react';
 import type { CardFormData, CardFormValidation, Issuer } from '../../../types';
 import { useModalContext } from '../../../contexts/ModalContext';
 import CardIssuerSelection from './CardIssuerSelection/CardIssuerSelection';
@@ -16,25 +16,16 @@ interface CardIssuerProps {
 }
 
 function CardIssuer({ isError, updateInputValue, updateInputError }: CardIssuerProps) {
-  const { isModalOpen, openModal, closeModal } = useModalContext();
+  const { isModalOpen, isModalClosed, openModal, closeModal } = useModalContext();
   const [value, setValue] = useState<Issuer | ''>('');
   const buttonRef = useRef<HTMLButtonElement>(null);
 
-  const focusButton = () => {
-    buttonRef.current?.focus();
-  };
-
-  const handleCloseModal = () => {
-    updateInputError('issuer', value);
-    closeModal();
-    focusButton();
-  };
-
-  const onClosePress = (event: KeyboardEvent<HTMLElement>) => {
-    if (event.key === 'Escape') {
-      handleCloseModal();
+  useEffect(() => {
+    if (isModalClosed) {
+      updateInputError('issuer', value);
+      buttonRef.current?.focus();
     }
-  };
+  }, [isModalClosed, updateInputError, value]);
 
   const onKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
     if (event.key === 'Tab') {
@@ -52,7 +43,6 @@ function CardIssuer({ isError, updateInputValue, updateInputError }: CardIssuerP
     setValue(event.currentTarget.value as Issuer);
     updateInputValue('issuer', event.currentTarget.value as Issuer);
     closeModal();
-    focusButton();
   };
 
   return (
@@ -84,8 +74,8 @@ function CardIssuer({ isError, updateInputValue, updateInputError }: CardIssuerP
         {value ? `${value}` : '카드사를 선택해주세요'}
       </Button>
       {isModalOpen && (
-        <Modal onKeyDown={onClosePress}>
-          <CardIssuerSelection onOptionClick={onOptionClick} close={handleCloseModal} />
+        <Modal>
+          <CardIssuerSelection onOptionClick={onOptionClick} close={closeModal} />
         </Modal>
       )}
     </InputContainer>
