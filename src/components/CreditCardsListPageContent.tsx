@@ -19,7 +19,7 @@ export const CreditCardsListPageContent = () => {
     <Container>
       {creditCards.map((creditCard) => (
         <CreditCardView
-          key={creditCard.name}
+          key={creditCard.cardNumbers}
           name={creditCard.name}
           cardNumbers={creditCard.cardNumbers}
           expirationDate={creditCard.expirationDate}
