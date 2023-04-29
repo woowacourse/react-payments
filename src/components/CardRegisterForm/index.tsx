@@ -45,8 +45,8 @@ const CardRegisterForm = ({ registerCard }: Props) => {
         owner,
       };
 
-      registerCard(cardData);
-      navigate('/');
+      //registerCard(cardData);
+      navigate('/card-name-register');
     } catch (error) {
       if (error instanceof Error) {
         alert(error.message);

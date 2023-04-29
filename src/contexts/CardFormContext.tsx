@@ -44,7 +44,7 @@ export const CardFormValueContext = createContext<CardInfo | null>(null);
 export const CardFormActionContext = createContext<CardFormAction | null>(null);
 
 interface Props {
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 const CardFormProvider = ({ children }: Props) => {
