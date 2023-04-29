@@ -17,7 +17,6 @@ export const ModalLayout = styled.div<AnimationType>`
   border: 0;
   left: 0;
   right: 0;
-  width: 375px;
   min-height: 100vh;
   margin: 0 auto;
   animation: ${(props) => (props.animation === ANIMATION.appear ? ModalLayoutAppear : ModalLayoutDisAppear)}

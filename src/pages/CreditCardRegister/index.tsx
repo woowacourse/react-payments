@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import Button from '@Components/Button';
 import CreditCard from '@Components/CreditCard';
 import Header from '@Components/Header';
-import Modal from '@Components/Modal';
 
 import useAnimationModal from '@Hooks/useAnimationModal';
 import useCreditCardValidation from '@Hooks/useCreditCardValidation';
@@ -24,7 +23,7 @@ import * as S from './style';
 function CreditCardRegister() {
   const navigate = useNavigate();
 
-  const { isModalOpen, animation, openModal, closeModal, delayMsTime } = useAnimationModal();
+  const { isModalOpen, openModal } = useAnimationModal();
 
   const { creditCard, update, errorMessage } = useContext(CreditCardRegisterContext);
   const isValid = useCreditCardValidation(creditCard, Object.values(errorMessage));
@@ -93,11 +92,7 @@ function CreditCardRegister() {
           </S.ButtonWrapper>
         </S.CreditCardRegisterForm>
       </S.CreditCardRegister>
-      {isModalOpen && (
-        <Modal closeModal={closeModal} isAbleBackdropClick={false} animation={animation} delayMsTime={delayMsTime}>
-          <CreditCardCompanyModal updateCompany={update.company} closeModal={closeModal} />
-        </Modal>
-      )}
+      {isModalOpen && <CreditCardCompanyModal updateCompany={update.company} />}
     </>
   );
 }
