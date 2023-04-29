@@ -121,7 +121,7 @@ export default function CardInputForm(props: CardInputFormProps) {
 
     if (isFormFilled) {
       addNewCard(nowCardInfo);
-      navigate("/CardListPage");
+      navigate("/CardNickInputPage");
     }
   };
 
