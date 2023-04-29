@@ -1,5 +1,5 @@
 import { CreditCard } from "../../type";
-import styles from "./CardPreview.module.css";
+import "./CardPreview.css";
 
 interface CardPreviewProps {
   card: CreditCard;
@@ -19,13 +19,13 @@ export default function CardPreview({
   });
 
   return (
-    <div className={styles.container} onClick={openCardCoModal}>
-      <div className={styles.chip}></div>
-      <p className={styles.number}>{previewNumber}</p>
-      <span className={styles.name}>
+    <div className="card-preview-container" onClick={openCardCoModal}>
+      <div className="card-preview-chip"></div>
+      <p className="card-preview-number">{previewNumber}</p>
+      <span className="card-preview-name">
         {card.owner !== "" ? card.owner.slice(0, 15) : "NAME"}
       </span>
-      <span className={styles.expireDate}>
+      <span className="card-preview-expireDate">
         {card.expirationDate !== "" ? card.expirationDate : "MM/YY"}
       </span>
     </div>

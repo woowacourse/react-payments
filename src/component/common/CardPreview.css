@@ -1,4 +1,4 @@
-.container {
+.card-preview-container {
   width: 213px;
   height: 133px;
   margin: auto;
@@ -13,7 +13,7 @@
   cursor: pointer;
 }
 
-.chip {
+.card-preview-chip {
   position: relative;
   left: 14px;
   top: 47px;
@@ -25,7 +25,7 @@
   border-radius: 4px;
 }
 
-.number {
+.card-preview-number {
   position: relative;
   left: 14px;
   top: 60px;
@@ -37,7 +37,7 @@
   letter-spacing: 2px;
 }
 
-.name {
+.card-preview-name {
   position: relative;
   left: 14px;
   top: 65px;
@@ -47,7 +47,7 @@
   color: white;
 }
 
-.expireDate {
+.card-preview-expireDate {
   position: relative;
   left: 10px;
   top: 65px;
