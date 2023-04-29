@@ -15,5 +15,5 @@ export const useFocus = () => {
     if (target.value.length === length && nextInput) nextInput.focus();
   };
 
-  return { handleRef, moveFocus };
+  return { handleRef, moveFocus, currentInput };
 };

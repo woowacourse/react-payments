@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState, createContext, useContext } from "react";
+import { useContext } from "react";
 import CardNumberInput from "./FormInputs/CardNumberInput";
 import ExpirationDateInput from "./FormInputs/ExpirationDateInput";
 import NameInput from "./FormInputs/NameInput";
@@ -11,13 +11,12 @@ import { NextButton } from "components/ButtonStyle";
 import { CardInfoContext } from "components/CardInfoProvider";
 import useRequiredCardInfo from "hooks/useRequiredCardInfo";
 import CardCompanyModal from "./CardCompanyModal";
-import { SetModalState } from "types";
 import { useNavigate } from "react-router";
+import { ModalStateContext } from "components/ModalStateProvider";
 
 const CardRegisterForm = () => {
   const allCardInfo = useContext(CardInfoContext).cardInfo;
-
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const isModalOpen = useContext(ModalStateContext).isModalOpen;
 
   const { isFormFilled } = useRequiredCardInfo();
 
@@ -28,11 +27,9 @@ const CardRegisterForm = () => {
     <S.Wrapper>
       <Header navigator title="카드 추가" />
 
-      <ModalState.Provider value={setIsModalOpen}>
-        <CardPreview cardInfo={allCardInfo} />
+      <CardPreview cardInfo={allCardInfo} />
 
-        {isModalOpen && <CardCompanyModal />}
-      </ModalState.Provider>
+      {isModalOpen && <CardCompanyModal />}
 
       <form onSubmit={handlePageChange}>
         <CardNumberInput />
@@ -55,5 +52,3 @@ const S = {
 };
 
 export default CardRegisterForm;
-
-export const ModalState = createContext<SetModalState>(() => {});

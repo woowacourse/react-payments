@@ -33,6 +33,10 @@ const S = {
   Wrapper: styled.div`
     max-width: 480px;
     width: 88%;
+
+    & > header {
+      margin-bottom: 8px;
+    }
   `,
 
   Main: styled.main`

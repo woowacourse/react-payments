@@ -9,6 +9,7 @@ import { CardNumberInputBox } from "components/InputBoxStyle";
 import { CardInfoContext } from "components/CardInfoProvider";
 import { CardNumber } from "types";
 import { NUMBER_INPUT, LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
+import { ModalStateContext } from "components/ModalStateProvider";
 const { ONLY_NUMBER } = VALID_INPUT;
 
 const CardNumberInput = () => {
@@ -17,7 +18,13 @@ const CardNumberInput = () => {
   const cardNumber: CardNumber = { number1, number2, number3, number4 };
   const setCardNumber = useContext(CardInfoContext).setCardInfo;
 
-  const { handleRef, moveFocus } = useFocus();
+  const { handleRef, moveFocus, currentInput } = useFocus();
+
+  const isModalOpen = useContext(ModalStateContext).isModalOpen;
+
+  if (!isModalOpen && currentInput[0].value.length === 0) {
+    currentInput[0].focus();
+  }
 
   const handleCardNumberChange = ({
     target,

@@ -1,7 +1,7 @@
 import { ReactNode, useContext } from "react";
 import styled, { CSSProp } from "styled-components";
-import { ModalState } from "pages/RegisterPage/CardRegisterForm";
 import { CloseButton } from "./ButtonStyle";
+import { ModalStateContext } from "./ModalStateProvider";
 
 interface Props {
   modalStyle: CSSProp;
@@ -10,7 +10,7 @@ interface Props {
 }
 
 const Modal = ({ closeButtonName, children, modalStyle }: Props) => {
-  const setIsModalOpen = useContext(ModalState);
+  const setIsModalOpen = useContext(ModalStateContext).setIsModalOpen;
 
   const handleModalClose = () => setIsModalOpen(false);
 

@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, ReactNode, SetStateAction } from "react";
 
 export interface CardNumber {
   [key: string]: string;
@@ -28,11 +28,18 @@ export interface CardInfo extends PreviewCardInfo, Password {
   code: string;
 }
 
+type SetCardInfo = Dispatch<SetStateAction<CardInfo>>;
 export interface CardInfoState {
   cardInfo: CardInfo;
   setCardInfo: SetCardInfo;
 }
 
 export type SetModalState = Dispatch<SetStateAction<boolean>>;
+export interface ModalState {
+  isModalOpen: boolean;
+  setIsModalOpen: SetModalState;
+}
 
-type SetCardInfo = Dispatch<SetStateAction<CardInfo>>;
+export interface ProviderChildren {
+  children: ReactNode;
+}

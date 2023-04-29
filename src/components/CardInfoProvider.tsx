@@ -1,13 +1,9 @@
-import { ReactNode, useState } from "react";
+import { useState } from "react";
 import { INITIAL_CARD_INFO } from "constants/initialCardInfo";
 import { createContext } from "react";
-import { CardInfoState } from "types";
+import { CardInfoState, ProviderChildren } from "types";
 
-interface Props {
-  children: ReactNode;
-}
-
-const CardInfoProvider = ({ children }: Props) => {
+const CardInfoProvider = ({ children }: ProviderChildren) => {
   const [cardInfo, setCardInfo] = useState(INITIAL_CARD_INFO);
 
   return (

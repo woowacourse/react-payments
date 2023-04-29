@@ -4,6 +4,7 @@ import LastPage from "pages/LastPage";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import GotLost from "pages/GotLost";
 import CardInfoProvider from "components/CardInfoProvider";
+import ModalStateProvider from "components/ModalStateProvider";
 
 const App = () => {
   return (
@@ -14,7 +15,9 @@ const App = () => {
           path="/register"
           element={
             <CardInfoProvider>
-              <CardRegisterForm />
+              <ModalStateProvider>
+                <CardRegisterForm />
+              </ModalStateProvider>
             </CardInfoProvider>
           }
         />

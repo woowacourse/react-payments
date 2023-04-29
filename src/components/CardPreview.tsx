@@ -3,15 +3,19 @@ import { Fragment, useContext } from "react";
 import { NUMBER_INPUT, LIMIT_LENGTH, PASSWORD_PART } from "constants/limit";
 import { HIDDEN_VALUE, SECURITY_TARGET } from "constants/security";
 import { CardInfo } from "types";
-import { ModalState } from "pages/RegisterPage/CardRegisterForm";
-import { CARD_COLORS, CARD_COMPANIES, UNSELECTED_CARD_COMPANY } from "constants/cardCompanies";
+import {
+  CARD_COLORS,
+  CARD_COMPANIES,
+  UNSELECTED_CARD_COMPANY,
+} from "constants/cardCompanies";
+import { ModalStateContext } from "./ModalStateProvider";
 
 interface Props {
   cardInfo: CardInfo;
 }
 
 const CardPreview = ({ cardInfo }: Props) => {
-  const setIsModalOpen = useContext(ModalState);
+  const setIsModalOpen = useContext(ModalStateContext).setIsModalOpen;
 
   const handleModalOpen = () => {
     setIsModalOpen(true);
