@@ -8,7 +8,7 @@ interface SubmitButtonProps {
 
 const SubmitButton = ({ textContent, color, cursor }: SubmitButtonProps) => {
   return (
-    <Styled.Button textColor={color} cursor={cursor}>
+    <Styled.Button textColor={color} pointCursor={cursor}>
       {textContent}
     </Styled.Button>
   );
