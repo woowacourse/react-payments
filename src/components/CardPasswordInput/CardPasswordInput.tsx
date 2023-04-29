@@ -27,8 +27,15 @@ const CardPasswordInput = () => {
   return (
     <div>
       <CardInfoInput title="카드 비밀번호">
-        <Input width="15%" value={firstDigit} maxLength={1} onChange={e => updateDigit(1, e)} />
-        <Input width="15%" value={secondDigit} maxLength={1} onChange={e => updateDigit(2, e)} ref={secondDigitRef} />
+        <Input type="password" width="15%" value={firstDigit} maxLength={1} onChange={e => updateDigit(1, e)} />
+        <Input
+          type="password"
+          width="15%"
+          value={secondDigit}
+          maxLength={1}
+          onChange={e => updateDigit(2, e)}
+          ref={secondDigitRef}
+        />
       </CardInfoInput>
       <ErrorMessage>{error}</ErrorMessage>
     </div>
