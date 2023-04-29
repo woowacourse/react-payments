@@ -24,7 +24,7 @@ const AddCard = ({ cards, setCards }: CardList) => {
     ownerName,
     isSetOwnerName,
     securityCode,
-    setSecurityCode,
+    isSetSecurityCode,
     passwords,
     setPasswords,
     cardCompany,
@@ -88,7 +88,7 @@ const AddCard = ({ cards, setCards }: CardList) => {
           />
           <SecurityCode
             securityCode={securityCode}
-            setSecurityCode={setSecurityCode}
+            isSetSecurityCode={isSetSecurityCode}
           />
           <CardPassword passwords={passwords} setPasswords={setPasswords} />
           <Styled.ButtonWrapper>

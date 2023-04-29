@@ -5,19 +5,20 @@ import * as Styled from './SecurityCode.styles';
 
 interface SecurityCodeProps {
   securityCode: string;
-  setSecurityCode: React.Dispatch<React.SetStateAction<string>>;
+  isSetSecurityCode: (value: string) => boolean;
 }
 
-const SecurityCode = ({ securityCode, setSecurityCode }: SecurityCodeProps) => {
+const SecurityCode = ({
+  securityCode,
+  isSetSecurityCode,
+}: SecurityCodeProps) => {
   const securityCodeRef = useRef<HTMLInputElement>(null);
   const [isShowToolTip, setIsShowToolTip] = useState(false);
 
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!(e.target instanceof HTMLInputElement)) return;
 
-    if (/[^0-9]/g.test(e.target.value)) return;
-
-    setSecurityCode(e.target.value);
+    if (!isSetSecurityCode(e.target.value)) return;
   };
 
   return (

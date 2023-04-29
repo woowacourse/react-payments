@@ -13,5 +13,6 @@ type Story = StoryObj<typeof meta>;
 export const SecurityCodeStory: Story = {
   args: {
     securityCode: '000',
+    isSetSecurityCode: () => true,
   },
 };
