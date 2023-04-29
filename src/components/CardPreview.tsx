@@ -7,14 +7,30 @@ type CardPreviewProps = {
   cardExpirationDate: string[];
 };
 
+export const CARD_COMPANY_COLOR_MAP: Record<string, { main: string; secondary: string }> = {
+  BC카드: { main: 'rgb(222, 84, 86)', secondary: 'white' },
+  신한카드: { main: 'rgb(19, 74, 245)', secondary: 'white' },
+  카카오뱅크: { main: 'rgb(251, 230, 77)', secondary: 'black' },
+  현대카드: { main: 'rgb(51, 51, 51)', secondary: 'white' },
+  우리카드: { main: 'rgb(187, 223, 245)', secondary: 'rgb(51, 122, 194)' },
+  롯데카드: { main: 'rgb(240, 240, 240)', secondary: 'rgb(225, 0, 0)' },
+  하나카드: { main: 'rgb(64, 146, 143)', secondary: 'white' },
+  국민카드: { main: 'rgb(85, 79, 71)', secondary: 'rgb(247, 206, 71)' },
+};
+
 const CardPreview = ({
   cardCompany,
   cardNumbers,
   cardOwner,
   cardExpirationDate,
 }: CardPreviewProps) => {
+  const { main, secondary } = CARD_COMPANY_COLOR_MAP[cardCompany] || {
+    main: '#8b8b8b',
+    secondary: '#FFF',
+  };
+
   return (
-    <CardPreviewWrapper>
+    <CardPreviewWrapper mainColor={main} secondaryColor={secondary}>
       <CardCompany>{cardCompany}</CardCompany>
       <CardChip />
       <CardNumberWrapper>
@@ -31,7 +47,7 @@ const CardPreview = ({
                 {Array(cardNumber.length)
                   .fill(0)
                   .map(() => (
-                    <Dot />
+                    <Dot secondaryColor={secondary} />
                   ))}
               </CardNumber>
             );
@@ -48,12 +64,16 @@ const CardPreview = ({
   );
 };
 
-const CardPreviewWrapper = styled.div`
-  color: #fff;
-
+const CardPreviewWrapper = styled.div<{
+  mainColor: string;
+  secondaryColor: string;
+}>`
   width: 212px;
   height: 132px;
-  background-color: #333;
+
+  color: ${({ secondaryColor }) => secondaryColor};
+  background-color: ${({ mainColor }) => mainColor};
+
   padding: 12px;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
@@ -64,7 +84,6 @@ const CardCompany = styled.p`
   font-weight: 500;
   font-size: 12px;
   line-height: 14px;
-  color: #fff;
 `;
 
 const CardChip = styled.div`
@@ -107,9 +126,11 @@ const CardInfo = styled.div`
   margin-right: 6px;
 `;
 
-const Dot = styled.span`
+const Dot = styled.span<{
+  secondaryColor: string;
+}>`
   display: inline-block;
-  background-color: #fff;
+  background-color: ${({ secondaryColor }) => secondaryColor};
   width: 4px;
   height: 4px;
   border-radius: 50%;
