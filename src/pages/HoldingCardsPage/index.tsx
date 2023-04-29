@@ -16,7 +16,7 @@ const HoldingCardsPage = ({ cards }: Props) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate('/card-register');
+    navigate('/card-info-register');
   };
 
   return (
