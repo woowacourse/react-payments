@@ -9,17 +9,18 @@ import CardPreview from "components/CardPreview";
 import Header from "components/Header";
 import { NextButton } from "components/ButtonStyle";
 import { CardInfoContext } from "components/CardInfoProvider";
-import useSetCardInfo from "hooks/useSetCardInfo";
 import useRequiredCardInfo from "hooks/useRequiredCardInfo";
 import CardCompanyModal from "./CardCompanyModal";
 import { SetModalState } from "types";
+import { useNavigate } from "react-router";
 
 const CardRegisterForm = () => {
   const allCardInfo = useContext(CardInfoContext).cardInfo;
   const [isModalOpen, setIsModalOpen] = useState(true);
+  const navigate = useNavigate();
 
   const { isFormFilled } = useRequiredCardInfo();
-  const { handleFormDataSubmit } = useSetCardInfo("card");
+  const handleFormSubmit = () => navigate("/completion");
 
   return (
     <S.Wrapper>
@@ -31,7 +32,7 @@ const CardRegisterForm = () => {
         {isModalOpen && <CardCompanyModal />}
       </ModalState.Provider>
 
-      <form onSubmit={handleFormDataSubmit}>
+      <form onSubmit={handleFormSubmit}>
         <CardNumberInput />
         <ExpirationDateInput />
         <NameInput />

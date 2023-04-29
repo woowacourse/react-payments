@@ -6,9 +6,9 @@ import Input, { CommonInputStyle } from "components/Input";
 import { Hyphen } from "components/DelimiterStyle";
 import { CardNumberCaption } from "components/CaptionStyle";
 import { CardNumberInputBox } from "components/InputBoxStyle";
+import { CardInfoContext } from "components/CardInfoProvider";
 import { CardNumber } from "types";
 import { NUMBER_INPUT, LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
-import { CardInfoContext } from "components/CardInfoProvider";
 const { ONLY_NUMBER } = VALID_INPUT;
 
 const CardNumberInput = () => {
