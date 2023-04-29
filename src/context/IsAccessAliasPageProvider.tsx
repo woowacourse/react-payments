@@ -1,17 +1,6 @@
-import {
-  Dispatch,
-  PropsWithChildren,
-  SetStateAction,
-  createContext,
-  useContext,
-  useState,
-} from 'react';
+import { PropsWithChildren, createContext, useContext, useState } from 'react';
 
-// TODO: 타입.ts로 분리
-type IsAccessAliasPage = {
-  isAccessAliasPage: boolean;
-  setIsAccessAliasPage: Dispatch<SetStateAction<boolean>>;
-};
+import { IsAccessAliasPage } from '../type';
 
 const IsAccessAliasPageContext = createContext<IsAccessAliasPage | null>(null);
 

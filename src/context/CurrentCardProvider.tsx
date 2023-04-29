@@ -1,19 +1,6 @@
-import {
-  Dispatch,
-  PropsWithChildren,
-  SetStateAction,
-  createContext,
-  useContext,
-  useState,
-} from 'react';
+import { PropsWithChildren, createContext, useContext, useState } from 'react';
 
-import { CardType } from '../type';
-
-// TODO: 타입 분리
-type CurrentCard = {
-  currentCard: Omit<CardType, 'id'>;
-  setCurrentCard: Dispatch<SetStateAction<Omit<CardType, 'id'>>>;
-};
+import { CardType, CurrentCard } from '../type';
 
 const CurrentCardContext = createContext<CurrentCard | null>(null);
 

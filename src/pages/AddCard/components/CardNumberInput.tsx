@@ -11,7 +11,6 @@ const CardNumberInput = ({
   cardThirdNumber,
   cardFourthNumber,
 }: CardNumberInputProps) => {
-  // TODO: memo를 적용시키려면 객체를 내리면 안된다.
   return (
     <InputContainer
       className="card-number-input-container"

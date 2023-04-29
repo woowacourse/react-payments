@@ -92,3 +92,13 @@ export type InputContainerProps = {
   status: InputStatus;
   inputType: InputType;
 };
+
+export type CurrentCard = {
+  currentCard: Omit<CardType, 'id'>;
+  setCurrentCard: Dispatch<SetStateAction<Omit<CardType, 'id'>>>;
+};
+
+export type IsAccessAliasPage = {
+  isAccessAliasPage: boolean;
+  setIsAccessAliasPage: Dispatch<SetStateAction<boolean>>;
+};
