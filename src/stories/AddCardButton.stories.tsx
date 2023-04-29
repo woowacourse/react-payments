@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import AddCardButton from '../components/CardListPageComponents/AddCardButton';
 
 const meta = {
-  title: 'Payment/AddCardButton',
+  title: 'Payment/cardListPageComponents/AddCardButton',
   component: AddCardButton,
   tags: ['autodocs'],
   argTypes: {},
