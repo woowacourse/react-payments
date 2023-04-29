@@ -1,10 +1,10 @@
-import type { CreditCardVendorName } from './CreditCardVendor';
+import type { CreditCardVendor } from './CreditCardVendor';
 
 export type CreditCard = {
   id: number;
   owner: string;
   displayName: string;
-  vendor: CreditCardVendorName;
+  vendor: CreditCardVendor;
   cardNumbers: string;
   expirationDate: [string, string];
   cvc: string;

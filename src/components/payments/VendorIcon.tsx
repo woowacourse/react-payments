@@ -7,10 +7,10 @@ import 우리카드 from '../../assets/payments/vendors/우리카드.png';
 import 카카오뱅크 from '../../assets/payments/vendors/카카오뱅크.png';
 import 하나카드 from '../../assets/payments/vendors/하나카드.png';
 import 현대카드 from '../../assets/payments/vendors/현대카드.png';
-import type { CreditCardVendorName } from '../../domain/CreditCardVendor';
+import type { CreditCardVendor } from '../../domain/CreditCardVendor';
 import { Icon } from '../common/Icon';
 
-const CreditCardVendorIcons: Record<CreditCardVendorName, string> = {
+const CreditCardVendorIcons: Record<CreditCardVendor, string> = {
   BC카드,
   신한카드,
   카카오뱅크,
@@ -22,7 +22,7 @@ const CreditCardVendorIcons: Record<CreditCardVendorName, string> = {
 };
 
 type VendorIconProps = {
-  vendor: CreditCardVendorName;
+  vendor: CreditCardVendor;
 } & Omit<ComponentProps<typeof Icon>, 'src' | 'alt' | 'size'> &
   Partial<Pick<ComponentProps<typeof Icon>, 'size'>>;
 

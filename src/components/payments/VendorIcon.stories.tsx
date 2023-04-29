@@ -1,6 +1,6 @@
 import type { Meta } from '@storybook/react';
 import styled from 'styled-components';
-import { CreditCardVendorNames } from '../../domain/CreditCardVendor';
+import { CREDIT_CARD_VENDORS } from '../../domain/CreditCardVendor';
 import { VendorIcon } from './VendorIcon';
 
 const Container = styled.div`
@@ -19,7 +19,7 @@ export default meta;
 export const Default = () => {
   return (
     <Container>
-      {CreditCardVendorNames.map((vendor) => (
+      {CREDIT_CARD_VENDORS.map((vendor) => (
         <VendorIcon key={vendor} vendor={vendor} size={10} />
       ))}
     </Container>

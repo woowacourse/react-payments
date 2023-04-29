@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import type { CreditCard } from '../../domain/CreditCard';
-import { CreditCardVendors } from '../../domain/CreditCardVendor';
+import { CREDIT_CARD_VENDOR_BRAND_COLORS } from '../../domain/CreditCardBrandColors';
 import { Text } from '../common/Text';
 import { CreditCardView } from './CreditCardView';
 import { VendorIcon } from './VendorIcon';
@@ -50,7 +50,7 @@ export const CreditCardList = (props: CreditCardListProps) => {
             owner={creditCard.owner}
             cardNumbers={creditCard.cardNumbers}
             expirationDate={creditCard.expirationDate}
-            color={CreditCardVendors[creditCard.vendor].color}
+            color={CREDIT_CARD_VENDOR_BRAND_COLORS[creditCard.vendor]}
             icon={<VendorIcon vendor={creditCard.vendor} />}
           />
           <Text weight="bold">{creditCard.displayName}</Text>

@@ -6,7 +6,7 @@ import { Input } from '../components/common/Input';
 import { Page } from '../components/common/Page';
 import { CreditCardView } from '../components/payments/CreditCardView';
 import { VendorIcon } from '../components/payments/VendorIcon';
-import { CreditCardVendors } from '../domain/CreditCardVendor';
+import { CREDIT_CARD_VENDOR_BRAND_COLORS } from '../domain/CreditCardBrandColors';
 import { usePayments } from '../hooks/usePayments';
 
 const Content = styled.main`
@@ -70,7 +70,7 @@ export const NewCreditCardDisplayNamePage = () => {
           owner={creditCard.owner}
           expirationDate={creditCard.expirationDate}
           vendor={creditCard.vendor}
-          color={CreditCardVendors[creditCard.vendor].color}
+          color={CREDIT_CARD_VENDOR_BRAND_COLORS[creditCard.vendor]}
           icon={<VendorIcon vendor={creditCard.vendor} />}
         />
 

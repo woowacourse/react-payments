@@ -13,7 +13,7 @@ import { CreditCardView } from '../components/payments/CreditCardView';
 import { ExpirationDateInput } from '../components/payments/ExpirationDateInput';
 import { VendorIcon } from '../components/payments/VendorIcon';
 import type { CreditCard } from '../domain/CreditCard';
-import { CreditCardVendors } from '../domain/CreditCardVendor';
+import { CREDIT_CARD_VENDOR_BRAND_COLORS } from '../domain/CreditCardBrandColors';
 import { usePayments } from '../hooks/usePayments';
 import { useValidation } from '../hooks/useValidation';
 import {
@@ -133,7 +133,7 @@ export const NewCreditCardPage = () => {
           cardNumbers={newCard.cardNumbers}
           expirationDate={newCard.expirationDate}
           cvc={newCard.cvc}
-          color={CreditCardVendors[newCard.vendor].color}
+          color={CREDIT_CARD_VENDOR_BRAND_COLORS[newCard.vendor]}
           icon={<VendorIcon vendor={newCard.vendor} />}
           showBackface={showBackface}
         />

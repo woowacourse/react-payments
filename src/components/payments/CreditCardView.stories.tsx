@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import styled from 'styled-components';
-import { CreditCardVendorNames, CreditCardVendors } from '../../domain/CreditCardVendor';
+import { CREDIT_CARD_VENDORS } from '../../domain/CreditCardVendor';
 
+import { CREDIT_CARD_VENDOR_BRAND_COLORS } from '../../domain/CreditCardBrandColors';
 import { CreditCardView } from './CreditCardView';
 import { VendorIcon } from './VendorIcon';
 
@@ -58,7 +59,7 @@ export const WithVendor = () => {
   return (
     <Container>
       {' '}
-      {CreditCardVendorNames.map((vendor) => (
+      {CREDIT_CARD_VENDORS.map((vendor) => (
         <CreditCardView
           key={vendor}
           owner="NOAH"
@@ -66,7 +67,7 @@ export const WithVendor = () => {
           cardNumbers="1290-9072-3345-2081"
           expirationDate={['6', '25']}
           cvc="127"
-          color={CreditCardVendors[vendor].color}
+          color={CREDIT_CARD_VENDOR_BRAND_COLORS[vendor]}
           icon={<VendorIcon vendor={vendor} />}
         />
       ))}

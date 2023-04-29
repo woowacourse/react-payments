@@ -1,8 +1,7 @@
 import type { ComponentProps } from 'react';
 import styled from 'styled-components';
-import type { CreditCardVendorName } from '../../domain/CreditCardVendor';
-import { CreditCardVendorNames } from '../../domain/CreditCardVendor';
-
+import type { CreditCardVendor } from '../../domain/CreditCardVendor';
+import { CREDIT_CARD_VENDORS } from '../../domain/CreditCardVendor';
 import { BottomSheet } from '../common/BottomSheet';
 import { Text } from '../common/Text';
 import { VendorIcon } from './VendorIcon';
@@ -28,7 +27,7 @@ const VendorButton = styled.button`
 `;
 
 type NewCreditCardVendorBottomSheetProps = ComponentProps<typeof BottomSheet> & {
-  onClickVendor?: (vendor: CreditCardVendorName) => void;
+  onClickVendor?: (vendor: CreditCardVendor) => void;
 };
 
 export const NewCreditCardVendorBottomSheet = (props: NewCreditCardVendorBottomSheetProps) => {
@@ -38,7 +37,7 @@ export const NewCreditCardVendorBottomSheet = (props: NewCreditCardVendorBottomS
     <BottomSheet {...bottomSheetProps}>
       <BottomSheetContent>
         <VendorButtonGroup>
-          {CreditCardVendorNames.map((vendor) => (
+          {CREDIT_CARD_VENDORS.map((vendor) => (
             <VendorButton key={vendor} onClick={() => onClickVendor?.(vendor)}>
               <VendorIcon vendor={vendor} size={4.5} />
 

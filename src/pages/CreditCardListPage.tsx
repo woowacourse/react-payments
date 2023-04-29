@@ -5,7 +5,7 @@ import { Page } from '../components/common/Page';
 import { CreditCardList } from '../components/payments/CreditCardList';
 import { NewCreditCardButton } from '../components/payments/NewCreditCardButton';
 import { NewCreditCardVendorBottomSheet } from '../components/payments/NewCreditCardVendorBottomSheet';
-import type { CreditCardVendorName } from '../domain/CreditCardVendor';
+import type { CreditCardVendor } from '../domain/CreditCardVendor';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 import { usePayments } from '../hooks/usePayments';
 
@@ -61,7 +61,7 @@ export const CreditCardListPage = () => {
     setIsVendorBottomSheetOpened(true);
   };
 
-  const handleClickCreditCardVendor = (vendor: CreditCardVendorName) => {
+  const handleClickCreditCardVendor = (vendor: CreditCardVendor) => {
     navigate('/register', {
       state: { vendor },
     });
