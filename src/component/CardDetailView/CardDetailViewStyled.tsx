@@ -22,7 +22,9 @@ const St = {
   `,
 
   CardCompany: styled.h2`
-    font: 400 16px "Roboto";
+    min-height: 18px;
+
+    font: 400 16px/18px "Roboto";
   `,
 
   ICDiv: styled.div`
