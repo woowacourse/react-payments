@@ -1,0 +1,30 @@
+.card-nick-input-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-top: 40%;
+  height: 100vw;
+  justify-content: space-between;
+}
+
+.card-nick-input-direction {
+  margin-top: 20%;
+  font-size: larger;
+}
+
+.card-nick-input {
+  height: 40px;
+  width: 60%;
+
+  border-bottom: 1px solid black;
+  text-align: center;
+
+  margin-bottom: 60%;
+  margin-top: 10%;
+}
+
+.card-nick-input-next-button-container {
+  display: block;
+  align-self: end;
+}

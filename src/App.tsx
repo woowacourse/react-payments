@@ -6,6 +6,7 @@ import { useState } from "react";
 
 import CardInputPage from "./component/CardInputPage/CardInputPage";
 import CardListPage from "./component/CardListPage/CardListPage";
+import CardNickInputPage from "./component/CardNickInputPage/CardNickInputPage";
 
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import { CreditCard } from "./type";
@@ -30,6 +31,7 @@ function App() {
             path="/CardInputPage"
             element={<CardInputPage addNewCard={addNewCard} />}
           />
+          <Route path="/CardNickInputPage" element={<CardNickInputPage />} />
         </Routes>
       </BrowserRouter>
     </div>
