@@ -8,13 +8,13 @@
 
 ## [💳 페이먼츠 페이지 링크](https://hyeryongchoi.github.io/react-payments/) / [📕 스토리북 페이지 링크](https://hyeryongchoi.github.io/react-payments/storybook/)
 
-<table>
+<table frame=void>
   <tr>
-    <td align="center" width="200px" height="400px">
-      <img width="200px" height="400px" alt="페이먼츠 페이지 실행 화면" src="https://user-images.githubusercontent.com/24777828/235288287-9c066402-e389-47a9-b807-af51f25d2af3.gif">
-    </td>
     <td align="center" width="300px" height="400px">
-      <img width="300px" height="400px" alt="페이먼츠 404 페이지" src="https://user-images.githubusercontent.com/24777828/233854475-1fb5e32f-a598-46e8-97c0-9231050fb80a.gif"> 
+      <img width="300px" height="400px" alt="페이먼츠 페이지 실행 화면" src="https://user-images.githubusercontent.com/24777828/235293546-7f8a4e92-ee2a-4a02-8ab4-5301f6b82149.gif">
+    </td>
+    <td align="center" width="400px" height="400px">
+      <img width="400px" height="400px" alt="페이먼츠 404 페이지" src="https://user-images.githubusercontent.com/24777828/233854475-1fb5e32f-a598-46e8-97c0-9231050fb80a.gif"> 
     </td>
   </tr>
 <table>
