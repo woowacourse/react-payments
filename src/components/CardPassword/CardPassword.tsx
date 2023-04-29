@@ -4,10 +4,10 @@ import { useRef } from 'react';
 import * as Styled from './CardPassword.styles';
 interface CardPasswordProps {
   passwords: Array<string>;
-  setPasswords: React.Dispatch<React.SetStateAction<Array<string>>>;
+  isSetPasswords: (order: number, value: string) => boolean;
 }
 
-const CardPassword = ({ passwords, setPasswords }: CardPasswordProps) => {
+const CardPassword = ({ passwords, isSetPasswords }: CardPasswordProps) => {
   const passwordRefs: Record<number, React.RefObject<HTMLInputElement>> = {
     0: useRef<HTMLInputElement>(null),
     1: useRef<HTMLInputElement>(null),
@@ -16,11 +16,7 @@ const CardPassword = ({ passwords, setPasswords }: CardPasswordProps) => {
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const currentOrder = Number(e.target.dataset['order']);
 
-    if (/[^0-9]/g.test(e.target.value)) {
-      return;
-    }
-
-    setPasswords({ ...passwords, [currentOrder]: e.target.value });
+    isSetPasswords(currentOrder, e.target.value);
 
     if (currentOrder === 0 && passwords[0].length === 0) {
       passwordRefs[currentOrder + 1].current?.focus();

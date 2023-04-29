@@ -26,7 +26,7 @@ const AddCard = ({ cards, setCards }: CardList) => {
     securityCode,
     isSetSecurityCode,
     passwords,
-    setPasswords,
+    isSetPasswords,
     cardCompany,
     setCardCompany,
     isDisabledForm,
@@ -90,7 +90,7 @@ const AddCard = ({ cards, setCards }: CardList) => {
             securityCode={securityCode}
             isSetSecurityCode={isSetSecurityCode}
           />
-          <CardPassword passwords={passwords} setPasswords={setPasswords} />
+          <CardPassword passwords={passwords} isSetPasswords={isSetPasswords} />
           <Styled.ButtonWrapper>
             <SubmitButton
               textContent="다음"

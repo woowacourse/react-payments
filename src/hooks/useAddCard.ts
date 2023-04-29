@@ -9,16 +9,16 @@ import useCardNumbers from './useCardNumbers';
 import useExpiredDates from './useExpiredDates';
 import useOwnerName from './useOwnerName';
 import useSecurityCode from './useSecurityCode';
+import usePassword from './usePassword';
 
 const useAddCard = () => {
-  const [passwords, setPasswords] = useState<Array<string>>(['', '']);
-  const [cardCompany, setCardCompany] = useState<string>('');
-  const [isDisabledForm, setIsDisabledForm] = useState(true);
-
   const { cardNumbers, isSetCardNumbers } = useCardNumbers();
   const { expiredDates, isSetExpiredDates } = useExpiredDates();
   const { ownerName, isSetOwnerName } = useOwnerName();
   const { securityCode, isSetSecurityCode } = useSecurityCode();
+  const { passwords, isSetPasswords } = usePassword();
+  const [cardCompany, setCardCompany] = useState<string>('');
+  const [isDisabledForm, setIsDisabledForm] = useState(true);
 
   useEffect(() => {
     if (
@@ -44,7 +44,7 @@ const useAddCard = () => {
     securityCode,
     isSetSecurityCode,
     passwords,
-    setPasswords,
+    isSetPasswords,
     cardCompany,
     setCardCompany,
     isDisabledForm,
