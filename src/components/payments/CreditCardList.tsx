@@ -24,8 +24,8 @@ const CreditCardListItem = styled.li<CreditCardListItemProps>`
   gap: 8px;
 
   position: sticky;
-  top: ${(props) => props.$topIndex * props.$stackGap}px;
-  bottom: ${(props) => props.$bottomIndex * props.$stackGap}px;
+  top: ${(props) => props.$topIndex * props.$stackGap + 20}px;
+  bottom: ${(props) => props.$bottomIndex * props.$stackGap + 40}px;
 `;
 
 type CreditCardListProps = {
@@ -34,14 +34,14 @@ type CreditCardListProps = {
 };
 
 export const CreditCardList = (props: CreditCardListProps) => {
-  const { creditCards, stackGap } = props;
+  const { creditCards, stackGap = 20 } = props;
 
   return (
     <StyledCreditCardList>
       {creditCards.map((creditCard, index) => (
         <CreditCardListItem
           key={creditCard.id}
-          $stackGap={stackGap ?? 20}
+          $stackGap={stackGap}
           $topIndex={index}
           $bottomIndex={creditCards.length - index - 1}
         >
