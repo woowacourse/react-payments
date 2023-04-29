@@ -9,6 +9,7 @@ import ErrorMessage from './ErrorMessage';
 import { getUniqueID } from '../utils/key';
 import useMoveFocus from '../hooks/useMoveFocus';
 import CardCompanyModal from './CardCompanyModal';
+import useModal from '../hooks/useModal';
 
 const AddCardContainer = () => {
   const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
@@ -18,7 +19,7 @@ const AddCardContainer = () => {
   const [cardPWD, setCardPWD] = useState<string[]>(['', '']);
   const [expirationError, setExpirationError] = useState<boolean>(false);
   const [cardCompany, setCardCompany] = useState('');
-
+  const { isModalOpen, openModal, closeModal } = useModal(true);
   const { insert, move } = useMoveFocus();
   const setCard = useCardDispatch();
   const navigate = useNavigate();
@@ -84,12 +85,14 @@ const AddCardContainer = () => {
   };
 
   const successSubmit = () => {
+    const cardID = getUniqueID();
+
     setCard((prev) => {
       return [
         ...prev,
         {
-          id: getUniqueID(),
-          cardName: '',
+          id: cardID,
+          cardName: [''],
           cardCompany,
           cardNumbers,
           cardExpirationDate,
@@ -99,7 +102,7 @@ const AddCardContainer = () => {
         },
       ];
     });
-    navigate('/');
+    navigate(`/addCardName`, { state: { cardID } });
     setExpirationError(false);
   };
 
@@ -109,12 +112,14 @@ const AddCardContainer = () => {
 
   return (
     <AddCardContainerWrapper>
-      <CardPreview
-        cardCompany={cardCompany}
-        cardNumbers={cardNumbers}
-        cardOwner={cardOwner}
-        cardExpirationDate={cardExpirationDate}
-      />
+      <CardCompanyButton onClick={openModal}>
+        <CardPreview
+          cardCompany={cardCompany}
+          cardNumbers={cardNumbers}
+          cardOwner={cardOwner}
+          cardExpirationDate={cardExpirationDate}
+        />
+      </CardCompanyButton>
       <StyledForm onSubmit={onSubmitCard}>
         <InputGroup
           labelText="카드 번호"
@@ -260,10 +265,22 @@ const AddCardContainer = () => {
         </StyledHeightCenter>
         <StyledSubmitButton type="submit">다음</StyledSubmitButton>
       </StyledForm>
-      <CardCompanyModal onClickLogo={onClickLogo} />
+      <CardCompanyModal
+        isModalOpen={isModalOpen}
+        closeModal={closeModal}
+        onClickLogo={onClickLogo}
+      />
     </AddCardContainerWrapper>
   );
 };
+
+const CardCompanyButton = styled.button`
+  cursor: pointer;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  text-align: left;
+`;
 
 const AddCardContainerWrapper = styled.section`
   display: flex;

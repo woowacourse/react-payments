@@ -8,7 +8,6 @@ import kbCard from '../assets/company-kb.png';
 import lotteCard from '../assets/company-lotte.png';
 import shinhanCard from '../assets/company-shinhan.png';
 import wooriCard from '../assets/company-woori.png';
-import useModal from '../hooks/useModal';
 import styled from 'styled-components';
 
 const cardCompanies = [
@@ -48,12 +47,12 @@ const cardCompanies = [
 ];
 
 type CardCompanyModalProps = {
+  isModalOpen: boolean;
+  closeModal: () => void;
   onClickLogo: (cardCompanyName: string) => void;
 };
 
-const CardCompanyModal = ({ onClickLogo }: CardCompanyModalProps) => {
-  const { isModalOpen, closeModal } = useModal(true);
-
+const CardCompanyModal = ({ onClickLogo, isModalOpen, closeModal }: CardCompanyModalProps) => {
   const handleClickLogo = (companyName: string) => {
     onClickLogo(companyName);
     closeModal();

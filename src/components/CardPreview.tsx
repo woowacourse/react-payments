@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { getUniqueID } from '../utils/key';
 
 type CardPreviewProps = {
   cardCompany: string;
@@ -47,7 +48,7 @@ const CardPreview = ({
                 {Array(cardNumber.length)
                   .fill(0)
                   .map(() => (
-                    <Dot secondaryColor={secondary} />
+                    <Dot key={getUniqueID()} secondaryColor={secondary} />
                   ))}
               </CardNumber>
             );
@@ -79,7 +80,7 @@ const CardPreviewWrapper = styled.div<{
   border-radius: 5px;
 `;
 
-const CardCompany = styled.p`
+const CardCompany = styled.div`
   height: 14px;
   font-weight: 500;
   font-size: 12px;
