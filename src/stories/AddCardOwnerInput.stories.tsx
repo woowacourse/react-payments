@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import OwnerInput from '../pages/AddCard/components/OwnerInput';
 import useInput from '../hooks/useInput';
-import { APP_WIDTH } from './constants';
+import { APP_WIDTH } from '../utils/constants';
 import { isValidOwnerName } from '../pages/AddCard/domain/dispatcher';
 
 export default {

@@ -53,3 +53,5 @@ export const CARD_NAME_IMAGE_SRCS: Record<CardCompany, string> = {
   카카오뱅크: KakaoBankIcon,
   롯데카드: LotteCardIcon,
 };
+
+export const APP_WIDTH = '318px';

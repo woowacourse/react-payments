@@ -1,7 +1,7 @@
 import type { Meta } from '@storybook/react';
 
 import ExpireDateInput from '../pages/AddCard/components/ExpireDateInput';
-import { APP_WIDTH } from './constants';
+import { APP_WIDTH } from '../utils/constants';
 import useInput from '../hooks/useInput';
 import {
   isValidExpiredMonthFormat,

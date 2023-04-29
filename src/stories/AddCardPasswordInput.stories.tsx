@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import PasswordInput from '../pages/AddCard/components/PasswordInput';
 import useInput from '../hooks/useInput';
-import { APP_WIDTH } from './constants';
+import { APP_WIDTH } from '../utils/constants';
 import { isValidPassword } from '../pages/AddCard/domain/dispatcher';
 
 export default {

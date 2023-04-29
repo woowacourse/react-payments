@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import SecurityCodeInput from '../pages/AddCard/components/SecurityCodeInput';
 import useInput from '../hooks/useInput';
-import { APP_WIDTH } from './constants';
+import { APP_WIDTH } from '../utils/constants';
 import { isValidSecurityCode } from '../pages/AddCard/domain/dispatcher';
 
 export default {
