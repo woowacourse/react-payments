@@ -36,6 +36,25 @@ const defaultCard: Card = {
   bankCode: BankCodeList.BCCard,
 };
 
+export const PartialCard: Story = {
+  args: {
+    card: {
+      numbers: ['', '', '', ''],
+      expirationDate: {
+        month: '',
+        year: '',
+      },
+      name: '',
+      securityCode: '',
+      password: {
+        first: '',
+        second: '',
+      },
+      // bankCode: BankCodeList.BCCard,
+    },
+  },
+};
+
 export const BCCard: Story = {
   args: {
     card: { ...defaultCard, bankCode: BankCodeList.BCCard },

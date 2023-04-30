@@ -19,11 +19,11 @@ export function CreditCard({ card }: CreditCardProps) {
         <Styled.Dots>{'•'.repeat(numbers?.[3].length ?? 0)}</Styled.Dots>
       </Styled.CardNumbers>
       <Styled.Container>
-        <Styled.Name>{name}</Styled.Name>
+        <Styled.Name>{name || 'NAME'}</Styled.Name>
         <Styled.ExpirationDate>
-          <Styled.Month>{expirationDate?.month}</Styled.Month>
+          <Styled.Month>{expirationDate?.month || 'MM'}</Styled.Month>
           <Styled.DateSeparator>/</Styled.DateSeparator>
-          <Styled.Year>{expirationDate?.year}</Styled.Year>
+          <Styled.Year>{expirationDate?.year || 'YY'}</Styled.Year>
         </Styled.ExpirationDate>
       </Styled.Container>
     </Styled.Wrapper>
@@ -102,15 +102,15 @@ const Styled = {
   `,
 
   Month: styled.span`
-    width: 14px;
+    flex: 1;
   `,
 
   Year: styled.span`
-    width: 14px;
+    flex: 1;
   `,
 
   DateSeparator: styled.span`
-    width: 6px;
     text-align: center;
+    flex: 1;
   `,
 };

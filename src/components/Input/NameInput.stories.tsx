@@ -1,7 +1,8 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryFn, StoryObj } from '@storybook/react';
 import { theme } from 'components/style/theme';
+import { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
-import { NameInput } from './NameInput';
+import { NameInput, NameInputProps } from './NameInput';
 
 const meta = {
   tags: ['autodocs'],
@@ -18,8 +19,14 @@ const meta = {
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryFn<typeof meta>;
 
-export const Default: Story = {
-  args: {},
+export const Default: Story = (args) => {
+  const [value, setValue] = useState<NameInputProps['value']>('');
+
+  const handleNameInputChange: NameInputProps['onChange'] = (inputValue) => {
+    setValue(inputValue);
+  };
+
+  return <NameInput {...args} value={value} onChange={handleNameInputChange}></NameInput>;
 };

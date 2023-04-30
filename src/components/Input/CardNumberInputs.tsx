@@ -3,6 +3,7 @@ import { ValueAndOnChange } from './types';
 import { ChangeEvent, Fragment, useRef } from 'react';
 import { isNumber } from 'utils';
 import styled from 'styled-components';
+import { PaymentsInputLabel } from 'components/common/Label/PaymentsInputLabel';
 
 interface CardNumberInputProps {
   valueAndOnChanges: ValueAndOnChange[];
@@ -29,28 +30,32 @@ export function CardNumberInputs({ valueAndOnChanges }: CardNumberInputProps) {
   };
 
   return (
-    <Container>
-      {valueAndOnChanges.map(({ value, onChange }, index) => (
-        <Fragment key={index}>
-          <PaymentsInput
-            ref={(element) => (inputRefs.current[index] = element)}
-            value={value}
-            type={index < 2 ? 'text' : 'password'}
-            maxLength={4}
-            onChange={(e) => handleChange(e, index, onChange)}
-            placeholder={DEFAULT_CARD_NUMBER}
-            inputMode="numeric"
-            align="center"
-            required
-          />
-          {index < valueAndOnChanges.length - 1 && <span>-</span>}
-        </Fragment>
-      ))}
-    </Container>
+    <>
+      <PaymentsInputLabel required>카드 번호</PaymentsInputLabel>
+      <Container>
+        {valueAndOnChanges.map(({ value, onChange }, index) => (
+          <Fragment key={index}>
+            <PaymentsInput
+              ref={(element) => (inputRefs.current[index] = element)}
+              value={value}
+              type={index < 2 ? 'text' : 'password'}
+              maxLength={4}
+              onChange={(e) => handleChange(e, index, onChange)}
+              placeholder={DEFAULT_CARD_NUMBER}
+              inputMode="numeric"
+              align="center"
+              required
+            />
+            {index < valueAndOnChanges.length - 1 && <span>-</span>}
+          </Fragment>
+        ))}
+      </Container>
+    </>
   );
 }
 
 const Container = styled.div`
+  margin-top: 3px;
   display: flex;
   align-items: center;
   width: 100%;

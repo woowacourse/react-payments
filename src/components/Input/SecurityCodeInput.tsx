@@ -1,6 +1,7 @@
 import { PaymentsInput } from 'components/common';
+import { PaymentsInputLabel } from 'components/common/Label/PaymentsInputLabel';
 import { ChangeEventHandler } from 'react';
-import { CSSProperties } from 'styled-components';
+import styled, { CSSProperties } from 'styled-components';
 import { isNumber } from 'utils';
 import { ValueAndOnChange } from './types';
 
@@ -17,15 +18,24 @@ export function SecurityCodeInput({ value, onChange, width }: SecurityInputProps
   };
 
   return (
-    <PaymentsInput
-      value={value}
-      type="password"
-      maxLength={3}
-      onChange={handleChange}
-      inputMode="numeric"
-      align="center"
-      width={width}
-      required
-    />
+    <Container>
+      <PaymentsInputLabel required>보안 코드(CVC/CVV)</PaymentsInputLabel>
+      <PaymentsInput
+        value={value}
+        type="password"
+        maxLength={3}
+        onChange={handleChange}
+        inputMode="numeric"
+        align="center"
+        width={width}
+        required
+      />
+    </Container>
   );
 }
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+`;

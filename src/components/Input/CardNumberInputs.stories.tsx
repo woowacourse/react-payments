@@ -4,6 +4,7 @@ import { ThemeProvider } from 'styled-components';
 import { CardNumberInputs } from './CardNumberInputs';
 
 const meta = {
+  tags: ['autodocs'],
   title: 'CardNumberInputs',
   component: CardNumberInputs,
   decorators: [

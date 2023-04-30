@@ -107,35 +107,23 @@ export function AddCardForm({ onSubmit }: AddCardFormProps) {
         <CreditCard card={card} />
       </CardWrapper>
       <FormContainer onSubmit={handleSubmit}>
-        <PaymentsInputLabel required>카드 번호</PaymentsInputLabel>
         <CardNumberInputs valueAndOnChanges={valueAndOnChanges} />
 
-        <PaymentsInputLabel required>만료일</PaymentsInputLabel>
         <ExpirationDateInput
           month={{ value: month, onChange: handleMonthInputChange }}
           year={{ value: year, onChange: handleYearInputChange }}
           width="70px"
         />
 
-        <NameLabelContainer>
-          <PaymentsInputLabel>카드 소유자 이름(선택)</PaymentsInputLabel>
-          <PaymentsInputLabel>{`${name.length} / 30`}</PaymentsInputLabel>
-        </NameLabelContainer>
         <NameInput value={name} onChange={handleNameInputChange} />
 
-        <PaymentsInputLabel required>보안 코드(CVC/CVV)</PaymentsInputLabel>
         <SecurityCodeInput value={securityCode} onChange={handleSecurityCodeChange} width="80px" />
 
-        <PaymentsInputLabel required>카드 비밀번호</PaymentsInputLabel>
-        <PasswordInputContainer>
-          <PasswordInput
-            first={{ value: firstDigit, onChange: handleFirstPasswordInputChange }}
-            second={{ value: secondDigit, onChange: handleSecondPasswordInputChange }}
-            width="50px"
-          />
-          <DotContainer>•</DotContainer>
-          <DotContainer>•</DotContainer>
-        </PasswordInputContainer>
+        <PasswordInput
+          first={{ value: firstDigit, onChange: handleFirstPasswordInputChange }}
+          second={{ value: secondDigit, onChange: handleSecondPasswordInputChange }}
+          width="50px"
+        />
 
         <FormSubmitButton type="submit">다음</FormSubmitButton>
       </FormContainer>
@@ -154,16 +142,6 @@ const FormContainer = styled.form`
   flex-direction: column;
 `;
 
-const PasswordInputContainer = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const DotContainer = styled.div`
-  padding: 0 20px;
-  font-size: 16px;
-`;
-
 const FormSubmitButton = styled.button`
   border: none;
   font-size: 14px;
@@ -174,11 +152,4 @@ const FormSubmitButton = styled.button`
   border-radius: 10px;
   padding: 10px;
   cursor: pointer;
-`;
-
-const NameLabelContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  background-color: rgba(255, 255, 255, 0);
 `;

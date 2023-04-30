@@ -1,4 +1,5 @@
 import { PaymentsInput } from 'components/common';
+import { PaymentsInputLabel } from 'components/common/Label/PaymentsInputLabel';
 import React, { ChangeEvent, useRef } from 'react';
 import styled, { CSSProperties } from 'styled-components';
 import { isNumber } from 'utils';
@@ -31,33 +32,36 @@ export function ExpirationDateInput(props: ExpirationProps) {
   };
 
   return (
-    <Container>
-      <PaymentsInput
-        ref={(element) => (inputRefs.current[0] = element)}
-        value={month.value}
-        type="text"
-        maxLength={2}
-        placeholder="MM"
-        onChange={(e) => handleChange(e, 0, month.onChange)}
-        inputMode="numeric"
-        width={width}
-        align="center"
-        required
-      />
-      <SLASH />
-      <PaymentsInput
-        ref={(element) => (inputRefs.current[1] = element)}
-        value={year.value}
-        type="text"
-        maxLength={2}
-        placeholder="YY"
-        onChange={(e) => handleChange(e, 1, year.onChange)}
-        inputMode="numeric"
-        width={width}
-        align="center"
-        required
-      />
-    </Container>
+    <>
+      <PaymentsInputLabel required>만료일</PaymentsInputLabel>
+      <Container>
+        <PaymentsInput
+          ref={(element) => (inputRefs.current[0] = element)}
+          value={month.value}
+          type="text"
+          maxLength={2}
+          placeholder="MM"
+          onChange={(e) => handleChange(e, 0, month.onChange)}
+          inputMode="numeric"
+          width={width}
+          align="center"
+          required
+        />
+        <SLASH />
+        <PaymentsInput
+          ref={(element) => (inputRefs.current[1] = element)}
+          value={year.value}
+          type="text"
+          maxLength={2}
+          placeholder="YY"
+          onChange={(e) => handleChange(e, 1, year.onChange)}
+          inputMode="numeric"
+          width={width}
+          align="center"
+          required
+        />
+      </Container>
+    </>
   );
 }
 
@@ -69,6 +73,7 @@ const SLASH = styled.span`
 `;
 
 const Container = styled.div`
+  margin-top: 3px;
   display: flex;
   align-items: center;
   width: 100%;
