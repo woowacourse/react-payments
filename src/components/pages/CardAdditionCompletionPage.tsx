@@ -20,7 +20,11 @@ const CardAdditionCompletionPage = ({
   const navigate = useNavigate();
 
   if (!card) {
-    throw new Error('카드를 찾을 수 없습니다.');
+    return (
+      <CompletionContainer>
+        <Error>카드를 찾을 수 없습니다.</Error>
+      </CompletionContainer>
+    );
   }
 
   const handleComplete = (event: React.FormEvent<HTMLFormElement>) => {
@@ -80,6 +84,11 @@ const CheckBtn = styled.button`
 
   align-self: flex-end;
   cursor: pointer;
+`;
+
+const Error = styled.p`
+  font-size: 20px;
+  color: var(--red-color);
 `;
 
 export default CardAdditionCompletionPage;
