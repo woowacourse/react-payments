@@ -1,15 +1,8 @@
 import styled from "styled-components";
-import { CardColor } from "../../type/card";
+import { CardColor, CardInfo } from "../../type/card";
 import { CardNumberIndex } from "../../type/input";
 
-export interface CardProps {
-  cardNumber: CardNumberIndex;
-  month: string;
-  year: string;
-  userName: string;
-  cardColor: CardColor;
-  bank: string;
-}
+export interface CardProps extends CardInfo {}
 
 export function Card(props: CardProps) {
   const { cardNumber, month, year, userName, cardColor, bank } = props;
@@ -44,7 +37,6 @@ const CardContainer = styled.section<{ cardColor: CardColor }>`
 
   width: 21.3rem;
   height: 13.3rem;
-  margin-bottom: 3.5rem;
 
   background-color: ${({ cardColor }) => cardColor?.bgColor};
   color: ${({ cardColor }) => cardColor?.fontColor};
