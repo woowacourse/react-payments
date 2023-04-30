@@ -7,13 +7,14 @@ type CardProps = {
   owner: string;
   cardNumber: [string, string, string, string];
   expirationDate: [string, string];
+  onClick?: () => void;
 };
 
-const Card = ({ cardType, owner, cardNumber, expirationDate }: CardProps) => {
+const Card = ({ cardType, owner, cardNumber, expirationDate, onClick }: CardProps) => {
   const [month, year] = expirationDate;
 
   return (
-    <Styled.CardTemplate bgColor={MAIN_COLOR[cardType]}>
+    <Styled.CardTemplate bgColor={MAIN_COLOR[cardType]} onClick={onClick}>
       <Styled.CardName>{cardType}</Styled.CardName>
       <Styled.CardIC />
       <Styled.CardInfoWrapper>

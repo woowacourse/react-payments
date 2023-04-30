@@ -11,7 +11,8 @@ type CardAliasProps = {
 
 const CardAlias = ({ setPageCardList, currentId }: CardAliasProps) => {
   const { cardList, setCardList } = useCardListContext();
-  const { cardType, owner, cardNumber, expirationDate } = cardList[cardList.length - 1];
+  // TODO: 단언 없애려면 어떻게 로직을 분리하면 좋을지
+  const { cardType, owner, cardNumber, expirationDate } = cardList.find(({ id }) => id === currentId)!;
 
   const aliasRef = useRef<HTMLInputElement>(null);
 

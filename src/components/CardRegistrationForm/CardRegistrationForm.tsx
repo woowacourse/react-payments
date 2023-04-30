@@ -7,15 +7,17 @@ import ExpirationDateInput from '../ExpirationDateInput';
 import SecurityCodeInput from '../SecurityCodeInput';
 import styled from 'styled-components';
 import useOnChangeHandler from './hooks/useOnChangeHandler';
-import type { CardInformation } from '../../domain/types/card';
 import { useCardListContext } from '../../contexts/CardListContexts';
+import type { CardInformation, CardType } from '../../domain/types/card';
 
 type CardRegistrationFormProps = {
   setPageCardAlias: () => void;
   setCurrentId: React.Dispatch<React.SetStateAction<number>>;
+  cardType: CardType;
+  openModal: () => void;
 };
 
-const CardRegistrationForm = ({ setPageCardAlias, setCurrentId }: CardRegistrationFormProps) => {
+const CardRegistrationForm = ({ setPageCardAlias, setCurrentId, cardType, openModal }: CardRegistrationFormProps) => {
   const [cardNumber, setCardNumber] = useState<CardInformation['cardNumber']>(['', '', '', '']);
   const [expirationDate, setExpirationDate] = useState<CardInformation['expirationDate']>(['', '']);
   const [owner, setOwner] = useState<CardInformation['owner']>('');
@@ -38,14 +40,20 @@ const CardRegistrationForm = ({ setPageCardAlias, setCurrentId }: CardRegistrati
     const newId = Date.now();
 
     setCurrentId(newId);
-    setCardList((prev) => [...prev, { id: newId, cardNumber, expirationDate, owner, cardType: '우리카드' }]);
+    setCardList((prev) => [...prev, { id: newId, cardNumber, expirationDate, owner, cardType }]);
     setPageCardAlias();
   };
 
   return (
     <Styled.FormWrapper onSubmit={onSubmitCard}>
       <Styled.CardWrapper>
-        <Card cardType="우리카드" owner={owner} cardNumber={cardNumber} expirationDate={expirationDate} />
+        <Card
+          cardType={cardType}
+          owner={owner}
+          cardNumber={cardNumber}
+          expirationDate={expirationDate}
+          onClick={openModal}
+        />
       </Styled.CardWrapper>
 
       <InputGroup>
