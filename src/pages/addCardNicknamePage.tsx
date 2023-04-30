@@ -11,12 +11,7 @@ import { setData } from "../utils/localStorage";
 export function AddCardNicknamePage() {
   const { state } = useLocation();
   const navigate = useNavigate();
-  const [nickname, setNickname] = useState("");
   const nicknameInput = useRef<any>({ current: {} });
-
-  function inputNickname(e: React.ChangeEvent<HTMLInputElement>) {
-    setNickname(e.target.value);
-  }
 
   function completeInputNickname() {
     const userCardInfo = { ...state };
@@ -39,7 +34,7 @@ export function AddCardNicknamePage() {
         }}
         bank={state.bank}
       />
-      <InputBox inputState={{ value: nickname, handleChange: inputNickname }}>
+      <InputBox>
         <InputGroup>
           <Input
             name="nickname"

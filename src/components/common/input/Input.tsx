@@ -4,13 +4,16 @@ import {
   InputHTMLAttributes,
   isValidElement,
   PropsWithChildren,
+  RefAttributes,
   useContext,
 } from "react";
 import styled from "styled-components";
 import { InputContext } from "../../../contexts/inputContext";
 import { Ref } from "../../../type/ref";
 
-export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface InputProps
+  extends InputHTMLAttributes<HTMLInputElement>,
+    RefAttributes<HTMLInputElement> {
   inputRef: React.MutableRefObject<Ref>;
   name: string;
   asChild?: boolean;

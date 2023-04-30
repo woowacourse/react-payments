@@ -16,7 +16,6 @@ import {
 } from "../contexts/cardInfo";
 import { TEXT_LENGTH } from "../constants/inputInfo";
 import { SubmitButton } from "./common/submitButton";
-import { PATH } from "../constants/path";
 import { bank } from "../core/bank";
 
 export function AddCardForm() {
