@@ -8,33 +8,35 @@ type TooltipProps = {
 const Tooltip = ({ text, children }: PropsWithChildren<TooltipProps>) => {
   return (
     <TooltipWrapper>
-      {children}
+      <TooltipTrigger>{children}</TooltipTrigger>
       <TooltipText>{text}</TooltipText>
     </TooltipWrapper>
   );
 };
 
 const TooltipWrapper = styled.div`
-  position: relative;
-  width: 100%;
-  &:hover > div {
-    opacity: 1;
-  }
+  display: flex;
+`;
+
+const TooltipTrigger = styled.div`
+  margin-right: 12px;
 `;
 
 const TooltipText = styled.div`
+  display: flex;
+  align-items: center;
   opacity: 0;
-  top: 14px;
-  left: 40px;
-  width: 100%;
   background-color: black;
   color: #fff;
   text-align: center;
   border-radius: 6px;
-  padding: 5px;
-  font-size: 14px;
+  padding: 5px 10px;
+  font-size: 12px;
   transition: opacity 0.8s;
-  position: absolute;
+
+  ${TooltipTrigger}:hover + & {
+    opacity: 1;
+  }
 `;
 
 export default Tooltip;
