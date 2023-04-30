@@ -1,13 +1,13 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from '../common/Header';
 import CardItem from '../common/CardItem';
 import CardForm from '../cardForm/CardForm';
 import { LeftArrowIcon } from '../../assets/icons';
-import type { CardItemInfo } from '../../types/Card';
+import { CardContext } from '../../context/CardContext';
 
 interface CardRegistrationPageProps {
-  card: CardItemInfo;
   onOpen: () => void;
   onChangeForm: (
     cardNumber: string[],
@@ -17,10 +17,11 @@ interface CardRegistrationPageProps {
 }
 
 const CardRegistrationPage = ({
-  card,
   onOpen,
   onChangeForm,
 }: CardRegistrationPageProps) => {
+  const { card } = useContext(CardContext);
+
   return (
     <>
       <Header title='카드추가' leading={<BackButton />} />

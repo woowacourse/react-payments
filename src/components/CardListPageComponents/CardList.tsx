@@ -1,14 +1,16 @@
+import { useContext } from 'react';
 import styled from 'styled-components';
 import CardItem from '../common/CardItem';
 import Title from '../common/Title';
-import type { CardItemInfo } from '../../types/Card';
+import { CardContext } from '../../context/CardContext';
 
 interface CardListProps {
-  cardList: CardItemInfo[];
   onOpen: () => void;
 }
 
-const CardList = ({ cardList, onOpen }: CardListProps) => {
+const CardList = ({ onOpen }: CardListProps) => {
+  const { cardList } = useContext(CardContext);
+
   return (
     <CardListContainer>
       {cardList.map((card, id) => (

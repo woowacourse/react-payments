@@ -5,23 +5,17 @@ import { CONVERT_BANK_NAME } from '../../utils/Constants';
 
 interface BankListProps {
   onClose: () => void;
-  onBankInfoChanged: (bankName: string) => void;
 }
 
 const bankNames = Object.keys(CONVERT_BANK_NAME);
 
-const BankList = ({ onClose, onBankInfoChanged }: BankListProps) => {
+const BankList = ({ onClose }: BankListProps) => {
   return (
     <BottomSheet onClose={onClose}>
       <BankContainer>
         {bankNames.map((bankName) => {
           return (
-            <BankItem
-              key={bankName}
-              bankName={bankName}
-              onClose={onClose}
-              onBankInfoChanged={onBankInfoChanged}
-            />
+            <BankItem key={bankName} bankName={bankName} onClose={onClose} />
           );
         })}
       </BankContainer>

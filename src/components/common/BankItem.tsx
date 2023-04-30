@@ -1,22 +1,23 @@
 import styled from 'styled-components';
 import { CONVERT_BANK_NAME } from '../../utils/Constants';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { CardContext } from '../../context/CardContext';
 
 interface BankItemProps {
   bankName: string;
   onClose: () => void;
-  onBankInfoChanged: (bankName: string) => void;
 }
 
-const BankItem = ({ bankName, onClose, onBankInfoChanged }: BankItemProps) => {
+const BankItem = ({ bankName, onClose }: BankItemProps) => {
   const [isError, setIsError] = useState(false);
+  const { setBankName } = useContext(CardContext);
 
   const handleImageError = () => {
     setIsError(true);
   };
 
   const handleBankName = () => {
-    onBankInfoChanged(bankName);
+    setBankName(bankName);
     onClose();
   };
 

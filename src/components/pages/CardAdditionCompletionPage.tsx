@@ -5,21 +5,18 @@ import Title from '../common/Title';
 import Input from '../common/Input';
 import { cardLocalStorage } from '../domain/CardLocalStorage';
 import type { CardItemInfo } from '../../types/Card';
+import { useContext } from 'react';
+import { CardContext } from '../../context/CardContext';
 
 interface CardAdditionCompletionPageProps {
-  card: CardItemInfo;
-  cardName: string;
-  setCardName(value: string): void;
   onUpdateCardList(card: CardItemInfo): void;
 }
 
 const CardAdditionCompletionPage = ({
-  card,
-  cardName,
-  setCardName,
   onUpdateCardList,
 }: CardAdditionCompletionPageProps) => {
   const navigate = useNavigate();
+  const { card, cardName, setCardName } = useContext(CardContext);
 
   if (!card) {
     return (
