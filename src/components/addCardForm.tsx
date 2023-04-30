@@ -15,7 +15,6 @@ import {
   RefContext,
 } from "../contexts/cardInfo";
 import { TEXT_LENGTH } from "../constants/inputInfo";
-import { setCardData } from "../utils/localStorage";
 import { SubmitButton } from "./common/submitButton";
 import { PATH } from "../constants/path";
 import { bank } from "../core/bank";
@@ -39,8 +38,8 @@ export function AddCardForm() {
 
   function saveData(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setCardData(getInputData());
-    navigate(PATH.CARD_LIST);
+    // setCardData(getInputData());
+    navigate("/add-nickname", { state: getInputData() });
   }
 
   function getInputData() {
