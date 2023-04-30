@@ -1,11 +1,16 @@
-import { State } from './type';
+import { CardFormState } from './type';
 
-const initialState: State = {
+const initialState: CardFormState = {
+  cardName: 'BC',
   cardNumbers: ['', '', '', ''],
   cardExpirationDate: ['', ''],
   cardOwner: [''],
   cardCVC: [''],
   cardPWD: ['', ''],
+};
+
+export const cardCompanyStore = {
+  cardColor: 'black',
 };
 
 export default initialState;
