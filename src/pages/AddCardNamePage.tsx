@@ -91,7 +91,7 @@ const StyledForm = styled.form`
   justify-content: space-between;
 `;
 
-const StyledSubmitButton = styled.button`
+export const StyledSubmitButton = styled.button`
   align-self: end;
   border: none;
   background-color: transparent;

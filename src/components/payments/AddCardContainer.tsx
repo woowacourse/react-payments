@@ -11,6 +11,7 @@ import CardCompanyModal from './CardCompanyModal';
 import useModal from '../../hooks/useModal';
 import Tooltip from '../common/Tooltip';
 import ErrorMessage from '../common/ErrorMessage';
+import { StyledSubmitButton } from '../../pages/AddCardNamePage';
 
 const AddCardContainer = () => {
   const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
@@ -314,18 +315,6 @@ const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   row-gap: 18px;
-`;
-
-const StyledSubmitButton = styled.button`
-  align-self: end;
-  border: none;
-  background-color: transparent;
-  margin-top: 4px;
-  padding: 8px;
-  cursor: pointer;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 16px;
 `;
 
 const StyledHelperButton = styled.button`
