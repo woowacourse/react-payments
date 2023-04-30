@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { ReactComponent as BC } from '../../../../public/assets/bc-logo.svg';
-import { ReactComponent as HANA } from '../../../../public/assets/hanacard-logo.svg';
-import { ReactComponent as HYUNDAI } from '../../../../public/assets/hyundaicard-logo.svg';
-import { ReactComponent as KAKAO } from '../../../../public/assets/kakaobank-logo.svg';
-import { ReactComponent as KB } from '../../../../public/assets/kbcard-logo.svg';
-import { ReactComponent as LOTTE } from '../../../../public/assets/lottecard-logo.svg';
-import { ReactComponent as SHINHAN } from '../../../../public/assets/shinhan-logo.svg';
-import { ReactComponent as WORRI } from '../../../../public/assets/worricard-logo.svg';
+import { ReactComponent as BC } from '../../../assets/bc-logo.svg';
+import { ReactComponent as HANA } from '../../../assets/hanacard-logo.svg';
+import { ReactComponent as HYUNDAI } from '../../../assets/hyundaicard-logo.svg';
+import { ReactComponent as KAKAO } from '../../../assets/kakaobank-logo.svg';
+import { ReactComponent as KB } from '../../../assets/kbcard-logo.svg';
+import { ReactComponent as LOTTE } from '../../../assets/lottecard-logo.svg';
+import { ReactComponent as SHINHAN } from '../../../assets/shinhan-logo.svg';
+import { ReactComponent as WORRI } from '../../../assets/worricard-logo.svg';
 
 type CardName = 'BC' | 'HANA' | 'HYUNDAI' | 'KAKAO' | 'KB' | 'LOTTE' | 'SHINHAN' | 'WORRI';
 
