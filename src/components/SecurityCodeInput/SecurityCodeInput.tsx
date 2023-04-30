@@ -7,7 +7,15 @@ const SecurityCodeInput = () => {
     <>
       <Label htmlFor="security-code">보안 코드(CVC/CVV)</Label>
       <Styled.Wrapper marginTop="10px">
-        <Input id="security-code" type="password" width="84px" maxLength={3} textAlign="center" inputMode="numeric" />
+        <Input
+          id="security-code"
+          type="password"
+          width="84px"
+          maxLength={3}
+          textAlign="center"
+          inputMode="numeric"
+          autoComplete="off"
+        />
       </Styled.Wrapper>
     </>
   );

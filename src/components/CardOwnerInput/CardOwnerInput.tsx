@@ -23,6 +23,7 @@ const CardOwnerInput = ({ owner, onChange }: CardOwnerInputProps) => {
           placeholder="이름을 입력해주세요."
           textAlign="center"
           onChange={onChange}
+          autoComplete="off"
         />
       </Styled.Box>
     </>

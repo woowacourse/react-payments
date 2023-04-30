@@ -22,6 +22,7 @@ const CardNumberInput = ({ onChange }: CardNumberInputProps) => {
           textAlign="center"
           inputMode="numeric"
           onChange={onFirstChange}
+          autoComplete="off"
         />
         <Dash />
         <Input
@@ -32,6 +33,7 @@ const CardNumberInput = ({ onChange }: CardNumberInputProps) => {
           textAlign="center"
           inputMode="numeric"
           onChange={onSecondChange}
+          autoComplete="off"
         />
         <Dash />
         <Input
@@ -42,6 +44,7 @@ const CardNumberInput = ({ onChange }: CardNumberInputProps) => {
           textAlign="center"
           inputMode="numeric"
           onChange={onThirdChange}
+          autoComplete="off"
         />
         <Dash />
         <Input
@@ -52,6 +55,7 @@ const CardNumberInput = ({ onChange }: CardNumberInputProps) => {
           textAlign="center"
           inputMode="numeric"
           onChange={onFourthChange}
+          autoComplete="off"
         />
       </Styled.Box>
     </>

@@ -22,6 +22,7 @@ const ExpirationDateInput = ({ onChange }: ExpirationDateInputProps) => {
           textAlign="right"
           inputMode="numeric"
           onChange={onMonthChange}
+          autoComplete="off"
         />
         <Slash />
         <Input
@@ -32,6 +33,7 @@ const ExpirationDateInput = ({ onChange }: ExpirationDateInputProps) => {
           textAlign="left"
           inputMode="numeric"
           onChange={onYearChange}
+          autoComplete="off"
         />
       </Styled.Box>
     </>

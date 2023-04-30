@@ -8,10 +8,18 @@ const CardPasswordInput = () => {
       <Label htmlFor="password">카드 비밀번호</Label>
       <Styled.Wrapper marginTop="10px">
         <Styled.Box>
-          <Input id="password" type="password" width="43px" maxLength={1} textAlign="center" inputMode="numeric" />
+          <Input
+            id="password"
+            type="password"
+            width="43px"
+            maxLength={1}
+            textAlign="center"
+            inputMode="numeric"
+            autoComplete="off"
+          />
         </Styled.Box>
         <Styled.Box>
-          <Input type="password" width="43px" maxLength={1} textAlign="center" inputMode="numeric" />
+          <Input type="password" width="43px" maxLength={1} textAlign="center" inputMode="numeric" autoComplete="off" />
         </Styled.Box>
         <Input type="password" width="43px" maxLength={1} textAlign="center" value="0" disabled />
         <Input type="password" width="43px" maxLength={1} textAlign="center" value="0" disabled />
