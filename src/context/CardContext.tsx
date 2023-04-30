@@ -9,6 +9,22 @@ import {
 interface CardState {
   color: string;
   title: string;
+  cardNumber?: {
+    first: string;
+    second: string;
+    third: string;
+    fourth: string;
+  };
+  expiracy?: {
+    month: string;
+    year: string;
+  };
+  owner?: string;
+  cvc?: string;
+  password?: {
+    first: string;
+    second: string;
+  };
 }
 
 interface SetCardColorAction {
@@ -21,11 +37,34 @@ interface SetCardTitleAction {
   title: string;
 }
 
-interface ResetCardContext {
+interface ResetCardColorTitleAction {
   type: "RESET_CARD_CONTEXT";
 }
+interface UpdateCardContextAction {
+  type: "UPDATE_CARD_CONTEXT";
+  cardNumber: {
+    first: string;
+    second: string;
+    third: string;
+    fourth: string;
+  };
+  expiracy: {
+    month: string;
+    year: string;
+  };
+  owner: string;
+  cvc: string;
+  password: {
+    first: string;
+    second: string;
+  };
+}
 
-type Action = SetCardColorAction | SetCardTitleAction | ResetCardContext;
+type Action =
+  | SetCardColorAction
+  | SetCardTitleAction
+  | ResetCardColorTitleAction
+  | UpdateCardContextAction;
 
 type CardDispatch = Dispatch<Action>;
 
@@ -49,6 +88,26 @@ function cardTypeReducer(state: CardState, action: Action) {
         title: "",
         color: "",
       };
+    case "UPDATE_CARD_CONTEXT":
+      return {
+        ...state,
+        cardNumber: {
+          first: action.cardNumber.first,
+          second: action.cardNumber.second,
+          third: action.cardNumber.third,
+          fourth: action.cardNumber.fourth,
+        },
+        expiracy: {
+          month: action.expiracy.month,
+          year: action.expiracy.year,
+        },
+        owner: action.owner,
+        cvc: action.cvc,
+        password: {
+          first: action.password.first,
+          second: action.password.second,
+        },
+      };
     default:
       throw new Error("unhandled Action");
   }
@@ -58,6 +117,22 @@ export function CardContextProvider({ children }: PropsWithChildren) {
   const [cardCompany, setCardCompany] = useReducer(cardTypeReducer, {
     color: "",
     title: "",
+    owner: "",
+    cvc: "",
+    cardNumber: {
+      first: "",
+      second: "",
+      third: "",
+      fourth: "",
+    },
+    expiracy: {
+      month: "",
+      year: "",
+    },
+    password: {
+      first: "",
+      second: "",
+    },
   });
 
   return (
