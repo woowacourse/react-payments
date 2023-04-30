@@ -76,7 +76,6 @@ const InputsContainer = styled.div`
 `;
 
 const DotContainer = styled.div<PasswordInputProps>`
-  /* padding: ${({ width }) => `0 ${width / 2}`}; */
   padding: 0 19px;
   font-size: 16px;
 `;
