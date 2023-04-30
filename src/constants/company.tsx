@@ -1,4 +1,4 @@
-import * as Company from '../assets/images/company';
+import * as Company from '../assets/svgs/company';
 
 export const COMPANY = {
   BC: 'BC카드',

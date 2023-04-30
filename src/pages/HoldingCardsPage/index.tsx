@@ -4,7 +4,7 @@ import Header from '../../components/common/Header';
 import CardItem from '../../components/CardItem';
 import Button from '../../components/common/Button';
 
-import { PlusIcon } from '../../assets/images';
+import { PlusIcon } from '../../assets/svgs';
 import type { CardData } from '../../types/card';
 
 import styles from './holdingCardsPage.module.css';
@@ -41,7 +41,7 @@ const HoldingCardsPage = ({ cards }: Props) => {
               ))}
             </ul>
           )}
-          <Button type='button' size="card" color="gray" onClick={handleClick}>
+          <Button type="button" size="card" color="gray" onClick={handleClick}>
             <PlusIcon width={16} height={16} />
           </Button>
         </section>

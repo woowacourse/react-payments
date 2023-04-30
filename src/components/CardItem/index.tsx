@@ -1,4 +1,4 @@
-import { CardChipIcon } from '../../assets/images';
+import { CardChipIcon } from '../../assets/svgs';
 import { COMPANY_INFO } from '../../constants/company';
 import useCardFormValue from '../../hooks/useCardFormValue';
 import type { CardData } from '../../types/card';
