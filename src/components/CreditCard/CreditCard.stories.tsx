@@ -11,17 +11,10 @@ import CreditCard from '.';
 const meta: Meta<typeof CreditCard> = {
   title: 'CreditCard',
   component: CreditCard,
-  tags: ['autodocs'],
   argTypes: {
     company: {
       options: Object.keys(CARD_COMPANY),
       control: { type: 'radio' },
-    },
-    owner: {
-      control: 'text',
-    },
-    fullFilled: {
-      control: 'boolean',
     },
   },
 };
