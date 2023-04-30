@@ -30,15 +30,18 @@ export function CardListPage() {
         {checkDataExist() ? (
           cards?.map((card) => {
             return (
-              <Card
-                key={card.userName}
-                cardNumber={card.cardNumber}
-                month={card.month}
-                year={card.year}
-                userName={card.userName}
-                cardColor={card.cardColor}
-                bank={card.bank}
-              />
+              <ItemWrapper>
+                <Card
+                  key={card.userName}
+                  cardNumber={card.cardNumber}
+                  month={card.month}
+                  year={card.year}
+                  userName={card.userName}
+                  cardColor={card.cardColor}
+                  bank={card.bank}
+                />
+                <CardNickname>{card.nickname}</CardNickname>
+              </ItemWrapper>
             );
           })
         ) : (
@@ -66,6 +69,16 @@ const Section = styled.section`
 
   gap: 3rem;
   ${({ theme }) => theme.fonts.h2}
+`;
+
+const CardNickname = styled.div`
+  ${({ theme }) => theme.fonts.title}
+`;
+
+const ItemWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const Button = styled.button`
