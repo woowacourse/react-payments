@@ -41,13 +41,13 @@ export default function Homepage({
       <CardWrapper>
         {cardList?.map((card, index) => (
           <Card
-            bankKind={card.bank}
+            companyKind={card.company}
             title={card.title}
             key={card.id}
             owner={card.owner}
             cardNumberSet={Object.values(card.cardNumber)}
-            month={card.expiracy.month}
-            year={card.expiracy.year}
+            month={card.expirationDate.month}
+            year={card.expirationDate.year}
             onDeleteClick={() => onDeleteClick(index)}
           />
         ))}

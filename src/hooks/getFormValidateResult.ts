@@ -7,10 +7,10 @@ import { formValidate } from './formValidate';
 export const getFormValidateResult = (
   inputInformation: InputValuesInformationProps[]
 ) => {
-  const { inputValueInfomation, inputKey } =
+  const { inputValueInformation, inputKey } =
     createFormInputValue(inputInformation);
 
-  const { validationResult } = formValidate(inputValueInfomation, inputKey);
+  const { validationResult } = formValidate(inputValueInformation, inputKey);
 
   return { validationResult };
 };

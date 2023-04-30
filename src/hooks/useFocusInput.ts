@@ -11,7 +11,7 @@ export const useFocusInput = (formRef: RefObject<HTMLFormElement>) => {
     if (!active) return;
 
     const curMaxLength = active.getAttribute('maxLength');
-    const curInputKind = active.getAttribute('inputmode');
+    const curInputKind = active.getAttribute('inputMode');
 
     const curInputLength = active.value.length;
 

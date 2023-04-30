@@ -1,18 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
-import { BankType } from '../../types';
-import { BANK_DATA } from '../../constant';
+import { CardCompanyType } from '../../types';
+import { CARD_COMPANY_DATA } from '../../constant';
 
 interface BankInfoProps {
-  kind: BankType;
+  kind: CardCompanyType;
   onClick: () => void;
 }
 
 export default function BankInfo({ kind, onClick }: BankInfoProps) {
   return (
     <Wrapper onClick={onClick}>
-      <Image src={BANK_DATA[kind].source} />
-      <Title>{BANK_DATA[kind].title}</Title>
+      <Image src={CARD_COMPANY_DATA[kind].source} />
+      <Title>{CARD_COMPANY_DATA[kind].title}</Title>
     </Wrapper>
   );
 }

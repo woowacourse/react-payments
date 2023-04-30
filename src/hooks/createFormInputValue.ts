@@ -8,10 +8,10 @@ export interface InputValuesInformationProps extends UseInputProps {
 export const createFormInputValue = (
   inputValues: InputValuesInformationProps[]
 ) => {
-  const inputValueInfomation: InputDetailInfo[] = [];
+  const inputValueInformation: InputDetailInfo[] = [];
 
   inputValues.forEach((item) => {
-    inputValueInfomation.push({
+    inputValueInformation.push({
       name: item.name,
       element: item.element,
       maxLength: item.maxLength,
@@ -24,5 +24,5 @@ export const createFormInputValue = (
 
   const inputKey = inputValues.map((item) => item.name);
 
-  return { inputValueInfomation, inputKey };
+  return { inputValueInformation, inputKey };
 };

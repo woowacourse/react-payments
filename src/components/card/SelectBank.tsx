@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import BankInfo from './BankInfo';
-import { BankType } from '../../types';
+import { CardCompanyType } from '../../types';
 
-const BANK_KIND: BankType[] = [
+const BANK_KIND: CardCompanyType[] = [
   'bc',
   'shinhan',
   'kakao',
@@ -15,7 +15,7 @@ const BANK_KIND: BankType[] = [
 ];
 
 interface SelectBankProps {
-  onClick: (value: BankType) => void;
+  onClick: (value: CardCompanyType) => void;
 }
 
 export default function SelectBank({ onClick }: SelectBankProps) {

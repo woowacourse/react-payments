@@ -5,21 +5,21 @@ import Input from '../../common/Input';
 import Error from '../../common/Error';
 import { TAB_INDEX_INFO } from '../../../constant';
 
-interface ExpiracyInputProps {
+interface ExpirationInputProps {
   year: UseInputProps;
   month: UseInputProps;
 }
 
 const { addCardPage } = TAB_INDEX_INFO;
 
-export default function ExpiracyInput({ year, month }: ExpiracyInputProps) {
+export default function ExpirationInput({ year, month }: ExpirationInputProps) {
   return (
     <Container>
       <Wrapper>
         <InputWrapper>
           <Input
             type="text"
-            id="expiracy"
+            id="expiration"
             isNumber={true}
             placeholder="MM"
             textAlign="center"

@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { createUniqueId, isPrevDate } from '../../utils';
 import { useState } from 'react';
 import Error from '../common/Error';
-import { BankType } from '../../types';
-import { BANK_DATA } from '../../constant';
+import { CardCompanyType } from '../../types';
+import { CARD_COMPANY_DATA } from '../../constant';
 
 export interface CardProps {
   cardNumberSet: string[];
@@ -12,7 +12,7 @@ export interface CardProps {
   month: string;
   year: string;
   title?: string;
-  bankKind: BankType;
+  companyKind: CardCompanyType;
 }
 
 const ENCRYPT_INDEX = 2;
@@ -25,10 +25,10 @@ export default function Card({
   year,
   onDeleteClick,
   title,
-  bankKind = 'default',
+  companyKind = 'default',
 }: CardProps) {
   const [isClick, setIsClick] = useState(false);
-  const onwerName =
+  const ownerName =
     owner.length > VIEW_LIMIT_LENGTH
       ? owner.slice(0, VIEW_LIMIT_LENGTH)
       : owner;
@@ -44,10 +44,10 @@ export default function Card({
         <Wrapper
           onClick={toggleIsClick}
           isHome={onDeleteClick ? true : false}
-          bgColor={BANK_DATA[bankKind].backgroundColor}
-          fontColor={BANK_DATA[bankKind].color}
+          bgColor={CARD_COMPANY_DATA[companyKind].backgroundColor}
+          fontColor={CARD_COMPANY_DATA[companyKind].color}
         >
-          <Title>{BANK_DATA[bankKind].title}</Title>
+          <Title>{CARD_COMPANY_DATA[companyKind].title}</Title>
           <Magnet />
           <div>
             <CardNumber>
@@ -59,16 +59,16 @@ export default function Card({
                 </CardNumberItem>
               ))}
             </CardNumber>
-            <OwnerAndExpiracyWrapper>
-              <Owner title={owner}>{onwerName}</Owner>
-              <Expiracy>{`${month}/${year}`}</Expiracy>
-            </OwnerAndExpiracyWrapper>
+            <OwnerAndExpirationWrapper>
+              <Owner title={owner}>{ownerName}</Owner>
+              <Expiration>{`${month}/${year}`}</Expiration>
+            </OwnerAndExpirationWrapper>
           </div>
         </Wrapper>
         {isClick && onDeleteClick && (
           <QuestionWrapper>
             <DeleteWrapper onClick={onDeleteClick}>삭제</DeleteWrapper>
-            <CancleWrapper onClick={toggleIsClick}>취소</CancleWrapper>
+            <CancelWrapper onClick={toggleIsClick}>취소</CancelWrapper>
           </QuestionWrapper>
         )}
       </Container>
@@ -148,7 +148,7 @@ const CardNumberItem = styled.span`
   }
 `;
 
-const OwnerAndExpiracyWrapper = styled.div`
+const OwnerAndExpirationWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -163,7 +163,7 @@ const Owner = styled.span`
   font-size: 14px;
 `;
 
-const Expiracy = styled.span`
+const Expiration = styled.span`
   float: right;
   font-weight: bold;
   font-size: 14px;
@@ -205,7 +205,7 @@ const DeleteWrapper = styled(Button)`
   }
 `;
 
-const CancleWrapper = styled(Button)`
+const CancelWrapper = styled(Button)`
   background-color: #fff;
 
   &:hover {

@@ -4,7 +4,7 @@ import PrevButton from '../components/common/PrevButton';
 import Card from '../components/card/Card';
 import InputField from '../components/common/InputField';
 import CardNumberInput from '../components/card/input/CardNumberInput';
-import ExpiracyInput from '../components/card/input/ExpiracyInput';
+import ExpirationInput from '../components/card/input/ExpirationInput';
 import OwnerInput from '../components/card/input/OwnerInput';
 import CvcInput from '../components/card/input/CvcInput';
 import PasswordInput from '../components/card/input/PasswordInput';
@@ -16,16 +16,16 @@ import {
   setNextInputFocus,
   userConfirm,
 } from '../utils';
-import { BankType, CardInfo, PageInfo } from '../types';
+import { CardInfo, PageInfo, CardCompanyType } from '../types';
 import { useFormInputs } from '../hooks/useFormInputs';
 import Modal from '../components/common/Modal';
 import SelectBank from '../components/card/SelectBank';
 import { useHideScrollState } from '../hooks/useHideScrollState';
 import ChangeButton from '../components/common/ChangeButton';
-import { BANK_DATA } from '../constant';
 import RegisteredCard from '../components/card/RegisteredCard';
 import { InputValuesInformationProps } from '../hooks/createFormInputValue';
 import { getFormValidateResult } from '../hooks/getFormValidateResult';
+import { CARD_COMPANY_DATA } from '../constant';
 
 interface AddCardPageProps {
   cardList: CardInfo[];
@@ -42,13 +42,16 @@ export default function AddCardPage({
   const { onInputKeydown } = useFocusInput(cardForm);
   const { formInputs } = useFormInputs();
   const [isRegister, setIsRegister] = useState(false);
-  const [bank, setBank] = useHideScrollState<BankType>('default', (value) => {
-    return value === 'default';
-  });
+  const [cardCompany, setCardCompany] = useHideScrollState<CardCompanyType>(
+    'default',
+    (value) => {
+      return value === 'default';
+    }
+  );
 
-  const onBankHanlder = (value: BankType) => {
+  const onBankHandler = (value: CardCompanyType) => {
     setNextInputFocus(cardForm.current);
-    setBank(value);
+    setCardCompany(value);
   };
 
   const {
@@ -112,15 +115,15 @@ export default function AddCardPage({
   const createCard = () => {
     const newCard: CardInfo = {
       id: createUniqueId(),
-      bank,
+      company: cardCompany,
       title: cardTitle.value,
       cardNumber: {
-        fisrt: firstCardNumber.value,
+        first: firstCardNumber.value,
         second: secondCardNumber.value,
         third: '&&&&',
         fourth: '&&&&',
       },
-      expiracy: {
+      expirationDate: {
         month: month.value,
         year: year.value,
       },
@@ -167,7 +170,7 @@ export default function AddCardPage({
       <RegisteredCard
         createCard={createCard}
         cardTitle={cardTitle}
-        bankKind={bank}
+        companyKind={cardCompany}
         cardNumberSet={[
           firstCardNumber.value,
           secondCardNumber.value,
@@ -190,7 +193,7 @@ export default function AddCardPage({
         </TitleWrapper>
         <CardWrapper>
           <Card
-            bankKind={bank}
+            companyKind={cardCompany}
             cardNumberSet={[
               firstCardNumber.value,
               secondCardNumber.value,
@@ -203,10 +206,10 @@ export default function AddCardPage({
           />
           <ChangeButtonWrapper>
             <ChangeButton
-              color={BANK_DATA[bank].color}
-              bgColor={BANK_DATA[bank].backgroundColor}
+              color={CARD_COMPANY_DATA[cardCompany].color}
+              bgColor={CARD_COMPANY_DATA[cardCompany].backgroundColor}
               text="카드 변경"
-              onClick={() => setBank('default')}
+              onClick={() => setCardCompany('default')}
             />
           </ChangeButtonWrapper>
         </CardWrapper>
@@ -225,7 +228,7 @@ export default function AddCardPage({
               />
             </InputField>
             <InputField text="만료일">
-              <ExpiracyInput year={year} month={month} />
+              <ExpirationInput year={year} month={month} />
             </InputField>
             <InputField
               text="카드 소유자 이름(선택)"
@@ -255,9 +258,9 @@ export default function AddCardPage({
           </NextButtonWrapper>
         </InputWrapperParent>
       </Page>
-      {bank === 'default' && (
+      {cardCompany === 'default' && (
         <Modal>
-          <SelectBank onClick={onBankHanlder} />
+          <SelectBank onClick={onBankHandler} />
         </Modal>
       )}
     </Container>

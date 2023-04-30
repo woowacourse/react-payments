@@ -4,7 +4,7 @@ import { CardInfo, PageInfo } from '../../types';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import Homepage from '../../pages/HomePage';
 
-const STORIES_CARD_KEY = 'storiesCardkey';
+const STORIES_CARD_KEY = 'storiesCardKey';
 
 function HomepageStories() {
   const [page, setPage] = useState<PageInfo>('homePage');

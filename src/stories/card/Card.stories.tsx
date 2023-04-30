@@ -54,7 +54,7 @@ export const nameLengthThirtyCard: Story = {
   },
 };
 
-export const FullfilledCard: Story = {
+export const FilledCard: Story = {
   args: {
     cardNumberSet: ['1111', '2222', '····', '····'],
     owner: 'EYK',
@@ -78,7 +78,7 @@ export const TitleCard: Story = {
     owner: 'EYK',
     month: '04',
     year: '23',
-    bankKind: 'kakao',
+    companyKind: 'kakao',
     title: '카카오뱅크 내 카드',
   },
 };
@@ -89,7 +89,7 @@ export const KakaoCard: Story = {
     owner: 'EYK',
     month: '04',
     year: '23',
-    bankKind: 'kakao',
+    companyKind: 'kakao',
   },
 };
 
@@ -99,7 +99,7 @@ export const HyundaiCard: Story = {
     owner: 'EYK',
     month: '04',
     year: '23',
-    bankKind: 'hyundai',
+    companyKind: 'hyundai',
   },
 };
 
@@ -109,7 +109,7 @@ export const HanaCard: Story = {
     owner: 'EYK',
     month: '04',
     year: '23',
-    bankKind: 'hana',
+    companyKind: 'hana',
   },
 };
 
@@ -119,7 +119,7 @@ export const BcCard: Story = {
     owner: 'EYK',
     month: '04',
     year: '23',
-    bankKind: 'bc',
+    companyKind: 'bc',
   },
 };
 
@@ -129,7 +129,7 @@ export const KbCard: Story = {
     owner: 'EYK',
     month: '04',
     year: '23',
-    bankKind: 'kb',
+    companyKind: 'kb',
   },
 };
 
@@ -139,7 +139,7 @@ export const ShinhanCard: Story = {
     owner: 'EYK',
     month: '04',
     year: '23',
-    bankKind: 'shinhan',
+    companyKind: 'shinhan',
   },
 };
 
@@ -149,7 +149,7 @@ export const WooriCard: Story = {
     owner: 'EYK',
     month: '04',
     year: '23',
-    bankKind: 'woori',
+    companyKind: 'woori',
   },
 };
 
@@ -159,6 +159,6 @@ export const LotteCard: Story = {
     owner: 'EYK',
     month: '04',
     year: '23',
-    bankKind: 'lotte',
+    companyKind: 'lotte',
   },
 };

@@ -9,7 +9,7 @@ import Error from '../common/Error';
 import { InputValuesInformationProps } from '../../hooks/createFormInputValue';
 import { getFormValidateResult } from '../../hooks/getFormValidateResult';
 
-interface RegistredCardProps extends CardProps {
+interface RegisteredCardProps extends CardProps {
   cardTitle: UseInputProps;
   createCard: () => void;
 }
@@ -18,7 +18,7 @@ export default function RegisteredCard({
   cardTitle,
   createCard,
   ...rest
-}: RegistredCardProps) {
+}: RegisteredCardProps) {
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 

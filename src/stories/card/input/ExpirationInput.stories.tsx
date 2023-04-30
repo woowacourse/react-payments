@@ -2,10 +2,10 @@ import React, { FormEvent, useRef } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import { useFocusInput } from '../../../hooks/useFocusInput';
 import styled from 'styled-components';
-import ExpiracyInput from '../../../components/card/input/ExpiracyInput';
+import ExpirationInput from '../../../components/card/input/ExpirationInput';
 import { useFormInputs } from '../../../hooks/useFormInputs';
 
-function ExpiracyStories() {
+function ExpirationStories() {
   const cardForm = useRef<HTMLFormElement>(null);
   const { onInputKeydown } = useFocusInput(cardForm);
 
@@ -25,20 +25,20 @@ function ExpiracyStories() {
       ref={cardForm}
       onKeyDown={(e) => onInputKeydown(e)}
     >
-      <ExpiracyInput year={year} month={month} />
+      <ExpirationInput year={year} month={month} />
     </InputWrapperParent>
   );
 }
 
-const meta: Meta<typeof ExpiracyStories> = {
-  component: ExpiracyStories,
+const meta: Meta<typeof ExpirationStories> = {
+  component: ExpirationStories,
   title: 'CardInput',
 };
 
 export default meta;
-type Story = StoryObj<typeof ExpiracyStories>;
+type Story = StoryObj<typeof ExpirationStories>;
 
-export const Expiracy: Story = {
+export const Expiration: Story = {
   args: {},
 };
 

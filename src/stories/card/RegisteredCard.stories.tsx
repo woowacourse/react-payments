@@ -18,7 +18,7 @@ function RegisteredCardStories() {
 
   return (
     <RegisteredCard
-      bankKind="default"
+      companyKind="default"
       createCard={() => {}}
       cardTitle={cardTitle}
       {...cardInfo}

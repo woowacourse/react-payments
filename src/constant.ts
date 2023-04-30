@@ -1,4 +1,4 @@
-import { BankDataRecord } from './types';
+import { CardCompanyRecord } from './types';
 import BC_CARD from './assets/bank/bc_card.png';
 import SHINHAN_CARD from './assets/bank/shinhan_card.png';
 import KAKAO_BANK from './assets/bank/kakao_bank.png';
@@ -33,7 +33,7 @@ export const TAB_INDEX_INFO = {
   },
 };
 
-export const BANK_DATA: BankDataRecord = {
+export const CARD_COMPANY_DATA: CardCompanyRecord = {
   default: {
     source: '',
     title: '',
