@@ -1,4 +1,9 @@
-export const isInputNumber = (inputValue: string, maxLength: number = 4) => {
+import { INPUT_MAX_LENGTH } from './Constants';
+
+export const isInputNumber = (
+  inputValue: string,
+  maxLength: number = INPUT_MAX_LENGTH.CARD_NUMBER_LENGTH
+) => {
   const numberRegex = new RegExp(`^\\d{0,${maxLength}}$`);
   return !numberRegex.test(inputValue);
 };
@@ -8,7 +13,10 @@ export const isInputEnglish = (inputValue: string) => {
   return !englishRegex.test(inputValue);
 };
 
-export const isOverLength = (inputValue: string, maxLength: number = 30) => {
+export const isOverLength = (
+  inputValue: string,
+  maxLength: number = INPUT_MAX_LENGTH.NAME_LENGTH
+) => {
   return inputValue.length > maxLength;
 };
 
