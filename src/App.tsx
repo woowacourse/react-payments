@@ -4,6 +4,7 @@ import CardRegistration from './pages/CardRegistration';
 import { useState } from 'react';
 import { CardListProvider } from './contexts/CardListContexts';
 import CardAlias from './pages/CardAlias';
+import { PortalProvider } from './components/ModalPortal';
 
 const PAGE = {
   CARD_LIST: 'card-list',
@@ -27,6 +28,7 @@ function App() {
           <CardAlias setPageCardList={() => setPage(PAGE.CARD_LIST)} currentId={currentId} />
         )}
       </CardListProvider>
+      <PortalProvider />
     </>
   );
 }
