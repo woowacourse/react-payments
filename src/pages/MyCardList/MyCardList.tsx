@@ -8,7 +8,7 @@ import { getItemFromLocalStorage } from '../../utils/localStorage';
 
 export default function MyCardList() {
   const navigate = useNavigate();
-  const [registeredCards] = useState(getItemFromLocalStorage<CardRegisterInfo[]>('CardList'));
+  const [registeredCards] = useState(() => getItemFromLocalStorage<CardRegisterInfo[]>('CardList'));
 
   return (
     <Styled.Root dir='column' align='center'>
