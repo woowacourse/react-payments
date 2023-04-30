@@ -22,9 +22,9 @@ const initialCard: CreditCard = {
   owner: "",
   expirationDate: "",
   cardCo: "woori",
-  cardNumber: [],
+  cardNumber: [0, 0, 0, 0],
   securityCode: "",
-  password: [],
+  password: [0, 0],
 };
 
 const initialArrayInputState: EachUserInputState = {
