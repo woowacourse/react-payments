@@ -36,6 +36,8 @@ export function CardList() {
                 month={card.month}
                 year={card.year}
                 userName={card.userName}
+                cardColor={card.cardColor}
+                bank={card.bank}
               />
             );
           })
