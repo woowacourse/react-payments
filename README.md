@@ -4,7 +4,7 @@
 
 ## [배포 페이지](https://guridaek.github.io/react-payments/)
 
-## 페어 프로그래밍 [가람](https://github.com/guridaek) & [루루](https://github.com/hafnium1923)
+## [스토리북](https://644e3c3e4b0966ee7c0c88be-ufptltvjyx.chromatic.com)
 
 ## 로컬 실행 방법
 
