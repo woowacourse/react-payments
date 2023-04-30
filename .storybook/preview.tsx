@@ -1,5 +1,6 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
+import { CardInformationProvider } from '../src/context/CardInformationProvider';
 import type { Preview } from '@storybook/react';
 
 const preview: Preview = {
@@ -16,9 +17,11 @@ const preview: Preview = {
 
 export const decorators = [
   Story => (
-    <MemoryRouter initialEntries={['/']}>
-      <Story />
-    </MemoryRouter>
+    <CardInformationProvider>
+      <MemoryRouter initialEntries={['/']}>
+        <Story />
+      </MemoryRouter>
+    </CardInformationProvider>
   ),
 ];
 
