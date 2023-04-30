@@ -55,7 +55,7 @@ const AddCard = () => {
   const { expiredDate, checkExpiredDate, validateDate } = useExpiredDate();
   const { cardCompany, checkCardCompany } = useCardCompany();
 
-  const { isBottomSheetOpen, openBottomSheet, closeBottomSheet } =
+  const { isBottomSheetOpen, onOpenBottomSheet, onCloseBottomSheet } =
     useBottomSheet();
 
   const { disabled } = useAddCard(
@@ -85,7 +85,7 @@ const AddCard = () => {
     <>
       <Layout>
         <form onSubmit={handleSubmitCard}>
-          <CardWrapper onClick={openBottomSheet}>
+          <CardWrapper onClick={onOpenBottomSheet}>
             <p>카드를 클릭해 카드사를 변경할 수 있습니다.</p>
             <Card
               cardNumbers={cardNumbers}
@@ -120,7 +120,7 @@ const AddCard = () => {
       {isBottomSheetOpen && (
         <BottomSheet
           checkCardCompany={checkCardCompany}
-          closeBottomSheet={closeBottomSheet}
+          closeBottomSheet={onCloseBottomSheet}
         />
       )}
     </>

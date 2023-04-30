@@ -2,10 +2,10 @@ import { useState } from 'react';
 
 const useBottomSheet = () => {
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(true);
-  const openBottomSheet = () => setIsBottomSheetOpen(true);
-  const closeBottomSheet = () => setIsBottomSheetOpen(false);
+  const onOpenBottomSheet = () => setIsBottomSheetOpen(true);
+  const onCloseBottomSheet = () => setIsBottomSheetOpen(false);
 
-  return { isBottomSheetOpen, openBottomSheet, closeBottomSheet };
+  return { isBottomSheetOpen, onOpenBottomSheet, onCloseBottomSheet };
 };
 
 export default useBottomSheet;

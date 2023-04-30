@@ -23,7 +23,7 @@ const useAddCard = (
 
   const isPasswordValid = () => {
     const { 0: first, 1: second } = password;
-    return first.length === 1 && second.length === 1;
+    return first && second;
   };
 
   const disabled =
