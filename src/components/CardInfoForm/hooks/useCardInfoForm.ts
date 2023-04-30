@@ -4,7 +4,7 @@ import { isNotAlphabet, isNotNumber } from '../../../utils/validation';
 import useCardFormAction from '../../../hooks/useCardFormAction';
 import { InputAction } from '../../../contexts/CardFormContext';
 
-const useCardRegisterForm = (inputRefs: RefObject<HTMLInputElement>[]) => {
+const useCardInfoForm = (inputRefs: RefObject<HTMLInputElement>[]) => {
   const { inputAction } = useCardFormAction();
 
   const autoFocusNextInput = (target: HTMLInputElement) => {
@@ -52,4 +52,4 @@ const useCardRegisterForm = (inputRefs: RefObject<HTMLInputElement>[]) => {
   };
 };
 
-export default useCardRegisterForm;
+export default useCardInfoForm;

@@ -9,12 +9,12 @@ import CvcField from './CvcField';
 import PasswordField from './PasswordField';
 import Button from '../common/Button';
 
-import useCardRegisterForm from './hooks/useCardRegisterForm';
+import useCardInfoForm from './hooks/useCardInfoForm';
 import useCardFormValidation from '../../hooks/useCardFormValidation';
 
-import styles from './cardRegisterForm.module.css';
+import styles from './cardInfoForm.module.css';
 
-const CardRegisterForm = () => {
+const CardInfoForm = () => {
   const inputRefs = Array.from({ length: 10 }).map(() =>
     useRef<HTMLInputElement>(null),
   );
@@ -22,8 +22,7 @@ const CardRegisterForm = () => {
 
   const { isValidCardData, validateCompany, validateExpiredDate } =
     useCardFormValidation();
-  const { handleNumberChange, handleOwnerChange } =
-    useCardRegisterForm(inputRefs);
+  const { handleNumberChange, handleOwnerChange } = useCardInfoForm(inputRefs);
 
   const handleFormSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
@@ -67,4 +66,4 @@ const CardRegisterForm = () => {
   );
 };
 
-export default CardRegisterForm;
+export default CardInfoForm;

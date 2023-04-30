@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import Header from '../../components/common/Header';
 import CardItem from '../../components/CardItem';
 import Button from '../../components/common/Button';
-import CardRegisterForm from '../../components/CardRegisterForm';
+import CardInfoForm from '../../components/CardInfoForm';
 import CardCompanyModal from '../../components/CardCompanyModal';
 
 import useModal from '../../hooks/useModal';
@@ -30,7 +30,7 @@ const CardInfoRegisterPage = () => {
           </div>
         </section>
         <section className={styles.formSection}>
-          <CardRegisterForm />
+          <CardInfoForm />
         </section>
         {toggleModal && <CardCompanyModal onClose={closeModal} />}
       </main>
