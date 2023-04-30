@@ -11,11 +11,16 @@ declare module 'styled-components' {
     [key: string]: string;
   }
 
+  interface ZIndex {
+    [key: string]: number;
+  }
+
   export interface DefaultTheme {
     light: Theme;
     dark: Theme;
     blue: Theme;
     pale: Theme;
     banks: BankColors;
+    zIndex: ZIndex;
   }
 }

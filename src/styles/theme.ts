@@ -31,4 +31,10 @@ export const theme: DefaultTheme = {
     하나카드: '#41928F',
     국민카드: '#665E55',
   },
+
+  zIndex: {
+    rootZIndex: 99,
+    backdropZIndex: 1000,
+    bottomSheetZIndex: 1001,
+  },
 };

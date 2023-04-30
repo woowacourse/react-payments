@@ -24,7 +24,7 @@ export const BottomSheetContainer = styled.div<{ isOpened: boolean }>`
   left: 0;
   right: 0;
   background-color: white;
-  z-index: 1000;
+  z-index: ${({ theme }) => theme.zIndex.bottomSheetZIndex};
   padding: 1rem 2rem;
   border-top: 1px solid #ccc;
   animation: ${({ isOpened }) => (isOpened ? slideUp : slideDown)} 250ms ease-out;
@@ -37,5 +37,5 @@ export const Backdrop = styled.div`
   left: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 999;
+  z-index: ${({ theme }) => theme.zIndex.backdropZIndex};
 `;
