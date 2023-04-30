@@ -5,6 +5,7 @@ import { CardCompanyButton } from './CardCompanyButton';
 import { Modal } from './common/Modal';
 
 type CardCompanyListModalProps = {
+  closeModal: () => void;
   handleOnClick: (value: CardCompanyButtonProps['cardCompany']) => void;
 };
 
@@ -16,9 +17,9 @@ const Contents = styled.div`
 `;
 
 export const CardCompanyListModal = (props: CardCompanyListModalProps) => {
-  const { handleOnClick } = props;
+  const { handleOnClick, closeModal } = props;
   return (
-    <Modal>
+    <Modal closeModal={closeModal}>
       <Contents>
         {CARD_COMPANY.map((cardCompany) => (
           <CardCompanyButton

@@ -43,7 +43,7 @@ export const Modal = (props: PropsWithChildren<ModalProps>) => {
   }, []);
 
   return (
-    <BackDrop>
+    <BackDrop onClick={closeModal}>
       <Container>{children}</Container>
     </BackDrop>
   );

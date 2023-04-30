@@ -197,7 +197,7 @@ export const NewCreditCardPageContent = () => {
         <Text weight="bold">다음</Text>
       </NextButton>
 
-      {isModalOpen && <CardCompanyListModal handleOnClick={handleCardCompanyChange} />}
+      {isModalOpen && <CardCompanyListModal closeModal={closeModal} handleOnClick={handleCardCompanyChange} />}
     </Container>
   );
 };
