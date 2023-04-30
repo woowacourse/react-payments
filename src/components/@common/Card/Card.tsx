@@ -23,10 +23,11 @@ function AddButton({ onClick }: AddButtonProps) {
   return <Styled.CardRegisterButton onClick={onClick} />;
 }
 
-function CardContent({ cardNumber, expirationDate, holderName }: CardRegisterInfo) {
+function CardContent({ cardNumber, expirationDate, holderName, bank }: CardRegisterInfo) {
   return (
-    <Styled.Card>
+    <Styled.Card bg={bank.bg}>
       <Styled.CardContainer>
+        <Styled.CardBank>{bank.label}</Styled.CardBank>
         <Styled.CardMagnet />
         <Styled.CardNumberContainer>
           {Object.values(cardNumber).map((number, i) =>

@@ -38,12 +38,12 @@ export const BANKS_INFO = {
   HYUNDAI: {
     label: '현대카드',
     logo: <HYUNDAI_IC />,
-    bg: '##000000',
+    bg: '#000000',
   },
   WOORI: {
     label: '우리카드',
     logo: <WOORI_IC />,
-    bg: '##000000',
+    bg: '#007BC8',
   },
   LOTTE: {
     label: '롯데카드',
@@ -61,3 +61,5 @@ export const BANKS_INFO = {
     bg: '#685E54',
   },
 } as const;
+
+export type BankInfo = (typeof BANKS_INFO)[(typeof BANKS)[number]];

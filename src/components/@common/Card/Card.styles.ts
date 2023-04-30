@@ -1,13 +1,15 @@
 import styled from 'styled-components';
 
-export const Card = styled.div`
+export const Card = styled.div<{
+  bg?: string;
+}>`
   width: 270px;
   aspect-ratio: 213 / 133;
   flex-shrink: 0;
   padding: 14.23px 18.45px;
 
   margin-top: 46px;
-  background: #333333;
+  background-color: ${({ bg }) => bg ?? '#333333'};
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
   color: #ffffff;
@@ -26,6 +28,12 @@ export const CardContainer = styled.div`
   height: 100%;
 
   padding-top: 34px;
+`;
+
+export const CardBank = styled.span`
+  position: absolute;
+  top: 0;
+  left: 0;
 `;
 
 export const CardMagnet = styled.div`

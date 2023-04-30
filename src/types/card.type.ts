@@ -1,3 +1,5 @@
+import { BankInfo } from './../constants/banks';
+
 export interface CardNumber {
   first: string;
   second: string;
@@ -19,10 +21,13 @@ export interface Password {
   passwordSecondDigit: string;
 }
 
+export type Bank = Partial<BankInfo>;
+
 export interface CardRegisterInfo {
   cardNumber: CardNumber;
   expirationDate: ExpirationDate;
   holderName: HolderName;
   cvc: CVC;
   password: Password;
+  bank: Bank;
 }

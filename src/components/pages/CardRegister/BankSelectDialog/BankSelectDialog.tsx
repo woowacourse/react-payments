@@ -2,8 +2,13 @@ import React from 'react';
 import Dialog from '../../../@common/Dialog/Dialog';
 import { BANKS, BANKS_INFO } from '../../../../constants/banks';
 import * as Styled from './BankSelectDialog.styles';
+import { Bank } from '../../../../types/card.type';
 
-export default function BankSelectDialog() {
+interface BankSelectDialogProps {
+  onClick(bank: Bank): void;
+}
+
+export default function BankSelectDialog({ onClick: selectBank }: BankSelectDialogProps) {
   return (
     <Dialog defaultOpen>
       <Dialog.Portal>
@@ -11,10 +16,12 @@ export default function BankSelectDialog() {
         <Dialog.Content asChild>
           <Styled.Content>
             {BANKS.map((bank) => (
-              <Styled.Bank key={BANKS_INFO[bank].label}>
-                {BANKS_INFO[bank].logo}
-                <Styled.BankLabel>{BANKS_INFO[bank].label}</Styled.BankLabel>
-              </Styled.Bank>
+              <Dialog.Close asChild key={BANKS_INFO[bank].label} onClick={() => selectBank(BANKS_INFO[bank])}>
+                <Styled.Bank>
+                  {BANKS_INFO[bank].logo}
+                  <Styled.BankLabel>{BANKS_INFO[bank].label}</Styled.BankLabel>
+                </Styled.Bank>
+              </Dialog.Close>
             ))}
           </Styled.Content>
         </Dialog.Content>
