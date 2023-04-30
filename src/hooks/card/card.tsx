@@ -40,12 +40,10 @@ export function useMyCardRegister() {
     setIsAllValid(validateAllInputs(inputs));
   };
 
-  const handleSubmit = (data: unknown) => {
-    return (e: FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
 
-      navigate('/', { state: { cardRegisterInfo: data } });
-    };
+    navigate('/', { state: { registered: true } });
   };
 
   return { isAllValid, handleSubmit, handleChange };
@@ -54,12 +52,11 @@ export function useMyCardRegister() {
 export function useMyCardList() {
   const location = useLocation();
   const cardList = getCardList();
+  const { cardRegisterInfo } = useCardRegisterContext();
   const [registeredCards, setRegisteredCards] = useState<CardRegisterInfo[]>(cardList);
 
   useEffect(() => {
-    if (location.state?.cardRegisterInfo) {
-      const { cardRegisterInfo } = location.state;
-
+    if (location.state?.registered) {
       setCardList([cardRegisterInfo, ...registeredCards]);
       setRegisteredCards((prev) => [cardRegisterInfo, ...prev]);
     }

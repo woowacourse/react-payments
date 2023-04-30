@@ -26,7 +26,7 @@ export default function CardRegister() {
         <Card type="card" {...cardRegisterInfo} />
       </Styled.CardSection>
       <Styled.InfoSection>
-        <Styled.RegisterForm onSubmit={handleSubmit(cardRegisterInfo)} onChange={handleChange}>
+        <Styled.RegisterForm onSubmit={handleSubmit} onChange={handleChange}>
           <CardNumberInput />
           <CardExpirationDateInput />
           <CardNameInput />
