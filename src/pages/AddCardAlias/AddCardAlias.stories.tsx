@@ -15,6 +15,7 @@ export const Default: Story = {
   args: {
     card: {
       id: '1',
+      cardName: 'BC',
       cardNumbers: ['1235', '1234', '1111', '1111'],
       cardExpirationDate: ['12', '23'],
       cardOwner: ['hwang junseung'],
