@@ -91,7 +91,6 @@ const FormWrapper = styled.form`
   display: flex;
   flex-direction: column;
   gap: 15px;
-  padding: 0 20px;
 `;
 
 const CardWrapper = styled.div`

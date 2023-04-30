@@ -21,7 +21,7 @@ const CardRegistration = ({ setPageCardAlias, setPageCardList, setCurrentId }: C
   return (
     <Styled.Wrapper>
       <Styled.HeaderWrapper>
-        <ChevronLeft width="20px" height="20px" cursor="pointer" onClick={setPageCardList} />
+        <ChevronLeft width="16px" height="16px" cursor="pointer" onClick={setPageCardList} />
         <Header title="카드 추가" />
       </Styled.HeaderWrapper>
       <CardRegistrationForm
@@ -50,17 +50,7 @@ const Wrapper = styled.div`
 
 const HeaderWrapper = styled.div`
   display: flex;
-  align-items: center;
   gap: 10px;
-  position: relative;
-
-  > svg {
-    vertical-align: top;
-  }
-
-  > header {
-    line-height: 20px;
-  }
 `;
 
 const Styled = {

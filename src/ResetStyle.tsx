@@ -130,6 +130,9 @@ const ResetStyle = css`
     border-collapse: collapse;
     border-spacing: 0;
   }
+  button {
+    color: inherit;
+  }
 `;
 
 export default ResetStyle;

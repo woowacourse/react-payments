@@ -24,7 +24,7 @@ const GlobalStyle = createGlobalStyle<PropsWithChildren>`
   @media (max-width: 500px) {
     #root {
       width: 100vw;
-      height: 100vh;
+      min-height: -webkit-fill-available;
     }
   }
 

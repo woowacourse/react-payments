@@ -45,6 +45,12 @@ const Wrapper = styled.div`
   position: fixed;
   bottom: 0;
   width: 375px;
+
+  @media (max-width: 500px) {
+    & > * {
+      width: 100vw;
+    }
+  }
 `;
 
 const Backdrop = styled.div`
@@ -53,6 +59,12 @@ const Backdrop = styled.div`
   width: 375px;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
+
+  @media (max-width: 500px) {
+    & {
+      width: 100vw;
+    }
+  }
 `;
 
 const Styled = {
