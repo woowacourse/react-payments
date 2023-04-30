@@ -1,9 +1,10 @@
-import styled from "styled-components";
-import { Container, Input } from "../../components/common";
-import CardPreview from "../../components/CardPreview/CardPreview";
-import { useLocation, useNavigate } from "react-router-dom";
-import type { Card } from "../../types";
 import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import NotFound from "../../components/NotFound/NotFound";
+import CardPreview from "../../components/CardPreview/CardPreview";
+import { Container, Input } from "../../components/common";
+import type { Card } from "../../types";
 
 type CardAliasRegistrationPageProps = {
   onSubmit: (card: Card) => void;
@@ -35,6 +36,10 @@ const CardAliasRegistrationPage = ({ onSubmit }: CardAliasRegistrationPageProps)
   };
 
   const isAliasInputFilled = !!cardAlias.length;
+
+  if (previewCard === null) {
+    return <NotFound />;
+  }
 
   return (
     <Container justify="center">
