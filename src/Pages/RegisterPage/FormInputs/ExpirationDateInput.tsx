@@ -26,7 +26,7 @@ const ExpirationDateInput = () => {
       <label className="label-text" htmlFor="date-label">
         만료일
       </label>
-      <InputBox width={40}>
+      <InputBox width={44}>
         <ExpirationInput
           type="text"
           name="month"
@@ -62,7 +62,7 @@ const ExpirationDateInput = () => {
 };
 
 const ExpirationInput = styled(StyledInput)`
-  width: 22vw;
+  width: 12vw;
 `;
 
 const Hyphen = styled.p<{ month: string }>`

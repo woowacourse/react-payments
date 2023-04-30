@@ -1,6 +1,6 @@
-import CardNamePage from 'Pages/CardNamePage';
-import MainPage from 'Pages/MainPage';
-import CardRegisterForm from 'Pages/RegisterPage/CardRegisterForm';
+import CardNamePage from 'pages/CardNamePage';
+import MainPage from 'pages/MainPage';
+import CardRegisterForm from 'pages/RegisterPage/CardRegisterForm';
 import { AddCardContextProvider } from 'context/CardContext';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 

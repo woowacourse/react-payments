@@ -2,6 +2,7 @@ import React from 'react';
 import type { Preview } from '@storybook/react';
 import { GlobalStyle } from '../src/styles/GlobalStyle';
 import { AddCardContextProvider } from '../src/context/CardContext';
+import { BrowserRouter } from 'react-router-dom';
 
 const preview: Preview = {
   parameters: {
@@ -15,10 +16,12 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => (
-      <AddCardContextProvider>
-        <GlobalStyle />
-        <Story />
-      </AddCardContextProvider>
+      <BrowserRouter>
+        <AddCardContextProvider>
+          <GlobalStyle />
+          <Story />
+        </AddCardContextProvider>
+      </BrowserRouter>
     ),
   ],
 };

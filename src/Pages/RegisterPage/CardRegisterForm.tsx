@@ -1,17 +1,18 @@
-import { useContext } from 'react';
-import CardNumberInput from './FormInputs/CardNumberInput';
-import ExpirationDateInput from './FormInputs/ExpirationDateInput';
-import NameInput from './FormInputs/NameInput';
-import PasswordInput from './FormInputs/PasswordInput';
-import SecurityCodeInput from './FormInputs/SecurityCodeInput';
-import CardPreview from './CardPreview';
-import { useFormHandler } from 'hooks/useFormHandler';
 import Header from 'components/Header';
 import NextButton from 'components/Button';
 import Modal from 'components/Modal';
+import styled from 'styled-components';
+import CardPreview from './CardPreview';
+import CardNumberInput from './FormInputs/CardNumberInput';
+import ExpirationDateInput from './FormInputs/ExpirationDateInput';
+import NameInput from './FormInputs/NameInput';
+import SecurityCodeInput from './FormInputs/SecurityCodeInput';
+import PasswordInput from './FormInputs/PasswordInput';
 import CardBankList from './CardBankList';
-import { Card } from 'types/Card';
+import { useContext } from 'react';
+import { useFormHandler } from 'hooks/useFormHandler';
 import { AddCardContext } from 'context/CardContext';
+import { Card } from 'types/Card';
 
 const CardRegisterForm = () => {
   const { cardNumber, date, name, bank, isModalActive, setIsModalActive } =
@@ -32,14 +33,14 @@ const CardRegisterForm = () => {
 
         <CardPreview cardInfo={cardInfo} handleModal={handleModal} />
 
-        <form onSubmit={handleForm}>
+        <AddCardForm onSubmit={handleForm}>
           <CardNumberInput />
           <ExpirationDateInput />
           <NameInput />
           <SecurityCodeInput />
           <PasswordInput />
           <NextButton>다음</NextButton>
-        </form>
+        </AddCardForm>
       </div>
       {isModalActive && (
         <Modal
@@ -52,5 +53,11 @@ const CardRegisterForm = () => {
     </>
   );
 };
+
+const AddCardForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+`;
 
 export default CardRegisterForm;

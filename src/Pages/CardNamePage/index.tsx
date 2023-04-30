@@ -1,4 +1,4 @@
-import CardPreview from 'Pages/RegisterPage/CardPreview';
+import CardPreview from 'pages/RegisterPage/CardPreview';
 import { StyledButton } from 'components/Button';
 import { StyledInput } from 'components/Input';
 import { AddCardContext } from 'context/CardContext';

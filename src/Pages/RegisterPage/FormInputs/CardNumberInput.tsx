@@ -20,7 +20,7 @@ const CardNumberInput = () => {
       <label className="label-text" htmlFor="card-label">
         카드 번호
       </label>
-      <InputBox width={88}>
+      <InputBox>
         <NumberInput
           type="text"
           name="number1"

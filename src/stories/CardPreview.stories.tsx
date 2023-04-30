@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import CardPreview from '../Pages/RegisterPage/CardPreview';
+import CardPreview from '../pages/RegisterPage/CardPreview';
 
 const CardPreviewMeta = {
   component: CardPreview,
-  title: 'CardPreview Component',
+  title: '/FormInput/CardPreview Component',
 } satisfies Meta<typeof CardPreview>;
 
 export default CardPreviewMeta;
