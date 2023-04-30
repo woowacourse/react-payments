@@ -4,13 +4,27 @@
     "es6": true,
     "node": true
   },
-  "extends": ["airbnb", "airbnb-typescript", ""],
+  "extends": [
+    "airbnb",
+    "airbnb-typescript",
+    "",
+    "plugin:storybook/recommended"
+  ],
   "parserOptions": {
     "project": "./tsconfig.json"
   },
-
   "rules": {
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx"
+        ]
+      }
+    ],
     "import/extensions": [
       "error",
       "ignorePackages",
@@ -29,17 +43,37 @@
     "import/no-unresolved": "off",
     "@typescript-eslint/comma-dangle": "off",
     "react/jsx-props-no-spreading": "off",
-    "import/no-extraneous-dependencies": [0, { "devDependencies": true }],
+    "import/no-extraneous-dependencies": [
+      0,
+      {
+        "devDependencies": true
+      }
+    ],
     "react/require-default-props": "off",
     "operator-linebreak": "off",
-    "max-len": ["error", { "code": 120 }],
+    "max-len": [
+      "error",
+      {
+        "code": 120
+      }
+    ],
     "object-curly-newline": "off",
     "react/button-has-type": "off",
     "react/jsx-no-constructed-context-values": "off",
     "import/order": [
       "error",
       {
-        "groups": ["external", "internal", "builtin", ["parent", "sibling"], "index", "unknown"],
+        "groups": [
+          "external",
+          "internal",
+          "builtin",
+          [
+            "parent",
+            "sibling"
+          ],
+          "index",
+          "unknown"
+        ],
         "pathGroups": [
           {
             "pattern": "react*,react*/**",
@@ -107,7 +141,10 @@
   },
   "overrides": [
     {
-      "files": ["*.ts", "*.tsx"],
+      "files": [
+        "*.ts",
+        "*.tsx"
+      ],
       "rules": {
         "no-undef": "off"
       }

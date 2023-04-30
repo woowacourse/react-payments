@@ -58,12 +58,10 @@ function CreditCardRegister() {
         <S.PreviewCreditCard>
           <CreditCard
             fullFilled={false}
-            creditCard={{
-              numbers: creditCard.numbers,
-              expiry: creditCard.expiry,
-              owner: creditCard.owner,
-              company: creditCard.company,
-            }}
+            numbers={creditCard.numbers}
+            expiry={creditCard.expiry}
+            owner={creditCard.owner}
+            company={creditCard.company}
           />
           <S.ReSelectCardCompanyButton onClick={handleClickSelectCreditCompanyButton}>
             {creditCard.company && '카드 재선택'}

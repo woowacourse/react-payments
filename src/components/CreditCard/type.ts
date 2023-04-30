@@ -1,8 +1,7 @@
 import * as Type from '@Types/index';
 
-export type CreditCardProps = {
+export type CreditCardProps = Pick<Type.CreditCard, 'numbers' | 'expiry' | 'owner' | 'company'> & {
   fullFilled?: boolean;
-  creditCard: Pick<Type.CreditCard, 'numbers' | 'expiry' | 'owner' | 'company'>;
 };
 
 export type CreditCardLayoutStyleProps = {

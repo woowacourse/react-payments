@@ -58,12 +58,10 @@ function CreditCardAlias() {
       <S.CreditCardAlias>
         <S.CompleteMessage>카드등록이 완료되었습니다.</S.CompleteMessage>
         <CreditCard
-          creditCard={{
-            numbers: creditCardState.numbers,
-            expiry: creditCardState.expiry,
-            owner: creditCardState.owner,
-            company: creditCardState.company,
-          }}
+          numbers={creditCardState.numbers}
+          expiry={creditCardState.expiry}
+          owner={creditCardState.owner}
+          company={creditCardState.company}
         />
         <S.AliasInputLayout>
           <Input

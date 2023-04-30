@@ -1,20 +1,37 @@
 /* eslint-disable react/function-component-definition */
-import { Story, Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
-import { CreditCardProps } from './type';
+import CARD_COMPANY from '@Constants/cardCompany';
 
 import CreditCard from '.';
 
-export default {
+/**
+ * `CreditCard`는 사용자가 등록을 한 신용카드 또는 신용카드 미리보기에서 사용되는 컴포넌트입니다.
+ */
+const meta: Meta<typeof CreditCard> = {
   title: 'CreditCard',
   component: CreditCard,
-} as Meta;
+  tags: ['autodocs'],
+  argTypes: {
+    company: {
+      options: Object.keys(CARD_COMPANY),
+      control: { type: 'radio' },
+    },
+    owner: {
+      control: 'text',
+    },
+    fullFilled: {
+      control: 'boolean',
+    },
+  },
+};
 
-const Template: Story<CreditCardProps> = (args) => <CreditCard {...args} />;
+export default meta;
 
-export const PerfectCreditCard = Template.bind({});
-PerfectCreditCard.args = {
-  creditCard: {
+type Story = StoryObj<typeof CreditCard>;
+
+export const PerfectCreditCard: Story = {
+  args: {
     numbers: '1234123412341234',
     expiry: '03/45',
     owner: 'NOAH',
@@ -22,27 +39,24 @@ PerfectCreditCard.args = {
   },
 };
 
-export const OwnerLessCreditCard = Template.bind({});
-OwnerLessCreditCard.args = {
-  creditCard: {
+export const OwnerLessCreditCard: Story = {
+  args: {
     numbers: '1234123412341234',
     expiry: '03/45',
     company: 'kb',
   },
 };
 
-export const invaildCreditCard = Template.bind({});
-invaildCreditCard.args = {
-  creditCard: {
+export const InvalidCreditCard: Story = {
+  args: {
     numbers: '12341234123',
     expiry: '03/45',
     company: 'kb',
   },
 };
 
-export const BCCreditCardCompany = Template.bind({});
-BCCreditCardCompany.args = {
-  creditCard: {
+export const BCCreditCardCompany: Story = {
+  args: {
     numbers: '1234123412341234',
     expiry: '03/45',
     owner: 'NOAH',
@@ -50,9 +64,8 @@ BCCreditCardCompany.args = {
   },
 };
 
-export const KakaoCreditCardCompany = Template.bind({});
-KakaoCreditCardCompany.args = {
-  creditCard: {
+export const KakaoCreditCardCompany: Story = {
+  args: {
     numbers: '1234123412341234',
     expiry: '03/45',
     owner: 'NOAH',
@@ -60,59 +73,53 @@ KakaoCreditCardCompany.args = {
   },
 };
 
-export const ShinhanCreditCardCompany = Template.bind({});
-ShinhanCreditCardCompany.args = {
-  creditCard: {
+export const ShinhanCreditCardCompany: Story = {
+  args: {
     numbers: '1234123412341234',
+    expiry: '03/45',
+    owner: 'NOAH',
     company: 'shinhan',
-    expiry: '03/45',
-    owner: 'NOAH',
   },
 };
 
-export const HanaCreditCardCompany = Template.bind({});
-HanaCreditCardCompany.args = {
-  creditCard: {
+export const HanaCreditCardCompany: Story = {
+  args: {
     numbers: '1234123412341234',
+    expiry: '03/45',
+    owner: 'NOAH',
     company: 'hana',
-    expiry: '03/45',
-    owner: 'NOAH',
   },
 };
 
-export const HyundaiCreditCardCompany = Template.bind({});
-HyundaiCreditCardCompany.args = {
-  creditCard: {
+export const HyundaiCreditCardCompany: Story = {
+  args: {
     numbers: '1234123412341234',
+    expiry: '03/45',
+    owner: 'NOAH',
     company: 'hyundai',
-    expiry: '03/45',
-    owner: 'NOAH',
   },
 };
 
-export const KBCreditCardCompany = Template.bind({});
-KBCreditCardCompany.args = {
-  creditCard: {
+export const KBCreditCardCompany: Story = {
+  args: {
     numbers: '1234123412341234',
+    expiry: '03/45',
+    owner: 'NOAH',
     company: 'kb',
-    expiry: '03/45',
-    owner: 'NOAH',
   },
 };
 
-export const LotteCreditCardCompany = Template.bind({});
-LotteCreditCardCompany.args = {
-  creditCard: {
+export const LotteCreditCardCompany: Story = {
+  args: {
     numbers: '1234123412341234',
-    company: 'lotte',
     expiry: '03/45',
     owner: 'NOAH',
+    company: 'lotte',
   },
 };
 
-export const WooriCreditCardCompany = Template.bind({});
-WooriCreditCardCompany.args = {
-  creditCard: {
+export const WooriCreditCardCompany: Story = {
+  args: {
     numbers: '1234123412341234',
     expiry: '03/45',
     owner: 'NOAH',

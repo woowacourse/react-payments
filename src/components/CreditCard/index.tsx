@@ -8,7 +8,7 @@ import CARD_COMPANY from '@Constants/cardCompany';
 import * as S from './style';
 import { CreditCardProps } from './type';
 
-function CreditCard({ fullFilled = true, creditCard: { expiry, numbers, owner, company } }: CreditCardProps) {
+function CreditCard({ fullFilled = true, expiry, numbers, owner, company }: CreditCardProps) {
   const isValid = useCreditCardValidation({ expiry, numbers, owner, company }, []);
 
   return (
