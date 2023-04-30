@@ -12,7 +12,7 @@ const initialState: CardType = {
   cardNumbers: { 0: '', 1: '', 2: '', 3: '' },
   expiredDate: { 0: '', 1: '' },
   cardOwnerName: '',
-  cardCompany: '',
+  cardCompany: '카드사',
   nickname: '',
 };
 
@@ -23,7 +23,7 @@ export const CardContext = createContext<CardState>({
     cardNumbers: { 0: '', 1: '', 2: '', 3: '' },
     expiredDate: { 0: '', 1: '' },
     cardOwnerName: '',
-    cardCompany: '',
+    cardCompany: '카드사',
     nickname: '',
   },
   setCard: () => {},

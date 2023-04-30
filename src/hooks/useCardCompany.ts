@@ -1,8 +1,9 @@
 import { useState } from 'react';
+import { CardCompanyName } from '../types/Card';
 
 const useCardCompany = () => {
-  const [cardCompany, setCardCompany] = useState('');
-  const checkCardCompany = (value: string) => {
+  const [cardCompany, setCardCompany] = useState<CardCompanyName>('카드사');
+  const checkCardCompany = (value: CardCompanyName) => {
     setCardCompany(value);
   };
 

@@ -1,4 +1,6 @@
-export const cardCompanies = [
+import { CardCompanies } from '../types/Card';
+
+export const cardCompanies: CardCompanies[] = [
   { type: 'bc-card', name: 'BC카드', color: '#F04652' },
   { type: 'shinhan-card', name: '신한카드', color: '#0046FF' },
   { type: 'kakao-card', name: '카카오뱅크', color: '#FFE600' },
