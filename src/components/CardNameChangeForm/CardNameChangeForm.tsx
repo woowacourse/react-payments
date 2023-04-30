@@ -3,7 +3,7 @@ import Button from '../common/Button/Button';
 import Input from '../common/Input/Input';
 import InputContainer from '../common/InputContainer/InputContainer';
 import { useCardNameChangeForm } from '../../hooks/cards/useCardNameChangeForm';
-import { CARD_NAME_INPUT_MAX_LENGTH } from '../../constants';
+import { CARD_NAME_INPUT_MAX_LENGTH } from '../../constants/input';
 
 interface CardNameChangeProps {
   id: number;

@@ -1,5 +1,6 @@
 import type { ExpirationDate, MultipleInputFieldCardInformation, Validator } from '../types';
-import { CARD_NUMBER_MAX_LENGTH, MAX_VALID_EXPIRATION_YEAR, REGEX } from '../constants';
+import { REGEX } from '../constants';
+import { CARD_NUMBER_MAX_LENGTH, MAX_VALID_EXPIRATION_YEAR } from '../constants/input';
 
 const validateNonEmptyInput = (input: string) => {
   return input !== '';

@@ -5,8 +5,7 @@ import Input from '../../common/Input/Input';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
 import { useCardNumber } from '../../../hooks/cards/useCardNumber';
-import { CARD_NUMBER_INPUT_MAX_LENGTH } from '../../../constants';
-import { PATTERN } from '../../../constants/input';
+import { CARD_NUMBER_INPUT_MAX_LENGTH, PATTERN } from '../../../constants/input';
 import { formatNumber } from '../../../utils/formatter';
 
 interface CardNumberProps {
@@ -18,6 +17,8 @@ interface CardNumberProps {
 const CardNumber = ({ isError, updateInputValue, updateInputError }: CardNumberProps) => {
   const { handleInputValueChange } = useCardNumber();
   const cardNumberRef = useRef('');
+
+  console.log('rendering CardNumber');
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     handleInputValueChange(event, cardNumberRef);

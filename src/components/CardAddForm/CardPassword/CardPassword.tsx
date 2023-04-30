@@ -4,8 +4,8 @@ import type { CardFormData, CardFormValidation } from '../../../types';
 import Input from '../../common/Input/Input';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
-import { PASSWORD_UNIT_MAX_LENGTH, SECURITY_TEXT_ICON } from '../../../constants';
-import { PATTERN } from '../../../constants/input';
+import { SECURITY_TEXT_ICON } from '../../../constants';
+import { PASSWORD_UNIT_MAX_LENGTH, PATTERN } from '../../../constants/input';
 import { formatNumber } from '../../../utils/formatter';
 import styles from './style.module.css';
 

@@ -2,9 +2,10 @@
 import { memo } from 'react';
 import type { ComponentPropsWithoutRef } from 'react';
 import type { CardDisplayInformation } from '../../types';
-import { CARD_NUMBER_UNIT_MAX_LENGTH, REGEX, SECURITY_TEXT_ICON } from '../../constants';
+import { REGEX, SECURITY_TEXT_ICON } from '../../constants';
 import { ISSUER_CLASS_NAME } from '../../constants/issuerClassName';
 import styles from './style.module.css';
+import { CARD_NUMBER_UNIT_MAX_LENGTH } from '../../constants/input';
 
 interface CardItemProps extends ComponentPropsWithoutRef<'div'>, CardDisplayInformation {}
 

@@ -1,12 +1,10 @@
+import { DATE_DIVIDER, REGEX, SECURITY_TEXT_ICON } from '../constants';
 import {
   CARD_NUMBER_INPUT_MAX_LENGTH,
   CARD_NUMBER_INPUT_MAX_VISIBLE_LENGTH,
-  DATE_DIVIDER,
   EXPIRATION_DATE_INPUT_MAX_LENGTH,
   EXPIRATION_DATE_UNIT_LENGTH,
-  REGEX,
-  SECURITY_TEXT_ICON,
-} from '../constants';
+} from '../constants/input';
 
 const formatNumber = (input: string) => {
   return input.replace(REGEX.NON_NUMBER, '');

@@ -4,8 +4,7 @@ import type { CardFormData, CardFormValidation } from '../../../types';
 import Input from '../../common/Input/Input';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
-import { EXPIRATION_DATE_INPUT_MAX_LENGTH } from '../../../constants';
-import { PATTERN } from '../../../constants/input';
+import { EXPIRATION_DATE_INPUT_MAX_LENGTH, PATTERN } from '../../../constants/input';
 import { formatDisplayedExpirationDate, formatExpirationDate } from '../../../utils/formatter';
 
 interface CardExpirationDateProps {

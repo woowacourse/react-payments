@@ -1,10 +1,10 @@
 import { memo, useState } from 'react';
 import type { ChangeEvent } from 'react';
 import type { CardFormData } from '../../../types';
-import { OWNER_NAME_MAX_LENGTH } from '../../../constants';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
 import Input from '../../common/Input/Input';
+import { OWNER_NAME_MAX_LENGTH } from '../../../constants/input';
 import { formatEnglishCapitalization, formatSentence } from '../../../utils/formatter';
 
 interface CardOwnerNameProps {

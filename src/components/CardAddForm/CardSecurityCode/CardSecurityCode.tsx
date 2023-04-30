@@ -4,8 +4,11 @@ import type { CardFormData, CardFormValidation } from '../../../types';
 import Input from '../../common/Input/Input';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
-import { SECURITY_CODE_MAX_LENGTH, SECURITY_CODE_MIN_LENGTH } from '../../../constants';
-import { PATTERN } from '../../../constants/input';
+import {
+  PATTERN,
+  SECURITY_CODE_MAX_LENGTH,
+  SECURITY_CODE_MIN_LENGTH,
+} from '../../../constants/input';
 import { formatNumber } from '../../../utils/formatter';
 
 interface CardSecurityCodeProps {
