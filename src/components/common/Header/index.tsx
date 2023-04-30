@@ -7,11 +7,11 @@ import styles from './header.module.css';
 
 interface Props {
   title: string;
-  previousButton?: true;
+  previousButton?: boolean;
   children?: ReactNode;
 }
 
-const Header = ({ title, previousButton, children }: Props) => {
+const Header = ({ title, previousButton = false, children }: Props) => {
   const navigate = useNavigate();
 
   const handlePreviousButtonClick = () => {
