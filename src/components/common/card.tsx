@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { CardColor } from "../../type/card";
 import { CardNumberIndex } from "../../type/input";
 
 export interface CardProps {
@@ -6,13 +7,16 @@ export interface CardProps {
   month: string;
   year: string;
   userName: string;
+  cardColor: CardColor;
+  bank: string;
 }
 
 export function Card(props: CardProps) {
-  const { cardNumber, month, year, userName } = props;
+  const { cardNumber, month, year, userName, cardColor, bank } = props;
 
   return (
-    <CardContainer>
+    <CardContainer cardColor={cardColor}>
+      <BankName>{bank}</BankName>
       <ICcard />
       <NumberWrapper>
         <NumberItem type="text">{cardNumber?.["first"]}</NumberItem>
@@ -34,7 +38,7 @@ export function Card(props: CardProps) {
   );
 }
 
-const CardContainer = styled.section`
+const CardContainer = styled.section<{ cardColor: CardColor }>`
   display: flex;
   flex-direction: column;
 
@@ -42,18 +46,25 @@ const CardContainer = styled.section`
   height: 13.3rem;
   margin-bottom: 3.5rem;
 
-  background-color: ${({ theme }) => theme.colors.card_main};
-  color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ cardColor }) => cardColor?.bgColor};
+  color: ${({ cardColor }) => cardColor?.fontColor};
   ${({ theme }) => theme.fonts.card};
 
   border-radius: 0.5rem;
+`;
+
+const BankName = styled.h1`
+  margin-top: 1rem;
+  margin-left: 1.4rem;
+
+  ${({ theme }) => theme.fonts.label}
 `;
 
 const ICcard = styled.div`
   width: 4rem;
   height: 2.6rem;
 
-  margin-top: 4rem;
+  margin-top: 2rem;
   margin-left: 1.4rem;
 
   background-color: ${({ theme }) => theme.colors.card_sub};

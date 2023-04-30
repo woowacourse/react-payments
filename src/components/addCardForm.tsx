@@ -8,6 +8,7 @@ import { ExpiredDate } from "./expiredDate";
 import { SecurityCode } from "./securityCode";
 import { UserName } from "./userName";
 import {
+  BankContext,
   DateContext,
   NameContext,
   NumberContext,
@@ -17,6 +18,7 @@ import { TEXT_LENGTH } from "../constants/inputInfo";
 import { setCardData } from "../utils/localStorage";
 import { SubmitButton } from "./common/submitButton";
 import { PATH } from "../constants/path";
+import { bank } from "../core/bank";
 
 export function AddCardForm() {
   const navigate = useNavigate();
@@ -25,6 +27,7 @@ export function AddCardForm() {
   const { cardNumber } = useContext(NumberContext);
   const { month, year } = useContext(DateContext);
   const { userName } = useContext(NameContext);
+  const { selectedItem } = useContext(BankContext);
 
   function checkAllInputs() {
     const isValid = Object.keys(inputRef.current).every(
@@ -51,6 +54,11 @@ export function AddCardForm() {
       month: month,
       year: year,
       userName: userName,
+      cardColor: {
+        bgColor: bank[selectedItem]?.color,
+        fontColor: bank[selectedItem]?.font,
+      },
+      bank: bank[selectedItem]?.logoName,
     };
   }
 
