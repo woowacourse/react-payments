@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router';
+import { Navigate } from 'react-router-dom';
 
 import HoldingCardsPage from './HoldingCardsPage';
 import CardInfoRegisterPage from './CardInfoRegisterPage';
@@ -22,6 +23,7 @@ function App() {
             element={<CardNameRegisterPage registerCard={registerCard} />}
           />
         </Route>
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Routes>
   );
