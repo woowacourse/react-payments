@@ -1,24 +1,27 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { ERROR_MESSAGE } from '../../constants/errors';
-import { LABEL, MAX_LENGTH, SIZE_STYLE } from '../../constants/inputInfo';
-import { InputInfo } from '../../type/input';
-import { ErrorMessage, Label, Input } from '../common';
-interface InputBoxProps extends React.HTMLAttributes<HTMLDivElement> {
+import { ERROR_MESSAGE } from '../../../constants/errors';
+import { LABEL, MAX_LENGTH, SIZE_STYLE } from '../../../constants/inputInfo';
+import { InputInfo } from '../../../type/input';
+import { ErrorMessage, Label, Input } from '../../common';
+
+export interface InputBoxProps extends React.HTMLAttributes<HTMLDivElement> {
   inputs: InputInfo[];
 }
 
 export function InputBox({ id, inputs }: InputBoxProps) {
   return (
     <_InputContainer>
-      <Label htmlFor={`${id}`}>{LABEL[`${id}`]}</Label>
+      <Label htmlFor={`${id}`}>
+        {String(id) in LABEL ? LABEL[`${id}`] : String(id)}
+      </Label>
       <_InputWithErrorMessage>
         {inputs.map(
           ({ type, value, handleChange, required, isError }, index) => (
             <>
               <_InputWrapper>
-                <div>{id === 'USERNAME' ? `${value.length} / 30` : ''}</div>
+                <div>{id === 'username' ? `${value.length} / 30` : ''}</div>
                 <Input
                   id={`${id}${index}`}
                   name={id}
