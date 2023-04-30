@@ -4,8 +4,10 @@ import Header from '../common/Header';
 import CardItem from '../common/CardItem';
 import CardForm from '../cardForm/CardForm';
 import { LeftArrowIcon } from '../../assets/icons';
+import type { CardItemInfo } from '../../types/Card';
 
 interface CardRegistrationPageProps {
+  card: CardItemInfo;
   onOpen: () => void;
   onChangeForm: (
     cardNumber: string[],
@@ -15,6 +17,7 @@ interface CardRegistrationPageProps {
 }
 
 const CardRegistrationPage = ({
+  card,
   onOpen,
   onChangeForm,
 }: CardRegistrationPageProps) => {
@@ -22,7 +25,7 @@ const CardRegistrationPage = ({
     <>
       <Header title='카드추가' leading={<BackButton />} />
       <CardItemContainer>
-        <CardItem onOpen={onOpen} />
+        <CardItem card={card} onOpen={onOpen} />
       </CardItemContainer>
       <BankChangeGuide>
         은행사 변경을 원하시면 위 카드의 은행사 이름을 눌러주세요

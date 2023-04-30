@@ -1,18 +1,15 @@
-import { useContext } from 'react';
 import styled from 'styled-components';
 import { CONVERT_BANK_NAME } from '../../utils/Constants';
-import { CardContext } from '../../context/CardContext';
 
 interface BankItemProps {
   bankName: string;
   onClose: () => void;
+  onBankInfoChanged: (bankName: string) => void;
 }
 
-const BankItem = ({ bankName, onClose }: BankItemProps) => {
-  const { setBankName } = useContext(CardContext);
-
+const BankItem = ({ bankName, onClose, onBankInfoChanged }: BankItemProps) => {
   const handleBankName = () => {
-    setBankName(bankName);
+    onBankInfoChanged(bankName);
     onClose();
   };
 
