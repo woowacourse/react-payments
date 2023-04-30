@@ -1,4 +1,4 @@
-label {
+.label {
   display: block;
   position: relative;
   font-size: 12px;
@@ -66,7 +66,7 @@ label {
 }
 
 .tooltipContainer.medium {
-  left: 60%;
+  left: 55%;
 }
 
 .tooltipContainer.fit {

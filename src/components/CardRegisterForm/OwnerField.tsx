@@ -13,7 +13,6 @@ const OwnerField = ({
   return (
     <TextField
       label="카드 소유자 이름(선택)"
-      size="fit"
       valueLength={owner.length}
       maxLength={20}
     >

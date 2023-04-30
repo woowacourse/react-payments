@@ -6,25 +6,25 @@ import styles from './textField.module.css';
 
 interface Props {
   label: string;
-  size: 'small' | 'medium' | 'fit';
+  size?: 'small' | 'medium' | 'fit';
   valueLength?: number;
   maxLength?: number;
   tooltipMessage?: string;
-  split?: true;
+  split?: boolean;
   children: ReactNode;
 }
 
 const TextField = ({
   label,
-  size,
+  size = 'fit',
   valueLength,
   maxLength,
   tooltipMessage,
-  split,
+  split = false,
   children,
 }: Props) => {
   return (
-    <label>
+    <label className={styles.label}>
       {label}
       {maxLength && (
         <span className={styles.valueLength}>
