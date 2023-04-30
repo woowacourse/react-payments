@@ -4,7 +4,7 @@
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
   padding: 12px 14px;
-  color: var(--text-white);
+  color: var(--text-primary);
   transition: background 0.2s ease-in 0s;
 }
 
@@ -38,34 +38,40 @@
 }
 
 .container.bc {
+  color: var(--text-white);
   background: var(--card-bc);
 }
 
 .container.shinhan {
+  color: var(--text-white);
   background: var(--card-shinhan);
 }
 
 .container.kakaobank {
   background: var(--card-kakaobank);
-  color: var(--text-primary);
 }
 
 .container.hyundai {
+  color: var(--text-white);
   background: var(--card-hyundai);
 }
 
 .container.woori {
+  color: var(--text-white);
   background: var(--card-woori);
 }
 
 .container.lotte {
+  color: var(--text-white);
   background: var(--card-lotte);
 }
 
 .container.hana {
+  color: var(--text-white);
   background: var(--card-hana);
 }
 
 .container.kb {
+  color: var(--text-white);
   background: var(--card-kb);
 }

@@ -29,7 +29,7 @@ const CardItem = ({ cardData }: Props) => {
         company ? styles[COMPANY_NAME[company]] : ''
       }`}
     >
-      <p className={styles.company}>{company}</p>
+      <p className={styles.company}>{company ?? ''}</p>
       <CardChipIcon width={31} height={27} />
       <div className={styles.cardNumber}>
         <span className={styles.number}>{number.first}</span>
