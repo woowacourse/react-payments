@@ -1,5 +1,5 @@
 import { cardCompanies } from '../../constants/cards';
-import SvgIcon from '../Svg/SvgIcon';
+import CardSvgIcon from '../Svg/CardSvgIcon';
 import * as Styled from './BottomSheet.styles';
 
 interface BottomSheetProps {
@@ -25,7 +25,7 @@ const BottomSheet = ({
             onClick={() => handleCardIconClick(name)}
             key={type}
           >
-            <SvgIcon type={type} size={36} />
+            <CardSvgIcon type={type} size={36} />
             <p>{name}</p>
           </Styled.IconWrapper>
         ))}
