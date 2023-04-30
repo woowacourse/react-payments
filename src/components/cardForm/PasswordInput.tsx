@@ -20,7 +20,10 @@ const PasswordInput = ({
   errorMessage,
   setErrorMessage,
 }: PasswordInputProps) => {
-  const refs = [useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null)];
+  const inputRefs = [
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+  ];
 
   const handleChangeInput =
     (inputIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,7 +48,7 @@ const PasswordInput = ({
           maxLength: INPUT_MAX_LENGTH.PASSWORD_LENGTH,
         })
       ) {
-        const nextInputRef = refs.at(inputIndex + 1);
+        const nextInputRef = inputRefs.at(inputIndex + 1);
         if (nextInputRef?.current) {
           nextInputRef.current.focus();
         }
@@ -58,7 +61,7 @@ const PasswordInput = ({
         <InputBox width='43px' isError={!!errorMessage}>
           <Input
             type='password'
-            ref={refs[0]}
+            ref={inputRefs[0]}
             value={value[0]}
             onChange={handleChangeInput(0)}
           />
@@ -66,7 +69,7 @@ const PasswordInput = ({
         <InputBox width='43px' isError={!!errorMessage}>
           <Input
             type='password'
-            ref={refs[1]}
+            ref={inputRefs[1]}
             value={value[1]}
             onChange={handleChangeInput(1)}
           />

@@ -20,7 +20,10 @@ const ExpirationDateInput = ({
   errorMessage,
   setErrorMessage,
 }: ExpirationDateInputProps) => {
-  const refs = [useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null)];
+  const inputRefs = [
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+  ];
 
   useEffect(() => {
     if (!value[0].length && !value[1].length) return;
@@ -65,7 +68,7 @@ const ExpirationDateInput = ({
           maxLength: INPUT_MAX_LENGTH.EXPIRATION_DATE_LENGTH,
         })
       ) {
-        const nextInputRef = refs.at(inputIndex + 1);
+        const nextInputRef = inputRefs.at(inputIndex + 1);
         if (nextInputRef?.current) {
           nextInputRef.current.focus();
         }
@@ -79,7 +82,7 @@ const ExpirationDateInput = ({
       <InputBox width='137px' isError={!!errorMessage}>
         <Input
           placeholder='MM'
-          ref={refs[0]}
+          ref={inputRefs[0]}
           value={value[0]}
           onChange={handleChangeInput(0)}
         />
@@ -88,7 +91,7 @@ const ExpirationDateInput = ({
         </InputSeparator>
         <Input
           placeholder='YY'
-          ref={refs[1]}
+          ref={inputRefs[1]}
           value={value[1]}
           onChange={handleChangeInput(1)}
         />

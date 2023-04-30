@@ -19,7 +19,7 @@ const CardNumberInput = ({
   errorMessage,
   setErrorMessage,
 }: CardNumberInputProps) => {
-  const refs = [
+  const inputRefs = [
     useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
@@ -43,7 +43,7 @@ const CardNumberInput = ({
           maxLength: INPUT_MAX_LENGTH.CARD_NUMBER_LENGTH,
         })
       ) {
-        const nextInputRef = refs.at(inputIndex + 1);
+        const nextInputRef = inputRefs.at(inputIndex + 1);
         if (nextInputRef?.current) {
           nextInputRef.current.focus();
         }
@@ -64,7 +64,7 @@ const CardNumberInput = ({
             <React.Fragment key={index}>
               <Input
                 placeholder='0000'
-                ref={refs[index]}
+                ref={inputRefs[index]}
                 value={value[index]}
                 type={
                   index >= INPUT.CARD_NUMBER_VISIBLE_INPUT_ORDER
