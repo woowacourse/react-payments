@@ -8,21 +8,12 @@ import { PAGE_HEADER } from "../constants";
 import { ModalBox } from "../components/common/modal/modalBox";
 import { ModalTrigger } from "../components/common/modal/modalTrigger";
 import { ModalBackDrop } from "../components/common/modal/modalBackDrop";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ModalContent } from "../components/common/modal/modalContent";
 import { BankMenu } from "../components/bankMenu";
+import { useSelect } from "../hooks/useSelect";
 
 export function AddCard() {
-  const [modalOpen, setModalOpen] = useState(false);
-
-  function openModal() {
-    setModalOpen(true);
-  }
-
-  function closeModal() {
-    setModalOpen(false);
-  }
-
   return (
     <Wrapper>
       <Header>
@@ -32,13 +23,6 @@ export function AddCard() {
       <CardInfoProvider>
         <AddCardSection />
       </CardInfoProvider>
-      <ModalBox modalState={{ modalOpen, openModal, closeModal }}>
-        <ModalBackDrop />
-        <ModalTrigger />
-        <ModalContent asChild>
-          <BankMenu />
-        </ModalContent>
-      </ModalBox>
     </Wrapper>
   );
 }
@@ -47,4 +31,10 @@ const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+const Test = styled.div`
+  width: 10rem;
+  height: 10rem;
+  background-color: black;
 `;
