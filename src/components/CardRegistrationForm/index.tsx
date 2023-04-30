@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { PAGE_PATH } from '../../constants';
 import { useCardInformationStore } from '../../context/CardInformationProvider';
 import { checkCardNumber, checkExpirationDate, checkPassword, checkSecurityCode } from '../../domain/validator';
 import TransParentButton from '../Common/Button/TransParentButton';
@@ -36,7 +37,7 @@ function CardRegistrationForm() {
 
     if (error.join('') === '') {
       resetValidateForm();
-      navigate('/registration/complete');
+      navigate(PAGE_PATH.NAME_REGISTRATION);
     }
   };
 

@@ -7,6 +7,7 @@ import {
   CARD_EXPIRATION_YEAR_LENGTH,
   CARD_NUMBER_LENGTH,
   CARD_NUMBER_VISIBLE_LENGTH,
+  PAGE_PATH,
 } from '../../../constants';
 import { CARD_COMPANY_COLOR_MAP } from '../../../data/bankList';
 import type { CardInformation } from './types';
@@ -61,7 +62,7 @@ function Card({ cardInformation = defaultCardInformation, isAddForm, isShowName 
             </StyledCardInfoTemplate>
           </>
         ) : (
-          <Link to="/registration">
+          <Link to={PAGE_PATH.FORM_REGISTRATION}>
             <StyledAddButton type="button">+</StyledAddButton>
           </Link>
         )}

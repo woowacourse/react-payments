@@ -4,6 +4,7 @@ import TransParentButton from '../components/Common/Button/TransParentButton';
 import Card from '../components/Common/Card';
 import Input from '../components/Common/Input';
 import MainLayout from '../components/Common/Layout/MainLayout';
+import { PAGE_PATH } from '../constants';
 import { useCardInformationStore } from '../context/CardInformationProvider';
 import { useCardListStore } from '../context/CardListProvider';
 
@@ -20,7 +21,7 @@ function CardNameRegistration() {
     e.preventDefault();
     dispatchCardList(card);
     resetCardInformation();
-    navigate('/');
+    navigate(PAGE_PATH.HOME);
   };
 
   return (
