@@ -7,11 +7,11 @@ import Modal from '../components/Common/Modal';
 import ProfileButtonList from '../components/Common/Profile/ProfileButtonList';
 import { useCardInformationStore } from '../context/CardInformationProvider';
 import bankList from '../data/bankList';
-import useModal from '../hooks/useModal';
+import useBooleanState from '../hooks/useBooleanState';
 
 function CardRegistration() {
   const { card, setBankName } = useCardInformationStore();
-  const { isModalOpen, openModal, closeModal } = useModal(true);
+  const { value: isModalOpen, setTrue: openModal, setFalse: closeModal } = useBooleanState(true);
 
   const handleBankName = (name: string) => {
     setBankName(name);
