@@ -19,7 +19,7 @@ export const initialCardRegisterInfo: CardRegisterInfo = {
     passwordFirstDigit: '',
     passwordSecondDigit: '',
   },
-  bankName: '',
+  bankName: null,
   cardAlias: '',
 };
 

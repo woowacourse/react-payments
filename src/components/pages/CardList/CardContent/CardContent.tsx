@@ -14,8 +14,8 @@ export default function CardContent({ cardNumber, expirationDate, holderName, ba
   };
 
   return (
-    <Styled.Card onClick={onClick ? handleClick : undefined} bankName={bankName}>
-      <p>{bankName}</p>
+    <Styled.Card onClick={onClick ? handleClick : undefined} bankName={bankName ? bankName : null}>
+      {bankName && <p>{bankName}</p>}
       <Styled.CardMagnet />
       <Styled.CardNumberContainer>
         <Styled.CardNumber index={0}>{cardNumber.first}</Styled.CardNumber>
@@ -26,7 +26,7 @@ export default function CardContent({ cardNumber, expirationDate, holderName, ba
       <Styled.CardHolderName>{holderName}</Styled.CardHolderName>
       <Styled.ExpirationDateContainer>
         <Styled.ExpirationDateText index={0}>{expirationDate.month}</Styled.ExpirationDateText>
-        {(expirationDate.month || expirationDate.year) && <Styled.ExpirationDateDivider bankName={bankName} />}
+        {(expirationDate.month || expirationDate.year) && <Styled.ExpirationDateDivider bankName={bankName ? bankName : null} />}
         <Styled.ExpirationDateText index={1}>{expirationDate.year}</Styled.ExpirationDateText>
       </Styled.ExpirationDateContainer>
     </Styled.Card>

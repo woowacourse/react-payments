@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { BankNames } from '../../../../types/card.type';
 import { HTMLAttributes } from 'react';
 
-export const Card = styled.div<{ bankName?: BankNames }>`
+export const Card = styled.div<{ bankName?: BankNames | null }>`
   position: relative;
   width: 270px;
   aspect-ratio: 213 / 133;
@@ -75,7 +75,7 @@ export const ExpirationDateContainer = styled.div`
   letter-spacing: 2.6px;
 `;
 
-export const ExpirationDateDivider = styled.span<{ bankName: BankNames }>`
+export const ExpirationDateDivider = styled.span<{ bankName: BankNames | null }>`
   position: absolute;
   display: inline-block;
   right: 66px;

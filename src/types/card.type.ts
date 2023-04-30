@@ -21,7 +21,7 @@ export interface Password {
   passwordSecondDigit: string;
 }
 
-export type BankNames = (typeof BANK_LIST)[number]['name'] | '';
+export type BankNames = (typeof BANK_LIST)[number]['name'];
 
 export interface CardRegisterInfo {
   cardNumber: CardNumber;
@@ -29,6 +29,6 @@ export interface CardRegisterInfo {
   holderName: HolderName;
   cvc: CVC;
   password: Password;
-  bankName: BankNames;
+  bankName: BankNames | null;
   cardAlias?: string;
 }

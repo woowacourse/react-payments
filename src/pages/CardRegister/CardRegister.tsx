@@ -18,7 +18,7 @@ export default function CardRegister() {
   const { cardRegisterInfo, handleCardInfo } = useCardRegisterContext();
 
   const { isOpened, content, openBottomSheet, closeBottomSheet } = useBottomSheet();
-  const [bankName, setBankName] = useState<BankNames>('');
+  const [bankName, setBankName] = useState<BankNames | null>(null);
   const [allValid, setAllValid] = useState(false);
 
   const handleChange = (e: FormEvent<HTMLFormElement>) => {
