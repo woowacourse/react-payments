@@ -1,4 +1,8 @@
+import React from "react";
 import type { Preview } from "@storybook/react";
+import GlobalStyle from "../src/component/common/GlobalStyle";
+import { CardProvier } from "../src/contexts/CardContext";
+import { MemoryRouter } from "react-router";
 
 const preview: Preview = {
   parameters: {
@@ -23,5 +27,19 @@ const preview: Preview = {
     },
   },
 };
+
+export const decorators = [
+  (Story) => (
+    <>
+      <GlobalStyle />
+      <CardProvier>
+        <MemoryRouter>
+          <Story />
+        </MemoryRouter>
+      </CardProvier>
+      <div id="modal" />
+    </>
+  ),
+];
 
 export default preview;
