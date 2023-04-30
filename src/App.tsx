@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import GlobalStyle from "./styles/GlobalStyle";
@@ -7,15 +7,26 @@ import AddCardPage from "./pages/AddCardPage/AddCardPage";
 import CardListPage from "./pages/CardListPage/CardListPage";
 import CardAliasRegistrationPage from "./pages/CardAliasRegistrationPage/CardAliasRegistrationPage";
 import NotFound from "./components/NotFound/NotFound";
+import store from "./utils/storage";
 import ROUTE_PATH from "./constants/routePath";
-import { Card } from "./types";
+import { CARDS_KEY } from "./constants/storageKey";
+import type { Card } from "./types";
 
 function App() {
   const [cards, setCards] = useState<Card[]>([]);
 
   const addCard = (card: Card) => {
-    setCards([...cards, card]);
+    const updatedCards = [...cards, card];
+
+    store.setStorage(CARDS_KEY, updatedCards);
+    setCards(updatedCards);
   };
+
+  useEffect(() => {
+    const data = store.getStorage<Card[]>(CARDS_KEY) ?? [];
+
+    setCards(data);
+  }, []);
 
   return (
     <>
