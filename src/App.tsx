@@ -6,8 +6,8 @@ import GlobalStyle from "./styles/GlobalStyle";
 import AddCardPage from "./pages/AddCardPage/AddCardPage";
 import CardListPage from "./pages/CardListPage/CardListPage";
 import CardAliasRegistrationPage from "./pages/CardAliasRegistrationPage/CardAliasRegistrationPage";
+import NotFound from "./components/NotFound/NotFound";
 import ROUTE_PATH from "./constants/routePath";
-
 import { Card } from "./types";
 
 function App() {
@@ -25,6 +25,7 @@ function App() {
           <Route index path={ROUTE_PATH.root} element={<CardListPage cards={cards} />} />
           <Route path={ROUTE_PATH.addCard} element={<AddCardPage />} />
           <Route path={ROUTE_PATH.cardAlias} element={<CardAliasRegistrationPage onSubmit={addCard} />} />
+          <Route path={ROUTE_PATH.other} element={<NotFound />} />
         </Routes>
       </Layout>
     </>
