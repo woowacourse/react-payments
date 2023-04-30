@@ -43,7 +43,7 @@ export const CvcButtonWrapper = styled.div`
   position: relative;
   margin-left: 11px;
 `;
-export const NextButtonWrapper = styled.div`
+export const DownRightButtonWrapper = styled.div`
   position: absolute;
   right: 25px;
   bottom: 25px;

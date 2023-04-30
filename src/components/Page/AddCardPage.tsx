@@ -14,9 +14,9 @@ import {
   CardWrapper,
   CvcButtonWrapper,
   CvcWrapper,
+  DownRightButtonWrapper,
   InputWrapper,
   InputWrapperParent,
-  NextButtonWrapper,
   Page,
   Title,
   TitleWrapper,
@@ -114,9 +114,9 @@ export default function AddCardPage({ onSubmit, onClick }: AddCardPageProps) {
               />
             </InputField>
           </InputWrapper>
-          <NextButtonWrapper>
+          <DownRightButtonWrapper>
             <NextButton disabled={isFormFilled} />
-          </NextButtonWrapper>
+          </DownRightButtonWrapper>
         </InputWrapperParent>
 
         <CardTypeDrawer />
