@@ -32,6 +32,7 @@ const CardForm: React.FC = () => {
       ...cardList,
       {
         id: getUniqueID(),
+        cardName: state.cardName,
         cardNumbers: state.cardNumbers,
         cardExpirationDate: state.cardExpirationDate,
         cardOwner: state.cardOwner,
@@ -40,7 +41,7 @@ const CardForm: React.FC = () => {
       },
     ]);
 
-    navigate('/');
+    navigate('/addCardAlias');
   };
 
   return (
