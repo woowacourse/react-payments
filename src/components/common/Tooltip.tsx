@@ -1,6 +1,11 @@
+import { PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
-const Tooltip = ({ text, children }: { text: string; children: React.ReactNode }) => {
+type TooltipProps = {
+  text: string;
+};
+
+const Tooltip = ({ text, children }: PropsWithChildren<TooltipProps>) => {
   return (
     <TooltipWrapper>
       {children}
