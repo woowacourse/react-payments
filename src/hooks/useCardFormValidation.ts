@@ -1,4 +1,4 @@
-import useCardFormValue from '../../../hooks/useCardFormValue';
+import useCardFormValue from './useCardFormValue';
 import { isValidExpiredDate } from '../utils/validation';
 
 const useCardFormValidation = () => {
@@ -21,8 +21,6 @@ const useCardFormValidation = () => {
         '현재 카드사를 선택하지 않았습니다. 카드사를 선택해주세요.',
       );
     }
-
-    return company;
   };
 
   const validateExpiredDate = () => {
@@ -31,8 +29,6 @@ const useCardFormValidation = () => {
     ) {
       throw new Error('유효한 만료일이 아닙니다. 다시 입력해주세요.');
     }
-
-    return expiredDate;
   };
 
   return { isValidCardData, validateCompany, validateExpiredDate };

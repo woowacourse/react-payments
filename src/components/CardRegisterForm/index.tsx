@@ -10,7 +10,7 @@ import PasswordField from './PasswordField';
 import Button from '../common/Button';
 
 import useCardRegisterForm from './hooks/useCardRegisterForm';
-import useCardFormValidation from './hooks/useCardFormValidation';
+import useCardFormValidation from '../../hooks/useCardFormValidation';
 
 import styles from './cardRegisterForm.module.css';
 

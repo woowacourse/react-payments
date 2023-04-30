@@ -5,6 +5,7 @@ import HoldingCardsPage from './HoldingCardsPage';
 import CardInfoRegisterPage from './CardInfoRegisterPage';
 import CardNameRegisterPage from './CardNameRegisterPage';
 import CardFormContext from './contexts/CardFormContext';
+import CardInfoRequired from './contexts/CardInfoRequired';
 
 import Layout from '../components/common/Layout';
 import useCards from '../hooks/useCards';
@@ -18,10 +19,12 @@ function App() {
         <Route path="/" element={<HoldingCardsPage cards={cards} />} />
         <Route element={<CardFormContext />}>
           <Route path="card-info-register" element={<CardInfoRegisterPage />} />
-          <Route
-            path="card-name-register"
-            element={<CardNameRegisterPage registerCard={registerCard} />}
-          />
+          <Route element={<CardInfoRequired />}>
+            <Route
+              path="card-name-register"
+              element={<CardNameRegisterPage registerCard={registerCard} />}
+            />
+          </Route>
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>

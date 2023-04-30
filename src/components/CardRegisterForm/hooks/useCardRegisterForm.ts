@@ -1,6 +1,6 @@
 import type { ChangeEventHandler, RefObject } from 'react';
 
-import { isNotAlphabet, isNotNumber } from '../utils/validation';
+import { isNotAlphabet, isNotNumber } from '../../../utils/validation';
 import useCardFormAction from '../../../hooks/useCardFormAction';
 import { InputAction } from '../../../contexts/CardFormContext';
 
