@@ -1,5 +1,4 @@
-import React from "react";
-import type { Meta } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import AddCardResultPage from "../../component/AddCardResultPage/AddCardResultPage";
 
 const meta = {
@@ -8,10 +7,11 @@ const meta = {
 } satisfies Meta<typeof AddCardResultPage>;
 
 export default meta;
+type Story = StoryObj<typeof meta>;
 
-/* eslint-disable-next-line */
-const addCreditCard = () => {};
-
-export const AddCardResult = () => (
-  <AddCardResultPage addCreditCard={addCreditCard} />
-);
+export const AddCardResult: Story = {
+  args: {
+    /* eslint-disable-next-line */
+    addCreditCard: () => {},
+  },
+};

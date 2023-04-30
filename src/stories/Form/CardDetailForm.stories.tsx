@@ -1,5 +1,4 @@
-import React from "react";
-import type { Meta } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import CardDetailForm from "../../component/AddCardPage/CardDetailForm/CardDetailForm";
 
 const meta = {
@@ -8,5 +7,8 @@ const meta = {
 } satisfies Meta<typeof CardDetailForm>;
 
 export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const CardDetail = () => <CardDetailForm />;
+export const CardDetail: Story = {
+  args: {},
+};

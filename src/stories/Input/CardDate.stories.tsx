@@ -1,5 +1,4 @@
-import React from "react";
-import type { Meta } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import CardDateInput from "../../component/AddCardPage/CardDetailForm/CardDateInput/CardDateInput";
 
 const meta = {
@@ -8,5 +7,9 @@ const meta = {
 } satisfies Meta<typeof CardDateInput>;
 
 export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const CardDate = () => <CardDateInput />;
+export const CardDate: Story = {
+  args: {},
+};
+

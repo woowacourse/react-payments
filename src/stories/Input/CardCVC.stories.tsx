@@ -1,5 +1,4 @@
-import React from "react";
-import type { Meta } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import CardCVCInput from "../../component/AddCardPage/CardDetailForm/CardCVCInput/CardCVCInput";
 
 const meta = {
@@ -8,5 +7,8 @@ const meta = {
 } satisfies Meta<typeof CardCVCInput>;
 
 export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const CardCVC = () => <CardCVCInput />;
+export const CardCVC: Story = {
+  args: {},
+};
