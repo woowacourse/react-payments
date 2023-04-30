@@ -13,5 +13,6 @@ type Story = StoryObj<typeof meta>;
 export const CompanyButton: Story = {
   args: {
     cardCompany: 'BC카드',
+    handleOnClick: () => {},
   },
 };
