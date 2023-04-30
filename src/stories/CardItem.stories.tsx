@@ -1,29 +1,20 @@
 import { Meta, Story } from '@storybook/react';
 import CardItem from '../components/common/CardItem';
-import { CardContext } from '../context/CardContext';
 import { CardItemInfo } from '../types/Card';
 
 const meta = {
-  title: 'Payment/CardItem',
+  title: 'Payment/common/CardItem',
   component: CardItem,
   tags: ['autodocs'],
   argTypes: {},
 } as Meta<typeof CardItem>;
 
-interface CardContextType {
-  cardName: string;
-  setCardName: React.Dispatch<React.SetStateAction<string>>;
-  bankName: string;
-  setBankName: React.Dispatch<React.SetStateAction<string>>;
+interface CardItemProps {
   card: CardItemInfo;
-  setCard: React.Dispatch<React.SetStateAction<CardItemInfo>>;
+  onOpen?: () => void;
 }
 
-const Template: Story<CardContextType> = (args) => (
-  <CardContext.Provider value={{ ...args, card: args.card ?? mockCard }}>
-    <CardItem />
-  </CardContext.Provider>
-);
+const Template: Story<CardItemProps> = (args) => <CardItem {...args} />;
 
 const mockCard = {
   id: 0,
@@ -37,8 +28,6 @@ const mockCard = {
 export const Default = Template.bind({});
 Default.args = {
   card: mockCard,
-  setCardName: () => {},
-  setBankName: () => {},
 };
 
 export const BCCard = Template.bind({});
@@ -51,8 +40,6 @@ BCCard.args = {
     bankName: 'BC카드',
     cardName: '엄마카드',
   },
-  setCardName: () => {},
-  setBankName: () => {},
 };
 
 export const ShinhanCard = Template.bind({});
@@ -65,8 +52,6 @@ ShinhanCard.args = {
     bankName: '신한카드',
     cardName: '엄마카드',
   },
-  setCardName: () => {},
-  setBankName: () => {},
 };
 
 export const KakaoCard = Template.bind({});
@@ -79,8 +64,6 @@ KakaoCard.args = {
     bankName: '카카오뱅크',
     cardName: '엄마카드',
   },
-  setCardName: () => {},
-  setBankName: () => {},
 };
 
 export const HyundaiCard = Template.bind({});
@@ -93,8 +76,6 @@ HyundaiCard.args = {
     bankName: '현대카드',
     cardName: '엄마카드',
   },
-  setCardName: () => {},
-  setBankName: () => {},
 };
 
 export const WooriCard = Template.bind({});
@@ -107,8 +88,6 @@ WooriCard.args = {
     bankName: '우리카드',
     cardName: '엄마카드',
   },
-  setCardName: () => {},
-  setBankName: () => {},
 };
 
 export const LotteCard = Template.bind({});
@@ -121,8 +100,6 @@ LotteCard.args = {
     bankName: '롯데카드',
     cardName: '엄마카드',
   },
-  setCardName: () => {},
-  setBankName: () => {},
 };
 
 export const HanaCard = Template.bind({});
@@ -135,8 +112,6 @@ HanaCard.args = {
     bankName: '하나카드',
     cardName: '엄마카드',
   },
-  setCardName: () => {},
-  setBankName: () => {},
 };
 
 export const KBCard = Template.bind({});
@@ -149,8 +124,6 @@ KBCard.args = {
     bankName: '국민카드',
     cardName: '엄마카드',
   },
-  setCardName: () => {},
-  setBankName: () => {},
 };
 
 export default meta;
