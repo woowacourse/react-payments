@@ -23,6 +23,7 @@ export function Input(props: PropsWithChildren<InputProps>) {
   const inputState = useContext(InputContext);
   const { handleChange } = inputState;
   const childrenList = Children.toArray(children);
+  console.log(inputRef);
 
   return asChild &&
     isValidElement<{ name: string; inputRef: React.MutableRefObject<Ref> }>(

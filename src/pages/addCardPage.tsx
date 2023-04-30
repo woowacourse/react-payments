@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { BackButton } from "../components/common/backButton";
+import { BackButton } from "../components/common/button/backButton";
 import { Header } from "../components/common/Header";
 import { AddCardSection } from "../components/addCardSection";
 import { CardInfoProvider } from "../contexts/cardInfo";

@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { ReactComponent as BackButtonIc } from "../../assets/backButtonIc.svg";
-import { PATH } from "../../constants/path";
+import { PATH } from "../../../constants/path";
 
 export function BackButton() {
   const navigate = useNavigate();
