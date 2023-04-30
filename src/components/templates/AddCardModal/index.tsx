@@ -1,20 +1,20 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
+import { useCardModalDispatch, useCardModalState } from '../../../hooks/useContextHooks';
 
 import CardCompanies from '../../organisms/CardCompanies';
 
-interface AddCardModalProps {
-  isModal: boolean;
-}
+const AddCardModal: React.FC = () => {
+  const isModal = useCardModalState();
+  const toggleModal = useCardModalDispatch();
 
-const AddCardModal: React.FC<AddCardModalProps> = ({ isModal }) => {
   return (
     <>
       {isModal &&
         createPortal(
           <>
-            <StyledBackDrop />
+            <StyledBackDrop onClick={toggleModal} />
             <CardCompaniesWrapper>
               <CardCompanies />
             </CardCompaniesWrapper>

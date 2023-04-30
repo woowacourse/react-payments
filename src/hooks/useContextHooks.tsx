@@ -1,17 +1,18 @@
 import { createContext, Dispatch, useContext } from 'react';
-import { Action, CardContextState, State } from '../store/type';
+import { Action, AddCardModalContextState, CardContextState, CardFormState } from '../store/type';
 
-export const CardPaymentStateContext = createContext<State | null>(null);
+export const CardPaymentStateContext = createContext<CardFormState | null>(null);
 export const CardPaymentDispatchContext = createContext<Dispatch<Action> | null>(null);
 export const CardFocusRefContext = createContext<React.MutableRefObject<HTMLInputElement[]> | null>(
   null,
 );
 export const MoveFocusRefContext = createContext<React.ChangeEventHandler | null>(null);
 export const CardListContext = createContext<CardContextState | null>(null);
+export const AddCardModalContext = createContext<AddCardModalContextState | null>(null);
 
 export function useCardPaymentState() {
   const state = useContext(CardPaymentStateContext);
-  if (!state) throw new Error('Cannot find CardPaymentStateProvider');
+  if (state == null) throw new Error('Cannot find CardPaymentStateProvider');
   return state;
 }
 
@@ -51,4 +52,24 @@ export const useCardListDispatch = () => {
   }
 
   return state.setCardList;
+};
+
+export const useCardModalState = () => {
+  const state = useContext(AddCardModalContext);
+
+  if (state?.isModal == null) {
+    throw new Error('CardModalState 가 없습니다!!');
+  }
+
+  return state.isModal;
+};
+
+export const useCardModalDispatch = () => {
+  const state = useContext(AddCardModalContext);
+
+  if (state?.toggleModal == null) {
+    throw new Error('CardModalDispatcher 가 없습니다!!');
+  }
+
+  return state.toggleModal;
 };

@@ -4,6 +4,7 @@ import { useCardPaymentState } from '../../hooks/useContextHooks';
 import CardItem from '../../components/molecules/CardItem';
 import Header from '../../components/molecules/Header';
 import CardForm from '../../components/organisms/CardForm';
+import AddCardModal from '../../components/templates/AddCardModal';
 
 const AddCard: React.FC = () => {
   const card = useCardPaymentState();
@@ -14,6 +15,7 @@ const AddCard: React.FC = () => {
       <AddCardWrapper>
         <CardItem card={card} />
         <CardForm />
+        <AddCardModal />
       </AddCardWrapper>
     </>
   );
