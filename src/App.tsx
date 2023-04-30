@@ -17,7 +17,7 @@ function App() {
   const { bankName, cardName, setCard, setCardList } = useContext(CardContext);
 
   const updateCardList = (cardItem: CardItemInfo) => {
-    setCardList((prevCardList) => [...prevCardList, cardItem]);
+    setCardList((prevCardList) => [cardItem, ...prevCardList]);
   };
 
   const handleChangeForm = (
