@@ -1,7 +1,8 @@
 import CardInput from '../@common/CardInput';
 import CardLabel from '../@common/CardLabel';
-import { useRef } from 'react';
+import { useContext } from 'react';
 import * as Styled from './ExpiredDates.styles';
+import { RefContext } from '../../contexts/RefProvider';
 
 interface ExpiredDateProps {
   expiredDates: Array<string>;
@@ -9,23 +10,18 @@ interface ExpiredDateProps {
 }
 
 const ExpiredDate = ({ expiredDates, isSetExpiredDates }: ExpiredDateProps) => {
-  const cardExpiredDateRefs: Record<
-    number,
-    React.RefObject<HTMLInputElement>
-  > = {
-    0: useRef<HTMLInputElement>(null),
-    1: useRef<HTMLInputElement>(null),
-  };
+  const cardRefs = useContext(RefContext);
 
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!(e.target instanceof HTMLInputElement)) return;
-    const currentOrder = Number(e.target.dataset['order']);
+    const currentOrder = Number(e.target.dataset['order']) + 4;
 
-    if (!isSetExpiredDates(currentOrder, e.target.value)) return;
+    if (!isSetExpiredDates(Number(e.target.dataset['order']), e.target.value))
+      return;
 
-    if (cardExpiredDateRefs[currentOrder].current?.value.length === 2) {
+    if (cardRefs[currentOrder].current?.value.length === 2) {
       if (currentOrder === 1) return;
-      cardExpiredDateRefs[currentOrder + 1].current?.focus();
+      cardRefs[currentOrder + 1].current?.focus();
     }
   };
 
@@ -36,20 +32,20 @@ const ExpiredDate = ({ expiredDates, isSetExpiredDates }: ExpiredDateProps) => {
         <CardInput
           type="text"
           maxLength={2}
-          ref={cardExpiredDateRefs[0]}
+          ref={cardRefs[4]}
           onChange={handleCardInputChange}
           value={expiredDates[0]}
           order={0}
           placeholder="MM"
           required={true}
         />
-        {cardExpiredDateRefs[0].current?.value.length === 2 && (
+        {cardRefs[4].current?.value.length === 2 && (
           <Styled.Pargraph>/</Styled.Pargraph>
         )}
         <CardInput
           type="text"
           maxLength={2}
-          ref={cardExpiredDateRefs[1]}
+          ref={cardRefs[5]}
           onChange={handleCardInputChange}
           value={expiredDates[1]}
           order={1}

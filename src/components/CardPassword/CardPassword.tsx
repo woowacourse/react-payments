@@ -1,25 +1,23 @@
 import CardInput from '../@common/CardInput';
 import CardLabel from '../@common/CardLabel';
-import { useRef } from 'react';
+import { useContext } from 'react';
 import * as Styled from './CardPassword.styles';
+import { RefContext } from '../../contexts/RefProvider';
 interface CardPasswordProps {
   passwords: Array<string>;
   isSetPasswords: (order: number, value: string) => boolean;
 }
 
 const CardPassword = ({ passwords, isSetPasswords }: CardPasswordProps) => {
-  const passwordRefs: Record<number, React.RefObject<HTMLInputElement>> = {
-    0: useRef<HTMLInputElement>(null),
-    1: useRef<HTMLInputElement>(null),
-  };
+  const cardRefs = useContext(RefContext);
 
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const currentOrder = Number(e.target.dataset['order']);
+    const currentOrder = Number(e.target.dataset['order']) + 8;
 
-    isSetPasswords(currentOrder, e.target.value);
+    isSetPasswords(Number(e.target.dataset['order']), e.target.value);
 
-    if (currentOrder === 0 && passwords[0].length === 0) {
-      passwordRefs[currentOrder + 1].current?.focus();
+    if (currentOrder === 8 && passwords[0].length === 0) {
+      cardRefs[currentOrder + 1].current?.focus();
     }
   };
 
@@ -31,7 +29,7 @@ const CardPassword = ({ passwords, isSetPasswords }: CardPasswordProps) => {
           <CardInput
             type="password"
             maxLength={1}
-            ref={passwordRefs[0]}
+            ref={cardRefs[8]}
             onChange={handleCardInputChange}
             value={passwords[0]}
             order={0}
@@ -43,7 +41,7 @@ const CardPassword = ({ passwords, isSetPasswords }: CardPasswordProps) => {
           <CardInput
             type="password"
             maxLength={1}
-            ref={passwordRefs[1]}
+            ref={cardRefs[9]}
             onChange={handleCardInputChange}
             value={passwords[1]}
             order={1}

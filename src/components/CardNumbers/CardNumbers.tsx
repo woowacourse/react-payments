@@ -1,7 +1,8 @@
-import { useRef } from 'react';
+import { useContext } from 'react';
 import * as Styled from './CardNumbers.styles';
 import CardInput from '../@common/CardInput';
 import CardLabel from '../@common/CardLabel';
+import { RefContext } from '../../contexts/RefProvider';
 
 interface CardNumbersProps {
   cardNumbers: Array<string>;
@@ -9,12 +10,7 @@ interface CardNumbersProps {
 }
 
 const CardNumbers = ({ cardNumbers, isSetCardNumbers }: CardNumbersProps) => {
-  const cardNumberRefs: Record<number, React.RefObject<HTMLInputElement>> = {
-    0: useRef<HTMLInputElement>(null),
-    1: useRef<HTMLInputElement>(null),
-    2: useRef<HTMLInputElement>(null),
-    3: useRef<HTMLInputElement>(null),
-  };
+  const cardRefs = useContext(RefContext);
 
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!(e.target instanceof HTMLInputElement)) return;
@@ -22,9 +18,8 @@ const CardNumbers = ({ cardNumbers, isSetCardNumbers }: CardNumbersProps) => {
 
     if (!isSetCardNumbers(currentOrder, e.target.value)) return;
 
-    if (cardNumberRefs[currentOrder].current?.value.length === 4) {
-      if (currentOrder === 3) return;
-      cardNumberRefs[currentOrder + 1].current?.focus();
+    if (cardRefs[currentOrder].current?.value.length === 4) {
+      cardRefs[currentOrder + 1].current?.focus();
     }
   };
 
@@ -35,7 +30,7 @@ const CardNumbers = ({ cardNumbers, isSetCardNumbers }: CardNumbersProps) => {
         <CardInput
           type="text"
           maxLength={4}
-          ref={cardNumberRefs[0]}
+          ref={cardRefs[0]}
           onChange={handleCardInputChange}
           value={cardNumbers[0]}
           order={0}
@@ -43,39 +38,39 @@ const CardNumbers = ({ cardNumbers, isSetCardNumbers }: CardNumbersProps) => {
           required={true}
           autofocus={true}
         />
-        {cardNumberRefs[0].current?.value.length === 4 && (
+        {cardRefs[0].current?.value.length === 4 && (
           <Styled.Pargraph>-</Styled.Pargraph>
         )}
         <CardInput
           type="text"
           maxLength={4}
-          ref={cardNumberRefs[1]}
+          ref={cardRefs[1]}
           onChange={handleCardInputChange}
           value={cardNumbers[1]}
           order={1}
           placeholder={'0000'}
           required={true}
         />
-        {cardNumberRefs[1].current?.value.length === 4 && (
+        {cardRefs[1].current?.value.length === 4 && (
           <Styled.Pargraph>-</Styled.Pargraph>
         )}
         <CardInput
           type="password"
           maxLength={4}
-          ref={cardNumberRefs[2]}
+          ref={cardRefs[2]}
           onChange={handleCardInputChange}
           value={cardNumbers[2]}
           order={2}
           placeholder={'0000'}
           required={true}
         />
-        {cardNumberRefs[2].current?.value.length === 4 && (
+        {cardRefs[2].current?.value.length === 4 && (
           <Styled.Pargraph>-</Styled.Pargraph>
         )}
         <CardInput
           type="password"
           maxLength={4}
-          ref={cardNumberRefs[3]}
+          ref={cardRefs[3]}
           onChange={handleCardInputChange}
           value={cardNumbers[3]}
           order={3}

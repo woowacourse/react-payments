@@ -1,7 +1,8 @@
 import CardInput from '../@common/CardInput';
 import CardLabel from '../@common/CardLabel';
-import { useRef, useState } from 'react';
+import { useContext, useState } from 'react';
 import * as Styled from './SecurityCode.styles';
+import { RefContext } from '../../contexts/RefProvider';
 
 interface SecurityCodeProps {
   securityCode: string;
@@ -12,13 +13,17 @@ const SecurityCode = ({
   securityCode,
   isSetSecurityCode,
 }: SecurityCodeProps) => {
-  const securityCodeRef = useRef<HTMLInputElement>(null);
+  const cardRefs = useContext(RefContext);
   const [isShowToolTip, setIsShowToolTip] = useState(false);
 
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!(e.target instanceof HTMLInputElement)) return;
 
     if (!isSetSecurityCode(e.target.value)) return;
+
+    if (cardRefs[7].current?.value.length === 3) {
+      cardRefs[8].current?.focus();
+    }
   };
 
   return (
@@ -29,7 +34,7 @@ const SecurityCode = ({
           <CardInput
             type="password"
             maxLength={3}
-            ref={securityCodeRef}
+            ref={cardRefs[7]}
             onChange={handleCardInputChange}
             value={securityCode}
             placeholder="•••"
