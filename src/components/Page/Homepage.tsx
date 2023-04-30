@@ -55,7 +55,7 @@ export default function Homepage({ onClick, cardList }: HomePageProps) {
             type="homepage"
             cardColor={CARD_COMPANYS[card.cardTitle].backgroundColor}
             cardTitle={CARD_COMPANYS[card.cardTitle].title}
-            key={`${card.owner}${card.cardNumber.third}`}
+            key={`${card.cardNumber.fourth}${card.cardNumber.third}${card.cardNumber.fourth}`}
             owner={card.owner}
             cardNumberSet={Object.values(card.cardNumber)}
             expiracy={`${card.expiracy.month}/${card.expiracy.year}`}

@@ -8,9 +8,10 @@ export function useFormValidation(
 ) {
   const [isFormFilled, setIsFormFilled] = useState(true);
   const { title } = useCardState();
+  const isTitleFilled = title === "";
   useEffect(() => {
     if (!ref.current) return;
-    setIsFormFilled(!ref.current.checkValidity() || title === "");
+    setIsFormFilled(!ref.current.checkValidity() || isTitleFilled);
   }, [ref, fields]);
   return {
     isFormFilled,
