@@ -13,17 +13,6 @@
   font-size: larger;
 }
 
-.card-nick-input {
-  height: 40px;
-  width: 60%;
-
-  border-bottom: 1px solid black;
-  text-align: center;
-
-  margin-bottom: 60%;
-  margin-top: 10%;
-}
-
 .card-nick-input-next-button-container {
   display: block;
   align-self: end;
