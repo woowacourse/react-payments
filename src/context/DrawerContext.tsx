@@ -16,7 +16,7 @@ export function DrawerContextProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(true);
   return (
     <DrawerStateContext.Provider value={{ isDrawerOpen }}>
       <DrawerDispatchContext.Provider value={{ setIsDrawerOpen }}>
