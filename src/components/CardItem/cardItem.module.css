@@ -5,6 +5,7 @@
   border-radius: 5px;
   padding: 12px 14px;
   color: var(--text-white);
+  transition: background 0.2s ease-in 0s;
 }
 
 .company {
