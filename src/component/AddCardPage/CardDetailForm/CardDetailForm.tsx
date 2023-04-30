@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import St from "./CardDetailFormStyled";
 import CardCompanyInput from "./CardCompanyInput/CardCompanyInput";
 import CardNumberInput from "./CardNumberInput/CardNumberInput";
@@ -10,7 +10,6 @@ import { SubmitButton } from "../../common/Button";
 import { useNavigate } from "react-router";
 
 function CardDetailForm() {
-  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const navigate = useNavigate();
 
   const goToResultPage = (e: React.FormEvent<HTMLFormElement>) => {
@@ -21,12 +20,12 @@ function CardDetailForm() {
 
   return (
     <St.Form onSubmit={goToResultPage}>
-      <CardCompanyInput inputRefs={inputRefs} />
-      <CardNumberInput inputRefs={inputRefs} />
-      <CardDateInput inputRefs={inputRefs} />
-      <CardOwnerNameInput inputRefs={inputRefs} />
-      <CardCVCInput inputRefs={inputRefs} />
-      <CardPasswordInput inputRefs={inputRefs} />
+      <CardCompanyInput />
+      <CardNumberInput />
+      <CardDateInput />
+      <CardOwnerNameInput />
+      <CardCVCInput />
+      <CardPasswordInput />
       <SubmitButton type="submit" value={"다음"} />
     </St.Form>
   );

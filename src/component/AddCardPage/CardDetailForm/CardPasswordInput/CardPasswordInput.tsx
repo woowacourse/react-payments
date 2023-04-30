@@ -1,13 +1,12 @@
 import React from "react";
 import St from "./CardPasswordInputStyled";
 import useCardPassword from "../../../../hooks/card/useCardPassword";
+import useInputRef from "../../../../hooks/useInputRef";
 
-interface CardPasswordInputProps {
-  inputRefs: React.MutableRefObject<(HTMLInputElement | null)[]>;
-}
-
-function CardPasswordInput({ inputRefs }: CardPasswordInputProps) {
+function CardPasswordInput() {
   const { cardPassword, changeCardPassword } = useCardPassword();
+
+  const { inputRef, focusNextInput } = useInputRef();
 
   return (
     <section>
@@ -21,9 +20,9 @@ function CardPasswordInput({ inputRefs }: CardPasswordInputProps) {
             value={cardPassword[0]}
             minLength={1}
             required
-            ref={(ref) => (inputRefs.current[5] = ref)}
+            ref={inputRef}
             onInput={(e) => {
-              e.currentTarget.validity.valid && inputRefs.current[6]?.focus();
+              e.currentTarget.validity.valid && focusNextInput();
               changeCardPassword(e);
             }}
           />
@@ -35,7 +34,6 @@ function CardPasswordInput({ inputRefs }: CardPasswordInputProps) {
             value={cardPassword[1]}
             minLength={1}
             required
-            ref={(ref) => (inputRefs.current[6] = ref)}
             onInput={changeCardPassword}
           />
         </St.InputSection>

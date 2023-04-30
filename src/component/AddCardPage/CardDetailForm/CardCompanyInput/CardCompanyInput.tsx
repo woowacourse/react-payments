@@ -3,17 +3,15 @@ import St from "./CardCompanyInputStyled";
 import useCardCompany from "../../../../hooks/card/useCardCompany";
 import useModal from "../../../../hooks/useModal";
 import CardCompanyModal from "../../../CardCompanyModal/CardCompanyModal";
+import useInputRef from "../../../../hooks/useInputRef";
 
-interface CardCompanyInputProps {
-  inputRefs: React.MutableRefObject<(HTMLInputElement | null)[]>;
-}
-
-function CardCompanyInput({ inputRefs }: CardCompanyInputProps) {
+function CardCompanyInput() {
   const { cardCompany } = useCardCompany();
   const { isModalOpen, openModal, closeModal } = useModal();
+  const { inputRef, focusNextInput } = useInputRef();
 
   useEffect(() => {
-    cardCompany && inputRefs.current[1]?.focus();
+    cardCompany && focusNextInput();
   }, [cardCompany]);
 
   return (
@@ -26,7 +24,7 @@ function CardCompanyInput({ inputRefs }: CardCompanyInputProps) {
           required
           autoFocus
           placeholder="카드사 선택"
-          ref={(ref) => (inputRefs.current[0] = ref)}
+          ref={inputRef}
           onFocus={(e) => {
             e.currentTarget.blur();
             openModal();

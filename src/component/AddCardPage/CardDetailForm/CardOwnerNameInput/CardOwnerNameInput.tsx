@@ -2,12 +2,9 @@ import React from "react";
 import St from "./CardOwnerNameInputStyled";
 import useCardOwnerName from "../../../../hooks/card/useCardOwnerName";
 
-interface CardOwnerNameInputProps {
-  inputRefs: React.MutableRefObject<(HTMLInputElement | null)[]>;
-}
-
-function CardOwnerNameInput({ inputRefs }: CardOwnerNameInputProps) {
+function CardOwnerNameInput() {
   const { cardOwnerName, changeCardOwnerName } = useCardOwnerName();
+
   return (
     <section>
       <St.Title>
@@ -19,7 +16,6 @@ function CardOwnerNameInput({ inputRefs }: CardOwnerNameInputProps) {
           type="text"
           maxLength={30}
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-          ref={(ref) => (inputRefs.current[3] = ref)}
           onInput={changeCardOwnerName}
         />
       </St.InputSection>
