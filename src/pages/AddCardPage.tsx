@@ -135,7 +135,10 @@ export default function AddCardPage({
   };
 
   const onPrevButtonClick = () => {
-    userConfirm('정말 닫으시겠습니까?', setHome);
+    userConfirm(
+      '이전 페이지로 이동하시면 현재 입력하신 내용이 사라집니다. 정말 이동하시겠습니까?',
+      setHome
+    );
   };
 
   const setHome = () => {
@@ -144,7 +147,10 @@ export default function AddCardPage({
 
   useEffect(() => {
     const setHomepage = () => {
-      userConfirm('정말 닫으시겠습니까?', () => setPage('homePage'));
+      userConfirm(
+        '이전 페이지로 이동하시면 현재 입력하신 내용이 사라집니다. 정말 이동하시겠습니까?',
+        () => setPage('homePage')
+      );
     };
 
     window.history.pushState(null, '', window.location.href);
