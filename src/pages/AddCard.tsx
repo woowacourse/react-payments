@@ -21,7 +21,6 @@ import {
   useBottomSheet,
 } from '../hooks';
 import { v4 as uuidv4 } from 'uuid';
-import theme from '../styles/theme';
 
 const CardWrapper = styled.div`
   display: flex;
@@ -31,8 +30,8 @@ const CardWrapper = styled.div`
   cursor: pointer;
 
   & > p {
-    font: ${theme.font.body};
-    color: ${theme.color.grey300};
+    font: ${(props) => props.theme.font.body};
+    color: ${(props) => props.theme.color.grey300};
     margin-bottom: 4px;
   }
 `;
