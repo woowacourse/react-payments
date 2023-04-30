@@ -16,7 +16,7 @@ export function BankItem(props: BankItemProps) {
   );
 }
 
-const Container = styled.li`
+const Container = styled.article`
   display: flex;
   flex-direction: column;
   align-items: center;
