@@ -1,57 +1,16 @@
-import bcLogo from '../../assets/bc-logo.svg';
-import hanaLogo from '../../assets/hana-logo.svg';
-import hyundaiLogo from '../../assets/hyundai-logo.svg';
-import kakaoLogo from '../../assets/kakao-logo.svg';
-import kbLogo from '../../assets/kb-logo.svg';
-import lotteLogo from '../../assets/lotte-logo.svg';
-import shinhanLogo from '../../assets/shinhan-logo.svg';
-import wooriLogo from '../../assets/woori-logo.svg';
 import styled from 'styled-components';
 import Modal from '../common/Modal';
-
-const cardCompanies = [
-  {
-    name: 'BC카드',
-    logo: bcLogo,
-  },
-  {
-    name: '신한카드',
-    logo: shinhanLogo,
-  },
-  {
-    name: '카카오뱅크',
-    logo: kakaoLogo,
-  },
-  {
-    name: '현대카드',
-    logo: hyundaiLogo,
-  },
-  {
-    name: '우리카드',
-    logo: wooriLogo,
-  },
-  {
-    name: '롯데카드',
-    logo: lotteLogo,
-  },
-  {
-    name: '하나카드',
-    logo: hanaLogo,
-  },
-  {
-    name: '국민카드',
-    logo: kbLogo,
-  },
-];
+import { CARD_COMPANY_LOGO } from '../../constants/cardCompany';
+import { CardCompany } from '../../@types';
 
 type CardCompanyModalProps = {
   isModalOpen: boolean;
   closeModal: () => void;
-  onClickLogo: (cardCompanyName: string) => void;
+  onClickLogo: (cardCompanyName: CardCompany) => void;
 };
 
 const CardCompanyModal = ({ onClickLogo, isModalOpen, closeModal }: CardCompanyModalProps) => {
-  const handleClickLogo = (companyName: string) => {
+  const handleClickLogo = (companyName: CardCompany) => {
     onClickLogo(companyName);
     closeModal();
   };
@@ -61,14 +20,10 @@ const CardCompanyModal = ({ onClickLogo, isModalOpen, closeModal }: CardCompanyM
       {isModalOpen && (
         <Modal onCloseModal={closeModal}>
           <CardCompanyWrapper>
-            {cardCompanies.map((company, index) => (
-              <CardCompanyButton
-                type="button"
-                key={index}
-                onClick={() => handleClickLogo(company.name)}
-              >
-                <img src={company.logo} alt={company.name} />
-                <CardCompanyName>{company.name}</CardCompanyName>
+            {CARD_COMPANY_LOGO.map(({ name, logo }, index) => (
+              <CardCompanyButton type="button" key={index} onClick={() => handleClickLogo(name)}>
+                <img src={logo} alt={name} />
+                <CardCompanyName>{name}</CardCompanyName>
               </CardCompanyButton>
             ))}
           </CardCompanyWrapper>

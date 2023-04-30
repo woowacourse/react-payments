@@ -12,6 +12,7 @@ import useModal from '../../hooks/useModal';
 import Tooltip from '../common/Tooltip';
 import ErrorMessage from '../common/ErrorMessage';
 import { StyledSubmitButton } from '../../pages/AddCardNamePage';
+import { Card, CardCompany } from '../../@types';
 
 const AddCardContainer = () => {
   const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
@@ -21,7 +22,7 @@ const AddCardContainer = () => {
   const [cardPWD, setCardPWD] = useState<string[]>(['', '']);
   const [expirationError, setExpirationError] = useState<boolean>(false);
   const [cardCompanyError, setCardCompanyError] = useState(false);
-  const [cardCompany, setCardCompany] = useState('');
+  const [cardCompany, setCardCompany] = useState<CardCompany | ''>('');
   const { isModalOpen, openModal, closeModal } = useModal(true);
   const { insert, move } = useMoveFocus();
   const setCard = useCardDispatch();
@@ -98,6 +99,8 @@ const AddCardContainer = () => {
   const successSubmit = () => {
     const cardID = getUniqueID();
 
+    if (!cardCompany) return;
+
     setCard((prev) => {
       return [
         ...prev,
@@ -117,7 +120,7 @@ const AddCardContainer = () => {
     setExpirationError(false);
   };
 
-  const onClickLogo = (cardCompanyName: string) => {
+  const onClickLogo = (cardCompanyName: CardCompany) => {
     setCardCompany(cardCompanyName);
   };
 

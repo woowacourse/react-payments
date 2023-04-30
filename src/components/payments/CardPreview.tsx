@@ -1,22 +1,13 @@
 import styled from 'styled-components';
 import { getUniqueID } from '../../utils/key';
+import { CARD_COMPANY_COLOR_MAP } from '../../constants/cardCompany';
+import { CardCompany } from '../../@types';
 
 type CardPreviewProps = {
-  cardCompany: string;
+  cardCompany: CardCompany | '';
   cardNumbers: string[];
   cardOwner: string[];
   cardExpirationDate: string[];
-};
-
-export const CARD_COMPANY_COLOR_MAP: Record<string, { main: string; secondary: string }> = {
-  BC카드: { main: 'rgb(222, 84, 86)', secondary: 'white' },
-  신한카드: { main: 'rgb(19, 74, 245)', secondary: 'white' },
-  카카오뱅크: { main: 'rgb(251, 230, 77)', secondary: 'black' },
-  현대카드: { main: 'rgb(51, 51, 51)', secondary: 'white' },
-  우리카드: { main: 'rgb(187, 223, 245)', secondary: 'rgb(51, 122, 194)' },
-  롯데카드: { main: 'rgb(240, 240, 240)', secondary: 'rgb(225, 0, 0)' },
-  하나카드: { main: 'rgb(64, 146, 143)', secondary: 'white' },
-  국민카드: { main: 'rgb(85, 79, 71)', secondary: 'rgb(247, 206, 71)' },
 };
 
 const CardPreview = ({
@@ -32,7 +23,7 @@ const CardPreview = ({
 
   return (
     <CardPreviewWrapper mainColor={main} secondaryColor={secondary}>
-      <CardCompany>{cardCompany}</CardCompany>
+      <SCardCompany>{cardCompany}</SCardCompany>
       <CardChip />
       <CardNumberWrapper>
         {cardNumbers.map((cardNumber, index) => {
@@ -80,7 +71,7 @@ const CardPreviewWrapper = styled.div<{
   border-radius: 5px;
 `;
 
-const CardCompany = styled.div`
+const SCardCompany = styled.div`
   height: 14px;
   font-weight: 500;
   font-size: 12px;

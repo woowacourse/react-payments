@@ -1,7 +1,9 @@
+import { CARD_COMPANY } from '../constants/cardCompany';
+
 type Card = {
   id: string;
   cardName: string[];
-  cardCompany: string;
+  cardCompany: CardCompany;
   cardNumbers: string[];
   cardExpirationDate: string[];
   cardOwner: string[];
@@ -9,6 +11,6 @@ type Card = {
   cardPWD: string[];
 };
 
-type CardRegisterForm = Omit<Card, 'cardName' | 'cardCompany'>;
+type CardCompany = (typeof CARD_COMPANY)[number];
 
-export type { Card, CardRegisterForm };
+export type { Card, CardCompany };

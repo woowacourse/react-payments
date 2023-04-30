@@ -1,17 +1,12 @@
 import styled from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
+import { PATH_TITLE } from '../../constants';
 
-const title = {
-  '/': '보유카드',
-  '/addCard': '카드 추가',
-  '/addCardPage': '',
-};
-
-type Pathname = '/' | '/addCard' | '/addCardPage';
+type Pathname = keyof typeof PATH_TITLE;
 
 const PaymentsHeader = () => {
   const { pathname } = useLocation();
-  const pageTitle = title[pathname as Pathname];
+  const pageTitle = PATH_TITLE[pathname as Pathname];
 
   return (
     <StyledHeader>
