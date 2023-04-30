@@ -12,7 +12,7 @@ import useModal from '../../hooks/useModal';
 import Tooltip from '../common/Tooltip';
 import ErrorMessage from '../common/ErrorMessage';
 import { StyledSubmitButton } from '../../pages/AddCardNamePage';
-import { Card, CardCompany } from '../../@types';
+import { CardCompany } from '../../@types';
 
 const AddCardContainer = () => {
   const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
