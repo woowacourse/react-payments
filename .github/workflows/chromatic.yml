@@ -1,6 +1,8 @@
 name: 'Chromatic Deployment'
 
-on: push
+on:
+  push:
+    branches: ['step2']
 
 jobs:
   test:
