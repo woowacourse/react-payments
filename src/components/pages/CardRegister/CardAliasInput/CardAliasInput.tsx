@@ -6,14 +6,16 @@ import Input from '../../../@common/Input/Input';
 import * as Styled from './CardAliasInput.styles';
 
 const CardAliasInput = () => {
-  const { cardRegisterInfo, handleCardInfo } = useCardRegisterContext();
+  const context = useCardRegisterContext();
+
   const { defaultConditions } = useCardAlias();
 
-  if (!cardRegisterInfo) {
+  if (!context) {
+    console.error('Error: CardAliasInput should be wrapped with CardRegisterContext Provider.');
     return null;
   }
 
-  const { cardAlias } = cardRegisterInfo;
+  const { cardRegisterInfo, handleCardInfo } = context;
 
   const onChangeValue = (value: CardRegisterInfo['cardAlias']) => {
     handleCardInfo('cardAlias', value);
@@ -25,7 +27,7 @@ const CardAliasInput = () => {
         <Input.Field
           name='cardAlias'
           id='cardAlias'
-          value={cardAlias}
+          value={cardRegisterInfo?.cardAlias}
           onChange={({ target: { value } }) => {
             onChangeValue(value);
           }}
