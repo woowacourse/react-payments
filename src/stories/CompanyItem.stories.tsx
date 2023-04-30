@@ -1,11 +1,19 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import CompanyItem from '../components/CardCompanyModal/CompanyItem';
+import CardFormProvider from '../contexts/CardFormContext';
 
 const meta: Meta<typeof CompanyItem> = {
   title: 'components/CompanyItem',
   component: CompanyItem,
   tags: ['autodocs'],
+  decorators: [
+    (Story) => (
+      <CardFormProvider>
+        <Story />
+      </CardFormProvider>
+    ),
+  ],
 };
 
 export default meta;
