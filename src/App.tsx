@@ -8,6 +8,7 @@ import BankList from './components/BottomSheetComponents/BankList';
 import CardAdditionCompletionPage from './components/pages/CardAdditionCompletionPage';
 import { useBottomSheet } from './hooks/useBottomSheet';
 import type { CardItemInfo } from './types/Card';
+import { cardLocalStorage } from './components/domain/CardLocalStorage';
 
 function App() {
   const { isBottomSheetOpen, handleBottomSheetOpen, handleBottomSheetClose } =
@@ -15,6 +16,9 @@ function App() {
 
   const [cardName, setCardName] = useState('');
   const [bankName, setBankName] = useState('기타 은행');
+  const [cardList, setCardList] = useState<CardItemInfo[]>(
+    cardLocalStorage.getCardList() || []
+  );
   const [card, setCard] = useState<CardItemInfo>({
     id: 0,
     cardNumber: ['', '', '', ''],
@@ -23,6 +27,10 @@ function App() {
     bankName: '',
     cardName: '',
   });
+
+  const updateCardList = (cardItem: CardItemInfo) => {
+    setCardList((prevCardList) => [...prevCardList, cardItem]);
+  };
 
   const handleChangeForm = (
     cardNumber: string[],
@@ -54,7 +62,12 @@ function App() {
         <Routes>
           <Route
             path='/'
-            element={<CardListPage onOpen={handleBottomSheetOpen} />}
+            element={
+              <CardListPage
+                cardList={cardList}
+                onOpen={handleBottomSheetOpen}
+              />
+            }
           />
           <Route
             path='/register'
@@ -73,6 +86,7 @@ function App() {
                 card={card}
                 cardName={cardName}
                 setCardName={setCardName}
+                onUpdateCardList={updateCardList}
               />
             }
           />

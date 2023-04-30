@@ -10,12 +10,14 @@ interface CardAdditionCompletionPageProps {
   card: CardItemInfo;
   cardName: string;
   setCardName(value: string): void;
+  onUpdateCardList(card: CardItemInfo): void;
 }
 
 const CardAdditionCompletionPage = ({
   card,
   cardName,
   setCardName,
+  onUpdateCardList,
 }: CardAdditionCompletionPageProps) => {
   const navigate = useNavigate();
 
@@ -30,6 +32,7 @@ const CardAdditionCompletionPage = ({
   const handleComplete = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setCardName((event.target as HTMLInputElement).value);
+    onUpdateCardList(card);
     cardLocalStorage.addCard(card);
     navigate('/');
   };
