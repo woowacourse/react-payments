@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useCardModalDispatch, useCardPaymentDispatch } from '../../../hooks/useContextHooks';
+import { changeCardName } from '../../../store/action';
 import Button from '../../atomics/Button';
 import Icon from '../../atomics/Icon';
 import Message from '../../atomics/Message';
@@ -14,8 +16,16 @@ interface IconProps {
 }
 
 const CardIconButton: React.FC<IconProps> = ({ cardName, ...rest }) => {
+  const dispatcher = useCardPaymentDispatch();
+  const modalDispatcher = useCardModalDispatch();
+
+  const onClickCardIcon = (cardName: string) => () => {
+    dispatcher(changeCardName(cardName));
+    modalDispatcher();
+  };
+
   return (
-    <StyledCardIconButton type="button" {...rest}>
+    <StyledCardIconButton type="button" {...rest} onClick={onClickCardIcon(cardName)}>
       <Icon cardName={cardName} width="36px" height="36px" />
       <Message color="#525252" fontWeight={500} fontSize="12px">
         {cardName}
