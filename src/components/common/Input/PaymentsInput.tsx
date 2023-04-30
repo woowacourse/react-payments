@@ -1,10 +1,11 @@
 import React, { forwardRef } from 'react';
-import styled, { CSSProperties } from 'styled-components';
+import styled, { css, CSSProperties } from 'styled-components';
 
 export interface InputProps extends React.ComponentPropsWithRef<'input'> {
   backgroundColor?: CSSProperties['backgroundColor'];
   align?: CSSProperties['textAlign'];
   width?: CSSProperties['width'];
+  isError?: boolean;
 }
 
 export const PaymentsInput = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
@@ -22,7 +23,14 @@ const Wrapper = styled.div<InputProps>`
   padding: 12px;
   width: ${({ width }) => width};
   &:focus-within {
-    box-shadow: 0 0 3px 1px #0064ff;
+    ${({ isError }) =>
+      isError
+        ? css`
+            box-shadow: 0 0 3px 1px #ff0000;
+          `
+        : css`
+            box-shadow: 0 0 3px 1px #0064ff;
+          `}
   }
 `;
 
