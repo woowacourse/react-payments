@@ -17,6 +17,7 @@ const InputWidth: { [key: string]: string } = {
 
 export const Input = styled.input<InputProps>`
   width: ${(props) => InputWidth[props.maxLength]};
+  max-width: calc(600px - 56px);
   height: 45px;
 
   background-color: ${(props) => (props.name === 'nickname' ? '' : '#e5e5e5')};
@@ -33,6 +34,6 @@ export const Input = styled.input<InputProps>`
   padding: ${(props) => props.name === 'ownerName' && '0 16px'};
 
   &:focus {
-    border: ${(props) => props.name === '' && '2px solid #0078ff;'};
+    border: ${(props) => props.name !== 'nickname' && '2px solid #0078ff;'};
   }
 `;

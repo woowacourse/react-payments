@@ -11,7 +11,6 @@ interface InputProps {
   numeric?: boolean;
   placeholder?: string;
   center?: boolean;
-  pattern?: string;
 }
 
 const Input = forwardRef((props: InputProps, ref: React.Ref<HTMLInputElement>) => {
