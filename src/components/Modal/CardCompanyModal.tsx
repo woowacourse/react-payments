@@ -1,4 +1,4 @@
-import { MouseEventHandler, forwardRef, useContext } from 'react';
+import { forwardRef, useContext } from 'react';
 import styled from 'styled-components';
 import { Icon } from '../common/Icon/Icon';
 import { COMPANY_NAME } from '../common/Card/types';
@@ -15,18 +15,15 @@ type Ref = HTMLDivElement;
 
 export const Modal = forwardRef<Ref, ModalProps>(
   ({ companyNames, ImgSources, onClick, ...props }, ref) => {
-    const { isModalOpen, setIsModalOpen } = useContext(ModalContext);
+    const { setIsModalOpen } = useContext(ModalContext);
 
-    const handleCloseModalWithBackDrop: MouseEventHandler<HTMLDivElement> = () => {
-      setIsModalOpen(!isModalOpen);
+    const handleModalClose = () => {
+      setIsModalOpen((prev) => !prev);
     };
 
-    const handleCloseModalWithCloseButton: MouseEventHandler<HTMLButtonElement> = () => {
-      setIsModalOpen(!isModalOpen);
-    };
     return (
       <>
-        <Styled.ModalBackdrop onClick={handleCloseModalWithBackDrop} />
+        <Styled.ModalBackdrop onClick={handleModalClose} />
 
         <Styled.Modal {...props} ref={ref}>
           {ImgSources &&
@@ -40,9 +37,7 @@ export const Modal = forwardRef<Ref, ModalProps>(
                 />
               );
             })}
-          <Styled.ModalCloseButton onClick={handleCloseModalWithCloseButton}>
-            X
-          </Styled.ModalCloseButton>
+          <Styled.ModalCloseButton onClick={handleModalClose}>X</Styled.ModalCloseButton>
         </Styled.Modal>
       </>
     );

@@ -1,8 +1,8 @@
-import { createContext, useState } from 'react';
+import React, { createContext, useState } from 'react';
 
 export type ModalContextType = {
   isModalOpen: boolean;
-  setIsModalOpen: (value: boolean) => void;
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export interface ModalContextProps {
@@ -15,7 +15,7 @@ export const ModalContext = createContext<ModalContextType>({
 });
 
 export function ModalProvider({ children }: ModalContextProps) {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState<boolean>(true);
 
   const toggleModalState = () => {
     setIsOpen(!isOpen);
