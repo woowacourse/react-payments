@@ -9,7 +9,7 @@ const title = {
 
 type Pathname = '/' | '/addCard' | '/addCardPage';
 
-const Header = () => {
+const PaymentsHeader = () => {
   const { pathname } = useLocation();
   const pageTitle = title[pathname as Pathname];
 
@@ -60,4 +60,4 @@ const StyledHeaderTitle = styled.h1`
   color: #383838;
 `;
 
-export default Header;
+export default PaymentsHeader;

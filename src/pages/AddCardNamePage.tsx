@@ -1,9 +1,9 @@
-import { useLocation, useNavigate } from 'react-router-dom';
-import CardPreview from '../components/CardPreview';
-import InputGroup from '../components/InputGroup';
-import { useCardDispatch, useCardState } from '../context/CardContext';
-import styled from 'styled-components';
 import { useState } from 'react';
+import styled from 'styled-components';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useCardDispatch, useCardState } from '../context/CardContext';
+import InputGroup from '../components/common/InputGroup';
+import CardPreview from '../components/payments/CardPreview';
 
 const AddCardNamePage = () => {
   const { state } = useLocation();

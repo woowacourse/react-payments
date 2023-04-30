@@ -1,5 +1,5 @@
-import CardPreviewList from '../components/CardPreviewList';
-import CardRegister from '../components/CardRegister';
+import CardPreviewList from '../components/payments/CardPreviewList';
+import CardRegister from '../components/payments/CardRegister';
 
 const MyCardPage = () => {
   return (

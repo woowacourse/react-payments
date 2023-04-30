@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useCardState } from '../context/CardContext';
+import { useCardState } from '../../context/CardContext';
 
 const CardRegister = () => {
   const cardList = useCardState();

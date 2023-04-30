@@ -1,4 +1,4 @@
-import AddCardContainer from '../components/AddCardContainer';
+import AddCardContainer from '../components/payments/AddCardContainer';
 
 const AddCardPage = () => {
   return (

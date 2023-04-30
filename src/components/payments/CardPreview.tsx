@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { getUniqueID } from '../utils/key';
+import { getUniqueID } from '../../utils/key';
 
 type CardPreviewProps = {
   cardCompany: string;

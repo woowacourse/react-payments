@@ -2,15 +2,15 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import CardPreview from './CardPreview';
-import InputGroup from './InputGroup';
-import { useCardDispatch } from '../context/CardContext';
-import { isAlphabet, isNumber, validateMonth, validateYear } from '../utils/validateInput';
-import ErrorMessage from './ErrorMessage';
-import { getUniqueID } from '../utils/key';
-import useMoveFocus from '../hooks/useMoveFocus';
+import InputGroup from '../common/InputGroup';
+import { useCardDispatch } from '../../context/CardContext';
+import { isAlphabet, isNumber, validateMonth, validateYear } from '../../utils/validateInput';
+import { getUniqueID } from '../../utils/key';
+import useMoveFocus from '../../hooks/useMoveFocus';
 import CardCompanyModal from './CardCompanyModal';
-import useModal from '../hooks/useModal';
-import Tooltip from './Tooltip';
+import useModal from '../../hooks/useModal';
+import Tooltip from '../common/Tooltip';
+import ErrorMessage from '../common/ErrorMessage';
 
 const AddCardContainer = () => {
   const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);

@@ -1,5 +1,3 @@
-import Modal from './Modal';
-
 import bcLogo from '../assets/bc-logo.svg';
 import hanaLogo from '../assets/hana-logo.svg';
 import hyundaiLogo from '../assets/hyundai-logo.svg';
@@ -9,6 +7,7 @@ import lotteLogo from '../assets/lotte-logo.svg';
 import shinhanLogo from '../assets/shinhan-logo.svg';
 import wooriLogo from '../assets/woori-logo.svg';
 import styled from 'styled-components';
+import Modal from '../common/Modal';
 
 const cardCompanies = [
   {
