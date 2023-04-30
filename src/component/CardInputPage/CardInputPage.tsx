@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { CreditCard } from "../../type";
 import CardInputForm from "./CardInputForm/CardInputForm";
 
+import { ReactComponent as LessThanSide } from "../../asset/lessThanSide.svg";
 import "./cardInputPage.css";
 
 interface CardInputPageProps {
@@ -16,21 +17,8 @@ export default function CardInputPage(props: CardInputPageProps) {
     <section className="card-Input-section">
       <div className="card-Input-section-header">
         <Link to="/">
-          <button className="back-page-button" type="button">
-            <svg
-              width="10"
-              height="17"
-              viewBox="0 0 10 17"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M8.30425 1L1.36475 8.78658L9.15133 15.7261"
-                stroke="#525252"
-                stroke-width="1.5"
-              />
-            </svg>
-          </button>
+          <button className="back-page-button" type="button"></button>
+          <LessThanSide />
         </Link>
         <span className="page-explanation">카드 추가</span>
       </div>
