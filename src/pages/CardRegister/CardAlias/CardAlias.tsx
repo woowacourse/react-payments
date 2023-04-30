@@ -25,13 +25,15 @@ const CardAlias = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (cardRegisterInfo !== null) {
-      const cardList = getItemFromLocalStorage<CardRegisterInfo[]>('CardList');
-      const newCardList = cardList !== null ? [cardRegisterInfo, ...cardList] : [cardRegisterInfo];
-      setItemInLocalStorage('CardList', newCardList);
-      initCardRegisterInfo();
-      showToast('카드 등록이 완료되었습니다 😀');
+    if (cardRegisterInfo === null) {
+      return;
     }
+
+    const cardList = getItemFromLocalStorage<CardRegisterInfo[]>('CardList');
+    const newCardList = cardList !== null ? [cardRegisterInfo, ...cardList] : [cardRegisterInfo];
+    setItemInLocalStorage('CardList', newCardList);
+    initCardRegisterInfo();
+    showToast('카드 등록이 완료되었습니다 😀');
 
     navigate('/');
   };
