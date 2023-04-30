@@ -15,10 +15,10 @@ export default function MyCardList() {
       {registeredCards &&
         registeredCards.map((card, index) => {
           return (
-            <>
-              <CardContent key={index} {...card} />
-              <p>{card.cardAlias}</p>
-            </>
+            <div key={index}>
+              <CardContent {...card} />
+              <Styled.CardAliasText>{card.cardAlias}</Styled.CardAliasText>
+            </div>
           );
         })}
       <AddCardButton onClick={() => navigate('/registerCard')} />

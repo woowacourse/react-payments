@@ -6,3 +6,8 @@ export const Root = styled(Flex)`
 
   padding: 50px 0;
 `;
+
+export const CardAliasText = styled.p`
+  text-align: center;
+  margin-top: 10px;
+`;
