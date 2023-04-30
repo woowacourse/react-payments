@@ -1,8 +1,6 @@
 /* eslint-disable react/function-component-definition */
 import type { Meta, StoryObj } from '@storybook/react';
 
-import CARD_COMPANY from '@Constants/cardCompany';
-
 import CreditCard from '.';
 
 /**
@@ -11,12 +9,6 @@ import CreditCard from '.';
 const meta: Meta<typeof CreditCard> = {
   title: 'CreditCard',
   component: CreditCard,
-  argTypes: {
-    company: {
-      options: Object.keys(CARD_COMPANY),
-      control: { type: 'radio' },
-    },
-  },
 };
 
 export default meta;
