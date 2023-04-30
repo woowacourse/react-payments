@@ -8,7 +8,7 @@ export const CreditCardLayout = styled.div<CreditCardLayoutStyleProps>`
   display: grid;
   grid-template-rows: 30px 45px 1fr;
   align-items: center;
-  background-color: ${(props) => props.backgroundColor};
+  background: linear-gradient(${(props) => `${props.backgroundColor}, ${props.gradientColor}`});
   color: ${(props) => props.fontColor};
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;

@@ -15,6 +15,7 @@ function CreditCard({ fullFilled = true, expiry, numbers, owner, company }: Cred
     <S.CreditCardLayout
       isValid={!fullFilled || isValid}
       backgroundColor={company && CARD_COMPANY[company].uniqueColor}
+      gradientColor={company && CARD_COMPANY[company].gradientColor}
       fontColor={company && CARD_COMPANY[company].fontColor}
     >
       <S.CreditCardCompanyName>{company && CARD_COMPANY[company].name}</S.CreditCardCompanyName>

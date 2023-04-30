@@ -7,5 +7,6 @@ export type CreditCardProps = Pick<Type.CreditCard, 'numbers' | 'expiry' | 'owne
 export type CreditCardLayoutStyleProps = {
   isValid: boolean;
   backgroundColor?: string;
+  gradientColor?: string;
   fontColor?: string;
 };
