@@ -8,7 +8,7 @@ export type InputProps = {
   center?: boolean;
   placeholder?: string;
   onChange?: (value: string) => void;
-  value: string;
+  value?: string;
   disabled?: boolean;
   maxCount?: number;
 };
