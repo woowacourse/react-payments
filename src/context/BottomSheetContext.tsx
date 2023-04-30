@@ -1,4 +1,5 @@
 import { createContext, PropsWithChildren, ReactNode, useContext, useState } from 'react';
+import BottomSheet from '../components/@common/BottomSheet/BottomSheet';
 
 interface BottomSheetContextProps {
   isOpened: boolean;
@@ -32,5 +33,12 @@ export const BottomSheetProvider = ({ children }: PropsWithChildren) => {
     setIsOpened(false);
   };
 
-  return <BottomSheetContext.Provider value={{ isOpened, content, openBottomSheet, closeBottomSheet }}>{children}</BottomSheetContext.Provider>;
+  return (
+    <>
+      <BottomSheetContext.Provider value={{ isOpened, content, openBottomSheet, closeBottomSheet }}>{children}</BottomSheetContext.Provider>
+      <BottomSheet isOpened={isOpened} onClose={closeBottomSheet}>
+        {content}
+      </BottomSheet>
+    </>
+  );
 };
