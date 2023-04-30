@@ -13,7 +13,7 @@ import { ModalContent } from "../components/common/modal/modalContent";
 import { BankMenu } from "../components/bankMenu";
 import { useSelect } from "../hooks/useSelect";
 
-export function AddCard() {
+export function AddCardPage() {
   return (
     <Wrapper>
       <Header>

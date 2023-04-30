@@ -8,7 +8,7 @@ import { ReactComponent as BackButtonIc } from "../assets/backButtonIc.svg";
 import { PAGE_HEADER } from "../constants";
 import { PATH } from "../constants/path";
 
-export function CardList() {
+export function CardListPage() {
   const [cards] = useState<CardProps[] | undefined>(getData());
   const navigate = useNavigate();
 
