@@ -10,14 +10,11 @@ export interface SecurityInputProps {
 }
 
 export function SecurityCodeInput({ value, onChange }: SecurityInputProps) {
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement>,
-    onChange?: ChangeEventHandler<HTMLInputElement>,
-  ) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     if (validateInput(value)) return;
 
-    onChange && onChange(e);
+    onChange(e);
   };
 
   return (
@@ -30,7 +27,7 @@ export function SecurityCodeInput({ value, onChange }: SecurityInputProps) {
             inputMode="numeric"
             type="password"
             maxLength={3}
-            onChange={(e) => handleChange(e, onChange)}
+            onChange={handleChange}
             required
           />
         </S.SecurityCodeInputContainer>
