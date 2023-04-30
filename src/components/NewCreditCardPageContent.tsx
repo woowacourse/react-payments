@@ -21,7 +21,7 @@ import { Input } from './common/Input';
 import { NumberInput } from './common/NumberInput';
 import { Text } from './common/Text';
 
-const Container = styled.main`
+export const Container = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,7 +30,7 @@ const Container = styled.main`
   padding: 28px;
 `;
 
-const FormGroup = styled.section`
+export const FormGroup = styled.section`
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -40,7 +40,7 @@ const FormGroup = styled.section`
   margin: 10px 0px;
 `;
 
-const FormGroupLabel = styled.div`
+export const FormGroupLabel = styled.div`
   display: flex;
   justify-content: space-between;
 `;
