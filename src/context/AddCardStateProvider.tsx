@@ -1,6 +1,5 @@
 import { createContext, useState } from "react";
 import { CARD_LOGO } from "../components/CardCompanyIcon/CardCompanyIcon";
-import { useFocus } from "../hooks/useFocus";
 import { CardCompany, CardExpirationDate, CardNumber, CardPassword } from "../types";
 
 interface AddCardState {

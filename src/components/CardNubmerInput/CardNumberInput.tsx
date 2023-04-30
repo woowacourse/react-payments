@@ -30,9 +30,9 @@ const CardNumberInput = ({ cardNumber, error, setCardNumber, setError }: CardNum
   };
 
   const onBlurCardNumberHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name } = e.target;
+    const { value } = e.target;
 
-    if (isFulfilledString(name, 4) || hasInvalidKey(cardNumber)) {
+    if (!isFulfilledString(value, 4)) {
       setError({ ...error, cardNumberError: true });
       return;
     }
@@ -55,7 +55,6 @@ const CardNumberInput = ({ cardNumber, error, setCardNumber, setError }: CardNum
           minLength={4}
           maxLength={4}
           required
-          autoFocus
           onChange={onChangeCardNumberHandler}
           onBlur={onBlurCardNumberHandler}
         />

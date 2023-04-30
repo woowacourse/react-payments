@@ -16,7 +16,7 @@ import { PAGE } from "../../constant";
 import Modal from "../../components/Modal/Modal";
 import CardCompanyIcon from "../../components/CardCompanyIcon/CardCompanyIcon";
 import { GlobalContext } from "../../context/GlobalProvider";
-import { AddCardContext } from "../../context/AddCardProvider";
+import { AddCardStateContext } from "../../context/AddCardStateProvider";
 import { Button } from "../../components/common/Button";
 import useModal from "../../hooks/useModal";
 
@@ -38,7 +38,7 @@ const AddCardPage = () => {
     setOwnerName,
     setSecurityCode,
     setPassword,
-  } = useContext(AddCardContext);
+  } = useContext(AddCardStateContext);
 
   const navigate = useNavigate();
 
@@ -79,7 +79,14 @@ const AddCardPage = () => {
     return addButtonAppearCondition;
   };
 
-  // const cardCompanyList = ["비씨카드","하나카드","현대카드","카카오뱅크","국민카드","롯데카드","신한카드","우리카드"]
+  const onChangeFormHandler = (e: React.ChangeEvent<HTMLFormElement>) => {
+    const { value, maxLength, form } = e.target;
+
+    const arr1: HTMLElement[] = Array.from(form);
+
+    const currentIndex = arr1.indexOf(e.target);
+    if (value.length === maxLength) arr1[currentIndex + 1].focus();
+  };
 
   return (
     <Container>
@@ -102,7 +109,7 @@ const AddCardPage = () => {
       <CardPreviewButton onClick={() => openModal()}>
         <CardPreview card={{ cardCompany, cardNumber, expirationDate, ownerName }} />
       </CardPreviewButton>
-      <Form onSubmit={onSubmitHandler}>
+      <Form onSubmit={onSubmitHandler} onChange={onChangeFormHandler}>
         <CardNumberInput cardNumber={cardNumber} error={error} setCardNumber={setCardNumber} setError={setError} />
         <CardExpirationDateInput
           expirationDate={expirationDate}

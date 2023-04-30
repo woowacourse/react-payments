@@ -5,7 +5,7 @@ import CardListPage from "./pages/CardListPage/CardListPage";
 
 import { Route, Routes } from "react-router-dom";
 import { PAGE } from "./constant";
-import { AddCardContextProvider } from "./context/AddCardProvider";
+import { AddCardStateContextProvider } from "./context/AddCardStateProvider";
 import NameCardPage from "./pages/NameCardPage/NameCardPage";
 
 function App() {
@@ -18,9 +18,9 @@ function App() {
           <Route
             path={PAGE.ADD_CARD}
             element={
-              <AddCardContextProvider>
+              <AddCardStateContextProvider>
                 <AddCardPage />
-              </AddCardContextProvider>
+              </AddCardStateContextProvider>
             }
           />
           <Route path={PAGE.NAME_CARD} element={<NameCardPage />} />

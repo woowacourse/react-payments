@@ -30,13 +30,6 @@ const CardExpirationDateInput = ({
     }
   };
 
-  const handleExpirationDateError = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { month } = expirationDate;
-
-    if (month.length === 1 && month !== "0") setExpirationDate({ ...expirationDate, month: `0${month}` });
-    setError({ ...error, expirationError: isValidMonth(month) ? false : true });
-  };
-
   return (
     <Label>
       만료일
@@ -54,7 +47,6 @@ const CardExpirationDateInput = ({
           maxLength={2}
           required
           onChange={onChangeExpirationDatehandler}
-          onBlur={handleExpirationDateError}
         />
         <Slash>/</Slash>
         <Input
