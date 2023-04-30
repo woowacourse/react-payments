@@ -27,7 +27,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 );
 
 const StyledInput = styled.input<InputProps>`
-  background-color: ${({ backgroundColor }) => backgroundColor ?? 'grey'};
+  background-color: ${({ backgroundColor }) => backgroundColor ?? 'white'};
   width: ${({ maxLength }) => (maxLength ? `${maxLength * 16}px` : '100%')};
   text-align: ${({ textAlign }) => textAlign ?? 'left'};
   ${({ resetStyle }) =>

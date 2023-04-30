@@ -25,6 +25,7 @@ const StyledProfile = styled.div<{ size: number | undefined }>`
 const StyledName = styled.p<{ size: number | undefined }>`
   font-size: ${({ size }) => (size ? size / 3 : 10)}px;
   width: ${({ size }) => (size ? size * 1.5 : 32)}px;
+  text-align: center;
 `;
 
 export default Profile;
