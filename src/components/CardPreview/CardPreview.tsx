@@ -13,8 +13,7 @@ type CardPreviewProps = {
 const CardPreview = ({ card, onClick }: CardPreviewProps) => {
   const { cardNumber, ownerName, expirationDate, cardCompany } = card;
 
-  const signatureColor = CARD_COMPANIES[cardCompany].signatureColor;
-  const companyKoreanName = CARD_COMPANIES[cardCompany].koreanName;
+  const { signatureColor, koreanName: companyKoreanName } = CARD_COMPANIES[cardCompany];
   const ownerNameText = ownerName ? ownerName : "NAME";
   const expirationMonthText = expirationDate.month ? expirationDate.month : "MM";
   const expirationYearText = expirationDate.year ? expirationDate.year : "YY";
