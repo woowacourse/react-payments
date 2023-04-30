@@ -23,7 +23,7 @@ function CardModal({ closeModal }: CardModalProps) {
     window.addEventListener("keyup", escHandler);
 
     return () => window.removeEventListener("keyup", escHandler);
-  });
+  }, []);
 
   return (
     <>

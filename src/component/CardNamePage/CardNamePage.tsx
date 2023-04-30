@@ -28,6 +28,7 @@ function CardNamePage({ lastCard, addCreditCard }: CardNamePageProps) {
   useEffect(() => {
     nameInputRef.current?.focus();
   }, []);
+
   const registerCard = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!isRightCardName(cardName)) return;
