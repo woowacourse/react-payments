@@ -13,9 +13,12 @@ const BankListBottomSheetContent = ({ onChange, onSelect }: BankListBottomSheetC
     onChange(bankName);
     onSelect();
   };
+
+  const bankValues = Object.values(BANK_LIST);
+
   return (
     <Styled.BankListBottomSheetContentContainer>
-      {BANK_LIST.map((bank) => {
+      {bankValues.map((bank) => {
         return (
           <Styled.BankItem key={bank.id}>
             <Styled.BankItemContent onClick={() => handleClick(bank.name)}>
