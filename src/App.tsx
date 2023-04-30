@@ -2,7 +2,7 @@ import { useState } from "react";
 import AddCardPage from "./components/Page/AddCardPage";
 import Homepage from "./components/Page/Homepage";
 import { LOCAL_STORAGE_CARD_KEY } from "./constant";
-import { useCardAction, useCardState } from "./context/CardContext";
+import { useCardAction } from "./context/CardContext";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 import "./styles/index.css";
 import { CardInfo } from "./types";
@@ -33,8 +33,6 @@ export default function App() {
       secondPassword,
     } = event.currentTarget;
 
-    // const updatedCardList = [...cardList, newCard];
-    // setCardList(updatedCardList);
     cardAction({
       type: "UPDATE_CARD_CONTEXT",
       cardNumber: {

@@ -46,12 +46,10 @@ const NickName = styled.h4`
   text-align: center;
   color: #383737;
   opacity: 0.9;
-  margin-top: -24px;
 `;
 
 export default function Homepage({ onClick, cardList }: HomePageProps) {
   useResetCardContext();
-
   return (
     <Page>
       <Title>보유카드</Title>
@@ -60,19 +58,19 @@ export default function Homepage({ onClick, cardList }: HomePageProps) {
       )}
       <CardWrapper>
         {cardList.map((card) => (
-          <>
+          <div
+            key={`${card.cardNumber.fourth}${card.cardNumber.third}${card.cardNumber.fourth}`}
+          >
             <Card
               type="homepage"
               cardColor={CARD_COMPANYS[card.cardTitle].backgroundColor}
               cardTitle={CARD_COMPANYS[card.cardTitle].title}
-              key={`${card.cardNumber.fourth}${card.cardNumber.third}${card.cardNumber.fourth}`}
               owner={card.owner}
               cardNumberSet={Object.values(card.cardNumber)}
               expiracy={`${card.expiracy.month}/${card.expiracy.year}`}
             />
-
             <NickName>{card.nickName}</NickName>
-          </>
+          </div>
         ))}
 
         <AddCardButton onClick={onClick} />

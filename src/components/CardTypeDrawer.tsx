@@ -1,11 +1,6 @@
 import styled from "styled-components";
-import { CardCompanyData } from "../constant";
 import CardLogo from "./CardLogo";
 import Drawer from "./common/Drawer";
-
-interface CardTypeDrawerProps {
-  cardCompanys: CardCompanyData[];
-}
 
 const Wrapper = styled.div`
   align-items: center;
@@ -18,7 +13,6 @@ const Wrapper = styled.div`
   height: calc(757px / 3);
   justify-content: center;
   padding: 30px;
-  /* position: absolute; */
   top: calc(757px / 3 * 2);
   width: 400px;
 `;
