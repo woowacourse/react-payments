@@ -3,6 +3,8 @@ name: 'Chromatic Deployment'
 on:
   push:
     branches: ['step2']
+    paths:
+      - 'src/stories/**'
 
 jobs:
   test:
