@@ -7,87 +7,90 @@ import {
 } from 'components/Input';
 import styled from 'styled-components';
 import { FormEventHandler, useState } from 'react';
-import { BankCode, Card, isCard } from 'components/common/Card/types';
+import { Card, isCard } from 'components/common/Card/types';
 import { ValueAndOnChange } from 'components/Input/types';
-import { useCardFormValid } from 'hooks/useCardFormValid';
 import { CreditCard } from 'components/common';
 import {
   CardBottomSheet,
   CardBottomSheetProps,
 } from 'components/common/BottomSheet/CardBottomSheet';
-import { PaymentsInputLabel } from 'components/common/Label/PaymentsInputLabel';
+import { useCardForm } from 'hooks/useCardForm';
 
 export type AddCardFormProps = {
   onSubmit: (card: Card) => void;
 };
 
 export function AddCardForm({ onSubmit }: AddCardFormProps) {
-  const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
+  const {
+    cardFormInformation,
+    setCardFormInformation,
+    card,
+    isCardNumberValid,
+    isExpirationDateValid,
+    isSecurityCodeValid,
+    isPasswordValid,
+    errorMessages,
+  } = useCardForm();
 
-  const [month, setMonth] = useState('');
-  const [year, setYear] = useState('');
-
-  const [name, setName] = useState('');
-
-  const [firstDigit, setFirstDigit] = useState('');
-  const [secondDigit, setSecondDigit] = useState('');
-
-  const [securityCode, setSecurityCode] = useState('');
-
-  const [bankCode, setBankCode] = useState<BankCode>();
   const [isBottomSheetActive, setBottomSheetActive] = useState<boolean>(true);
-
-  const card: Partial<Card> = {
-    numbers: cardNumbers,
-    expirationDate: { month: month, year: year },
-    name,
-    securityCode: securityCode,
-    password: { first: firstDigit, second: secondDigit },
-    bankCode,
-  };
-
-  const { isValid, errorMessages } = useCardFormValid(card);
+  const { cardNumbers, month, year, name, firstDigit, secondDigit, securityCode, bankCode } =
+    cardFormInformation;
 
   const valueAndOnChanges: ValueAndOnChange[] = cardNumbers.map((cardNumber, index) => ({
     value: cardNumber,
     onChange: (value) => {
-      setCardNumbers((prev) => {
-        const prevCardNumbers = [...prev];
+      setCardFormInformation((prev) => {
+        const prevCardNumbers = [...prev.cardNumbers];
         prevCardNumbers.splice(index, 1, value);
 
-        return prevCardNumbers;
+        return {
+          ...prev,
+          cardNumbers: prevCardNumbers,
+        };
       });
     },
   }));
 
   const handleMonthInputChange: ValueAndOnChange['onChange'] = (inputValue) => {
-    setMonth(inputValue);
+    setCardFormInformation((prev) => {
+      return { ...prev, month: inputValue };
+    });
   };
 
   const handleYearInputChange: ValueAndOnChange['onChange'] = (inputValue) => {
-    setYear(inputValue);
+    setCardFormInformation((prev) => {
+      return { ...prev, year: inputValue };
+    });
   };
 
   const handleNameInputChange: ValueAndOnChange['onChange'] = (inputValue) => {
-    setName(inputValue);
+    setCardFormInformation((prev) => {
+      return { ...prev, name: inputValue };
+    });
   };
 
   const handleSecurityCodeChange: ValueAndOnChange['onChange'] = (inputValue) => {
-    setSecurityCode(inputValue);
+    setCardFormInformation((prev) => {
+      return { ...prev, securityCode: inputValue };
+    });
   };
 
   const handleFirstPasswordInputChange: ValueAndOnChange['onChange'] = (inputValue) => {
-    setFirstDigit(inputValue);
+    setCardFormInformation((prev) => {
+      return { ...prev, firstDigit: inputValue };
+    });
   };
 
   const handleSecondPasswordInputChange: ValueAndOnChange['onChange'] = (inputValue) => {
-    setSecondDigit(inputValue);
+    setCardFormInformation((prev) => {
+      return { ...prev, secondDigit: inputValue };
+    });
   };
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
-    if (!isValid) {
+    if (!(isCardNumberValid && isExpirationDateValid && isSecurityCodeValid && isPasswordValid)) {
       return alert(Object.values(errorMessages).join('\n'));
     }
 
@@ -97,7 +100,9 @@ export function AddCardForm({ onSubmit }: AddCardFormProps) {
   };
 
   const handleClickBankImage: CardBottomSheetProps['onClickBankImage'] = (bankCode) => {
-    setBankCode(bankCode);
+    setCardFormInformation((prev) => {
+      return { ...prev, bankCode: bankCode };
+    });
     setBottomSheetActive((prevIsBottomSheetActive) => !prevIsBottomSheetActive);
   };
 
