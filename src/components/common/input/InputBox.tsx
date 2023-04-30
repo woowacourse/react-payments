@@ -3,7 +3,7 @@ import { InputProvider } from "../../../contexts/inputContext";
 
 export interface InputBoxProps<T> {
   children: React.ReactNode;
-  inputState: {
+  inputState?: {
     value: T;
     handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   };
