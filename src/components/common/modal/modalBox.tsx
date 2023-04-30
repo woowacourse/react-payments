@@ -8,7 +8,7 @@ interface ModalState {
 }
 
 interface ModalProps {
-  modalState: ModalState;
+  modalState?: ModalState;
 }
 
 export function ModalBox(props: PropsWithChildren<ModalProps>) {

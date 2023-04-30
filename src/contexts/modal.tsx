@@ -13,21 +13,21 @@ interface ModalState {
 }
 
 interface ModalProviderProps {
-  modalState: ModalState;
+  modalState?: ModalState;
 }
 
 export function ModalProvider(props: PropsWithChildren<ModalProviderProps>) {
   const { modalState, children } = props;
-  const [isOpen, setIsOpen] = useState(modalState.modalOpen ?? false);
+  const [isOpen, setIsOpen] = useState(modalState?.modalOpen ?? true);
 
   function openLocalModal() {
     setIsOpen(true);
-    modalState.openModal();
+    modalState?.openModal();
   }
 
   function closeLocalModal() {
     setIsOpen(false);
-    modalState.closeModal();
+    modalState?.closeModal();
   }
 
   return (
