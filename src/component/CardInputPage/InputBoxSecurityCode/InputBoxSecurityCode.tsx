@@ -27,10 +27,13 @@ export default function InputBoxSecurityCode(props: InputBoxSecurityProps) {
     if (userSecurityCode !== appropriateSecurityCode) {
       setHaveError(true);
       changeSecurityCodeStatus("isComplete", false);
-    } else {
+    } else if (appropriateSecurityCode.length === 3) {
       setHaveError(false);
       changeSecurityCodeStatus("isComplete", true);
       changeSecurityCodeStatus("userInput", appropriateSecurityCode);
+    } else {
+      setHaveError(false);
+      changeSecurityCodeStatus("isComplete", false);
     }
 
     setSecurityCode(appropriateSecurityCode);
