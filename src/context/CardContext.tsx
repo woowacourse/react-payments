@@ -25,6 +25,7 @@ interface CardState {
     first: string;
     second: string;
   };
+  nickName?: string;
 }
 
 interface SetCardColorAction {
@@ -40,6 +41,7 @@ interface SetCardTitleAction {
 interface ResetCardColorTitleAction {
   type: "RESET_CARD_CONTEXT";
 }
+
 interface UpdateCardContextAction {
   type: "UPDATE_CARD_CONTEXT";
   cardNumber: {
@@ -60,11 +62,17 @@ interface UpdateCardContextAction {
   };
 }
 
+interface SetNickNameAction {
+  type: "SET_NICKNAME";
+  nickName: string;
+}
+
 type Action =
   | SetCardColorAction
   | SetCardTitleAction
   | ResetCardColorTitleAction
-  | UpdateCardContextAction;
+  | UpdateCardContextAction
+  | SetNickNameAction;
 
 type CardDispatch = Dispatch<Action>;
 
@@ -107,6 +115,11 @@ function cardTypeReducer(state: CardState, action: Action) {
           first: action.password.first,
           second: action.password.second,
         },
+      };
+    case "SET_NICKNAME":
+      return {
+        ...state,
+        nickname: action.nickName,
       };
     default:
       throw new Error("unhandled Action");
