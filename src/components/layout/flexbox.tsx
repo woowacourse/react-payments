@@ -13,3 +13,9 @@ export const SBetweenStack = css`
   display: flex;
   justify-content: space-between;
 `;
+
+export const Center = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
