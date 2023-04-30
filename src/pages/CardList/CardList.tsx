@@ -2,6 +2,7 @@ import Card from '../../components/Card';
 import { useCardListContext } from '../../contexts/CardListContexts';
 import styled from 'styled-components';
 import CardAddButton from './CardAddButton';
+import Header from '../../components/Header';
 
 type CardListProps = {
   setPageCardRegistration: () => void;
@@ -12,6 +13,7 @@ const CardList = ({ setPageCardRegistration }: CardListProps) => {
 
   return (
     <Styled.Wrapper>
+      <Header title="보유 카드" />
       <Styled.CardListWrapper>
         {cardList.map(({ cardType, cardNumber, owner, expirationDate, alias }) => {
           return (
@@ -32,17 +34,22 @@ const CardList = ({ setPageCardRegistration }: CardListProps) => {
 export default CardList;
 
 const Wrapper = styled.div`
+  padding: 20px 20px 0 20px;
   height: 100%;
 `;
 
 const CardListWrapper = styled.ul`
-  padding: 36px 0 10px 0;
+  padding: 20px 0 10px 0;
   height: 644px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
   overflow: scroll;
+
+  @media (max-width: 500px) {
+    min-height: -webkit-fill-available;
+  }
 `;
 
 const CardItemWrapper = styled.li`

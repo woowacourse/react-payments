@@ -3,6 +3,7 @@ import Card from '../../components/Card';
 import { useCardListContext } from '../../contexts/CardListContexts';
 import styled from 'styled-components';
 import { Input } from '../../components/Input';
+import Header from '../../components/Header';
 
 type CardAliasProps = {
   setPageCardList: () => void;
@@ -31,6 +32,7 @@ const CardAlias = ({ setPageCardList, currentId }: CardAliasProps) => {
 
   return (
     <Styled.Wrapper>
+      <Header title="카드 이름을 지어주세요." />
       <Styled.CardWrapper>
         <Card cardType={cardType} owner={owner} cardNumber={cardNumber} expirationDate={expirationDate} />
       </Styled.CardWrapper>
@@ -51,7 +53,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 20px 20px 0 20px;
   height: inherit;
 `;
 

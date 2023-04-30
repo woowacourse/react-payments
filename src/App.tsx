@@ -22,7 +22,11 @@ function App() {
       <CardListProvider>
         {page === PAGE.CARD_LIST && <CardList setPageCardRegistration={() => setPage(PAGE.CARD_REGISTRATION)} />}
         {page === PAGE.CARD_REGISTRATION && (
-          <CardRegistration setPageCardAlias={() => setPage(PAGE.CARD_ALIAS)} setCurrentId={setCurrentId} />
+          <CardRegistration
+            setPageCardAlias={() => setPage(PAGE.CARD_ALIAS)}
+            setPageCardList={() => setPage(PAGE.CARD_LIST)}
+            setCurrentId={setCurrentId}
+          />
         )}
         {page === PAGE.CARD_ALIAS && (
           <CardAlias setPageCardList={() => setPage(PAGE.CARD_LIST)} currentId={currentId} />

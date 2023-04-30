@@ -2,20 +2,28 @@ import { useState } from 'react';
 import useModal from '../../hooks/useModal';
 import BottomSheet from '../../components/BottomSheet';
 import CardRegistrationForm from '../../components/CardRegistrationForm';
-import BankProfileList from '../../components/BankProfileList';
 import type { CardType } from '../../domain/types/card';
+import Header from '../../components/Header';
+import { ReactComponent as ChevronLeft } from '../../assets/chevron-left.svg';
+import styled from 'styled-components';
+import BankProfileList from '../../components/BankProfileList';
 
 type CardRegistrationProps = {
   setPageCardAlias: () => void;
+  setPageCardList: () => void;
   setCurrentId: React.Dispatch<React.SetStateAction<number>>;
 };
 
-const CardRegistration = ({ setPageCardAlias, setCurrentId }: CardRegistrationProps) => {
+const CardRegistration = ({ setPageCardAlias, setPageCardList, setCurrentId }: CardRegistrationProps) => {
   const { isModalOpen, openModal, closeModal } = useModal(true);
   const [cardType, setCardType] = useState<CardType>('우리카드');
 
   return (
-    <>
+    <Styled.Wrapper>
+      <Styled.HeaderWrapper>
+        <ChevronLeft width="20px" height="20px" cursor="pointer" onClick={setPageCardList} />
+        <Header title="카드 추가" />
+      </Styled.HeaderWrapper>
       <CardRegistrationForm
         setPageCardAlias={setPageCardAlias}
         setCurrentId={setCurrentId}
@@ -27,8 +35,35 @@ const CardRegistration = ({ setPageCardAlias, setCurrentId }: CardRegistrationPr
           <BankProfileList closeModal={closeModal} setCardType={setCardType} />
         </BottomSheet>
       )}
-    </>
+    </Styled.Wrapper>
   );
 };
 
 export default CardRegistration;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+`;
+
+const HeaderWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+
+  > svg {
+    vertical-align: top;
+  }
+
+  > header {
+    line-height: 20px;
+  }
+`;
+
+const Styled = {
+  Wrapper,
+  HeaderWrapper,
+};
