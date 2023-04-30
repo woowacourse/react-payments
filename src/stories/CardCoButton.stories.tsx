@@ -7,11 +7,13 @@ const meta: Meta = {
   title: "CardCoButton component",
   component: CardCoButton,
   argTypes: {
-    changeCardCoStatus: { action: "Is input complete?" },
+    changeCardCoStatus: {
+      action: "카드사 상태 변경 및 카드사 입력 완료로 상태 변경",
+    },
   },
 };
 
-export interface BtnProps {
+export interface Props {
   /** 카드사 변경 */
   cardCo: CardCo;
 }
@@ -21,7 +23,6 @@ export const renderingTest = (args: any) => (
 );
 renderingTest.args = {
   cardCo: "woori",
-  changeCardCoStatus: () => {},
 };
 
 export default meta;
