@@ -6,7 +6,7 @@ import {
   useCardInfoValue,
 } from '../../../context/CardInfoContext';
 import useForm from '../../../hooks/useForm';
-import { ExpirationDate } from '../../../components/InputBox';
+import { ExpirationDate as ExpirationDateComponent } from '../../../components/InputBox';
 import { Input } from '../../../components';
 
 import validator from '../../../domain/validator';
@@ -31,7 +31,7 @@ const InputBoxStories = () => {
 
   return (
     <form onSubmit={onSubmit}>
-      <ExpirationDate error={error}>
+      <ExpirationDateComponent error={error}>
         <Input
           name="expirationMonth"
           value={cardInfo?.expirationMonth}
@@ -52,13 +52,13 @@ const InputBoxStories = () => {
           type="text"
           numeric={true}
         />
-      </ExpirationDate>
+      </ExpirationDateComponent>
       <button style={{ visibility: 'hidden' }}></button>
     </form>
   );
 };
 
-export const ExpirationDateBox = () => {
+export const ExpirationDate = () => {
   return (
     <CardInfoProvider>
       <InputBoxStories />
@@ -66,8 +66,8 @@ export const ExpirationDateBox = () => {
   );
 };
 
-const meta: Meta<typeof ExpirationDateBox> = {
-  component: ExpirationDateBox,
+const meta: Meta<typeof ExpirationDate> = {
+  component: ExpirationDate,
   title: 'Components/InputBox',
 };
 

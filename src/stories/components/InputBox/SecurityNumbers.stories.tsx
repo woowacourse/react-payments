@@ -6,7 +6,7 @@ import {
   useCardInfoValue,
 } from '../../../context/CardInfoContext';
 import useForm from '../../../hooks/useForm';
-import { SecurityNumbers } from '../../../components/InputBox';
+import { SecurityNumbers as SecurityNumbersComponent } from '../../../components/InputBox';
 import { Input } from '../../../components';
 
 import validator from '../../../domain/validator';
@@ -30,7 +30,7 @@ const InputBoxStories = () => {
 
   return (
     <form onSubmit={onSubmit}>
-      <SecurityNumbers error={error}>
+      <SecurityNumbersComponent error={error}>
         <Input
           name="securityNumbers"
           value={cardInfo?.securityNumbers}
@@ -40,13 +40,13 @@ const InputBoxStories = () => {
           type="password"
           numeric={true}
         />
-      </SecurityNumbers>
+      </SecurityNumbersComponent>
       <button style={{ visibility: 'hidden' }}></button>
     </form>
   );
 };
 
-export const SecurityNumbersBox = () => {
+export const SecurityNumbers = () => {
   return (
     <CardInfoProvider>
       <InputBoxStories />
@@ -54,8 +54,8 @@ export const SecurityNumbersBox = () => {
   );
 };
 
-const meta: Meta<typeof SecurityNumbersBox> = {
-  component: SecurityNumbersBox,
+const meta: Meta<typeof SecurityNumbers> = {
+  component: SecurityNumbers,
   title: 'Components/InputBox',
 };
 

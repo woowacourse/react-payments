@@ -6,7 +6,7 @@ import {
   useCardInfoValue,
 } from '../../../context/CardInfoContext';
 import useForm from '../../../hooks/useForm';
-import { OwnerName } from '../../../components/InputBox';
+import { OwnerName as OwnerNameComponent } from '../../../components/InputBox';
 import { Input } from '../../../components';
 
 import validator from '../../../domain/validator';
@@ -31,7 +31,7 @@ const InputBoxStories = () => {
 
   return (
     <form onSubmit={onSubmit}>
-      <OwnerName ownerName={cardInfo?.ownerName} maxLength={30} error={error}>
+      <OwnerNameComponent ownerName={cardInfo?.ownerName} maxLength={30} error={error}>
         <Input
           name="ownerName"
           value={cardInfo?.ownerName}
@@ -40,13 +40,13 @@ const InputBoxStories = () => {
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
           type="text"
         />
-      </OwnerName>
+      </OwnerNameComponent>
       <button style={{ visibility: 'hidden' }}></button>
     </form>
   );
 };
 
-export const OwnerNameBox = () => {
+export const OwnerName = () => {
   return (
     <CardInfoProvider>
       <InputBoxStories />
@@ -54,8 +54,8 @@ export const OwnerNameBox = () => {
   );
 };
 
-const meta: Meta<typeof OwnerNameBox> = {
-  component: OwnerNameBox,
+const meta: Meta<typeof OwnerName> = {
+  component: OwnerName,
   title: 'Components/InputBox',
 };
 
