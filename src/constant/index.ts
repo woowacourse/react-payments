@@ -1,5 +1,5 @@
 export const PAGE = {
   CARD_LIST: "/",
-  ADD_CARD: "/addCard",
-  NAME_CARD: "/nameCard",
+  ADD_CARD: "/add-card",
+  NAME_CARD: "/name-card",
 };

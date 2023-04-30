@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
 import { CARD_LOGO } from "../components/CardCompanyIcon/CardCompanyIcon";
+import { useFocus } from "../hooks/useFocus";
 import { CardCompany, CardExpirationDate, CardNumber, CardPassword } from "../types";
 
 interface AddCardState {
@@ -49,9 +50,9 @@ const initialValue = {
   setPassword: () => {},
 };
 
-export const AddCardContext = createContext<AddCardState>(initialValue);
+export const AddCardStateContext = createContext<AddCardState>(initialValue);
 
-export const AddCardContextProvider = ({ children }: React.PropsWithChildren) => {
+export const AddCardStateContextProvider = ({ children }: React.PropsWithChildren) => {
   const [error, setError] = useState<{ cardNumberError: boolean; expirationError: boolean }>({
     cardNumberError: false,
     expirationError: false,
@@ -91,5 +92,5 @@ export const AddCardContextProvider = ({ children }: React.PropsWithChildren) =>
     setPassword,
   };
 
-  return <AddCardContext.Provider value={value}>{children}</AddCardContext.Provider>;
+  return <AddCardStateContext.Provider value={value}>{children}</AddCardStateContext.Provider>;
 };
