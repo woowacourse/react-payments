@@ -8,9 +8,9 @@ interface BankListProps {
   onBankInfoChanged: (bankName: string) => void;
 }
 
-const BankList = ({ onClose, onBankInfoChanged }: BankListProps) => {
-  const bankNames = Object.keys(CONVERT_BANK_NAME);
+const bankNames = Object.keys(CONVERT_BANK_NAME);
 
+const BankList = ({ onClose, onBankInfoChanged }: BankListProps) => {
   return (
     <BottomSheet onClose={onClose}>
       <BankContainer>
