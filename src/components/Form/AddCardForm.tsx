@@ -15,6 +15,7 @@ import {
   CardBottomSheet,
   CardBottomSheetProps,
 } from 'components/common/BottomSheet/CardBottomSheet';
+import { PaymentsInputLabel } from 'components/common/Label/PaymentsInputLabel';
 
 export type AddCardFormProps = {
   onSubmit: (card: Card) => void;
@@ -106,10 +107,10 @@ export function AddCardForm({ onSubmit }: AddCardFormProps) {
         <CreditCard card={card} />
       </CardWrapper>
       <FormContainer onSubmit={handleSubmit}>
-        <InputLabel>카드 번호</InputLabel>
+        <PaymentsInputLabel required>카드 번호</PaymentsInputLabel>
         <CardNumberInputs valueAndOnChanges={valueAndOnChanges} />
 
-        <InputLabel>만료일</InputLabel>
+        <PaymentsInputLabel required>만료일</PaymentsInputLabel>
         <ExpirationDateInput
           month={{ value: month, onChange: handleMonthInputChange }}
           year={{ value: year, onChange: handleYearInputChange }}
@@ -117,15 +118,15 @@ export function AddCardForm({ onSubmit }: AddCardFormProps) {
         />
 
         <NameLabelContainer>
-          <InputLabel>카드 소유자 이름(선택)</InputLabel>
-          <InputLabel>{`${name.length} / 30`}</InputLabel>
+          <PaymentsInputLabel>카드 소유자 이름(선택)</PaymentsInputLabel>
+          <PaymentsInputLabel>{`${name.length} / 30`}</PaymentsInputLabel>
         </NameLabelContainer>
         <NameInput value={name} onChange={handleNameInputChange} />
 
-        <InputLabel>보안 코드(CVC/CVV)</InputLabel>
+        <PaymentsInputLabel required>보안 코드(CVC/CVV)</PaymentsInputLabel>
         <SecurityCodeInput value={securityCode} onChange={handleSecurityCodeChange} width="80px" />
 
-        <InputLabel>카드 비밀번호</InputLabel>
+        <PaymentsInputLabel required>카드 비밀번호</PaymentsInputLabel>
         <PasswordInputContainer>
           <PasswordInput
             first={{ value: firstDigit, onChange: handleFirstPasswordInputChange }}
@@ -151,15 +152,6 @@ const CardWrapper = styled.div`
 const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
-`;
-
-const InputLabel = styled.span`
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: -0.085em;
-  color: #525252;
-  margin-top: 19px;
-  margin-bottom: 3px;
 `;
 
 const PasswordInputContainer = styled.div`
