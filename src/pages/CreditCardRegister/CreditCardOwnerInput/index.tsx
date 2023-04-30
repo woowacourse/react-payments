@@ -40,6 +40,7 @@ function CreditCardOwnerInput() {
         textAlign="start"
         onChange={handleChangeOwner}
         maxLength={CREDIT_CARD_MAX_LENGTH.owner}
+        isValid={!errorMessage}
       />
     </InputLayout>
   );

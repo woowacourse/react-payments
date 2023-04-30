@@ -43,6 +43,7 @@ function CreditCardPasswordInput() {
           textAlign="center"
           onChange={handleChangeCreditCardFirstPassword}
           maxLength={CREDIT_CARD_LENGTH.password}
+          isValid={!errorMessage}
         />
         <Input
           type="password"
@@ -51,6 +52,7 @@ function CreditCardPasswordInput() {
           textAlign="center"
           onChange={handleChangeCreditCardSecondPassword}
           maxLength={CREDIT_CARD_LENGTH.password}
+          isValid={!errorMessage}
         />
         <S.PasswordBox>•</S.PasswordBox>
         <S.PasswordBox>•</S.PasswordBox>

@@ -43,6 +43,7 @@ function CreditCardCVCInput() {
           textAlign="center"
           onChange={handleChangeCreditCardCVC}
           maxLength={CREDIT_CARD_LENGTH.cvc}
+          isValid={!errorMessage}
         />
         <S.GuideLayout>
           <S.GuideIcon onMouseEnter={handleGuideIconMouseEnter} onMouseLeave={handleGuideIconMouseLeave}>

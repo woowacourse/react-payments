@@ -35,6 +35,7 @@ function CreditCardExpiryInput() {
         textAlign="center"
         onChange={handleChangeExpiry}
         maxLength={CREDIT_CARD_LENGTH.expiry}
+        isValid={!errorMessage}
       />
     </InputLayout>
   );

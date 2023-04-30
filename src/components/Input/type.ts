@@ -9,6 +9,7 @@ export type InputProps<T> = {
   onClick?: () => void;
   background?: string;
   underline?: boolean;
+  isValid?: boolean;
 };
 
 export type InputValueType = string | number | readonly string[] | undefined;
@@ -18,4 +19,5 @@ export type InputStyleProps = {
   textAlign: string;
   background?: string;
   underline: boolean;
+  isValid: boolean;
 };

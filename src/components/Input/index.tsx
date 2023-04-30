@@ -13,6 +13,7 @@ function Input<T extends InputValueType>({
   onClick,
   background,
   underline = false,
+  isValid = true,
 }: InputProps<T>) {
   return (
     <S.Input
@@ -26,6 +27,7 @@ function Input<T extends InputValueType>({
       onClick={onClick}
       placeholder={placeholder}
       maxLength={maxLength}
+      isValid={isValid}
     />
   );
 }
