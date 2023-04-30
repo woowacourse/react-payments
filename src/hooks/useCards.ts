@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import type { CardData } from '../types/card';
 
-const STORAGE_ID = 'payments-card';
+const STORAGE_ID = 'payments-cards';
 
 const useCards = () => {
   const [cards, setCards] = useState<CardData[]>([]);

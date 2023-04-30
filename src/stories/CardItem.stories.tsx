@@ -12,6 +12,7 @@ export default meta;
 type Story = StoryObj<typeof CardItem>;
 
 const DEFAULT_DATA = {
+  name: '카드',
   number: { first: '0000', second: '0000' },
   expiredDate: { month: '12', year: '24' },
 };

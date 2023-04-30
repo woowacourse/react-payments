@@ -25,7 +25,7 @@ export interface CardInfo {
 }
 
 export interface CardData {
-  name?: string;
+  name: string;
   company: CompanyName;
   number: Pick<CardNumber, 'first' | 'second'>;
   expiredDate: ExpiredDate;

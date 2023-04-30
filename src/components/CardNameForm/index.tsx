@@ -23,11 +23,13 @@ const CardNameForm = ({ registerCard }: Props) => {
   const handleNameFormSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
 
-    if (nameInputRef.current === null) {
+    if (nameInputRef.current === null || !company) {
       return;
     }
 
-    if (!company) {
+    if (nameInputRef.current.value === '') {
+      alert('카드 이름을 작성하지 않았습니다. 작성 후 다시 제출해주세요.');
+      nameInputRef.current.focus();
       return;
     }
 
