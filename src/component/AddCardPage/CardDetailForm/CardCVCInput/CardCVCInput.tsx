@@ -20,8 +20,15 @@ function CardCVCInput() {
             minLength={3}
             required
             ref={inputRef}
+            onInvalid={(e) => {
+              e.currentTarget.setCustomValidity("보안 코드 3자리를 입력해주세요.");
+            }}
             onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
-              e.currentTarget.validity.valid && focusNextInput();
+              const validity = e.currentTarget.validity;
+
+              !validity.tooShort && e.currentTarget.setCustomValidity("");
+
+              validity.valid && focusNextInput();
               changeCardCVC(e);
             }}
           />

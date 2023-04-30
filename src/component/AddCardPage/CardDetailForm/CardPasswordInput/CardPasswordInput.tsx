@@ -21,8 +21,15 @@ function CardPasswordInput() {
             minLength={1}
             required
             ref={inputRef}
+            onInvalid={(e) => {
+              e.currentTarget.setCustomValidity("비밀번호를 입력해주세요.");
+            }}
             onInput={(e) => {
-              e.currentTarget.validity.valid && focusNextInput();
+              const validity = e.currentTarget.validity;
+
+              !validity.tooShort && e.currentTarget.setCustomValidity("");
+
+              validity.valid && focusNextInput();
               changeCardPassword(e);
             }}
           />
@@ -34,7 +41,16 @@ function CardPasswordInput() {
             value={cardPassword[1]}
             minLength={1}
             required
-            onInput={changeCardPassword}
+            onInvalid={(e) => {
+              e.currentTarget.setCustomValidity("비밀번호를 입력해주세요.");
+            }}
+            onInput={(e) => {
+              const validity = e.currentTarget.validity;
+
+              !validity.tooShort && e.currentTarget.setCustomValidity("");
+
+              changeCardPassword(e);
+            }}
           />
         </St.InputSection>
 

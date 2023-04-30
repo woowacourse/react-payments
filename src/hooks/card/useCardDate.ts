@@ -12,25 +12,21 @@ function useCardDate() {
 
     const expirationDate = dateString.match(/.{1,2}/g);
 
-    e.currentTarget.setCustomValidity(
-      expirationDate && isValid(expirationDate[0], expirationDate[1])
-        ? ""
-        : "올바른 유효 기간을 입력해야 합니다."
-    );
-
     const resultDate = expirationDate ? expirationDate.join("/") : "";
 
     setCardDate(resultDate);
   };
 
-  const isValid = (MM: string, YY: string) => {
+  const isValid = (date: string) => {
+    const [MM, YY] = date.split("/");
+
     if (!MM || +MM < 1 || +MM > 12) return false;
-    if (!YY || +YY < 23) return false;
+    if (!YY || YY.length < 2) return false;
 
     return true;
   };
 
-  return { cardDate, changeCardDate };
+  return { cardDate, changeCardDate, isValid };
 }
 
 export default useCardDate;

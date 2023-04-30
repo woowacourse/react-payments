@@ -45,7 +45,15 @@ function AddCardResultPage({ addCreditCard }: AddCardResultPageProps) {
           maxLength={10}
           required
           placeholder="카드 별칭"
-          onChange={changeCardAlias}
+          onInvalid={(e) => {
+            e.currentTarget.setCustomValidity("별칭을 입력해주세요.");
+          }}
+          onChange={(e) => {
+            !e.currentTarget.validity.tooShort &&
+              e.currentTarget.setCustomValidity("");
+
+            changeCardAlias(e);
+          }}
         ></St.CardAlias>
         <St.SubmitButton type="submit" value={"확인"} />
       </St.CardAliasForm>

@@ -5,7 +5,7 @@ import useCardNumber from "../../../../hooks/card/useCardNumber";
 import useInputRef from "../../../../hooks/useInputRef";
 
 function CardNumberInput() {
-  const { displayNumber, changeCardNumber } = useCardNumber();
+  const { displayNumber, changeCardNumber, isValid } = useCardNumber();
 
   const { inputRef, focusNextInput } = useInputRef();
 
@@ -19,8 +19,15 @@ function CardNumberInput() {
           required
           value={displayNumber}
           ref={inputRef}
+          onInvalid={(e) => {
+            e.currentTarget.setCustomValidity("카드 번호를 입력해주세요.");
+          }}
           onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
-            !e.currentTarget.validity.tooShort && focusNextInput();
+            e.currentTarget.setCustomValidity(
+              isValid(e.currentTarget.value) ? "" : "카드 번호는 16자 이어야 합니다."
+            );
+
+            isValid(e.currentTarget.value) && focusNextInput();
             changeCardNumber(e);
           }}
         />

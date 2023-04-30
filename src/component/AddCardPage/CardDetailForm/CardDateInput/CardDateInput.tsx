@@ -4,7 +4,7 @@ import useCardDate from "../../../../hooks/card/useCardDate";
 import useInputRef from "../../../../hooks/useInputRef";
 
 function CardDateInput() {
-  const { cardDate, changeCardDate } = useCardDate();
+  const { cardDate, changeCardDate, isValid } = useCardDate();
 
   const { inputRef, focusNextInput } = useInputRef();
 
@@ -19,8 +19,15 @@ function CardDateInput() {
           required
           placeholder="MM/YY"
           ref={inputRef}
+          onInvalid={(e) => {
+            e.currentTarget.setCustomValidity("올바른 유효 기간을 입력해주세요.");
+          }}
           onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
-            !e.currentTarget.validity.tooShort && focusNextInput();
+            e.currentTarget.setCustomValidity(
+              isValid(e.currentTarget.value) ? "" : "MM,YY 순으로 입력해주세요."
+            );
+
+            isValid(e.currentTarget.value) && focusNextInput();
             changeCardDate(e);
           }}
         ></St.Input>

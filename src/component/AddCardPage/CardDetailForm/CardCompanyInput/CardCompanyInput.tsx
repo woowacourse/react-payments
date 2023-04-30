@@ -29,6 +29,11 @@ function CardCompanyInput() {
             e.currentTarget.blur();
             openModal();
           }}
+          onInvalid={(e) => {
+            e.currentTarget.setCustomValidity(
+              cardCompany ? "" : "카드사를 선택해주세요."
+            );
+          }}
         ></St.Input>
       </St.InputSection>
       {isModalOpen ? <CardCompanyModal closeModal={closeModal} /> : null}
