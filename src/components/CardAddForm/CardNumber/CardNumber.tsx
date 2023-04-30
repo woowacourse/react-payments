@@ -18,8 +18,6 @@ const CardNumber = ({ isError, updateInputValue, updateInputError }: CardNumberP
   const { handleInputValueChange } = useCardNumber();
   const cardNumberRef = useRef('');
 
-  console.log('rendering CardNumber');
-
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     handleInputValueChange(event, cardNumberRef);
     updateInputValue('cardNumber', formatNumber(cardNumberRef.current));
