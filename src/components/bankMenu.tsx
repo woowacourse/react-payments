@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import { BCIc } from "../assets";
 import { ModalContext } from "../contexts/modal";
 import { bank } from "../core/bank";
 import { BankItem } from "./bankItem";
