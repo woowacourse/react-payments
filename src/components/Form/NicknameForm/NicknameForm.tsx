@@ -7,7 +7,7 @@ import { useCardInfoActions, useCardInfoValue } from '../../../context/CardInfoC
 import { useCardListActions } from '../../../context/CardListContext';
 import useForm from '../../../hooks/useForm';
 
-import { Input } from '../../Form';
+import { Input } from '../../';
 
 const NicknameForm = () => {
   const navigate = useNavigate();

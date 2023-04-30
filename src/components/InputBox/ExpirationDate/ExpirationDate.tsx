@@ -1,6 +1,6 @@
 import * as styled from './ExpirationDate.styled';
 
-import { InputBoxProps } from '../../../../types/InputBox';
+import { InputBoxProps } from '../../../types/InputBox';
 
 const ExpirationDate = ({ children, error }: InputBoxProps) => {
   return (

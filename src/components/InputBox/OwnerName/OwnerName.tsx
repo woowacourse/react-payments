@@ -1,6 +1,6 @@
 import * as styled from './OwnerName.styled';
 
-import { InputBoxProps } from '../../../../types/InputBox';
+import { InputBoxProps } from '../../../types/InputBox';
 
 interface OwnerNameProps extends InputBoxProps {
   ownerName: string;

@@ -1,6 +1,6 @@
 import * as styled from './Password.styled';
 
-import { InputBoxProps } from '../../../../types/InputBox';
+import { InputBoxProps } from '../../../types/InputBox';
 
 const Password = ({ children, error }: InputBoxProps) => {
   return (

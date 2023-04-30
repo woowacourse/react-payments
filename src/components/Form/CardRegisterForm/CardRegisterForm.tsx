@@ -3,7 +3,8 @@ import * as styled from './CardRegisterForm.styled';
 import { useCardInfoActions, useCardInfoValue } from '../../../context/CardInfoContext';
 import useForm from '../../../hooks/useForm';
 
-import { CardNumbers, ExpirationDate, Input, OwnerName, Password, SecurityNumbers } from '../';
+import { Input } from '../../';
+import { CardNumbers, ExpirationDate, OwnerName, Password, SecurityNumbers } from '../../InputBox';
 
 import validator from '../../../domain/validator';
 import { useEffect, useRef } from 'react';

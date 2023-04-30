@@ -1,6 +1,6 @@
 import * as styled from './SecurityNumbers.styled';
 
-import { InputBoxProps } from '../../../../types/InputBox';
+import { InputBoxProps } from '../../../types/InputBox';
 
 const SecurityNumbers = ({ children, error }: InputBoxProps) => {
   return (

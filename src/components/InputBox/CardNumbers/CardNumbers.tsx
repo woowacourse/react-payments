@@ -1,6 +1,6 @@
 import * as styled from './CardNumbers.styled';
 
-import { InputBoxProps } from '../../../../types/InputBox';
+import { InputBoxProps } from '../../../types/InputBox';
 
 const CardNumbers = ({ children, error }: InputBoxProps) => {
   return (
