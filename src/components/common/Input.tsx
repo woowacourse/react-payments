@@ -32,7 +32,6 @@ export default function Input({
   showError,
   ...rest
 }: InputProps) {
-  console.log(shape);
   return (
     <StyledInput
       textAlign={textAlign}
