@@ -1,4 +1,5 @@
 type CardInformation = {
+  id: number;
   cardType: CardType;
   cardNumber: [string, string, string, string];
   expirationDate: [string, string];

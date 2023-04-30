@@ -1,11 +1,12 @@
 import CardRegistrationForm from '../../components/CardRegistrationForm';
 
 type CardRegistrationProps = {
-  setPageCardList: () => void;
+  setPageCardAlias: () => void;
+  setCurrentId: React.Dispatch<React.SetStateAction<number>>;
 };
 
-const CardRegistration = ({ setPageCardList }: CardRegistrationProps) => {
-  return <CardRegistrationForm setPageCardList={setPageCardList} />;
+const CardRegistration = ({ setPageCardAlias, setCurrentId }: CardRegistrationProps) => {
+  return <CardRegistrationForm setPageCardAlias={setPageCardAlias} setCurrentId={setCurrentId} />;
 };
 
 export default CardRegistration;

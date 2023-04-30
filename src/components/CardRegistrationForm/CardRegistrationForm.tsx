@@ -11,10 +11,11 @@ import type { CardInformation } from '../../domain/types/card';
 import { useCardListContext } from '../../contexts/CardListContexts';
 
 type CardRegistrationFormProps = {
-  setPageCardList: () => void;
+  setPageCardAlias: () => void;
+  setCurrentId: React.Dispatch<React.SetStateAction<number>>;
 };
 
-const CardRegistrationForm = ({ setPageCardList }: CardRegistrationFormProps) => {
+const CardRegistrationForm = ({ setPageCardAlias, setCurrentId }: CardRegistrationFormProps) => {
   const [cardNumber, setCardNumber] = useState<CardInformation['cardNumber']>(['', '', '', '']);
   const [expirationDate, setExpirationDate] = useState<CardInformation['expirationDate']>(['', '']);
   const [owner, setOwner] = useState<CardInformation['owner']>('');
@@ -34,8 +35,11 @@ const CardRegistrationForm = ({ setPageCardList }: CardRegistrationFormProps) =>
   const onSubmitCard: React.FormEventHandler = (e) => {
     e.preventDefault();
 
-    setCardList((prev) => [...prev, { cardNumber, expirationDate, owner, cardType: '우리카드' }]);
-    setPageCardList();
+    const newId = Date.now();
+
+    setCurrentId(newId);
+    setCardList((prev) => [...prev, { id: newId, cardNumber, expirationDate, owner, cardType: '우리카드' }]);
+    setPageCardAlias();
   };
 
   return (
