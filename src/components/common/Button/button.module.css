@@ -1,0 +1,25 @@
+.button {
+  color: var(--text-primary);
+  border-radius: 4px;
+}
+
+.button.default {
+  height: 30px;
+}
+
+.button.card {
+  width: 213px;
+  height: 133px;
+}
+
+.button.white {
+  background: var(--background-white);
+}
+
+.button.gray {
+  background: var(--gray-e);
+}
+
+.button.padding {
+  padding: 0 10px;
+}

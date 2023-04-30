@@ -6,13 +6,5 @@
 }
 
 .submitButton {
-  height: 34px;
   margin-left: auto;
-}
-
-.submitButton > button {
-  width: 50px;
-  height: 100%;
-  font-weight: 500;
-  background: transparent;
 }

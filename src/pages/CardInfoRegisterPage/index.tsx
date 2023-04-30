@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 
 import Header from '../../components/common/Header';
 import CardItem from '../../components/CardItem';
+import Button from '../../components/common/Button';
 import CardRegisterForm from '../../components/CardRegisterForm';
 import CardCompanyModal from '../../components/CardCompanyModal';
 
@@ -22,13 +23,11 @@ const CardInfoRegisterPage = () => {
       <main className={styles.main}>
         <section className={styles.cardSection}>
           <CardItem />
-          <button
-            type="button"
-            className={styles.companySelectButton}
-            onClick={openModal}
-          >
-            카드사 설정하기
-          </button>
+          <div className={styles.companySelectButton}>
+            <Button type="button" onClick={openModal} padding>
+              카드사 설정하기
+            </Button>
+          </div>
         </section>
         <section className={styles.formSection}>
           <CardRegisterForm />

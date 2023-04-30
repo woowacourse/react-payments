@@ -7,6 +7,7 @@ import ExpiredDateField from './ExpiredDataField';
 import OwnerField from './OwnerField';
 import CvcField from './CvcField';
 import PasswordField from './PasswordField';
+import Button from '../common/Button';
 
 import useCardRegisterForm from './hooks/useCardRegisterForm';
 import useCardFormValidation from './hooks/useCardFormValidation';
@@ -56,7 +57,11 @@ const CardRegisterForm = () => {
         inputRefs={inputRefs}
       />
       <div className={styles.submitButton}>
-        {isValidCardData && <button tabIndex={11}>다음</button>}
+        {isValidCardData && (
+          <Button tabIndex={11} padding>
+            다음
+          </Button>
+        )}
       </div>
     </form>
   );
