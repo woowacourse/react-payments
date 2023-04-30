@@ -1,19 +1,9 @@
 import { CardChipIcon } from '../../assets/images';
+import { COMPANY_INFO } from '../../constants/company';
 import useCardFormValue from '../../hooks/useCardFormValue';
 import type { CardData } from '../../types/card';
 
 import styles from './cardItem.module.css';
-
-const COMPANY_NAME = {
-  BC카드: 'bc',
-  신한카드: 'shinhan',
-  카카오뱅크: 'kakaobank',
-  현대카드: 'hyundai',
-  우리카드: 'woori',
-  롯데카드: 'lotte',
-  하나카드: 'hana',
-  국민카드: 'kb',
-};
 
 interface Props {
   cardData?: CardData;
@@ -26,7 +16,7 @@ const CardItem = ({ cardData }: Props) => {
   return (
     <div
       className={`${styles.container} ${
-        company ? styles[COMPANY_NAME[company]] : ''
+        company ? styles[COMPANY_INFO[company].className] : ''
       }`}
     >
       <p className={styles.company}>{company ?? ''}</p>
