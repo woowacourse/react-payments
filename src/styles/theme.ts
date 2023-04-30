@@ -31,6 +31,7 @@ function FONT({ weight, size, lineHeight }: FontType): string {
 }
 
 const fonts: StyleType = {
+  title: FONT({ weight: 400, size: 2.4, lineHeight: 1.8 }),
   h1: FONT({ weight: 400, size: 1.6, lineHeight: 1.8 }),
   h2: FONT({ weight: 400, size: 1.4, lineHeight: 1.6 }),
   body: FONT({ weight: 500, size: 1.8, lineHeight: 2.1 }),
