@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { CONVERT_BANK_NAME } from '../../utils/Constants';
+import { useState } from 'react';
 
 interface BankItemProps {
   bankName: string;
@@ -8,6 +9,12 @@ interface BankItemProps {
 }
 
 const BankItem = ({ bankName, onClose, onBankInfoChanged }: BankItemProps) => {
+  const [isError, setIsError] = useState(false);
+
+  const handleImageError = () => {
+    setIsError(true);
+  };
+
   const handleBankName = () => {
     onBankInfoChanged(bankName);
     onClose();
@@ -16,10 +23,16 @@ const BankItem = ({ bankName, onClose, onBankInfoChanged }: BankItemProps) => {
   return (
     <BankItemContainer>
       <BankButton onClick={handleBankName}>
-        <BankImage
-          src={`images/${CONVERT_BANK_NAME[bankName]}.png`}
-          alt={bankName}
-        />
+        {isError ? (
+          <ErrorEmoji>🏦</ErrorEmoji>
+        ) : (
+          <BankImage
+            src={`images/${CONVERT_BANK_NAME[bankName]}.png`}
+            alt={bankName}
+            onError={handleImageError}
+            loading='lazy'
+          />
+        )}
       </BankButton>
       <span>{bankName}</span>
     </BankItemContainer>
@@ -52,4 +65,9 @@ const BankImage = styled.img`
     transition: all 200ms ease-in-out;
   }
 `;
+
+const ErrorEmoji = styled.span`
+  font-size: 37px;
+`;
+
 export default BankItem;
