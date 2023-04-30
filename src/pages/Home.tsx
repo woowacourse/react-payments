@@ -16,7 +16,9 @@ function Home() {
       <PageContainer>
         <Header text={'보유카드'} />
         <CardContainer>
-          {CardDB.getCards().length ? '' : <AddMsgSpan>{'새로운 카드를 등록해주세요'}</AddMsgSpan>}
+          {CardDB.getCards().length ? null : (
+            <AddMsgSpan>{'새로운 카드를 등록해주세요'}</AddMsgSpan>
+          )}
           {CardDB.getCards().map((card) => (
             <CardWrapper>
               <CreditCard card={card} />
