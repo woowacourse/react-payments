@@ -1,27 +1,24 @@
 import { useNavigate } from 'react-router-dom';
-import { CardDB } from 'db/Cards';
 import styled from 'styled-components';
 import { CreditCard, Header } from 'components/common';
 import { PageContainer } from 'components/style/PageContainer';
-import { Fragment, useEffect, useState } from 'react';
-import { Card } from 'components/common/Card/types';
+import { Fragment } from 'react';
+import { useUserCards } from 'contexts/UserCardProvider';
 
 function Home() {
-  const [cards, setCards] = useState<Card[]>(CardDB.getCards());
+  const [userCards] = useUserCards();
   const navigate = useNavigate();
 
   const goRegister = () => {
     navigate('/register');
   };
 
-  useEffect(() => {}, [cards]);
-
   return (
     <PageContainer>
       <Header text={'보유카드'} />
       <CardContainer>
-        {cards.length <= 0 && <Text>새로운 카드를 등록해주세요</Text>}
-        {cards.map((card) => (
+        {userCards.length <= 0 && <Text>새로운 카드를 등록해주세요</Text>}
+        {userCards.map((card) => (
           <Fragment>
             <CreditCard card={card} />
             <CardNickName>{card.nickName}</CardNickName>

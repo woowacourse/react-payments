@@ -1,12 +1,12 @@
 import { Card } from 'components/common/Card/types';
 import { AddCardNickNameForm } from 'components/Form/AddCardNickNameForm';
 import { PageContainer } from 'components/style/PageContainer';
-import { CardDB } from 'db/Cards';
-import { useEffect } from 'react';
+import { useUserCards } from 'contexts/UserCardProvider';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const RegisterCardNickName = () => {
+  const [, { addCard }] = useUserCards();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -15,7 +15,7 @@ export const RegisterCardNickName = () => {
   };
 
   const handleCardNickNameSubmit = (card: Card) => {
-    CardDB.registerCard(card);
+    addCard(card);
     goHome();
   };
 
