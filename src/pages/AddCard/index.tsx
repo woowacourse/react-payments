@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useCardPaymentState } from '../../../hooks/useContextHooks';
-import CardItem from '../../molecules/CardItem';
-import Header from '../../molecules/Header';
-import CardForm from '../../organisms/CardForm';
+import { useCardPaymentState } from '../../hooks/useContextHooks';
+import CardItem from '../../components/molecules/CardItem';
+import Header from '../../components/molecules/Header';
+import CardForm from '../../components/organisms/CardForm';
 
 const AddCard: React.FC = () => {
   const card = useCardPaymentState();

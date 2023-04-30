@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import PaymentProvider from './components/context/PaymentsProvider';
 
-import MyCard from './components/pages/MyCard';
-import AddCard from './components/pages/AddCard';
+import MyCard from './pages/MyCard';
+import AddCard from './pages/AddCard';
 
 import CardListProvider from './components/context/CardListProvider';
 
