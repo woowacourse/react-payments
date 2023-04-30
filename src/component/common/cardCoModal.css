@@ -5,6 +5,7 @@
   position: fixed;
   bottom: 0;
   left: 0;
+  margin: 0;
 
   border-radius: 7px 7px 0 0;
 
@@ -17,9 +18,11 @@
 
   padding: 50px 10%;
 
-  row-gap: 30px;
-
   min-width: 375px;
+}
+
+.cardCo-button-container > * {
+  margin-bottom: 30px;
 }
 
 .cardCo-modal-background {

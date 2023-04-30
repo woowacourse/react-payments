@@ -1,19 +1,23 @@
 .card-nick-input-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  margin-top: 40%;
-  height: 100vw;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(8, 1fr);
+  height: 100%;
+  justify-items: center;
 }
 
 .card-nick-input-direction {
-  margin-top: 20%;
   font-size: larger;
+  grid-row: 3/4;
 }
 
 .card-nick-input-next-button-container {
   display: block;
-  align-self: end;
+  width: 100%;
+
+  grid-row: -2/-1;
+}
+
+.nick-input-section-card-preview {
+  grid-row: 4/5;
 }

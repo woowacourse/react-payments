@@ -7,12 +7,14 @@ interface CardPreviewProps {
   card: CreditCard;
   style?: object;
   openCardCoModal?: () => void;
+  className?: string;
 }
 
 export default function CardPreview({
   card,
   openCardCoModal,
   style,
+  className,
 }: CardPreviewProps) {
   const { cardCo, cardNumber, expirationDate, owner } = card;
 
@@ -28,7 +30,7 @@ export default function CardPreview({
 
   return (
     <div
-      className="card-preview-container"
+      className={`card-preview-container ${className}`}
       onClick={openCardCoModal}
       style={{ ...{ backgroundColor: backgroundColor }, ...style }}
     >

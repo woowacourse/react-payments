@@ -23,13 +23,17 @@ export default function CardNickInputPage({
   return (
     <section className="card-nick-input-section">
       <p className="card-nick-input-direction">카드 등록이 완료되었습니다</p>
-      <CardPreview card={card} style={{ cursor: "initial", margin: "0" }} />
+      <CardPreview
+        className="nick-input-section-card-preview"
+        card={card}
+        style={{ cursor: "initial", margin: "0" }}
+      />
       <InputBoxNick submitNickAndSetCard={submitNickAndSetCard} />
       <Link
         to="/CardListPage"
         className="card-nick-input-next-button-container"
       >
-        <Button>확인</Button>
+        <Button style={{ float: "right" }}>확인</Button>
       </Link>
     </section>
   );

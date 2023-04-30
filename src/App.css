@@ -3,8 +3,10 @@
   width: 50%;
   min-width: 375px;
 
-  min-height: 820px;
+  height: 100vh;
   padding: 1% 3%;
+
+  overflow-y: scroll;
 
   background-color: white;
 }
