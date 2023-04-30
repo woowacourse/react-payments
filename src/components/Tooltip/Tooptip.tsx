@@ -13,8 +13,9 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 export function Tooltip({ designType = 'basic', message, children, ...props }: Props) {
   return (
     <Style.Container>
-      <Style.Button type='button' aria-label='Tooltip' role='tooltip'>
-        ?<Style.Content className='tooltipText'>{message}</Style.Content>
+      <Style.Button type='button' aria-disabled='true'>
+        <span aria-hidden='true'>?</span>
+        <Style.Content className='tooltipText'>{message}</Style.Content>
       </Style.Button>
     </Style.Container>
   );
@@ -47,6 +48,7 @@ const Style = {
 
     cursor: pointer;
 
+    &:focus > .tooltipText,
     &:hover > .tooltipText,
     &:active > .tooltipText {
       display: block;

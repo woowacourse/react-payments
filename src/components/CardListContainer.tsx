@@ -27,7 +27,9 @@ export function CardListContainer() {
             </Fragment>
           );
         })}
-        <Style.AddCardButton onClick={() => navigate('/register')}>+</Style.AddCardButton>
+        <Style.AddCardButton aria-label='카드 추가' onClick={() => navigate('/register')}>
+          <span aria-hidden='true'>+</span>
+        </Style.AddCardButton>
       </Style.CardListContainer>
     </>
   );
