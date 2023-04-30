@@ -40,6 +40,15 @@ const CardWrapper = styled.div`
   gap: 46px;
 `;
 
+const NickName = styled.h4`
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  color: #383737;
+  opacity: 0.9;
+  margin-top: -24px;
+`;
+
 export default function Homepage({ onClick, cardList }: HomePageProps) {
   useResetCardContext();
 
@@ -50,17 +59,22 @@ export default function Homepage({ onClick, cardList }: HomePageProps) {
         <AddInformation>새로운 카드를 등록해주세요.</AddInformation>
       )}
       <CardWrapper>
-        {cardList.map((card: CardInfo) => (
-          <Card
-            type="homepage"
-            cardColor={CARD_COMPANYS[card.cardTitle].backgroundColor}
-            cardTitle={CARD_COMPANYS[card.cardTitle].title}
-            key={`${card.cardNumber.fourth}${card.cardNumber.third}${card.cardNumber.fourth}`}
-            owner={card.owner}
-            cardNumberSet={Object.values(card.cardNumber)}
-            expiracy={`${card.expiracy.month}/${card.expiracy.year}`}
-          />
+        {cardList.map((card) => (
+          <>
+            <Card
+              type="homepage"
+              cardColor={CARD_COMPANYS[card.cardTitle].backgroundColor}
+              cardTitle={CARD_COMPANYS[card.cardTitle].title}
+              key={`${card.cardNumber.fourth}${card.cardNumber.third}${card.cardNumber.fourth}`}
+              owner={card.owner}
+              cardNumberSet={Object.values(card.cardNumber)}
+              expiracy={`${card.expiracy.month}/${card.expiracy.year}`}
+            />
+
+            <NickName>{card.nickName}</NickName>
+          </>
         ))}
+
         <AddCardButton onClick={onClick} />
       </CardWrapper>
     </Page>

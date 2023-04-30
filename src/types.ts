@@ -11,9 +11,10 @@ export interface CardInfo {
     year: string;
   }
   owner: string;
-  cvc: string;
-  password: {
+  cvc?: string;
+  password?: {
     first: string;
     second: string;
   }
+  nickName?: string;
 }

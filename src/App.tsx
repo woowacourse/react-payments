@@ -7,6 +7,7 @@ import { useLocalStorage } from "./hooks/useLocalStorage";
 import "./styles/index.css";
 import { CardInfo } from "./types";
 import { DrawerContextProvider } from "./context/DrawerContext";
+import AddNicknamePage from "./components/Page/AddNicknamePage";
 
 export default function App() {
   const [pageIndex, setPageIndex] = useState(0);
@@ -14,7 +15,6 @@ export default function App() {
     [],
     LOCAL_STORAGE_CARD_KEY
   );
-  const { title } = useCardState();
   const cardAction = useCardAction();
 
   const onCardInfoSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -32,28 +32,9 @@ export default function App() {
       firstPassword,
       secondPassword,
     } = event.currentTarget;
-    const newCard: CardInfo = {
-      cardTitle: title,
-      cardNumber: {
-        fisrt: firstCardNumber.value,
-        second: secondCardNumber.value,
-        third: thirdCardNumber.value,
-        fourth: fourthCardNumber.value,
-      },
-      expiracy: {
-        month: month.value,
-        year: year.value,
-      },
-      owner: owner.value,
-      cvc: cvc.value,
-      password: {
-        first: firstPassword.value,
-        second: secondPassword.value,
-      },
-    };
 
-    const updatedCardList = [...cardList, newCard];
-    setCardList(updatedCardList);
+    // const updatedCardList = [...cardList, newCard];
+    // setCardList(updatedCardList);
     cardAction({
       type: "UPDATE_CARD_CONTEXT",
       cardNumber: {
@@ -73,7 +54,7 @@ export default function App() {
         second: secondPassword.value,
       },
     });
-    setPageIndex(0);
+    setPageIndex(2);
   };
 
   return (
@@ -86,6 +67,13 @@ export default function App() {
           <AddCardPage
             onClick={() => setPageIndex(0)}
             onSubmit={onCardInfoSubmit}
+          />
+        )}
+        {pageIndex === 2 && (
+          <AddNicknamePage
+            cardList={cardList}
+            setCardList={setCardList}
+            setPageIndex={setPageIndex}
           />
         )}
       </DrawerContextProvider>
