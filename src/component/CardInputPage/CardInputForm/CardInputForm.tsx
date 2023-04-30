@@ -19,6 +19,7 @@ interface CardInputFormProps {
 }
 
 const initialCard: CreditCard = {
+  nickName: "",
   owner: "",
   expirationDate: "",
   cardCo: "woori",

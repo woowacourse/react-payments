@@ -5,6 +5,7 @@ import CardPreview from "../common/CardPreview";
 import "./cardNickInputPage.css";
 
 const ex: CreditCard = {
+  nickName: "",
   owner: "JJJJ",
   expirationDate: "12/23",
   cardCo: "woori",
@@ -18,7 +19,7 @@ export default function CardListPage() {
     <section className="card-nick-input-section">
       <p className="card-nick-input-direction">카드 등록이 완료되었습니다</p>
       <CardPreview card={ex} style={{ cursor: "initial", margin: "0" }} />
-      <input className="card-nick-input" />
+      <input className="card-nick-input" placeholder={ex.nickName} />
       <Link
         to="/CardListPage"
         className="card-nick-input-next-button-container"

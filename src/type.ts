@@ -1,5 +1,6 @@
 export interface CreditCard {
   cardCo: CardCo;
+  nickName: string;
   cardNumber: number[];
   expirationDate: string;
   owner: string;
