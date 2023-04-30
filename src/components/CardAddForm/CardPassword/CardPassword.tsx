@@ -5,6 +5,7 @@ import Input from '../../common/Input/Input';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
 import { PASSWORD_UNIT_MAX_LENGTH, SECURITY_TEXT_ICON } from '../../../constants';
+import { PATTERN } from '../../../constants/input';
 import { formatNumber } from '../../../utils/formatter';
 import styles from './style.module.css';
 
@@ -63,7 +64,7 @@ const CardPassword = ({ isError, updateInputValue, updateInputError }: CardPassw
             maxLength={PASSWORD_UNIT_MAX_LENGTH}
             autoComplete="off"
             inputMode="numeric"
-            pattern="^\d$"
+            pattern={PATTERN.PASSWORD}
             required
             aria-labelledby={index === 0 ? undefined : 'password-label'}
             isError={isError}

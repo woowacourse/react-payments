@@ -5,6 +5,7 @@ import Input from '../../common/Input/Input';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
 import { SECURITY_CODE_MAX_LENGTH, SECURITY_CODE_MIN_LENGTH } from '../../../constants';
+import { PATTERN } from '../../../constants/input';
 import { formatNumber } from '../../../utils/formatter';
 
 interface CardSecurityCodeProps {
@@ -46,7 +47,7 @@ const CardSecurityCode = ({
         maxLength={SECURITY_CODE_MAX_LENGTH}
         autoComplete="cc-csc"
         inputMode="numeric"
-        pattern="^\d{3,4}$"
+        pattern={PATTERN.SECURITY_CODE}
         required
         isError={isError}
         onChange={onChange}

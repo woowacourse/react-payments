@@ -5,6 +5,7 @@ import Input from '../../common/Input/Input';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
 import { EXPIRATION_DATE_INPUT_MAX_LENGTH } from '../../../constants';
+import { PATTERN } from '../../../constants/input';
 import { formatDisplayedExpirationDate, formatExpirationDate } from '../../../utils/formatter';
 
 interface CardExpirationDateProps {
@@ -45,7 +46,7 @@ const CardExpirationDate = ({
         maxLength={EXPIRATION_DATE_INPUT_MAX_LENGTH}
         autoComplete="cc-exp"
         inputMode="numeric"
-        pattern="^(0[1-9]|1[0-2])\/(2[3-8]|[4-9][0-9])$"
+        pattern={PATTERN.EXPIRATION_DATE}
         required
         isError={isError}
         onChange={onChange}

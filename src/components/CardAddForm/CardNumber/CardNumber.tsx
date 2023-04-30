@@ -6,6 +6,7 @@ import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
 import { useCardNumber } from '../../../hooks/cards/useCardNumber';
 import { CARD_NUMBER_INPUT_MAX_LENGTH } from '../../../constants';
+import { PATTERN } from '../../../constants/input';
 import { formatNumber } from '../../../utils/formatter';
 
 interface CardNumberProps {
@@ -45,7 +46,7 @@ const CardNumber = ({ isError, updateInputValue, updateInputError }: CardNumberP
         maxLength={CARD_NUMBER_INPUT_MAX_LENGTH}
         autoComplete="cc-number"
         inputMode="numeric"
-        pattern="^\d{4} \d{4} •{4} •{4}$"
+        pattern={PATTERN.CARD_NUMBER}
         required
         isError={isError}
         onChange={onChange}
