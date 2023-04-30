@@ -4,7 +4,7 @@ import Header from '../components/common/Header';
 import { BrowserRouter } from 'react-router-dom';
 
 const meta: Meta<typeof Header> = {
-  title: 'Example/Header',
+  title: 'components/common/Header',
   component: Header,
 };
 

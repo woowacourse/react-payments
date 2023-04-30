@@ -4,7 +4,7 @@ import TextField from '../components/common/TextField';
 import Input from '../components/common/Input';
 
 const meta: Meta<typeof TextField> = {
-  title: 'Example/TextField',
+  title: 'components/common/TextField',
   component: TextField,
 };
 

@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import CompanyItem from '../components/CardCompanyModal/CompanyItem';
 
 const meta: Meta<typeof CompanyItem> = {
-  title: 'Example/CompanyItem',
+  title: 'components/CompanyItem',
   component: CompanyItem,
   tags: ['autodocs'],
 };
