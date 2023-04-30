@@ -14,6 +14,7 @@ const St = {
   Container: styled.div`
     position: fixed;
     bottom: 0;
+    left: 0;
     max-height: 90%;
     width: 100%;
 
