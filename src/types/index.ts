@@ -1,4 +1,4 @@
-import { CARD_ISSUERS } from '../constants';
+import type { CARD_ISSUERS } from '../constants';
 
 interface SupportingTextMessage {
   default?: string;
