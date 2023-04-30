@@ -47,11 +47,31 @@ const CardRegistrationForm = ({ setPageCardAlias, setCurrentId }: CardRegistrati
       <Styled.CardWrapper>
         <Card cardType="우리카드" owner={owner} cardNumber={cardNumber} expirationDate={expirationDate} />
       </Styled.CardWrapper>
-      <CardNumberInput onChange={onChangeCardNumber} />
-      <ExpirationDateInput onChange={onChangeExpiraiontDate} />
-      <CardOwnerInput owner={owner} onChange={(e) => setOwner(e.target.value)} />
-      <SecurityCodeInput />
-      <CardPasswordInput />
+
+      <InputGroup>
+        <CardNumberInput onChange={onChangeCardNumber} />
+        <ErrorMessage>test error</ErrorMessage>
+      </InputGroup>
+
+      <InputGroup>
+        <ExpirationDateInput onChange={onChangeExpiraiontDate} />
+        <ErrorMessage>test error</ErrorMessage>
+      </InputGroup>
+
+      <InputGroup>
+        <CardOwnerInput owner={owner} onChange={(e) => setOwner(e.target.value)} />
+        <ErrorMessage>test error</ErrorMessage>
+      </InputGroup>
+
+      <InputGroup>
+        <SecurityCodeInput />
+        <ErrorMessage>test error</ErrorMessage>
+      </InputGroup>
+
+      <InputGroup>
+        <CardPasswordInput />
+        <ErrorMessage>test error</ErrorMessage>
+      </InputGroup>
       <SubmitButton>다음</SubmitButton>
     </Styled.FormWrapper>
   );
@@ -84,8 +104,21 @@ const SubmitButton = styled.button`
   }
 `;
 
+const InputGroup = styled.p`
+  position: relative;
+`;
+
+const ErrorMessage = styled.div`
+  position: absolute;
+  top: 100%;
+
+  font-size: 14px;
+  color: red;
+`;
+
 const Styled = {
   FormWrapper,
   CardWrapper,
   SubmitButton,
+  ErrorMessage,
 };

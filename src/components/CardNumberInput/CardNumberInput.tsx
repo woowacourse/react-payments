@@ -10,7 +10,7 @@ const CardNumberInput = ({ onChange }: CardNumberInputProps) => {
   const [onFirstChange, onSecondChange, onThirdChange, onFourthChange] = onChange;
 
   return (
-    <p>
+    <>
       <Label htmlFor="CardNumber">카드 번호</Label>
       <Styled.Box marginTop="10px">
         <Input
@@ -54,7 +54,7 @@ const CardNumberInput = ({ onChange }: CardNumberInputProps) => {
           onChange={onFourthChange}
         />
       </Styled.Box>
-    </p>
+    </>
   );
 };
 

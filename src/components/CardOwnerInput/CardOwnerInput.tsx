@@ -9,7 +9,7 @@ type CardOwnerInputProps = {
 
 const CardOwnerInput = ({ owner, onChange }: CardOwnerInputProps) => {
   return (
-    <p>
+    <>
       <Styled.LabelWrapper>
         <Label htmlFor="owner">카드 소유자 이름 (선택)</Label>
         <Label>{owner.length}/30</Label>
@@ -25,7 +25,7 @@ const CardOwnerInput = ({ owner, onChange }: CardOwnerInputProps) => {
           onChange={onChange}
         />
       </Styled.Box>
-    </p>
+    </>
   );
 };
 

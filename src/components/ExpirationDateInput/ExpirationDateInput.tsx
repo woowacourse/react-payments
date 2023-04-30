@@ -10,7 +10,7 @@ const ExpirationDateInput = ({ onChange }: ExpirationDateInputProps) => {
   const [onMonthChange, onYearChange] = onChange;
 
   return (
-    <p>
+    <>
       <Label htmlFor="expiration-date">만료일</Label>
       <Styled.Box marginTop="10px">
         <Input
@@ -34,7 +34,7 @@ const ExpirationDateInput = ({ onChange }: ExpirationDateInputProps) => {
           onChange={onYearChange}
         />
       </Styled.Box>
-    </p>
+    </>
   );
 };
 

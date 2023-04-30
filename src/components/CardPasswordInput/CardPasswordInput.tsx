@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const CardPasswordInput = () => {
   return (
-    <p>
+    <>
       <Label htmlFor="password">카드 비밀번호</Label>
       <Styled.Wrapper marginTop="10px">
         <Styled.Box>
@@ -16,7 +16,7 @@ const CardPasswordInput = () => {
         <Input type="password" width="43px" maxLength={1} textAlign="center" value="0" disabled />
         <Input type="password" width="43px" maxLength={1} textAlign="center" value="0" disabled />
       </Styled.Wrapper>
-    </p>
+    </>
   );
 };
 
