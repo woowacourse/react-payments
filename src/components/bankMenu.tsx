@@ -1,5 +1,7 @@
+import { useContext } from "react";
 import styled from "styled-components";
 import { BCIc } from "../assets";
+import { ModalContext } from "../contexts/modal";
 import { bank } from "../core/bank";
 import { BankItem } from "./bankItem";
 
@@ -9,12 +11,18 @@ interface BankMenuprops {
 
 export function BankMenu(props: BankMenuprops) {
   const { selectItem } = props;
+  const { closeLocalModal } = useContext(ModalContext);
+
+  function clickHandle(e: React.MouseEvent<HTMLUListElement>) {
+    closeLocalModal();
+    selectItem(e);
+  }
 
   return (
     <Container>
       {bank.map((item) => {
         return (
-          <section key={item.id} id={String(item.id)} onClick={selectItem}>
+          <section key={item.id} id={String(item.id)} onClick={clickHandle}>
             <BankItem logo={item.logo} logoName={item.logoName} />
           </section>
         );
