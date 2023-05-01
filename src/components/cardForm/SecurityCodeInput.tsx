@@ -3,18 +3,13 @@ import InputBox from '../common/InputBox';
 import InputGroup from '../common/InputGroup';
 import { isInputNumber, isOverLength } from '../../utils/InputValidate';
 import { ERROR_MESSAGE, INPUT_MAX_LENGTH } from '../../utils/Constants';
-import type { Card } from '../../types/Card';
+import type { Card, InputProps } from '../../types/Card';
 
-interface SecurityCodeInputProps {
-  securityCode: Card['securityCode'];
-  setSecurityCode: (securityCode: Card['securityCode']) => void;
-  errorMessage: string;
-  setErrorMessage: (errorMessage: string) => void;
-}
+type SecurityCodeInputProps = InputProps<Card['securityCode']>;
 
 const SecurityCodeInput = ({
-  securityCode,
-  setSecurityCode,
+  value,
+  setValue,
   errorMessage,
   setErrorMessage,
 }: SecurityCodeInputProps) => {
@@ -27,18 +22,14 @@ const SecurityCodeInput = ({
       return;
     }
 
-    setSecurityCode(inputValue.toUpperCase());
+    setValue(inputValue.toUpperCase());
     setErrorMessage('');
   };
 
   return (
     <InputGroup labelValue={'보안 코드(CVC/CVV)'} errorMessage={errorMessage}>
       <InputBox width='100px' isError={!!errorMessage}>
-        <Input
-          type='password'
-          value={securityCode}
-          onChange={handleChangeInput}
-        />
+        <Input type='password' value={value} onChange={handleChangeInput} />
       </InputBox>
     </InputGroup>
   );

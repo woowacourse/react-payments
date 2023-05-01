@@ -1,16 +1,21 @@
 import styled from 'styled-components';
+import { CARD_COLOR } from '../../utils/Constants';
 import type { CardItemInfo } from '../../types/Card';
 
 interface CardItemProps {
   card: CardItemInfo;
+  onOpen?: () => void;
 }
 
-const CardItem = ({ card }: CardItemProps) => {
+const CardItem = ({ card, onOpen }: CardItemProps) => {
+  const cardColor = CARD_COLOR[card.bankName];
+
   return (
-    <CardItemContainer>
-      <ICChip />
+    <CardItemContainer cardColor={cardColor}>
       {card && (
         <>
+          <BankChangeBtn onClick={onOpen}>{card.bankName}</BankChangeBtn>
+          <ICChip />
           <CardNumberContainer>
             <p>{card.cardNumber[0]}</p>
             <p>{card.cardNumber[1]}</p>
@@ -37,7 +42,7 @@ const CardItem = ({ card }: CardItemProps) => {
   );
 };
 
-const CardItemContainer = styled.div`
+const CardItemContainer = styled.div<{ cardColor?: string }>`
   width: 213px;
   height: 133px;
 
@@ -45,7 +50,7 @@ const CardItemContainer = styled.div`
 
   box-sizing: border-box;
 
-  background: var(--black-color);
+  background: ${({ cardColor }) => cardColor || 'var(--black-color)'};
   box-shadow: 3px 3px 5px var(--shadow-color);
   border-radius: 5px;
 
@@ -55,11 +60,21 @@ const CardItemContainer = styled.div`
   color: var(--white-color);
 `;
 
+const BankChangeBtn = styled.button`
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  color: var(--white-color);
+  font-weight: 700;
+
+  cursor: pointer;
+`;
+
 const ICChip = styled.div`
   width: 40px;
   height: 26px;
 
-  margin-top: 33px;
+  margin: 20px 0 10px 0;
 
   background: var(--yellow-color);
   border-radius: 4px;
@@ -70,8 +85,6 @@ const CardNumberContainer = styled.div`
   justify-content: space-between;
 
   height: 12px;
-
-  margin-top: 12px;
 
   font-size: 14px;
   letter-spacing: 3px;
@@ -86,7 +99,7 @@ const CardInfoContainer = styled.div`
   display: flex;
   justify-content: space-between;
 
-  margin-top: 7px;
+  margin-top: 10px;
 `;
 
 const CardNameContainer = styled.p`

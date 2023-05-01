@@ -10,22 +10,20 @@ import {
   isOverLength,
 } from '../../utils/InputValidate';
 import { ERROR_MESSAGE, INPUT_MAX_LENGTH } from '../../utils/Constants';
-import type { Card } from '../../types/Card';
+import type { Card, InputProps } from '../../types/Card';
 
-interface PasswordInputProps {
-  password: Card['password'];
-  setPassword: (password: Card['password']) => void;
-  errorMessage: string;
-  setErrorMessage: (errorMessage: string) => void;
-}
+type PasswordInputProps = InputProps<Card['password']>;
 
 const PasswordInput = ({
-  password,
-  setPassword,
+  value,
+  setValue,
   errorMessage,
   setErrorMessage,
 }: PasswordInputProps) => {
-  const refs = [useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null)];
+  const inputRefs = [
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+  ];
 
   const handleChangeInput =
     (inputIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,20 +35,23 @@ const PasswordInput = ({
         return;
       }
 
-      const newInputs = [...password];
+      const newInputs = [...value];
       newInputs[inputIndex] = inputValue;
 
-      setPassword(newInputs);
+      setValue(newInputs);
       setErrorMessage('');
 
       if (
-        isNextInputFocusable(
+        isNextInputFocusable({
           inputValue,
           inputIndex,
-          INPUT_MAX_LENGTH.PASSWORD_LENGTH
-        )
+          maxLength: INPUT_MAX_LENGTH.PASSWORD_LENGTH,
+        })
       ) {
-        refs[inputIndex + 1].current?.focus();
+        const nextInputRef = inputRefs.at(inputIndex + 1);
+        if (nextInputRef?.current) {
+          nextInputRef.current.focus();
+        }
       }
     };
 
@@ -60,18 +61,18 @@ const PasswordInput = ({
         <InputBox width='43px' isError={!!errorMessage}>
           <Input
             type='password'
-            ref={refs[0]}
-            value={password[0]}
+            ref={inputRefs[0]}
+            value={value[0]}
             onChange={handleChangeInput(0)}
-          ></Input>
+          />
         </InputBox>
         <InputBox width='43px' isError={!!errorMessage}>
           <Input
             type='password'
-            ref={refs[1]}
-            value={password[1]}
+            ref={inputRefs[1]}
+            value={value[1]}
             onChange={handleChangeInput(1)}
-          ></Input>
+          />
         </InputBox>
         <DotIcon />
         <DotIcon />

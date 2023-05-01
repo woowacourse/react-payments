@@ -1,16 +1,23 @@
+import { useContext } from 'react';
 import styled from 'styled-components';
 import CardItem from '../common/CardItem';
-import type { CardItemInfo } from '../../types/Card';
+import Title from '../common/Title';
+import { CardContext } from '../../context/CardContext';
 
 interface CardListProps {
-  cardList: CardItemInfo[];
+  onOpen: () => void;
 }
 
-const CardList = ({ cardList }: CardListProps) => {
+const CardList = ({ onOpen }: CardListProps) => {
+  const { cardList } = useContext(CardContext);
+
   return (
     <CardListContainer>
       {cardList.map((card, id) => (
-        <CardItem card={card} key={id} />
+        <>
+          <CardItem card={card} key={id} onOpen={onOpen} />
+          <Title title={card.cardName} fontSize={14} />
+        </>
       ))}
     </CardListContainer>
   );
@@ -19,7 +26,7 @@ const CardList = ({ cardList }: CardListProps) => {
 const CardListContainer = styled.section`
   display: flex;
   flex-direction: column;
-  gap: 45px;
+  gap: 9px;
 
   margin-bottom: 45px;
 

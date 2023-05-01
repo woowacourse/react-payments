@@ -4,18 +4,13 @@ import InputBox from '../common/InputBox';
 import InputGroup from '../common/InputGroup';
 import { isInputEnglish, isOverLength } from '../../utils/InputValidate';
 import { ERROR_MESSAGE, INPUT_MAX_LENGTH } from '../../utils/Constants';
-import type { CardItemInfo } from '../../types/Card';
+import type { CardItemInfo, InputProps } from '../../types/Card';
 
-interface NameInputProps {
-  name: CardItemInfo['name'];
-  setName: (name: CardItemInfo['name']) => void;
-  errorMessage: string;
-  setErrorMessage: (errorMessage: string) => void;
-}
+type NameInputProps = InputProps<CardItemInfo['name']>;
 
 const NameInput = ({
-  name,
-  setName,
+  value,
+  setValue,
   errorMessage,
   setErrorMessage,
 }: NameInputProps) => {
@@ -31,20 +26,20 @@ const NameInput = ({
       return;
     }
 
-    setName(inputValue.toUpperCase());
+    setValue(inputValue.toUpperCase());
     setErrorMessage('');
   };
 
   return (
     <InputGroup
-      labelValue={<LabelValue length={name.length} />}
+      labelValue={<LabelValue length={value.length} />}
       errorMessage={errorMessage}
     >
       <InputBox isError={!!errorMessage}>
         <Input
           placeholder='카드에 표시된 이름과 동일하게 입력하세요.'
           textAlign='start'
-          value={name}
+          value={value}
           onChange={handleChangeInput}
         />
       </InputBox>

@@ -1,10 +1,14 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const AddCardButton = () => {
+interface AddCardButtonProps {
+  onOpen: () => void;
+}
+
+const AddCardButton = ({ onOpen }: AddCardButtonProps) => {
   return (
     <Link to={'/register'}>
-      <AddCardButtonBox>+</AddCardButtonBox>
+      <AddCardButtonBox onClick={onOpen}>+</AddCardButtonBox>
     </Link>
   );
 };

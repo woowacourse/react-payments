@@ -1,24 +1,27 @@
+import { useContext } from 'react';
 import styled from 'styled-components';
 import Header from '../common/Header';
 import Title from '../common/Title';
 import AddCardButton from '../CardListPageComponents/AddCardButton';
 import CardList from '../CardListPageComponents/CardList';
-import type { CardItemInfo } from '../../types/Card';
+import { CardContext } from '../../context/CardContext';
 
 interface CardListPageProps {
-  cardList: CardItemInfo[];
+  onOpen: () => void;
 }
 
-const CardListPage = ({ cardList }: CardListPageProps) => {
+const CardListPage = ({ onOpen }: CardListPageProps) => {
+  const cardList = useContext(CardContext);
+
   return (
     <>
       <Header title='보유카드' />
       <ContentContainer>
-        {!cardList.length && (
+        {!cardList && (
           <Title title='새로운 카드를 등록해주세요.' fontSize={18} />
         )}
-        <CardList cardList={cardList} />
-        <AddCardButton />
+        <CardList onOpen={onOpen} />
+        <AddCardButton onOpen={onOpen} />
       </ContentContainer>
     </>
   );

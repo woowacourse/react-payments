@@ -12,6 +12,7 @@ const Title = ({ title, fontSize }: TitleProps) => {
 const TitleContainer = styled.h3<{ fontSize?: number }>`
   font-weight: 700;
   font-size: ${({ fontSize }) => (fontSize ? `${fontSize}px` : '16px')};
+  text-align: center;
 
   color: var(--dark-grey-color);
 

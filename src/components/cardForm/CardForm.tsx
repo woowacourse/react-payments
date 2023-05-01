@@ -9,7 +9,6 @@ import PasswordInput from '../cardForm/PasswordInput';
 import { useFormValidation } from '../../hooks/useFormValidation';
 
 interface CardFormProps {
-  onSubmitForm: () => void;
   onChangeForm: (
     cardNumber: string[],
     expirationDate: string[],
@@ -17,7 +16,7 @@ interface CardFormProps {
   ) => void;
 }
 
-const CardForm = ({ onSubmitForm, onChangeForm }: CardFormProps) => {
+const CardForm = ({ onChangeForm }: CardFormProps) => {
   const navigate = useNavigate();
   const [buttonActive, setButtonActive] = useState(false);
 
@@ -51,39 +50,39 @@ const CardForm = ({ onSubmitForm, onChangeForm }: CardFormProps) => {
 
   const handleSubmitForm = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    onSubmitForm();
-    navigate('/');
+
+    navigate('/complete');
   };
 
   return (
     <FormContainer onSubmit={handleSubmitForm}>
       <CardNumberInput
-        cardNumber={cardNumber}
-        setCardNumber={setCardNumber}
+        value={cardNumber}
+        setValue={setCardNumber}
         errorMessage={cardNumberError}
         setErrorMessage={setCardNumberError}
       />
       <ExpirationDateInput
-        expirationDate={expirationDate}
-        setExpirationDate={setExpirationDate}
+        value={expirationDate}
+        setValue={setExpirationDate}
         errorMessage={expirationDateError}
         setErrorMessage={setExpirationDateError}
       />
       <NameInput
-        name={name}
-        setName={setName}
+        value={name}
+        setValue={setName}
         errorMessage={nameError}
         setErrorMessage={setNameError}
       />
       <SecurityCodeInput
-        securityCode={securityCode}
-        setSecurityCode={setSecurityCode}
+        value={securityCode}
+        setValue={setSecurityCode}
         errorMessage={securityCodeError}
         setErrorMessage={setSecurityCodeError}
       />
       <PasswordInput
-        password={password}
-        setPassword={setPassword}
+        value={password}
+        setValue={setPassword}
         errorMessage={passwordError}
         setErrorMessage={setPasswordError}
       />
@@ -95,7 +94,7 @@ const CardForm = ({ onSubmitForm, onChangeForm }: CardFormProps) => {
 const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 7px;
   padding: 28px;
 `;
 

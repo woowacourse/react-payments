@@ -9,22 +9,17 @@ import {
   isOverLength,
 } from '../../utils/InputValidate';
 import { ERROR_MESSAGE, INPUT, INPUT_MAX_LENGTH } from '../../utils/Constants';
-import type { CardItemInfo } from '../../types/Card';
+import type { CardItemInfo, InputProps } from '../../types/Card';
 
-interface CardNumberInputProps {
-  cardNumber: CardItemInfo['cardNumber'];
-  setCardNumber: (cardNumber: CardItemInfo['cardNumber']) => void;
-  errorMessage: string;
-  setErrorMessage: (errorMessage: string) => void;
-}
+type CardNumberInputProps = InputProps<CardItemInfo['cardNumber']>;
 
 const CardNumberInput = ({
-  cardNumber,
-  setCardNumber,
+  value,
+  setValue,
   errorMessage,
   setErrorMessage,
 }: CardNumberInputProps) => {
-  const refs = [
+  const inputRefs = [
     useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
@@ -40,19 +35,24 @@ const CardNumberInput = ({
         setErrorMessage(ERROR_MESSAGE.ONLY_NUMBER);
         return;
       }
+
       if (
-        isNextInputFocusable(
+        isNextInputFocusable({
           inputValue,
           inputIndex,
-          INPUT_MAX_LENGTH.CARD_NUMBER_LENGTH
-        )
-      )
-        refs[inputIndex + 1].current?.focus();
+          maxLength: INPUT_MAX_LENGTH.CARD_NUMBER_LENGTH,
+        })
+      ) {
+        const nextInputRef = inputRefs.at(inputIndex + 1);
+        if (nextInputRef?.current) {
+          nextInputRef.current.focus();
+        }
+      }
 
-      const newCardNumber = [...cardNumber];
+      const newCardNumber = [...value];
       newCardNumber[inputIndex] = inputValue;
 
-      setCardNumber(newCardNumber);
+      setValue(newCardNumber);
       setErrorMessage('');
     };
 
@@ -63,20 +63,20 @@ const CardNumberInput = ({
           (_, index) => (
             <React.Fragment key={index}>
               <Input
-                ref={refs[index]}
-                value={cardNumber[index]}
+                placeholder='0000'
+                ref={inputRefs[index]}
+                value={value[index]}
                 type={
                   index >= INPUT.CARD_NUMBER_VISIBLE_INPUT_ORDER
                     ? 'password'
-                    : undefined
+                    : 'text'
                 }
                 onChange={handleChangeInput(index)}
               />
               {index < INPUT.CARD_NUMBER_LAST_INPUT_ORDER && (
                 <InputSeparator
                   isActive={
-                    cardNumber[index].length ===
-                    INPUT_MAX_LENGTH.CARD_NUMBER_LENGTH
+                    value[index].length === INPUT_MAX_LENGTH.CARD_NUMBER_LENGTH
                   }
                 >
                   -

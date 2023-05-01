@@ -11,6 +11,7 @@ const GlobalStyle = createGlobalStyle`
     --yellow-color:#cbba64;
     --red-color:#ec2f1b;
     --shadow-color:rgba(0, 0, 0, 0.25);
+    --backdrop-color:rgba(0, 0, 0, 0.35);
   }
 
 body {
