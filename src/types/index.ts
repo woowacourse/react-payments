@@ -7,7 +7,7 @@ interface ExpirationDateFormat {
 }
 
 interface Card {
-  cardNumber: CardNumberFormat;
+  cardNumber: "";
   expirationDate: ExpirationDateFormat;
   ownerName?: string;
   securityCode: string;
@@ -18,4 +18,10 @@ type CardInputValidation = {
   [K in keyof Card]: boolean;
 };
 
-export type { CardNumberFormat, PasswordFormat, ExpirationDateFormat, Card, CardInputValidation };
+export type {
+  CardNumberFormat,
+  PasswordFormat,
+  ExpirationDateFormat,
+  Card,
+  CardInputValidation,
+};
