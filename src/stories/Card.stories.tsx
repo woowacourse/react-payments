@@ -1,5 +1,5 @@
 import { StoryFn } from "@storybook/react";
-import Card from "../components/common/Card";
+import { Card } from "../components/common/Card";
 
 export default {
   title: "Card",

@@ -7,16 +7,16 @@ import { RegisterCard } from "./page/RegisterCard";
 
 const App = () => {
   return (
-    <CardListProvider>
-      <GlobalStyle />
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <CardListProvider>
+        <GlobalStyle />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/addCard" element={<AddCard />} />
           <Route path="/registerCard" element={<RegisterCard />} />
         </Routes>
-      </BrowserRouter>
-    </CardListProvider>
+      </CardListProvider>
+    </BrowserRouter>
   );
 };
 

@@ -1,7 +1,5 @@
-import { InputContainer } from "../common/InputContainer";
-import { Input } from "../common/Input";
-import { InputLabel } from "../common/InputLabel";
 import { useState } from "react";
+import { InputContainer, Input, InputLabel } from "../common";
 import { isNumeric } from "../../utils/validate";
 import { ERROR_MESSAGE, INPUT_FULL_LENGTH } from "../../constant/cardInput";
 

@@ -1,7 +1,5 @@
-import { InputContainer } from "../common/InputContainer";
-import { Input } from "../common/Input";
-import { InputLabel } from "../common/InputLabel";
 import styled from "styled-components";
+import { InputContainer, Input, InputLabel } from "../common";
 import { INPUT_FULL_LENGTH } from "../../constant/cardInput";
 import { useState } from "react";
 

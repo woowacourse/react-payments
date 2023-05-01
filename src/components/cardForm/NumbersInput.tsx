@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
-import { InputContainer, InputLabel, Input } from "../common";
 import styled from "styled-components";
+import { InputContainer, InputLabel, Input } from "../common";
 import { isNumeric } from "../../utils/validate";
 import { useFocusChain } from "../../hook/useFocusChain";
 import { ERROR_MESSAGE, INPUT_FULL_LENGTH } from "../../constant/cardInput";
