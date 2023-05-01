@@ -1,4 +1,10 @@
-import React, { FormEvent, useEffect, useRef, useState } from 'react';
+import React, {
+  FormEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import styled from 'styled-components';
 import { CardNumberInput } from '../../components/addCardPage/CardNumberInput';
 import { CvcInput } from '../../components/addCardPage/CvcInput';
@@ -12,18 +18,14 @@ import { Card } from '../../components/common/Card';
 import { InputField } from '../../components/common/InputField';
 import { Modal } from '../../components/common/Modal';
 import { CARD_COMPANY_DATA } from '../../constants/constant';
-import { InputValuesInformationProps } from '../../hooks/createFormInputValue';
-import { getFormValidateResult } from '../../hooks/getFormValidateResult';
 import { useFocusInput } from '../../hooks/useFocusInput';
 import { useFormInputs } from '../../hooks/useFormInputs';
 import { useHideScrollState } from '../../hooks/useHideScrollState';
 import { CardCompanyType, CardInfo, PageInfo } from '../../types/types';
-import {
-  createUniqueId,
-  isPrevDate,
-  setNextInputFocus,
-  userConfirm,
-} from '../../utils';
+import { createUniqueId, setNextInputFocus } from '../../utils/common';
+import { InputValuesInformationProps } from '../../utils/createValidationInputInfomation';
+import { getFormValidateResult } from '../../utils/getFormValidateResult';
+import { isPastDate } from '../../utils/validate';
 
 interface AddCardPageProps {
   cardList: CardInfo[];
@@ -101,7 +103,7 @@ export default function AddCardPage({
       return;
     }
 
-    if (isPrevDate(Number(yearInput.value), Number(monthInput.value))) {
+    if (isPastDate(Number(yearInput.value), Number(monthInput.value))) {
       monthInput.focus();
       month.setError('지난 기간은 입력할 수 없습니다.');
       return;
@@ -135,33 +137,29 @@ export default function AddCardPage({
     setPage('homePage');
   };
 
-  const onPrevButtonClick = () => {
-    userConfirm(
-      '이전 페이지로 이동하시면 현재 입력하신 내용이 사라집니다. 정말 이동하시겠습니까?',
-      setHome
+  const askPrevPage = useCallback(() => {
+    const result = window.confirm(
+      '이전 페이지로 이동하시면 현재 입력하신 내용이 사라집니다. 정말 이동하시겠습니까?'
     );
-  };
 
-  const setHome = () => {
-    setPage('homePage');
+    if (result) {
+      setPage('homePage');
+    }
+  }, [setPage]);
+
+  const onPrevButtonClick = () => {
+    askPrevPage();
   };
 
   useEffect(() => {
-    const setHomepage = () => {
-      userConfirm(
-        '이전 페이지로 이동하시면 현재 입력하신 내용이 사라집니다. 정말 이동하시겠습니까?',
-        () => setPage('homePage')
-      );
-    };
-
     window.history.pushState(null, '', window.location.href);
 
-    window.addEventListener('popstate', setHomepage);
+    window.addEventListener('popstate', askPrevPage);
 
     return () => {
-      window.removeEventListener('popstate', setHomepage);
+      window.removeEventListener('popstate', askPrevPage);
     };
-  }, [setPage]);
+  }, [askPrevPage]);
 
   if (isRegister) {
     return (

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { CARD_COMPANY_DATA } from '../../../constants/constant';
 import { CardCompanyType } from '../../../types/types';
-import { createUniqueId, isPrevDate } from '../../../utils';
+import { isPastDate } from '../../../utils/validate';
 import { Error } from '../Error';
 
 export interface CardProps {
@@ -37,7 +37,7 @@ export default function Card({
     setIsClick((prev) => !prev);
   };
 
-  const isPrevCard = isPrevDate(Number(year), Number(month));
+  const isPrevCard = isPastDate(Number(year), Number(month));
   return (
     <CardContainer>
       <Container>
@@ -52,7 +52,7 @@ export default function Card({
           <div>
             <CardNumber>
               {cardNumberSet.map((cardNumberItem: string, index: number) => (
-                <CardNumberItem key={createUniqueId()}>
+                <CardNumberItem key={`${cardNumberItem}${index}`}>
                   {index >= ENCRYPT_INDEX
                     ? '•'.repeat(cardNumberItem.length)
                     : cardNumberItem}

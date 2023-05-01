@@ -1,9 +1,9 @@
 import React, { FormEvent } from 'react';
 import styled from 'styled-components';
-import { InputValuesInformationProps } from '../../../hooks/createFormInputValue';
-import { getFormValidateResult } from '../../../hooks/getFormValidateResult';
 import { UseInputProps } from '../../../hooks/useInput';
 import { colors } from '../../../styles/theme';
+import { InputValuesInformationProps } from '../../../utils/createValidationInputInfomation';
+import { getFormValidateResult } from '../../../utils/getFormValidateResult';
 import { Button } from '../../common/Button';
 import { Card } from '../../common/Card';
 import { type CardProps } from '../../common/Card/Card';
@@ -50,6 +50,7 @@ export default function RegisteredCard({
             inputLength={`${cardTitleInformation.value.length}/20`}
           >
             <Input
+              autoFocus
               {...cardTitleInformation}
               type="text"
               bgColor={colors.white}

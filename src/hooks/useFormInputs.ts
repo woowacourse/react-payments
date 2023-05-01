@@ -1,12 +1,11 @@
 import { PageInfo } from '../types/types';
 import {
-  convertUpperCase,
   isNumber,
   isOnlyEnglish,
-  lengthValidate,
   monthValidate,
   yearValidate,
-} from '../utils';
+} from '../utils/validate';
+
 import { UseInputProps, useInput } from './useInput';
 
 type UseFormInputsProps = {
@@ -69,7 +68,7 @@ export const useFormInputs = () => {
         validate: isOnlyEnglish,
         isRequired: false,
         errorMessage: '영문만 입력할 수 있어요.',
-        convertValue: convertUpperCase,
+        convertValue: (text: string) => text.toUpperCase(),
       }),
       cvc: useInput('', {
         name: 'cvcInput',
@@ -95,7 +94,7 @@ export const useFormInputs = () => {
       cardTitle: useInput('', {
         name: 'cardTitleInput',
         maxLength: 20,
-        validate: lengthValidate(20),
+        validate: (value: string) => value.length <= 20,
         errorMessage: '20 글자 이하로만 입력 가능해요.',
         isRequired: false,
       }),

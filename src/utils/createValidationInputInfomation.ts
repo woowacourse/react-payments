@@ -1,17 +1,17 @@
+import { UseInputProps } from '../hooks/useInput';
 import { InputDetailInfo } from './formValidate';
-import { UseInputProps } from './useInput';
 
 export interface InputValuesInformationProps extends UseInputProps {
   element: HTMLInputElement;
 }
 
-export const createFormInputValue = (
+export const createValidationInputInformation = (
   inputValues: InputValuesInformationProps[]
 ) => {
-  const inputValueInformation: InputDetailInfo[] = [];
+  const validationInputInformation: InputDetailInfo[] = [];
 
   inputValues.forEach((item) => {
-    inputValueInformation.push({
+    validationInputInformation.push({
       name: item.name,
       element: item.element,
       maxLength: item.maxLength,
@@ -22,7 +22,7 @@ export const createFormInputValue = (
     });
   });
 
-  const inputKey = inputValues.map((item) => item.name);
+  const validationInputKey = inputValues.map((item) => item.name);
 
-  return { inputValueInformation, inputKey };
+  return { validationInputInformation, validationInputKey };
 };
