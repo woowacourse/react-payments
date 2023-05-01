@@ -7,10 +7,12 @@ import { CardType } from '../types';
 const Card = (props: CardType) => {
   const cardNumberArray = props.cardNumber.replaceAll(' - ', ' ').split(' ');
 
-  const modalCtx = useContext(ModalContext);
+  const { openModal } = useContext(ModalContext) ?? {
+    openModal: () => {},
+  };
 
   return (
-    <CardWrapper style={{ background: props.color }} onClick={() => modalCtx.openModal()}>
+    <CardWrapper style={{ background: props.color }} onClick={() => openModal()}>
       <span>{props.bankName}</span>
       <img src={IcChip} alt="ic-chip" />
       <CardInfoWrapper>

@@ -31,7 +31,10 @@ const AddCard = () => {
     navigate('/CardName');
   };
 
-  const modalCtx = useContext(ModalContext);
+  const { isModalOpen, closeModal } = useContext(ModalContext) ?? {
+    isModalOpen: true,
+    closeModal: () => {},
+  };
 
   return (
     <Page>
@@ -46,8 +49,8 @@ const AddCard = () => {
         password={card.password}
       />
       <CardInputForm card={card} setCard={setCard} onSubmit={e => registerCard(e)} />
-      {modalCtx.isModalOpen && (
-        <ModalPortal closeEvent={modalCtx.closeModal}>
+      {isModalOpen && (
+        <ModalPortal closeEvent={closeModal}>
           <ModalBanks setCard={setCard} card={card} />
         </ModalPortal>
       )}

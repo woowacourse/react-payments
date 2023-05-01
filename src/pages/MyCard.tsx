@@ -12,11 +12,13 @@ import { ModalContext } from '../store/modalContext';
 const MyCard = () => {
   const cards = getLocalStorage('card');
 
-  const modalCtx = useContext(ModalContext);
+  const { openModal } = useContext(ModalContext) ?? {
+    openModal: () => {},
+  };
   const navigate = useNavigate();
 
   const registerCard = () => {
-    modalCtx.openModal();
+    openModal();
 
     navigate('/AddCard');
   };
