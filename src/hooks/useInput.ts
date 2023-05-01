@@ -6,10 +6,12 @@ const useInput = (validator?: InputValidator) => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const onChange = (inputValue: string) => {
-    const { hasError, message } = validator?.(inputValue) ?? { hasError: false, message: "" };
+    const { hasError, message, allowInput } = validator?.(inputValue) ?? { hasError: false, message: "" };
 
     if (hasError) {
       setErrorMessage(message || "");
+
+      if (allowInput) setInputValue(inputValue);
       return;
     }
 
