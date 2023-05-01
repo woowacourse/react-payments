@@ -1,5 +1,5 @@
 import { CardList } from "../components/cardList";
-import { Header } from "../components/common/Header";
+import { Header } from "../components/common";
 
 export const Home = () => {
   return (

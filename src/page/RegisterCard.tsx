@@ -9,12 +9,15 @@ export const RegisterCard = () => {
   const { cards, cardListActions } = useCardList();
   const newCard = cards[cards.length - 1];
 
-  const nicknameRef = useRef<HTMLInputElement>(null);
+  const nameRef = useRef<HTMLInputElement>(null);
 
   const moveTo = useNavigate();
 
-  const handleClick = () => {
-    const name = nicknameRef.current?.value.trim();
+  const updateCardName = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const name = nameRef.current?.value.trim();
+
     if (name) {
       cardListActions.updateCard(newCard.id, { name });
     }
@@ -23,17 +26,17 @@ export const RegisterCard = () => {
   };
 
   return (
-    <Container>
+    <Container onSubmit={updateCardName}>
       <Title>카드 등록이 완료되었습니다.</Title>
       <SubTitle>카드 이름을 설정할 수 있습니다.</SubTitle>
       <CardItem card={newCard} />
-      <NickNameInput autoFocus ref={nicknameRef} />
-      <SubmitButton onClick={handleClick}>확인</SubmitButton>
+      <NameInput autoFocus ref={nameRef} />
+      <SubmitButton type="submit">확인</SubmitButton>
     </Container>
   );
 };
 
-const Container = styled.div`
+const Container = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -55,7 +58,7 @@ const SubTitle = styled.h4`
   color: gray;
 `;
 
-const NickNameInput = styled.input`
+const NameInput = styled.input`
   border: none;
   border-bottom: 1px solid #383838;
   width: 70%;

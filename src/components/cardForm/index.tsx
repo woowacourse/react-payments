@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { CardType } from "../../types/card";
 import { CVCInput } from "./CVCInput";
-import { CardNumberInput } from "./CardNumberInput";
+import { NumbersInput } from "./NumbersInput";
 import { ExpiryDateInput } from "./ExpiryDateInput";
 import { OwnerInput } from "./OwnerInput";
 import { PasswordInput } from "./PasswordInput";
@@ -51,8 +51,8 @@ export const CardForm = ({ setCardInfo, newCard }: CardFormProps) => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <CardNumberInput
-        setCardNumbers={setCardArrayData("numbers")}
+      <NumbersInput
+        setNumbers={setCardArrayData("numbers")}
         validateNumbersInput={validateNumbersInput}
       />
       <ExpiryDateInput
@@ -65,7 +65,7 @@ export const CardForm = ({ setCardInfo, newCard }: CardFormProps) => {
         validateCVCInput={validateCVCInput}
       />
       <PasswordInput
-        setNewPassword={setCardArrayData("password")}
+        setPassword={setCardArrayData("password")}
         validatePasswordInput={validatePasswordInput}
       />
       <SubmitButton type="submit">다음</SubmitButton>

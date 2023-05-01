@@ -1,8 +1,8 @@
+import styled from "styled-components";
 import { useState, useRef } from "react";
 import { InputContainer } from "../common/InputContainer";
 import { Input } from "../common/Input";
 import { InputLabel } from "../common/InputLabel";
-import styled from "styled-components";
 import { isNumeric } from "../../utils/validate";
 import { useFocusChain } from "../../hook/useFocusChain";
 import { ERROR_MESSAGE, INPUT_FULL_LENGTH } from "../../constant/cardInput";
@@ -14,15 +14,15 @@ const passwordInfo = {
 };
 
 interface PasswordInputProps {
-  setNewPassword: (index: number, value: string) => void;
+  setPassword: (index: number, value: string) => void;
   validatePasswordInput: (password: string[]) => boolean;
 }
 
 export const PasswordInput = ({
-  setNewPassword,
+  setPassword,
   validatePasswordInput,
 }: PasswordInputProps) => {
-  const [password, setPassword] = useState(["", ""]);
+  const [inputValues, setInputValues] = useState(["", ""]);
   const [isValid, setIsValid] = useState(true);
 
   const allRefs = [
@@ -41,18 +41,18 @@ export const PasswordInput = ({
         return;
       }
 
-      setPassword((prev) => {
+      setInputValues((prev) => {
         const newPassword = [...prev];
         newPassword[index] = value;
         return newPassword;
       });
-      setNewPassword(index, value);
+      setPassword(index, value);
 
       moveFocusToNext(index, value);
     };
 
   const validate = () => {
-    const validity = validatePasswordInput(password);
+    const validity = validatePasswordInput(inputValues);
     setIsValid(validity);
   };
 

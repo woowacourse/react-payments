@@ -1,27 +1,25 @@
 import { useState, useRef } from "react";
-import { InputContainer } from "../common/InputContainer";
-import { InputLabel } from "../common/InputLabel";
-import { Input } from "../common/Input";
+import { InputContainer, InputLabel, Input } from "../common";
 import styled from "styled-components";
 import { isNumeric } from "../../utils/validate";
 import { useFocusChain } from "../../hook/useFocusChain";
 import { ERROR_MESSAGE, INPUT_FULL_LENGTH } from "../../constant/cardInput";
 
-interface CardNumberInputProps {
-  setCardNumbers: (index: number, numbers: string) => void;
+interface NumbersInputProps {
+  setNumbers: (index: number, numbers: string) => void;
   validateNumbersInput: (numbers: string[]) => boolean;
 }
 
-const cardNumberInputInfo = {
+const numbersInputInfo = {
   $width: "70px",
   $textPosition: "center",
 };
 
-export const CardNumberInput = ({
-  setCardNumbers,
+export const NumbersInput = ({
+  setNumbers,
   validateNumbersInput,
-}: CardNumberInputProps) => {
-  const [numbers, setNumbers] = useState(["", "", "", ""]);
+}: NumbersInputProps) => {
+  const [inputValues, setInputValues] = useState(["", "", "", ""]);
   const [isValid, setIsValid] = useState(true);
 
   const allRefs = [
@@ -41,8 +39,8 @@ export const CardNumberInput = ({
       const value = e.target.value;
 
       if (!isNumeric(value)) {
-        const onlyNumbers = value.match(/\d+/g)?.join("") || "";
-        e.target.value = onlyNumbers;
+        const onlyNumeric = value.match(/\d+/g)?.join("") || "";
+        e.target.value = onlyNumeric;
         return;
       }
 
@@ -51,21 +49,23 @@ export const CardNumberInput = ({
         return;
       }
 
-      setNumbers((prev) => {
+      setInputValues((prev) => {
         const newNumbers = [...prev];
         newNumbers[index] = value;
         return newNumbers;
       });
-      setCardNumbers(index, value);
+      setNumbers(index, value);
 
       moveFocusToNext(index, value);
     };
 
   const validate = () => {
-    const isEveryInputActivated = numbers.every((number) => number.length > 0);
+    const isEveryInputActivated = inputValues.every(
+      (number) => number.length > 0
+    );
 
     if (isEveryInputActivated) {
-      const validity = validateNumbersInput(numbers);
+      const validity = validateNumbersInput(inputValues);
       setIsValid(validity);
     }
   };
@@ -76,16 +76,16 @@ export const CardNumberInput = ({
 
   return (
     <InputContainer>
-      <InputLabel text="카드 번호" name="cardNumber" />
+      <InputLabel text="카드 번호" name="numbers" />
       <Row>
         <Input
           error={{
             isValid: isValid,
             errorMessage: ERROR_MESSAGE.CARD_NUMBERS,
           }}
-          {...cardNumberInputInfo}
+          {...numbersInputInfo}
           type="text"
-          label="cardNumber1"
+          label="number1"
           handleInput={handleInput(0)}
           handleOutFocus={validate}
           handleFocus={eraseErrorMessage}
@@ -94,9 +94,9 @@ export const CardNumberInput = ({
         {[2, 3, 4].map((inputNumber) => (
           <Input
             key={inputNumber}
-            {...cardNumberInputInfo}
+            {...numbersInputInfo}
             type={inputNumber < 3 ? "text" : "password"}
-            label={`cardNumber${inputNumber}`}
+            label={`number${inputNumber}`}
             handleInput={handleInput(inputNumber - 1)}
             handleOutFocus={validate}
             handleFocus={eraseErrorMessage}

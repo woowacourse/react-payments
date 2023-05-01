@@ -11,9 +11,11 @@ export const useFocusChain = (
   };
 
   const moveFocusToNext = (ind: number, value: string) => {
-    if (!isLastInput(ind) && isInputFull(value)) {
-      inputs[ind + 1].current?.focus();
+    if (isLastInput(ind) || !isInputFull(value)) {
+      return;
     }
+
+    inputs[ind + 1].current?.focus();
   };
 
   return { moveFocusToNext };
