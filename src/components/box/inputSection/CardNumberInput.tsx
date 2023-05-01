@@ -1,8 +1,6 @@
 import InputSectionTemplate from '../../template/InputSectionTemplate';
 import InputBox, { InputType } from '../../common/InputBox';
 import { InputStateProps } from '../../../abstracts/types';
-import Input from '../../common/Input';
-import { Dispatch, SetStateAction } from 'react';
 
 const CardNumberInput = (props: InputStateProps) => {
   const inputs: InputType[] = [
@@ -13,7 +11,6 @@ const CardNumberInput = (props: InputStateProps) => {
   ];
   return (
     <InputSectionTemplate label="카드 번호">
-      {/* <Input number={props.inputValues as string} setInput={props.setInputValues} /> */}
       <InputBox inputs={inputs} align="center" separator="-" isFullWidth {...props} />
     </InputSectionTemplate>
   );

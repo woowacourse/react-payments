@@ -19,17 +19,19 @@ const Card = ({ cardNumber, ownerName, expireDate, bank, alias, onClick }: CardP
             </CardHead>
           )}
           <CardChip />
-          <CardNumberArea>
-            {cardNumber.map((number, index) => (
-              <CardNumber>
-                {number.length ? (index >= 2 ? '∙'.repeat(number.length) : number) : null}
-              </CardNumber>
-            ))}
-          </CardNumberArea>
-          <CardInfoArea>
-            <OwnerName>{ownerName || 'NAME'}</OwnerName>
-            <ExpireDate>{expireDate.join('') !== '' ? expireDate.join('/') : 'MM/YY'}</ExpireDate>
-          </CardInfoArea>
+          <CardPrimary>
+            <CardNumberArea>
+              {cardNumber.map((number, index) => (
+                <CardNumber>
+                  {number.length ? (index >= 2 ? '∙'.repeat(number.length) : number) : null}
+                </CardNumber>
+              ))}
+            </CardNumberArea>
+            <CardInfoArea>
+              <OwnerName>{ownerName || 'NAME'}</OwnerName>
+              <ExpireDate>{expireDate.join('') !== '' ? expireDate.join('/') : 'MM/YY'}</ExpireDate>
+            </CardInfoArea>
+          </CardPrimary>
         </CardFront>
         <CardBack>
           <CardMagnetic />
@@ -116,8 +118,8 @@ const CardFront = styled.div<{ bankId: number | undefined }>`
   border-radius: 5px;
 
   display: flex;
+  justify-content: ${({ bankId }) => (bankId ? 'space-between' : 'flex-end')};
   flex-direction: column;
-  justify-content: space-between;
 
   width: 100%;
   height: 100%;
@@ -138,6 +140,12 @@ const CardChip = styled.div`
   border-radius: 4px;
   width: 40px;
   height: 26px;
+`;
+
+const CardPrimary = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 `;
 
 const CardNumberArea = styled.div`

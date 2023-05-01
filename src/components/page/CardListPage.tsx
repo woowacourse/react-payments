@@ -4,7 +4,6 @@ import Card from '../common/Card';
 import PageTemplate from '../template/PageTemplate';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import { CARD_LIST_STORAGE_KEY } from '../../abstracts/constants';
-import Input from '../common/Input';
 
 const CardListPage = ({ navigate }: PageProps) => {
   const onClickAdd = () => {

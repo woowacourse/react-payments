@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useState } from 'react';
 import Card from '../common/Card';
 import CardNumberInput from '../box/inputSection/CardNumberInput';
 import ExpireDateInput from '../box/inputSection/ExpireDateInput';
@@ -8,11 +8,8 @@ import CardPasswordInput from '../box/inputSection/CardPasswordInput';
 import styled from 'styled-components';
 import { Bank, CardType, Page, PageProps } from '../../abstracts/types';
 import PageTemplate from '../template/PageTemplate';
-import useLocalStorage from '../../hooks/useLocalStorage';
-import { CARD_LIST_STORAGE_KEY } from '../../abstracts/constants';
 import BankSelectBottomSheet from '../box/BankSelectBottomSheet';
 import BottomSheetTemplate from '../template/BottomSheetTemplate';
-import Input from '../common/Input';
 
 interface CardFormState extends Omit<CardType, 'id' | 'cardPassword'> {
   cardPassword1: string;
@@ -32,8 +29,6 @@ const CardRegisterPage = ({ navigate }: PageProps) => {
     bank: undefined,
   });
 
-  const { pushLocalStorage } = useLocalStorage<CardType[]>(CARD_LIST_STORAGE_KEY);
-
   const submitNewCard = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -46,8 +41,6 @@ const CardRegisterPage = ({ navigate }: PageProps) => {
       cardPassword: cardPassword1 + cardPassword2,
       bank,
     };
-
-    // pushLocalStorage(newCard);
 
     navigate(Page.aliasSet, newCard);
   };
@@ -73,7 +66,6 @@ const CardRegisterPage = ({ navigate }: PageProps) => {
       />
 
       <InputForm onSubmit={submitNewCard}>
-        {/* <Input number={number} setInput={setNumber} /> */}
         <CardNumberInput inputValues={cardNumber} setInputValues={onChange('cardNumber')} />
         <ExpireDateInput inputValues={expireDate} setInputValues={onChange('expireDate')} />
         <OwnerNameInput inputValues={ownerName} setInputValues={onChange('ownerName')} />
