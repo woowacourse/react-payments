@@ -5,7 +5,7 @@ import { useContext } from 'react';
 
 const useCreditCardForm = () => {
   const { creditCardForm, setCreditCardForm } = useContext(CardContext);
-  const isCreditCardError = checkCreditCardValidations(creditCardForm);
+  const isCreditCardError = !checkCreditCardValidations(creditCardForm);
 
   const initCreditCardForm = () => {
     setCreditCardForm({ ...defaultCreditCardForm, password: ['', ''] });

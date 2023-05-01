@@ -16,7 +16,7 @@ function CreditCardCVCInput({ name }: T.CreditCardInputProps) {
     }
   };
 
-  const isError = creditCardForm.cvc.length > 0 && validateCVC(creditCardForm.cvc);
+  const isError = creditCardForm.cvc.length > 0 && !validateCVC(creditCardForm.cvc);
 
   return (
     <div>

@@ -44,7 +44,6 @@ function CreditCardRegister() {
             onClick={() => navigate('/')}
           >
             {`${'<'}`}
-
           </S.HomeButton>
           <S.CreditCardRegisterHeader>카드 추가</S.CreditCardRegisterHeader>
         </CreditCardRegisterTopSheet>

@@ -26,9 +26,8 @@ function CreditCardPasswordInput({ name }: T.CreditCardInputProps) {
     }
   };
 
-  const isError = (creditCardForm.password[0].length > 0
-    || creditCardForm.password[1].length > 0)
-    && validatePassword(creditCardForm.password[0], creditCardForm.password[1]);
+  const isError = (creditCardForm.password[0].length > 0 || creditCardForm.password[1].length > 0)
+    && !validatePassword(creditCardForm.password[0], creditCardForm.password[1]);
 
   return (
     <div>

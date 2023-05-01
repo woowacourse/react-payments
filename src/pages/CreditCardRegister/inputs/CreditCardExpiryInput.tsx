@@ -19,7 +19,7 @@ function CreditCardExpiryInput({ name }: T.CreditCardInputProps) {
   };
 
   const markedExpiry = markExpiry(creditCardForm.expiry);
-  const isError = creditCardForm.expiry.length > 0 && validateExpiry(creditCardForm.expiry);
+  const isError = creditCardForm.expiry.length > 0 && !validateExpiry(creditCardForm.expiry);
 
   return (
     <div>

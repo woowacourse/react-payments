@@ -8,8 +8,7 @@ interface UseCreditCard {
 export const useCreditCard = (): UseCreditCard => {
   const [creditCardList, setCreditCardList] = useState<T.CreditCard[]>([]);
 
-  const existCreditCards = (() =>
-    JSON.parse(localStorage.getItem('creditCards') || '[]'))();
+  const existCreditCards = (() => JSON.parse(localStorage.getItem('creditCards') || '[]'))();
 
   const saveCreditCard = (creditCard: T.CreditCard): void => {
     localStorage.setItem(
