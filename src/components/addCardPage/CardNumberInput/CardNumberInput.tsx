@@ -11,7 +11,14 @@ interface CardNumberInputProps {
   fourthNumberInformation: UseInputProps;
 }
 
-const { addCardPage } = TAB_INDEX_INFO;
+const {
+  ADD_CARD_PAGE: {
+    FIRST_CARD_NUMBER,
+    SECOND_CARD_NUMBER,
+    THIRD_CARD_NUMBER,
+    FOURTH_CARD_NUMBER,
+  },
+} = TAB_INDEX_INFO;
 
 export default function CardNumberInput({
   firstNumberInformation,
@@ -29,7 +36,7 @@ export default function CardNumberInput({
           textAlign="center"
           placeholder="0000"
           autoComplete="off"
-          tabIndex={addCardPage.firstCardNumber}
+          tabIndex={FIRST_CARD_NUMBER}
           {...firstNumberInformation}
         />
         <Dash>-</Dash>
@@ -37,7 +44,7 @@ export default function CardNumberInput({
           isNumber={true}
           type="text"
           placeholder="0000"
-          tabIndex={addCardPage.secondCardNumber}
+          tabIndex={SECOND_CARD_NUMBER}
           autoComplete="off"
           textAlign="center"
           {...secondNumberInformation}
@@ -50,7 +57,7 @@ export default function CardNumberInput({
           isPassword={true}
           textAlign="center"
           autoComplete="off"
-          tabIndex={addCardPage.thirdCardNumber}
+          tabIndex={THIRD_CARD_NUMBER}
           {...thirdNumberInformation}
         />
         <Dash>-</Dash>
@@ -61,7 +68,7 @@ export default function CardNumberInput({
           autoComplete="off"
           isPassword={true}
           textAlign="center"
-          tabIndex={addCardPage.fourthCardNumber}
+          tabIndex={FOURTH_CARD_NUMBER}
           {...fourthNumberInformation}
         />
       </Wrapper>

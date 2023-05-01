@@ -11,7 +11,7 @@ interface ToolTipProps {
 export default function ToolTip({
   text,
   onClick,
-  tabIndex = TAB_INDEX_INFO.dismiss,
+  tabIndex = TAB_INDEX_INFO.DISMISS,
 }: ToolTipProps) {
   return (
     <Wrapper onClick={onClick} tabIndex={tabIndex}>

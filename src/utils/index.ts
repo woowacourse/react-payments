@@ -64,7 +64,7 @@ export const setNextInputFocus = (form: HTMLFormElement | null) => {
 
     const { maxLength, value, tabIndex } = currentInput;
 
-    if (tabIndex === TAB_INDEX_INFO.dismiss) {
+    if (tabIndex === TAB_INDEX_INFO.DISMISS) {
       continue;
     }
     if (maxLength === value.length) {

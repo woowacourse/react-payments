@@ -1,18 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { CARD_COMPANY_KIND } from '../../../constants/constant';
 import { CardCompanyType } from '../../../types/types';
 import BankInfo from './SelectCardCompanyItem';
-
-const CARD_COMPANY_KIND: CardCompanyType[] = [
-  'bc',
-  'shinhan',
-  'kakao',
-  'hyundai',
-  'woori',
-  'lotte',
-  'hana',
-  'kb',
-];
 
 interface SelectCardCompanyProps {
   onCardCompanySelectClick: (value: CardCompanyType) => void;

@@ -10,7 +10,9 @@ export interface PasswordInputProps {
   secondPasswordInformation: UseInputProps;
 }
 
-const { addCardPage } = TAB_INDEX_INFO;
+const {
+  ADD_CARD_PAGE: { FIRST_PASSWORD, SECOND_PASSWORD },
+} = TAB_INDEX_INFO;
 
 export default function PasswordInput({
   firstPasswordInformation,
@@ -28,7 +30,7 @@ export default function PasswordInput({
             placeholder="0"
             textAlign="center"
             autoComplete="off"
-            tabIndex={addCardPage.firstPassword}
+            tabIndex={FIRST_PASSWORD}
             {...firstPasswordInformation}
           />
         </GrayWrapper>
@@ -39,7 +41,7 @@ export default function PasswordInput({
             type="text"
             isPassword={true}
             textAlign="center"
-            tabIndex={addCardPage.secondPassword}
+            tabIndex={SECOND_PASSWORD}
             autoComplete="off"
             {...secondPasswordInformation}
           />

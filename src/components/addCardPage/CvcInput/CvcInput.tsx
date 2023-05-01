@@ -11,7 +11,9 @@ interface CvcInputProps {
   cvcInformation: UseInputProps;
 }
 
-const { addCardPage } = TAB_INDEX_INFO;
+const {
+  ADD_CARD_PAGE: { CVC },
+} = TAB_INDEX_INFO;
 
 export default function CvcInput({ cvcInformation }: CvcInputProps) {
   const [isOpenToolTip, setIsOpenToolTip] = useState(false);
@@ -32,7 +34,7 @@ export default function CvcInput({ cvcInformation }: CvcInputProps) {
             isNumber={true}
             id="cvc"
             placeholder="000"
-            tabIndex={addCardPage.cvc}
+            tabIndex={CVC}
             {...cvcInformation}
           />
         </Wrapper>

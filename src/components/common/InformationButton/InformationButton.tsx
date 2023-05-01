@@ -11,7 +11,7 @@ interface InformationButtonProps {
 export default function InformationButton({
   onClick,
   text = '?',
-  tabIndex = TAB_INDEX_INFO.dismiss,
+  tabIndex = TAB_INDEX_INFO.DISMISS,
 }: InformationButtonProps) {
   return (
     <Wrapper type="button" onClick={onClick} tabIndex={tabIndex}>

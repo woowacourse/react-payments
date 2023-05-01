@@ -9,7 +9,9 @@ export interface OwnerInputProps {
   ownerInformation: UseInputProps;
 }
 
-const { addCardPage } = TAB_INDEX_INFO;
+const {
+  ADD_CARD_PAGE: { OWNER },
+} = TAB_INDEX_INFO;
 
 export default function OwnerInput({ ownerInformation }: OwnerInputProps) {
   return (
@@ -19,7 +21,7 @@ export default function OwnerInput({ ownerInformation }: OwnerInputProps) {
           type="text"
           id="owner"
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-          tabIndex={addCardPage.owner}
+          tabIndex={OWNER}
           autoComplete="off"
           autoCapitalize="characters"
           lang="en"
