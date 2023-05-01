@@ -1,23 +1,29 @@
-import { Card } from '../types';
-import { Link } from 'react-router-dom';
-import Header from '../components/common/Header/Header';
-import Button from '../components/common/Button/Button';
-import CardList from '../components/CardList/CardList';
+import { useNavigate } from "react-router-dom";
+import Button from "../components/common/Button/Button";
+import CardList from "../components/CardList/CardList";
+import Header from "../components/common/Header/Header";
+import { useCardListContext } from "../contexts/CardListContext";
+import { PATH } from "../constants";
 
-interface CardListPageProps {
-  cardList: Card[];
-}
+const CardListPage = () => {
+  const { cardList } = useCardListContext();
+  const navigate = useNavigate();
 
-function CardListPage({ cardList }: CardListPageProps) {
   return (
     <>
       <Header content="나의 카드" />
-      <CardList cardList={cardList} />
-      <Link to={'/add-card'}>
-        <Button className="add-button center-hoz-item w-250">카드 추가하기</Button>
-      </Link>
+      <main>
+        <CardList cardList={cardList} />
+        <Button
+          variant="secondary"
+          className="add-button mg-t-24 center-hoz-item w-250"
+          onClick={() => navigate(PATH.ADD)}
+        >
+          카드 추가하기
+        </Button>
+      </main>
     </>
   );
-}
+};
 
 export default CardListPage;
