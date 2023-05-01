@@ -41,11 +41,23 @@ const useCardAddForm = () => {
     [updateInputValidation]
   );
 
-  const focusErrorInput = (errorInputs: (HTMLButtonElement | HTMLInputElement)[]) => {
+  const handleErrorInputFocus = (event: FormEvent<HTMLFormElement>) => {
     if (!inputValidation.issuer) {
-      errorInputs[0].focus();
-    } else {
-      errorInputs[1].focus();
+      const issuerInputButton = Array.from(event.currentTarget.elements).find(
+        (element): element is HTMLButtonElement =>
+          element.tagName === 'BUTTON' && (element as HTMLButtonElement).name === 'issuer'
+      );
+
+      issuerInputButton?.focus();
+    }
+
+    if (inputValidation.issuer) {
+      const errorInputElement = Array.from(event.currentTarget.elements).find(
+        (element): element is HTMLInputElement =>
+          element.tagName === 'INPUT' && !(element as HTMLInputElement).validity.valid
+      );
+
+      errorInputElement?.focus();
     }
   };
 
@@ -53,13 +65,8 @@ const useCardAddForm = () => {
     event.preventDefault();
 
     if (!isFormComplete) {
-      const errorInputs = Array.from(event.currentTarget.elements).filter(
-        (element): element is HTMLButtonElement | HTMLInputElement =>
-          element.tagName === 'BUTTON' || !(element as HTMLInputElement).validity.valid
-      );
-
       triggerAllInputErrors();
-      focusErrorInput(errorInputs);
+      handleErrorInputFocus(event);
 
       return;
     }
