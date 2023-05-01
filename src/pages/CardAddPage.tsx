@@ -1,9 +1,9 @@
-import { Dispatch, SetStateAction } from 'react';
-import { Card } from '../types';
-import Header from '../components/common/Header/Header';
-import CardItem from '../components/CardItem/CardItem';
-import CardAddForm from '../components/CardAddForm/CardAddForm';
-import { useCardAddition } from '../hooks/useCardAddition';
+import { Dispatch, SetStateAction } from "react";
+import { Card } from "../types";
+import Header from "../components/common/Header/Header";
+import CardItem from "../components/CardItem/CardItem";
+import CardAddForm from "../components/CardAddForm/CardAddForm";
+import { useCardForm } from "../hooks/useCardForm";
 
 interface CardAddPageProps {
   addCard: Dispatch<SetStateAction<Card[]>>;
@@ -18,12 +18,15 @@ function CardAddPage({ addCard }: CardAddPageProps) {
     onSecurityCodeChange,
     onPasswordChange,
     onCardInformationSubmit,
-  } = useCardAddition(addCard);
+  } = useCardForm(addCard);
 
   return (
     <>
-      <Header content="카드 추가" isOverlayPage={true} />
-      <CardItem className="mg-b-24 center-hoz-item" information={cardInformation} />
+      <Header content="카드  추가" isOverlayPage={true} />
+      <CardItem
+        className="mg-b-24 center-hoz-item"
+        information={cardInformation}
+      />
       <CardAddForm
         cardInformation={cardInformation}
         onCardNumberChange={onCardNumberChange}
