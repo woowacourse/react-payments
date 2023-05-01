@@ -12,18 +12,16 @@ function CardRegisterForm() {
   const { onSubmit, isValidateInfo } = useRegisterCardInfo();
 
   return (
-    <>
-      <S.Form onSubmit={onSubmit}>
-        <CardNumber />
-        <ExpireDate />
-        <OwnerNameInput />
-        <SecurityCode />
-        <CardPassword />
-        <S.ButtonContainer>
-          <Button text="다음" disabled={!isValidateInfo} />
-        </S.ButtonContainer>
-      </S.Form>
-    </>
+    <S.Form onSubmit={onSubmit}>
+      <CardNumber />
+      <ExpireDate />
+      <OwnerNameInput />
+      <SecurityCode />
+      <CardPassword />
+      <S.ButtonContainer>
+        <Button text="다음" disabled={!isValidateInfo} />
+      </S.ButtonContainer>
+    </S.Form>
   );
 }
 

@@ -18,6 +18,7 @@ function reducer(
   },
 ): CardInfoProps {
   const { type, payload, index } = action;
+
   switch (type) {
     case "cardNumbers":
     case "password":
@@ -25,6 +26,7 @@ function reducer(
       if (index !== undefined && !isNaN(index)) {
         state[type][index] = payload;
       }
+
       return { ...state, [type]: state[type] };
 
     case "ownerName":
@@ -34,8 +36,11 @@ function reducer(
       return { ...state, [type]: payload as CardIDProps };
 
     case "clear":
-      return initialCardInfos;
+      initialCardInfos.cardNumbers = ["", "", "", ""];
+      initialCardInfos.expireDate = ["", ""];
+      initialCardInfos.password = ["", ""];
 
+      return { ...initialCardInfos };
     default:
       return { ...state, [type]: payload };
   }
@@ -50,7 +55,7 @@ export const CardInfoContext = createContext<
       index?: number;
     }> | null,
   ]
->([initialCardInfos, null]);
+>([{ ...initialCardInfos }, null]);
 
 export function CardInfoProvider({ children }: PropsWithChildren) {
   const [inputValueContext] = useContext(CardInfoContext);
