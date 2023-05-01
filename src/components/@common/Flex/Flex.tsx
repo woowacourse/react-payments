@@ -18,7 +18,6 @@ const Flex = styled.div<Flex>`
   align-items: ${({ align = 'stretch' }) => align};
 
   width: ${({ width = '100%' }) => width};
-  ${({ scroll }) => (scroll ? `overflow: scroll` : 'overflow: hidden')};
 `;
 
 export default Flex;
