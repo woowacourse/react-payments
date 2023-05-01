@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 import CardNumber from "./CardNumber";
 
@@ -19,10 +19,10 @@ export default function InputBoxCardNumber(props: InputBoxNumberProps) {
   const { changeCardNumberStatus } = props;
 
   const [allStatus, setAllStatus] = useState<nowStatus[]>([1, 1, 1, 1]);
-  let hasError = false;
+  let hasError = useRef(false);
 
   useEffect(() => {
-    hasError = allStatus.includes(0) ? true : false;
+    hasError.current = allStatus.includes(0) ? true : false;
 
     allStatus.every((status) => status === 2)
       ? changeCardNumberStatus(true)

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import CardPassword from "./CardPassword";
 
@@ -19,10 +19,10 @@ export default function InputBoxPassword(props: InputBoxPasswordProps) {
   const { changePasswordStatus } = props;
 
   const [allStatus, setAllStatus] = useState<nowStatus[]>([1, 1]);
-  let hasError = false;
+  let hasError = useRef(false);
 
   useEffect(() => {
-    hasError = allStatus.includes(0) ? true : false;
+    hasError.current = allStatus.includes(0) ? true : false;
 
     allStatus.every((status) => status === 2)
       ? changePasswordStatus(true)
