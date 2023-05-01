@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { InputContainer, Input, InputLabel } from "../common";
 import { isNumeric } from "../../utils/validate";
 import { useFocusChain } from "../../hook/useFocusChain";
@@ -22,13 +22,7 @@ export const PasswordInput = ({
 }: PasswordInputProps) => {
   const [inputValues, setInputValues] = useState(["", ""]);
   const [isValid, setIsValid] = useState(true);
-
-  const allRefs = [
-    useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null),
-  ];
-
-  const { moveFocusToNext } = useFocusChain(allRefs, 1);
+  const { inputRefs, moveFocusToNext } = useFocusChain(2, 1);
 
   const handleInput =
     (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,7 +66,7 @@ export const PasswordInput = ({
             isValid: isValid,
             errorMessage: ERROR_MESSAGE.PASSWORDS,
           }}
-          ref={allRefs[0]}
+          ref={inputRefs[0]}
         />
         <Input
           {...passwordInfo}
@@ -80,7 +74,7 @@ export const PasswordInput = ({
           handleOutFocus={validate}
           handleFocus={eraseErrorMessage}
           label="password2"
-          ref={allRefs[1]}
+          ref={inputRefs[1]}
         />
         <HiddenPassword>●</HiddenPassword>
         <HiddenPassword>●</HiddenPassword>

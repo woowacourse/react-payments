@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { InputContainer, InputLabel, Input } from "../common";
 import { isNumeric } from "../../utils/validate";
@@ -22,15 +22,8 @@ export const NumbersInput = ({
   const [inputValues, setInputValues] = useState(["", "", "", ""]);
   const [isValid, setIsValid] = useState(true);
 
-  const allRefs = [
-    useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null),
-  ];
-
-  const { moveFocusToNext } = useFocusChain(
-    allRefs,
+  const { moveFocusToNext, inputRefs } = useFocusChain(
+    4,
     INPUT_FULL_LENGTH.CARD_NUMBER
   );
 
@@ -89,7 +82,7 @@ export const NumbersInput = ({
           handleInput={handleInput(0)}
           handleOutFocus={validate}
           handleFocus={eraseErrorMessage}
-          ref={allRefs[0]}
+          ref={inputRefs[0]}
         />
         {[2, 3, 4].map((inputNumber) => (
           <Input
@@ -100,7 +93,7 @@ export const NumbersInput = ({
             handleInput={handleInput(inputNumber - 1)}
             handleOutFocus={validate}
             handleFocus={eraseErrorMessage}
-            ref={allRefs[inputNumber - 1]}
+            ref={inputRefs[inputNumber - 1]}
           />
         ))}
       </Row>
