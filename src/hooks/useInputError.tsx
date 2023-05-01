@@ -4,12 +4,8 @@ export const useInputError = (): [boolean, (e: React.ChangeEvent<HTMLInputElemen
   const [isError, setIsError] = useState<boolean>(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.validity.valid) {
-      setIsError(false);
-      return;
-    }
-
-    setIsError(true);
+    const isInvalid = !e.target.validity.valid;
+    setIsError(isInvalid);
   };
 
   return [isError, handleInputChange];
