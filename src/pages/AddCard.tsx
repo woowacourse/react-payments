@@ -52,7 +52,7 @@ const AddCard = () => {
   const { password, checkPassword } = useCardPassword();
   const { securityCode, checkSecurityCode } = useSecurityCode();
   const { expiredDate, checkExpiredDate, validateDate } = useExpiredDate();
-  const { cardCompany, checkCardCompany } = useCardCompany();
+  const { cardCompany, onSetCardCompany } = useCardCompany();
 
   const { isBottomSheetOpen, onOpenBottomSheet, onCloseBottomSheet } =
     useBottomSheet();
@@ -137,7 +137,7 @@ const AddCard = () => {
       </Layout>
       {isBottomSheetOpen && (
         <BottomSheet
-          checkCardCompany={checkCardCompany}
+          onSetCardCompany={onSetCardCompany}
           closeBottomSheet={onCloseBottomSheet}
         />
       )}

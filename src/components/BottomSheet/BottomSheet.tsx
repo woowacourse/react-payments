@@ -4,7 +4,7 @@ import CardSvgIcon from '../Svg/CardSvgIcon';
 import * as Styled from './BottomSheet.styles';
 
 interface BottomSheetProps {
-  checkCardCompany: (value: CardCompanyName) => void;
+  onSetCardCompany: (value: CardCompanyName) => void;
   closeBottomSheet: () => void;
 }
 
@@ -22,12 +22,12 @@ const isCardCompany = (value: string): value is CardCompanyName => {
 };
 
 const BottomSheet = ({
-  checkCardCompany,
+  onSetCardCompany,
   closeBottomSheet,
 }: BottomSheetProps) => {
   const handleCardIconClick = (name: string) => {
     if (!isCardCompany(name)) return;
-    checkCardCompany(name);
+    onSetCardCompany(name);
     closeBottomSheet();
   };
 

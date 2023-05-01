@@ -3,11 +3,11 @@ import { CardCompanyName } from '../types/Card';
 
 const useCardCompany = () => {
   const [cardCompany, setCardCompany] = useState<CardCompanyName>('카드사');
-  const checkCardCompany = (value: CardCompanyName) => {
+  const onSetCardCompany = (value: CardCompanyName) => {
     setCardCompany(value);
   };
 
-  return { cardCompany, checkCardCompany };
+  return { cardCompany, onSetCardCompany };
 };
 
 export default useCardCompany;
