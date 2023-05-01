@@ -18,9 +18,9 @@ import { useCardList } from '../../hooks/useCardList';
 export const AddNewCardForm = () => {
   const navigate = useNavigate();
 
-  const { addCardListToLocalStorage: addNewCardToLocalStorage } =
-    useLocalStorage();
-  const { addNewCard } = useCardList();
+  const { addNewCard, modifyCardInfo, cardList } = useCardList();
+
+  const { setCardId } = useCardInfoActionContext();
 
   const {
     cardNumber,
@@ -31,7 +31,6 @@ export const AddNewCardForm = () => {
     companyId,
     cardId,
   } = useCardInfoValueContext();
-  const { setCardId } = useCardInfoActionContext();
 
   const { isOpen } = useModalStateContext();
 
@@ -46,7 +45,7 @@ export const AddNewCardForm = () => {
   }, []);
 
   const handleSubmitNewCardInfo = () => {
-    const newCard = {
+    const newCardInfo = {
       cardNumber,
       expirationDate,
       ownerName,
@@ -56,17 +55,22 @@ export const AddNewCardForm = () => {
       cardId,
     };
 
-    addNewCard(newCard);
+    if (cardList.find((card) => card.cardId === cardId)) {
+      modifyCardInfo(cardId, newCardInfo);
+      navigate('/register/nickName');
+      return;
+    }
 
+    addNewCard(newCardInfo);
     navigate('/register/nickName');
   };
 
   useEffect(() => {
-    setCardId(v4());
-  }, [setCardId]);
+    if (cardId === '') setCardId(v4());
+  }, [cardId, setCardId]);
 
   return (
-    <Style.Wrapper>
+    <Style.Wrapper onSubmit={(e) => e.preventDefault()}>
       {companyId ? (
         <Style.InputContainer>
           {inputOrder === 0 && (

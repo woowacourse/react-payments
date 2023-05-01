@@ -5,14 +5,68 @@ import { v4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
 import { useCardList } from '../hooks/useCardList';
 import { useCardInfoActionContext } from '../hooks/cardInfoContext';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { Card } from '../types/card';
 
 export const Main = () => {
   const navigate = useNavigate();
 
   const { cardList } = useCardList();
 
-  const { resetAll } = useCardInfoActionContext();
+  const {
+    resetAll,
+    setCardNumber,
+    setCompanyId,
+    setExpirationDate,
+    setOwnerName,
+    setPassword,
+    setSecurityCode,
+    setCardId,
+    setNickName,
+  } = useCardInfoActionContext();
+
+  const { getCardById } = useCardList();
+
+  const setCardInfo = (card: Card) => {
+    if (card.companyId) setCompanyId(card.companyId);
+
+    for (let i = 0; i < 4; i++) {
+      setCardNumber(i, card.cardNumber[i]);
+    }
+
+    setExpirationDate('month', card.expirationDate.month);
+    setExpirationDate('year', card.expirationDate.year);
+
+    setOwnerName(card.ownerName);
+
+    setSecurityCode(card.securityCode);
+
+    for (let i = 0; i < 2; i++) {
+      setPassword(i, card.password[i]);
+    }
+
+    if (card.nickName) setNickName(card.nickName);
+  };
+
+  const handleClickCardPreview = (cardId: string) => {
+    const card = getCardById(cardId);
+
+    setCardId(cardId);
+
+    setCardInfo(card);
+
+    navigate('/register');
+  };
+
+  const handleClickCardNickName = (cardId: string) => {
+    const card = getCardById(cardId);
+
+    setCardId(cardId);
+
+    setCardInfo(card);
+
+    navigate('/register/nickName');
+  };
 
   useEffect(() => {
     resetAll();
@@ -39,8 +93,22 @@ export const Main = () => {
                   expirationDate={card.expirationDate}
                   ownerName={card.ownerName}
                   companyId={card.companyId}
+                  handleClick={() => {
+                    // eslint-disable-next-line no-restricted-globals
+                    if (confirm('카드 정보를 수정하시겠습니까?'))
+                      handleClickCardPreview(card.cardId);
+                  }}
                 />
-                <Style.CardNickName>{card.nickName ?? ''}</Style.CardNickName>
+                <Style.CardNickName
+                  onClick={() => {
+                    // eslint-disable-next-line no-restricted-globals
+                    if (confirm('카드 별명을 수정하시겠습니까?')) {
+                      handleClickCardNickName(card.cardId);
+                    }
+                  }}
+                >
+                  {card.nickName ?? ''}
+                </Style.CardNickName>
               </div>
             );
           })

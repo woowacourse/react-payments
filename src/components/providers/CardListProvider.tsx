@@ -12,6 +12,7 @@ interface CardListContextType {
   getCardById: (id: string) => Card;
   addNewCard: (newCard: Card) => void;
   setNickNameToCard: (cardId: string, nickName: string) => void;
+  modifyCardInfo: (cardId: string, card: Card) => void;
 }
 
 export const CardListContext = createContext<CardListContextType>({
@@ -30,6 +31,7 @@ export const CardListContext = createContext<CardListContextType>({
   },
   addNewCard: (newCard: Card) => {},
   setNickNameToCard: (cardId: string, nickName: string) => {},
+  modifyCardInfo: (cardId: string, card: Card) => {},
 });
 
 export const CardListProvider = ({ children }: Props) => {
@@ -77,9 +79,28 @@ export const CardListProvider = ({ children }: Props) => {
     });
   };
 
+  const modifyCardInfo = (cardId: string, card: Card) => {
+    setCardList((prev) => {
+      const newCardList = prev.map((c) => {
+        if (c.cardId === cardId) return card;
+        return c;
+      });
+
+      addNewCardToLocalStorage(newCardList);
+
+      return newCardList;
+    });
+  };
+
   return (
     <CardListContext.Provider
-      value={{ cardList, getCardById, addNewCard, setNickNameToCard }}
+      value={{
+        cardList,
+        getCardById,
+        addNewCard,
+        setNickNameToCard,
+        modifyCardInfo,
+      }}
     >
       {children}
     </CardListContext.Provider>

@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 import { CardViewer } from '../../components/cardViewer';
-import { useCardInfoValueContext } from '../../hooks/cardInfoContext';
+import {
+  useCardInfoActionContext,
+  useCardInfoValueContext,
+} from '../../hooks/cardInfoContext';
 import { Layout } from '../../layout';
 import { Input } from '../../components/addCardForm/cardInfoInputs/template/Input';
 import { useNavigate } from 'react-router-dom';
@@ -10,8 +13,9 @@ import { useRef } from 'react';
 export const AddCardNickName = () => {
   const navigate = useNavigate();
 
-  const { cardNumber, expirationDate, ownerName, companyId, cardId } =
+  const { cardNumber, expirationDate, ownerName, companyId, cardId, nickName } =
     useCardInfoValueContext();
+  const { setNickName } = useCardInfoActionContext();
 
   const { setNickNameToCard } = useCardList();
 
@@ -51,6 +55,8 @@ export const AddCardNickName = () => {
             height: 'max-content',
             padding: '5px',
           }}
+          onChange={(e) => setNickName(e.target.value)}
+          value={nickName ?? ''}
           placeholder="카드 별명"
         />
         <Style.ButtonWrapper>

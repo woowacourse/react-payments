@@ -128,7 +128,7 @@ export const CardInfoProvider = ({ children }: Props) => {
           password: ['', ''],
           companyId: undefined,
           nickName: undefined,
-          cardId: v4(),
+          cardId: '',
         });
       },
     }),
