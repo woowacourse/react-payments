@@ -12,7 +12,10 @@ export default function MyCardList() {
   return (
     <Styled.Root dir="column" align="center" scroll>
       {registeredCards.map((card, index) => (
-        <Card type="card" key={generateCardNumber(card.cardNumber)} {...card} />
+        <div key={generateCardNumber(card.cardNumber)}>
+          <Card type="card" {...card} />
+          <Styled.Alias style={{ color: 'black', height: '30px' }}>{card.alias}</Styled.Alias>
+        </div>
       ))}
       <Card type="button" onClick={() => navigate('./registerCard')} />
     </Styled.Root>
