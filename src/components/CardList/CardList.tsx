@@ -1,25 +1,34 @@
-import styles from './style.module.css';
-import { Card } from '../../types';
-import CardItem from '../CardItem/CardItem';
+/* eslint-disable react/jsx-no-useless-fragment */
+import styles from "./style.module.css";
+import type { Card } from "../../types";
+import CardItem from "../CardItem/CardItem";
 
 interface CardListProps {
   cardList: Card[];
 }
 
-function CardList({ cardList }: CardListProps) {
+const CardList = ({ cardList }: CardListProps) => {
   return (
-    <div className={styles.container}>
+    <>
       {cardList.length ? (
-        <div className={styles.listContainer}>
-          {cardList.map((card, index) => (
-            <CardItem information={card} key={index} />
+        <div className={styles.container}>
+          {cardList.map((card) => (
+            <div className={styles.item} key={card.id}>
+              <CardItem
+                issuer={card.issuer}
+                cardNumber={card.cardNumber}
+                expirationDate={card.expirationDate}
+                ownerName={card.ownerName}
+              />
+              <h5 className={styles.cardName}>{card.cardName}</h5>
+            </div>
           ))}
         </div>
       ) : (
         <h4 className={styles.emptyListMessage}>새로운 카드를 등록해주세요.</h4>
       )}
-    </div>
+    </>
   );
-}
+};
 
 export default CardList;
