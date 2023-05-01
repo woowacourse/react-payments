@@ -74,29 +74,29 @@ export const SuccessInteraction: Story = {
       await new Promise((resolve) => setTimeout(resolve, 700));
     });
 
-    userEvent.tab();
-
     const cardNumberInput = canvas.getByLabelText('카드 번호', {
       exact: false,
       selector: 'input',
     });
+    expect(cardNumberInput).toHaveFocus();
+
     await userEvent.type(cardNumberInput, '1234123412341234', { delay: 200 });
     expect(cardNumberInput).toHaveValue('1234 1234 •••• ••••');
-
-    userEvent.tab();
 
     const expirationDateInput = canvas.getByLabelText('만료일', {
       exact: false,
       selector: 'input',
     });
-    await userEvent.type(expirationDateInput, '1223', { delay: 200 });
+    expect(expirationDateInput).toHaveFocus();
 
-    userEvent.tab();
+    await userEvent.type(expirationDateInput, '1223', { delay: 200 });
 
     const ownerNameInput = canvas.getByLabelText('카드 소유자 이름', {
       exact: false,
       selector: 'input',
     });
+    expect(ownerNameInput).toHaveFocus();
+
     await userEvent.type(ownerNameInput, 'WOOWACOURSE', { delay: 200 });
 
     userEvent.tab();
@@ -105,21 +105,21 @@ export const SuccessInteraction: Story = {
       exact: false,
       selector: 'input',
     });
+    expect(securityCodeInput).toHaveFocus();
+
     await userEvent.type(securityCodeInput, '1234', { delay: 200 });
     expect(securityCodeInput).toHaveValue('1234');
-
-    userEvent.tab();
 
     const passwordInputs = canvas.queryAllByLabelText('비밀번호', {
       exact: false,
       selector: 'input',
     });
+    expect(passwordInputs[0]).toHaveFocus();
+
     await userEvent.type(passwordInputs[0], '1', { delay: 200 });
     expect(passwordInputs[1]).toHaveFocus();
 
     await userEvent.type(passwordInputs[1], '2', { delay: 200 });
-
-    userEvent.tab();
   },
 };
 
