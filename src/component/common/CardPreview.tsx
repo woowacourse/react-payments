@@ -20,9 +20,7 @@ export default function CardPreview({
 
   const previewNumber =
     cardNumber.length === 4 &&
-    cardNumber.every((number) => {
-      return 1000 <= number && number <= 9999;
-    }) &&
+    cardNumber.every((number) => number.length === 4) &&
     cardNumber.join(" ");
 
   const { backgroundColor, color } = colorMatch[cardCo];

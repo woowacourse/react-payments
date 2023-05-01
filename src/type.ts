@@ -1,11 +1,11 @@
 export interface CreditCard {
   cardCo: CardCo;
   nickName: string;
-  cardNumber: number[];
+  cardNumber: string[];
   expirationDate: string;
   owner: string;
   securityCode: string;
-  password: number[];
+  password: string[];
 }
 
 export interface EachUserInputState {
