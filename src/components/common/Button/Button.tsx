@@ -1,19 +1,37 @@
-import styles from './style.module.css';
-import { ComponentPropsWithoutRef } from 'react';
+import { forwardRef } from "react";
+import type { ComponentPropsWithRef, ForwardedRef } from "react";
+import styles from "./style.module.css";
 
-interface ButtonProps extends ComponentPropsWithoutRef<'button'> {
-  primary?: boolean;
-  children: string;
+interface ButtonProps extends ComponentPropsWithRef<"button"> {
+  variant?: "default" | "primary" | "secondary" | "danger" | "textButton";
+  size?: "small" | "medium" | "large";
+  icon?: string;
+  children?: string;
 }
 
-function Button({ children, primary = false, className, ...attributes }: ButtonProps) {
-  const visualStyle = primary ? styles.primaryButton : styles.secondaryButton;
+const Button = (
+  {
+    children,
+    variant = "default",
+    size = "medium",
+    className = "",
+    icon,
+    ...attributes
+  }: ButtonProps,
+  ref: ForwardedRef<HTMLButtonElement>
+) => {
+  const displayStyle = icon ? styles.iconButton : "";
 
   return (
-    <button className={`${visualStyle} ${className}`} {...attributes}>
+    <button
+      ref={ref}
+      className={`${className} ${styles[variant]} ${styles[size]} ${displayStyle}`}
+      {...attributes}
+    >
+      {icon && <img src={icon} alt="icon" />}
       {children}
     </button>
   );
-}
+};
 
-export default Button;
+export default forwardRef(Button);
