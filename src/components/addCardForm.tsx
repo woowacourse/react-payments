@@ -15,7 +15,7 @@ import {
   RefContext,
 } from "../contexts/cardInfo";
 import { TEXT_LENGTH } from "../constants/inputInfo";
-import { SubmitButton } from "./common/submitButton";
+import { SubmitButton } from "./common/button/submitButton";
 import { bank } from "../core/bank";
 
 export function AddCardForm() {
@@ -37,7 +37,6 @@ export function AddCardForm() {
 
   function saveData(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    // setCardData(getInputData());
     navigate("/add-nickname", { state: getInputData() });
   }
 
@@ -79,18 +78,4 @@ const Form = styled.form`
   justify-content: space-between;
 
   margin-left: 1rem;
-`;
-
-const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: end;
-`;
-
-const CompleteButton = styled.button`
-  width: 5rem;
-
-  padding: 0.5rem 0.1rem;
-
-  background-color: ${({ theme }) => theme.colors.black};
-  color: ${({ theme }) => theme.colors.gray200};
 `;
