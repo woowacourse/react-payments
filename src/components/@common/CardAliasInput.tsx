@@ -5,27 +5,11 @@ interface CardAliasInputProps {
   value: string;
   maxLength?: number;
   placeholder?: string;
-  autofocus?: boolean;
+  autoFocus?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const CardAliasInput = ({
-  type,
-  maxLength,
-  placeholder,
-  onChange,
-  value,
-  autofocus,
-}: CardAliasInputProps) => {
-  return (
-    <Styled.Input
-      type={type}
-      maxLength={maxLength}
-      placeholder={placeholder}
-      onChange={onChange}
-      value={value}
-      autoFocus={autofocus}
-    />
-  );
+const CardAliasInput = (cardAliasInputProps: CardAliasInputProps) => {
+  return <Styled.Input {...cardAliasInputProps} />;
 };
 export default CardAliasInput;

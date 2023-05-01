@@ -55,7 +55,7 @@ const AddAlias = ({ cards, setCards }: CardList) => {
             maxLength={10}
             placeholder="10글자 이내의 카드 별칭을 적어주세요."
             onChange={handleOnChange}
-            autofocus={true}
+            autoFocus={true}
           />
           <Styled.ButtonWrapper>
             <SubmitButton textContent="확인" color={true} cursor={true} />
