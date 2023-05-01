@@ -1,4 +1,3 @@
-import { useRef } from 'react';
 import type { FormEvent } from 'react';
 import type { CardFormData, CardFormValidation } from '../../types';
 import Button from '../common/Button/Button';
@@ -8,6 +7,7 @@ import CardNumber from './CardNumber/CardNumber';
 import CardOwnerName from './CardOwnerName/CardOwnerName';
 import CardPassword from './CardPassword/CardPassword';
 import CardSecurityCode from './CardSecurityCode/CardSecurityCode';
+import { useFormFocus } from '../../hooks/common/useFormFocusMove';
 import styles from './style.module.css';
 
 interface CardAddFormProps {
@@ -23,10 +23,10 @@ const CardAddForm = ({
   updateInputError,
   handleSubmit,
 }: CardAddFormProps) => {
-  const formRef = useRef<HTMLFormElement>(null);
+  const { moveFocus } = useFormFocus();
 
   return (
-    <form ref={formRef} className={styles.form} noValidate onSubmit={handleSubmit}>
+    <form className={styles.form} onChange={moveFocus} onSubmit={handleSubmit} noValidate>
       <CardIssuer
         isError={cardInputError.issuer}
         updateInputValue={updateInputValue}
