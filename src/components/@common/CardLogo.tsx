@@ -14,13 +14,13 @@ const CardLogo = ({
   setCardCompany,
   setIsModalOpen,
 }: CardLogoProps) => {
+  const handleCardCompany = () => {
+    setCardCompany(companyName);
+    setIsModalOpen(false);
+  };
+
   return (
-    <Styled.Wrapper
-      onClick={() => {
-        setCardCompany(companyName);
-        setIsModalOpen(false);
-      }}
-    >
+    <Styled.Wrapper onClick={handleCardCompany}>
       <img src={companyImage} alt="로고" />
       <Styled.Text>{companyName}</Styled.Text>
     </Styled.Wrapper>
