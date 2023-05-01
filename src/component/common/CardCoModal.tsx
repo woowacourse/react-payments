@@ -22,7 +22,7 @@ export default function CardCoModal({
   return (
     <>
       <div className="cardCo-modal-background"></div>
-      <div className="cardCo-modal-container">
+      <div className="cardCo-modal-container" style={{ margin: 0 }}>
         <div className="cardCo-button-container">
           {cardCoList.map((cardCo) =>
             CardCoButton({ cardCo, changeCardCoStatus })
