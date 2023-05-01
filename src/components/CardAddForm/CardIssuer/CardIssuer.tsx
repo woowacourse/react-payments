@@ -2,7 +2,7 @@ import { memo, useEffect, useRef, useState } from "react";
 import type { FocusEvent, KeyboardEvent, MouseEvent } from "react";
 import type { CardFormData, CardFormValidation, Issuer } from "../../../types";
 import Button from "../../common/Button/Button";
-import CardIssuerSelection from "./CardIssuerSelection/CardIssuerSelection";
+import CardIssuerSelection from "./CardIssuerSelction/CardIssuerSelction";
 import InputContainer from "../../common/InputContainer/InputContainer";
 import Label from "../../common/Label/Label";
 import Modal from "../../common/Modal/Modal";

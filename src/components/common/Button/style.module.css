@@ -1,32 +1,110 @@
 button {
   width: 100%;
   max-width: 350px;
-  padding: 15px 0;
   border-radius: 7px;
   border: none;
   outline: 0;
   cursor: pointer;
 
   font-weight: 600;
-  font-size: 14px;
 
   transition: all 0.2s ease-in-out;
 }
 
-.primaryButton {
-  background-color: #2295ff;
-  color: white;
+button:focus {
+  outline: 1px solid white;
 }
 
-.primaryButton:hover {
-  background-color: #007aea;
+.iconButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
 }
 
-.secondaryButton {
-  background-color: #e9f4ff;
-  color: #007aea;
+.default {
+  background-color: transparent;
+  color: #0e0e0e;
+  border: 1px solid var(--light-gray-2);
 }
 
-.secondaryButton:hover {
-  background-color: #d7ecff;
+.default:hover:enabled {
+  background-color: var(--light-gray-1);
+}
+
+.primary {
+  background-color: var(--blue);
+  color: var(--white);
+}
+
+.primary:hover:enabled {
+  background-color: var(--dark-blue);
+}
+
+.primary:focus {
+  box-shadow: 0 0 0 3px var(--blue);
+}
+
+.secondary {
+  background-color: var(--light-blue-1);
+  color: var(--dark-blue);
+}
+
+.secondary:hover:enabled {
+  background-color: var(--light-blue-2);
+}
+
+.secondary:focus {
+  box-shadow: 0 0 0 3px var(--light-blue-1);
+}
+
+.danger {
+  background-color: var(--red);
+  color: var(--white);
+}
+
+.danger:hover:enabled {
+  background-color: var(--dark-red);
+}
+
+.danger:focus {
+  box-shadow: 0 0 0 3px var(--red);
+}
+
+.textButton {
+  background-color: transparent;
+  color: var(--black);
+}
+
+.textButton:hover:enabled {
+  background-color: var(--light-gray-1);
+}
+
+.textButton:focus {
+  box-shadow: 0 0 0 3px var(--light-gray-1);
+}
+
+.small {
+  padding: 12px 12px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.medium {
+  padding: 12px 12px;
+  font-size: 16px;
+}
+
+.large {
+  padding: 16px 14px;
+  font-size: 16px;
+}
+
+button:disabled {
+  opacity: 0.3;
+}
+
+.iconButton > img {
+  width: 14px;
+  height: 14px;
 }

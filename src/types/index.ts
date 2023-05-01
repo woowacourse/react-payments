@@ -1,27 +1,63 @@
-type CardNumberFormat = [string, string, string, string];
-type PasswordFormat = [string, string];
+import type { CARD_ISSUERS } from "../constants";
 
-interface ExpirationDateFormat {
+interface SupportingTextMessage {
+  default?: string;
+  error?: string;
+}
+
+type Issuer = (typeof CARD_ISSUERS)[number];
+
+interface ExpirationDate {
   month: string;
   year: string;
 }
 
 interface Card {
-  cardNumber: "";
-  expirationDate: ExpirationDateFormat;
-  ownerName?: string;
+  id: number;
+  cardName: string;
+  issuer: Issuer | "";
+  cardNumber: string;
+  expirationDate: ExpirationDate;
+  ownerName: string;
   securityCode: string;
-  password: PasswordFormat;
+  password: string[];
 }
 
-type CardInputValidation = {
-  [K in keyof Card]: boolean;
+type CardFormData = Omit<Card, "id" | "cardName">;
+
+type CardDisplayInformation = Pick<
+  Card,
+  "issuer" | "cardNumber" | "expirationDate" | "ownerName"
+>;
+
+type CardFormValidation = {
+  [K in keyof CardFormData]: boolean;
+};
+
+type MultipleInputFieldCardInformation = "password";
+
+type ValidatorArgs = {
+  issuer: string;
+  cardNumber: string;
+  expirationDate: ExpirationDate;
+  ownerName: string;
+  securityCode: string;
+  password: string[];
+};
+
+type Validator = {
+  [K in keyof CardFormData]: (value: ValidatorArgs[K]) => boolean;
 };
 
 export type {
-  CardNumberFormat,
-  PasswordFormat,
-  ExpirationDateFormat,
+  SupportingTextMessage,
+  Issuer,
+  ExpirationDate,
   Card,
-  CardInputValidation,
+  CardFormData,
+  CardDisplayInformation,
+  CardFormValidation,
+  MultipleInputFieldCardInformation,
+  ValidatorArgs,
+  Validator,
 };

@@ -1,28 +1,28 @@
-import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import { Card } from "./types";
-import CardListPage from "./pages/CardListPage";
 import CardAddPage from "./pages/CardAddPage";
-import { getLocalStorage, saveToLocalStorage } from "./utils/localStorage";
+import CardListPage from "./pages/CardListPage";
+import CardRegisteredPage from "./pages/CardRegisteredPage";
+import { CardListProvider } from "./contexts/CardListContext";
+import { ModalProvider } from "./contexts/ModalContext";
+import { PATH } from "./constants";
 
-function App() {
-  const [cardList, setCardList] = useState<Card[]>(getLocalStorage() ?? []);
-
-  useEffect(() => {
-    saveToLocalStorage(cardList);
-  }, [cardList]);
-
+const App = () => {
   return (
-    <div className="app">
-      <Routes>
-        <Route path="/" element={<CardListPage cardList={cardList} />} />
-        <Route
-          path="/add-card"
-          element={<CardAddPage addCard={setCardList} />}
-        />
-      </Routes>
-    </div>
+    <ModalProvider>
+      <CardListProvider>
+        <div className="app">
+          <Routes>
+            <Route path={PATH.ROOT} element={<CardListPage />} />
+            <Route path={PATH.ADD} element={<CardAddPage />} />
+            <Route
+              path={`${PATH.REGISTER}/:id`}
+              element={<CardRegisteredPage />}
+            />
+          </Routes>
+        </div>
+      </CardListProvider>
+    </ModalProvider>
   );
-}
+};
 
 export default App;

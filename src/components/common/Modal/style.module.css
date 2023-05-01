@@ -1,0 +1,118 @@
+.container {
+  position: relative;
+  background: transparent;
+  border: none;
+  z-index: 10000;
+  width: 100%;
+  height: 100%;
+  z-index: 999999;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  background: rgba(0, 0, 0, 0.15);
+
+  cursor: pointer;
+}
+
+.content {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+
+  padding: 36px 16px;
+  padding-bottom: 48px;
+
+  background-color: var(--white);
+
+  border: none;
+  outline: 0;
+
+  opacity: 0;
+  transform: translate(0, 100%);
+}
+
+.openModal {
+  animation: openModalAnimation 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) 0.2s
+    forwards;
+}
+
+.closeModal {
+  opacity: 1;
+  transform: translate(0, 0);
+  animation: closeModalAnimation 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) 0.1s
+    forwards;
+}
+
+.openBackdrop {
+  animation: showBackdropAnimation 0.2s cubic-bezier(0.165, 0.84, 0.44, 1)
+    forwards;
+}
+
+.closeBackdrop {
+  animation: hideBackdropAnimation 0.2s cubic-bezier(0.165, 0.84, 0.44, 1) 0.2s
+    forwards;
+}
+
+@keyframes openModalAnimation {
+  0% {
+    opacity: 0;
+    transform: translate(0, 100%);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes closeModalAnimation {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(0, 100%);
+  }
+}
+
+@keyframes showBackdropAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes hideBackdropAnimation {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .content {
+    width: calc(100% - 40px);
+    margin: 20px;
+    padding-top: 24px;
+    padding-bottom: 24px;
+
+    border-radius: 8px;
+  }
+}
