@@ -1,4 +1,9 @@
-import React, { createContext, PropsWithChildren, useState } from "react";
+import React, {
+  createContext,
+  PropsWithChildren,
+  useEffect,
+  useState,
+} from "react";
 
 export const ModalContext = createContext({
   isOpen: false,
@@ -14,11 +19,16 @@ interface ModalState {
 
 interface ModalProviderProps {
   modalState?: ModalState;
+  defaultOpen: boolean;
 }
 
 export function ModalProvider(props: PropsWithChildren<ModalProviderProps>) {
-  const { modalState, children } = props;
-  const [isOpen, setIsOpen] = useState(modalState?.modalOpen ?? true);
+  const { modalState, defaultOpen = false, children } = props;
+  const [isOpen, setIsOpen] = useState(modalState?.modalOpen ?? false);
+
+  useEffect(() => {
+    defaultOpen && setIsOpen(true);
+  }, []);
 
   function openLocalModal() {
     setIsOpen(true);

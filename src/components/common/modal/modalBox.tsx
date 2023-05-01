@@ -1,5 +1,5 @@
-import { PropsWithChildren, useState } from "react";
-import { ModalProvider } from "../../../contexts/modal";
+import { PropsWithChildren, useContext, useEffect, useState } from "react";
+import { ModalContext, ModalProvider } from "../../../contexts/modal";
 
 interface ModalState {
   modalOpen: boolean;
@@ -9,10 +9,15 @@ interface ModalState {
 
 interface ModalProps {
   modalState?: ModalState;
+  defaultOpen?: boolean;
 }
 
 export function ModalBox(props: PropsWithChildren<ModalProps>) {
-  const { modalState, children } = props;
+  const { defaultOpen = false, modalState, children } = props;
 
-  return <ModalProvider modalState={modalState}>{children}</ModalProvider>;
+  return (
+    <ModalProvider modalState={modalState} defaultOpen={defaultOpen}>
+      {children}
+    </ModalProvider>
+  );
 }

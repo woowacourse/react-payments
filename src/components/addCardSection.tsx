@@ -34,7 +34,7 @@ export function AddCardSection() {
         bank={bank[selectedItem]?.logoName}
       />
       <AddCardForm />
-      <ModalBox>
+      <ModalBox defaultOpen>
         <ModalTrigger />
         <ModalBackDrop />
         <ModalContent>
