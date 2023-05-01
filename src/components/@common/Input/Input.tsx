@@ -120,7 +120,7 @@ function Label(props: PropsWithChildren<LabelProps>) {
     if (fieldItem && fieldItem.ref.current) {
       setFieldId(fieldItem.ref.current.id);
     }
-  }, [itemMap]);
+  }, []);
 
   if (asChild && isValidElement<{ htmlFor: string }>(child)) {
     return cloneElement(child, {
