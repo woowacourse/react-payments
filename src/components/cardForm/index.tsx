@@ -7,9 +7,9 @@ import { OwnerInput } from "./OwnerInput";
 import { PasswordInput } from "./PasswordInput";
 import { FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { useValidation } from "../../hook/useValidation";
+import { useValidation } from "./hooks/useValidation";
 import { PAGE } from "../../constant/routePath";
-import { useCardList } from "../../hook/useCardList";
+import { useCardList } from "./hooks/useCardList";
 
 interface CardFormProps {
   setCardInfo: React.Dispatch<React.SetStateAction<CardType>>;
@@ -32,6 +32,7 @@ export const CardForm = ({ setCardInfo, newCard }: CardFormProps) => {
 
     if (isEveryInputValid()) {
       cardListActions.addNewCard(newCard);
+
       moveTo(PAGE.registerCard);
     }
   };

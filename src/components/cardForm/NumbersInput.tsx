@@ -2,7 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { InputContainer, InputLabel, Input } from "../common";
 import { isNumeric } from "../../utils/validate";
-import { useFocusChain } from "../../hook/useFocusChain";
+import { useInputFocusChain } from "../../hook/useInputFocusChain";
 import { ERROR_MESSAGE, INPUT_FULL_LENGTH } from "../../constant/cardInput";
 
 interface NumbersInputProps {
@@ -22,7 +22,7 @@ export const NumbersInput = ({
   const [inputValues, setInputValues] = useState(["", "", "", ""]);
   const [isValid, setIsValid] = useState(true);
 
-  const { moveFocusToNext, inputRefs } = useFocusChain(
+  const { moveFocusToNext, inputRefs } = useInputFocusChain(
     4,
     INPUT_FULL_LENGTH.CARD_NUMBER
   );

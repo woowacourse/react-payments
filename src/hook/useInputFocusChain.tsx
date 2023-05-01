@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useRef } from "react";
 
-export const useFocusChain = (inputNumber: number, fullLength: number) => {
+export const useInputFocusChain = (inputNumber: number, fullLength: number) => {
   const inputRefs = Array.from({ length: inputNumber }, () =>
     useRef<HTMLInputElement>(null)
   );

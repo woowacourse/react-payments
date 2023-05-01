@@ -3,7 +3,7 @@ import { CardItem } from "../components/cardList/CardItem";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { PAGE } from "../constant/routePath";
-import { useCardList } from "../hook/useCardList";
+import { useCardList } from "../components/cardForm/hooks/useCardList";
 
 export const RegisterCard = () => {
   const { cards, cardListActions } = useCardList();

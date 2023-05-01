@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import { InputContainer, Input, InputLabel } from "../common";
 import { isNumeric } from "../../utils/validate";
-import { useFocusChain } from "../../hook/useFocusChain";
+import { useInputFocusChain } from "../../hook/useInputFocusChain";
 import { ERROR_MESSAGE, INPUT_FULL_LENGTH } from "../../constant/cardInput";
 
 const passwordInfo = {
@@ -22,7 +22,7 @@ export const PasswordInput = ({
 }: PasswordInputProps) => {
   const [inputValues, setInputValues] = useState(["", ""]);
   const [isValid, setIsValid] = useState(true);
-  const { inputRefs, moveFocusToNext } = useFocusChain(2, 1);
+  const { inputRefs, moveFocusToNext } = useInputFocusChain(2, 1);
 
   const handleInput =
     (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
