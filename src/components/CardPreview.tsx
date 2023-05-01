@@ -1,26 +1,22 @@
-import { Fragment, useContext } from "react";
+import { Fragment } from "react";
 import styled from "styled-components";
+import { CardCompanyCaption } from "./style/CaptionStyle";
+import { CardInfo } from "types";
+import useModal from "hooks/useModal";
+import { NUMBER_INPUT, LIMIT_LENGTH, PASSWORD_PART } from "constants/limit";
+import { HIDDEN_VALUE, SECURITY_TARGET } from "constants/security";
 import {
   CARD_COLORS,
   CARD_COMPANIES,
   UNSELECTED_CARD_COMPANY,
 } from "constants/cardCompanies";
-import { ModalStateContext } from "./provider/ModalStateProvider";
-import { CardCompanyCaption } from "./style/CaptionStyle";
-import { CardInfo } from "types";
-import { NUMBER_INPUT, LIMIT_LENGTH, PASSWORD_PART } from "constants/limit";
-import { HIDDEN_VALUE, SECURITY_TARGET } from "constants/security";
 
 interface Props {
   cardInfo: CardInfo;
 }
 
 const CardPreview = ({ cardInfo }: Props) => {
-  const setIsModalOpen = useContext(ModalStateContext).setIsModalOpen;
-
-  const handleModalOpen = () => {
-    setIsModalOpen(true);
-  };
+  const { handleModalOpen } = useModal();
 
   const isSelected = Object.keys(CARD_COMPANIES).includes(cardInfo.cardCompany);
 

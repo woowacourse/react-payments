@@ -1,7 +1,7 @@
-import { ReactNode, useContext } from "react";
+import { ReactNode } from "react";
 import styled, { CSSProp } from "styled-components";
 import { CloseButton } from "./style/ButtonStyle";
-import { ModalStateContext } from "./provider/ModalStateProvider";
+import useModal from "hooks/useModal";
 
 interface Props {
   modalStyle: CSSProp;
@@ -10,9 +10,7 @@ interface Props {
 }
 
 const Modal = ({ closeButtonName, children, modalStyle }: Props) => {
-  const setIsModalOpen = useContext(ModalStateContext).setIsModalOpen;
-
-  const handleModalClose = () => setIsModalOpen(false);
+  const { handleModalClose } = useModal();
 
   return (
     <>
