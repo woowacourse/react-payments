@@ -22,7 +22,6 @@ function CreditCardRegisterDone() {
         <S.CreditCardRegisterTitleFont>카드 등록이 완료되었습니다.</S.CreditCardRegisterTitleFont>
       </S.CreditCardRegisterTitle>
       <CreditCardNicknameInputForm
-        creditCardForm={creditCardForm}
         nickname={nickname}
         setNickname={setNickname}
       />
