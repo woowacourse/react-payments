@@ -113,7 +113,7 @@ const AddCardPage = () => {
     <AddCardPageContainer>
       <AppBar title={"카드 추가"} prevButton />
       <CardPreview card={{ cardNumber, expirationDate, ownerName, cardCompany }} onClick={modalOpen} />
-      <HelperText>카드사 선택하기👆</HelperText>
+      <HelperText onClick={modalOpen}>카드사 선택하기👆</HelperText>
       <Form onSubmit={addCard}>
         <CardNumberInput cardNumber={cardNumber} onChange={handleCardNumber} />
         <CardExpirationDateInput expirationDate={expirationDate} onChange={handleExpirationDate} />
@@ -137,6 +137,8 @@ const AddCardPageContainer = styled(Container)`
 
 const HelperText = styled.span`
   font-size: 12px;
+
+  cursor: pointer;
 `;
 
 const Form = styled.form`
