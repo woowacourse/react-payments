@@ -3,7 +3,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { userEvent, within } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
-import { act } from 'react-dom/test-utils';
 import CardAddForm from '../../components/CardAddForm/CardAddForm';
 import { CardListProvider } from '../../contexts/CardListContext';
 import { useCardAddForm } from '../../hooks/cards/useCardAddForm';
@@ -70,9 +69,7 @@ export const SuccessInteraction: Story = {
     await userEvent.click(BCCardButton);
     expect(issuerInputButton).toHaveTextContent('BC카드');
 
-    await act(async () => {
-      await new Promise((resolve) => setTimeout(resolve, 700));
-    });
+    await new Promise((resolve) => setTimeout(resolve, 700));
 
     const cardNumberInput = canvas.getByLabelText('카드 번호', {
       exact: false,

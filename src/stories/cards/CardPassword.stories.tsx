@@ -63,6 +63,9 @@ export const SuccessInteraction: Story = {
     expect(input[1]).not.toHaveFocus();
 
     await userEvent.type(input[0], '1', { delay: 200 });
+
+    userEvent.tab();
+
     expect(input[1]).toHaveFocus();
 
     await userEvent.type(input[1], '2', { delay: 200 });
