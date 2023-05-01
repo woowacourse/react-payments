@@ -8,9 +8,3 @@ export interface CardType {
   bankName: string;
   cardName?: string;
 }
-
-export interface modalContextType {
-  isModalOpen: boolean;
-  openModal: () => void;
-  closeModal: () => void;
-}
