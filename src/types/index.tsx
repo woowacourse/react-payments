@@ -13,7 +13,3 @@ export type CreditCard = {
 
 export type CreditCardCompanyKeys = 'id' | 'name' | 'color' | 'backgroundColor';
 export type CreditCardCompany = Record<CreditCardCompanyKeys, string>;
-
-export interface CreditCardInputProps {
-  name: CreditCardKeys;
-}

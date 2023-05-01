@@ -1,6 +1,5 @@
 import { creditCardCompanies } from 'data/creditCard';
 import { convertImage } from 'tools/image';
-import * as T from 'types';
 import useCreditCardForm from 'hooks/useCreditCardForm';
 import {
   CreditCardCompanyImage,
@@ -9,18 +8,17 @@ import {
   CreditCardCompanyTitle,
 } from '../style';
 
-interface CreditCardCompanyInputProps extends T.CreditCardInputProps {
+interface CreditCardCompanyInputProps {
   closeModal: () => void;
 }
 
 function CreditCardCompanyInput({
   closeModal,
-  name,
 }: CreditCardCompanyInputProps) {
-  const { creditCardForm, setCreditCardForm } = useCreditCardForm();
+  const { updateCreditCardCompany } = useCreditCardForm();
 
-  const handleChangeCreditCardCompany = (companyId: string) => {
-    setCreditCardForm({ ...creditCardForm, [name]: companyId });
+  const handleCreditCardCompanyChange = (companyId: string) => {
+    updateCreditCardCompany(companyId);
     closeModal();
   };
 
@@ -29,7 +27,7 @@ function CreditCardCompanyInput({
       {creditCardCompanies.map((creditCardCompany) => (
         <CreditCardCompanyItem
           key={creditCardCompany.id}
-          onClick={() => handleChangeCreditCardCompany(creditCardCompany.id)}
+          onClick={() => handleCreditCardCompanyChange(creditCardCompany.id)}
         >
           <CreditCardCompanyImage
             src={convertImage(creditCardCompany.id)}

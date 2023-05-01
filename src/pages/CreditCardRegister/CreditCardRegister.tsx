@@ -74,7 +74,7 @@ function CreditCardRegister() {
         </S.CreditCardRegisterForm>
       </CreditCardRegisterLayout>
       <Modal modalOpen={modalOpen}>
-        <CreditCardCompanyInput closeModal={closeModal} name="companyId" />
+        <CreditCardCompanyInput closeModal={closeModal} />
       </Modal>
     </>
   );

@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import { act, renderHook } from '@testing-library/react';
-import { ReactNode } from 'react';
+import { ChangeEvent, ReactNode } from 'react';
 import useCreditCardForm from './useCreditCardForm';
 import CardFormProvider from '../CardFormProvider';
 
@@ -11,10 +11,9 @@ test('useCreditCardForm hook 테스트', () => {
   const { result } = renderHook(() => useCreditCardForm(), { wrapper });
 
   act(() => {
-    result.current.setCreditCardForm({
-      ...result.current.creditCardForm,
-      expiry: '1234',
-    });
+    result.current.handleCreditCardExpiryChange(
+      { target: { value: '1234' } } as ChangeEvent<HTMLInputElement>
+    );
   });
 
   expect(result.current.creditCardForm.expiry).toStrictEqual('1234');

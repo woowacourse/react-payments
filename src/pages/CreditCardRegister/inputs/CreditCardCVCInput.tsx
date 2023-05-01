@@ -1,19 +1,11 @@
 import useCreditCardForm from 'hooks/useCreditCardForm';
 import FlexBox from 'components/FlexBox';
 import { validateCVC } from 'domains/validations';
-import { ChangeEvent } from 'react';
 import Input from '../../../components/Input';
 import * as S from '../style';
 
 function CreditCardCVCInput() {
-  const { creditCardForm, updateCreditCardCVC } = useCreditCardForm();
-
-  const handleChangeCreditCardCVC = (event: ChangeEvent<HTMLInputElement>) => {
-    const newCVC = event.target.value.replace(/\D/g, '');
-    if (newCVC.length <= 3) {
-      updateCreditCardCVC(newCVC);
-    }
-  };
+  const { creditCardForm, handleCreditCardCVCChange } = useCreditCardForm();
 
   const isError = creditCardForm.cvc.length > 0 && !validateCVC(creditCardForm.cvc);
 
@@ -27,7 +19,7 @@ function CreditCardCVCInput() {
           value={creditCardForm.cvc}
           width="72px"
           textAlign="center"
-          onChange={handleChangeCreditCardCVC}
+          onChange={handleCreditCardCVCChange}
         />
         <S.QuestionBox onClick={() => alert('카드 뒷 면을 참고하세요.')}>
           <S.QuestionMark>?</S.QuestionMark>

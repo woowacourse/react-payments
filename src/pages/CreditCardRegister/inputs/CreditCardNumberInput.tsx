@@ -1,5 +1,4 @@
-import { ChangeEvent, useRef, useState } from 'react';
-import { convertSecuredCreditCard } from 'domains/creditCard';
+import { useRef } from 'react';
 import styled from 'styled-components';
 import useCreditCardForm from 'hooks/useCreditCardForm';
 import * as S from '../style';
@@ -24,24 +23,11 @@ export const MaskedViewer = styled.p`
 
 function CreditCardNumberInput() {
   const inputRef = useRef<HTMLInputElement>(null);
-  const { creditCardForm, updateCreditCardNumber } = useCreditCardForm();
-  const [markedCreditCardNumber, setMarkedCreditCardNumber] = useState('');
-
-  const handleChangeCreditCardNumber = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    const newCreditCardNumber = event.target.value.replace(/\D/g, '');
-
-    if (newCreditCardNumber.length > 16) return;
-
-    const markedNumber = convertSecuredCreditCard(newCreditCardNumber)
-      .filter((numbers) => !!numbers.length)
-      .map((numbers) => numbers.join(''))
-      .join(' - ');
-
-    setMarkedCreditCardNumber(markedNumber);
-    updateCreditCardNumber(newCreditCardNumber);
-  };
+  const {
+    creditCardForm,
+    markedCreditCardNumber,
+    handleCreditCardNumberChange
+  } = useCreditCardForm();
 
   const isError = creditCardForm.number.length > 0 && !validateNumber(creditCardForm.number);
 
@@ -62,7 +48,7 @@ function CreditCardNumberInput() {
           ref={inputRef}
           type="string"
           value={creditCardForm.number}
-          onChange={handleChangeCreditCardNumber}
+          onChange={handleCreditCardNumberChange}
         />
       </S.RelativeBox>
       {isError && (

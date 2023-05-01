@@ -1,30 +1,11 @@
-import * as T from 'types';
 import useCreditCardForm from 'hooks/useCreditCardForm';
 import FlexBox from 'components/FlexBox';
-import { ChangeEvent } from 'react';
 import Input from '../../../components/Input';
 import * as S from '../style';
 import { validatePassword } from '../../../domains/validations';
 
 function CreditCardPasswordInput() {
-  const { creditCardForm, updateCreditCardPassword } = useCreditCardForm();
-
-  const handleChangeCreditCardPassword = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    const newPassword = event.target.value.replace(/\D/g, '');
-    if (newPassword.length <= 1) {
-      const { password }: T.CreditCard = { ...creditCardForm };
-      const targetName = event.target.name;
-      if (targetName === 'first') {
-        password[0] = newPassword;
-      }
-      if (targetName === 'second') {
-        password[1] = newPassword;
-      }
-      updateCreditCardPassword(password);
-    }
-  };
+  const { creditCardForm, handleCreditCardPasswordChange } = useCreditCardForm();
 
   const isError = (creditCardForm.password[0].length > 0 || creditCardForm.password[1].length > 0)
     && !validatePassword(creditCardForm.password[0], creditCardForm.password[1]);
@@ -39,7 +20,7 @@ function CreditCardPasswordInput() {
           width="48px"
           textAlign="center"
           name="first"
-          onChange={handleChangeCreditCardPassword}
+          onChange={handleCreditCardPasswordChange}
         />
         <Input
           type="password"
@@ -47,7 +28,7 @@ function CreditCardPasswordInput() {
           width="48px"
           textAlign="center"
           name="second"
-          onChange={handleChangeCreditCardPassword}
+          onChange={handleCreditCardPasswordChange}
         />
         <S.PasswordBox>•</S.PasswordBox>
         <S.PasswordBox>•</S.PasswordBox>

@@ -44,8 +44,6 @@ export const checkCreditCardValidations = (creditCard: CreditCard) => {
     isValidCardPassword,
   ].every((v) => v);
 
-  console.log(isValidCVC, isValidExpiry, isValidCardNumber, isValidCardPassword);
-  console.log(isCreditCardError);
   return isCreditCardError;
 };
 
