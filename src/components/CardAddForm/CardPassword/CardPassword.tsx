@@ -1,4 +1,4 @@
-import { memo, useRef } from 'react';
+import { memo, useRef, useState } from 'react';
 import type { ChangeEvent, FocusEvent } from 'react';
 import type { CardFormData, CardFormValidation } from '../../../types';
 import Input from '../../common/Input/Input';
@@ -16,30 +16,27 @@ interface CardPasswordProps {
 }
 
 const CardPassword = ({ isError, updateInputValue, updateInputError }: CardPasswordProps) => {
-  const firstInputRef = useRef<HTMLInputElement>(null);
-  const lastInputRef = useRef<HTMLInputElement>(null);
+  const [password, setPassword] = useState(['', '']);
+  const refs = useRef<HTMLInputElement[]>([]);
 
-  const onChange = () => {
-    if (!firstInputRef.current || !lastInputRef.current) return;
+  const onChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
+    target.value = formatNumber(target.value);
 
-    firstInputRef.current.value = formatNumber(firstInputRef.current.value);
-    lastInputRef.current.value = formatNumber(lastInputRef.current.value);
-    updateInputValue('password', [firstInputRef.current.value, lastInputRef.current.value]);
-  };
+    const newPassword = [...password];
+    newPassword[Number(target.dataset.index)] = target.value;
 
-  const onFirstInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    onChange();
+    setPassword(newPassword);
+    updateInputValue('password', newPassword);
 
-    if (event.target.value.length === PASSWORD_UNIT_MAX_LENGTH && lastInputRef.current) {
-      lastInputRef.current.focus();
+    if (target.value.length === target.maxLength) {
+      refs.current[Number(target.dataset.index) + 1]?.focus();
     }
   };
 
   const onBlur = (event: FocusEvent<HTMLElement>) => {
     if (event.currentTarget.contains(event.relatedTarget)) return;
-    if (!firstInputRef.current || !lastInputRef.current) return;
 
-    updateInputError('password', [firstInputRef.current.value, lastInputRef.current.value]);
+    updateInputError('password', password);
   };
 
   return (
@@ -54,10 +51,13 @@ const CardPassword = ({ isError, updateInputValue, updateInputError }: CardPassw
       </Label>
       <div className={styles.container} onBlur={onBlur}>
         <Input
-          ref={firstInputRef}
+          ref={(element: HTMLInputElement) => {
+            refs.current[0] = element;
+          }}
           type="password"
           id="password"
           name="password"
+          data-index={0}
           maxLength={PASSWORD_UNIT_MAX_LENGTH}
           autoComplete="off"
           inputMode="numeric"
@@ -65,13 +65,16 @@ const CardPassword = ({ isError, updateInputValue, updateInputError }: CardPassw
           required
           aria-label="첫 번째 비밀번호 입력"
           isError={isError}
-          onChange={onFirstInputChange}
+          onChange={onChange}
         />
         <Input
-          ref={lastInputRef}
+          ref={(element: HTMLInputElement) => {
+            refs.current[1] = element;
+          }}
           type="password"
           id="password1"
           name="password"
+          data-index={1}
           maxLength={PASSWORD_UNIT_MAX_LENGTH}
           autoComplete="off"
           inputMode="numeric"
