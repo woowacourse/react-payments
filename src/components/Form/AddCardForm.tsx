@@ -101,16 +101,20 @@ function AddCardInfo({ onSubmit }: AddCardFormProps) {
     onSubmit();
   };
 
-  const handleOpenModal = (bank: COMPANY_NAME) => {
-    setCard((prev) => ({ ...prev, bank: bank }));
+  const handleOpenModal = () => {
     setIsModalOpen(!isModalOpen);
+  };
+
+  const handleSelectCompany = (bank: COMPANY_NAME) => {
+    setCard((prev) => ({ ...prev, bank: bank }));
+    handleOpenModal();
   };
 
   return (
     <>
-      {isModalOpen && <Modal onClick={handleOpenModal} />}
-      <CardWrapper>
-        <CreditCard card={card} onClick={handleOpenModal} />
+      {isModalOpen && <Modal onClick={handleSelectCompany} />}
+      <CardWrapper onClick={handleOpenModal}>
+        <CreditCard card={card} />
         <FormLabel>카드 이미지를 터치하여 카드사를 변경할 수 있습니다.</FormLabel>
       </CardWrapper>
       <FormContainer onSubmit={handleSubmit}>

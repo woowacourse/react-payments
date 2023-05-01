@@ -5,20 +5,15 @@ import { COMPANY_LIST, CARDS_INFO } from '../../../constants';
 
 export type CreditCardProps = {
   card: Card;
-  onClick?: (bank: COMPANY_NAME) => void;
 };
 
 interface CardColorProps extends React.ComponentPropsWithoutRef<'span'> {
   backgroundColor: COMPANY_NAME;
 }
 
-export function CreditCard({ card, onClick }: CreditCardProps) {
-  const handleOpenModal = () => {
-    if (onClick) onClick(card.bank);
-  };
-
+export function CreditCard({ card }: CreditCardProps) {
   return (
-    <Styled.Wrapper backgroundColor={card.bank} onClick={handleOpenModal}>
+    <Styled.Wrapper backgroundColor={card.bank}>
       <Styled.Bank>{card.bank}</Styled.Bank>
       <Styled.Chip />
       <Styled.CardNumbers>

@@ -4,6 +4,7 @@ import { Icon } from '../common/Icon/Icon';
 import { ModalContext } from 'context/ModalContext';
 import { CARDS_INFO } from '../../constants';
 import { COMPANY_NAME } from 'components/common/Card/types';
+import { isCompanyName } from 'util/guard';
 
 export interface ModalProps {
   onClick: (bank: COMPANY_NAME) => void;
@@ -19,15 +20,15 @@ export const Modal = forwardRef<Ref, ModalProps>(({ onClick, ...props }, ref) =>
   };
 
   const handleSelectCompany: MouseEventHandler<HTMLSpanElement> = (e) => {
-    const company = e.currentTarget.textContent as COMPANY_NAME;
-
-    onClick(company);
+    if (isCompanyName(e.currentTarget.textContent!)) {
+      const company: COMPANY_NAME = e.currentTarget.textContent;
+      onClick(company);
+    }
   };
 
   return (
     <>
       <Styled.ModalBackdrop onClick={handleModalClose} />
-
       <Styled.Modal {...props} ref={ref}>
         {Object.values(CARDS_INFO).map((value) => {
           return (
