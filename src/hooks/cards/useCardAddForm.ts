@@ -71,7 +71,7 @@ const useCardAddForm = () => {
     };
 
     addCard(newCard);
-    navigate(`${PATH.REGISTER}/${newCard.id}`);
+    navigate(`${PATH.REGISTER}/?id=${newCard.id}`);
   };
 
   return {

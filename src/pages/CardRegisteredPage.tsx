@@ -1,25 +1,33 @@
+import { Navigate, useSearchParams } from 'react-router-dom';
 import CardItem from '../components/CardItem/CardItem';
 import CardNameChangeForm from '../components/CardNameChangeForm/CardNameChangeForm';
 import { useCardListContext } from '../contexts/CardListContext';
+import { PATH } from '../constants';
 
 const CardRegisteredPage = () => {
-  const { newestCard } = useCardListContext();
+  const [searchParams] = useSearchParams();
+  const { getCardById } = useCardListContext();
+
+  const id = searchParams.get('id');
+  const card = getCardById(Number(id));
+
+  if (!card) {
+    return <Navigate to={PATH.NOT_FOUND} />;
+  }
 
   return (
     <main>
-      {newestCard && (
-        <div className="register-content">
-          <h2 className="align-center mg-b-24">카드 등록이 완료되었습니다</h2>
-          <CardItem
-            className="center-hoz-item"
-            issuer={newestCard.issuer}
-            cardNumber={newestCard.cardNumber}
-            expirationDate={newestCard.expirationDate}
-            ownerName={newestCard.ownerName}
-          />
-          <CardNameChangeForm id={newestCard.id} defaultCardName={newestCard.cardName} />
-        </div>
-      )}
+      <div className="register-content">
+        <h2 className="align-center mg-b-24">카드 등록이 완료되었습니다</h2>
+        <CardItem
+          className="center-hoz-item"
+          issuer={card.issuer}
+          cardNumber={card.cardNumber}
+          expirationDate={card.expirationDate}
+          ownerName={card.ownerName}
+        />
+        <CardNameChangeForm id={card.id} defaultCardName={card.cardName} />
+      </div>
     </main>
   );
 };

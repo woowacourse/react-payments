@@ -15,7 +15,7 @@ const App = () => {
           <Routes>
             <Route path={PATH.ROOT} element={<CardListPage />} />
             <Route path={PATH.ADD} element={<CardAddPage />} />
-            <Route path={`${PATH.REGISTER}/:id`} element={<CardRegisteredPage />} />
+            <Route path={PATH.REGISTER} element={<CardRegisteredPage />} />
             <Route path={PATH.NOT_FOUND} element={<NotFoundPage />} />
           </Routes>
         </div>

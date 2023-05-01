@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import type { Card } from '../../types';
 import { CARD_LIST_LOCAL_STORAGE_KEY } from '../../constants';
 import { getLocalStorage, saveToLocalStorage } from '../../utils/localStorage';
@@ -9,7 +9,6 @@ const useCard = () => {
   );
 
   const newCardId = (cardList.at(-1)?.id ?? 0) + 1;
-  const newestCard = cardList.at(-1);
   const cardListLength = cardList.length;
 
   useEffect(() => {
@@ -19,6 +18,13 @@ const useCard = () => {
   const addCard = (newCard: Card) => {
     setCardList((prevCardList) => [...prevCardList, newCard]);
   };
+
+  const getCardById = useCallback(
+    (id: number) => {
+      return cardList.find((card) => card.id === id) ?? null;
+    },
+    [cardList]
+  );
 
   const updateCardName = (id: number, cardName: string) => {
     setCardList((prevCardList) => {
@@ -30,7 +36,7 @@ const useCard = () => {
     });
   };
 
-  return { cardList, newCardId, newestCard, cardListLength, addCard, updateCardName };
+  return { cardList, newCardId, cardListLength, addCard, getCardById, updateCardName };
 };
 
 export { useCard };
