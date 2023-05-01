@@ -1,7 +1,10 @@
-import { PropsWithChildren } from 'react';
+import { ReactNode } from 'react';
 import * as S from './style';
 
-function CreditCardRegisterLayout({ children }: PropsWithChildren) {
+interface CreditCardRegisterLayoutProps {
+  children: ReactNode;
+}
+function CreditCardRegisterLayout({ children }: CreditCardRegisterLayoutProps) {
   return <S.CreditCardRegisterLayout>{children}</S.CreditCardRegisterLayout>;
 }
 

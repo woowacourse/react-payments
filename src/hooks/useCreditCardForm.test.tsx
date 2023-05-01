@@ -1,11 +1,11 @@
 /* eslint-disable no-undef */
 import { act, renderHook } from '@testing-library/react';
-import { PropsWithChildren } from 'react';
+import { ReactNode } from 'react';
 import useCreditCardForm from './useCreditCardForm';
 import CardFormProvider from '../CardFormProvider';
 
 test('useCreditCardForm hook 테스트', () => {
-  const wrapper = ({ children }: PropsWithChildren) => (
+  const wrapper = ({ children }: { children: ReactNode }) => (
     <CardFormProvider>{children}</CardFormProvider>
   );
   const { result } = renderHook(() => useCreditCardForm(), { wrapper });
