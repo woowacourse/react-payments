@@ -1,5 +1,5 @@
-import { CardInfoContext } from "components/provider/CardInfoProvider";
 import { useContext } from "react";
+import { CardInfoContext } from "components/provider/CardInfoProvider";
 
 const useInitCardInfo = () => {
   const cardInfo = useContext(CardInfoContext).cardInfo;

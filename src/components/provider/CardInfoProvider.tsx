@@ -1,7 +1,6 @@
-import { useState } from "react";
-import { INITIAL_CARD_INFO } from "constants/initialCardInfo";
-import { createContext } from "react";
+import { useState, createContext } from "react";
 import { CardInfoState, ProviderChildren } from "types";
+import { INITIAL_CARD_INFO } from "constants/initialCardInfo";
 
 const CardInfoProvider = ({ children }: ProviderChildren) => {
   const [cardInfo, setCardInfo] = useState(INITIAL_CARD_INFO);

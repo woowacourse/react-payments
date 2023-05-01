@@ -34,7 +34,7 @@ export interface CardInfoState {
   setCardInfo: SetCardInfo;
 }
 
-export type SetModalState = Dispatch<SetStateAction<boolean>>;
+type SetModalState = Dispatch<SetStateAction<boolean>>;
 export interface ModalState {
   isModalOpen: boolean;
   setIsModalOpen: SetModalState;

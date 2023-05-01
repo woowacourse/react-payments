@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { CARD_COMPANIES } from "constants/cardCompanies";
 import useInitCardInfo from "hooks/useInitCardInfo";
+import { CARD_COMPANIES } from "constants/cardCompanies";
 
 const CardCompany = ({ cardCompanyName }: { cardCompanyName: string }) => {
   const { initCardInfo } = useInitCardInfo();

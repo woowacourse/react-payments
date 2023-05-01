@@ -1,5 +1,5 @@
-import { CardInfoContext } from "../components/provider/CardInfoProvider";
 import { useContext, useEffect, useState } from "react";
+import { CardInfoContext } from "../components/provider/CardInfoProvider";
 import { isValidInfo } from "validation";
 
 const useRequiredCardInfo = () => {
