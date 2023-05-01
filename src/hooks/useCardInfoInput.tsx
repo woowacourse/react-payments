@@ -1,10 +1,7 @@
 import { useContext, useState } from "react";
 import { CardInfoContext } from "src/context/CardInfoContext";
 import { CardInfoProps } from "src/interfaces";
-import {
-  ONLY_ENG_AND_EMPTY_REGEXP,
-  ONLY_NUMBER_REGEXP,
-} from "src/utils/regexp";
+import { isUnValidInputValue } from "src/utils/validation";
 
 interface Props {
   contextType: keyof CardInfoProps;
@@ -28,7 +25,8 @@ function useCardInfoInput<T>({
     const { value } = event.currentTarget;
     const idx = event.currentTarget.dataset["index"];
     if (!dispatch) return;
-    checkInputValue(value);
+
+    if (isUnValidInputValue(contextType, value)) return;
 
     try {
       if (validation) validation(value);
@@ -44,12 +42,6 @@ function useCardInfoInput<T>({
     if (idx && nextInputFocus) {
       nextInputFocus(Number(idx));
     }
-  };
-
-  const checkInputValue = (value: string) => {
-    if (contextType !== "ownerName" && !ONLY_NUMBER_REGEXP.test(value)) return;
-    if (contextType === "ownerName" && !ONLY_ENG_AND_EMPTY_REGEXP.test(value))
-      return;
   };
 
   return {

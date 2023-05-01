@@ -1,7 +1,24 @@
-import { CONTINUOUS_EMPTY_REGEXP, MMYY_REGEXP } from "./regexp";
+import {
+  CONTINUOUS_EMPTY_REGEXP,
+  MMYY_REGEXP,
+  ONLY_ENG_AND_EMPTY_REGEXP,
+  ONLY_NUMBER_REGEXP,
+} from "./regexp";
 import { NUMBERS } from "./constant";
 import { objectValueToString } from ".";
 import { CardInfoProps } from "src/interfaces";
+
+export const isUnValidInputValue = (
+  contextType: keyof CardInfoProps,
+  value: string,
+) => {
+  if (contextType !== "ownerName" && !ONLY_NUMBER_REGEXP.test(value))
+    return true;
+  if (contextType === "ownerName" && !ONLY_ENG_AND_EMPTY_REGEXP.test(value))
+    return true;
+
+  return false;
+};
 
 export const lengthMatchValidation = (value: string, maxLength: number) => {
   if (value.length > 0 && value.length !== maxLength) {
