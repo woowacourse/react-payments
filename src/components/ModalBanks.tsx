@@ -57,21 +57,4 @@ const BanksWrapper = styled.div`
   align-items: center;
 `;
 
-const BankWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 37px;
-  height: 37px;
-  font-size: 12px;
-  > span {
-    margin-top: 10px;
-    width: 70px;
-    align-items: center;
-  }
-  > img:hover {
-    transform: scale(1.2);
-    cursor: pointer;
-  }
-`;
-
 export default ModalBanks;
