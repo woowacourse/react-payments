@@ -6,7 +6,6 @@ import { BrowserRouter } from "react-router-dom";
 const meta: Meta = {
   title: "CardInputForm component",
   component: CardInputForm,
-
   decorators: [
     (Story) => (
       <BrowserRouter>

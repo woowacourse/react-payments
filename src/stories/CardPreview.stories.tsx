@@ -4,6 +4,7 @@ import CardPreview from "../component/common/CardPreview";
 
 import "../component/common/cardPreview.css";
 import "../style/palette.css";
+import { filledCardWithoutOwner_test, filledCard_test } from "../cardData";
 
 const meta: Meta = {
   title: "CardPreview component",
@@ -31,26 +32,12 @@ emptyCard.args = {
 
 export const filledCard = (args: any) => <CardPreview {...args}></CardPreview>;
 filledCard.args = {
-  card: {
-    owner: "hi",
-    expirationDate: "12/23",
-    cardCo: "woori",
-    cardNumber: [1234, 5678, 9984, 1245],
-    securityCode: "124",
-    password: ["1", "6"],
-  },
+  card: filledCard_test,
 };
 
 export const filledCardWithoutName = (args: any) => (
   <CardPreview {...args}></CardPreview>
 );
 filledCardWithoutName.args = {
-  card: {
-    owner: "",
-    expirationDate: "12/23",
-    cardCo: "woori",
-    cardNumber: [1234, 5678, 9984, 1245],
-    securityCode: "124",
-    password: ["1", "6"],
-  },
+  card: filledCardWithoutOwner_test,
 };

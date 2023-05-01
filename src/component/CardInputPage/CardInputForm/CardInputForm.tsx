@@ -13,20 +13,11 @@ import "./cardInputForm.css";
 import { CreditCard, InputStatus } from "../../../type";
 import { EachUserInputState } from "../../../type";
 import CardCoModal from "../../common/CardCoModal";
+import { initialCard } from "../../../cardData";
 
 interface CardInputFormProps {
   addNewCard: (card: CreditCard) => void;
 }
-
-const initialCard: CreditCard = {
-  nickName: "",
-  owner: "",
-  expirationDate: "",
-  cardCo: "woori",
-  cardNumber: [0, 0, 0, 0],
-  securityCode: "",
-  password: [0, 0],
-};
 
 const initialArrayInputState: EachUserInputState = {
   isComplete: false,

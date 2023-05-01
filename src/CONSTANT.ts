@@ -27,7 +27,7 @@ export const CARD_CO_NAME = {
   woori: "우리카드",
   lotte: "롯데카드",
   hana: "하나카드",
-  kb: "KB카드",
+  kb: "국민카드",
   kakao: "카카오뱅크",
   bc: "BC카드",
   shinhan: "신한카드",
