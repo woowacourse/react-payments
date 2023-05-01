@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import { InputValuesInformationProps } from '../../../hooks/createFormInputValue';
 import { getFormValidateResult } from '../../../hooks/getFormValidateResult';
 import { UseInputProps } from '../../../hooks/useInput';
+import { colors } from '../../../styles/theme';
 import { Button } from '../../common/Button';
 import { Card } from '../../common/Card';
 import { type CardProps } from '../../common/Card/Card';
 import { Error } from '../../common/Error';
 import { Input } from '../../common/Input';
 import { InputField } from '../../common/InputField';
-import { colors } from '../../../styles/theme';
 
 interface RegisteredCardProps extends CardProps {
   cardTitleInformation: UseInputProps;
@@ -43,7 +43,7 @@ export default function RegisteredCard({
     <Wrapper>
       <FinishMessage>카드등록이 완료되었습니다.</FinishMessage>
       <Card {...rest} />
-      <Form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit}>
         <InputWrapper>
           <InputField
             text="카드 별칭"
@@ -65,7 +65,7 @@ export default function RegisteredCard({
         <ButtonWrapper>
           <Button text="확인" />
         </ButtonWrapper>
-      </Form>
+      </form>
       {cardTitleInformation.error && (
         <Error text={cardTitleInformation.error} />
       )}
@@ -81,8 +81,6 @@ const Wrapper = styled.div`
   position: relative;
   padding: 130px 0 0 0;
 `;
-
-const Form = styled.form``;
 
 const FinishMessage = styled.h2`
   margin-bottom: 36px;

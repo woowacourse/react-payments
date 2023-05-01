@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
-import RegisteredCard from './RegisteredCard';
 import { useFormInputs } from '../../../hooks/useFormInputs';
+import RegisteredCard from './RegisteredCard';
 
 function RegisteredCardStories() {
   const {

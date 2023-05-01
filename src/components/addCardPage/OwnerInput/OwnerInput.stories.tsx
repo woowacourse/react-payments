@@ -1,9 +1,9 @@
 import React, { FormEvent, useRef } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
-import { useFocusInput } from '../../../hooks/useFocusInput';
 import styled from 'styled-components';
-import OwnerInput from './OwnerInput';
+import { useFocusInput } from '../../../hooks/useFocusInput';
 import { useFormInputs } from '../../../hooks/useFormInputs';
+import OwnerInput from './OwnerInput';
 
 function OwnerStories() {
   const cardForm = useRef<HTMLFormElement>(null);

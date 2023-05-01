@@ -1,9 +1,9 @@
 import React, { FormEvent, useRef } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
-import { useFocusInput } from '../../../hooks/useFocusInput';
 import styled from 'styled-components';
-import ExpirationInput from './ExpirationInput';
+import { useFocusInput } from '../../../hooks/useFocusInput';
 import { useFormInputs } from '../../../hooks/useFormInputs';
+import ExpirationInput from './ExpirationInput';
 
 function ExpirationStories() {
   const cardForm = useRef<HTMLFormElement>(null);

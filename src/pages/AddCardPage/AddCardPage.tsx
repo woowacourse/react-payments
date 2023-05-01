@@ -185,7 +185,7 @@ export default function AddCardPage({
   }
 
   return (
-    <Container>
+    <div>
       <Page>
         <TitleWrapper>
           <PrevButton onClick={onPrevButtonClick} />
@@ -266,11 +266,9 @@ export default function AddCardPage({
           <SelectCardCompany onCardCompanySelectClick={onBankSelectClick} />
         </Modal>
       )}
-    </Container>
+    </div>
   );
 }
-
-const Container = styled.div``;
 
 const Page = styled.div`
   display: flex;
