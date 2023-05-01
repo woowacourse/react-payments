@@ -1,13 +1,16 @@
-import React from 'react';
-import { Outlet } from 'react-router-dom';
+import React, { PropsWithChildren } from 'react';
 import Header from '../Header/Header';
 import * as Styled from './Layout.styles';
 
-export default function Layout() {
+interface LayoutProps {
+  header?: boolean;
+}
+
+export default function Layout({ children, header = true }: PropsWithChildren<LayoutProps>) {
   return (
     <Styled.Root>
-      <Header />
-      <Outlet />
+      {header && <Header />}
+      {children}
     </Styled.Root>
   );
 }

@@ -7,18 +7,17 @@ import Layout from './components/@common/Layout/Layout';
 import CardRegisterProvider from './context/CardRegisterContext';
 import CardAlias from './pages/CardAlias/CardAlias';
 import { ROUTES } from './constants/routes';
+import NotFound from './pages/404/NotFound';
 
 function App() {
   return (
     <CardRegisterProvider>
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
-          <Route path={ROUTES.MY_CARD_LIST} element={<Layout />}>
-            <Route index element={<MyCardList />} />
-            <Route path={ROUTES.REGISTER_CARD} element={<CardRegister />} />
-            <Route path={ROUTES.ALIAS} element={<CardAlias />} />
-            <Route path="*" element={<h1>Not Found</h1>} />
-          </Route>
+          <Route index element={<MyCardList />} />
+          <Route path={ROUTES.REGISTER_CARD} element={<CardRegister />} />
+          <Route path={ROUTES.ALIAS} element={<CardAlias />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </CardRegisterProvider>
