@@ -91,16 +91,16 @@ export const CardNumberInput = ({
           handleFocus={eraseErrorMessage}
           ref={allRefs[0]}
         />
-        {[2, 3, 4].map((ind) => (
+        {[2, 3, 4].map((inputNumber) => (
           <Input
-            key={ind}
+            key={inputNumber}
             {...cardNumberInputInfo}
-            type={ind < 3 ? "text" : "password"}
-            label={`cardNumber${ind}`}
-            handleInput={handleInput(ind - 1)}
+            type={inputNumber < 3 ? "text" : "password"}
+            label={`cardNumber${inputNumber}`}
+            handleInput={handleInput(inputNumber - 1)}
             handleOutFocus={validate}
             handleFocus={eraseErrorMessage}
-            ref={allRefs[ind - 1]}
+            ref={allRefs[inputNumber - 1]}
           />
         ))}
       </Row>
