@@ -22,6 +22,7 @@ const Wrapper = styled.div<InputProps>`
   border-radius: 7px;
   padding: 12px;
   width: ${({ width }) => width};
+  box-shadow: ${({ isError }) => isError && css`0 0 3px 1px #ff0000;`};
   &:focus-within {
     ${({ isError }) =>
       isError
