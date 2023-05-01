@@ -1,15 +1,11 @@
-import { ReactNode, useEffect } from 'react';
+import { PropsWithChildren, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
 import { useModalContext } from './ModalContext';
 
 import styles from './modal.module.css';
 
-interface Props {
-  children: ReactNode;
-}
-
-const Modal = ({ children }: Props) => {
+const Modal = ({ children }: PropsWithChildren) => {
   const { isClosing, closeModal } = useModalContext();
 
   const handleEscapeKeydown = (event: KeyboardEvent) => {
