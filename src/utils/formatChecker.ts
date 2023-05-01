@@ -1,13 +1,22 @@
+import { REGEX } from "../constants";
+
 const checkNumberFormat = (input: string) => {
-  return /^\d*$/.test(input);
+  return REGEX.ONLY_NUMBER.test(input);
 };
 
 const checkEnglishFormat = (input: string) => {
-  return /^[a-zA-Z ]*$/.test(input);
+  return REGEX.ENGLISH_AND_WHITESPACE.test(input);
 };
 
 const checkExpirationDateFormat = (input: string) => {
-  return /^(?:\d{0,2}\/?\d{0,2})?$/.test(input);
+  return REGEX.DATE_FORMAT.test(input);
 };
 
-export { checkNumberFormat, checkEnglishFormat, checkExpirationDateFormat };
+const formatChecker = {
+  expirationDate: checkExpirationDateFormat,
+  ownerName: checkEnglishFormat,
+  securityCode: checkNumberFormat,
+  password: checkNumberFormat,
+};
+
+export default formatChecker;

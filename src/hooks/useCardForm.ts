@@ -7,11 +7,7 @@ import {
 } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, CardNumberFormat, PasswordFormat } from "../types";
-import {
-  checkEnglishFormat,
-  checkExpirationDateFormat,
-  checkNumberFormat,
-} from "../utils/formatChecker";
+import formatChecker from "../utils/formatChecker";
 import { formatEnglishCapitalization } from "../utils/formatter";
 
 const useCardForm = (addCard: Dispatch<SetStateAction<Card[]>>) => {
@@ -31,7 +27,7 @@ const useCardForm = (addCard: Dispatch<SetStateAction<Card[]>>) => {
   const onCardNumberChange = ({
     target: { value, dataset },
   }: ChangeEvent<HTMLInputElement>) => {
-    if (!checkNumberFormat(value)) return;
+    if (!formatChecker.password(value)) return;
 
     const index = Number(dataset.index);
 
@@ -49,7 +45,7 @@ const useCardForm = (addCard: Dispatch<SetStateAction<Card[]>>) => {
   const onOwnerNameChange = ({
     target: { value },
   }: ChangeEvent<HTMLInputElement>) => {
-    if (!checkEnglishFormat(value)) return;
+    if (!formatChecker.ownerName(value)) return;
 
     const ownerName = formatEnglishCapitalization(value);
 
@@ -64,7 +60,7 @@ const useCardForm = (addCard: Dispatch<SetStateAction<Card[]>>) => {
   const onExpirationDateChange = ({
     target: { value },
   }: ChangeEvent<HTMLInputElement>) => {
-    if (!checkExpirationDateFormat(value)) return;
+    if (!formatChecker.expirationDate(value)) return;
 
     setCardInformation((information) => {
       const [month, year] = value.split("/");
@@ -82,7 +78,7 @@ const useCardForm = (addCard: Dispatch<SetStateAction<Card[]>>) => {
   const onSecurityCodeChange = ({
     target: { value },
   }: ChangeEvent<HTMLInputElement>) => {
-    if (!checkNumberFormat(value)) return;
+    if (!formatChecker.securityCode(value)) return;
 
     setCardInformation((information) => {
       return {
@@ -95,7 +91,7 @@ const useCardForm = (addCard: Dispatch<SetStateAction<Card[]>>) => {
   const onPasswordChange = ({
     target: { value, dataset },
   }: ChangeEvent<HTMLInputElement>) => {
-    if (!checkNumberFormat(value)) return;
+    if (!formatChecker.password(value)) return;
 
     const index = Number(dataset.index);
 
