@@ -1,12 +1,11 @@
-import CardCompany from "components/CardCompany";
-import { CardInfoContext } from "components/provider/CardInfoProvider";
-import Modal from "components/Modal";
-import { CARD_COMPANIES } from "constants/cardCompanies";
-import { useContext } from "react";
 import { css } from "styled-components";
+import CardCompany from "components/CardCompany";
+import Modal from "components/Modal";
+import useInitCardInfo from "hooks/useInitCardInfo";
+import { CARD_COMPANIES } from "constants/cardCompanies";
 
 const CardCompanyModal = () => {
-  const { cardCompany } = useContext(CardInfoContext).cardInfo;
+  const { cardCompany } = useInitCardInfo().cardInfo;
 
   return (
     <Modal

@@ -1,4 +1,4 @@
-import { ChangeEvent, useContext } from "react";
+import { ChangeEvent } from "react";
 import styled, { css } from "styled-components";
 import {
   changeInvalidValueToBlank,
@@ -6,27 +6,25 @@ import {
 } from "utils/inputValidator";
 import Input, { NameInputStyle } from "components/Input";
 import LengthLimit from "components/LengthLimit";
-import { CardInfoContext } from "components/provider/CardInfoProvider";
+import useInitCardInfo from "hooks/useInitCardInfo";
 import { LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
 const { ONLY_ENGLISH } = VALID_INPUT;
 
 const NameInput = () => {
-  const { name } = useContext(CardInfoContext).cardInfo;
-  const setName = useContext(CardInfoContext).setCardInfo;
+  const { cardInfo, initCardInfo } = useInitCardInfo();
+  const { name } = cardInfo;
 
   const handleNameChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     const value = preventInvalidBlank(target.value.toUpperCase());
     if (value === undefined) return;
 
-    setName((prevState) => {
-      return {
-        ...prevState,
-        name: changeInvalidValueToBlank(value, {
-          length: LIMIT_LENGTH.NAME,
-          regex: ONLY_ENGLISH,
-        }),
-      };
-    });
+    initCardInfo(
+      "name",
+      changeInvalidValueToBlank(value, {
+        length: LIMIT_LENGTH.NAME,
+        regex: ONLY_ENGLISH,
+      })
+    );
   };
 
   return (

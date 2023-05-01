@@ -1,36 +1,35 @@
-import { useFocus } from "hooks/useFocus";
-import { ChangeEvent, Fragment, useContext } from "react";
+import { ChangeEvent, Fragment } from "react";
 import styled from "styled-components";
+import { Password } from "types";
 import { changeInvalidValueToBlank } from "utils/inputValidator";
 import Input, { PasswordInputStyle } from "components/Input";
 import { PasswordCaption } from "components/style/CaptionStyle";
 import { PasswordInputBox } from "components/style/InputBoxStyle";
-import { CardInfoContext } from "components/provider/CardInfoProvider";
+import { useFocus } from "hooks/useFocus";
+import useInitCardInfo from "hooks/useInitCardInfo";
 import {
   NUMBER_INPUT,
   LIMIT_LENGTH,
   PASSWORD_PART,
   VALID_INPUT,
 } from "constants/limit";
-import { Password } from "types";
 const { ONLY_NUMBER } = VALID_INPUT;
 
 const PasswordInput = () => {
-  const { password1, password2 } = useContext(CardInfoContext).cardInfo;
+  const { cardInfo, initCardInfo } = useInitCardInfo();
+  const { password1, password2 } = cardInfo;
   const password: Password = { password1, password2 };
-  const setPassword = useContext(CardInfoContext).setCardInfo;
+
   const { handleRef, moveFocus } = useFocus();
 
   const handlePasswordChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    setPassword((prevState) => {
-      return {
-        ...prevState,
-        [target.name]: changeInvalidValueToBlank(target.value, {
-          length: LIMIT_LENGTH.PASSWORD,
-          regex: ONLY_NUMBER,
-        }),
-      };
-    });
+    initCardInfo(
+      target.name,
+      changeInvalidValueToBlank(target.value, {
+        length: LIMIT_LENGTH.PASSWORD,
+        regex: ONLY_NUMBER,
+      })
+    );
 
     moveFocus(target, LIMIT_LENGTH.PASSWORD);
   };

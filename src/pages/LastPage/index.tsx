@@ -1,18 +1,18 @@
-import { ChangeEvent, KeyboardEventHandler, useContext, useState } from "react";
+import { ChangeEvent, KeyboardEventHandler, useState } from "react";
 import styled, { css } from "styled-components";
+import { changeInvalidValueToBlank } from "utils/inputValidator";
 import { NextButton } from "components/style/ButtonStyle";
 import CardPreview from "components/CardPreview";
 import Input, { CardNickname } from "components/Input";
 import LengthLimit from "components/LengthLimit";
-import { CardInfoContext } from "components/provider/CardInfoProvider";
 import GotLost from "pages/GotLost";
 import useSetCardInfo from "hooks/useSetCardInfo";
-import { changeInvalidValueToBlank } from "utils/inputValidator";
+import useInitCardInfo from "hooks/useInitCardInfo";
 import { LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
 const { NOT_ONLY_BLANK } = VALID_INPUT;
 
 const LastPage = () => {
-  const cardInfo = useContext(CardInfoContext).cardInfo;
+  const cardInfo = useInitCardInfo().cardInfo;
 
   const [nickname, setNickname] = useState("");
 

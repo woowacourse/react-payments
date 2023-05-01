@@ -1,34 +1,33 @@
-import { useFocus } from "hooks/useFocus";
-import { ChangeEvent, Fragment, useContext } from "react";
+import { ChangeEvent, Fragment } from "react";
+import { ExpirationDate } from "types";
 import { changeInvalidValueToBlank } from "utils/inputValidator";
 import Input, { CommonInputStyle } from "components/Input";
 import { Slash } from "components/style/DelimiterStyle";
 import { DateCaption } from "components/style/CaptionStyle";
 import { DateInputBox } from "components/style/InputBoxStyle";
-import { CardInfoContext } from "components/provider/CardInfoProvider";
 import { isInvalidDate } from "validation";
-import { ExpirationDate } from "types";
+import { useFocus } from "hooks/useFocus";
+import useInitCardInfo from "hooks/useInitCardInfo";
 import { DATE_INPUT, LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
 const { ONLY_NUMBER } = VALID_INPUT;
 
 const ExpirationDateInput = () => {
-  const { month, year } = useContext(CardInfoContext).cardInfo;
+  const { cardInfo, initCardInfo } = useInitCardInfo();
+  const { month, year } = cardInfo;
   const date: ExpirationDate = { month, year };
-  const setDate = useContext(CardInfoContext).setCardInfo;
+
   const { handleRef, moveFocus } = useFocus();
 
   const handleDateChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     if (isInvalidDate(target, date)) return;
 
-    setDate((prevState) => {
-      return {
-        ...prevState,
-        [target.name]: changeInvalidValueToBlank(target.value, {
-          length: LIMIT_LENGTH.EXPIRATION_DATE,
-          regex: ONLY_NUMBER,
-        }),
-      };
-    });
+    initCardInfo(
+      target.name,
+      changeInvalidValueToBlank(target.value, {
+        length: LIMIT_LENGTH.EXPIRATION_DATE,
+        regex: ONLY_NUMBER,
+      })
+    );
 
     moveFocus(target, LIMIT_LENGTH.EXPIRATION_DATE);
   };

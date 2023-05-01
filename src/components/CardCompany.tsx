@@ -1,30 +1,16 @@
 import styled from "styled-components";
-import { SyntheticEvent, useContext } from "react";
 import { CARD_COMPANIES } from "constants/cardCompanies";
-import { CardInfoContext } from "components/provider/CardInfoProvider";
+import useInitCardInfo from "hooks/useInitCardInfo";
 
 const CardCompany = ({ cardCompanyName }: { cardCompanyName: string }) => {
-  const setCardCompany = useContext(CardInfoContext).setCardInfo;
-
-  const handleCompanySelection = ({
-    target,
-  }: SyntheticEvent<HTMLImageElement>) => {
-    if (!(target instanceof HTMLImageElement)) return;
-
-    setCardCompany((prevState) => {
-      return {
-        ...prevState,
-        cardCompany: target.alt,
-      };
-    });
-  };
+  const { initCardInfo } = useInitCardInfo();
 
   return (
     <S.Wrapper>
       <S.Logo
         src={`${process.env.PUBLIC_URL}/assets/${CARD_COMPANIES[cardCompanyName]}.svg`}
         alt={cardCompanyName}
-        onClick={handleCompanySelection}
+        onClick={() => initCardInfo("cardCompany", cardCompanyName)}
       />
       <S.CardCompany>{cardCompanyName}</S.CardCompany>
     </S.Wrapper>

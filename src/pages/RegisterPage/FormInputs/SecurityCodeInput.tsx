@@ -1,26 +1,24 @@
-import { ChangeEvent, useContext } from "react";
+import { ChangeEvent } from "react";
 import styled from "styled-components";
 import { changeInvalidValueToBlank } from "utils/inputValidator";
 import Input, { SecurityCodeInputStyle } from "components/Input";
 import { CodeCaption } from "components/style/CaptionStyle";
-import { CardInfoContext } from "components/provider/CardInfoProvider";
+import useInitCardInfo from "hooks/useInitCardInfo";
 import { LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
 const { ONLY_NUMBER } = VALID_INPUT;
 
 const SecurityCodeInput = () => {
-  const { code } = useContext(CardInfoContext).cardInfo;
-  const setCode = useContext(CardInfoContext).setCardInfo;
+  const { cardInfo, initCardInfo } = useInitCardInfo();
+  const { code } = cardInfo;
 
   const handleCodeChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    setCode((prevState) => {
-      return {
-        ...prevState,
-        code: changeInvalidValueToBlank(target.value, {
-          length: LIMIT_LENGTH.SECURITY_CODE,
-          regex: ONLY_NUMBER,
-        }),
-      };
-    });
+    initCardInfo(
+      "code",
+      changeInvalidValueToBlank(target.value, {
+        length: LIMIT_LENGTH.SECURITY_CODE,
+        regex: ONLY_NUMBER,
+      })
+    );
   };
 
   return (

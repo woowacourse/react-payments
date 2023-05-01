@@ -1,22 +1,21 @@
-import { useFocus } from "hooks/useFocus";
 import { ChangeEvent, Fragment, useContext } from "react";
-import { changeInvalidValueToBlank } from "utils/inputValidator";
 import styled from "styled-components";
+import { CardNumber } from "types";
+import { changeInvalidValueToBlank } from "utils/inputValidator";
 import Input, { CommonInputStyle } from "components/Input";
 import { Hyphen } from "components/style/DelimiterStyle";
 import { CardNumberCaption } from "components/style/CaptionStyle";
 import { CardNumberInputBox } from "components/style/InputBoxStyle";
-import { CardInfoContext } from "components/provider/CardInfoProvider";
-import { CardNumber } from "types";
-import { NUMBER_INPUT, LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
 import { ModalStateContext } from "components/provider/ModalStateProvider";
+import { useFocus } from "hooks/useFocus";
+import useInitCardInfo from "hooks/useInitCardInfo";
+import { NUMBER_INPUT, LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
 const { ONLY_NUMBER } = VALID_INPUT;
 
 const CardNumberInput = () => {
-  const { number1, number2, number3, number4 } =
-    useContext(CardInfoContext).cardInfo;
+  const { cardInfo, initCardInfo } = useInitCardInfo();
+  const { number1, number2, number3, number4 } = cardInfo;
   const cardNumber: CardNumber = { number1, number2, number3, number4 };
-  const setCardNumber = useContext(CardInfoContext).setCardInfo;
 
   const { handleRef, moveFocus, currentInput } = useFocus();
 
@@ -29,15 +28,13 @@ const CardNumberInput = () => {
   const handleCardNumberChange = ({
     target,
   }: ChangeEvent<HTMLInputElement>) => {
-    setCardNumber((prevState) => {
-      return {
-        ...prevState,
-        [target.name]: changeInvalidValueToBlank(target.value, {
-          length: LIMIT_LENGTH.CARD_NUMBER,
-          regex: ONLY_NUMBER,
-        }),
-      };
-    });
+    initCardInfo(
+      target.name,
+      changeInvalidValueToBlank(target.value, {
+        length: LIMIT_LENGTH.CARD_NUMBER,
+        regex: ONLY_NUMBER,
+      })
+    );
 
     moveFocus(target, LIMIT_LENGTH.CARD_NUMBER);
   };
