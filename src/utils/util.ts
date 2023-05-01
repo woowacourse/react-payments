@@ -28,8 +28,6 @@ export const stringToUpperCase = (data: string): string => {
   return data.toUpperCase();
 };
 
-export const identity = (v: any) => v;
-
 export const getBackgroundStyleByCardCompany = (cardCompany: string) => {
   switch (cardCompany) {
     case '현대카드':
