@@ -7,3 +7,9 @@ export const PATH_TITLE = {
   '/addCard': '카드 추가',
   '/addCardName': '',
 };
+
+export const PAGE_PATH = {
+  HOME: '/',
+  ADD_CARD: '/addCard',
+  ADD_CARD_NAME: '/addCardName',
+};

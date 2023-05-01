@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
-import { PATH_TITLE } from '../../constants';
+import { PAGE_PATH, PATH_TITLE } from '../../constants';
 
 type Pathname = keyof typeof PATH_TITLE;
 
@@ -10,7 +10,7 @@ const PaymentsHeader = () => {
 
   return (
     <StyledHeader>
-      <StyledLeftArrowButton to="/" title={pageTitle} />
+      <StyledLeftArrowButton to={PAGE_PATH.HOME} title={pageTitle} />
       <StyledHeaderTitle>{pageTitle}</StyledHeaderTitle>
     </StyledHeader>
   );

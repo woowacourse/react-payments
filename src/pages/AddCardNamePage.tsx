@@ -5,6 +5,7 @@ import { useCardDispatch, useCardState } from '../context/CardListContext';
 import InputGroup from '../components/common/InputGroup';
 import CardPreview from '../components/payments/CardPreview';
 import useAddCardForm from '../hooks/useAddCardForm';
+import { PAGE_PATH } from '../constants';
 
 const AddCardNamePage = () => {
   const { state } = useLocation();
@@ -22,7 +23,7 @@ const AddCardNamePage = () => {
     );
 
     setCard(nextState);
-    navigate('/');
+    navigate(PAGE_PATH.HOME);
   };
 
   return (

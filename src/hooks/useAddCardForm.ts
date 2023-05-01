@@ -15,7 +15,7 @@ const useAddCardForm = () => {
           break;
         default:
       }
-      onChangeState('number')(setState, key)(e);
+      onChangeState(type)(setState, key)(e);
     };
 
   const onChangeState =

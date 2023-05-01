@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useCardState } from '../../context/CardListContext';
+import { PAGE_PATH } from '../../constants';
 
 const CardRegister = () => {
   const cardList = useCardState();
@@ -10,7 +11,7 @@ const CardRegister = () => {
       {cardList.length === 0 && (
         <CardRegisterMessage>새로운 카드를 등록해주세요.</CardRegisterMessage>
       )}
-      <CardRegisterButton to="addCard">+</CardRegisterButton>
+      <CardRegisterButton to={PAGE_PATH.ADD_CARD}>+</CardRegisterButton>
     </CardRegisterWrapper>
   );
 };

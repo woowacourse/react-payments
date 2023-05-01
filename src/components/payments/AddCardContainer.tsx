@@ -11,6 +11,7 @@ import { getUniqueID } from '../../utils/key';
 import { useNavigate } from 'react-router-dom';
 import { useCardDispatch } from '../../context/CardListContext';
 import useAddCardFormValidation from '../../hooks/useAddCardFormValidation';
+import { PAGE_PATH } from '../../constants';
 
 const AddCardContainer = () => {
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ const AddCardContainer = () => {
       return [...prev, { ...cardInformation, id: cardID }];
     });
 
-    navigate(`/addCardName`, { state: { cardID } });
+    navigate(PAGE_PATH.ADD_CARD_NAME, { state: { cardID } });
   };
 
   return (
