@@ -8,18 +8,23 @@ import { VStack } from '../../layout/flexbox';
 
 import { changeCardExpirationDate } from '../../../store/action';
 import { useExpirationError } from '../../../hooks/useExpirationError';
-import { useCardFocusRefs, useCardPaymentDispatch } from '../../context/CardPaymentContext';
+import {
+  useCardFocusRefs,
+  useCardPaymentDispatch,
+  useMoveFocus,
+} from '../../context/CardPaymentContext';
 
 /* component */
 const CardExpiration: React.FC = () => {
   const inputRefs = useCardFocusRefs();
   const [{ isDateError, isMonthError, isYearError }, { handleMonthError, handleYearError }] =
     useExpirationError();
-
+  const moveFocus = useMoveFocus();
   const dispatch = useCardPaymentDispatch();
 
   const handleChange = (id: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(changeCardExpirationDate(id, e.target.value));
+    moveFocus(e);
 
     if (id === 0) {
       handleMonthError(e);
@@ -37,7 +42,6 @@ const CardExpiration: React.FC = () => {
         </Message>
         <StyledCardInputWrapper>
           <Input
-            id={4}
             type="text"
             variant="underline"
             placeholder="MM"
@@ -48,6 +52,7 @@ const CardExpiration: React.FC = () => {
             center={true}
             required={true}
             isValid={!isMonthError}
+            data-form-id={4}
             ref={(el: HTMLInputElement) => (inputRefs.current[4] = el)}
             onChange={handleChange(0)}
           />
@@ -63,6 +68,7 @@ const CardExpiration: React.FC = () => {
             center={true}
             required={true}
             isValid={!isYearError}
+            data-form-id={5}
             ref={(el: HTMLInputElement) => (inputRefs.current[5] = el)}
             onChange={handleChange(1)}
           />

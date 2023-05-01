@@ -1,6 +1,6 @@
 import { CardFormState } from './type';
 
-const initialState: CardFormState = {
+const cardFormStore: CardFormState = {
   cardName: 'BC',
   cardNumbers: ['', '', '', ''],
   cardExpirationDate: ['', ''],
@@ -13,4 +13,4 @@ export const cardCompanyStore = {
   cardColor: 'black',
 };
 
-export default initialState;
+export default cardFormStore;

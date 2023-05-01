@@ -46,6 +46,7 @@ const CardOwner: React.FC = () => {
           maxLength={30}
           center={false}
           isValid={!isError}
+          date-form-id={6}
           ref={(el: HTMLInputElement) => (inputRefs.current[6] = el)}
           onChange={handleChange(0)}
         />

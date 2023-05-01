@@ -6,22 +6,30 @@ import { changeCardPWD } from '../../../store/action';
 
 import Input from '../../atomics/Input';
 import Message from '../../atomics/Message';
-import { useCardFocusRefs, useCardPaymentDispatch } from '../../context/CardPaymentContext';
+import {
+  useCardFocusRefs,
+  useCardPaymentDispatch,
+  useMoveFocus,
+} from '../../context/CardPaymentContext';
 
 import { Stack, VStack } from '../../layout/flexbox';
 
 /* component */
 const CardPWD: React.FC = () => {
   const inputRefs = useCardFocusRefs();
-  const [isError1, handleError1] = useInputError();
-  const [isError2, handleError2] = useInputError();
+  const [isErrorFirstPWD, handleErrorFirstPWD] = useInputError();
+  const [isErrorSecondPWD, handleErrorSecondPWD] = useInputError();
+  const moveFocus = useMoveFocus();
   const dispatch = useCardPaymentDispatch();
+
+  const isError = isErrorFirstPWD || isErrorSecondPWD;
 
   const handleChange =
     (id: number, handleError: (e: React.ChangeEvent<HTMLInputElement>) => void) =>
     (e: React.ChangeEvent<HTMLInputElement>) => {
       handleError(e);
       dispatch(changeCardPWD(id, e.target.value));
+      moveFocus(e);
     };
 
   return (
@@ -32,7 +40,6 @@ const CardPWD: React.FC = () => {
         </Message>
         <StyledCardInputWrapper>
           <Input
-            id={7}
             type="text"
             variant="underline"
             pattern="[0-9]{1}"
@@ -40,12 +47,12 @@ const CardPWD: React.FC = () => {
             minLength={1}
             maxLength={1}
             center={true}
-            isValid={!isError1}
+            isValid={!isErrorFirstPWD}
+            data-form-id={8}
             ref={(el: HTMLInputElement) => (inputRefs.current[8] = el)}
-            onChange={handleChange(0, handleError1)}
+            onChange={handleChange(0, handleErrorFirstPWD)}
           />
           <Input
-            id={8}
             type="text"
             variant="underline"
             pattern="[0-9]{1}"
@@ -53,9 +60,10 @@ const CardPWD: React.FC = () => {
             minLength={1}
             maxLength={1}
             center={true}
-            isValid={!isError2}
+            isValid={!isErrorSecondPWD}
+            data-form-id={9}
             ref={(el: HTMLInputElement) => (inputRefs.current[9] = el)}
-            onChange={handleChange(1, handleError2)}
+            onChange={handleChange(1, handleErrorSecondPWD)}
           />
           <StyledDotWrapper>
             <StyledDot />
@@ -65,7 +73,7 @@ const CardPWD: React.FC = () => {
           </StyledDotWrapper>
         </StyledCardInputWrapper>
       </StyledCardLabel>
-      {(isError1 || isError2) && (
+      {isError && (
         <Message fontWeight={500} fontSize="12px" color="red" lineHeight="14px">
           카드 앞 두 자리 숫자를 입력해주세요!!
         </Message>

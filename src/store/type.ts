@@ -11,14 +11,7 @@ export type Card = {
   cardPWD: string[];
 };
 
-export type CardFormState = {
-  cardName: string;
-  cardNumbers: string[];
-  cardExpirationDate: string[];
-  cardOwner: string[];
-  cardCVC: string[];
-  cardPWD: string[];
-};
+export type CardFormState = Omit<Card, 'id' | 'nickName'>;
 
 export type CardContextState = {
   cardList: Card[];

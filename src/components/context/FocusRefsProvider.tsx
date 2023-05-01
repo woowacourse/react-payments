@@ -9,8 +9,8 @@ const FocusRefProvider: React.FC<ChildProps> = ({ children }) => {
   const inputRefs = useRef<HTMLInputElement[]>([]);
 
   const moveFocus = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const id = Number(e.target.id);
-    if (!e.target.validity.valid) return;
+    const id = Number(e.target.dataset.formId);
+    if (!e.target.validity.valid || id >= 9) return;
     inputRefs.current[id + 1].focus();
   };
 
