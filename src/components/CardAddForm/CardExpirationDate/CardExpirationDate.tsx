@@ -16,7 +16,7 @@ interface CardExpirationDateProps {
 const CardExpirationDate = ({
   isError,
   updateInputValue,
-  updateInputError: updateCardInputError,
+  updateInputError,
 }: CardExpirationDateProps) => {
   const onChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     target.value = formatDisplayedExpirationDate(target.value);
@@ -24,7 +24,7 @@ const CardExpirationDate = ({
   };
 
   const onBlur = ({ target }: FocusEvent<HTMLInputElement>) => {
-    updateCardInputError('expirationDate', formatExpirationDate(target.value));
+    updateInputError('expirationDate', formatExpirationDate(target.value));
   };
 
   return (
