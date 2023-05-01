@@ -8,7 +8,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { Card, CardNumberFormat, PasswordFormat } from "../types";
 import formatChecker from "../utils/formatChecker";
-import { formatEnglishCapitalization } from "../utils/formatter";
+import formatter from "../utils/formatter";
 
 const useCardForm = (addCard: Dispatch<SetStateAction<Card[]>>) => {
   const [cardInformation, setCardInformation] = useState<Card>({
@@ -47,7 +47,7 @@ const useCardForm = (addCard: Dispatch<SetStateAction<Card[]>>) => {
   }: ChangeEvent<HTMLInputElement>) => {
     if (!formatChecker.ownerName(value)) return;
 
-    const ownerName = formatEnglishCapitalization(value);
+    const ownerName = formatter.ownerName(value);
 
     setCardInformation((information) => {
       return {
