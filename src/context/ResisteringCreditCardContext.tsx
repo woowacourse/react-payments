@@ -31,7 +31,15 @@ export const ResisteringCreditCardProvider = (props: PropsWithChildren) => {
 
   const { localStorageData, internalSetLocalStorageData } = useLocalStorage<CreditCard>(
     RESISTERING_CREDIT_CARD_KEY,
-    {},
+    {
+      cardCompany: '카드사',
+      cardNumbers: '',
+      cvc: '',
+      expirationDate: ['', ''],
+      name: '',
+      password: '',
+      nickName: '',
+    },
   );
 
   const setResisteringCreditCard = useCallback(internalSetLocalStorageData, []);
