@@ -97,6 +97,12 @@ h2 {
   transform: translateX(-50%);
 }
 
+.center-vert-item {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 .align-center {
   text-align: center;
 }
@@ -125,6 +131,10 @@ h2 {
 .register-content {
   position: relative;
   top: 100px;
+}
+
+.not-found-container {
+  padding: 0 20px;
 }
 
 @media screen and (max-width: 600px) {

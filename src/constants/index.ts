@@ -4,6 +4,7 @@ const PATH = {
   ROOT: '/',
   ADD: '/add',
   REGISTER: '/register',
+  NOT_FOUND: '*',
 } as const;
 
 const CARD_ISSUERS = [
