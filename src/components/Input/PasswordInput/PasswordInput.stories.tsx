@@ -11,7 +11,7 @@ type Story = StoryObj<typeof meta>;
 
 export const PasswordInputStory: Story = {
   args: {
-    first: { value: '1' },
-    second: { value: '2' },
+    onChangeFirst: () => {},
+    onChangeSecond: () => {},
   },
 };

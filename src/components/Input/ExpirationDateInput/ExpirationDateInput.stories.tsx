@@ -11,7 +11,7 @@ type Story = StoryObj<typeof meta>;
 
 export const ExpirationDateInputStory: Story = {
   args: {
-    month: { value: '12' },
-    year: { value: '23' },
+    onChangeMonth: () => {},
+    onChangeYear: () => {},
   },
 };

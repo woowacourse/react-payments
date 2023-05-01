@@ -11,6 +11,11 @@ type Story = StoryObj<typeof meta>;
 
 export const CardNumberInputsStory: Story = {
   args: {
-    valueAndOnChanges: [{ value: '1111' }, { value: '2222' }, { value: '3333' }, { value: '4444' }],
+    valueAndOnChanges: [
+      { value: '1111', onChange: () => {} },
+      { value: '2222', onChange: () => {} },
+      { value: '3333', onChange: () => {} },
+      { value: '4444', onChange: () => {} },
+    ],
   },
 };
