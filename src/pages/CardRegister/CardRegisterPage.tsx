@@ -30,13 +30,10 @@ export default function CardRegisterPage() {
 
     const isNameInput = activeInput.name === 'name';
     const isMaxLength = activeInput.value.length === activeInput.maxLength;
-    const isEmpty = activeInput.value === '';
 
     if (isNameInput || !isNameInput) {
       if (isMaxLength) {
         inputs[activeIndex + 1]?.focus();
-      } else if (isEmpty) {
-        inputs[activeIndex - 1]?.focus();
       }
     }
 
