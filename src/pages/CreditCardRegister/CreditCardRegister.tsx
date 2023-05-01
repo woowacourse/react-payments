@@ -58,6 +58,18 @@ function CreditCardRegister() {
             }}
           />
         </FlexBox>
+        {
+          !modalOpen && (
+            <FlexBox justifyContent="center">
+              <S.CreditCardChangeButton
+                type="button"
+                onClick={openModal}
+              >
+                카드사 변경하기
+              </S.CreditCardChangeButton>
+            </FlexBox>
+          )
+        }
         <S.CreditCardRegisterForm>
           <CreditCardNumberInput />
           <CreditCardExpiryInput />

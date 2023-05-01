@@ -98,3 +98,9 @@ export const CreditCardCompanyTitle = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
 `;
+
+export const CreditCardChangeButton = styled.button`
+  margin-top: 10px;
+  color: gray;
+  cursor: pointer;
+`;
