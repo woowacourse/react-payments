@@ -1,9 +1,11 @@
 import React, { HTMLAttributes } from 'react';
 import styled from 'styled-components';
-import { INPUT_MAX_LENGTH, INPUT_MIN_LENGTH } from '../constants';
+import { INPUT_MAX_LENGTH, INPUT_MIN_LENGTH, CARD_ID_VALUE } from '../constants';
+
+type CardIdType = (typeof CARD_ID_VALUE)[keyof typeof CARD_ID_VALUE];
 
 interface CardInputProps extends HTMLAttributes<HTMLInputElement> {
-  id: 'cardNumber' | 'expiredDate' | 'ownerName' | 'cvc' | 'passwordFirst' | 'passwordSecond';
+  id: CardIdType;
   width?: string;
   value: number | string | undefined;
   isSecured: boolean;
