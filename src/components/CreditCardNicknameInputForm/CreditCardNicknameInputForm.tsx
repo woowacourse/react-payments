@@ -1,6 +1,7 @@
 import CreditCard from 'components/CreditCard/CreditCard';
 import styled from 'styled-components';
 import * as T from 'types';
+import * as S from './style';
 
 const NicknameInput = styled.input`
     border-left-width: 0px;
@@ -36,22 +37,25 @@ function CreditCardNicknameInputForm(
   };
 
   return (
-    <div>
-      <CreditCard
-        fullFilled
-        creditCard={{
-          companyId: creditCardForm.companyId,
-          number: creditCardForm.number,
-          expiry: creditCardForm.expiry,
-          owner: creditCardForm.owner,
-        }}
-      />
+    <S.CreditCardNicknameInputFormLayout>
+      <S.CreditCardPreview>
+        <CreditCard
+          fullFilled
+          creditCard={{
+            companyId: creditCardForm.companyId,
+            number: creditCardForm.number,
+            expiry: creditCardForm.expiry,
+            owner: creditCardForm.owner,
+          }}
+        />
+      </S.CreditCardPreview>
+
       <NicknameInput
         value={nickname}
         onChange={handleNicknameInput}
         placeholder="카드 별명을 입력하세요"
       />
-    </div>
+    </S.CreditCardNicknameInputFormLayout>
   );
 }
 export default CreditCardNicknameInputForm;
