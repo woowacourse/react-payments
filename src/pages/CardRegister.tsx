@@ -32,7 +32,7 @@ function CardRegister() {
       {cardPreview}
       <CardRegisterForm />
       {isModalOpen && (
-        <Modal closeEvent={closeModal}>
+        <Modal closeEvent={closeModal} direction="bottom">
           <CardCompany closeEvent={closeModal} />
         </Modal>
       )}

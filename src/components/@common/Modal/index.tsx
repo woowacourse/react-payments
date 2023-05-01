@@ -1,12 +1,15 @@
 import ReactDom from "react-dom";
-import { Styled as S } from "./Modal.styles";
+import { Styled as S, cssDirection } from "./Modal.styles";
+
+export type Dicrection = "top" | "bottom" | "right" | "left" | "center";
 
 interface Props {
+  direction: Dicrection;
   children: React.ReactNode;
   closeEvent: () => void;
 }
 
-function Modal({ children, closeEvent }: Props) {
+function Modal({ children, closeEvent, direction }: Props) {
   const $modalRoot = document.getElementById("modal-root") as HTMLElement;
 
   const dialogKeyDownListener = (
@@ -30,7 +33,13 @@ function Modal({ children, closeEvent }: Props) {
       onKeyDown={dialogKeyDownListener}
       onClick={dialogBackdropListener}
     >
-      <S.ModalContent>{children}</S.ModalContent>
+      <S.ModalContent
+        direction={direction}
+        customInputStyle={cssDirection[direction]}
+        height="228px"
+      >
+        {children}
+      </S.ModalContent>
     </S.Dialog>,
     $modalRoot,
   );

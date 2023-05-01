@@ -29,7 +29,7 @@ export const Example = () => {
       <div>
         <button onClick={openModal}>모달 열기</button>
         {isModalOpen && (
-          <Modal closeEvent={closeModal}>
+          <Modal closeEvent={closeModal} direction="bottom">
             <CardCompany closeEvent={closeModal} />
           </Modal>
         )}
