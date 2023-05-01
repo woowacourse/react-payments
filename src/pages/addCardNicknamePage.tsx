@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { InputBox } from "../components";
@@ -11,11 +11,16 @@ import { setData } from "../utils/localStorage";
 export function AddCardNicknamePage() {
   const { state } = useLocation();
   const navigate = useNavigate();
-  const nicknameInput = useRef<any>({ current: {} });
+  const nicknameInput = useRef<any>({ current: {} }); // ref수정 필요
+  const [nickname, setNickname] = useState("");
+
+  function getNicknameInput(e: React.ChangeEvent<HTMLInputElement>) {
+    setNickname(e.target.value);
+  }
 
   function completeInputNickname() {
     const userCardInfo = { ...state };
-    userCardInfo.nickname = nicknameInput.current.nickname?.value;
+    userCardInfo["nickname"] = nickname;
     setData(userCardInfo);
     navigate(PATH.CARD_LIST);
   }
@@ -42,6 +47,7 @@ export function AddCardNicknamePage() {
             maxLength={15}
             inputRef={nicknameInput}
             placeholder="카드의 별명을 입력해주세요 (선택)"
+            onChange={getNicknameInput}
             asChild>
             <NicknameInput />
           </Input>
@@ -85,7 +91,6 @@ const NicknameInput = styled.input`
   width: 22rem;
   border-bottom: 0.2rem solid black;
   outline: none;
-  ${({ theme }) => theme.fonts.body}
 `;
 
 const NicknameInutGroup = styled.div`

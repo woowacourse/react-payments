@@ -1,13 +1,13 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import { WarningIc } from "../../assets";
-import { LABEL, TEXT_LENGTH } from "../../constants/inputInfo";
-import { RefContext } from "../../contexts/cardInfo";
-import { useInputCode } from "../../hooks/useInputCode";
-import { Input } from "../@common/input/Input";
-import { InputBox } from "../@common/input/InputBox";
-import { InputGroup } from "../@common/input/inputGroup";
-import { InputLabel } from "../@common/input/inputLabel";
+import { WarningIc } from "../../../assets";
+import { LABEL, TEXT_LENGTH } from "../../../constants/inputInfo";
+import { RefContext } from "../../../contexts/cardInfo";
+import { useInputCode } from "../../../hooks/useInputCode";
+import { Input } from "../../@common/input/Input";
+import { InputBox } from "../../@common/input/InputBox";
+import { InputGroup } from "../../@common/input/inputGroup";
+import { InputLabel } from "../../@common/input/inputLabel";
 
 export function SecurityCode() {
   const { code, handleChange } = useInputCode();

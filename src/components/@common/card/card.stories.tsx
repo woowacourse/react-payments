@@ -3,7 +3,7 @@ import { Card } from "./card";
 
 const meta: Meta<typeof Card> = {
   component: Card,
-  title: "creditCard",
+  title: "card",
 };
 
 export default meta;

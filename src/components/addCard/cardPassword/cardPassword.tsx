@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import { LABEL, TEXT_LENGTH } from "../../constants/inputInfo";
-import { RefContext } from "../../contexts/cardInfo";
-import { useInputPassword } from "../../hooks/useInputPassword";
-import { Password } from "../../type/input";
-import { Input } from "../@common/input/Input";
-import { InputBox } from "../@common/input/InputBox";
-import { InputLabel } from "../@common/input/inputLabel";
+import { LABEL, TEXT_LENGTH } from "../../../constants/inputInfo";
+import { RefContext } from "../../../contexts/cardInfo";
+import { useInputPassword } from "../../../hooks/useInputPassword";
+import { Password } from "../../../type/input";
+import { Input } from "../../@common/input/Input";
+import { InputBox } from "../../@common/input/InputBox";
+import { InputLabel } from "../../@common/input/inputLabel";
 
 export function CardPassword() {
   const { password, handleChange } = useInputPassword();

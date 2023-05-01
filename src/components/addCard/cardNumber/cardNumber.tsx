@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import { Fragment, useContext } from "react";
-import { Input } from "../@common/input/Input";
-import { InputBox } from "../@common/input/InputBox";
-import { NumberContext, RefContext } from "../../contexts/cardInfo";
-import { InputGroup } from "../@common/input/inputGroup";
-import { InputLabel } from "../@common/input/inputLabel";
-import { INPUT_TYPE, LABEL } from "../../constants/inputInfo";
-import { CardNumberIndex } from "../../type/input";
+import { Input } from "../../@common/input/Input";
+import { InputBox } from "../../@common/input/InputBox";
+import { NumberContext, RefContext } from "../../../contexts/cardInfo";
+import { InputGroup } from "../../@common/input/inputGroup";
+import { InputLabel } from "../../@common/input/inputLabel";
+import { INPUT_TYPE, LABEL } from "../../../constants/inputInfo";
+import { CardNumberIndex } from "../../../type/input";
 
 export function CardNumber() {
   const { cardNumber, handleChange } = useContext(NumberContext);

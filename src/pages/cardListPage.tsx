@@ -29,11 +29,10 @@ export function CardListPage() {
       </Header>
       <Section>
         {checkDataExist() ? (
-          cards?.map((card) => {
+          cards?.map((card, index) => {
             return (
-              <ItemWrapper>
+              <ItemWrapper key={index}>
                 <Card
-                  key={card.userName}
                   cardNumber={card.cardNumber}
                   month={card.month}
                   year={card.year}
@@ -73,7 +72,11 @@ const Section = styled.section`
 `;
 
 const CardNickname = styled.div`
-  ${({ theme }) => theme.fonts.title}
+  height: 1rem;
+
+  margin-top: 0.5rem;
+
+  ${({ theme }) => theme.fonts.label}
 `;
 
 const ItemWrapper = styled.div`
