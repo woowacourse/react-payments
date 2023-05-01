@@ -64,7 +64,7 @@ const ExpirationDateInput = () => {
         ))}
       </DateInputBox>
       <DateCaption date={Object.values(date)}>
-        카드에 표기된 월/연도 순으로 입력해주세요. ex&#41; 01/28
+        카드에 표기된 월/연도 순으로 입력해 주세요. ex&#41; 01/28
       </DateCaption>
     </>
   );
