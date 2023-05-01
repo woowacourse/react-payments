@@ -10,6 +10,12 @@ const PasswordInput = () => {
   const { onChangePassword, registPasswordRef } = useCardItemAction();
   const { passwordErrorMessage } = useErrorMessageValue();
 
+  const handleChangePassword = (inputIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = event.target.value;
+
+    onChangePassword(inputIndex)(inputValue);
+  };
+
   return (
     <InputGroup labelValue="카드 비밀번호" errorMessage={passwordErrorMessage}>
       <BoxContainer>
@@ -18,7 +24,7 @@ const PasswordInput = () => {
             type="password"
             ref={(element) => registPasswordRef(0, element)}
             value={password[0]}
-            onChange={onChangePassword(0)}
+            onChange={handleChangePassword(0)}
           ></Input>
         </InputBox>
         <InputBox width="43px" isError={!!passwordErrorMessage}>
@@ -26,7 +32,7 @@ const PasswordInput = () => {
             type="password"
             ref={(element) => registPasswordRef(1, element)}
             value={password[1]}
-            onChange={onChangePassword(1)}
+            onChange={handleChangePassword(1)}
           ></Input>
         </InputBox>
         <DotIconWrapper>

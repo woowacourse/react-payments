@@ -19,6 +19,11 @@ const CardCompletePage = ({ getCardItem, setCardNickName }: CardCompletePageProp
   const { id } = useParams();
   const card = getCardItem(Number(id));
 
+  const handleChangeNickName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = event.target.value;
+    onChangeNickName(inputValue);
+  };
+
   const handleClickButton = () => {
     setCardNickName(Number(id), nickName);
     navigate("/");
@@ -33,7 +38,7 @@ const CardCompletePage = ({ getCardItem, setCardNickName }: CardCompletePageProp
           <InputWrapper>
             <InputGroup errorMessage={errorMessage}>
               <NickNameInputBox>
-                <Input placeholder="카드 별칭(생략 가능)" value={nickName} onChange={onChangeNickName} />
+                <Input placeholder="카드 별칭(생략 가능)" value={nickName} onChange={handleChangeNickName} />
               </NickNameInputBox>
             </InputGroup>
           </InputWrapper>

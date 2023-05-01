@@ -5,12 +5,14 @@ import useInputFocus from "../useInputFocus";
 
 const passwordValidator = (inputValue: string) => {
   if (isOverMaxLength(inputValue, INPUT_MAX_LENGTH.PASSWORD)) {
-    throw new Error();
+    return { hasError: true };
   }
 
   if (!isNumber(inputValue)) {
-    throw new Error("숫자만 입력해주세요");
+    return { hasError: true, message: "숫자만 입력해주세요" };
   }
+
+  return { hasError: false };
 };
 
 const usePassword = () => {
@@ -18,10 +20,8 @@ const usePassword = () => {
 
   const { registRef, isNextInputFocusable, focusNextInput } = useInputFocus(INPUT_MAX_LENGTH.PASSWORD);
 
-  const handleChange = (inputIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = event.target.value;
-
-    onChange(inputIndex)(event);
+  const handleChange = (inputIndex: number) => (inputValue: string) => {
+    onChange(inputIndex)(inputValue);
 
     if (isNextInputFocusable(inputValue, inputIndex)) focusNextInput(inputIndex);
   };

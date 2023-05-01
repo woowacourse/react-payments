@@ -10,6 +10,13 @@ const NameInput = () => {
   const { onChangeName } = useCardItemAction();
   const { nameErrorMessage } = useErrorMessageValue();
 
+  const handleChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = event.target.value;
+    const upperValue = inputValue.toLocaleUpperCase();
+
+    onChangeName(upperValue);
+  };
+
   return (
     <InputGroup labelValue={<LabelValue length={name.length} />} errorMessage={nameErrorMessage}>
       <InputBox isError={!!nameErrorMessage}>
@@ -17,7 +24,7 @@ const NameInput = () => {
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
           textAlign="start"
           value={name}
-          onChange={onChangeName}
+          onChange={handleChangeName}
         />
       </InputBox>
     </InputGroup>

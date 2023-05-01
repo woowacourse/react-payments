@@ -8,10 +8,16 @@ const SecurityCodeInput = () => {
   const { onChangeSecurityCode } = useCardItemAction();
   const { securityCodeErrorMessage } = useErrorMessageValue();
 
+  const handleChangeSecurityCode = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = event.target.value;
+
+    onChangeSecurityCode(inputValue);
+  };
+
   return (
     <InputGroup labelValue={"보안 코드(CVC/CVV)"} errorMessage={securityCodeErrorMessage}>
       <InputBox width="100px" isError={!!securityCodeErrorMessage}>
-        <Input type="password" value={securityCode} onChange={onChangeSecurityCode} />
+        <Input type="password" value={securityCode} onChange={handleChangeSecurityCode} />
       </InputBox>
     </InputGroup>
   );

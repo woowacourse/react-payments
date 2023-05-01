@@ -36,11 +36,11 @@ interface ErrorMessageValue {
 }
 
 interface CardItemAction {
-  onChangeCardNumber: (inputIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onChangeExpirationDate: (inputIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onChangeName: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onChangeSecurityCode: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onChangePassword: (inputIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeCardNumber: (inputIndex: number) => (inputValue: string) => void;
+  onChangeExpirationDate: (inputIndex: number) => (inputValue: string) => void;
+  onChangeName: (inputValue: string) => void;
+  onChangeSecurityCode: (inputValue: string) => void;
+  onChangePassword: (inputIndex: number) => (inputValue: string) => void;
   setCompany: (company: Company) => void;
 
   registCardNumberRef: (inputIndex: number, element: HTMLInputElement | null) => void;

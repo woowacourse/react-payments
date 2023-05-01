@@ -1,23 +1,23 @@
 import { useState } from "react";
+import { InputValidator } from "../types/Validate";
 
-const useInput = (validator?: (inputValue: string) => void) => {
+const useInput = (validator?: InputValidator) => {
   const [inputValue, setInputValue] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = event.target.value;
+  const onChange = (inputValue: string) => {
+    const { hasError, message } = validator?.(inputValue) ?? { hasError: false, message: "" };
 
-    try {
-      validator && validator(inputValue);
-      setInputValue(inputValue);
-      setErrorMessage("");
-    } catch (error) {
-      if (!(error instanceof Error)) return;
-      setErrorMessage(error.message);
+    if (hasError) {
+      setErrorMessage(message || "");
+      return;
     }
+
+    setInputValue(inputValue);
+    setErrorMessage("");
   };
 
-  return { inputValue, errorMessage, onChange };
+  return { inputValue, errorMessage, setErrorMessage, onChange };
 };
 
 export default useInput;
