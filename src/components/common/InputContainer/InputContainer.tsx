@@ -1,9 +1,10 @@
-import type { ComponentPropsWithoutRef, ReactNode } from 'react';
+import { forwardRef } from 'react';
+import type { ComponentPropsWithRef, ForwardedRef, ReactNode } from 'react';
 import type { SupportingTextMessage } from '../../../types';
 import SupportingText from '../SupportingText/SupportingText';
 import styles from './style.module.css';
 
-interface InputContainerProps extends ComponentPropsWithoutRef<'div'> {
+interface InputContainerProps extends ComponentPropsWithRef<'div'> {
   children: ReactNode;
   supportingText?: SupportingTextMessage;
   characterCounter?: {
@@ -13,15 +14,18 @@ interface InputContainerProps extends ComponentPropsWithoutRef<'div'> {
   isError?: boolean;
 }
 
-const InputContainer = ({
-  children,
-  className = '',
-  supportingText,
-  characterCounter,
-  isError = false,
-}: InputContainerProps) => {
+const InputContainer = (
+  {
+    children,
+    className = '',
+    supportingText,
+    characterCounter,
+    isError = false,
+  }: InputContainerProps,
+  ref: ForwardedRef<HTMLDivElement>
+) => {
   return (
-    <div className={`${className} ${styles.inputContainer}`}>
+    <div ref={ref} className={`${className} ${styles.inputContainer}`}>
       {children}
       <div className={styles.subInformation}>
         {supportingText && <SupportingText message={supportingText} isError={isError} />}
@@ -35,4 +39,4 @@ const InputContainer = ({
   );
 };
 
-export default InputContainer;
+export default forwardRef(InputContainer);
