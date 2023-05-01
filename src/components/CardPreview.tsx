@@ -11,11 +11,7 @@ import {
   UNSELECTED_CARD_COMPANY,
 } from "constants/cardCompanies";
 
-interface Props {
-  cardInfo: CardInfo;
-}
-
-const CardPreview = ({ cardInfo }: Props) => {
+const CardPreview = ({ cardInfo }: { cardInfo: CardInfo }) => {
   const { handleModalOpen } = useModal();
 
   const isSelected = Object.keys(CARD_COMPANIES).includes(cardInfo.cardCompany);

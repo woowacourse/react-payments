@@ -3,11 +3,7 @@ import { SyntheticEvent, useContext } from "react";
 import { CARD_COMPANIES } from "constants/cardCompanies";
 import { CardInfoContext } from "components/provider/CardInfoProvider";
 
-interface Props {
-  cardCompanyName: string;
-}
-
-const CardCompany = ({ cardCompanyName }: Props) => {
+const CardCompany = ({ cardCompanyName }: { cardCompanyName: string }) => {
   const setCardCompany = useContext(CardInfoContext).setCardInfo;
 
   const handleCompanySelection = ({
