@@ -1,6 +1,5 @@
 import { ChangeEvent, useRef, useState } from 'react';
 import { convertSecuredCreditCard } from 'domains/creditCard';
-import * as T from 'types';
 import styled from 'styled-components';
 import useCreditCardForm from 'hooks/useCreditCardForm';
 import * as S from '../style';
@@ -23,9 +22,9 @@ export const MaskedViewer = styled.p`
   justify-content: center;
 `;
 
-function CreditCardNumberInput({ name }: T.CreditCardInputProps) {
+function CreditCardNumberInput() {
   const inputRef = useRef<HTMLInputElement>(null);
-  const { creditCardForm, setCreditCardForm } = useCreditCardForm();
+  const { creditCardForm, updateCreditCardNumber } = useCreditCardForm();
   const [markedCreditCardNumber, setMarkedCreditCardNumber] = useState('');
 
   const handleChangeCreditCardNumber = (
@@ -41,7 +40,7 @@ function CreditCardNumberInput({ name }: T.CreditCardInputProps) {
       .join(' - ');
 
     setMarkedCreditCardNumber(markedNumber);
-    setCreditCardForm({ ...creditCardForm, [name]: newCreditCardNumber });
+    updateCreditCardNumber(newCreditCardNumber);
   };
 
   const isError = creditCardForm.number.length > 0 && !validateNumber(creditCardForm.number);

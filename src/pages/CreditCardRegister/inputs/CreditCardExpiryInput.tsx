@@ -1,4 +1,3 @@
-import * as T from 'types';
 import useCreditCardForm from 'hooks/useCreditCardForm';
 import { markExpiry } from 'domains/creditCard';
 import { ChangeEvent } from 'react';
@@ -6,8 +5,8 @@ import Input from '../../../components/Input';
 import * as S from '../style';
 import { validateExpiry } from '../../../domains/validations';
 
-function CreditCardExpiryInput({ name }: T.CreditCardInputProps) {
-  const { creditCardForm, setCreditCardForm } = useCreditCardForm();
+function CreditCardExpiryInput() {
+  const { creditCardForm, updateCreditCardExpiry } = useCreditCardForm();
 
   const handleChangeCreditCardExpiry = (
     event: ChangeEvent<HTMLInputElement>
@@ -15,7 +14,7 @@ function CreditCardExpiryInput({ name }: T.CreditCardInputProps) {
     const newCardExpiry = event.target.value;
     const cleanedExpiry = newCardExpiry.replaceAll('/', '').replace(/\D/g, '');
     if (cleanedExpiry.length > 4) return;
-    setCreditCardForm({ ...creditCardForm, [name]: cleanedExpiry });
+    updateCreditCardExpiry(cleanedExpiry);
   };
 
   const markedExpiry = markExpiry(creditCardForm.expiry);

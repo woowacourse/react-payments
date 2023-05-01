@@ -59,11 +59,11 @@ function CreditCardRegister() {
           />
         </FlexBox>
         <S.CreditCardRegisterForm>
-          <CreditCardNumberInput name="number" />
-          <CreditCardExpiryInput name="expiry" />
-          <CreditCardOwnerInput name="owner" />
-          <CreditCardCVCInput name="cvc" />
-          <CreditCardPasswordInput name="password" />
+          <CreditCardNumberInput />
+          <CreditCardExpiryInput />
+          <CreditCardOwnerInput />
+          <CreditCardCVCInput />
+          <CreditCardPasswordInput />
           <ControlButton
             disabled={isCreditCardError}
             type="submit"

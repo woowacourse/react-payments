@@ -6,8 +6,8 @@ import Input from '../../../components/Input';
 import * as S from '../style';
 import { validatePassword } from '../../../domains/validations';
 
-function CreditCardPasswordInput({ name }: T.CreditCardInputProps) {
-  const { creditCardForm, setCreditCardForm } = useCreditCardForm();
+function CreditCardPasswordInput() {
+  const { creditCardForm, updateCreditCardPassword } = useCreditCardForm();
 
   const handleChangeCreditCardPassword = (
     event: ChangeEvent<HTMLInputElement>
@@ -22,7 +22,7 @@ function CreditCardPasswordInput({ name }: T.CreditCardInputProps) {
       if (targetName === 'second') {
         password[1] = newPassword;
       }
-      setCreditCardForm({ ...creditCardForm, [name]: password });
+      updateCreditCardPassword(password);
     }
   };
 

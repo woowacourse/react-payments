@@ -1,4 +1,3 @@
-import * as T from 'types';
 import useCreditCardForm from 'hooks/useCreditCardForm';
 import FlexBox from 'components/FlexBox';
 import { validateCVC } from 'domains/validations';
@@ -6,13 +5,13 @@ import { ChangeEvent } from 'react';
 import Input from '../../../components/Input';
 import * as S from '../style';
 
-function CreditCardCVCInput({ name }: T.CreditCardInputProps) {
-  const { creditCardForm, setCreditCardForm } = useCreditCardForm();
+function CreditCardCVCInput() {
+  const { creditCardForm, updateCreditCardCVC } = useCreditCardForm();
 
   const handleChangeCreditCardCVC = (event: ChangeEvent<HTMLInputElement>) => {
     const newCVC = event.target.value.replace(/\D/g, '');
     if (newCVC.length <= 3) {
-      setCreditCardForm({ ...creditCardForm, [name]: newCVC });
+      updateCreditCardCVC(newCVC);
     }
   };
 
