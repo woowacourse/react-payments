@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import CardCompanyModal from './CardCompanyModal';
+import CardCompanyModal from '../components/CardCompanyModal/CardCompanyModal';
 
 const meta = {
   component: CardCompanyModal,

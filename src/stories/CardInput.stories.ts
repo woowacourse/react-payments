@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import CardInput from './CardInput';
+import CardInput from '../components/@common/CardInput';
 
 const meta = {
   component: CardInput,

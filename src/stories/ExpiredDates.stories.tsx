@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import ExpiredDate from './ExpiredDates';
+import ExpiredDate from '../components/ExpiredDate/ExpiredDates';
 
 const meta = {
   component: ExpiredDate,

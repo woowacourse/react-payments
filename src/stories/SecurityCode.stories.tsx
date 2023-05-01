@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import SecurityCode from './SecurityCode';
+import SecurityCode from '../components/SecurityCode/SecurityCode';
 
 const meta = {
   component: SecurityCode,

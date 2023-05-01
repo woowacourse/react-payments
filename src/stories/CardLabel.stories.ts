@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import CardLabel from './CardLabel';
+import CardLabel from '../components/@common/CardLabel';
 
 const meta = {
   component: CardLabel,

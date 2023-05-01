@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
-import CardLogo from './CardLogo';
-import { IMAGE_PATH } from '../../types/Image';
+import CardLogo from '../components/@common/CardLogo';
+import { IMAGE_PATH } from '../types/Image';
 
 const meta = {
   component: CardLogo,
