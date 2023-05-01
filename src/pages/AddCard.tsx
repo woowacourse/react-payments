@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useRef } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import CardNumbers from '../components/CardNumbers/CardNumbers';
@@ -80,6 +80,14 @@ const AddCard = () => {
     navigate('/register-card');
   };
 
+  const refs = {
+    cardNumbers: useRef<HTMLInputElement>(null),
+    expiredDate: useRef<HTMLInputElement>(null),
+    cardOwnerName: useRef<HTMLInputElement>(null),
+    securityCode: useRef<HTMLInputElement>(null),
+    password: useRef<HTMLInputElement>(null),
+  };
+
   return (
     <>
       <Layout>
@@ -96,21 +104,32 @@ const AddCard = () => {
           <CardNumbers
             cardNumbers={cardNumbers}
             checkCardNumbers={checkCardNumbers}
+            ref={refs.cardNumbers}
+            nextRef={refs.expiredDate}
           />
           <ExpiredDate
             expiredDate={expiredDate}
             checkExpiredDate={checkExpiredDate}
             validateDate={validateDate}
+            ref={refs.expiredDate}
+            nextRef={refs.cardOwnerName}
           />
           <CardOwnerName
             cardOwnerName={cardOwnerName}
             checkCardOwnerName={checkCardOwnerName}
+            ref={refs.cardOwnerName}
           />
           <SecurityCode
             securityCode={securityCode}
             checkSecurityCode={checkSecurityCode}
+            ref={refs.securityCode}
+            nextRef={refs.password}
           />
-          <CardPassword password={password} checkPassword={checkPassword} />
+          <CardPassword
+            password={password}
+            checkPassword={checkPassword}
+            ref={refs.password}
+          />
           <ButtonWrapper>
             <NextButton disabled={disabled}>다음</NextButton>
           </ButtonWrapper>
