@@ -35,6 +35,7 @@ const Style = {
       outline: none;
       border-color: #75c4d2;
       box-shadow: 0 0 4px #75c4d2;
+      background-color: #cddfe3;
     }
 
     ::placeholder {
@@ -45,6 +46,10 @@ const Style = {
       border-radius: 0;
       border-bottom: 1px solid #737373;
       background-color: transparent;
+
+      :focus {
+        box-shadow: 0 4px 4px -4px #75c4d2;
+      }
     }
   `,
 };

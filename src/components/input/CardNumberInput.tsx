@@ -16,6 +16,7 @@ import {
 interface Props {
   cardNumberInputRef: React.RefObject<HTMLInputElement>;
   cardNumber: CardNumber;
+  caption?: string;
   setCardNumber: (input: CardNumber) => void;
   moveFocusToExpirationDate?: () => void;
 }
@@ -23,6 +24,7 @@ interface Props {
 export function CardNumberInput({
   cardNumberInputRef,
   cardNumber,
+  caption = '카드번호 16자리를 입력해주세요.',
   setCardNumber,
   moveFocusToExpirationDate,
 }: Props) {
@@ -76,7 +78,7 @@ export function CardNumberInput({
   };
 
   return (
-    <>
+    <div>
       <Style.Label htmlFor='cardNumber0'>
         <Style.Title>
           카드 번호<Style.Essential>*</Style.Essential>
@@ -100,6 +102,7 @@ export function CardNumberInput({
                 onKeyDown={(e) => handleBackspacePress(index, e)}
                 onBlur={(e) => handleLastInputBlur(index, e)}
                 placeholder={isPasswordInput(index) ? '••••' : '0000'}
+                aria-labelledby='cardNumberCaption'
               />
               {!isLast(index, CARD_NUMBER_INPUTS_LENGTH) && (
                 <Style.Hyphen visible={isFullInputs[index]}>-</Style.Hyphen>
@@ -108,7 +111,8 @@ export function CardNumberInput({
           );
         })}
       </InputContainer>
-    </>
+      <Style.Caption id='cardNumberCaption'>{caption}</Style.Caption>
+    </div>
   );
 }
 
@@ -118,6 +122,7 @@ const Style = {
     justify-content: space-between;
 
     width: 318px;
+    margin-bottom: 10px;
 
     font-size: 12px;
   `,
@@ -133,5 +138,12 @@ const Style = {
   Hyphen: styled.span<{ visible: boolean }>`
     padding: 0 10px;
     visibility: ${(props) => (props.visible ? 'visible' : 'hidden')};
+  `,
+
+  Caption: styled.p`
+    margin-top: 8px;
+
+    font-size: 10px;
+    color: #737373;
   `,
 };

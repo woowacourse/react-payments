@@ -10,10 +10,16 @@ import { Password } from '../../types';
 interface Props {
   password: Password;
   passwordInputRef: React.RefObject<HTMLInputElement>;
+  caption?: string;
   setPassword: (input: Password) => void;
 }
 
-export function PasswordInput({ password, passwordInputRef, setPassword }: Props) {
+export function PasswordInput({
+  password,
+  passwordInputRef,
+  caption = '카드 비밀번호 앞 2자리를 입력해주세요.',
+  setPassword,
+}: Props) {
   const allRef = [passwordInputRef, useRef<HTMLInputElement>(null)];
 
   const handleBackspacePress = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -50,7 +56,7 @@ export function PasswordInput({ password, passwordInputRef, setPassword }: Props
   };
 
   return (
-    <>
+    <div>
       <Style.Label htmlFor='cardPassword0'>
         <Style.Title>
           카드 비밀번호<Style.Essential>*</Style.Essential>
@@ -72,6 +78,7 @@ export function PasswordInput({ password, passwordInputRef, setPassword }: Props
                 onChange={(e) => handlePasswordInputChange(index, e)}
                 onKeyDown={(e) => handleBackspacePress(index, e)}
                 placeholder={PASSWORD_TEXT}
+                aria-labelledby='passwordCaption'
               />
             </InputContainer>
           );
@@ -79,7 +86,8 @@ export function PasswordInput({ password, passwordInputRef, setPassword }: Props
         <Style.Dot>•</Style.Dot>
         <Style.Dot>•</Style.Dot>
       </Style.Container>
-    </>
+      <Style.Caption id='passwordCaption'>{caption}</Style.Caption>
+    </div>
   );
 }
 
@@ -87,6 +95,7 @@ const Style = {
   Container: styled.div`
     display: flex;
     justify-content: space-between;
+    align-items: center;
 
     width: 193px;
   `,
@@ -96,6 +105,7 @@ const Style = {
     justify-content: space-between;
 
     width: 318px;
+    margin-bottom: 10px;
 
     font-size: 12px;
   `,
@@ -115,5 +125,12 @@ const Style = {
 
     width: 43px;
     height: 45px;
+  `,
+
+  Caption: styled.p`
+    margin-top: 8px;
+
+    font-size: 10px;
+    color: #737373;
   `,
 };

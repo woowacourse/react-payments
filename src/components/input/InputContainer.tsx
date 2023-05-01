@@ -20,5 +20,9 @@ const Style = {
 
     border-radius: 7px;
     background-color: #ecebf1;
+
+    &:focus {
+      background-color: #75c4d2;
+    }
   `,
 };

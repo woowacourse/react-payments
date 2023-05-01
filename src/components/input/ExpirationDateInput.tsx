@@ -10,6 +10,7 @@ import { ExpirationDate } from '../../types';
 interface Props {
   monthInputRef: React.RefObject<HTMLInputElement>;
   expirationDate: ExpirationDate;
+  caption?: string;
   setExpirationDate: (input: ExpirationDate) => void;
   moveFocusToOwnerName?: () => void;
 }
@@ -17,6 +18,7 @@ interface Props {
 export function ExpirationDateInput({
   monthInputRef,
   expirationDate,
+  caption = '카드 만료일을 월 2자리, 연도 뒤 2자리로 입력해주세요.',
   setExpirationDate,
   moveFocusToOwnerName,
 }: Props) {
@@ -65,7 +67,7 @@ export function ExpirationDateInput({
   }, [expirationDate.year]);
 
   return (
-    <>
+    <div>
       <Style.Label htmlFor='expirationDate'>
         <Style.Title>
           만료일<Style.Essential>*</Style.Essential>
@@ -83,6 +85,7 @@ export function ExpirationDateInput({
           inputMode='numeric'
           placeholder='MM'
           onChange={handleMonthInputChange}
+          aria-labelledby='ExpirationDateCaption'
         />
         <Style.Slash>/</Style.Slash>
         <Input
@@ -99,7 +102,8 @@ export function ExpirationDateInput({
           onBlur={validateDate}
         />
       </InputContainer>
-    </>
+      <Style.Caption id='ExpirationDateCaption'>{caption}</Style.Caption>
+    </div>
   );
 }
 
@@ -109,6 +113,7 @@ const Style = {
     justify-content: space-between;
 
     width: 318px;
+    margin-bottom: 10px;
 
     font-size: 12px;
   `,
@@ -123,5 +128,12 @@ const Style = {
 
   Slash: styled.span`
     padding: 0 5px;
+  `,
+
+  Caption: styled.p`
+    margin-top: 8px;
+
+    font-size: 10px;
+    color: #737373;
   `,
 };

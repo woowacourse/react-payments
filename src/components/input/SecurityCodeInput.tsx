@@ -11,15 +11,17 @@ import { SecurityCode } from '../../types';
 interface Props {
   securityCode: SecurityCode;
   securityCodeInputRef: React.RefObject<HTMLInputElement>;
+  caption?: string;
   setSecurityCode: (input: SecurityCode) => void;
   moveFocusToPassword?: () => void;
 }
 
 export function SecurityCodeInput({
-  securityCodeInputRef,
-  moveFocusToPassword,
   securityCode,
+  securityCodeInputRef,
+  caption = '카드 뒷면 서명란에 인쇄된 숫자 끝 3자리를 입력해주세요.',
   setSecurityCode,
+  moveFocusToPassword,
 }: Props) {
   const tooltipMessage = '카드 뒷면 서명란에 인쇄된 숫자 끝 3자리를 입력해주세요.';
 
@@ -43,7 +45,7 @@ export function SecurityCodeInput({
   }, [securityCode]);
 
   return (
-    <>
+    <div>
       <Style.Label htmlFor='CVC'>
         <Style.Title>
           보안 코드(CVC/CVV)<Style.Essential>*</Style.Essential>
@@ -64,11 +66,13 @@ export function SecurityCodeInput({
             inputMode='numeric'
             type='password'
             required
+            aria-labelledby='securityCodeCaption'
           />
         </InputContainer>
         <Tooltip message={tooltipMessage} />
       </Style.TooltipContainer>
-    </>
+      <Style.Caption id='securityCodeCaption'>{caption}</Style.Caption>
+    </div>
   );
 }
 
@@ -78,6 +82,7 @@ const Style = {
     justify-content: space-between;
 
     width: 318px;
+    margin-bottom: 10px;
 
     font-size: 12px;
   `,
@@ -94,5 +99,12 @@ const Style = {
     display: flex;
     align-items: center;
     gap: 10px;
+  `,
+
+  Caption: styled.p`
+    margin-top: 8px;
+
+    font-size: 10px;
+    color: #737373;
   `,
 };
