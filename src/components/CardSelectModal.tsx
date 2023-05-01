@@ -12,12 +12,7 @@ type modalProps = {
 const CardSelectModal = ({ determineCardType, closeModal }: modalProps) => {
   return (
     <>
-      <div
-        className="card-select-modal-backdrop"
-        onClick={() => {
-          closeModal(false);
-        }}
-      ></div>
+      <div className="card-select-modal-backdrop" onClick={() => closeModal(false)}></div>
       <div className="card-select-modal">
         {BANK_LIST.map((name) => (
           <BankIcon

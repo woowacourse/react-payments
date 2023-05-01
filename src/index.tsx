@@ -23,8 +23,8 @@ const router = createBrowserRouter(
       element: <NotFoundPage />,
     },
     {
-      path: '*',
-      element: <Navigate replace to="/404" />,
+      path: LOCATION.EXCEPT_PAGE,
+      element: <Navigate replace to={LOCATION.PAGE_NOT_FOUND} />,
     },
   ],
   {
