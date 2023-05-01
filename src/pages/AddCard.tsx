@@ -1,4 +1,4 @@
-import { useContext, useRef } from 'react';
+import { useContext, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import CardNumbers from '../components/CardNumbers/CardNumbers';
@@ -87,6 +87,10 @@ const AddCard = () => {
     securityCode: useRef<HTMLInputElement>(null),
     password: useRef<HTMLInputElement>(null),
   };
+
+  useEffect(() => {
+    if (!isBottomSheetOpen) refs.cardNumbers.current?.focus();
+  }, [isBottomSheetOpen]);
 
   return (
     <>
