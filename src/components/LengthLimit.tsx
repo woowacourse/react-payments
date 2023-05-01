@@ -8,14 +8,16 @@ interface Props {
 
 const LengthLimit = ({ length, lengthLimitStyle }: Props) => {
   return (
-    <Limit lengthLimitStyle={lengthLimitStyle}>
+    <S.Limit lengthLimitStyle={lengthLimitStyle}>
       {length}/{LIMIT_LENGTH.NAME}
-    </Limit>
+    </S.Limit>
   );
 };
 
-const Limit = styled.div<{ lengthLimitStyle: CSSProp }>`
-  ${(props) => props.lengthLimitStyle}
-`;
+const S = {
+  Limit: styled.div<{ lengthLimitStyle: CSSProp }>`
+    ${(props) => props.lengthLimitStyle}
+  `,
+};
 
 export default LengthLimit;
