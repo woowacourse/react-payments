@@ -1,32 +1,17 @@
 import { Input } from 'components/common';
-import React, { ChangeEvent, ChangeEventHandler } from 'react';
-import { ValueAndOnChange } from '../types';
-import { validateInput } from 'util/Validation';
+import React, { ChangeEventHandler } from 'react';
 import { Styled as S } from './PasswordInput.styles';
 import FormLabel from 'components/common/FormLabel/FormLabel';
+import { usePasswordInput } from 'hooks/usePasswordInput';
 
 export interface PasswordInputProps {
-  first: ValueAndOnChange;
-  second: ValueAndOnChange;
+  onChangeFirst: ChangeEventHandler<HTMLInputElement>;
+  onChangeSecond: ChangeEventHandler<HTMLInputElement>;
 }
 
-export function PasswordInput(props: PasswordInputProps) {
-  const { first, second } = props;
-  const inputRefs = Object.keys(props).map(() => React.createRef<HTMLInputElement>());
-
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement>,
-    index: number,
-    onChange?: ChangeEventHandler<HTMLInputElement>,
-  ) => {
-    const value = e.target.value;
-    if (validateInput(value)) return;
-
-    if (index < Object.keys(props).length - 1 && value.trim().length === e.target.maxLength) {
-      inputRefs[index + 1].current?.focus();
-    }
-    onChange && onChange(e);
-  };
+export function PasswordInput({ onChangeFirst, onChangeSecond }: PasswordInputProps) {
+  const inputRefs = [React.createRef<HTMLInputElement>(), React.createRef<HTMLInputElement>()];
+  const { first, second } = usePasswordInput(inputRefs, onChangeFirst, onChangeSecond);
 
   return (
     <>
@@ -38,7 +23,7 @@ export function PasswordInput(props: PasswordInputProps) {
           value={first.value}
           type="password"
           maxLength={1}
-          onChange={(e) => handleChange(e, 0, first.onChange)}
+          onChange={first.onChange}
           required
         />
         <Input
@@ -47,7 +32,7 @@ export function PasswordInput(props: PasswordInputProps) {
           value={second.value}
           type="password"
           maxLength={1}
-          onChange={(e) => handleChange(e, 1, second.onChange)}
+          onChange={second.onChange}
           required
         />
         <S.DotContainer>•</S.DotContainer>

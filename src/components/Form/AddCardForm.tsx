@@ -133,8 +133,8 @@ function AddCardInfo({ onSubmit }: AddCardFormProps) {
         {<ErrorCaption>{!isValid && errorMessages.securityCode}</ErrorCaption>}
 
         <PasswordInput
-          first={{ value: card.password.first, onChange: handleFirstPasswordInputChange }}
-          second={{ value: card.password.second, onChange: handleSecondPasswordInputChange }}
+          onChangeFirst={handleFirstPasswordInputChange}
+          onChangeSecond={handleSecondPasswordInputChange}
         />
         {<ErrorCaption>{!isValid && errorMessages.password}</ErrorCaption>}
 
