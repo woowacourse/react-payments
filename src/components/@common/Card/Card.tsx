@@ -30,13 +30,9 @@ function CardContent({ cardNumber, expirationDate, holderName, bank }: CardRegis
         <Styled.CardBank>{bank.label}</Styled.CardBank>
         <Styled.CardMagnet />
         <Styled.CardNumberContainer>
-          {Object.values(cardNumber).map((number, i) =>
-            i < 2 ? (
-              <Styled.CardNumber key={i} defaultValue={number} disabled />
-            ) : (
-              <Styled.CardNumber key={i} type="password" defaultValue={number} disabled />
-            )
-          )}
+          {Object.values(cardNumber).map((number, i) => (
+            <Styled.CardNumber key={i} defaultValue={number} disabled type={i < 2 ? 'text' : 'password'} />
+          ))}
         </Styled.CardNumberContainer>
         <Styled.CardHolderName>{holderName}</Styled.CardHolderName>
         <Styled.ExpirationDateContainer>
