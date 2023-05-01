@@ -27,7 +27,9 @@ const CardPassword = forwardRef(
     };
 
     const focusNext = (currentOrder: number) => {
-      passwordRefs[currentOrder + 1].current?.focus();
+      const currentRef = passwordRefs[currentOrder].current;
+      const nextRef = passwordRefs[currentOrder + 1].current;
+      if (currentRef?.value.length) nextRef?.focus();
     };
 
     return (

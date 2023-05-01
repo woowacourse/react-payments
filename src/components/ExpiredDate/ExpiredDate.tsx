@@ -32,7 +32,11 @@ const ExpiredDate = forwardRef(
     };
 
     const focusNext = () => {
-      if (cardExpiredDateRefs[1].current?.value.length === 2)
+      if (
+        Object.values(cardExpiredDateRefs).every(
+          (ref) => ref.current?.value.length === 2
+        )
+      )
         nextRef.current?.focus();
     };
 
