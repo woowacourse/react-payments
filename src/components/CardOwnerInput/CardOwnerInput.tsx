@@ -24,6 +24,7 @@ const CardOwnerInput = ({ owner, onChange }: CardOwnerInputProps) => {
           textAlign="center"
           onChange={onChange}
           autoComplete="off"
+          value={owner}
         />
       </Styled.Box>
     </>
