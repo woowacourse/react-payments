@@ -4,13 +4,17 @@
     "es6": true,
     "node": true
   },
-  "extends": ["airbnb", "airbnb-typescript"],
+  "extends": ["airbnb", "airbnb-typescript", "", "plugin:storybook/recommended"],
   "parserOptions": {
     "project": "./tsconfig.json"
   },
-
   "rules": {
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    ],
     "import/extensions": [
       "error",
       "ignorePackages",
@@ -22,17 +26,30 @@
       }
     ],
     "linebreak-style": "off",
+    "implicit-arrow-linebreak": "off",
     "react/react-in-jsx-scope": 0,
     "react/jsx-uses-react": 0,
     "react/prop-types": 0,
     "import/no-unresolved": "off",
     "@typescript-eslint/comma-dangle": "off",
     "react/jsx-props-no-spreading": "off",
-    "import/no-extraneous-dependencies": [0, { "devDependencies": true }],
+    "import/no-extraneous-dependencies": [
+      0,
+      {
+        "devDependencies": true
+      }
+    ],
     "react/require-default-props": "off",
     "operator-linebreak": "off",
-    "max-len": ["error", { "code": 120 }],
+    "max-len": [
+      "error",
+      {
+        "code": 120
+      }
+    ],
     "object-curly-newline": "off",
+    "react/button-has-type": "off",
+    "react/jsx-no-constructed-context-values": "off",
     "import/order": [
       "error",
       {
@@ -54,7 +71,17 @@
             "position": "after"
           },
           {
-            "pattern": "@Domains/*",
+            "pattern": "@Styles/*",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "@Domains/**/*",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "@Types/*",
             "group": "internal",
             "position": "after"
           },
@@ -64,12 +91,22 @@
             "position": "after"
           },
           {
+            "pattern": "@Contexts/**/*",
+            "group": "internal",
+            "position": "after"
+          },
+          {
             "pattern": "@Utils/*",
             "group": "internal",
             "position": "after"
           },
           {
-            "pattern": "@Constant/*",
+            "pattern": "@Constants/*",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "@Animations/*",
             "group": "internal",
             "position": "after"
           }

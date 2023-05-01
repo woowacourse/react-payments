@@ -1,42 +1,37 @@
 /* eslint-disable react/no-array-index-key */
-import * as Type from '@Types/index';
-
 import creditCard from '@Domains/creditCard';
 
-import * as Style from './style';
+import useCreditCardValidation from '@Hooks/useCreditCardValidation';
 
-export type CreditCardProps = {
-  fullFilled: boolean;
-  creditCard: Pick<Type.CreditCard, 'number' | 'expiry' | 'owner'>;
-};
+import CARD_COMPANY from '@Constants/cardCompany';
 
-function CreditCard({ fullFilled, creditCard: { expiry, number, owner } }: CreditCardProps) {
-  const isValid = () => {
-    if (!fullFilled) return true;
+import * as S from './style';
+import { CreditCardProps } from './type';
 
-    if (number.length !== 16) return false;
-    if (!number) return false;
-
-    if (!expiry) return false;
-
-    return true;
-  };
+function CreditCard({ fullFilled = true, expiry, numbers, owner, company }: CreditCardProps) {
+  const isValid = useCreditCardValidation({ expiry, numbers, owner, company }, []);
 
   return (
-    <Style.CreditCardLayout isValid={isValid()}>
-      <Style.CreditCardICChip />
-      <Style.CreditCardInfoLayout>
-        <Style.CreditCardNumber>
-          {creditCard.convertSecuredCreditCard(number).map((num, idx) => (
+    <S.CreditCardLayout
+      isValid={!fullFilled || isValid}
+      backgroundColor={company && CARD_COMPANY[company].uniqueColor}
+      gradientColor={company && CARD_COMPANY[company].gradientColor}
+      fontColor={company && CARD_COMPANY[company].fontColor}
+    >
+      <S.CreditCardCompanyName>{company && CARD_COMPANY[company].name}</S.CreditCardCompanyName>
+      <S.CreditCardICChip />
+      <S.CreditCardInfoLayout>
+        <S.CreditCardNumber>
+          {creditCard.convertSecuredCreditCard(numbers).map((num, idx) => (
             <div key={idx}>{num}</div>
           ))}
-        </Style.CreditCardNumber>
-        <Style.CreditCardContainer>
-          <Style.CreditCardBox>{owner}</Style.CreditCardBox>
-          <Style.CreditCardBox>{expiry}</Style.CreditCardBox>
-        </Style.CreditCardContainer>
-      </Style.CreditCardInfoLayout>
-    </Style.CreditCardLayout>
+        </S.CreditCardNumber>
+        <S.CreditCardContainer>
+          <S.CreditCardBox>{owner}</S.CreditCardBox>
+          <S.CreditCardBox>{expiry}</S.CreditCardBox>
+        </S.CreditCardContainer>
+      </S.CreditCardInfoLayout>
+    </S.CreditCardLayout>
   );
 }
 

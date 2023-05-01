@@ -1,30 +1,24 @@
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const path = require('path');
-
 module.exports = {
-  stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
-  staticDirs: ['../public'],
+  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
-    '@storybook/addon-interactions',
     '@storybook/preset-create-react-app',
+    '@storybook/addon-interactions',
+    '@storybook/addon-controls',
   ],
-  framework: '@storybook/react',
-  core: {
-    builder: '@storybook/builder-webpack5',
+  framework: {
+    name: '@storybook/react-webpack5',
+    options: {},
   },
-  features: {
-    interactionsDebugger: true,
+
+  docs: {
+    autodocs: true,
   },
-  typescript: {
-    reactDocgen: 'react-docgen-typescript-plugin',
-  },
-  staticDirs: ['../public', '../src/stories/assets'],
-  framework: '@storybook/react',
-  core: {
-    builder: '@storybook/builder-webpack5',
-  },
+
+  staticDirs: ['../public'],
 
   webpackFinal: async (config) => {
     config.resolve.plugins.push(
