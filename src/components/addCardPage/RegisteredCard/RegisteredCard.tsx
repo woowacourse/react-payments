@@ -9,6 +9,7 @@ import { type CardProps } from '../../common/Card/Card';
 import { Error } from '../../common/Error';
 import { Input } from '../../common/Input';
 import { InputField } from '../../common/InputField';
+import { colors } from '../../../styles/theme';
 
 interface RegisteredCardProps extends CardProps {
   cardTitleInformation: UseInputProps;
@@ -51,7 +52,7 @@ export default function RegisteredCard({
             <Input
               {...cardTitleInformation}
               type="text"
-              bgColor="#fff"
+              bgColor={colors.white}
               textAlign="center"
               enterKeyHint="done"
               required
@@ -89,7 +90,7 @@ const FinishMessage = styled.h2`
   font-size: 24px;
   line-height: 28px;
   text-align: center;
-  color: #383838;
+  color: ${({ theme }) => theme.colors.primaryText};
 `;
 
 const InputWrapper = styled.div`

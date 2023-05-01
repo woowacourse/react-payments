@@ -13,6 +13,6 @@ const Wrapper = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: ${({ theme }) => theme.colors.modalBlack};
   z-index: 1;
 `;

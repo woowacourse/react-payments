@@ -40,5 +40,5 @@ const Title = styled.span`
   line-height: 14px;
   text-align: center;
   letter-spacing: -0.085em;
-  color: #525252;
+  color: ${({ theme }) => theme.colors.secondText};
 `;

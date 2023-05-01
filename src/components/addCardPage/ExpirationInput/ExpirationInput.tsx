@@ -62,7 +62,7 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
-  background-color: #ecebf1;
+  background-color: ${({ theme }) => theme.colors.inputGray};
   height: 45px;
   border-radius: 7px;
 `;
@@ -77,5 +77,5 @@ const Slash = styled.span`
   margin: 0 5px;
   font-size: 18px;
   font-weight: 500;
-  color: #737373;
+  color: ${({ theme }) => theme.colors.placeholder};
 `;

@@ -1,4 +1,4 @@
-/*! minireset.css v0.0.6 | MIT License | github.com/jgthms/minireset.css */
+export const reset = `/*! minireset.css v0.0.6 | MIT License | github.com/jgthms/minireset.css */
 blockquote,
 body,
 dd,
@@ -66,3 +66,4 @@ td,
 th {
   padding: 0;
 }
+`;

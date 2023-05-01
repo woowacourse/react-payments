@@ -71,7 +71,7 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 122px;
-  background-color: #ecebf1;
+  background-color: ${({ theme }) => theme.colors.inputGray};
   height: 45px;
   border-radius: 7px;
   padding: 0 16px;

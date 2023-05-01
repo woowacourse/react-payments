@@ -288,7 +288,7 @@ const TitleWrapper = styled.div`
 const Title = styled.h3`
   font-size: 16px;
   font-weight: 400;
-  color: #383838;
+  color: ${({ theme }) => theme.colors.primaryText};
   margin-left: 12px;
 `;
 

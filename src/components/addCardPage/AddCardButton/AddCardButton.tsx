@@ -28,7 +28,7 @@ export default function AddCardButton({ onAddCardClick }: AddCardButtonProps) {
 const Wrapper = styled.button`
   width: 213px;
   height: 133px;
-  background: #e5e5e5;
+  background: ${({ theme }) => theme.colors.gray};
   margin-bottom: 85px;
   border-radius: 5px;
   border: none;
@@ -38,5 +38,5 @@ const Wrapper = styled.button`
 const PlusWrapper = styled.svg`
   max-height: 36px;
   max-width: 36px;
-  color: #575757;
+  color: ${({ theme }) => theme.colors.darkGray};
 `;

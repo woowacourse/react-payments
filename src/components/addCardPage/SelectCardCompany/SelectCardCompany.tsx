@@ -44,7 +44,7 @@ const Wrapper = styled.div`
   height: 227px;
   padding: 34px 50px;
   border-radius: 5px 5px 0px 0px;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.colors.white};
 `;
 
 const GridWrapper = styled.div`

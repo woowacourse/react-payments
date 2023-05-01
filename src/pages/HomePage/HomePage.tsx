@@ -60,20 +60,20 @@ export default function HomePage({
 const Page = styled.div`
   min-height: 100vh;
   padding: 20px 36px;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.colors.white};
 `;
 
 const Title = styled.h3`
   font-size: 16px;
   font-weight: 400;
-  color: #383838;
+  color: ${({ theme }) => theme.colors.primaryText};
 `;
 
 const AddInformation = styled.h4`
   font-size: 14px;
   font-weight: 700;
   text-align: center;
-  color: #575757;
+  color: ${({ theme }) => theme.colors.darkGray};
   opacity: 0.9;
   margin-top: 33px;
   margin-bottom: 9px;

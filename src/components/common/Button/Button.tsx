@@ -20,5 +20,6 @@ const Wrapper = styled.button<{ isDisable?: boolean }>`
   background-color: transparent;
   font-size: 14px;
   font-weight: 700;
-  color: ${({ isDisable }) => (isDisable ? '#bebbbb' : '#000000')};
+  color: ${({ isDisable, theme }) =>
+    isDisable ? theme.colors.gray : theme.colors.primaryText};
 `;

@@ -79,7 +79,7 @@ const Container = styled.div`
 
 const Wrapper = styled.div`
   display: flex;
-  background-color: #ecebf1;
+  background-color: ${({ theme }) => theme.colors.inputGray};
   justify-content: space-between;
   height: 45px;
   border-radius: 7px;

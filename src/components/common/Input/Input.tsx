@@ -72,8 +72,10 @@ const StyledInput = styled.input<{
   bgColor?: string;
 }>`
   border: none;
-  background-color: ${({ bgColor }) => (bgColor ? bgColor : '#ecebf1')};
-  border: ${({ isWrong }) => (isWrong ? '1px solid #ff0033' : '')};
+  background-color: ${({ bgColor, theme }) =>
+    bgColor ? bgColor : theme.colors.inputGray};
+  border: ${({ isWrong, theme }) =>
+    isWrong ? `1px solid ${theme.colors.primaryRed}` : ''};
   font-size: 18px;
   font-weight: 500;
   width: 100%;

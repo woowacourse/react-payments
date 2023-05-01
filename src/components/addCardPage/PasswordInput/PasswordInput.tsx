@@ -75,7 +75,7 @@ const GrayWrapper = styled.div`
   width: 45px;
   height: 45px;
   border-radius: 7px;
-  background-color: #ecebf1;
+  background-color: ${({ theme }) => theme.colors.inputGray};
 `;
 
 const WhiteWrapper = styled.div`
@@ -84,7 +84,8 @@ const WhiteWrapper = styled.div`
   justify-content: center;
   width: 45px;
   height: 45px;
-  border: solid 1px #ecebf1;
+  border: solid 1px ${({ theme }) => theme.colors.inputGray};
+  background-color: ${({ theme }) => theme.colors.white};
   border-radius: 7px;
   cursor: not-allowed;
 `;

@@ -106,7 +106,7 @@ const Wrapper = styled.div<WrapperProps>`
   box-sizing: border-box;
   color: ${({ fontColor }) => fontColor};
   background: ${({ bgColor }) => bgColor};
-  box-shadow: 3px 3px 5px #00000040;
+  box-shadow: 3px 3px 5px ${({ theme }) => theme.colors.shadow};
   cursor: ${({ isHome }) => (isHome ? 'pointer' : '')};
 `;
 
@@ -117,8 +117,9 @@ const Title = styled.div`
   font-size: 12px;
   letter-spacing: -0.085em;
 `;
+
 const Magnet = styled.div`
-  background: #cbba64;
+  background: ${({ theme }) => theme.colors.magnet};
   position: absolute;
   top: 40px;
   width: 40px;
@@ -126,6 +127,7 @@ const Magnet = styled.div`
   margin-bottom: 15px;
   border-radius: 4px;
 `;
+
 const CardNumber = styled.div`
   font-weight: bold;
   font-size: 14px;
@@ -135,17 +137,10 @@ const CardNumber = styled.div`
   margin-bottom: 4px;
   align-items: center;
 `;
+
 const CardNumberItem = styled.span`
   width: 34px;
   letter-spacing: 2px;
-
-  &:nth-child(3) {
-    letter-spacing: -3px;
-  }
-
-  &:nth-child(4) {
-    letter-spacing: -3px;
-  }
 `;
 
 const OwnerAndExpirationWrapper = styled.div`
@@ -178,7 +173,7 @@ const QuestionWrapper = styled.div`
   width: 213px;
   height: 133px;
   border-radius: 5px;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: ${({ theme }) => theme.colors.modalBlack};
   gap: 20px;
 `;
 
@@ -188,28 +183,27 @@ const Button = styled.div`
   align-items: center;
   border-radius: 12px;
   padding: 8px 20px;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.colors.white};
   cursor: pointer;
-
-  &:hover {
-    background-color: #9e9c9c;
-  }
+  transition: 0.2s color ease-in-out;
 `;
 
 const DeleteWrapper = styled(Button)`
-  color: #fff;
-  background-color: #ff0033;
+  color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.primaryRed};
 
   &:hover {
-    background-color: #ea5270;
+    background-color: ${({ theme }) => theme.colors.secondRed};
   }
 `;
 
 const CancelWrapper = styled(Button)`
-  background-color: #fff;
+  color: ${({ theme }) => theme.colors.primaryText};
+  background-color: ${({ theme }) => theme.colors.white};
 
   &:hover {
-    background-color: #9e9c9c;
+    color: ${({ theme }) => theme.colors.white};
+    background-color: ${({ theme }) => theme.colors.darkGray};
   }
 `;
 
@@ -219,6 +213,6 @@ const CardTitle = styled.span`
   font-size: 14px;
   line-height: 16px;
   text-align: center;
-  color: #575757;
+  color: ${({ theme }) => theme.colors.darkGray};
   opacity: 0.9;
 `;

@@ -34,7 +34,7 @@ const Label = styled.label`
   font-size: 12px;
   line-height: 14px;
   letter-spacing: -0.085em;
-  color: #525252;
+  color: ${({ theme }) => theme.colors.secondText};
 `;
 
 const InputLengthText = styled.span`

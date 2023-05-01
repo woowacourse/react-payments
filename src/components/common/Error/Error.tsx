@@ -30,7 +30,7 @@ export default function Error({ text }: ErrorProps) {
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
-  color: #ff0033;
+  color: ${({ theme }) => theme.colors.primaryRed};
   margin-top: 12px;
 `;
 

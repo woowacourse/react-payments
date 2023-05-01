@@ -21,8 +21,8 @@ export default function ToolTip({
 }
 
 const Wrapper = styled.div`
-  background-color: white;
-  border: 1px solid #525252;
+  background-color: ${({ theme }) => theme.colors.white};
+  border: 1px solid ${({ theme }) => theme.colors.secondText};
   padding: 10px 20px;
   border-radius: 7px;
   width: 200px;

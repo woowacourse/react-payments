@@ -25,9 +25,9 @@ const Wrapper = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid #bababa;
+  border: 1px solid ${({ theme }) => theme.colors.weakDarkGray};
   border-radius: 50%;
-  color: #969696;
+  color: ${({ theme }) => theme.colors.weakDarkGray};
   background-color: transparent;
   width: 27px;
   height: 27px;

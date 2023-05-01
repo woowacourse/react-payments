@@ -43,7 +43,7 @@ const Wrapper = styled.div`
   padding: 0 8px;
   box-sizing: border-box;
   align-items: center;
-  background-color: #ecebf1;
+  background-color: ${({ theme }) => theme.colors.inputGray};
   height: 45px;
   border-radius: 7px;
 `;
