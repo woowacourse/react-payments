@@ -20,5 +20,3 @@ export const useCreditCard = (): UseCreditCard => {
 
   return { creditCardList, saveCreditCard };
 };
-
-export default {};

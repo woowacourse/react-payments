@@ -36,5 +36,3 @@ export const defaultCreditCardForm: T.CreditCard = {
   password: ['', ''],
   nickname: '',
 };
-
-export default {};

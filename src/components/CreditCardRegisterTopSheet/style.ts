@@ -6,4 +6,3 @@ export const CreditCardRegisterTopSheet = styled.div`
     font-size: 18px;
     align-items: center;
 `;
-export default {};

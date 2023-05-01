@@ -14,4 +14,3 @@ export const validatePassword = (
   first: string,
   second: string
 ) => first.length !== 1 || second.length !== 1;
-export default {};

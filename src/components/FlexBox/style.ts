@@ -7,4 +7,3 @@ export const FlexBox = styled.div<T.FlexBox>`
       align-items: ${(props) => props.alignItems};
       flex-direction: ${(props) => props.direction};
   `;
-export default {};

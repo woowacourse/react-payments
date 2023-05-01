@@ -20,5 +20,3 @@ export const Input = styled.input<InputProps>`
     }
     margin-right: 10px;
 `;
-
-export default {};

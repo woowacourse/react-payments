@@ -52,5 +52,3 @@ export const markExpiry = (expiry: string) => {
   }
   return newCardExpiryArray.join('');
 };
-
-export default {};
