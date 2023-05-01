@@ -42,7 +42,7 @@ const ExpiredDate = ({ expiredDates, isSetExpiredDates }: ExpiredDateProps) => {
           required={true}
         />
         {cardRefs[4].current?.value.length === 2 && (
-          <Styled.Pargraph>/</Styled.Pargraph>
+          <Styled.Paragraph>/</Styled.Paragraph>
         )}
         <CardInput
           type="text"

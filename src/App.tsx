@@ -4,12 +4,12 @@ import GlobalStyle from './styles/GlobalStyle';
 import Home from './pages/Home';
 import AddCard from './pages/AddCard';
 import CardType from './types/Card';
-import { getLoacalStorage, setLocalStorage } from './utils/setLocalStorge';
+import { getLocalStorage, setLocalStorage } from './utils/setLocalStorage';
 import AddCardAlias from './pages/AddCardAlias';
 import RefProvider from './contexts/RefProvider';
 
 const initCards = () => {
-  const localStorageCards = getLoacalStorage('cards');
+  const localStorageCards = getLocalStorage('cards');
   if (localStorageCards) return localStorageCards;
   return [];
 };

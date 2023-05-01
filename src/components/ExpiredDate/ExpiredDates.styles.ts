@@ -14,6 +14,6 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const Pargraph = styled.p`
+export const Paragraph = styled.p`
   width: 16px;
 `;

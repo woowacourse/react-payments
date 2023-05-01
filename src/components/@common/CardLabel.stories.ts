@@ -10,7 +10,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const CardLableStory: Story = {
+export const CardLabelStory: Story = {
   args: {
     labelText: '카드 추가',
     color: '',

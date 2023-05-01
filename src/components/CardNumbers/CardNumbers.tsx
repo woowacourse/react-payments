@@ -43,7 +43,7 @@ const CardNumbers = ({ cardNumbers, isSetCardNumbers }: CardNumbersProps) => {
           autofocus={true}
         />
         {cardRefs[0].current?.value.length === 4 && (
-          <Styled.Pargraph>-</Styled.Pargraph>
+          <Styled.Paragraph>-</Styled.Paragraph>
         )}
         <CardInput
           type="text"
@@ -56,7 +56,7 @@ const CardNumbers = ({ cardNumbers, isSetCardNumbers }: CardNumbersProps) => {
           required={true}
         />
         {cardRefs[1].current?.value.length === 4 && (
-          <Styled.Pargraph>-</Styled.Pargraph>
+          <Styled.Paragraph>-</Styled.Paragraph>
         )}
         <CardInput
           type="password"
@@ -69,7 +69,7 @@ const CardNumbers = ({ cardNumbers, isSetCardNumbers }: CardNumbersProps) => {
           required={true}
         />
         {cardRefs[2].current?.value.length === 4 && (
-          <Styled.Pargraph>-</Styled.Pargraph>
+          <Styled.Paragraph>-</Styled.Paragraph>
         )}
         <CardInput
           type="password"

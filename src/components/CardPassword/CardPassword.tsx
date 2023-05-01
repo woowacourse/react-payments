@@ -53,8 +53,8 @@ const CardPassword = ({ passwords, isSetPasswords }: CardPasswordProps) => {
             required={true}
           />
         </Styled.PasswordInputWrapper>
-        <Styled.Pargraph>•</Styled.Pargraph>
-        <Styled.Pargraph>•</Styled.Pargraph>
+        <Styled.Paragraph>•</Styled.Paragraph>
+        <Styled.Paragraph>•</Styled.Paragraph>
       </Styled.Wrapper>
     </>
   );

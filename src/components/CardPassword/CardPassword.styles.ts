@@ -20,7 +20,7 @@ export const PasswordInputWrapper = styled.div`
   }
 `;
 
-export const Pargraph = styled.p`
+export const Paragraph = styled.p`
   width: 45px;
   text-align: center;
   margin-right: 8px;
