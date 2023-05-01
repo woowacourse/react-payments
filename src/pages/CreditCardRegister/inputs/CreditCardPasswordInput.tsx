@@ -1,6 +1,7 @@
 import * as T from 'types';
 import useCreditCardForm from 'hooks/useCreditCardForm';
 import FlexBox from 'components/FlexBox';
+import { ChangeEvent } from 'react';
 import Input from '../../../components/Input';
 import * as S from '../style';
 import { validatePassword } from '../../../domains/validations';
@@ -8,7 +9,7 @@ import { validatePassword } from '../../../domains/validations';
 function CreditCardPasswordInput({ name }: T.CreditCardInputProps) {
   const { creditCardForm, setCreditCardForm } = useCreditCardForm();
 
-  const handleChangeCreditCardPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeCreditCardPassword = (event: ChangeEvent<HTMLInputElement>) => {
     const newPassword = event.target.value.replace(/\D/g, '');
     if (newPassword.length <= 1) {
       const { password }: T.CreditCard = { ...creditCardForm };

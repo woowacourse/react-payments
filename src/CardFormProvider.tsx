@@ -1,21 +1,23 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable react/jsx-no-constructed-context-values */
 import { defaultCreditCardForm } from 'data/creditCard';
-import React, { useState } from 'react';
+import {
+  Dispatch, ReactNode, SetStateAction, createContext, useState
+} from 'react';
 import * as Type from 'types';
 
 export interface CardFormState {
   creditCardForm: Type.CreditCard;
-  setCreditCardForm: React.Dispatch<React.SetStateAction<Type.CreditCard>>;
+  setCreditCardForm: Dispatch<SetStateAction<Type.CreditCard>>;
 }
 
-export const CardContext = React.createContext<CardFormState>({
+export const CardContext = createContext<CardFormState>({
   creditCardForm: defaultCreditCardForm,
   setCreditCardForm: () => { },
 });
 
 interface CardProviderProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 function CardFormProvider({ children }: CardProviderProps) {

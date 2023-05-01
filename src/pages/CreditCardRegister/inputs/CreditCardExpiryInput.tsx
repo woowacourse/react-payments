@@ -1,6 +1,7 @@
 import * as T from 'types';
 import useCreditCardForm from 'hooks/useCreditCardForm';
 import { markExpiry } from 'domains/creditCard';
+import { ChangeEvent } from 'react';
 import Input from '../../../components/Input';
 import * as S from '../style';
 import { validateExpiry } from '../../../domains/validations';
@@ -8,7 +9,7 @@ import { validateExpiry } from '../../../domains/validations';
 function CreditCardExpiryInput({ name }: T.CreditCardInputProps) {
   const { creditCardForm, setCreditCardForm } = useCreditCardForm();
 
-  const handleChangeCreditCardExpiry = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeCreditCardExpiry = (event: ChangeEvent<HTMLInputElement>) => {
     const newCardExpiry = event.target.value;
     const cleanedExpiry = newCardExpiry
       .replaceAll('/', '')

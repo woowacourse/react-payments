@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { HTMLAttributes } from 'react';
+import { ChangeEvent, HTMLAttributes } from 'react';
 import * as S from './style';
 
 export interface InputProps<T> extends HTMLAttributes<HTMLInputElement> {
@@ -9,7 +9,7 @@ export interface InputProps<T> extends HTMLAttributes<HTMLInputElement> {
   width: string,
   textAlign: 'center' | 'start',
   placeholder?: string,
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void,
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void,
   onClick?: () => void,
 }
 
@@ -34,5 +34,5 @@ function Input<T extends InputValueType>({
 export default Input;
 
 Input.defaultProps = {
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => { }
+  onChange: (e: ChangeEvent<HTMLInputElement>) => { }
 };

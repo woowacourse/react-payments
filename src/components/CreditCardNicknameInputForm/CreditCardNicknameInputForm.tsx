@@ -1,6 +1,7 @@
 import CreditCard from 'components/CreditCard/CreditCard';
 import styled from 'styled-components';
 import * as T from 'types';
+import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import * as S from './style';
 
 const NicknameInput = styled.input`
@@ -27,13 +28,13 @@ const NicknameInput = styled.input`
 interface CreditCardNicknameInputFormProps {
   creditCardForm: T.CreditCard;
   nickname: string;
-  setNickname: React.Dispatch<React.SetStateAction<string>>;
+  setNickname: Dispatch<SetStateAction<string>>;
 }
 
 function CreditCardNicknameInputForm(
   { creditCardForm, nickname, setNickname }: CreditCardNicknameInputFormProps
 ) {
-  const handleNicknameInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNicknameInput = (e: ChangeEvent<HTMLInputElement>) => {
     setNickname(e.target.value);
   };
 

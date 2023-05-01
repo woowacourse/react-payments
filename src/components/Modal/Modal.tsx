@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactNode } from 'react';
 import styled from 'styled-components';
 
 const ModalContainer = styled.div`
@@ -25,7 +25,7 @@ const ModalContent = styled.div`
 interface ModalProps {
   modalOpen: boolean;
   closeModal?: () => void;
-  children: React.ReactNode;
+  children: ReactNode;
 }
 function Modal({ modalOpen, closeModal, children }: ModalProps) {
   return (

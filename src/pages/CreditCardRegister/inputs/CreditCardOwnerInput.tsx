@@ -1,13 +1,14 @@
 import * as T from 'types';
 import useCreditCardForm from 'hooks/useCreditCardForm';
 import FlexBox from 'components/FlexBox';
+import { ChangeEvent } from 'react';
 import Input from '../../../components/Input';
 import * as S from '../style';
 
 function CreditCardOwnerInput({ name }: T.CreditCardInputProps) {
   const { creditCardForm, setCreditCardForm } = useCreditCardForm();
 
-  const handleChangeCreditCardOwner = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeCreditCardOwner = (event: ChangeEvent<HTMLInputElement>) => {
     const newName = (event.target.value).toUpperCase();
     if (newName.length <= 30) {
       setCreditCardForm({ ...creditCardForm, [name]: newName });

@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 import { convertSecuredCreditCard } from 'domains/creditCard';
 import * as T from 'types';
 import styled from 'styled-components';
@@ -28,7 +28,7 @@ function CreditCardNumberInput({ name }: T.CreditCardInputProps) {
   const { creditCardForm, setCreditCardForm } = useCreditCardForm();
   const [markedCreditCardNumber, setMarkedCreditCardNumber] = useState('');
 
-  const handleChangeCreditCardNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeCreditCardNumber = (event: ChangeEvent<HTMLInputElement>) => {
     const newCreditCardNumber = event.target.value.replace(/\D/g, '');
 
     if (newCreditCardNumber.length > 16) return;
