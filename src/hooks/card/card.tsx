@@ -5,7 +5,7 @@ import { useCardRegisterContext } from '../../context/CardRegisterContext';
 import { CardNumber, CardRegisterInfo, ExpirationDate, Password } from '../../types/card.type';
 import { isInputElement } from '../../utils/dom';
 import { getCardList, setCardList } from '../../utils/localStorage';
-import { isEnglish, isLongerThan, isNumber, isPatternMatch } from '../../utils/validation';
+import { isEnglish, isLongerThan, isDigit } from '../../utils/validation';
 import useAutoFocus from '../@common/useAutoFocus';
 import useErrors, { INVALID_FORMAT } from '../@common/useError';
 
@@ -58,7 +58,7 @@ export function useCardNumber() {
   const onChangeByKey =
     (key: keyof CardNumber) =>
     ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
-      if (value && !isNumber(value)) return;
+      if (value && !isDigit(value)) return;
 
       handleCardInfo('cardNumber', {
         ...cardNumber,
@@ -85,7 +85,7 @@ export function useCardExpirationDate() {
   const onChangeByKey =
     (key: keyof ExpirationDate) =>
     ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
-      if (value && !isNumber(value)) return;
+      if (value && !isDigit(value)) return;
 
       handleCardInfo('expirationDate', {
         ...expirationDate,
@@ -132,7 +132,7 @@ export function useCardCVC() {
   };
 
   const onChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
-    if (value && !isNumber(value)) return;
+    if (value && !isDigit(value)) return;
 
     handleCardInfo('cvc', value);
   };
@@ -155,7 +155,7 @@ export function useCardPassword() {
   const onChangeByKey =
     (key: keyof Password) =>
     ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
-      if (value && !isNumber(value)) return;
+      if (value && !isDigit(value)) return;
 
       handleCardInfo('password', {
         ...password,

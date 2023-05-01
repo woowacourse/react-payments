@@ -8,7 +8,7 @@ export const REGEX = {
   YEAR: '^(2[3-9]|[3-3][0-9]|40)$',
 } as const;
 
-export const isNumber = (value: string) => new RegExp(REGEX.NUMBER).test(value);
+export const isDigit = (value: string) => new RegExp(REGEX.NUMBER).test(value);
 
 export const isEnglish = (value: string) => new RegExp(REGEX.ENGLISH).test(value);
 
