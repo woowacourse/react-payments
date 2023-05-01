@@ -19,15 +19,25 @@ export function CreditCard({ card }: CreditCardProps) {
       <Styled.CardNumbers>
         <span>{card.numbers[0]}</span>
         <span>{card.numbers[1]}</span>
-        <span>••••</span>
-        <span>••••</span>
+        <span>{'•'.repeat(card.numbers[2].length)}</span>
+        <span>{'•'.repeat(card.numbers[3].length)}</span>
       </Styled.CardNumbers>
       <Styled.Container>
-        <Styled.Name>{card.ownerName}</Styled.Name>
+        <Styled.Name>{card.ownerName.length ? card.ownerName : 'NAME'}</Styled.Name>
         <Styled.ExpirationDate>
-          <Styled.Month>{card.expirationDate.month}</Styled.Month>
-          <Styled.DateSeparator>/</Styled.DateSeparator>
-          <Styled.Year>{card.expirationDate.year}</Styled.Year>
+          <Styled.Month>
+            {card.expirationDate.month.length ? card.expirationDate.month : 'MM'}
+          </Styled.Month>
+          <Styled.DateSeparator>
+            {card.expirationDate.month.length === 2 ||
+            card.expirationDate.year.length > 0 ||
+            (card.expirationDate.month.length === 0 && card.expirationDate.year.length === 0)
+              ? '/'
+              : null}
+          </Styled.DateSeparator>
+          <Styled.Year>
+            {card.expirationDate.year.length ? card.expirationDate.year : 'YY'}
+          </Styled.Year>
         </Styled.ExpirationDate>
       </Styled.Container>
     </Styled.Wrapper>
@@ -88,22 +98,29 @@ const Styled = {
   `,
 
   Name: styled.span`
+    width: 140px;
+    height: 12px;
     font-size: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   `,
 
   ExpirationDate: styled.div`
     font-size: 12px;
-    width: 36px;
+    width: 40px;
     height: 10px;
     display: flex;
   `,
 
   Month: styled.span`
-    width: 14px;
+    width: 20px;
+    text-align: center;
   `,
 
   Year: styled.span`
-    width: 14px;
+    width: 20px;
+    text-align: center;
   `,
 
   DateSeparator: styled.span`
