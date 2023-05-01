@@ -32,7 +32,7 @@ function Modal({ modalOpen, closeModal, children }: ModalProps) {
     <>
       {modalOpen && (
         <ModalContainer>
-          <ModalBackDrop onClick={() => closeModal && closeModal()} />
+          <ModalBackDrop onClick={closeModal} />
           <ModalContent>{children}</ModalContent>
         </ModalContainer>
       )}
