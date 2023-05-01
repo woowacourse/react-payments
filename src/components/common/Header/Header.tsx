@@ -1,21 +1,33 @@
-import styles from './style.module.css';
-import { ComponentPropsWithoutRef } from 'react';
-import { Link } from 'react-router-dom';
-import leftIcon from '../../../assets/left-icon.svg';
+import { useNavigate } from "react-router-dom";
+import type { ComponentPropsWithoutRef } from "react";
+import Button from "../Button/Button";
+import leftIcon from "../../../assets/left-icon.svg";
+import styles from "./style.module.css";
 
-interface HeaderProps extends ComponentPropsWithoutRef<'header'> {
+interface HeaderProps extends ComponentPropsWithoutRef<"header"> {
   content: string;
-  path?: string;
   isOverlayPage?: boolean;
 }
 
-function Header({ content, path = '/', isOverlayPage = false, ...attributes }: HeaderProps) {
+const Header = ({
+  content,
+  isOverlayPage = false,
+  ...attributes
+}: HeaderProps) => {
+  const navigate = useNavigate();
+
   return (
     <header className={styles.header} {...attributes}>
-      <Link to={path}>{isOverlayPage && <img src={leftIcon} alt="left back icon" />}</Link>
+      {isOverlayPage && (
+        <Button
+          variant="textButton"
+          icon={leftIcon}
+          onClick={() => navigate(-1)}
+        />
+      )}
       <h3 className="center-hoz-item">{content}</h3>
     </header>
   );
-}
+};
 
 export default Header;
