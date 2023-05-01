@@ -1,11 +1,11 @@
 import { useContext, useEffect } from "react";
 import styled from "styled-components";
-import { INPUT_TYPE, LABEL, PLACEHOLDER } from "../constants/inputInfo";
-import { NameContext, RefContext } from "../contexts/cardInfo";
-import { useCountText } from "../hooks/useCountText";
-import { Input } from "./common/input/Input";
-import { InputBox } from "./common/input/InputBox";
-import { InputLabel } from "./common/input/inputLabel";
+import { INPUT_TYPE, LABEL, PLACEHOLDER } from "../../constants/inputInfo";
+import { NameContext, RefContext } from "../../contexts/cardInfo";
+import { useCountText } from "../../hooks/useCountText";
+import { Input } from "../@common/input/Input";
+import { InputBox } from "../@common/input/InputBox";
+import { InputLabel } from "../@common/input/inputLabel";
 
 export function UserName() {
   const { userName, handleChange } = useContext(NameContext);

@@ -13,10 +13,10 @@ import {
   NameContext,
   NumberContext,
   RefContext,
-} from "../contexts/cardInfo";
-import { TEXT_LENGTH } from "../constants/inputInfo";
-import { SubmitButton } from "./common/button/submitButton";
-import { bank } from "../core/bank";
+} from "../../contexts/cardInfo";
+import { TEXT_LENGTH } from "../../constants/inputInfo";
+import { SubmitButton } from "../@common/button/submitButton";
+import { bank } from "../../core/bank";
 
 export function AddCardForm() {
   const navigate = useNavigate();

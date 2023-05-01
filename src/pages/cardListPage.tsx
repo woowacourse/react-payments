@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { Header } from "../components/common/Header";
+import { Header } from "../components/@common/Header";
 import { useState } from "react";
 import { getData } from "../utils/localStorage";
-import { Card, CardProps } from "../components/common/card/card";
+import { Card, CardProps } from "../components/@common/card/card";
 import { ReactComponent as BackButtonIc } from "../assets/backButtonIc.svg";
 import { PAGE_HEADER } from "../constants";
 import { PATH } from "../constants/path";
-import { BackButton } from "../components/common/button/backButton";
+import { BackButton } from "../components/@common/button/backButton";
 
 export function CardListPage() {
   const [cards] = useState<CardProps[] | undefined>(getData());

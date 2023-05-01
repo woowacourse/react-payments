@@ -4,15 +4,15 @@ import {
   DateContext,
   NameContext,
   NumberContext,
-} from "../contexts/cardInfo";
-import { bank } from "../core/bank";
+} from "../../contexts/cardInfo";
+import { bank } from "../../core/bank";
 import { AddCardForm } from "./addCardForm";
-import { BankMenu } from "./bankMenu";
-import { Card } from "./common/card/card";
-import { ModalBackDrop } from "./common/modal/modalBackDrop";
-import { ModalBox } from "./common/modal/modalBox";
-import { ModalContent } from "./common/modal/modalContent";
-import { ModalTrigger } from "./common/modal/modalTrigger";
+import { BankMenu } from "../bankModal/bankMenu";
+import { Card } from "../@common/card/card";
+import { ModalBackDrop } from "../@common/modal/modalBackDrop";
+import { ModalBox } from "../@common/modal/modalBox";
+import { ModalContent } from "../@common/modal/modalContent";
+import { ModalTrigger } from "../@common/modal/modalTrigger";
 
 export function AddCardSection() {
   const { cardNumber } = useContext(NumberContext);

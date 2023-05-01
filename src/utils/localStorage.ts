@@ -1,4 +1,4 @@
-import { CardProps } from "../components/common/card/card";
+import { CardProps } from "../components/@common/card/card";
 
 export function setData(data: CardProps) {
   const prevData = getData();

@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import { ModalContext } from "../contexts/modal";
-import { bank } from "../core/bank";
+import { ModalContext } from "../../contexts/modal";
+import { bank } from "../../core/bank";
 import { BankItem } from "./bankItem";
 
 interface BankMenuprops {

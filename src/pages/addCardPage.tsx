@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { BackButton } from "../components/common/button/backButton";
-import { Header } from "../components/common/Header";
-import { AddCardSection } from "../components/addCardSection";
+import { BackButton } from "../components/@common/button/backButton";
+import { Header } from "../components/@common/Header";
+import { AddCardSection } from "../components/addCard/addCardSection";
 import { CardInfoProvider } from "../contexts/cardInfo";
 import { PAGE_HEADER } from "../constants";
 

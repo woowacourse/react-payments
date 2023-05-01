@@ -2,9 +2,9 @@ import React, { useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { InputBox } from "../components";
-import { Card } from "../components/common/card/card";
-import { Input } from "../components/common/input/Input";
-import { InputGroup } from "../components/common/input/inputGroup";
+import { Card } from "../components/@common/card/card";
+import { Input } from "../components/@common/input/Input";
+import { InputGroup } from "../components/@common/input/inputGroup";
 import { PATH } from "../constants/path";
 import { setData } from "../utils/localStorage";
 
