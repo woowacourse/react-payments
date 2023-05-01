@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Header from "./Header";
 import { useLocation } from "react-router-dom";
+import { PATHS } from "src/utils/constant";
 
 interface Props {
   children: React.ReactNode;
@@ -17,10 +18,10 @@ function Layout(props: Props) {
   useEffect(() => {
     const currentPath = location.pathname;
     switch (currentPath) {
-      case "/card-list":
+      case PATHS.cardList:
         setHeadProps({ text: "보유카드", backButton: false });
         break;
-      case "/card-register":
+      case PATHS.cardRegister:
         setHeadProps({ text: "카드 추가", backButton: true });
         break;
       default:
