@@ -24,9 +24,7 @@ const Card = ({
   cardFlipped,
   openCardSelectModal,
 }: CardProps) => {
-  const flipHandler = () => {
-    return cardFlipped ? 'card flipped' : 'card';
-  };
+  const cardFlipData = cardFlipped ? 'card flipped' : 'card';
 
   return (
     <div
@@ -35,7 +33,7 @@ const Card = ({
         if (openCardSelectModal) openCardSelectModal(true);
       }}
     >
-      <div className={flipHandler()}>
+      <div className={cardFlipData}>
         <div
           className="front"
           style={{

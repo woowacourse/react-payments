@@ -10,16 +10,14 @@ type bankIconProps = {
 
 const BankIcon = ({ bankName, determineCardType, selectCardType }: bankIconProps) => {
   return (
-    <div className="card-icon">
-      <img
-        src={BANK_ICONS[bankName]}
-        alt={bankName}
-        className="bank-icon"
-        onClick={() => {
-          determineCardType(bankName);
-          selectCardType(false);
-        }}
-      />
+    <div
+      className="card-icon"
+      onClick={() => {
+        determineCardType(bankName);
+        selectCardType(false);
+      }}
+    >
+      <img src={BANK_ICONS[bankName]} alt={bankName} className="bank-icon" />
       <div>{bankName}</div>
     </div>
   );

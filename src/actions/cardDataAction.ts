@@ -5,6 +5,7 @@ export const CARDLIST_FAILURE: actionName = 'CARDLIST_FAILURE';
 
 export const getCardListAction = () => {
   const cardList = JSON.parse(localStorage.getItem('cardList') ?? '[]');
+
   if (cardList.length) {
     return {
       type: CARDLIST_SUCCESS,
