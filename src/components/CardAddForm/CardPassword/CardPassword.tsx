@@ -1,4 +1,4 @@
-import { memo, useRef, useState } from 'react';
+import { memo, useRef } from 'react';
 import type { ChangeEvent, FocusEvent } from 'react';
 import type { CardFormData, CardFormValidation } from '../../../types';
 import Input from '../../common/Input/Input';
@@ -16,27 +16,22 @@ interface CardPasswordProps {
 }
 
 const CardPassword = ({ isError, updateInputValue, updateInputError }: CardPasswordProps) => {
-  const [password, setPassword] = useState(['', '']);
-  const refs = useRef<HTMLInputElement[]>([]);
+  const passwordRef = useRef(['', '']);
 
   const onChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     target.value = formatNumber(target.value);
 
-    const newPassword = [...password];
+    const newPassword = [...passwordRef.current];
     newPassword[Number(target.dataset.index)] = target.value;
 
-    setPassword(newPassword);
+    passwordRef.current = newPassword;
     updateInputValue('password', newPassword);
-
-    if (target.value.length === target.maxLength) {
-      refs.current[Number(target.dataset.index) + 1]?.focus();
-    }
   };
 
   const onBlur = (event: FocusEvent<HTMLElement>) => {
     if (event.currentTarget.contains(event.relatedTarget)) return;
 
-    updateInputError('password', password);
+    updateInputError('password', passwordRef.current);
   };
 
   return (
@@ -51,9 +46,6 @@ const CardPassword = ({ isError, updateInputValue, updateInputError }: CardPassw
       </Label>
       <div className={styles.container} onBlur={onBlur}>
         <Input
-          ref={(element: HTMLInputElement) => {
-            refs.current[0] = element;
-          }}
           type="password"
           id="password"
           name="password"
@@ -68,9 +60,6 @@ const CardPassword = ({ isError, updateInputValue, updateInputError }: CardPassw
           onChange={onChange}
         />
         <Input
-          ref={(element: HTMLInputElement) => {
-            refs.current[1] = element;
-          }}
           type="password"
           id="password1"
           name="password"
