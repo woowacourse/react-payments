@@ -4,16 +4,22 @@ import InputBox from "../../common/InputBox";
 import InputGroup from "../../common/InputGroup";
 import { DotIcon } from "../../../assets/icons";
 import { useCardItemAction, useCardItemValue, useErrorMessageValue } from "../../provider/CardItemProvider";
+import useInputFocus from "../../../hooks/useInputFocus";
+import { INPUT_MAX_LENGTH } from "../../../constants";
 
 const PasswordInput = () => {
   const { password } = useCardItemValue();
-  const { onChangePassword, registPasswordRef } = useCardItemAction();
+  const { onChangePassword } = useCardItemAction();
   const { passwordErrorMessage } = useErrorMessageValue();
+
+  const { registRef, isNextInputFocusable, focusNextInput } = useInputFocus(INPUT_MAX_LENGTH.PASSWORD);
 
   const handleChangePassword = (inputIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
 
     onChangePassword(inputIndex)(inputValue);
+
+    if (isNextInputFocusable(inputValue, inputIndex)) focusNextInput(inputIndex);
   };
 
   return (
@@ -22,7 +28,7 @@ const PasswordInput = () => {
         <InputBox width="43px" isError={!!passwordErrorMessage}>
           <Input
             type="password"
-            ref={(element) => registPasswordRef(0, element)}
+            ref={(element) => registRef(0, element)}
             value={password[0]}
             onChange={handleChangePassword(0)}
           ></Input>
@@ -30,7 +36,7 @@ const PasswordInput = () => {
         <InputBox width="43px" isError={!!passwordErrorMessage}>
           <Input
             type="password"
-            ref={(element) => registPasswordRef(1, element)}
+            ref={(element) => registRef(1, element)}
             value={password[1]}
             onChange={handleChangePassword(1)}
           ></Input>

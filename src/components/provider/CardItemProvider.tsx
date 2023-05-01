@@ -45,10 +45,6 @@ interface CardItemAction {
   onChangeSecurityCode: (inputValue: string) => void;
   onChangePassword: (inputIndex: number) => (inputValue: string) => void;
   setCompany: (company: Company) => void;
-
-  registCardNumberRef: (inputIndex: number, element: HTMLInputElement | null) => void;
-  registExpirationDateRef: (inputIndex: number, element: HTMLInputElement | null) => void;
-  registPasswordRef: (inputIndex: number, element: HTMLInputElement | null) => void;
 }
 
 const CardItemValueContext = createContext<CardItemValue | null>(null);
@@ -56,12 +52,11 @@ const CardItemActionContext = createContext<CardItemAction | null>(null);
 const ErrorMessageValueContext = createContext<ErrorMessageValue | null>(null);
 
 const CardItemProvider = ({ children }: CardItemProviderProps) => {
-  const { cardNumber, cardNumberErrorMessage, onChangeCardNumber, registCardNumberRef } = useCardNumber();
-  const { expirationDate, expirationDateErrorMessage, onChangeExpirationDate, registExpirationDateRef } =
-    useExpirationDate();
+  const { cardNumber, cardNumberErrorMessage, onChangeCardNumber } = useCardNumber();
+  const { expirationDate, expirationDateErrorMessage, onChangeExpirationDate } = useExpirationDate();
   const { name, nameErrorMessage, onChangeName } = useName();
   const { securityCode, securityCodeErrorMessage, onChangeSecurityCode } = useSecurityCode();
-  const { password, passwordErrorMessage, onChangePassword, registPasswordRef } = usePassword();
+  const { password, passwordErrorMessage, onChangePassword } = usePassword();
 
   const { company, companyErrorMessage, setCompany } = useCompany();
   const { inputValue: nickName, onChange: onChangeNickName } = useInput();
@@ -104,10 +99,6 @@ const CardItemProvider = ({ children }: CardItemProviderProps) => {
     onChangePassword,
     onChangeNickName,
     setCompany,
-
-    registCardNumberRef,
-    registExpirationDateRef,
-    registPasswordRef,
   };
 
   const errorMessage = {

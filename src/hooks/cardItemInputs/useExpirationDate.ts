@@ -1,7 +1,5 @@
 import { INPUT_MAX_LENGTH } from "../../constants";
 import { isNumber, isOverMaxLength, isValidMonth } from "../../utils";
-
-import useInputFocus from "../useInputFocus";
 import useInput from "../useInput";
 
 const monthValidator = (inputValue: string) => {
@@ -44,27 +42,13 @@ const useExpirationDate = () => {
   const { inputValue: monthValue, errorMessage: monthError, onChange: onChangeMonth } = useInput(monthValidator);
   const { inputValue: yearValue, errorMessage: yearError, onChange: onChangeYear } = useInput(yearValidator);
 
-  const expirationDate = [monthValue, yearValue];
-  const expirationDateErrorMessage = monthError || yearError;
-
-  const { registRef, isNextInputFocusable, focusNextInput } = useInputFocus(INPUT_MAX_LENGTH.EXPIRATION_DATE);
-
-  const handleChangeMonth = (inputValue: string) => {
-    onChangeMonth(inputValue);
-
-    if (isNextInputFocusable(inputValue, 0)) focusNextInput(0);
-  };
-
-  const handleChangeExpirationDate = {
-    onChangeMonth: handleChangeMonth,
-    onChangeYear,
-  };
-
   return {
-    expirationDate,
-    expirationDateErrorMessage,
-    onChangeExpirationDate: handleChangeExpirationDate,
-    registExpirationDateRef: registRef,
+    expirationDate: [monthValue, yearValue],
+    expirationDateErrorMessage: monthError || yearError,
+    onChangeExpirationDate: {
+      onChangeMonth,
+      onChangeYear,
+    },
   };
 };
 
