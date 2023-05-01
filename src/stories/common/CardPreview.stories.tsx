@@ -1,10 +1,10 @@
 import type { Meta } from "@storybook/react";
+import { filledCardWithoutOwner_test, filledCard_test } from "../../cardData";
 
-import CardPreview from "../component/common/CardPreview";
+import CardPreview from "../../component/common/CardPreview";
 
-import "../component/common/cardPreview.css";
-import "../style/palette.css";
-import { filledCardWithoutOwner_test, filledCard_test } from "../cardData";
+import "../../component/common/cardPreview.css";
+import "../../style/palette.css";
 
 const meta: Meta = {
   title: "CardPreview component",

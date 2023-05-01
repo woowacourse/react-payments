@@ -1,8 +1,8 @@
 import type { Meta } from "@storybook/react";
 
-import CardNickInputPage from "../component/CardNickInputPage/CardNickInputPage";
+import CardNickInputPage from "../../component/CardNickInputPage/CardNickInputPage";
 import { BrowserRouter } from "react-router-dom";
-import { filledCard_test } from "../cardData";
+import { filledCard_test } from "../../cardData";
 
 const meta: Meta = {
   title: "CardNickInputPage component",

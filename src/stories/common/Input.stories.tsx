@@ -1,9 +1,9 @@
 import type { Meta } from "@storybook/react";
 
-import Input from "../component/common/Input";
+import Input from "../../component/common/Input";
 
-import "../style/reset.css";
-import "../component/common/input.css";
+import "../../style/reset.css";
+import "../../component/common/input.css";
 
 const meta: Meta = {
   title: "Input common component",

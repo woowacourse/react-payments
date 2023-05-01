@@ -1,6 +1,5 @@
 import type { Meta } from "@storybook/react";
-
-import InputBoxExpirationDate from "../component/CardInputPage/InputBoxExpirationDate/InputBoxExpirationDate";
+import InputBoxExpirationDate from "../../component/CardInputPage/InputBoxExpirationDate/InputBoxExpirationDate";
 
 const meta: Meta = {
   title: "InputBoxExpirationDate component",

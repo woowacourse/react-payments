@@ -1,6 +1,5 @@
 import type { Meta } from "@storybook/react";
-
-import InputBoxPassword from "../component/CardInputPage/InputBoxPassword/InputBoxPassword";
+import InputBoxPassword from "../../component/CardInputPage/InputBoxPassword/InputBoxPassword";
 
 const meta: Meta = {
   title: "InputBoxPassword component",

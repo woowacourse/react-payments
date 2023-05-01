@@ -1,8 +1,8 @@
 import type { Meta } from "@storybook/react";
-import InputBoxNick from "../component/CardNickInputPage/InputBoxNick/InputBoxNick";
+import InputBoxNick from "../../component/CardNickInputPage/InputBoxNick/InputBoxNick";
 
-import "../style/reset.css";
-import "../component/CardNickInputPage/InputBoxNick/inputBoxNick.css";
+import "../../style/reset.css";
+import "../../component/CardNickInputPage/InputBoxNick/inputBoxNick.css";
 
 const meta: Meta = {
   title: "InputBoxNick component",

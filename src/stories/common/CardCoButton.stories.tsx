@@ -1,10 +1,11 @@
 import type { Meta } from "@storybook/react";
 
-import CardCoModal from "../component/common/CardCoModal";
+import CardCoButton from "../../component/common/CardCoButton";
+import { CardCo } from "../../type";
 
 const meta: Meta = {
-  title: "CardCoModal component",
-  component: CardCoModal,
+  title: "CardCoButton component",
+  component: CardCoButton,
   argTypes: {
     changeCardCoStatus: {
       action: "카드사 상태 변경 및 카드사 입력 완료로 상태 변경",
@@ -12,20 +13,16 @@ const meta: Meta = {
   },
 };
 
+export interface Props {
+  /** 카드사 변경 */
+  cardCo: CardCo;
+}
+
 export const renderingTest = (args: any) => (
-  <CardCoModal {...args}></CardCoModal>
+  <CardCoButton {...args}></CardCoButton>
 );
 renderingTest.args = {
-  cardCoList: [
-    "woori",
-    "hana",
-    "kakao",
-    "hyundai",
-    "shinhan",
-    "kb",
-    "bc",
-    "lotte",
-  ],
+  cardCo: "woori",
 };
 
 export default meta;

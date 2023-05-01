@@ -1,6 +1,5 @@
 import type { Meta } from "@storybook/react";
-
-import InputBoxSecurityCode from "../component/CardInputPage/InputBoxSecurityCode/InputBoxSecurityCode";
+import InputBoxSecurityCode from "../../component/CardInputPage/InputBoxSecurityCode/InputBoxSecurityCode";
 
 const meta: Meta = {
   title: "InputBoxSecurityCode component",

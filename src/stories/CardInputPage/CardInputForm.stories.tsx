@@ -1,6 +1,6 @@
 import type { Meta } from "@storybook/react";
 
-import CardInputForm from "../component/CardInputPage/CardInputForm/CardInputForm";
+import CardInputForm from "../../component/CardInputPage/CardInputForm/CardInputForm";
 import { BrowserRouter } from "react-router-dom";
 
 const meta: Meta = {
