@@ -3,15 +3,20 @@ import { convertImage } from 'tools/image';
 import * as T from 'types';
 import useCreditCardForm from 'hooks/useCreditCardForm';
 import {
-  CreditCardCompanyImage, CreditCardCompanyInputLayout,
-  CreditCardCompanyItem, CreditCardCompanyTitle
+  CreditCardCompanyImage,
+  CreditCardCompanyInputLayout,
+  CreditCardCompanyItem,
+  CreditCardCompanyTitle,
 } from '../style';
 
 interface CreditCardCompanyInputProps extends T.CreditCardInputProps {
   closeModal: () => void;
 }
 
-function CreditCardCompanyInput({ closeModal, name }: CreditCardCompanyInputProps) {
+function CreditCardCompanyInput({
+  closeModal,
+  name,
+}: CreditCardCompanyInputProps) {
   const { creditCardForm, setCreditCardForm } = useCreditCardForm();
 
   const handleChangeCreditCardCompany = (companyId: string) => {
@@ -30,7 +35,9 @@ function CreditCardCompanyInput({ closeModal, name }: CreditCardCompanyInputProp
             src={convertImage(creditCardCompany.id)}
             alt={creditCardCompany.name}
           />
-          <CreditCardCompanyTitle>{creditCardCompany.name}</CreditCardCompanyTitle>
+          <CreditCardCompanyTitle>
+            {creditCardCompany.name}
+          </CreditCardCompanyTitle>
         </CreditCardCompanyItem>
       ))}
     </CreditCardCompanyInputLayout>

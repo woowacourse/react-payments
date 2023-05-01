@@ -1,7 +1,11 @@
 /* eslint-disable max-len */
 /* eslint-disable react/no-array-index-key */
 import * as T from 'types';
-import { convertSecuredCreditCard, findCreditCardCompanyById, markExpiry } from '../../domains/creditCard';
+import {
+  convertSecuredCreditCard,
+  findCreditCardCompanyById,
+  markExpiry,
+} from '../../domains/creditCard';
 import * as S from './style';
 
 export type CreditCardProps = {
@@ -10,9 +14,10 @@ export type CreditCardProps = {
 };
 
 function CreditCard({
-  fullFilled, creditCard: {
+  fullFilled,
+  creditCard: {
     companyId, expiry, number, owner
-  }
+  },
 }: CreditCardProps) {
   const isValid = () => {
     if (!fullFilled) return true;
@@ -39,15 +44,13 @@ function CreditCard({
       <S.CreditCardICChip />
       <S.CreditCardInfoFooter>
         <S.CreditCardNumber>
-          {convertSecuredCreditCard(number).map((num, idx) => <div key={idx}>{num}</div>)}
+          {convertSecuredCreditCard(number).map((num, idx) => (
+            <div key={idx}>{num}</div>
+          ))}
         </S.CreditCardNumber>
         <S.CreditCardContainer>
-          <S.CreditCardBox>
-            {owner}
-          </S.CreditCardBox>
-          <S.CreditCardBox>
-            {markExpiry(expiry)}
-          </S.CreditCardBox>
+          <S.CreditCardBox>{owner}</S.CreditCardBox>
+          <S.CreditCardBox>{markExpiry(expiry)}</S.CreditCardBox>
         </S.CreditCardContainer>
       </S.CreditCardInfoFooter>
     </S.CreditCardLayout>

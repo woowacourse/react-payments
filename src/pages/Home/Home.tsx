@@ -29,9 +29,7 @@ function Home() {
                 owner: creditCard.owner,
               }}
             />
-            <S.CreditCardNickname>
-              {creditCard.nickname}
-            </S.CreditCardNickname>
+            <S.CreditCardNickname>{creditCard.nickname}</S.CreditCardNickname>
           </div>
         ))}
       </S.CreditCardList>

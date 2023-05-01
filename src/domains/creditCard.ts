@@ -1,7 +1,10 @@
 import { CreditCard } from 'types';
 import { creditCardCompanies } from '../data/creditCard';
 import {
-  validateCVC, validateExpiry, validateNumber, validatePassword
+  validateCVC,
+  validateExpiry,
+  validateNumber,
+  validatePassword,
 } from './validations';
 
 export const convertSecuredCreditCard = (number: string) => {
@@ -20,7 +23,7 @@ export const findCreditCardCompanyById = (id: string) => {
       id: 'default',
       name: 'COMPANY',
       color: 'white',
-      backgroundColor: 'black'
+      backgroundColor: 'black',
     };
   }
   return creditCardCompanies[index];
@@ -39,7 +42,7 @@ export const checkCreditCardValidations = (creditCard: CreditCard) => {
     isValidCVC,
     isValidExpiry,
     isValidCardNumber,
-    isValidCardPassword
+    isValidCardPassword,
   ].some((v) => v);
 
   return isCreditCardError;

@@ -7,20 +7,20 @@ import * as S from '../style';
 import { validateNumber } from '../../../domains/validations';
 
 export const MaskedViewer = styled.p`
-    background-color: #ECEBF1;
-    border-radius: 7px;
-    height: 48px;
-    width: 100%;
-    border: none;
-    font-size: 18px;
-    :focus {
-        outline: none;
-    }
-    margin-right: 10px;
-    display: flex;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
+  background-color: #ecebf1;
+  border-radius: 7px;
+  height: 48px;
+  width: 100%;
+  border: none;
+  font-size: 18px;
+  :focus {
+    outline: none;
+  }
+  margin-right: 10px;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
 `;
 
 function CreditCardNumberInput({ name }: T.CreditCardInputProps) {
@@ -28,7 +28,9 @@ function CreditCardNumberInput({ name }: T.CreditCardInputProps) {
   const { creditCardForm, setCreditCardForm } = useCreditCardForm();
   const [markedCreditCardNumber, setMarkedCreditCardNumber] = useState('');
 
-  const handleChangeCreditCardNumber = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleChangeCreditCardNumber = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
     const newCreditCardNumber = event.target.value.replace(/\D/g, '');
 
     if (newCreditCardNumber.length > 16) return;
@@ -64,7 +66,11 @@ function CreditCardNumberInput({ name }: T.CreditCardInputProps) {
           onChange={handleChangeCreditCardNumber}
         />
       </S.RelativeBox>
-      {isError && <S.ErrorMessage>카드번호는 16자리의 숫자로만 이루어져야 합니다.</S.ErrorMessage>}
+      {isError && (
+        <S.ErrorMessage>
+          카드번호는 16자리의 숫자로만 이루어져야 합니다.
+        </S.ErrorMessage>
+      )}
     </>
   );
 }

@@ -9,7 +9,9 @@ import { validatePassword } from '../../../domains/validations';
 function CreditCardPasswordInput({ name }: T.CreditCardInputProps) {
   const { creditCardForm, setCreditCardForm } = useCreditCardForm();
 
-  const handleChangeCreditCardPassword = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleChangeCreditCardPassword = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
     const newPassword = event.target.value.replace(/\D/g, '');
     if (newPassword.length <= 1) {
       const { password }: T.CreditCard = { ...creditCardForm };
@@ -24,12 +26,9 @@ function CreditCardPasswordInput({ name }: T.CreditCardInputProps) {
     }
   };
 
-  const isError = (
-    creditCardForm.password[0].length > 0 || creditCardForm.password[1].length > 0)
-    && validatePassword(
-      creditCardForm.password[0],
-      creditCardForm.password[1]
-    );
+  const isError = (creditCardForm.password[0].length > 0
+    || creditCardForm.password[1].length > 0)
+    && validatePassword(creditCardForm.password[0], creditCardForm.password[1]);
 
   return (
     <div>
@@ -54,7 +53,11 @@ function CreditCardPasswordInput({ name }: T.CreditCardInputProps) {
         <S.PasswordBox>•</S.PasswordBox>
         <S.PasswordBox>•</S.PasswordBox>
       </FlexBox>
-      {isError && <S.ErrorMessage>비밀 번호는 앞 2자리를 입력하셔야 합니다.</S.ErrorMessage>}
+      {isError && (
+        <S.ErrorMessage>
+          비밀 번호는 앞 2자리를 입력하셔야 합니다.
+        </S.ErrorMessage>
+      )}
     </div>
   );
 }

@@ -12,7 +12,10 @@ const useCreditCardForm = () => {
   };
 
   return {
-    creditCardForm, setCreditCardForm, initCreditCardForm, isCreditCardError
+    creditCardForm,
+    setCreditCardForm,
+    initCreditCardForm,
+    isCreditCardError,
   };
 };
 

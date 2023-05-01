@@ -8,18 +8,16 @@ interface ControlButtonProps extends HTMLAttributes<HTMLButtonElement> {
 }
 
 function ControlButton({
-  children, type, disabled, onClick
+  children,
+  type,
+  disabled,
+  onClick,
 }: ControlButtonProps) {
   return (
     <S.ButtonWrapper>
-      <S.RegisterButton
-        type={type}
-        disabled={disabled}
-        onClick={onClick}
-      >
+      <S.RegisterButton type={type} disabled={disabled} onClick={onClick}>
         {children}
       </S.RegisterButton>
-
     </S.ButtonWrapper>
   );
 }

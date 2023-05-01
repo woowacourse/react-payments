@@ -7,10 +7,17 @@ interface FlexBoxProps extends T.FlexBox {
 }
 
 function FlexBox({
-  children, direction, justifyContent, alignItems
+  children,
+  direction,
+  justifyContent,
+  alignItems,
 }: FlexBoxProps) {
   return (
-    <S.FlexBox direction={direction} justifyContent={justifyContent} alignItems={alignItems}>
+    <S.FlexBox
+      direction={direction}
+      justifyContent={justifyContent}
+      alignItems={alignItems}
+    >
       {children}
     </S.FlexBox>
   );

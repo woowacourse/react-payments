@@ -39,7 +39,13 @@ function CreditCardRegister() {
     <>
       <CreditCardRegisterLayout>
         <CreditCardRegisterTopSheet>
-          <S.HomeButton type="button" onClick={() => navigate('/')}>{`${'<'}`}</S.HomeButton>
+          <S.HomeButton
+            type="button"
+            onClick={() => navigate('/')}
+          >
+            {`${'<'}`}
+
+          </S.HomeButton>
           <S.CreditCardRegisterHeader>카드 추가</S.CreditCardRegisterHeader>
         </CreditCardRegisterTopSheet>
         <FlexBox justifyContent="center">
@@ -54,21 +60,11 @@ function CreditCardRegister() {
           />
         </FlexBox>
         <S.CreditCardRegisterForm>
-          <CreditCardNumberInput
-            name="number"
-          />
-          <CreditCardExpiryInput
-            name="expiry"
-          />
-          <CreditCardOwnerInput
-            name="owner"
-          />
-          <CreditCardCVCInput
-            name="cvc"
-          />
-          <CreditCardPasswordInput
-            name="password"
-          />
+          <CreditCardNumberInput name="number" />
+          <CreditCardExpiryInput name="expiry" />
+          <CreditCardOwnerInput name="owner" />
+          <CreditCardCVCInput name="cvc" />
+          <CreditCardPasswordInput name="password" />
           <ControlButton
             disabled={isCreditCardError}
             type="submit"
@@ -79,12 +75,8 @@ function CreditCardRegister() {
         </S.CreditCardRegisterForm>
       </CreditCardRegisterLayout>
       <Modal modalOpen={modalOpen}>
-        <CreditCardCompanyInput
-          closeModal={closeModal}
-          name="companyId"
-        />
+        <CreditCardCompanyInput closeModal={closeModal} name="companyId" />
       </Modal>
-
     </>
   );
 }

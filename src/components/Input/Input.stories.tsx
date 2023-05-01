@@ -18,7 +18,7 @@ FullWidthInput.args = {
   value: '1111-1111-***',
   width: '100%',
   textAlign: 'center',
-  onChange: (event: ChangeEvent<HTMLInputElement>) => (event.target.value),
+  onChange: (event: ChangeEvent<HTMLInputElement>) => event.target.value,
 };
 
 export const HalfWidthInput = Template.bind({});
@@ -27,7 +27,7 @@ HalfWidthInput.args = {
   value: '1111-1111-***',
   width: '50%',
   textAlign: 'center',
-  onChange: (event: ChangeEvent<HTMLInputElement>) => (event.target.value),
+  onChange: (event: ChangeEvent<HTMLInputElement>) => event.target.value,
 };
 
 export const SmallWidthInput = Template.bind({});
@@ -36,7 +36,7 @@ SmallWidthInput.args = {
   value: '***',
   width: '20%',
   textAlign: 'center',
-  onChange: (event: ChangeEvent<HTMLInputElement>) => (event.target.value),
+  onChange: (event: ChangeEvent<HTMLInputElement>) => event.target.value,
 };
 
 export const FixedWidthInput = Template.bind({});
@@ -45,7 +45,7 @@ FixedWidthInput.args = {
   value: '*',
   width: '24px',
   textAlign: 'center',
-  onChange: (event: ChangeEvent<HTMLInputElement>) => (event.target.value),
+  onChange: (event: ChangeEvent<HTMLInputElement>) => event.target.value,
 };
 
 export const TextAlignStartInput = Template.bind({});
@@ -54,5 +54,5 @@ TextAlignStartInput.args = {
   value: 'NOAH',
   width: '60%',
   textAlign: 'start',
-  onChange: (event: ChangeEvent<HTMLInputElement>) => (event.target.value),
+  onChange: (event: ChangeEvent<HTMLInputElement>) => event.target.value,
 };

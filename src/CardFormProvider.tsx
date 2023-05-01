@@ -2,7 +2,11 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 import { defaultCreditCardForm } from 'data/creditCard';
 import {
-  Dispatch, ReactNode, SetStateAction, createContext, useState
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  createContext,
+  useState,
 } from 'react';
 import * as T from 'types';
 
@@ -13,7 +17,7 @@ export interface CardFormState {
 
 export const CardContext = createContext<CardFormState>({
   creditCardForm: defaultCreditCardForm,
-  setCreditCardForm: () => { },
+  setCreditCardForm: () => {},
 });
 
 interface CardProviderProps {
@@ -21,15 +25,13 @@ interface CardProviderProps {
 }
 
 function CardFormProvider({ children }: CardProviderProps) {
-  const [creditCardForm, setCreditCardForm] = useState<T.CreditCard>(defaultCreditCardForm);
+  const [creditCardForm, setCreditCardForm] = useState<T.CreditCard>(
+    defaultCreditCardForm
+  );
 
   const state = { creditCardForm, setCreditCardForm };
 
-  return (
-    <CardContext.Provider value={state}>
-      {children}
-    </CardContext.Provider>
-  );
+  return <CardContext.Provider value={state}>{children}</CardContext.Provider>;
 }
 
 export default CardFormProvider;

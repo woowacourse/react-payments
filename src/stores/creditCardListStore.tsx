@@ -21,7 +21,9 @@ export const creditCardListStore = {
     emitChange();
   },
   updateNickname(number: string, newNickname: string) {
-    const target = creditCardList.findIndex((c: T.CreditCard) => c.number === number);
+    const target = creditCardList.findIndex(
+      (c: T.CreditCard) => c.number === number
+    );
     if (target !== -1) {
       creditCardList[target].nickname = newNickname;
       saveCreditCardListToLocalStorage();
@@ -40,5 +42,5 @@ export const creditCardListStore = {
   },
   getSnapshot() {
     return creditCardList;
-  }
+  },
 };
