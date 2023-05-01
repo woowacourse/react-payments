@@ -1,5 +1,7 @@
 import { PaymentsInput } from 'components/common';
+import { PaymentsInputErrorLabel } from 'components/common/Label/PaymentsInputErrorLabel';
 import { PaymentsInputLabel } from 'components/common/Label/PaymentsInputLabel';
+import { useIsPaymentsInputErrors } from 'hooks/useIsPaymentsInputErrors';
 import React, { ChangeEvent, useRef } from 'react';
 import styled, { CSSProperties } from 'styled-components';
 import { isNumber } from 'utils';
@@ -14,6 +16,7 @@ export interface PasswordInputProps {
 export function PasswordInput(props: PasswordInputProps) {
   const { first, second, width } = props;
   const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
+  const [isInputErrors, setIsInputError] = useIsPaymentsInputErrors(2);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement>,
@@ -22,12 +25,16 @@ export function PasswordInput(props: PasswordInputProps) {
   ) => {
     const value = e.target.value;
 
-    if (!isNumber(value)) return;
-
+    if (!isNumber(value)) {
+      setIsInputError(index)(true);
+      return;
+    }
     if (index < inputRefs.current.length - 1 && value.length === e.target.maxLength) {
       inputRefs.current[index + 1]?.focus();
     }
+
     onChange?.(value);
+    setIsInputError(index)(false);
   };
 
   return (
@@ -43,6 +50,7 @@ export function PasswordInput(props: PasswordInputProps) {
           inputMode="numeric"
           align="center"
           width={width}
+          isError={isInputErrors[0]}
           required
         />
         <PaymentsInput
@@ -54,11 +62,15 @@ export function PasswordInput(props: PasswordInputProps) {
           inputMode="numeric"
           align="center"
           width={width}
+          isError={isInputErrors[1]}
           required
         />
         <DotContainer {...props}>•</DotContainer>
         <DotContainer {...props}>•</DotContainer>
       </InputsContainer>
+      {isInputErrors.some((isError) => isError) && (
+        <PaymentsInputErrorLabel>숫자만 입력해주세요</PaymentsInputErrorLabel>
+      )}
     </Container>
   );
 }
@@ -66,6 +78,7 @@ export function PasswordInput(props: PasswordInputProps) {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 3px;
 `;
 
 const InputsContainer = styled.div`

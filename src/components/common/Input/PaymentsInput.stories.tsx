@@ -14,6 +14,11 @@ ColoredInput.args = {
   backgroundColor: 'skyblue',
 };
 
+export const ErrorInput = Template.bind({});
+ErrorInput.args = {
+  isError: true,
+};
+
 export const leftAlignedInput = Template.bind({});
 leftAlignedInput.args = {
   align: 'left',

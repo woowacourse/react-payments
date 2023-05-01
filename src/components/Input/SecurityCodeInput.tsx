@@ -1,6 +1,7 @@
 import { PaymentsInput } from 'components/common';
 import { PaymentsInputErrorLabel } from 'components/common/Label/PaymentsInputErrorLabel';
 import { PaymentsInputLabel } from 'components/common/Label/PaymentsInputLabel';
+import { useIsPaymentsInputErrors } from 'hooks/useIsPaymentsInputErrors';
 import { ChangeEventHandler, useState } from 'react';
 import styled, { CSSProperties } from 'styled-components';
 import { isNumber } from 'utils';
@@ -11,7 +12,7 @@ export interface SecurityInputProps extends ValueAndOnChange {
 }
 
 export function SecurityCodeInput({ value, onChange, width }: SecurityInputProps) {
-  const [isInputError, setIsInputError] = useState(false);
+  const [isInputError, setIsInputError] = useIsPaymentsInputErrors(1);
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const value = e.target.value;

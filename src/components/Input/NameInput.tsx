@@ -1,6 +1,7 @@
 import { PaymentsInput } from 'components/common';
 import { PaymentsInputErrorLabel } from 'components/common/Label/PaymentsInputErrorLabel';
 import { PaymentsInputLabel } from 'components/common/Label/PaymentsInputLabel';
+import { useIsPaymentsInputErrors } from 'hooks/useIsPaymentsInputErrors';
 import { ChangeEventHandler, useState } from 'react';
 import styled from 'styled-components';
 import { ValueAndOnChange } from './types';
@@ -12,8 +13,8 @@ export type NameInputProps = {
 const NOT_ALPHABET_REGEX = /[^A-Za-z\s]/gi;
 
 export function NameInput(props: NameInputProps) {
-  const { value, onChange, width, onErrorText } = props;
-  const [isError, setIsError] = useState(false);
+  const { value, onChange, width } = props;
+  const [isError, setIsError] = useIsPaymentsInputErrors(1);
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     if (e.target.value.match(NOT_ALPHABET_REGEX)) {
