@@ -35,8 +35,8 @@ export type FormCardAddProps = {
   cardExpire: InputHook<string>;
   cardOwner: InputHook<string>;
   securityCode: InputHook<string>;
-  cardPassword1: InputHook<string>;
-  cardPassword2: InputHook<string>;
+  cardPasswordFirstDigit: InputHook<string>;
+  cardPasswordSecondDigit: InputHook<string>;
   cardFlipper: React.Dispatch<React.SetStateAction<boolean>>;
 };
 

@@ -15,8 +15,8 @@ type CardNicknameInputModalProps = {
   cardExpire: InputHook<string>;
   cardOwner: InputHook<string>;
   securityCode: InputHook<string>;
-  cardPassword1: InputHook<string>;
-  cardPassword2: InputHook<string>;
+  cardPasswordFirstDigit: InputHook<string>;
+  cardPasswordSecondDigit: InputHook<string>;
 };
 
 const CardNicknameInputModal = ({
@@ -26,8 +26,8 @@ const CardNicknameInputModal = ({
   cardExpire,
   cardOwner,
   securityCode,
-  cardPassword1,
-  cardPassword2,
+  cardPasswordFirstDigit,
+  cardPasswordSecondDigit,
 }: CardNicknameInputModalProps) => {
   const navigate = useNavigate();
   const [cardNickName, setCardNickName] = useState('');
@@ -49,8 +49,8 @@ const CardNicknameInputModal = ({
       expired: cardExpire.value,
       securityCode: securityCode.value,
       cardPassword: {
-        first: cardPassword1.value,
-        second: cardPassword2.value,
+        first: cardPasswordFirstDigit.value,
+        second: cardPasswordSecondDigit.value,
       },
     };
     if (!fetchNewCardData(postData)) {

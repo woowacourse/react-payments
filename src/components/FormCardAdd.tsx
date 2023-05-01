@@ -14,8 +14,8 @@ const FormCardAdd = ({
   cardExpire,
   cardOwner,
   securityCode,
-  cardPassword1,
-  cardPassword2,
+  cardPasswordFirstDigit,
+  cardPasswordSecondDigit,
 }: FormCardAddProps) => {
   const [inputError, setInputError] = useState(false);
   const [readyToPending, setReadyToPending] = useState(false);
@@ -259,14 +259,14 @@ const FormCardAdd = ({
               inputType="password"
               inputMode="numeric"
               passwordType="password-single"
-              value={cardPassword1.value}
+              value={cardPasswordFirstDigit.value}
               maxDataLength={1}
               minDataLength={1}
               name="card-password-1"
               dataId={7}
               refObject={inputRef[7]}
               handleError={() => {}}
-              onChange={cardPassword1.onChange}
+              onChange={cardPasswordFirstDigit.onChange}
               nextFocus={moveFocus}
               onFlip={() => {
                 handleCardUnflip();
@@ -278,14 +278,14 @@ const FormCardAdd = ({
               inputType="password"
               inputMode="numeric"
               passwordType="password-single"
-              value={cardPassword2.value}
+              value={cardPasswordSecondDigit.value}
               maxDataLength={1}
               minDataLength={1}
               name="card-password-2"
               dataId={8}
               refObject={inputRef[8]}
               handleError={() => {}}
-              onChange={cardPassword2.onChange}
+              onChange={cardPasswordSecondDigit.onChange}
               nextFocus={moveFocus}
               onFlip={() => {
                 handleCardUnflip();
@@ -309,8 +309,8 @@ const FormCardAdd = ({
           cardExpire={cardExpire}
           cardOwner={cardOwner}
           securityCode={securityCode}
-          cardPassword1={cardPassword1}
-          cardPassword2={cardPassword2}
+          cardPasswordFirstDigit={cardPasswordFirstDigit}
+          cardPasswordSecondDigit={cardPasswordSecondDigit}
         />
       ) : (
         ''

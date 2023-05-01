@@ -33,8 +33,8 @@ const AddCardPage = () => {
   const cardExpire = useInput('', cardExpireCondition, formatExpireDate);
   const securityCode = useInput('', securityCodeCondition, handleNumberInput);
   const cardOwner = useInput('', cardOwnerCondition, stringToUpperCase);
-  const cardPassword1 = useInput('', cardPasswordCondition, handleNumberInput);
-  const cardPassword2 = useInput('', cardPasswordCondition, handleNumberInput);
+  const cardPasswordFirstDigit = useInput('', cardPasswordCondition, handleNumberInput);
+  const cardPasswordSecondDigit = useInput('', cardPasswordCondition, handleNumberInput);
 
   const onBackButtonClick = () => {
     navigate('/');
@@ -72,8 +72,8 @@ const AddCardPage = () => {
             cardExpire={cardExpire}
             cardOwner={cardOwner}
             securityCode={securityCode}
-            cardPassword1={cardPassword1}
-            cardPassword2={cardPassword2}
+            cardPasswordFirstDigit={cardPasswordFirstDigit}
+            cardPasswordSecondDigit={cardPasswordSecondDigit}
             cardFlipper={setCardFlip}
           />
         </section>
