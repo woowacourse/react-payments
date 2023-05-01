@@ -1,4 +1,4 @@
-import { TAB_INDEX_INFO } from './constant';
+import { TAB_INDEX_INFO } from '../constants/constant';
 
 export const isNumber = (value: string) => {
   return !Number.isNaN(Number(value));

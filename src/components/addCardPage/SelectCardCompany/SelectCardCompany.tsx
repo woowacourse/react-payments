@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { CardCompanyType } from '../../../types/types';
 import BankInfo from './SelectCardCompanyItem';
-import { CardCompanyType } from '../../../types';
 
 const CARD_COMPANY_KIND: CardCompanyType[] = [
   'bc',

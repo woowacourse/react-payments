@@ -1,5 +1,5 @@
-import { UseInputProps } from './useInput';
 import { InputDetailInfo } from './formValidate';
+import { UseInputProps } from './useInput';
 
 export interface InputValuesInformationProps extends UseInputProps {
   element: HTMLInputElement;

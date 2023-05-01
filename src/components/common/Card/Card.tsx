@@ -1,9 +1,9 @@
-import styled from 'styled-components';
 import { useState } from 'react';
-import { CardCompanyType } from '../../../types';
-import { CARD_COMPANY_DATA } from '../../../constant';
-import Error from '../Error/Error';
+import styled from 'styled-components';
+import { CARD_COMPANY_DATA } from '../../../constants/constant';
+import { CardCompanyType } from '../../../types/types';
 import { createUniqueId, isPrevDate } from '../../../utils';
+import { Error } from '../Error';
 
 export interface CardProps {
   cardNumberSet: string[];

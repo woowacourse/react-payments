@@ -1,4 +1,4 @@
-import { PageInfo } from '../types';
+import { PageInfo } from '../types/types';
 import {
   convertUpperCase,
   isNumber,

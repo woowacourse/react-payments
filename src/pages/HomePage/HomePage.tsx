@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { CardInfo, PageInfo } from '../../types';
 import { AddCardButton } from '../../components/addCardPage/AddCardButton';
 import { Card } from '../../components/common/Card';
+import { CardInfo, PageInfo } from '../../types/types';
 
 interface HomePageProps {
   cardList: CardInfo[];

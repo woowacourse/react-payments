@@ -1,4 +1,4 @@
-import { PAGE } from './constant';
+import { PAGE } from '../constants/constant';
 
 export interface CardInfo {
   id: string;
