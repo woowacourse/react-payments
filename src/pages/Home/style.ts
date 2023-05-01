@@ -16,6 +16,12 @@ export const CreditCardList = styled.div`
     justify-items: center;
 `;
 
+export const CreditCardNickname = styled.div`
+    margin-top: 16px;
+    display: flex;
+    justify-content: center;
+`;
+
 export const RegisterCreditCardContainer = styled.div`
     display: flex;
     flex-direction: column;
