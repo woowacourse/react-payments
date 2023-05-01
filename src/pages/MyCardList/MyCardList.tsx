@@ -5,6 +5,7 @@ import * as Styled from './MyCardList.styles';
 import { useMyCardList } from '../../hooks/card/card';
 import { generateCardNumber } from '../../utils/card';
 import Layout from '../../components/@common/Layout/Layout';
+import { ROUTES } from '../../constants/routes';
 
 export default function MyCardList() {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ export default function MyCardList() {
             <Styled.Alias>{card.alias}</Styled.Alias>
           </div>
         ))}
-        <Card type="button" onClick={() => navigate('./registerCard')} />
+        <Card type="button" onClick={() => navigate(ROUTES.REGISTER_CARD)} />
       </Styled.Root>
     </Layout>
   );
