@@ -1,15 +1,14 @@
 import styled from 'styled-components';
+import { CardCompanyItem } from './CardCompanyItem';
+import { ModalWithCloseButton } from '../ModalWithCloseButton';
+import { CARD_COMPANY } from '../../../constants';
 import { CardCompany } from '../../../types';
 import { isCardCompany } from '../../../types/guard';
-import { CARD_COMPANY } from '../../../constants';
-import { ModalWithCloseButton } from '../ModalWithCloseButton';
-import { CardCompanyItem } from './CardCompanyItem';
 
 interface Props {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setCardCompany: React.Dispatch<React.SetStateAction<CardCompany>>;
-  children?: React.ReactNode;
+  setCardCompany: (input: CardCompany) => void;
 }
 
 export function CardSelectModal({ isOpen, setIsOpen, setCardCompany }: Props) {

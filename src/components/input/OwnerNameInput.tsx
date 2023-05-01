@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 import { Input } from './Input';
 import { InputContainer } from './InputContainer';
-import { OwnerName } from '../../types';
 import { isEnglish } from '../../utils/validator';
 import { ERROR, MAX_NAME_SIZE } from '../../constants';
+import { OwnerName } from '../../types';
 
 interface Props {
   ownerName: OwnerName;
   ownerNameInputRef: React.RefObject<HTMLInputElement>;
-  setOwnerName: React.Dispatch<React.SetStateAction<OwnerName>>;
+  setOwnerName: (input: OwnerName) => void;
   moveFocusToSecurityCode?: () => void;
 }
 

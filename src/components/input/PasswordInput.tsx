@@ -1,16 +1,16 @@
-import styled from 'styled-components';
 import { useRef } from 'react';
+import styled from 'styled-components';
 import { Input } from './Input';
 import { InputContainer } from './InputContainer';
-import { Password } from '../../types';
+import { isEmptyInput, isFirst } from '../../utils';
 import { hasValidLength, isNumeric } from '../../utils/validator';
 import { ERROR, PASSWORD_SIZE, PASSWORD_TEXT } from '../../constants';
-import { isEmptyInput, isFirst } from '../../utils';
+import { Password } from '../../types';
 
 interface Props {
   password: Password;
   passwordInputRef: React.RefObject<HTMLInputElement>;
-  setPassword: React.Dispatch<React.SetStateAction<Password>>;
+  setPassword: (input: Password) => void;
 }
 
 export function PasswordInput({ password, passwordInputRef, setPassword }: Props) {
@@ -24,11 +24,9 @@ export function PasswordInput({ password, passwordInputRef, setPassword }: Props
   };
 
   const handlePasswordInputChange = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword((prev) => {
-      const currentPassword = [...prev];
-      currentPassword[index] = e.target.value;
-      return currentPassword;
-    });
+    const newPassword = [...password];
+    newPassword[index] = e.target.value;
+    setPassword(newPassword);
 
     if (index < password.length - 1) {
       allRef.at(index + 1)?.current?.focus();

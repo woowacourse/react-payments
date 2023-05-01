@@ -9,17 +9,13 @@ import { isOverMaxLength } from '../../utils/validator';
 import { CARD_ALIAS_SIZE, ERROR } from '../../constants';
 
 export function CardAliasAddForm() {
+  const [cardAlias, setCardAlias] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
-  const [cardAlias, setCardAlias] = useState('');
-
-  if (!location.state) return null;
   const cardId = location.state.cardId;
-
   const card = cardDataService.getCard(cardId);
 
   if (!card) return null;
-  const { cardCompany, cardNumber, expirationDate, ownerName } = card;
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (isOverMaxLength(e.target.value, CARD_ALIAS_SIZE)) {
@@ -35,25 +31,20 @@ export function CardAliasAddForm() {
     e.preventDefault();
     if (!(e.target instanceof HTMLFormElement)) return;
 
-    cardDataService.addAliasToCard(cardId, e.target.alias.value);
+    cardDataService.addAliasToCard(card.id, e.target.alias.value);
     navigate('/');
   };
 
   return (
     <Style.Container>
-      <CardViewer
-        cardCompany={cardCompany}
-        cardNumber={cardNumber}
-        expirationDate={expirationDate}
-        ownerName={ownerName}
-      />
+      <CardViewer card={card} />
       <Style.Form onSubmit={handleAliasSubmit}>
         <Input
           value={cardAlias}
           designType='underline'
           name='alias'
           placeholder='카드 별칭을 입력해주세요.(선택)'
-          maxLength={20}
+          maxLength={CARD_ALIAS_SIZE}
           autoFocus
           width={'240px'}
           height={'45px'}

@@ -1,6 +1,6 @@
-import styled from 'styled-components';
 import { Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 import { CardViewer } from './CardViewer';
 import { cardDataService } from '../domains/cardDataService';
 
@@ -13,17 +13,10 @@ export function CardListContainer() {
       {!cardList.length && <Style.Caption>새로운 카드를 등록해주세요.</Style.Caption>}
       <Style.CardListContainer>
         {cardList.map((card) => {
-          const { id, alias, cardCompany, cardNumber, expirationDate, ownerName } = card;
-
           return (
-            <Fragment key={id}>
-              <CardViewer
-                cardCompany={cardCompany}
-                cardNumber={cardNumber}
-                expirationDate={expirationDate}
-                ownerName={ownerName}
-              />
-              <Style.CardAlias>{alias}</Style.CardAlias>
+            <Fragment key={card.id}>
+              <CardViewer card={card} />
+              <Style.CardAlias>{card.cardAlias}</Style.CardAlias>
             </Fragment>
           );
         })}

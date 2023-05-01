@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { CardCompany, CardNumber, ExpirationDate, OwnerName } from '../types';
+import { Card } from '../types';
 import {
   CARD_COMPANY,
   CARD_COMPANY_KEY,
@@ -10,13 +10,10 @@ import {
 } from '../constants';
 
 interface Props {
-  cardCompany: CardCompany;
-  cardNumber: CardNumber;
-  expirationDate: ExpirationDate;
-  ownerName: OwnerName;
+  card: Card;
 }
 
-export function CardViewer({ cardCompany, cardNumber, expirationDate, ownerName }: Props) {
+export function CardViewer({ card }: Props) {
   const changeCardNumberFormat = (rawCardNumbers: string[]) => {
     const cardNumbersFormat = rawCardNumbers.map((rawCardNumber, index) =>
       index < PASSWORD_START_INDEX ? rawCardNumber : PASSWORD_TEXT.repeat(rawCardNumber.length),
@@ -31,6 +28,7 @@ export function CardViewer({ cardCompany, cardNumber, expirationDate, ownerName 
     return `${month}/${year}`;
   };
 
+  const { cardCompany, cardNumber, expirationDate, ownerName } = card;
   const cardColor = CARD_COMPANY[CARD_COMPANY_KEY[cardCompany]].color;
   const ownerNameFormat = ownerName.length ? ownerName : OWNER_NAME_TEXT;
   const cardNumbersFormat = changeCardNumberFormat(cardNumber);
@@ -77,7 +75,7 @@ const Style = {
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
 
     font-size: 14px;
-    color: white;
+    color: ${(props) => (props.cardColor === CARD_COMPANY.KAKAO.color ? '#494949' : 'white')};
   `,
 
   CardCompany: styled.h2`
@@ -86,7 +84,7 @@ const Style = {
     left: 15px;
 
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 600;
   `,
 
   ICChip: styled.div`

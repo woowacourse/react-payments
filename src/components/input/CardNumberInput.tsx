@@ -1,9 +1,10 @@
-import styled from 'styled-components';
 import React, { Fragment, useRef, useState } from 'react';
+import styled from 'styled-components';
 import { Input } from './Input';
 import { InputContainer } from './InputContainer';
-import { CardNumber } from '../../types';
+import { isEmptyInput, isFirst, isFullInput, isLast } from '../../utils';
 import { hasValidLength, isNumeric } from '../../utils/validator';
+import { CardNumber } from '../../types';
 import {
   CARD_NUMBER_DIGITS,
   CARD_NUMBER_INPUTS_LENGTH,
@@ -11,12 +12,11 @@ import {
   PASSWORD_START_INDEX,
   ERROR,
 } from '../../constants';
-import { isEmptyInput, isFirst, isFullInput, isLast } from '../../utils';
 
 interface Props {
   cardNumberInputRef: React.RefObject<HTMLInputElement>;
   cardNumber: CardNumber;
-  setCardNumber: React.Dispatch<React.SetStateAction<CardNumber>>;
+  setCardNumber: (input: CardNumber) => void;
   moveFocusToExpirationDate?: () => void;
 }
 
@@ -45,11 +45,9 @@ export function CardNumberInput({
   };
 
   const handleCardNumberInputChange = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
-    setCardNumber((prev) => {
-      const currentCardNumber = [...prev];
-      currentCardNumber[index] = e.target.value;
-      return currentCardNumber;
-    });
+    const newCardNumber = [...cardNumber];
+    newCardNumber[index] = e.target.value;
+    setCardNumber(newCardNumber);
 
     if (isFullInput(e.target.value, CARD_NUMBER_INPUT_SIZE)) {
       setIsFullInputs((prev) => [true, ...prev.slice(0, -1)]);

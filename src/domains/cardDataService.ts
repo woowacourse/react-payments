@@ -27,7 +27,7 @@ export const cardDataService = {
 
     for (let index = 0; index < storedCardList.length; index++) {
       if (id === storedCardList[index].id) {
-        storedCardList[index].alias = alias;
+        storedCardList[index].cardAlias = alias;
         break;
       }
     }

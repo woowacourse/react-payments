@@ -8,6 +8,7 @@ export type CardCompany =
   | '하나카드'
   | '국민카드';
 
+export type CardAlias = string;
 export type CardNumber = string[];
 export type OwnerName = string;
 export type SecurityCode = string;
@@ -20,7 +21,7 @@ export interface ExpirationDate {
 
 export interface Card {
   id: string;
-  alias: string;
+  cardAlias?: CardAlias;
   cardCompany: CardCompany;
   cardNumber: CardNumber;
   expirationDate: ExpirationDate;

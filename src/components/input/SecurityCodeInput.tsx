@@ -1,17 +1,17 @@
-import styled from 'styled-components';
 import { useEffect } from 'react';
+import styled from 'styled-components';
+import { Tooltip } from '../Tooltip/Tooptip';
 import { Input } from './Input';
 import { InputContainer } from './InputContainer';
-import { SecurityCode } from '../../types';
+import { isFullInput } from '../../utils';
 import { hasValidLength, isNumeric } from '../../utils/validator';
 import { ERROR, PASSWORD_TEXT, SECURITY_CODE_SIZE } from '../../constants';
-import { isFullInput } from '../../utils';
-import { Tooltip } from '../Tooltip/Tooptip';
+import { SecurityCode } from '../../types';
 
 interface Props {
   securityCode: SecurityCode;
   securityCodeInputRef: React.RefObject<HTMLInputElement>;
-  setSecurityCode: React.Dispatch<React.SetStateAction<SecurityCode>>;
+  setSecurityCode: (input: SecurityCode) => void;
   moveFocusToPassword?: () => void;
 }
 

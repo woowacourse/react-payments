@@ -1,16 +1,16 @@
-import styled from 'styled-components';
 import { useRef, useEffect } from 'react';
+import styled from 'styled-components';
 import { Input } from './Input';
 import { InputContainer } from './InputContainer';
-import { ExpirationDate } from '../../types';
+import { isEmptyInput, isFullInput } from '../../utils';
 import { isValidDate } from '../../utils/validator';
 import { ERROR, MONTH_SIZE, YEAR_SIZE } from '../../constants';
-import { isEmptyInput, isFullInput } from '../../utils';
+import { ExpirationDate } from '../../types';
 
 interface Props {
   monthInputRef: React.RefObject<HTMLInputElement>;
   expirationDate: ExpirationDate;
-  setExpirationDate: React.Dispatch<React.SetStateAction<ExpirationDate>>;
+  setExpirationDate: (input: ExpirationDate) => void;
   moveFocusToOwnerName?: () => void;
 }
 

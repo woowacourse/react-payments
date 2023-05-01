@@ -1,12 +1,10 @@
 import styled from 'styled-components';
-import { ReactNode } from 'react';
 import { CardCompany } from '../../../types';
 
 interface Props {
   name: CardCompany;
   logo: string;
-  setCardCompany: React.Dispatch<React.SetStateAction<CardCompany>>;
-  children?: ReactNode;
+  setCardCompany: (input: CardCompany) => void;
 }
 
 export function CardCompanyItem({ name, logo, setCardCompany }: Props) {

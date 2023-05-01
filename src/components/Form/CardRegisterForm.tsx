@@ -1,29 +1,22 @@
-import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
-import { cardDataService } from '../../domains/cardDataService';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 import { CardViewer } from '../CardViewer';
 import { CardNumberInput } from '../input/CardNumberInput';
 import { ExpirationDateInput } from '../input/ExpirationDateInput';
 import { OwnerNameInput } from '../input/OwnerNameInput';
 import { SecurityCodeInput } from '../input/SecurityCodeInput';
 import { PasswordInput } from '../input/PasswordInput';
-import { useCardRegisterForm } from '../../hooks/useCardRegisterForm';
 import { CardSelectModal } from '../Modal/CardSelect/CardSelectModal';
 import { Button } from '../Button/Button';
+import { useCardRegisterForm } from '../../hooks/useCardRegisterForm';
+import { cardDataService } from '../../domains/cardDataService';
 
 export function CardRegisterForm() {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(true);
   const {
-    id,
-    alias,
-    cardCompany,
-    cardNumber,
-    expirationDate,
-    ownerName,
-    securityCode,
-    password,
+    card,
     setCardCompany,
     setCardNumber,
     setExpirationDate,
@@ -42,18 +35,9 @@ export function CardRegisterForm() {
   const handleCardInfoSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    cardDataService.addNewCard({
-      id,
-      alias,
-      cardCompany,
-      cardNumber,
-      expirationDate,
-      ownerName,
-      securityCode,
-      password,
-    });
+    cardDataService.addNewCard(card);
 
-    navigate('/add-alias', { state: { cardId: id } });
+    navigate('/add-alias', { state: { cardId: card.id } });
   };
 
   const moveFocusToExpirationDate = () => {
@@ -89,41 +73,36 @@ export function CardRegisterForm() {
         setCardCompany={setCardCompany}
       />
       <Style.CardCompanySelectButton type={'button'} onClick={openModal}>
-        <CardViewer
-          cardCompany={cardCompany}
-          cardNumber={cardNumber}
-          expirationDate={expirationDate}
-          ownerName={ownerName}
-        />
+        <CardViewer card={card} />
       </Style.CardCompanySelectButton>
       <Style.InputContainer>
         <CardNumberInput
           cardNumberInputRef={cardNumberInputRef}
           moveFocusToExpirationDate={moveFocusToExpirationDate}
-          cardNumber={cardNumber}
+          cardNumber={card.cardNumber}
           setCardNumber={setCardNumber}
         />
         <ExpirationDateInput
           monthInputRef={monthInputRef}
           moveFocusToOwnerName={moveFocusToOwnerName}
-          expirationDate={expirationDate}
+          expirationDate={card.expirationDate}
           setExpirationDate={setExpirationDate}
         />
         <OwnerNameInput
           ownerNameInputRef={ownerNameInputRef}
           moveFocusToSecurityCode={moveFocusToSecurityCode}
-          ownerName={ownerName}
+          ownerName={card.ownerName}
           setOwnerName={setOwnerName}
         />
         <SecurityCodeInput
           securityCodeInputRef={securityCodeInputRef}
           moveFocusToPassword={moveFocusToPassword}
-          securityCode={securityCode}
+          securityCode={card.securityCode}
           setSecurityCode={setSecurityCode}
         />
         <PasswordInput
           passwordInputRef={passwordInputRef}
-          password={password}
+          password={card.password}
           setPassword={setPassword}
         />
       </Style.InputContainer>
