@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import styled from "styled-components";
 import { CardColor, CardInfo } from "../../../type/card";
 import { CardNumberIndex } from "../../../type/input";
@@ -38,8 +39,9 @@ const CardContainer = styled.section<{ cardColor: CardColor }>`
   width: 21.3rem;
   height: 13.3rem;
 
-  background-color: ${({ cardColor }) => cardColor?.bgColor};
-  color: ${({ cardColor }) => cardColor?.fontColor};
+  background-color: ${({ cardColor }) =>
+    cardColor ? cardColor.bgColor : "gray"};
+  color: ${({ cardColor }) => (cardColor ? cardColor.fontColor : "black")};
   ${({ theme }) => theme.fonts.card};
 
   border-radius: 0.5rem;

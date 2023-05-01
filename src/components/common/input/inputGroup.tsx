@@ -19,6 +19,7 @@ export function InputGroup(props: InputGroupProps) {
       {cloneElement(childrenList[0], {
         children: childrenList[0].props.children,
       })}
+      {children}
       {error && <ErrorMessage>{ERROR_MESSAGE.COMMON}</ErrorMessage>}
     </>
   ) : (
