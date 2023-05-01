@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import {
   ModalActionContext,
   ModalStateContext,
-} from '../components/provider/ModalProvider';
+} from '../components/providers/ModalProvider';
 
 export const useModalStateContext = () => {
   const modalState = useContext(ModalStateContext);

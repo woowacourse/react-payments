@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
 import type { Meta } from '@storybook/react';
 import { ExpirationDateInput } from '../../components/addCardForm/cardInfoInputs/ExpirationDateInput';
+import { CardInfoProvider } from '../../components/providers/CardInfoProvider';
 
 const meta = {
   title: 'Example/Input',
@@ -12,9 +12,11 @@ export default meta;
 
 export const ExpirationDate = () => {
   return (
-    <ExpirationDateInput
-      viewNextInput={() => {}}
-      viewPreviousInput={() => {}}
-    />
+    <CardInfoProvider>
+      <ExpirationDateInput
+        viewNextInput={() => {}}
+        viewPreviousInput={() => {}}
+      />
+    </CardInfoProvider>
   );
 };

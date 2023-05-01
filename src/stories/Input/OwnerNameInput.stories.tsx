@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
 import type { Meta } from '@storybook/react';
 
 import { OwnerNameInput } from '../../components/addCardForm/cardInfoInputs/OwnerNameInput';
+import { CardInfoProvider } from '../../components/providers/CardInfoProvider';
 
 const meta = {
   title: 'Example/Input',
@@ -13,6 +13,8 @@ export default meta;
 
 export const OwnerName = () => {
   return (
-    <OwnerNameInput viewNextInput={() => {}} viewPreviousInput={() => {}} />
+    <CardInfoProvider>
+      <OwnerNameInput viewNextInput={() => {}} viewPreviousInput={() => {}} />
+    </CardInfoProvider>
   );
 };

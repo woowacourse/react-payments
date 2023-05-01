@@ -33,12 +33,10 @@ export const AddCardNickName = () => {
         <Style.Header>카드 등록이 완료되었습니다!</Style.Header>
         <Style.CardWrapper>
           <CardViewer
-            cardInfo={{
-              cardNumber,
-              expirationDate,
-              ownerName,
-              companyId,
-            }}
+            cardNumber={cardNumber}
+            expirationDate={expirationDate}
+            ownerName={ownerName}
+            companyId={companyId}
           />
         </Style.CardWrapper>
         <Input

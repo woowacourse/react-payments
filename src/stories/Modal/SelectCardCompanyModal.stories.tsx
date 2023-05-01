@@ -1,9 +1,12 @@
 import type { Meta } from '@storybook/react';
 
-import { useState } from 'react';
 import { BottomSheet } from '../../components/modal/template/BottomSheet';
 import { SelectCardCompanyModal } from '../../components/modal/content/selectCardCompany';
-import { COMPANIES } from '../../constants/cardCompany';
+import {
+  useModalActionContext,
+  useModalStateContext,
+} from '../../hooks/useModalContext';
+import { ModalProvider } from '../../components/providers/ModalProvider';
 
 const meta = {
   title: 'Example/Modal',
@@ -14,11 +17,21 @@ const meta = {
 export default meta;
 
 export const SelectCardCompanyModalStory = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(true);
+  return (
+    <ModalProvider>
+      <Modal />
+    </ModalProvider>
+  );
+};
+
+const Modal = () => {
+  const ModalState = useModalStateContext();
+  const { openModal } = useModalActionContext();
 
   return (
     <>
-      {isOpen && (
+      <button onClick={openModal}>모달 열기</button>
+      {ModalState.isOpen && (
         <BottomSheet>
           <SelectCardCompanyModal />
         </BottomSheet>

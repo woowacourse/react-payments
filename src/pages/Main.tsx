@@ -4,10 +4,19 @@ import { Layout } from '../layout';
 import { v4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
 import { useCardList } from '../hooks/useCardList';
+import { useCardInfoActionContext } from '../hooks/cardInfoContext';
+import { useEffect } from 'react';
 
 export const Main = () => {
   const navigate = useNavigate();
+
   const { cardList } = useCardList();
+
+  const { resetAll } = useCardInfoActionContext();
+
+  useEffect(() => {
+    resetAll();
+  }, []);
 
   return (
     <Layout>
@@ -22,17 +31,14 @@ export const Main = () => {
           </Style.EmptyCardListWrapper>
         ) : (
           cardList.map((card) => {
-            const { cardNumber, expirationDate, ownerName, companyId } = card;
             return (
               <div key={v4()}>
                 <CardViewer
                   key={v4()}
-                  cardInfo={{
-                    cardNumber,
-                    expirationDate,
-                    ownerName,
-                    companyId,
-                  }}
+                  cardNumber={card.cardNumber}
+                  expirationDate={card.expirationDate}
+                  ownerName={card.ownerName}
+                  companyId={card.companyId}
                 />
                 <Style.CardNickName>{card.nickName ?? ''}</Style.CardNickName>
               </div>

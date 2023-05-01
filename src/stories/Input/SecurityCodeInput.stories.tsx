@@ -1,8 +1,7 @@
-import React, { useRef, useState } from 'react';
-
 import type { Meta } from '@storybook/react';
 
 import { SecurityCodeInput } from '../../components/addCardForm/cardInfoInputs/SecurityCodeInput';
+import { CardInfoProvider } from '../../components/providers/CardInfoProvider';
 
 const meta = {
   title: 'Example/Input',
@@ -14,6 +13,11 @@ export default meta;
 
 export const SecurityCode = () => {
   return (
-    <SecurityCodeInput viewNextInput={() => {}} viewPreviousInput={() => {}} />
+    <CardInfoProvider>
+      <SecurityCodeInput
+        viewNextInput={() => {}}
+        viewPreviousInput={() => {}}
+      />
+    </CardInfoProvider>
   );
 };

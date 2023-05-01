@@ -34,7 +34,10 @@ export const Register = () => {
       </Style.Header>
       <Style.CardContainer>
         <CardViewer
-          cardInfo={{ cardNumber, expirationDate, ownerName, companyId }}
+          cardNumber={cardNumber}
+          expirationDate={expirationDate}
+          ownerName={ownerName}
+          companyId={companyId}
           handleClick={openModal}
         />
       </Style.CardContainer>

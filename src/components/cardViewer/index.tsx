@@ -4,28 +4,29 @@ import { COMPANIES } from '../../constants/cardCompany';
 import { isCompanyId } from '../modal/content/selectCardCompany';
 import { CardViewerProps } from '../../types/card';
 
-interface Props {
-  cardInfo: CardViewerProps;
+interface Props extends CardViewerProps {
   handleClick?: () => void;
 }
 
-export function CardViewer({ cardInfo, handleClick }: Props) {
+export function CardViewer({
+  cardNumber,
+  expirationDate,
+  ownerName,
+  companyId,
+  handleClick,
+}: Props) {
   return (
     <Style.Wrapper
       onClick={handleClick}
-      color={
-        isCompanyId(cardInfo.companyId)
-          ? COMPANIES[cardInfo.companyId].color
-          : ''
-      }
+      color={isCompanyId(companyId) ? COMPANIES[companyId].color : ''}
       aria-label="카드사 선택 버튼"
     >
       <Style.CompanyName>
-        {isCompanyId(cardInfo.companyId) && COMPANIES[cardInfo.companyId].name}
+        {isCompanyId(companyId) && COMPANIES[companyId].name}
       </Style.CompanyName>
       <Style.ICChip />
       <Style.CardNumberContainer>
-        {cardInfo.cardNumber.map((number, index) => (
+        {cardNumber.map((number, index) => (
           <Style.CardNumber
             key={v4()}
             style={{
@@ -38,10 +39,9 @@ export function CardViewer({ cardInfo, handleClick }: Props) {
         ))}
       </Style.CardNumberContainer>
       <Style.NameAndDateContainer>
-        <span>{cardInfo.ownerName === '' ? 'NAME' : cardInfo.ownerName}</span>
+        <span>{ownerName === '' ? 'NAME' : ownerName}</span>
         <span>
-          {cardInfo.expirationDate.month || 'MM'}/
-          {cardInfo.expirationDate.year || 'YY'}
+          {expirationDate.month || 'MM'}/{expirationDate.year || 'YY'}
         </span>
       </Style.NameAndDateContainer>
     </Style.Wrapper>
