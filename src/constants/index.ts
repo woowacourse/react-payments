@@ -95,6 +95,17 @@ const LOCALSTORAGE_KEY = {
   CARD: 'card',
 } as const;
 
+const BANK_ID = {
+  BC_CARD: 'BC카드',
+  SHINHAN_CARD: '신한카드',
+  KAKAO_CARD: '카카오뱅크',
+  HYUNDAI_CARD: '현대카드',
+  WOORI_CARD: '우리카드',
+  ROTTE_CARD: '롯데카드',
+  HANA_CARD: '하나카드',
+  KOOKMIN_CARD: '국민카드',
+};
+
 export {
   INPUT_MAX_LENGTH,
   INPUT_MIN_LENGTH,
@@ -110,4 +121,5 @@ export {
   ERASE_UNTIL_CARD_NUMBER,
   CARD_BANK_COLOR_MAP,
   LOCALSTORAGE_KEY,
+  BANK_ID,
 };
