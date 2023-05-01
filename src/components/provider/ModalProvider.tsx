@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import useModal from "../../hooks/useModal";
+import useIsOpen from "../../hooks/useModal";
 
 interface ModalProviderProps {
   children: React.ReactNode;
@@ -14,7 +14,7 @@ interface ModalAction {
 const ModalContext = createContext<ModalAction | null>(null);
 
 const ModalProvider = ({ children }: ModalProviderProps) => {
-  const { isOpenModal, openModal, closeModal } = useModal();
+  const { isOpen: isOpenModal, open: openModal, close: closeModal } = useIsOpen();
 
   const modalAction = {
     isOpenModal,
