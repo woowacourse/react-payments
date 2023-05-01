@@ -1,7 +1,5 @@
-import { useEffect, useRef } from 'react';
-
 import Card from '../Card';
-import Input, { Focus } from '../common/Input';
+import Input from '../common/Input';
 import Tooltip from '../Tooltip';
 import TooltipButton from '../TooltipButton';
 
@@ -12,8 +10,7 @@ import { CARD_NUMBER_INPUT_PLACEHOLDER } from '../../domain/constants';
 import styles from './cardRegisterForm.module.css';
 
 const CardRegisterForm = () => {
-  const inputRefs = Array.from({ length: 10 }).map(() => useRef<Focus>(null));
-  const { isModalOpen, openModal } = useModal();
+  const { openModal } = useModal();
   const {
     cardCompany,
     cardNumber1,
@@ -26,17 +23,8 @@ const CardRegisterForm = () => {
     cvc,
     cardPassword1,
     cardPassword2,
-
-    setCardNumber1,
-    setCardNumber2,
-    setCardNumber3,
-    setCardNumber4,
-    setExpiredMonth,
-    setExpiredYear,
-    setCvc,
-    setCardPassword1,
-    setCardPassword2,
-
+    cardNumberInputRef,
+    expiredMonthInputRef,
     isCardFormFilled,
     handleNumberChange,
     handleOwnerChange,
