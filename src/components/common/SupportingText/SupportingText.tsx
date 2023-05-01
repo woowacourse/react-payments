@@ -1,12 +1,17 @@
-import styles from './style.module.css';
+import type { SupportingTextMessage } from "../../../types";
+import styles from "./style.module.css";
 
 interface SupportingTextProps {
-  message: string;
+  message: SupportingTextMessage;
   isError?: boolean;
 }
 
-function SupportingText({ message, isError = false }: SupportingTextProps) {
-  return <p className={`${styles.message} ${isError ? styles.error : ''}`}>{message}</p>;
-}
+const SupportingText = ({ message, isError = false }: SupportingTextProps) => {
+  return (
+    <p className={`${styles.message} ${isError ? styles.error : ""}`}>
+      {isError ? message.error : message.default}
+    </p>
+  );
+};
 
 export default SupportingText;
