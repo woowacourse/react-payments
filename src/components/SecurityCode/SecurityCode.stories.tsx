@@ -1,5 +1,6 @@
-import { Meta, StoryObj } from '@storybook/react';
-import SecurityCode from './SecurityCode';
+import { Meta } from '@storybook/react';
+import { useRef } from 'react';
+import SecurityCode, { SecurityCodeProps } from './SecurityCode';
 
 const meta = {
   component: SecurityCode,
@@ -8,10 +9,11 @@ const meta = {
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+export const SecurityCodeStory = (args: SecurityCodeProps) => {
+  const ref = useRef<HTMLInputElement>(null);
+  return <SecurityCode {...args} ref={ref} />;
+};
 
-export const SecurityCodeStory: Story = {
-  args: {
-    securityCode: '000',
-  },
+SecurityCodeStory.args = {
+  securityCode: '000',
 };

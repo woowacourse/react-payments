@@ -3,7 +3,7 @@ import CardInput from '../CardInput/CardInput';
 import CardLabel from '../CardLabel/CardLabel';
 import * as Styled from './CardNumbers.styles';
 
-interface CardNumbersProps {
+export interface CardNumbersProps {
   cardNumbers: Record<number, string>;
   checkCardNumbers: (order: number, value: string) => boolean;
   nextRef: RefObject<HTMLInputElement>;
@@ -31,6 +31,7 @@ const CardNumbers = forwardRef(
     };
 
     const focusNext = (currentOrder: number) => {
+      if (!nextRef) return;
       if (currentOrder === 3) {
         nextRef.current?.focus();
         return;

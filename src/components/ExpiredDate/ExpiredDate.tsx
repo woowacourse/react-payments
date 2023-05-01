@@ -3,7 +3,7 @@ import CardInput from '../CardInput/CardInput';
 import CardLabel from '../CardLabel/CardLabel';
 import * as Styled from './ExpiredDate.styles';
 
-interface ExpiredDateProps {
+export interface ExpiredDateProps {
   expiredDate: Record<number, string>;
   checkExpiredDate: (order: number, value: string) => boolean;
   validateDate: (

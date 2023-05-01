@@ -1,5 +1,6 @@
-import { Meta, StoryObj } from '@storybook/react';
-import ExpiredDate from './ExpiredDate';
+import { Meta } from '@storybook/react';
+import { RefObject, useRef } from 'react';
+import ExpiredDate, { ExpiredDateProps } from './ExpiredDate';
 
 const meta = {
   component: ExpiredDate,
@@ -15,14 +16,16 @@ const meta = {
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+export const ExpiredDateStory = (
+  args: ExpiredDateProps & { nextRef: RefObject<HTMLInputElement> }
+) => {
+  const ref = useRef<HTMLInputElement>(null);
+  return <ExpiredDate {...args} ref={ref} />;
+};
 
-export const SecurityCodeStory: Story = {
-  args: {
-    expiredDate: {
-      0: '02',
-      1: '32',
-    },
-    checkExpiredDate: (order: number, value: string) => true,
+ExpiredDateStory.args = {
+  expiredDate: {
+    0: '02',
+    1: '32',
   },
 };

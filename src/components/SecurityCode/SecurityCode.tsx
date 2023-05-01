@@ -3,7 +3,7 @@ import CardInput from '../CardInput/CardInput';
 import CardLabel from '../CardLabel/CardLabel';
 import * as Styled from './SecurityCode.styles';
 
-interface SecurityCodeProps {
+export interface SecurityCodeProps {
   securityCode: string;
   checkSecurityCode: (value: string) => void;
   nextRef: RefObject<HTMLInputElement>;

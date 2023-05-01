@@ -3,7 +3,7 @@ import CardInput from '../CardInput/CardInput';
 import CardLabel from '../CardLabel/CardLabel';
 import * as Styled from './CardPassword.styles';
 
-interface CardPasswordProps {
+export interface CardPasswordProps {
   password: Record<number, string>;
   checkPassword: (order: number, value: string) => boolean;
 }

@@ -3,7 +3,7 @@ import CardInput from '../CardInput/CardInput';
 import CardLabel from '../CardLabel/CardLabel';
 import * as Styled from './CardOwnerName.styles';
 
-interface CardOwnerNameProps {
+export interface CardOwnerNameProps {
   cardOwnerName: string;
   checkCardOwnerName: (value: string) => void;
 }
