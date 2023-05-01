@@ -1,16 +1,16 @@
 import { Meta, StoryObj } from '@storybook/react';
-import ExpiredDate from '../components/ExpiredDate/ExpiredDates';
+import CardExpiredDate from '../components/CardExpiredDate/CardExpiredDates';
 
 const meta = {
-  component: ExpiredDate,
+  component: CardExpiredDate,
   title: 'Section/ExpiredDate',
-} satisfies Meta<typeof ExpiredDate>;
+} satisfies Meta<typeof CardExpiredDate>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const SecurityCodeStory: Story = {
+export const CardExpiredDateStory: Story = {
   args: {
     expiredDates: ['02', '12'],
     isSetExpiredDates: () => true,

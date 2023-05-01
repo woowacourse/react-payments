@@ -1,7 +1,7 @@
 import CardInput from '../@common/CardInput';
 import CardLabel from '../@common/CardLabel';
 import { useContext } from 'react';
-import * as Styled from './ExpiredDates.styles';
+import * as Styled from './CardExpiredDates.styles';
 import { RefContext } from '../../contexts/RefProvider';
 
 interface ExpiredDateProps {

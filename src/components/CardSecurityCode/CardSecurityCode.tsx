@@ -1,7 +1,7 @@
 import CardInput from '../@common/CardInput';
 import CardLabel from '../@common/CardLabel';
 import { useContext, useState } from 'react';
-import * as Styled from './SecurityCode.styles';
+import * as Styled from './CardSecurityCode.styles';
 import { RefContext } from '../../contexts/RefProvider';
 
 interface SecurityCodeProps {

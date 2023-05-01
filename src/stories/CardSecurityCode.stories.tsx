@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from '@storybook/react';
-import SecurityCode from '../components/SecurityCode/SecurityCode';
+import CardSecurityCode from '../components/CardSecurityCode/CardSecurityCode';
 
 const meta = {
-  component: SecurityCode,
+  component: CardSecurityCode,
   title: 'Section/SecurityCode',
-} satisfies Meta<typeof SecurityCode>;
+} satisfies Meta<typeof CardSecurityCode>;
 
 export default meta;
 
