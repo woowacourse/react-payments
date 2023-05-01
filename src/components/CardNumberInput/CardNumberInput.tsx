@@ -1,6 +1,7 @@
 import { Input, InputBox } from '../Input';
 import styled from 'styled-components';
 import Label from '../Label';
+import useAutoFocus from '../../hooks/useAutoFocus';
 
 type CardNumberInputProps = {
   onChange: React.ChangeEventHandler<HTMLInputElement>[];
@@ -8,6 +9,7 @@ type CardNumberInputProps = {
 
 const CardNumberInput = ({ onChange }: CardNumberInputProps) => {
   const [onFirstChange, onSecondChange, onThirdChange, onFourthChange] = onChange;
+  const { inputRefs, focusNext } = useAutoFocus(4);
 
   return (
     <>
@@ -21,8 +23,14 @@ const CardNumberInput = ({ onChange }: CardNumberInputProps) => {
           placeholder="0000"
           textAlign="center"
           inputMode="numeric"
-          onChange={onFirstChange}
+          onChange={(e) => {
+            onFirstChange(e);
+            focusNext(0);
+          }}
           autoComplete="off"
+          ref={(node: HTMLInputElement) => {
+            inputRefs.current[0] = node;
+          }}
         />
         <Dash />
         <Input
@@ -32,8 +40,14 @@ const CardNumberInput = ({ onChange }: CardNumberInputProps) => {
           placeholder="0000"
           textAlign="center"
           inputMode="numeric"
-          onChange={onSecondChange}
+          onChange={(e) => {
+            onSecondChange(e);
+            focusNext(1);
+          }}
           autoComplete="off"
+          ref={(node: HTMLInputElement) => {
+            inputRefs.current[1] = node;
+          }}
         />
         <Dash />
         <Input
@@ -43,8 +57,14 @@ const CardNumberInput = ({ onChange }: CardNumberInputProps) => {
           placeholder="0000"
           textAlign="center"
           inputMode="numeric"
-          onChange={onThirdChange}
+          onChange={(e) => {
+            onThirdChange(e);
+            focusNext(2);
+          }}
           autoComplete="off"
+          ref={(node: HTMLInputElement) => {
+            inputRefs.current[2] = node;
+          }}
         />
         <Dash />
         <Input
@@ -56,6 +76,9 @@ const CardNumberInput = ({ onChange }: CardNumberInputProps) => {
           inputMode="numeric"
           onChange={onFourthChange}
           autoComplete="off"
+          ref={(node: HTMLInputElement) => {
+            inputRefs.current[3] = node;
+          }}
         />
       </Styled.Box>
     </>

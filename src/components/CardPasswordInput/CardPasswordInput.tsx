@@ -1,8 +1,11 @@
 import Label from '../Label';
 import { Input, InputBox } from '../Input';
 import styled from 'styled-components';
+import useAutoFocus from '../../hooks/useAutoFocus';
 
 const CardPasswordInput = () => {
+  const { inputRefs, focusNext } = useAutoFocus(1);
+
   return (
     <>
       <Label htmlFor="password">카드 비밀번호</Label>
@@ -16,10 +19,24 @@ const CardPasswordInput = () => {
             textAlign="center"
             inputMode="numeric"
             autoComplete="off"
+            ref={(node: HTMLInputElement) => {
+              inputRefs.current[0] = node;
+            }}
+            onChange={(e) => focusNext(0)}
           />
         </Styled.Box>
         <Styled.Box>
-          <Input type="password" width="43px" maxLength={1} textAlign="center" inputMode="numeric" autoComplete="off" />
+          <Input
+            type="password"
+            width="43px"
+            maxLength={1}
+            textAlign="center"
+            inputMode="numeric"
+            autoComplete="off"
+            ref={(node: HTMLInputElement) => {
+              inputRefs.current[1] = node;
+            }}
+          />
         </Styled.Box>
         <Input type="password" width="43px" maxLength={1} textAlign="center" value="0" disabled />
         <Input type="password" width="43px" maxLength={1} textAlign="center" value="0" disabled />

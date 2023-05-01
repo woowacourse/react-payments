@@ -1,6 +1,7 @@
 import { Input, InputBox } from '../Input';
 import styled from 'styled-components';
 import Label from '../Label';
+import useAutoFocus from '../../hooks/useAutoFocus';
 
 type ExpirationDateInputProps = {
   onChange: React.ChangeEventHandler<HTMLInputElement>[];
@@ -8,6 +9,7 @@ type ExpirationDateInputProps = {
 
 const ExpirationDateInput = ({ onChange }: ExpirationDateInputProps) => {
   const [onMonthChange, onYearChange] = onChange;
+  const { inputRefs, focusNext } = useAutoFocus(2);
 
   return (
     <>
@@ -21,8 +23,14 @@ const ExpirationDateInput = ({ onChange }: ExpirationDateInputProps) => {
           placeholder="MM"
           textAlign="right"
           inputMode="numeric"
-          onChange={onMonthChange}
+          onChange={(e) => {
+            onMonthChange(e);
+            focusNext(0);
+          }}
           autoComplete="off"
+          ref={(node: HTMLInputElement) => {
+            inputRefs.current[0] = node;
+          }}
         />
         <Slash />
         <Input
@@ -34,6 +42,9 @@ const ExpirationDateInput = ({ onChange }: ExpirationDateInputProps) => {
           inputMode="numeric"
           onChange={onYearChange}
           autoComplete="off"
+          ref={(node: HTMLInputElement) => {
+            inputRefs.current[1] = node;
+          }}
         />
       </Styled.Box>
     </>
