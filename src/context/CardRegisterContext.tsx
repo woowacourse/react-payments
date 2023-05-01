@@ -20,6 +20,7 @@ export const initialCardRegisterInfo = {
     passwordSecondDigit: '',
   },
   bank: {},
+  alias: '우아한 카드',
 };
 
 export const CardRegisterContext = createContext<{

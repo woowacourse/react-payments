@@ -30,4 +30,5 @@ export interface CardRegisterInfo {
   cvc: CVC;
   password: Password;
   bank: Bank;
+  alias: string;
 }

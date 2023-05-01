@@ -5,6 +5,7 @@ import MyCardList from './pages/MyCardList/MyCardList';
 
 import Layout from './components/@common/Layout/Layout';
 import CardRegisterProvider from './context/CardRegisterContext';
+import CardAlias from './pages/CardAlias/CardAlias';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index path="/" element={<MyCardList />} />
             <Route path="/registerCard" element={<CardRegister />} />
+            <Route path="/alias" element={<CardAlias />} />
           </Route>
         </Routes>
       </BrowserRouter>
