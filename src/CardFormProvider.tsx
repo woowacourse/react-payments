@@ -23,7 +23,7 @@ interface CardProviderProps {
 function CardFormProvider({ children }: CardProviderProps) {
   const [creditCardForm, setCreditCardForm] = useState<Type.CreditCard>(defaultCreditCardForm);
 
-  const state = { creditCardForm, setCreditCardForm, };
+  const state = { creditCardForm, setCreditCardForm };
 
   return (
     <CardContext.Provider value={state}>

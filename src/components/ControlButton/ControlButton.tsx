@@ -1,6 +1,7 @@
+import { HTMLAttributes } from 'react';
 import * as S from './style';
 
-interface ControlButtonProps {
+interface ControlButtonProps extends HTMLAttributes<HTMLButtonElement> {
   type?: 'button' | 'submit' | 'reset' | undefined;
   disabled?: boolean | undefined;
   onClick?: () => void;
