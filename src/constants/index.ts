@@ -1,3 +1,5 @@
+import { Company } from "../types/Card";
+
 export const INPUT_MAX_LENGTH = {
   CARD_NUMBER: 4,
   EXPIRATION_DATE: 2,
@@ -14,7 +16,11 @@ export const NUMBER_OF_INPUTS = {
   PASSWORD: 2,
 };
 
-export const CARD_BACKGROUND_COLOR = {
+type CardCompanyColor = {
+  [key in Company]: string;
+};
+
+export const CARD_BACKGROUND_COLOR: CardCompanyColor = {
   현대카드: "#030303",
   BC카드: "#F04651",
   신한카드: "#0046ff",
