@@ -52,6 +52,7 @@ const InputGroup = ({
                   pattern={`.{${minLength},}`}
                   required={minLength !== 0}
                   type={type === 'number' ? 'text' : type}
+                  inputMode={type === 'number' ? 'numeric' : 'text'}
                   name={`${labelText}${index}`}
                   maxLength={maxLength}
                   width={width}
