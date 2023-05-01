@@ -1,4 +1,4 @@
-import { SyntheticEvent } from 'react';
+import type { SyntheticEvent } from "react";
 
 const isElementOfType = <T extends Element>(
   event: SyntheticEvent
