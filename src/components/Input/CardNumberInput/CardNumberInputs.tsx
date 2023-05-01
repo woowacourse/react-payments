@@ -1,57 +1,29 @@
-import React, { ChangeEvent, ChangeEventHandler } from 'react';
-import { validateInput } from 'util/Validation';
+import React, { Fragment } from 'react';
+
 import { ValueAndOnChange } from '../types';
 import { Input } from 'components/common';
 import FormLabel from 'components/common/FormLabel/FormLabel';
 import { Styled as S } from './CardNumberInputs.styles';
+import { useCardNumberInputs } from 'hooks/useCardNumberInputs';
 
 interface CardNumberInputProps {
   valueAndOnChanges: ValueAndOnChange[];
 }
 
-const DEFAULT_CARD_NUMBER = '0000';
-const THIRD_BOX = 2;
-
 export function CardNumberInputs({ valueAndOnChanges }: CardNumberInputProps) {
   const inputRefs = valueAndOnChanges.map(() => React.createRef<HTMLInputElement>());
-
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement>,
-    index: number,
-    onChange?: ChangeEventHandler<HTMLInputElement>,
-  ) => {
-    const value = e.target.value;
-    if (validateInput(value)) return;
-
-    const isLast = inputRefs.length - 1 === index;
-    const isInputMaxLength = value.trim().length === e.target.maxLength;
-
-    if (!isLast && isInputMaxLength) {
-      inputRefs[index + 1].current?.focus();
-    }
-
-    onChange && onChange(e);
-  };
+  const { inputs } = useCardNumberInputs(inputRefs, valueAndOnChanges);
 
   return (
     <>
       <FormLabel>카드 번호</FormLabel>
       <S.CardNumberContainer>
-        {valueAndOnChanges.map(({ value, onChange }, index) => {
+        {inputs.map((input, index) => {
           return (
-            <>
-              <Input
-                ref={inputRefs[index]}
-                inputMode="numeric"
-                value={value}
-                type={index < THIRD_BOX ? 'text' : 'password'}
-                maxLength={4}
-                onChange={(e) => handleChange(e, index, onChange)}
-                placeholder={DEFAULT_CARD_NUMBER}
-                required
-              />
+            <Fragment key={index}>
+              <Input {...input} />
               {index < valueAndOnChanges.length - 1 && <span>-</span>}
-            </>
+            </Fragment>
           );
         })}
       </S.CardNumberContainer>
