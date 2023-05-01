@@ -1,7 +1,7 @@
 import CreditCard from 'components/CreditCard/CreditCard';
 import styled from 'styled-components';
-import * as T from 'types';
 import { ChangeEvent, Dispatch, SetStateAction } from 'react';
+import { CreditCard as CreditCardType } from 'types';
 import * as S from './style';
 
 const NicknameInput = styled.input`
@@ -23,7 +23,7 @@ const NicknameInput = styled.input`
 `;
 
 interface CreditCardNicknameInputFormProps {
-  creditCardForm: T.CreditCard;
+  creditCardForm: CreditCardType;
   nickname: string;
   setNickname: Dispatch<SetStateAction<string>>;
 }
