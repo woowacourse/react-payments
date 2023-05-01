@@ -85,6 +85,7 @@
     "eslint-plugin-react-hooks": "^4.3.0",
     "gh-pages": "^5.0.0",
     "msw": "^0.42.0",
-    "msw-storybook-addon": "^1.6.3"
+    "msw-storybook-addon": "^1.6.3",
+    "prettier": "^2.8.8"
   }
 }
