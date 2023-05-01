@@ -1,27 +1,19 @@
 import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { HEADER, ROUTES } from '../../../constants/routes';
+import useNavigation from '../../../hooks/@common/useHistory';
 import * as Styled from './Header.styles';
 
 export default function Header() {
   const location = useLocation();
-  const navigate = useNavigate();
+  const { goBack } = useNavigation();
 
-  let content;
-
-  if (location.pathname === '/') {
-    content = '보유카드';
-  } else if (location.pathname === '/registerCard') {
-    content = '카드 추가';
-  } else if (location.pathname === '/alias') {
-    content = '';
-  } else {
-    content = 'Page not found';
-  }
+  const content = HEADER[location.pathname as keyof typeof HEADER];
 
   return (
     <Styled.Root>
-      {location.pathname !== '/' && (
-        <Styled.NavigationButton onClick={() => navigate(-1)}>&lt;</Styled.NavigationButton>
+      {location.pathname !== ROUTES.MY_CARD_LIST && (
+        <Styled.NavigationButton onClick={goBack}>&lt;</Styled.NavigationButton>
       )}
       <Styled.HeaderTitle>{content}</Styled.HeaderTitle>
     </Styled.Root>
