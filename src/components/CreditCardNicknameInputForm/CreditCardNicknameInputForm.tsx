@@ -1,7 +1,10 @@
 import CreditCard from 'components/CreditCard/CreditCard';
 import styled from 'styled-components';
-import { ChangeEvent, Dispatch, SetStateAction } from 'react';
+import { ChangeEvent, useState } from 'react';
 import useCreditCardForm from 'hooks/useCreditCardForm';
+import ControlButton from 'components/ControlButton';
+import { useNavigate } from 'react-router-dom';
+import { creditCardListStore } from 'stores/creditCardListStore';
 import * as S from './style';
 
 const NicknameInput = styled.input`
@@ -22,40 +25,47 @@ const NicknameInput = styled.input`
     text-align: center;
 `;
 
-interface CreditCardNicknameInputFormProps {
-  nickname: string;
-  setNickname: Dispatch<SetStateAction<string>>;
-}
-
-function CreditCardNicknameInputForm(
-  { nickname, setNickname }: CreditCardNicknameInputFormProps
-) {
+function CreditCardNicknameInputForm() {
+  const navigate = useNavigate();
   const { creditCardForm } = useCreditCardForm();
+  const [nickname, setNickname] = useState('');
 
   const handleNicknameInput = (e: ChangeEvent<HTMLInputElement>) => {
     setNickname(e.target.value);
   };
 
-  return (
-    <S.CreditCardNicknameInputFormLayout>
-      <S.CreditCardPreview>
-        <CreditCard
-          fullFilled
-          creditCard={{
-            companyId: creditCardForm.companyId,
-            number: creditCardForm.number,
-            expiry: creditCardForm.expiry,
-            owner: creditCardForm.owner,
-          }}
-        />
-      </S.CreditCardPreview>
+  const submitNicknameInput = () => {
+    creditCardListStore.updateNickname(creditCardForm.number, nickname);
+    navigate('/');
+  };
 
-      <NicknameInput
-        value={nickname}
-        onChange={handleNicknameInput}
-        placeholder="카드 별명을 입력하세요"
-      />
-    </S.CreditCardNicknameInputFormLayout>
+  return (
+    <>
+      <S.CreditCardNicknameInputFormLayout>
+        <S.CreditCardPreview>
+          <CreditCard
+            fullFilled
+            creditCard={{
+              companyId: creditCardForm.companyId,
+              number: creditCardForm.number,
+              expiry: creditCardForm.expiry,
+              owner: creditCardForm.owner,
+            }}
+          />
+        </S.CreditCardPreview>
+
+        <NicknameInput
+          value={nickname}
+          onChange={handleNicknameInput}
+          placeholder="카드 별명을 입력하세요"
+        />
+      </S.CreditCardNicknameInputFormLayout>
+      <ControlButton
+        onClick={submitNicknameInput}
+      >
+        {nickname.length > 0 ? '확인' : '건너뛰기'}
+      </ControlButton>
+    </>
   );
 }
 export default CreditCardNicknameInputForm;

@@ -42,5 +42,3 @@ export const creditCardListStore = {
     return creditCardList;
   }
 };
-
-export default null;
