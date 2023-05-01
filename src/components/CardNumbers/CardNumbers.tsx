@@ -18,6 +18,10 @@ const CardNumbers = ({ cardNumbers, isSetCardNumbers }: CardNumbersProps) => {
 
     if (!isSetCardNumbers(currentOrder, e.target.value)) return;
 
+    focusNextInput(currentOrder);
+  };
+
+  const focusNextInput = (currentOrder: number) => {
     if (cardRefs[currentOrder].current?.value.length === 4) {
       cardRefs[currentOrder + 1].current?.focus();
     }

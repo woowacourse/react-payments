@@ -12,10 +12,14 @@ const CardPassword = ({ passwords, isSetPasswords }: CardPasswordProps) => {
   const cardRefs = useContext(RefContext);
 
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const currentOrder = Number(e.target.dataset['order']) + 8;
+    const currentOrder = Number(e.target.dataset['order']);
 
-    isSetPasswords(Number(e.target.dataset['order']), e.target.value);
+    isSetPasswords(currentOrder - 8, e.target.value);
 
+    focusNextInput(currentOrder);
+  };
+
+  const focusNextInput = (currentOrder: number) => {
     if (currentOrder === 8 && passwords[0].length === 0) {
       cardRefs[currentOrder + 1].current?.focus();
     }
@@ -32,7 +36,7 @@ const CardPassword = ({ passwords, isSetPasswords }: CardPasswordProps) => {
             ref={cardRefs[8]}
             onChange={handleCardInputChange}
             value={passwords[0]}
-            order={0}
+            order={8}
             placeholder="•"
             required={true}
           />
@@ -44,7 +48,7 @@ const CardPassword = ({ passwords, isSetPasswords }: CardPasswordProps) => {
             ref={cardRefs[9]}
             onChange={handleCardInputChange}
             value={passwords[1]}
-            order={1}
+            order={9}
             placeholder="•"
             required={true}
           />

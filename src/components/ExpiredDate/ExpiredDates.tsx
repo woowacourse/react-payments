@@ -14,13 +14,15 @@ const ExpiredDate = ({ expiredDates, isSetExpiredDates }: ExpiredDateProps) => {
 
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!(e.target instanceof HTMLInputElement)) return;
-    const currentOrder = Number(e.target.dataset['order']) + 4;
+    const currentOrder = Number(e.target.dataset['order']);
 
-    if (!isSetExpiredDates(Number(e.target.dataset['order']), e.target.value))
-      return;
+    if (!isSetExpiredDates(currentOrder - 4, e.target.value)) return;
 
+    focusNextInput(currentOrder);
+  };
+
+  const focusNextInput = (currentOrder: number) => {
     if (cardRefs[currentOrder].current?.value.length === 2) {
-      if (currentOrder === 1) return;
       cardRefs[currentOrder + 1].current?.focus();
     }
   };
@@ -35,7 +37,7 @@ const ExpiredDate = ({ expiredDates, isSetExpiredDates }: ExpiredDateProps) => {
           ref={cardRefs[4]}
           onChange={handleCardInputChange}
           value={expiredDates[0]}
-          order={0}
+          order={4}
           placeholder="MM"
           required={true}
         />
@@ -48,7 +50,7 @@ const ExpiredDate = ({ expiredDates, isSetExpiredDates }: ExpiredDateProps) => {
           ref={cardRefs[5]}
           onChange={handleCardInputChange}
           value={expiredDates[1]}
-          order={1}
+          order={5}
           placeholder="YY"
           required={true}
         />

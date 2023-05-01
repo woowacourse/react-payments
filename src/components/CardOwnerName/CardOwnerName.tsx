@@ -31,6 +31,7 @@ const CardOwnerName = ({ ownerName, isSetOwnerName }: CardOwnerNameProps) => {
           type="text"
           maxLength={30}
           ref={cardRefs[6]}
+          order={6}
           onChange={handleCardInputChange}
           value={ownerName}
           placeholder="카드에 표시된 영어 이름을 입력하세요."

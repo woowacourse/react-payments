@@ -18,11 +18,16 @@ const SecurityCode = ({
 
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!(e.target instanceof HTMLInputElement)) return;
+    const currentOrder = Number(e.target.dataset['order']);
 
     if (!isSetSecurityCode(e.target.value)) return;
 
-    if (cardRefs[7].current?.value.length === 3) {
-      cardRefs[8].current?.focus();
+    focusNextInput(currentOrder);
+  };
+
+  const focusNextInput = (currentOrder: number) => {
+    if (cardRefs[currentOrder].current?.value.length === 3) {
+      cardRefs[currentOrder + 1].current?.focus();
     }
   };
 
@@ -37,6 +42,7 @@ const SecurityCode = ({
             ref={cardRefs[7]}
             onChange={handleCardInputChange}
             value={securityCode}
+            order={7}
             placeholder="•••"
             required={true}
           />
