@@ -1,23 +1,17 @@
+import { memo, useState } from "react";
 import { CardNumber } from "../../types";
-import {
-  hasInvalidKey,
-  isFulfilledObject,
-  isFulfilledString,
-  isNumeric,
-  isTheOtherGroupFulfilled,
-} from "../../validator/Validator";
+import { isFulfilledObject, isFulfilledString, isNumeric, isTheOtherGroupFulfilled } from "../../validator/Validator";
 import { ErrorMessage } from "../CardExpirationDateInput/CardExpirationDateInput";
 import { InputContainer, Input, Label } from "../common";
 
 type CardNumberInputProps = {
   cardNumber: CardNumber;
-  error: { cardNumberError: boolean; expirationError: boolean };
   setCardNumber: (value: CardNumber) => void;
-  setError: (value: { cardNumberError: boolean; expirationError: boolean }) => void;
 };
 
-const CardNumberInput = ({ cardNumber, error, setCardNumber, setError }: CardNumberInputProps) => {
+const CardNumberInput = ({ cardNumber, setCardNumber }: CardNumberInputProps) => {
   const { firstGroup, secondGroup, thirdGroup, fourthGroup } = cardNumber;
+  const [error, setError] = useState<boolean>(false);
 
   const onChangeCardNumberHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
@@ -25,25 +19,24 @@ const CardNumberInput = ({ cardNumber, error, setCardNumber, setError }: CardNum
     if (!isNumeric(value)) return;
     setCardNumber({ ...cardNumber, [name]: value });
 
-    if (isTheOtherGroupFulfilled(cardNumber, name) && isFulfilledString(value, 4))
-      setError({ ...error, cardNumberError: false });
+    if (isTheOtherGroupFulfilled(cardNumber, name) && isFulfilledString(value, 4) && error) setError(false);
   };
 
   const onBlurCardNumberHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
 
-    if (!isFulfilledString(value, 4)) {
-      setError({ ...error, cardNumberError: true });
+    if (!isFulfilledString(value, 4) && !error) {
+      setError(true);
       return;
     }
 
-    if (isFulfilledObject(cardNumber, 4)) setError({ ...error, cardNumberError: false });
+    if (isFulfilledObject(cardNumber, 4) && error) setError(false);
   };
 
   return (
     <Label>
       카드번호
-      <InputContainer width="318px" border={error.cardNumberError ? "3px solid #f09c9c" : "none"}>
+      <InputContainer width="318px" border={error ? "3px solid #f09c9c" : "none"}>
         <Input
           value={firstGroup}
           name="firstGroup"
@@ -104,9 +97,9 @@ const CardNumberInput = ({ cardNumber, error, setCardNumber, setError }: CardNum
           onBlur={onBlurCardNumberHandler}
         />
       </InputContainer>
-      {error.cardNumberError && <ErrorMessage>카드번호 입력 형식이 잘못되었습니다.</ErrorMessage>}
+      {error && <ErrorMessage>카드번호 입력 형식이 잘못되었습니다.</ErrorMessage>}
     </Label>
   );
 };
 
-export default CardNumberInput;
+export default memo(CardNumberInput);

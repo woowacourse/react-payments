@@ -1,3 +1,4 @@
+import { memo } from "react";
 import styled from "styled-components";
 import { InputContainer, Input, Label } from "../common";
 import { CardExpirationDate } from "../../types";
@@ -5,14 +6,14 @@ import { isNumeric, isValidMonth } from "../../validator/Validator";
 
 type CardExpirationDateInputProps = {
   expirationDate: CardExpirationDate;
-  error: { cardNumberError: boolean; expirationError: boolean };
+  expirationError: boolean;
   setExpirationDate: (value: CardExpirationDate) => void;
-  setError: (value: { cardNumberError: boolean; expirationError: boolean }) => void;
+  setError: (value: boolean) => void;
 };
 
 const CardExpirationDateInput = ({
   expirationDate,
-  error,
+  expirationError,
   setExpirationDate,
   setError,
 }: CardExpirationDateInputProps) => {
@@ -26,14 +27,14 @@ const CardExpirationDateInput = ({
     setExpirationDate({ ...expirationDate, [name]: value });
 
     if (name === "month") {
-      setError({ ...error, expirationError: isValidMonth(value) ? false : true });
+      setError(isValidMonth(value) ? false : true);
     }
   };
 
   return (
     <Label>
       만료일
-      <InputContainer width="137px" border={error.expirationError ? "3px solid #f09c9c" : "none"}>
+      <InputContainer width="137px" border={expirationError ? "3px solid #f09c9c" : "none"}>
         <Input
           value={month}
           name="month"
@@ -64,7 +65,7 @@ const CardExpirationDateInput = ({
           onChange={onChangeExpirationDatehandler}
         />
       </InputContainer>
-      {error.expirationError && <ErrorMessage>날짜 입력 형식이 잘못되었습니다.</ErrorMessage>}
+      {expirationError && <ErrorMessage>날짜 입력 형식이 잘못되었습니다.</ErrorMessage>}
     </Label>
   );
 };
@@ -85,4 +86,4 @@ const Slash = styled.span`
   color: #737373;
 `;
 
-export default CardExpirationDateInput;
+export default memo(CardExpirationDateInput);

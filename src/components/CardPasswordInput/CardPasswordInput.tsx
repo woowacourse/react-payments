@@ -1,3 +1,4 @@
+import { memo } from "react";
 import styled from "styled-components";
 import { InputContainer, Input, Label } from "../common";
 import { CardPassword } from "../../types";
@@ -84,4 +85,4 @@ const PasswordIcon = styled.div`
   letter-spacing: 0em;
 `;
 
-export default CardPasswordInput;
+export default memo(CardPasswordInput);

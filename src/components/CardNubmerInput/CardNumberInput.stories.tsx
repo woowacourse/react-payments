@@ -11,9 +11,7 @@ export const Default = () => (
     <GlobalStyle />
     <CardNumberInput
       cardNumber={{ firstGroup: "", secondGroup: "", thirdGroup: "", fourthGroup: "" }}
-      error={{ cardNumberError: false, expirationError: false }}
       setCardNumber={() => {}}
-      setError={() => {}}
     ></CardNumberInput>
   </>
 );

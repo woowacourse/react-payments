@@ -73,8 +73,7 @@ const AddCardPage = () => {
       isFulfilledObject(expirationDate, 2) &&
       isFulfilledObject(password, 1) &&
       isFulfilledString(securityCode, 3) &&
-      !error.cardNumberError &&
-      !error.expirationError;
+      !error;
 
     return addButtonAppearCondition;
   };
@@ -110,10 +109,10 @@ const AddCardPage = () => {
         <CardPreview card={{ cardCompany, cardNumber, expirationDate, ownerName }} />
       </CardPreviewButton>
       <Form onSubmit={onSubmitHandler} onChange={onChangeFormHandler}>
-        <CardNumberInput cardNumber={cardNumber} error={error} setCardNumber={setCardNumber} setError={setError} />
+        <CardNumberInput cardNumber={cardNumber} setCardNumber={setCardNumber} />
         <CardExpirationDateInput
           expirationDate={expirationDate}
-          error={error}
+          expirationError={error}
           setExpirationDate={setExpirationDate}
           setError={setError}
         />

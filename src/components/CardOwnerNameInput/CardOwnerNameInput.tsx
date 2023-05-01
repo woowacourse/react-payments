@@ -1,3 +1,4 @@
+import { memo } from "react";
 import styled from "styled-components";
 import { isEndsWithSpace, isValidOwnerName } from "../../validator/Validator";
 import { InputContainer, Input, Label } from "../common";
@@ -54,4 +55,4 @@ const Div = styled.div`
   justify-content: space-between;
 `;
 
-export default CardOwnerNameInput;
+export default memo(CardOwnerNameInput);

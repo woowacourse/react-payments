@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { isNumeric } from "../../validator/Validator";
 import { InputContainer, Input, Label } from "../common";
 
@@ -36,4 +37,4 @@ const CardSecurityCodeInput = ({ securityCode, setSecurityCode }: CardSecurityCo
   );
 };
 
-export default CardSecurityCodeInput;
+export default memo(CardSecurityCodeInput);

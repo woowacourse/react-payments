@@ -11,7 +11,7 @@ export const Default = () => (
     <GlobalStyle />
     <CardExpirationDateInput
       expirationDate={{ month: "", year: "" }}
-      error={{ cardNumberError: false, expirationError: false }}
+      expirationError={false}
       setExpirationDate={() => {}}
       setError={() => {}}
     ></CardExpirationDateInput>

@@ -3,14 +3,14 @@ import { CARD_LOGO } from "../components/CardCompanyIcon/CardCompanyIcon";
 import { CardCompany, CardExpirationDate, CardNumber, CardPassword } from "../types";
 
 interface AddCardState {
-  error: { cardNumberError: boolean; expirationError: boolean };
+  error: boolean;
   cardCompany: CardCompany;
   cardNumber: CardNumber;
   expirationDate: CardExpirationDate;
   ownerName: string;
   securityCode: string;
   password: CardPassword;
-  setError: (value: { cardNumberError: boolean; expirationError: boolean }) => void;
+  setError: (value: boolean) => void;
   setCardCompany: (value: CardCompany) => void;
   setCardNumber: (value: CardNumber) => void;
   setExpirationDate: (value: CardExpirationDate) => void;
@@ -21,10 +21,7 @@ interface AddCardState {
 
 const initialValue = {
   modalOpen: false,
-  error: {
-    cardNumberError: false,
-    expirationError: false,
-  },
+  error: true,
   cardCompany: undefined,
   cardNumber: {
     firstGroup: "",
@@ -52,10 +49,7 @@ const initialValue = {
 export const AddCardStateContext = createContext<AddCardState>(initialValue);
 
 export const AddCardStateContextProvider = ({ children }: React.PropsWithChildren) => {
-  const [error, setError] = useState<{ cardNumberError: boolean; expirationError: boolean }>({
-    cardNumberError: false,
-    expirationError: false,
-  });
+  const [error, setError] = useState<boolean>(false);
   const [cardCompany, setCardCompany] = useState<keyof typeof CARD_LOGO>();
   const [cardNumber, setCardNumber] = useState<CardNumber>({
     firstGroup: "",
