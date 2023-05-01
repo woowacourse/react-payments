@@ -11,7 +11,7 @@ const Bank = (props: Props) => {
   return (
     <BankWrapper id={props.id} onClick={props.onClick}>
       <img src={props.imgSrc} alt="도움말" />
-      <span style={props.id===BANK_ID.KAKAO_CARD ? { marginLeft: '-5px' } : { marginLeft: '-1px' }}>{props.id}</span>
+      <span style={props.id === BANK_ID.KAKAO_CARD ? { marginLeft: '-5px' } : { marginLeft: '-1px' }}>{props.id}</span>
     </BankWrapper>
   );
 };

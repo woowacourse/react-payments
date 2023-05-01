@@ -1,7 +1,6 @@
 import React, { HTMLAttributes } from 'react';
 import styled from 'styled-components';
 
-
 interface RegisterCardNameInputProps extends HTMLAttributes<HTMLInputElement> {
   value?: string;
   isAutoFocus: boolean;
@@ -9,15 +8,14 @@ interface RegisterCardNameInputProps extends HTMLAttributes<HTMLInputElement> {
 }
 
 const CardNameInput = (props: RegisterCardNameInputProps) => {
-
   return (
-      <CardNameInputWrapper
-        placeholder={props.placeholder}
-        value={props.value}
-        autoFocus={props.isAutoFocus}
-        required={props.isRequired}
-        onChange={props.onChange}
-      />
+    <CardNameInputWrapper
+      placeholder={props.placeholder}
+      value={props.value}
+      autoFocus={props.isAutoFocus}
+      required={props.isRequired}
+      onChange={props.onChange}
+    />
   );
 };
 
@@ -33,6 +31,5 @@ const CardNameInputWrapper = styled.input`
   border: none;
   border-bottom: 1.5px solid #737373;
 `;
-
 
 export default CardNameInput;

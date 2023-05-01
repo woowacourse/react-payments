@@ -67,7 +67,7 @@ const inputLengthValidation = (card: CardType) => {
   return true;
 };
 
-export const inputFormValidation = (realCardNumber:string, card: CardType) => {
+export const inputFormValidation = (realCardNumber: string, card: CardType) => {
   if (
     cardNumberValidation(realCardNumber) &&
     expiredDateValidation(card.expiredDate) &&

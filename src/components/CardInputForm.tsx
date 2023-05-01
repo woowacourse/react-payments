@@ -91,7 +91,6 @@ const CardInputForm = (props: CardInputFormProps) => {
     }
   };
 
-  console.log(realCardNumber);
   return (
     <CardInputFormWrapper onSubmit={props.onSubmit}>
       <InputSetWrapper>

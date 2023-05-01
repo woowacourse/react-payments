@@ -1,8 +1,8 @@
-import { StoryObj } from "@storybook/react";
-import Header from "../components/common/Header";
+import { StoryObj } from '@storybook/react';
+import Header from '../components/common/Header';
 
 const meta = {
-  title: "Header",
+  title: 'Header',
   component: Header,
 };
 
@@ -11,14 +11,14 @@ type Story = StoryObj<typeof meta>;
 
 export const MyCardHeader: Story = {
   args: {
-    title: "보유 카드",
+    title: '보유 카드',
     goToMainPage: false,
   },
 };
 
 export const AddCardHeader: Story = {
   args: {
-    title: "카드 추가",
+    title: '카드 추가',
     goToMainPage: true,
   },
 };
