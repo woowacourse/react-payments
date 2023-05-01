@@ -16,6 +16,14 @@ const Style = {
     font: 700 14px/16px "Roboto";
     color: #575757;
   `,
+  CardName: styled.h1`
+    margin-top: 12px;
+    height: fit-content;
+
+    text-align: center;
+    font: 700 14px/16px "Roboto";
+    color: #575757;
+  `,
 };
 
 export default Style;

@@ -1,51 +1,57 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import Style from "./CardDetailFormStyled";
 
 import CardNumberInput from "./CardNumberInput/CardNumberInput";
 import CardDateInput from "./CardDateInput/CardDateInput";
 import CardOwnerNameInput from "./CardOwnerNameInput/CardOwnerNameInput";
 import CardCVCInput from "./CardCVCInput/CardCVCInput";
 import CardPasswordInput from "./CardPasswordInput/CardPasswordInput";
-
-import Style from "./CardDetailFormStyled";
-import useWarningText from "../../../hooks/useWarningText";
 import InputGuide from "../../common/InputGuide/InputGuide";
 
-type CardDetailFormProps = {
-  changeCardNumber: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  cardNumberHidden: string;
+import useWarningText from "../../../hooks/useWarningText";
+import { TYPE, NAVIGATE } from "../../../abstract/constants";
+import { CardDetailContext } from "../../../context/CardDetailContext";
+import CardDetailView from "../../CardDetailView/CardDetailView";
+import { Card } from "../../../types/card";
 
-  changeCardDate: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  cardDate: string;
+interface CardDetailFormProps {
+  setLastCard: (card: Card) => void;
+  openModal: () => void;
+}
 
-  changeCardOwnerName: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  cardOwnerName: string;
+function CardDetailForm({ setLastCard, openModal }: CardDetailFormProps) {
+  const navigate = useNavigate();
+  const { warningText, isWrongForm } = useWarningText();
+  const {
+    cardNumberOrigin,
+    cardNumberHidden,
+    cardDate,
+    cardOwnerName,
+    cardCVC,
+    cardPassword,
+    cardCompany,
+  } = useContext(CardDetailContext);
 
-  changeCardCVC: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  cardCVC: string;
+  const submitCreditCard = () => {
+    const newCard: Card = {
+      cardNumberOrigin,
+      cardNumberHidden,
+      cardDate,
+      cardOwnerName,
+      cardCVC,
+      cardPassword,
+      cardCompany,
+    };
 
-  changeCardPassword: (e: React.FormEvent<HTMLInputElement>) => void;
-  cardPassword: [string, string];
+    setLastCard(newCard);
 
-  submitCreditCard: (e: React.FormEvent<HTMLFormElement>) => void;
-};
+    navigate(NAVIGATE.ADD_CARD_NAME);
+  };
 
-function CardDetailForm({
-  changeCardNumber,
-  cardNumberHidden,
-  changeCardDate,
-  cardDate,
-  changeCardOwnerName,
-  cardOwnerName,
-  changeCardCVC,
-  cardCVC,
-  changeCardPassword,
-  cardPassword,
-  submitCreditCard,
-}: CardDetailFormProps) {
-  const { warningText, isRightForm } = useWarningText();
   const handelChange = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const isError = isRightForm(
+    const isError = isWrongForm(
       cardNumberHidden,
       cardDate,
       cardCVC,
@@ -53,33 +59,34 @@ function CardDetailForm({
     );
 
     if (!isError) {
-      submitCreditCard(e);
+      submitCreditCard();
     }
 
     return;
   };
 
   return (
-    <Style.Form onSubmit={handelChange}>
-      <CardNumberInput
-        changeCardNumber={changeCardNumber}
-        cardNumberHidden={cardNumberHidden}
-      />
-      <CardDateInput changeCardDate={changeCardDate} cardDate={cardDate} />
-      <CardOwnerNameInput
-        changeCardOwnerName={changeCardOwnerName}
-        cardOwnerName={cardOwnerName}
-      />
-      <CardCVCInput changeCardCVC={changeCardCVC} cardCVC={cardCVC} />
-      <CardPasswordInput
-        changeCardPassword={changeCardPassword}
-        cardPassword={cardPassword}
-      />
-      <Style.SubmitLayout>
-        <InputGuide warningText={warningText} />
-        <Style.SubmitButton type="submit" value={"다음"} />
-      </Style.SubmitLayout>
-    </Style.Form>
+    <>
+      <Style.CardViewSection onClick={openModal}>
+        <CardDetailView
+          cardNumberHidden={cardNumberHidden}
+          cardDate={cardDate}
+          cardOwnerName={cardOwnerName}
+          cardCompany={cardCompany}
+        />
+      </Style.CardViewSection>
+      <Style.Form onSubmit={handelChange}>
+        <CardNumberInput />
+        <CardDateInput />
+        <CardOwnerNameInput />
+        <CardCVCInput />
+        <CardPasswordInput />
+        <Style.SubmitLayout>
+          <InputGuide warningText={warningText} />
+          <Style.SubmitButton type={TYPE.SUBMIT} value={"다음"} />
+        </Style.SubmitLayout>
+      </Style.Form>
+    </>
   );
 }
 

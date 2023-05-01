@@ -2,19 +2,20 @@ import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CardDetailPage from "./component/CardDetailPage/CardDetailPage";
 import CardListPage from "./component/CardListPage/CardListPage";
-
-type CreditCard = {
-  cardNumberOrigin: string;
-  cardNumberHidden: string;
-  cardDate: string;
-  cardOwnerName: string;
-  cardCVC: string;
-  cardPassword: [string, string];
-};
+import { Card, CreditCard } from "./types/card";
+import CardNamePage from "./component/CardNamePage/CardNamePage";
 
 function App() {
   const [creditCardList, setCreditCardList] = useState<CreditCard[]>([]);
-
+  const [lastCard, setLastCard] = useState<Card>({
+    cardNumberOrigin: "",
+    cardNumberHidden: "",
+    cardDate: "",
+    cardOwnerName: "",
+    cardCVC: "",
+    cardPassword: ["", ""],
+    cardCompany: "없음",
+  });
   const addCreditCard = (card: CreditCard) => {
     setCreditCardList([...creditCardList, card]);
   };
@@ -29,7 +30,13 @@ function App() {
           />
           <Route
             path="/addCardForm"
-            element={<CardDetailPage addCreditCard={addCreditCard} />}
+            element={<CardDetailPage setLastCard={setLastCard} />}
+          />
+          <Route
+            path="/addCardName"
+            element={
+              <CardNamePage addCreditCard={addCreditCard} lastCard={lastCard} />
+            }
           />
         </Routes>
       </BrowserRouter>

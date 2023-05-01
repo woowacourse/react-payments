@@ -1,70 +1,35 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-
-import CardDetailHeader from "./CardDetailHeader/CardDetailHeader";
-import CardDetailView from "../CardDetailView/CardDetailView";
-import CardDetailForm from "./CardDetailForm/CardDetailForm";
+import React, { useState } from "react";
 import Style from "./CardDetailPageStyled";
 
-import { CreditCard } from "../../types/card";
+import CardDetailHeader from "./CardDetailHeader/CardDetailHeader";
+import CardDetailForm from "./CardDetailForm/CardDetailForm";
 
-import useCardNumber from "../../hooks/useCardNumber";
-import useCardDate from "../../hooks/useCardDate";
-import useCardOwnerName from "../../hooks/useCardOwnerName";
-import useCardCVC from "../../hooks/useCardCVC";
-import useCardPassword from "../../hooks/useCardPassword";
+import { Card } from "../../types/card";
 
-type CardDetailPageProps = {
-  addCreditCard: (card: CreditCard) => void;
-};
+import { CardDetailProvider } from "../../context/CardDetailContext";
+import CardModal from "../CardModal/CardModal";
 
-function CardDetailPage({ addCreditCard }: CardDetailPageProps) {
-  const navigate = useNavigate();
-  const { cardNumberOrigin, cardNumberHidden, changeCardNumber } =
-    useCardNumber();
-  const { cardDate, changeCardDate } = useCardDate();
-  const { cardOwnerName, changeCardOwnerName } = useCardOwnerName();
-  const { cardCVC, changeCardCVC } = useCardCVC();
-  const { cardPassword, changeCardPassword } = useCardPassword();
+interface CardDetailPageProps {
+  setLastCard: (card: Card) => void;
+}
 
-  const submitCreditCard = (e: React.FormEvent<HTMLFormElement>) => {
-    const newCard: CreditCard = {
-      cardNumberOrigin,
-      cardNumberHidden,
-      cardDate,
-      cardOwnerName,
-      cardCVC,
-      cardPassword,
-    };
+function CardDetailPage({ setLastCard }: CardDetailPageProps) {
+  const [isOpened, setIsOpened] = useState(true);
 
-    e.preventDefault();
-    navigate("/");
-    addCreditCard(newCard);
+  const closeModal = () => {
+    setIsOpened(false);
   };
 
-  const detailFromProps = {
-    changeCardNumber: changeCardNumber,
-    cardNumberHidden: cardNumberHidden,
-    changeCardDate: changeCardDate,
-    cardDate: cardDate,
-    changeCardOwnerName: changeCardOwnerName,
-    cardOwnerName: cardOwnerName,
-    changeCardCVC: changeCardCVC,
-    cardCVC: cardCVC,
-    cardPassword: cardPassword,
-    changeCardPassword: changeCardPassword,
-    submitCreditCard: submitCreditCard,
+  const openModal = () => {
+    setIsOpened(true);
   };
-
   return (
     <Style.Page>
       <CardDetailHeader />
-      <CardDetailView
-        cardNumberHidden={cardNumberHidden}
-        cardDate={cardDate}
-        cardOwnerName={cardOwnerName}
-      />
-      <CardDetailForm {...detailFromProps} />
+      <CardDetailProvider>
+        {isOpened ? <CardModal closeModal={closeModal} /> : null}
+        <CardDetailForm setLastCard={setLastCard} openModal={openModal} />
+      </CardDetailProvider>
     </Style.Page>
   );
 }

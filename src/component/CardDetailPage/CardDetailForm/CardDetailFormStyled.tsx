@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
 const Style = {
+  CardViewSection: styled.section`
+    align-self: center;
+  `,
   Form: styled.form`
     display: flex;
     flex-direction: column;

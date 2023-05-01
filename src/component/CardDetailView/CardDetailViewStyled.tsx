@@ -5,16 +5,27 @@ const Style = {
     display: flex;
     flex-direction: column;
     align-self: center;
-    gap: 11px;
+    gap: 10px;
 
     width: 280px;
     height: 160px;
 
-    background: #333333;
+    background: ${(props) => props.theme.background};
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
 
-    padding: 40px 20px 15px 20px;
+    padding: 10px 20px 15px 20px;
+  `,
+  Company: styled.h1`
+    font: 400 19px "Roboto";
+    color: white;
+    letter-spacing: -0.5px;
+  `,
+  CompanyHint: styled.h1`
+    align-self: center;
+    font: 400 19px "Roboto";
+    color: white;
+    letter-spacing: -0.5px;
   `,
   ICDiv: styled.div`
     width: 53px;
@@ -52,4 +63,9 @@ const Style = {
   `,
 };
 
+Style.CreditCard.defaultProps = {
+  theme: {
+    background: "#778899",
+  },
+};
 export default Style;

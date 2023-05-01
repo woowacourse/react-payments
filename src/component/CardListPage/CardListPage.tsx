@@ -1,12 +1,14 @@
 import React from "react";
 import Style from "./CardListPageStyled";
+
 import CardListHeader from "./CardListHeader/CardListHeader";
 import CardList from "./CardList/CardList";
+
 import { CreditCard } from "../../types/card";
 
-type CardListPageProps = {
+interface CardListPageProps {
   creditCardList: CreditCard[];
-};
+}
 
 function CardListPage({ creditCardList }: CardListPageProps) {
   return (
