@@ -16,6 +16,8 @@ export const Root = styled.header`
   padding: 0 25px;
   font-size: 1.2rem;
 
+  z-index: 1;
+
   background-color: white;
 `;
 

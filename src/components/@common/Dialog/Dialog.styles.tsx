@@ -4,6 +4,7 @@ export const BackDrop = styled.div`
   position: fixed;
   inset: 0;
   background-color: hsla(0, 0%, 0%, 0.439);
+  z-index: 999;
 `;
 
 export const Content = styled.div`
