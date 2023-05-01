@@ -63,6 +63,7 @@ const CardPassword = ({ isError, updateInputValue, updateInputError }: CardPassw
           inputMode="numeric"
           pattern={PATTERN.PASSWORD}
           required
+          aria-label="첫 번째 비밀번호 입력"
           isError={isError}
           onChange={onFirstInputChange}
         />
@@ -76,6 +77,7 @@ const CardPassword = ({ isError, updateInputValue, updateInputError }: CardPassw
           inputMode="numeric"
           pattern={PATTERN.PASSWORD}
           required
+          aria-label="두 번째 비밀번호 입력"
           aria-labelledby="password-label"
           isError={isError}
           onChange={onChange}
