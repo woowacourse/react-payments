@@ -1,7 +1,7 @@
 import React from "react";
 import { CardIDProps, CardNumberProps, ExpireDateProps } from "src/interfaces";
 import { Styled as S } from "./Card.styles";
-import { BANK_LIST } from "src/utils/constant";
+import { BANK_LIST, NUMBERS } from "src/utils/constant";
 
 interface Props {
   cardName?: CardIDProps;
@@ -29,6 +29,10 @@ function Card({
   });
 
   const name = BANK_LIST.find(({ id }) => id === cardName)?.name;
+  const expire =
+    expireDate[0].length === NUMBERS.EACH_MM_YY
+      ? expireDate.join("/")
+      : expireDate[0];
 
   return (
     <S.CardContainer onClick={onClick} cardName={cardName} isModalOpen={isOpen}>
@@ -37,7 +41,7 @@ function Card({
       <S.CardNumberContainer>{CardNumbers}</S.CardNumberContainer>
       <S.CardNameContainer>
         <span>{ownerName}</span>
-        <span>{expireDate.join("/")}</span>
+        <span>{expire}</span>
       </S.CardNameContainer>
     </S.CardContainer>
   );
