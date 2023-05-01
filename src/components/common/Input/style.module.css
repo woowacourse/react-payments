@@ -1,24 +1,48 @@
 .input {
   min-width: 10px;
   padding: 12px 12px;
+  font-size: 16px;
   border-radius: 7px;
   background-color: transparent;
-  border: 1px solid #d6d6d6;
   outline: 0;
 
   transition: all 0.2s ease-in-out;
 }
 
-.input:focus {
-  border-color: #8dc9ff;
+.input.outline {
+  border: 1px solid var(--light-gray-2);
+}
+
+.input.outline:focus {
+  border-color: var(--light-blue-3);
   box-shadow: 0 0 0 3px rgba(141, 201, 255, 0.4);
 }
 
-.input.error {
-  background-color: #fff6f6;
-  border-color: #eb7171;
+.input.underline {
+  border-radius: 7px 7px 0 0;
+  border: 0;
+  box-shadow: inset 0px -1px 0px var(--light-gray-2);
 }
 
-.input.error:focus {
+.input.underline:focus {
+  background-color: var(--light-gray-1);
+  box-shadow: inset 0px -2px 0px var(--blue);
+}
+
+.input.outline.error {
+  background-color: var(--light-red-1);
+  border-color: var(--light-red-3);
+}
+
+.input.outline.error:focus {
   box-shadow: 0 0 0 3px rgba(255, 177, 177, 0.4);
+}
+
+.input.underline.error {
+  background-color: var(--light-red-1);
+  box-shadow: inset 0px -1px 0px var(--light-red-3);
+}
+
+.input.underline.error:focus {
+  box-shadow: inset 0px -2px 0px var(--light-red-3);
 }
