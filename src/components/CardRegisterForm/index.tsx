@@ -74,54 +74,50 @@ const CardRegisterForm = () => {
           <div className={styles.inputContainer}>
             <Input
               type="text"
+              name="cardNumber1"
               inputMode="numeric"
+              ref={cardNumberInputRef}
               minLength={4}
               maxLength={4}
               required
-              tabIndex={1}
-              autoFocus
               value={cardNumber1}
-              onChange={(e) => handleNumberChange(e, setCardNumber1)}
-              ref={inputRefs[0]}
+              onChange={handleNumberChange}
               placeholder={CARD_NUMBER_INPUT_PLACEHOLDER}
             />
             <span>-</span>
             <Input
               type="text"
+              name="cardNumber2"
               inputMode="numeric"
               minLength={4}
               maxLength={4}
               required
-              tabIndex={2}
               value={cardNumber2}
-              onChange={(e) => handleNumberChange(e, setCardNumber2)}
-              ref={inputRefs[1]}
+              onChange={handleNumberChange}
               placeholder={CARD_NUMBER_INPUT_PLACEHOLDER}
             />
             <span>-</span>
             <Input
               type="password"
+              name="cardNumber3"
               inputMode="numeric"
               minLength={4}
               maxLength={4}
               required
-              tabIndex={3}
               value={cardNumber3}
-              onChange={(e) => handleNumberChange(e, setCardNumber3)}
-              ref={inputRefs[2]}
+              onChange={handleNumberChange}
               placeholder={CARD_NUMBER_INPUT_PLACEHOLDER}
             />
             <span>-</span>
             <Input
               type="password"
+              name="cardNumber4"
               inputMode="numeric"
               minLength={4}
               maxLength={4}
               required
-              tabIndex={4}
               value={cardNumber4}
-              onChange={(e) => handleNumberChange(e, setCardNumber4)}
-              ref={inputRefs[3]}
+              onChange={handleNumberChange}
               placeholder={CARD_NUMBER_INPUT_PLACEHOLDER}
             />
           </div>
@@ -132,28 +128,27 @@ const CardRegisterForm = () => {
           <div className={styles.expirationDate}>
             <Input
               type="text"
+              name="expiredMonth"
               inputMode="numeric"
+              ref={expiredMonthInputRef}
               minLength={2}
               maxLength={2}
               required
-              tabIndex={5}
               placeholder="MM"
               value={expiredMonth}
-              onChange={(e) => handleNumberChange(e, setExpiredMonth)}
-              ref={inputRefs[4]}
+              onChange={handleNumberChange}
             />
             <span>/</span>
             <Input
               type="text"
+              name="expiredYear"
               inputMode="numeric"
               minLength={2}
               maxLength={2}
               required
-              tabIndex={6}
               placeholder="YY"
               value={expiredYear}
-              onChange={(e) => handleNumberChange(e, setExpiredYear)}
-              ref={inputRefs[5]}
+              onChange={handleNumberChange}
             />
           </div>
         </label>
@@ -165,12 +160,11 @@ const CardRegisterForm = () => {
             <div className={styles.ownerName}>
               <Input
                 type="text"
+                name="owner"
                 maxLength={20}
                 placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-                tabIndex={7}
                 value={owner}
-                onChange={(e) => handleOwnerChange(e)}
-                ref={inputRefs[6]}
+                onChange={handleOwnerChange}
               />
             </div>
           </label>
@@ -182,19 +176,18 @@ const CardRegisterForm = () => {
             <div className={styles.cvc}>
               <Input
                 type="password"
+                name="cvc"
                 inputMode="numeric"
                 minLength={3}
                 maxLength={3}
                 required
-                tabIndex={8}
                 value={cvc}
-                onChange={(e) => handleNumberChange(e, setCvc)}
-                ref={inputRefs[7]}
+                onChange={handleNumberChange}
               />
             </div>
 
             <Tooltip>
-              <TooltipButton tabIndex={12} />
+              <TooltipButton />
             </Tooltip>
           </div>
         </label>
@@ -204,25 +197,23 @@ const CardRegisterForm = () => {
           <div className={styles.cardPassword}>
             <Input
               type="password"
+              name="cardPassword1"
               inputMode="numeric"
               minLength={1}
               maxLength={1}
               required
-              tabIndex={9}
               value={cardPassword1}
-              onChange={(e) => handleNumberChange(e, setCardPassword1)}
-              ref={inputRefs[8]}
+              onChange={handleNumberChange}
             />
             <Input
               type="password"
+              name="cardPassword2"
               inputMode="numeric"
               minLength={1}
               maxLength={1}
               required
-              tabIndex={10}
               value={cardPassword2}
-              onChange={(e) => handleNumberChange(e, setCardPassword2)}
-              ref={inputRefs[9]}
+              onChange={handleNumberChange}
             />
             <p>﹒</p>
             <p>﹒</p>
@@ -230,9 +221,7 @@ const CardRegisterForm = () => {
         </label>
 
         {isCardFormFilled && (
-          <button tabIndex={11} className={styles.submitButton}>
-            다음
-          </button>
+          <button className={styles.submitButton}>다음</button>
         )}
       </form>
     </>
