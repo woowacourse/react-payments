@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import CardInput from './CardInput';
 import {
@@ -11,6 +11,7 @@ import {
   EXPIRED_DATE_PLUS_SYMBOL,
   EXPIRED_DATE_ERASE_SYMBOL,
   ERASE_UNTIL_CARD_NUMBER,
+  INPUT_MAX_LENGTH,
 } from '../constants';
 import { CardType } from '../types';
 import { QuestionMark } from '../assets';
@@ -35,6 +36,8 @@ const CardInputForm = (props: CardInputFormProps) => {
   const [realCardNumber, setRealCardNumber] = useState<string>('');
 
   const handleCardNumberChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if(e.target.value.length>INPUT_MAX_LENGTH.cardNumber) return 
+
     setRealCardNumber(realCardNumber + e.target.value[e.target.value.length - 1].trim());
 
     cardNumberSecureMode(e);
@@ -94,6 +97,8 @@ const CardInputForm = (props: CardInputFormProps) => {
   };
 
   const handleExpiredDateChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if(e.target.value.length>INPUT_MAX_LENGTH.expiredDate) return
+    
     card.expiredDate = e.target.value;
     props.setCard(card);
     if (e.target.value.length === EXPIRED_DATE_PLUS_SYMBOL) {
@@ -136,6 +141,10 @@ const CardInputForm = (props: CardInputFormProps) => {
     card.cvc = e.target.value;
     props.setCard(card);
   };
+
+  useEffect(()=>{
+    console.log(card.cardNumber, realCardNumber)
+  }, [card.cardNumber, realCardNumber])
 
   return (
     <CardInputFormWrapper onSubmit={props.onSubmit}>
