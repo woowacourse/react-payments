@@ -10,17 +10,16 @@ interface Props {
 function useCardList({ key, initialValue }: Props) {
   const saved = getItem(key);
   const savedList = (saved ? JSON.parse(saved) : []) as Array<CardListProps>;
-
   const [cardList, setCardList] = useState<Array<CardListProps>>([
     ...(initialValue ?? []),
     ...savedList,
   ]);
 
   const saveCard = (cardInfo: CardListProps) => {
-    const savedData = JSON.stringify([...cardList, cardInfo]);
-    setItem(key, savedData);
+    const newCardList = [...cardList, cardInfo];
 
-    setCardList((prev) => [...prev, cardInfo]);
+    setItem(key, JSON.stringify([...newCardList]));
+    setCardList(newCardList);
   };
 
   return { cardList, saveCard };
