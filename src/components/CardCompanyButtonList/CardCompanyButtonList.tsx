@@ -1,13 +1,15 @@
 import styled from "styled-components";
 import { CardCompany } from "../../types";
 import CardCompanyButton from "../CardCompanyButton/CardCompanyButton";
+import CARD_COMPANIES from "../../constants/cardCompanies";
 
 type CardCompanyButtonListProps = {
-  cardCompanies: CardCompany[];
   handleCardCompany: (company: CardCompany) => void;
 };
 
-const CardCompanyButtonList = ({ cardCompanies, handleCardCompany }: CardCompanyButtonListProps) => {
+const CardCompanyButtonList = ({ handleCardCompany }: CardCompanyButtonListProps) => {
+  const cardCompanies = Object.keys(CARD_COMPANIES) as CardCompany[];
+
   return (
     <CardCompanyButtonContainer>
       <Instruction>카드사 선택</Instruction>

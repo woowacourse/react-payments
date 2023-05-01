@@ -23,7 +23,6 @@ import { useNavigate } from "react-router-dom";
 import { isFulfilledObject, isFulfilledString, isValidMonth } from "../../validator/Validator";
 import useModal from "../../hooks/useModal";
 import CardCompanyButtonList from "../../components/CardCompanyButtonList/CardCompanyButtonList";
-import CARD_COMPANIES from "../../constants/cardCompanies";
 
 const AddCardPage = () => {
   const [cardNumber, setCardNumber] = useState<CardNumber>({
@@ -126,10 +125,7 @@ const AddCardPage = () => {
         </NextButton>
       </Form>
       <Modal isOpen={isModalOpen} closeModal={modalClose}>
-        <CardCompanyButtonList
-          cardCompanies={Object.keys(CARD_COMPANIES) as CardCompany[]}
-          handleCardCompany={handleCardCompany}
-        />
+        <CardCompanyButtonList handleCardCompany={handleCardCompany} />
       </Modal>
     </AddCardPageContainer>
   );
