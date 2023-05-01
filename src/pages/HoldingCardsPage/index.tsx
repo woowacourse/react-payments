@@ -4,7 +4,6 @@ import Card from '../../components/Card';
 import CardRegisterButton from '../../components/CardRegisterButton';
 
 import { useCardsContext } from '../../domain/context/CardsContext';
-import { uuid } from '../../utils/uuid';
 
 import styles from './holdingCardsPage.module.css';
 
@@ -29,7 +28,7 @@ const HoldingCardsPage = () => {
         )}
         <section className={styles.cardContainer}>
           {cards.map((card) => (
-            <div key={uuid()} className={styles.cardWrapper}>
+            <div key={card.id} className={styles.cardWrapper}>
               <Card
                 cardCompany={card.cardCompany}
                 cardNumber1={card.cardNumber1}
