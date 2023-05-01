@@ -47,13 +47,11 @@ export function useCardNumber() {
     cardRegisterInfo: { cardNumber },
     handleCardInfo,
   } = useCardRegisterContext();
-  const { error, reportError } = useErrors<CardNumber>();
+  const { error, reportError, initError } = useErrors<CardNumber>();
 
   const onBlur = ({ target }: FocusEvent<HTMLElement>) => {
     if (isInputElement(target)) {
-      target.validity.valid
-        ? reportError({ [target.name]: '' })
-        : reportError({ [target.name]: INVALID_FORMAT });
+      target.validity.valid ? initError(target.name) : reportError({ [target.name]: INVALID_FORMAT });
     }
   };
 
@@ -76,13 +74,11 @@ export function useCardExpirationDate() {
     cardRegisterInfo: { expirationDate },
     handleCardInfo,
   } = useCardRegisterContext();
-  const { error, reportError } = useErrors<CardNumber>();
+  const { error, reportError, initError } = useErrors<CardNumber>();
 
   const onBlur = ({ target }: FocusEvent<HTMLElement>) => {
     if (isInputElement(target)) {
-      target.validity.valid
-        ? reportError({ [target.name]: '' })
-        : reportError({ [target.name]: INVALID_FORMAT });
+      target.validity.valid ? initError(target.name) : reportError({ [target.name]: INVALID_FORMAT });
     }
   };
 
@@ -105,13 +101,11 @@ export function useCardName() {
     cardRegisterInfo: { holderName },
     handleCardInfo,
   } = useCardRegisterContext();
-  const { error, reportError } = useErrors<CardNumber>();
+  const { error, reportError, initError } = useErrors<CardNumber>();
 
   const onBlur = ({ target }: FocusEvent<HTMLElement>) => {
     if (isInputElement(target)) {
-      target.validity.valid
-        ? reportError({ [target.name]: '' })
-        : reportError({ [target.name]: INVALID_FORMAT });
+      target.validity.valid ? initError(target.name) : reportError({ [target.name]: INVALID_FORMAT });
     }
   };
 
@@ -129,13 +123,11 @@ export function useCardCVC() {
     cardRegisterInfo: { cvc },
     handleCardInfo,
   } = useCardRegisterContext();
-  const { error, reportError } = useErrors<CardNumber>();
+  const { error, reportError, initError } = useErrors<CardNumber>();
 
   const onBlur = ({ target }: FocusEvent<HTMLElement>) => {
     if (isInputElement(target)) {
-      target.validity.valid
-        ? reportError({ [target.name]: '' })
-        : reportError({ [target.name]: INVALID_FORMAT });
+      target.validity.valid ? initError(target.name) : reportError({ [target.name]: INVALID_FORMAT });
     }
   };
 
@@ -152,13 +144,11 @@ export function useCardPassword() {
     cardRegisterInfo: { password },
     handleCardInfo,
   } = useCardRegisterContext();
-  const { error, reportError } = useErrors<CardNumber>();
+  const { error, reportError, initError } = useErrors<CardNumber>();
 
   const onBlur = ({ target }: FocusEvent<HTMLElement>) => {
     if (isInputElement(target)) {
-      target.validity.valid
-        ? reportError({ [target.name]: '' })
-        : reportError({ [target.name]: INVALID_FORMAT });
+      target.validity.valid ? initError(target.name) : reportError({ [target.name]: INVALID_FORMAT });
     }
   };
 
