@@ -31,6 +31,7 @@
     "@typescript-eslint/comma-dangle": "off",
     "react/jsx-props-no-spreading": "off",
     "import/no-extraneous-dependencies": [0, { "devDependencies": true }],
+    "import/prefer-default-export": ["off"],
     "react/require-default-props": "off"
   },
   "overrides": [
