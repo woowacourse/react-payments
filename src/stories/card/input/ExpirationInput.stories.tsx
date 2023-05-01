@@ -25,7 +25,7 @@ function ExpirationStories() {
       ref={cardForm}
       onKeyDown={(e) => onInputKeydown(e)}
     >
-      <ExpirationInput year={year} month={month} />
+      <ExpirationInput yearInformation={year} monthInformation={month} />
     </InputWrapperParent>
   );
 }

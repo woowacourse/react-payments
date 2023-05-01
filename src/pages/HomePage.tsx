@@ -15,7 +15,7 @@ export default function Homepage({
   setPage,
   setCardList,
 }: HomePageProps) {
-  const onAddClick = () => {
+  const onAddCardClick = () => {
     setPage('addCardPage');
   };
 
@@ -51,7 +51,7 @@ export default function Homepage({
             onDeleteClick={() => onDeleteClick(index)}
           />
         ))}
-        <AddCardButton onClick={onAddClick} />
+        <AddCardButton onAddCardClick={onAddCardClick} />
       </CardWrapper>
     </Page>
   );

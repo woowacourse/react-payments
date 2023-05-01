@@ -20,7 +20,7 @@ function RegisteredCardStories() {
     <RegisteredCard
       companyKind="default"
       createCard={() => {}}
-      cardTitle={cardTitle}
+      cardTitleInformation={cardTitle}
       {...cardInfo}
     />
   );

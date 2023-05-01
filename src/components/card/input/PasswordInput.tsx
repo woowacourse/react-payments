@@ -6,15 +6,15 @@ import Error from '../../common/Error';
 import { TAB_INDEX_INFO } from '../../../constant';
 
 export interface PasswordInputProps {
-  firstPassword: UseInputProps;
-  secondPassword: UseInputProps;
+  firstPasswordInformation: UseInputProps;
+  secondPasswordInformation: UseInputProps;
 }
 
 const { addCardPage } = TAB_INDEX_INFO;
 
 export default function PasswordInput({
-  firstPassword,
-  secondPassword,
+  firstPasswordInformation,
+  secondPasswordInformation,
 }: PasswordInputProps) {
   return (
     <Container>
@@ -29,7 +29,7 @@ export default function PasswordInput({
             textAlign="center"
             autoComplete="off"
             tabIndex={addCardPage.firstPassword}
-            {...firstPassword}
+            {...firstPasswordInformation}
           />
         </GrayWrapper>
         <GrayWrapper>
@@ -41,13 +41,15 @@ export default function PasswordInput({
             textAlign="center"
             tabIndex={addCardPage.secondPassword}
             autoComplete="off"
-            {...secondPassword}
+            {...secondPasswordInformation}
           />
         </GrayWrapper>
         <WhiteWrapper>•</WhiteWrapper>
         <WhiteWrapper>•</WhiteWrapper>
       </Wrapper>
-      {firstPassword.error && <Error text={firstPassword.error} />}
+      {firstPasswordInformation.error && (
+        <Error text={firstPasswordInformation.error} />
+      )}
     </Container>
   );
 }

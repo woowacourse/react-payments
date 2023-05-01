@@ -5,19 +5,19 @@ import Error from '../../common/Error';
 import { TAB_INDEX_INFO } from '../../../constant';
 
 interface CardNumberInputProps {
-  firstNumber: UseInputProps;
-  secondNumber: UseInputProps;
-  thirdNumber: UseInputProps;
-  fourthNumber: UseInputProps;
+  firstNumberInformation: UseInputProps;
+  secondNumberInformation: UseInputProps;
+  thirdNumberInformation: UseInputProps;
+  fourthNumberInformation: UseInputProps;
 }
 
 const { addCardPage } = TAB_INDEX_INFO;
 
 export default function CardNumberInput({
-  firstNumber,
-  secondNumber,
-  thirdNumber,
-  fourthNumber,
+  firstNumberInformation,
+  secondNumberInformation,
+  thirdNumberInformation,
+  fourthNumberInformation,
 }: CardNumberInputProps) {
   return (
     <Container>
@@ -30,7 +30,7 @@ export default function CardNumberInput({
           placeholder="0000"
           autoComplete="off"
           tabIndex={addCardPage.firstCardNumber}
-          {...firstNumber}
+          {...firstNumberInformation}
         />
         <Dash>-</Dash>
         <Input
@@ -40,7 +40,7 @@ export default function CardNumberInput({
           tabIndex={addCardPage.secondCardNumber}
           autoComplete="off"
           textAlign="center"
-          {...secondNumber}
+          {...secondNumberInformation}
         />
         <Dash>-</Dash>
         <Input
@@ -51,7 +51,7 @@ export default function CardNumberInput({
           textAlign="center"
           autoComplete="off"
           tabIndex={addCardPage.thirdCardNumber}
-          {...thirdNumber}
+          {...thirdNumberInformation}
         />
         <Dash>-</Dash>
         <Input
@@ -62,10 +62,12 @@ export default function CardNumberInput({
           isPassword={true}
           textAlign="center"
           tabIndex={addCardPage.fourthCardNumber}
-          {...fourthNumber}
+          {...fourthNumberInformation}
         />
       </Wrapper>
-      {firstNumber.error && <Error text={firstNumber.error} />}
+      {firstNumberInformation.error && (
+        <Error text={firstNumberInformation.error} />
+      )}
     </Container>
   );
 }

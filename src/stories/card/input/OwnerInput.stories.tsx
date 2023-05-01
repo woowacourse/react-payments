@@ -24,7 +24,7 @@ function OwnerStories() {
       ref={cardForm}
       onKeyDown={(e) => onInputKeydown(e)}
     >
-      <OwnerInput owner={owner} />
+      <OwnerInput ownerInformation={owner} />
     </InputWrapperParent>
   );
 }

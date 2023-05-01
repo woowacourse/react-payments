@@ -8,12 +8,12 @@ import ToolTip from '../../common/ToolTip';
 import { TAB_INDEX_INFO } from '../../../constant';
 
 interface CvcInputProps {
-  cvc: UseInputProps;
+  cvcInformation: UseInputProps;
 }
 
 const { addCardPage } = TAB_INDEX_INFO;
 
-export default function CvcInput({ cvc }: CvcInputProps) {
+export default function CvcInput({ cvcInformation }: CvcInputProps) {
   const [isOpenToolTip, setIsOpenToolTip] = useState(false);
 
   const handleToolTip = () => {
@@ -33,7 +33,7 @@ export default function CvcInput({ cvc }: CvcInputProps) {
             id="cvc"
             placeholder="000"
             tabIndex={addCardPage.cvc}
-            {...cvc}
+            {...cvcInformation}
           />
         </Wrapper>
         <CvcButtonWrapper>
@@ -50,7 +50,7 @@ export default function CvcInput({ cvc }: CvcInputProps) {
           )}
         </CvcButtonWrapper>
       </InformationAndInputWrapper>
-      {cvc.error && <Error text={cvc.error} />}
+      {cvcInformation.error && <Error text={cvcInformation.error} />}
     </Container>
   );
 }

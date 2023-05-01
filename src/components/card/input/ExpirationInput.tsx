@@ -6,13 +6,16 @@ import Error from '../../common/Error';
 import { TAB_INDEX_INFO } from '../../../constant';
 
 interface ExpirationInputProps {
-  year: UseInputProps;
-  month: UseInputProps;
+  yearInformation: UseInputProps;
+  monthInformation: UseInputProps;
 }
 
 const { addCardPage } = TAB_INDEX_INFO;
 
-export default function ExpirationInput({ year, month }: ExpirationInputProps) {
+export default function ExpirationInput({
+  yearInformation,
+  monthInformation,
+}: ExpirationInputProps) {
   return (
     <Container>
       <Wrapper>
@@ -25,7 +28,7 @@ export default function ExpirationInput({ year, month }: ExpirationInputProps) {
             textAlign="center"
             autoComplete="off"
             tabIndex={addCardPage.month}
-            {...month}
+            {...monthInformation}
           />
         </InputWrapper>
         <Slash>/</Slash>
@@ -37,12 +40,12 @@ export default function ExpirationInput({ year, month }: ExpirationInputProps) {
             textAlign="center"
             autoComplete="off"
             tabIndex={addCardPage.year}
-            {...year}
+            {...yearInformation}
           />
         </InputWrapper>
       </Wrapper>
-      {month.error && <Error text={month.error} />}
-      {year.error && <Error text={year.error} />}
+      {monthInformation.error && <Error text={monthInformation.error} />}
+      {yearInformation.error && <Error text={yearInformation.error} />}
     </Container>
   );
 }

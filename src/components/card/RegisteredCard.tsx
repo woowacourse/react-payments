@@ -10,12 +10,12 @@ import { InputValuesInformationProps } from '../../hooks/createFormInputValue';
 import { getFormValidateResult } from '../../hooks/getFormValidateResult';
 
 interface RegisteredCardProps extends CardProps {
-  cardTitle: UseInputProps;
+  cardTitleInformation: UseInputProps;
   createCard: () => void;
 }
 
 export default function RegisteredCard({
-  cardTitle,
+  cardTitleInformation,
   createCard,
   ...rest
 }: RegisteredCardProps) {
@@ -25,7 +25,7 @@ export default function RegisteredCard({
     const { cardTitleInput } = event.currentTarget;
 
     const inputInformation: InputValuesInformationProps[] = [
-      { ...cardTitle, element: cardTitleInput },
+      { ...cardTitleInformation, element: cardTitleInput },
     ];
 
     const { validationResult } = getFormValidateResult(inputInformation);
@@ -45,10 +45,10 @@ export default function RegisteredCard({
         <InputWrapper>
           <InputField
             text="카드 별칭"
-            inputLength={`${cardTitle.value.length}/20`}
+            inputLength={`${cardTitleInformation.value.length}/20`}
           >
             <Input
-              {...cardTitle}
+              {...cardTitleInformation}
               type="text"
               bgColor="#fff"
               textAlign="center"
@@ -64,7 +64,9 @@ export default function RegisteredCard({
           <Button text="확인" />
         </ButtonWrapper>
       </Form>
-      {cardTitle.error && <Error text={cardTitle.error} />}
+      {cardTitleInformation.error && (
+        <Error text={cardTitleInformation.error} />
+      )}
     </Wrapper>
   );
 }

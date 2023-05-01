@@ -5,12 +5,12 @@ import { CARD_COMPANY_DATA } from '../../constant';
 
 interface BankInfoProps {
   kind: CardCompanyType;
-  onClick: () => void;
+  onBankSelectClick: () => void;
 }
 
-export default function BankInfo({ kind, onClick }: BankInfoProps) {
+export default function BankInfo({ kind, onBankSelectClick }: BankInfoProps) {
   return (
-    <Wrapper onClick={onClick}>
+    <Wrapper onClick={onBankSelectClick}>
       <Image src={CARD_COMPANY_DATA[kind].source} />
       <Title>{CARD_COMPANY_DATA[kind].title}</Title>
     </Wrapper>

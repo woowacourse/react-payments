@@ -49,7 +49,7 @@ export default function AddCardPage({
     }
   );
 
-  const onBankHandler = (value: CardCompanyType) => {
+  const onBankSelectClick = (value: CardCompanyType) => {
     setNextInputFocus(cardForm.current);
     setCardCompany(value);
   };
@@ -169,7 +169,7 @@ export default function AddCardPage({
     return (
       <RegisteredCard
         createCard={createCard}
-        cardTitle={cardTitle}
+        cardTitleInformation={cardTitle}
         companyKind={cardCompany}
         cardNumberSet={[
           firstCardNumber.value,
@@ -221,30 +221,33 @@ export default function AddCardPage({
           <InputWrapper>
             <InputField text="카드 번호">
               <CardNumberInput
-                firstNumber={firstCardNumber}
-                secondNumber={secondCardNumber}
-                thirdNumber={thirdCardNumber}
-                fourthNumber={fourthCardNumber}
+                firstNumberInformation={firstCardNumber}
+                secondNumberInformation={secondCardNumber}
+                thirdNumberInformation={thirdCardNumber}
+                fourthNumberInformation={fourthCardNumber}
               />
             </InputField>
             <InputField text="만료일">
-              <ExpirationInput year={year} month={month} />
+              <ExpirationInput
+                yearInformation={year}
+                monthInformation={month}
+              />
             </InputField>
             <InputField
               text="카드 소유자 이름(선택)"
               inputLength={`${owner.value.length}/30`}
             >
-              <OwnerInput owner={owner} />
+              <OwnerInput ownerInformation={owner} />
             </InputField>
             <InputField text="보안 코드(CVC/CVV)">
               <CvcWrapper>
-                <CvcInput cvc={cvc} />
+                <CvcInput cvcInformation={cvc} />
               </CvcWrapper>
             </InputField>
             <InputField text="카드 비밀번호">
               <PasswordInput
-                firstPassword={firstPassword}
-                secondPassword={secondPassword}
+                firstPasswordInformation={firstPassword}
+                secondPasswordInformation={secondPassword}
               />
             </InputField>
           </InputWrapper>
@@ -260,7 +263,7 @@ export default function AddCardPage({
       </Page>
       {cardCompany === 'default' && (
         <Modal>
-          <SelectBank onClick={onBankHandler} />
+          <SelectBank onBankSelectClick={onBankSelectClick} />
         </Modal>
       )}
     </Container>

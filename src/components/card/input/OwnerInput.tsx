@@ -6,12 +6,12 @@ import Error from '../../common/Error';
 import { TAB_INDEX_INFO } from '../../../constant';
 
 export interface OwnerInputProps {
-  owner: UseInputProps;
+  ownerInformation: UseInputProps;
 }
 
 const { addCardPage } = TAB_INDEX_INFO;
 
-export default function OwnerInput({ owner }: OwnerInputProps) {
+export default function OwnerInput({ ownerInformation }: OwnerInputProps) {
   return (
     <Container>
       <Wrapper>
@@ -24,10 +24,10 @@ export default function OwnerInput({ owner }: OwnerInputProps) {
           autoCapitalize="characters"
           lang="en"
           enterKeyHint="next"
-          {...owner}
+          {...ownerInformation}
         />
       </Wrapper>
-      {owner.error && <Error text={owner.error} />}
+      {ownerInformation.error && <Error text={ownerInformation.error} />}
     </Container>
   );
 }

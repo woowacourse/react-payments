@@ -15,15 +15,19 @@ const BANK_KIND: CardCompanyType[] = [
 ];
 
 interface SelectBankProps {
-  onClick: (value: CardCompanyType) => void;
+  onBankSelectClick: (value: CardCompanyType) => void;
 }
 
-export default function SelectBank({ onClick }: SelectBankProps) {
+export default function SelectBank({ onBankSelectClick }: SelectBankProps) {
   return (
     <Wrapper>
       <GridWrapper>
         {BANK_KIND.map((bank) => (
-          <BankInfo key={bank} kind={bank} onClick={() => onClick(bank)} />
+          <BankInfo
+            key={bank}
+            kind={bank}
+            onBankSelectClick={() => onBankSelectClick(bank)}
+          />
         ))}
       </GridWrapper>
     </Wrapper>

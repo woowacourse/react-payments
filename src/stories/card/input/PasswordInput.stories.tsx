@@ -26,8 +26,8 @@ function PasswordStories() {
       onKeyDown={(e) => onInputKeydown(e)}
     >
       <PasswordInput
-        firstPassword={firstPassword}
-        secondPassword={secondPassword}
+        firstPasswordInformation={firstPassword}
+        secondPasswordInformation={secondPassword}
       />
     </InputWrapperParent>
   );

@@ -31,10 +31,10 @@ function CardNumberStories() {
       onKeyDown={(e) => onInputKeydown(e)}
     >
       <CardNumberInput
-        firstNumber={firstCardNumber}
-        secondNumber={secondCardNumber}
-        thirdNumber={thirdCardNumber}
-        fourthNumber={fourthCardNumber}
+        firstNumberInformation={firstCardNumber}
+        secondNumberInformation={secondCardNumber}
+        thirdNumberInformation={thirdCardNumber}
+        fourthNumberInformation={fourthCardNumber}
       />
     </InputWrapperParent>
   );

@@ -2,12 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 
 interface AddCardButtonProps {
-  onClick: () => void;
+  onAddCardClick: () => void;
 }
 
-export default function AddCardButton({ onClick }: AddCardButtonProps) {
+export default function AddCardButton({ onAddCardClick }: AddCardButtonProps) {
   return (
-    <Wrapper onClick={onClick}>
+    <Wrapper onClick={onAddCardClick}>
       <PlusWrapper
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
