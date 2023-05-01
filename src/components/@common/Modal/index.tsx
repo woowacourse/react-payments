@@ -41,7 +41,7 @@ function Modal({ children, closeEvent, direction }: Props) {
         {children}
       </S.ModalContent>
     </S.Dialog>,
-    $modalRoot,
+    $modalRoot ?? document.body,
   );
 }
 
