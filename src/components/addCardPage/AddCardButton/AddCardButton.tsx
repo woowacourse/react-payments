@@ -29,7 +29,6 @@ const Wrapper = styled.button`
   width: 213px;
   height: 133px;
   background: ${({ theme }) => theme.colors.gray};
-  margin-bottom: 85px;
   border-radius: 5px;
   border: none;
   cursor: pointer;

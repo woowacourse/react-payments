@@ -34,6 +34,7 @@ export const TAB_INDEX_INFO = {
     CVC: 7,
     FIRST_PASSWORD: 8,
     SECOND_PASSWORD: 9,
+    SUBMIT: 10,
   },
 };
 

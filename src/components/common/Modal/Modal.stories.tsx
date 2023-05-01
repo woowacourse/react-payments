@@ -11,11 +11,16 @@ export default meta;
 type Story = StoryObj<typeof Modal>;
 
 export const Default: Story = {
-  args: {},
+  args: {
+    isOpen: true,
+    onClose: () => {},
+  },
 };
 
 export const Bank: Story = {
   args: {
+    isOpen: true,
+    onClose: () => {},
     children: <SelectCardCompany onCardCompanySelectClick={() => {}} />,
   },
 };

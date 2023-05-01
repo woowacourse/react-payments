@@ -9,10 +9,8 @@ import { RegisteredCard } from '../../components/addCardPage/RegisteredCard';
 import { SelectCardCompany } from '../../components/addCardPage/SelectCardCompany';
 import { Button } from '../../components/common/Button';
 import { Card } from '../../components/common/Card';
-import { ChangeButton } from '../../components/common/ChangeButton';
 import { InputField } from '../../components/common/InputField';
 import { Modal } from '../../components/common/Modal';
-import { PrevButton } from '../../components/common/PrevButton';
 import { CARD_COMPANY_DATA } from '../../constants/constant';
 import { InputValuesInformationProps } from '../../hooks/createFormInputValue';
 import { getFormValidateResult } from '../../hooks/getFormValidateResult';
@@ -188,7 +186,7 @@ export default function AddCardPage({
     <div>
       <Page>
         <TitleWrapper>
-          <PrevButton onClick={onPrevButtonClick} />
+          <Button icon={<PrevIcon />} text="" onClick={onPrevButtonClick} />
           <Title>카드 추가</Title>
         </TitleWrapper>
         <CardWrapper>
@@ -205,11 +203,14 @@ export default function AddCardPage({
             owner={owner.value ? owner.value : 'NAME'}
           />
           <ChangeButtonWrapper>
-            <ChangeButton
+            <Button
               color={CARD_COMPANY_DATA[cardCompany].color}
-              bgColor={CARD_COMPANY_DATA[cardCompany].backgroundColor}
+              backgroundColor={CARD_COMPANY_DATA[cardCompany].backgroundColor}
               text="카드 변경"
               onClick={() => setCardCompany('default')}
+              type="button"
+              padding="8px"
+              borderRadius="8px"
             />
           </ChangeButtonWrapper>
         </CardWrapper>
@@ -261,12 +262,29 @@ export default function AddCardPage({
           </NextButtonWrapper>
         </InputWrapperParent>
       </Page>
-      {cardCompany === 'default' && (
-        <Modal>
-          <SelectCardCompany onCardCompanySelectClick={onBankSelectClick} />
-        </Modal>
-      )}
+      <Modal isOpen={cardCompany === 'default'} ariaLabel="카드사 선택창">
+        <SelectCardCompany onCardCompanySelectClick={onBankSelectClick} />
+      </Modal>
     </div>
+  );
+}
+
+function PrevIcon() {
+  return (
+    <Svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke="currentColor"
+      className="w-6 h-6"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M15.75 19.5L8.25 12l7.5-7.5"
+      />
+    </Svg>
   );
 }
 
@@ -322,4 +340,9 @@ const CvcWrapper = styled.div`
 const NextButtonWrapper = styled.div`
   margin-top: 25px;
   align-self: end;
+`;
+
+const Svg = styled.svg`
+  width: 20px;
+  height: 20px;
 `;
