@@ -7,7 +7,7 @@ const ERROR_MESSAGES = {
   password: '카드 비밀번호 앞 2자리를 입력해주세요.',
 } as const;
 
-export function useCardFormValid(card: Card): [
+export function ValidateForm(card: Card): [
   isValid: boolean,
   errorMessages: {
     numbers: string;

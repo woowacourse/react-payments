@@ -10,11 +10,11 @@ import { ChangeEvent, ChangeEventHandler, FormEventHandler, useContext, useState
 import { COMPANY_NAME, Card } from 'components/common/Card/types';
 import { ValueAndOnChange } from 'components/Input/types';
 import { CreditCard } from 'components/common/Card/CreditCard';
-import { useCardFormValid } from 'hooks/useCardFormValid';
 import { Modal } from 'components/Modal/CardCompanyModal';
 import { CardInfoContext, defaultCardInfo } from 'context/CardInfoContext';
 import FormLabel from 'components/common/FormLabel/FormLabel';
 import { ModalContext } from 'context/ModalContext';
+import { ValidateForm } from 'util/ValidateForm';
 
 export type AddCardFormProps = {
   onSubmit: () => void;
@@ -27,7 +27,7 @@ function AddCardInfo({ onSubmit }: AddCardFormProps) {
   const { setCardInfo } = useContext(CardInfoContext);
   const [card, setCard] = useState<Card>(defaultCardInfo);
 
-  const [isValid, errorMessages] = useCardFormValid(card);
+  const [isValid, errorMessages] = ValidateForm(card);
 
   const handleCardNumbersChange: ValueAndOnChange[] = card.numbers.map((cardNumber, index) => ({
     value: cardNumber,
