@@ -6,7 +6,6 @@ interface Props {
 const Spacer = ({ width = 1, height = 1 }: Props) => {
   return (
     <div
-      aria-hidden
       style={{
         width,
         height,
