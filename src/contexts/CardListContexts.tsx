@@ -9,16 +9,7 @@ type CardListProviderProps = {
 };
 
 export function CardListProvider({ children }: CardListProviderProps) {
-  const [cardList, setCardList] = useState<CardInformation[]>([
-    {
-      id: 0,
-      cardType: '우리카드',
-      cardNumber: ['0000', '1111', '2222', '3333'],
-      expirationDate: ['12', '25'],
-      owner: 'EXAMPLE-1',
-      alias: 'CONTEXT',
-    },
-  ]);
+  const [cardList, setCardList] = useState<CardInformation[]>([]);
 
   return (
     <CardListContext.Provider value={cardList}>
