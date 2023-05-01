@@ -102,6 +102,7 @@ const AddCard = ({ cards, setCards }: CardList) => {
       </Styled.PageWrapper>
       {isModalOpen && (
         <CardCompanyModal
+          cardCompany={cardCompany}
           setIsModalOpen={setIsModalOpen}
           setCardCompany={setCardCompany}
         />

@@ -10,4 +10,8 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const CardCompanyModalStory: Story = {};
+export const CardCompanyModalStory: Story = {
+  args: {
+    cardCompany: '국민카드',
+  },
+};
