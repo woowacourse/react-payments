@@ -16,6 +16,7 @@ import {
   Password,
   SecurityCode,
 } from '../types';
+import { CARD_COMPANY } from '../constants';
 
 type Action =
   | { type: 'SET_CARD_COMPANY'; cardCompany: CardCompany }
@@ -41,7 +42,7 @@ const reducer = (state: Card, action: Action): Card => {
 export const useCardRegisterForm = () => {
   const [card, dispatch] = useReducer(reducer, {
     id: v4(),
-    cardCompany: '우리카드',
+    cardCompany: CARD_COMPANY.WOORI.name,
     cardNumber: ['', '', '', ''],
     expirationDate: { month: '', year: '' },
     ownerName: '',

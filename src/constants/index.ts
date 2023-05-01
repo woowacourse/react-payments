@@ -1,3 +1,5 @@
+import { CardCompany, CardCompanyKey } from '../types';
+
 export const CARD_NUMBER_DIGITS = 16;
 export const CARD_NUMBER_INPUTS_LENGTH = 4; // input 개수: 4개
 export const CARD_NUMBER_INPUT_SIZE = 4; // input 1개: 카드번호 4자리
@@ -12,7 +14,29 @@ export const PASSWORD_START_INDEX = 2;
 export const PASSWORD_TEXT = '•';
 export const CARD_ALIAS_SIZE = 20;
 
-export const IMAGE_PATH = {
+export const CARD_COMPANIES = [
+  'BC카드',
+  '신한카드',
+  '카카오뱅크',
+  '현대카드',
+  '우리카드',
+  '롯데카드',
+  '하나카드',
+  '국민카드',
+] as const;
+
+export const CARD_COMPANY_KEYS = [
+  'BC',
+  'SHINHAN',
+  'KAKAO',
+  'HYUNDAI',
+  'WOORI',
+  'LOTTE',
+  'HANA',
+  'KOOKMIN',
+] as const;
+
+export const IMAGE_PATH: Readonly<Record<CardCompanyKey, string>> = {
   BC: `${process.env.PUBLIC_URL}/assets/logo-bc.svg`,
   SHINHAN: `${process.env.PUBLIC_URL}/assets/logo-shinhan.svg`,
   KAKAO: `${process.env.PUBLIC_URL}/assets/logo-kakao.svg`,
@@ -21,9 +45,11 @@ export const IMAGE_PATH = {
   LOTTE: `${process.env.PUBLIC_URL}/assets/logo-lotte.svg`,
   HANA: `${process.env.PUBLIC_URL}/assets/logo-hana.svg`,
   KOOKMIN: `${process.env.PUBLIC_URL}/assets/logo-kookmin.svg`,
-} as const;
+};
 
-export const CARD_COMPANY = {
+export const CARD_COMPANY: Readonly<
+  Record<CardCompanyKey, { name: CardCompany; color: string; logo: string }>
+> = {
   BC: { name: 'BC카드', color: '#F04652', logo: IMAGE_PATH.BC },
   SHINHAN: { name: '신한카드', color: '#0046FF', logo: IMAGE_PATH.SHINHAN },
   KAKAO: { name: '카카오뱅크', color: '#FFE600', logo: IMAGE_PATH.KAKAO },
@@ -34,7 +60,7 @@ export const CARD_COMPANY = {
   KOOKMIN: { name: '국민카드', color: '#6F655B', logo: IMAGE_PATH.KOOKMIN },
 };
 
-export const CARD_COMPANY_KEY = {
+export const CONVERT_CARD_COMPANY_KEY: Readonly<Record<CardCompany, CardCompanyKey>> = {
   BC카드: 'BC',
   신한카드: 'SHINHAN',
   카카오뱅크: 'KAKAO',
@@ -43,7 +69,7 @@ export const CARD_COMPANY_KEY = {
   롯데카드: 'LOTTE',
   하나카드: 'HANA',
   국민카드: 'KOOKMIN',
-} as const;
+};
 
 export const ERROR = {
   IS_NOT_NUMBER: '숫자를 입력해주세요.',

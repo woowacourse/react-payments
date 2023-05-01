@@ -3,7 +3,6 @@ import { CardCompanyItem } from './CardCompanyItem';
 import { ModalWithCloseButton } from '../ModalWithCloseButton';
 import { CARD_COMPANY } from '../../../constants';
 import { CardCompany } from '../../../types';
-import { isCardCompany } from '../../../types/guard';
 
 interface Props {
   isOpen: boolean;
@@ -26,8 +25,6 @@ export function CardSelectModal({ isOpen, setIsOpen, setCardCompany }: Props) {
       <Style.GridContainer>
         {cardCompanies.map((cardCompany) => {
           const { name, logo } = cardCompany;
-
-          if (!isCardCompany(name)) return;
 
           return (
             <CardCompanyItem key={name} name={name} logo={logo} setCardCompany={setCardCompany} />

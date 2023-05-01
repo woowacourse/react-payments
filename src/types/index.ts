@@ -1,13 +1,7 @@
-export type CardCompany =
-  | 'BC카드'
-  | '신한카드'
-  | '카카오뱅크'
-  | '현대카드'
-  | '우리카드'
-  | '롯데카드'
-  | '하나카드'
-  | '국민카드';
+import { CARD_COMPANIES, CARD_COMPANY_KEYS } from '../constants';
 
+export type CardCompany = (typeof CARD_COMPANIES)[number];
+export type CardCompanyKey = (typeof CARD_COMPANY_KEYS)[number];
 export type CardAlias = string;
 export type CardNumber = string[];
 export type OwnerName = string;

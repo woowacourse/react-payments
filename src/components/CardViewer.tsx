@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Card } from '../types';
 import {
   CARD_COMPANY,
-  CARD_COMPANY_KEY,
+  CONVERT_CARD_COMPANY_KEY,
   DATE_TEXT,
   OWNER_NAME_TEXT,
   PASSWORD_START_INDEX,
@@ -29,7 +29,7 @@ export function CardViewer({ card }: Props) {
   };
 
   const { cardCompany, cardNumber, expirationDate, ownerName } = card;
-  const cardColor = CARD_COMPANY[CARD_COMPANY_KEY[cardCompany]].color;
+  const cardColor = CARD_COMPANY[CONVERT_CARD_COMPANY_KEY[cardCompany]].color;
   const ownerNameFormat = ownerName.length ? ownerName : OWNER_NAME_TEXT;
   const cardNumbersFormat = changeCardNumberFormat(cardNumber);
   const expirationDateFormat = changeExpirationDateFormat(
