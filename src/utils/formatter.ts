@@ -1,12 +1,36 @@
-const formatExpirationDate = (input: string) => {
-  const value = input.replace(/\D/g, '');
-  const formattedValue = value.length > 2 ? value.replace(/(\d{2})/, '$1/') : value;
+import {
+  DATE_DIVIDER,
+  EXPIRATION_DATE_INPUT_MAX_LENGTH,
+  EXPIRATION_DATE_UNIT_LENGTH,
+  REGEX,
+} from "../constants";
 
-  return formattedValue.slice(0, 5);
+const formatExpirationDate = (input: string) => {
+  const [month, year] =
+    input.replace(DATE_DIVIDER, "").match(REGEX.TWO_CHAR_SEQUENCE) ?? [];
+
+  return { month, year };
 };
 
 const formatEnglishCapitalization = (input: string) => {
   return input.toUpperCase();
 };
 
-export { formatExpirationDate, formatEnglishCapitalization };
+const formatter = {
+  expirationDate: formatExpirationDate,
+  ownerName: formatEnglishCapitalization,
+};
+
+export default formatter;
+
+const formatDisplayedExpirationDate = (input: string) => {
+  const value = input.replace(REGEX.NON_NUMBER, "");
+  const formattedValue =
+    value.length > EXPIRATION_DATE_UNIT_LENGTH
+      ? value.replace(REGEX.TWO_DIGIT, "$1/")
+      : value;
+
+  return formattedValue.slice(0, EXPIRATION_DATE_INPUT_MAX_LENGTH);
+};
+
+export { formatDisplayedExpirationDate };

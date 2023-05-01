@@ -1,24 +1,33 @@
-import { CardInputValidation, ExpirationDateFormat } from '../../../types';
-import InputContainer from '../../common/InputContainer/InputContainer';
-import Input from '../../common/Input/Input';
-import { useError } from '../../../hooks/useError';
-import validator from '../../../utils/validator';
-import { formatExpirationDate } from '../../../utils/formatter';
-import { ChangeEvent } from 'react';
+import { CardInputValidation, ExpirationDateFormat } from "../../../types";
+import InputContainer from "../../common/InputContainer/InputContainer";
+import Input from "../../common/Input/Input";
+import { useError } from "../../../hooks/useError";
+import validator from "../../../utils/validator";
+import { formatDisplayedExpirationDate } from "../../../utils/formatter";
+import { ChangeEvent } from "react";
 
 interface CardExpirationDateProps {
-  handleValidationChange: (key: keyof CardInputValidation, value: boolean) => void;
+  handleValidationChange: (
+    key: keyof CardInputValidation,
+    value: boolean
+  ) => void;
   onChange: ({ target: { value } }: ChangeEvent<HTMLInputElement>) => void;
   value: ExpirationDateFormat;
 }
 
-function CardExpirationDate({ onChange, handleValidationChange, value }: CardExpirationDateProps) {
+function CardExpirationDate({
+  onChange,
+  handleValidationChange,
+  value,
+}: CardExpirationDateProps) {
   const [isError, onErrorBlur] = useError({
     validator: validator.expirationDate,
     handleValidationChange,
   });
 
-  const expirationDate = formatExpirationDate(`${value.month}${value.year}`);
+  const expirationDate = formatDisplayedExpirationDate(
+    `${value.month}${value.year}`
+  );
 
   return (
     <InputContainer
@@ -26,7 +35,9 @@ function CardExpirationDate({ onChange, handleValidationChange, value }: CardExp
       id="expirationDate"
       isError={isError}
       supportingText={
-        isError ? '카드에 표시된 만료일을 (MM/YY) 순서로 동일하게 입력해주세요' : undefined
+        isError
+          ? "카드에 표시된 만료일을 (MM/YY) 순서로 동일하게 입력해주세요"
+          : undefined
       }
       required
     >
