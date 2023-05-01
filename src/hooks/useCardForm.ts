@@ -40,21 +40,23 @@ export const useCardForm = () => {
   };
 
   const isCardNumberValid =
-    card.numbers && card.numbers.every((number) => isNumberLengthValid(number, 4));
+    card.numbers !== undefined && card.numbers.every((number) => isNumberLengthValid(number, 4));
 
   const isExpirationDateValid =
-    card.expirationDate &&
+    card.expirationDate !== undefined &&
     isNumberLengthValid(card.expirationDate.month, 2) &&
     isNumberLengthValid(card.expirationDate.year, 2);
 
-  const isSecurityCodeValid = card.securityCode && isNumberLengthValid(card.securityCode, 3);
+  const isSecurityCodeValid =
+    card.securityCode !== undefined && isNumberLengthValid(card.securityCode, 3);
 
   const isPasswordValid =
-    card.password &&
+    card.password !== undefined &&
     isNumberLengthValid(card.password.first, 1) &&
     isNumberLengthValid(card.password.second, 1);
 
-  const isBankCodeValid = card.bankCode && card.bankCode in Object.values(BankCodeList);
+  const isBankCodeValid =
+    card.bankCode !== undefined && card.bankCode in Object.values(BankCodeList);
 
   const errorMessages: Partial<Record<keyof Card, string>> = {
     numbers: isCardNumberValid ? '' : '카드번호는 16자리로 입력해주세요.',
