@@ -41,9 +41,7 @@ const SecurityCode = forwardRef(
               required={true}
             />
           </Styled.Wrapper>
-          <Styled.Tooltip type="button" tabIndex={-1}>
-            ?
-          </Styled.Tooltip>
+          <Styled.Tooltip type="button">?</Styled.Tooltip>
         </Styled.InputWrapper>
       </>
     );

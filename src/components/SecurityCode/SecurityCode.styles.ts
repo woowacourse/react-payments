@@ -20,7 +20,8 @@ export const Tooltip = styled.button`
   text-align: center;
   cursor: pointer;
 
-  &:hover:after {
+  &:hover::after,
+  &:focus::after {
     content: 'CVC 번호는 카드 뒤 3자리 입니다.';
     display: block;
     width: 100px;
