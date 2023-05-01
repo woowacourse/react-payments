@@ -43,7 +43,7 @@ export default function InputBoxCardNumber(props: InputBoxNumberProps) {
         changeCardNumberStatus={changeCardNumberStatus}
       />
       <p className="error-message">
-        {hasError && CARD_ERROR_MESSAGE.INPUT_CARD_NUMBER}
+        {hasError.current && CARD_ERROR_MESSAGE.INPUT_CARD_NUMBER}
       </p>
     </div>
   );

@@ -43,7 +43,7 @@ export default function InputBoxPassword(props: InputBoxPasswordProps) {
         changePasswordStatus={changePasswordStatus}
       />
       <p className="error-message">
-        {hasError && CARD_ERROR_MESSAGE.INPUT_CARD_PASSWORD}
+        {hasError.current && CARD_ERROR_MESSAGE.INPUT_CARD_PASSWORD}
       </p>
     </div>
   );
