@@ -11,9 +11,7 @@ export const InputNumberType = () => {
   return (
     <InputSectionTemplate label="숫자">
       <InputBox
-        inputs={[{ textType: 'number', maxLength: 10 }]}
-        inputValues={'1234'}
-        setInputValues={() => {}}
+        inputs={[{ textType: 'number', maxLength: 10, inputValues: '1234', setInputValues: () => {} }]}
         align="center"
       />
     </InputSectionTemplate>
@@ -25,9 +23,7 @@ export const InputNameType = () => {
   return (
     <InputSectionTemplate label="이름" isCountLength maxLength={10} inputValues={inputValue}>
       <InputBox
-        inputs={[{ textType: 'text', maxLength: 10 }]}
-        inputValues={inputValue}
-        setInputValues={() => {}}
+        inputs={[{ textType: 'text', maxLength: 10, inputValues: inputValue, setInputValues: () => {} }]}
         align="left"
         isFullWidth
       />
@@ -39,27 +35,51 @@ export const InputPasswordType = () => {
   return (
     <InputSectionTemplate label="비밀번호">
       <InputBox
-        inputs={[{ textType: 'number', maxLength: 1, textSecurity: true }]}
-        inputValues={'1'}
-        setInputValues={() => {}}
+        inputs={[
+          {
+            textType: 'number',
+            maxLength: 1,
+            textSecurity: true,
+            inputValues: '1',
+            setInputValues: () => {},
+          },
+        ]}
         align="center"
       />
       <InputBox
-        inputs={[{ textType: 'number', maxLength: 1, textSecurity: true }]}
-        inputValues={'1'}
-        setInputValues={() => {}}
+        inputs={[
+          {
+            textType: 'number',
+            maxLength: 1,
+            textSecurity: true,
+            inputValues: '1',
+            setInputValues: () => {},
+          },
+        ]}
         align="center"
       />
       <InputBox
-        inputs={[{ textType: 'number', maxLength: 1, textSecurity: true }]}
-        inputValues={'1'}
-        setInputValues={() => {}}
+        inputs={[
+          {
+            textType: 'number',
+            maxLength: 1,
+            textSecurity: true,
+            inputValues: '1',
+            setInputValues: () => {},
+          },
+        ]}
         align="center"
       />
       <InputBox
-        inputs={[{ textType: 'number', maxLength: 1, textSecurity: true }]}
-        inputValues={'1'}
-        setInputValues={() => {}}
+        inputs={[
+          {
+            textType: 'number',
+            maxLength: 1,
+            textSecurity: true,
+            inputValues: '1',
+            setInputValues: () => {},
+          },
+        ]}
         align="center"
       />
     </InputSectionTemplate>
@@ -71,12 +91,10 @@ export const InputPhoneNumberType = () => {
     <InputSectionTemplate label="전화번호">
       <InputBox
         inputs={[
-          { textType: 'number', maxLength: 3 },
-          { textType: 'number', maxLength: 4 },
-          { textType: 'number', maxLength: 4 },
+          { textType: 'number', maxLength: 3, inputValues: '010', setInputValues: () => {} },
+          { textType: 'number', maxLength: 4, inputValues: '1234', setInputValues: () => {} },
+          { textType: 'number', maxLength: 4, inputValues: '5678', setInputValues: () => {} },
         ]}
-        inputValues={['010', '1234', '5678']}
-        setInputValues={() => {}}
         align="center"
         separator="-"
       />

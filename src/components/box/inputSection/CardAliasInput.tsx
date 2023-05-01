@@ -4,7 +4,13 @@ import { InputStateProps } from '../../../abstracts/types';
 
 const CardAliasInput = (props: InputStateProps) => {
   const inputs: InputType[] = [
-    { textType: 'text', maxLength: 15, placeholder: '카드의 별칭을 입력해주세요.' },
+    {
+      textType: 'text',
+      maxLength: 15,
+      placeholder: '카드의 별칭을 입력해주세요.',
+      inputValues: props.inputValues as string,
+      setInputValues: props.setInputValues,
+    },
   ];
   return (
     <InputSectionTemplate
