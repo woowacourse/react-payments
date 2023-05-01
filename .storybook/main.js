@@ -21,11 +21,21 @@ module.exports = {
   staticDirs: ['../public'],
 
   webpackFinal: async (config) => {
-    config.resolve.plugins.push(
-      new TsconfigPathsPlugin({
-        configFile: path.resolve(__dirname, '../tsconfig.json'),
-      }),
-    );
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@Components/*': path.resolve(__dirname, '../src/components'),
+      '@Constants/*': path.resolve(__dirname, '../src/constants'),
+      '@Hooks/*': path.resolve(__dirname, '../src/hooks'),
+      '@Pages/*': path.resolve(__dirname, '../src/pages'),
+      '@Utils/*': path.resolve(__dirname, '../src/utils'),
+      '@Types/*': path.resolve(__dirname, '../src/types'),
+      '@Domains/*': path.resolve(__dirname, '../src/domains'),
+      '@Asset/*': path.resolve(__dirname, '../src/assets'),
+      '@Styles/*': path.resolve(__dirname, '../src/styles'),
+      '@Contexts/*': path.resolve(__dirname, '../src/contexts'),
+      '@Animations/*': path.resolve(__dirname, '../src/animations'),
+    };
+
     return config;
   },
 };
