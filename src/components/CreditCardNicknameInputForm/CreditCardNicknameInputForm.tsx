@@ -5,10 +5,7 @@ import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import * as S from './style';
 
 const NicknameInput = styled.input`
-    border-left-width: 0px;
-    border-right-width: 0px;
-    border-top-width: 0px;
-    border-bottom-width: 1px;
+    border-width: 0px 0px 1px 0px;
 
     width: 100%;
     
