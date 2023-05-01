@@ -24,12 +24,8 @@ const useCardNumber = () => {
     }
 
     if (nativeEvent.inputType === 'deleteContentBackward') {
-      const modifiedValue =
-        cardNumberRef.current.slice(0, target.selectionStart) +
-        cardNumberRef.current.slice(target.selectionStart + 1);
-
-      cardNumberRef.current = formatDisplayedCardNumber(modifiedValue);
-      target.value = encryptDisplayedCardNumber(cardNumberRef.current);
+      cardNumberRef.current = '';
+      target.value = cardNumberRef.current;
     }
   };
 
