@@ -7,6 +7,7 @@ export const CreditCardNicknameInputFormLayout = styled.div`
 `;
 
 export const CreditCardPreview = styled.div`
+        margin-top: 36px;
         display: flex;
         justify-content: center;
 `;

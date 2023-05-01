@@ -11,6 +11,7 @@ const NicknameInput = styled.input`
 
     width: 100%;
     
+    margin-top: 100px;
     padding: 10px;
 
     font-family: 'Roboto';
