@@ -46,21 +46,21 @@ export const CardNumberInput = (props: CardNumberInputProps) => {
         ref={cardNumberRef1}
         maxCount={4}
         value={getPartialCardNumber(0)}
-        onChange={handleCardNumberChange(0)}
+        handleOnChange={handleCardNumberChange(0)}
         center
       />
       <NumberInput
         ref={cardNumberRef2}
         maxCount={4}
         value={getPartialCardNumber(1)}
-        onChange={handleCardNumberChange(1)}
+        handleOnChange={handleCardNumberChange(1)}
         center
       />
       <NumberInput
         ref={cardNumberRef3}
         maxCount={4}
         value={getPartialCardNumber(2)}
-        onChange={handleCardNumberChange(2)}
+        handleOnChange={handleCardNumberChange(2)}
         center
         type="password"
       />
@@ -68,7 +68,7 @@ export const CardNumberInput = (props: CardNumberInputProps) => {
         ref={cardNumberRef4}
         maxCount={4}
         value={getPartialCardNumber(3)}
-        onChange={handleCardNumberChange(3)}
+        handleOnChange={handleCardNumberChange(3)}
         center
         type="password"
       />

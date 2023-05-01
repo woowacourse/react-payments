@@ -4,5 +4,3 @@ export const ERROR_MESSAGE = {
   cvc: '보안 코드는 숫자 3개를 입력해주세요.',
   cardPassword: '카드 비밀번호는 앞 자리 두 개를 입력해주세요.',
 } as const;
-
-export const SUCCESS_MESSAGE = '유효' as const;

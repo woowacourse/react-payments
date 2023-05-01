@@ -4,6 +4,7 @@ import { createHashRouter, RouterProvider } from 'react-router-dom';
 import { App } from './components/App';
 import { CreditCardListPage } from './components/pages/CreditCardListPage';
 import { NewCreditCardPage } from './components/pages/NewCreditCardPage';
+import { AddNickNamePage } from './components/pages/AddNickNamePage';
 
 const router = createHashRouter([
   {
@@ -17,6 +18,10 @@ const router = createHashRouter([
       {
         path: 'register',
         element: <NewCreditCardPage />,
+      },
+      {
+        path: 'addnickname',
+        element: <AddNickNamePage />,
       },
     ],
   },

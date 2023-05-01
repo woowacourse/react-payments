@@ -1,18 +1,20 @@
 import { useState } from 'react';
-import type { ERROR_MESSAGE } from '../constants/validation';
-import { SUCCESS_MESSAGE } from '../constants/validation';
 
 type ValidateFunctions<Data> = Partial<{
   [K in keyof Data]: (value: Data[K]) => void;
 }>;
 
-type ErrorMessage = (typeof ERROR_MESSAGE)[keyof typeof ERROR_MESSAGE];
+type FieldValidationResult =
+  | {
+      success: true;
+      errorMessage: null;
+    }
+  | {
+      success: false;
+      errorMessage: string;
+    };
 
-type SuccessMessage = typeof SUCCESS_MESSAGE;
-
-type isValidateMessage = ErrorMessage | SuccessMessage;
-
-type ValidationResult<Data> = Partial<Record<keyof Data, isValidateMessage>>;
+type ValidationResult<Data> = Partial<Record<keyof Data, FieldValidationResult>>;
 
 export const useValidation = <Data extends object>(
   validationFunctions: ValidateFunctions<Data>,
@@ -28,16 +30,18 @@ export const useValidation = <Data extends object>(
 
       try {
         validateFunction?.(data[key]);
-        return { ...result, [key]: SUCCESS_MESSAGE };
+        return { ...result, [key]: { success: true, errorMessage: null } };
       } catch (e) {
         const error = e as Error;
-        return { ...result, [key]: error.message as ErrorMessage };
+        return { ...result, [key]: { success: false, errorMessage: error.message } };
       }
     }, {});
 
     setValidationResult(nextValidationResult);
 
-    return Object.values(nextValidationResult).every((result) => result === SUCCESS_MESSAGE);
+    return Object.values(nextValidationResult).every(
+      (result) => (result as FieldValidationResult).success,
+    );
   };
 
   return { validate, validationResult };

@@ -1,9 +1,9 @@
 import { useContext } from 'react';
-import { PaymentsContext } from '../context/PaymentsContext';
+import { CreditCardsContext } from '../context/CreditCardsContext';
 import type { CreditCard } from '../types/CreditCard';
 
-export const usePayments = () => {
-  const { creditCards, setCreditCards } = useContext(PaymentsContext);
+export const useCreditCards = () => {
+  const { creditCards, setCreditCards } = useContext(CreditCardsContext);
 
   const addCreditCard = (newCard: CreditCard) => {
     setCreditCards([...creditCards, newCard]);

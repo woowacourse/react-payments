@@ -1,13 +1,42 @@
+import React from 'react';
 import styled from 'styled-components';
 import type { CreditCard } from '../types/CreditCard';
 import { Text } from './common/Text';
 
-type CreditCardViewProps = Pick<CreditCard, 'name' | 'cardNumbers' | 'expirationDate'>;
+const CREDIT_CARD_VIEW_BACKGROUND_COLOR = {
+  BC카드: '#f15060',
+  신한카드: '#115588',
+  카카오뱅크: '#fae20c',
+  현대카드: '#333333',
+  우리카드: '#179cf0',
+  롯데카드: '#f60606',
+  하나카드: '#048d84',
+  국민카드: '#5c5248',
+  카드사: '#838e99',
+} as const;
 
-const StyledCreditCardView = styled.div`
+type CreditCardViewProps = Pick<
+  CreditCard,
+  'cardCompany' | 'name' | 'cardNumbers' | 'expirationDate' | 'nickName'
+> & { openModal?: () => void };
+
+type StyledCreditCardViewProps = {
+  $background?: (typeof CREDIT_CARD_VIEW_BACKGROUND_COLOR)[keyof typeof CREDIT_CARD_VIEW_BACKGROUND_COLOR];
+};
+
+const Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  align-items: center;
+  gap: 15px;
+
+  cursor: pointer;
+`;
+
+const StyledCreditCardView = styled.div<StyledCreditCardViewProps>`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   gap: 6px;
 
   width: 200px;
@@ -17,7 +46,7 @@ const StyledCreditCardView = styled.div`
 
   border-radius: 4px;
 
-  background: #333333;
+  background: ${(props) => props.$background};
   color: white;
   font-weight: bold;
 `;
@@ -33,9 +62,9 @@ const ICChip = styled.div`
 
 const CardNumber = styled.div`
   display: flex;
-  gap: 6px;
-  letter-spacing: 2px;
+  gap: 5px;
 
+  letter-spacing: 2px;
   height: 12px;
 `;
 
@@ -46,32 +75,50 @@ const CardAdditionalInfo = styled.div`
   height: 12px;
 `;
 
-export const CreditCardView = (props: CreditCardViewProps) => {
-  const { name, cardNumbers, expirationDate } = props;
+export const CreditCardView = React.memo(
+  (props: CreditCardViewProps) => {
+    const { cardCompany, name, cardNumbers, expirationDate, openModal, nickName } = props;
 
-  const getPartialCardNumber = (index: number) => {
-    const partialCardNumber = cardNumbers.split('-')[index] ?? '';
+    const getPartialCardNumber = (index: number) => {
+      const partialCardNumber = cardNumbers.split('-')[index] ?? '';
 
-    return [0, 1].includes(index) ? partialCardNumber : partialCardNumber.replaceAll(/\d/g, '•');
-  };
+      return [0, 1].includes(index) ? partialCardNumber : partialCardNumber.replaceAll(/\d/g, '•');
+    };
 
-  const partialCardNumbers = [0, 1, 2, 3].map(getPartialCardNumber);
+    const partialCardNumbers = [0, 1, 2, 3].map(getPartialCardNumber);
 
-  return (
-    <StyledCreditCardView>
-      <ICChip />
-      <CardNumber>
-        {partialCardNumbers.map((partialCardNumber, index) => (
-          // eslint-disable-next-line react/no-array-index-key
-          <Text size="small" key={index}>
-            {partialCardNumber}
+    return (
+      <Container>
+        <StyledCreditCardView
+          $background={CREDIT_CARD_VIEW_BACKGROUND_COLOR[cardCompany]}
+          onClick={openModal}
+        >
+          <Text size="large" weight="bold">
+            {cardCompany}
           </Text>
-        ))}
-      </CardNumber>
-      <CardAdditionalInfo>
-        <Text size="small">{name}</Text>
-        {expirationDate.some(Boolean) && <Text size="small">{expirationDate.join('/')}</Text>}
-      </CardAdditionalInfo>
-    </StyledCreditCardView>
-  );
-};
+          <ICChip />
+          <CardNumber>
+            {partialCardNumbers.map((partialCardNumber, index) => (
+              // eslint-disable-next-line react/no-array-index-key
+              <Text size="small" key={index}>
+                {partialCardNumber}
+              </Text>
+            ))}
+          </CardNumber>
+          <CardAdditionalInfo>
+            <Text size="small">{name}</Text>
+            {expirationDate.some(Boolean) && <Text size="small">{expirationDate.join('/')}</Text>}
+          </CardAdditionalInfo>
+        </StyledCreditCardView>
+        <Text size="large" weight="bold">
+          {nickName}
+        </Text>
+      </Container>
+    );
+  },
+  (prev, next) =>
+    prev.cardCompany === next.cardCompany &&
+    prev.cardNumbers === next.cardNumbers &&
+    prev.expirationDate === next.expirationDate &&
+    prev.name === next.name,
+);

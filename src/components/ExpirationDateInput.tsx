@@ -43,7 +43,7 @@ export const ExpirationDateInput = (props: ExpirationDateInputProps) => {
         ref={monthRef}
         maxCount={2}
         value={month}
-        onChange={handleMonthChange}
+        handleOnChange={handleMonthChange}
         center
         placeholder="MM"
         width={6}
@@ -52,7 +52,7 @@ export const ExpirationDateInput = (props: ExpirationDateInputProps) => {
         ref={yearRef}
         maxCount={2}
         value={year}
-        onChange={handleYearChange}
+        handleOnChange={handleYearChange}
         center
         placeholder="YY"
         width={6}

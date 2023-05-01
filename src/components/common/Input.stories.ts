@@ -10,8 +10,11 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const UniversalInput: Story = {};
+
+export const CardNameInput: Story = {
   args: {
-    value: '다람쥐 헌 쳇바퀴 돌듯이',
+    maxCount: 30,
+    placeholder: '카드에 표시된 이름과 동일하게 입력하세요.',
   },
 };

@@ -36,7 +36,7 @@ export const CardPasswordInput = (props: CardPasswordInputProps) => {
         ref={password1Ref}
         maxCount={1}
         value={value[0] ?? ''}
-        onChange={handleCardPasswordChange(0)}
+        handleOnChange={handleCardPasswordChange(0)}
         width={5}
         center
         type="password"
@@ -45,7 +45,7 @@ export const CardPasswordInput = (props: CardPasswordInputProps) => {
         ref={password2Ref}
         maxCount={1}
         value={value[1] ?? ''}
-        onChange={handleCardPasswordChange(1)}
+        handleOnChange={handleCardPasswordChange(1)}
         width={5}
         center
         type="password"
