@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import BankItem from '../common/BankItem';
+import BankItem from './BankItem';
 import BottomSheet from './BottomSheet';
 import { CONVERT_BANK_NAME } from '../../utils/Constants';
 

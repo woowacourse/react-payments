@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import CardItem from '../common/CardItem';
+import CardItem from '../CardListPageComponents/CardItem';
 import Title from '../common/Title';
 import Input from '../common/Input';
 import { cardLocalStorage } from '../domain/CardLocalStorage';

@@ -1,6 +1,6 @@
 import { Story, Meta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import BankItem from '../components/common/BankItem';
+import BankItem from '../components/BottomSheetComponents/BankItem';
 
 export default {
   title: 'Payment/common/BankItem',

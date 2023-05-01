@@ -1,5 +1,5 @@
 import { Meta, Story } from '@storybook/react';
-import CardItem from '../components/common/CardItem';
+import CardItem from '../components/CardListPageComponents/CardItem';
 import { CardItemInfo } from '../types/Card';
 
 const meta = {

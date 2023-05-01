@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import styled from 'styled-components';
-import CardItem from '../common/CardItem';
+import CardItem from './CardItem';
 import Title from '../common/Title';
 import { CardContext } from '../../context/CardContext';
 
