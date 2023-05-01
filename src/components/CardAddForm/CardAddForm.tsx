@@ -1,81 +1,74 @@
-import styles from './style.module.css';
-import { ChangeEvent, FormEvent, useEffect, useRef } from 'react';
-import { Card } from '../../types';
-import CardNumber from './CardNumber/CardNumber';
-import CardExpirationDate from './CardExpirationDate/CardExpirationDate';
-import CardOwnerName from './CardOwnerName/CardOwnerName';
-import CardSecurityCode from './CardSecurityCode/CardSecurityCode';
-import CardPassword from './CardPassword/CardPassword';
-import Button from '../common/Button/Button';
-import { useFormComplete } from '../../hooks/useFormComplete';
-import { useCardValidator } from '../../hooks/useCardValidation';
+import { useRef } from "react";
+import type { FormEvent } from "react";
+import type { CardFormData, CardFormValidation } from "../../types";
+import Button from "../common/Button/Button";
+import CardExpirationDate from "./CardExpirationDate/CardExpirationDate";
+import CardIssuer from "./CardIssuer/CardIssuer";
+import CardNumber from "./CardNumber/CardNumber";
+import CardOwnerName from "./CardOwnerName/CardOwnerName";
+import CardPassword from "./CardPassword/CardPassword";
+import CardSecurityCode from "./CardSecurityCode/CardSecurityCode";
+import styles from "./style.module.css";
 
 interface CardAddFormProps {
-  cardInformation: Card;
-  onCardNumberChange: ({ target: { value, dataset } }: ChangeEvent<HTMLInputElement>) => void;
-  onOwnerNameChange: ({ target: { value } }: ChangeEvent<HTMLInputElement>) => void;
-  onExpirationDateChange: ({ target: { value } }: ChangeEvent<HTMLInputElement>) => void;
-  onSecurityCodeChange: ({ target: { value } }: ChangeEvent<HTMLInputElement>) => void;
-  onPasswordChange: ({ target: { value, dataset } }: ChangeEvent<HTMLInputElement>) => void;
-  onCardInformationSubmit: (event: FormEvent<HTMLFormElement>) => void;
+  cardInputError: CardFormValidation;
+  updateInputValue: <K extends keyof CardFormData>(
+    key: K,
+    value: CardFormData[K]
+  ) => void;
+  updateInputError: <K extends keyof CardFormValidation>(
+    key: K,
+    value: CardFormData[K]
+  ) => void;
+  handleSubmit: (event: FormEvent<HTMLFormElement>) => void;
 }
 
-function CardAddForm({
-  cardInformation,
-  onCardNumberChange,
-  onOwnerNameChange,
-  onExpirationDateChange,
-  onSecurityCodeChange,
-  onPasswordChange,
-  onCardInformationSubmit,
-}: CardAddFormProps) {
-  const [cardInputValidation, handleValidationChange] = useCardValidator();
-  const isFormComplete = useFormComplete(cardInputValidation);
-
+const CardAddForm = ({
+  cardInputError,
+  updateInputValue,
+  updateInputError,
+  handleSubmit,
+}: CardAddFormProps) => {
   const formRef = useRef<HTMLFormElement>(null);
 
-  useEffect(() => {
-    if (formRef.current && formRef.current[0] instanceof HTMLInputElement) {
-      formRef.current[0].focus();
-    }
-  }, []);
-
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    if (!isFormComplete) return;
-
-    onCardInformationSubmit(event);
-  };
-
   return (
-    <form ref={formRef} className={styles.form} onSubmit={onSubmit} tabIndex={0}>
+    <form
+      ref={formRef}
+      className={styles.form}
+      noValidate
+      onSubmit={handleSubmit}
+    >
+      <CardIssuer
+        isError={cardInputError.issuer}
+        updateInputValue={updateInputValue}
+        updateInputError={updateInputError}
+      />
       <CardNumber
-        onChange={onCardNumberChange}
-        handleValidationChange={handleValidationChange}
-        values={cardInformation.cardNumber}
+        isError={cardInputError.cardNumber}
+        updateInputValue={updateInputValue}
+        updateInputError={updateInputError}
       />
       <CardExpirationDate
-        onChange={onExpirationDateChange}
-        handleValidationChange={handleValidationChange}
-        value={cardInformation.expirationDate}
+        isError={cardInputError.expirationDate}
+        updateInputValue={updateInputValue}
+        updateInputError={updateInputError}
       />
-      <CardOwnerName onChange={onOwnerNameChange} value={cardInformation.ownerName} />
+      <CardOwnerName updateInputValue={updateInputValue} />
       <CardSecurityCode
-        onChange={onSecurityCodeChange}
-        handleValidationChange={handleValidationChange}
-        value={cardInformation.securityCode}
+        isError={cardInputError.securityCode}
+        updateInputValue={updateInputValue}
+        updateInputError={updateInputError}
       />
       <CardPassword
-        onChange={onPasswordChange}
-        handleValidationChange={handleValidationChange}
-        values={cardInformation.password}
+        isError={cardInputError.password}
+        updateInputValue={updateInputValue}
+        updateInputError={updateInputError}
       />
-      <Button id="submitButton" className={isFormComplete ? '' : 'hide'} primary>
-        완료
+      <Button className="submit-button" variant="primary">
+        다음
       </Button>
     </form>
   );
-}
+};
 
 export default CardAddForm;
