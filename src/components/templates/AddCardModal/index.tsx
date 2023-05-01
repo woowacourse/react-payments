@@ -1,7 +1,7 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
-import { useCardModalDispatch, useCardModalState } from '../../../hooks/useContextHooks';
+import { useCardModalDispatch, useCardModalState } from '../../context/CardPaymentContext';
 
 import CardCompanies from '../../organisms/CardCompanies';
 

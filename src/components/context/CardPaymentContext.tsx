@@ -1,5 +1,10 @@
 import { createContext, Dispatch, useContext } from 'react';
-import { Action, AddCardModalContextState, CardContextState, CardFormState } from '../store/type';
+import {
+  Action,
+  AddCardModalContextState,
+  CardContextState,
+  CardFormState,
+} from '../../store/type';
 
 export const CardPaymentStateContext = createContext<CardFormState | null>(null);
 export const CardPaymentDispatchContext = createContext<Dispatch<Action> | null>(null);

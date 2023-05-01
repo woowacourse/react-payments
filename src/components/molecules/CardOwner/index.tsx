@@ -11,7 +11,7 @@ import {
   useCardFocusRefs,
   useCardPaymentDispatch,
   useCardPaymentState,
-} from '../../../hooks/useContextHooks';
+} from '../../context/CardPaymentContext';
 
 /* component */
 const CardOwner: React.FC = () => {

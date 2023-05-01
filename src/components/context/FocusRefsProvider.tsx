@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { CardFocusRefContext, MoveFocusRefContext } from '../../hooks/useContextHooks';
+import { CardFocusRefContext, MoveFocusRefContext } from './CardPaymentContext';
 
 type ChildProps = {
   children: React.ReactNode;

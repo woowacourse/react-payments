@@ -1,11 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useCardModalDispatch, useCardPaymentDispatch } from '../../../hooks/useContextHooks';
-import { changeCardName } from '../../../store/action';
+
 import Button from '../../atomics/Button';
 import Icon from '../../atomics/Icon';
 import Message from '../../atomics/Message';
+import { changeCardName } from '../../../store/action';
+
 import { VStack } from '../../layout/flexbox';
+
+import { useCardModalDispatch, useCardPaymentDispatch } from '../../context/CardPaymentContext';
 
 type CardName = 'BC' | 'HANA' | 'HYUNDAI' | 'KAKAO' | 'KB' | 'LOTTE' | 'SHINHAN' | 'WORRI';
 

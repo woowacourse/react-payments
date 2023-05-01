@@ -8,7 +8,7 @@ import { useInputError } from '../../../hooks/useInputError';
 import { VStack } from '../../layout/flexbox';
 
 import { changeCardCVCAction } from '../../../store/action';
-import { useCardFocusRefs, useCardPaymentDispatch } from '../../../hooks/useContextHooks';
+import { useCardFocusRefs, useCardPaymentDispatch } from '../../context/CardPaymentContext';
 
 /* component */
 const CardCVC: React.FC = () => {

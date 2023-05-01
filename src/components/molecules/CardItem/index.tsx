@@ -1,9 +1,9 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import { useCardModalDispatch } from '../../../hooks/useContextHooks';
 import { Card } from '../../../store/type';
 import Message from '../../atomics/Message';
+import { useCardModalDispatch } from '../../context/CardPaymentContext';
 import { SBetweenStack } from '../../layout/flexbox';
 import { color } from '../../stylesheet/theme';
 

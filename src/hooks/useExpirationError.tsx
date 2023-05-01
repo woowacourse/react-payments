@@ -1,5 +1,6 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useCardPaymentState } from './useContextHooks';
+import { useCardPaymentState } from '../components/context/CardPaymentContext';
 
 import { useInputError } from './useInputError';
 

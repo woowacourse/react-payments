@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useCardFocusRefs, useCardPaymentDispatch } from '../../../hooks/useContextHooks';
+
 import { useInputError } from '../../../hooks/useInputError';
 import { changeCardPWD } from '../../../store/action';
 
 import Input from '../../atomics/Input';
 import Message from '../../atomics/Message';
+import { useCardFocusRefs, useCardPaymentDispatch } from '../../context/CardPaymentContext';
 
 import { Stack, VStack } from '../../layout/flexbox';
 

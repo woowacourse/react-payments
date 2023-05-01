@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { useCardListDispatch, useCardListState } from '../../../hooks/useContextHooks';
 import Button from '../../atomics/Button';
 import Input from '../../atomics/Input';
 import Message from '../../atomics/Message';
+import { useCardListDispatch, useCardListState } from '../../context/CardPaymentContext';
 import { VStack } from '../../layout/flexbox';
 import CardItem from '../../molecules/CardItem';
 

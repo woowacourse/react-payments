@@ -1,6 +1,6 @@
 import React from 'react';
 import { useCardModal } from '../../hooks/useCardModal';
-import { AddCardModalContext } from '../../hooks/useContextHooks';
+import { AddCardModalContext } from './CardPaymentContext';
 
 type ChildProps = {
   children: React.ReactNode;

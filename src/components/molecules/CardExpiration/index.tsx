@@ -8,7 +8,7 @@ import { VStack } from '../../layout/flexbox';
 
 import { changeCardExpirationDate } from '../../../store/action';
 import { useExpirationError } from '../../../hooks/useExpirationError';
-import { useCardFocusRefs, useCardPaymentDispatch } from '../../../hooks/useContextHooks';
+import { useCardFocusRefs, useCardPaymentDispatch } from '../../context/CardPaymentContext';
 
 /* component */
 const CardExpiration: React.FC = () => {
