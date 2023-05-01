@@ -13,10 +13,7 @@ interface ModalTriggerProps {
   asChild?: boolean;
 }
 
-export const ModalTrigger = forwardRef(function ModalTrigger(
-  props: PropsWithChildren<ModalTriggerProps>,
-  ref?: any
-) {
+export function ModalTrigger(props: PropsWithChildren<ModalTriggerProps>) {
   const { asChild, children } = props;
   const { isOpen, openLocalModal, closeLocalModal } = useContext(ModalContext);
   const childrenList = Children.toArray(children);
@@ -28,9 +25,5 @@ export const ModalTrigger = forwardRef(function ModalTrigger(
   if (asChild && isValidElement<{ onClick: () => void }>(childrenList[0])) {
     return cloneElement(childrenList[0], { onClick: toggleLocalModal });
   }
-  return (
-    <div onClick={toggleLocalModal} ref={ref}>
-      {children}
-    </div>
-  );
-});
+  return <div onClick={toggleLocalModal}>{children}</div>;
+}
