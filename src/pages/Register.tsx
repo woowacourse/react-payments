@@ -20,7 +20,7 @@ const Style = {
     display: flex;
     align-items: center;
 
-    margin-bottom: 25px;
+    margin-bottom: 15px;
 
     font-weight: bold;
   `,

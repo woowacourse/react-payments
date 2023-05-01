@@ -123,7 +123,7 @@ const Style = {
 
     width: max-content;
 
-    gap: 19px;
+    gap: 15px;
   `,
 
   CardCompanySelectButton: styled.button`
@@ -150,7 +150,7 @@ const Style = {
 
     width: max-content;
 
-    gap: 19px;
+    gap: 12px;
   `,
 
   ButtonContainer: styled.div`

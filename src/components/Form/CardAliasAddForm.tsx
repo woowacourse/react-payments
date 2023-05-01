@@ -88,7 +88,7 @@ const Style = {
     justify-content: flex-end;
 
     width: 100%;
-    margin-top: 270px;
+    margin-top: 250px;
   `,
 
   AliasLength: styled.span`
