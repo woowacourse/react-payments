@@ -8,7 +8,6 @@ import ControlButton from 'components/ControlButton';
 import CreditCardRegisterLayout from 'components/CreditCardRegisterLayout';
 import CreditCardRegisterTopSheet from 'components/CreditCardRegisterTopSheet';
 import FlexBox from 'components/FlexBox';
-import Box from 'components/Box';
 import { creditCardListStore } from 'stores/creditCardListStore';
 import CreditCardNumberInput from './inputs/CreditCardNumberInput';
 import CreditCardExpiryInput from './inputs/CreditCardExpiryInput';
@@ -44,17 +43,15 @@ function CreditCardRegister() {
           <S.CreditCardRegisterHeader>카드 추가</S.CreditCardRegisterHeader>
         </CreditCardRegisterTopSheet>
         <FlexBox justifyContent="center">
-          <Box mb={3}>
-            <CreditCard
-              fullFilled={false}
-              creditCard={{
-                companyId: creditCardForm.companyId,
-                number: creditCardForm.number,
-                expiry: creditCardForm.expiry,
-                owner: creditCardForm.owner,
-              }}
-            />
-          </Box>
+          <CreditCard
+            fullFilled={false}
+            creditCard={{
+              companyId: creditCardForm.companyId,
+              number: creditCardForm.number,
+              expiry: creditCardForm.expiry,
+              owner: creditCardForm.owner,
+            }}
+          />
         </FlexBox>
         <S.CreditCardRegisterForm>
           <CreditCardNumberInput

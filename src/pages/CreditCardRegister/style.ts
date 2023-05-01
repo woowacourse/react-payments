@@ -11,6 +11,7 @@ export const CreditCardRegisterHeader = styled.h3`
 `;
 
 export const CreditCardRegisterForm = styled.form`
+    margin-top: 36px;
     display: grid;
     row-gap: 20px;
 `;

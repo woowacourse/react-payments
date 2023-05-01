@@ -1,7 +1,6 @@
 import * as T from 'types';
 import useCreditCardForm from 'hooks/useCreditCardForm';
 import FlexBox from 'components/FlexBox';
-import Box from 'components/Box';
 import { validateCVC } from 'domains/validations';
 import Input from '../../../components/Input';
 import * as S from '../style';
@@ -19,7 +18,7 @@ function CreditCardCVCInput({ name }: T.CreditCardInputProps) {
   const isError = creditCardForm.cvc.length > 0 && validateCVC(creditCardForm.cvc);
 
   return (
-    <Box>
+    <div>
       <S.CreditCardRegisterLabel>보안 코드(CVC/CVV)</S.CreditCardRegisterLabel>
 
       <FlexBox justifyContent="flex-start" alignItems="center">
@@ -29,7 +28,7 @@ function CreditCardCVCInput({ name }: T.CreditCardInputProps) {
         </S.QuestionBox>
       </FlexBox>
       {isError && <S.ErrorMessage>CVC/CVV 번호는 3자리 숫자여야 합니다.</S.ErrorMessage>}
-    </Box>
+    </div>
   );
 }
 
