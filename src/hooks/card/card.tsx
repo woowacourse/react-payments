@@ -1,52 +1,24 @@
-import React, { ChangeEvent, FocusEvent, FormEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, FocusEvent, FormEvent, useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useCardRegisterContext } from '../../context/CardRegisterContext';
 import { CardNumber, CardRegisterInfo, ExpirationDate, Password } from '../../types/card.type';
 import { isInputElement } from '../../utils/dom';
 import { getCardList, setCardList } from '../../utils/localStorage';
-import { isEnglish, isNumber, isPatternMatch } from '../../utils/validation';
+import { isEnglish, isLongerThan, isNumber, isPatternMatch } from '../../utils/validation';
+import useAutoFocus from '../@common/useAutoFocus';
 import useErrors, { INVALID_FORMAT } from '../@common/useError';
 
-export function useMyCardRegister() {
+export function useCardRegister() {
   const navigate = useNavigate();
-  const [isAllValid, setIsAllValid] = useState(false);
-
-  const findInvalidInput = (inputs: HTMLInputElement[]) => inputs.find((input) => !input.validity.valid);
-  const validateAllInputs = (inputs: HTMLInputElement[]) =>
-    inputs.every((input, i, inputs) => input.validity.valid);
-
-  const handleChange = (e: FormEvent<HTMLFormElement>) => {
-    const form = e.currentTarget as HTMLFormElement;
-    const inputs = Array.from(form.elements).filter((e) => e.tagName === 'INPUT') as HTMLInputElement[];
-
-    inputs.forEach((input, i) => {
-      if (input !== e.target) return;
-
-      const { value, pattern, name, maxLength, validity } = input;
-      const nextInput = findInvalidInput(inputs.slice(i + 1)) ?? inputs[i + 1];
-      const prevInput = findInvalidInput(inputs.slice(0, i).reverse()) ?? inputs[i - 1];
-
-      if (name === 'name') {
-        value.length === maxLength && nextInput?.focus();
-        !value && prevInput?.focus();
-
-        return;
-      }
-
-      isPatternMatch(value, pattern) && nextInput?.focus();
-      !value && prevInput?.focus();
-    });
-
-    setIsAllValid(validateAllInputs(inputs));
-  };
+  const { isAllFilled, handleChange } = useAutoFocus();
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    navigate('/', { state: { registered: true } });
+    navigate('/alias');
   };
 
-  return { isAllValid, handleSubmit, handleChange };
+  return { isAllFilled, handleSubmit, handleChange };
 }
 
 export function useMyCardList() {
@@ -202,3 +174,25 @@ export function useCardPassword() {
 
   return { error, password, onChangeByKey, onBlur };
 }
+
+export const useCardAlias = () => {
+  const {
+    cardRegisterInfo: { alias },
+    handleCardInfo,
+  } = useCardRegisterContext();
+  const navigate = useNavigate();
+
+  const onChange = ({ target: { value, maxLength } }: ChangeEvent<HTMLInputElement>) => {
+    if (value && isLongerThan(maxLength)(value)) return;
+
+    handleCardInfo('alias', value);
+  };
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    navigate('/', { state: { registered: true } });
+  };
+
+  return { alias, onChange, handleSubmit };
+};
