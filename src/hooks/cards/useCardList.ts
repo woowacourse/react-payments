@@ -1,16 +1,19 @@
 import { useEffect, useState } from 'react';
 import type { Card } from '../../types';
+import { CARD_LIST_LOCAL_STORAGE_KEY } from '../../constants';
 import { getLocalStorage, saveToLocalStorage } from '../../utils/localStorage';
 
 const useCard = () => {
-  const [cardList, setCardList] = useState<Card[]>(getLocalStorage() ?? []);
+  const [cardList, setCardList] = useState<Card[]>(
+    getLocalStorage(CARD_LIST_LOCAL_STORAGE_KEY) ?? []
+  );
 
   const newCardId = (cardList.at(-1)?.id ?? 0) + 1;
   const newestCard = cardList.at(-1);
   const cardListLength = cardList.length;
 
   useEffect(() => {
-    saveToLocalStorage(cardList);
+    saveToLocalStorage(CARD_LIST_LOCAL_STORAGE_KEY, cardList);
   }, [cardList]);
 
   const addCard = (newCard: Card) => {
