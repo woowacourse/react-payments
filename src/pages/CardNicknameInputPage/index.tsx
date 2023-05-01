@@ -61,7 +61,6 @@ const CardNicknameInputPage = () => {
             onChange={handleNicknameChange}
             placeholder="카드 별칭 입력(선택)"
             ref={inputRef}
-            aria-label="카드 별칭 입력(선택)"
           />
         </label>
         <Spacer height={130} />
