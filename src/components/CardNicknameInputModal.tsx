@@ -87,7 +87,7 @@ const CardNicknameInputModal = ({
           <input
             onChange={handleNickname}
             className="nickname-input"
-            placeholder="닉네임을 입력해주세요!"
+            placeholder="카드 닉네임을 입력해주세요!"
             autoFocus
             type="text"
             maxLength={10}
