@@ -16,17 +16,14 @@ export default function useAutoFocus() {
 
       const { value, name, pattern, maxLength } = input;
       const nextInput = findInvalidInput(inputs.slice(i + 1)) ?? inputs[i + 1];
-      const prevInput = findInvalidInput(inputs.slice(0, i).reverse()) ?? inputs[i - 1];
 
       if (name === 'name') {
         value.length === maxLength && nextInput?.focus();
-        !value && prevInput?.focus();
 
         return;
       }
 
       isPatternMatch(value, pattern) && nextInput?.focus();
-      !value && prevInput?.focus();
     });
 
     setIsAllFilled(validateAllInputs(inputs));
