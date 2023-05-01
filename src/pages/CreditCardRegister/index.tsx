@@ -45,7 +45,7 @@ function CreditCardRegister() {
   };
 
   useEffect(() => {
-    scrollWindow.toTo();
+    scrollWindow.toTop();
     if (!creditCard.company) {
       openModal();
     }
