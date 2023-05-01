@@ -16,7 +16,7 @@ export default function MyCardList() {
         {registeredCards.map((card, index) => (
           <div key={generateCardNumber(card.cardNumber)}>
             <Card type="card" {...card} />
-            <Styled.Alias style={{ color: 'black', height: '30px' }}>{card.alias}</Styled.Alias>
+            <Styled.Alias>{card.alias}</Styled.Alias>
           </div>
         ))}
         <Card type="button" onClick={() => navigate('./registerCard')} />
