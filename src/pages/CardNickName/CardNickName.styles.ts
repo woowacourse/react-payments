@@ -1,48 +1,6 @@
-import Card from "src/components/@common/Card";
-import Input from "src/components/@common/Input";
-import useSaveNickName from "src/hooks/useSaveNickName";
 import styled, { css } from "styled-components";
 
-function CardNickName() {
-  const {
-    cardName,
-    cardNumbers,
-    ownerName,
-    expireDate,
-    nickName,
-    onChange,
-    registerCard,
-  } = useSaveNickName();
-
-  return (
-    <>
-      {
-        <Styled.NickNameContainer>
-          <Styled.Title>카드 등록이 완료되었습니다.</Styled.Title>
-          <Card
-            cardName={cardName}
-            cardNumber={cardNumbers}
-            ownerName={ownerName}
-            expireDate={expireDate}
-          />
-          <Input
-            type="text"
-            value={nickName}
-            onChange={onChange}
-            customInputStyle={Styled.NickNameInput}
-          />
-          <Styled.ButtonContainer>
-            <Styled.NextButton onClick={registerCard}>확인</Styled.NextButton>
-          </Styled.ButtonContainer>
-        </Styled.NickNameContainer>
-      }
-    </>
-  );
-}
-
-export default CardNickName;
-
-const Styled = {
+export const Styled = {
   NickNameContainer: styled.div`
     display: flex;
     flex-direction: column;
