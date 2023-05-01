@@ -40,7 +40,7 @@ const CardNumbers = ({ cardNumbers, isSetCardNumbers }: CardNumbersProps) => {
           order={0}
           placeholder={'0000'}
           required={true}
-          autofocus={true}
+          autoFocus={true}
         />
         {cardRefs[0].current?.value.length === 4 && (
           <Styled.Paragraph>-</Styled.Paragraph>
