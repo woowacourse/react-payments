@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Input } from './Input';
 import { InputContainer } from './InputContainer';
 import { isEmptyInput, isFullInput } from '../../utils';
-import { isValidDate } from '../../utils/validator';
+import { isNumeric, isValidDate } from '../../utils/validator';
 import { ERROR, MONTH_SIZE, YEAR_SIZE } from '../../constants';
 import { ExpirationDate } from '../../types';
 
@@ -30,6 +30,8 @@ export function ExpirationDateInput({
   };
 
   const handleMonthInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!isNumeric(e.target.value)) return;
+
     setExpirationDate({
       ...expirationDate,
       month: e.target.value,
@@ -40,6 +42,8 @@ export function ExpirationDateInput({
   };
 
   const handleYearInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!isNumeric(e.target.value)) return;
+
     setExpirationDate({
       ...expirationDate,
       year: e.target.value,

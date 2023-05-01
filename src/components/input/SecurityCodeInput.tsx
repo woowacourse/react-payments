@@ -24,11 +24,7 @@ export function SecurityCodeInput({
   const tooltipMessage = '카드 뒷면 서명란에 인쇄된 숫자 끝 3자리를 입력해주세요.';
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!isNumeric(e.target.value)) {
-      alert(ERROR.IS_NOT_NUMBER);
-
-      e.target.value = '';
-    }
+    if (!isNumeric(e.target.value)) return;
 
     setSecurityCode(e.target.value.toUpperCase());
   };

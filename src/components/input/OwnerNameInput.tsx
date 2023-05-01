@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { Input } from './Input';
 import { InputContainer } from './InputContainer';
-import { isEnglish } from '../../utils/validator';
-import { ERROR, MAX_NAME_SIZE } from '../../constants';
+import { isEnglish, isOverMaxLength } from '../../utils/validator';
+import { MAX_NAME_SIZE } from '../../constants';
 import { OwnerName } from '../../types';
 
 interface Props {
@@ -19,11 +19,8 @@ export function OwnerNameInput({
   moveFocusToSecurityCode,
 }: Props) {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!isEnglish(e.target.value, MAX_NAME_SIZE)) {
-      alert(ERROR.INVALID_OWNER_NAME);
-
-      e.target.value = '';
-    }
+    if (!isEnglish(e.target.value)) return;
+    if (isOverMaxLength(e.target.value, MAX_NAME_SIZE)) return;
 
     setOwnerName(e.target.value.toUpperCase());
   };

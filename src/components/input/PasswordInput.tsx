@@ -24,6 +24,8 @@ export function PasswordInput({ password, passwordInputRef, setPassword }: Props
   };
 
   const handlePasswordInputChange = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!isNumeric(e.target.value)) return;
+
     const newPassword = [...password];
     newPassword[index] = e.target.value;
     setPassword(newPassword);

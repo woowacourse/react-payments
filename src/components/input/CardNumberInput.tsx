@@ -45,6 +45,8 @@ export function CardNumberInput({
   };
 
   const handleCardNumberInputChange = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!isNumeric(e.target.value)) return;
+
     const newCardNumber = [...cardNumber];
     newCardNumber[index] = e.target.value;
     setCardNumber(newCardNumber);
