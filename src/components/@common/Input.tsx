@@ -1,7 +1,7 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, ComponentPropsWithoutRef } from "react";
 import styled, { CSSProp } from "styled-components";
 
-interface Props extends StyleInputProps {
+interface Props extends StyleInputProps, ComponentPropsWithoutRef<"input"> {
   value: string;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   maxLength?: number;

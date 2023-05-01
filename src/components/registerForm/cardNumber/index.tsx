@@ -27,6 +27,7 @@ function CardNumber() {
       <Input
         key={key}
         data-index={idx}
+        name="cardNumber"
         value={value[idx]}
         onChange={onChange}
         maxLength={EACH_CARD}
@@ -42,7 +43,7 @@ function CardNumber() {
 
   return (
     <div>
-      <FormLabel>카드 번호</FormLabel>
+      <FormLabel htmlFor="cardNumber">카드 번호</FormLabel>
       <S.CardNumberInputContainer>{inputs}</S.CardNumberInputContainer>
       {error?.isError && <ErrorSpan>{error?.message}</ErrorSpan>}
     </div>

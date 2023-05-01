@@ -1,11 +1,12 @@
+import { ComponentPropsWithoutRef } from "react";
 import styled from "styled-components";
 
-interface Props {
+interface Props extends ComponentPropsWithoutRef<"label"> {
   children: React.ReactNode;
 }
 
 function FormLabel({ children }: Props) {
-  return <StyleLabel>{children}</StyleLabel>;
+  return <StyleLabel htmlFor="">{children}</StyleLabel>;
 }
 
 export default FormLabel;
