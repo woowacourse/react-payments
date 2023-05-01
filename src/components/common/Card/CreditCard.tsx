@@ -1,7 +1,7 @@
 import React from 'react';
 import { COMPANY_NAME, Card } from './types';
 import styled from 'styled-components';
-import { CARD_COLOR } from '../../../constants';
+import { COMPANY_LIST, CARDS_INFO } from '../../../constants';
 
 export type CreditCardProps = {
   card: Card;
@@ -13,11 +13,12 @@ interface CardColorProps extends React.ComponentPropsWithoutRef<'span'> {
 }
 
 export function CreditCard({ card, onClick }: CreditCardProps) {
-  const handleClick = () => {
+  const handleOpenModal = () => {
     if (onClick) onClick(card.bank);
   };
+
   return (
-    <Styled.Wrapper backgroundColor={card.bank} onClick={handleClick}>
+    <Styled.Wrapper backgroundColor={card.bank} onClick={handleOpenModal}>
       <Styled.Bank>{card.bank}</Styled.Bank>
       <Styled.Chip />
       <Styled.CardNumbers>
@@ -43,10 +44,12 @@ const Styled = {
     position: relative;
     width: 213px;
     height: 133px;
-    background-color: ${({ backgroundColor }) => CARD_COLOR[backgroundColor] ?? 'black'};
+    background-color: ${({ backgroundColor }) =>
+      CARDS_INFO[COMPANY_LIST.indexOf(backgroundColor)].color ?? 'black'};
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
     color: ${({ backgroundColor }) => (backgroundColor === '카카오뱅크' ? '#3A1D1D' : 'white')};
+    cursor: pointer;
   `,
   Chip: styled.div`
     position: absolute;

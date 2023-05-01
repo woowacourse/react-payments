@@ -12,7 +12,6 @@ import { ValueAndOnChange } from 'components/Input/types';
 import { CreditCard } from 'components/common/Card/CreditCard';
 import { useCardFormValid } from 'hooks/useCardFormValid';
 import { Modal } from 'components/Modal/CardCompanyModal';
-import { COMPANY_LIST, ICON_SVG_PATH } from '../../constants';
 import { CardInfoContext, defaultCardInfo } from 'context/CardInfoContext';
 import FormLabel from 'components/common/FormLabel/FormLabel';
 import { ModalContext } from 'context/ModalContext';
@@ -102,22 +101,16 @@ function AddCardInfo({ onSubmit }: AddCardFormProps) {
     onSubmit();
   };
 
-  const handleClickCompany = (bank: COMPANY_NAME) => {
+  const handleOpenModal = (bank: COMPANY_NAME) => {
     setCard((prev) => ({ ...prev, bank: bank }));
     setIsModalOpen(!isModalOpen);
   };
 
   return (
     <>
-      {isModalOpen && (
-        <Modal
-          ImgSources={Object.values(ICON_SVG_PATH) as string[]}
-          companyNames={COMPANY_LIST}
-          onClick={handleClickCompany}
-        />
-      )}
+      {isModalOpen && <Modal onClick={handleOpenModal} />}
       <CardWrapper>
-        <CreditCard card={card} onClick={handleClickCompany} />
+        <CreditCard card={card} onClick={handleOpenModal} />
         <FormLabel>카드 이미지를 터치하여 카드사를 변경할 수 있습니다.</FormLabel>
       </CardWrapper>
       <FormContainer onSubmit={handleSubmit}>

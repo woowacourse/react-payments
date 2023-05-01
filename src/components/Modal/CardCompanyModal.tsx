@@ -1,48 +1,44 @@
-import { forwardRef, useContext } from 'react';
+import { MouseEventHandler, forwardRef, useContext } from 'react';
 import styled from 'styled-components';
 import { Icon } from '../common/Icon/Icon';
-import { COMPANY_NAME } from '../common/Card/types';
 import { ModalContext } from 'context/ModalContext';
+import { CARDS_INFO } from '../../constants';
+import { COMPANY_NAME } from 'components/common/Card/types';
 
 export interface ModalProps {
-  ImgSources?: string[];
-  companyNames?: COMPANY_NAME[];
-
   onClick: (bank: COMPANY_NAME) => void;
 }
 
 type Ref = HTMLDivElement;
 
-export const Modal = forwardRef<Ref, ModalProps>(
-  ({ companyNames, ImgSources, onClick, ...props }, ref) => {
-    const { setIsModalOpen } = useContext(ModalContext);
+export const Modal = forwardRef<Ref, ModalProps>(({ onClick, ...props }, ref) => {
+  const { setIsModalOpen } = useContext(ModalContext);
 
-    const handleModalClose = () => {
-      setIsModalOpen((prev) => !prev);
-    };
+  const handleModalClose = () => {
+    setIsModalOpen((prev) => !prev);
+  };
 
-    return (
-      <>
-        <Styled.ModalBackdrop onClick={handleModalClose} />
+  const handleSelectCompany: MouseEventHandler<HTMLSpanElement> = (e) => {
+    const company = e.currentTarget.textContent as COMPANY_NAME;
 
-        <Styled.Modal {...props} ref={ref}>
-          {ImgSources &&
-            companyNames &&
-            ImgSources?.map((value, index) => {
-              return (
-                <Icon
-                  imgSrc={value}
-                  name={companyNames[index]}
-                  onClick={() => onClick(companyNames[index])}
-                />
-              );
-            })}
-          <Styled.ModalCloseButton onClick={handleModalClose}>X</Styled.ModalCloseButton>
-        </Styled.Modal>
-      </>
-    );
-  },
-);
+    onClick(company);
+  };
+
+  return (
+    <>
+      <Styled.ModalBackdrop onClick={handleModalClose} />
+
+      <Styled.Modal {...props} ref={ref}>
+        {Object.values(CARDS_INFO).map((value) => {
+          return (
+            <Icon imgSrc={value.iconSvgPath} name={value.name} onClick={handleSelectCompany} />
+          );
+        })}
+        <Styled.ModalCloseButton onClick={handleModalClose}>X</Styled.ModalCloseButton>
+      </Styled.Modal>
+    </>
+  );
+});
 
 const Styled = {
   Modal: styled.div`
