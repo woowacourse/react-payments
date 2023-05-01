@@ -18,4 +18,4 @@ export const CARD_COMPANIES = [
   { name: "비씨카드", imgSrc: bcLogo, color: "#C04A82" },
   { name: "롯데카드", imgSrc: lotteLogo, color: "#009FBD" },
   { name: "현대카드", imgSrc: hdLogo, color: "#95E1D3" },
-];
+] as const;
