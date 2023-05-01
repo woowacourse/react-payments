@@ -12,6 +12,8 @@ export default function Header() {
     content = '보유카드';
   } else if (location.pathname === '/registerCard') {
     content = '카드 추가';
+  } else if (location.pathname === '/alias') {
+    content = '';
   } else {
     content = 'Page not found';
   }
@@ -19,9 +21,7 @@ export default function Header() {
   return (
     <Styled.Root>
       {location.pathname !== '/' && (
-        <Styled.NavigationButton onClick={() => navigate(-1)}>
-          &lt;
-        </Styled.NavigationButton>
+        <Styled.NavigationButton onClick={() => navigate(-1)}>&lt;</Styled.NavigationButton>
       )}
       <Styled.HeaderTitle>{content}</Styled.HeaderTitle>
     </Styled.Root>
