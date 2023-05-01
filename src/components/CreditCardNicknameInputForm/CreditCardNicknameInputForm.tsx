@@ -1,6 +1,4 @@
-import Box from 'components/Box';
 import CreditCard from 'components/CreditCard/CreditCard';
-import FlexBox from 'components/FlexBox';
 import styled from 'styled-components';
 import * as T from 'types';
 
@@ -38,34 +36,22 @@ function CreditCardNicknameInputForm(
   };
 
   return (
-    <Box>
-      <Box>
-        <FlexBox justifyContent="center">
-          <CreditCard
-            fullFilled
-            creditCard={{
-              companyId: creditCardForm.companyId,
-              number: creditCardForm.number,
-              expiry: creditCardForm.expiry,
-              owner: creditCardForm.owner,
-            }}
-          />
-        </FlexBox>
-      </Box>
-      <Box mt={3} mb={3}>
-
-        <FlexBox justifyContent="center">
-          <Box mt={6} mb={3}>
-            <NicknameInput
-              value={nickname}
-              onChange={handleNicknameInput}
-              placeholder="카드 별명을 입력하세요"
-            />
-          </Box>
-        </FlexBox>
-      </Box>
-    </Box>
-
+    <div>
+      <CreditCard
+        fullFilled
+        creditCard={{
+          companyId: creditCardForm.companyId,
+          number: creditCardForm.number,
+          expiry: creditCardForm.expiry,
+          owner: creditCardForm.owner,
+        }}
+      />
+      <NicknameInput
+        value={nickname}
+        onChange={handleNicknameInput}
+        placeholder="카드 별명을 입력하세요"
+      />
+    </div>
   );
 }
 export default CreditCardNicknameInputForm;
