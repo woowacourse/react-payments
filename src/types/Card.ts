@@ -6,15 +6,14 @@ export type Company =
   | "우리카드"
   | "롯데카드"
   | "하나카드"
-  | "국민카드"
-  | "";
+  | "국민카드";
 
 export interface CardPublicInfo {
   id: number;
   cardNumber: string[];
   expirationDate: string[];
   name: string;
-  company: Company;
+  company?: Company;
   nickName?: string;
 }
 

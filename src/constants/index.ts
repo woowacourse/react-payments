@@ -29,5 +29,4 @@ export const CARD_BACKGROUND_COLOR: CardCompanyColor = {
   우리카드: "#42add7",
   국민카드: "#8C8176",
   롯데카드: "#e60013",
-  "": "#000000",
 };

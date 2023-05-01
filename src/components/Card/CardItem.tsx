@@ -8,7 +8,7 @@ interface CardItemProps {
 }
 
 const CardItem = ({ card }: CardItemProps) => {
-  const cardBackground = CARD_BACKGROUND_COLOR[card.company];
+  const cardBackground = card.company ? CARD_BACKGROUND_COLOR[card.company] : "#000000";
   const cardFontColor = card.company === "카카오뱅크" ? "#5d4545" : "#ffffff";
 
   return (

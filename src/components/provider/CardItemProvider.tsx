@@ -21,7 +21,7 @@ interface CardItemValue {
   name: string;
   securityCode: string;
   password: string[];
-  company: Company;
+  company: Company | undefined;
   nickname?: string;
 }
 
