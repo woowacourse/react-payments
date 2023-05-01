@@ -19,12 +19,17 @@ interface CardIssuerProps {
 const CardIssuer = ({ isError, updateInputValue, updateInputError }: CardIssuerProps) => {
   const { isModalOpen, isModalClosed, openModal, closeModal } = useModalContext();
   const [value, setValue] = useState<Issuer | ''>('');
+  const containerRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    if (isModalClosed) {
-      updateInputError('issuer', value);
+    if (!isModalClosed) return;
+
+    if (value === '') {
       buttonRef.current?.focus();
+      updateInputError('issuer', value);
+    } else {
+      (containerRef.current?.nextElementSibling?.children[1] as HTMLInputElement).focus();
     }
   }, [isModalClosed, updateInputError, value]);
 
@@ -42,6 +47,7 @@ const CardIssuer = ({ isError, updateInputValue, updateInputError }: CardIssuerP
 
   return (
     <InputContainer
+      ref={containerRef}
       className={styles.container}
       supportingText={{
         error: '카드에 표시된 카드사를 선택해주세요',
