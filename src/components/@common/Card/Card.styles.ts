@@ -7,8 +7,6 @@ export const Card = styled.div<{
   aspect-ratio: 213 / 133;
   flex-shrink: 0;
   padding: 14.23px 18.45px;
-
-  margin-top: 46px;
   background-color: ${({ bg }) => bg ?? '#333333'};
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
