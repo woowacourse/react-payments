@@ -41,15 +41,8 @@ const CardRegisterForm = () => {
     handleNumberChange,
     handleOwnerChange,
     handleSubmit,
-  } = useCardRegisterForm(inputRefs);
-
-  useEffect(() => {
-    if (isModalOpen === false) {
-      const [cardNumberInputRef] = inputRefs;
-
-      cardNumberInputRef.current?.focus();
-    }
-  }, [isModalOpen]);
+    handleFormChange,
+  } = useCardRegisterForm();
 
   return (
     <>
@@ -68,7 +61,11 @@ const CardRegisterForm = () => {
         expiredYear={expiredYear}
         onClick={openModal}
       />
-      <form className={styles.form} onSubmit={handleSubmit}>
+      <form
+        className={styles.form}
+        onSubmit={handleSubmit}
+        onChange={handleFormChange}
+      >
         <label>
           카드 번호
           <div className={styles.inputContainer}>

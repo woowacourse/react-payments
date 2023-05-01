@@ -6,8 +6,10 @@ import {
   SetStateAction,
   useState,
 } from 'react';
+import { ChangeEvent, FormEventHandler, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import useCardRegisterInput from './useCardRegisterInput';
 import { useCardCompany } from '../../domain/context/CardCompanyContext';
 import { useCardsContext } from '../../domain/context/CardsContext';
 import { isNotAlphabet, isNotNumber } from '../../utils/validation';
@@ -18,6 +20,7 @@ const currentYear = today.getFullYear() % 100;
 const currentMonth = today.getMonth() + 1;
 
 const useCardRegisterForm = (inputRefs: RefObject<Focus>[]) => {
+const useCardRegisterForm = () => {
   const navigate = useNavigate();
   const { cardCompany } = useCardCompany();
   const { registerCard } = useCardsContext();
@@ -35,6 +38,20 @@ const useCardRegisterForm = (inputRefs: RefObject<Focus>[]) => {
   const [cvc, setCvc] = useState('');
   const [cardPassword1, setCardPassword1] = useState('');
   const [cardPassword2, setCardPassword2] = useState('');
+  const { cardData, handleNumberChange, handleOwnerChange } =
+    useCardRegisterInput();
+  const {
+    cardNumber1,
+    cardNumber2,
+    cardNumber3,
+    cardNumber4,
+    expiredMonth,
+    expiredYear,
+    owner,
+    cvc,
+    cardPassword1,
+    cardPassword2,
+  } = cardData;
 
   const isCardFormFilled =
     cardNumber1.length === 4 &&
@@ -120,6 +137,29 @@ const useCardRegisterForm = (inputRefs: RefObject<Focus>[]) => {
     navigate('/card-nickname');
   };
 
+  const handleFormChange = (event: ChangeEvent<HTMLFormElement>) => {
+    autoFocusNextInput(event);
+  };
+
+  const autoFocusNextInput = (event: ChangeEvent<HTMLFormElement>) => {
+    const { value, name, maxLength } = event.target;
+    const inputEls = Array.from(event.currentTarget.elements).filter(
+      (el) => el.tagName.toLowerCase() === 'input',
+    );
+
+    if (value.length === maxLength) {
+      const targetInput = inputEls.find(
+        (inputEl) => (inputEl as HTMLInputElement).name === name,
+      );
+
+      if (targetInput === undefined) return;
+
+      const index = inputEls.indexOf(targetInput);
+
+      (inputEls[index + 1] as HTMLInputElement)?.focus();
+    }
+  };
+
   return {
     cardCompany,
     cardNumber1,
@@ -147,6 +187,7 @@ const useCardRegisterForm = (inputRefs: RefObject<Focus>[]) => {
     handleNumberChange,
     handleOwnerChange,
     handleSubmit,
+    handleFormChange,
   };
 };
 
