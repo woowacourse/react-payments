@@ -6,6 +6,7 @@ import SecurityCode from "src/components/registerForm/SecurityCode";
 import CardPassword from "src/components/registerForm/CardPassword";
 import { Styled as S } from "./CardRegisterForm.styles";
 import useRegisterCardInfo from "src/hooks/useRegisterCardInfo";
+import Button from "src/components/@common/Button";
 
 function CardRegisterForm() {
   const { onSubmit, isValidateInfo } = useRegisterCardInfo();
@@ -18,11 +19,9 @@ function CardRegisterForm() {
         <OwnerNameInput />
         <SecurityCode />
         <CardPassword />
-        {isValidateInfo && (
-          <S.ButtonContainer>
-            <S.NextButton>다음</S.NextButton>
-          </S.ButtonContainer>
-        )}
+        <S.ButtonContainer>
+          <Button text="다음" disabled={!isValidateInfo} />
+        </S.ButtonContainer>
       </S.Form>
     </>
   );
