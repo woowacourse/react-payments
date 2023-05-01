@@ -15,24 +15,25 @@ function CardPassword() {
     maxLength: EACH_PASSWORD,
   });
 
-  const { value, onChange, error } = useCardInfoInput<CardPasswordProps>({
-    contextType: "password",
-    validation: (value) => {
-      const firstVal = refs.current[0]?.value ?? "";
-      const secondVal = refs.current[1]?.value ?? "";
-      const passwordVal = firstVal + secondVal;
+  const { value, numberInputOnChange, error } =
+    useCardInfoInput<CardPasswordProps>({
+      contextType: "password",
+      validation: (value) => {
+        const firstVal = refs.current[0]?.value ?? "";
+        const secondVal = refs.current[1]?.value ?? "";
+        const passwordVal = firstVal + secondVal;
 
-      lengthMatchValidation(passwordVal, MAX_PASSWORD);
-    },
-    nextInputFocus,
-  });
+        lengthMatchValidation(passwordVal, MAX_PASSWORD);
+      },
+      nextInputFocus,
+    });
 
   const inputs = PASSWORD_NUMBER_TYPES.map((key, idx) => (
     <Input
       key={key}
       data-index={idx}
       value={value[idx]}
-      onChange={onChange}
+      onChange={numberInputOnChange}
       maxLength={EACH_PASSWORD}
       inputmode="numeric"
       type="password"

@@ -8,10 +8,12 @@ import { CardIDProps, CardInfoProps } from "src/interfaces";
 import { initialCardInfos } from "src/utils/constant";
 import { EACH_SECOND_CHANCE } from "src/utils/regexp";
 
+type ReducerActionType = keyof CardInfoProps | "clear";
+
 function reducer(
   state: CardInfoProps,
   action: {
-    type: keyof CardInfoProps | "clear";
+    type: ReducerActionType;
     payload: string;
     index?: number;
   },
@@ -48,7 +50,7 @@ export const CardInfoContext = createContext<
   [
     CardInfoProps,
     React.Dispatch<{
-      type: keyof CardInfoProps | "clear";
+      type: ReducerActionType;
       payload: string;
       index?: number;
     }> | null,

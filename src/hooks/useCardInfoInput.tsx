@@ -26,43 +26,22 @@ function useCardInfoInput<T>({
     message: "",
   });
 
-  const onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+  const numberInputOnChange: React.ChangeEventHandler<HTMLInputElement> = (
+    event,
+  ) => {
     const { value } = event.currentTarget;
     const idx = event.currentTarget.dataset["index"];
-    const date = value.replace("/", "");
+    if (!dispatch) return;
 
-    if (
-      contextType !== "ownerName" &&
-      !ONLY_NUMBER_REGEXP.test(contextType === "expireDate" ? date : value)
-    )
-      return;
-    if (contextType === "ownerName" && !ONLY_ENG_AND_EMPTY_REGEXP.test(value))
-      return;
+    if (!ONLY_NUMBER_REGEXP.test(value)) return;
 
     try {
       if (validation) validation(value);
-
       setError({ isError: false, message: "" });
     } catch (error) {
       if (!(error instanceof Error)) return;
       setError({ isError: true, message: error.message });
     } finally {
-      if (!dispatch) return;
-
-      if (contextType === "expireDate") {
-        const [MM, YY] = value.split("/");
-
-        const dateValitation = MMYYValidation(date, [MM, YY]);
-
-        if (dateValitation && value.length === NUMBERS.MAX_EXPIREDATE) {
-          dispatch({ type: contextType, payload: "", index: Number(idx) });
-          setError({
-            isError: true,
-            message: `${value}는 유효한 값이 아닙니다.`,
-          });
-          return;
-        }
-      }
       dispatch({ type: contextType, payload: value, index: Number(idx) });
     }
 
@@ -71,15 +50,67 @@ function useCardInfoInput<T>({
     }
   };
 
-  /**
-   * 문제 1 onChange가 너무 복잡하다.
-   * 문제 2 상태 값을 하나의 객체에서 사용하다 관심사 분리가 되어있지 않다.
-   *  -> 모든 컴포넌트의 상태를 하나의 객체에서 관리할 필요가 없다고 생각한다. 분리된 상태를 적용해보자
-   *
-   */
+  const onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+    const { value } = event.currentTarget;
+    const idx = event.currentTarget.dataset["index"];
+    if (!dispatch) return;
+    checkInputValue(value);
+
+    try {
+      if (validation) validation(value);
+      setError({ isError: false, message: "" });
+    } catch (error) {
+      if (!(error instanceof Error)) return;
+
+      setError({ isError: true, message: error.message });
+    } finally {
+      if (contextType === "expireDate" && isInValidExpireDate(value)) {
+        dispatch({ type: contextType, payload: "" });
+        setError({
+          isError: true,
+          message: `${value}는 유효한 값이 아닙니다.`,
+        });
+        return;
+      }
+
+      dispatch({ type: contextType, payload: value, index: Number(idx) });
+    }
+
+    if (idx && nextInputFocus) {
+      nextInputFocus(Number(idx));
+    }
+  };
+
+  const isInValidExpireDate = (value: string) => {
+    if (!dispatch) return;
+
+    const [MM, YY] = value.split("/");
+    const date = value.replace("/", "");
+    const dateValitation = MMYYValidation(date, [MM, YY]);
+
+    if (dateValitation && value.length === NUMBERS.MAX_EXPIREDATE) {
+      return true;
+    }
+
+    return false;
+  };
+
+  const checkInputValue = (value: string) => {
+    const date = value.replace("/", "");
+
+    if (
+      contextType !== "ownerName" &&
+      !ONLY_NUMBER_REGEXP.test(contextType === "expireDate" ? date : value)
+    )
+      return; // ownerName이 아니고 date가 아닐때
+    if (contextType === "ownerName" && !ONLY_ENG_AND_EMPTY_REGEXP.test(value))
+      // owner Name일 때
+      return;
+  };
 
   return {
     value: cardInfo[contextType] as T,
+    numberInputOnChange,
     onChange,
     error,
   };
