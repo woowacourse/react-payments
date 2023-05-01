@@ -1,28 +1,36 @@
-import { ChangeEvent, Dispatch, FormEvent, SetStateAction, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Card, CardNumberFormat, PasswordFormat } from '../types';
+import {
+  ChangeEvent,
+  Dispatch,
+  FormEvent,
+  SetStateAction,
+  useState,
+} from "react";
+import { useNavigate } from "react-router-dom";
+import { Card, CardNumberFormat, PasswordFormat } from "../types";
 import {
   checkEnglishFormat,
   checkExpirationDateFormat,
   checkNumberFormat,
-} from '../utils/formatChecker';
-import { formatEnglishCapitalization } from '../utils/formatter';
+} from "../utils/formatChecker";
+import { formatEnglishCapitalization } from "../utils/formatter";
 
-const useCardAddition = (addCard: Dispatch<SetStateAction<Card[]>>) => {
+const useCardForm = (addCard: Dispatch<SetStateAction<Card[]>>) => {
   const [cardInformation, setCardInformation] = useState<Card>({
-    cardNumber: ['', '', '', ''],
+    cardNumber: ["", "", "", ""],
     expirationDate: {
-      month: '',
-      year: '',
+      month: "",
+      year: "",
     },
-    ownerName: '',
-    securityCode: '',
-    password: ['', ''],
+    ownerName: "",
+    securityCode: "",
+    password: ["", ""],
   });
 
   const navigate = useNavigate();
 
-  const onCardNumberChange = ({ target: { value, dataset } }: ChangeEvent<HTMLInputElement>) => {
+  const onCardNumberChange = ({
+    target: { value, dataset },
+  }: ChangeEvent<HTMLInputElement>) => {
     if (!checkNumberFormat(value)) return;
 
     const index = Number(dataset.index);
@@ -38,7 +46,9 @@ const useCardAddition = (addCard: Dispatch<SetStateAction<Card[]>>) => {
     });
   };
 
-  const onOwnerNameChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
+  const onOwnerNameChange = ({
+    target: { value },
+  }: ChangeEvent<HTMLInputElement>) => {
     if (!checkEnglishFormat(value)) return;
 
     const ownerName = formatEnglishCapitalization(value);
@@ -51,11 +61,13 @@ const useCardAddition = (addCard: Dispatch<SetStateAction<Card[]>>) => {
     });
   };
 
-  const onExpirationDateChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
+  const onExpirationDateChange = ({
+    target: { value },
+  }: ChangeEvent<HTMLInputElement>) => {
     if (!checkExpirationDateFormat(value)) return;
 
     setCardInformation((information) => {
-      const [month, year] = value.split('/');
+      const [month, year] = value.split("/");
 
       return {
         ...information,
@@ -67,7 +79,9 @@ const useCardAddition = (addCard: Dispatch<SetStateAction<Card[]>>) => {
     });
   };
 
-  const onSecurityCodeChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
+  const onSecurityCodeChange = ({
+    target: { value },
+  }: ChangeEvent<HTMLInputElement>) => {
     if (!checkNumberFormat(value)) return;
 
     setCardInformation((information) => {
@@ -78,7 +92,9 @@ const useCardAddition = (addCard: Dispatch<SetStateAction<Card[]>>) => {
     });
   };
 
-  const onPasswordChange = ({ target: { value, dataset } }: ChangeEvent<HTMLInputElement>) => {
+  const onPasswordChange = ({
+    target: { value, dataset },
+  }: ChangeEvent<HTMLInputElement>) => {
     if (!checkNumberFormat(value)) return;
 
     const index = Number(dataset.index);
@@ -100,7 +116,7 @@ const useCardAddition = (addCard: Dispatch<SetStateAction<Card[]>>) => {
     addCard((cardList) => {
       return [...cardList, cardInformation];
     });
-    navigate('/');
+    navigate("/");
   };
 
   return {
@@ -114,4 +130,4 @@ const useCardAddition = (addCard: Dispatch<SetStateAction<Card[]>>) => {
   };
 };
 
-export { useCardAddition };
+export { useCardForm };
