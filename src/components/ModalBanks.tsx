@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import { BcBank, ShinhanBank, KakaoBank, HyundaeBank, WooriBank, LotteBank, HanaBank, KookminBank } from '../assets';
-import { CARD_BANK_COLOR_MAP } from '../constants';
+import { BANK_ID, CARD_BANK_COLOR_MAP } from '../constants';
 import { CardType } from '../types';
+import Bank from './Bank';
 
 interface Props {
   card: CardType;
@@ -9,7 +10,6 @@ interface Props {
 }
 const ModalBanks = (props: Props) => {
   const card = JSON.parse(JSON.stringify(props.card));
-
   const cardColorHandler = (e: React.MouseEvent<HTMLElement>) => {
     card.color = CARD_BANK_COLOR_MAP[e.currentTarget.id].background;
     card.bankName = e.currentTarget.id;
@@ -18,40 +18,16 @@ const ModalBanks = (props: Props) => {
   return (
     <ModalContainer>
       <BanksWrapper>
-        <BankWrapper id="BC카드" onClick={cardColorHandler}>
-          <img src={BcBank} alt="도움말" />
-          <span>BC카드</span>
-        </BankWrapper>
-        <BankWrapper id="신한카드" onClick={cardColorHandler}>
-          <img src={ShinhanBank} alt="도움말" />
-          <span>신한카드</span>
-        </BankWrapper>
-        <BankWrapper id="카카오뱅크" onClick={cardColorHandler}>
-          <img src={KakaoBank} alt="도움말" />
-          <span style={{ marginLeft: '-6px' }}>카카오뱅크</span>
-        </BankWrapper>
-        <BankWrapper id="현대카드" onClick={cardColorHandler}>
-          <img src={HyundaeBank} alt="도움말" />
-          <span>현대카드</span>
-        </BankWrapper>
+        <Bank id={BANK_ID.BC_CARD} imgSrc={BcBank} onClick={e => cardColorHandler(e)} />
+        <Bank id={BANK_ID.SHINHAN_CARD} imgSrc={ShinhanBank} onClick={e => cardColorHandler(e)} />
+        <Bank id={BANK_ID.KAKAO_CARD} imgSrc={KakaoBank} onClick={e => cardColorHandler(e)} />
+        <Bank id={BANK_ID.HYUNDAI_CARD} imgSrc={HyundaeBank} onClick={e => cardColorHandler(e)} />
       </BanksWrapper>
       <BanksWrapper>
-        <BankWrapper id="우리카드" onClick={cardColorHandler}>
-          <img src={WooriBank} alt="도움말" />
-          <span>우리카드</span>
-        </BankWrapper>
-        <BankWrapper id="롯데카드" onClick={cardColorHandler}>
-          <img src={LotteBank} alt="도움말" />
-          <span>롯데카드</span>
-        </BankWrapper>
-        <BankWrapper id="하나카드" onClick={cardColorHandler}>
-          <img src={HanaBank} alt="도움말" />
-          <span>하나카드</span>
-        </BankWrapper>
-        <BankWrapper id="국민카드" onClick={cardColorHandler}>
-          <img src={KookminBank} alt="도움말" />
-          <span>국민카드</span>
-        </BankWrapper>
+        <Bank id={BANK_ID.WOORI_CARD} imgSrc={WooriBank} onClick={e => cardColorHandler(e)} />
+        <Bank id={BANK_ID.ROTTE_CARD} imgSrc={LotteBank} onClick={e => cardColorHandler(e)} />
+        <Bank id={BANK_ID.HANA_CARD} imgSrc={HanaBank} onClick={e => cardColorHandler(e)} />
+        <Bank id={BANK_ID.KOOKMIN_CARD} imgSrc={KookminBank} onClick={e => cardColorHandler(e)} />
       </BanksWrapper>
     </ModalContainer>
   );
