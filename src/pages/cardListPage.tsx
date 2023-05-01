@@ -7,6 +7,7 @@ import { Card, CardProps } from "../components/common/card/card";
 import { ReactComponent as BackButtonIc } from "../assets/backButtonIc.svg";
 import { PAGE_HEADER } from "../constants";
 import { PATH } from "../constants/path";
+import { BackButton } from "../components/common/button/backButton";
 
 export function CardListPage() {
   const [cards] = useState<CardProps[] | undefined>(getData());
@@ -23,7 +24,7 @@ export function CardListPage() {
   return (
     <CardListContainer>
       <Header>
-        <BackButtonIc />
+        <BackButton />
         {PAGE_HEADER.CARD_LIST}
       </Header>
       <Section>
