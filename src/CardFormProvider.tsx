@@ -4,11 +4,11 @@ import { defaultCreditCardForm } from 'data/creditCard';
 import {
   Dispatch, ReactNode, SetStateAction, createContext, useState
 } from 'react';
-import * as Type from 'types';
+import * as T from 'types';
 
 export interface CardFormState {
-  creditCardForm: Type.CreditCard;
-  setCreditCardForm: Dispatch<SetStateAction<Type.CreditCard>>;
+  creditCardForm: T.CreditCard;
+  setCreditCardForm: Dispatch<SetStateAction<T.CreditCard>>;
 }
 
 export const CardContext = createContext<CardFormState>({
@@ -21,7 +21,7 @@ interface CardProviderProps {
 }
 
 function CardFormProvider({ children }: CardProviderProps) {
-  const [creditCardForm, setCreditCardForm] = useState<Type.CreditCard>(defaultCreditCardForm);
+  const [creditCardForm, setCreditCardForm] = useState<T.CreditCard>(defaultCreditCardForm);
 
   const state = { creditCardForm, setCreditCardForm };
 

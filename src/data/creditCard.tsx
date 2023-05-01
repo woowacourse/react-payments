@@ -1,6 +1,6 @@
-import * as Type from 'types';
+import * as T from 'types';
 
-export const creditCardCompanies: Type.CreditCardCompany[] = [
+export const creditCardCompanies: T.CreditCardCompany[] = [
   {
     id: 'bc', name: 'BC카드', color: 'white', backgroundColor: '#FA3246'
   },
@@ -27,7 +27,7 @@ export const creditCardCompanies: Type.CreditCardCompany[] = [
   },
 ];
 
-export const defaultCreditCardForm: Type.CreditCard = {
+export const defaultCreditCardForm: T.CreditCard = {
   companyId: '',
   number: '',
   expiry: '',
