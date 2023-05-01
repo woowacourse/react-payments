@@ -10,6 +10,8 @@ import { CardType, Page, PageProps } from '../../abstracts/types';
 import PageTemplate from '../template/PageTemplate';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import { CARD_LIST_STORAGE_KEY } from '../../abstracts/constants';
+import BottomSheetTemplate from '../template/BottomSheetTemplate';
+import BankSelectBottomSheet from '../box/BankSelectBottomSheet';
 
 interface CardFormState extends Omit<CardType, 'id' | 'cardPassword'> {
   cardPassword1: string;
@@ -76,6 +78,9 @@ const CardRegisterPage = ({ navigate }: PageProps) => {
           <SubmitButton type="submit">다음</SubmitButton>
         </ButtonWrapper>
       </InputForm>
+      <BottomSheetTemplate>
+        <BankSelectBottomSheet />
+      </BottomSheetTemplate>
     </PageTemplate>
   );
 };
