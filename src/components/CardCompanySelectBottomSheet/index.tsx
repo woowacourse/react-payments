@@ -2,7 +2,6 @@ import CardCompanyButton from '../CardCompanyButton';
 import Modal from '../common/Modal';
 
 import { CARD_COMPANIES } from '../../domain/constants';
-import { uuid } from '../../utils/uuid';
 
 import styles from './cardCompanySelectBottomSheet.module.css';
 
@@ -12,7 +11,7 @@ const CardCompanySelectBottomSheet = () => {
       <div className={styles.container}>
         <div className={styles.companyContainer}>
           {CARD_COMPANIES.map((cardCompany) => (
-            <CardCompanyButton key={uuid()} cardCompany={cardCompany} />
+            <CardCompanyButton key={cardCompany} cardCompany={cardCompany} />
           ))}
         </div>
       </div>
