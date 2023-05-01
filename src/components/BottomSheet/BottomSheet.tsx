@@ -40,7 +40,7 @@ const BottomSheet = ({
             onClick={() => handleCardIconClick(name)}
             key={type}
           >
-            <CardSvgIcon type={type} size={36} />
+            <CardSvgIcon type={type} />
             <p>{name}</p>
           </Styled.IconWrapper>
         ))}

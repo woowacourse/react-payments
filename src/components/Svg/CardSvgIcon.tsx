@@ -12,7 +12,6 @@ import { CardCompanyType } from '../../types/Card';
 
 interface CardSvgIconProps {
   type: CardCompanyType;
-  size?: number;
 }
 
 const CARD_ICON_COMPONENTS: { [key in CardCompanyType]: any } = {
@@ -26,7 +25,7 @@ const CARD_ICON_COMPONENTS: { [key in CardCompanyType]: any } = {
   'woori-card': <WOORI />,
 };
 
-const CardSvgIcon = ({ type, size }: CardSvgIconProps) => {
+const CardSvgIcon = ({ type }: CardSvgIconProps) => {
   return CARD_ICON_COMPONENTS[type];
 };
 
