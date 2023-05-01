@@ -3,7 +3,7 @@ import ReactDom from 'react-dom';
 
 interface Props {
   children: ReactChild;
-  closeEvent: () => void;
+  closeModalHandler: () => void;
 }
 
 const ModalPortal=(props:Props)=> {
@@ -12,13 +12,13 @@ const ModalPortal=(props:Props)=> {
 
   const dialogKeyDownListener=(event: React.KeyboardEvent<HTMLDialogElement>)=>{
     if (event.key === 'Escape') {
-      props.closeEvent();
+      props.closeModalHandler();
     }
   }
 
   const dialogBackdropListener=(event: React.MouseEvent<HTMLDialogElement>)=>{
     if (event.target === event.currentTarget) {
-      props.closeEvent();
+      props.closeModalHandler();
     }
   }
 

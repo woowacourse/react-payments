@@ -51,7 +51,7 @@ const AddCard = () => {
       />
       <CardInputForm card={card} setCard={setCard} onSubmit={e => registerCard(e)} />
       {isModalOpen && (
-        <ModalPortal closeEvent={closeModal}>
+        <ModalPortal closeModalHandler={closeModal}>
           <ModalBanks setCard={setCard} card={card} />
         </ModalPortal>
       )}
