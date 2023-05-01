@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useContext } from "react";
+import { Fragment, useContext } from "react";
 import { Input } from "./common/input/Input";
 import { InputBox } from "./common/input/InputBox";
 import { NumberContext, RefContext } from "../contexts/cardInfo";
@@ -24,9 +24,8 @@ export function CardNumber() {
         <InputGroup>
           {Object.keys(cardNumber).map((cardInput, index, original) => {
             return (
-              <>
+              <Fragment key={cardInput}>
                 <Input
-                  key={cardInput}
                   name={cardInput}
                   type={
                     checkIsPasswordType(cardInput)
@@ -39,7 +38,7 @@ export function CardNumber() {
                   <CustomInput />
                 </Input>
                 {index < original.length - 1 && INPUT_TYPE.BAR}
-              </>
+              </Fragment>
             );
           })}
         </InputGroup>
