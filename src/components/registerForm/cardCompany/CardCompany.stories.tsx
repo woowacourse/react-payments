@@ -22,14 +22,14 @@ const cardNumber = {
 export default cardNumber;
 
 export const Example = () => {
-  const { isModalOpen, openModal, closeModal, modalRef } = useModal();
+  const { isModalOpen, openModal, closeModal } = useModal();
 
   return (
     <div>
       <div>
         <button onClick={openModal}>모달 열기</button>
         {isModalOpen && (
-          <Modal dialogRef={modalRef} closeEvent={closeModal}>
+          <Modal closeEvent={closeModal}>
             <CardCompany closeEvent={closeModal} />
           </Modal>
         )}

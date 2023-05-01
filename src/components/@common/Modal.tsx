@@ -3,11 +3,10 @@ import styled from "styled-components";
 
 interface Props {
   children: React.ReactNode;
-  dialogRef: React.RefObject<HTMLDialogElement>;
   closeEvent: () => void;
 }
 
-function Modal({ children, dialogRef, closeEvent }: Props) {
+function Modal({ children, closeEvent }: Props) {
   const $modalRoot = document.getElementById("modal-root") as HTMLElement;
 
   const dialogKeyDownListener = (
@@ -28,7 +27,6 @@ function Modal({ children, dialogRef, closeEvent }: Props) {
 
   return ReactDom.createPortal(
     <Styled.Dialog
-      ref={dialogRef}
       onKeyDown={dialogKeyDownListener}
       onClick={dialogBackdropListener}
     >

@@ -12,7 +12,7 @@ function CardRegister() {
 
   const { cardNumbers, expireDate, cardName, ownerName } = cardInfo;
 
-  const { openModal, closeModal, modalRef, isModalOpen } = useModal();
+  const { openModal, closeModal, isModalOpen } = useModal();
 
   const cardPreview = useMemo(
     () => (
@@ -32,7 +32,7 @@ function CardRegister() {
       {cardPreview}
       <CardRegisterForm />
       {isModalOpen && (
-        <Modal closeEvent={closeModal} dialogRef={modalRef}>
+        <Modal closeEvent={closeModal}>
           <CardCompany closeEvent={closeModal} />
         </Modal>
       )}
