@@ -30,9 +30,14 @@ export const Modal = forwardRef<Ref, ModalProps>(({ onClick, ...props }, ref) =>
     <>
       <Styled.ModalBackdrop onClick={handleModalClose} />
       <Styled.Modal {...props} ref={ref}>
-        {Object.values(CARDS_INFO).map((value) => {
+        {Object.values(CARDS_INFO).map((value, index) => {
           return (
-            <Icon imgSrc={value.iconSvgPath} name={value.name} onClick={handleSelectCompany} />
+            <Icon
+              key={index}
+              imgSrc={value.iconSvgPath}
+              name={value.name}
+              onClick={handleSelectCompany}
+            />
           );
         })}
         <Styled.ModalCloseButton onClick={handleModalClose}>X</Styled.ModalCloseButton>

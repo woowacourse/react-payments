@@ -28,7 +28,9 @@ export function useCardFormValid(card: Card): [
     isNumberLengthValid(expirationDate.month, 2) &&
     isNumberLengthValid(expirationDate.year, 2) &&
     Number(expirationDate.month) > 0 &&
-    Number(expirationDate.month) <= 12;
+    Number(expirationDate.month) <= 12 &&
+    Number(expirationDate.year) >= new Date().getFullYear() - 2000 &&
+    Number(expirationDate.year) <= new Date().getFullYear() - 1995;
 
   const isSecurityCodeValid = isNumberLengthValid(securityCode, 3);
 
