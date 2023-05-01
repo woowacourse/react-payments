@@ -16,8 +16,6 @@ const InputLabel = styled.span<Props>`
   font-weight: 500;
   letter-spacing: -0.085em;
   color: #525252;
-  margin-top: 19px;
-  margin-bottom: 3px;
 
   &::after {
     ${({ required }) =>

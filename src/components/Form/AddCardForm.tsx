@@ -5,9 +5,9 @@ import {
   PasswordInput,
   CardNumberInputs,
 } from 'components/Input';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { FormEventHandler, useState } from 'react';
-import { Card, isCard } from 'components/common/Card/types';
+import { BankCode, Card, isCard } from 'components/common/Card/types';
 import { ValueAndOnChange } from 'components/Input/types';
 import { CreditCard } from 'components/common';
 import {
@@ -20,7 +20,8 @@ export type AddCardFormProps = {
   onSubmit: (card: Card) => void;
 };
 
-export function AddCardForm({ onSubmit }: AddCardFormProps) {
+export function AddCardForm(props: AddCardFormProps) {
+  const { onSubmit } = props;
   const {
     cardFormInformation,
     setCardFormInformation,
@@ -106,6 +107,9 @@ export function AddCardForm({ onSubmit }: AddCardFormProps) {
     setBottomSheetActive((prevIsBottomSheetActive) => !prevIsBottomSheetActive);
   };
 
+  const isInputAllValid =
+    isCardNumberValid && isExpirationDateValid && isSecurityCodeValid && isPasswordValid;
+
   return (
     <>
       <CardWrapper>
@@ -130,7 +134,9 @@ export function AddCardForm({ onSubmit }: AddCardFormProps) {
           width="50px"
         />
 
-        <FormSubmitButton type="submit">다음</FormSubmitButton>
+        <FormSubmitButton type="submit" disabled={!isInputAllValid} bankCode={bankCode}>
+          다음
+        </FormSubmitButton>
       </FormContainer>
       <CardBottomSheet onClickBankImage={handleClickBankImage} active={isBottomSheetActive} />
     </>
@@ -145,16 +151,30 @@ const CardWrapper = styled.div`
 const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
+  gap: 19px;
 `;
 
-const FormSubmitButton = styled.button`
+const FormSubmitButton = styled.button<{ bankCode?: BankCode }>`
+  padding: 8px;
   border: none;
+  border-radius: 5px;
+
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+
+  background-color: ${({ disabled, theme: { colors }, bankCode }) =>
+    disabled || bankCode === undefined ? '#ececec' : colors.card.background[bankCode]};
+
+  color: ${({ disabled, theme: { colors }, bankCode }) =>
+    disabled || bankCode === undefined ? '#9e9e9e' : colors.card.font[bankCode]};
+
+  transition: background-color 300ms;
   font-size: 14px;
-  font-weight: 700;
-  background-color: transparent;
-  color: #000000;
-  margin-left: auto;
-  border-radius: 10px;
-  padding: 10px;
-  cursor: pointer;
+
+  &:hover {
+    filter: brightness(0.9);
+  }
+
+  &:focus {
+    background-color: brightness(0.8);
+  }
 `;
