@@ -9,14 +9,14 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const CardList: Story = {
+export const Default: Story = {
   args: {
     content: 'Header',
     isOverlayPage: false,
   },
 };
 
-export const CardAdd: Story = {
+export const Overlay: Story = {
   args: {
     content: 'Header',
     isOverlayPage: true,
