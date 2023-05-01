@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import useCardRegisterInput from './useCardRegisterInput';
 import { useCardCompany } from '../../domain/context/CardCompanyContext';
 import { useCardsContext } from '../../domain/context/CardsContext';
-import { useModal } from '../common/Modal/ModalContext';
+import { useModalContext } from '../common/Modal/ModalContext';
 
 const today = new Date();
 const currentYear = today.getFullYear() % 100;
@@ -14,7 +14,7 @@ const useCardRegisterForm = () => {
   const navigate = useNavigate();
   const cardNumberInputRef = useRef<HTMLInputElement>(null);
   const expiredMonthInputRef = useRef<HTMLInputElement>(null);
-  const { isModalOpen, openModal } = useModal();
+  const { isModalOpen, openModal } = useModalContext();
   const { cardCompany } = useCardCompany();
   const { registerCard } = useCardsContext();
   const { cardData, handleNumberChange, handleOwnerChange } =

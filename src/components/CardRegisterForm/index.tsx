@@ -4,13 +4,13 @@ import Tooltip from '../Tooltip';
 import TooltipButton from '../TooltipButton';
 
 import useCardRegisterForm from './useCardRegisterForm';
-import { useModal } from '../common/Modal/ModalContext';
+import { useModalContext } from '../common/Modal/ModalContext';
 import { CARD_NUMBER_INPUT_PLACEHOLDER } from '../../domain/constants';
 
 import styles from './cardRegisterForm.module.css';
 
 const CardRegisterForm = () => {
-  const { openModal } = useModal();
+  const { openModal } = useModalContext();
   const {
     cardCompany,
     cardNumber1,

@@ -9,7 +9,7 @@ import {
   WooriCardLogo,
 } from '../../assets/svg';
 
-import { useModal } from '../common/Modal/ModalContext';
+import { useModalContext } from '../common/Modal/ModalContext';
 import { useCardCompany } from '../../domain/context/CardCompanyContext';
 import type { CardCompany } from '../../domain/types/card';
 
@@ -32,7 +32,7 @@ interface Props {
 
 const CardCompanyButton = ({ cardCompany }: Props) => {
   const { setCardCompany } = useCardCompany();
-  const { closeModal } = useModal();
+  const { closeModal } = useModalContext();
 
   const handleClick = () => {
     setCardCompany(cardCompany);

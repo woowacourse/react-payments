@@ -1,7 +1,7 @@
 import { ReactNode, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
-import { useModal } from './ModalContext';
+import { useModalContext } from './ModalContext';
 
 import styles from './modal.module.css';
 
@@ -10,7 +10,7 @@ interface Props {
 }
 
 const Modal = ({ children }: Props) => {
-  const { isModalOpen, isVisible, isAnimating, closeModal } = useModal();
+  const { isClosing, closeModal } = useModalContext();
 
   const handleEscapeKeydown = (event: KeyboardEvent) => {
     if (event.key === 'Escape') {
@@ -25,17 +25,14 @@ const Modal = ({ children }: Props) => {
       document.body.removeEventListener('keydown', handleEscapeKeydown);
   }, []);
 
-  if (isModalOpen === false && isVisible === false && isAnimating === false)
-    return null;
-
   return createPortal(
     <div role="dialog" aria-modal>
       <div className={styles.backdrop} onClick={closeModal} />
       <div
         className={
-          isVisible
-            ? `${styles.container} ${styles.slideUp}`
-            : `${styles.container}`
+          isClosing
+            ? `${styles.container}`
+            : `${styles.container} ${styles.slideUp}`
         }
       >
         {children}

@@ -4,12 +4,12 @@ import CardRegisterForm from '../../components/CardRegisterForm';
 import CardCompanySelectBottomSheet from '../../components/CardCompanySelectBottomSheet';
 import { CardCompanyProvider } from '../../domain/context/CardCompanyContext';
 
-import { useModal } from '../../components/common/Modal/ModalContext';
+import { useModalContext } from '../../components/common/Modal/ModalContext';
 
 import styles from './cardRegisterPage.module.css';
 
 const CardRegisterPage = () => {
-  const { isModalOpen } = useModal();
+  const { isModalOpen } = useModalContext();
 
   return (
     <CardCompanyProvider>

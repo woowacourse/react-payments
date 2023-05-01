@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import CardCompanySelectBottomSheet from '../components/CardCompanySelectBottomSheet';
 import {
   ModalProvider,
-  useModal,
+  useModalContext,
 } from '../components/common/Modal/ModalContext';
 
 const meta: Meta<typeof CardCompanySelectBottomSheet> = {
@@ -17,7 +17,7 @@ type Story = StoryObj<typeof CardCompanySelectBottomSheet>;
 
 const Template: Story = {
   render: () => {
-    const { openModal } = useModal();
+    const { openModal } = useModalContext();
 
     return (
       <>
