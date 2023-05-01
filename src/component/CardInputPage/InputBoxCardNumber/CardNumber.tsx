@@ -1,15 +1,17 @@
-import "./cardNumber.css";
-
 import { ChangeEvent, useState } from "react";
+
 import Input from "../../common/Input";
-import { makeAppropriateNumber } from "../../../util/trans";
+
 import { nowStatus } from "../../../type";
+import { makeAppropriateNumber } from "../../../util/trans";
+
+import "./cardNumber.css";
 
 interface CardNumberProps {
   changeHasError: (partIndex: number, state: nowStatus) => void;
   changeCardNumberStatus: (
-    key: "isComplete" | "userInput",
-    value: any,
+    completeState: boolean,
+    value?: string,
     index?: number
   ) => void;
 }
@@ -29,7 +31,7 @@ export default function CardNumber({
         changeHasError(partIndex, 0);
       } else if (appropriateNumber.length === 4) {
         changeHasError(partIndex, 2);
-        changeCardNumberStatus("userInput", appropriateNumber, partIndex);
+        changeCardNumberStatus(true, appropriateNumber, partIndex);
       } else {
         changeHasError(partIndex, 1);
       }

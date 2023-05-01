@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 
-import { CreditCard } from "../../type";
 import CardInputForm from "./CardInputForm/CardInputForm";
 
+import { CreditCard } from "../../type";
 import { ReactComponent as LessThanSide } from "../../asset/lessThanSide.svg";
+
 import "./cardInputPage.css";
 
 interface CardInputPageProps {

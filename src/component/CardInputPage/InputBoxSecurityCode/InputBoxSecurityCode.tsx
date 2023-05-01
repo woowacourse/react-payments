@@ -1,14 +1,17 @@
 import { useState, ChangeEvent } from "react";
+
 import Input from "../../common/Input";
 
-import "./inputBoxSecurityCode.css";
 import { CARD_ERROR_MESSAGE, GUIDE_MESSAGE } from "../../../CONSTANT";
 import { makeAppropriateSecurityCode } from "../../../util/trans";
 
+import "./inputBoxSecurityCode.css";
+
 interface InputBoxSecurityProps {
   changeSecurityCodeStatus: (
-    key: "isComplete" | "userInput",
-    value: any
+    completeState: boolean,
+    value?: string,
+    index?: number
   ) => void;
 }
 
@@ -26,14 +29,13 @@ export default function InputBoxSecurityCode(props: InputBoxSecurityProps) {
 
     if (userSecurityCode !== appropriateSecurityCode) {
       setHaveError(true);
-      changeSecurityCodeStatus("isComplete", false);
+      changeSecurityCodeStatus(false);
     } else if (appropriateSecurityCode.length === 3) {
       setHaveError(false);
-      changeSecurityCodeStatus("isComplete", true);
-      changeSecurityCodeStatus("userInput", appropriateSecurityCode);
+      changeSecurityCodeStatus(true, appropriateSecurityCode);
     } else {
       setHaveError(false);
-      changeSecurityCodeStatus("isComplete", false);
+      changeSecurityCodeStatus(false);
     }
 
     setSecurityCode(appropriateSecurityCode);

@@ -1,3 +1,6 @@
+import { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+
 import Button from "../../common/Button";
 import CardPreview from "../../common/CardPreview";
 import InputBoxCardNumber from "../InputBoxCardNumber/InputBoxCardNumber";
@@ -5,40 +8,24 @@ import InputBoxExpirationDate from "../InputBoxExpirationDate/InputBoxExpiration
 import InputBoxOwner from "../InputBoxOwner/InputBoxOwner";
 import InputBoxPassword from "../InputBoxPassword/InputBoxPassword";
 import InputBoxSecurityCode from "../InputBoxSecurityCode/InputBoxSecurityCode";
+import CardCoModal from "../../common/CardCoModal";
 
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { CardCo, CreditCard, InputStatus } from "../../../type";
+import { initialCard } from "../../../cardData";
 
 import "./cardInputForm.css";
-import { CreditCard, InputStatus } from "../../../type";
-import { EachUserInputState } from "../../../type";
-import CardCoModal from "../../common/CardCoModal";
-import { initialCard } from "../../../cardData";
 
 interface CardInputFormProps {
   addNewCard: (card: CreditCard) => void;
 }
 
-const initialArrayInputState: EachUserInputState = {
-  isComplete: false,
-  userInput: [],
-};
-const initialStringInputState: EachUserInputState = {
-  isComplete: false,
-  userInput: "",
-};
-const initialCardCoInputState: EachUserInputState = {
-  isComplete: false,
-  userInput: "woori",
-};
-
-const initialInputStatus = {
-  cardCo: initialCardCoInputState,
-  cardNumber: initialArrayInputState,
-  expirationDate: initialStringInputState,
-  owner: initialStringInputState,
-  securityCode: initialStringInputState,
-  password: initialArrayInputState,
+const cardInputComplete = {
+  cardCo: false,
+  cardNumber: false,
+  expirationDate: false,
+  owner: false,
+  securityCode: false,
+  password: false,
 };
 
 const useCardCoModalState = () => {
@@ -55,63 +42,55 @@ const useCardCoModalState = () => {
   return { modalOpen, openCardCoModal, closeCardCoModal };
 };
 
-export default function CardInputForm(props: CardInputFormProps) {
-  const { addNewCard } = props;
-
-  const [isFormFilled, setIsFormFilled] = useState(false);
+const useCardInfoAndInputState = (closeModal: Function) => {
   const [inputStatus, setInputStatus] =
-    useState<InputStatus>(initialInputStatus);
+    useState<InputStatus>(cardInputComplete);
   const [nowCardInfo, setNowCardInfo] = useState<CreditCard>(initialCard);
-  const { modalOpen, openCardCoModal, closeCardCoModal } =
-    useCardCoModalState();
-  const navigate = useNavigate();
 
   const changeInputStatus = (inputName: keyof InputStatus) => {
-    return (key: keyof EachUserInputState, value: any, index?: number) => {
-      setInputStatus((currentInputStatus) => {
-        const updateResult = JSON.parse(JSON.stringify(currentInputStatus));
-        const originNowCard = JSON.parse(JSON.stringify(nowCardInfo));
+    return (completeState: boolean, value?: string, index?: number) => {
+      // 완료/미완료 setting
+      const changeInputStatus = JSON.parse(JSON.stringify(inputStatus));
+      changeInputStatus[inputName] = completeState;
+      setInputStatus(changeInputStatus);
 
-        if (key === "isComplete") {
-          updateResult[inputName][key] = value;
-          return updateResult;
-        }
+      //user input 입력
+      if (!completeState || value === undefined) return;
 
-        if (
-          (inputName === "cardNumber" || inputName === "password") &&
-          index !== undefined
-        ) {
-          updateResult[inputName][key][index] = value;
-          originNowCard[inputName][index] = value;
-          setNowCardInfo(originNowCard);
-          return updateResult;
-        } else if (inputName === "cardCo") {
-          closeCardCoModal();
-        }
-
-        updateResult[inputName][key] = value;
-        originNowCard[inputName] = value;
-        setNowCardInfo(originNowCard);
-
-        return updateResult;
-      });
+      const changeNowCard = JSON.parse(JSON.stringify(nowCardInfo));
+      if (inputName === "cardCo") {
+        changeNowCard[inputName] = value as CardCo;
+        setNowCardInfo(changeNowCard);
+        closeModal();
+      } else if (inputName !== "cardNumber" && inputName !== "password") {
+        changeNowCard[inputName] = value;
+        setNowCardInfo(changeNowCard);
+      } else if (index !== undefined) {
+        changeNowCard[inputName][index] = value;
+        setNowCardInfo(changeNowCard);
+      }
     };
   };
+  return { inputStatus, nowCardInfo, changeInputStatus };
+};
 
-  useEffect(() => {
-    const { cardNumber, expirationDate, securityCode, password } = inputStatus;
-    setIsFormFilled(
-      cardNumber.isComplete &&
-        expirationDate.isComplete &&
-        securityCode.isComplete &&
-        password.isComplete
-    );
-  }, [inputStatus]);
+export default function CardInputForm(props: CardInputFormProps) {
+  const { modalOpen, openCardCoModal, closeCardCoModal } =
+    useCardCoModalState();
 
+  const isFormFilled = useRef(false);
+  const { inputStatus, nowCardInfo, changeInputStatus } =
+    useCardInfoAndInputState(closeCardCoModal);
+  const { cardNumber, expirationDate, securityCode, password } = inputStatus;
+  isFormFilled.current =
+    cardNumber && expirationDate && securityCode && password;
+
+  const navigate = useNavigate();
+  const { addNewCard } = props;
   const submitCardInfo = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (isFormFilled) {
+    if (isFormFilled.current) {
       addNewCard(nowCardInfo);
       navigate("/CardNickInputPage");
     }
@@ -146,7 +125,10 @@ export default function CardInputForm(props: CardInputFormProps) {
         changeSecurityCodeStatus={changeInputStatus("securityCode")}
       />
       <InputBoxPassword changePasswordStatus={changeInputStatus("password")} />
-      <Button type="submit" style={isFormFilled ? {} : { color: "lightgrey" }}>
+      <Button
+        type="submit"
+        style={isFormFilled.current ? {} : { color: "lightgrey" }}
+      >
         다음
       </Button>
     </form>

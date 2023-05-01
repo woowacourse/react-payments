@@ -1,14 +1,16 @@
 import { DialogHTMLAttributes } from "react";
-import { CardCo, EachUserInputState } from "../../type";
+
 import CardCoButton from "./CardCoButton";
+
+import { CardCo } from "../../type";
 
 import "./cardCoModal.css";
 
 interface CardCoModalProps extends DialogHTMLAttributes<HTMLDialogElement> {
   cardCoList: CardCo[];
   changeCardCoStatus: (
-    key: keyof EachUserInputState,
-    value: any,
+    completeState: boolean,
+    value?: string,
     index?: number
   ) => void;
 }

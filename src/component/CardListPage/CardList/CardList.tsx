@@ -1,7 +1,9 @@
-import { CreditCard } from "../../../type";
 import CardPreview from "../../common/CardPreview";
 import AddCardButton from "../AddCardButton/AddCardButton";
 import CardPreviewBox from "./CardPreviewBox";
+
+import { CreditCard } from "../../../type";
+
 import "./cardList.css";
 
 interface CardListProps {

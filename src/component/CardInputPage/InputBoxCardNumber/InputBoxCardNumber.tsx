@@ -1,14 +1,16 @@
-import "./inputBoxCardNumber.css";
-
 import { useEffect, useState } from "react";
+
 import CardNumber from "./CardNumber";
+
 import { CARD_ERROR_MESSAGE } from "../../../CONSTANT";
 import { nowStatus } from "../../../type";
 
+import "./inputBoxCardNumber.css";
+
 interface InputBoxNumberProps {
   changeCardNumberStatus: (
-    key: "isComplete" | "userInput",
-    value: any,
+    completeState: boolean,
+    value?: string,
     index?: number
   ) => void;
 }
@@ -23,8 +25,8 @@ export default function InputBoxCardNumber(props: InputBoxNumberProps) {
     hasError = allStatus.includes(0) ? true : false;
 
     allStatus.every((status) => status === 2)
-      ? changeCardNumberStatus("isComplete", true)
-      : changeCardNumberStatus("isComplete", false);
+      ? changeCardNumberStatus(true)
+      : changeCardNumberStatus(false);
   }, [allStatus]);
 
   const changeHasError = (partIndex: number, state: nowStatus) => {

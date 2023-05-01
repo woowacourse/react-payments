@@ -1,5 +1,5 @@
 import { CARD_CO_NAME } from "../../CONSTANT";
-import { CardCo, EachUserInputState } from "../../type";
+import { CardCo } from "../../type";
 import { GetCardCoIcon } from "../../util/getCardCoIcon";
 
 import "./cardCoButton.css";
@@ -7,8 +7,8 @@ import "./cardCoButton.css";
 interface CardCoButtonProps {
   cardCo: CardCo;
   changeCardCoStatus: (
-    key: keyof EachUserInputState,
-    value: any,
+    completeState: boolean,
+    value?: string,
     index?: number
   ) => void;
 }
@@ -18,8 +18,7 @@ export default function CardCoButton({
   changeCardCoStatus,
 }: CardCoButtonProps) {
   function submitCardCo() {
-    changeCardCoStatus("isComplete", true);
-    changeCardCoStatus("userInput", cardCo);
+    changeCardCoStatus(true, cardCo);
   }
 
   return (

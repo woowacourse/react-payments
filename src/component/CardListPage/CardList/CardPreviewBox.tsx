@@ -1,5 +1,6 @@
-import { CreditCard } from "../../../type";
 import CardPreview from "../../common/CardPreview";
+
+import { CreditCard } from "../../../type";
 
 import "./cardPreviewBox.css";
 

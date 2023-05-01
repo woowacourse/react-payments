@@ -1,6 +1,7 @@
 import { CARD_CO_NAME } from "../../CONSTANT";
 import { CreditCard } from "../../type";
 import { colorMatch } from "../../util/colorMatch";
+
 import "./cardPreview.css";
 
 interface CardPreviewProps {

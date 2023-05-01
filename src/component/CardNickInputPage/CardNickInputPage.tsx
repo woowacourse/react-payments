@@ -1,9 +1,13 @@
 import { Link } from "react-router-dom";
-import { CreditCard } from "../../type";
+
 import Button from "../common/Button";
 import CardPreview from "../common/CardPreview";
-import "./cardNickInputPage.css";
+
+import { CreditCard } from "../../type";
+
 import InputBoxNick from "./InputBoxNick/InputBoxNick";
+
+import "./cardNickInputPage.css";
 
 interface CardNickInputPageProps {
   card: CreditCard;

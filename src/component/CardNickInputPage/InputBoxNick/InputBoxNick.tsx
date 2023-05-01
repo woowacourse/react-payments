@@ -1,4 +1,5 @@
 import { ChangeEvent, useState } from "react";
+
 import "./inputBoxNick.css";
 
 interface InputBoxNickProps {
