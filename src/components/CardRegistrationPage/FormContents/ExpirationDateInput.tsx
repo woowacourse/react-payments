@@ -9,11 +9,22 @@ const ExpirationDateInput = () => {
   const { onChangeExpirationDate, registExpirationDateRef } = useCardItemAction();
   const { expirationDateErrorMessage } = useErrorMessageValue();
 
-  const handleChangeExpirationDate = (inputIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeMonth = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
 
-    onChangeExpirationDate(inputIndex)(inputValue);
+    onChangeExpirationDate.onChangeMonth(inputValue);
   };
+
+  const handleChangeYear = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = event.target.value;
+
+    onChangeExpirationDate.onChangeYear(inputValue);
+  };
+  // const handleChangeExpirationDate = (inputIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const inputValue = event.target.value;
+
+  //   onChangeExpirationDate(inputIndex)(inputValue);
+  // };
 
   return (
     <InputGroup labelValue="만료일" errorMessage={expirationDateErrorMessage}>
@@ -22,14 +33,14 @@ const ExpirationDateInput = () => {
           placeholder="MM"
           ref={(element) => registExpirationDateRef(0, element)}
           value={expirationDate[0]}
-          onChange={handleChangeExpirationDate(0)}
+          onChange={handleChangeMonth}
         />
         <InputSeparator color="#737373">/</InputSeparator>
         <Input
           placeholder="YY"
           ref={(element) => registExpirationDateRef(1, element)}
           value={expirationDate[1]}
-          onChange={handleChangeExpirationDate(1)}
+          onChange={handleChangeYear}
         />
       </InputBox>
     </InputGroup>

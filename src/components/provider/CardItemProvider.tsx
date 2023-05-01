@@ -37,7 +37,10 @@ interface ErrorMessageValue {
 
 interface CardItemAction {
   onChangeCardNumber: (inputIndex: number) => (inputValue: string) => void;
-  onChangeExpirationDate: (inputIndex: number) => (inputValue: string) => void;
+  onChangeExpirationDate: {
+    onChangeMonth: (inputValue: string) => void;
+    onChangeYear: (inputValue: string) => void;
+  };
   onChangeName: (inputValue: string) => void;
   onChangeSecurityCode: (inputValue: string) => void;
   onChangePassword: (inputIndex: number) => (inputValue: string) => void;
