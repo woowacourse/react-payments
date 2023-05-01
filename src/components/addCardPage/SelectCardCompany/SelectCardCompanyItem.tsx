@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { CARD_COMPANY_DATA } from '../../../constants/constant';
+import { CARD_COMPANY_DATA } from '../../../constants/cardCompany';
 import { CardCompanyType } from '../../../types/types';
 
 interface SelectCardCompanyItemProps {

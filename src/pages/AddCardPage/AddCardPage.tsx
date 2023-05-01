@@ -17,7 +17,7 @@ import { Button } from '../../components/common/Button';
 import { Card } from '../../components/common/Card';
 import { InputField } from '../../components/common/InputField';
 import { Modal } from '../../components/common/Modal';
-import { CARD_COMPANY_DATA } from '../../constants/constant';
+import { CARD_COMPANY_DATA } from '../../constants/cardCompany';
 import { useFocusInput } from '../../hooks/useFocusInput';
 import { useFormInputs } from '../../hooks/useFormInputs';
 import { useHideScrollState } from '../../hooks/useHideScrollState';
@@ -68,7 +68,9 @@ export default function AddCardPage({
     cardTitle,
   } = formInputs.addCardPage;
 
-  const onCardInfoSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const onCardInfoValidateAndGoRegisterPage = (
+    event: FormEvent<HTMLFormElement>
+  ) => {
     event.preventDefault();
 
     const {

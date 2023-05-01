@@ -1,5 +1,4 @@
 import { CARD_COMPANY_KIND } from '../constants/cardCompany';
-import { PAGE } from '../constants/constant';
 
 export interface CardInfo {
   id: string;
@@ -19,8 +18,6 @@ export interface CardInfo {
 }
 
 export type CardCompanyRecord = Record<CardCompanyType, CardCompanyDetail>;
-
-export type PageInfo = (typeof PAGE)[number];
 
 export type CardCompanyType = (typeof CARD_COMPANY_KIND)[number] | 'default';
 

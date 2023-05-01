@@ -1,4 +1,3 @@
-import { PageInfo } from '../types/types';
 import {
   isNumber,
   isOnlyEnglish,
@@ -8,11 +7,22 @@ import {
 
 import { UseInputProps, useInput } from './useInput';
 
-type UseFormInputsProps = {
-  [page in PageInfo]: {
-    [kind: string]: UseInputProps;
+interface UseFormInputsProps {
+  homePage: {};
+  addCardPage: {
+    firstCardNumber: UseInputProps;
+    secondCardNumber: UseInputProps;
+    thirdCardNumber: UseInputProps;
+    fourthCardNumber: UseInputProps;
+    year: UseInputProps;
+    month: UseInputProps;
+    owner: UseInputProps;
+    cvc: UseInputProps;
+    firstPassword: UseInputProps;
+    secondPassword: UseInputProps;
+    cardTitle: UseInputProps;
   };
-};
+}
 
 export const useFormInputs = () => {
   const formInputs: UseFormInputsProps = {
