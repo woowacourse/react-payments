@@ -1,5 +1,6 @@
 import React, { ChangeEvent, FocusEvent, FormEvent, useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { ROUTES } from '../../constants/routes';
 import { useCardRegisterContext } from '../../context/CardRegisterContext';
 import { CardNumber, CardRegisterInfo, ExpirationDate, Password } from '../../types/card.type';
 import { isInputElement } from '../../utils/dom';
@@ -15,7 +16,7 @@ export function useCardRegister() {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    navigate('/alias');
+    navigate(ROUTES.ALIAS, { replace: true });
   };
 
   return { isAllFilled, handleSubmit, handleChange };
