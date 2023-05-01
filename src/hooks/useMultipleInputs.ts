@@ -6,12 +6,12 @@ const useMultipleInputs = (numberOfInputs: number, validator: InputValidator) =>
   const [errorMessage, setErrorMessage] = useState("");
 
   const onChange = (inputIndex: number) => (inputValue: string) => {
-    const { hasError, message, allowInput } = validator?.(inputValue) ?? { hasError: false, message: "" };
+    const { hasError, message, isAllowInput } = validator?.(inputValue) ?? { hasError: false, message: "" };
 
     if (hasError) {
       setErrorMessage(message || "");
 
-      if (allowInput) {
+      if (isAllowInput) {
         setInputValues((prevInputs) => {
           const updatedInputs = [...prevInputs];
           updatedInputs[inputIndex] = inputValue;

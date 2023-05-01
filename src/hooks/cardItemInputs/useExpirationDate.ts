@@ -12,11 +12,11 @@ const monthValidator = (inputValue: string) => {
   }
 
   if (inputValue.length < INPUT_MAX_LENGTH.EXPIRATION_DATE) {
-    return { hasError: true, message: "만료일은 MM/YY 형식으로 입력해주세요", allowInput: true };
+    return { hasError: true, message: "만료일은 MM/YY 형식으로 입력해주세요", isAllowInput: true };
   }
 
   if (!isValidMonth(inputValue)) {
-    return { hasError: true, message: "유효한 달(01~12)를 입력해주세요", allowInput: true };
+    return { hasError: true, message: "유효한 달(01~12)를 입력해주세요", isAllowInput: true };
   }
 
   return { hasError: false };
@@ -32,7 +32,7 @@ const yearValidator = (inputValue: string) => {
   }
 
   if (inputValue.length < INPUT_MAX_LENGTH.EXPIRATION_DATE) {
-    return { hasError: true, message: "만료일은 MM/YY 형식으로 입력해주세요", allowInput: true };
+    return { hasError: true, message: "만료일은 MM/YY 형식으로 입력해주세요", isAllowInput: true };
   }
 
   return { hasError: false };

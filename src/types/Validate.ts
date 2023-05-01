@@ -1,7 +1,7 @@
 export interface ValidateResult {
   hasError: boolean;
   message?: string;
-  allowInput?: boolean;
+  isAllowInput?: boolean;
 }
 
 export type InputValidator = (value: string) => ValidateResult;
