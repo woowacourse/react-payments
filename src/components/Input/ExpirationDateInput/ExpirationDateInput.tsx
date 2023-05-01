@@ -1,33 +1,17 @@
 import { Input } from 'components/common';
-import React, { ChangeEventHandler, ChangeEvent } from 'react';
-import { ValueAndOnChange } from '../types';
-import { validateInput } from 'util/Validation';
+import React, { ChangeEventHandler } from 'react';
 import { Styled as S } from './ExpirationDateInput.styles';
 import FormLabel from 'components/common/FormLabel/FormLabel';
+import { useExpirationDataInput } from 'hooks/useExpirationDateInput';
 
-export interface ExpirationProps {
-  month: ValueAndOnChange;
-  year: ValueAndOnChange;
+export interface ExpirationDateProps {
+  onChangeMonth: ChangeEventHandler<HTMLInputElement>;
+  onChangeYear: ChangeEventHandler<HTMLInputElement>;
 }
 
-export function ExpirationDateInput(props: ExpirationProps) {
-  const { month, year } = props;
-  const inputRefs = Object.keys(props).map(() => React.createRef<HTMLInputElement>());
-
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement>,
-    index: number,
-    onChange?: ChangeEventHandler<HTMLInputElement>,
-  ) => {
-    const value = e.target.value;
-    if (validateInput(value)) return;
-
-    if (index < Object.keys(props).length - 1 && value.trim().length === e.target.maxLength) {
-      inputRefs[index + 1].current?.focus();
-    }
-
-    onChange && onChange(e);
-  };
+export function ExpirationDateInput({ onChangeMonth, onChangeYear }: ExpirationDateProps) {
+  const inputRefs = [React.createRef<HTMLInputElement>(), React.createRef<HTMLInputElement>()];
+  const { month, year } = useExpirationDataInput(inputRefs, onChangeMonth, onChangeYear);
 
   return (
     <>
@@ -40,7 +24,7 @@ export function ExpirationDateInput(props: ExpirationProps) {
           type="text"
           maxLength={2}
           placeholder="MM"
-          onChange={(e) => handleChange(e, 0, month.onChange)}
+          onChange={month.onChange}
           required
         />
         <S.SLASH />
@@ -51,7 +35,7 @@ export function ExpirationDateInput(props: ExpirationProps) {
           type="text"
           maxLength={2}
           placeholder="YY"
-          onChange={(e) => handleChange(e, 1, year.onChange)}
+          onChange={year.onChange}
           required
         />
       </S.ExpirationDateContainer>

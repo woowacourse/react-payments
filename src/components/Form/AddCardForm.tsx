@@ -122,8 +122,8 @@ function AddCardInfo({ onSubmit }: AddCardFormProps) {
         {<ErrorCaption>{!isValid && errorMessages.numbers}</ErrorCaption>}
 
         <ExpirationDateInput
-          month={{ value: card.expirationDate.month, onChange: handleMonthInputChange }}
-          year={{ value: card.expirationDate.year, onChange: handleYearInputChange }}
+          onChangeMonth={handleMonthInputChange}
+          onChangeYear={handleYearInputChange}
         />
         {<ErrorCaption>{!isValid && errorMessages.expirationDate}</ErrorCaption>}
 
