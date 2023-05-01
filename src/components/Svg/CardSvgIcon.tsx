@@ -14,7 +14,9 @@ interface CardSvgIconProps {
   type: CardCompanyType;
 }
 
-const CARD_ICON_COMPONENTS: { [key in CardCompanyType]: any } = {
+const CARD_ICON_COMPONENTS: {
+  [key in CardCompanyType]: JSX.Element;
+} = {
   'bc-card': <BC />,
   'hana-card': <HANA />,
   'hyundai-card': <HYUNDAI />,
