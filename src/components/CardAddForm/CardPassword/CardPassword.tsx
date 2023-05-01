@@ -53,24 +53,33 @@ const CardPassword = ({ isError, updateInputValue, updateInputError }: CardPassw
         비밀번호
       </Label>
       <div className={styles.container} onBlur={onBlur}>
-        {Array.from({ length: 2 }, (_, index) => (
-          <Input
-            ref={index === 0 ? firstInputRef : lastInputRef}
-            key={index}
-            type="password"
-            id={index === 0 ? 'password' : `password${index}`}
-            name="password"
-            data-index={index}
-            maxLength={PASSWORD_UNIT_MAX_LENGTH}
-            autoComplete="off"
-            inputMode="numeric"
-            pattern={PATTERN.PASSWORD}
-            required
-            aria-labelledby={index === 0 ? undefined : 'password-label'}
-            isError={isError}
-            onChange={index === 0 ? onFirstInputChange : onChange}
-          />
-        ))}
+        <Input
+          ref={firstInputRef}
+          type="password"
+          id="password"
+          name="password"
+          maxLength={PASSWORD_UNIT_MAX_LENGTH}
+          autoComplete="off"
+          inputMode="numeric"
+          pattern={PATTERN.PASSWORD}
+          required
+          isError={isError}
+          onChange={onFirstInputChange}
+        />
+        <Input
+          ref={lastInputRef}
+          type="password"
+          id="password1"
+          name="password"
+          maxLength={PASSWORD_UNIT_MAX_LENGTH}
+          autoComplete="off"
+          inputMode="numeric"
+          pattern={PATTERN.PASSWORD}
+          required
+          aria-labelledby="password-label"
+          isError={isError}
+          onChange={onChange}
+        />
         <div className={styles.passwordPlaceholder}>
           <p className="passwordItem">{SECURITY_TEXT_ICON}</p>
           <p className="passwordItem">{SECURITY_TEXT_ICON}</p>
