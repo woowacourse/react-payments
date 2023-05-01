@@ -2,7 +2,7 @@ export const UNSELECTED_CARD_COMPANY: Readonly<string> = "카드사 선택";
 
 export const CARD_COMPANIES: Readonly<{ [key: string]: string }> = {
   BC카드: "bc-card",
-  신한카드: "sinhan-card",
+  신한카드: "shinhan-card",
   카카오뱅크: "kakao-card",
   현대카드: "hyundai-card",
   우리카드: "woori-card",
