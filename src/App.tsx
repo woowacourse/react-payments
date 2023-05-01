@@ -15,4 +15,5 @@ const AppWrapper = styled.div`
   display: flex;
   width: 100%;
   justify-content: center;
+  min-height: 731px;
 `;

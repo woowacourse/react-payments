@@ -10,19 +10,22 @@ export interface CardType {
   ownerName: string;
   securityCode: string;
   cardPassword: string;
+  bank?: Bank | undefined;
+  alias?: string;
 }
 
 export interface PageProps {
-  navigate: (page: Page) => void;
+  navigate: (page: Page, data?: any) => void;
+  navData?: any;
 }
 
 export enum Page {
   list = 'list',
   register = 'register',
+  aliasSet = 'aliasSet',
 }
 
 export interface Bank {
   id: number;
   bankName: string;
-  BankImage: React.FunctionComponent<React.SVGProps<SVGSVGElement> & { title?: string | undefined }>;
 }

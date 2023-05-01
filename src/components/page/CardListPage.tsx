@@ -4,6 +4,7 @@ import Card from '../common/Card';
 import PageTemplate from '../template/PageTemplate';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import { CARD_LIST_STORAGE_KEY } from '../../abstracts/constants';
+import Input from '../common/Input';
 
 const CardListPage = ({ navigate }: PageProps) => {
   const onClickAdd = () => {
@@ -55,8 +56,10 @@ const CardAddButton = styled.button`
   border: none;
   cursor: pointer;
 
-  transition: all 0.2s ease;
+  transition: all 0.2s ease-in-out;
   &:hover {
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    transform: translate3D(0, -3%, 0);
+    box-shadow: rgba(0, 0, 11, 0.07) 0px 16px 22.4px 4.8px, rgba(0, 0, 11, 0.05) 0px 3.2px 16px 0px,
+      rgba(0, 0, 33, 0.07) 0px 0px 1px 0px;
   }
 `;

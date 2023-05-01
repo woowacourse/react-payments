@@ -10,45 +10,51 @@ import { Bank } from '../types';
 
 export const CARD_LIST_STORAGE_KEY = 'cardList';
 
+export const BANK_COLOR_MAP: Record<
+  number,
+  { background: string; color: string; image: React.FC<React.SVGProps<SVGSVGElement>> }
+> = {
+  1: { background: 'rgb(222, 84, 86)', color: 'white', image: BCBankImage },
+  2: { background: 'rgb(19, 74, 245)', color: 'white', image: SinhanBankImage },
+  3: { background: 'rgb(251, 230, 77)', color: 'black', image: KakaoBankImage },
+  4: { background: 'rgb(51, 51, 51)', color: 'white', image: HyundaiImage },
+  5: { background: 'rgb(187, 223, 245)', color: 'rgb(51, 122, 194)', image: WooriBankImage },
+  6: { background: 'rgb(240, 240, 240)', color: 'rgb(225, 0, 0)', image: LotteImage },
+  7: { background: 'rgb(64, 146, 143)', color: 'white', image: HanaBankImage },
+  8: { background: 'rgb(85, 79, 71)', color: 'rgb(247, 206, 71)', image: KookminBankImage },
+};
+
 export const BANK: Bank[] = [
   {
     id: 1,
     bankName: 'BC카드',
-    BankImage: BCBankImage,
   },
   {
     id: 2,
     bankName: '신한카드',
-    BankImage: SinhanBankImage,
   },
   {
     id: 3,
-    bankName: '키키오뱅크',
-    BankImage: KakaoBankImage,
+    bankName: '카카오뱅크',
   },
   {
     id: 4,
     bankName: '현대카드',
-    BankImage: HyundaiImage,
   },
   {
     id: 5,
     bankName: '우리카드',
-    BankImage: WooriBankImage,
   },
   {
     id: 6,
     bankName: '롯데카드',
-    BankImage: LotteImage,
   },
   {
     id: 7,
     bankName: '하나카드',
-    BankImage: HanaBankImage,
   },
   {
     id: 8,
     bankName: '국민카드',
-    BankImage: KookminBankImage,
   },
 ];
