@@ -10,55 +10,51 @@ import {
   CardPasswordKey,
 } from "../types";
 
-export const CardNumberContext = createContext({
+type CardRegistrationInfoContextType = {
+  cardNumber: CardNumber;
+  expirationDate: CardExpirationDate;
+  ownerName: Card["ownerName"];
+  securityCode: Card["securityCode"];
+  password: CardPassword;
+  cardCompany: Card["cardCompany"];
+  cardAlias: Card["alias"];
+
+  setCardNumber: (value: string, targetGroup: CardNumberGroups) => void;
+  setExpirationDate: (value: string, dateType: CardExpirationDateKey) => void;
+  setOwnerName: (name: string) => void;
+  setSecurityCode: (code: string) => void;
+  setPassword: (pw: string, targetDigit: CardPasswordKey) => void;
+  setCardCompany: (company: CardCompany) => void;
+  setCardAlias: (alias: string) => void;
+};
+
+export const CardRegistrationInfoContext = createContext<CardRegistrationInfoContextType>({
   cardNumber: {
     firstGroup: "",
     secondGroup: "",
     thirdGroup: "",
     fourthGroup: "",
   },
-
-  handleCardNumber(value: string, targetGroup: CardNumberGroups) {},
-});
-
-export const ExpirationDateContext = createContext({
   expirationDate: {
     month: "",
     year: "",
   },
-
-  handleExpirationDate(value: string, dateType: CardExpirationDateKey) {},
-});
-
-export const OwnerNameContext = createContext({
   ownerName: "",
-  handleOwnerName(name: string) {},
-});
-
-export const SecurityCodeContext = createContext({
   securityCode: "",
-  handleSecurityCode(code: string) {},
-});
-
-export const PasswordContext = createContext({
   password: {
     first: "",
     second: "",
   },
-
-  handlePassword(pw: string, targetDigit: CardPasswordKey) {},
-});
-
-export const CardCompanyContext = createContext({
   cardCompany: "BC",
-
-  handleCardCompany(company: CardCompany) {},
-});
-
-export const CardAliasContext = createContext({
   cardAlias: "",
 
-  handleAlias(alias: string) {},
+  setCardNumber(value: string, targetGroup: CardNumberGroups) {},
+  setExpirationDate(value: string, dateType: CardExpirationDateKey) {},
+  setOwnerName(name: string) {},
+  setSecurityCode(code: string) {},
+  setPassword(pw: string, targetDigit: CardPasswordKey) {},
+  setCardCompany(company: CardCompany) {},
+  setCardAlias(alias: string) {},
 });
 
 export const CardRegistrationInfoProvider = ({ children }: PropsWithChildren) => {
@@ -116,18 +112,25 @@ export const CardRegistrationInfoProvider = ({ children }: PropsWithChildren) =>
   };
 
   return (
-    <CardNumberContext.Provider value={{ cardNumber, handleCardNumber }}>
-      <ExpirationDateContext.Provider value={{ expirationDate, handleExpirationDate }}>
-        <OwnerNameContext.Provider value={{ ownerName, handleOwnerName }}>
-          <SecurityCodeContext.Provider value={{ securityCode, handleSecurityCode }}>
-            <PasswordContext.Provider value={{ password, handlePassword }}>
-              <CardCompanyContext.Provider value={{ cardCompany, handleCardCompany }}>
-                <CardAliasContext.Provider value={{ cardAlias, handleAlias }}>{children}</CardAliasContext.Provider>
-              </CardCompanyContext.Provider>
-            </PasswordContext.Provider>
-          </SecurityCodeContext.Provider>
-        </OwnerNameContext.Provider>
-      </ExpirationDateContext.Provider>
-    </CardNumberContext.Provider>
+    <CardRegistrationInfoContext.Provider
+      value={{
+        cardNumber,
+        expirationDate,
+        ownerName,
+        securityCode,
+        password,
+        cardCompany,
+        cardAlias,
+        setCardNumber: handleCardNumber,
+        setExpirationDate: handleExpirationDate,
+        setOwnerName: handleOwnerName,
+        setSecurityCode: handleSecurityCode,
+        setPassword: handlePassword,
+        setCardCompany: handleCardCompany,
+        setCardAlias: handleAlias,
+      }}
+    >
+      {children}
+    </CardRegistrationInfoContext.Provider>
   );
 };
