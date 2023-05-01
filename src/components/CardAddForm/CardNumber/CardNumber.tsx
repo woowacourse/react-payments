@@ -1,56 +1,71 @@
-import { ChangeEvent } from "react";
-import { CardInputValidation } from "../../../types";
-import { CARD_NUMBER_INPUT_MAX_LENGTH } from "../../../constants";
-import InputContainer from "../../common/InputContainer/InputContainer";
+import { memo, useRef } from "react";
+import type { ChangeEvent } from "react";
+import type { CardFormData, CardFormValidation } from "../../../types";
 import Input from "../../common/Input/Input";
-import { useError } from "../../../hooks/useError";
-import validator from "../../../utils/validator";
+import InputContainer from "../../common/InputContainer/InputContainer";
+import Label from "../../common/Label/Label";
+import { useCardNumber } from "../../../hooks/cards/useCardNumber";
+import {
+  CARD_NUMBER_INPUT_MAX_LENGTH,
+  PATTERN,
+} from "../../../constants/input";
+import { formatNumber } from "../../../utils/formatter";
 
 interface CardNumberProps {
-  handleValidationChange: (
-    key: keyof CardInputValidation,
-    value: boolean
+  isError: boolean;
+  updateInputValue: <K extends keyof CardFormData>(
+    key: K,
+    value: CardFormData[K]
   ) => void;
-  onChange: ({
-    target: { value, dataset },
-  }: ChangeEvent<HTMLInputElement>) => void;
-  value: string;
+  updateInputError: <K extends keyof CardFormValidation>(
+    key: K,
+    value: CardFormData[K]
+  ) => void;
 }
 
-function CardNumber({
-  handleValidationChange,
-  onChange,
-  value,
-}: CardNumberProps) {
-  const [isError, onErrorBlur] = useError({
-    validator: validator.cardNumber,
-    handleValidationChange,
-  });
+const CardNumber = ({
+  isError,
+  updateInputValue,
+  updateInputError,
+}: CardNumberProps) => {
+  const { handleInputValueChange } = useCardNumber();
+  const cardNumberRef = useRef("");
+
+  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+    handleInputValueChange(event, cardNumberRef);
+    updateInputValue("cardNumber", formatNumber(cardNumberRef.current));
+  };
+
+  const onBlur = () => {
+    updateInputError("cardNumber", formatNumber(cardNumberRef.current));
+  };
 
   return (
     <InputContainer
-      label="카드 번호"
-      id="cardNumber"
+      supportingText={{
+        error: "카드에 표시된 16자리 숫자와 동일하게 입력해주세요",
+      }}
       isError={isError}
-      supportingText={
-        isError
-          ? "카드에 표시된 16자리 숫자와 동일하게 입력해주세요"
-          : undefined
-      }
-      required
     >
+      <Label htmlFor="cardNumber" required>
+        카드 번호
+      </Label>
       <Input
         id="cardNumber"
         name="cardNumber"
-        value={value}
+        data-value=""
+        minLength={CARD_NUMBER_INPUT_MAX_LENGTH}
         maxLength={CARD_NUMBER_INPUT_MAX_LENGTH}
-        autoComplete="cc-csc"
+        autoComplete="cc-number"
+        inputMode="numeric"
+        pattern={PATTERN.CARD_NUMBER}
+        required
         isError={isError}
         onChange={onChange}
-        onBlur={onErrorBlur}
+        onBlur={onBlur}
       />
     </InputContainer>
   );
-}
+};
 
-export default CardNumber;
+export default memo(CardNumber);
