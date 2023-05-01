@@ -155,6 +155,8 @@ const Style = {
     margin-top: 10px;
     font-size: 15px;
     font-weight: 500;
+
+    cursor: pointer;
   `,
   Caption: styled.span`
     color: #575757;
