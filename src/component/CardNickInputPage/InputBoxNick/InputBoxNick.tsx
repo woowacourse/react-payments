@@ -1,4 +1,5 @@
-import { ChangeEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { ChangeEvent, KeyboardEvent, useState } from "react";
 
 import "./inputBoxNick.css";
 
@@ -17,11 +18,17 @@ export default function InputBoxNick({
     submitNickAndSetCard(appropriateNick);
   };
 
+  const navigate = useNavigate();
+  const submitNickInput = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") navigate("/CardListPage");
+  };
+
   return (
     <div className="card-nick-input-container">
       <input
         className="card-nick-input"
         onChange={changeNickInput}
+        onKeyDown={submitNickInput}
         value={nick}
       />
       <p className="card-nick-input-length">{nick.length} / 10</p>
