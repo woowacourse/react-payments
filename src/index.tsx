@@ -6,6 +6,7 @@ import MyCardPage from './pages/MyCardPage';
 import AddCardPage from './pages/AddCardPage';
 import AddCardNamePage from './pages/AddCardNamePage';
 import { PAGE_PATH } from './constants';
+import GlobalStyle from './styles/global';
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,7 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
 root.render(
   <React.StrictMode>
+    <GlobalStyle />
     <RouterProvider router={router} />
   </React.StrictMode>,
 );

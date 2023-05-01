@@ -16,6 +16,7 @@ const Tooltip = ({ text, children }: PropsWithChildren<TooltipProps>) => {
 
 const TooltipWrapper = styled.div`
   display: flex;
+  margin-left: 10px;
 `;
 
 const TooltipTrigger = styled.div`

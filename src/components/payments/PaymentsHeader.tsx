@@ -44,7 +44,11 @@ const StyledHeader = styled.header`
   display: flex;
   height: 70px;
   align-items: center;
-  padding: 22px;
+  position: sticky;
+  top: 0px;
+  background-color: #fff;
+  z-index: 999;
+  margin-bottom: 10px;
 `;
 
 const StyledHeaderTitle = styled.h1`

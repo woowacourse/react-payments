@@ -18,13 +18,18 @@ const Modal = ({ children, onCloseModal }: PropsWithChildren<ModalProps>) => {
   });
 
   return createPortal(
-    <>
+    <ModalWrapper>
       <ModalBackdrop onClick={onCloseModal} />
       <ModalContent>{children}</ModalContent>
-    </>,
+    </ModalWrapper>,
     document.body,
   );
 };
+
+const ModalWrapper = styled.div`
+  position: relative;
+  z-index: 9999;
+`;
 
 const ModalBackdrop = styled.div`
   position: fixed;

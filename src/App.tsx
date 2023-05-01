@@ -1,14 +1,15 @@
 import { Outlet } from 'react-router-dom';
 import { CardListProvider } from './context/CardListContext';
-import GlobalStyle from './styles/global';
 import PaymentsHeader from './components/payments/PaymentsHeader';
+import Layout from './components/common/Layout';
 
 function App() {
   return (
     <CardListProvider>
-      <GlobalStyle />
-      <PaymentsHeader />
-      <Outlet />
+      <Layout>
+        <PaymentsHeader />
+        <Outlet />
+      </Layout>
     </CardListProvider>
   );
 }

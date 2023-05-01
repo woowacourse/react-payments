@@ -26,7 +26,7 @@ const CardCVCInput = ({ setState, insertRef, moveFocus }: CardCVCInputProps) => 
           type: 'password',
           minLength: 3,
           maxLength: 3,
-          width: '75px',
+          width: '110px',
           center: false,
           value: cardCVC,
           onChange: onChangeState('password')(setState),

@@ -72,7 +72,7 @@ const AddCardNameLayout = styled.div`
 
 const AddCardMessage = styled.p`
   font-weight: 400;
-  font-size: 24px;
+  font-size: 22px;
   line-height: 28px;
   color: #383838;
   margin-bottom: 36px;
