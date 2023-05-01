@@ -73,8 +73,9 @@ function CreditCardRegister() {
             disabled={isCreditCardError}
             type="submit"
             onClick={handleSubmit}
-            label="다음"
-          />
+          >
+            다음
+          </ControlButton>
         </S.CreditCardRegisterForm>
       </CreditCardRegisterLayout>
       <Modal modalOpen={modalOpen}>

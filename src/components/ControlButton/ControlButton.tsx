@@ -5,20 +5,21 @@ interface ControlButtonProps extends HTMLAttributes<HTMLButtonElement> {
   type?: 'button' | 'submit' | 'reset' | undefined;
   disabled?: boolean | undefined;
   onClick?: () => void;
-  label: string;
 }
+
 function ControlButton({
-  type, disabled, onClick, label
+  children, type, disabled, onClick
 }: ControlButtonProps) {
   return (
     <S.ButtonWrapper>
       <S.RegisterButton
-        disabled={disabled}
         type={type}
-        onClick={() => onClick && onClick()}
+        disabled={disabled}
+        onClick={onClick}
       >
-        {label}
+        {children}
       </S.RegisterButton>
+
     </S.ButtonWrapper>
   );
 }

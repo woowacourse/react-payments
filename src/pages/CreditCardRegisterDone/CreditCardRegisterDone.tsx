@@ -28,8 +28,9 @@ function CreditCardRegisterDone() {
       />
       <ControlButton
         onClick={handleNicknameInput}
-        label={nickname.length > 0 ? '확인' : '건너뛰기'}
-      />
+      >
+        {nickname.length > 0 ? '확인' : '건너뛰기'}
+      </ControlButton>
     </CreditCardRegisterLayout>
   );
 }
