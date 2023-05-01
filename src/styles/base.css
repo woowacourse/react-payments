@@ -1,7 +1,24 @@
-html,
-body,
-#root {
-  height: 100%;
+html {
+  width: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box !important;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+*:focus {
+  outline: none;
 }
 
 body {
@@ -10,8 +27,13 @@ body {
     'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-style: normal;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+#root {
+  margin: 0 auto;
 }

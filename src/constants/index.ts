@@ -26,3 +26,9 @@ export const CARD_NUMBER_VISIBLE_LENGTH = 8;
 export const CARD_VISIBLE_OWNER_LENGTH = 12;
 export const CARD_PASSWORD_LENGTH = 2;
 export const CARD_SECURITY_CODE_LENGTH = 3;
+
+export const PAGE_PATH = Object.freeze({
+  HOME: '/',
+  FORM_REGISTRATION: '/registration/form',
+  NAME_REGISTRATION: '/registration/name',
+});

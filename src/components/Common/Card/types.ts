@@ -5,6 +5,8 @@ type Owner = [string];
 type SecurityCode = [string];
 
 interface CardInformation {
+  cardName?: string;
+  bankName: string;
   cardNumber: CardNumber;
   expirationDate: ExpirationDate;
   owner?: Owner;

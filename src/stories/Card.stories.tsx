@@ -13,11 +13,41 @@ export default meta;
 export const Default: Story = {
   args: {
     cardInformation: {
+      cardName: '카드이름',
+      bankName: 'OO카드',
       cardNumber: ['1234', '1234', '1234', '1234'],
       expirationDate: ['YY', 'MM'],
       owner: ['NAME'],
     },
     isAddForm: true,
+    isShowName: true,
+  },
+};
+
+export const NoName: Story = {
+  args: {
+    cardInformation: {
+      cardName: '카드이름',
+      bankName: 'OO카드',
+      cardNumber: ['1234', '1234', '1234', '1234'],
+      expirationDate: ['YY', 'MM'],
+      owner: ['NAME'],
+    },
+    isAddForm: true,
+  },
+};
+
+export const HasBank: Story = {
+  args: {
+    cardInformation: {
+      cardName: '카드이름',
+      bankName: '신한카드',
+      cardNumber: ['1234', '1234', '1234', '1234'],
+      expirationDate: ['YY', 'MM'],
+      owner: ['NAME'],
+    },
+    isAddForm: true,
+    isShowName: true,
   },
 };
 

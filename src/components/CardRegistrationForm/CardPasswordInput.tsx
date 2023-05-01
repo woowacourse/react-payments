@@ -1,4 +1,4 @@
-import { ReactComponent as BlackDot } from '../../assets/black-dot.svg';
+import { ReactComponent as Dot } from '../../assets/dot.svg';
 import { CARD_FORM_TITLE } from '../../constants';
 import PaymentsInput from '../PaymentsInput';
 import type { CardInputProps } from './types';
@@ -24,10 +24,10 @@ function CardPasswordInput({ getInputListValue, checkValidator, errorMessage, is
         children: (
           <>
             <div>
-              <BlackDot />
+              <Dot fill="black" />
             </div>
             <div>
-              <BlackDot />
+              <Dot fill="black" />
             </div>
           </>
         ),

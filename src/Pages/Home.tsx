@@ -14,7 +14,7 @@ function Home() {
       <StyledMain>
         <StyledMessage>새로운 카드를 등록해주세요.</StyledMessage>
         {cardList?.map((cardInformation: CardInformation) => (
-          <Card key={getUniqueKey()} cardInformation={cardInformation} isAddForm />
+          <Card key={getUniqueKey()} cardInformation={cardInformation} isAddForm isShowName />
         ))}
         <Card isAddForm={false} />
       </StyledMain>
@@ -27,10 +27,7 @@ const StyledMain = styled.main`
   flex-direction: column;
   align-items: center;
   & > div {
-    margin-bottom: 46px;
-    :nth-child(1) {
-      margin-bottom: 10px;
-    }
+    margin-bottom: 26px;
   }
 `;
 

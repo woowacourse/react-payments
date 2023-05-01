@@ -1,6 +1,5 @@
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { ReactComponent as ChevronLeft } from '../../../assets/previous.svg';
+import PreviousButton from '../Button/PreviousButton';
 
 interface HeaderProps {
   title: string;
@@ -10,17 +9,9 @@ interface HeaderProps {
 export type { HeaderProps };
 
 function Header({ title, hasBackHistory }: HeaderProps) {
-  const navigate = useNavigate();
-
-  const navigatePrevious = () => navigate(-1);
-
   return (
     <StyledHeader>
-      {hasBackHistory && (
-        <StyledBackHistory onClick={navigatePrevious}>
-          <ChevronLeft />
-        </StyledBackHistory>
-      )}
+      {hasBackHistory && <PreviousButton />}
       <StyledHeaderTitle>{title}</StyledHeaderTitle>
     </StyledHeader>
   );
@@ -31,11 +22,6 @@ const StyledHeader = styled.header`
   padding: 20px;
   align-items: center;
   font-size: 16px;
-`;
-
-const StyledBackHistory = styled.div`
-  width: 16px;
-  height: 16px;
 `;
 
 const StyledHeaderTitle = styled.h2`

@@ -1,38 +1,41 @@
 import styled from 'styled-components';
 import CardRegistrationForm from '../components/CardRegistrationForm';
-import useCardForm from '../components/CardRegistrationForm/hooks/useCardForm';
+import TransParentButton from '../components/Common/Button/TransParentButton';
 import Card from '../components/Common/Card';
 import Header from '../components/Common/Header';
+import Modal from '../components/Common/Modal';
+import ProfileButtonList from '../components/Common/Profile/ProfileButtonList';
+import { useCardInformationStore } from '../context/CardInformationProvider';
+import bankList from '../data/bankList';
+import useBooleanState from '../hooks/useBooleanState';
 
 function CardRegistration() {
-  const {
-    card,
-    checkValidator,
-    errorMessage,
-    isVisited,
-    setCardNumber,
-    setExpirationDate,
-    setOwner,
-    setPassword,
-    setSecurityCode,
-  } = useCardForm();
+  const { card, setBankName } = useCardInformationStore();
+  const { value: isModalOpen, setTrue: openModal, setFalse: closeModal } = useBooleanState(true);
+
+  const handleBankName = (name: string) => {
+    setBankName(name);
+    closeModal();
+  };
 
   return (
     <>
       <Header title="카드 추가" hasBackHistory />
       <StyledMainCardRegistration>
-        <Card cardInformation={card} isAddForm />
-        <CardRegistrationForm
-          card={card}
-          checkValidator={checkValidator}
-          errorMessage={errorMessage}
-          isVisited={isVisited}
-          setCardNumber={setCardNumber}
-          setExpirationDate={setExpirationDate}
-          setOwner={setOwner}
-          setSecurityCode={setSecurityCode}
-          setPassword={setPassword}
-        />
+        <TransParentButton onClick={openModal}>
+          <Card cardInformation={card} isAddForm />
+        </TransParentButton>
+        <CardRegistrationForm />
+        {isModalOpen && (
+          <Modal closeModal={closeModal}>
+            <ProfileButtonList
+              profileList={bankList}
+              getProfileName={handleBankName}
+              profileSize={37}
+              severalPerLine={4}
+            />
+          </Modal>
+        )}
       </StyledMainCardRegistration>
     </>
   );
