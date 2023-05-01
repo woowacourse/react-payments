@@ -8,10 +8,10 @@ export type CardContextState = {
   setCardList: React.Dispatch<React.SetStateAction<Card[]>>;
 };
 
-const CardContext = createContext<CardContextState | null>(null);
+const CardListContext = createContext<CardContextState | null>(null);
 
 export const useCardState = () => {
-  const state = useContext(CardContext);
+  const state = useContext(CardListContext);
 
   if (!state?.cardList) {
     throw new Error('CardState 가 없습니다!!');
@@ -21,7 +21,7 @@ export const useCardState = () => {
 };
 
 export const useCardDispatch = () => {
-  const state = useContext(CardContext);
+  const state = useContext(CardListContext);
 
   if (!state?.setCardList) {
     throw new Error('CardState 가 없습니다!!');
@@ -39,5 +39,9 @@ export const CardListProvider = ({ children }: { children: React.ReactNode }) =>
     setLocalStorage(LOCAL_STORAGE_KEY.CARD_LIST, cardList);
   }, [cardList]);
 
-  return <CardContext.Provider value={{ cardList, setCardList }}>{children}</CardContext.Provider>;
+  return (
+    <CardListContext.Provider value={{ cardList, setCardList }}>
+      {children}
+    </CardListContext.Provider>
+  );
 };

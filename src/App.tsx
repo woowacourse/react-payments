@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import { CardListProvider } from './context/CardContext';
+import { CardListProvider } from './context/CardListContext';
 import GlobalStyle from './styles/global';
 import PaymentsHeader from './components/payments/PaymentsHeader';
 
