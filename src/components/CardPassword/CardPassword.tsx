@@ -22,10 +22,12 @@ const CardPassword = forwardRef(
       const currentOrder = Number(e.target.dataset['order']);
 
       if (!checkPassword(currentOrder, e.target.value)) return;
+      if (currentOrder === 1) return;
+      focusNext(currentOrder);
+    };
 
-      if (currentOrder === 0 && password[0].length === 0) {
-        passwordRefs[currentOrder + 1].current?.focus();
-      }
+    const focusNext = (currentOrder: number) => {
+      passwordRefs[currentOrder + 1].current?.focus();
     };
 
     return (

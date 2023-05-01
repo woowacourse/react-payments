@@ -26,14 +26,16 @@ const CardNumbers = forwardRef(
       const currentOrder = Number(e.target.dataset['order']);
 
       if (!checkCardNumbers(currentOrder, e.target.value)) return;
+      if (cardNumberRefs[currentOrder].current?.value.length === 4)
+        focusNext(currentOrder);
+    };
 
-      if (cardNumberRefs[currentOrder].current?.value.length === 4) {
-        if (currentOrder === 3) {
-          nextRef.current?.focus();
-          return;
-        }
-        cardNumberRefs[currentOrder + 1].current?.focus();
+    const focusNext = (currentOrder: number) => {
+      if (currentOrder === 3) {
+        nextRef.current?.focus();
+        return;
       }
+      cardNumberRefs[currentOrder + 1].current?.focus();
     };
 
     return (

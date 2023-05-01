@@ -28,6 +28,10 @@ const ExpiredDate = forwardRef(
       const currentOrder = Number(e.target.dataset['order']);
       checkExpiredDate(currentOrder, e.target.value);
       validateDate(currentOrder, cardExpiredDateRefs);
+      focusNext();
+    };
+
+    const focusNext = () => {
       if (cardExpiredDateRefs[1].current?.value.length === 2)
         nextRef.current?.focus();
     };
