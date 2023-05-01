@@ -1,4 +1,4 @@
-import { ChangeEvent, Fragment, useContext } from "react";
+import { ChangeEvent, Fragment } from "react";
 import styled from "styled-components";
 import { CardNumber } from "types";
 import { changeInvalidValueToBlank } from "utils/inputValidator";
@@ -6,10 +6,10 @@ import Input, { CommonInputStyle } from "components/Input";
 import { Hyphen } from "components/style/DelimiterStyle";
 import { CardNumberCaption } from "components/style/CaptionStyle";
 import { CardNumberInputBox } from "components/style/InputBoxStyle";
-import { ModalStateContext } from "components/provider/ModalStateProvider";
 import { useFocus } from "hooks/useFocus";
 import useInitCardInfo from "hooks/useInitCardInfo";
 import { NUMBER_INPUT, LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
+import useModal from "hooks/useModal";
 const { ONLY_NUMBER } = VALID_INPUT;
 
 const CardNumberInput = () => {
@@ -19,9 +19,7 @@ const CardNumberInput = () => {
 
   const { handleRef, moveFocus, currentInput } = useFocus();
 
-  const isModalOpen = useContext(ModalStateContext).isModalOpen;
-
-  if (!isModalOpen && currentInput[0].value.length === 0) {
+  if (!useModal().isModalOpen && !currentInput[0].value.length) {
     currentInput[0].focus();
   }
 

@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
 import CardNumberInput from "./FormInputs/CardNumberInput";
@@ -10,13 +9,12 @@ import CardCompanyModal from "./CardCompanyModal";
 import CardPreview from "components/CardPreview";
 import Header from "components/Header";
 import { NextButton } from "components/style/ButtonStyle";
-import { ModalStateContext } from "components/provider/ModalStateProvider";
 import useRequiredCardInfo from "hooks/useRequiredCardInfo";
 import useInitCardInfo from "hooks/useInitCardInfo";
+import useModal from "hooks/useModal";
 
 const CardRegisterForm = () => {
   const allCardInfo = useInitCardInfo().cardInfo;
-  const isModalOpen = useContext(ModalStateContext).isModalOpen;
 
   const { isFormFilled } = useRequiredCardInfo();
 
@@ -29,7 +27,7 @@ const CardRegisterForm = () => {
 
       <CardPreview cardInfo={allCardInfo} />
 
-      {isModalOpen && <CardCompanyModal />}
+      {useModal().isModalOpen && <CardCompanyModal />}
 
       <form onSubmit={handlePageChange}>
         <CardNumberInput />
