@@ -6,27 +6,23 @@ import type { CardInfo } from '../types/card';
 
 interface CardsContextProps {
   cards: CardInfo[];
-  lastRegisteredCard: CardInfo | null;
   registerCard: (card: CardInfo) => void;
-  modifyLastCardNickname: (card: CardInfo, nickname: string) => void;
+  modifyCardNickname: (id: string, nickname: string) => void;
 }
 
 const CardsContext = createContext<CardsContextProps>({
   cards: [],
-  lastRegisteredCard: null,
   registerCard: noop,
-  modifyLastCardNickname: noop,
+  modifyCardNickname: noop,
 });
 
 export const CardsProvider = ({ children }: PropsWithChildren) => {
-  const { cards, lastRegisteredCard, registerCard, modifyLastCardNickname } =
-    useCards();
+  const { cards, registerCard, modifyCardNickname } = useCards();
 
   const value = {
     cards,
-    lastRegisteredCard,
     registerCard,
-    modifyLastCardNickname,
+    modifyCardNickname,
   };
 
   return (

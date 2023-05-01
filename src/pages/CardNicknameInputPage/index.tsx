@@ -22,11 +22,9 @@ const CardNicknameInputPage = () => {
     cardCompany,
     cardNumber1,
     cardNumber2,
-    cardNumber3,
-    cardNumber4,
+    owner,
     expiredMonth,
     expiredYear,
-    owner,
   } = lastRegisteredCard as CardInfo;
 
   useEffect(() => {
@@ -34,7 +32,7 @@ const CardNicknameInputPage = () => {
   }, []);
 
   return (
-    <div className={styles.container} onSubmit={handleNicknameSubmit}>
+    <div className={styles.container}>
       <Spacer height={130} />
       <h1 className={`${styles.title} text-title`}>
         카드등록이 완료되었습니다.
@@ -44,14 +42,12 @@ const CardNicknameInputPage = () => {
         cardCompany={cardCompany}
         cardNumber1={cardNumber1}
         cardNumber2={cardNumber2}
-        cardNumber3={cardNumber3}
-        cardNumber4={cardNumber4}
+        owner={owner}
         expiredMonth={expiredMonth}
         expiredYear={expiredYear}
-        owner={owner}
       />
       <Spacer height={124} />
-      <form className={styles.formContainer}>
+      <form className={styles.formContainer} onSubmit={handleNicknameSubmit}>
         <label>
           <Input
             id="card-nickname"

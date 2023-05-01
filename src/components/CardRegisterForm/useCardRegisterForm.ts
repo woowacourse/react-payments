@@ -68,8 +68,9 @@ const useCardRegisterForm = () => {
       return;
     }
 
+    const cardId = uuid();
     const cardData = {
-      id: uuid(),
+      id: cardId,
       cardCompany,
       cardNumber1,
       cardNumber2,
@@ -79,7 +80,7 @@ const useCardRegisterForm = () => {
     };
 
     registerCard(cardData);
-    navigate('/card-nickname');
+    navigate(`/card-nickname/${cardId}`);
   };
 
   const handleFormChange = (event: ChangeEvent<HTMLFormElement>) => {

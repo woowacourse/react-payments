@@ -11,18 +11,24 @@ const useCards = () => {
 
     return JSON.parse(localStorageData);
   });
-  const lastRegisteredCard = cards.at(-1) ?? null;
 
   const registerCard = (card: CardInfo) => {
     setCards((prevCards) => [...prevCards, card]);
   };
 
-  const modifyLastCardNickname = (card: CardInfo, nickname: string) => {
-    const cardsWithoutLast = cards.slice(0, -1);
+  const modifyCardNickname = (id: string, nickname: string) => {
+    setCards((prevCards) => {
+      return prevCards.map((card) => {
+        if (card.id === id) {
+          return {
+            ...card,
+            nickname,
+          };
+        }
 
-    card['nickname'] = nickname;
-
-    setCards(() => [...cardsWithoutLast, card]);
+        return card;
+      });
+    });
   };
 
   useEffect(() => {
@@ -31,7 +37,7 @@ const useCards = () => {
     }
   }, [cards]);
 
-  return { cards, registerCard, lastRegisteredCard, modifyLastCardNickname };
+  return { cards, registerCard, modifyCardNickname };
 };
 
 export default useCards;

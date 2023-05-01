@@ -23,7 +23,7 @@ const router = createHashRouter([
         element: <CardRegisterPage />,
       },
       {
-        path: 'card-nickname',
+        path: 'card-nickname/:cardId',
         element: <CardNicknameInputPage />,
       },
     ],
