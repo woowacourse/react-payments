@@ -1,8 +1,7 @@
-import { useRef } from 'react';
-
-const useInputListRef = (valueLength: number) => {
-  const inputListRef = useRef<HTMLInputElement[]>([]);
-
+const useAutoFocus = (
+  inputListRef: React.MutableRefObject<HTMLInputElement[]>,
+  valueLength: number
+) => {
   const focusNext = (index = 0) => {
     if (index === inputListRef.current.length - 1) return;
 
@@ -15,4 +14,4 @@ const useInputListRef = (valueLength: number) => {
   return { inputListRef, focusNext };
 };
 
-export default useInputListRef;
+export default useAutoFocus;

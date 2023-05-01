@@ -1,6 +1,6 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 
-import useInputListRef from '../../../hooks/useInputListRef';
+import useAutoFocus from '../../../hooks/useAutoFocus';
 import { ONLY_NUMBER_REGEXP } from '../../../utils/regexp';
 import FormLabel from '../../@common/FormLabel';
 import Input from '../../@common/input/Input';
@@ -17,7 +17,8 @@ function CardPassword() {
   });
   const { creditCard, setCreditCard } = useContext(CreditCardContext) as CreditCardContextType;
 
-  const { inputListRef, focusNext } = useInputListRef(1);
+  const inputListRef = useRef<HTMLInputElement[]>([]);
+  const { focusNext } = useAutoFocus(inputListRef, 1);
 
   const handleChangeByIndex: (index: number) => React.ChangeEventHandler<HTMLInputElement> =
     (index) => (event) => {

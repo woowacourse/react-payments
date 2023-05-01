@@ -1,6 +1,6 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 
-import useInputListRef from '../../../hooks/useInputListRef';
+import useAutoFocus from '../../../hooks/useAutoFocus';
 import FormLabel from '../../@common/FormLabel';
 import Input from '../../@common/input/Input';
 import ErrorSpan from '../../@common/ErrorSpan';
@@ -17,7 +17,8 @@ export const CardNumber = () => {
     message: '',
   });
 
-  const { inputListRef, focusNext } = useInputListRef(4);
+  const inputListRef = useRef<HTMLInputElement[]>([]);
+  const { focusNext } = useAutoFocus(inputListRef, 4);
 
   const handleChangeByIndex: (index: number) => React.ChangeEventHandler<HTMLInputElement> =
     (index) => (event) => {

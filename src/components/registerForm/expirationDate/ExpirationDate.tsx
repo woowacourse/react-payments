@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 
 import FormLabel from '../../@common/FormLabel';
 import Input from '../../@common/input/Input';
@@ -7,7 +7,7 @@ import { CreditCardContext } from '../../../contexts/CreditCardContext';
 import { ONLY_NUMBER_REGEXP } from '../../../utils/regexp';
 import InputWrapper from '../../@common/InputWrapper';
 import CreditCardContextType from '../../../@types/creditCardContextType';
-import useInputListRef from '../../../hooks/useInputListRef';
+import useAutoFocus from '../../../hooks/useAutoFocus';
 
 function ExpirationDate() {
   const { creditCard, setCreditCard } = useContext(CreditCardContext) as CreditCardContextType;
@@ -17,7 +17,8 @@ function ExpirationDate() {
     message: '',
   });
 
-  const { inputListRef, focusNext } = useInputListRef(2);
+  const inputListRef = useRef<HTMLInputElement[]>([]);
+  const { focusNext } = useAutoFocus(inputListRef, 2);
 
   const handleChange: (index: number) => React.ChangeEventHandler<HTMLInputElement> =
     (index) => (event) => {
