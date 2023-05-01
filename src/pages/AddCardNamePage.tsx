@@ -1,29 +1,19 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useCardDispatch, useCardState } from '../context/CardContext';
+import { useCardDispatch, useCardState } from '../context/CardListContext';
 import InputGroup from '../components/common/InputGroup';
 import CardPreview from '../components/payments/CardPreview';
+import useAddCardForm from '../hooks/useAddCardForm';
 
 const AddCardNamePage = () => {
   const { state } = useLocation();
   const cardList = useCardState();
-  const [cardName, setCardName] = useState(['']);
+  const [cardName, setCardName] = useState('');
   const setCard = useCardDispatch();
   const navigate = useNavigate();
+  const { onChangeState } = useAddCardForm();
   const currentCard = cardList.find((card) => card.id === state.cardID);
-
-  if (!currentCard) return <></>;
-
-  const onChangeState =
-    (state: string[], setState: React.Dispatch<React.SetStateAction<string[]>>) =>
-    (index: number) =>
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const targetId = Number(index);
-      const nextState = state.map((value, index) => (index === targetId ? e.target.value : value));
-
-      setState(nextState);
-    };
 
   const successSubmit = () => {
     const targetId = state.cardID;
@@ -37,32 +27,36 @@ const AddCardNamePage = () => {
 
   return (
     <AddCardNameLayout>
-      <AddCardMessage>카드등록이 완료되었습니다.</AddCardMessage>
-      <CardPreview
-        cardCompany={currentCard.cardCompany}
-        cardNumbers={currentCard.cardNumbers}
-        cardOwner={currentCard.cardOwner}
-        cardExpirationDate={currentCard.cardExpirationDate}
-      />
-      <StyledForm onSubmit={successSubmit}>
-        <InputGroup
-          labelText=""
-          autofocus={false}
-          inputInfoList={[
-            {
-              type: 'text',
-              placeholder: '카드 별칭을 입력해주세요.',
-              minLength: 0,
-              maxLength: 30,
-              width: '242px',
-              center: true,
-              value: cardName[0],
-              onChange: onChangeState(cardName, setCardName),
-            },
-          ]}
-        />
-        <StyledSubmitButton type="submit">확인</StyledSubmitButton>
-      </StyledForm>
+      {currentCard && (
+        <>
+          <AddCardMessage>카드등록이 완료되었습니다.</AddCardMessage>
+          <CardPreview
+            cardCompany={currentCard.cardCompany}
+            cardNumbers={currentCard.cardNumbers}
+            cardOwner={currentCard.cardOwner}
+            cardExpirationDate={currentCard.cardExpirationDate}
+          />
+          <StyledForm onSubmit={successSubmit}>
+            <InputGroup
+              labelText=""
+              autoMoveFocus={false}
+              inputInfoList={[
+                {
+                  type: 'text',
+                  placeholder: '카드 별칭을 입력해주세요.',
+                  minLength: 0,
+                  maxLength: 30,
+                  width: '242px',
+                  center: true,
+                  value: cardName,
+                  onChange: onChangeState('text')(setCardName),
+                },
+              ]}
+            />
+            <StyledSubmitButton type="submit">확인</StyledSubmitButton>
+          </StyledForm>
+        </>
+      )}
     </AddCardNameLayout>
   );
 };

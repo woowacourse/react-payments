@@ -2,15 +2,20 @@ import { CARD_COMPANY } from '../constants/cardCompany';
 
 type Card = {
   id: string;
-  cardName: string[];
-  cardCompany: CardCompany;
-  cardNumbers: string[];
-  cardExpirationDate: string[];
-  cardOwner: string[];
-  cardCVC: string[];
-  cardPWD: string[];
+  cardName: string;
+  cardCompany: string;
+  cardNumbers: { first: string; second: string; third: string; fourth: string };
+  cardExpirationDate: { month: string; year: string };
+  cardOwner: string;
+  cardCVC: string;
+  cardPWD: { first: string; second: string };
 };
 
-type CardCompany = (typeof CARD_COMPANY)[number];
+type CardCompany = (typeof CARD_COMPANY)[number] | '';
 
-export type { Card, CardCompany };
+type SetState = {
+  (value: string): void;
+  (key: string, value: string): void;
+};
+
+export type { Card, CardCompany, SetState };

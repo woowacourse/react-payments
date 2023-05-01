@@ -8,13 +8,14 @@ type InputInfo = {
   width: string;
   value?: string;
   center: boolean;
-  onChange: (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 type InputGroupProps = {
   labelText: string;
-  insert?: (element: HTMLElement | null) => void;
-  autofocus: boolean;
+  insertRef?: (element: HTMLElement | null) => void;
+  moveFocus?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  autoMoveFocus: boolean;
   inputInfoList: InputInfo[];
   children?: React.ReactNode;
 };
@@ -24,7 +25,14 @@ interface InputProps extends React.HTMLAttributes<HTMLInputElement> {
   textCenter: boolean;
 }
 
-const InputGroup = ({ labelText, inputInfoList, children, autofocus, insert }: InputGroupProps) => {
+const InputGroup = ({
+  labelText,
+  inputInfoList,
+  children,
+  autoMoveFocus,
+  moveFocus,
+  insertRef,
+}: InputGroupProps) => {
   return (
     <StyledInputGroupWrapper>
       <StyledInputLabel>
@@ -50,10 +58,9 @@ const InputGroup = ({ labelText, inputInfoList, children, autofocus, insert }: I
                   placeholder={placeholder}
                   value={value}
                   textCenter={center}
-                  ref={autofocus ? insert : null}
-                  onChange={(e) => {
-                    onChange(index)(e);
-                  }}
+                  ref={autoMoveFocus ? insertRef : null}
+                  onChange={onChange}
+                  onInput={moveFocus}
                 />
               );
             },

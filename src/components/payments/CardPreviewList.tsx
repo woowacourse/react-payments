@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import CardPreview from './CardPreview';
-import { useCardState } from '../../context/CardContext';
+import { useCardState } from '../../context/CardListContext';
 
 const CardPreviewList = () => {
   const cardList = useCardState();

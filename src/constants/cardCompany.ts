@@ -20,7 +20,7 @@ export const CARD_COMPANY = [
 ] as const;
 
 export const CARD_COMPANY_COLOR_MAP: Record<
-  CardCompany | '',
+  string,
   { main: string; secondary: string } | undefined
 > = {
   '': undefined,

@@ -1,13 +1,12 @@
 import styled from 'styled-components';
 import { getUniqueID } from '../../utils/key';
 import { CARD_COMPANY_COLOR_MAP } from '../../constants/cardCompany';
-import { CardCompany } from '../../@types';
 
 type CardPreviewProps = {
-  cardCompany: CardCompany | '';
-  cardNumbers: string[];
-  cardOwner: string[];
-  cardExpirationDate: string[];
+  cardCompany: string;
+  cardNumbers: { first: string; second: string; third: string; fourth: string };
+  cardOwner: string;
+  cardExpirationDate: { month: string; year: string };
 };
 
 const CardPreview = ({
@@ -23,33 +22,34 @@ const CardPreview = ({
 
   return (
     <CardPreviewWrapper mainColor={main} secondaryColor={secondary}>
-      <SCardCompany>{cardCompany}</SCardCompany>
+      <SCardCompany>{cardCompany === '' ? '카드사 선택하기' : cardCompany}</SCardCompany>
       <CardChip />
       <CardNumberWrapper>
-        {cardNumbers.map((cardNumber, index) => {
-          if (index < 2) {
-            return (
-              <CardNumber key={index}>
-                <div>{cardNumber}</div>
-              </CardNumber>
-            );
-          } else {
-            return (
-              <CardNumber key={index}>
-                {Array(cardNumber.length)
-                  .fill(0)
-                  .map(() => (
-                    <Dot key={getUniqueID()} secondaryColor={secondary} />
-                  ))}
-              </CardNumber>
-            );
-          }
-        })}
+        <CardNumber>
+          <div>{cardNumbers.first}</div>
+        </CardNumber>
+        <CardNumber>
+          <div>{cardNumbers.second}</div>
+        </CardNumber>
+        <CardNumber>
+          {Array(cardNumbers.third.length)
+            .fill(0)
+            .map(() => (
+              <Dot key={getUniqueID()} secondaryColor={secondary} />
+            ))}
+        </CardNumber>
+        <CardNumber>
+          {Array(cardNumbers.fourth.length)
+            .fill(0)
+            .map(() => (
+              <Dot key={getUniqueID()} secondaryColor={secondary} />
+            ))}
+        </CardNumber>
       </CardNumberWrapper>
       <CardInfo>
-        <div>{cardOwner[0]}</div>
+        <div>{cardOwner}</div>
         <div>
-          <span>{cardExpirationDate[0]}</span>/<span>{cardExpirationDate[1]}</span>
+          <span>{cardExpirationDate.month}</span>/<span>{cardExpirationDate.year}</span>
         </div>
       </CardInfo>
     </CardPreviewWrapper>
