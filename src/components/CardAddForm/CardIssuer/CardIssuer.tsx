@@ -1,5 +1,5 @@
 import { memo, useEffect, useRef, useState } from 'react';
-import type { FocusEvent, KeyboardEvent, MouseEvent } from 'react';
+import type { FocusEvent, MouseEvent } from 'react';
 import type { CardFormData, CardFormValidation, Issuer } from '../../../types';
 import Button from '../../common/Button/Button';
 import CardIssuerSelection from './CardIssuerSelection/CardIssuerSelection';
@@ -27,12 +27,6 @@ const CardIssuer = ({ isError, updateInputValue, updateInputError }: CardIssuerP
       buttonRef.current?.focus();
     }
   }, [isModalClosed, updateInputError, value]);
-
-  const onKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
-    if (event.key === 'Tab') {
-      updateInputError('issuer', value);
-    }
-  };
 
   const onBlur = (event: FocusEvent<HTMLButtonElement>) => {
     if (isModalOpen) return;
@@ -70,7 +64,6 @@ const CardIssuer = ({ isError, updateInputValue, updateInputError }: CardIssuerP
         autoFocus
         onClick={openModal}
         onBlur={onBlur}
-        onKeyDown={onKeyDown}
       >
         {value ? `${value}` : '카드사를 선택해주세요'}
       </Button>
