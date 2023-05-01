@@ -1,6 +1,6 @@
 import React from "react";
 import { CardIDProps, CardNumberProps, ExpireDateProps } from "src/interfaces";
-import { CardContainer, Styled as S } from "./Card.styles";
+import { Styled as S } from "./Card.styles";
 import { BANK_LIST } from "src/utils/constant";
 
 interface Props {
@@ -31,7 +31,7 @@ function Card({
   const name = BANK_LIST.find(({ id }) => id === cardName)?.name;
 
   return (
-    <CardContainer onClick={onClick} cardName={cardName} isModalOpen={isOpen}>
+    <S.CardContainer onClick={onClick} cardName={cardName} isModalOpen={isOpen}>
       <S.CardName>{name}</S.CardName>
       <S.CardChip />
       <S.CardNumberContainer>{CardNumbers}</S.CardNumberContainer>
@@ -39,7 +39,7 @@ function Card({
         <span>{ownerName}</span>
         <span>{expireDate.join("/")}</span>
       </S.CardNameContainer>
-    </CardContainer>
+    </S.CardContainer>
   );
 }
 

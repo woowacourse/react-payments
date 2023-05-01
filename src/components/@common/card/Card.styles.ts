@@ -7,34 +7,34 @@ interface CardColorProps {
   isModalOpen?: boolean;
 }
 
-export const CardContainer = styled.div<CardColorProps>`
-  position: relative;
-
-  width: 213px;
-  height: 133px;
-
-  display: flex;
-  flex-direction: column;
-  row-gap: 13px;
-  justify-content: flex-end;
-
-  background: ${(props) =>
-    props.cardName ? theme.cardColors[props.cardName].background : "#fff"};
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
-  border-radius: 5px;
-
-  color: ${(props) =>
-    props.cardName ? theme.cardColors[props.cardName].color : "#333"};
-
-  padding: 14px;
-  margin: 25px auto 9px auto;
-
-  box-sizing: border-box;
-
-  z-index: ${(props) => (props.isModalOpen ? 1000 : 1)};
-`;
-
 export const Styled = {
+  CardContainer: styled.div<CardColorProps>`
+    position: relative;
+
+    width: 213px;
+    height: 133px;
+
+    display: flex;
+    flex-direction: column;
+    row-gap: 13px;
+    justify-content: flex-end;
+
+    background: ${(props) =>
+      props.cardName ? theme.cardColors[props.cardName].background : "fff"};
+
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+
+    color: ${(props) =>
+      props.cardName ? theme.cardColors[props.cardName].color : "#333"};
+
+    padding: 14px;
+    margin: 25px auto 9px auto;
+
+    box-sizing: border-box;
+
+    z-index: ${(props) => (props.isModalOpen ? 1000 : 1)};
+  `,
   CardName: styled.span`
     font-style: normal;
     font-weight: 500;
