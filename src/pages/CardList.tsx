@@ -19,7 +19,7 @@ function CardList() {
         return (
           <>
             <Card
-              key={cardNumbers + expireDate}
+              key={cardNumbers + ""}
               cardName={cardName}
               cardNumber={cardNumbers}
               ownerName={ownerName}

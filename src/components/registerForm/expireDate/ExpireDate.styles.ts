@@ -8,11 +8,17 @@ export const Styled = {
   `,
 
   ExpireDateInput: css`
-    width: 137px;
+    width: 65px;
     letter-spacing: 3px;
     text-align: center;
     font-size: 18px;
     font-weight: 500;
     line-height: 21px;
+  `,
+
+  InputContainer: styled.div`
+    width: 137px;
+    background: var(--input-background);
+    border-radius: 7px;
   `,
 };

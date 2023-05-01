@@ -17,6 +17,14 @@ const cardNumber = {
       );
     },
   ],
+  argTypes: {
+    CardInfoProvider: {
+      type: "function",
+    },
+    CardNumber: {
+      option: "string",
+    },
+  },
 } satisfies Meta<typeof CardNumber>;
 
 export default cardNumber;

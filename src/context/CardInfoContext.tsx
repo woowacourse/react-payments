@@ -6,7 +6,6 @@ import React, {
 } from "react";
 import { CardIDProps, CardInfoProps } from "src/interfaces";
 import { initialCardInfos } from "src/utils/constant";
-import { EACH_SECOND_CHANCE } from "src/utils/regexp";
 
 type ReducerActionType = keyof CardInfoProps | "clear";
 
@@ -22,6 +21,7 @@ function reducer(
   switch (type) {
     case "cardNumbers":
     case "password":
+    case "expireDate":
       if (index !== undefined && !isNaN(index)) {
         state[type][index] = payload;
       }
@@ -29,11 +29,6 @@ function reducer(
 
     case "ownerName":
       return { ...state, [type]: payload.toUpperCase() };
-
-    case "expireDate":
-      const date = payload.replace("/", "");
-      const expire = date.match(EACH_SECOND_CHANCE) ?? [];
-      return { ...state, [type]: expire.join("/") };
 
     case "cardName":
       return { ...state, [type]: payload as CardIDProps };

@@ -1,13 +1,13 @@
 import { CARD_ID } from "src/utils/constant";
 
 export type CardNumberProps = [string, string, string, string];
-
+export type ExpireDateProps = [string, string];
 export type CardPasswordProps = [string, string];
 export type CardIDProps = (typeof CARD_ID)[number] | null;
 
 export interface CardInfoProps {
   cardNumbers: CardNumberProps;
-  expireDate: string;
+  expireDate: ExpireDateProps;
   ownerName: string;
   securityCode: string;
   password: CardPasswordProps;

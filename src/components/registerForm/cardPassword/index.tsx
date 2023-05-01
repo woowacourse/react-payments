@@ -8,6 +8,7 @@ import { NUMBERS, PASSWORD_NUMBER_TYPES } from "src/utils/constant";
 import { lengthMatchValidation } from "src/utils/validation";
 import useCardInfoInput from "src/hooks/useCardInfoInput";
 import { CardPasswordProps } from "src/interfaces";
+import { getInputRefValueSum } from "src/utils";
 
 function CardPassword() {
   const { MAX_PASSWORD, EACH_PASSWORD } = NUMBERS;
@@ -15,25 +16,22 @@ function CardPassword() {
     maxLength: EACH_PASSWORD,
   });
 
-  const { value, numberInputOnChange, error } =
-    useCardInfoInput<CardPasswordProps>({
-      contextType: "password",
-      validation: (value) => {
-        const firstVal = refs.current[0]?.value ?? "";
-        const secondVal = refs.current[1]?.value ?? "";
-        const passwordVal = firstVal + secondVal;
+  const { value, onChange, error } = useCardInfoInput<CardPasswordProps>({
+    contextType: "password",
+    validation: (value) => {
+      const passwordVal = getInputRefValueSum(refs);
 
-        lengthMatchValidation(passwordVal, MAX_PASSWORD);
-      },
-      nextInputFocus,
-    });
+      lengthMatchValidation(passwordVal, MAX_PASSWORD);
+    },
+    nextInputFocus,
+  });
 
   const inputs = PASSWORD_NUMBER_TYPES.map((key, idx) => (
     <Input
       key={key}
       data-index={idx}
       value={value[idx]}
-      onChange={numberInputOnChange}
+      onChange={onChange}
       maxLength={EACH_PASSWORD}
       inputmode="numeric"
       type="password"

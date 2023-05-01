@@ -37,7 +37,7 @@ const InputStyle = styled.input<StyleInputProps>`
   width: 100%;
   height: 45px;
 
-  background-color: #ecebf1;
+  background-color: var(--input-background);
   border-radius: 7px;
   border: none;
 

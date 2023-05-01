@@ -16,12 +16,11 @@ function CardNumber() {
     maxLength: EACH_CARD,
   });
 
-  const { value, numberInputOnChange, error } =
-    useCardInfoInput<CardNumberProps>({
-      contextType: "cardNumbers",
-      validation: (value) => lengthMatchValidation(value, EACH_CARD),
-      nextInputFocus,
-    });
+  const { value, onChange, error } = useCardInfoInput<CardNumberProps>({
+    contextType: "cardNumbers",
+    validation: (value) => lengthMatchValidation(value, EACH_CARD),
+    nextInputFocus,
+  });
 
   const inputs = CARD_NUMBER_TYPES.map((key, idx) => (
     <>
@@ -29,7 +28,7 @@ function CardNumber() {
         key={key}
         data-index={idx}
         value={value[idx]}
-        onChange={numberInputOnChange}
+        onChange={onChange}
         maxLength={EACH_CARD}
         customInputStyle={S.CardNumberInput}
         inputmode="numeric"

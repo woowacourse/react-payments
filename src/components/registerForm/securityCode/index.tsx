@@ -10,7 +10,7 @@ import { lengthMatchValidation } from "src/utils/validation";
 import useCardInfoInput from "src/hooks/useCardInfoInput";
 
 function SecurityCode() {
-  const { value, numberInputOnChange, error } = useCardInfoInput<string>({
+  const { value, onChange, error } = useCardInfoInput<string>({
     contextType: "securityCode",
     validation: (value) => lengthMatchValidation(value, NUMBERS.MAX_SECURITY),
   });
@@ -21,7 +21,7 @@ function SecurityCode() {
       <S.SecurityInfoContainer>
         <Input
           value={value}
-          onChange={numberInputOnChange}
+          onChange={onChange}
           maxLength={NUMBERS.MAX_SECURITY}
           type="password"
           placeholder="•••"

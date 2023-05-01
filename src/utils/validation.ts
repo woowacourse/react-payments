@@ -9,10 +9,20 @@ export const lengthMatchValidation = (value: string, maxLength: number) => {
   }
 };
 
-export const MMYYValidation = (date: string, [MM, YY]: [string, string]) => {
-  const [curMM, _, curYY] = new Date().toLocaleDateString("en-US").split("/");
-  const years = curYY.slice(2);
+export const expireDateValidation = (value: string) => {
+  const dateValitation = MMYYValidation(value);
 
+  if (dateValitation) {
+    throw new Error("유효한 만료일이 아닙니다.");
+  }
+};
+
+export const MMYYValidation = (date: string) => {
+  const [curMM, _, curYY] = new Date().toLocaleDateString("en-US").split("/");
+  const MM = date.slice(0, 2);
+  const YY = date.slice(2);
+
+  const years = curYY.slice(2);
   const isMMYYVal =
     date.length > 0 &&
     (!MMYY_REGEXP.test(date) ||
@@ -55,7 +65,7 @@ export const isValidateFormValues = (cardInfo: CardInfoProps) => {
 
   const exceptOwnerName =
     objectValueToString(cardNumbers).length === MAX_CARD &&
-    expireDate.length === MAX_EXPIREDATE &&
+    objectValueToString(expireDate).length === MAX_EXPIREDATE &&
     securityCode.length === MAX_SECURITY &&
     objectValueToString(password).length === MAX_PASSWORD;
 
