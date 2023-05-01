@@ -1,7 +1,8 @@
-import { BankCode, Card } from 'components/common/Card/types';
+import { Card } from 'components/common/Card/types';
 import { CreditCard } from 'components/common';
 import styled from 'styled-components';
 import { FormEventHandler, useRef } from 'react';
+import { PaymentsButton } from 'components/common/Button/PaymentsButton';
 
 type Props = { card: Card; onSubmit: (card: Card) => void };
 
@@ -24,9 +25,9 @@ export const AddCardNickNameForm = ({ card, onSubmit }: Props) => {
       <CreditCard card={card} />
       <FormContainer onSubmit={handleSubmit}>
         <NickNameInput placeholder="별명을 적어주세요" ref={inputRef} autoFocus />
-        <FormSubmitButton type="submit" bankCode={card.bankCode}>
+        <PaymentsButton type="submit" bankCode={card.bankCode}>
           확인
-        </FormSubmitButton>
+        </PaymentsButton>
       </FormContainer>
     </Container>
   );
@@ -58,29 +59,4 @@ const NickNameInput = styled.input`
   text-align: center;
   font-size: 18px;
   width: 280px;
-`;
-
-const FormSubmitButton = styled.button<{ bankCode?: BankCode }>`
-  padding: 8px;
-  border: none;
-  border-radius: 5px;
-
-  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
-
-  background-color: ${({ disabled, theme: { colors }, bankCode }) =>
-    disabled || bankCode === undefined ? '#ececec' : colors.card.background[bankCode]};
-
-  color: ${({ disabled, theme: { colors }, bankCode }) =>
-    disabled || bankCode === undefined ? '#9e9e9e' : colors.card.font[bankCode]};
-
-  transition: background-color 300ms;
-  font-size: 14px;
-
-  &:hover {
-    filter: brightness(0.9);
-  }
-
-  &:focus {
-    background-color: brightness(0.8);
-  }
 `;

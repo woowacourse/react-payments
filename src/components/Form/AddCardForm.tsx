@@ -5,9 +5,9 @@ import {
   PasswordInput,
   CardNumberInputs,
 } from 'components/Input';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { FormEventHandler, useState } from 'react';
-import { BankCode, Card, isCard } from 'components/common/Card/types';
+import { Card, isCard } from 'components/common/Card/types';
 import { ValueAndOnChange } from 'components/Input/types';
 import { CreditCard } from 'components/common';
 import {
@@ -15,6 +15,7 @@ import {
   CardBottomSheetProps,
 } from 'components/common/BottomSheet/CardBottomSheet';
 import { useCardForm } from 'hooks/useCardForm';
+import { PaymentsButton } from 'components/common/Button/PaymentsButton';
 
 export type AddCardFormProps = {
   onSubmit: (card: Card) => void;
@@ -134,9 +135,9 @@ export function AddCardForm(props: AddCardFormProps) {
           width="50px"
         />
 
-        <FormSubmitButton type="submit" disabled={!isInputAllValid} bankCode={bankCode}>
+        <PaymentsButton type="submit" disabled={!isInputAllValid} bankCode={bankCode}>
           다음
-        </FormSubmitButton>
+        </PaymentsButton>
       </FormContainer>
       <CardBottomSheet onClickBankImage={handleClickBankImage} active={isBottomSheetActive} />
     </>
@@ -152,29 +153,4 @@ const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
   gap: 19px;
-`;
-
-const FormSubmitButton = styled.button<{ bankCode?: BankCode }>`
-  padding: 8px;
-  border: none;
-  border-radius: 5px;
-
-  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
-
-  background-color: ${({ disabled, theme: { colors }, bankCode }) =>
-    disabled || bankCode === undefined ? '#ececec' : colors.card.background[bankCode]};
-
-  color: ${({ disabled, theme: { colors }, bankCode }) =>
-    disabled || bankCode === undefined ? '#9e9e9e' : colors.card.font[bankCode]};
-
-  transition: background-color 300ms;
-  font-size: 14px;
-
-  &:hover {
-    filter: brightness(0.9);
-  }
-
-  &:focus {
-    background-color: brightness(0.8);
-  }
 `;

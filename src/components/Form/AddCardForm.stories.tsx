@@ -21,5 +21,9 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: { onSubmit: () => {} },
+  args: {
+    onSubmit: () => {
+      alert('카드 제출 완료');
+    },
+  },
 };
