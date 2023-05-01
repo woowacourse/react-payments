@@ -16,7 +16,7 @@ import {
 import scrollWindow from '@Utils/scrollWindow';
 
 import CreditCardCVCInput from './CreditCardCVCInput';
-import CreditCardCompanyModal from './CreditCardCompanyModal/CreditCardCompanyModal';
+import CreditCardCompanyModal from './CreditCardCompanyModal';
 import CreditCardExpiryInput from './CreditCardExpiryInput';
 import CreditCardNumberInput from './CreditCardNumberInput';
 import CreditCardOwnerInput from './CreditCardOwnerInput';

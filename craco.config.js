@@ -17,6 +17,7 @@ module.exports = {
         '^\\@Domains/(.*)$': '<rootDir>/src/domains/$1',
         '^\\@Constants/(.*)$': '<rootDir>/src/constants/$1',
         '^\\@Hooks/(.*)$': '<rootDir>/src/hooks/$1',
+        '^\\@Contexts/(.*)$': '<rootDir>/src/contexts/$1',
       },
     },
   },
