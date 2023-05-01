@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import SubmitButton from '../components/@common/SubmitButton';
 import { useNavigate } from 'react-router-dom';
 import CardList from '../types/CardList';
+import { REG_EXP } from '../constants/regexp';
 
 const AddAlias = ({ cards, setCards }: CardList) => {
   const [cardAlias, setCardAlias] = useState('');
@@ -18,7 +19,7 @@ const AddAlias = ({ cards, setCards }: CardList) => {
   };
 
   const validateAlias = (alias: string) => {
-    if (/[~!@#$%^&*()_+=[\]\\';,./{}|\\":<>?]/.test(alias)) return;
+    if (REG_EXP.cardAliasForm.test(alias)) return;
 
     setCardAlias(alias);
   };

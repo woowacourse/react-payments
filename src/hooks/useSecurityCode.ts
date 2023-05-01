@@ -1,10 +1,11 @@
 import { useState } from 'react';
+import { REG_EXP } from '../constants/regexp';
 
 const useSecurityCode = () => {
   const [securityCode, setSecurityCode] = useState<string>('');
 
   const isSetSecurityCode = (value: string) => {
-    if (/[^0-9]/g.test(value)) return false;
+    if (REG_EXP.cardNumberLimit.test(value)) return false;
 
     setSecurityCode(value);
     return true;

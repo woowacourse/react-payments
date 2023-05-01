@@ -1,14 +1,11 @@
 import { useState } from 'react';
+import { REG_EXP } from '../constants/regexp';
 
 const useExpiredDates = () => {
   const [expiredDates, setExpiredDates] = useState<Array<string>>(['', '']);
 
   const isSetExpiredDates = (order: number, value: string) => {
-    if (/[^0-9]/g.test(value)) return false;
-
-    if (!/^0?[1-9]|1[0-2]$|/.test(value) && order === 0) {
-      return false;
-    }
+    if (REG_EXP.cardNumberLimit.test(value)) return false;
 
     setExpiredDates({ ...expiredDates, [order]: value });
     return true;

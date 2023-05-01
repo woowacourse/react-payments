@@ -1,11 +1,12 @@
 import { useState } from 'react';
+import { REG_EXP } from '../constants/regexp';
 
 const useOwnerName = () => {
   const [ownerName, setOwnerName] = useState<string>('');
 
   const isSetOwnerName = (value: string) => {
     if (value.length === 0) setOwnerName('');
-    if (/[^A-Za-z\s]+$/.test(value)) return false;
+    if (REG_EXP.cardNameForm.test(value)) return false;
 
     setOwnerName(value);
     return true;

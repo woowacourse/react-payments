@@ -1,10 +1,11 @@
 import { useState } from 'react';
+import { REG_EXP } from '../constants/regexp';
 
 const usePassword = () => {
   const [passwords, setPasswords] = useState<Array<string>>(['', '']);
 
   const isSetPasswords = (order: number, value: string) => {
-    if (/[^0-9]/g.test(value)) return false;
+    if (REG_EXP.cardNumberLimit.test(value)) return false;
 
     setPasswords({ ...passwords, [order]: value });
     return true;
