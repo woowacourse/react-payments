@@ -1,17 +1,14 @@
-import type { ChangeEventHandler, HTMLInputTypeAttribute } from 'react';
+import type { ChangeEventHandler, InputHTMLAttributes } from 'react';
 import { forwardRef } from 'react';
 import styled from 'styled-components';
 
-export type InputProps = {
-  type?: HTMLInputTypeAttribute;
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   width?: number;
   center?: boolean;
-  placeholder?: string;
-  onChange?: (value: string) => void;
-  value?: string;
+  handleOnChange?: (value: string) => void;
   disabled?: boolean;
   maxCount?: number;
-};
+}
 
 type StyledInputProps = {
   $width?: number;
@@ -32,12 +29,12 @@ const StyledInput = styled.input<StyledInputProps>`
 `;
 
 export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
-  const { type, width, center, placeholder, value, onChange, disabled, maxCount } = props;
+  const { type, width, center, placeholder, value, handleOnChange, disabled, maxCount } = props;
 
   const handleInputChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     if (maxCount !== undefined && event.target.value.length > maxCount) return;
 
-    onChange?.(event.target.value);
+    handleOnChange?.(event.target.value);
   };
 
   return (

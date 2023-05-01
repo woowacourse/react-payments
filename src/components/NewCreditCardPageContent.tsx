@@ -158,7 +158,7 @@ export const NewCreditCardPageContent = () => {
         <Input
           maxCount={30}
           value={resisteringCreditCard.name}
-          onChange={handleCardNameChange}
+          handleOnChange={handleCardNameChange}
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
         />
       </FormGroup>
@@ -168,7 +168,7 @@ export const NewCreditCardPageContent = () => {
         <NumberInput
           maxCount={3}
           value={resisteringCreditCard.cvc}
-          onChange={handleCVCNumberChange}
+          handleOnChange={handleCVCNumberChange}
           width={8}
           center
           type="password"
@@ -197,7 +197,9 @@ export const NewCreditCardPageContent = () => {
         <Text weight="bold">다음</Text>
       </NextButton>
 
-      {isModalOpen && <CardCompanyListModal closeModal={closeModal} handleOnClick={handleCardCompanyChange} />}
+      {isModalOpen && (
+        <CardCompanyListModal closeModal={closeModal} handleOnClick={handleCardCompanyChange} />
+      )}
     </Container>
   );
 };
