@@ -16,7 +16,7 @@ const TooltipTemplate: Story = {
     return (
       <div style={{ width: '30px' }}>
         <Tooltip>
-          <TooltipButton tabIndex={0} />
+          <TooltipButton />
         </Tooltip>
       </div>
     );
