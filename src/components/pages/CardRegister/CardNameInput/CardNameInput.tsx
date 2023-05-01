@@ -5,10 +5,13 @@ import { CardRegisterInfo } from '../../../../types/card.type';
 import Flex from '../../../@common/Flex/Flex';
 import Input from '../../../@common/Input/Input';
 import * as Styled from './CardNameInput.styles';
+import { CardInputProps } from '../../../../pages/CardRegister/CardRegisterPage';
+import { ErrorMessage } from '../../../../pages/CardRegister/CardRegisterPage.styles';
 
-export default function CardNameInput() {
+export default function CardNameInput({ onBlur, isValid }: CardInputProps) {
   const { cardRegisterInfo, handleCardInfo } = useCardRegisterContext();
   const { defaultConditions } = useCardName();
+  const errorMessage = '카드에 기재된 이름을 올바르게 입력해주세요.';
 
   if (!cardRegisterInfo) {
     return null;
@@ -35,7 +38,7 @@ export default function CardNameInput() {
             )}
           </Input.Limit>
         </Flex>
-        <Styled.InputBackground>
+        <Styled.InputBackground isValid={isValid}>
           <Input.Field
             name='name'
             id='name'
@@ -45,10 +48,11 @@ export default function CardNameInput() {
             }}
             {...defaultConditions}
           >
-            <Styled.Input />
+            <Styled.Input onBlur={onBlur} />
           </Input.Field>
         </Styled.InputBackground>
       </Input>
+      <ErrorMessage>{!isValid && errorMessage}</ErrorMessage>
     </Flex>
   );
 }

@@ -6,10 +6,13 @@ import { useCardPassword } from '../../../../hooks/card/card';
 import Flex from '../../../@common/Flex/Flex';
 import Input from '../../../@common/Input/Input';
 import * as Styled from './CardPasswordInput.styles';
+import { CardInputProps } from '../../../../pages/CardRegister/CardRegisterPage';
+import { ErrorMessage } from '../../../../pages/CardRegister/CardRegisterPage.styles';
 
-export default function CardPasswordInput() {
+export default function CardPasswordInput({ onBlur, isValid }: CardInputProps) {
   const { cardRegisterInfo, handleCardInfo } = useCardRegisterContext();
   const { defaultConditions } = useCardPassword();
+  const errorMessage = '4자리의 카드 비밀번호를 올바르게 입력해주세요.';
 
   if (!cardRegisterInfo) {
     return null;
@@ -36,7 +39,7 @@ export default function CardPasswordInput() {
             onChange={({ target: { value } }) => onChangeValue('passwordFirstDigit', value)}
             {...defaultConditions}
           >
-            <Styled.Input />
+            <Styled.Input onBlur={onBlur} />
           </Input.Field>
         </Input>
         <Input>
@@ -47,12 +50,13 @@ export default function CardPasswordInput() {
             onChange={({ target: { value } }) => onChangeValue('passwordSecondDigit', value)}
             {...defaultConditions}
           >
-            <Styled.Input />
+            <Styled.Input onBlur={onBlur} />
           </Input.Field>
         </Input>
         <Styled.Input type='password' value='0' disabled />
         <Styled.Input type='password' value='0' disabled />
       </Flex>
+      <ErrorMessage>{!isValid && errorMessage}</ErrorMessage>
     </Styled.FieldSet>
   );
 }

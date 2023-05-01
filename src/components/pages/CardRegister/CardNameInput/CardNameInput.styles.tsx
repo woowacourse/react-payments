@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { BaseInput } from '../../../@common/Input/InputStyles.styles';
+import { InputBackgroundProps } from '../../../../types/input.type';
 
 export const Input = styled.input`
   ${BaseInput}
@@ -12,7 +13,7 @@ export const Label = styled.label`
   color: #525252;
 `;
 
-export const InputBackground = styled.div`
+export const InputBackground = styled.div<InputBackgroundProps>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,7 +22,7 @@ export const InputBackground = styled.div`
   height: 48.75px;
   margin-top: 8px;
 
-  border: none;
+  border: ${({ isValid }) => (isValid ? 'none' : '2px solid #c81717')};
   border-radius: 7px;
 
   background: #ecebf1;

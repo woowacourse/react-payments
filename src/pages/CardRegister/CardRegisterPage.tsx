@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState } from 'react';
+import React, { FormEvent, FocusEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Card from '../../components/pages/CardList/CardContent/CardContent';
 import CardCVCInput from '../../components/pages/CardRegister/CardCVCInput/CardCVCInput';
@@ -13,6 +13,11 @@ import BankListBottomSheetContent from '../../components/pages/CardRegister/Bank
 import BottomSheet from '../../components/@common/BottomSheet/BottomSheet';
 import { BankNames } from '../../types/card.type';
 
+export type CardInputProps = {
+  isValid: boolean;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+};
+
 export default function CardRegisterPage() {
   const navigate = useNavigate();
   const { cardRegisterInfo, handleCardInfo } = useCardRegisterContext();
@@ -20,6 +25,23 @@ export default function CardRegisterPage() {
   const { isOpened, content, openBottomSheet, closeBottomSheet } = useBottomSheet();
   const [bankName, setBankName] = useState<BankNames | null>(null);
   const [allValid, setAllValid] = useState(false);
+  const [validationStatus, setValidationStatus] = useState({
+    cardNumber: true,
+    expirationDate: true,
+    holderName: true,
+    cvc: true,
+    password: true,
+  });
+
+  const handleBlur = (field: string, e: FocusEvent<HTMLInputElement>) => {
+    const input = e.target as HTMLInputElement;
+    const isValid = input.validity.valid;
+
+    setValidationStatus({
+      ...validationStatus,
+      [field]: isValid,
+    });
+  };
 
   const handleChange = (e: FormEvent<HTMLFormElement>) => {
     const form = e.currentTarget as HTMLFormElement;
@@ -37,8 +59,13 @@ export default function CardRegisterPage() {
       }
     }
 
-    const hasInvalidInput = inputs.some((input) => !input.validity.valid);
+    const hasInvalidInput = Object.values(validationStatus).some((status) => !status);
     setAllValid(!hasInvalidInput);
+  };
+
+  const handleSubmit = () => {
+    if (!allValid) return;
+    navigate('alias', { state: { from: 'registerCard' } });
   };
 
   const onChangeBank = (newBank: BankNames) => {
@@ -68,12 +95,12 @@ export default function CardRegisterPage() {
       <Styled.CardBankChangeText>카드사를 변경하려면 카드를 클릭해주세요. 💳</Styled.CardBankChangeText>
       <Styled.InfoSection>
         <Styled.RegisterForm onChange={handleChange}>
-          <CardNumberInput />
-          <CardExpirationDateInput />
-          <CardNameInput />
-          <CardCVCInput />
-          <CardPasswordInput />
-          {allValid && <Styled.CompleteButton onClick={() => navigate('alias', { state: { from: 'registerCard' } })}>다음</Styled.CompleteButton>}
+          <CardNumberInput isValid={validationStatus.cardNumber} onBlur={(valid) => handleBlur('cardNumber', valid)} />
+          <CardExpirationDateInput isValid={validationStatus.expirationDate} onBlur={(valid) => handleBlur('expirationDate', valid)} />
+          <CardNameInput isValid={validationStatus.holderName} onBlur={(valid) => handleBlur('holderName', valid)} />
+          <CardCVCInput isValid={validationStatus.cvc} onBlur={(valid) => handleBlur('cvc', valid)} />
+          <CardPasswordInput isValid={validationStatus.password} onBlur={(valid) => handleBlur('password', valid)} />
+          {<Styled.CompleteButton onClick={handleSubmit}>다음</Styled.CompleteButton>}
         </Styled.RegisterForm>
       </Styled.InfoSection>
       <BottomSheet isOpened={isOpened} onClose={closeBottomSheet}>

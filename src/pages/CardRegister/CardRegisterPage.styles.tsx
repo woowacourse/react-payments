@@ -47,3 +47,9 @@ export const CompleteButton = styled.button`
 export const CardBankChangeText = styled.p`
   margin-top: 11px;
 `;
+
+export const ErrorMessage = styled.p`
+  margin-top: 4px;
+  height: 10px;
+  color: #c81717;
+`;
