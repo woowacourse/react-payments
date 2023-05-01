@@ -4,7 +4,7 @@ import GlobalStyle from './styles/GlobalStyle';
 import Home from './pages/Home';
 import AddCard from './pages/AddCard';
 import CardType from './types/Card';
-import { getLocalStorage, setLocalStorage } from './utils/setLocalStorage';
+import { getLocalStorage, setLocalStorage } from './utils/handleLocalStorage';
 import AddCardAlias from './pages/AddCardAlias';
 import RefProvider from './contexts/RefProvider';
 
