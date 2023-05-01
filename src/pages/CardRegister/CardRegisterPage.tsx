@@ -7,13 +7,13 @@ import CardNameInput from '../../components/pages/CardRegister/CardNameInput/Car
 import CardNumberInput from '../../components/pages/CardRegister/CardNumberInput/CardNumberInput';
 import CardPasswordInput from '../../components/pages/CardRegister/CardPasswordInput/CardPasswordInput';
 import { useCardRegisterContext } from '../../context/CardRegisterContext';
-import * as Styled from './CardRegister.styles';
+import * as Styled from './CardRegisterPage.styles';
 import { useBottomSheet } from '../../context/BottomSheetContext';
 import BankListBottomSheetContent from '../../components/pages/CardRegister/BankListBottomSheetContent/BankListBottomSheetContent';
 import BottomSheet from '../../components/@common/BottomSheet/BottomSheet';
 import { BankNames } from '../../types/card.type';
 
-export default function CardRegister() {
+export default function CardRegisterPage() {
   const navigate = useNavigate();
   const { cardRegisterInfo, handleCardInfo } = useCardRegisterContext();
 

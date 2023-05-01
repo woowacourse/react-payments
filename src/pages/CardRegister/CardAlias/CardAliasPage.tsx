@@ -3,12 +3,12 @@ import { getItemFromLocalStorage, setItemInLocalStorage } from '../../../utils/l
 import { CardRegisterInfo } from '../../../types/card.type';
 import { useCardRegisterContext } from '../../../context/CardRegisterContext';
 import { useNavigate } from 'react-router-dom';
-import * as Styled from './CardAlias.styles';
+import * as Styled from './CardAliasPage.styles';
 import Card from '../../../components/pages/CardList/CardContent/CardContent';
 import CardAliasInput from '../../../components/pages/CardRegister/CardAliasInput/CardAliasInput';
 import { useToastContext } from '../../../context/ToastMessageContext';
 
-const CardAlias = () => {
+const CardAliasPage = () => {
   const navigate = useNavigate();
   const { cardRegisterInfo, initCardRegisterInfo } = useCardRegisterContext();
   const [isValid, setIsValid] = useState(false);
@@ -63,4 +63,4 @@ const CardAlias = () => {
   );
 };
 
-export default CardAlias;
+export default CardAliasPage;

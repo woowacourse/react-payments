@@ -1,11 +1,11 @@
 import Header from '../components/@common/Header/Header';
-import MyCardList from '../pages/MyCardList/MyCardList';
+import MyCardListPage from '../pages/MyCardList/MyCardListPage';
 
 const MyCardListRoute = () => {
   return (
     <>
       <Header pageTitle='보유카드' />
-      <MyCardList />
+      <MyCardListPage />
     </>
   );
 };

@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import Header from '../components/@common/Header/Header';
-import CardRegister from '../pages/CardRegister/CardRegister';
-import CardAlias from '../pages/CardRegister/CardAlias/CardAlias';
+import CardRegisterPage from '../pages/CardRegister/CardRegisterPage';
+import CardAliasPage from '../pages/CardRegister/CardAlias/CardAliasPage';
 
 const CardRegisterRoute = () => (
   <Routes>
@@ -10,11 +10,11 @@ const CardRegisterRoute = () => (
       element={
         <>
           <Header pageTitle='카드 등록' />
-          <CardRegister />
+          <CardRegisterPage />
         </>
       }
     />
-    <Route path=':alias' element={<CardAlias />} />
+    <Route path=':alias' element={<CardAliasPage />} />
   </Routes>
 );
 
