@@ -1,7 +1,7 @@
 import CardNumbers from '../components/CardNumbers/CardNumbers';
-import ExpiredDate from '../components/CardExpiredDate/CardExpiredDates';
+import CardExpiredDate from '../components/CardExpiredDate/CardExpiredDates';
 import CardOwnerName from '../components/CardOwnerName/CardOwnerName';
-import SecurityCode from '../components/CardSecurityCode/CardSecurityCode';
+import CardSecurityCode from '../components/CardSecurityCode/CardSecurityCode';
 import CardPassword from '../components/CardPassword/CardPassword';
 import Card from '../components/Card/Card';
 import Header from '../components/Header/Header';
@@ -78,7 +78,7 @@ const AddCard = ({ cards, setCards }: CardList) => {
             cardNumbers={cardNumbers}
             isSetCardNumbers={isSetCardNumbers}
           />
-          <ExpiredDate
+          <CardExpiredDate
             expiredDates={expiredDates}
             isSetExpiredDates={isSetExpiredDates}
           />
@@ -86,7 +86,7 @@ const AddCard = ({ cards, setCards }: CardList) => {
             ownerName={ownerName}
             isSetOwnerName={isSetOwnerName}
           />
-          <SecurityCode
+          <CardSecurityCode
             securityCode={securityCode}
             isSetSecurityCode={isSetSecurityCode}
           />

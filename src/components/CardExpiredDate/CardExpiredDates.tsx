@@ -9,7 +9,10 @@ interface ExpiredDateProps {
   isSetExpiredDates: (order: number, value: string) => boolean;
 }
 
-const ExpiredDate = ({ expiredDates, isSetExpiredDates }: ExpiredDateProps) => {
+const CardExpiredDate = ({
+  expiredDates,
+  isSetExpiredDates,
+}: ExpiredDateProps) => {
   const cardRefs = useContext(RefContext);
 
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,4 +62,4 @@ const ExpiredDate = ({ expiredDates, isSetExpiredDates }: ExpiredDateProps) => {
   );
 };
 
-export default ExpiredDate;
+export default CardExpiredDate;

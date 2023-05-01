@@ -9,7 +9,7 @@ interface SecurityCodeProps {
   isSetSecurityCode: (value: string) => boolean;
 }
 
-const SecurityCode = ({
+const CardSecurityCode = ({
   securityCode,
   isSetSecurityCode,
 }: SecurityCodeProps) => {
@@ -71,4 +71,4 @@ const SecurityCode = ({
   );
 };
 
-export default SecurityCode;
+export default CardSecurityCode;
