@@ -1,6 +1,7 @@
 import { CARD_COMPANIES } from '../constants';
 
 export interface CardInfo {
+  id: string;
   cardCompany: CardCompany;
   cardNumber1: string;
   cardNumber2: string;

@@ -5,6 +5,7 @@ import useCardRegisterInput from './useCardRegisterInput';
 import { useCardCompany } from '../../domain/context/CardCompanyContext';
 import { useCardsContext } from '../../domain/context/CardsContext';
 import { useModalContext } from '../common/Modal/ModalContext';
+import { uuid } from '../../utils/uuid';
 
 const today = new Date();
 const currentYear = today.getFullYear() % 100;
@@ -68,6 +69,7 @@ const useCardRegisterForm = () => {
     }
 
     const cardData = {
+      id: uuid(),
       cardCompany,
       cardNumber1,
       cardNumber2,

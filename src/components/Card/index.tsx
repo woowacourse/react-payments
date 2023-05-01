@@ -16,7 +16,7 @@ const CARD_COMPANY_CLASSNAMES = {
 
 type OptionalCardInfo = Pick<
   CardInfo,
-  Exclude<keyof CardInfo, 'cardCompany'>
+  Exclude<keyof CardInfo, 'id' | 'cardCompany'>
 > & {
   cardCompany: CardInfo['cardCompany'] | null;
 };
