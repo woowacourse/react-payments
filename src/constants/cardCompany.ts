@@ -6,7 +6,7 @@ import KB_CARD from '../assets/bank/kb_card.png';
 import LOTTE_CARD from '../assets/bank/lotte_card.png';
 import SHINHAN_CARD from '../assets/bank/shinhan_card.png';
 import WOORI_CARD from '../assets/bank/woori_card.png';
-import { CardCompanyRecord } from '../types/types';
+import { type CardCompanyRecord } from '../types/types';
 
 export const CARD_COMPANY_KIND = [
   'bc',

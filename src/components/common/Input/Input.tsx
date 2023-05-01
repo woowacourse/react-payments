@@ -1,4 +1,8 @@
-import { ChangeEvent, InputHTMLAttributes, KeyboardEvent } from 'react';
+import React, {
+  type ChangeEvent,
+  type InputHTMLAttributes,
+  type KeyboardEvent,
+} from 'react';
 import styled from 'styled-components';
 import { setNextInputFocus } from '../../../utils/common';
 
@@ -8,6 +12,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   isWrong?: boolean;
   isPassword?: boolean;
   bgColor?: string;
+  inputRef?: React.RefObject<HTMLInputElement>;
 }
 
 export default function Input({
@@ -17,6 +22,7 @@ export default function Input({
   bgColor,
   value,
   isPassword,
+  inputRef,
   ...rest
 }: InputProps) {
   const onInput = (event: ChangeEvent<HTMLInputElement>) => {
@@ -39,6 +45,7 @@ export default function Input({
   if (isPassword) {
     return (
       <StyledInput
+        ref={inputRef}
         bgColor={bgColor}
         isWrong={isWrong}
         textAlign={textAlign}
@@ -53,6 +60,7 @@ export default function Input({
 
   return (
     <StyledInput
+      ref={inputRef}
       bgColor={bgColor}
       isWrong={isWrong}
       textAlign={textAlign}

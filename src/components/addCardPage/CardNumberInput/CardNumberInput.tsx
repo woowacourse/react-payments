@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { TAB_INDEX_INFO } from '../../../constants/constant';
-import { UseInputProps } from '../../../hooks/useInput';
+import { type UseInputProps } from '../../../hooks/useInput';
 import { Error } from '../../common/Error';
 import { Input } from '../../common/Input';
 

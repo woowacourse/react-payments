@@ -1,4 +1,4 @@
-import { KeyboardEvent, RefObject } from 'react';
+import { type KeyboardEvent, type RefObject } from 'react';
 import { setNextInputFocus } from '../utils/common';
 import { isNumber, isOnlyKoreanAndEnglish } from '../utils/validate';
 

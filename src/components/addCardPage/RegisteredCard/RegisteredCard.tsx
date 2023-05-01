@@ -1,9 +1,8 @@
 import React, { FormEvent } from 'react';
 import styled from 'styled-components';
-import { UseInputProps } from '../../../hooks/useInput';
+import { type UseInputProps } from '../../../hooks/useInput';
 import { colors } from '../../../styles/theme';
-import { InputValuesInformationProps } from '../../../utils/createValidationInputInfomation';
-import { getFormValidateResult } from '../../../utils/getFormValidateResult';
+import { formValidate } from '../../../utils/formValidate';
 import { Button } from '../../common/Button';
 import { Card } from '../../common/Card';
 import { type CardProps } from '../../common/Card/Card';
@@ -24,13 +23,8 @@ export default function RegisteredCard({
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const { cardTitleInput } = event.currentTarget;
-
-    const inputInformation: InputValuesInformationProps[] = [
-      { ...cardTitleInformation, element: cardTitleInput },
-    ];
-
-    const { validationResult } = getFormValidateResult(inputInformation);
+    // 유효성 검사를 진행합니다
+    const { validationResult } = formValidate({ cardTitleInformation });
 
     if (!validationResult) {
       return;

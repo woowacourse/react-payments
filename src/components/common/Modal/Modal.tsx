@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import React, { type PropsWithChildren } from 'react';
 import styled from 'styled-components';
 import { Z_INDEX_INFO } from '../../../constants/constant';
 

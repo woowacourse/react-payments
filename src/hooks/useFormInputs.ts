@@ -5,7 +5,7 @@ import {
   yearValidate,
 } from '../utils/validate';
 
-import { UseInputProps, useInput } from './useInput';
+import { type UseInputProps, useInput } from './useInput';
 
 interface UseFormInputsProps {
   homePage: {};

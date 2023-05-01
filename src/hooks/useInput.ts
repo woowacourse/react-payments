@@ -1,4 +1,10 @@
-import { ChangeEvent, Dispatch, useEffect, useState } from 'react';
+import {
+  type ChangeEvent,
+  type Dispatch,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 export interface UseInputProps {
   value: string;
@@ -11,6 +17,7 @@ export interface UseInputProps {
   maxLength: number;
   required: boolean;
   validate: (text: string) => boolean;
+  inputRef: React.RefObject<HTMLInputElement>;
 }
 
 interface UseInputOptionProps {
@@ -35,6 +42,7 @@ export const useInput = (
     convertValue = (value: string) => value,
   }: UseInputOptionProps
 ): UseInputProps => {
+  const inputRef = useRef<HTMLInputElement>(null);
   const [value, setValue] = useState(initialValue);
   const [error, setError] = useState<string | undefined>('');
 
@@ -81,6 +89,7 @@ export const useInput = (
   };
 
   return {
+    inputRef,
     value,
     onChange,
     name,

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { AddCardButton } from '../../components/addCardPage/AddCardButton';
 import { Card } from '../../components/common/Card';
-import { CardInfo, PageInfo } from '../../types/types';
+import { type CardInfo, type PageInfo } from '../../types/types';
 
 interface HomePageProps {
   cardList: CardInfo[];
@@ -20,7 +20,7 @@ export default function HomePage({
   };
 
   const onDeleteClick = (index: number) => {
-    const result = window.confirm('정말 삭제하시겠습니까?');
+    const result = window.confirm('등록하신 카드를 정말 삭제하시겠습니까?');
 
     if (result) {
       const updatedCardList = [

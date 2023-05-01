@@ -1,5 +1,5 @@
 import React, {
-  FormEvent,
+  type FormEvent,
   useCallback,
   useEffect,
   useRef,
@@ -21,10 +21,14 @@ import { CARD_COMPANY_DATA } from '../../constants/cardCompany';
 import { useFocusInput } from '../../hooks/useFocusInput';
 import { useFormInputs } from '../../hooks/useFormInputs';
 import { useHideScrollState } from '../../hooks/useHideScrollState';
-import { CardCompanyType, CardInfo, PageInfo } from '../../types/types';
+import { type UseInputProps } from '../../hooks/useInput';
+import {
+  type CardCompanyType,
+  type CardInfo,
+  type PageInfo,
+} from '../../types/types';
 import { createUniqueId, setNextInputFocus } from '../../utils/common';
-import { InputValuesInformationProps } from '../../utils/createValidationInputInfomation';
-import { getFormValidateResult } from '../../utils/getFormValidateResult';
+import { formValidate } from '../../utils/formValidate';
 import { isPastDate } from '../../utils/validate';
 
 interface AddCardPageProps {
@@ -68,45 +72,35 @@ export default function AddCardPage({
     cardTitle,
   } = formInputs.addCardPage;
 
+  /*
+  모든 인풋의 정보에서 카드 타이틀을 뺍니다.
+
+  인풋의 정보들을 기반으로 유효성 검사를 합니다.
+
+  유효성 검사를 통과한다면 카드 별칭 등록 페이지로 이동합니다.
+  */
   const onCardInfoValidateAndGoRegisterPage = (
     event: FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
 
-    const {
-      firstCardInput,
-      secondCardInput,
-      thirdCardInput,
-      fourthCardInput,
-      monthInput,
-      yearInput,
-      ownerInput,
-      cvcInput,
-      firstPasswordInput,
-      secondPasswordInput,
-    } = event.currentTarget;
+    const cardInformation: Record<string, UseInputProps> = {
+      ...formInputs.addCardPage,
+    };
 
-    const inputInformation: InputValuesInformationProps[] = [
-      { ...firstCardNumber, element: firstCardInput },
-      { ...secondCardNumber, element: secondCardInput },
-      { ...thirdCardNumber, element: thirdCardInput },
-      { ...fourthCardNumber, element: fourthCardInput },
-      { ...month, element: monthInput },
-      { ...year, element: yearInput },
-      { ...owner, element: ownerInput },
-      { ...cvc, element: cvcInput },
-      { ...firstPassword, element: firstPasswordInput },
-      { ...secondPassword, element: secondPasswordInput },
-    ];
+    delete cardInformation.cardTitle;
 
-    const { validationResult } = getFormValidateResult(inputInformation);
+    const { validationResult } = formValidate(cardInformation);
 
     if (!validationResult) {
       return;
     }
 
-    if (isPastDate(Number(yearInput.value), Number(monthInput.value))) {
-      monthInput.focus();
+    if (isPastDate(Number(year.value), Number(month.value))) {
+      if (month.inputRef.current) {
+        month.inputRef.current.focus();
+      }
+
       month.setError('지난 기간은 입력할 수 없습니다.');
       return;
     }
@@ -132,7 +126,7 @@ export default function AddCardPage({
       owner: owner.value.toUpperCase(),
     };
 
-    const updatedCardList = [...cardList, newCard];
+    const updatedCardList = [newCard, ...cardList];
 
     setCardList(updatedCardList);
 
@@ -215,7 +209,7 @@ export default function AddCardPage({
           </ChangeButtonWrapper>
         </CardWrapper>
         <InputWrapperParent
-          onSubmit={onCardInfoSubmit}
+          onSubmit={onCardInfoValidateAndGoRegisterPage}
           ref={cardForm}
           onKeyDown={(e) => onInputKeydown(e)}
         >
