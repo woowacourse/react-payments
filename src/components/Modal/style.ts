@@ -41,3 +41,20 @@ export const ModalContents = styled.div<AnimationType>`
   animation: ${(props) => (props.animation === ANIMATION.appear ? ModalContentsAppear : ModalContentsDisAppear)}
     ${(props) => `${props.delayMsTime / 1000}s`} forwards;
 `;
+
+export const TopSheet = styled.div`
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const Title = styled.h3`
+  font-size: 18px;
+  font-weight: 500;
+`;
+
+export const CloseButton = styled.button`
+  font-size: 18px;
+  cursor: pointer;
+`;

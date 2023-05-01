@@ -8,10 +8,7 @@ import Header from '@Components/Header';
 import useAnimationModal from '@Hooks/useAnimationModal';
 import useCreditCardValidation from '@Hooks/useCreditCardValidation';
 
-import {
-  CreditCardRegisterContext,
-  CreditCardRegisterUpdateContext,
-} from '@Contexts/CreditCardRegister/CreditCardRegisterContext';
+import { CreditCardRegisterContext } from '@Contexts/CreditCardRegister/CreditCardRegisterContext';
 
 import scrollWindow from '@Utils/scrollWindow';
 
@@ -27,7 +24,6 @@ function CreditCardRegister() {
   const navigate = useNavigate();
 
   const { creditCard, errorMessage } = useContext(CreditCardRegisterContext);
-  const { update } = useContext(CreditCardRegisterUpdateContext);
 
   const { isModalOpen, openModal } = useAnimationModal();
   const isValid = useCreditCardValidation(creditCard, Object.values(errorMessage));
@@ -41,7 +37,6 @@ function CreditCardRegister() {
 
   const handleClickSelectCreditCompanyButton = () => {
     openModal();
-    update.company(undefined);
   };
 
   useEffect(() => {
@@ -64,7 +59,7 @@ function CreditCardRegister() {
             company={creditCard.company}
           />
           <S.ReSelectCardCompanyButton onClick={handleClickSelectCreditCompanyButton}>
-            {creditCard.company && '카드 재선택'}
+            {creditCard.company ? '카드 재선택' : '카드 선택'}
           </S.ReSelectCardCompanyButton>
         </S.PreviewCreditCard>
         <S.CreditCardRegisterForm>

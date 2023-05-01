@@ -1,6 +1,7 @@
 import { AnimationTypes } from '@Types/index';
 
 export type ModalProps = {
+  title: string;
   delayMsTime?: number;
   isAbleBackdropClick?: boolean;
 };

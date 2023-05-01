@@ -26,7 +26,7 @@ function CreditCardCompanyModal() {
   };
 
   return (
-    <Modal isAbleBackdropClick={false} delayMsTime={500}>
+    <Modal title="카드사 선택" delayMsTime={500}>
       <S.CardCompanyLayout>
         {(Object.keys(CARD_COMPANY) as Type.CreditCardCompanies[]).map((company) => (
           <CreditCardCompanyType company={company} key={company} handleClick={() => handleClickCardCompany(company)} />

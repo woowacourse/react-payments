@@ -17,6 +17,8 @@ const useCreditCardValidation = (
     });
     setIsValid(result);
 
+    if (!creditCard.company) setIsValid(false);
+
     if (creditCard.numbers && creditCard.numbers.length !== CREDIT_CARD_LENGTH.numbers) setIsValid(false);
 
     if (creditCard.expiry && creditCard.expiry.length !== CREDIT_CARD_LENGTH.expiry) setIsValid(false);
