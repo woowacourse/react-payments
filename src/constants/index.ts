@@ -91,6 +91,10 @@ const CARD_BANK_COLOR_MAP: Record<string, { background: string }> = {
   국민카드: { background: 'rgb(85, 79, 71)' },
 } as const;
 
+const LOCALSTORAGE_KEY = {
+  CARD: 'card',
+} as const;
+
 export {
   INPUT_MAX_LENGTH,
   INPUT_MIN_LENGTH,
@@ -105,4 +109,5 @@ export {
   RANDOM_COLOR,
   ERASE_UNTIL_CARD_NUMBER,
   CARD_BANK_COLOR_MAP,
+  LOCALSTORAGE_KEY,
 };

@@ -10,6 +10,7 @@ import { getLocalStorage, setLocalStorage } from '../utils/localStorage';
 import { ModalContext } from '../store/modalContext';
 import ModalBanks from '../components/ModalBanks';
 import { useNavigate } from 'react-router-dom';
+import { LOCALSTORAGE_KEY } from '../constants';
 
 const AddCard = () => {
   const [card, setCard] = useState<CardType>({
@@ -25,8 +26,8 @@ const AddCard = () => {
   const navigate = useNavigate();
 
   const registerCard = (e: FormEvent) => {
-    const cards = getLocalStorage('card');
-    setLocalStorage('card', [...cards, card]);
+    const cards = getLocalStorage(LOCALSTORAGE_KEY.CARD);
+    setLocalStorage(LOCALSTORAGE_KEY.CARD, [...cards, card]);
 
     navigate('/CardName');
   };

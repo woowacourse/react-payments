@@ -3,6 +3,7 @@ import { getLocalStorage, setLocalStorage } from '../utils/localStorage';
 import styled from 'styled-components';
 import CardNameInput from './CardNameInput';
 import { CardType } from '../types';
+import { LOCALSTORAGE_KEY } from '../constants';
 
 interface Props {
   card: CardType;
@@ -16,10 +17,10 @@ const RegisterCardName = (props: Props) => {
   };
 
   const registerCardNameHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const cards = getLocalStorage('card');
+    const cards = getLocalStorage(LOCALSTORAGE_KEY.CARD);
     const card = cards.pop();
     card.cardName = props.card.cardName;
-    setLocalStorage('card', [...cards, card]);
+    setLocalStorage(LOCALSTORAGE_KEY.CARD, [...cards, card]);
 
     navigator('/');
   };

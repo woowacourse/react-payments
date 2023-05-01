@@ -8,9 +8,10 @@ import { getLocalStorage } from '../utils/localStorage';
 import { CardType } from '../types';
 import uuid from 'react-uuid';
 import { ModalContext } from '../store/modalContext';
+import { LOCALSTORAGE_KEY } from '../constants';
 
 const MyCard = () => {
-  const cards = getLocalStorage('card');
+  const cards = getLocalStorage(LOCALSTORAGE_KEY.CARD);
 
   const { openModal } = useContext(ModalContext) ?? {
     openModal: () => {},

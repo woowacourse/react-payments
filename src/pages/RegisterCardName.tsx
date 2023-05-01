@@ -3,9 +3,10 @@ import Page from '../components/common/Page';
 import styled from 'styled-components';
 import { getLocalStorage } from '../utils/localStorage';
 import RegisterCardName from '../components/RegisterCardName';
+import { LOCALSTORAGE_KEY } from '../constants';
 
 const CardName = () => {
-  const card = getLocalStorage('card').at(-1);
+  const card = getLocalStorage(LOCALSTORAGE_KEY.CARD).at(-1);
 
   return (
     <Page>
@@ -25,9 +26,7 @@ const CardName = () => {
           )}
         </CardWrapper>
         <RegisterCardNameInputWrapper>
-            <RegisterCardName 
-                card={card}
-            />
+          <RegisterCardName card={card} />
         </RegisterCardNameInputWrapper>
       </RegisterCardNameWrapper>
     </Page>
