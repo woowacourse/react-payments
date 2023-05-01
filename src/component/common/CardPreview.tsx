@@ -22,7 +22,7 @@ export default function CardPreview({
   const previewNumber =
     cardNumber.length === 4 &&
     cardNumber.every((number) => number.length === 4) &&
-    cardNumber.join(" ");
+    `${cardNumber[0]} **** **** ${cardNumber[3]}`;
 
   const { backgroundColor, color } = colorMatch[cardCo];
   const cardCoName = CARD_CO_NAME[cardCo];
