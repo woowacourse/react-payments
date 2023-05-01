@@ -1,25 +1,48 @@
-import { ChangeEvent, Dispatch, useState } from 'react';
+import {
+  type ChangeEvent,
+  type Dispatch,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 export interface UseInputProps {
   value: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  name: string | undefined;
+  name: string;
   error: string | undefined;
   setError: Dispatch<React.SetStateAction<string | undefined>>;
   isWrong: boolean;
+  onBlur: () => void;
+  maxLength: number;
+  required: boolean;
+  validate: (text: string) => boolean;
+  inputRef: React.RefObject<HTMLInputElement>;
 }
 
 interface UseInputOptionProps {
-  name?: string;
-  validate?: (text: string) => boolean;
+  name: string;
+  validate: (text: string) => boolean;
   errorMessage?: string;
-  maxLength?: number;
+  maxLength: number;
+  isRequired: boolean;
+  isNumber?: boolean;
+  convertValue?: (text: string) => string;
 }
 
 export const useInput = (
   initialValue: string,
-  { name, validate = () => true, errorMessage, maxLength }: UseInputOptionProps
+  {
+    name,
+    validate = () => true,
+    errorMessage,
+    maxLength,
+    isRequired,
+    isNumber = false,
+    convertValue = (value: string) => value,
+  }: UseInputOptionProps
 ): UseInputProps => {
+  const inputRef = useRef<HTMLInputElement>(null);
   const [value, setValue] = useState(initialValue);
   const [error, setError] = useState<string | undefined>('');
 
@@ -30,8 +53,16 @@ export const useInput = (
       return;
     }
 
+    if (isNumber) {
+      const convertResult = convertValue(value);
+      setValue(convertResult);
+      setError('');
+      return;
+    }
+
     if (validate(value)) {
-      setValue(value);
+      const convertResult = convertValue(value);
+      setValue(convertResult);
       setError('');
       return;
     }
@@ -39,5 +70,35 @@ export const useInput = (
     setError(errorMessage);
   };
 
-  return { value, onChange, name, error, setError, isWrong: error !== '' };
+  useEffect(() => {
+    if (isNumber && maxLength === value.length) {
+      const isSuccess = validate(value);
+
+      if (isSuccess) {
+        setError('');
+      } else {
+        setError(errorMessage);
+      }
+    }
+  }, [isNumber, setError, maxLength, errorMessage, validate, value]);
+
+  const onBlur = () => {
+    if (validate(value)) {
+      setError('');
+    }
+  };
+
+  return {
+    inputRef,
+    value,
+    onChange,
+    name,
+    error,
+    setError,
+    isWrong: error !== '',
+    onBlur,
+    required: isRequired,
+    validate,
+    maxLength,
+  };
 };

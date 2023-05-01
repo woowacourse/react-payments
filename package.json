@@ -42,7 +42,71 @@
           "import/no-anonymous-default-export": "off"
         }
       }
-    ]
+    ],
+    "rules": {
+      "import/order": [
+        "warn",
+        {
+          "pathGroups": [
+            {
+              "pattern": "react*",
+              "group": "external",
+              "position": "before"
+            },
+            {
+              "pattern": "./hooks/*",
+              "group": "internal",
+              "position": "after"
+            },
+            {
+              "pattern": "./pages/*",
+              "group": "internal",
+              "position": "after"
+            },
+            {
+              "pattern": "./components/*",
+              "group": "internal",
+              "position": "after"
+            },
+            {
+              "pattern": "./common/*",
+              "group": "internal",
+              "position": "after"
+            },
+            {
+              "pattern": "./types/*",
+              "group": "internal",
+              "position": "after"
+            },
+            {
+              "pattern": "./utils/*",
+              "group": "internal",
+              "position": "after"
+            },
+            {
+              "pattern": "./constants/*",
+              "group": "internal",
+              "position": "after"
+            }
+          ],
+          "alphabetize": {
+            "caseInsensitive": true,
+            "order": "asc"
+          },
+          "pathGroupsExcludedImportTypes": [],
+          "groups": [
+            "type",
+            "builtin",
+            "external",
+            "internal",
+            "parent",
+            "sibling",
+            "index",
+            "unknown"
+          ]
+        }
+      ]
+    }
   },
   "browserslist": {
     "production": [
@@ -60,6 +124,7 @@
     "@storybook/addon-essentials": "^7.0.5",
     "@storybook/addon-interactions": "^7.0.5",
     "@storybook/addon-links": "^7.0.5",
+    "@storybook/addon-styling": "^1.0.5",
     "@storybook/blocks": "^7.0.5",
     "@storybook/preset-create-react-app": "^7.0.5",
     "@storybook/react": "^7.0.5",

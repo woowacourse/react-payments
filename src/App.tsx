@@ -1,11 +1,9 @@
-import './styles/index.css';
-
 import { useState } from 'react';
-import { LOCAL_STORAGE_CARD_KEY } from './constant';
-import { CardInfo, PageInfo } from './types';
 import { useLocalStorage } from './hooks/useLocalStorage';
-import Homepage from './pages/HomePage';
-import AddCardPage from './pages/AddCardPage';
+import { AddCardPage } from './pages/AddCardPage';
+import { HomePage } from './pages/HomePage';
+import { type CardInfo, type PageInfo } from './types/types';
+import { LOCAL_STORAGE_CARD_KEY } from './constants/constant';
 
 export default function App() {
   const [page, setPage] = useState<PageInfo>('homePage');
@@ -17,7 +15,7 @@ export default function App() {
   return (
     <div className="app">
       {page === 'homePage' && (
-        <Homepage
+        <HomePage
           cardList={cardList}
           setCardList={setCardList}
           setPage={setPage}
