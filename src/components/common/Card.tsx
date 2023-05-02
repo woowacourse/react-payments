@@ -43,9 +43,9 @@ const CardWrapper = styled.div<{ cardCompany: string }>`
   background: ${({ cardCompany }) => CARD_COMPANY_COLOR_MAP[cardCompany]?.background || '#333333'};
   color: ${({ cardCompany }) => CARD_COMPANY_COLOR_MAP[cardCompany]?.color || 'white'};
 
-  transition: margin 0.2s;
+  transition: transform 0.2s;
   &:hover {
-    margin-left: 32px;
+    transform: perspective(260px) rotateX(24deg);
   }
 `;
 

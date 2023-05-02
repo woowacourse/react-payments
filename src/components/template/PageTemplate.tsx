@@ -22,19 +22,20 @@ export default PageTemplate;
 const PageTemplateWrapper = styled.div`
   position: relative;
 
-  min-width: 375px;
-  width: 375px;
+  width: 100%;
+  height: 100%;
 
-  padding: 28px;
-  padding-top: 72px;
+  padding-top: 64px;
 `;
 
 const Main = styled.div`
+  overflow-y: scroll;
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  height: 700px;
 
-  overflow-y: scroll;
+  width: 100%;
+  height: 100%;
+  padding: 0 28px;
 `;

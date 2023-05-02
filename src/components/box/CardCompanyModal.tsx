@@ -43,12 +43,12 @@ const darkening = keyframes`
 `;
 
 const drawer = keyframes`
-  from { bottom: -20% }
+  from { bottom: -100px }
   to { bottom: 0; }
 `;
 
 const ModalBackdrop = styled.div`
-  animation: ${darkening} 0.4s;
+  animation: ${darkening} 0.3s;
   position: absolute;
   top: 0;
 
@@ -58,7 +58,7 @@ const ModalBackdrop = styled.div`
 `;
 
 const ModalWrapper = styled.div`
-  animation: ${drawer} 0.4s;
+  animation: ${drawer} 0.3s;
   position: absolute;
   bottom: 0;
 
