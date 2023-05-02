@@ -10,6 +10,7 @@ const cardReducer = (state: CardType[], action: any) => {
 
     case CARDLIST_FAILURE:
       return [...state];
+
     default:
       return state;
   }

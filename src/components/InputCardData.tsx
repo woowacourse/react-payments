@@ -32,7 +32,6 @@ const InputCardData = ({
       onChange={(e) => {
         onChange(e);
         nextFocus(e);
-
         handleInputData(dataId, e);
       }}
       onFocus={onFlip}

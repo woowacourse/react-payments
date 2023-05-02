@@ -42,32 +42,16 @@ export type FormCardAddProps = {
 
 export type actionName = 'CARDLIST_REQUEST' | 'CARDLIST_SUCCESS' | 'CARDLIST_FAILURE';
 
-type inputModeType =
-  | 'search'
-  | 'text'
-  | 'email'
-  | 'tel'
-  | 'url'
-  | 'none'
-  | 'numeric'
-  | 'decimal'
-  | undefined;
-
-export type InputProps = {
-  required: boolean;
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   inputType: string;
-  inputMode: inputModeType;
   passwordType?: string;
-  className?: string;
-  value: string;
   minDataLength: number;
   maxDataLength: number;
-  name: string;
   dataId: number;
-  refObject: RefObject<HTMLInputElement>;
-  handleError: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  refObject: React.Ref<HTMLInputElement>;
+  handleError: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   nextFocus: (e: ChangeEvent) => void;
   onFlip: () => void;
   handleInputData: (index: number, e: ChangeEvent<HTMLInputElement>) => void;
-};
+}

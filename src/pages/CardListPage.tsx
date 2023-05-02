@@ -10,7 +10,7 @@ import './CardListPage.css';
 
 const CardListPage = () => {
   const CardDispatch = React.createContext({});
-  const [mainCardListData, dispatchmainCardListData] = useReducer(cardReducer, initialState);
+  const [mainCardListData, dispatchMainCardListData] = useReducer(cardReducer, initialState);
 
   const navigate = useNavigate();
 
@@ -19,11 +19,11 @@ const CardListPage = () => {
   };
 
   useEffect(() => {
-    dispatchmainCardListData(getCardListAction());
+    dispatchMainCardListData(getCardListAction());
   }, []);
 
   return (
-    <CardDispatch.Provider value={dispatchmainCardListData}>
+    <CardDispatch.Provider value={dispatchMainCardListData}>
       <div className="add-card-page">
         <Header headerTitle="보유카드" />
         <main className="add-card-page-body">
