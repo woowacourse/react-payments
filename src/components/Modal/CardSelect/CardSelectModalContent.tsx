@@ -1,26 +1,17 @@
 import styled from 'styled-components';
 import { CardCompanyItem } from './CardCompanyItem';
-import { ModalWithCloseButton } from '../ModalWithCloseButton';
 import { CARD_COMPANY } from '../../../constants';
 import { CardCompany } from '../../../types';
 
 interface Props {
-  isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setCardCompany: (input: CardCompany) => void;
 }
 
-export function CardSelectModal({ isOpen, setIsOpen, setCardCompany }: Props) {
+export function CardSelectModalContent({ setCardCompany }: Props) {
   const cardCompanies = Object.values(CARD_COMPANY);
-  const buttonText = '카드사 선택 완료';
 
   return (
-    <ModalWithCloseButton
-      isOpen={isOpen}
-      setIsOpen={setIsOpen}
-      buttonText={buttonText}
-      aria-labelledby='title-dialog'
-    >
+    <>
       <Style.Title id='title-dialog'>카드사를 선택해주세요.</Style.Title>
       <Style.GridContainer>
         {cardCompanies.map((cardCompany) => {
@@ -31,7 +22,7 @@ export function CardSelectModal({ isOpen, setIsOpen, setCardCompany }: Props) {
           );
         })}
       </Style.GridContainer>
-    </ModalWithCloseButton>
+    </>
   );
 }
 

@@ -7,10 +7,13 @@ import { ExpirationDateInput } from '../input/ExpirationDateInput';
 import { OwnerNameInput } from '../input/OwnerNameInput';
 import { SecurityCodeInput } from '../input/SecurityCodeInput';
 import { PasswordInput } from '../input/PasswordInput';
-import { CardSelectModal } from '../Modal/CardSelect/CardSelectModal';
 import { Button } from '../Button/Button';
 import { useCardRegisterForm } from '../../hooks/useCardRegisterForm';
 import { cardDataService } from '../../domains/cardDataService';
+import { ModalWithCloseButton } from '../Modal/ModalWithCloseButton';
+import { CARD_SELECT_COMPLETE_BUTTON } from '../../constants';
+import { CardSelectModalContent } from '../Modal/CardSelect/CardSelectModalContent';
+import { CardCompany } from '../../types';
 
 export function CardRegisterForm() {
   const navigate = useNavigate();
@@ -58,11 +61,18 @@ export function CardRegisterForm() {
 
   return (
     <Style.Container onSubmit={handleCardInfoSubmit}>
-      <CardSelectModal
+      <ModalWithCloseButton
         isOpen={isModalOpen}
         setIsOpen={setIsModalOpen}
-        setCardCompany={(input) => cardDispatch({ type: 'SET_CARD_COMPANY', cardCompany: input })}
-      />
+        buttonText={CARD_SELECT_COMPLETE_BUTTON}
+        aria-labelledby='title-dialog'
+      >
+        <CardSelectModalContent
+          setCardCompany={(input: CardCompany) =>
+            cardDispatch({ type: 'SET_CARD_COMPANY', cardCompany: input })
+          }
+        />
+      </ModalWithCloseButton>
       <Style.CardCompanySelectButton type={'button'} onClick={openModal}>
         <CardViewer card={card} />
       </Style.CardCompanySelectButton>

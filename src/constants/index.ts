@@ -14,6 +14,8 @@ export const PASSWORD_START_INDEX = 2;
 export const PASSWORD_TEXT = '•';
 export const CARD_ALIAS_SIZE = 20;
 
+export const CARD_SELECT_COMPLETE_BUTTON = '카드사 선택 완료';
+
 export const CARD_COMPANIES = [
   'BC카드',
   '신한카드',

@@ -27,7 +27,9 @@ export function Modal({ isOpen, setIsOpen, children, ...props }: Props) {
   return (
     <>
       <Style.Backdrop isOpen={isOpen} onClick={closeModal} />
-      <Style.Container open={isOpen}>{children}</Style.Container>
+      <Style.Container open={isOpen} {...props}>
+        {children}
+      </Style.Container>
     </>
   );
 }
