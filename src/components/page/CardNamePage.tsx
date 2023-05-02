@@ -54,6 +54,7 @@ const CardNamePage = ({ navigate }: Props) => {
         value={cardName}
         onChange={onChangeCardNameInput}
         onKeyDown={onKeyDownEnter}
+        placeholder="카드 별칭을 입력해주세요! (선택)"
       />
       <ButtonWrapper>
         <SubmitButton onClick={submitCardForm}>확인</SubmitButton>
