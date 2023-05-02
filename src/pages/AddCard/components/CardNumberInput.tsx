@@ -11,17 +11,14 @@ const CardNumberInput = ({
   cardThirdNumber,
   cardFourthNumber,
 }: CardNumberInputProps) => {
+  const status = calcMultipleStatus([
+    cardFirstNumber.status,
+    cardSecondNumber.status,
+    cardThirdNumber.status,
+    cardFourthNumber.status,
+  ]);
   return (
-    <InputContainer
-      className="card-number-input-container"
-      status={calcMultipleStatus([
-        cardFirstNumber.status,
-        cardSecondNumber.status,
-        cardThirdNumber.status,
-        cardFourthNumber.status,
-      ])}
-      inputType="cardNumber"
-    >
+    <InputContainer className="card-number-input-container" status={status} inputType="cardNumber">
       <span className="form-label">카드 번호</span>
       <div className="card-number-input">
         <input
