@@ -8,6 +8,8 @@ export const CardAliasPage = styled.section`
   flex-direction: column;
   align-items: center;
 
+  position: relative;
+
   width: 100%;
   height: 100%;
 `;

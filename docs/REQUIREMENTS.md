@@ -1,7 +1,7 @@
 ## 기능 요구 사항
 
 - [ ] 스토리북 상호작용 테스트하기
-- [ ] 버튼 위치 페이지 벗어나지 않게 수정
+- [x] 버튼 위치 페이지 벗어나지 않게 수정
 
 ## 피드백
 
@@ -11,7 +11,7 @@
 - [ ] viewport 메타태그 학습, safe area 학습
 - [ ] inputmode라는 속성에 대해 알아보셔도 좋을 것 같아요! 가상키보드가 어떻게 떠야하는지 지정
 - [ ] 자유도를 좀 더 생각해서 스킵이 가능하게 하되 제출만 막는 경험 구현하기
-- [ ] src/GlobalStyles.ts
+- [x] src/GlobalStyles.ts
       100vw 에서 100%로 변경한 이유는 어떤 것인가요?
 - [ ] src/components/BottomSheet/BottomSheet.tsx
       CardCompanyContents를 바텀싯이 알아야할것같진 않아서 children정도여도 좋을 것 같아요~
