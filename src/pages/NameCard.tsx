@@ -40,9 +40,10 @@ const NameCard = () => {
 };
 
 const TitleWrapper = styled.h3`
-  font-size: 24px;
-  font-weight: 400;
+  font-size: 22px;
   margin-bottom: 40px;
+  width: 100vw;
+  text-align: center;
 `;
 
 const NameInputWrapper = styled.div`
