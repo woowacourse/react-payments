@@ -97,3 +97,7 @@ export const CARD_COMPANYS: CardCompany[] = [
   '하나카드',
   '국민카드',
 ];
+
+export const YEAR = new Date().getFullYear();
+export const YEAR_LAST = YEAR.toString().slice(2, 4);
+export const MONTH = new Date().getMonth() + 1;

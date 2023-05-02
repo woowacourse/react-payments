@@ -1,9 +1,6 @@
 import { useState } from 'react';
-import { MONTH_DATA } from '../utils/constants';
 
-const YEAR = new Date().getFullYear();
-const YEAR_LAST = YEAR.toString().slice(2, 4);
-const MONTH = new Date().getMonth() + 1;
+import { MONTH, MONTH_DATA, YEAR_LAST } from '../utils/constants';
 
 const useValidExpireDate = () => {
   const [isCurrentYear, setIsCurrentYear] = useState(false);
