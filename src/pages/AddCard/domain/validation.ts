@@ -15,8 +15,10 @@ export const isValidExpiredYearFormat = (str: string) => {
 };
 
 export const isValidSecurityCode = (str: string) => {
-  const strToNum = +str;
-  return str.length === 3 && Number.isInteger(strToNum) ? 'VALID' : 'INVALID';
+  const strToArr = str.split('');
+  return str.length === 3 && strToArr.every((element) => NUMBERS.includes(element))
+    ? 'VALID'
+    : 'INVALID';
 };
 
 export const isValidOwnerName = (str: string) => {
@@ -32,8 +34,10 @@ export const isValidPassword = (str: string) => {
 };
 
 export const isValidCardNumber = (str: string) => {
-  const strToNum = +str;
-  return str.length === 4 && Number.isInteger(strToNum) ? 'VALID' : 'INVALID';
+  const strToArr = str.split('');
+  return str.length === 4 && strToArr.every((element) => NUMBERS.includes(element))
+    ? 'VALID'
+    : 'INVALID';
 };
 
 export const isValidCardAlias = (str: string) => {
