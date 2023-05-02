@@ -13,8 +13,8 @@ const NameCardPage = () => {
   const navigate = useNavigate();
 
   const { cards, setCards } = useContext(GlobalContext);
-  const { cardName, cardCompany, cardNumber, expirationDate, ownerName, securityCode, password, setCardName } =
-    useContext(AddCardStateContext);
+  const { cardInfo, setCardInfo } = useContext(AddCardStateContext);
+  const { cardName, cardCompany, cardNumber, expirationDate, ownerName, securityCode, password } = cardInfo;
 
   const onSubmitHandler = () => {
     const card: Card = {
@@ -32,9 +32,7 @@ const NameCardPage = () => {
   };
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!isValidCardName(e.target.value)) return;
-
-    setCardName(e.target.value);
+    setCardInfo({ ...cardInfo, cardName: e.target.value });
   };
 
   return (
