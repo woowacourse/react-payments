@@ -24,9 +24,7 @@ export const useCreditCardContext = () => {
 
   if (context === null) throw new Error('[ERROR] <CreditCardProvider>가 존재하지 않습니다!! 먼저 만들어 주세요.');
 
-  const { card, setCardInfo } = context;
-
-  return { card, setCardInfo };
+  return context;
 }
 
 export default CreditCardContext;
