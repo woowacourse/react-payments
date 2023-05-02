@@ -1,4 +1,4 @@
-import { useCardDispatch, useCardState } from "./useCard";
+import { useCardDispatch, useCardState } from "../../contexts/CardContext";
 
 function useCardCVC() {
   const dispatch = useCardDispatch();

@@ -1,11 +1,9 @@
 import React from "react";
-
+import St from "./AddCardPageStyled";
 import CardDetailHeader from "./CardDetailHeader/CardDetailHeader";
 import CardDetailView from "../CardDetailView/CardDetailView";
 import CardDetailForm from "./CardDetailForm/CardDetailForm";
-
-import St from "./AddCardPageStyled";
-import { useCardState } from "../../hooks/card/useCard";
+import { useCardState } from "../../contexts/CardContext";
 
 function AddCardPage() {
   const creditCard = useCardState();

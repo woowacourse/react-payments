@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import St from "./AddCardResultPageStyled";
 import { CreditCard } from "../../types/card";
-import { useCardDispatch, useCardState } from "../../hooks/card/useCard";
+import { useCardState, useCardDispatch } from "../../contexts/CardContext";
 import CardDetailView from "../CardDetailView/CardDetailView";
 import useCardAlias from "../../hooks/card/useCardAlias";
 import { LocationState } from "../../types/reactRouter";

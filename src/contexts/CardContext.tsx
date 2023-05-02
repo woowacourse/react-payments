@@ -1,4 +1,4 @@
-import React, { Dispatch, createContext, useReducer } from "react";
+import React, { Dispatch, createContext, useContext, useReducer } from "react";
 import { CreditCard, CREDIT_CARD_COMPANY } from "../types/card";
 
 type Action =
@@ -84,4 +84,20 @@ export function CardProvier({ children }: { children: React.ReactNode }) {
       </CardDispatchContext.Provider>
     </CardContext.Provider>
   );
+}
+
+export function useCardState() {
+  const state = useContext(CardContext);
+
+  if (!state) throw new Error("Can't find CardContext");
+
+  return state;
+}
+
+export function useCardDispatch() {
+  const dispatch = useContext(CardDispatchContext);
+
+  if (!dispatch) throw new Error("Can't find CardContext");
+
+  return dispatch;
 }

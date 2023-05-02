@@ -1,7 +1,7 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import St from "./CardDetailHeaderStyled";
-import { useCardDispatch } from "../../../hooks/card/useCard";
+import { useNavigate } from "react-router-dom";
+import { useCardDispatch } from "../../../contexts/CardContext";
 
 function CardDetailHeader() {
   const navigate = useNavigate();
