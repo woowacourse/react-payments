@@ -6,6 +6,7 @@ import { useState, useCallback, useContext } from "react";
 import { SubmitManageContext } from "../../contexts/SubmitManageContext";
 import { NewCardContext } from "../../contexts/NewCardContext";
 
+import { ValidFlagType } from "../../types/input";
 import { CARDNUMBERS_MAXLEGNTH, CARDNUMBERS_REGEX, NUMBER_REGEX } from "../../constants";
 
 const cardNumberInputInfo = {
@@ -42,9 +43,14 @@ const cannotInput = (postText: string, text: string): boolean => {
   return false;
 };
 
-const CardNumberInput = () => {
+interface CardNumberInputProps {
+  isInputsValid: ValidFlagType;
+  setIsNumbersCompleted: (isValid: boolean) => void;
+  setIsNumbersValid: (isValid: boolean) => void;
+}
+
+const CardNumberInput = ({ isInputsValid, setIsNumbersCompleted, setIsNumbersValid }: CardNumberInputProps) => {
   const [postText, setPostText] = useState("");
-  const { isInputsValid, setIsNumbersCompleted, setIsNumbersValid } = useContext(SubmitManageContext);
   const { setNumbers, newCard } = useContext(NewCardContext);
 
   const saveNumbers = useCallback(

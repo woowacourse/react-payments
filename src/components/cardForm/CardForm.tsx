@@ -1,6 +1,3 @@
-import { CardType } from "../../types/card";
-import { ValidFlagType } from "../../types/input";
-
 import CVCInput from "./CVCInput";
 import CardNumberInput from "./CardNumberInput";
 import ExpiryDateInput from "./ExpiryDateInput";
@@ -11,16 +8,18 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useContext, FormEvent } from "react";
 import { useCheckForm } from "../../hook/useCheckForm";
-
-import { validateCardNumbers, validateExpiryDate } from "../../validation";
+import { useHelpSubmitForm } from "../../hook/useHelpSubmitForm";
 
 import { CardsContext } from "../../contexts/CardsContext";
 import { NewCardContext } from "../../contexts/NewCardContext";
-import { SubmitManageContext } from "../../contexts/SubmitManageContext";
 
 const CardForm = () => {
   const { cards, addNewCard } = useContext(CardsContext);
   const { newCard } = useContext(NewCardContext);
+  const navigate = useNavigate();
+  const moveToHome = () => {
+    navigate("/setAlias", { state: { newCard } });
+  };
 
   const {
     isInputsCompleted,
@@ -36,63 +35,39 @@ const CardForm = () => {
     isAllCompleted,
   } = useCheckForm();
 
-  const navigate = useNavigate();
-  const moveToHome = () => {
-    navigate("/setAlias", { state: { newCard } });
-  };
+  const { isAllValid, makeCardFormData } = useHelpSubmitForm({
+    newCard,
+    cards,
+    setIsNumbersValid,
+    setIsExpiryDateValid,
+  });
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!isAllCompleted()) return;
+    if (!isAllValid()) return;
 
-    const validations: ValidFlagType = {
-      isCardNumbersValid: validateCardNumbers(newCard, cards),
-      isExpiryDateValid: validateExpiryDate(newCard.expiryDate),
-    };
-
-    if (!Object.values(validations).every((valid) => valid)) {
-      setIsNumbersValid(validations.isCardNumbersValid);
-      setIsExpiryDateValid(validations.isExpiryDateValid);
-      return;
-    }
-
-    const formData = new FormData(e.target as HTMLFormElement);
-    const data = Object.fromEntries(formData.entries());
-    const cardInfo: CardType = {
-      numbers: newCard.numbers,
-      expiryDate: newCard.expiryDate,
-      owner: newCard.owner ?? "",
-      brand: newCard.brand,
-      CVC: Number(data.CVC),
-      password: [Number(data.password1), Number(data.password2)],
-    };
-
+    const cardInfo = makeCardFormData(e.target as HTMLFormElement);
     addNewCard(cardInfo);
     moveToHome();
   };
 
   return (
     <Form onSubmit={handleSubmit}>
-      <SubmitManageContext.Provider
-        value={{
-          isInputsCompleted,
-          setIsNumbersCompleted,
-          setExpriyDateCompleted,
-          setIsCVCCompleted,
-          setIsPassWordCompleted,
-
-          isInputsValid,
-          setIsNumbersValid,
-          setIsExpiryDateValid,
-        }}
-      >
-        <CardNumberInput />
-        <ExpiryDateInput />
-        <OwnerInput />
-        <CVCInput />
-        <PasswordInput />
-      </SubmitManageContext.Provider>
+      <CardNumberInput
+        isInputsValid={isInputsValid}
+        setIsNumbersCompleted={setIsNumbersCompleted}
+        setIsNumbersValid={setIsNumbersValid}
+      />
+      <ExpiryDateInput
+        isInputsValid={isInputsValid}
+        setExpriyDateCompleted={setExpriyDateCompleted}
+        setIsExpiryDateValid={setIsExpiryDateValid}
+      />
+      <OwnerInput />
+      <CVCInput setIsCVCCompleted={setIsCVCCompleted} />
+      <PasswordInput setIsPassWordCompleted={setIsPassWordCompleted} />
       <SubmitButton $color={isAllCompleted() ? "#525252" : "#D3D3D3"} type="submit">
         다음
       </SubmitButton>

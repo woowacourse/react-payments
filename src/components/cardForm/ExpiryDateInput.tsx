@@ -7,6 +7,13 @@ import { SubmitManageContext } from "../../contexts/SubmitManageContext";
 import { NewCardContext } from "../../contexts/NewCardContext";
 
 import { EXPRIYDATE_MAXLEGNTH, EXPRIYDATE_REGEX, TWO_TO_NINE_REGEX } from "../../constants";
+import { ValidFlagType } from "../../types/input";
+
+interface ExpiryDateInputProps {
+  isInputsValid: ValidFlagType;
+  setExpriyDateCompleted: (isCompleted: boolean) => void;
+  setIsExpiryDateValid: (isValid: boolean) => void;
+}
 
 const paddingSingleDigitMonth = (expriyDate: string) => {
   if (expriyDate.length === 2 && !new RegExp(TWO_TO_NINE_REGEX).test(expriyDate[0])) {
@@ -24,8 +31,7 @@ const ExpiryDateInfo = {
   $textPosition: "center",
 };
 
-const ExpiryDateInput = () => {
-  const { isInputsValid, setExpriyDateCompleted, setIsExpiryDateValid } = useContext(SubmitManageContext);
+const ExpiryDateInput = ({ isInputsValid, setExpriyDateCompleted, setIsExpiryDateValid }: ExpiryDateInputProps) => {
   const { setExpiryDate } = useContext(NewCardContext);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {

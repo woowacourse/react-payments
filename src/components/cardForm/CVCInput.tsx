@@ -8,6 +8,10 @@ import { SubmitManageContext } from "../../contexts/SubmitManageContext";
 
 import { CVC_MAXLEGNTH, NUMBER_REGEX } from "../../constants";
 
+interface CVCInputProps {
+  setIsCVCCompleted: (isCompleted: boolean) => void;
+}
+
 const CVCInfo = {
   label: "CVC",
   placeholder: "",
@@ -20,9 +24,7 @@ const cannotInput = (text: string): boolean => {
   return text.length > CVC_MAXLEGNTH || !new RegExp(NUMBER_REGEX).test(text);
 };
 
-const CVCInput = () => {
-  const { setIsCVCCompleted } = useContext(SubmitManageContext);
-
+const CVCInput = ({ setIsCVCCompleted }: CVCInputProps) => {
   const handleInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       if (cannotInput(e.target.value)) {

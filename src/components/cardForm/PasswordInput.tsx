@@ -8,6 +8,10 @@ import { SubmitManageContext } from "../../contexts/SubmitManageContext";
 
 import { PASSWORD_MAXLEGNTH, NUMBER_REGEX } from "../../constants";
 
+interface PasswordInputProps {
+  setIsPassWordCompleted: (isCompleted: boolean) => void;
+}
+
 const passwordInfo = {
   placeholder: "",
   type: "password",
@@ -21,9 +25,8 @@ const cannotInput = (text: string): boolean => {
   return text.length > PASSWORD_MAXLEGNTH || !new RegExp(NUMBER_REGEX).test(text);
 };
 
-const PasswordInput = () => {
+const PasswordInput = ({ setIsPassWordCompleted }: PasswordInputProps) => {
   const isPassWordsCompleted = useRef<boolean[]>(new Array(passwordInfo.length).fill(false));
-  const { setIsPassWordCompleted } = useContext(SubmitManageContext);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const moveFocus = (index: number, text: string) => {
