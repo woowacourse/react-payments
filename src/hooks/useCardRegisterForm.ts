@@ -1,7 +1,10 @@
 import { useContext } from 'react';
 
 import { useInput } from './useInput';
-import { CardPreviewInfoContext, passwordInput } from '../contexts/cardInfo';
+import {
+  CardPreviewInfoContext,
+  passwordInput,
+} from '../contexts/cardPreviewInfo';
 import { InputInfo } from '../type/input';
 import { checkInputValdiation } from '../utils/checkInputValidation';
 import { cardRegisterValidator } from '../validation/cardRegister';

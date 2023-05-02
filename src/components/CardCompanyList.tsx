@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import styled from 'styled-components';
 
 import { CARD_COMPANY, imgSrc } from '../constants/cardCompany';
-import { CardPreviewInfoContext } from '../contexts/cardInfo';
+import { CardPreviewInfoContext } from '../contexts/cardPreviewInfo';
 
 export function CardCompanyList() {
   const { company } = useContext(CardPreviewInfoContext);

@@ -1,10 +1,7 @@
 import React from 'react';
 
 import { InputBox } from './InputBox';
-import { passwordInput } from '../../../contexts/cardInfo';
-import { useInput } from '../../../hooks/useInput';
 import { InputInfo } from '../../../type/input';
-import { cardRegisterValidator } from '../../../validation/cardRegister';
 
 export default {
   component: InputBox,
