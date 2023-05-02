@@ -6,7 +6,6 @@ import { OwnerNameInput } from './cardInfoInputs/OwnerNameInput';
 import { SecurityCodeInput } from './cardInfoInputs/SecurityCodeInput';
 import { PasswordInput } from './cardInfoInputs/PasswordInput';
 import { useNavigate } from 'react-router-dom';
-import { useLocalStorage } from '../../hooks/useLocalStorage';
 import {
   useCardInfoActionContext,
   useCardInfoValueContext,
@@ -55,7 +54,7 @@ export const AddNewCardForm = () => {
       cardId,
     };
 
-    if (cardList.find((card) => card.cardId === cardId)) {
+    if (cardList.some((card) => card.cardId === cardId)) {
       modifyCardInfo(cardId, newCardInfo);
       navigate('/register/nickName');
       return;
