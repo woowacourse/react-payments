@@ -100,8 +100,8 @@ export const CardNumberInput = ({ viewNextInput }: Props) => {
       </InputWrapper>
       <ErrorMessage>{error ?? ''}</ErrorMessage>
       <MoveInputContainer
-        isLeftBtnShowed={false}
-        isRightBtnShowed={error === null}
+        isLeftBtnShown={false}
+        isRightBtnShown={error === null}
         viewNextInput={viewNextInput}
         progress={'1/5'}
       />
