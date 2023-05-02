@@ -1,36 +1,19 @@
 import { useNavigate } from 'react-router-dom';
 
-import { CardNumber, CardType } from '../../type';
 import Card from '../../components/Card';
 import useInput from '../../hooks/useInput';
 import { useCurrentCardContext } from '../../context/CurrentCardProvider';
 import { useIsAccessAliasPageContext } from '../../context/IsAccessAliasPageProvider';
 import { isValidCardAlias } from '../AddCard/domain/validation';
-import { fetchLocalStorage, getSerialNumber } from '../../utils/applicationUtil';
 import './index.css';
-
-const registerCardAlias = (alias: string, cardNumber: CardNumber) => {
-  const registerdCardNumber = getSerialNumber(cardNumber);
-  const cardList = fetchLocalStorage('cardList', '[]');
-  const currentCard = cardList.find(
-    (card: CardType) => getSerialNumber(card.cardNumber) === registerdCardNumber
-  );
-  const addedAliasCard = { alias, ...currentCard };
-  const restCardList = cardList.filter(
-    (card: CardType) => getSerialNumber(card.cardNumber) !== registerdCardNumber
-  );
-
-  const newCardList = [...restCardList, addedAliasCard];
-
-  localStorage.setItem('cardList', JSON.stringify(newCardList));
-};
+import registerCardAlias from './registerCardAlias';
 
 const CardAliasPage = () => {
   const navigate = useNavigate();
   const { currentCard } = useCurrentCardContext();
   const { value, onChange } = useInput(isValidCardAlias);
   const { setIsAccessAliasPage } = useIsAccessAliasPageContext();
-  const onClick = () => {
+  const onConfirmButtonClick = () => {
     registerCardAlias(value, currentCard.cardNumber);
     setIsAccessAliasPage(false);
     navigate('/');
@@ -50,7 +33,7 @@ const CardAliasPage = () => {
       />
       <input value={value} onChange={onChange} placeholder="별칭을 입력해주세요." />
       <div className="card-alias-footer">
-        <button onClick={onClick}>확인</button>
+        <button onClick={onConfirmButtonClick}>확인</button>
       </div>
     </div>
   );
