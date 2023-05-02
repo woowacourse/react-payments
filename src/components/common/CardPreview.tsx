@@ -5,7 +5,7 @@ import { CARD_COMPANY } from '../../constants/cardCompany';
 import { CardPreviewInfoContext } from '../../contexts/cardInfo';
 
 export function CardPreview() {
-  const { card_number, username, expired_date, company } = useContext(
+  const { cardNumber, username, expiredDate, company } = useContext(
     CardPreviewInfoContext
   );
 
@@ -23,15 +23,15 @@ export function CardPreview() {
       <_CompanyName>{companyName}</_CompanyName>
       <_Chip />
       <NumberWrapper>
-        <NumberItem>{card_number.first.value}</NumberItem>
-        <NumberItem>{card_number.second.value}</NumberItem>
-        <NumberItem>{'•'.repeat(card_number.third.value.length)}</NumberItem>
-        <NumberItem>{'•'.repeat(card_number.fourth.value.length)}</NumberItem>
+        <NumberItem>{cardNumber.first.value}</NumberItem>
+        <NumberItem>{cardNumber.second.value}</NumberItem>
+        <NumberItem>{'•'.repeat(cardNumber.third.value.length)}</NumberItem>
+        <NumberItem>{'•'.repeat(cardNumber.fourth.value.length)}</NumberItem>
       </NumberWrapper>
       <InfoWrapper>
         <Name>{username.first.value}</Name>
         <Date>
-          {expired_date.month.value}/{expired_date.year.value}
+          {expiredDate.month.value}/{expiredDate.year.value}
         </Date>
       </InfoWrapper>
     </CardContainer>

@@ -22,13 +22,13 @@ export const passwordInput = {
 };
 
 export const CardPreviewInfoContext = createContext({
-  card_number: {
+  cardNumber: {
     first: { ...defaultInput },
     second: { ...defaultInput },
     third: { ...passwordInput },
     fourth: { ...passwordInput },
   },
-  expired_date: {
+  expiredDate: {
     month: { ...defaultInput },
     year: { ...defaultInput },
   },
@@ -42,7 +42,7 @@ export const CardPreviewInfoContext = createContext({
 
 export function CardInfoProvider({ children }: { children: React.ReactNode }) {
   const preivewInfo = {
-    card_number: {
+    cardNumber: {
       first: {
         ...defaultInput,
         ...useInput(cardRegisterValidator.cardNumber),
@@ -60,7 +60,7 @@ export function CardInfoProvider({ children }: { children: React.ReactNode }) {
         ...useInput(cardRegisterValidator.cardNumber),
       },
     },
-    expired_date: {
+    expiredDate: {
       month: {
         ...defaultInput,
         ...useInput(cardRegisterValidator.month),

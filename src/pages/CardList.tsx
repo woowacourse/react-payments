@@ -10,7 +10,7 @@ export function CardList() {
 
   const navigate = useNavigate();
   function moveAddCardPage() {
-    navigate(PATH.ADD_CARD_NAME);
+    navigate(PATH.ADD_CARD);
   }
 
   return (

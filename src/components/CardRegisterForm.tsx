@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { InputBox } from './common';
+import { PATH } from '../constants/path';
 import { useCardRegisterForm } from '../hooks/useCardRegisterForm';
 import { Card } from '../type/card';
 import { isCardInfoOption } from '../utils/checkType';
@@ -19,8 +20,8 @@ export function CardRegisterForm() {
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const submittedCardInfo: Card = {
-      card_number: '',
-      expired_date: '',
+      cardNumber: '',
+      expiredDate: '',
       code: '',
       password: '',
       company: '',
@@ -45,7 +46,7 @@ export function CardRegisterForm() {
   }
 
   function moveAddCardNamePage(formState: Card) {
-    naviagte('/add-card-name', { state: { ...formState } });
+    naviagte(PATH.ADD_CARD_NAME, { state: { ...formState } });
   }
 
   return (

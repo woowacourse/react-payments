@@ -73,7 +73,7 @@ export const Default: React.FC = () => (
 );
 
 export const Invalid: React.FC = () => (
-  <InputBox id={'card_number'} inputs={invalidCardNumberInput}></InputBox>
+  <InputBox id={'cardNumber'} inputs={invalidCardNumberInput}></InputBox>
 );
 
 export const ValidCode: React.FC = () => (

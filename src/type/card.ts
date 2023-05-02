@@ -1,8 +1,8 @@
 import { CARD_COMPANY } from '../constants/cardCompany';
 
 export interface Card {
-  card_number: string;
-  expired_date: string;
+  cardNumber: string;
+  expiredDate: string;
   username?: string;
   code: string;
   password: string;
