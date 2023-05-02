@@ -18,7 +18,7 @@ const PLACE_HOLDER = {
   CARD_NAME_HINT: "카드 별명을 입력하세요.",
 } as const;
 
-const ID = {
+const CARD_PASSWORD = {
   FIRST: "first",
   SECOND: "second",
 } as const;
@@ -92,7 +92,7 @@ const DEFAULT_COMPANY = "없음" as const;
 export {
   IMG,
   TYPE,
-  ID,
+  CARD_PASSWORD,
   NAVIGATE,
   PLACE_HOLDER,
   STRING,

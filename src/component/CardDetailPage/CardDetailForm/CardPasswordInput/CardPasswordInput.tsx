@@ -7,7 +7,7 @@ import InputGuide from "../../../common/InputGuide/InputGuide";
 
 import useWarningText from "../../../../hooks/useWarningText";
 
-import { ID, TYPE } from "../../../../abstract/constants";
+import { CARD_PASSWORD, TYPE } from "../../../../abstract/constants";
 import { CardDetailContext } from "../../../../context/CardDetailContext";
 
 function CardPasswordInput() {
@@ -29,14 +29,14 @@ function CardPasswordInput() {
   };
 
   const firstPassword = {
-    id: ID.FIRST,
+    id: CARD_PASSWORD.FIRST,
     value: cardPassword[0],
 
     ...props,
   };
 
   const secondPassword = {
-    id: ID.SECOND,
+    id: CARD_PASSWORD.SECOND,
     value: cardPassword[1],
     inputRef: inputRef2,
     ...props,
