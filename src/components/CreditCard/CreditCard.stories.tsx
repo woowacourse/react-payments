@@ -103,8 +103,18 @@ export const OwnerLessCreditCard = Template.bind({});
 OwnerLessCreditCard.args = {
   fullFilled: true,
   creditCard: {
-    companyId: 'kookmin',
-    number: '1234123412341234',
+    companyId: 'hyundai',
+    number: '9999999999999999',
+    expiry: '0345',
+  },
+};
+
+export const WrongCardCompanyName = Template.bind({});
+OwnerLessCreditCard.args = {
+  fullFilled: true,
+  creditCard: {
+    companyId: 'invalid',
+    number: '9999999999999999',
     expiry: '0345',
   },
 };
