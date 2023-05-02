@@ -17,3 +17,10 @@
   margin-top: 9px;
   row-gap: 46px;
 }
+
+.cardWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 12px;
+}

@@ -1,0 +1,50 @@
+:root {
+  --bc-card: rgb(255, 64, 83);
+  --shinhan-card: rgb(12, 101, 188);
+  --kakaobank-card: rgb(244, 216, 0);
+  --hyundai-card: #333;
+  --woori-card: rgb(41, 133, 224);
+  --lotte-card: rgb(222, 36, 61);
+  --hana-card: rgb(17, 132, 125);
+  --kb-card: rgb(100, 91, 76);
+}
+
+.bc-card {
+  background: var(--bc-card);
+  color: #fff;
+}
+
+.shinhan-card {
+  background: var(--shinhan-card);
+  color: #fff;
+}
+
+.kakaobank-card {
+  background: var(--kakaobank-card);
+  color: #282828;
+}
+
+.hyundai-card {
+  background: var(--hyundai-card);
+  color: #fff;
+}
+
+.woori-card {
+  background: var(--woori-card);
+  color: #fff;
+}
+
+.lotte-card {
+  background: var(--lotte-card);
+  color: #fff;
+}
+
+.hana-card {
+  background: var(--hana-card);
+  color: #fff;
+}
+
+.kb-card {
+  background: var(--kb-card);
+  color: #fff;
+}

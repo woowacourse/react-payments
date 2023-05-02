@@ -1,0 +1,6 @@
+.companyContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 47px);
+  gap: 26px;
+  justify-content: center;
+}
