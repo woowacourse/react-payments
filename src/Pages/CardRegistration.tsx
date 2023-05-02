@@ -1,9 +1,9 @@
+import { Modal } from '@d0dam/react-modal';
 import styled from 'styled-components';
 import CardRegistrationForm from '../components/CardRegistrationForm';
 import TransParentButton from '../components/Common/Button/TransParentButton';
 import Card from '../components/Common/Card';
 import Header from '../components/Common/Header';
-import Modal from '../components/Common/Modal';
 import ProfileButtonList from '../components/Common/Profile/ProfileButtonList';
 import { useCardInformationStore } from '../context/CardInformationProvider';
 import bankList from '../data/bankList';
@@ -26,16 +26,14 @@ function CardRegistration() {
           <Card cardInformation={card} isAddForm />
         </TransParentButton>
         <CardRegistrationForm />
-        {isModalOpen && (
-          <Modal closeModal={closeModal}>
-            <ProfileButtonList
-              profileList={bankList}
-              getProfileName={handleBankName}
-              profileSize={37}
-              severalPerLine={4}
-            />
-          </Modal>
-        )}
+        <Modal isModalOpen={isModalOpen} closeModal={closeModal}>
+          <ProfileButtonList
+            profileList={bankList}
+            getProfileName={handleBankName}
+            profileSize={37}
+            severalPerLine={4}
+          />
+        </Modal>
       </StyledMainCardRegistration>
     </>
   );
