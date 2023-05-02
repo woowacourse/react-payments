@@ -11,15 +11,13 @@ import { setData } from "../utils/localStorage";
 export function AddCardNicknamePage() {
   const { state } = useLocation();
   const navigate = useNavigate();
-  const [nickname, setNickname] = useState("");
-
-  function getNicknameInput(e: React.ChangeEvent<HTMLInputElement>) {
-    setNickname(e.target.value);
-  }
+  const nicknameInput = useRef<HTMLInputElement>(null);
 
   function completeInputNickname() {
     const userCardInfo = { ...state };
-    userCardInfo["nickname"] = nickname;
+    if (nicknameInput.current !== null) {
+      userCardInfo["nickname"] = nicknameInput.current.value;
+    }
     setData(userCardInfo);
     navigate(PATH.CARD_LIST);
   }
@@ -45,7 +43,7 @@ export function AddCardNicknamePage() {
             name="nickname"
             maxLength={15}
             placeholder="카드의 별명을 입력해주세요 (선택)"
-            onChange={getNicknameInput}
+            ref={nicknameInput}
             asChild>
             <NicknameInput />
           </Input>

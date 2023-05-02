@@ -1,43 +1,48 @@
 import {
   Children,
   cloneElement,
+  ForwardedRef,
+  forwardRef,
   InputHTMLAttributes,
   isValidElement,
   PropsWithChildren,
   RefAttributes,
+  RefObject,
   useContext,
 } from "react";
 import styled from "styled-components";
 import { InputContext } from "../../../contexts/inputContext";
 import { Ref } from "../../../type/ref";
 
-export interface InputProps
-  extends InputHTMLAttributes<HTMLInputElement>,
-    RefAttributes<HTMLInputElement> {
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   asChild?: boolean;
 }
-export function Input(props: PropsWithChildren<InputProps>) {
+export const Input = forwardRef<
+  HTMLInputElement,
+  PropsWithChildren<InputProps>
+>(function Input(props, ref) {
   const { name, asChild = false, children, ...restProps } = props;
   const inputState = useContext(InputContext);
   const { handleChange } = inputState;
   const childrenList = Children.toArray(children);
 
   return asChild &&
-    isValidElement<{ name: string; inputRef: React.MutableRefObject<Ref> }>(
+    isValidElement<{ name: string; ref: ForwardedRef<HTMLInputElement> }>(
       childrenList[0]
     ) ? (
     <>
       {cloneElement(childrenList[0], {
         name,
         onChange: handleChange,
+        ref,
         ...restProps,
       })}
     </>
   ) : (
-    <InputUnit onChange={handleChange} name={name} {...restProps} />
+    <InputUnit onChange={handleChange} name={name} ref={ref} {...restProps} />
   );
-}
+});
 
 const InputUnit = styled.input`
   width: 100%;
