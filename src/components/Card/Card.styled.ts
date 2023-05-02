@@ -12,8 +12,8 @@ export const Card = styled.div<CardProps>`
 
   padding: 15px 18px;
 
-  background-color: ${(props) => (props.bgColor ? props.bgColor : 'black')};
-  color: ${(props) => (props.color ? props.color : 'white')};
+  background-color: ${(props) => props.bgColor || 'black'};
+  color: ${(props) => props.color || 'white'};
 
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
 
@@ -75,7 +75,7 @@ export const Ellipse = styled.div`
 
   border-radius: 50%;
 
-  background-color: ${(props) => (props.color ? props.color : 'white')};
+  background-color: ${(props) => props.color || 'white'};
 
   margin-right: 5px;
 `;

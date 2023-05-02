@@ -20,18 +20,18 @@ export const Input = styled.input<InputProps>`
   max-width: calc(600px - 56px);
   height: 45px;
 
-  background-color: ${(props) => (props.name === 'nickname' ? '' : '#e5e5e5')};
-  border-radius: ${(props) => (props.name === 'nickname' ? '' : '10px')};
+  padding: ${(props) => props.name === 'ownerName' && '0 16px'};
+
+  background-color: ${(props) => props.name === 'nickname' && '#e5e5e5'};
 
   border: none;
-  border-bottom: ${(props) => (props.name === 'nickname' ? '2px solid black' : '')};
+  border-radius: ${(props) => props.name === 'nickname' && '10px'};
+  border-bottom: ${(props) => props.name === 'nickname' && '2px solid black'};
 
   font-weight: 600;
   font-size: ${(props) => (props.type === 'password' ? '24px' : '18px')};
-  letter-spacing: 2px;
   text-align: ${(props) => props.center && 'center'};
-
-  padding: ${(props) => props.name === 'ownerName' && '0 16px'};
+  letter-spacing: 2px;
 
   &:focus {
     border: ${(props) => props.name !== 'nickname' && '2px solid #0078ff;'};
