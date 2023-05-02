@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Context } from "../context";
+import { ModalContext } from "../context";
 import { ROUTER_PATH } from "../router/path";
 import type { CardType } from "../types";
 import { getLocalStorage, setLocalStorage, getEmptyCard } from "../utils";
@@ -16,7 +16,7 @@ import {
 const AddCard = () => {
   const navigate = useNavigate();
   const [newCard, setNewCard] = useState<CardType>(getEmptyCard());
-  const { toggleModal } = useContext(Context);
+  const { toggleModal } = useContext(ModalContext);
 
   useEffect(() => {
     toggleModal();
@@ -26,6 +26,10 @@ const AddCard = () => {
     const cards = getLocalStorage("card");
     setLocalStorage("card", [...cards, newCard]);
     navigate(ROUTER_PATH.NameCard);
+  };
+
+  const handleCardCompanyChanged = (companyName: string) => {
+    setNewCard((prev): CardType => ({ ...prev, cardCompany: companyName }));
   };
 
   return (
@@ -40,7 +44,7 @@ const AddCard = () => {
         onSubmit={handleFormSubmited}
       />
       <BottomSheet>
-        <CardCompany setCard={setNewCard} />
+        <CardCompany onChange={handleCardCompanyChanged} />
       </BottomSheet>
     </Page>
   );

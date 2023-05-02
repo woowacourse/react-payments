@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { getLocalStorage } from "../utils/localStorage";
-import { CardType } from "../types";
 import { ROUTER_PATH } from "../router/path";
 import { Page, Header, Card } from "../components";
 
@@ -12,7 +11,7 @@ const MyCard = () => {
   return (
     <Page>
       <Header title="보유카드" isBack={false} />
-      {cards.map((card: CardType) => (
+      {cards.map((card) => (
         <CardWrapper key={crypto.randomUUID()}>
           <Card {...card} />
           <p>{card.name}</p>

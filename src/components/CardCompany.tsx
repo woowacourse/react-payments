@@ -1,35 +1,33 @@
-import { Dispatch, SetStateAction, useContext } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
 import { CARD_COMPANY } from "../constants";
-import { Context } from "../context";
+import { ModalContext } from "../context";
 import { CardType } from "../types";
 
 interface CardCompanyType {
-  setCard: Dispatch<SetStateAction<CardType>>;
+  onChange: (cardCompany: string) => void;
 }
 
-const CardCompany = ({ setCard }: CardCompanyType) => {
-  const { toggleModal } = useContext(Context);
+const CardCompany = ({ onChange }: CardCompanyType) => {
+  const { toggleModal } = useContext(ModalContext);
 
   const handleCardCompanyClicked =
     (companyName: CardType["cardCompany"]) => () => {
-      setCard((prev): CardType => ({ ...prev, cardCompany: companyName }));
+      onChange(companyName);
       toggleModal();
     };
 
   return (
     <CardCompanyWrapper>
-      {Object.keys(CARD_COMPANY)
-        .splice(1)
-        .map((companyName) => (
-          <CardCompanyGroup
-            key={crypto.randomUUID()}
-            onClick={handleCardCompanyClicked(companyName)}
-          >
-            <img src={CARD_COMPANY[companyName].img} alt="카드사로고" />
-            <p>{companyName}</p>
-          </CardCompanyGroup>
-        ))}
+      {Object.keys(CARD_COMPANY).map((companyName) => (
+        <CardCompanyGroup
+          key={crypto.randomUUID()}
+          onClick={handleCardCompanyClicked(companyName)}
+        >
+          <img src={CARD_COMPANY[companyName].img} alt="카드사로고" />
+          <p>{companyName}</p>
+        </CardCompanyGroup>
+      ))}
     </CardCompanyWrapper>
   );
 };
