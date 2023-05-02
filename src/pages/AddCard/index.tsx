@@ -83,7 +83,7 @@ const AddCardPage = () => {
       <CardNameBottomSheet
         isOpen={isOpen}
         onToggleOpen={toggleOpen}
-        setCardType={changeCardCompany}
+        setCardCompany={changeCardCompany}
       />
     </>
   );

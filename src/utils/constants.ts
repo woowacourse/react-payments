@@ -6,7 +6,7 @@ import KookminCardIcon from '../asset/kookmin_card.png';
 import LotteCardIcon from '../asset/lotte_card.png';
 import SinhanCardIcon from '../asset/sinhan_card.png';
 import WooriCardIcon from '../asset/woori_card.png';
-import { CardCompany, CardInfoInput, InputStatus } from '../type';
+import { CardCompany, CardInfoInput, CardType, InputStatus } from '../type';
 
 export const MONTH_DATA = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
 
@@ -68,3 +68,21 @@ export const CARD_COMPANY_ENG: Record<CardCompany, string> = {
 };
 
 export const APP_WIDTH = '318px';
+
+export const CARD_INIT: Omit<CardType, 'id'> = {
+  cardCompany: '카드사 선택',
+  cardNumber: {
+    first: '',
+    second: '',
+    third: '',
+    fourth: '',
+  },
+  cardOwner: '',
+  expireMonth: '',
+  expireYear: '',
+  securityCode: '',
+  cardPassword: {
+    first: '',
+    second: '',
+  },
+};

@@ -103,3 +103,12 @@ export type IsAccessAliasPage = {
   isAccessAliasPage: boolean;
   setIsAccessAliasPage: Dispatch<SetStateAction<boolean>>;
 };
+
+export type BottomSheetProps = {
+  isOpen: boolean;
+  onToggleOpen: () => void;
+};
+
+export type CardNameBottomSheetProps = BottomSheetProps & {
+  setCardCompany: (cardCompany: CardCompany) => void;
+};
