@@ -17,8 +17,8 @@ function useCardDate() {
     setCardDate(resultDate);
   };
 
-  const isValid = (date: string) => {
-    const [MM, YY] = date.split("/");
+  const validate = () => {
+    const [MM, YY] = cardDate.split("/");
 
     if (!MM || +MM < 1 || +MM > 12) return false;
     if (!YY || YY.length < 2) return false;
@@ -26,7 +26,7 @@ function useCardDate() {
     return true;
   };
 
-  return { cardDate, changeCardDate, isValid };
+  return { cardDate, changeCardDate, validate };
 }
 
 export default useCardDate;

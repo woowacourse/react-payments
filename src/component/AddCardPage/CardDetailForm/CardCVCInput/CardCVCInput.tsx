@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import St from "./CardCVCInputStyled";
 import CVCHintPopup from "./CVCHintPopup/CVCHintPopup";
 import useCardCVC from "../../../../hooks/card/useCardCVC";
@@ -6,8 +6,18 @@ import useInputRef from "../../../../hooks/useInputRef";
 
 function CardCVCInput() {
   const [isPopup, setIsPopup] = useState(false);
-  const { cardCVC, changeCardCVC } = useCardCVC();
+  const { cardCVC, changeCardCVC, validate } = useCardCVC();
   const { inputRef, focusNextInput } = useInputRef();
+
+  useEffect(() => {
+    const isValid = validate();
+
+    inputRef.current?.setCustomValidity(
+      isValid ? "" : "보안 코드 3자리를 입력해주세요."
+    );
+
+    isValid && focusNextInput();
+  }, [cardCVC]);
 
   return (
     <section>
@@ -20,17 +30,7 @@ function CardCVCInput() {
             minLength={3}
             required
             ref={inputRef}
-            onInvalid={(e) => {
-              e.currentTarget.setCustomValidity("보안 코드 3자리를 입력해주세요.");
-            }}
-            onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
-              const validity = e.currentTarget.validity;
-
-              !validity.tooShort && e.currentTarget.setCustomValidity("");
-
-              validity.valid && focusNextInput();
-              changeCardCVC(e);
-            }}
+            onChange={changeCardCVC}
           />
         </St.InputSection>
         <St.Button

@@ -12,7 +12,9 @@ function useCardCVC() {
     setCardCVC(cvc);
   };
 
-  return { cardCVC, changeCardCVC };
+  const validate = () => cardCVC.length === 3;
+
+  return { cardCVC, changeCardCVC, validate };
 }
 
 export default useCardCVC;

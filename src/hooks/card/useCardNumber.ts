@@ -11,9 +11,7 @@ function useCardNumber() {
     dispatch({ type: "SET_DISPLAY_NUMBER", displayNumber: value });
 
   const changeCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const cardNumber = e.currentTarget.value
-      .replace(/[^\d•]/g, "")
-      .slice(0, 16);
+    const cardNumber = e.currentTarget.value.replace(/[^\d•]/g, "").slice(0, 16);
 
     if (cardNumber.length < originNumber.length) removeNumber(cardNumber);
     if (cardNumber.length > originNumber.length) addNumber(cardNumber);
@@ -58,11 +56,9 @@ function useCardNumber() {
     return maskedNumber.join("-");
   };
 
-  const isValid = (cardNumber: string) => {
-    return cardNumber.replace(/[^\d•]/g, "").length === 16;
-  };
+  const validate = () => originNumber.replace(/[^\d]/g, "").length === 16;
 
-  return { originNumber, displayNumber, changeCardNumber, isValid };
+  return { originNumber, displayNumber, changeCardNumber, validate };
 }
 
 export default useCardNumber;
