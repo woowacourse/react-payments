@@ -6,15 +6,15 @@ const useSelectCardCompany = (
   statusDispather: (str: CardCompany) => InputStatus,
   init: CardCompany = '카드사 선택'
 ) => {
-  const [cardCompany, setCardCompany] = useState<CardCompany>(init);
+  const [value, setValue] = useState<CardCompany>(init);
   const [status, setStatus] = useState<InputStatus>('INIT');
 
   const changeCardCompany = (str: CardCompany) => {
     setStatus(statusDispather(str));
-    setCardCompany(str);
+    setValue(str);
   };
 
-  return { cardCompany, status, changeCardCompany };
+  return { value, status, changeCardCompany };
 };
 
 export default useSelectCardCompany;

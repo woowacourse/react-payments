@@ -6,6 +6,7 @@ type CardSelectButtonProps = {
   cardName: CardCompany;
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
+
 const CardSelectButton = ({ onClick, cardName }: CardSelectButtonProps) => {
   return (
     <button className="card-select-button" onClick={onClick} name={cardName}>

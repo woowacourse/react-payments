@@ -22,11 +22,7 @@ import './index.css';
 
 const AddCardPage = () => {
   const navigate = useNavigate();
-  const {
-    cardCompany,
-    status: cardCompanyStatus,
-    changeCardCompany,
-  } = useSelectCardCompany(isSelectCardType);
+  const cardCompany = useSelectCardCompany(isSelectCardType);
   const cardFirstNumber = useInput(isValidCardNumber);
   const cardSecondNumber = useInput(isValidCardNumber);
   const cardThirdNumber = useInput(isValidCardNumber);
@@ -54,7 +50,7 @@ const AddCardPage = () => {
         </Header>
         <article className="add-card-page-body">
           <Card
-            cardCompany={cardCompany}
+            cardCompany={cardCompany.value}
             cardFirstNumber={cardFirstNumber.value}
             cardSecondNumber={cardSecondNumber.value}
             cardThirdNumber={cardThirdNumber.value}
@@ -66,7 +62,6 @@ const AddCardPage = () => {
           />
           <AddCardForm
             cardCompany={cardCompany}
-            cardCompanyStatus={cardCompanyStatus}
             cardFirstNumber={cardFirstNumber}
             cardSecondNumber={cardSecondNumber}
             cardThirdNumber={cardThirdNumber}
@@ -83,7 +78,7 @@ const AddCardPage = () => {
       <CardNameBottomSheet
         isOpen={isOpen}
         onToggleOpen={toggleOpen}
-        setCardCompany={changeCardCompany}
+        setCardCompany={cardCompany.changeCardCompany}
       />
     </>
   );

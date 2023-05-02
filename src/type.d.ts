@@ -40,6 +40,12 @@ export type InputHook = {
   status: InputStatus;
 };
 
+export type CardCompanyHook = {
+  value: CardCompany;
+  status: InputStatus;
+  changeCardCompany: (str: CardCompany) => void;
+};
+
 export type InputStatus = 'INIT' | 'VALID' | 'INVALID';
 export type CardInfoInput = 'securityCode' | 'password' | 'owner' | 'expired' | 'cardNumber';
 export type CardCompany =
@@ -54,8 +60,7 @@ export type CardCompany =
   | '카드사 선택';
 
 export type AddCardFormProps = {
-  cardCompany: CardCompany;
-  cardCompanyStatus: InputStatus;
+  cardCompany: CardCompanyHook;
   cardFirstNumber: InputHook;
   cardSecondNumber: InputHook;
   cardThirdNumber: InputHook;
