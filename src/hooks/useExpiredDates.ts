@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { REG_EXP } from '../constants/regexp';
-import { REF_INDEX } from '../constants/refIndex';
 
 const nowYear = new Date().getFullYear() % 2000;
 const nowMonth = new Date().getMonth() + 1;
@@ -25,7 +24,7 @@ const useExpiredDates = () => {
     }
 
     setError('');
-    setState(order - REF_INDEX.lastCardNumbersOrder, value);
+    setState(order, value);
   };
 
   const checkExpiredDates = (order: number, value: string) => {

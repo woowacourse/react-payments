@@ -3,6 +3,7 @@ import CardLabel from '../@common/CardLabel';
 import { useContext } from 'react';
 import * as Styled from './CardExpiredDates.styles';
 import { RefContext } from '../../contexts/RefProvider';
+import { REF_INDEX } from '../../constants/refIndex';
 
 interface ExpiredDateProps {
   expiredDates: Array<string>;
@@ -21,7 +22,10 @@ const CardExpiredDate = ({
     if (!(e.target instanceof HTMLInputElement)) return;
     const currentOrder = Number(e.target.dataset['order']);
 
-    handleExpiredDates(currentOrder, e.target.value);
+    handleExpiredDates(
+      currentOrder - REF_INDEX.lastCardNumbersOrder,
+      e.target.value
+    );
     focusNextInput(currentOrder);
   };
 
