@@ -1,5 +1,5 @@
-import { Dispatch, PropsWithChildren, createContext, useContext, useState } from 'react';
-import { CreditCard, getDefaultCreditCard } from '../type/CreditCard';
+import { PropsWithChildren, createContext, useContext } from 'react';
+import { CreditCard } from '../type/CreditCard';
 import useSingleCreditCard from '../hook/useSingleCreditCard';
 
 interface Props extends PropsWithChildren {
