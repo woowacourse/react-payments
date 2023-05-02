@@ -18,10 +18,12 @@ const InputSuccessPage = (props: Props) => {
   const [nickname, setNickname] = useState('');
   const navigate = useNavigate();
 
+  const companyKoreanName = card.company ? cardCompanyEnglishToKorean(card.company) : '기타 카드';
+
   const lengthParser = (value: string) => value.slice(0, 12);
   const clickHandler = () => {
     if (nickname) setCardInfo({ nickname });
-    else setCardInfo({ nickname: `${cardCompanyEnglishToKorean(card.company)} ${card.number[3]}` });
+    else setCardInfo({ nickname: `${companyKoreanName} ${card.number[3]}` });
   
     navigate("/");
   };

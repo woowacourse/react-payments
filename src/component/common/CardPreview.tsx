@@ -14,11 +14,12 @@ export default function CardPreview(props: Props) {
     else return '•'.repeat(part.length) + ' '.repeat(4 - part.length);
   });
 
-  const c = company ?? 'woori';
+  const companyClassName = company ? styles[company] : '';
+  const companyKoreanName = company ? cardCompanyEnglishToKorean(company) : '기타 카드';
 
   return (
-    <div className={`${styles.container} ${styles[c]}`}>
-      <div className={styles.company}>{cardCompanyEnglishToKorean(c)}</div>
+    <div className={`${styles.container} ${companyClassName}`}>
+      <div className={styles.company}>{companyKoreanName}</div>
       <div className={styles.chip}></div>
       <div className={styles.numberContainer}>
         {cardNumber.map((numberPart, idx) => <span key={idx} className={styles.number}>{numberPart}</span>)}
