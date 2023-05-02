@@ -40,7 +40,11 @@ export const CardPreviewInfoContext = createContext({
   },
 });
 
-export function CardInfoProvider({ children }: { children: React.ReactNode }) {
+export function CardPreviewInfoProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const preivewInfo = {
     cardNumber: {
       first: {
