@@ -2,15 +2,15 @@ import { ButtonHTMLAttributes } from 'react';
 import styled from 'styled-components';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-  designType?: 'basic' | 'text';
-  width?: string;
-  height?: string;
-  backgroundColor?: string;
-  fontSize?: string;
-  children?: React.ReactNode;
+  designType: 'basic' | 'text';
+  width: string;
+  height: string;
+  backgroundColor: string;
+  fontSize: string;
+  children: React.ReactNode;
 }
 
-export function Button({ designType = 'basic', children, ...props }: Props) {
+export function Button({ designType = 'basic', children, ...props }: Partial<Props>) {
   return (
     <Style.Button className={designType} {...props}>
       {children}
@@ -19,7 +19,7 @@ export function Button({ designType = 'basic', children, ...props }: Props) {
 }
 
 const Style = {
-  Button: styled.button<Props>`
+  Button: styled.button<Partial<Props>>`
     width: ${(props) => (props.width ? `${props.width}` : '300px')};
     height: ${(props) => (props.height ? `${props.height}` : '100px')};
     border: none;
