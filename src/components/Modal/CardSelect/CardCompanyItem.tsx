@@ -8,14 +8,14 @@ interface Props {
 }
 
 export function CardCompanyItem({ name, logo, setCardCompany }: Props) {
-  const handleClick = (cardCompanyName: CardCompany) => {
-    setCardCompany(cardCompanyName);
-  };
-
   return (
     <Style.Wrapper>
-      <Style.Button type={'button'} aria-label={`${name} 선택`} onClick={() => handleClick(name)}>
-        <Style.Img src={logo} alt='카드사 로고' />
+      <Style.Button
+        type={'button'}
+        aria-label={`${name} 선택`}
+        onClick={() => setCardCompany(name)}
+      >
+        <Style.Img src={logo} alt={`${name} 로고`} />
         <Style.Caption>{name}</Style.Caption>
       </Style.Button>
     </Style.Wrapper>
