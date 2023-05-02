@@ -9,6 +9,6 @@ export default {
 export const Default = () => (
   <>
     <GlobalStyle />
-    <Modal modalOpen={true} children={<div></div>}></Modal>
+    <Modal children={<div></div>}></Modal>
   </>
 );

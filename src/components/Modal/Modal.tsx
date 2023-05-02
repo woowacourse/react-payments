@@ -1,21 +1,18 @@
 import styled from "styled-components";
 
 type ModalProps = {
-  modalOpen: boolean;
   children: React.ReactNode;
 };
 
-const Modal = ({ modalOpen, children }: ModalProps) => {
+const Modal = ({ children }: ModalProps) => {
   return (
-    <ModalBackDrop modalOpen={modalOpen}>
+    <ModalBackDrop>
       <ModalContent>{children}</ModalContent>
     </ModalBackDrop>
   );
 };
 
-const ModalBackDrop = styled.div<{ modalOpen: boolean }>`
-  display: ${({ modalOpen }) => (modalOpen ? "block" : "none")};
-
+const ModalBackDrop = styled.div`
   position: absolute;
 
   top: 0;
