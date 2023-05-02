@@ -1,5 +1,6 @@
 import type { CardType } from '../../types';
 import { Page } from '../../types';
+import React from 'react';
 import styled from 'styled-components';
 
 import PageTemplate from '../template/PageTemplate';
@@ -23,10 +24,10 @@ const CardListPage = ({ navigate }: Props) => {
     <PageTemplate title="보유카드">
       {cardList.length === 0 && <GuideMessage>새로운 카드를 등록해주세요</GuideMessage>}
       {cardList.map((card) => (
-        <>
-          <Card key={card.id} {...card} />
+        <React.Fragment key={card.id}>
+          <Card {...card} />
           <CardName>{card.cardName}</CardName>
-        </>
+        </React.Fragment>
       ))}
       <CardAddButton onClick={onClickAdd}>+</CardAddButton>
     </PageTemplate>
