@@ -30,9 +30,9 @@ export const Main = () => {
   const setCardInfo = (card: Card) => {
     if (card.companyId) setCompanyId(card.companyId);
 
-    for (let i = 0; i < 4; i++) {
+    Array.from({ length: 4 }).forEach((_, i) => {
       setCardNumber(i, card.cardNumber[i]);
-    }
+    });
 
     setExpirationDate('month', card.expirationDate.month);
     setExpirationDate('year', card.expirationDate.year);
@@ -41,9 +41,9 @@ export const Main = () => {
 
     setSecurityCode(card.securityCode);
 
-    for (let i = 0; i < 2; i++) {
+    Array.from({ length: 2 }).forEach((_, i) => {
       setPassword(i, card.password[i]);
-    }
+    });
 
     if (card.nickName) setNickName(card.nickName);
   };
