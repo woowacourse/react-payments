@@ -68,3 +68,11 @@ export const HyundaiCard: Story = {
     selectCardType: () => {},
   },
 };
+
+export const NoNameCard: Story = {
+  args: {
+    bankName: '',
+    determineCardType: () => {},
+    selectCardType: () => {},
+  },
+};
