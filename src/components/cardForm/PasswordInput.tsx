@@ -1,9 +1,9 @@
-import { InputContainer } from "../common/InputContainer";
-import { Input } from "../common/Input";
-import { InputLabel } from "../common/InputLabel";
 import styled from "styled-components";
+import { useState } from "react";
+import { InputContainer, Input, InputLabel } from "../common";
 import { isNumeric } from "../../utils/validate";
-import { useInputCompleted } from "../../hook/useInputComplete";
+import { useInputFocusChain } from "../../hook/useInputFocusChain";
+import { ERROR_MESSAGE, INPUT_FULL_LENGTH } from "../../constant/cardInput";
 
 const passwordInfo = {
   $width: "43px",
@@ -11,20 +11,45 @@ const passwordInfo = {
   type: "password",
 };
 
-export const PasswordInput = () => {
-  const { isCompleted, checkInputCompleted } = useInputCompleted();
+interface PasswordInputProps {
+  setPassword: (index: number, value: string) => void;
+  validatePasswordInput: (password: string[]) => boolean;
+}
 
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
+export const PasswordInput = ({
+  setPassword,
+  validatePasswordInput,
+}: PasswordInputProps) => {
+  const [inputValues, setInputValues] = useState(["", ""]);
+  const [isValid, setIsValid] = useState(true);
+  const { inputRefs, moveFocusToNext } = useInputFocusChain(2, 1);
 
-    if (value.length > 1 || !isNumeric(value)) {
-      e.target.value = value.slice(0, -1);
-      return;
-    }
+  const handleInput =
+    (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value;
+
+      if (value.length > INPUT_FULL_LENGTH.PASSWORD || !isNumeric(value)) {
+        e.target.value = value.slice(0, -1);
+        return;
+      }
+
+      setInputValues((prev) => {
+        const newPassword = [...prev];
+        newPassword[index] = value;
+        return newPassword;
+      });
+      setPassword(index, value);
+
+      moveFocusToNext(index, value);
+    };
+
+  const validate = () => {
+    const validity = validatePasswordInput(inputValues);
+    setIsValid(validity);
   };
 
-  const handleOutFocusEvent = (e: React.FocusEvent<HTMLInputElement>) => {
-    checkInputCompleted(e.target.value, 1);
+  const eraseErrorMessage = () => {
+    setIsValid(true);
   };
 
   return (
@@ -33,19 +58,23 @@ export const PasswordInput = () => {
       <Row>
         <Input
           {...passwordInfo}
-          handleInput={handleInput}
-          handleChange={handleOutFocusEvent}
+          handleInput={handleInput(0)}
+          handleOutFocus={validate}
+          handleFocus={eraseErrorMessage}
           label="password1"
           error={{
-            isValid: isCompleted,
-            errorMessage: "비밀번호를 입력하세요.",
+            isValid: isValid,
+            errorMessage: ERROR_MESSAGE.PASSWORDS,
           }}
+          ref={inputRefs[0]}
         />
         <Input
           {...passwordInfo}
-          handleInput={handleInput}
-          handleChange={handleOutFocusEvent}
+          handleInput={handleInput(1)}
+          handleOutFocus={validate}
+          handleFocus={eraseErrorMessage}
           label="password2"
+          ref={inputRefs[1]}
         />
         <HiddenPassword>●</HiddenPassword>
         <HiddenPassword>●</HiddenPassword>

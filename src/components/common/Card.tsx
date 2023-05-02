@@ -5,14 +5,14 @@ interface CardProps {
   backgroundColor?: string;
 }
 
-export default function Card({
+export const Card = ({
   backgroundColor = "lightGrey",
   children,
-}: PropsWithChildren<CardProps>) {
+}: PropsWithChildren<CardProps>) => {
   return (
     <CardWrapper backgroundColor={backgroundColor}>{children}</CardWrapper>
   );
-}
+};
 
 const CardWrapper = styled.div<{ backgroundColor: string }>`
   display: flex;

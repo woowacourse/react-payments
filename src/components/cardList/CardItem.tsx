@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { CardType } from "../../types/card";
-import Card from "../common/Card";
+import { Card } from "../common";
 
 interface CardProps {
   card: CardType;
@@ -15,12 +15,13 @@ export const CardItem = ({ card }: CardProps) => {
         }
         return number;
       })
-      .join("  ");
+      .join("   ");
   };
 
   return (
     <Card backgroundColor={card.color}>
       <Container>
+        <Company>{card.company}</Company>
         <IcChip />
         <CardNumbers>{hideNumbers(card.numbers)}</CardNumbers>
         <InfoWrapper>
@@ -45,6 +46,11 @@ const Container = styled.div`
   gap: 6px;
 `;
 
+const Company = styled.div`
+  color: white;
+  height: 25px;
+`;
+
 const IcChip = styled.div`
   width: 40px;
   height: 26px;
@@ -56,7 +62,7 @@ const CardNumbers = styled.div`
   height: 12px;
   font-size: 12px;
   text-align: left;
-  letter-spacing: 1.1px;
+  letter-spacing: 3.2px;
 `;
 
 const InfoWrapper = styled.div`

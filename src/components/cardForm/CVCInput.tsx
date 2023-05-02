@@ -1,10 +1,8 @@
-import { InputContainer } from "../common/InputContainer";
-import { Input } from "../common/Input";
-import { InputLabel } from "../common/InputLabel";
 import styled from "styled-components";
-import { CARD_INPUT_NUMBER } from "../../constant/cardInput";
+import { useState } from "react";
+import { InputContainer, Input, InputLabel } from "../common";
 import { isNumeric } from "../../utils/validate";
-import { useInputCompleted } from "../../hook/useInputComplete";
+import { ERROR_MESSAGE, INPUT_FULL_LENGTH } from "../../constant/cardInput";
 
 const CVCInfo = {
   label: "cvc",
@@ -13,8 +11,13 @@ const CVCInfo = {
   type: "password",
 };
 
-export const CVCInput = () => {
-  const { isCompleted, checkInputCompleted } = useInputCompleted();
+interface CVCInputProps {
+  setCVC: (value: number) => void;
+  validateCVCInput: (cvc: number) => boolean;
+}
+
+export const CVCInput = ({ validateCVCInput, setCVC }: CVCInputProps) => {
+  const [isValid, setIsValid] = useState(true);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -25,14 +28,21 @@ export const CVCInput = () => {
       return;
     }
 
-    if (value.length > CARD_INPUT_NUMBER.CVC) {
+    if (value.length > INPUT_FULL_LENGTH.CVC) {
       e.target.value = value.slice(0, -1);
       return;
     }
+
+    setCVC(Number(value));
   };
 
-  const handleOutFocusEvent = (e: React.FocusEvent<HTMLInputElement>) => {
-    checkInputCompleted(e.target.value, CARD_INPUT_NUMBER.CVC);
+  const validate = (e: React.FocusEvent<HTMLInputElement>) => {
+    const validity = validateCVCInput(Number(e.target.value));
+    setIsValid(validity);
+  };
+
+  const eraseErrorMessage = () => {
+    setIsValid(true);
   };
 
   return (
@@ -42,10 +52,11 @@ export const CVCInput = () => {
         <Input
           {...CVCInfo}
           handleInput={handleInput}
-          handleChange={handleOutFocusEvent}
+          handleOutFocus={validate}
+          handleFocus={eraseErrorMessage}
           error={{
-            isValid: isCompleted,
-            errorMessage: "3자리 숫자를 입력하세요.",
+            isValid: isValid,
+            errorMessage: ERROR_MESSAGE.CVC,
           }}
         />
         <HelpIcon

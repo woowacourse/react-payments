@@ -1,74 +1,74 @@
 import styled from "styled-components";
-import cardHandler from "../../domain/creditCards";
 import { CardType } from "../../types/card";
 import { CVCInput } from "./CVCInput";
-import { CardNumberInput } from "./CardNumberInput";
+import { NumbersInput } from "./NumbersInput";
 import { ExpiryDateInput } from "./ExpiryDateInput";
 import { OwnerInput } from "./OwnerInput";
 import { PasswordInput } from "./PasswordInput";
 import { FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { isInputFilled, isMonthValid, isYearValid } from "../../utils/validate";
+import { useValidation } from "./hooks/useValidation";
+import { PAGE } from "../../constant/routePath";
+import { useCardList } from "./hooks/useCardList";
 
 interface CardFormProps {
   setCardInfo: React.Dispatch<React.SetStateAction<CardType>>;
+  newCard: CardType;
 }
 
-export const CardForm = ({ setCardInfo }: CardFormProps) => {
-  const navigate = useNavigate();
-
-  const moveToHome = () => {
-    navigate("/");
-  };
-
-  const isInputValid = (newCard: CardType) => {
-    const { numbers, expiryDate, CVC, password } = newCard;
-    const [month, year] = expiryDate.split(" / ");
-
-    const isNumberValid = isInputFilled(numbers.join(""), 16);
-    const isExpiryDateValid =
-      isInputFilled(month + year, 4) &&
-      isMonthValid(Number(month)) &&
-      isYearValid(Number(year));
-    const isCVCValid = isInputFilled(String(CVC), 3);
-    const isPasswordValid = isInputFilled(password.join(""), 2);
-
-    return isNumberValid && isExpiryDateValid && isCVCValid && isPasswordValid;
-  };
+export const CardForm = ({ setCardInfo, newCard }: CardFormProps) => {
+  const { cardListActions } = useCardList();
+  const {
+    isEveryInputValid,
+    validateCVCInput,
+    validateExpiryDateInput,
+    validateNumbersInput,
+    validatePasswordInput,
+  } = useValidation();
+  const moveTo = useNavigate();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const formData = new FormData(e.target as HTMLFormElement);
-    const data = Object.fromEntries(formData.entries());
-    const newCard = cardHandler.formNewCard(data);
+    if (isEveryInputValid()) {
+      cardListActions.addNewCard(newCard);
 
-    if (isInputValid(newCard)) {
-      cardHandler.addNewCard(newCard);
-
-      moveToHome();
+      moveTo(PAGE.registerCard);
     }
   };
 
-  const setCardNumbers = (index: number, numbers: string) => {
-    setCardInfo((prev) => {
-      const newNumbers = [...prev.numbers];
-      newNumbers[index] = numbers;
-      return { ...prev, numbers: newNumbers };
-    });
-  };
+  const setCardArrayData =
+    (key: "numbers" | "password") => (index: number, value: string) => {
+      setCardInfo((prev) => {
+        const newData = [...prev[key]];
+        newData[index] = value;
+        return { ...prev, [key]: newData };
+      });
+    };
 
-  const setCardData = (property: string) => (newData: string) => {
-    setCardInfo((prev) => ({ ...prev, [property]: newData }));
+  const setCardData = (key: string) => (value: string | number) => {
+    setCardInfo((prev) => ({ ...prev, [key]: value }));
   };
 
   return (
     <Form onSubmit={handleSubmit}>
-      <CardNumberInput setCardNumbers={setCardNumbers} />
-      <ExpiryDateInput setExpiryDate={setCardData("expiryDate")} />
+      <NumbersInput
+        setNumbers={setCardArrayData("numbers")}
+        validateNumbersInput={validateNumbersInput}
+      />
+      <ExpiryDateInput
+        setExpiryDate={setCardData("expiryDate")}
+        validateExpiryDateInput={validateExpiryDateInput}
+      />
       <OwnerInput setOwner={setCardData("owner")} />
-      <CVCInput />
-      <PasswordInput />
+      <CVCInput
+        setCVC={setCardData("CVC")}
+        validateCVCInput={validateCVCInput}
+      />
+      <PasswordInput
+        setPassword={setCardArrayData("password")}
+        validatePasswordInput={validatePasswordInput}
+      />
       <SubmitButton type="submit">다음</SubmitButton>
     </Form>
   );
@@ -78,7 +78,7 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 15px;
-  margin-top: 20px;
+  margin-top: 10px;
 `;
 
 const SubmitButton = styled.button`

@@ -1,13 +1,12 @@
 import styled from "styled-components";
 import { CardItem } from "./CardItem";
-import { CardType } from "../../types/card";
 import { EmptyCard } from "./EmptyCard";
+import { useContext } from "react";
+import { CardListContext } from "../../context/cardListContext";
 
-interface CardListProps {
-  cards: CardType[];
-}
+export const CardList = () => {
+  const { cards } = useContext(CardListContext);
 
-export const CardList = ({ cards }: CardListProps) => {
   return (
     <CardListWrapper>
       {!cards.length && <GuideText>새로운 카드를 등록해주세요.</GuideText>}

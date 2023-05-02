@@ -1,43 +1,53 @@
-import { HTMLAttributes } from "react";
+import { forwardRef } from "react";
 import styled from "styled-components";
 
-export interface InputProps extends HTMLAttributes<HTMLInputElement> {
+export interface InputProps {
   label: string;
   $width: string;
   $textPosition: string;
   type: string;
+  placeholder?: string;
   error?: { isValid: boolean; errorMessage: string };
   handleInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleChange: (e: React.FocusEvent<HTMLInputElement>) => void;
+  handleOutFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  handleFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
 
-export const Input = ({
-  label,
-  $width,
-  $textPosition,
-  placeholder = "",
-  type,
-  error = { isValid: true, errorMessage: "" },
-  handleInput,
-  handleChange,
-}: InputProps) => {
-  const { isValid, errorMessage } = error;
+export const Input = forwardRef<HTMLInputElement, InputProps>(
+  (
+    {
+      label,
+      $width,
+      $textPosition,
+      placeholder = "",
+      type,
+      error = { isValid: true, errorMessage: "" },
+      handleInput,
+      handleOutFocus,
+      handleFocus,
+    },
+    ref
+  ) => {
+    const { isValid, errorMessage } = error;
 
-  return (
-    <Colum $width={$width}>
-      <InputField
-        placeholder={placeholder}
-        id={label}
-        name={label}
-        onInput={handleInput}
-        onBlur={handleChange}
-        $textPosition={$textPosition}
-        type={type}
-      />
-      {<ErrorMessage>{!isValid ? errorMessage : ""}</ErrorMessage>}
-    </Colum>
-  );
-};
+    return (
+      <Colum $width={$width}>
+        <InputField
+          placeholder={placeholder}
+          id={label}
+          name={label}
+          onInput={handleInput}
+          onBlur={handleOutFocus}
+          onFocus={handleFocus}
+          $textPosition={$textPosition}
+          type={type}
+          ref={ref}
+        />
+        {<ErrorMessage>{!isValid ? errorMessage : ""}</ErrorMessage>}
+      </Colum>
+    );
+  }
+);
 
 const Colum = styled.div<{ $width: string }>`
   width: ${(props) => props.$width};

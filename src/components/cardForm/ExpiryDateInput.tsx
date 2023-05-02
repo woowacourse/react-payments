@@ -1,11 +1,11 @@
-import { InputContainer } from "../common/InputContainer";
-import { Input } from "../common/Input";
-import { InputLabel } from "../common/InputLabel";
 import { useState } from "react";
-import { isNumeric, isMonthValid, isYearValid } from "../../utils/validate";
+import { InputContainer, Input, InputLabel } from "../common";
+import { isNumeric } from "../../utils/validate";
+import { ERROR_MESSAGE, INPUT_FULL_LENGTH } from "../../constant/cardInput";
 
 interface ExpiryDateInputProps {
   setExpiryDate: (value: string) => void;
+  validateExpiryDateInput: (expiryDate: string) => boolean;
 }
 
 const ExpiryDateInfo = {
@@ -16,7 +16,10 @@ const ExpiryDateInfo = {
   type: "text",
 };
 
-export const ExpiryDateInput = ({ setExpiryDate }: ExpiryDateInputProps) => {
+export const ExpiryDateInput = ({
+  setExpiryDate,
+  validateExpiryDateInput,
+}: ExpiryDateInputProps) => {
   const [isValid, setIsValid] = useState(true);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,7 +31,7 @@ export const ExpiryDateInput = ({ setExpiryDate }: ExpiryDateInputProps) => {
       return;
     }
 
-    if (value.length > 4) {
+    if (value.length > INPUT_FULL_LENGTH.EXPIRY_DATE) {
       e.target.value = e.target.value.slice(0, -1);
       return;
     }
@@ -37,25 +40,13 @@ export const ExpiryDateInput = ({ setExpiryDate }: ExpiryDateInputProps) => {
     setExpiryDate(e.target.value);
   };
 
-  const validateExpiryDate = (expiryDate: string): void => {
-    const [month, year] = expiryDate.split(" / ").map((each) => Number(each));
-
-    setIsValid(false);
-
-    if (isMonthValid(month) && isYearValid(year)) {
-      setIsValid(true);
-    }
+  const validate = (e: React.FocusEvent<HTMLInputElement>) => {
+    const validity = validateExpiryDateInput(e.target.value);
+    setIsValid(validity);
   };
 
-  const handleOutFocusEvent = (e: React.FocusEvent<HTMLInputElement>) => {
-    const value = e.target.value.replaceAll(" / ", "");
-
-    if (value.length === 4) {
-      validateExpiryDate(e.target.value);
-      return;
-    }
-
-    setIsValid(false);
+  const eraseErrorMessage = () => {
+    setIsValid(true);
   };
 
   return (
@@ -64,10 +55,11 @@ export const ExpiryDateInput = ({ setExpiryDate }: ExpiryDateInputProps) => {
       <Input
         {...ExpiryDateInfo}
         handleInput={handleInput}
-        handleChange={handleOutFocusEvent}
+        handleOutFocus={validate}
+        handleFocus={eraseErrorMessage}
         error={{
           isValid: isValid,
-          errorMessage: "유효한 만료일이 아닙니다. ",
+          errorMessage: ERROR_MESSAGE.EXPIRY_DATE,
         }}
       />
     </InputContainer>

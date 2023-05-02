@@ -1,8 +1,6 @@
-import { InputContainer } from "../common/InputContainer";
-import { Input } from "../common/Input";
-import { InputLabel } from "../common/InputLabel";
 import styled from "styled-components";
-import { CARD_INPUT_NUMBER } from "../../constant/cardInput";
+import { InputContainer, Input, InputLabel } from "../common";
+import { INPUT_FULL_LENGTH } from "../../constant/cardInput";
 import { useState } from "react";
 
 interface OwnerInputProps {
@@ -23,15 +21,15 @@ export const OwnerInput = ({ setOwner }: OwnerInputProps) => {
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
 
-    if (value.length > CARD_INPUT_NUMBER.OWNER) {
+    if (value.length > INPUT_FULL_LENGTH.OWNER) {
       e.target.value = value.slice(0, -1);
       return;
     }
 
     e.target.value = value.toUpperCase();
 
-    setOwner(e.target.value);
     setOwnerLength(value.length);
+    setOwner(e.target.value);
   };
 
   return (
@@ -40,11 +38,7 @@ export const OwnerInput = ({ setOwner }: OwnerInputProps) => {
         <InputLabel text="카드 소유자 이름 (선택)" name="owner" />
         <InputLabel text={`${ownerLength}/30`} name="ownerLength" />
       </Row>
-      <Input
-        {...OwnerInfo}
-        handleInput={handleInput}
-        handleChange={(e) => {}}
-      />
+      <Input {...OwnerInfo} handleInput={handleInput} />
     </InputContainer>
   );
 };
