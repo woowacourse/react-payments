@@ -79,11 +79,10 @@ const AddCardPage = () => {
   };
 
   const onChangeFormHandler = (e: React.ChangeEvent<HTMLFormElement>) => {
-    const { value, maxLength, form } = e.target;
-
+    const { form, value, maxLength } = e.target;
     const formElements: HTMLElement[] = Array.from(form);
-
     const currentIndex = formElements.indexOf(e.target);
+
     if (value.length === maxLength) formElements[currentIndex + 1].focus();
   };
 

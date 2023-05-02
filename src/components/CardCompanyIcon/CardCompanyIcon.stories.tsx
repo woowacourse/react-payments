@@ -1,4 +1,5 @@
 import GlobalStyle from "../../styles/GlobalStyle";
+import { emptyArrowFuction } from "../../util/initialValue";
 import CardCompanyIcon from "./CardCompanyIcon";
 
 export default {
@@ -9,6 +10,6 @@ export default {
 export const Default = () => (
   <>
     <GlobalStyle />
-    <CardCompanyIcon company={"하나카드"} onClickHandler={() => {}}></CardCompanyIcon>
+    <CardCompanyIcon company={"하나카드"} onClickHandler={emptyArrowFuction}></CardCompanyIcon>
   </>
 );

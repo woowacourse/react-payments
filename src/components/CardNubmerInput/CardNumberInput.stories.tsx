@@ -1,4 +1,5 @@
 import GlobalStyle from "../../styles/GlobalStyle";
+import { cardNumberInitialValue, emptyArrowFuction } from "../../util/initialValue";
 import CardNumberInput from "./CardNumberInput";
 
 export default {
@@ -9,9 +10,6 @@ export default {
 export const Default = () => (
   <>
     <GlobalStyle />
-    <CardNumberInput
-      cardNumber={{ firstGroup: "", secondGroup: "", thirdGroup: "", fourthGroup: "" }}
-      setCardNumber={() => {}}
-    ></CardNumberInput>
+    <CardNumberInput cardNumber={cardNumberInitialValue} setCardNumber={emptyArrowFuction}></CardNumberInput>
   </>
 );

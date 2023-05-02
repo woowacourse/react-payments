@@ -1,4 +1,5 @@
 import GlobalStyle from "../../styles/GlobalStyle";
+import { emptyArrowFuction, passwordInitialValue } from "../../util/initialValue";
 import CardPasswordInput from "./CardPasswordInput";
 
 export default {
@@ -9,6 +10,6 @@ export default {
 export const Default = () => (
   <>
     <GlobalStyle />
-    <CardPasswordInput password={{ first: "", second: "" }} setPassword={() => {}}></CardPasswordInput>
+    <CardPasswordInput password={passwordInitialValue} setPassword={emptyArrowFuction}></CardPasswordInput>
   </>
 );

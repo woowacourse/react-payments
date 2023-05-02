@@ -1,4 +1,5 @@
 import GlobalStyle from "../../styles/GlobalStyle";
+import { emptyArrowFuction } from "../../util/initialValue";
 import CardSecurityCodeInput from "./CardSecurityCodeInput";
 
 export default {
@@ -9,6 +10,6 @@ export default {
 export const Default = () => (
   <>
     <GlobalStyle />
-    <CardSecurityCodeInput securityCode={""} setSecurityCode={() => {}}></CardSecurityCodeInput>
+    <CardSecurityCodeInput securityCode={""} setSecurityCode={emptyArrowFuction}></CardSecurityCodeInput>
   </>
 );

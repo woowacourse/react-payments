@@ -1,4 +1,5 @@
 import GlobalStyle from "../../styles/GlobalStyle";
+import { emptyArrowFuction, expirationDateInitialValue } from "../../util/initialValue";
 import CardExpirationDateInput from "./CardExpirationDateInput";
 
 export default {
@@ -10,10 +11,10 @@ export const Default = () => (
   <>
     <GlobalStyle />
     <CardExpirationDateInput
-      expirationDate={{ month: "", year: "" }}
+      expirationDate={expirationDateInitialValue}
       expirationError={false}
-      setExpirationDate={() => {}}
-      setError={() => {}}
+      setExpirationDate={emptyArrowFuction}
+      setError={emptyArrowFuction}
     ></CardExpirationDateInput>
   </>
 );

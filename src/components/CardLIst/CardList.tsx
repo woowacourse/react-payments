@@ -16,9 +16,8 @@ const CardList = ({ cards }: CardListProps) => {
         const key = `${firstGroup}${secondGroup}${thirdGroup}${fourthGroup}`;
 
         return (
-          <Li>
+          <Li key={key}>
             <CardPreview
-              key={key}
               card={{ cardCompany, cardNumber, ownerName, expirationDate }}
               animation={{ transition: "all 0.3s ease", transform: "translate(3px, 3px)" }}
             />

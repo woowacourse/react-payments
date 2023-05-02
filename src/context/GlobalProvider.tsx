@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
 import { Card } from "../types";
+import { emptyArrowFuction } from "../util/initialValue";
 
 interface GlobalState {
   cards: Card[];
@@ -11,8 +12,8 @@ interface GlobalState {
 export const GlobalContext = createContext<GlobalState>({
   cards: [],
   currentIndex: 0,
-  setCards: () => {},
-  setCurrentIndex: () => {},
+  setCards: emptyArrowFuction,
+  setCurrentIndex: emptyArrowFuction,
 });
 
 export const GlobalContextProvider = ({ children }: React.PropsWithChildren) => {

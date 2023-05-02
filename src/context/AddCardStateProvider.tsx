@@ -1,6 +1,12 @@
 import { createContext, useState } from "react";
 import { CARD_LOGO } from "../components/CardCompanyIcon/CardCompanyIcon";
 import { CardCompany, CardExpirationDate, CardNumber, CardPassword } from "../types";
+import {
+  cardNumberInitialValue,
+  emptyArrowFuction,
+  expirationDateInitialValue,
+  passwordInitialValue,
+} from "../util/initialValue";
 
 interface AddCardState {
   error: boolean;
@@ -23,27 +29,19 @@ const initialValue = {
   modalOpen: false,
   error: true,
   cardCompany: undefined,
-  cardNumber: {
-    firstGroup: "",
-    secondGroup: "",
-    thirdGroup: "",
-    fourthGroup: "",
-  },
-  expirationDate: {
-    month: "",
-    year: "",
-  },
+  cardNumber: cardNumberInitialValue,
+  expirationDate: expirationDateInitialValue,
   ownerName: "",
   securityCode: "",
-  password: { first: "", second: "" },
-  setModalOpen: () => {},
-  setError: () => {},
-  setCardCompany: () => {},
-  setCardNumber: () => {},
-  setExpirationDate: () => {},
-  setOwnerName: () => {},
-  setSecurityCode: () => {},
-  setPassword: () => {},
+  password: passwordInitialValue,
+  setModalOpen: emptyArrowFuction,
+  setError: emptyArrowFuction,
+  setCardCompany: emptyArrowFuction,
+  setCardNumber: emptyArrowFuction,
+  setExpirationDate: emptyArrowFuction,
+  setOwnerName: emptyArrowFuction,
+  setSecurityCode: emptyArrowFuction,
+  setPassword: emptyArrowFuction,
 };
 
 export const AddCardStateContext = createContext<AddCardState>(initialValue);
@@ -51,22 +49,11 @@ export const AddCardStateContext = createContext<AddCardState>(initialValue);
 export const AddCardStateContextProvider = ({ children }: React.PropsWithChildren) => {
   const [error, setError] = useState<boolean>(false);
   const [cardCompany, setCardCompany] = useState<keyof typeof CARD_LOGO>();
-  const [cardNumber, setCardNumber] = useState<CardNumber>({
-    firstGroup: "",
-    secondGroup: "",
-    thirdGroup: "",
-    fourthGroup: "",
-  });
-  const [expirationDate, setExpirationDate] = useState<CardExpirationDate>({
-    month: "",
-    year: "",
-  });
+  const [cardNumber, setCardNumber] = useState<CardNumber>(cardNumberInitialValue);
+  const [expirationDate, setExpirationDate] = useState<CardExpirationDate>(expirationDateInitialValue);
   const [ownerName, setOwnerName] = useState<string>("");
   const [securityCode, setSecurityCode] = useState<string>("");
-  const [password, setPassword] = useState<CardPassword>({
-    first: "",
-    second: "",
-  });
+  const [password, setPassword] = useState<CardPassword>(passwordInitialValue);
 
   const value = {
     error,
