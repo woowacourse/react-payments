@@ -1,16 +1,21 @@
 import { PropsWithChildren, createContext, useContext } from 'react';
-import { CreditCard } from '../type/CreditCard';
-import useSingleCreditCard from '../hook/useSingleCreditCard';
+import { CreditCard, getDefaultCreditCard } from '../type/CreditCard';
+import useStateObject from '../hook/useStateObject';
+
+interface ContextValue {
+  card: CreditCard;
+  setCardInfo: (newInfo: Partial<CreditCard>) => void;
+}
 
 interface Props extends PropsWithChildren {
   value?: CreditCard;
 }
 
-const CreditCardContext = createContext<ReturnType<typeof useSingleCreditCard> | null>(null);
+const CreditCardContext = createContext<ContextValue | null>(null);
 
 export const CreditCardProvider = (props: Props) => {
   const { children, value } = props;
-  const { card, setCardInfo } = useSingleCreditCard(value);
+  const { state: card, setPartialState: setCardInfo } = useStateObject<CreditCard>(value ?? getDefaultCreditCard());
 
   return (
     <CreditCardContext.Provider value={{ card, setCardInfo }}>

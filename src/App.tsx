@@ -6,16 +6,16 @@ import { useEffect, useState } from "react";
 
 import CardInputPage from "./component/CardInputPage/CardInputPage";
 import CardListPage from "./component/CardListPage/CardListPage";
-import { CreditCard } from "./type/CreditCard";
+import { CreditCard, getDefaultCreditCard } from "./type/CreditCard";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import useSingleCreditCard from "./hook/useSingleCreditCard";
+import useStateObject from "./hook/useStateObject";
 import InputSuccessPage from "./component/InputSuccessPage/InputSuccessPage";
-
-
 
 function App() {
   const [cardList, setCardList] = useState<CreditCard[]>([]);
-  const { card: newCard, setCardInfo: setNewCardInfo } = useSingleCreditCard();
+  const { state: newCard, setPartialState: setNewCardInfo } = (
+    useStateObject<CreditCard>(getDefaultCreditCard())
+  );
 
   useEffect(() => {
     if (!newCard.nickname) return;
