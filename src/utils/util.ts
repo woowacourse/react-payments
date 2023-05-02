@@ -1,10 +1,11 @@
 import { ALPHABET, NUMBERS } from './constants';
 
-export const formatExpireDate = (expireDate: string): string => {
+// TODO: 구체화 하기
+export const formatExpireDate = (expireDate: string) => {
   return expireDate;
 };
 
-export const handleNumberInput = (data: string): string => {
+export const handleNumberInput = (data: string) => {
   if (!NUMBERS.includes(data[data.length - 1])) {
     data = data.slice(0, -1);
   }
@@ -12,18 +13,18 @@ export const handleNumberInput = (data: string): string => {
   return data;
 };
 
-export const isAlphabetInput = (data: string): boolean => {
+export const isAlphabetInput = (data: string) => {
   return ALPHABET.includes(data);
 };
 
-export const isNumberInput = (data: string): boolean => {
+export const isNumberInput = (data: string) => {
   return NUMBERS.includes(data);
 };
 
-export const changeNumberToMask = (data: string): string => {
+export const changeNumberToMask = (data: string) => {
   return '·'.repeat(data.length);
 };
 
-export const stringToUpperCase = (data: string): string => {
+export const stringToUpperCase = (data: string) => {
   return data.toUpperCase();
 };
