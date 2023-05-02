@@ -11,7 +11,12 @@ interface CardCompanyButtonProps {
   setCardCompany: setCardCompany;
 }
 
-const CardCompanyButton = ({ Logo, name, theme, setCardCompany }: CardCompanyButtonProps) => {
+const CardCompanyButton = ({
+  Logo,
+  name,
+  theme,
+  setCardCompany,
+}: CardCompanyButtonProps) => {
   const handleClick = () => {
     setCardCompany({
       name: name,

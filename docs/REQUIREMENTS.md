@@ -10,10 +10,10 @@
 - [ ] 컴포넌트 분리의 기준 세우기
 - [ ] viewport 메타태그 학습, safe area 학습
 - [ ] inputmode라는 속성에 대해 알아보셔도 좋을 것 같아요! 가상키보드가 어떻게 떠야하는지 지정
-- [ ] 자유도를 좀 더 생각해서 스킵이 가능하게 하되 제출만 막는 경험 구현하기
+- [x] 자유도를 좀 더 생각해서 스킵이 가능하게 하되 제출만 막는 경험 구현하기
 - [x] src/GlobalStyles.ts
       100vw 에서 100%로 변경한 이유는 어떤 것인가요?
-- [ ] src/components/BottomSheet/BottomSheet.tsx
+- [x] src/components/BottomSheet/BottomSheet.tsx
       CardCompanyContents를 바텀싯이 알아야할것같진 않아서 children정도여도 좋을 것 같아요~
 - [ ] src/components/Card/Card.styled.ts
       테마여서 프리셋으로 지정된 문자열으로 예상했는데 컬러값이네요! backgroundColor로 명확하게 변경해줘도 좋을 것 같아요

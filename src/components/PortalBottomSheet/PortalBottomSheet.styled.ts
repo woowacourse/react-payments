@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { COLOR } from '../../constants/cardInfo';
 
-export const BottomSheet = styled.div`
+export const PortalBottomSheet = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -21,28 +21,14 @@ export const BottomSheet = styled.div`
 `;
 
 export const Backdrop = styled.div`
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
 
   background-color: ${COLOR.BLACK};
   opacity: 0.6;
-
-  @media (min-width: 992px) {
-    width: 50%;
-  }
-
-  @media (min-width: 1200px) {
-    width: 30%;
-  }
 `;
 
-export const BottomSheetContainer = styled.div`
+export const Contents = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;

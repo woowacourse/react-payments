@@ -10,14 +10,28 @@ export interface CardProps {
 const Card = ({ cardInfo, theme }: CardProps) => {
   return (
     <styled.Card theme={theme}>
+      <styled.EmptyCardCover cardCompany={cardInfo.cardCompany.name}>
+        <p>카드사 등록하기</p>
+      </styled.EmptyCardCover>
       <styled.CardName>{cardInfo.cardCompany.name}</styled.CardName>
-      <styled.Rectangle />
+      <styled.Rectangle theme={theme} />
       <styled.CardInformationContainer>
         <styled.CardNumber theme={theme}>
           <input disabled defaultValue={cardInfo.cardNumbers.firstCardNumber} />
-          <input disabled defaultValue={cardInfo.cardNumbers.secondCardNumber} />
-          <input disabled type="password" defaultValue={cardInfo.cardNumbers.thirdCardNumber} />
-          <input disabled type="password" defaultValue={cardInfo.cardNumbers.fourthCardNumber} />
+          <input
+            disabled
+            defaultValue={cardInfo.cardNumbers.secondCardNumber}
+          />
+          <input
+            disabled
+            type="password"
+            defaultValue={cardInfo.cardNumbers.thirdCardNumber}
+          />
+          <input
+            disabled
+            type="password"
+            defaultValue={cardInfo.cardNumbers.fourthCardNumber}
+          />
         </styled.CardNumber>
         <styled.CardNameAndExpirationDateContainer>
           <styled.OwnerName>{cardInfo.ownerName ?? 'NAME'}</styled.OwnerName>

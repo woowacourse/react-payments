@@ -5,12 +5,19 @@ import CardInfoContext from '../../contexts/CardInfoContext';
 import * as styled from './CardPreview.styled';
 import Card from '../Card/Card';
 
-const CardPreview = () => {
-  const { cardNumbers, expirationDate, ownerName, securityCode, password, cardCompany, cardAlias } =
-    useContext(CardInfoContext);
+const CardPreview = ({ handleOpenModal }: { handleOpenModal?: () => void }) => {
+  const {
+    cardNumbers,
+    expirationDate,
+    ownerName,
+    securityCode,
+    password,
+    cardCompany,
+    cardAlias,
+  } = useContext(CardInfoContext);
 
   return (
-    <styled.CardPreview>
+    <styled.CardPreview onClick={handleOpenModal}>
       <Card
         cardInfo={{
           cardNumbers,

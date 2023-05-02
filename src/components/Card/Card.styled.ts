@@ -6,7 +6,7 @@ export const Card = styled.div`
   width: 220px;
   height: 140px;
 
-  padding: 12px 16px;
+  padding: ${props => (props.theme === COLOR.DEFAULT ? '' : '12px 16px')};
 
   background-color: ${props => props.theme ?? COLOR.DEFAULT};
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
@@ -16,6 +16,32 @@ export const Card = styled.div`
 
   font-size: 12px;
   letter-spacing: 0.1em;
+
+  cursor: pointer;
+`;
+
+export const EmptyCardCover = styled.div<Record<'cardCompany', string>>`
+  display: ${props => (props.cardCompany ? 'none' : 'flex')};
+  justify-content: center;
+  align-items: center;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  border-radius: 5px;
+  background-color: ${COLOR.GREY200};
+  opacity: 0.6;
+
+  & > p {
+    font-size: x-large;
+    font-weight: 700;
+  }
 `;
 
 export const CardName = styled.p`
@@ -23,6 +49,7 @@ export const CardName = styled.p`
 `;
 
 export const Rectangle = styled.div`
+  display: ${props => (props.theme === COLOR.DEFAULT ? 'none' : 'block')};
   width: 40px;
   height: 26px;
 
