@@ -24,10 +24,9 @@ const cardNumberValidator = (input: string[] | string) => {
 };
 
 export const CardNumberInput = ({ viewNextInput }: Props) => {
-  const { inputRefs, focusInputByIndex } = useFocus(4);
-
   const { setCardNumber } = useCardInfoActionContext();
   const { cardNumber } = useCardInfoValueContext();
+  const { inputRefs, focusInputByIndex } = useFocus(4);
 
   const error = useErrorMessage(cardNumber, cardNumberValidator);
 

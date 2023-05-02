@@ -28,10 +28,9 @@ export const PasswordInput = ({
   handleSubmitNewCardInfo,
   viewPreviousInput,
 }: Props) => {
-  const { inputRefs, focusInputByIndex } = useFocus(2);
-
   const { password } = useCardInfoValueContext();
   const { setPassword } = useCardInfoActionContext();
+  const { inputRefs, focusInputByIndex } = useFocus(2);
 
   const error = useErrorMessage(password, passwordInputValidator);
 

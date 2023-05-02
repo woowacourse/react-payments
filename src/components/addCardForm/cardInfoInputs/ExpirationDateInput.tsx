@@ -49,7 +49,6 @@ export const ExpirationDateInput = ({
 }: Props) => {
   const { expirationDate } = useCardInfoValueContext();
   const { setExpirationDate } = useCardInfoActionContext();
-
   const { inputRefs, focusInputByIndex } = useFocus(2);
 
   const error = useErrorMessage(
