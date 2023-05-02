@@ -8,7 +8,7 @@ const meta: Meta = {
   title: "Card Company Select Modal",
   component: CardCompanySelectModal,
   argTypes: {
-    setIsOpen: {
+    setOpen: {
       action: 'Closing modal',
       description: 'This is for setting isOpen state to false.'
     },
@@ -32,6 +32,6 @@ export default meta;
 
 export const Modal: Story = {
   args: {
-    isOpen: true,
+    open: true,
   }
 };

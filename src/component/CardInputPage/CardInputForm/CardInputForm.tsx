@@ -8,7 +8,7 @@ import InputBoxPassword from "../InputBoxPassword/InputBoxPassword";
 import InputBoxSecurityCode from "../InputBoxSecurityCode/InputBoxSecurityCode";
 import { useCreditCardContext } from "../../../context/CreditCardContext";
 
-import { useRef, FormEvent, useState } from "react";
+import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import styles from "./cardInputForm.module.css";
@@ -51,8 +51,8 @@ export default function CardInputForm(props: Props) {
     <form className={styles.form} onSubmit={submitHandler}>
       {createPortal(
         <CardCompanySelectModal
-          isOpen={isModalOpen}
-          setIsOpen={setIsModalOpen}
+          open={isModalOpen}
+          setOpen={setIsModalOpen}
           companyClickHandler={modalClickHandler}
         />,
         document.body
