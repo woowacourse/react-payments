@@ -4,7 +4,7 @@ import { ChangeEvent, useState } from 'react';
 import useCreditCardForm from 'hooks/useCreditCardForm';
 import ControlButton from 'components/ControlButton';
 import { useNavigate } from 'react-router-dom';
-import { creditCardListStore } from 'stores/creditCardListStore';
+import { useCreditCardList } from 'hooks/useCreditCardList';
 import * as S from './style';
 
 const NicknameInput = styled.input`
@@ -28,6 +28,7 @@ const NicknameInput = styled.input`
 function CreditCardNicknameInputForm() {
   const navigate = useNavigate();
   const { creditCardForm } = useCreditCardForm();
+  const { updateNickname } = useCreditCardList();
   const [nickname, setNickname] = useState('');
 
   const handleNicknameInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -35,7 +36,7 @@ function CreditCardNicknameInputForm() {
   };
 
   const submitNicknameInput = () => {
-    creditCardListStore.updateNickname(creditCardForm.number, nickname);
+    updateNickname(creditCardForm.number, nickname);
     navigate('/');
   };
 

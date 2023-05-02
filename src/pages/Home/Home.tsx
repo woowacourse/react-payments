@@ -1,19 +1,11 @@
 import CreditCard from 'components/CreditCard';
 import { useNavigate } from 'react-router-dom';
-import { creditCardListStore } from 'stores/creditCardListStore';
-import { useEffect, useSyncExternalStore } from 'react';
+import { useCreditCardList } from 'hooks/useCreditCardList';
 import * as S from './style';
 
 function Home() {
   const navigate = useNavigate();
-  const creditCardList = useSyncExternalStore(
-    creditCardListStore.subscribe,
-    creditCardListStore.getSnapshot
-  );
-  useEffect(() => {
-    creditCardListStore.restoreCreditCardsFromLocalStorage();
-  }, []);
-
+  const { creditCardList } = useCreditCardList();
   return (
     <S.HomeLayout>
       <S.HomeHeader>보유카드</S.HomeHeader>

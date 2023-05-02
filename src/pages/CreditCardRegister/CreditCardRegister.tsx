@@ -8,7 +8,7 @@ import ControlButton from 'components/ControlButton';
 import CreditCardRegisterLayout from 'components/CreditCardRegisterLayout';
 import CreditCardRegisterTopSheet from 'components/CreditCardRegisterTopSheet';
 import FlexBox from 'components/FlexBox';
-import { creditCardListStore } from 'stores/creditCardListStore';
+import { useCreditCardList } from 'hooks/useCreditCardList';
 import CreditCardNumberInput from './inputs/CreditCardNumberInput';
 import CreditCardExpiryInput from './inputs/CreditCardExpiryInput';
 import CreditCardOwnerInput from './inputs/CreditCardOwnerInput';
@@ -21,11 +21,12 @@ function CreditCardRegister() {
   const navigate = useNavigate();
   const { modalOpen, openModal, closeModal } = useModal();
   const { creditCardForm, initCreditCardForm, isCreditCardError } = useCreditCardForm();
+  const { saveCreditCard } = useCreditCardList();
 
   const handleSubmit = () => {
     if (isCreditCardError) return;
 
-    creditCardListStore.addCreditCard(creditCardForm);
+    saveCreditCard(creditCardForm);
 
     navigate('/register-done');
   };
