@@ -117,3 +117,8 @@ export type BottomSheetProps = {
 export type CardNameBottomSheetProps = BottomSheetProps & {
   setCardCompany: (cardCompany: CardCompany) => void;
 };
+
+export type CardSelectButtonProps = {
+  company: CardCompany;
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+};
