@@ -5,15 +5,21 @@ const St = {
     display: flex;
     flex-direction: column;
 
-    gap: 50px;
+    gap: 40px;
     align-items: center;
+  `,
+
+  List: styled.li`
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
   `,
 
   Title: styled.h1`
     height: fit-content;
 
     text-align: center;
-    font: 700 14px/16px "Roboto";
+    font: 700 16px/18px "Roboto";
     color: #575757;
   `,
 };

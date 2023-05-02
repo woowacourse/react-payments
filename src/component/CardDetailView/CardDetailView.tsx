@@ -1,24 +1,28 @@
 import React from "react";
 
 import St from "./CardDetailViewStyled";
+import { CreditCard } from "../../types/card";
 
 type CardDetailViewProps = {
-  displayNumber: string;
-  cardDate: string;
-  cardOwnerName: string;
+  creditcard: CreditCard;
 };
 
-function CardDetailView({
-  displayNumber,
-  cardDate,
-  cardOwnerName,
-}: CardDetailViewProps) {
+function CardDetailView({ creditcard }: CardDetailViewProps) {
+  const { displayNumber, cardOwnerName, cardDate, cardCompany } = creditcard;
+
+  const splitNumber = displayNumber.split("-");
+
   return (
-    <St.CreditCard>
+    <St.CreditCard company={cardCompany}>
+      <St.CardCompany>{cardCompany}</St.CardCompany>
       <St.ICDiv />
       <St.CardNumberSection>
-        <St.CardNumber>{displayNumber.replaceAll("-", " ")}</St.CardNumber>
+        <St.CardNumber>{splitNumber[0]}</St.CardNumber>
+        <St.CardNumber>{splitNumber[1]}</St.CardNumber>
+        <St.MaskedNumber>{splitNumber[2]}</St.MaskedNumber>
+        <St.MaskedNumber>{splitNumber[3]}</St.MaskedNumber>
       </St.CardNumberSection>
+
       <St.CardInfoSection>
         <St.CardInfo>{cardOwnerName ? cardOwnerName : "NAME"}</St.CardInfo>
         <St.CardInfo>{cardDate ? cardDate : "MM/YY"}</St.CardInfo>
