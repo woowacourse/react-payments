@@ -17,18 +17,16 @@ interface CardListContextType {
 
 export const CardListContext = createContext<CardListContextType>({
   cardList: [],
-  getCardById: (id: string) => {
-    return {
-      cardNumber: ['', '', '', ''],
-      expirationDate: { month: '', year: '' },
-      ownerName: '',
-      securityCode: '',
-      password: ['', ''],
-      companyId: undefined,
-      nickName: undefined,
-      cardId: '',
-    };
-  },
+  getCardById: (id: string) => ({
+    cardNumber: ['', '', '', ''],
+    expirationDate: { month: '', year: '' },
+    ownerName: '',
+    securityCode: '',
+    password: ['', ''],
+    companyId: undefined,
+    nickName: undefined,
+    cardId: '',
+  }),
   addNewCard: (newCard: Card) => {},
   setNickNameToCard: (cardId: string, nickName: string) => {},
   modifyCardInfo: (cardId: string, card: Card) => {},
