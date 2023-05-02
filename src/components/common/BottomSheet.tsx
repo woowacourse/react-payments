@@ -13,16 +13,16 @@ const BottomSheet = (props: BottomSheetType) => {
 
   return (
     <>
-      <BackDrop isModalOpen={isModalOpen} onClick={toggleModal} />
-      <BottomSheetWrapper isModalOpen={isModalOpen}>
+      <BackDrop $isModalOpen={isModalOpen} onClick={toggleModal} />
+      <BottomSheetWrapper $isModalOpen={isModalOpen}>
         {props.children}
       </BottomSheetWrapper>
     </>
   );
 };
 
-const BottomSheetWrapper = styled.div<{ isModalOpen: boolean }>`
-  display: ${(props) => (props.isModalOpen ? "flex" : "none")};
+const BottomSheetWrapper = styled.div<{ $isModalOpen: boolean }>`
+  display: ${(props) => (props.$isModalOpen ? "flex" : "none")};
   height: 227px;
   width: 100%;
 
@@ -34,12 +34,12 @@ const BottomSheetWrapper = styled.div<{ isModalOpen: boolean }>`
   border-radius: 5px 5px 0px 0px;
 
   animation: ${(props) =>
-      props.isModalOpen ? slideBottomToUp : slideUpToBottom}
+      props.$isModalOpen ? slideBottomToUp : slideUpToBottom}
     0.7s;
 `;
 
-const BackDrop = styled.div<{ isModalOpen: boolean }>`
-  visibility: ${(props) => (props.isModalOpen ? "visible" : "hidden")};
+const BackDrop = styled.div<{ $isModalOpen: boolean }>`
+  visibility: ${(props) => (props.$isModalOpen ? "visible" : "hidden")};
   width: 100%;
   height: 100%;
 

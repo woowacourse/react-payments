@@ -7,11 +7,11 @@ interface ButtonType extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const Button = (props: ButtonType) => {
-  return <ButtonWrapper {...props}>{props.text}</ButtonWrapper>;
+  return <ButtonWrapper $isShown={props.isShown}>{props.text}</ButtonWrapper>;
 };
 
-const ButtonWrapper = styled.button<{ isShown: boolean }>`
-  visibility: ${(props) => (props.isShown ? "visible" : "hidden")};
+const ButtonWrapper = styled.button<{ $isShown: boolean }>`
+  visibility: ${(props) => (props.$isShown ? "visible" : "hidden")};
   align-self: flex-end;
   width: 30px;
 
