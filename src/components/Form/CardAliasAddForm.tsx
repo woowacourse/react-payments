@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Input } from '../input/Input';
 import { Button } from '../Button/Button';
 import { CardViewer } from '../CardViewer';
+import { CardNotFound } from '../CardNotFound';
 import { cardDataService } from '../../domains/cardDataService';
 import { isOverMaxLength } from '../../utils/validator';
 import { CARD_ALIAS_SIZE, ERROR } from '../../constants';
@@ -12,10 +13,13 @@ export function CardAliasAddForm() {
   const [cardAlias, setCardAlias] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
+
+  if (!location.state) return <CardNotFound />;
+
   const cardId = location.state.cardId;
   const card = cardDataService.getCard(cardId);
 
-  if (!card) return null;
+  if (!card) return <CardNotFound />;
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (isOverMaxLength(e.target.value, CARD_ALIAS_SIZE)) {
@@ -37,6 +41,7 @@ export function CardAliasAddForm() {
 
   return (
     <Style.Container>
+      <Style.Title>카드등록이 완료되었습니다.</Style.Title>
       <CardViewer card={card} />
       <Style.Form onSubmit={handleAliasSubmit}>
         <Input
@@ -69,6 +74,17 @@ const Style = {
 
     width: 100%;
     height: 100%;
+  `,
+
+  Title: styled.h1`
+    width: 100%;
+
+    margin-top: 70px;
+    margin-bottom: 36px;
+
+    font-size: 24px;
+    font-weight: 500;
+    text-align: center;
   `,
 
   Form: styled.form`
