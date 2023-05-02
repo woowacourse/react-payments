@@ -1,43 +1,45 @@
 import { useState } from 'react';
-import { Story } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import PasswordInput from '../components/cardForm/PasswordInput';
-import type { Card, InputProps } from '../types/Card';
 
-export default {
+const meta = {
   title: 'Payment/cardForm/PasswordInput',
   component: PasswordInput,
   tags: ['autodocs'],
+  decorators: [
+    (Story) => {
+      const [value, setValue] = useState(['', '', '', '']);
+      const handleChange = (newValue: string[]) => {
+        setValue(newValue);
+      };
+      return <Story value={value} setValue={handleChange} />;
+    },
+  ],
+} satisfies Meta<typeof PasswordInput>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: {
+    value: ['', ''],
+    errorMessage: '',
+    setErrorMessage: () => {},
+  },
 };
 
-type PasswordInputProps = InputProps<Card['password']>;
-
-const Template: Story<PasswordInputProps> = (args) => {
-  const [value, setValue] = useState(args.value);
-
-  const handleChange = (newValue: string[]) => {
-    setValue(newValue);
-  };
-
-  return <PasswordInput {...args} value={value} setValue={handleChange} />;
+export const Error: Story = {
+  args: {
+    value: [' ', ''],
+    errorMessage: '숫자만 입력해주세요',
+    setErrorMessage: () => {},
+  },
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  value: ['', ''],
-  errorMessage: '',
-  setErrorMessage: () => {},
-};
-
-export const Error = Template.bind({});
-Error.args = {
-  value: [' ', ''],
-  errorMessage: '숫자만 입력해주세요',
-  setErrorMessage: () => {},
-};
-
-export const FinishInput = Template.bind({});
-FinishInput.args = {
-  value: ['1', '2'],
-  errorMessage: '',
-  setErrorMessage: () => {},
+export const FinishInput: Story = {
+  args: {
+    value: ['1', '2'],
+    errorMessage: '',
+    setErrorMessage: () => {},
+  },
 };

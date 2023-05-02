@@ -1,52 +1,53 @@
 import { useState } from 'react';
-import { Story } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import ExpirationDateInput from '../components/cardForm/ExpirationDateInput';
-import type { CardItemInfo, InputProps } from '../types/Card';
 
-export default {
+const meta = {
   title: 'Payment/cardForm/ExpirationDateInput',
   component: ExpirationDateInput,
   tags: ['autodocs'],
+  decorators: [
+    (Story) => {
+      const [value, setValue] = useState(['', '', '', '']);
+      const handleChange = (newValue: string[]) => {
+        setValue(newValue);
+      };
+      return <Story value={value} setValue={handleChange} />;
+    },
+  ],
+} satisfies Meta<typeof ExpirationDateInput>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: {
+    value: ['', ''],
+    errorMessage: '',
+    setErrorMessage: () => {},
+  },
 };
 
-type ExpirationDateInputProps = InputProps<CardItemInfo['expirationDate']>;
-
-const Template: Story<ExpirationDateInputProps> = (args) => {
-  const [value, setValue] = useState(args.value);
-
-  const handleChange = (newValue: string[]) => {
-    setValue(newValue);
-  };
-
-  return (
-    <ExpirationDateInput {...args} value={value} setValue={handleChange} />
-  );
+export const FormatError: Story = {
+  args: {
+    value: ['3', ''],
+    errorMessage: '만료일은 MM/YY 형식으로 입력해주세요',
+    setErrorMessage: () => {},
+  },
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  value: ['', ''],
-  errorMessage: '',
-  setErrorMessage: () => {},
+export const ValidMonthError: Story = {
+  args: {
+    value: ['34', '34'],
+    errorMessage: '유효한 달을 입력해주세요',
+    setErrorMessage: () => {},
+  },
 };
 
-export const FormatError = Template.bind({});
-FormatError.args = {
-  value: ['3', ''],
-  errorMessage: '만료일은 MM/YY 형식으로 입력해주세요',
-  setErrorMessage: () => {},
-};
-
-export const ValidMonthError = Template.bind({});
-ValidMonthError.args = {
-  value: ['34', '34'],
-  errorMessage: '유효한 달을 입력해주세요',
-  setErrorMessage: () => {},
-};
-
-export const FinishInput = Template.bind({});
-FinishInput.args = {
-  value: ['04', '34'],
-  errorMessage: '',
-  setErrorMessage: () => {},
+export const FinishInput: Story = {
+  args: {
+    value: ['04', '34'],
+    errorMessage: '',
+    setErrorMessage: () => {},
+  },
 };

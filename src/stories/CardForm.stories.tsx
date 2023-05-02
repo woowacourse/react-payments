@@ -1,31 +1,26 @@
+import { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { Meta, Story } from '@storybook/react';
-import CardForm from '../components/cardForm/CardForm';
 import { BrowserRouter } from 'react-router-dom';
+import CardForm from '../components/cardForm/CardForm';
 
-const meta: Meta<CardFormProps> = {
+const meta = {
   title: 'Payment/cardForm/CardForm',
   component: CardForm,
   tags: ['autodocs'],
-};
-
-interface CardFormProps {
-  onChangeForm: (
-    cardNumber: string[],
-    expirationDate: string[],
-    name: string
-  ) => void;
-}
-
-const Template: Story<CardFormProps> = ({ onChangeForm }) => (
-  <BrowserRouter>
-    <CardForm onChangeForm={onChangeForm} />
-  </BrowserRouter>
-);
-
-export const Primary: Story<CardFormProps> = Template.bind({});
-Primary.args = {
-  onChangeForm: action('onChangeForm'),
-};
+} satisfies Meta<typeof CardForm>;
 
 export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  decorators: [
+    (Story) => (
+      <BrowserRouter>
+        <Story />
+      </BrowserRouter>
+    ),
+  ],
+  args: {
+    onChangeForm: action('onChangeForm'),
+  },
+};
