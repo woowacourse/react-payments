@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { Card } from "../types";
 import { emptyArrowFuction } from "../util/initialValue";
 
@@ -13,7 +13,12 @@ export const GlobalContext = createContext<GlobalState>({
 });
 
 export const GlobalContextProvider = ({ children }: React.PropsWithChildren) => {
-  const [cards, setCards] = useState<Card[]>([]);
+  const storedCards = localStorage.getItem("cards");
+  const [cards, setCards] = useState<Card[]>(storedCards ? [...JSON.parse(storedCards)] : []);
+
+  useEffect(() => {
+    localStorage.setItem("cards", JSON.stringify(cards));
+  }, [cards]);
 
   const value = { cards, setCards };
 
