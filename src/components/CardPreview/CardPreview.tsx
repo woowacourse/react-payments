@@ -7,7 +7,6 @@ type PreviewCard = Pick<Card, "cardNumber" | "ownerName" | "expirationDate" | "c
 type CardPreviewProps = {
   card: PreviewCard;
   animation?: { transition: string; transform: string };
-  defaultOwnerName?: string;
 };
 
 const CARD_COMPANY_COLOR = {
@@ -21,7 +20,7 @@ const CARD_COMPANY_COLOR = {
   우리카드: "#007BC8",
 };
 
-const CardPreview = ({ card, animation, defaultOwnerName = "NAME" }: CardPreviewProps) => {
+const CardPreview = ({ card, animation }: CardPreviewProps) => {
   const { cardCompany, cardNumber, ownerName, expirationDate } = card;
   const { transition = "", transform = "" } = animation ?? {};
 
@@ -34,13 +33,13 @@ const CardPreview = ({ card, animation, defaultOwnerName = "NAME" }: CardPreview
         <ICChip />
       </Div>
       <NumberContainer>
-        <NumberBox space={"2px"}>{cardNumber.firstGroup}</NumberBox>
-        <NumberBox space={"2px"}>{cardNumber.secondGroup}</NumberBox>
-        <NumberBox space={"-5px"}>{"•".repeat(cardNumber.thirdGroup.length)}</NumberBox>
-        <NumberBox space={"-5px"}>{"•".repeat(cardNumber.fourthGroup.length)}</NumberBox>
+        <NumberBox space="2px">{cardNumber.firstGroup}</NumberBox>
+        <NumberBox space="2px">{cardNumber.secondGroup}</NumberBox>
+        <NumberBox space="-5px">{"•".repeat(cardNumber.thirdGroup.length)}</NumberBox>
+        <NumberBox space="-5px">{"•".repeat(cardNumber.fourthGroup.length)}</NumberBox>
       </NumberContainer>
       <InfoContainer>
-        <OwnerName>{ownerName ? ownerName : defaultOwnerName}</OwnerName>
+        <OwnerName>{ownerName ? ownerName : "NAME"}</OwnerName>
         <span>
           {expirationDate.month ? expirationDate.month : "MM"} / {expirationDate.year ? expirationDate.year : "YY"}
         </span>
