@@ -12,15 +12,15 @@ import useSelectCardCompany from '../../hooks/useSelectCardType';
 import {
   isSelectCardType,
   isValidCardNumber,
-  isValidExpiredMonthFormat,
-  isValidExpiredYearFormat,
   isValidOwnerName,
   isValidPassword,
   isValidSecurityCode,
 } from './domain/validation';
 import './index.css';
+import useValidExpireDate from '../../hooks/useValidExpireDate';
 
 const AddCardPage = () => {
+  const { isValidExpiredMonthFormat, isValidExpiredYearFormat } = useValidExpireDate();
   const navigate = useNavigate();
   const cardCompany = useSelectCardCompany(isSelectCardType);
   const cardFirstNumber = useInput(isValidCardNumber);
