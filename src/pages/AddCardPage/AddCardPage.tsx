@@ -21,28 +21,14 @@ import useModal from "../../hooks/useModal";
 
 const AddCardPage = () => {
   const { modalOpen, closeModal, openModal } = useModal(true);
-  const {
-    error,
-    cardCompany,
-    cardNumber,
-    expirationDate,
-    ownerName,
-    securityCode,
-    password,
-    setError,
-    setCardCompany,
-    setCardNumber,
-    setExpirationDate,
-    setOwnerName,
-    setSecurityCode,
-    setPassword,
-  } = useContext(AddCardStateContext);
+  const { error, cardInfo, setError, setCardInfo } = useContext(AddCardStateContext);
+  const { cardCompany, cardNumber, expirationDate, ownerName, securityCode, password } = cardInfo;
 
   const navigate = useNavigate();
 
   const handleCardCompany = (e: React.MouseEvent<HTMLButtonElement>) => {
     const company = e.currentTarget.name as CardCompany;
-    setCardCompany(company);
+    setCardInfo({ ...cardInfo, cardCompany: company });
 
     closeModal();
   };
@@ -94,16 +80,26 @@ const AddCardPage = () => {
         <CardPreview card={{ cardCompany, cardNumber, expirationDate, ownerName }} />
       </CardPreviewButton>
       <Form onSubmit={onSubmitHandler} onChange={onChangeFormHandler}>
-        <CardNumberInput cardNumber={cardNumber} setCardNumber={setCardNumber} />
+        <CardNumberInput
+          cardNumber={cardNumber}
+          setCardNumber={(cardNumber) => setCardInfo({ ...cardInfo, cardNumber })}
+        />
         <CardExpirationDateInput
           expirationDate={expirationDate}
           expirationError={error}
-          setExpirationDate={setExpirationDate}
+          setExpirationDate={(expirationDate) => setCardInfo({ ...cardInfo, expirationDate })}
           setError={setError}
         />
-        <CardOwnerNameInput ownerName={ownerName} nameLength={ownerName.length} setOwnerName={setOwnerName} />
-        <CardSecurityCodeInput securityCode={securityCode} setSecurityCode={setSecurityCode} />
-        <CardPasswordInput password={password} setPassword={setPassword} />
+        <CardOwnerNameInput
+          ownerName={ownerName}
+          nameLength={ownerName.length}
+          setOwnerName={(ownerName) => setCardInfo({ ...cardInfo, ownerName })}
+        />
+        <CardSecurityCodeInput
+          securityCode={securityCode}
+          setSecurityCode={(securityCode) => setCardInfo({ ...cardInfo, securityCode })}
+        />
+        <CardPasswordInput password={password} setPassword={(password) => setCardInfo({ ...cardInfo, password })} />
         <Button isVisible={isAddButtonVisibleConditionFulfilled()}>다음</Button>
       </Form>
     </Container>
