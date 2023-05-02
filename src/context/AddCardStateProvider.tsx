@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
 import { CARD_LOGO } from "../components/CardCompanyIcon/CardCompanyIcon";
-import { CardCompany, CardExpirationDate, CardNumber, CardPassword } from "../types";
+import { Card, CardCompany, CardExpirationDate, CardNumber, CardPassword } from "../types";
 import {
   cardNumberInitialValue,
   emptyArrowFuction,
@@ -8,15 +8,10 @@ import {
   passwordInitialValue,
 } from "../util/initialValue";
 
-interface AddCardState {
+interface AddCardState extends Card {
   error: boolean;
-  cardCompany: CardCompany;
-  cardNumber: CardNumber;
-  expirationDate: CardExpirationDate;
-  ownerName: string;
-  securityCode: string;
-  password: CardPassword;
   setError: (value: boolean) => void;
+  setCardName: (value: string) => void;
   setCardCompany: (value: CardCompany) => void;
   setCardNumber: (value: CardNumber) => void;
   setExpirationDate: (value: CardExpirationDate) => void;
@@ -27,6 +22,7 @@ interface AddCardState {
 
 const initialValue = {
   modalOpen: false,
+  cardName: "",
   error: true,
   cardCompany: undefined,
   cardNumber: cardNumberInitialValue,
@@ -36,6 +32,7 @@ const initialValue = {
   password: passwordInitialValue,
   setModalOpen: emptyArrowFuction,
   setError: emptyArrowFuction,
+  setCardName: emptyArrowFuction,
   setCardCompany: emptyArrowFuction,
   setCardNumber: emptyArrowFuction,
   setExpirationDate: emptyArrowFuction,
@@ -48,6 +45,7 @@ export const AddCardStateContext = createContext<AddCardState>(initialValue);
 
 export const AddCardStateContextProvider = ({ children }: React.PropsWithChildren) => {
   const [error, setError] = useState<boolean>(false);
+  const [cardName, setCardName] = useState<string>("");
   const [cardCompany, setCardCompany] = useState<keyof typeof CARD_LOGO>();
   const [cardNumber, setCardNumber] = useState<CardNumber>(cardNumberInitialValue);
   const [expirationDate, setExpirationDate] = useState<CardExpirationDate>(expirationDateInitialValue);
@@ -57,6 +55,7 @@ export const AddCardStateContextProvider = ({ children }: React.PropsWithChildre
 
   const value = {
     error,
+    cardName,
     cardCompany,
     cardNumber,
     expirationDate,
@@ -64,6 +63,7 @@ export const AddCardStateContextProvider = ({ children }: React.PropsWithChildre
     securityCode,
     password,
     setError,
+    setCardName,
     setCardCompany,
     setCardNumber,
     setExpirationDate,

@@ -9,19 +9,17 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Container } from "../../components/common";
 import { useContext } from "react";
-import { Card, CardCompany } from "../../types";
+import { CardCompany } from "../../types";
 import { useNavigate } from "react-router-dom";
 import { isFulfilledObject, isFulfilledString } from "../../validator/Validator";
 import { PAGE } from "../../constant";
 import Modal from "../../components/Modal/Modal";
 import CardCompanyIcon from "../../components/CardCompanyIcon/CardCompanyIcon";
-import { GlobalContext } from "../../context/GlobalProvider";
 import { AddCardStateContext } from "../../context/AddCardStateProvider";
 import { Button } from "../../components/common/Button";
 import useModal from "../../hooks/useModal";
 
 const AddCardPage = () => {
-  const { cards, setCards, setCurrentIndex } = useContext(GlobalContext);
   const { modalOpen, closeModal, openModal } = useModal(true);
   const {
     error,
@@ -52,18 +50,6 @@ const AddCardPage = () => {
   const onSubmitHandler = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const card: Card = {
-      cardName: "",
-      cardCompany,
-      cardNumber,
-      expirationDate,
-      ownerName,
-      securityCode,
-      password,
-    };
-
-    setCards([...cards, card]);
-    setCurrentIndex(cards.length);
     navigate(PAGE.NAME_CARD);
   };
 

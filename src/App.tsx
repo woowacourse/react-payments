@@ -12,6 +12,7 @@ function App() {
   return (
     <>
       <GlobalStyle />
+
       <Layout>
         <Routes>
           <Route index path={PAGE.CARD_LIST} element={<CardListPage />} />
@@ -23,7 +24,14 @@ function App() {
               </AddCardStateContextProvider>
             }
           />
-          <Route path={PAGE.NAME_CARD} element={<NameCardPage />} />
+          <Route
+            path={PAGE.NAME_CARD}
+            element={
+              <AddCardStateContextProvider>
+                <NameCardPage />
+              </AddCardStateContextProvider>
+            }
+          />
         </Routes>
       </Layout>
     </>

@@ -17,7 +17,7 @@ export type CardPasswordKey = "first" | "second";
 
 export type CardPassword = Record<CardPasswordKey, string>;
 
-export type Card = {
+export interface Card {
   cardName: string;
   cardCompany: CardCompany;
   cardNumber: CardNumber;
@@ -25,4 +25,4 @@ export type Card = {
   ownerName: string;
   securityCode: string;
   password: CardPassword;
-};
+}
