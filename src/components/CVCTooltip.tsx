@@ -1,3 +1,5 @@
+import React from 'react';
+
 import cvcInfo from '../asset/cvc_info.png';
 import './CVCTooltip.css';
 
