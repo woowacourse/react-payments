@@ -7,15 +7,17 @@ import { useState } from "react";
 const App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const toggleModal = (): void => {
+  const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
 
   return (
-    <Context.Provider value={{ isModalOpen, toggleModal }}>
+    <>
       <GlobalStyle />
-      <RouterProvider router={router} />
-    </Context.Provider>
+      <Context.Provider value={{ isModalOpen, toggleModal }}>
+        <RouterProvider router={router} />
+      </Context.Provider>
+    </>
   );
 };
 
