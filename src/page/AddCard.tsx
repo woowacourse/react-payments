@@ -1,13 +1,14 @@
-import { useState } from "react";
 import CardItem from "../components/cardList/CardItem";
 import Header from "../components/common/Header";
-import { CardType, BrandType } from "../types/card";
-import styled from "styled-components";
 import CardForm from "../components/cardForm/CardForm";
-import { Link } from "react-router-dom";
+import BrandSelectModal from "../components/modal/BrandSelectModal";
+import styled from "styled-components";
 
-import { BrandSelectModal } from "../components/modal/BrandSelectModal";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { NewCardContext } from "../contexts/NewCardContext";
+
+import { CardType, BrandType } from "../types/card";
 
 export const AddCard = () => {
   const [newCard, setNewCard] = useState<CardType>({

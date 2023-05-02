@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import { CardType } from "../../types/card";
 import { ValidFlagType } from "../../types/input";
 
@@ -7,12 +6,12 @@ import CardNumberInput from "./CardNumberInput";
 import ExpiryDateInput from "./ExpiryDateInput";
 import OwnerInput from "./OwnerInput";
 import PasswordInput from "./PasswordInput";
+import styled from "styled-components";
 
-import { validateCardNumbers, validateExpiryDate } from "../../validation";
 import { useNavigate } from "react-router-dom";
 import { useContext, FormEvent } from "react";
-
 import { useCheckForm } from "../../hook/useCheckForm";
+import { validateCardNumbers, validateExpiryDate } from "../../validation";
 
 import { CardsContext } from "../../contexts/CardsContext";
 import { NewCardContext } from "../../contexts/NewCardContext";

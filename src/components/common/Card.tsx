@@ -4,9 +4,9 @@ interface CardProps {
   $backgroundColor?: string;
 }
 
-function Card({ $backgroundColor = "lightGrey", children }: React.PropsWithChildren<CardProps>) {
+const Card = ({ $backgroundColor = "lightGrey", children }: React.PropsWithChildren<CardProps>) => {
   return <CardWrapper $backgroundColor={$backgroundColor}>{children}</CardWrapper>;
-}
+};
 
 const CardWrapper = styled.div<{ $backgroundColor: string }>`
   display: flex;

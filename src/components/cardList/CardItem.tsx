@@ -1,10 +1,10 @@
-import styled from "styled-components";
-import { CardType, BrandType } from "../../types/card";
-
 import Card from "../common/Card";
-import { CARDNUMBERS_REGEX, DEFAULT_EXPRIYDATE, DEFAULT_NAME, DEFAULT_BRAND } from "../../constants";
+import styled from "styled-components";
 
 import { useMemo } from "react";
+
+import { CardType, BrandType } from "../../types/card";
+import { CARDNUMBERS_REGEX, DEFAULT_EXPRIYDATE, DEFAULT_NAME, DEFAULT_BRAND } from "../../constants";
 
 interface CardProps {
   card: CardType;

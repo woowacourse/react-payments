@@ -1,12 +1,11 @@
 import CardItem from "./CardItem";
 import EmptyCard from "./EmptyCard";
-
 import styled from "styled-components";
 
 import { useContext } from "react";
 import { CardsContext } from "../../contexts/CardsContext";
 
-export const CardList = () => {
+const CardList = () => {
   const { cards } = useContext(CardsContext);
 
   return (

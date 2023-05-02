@@ -1,12 +1,9 @@
-import { useRef } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-
 import CardItem from "../components/cardList/CardItem";
 import AliasInput from "../components/cardForm/AliasInput";
-
-import { FormEvent } from "react";
-
 import styled from "styled-components";
+
+import { useRef, FormEvent } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 interface SetAliasProps {
   setAlias: (numbers: string, alias: string) => void;
@@ -17,11 +14,6 @@ export const SetAlias = ({ setAlias }: SetAliasProps) => {
 
   const location = useLocation();
   const { newCard } = location.state;
-
-  const aliasRef = useRef("");
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    aliasRef.current = e.target.value;
-  };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

@@ -1,4 +1,3 @@
-import { StoryFn } from "@storybook/react";
 import Card from "../components/common/Card";
 import { Meta, StoryObj } from "@storybook/react";
 

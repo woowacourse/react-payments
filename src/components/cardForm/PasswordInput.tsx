@@ -1,11 +1,9 @@
 import Container from "../common/Container";
 import Input from "../common/Input";
 import InputLabel from "../common/InputLabel";
-
-import { useRef, useCallback, useContext } from "react";
-
 import styled from "styled-components";
 
+import { useRef, useCallback, useContext } from "react";
 import { SubmitManageContext } from "../../contexts/SubmitManageContext";
 
 import { PASSWORD_MAXLEGNTH, NUMBER_REGEX } from "../../constants";

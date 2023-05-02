@@ -1,4 +1,5 @@
 import { createContext } from "react";
+
 import { ValidFlagType, CompleteFlagsType } from "../types/input";
 
 interface SubmitManageContextValue {

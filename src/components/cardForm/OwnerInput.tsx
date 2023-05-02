@@ -1,14 +1,13 @@
 import Container from "../common/Container";
 import Input from "../common/Input";
 import InputLabel from "../common/InputLabel";
-
 import styled from "styled-components";
+
+import { NewCardContext } from "../../contexts/NewCardContext";
+import { useContext } from "react";
 
 import { NAME_MAXLEGNTH } from "../../constants";
 
-import { NewCardContext } from "../../contexts/NewCardContext";
-
-import { useContext } from "react";
 const OwnerInfo = {
   label: "owner",
   placeholder: "카드에 표시된 이름과 동일하게 입력하세요.",

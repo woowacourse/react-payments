@@ -1,4 +1,4 @@
-import { CardList } from "../components/cardList/CardList";
+import CardList from "../components/cardList/CardList";
 import Header from "../components/common/Header";
 
 export const Home = () => {

@@ -3,7 +3,6 @@ import InputLabel from "../common/InputLabel";
 import Input from "../common/Input";
 
 import { useState, useCallback, useContext } from "react";
-
 import { SubmitManageContext } from "../../contexts/SubmitManageContext";
 import { NewCardContext } from "../../contexts/NewCardContext";
 

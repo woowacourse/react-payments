@@ -1,18 +1,17 @@
-import { ModalButton } from "./ModalButton";
-import { BRANDS } from "../../constants";
+import ModalButton from "./ModalButton";
+import styled from "styled-components";
 
 import { useContext } from "react";
 import { createPortal } from "react-dom";
-
 import { NewCardContext } from "../../contexts/NewCardContext";
 
-import styled from "styled-components";
+import { BRANDS } from "../../constants";
 
 interface BrandSelectModalProps {
   closeModal: () => void;
 }
 
-export const BrandSelectModal = ({ closeModal }: BrandSelectModalProps) => {
+const BrandSelectModal = ({ closeModal }: BrandSelectModalProps) => {
   const { newCard } = useContext(NewCardContext);
 
   return createPortal(
@@ -53,3 +52,5 @@ const Container = styled.div`
   border-radius: 8px 8px 0px 0px;
   background: white;
 `;
+
+export default BrandSelectModal;

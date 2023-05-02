@@ -1,5 +1,6 @@
-import styled from "styled-components";
 import Card from "../common/Card";
+import styled from "styled-components";
+
 import { Link } from "react-router-dom";
 
 const EmptyCard = () => {

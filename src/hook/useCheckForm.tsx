@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react";
+
 import { CompleteFlagsType, ValidFlagType } from "../types/input";
 
 export const useCheckForm = () => {

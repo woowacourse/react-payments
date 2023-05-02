@@ -1,30 +1,31 @@
 import { HyundaiLogo, BCLogo, ShinhanLogo, KakaoLogo, HanaLogo, WorriLogo, KBLogo, LotteLogo } from "../BrandIcon";
-import { useContext } from "react";
 
 import styled from "styled-components";
+
+import { useContext } from "react";
 import { NewCardContext } from "../../contexts/NewCardContext";
 
 import { BrandType } from "../../types/card";
+import { DEFAULT_BRAND } from "../../constants";
 
 interface ModalButtonProps {
   brand: BrandType;
   closeModal: () => void;
 }
 
-const selectLogo = (brand: BrandType): JSX.Element => {
-  if (brand === "현대카드") return <HyundaiLogo />;
-  if (brand === "BC카드") return <BCLogo />;
-  if (brand === "신한카드") return <ShinhanLogo />;
-  if (brand === "카카오뱅크") return <KakaoLogo />;
-  if (brand === "하나카드") return <HanaLogo />;
-  if (brand === "우리카드") return <WorriLogo />;
-  if (brand === "KB카드") return <KBLogo />;
-  if (brand === "롯데카드") return <LotteLogo />;
-
-  return <>No Logo</>;
+const selectLogo: Record<BrandType | typeof DEFAULT_BRAND, JSX.Element> = {
+  현대카드: <HyundaiLogo />,
+  BC카드: <BCLogo />,
+  신한카드: <ShinhanLogo />,
+  카카오뱅크: <KakaoLogo />,
+  하나카드: <HanaLogo />,
+  우리카드: <WorriLogo />,
+  KB카드: <KBLogo />,
+  롯데카드: <LotteLogo />,
+  [DEFAULT_BRAND]: <>No Logo</>,
 };
 
-export const ModalButton = ({ brand, closeModal }: ModalButtonProps) => {
+const ModalButton = ({ brand, closeModal }: ModalButtonProps) => {
   const { setBrand } = useContext(NewCardContext);
 
   const handleClick = (event: React.MouseEvent<HTMLElement> | React.TouchEvent<HTMLElement>) => {
@@ -36,7 +37,7 @@ export const ModalButton = ({ brand, closeModal }: ModalButtonProps) => {
 
   return (
     <Button onClick={handleClick}>
-      {selectLogo(brand)}
+      {selectLogo[brand]}
       <BrandName>{brand}</BrandName>
     </Button>
   );
@@ -56,3 +57,5 @@ const Button = styled.button`
   width: 67px;
   height: 64px;
 `;
+
+export default ModalButton;
