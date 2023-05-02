@@ -27,6 +27,7 @@ export function RegisterCardNameForm({ onSubmit }: RegisterCardNameFormProps) {
 
     setIsModalOpen(true);
     CardDB.registerCard(cardInfo);
+    setCardInfoName('');
     onSubmit();
   };
 
