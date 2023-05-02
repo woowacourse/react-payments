@@ -1,7 +1,7 @@
 import BottomSheet from '../../../components/BottomSheet';
 import CardSelectButton from './CardSelectButton';
 import './CardNameBottomSheet.css';
-import { CardNameBottomSheetProps } from '../../../type';
+import { CardCompany, CardNameBottomSheetProps } from '../../../type';
 import { CARD_COMPANYS } from '../../../utils/constants';
 
 const CardNameBottomSheet = ({
@@ -9,7 +9,11 @@ const CardNameBottomSheet = ({
   onToggleOpen,
   setCardCompany,
 }: CardNameBottomSheetProps) => {
-  // TODO: onClick 함수 분리
+  const onCardSelectButtonClick = (cardCompany:CardCompany) => {
+    onToggleOpen();
+    setCardCompany(cardCompany);
+  }
+
   return (
     <BottomSheet isOpen={isOpen} onToggleOpen={onToggleOpen}>
       <div className="card-name-select">
@@ -17,10 +21,7 @@ const CardNameBottomSheet = ({
           <CardSelectButton
             key={cardCompany}
             company={cardCompany}
-            onClick={() => {
-              onToggleOpen();
-              setCardCompany(cardCompany);
-            }}
+            onCardSelectButtonClick={() => onCardSelectButtonClick(cardCompany)}
           />
         ))}
       </div>
