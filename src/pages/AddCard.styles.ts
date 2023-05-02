@@ -30,3 +30,12 @@ export const ButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
+
+export const ErrorTextWrapper = styled.p`
+  margin-top: 12px;
+  width: 100%;
+  height: 18px;
+  font-size: 14px;
+  color: red;
+  text-align: center;
+`;

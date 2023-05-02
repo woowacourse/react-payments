@@ -32,10 +32,19 @@ const AddCard = ({ cards, setCards }: CardList) => {
     setCardCompany,
     isDisabledForm,
   } = useAddCard();
+  const [errorMessage, setErrorMessage] = useState('');
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  const handleSetCards = () => {
+  const handleSetCards = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (isDisabledForm) {
+      setErrorMessage(
+        '잘못된 정보입니다. 올바른 카드 정보를 입력했는지 확인해주세요.'
+      );
+      return;
+    }
+
     setCards([
       ...cards,
       {
@@ -100,6 +109,7 @@ const AddCard = ({ cards, setCards }: CardList) => {
             />
           </Styled.ButtonWrapper>
         </form>
+        <Styled.ErrorTextWrapper>{errorMessage}</Styled.ErrorTextWrapper>
       </Styled.PageWrapper>
       {isModalOpen && (
         <CardCompanyModal

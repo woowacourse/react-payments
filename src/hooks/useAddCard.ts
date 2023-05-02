@@ -18,7 +18,7 @@ const useAddCard = () => {
   const { securityCode, isSetSecurityCode } = useSecurityCode();
   const { passwords, isSetPasswords } = usePassword();
   const [cardCompany, setCardCompany] = useState<string>('');
-  let isDisabledForm = false;
+  const [isDisabledForm, setIsDisabledForm] = useState(true);
 
   useEffect(() => {
     if (
@@ -28,10 +28,10 @@ const useAddCard = () => {
       isCorrectPassword(passwords) &&
       cardCompany
     ) {
-      isDisabledForm = false;
+      setIsDisabledForm(false);
       return;
     }
-    isDisabledForm = true;
+    setIsDisabledForm(true);
   }, [cardNumbers, expiredDates, securityCode, passwords, cardCompany]);
 
   return {
