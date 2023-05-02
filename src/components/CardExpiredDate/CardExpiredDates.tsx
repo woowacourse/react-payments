@@ -3,6 +3,7 @@ import CardLabel from '../@common/CardLabel';
 import { useContext, useState } from 'react';
 import * as Styled from './CardExpiredDates.styles';
 import { RefContext } from '../../contexts/RefProvider';
+import { REF_INDEX } from '../../constants/refIndex';
 
 interface ExpiredDateProps {
   expiredDates: Array<string>;
@@ -32,7 +33,12 @@ const CardExpiredDate = ({
     if (!(e.target instanceof HTMLInputElement)) return;
     const currentOrder = Number(e.target.dataset['order']);
 
-    if (!isSetExpiredDates(currentOrder - 4, e.target.value)) {
+    if (
+      !isSetExpiredDates(
+        currentOrder - REF_INDEX.lastCardNumbersOrder,
+        e.target.value
+      )
+    ) {
       setErrorMessage(
         `유효한 만료일을 ${getCurrentDateToString()}의 형태로 입력해주세요.`
       );

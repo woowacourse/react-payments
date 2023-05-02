@@ -3,6 +3,8 @@ import CardLabel from '../@common/CardLabel';
 import { useContext, useState } from 'react';
 import * as Styled from './CardPassword.styles';
 import { RefContext } from '../../contexts/RefProvider';
+import { REF_INDEX } from '../../constants/refIndex';
+
 interface CardPasswordProps {
   passwords: Array<string>;
   isSetPasswords: (order: number, value: string) => boolean;
@@ -15,7 +17,12 @@ const CardPassword = ({ passwords, isSetPasswords }: CardPasswordProps) => {
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const currentOrder = Number(e.target.dataset['order']);
 
-    if (!isSetPasswords(currentOrder - 8, e.target.value)) {
+    if (
+      !isSetPasswords(
+        currentOrder - REF_INDEX.lastSecurityCodeOrder,
+        e.target.value
+      )
+    ) {
       setErrorMessage('카드 비밀번호 앞 두 자리를 숫자로 입력해주세요.');
       return;
     }
