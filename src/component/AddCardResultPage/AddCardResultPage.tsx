@@ -5,6 +5,7 @@ import { CreditCard } from "../../types/card";
 import { useCardState, useCardDispatch } from "../../contexts/CardContext";
 import CardDetailView from "../CardDetailView/CardDetailView";
 import useCardAlias from "../../hooks/card/useCardAlias";
+import useInputRef from "../../hooks/useInputRef";
 
 type AddCardResultPageProps = {
   addCreditCard: (card: CreditCard) => void;
@@ -15,12 +16,18 @@ function AddCardResultPage({ addCreditCard }: AddCardResultPageProps) {
 
   const creditCard = useCardState();
   const dispatch = useCardDispatch();
-
   const { cardAlias, changeCardAlias } = useCardAlias();
+  const { inputRef } = useInputRef();
 
   useEffect(() => {
     !creditCard.isValid && navigate("/", { replace: true });
   }, []);
+
+  useEffect(() => {
+    inputRef.current?.setCustomValidity(
+      cardAlias ? "" : "10자 이내의 별칭을 입력해주세요."
+    );
+  }, [cardAlias]);
 
   const submitCreditCard = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -41,15 +48,8 @@ function AddCardResultPage({ addCreditCard }: AddCardResultPageProps) {
           maxLength={10}
           required
           placeholder="카드 별칭"
-          onInvalid={(e) => {
-            e.currentTarget.setCustomValidity("별칭을 입력해주세요.");
-          }}
-          onChange={(e) => {
-            !e.currentTarget.validity.tooShort &&
-              e.currentTarget.setCustomValidity("");
-
-            changeCardAlias(e);
-          }}
+          ref={inputRef}
+          onChange={changeCardAlias}
         ></St.CardAlias>
         <St.SubmitButton type="submit" value={"확인"} />
       </St.CardAliasForm>
