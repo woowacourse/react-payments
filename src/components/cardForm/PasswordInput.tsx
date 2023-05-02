@@ -24,6 +24,12 @@ const cannotInput = (text: string): boolean => {
 const PasswordInput = () => {
   const isPassWordsCompleted = useRef<boolean[]>(new Array(passwordInfo.length).fill(false));
   const { setIsPassWordCompleted } = useContext(SubmitManageContext);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const moveFocus = (index: number, text: string) => {
+    if (inputRef.current === null) return;
+    if (index === 0 && text.length === 1) inputRef.current.focus();
+  };
 
   const handleInput = useCallback(
     (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,6 +49,8 @@ const PasswordInput = () => {
 
       setIsPassWordCompleted(false);
       if (isPassWordsCompleted.current.every((isCompleted) => isCompleted)) setIsPassWordCompleted(true);
+
+      moveFocus(index, text);
     },
     [setIsPassWordCompleted, cannotInput, isPassWordsCompleted]
   );
@@ -52,7 +60,7 @@ const PasswordInput = () => {
       <InputLabel text="비밀번호" name="password" />
       <Row>
         <Input {...passwordInfo} handleInput={handleInput(0)} label="password1" />
-        <Input {...passwordInfo} handleInput={handleInput(1)} label="password2" />
+        <Input {...passwordInfo} handleInput={handleInput(1)} label="password2" ref={inputRef} />
         <HiddenPassword>●</HiddenPassword>
         <HiddenPassword>●</HiddenPassword>
       </Row>

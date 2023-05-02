@@ -1,42 +1,46 @@
+import { forwardRef } from "react";
 import styled from "styled-components";
 
 interface InputProps {
   label: string;
   placeholder: string;
   type: string;
-  ref?: React.RefObject<HTMLInputElement>;
   error?: { isValid: boolean; errorMessage: string };
   handleInput?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   $width: string;
   $textPosition: string;
 }
 
-const Input = ({
-  label,
-  placeholder,
-  type,
-  ref,
-  handleInput,
-  error = { isValid: true, errorMessage: "" },
-  $width,
-  $textPosition,
-}: InputProps) => {
-  return (
-    <Column>
-      <InputField
-        placeholder={placeholder}
-        id={label}
-        name={label}
-        onInput={handleInput}
-        type={type}
-        ref={ref}
-        $width={$width}
-        $textPosition={$textPosition}
-      />
-      <ErrorMessage>{error.isValid ? "" : error.errorMessage}</ErrorMessage>
-    </Column>
-  );
-};
+const Input = forwardRef(
+  (
+    {
+      label,
+      placeholder,
+      type,
+      handleInput,
+      error = { isValid: true, errorMessage: "" },
+      $width,
+      $textPosition,
+    }: InputProps,
+    ref: React.ForwardedRef<HTMLInputElement>
+  ) => {
+    return (
+      <Column>
+        <InputField
+          placeholder={placeholder}
+          id={label}
+          name={label}
+          onInput={handleInput}
+          type={type}
+          $width={$width}
+          $textPosition={$textPosition}
+          ref={ref}
+        />
+        <ErrorMessage>{error.isValid ? "" : error.errorMessage}</ErrorMessage>
+      </Column>
+    );
+  }
+);
 
 const Column = styled.div`
   display: flex;
