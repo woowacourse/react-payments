@@ -33,8 +33,11 @@ const CardContainer = styled.section`
   width: 21.3rem;
   height: 13.3rem;
 
-  background-color: ${(props) => props.color || 'gray'};
-  color: ${(props) => (props.color === '#FFE600' ? 'black' : 'white')};
+  background-color: ${(props) => props.color || props.theme.color.grey400};
+  color: ${(props) =>
+    props.color === props.theme.color.yellowKakao
+      ? props.theme.color.black
+      : props.theme.color.white};
   font-size: 1.3rem;
   font-weight: 500;
 
@@ -59,7 +62,7 @@ const _Chip = styled.div`
   width: 4rem;
   height: 2.6rem;
   margin-left: 1.4rem;
-  background-color: #cbba64;
+  background-color: ${(props) => props.theme.color.yellow};
   border-radius: 0.4rem;
 `;
 

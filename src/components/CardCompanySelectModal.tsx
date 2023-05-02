@@ -18,7 +18,7 @@ export function CardCompanySelectModal({ onModalClose }: ModalProps) {
 
   return (
     <div>
-      <_Backdrop ref={BackDropRef}></_Backdrop>
+      <_Backdrop ref={BackDropRef} />
       <Container>
         <CardCompanyList></CardCompanyList>
       </Container>

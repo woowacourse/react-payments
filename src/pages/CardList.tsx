@@ -54,19 +54,19 @@ const _Section = styled.section`
 `;
 
 const _Direction = styled.h3`
-  font: var(--text-subtitle);
-  color: #575757;
+  font: ${(props) => props.theme.text.subtitle};
+  color: ${(props) => props.theme.color.grey300};
 `;
 
 const _CardNickName = styled.p`
   font-weight: 700;
   font-size: 1.4rem;
 
-  color: #575757;
+  color: ${(props) => props.theme.color.grey300};
 `;
 const _Button = styled.button`
-  background: #e5e5e5;
-  border-radius: 5px;
+  background: ${(props) => props.theme.color.grey200};
+  border-radius: 0.5rem;
 
   width: 21.3rem;
   height: 13.3rem;

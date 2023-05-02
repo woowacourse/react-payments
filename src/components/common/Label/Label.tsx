@@ -10,6 +10,6 @@ export function Label({ children, ...props }: LabelProps) {
 }
 
 const _Label = styled.label`
-  font: var(--text-caption);
-  color: var(--grey-300);
+  font: ${(props) => props.theme.text.caption};
+  color: ${(props) => props.theme.color.black};
 `;
