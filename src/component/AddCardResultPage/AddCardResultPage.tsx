@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import St from "./AddCardResultPageStyled";
 import { CreditCard } from "../../types/card";
 import { useCardState, useCardDispatch } from "../../contexts/CardContext";
 import CardDetailView from "../CardDetailView/CardDetailView";
 import useCardAlias from "../../hooks/card/useCardAlias";
-import { LocationState } from "../../types/reactRouter";
 
 type AddCardResultPageProps = {
   addCreditCard: (card: CreditCard) => void;
@@ -13,7 +12,6 @@ type AddCardResultPageProps = {
 
 function AddCardResultPage({ addCreditCard }: AddCardResultPageProps) {
   const navigate = useNavigate();
-  const location = useLocation();
 
   const creditCard = useCardState();
   const dispatch = useCardDispatch();
@@ -21,9 +19,7 @@ function AddCardResultPage({ addCreditCard }: AddCardResultPageProps) {
   const { cardAlias, changeCardAlias } = useCardAlias();
 
   useEffect(() => {
-    const state = location.state as LocationState;
-
-    if (!state || !state.isValid) navigate("/", { replace: true });
+    !creditCard.isValid && navigate("/", { replace: true });
   }, []);
 
   const submitCreditCard = (e: React.FormEvent<HTMLFormElement>) => {

@@ -18,4 +18,5 @@ export interface CreditCard {
   cardPassword: [string, string];
   cardCompany: CREDIT_CARD_COMPANY | null;
   cardAlias?: string;
+  isValid: boolean;
 }

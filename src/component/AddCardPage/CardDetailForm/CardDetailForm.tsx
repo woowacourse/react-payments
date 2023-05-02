@@ -8,16 +8,18 @@ import CardCVCInput from "./CardCVCInput/CardCVCInput";
 import CardPasswordInput from "./CardPasswordInput/CardPasswordInput";
 import { SubmitButton } from "../../common/Button";
 import { useNavigate } from "react-router";
-import { LocationState } from "../../../types/reactRouter";
+import useCardIsValid from "../../../hooks/card/useCardIsValid";
 
 function CardDetailForm() {
   const navigate = useNavigate();
-
+  
+  const {setIsValid} = useCardIsValid()
+  
   const goToResultPage = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const state: LocationState = { isValid: true };
-    navigate("result", { replace: true, state: state });
+    setIsValid(true);
+    navigate("result", { replace: true});
   };
 
   return (

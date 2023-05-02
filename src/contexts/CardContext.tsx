@@ -10,6 +10,7 @@ type Action =
   | { type: "SET_PASSWORD"; cardPassword: [string, string] }
   | { type: "SET_CARD_COMPANY"; cardCompany: CREDIT_CARD_COMPANY | null }
   | { type: "SET_CARD_ALIAS"; cardAlias: string }
+  | { type: "SET_IS_VALID"; isValid: boolean }
   | { type: "RESET" };
 
 type CardDispatch = Dispatch<Action>;
@@ -21,6 +22,7 @@ const initialState: CreditCard = {
   cardOwnerName: "",
   cardCVC: "",
   cardPassword: ["", ""],
+  isValid: false,
   cardCompany: null,
 };
 
@@ -68,6 +70,11 @@ function cardReducer(state: CreditCard, action: Action): CreditCard {
       return {
         ...state,
         cardAlias: action.cardAlias,
+      };
+    case "SET_IS_VALID":
+      return {
+        ...state,
+        isValid: action.isValid,
       };
     case "RESET":
       return initialState;
