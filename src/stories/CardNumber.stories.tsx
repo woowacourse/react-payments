@@ -21,7 +21,7 @@ export default meta;
 
 export const Input: Story = {
   args: {
-    setError: () => {},
+    setHasError: () => {},
     setIsComplete: () => {},
   }
 };

@@ -10,16 +10,16 @@ interface Props {
 export default function InputBoxCardNumber(props: Props) {
   const { setIsComplete } = props;
 
-  const [error, setError] = useState(true);
+  const [hasError, setHasError] = useState(true);
 
   return (
     <div className={styles.inputBox}>
       <p>카드번호</p>
       <CardNumber 
-        setError={setError}
+        setHasError={setHasError}
         setIsComplete={setIsComplete}
       />
-      <p className={error ? styles.visible : ""}>16자리의 숫자를 입력해 주세요!!!</p>
+      <p className={hasError ? styles.visible : ""}>16자리의 숫자를 입력해 주세요!!!</p>
     </div>
   );
 }

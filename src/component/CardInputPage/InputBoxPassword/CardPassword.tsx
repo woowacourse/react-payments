@@ -8,12 +8,12 @@ import useMultipleInputStatus from "../../../hook/useMultipleInputStatus";
 import { useCreditCardContext } from "../../../context/CreditCardContext";
 
 interface Props {
-  setError: React.Dispatch<React.SetStateAction<boolean>>;
+  setHasError: React.Dispatch<React.SetStateAction<boolean>>;
   setIsComplete: (value: boolean) => void;
 }
 
 export default function CardPassword(props: Props) {
-  const { setError, setIsComplete } = props;
+  const { setHasError, setIsComplete } = props;
 
   const [password, setPassword] = useState(['', '']);
   const { hasError, isAllComplete, getSetStateFunction } = useMultipleInputStatus(2);
@@ -40,7 +40,7 @@ export default function CardPassword(props: Props) {
     };
 
   useEffect(() => {
-    setError(hasError);
+    setHasError(hasError);
   }, [hasError]);
 
   useEffect(() => {
