@@ -1,19 +1,33 @@
-import Header from "../components/common/Header";
-import Page from "../components/common/Page";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import Card from "../components/Card";
-import { getLocalStorage } from "../utils";
-import { CardType } from "../types";
-import uuid from "react-uuid";
+import { useContext } from 'react';
+import Header from '../components/common/Header';
+import Page from '../components/common/Page';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import Card from '../components/Card';
+import { getLocalStorage } from '../utils/localStorage';
+import { CardType } from '../types';
+import uuid from 'react-uuid';
+import { ModalContext } from '../store/modalContext';
+import { LOCALSTORAGE_KEY } from '../constants';
 
 const MyCard = () => {
-  const cards = getLocalStorage("card");
+  const cards = getLocalStorage(LOCALSTORAGE_KEY.CARD);
+
+  const { openModal } = useContext(ModalContext) ?? {
+    openModal: () => {},
+  };
+  const navigate = useNavigate();
+
+  const registerCard = () => {
+    openModal();
+
+    navigate('/AddCard');
+  };
 
   return (
     <Page>
       <>
-        <Header title="보유카드" isBack={false} />
+        <Header title="보유카드" goToMainPage={false} />
         {cards.map((card: CardType) => (
           <CardWrapper key={uuid()}>
             <Card
@@ -21,19 +35,21 @@ const MyCard = () => {
               ownerName={card.ownerName}
               expiredDate={card.expiredDate}
               cardNumber={card.cardNumber}
+              bankName={card.bankName}
+              cvc={card.cvc}
+              password={card.password}
             />
+            {card.cardName && <CardNameWrapper>{card.cardName}</CardNameWrapper>}
           </CardWrapper>
         ))}
-        <Link to="/AddCard" style={{ textDecoration: "none" }}>
-          <EmptyCardWrapper>+</EmptyCardWrapper>
-        </Link>
+        <EmptyCardWrapper onClick={registerCard}>+</EmptyCardWrapper>
       </>
     </Page>
   );
 };
 
 const CardWrapper = styled.div`
-  margin-bottom: 46px;
+  margin-bottom: 30px;
 `;
 
 const EmptyCardWrapper = styled.div`
@@ -59,6 +75,19 @@ const EmptyCardWrapper = styled.div`
   :active {
     transform: scale(0.98);
   }
+`;
+
+const CardNameWrapper = styled.span`
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 15px;
 `;
 
 export default MyCard;

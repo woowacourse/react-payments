@@ -41,3 +41,17 @@
 - CardInputForm
   - input 종류에 맞는 예외를 보여준다.
   - card input들을 관리한다.
+
+## 2단계
+
+- 모달창
+  - 모달창의 은행별로 카드 색 변경
+  - 은행별 카드 이름 추가
+  - 카드 클릭 했을 때 모달창 보이게 하기
+- 카드 등록 완료 후 카드 이름 짓기
+
+## 요구 사항
+
+- 주요 컴포넌트에 대한 Storybook 상호 작용 테스트
+- Controlled & Uncontrolled Components에 입각하여 Form 핸들링
+- Context API를 활용해 전역 상태 관리 및 계층 재구성

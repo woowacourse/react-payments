@@ -1,27 +1,25 @@
-import uuid from "react-uuid";
-import styled from "styled-components";
-import { IcChip } from "../assets";
-import { CardType } from "../types";
+import { useContext } from 'react';
+import styled from 'styled-components';
+import { IcChip } from '../assets';
+import { ModalContext } from '../store/modalContext';
+import { CardType } from '../types';
 
 const Card = (props: CardType) => {
-  const cardNumberArray = props.cardNumber.replaceAll(" - ", " ").split(" ");
+  const cardNumberArray = props.cardNumber.replaceAll(' - ', ' ').split(' ');
+
+  const { openModal } = useContext(ModalContext) ?? {
+    openModal: () => {},
+  };
 
   return (
-    <CardWrapper style={{ background: props.color }}>
+    <CardWrapper style={{ background: props.color }} onClick={() => openModal()}>
+      <span>{props.bankName}</span>
       <img src={IcChip} alt="ic-chip" />
       <CardInfoWrapper>
         <div>
-          {cardNumberArray.map((cardNumber, index) => {
-            return index > 1 ? (
-              <span key={uuid()} style={{ letterSpacing: "-3px" }}>
-                {cardNumber}
-              </span>
-            ) : (
-              <span key={uuid()} style={{ letterSpacing: "4px" }}>
-                {cardNumber}
-              </span>
-            );
-          })}
+          {cardNumberArray.map((cardNumber, idx) => (
+            <span key={idx}>{cardNumber}</span>
+          ))}
         </div>
         <div>
           <span>{props.ownerName}</span>
@@ -37,15 +35,21 @@ const CardWrapper = styled.div`
   flex-direction: column;
 
   align-items: flex-start;
-  width: 208px;
-  height: 123px;
+  width: 213px;
+  height: 133px;
 
   box-sizing: border-box;
 
-  padding: 40px 14px 0 14px;
+  padding: 10px 14px 0 14px;
   border-radius: 5px;
 
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+
+  > span {
+    font-size: 12px;
+    margin-bottom: 28px;
+    color: white;
+  }
 `;
 
 const CardInfoWrapper = styled.div`
