@@ -1,3 +1,4 @@
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -21,12 +22,12 @@ export function CardList() {
           {cards?.length === 0 ? '새로운 카드를 추가하세요' : ''}
         </_Direction>
         {cards &&
-          cards?.reverse().map((card) => {
+          cards?.reverse().map((card, index) => {
             return (
-              <>
+              <React.Fragment key={index}>
                 <CardItem info={card}></CardItem>
                 <_CardNickName>{card.nickname}</_CardNickName>
-              </>
+              </React.Fragment>
             );
           })}
         <_Button onClick={moveAddCardPage}>+</_Button>

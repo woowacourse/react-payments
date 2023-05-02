@@ -19,7 +19,7 @@ export function InputBox({ id, inputs }: InputBoxProps) {
       <_InputWithErrorMessage>
         {inputs.map(
           ({ type, value, handleChange, required, isError }, index) => (
-            <>
+            <React.Fragment key={index}>
               <_InputWrapper>
                 <div>{id === 'username' ? `${value.length} / 30` : ''}</div>
                 <Input
@@ -34,7 +34,7 @@ export function InputBox({ id, inputs }: InputBoxProps) {
                 />
                 <ErrorMessage>{isError && ERROR_MESSAGE[`${id}`]}</ErrorMessage>
               </_InputWrapper>
-            </>
+            </React.Fragment>
           )
         )}
       </_InputWithErrorMessage>
