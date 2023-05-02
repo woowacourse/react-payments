@@ -1,25 +1,21 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { Input } from './Input';
 import { InputContainer } from './InputContainer';
-import { isEmptyInput, isFirst } from '../../utils';
-import { hasValidLength, isNumeric } from '../../utils/validator';
+import { isValidPassword } from '../../cardInputValidator';
+import { isEmptyInput, isFirst, isLast } from '../../utils';
+import { isNumeric } from '../../utils/validator';
 import { ERROR, PASSWORD_SIZE, PASSWORD_TEXT } from '../../constants';
 import { Password } from '../../types';
 
 interface Props {
   password: Password;
   passwordInputRef: React.RefObject<HTMLInputElement>;
-  caption?: string;
   setPassword: (input: Password) => void;
 }
 
-export function PasswordInput({
-  password,
-  passwordInputRef,
-  caption = '카드 비밀번호 앞 2자리를 입력해주세요.',
-  setPassword,
-}: Props) {
+export function PasswordInput({ password, passwordInputRef, setPassword }: Props) {
+  const [passwordError, setPasswordError] = useState('');
   const allRef = [passwordInputRef, useRef<HTMLInputElement>(null)];
 
   const handleBackspacePress = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -30,39 +26,45 @@ export function PasswordInput({
   };
 
   const handlePasswordInputChange = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!isNumeric(e.target.value)) return;
-
     const newPassword = [...password];
     newPassword[index] = e.target.value;
     setPassword(newPassword);
 
-    if (index < password.length - 1) {
+    if (!isNumeric(e.target.value)) {
+      setPasswordError(ERROR.IS_NOT_NUMBER);
+      return;
+    }
+
+    setPasswordError('');
+
+    if (!isLast(index, PASSWORD_SIZE) && !isEmptyInput(e.target.value)) {
       allRef.at(index + 1)?.current?.focus();
       return;
     }
-
-    const inputs = [...password.slice(0, -1), e.target.value].join('');
-    validatePassword(inputs);
   };
 
-  const validatePassword = (inputs: string) => {
-    if (!isNumeric(inputs) || !hasValidLength(inputs, PASSWORD_SIZE)) {
-      alert(ERROR.INVALID_PASSWORD);
-      setPassword(['', '']);
+  const updatePasswordError = (e: React.FocusEvent<HTMLElement>) => {
+    if (e.currentTarget.contains(e.relatedTarget)) return;
+    if (!(e.target instanceof HTMLInputElement)) return;
 
-      allRef[0].current?.focus();
+    const inputs = [...password.slice(0, -1), e.target.value];
+
+    if (!isValidPassword(inputs)) {
+      setPasswordError(ERROR.INVALID_PASSWORD);
       return;
     }
+
+    setPasswordError('');
   };
 
   return (
-    <div>
+    <Style.Container onBlur={updatePasswordError}>
       <Style.Label htmlFor='cardPassword0'>
         <Style.Title>
           카드 비밀번호<Style.Essential>*</Style.Essential>
         </Style.Title>
       </Style.Label>
-      <Style.Container>
+      <Style.InputsContainer>
         {Array.from({ length: 2 }).map((_, index) => {
           return (
             <InputContainer key={index} width={'43px'}>
@@ -85,19 +87,17 @@ export function PasswordInput({
         })}
         <Style.Dot>•</Style.Dot>
         <Style.Dot>•</Style.Dot>
-      </Style.Container>
-      <Style.Caption id='passwordCaption'>{caption}</Style.Caption>
-    </div>
+      </Style.InputsContainer>
+      <Style.Caption id='passwordCaption' aria-live='assertive'>
+        {passwordError}
+      </Style.Caption>
+    </Style.Container>
   );
 }
 
 const Style = {
-  Container: styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    width: 193px;
+  Container: styled.fieldset`
+    border: none;
   `,
 
   Label: styled.label`
@@ -118,6 +118,14 @@ const Style = {
     color: red;
   `,
 
+  InputsContainer: styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 193px;
+  `,
+
   Dot: styled.div`
     display: flex;
     justify-content: center;
@@ -128,9 +136,10 @@ const Style = {
   `,
 
   Caption: styled.p`
+    height: 8px;
     margin-top: 8px;
 
     font-size: 10px;
-    color: #737373;
+    color: #db5959;
   `,
 };

@@ -1,17 +1,17 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Tooltip } from '../Tooltip/Tooptip';
 import { Input } from './Input';
 import { InputContainer } from './InputContainer';
+import { isValidSecurityCode } from '../../cardInputValidator';
 import { isFullInput } from '../../utils';
-import { hasValidLength, isNumeric } from '../../utils/validator';
+import { isNumeric } from '../../utils/validator';
 import { ERROR, PASSWORD_TEXT, SECURITY_CODE_SIZE } from '../../constants';
 import { SecurityCode } from '../../types';
 
 interface Props {
   securityCode: SecurityCode;
   securityCodeInputRef: React.RefObject<HTMLInputElement>;
-  caption?: string;
   setSecurityCode: (input: SecurityCode) => void;
   moveFocusToPassword?: () => void;
 }
@@ -19,25 +19,27 @@ interface Props {
 export function SecurityCodeInput({
   securityCode,
   securityCodeInputRef,
-  caption = '카드 뒷면 서명란에 인쇄된 숫자 끝 3자리를 입력해주세요.',
   setSecurityCode,
   moveFocusToPassword,
 }: Props) {
+  const [securityCodeError, setSecurityCodeError] = useState('');
   const tooltipMessage = '카드 뒷면 서명란에 인쇄된 숫자 끝 3자리를 입력해주세요.';
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!isNumeric(e.target.value)) return;
-
     setSecurityCode(e.target.value.toUpperCase());
+
+    if (!isNumeric(e.target.value)) {
+      setSecurityCodeError(ERROR.IS_NOT_NUMBER);
+      return;
+    }
+
+    setSecurityCodeError('');
   };
 
-  const validateSecurityCode = () => {
-    if (!hasValidLength(securityCode, SECURITY_CODE_SIZE) && securityCode !== '') {
-      alert(ERROR.INVALID_SECURITY_CODE);
+  const updateSecurityCodeError = () => {
+    if (isValidSecurityCode(securityCode)) return;
 
-      setSecurityCode('');
-      securityCodeInputRef.current?.focus();
-    }
+    setSecurityCodeError(ERROR.INVALID_SECURITY_CODE);
   };
 
   useEffect(() => {
@@ -62,7 +64,7 @@ export function SecurityCodeInput({
             maxLength={SECURITY_CODE_SIZE}
             placeholder={PASSWORD_TEXT.repeat(SECURITY_CODE_SIZE)}
             onChange={handleInputChange}
-            onBlur={validateSecurityCode}
+            onBlur={updateSecurityCodeError}
             inputMode='numeric'
             type='password'
             required
@@ -71,7 +73,9 @@ export function SecurityCodeInput({
         </InputContainer>
         <Tooltip message={tooltipMessage} />
       </Style.TooltipContainer>
-      <Style.Caption id='securityCodeCaption'>{caption}</Style.Caption>
+      <Style.Caption id='securityCodeCaption' aria-live='assertive'>
+        {securityCodeError}
+      </Style.Caption>
     </div>
   );
 }
@@ -102,9 +106,10 @@ const Style = {
   `,
 
   Caption: styled.p`
+    height: 8px;
     margin-top: 8px;
 
     font-size: 10px;
-    color: #737373;
+    color: #db5959;
   `,
 };

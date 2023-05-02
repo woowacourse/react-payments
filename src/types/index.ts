@@ -1,5 +1,5 @@
 import { CARD_COMPANIES, CARD_COMPANY_KEYS } from '../constants';
-
+export type CardInfo = CardNumber | string | string[] | CardCompany;
 export type CardCompany = (typeof CARD_COMPANIES)[number];
 export type CardCompanyKey = (typeof CARD_COMPANY_KEYS)[number];
 export type CardAlias = string;

@@ -1,14 +1,14 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import { Input } from './Input';
 import { InputContainer } from './InputContainer';
 import { isEnglish, isOverMaxLength } from '../../utils/validator';
-import { MAX_NAME_SIZE } from '../../constants';
+import { ERROR, MAX_NAME_SIZE } from '../../constants';
 import { OwnerName } from '../../types';
 
 interface Props {
   ownerName: OwnerName;
   ownerNameInputRef: React.RefObject<HTMLInputElement>;
-  caption?: string;
   setOwnerName: (input: OwnerName) => void;
   moveFocusToSecurityCode?: () => void;
 }
@@ -16,15 +16,21 @@ interface Props {
 export function OwnerNameInput({
   ownerName,
   ownerNameInputRef,
-  caption = '카드 소유자의 이름을 영문 30자 이내로 입력해주세요.',
   setOwnerName,
   moveFocusToSecurityCode,
 }: Props) {
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!isEnglish(e.target.value)) return;
-    if (isOverMaxLength(e.target.value, MAX_NAME_SIZE)) return;
+  const [ownerNameError, setOwnerNameError] = useState('');
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setOwnerName(e.target.value.toUpperCase());
+
+    if (!isEnglish(e.target.value) || isOverMaxLength(e.target.value, MAX_NAME_SIZE)) {
+      setOwnerNameError(ERROR.INVALID_OWNER_NAME);
+      e.target.focus();
+      return;
+    }
+
+    setOwnerNameError('');
   };
 
   const handleEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -52,7 +58,9 @@ export function OwnerNameInput({
           aria-labelledby='ownerNameCaption'
         />
       </InputContainer>
-      <Style.Caption id='ownerNameCaption'>{caption}</Style.Caption>
+      <Style.Caption id='ownerNameCaption' aria-live='assertive'>
+        {ownerNameError}
+      </Style.Caption>
     </div>
   );
 }
@@ -77,9 +85,10 @@ const Style = {
   `,
 
   Caption: styled.p`
+    height: 8px;
     margin-top: 8px;
 
     font-size: 10px;
-    color: #737373;
+    color: #db5959;
   `,
 };

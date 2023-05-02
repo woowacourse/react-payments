@@ -15,16 +15,7 @@ import { cardDataService } from '../../domains/cardDataService';
 export function CardRegisterForm() {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(true);
-  const {
-    card,
-    setCardCompany,
-    setCardNumber,
-    setExpirationDate,
-    setOwnerName,
-    setSecurityCode,
-    setPassword,
-    isValidCardForm,
-  } = useCardRegisterForm();
+  const { card, cardDispatch, isValidCardForm } = useCardRegisterForm();
 
   const cardNumberInputRef = useRef<HTMLInputElement>(null);
   const monthInputRef = useRef<HTMLInputElement>(null);
@@ -70,7 +61,7 @@ export function CardRegisterForm() {
       <CardSelectModal
         isOpen={isModalOpen}
         setIsOpen={setIsModalOpen}
-        setCardCompany={setCardCompany}
+        setCardCompany={(input) => cardDispatch({ type: 'SET_CARD_COMPANY', cardCompany: input })}
       />
       <Style.CardCompanySelectButton type={'button'} onClick={openModal}>
         <CardViewer card={card} />
@@ -80,30 +71,34 @@ export function CardRegisterForm() {
           cardNumberInputRef={cardNumberInputRef}
           moveFocusToExpirationDate={moveFocusToExpirationDate}
           cardNumber={card.cardNumber}
-          setCardNumber={setCardNumber}
+          setCardNumber={(input) => cardDispatch({ type: 'SET_CARD_NUMBER', cardNumber: input })}
         />
         <ExpirationDateInput
           monthInputRef={monthInputRef}
           moveFocusToOwnerName={moveFocusToOwnerName}
           expirationDate={card.expirationDate}
-          setExpirationDate={setExpirationDate}
+          setExpirationDate={(input) =>
+            cardDispatch({ type: 'SET_EXPIRATION_DATE', expirationDate: input })
+          }
         />
         <OwnerNameInput
           ownerNameInputRef={ownerNameInputRef}
           moveFocusToSecurityCode={moveFocusToSecurityCode}
           ownerName={card.ownerName}
-          setOwnerName={setOwnerName}
+          setOwnerName={(input) => cardDispatch({ type: 'SET_OWNER_NAME', ownerName: input })}
         />
         <SecurityCodeInput
           securityCodeInputRef={securityCodeInputRef}
           moveFocusToPassword={moveFocusToPassword}
           securityCode={card.securityCode}
-          setSecurityCode={setSecurityCode}
+          setSecurityCode={(input) =>
+            cardDispatch({ type: 'SET_SECURITY_CODE', securityCode: input })
+          }
         />
         <PasswordInput
           passwordInputRef={passwordInputRef}
           password={card.password}
-          setPassword={setPassword}
+          setPassword={(input) => cardDispatch({ type: 'SET_PASSWORD', password: input })}
         />
       </Style.InputContainer>
       <Style.ButtonContainer>

@@ -36,11 +36,11 @@ const reducer = (state: Card, action: Action): Card => {
     return { ...state, expirationDate: action.expirationDate };
   }
 
-  throw new Error('Unhandled action');
+  return state;
 };
 
 export const useCardRegisterForm = () => {
-  const [card, dispatch] = useReducer(reducer, {
+  const [card, cardDispatch] = useReducer(reducer, {
     id: v4(),
     cardCompany: CARD_COMPANY.WOORI.name,
     cardNumber: ['', '', '', ''],
@@ -49,21 +49,6 @@ export const useCardRegisterForm = () => {
     securityCode: '',
     password: ['', ''],
   });
-
-  const setCardCompany = (input: CardCompany) => {
-    dispatch({ type: 'SET_CARD_COMPANY', cardCompany: input });
-  };
-  const setCardNumber = (input: CardNumber) => {
-    dispatch({ type: 'SET_CARD_NUMBER', cardNumber: input });
-  };
-  const setExpirationDate = (input: ExpirationDate) => {
-    dispatch({ type: 'SET_EXPIRATION_DATE', expirationDate: input });
-  };
-  const setOwnerName = (input: OwnerName) => dispatch({ type: 'SET_OWNER_NAME', ownerName: input });
-  const setPassword = (input: Password) => dispatch({ type: 'SET_PASSWORD', password: input });
-  const setSecurityCode = (input: SecurityCode) => {
-    dispatch({ type: 'SET_SECURITY_CODE', securityCode: input });
-  };
 
   const isValidCardForm =
     isValidCardNumber(card.cardNumber) &&
@@ -74,12 +59,7 @@ export const useCardRegisterForm = () => {
 
   return {
     card,
-    setCardCompany,
-    setCardNumber,
-    setExpirationDate,
-    setOwnerName,
-    setSecurityCode,
-    setPassword,
+    cardDispatch,
     isValidCardForm,
   };
 };

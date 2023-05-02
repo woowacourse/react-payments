@@ -73,10 +73,11 @@ export const CONVERT_CARD_COMPANY_KEY: Readonly<Record<CardCompany, CardCompanyK
 
 export const ERROR = {
   IS_NOT_NUMBER: '숫자를 입력해주세요.',
-  INVALID_CARD_NUMBER: `유효하지 않은 카드 번호입니다. ${CARD_NUMBER_DIGITS}자리 숫자를 입력해주세요.`,
-  INVALID_EXPIRATION_DATE: `유효하지 않은 만료일입니다. 현재 월/연도 이후의 날짜를 입력해주세요.`,
-  INVALID_OWNER_NAME: `유효하지 않은 이름입니다. 최대 ${MAX_NAME_SIZE}자의 영문으로 입력해주세요.`,
-  INVALID_SECURITY_CODE: `유효하지 않은 보안코드입니다. ${SECURITY_CODE_SIZE}자리의 숫자를 입력해주세요.`,
-  INVALID_PASSWORD: `유효하지 않은 비밀번호입니다. ${PASSWORD_SIZE}자리의 숫자를 입력해주세요.`,
+  INVALID_CARD_NUMBER: `카드번호 ${CARD_NUMBER_DIGITS}자리 숫자를 입력해주세요.`,
+  INVALID_MONTH: `월은 1~12사이의 숫자로 입력해주세요.`,
+  INVALID_EXPIRATION_DATE: `현재 월/연도 이후의 날짜를 입력해주세요.`,
+  INVALID_OWNER_NAME: `카드 소유자의 이름을 최대 ${MAX_NAME_SIZE}자의 영문으로 입력해주세요.`,
+  INVALID_SECURITY_CODE: `카드 뒷면 서명란에 인쇄된 숫자 끝 ${SECURITY_CODE_SIZE}자리를 입력해주세요.`,
+  INVALID_PASSWORD: `카드 비밀번호 앞 ${PASSWORD_SIZE}자리를 입력해주세요.`,
   INVALID_CARD_ALIAS: `카드 별칭은 최대 ${CARD_ALIAS_SIZE}자까지 입력 가능합니다.`,
 } as const;

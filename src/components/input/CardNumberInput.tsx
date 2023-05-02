@@ -3,15 +3,15 @@ import styled from 'styled-components';
 import { Input } from './Input';
 import { InputContainer } from './InputContainer';
 import { isEmptyInput, isFirst, isFullInput, isLast } from '../../utils';
-import { hasValidLength, isNumeric } from '../../utils/validator';
+import { isNumeric } from '../../utils/validator';
 import { CardNumber } from '../../types';
 import {
-  CARD_NUMBER_DIGITS,
   CARD_NUMBER_INPUTS_LENGTH,
   CARD_NUMBER_INPUT_SIZE,
   PASSWORD_START_INDEX,
   ERROR,
 } from '../../constants';
+import { isValidCardNumber } from '../../cardInputValidator';
 
 interface Props {
   cardNumberInputRef: React.RefObject<HTMLInputElement>;
@@ -24,11 +24,11 @@ interface Props {
 export function CardNumberInput({
   cardNumberInputRef,
   cardNumber,
-  caption = '카드번호 16자리를 입력해주세요.',
   setCardNumber,
   moveFocusToExpirationDate,
 }: Props) {
   const [isFullInputs, setIsFullInputs] = useState([false, false, false]);
+  const [cardNumberError, setCardNumberError] = useState('');
   const allRef = [
     cardNumberInputRef,
     useRef<HTMLInputElement>(null),
@@ -47,11 +47,15 @@ export function CardNumberInput({
   };
 
   const handleCardNumberInputChange = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!isNumeric(e.target.value)) return;
-
     const newCardNumber = [...cardNumber];
     newCardNumber[index] = e.target.value;
     setCardNumber(newCardNumber);
+
+    if (!isNumeric(e.target.value)) {
+      setCardNumberError(ERROR.IS_NOT_NUMBER);
+      return;
+    }
+    setCardNumberError('');
 
     if (isFullInput(e.target.value, CARD_NUMBER_INPUT_SIZE)) {
       setIsFullInputs((prev) => [true, ...prev.slice(0, -1)]);
@@ -63,22 +67,22 @@ export function CardNumberInput({
     }
   };
 
-  const handleLastInputBlur = (index: number, e: React.FocusEvent<HTMLInputElement>) => {
-    if (!isLast(index, CARD_NUMBER_INPUT_SIZE)) return;
+  const updateCardNumberError = (e: React.FocusEvent<HTMLElement>) => {
+    if (e.currentTarget.contains(e.relatedTarget)) return;
+    if (!(e.target instanceof HTMLInputElement)) return;
 
-    const inputs = [...cardNumber.slice(0, -1), e.target.value].join('');
-    const isValidCardNumber = isNumeric(inputs) && hasValidLength(inputs, CARD_NUMBER_DIGITS);
+    const inputs = [...cardNumber.slice(0, -1), e.target.value];
 
-    if (!isValidCardNumber) {
-      setCardNumber(['', '', '', '']);
-      alert(ERROR.INVALID_CARD_NUMBER);
-
-      allRef[0].current?.focus();
+    if (!isValidCardNumber(inputs)) {
+      setCardNumberError(ERROR.INVALID_CARD_NUMBER);
+      return;
     }
+
+    setCardNumberError('');
   };
 
   return (
-    <div>
+    <Style.Container onBlur={updateCardNumberError}>
       <Style.Label htmlFor='cardNumber0'>
         <Style.Title>
           카드 번호<Style.Essential>*</Style.Essential>
@@ -100,7 +104,6 @@ export function CardNumberInput({
                 ref={allRef[index]}
                 onChange={(e) => handleCardNumberInputChange(index, e)}
                 onKeyDown={(e) => handleBackspacePress(index, e)}
-                onBlur={(e) => handleLastInputBlur(index, e)}
                 placeholder={isPasswordInput(index) ? '••••' : '0000'}
                 aria-labelledby='cardNumberCaption'
               />
@@ -111,12 +114,18 @@ export function CardNumberInput({
           );
         })}
       </InputContainer>
-      <Style.Caption id='cardNumberCaption'>{caption}</Style.Caption>
-    </div>
+      <Style.Caption id='cardNumberCaption' aria-live='assertive'>
+        {cardNumberError}
+      </Style.Caption>
+    </Style.Container>
   );
 }
 
 const Style = {
+  Container: styled.fieldset`
+    border: none;
+  `,
+
   Label: styled.label`
     display: flex;
     justify-content: space-between;
@@ -141,9 +150,10 @@ const Style = {
   `,
 
   Caption: styled.p`
+    height: 8px;
     margin-top: 8px;
 
     font-size: 10px;
-    color: #737373;
+    color: #db5959;
   `,
 };
