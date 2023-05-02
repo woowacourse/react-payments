@@ -1,7 +1,6 @@
 import { CardNumber, CardType } from '../../type';
-import { fetchLocalStorage, getSerialNumber } from '../../utils/applicationUtil';
+import { fetchLocalStorage, getSerialNumber } from '../../utils/applicationStorage';
 
-// TODO: 도메인 분리하기 !
 const registerCardAlias = (alias: string, cardNumber: CardNumber) => {
   const registerdCardNumber = getSerialNumber(cardNumber);
   const cardList = fetchLocalStorage('cardList', '[]');
