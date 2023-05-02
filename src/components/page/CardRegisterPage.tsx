@@ -22,7 +22,7 @@ interface Props {
 const CardRegisterPage = ({ navigate }: Props) => {
   const [{ cardCompany, cardNumber, expireDate, ownerName }] = useCardForm();
   const [insert, focus] = useFocusRef();
-  const [isModalOpen, setIsModalOpen] = useState(!cardCompany);
+  const [isModalOpen, setIsModalOpen] = useState(true);
 
   const submitNewCard = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -42,8 +42,8 @@ const CardRegisterPage = ({ navigate }: Props) => {
   };
 
   useEffect(() => {
-    focus(0)(0);
-  }, [focus]);
+    if (cardCompany !== '') setIsModalOpen(false);
+  }, []);
 
   const isValid = validExpireDate(expireDate) === '';
 
