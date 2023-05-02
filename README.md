@@ -11,7 +11,7 @@
 <table>
   <tr>
     <td align="center" width="300px" height="400px">
-      <img width="250px" height="400px" alt="페이먼츠 페이지 실행 화면" src="https://user-images.githubusercontent.com/24777828/235293546-7f8a4e92-ee2a-4a02-8ab4-5301f6b82149.gif">
+      <img width="250px" height="400px" alt="페이먼츠 페이지 실행 화면" src="https://user-images.githubusercontent.com/24777828/235736251-bdf120a4-751b-4222-8599-69b81439655b.gif">
     </td>
     <td align="center" width="400px" height="400px">
       <img width="350px" height="400px" alt="페이먼츠 404 페이지" src="https://user-images.githubusercontent.com/24777828/233854475-1fb5e32f-a598-46e8-97c0-9231050fb80a.gif"> 
