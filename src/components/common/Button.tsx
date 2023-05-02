@@ -2,12 +2,13 @@ import React from "react";
 import styled from "styled-components";
 
 interface ButtonType extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  text: string;
   isShown: boolean;
 }
 
 const Button = (props: ButtonType) => {
-  return <ButtonWrapper $isShown={props.isShown}>{props.text}</ButtonWrapper>;
+  return (
+    <ButtonWrapper $isShown={props.isShown}>{props.children}</ButtonWrapper>
+  );
 };
 
 const ButtonWrapper = styled.button<{ $isShown: boolean }>`

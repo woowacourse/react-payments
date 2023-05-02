@@ -31,10 +31,11 @@ const NameCard = () => {
       </NameInputWrapper>
       <Button
         isShown={true}
-        text="확인"
         type="button"
         onClick={handleButtonClicked(ROUTER_PATH.MyCard)}
-      />
+      >
+        확인
+      </Button>
     </Page>
   );
 };
