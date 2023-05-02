@@ -27,14 +27,8 @@ export function CardViewer({
       <Style.ICChip />
       <Style.CardNumberContainer>
         {cardNumber.map((number, index) => (
-          <Style.CardNumber
-            key={v4()}
-            // style={{
-            //   letterSpacing:
-            //     window.innerWidth < 768 ? (index > 1 ? '-7px' : '0px') : '0px',
-            // }}
-          >
-            {index < 2 ? number : '•'.repeat(number.length)}
+          <Style.CardNumber key={v4()}>
+            {index < 2 ? number : '·'.repeat(number.length)}
           </Style.CardNumber>
         ))}
       </Style.CardNumberContainer>
@@ -94,8 +88,6 @@ const Style = {
     width: 100%;
   `,
   CardNumber: styled.div`
-    all: unset;
-
     width: 30px;
   `,
   NameAndDateContainer: styled.div`
