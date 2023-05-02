@@ -52,6 +52,19 @@ export const CARD_NAME_IMAGE_SRCS: Record<CardCompany, string> = {
   우리카드: WooriCardIcon,
   카카오뱅크: KakaoBankIcon,
   롯데카드: LotteCardIcon,
+  '카드사 선택': '',
+};
+
+export const CARD_COMPANY_ENG: Record<CardCompany, string> = {
+  현대카드: 'hyundai',
+  BC카드: 'bc',
+  신한카드: 'sinhan',
+  카카오뱅크: 'kakao',
+  우리카드: 'woori',
+  국민카드: 'kookmin',
+  하나카드: 'hana',
+  롯데카드: 'lotte',
+  '카드사 선택': 'default-company',
 };
 
 export const APP_WIDTH = '318px';

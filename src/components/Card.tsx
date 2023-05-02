@@ -1,6 +1,7 @@
 import type { CardProps } from '../type';
-import { changeNumberToMask, getBackgroundStyleByCardCompany } from '../utils/util';
+import { changeNumberToMask } from '../utils/util';
 import { formatExpireDate } from './format';
+import { CARD_COMPANY_ENG } from '../utils/constants';
 import './Card.css';
 
 const Card = ({
@@ -15,7 +16,7 @@ const Card = ({
   onClick = () => {},
 }: CardProps) => {
   return (
-    <div className={`card ${getBackgroundStyleByCardCompany(cardCompany)}`} onClick={onClick}>
+    <div className={`card ${CARD_COMPANY_ENG[cardCompany]}`} onClick={onClick}>
       <div className="card-track-1">
         <span className="card-type">{cardCompany || '카드회사를 선택해 주세요.'}</span>
       </div>

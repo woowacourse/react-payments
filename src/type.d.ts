@@ -5,8 +5,8 @@ export type CardNumber = {
   fourth: string;
 };
 
-type CardProps = {
-  cardCompany: string;
+export type CardProps = {
+  cardCompany: CardCompany;
   cardFirstNumber: string;
   cardSecondNumber: string;
   cardThirdNumber: string;
@@ -25,7 +25,7 @@ export type CardPassword = {
 export type CardType = {
   id: number;
   alias?: string;
-  cardCompany: string;
+  cardCompany: CardCompany;
   cardNumber: CardNumber;
   cardOwner: string;
   expireMonth: string;
@@ -50,10 +50,11 @@ export type CardCompany =
   | '국민카드'
   | '우리카드'
   | '카카오뱅크'
-  | '롯데카드';
+  | '롯데카드'
+  | '카드사 선택';
 
 export type AddCardFormProps = {
-  cardCompany: string;
+  cardCompany: CardCompany;
   cardCompanyStatus: InputStatus;
   cardFirstNumber: InputHook;
   cardSecondNumber: InputHook;

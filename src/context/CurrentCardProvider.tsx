@@ -6,7 +6,7 @@ const CurrentCardContext = createContext<CurrentCard | null>(null);
 
 export const CurrentCardProvider = ({ children }: PropsWithChildren) => {
   const [currentCard, setCurrentCard] = useState<Omit<CardType, 'id'>>({
-    cardCompany: '',
+    cardCompany: '카드사 선택',
     cardNumber: {
       first: '',
       second: '',

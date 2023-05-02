@@ -1,12 +1,15 @@
 import { useState } from 'react';
 
-import { InputStatus } from '../type';
+import { CardCompany, InputStatus } from '../type';
 
-const useSelectCardCompany = (statusDispather: (str: string) => InputStatus, init = '') => {
-  const [cardCompany, setCardCompany] = useState(init);
+const useSelectCardCompany = (
+  statusDispather: (str: CardCompany) => InputStatus,
+  init: CardCompany = '카드사 선택'
+) => {
+  const [cardCompany, setCardCompany] = useState<CardCompany>(init);
   const [status, setStatus] = useState<InputStatus>('INIT');
 
-  const changeCardCompany = (str: string) => {
+  const changeCardCompany = (str: CardCompany) => {
     setStatus(statusDispather(str));
     setCardCompany(str);
   };
