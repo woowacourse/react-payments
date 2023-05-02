@@ -5,7 +5,7 @@ const useStateObject = <T extends Object>(initialObject: T) => {
 
   const setPartialState = (partialState: Partial<T>) => {
     setState(Object.assign({ ...state }, partialState));
-  }
+  };
 
   return { state, setPartialState };
 };
