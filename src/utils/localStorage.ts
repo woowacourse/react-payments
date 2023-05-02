@@ -1,11 +1,13 @@
-import { CardRegisterInfo } from "../types/card.type";
+export const getItemFromLocalStorage = <T>(key: string): T | null => {
+  const data = localStorage.getItem(key);
+  if (!data) {
+    return null;
+  }
 
-export const getCardList = (): CardRegisterInfo[] => {
-  const cardListJSON = localStorage.getItem("CardList");
-  return cardListJSON ? JSON.parse(cardListJSON) : [];
+  return JSON.parse(data);
 };
 
-export const saveCardList = (cardList: CardRegisterInfo[]): void => {
-  const cardListJSON = JSON.stringify(cardList);
-  localStorage.setItem("CardList", cardListJSON);
+export const setItemInLocalStorage = <T>(key: string, data: T) => {
+  const JSONData = JSON.stringify(data);
+  localStorage.setItem(key, JSONData);
 };

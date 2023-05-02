@@ -21,4 +21,20 @@ export const theme: DefaultTheme = {
     color: '#333',
     backgroundColor: '#ECEBF1',
   },
+  banks: {
+    BC카드: '#DE5457',
+    신한카드: '#1B45F5',
+    카카오뱅크: '#FBE74D',
+    현대카드: '#000000',
+    우리카드: '#3579C2',
+    롯데카드: '#DA3831',
+    하나카드: '#41928F',
+    국민카드: '#665E55',
+  },
+
+  zIndex: {
+    rootZIndex: 99,
+    backdropZIndex: 1000,
+    bottomSheetZIndex: 1001,
+  },
 };

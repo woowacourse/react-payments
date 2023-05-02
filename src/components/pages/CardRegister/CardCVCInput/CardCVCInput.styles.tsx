@@ -1,5 +1,6 @@
-import styled from "styled-components";
-import { BaseInput } from "../../../@common/Input/InputStyles.styles";
+import styled from 'styled-components';
+import { BaseInput } from '../../../@common/Input/InputStyles.styles';
+import { InputBackgroundProps } from '../../../../types/input.type';
 
 export const Root = styled.div`
   display: flex;
@@ -18,12 +19,12 @@ export const Label = styled.label`
   color: #525252;
 `;
 
-export const InputBackground = styled.div`
+export const InputBackground = styled.div<InputBackgroundProps>`
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 7px;
-  border: none;
+  border: ${({ isValid }) => (isValid ? 'none' : '2px solid #c81717')};
 
   background: #ecebf1;
   width: 137px;

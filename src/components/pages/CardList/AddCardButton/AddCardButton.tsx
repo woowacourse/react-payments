@@ -1,5 +1,5 @@
-import React from "react";
-import * as Styled from "./AddCardButton.styles";
+import React from 'react';
+import * as Styled from './AddCardButton.styles';
 
 interface AddCardButtonProps {
   onClick?: () => void;

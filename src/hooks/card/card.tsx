@@ -76,6 +76,27 @@ export function useCardName() {
   return { defaultConditions };
 }
 
+export function useCardAlias() {
+  const onKeyDown = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
+    if (isValidateKey(e, '^[a-zA-Z0-9가-힣]+$')) return;
+
+    e.preventDefault();
+  }, []);
+
+  const defaultConditions = useMemo(
+    () => ({
+      asChild: true,
+      required: true,
+      placeholder: '카드의 이름(별칭)을 입력하세요.',
+      pattern: '^[a-zA-Z0-9가-힣]{1,30}$',
+      maxLength: 30,
+      onKeyDown,
+    }),
+    []
+  );
+  return { defaultConditions };
+}
+
 export function useCardCVC() {
   const onKeyDown = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
     if (isValidateKey(e, '[0-9]')) return;
@@ -112,5 +133,6 @@ export function useCardPassword() {
     }),
     []
   );
+
   return { defaultConditions };
 }

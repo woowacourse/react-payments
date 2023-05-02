@@ -47,11 +47,7 @@ const useInputItemsContext = () => useContext(InputItemsContext);
 function InputItemsProvider({ children }: PropsWithChildren) {
   const itemMap = useRef<InputItemsContext['itemMap']>(new Map()).current;
 
-  return (
-    <InputItemsContext.Provider value={{ itemMap }}>
-      {children}
-    </InputItemsContext.Provider>
-  );
+  return <InputItemsContext.Provider value={{ itemMap }}>{children}</InputItemsContext.Provider>;
 }
 
 function InputItem({ children }: PropsWithChildren) {
@@ -92,7 +88,8 @@ function Input(props: PropsWithChildren) {
         id,
         value,
         onChange,
-      }}>
+      }}
+    >
       <InputItemsProvider>{children}</InputItemsProvider>
     </InputContext.Provider>
   );
@@ -105,17 +102,7 @@ interface FieldProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 function Field(props: PropsWithChildren<FieldProps>) {
-  const {
-    asChild = false,
-    id: idProps,
-    children,
-    pattern,
-    onPatternMatch,
-    onPatternMismatch,
-    value: valueProps,
-    onChange: onChangeProps,
-    ...restProps
-  } = props;
+  const { asChild = false, id: idProps, children, pattern, onPatternMatch, onPatternMismatch, value: valueProps, onChange: onChangeProps, ...restProps } = props;
   const { id, value, onChange } = useInputContext();
   const childrenArray = Children.toArray(children);
   const child = childrenArray[0];
@@ -149,15 +136,7 @@ function Field(props: PropsWithChildren<FieldProps>) {
     );
   }
 
-  return (
-    <input
-      id={idProps ? `${idProps}-${id}` : id}
-      value={valueProps ?? value}
-      onChange={localOnChange}
-      pattern={pattern}
-      {...restProps}
-    />
-  );
+  return <input id={idProps ? `${idProps}-${id}` : id} value={valueProps ?? value} onChange={localOnChange} pattern={pattern} {...restProps} />;
 }
 
 function PinField() {
@@ -244,16 +223,11 @@ Input.Message = Message;
 
 export default Input;
 
-const validateAsChild = (
-  childrenArray: ReturnType<typeof Children.toArray>
-) => {
+const validateAsChild = (childrenArray: ReturnType<typeof Children.toArray>) => {
   if (childrenArray.length > 1) throw new Error('자식은 하나만');
   if (childrenArray.length === 0) throw new Error('자식은 필수');
 };
 
-const getResolvedChildren: <T>(
-  children: ReactNode | RenderProps<T>,
-  props: T
-) => ReactNode | ReactElement<T> = (children, props) => {
+const getResolvedChildren: <T>(children: ReactNode | RenderProps<T>, props: T) => ReactNode | ReactElement<T> = (children, props) => {
   return typeof children === 'function' ? children(props) : children;
 };

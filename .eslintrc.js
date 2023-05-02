@@ -20,5 +20,7 @@ module.exports = {
   rules: {
     '@typescript-eslint/no-empty-function': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
+    'react/react-in-jsx-scope': 'off',
+    'quotes': [2, 'single', { 'avoidEscape': true }],
   },
 };

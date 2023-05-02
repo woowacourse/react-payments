@@ -1,5 +1,6 @@
-import styled from "styled-components";
-import { BaseInput } from "../../../@common/Input/InputStyles.styles";
+import styled from 'styled-components';
+import { BaseInput } from '../../../@common/Input/InputStyles.styles';
+import { InputBackgroundProps } from '../../../../types/input.type';
 
 export const Input = styled.input`
   ${BaseInput}
@@ -20,12 +21,12 @@ export const Legend = styled.legend`
   color: #525252;
 `;
 
-export const InputBackground = styled.div`
+export const InputBackground = styled.div<InputBackgroundProps>`
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 7px;
-  border: none;
+  border: ${({ isValid }) => (isValid ? 'none' : '2px solid #c81717')};
 
   background: #ecebf1;
   width: 100%;
@@ -36,5 +37,5 @@ export const InputBackground = styled.div`
 export const Divider = styled.span<{
   show?: boolean;
 }>`
-  ${({ show }) => !show && `visibility: hidden`}
+  ${({ show }) => !show && 'visibility: hidden'}
 `;
