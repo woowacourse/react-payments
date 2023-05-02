@@ -62,6 +62,12 @@ export function ExpirationDateInput({
       setExpirationDateError(ERROR.IS_NOT_NUMBER);
       return;
     }
+
+    if (!isValidDate(expirationDate.month, e.target.value)) {
+      setExpirationDateError(ERROR.INVALID_EXPIRATION_DATE);
+      return;
+    }
+
     setExpirationDateError('');
   };
 
@@ -78,7 +84,12 @@ export function ExpirationDateInput({
   };
 
   useEffect(() => {
-    if (isFullInput(expirationDate.year, YEAR_SIZE) && moveFocusToOwnerName) moveFocusToOwnerName();
+    if (
+      isFullInput(expirationDate.year, YEAR_SIZE) &&
+      isValidDate(expirationDate.month, expirationDate.year) &&
+      moveFocusToOwnerName
+    )
+      moveFocusToOwnerName();
   }, [expirationDate.year]);
 
   return (
