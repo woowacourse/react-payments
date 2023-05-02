@@ -27,13 +27,16 @@ export default function InputBoxExpirationDate(props: Props) {
   );
 
   const inputStatusHandler = (value: string) => {
-    if (validateExpirationDate(value)) {
-      value.length === 5
-        ? setInputStatus(INPUT_STATUS.COMPLETE)
-        : setInputStatus(INPUT_STATUS.NOT_COMPLETE);
-    } else {
+    if (!validateExpirationDate(value)) {
       setInputStatus(INPUT_STATUS.ERROR);
+      return;
     }
+
+    const status =  value.length === CONSTANT.MONTH_INPUT_MAX_LENGTH + CONSTANT.YEAR_INPUT_MAX_LENGTH + 1
+      ? INPUT_STATUS.COMPLETE
+      : INPUT_STATUS.NOT_COMPLETE;
+
+    setInputStatus(status);
   };
 
   const dateSetter = (value: string) => setCardInfo({ date: value });

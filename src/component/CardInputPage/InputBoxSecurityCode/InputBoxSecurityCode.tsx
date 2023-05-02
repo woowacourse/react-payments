@@ -23,13 +23,16 @@ export default function InputBoxSecurityCode(props: Props) {
   const lengthParser = (value: string) => value.slice(0, CONSTANT.SECURITY_INPUT_MAX_LENGTH);
 
   const inputStatusHandler = (value: string) => {
-    if (validateSecurityNumber(value)) {
-      value.length === CONSTANT.SECURITY_INPUT_MAX_LENGTH
-        ? setInputStatus(INPUT_STATUS.COMPLETE)
-        : setInputStatus(INPUT_STATUS.NOT_COMPLETE);
-    } else {
+    if (!validateSecurityNumber(value)) {
       setInputStatus(INPUT_STATUS.ERROR);
+      return;
     }
+
+    const status = value.length === CONSTANT.SECURITY_INPUT_MAX_LENGTH
+        ? INPUT_STATUS.COMPLETE
+        : INPUT_STATUS.NOT_COMPLETE;
+      
+    setInputStatus(status);
   };
 
   useEffect(() => {

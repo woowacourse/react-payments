@@ -31,15 +31,16 @@ export default function CardNumber(props: Props) {
   const makeInputStatusSetter =
     (setInputStatus: (status: INPUT_STATUS) => void) =>
     (value: string) => {
-      if (validateCardNumber(value)) {
-        setInputStatus(
-          value.length === CONSTANT.NUMBER_INPUT_MAX_LENGTH
-            ? INPUT_STATUS.COMPLETE
-            : INPUT_STATUS.NOT_COMPLETE
-        );
-      } else {
+      if (!validateCardNumber(value)) {
         setInputStatus(INPUT_STATUS.ERROR);
+        return;
       }
+
+      const status = value.length === CONSTANT.NUMBER_INPUT_MAX_LENGTH
+        ? INPUT_STATUS.COMPLETE
+        : INPUT_STATUS.NOT_COMPLETE;
+
+      setInputStatus(status);
     };
 
   const makeSetCardInfoSetter =

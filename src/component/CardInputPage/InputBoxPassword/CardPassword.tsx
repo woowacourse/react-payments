@@ -22,13 +22,16 @@ export default function CardPassword(props: Props) {
   const lengthParser = (value: string) => value.slice(0, CONSTANT.PASSWORD_INPUT_MAX_LENGTH);
 
   const setInputStatus =(value: string, index: number) => {
-    if (validatePassword(value)) {
-      value.length === CONSTANT.PASSWORD_INPUT_MAX_LENGTH
-        ? getSetStateFunction(index)(INPUT_STATUS.COMPLETE)
-        : getSetStateFunction(index)(INPUT_STATUS.NOT_COMPLETE);
-    } else {
+    if (!validatePassword(value)) {
       getSetStateFunction(index)(INPUT_STATUS.ERROR);
+      return;
     }
+    
+    const status = value.length === CONSTANT.PASSWORD_INPUT_MAX_LENGTH 
+      ? INPUT_STATUS.COMPLETE 
+      : INPUT_STATUS.NOT_COMPLETE;
+   
+    getSetStateFunction(index)(status);
   };
 
   const makePasswordSetter =
