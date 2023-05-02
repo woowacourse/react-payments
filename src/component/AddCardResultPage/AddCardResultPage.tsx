@@ -20,7 +20,11 @@ function AddCardResultPage({ addCreditCard }: AddCardResultPageProps) {
   const { inputRef } = useInputRef();
 
   useEffect(() => {
-    !creditCard.isValid && navigate("/", { replace: true });
+    if (creditCard.isValid) return;
+
+    navigate("/", { replace: true });
+
+    alert("유효하지 않은 접근입니다.");
   }, []);
 
   useEffect(() => {
