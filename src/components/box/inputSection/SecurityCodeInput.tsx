@@ -4,7 +4,7 @@ import InputSectionTemplate from '../../template/InputSectionTemplate';
 import InputBox from '../../common/InputBox';
 import Input from '../../common/Input';
 
-import { useCardForm } from '../../../context/cardForm';
+import { useCardForm } from '../../../context/CardFormContext';
 
 interface Props {
   insert: (index: number) => (element: HTMLInputElement | null) => void;

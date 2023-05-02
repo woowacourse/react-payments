@@ -11,7 +11,7 @@ import SecurityCodeInput from '../box/inputSection/SecurityCodeInput';
 import CardPasswordInput from '../box/inputSection/CardPasswordInput';
 import Card from '../common/Card';
 
-import { useCardForm } from '../../context/cardForm';
+import { useCardForm } from '../../context/CardFormContext';
 import { validExpireDate } from '../../domain/validator';
 import useFocusRef from '../../utils/useFocusRef';
 

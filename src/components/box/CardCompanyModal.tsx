@@ -1,7 +1,7 @@
 import type { CardType } from '../../types';
 import styled, { keyframes } from 'styled-components';
 
-import { useCardForm } from '../../context/cardForm';
+import { useCardForm } from '../../context/CardFormContext';
 import { CARD_COMPANY_OPTION_MATRIX } from '../../constants';
 
 interface Props {

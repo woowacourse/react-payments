@@ -6,7 +6,7 @@ import CardListPage from './components/page/CardListPage';
 import CardRegisterPage from './components/page/CardRegisterPage';
 import CardNamePage from './components/page/CardNamePage';
 
-import { CardFormProvider } from './context/cardForm';
+import { CardFormProvider } from './context/CardFormContext';
 
 function App() {
   const [currentPage, setCurrentPage] = useState<Page>(Page.list);

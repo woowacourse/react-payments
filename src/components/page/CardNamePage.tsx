@@ -5,7 +5,7 @@ import styled, { keyframes } from 'styled-components';
 import PageTemplate from '../template/PageTemplate';
 import Card from '../common/Card';
 
-import { useCardForm } from '../../context/cardForm';
+import { useCardForm } from '../../context/CardFormContext';
 import { pushList } from '../../utils/localStorageUtils';
 import { LOCAL_STORAGE_KEY } from '../../constants';
 
