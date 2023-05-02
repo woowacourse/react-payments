@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { ERROR_MESSAGE } from '../../../constants/errors';
 import { LABEL, MAX_LENGTH, SIZE_STYLE } from '../../../constants/inputInfo';
 import { InputInfo } from '../../../type/input';
+import { camelToSnake } from '../../../utils/cardInfoFormat';
 import { ErrorMessage, Label, Input } from '../../common';
 
 export interface InputBoxProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -14,7 +15,9 @@ export function InputBox({ id, inputs }: InputBoxProps) {
   return (
     <_InputContainer>
       <Label htmlFor={`${id}`}>
-        {String(id) in LABEL ? LABEL[`${id}`] : String(id)}
+        {camelToSnake(String(id)) in LABEL
+          ? LABEL[camelToSnake(String(id))]
+          : String(id)}
       </Label>
       <_InputWithErrorMessage>
         {inputs.map(
@@ -29,10 +32,12 @@ export function InputBox({ id, inputs }: InputBoxProps) {
                   value={value}
                   onChange={handleChange}
                   required={required}
-                  maxLength={MAX_LENGTH[`${id}`]}
-                  size={SIZE_STYLE[`${id}`]}
+                  maxLength={MAX_LENGTH[camelToSnake(String(id))]}
+                  size={SIZE_STYLE[camelToSnake(String(id))]}
                 />
-                <ErrorMessage>{isError && ERROR_MESSAGE[`${id}`]}</ErrorMessage>
+                <ErrorMessage>
+                  {isError && ERROR_MESSAGE[camelToSnake(String(id))]}
+                </ErrorMessage>
               </_InputWrapper>
             </React.Fragment>
           )
