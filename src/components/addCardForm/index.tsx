@@ -64,7 +64,7 @@ export const AddNewCardForm = () => {
 
   useEffect(() => {
     if (cardId === '') setCardId(v4());
-  }, [cardId, setCardId]);
+  }, [cardId]);
 
   return (
     <Style.Wrapper onSubmit={handleSubmitNewCardInfo}>
