@@ -1,30 +1,32 @@
 import { useEffect, useState } from "react";
 import { INPUT_STATUS } from "../type/InputStatus";
 
-const useMultipleInputStatus = (length: number) => {
-  const initialState = Object.assign(new Array(length).fill(INPUT_STATUS.NOT_COMPLETE));
+const getStateInitializer = (length: number) => () => (
+  new Array(length).fill(INPUT_STATUS.NOT_COMPLETE)
+);
 
-  const [states, setStates] = useState(initialState);
+const useMultipleInputStatus = (length: number) => {
+  const [states, setStates] = useState<INPUT_STATUS[]>(getStateInitializer(length));
   const [hasError, setHasError] = useState(false);
   const [isAllComplete, setIsAllComplete] = useState(false);
 
   const getSetStateFunction = (index: number) => (status: INPUT_STATUS) => {
-    const newStates = { ...states };
+    const newStates = [ ...states ];
     
-    if (newStates[index.toString()] === status) return;
+    if (newStates[index] === status) return;
 
-    newStates[index.toString()] = status;
+    newStates[index] = status;
 
     setStates(newStates);
   }
 
   useEffect(() => {
-    setHasError(Object.values(states).includes(INPUT_STATUS.ERROR));
+    setHasError(states.includes(INPUT_STATUS.ERROR));
   }, [states]);
 
   useEffect(() => {
     setIsAllComplete(
-      Object.values(states).every((status) => status === INPUT_STATUS.COMPLETE)
+      states.every((status) => status === INPUT_STATUS.COMPLETE)
     );
   }, [states]);
 
