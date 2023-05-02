@@ -22,7 +22,7 @@ export const MoveInputContainer = ({
     <Style.Wrapper>
       <Style.ButtonWrapper>
         {isLeftBtnShown && (
-          <Style.Button
+          <Style.MoveButtonImage
             src={`${process.env.PUBLIC_URL}/arrow-left.svg`}
             onClick={viewPreviousInput}
             alt="이전 입력창"
@@ -32,7 +32,7 @@ export const MoveInputContainer = ({
       {progress}
       <Style.ButtonWrapper>
         {isRightBtnShown && (
-          <Style.Button
+          <Style.MoveButtonImage
             src={
               isAllInputDone
                 ? `${process.env.PUBLIC_URL}/done.svg`
@@ -62,7 +62,7 @@ const Style = {
     width: 20px;
     height: 20px;
   `,
-  Button: styled.img`
+  MoveButtonImage: styled.img`
     width: 100%;
     height: 100%;
 
