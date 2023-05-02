@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { CardCompanySelectModal, CardRegisterForm } from '../components';
 import { Header, BackButton, CardPreview } from '../components/common';
-import { CardPreviewInfoProvider } from '../contexts/cardInfo';
+import { CardPreviewInfoProvider } from '../contexts/cardPreviewInfo';
 
 export function AddCard() {
   const [isModalOpen, setIsModalOpen] = useState(true);

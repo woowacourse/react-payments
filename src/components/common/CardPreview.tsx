@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import styled from 'styled-components';
 
 import { CARD_COMPANY } from '../../constants/cardCompany';
-import { CardPreviewInfoContext } from '../../contexts/cardInfo';
+import { CardPreviewInfoContext } from '../../contexts/cardPreviewInfo';
 
 export function CardPreview() {
   const { cardNumber, username, expiredDate, company } = useContext(
