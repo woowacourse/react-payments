@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import PasswordInput from '../pages/AddCard/components/PasswordInput';
 import useInput from '../hooks/useInput';
 import { APP_WIDTH } from '../utils/constants';
-import { isValidPassword } from '../pages/AddCard/domain/dispatcher';
+import { isValidPassword } from '../pages/AddCard/domain/validation';
 
 export default {
   title: 'AddCardPasswordInput',

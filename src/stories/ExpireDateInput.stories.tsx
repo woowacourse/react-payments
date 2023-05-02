@@ -6,7 +6,7 @@ import useInput from '../hooks/useInput';
 import {
   isValidExpiredMonthFormat,
   isValidExpiredYearFormat,
-} from '../pages/AddCard/domain/dispatcher';
+} from '../pages/AddCard/domain/validation';
 
 export default {
   title: 'AddCardExpireDateInput',

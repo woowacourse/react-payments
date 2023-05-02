@@ -17,7 +17,7 @@ import {
   isValidOwnerName,
   isValidPassword,
   isValidSecurityCode,
-} from './domain/dispatcher';
+} from './domain/validation';
 import './index.css';
 
 const AddCardPage = () => {

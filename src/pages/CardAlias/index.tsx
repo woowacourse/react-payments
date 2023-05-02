@@ -5,7 +5,7 @@ import Card from '../../components/Card';
 import useInput from '../../hooks/useInput';
 import { useCurrentCardContext } from '../../context/CurrentCardProvider';
 import { useIsAccessAliasPageContext } from '../../context/IsAccessAliasPageProvider';
-import { isValidCardAlias } from '../AddCard/domain/dispatcher';
+import { isValidCardAlias } from '../AddCard/domain/validation';
 import { fetchLocalStorage, getSerialNumber } from '../../utils/applicationUtil';
 import './index.css';
 

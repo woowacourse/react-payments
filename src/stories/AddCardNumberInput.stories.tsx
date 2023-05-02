@@ -2,7 +2,7 @@ import type { Meta } from '@storybook/react';
 
 import CardNumberInput from '../pages/AddCard/components/CardNumberInput';
 import { APP_WIDTH } from '../utils/constants';
-import { isValidCardNumber } from '../pages/AddCard/domain/dispatcher';
+import { isValidCardNumber } from '../pages/AddCard/domain/validation';
 import useInput from '../hooks/useInput';
 
 export default {

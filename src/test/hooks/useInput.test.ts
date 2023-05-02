@@ -7,7 +7,7 @@ import {
   isValidOwnerName,
   isValidPassword,
   isValidSecurityCode,
-} from '../../pages/AddCard/domain/dispatcher';
+} from '../../pages/AddCard/domain/validation';
 import { act } from 'react-dom/test-utils';
 import { mockEventTarget } from '../utils/util';
 
