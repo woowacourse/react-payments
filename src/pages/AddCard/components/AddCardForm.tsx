@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import type { AddCardFormProps, CardType } from '../../../type';
-import { sumbitCard } from '../../../utils/applicationUtil';
+import { postLocalStorage as submitCard } from '../../../utils/applicationUtil';
 import ExpireDateInput from './ExpireDateInput';
 import OwnerInput from './OwnerInput';
 import SecurityCodeInput from './SecurityCodeInput';
@@ -63,7 +63,7 @@ const AddCardForm = ({
       },
     };
     try {
-      sumbitCard(submitData);
+      submitCard(submitData);
       setCurrentCard(submitData);
       setIsAccessAliasPage(true);
       navigate('/alias');

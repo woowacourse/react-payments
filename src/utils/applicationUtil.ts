@@ -34,10 +34,6 @@ export const postLocalStorage = (data: Omit<CardType, 'id'>) => {
   localStorage.setItem('cardList', JSON.stringify(dataToArr));
 };
 
-export const sumbitCard = (card: Omit<CardType, 'id'>) => {
-  postLocalStorage(card);
-};
-
 export const fetchLocalStorage = (key: string, initial = '') => {
   return JSON.parse(localStorage.getItem('cardList') ?? initial);
 };
