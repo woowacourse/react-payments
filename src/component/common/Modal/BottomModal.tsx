@@ -10,17 +10,19 @@ export interface BottomModalProps extends PropsWithChildren {
 export default function BottomModal(props: BottomModalProps) {
   const { children, isOpen, setIsOpen } = props;
 
-  const escCloseHandler = (e: KeyboardEvent) => {
+  const closeWithEsc = (e: KeyboardEvent) => {
     if (e.key === 'Escape') setIsOpen(false);
   }
 
-  useEffect(() => {
+  const setCloseEventListener = () => {
     if (!isOpen) return;
 
-    window.addEventListener('keyup', escCloseHandler);
+    window.addEventListener('keyup', closeWithEsc);
 
-    return () => { window.removeEventListener('keyup', escCloseHandler) };
-  }, [isOpen])
+    return () => { window.removeEventListener('keyup', closeWithEsc) };
+  };
+
+  useEffect(setCloseEventListener, [isOpen]);
 
   return (
     <div className={`${style.modal} ${isOpen ? style.open : ''}`} aria-modal={isOpen}>
