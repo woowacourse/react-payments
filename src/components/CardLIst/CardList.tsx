@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { v4 as uuidv4 } from "uuid";
 import { Card } from "../../types";
 import CardPreview from "../CardPreview/CardPreview";
 import AddCardButton from "../AddCardButton/AddCardButton";
@@ -12,11 +13,10 @@ const CardList = ({ cards }: CardListProps) => {
     <Ul>
       {cards.map((card) => {
         const { cardName, cardCompany, cardNumber, ownerName, expirationDate } = card;
-        const { firstGroup, secondGroup, thirdGroup, fourthGroup } = cardNumber;
-        const key = `${firstGroup}${secondGroup}${thirdGroup}${fourthGroup}`;
+        const uuid = uuidv4();
 
         return (
-          <Li key={key}>
+          <Li key={uuid}>
             <CardPreview
               card={{ cardCompany, cardNumber, ownerName, expirationDate }}
               animation={{ transition: "all 0.3s ease", transform: "translate(3px, 3px)" }}
