@@ -1,5 +1,5 @@
 import { Fragment, ReactNode } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { useModalActionContext } from '../../../hooks/useModalContext';
 
 interface Props {
@@ -17,6 +17,17 @@ export const BottomSheet = ({ children }: Props) => {
   );
 };
 
+const ModalShowKeyframes = keyframes`
+from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
 const Style = {
   BackDrop: styled.div`
     width: 100vw;
@@ -28,7 +39,6 @@ const Style = {
 
     background-color: #0000006d;
   `,
-
   Content: styled.div`
     width: 100vw;
     height: max-content;
@@ -42,16 +52,6 @@ const Style = {
     padding: 20px 0;
     background-color: white;
 
-    animation: modal-show 0.4s;
-    @keyframes modal-show {
-      from {
-        opacity: 0;
-        transform: translateY(100%);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+    animation: ${ModalShowKeyframes} 0.4s;
   `,
 };
