@@ -107,8 +107,8 @@ export const PasswordInput = ({
       </Style.Wrapper>
       <ErrorMessage>{error ?? ''}</ErrorMessage>
       <MoveInputContainer
-        isLeftBtnShowed={true}
-        isRightBtnShowed={error === null}
+        isLeftBtnShown={true}
+        isRightBtnShown={error === null}
         viewPreviousInput={viewPreviousInput}
         viewNextInput={handleSubmitNewCardInfo}
         isAllInputDone={true}

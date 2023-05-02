@@ -125,8 +125,8 @@ export const ExpirationDateInput = ({
       </InputWrapper>
       <ErrorMessage>{error ?? ''}</ErrorMessage>
       <MoveInputContainer
-        isLeftBtnShowed={true}
-        isRightBtnShowed={error === null}
+        isLeftBtnShown={true}
+        isRightBtnShown={error === null}
         viewNextInput={viewNextInput}
         viewPreviousInput={viewPreviousInput}
         progress={'2/5'}

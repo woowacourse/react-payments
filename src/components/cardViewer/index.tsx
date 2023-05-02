@@ -29,10 +29,10 @@ export function CardViewer({
         {cardNumber.map((number, index) => (
           <Style.CardNumber
             key={v4()}
-            style={{
-              letterSpacing:
-                window.innerWidth < 768 ? (index > 1 ? '-7px' : '0px') : '0px',
-            }}
+            // style={{
+            //   letterSpacing:
+            //     window.innerWidth < 768 ? (index > 1 ? '-7px' : '0px') : '0px',
+            // }}
           >
             {index < 2 ? number : '•'.repeat(number.length)}
           </Style.CardNumber>
