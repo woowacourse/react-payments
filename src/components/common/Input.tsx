@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+import { isNumberValue } from '../../domain/validator';
 
 type TextType = 'string' | 'number';
 type TextAlign = 'left' | 'center';
@@ -26,16 +27,16 @@ const Input = (props: Props) => {
     }, 400);
   };
 
-  const onChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-    if (textType === 'number' && isNaN(Number(target.value))) {
+  const onChange = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {
+    if (textType === 'number' && !isNumberValue(value)) {
       riseWarning();
       return;
     }
 
-    setValue(target.value);
+    setValue(value);
 
     if (!focus) return;
-    if (target.value.length === length) focus(1);
+    if (value.length === length) focus(1);
   };
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {

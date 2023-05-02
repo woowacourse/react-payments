@@ -1,6 +1,10 @@
 import { CardType } from '../types';
 import { EXPIRE_DATE_VALID_MESSAGE } from '../constants';
 
+export const isNumberValue = (value: string) => {
+  return value.split('').every((char) => '0123456789'.includes(char));
+};
+
 export const validExpireDate = (expireDate: CardType['expireDate']) => {
   if (expireDate.join('') === '') return;
 
