@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
 import CardListPage from './components/pages/CardListPage';
@@ -7,42 +7,20 @@ import NotFoundPage from './components/pages/NotFoundPage';
 import BankList from './components/BottomSheetComponents/BankList';
 import CardAdditionCompletionPage from './components/pages/CardAdditionCompletionPage';
 import { useBottomSheet } from './hooks/useBottomSheet';
+import { useChangeForm } from './hooks/useChangeForm';
 import { CardContext } from './context/CardContext';
 import type { CardItemInfo } from './types/Card';
 
 function App() {
   const { isBottomSheetOpen, handleBottomSheetOpen, handleBottomSheetClose } =
     useBottomSheet();
+  const { handleChangeForm } = useChangeForm();
 
-  const { bankName, cardName, setCard, setCardList } = useContext(CardContext);
+  const { setCardList } = useContext(CardContext);
 
   const updateCardList = (cardItem: CardItemInfo) => {
     setCardList((prevCardList) => [cardItem, ...prevCardList]);
   };
-
-  const handleChangeForm = (
-    cardNumber: string[],
-    expirationDate: string[],
-    name: string
-  ) => {
-    const updatedCard = {
-      id: Date.now(),
-      cardNumber,
-      expirationDate,
-      name,
-      bankName,
-      cardName,
-    };
-    setCard(updatedCard);
-  };
-
-  useEffect(() => {
-    setCard((prevState) => ({
-      ...prevState,
-      bankName,
-      cardName,
-    }));
-  }, [bankName, cardName]);
 
   return (
     <AppContainer className='App'>
