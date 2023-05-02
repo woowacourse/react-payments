@@ -11,8 +11,8 @@ interface Props {
 }
 
 export const MoveInputContainer = ({
-  isLeftBtnShowed,
-  isRightBtnShowed,
+  isLeftBtnShown,
+  isRightBtnShown,
   viewNextInput,
   viewPreviousInput,
   isAllInputDone,
@@ -21,7 +21,7 @@ export const MoveInputContainer = ({
   return (
     <Style.Wrapper>
       <Style.ButtonWrapper>
-        {isLeftBtnShowed && (
+        {isLeftBtnShown && (
           <Style.Button
             src={`${process.env.PUBLIC_URL}/arrow-left.svg`}
             onClick={viewPreviousInput}
@@ -31,7 +31,7 @@ export const MoveInputContainer = ({
       </Style.ButtonWrapper>
       {progress}
       <Style.ButtonWrapper>
-        {isRightBtnShowed && (
+        {isRightBtnShown && (
           <Style.Button
             src={
               isAllInputDone
