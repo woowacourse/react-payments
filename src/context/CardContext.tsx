@@ -1,6 +1,6 @@
 import { createContext, useState } from 'react';
-import type { CardItemInfo } from '../types/Card';
 import { cardLocalStorage } from '../components/domain/CardLocalStorage';
+import type { CardItemInfo } from '../types/Card';
 
 interface CardProviderProps {
   children: React.ReactNode;
