@@ -11,7 +11,10 @@ const GlobalStyles = createGlobalStyle`
 
 	body {
 		width: 100vw;
-		height: 100vh;
+		min-height: 100vh;
+		@supports (-webkit-touch-callout: none) {
+    	min-height: -webkit-fill-available;
+		}
 
 		font-family: "Roboto", sans-serif;
 
