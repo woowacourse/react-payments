@@ -11,13 +11,18 @@ function App() {
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <CardInfoProvider>
         <CardListProvider>
-          <ModalProvider>
-            <Routes>
-              <Route path="/" element={<Main />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/register/nickname" element={<AddCardNickName />} />
-            </Routes>
-          </ModalProvider>
+          <Routes>
+            <Route path="/" element={<Main />} />
+            <Route
+              path="/register"
+              element={
+                <ModalProvider>
+                  <Register />
+                </ModalProvider>
+              }
+            />
+            <Route path="/register/nickname" element={<AddCardNickName />} />
+          </Routes>
         </CardListProvider>
       </CardInfoProvider>
     </BrowserRouter>
