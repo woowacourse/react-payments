@@ -6,7 +6,7 @@ export interface InputInfo {
   value: string;
   type: string;
   isError: boolean;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void | undefined;
+  handleChange?: (e: React.ChangeEvent<HTMLInputElement>) => void | undefined;
   required?: boolean;
 }
 

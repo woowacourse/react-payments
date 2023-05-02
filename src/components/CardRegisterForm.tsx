@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 import { InputBox } from './common';
 import { useCardRegisterForm } from '../hooks/useCardRegisterForm';
-import { Card, CardInfoOption } from '../type/card';
-import { InputInfo } from '../type/input';
+import { Card } from '../type/card';
+import { isCardInfoOption } from '../utils/checkType';
 
 export function CardRegisterForm() {
   const naviagte = useNavigate();
@@ -18,12 +18,20 @@ export function CardRegisterForm() {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const submittedCardInfo = {} as unknown as Card;
+    const submittedCardInfo: Card = {
+      card_number: '',
+      expired_date: '',
+      code: '',
+      password: '',
+      company: '',
+    };
 
     for (const [key, inputs] of Object.entries(cardRegisterForm)) {
-      submittedCardInfo[key as CardInfoOption] = Object.values(inputs)
-        .map((input) => input.value)
-        .join('');
+      if (isCardInfoOption(key, submittedCardInfo)) {
+        submittedCardInfo[key] = Object.values(inputs)
+          .map((input) => input.value)
+          .join('');
+      }
     }
 
     if (company.clicked.value) {
@@ -43,11 +51,7 @@ export function CardRegisterForm() {
   return (
     <_Form onSubmit={handleSubmit}>
       {Object.entries(cardRegisterForm).map(([key, inputs], index) => (
-        <InputBox
-          key={index}
-          id={key}
-          inputs={Object.values(inputs) as unknown as InputInfo[]}
-        />
+        <InputBox key={index} id={key} inputs={Object.values(inputs)} />
       ))}
       {isRequiredInputValid && isOptionalInputValid && (
         <_ButtonWrapper>

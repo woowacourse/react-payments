@@ -6,11 +6,19 @@ import { InputInfo } from '../type/input';
 import { checkInputValdiation } from '../utils/checkInputValidation';
 import { cardRegisterValidator } from '../validation/cardRegister';
 
+type InputsType = {
+  [key: string]: InputInfo;
+};
+
+type AllInputsType = {
+  [key: string]: InputsType;
+};
+
 export function useCardRegisterForm() {
   const previewInfo = useContext(CardPreviewInfoContext);
   const { company, ...previewInfoWithForm } = previewInfo;
 
-  const cardRegisterForm = {
+  const cardRegisterForm: AllInputsType = {
     ...previewInfoWithForm,
     code: {
       first: {
@@ -30,16 +38,15 @@ export function useCardRegisterForm() {
     },
   };
 
-  const allInputs = [];
+  const allInputs: InputInfo[] = [];
 
   for (const [_, cardInfos] of Object.entries(cardRegisterForm)) {
     const inputs = Object.values(cardInfos);
     allInputs.push(...inputs);
   }
 
-  const { isRequiredInputValid, isOptionalInputValid } = checkInputValdiation(
-    allInputs as InputInfo[]
-  );
+  const { isRequiredInputValid, isOptionalInputValid } =
+    checkInputValdiation(allInputs);
   return {
     cardRegisterForm,
     company,
