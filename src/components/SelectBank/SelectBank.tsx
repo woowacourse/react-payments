@@ -21,12 +21,12 @@ const SelectBank = ({ closeModal }: Props) => {
   return (
     <styled.SelectBank>
       <styled.Banks>
-        {Object.keys(BANKS).map((key) => (
+        {Object.entries(BANKS).map(([key, bank]) => (
           <styled.Bank key={key} id={key} onClick={onClick}>
             <styled.Icon>
-              <img src={BANKS[key].logo} alt={`${BANKS[key].name}_logo`} />
+              <img src={bank.logo} alt={`${bank.name}_logo`} />
             </styled.Icon>
-            <styled.Name>{BANKS[key].name}</styled.Name>
+            <styled.Name>{bank.name}</styled.Name>
           </styled.Bank>
         ))}
       </styled.Banks>
