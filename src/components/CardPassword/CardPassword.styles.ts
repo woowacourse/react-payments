@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 4px;
 `;
 
 export const PasswordInputWrapper = styled.div`
@@ -28,4 +28,10 @@ export const Paragraph = styled.p`
   &:last-child {
     margin-right: 0;
   }
+`;
+
+export const ErrorTextWrapper = styled.p`
+  height: 18px;
+  font-size: 14px;
+  color: red;
 `;

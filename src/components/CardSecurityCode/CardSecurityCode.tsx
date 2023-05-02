@@ -15,13 +15,18 @@ const CardSecurityCode = ({
 }: SecurityCodeProps) => {
   const cardRefs = useContext(RefContext);
   const [isShowToolTip, setIsShowToolTip] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!(e.target instanceof HTMLInputElement)) return;
     const currentOrder = Number(e.target.dataset['order']);
 
-    if (!isSetSecurityCode(e.target.value)) return;
+    if (!isSetSecurityCode(e.target.value)) {
+      setErrorMessage('보안 코드는 세 자리의 숫자로만 입력해주세요.');
+      return;
+    }
 
+    setErrorMessage('');
     focusNextInput(currentOrder);
   };
 
@@ -67,6 +72,7 @@ const CardSecurityCode = ({
           </Styled.QuestionButton>
         )}
       </Styled.Wrapper>
+      <Styled.ErrorTextWrapper>{errorMessage}</Styled.ErrorTextWrapper>
     </>
   );
 };

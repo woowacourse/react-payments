@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import CardInput from '../@common/CardInput';
 import CardLabel from '../@common/CardLabel';
 import * as Styled from './CardOwnerName.styles';
@@ -11,11 +11,19 @@ interface CardOwnerNameProps {
 
 const CardOwnerName = ({ ownerName, isSetOwnerName }: CardOwnerNameProps) => {
   const cardRefs = useContext(RefContext);
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!(e.target instanceof HTMLInputElement)) return;
 
-    if (!isSetOwnerName(e.target.value.toUpperCase())) return;
+    if (!isSetOwnerName(e.target.value.toUpperCase())) {
+      setErrorMessage(
+        '카드 소유자명은 30자 이내의 대문자 영문으로만 입력해주세요.'
+      );
+      return;
+    }
+
+    setErrorMessage('');
   };
 
   return (
@@ -37,6 +45,7 @@ const CardOwnerName = ({ ownerName, isSetOwnerName }: CardOwnerNameProps) => {
           placeholder="카드에 표시된 영어 이름을 입력하세요."
         />
       </Styled.Wrapper>
+      <Styled.ErrorTextWrapper>{errorMessage}</Styled.ErrorTextWrapper>
     </>
   );
 };

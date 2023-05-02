@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
   align-items: center;
   background: #ecebf1;
   border-radius: 7px;
-  margin-bottom: 20px;
+  margin-bottom: 4px;
 
   & > * {
     width: 100%;
@@ -15,4 +15,10 @@ export const Wrapper = styled.div`
 
 export const Paragraph = styled.p`
   width: 32px;
+`;
+
+export const ErrorTextWrapper = styled.p`
+  height: 18px;
+  font-size: 14px;
+  color: red;
 `;

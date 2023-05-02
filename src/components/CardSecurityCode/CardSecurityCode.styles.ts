@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 4px;
 `;
 
 export const QuestionButton = styled.button`
@@ -36,4 +36,10 @@ export const ToolTip = styled.p`
   padding: 8px;
   font-size: 13px;
   cursor: pointer;
+`;
+
+export const ErrorTextWrapper = styled.p`
+  height: 18px;
+  font-size: 14px;
+  color: red;
 `;

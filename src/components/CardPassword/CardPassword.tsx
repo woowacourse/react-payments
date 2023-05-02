@@ -1,6 +1,6 @@
 import CardInput from '../@common/CardInput';
 import CardLabel from '../@common/CardLabel';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import * as Styled from './CardPassword.styles';
 import { RefContext } from '../../contexts/RefProvider';
 interface CardPasswordProps {
@@ -10,12 +10,17 @@ interface CardPasswordProps {
 
 const CardPassword = ({ passwords, isSetPasswords }: CardPasswordProps) => {
   const cardRefs = useContext(RefContext);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const currentOrder = Number(e.target.dataset['order']);
 
-    isSetPasswords(currentOrder - 8, e.target.value);
+    if (!isSetPasswords(currentOrder - 8, e.target.value)) {
+      setErrorMessage('카드 비밀번호 앞 두 자리를 숫자로 입력해주세요.');
+      return;
+    }
 
+    setErrorMessage('');
     focusNextInput(currentOrder);
   };
 
@@ -56,6 +61,7 @@ const CardPassword = ({ passwords, isSetPasswords }: CardPasswordProps) => {
         <Styled.Paragraph>•</Styled.Paragraph>
         <Styled.Paragraph>•</Styled.Paragraph>
       </Styled.Wrapper>
+      <Styled.ErrorTextWrapper>{errorMessage}</Styled.ErrorTextWrapper>
     </>
   );
 };
