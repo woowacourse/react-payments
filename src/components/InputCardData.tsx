@@ -6,6 +6,7 @@ import './InputCardData.css';
 const InputCardData = ({
   required,
   inputType,
+  placeholder,
   inputMode,
   passwordType,
   className,
@@ -26,6 +27,7 @@ const InputCardData = ({
       className={`input-password-container ${passwordType}`}
       type="password"
       value={value}
+      placeholder={placeholder}
       inputMode={inputMode}
       maxLength={maxDataLength}
       minLength={minDataLength}
@@ -44,6 +46,7 @@ const InputCardData = ({
     <input
       className={`input-box ${className}`}
       value={value}
+      placeholder={placeholder}
       type={inputType}
       inputMode={inputMode}
       maxLength={maxDataLength}
