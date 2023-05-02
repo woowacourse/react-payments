@@ -6,17 +6,11 @@ import Title from '../common/Title';
 import Input from '../common/Input';
 import { cardLocalStorage } from '../domain/CardLocalStorage';
 import { CardContext } from '../../context/CardContext';
-import type { CardItemInfo } from '../../types/Card';
 
-interface CardAdditionCompletionPageProps {
-  onUpdateCardList(card: CardItemInfo): void;
-}
-
-const CardAdditionCompletionPage = ({
-  onUpdateCardList,
-}: CardAdditionCompletionPageProps) => {
+const CardAdditionCompletionPage = () => {
   const navigate = useNavigate();
-  const { card, cardName, setCardName } = useContext(CardContext);
+  const { card, cardName, setCardName, updateCardList } =
+    useContext(CardContext);
 
   if (!card) {
     return (
@@ -29,7 +23,7 @@ const CardAdditionCompletionPage = ({
   const handleComplete = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setCardName((event.target as HTMLInputElement).value);
-    onUpdateCardList(card);
+    updateCardList(card);
     cardLocalStorage.addCard(card);
     navigate('/');
   };

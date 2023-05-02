@@ -1,5 +1,5 @@
 import { createContext, useState } from 'react';
-import { cardLocalStorage } from '../components/domain/CardLocalStorage';
+import { useCardList } from '../hooks/useCardList';
 import type { CardItemInfo } from '../types/Card';
 
 interface CardProviderProps {
@@ -11,10 +11,10 @@ interface CardContextType {
   setCardName: React.Dispatch<React.SetStateAction<string>>;
   bankName: string;
   setBankName: React.Dispatch<React.SetStateAction<string>>;
-  cardList: CardItemInfo[];
-  setCardList: React.Dispatch<React.SetStateAction<CardItemInfo[]>>;
   card: CardItemInfo;
   setCard: React.Dispatch<React.SetStateAction<CardItemInfo>>;
+  cardList: CardItemInfo[];
+  updateCardList: (cardItem: CardItemInfo) => void;
 }
 
 const INIT_STATE = {
@@ -31,19 +31,18 @@ export const CardContext = createContext<CardContextType>({
   setCardName: () => {},
   bankName: '',
   setBankName: () => {},
-  cardList: [],
-  setCardList: () => {},
   card: INIT_STATE,
   setCard: () => {},
+  cardList: [],
+  updateCardList: () => {},
 });
 
 export const CardContextProvider = ({ children }: CardProviderProps) => {
   const [cardName, setCardName] = useState('');
   const [bankName, setBankName] = useState('기타 은행');
-  const [cardList, setCardList] = useState<CardItemInfo[]>(
-    cardLocalStorage.getCardList() || []
-  );
   const [card, setCard] = useState<CardItemInfo>(INIT_STATE);
+
+  const { cardList, updateCardList } = useCardList();
 
   return (
     <CardContext.Provider
@@ -53,7 +52,7 @@ export const CardContextProvider = ({ children }: CardProviderProps) => {
         bankName,
         setBankName,
         cardList,
-        setCardList,
+        updateCardList,
         card,
         setCard,
       }}
