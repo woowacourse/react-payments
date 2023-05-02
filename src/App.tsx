@@ -6,7 +6,6 @@ import AddCard from './pages/AddCard';
 import CardType from './types/Card';
 import { getLocalStorage, setLocalStorage } from './utils/handleLocalStorage';
 import AddCardAlias from './pages/AddCardAlias';
-import RefProvider from './contexts/RefProvider';
 
 const initCards = () => {
   const localStorageCards = getLocalStorage('cards');
@@ -23,20 +22,18 @@ function App() {
 
   return (
     <Router basename={process.env.PUBLIC_URL}>
-      <RefProvider>
-        <GlobalStyle />
-        <Routes>
-          <Route path="/" element={<Home cards={cards} />} />
-          <Route
-            path="/add-card"
-            element={<AddCard cards={cards} setCards={setCards} />}
-          />
-          <Route
-            path="/add-card-alias"
-            element={<AddCardAlias cards={cards} setCards={setCards} />}
-          />
-        </Routes>
-      </RefProvider>
+      <GlobalStyle />
+      <Routes>
+        <Route path="/" element={<Home cards={cards} />} />
+        <Route
+          path="/add-card"
+          element={<AddCard cards={cards} setCards={setCards} />}
+        />
+        <Route
+          path="/add-card-alias"
+          element={<AddCardAlias cards={cards} setCards={setCards} />}
+        />
+      </Routes>
     </Router>
   );
 }

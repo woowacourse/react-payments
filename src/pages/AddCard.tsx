@@ -14,6 +14,7 @@ import CardLabel from '../components/@common/CardLabel';
 import * as Styled from './AddCard.styles';
 import SubmitButton from '../components/@common/SubmitButton';
 import CardList from '../types/CardList';
+import RefProvider from '../contexts/RefProvider';
 
 const AddCard = ({ cards, setCards }: CardList) => {
   const {
@@ -53,7 +54,7 @@ const AddCard = ({ cards, setCards }: CardList) => {
   }, []);
 
   return (
-    <>
+    <RefProvider>
       <Styled.PageWrapper>
         <Header page="add-card" titleContent="&lt; &nbsp; 카드 추가" />
         <form onSubmit={handleSetCards}>
@@ -107,7 +108,7 @@ const AddCard = ({ cards, setCards }: CardList) => {
           setCardCompany={setCardCompany}
         />
       )}
-    </>
+    </RefProvider>
   );
 };
 
