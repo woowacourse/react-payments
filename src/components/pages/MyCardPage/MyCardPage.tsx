@@ -5,8 +5,6 @@ import * as styled from './MyCardPage.styled';
 
 import { Header, Card } from '../../';
 
-import { CardInfo } from '../../../types/card';
-
 const MyCardPage = () => {
   const navigation = useNavigate();
 
@@ -20,7 +18,7 @@ const MyCardPage = () => {
         <styled.ButtonIcon>+</styled.ButtonIcon>
       </styled.CardRegisterButton>
       <styled.CardList>
-        {cardList?.map((cardInfo: CardInfo) => (
+        {cardList.map((cardInfo) => (
           <div key={cardInfo.id}>
             <Card cardInfo={cardInfo} />
             <styled.Nickname>{cardInfo.nickname}</styled.Nickname>
