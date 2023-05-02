@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { ReactNode } from "react";
 import styled from "styled-components";
-import { Context } from "../../context";
+import { ModalDispatchContext, ModalStateContext } from "../../context";
 import { slideBottomToUp, slideUpToBottom } from "../../style/keyframe";
 
 interface BottomSheetType {
@@ -9,7 +9,8 @@ interface BottomSheetType {
 }
 
 const BottomSheet = (props: BottomSheetType) => {
-  const { isModalOpen, toggleModal } = useContext(Context);
+  const { isModalOpen } = useContext(ModalStateContext);
+  const { toggleModal } = useContext(ModalDispatchContext);
 
   return (
     <>

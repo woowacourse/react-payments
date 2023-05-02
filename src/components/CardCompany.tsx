@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import styled from "styled-components";
 import { CARD_COMPANY } from "../constants";
-import { ModalContext } from "../context";
+import { ModalDispatchContext } from "../context";
 import { CardType } from "../types";
 
 interface CardCompanyType {
@@ -9,7 +9,7 @@ interface CardCompanyType {
 }
 
 const CardCompany = ({ onChange }: CardCompanyType) => {
-  const { toggleModal } = useContext(ModalContext);
+  const { toggleModal } = useContext(ModalDispatchContext);
 
   const handleCardCompanyClicked =
     (companyName: CardType["cardCompany"]) => () => {

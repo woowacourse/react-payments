@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ModalContext } from "../context";
+import { ModalDispatchContext } from "../context";
 import { ROUTER_PATH } from "../router/path";
 import type { CardType } from "../types";
 import { getLocalStorage, setLocalStorage, getEmptyCard } from "../utils";
@@ -16,7 +16,7 @@ import {
 const AddCard = () => {
   const navigate = useNavigate();
   const [newCard, setNewCard] = useState<CardType>(getEmptyCard());
-  const { toggleModal } = useContext(ModalContext);
+  const { toggleModal } = useContext(ModalDispatchContext);
 
   useEffect(() => {
     toggleModal();
