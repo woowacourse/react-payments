@@ -1,22 +1,19 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, SetStateAction } from 'react';
 import { createPortal } from 'react-dom';
-import { useNavigate } from 'react-router-dom';
 
-import { CardNumber, CardType, InputHook } from '../type';
-import { LOCATION } from '../utils/constants';
-import { fetchNewCardData } from '../utils/fetchData';
+import { CardNumber, InputHook } from '../type';
 import Card from './Card';
 import './CardNicknameInputModal.css';
 
 type CardNicknameInputModalProps = {
-  closeModal: React.Dispatch<React.SetStateAction<boolean>>;
   cardType: string;
   cardNumber: InputHook<CardNumber>;
   cardExpire: InputHook<string>;
   cardOwner: InputHook<string>;
   securityCode: InputHook<string>;
-  cardPasswordFirstDigit: InputHook<string>;
-  cardPasswordSecondDigit: InputHook<string>;
+  closeModal: React.Dispatch<React.SetStateAction<boolean>>;
+  handleNickname: React.Dispatch<SetStateAction<string>>;
+  submitData: (e: React.FormEvent) => void;
 };
 
 const CardNicknameInputModal = ({
@@ -26,44 +23,9 @@ const CardNicknameInputModal = ({
   cardExpire,
   cardOwner,
   securityCode,
-  cardPasswordFirstDigit,
-  cardPasswordSecondDigit,
+  handleNickname,
+  submitData,
 }: CardNicknameInputModalProps) => {
-  const navigate = useNavigate();
-  const [cardNickName, setCardNickName] = useState('');
-
-  const onSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const { first, second, third, fourth } = cardNumber.value;
-
-    const postData: Omit<CardType, 'id'> = {
-      cardNickName,
-      cardType,
-      cardNumber: {
-        first,
-        second,
-        third,
-        fourth,
-      },
-      cardOwner: cardOwner.value,
-      expired: cardExpire.value,
-      securityCode: securityCode.value,
-      cardPassword: {
-        first: cardPasswordFirstDigit.value,
-        second: cardPasswordSecondDigit.value,
-      },
-    };
-    if (!fetchNewCardData(postData)) {
-      alert('이미 등록된 카드입니다.');
-      return;
-    }
-    navigate(LOCATION.CARD_LIST_PAGE);
-  };
-
-  const handleNickname = (e: ChangeEvent<HTMLInputElement>) => {
-    setCardNickName(e.target.value);
-  };
-
   return createPortal(
     <>
       <div
@@ -83,9 +45,11 @@ const CardNicknameInputModal = ({
             securityCode={securityCode.value}
           />
         </div>
-        <form onSubmit={onSubmit}>
+        <form onSubmit={submitData}>
           <input
-            onChange={handleNickname}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              handleNickname(e.target.value);
+            }}
             className="nickname-input"
             placeholder="카드 닉네임을 입력해주세요!"
             autoFocus

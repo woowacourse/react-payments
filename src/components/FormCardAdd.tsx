@@ -1,7 +1,10 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 
-import { FormCardAddProps } from '../type';
-import { CVC_TOOLTIP_DETAIL, CVC_TOOLTIP_TITLE } from '../utils/constants';
+import { CardType, FormCardAddProps } from '../type';
+import { CVC_TOOLTIP_DETAIL, CVC_TOOLTIP_TITLE, LOCATION } from '../utils/constants';
+import { fetchNewCardData } from '../utils/fetchData';
 import Tooltip from './CVCTooltip';
 import CardNicknameInputModal from './CardNicknameInputModal';
 import './FormCardAdd.css';
@@ -21,6 +24,38 @@ const FormCardAdd = ({
   const [readyToPending, setReadyToPending] = useState(false);
   const [nicknameModalOpen, setNicknameModalOpen] = useState(false);
   const [fulfilledData, setFulFilledData] = useState(Array.from({ length: 9 }, () => false));
+
+  const navigate = useNavigate();
+  const [cardNickName, setCardNickName] = useState('');
+
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const { first, second, third, fourth } = cardNumber.value;
+    const id = uuidv4();
+    const postData: CardType = {
+      id,
+      cardNickName,
+      cardType,
+      cardNumber: {
+        first,
+        second,
+        third,
+        fourth,
+      },
+      cardOwner: cardOwner.value,
+      expired: cardExpire.value,
+      securityCode: securityCode.value,
+      cardPassword: {
+        first: cardPasswordFirstDigit.value,
+        second: cardPasswordSecondDigit.value,
+      },
+    };
+    if (!fetchNewCardData(postData)) {
+      alert('이미 등록된 카드입니다.');
+      return;
+    }
+    navigate(LOCATION.CARD_LIST_PAGE);
+  };
 
   const handleExpireError = (element: ChangeEvent<HTMLInputElement>) => {
     const data = element.target.value;
@@ -297,7 +332,7 @@ const FormCardAdd = ({
             <span className="passwordDot">ㆍ</span>
           </div>
         </div>
-        <div className="add-card-submit ">
+        <div className="add-card-submit">
           {readyToPending && !inputError ? <button type="submit">다음</button> : ''}
         </div>
       </form>
@@ -309,8 +344,8 @@ const FormCardAdd = ({
           cardExpire={cardExpire}
           cardOwner={cardOwner}
           securityCode={securityCode}
-          cardPasswordFirstDigit={cardPasswordFirstDigit}
-          cardPasswordSecondDigit={cardPasswordSecondDigit}
+          handleNickname={setCardNickName}
+          submitData={onSubmit}
         />
       ) : (
         ''

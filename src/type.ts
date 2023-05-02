@@ -1,4 +1,4 @@
-import { ChangeEvent, RefObject } from 'react';
+import { ChangeEvent } from 'react';
 
 export type CardNumber = {
   first: string;
@@ -12,7 +12,7 @@ export type CardPassword = {
   second: string;
 };
 export type CardType = {
-  id: number;
+  id: string;
   cardType: string;
   cardNumber: CardNumber;
   cardOwner: string;

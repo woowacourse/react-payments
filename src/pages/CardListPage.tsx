@@ -31,9 +31,8 @@ const CardListPage = () => {
             <span className="empty-card-list-title">새로운 카드를 등록해주세요.</span>
           ) : (
             mainCardListData.map((card: CardType) => (
-              <div className="card-data-item">
+              <div className="card-data-item" key={card.id}>
                 <Card
-                  key={card.id}
                   cardType={card.cardType}
                   cardNumber={card.cardNumber}
                   cardOwner={card.cardOwner}
