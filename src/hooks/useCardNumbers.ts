@@ -8,15 +8,27 @@ const useCardNumbers = () => {
     '',
     '',
   ]);
+  const [cardNumbersError, setCardNumbersError] = useState<string>('');
 
-  const isSetCardNumbers = (order: number, value: string) => {
-    if (REG_EXP.cardNumberLimit.test(value)) return false;
+  const handleCardNumbers = (order: number, value: string) => {
+    if (REG_EXP.cardNumberLimit.test(value)) {
+      setError('숫자로만 카드 번호를 입력해주세요.');
+      return;
+    }
 
-    setCardNumbers({ ...cardNumbers, [order]: value });
-    return true;
+    setError('');
+    setSate(order, value);
   };
 
-  return { cardNumbers, isSetCardNumbers };
+  const setSate = (order: number, value: string) => {
+    setCardNumbers({ ...cardNumbers, [order]: value });
+  };
+
+  const setError = (message: string) => {
+    setCardNumbersError(message);
+  };
+
+  return { cardNumbers, cardNumbersError, handleCardNumbers };
 };
 
 export default useCardNumbers;

@@ -19,7 +19,8 @@ import RefProvider from '../contexts/RefProvider';
 const AddCard = ({ cards, setCards }: CardList) => {
   const {
     cardNumbers,
-    isSetCardNumbers,
+    cardNumbersError,
+    handleCardNumbers,
     expiredDates,
     expiredDatesError,
     handleExpiredDates,
@@ -87,7 +88,8 @@ const AddCard = ({ cards, setCards }: CardList) => {
           </Styled.CardWrapper>
           <CardNumbers
             cardNumbers={cardNumbers}
-            isSetCardNumbers={isSetCardNumbers}
+            errorMessage={cardNumbersError}
+            handleCardNumbers={handleCardNumbers}
           />
           <CardExpiredDate
             expiredDates={expiredDates}

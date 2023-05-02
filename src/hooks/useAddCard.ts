@@ -12,7 +12,7 @@ import useSecurityCode from './useSecurityCode';
 import usePassword from './usePassword';
 
 const useAddCard = () => {
-  const { cardNumbers, isSetCardNumbers } = useCardNumbers();
+  const { cardNumbers, cardNumbersError, handleCardNumbers } = useCardNumbers();
   const { expiredDates, expiredDatesError, handleExpiredDates } =
     useExpiredDates();
   const { ownerName, isSetOwnerName } = useOwnerName();
@@ -37,7 +37,8 @@ const useAddCard = () => {
 
   return {
     cardNumbers,
-    isSetCardNumbers,
+    cardNumbersError,
+    handleCardNumbers,
     expiredDates,
     expiredDatesError,
     handleExpiredDates,

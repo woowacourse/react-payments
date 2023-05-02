@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import * as Styled from './CardNumbers.styles';
 import CardInput from '../@common/CardInput';
 import CardLabel from '../@common/CardLabel';
@@ -6,23 +6,23 @@ import { RefContext } from '../../contexts/RefProvider';
 
 interface CardNumbersProps {
   cardNumbers: Array<string>;
-  isSetCardNumbers: (order: number, value: string) => boolean;
+  errorMessage: string;
+  handleCardNumbers: (order: number, value: string) => void;
 }
 
-const CardNumbers = ({ cardNumbers, isSetCardNumbers }: CardNumbersProps) => {
+const CardNumbers = ({
+  cardNumbers,
+  errorMessage,
+  handleCardNumbers,
+}: CardNumbersProps) => {
   const cardRefs = useContext(RefContext);
-  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!(e.target instanceof HTMLInputElement)) return;
     const currentOrder = Number(e.target.dataset['order']);
 
-    if (!isSetCardNumbers(currentOrder, e.target.value)) {
-      setErrorMessage('숫자로만 카드 번호를 입력해주세요.');
-      return;
-    }
+    handleCardNumbers(currentOrder, e.target.value);
 
-    setErrorMessage('');
     focusNextInput(currentOrder);
   };
 
