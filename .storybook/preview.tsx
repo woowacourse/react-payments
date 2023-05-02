@@ -1,5 +1,7 @@
 import React from "react";
 import { MemoryRouter } from "react-router";
+import { withThemeFromJSXProvider } from "@storybook/addon-styling";
+import GlobalStyle from "../src/styles/GlobalStyle";
 import type { Preview } from "@storybook/react";
 
 const customViewports = {
@@ -36,4 +38,6 @@ export const decorators = [
       <Story />
     </MemoryRouter>
   ),
+
+  withThemeFromJSXProvider({ GlobalStyles: GlobalStyle }),
 ];

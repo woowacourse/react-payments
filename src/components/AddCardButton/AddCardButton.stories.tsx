@@ -1,4 +1,3 @@
-import GlobalStyle from "../../styles/GlobalStyle";
 import AddCardButton from "./AddCardButton";
 
 export default {
@@ -6,9 +5,4 @@ export default {
   component: AddCardButton,
 };
 
-export const CardListPage = () => (
-  <>
-    <GlobalStyle />
-    <AddCardButton></AddCardButton>
-  </>
-);
+export const Default = () => <AddCardButton />;

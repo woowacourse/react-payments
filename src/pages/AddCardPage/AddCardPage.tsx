@@ -5,19 +5,26 @@ import CardOwnerNameInput from "../../components/CardOwnerNameInput/CardOwnerNam
 import CardExpirationDateInput from "../../components/CardExpirationDateInput/CardExpirationDateInput";
 import CardSecurityCodeInput from "../../components/CardSecurityCodeInput/CardSecurityCodeInput";
 import CardPasswordInput from "../../components/CardPasswordInput/CardPasswordInput";
+import Modal from "../../components/common/Modal/Modal";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import { Container } from "../../components/common";
 import { useState } from "react";
-import { Card, CardExpirationDate, CardNumber, CardPassword } from "../../types";
+import {
+  Card,
+  CardCompany,
+  CardExpirationDate,
+  CardExpirationDateKey,
+  CardNumber,
+  CardNumberGroups,
+  CardPassword,
+  CardPasswordKey,
+} from "../../types";
 import { useNavigate } from "react-router-dom";
-import { isAlphabetic, isNumeric, isFulfilledObject, isFulfilledString, isValidMonth } from "../../validator/Validator";
+import { isFulfilledObject, isFulfilledString, isValidMonth } from "../../validator/Validator";
+import useModal from "../../hooks/useModal";
+import CardCompanyButtonList from "../../components/CardCompanyButtonList/CardCompanyButtonList";
 
-type AddCardPageProps = {
-  onSubmit: (card: Card) => void;
-};
-
-const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
+const AddCardPage = () => {
   const [cardNumber, setCardNumber] = useState<CardNumber>({
     firstGroup: "",
     secondGroup: "",
@@ -38,53 +45,38 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
     second: "",
   });
 
+  const [cardCompany, setCardCompany] = useState<Card["cardCompany"]>("BC");
+
+  const { isModalOpen, modalClose, modalOpen } = useModal();
+
   const navigate = useNavigate();
 
-  const handleCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    const targetGroup = e.target.name;
-
-    if (!isNumeric(value)) return;
-    if (!(targetGroup in cardNumber)) return;
-
+  const handleCardNumber = (value: string, targetGroup: CardNumberGroups) => {
     setCardNumber({ ...cardNumber, [targetGroup]: value });
   };
 
-  const handleExpirationDate = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    const dateType = e.target.name;
-
-    if (!isNumeric(value)) return;
-    if (!(dateType in expirationDate)) return;
-
+  const handleExpirationDate = (value: string, dateType: CardExpirationDateKey) => {
     setExpirationDate({ ...expirationDate, [dateType]: value });
   };
 
-  const handleOwnerName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const name = e.target.value;
-
-    if (!isAlphabetic(name)) return;
+  const handleOwnerName = (name: string) => {
     const upperCaseName = name.toUpperCase();
 
     setOwnerName(upperCaseName);
   };
 
-  const handleSecurityCode = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const code = e.target.value;
-
-    if (!isNumeric(code)) return;
-
+  const handleSecurityCode = (code: string) => {
     setSecurityCode(code);
   };
 
-  const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const pw = e.target.value;
-    const targetDigit = e.target.name;
-
-    if (!isNumeric(pw)) return;
-    if (!(targetDigit in password)) return;
-
+  const handlePassword = (pw: string, targetDigit: CardPasswordKey) => {
     setPassword({ ...password, [targetDigit]: pw });
+  };
+
+  const handleCardCompany = (company: CardCompany) => {
+    setCardCompany(company);
+
+    modalClose();
   };
 
   const addCard = (e: React.FormEvent) => {
@@ -96,64 +88,78 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
       return;
     }
 
-    const card: Card = {
+    const card: Omit<Card, "alias"> = {
       cardNumber,
       expirationDate,
       ownerName,
       securityCode,
       password,
+      cardCompany,
     };
 
-    onSubmit(card);
-
-    navigate("/");
+    navigate("/alias", {
+      state: card,
+      replace: true,
+    });
   };
 
-  const isAddButtonVisible: boolean =
+  const isFormFilled =
     isFulfilledObject(cardNumber, 4) &&
     isFulfilledObject(expirationDate, 2) &&
     isFulfilledObject(password, 1) &&
     isFulfilledString(securityCode, 3);
 
   return (
-    <Container>
-      <AppBar title={"카드 추가"} leftChild={<Link to="/">〈</Link>} />
-      <CardPreview card={{ cardNumber, expirationDate, ownerName }} />
+    <AddCardPageContainer>
+      <AppBar title={"카드 추가"} prevButton />
+      <CardPreview card={{ cardNumber, expirationDate, ownerName, cardCompany }} onClick={modalOpen} />
+      <HelperText onClick={modalOpen}>카드사 선택하기👆</HelperText>
       <Form onSubmit={addCard}>
         <CardNumberInput cardNumber={cardNumber} onChange={handleCardNumber} />
         <CardExpirationDateInput expirationDate={expirationDate} onChange={handleExpirationDate} />
-        <CardOwnerNameInput ownerName={ownerName} nameLength={ownerName.length} onChange={handleOwnerName} />
+        <CardOwnerNameInput ownerName={ownerName} onChange={handleOwnerName} />
         <CardSecurityCodeInput securityCode={securityCode} onChange={handleSecurityCode} />
         <CardPasswordInput password={password} onChange={handlePassword} />
-        <ButtonBox>
-          <Button type="submit" isVisible={isAddButtonVisible}>
-            다음
-          </Button>
-        </ButtonBox>
+        <NextButton type="submit" isFormFilled={isFormFilled}>
+          입력 완료
+        </NextButton>
       </Form>
-    </Container>
+      <Modal isOpen={isModalOpen} closeModal={modalClose}>
+        <CardCompanyButtonList handleCardCompany={handleCardCompany} />
+      </Modal>
+    </AddCardPageContainer>
   );
 };
+
+const AddCardPageContainer = styled(Container)`
+  height: initial;
+`;
+
+const HelperText = styled.span`
+  font-size: 12px;
+
+  cursor: pointer;
+`;
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 19px;
+  gap: 20px;
+
+  height: 100%;
 `;
 
-const ButtonBox = styled.div`
-  display: flex;
-  justify-content: flex-end;
-`;
+const NextButton = styled.button<{ isFormFilled: boolean }>`
+  width: 100%;
+  height: 50px;
 
-const Button = styled.button<{ isVisible: boolean }>`
-  background-color: transparent;
   border: none;
+  border-radius: 4px;
 
   font-size: 14px;
   font-weight: 700;
 
-  visibility: ${({ isVisible }) => (isVisible ? "visible" : "hidden")};
+  background-color: ${(props) => (props.isFormFilled ? "#d4e7fd" : "#ececec")};
 
   cursor: pointer;
 `;

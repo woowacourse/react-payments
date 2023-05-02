@@ -10,15 +10,17 @@ type CardListProps = {
 const CardList = ({ cards }: CardListProps) => {
   return (
     <Ul>
-      {cards.map((card) => {
-        const { cardNumber, ownerName, expirationDate } = card;
-        const { firstGroup, secondGroup, thirdGroup, fourthGroup } = cardNumber;
-        const key = `${firstGroup}${secondGroup}${thirdGroup}${fourthGroup}`;
-
-        return <CardPreview key={key} card={{ cardNumber, ownerName, expirationDate }} />;
-      })}
-
       <AddCardButton />
+      {cards.map((card) => {
+        const { cardNumber, ownerName, expirationDate, cardCompany, alias } = card;
+
+        return (
+          <FlexContainer key={crypto.randomUUID()}>
+            <CardPreview card={{ cardNumber, ownerName, expirationDate, cardCompany }} />
+            <CardAlias>{alias}</CardAlias>
+          </FlexContainer>
+        );
+      })}
     </Ul>
   );
 };
@@ -40,6 +42,19 @@ const Ul = styled.ul`
     height: 0;
     background-color: transparent;
   }
+`;
+
+const FlexContainer = styled.li`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+const CardAlias = styled.p`
+  font-size: 14px;
+  font-weight: 700;
+
+  text-align: center;
 `;
 
 export default CardList;

@@ -10,14 +10,13 @@ const AddCardButton = () => {
 };
 
 const Button = styled.button`
-  height: 123px;
-  width: 208px;
+  width: 248px;
+  height: 150px;
 
   border: none;
+  border-radius: 5px;
 
   background-color: #e5e5e5;
-
-  border-radius: 5px;
 
   box-shadow: 5px 5px 5px #adadad;
 

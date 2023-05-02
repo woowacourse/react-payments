@@ -1,17 +1,23 @@
+import { Route, Routes } from "react-router-dom";
 import styled from "styled-components";
+
 import GlobalStyle from "./styles/GlobalStyle";
 import AddCardPage from "./pages/AddCardPage/AddCardPage";
 import CardListPage from "./pages/CardListPage/CardListPage";
-
-import { Route, Routes } from "react-router-dom";
-import { useState } from "react";
-import { Card } from "./types";
+import CardAliasRegistrationPage from "./pages/CardAliasRegistrationPage/CardAliasRegistrationPage";
+import NotFound from "./components/NotFound/NotFound";
+import useStateWithStorage from "./hooks/useStateWithStorage";
+import ROUTE_PATH from "./constants/routePath";
+import { CARDS_KEY } from "./constants/storageKey";
+import type { Card } from "./types";
 
 function App() {
-  const [cards, setCards] = useState<Card[]>([]);
+  const { storageValue: cards, setStorageValue: setCards } = useStateWithStorage<Card[]>(CARDS_KEY, []);
 
   const addCard = (card: Card) => {
-    setCards([...cards, card]);
+    const updatedCards = [...cards, card];
+
+    setCards(updatedCards);
   };
 
   return (
@@ -19,8 +25,10 @@ function App() {
       <GlobalStyle />
       <Layout>
         <Routes>
-          <Route index path="/" element={<CardListPage cards={cards} />} />
-          <Route path="/addCard" element={<AddCardPage onSubmit={addCard} />} />
+          <Route index path={ROUTE_PATH.root} element={<CardListPage cards={cards} />} />
+          <Route path={ROUTE_PATH.addCard} element={<AddCardPage />} />
+          <Route path={ROUTE_PATH.cardAlias} element={<CardAliasRegistrationPage onSubmit={addCard} />} />
+          <Route path={ROUTE_PATH.other} element={<NotFound />} />
         </Routes>
       </Layout>
     </>
