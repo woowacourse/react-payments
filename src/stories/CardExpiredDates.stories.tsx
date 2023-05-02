@@ -13,6 +13,9 @@ type Story = StoryObj<typeof meta>;
 export const CardExpiredDateStory: Story = {
   args: {
     expiredDates: ['02', '12'],
-    isSetExpiredDates: () => true,
+    errorMessage: '',
+    handleExpiredDates: () => {
+      return;
+    },
   },
 };

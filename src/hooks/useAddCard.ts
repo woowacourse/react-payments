@@ -13,7 +13,8 @@ import usePassword from './usePassword';
 
 const useAddCard = () => {
   const { cardNumbers, isSetCardNumbers } = useCardNumbers();
-  const { expiredDates, isSetExpiredDates } = useExpiredDates();
+  const { expiredDates, expiredDatesError, handleExpiredDates } =
+    useExpiredDates();
   const { ownerName, isSetOwnerName } = useOwnerName();
   const { securityCode, isSetSecurityCode } = useSecurityCode();
   const { passwords, isSetPasswords } = usePassword();
@@ -38,7 +39,8 @@ const useAddCard = () => {
     cardNumbers,
     isSetCardNumbers,
     expiredDates,
-    isSetExpiredDates,
+    expiredDatesError,
+    handleExpiredDates,
     ownerName,
     isSetOwnerName,
     securityCode,

@@ -1,57 +1,33 @@
 import CardInput from '../@common/CardInput';
 import CardLabel from '../@common/CardLabel';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import * as Styled from './CardExpiredDates.styles';
 import { RefContext } from '../../contexts/RefProvider';
-import { REF_INDEX } from '../../constants/refIndex';
 
 interface ExpiredDateProps {
   expiredDates: Array<string>;
-  isSetExpiredDates: (order: number, value: string) => boolean;
+  errorMessage: string;
+  handleExpiredDates: (order: number, value: string) => void;
 }
-
-const nowDate = new Date();
-
-const getCurrentDateToString = () => {
-  const month =
-    String(nowDate.getMonth() + 1).length === 1
-      ? `0${nowDate.getMonth() + 1}`
-      : `${nowDate.getMonth() + 1}`;
-
-  const year = `${nowDate.getFullYear() % 2000}`;
-  return `${month}/${year}`;
-};
 
 const CardExpiredDate = ({
   expiredDates,
-  isSetExpiredDates,
+  errorMessage,
+  handleExpiredDates,
 }: ExpiredDateProps) => {
   const cardRefs = useContext(RefContext);
-  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!(e.target instanceof HTMLInputElement)) return;
     const currentOrder = Number(e.target.dataset['order']);
 
-    if (
-      !isSetExpiredDates(
-        currentOrder - REF_INDEX.lastCardNumbersOrder,
-        e.target.value
-      )
-    ) {
-      setErrorMessage(
-        `유효한 만료일을 ${getCurrentDateToString()}의 형태로 입력해주세요.`
-      );
-      return;
-    }
-
-    setErrorMessage('');
+    handleExpiredDates(currentOrder, e.target.value);
     focusNextInput(currentOrder);
   };
 
-  const focusNextInput = (currentOrder: number) => {
-    if (cardRefs[currentOrder].current?.value.length === 2) {
-      cardRefs[currentOrder + 1].current?.focus();
+  const focusNextInput = (order: number) => {
+    if (cardRefs[order].current?.value.length === 2) {
+      cardRefs[order + 1].current?.focus();
     }
   };
 
