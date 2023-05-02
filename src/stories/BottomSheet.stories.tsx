@@ -4,7 +4,7 @@ import BottomSheet from "../component/common/Modal/BottomSheet";
 type Story = StoryObj<typeof BottomSheet>;
 
 const meta: Meta = {
-  title: "Bottom Modal",
+  title: "Bottom Sheet",
   component: BottomSheet,
   argTypes: {
     setOpen: {
