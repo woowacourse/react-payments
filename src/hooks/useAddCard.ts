@@ -18,7 +18,7 @@ const useAddCard = () => {
   const { cardOwnerName, ownerNameError, handleCardOwnerName } = useOwnerName();
   const { securityCode, securityCodeError, handleSecurityCode } =
     useSecurityCode();
-  const { passwords, isSetPasswords } = usePassword();
+  const { cardPasswords, passwordError, handleCardPasswords } = usePassword();
   const [cardCompany, setCardCompany] = useState<string>('');
   const [isDisabledForm, setIsDisabledForm] = useState(true);
 
@@ -27,14 +27,14 @@ const useAddCard = () => {
       isCorrectCardNumber(cardNumbers) &&
       isCorrectExpiredDate(expiredDates) &&
       isCorrectSecurityCode(securityCode) &&
-      isCorrectPassword(passwords) &&
+      isCorrectPassword(cardPasswords) &&
       cardCompany
     ) {
       setIsDisabledForm(false);
       return;
     }
     setIsDisabledForm(true);
-  }, [cardNumbers, expiredDates, securityCode, passwords, cardCompany]);
+  }, [cardNumbers, expiredDates, securityCode, cardPasswords, cardCompany]);
 
   return {
     cardNumbers,
@@ -49,8 +49,9 @@ const useAddCard = () => {
     securityCode,
     securityCodeError,
     handleSecurityCode,
-    passwords,
-    isSetPasswords,
+    cardPasswords,
+    passwordError,
+    handleCardPasswords,
     cardCompany,
     setCardCompany,
     isDisabledForm,
