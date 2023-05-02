@@ -1,23 +1,24 @@
-import { StoryFn } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import CardItem from "../components/cardList/CardItem";
-import { CardType } from "../types/card";
 
-export default {
+const meta = {
   title: "CardItem",
   component: CardItem,
-};
+} as Meta;
 
-const Template: StoryFn<typeof CardItem> = (args: { card: CardType }): React.ReactElement => <CardItem {...args} />;
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-export const cardItem = Template.bind({});
-cardItem.args = {
-  card: {
-    CVC: 312,
-    alias: "내 카드",
-    brand: "신한카드",
-    expiryDate: "12 / 35",
-    numbers: "1233123123122231",
-    owner: "ME",
-    password: [2, 2],
+export const Card: Story = {
+  args: {
+    card: {
+      CVC: 312,
+      alias: "내 카드",
+      brand: "신한카드",
+      expiryDate: "12 / 35",
+      numbers: "1233123123122231",
+      owner: "ME",
+      password: [2, 2],
+    },
   },
 };
