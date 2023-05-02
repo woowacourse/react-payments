@@ -1,52 +1,35 @@
-import { useRef, useState } from 'react';
-import { convertSecuredCreditCard } from 'domains/creditCard';
-import * as T from 'types';
+import { useRef } from 'react';
 import styled from 'styled-components';
+import useCreditCardForm from 'hooks/useCreditCardForm';
 import * as S from '../style';
-import { validateNumber } from '../validations';
+import { validateNumber } from '../../../domains/validations';
 
 export const MaskedViewer = styled.p`
-    background-color: #ECEBF1;
-    border-radius: 7px;
-    height: 48px;
-    width: 100%;
-    border: none;
-    font-size: 18px;
-    :focus {
-        outline: none;
-    }
-    margin-right: 10px;
-    display: flex;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
+  background-color: #ecebf1;
+  border-radius: 7px;
+  height: 48px;
+  width: 100%;
+  border: none;
+  font-size: 18px;
+  :focus {
+    outline: none;
+  }
+  margin-right: 10px;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
 `;
 
-type Props = {
-  name: keyof T.CreditCard;
-  creditCard: T.CreditCard;
-  setCreditCard: React.Dispatch<React.SetStateAction<T.CreditCard>>;
-};
-
-function CreditCardNumberInput({ name, creditCard, setCreditCard }: Props) {
+function CreditCardNumberInput() {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [markedCreditCardNumber, setMarkedCreditCardNumber] = useState('');
+  const {
+    creditCardForm,
+    markedCreditCardNumber,
+    handleCreditCardNumberChange,
+  } = useCreditCardForm();
 
-  const handleChangeCreditCardNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newCreditCardNumber = event.target.value.replace(/\D/g, '');
-
-    if (newCreditCardNumber.length > 16) return;
-
-    const markedNumber = convertSecuredCreditCard(newCreditCardNumber)
-      .filter((numbers) => !!numbers.length)
-      .map((numbers) => numbers.join(''))
-      .join(' - ');
-
-    setMarkedCreditCardNumber(markedNumber);
-    setCreditCard({ ...creditCard, [name]: newCreditCardNumber });
-  };
-
-  const isError = validateNumber(creditCard.number);
+  const isError = creditCardForm.number.length > 0 && !validateNumber(creditCardForm.number);
 
   return (
     <>
@@ -64,11 +47,15 @@ function CreditCardNumberInput({ name, creditCard, setCreditCard }: Props) {
         <S.HiddenInput
           ref={inputRef}
           type="string"
-          value={creditCard.number}
-          onChange={handleChangeCreditCardNumber}
+          value={creditCardForm.number}
+          onChange={handleCreditCardNumberChange}
         />
       </S.RelativeBox>
-      {isError && <S.ErrorMessage>카드번호는 16자리의 숫자로만 이루어져야 합니다.</S.ErrorMessage>}
+      {isError && (
+        <S.ErrorMessage>
+          카드번호는 16자리의 숫자로만 이루어져야 합니다.
+        </S.ErrorMessage>
+      )}
     </>
   );
 }

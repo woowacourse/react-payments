@@ -1,3 +1,12 @@
+import { CreditCard } from 'types';
+import { creditCardCompanies } from '../data/creditCard';
+import {
+  validateCVC,
+  validateExpiry,
+  validateNumber,
+  validatePassword,
+} from './validations';
+
 export const convertSecuredCreditCard = (number: string) => {
   const creditCardNumberLength = number.length;
   const securedCreditNumber = creditCardNumberLength <= 8
@@ -6,4 +15,42 @@ export const convertSecuredCreditCard = (number: string) => {
   const numberArrays = securedCreditNumber.match(/.{1,4}/g) ?? [];
   return numberArrays.map((n) => n.split(''));
 };
-export default {};
+
+export const findCreditCardCompanyById = (id: string) => {
+  const index = creditCardCompanies.findIndex((c) => c.id === id);
+  if (index === -1) {
+    return {
+      id: 'default',
+      name: 'COMPANY',
+      color: 'white',
+      backgroundColor: 'black',
+    };
+  }
+  return creditCardCompanies[index];
+};
+
+export const checkCreditCardValidations = (creditCard: CreditCard) => {
+  const isValidCVC = validateCVC(creditCard.cvc);
+  const isValidExpiry = validateExpiry(creditCard.expiry);
+  const isValidCardNumber = validateNumber(creditCard.number);
+  const isValidCardPassword = validatePassword(
+    creditCard.password[0],
+    creditCard.password[1]
+  );
+  const isCreditCardError = [
+    isValidCVC,
+    isValidExpiry,
+    isValidCardNumber,
+    isValidCardPassword,
+  ].every((v) => v);
+
+  return isCreditCardError;
+};
+
+export const markExpiry = (expiry: string) => {
+  const newCardExpiryArray = expiry.split('');
+  if (newCardExpiryArray.length > 2) {
+    newCardExpiryArray.splice(2, 0, '/');
+  }
+  return newCardExpiryArray.join('');
+};

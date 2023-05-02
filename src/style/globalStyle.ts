@@ -23,10 +23,9 @@ const GlobalStyle = createGlobalStyle`
 
 export const GlobalLayout = styled.div`
   background-color: white;
-  width: 375px;
+  width: 400px;
   min-height: 100vh;
   margin: 0 auto;
-
 `;
 
 export default GlobalStyle;
