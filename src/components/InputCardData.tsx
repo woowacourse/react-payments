@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { InputProps } from '../type';
 import './InputCardData.css';
 
