@@ -11,7 +11,10 @@ type Story = StoryObj<typeof meta>;
 
 export const CardOwnerNameStory: Story = {
   args: {
-    ownerName: 'NAME',
-    isSetOwnerName: () => true,
+    cardOwnerName: 'NAME',
+    errorMessage: '',
+    handleCardOwnerName: () => {
+      return;
+    },
   },
 };
