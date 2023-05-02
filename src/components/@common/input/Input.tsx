@@ -14,12 +14,11 @@ import { Ref } from "../../../type/ref";
 export interface InputProps
   extends InputHTMLAttributes<HTMLInputElement>,
     RefAttributes<HTMLInputElement> {
-  inputRef: React.MutableRefObject<Ref>;
   name: string;
   asChild?: boolean;
 }
 export function Input(props: PropsWithChildren<InputProps>) {
-  const { name, inputRef, asChild = false, children, ...restProps } = props;
+  const { name, asChild = false, children, ...restProps } = props;
   const inputState = useContext(InputContext);
   const { handleChange } = inputState;
   const childrenList = Children.toArray(children);
@@ -31,22 +30,12 @@ export function Input(props: PropsWithChildren<InputProps>) {
     <>
       {cloneElement(childrenList[0], {
         name,
-        inputRef,
         onChange: handleChange,
         ...restProps,
       })}
     </>
   ) : (
-    <InputUnit
-      onChange={handleChange}
-      name={name}
-      ref={(elem) => {
-        if (inputRef !== null && elem instanceof HTMLInputElement) {
-          inputRef.current[name] = elem;
-        }
-      }}
-      {...restProps}
-    />
+    <InputUnit onChange={handleChange} name={name} {...restProps} />
   );
 }
 

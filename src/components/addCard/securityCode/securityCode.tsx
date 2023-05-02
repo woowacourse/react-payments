@@ -1,8 +1,6 @@
-import { useContext } from "react";
 import styled from "styled-components";
 import { WarningIc } from "../../../assets";
 import { LABEL, TEXT_LENGTH } from "../../../constants/inputInfo";
-import { RefContext } from "../../../contexts/cardInfo";
 import { useInputCode } from "../../../hooks/useInputCode";
 import { Input } from "../../@common/input/Input";
 import { InputBox } from "../../@common/input/InputBox";
@@ -11,7 +9,6 @@ import { InputLabel } from "../../@common/input/inputLabel";
 
 export function SecurityCode() {
   const { code, handleChange } = useInputCode();
-  const inputRef = useContext(RefContext);
 
   return (
     <InputBox<string> inputState={{ value: code, handleChange }}>
@@ -23,7 +20,6 @@ export function SecurityCode() {
             minLength={TEXT_LENGTH.CODE}
             type="password"
             name="code"
-            inputRef={inputRef}
             asChild>
             <SecurityCodeInput />
           </Input>

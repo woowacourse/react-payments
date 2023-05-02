@@ -6,7 +6,7 @@ import {
   PLACEHOLDER,
   ERROR_MESSAGE,
 } from "../../../constants/inputInfo";
-import { DateContext, RefContext } from "../../../contexts/cardInfo";
+import { DateContext } from "../../../contexts/cardInfo";
 import { Date } from "../../../type/input";
 import { validation } from "../../../validation/input";
 import { Input } from "../../@common/input/Input";
@@ -16,7 +16,6 @@ import { InputLabel } from "../../@common/input/inputLabel";
 
 export function ExpiredDate() {
   const { month, year, handleChange } = useContext(DateContext);
-  const inputRef = useContext(RefContext);
   const [error, setError] = useState<boolean>(false);
 
   function checkIsCorrenctYear(e: React.FocusEvent<HTMLInputElement>) {
@@ -42,7 +41,6 @@ export function ExpiredDate() {
             maxLength={2}
             minLength={TEXT_LENGTH.MONTH}
             placeholder={PLACEHOLDER.MONTH}
-            inputRef={inputRef}
             asChild>
             <DateInput />
           </Input>
@@ -52,7 +50,6 @@ export function ExpiredDate() {
             maxLength={TEXT_LENGTH.YEAR}
             minLength={TEXT_LENGTH.YEAR}
             placeholder={PLACEHOLDER.YEAR}
-            inputRef={inputRef}
             onBlur={checkIsCorrenctYear}
             asChild>
             <DateInput />

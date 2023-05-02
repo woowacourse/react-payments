@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Fragment, useContext } from "react";
 import { Input } from "../../@common/input/Input";
 import { InputBox } from "../../@common/input/InputBox";
-import { NumberContext, RefContext } from "../../../contexts/cardInfo";
+import { NumberContext } from "../../../contexts/cardInfo";
 import { InputGroup } from "../../@common/input/inputGroup";
 import { InputLabel } from "../../@common/input/inputLabel";
 import { INPUT_TYPE, LABEL } from "../../../constants/inputInfo";
@@ -10,7 +10,6 @@ import { CardNumberIndex } from "../../../type/input";
 
 export function CardNumber() {
   const { cardNumber, handleChange } = useContext(NumberContext);
-  const inputRef = useContext(RefContext);
 
   function checkIsPasswordType(name: string) {
     return name === "third" || name === "fourth";
@@ -33,8 +32,7 @@ export function CardNumber() {
                       : INPUT_TYPE.TEXT
                   }
                   maxLength={4}
-                  minLength={4}
-                  inputRef={inputRef}>
+                  minLength={4}>
                   <CustomInput />
                 </Input>
                 {index < original.length - 1 && INPUT_TYPE.BAR}

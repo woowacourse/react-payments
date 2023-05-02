@@ -12,7 +12,6 @@ import {
   DateContext,
   NameContext,
   NumberContext,
-  RefContext,
 } from "../../contexts/cardInfo";
 import { TEXT_LENGTH } from "../../constants/inputInfo";
 import { SubmitButton } from "../@common/button/submitButton";
@@ -21,18 +20,24 @@ import { bank } from "../../core/bank";
 export function AddCardForm() {
   const navigate = useNavigate();
   const [isComplete, setIsComplete] = useState<boolean>(false);
-  const inputRef = useContext(RefContext);
   const { cardNumber } = useContext(NumberContext);
   const { month, year } = useContext(DateContext);
   const { userName } = useContext(NameContext);
   const { selectedItem } = useContext(BankContext);
 
-  function checkAllInputs() {
-    const isValid = Object.keys(inputRef.current).every(
-      (input) =>
-        inputRef.current[input].value.length >= TEXT_LENGTH[input.toUpperCase()]
+  function checkAllInputs(e: React.FormEvent<HTMLFormElement>) {
+    const inputElements = Array.from(
+      e.currentTarget.elements
+    ) as HTMLInputElement[];
+    const isAllValid = inputElements.every(
+      (input) => input.value.length >= TEXT_LENGTH[input.name.toUpperCase()]
     );
-    isValid && setIsComplete(true);
+
+    inputElements.forEach((input) => {
+      console.log(input.name.toUpperCase());
+      console.log(TEXT_LENGTH[input.name.toUpperCase()]);
+    });
+    isAllValid && setIsComplete(true);
   }
 
   function saveData(e: React.FormEvent<HTMLFormElement>) {

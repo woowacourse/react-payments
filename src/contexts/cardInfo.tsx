@@ -1,6 +1,4 @@
-import { number } from "prop-types";
-import React, { createContext, useRef } from "react";
-import { useState } from "react";
+import React, { createContext } from "react";
 import { useInputDate } from "../hooks/useInputDate";
 import { useInputName } from "../hooks/useInputName";
 import { useInputNumber } from "../hooks/useInputNumber";
@@ -39,10 +37,6 @@ export const NameContext = createContext<{
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => {},
 });
 
-export const RefContext = createContext<React.MutableRefObject<Ref>>({
-  current: {},
-});
-
 export const BankContext = createContext<{
   selectedItem: number;
   selectItem: (e: React.MouseEvent<HTMLElement>) => void;
@@ -55,20 +49,17 @@ export function CardInfoProvider({ children }: { children: React.ReactNode }) {
   const numberInfo = useInputNumber();
   const dateInfo = useInputDate();
   const nameInfo = useInputName();
-  const inputRef = useRef<React.MutableRefObject<Ref>>({ current: {} });
   const bankInfo = useSelect();
 
   return (
-    <RefContext.Provider value={inputRef.current}>
-      <NumberContext.Provider value={numberInfo}>
-        <DateContext.Provider value={dateInfo}>
-          <NameContext.Provider value={nameInfo}>
-            <BankContext.Provider value={bankInfo}>
-              {children}
-            </BankContext.Provider>
-          </NameContext.Provider>
-        </DateContext.Provider>
-      </NumberContext.Provider>
-    </RefContext.Provider>
+    <NumberContext.Provider value={numberInfo}>
+      <DateContext.Provider value={dateInfo}>
+        <NameContext.Provider value={nameInfo}>
+          <BankContext.Provider value={bankInfo}>
+            {children}
+          </BankContext.Provider>
+        </NameContext.Provider>
+      </DateContext.Provider>
+    </NumberContext.Provider>
   );
 }
