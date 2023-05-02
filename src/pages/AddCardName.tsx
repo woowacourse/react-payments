@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import { CardItem, ErrorMessage } from '../components/common';
 import { ERROR_MESSAGE } from '../constants/errors';
+import { PATH } from '../constants/path';
 import { cardList } from '../data/localStorage';
 import { useInput } from '../hooks/useInput';
 import { cardRegisterValidator } from '../validation/cardRegister';
@@ -30,7 +31,7 @@ export function AddCardName() {
   }
 
   function moveAddCardNamePage() {
-    navigate('/');
+    navigate(PATH.CARD_LIST);
   }
 
   return (

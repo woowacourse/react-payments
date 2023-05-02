@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { Header, CardItem } from '../components/common';
+import { PATH } from '../constants/path';
 import { cardList } from '../data/localStorage';
 
 export function CardList() {
@@ -9,7 +10,7 @@ export function CardList() {
 
   const navigate = useNavigate();
   function moveAddCardPage() {
-    navigate('/add-card');
+    navigate(PATH.ADD_CARD_NAME);
   }
 
   return (
