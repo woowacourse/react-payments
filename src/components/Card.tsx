@@ -1,7 +1,7 @@
 import { useMemo } from "react";
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 import { IcChip } from "../assets";
-import { CARD_COMPANY } from "../constants";
+import { cardCompanyTheme } from "../style/theme";
 import { CardType } from "../types";
 import { getCardNumberArray } from "../utils/card";
 
@@ -17,25 +17,27 @@ const Card = ({
   );
 
   return (
-    <CardWrapper $cardCompany={cardCompany}>
-      <p>{cardCompany}</p>
-      <img src={IcChip} alt="ic-chip" />
-      <CardInfoWrapper>
-        <UpInfoWrapper>
-          {cardNumberArray.map((cardNumber) => (
-            <span key={crypto.randomUUID()}>{cardNumber}</span>
-          ))}
-        </UpInfoWrapper>
-        <BottomInfoWrapper>
-          <span>{ownerName}</span>
-          <span>{expiredDate}</span>
-        </BottomInfoWrapper>
-      </CardInfoWrapper>
-    </CardWrapper>
+    <ThemeProvider theme={cardCompanyTheme[cardCompany]}>
+      <CardWrapper>
+        <p>{cardCompany}</p>
+        <img src={IcChip} alt="ic-chip" />
+        <CardInfoWrapper>
+          <UpInfoWrapper>
+            {cardNumberArray.map((cardNumber) => (
+              <span key={crypto.randomUUID()}>{cardNumber}</span>
+            ))}
+          </UpInfoWrapper>
+          <BottomInfoWrapper>
+            <span>{ownerName}</span>
+            <span>{expiredDate}</span>
+          </BottomInfoWrapper>
+        </CardInfoWrapper>
+      </CardWrapper>
+    </ThemeProvider>
   );
 };
 
-const CardWrapper = styled.div<{ $cardCompany: string }>`
+const CardWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -47,8 +49,9 @@ const CardWrapper = styled.div<{ $cardCompany: string }>`
 
   border-radius: 5px;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
-  background: ${(props) => CARD_COMPANY[props.$cardCompany].background};
-  color: ${(props) => CARD_COMPANY[props.$cardCompany].color};
+
+  background: ${(props) => props.theme.main};
+  color: ${(props) => props.theme.point};
 
   & > p {
     font-weight: 500;
