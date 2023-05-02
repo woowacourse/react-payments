@@ -1,15 +1,15 @@
 import styled from "styled-components";
 import useInitCardInfo from "hooks/useInitCardInfo";
-import { CARD_COMPANIES } from "constants/cardCompanies";
+import CardCompanyLogoSvg from "./CardCompanyLogoSvg";
 
 const CardCompany = ({ cardCompanyName }: { cardCompanyName: string }) => {
   const { initCardInfo } = useInitCardInfo();
 
   return (
     <S.Wrapper>
-      <S.Logo
-        src={`${process.env.PUBLIC_URL}/assets/${CARD_COMPANIES[cardCompanyName]}.svg`}
-        alt={cardCompanyName}
+      <CardCompanyLogoSvg
+        cardCompanyName={cardCompanyName}
+        style={{ cursor: "pointer" }}
         onClick={() => initCardInfo("cardCompany", cardCompanyName)}
       />
       <S.CardCompany>{cardCompanyName}</S.CardCompany>
@@ -24,10 +24,6 @@ const S = {
     -webkit-box-align: center;
     justify-content: center;
     align-items: center;
-  `,
-
-  Logo: styled.img`
-    cursor: pointer;
   `,
 
   CardCompany: styled.p`

@@ -1,4 +1,4 @@
-import { Dispatch, ReactNode, SetStateAction } from "react";
+import { Dispatch, ReactNode, SVGProps, SetStateAction } from "react";
 
 export interface CardNumber {
   [key: string]: string;
@@ -42,4 +42,8 @@ export interface ModalState {
 
 export interface ProviderChildren {
   children: ReactNode;
+}
+
+export interface CardCompanyLogoProps extends SVGProps<SVGSVGElement> {
+  onClick: () => void;
 }

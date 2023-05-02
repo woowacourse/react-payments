@@ -8,8 +8,8 @@ import { CardNumberCaption } from "components/style/CaptionStyle";
 import { CardNumberInputBox } from "components/style/InputBoxStyle";
 import { useFocus } from "hooks/useFocus";
 import useInitCardInfo from "hooks/useInitCardInfo";
-import { NUMBER_INPUT, LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
 import useModal from "hooks/useModal";
+import { NUMBER_INPUT, LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
 const { ONLY_NUMBER } = VALID_INPUT;
 
 const CardNumberInput = () => {
