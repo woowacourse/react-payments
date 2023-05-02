@@ -82,6 +82,7 @@ const StyledInput = styled.input<StyledInputProps>`
   max-width: 100%;
   height: 100%;
   border: none;
+  border-top: solid 3px transparent;
   border-bottom: solid 3px ${({ warning }) => (warning ? 'red' : 'transparent')};
   background-color: transparent;
 
