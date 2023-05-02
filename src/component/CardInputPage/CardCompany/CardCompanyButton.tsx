@@ -36,7 +36,7 @@ const CardCompanyButton = (props: Props) => {
       <img
         className={style.image}
         src={cardImage[companyName]}
-        alt={`${cardCompanyEnglishToKorean(companyName)} 로고`}
+        alt=""
       />
       <p className={style.company}>{cardCompanyEnglishToKorean(companyName)}</p>
     </button>
