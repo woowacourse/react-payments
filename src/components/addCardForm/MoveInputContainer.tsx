@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { ReactNode } from 'react';
 
 interface Props {
-  isLeftBtnShowed: boolean;
-  isRightBtnShowed: boolean;
+  isLeftBtnShown: boolean;
+  isRightBtnShown: boolean;
   viewPreviousInput?: () => void;
   viewNextInput?: () => void;
   isAllInputDone?: boolean;
