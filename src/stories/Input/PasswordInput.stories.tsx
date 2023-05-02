@@ -14,10 +14,7 @@ export default meta;
 export const Password = () => {
   return (
     <CardInfoProvider>
-      <PasswordInput
-        handleSubmitNewCardInfo={() => {}}
-        viewPreviousInput={() => {}}
-      />
+      <PasswordInput viewNextInput={() => {}} />
     </CardInfoProvider>
   );
 };

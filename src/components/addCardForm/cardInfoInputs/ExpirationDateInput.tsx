@@ -2,19 +2,18 @@ import { InputWrapper } from './template/InputWrapper';
 import { ErrorMessage, Input } from './template/Input';
 import styled from 'styled-components';
 import { useErrorMessage } from '../../../hooks/useError';
-import { MoveInputContainer } from '../MoveInputContainer';
 import {
   useCardInfoActionContext,
   useCardInfoValueContext,
 } from '../../../hooks/cardInfoContext';
 import { useFocus } from '../../../hooks/useFocus';
+import { useEffect } from 'react';
 
 interface Props {
   viewNextInput: () => void;
-  viewPreviousInput: () => void;
 }
 
-const expirationDateInputValidator = (input: string | string[]) => {
+export const expirationDateInputValidator = (input: string | string[]) => {
   if (typeof input === 'string') throw new Error('입력 객체 에러');
 
   const inputYear = Number(input[1]);
@@ -22,11 +21,13 @@ const expirationDateInputValidator = (input: string | string[]) => {
   const currentYear = new Date().getFullYear() % 100;
   const currentMonth = new Date().getMonth() + 1;
 
+  if (input.every((num) => num === '')) throw new Error('');
+
   if (input.some((num) => num.length === 0))
     throw new Error('모든 입력창을 채워주세요.');
 
   if (inputMonth > 12 || inputMonth < 1)
-    throw new Error('유효한 날짜를 입력해주세요');
+    throw new Error('달에는 1 ~ 12까지의 숫자만 입력 가능합니다!');
 
   if (currentYear > inputYear)
     throw new Error('만료 일자는 현재 날짜보다 이후여야 합니다.');
@@ -43,10 +44,7 @@ const isExpirationDate = (
   return inputTarget === 'month' || inputTarget === 'year';
 };
 
-export const ExpirationDateInput = ({
-  viewNextInput,
-  viewPreviousInput,
-}: Props) => {
+export const ExpirationDateInput = ({ viewNextInput }: Props) => {
   const { expirationDate } = useCardInfoValueContext();
   const { setExpirationDate } = useCardInfoActionContext();
   const { inputRefs, focusInputByIndex } = useFocus(2);
@@ -78,6 +76,10 @@ export const ExpirationDateInput = ({
     if (e.key === 'Backspace' && e.target.value === '')
       focusInputByIndex(Number(index) - 1);
   };
+
+  useEffect(() => {
+    if (error === null) viewNextInput();
+  }, [error]);
 
   return (
     <div>
@@ -123,13 +125,6 @@ export const ExpirationDateInput = ({
         />
       </InputWrapper>
       <ErrorMessage>{error ?? ''}</ErrorMessage>
-      <MoveInputContainer
-        isLeftBtnShown={true}
-        isRightBtnShown={error === null}
-        viewNextInput={viewNextInput}
-        viewPreviousInput={viewPreviousInput}
-        progress={'2/5'}
-      />
     </div>
   );
 };

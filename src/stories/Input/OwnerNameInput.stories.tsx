@@ -14,7 +14,7 @@ export default meta;
 export const OwnerName = () => {
   return (
     <CardInfoProvider>
-      <OwnerNameInput viewNextInput={() => {}} viewPreviousInput={() => {}} />
+      <OwnerNameInput viewNextInput={() => {}} />
     </CardInfoProvider>
   );
 };

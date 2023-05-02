@@ -1,9 +1,8 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { InputWrapper } from './template/InputWrapper';
 import { ErrorMessage, Input } from './template/Input';
 import styled from 'styled-components';
 import { useErrorMessage } from '../../../hooks/useError';
-import { MoveInputContainer } from '../MoveInputContainer';
 import {
   useCardInfoActionContext,
   useCardInfoValueContext,
@@ -14,8 +13,10 @@ interface Props {
   viewNextInput: () => void;
 }
 
-const cardNumberValidator = (input: string[] | string) => {
+export const cardNumberValidator = (input: string[] | string) => {
   if (typeof input === 'string') throw new Error('입력 타입이 다릅니다.');
+
+  if (input.every((num) => num === '')) throw new Error('');
 
   if (input.some((num) => num.length !== 4))
     throw new Error('모든 입력창을 채워주세요.');
@@ -55,6 +56,10 @@ export const CardNumberInput = ({ viewNextInput }: Props) => {
       focusInputByIndex(Number(index) - 1);
     }
   };
+
+  useEffect(() => {
+    if (error === null) viewNextInput();
+  }, [error]);
 
   return (
     <div>
@@ -98,12 +103,6 @@ export const CardNumberInput = ({ viewNextInput }: Props) => {
         })}
       </InputWrapper>
       <ErrorMessage>{error ?? ''}</ErrorMessage>
-      <MoveInputContainer
-        isLeftBtnShown={false}
-        isRightBtnShown={error === null}
-        viewNextInput={viewNextInput}
-        progress={'1/5'}
-      />
     </div>
   );
 };

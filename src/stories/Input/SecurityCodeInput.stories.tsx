@@ -14,10 +14,7 @@ export default meta;
 export const SecurityCode = () => {
   return (
     <CardInfoProvider>
-      <SecurityCodeInput
-        viewNextInput={() => {}}
-        viewPreviousInput={() => {}}
-      />
+      <SecurityCodeInput viewNextInput={() => {}} />
     </CardInfoProvider>
   );
 };

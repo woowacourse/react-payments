@@ -2,7 +2,6 @@ import { InputWrapper } from './template/InputWrapper';
 import { ErrorMessage, Input } from './template/Input';
 import styled from 'styled-components';
 import { useErrorMessage } from '../../../hooks/useError';
-import { MoveInputContainer } from '../MoveInputContainer';
 import {
   useCardInfoActionContext,
   useCardInfoValueContext,
@@ -10,10 +9,9 @@ import {
 
 interface Props {
   viewNextInput: () => void;
-  viewPreviousInput: () => void;
 }
 
-const ownerNameInputValidator = (input: string | string[]) => {
+export const ownerNameInputValidator = (input: string | string[]) => {
   if (typeof input === 'object') throw new Error('입력 객체 에러');
 
   if (input.length === 0) return;
@@ -25,7 +23,7 @@ const ownerNameInputValidator = (input: string | string[]) => {
     throw new Error('이름은 영문으로만 입력 가능합니다.');
 };
 
-export const OwnerNameInput = ({ viewNextInput, viewPreviousInput }: Props) => {
+export const OwnerNameInput = ({ viewNextInput }: Props) => {
   const { ownerName } = useCardInfoValueContext();
   const { setOwnerName } = useCardInfoActionContext();
 
@@ -52,7 +50,6 @@ export const OwnerNameInput = ({ viewNextInput, viewPreviousInput }: Props) => {
       </Style.Label>
       <InputWrapper width={318}>
         <Input
-          autoFocus={true}
           value={ownerName}
           width={'318'}
           minLength={1}
@@ -63,13 +60,6 @@ export const OwnerNameInput = ({ viewNextInput, viewPreviousInput }: Props) => {
         />
       </InputWrapper>
       <ErrorMessage>{error ?? ''}</ErrorMessage>
-      <MoveInputContainer
-        isLeftBtnShown={true}
-        isRightBtnShown={error === null}
-        viewNextInput={viewNextInput}
-        viewPreviousInput={viewPreviousInput}
-        progress={'3/5'}
-      />
     </div>
   );
 };

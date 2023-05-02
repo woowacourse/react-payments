@@ -2,20 +2,21 @@ import styled from 'styled-components';
 import { InputWrapper } from './template/InputWrapper';
 import { ErrorMessage, Input } from './template/Input';
 import { useErrorMessage } from '../../../hooks/useError';
-import { MoveInputContainer } from '../MoveInputContainer';
 import {
   useCardInfoActionContext,
   useCardInfoValueContext,
 } from '../../../hooks/cardInfoContext';
 import { useFocus } from '../../../hooks/useFocus';
+import { useEffect } from 'react';
 
 interface Props {
-  handleSubmitNewCardInfo: () => void;
-  viewPreviousInput: () => void;
+  viewNextInput: () => void;
 }
 
-const passwordInputValidator = (input: string | string[]) => {
+export const passwordInputValidator = (input: string | string[]) => {
   if (typeof input === 'string') return;
+
+  if (input.every((num) => num === '')) throw new Error('');
 
   if (input.some((num) => !/^[0-9]*$/.test(num)))
     throw new Error('카드 비밀 번호를 숫자로 입력해주세요.');
@@ -24,10 +25,7 @@ const passwordInputValidator = (input: string | string[]) => {
     throw new Error('모든 입력창을 채워주세요.');
 };
 
-export const PasswordInput = ({
-  handleSubmitNewCardInfo,
-  viewPreviousInput,
-}: Props) => {
+export const PasswordInput = ({ viewNextInput }: Props) => {
   const { password } = useCardInfoValueContext();
   const { setPassword } = useCardInfoActionContext();
   const { inputRefs, focusInputByIndex } = useFocus(2);
@@ -55,6 +53,10 @@ export const PasswordInput = ({
 
     if (password[Number(index)] === '') focusInputByIndex(Number(index) - 1);
   };
+
+  useEffect(() => {
+    if (error === null) viewNextInput();
+  }, [error]);
 
   return (
     <div>
@@ -105,14 +107,6 @@ export const PasswordInput = ({
         <Style.DotContainer>•</Style.DotContainer>
       </Style.Wrapper>
       <ErrorMessage>{error ?? ''}</ErrorMessage>
-      <MoveInputContainer
-        isLeftBtnShown={true}
-        isRightBtnShown={error === null}
-        viewPreviousInput={viewPreviousInput}
-        viewNextInput={handleSubmitNewCardInfo}
-        isAllInputDone={true}
-        progress={'5/5'}
-      />
     </div>
   );
 };

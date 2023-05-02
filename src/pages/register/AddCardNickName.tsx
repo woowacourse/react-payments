@@ -45,6 +45,7 @@ export const AddCardNickName = () => {
         </Style.CardWrapper>
         <Input
           ref={inputRef}
+          autoFocus={true}
           style={{
             backgroundColor: 'white',
             borderBottom: '1px solid',

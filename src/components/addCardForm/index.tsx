@@ -13,14 +13,13 @@ import {
 import { useModalStateContext } from '../../hooks/useModalContext';
 import { v4 } from 'uuid';
 import { useCardList } from '../../hooks/useCardList';
+import { useFormValidation } from '../../hooks/useFormValidation';
 
 export const AddNewCardForm = () => {
   const navigate = useNavigate();
 
   const { addNewCard, modifyCardInfo, cardList } = useCardList();
-
   const { setCardId } = useCardInfoActionContext();
-
   const {
     cardNumber,
     expirationDate,
@@ -30,6 +29,7 @@ export const AddNewCardForm = () => {
     companyId,
     cardId,
   } = useCardInfoValueContext();
+  const canSubmit = useFormValidation();
 
   const { isOpen } = useModalStateContext();
 
@@ -39,11 +39,9 @@ export const AddNewCardForm = () => {
     setInputOrder((current) => current + 1);
   }, []);
 
-  const viewPreviousInput = useCallback(() => {
-    setInputOrder((current) => current - 1);
-  }, []);
+  const handleSubmitNewCardInfo: React.FormEventHandler = (e) => {
+    e.preventDefault();
 
-  const handleSubmitNewCardInfo = () => {
     const newCardInfo = {
       cardNumber,
       expirationDate,
@@ -69,40 +67,29 @@ export const AddNewCardForm = () => {
   }, [cardId, setCardId]);
 
   return (
-    <Style.Wrapper onSubmit={(e) => e.preventDefault()}>
+    <Style.Wrapper onSubmit={handleSubmitNewCardInfo}>
       {companyId ? (
         <Style.InputContainer>
-          {inputOrder === 0 && (
-            <CardNumberInput viewNextInput={viewNextInput} />
+          {inputOrder > 3 && (
+            <Style.SubmitButton disabled={!canSubmit} autoFocus={true}>
+              {canSubmit ? '제출' : '❌'}
+            </Style.SubmitButton>
           )}
 
-          {inputOrder === 1 && (
-            <ExpirationDateInput
-              viewNextInput={viewNextInput}
-              viewPreviousInput={viewPreviousInput}
-            />
+          {inputOrder > 2 && <PasswordInput viewNextInput={viewNextInput} />}
+
+          {inputOrder > 1 && (
+            <>
+              <SecurityCodeInput viewNextInput={viewNextInput} />
+              <OwnerNameInput viewNextInput={viewNextInput} />
+            </>
           )}
 
-          {inputOrder === 2 && (
-            <OwnerNameInput
-              viewNextInput={viewNextInput}
-              viewPreviousInput={viewPreviousInput}
-            />
+          {inputOrder > 0 && (
+            <ExpirationDateInput viewNextInput={viewNextInput} />
           )}
 
-          {inputOrder === 3 && (
-            <SecurityCodeInput
-              viewNextInput={viewNextInput}
-              viewPreviousInput={viewPreviousInput}
-            />
-          )}
-
-          {inputOrder === 4 && (
-            <PasswordInput
-              viewPreviousInput={viewPreviousInput}
-              handleSubmitNewCardInfo={handleSubmitNewCardInfo}
-            />
-          )}
+          <CardNumberInput viewNextInput={viewNextInput} />
         </Style.InputContainer>
       ) : (
         <Style.Caption>{isOpen || '카드 클릭!'}</Style.Caption>
@@ -137,5 +124,23 @@ const Style = {
     font-size: 20px;
     margin-top: 5px;
     color: grey;
+  `,
+  SubmitButton: styled.button`
+    all: unset;
+
+    width: 100%;
+    height: 50px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #646464;
+    opacity: ${(props) => (props.disabled ? '0.3' : '1')};
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
   `,
 };

@@ -13,10 +13,7 @@ export default meta;
 export const ExpirationDate = () => {
   return (
     <CardInfoProvider>
-      <ExpirationDateInput
-        viewNextInput={() => {}}
-        viewPreviousInput={() => {}}
-      />
+      <ExpirationDateInput viewNextInput={() => {}} />
     </CardInfoProvider>
   );
 };

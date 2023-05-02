@@ -2,19 +2,20 @@ import { InputWrapper } from './template/InputWrapper';
 import { ErrorMessage, Input } from './template/Input';
 import styled from 'styled-components';
 import { useErrorMessage } from '../../../hooks/useError';
-import { MoveInputContainer } from '../MoveInputContainer';
 import {
   useCardInfoActionContext,
   useCardInfoValueContext,
 } from '../../../hooks/cardInfoContext';
+import { useEffect } from 'react';
 
 interface Props {
   viewNextInput: () => void;
-  viewPreviousInput: () => void;
 }
 
-const securityCodeInputValidator = (input: string | string[]) => {
+export const securityCodeInputValidator = (input: string | string[]) => {
   if (typeof input === 'object') return;
+
+  if (input === '') throw new Error('');
 
   if (!/^[0-9]*$/.test(input))
     throw new Error('보안 코드는 숫자만 입력가능합니다.');
@@ -23,10 +24,7 @@ const securityCodeInputValidator = (input: string | string[]) => {
     throw new Error('보안 코드 세자리를 모두 입력해주세요.');
 };
 
-export const SecurityCodeInput = ({
-  viewNextInput,
-  viewPreviousInput,
-}: Props) => {
+export const SecurityCodeInput = ({ viewNextInput }: Props) => {
   const { securityCode } = useCardInfoValueContext();
   const { setSecurityCode } = useCardInfoActionContext();
 
@@ -35,6 +33,10 @@ export const SecurityCodeInput = ({
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSecurityCode(e.target.value);
   };
+
+  useEffect(() => {
+    if (error === null) viewNextInput();
+  }, [error]);
 
   return (
     <div>
@@ -57,13 +59,6 @@ export const SecurityCodeInput = ({
         />
       </InputWrapper>
       <ErrorMessage>{error ?? ''}</ErrorMessage>
-      <MoveInputContainer
-        isLeftBtnShown={true}
-        isRightBtnShown={error === null}
-        viewNextInput={viewNextInput}
-        viewPreviousInput={viewPreviousInput}
-        progress={'4/5'}
-      />
     </div>
   );
 };
