@@ -41,8 +41,6 @@ const useExpiredDates = () => {
 
   const setState = (order: number, value: string) => {
     setExpiredDates({ ...expiredDates, [order]: value });
-
-    return true;
   };
 
   const setError = (message: string) => {
