@@ -17,9 +17,9 @@
 
 ### 리팩터링 목록
 
-- [ ] eslint.rc 만들어서 설정 관리하기
+- [x] .eslintrc 만들어서 설정 관리하기
 - [x] 절대 경로를 설정해보기
-- [ ] eslint의 import/order pathGroups를 절대 경로로 고쳐보기
+- [x] eslint의 import/order pathGroups를 수정해보기 (제대로 작동하지 않음)
 - [ ] 상수의 이름을 보고 용도가 유추되도록 수정하기
 - [ ] Button의 Wrapper 코드 가독성 높여보기 (삼항 연산자 개선, 한줄 비우기 등)
 - [ ] 코드 작성 중 depth가 2 깊이 이상 들어가지 않도록 한다.

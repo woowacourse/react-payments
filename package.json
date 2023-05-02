@@ -28,86 +28,6 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ],
-    "overrides": [
-      {
-        "files": [
-          "**/*.stories.*"
-        ],
-        "rules": {
-          "import/no-anonymous-default-export": "off"
-        }
-      }
-    ],
-    "rules": {
-      "import/order": [
-        "warn",
-        {
-          "pathGroups": [
-            {
-              "pattern": "react*",
-              "group": "external",
-              "position": "before"
-            },
-            {
-              "pattern": "./hooks/*",
-              "group": "internal",
-              "position": "after"
-            },
-            {
-              "pattern": "./pages/*",
-              "group": "internal",
-              "position": "after"
-            },
-            {
-              "pattern": "./components/*",
-              "group": "internal",
-              "position": "after"
-            },
-            {
-              "pattern": "./common/*",
-              "group": "internal",
-              "position": "after"
-            },
-            {
-              "pattern": "./types/*",
-              "group": "internal",
-              "position": "after"
-            },
-            {
-              "pattern": "./utils/*",
-              "group": "internal",
-              "position": "after"
-            },
-            {
-              "pattern": "./constants/*",
-              "group": "internal",
-              "position": "after"
-            }
-          ],
-          "alphabetize": {
-            "caseInsensitive": true,
-            "order": "asc"
-          },
-          "pathGroupsExcludedImportTypes": [],
-          "groups": [
-            "type",
-            "builtin",
-            "external",
-            "internal",
-            "parent",
-            "sibling",
-            "index",
-            "unknown"
-          ]
-        }
-      ]
-    }
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -133,6 +53,7 @@
     "@storybook/testing-library": "^0.0.14-next.2",
     "@types/styled-components": "^5.1.26",
     "babel-plugin-named-exports-order": "^0.0.2",
+    "eslint-plugin-import": "^2.27.5",
     "gh-pages": "^5.0.0",
     "prop-types": "^15.8.1",
     "storybook": "^7.0.5",
