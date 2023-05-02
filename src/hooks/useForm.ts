@@ -47,7 +47,7 @@ const useForm = ({ submitAction, changeAction, errorOptions }: Props) => {
     setError((prev: any) => ({ ...prev, [name]: '' }));
 
     if (value.length === maxLength) {
-      const formElements = target.closest('form')?.elements;
+      const formElements = target.form?.elements;
       const elements = formElements ? ([...formElements] as HTMLInputElement[]) : [];
       focusToNextFormElement(elements, target);
     }

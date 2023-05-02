@@ -4,11 +4,11 @@ const useSwitch = (initValue: boolean) => {
   const [state, setState] = useState(initValue);
 
   const turnOn = () => {
-    setState(true);
+    setState((prev) => !prev);
   };
 
   const turnOff = () => {
-    setState(false);
+    setState((prev) => !prev);
   };
 
   return { state, turnOn, turnOff };
