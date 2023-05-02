@@ -21,8 +21,8 @@ interface Props {
   children: ReactNode;
 }
 
-const CardListValueContext = createContext<CardInfo[]>([] as CardInfo[]);
-const CardListActionsContext = createContext<Actions>({} as Actions);
+const CardListValueContext = createContext<CardInfo[]>([]);
+const CardListActionsContext = createContext<Actions | undefined>(undefined);
 
 export const CardListProvider = ({ children }: Props) => {
   const [localData, setLocalData] = handleLocalStorage('react-payments-card-info');
@@ -47,9 +47,13 @@ export const CardListProvider = ({ children }: Props) => {
 };
 
 export const useCardListValue = () => {
-  return useContext(CardListValueContext);
+  const state = useContext(CardListValueContext);
+  if (!state) throw Error('cannot find Provider');
+  return state;
 };
 
 export const useCardListActions = () => {
-  return useContext(CardListActionsContext);
+  const actions = useContext(CardListActionsContext);
+  if (!actions?.setCardList) throw Error('cannot find Provider');
+  return actions;
 };

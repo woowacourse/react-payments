@@ -53,7 +53,7 @@ const CardRegisterForm = ({ showModal, turnToNicknameForm }: Props) => {
         <Input
           ref={firstInputRef}
           name="firstCardNumbers"
-          value={cardInfo?.firstCardNumbers}
+          value={cardInfo.firstCardNumbers}
           onChange={onChange}
           maxLength={4}
           center={true}
@@ -62,7 +62,7 @@ const CardRegisterForm = ({ showModal, turnToNicknameForm }: Props) => {
         />
         <Input
           name="secondCardNumbers"
-          value={cardInfo?.secondCardNumbers}
+          value={cardInfo.secondCardNumbers}
           onChange={onChange}
           maxLength={4}
           center={true}
@@ -71,7 +71,7 @@ const CardRegisterForm = ({ showModal, turnToNicknameForm }: Props) => {
         />
         <Input
           name="thirdCardNumbers"
-          value={cardInfo?.thirdCardNumbers}
+          value={cardInfo.thirdCardNumbers}
           onChange={onChange}
           maxLength={4}
           center={true}
@@ -80,7 +80,7 @@ const CardRegisterForm = ({ showModal, turnToNicknameForm }: Props) => {
         />
         <Input
           name="fourthCardNumbers"
-          value={cardInfo?.fourthCardNumbers}
+          value={cardInfo.fourthCardNumbers}
           onChange={onChange}
           maxLength={4}
           center={true}
@@ -91,7 +91,7 @@ const CardRegisterForm = ({ showModal, turnToNicknameForm }: Props) => {
       <ExpirationDate error={error}>
         <Input
           name="expirationMonth"
-          value={cardInfo?.expirationMonth}
+          value={cardInfo.expirationMonth}
           onChange={onChange}
           maxLength={2}
           center={true}
@@ -101,7 +101,7 @@ const CardRegisterForm = ({ showModal, turnToNicknameForm }: Props) => {
         />
         <Input
           name="expirationYear"
-          value={cardInfo?.expirationYear}
+          value={cardInfo.expirationYear}
           onChange={onChange}
           maxLength={2}
           center={true}
@@ -110,10 +110,10 @@ const CardRegisterForm = ({ showModal, turnToNicknameForm }: Props) => {
           numeric={true}
         />
       </ExpirationDate>
-      <OwnerName ownerName={cardInfo?.ownerName} maxLength={30} error={error}>
+      <OwnerName ownerName={cardInfo.ownerName} maxLength={30} error={error}>
         <Input
           name="ownerName"
-          value={cardInfo?.ownerName}
+          value={cardInfo.ownerName}
           onChange={onChange}
           maxLength={30}
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
@@ -123,7 +123,7 @@ const CardRegisterForm = ({ showModal, turnToNicknameForm }: Props) => {
       <SecurityNumbers error={error}>
         <Input
           name="securityNumbers"
-          value={cardInfo?.securityNumbers}
+          value={cardInfo.securityNumbers}
           onChange={onChange}
           maxLength={3}
           center={true}
@@ -134,7 +134,7 @@ const CardRegisterForm = ({ showModal, turnToNicknameForm }: Props) => {
       <Password error={error}>
         <Input
           name="firstPassword"
-          value={cardInfo?.firstPassword}
+          value={cardInfo.firstPassword}
           onChange={onChange}
           maxLength={1}
           center={true}
@@ -143,7 +143,7 @@ const CardRegisterForm = ({ showModal, turnToNicknameForm }: Props) => {
         />
         <Input
           name="secondPassword"
-          value={cardInfo?.secondPassword}
+          value={cardInfo.secondPassword}
           onChange={onChange}
           maxLength={1}
           center={true}

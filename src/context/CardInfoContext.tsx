@@ -21,8 +21,8 @@ interface Props {
   children: ReactNode;
 }
 
-const CardInfoValueContext = createContext<CardInfo>({} as CardInfo);
-const CardInfoActionsContext = createContext<Actions>({} as Actions);
+const CardInfoValueContext = createContext<CardInfo | undefined>(undefined);
+const CardInfoActionsContext = createContext<Actions | undefined>(undefined);
 
 export const CardInfoProvider = ({ children }: Props) => {
   const getInit = () => {
@@ -64,9 +64,13 @@ export const CardInfoProvider = ({ children }: Props) => {
 };
 
 export const useCardInfoValue = () => {
-  return useContext(CardInfoValueContext);
+  const state = useContext(CardInfoValueContext);
+  if (!state) throw Error('cannot find Provider');
+  return state;
 };
 
 export const useCardInfoActions = () => {
-  return useContext(CardInfoActionsContext);
+  const actions = useContext(CardInfoActionsContext);
+  if (!actions?.initCardInfo || !actions?.setCardInfo) throw Error('cannot find Provider');
+  return actions;
 };
