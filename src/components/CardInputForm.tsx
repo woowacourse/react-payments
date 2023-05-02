@@ -8,7 +8,6 @@ import {
   CARD_COMPANY_NOT_SELECTED_STRING,
   CARD_INPUT_LENGTH,
   PASSWORD_DIGIT_INDEX,
-  VALID_CARD_INPUT_FORM_LENGTH,
 } from "../constants";
 import {
   getSeperatedCardNumber,
@@ -48,7 +47,6 @@ const CardInputForm = ({ card, setCard, onSubmit }: CardInputFormType) => {
     switch (e.target.id) {
       case "cardNumber":
         e.target.value = getSeperatedCardNumber(e.target.value);
-
         break;
       case "expiredDate":
         e.target.value = getSeperatedExpiredDate(e.target.value);

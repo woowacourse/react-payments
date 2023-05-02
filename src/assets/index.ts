@@ -1,7 +1,6 @@
 export { default as ArrowLeft } from "./arrow-left.svg";
 export { default as IcChip } from "./ic-chip.svg";
 export { default as QuestionMark } from "./question-mark.svg";
-
 export { default as BcCard } from "./bc-card.svg";
 export { default as ShinhanCard } from "./shinhan-card.svg";
 export { default as KakaoCard } from "./kakao-card.svg";

@@ -7,23 +7,20 @@ import {
 } from "../constants";
 import { CardType } from "../types";
 
-export const getEmptyCard = (): CardType => {
-  return {
-    cardNumber: "",
-    expiredDate: "",
-    ownerName: "",
-    cvc: "",
-    password: ["", ""],
-    cardCompany: CARD_COMPANY_NOT_SELECTED_STRING,
-    name: "",
-  };
-};
+export const getEmptyCard = (): CardType => ({
+  cardNumber: "",
+  expiredDate: "",
+  ownerName: "",
+  cvc: "",
+  password: ["", ""],
+  cardCompany: CARD_COMPANY_NOT_SELECTED_STRING,
+  name: "",
+});
 
 export const getReplacedCardNumber = (cardNumber: string) => {
-  const test = cardNumber;
   return cardNumber.length > SEPERATED_CARD_NUMBER_LENGTH.SECOND
-    ? test.substring(0, 12) +
-        test
+    ? cardNumber.substring(0, 12) +
+        cardNumber
           .substring(12, cardNumber.length)
           .replaceAll(REGEX.globalNumber, "•")
     : cardNumber;

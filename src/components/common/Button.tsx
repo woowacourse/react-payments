@@ -22,7 +22,6 @@ const ButtonWrapper = styled.button<{ isShown: boolean }>`
 
   background: transparent;
   border: none;
-  /* transition: all 0.5s ease; */
 
   :active {
     opacity: 50%;
