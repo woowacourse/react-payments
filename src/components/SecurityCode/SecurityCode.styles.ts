@@ -4,12 +4,13 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #ecebf1;
+  background: ${(props) => props.theme.color.grey100};
   border-radius: 7px;
   margin-bottom: 20px;
 `;
 
-export const QuestionButton = styled.button`
+export const Tooltip = styled.button`
+  position: relative;
   width: 27px;
   height: 27px;
   margin-left: 12px;
@@ -18,6 +19,17 @@ export const QuestionButton = styled.button`
   border-radius: 50%;
   text-align: center;
   cursor: pointer;
+
+  &:hover::after,
+  &:focus::after {
+    content: 'CVC 번호는 카드 뒤 3자리 입니다.';
+    display: block;
+    width: 100px;
+    position: absolute;
+    left: 36px;
+    top: 0px;
+    font-size: 12px;
+  }
 `;
 
 export const InputWrapper = styled.div`

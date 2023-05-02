@@ -1,13 +1,24 @@
 import * as Styled from './Card.styles';
 import { CardType } from '../../types/Card';
+import { cardCompanies } from '../../constants/cards';
 
-type CardProps = Omit<CardType, 'id'>;
+type CardProps = Omit<CardType, 'id' | 'nickname'> & { nickname?: string };
 
-const Card = ({ cardNumbers, expiredDate, cardOwnerName }: CardProps) => {
+const Card = ({
+  cardNumbers,
+  expiredDate,
+  cardOwnerName,
+  cardCompany,
+}: CardProps) => {
+  const cardColor = cardCompanies.find(
+    (card) => card.name === cardCompany
+  )?.color;
+
   return (
     <>
-      <Styled.Wrapper>
+      <Styled.CardWrapper cardColor={cardColor}>
         <Styled.ChipWrapper>
+          <Styled.CardCompany>{cardCompany}</Styled.CardCompany>
           <Styled.Chip />
           <Styled.TextWrapper>
             <Styled.CardText>{cardNumbers[0]}</Styled.CardText>
@@ -26,7 +37,7 @@ const Card = ({ cardNumbers, expiredDate, cardOwnerName }: CardProps) => {
             </Styled.CardText>
           </Styled.TextWrapper>
         </Styled.ChipWrapper>
-      </Styled.Wrapper>
+      </Styled.CardWrapper>
     </>
   );
 };

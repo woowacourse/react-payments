@@ -1,16 +1,18 @@
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Title = styled.p`
   margin-top: 20px;
-  font-size: 20px;
+  font: ${(props) => props.theme.font.title};
   cursor: pointer;
 `;
 
-const Header = ({ page }: { page: string }) => {
+const Header = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const page = location.pathname;
 
-  return page === 'home' ? (
+  return page === '/' ? (
     <Title>보유카드</Title>
   ) : (
     <Title onClick={() => navigate(-1)}>&lt; &nbsp; 카드 추가</Title>

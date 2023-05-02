@@ -1,13 +1,9 @@
-import { useEffect, useState } from 'react';
-
 const useAddCard = (
   cardNumbers: Record<number, string>,
   expiredDate: Record<number, string>,
   securityCode: string,
   password: Record<number, string>
 ) => {
-  const [disabled, setDisabled] = useState(true);
-
   const isCardNumbersValid = () => {
     const { 0: first, 1: second, 2: third, 3: fourth } = cardNumbers;
     return (
@@ -30,18 +26,11 @@ const useAddCard = (
     return first && second;
   };
 
-  useEffect(() => {
-    if (
-      !isCardNumbersValid() ||
-      !isExpiredDateValid() ||
-      !isSecurityCodeValid() ||
-      !isPasswordValid()
-    ) {
-      setDisabled(true);
-      return;
-    }
-    setDisabled(false);
-  }, [expiredDate, cardNumbers, securityCode, password]);
+  const disabled =
+    !isCardNumbersValid() ||
+    !isExpiredDateValid() ||
+    !isSecurityCodeValid() ||
+    !isPasswordValid();
 
   return {
     disabled,

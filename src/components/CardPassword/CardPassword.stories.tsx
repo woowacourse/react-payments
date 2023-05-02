@@ -1,21 +1,29 @@
-import { Meta, StoryObj } from '@storybook/react';
-import CardPassword from './CardPassword';
+import { Meta } from '@storybook/react';
+import { useRef } from 'react';
+import CardPassword, { CardPasswordProps } from './CardPassword';
 
 const meta = {
   component: CardPassword,
   title: 'Section/CardPassword',
+  argTypes: {
+    checkPassword: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 } satisfies Meta<typeof CardPassword>;
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+export const CardPasswordStory = (args: CardPasswordProps) => {
+  const ref = useRef<HTMLInputElement>(null);
+  return <CardPassword {...args} ref={ref} />;
+};
 
-export const CardPasswordStory: Story = {
-  args: {
-    password: {
-      0: '0',
-      1: '2',
-    },
-    checkPassword: (order: number, value: string) => true,
+CardPasswordStory.args = {
+  password: {
+    0: '0',
+    1: '2',
   },
 };

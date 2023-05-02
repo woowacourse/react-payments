@@ -1,22 +1,37 @@
-import { Meta, StoryObj } from '@storybook/react';
-import CardNumbers from './CardNumbers';
+import { Meta } from '@storybook/react';
+import CardNumbers, { CardNumbersProps } from './CardNumbers';
+import { RefObject, useRef } from 'react';
 
 const meta = {
   component: CardNumbers,
   title: 'Section/CardNumbers',
+  argTypes: {
+    checkCardNumbers: {
+      table: {
+        disable: true,
+      },
+    },
+    nextRef: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 } satisfies Meta<typeof CardNumbers>;
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+export const CardNumbersStory = (
+  args: CardNumbersProps & { nextRef: RefObject<HTMLInputElement> }
+) => {
+  const ref = useRef<HTMLInputElement>(null);
+  return <CardNumbers {...args} ref={ref} />;
+};
 
-export const CardNumbersStory: Story = {
-  args: {
-    cardNumbers: {
-      0: '1111',
-      1: '2222',
-      2: '3333',
-      3: '4444',
-    },
-    checkCardNumbers: (order: number, value: string) => true,
+CardNumbersStory.args = {
+  cardNumbers: {
+    0: '1111',
+    1: '2222',
+    2: '3333',
+    3: '4444',
   },
 };

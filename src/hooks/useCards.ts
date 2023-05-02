@@ -1,19 +1,11 @@
-import { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import { useContext } from 'react';
+import { CardContext } from '../context/CardProvider';
 import { CardType } from '../types/Card';
 
 const useCards = () => {
-  const [cards, setCards] = useState<CardType[]>([]);
-
-  const handleSetCards = (
-    cardNumbers: Record<number, string>,
-    expiredDate: Record<number, string>,
-    cardOwnerName: string
-  ) => {
-    setCards([
-      ...cards,
-      { id: uuidv4(), cardNumbers, expiredDate, cardOwnerName },
-    ]);
+  const { cards, setCards } = useContext(CardContext);
+  const handleSetCards = (newCard: CardType) => {
+    setCards([...cards, newCard]);
   };
 
   return { cards, handleSetCards };

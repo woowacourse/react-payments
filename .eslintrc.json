@@ -8,14 +8,14 @@
     "ecmaVersion": "latest"
   },
   "parser": "@typescript-eslint/parser",
-  "plugins": [
-    "@typescript-eslint"
-  ],
+  "plugins": ["@typescript-eslint"],
   "extends": [
     "eslint:recommended",
     "prettier",
     "plugin:@typescript-eslint/recommended",
     "plugin:storybook/recommended"
   ],
-  "rules": {}
+  "rules": {
+    "@typescript-eslint/no-empty-function": "off"
+  }
 }
