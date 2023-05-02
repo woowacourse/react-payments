@@ -22,7 +22,7 @@ export function CardList() {
           {cards?.length === 0 ? '새로운 카드를 추가하세요' : ''}
         </_Direction>
         {cards &&
-          cards?.reverse().map((card, index) => {
+          cards.reverse().map((card, index) => {
             return (
               <React.Fragment key={index}>
                 <CardItem info={card}></CardItem>
