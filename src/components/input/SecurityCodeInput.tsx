@@ -1,12 +1,9 @@
-import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Tooltip } from '../Tooltip/Tooptip';
 import { Input } from './Input';
 import { InputContainer } from './InputContainer';
-import { isValidSecurityCode } from '../../cardInputValidator';
-import { isFullInput } from '../../utils';
-import { isNumeric } from '../../utils/validator';
-import { ERROR, PASSWORD_TEXT, SECURITY_CODE_SIZE } from '../../constants';
+import { useSecurityCodeInput } from '../../hooks/input/useSecurityCodeInput';
+import { CVC_TOOLTIP_MESSAGE, PASSWORD_TEXT, SECURITY_CODE_SIZE } from '../../constants';
 import { SecurityCode } from '../../types';
 
 interface Props {
@@ -22,29 +19,11 @@ export function SecurityCodeInput({
   setSecurityCode,
   moveFocusToPassword,
 }: Props) {
-  const [securityCodeError, setSecurityCodeError] = useState('');
-  const tooltipMessage = '카드 뒷면 서명란에 인쇄된 숫자 끝 3자리를 입력해주세요.';
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSecurityCode(e.target.value.toUpperCase());
-
-    if (!isNumeric(e.target.value)) {
-      setSecurityCodeError(ERROR.IS_NOT_NUMBER);
-      return;
-    }
-
-    setSecurityCodeError('');
-  };
-
-  const updateSecurityCodeError = () => {
-    if (isValidSecurityCode(securityCode)) return;
-
-    setSecurityCodeError(ERROR.INVALID_SECURITY_CODE);
-  };
-
-  useEffect(() => {
-    if (isFullInput(securityCode, SECURITY_CODE_SIZE) && moveFocusToPassword) moveFocusToPassword();
-  }, [securityCode]);
+  const { securityCodeError, updateSecurityCodeError, handleInputChange } = useSecurityCodeInput({
+    securityCode,
+    setSecurityCode,
+    moveFocusToPassword,
+  });
 
   return (
     <div>
@@ -71,7 +50,7 @@ export function SecurityCodeInput({
             aria-labelledby='securityCodeCaption'
           />
         </InputContainer>
-        <Tooltip message={tooltipMessage} />
+        <Tooltip message={CVC_TOOLTIP_MESSAGE} />
       </Style.TooltipContainer>
       <Style.Caption id='securityCodeCaption' aria-live='assertive'>
         {securityCodeError}

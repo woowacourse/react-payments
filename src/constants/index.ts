@@ -15,6 +15,7 @@ export const PASSWORD_TEXT = '•';
 export const CARD_ALIAS_SIZE = 20;
 
 export const CARD_SELECT_COMPLETE_BUTTON = '카드사 선택 완료';
+export const CVC_TOOLTIP_MESSAGE = '카드 뒷면 서명란에 인쇄된 숫자 끝 3자리를 입력해주세요.';
 
 export const CARD_COMPANIES = [
   'BC카드',

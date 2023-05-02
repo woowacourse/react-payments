@@ -1,9 +1,8 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 import { Input } from './Input';
 import { InputContainer } from './InputContainer';
-import { isEnglish, isOverMaxLength } from '../../utils/validator';
-import { ERROR, MAX_NAME_SIZE } from '../../constants';
+import { useOwnerNameInput } from '../../hooks/input/useOwnerNameInput';
+import { MAX_NAME_SIZE } from '../../constants';
 import { OwnerName } from '../../types';
 
 interface Props {
@@ -19,23 +18,10 @@ export function OwnerNameInput({
   setOwnerName,
   moveFocusToSecurityCode,
 }: Props) {
-  const [ownerNameError, setOwnerNameError] = useState('');
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setOwnerName(e.target.value.toUpperCase());
-
-    if (!isEnglish(e.target.value) || isOverMaxLength(e.target.value, MAX_NAME_SIZE)) {
-      setOwnerNameError(ERROR.INVALID_OWNER_NAME);
-      e.target.focus();
-      return;
-    }
-
-    setOwnerNameError('');
-  };
-
-  const handleEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' && moveFocusToSecurityCode) moveFocusToSecurityCode();
-  };
+  const { ownerNameError, handleInputChange, handleEnterPress } = useOwnerNameInput({
+    setOwnerName,
+    moveFocusToSecurityCode,
+  });
 
   return (
     <div>

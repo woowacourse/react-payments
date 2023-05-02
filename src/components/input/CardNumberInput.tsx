@@ -1,17 +1,11 @@
-import React, { Fragment, useRef, useState } from 'react';
+import React, { Fragment, useRef } from 'react';
 import styled from 'styled-components';
 import { Input } from './Input';
 import { InputContainer } from './InputContainer';
-import { isEmptyInput, isFirst, isFullInput, isLast } from '../../utils';
-import { isNumeric } from '../../utils/validator';
+import { useCardNumberInput } from '../../hooks/input/useCardNumberInput';
+import { isLast } from '../../utils';
 import { CardNumber } from '../../types';
-import {
-  CARD_NUMBER_INPUTS_LENGTH,
-  CARD_NUMBER_INPUT_SIZE,
-  PASSWORD_START_INDEX,
-  ERROR,
-} from '../../constants';
-import { isValidCardNumber } from '../../cardInputValidator';
+import { CARD_NUMBER_INPUTS_LENGTH, CARD_NUMBER_INPUT_SIZE } from '../../constants';
 
 interface Props {
   cardNumberInputRef: React.RefObject<HTMLInputElement>;
@@ -27,8 +21,6 @@ export function CardNumberInput({
   setCardNumber,
   moveFocusToExpirationDate,
 }: Props) {
-  const [isFullInputs, setIsFullInputs] = useState([false, false, false]);
-  const [cardNumberError, setCardNumberError] = useState('');
   const allRef = [
     cardNumberInputRef,
     useRef<HTMLInputElement>(null),
@@ -36,50 +28,14 @@ export function CardNumberInput({
     useRef<HTMLInputElement>(null),
   ];
 
-  const isPasswordInput = (index: number) => index >= PASSWORD_START_INDEX;
-
-  const handleBackspacePress = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Backspace' && isEmptyInput(cardNumber[index]) && !isFirst(index)) {
-      e.preventDefault();
-      setIsFullInputs((prev) => [...prev.slice(1), false]);
-      allRef.at(index - 1)?.current?.focus();
-    }
-  };
-
-  const handleCardNumberInputChange = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
-    const newCardNumber = [...cardNumber];
-    newCardNumber[index] = e.target.value;
-    setCardNumber(newCardNumber);
-
-    if (!isNumeric(e.target.value)) {
-      setCardNumberError(ERROR.IS_NOT_NUMBER);
-      return;
-    }
-    setCardNumberError('');
-
-    if (isFullInput(e.target.value, CARD_NUMBER_INPUT_SIZE)) {
-      setIsFullInputs((prev) => [true, ...prev.slice(0, -1)]);
-
-      if (!isLast(index, CARD_NUMBER_INPUT_SIZE)) allRef.at(index + 1)?.current?.focus();
-      if (isLast(index, CARD_NUMBER_INPUT_SIZE) && moveFocusToExpirationDate) {
-        moveFocusToExpirationDate();
-      }
-    }
-  };
-
-  const updateCardNumberError = (e: React.FocusEvent<HTMLElement>) => {
-    if (e.currentTarget.contains(e.relatedTarget)) return;
-    if (!(e.target instanceof HTMLInputElement)) return;
-
-    const inputs = [...cardNumber.slice(0, -1), e.target.value];
-
-    if (!isValidCardNumber(inputs)) {
-      setCardNumberError(ERROR.INVALID_CARD_NUMBER);
-      return;
-    }
-
-    setCardNumberError('');
-  };
+  const {
+    isFullInputs,
+    cardNumberError,
+    updateCardNumberError,
+    isPasswordInput,
+    handleCardNumberInputChange,
+    handleBackspacePress,
+  } = useCardNumberInput({ cardNumber, allRef, setCardNumber, moveFocusToExpirationDate });
 
   return (
     <Style.Container onBlur={updateCardNumberError}>

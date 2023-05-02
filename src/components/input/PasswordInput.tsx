@@ -1,11 +1,9 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import styled from 'styled-components';
 import { Input } from './Input';
 import { InputContainer } from './InputContainer';
-import { isValidPassword } from '../../cardInputValidator';
-import { isEmptyInput, isFirst, isLast } from '../../utils';
-import { isNumeric } from '../../utils/validator';
-import { ERROR, PASSWORD_SIZE, PASSWORD_TEXT } from '../../constants';
+import { usePasswordInput } from '../../hooks/input/usePasswordInput';
+import { PASSWORD_TEXT } from '../../constants';
 import { Password } from '../../types';
 
 interface Props {
@@ -15,47 +13,9 @@ interface Props {
 }
 
 export function PasswordInput({ password, passwordInputRef, setPassword }: Props) {
-  const [passwordError, setPasswordError] = useState('');
   const allRef = [passwordInputRef, useRef<HTMLInputElement>(null)];
-
-  const handleBackspacePress = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Backspace' && isEmptyInput(password[index]) && !isFirst(index)) {
-      e.preventDefault();
-      allRef.at(index - 1)?.current?.focus();
-    }
-  };
-
-  const handlePasswordInputChange = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
-    const newPassword = [...password];
-    newPassword[index] = e.target.value;
-    setPassword(newPassword);
-
-    if (!isNumeric(e.target.value)) {
-      setPasswordError(ERROR.IS_NOT_NUMBER);
-      return;
-    }
-
-    setPasswordError('');
-
-    if (!isLast(index, PASSWORD_SIZE) && !isEmptyInput(e.target.value)) {
-      allRef.at(index + 1)?.current?.focus();
-      return;
-    }
-  };
-
-  const updatePasswordError = (e: React.FocusEvent<HTMLElement>) => {
-    if (e.currentTarget.contains(e.relatedTarget)) return;
-    if (!(e.target instanceof HTMLInputElement)) return;
-
-    const inputs = [...password.slice(0, -1), e.target.value];
-
-    if (!isValidPassword(inputs)) {
-      setPasswordError(ERROR.INVALID_PASSWORD);
-      return;
-    }
-
-    setPasswordError('');
-  };
+  const { passwordError, updatePasswordError, handleBackspacePress, handlePasswordInputChange } =
+    usePasswordInput({ allRef, password, setPassword });
 
   return (
     <Style.Container onBlur={updatePasswordError}>
