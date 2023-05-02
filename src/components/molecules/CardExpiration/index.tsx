@@ -8,25 +8,30 @@ import { VStack } from '../../layout/flexbox';
 
 import { changeCardExpirationDate } from '../../../store/action';
 import { useExpirationError } from '../../../hooks/useExpirationError';
-import { useCardFocusRefs, useCardPaymentDispatch } from '../../../hooks/useContextHooks';
+import {
+  useCardFocusRefs,
+  useCardPaymentDispatch,
+  useMoveFocus,
+} from '../../context/CardPaymentContext';
 
 /* component */
 const CardExpiration: React.FC = () => {
   const inputRefs = useCardFocusRefs();
-  const [{ isDataError, isError1, isError2 }, { handleError1, handleError2 }] =
+  const [{ isDateError, isMonthError, isYearError }, { handleMonthError, handleYearError }] =
     useExpirationError();
-
+  const moveFocus = useMoveFocus();
   const dispatch = useCardPaymentDispatch();
 
   const handleChange = (id: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(changeCardExpirationDate(id, e.target.value));
+    moveFocus(e);
 
     if (id === 0) {
-      handleError1(e);
+      handleMonthError(e);
       return;
     }
 
-    handleError2(e);
+    handleYearError(e);
   };
 
   return (
@@ -37,7 +42,6 @@ const CardExpiration: React.FC = () => {
         </Message>
         <StyledCardInputWrapper>
           <Input
-            id={4}
             type="text"
             variant="underline"
             placeholder="MM"
@@ -47,7 +51,8 @@ const CardExpiration: React.FC = () => {
             maxLength={2}
             center={true}
             required={true}
-            isValid={!isError1}
+            isValid={!isMonthError}
+            data-form-id={4}
             ref={(el: HTMLInputElement) => (inputRefs.current[4] = el)}
             onChange={handleChange(0)}
           />
@@ -62,13 +67,14 @@ const CardExpiration: React.FC = () => {
             maxLength={2}
             center={true}
             required={true}
-            isValid={!isError2}
+            isValid={!isYearError}
+            data-form-id={5}
             ref={(el: HTMLInputElement) => (inputRefs.current[5] = el)}
             onChange={handleChange(1)}
           />
         </StyledCardInputWrapper>
       </StyledCardLabel>
-      {(isDataError || isError1 || isError2) && (
+      {(isDateError || isMonthError || isYearError) && (
         <Message fontWeight={500} fontSize="12px" color="red" lineHeight="14px">
           만료가 되지 않은 카드 만료일만 입력이 가능합니다!!
         </Message>

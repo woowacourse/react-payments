@@ -1,16 +1,30 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { Card } from '../../../store/type';
 import Message from '../../atomics/Message';
+import { useCardModalDispatch } from '../../context/CardPaymentContext';
 import { SBetweenStack } from '../../layout/flexbox';
+import { color } from '../../stylesheet/theme';
 
 type CardItemProps = {
   card: Omit<Card, 'id'>;
 };
 
 const CardItem: React.FC<CardItemProps> = ({ card }) => {
+  const cardModalDispatch = useCardModalDispatch();
+  const location = useLocation();
+
+  const handleModal = () => {
+    if (location.pathname !== '/addCard') return;
+    cardModalDispatch();
+  };
+
   return (
-    <StyledCardItemBox>
+    <StyledCardItemBox onClick={handleModal} cardType={card.cardName}>
+      <StyledCardName fontWeight={500} fontSize="12px" lineHeight="14px" color="#fff">
+        {card.cardName}
+      </StyledCardName>
       <StyledCardItemGoldBox />
       <CardNumberWrapper>
         {Array(4)
@@ -61,17 +75,19 @@ const CardItem: React.FC<CardItemProps> = ({ card }) => {
   );
 };
 
-const StyledCardItemBox = styled.div`
+const StyledCardItemBox = styled.div<{ cardType: string }>`
   width: 214px;
   height: 132px;
-  background-color: #333333;
+  background-color: ${(props) => color[props.cardType] || '#333'};
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
   padding: 12px;
 `;
 
+const StyledCardName = styled(Message)``;
+
 const StyledCardItemGoldBox = styled.div`
-  margin-top: 40px;
+  margin-top: 20px;
 
   width: 40px;
   height: 24px;

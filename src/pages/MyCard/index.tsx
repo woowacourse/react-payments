@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import Header from '../../molecules/Header';
-import CardList from '../../organisms/CardList';
-import CardRegister from '../../organisms/CardRegister';
+import Header from '../../components/molecules/Header';
+import CardList from '../../components/organisms/CardList';
+import CardRegister from '../../components/organisms/CardRegister';
 
 const MyCard: React.FC = () => {
   return (

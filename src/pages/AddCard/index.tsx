@@ -1,9 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useCardPaymentState } from '../../../hooks/useContextHooks';
-import CardItem from '../../molecules/CardItem';
-import Header from '../../molecules/Header';
-import CardForm from '../../organisms/CardForm';
+import { useCardPaymentState } from '../../components/context/CardPaymentContext';
+
+import CardItem from '../../components/molecules/CardItem';
+import Header from '../../components/molecules/Header';
+import CardForm from '../../components/organisms/CardForm';
+import AddCardModal from '../../components/templates/AddCardModal';
 
 const AddCard: React.FC = () => {
   const card = useCardPaymentState();
@@ -14,6 +16,7 @@ const AddCard: React.FC = () => {
       <AddCardWrapper>
         <CardItem card={card} />
         <CardForm />
+        <AddCardModal />
       </AddCardWrapper>
     </>
   );

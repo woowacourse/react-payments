@@ -1,15 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
-import {
-  useCardFocusRefs,
-  useCardPaymentDispatch,
-  useMoveFocus,
-} from '../../../hooks/useContextHooks';
+
 import { useInputError } from '../../../hooks/useInputError';
 import { changeNumbersAction } from '../../../store/action';
 
 import Input from '../../atomics/Input';
 import Message from '../../atomics/Message';
+import {
+  useCardFocusRefs,
+  useCardPaymentDispatch,
+  useMoveFocus,
+} from '../../context/CardPaymentContext';
 
 import { VStack } from '../../layout/flexbox';
 
@@ -19,6 +20,8 @@ const CardNumbers: React.FC = () => {
   const moveFocus = useMoveFocus();
   const errorList = [useInputError(), useInputError(), useInputError(), useInputError()];
   const dispatch = useCardPaymentDispatch();
+
+  const isError = errorList[0][0] || errorList[1][0] || errorList[2][0] || errorList[3][0];
 
   const handleChange =
     (id: number, handleError: (e: React.ChangeEvent<HTMLInputElement>) => void) =>
@@ -37,7 +40,6 @@ const CardNumbers: React.FC = () => {
         <StyledCardInputWrapper>
           {errorList.map(([error, handleError], idx) => (
             <Input
-              id={idx}
               key={idx}
               type={idx < 2 ? 'text' : 'password'}
               variant="underline"
@@ -48,13 +50,14 @@ const CardNumbers: React.FC = () => {
               center={true}
               required={true}
               isValid={!error}
+              data-form-id={idx}
               ref={(el: HTMLInputElement) => (inputRefs.current[idx] = el)}
               onChange={handleChange(idx, handleError)}
             />
           ))}
         </StyledCardInputWrapper>
       </StyledCardLabel>
-      {(errorList[0][0] || errorList[1][0] || errorList[2][0] || errorList[3][0]) && (
+      {isError && (
         <Message fontWeight={500} fontSize="12px" color="red" lineHeight="14px">
           총 16자리 카드 번호를 입력해주세요!!
         </Message>

@@ -10,12 +10,13 @@ import CardPWD from '../../molecules/CardPWD';
 
 import { useNavigate } from 'react-router-dom';
 import FocusRefProvider from '../../context/FocusRefsProvider';
+
+import { getUniqueID } from '../../../utils/key';
 import {
   useCardListDispatch,
   useCardListState,
   useCardPaymentState,
-} from '../../../hooks/useContextHooks';
-import { getUniqueID } from '../../../utils/key';
+} from '../../context/CardPaymentContext';
 
 /* component */
 const CardForm: React.FC = () => {
@@ -32,6 +33,7 @@ const CardForm: React.FC = () => {
       ...cardList,
       {
         id: getUniqueID(),
+        cardName: state.cardName,
         cardNumbers: state.cardNumbers,
         cardExpirationDate: state.cardExpirationDate,
         cardOwner: state.cardOwner,
@@ -40,7 +42,7 @@ const CardForm: React.FC = () => {
       },
     ]);
 
-    navigate('/');
+    navigate('/addCardAlias');
   };
 
   return (

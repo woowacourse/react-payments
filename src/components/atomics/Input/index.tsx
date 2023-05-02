@@ -13,7 +13,7 @@ interface InputStyleProps {
   placeholder?: string;
   width: string;
   minLength?: number;
-  maxLength: number;
+  maxLength?: number;
   center: boolean;
   required?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;

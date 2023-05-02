@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { CardListContext } from '../../hooks/useContextHooks';
+
 import { Card } from '../../store/type';
+import { CardListContext } from './CardPaymentContext';
 
 type ChildProps = {
   children: React.ReactNode;

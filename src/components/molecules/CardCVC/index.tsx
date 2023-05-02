@@ -8,17 +8,23 @@ import { useInputError } from '../../../hooks/useInputError';
 import { VStack } from '../../layout/flexbox';
 
 import { changeCardCVCAction } from '../../../store/action';
-import { useCardFocusRefs, useCardPaymentDispatch } from '../../../hooks/useContextHooks';
+import {
+  useCardFocusRefs,
+  useCardPaymentDispatch,
+  useMoveFocus,
+} from '../../context/CardPaymentContext';
 
 /* component */
 const CardCVC: React.FC = () => {
   const inputRefs = useCardFocusRefs();
   const [isError, handleError] = useInputError();
   const dispatch = useCardPaymentDispatch();
+  const moveFocus = useMoveFocus();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     handleError(e);
     dispatch(changeCardCVCAction(0, e.target.value));
+    moveFocus(e);
   };
 
   return (
@@ -28,7 +34,6 @@ const CardCVC: React.FC = () => {
           보안 코드(CVC/CVV)
         </Message>
         <Input
-          id={6}
           variant="underline"
           type="password"
           pattern="[0-9]{3}"
@@ -38,6 +43,7 @@ const CardCVC: React.FC = () => {
           maxLength={3}
           center={true}
           required={true}
+          data-form-id={7}
           ref={(el: HTMLInputElement) => (inputRefs.current[7] = el)}
           onChange={handleChange}
         />

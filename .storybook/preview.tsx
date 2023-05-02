@@ -7,18 +7,21 @@ import { BrowserRouter } from 'react-router-dom';
 import PaymentsProvider from '../src/components/context/PaymentsProvider';
 import FocusRefProvider from '../src/components/context/FocusRefsProvider';
 import CardListProvider from '../src/components/context/CardListProvider';
+import CardModalProvider from '../src/components/context/CardModalProvider';
 
 export const decorators = [
   (Story) => {
     return (
       <BrowserRouter>
         <CardListProvider>
-          <PaymentsProvider>
-            <FocusRefProvider>
-              <GlobalStyle />
-              <Story />
-            </FocusRefProvider>
-          </PaymentsProvider>
+          <CardModalProvider>
+            <PaymentsProvider>
+              <FocusRefProvider>
+                <GlobalStyle />
+                <Story />
+              </FocusRefProvider>
+            </PaymentsProvider>
+          </CardModalProvider>
         </CardListProvider>
       </BrowserRouter>
     );
