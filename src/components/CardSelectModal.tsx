@@ -16,6 +16,7 @@ const CardSelectModal = ({ determineCardType, closeModal }: modalProps) => {
       <div className="card-select-modal">
         {BANK_LIST.map((name) => (
           <BankIcon
+            key={name}
             bankName={name}
             determineCardType={determineCardType}
             selectCardType={closeModal}
