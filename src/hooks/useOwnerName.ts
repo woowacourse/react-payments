@@ -16,7 +16,7 @@ const useOwnerName = () => {
     }
 
     setOwnerNameError('');
-    setCardOwnerName(value);
+    setCardOwnerName(value.toUpperCase());
   };
 
   return { cardOwnerName, ownerNameError, handleCardOwnerName };
