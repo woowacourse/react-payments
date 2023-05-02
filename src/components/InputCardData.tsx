@@ -55,9 +55,9 @@ const InputCardData = ({
       ref={Ref}
       onChange={(e) => {
         onChange(e);
-        handleError(e);
         nextFocus(e);
         handleInputData(dataId, e);
+        if (handleError) handleError(e);
       }}
       onFocus={onFlip}
       name={name}

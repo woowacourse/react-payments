@@ -49,7 +49,7 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
   maxDataLength: number;
   dataId: number;
   refObject: React.Ref<HTMLInputElement>;
-  handleError: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleError?: (e: ChangeEvent<HTMLInputElement>) => void;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   nextFocus: (e: ChangeEvent) => void;
   onFlip: () => void;

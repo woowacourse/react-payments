@@ -121,12 +121,7 @@ const FormCardAdd = ({
 
   return (
     <>
-      <form
-        className="add-card-form"
-        onSubmit={(e) => {
-          viewAddNicknameModal(e);
-        }}
-      >
+      <form className="add-card-form" onSubmit={viewAddNicknameModal}>
         <div>
           <span className="form-label">카드 번호</span>
           <div className="card-number-input-container">
@@ -258,12 +253,9 @@ const FormCardAdd = ({
             name="owner"
             dataId={5}
             refObject={inputRef[5]}
-            handleError={() => {}}
             onChange={cardOwner.onChange}
             nextFocus={moveFocus}
-            onFlip={() => {
-              handleCardUnflip();
-            }}
+            onFlip={handleCardUnflip}
             handleInputData={handleInputData}
           />
         </div>
@@ -285,9 +277,7 @@ const FormCardAdd = ({
               handleError={() => {}}
               onChange={securityCode.onChange}
               nextFocus={moveFocus}
-              onFlip={() => {
-                handleCardFlip();
-              }}
+              onFlip={handleCardFlip}
               handleInputData={handleInputData}
             />
             <Tooltip title={CVC_TOOLTIP_TITLE} detail={CVC_TOOLTIP_DETAIL} />
