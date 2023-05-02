@@ -4,7 +4,6 @@ import { Header } from "../components/@common/Header";
 import { useState } from "react";
 import { getData } from "../utils/localStorage";
 import { Card, CardProps } from "../components/@common/card/card";
-import { ReactComponent as BackButtonIc } from "../assets/backButtonIc.svg";
 import { PAGE_HEADER } from "../constants";
 import { PATH } from "../constants/path";
 import { BackButton } from "../components/@common/button/backButton";

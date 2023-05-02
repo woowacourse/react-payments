@@ -11,7 +11,6 @@ import { setData } from "../utils/localStorage";
 export function AddCardNicknamePage() {
   const { state } = useLocation();
   const navigate = useNavigate();
-  const nicknameInput = useRef<any>({ current: {} }); // ref수정 필요
   const [nickname, setNickname] = useState("");
 
   function getNicknameInput(e: React.ChangeEvent<HTMLInputElement>) {
@@ -45,7 +44,6 @@ export function AddCardNicknamePage() {
           <Input
             name="nickname"
             maxLength={15}
-            inputRef={nicknameInput}
             placeholder="카드의 별명을 입력해주세요 (선택)"
             onChange={getNicknameInput}
             asChild>

@@ -20,7 +20,7 @@ export const TEXT_LENGTH: TextLength = {
   THIRD: 4,
   FOURTH: 4,
   MONTH: 1,
-  YAER: 2,
+  YEAR: 2,
   CODE: 3,
   FIRSTPASSWORD: 1,
   SECONDPASSWORD: 1,

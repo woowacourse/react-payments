@@ -1,12 +1,10 @@
 import {
   Children,
   cloneElement,
-  forwardRef,
   isValidElement,
   PropsWithChildren,
   useContext,
 } from "react";
-import styled from "styled-components";
 import { ModalContext } from "../../../contexts/modal";
 
 interface ModalTriggerProps {

@@ -1,7 +1,5 @@
-import { useContext } from "react";
 import styled from "styled-components";
 import { CardColor, CardInfo } from "../../../type/card";
-import { CardNumberIndex } from "../../../type/input";
 
 export interface CardProps extends CardInfo {}
 

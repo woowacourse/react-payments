@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { ModalContext } from "../../../contexts/modal";
 
 export function ModalBackDrop() {
-  const { isOpen, openLocalModal, closeLocalModal } = useContext(ModalContext);
+  const { isOpen, closeLocalModal } = useContext(ModalContext);
 
   window.addEventListener("keyup", () => {
     closeLocalModal();
