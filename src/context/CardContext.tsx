@@ -17,6 +17,15 @@ interface CardContextType {
   setCard: React.Dispatch<React.SetStateAction<CardItemInfo>>;
 }
 
+const INIT_STATE = {
+  id: 0,
+  cardNumber: ['', '', '', ''],
+  expirationDate: ['', ''],
+  name: '',
+  bankName: '',
+  cardName: '',
+};
+
 export const CardContext = createContext<CardContextType>({
   cardName: '',
   setCardName: () => {},
@@ -24,14 +33,7 @@ export const CardContext = createContext<CardContextType>({
   setBankName: () => {},
   cardList: [],
   setCardList: () => {},
-  card: {
-    id: 0,
-    cardNumber: ['', '', '', ''],
-    expirationDate: ['', ''],
-    name: '',
-    bankName: '',
-    cardName: '',
-  },
+  card: INIT_STATE,
   setCard: () => {},
 });
 
@@ -41,14 +43,7 @@ export const CardContextProvider = ({ children }: CardProviderProps) => {
   const [cardList, setCardList] = useState<CardItemInfo[]>(
     cardLocalStorage.getCardList() || []
   );
-  const [card, setCard] = useState<CardItemInfo>({
-    id: 0,
-    cardNumber: ['', '', '', ''],
-    expirationDate: ['', ''],
-    name: '',
-    bankName: '',
-    cardName: '',
-  });
+  const [card, setCard] = useState<CardItemInfo>(INIT_STATE);
 
   return (
     <CardContext.Provider
