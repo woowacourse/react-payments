@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Card, CardCompany } from "../../types";
 import { ReactComponent as ICChip } from "../../assets/ic-chip.svg";
+import { memo } from "react";
 
 type PreviewCard = Pick<Card, "cardNumber" | "ownerName" | "expirationDate" | "cardCompany">;
 
@@ -48,7 +49,15 @@ const CardPreview = ({ card, animation }: CardPreviewProps) => {
   );
 };
 
-export default CardPreview;
+const areEqual = (prevProps: any, nextProps: any): boolean => {
+  return (
+    prevProps.card.cardCompany === nextProps.card.cardCompany &&
+    prevProps.card.cardNumber === nextProps.card.cardNumber &&
+    prevProps.card.ownerName === nextProps.card.ownerName &&
+    prevProps.card.expirationDate === nextProps.card.expirationDate
+  );
+};
+export default memo(CardPreview, areEqual);
 
 const CardLayout = styled.div<{ transition: string; transform: string; cardCompany: CardCompany }>`
   position: relative;
