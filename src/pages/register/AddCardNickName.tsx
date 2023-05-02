@@ -43,19 +43,9 @@ export const AddCardNickName = () => {
             companyId={companyId}
           />
         </Style.CardWrapper>
-        <Input
+        <Style.NickNameInput
           ref={inputRef}
           autoFocus={true}
-          style={{
-            backgroundColor: 'white',
-            borderBottom: '1px solid',
-            borderRadius: 0,
-            alignItems: 'flex-end',
-            marginTop: '124px',
-            fontSize: '18px',
-            height: 'max-content',
-            padding: '5px',
-          }}
           onChange={(e) => setNickName(e.target.value)}
           value={nickName ?? ''}
           placeholder="카드 별명"
@@ -92,6 +82,18 @@ const Style = {
   CardWrapper: styled.div`
     display: flex;
     justify-content: center;
+  `,
+  NickNameInput: styled.input`
+    all: unset;
+
+    background-color: white;
+    border-bottom: 1px solid;
+    border-radius: 0;
+    align-items: flex-end;
+    margin-top: 124px;
+    font-size: 18px;
+    height: max-content;
+    padding: 5px;
   `,
   ButtonWrapper: styled.div`
     display: flex;
