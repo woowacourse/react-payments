@@ -9,7 +9,7 @@ export const CARD_COMPANIES_ENGLISH = [
   'kb',
 ] as const;
 
-const CARD_COMPANIES = {
+const CARD_COMPANIES: Record<CardCompany, string> = {
   bc: 'BC카드',
   shinhan: '신한카드',
   kakao: '카카오뱅크',
