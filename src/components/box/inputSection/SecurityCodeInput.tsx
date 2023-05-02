@@ -2,10 +2,19 @@ import styled from 'styled-components';
 import InputSectionTemplate from '../../template/InputSectionTemplate';
 import InputBox, { InputType } from '../../common/InputBox';
 import { InputStateProps } from '../../../abstracts/types';
-import HelpButtonImage from '../../../assets/HelpButtonImage';
+import HelpButtonImage from '../../../assets/buttonImage/HelpButtonImage';
 
 const SecurityCodeInput = (props: InputStateProps) => {
-  const inputs: InputType[] = [{ textType: 'number', maxLength: 3, required: true, textSecurity: true }];
+  const inputs: InputType[] = [
+    {
+      textType: 'number',
+      maxLength: 3,
+      required: true,
+      textSecurity: true,
+      inputValues: props.inputValues as string,
+      setInputValues: props.setInputValues,
+    },
+  ];
   return (
     <InputSectionTemplate label="보안 코드(CVC/CVV)">
       <InputBox inputs={inputs} align="center" {...props} />

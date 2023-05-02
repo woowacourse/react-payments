@@ -4,14 +4,14 @@ import Header from '../common/Header';
 
 interface PageTemplateProps {
   children: React.ReactNode;
-  title: string;
+  title?: string;
   onClickBack?: () => void;
 }
 
 const PageTemplate = ({ children, title, onClickBack }: PageTemplateProps) => {
   return (
     <PageWrapper>
-      <Header title={title} onClickBack={onClickBack}></Header>
+      {title && <Header title={title} onClickBack={onClickBack}></Header>}
       {children}
     </PageWrapper>
   );
@@ -20,12 +20,16 @@ const PageTemplate = ({ children, title, onClickBack }: PageTemplateProps) => {
 export default PageTemplate;
 
 const PageWrapper = styled.main`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 
   min-width: 375px;
   width: 375px;
 
   padding: 0 28px 28px 28px;
+
+  overflow-y: hidden;
 `;

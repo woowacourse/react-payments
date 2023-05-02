@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import BackButtonImage from '../../assets/BackButtonImage';
+import BackButtonImage from '../../assets/buttonImage/BackButtonImage';
 
 interface HeaderProps {
   title: string;

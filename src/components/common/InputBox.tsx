@@ -4,38 +4,24 @@ import styled from 'styled-components';
 export interface InputType extends InputHTMLAttributes<HTMLInputElement> {
   textType: 'text' | 'number';
   textSecurity?: boolean;
+  inputValues: string;
+  setInputValues: (val: string) => void;
 }
 
 interface InputBoxProps {
   inputs: InputType[];
-  inputValues: string | string[];
-  setInputValues: (val: string | string[]) => void;
   align: string;
   separator?: string;
   isFullWidth?: boolean;
 }
 
-const InputBox = ({
-  inputs,
-  inputValues,
-  setInputValues,
-  align,
-  separator,
-  isFullWidth = false,
-}: InputBoxProps) => {
-  const onChangeInput = (textType: string, index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (textType === 'number' && isNaN(Number(e.target.value))) {
+const InputBox = ({ inputs, align, separator, isFullWidth = false }: InputBoxProps) => {
+  const onChangeInput = (props: InputType, index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (props.textType === 'number' && isNaN(Number(e.target.value))) {
       return;
     }
 
-    if (typeof inputValues === 'string') {
-      setInputValues(e.target.value);
-      return;
-    }
-
-    const newInputValues = inputValues.slice();
-    newInputValues[index] = e.target.value;
-    setInputValues(newInputValues);
+    props.setInputValues(e.target.value);
   };
 
   return (
@@ -46,8 +32,8 @@ const InputBox = ({
           <Input
             {...props}
             type="text"
-            value={typeof inputValues === 'string' ? inputValues : inputValues[index]}
-            onChange={onChangeInput(props.textType, index)}
+            value={props.inputValues}
+            onChange={onChangeInput(props, index)}
             minLength={props.required ? props.maxLength : 0}
             align={align}
           />

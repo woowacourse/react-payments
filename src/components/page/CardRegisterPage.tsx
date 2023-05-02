@@ -6,10 +6,10 @@ import OwnerNameInput from '../box/inputSection/OwnerNameInput';
 import SecurityCodeInput from '../box/inputSection/SecurityCodeInput';
 import CardPasswordInput from '../box/inputSection/CardPasswordInput';
 import styled from 'styled-components';
-import { CardType, Page, PageProps } from '../../abstracts/types';
+import { Bank, CardType, Page, PageProps } from '../../abstracts/types';
 import PageTemplate from '../template/PageTemplate';
-import useLocalStorage from '../../hooks/useLocalStorage';
-import { CARD_LIST_STORAGE_KEY } from '../../abstracts/constants';
+import BankSelectBottomSheet from '../box/BankSelectBottomSheet';
+import BottomSheetTemplate from '../template/BottomSheetTemplate';
 
 interface CardFormState extends Omit<CardType, 'id' | 'cardPassword'> {
   cardPassword1: string;
@@ -17,6 +17,8 @@ interface CardFormState extends Omit<CardType, 'id' | 'cardPassword'> {
 }
 
 const CardRegisterPage = ({ navigate }: PageProps) => {
+  const [isOnBankModal, setIsOnBankModal] = useState<boolean>(false);
+
   const [card, setCard] = useState<CardFormState>({
     cardNumber: ['', '', '', ''],
     expireDate: ['', ''],
@@ -24,9 +26,8 @@ const CardRegisterPage = ({ navigate }: PageProps) => {
     securityCode: '',
     cardPassword1: '',
     cardPassword2: '',
+    bank: undefined,
   });
-
-  const { pushLocalStorage } = useLocalStorage<CardType[]>(CARD_LIST_STORAGE_KEY);
 
   const submitNewCard = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -38,25 +39,32 @@ const CardRegisterPage = ({ navigate }: PageProps) => {
       ownerName,
       securityCode,
       cardPassword: cardPassword1 + cardPassword2,
+      bank,
     };
 
-    pushLocalStorage(newCard);
-    navigate(Page.list);
+    navigate(Page.aliasSet, newCard);
   };
 
   const onClickBack = () => {
     navigate(Page.list);
   };
 
-  const onChange = (key: keyof CardFormState) => (value: string | string[]) => {
+  const onChange = (key: keyof CardFormState) => (value: string | string[] | Bank) => {
     setCard((prev) => ({ ...prev, [key]: value }));
   };
 
-  const { cardNumber, expireDate, ownerName, securityCode, cardPassword1, cardPassword2 } = card;
+  const { cardNumber, expireDate, ownerName, securityCode, cardPassword1, cardPassword2, bank } = card;
 
   return (
     <PageTemplate title="카드 추가" onClickBack={onClickBack}>
-      <Card cardNumber={cardNumber} ownerName={ownerName} expireDate={expireDate} />
+      <Card
+        cardNumber={cardNumber}
+        ownerName={ownerName}
+        expireDate={expireDate}
+        bank={bank}
+        onClick={() => setIsOnBankModal(true)}
+      />
+
       <InputForm onSubmit={submitNewCard}>
         <CardNumberInput inputValues={cardNumber} setInputValues={onChange('cardNumber')} />
         <ExpireDateInput inputValues={expireDate} setInputValues={onChange('expireDate')} />
@@ -76,6 +84,16 @@ const CardRegisterPage = ({ navigate }: PageProps) => {
           <SubmitButton type="submit">다음</SubmitButton>
         </ButtonWrapper>
       </InputForm>
+      {isOnBankModal && (
+        <BottomSheetTemplate onClose={() => setIsOnBankModal(false)} modalState={isOnBankModal}>
+          <BankSelectBottomSheet
+            onClose={() => setIsOnBankModal(false)}
+            modalState={isOnBankModal}
+            bank={bank}
+            setBank={(newBank: Bank) => onChange('bank')(newBank)}
+          />
+        </BottomSheetTemplate>
+      )}
     </PageTemplate>
   );
 };

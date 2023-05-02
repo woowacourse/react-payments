@@ -9,11 +9,30 @@ interface CardPasswordInputProps {
 }
 
 const CardPasswordInput = ({ cardPassword1Props, cardPassword2Props }: CardPasswordInputProps) => {
-  const inputs: InputType[] = [{ textType: 'number', maxLength: 1, required: true, textSecurity: true }];
+  const pw1Inputs: InputType[] = [
+    {
+      textType: 'number',
+      maxLength: 1,
+      required: true,
+      textSecurity: true,
+      inputValues: cardPassword1Props.inputValues as string,
+      setInputValues: cardPassword1Props.setInputValues,
+    },
+  ];
+  const pw2Inputs: InputType[] = [
+    {
+      textType: 'number',
+      maxLength: 1,
+      required: true,
+      textSecurity: true,
+      inputValues: cardPassword2Props.inputValues as string,
+      setInputValues: cardPassword2Props.setInputValues,
+    },
+  ];
   return (
     <InputSectionTemplate label="카드 번호">
-      <InputBox inputs={inputs} align="center" {...cardPassword1Props} />
-      <InputBox inputs={inputs} align="center" {...cardPassword2Props} />
+      <InputBox inputs={pw1Inputs} align="center" />
+      <InputBox inputs={pw2Inputs} align="center" />
       <PasswordPlaceholder>∙</PasswordPlaceholder>
       <PasswordPlaceholder>∙</PasswordPlaceholder>
     </InputSectionTemplate>

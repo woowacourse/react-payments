@@ -2,19 +2,19 @@ import InputSectionTemplate from '../../template/InputSectionTemplate';
 import InputBox, { InputType } from '../../common/InputBox';
 import { InputStateProps } from '../../../abstracts/types';
 
-const OwnerNameInput = (props: InputStateProps) => {
+const CardAliasInput = (props: InputStateProps) => {
   const inputs: InputType[] = [
     {
       textType: 'text',
-      maxLength: 30,
-      placeholder: '카드에 표시된 이름과 동일하게 입력하세요.',
+      maxLength: 15,
+      placeholder: '카드의 별칭을 입력해주세요.',
       inputValues: props.inputValues as string,
       setInputValues: props.setInputValues,
     },
   ];
   return (
     <InputSectionTemplate
-      label="카드 소유자 이름(선택)"
+      label="카드 별칭(선택)"
       isCountLength
       inputValues={props.inputValues as string}
       maxLength={inputs[0].maxLength}
@@ -24,4 +24,4 @@ const OwnerNameInput = (props: InputStateProps) => {
   );
 };
 
-export default OwnerNameInput;
+export default CardAliasInput;
