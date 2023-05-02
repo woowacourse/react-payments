@@ -14,9 +14,9 @@ export function FullValue() {
   return (
     <Card
       cardCompany="쵸파은행"
-      cardNumber={['1999', '1216', '9382', '0938']}
+      cardNumber={['1999', '1216', '1999', '1216']}
       ownerName="CHOPPER"
-      expireDate={['12', '16']}
+      expireDate={['12', '25']}
     />
   );
 }
