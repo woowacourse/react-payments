@@ -5,10 +5,13 @@ import * as S from '../style';
 import { validatePassword } from '../../../domains/validations';
 
 function CreditCardPasswordInput() {
-  const { creditCardForm, handleCreditCardPasswordChange } = useCreditCardForm();
+  const { creditCardForm, handleCreditCardPasswordChange } =
+    useCreditCardForm();
 
-  const isError = (creditCardForm.password[0].length > 0 || creditCardForm.password[1].length > 0)
-    && !validatePassword(creditCardForm.password[0], creditCardForm.password[1]);
+  const isError =
+    (creditCardForm.password[0].length > 0 ||
+      creditCardForm.password[1].length > 0) &&
+    !validatePassword(creditCardForm.password[0], creditCardForm.password[1]);
 
   return (
     <div>

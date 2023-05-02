@@ -18,21 +18,17 @@ export const useCreditCardList = (): UseCreditCard => {
 
   const saveCreditCard = (creditCard: T.CreditCard): void => {
     const newCardList = [...existCreditCards(), creditCard];
-    localStorage.setItem(
-      'creditCards',
-      JSON.stringify(newCardList)
-    );
+    localStorage.setItem('creditCards', JSON.stringify(newCardList));
   };
 
   const updateNickname = (number: string, newNickname: string) => {
     const copiedCreditCards = existCreditCards();
-    const targetIndex = copiedCreditCards.findIndex((card) => card.number === number);
+    const targetIndex = copiedCreditCards.findIndex(
+      (card) => card.number === number
+    );
     if (targetIndex !== -1) {
       copiedCreditCards[targetIndex].nickname = newNickname;
-      localStorage.setItem(
-        'creditCards',
-        JSON.stringify(copiedCreditCards)
-      );
+      localStorage.setItem('creditCards', JSON.stringify(copiedCreditCards));
     }
   };
 

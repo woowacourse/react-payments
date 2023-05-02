@@ -14,4 +14,4 @@ export const validateExpiry = (expiry: string) => {
 };
 export const validateCVC = (cvc: string) => cvc.length === 3;
 export const validateNumber = (number: string) => number.length === 16;
-export const validatePassword = (first: string, second: string) => (first.length === 1 && second.length === 1);
+export const validatePassword = (first: string, second: string) => first.length === 1 && second.length === 1;

@@ -26,10 +26,11 @@ function CreditCardNumberInput() {
   const {
     creditCardForm,
     markedCreditCardNumber,
-    handleCreditCardNumberChange
+    handleCreditCardNumberChange,
   } = useCreditCardForm();
 
-  const isError = creditCardForm.number.length > 0 && !validateNumber(creditCardForm.number);
+  const isError =
+    creditCardForm.number.length > 0 && !validateNumber(creditCardForm.number);
 
   return (
     <>

@@ -1,6 +1,9 @@
 import { CardContext } from 'CardFormProvider';
 import { defaultCreditCardForm } from 'data/creditCard';
-import { checkCreditCardValidations, convertSecuredCreditCard } from 'domains/creditCard';
+import {
+  checkCreditCardValidations,
+  convertSecuredCreditCard,
+} from 'domains/creditCard';
 import { ChangeEvent, useContext, useState } from 'react';
 import { CreditCard } from 'types';
 

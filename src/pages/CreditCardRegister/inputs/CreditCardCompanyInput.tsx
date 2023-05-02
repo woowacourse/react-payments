@@ -12,9 +12,7 @@ interface CreditCardCompanyInputProps {
   closeModal: () => void;
 }
 
-function CreditCardCompanyInput({
-  closeModal,
-}: CreditCardCompanyInputProps) {
+function CreditCardCompanyInput({ closeModal }: CreditCardCompanyInputProps) {
   const { updateCreditCardCompany } = useCreditCardForm();
 
   const handleCreditCardCompanyChange = (companyId: string) => {

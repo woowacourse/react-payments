@@ -11,9 +11,9 @@ test('useCreditCardForm hook 테스트', () => {
   const { result } = renderHook(() => useCreditCardForm(), { wrapper });
 
   act(() => {
-    result.current.handleCreditCardExpiryChange(
-      { target: { value: '1234' } } as ChangeEvent<HTMLInputElement>
-    );
+    result.current.handleCreditCardExpiryChange({
+      target: { value: '1234' },
+    } as ChangeEvent<HTMLInputElement>);
   });
 
   expect(result.current.creditCardForm.expiry).toStrictEqual('1234');

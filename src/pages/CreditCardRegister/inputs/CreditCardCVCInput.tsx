@@ -7,7 +7,8 @@ import * as S from '../style';
 function CreditCardCVCInput() {
   const { creditCardForm, handleCreditCardCVCChange } = useCreditCardForm();
 
-  const isError = creditCardForm.cvc.length > 0 && !validateCVC(creditCardForm.cvc);
+  const isError =
+    creditCardForm.cvc.length > 0 && !validateCVC(creditCardForm.cvc);
 
   return (
     <div>

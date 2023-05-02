@@ -4,7 +4,9 @@ import * as S from './style';
 interface CreditCardRegisterTopSheetProps {
   children: ReactNode;
 }
-function CreditCardRegisterTopSheet({ children }: CreditCardRegisterTopSheetProps) {
+function CreditCardRegisterTopSheet({
+  children,
+}: CreditCardRegisterTopSheetProps) {
   return (
     <S.CreditCardRegisterTopSheet>{children}</S.CreditCardRegisterTopSheet>
   );

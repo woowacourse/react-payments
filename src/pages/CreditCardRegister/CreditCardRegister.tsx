@@ -40,10 +40,7 @@ function CreditCardRegister() {
     <>
       <CreditCardRegisterLayout>
         <CreditCardRegisterTopSheet>
-          <S.HomeButton
-            type="button"
-            onClick={() => navigate('/')}
-          >
+          <S.HomeButton type="button" onClick={() => navigate('/')}>
             {`${'<'}`}
           </S.HomeButton>
           <S.CreditCardRegisterHeader>카드 추가</S.CreditCardRegisterHeader>
@@ -59,18 +56,13 @@ function CreditCardRegister() {
             }}
           />
         </FlexBox>
-        {
-          !modalOpen && (
-            <FlexBox justifyContent="center">
-              <S.CreditCardChangeButton
-                type="button"
-                onClick={openModal}
-              >
-                카드사 변경하기
-              </S.CreditCardChangeButton>
-            </FlexBox>
-          )
-        }
+        {!modalOpen && (
+          <FlexBox justifyContent="center">
+            <S.CreditCardChangeButton type="button" onClick={openModal}>
+              카드사 변경하기
+            </S.CreditCardChangeButton>
+          </FlexBox>
+        )}
         <S.CreditCardRegisterForm>
           <CreditCardNumberInput />
           <CreditCardExpiryInput />
