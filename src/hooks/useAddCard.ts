@@ -16,7 +16,8 @@ const useAddCard = () => {
   const { expiredDates, expiredDatesError, handleExpiredDates } =
     useExpiredDates();
   const { cardOwnerName, ownerNameError, handleCardOwnerName } = useOwnerName();
-  const { securityCode, isSetSecurityCode } = useSecurityCode();
+  const { securityCode, securityCodeError, handleSecurityCode } =
+    useSecurityCode();
   const { passwords, isSetPasswords } = usePassword();
   const [cardCompany, setCardCompany] = useState<string>('');
   const [isDisabledForm, setIsDisabledForm] = useState(true);
@@ -46,7 +47,8 @@ const useAddCard = () => {
     ownerNameError,
     handleCardOwnerName,
     securityCode,
-    isSetSecurityCode,
+    securityCodeError,
+    handleSecurityCode,
     passwords,
     isSetPasswords,
     cardCompany,

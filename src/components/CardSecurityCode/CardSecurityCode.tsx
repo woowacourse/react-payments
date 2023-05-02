@@ -6,27 +6,24 @@ import { RefContext } from '../../contexts/RefProvider';
 
 interface SecurityCodeProps {
   securityCode: string;
-  isSetSecurityCode: (value: string) => boolean;
+  errorMessage: string;
+  handleSecurityCode: (value: string) => void;
 }
 
 const CardSecurityCode = ({
   securityCode,
-  isSetSecurityCode,
+  errorMessage,
+  handleSecurityCode,
 }: SecurityCodeProps) => {
   const cardRefs = useContext(RefContext);
   const [isShowToolTip, setIsShowToolTip] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
 
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!(e.target instanceof HTMLInputElement)) return;
     const currentOrder = Number(e.target.dataset['order']);
 
-    if (!isSetSecurityCode(e.target.value)) {
-      setErrorMessage('보안 코드는 세 자리의 숫자로만 입력해주세요.');
-      return;
-    }
+    handleSecurityCode(e.target.value);
 
-    setErrorMessage('');
     focusNextInput(currentOrder);
   };
 

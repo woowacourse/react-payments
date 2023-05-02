@@ -28,7 +28,8 @@ const AddCard = ({ cards, setCards }: CardList) => {
     ownerNameError,
     handleCardOwnerName,
     securityCode,
-    isSetSecurityCode,
+    securityCodeError,
+    handleSecurityCode,
     passwords,
     isSetPasswords,
     cardCompany,
@@ -104,7 +105,8 @@ const AddCard = ({ cards, setCards }: CardList) => {
           />
           <CardSecurityCode
             securityCode={securityCode}
-            isSetSecurityCode={isSetSecurityCode}
+            errorMessage={securityCodeError}
+            handleSecurityCode={handleSecurityCode}
           />
           <CardPassword passwords={passwords} isSetPasswords={isSetPasswords} />
           <Styled.ButtonWrapper>
