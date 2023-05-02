@@ -45,7 +45,7 @@ export function CardPreviewInfoProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const preivewInfo = {
+  const previewInfo = {
     cardNumber: {
       first: {
         ...defaultInput,
@@ -86,7 +86,7 @@ export function CardPreviewInfoProvider({
   };
 
   return (
-    <CardPreviewInfoContext.Provider value={preivewInfo}>
+    <CardPreviewInfoContext.Provider value={previewInfo}>
       {children}
     </CardPreviewInfoContext.Provider>
   );
