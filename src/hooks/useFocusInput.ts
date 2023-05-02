@@ -1,6 +1,6 @@
 import { type KeyboardEvent, type RefObject } from 'react';
-import { setNextInputFocus } from '../utils/common';
-import { isNumber, isOnlyKoreanAndEnglish } from '../utils/validate';
+import { setNextInputFocus } from '@utils/common';
+import { isNumber, isOnlyKoreanAndEnglish } from '@utils/validate';
 
 const numberType = 'numeric';
 const textType = 'text';

@@ -3,7 +3,7 @@ import {
   isOnlyEnglish,
   monthValidate,
   yearValidate,
-} from '../utils/validate';
+} from '@utils/validate';
 
 import { type UseInputProps, useInput } from './useInput';
 

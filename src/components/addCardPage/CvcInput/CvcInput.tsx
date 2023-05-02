@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { TAB_INDEX_INFO } from '../../../constants/constant';
-import { type UseInputProps } from '../../../hooks/useInput';
-import { Error } from '../../common/Error';
-import { InformationButton } from '../../common/InformationButton';
-import { Input } from '../../common/Input';
-import { ToolTip } from '../../common/ToolTip';
+import { TAB_INDEX_INFO } from '@constants/constant';
+import { type UseInputProps } from '@hooks/useInput';
+import { Error } from '@components/common/Error';
+import { InformationButton } from '@components/common/InformationButton';
+import { Input } from '@components/common/Input';
+import { ToolTip } from '@components/common/ToolTip';
 
 interface CvcInputProps {
   cvcInformation: UseInputProps;

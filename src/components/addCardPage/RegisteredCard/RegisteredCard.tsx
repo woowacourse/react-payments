@@ -1,14 +1,14 @@
 import React, { FormEvent } from 'react';
 import styled from 'styled-components';
-import { type UseInputProps } from '../../../hooks/useInput';
-import { colors } from '../../../styles/theme';
-import { formValidate } from '../../../utils/formValidate';
-import { Button } from '../../common/Button';
-import { Card } from '../../common/Card';
-import { type CardProps } from '../../common/Card/Card';
-import { Error } from '../../common/Error';
-import { Input } from '../../common/Input';
-import { InputField } from '../../common/InputField';
+import { type UseInputProps } from '@hooks/useInput';
+import { colors } from '@styles/theme';
+import { formValidate } from '@utils/formValidate';
+import { Button } from '@components/common/Button';
+import { Card } from '@components/common/Card';
+import { type CardProps } from '@components/common/Card/Card';
+import { Error } from '@components/common/Error';
+import { Input } from '@components/common/Input';
+import { InputField } from '@components/common/InputField';
 
 interface RegisteredCardProps extends CardProps {
   cardTitleInformation: UseInputProps;

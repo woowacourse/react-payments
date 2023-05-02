@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import { AddCardPage } from './pages/AddCardPage';
 import { HomePage } from './pages/HomePage';
-import { type CardInfo, type PageInfo } from './types/types';
+import { type CardInfo, type PageInfo } from '@type/types';
 import { LOCAL_STORAGE_CARD_KEY } from './constants/constant';
 
 export default function App() {

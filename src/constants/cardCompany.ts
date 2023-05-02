@@ -1,12 +1,12 @@
-import BC_CARD from '../assets/bank/bc_card.png';
-import HANA_CARD from '../assets/bank/hana_card.png';
-import HYUNDAI_CARD from '../assets/bank/hyundai_card.png';
-import KAKAO_BANK from '../assets/bank/kakao_bank.png';
-import KB_CARD from '../assets/bank/kb_card.png';
-import LOTTE_CARD from '../assets/bank/lotte_card.png';
-import SHINHAN_CARD from '../assets/bank/shinhan_card.png';
-import WOORI_CARD from '../assets/bank/woori_card.png';
-import { type CardCompanyRecord } from '../types/types';
+import BC_CARD from '@assets/bank/bc_card.png';
+import HANA_CARD from '@assets/bank/hana_card.png';
+import HYUNDAI_CARD from '@assets/bank/hyundai_card.png';
+import KAKAO_BANK from '@assets/bank/kakao_bank.png';
+import KB_CARD from '@assets/bank/kb_card.png';
+import LOTTE_CARD from '@assets/bank/lotte_card.png';
+import SHINHAN_CARD from '@assets/bank/shinhan_card.png';
+import WOORI_CARD from '@assets/bank/woori_card.png';
+import { type CardCompanyRecord } from '@type/types';
 
 export const CARD_COMPANY_KIND = [
   'bc',

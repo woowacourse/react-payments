@@ -6,30 +6,30 @@ import React, {
   useState,
 } from 'react';
 import styled from 'styled-components';
-import { CardNumberInput } from '../../components/addCardPage/CardNumberInput';
-import { CvcInput } from '../../components/addCardPage/CvcInput';
-import { ExpirationInput } from '../../components/addCardPage/ExpirationInput';
-import { OwnerInput } from '../../components/addCardPage/OwnerInput';
-import { PasswordInput } from '../../components/addCardPage/PasswordInput';
-import { RegisteredCard } from '../../components/addCardPage/RegisteredCard';
-import { SelectCardCompany } from '../../components/addCardPage/SelectCardCompany';
-import { Button } from '../../components/common/Button';
-import { Card } from '../../components/common/Card';
-import { InputField } from '../../components/common/InputField';
-import { Modal } from '../../components/common/Modal';
-import { CARD_COMPANY_DATA } from '../../constants/cardCompany';
-import { useFocusInput } from '../../hooks/useFocusInput';
-import { useFormInputs } from '../../hooks/useFormInputs';
-import { useHideScrollState } from '../../hooks/useHideScrollState';
-import { type UseInputProps } from '../../hooks/useInput';
+import { CardNumberInput } from '@components/addCardPage/CardNumberInput';
+import { CvcInput } from '@components/addCardPage/CvcInput';
+import { ExpirationInput } from '@components/addCardPage/ExpirationInput';
+import { OwnerInput } from '@components/addCardPage/OwnerInput';
+import { PasswordInput } from '@components/addCardPage/PasswordInput';
+import { RegisteredCard } from '@components/addCardPage/RegisteredCard';
+import { SelectCardCompany } from '@components/addCardPage/SelectCardCompany';
+import { Button } from '@components/common/Button';
+import { Card } from '@components/common/Card';
+import { InputField } from '@components/common/InputField';
+import { Modal } from '@components/common/Modal';
+import { CARD_COMPANY_DATA } from '@constants/cardCompany';
+import { useFocusInput } from '@hooks/useFocusInput';
+import { useFormInputs } from '@hooks/useFormInputs';
+import { useHideScrollState } from '@hooks/useHideScrollState';
+import { type UseInputProps } from '@hooks/useInput';
 import {
   type CardCompanyType,
   type CardInfo,
   type PageInfo,
-} from '../../types/types';
-import { createUniqueId, setNextInputFocus } from '../../utils/common';
-import { formValidate } from '../../utils/formValidate';
-import { isPastDate } from '../../utils/validate';
+} from '@type/types';
+import { createUniqueId, setNextInputFocus } from '@utils/common';
+import { formValidate } from '@utils/formValidate';
+import { isPastDate } from '@utils/validate';
 
 interface AddCardPageProps {
   cardList: CardInfo[];

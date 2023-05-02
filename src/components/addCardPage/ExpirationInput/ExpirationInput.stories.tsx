@@ -1,8 +1,8 @@
 import React, { FormEvent, useRef } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import styled from 'styled-components';
-import { useFocusInput } from '../../../hooks/useFocusInput';
-import { useFormInputs } from '../../../hooks/useFormInputs';
+import { useFocusInput } from '@hooks/useFocusInput';
+import { useFormInputs } from '@hooks/useFormInputs';
 import ExpirationInput from './ExpirationInput';
 
 function ExpirationStories() {

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
-import { useLocalStorage } from '../../hooks/useLocalStorage';
-import { CardInfo, PageInfo } from '../../types/types';
+import { type CardInfo, type PageInfo } from '@type/types';
 import HomePage from './HomePage';
+import { useLocalStorage } from '@hooks/useLocalStorage';
 
 const STORIES_CARD_KEY = 'storiesCardKey';
 

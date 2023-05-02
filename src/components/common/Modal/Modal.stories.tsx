@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { SelectCardCompany } from '../../addCardPage/SelectCardCompany';
+import { SelectCardCompany } from '@components/addCardPage/SelectCardCompany';
 import Modal from './Modal';
 
 const meta: Meta<typeof Modal> = {

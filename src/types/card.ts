@@ -1,4 +1,4 @@
-import { CARD_COMPANY_KIND } from '../constants/cardCompany';
+import { CARD_COMPANY_KIND } from '@constants/cardCompany';
 
 export interface CardInfo {
   id: string;

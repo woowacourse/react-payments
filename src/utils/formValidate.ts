@@ -1,4 +1,4 @@
-import { type UseInputProps } from '../hooks/useInput';
+import { type UseInputProps } from '@hooks/useInput';
 
 const wrongInputs: HTMLInputElement[] = [];
 

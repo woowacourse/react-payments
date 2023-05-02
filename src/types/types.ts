@@ -1,5 +1,5 @@
-import { CARD_COMPANY_KIND } from '../constants/cardCompany';
-import { PAGE } from '../constants/constant';
+import { CARD_COMPANY_KIND } from '@constants/cardCompany';
+import { PAGE } from '@constants/constant';
 
 export interface CardInfo {
   id: string;

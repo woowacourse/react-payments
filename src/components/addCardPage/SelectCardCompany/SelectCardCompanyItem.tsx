@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { CARD_COMPANY_DATA } from '../../../constants/cardCompany';
-import { type CardCompanyType } from '../../../types/types';
+import { CARD_COMPANY_DATA } from '@constants/cardCompany';
+import { type CardCompanyType } from '@type/types';
 
 interface SelectCardCompanyItemProps {
   kind: CardCompanyType;
