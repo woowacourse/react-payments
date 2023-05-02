@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 
 type TextType = 'string' | 'number';
@@ -16,9 +17,20 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
 
 const Input = (props: Props) => {
   const { textType, setValue, length, required, insert, focus } = props;
+  const [warning, setWarning] = useState(false);
+
+  const riseWarning = () => {
+    setWarning(true);
+    setTimeout(() => {
+      setWarning(false);
+    }, 400);
+  };
 
   const onChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-    if (textType === 'number' && isNaN(Number(target.value))) return;
+    if (textType === 'number' && isNaN(Number(target.value))) {
+      riseWarning();
+      return;
+    }
 
     setValue(target.value);
 
@@ -50,23 +62,31 @@ const Input = (props: Props) => {
       minLength={required ? length : 0}
       maxLength={length}
       ref={insert}
+      warning={warning}
     />
   );
 };
 
 export default Input;
 
-const StyledInput = styled.input<Props>`
+interface StyledInputProps extends Props {
+  warning: boolean;
+}
+
+const StyledInput = styled.input<StyledInputProps>`
+  transition: border 0.1s;
+  outline: none;
+
   width: ${({ length }) => length * 16}px;
   max-width: 100%;
-  height: 16px;
+  height: 100%;
   border: none;
+  border-bottom: solid 3px ${({ warning }) => (warning ? 'red' : 'transparent')};
   background-color: transparent;
 
   text-align: ${({ textAlign }) => textAlign || 'center'};
   font-size: 16px;
   color: #000000;
-  outline: none;
 
   &[type='number']::-webkit-outer-spin-button,
   &[type='number']::-webkit-inner-spin-button {
