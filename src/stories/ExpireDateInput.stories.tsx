@@ -3,10 +3,7 @@ import type { Meta } from '@storybook/react';
 import ExpireDateInput from '../pages/AddCard/components/ExpireDateInput';
 import { APP_WIDTH } from '../utils/constants';
 import useInput from '../hooks/useInput';
-import {
-  isValidExpiredMonthFormat,
-  isValidExpiredYearFormat,
-} from '../pages/AddCard/domain/validation';
+import useValidExpireDate from '../hooks/useValidExpireDate';
 
 export default {
   title: 'AddCardExpireDateInput',
@@ -25,6 +22,7 @@ export default {
 } as Meta<typeof ExpireDateInput>;
 
 const AddHook = () => {
+  const { isValidExpiredMonthFormat, isValidExpiredYearFormat } = useValidExpireDate();
   const expireMonth = useInput(isValidExpiredMonthFormat);
   const expireYear = useInput(isValidExpiredYearFormat);
 

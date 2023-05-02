@@ -2,14 +2,13 @@ import { renderHook } from '@testing-library/react';
 import useInput from '../../hooks/useInput';
 import {
   isValidCardNumber,
-  isValidExpiredMonthFormat,
-  isValidExpiredYearFormat,
   isValidOwnerName,
   isValidPassword,
   isValidSecurityCode,
 } from '../../pages/AddCard/domain/validation';
 import { act } from 'react-dom/test-utils';
 import { mockEventTarget } from '../utils/util';
+import useValidExpireDate from '../../hooks/useValidExpireDate';
 
 describe('카드 번호 테스트', () => {
   it('카드 번호 Hook의 초기 상태는 INIT를 가진다.', () => {
@@ -35,11 +34,13 @@ describe('카드 번호 테스트', () => {
 
 describe('만료일(년도) 테스트', () => {
   it('만료일(년도) Hook의 초기 상태는 INIT를 가진다.', () => {
-    const { result } = renderHook(() => useInput(isValidExpiredYearFormat));
+    const { result: valid } = renderHook(() => useValidExpireDate());
+    const { result } = renderHook(() => useInput(valid.current.isValidExpiredYearFormat));
     expect(result.current.status).toBe('INIT');
   });
   it('유효한 만료일(년도) 입력이 들어오면, 만료일(년도)의 상태가 유효한 상태로 변경된다.', () => {
-    const { result } = renderHook(() => useInput(isValidExpiredYearFormat));
+    const { result: valid } = renderHook(() => useValidExpireDate());
+    const { result } = renderHook(() => useInput(valid.current.isValidExpiredYearFormat));
     act(() => {
       result.current.onChange(mockEventTarget('23') as React.ChangeEvent<HTMLInputElement>);
     });
@@ -47,7 +48,8 @@ describe('만료일(년도) 테스트', () => {
     expect(result.current.value).toBe('23');
   });
   it('유효하지 않은 만료일(년도) 입력이 들어오면, 만료일(년도)의 상태가 유효하지 않는 상태로 변경된다.', () => {
-    const { result } = renderHook(() => useInput(isValidExpiredYearFormat));
+    const { result: valid } = renderHook(() => useValidExpireDate());
+    const { result } = renderHook(() => useInput(valid.current.isValidExpiredYearFormat));
     act(() => {
       result.current.onChange(mockEventTarget('a8') as React.ChangeEvent<HTMLInputElement>);
     });
@@ -57,11 +59,13 @@ describe('만료일(년도) 테스트', () => {
 
 describe('만료일(월) 테스트', () => {
   it('만료일(월) Hook의 초기 상태는 INIT를 가진다.', () => {
-    const { result } = renderHook(() => useInput(isValidExpiredMonthFormat));
+    const { result: valid } = renderHook(() => useValidExpireDate());
+    const { result } = renderHook(() => useInput(valid.current.isValidExpiredMonthFormat));
     expect(result.current.status).toBe('INIT');
   });
   it('유효한 만료일(월) 입력이 들어오면, 만료일(월)의 상태가 유효한 상태로 변경된다.', () => {
-    const { result } = renderHook(() => useInput(isValidExpiredMonthFormat));
+    const { result: valid } = renderHook(() => useValidExpireDate());
+    const { result } = renderHook(() => useInput(valid.current.isValidExpiredMonthFormat));
     act(() => {
       result.current.onChange(mockEventTarget('12') as React.ChangeEvent<HTMLInputElement>);
     });
@@ -69,7 +73,8 @@ describe('만료일(월) 테스트', () => {
     expect(result.current.value).toBe('12');
   });
   it('유효하지 않은 만료일(월) 입력이 들어오면, 만료일(월)의 상태가 유효하지 않는 상태로 변경된다.', () => {
-    const { result } = renderHook(() => useInput(isValidExpiredMonthFormat));
+    const { result: valid } = renderHook(() => useValidExpireDate());
+    const { result } = renderHook(() => useInput(valid.current.isValidExpiredMonthFormat));
     act(() => {
       result.current.onChange(mockEventTarget('13') as React.ChangeEvent<HTMLInputElement>);
     });
