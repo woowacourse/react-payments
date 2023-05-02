@@ -102,4 +102,8 @@ const CardNumberInput = ({ cardNumber, setCardNumber }: CardNumberInputProps) =>
   );
 };
 
-export default memo(CardNumberInput);
+const areEqual = (prevState: any, nextState: any) => {
+  return prevState.cardNumber === nextState.cardNumber;
+};
+
+export default memo(CardNumberInput, areEqual);
