@@ -2,7 +2,7 @@ import { Card } from 'components/common/Card/types';
 
 const ERROR_MESSAGES = {
   numbers: '카드번호는 16자리로 입력해주세요.',
-  expirationDate: '유효한 만료일을 입력해주세요.',
+  expirationDate: '유효한 만료일을 입력해주세요. 예) 08/25',
   securityCode: '보안 코드 3자리를 입력해주세요.',
   password: '카드 비밀번호 앞 2자리를 입력해주세요.',
 } as const;
