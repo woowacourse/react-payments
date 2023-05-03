@@ -1,4 +1,15 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const show = keyframes`
+  /* 하단에서 */
+  0% {
+    transform: translateY(100%);
+  }
+  /* 중앙으로 위치 */
+  100% {
+    transform: translateY(0);
+  }
+`;
 
 export const BackDrop = styled.div`
   position: fixed;
@@ -20,6 +31,7 @@ export const Wrapper = styled.div`
   padding: 36px;
   border-radius: 8px 8px 0px 0px;
   background: #fff;
+  animation: ${show} 0.5s;
 `;
 
 export const IconWrapper = styled.div`
