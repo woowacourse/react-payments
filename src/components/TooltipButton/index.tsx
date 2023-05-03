@@ -5,7 +5,7 @@ const TooltipButton = () => {
     <button
       type="button"
       className={styles.button}
-      aria-label="보안 코드(CVC/CVV)에 대한 상세 설명 툴팁"
+      aria-label="보안 코드(CVC/CVV)에 대한 상세 설명 보기"
     >
       <span className={styles.mark}>?</span>
     </button>
