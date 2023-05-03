@@ -57,24 +57,22 @@ export default function App() {
 
   return (
     <div className="app">
-      <DrawerContextProvider>
-        {pageIndex === 0 && (
-          <Homepage cardList={cardList} onClick={() => setPageIndex(1)} />
-        )}
-        {pageIndex === 1 && (
-          <AddCardPage
-            onClick={() => setPageIndex(0)}
-            onSubmit={onCardInfoSubmit}
-          />
-        )}
-        {pageIndex === 2 && (
-          <AddNicknamePage
-            cardList={cardList}
-            setCardList={setCardList}
-            setPageIndex={setPageIndex}
-          />
-        )}
-      </DrawerContextProvider>
+      {pageIndex === 0 && (
+        <Homepage cardList={cardList} onClick={() => setPageIndex(1)} />
+      )}
+      {pageIndex === 1 && (
+        <AddCardPage
+          onClick={() => setPageIndex(0)}
+          onSubmit={onCardInfoSubmit}
+        />
+      )}
+      {pageIndex === 2 && (
+        <AddNicknamePage
+          cardList={cardList}
+          setCardList={setCardList}
+          setPageIndex={setPageIndex}
+        />
+      )}
     </div>
   );
 }
