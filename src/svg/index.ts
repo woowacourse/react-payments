@@ -6,3 +6,4 @@ export { ReactComponent as KUKMIN } from './kukmin.svg';
 export { ReactComponent as LOTTE } from './lotte.svg';
 export { ReactComponent as SINHAN } from './sinhan.svg';
 export { ReactComponent as WOORI } from './woori.svg';
+export { ReactComponent as Spinner } from './spinner.svg';
