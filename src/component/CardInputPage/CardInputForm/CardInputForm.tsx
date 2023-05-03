@@ -72,7 +72,7 @@ export default function CardInputForm(props: Props) {
       <InputBoxPassword setIsComplete={getSetCompleteStatus(3)} />
       {
         isAllComplete
-        && <Button className={styles.nextButton} type="submit">
+        && <Button className={styles.nextButton} type="submit" data-testid="submit-button">
           다음
         </Button>
       }

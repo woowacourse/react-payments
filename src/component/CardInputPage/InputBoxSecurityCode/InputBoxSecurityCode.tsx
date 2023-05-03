@@ -47,7 +47,7 @@ export default function InputBoxSecurityCode(props: Props) {
     <div className={styles.inputBox}>
       <p>보안 코드(CVC/CVV)</p>
       <Input
-        name="security-code"
+        data-testid="security-code"
         className={styles.input}
         type="password"
         inputMode="numeric"

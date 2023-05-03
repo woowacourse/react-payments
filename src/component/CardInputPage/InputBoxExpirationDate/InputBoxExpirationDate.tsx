@@ -49,7 +49,7 @@ export default function InputBoxExpirationDate(props: Props) {
     <div className={styles.inputBox}>
       <p>만료일</p>
       <Input
-        name="expiration-date"
+        data-testid="expiration-date"
         className="input-expiration-date"
         type="text"
         parsers={[removeSlashParser, lengthParser, dateFormatter]}

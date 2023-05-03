@@ -54,7 +54,7 @@ export default function CardNumber(props: Props) {
   return (
     <>
       <Input
-        name="card-number-1"
+        data-testid="card-number-1"
         className={`${styles.input} ${styles.first}`}
         type="text"
         inputMode="numeric"
@@ -66,7 +66,7 @@ export default function CardNumber(props: Props) {
         placeholder="XXXX"
       />
       <Input
-        name="card-number-2"
+        data-testid="card-number-2"
         className={styles.input}
         type="password"
         inputMode="numeric"
@@ -78,7 +78,7 @@ export default function CardNumber(props: Props) {
         placeholder="XXXX"
       />
       <Input
-        name="card-number-3"
+        data-testid="card-number-3"
         className={styles.input}
         type="password"
         inputMode="numeric"
@@ -90,7 +90,7 @@ export default function CardNumber(props: Props) {
         placeholder="XXXX"
       />
       <Input
-        name="card-number-4"
+        data-testid="card-number-4"
         className={`${styles.input} ${styles.last}`}
         type="text"
         inputMode="numeric"

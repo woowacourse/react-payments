@@ -26,7 +26,7 @@ export default function InputBoxOwner(props: PropsWithChildren) {
       <p>카드 소유자 이름(선택)</p>
       <p>{nameLength}/{CONSTANT.OWNER_NAME_MAX_LENGTH}</p>
       <Input
-        name="card-owner"
+        data-testid="card-owner"
         className={styles.input}
         type="text"
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
