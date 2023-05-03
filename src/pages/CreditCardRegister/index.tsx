@@ -1,3 +1,4 @@
+import { useModal } from 'noah-modal';
 import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -5,7 +6,6 @@ import Button from '@Components/Button';
 import CreditCard from '@Components/CreditCard';
 import Header from '@Components/Header';
 
-import useAnimationModal from '@Hooks/useAnimationModal';
 import useCreditCardValidation from '@Hooks/useCreditCardValidation';
 
 import { CreditCardRegisterContext } from '@Contexts/CreditCardRegister/CreditCardRegisterContext';
@@ -25,7 +25,7 @@ function CreditCardRegister() {
 
   const { creditCard, errorMessage } = useContext(CreditCardRegisterContext);
 
-  const { isModalOpen, openModal } = useAnimationModal();
+  const { isModalOpen, openModal } = useModal();
   const isValid = useCreditCardValidation(creditCard, Object.values(errorMessage));
 
   const handleSubmit = () => {
