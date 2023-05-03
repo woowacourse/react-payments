@@ -35,8 +35,8 @@ const AddCardForm = () => {
     setHasCheckedValidation,
   } = useContext(CardInfoContext);
 
-  const isNextButtonUnlocked = [cardNumber, cardOwnerName, cardPassword, cardSecurityCode, cardExpirationDate].every(
-    currentInputValue => currentInputValue.isValid
+  const isNextButtonLocked = [cardNumber, cardOwnerName, cardPassword, cardSecurityCode, cardExpirationDate].some(
+    currentInputValue => !currentInputValue.isValid
   );
 
   const validateCardInfo = (event: React.FormEvent<HTMLFormElement>) => {
@@ -102,7 +102,7 @@ const AddCardForm = () => {
       <CardOwnerName />
       <CardSecurityCodeInput />
       <CardPasswordInput />
-      <FooterButton title="다음" disabled={!isNextButtonUnlocked} />
+      <FooterButton title="다음" disabled={isNextButtonLocked} />
     </form>
   );
 };
