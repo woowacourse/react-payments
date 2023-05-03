@@ -1,0 +1,37 @@
+:root {
+  --pure-black: #000000;
+  --pure-white: #ffffff;
+}
+
+.button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 40px;
+  background-color: var(--pure-black);
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.icon {
+  font-size: 18px;
+  color: var(--pure-white);
+  margin-left: 5px;
+  margin-right: 5px;
+  transition: 0.3s;
+}
+
+.button:hover .icon {
+  margin-left: 0;
+  margin-right: 10px;
+}
+
+.title {
+  font-weight: 600;
+  color: var(--pure-white);
+  text-decoration: underline var(--pure-black);
+}
