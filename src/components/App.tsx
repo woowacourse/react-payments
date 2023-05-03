@@ -4,7 +4,7 @@ import Home from '../pages/Home/Home';
 import CardRegistration from '../pages/CardRegistration/CardRegistration';
 import styles from './App.module.css';
 import CardRegistrationConfirmation from '../pages/CardRegistrationConfirmation/CardRegistrationConfirmation';
-import { CardInfoProvider } from '../context/CardInfoContext';
+import { CardProvider } from '../context/CardContext';
 import useCardInfo from '../hook/useCardInfo';
 
 const App = () => {
@@ -18,17 +18,17 @@ const App = () => {
     {
       path: '/card-registration',
       element: (
-        <CardInfoProvider>
+        <CardProvider>
           <CardRegistration />,
-        </CardInfoProvider>
+        </CardProvider>
       ),
     },
     {
       path: '/card-registration-confirmation',
       element: (
-        <CardInfoProvider>
+        <CardProvider>
           <CardRegistrationConfirmation registerNewCard={registerNewCard} />,
-        </CardInfoProvider>
+        </CardProvider>
       ),
     },
     {
