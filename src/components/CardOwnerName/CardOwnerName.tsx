@@ -1,9 +1,10 @@
 import CardInfoInput from '../CardInfoInput/CardInfoInput';
 import Input from '../Input/Input';
-import { useCardInfoContext } from '../../context/CardInfoContext';
+import { useCardStore } from '../../hook/useCardState';
 
 const CardOwnerName = () => {
-  const { cardOwnerName, setCardOwnerName } = useCardInfoContext();
+  const { get, setCardOwnerName } = useCardStore();
+  const cardOwnerName = get().cardOwnerName;
 
   const checkCardOwnerNameLength = (e: React.ChangeEvent<HTMLInputElement>) => {
     const currentCardOwnerName = e.target.value;

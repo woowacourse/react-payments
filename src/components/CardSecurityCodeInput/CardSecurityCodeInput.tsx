@@ -4,10 +4,11 @@ import HelpButton from '../HelpButton/HelpButton';
 import Input from '../Input/Input';
 import { NUMBER_REGEX } from '../../constant/regex';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import { useCardInfoContext } from '../../context/CardInfoContext';
+import { useCardStore } from '../../hook/useCardState';
 
 const CardSecurityCodeInput = () => {
-  const { securityCode, setSecurityCode } = useCardInfoContext();
+  const { get, setSecurityCode } = useCardStore();
+  const securityCode = get().securityCode;
   const [error, setError] = useState('');
 
   const updateSecurityCode = (e: React.ChangeEvent<HTMLInputElement>) => {

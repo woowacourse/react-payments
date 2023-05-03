@@ -6,11 +6,16 @@ import CardSecurityCodeInput from '../CardSecurityCodeInput/CardSecurityCodeInpu
 import CardPasswordInput from '../CardPasswordInput/CardPasswordInput';
 import { useNavigate } from 'react-router-dom';
 import Button from '../Button/Button';
-import { useCardInfoContext } from '../../context/CardInfoContext';
+import { useCardStore } from '../../hook/useCardState';
 
 const AddCardForm = () => {
-  const { cardNumber, expirationDate, securityCode, firstDigit, secondDigit } = useCardInfoContext();
   const navigate = useNavigate();
+  const { get } = useCardStore();
+  const cardNumber = get().cardNumber;
+  const expirationDate = get().expirationDate;
+  const securityCode = get().securityCode;
+  const firstDigit = get().firstDigit;
+  const secondDigit = get().secondDigit;
 
   const handleNextButtonClick = () => {
     if (!cardNumber || !expirationDate || !securityCode || !firstDigit || !secondDigit) {

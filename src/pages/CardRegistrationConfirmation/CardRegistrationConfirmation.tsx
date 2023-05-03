@@ -1,10 +1,10 @@
 import CardPreview from '../../components/CardPreview/CardPreview';
-import { useCardInfoContext } from '../../context/CardInfoContext';
 import styles from './CardRegistrationConfirmation.module.css';
 import CardNicknameInput from '../../components/CardNickname/CardNicknameInput';
 import Button from '../../components/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import { CardInfo } from '../../types';
+import { useCardStore } from '../../hook/useCardState';
 
 type CardRegistrationConfirmationProps = {
   registerNewCard: (cardInfo: CardInfo) => void;
@@ -12,7 +12,12 @@ type CardRegistrationConfirmationProps = {
 
 const CardRegistrationConfirmation = ({ registerNewCard }: CardRegistrationConfirmationProps) => {
   const navigate = useNavigate();
-  const { cardNumber, cardOwnerName, expirationDate, selectedCard, cardNickName } = useCardInfoContext();
+  const { get } = useCardStore();
+  const cardNumber = get().cardNumber;
+  const cardOwnerName = get().cardOwnerName;
+  const expirationDate = get().expirationDate;
+  const selectedCard = get().selectedCard;
+  const cardNickName = get().cardNickName;
 
   const handleCardInfo = (e: React.MouseEvent<HTMLButtonElement>) => {
     const cardInfo: CardInfo = {

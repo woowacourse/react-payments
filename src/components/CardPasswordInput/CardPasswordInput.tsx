@@ -3,10 +3,12 @@ import CardInfoInput from '../CardInfoInput/CardInfoInput';
 import Input from '../Input/Input';
 import { NUMBER_REGEX } from '../../constant/regex';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
-import { useCardInfoContext } from '../../context/CardInfoContext';
+import { useCardStore } from '../../hook/useCardState';
 
 const CardPasswordInput = () => {
-  const { firstDigit, setFirstDigit, secondDigit, setSecondDigit } = useCardInfoContext();
+  const { get, setFirstDigit, setSecondDigit } = useCardStore();
+  const firstDigit = get().firstDigit;
+  const secondDigit = get().secondDigit;
   const secondDigitRef = useRef<HTMLInputElement>(null);
   const [error, setError] = useState('');
 

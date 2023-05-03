@@ -2,11 +2,12 @@ import { useState } from 'react';
 import CardInfoInput from '../CardInfoInput/CardInfoInput';
 import Input from '../Input/Input';
 import { NUMBER_REGEX, ONE_TO_TWO_NUMBER_REGEX } from '../../constant/regex';
-import { useCardInfoContext } from '../../context/CardInfoContext';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import { useCardStore } from '../../hook/useCardState';
 
 const ExpirationDateInput = () => {
-  const { expirationDate, setExpirationDate } = useCardInfoContext();
+  const { get, setExpirationDate } = useCardStore();
+  const expirationDate = get().expirationDate;
   const [error, setError] = useState('');
 
   const addSlashInExpirationDate = (e: React.ChangeEvent<HTMLInputElement>) => {

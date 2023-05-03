@@ -1,5 +1,5 @@
 import styles from './CardCompany.module.css';
-import { useCardInfoContext } from '../../context/CardInfoContext';
+import { useCardStore } from '../../hook/useCardState';
 
 type CardCompanyProps = {
   image: string;
@@ -8,7 +8,7 @@ type CardCompanyProps = {
 };
 
 const CardCompany = ({ image, cardName, onClose }: CardCompanyProps) => {
-  const { setSelectedCard } = useCardInfoContext();
+  const { setSelectedCard } = useCardStore();
 
   const handleClick = () => {
     setSelectedCard(cardName);

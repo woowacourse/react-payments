@@ -3,10 +3,14 @@ import AddCardForm from '../../components/AddCardForm/AddCardForm';
 import ArrowHeader from '../../components/ArrowHeader/ArrowHeader';
 import CardPreview from '../../components/CardPreview/CardPreview';
 import CardCompanyModal from '../../components/CardCompanyModal/CardCompanyModal';
-import { useCardInfoContext } from '../../context/CardInfoContext';
+import { useCardStore } from '../../hook/useCardState';
 
 const CardRegistration = () => {
-  const { cardNumber, expirationDate, cardOwnerName, selectedCard } = useCardInfoContext();
+  const { get } = useCardStore();
+  const cardNumber = get().cardNumber;
+  const expirationDate = get().expirationDate;
+  const cardOwnerName = get().cardOwnerName;
+  const selectedCard = get().selectedCard;
   const [isModalOpen, setIsModalOpen] = useState(true);
 
   const handleOpenModal = () => {

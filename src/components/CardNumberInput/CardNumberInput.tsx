@@ -2,12 +2,13 @@ import { useState } from 'react';
 import CardInfoInput from '../CardInfoInput/CardInfoInput';
 import Input from '../Input/Input';
 import { NUMBER_REGEX, ONE_TO_FOUR_NUMBER_REGEX } from '../../constant/regex';
-import { useCardInfoContext } from '../../context/CardInfoContext';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import { useCardStore } from '../../hook/useCardState';
 
 const CardNumberInput = () => {
-  const { cardNumber, setCardNumber } = useCardInfoContext();
+  const { get, setCardNumber } = useCardStore();
   const [error, setError] = useState('');
+  const cardNumber = get().cardNumber;
 
   const addHyphensInCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     const cardNumber = e.target.value;
