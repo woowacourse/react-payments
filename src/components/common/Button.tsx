@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-interface ButtonType extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonType
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   isShown: boolean;
 }
 

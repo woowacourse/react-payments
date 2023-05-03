@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { ModalDispatchContext, ModalStateContext } from "../../context";
 import { slideBottomToUp, slideUpToBottom } from "../../style/keyframe";
 
-interface BottomSheetType {
+export interface BottomSheetType {
   children: ReactNode;
 }
 
