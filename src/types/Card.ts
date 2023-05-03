@@ -1,40 +1,31 @@
 export interface Card {
-  number1: string;
-  number2: string;
-  number3: string;
-  number4: string;
-  month: string;
-  year: string;
-  name: string;
+  cardNumber: CardNumber;
+  date: Expiration;
+  name: Name;
   code?: string;
   password1?: string;
   password2?: string;
-  bank: string;
-  color: string;
-  cardName?: string;
+  cardCompany: CardCompany;
+  cardName?: CardName;
 }
 
-export interface CardNumber {
+export type CardNumber = {
   number1: string;
   number2: string;
   number3: string;
   number4: string;
-}
+};
 
-export interface Expiration {
+export type Expiration = {
   month: string;
   year: string;
-}
+};
 
-export interface Name {
-  name: string;
-}
+export type Name = string;
 
-export interface Bank {
-  bank: string;
+export type CardCompany = {
+  company: string;
   color: string;
-}
+};
 
-export interface CardName {
-  cardName: string;
-}
+export type CardName = string;

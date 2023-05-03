@@ -6,7 +6,7 @@ import { areValidInfo } from 'validator';
 
 export const useFormHandler = (cardInfo: Card) => {
   const navigate = useNavigate();
-  const bank = cardInfo.bank;
+  const bank = cardInfo.cardCompany.company;
 
   const handleForm = (event: FormEvent) => {
     event.preventDefault();

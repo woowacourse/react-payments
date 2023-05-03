@@ -28,10 +28,10 @@ const banks = [
 const CardBankList = (props: CardBankListProps) => {
   const { setModal } = props;
 
-  const { setBank } = useContext(AddCardContext);
+  const { setCardCompany } = useContext(AddCardContext);
 
   const handleBank = (name: string, color: string) => {
-    setBank?.({ bank: name, color: color });
+    setCardCompany?.({ company: name, color: color });
     setModal(false);
   };
 

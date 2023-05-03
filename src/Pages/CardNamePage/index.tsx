@@ -6,19 +6,26 @@ import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { setLocalStorage } from 'utils/localStorage';
+import { Card } from 'types/Card';
 
 const CardNamePage = () => {
   const navigate = useNavigate();
 
-  const { cardNumber, date, name, bank, cardName, setCardName } =
+  const { cardNumber, date, name, cardCompany, cardName, setCardName } =
     useContext(AddCardContext);
 
-  const cardInfo = { ...cardNumber, ...date, ...name, ...bank, ...cardName };
+  const cardInfo: Card = {
+    cardNumber: cardNumber,
+    date: date,
+    name: name,
+    cardCompany: cardCompany,
+    cardName: cardName,
+  };
 
   const handleCardName = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
 
-    setCardName?.({ cardName: value });
+    setCardName?.(value);
   };
 
   const onSubmitHandler = () => {
@@ -34,7 +41,7 @@ const CardNamePage = () => {
         <form onSubmit={onSubmitHandler}>
           <CardNameInput
             autoFocus
-            value={cardName.cardName}
+            value={cardName}
             onChange={handleCardName}
             required
           ></CardNameInput>

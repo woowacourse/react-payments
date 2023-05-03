@@ -2,23 +2,23 @@ import { StyledInput } from 'components/Input';
 import { StyledInputBox } from 'components/InputBox';
 import { LENGTH, REGEX } from 'constants/constants';
 import { AddCardContext } from 'context/CardContext';
-import { useInputHandler } from 'hooks/useInputHandler';
-import { useContext } from 'react';
+import { ChangeEvent, useContext } from 'react';
 import styled from 'styled-components';
+import { changeToValidValue } from 'utils/inputValidator';
 
 const NameInput = () => {
   const { name, setName } = useContext(AddCardContext);
 
-  const NameValidatior = (target: string, value: string) => {
-    const upperValue = value.toUpperCase().trimStart();
-    return upperValue.includes('  ') ? '' : upperValue;
-  };
+  const handleName = ({ target }: ChangeEvent<HTMLInputElement>) => {
+    const value = target.value.toUpperCase().trimStart().split('  ').join(' ');
 
-  const { handleInput: handleName } = useInputHandler(setName, {
-    length: LENGTH.NAME,
-    regex: REGEX.ONLY_ENGLISH,
-    validator: NameValidatior,
-  });
+    const vaildValue = changeToValidValue(value, {
+      length: LENGTH.NAME,
+      regex: REGEX.ONLY_ENGLISH,
+    });
+
+    setName?.(vaildValue);
+  };
 
   return (
     <>
@@ -27,7 +27,7 @@ const NameInput = () => {
           카드 소유자 이름&#40;선택&#41;
         </label>
         <p>
-          {name.name.length}/{LENGTH.NAME}
+          {name.length}/{LENGTH.NAME}
         </p>
       </Wrapper>
       <NameInputBox>
@@ -36,10 +36,10 @@ const NameInput = () => {
           name="name"
           id="name"
           maxLength={LENGTH.NAME}
-          value={name.name}
+          value={name}
           onChange={handleName}
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-        ></StyledNameInput>
+        />
       </NameInputBox>
     </>
   );

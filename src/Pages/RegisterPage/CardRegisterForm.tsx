@@ -15,14 +15,25 @@ import { AddCardContext } from 'context/CardContext';
 import { Card } from 'types/Card';
 
 const CardRegisterForm = () => {
-  const { cardNumber, date, name, bank, isModalActive, setIsModalActive } =
-    useContext(AddCardContext);
+  const {
+    cardNumber,
+    date,
+    name,
+    cardCompany,
+    isModalActive,
+    setIsModalActive,
+  } = useContext(AddCardContext);
 
   const handleModal = () => {
     setIsModalActive?.(!isModalActive);
   };
 
-  const cardInfo: Card = { ...cardNumber, ...date, ...name, ...bank };
+  const cardInfo: Card = {
+    cardNumber: cardNumber,
+    date: date,
+    name: name,
+    cardCompany: cardCompany,
+  };
 
   const { handleForm } = useFormHandler(cardInfo);
 

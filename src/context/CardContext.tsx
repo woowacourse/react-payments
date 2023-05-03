@@ -5,20 +5,26 @@ import {
   createContext,
   useState,
 } from 'react';
-import { Bank, CardName, CardNumber, Expiration, Name } from 'types/Card';
+import {
+  CardCompany,
+  CardName,
+  CardNumber,
+  Expiration,
+  Name,
+} from 'types/Card';
 
 interface CardContext {
   isModalActive: boolean;
   cardNumber: CardNumber;
   date: Expiration;
   name: Name;
-  bank: Bank;
+  cardCompany: CardCompany;
   cardName: CardName;
   setIsModalActive: Dispatch<SetStateAction<boolean>> | null;
   setCardNumber: Dispatch<SetStateAction<CardNumber>> | null;
   setDate: Dispatch<SetStateAction<Expiration>> | null;
   setName: Dispatch<SetStateAction<Name>> | null;
-  setBank: Dispatch<SetStateAction<Bank>> | null;
+  setCardCompany: Dispatch<SetStateAction<CardCompany>> | null;
   setCardName: Dispatch<SetStateAction<CardName>> | null;
 }
 
@@ -34,21 +40,17 @@ const initialValue = {
     month: '',
     year: '',
   },
-  name: {
-    name: '',
-  },
-  bank: {
-    bank: '',
+  name: '',
+  cardCompany: {
+    company: '',
     color: '',
   },
-  cardName: {
-    cardName: '',
-  },
+  cardName: '',
   setIsModalActive: null,
   setCardNumber: null,
   setDate: null,
   setName: null,
-  setBank: null,
+  setCardCompany: null,
   setCardName: null,
 };
 
@@ -73,31 +75,27 @@ export const AddCardContextProvider = ({
     year: '',
   });
 
-  const [name, setName] = useState<Name>({
-    name: '',
-  });
+  const [name, setName] = useState<Name>('');
 
-  const [bank, setBank] = useState<Bank>({
-    bank: '',
+  const [cardCompany, setCardCompany] = useState<CardCompany>({
+    company: '',
     color: '',
   });
 
-  const [cardName, setCardName] = useState<CardName>({
-    cardName: '',
-  });
+  const [cardName, setCardName] = useState<CardName>('');
 
   const value = {
     isModalActive,
     cardNumber,
     date,
     name,
-    bank,
+    cardCompany,
     cardName,
     setIsModalActive,
     setCardNumber,
     setDate,
     setName,
-    setBank,
+    setCardCompany,
     setCardName,
   };
 
