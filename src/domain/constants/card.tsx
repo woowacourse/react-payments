@@ -6,6 +6,7 @@ import { ReactComponent as Woori } from '../../assets/woori.svg';
 import { ReactComponent as Lotte } from '../../assets/lotte.svg';
 import { ReactComponent as Hana } from '../../assets/hana.svg';
 import { ReactComponent as KB } from '../../assets/kb.svg';
+import { CardType } from '../types/card';
 
 export const MAIN_COLOR = {
   BC카드: '#E83F44',
@@ -18,7 +19,7 @@ export const MAIN_COLOR = {
   국민카드: '#776C61',
 };
 
-export const BANK_LIST = [
+export const BANK_LIST: { name: CardType; profile: JSX.Element }[] = [
   { name: 'BC카드', profile: <BC width={40} height={40} /> },
   { name: '신한카드', profile: <Shinhan width={40} height={40} /> },
   { name: '카카오카드', profile: <Kakao width={40} height={40} /> },

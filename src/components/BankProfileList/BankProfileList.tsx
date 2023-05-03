@@ -17,7 +17,7 @@ const BankProfileList = ({ setCardType, closeModal }: BankProfileListProps) => {
             <BankProfileButton
               name={name}
               onClick={() => {
-                setCardType(name as CardType);
+                setCardType(name);
                 closeModal();
               }}
             >
