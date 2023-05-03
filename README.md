@@ -47,6 +47,9 @@
 
 - <a href="https://gabrielyoon7.github.io/react-payments/">앱 바로 실행하기</a>
 
+- <a href="https://6450fc4c05b9cc822a07bc18-yvimctjdtc.chromatic.com/?path=/story/creditcard--wrong-card-company-name">스토리북 실행하기</a>
+
+
 - 터미널에서 yarn 설치(`yarn`) 후 `yarn start` 커맨드로 앱을 실행할 수 있다.
 
 <br>
