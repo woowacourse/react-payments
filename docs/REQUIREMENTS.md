@@ -5,11 +5,6 @@
 
 ## 피드백
 
-- [ ] 추상화했을 때, 얻는 이득이 크지 않다면 컴포넌트 내부에 두기. 혹은 재사용성을 높여서 분리하기
-- [ ] 제어/비제어 개념에 대해서 집중도 있게 학습하기
-- [ ] 컴포넌트 분리의 기준 세우기
-- [ ] viewport 메타태그 학습, safe area 학습
-- [ ] inputmode라는 속성에 대해 알아보셔도 좋을 것 같아요! 가상키보드가 어떻게 떠야하는지 지정
 - [x] 자유도를 좀 더 생각해서 스킵이 가능하게 하되 제출만 막는 경험 구현하기
 - [x] src/GlobalStyles.ts
       100vw 에서 100%로 변경한 이유는 어떤 것인가요?
@@ -70,12 +65,12 @@
       그그 이전에 이함수가 존재해야하는 이유가 조금 이해가 어렵네요. 오히려 onChange 함수들을 한 개 함수로 묶음으로써 복잡도가 올라간것같아요
 - [x] src/components/RegisterEntryBox/RegisterEntryBox.tsx
       컨테이너 컴포넌트가 이미 내부에 요소를 갖고있는것같은데 CardRegisterButton으로 명명되는게 자연스러울 것 같아요
-- [ ] src/components/RegisterForm/RegisterForm.tsx
+- [x] src/components/RegisterForm/RegisterForm.tsx
       요소타입이 form 이었다면 submit핸들러함수가 여기서 사용되어서 로직이 위계적으로도 적절한 위치에 있었을것같아요
-- [ ] src/components/RegisterForm/RegisterForm.styled.ts
+- [x] src/components/RegisterForm/RegisterForm.styled.ts
       form이 아닌데 form으로 명명됐어요. 현재 브라우저레벨에서 지원해주는 자동완성기능같은것들이 동작하지 않아요
       [https://wainaat.github.io/react-payments](https://wainaat.github.io/react-payments) 참새가 한 거는 자동완성이 잘되더라구요. 참고해봐도 좋을 것 같아요
-- [ ] src/components/Header/Header.tsx
+- [x] src/components/Header/Header.tsx
       페이지 타이틀과 뒤로가기버튼을 별도 모듈에서 선언하고 있는데 페이지컴포넌트 모듈에서 관리하면 보다 연관깊은코드가 가까이에 있게될것같아요. PageLayout 컴포넌트와같이 페이지 컴포넌트가 공통적으로 사용하는 컴포넌트에 헤더컴포넌트를 포함시켜서 페이지컴포넌트에서 prop으로 넘겨주도록 변경해보면 어떨까요?
 - [x] src/hooks/useTitle.ts
       요런 단순 setState는 커스텀훅으로 분리하지 않아도 복잡도가 큰 차이가 없는 것 같아요

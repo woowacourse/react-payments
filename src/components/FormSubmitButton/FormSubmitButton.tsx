@@ -1,24 +1,22 @@
-import { useNavigate } from 'react-router-dom';
+import { FormEvent } from 'react';
 
-import { PATHNAME } from '../../constants/pathname';
 import { useIsFilledForm } from '../../hooks/useIsFilledForm';
 
 import * as styled from './FormSubmitButton.styled';
 
-const FormSubmitButton = () => {
-  const navigation = useNavigate();
+const FormSubmitButton = ({
+  handleSubmit,
+}: {
+  handleSubmit: (event: FormEvent<HTMLButtonElement>) => void;
+}) => {
+  if (!useIsFilledForm()) {
+    return null;
+  }
 
   return (
-    <>
-      {useIsFilledForm() && (
-        <styled.FormSubmitButton
-          onClick={() => navigation(PATHNAME.NICKNAME)}
-          autoFocus
-        >
-          다음
-        </styled.FormSubmitButton>
-      )}
-    </>
+    <styled.FormSubmitButton type="submit" onSubmit={handleSubmit} autoFocus>
+      다음
+    </styled.FormSubmitButton>
   );
 };
 
