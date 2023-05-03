@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-dom';
 
 import CardContext from '../../../contexts/CardContext';
 
-import { generateCardKey } from '../../../domains/keyGenerator';
 import { PATHNAME } from '../../../constants/pathname';
-import { useUpdateCardList } from '../../../hooks/useUpdateCardList';
+import { generateCardKey } from '../../../domains/keyGenerator';
 import { useIsFilledForm } from '../../../hooks/useIsFilledForm';
+import { useUpdateCardList } from '../../../hooks/useUpdateCardList';
 
 import * as styled from './NicknamePage.styled';
 import CardPreviewSection from '../../CardPreviewSection/CardPreviewSection';

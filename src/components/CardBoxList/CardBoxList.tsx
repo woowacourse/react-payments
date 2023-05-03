@@ -15,7 +15,7 @@ const CardBoxList = () => {
   const navigation = useNavigate();
   const initCard = useInitCard();
 
-  const onClickCardBoxItem = ({
+  const handleClickCardBoxItem = ({
     currentTarget: {
       dataset: { cardKey },
     },
@@ -41,7 +41,7 @@ const CardBoxList = () => {
           <styled.CardBoxItem
             key={key + 'box'}
             data-card-key={key}
-            onClick={onClickCardBoxItem}
+            onClick={handleClickCardBoxItem}
           >
             <CardBox
               key={key + 'card'}

@@ -17,7 +17,7 @@ const CompanyLogoList = () => {
             key={company.NAME}
             SvgLogo={<company.SVG_LOGO_COMPONENT />}
             name={company.NAME}
-            onClick={() => {
+            handleClickCompanyLogo={() => {
               setCompany({
                 name: company.NAME,
                 backgroundColor: company.BACKGROUND_COLOR,
