@@ -1,4 +1,5 @@
 import { PropsWithChildren } from "react";
+import { createPortal } from "react-dom";
 import styled from "styled-components";
 
 interface ModalProps {
@@ -9,11 +10,12 @@ export const Modal = ({
   children,
   closeModal,
 }: PropsWithChildren<ModalProps>) => {
-  return (
+  return createPortal(
     <>
       <BackDrop onClick={closeModal} />
       <ModalContainer>{children}</ModalContainer>
-    </>
+    </>,
+    document.body
   );
 };
 
