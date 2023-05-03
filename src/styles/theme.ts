@@ -55,17 +55,13 @@ export type Theme = ExtractTheme<typeof theme>;
 
 export const light: Theme = theme;
 
-const revertColor = (hexColor: string) => {
-  return Color.fromHex('#000000').getContrastFontColor(Color.fromHex(hexColor)).toString();
-};
-
 export const dark: Theme = {
   ...theme,
 
   fontColor: {
     ...theme.fontColor,
-    primary: revertColor(theme.fontColor.primary),
-    secondary: revertColor(theme.fontColor.secondary),
+    primary: Color.fromHex(theme.fontColor.primary).oppositeWithLightness().toString(),
+    secondary: Color.fromHex(theme.fontColor.secondary).oppositeWithLightness().toString(),
   },
 
   color: {
