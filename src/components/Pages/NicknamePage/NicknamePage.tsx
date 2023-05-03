@@ -1,4 +1,4 @@
-import { ChangeEvent, useContext, useEffect, useState } from 'react';
+import { ChangeEvent, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import CardContext from '../../../contexts/CardContext';
@@ -38,11 +38,10 @@ const NicknamePage = () => {
   const updateCardList = useUpdateCardList(card, setCardList);
   const navigation = useNavigate();
 
-  const [title] = useState(
+  const title =
     cardList && Object.hasOwn(cardList, generateCardKey(card))
       ? '카드 별칭을 수정합니다'
-      : '카드 등록이 완료되었습니다'
-  );
+      : '카드 등록이 완료되었습니다';
 
   const isFilledForm = useIsFilledForm();
   useEffect(() => {
