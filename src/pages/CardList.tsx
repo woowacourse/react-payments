@@ -25,7 +25,7 @@ export function CardList() {
           cards.reverse().map((card, index) => {
             return (
               <React.Fragment key={index}>
-                <CardItem info={card}></CardItem>
+                <CardItem info={card} />
                 <_CardNickName>{card.nickname}</_CardNickName>
               </React.Fragment>
             );

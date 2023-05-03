@@ -17,8 +17,8 @@ export function AddCard() {
       <_AddCardContainer>
         <Header title='카드 추가' render={BackButton} />
         <_Section>
-          <CardPreview></CardPreview>
-          <CardRegisterForm></CardRegisterForm>
+          <CardPreview />
+          <CardRegisterForm />
           <_CompanySelectButton onClick={handleClickButton}>
             카드사 재선택
           </_CompanySelectButton>

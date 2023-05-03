@@ -38,7 +38,7 @@ export function AddCardName() {
     <_AddCardNameContainer>
       <_Section>
         <_Direction>카드 등록이 완료되었습니다.</_Direction>
-        <CardItem info={currentCardInfo}></CardItem>
+        <CardItem info={currentCardInfo} />
         <_Form onSubmit={handleSubmit}>
           <_Input
             type='text'

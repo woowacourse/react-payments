@@ -17,12 +17,12 @@ export function CardCompanySelectModal({ onModalClose }: ModalProps) {
   useClickEvent(BackDropRef, closeModal);
 
   return (
-    <div>
+    <>
       <_Backdrop ref={BackDropRef} />
       <Container>
-        <CardCompanyList></CardCompanyList>
+        <CardCompanyList />
       </Container>
-    </div>
+    </>
   );
 }
 
@@ -49,4 +49,8 @@ const Container = styled.div`
 
   display: flex;
   justify-content: center;
+
+  transition: height 0.5s ease-out;
+  .open {
+  }
 `;
