@@ -27,6 +27,9 @@ export const useCard = () => {
         break;
       case "ownerName":
         setCard({ ...card, [key]: value.toLocaleUpperCase() });
+        break;
+      default:
+        setCard({ ...card, [key]: value });
     }
   };
 
