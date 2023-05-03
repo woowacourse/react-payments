@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CreditCard } from "../../type/CreditCard";
 import Button from "../common/Button";
 import CardPreview from "../common/CardPreview";
 import Input from "../common/Input";
 import { cardCompanyEnglishToKorean } from "../../type/CardCompany";
 import styles from "./InputSuccessPage.module.css";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 interface Props {
   card: CreditCard;
@@ -18,6 +18,17 @@ const InputSuccessPage = (props: Props) => {
   const [nickname, setNickname] = useState('');
   const navigate = useNavigate();
 
+  const location = useLocation();
+
+  useEffect(() => {
+    if (
+      !location.state
+      || !Object.prototype.hasOwnProperty.call(location.state, 'validAccess')
+    ) {
+      navigate('/');
+    }
+  }, [location]);
+
   const companyKoreanName = card.company ? cardCompanyEnglishToKorean(card.company) : '기타 카드';
 
   const lengthParser = (value: string) => value.slice(0, 12);
@@ -25,7 +36,7 @@ const InputSuccessPage = (props: Props) => {
     if (nickname) setCardInfo({ nickname });
     else setCardInfo({ nickname: `${companyKoreanName} ${card.number[3]}` });
   
-    navigate("/");
+    navigate("/", { replace: true });
   };
 
   return (
