@@ -12,6 +12,7 @@ const Style = {
 
     font: 700 19px "Roboto";
     color: #525252;
+    cursor: pointer;
   `,
   Title: styled.h1`
     align-items: center;

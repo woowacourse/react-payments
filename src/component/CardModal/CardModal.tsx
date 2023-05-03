@@ -1,5 +1,4 @@
-import React, { useContext, useEffect } from "react";
-import Style from "./CardModalStyled";
+import React, { useContext } from "react";
 import {
   COMPANY_LIST,
   COMPANY_SRC,
@@ -8,46 +7,42 @@ import {
 import ImgButton from "../common/ImgButton/ImgButton";
 import { CardCompany } from "../../types/card";
 import { CardDetailContext } from "../../context/CardDetailContext";
+import BottomSheet from "../common/BottomSheet/BottomSheet";
+import CardDetailView from "../CardDetailView/CardDetailView";
 
-interface CardModalProps {
-  closeModal: () => void;
-}
-function CardModal({ closeModal }: CardModalProps) {
-  const { changeCompany } = useContext(CardDetailContext);
+function CardModal() {
+  const {
+    cardNumberHidden,
+    cardDate,
+    cardOwnerName,
+    cardCompany,
+    changeCompany,
+  } = useContext(CardDetailContext);
 
-  const escHandler = (e: KeyboardEvent) => {
-    if (e.key === "Escape") closeModal();
-  };
-
-  useEffect(() => {
-    window.addEventListener("keyup", escHandler);
-
-    return () => window.removeEventListener("keyup", escHandler);
-  }, []);
-
-  return (
-    <>
-      <Style.Backdrop onClick={closeModal} />
-      <Style.PopUp>
-        <Style.Detail>
-          {COMPANY_LIST.map(
-            (company: CardCompany) =>
-              company !== DEFAULT_COMPANY && (
-                <ImgButton
-                  key={company}
-                  onClick={() => {
-                    changeCompany(company);
-                    closeModal();
-                  }}
-                  src={COMPANY_SRC[company]}
-                  alt={company}
-                />
-              )
-          )}
-        </Style.Detail>
-      </Style.PopUp>
-    </>
+  const trigger = (
+    <CardDetailView
+      cardNumberHidden={cardNumberHidden}
+      cardDate={cardDate}
+      cardOwnerName={cardOwnerName}
+      cardCompany={cardCompany}
+    />
   );
+
+  const IMGButtons = COMPANY_LIST.map(
+    (company: CardCompany) =>
+      company !== DEFAULT_COMPANY && (
+        <ImgButton
+          key={company}
+          onClick={() => {
+            changeCompany(company);
+          }}
+          src={COMPANY_SRC[company]}
+          alt={company}
+        />
+      )
+  );
+
+  return <BottomSheet trigger={trigger} buttons={IMGButtons}></BottomSheet>;
 }
 
 export default CardModal;

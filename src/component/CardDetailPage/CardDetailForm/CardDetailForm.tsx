@@ -12,15 +12,14 @@ import InputGuide from "../../common/InputGuide/InputGuide";
 import useWarningText from "../../../hooks/useWarningText";
 import { TYPE, NAVIGATE } from "../../../abstract/constants";
 import { CardDetailContext } from "../../../context/CardDetailContext";
-import CardDetailView from "../../CardDetailView/CardDetailView";
 import { Card } from "../../../types/card";
+import CardModal from "../../CardModal/CardModal";
 
 interface CardDetailFormProps {
   setLastCard: (card: Card) => void;
-  openModal: () => void;
 }
 
-function CardDetailForm({ setLastCard, openModal }: CardDetailFormProps) {
+function CardDetailForm({ setLastCard }: CardDetailFormProps) {
   const navigate = useNavigate();
   const { warningText, isWrongForm } = useWarningText();
   const {
@@ -67,13 +66,8 @@ function CardDetailForm({ setLastCard, openModal }: CardDetailFormProps) {
 
   return (
     <>
-      <Style.CardViewSection onClick={openModal}>
-        <CardDetailView
-          cardNumberHidden={cardNumberHidden}
-          cardDate={cardDate}
-          cardOwnerName={cardOwnerName}
-          cardCompany={cardCompany}
-        />
+      <Style.CardViewSection>
+        <CardModal />
       </Style.CardViewSection>
       <Style.Form onSubmit={handelChange}>
         <CardNumberInput />
