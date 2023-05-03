@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { CARD_COMPANY_KIND } from '@constants/cardCompany';
 import { type CardCompanyType } from '@type/card';
+import { CARD_COMPANY_KIND } from '@constants/cardCompany';
 import BankInfo from './SelectCardCompanyItem';
 
 interface SelectCardCompanyProps {

@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { TAB_INDEX_INFO } from '@constants/constant';
 import { type UseInputProps } from '@hooks/useInput';
 import { Error } from '@components/common/Error';
 import { Input } from '@components/common/Input';
+import { TAB_INDEX_INFO } from '@constants/constant';
 
 export interface PasswordInputProps {
   firstPasswordInformation: UseInputProps;

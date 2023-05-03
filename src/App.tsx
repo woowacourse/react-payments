@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { type CardInfo } from '@type/card';
-import { type PageInfo } from '@type/types';
 import { useLocalStorage } from '@hooks/useLocalStorage';
 import { AddCardPage } from '@pages/AddCardPage';
 import { HomePage } from '@pages/HomePage';
+import { type CardInfo } from '@type/card';
+import { type PageInfo } from '@type/types';
 import { LOCAL_STORAGE_CARD_KEY, PAGE_KIND } from '@constants/constant';
 
 export default function App() {

@@ -13,22 +13,62 @@
       "error",
       {
         "groups": [
+          "type",
           "builtin",
           "external",
           "internal",
           "parent",
           "sibling",
           "index",
-          "object",
-          "type"
+          "unknown"
         ],
         "pathGroups": [
           {
-            "pattern": "react",
-            "group": "builtin",
+            "pattern": "react*",
+            "group": "external",
             "position": "before"
+          },
+          {
+            "pattern": "@hooks/**",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "@pages/**",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "@components/**",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "@type/**",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "@utils/**",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "@constants/**",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "@styles/**",
+            "group": "internal",
+            "position": "after"
           }
-        ]
+        ],
+        "alphabetize": {
+          "caseInsensitive": true,
+          "order": "asc"
+        },
+        "pathGroupsExcludedImportTypes": []
       }
     ]
   }
