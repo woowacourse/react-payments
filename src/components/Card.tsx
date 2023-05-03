@@ -67,7 +67,7 @@ const Card = ({
         >
           <div className="card-back-track-1"></div>
           <div className="card-back-track-2">
-            <div>* * * * {securityCode}</div>
+            <div>* * * * {securityCode.replace(/\d/g, ' * ')}</div>
             {cardOwner}
           </div>
           <div className="card-back-track-3">
