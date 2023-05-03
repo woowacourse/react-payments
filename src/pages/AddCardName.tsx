@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, Navigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { CardItem, ErrorMessage } from '../components/common';
@@ -12,11 +12,7 @@ export function AddCardName() {
   const location = useLocation();
   const navigate = useNavigate();
   const currentCardInfo = location.state;
-  /* location.state에 아무것도 없는데 /add-card-name 으로 접근하려고 하는 경우 
-  if (currentCardInfo === null) {
-    alert('먼저 카드 등록이 필요합니다.');
-  }
-  */
+
   const { value, isError, handleChange } = useInput(
     cardRegisterValidator.nickname
   );
@@ -38,7 +34,11 @@ export function AddCardName() {
     <_AddCardNameContainer>
       <_Section>
         <_Direction>카드 등록이 완료되었습니다.</_Direction>
-        <CardItem info={currentCardInfo} />
+        {currentCardInfo ? (
+          <CardItem info={currentCardInfo} />
+        ) : (
+          <Navigate to='/' replace={true} />
+        )}
         <_Form onSubmit={handleSubmit}>
           <_Input
             type='text'
