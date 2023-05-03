@@ -1,6 +1,6 @@
 import type { CardProps } from '../type';
 import { changeNumberToMask } from '../utils/util';
-import { formatExpireDate } from './format';
+import { formatExpireDate } from './formatting/format';
 import { CARD_COMPANY_ENG } from '../utils/constants';
 import './Card.css';
 
