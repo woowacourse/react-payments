@@ -18,13 +18,13 @@ const App = () => {
         <ModalProvider>
           <HashRouter>
             <Routes>
-              <Route path="/" element={<Home cardInfo={cards} />}></Route>
-              <Route path="/card-registration" element={<CardRegistration />}></Route>
+              <Route path="/" element={<Home cardInfo={cards} />} />
+              <Route path="/card-registration" element={<CardRegistration />} />
               <Route
                 path="/card-name-decision"
                 element={<CardNameDecision saveCardToLocalStorage={saveCardToLocalStorage} />}
-              ></Route>
-              <Route path="*" element={<NotFound />}></Route>
+              />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </HashRouter>
           <ModalBottomSheet />
