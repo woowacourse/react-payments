@@ -4,7 +4,7 @@ name: 'Chromatic Deployment'
 # Event for the workflow
 on:
   push:
-    branches: ['step2']
+    branches: ['step3']
     paths: ['src/components/**']
 
 # List of jobs
