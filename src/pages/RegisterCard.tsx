@@ -2,6 +2,7 @@ import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Card from '../components/Card/Card';
+import Layout from '../components/Layout/Layout';
 import { CardContext } from '../context/CardProvider';
 import { useCards } from '../hooks';
 
@@ -26,7 +27,7 @@ const RegisterCard = () => {
   };
 
   return (
-    <>
+    <Layout>
       <Wrapper>
         <Title>카드 등록이 완료되었습니다.</Title>
         <Card
@@ -44,7 +45,7 @@ const RegisterCard = () => {
       <ButtonWrapper>
         <button onClick={handleConfirmButton}>확인</button>
       </ButtonWrapper>
-    </>
+    </Layout>
   );
 };
 

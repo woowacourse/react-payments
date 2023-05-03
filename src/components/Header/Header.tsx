@@ -12,11 +12,22 @@ const Header = () => {
   const location = useLocation();
   const page = location.pathname;
 
-  return page === '/' ? (
-    <Title>보유카드</Title>
-  ) : (
-    <Title onClick={() => navigate(-1)}>&lt; &nbsp; 카드 추가</Title>
-  );
+  const createHeader = () => {
+    switch (page) {
+      case '/':
+        return <Title>보유카드</Title>;
+      case '/add-card':
+        return (
+          <Title onClick={() => navigate(-1)}>&lt; &nbsp; 카드 추가</Title>
+        );
+      case '/register-card':
+        return (
+          <Title onClick={() => navigate(-1)}>&lt; &nbsp; 카드 등록</Title>
+        );
+    }
+  };
+
+  return <>{createHeader()}</>;
 };
 
 export default Header;
