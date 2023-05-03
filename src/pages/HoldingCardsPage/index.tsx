@@ -6,15 +6,9 @@ import CardRegisterButton from '../../components/CardRegisterButton';
 
 import { useCardsContext } from '../../domain/context/CardsContext';
 import { usePreviousPath } from '../../utils/context/PreviousPathContext';
+import { scrollToBottom } from '../../utils/scrollToBottom';
 
 import styles from './holdingCardsPage.module.css';
-
-const scrollToBottom = () => {
-  window.scrollTo({
-    top: document.body.scrollHeight,
-    behavior: 'smooth',
-  });
-};
 
 const HoldingCardsPage = () => {
   const navigate = useNavigate();
