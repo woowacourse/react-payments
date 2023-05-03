@@ -27,10 +27,12 @@ export const getReplacedCardNumber = (cardNumber: string) => {
 };
 
 export const getSeperatedCardNumber = (cardNumber: string) => {
-  return cardNumber.length === SEPERATED_CARD_NUMBER_LENGTH.FIRST ||
-    cardNumber.length === SEPERATED_CARD_NUMBER_LENGTH.SECOND ||
-    cardNumber.length === SEPERATED_CARD_NUMBER_LENGTH.THIRD
-    ? cardNumber + SEPERATOR_STRING.cardNumber
+  return cardNumber.length === SEPERATED_CARD_NUMBER_LENGTH.FIRST + 1 ||
+    cardNumber.length === SEPERATED_CARD_NUMBER_LENGTH.SECOND + 1 ||
+    cardNumber.length === SEPERATED_CARD_NUMBER_LENGTH.THIRD + 1
+    ? cardNumber.substring(0, cardNumber.length - 1) +
+        SEPERATOR_STRING.cardNumber +
+        cardNumber[cardNumber.length - 1]
     : cardNumber;
 };
 
@@ -49,8 +51,10 @@ export const getSubCardNumber = (cardNumber: string) => {
 };
 
 export const getSeperatedExpiredDate = (expiredDate: string) => {
-  return expiredDate.length === SEPERATED_EXPIRED_DATE_LENGTH
-    ? expiredDate + SEPERATOR_STRING.expiredDate
+  return expiredDate.length === SEPERATED_EXPIRED_DATE_LENGTH + 1
+    ? expiredDate.substring(0, expiredDate.length - 1) +
+        SEPERATOR_STRING.expiredDate +
+        expiredDate[expiredDate.length - 1]
     : expiredDate;
 };
 

@@ -33,24 +33,12 @@ const CardInputForm = ({ card, setNewCard, onSubmit }: CardInputFormType) => {
   }, [card]);
 
   const handleInputChanged =
-    (key: keyof Omit<CardType, "password">) =>
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      switch (key) {
-        case "cardNumber":
-          e.target.value = getSeperatedCardNumber(e.target.value);
-          break;
-        case "expiredDate":
-          e.target.value = getSeperatedExpiredDate(e.target.value);
-          break;
-        case "ownerName":
-          e.target.value = e.target.value.toLocaleUpperCase();
-      }
+    (key: keyof CardType) => (e: React.ChangeEvent<HTMLInputElement>) => {
       setNewCard(key, e.target.value);
     };
 
   const handleInputKeyDown =
-    (key: keyof Omit<CardType, "password">) =>
-    (e: React.KeyboardEvent<HTMLInputElement>) => {
+    (key: keyof CardType) => (e: React.KeyboardEvent<HTMLInputElement>) => {
       if (!(e.target instanceof HTMLInputElement) || e.key !== "Backspace")
         return;
 
@@ -58,13 +46,6 @@ const CardInputForm = ({ card, setNewCard, onSubmit }: CardInputFormType) => {
       e.target.value = "";
       e.target.value = value;
 
-      switch (key) {
-        case "cardNumber":
-          e.target.value = getSubCardNumber(e.target.value);
-          break;
-        case "expiredDate":
-          e.target.value = getSubExpiredDate(e.target.value);
-      }
       setNewCard(key, e.target.value);
     };
 
