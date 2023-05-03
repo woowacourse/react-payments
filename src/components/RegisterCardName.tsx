@@ -7,6 +7,7 @@ import { LOCALSTORAGE_KEY } from '../constants';
 
 interface Props {
   card: CardType;
+  setLoading: (value: boolean) => void;
 }
 
 const RegisterCardName = (props: Props) => {
@@ -21,8 +22,9 @@ const RegisterCardName = (props: Props) => {
     const card = cards.pop();
     card.cardName = props.card.cardName;
     setLocalStorage(LOCALSTORAGE_KEY.CARD, [...cards, card]);
+    props.setLoading(true);
 
-    navigator('/');
+    setTimeout(() => navigator('/'), 3000);
   };
 
   return (
