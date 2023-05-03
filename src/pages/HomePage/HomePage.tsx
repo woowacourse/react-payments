@@ -2,7 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { AddCardButton } from '@components/addCardPage/AddCardButton';
 import { Card } from '@components/common/Card';
-import { type CardInfo, type PageInfo } from '@type/types';
+import { type CardInfo } from '@type/card';
+import { type PageInfo } from '@type/types';
+import { PAGE_KIND } from '@constants/constant';
 
 interface HomePageProps {
   cardList: CardInfo[];
@@ -16,7 +18,7 @@ export default function HomePage({
   setCardList,
 }: HomePageProps) {
   const onAddCardClick = () => {
-    setPage('addCardPage');
+    setPage(PAGE_KIND.ADD_CARD);
   };
 
   const onDeleteClick = (index: number) => {

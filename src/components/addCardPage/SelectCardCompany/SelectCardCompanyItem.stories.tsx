@@ -1,24 +1,17 @@
 import React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
+import { CARD_COMPANY_KIND } from '@constants/cardCompany';
 import SelectCardCompanyItem from './SelectCardCompanyItem';
 
 function BankDummy() {
   return (
     <div>
-      <SelectCardCompanyItem kind="bc" onCardCompanySelectClick={() => {}} />
-      <SelectCardCompanyItem kind="kakao" onCardCompanySelectClick={() => {}} />
-      <SelectCardCompanyItem kind="hana" onCardCompanySelectClick={() => {}} />
-      <SelectCardCompanyItem
-        kind="hyundai"
-        onCardCompanySelectClick={() => {}}
-      />
-      <SelectCardCompanyItem kind="kb" onCardCompanySelectClick={() => {}} />
-      <SelectCardCompanyItem kind="lotte" onCardCompanySelectClick={() => {}} />
-      <SelectCardCompanyItem
-        kind="shinhan"
-        onCardCompanySelectClick={() => {}}
-      />
-      <SelectCardCompanyItem kind="woori" onCardCompanySelectClick={() => {}} />
+      {CARD_COMPANY_KIND.map((company) => (
+        <SelectCardCompanyItem
+          kind={company}
+          onCardCompanySelectClick={() => {}}
+        ></SelectCardCompanyItem>
+      ))}
     </div>
   );
 }

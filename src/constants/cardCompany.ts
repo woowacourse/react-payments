@@ -6,72 +6,84 @@ import KB_CARD from '@assets/bank/kb_card.png';
 import LOTTE_CARD from '@assets/bank/lotte_card.png';
 import SHINHAN_CARD from '@assets/bank/shinhan_card.png';
 import WOORI_CARD from '@assets/bank/woori_card.png';
-import { type CardCompanyRecord } from '@type/types';
+import { type CardCompanyRecord } from '@type/card';
+
+export const CARD_COMPANY = Object.freeze({
+  DEFAULT: 'DEFAULT',
+  BC: 'BC',
+  SHINHAN: 'SHINHAN',
+  KAKAO: 'KAKAO',
+  HYUNDAI: 'HYUNDAI',
+  WOORI: 'WOORI',
+  LOTTE: 'LOTTE',
+  HANA: 'HANA',
+  KB: 'KB',
+});
 
 export const CARD_COMPANY_KIND = [
-  'bc',
-  'shinhan',
-  'kakao',
-  'hyundai',
-  'woori',
-  'lotte',
-  'hana',
-  'kb',
+  CARD_COMPANY.BC,
+  CARD_COMPANY.SHINHAN,
+  CARD_COMPANY.KAKAO,
+  CARD_COMPANY.HYUNDAI,
+  CARD_COMPANY.WOORI,
+  CARD_COMPANY.LOTTE,
+  CARD_COMPANY.HANA,
+  CARD_COMPANY.KB,
 ] as const;
 
 export const CARD_COMPANY_DATA: CardCompanyRecord = {
-  default: {
-    source: '',
-    title: '',
-    color: '#FFFFFF',
-    backgroundColor: '#333333',
+  [CARD_COMPANY.DEFAULT]: {
+    SOURCE: '',
+    TITLE: '',
+    COLOR: '#FFFFFF',
+    BACKGROUND_COLOR: '#333333',
   },
-  bc: {
-    source: BC_CARD,
-    title: 'BC카드',
-    color: '#FFFFFF',
-    backgroundColor: '#DE5356',
+  [CARD_COMPANY.BC]: {
+    SOURCE: BC_CARD,
+    TITLE: 'BC카드',
+    COLOR: '#FFFFFF',
+    BACKGROUND_COLOR: '#DE5356',
   },
-  shinhan: {
-    source: SHINHAN_CARD,
-    title: '신한카드',
-    color: '#FFFFFF',
-    backgroundColor: '#1B45F5',
+  [CARD_COMPANY.SHINHAN]: {
+    SOURCE: SHINHAN_CARD,
+    TITLE: '신한카드',
+    COLOR: '#FFFFFF',
+    BACKGROUND_COLOR: '#1B45F5',
   },
-  kakao: {
-    source: KAKAO_BANK,
-    title: '카카오뱅크',
-    color: '#333333',
-    backgroundColor: '#FBE74D',
+  [CARD_COMPANY.KAKAO]: {
+    SOURCE: KAKAO_BANK,
+    TITLE: '카카오뱅크',
+    COLOR: '#333333',
+    BACKGROUND_COLOR: '#FBE74D',
   },
-  hyundai: {
-    source: HYUNDAI_CARD,
-    title: '현대카드',
-    color: '#FFFFFF',
-    backgroundColor: '#000000',
+  [CARD_COMPANY.HYUNDAI]: {
+    SOURCE: HYUNDAI_CARD,
+    TITLE: '현대카드',
+    COLOR: '#FFFFFF',
+    BACKGROUND_COLOR: '#000000',
   },
-  woori: {
-    source: WOORI_CARD,
-    title: '우리카드',
-    color: '#FFFFFF',
-    backgroundColor: '#3579C2',
+  [CARD_COMPANY.WOORI]: {
+    SOURCE: WOORI_CARD,
+    TITLE: '우리카드',
+    COLOR: '#FFFFFF',
+    BACKGROUND_COLOR: '#3579C2',
   },
-  lotte: {
-    source: LOTTE_CARD,
-    title: '롯데카드',
-    color: '#FFFFFF',
-    backgroundColor: '#DA3832',
+  [CARD_COMPANY.LOTTE]: {
+    SOURCE: LOTTE_CARD,
+    TITLE: '롯데카드',
+    COLOR: '#FFFFFF',
+    BACKGROUND_COLOR: '#DA3832',
   },
-  hana: {
-    source: HANA_CARD,
-    title: '하나카드',
-    color: '#FFFFFF',
-    backgroundColor: '#41928F',
+  [CARD_COMPANY.HANA]: {
+    SOURCE: HANA_CARD,
+    TITLE: '하나카드',
+    COLOR: '#FFFFFF',
+    BACKGROUND_COLOR: '#41928F',
   },
-  kb: {
-    source: KB_CARD,
-    title: '국민카드',
-    color: '#F7CF47',
-    backgroundColor: '#6D655C',
+  [CARD_COMPANY.KB]: {
+    SOURCE: KB_CARD,
+    TITLE: '국민카드',
+    COLOR: '#F7CF47',
+    BACKGROUND_COLOR: '#6D655C',
   },
 };

@@ -1,4 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
+import { CARD_COMPANY } from '@constants/cardCompany';
 import Card from './Card';
 
 const meta: Meta<typeof Card> = {
@@ -78,7 +79,7 @@ export const TitleCard: Story = {
     owner: 'EYK',
     month: '04',
     year: '23',
-    companyKind: 'kakao',
+    companyKind: CARD_COMPANY.KAKAO,
     title: '카카오뱅크 내 카드',
   },
 };
@@ -89,7 +90,7 @@ export const KakaoCard: Story = {
     owner: 'EYK',
     month: '04',
     year: '23',
-    companyKind: 'kakao',
+    companyKind: CARD_COMPANY.KAKAO,
   },
 };
 
@@ -99,7 +100,7 @@ export const HyundaiCard: Story = {
     owner: 'EYK',
     month: '04',
     year: '23',
-    companyKind: 'hyundai',
+    companyKind: CARD_COMPANY.HYUNDAI,
   },
 };
 
@@ -109,7 +110,7 @@ export const HanaCard: Story = {
     owner: 'EYK',
     month: '04',
     year: '23',
-    companyKind: 'hana',
+    companyKind: CARD_COMPANY.HANA,
   },
 };
 
@@ -119,7 +120,7 @@ export const BcCard: Story = {
     owner: 'EYK',
     month: '04',
     year: '23',
-    companyKind: 'bc',
+    companyKind: CARD_COMPANY.BC,
   },
 };
 
@@ -129,7 +130,7 @@ export const KbCard: Story = {
     owner: 'EYK',
     month: '04',
     year: '23',
-    companyKind: 'kb',
+    companyKind: CARD_COMPANY.KB,
   },
 };
 
@@ -139,7 +140,7 @@ export const ShinhanCard: Story = {
     owner: 'EYK',
     month: '04',
     year: '23',
-    companyKind: 'shinhan',
+    companyKind: CARD_COMPANY.SHINHAN,
   },
 };
 
@@ -149,7 +150,7 @@ export const WooriCard: Story = {
     owner: 'EYK',
     month: '04',
     year: '23',
-    companyKind: 'woori',
+    companyKind: CARD_COMPANY.WOORI,
   },
 };
 
@@ -159,6 +160,6 @@ export const LotteCard: Story = {
     owner: 'EYK',
     month: '04',
     year: '23',
-    companyKind: 'lotte',
+    companyKind: CARD_COMPANY.LOTTE,
   },
 };

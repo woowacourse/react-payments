@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
 import { useLocalStorage } from '@hooks/useLocalStorage';
-import { CardInfo, PageInfo } from '@type/types';
+import { type CardInfo } from '@type/card';
+import { type PageInfo } from '@type/types';
+import { PAGE_KIND } from '@constants/constant';
 import AddCardPage from './AddCardPage';
 
 const STORIES_CARD_KEY = 'storiesCardKey';
 
 function AddCardPageStories() {
-  const [page, setPage] = useState<PageInfo>('addCardPage');
+  const [page, setPage] = useState<PageInfo>(PAGE_KIND.ADD_CARD);
   const [cardList, setCardList] = useLocalStorage<CardInfo[]>(
     [],
     STORIES_CARD_KEY
@@ -15,7 +17,7 @@ function AddCardPageStories() {
 
   return (
     <div className="app">
-      {page === 'addCardPage' && (
+      {page === PAGE_KIND.ADD_CARD && (
         <AddCardPage
           cardList={cardList}
           setCardList={setCardList}

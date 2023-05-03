@@ -10,9 +10,7 @@ interface ExpirationInputProps {
   monthInformation: UseInputProps;
 }
 
-const {
-  ADD_CARD_PAGE: { MONTH, YEAR },
-} = TAB_INDEX_INFO;
+const { ADD_CARD_PAGE_TAB_INDEX } = TAB_INDEX_INFO;
 
 export default function ExpirationInput({
   yearInformation,
@@ -29,7 +27,7 @@ export default function ExpirationInput({
             placeholder="MM"
             textAlign="center"
             autoComplete="off"
-            tabIndex={MONTH}
+            tabIndex={ADD_CARD_PAGE_TAB_INDEX.MONTH}
             {...monthInformation}
           />
         </InputWrapper>
@@ -41,7 +39,7 @@ export default function ExpirationInput({
             placeholder="YY"
             textAlign="center"
             autoComplete="off"
-            tabIndex={YEAR}
+            tabIndex={ADD_CARD_PAGE_TAB_INDEX.YEAR}
             {...yearInformation}
           />
         </InputWrapper>

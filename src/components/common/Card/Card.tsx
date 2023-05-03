@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { CARD_COMPANY_DATA } from '@constants/cardCompany';
-import { type CardCompanyType } from '@type/types';
+import { type CardCompanyType } from '@type/card';
 import { isPastDate } from '@utils/validate';
 import { Error } from '@components/common/Error';
 
@@ -25,7 +25,7 @@ export default function Card({
   year,
   onDeleteClick,
   title,
-  companyKind = 'default',
+  companyKind,
 }: CardProps) {
   const [isClick, setIsClick] = useState(false);
   const ownerName =
@@ -44,10 +44,10 @@ export default function Card({
         <Wrapper
           onClick={toggleIsClick}
           isHome={onDeleteClick ? true : false}
-          bgColor={CARD_COMPANY_DATA[companyKind].backgroundColor}
-          fontColor={CARD_COMPANY_DATA[companyKind].color}
+          bgColor={CARD_COMPANY_DATA[companyKind].BACKGROUND_COLOR}
+          fontColor={CARD_COMPANY_DATA[companyKind].COLOR}
         >
-          <Title>{CARD_COMPANY_DATA[companyKind].title}</Title>
+          <Title>{CARD_COMPANY_DATA[companyKind].TITLE}</Title>
           <Magnet />
           <div>
             <CardNumber>
@@ -141,6 +141,13 @@ const CardNumber = styled.div`
 const CardNumberItem = styled.span`
   width: 34px;
   letter-spacing: 2px;
+
+  &:nth-child(3) {
+    letter-spacing: -3px;
+  }
+  &:nth-child(4) {
+    letter-spacing: -3px;
+  }
 `;
 
 const OwnerAndExpirationWrapper = styled.div`

@@ -17,19 +17,17 @@ import { Button } from '@components/common/Button';
 import { Card } from '@components/common/Card';
 import { InputField } from '@components/common/InputField';
 import { Modal } from '@components/common/Modal';
-import { CARD_COMPANY_DATA } from '@constants/cardCompany';
+import { CARD_COMPANY, CARD_COMPANY_DATA } from '@constants/cardCompany';
 import { useFocusInput } from '@hooks/useFocusInput';
 import { useFormInputs } from '@hooks/useFormInputs';
 import { useHideScrollState } from '@hooks/useHideScrollState';
 import { type UseInputProps } from '@hooks/useInput';
-import {
-  type CardCompanyType,
-  type CardInfo,
-  type PageInfo,
-} from '@type/types';
+import { type CardCompanyType, type CardInfo } from '@type/card';
+import { type PageInfo } from '@type/types';
 import { createUniqueId, setNextInputFocus } from '@utils/common';
 import { formValidate } from '@utils/formValidate';
 import { isPastDate } from '@utils/validate';
+import { PAGE_KIND } from '@constants/constant';
 
 interface AddCardPageProps {
   cardList: CardInfo[];
@@ -47,9 +45,9 @@ export default function AddCardPage({
   const { formInputs } = useFormInputs();
   const [isRegister, setIsRegister] = useState(false);
   const [cardCompany, setCardCompany] = useHideScrollState<CardCompanyType>(
-    'default',
+    CARD_COMPANY.DEFAULT,
     (value) => {
-      return value === 'default';
+      return value === CARD_COMPANY.DEFAULT;
     }
   );
 
@@ -130,7 +128,7 @@ export default function AddCardPage({
 
     setCardList(updatedCardList);
 
-    setPage('homePage');
+    setPage(PAGE_KIND.HOME);
   };
 
   const askPrevPage = useCallback(() => {
@@ -139,7 +137,7 @@ export default function AddCardPage({
     );
 
     if (result) {
-      setPage('homePage');
+      setPage(PAGE_KIND.HOME);
     }
   }, [setPage]);
 
@@ -198,10 +196,10 @@ export default function AddCardPage({
           />
           <ChangeButtonWrapper>
             <Button
-              color={CARD_COMPANY_DATA[cardCompany].color}
-              backgroundColor={CARD_COMPANY_DATA[cardCompany].backgroundColor}
+              color={CARD_COMPANY_DATA[cardCompany].COLOR}
+              backgroundColor={CARD_COMPANY_DATA[cardCompany].BACKGROUND_COLOR}
               text="카드 변경"
-              onClick={() => setCardCompany('default')}
+              onClick={() => setCardCompany('DEFAULT')}
               type="button"
               padding="8px"
               borderRadius="8px"
@@ -256,7 +254,10 @@ export default function AddCardPage({
           </NextButtonWrapper>
         </InputWrapperParent>
       </Page>
-      <Modal isOpen={cardCompany === 'default'} ariaLabel="카드사 선택창">
+      <Modal
+        isOpen={cardCompany === CARD_COMPANY.DEFAULT}
+        ariaLabel="카드사 선택창"
+      >
         <SelectCardCompany onCardCompanySelectClick={onBankSelectClick} />
       </Modal>
     </div>

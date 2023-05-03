@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { useFormInputs } from '@hooks/useFormInputs';
+import { CARD_COMPANY } from '@constants/cardCompany';
 import RegisteredCard from './RegisteredCard';
 
 function RegisteredCardStories() {
@@ -18,7 +19,7 @@ function RegisteredCardStories() {
 
   return (
     <RegisteredCard
-      companyKind="default"
+      companyKind={CARD_COMPANY.DEFAULT}
       createCard={() => {}}
       cardTitleInformation={cardTitle}
       {...cardInfo}

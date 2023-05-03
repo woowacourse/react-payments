@@ -11,14 +11,7 @@ interface CardNumberInputProps {
   fourthNumberInformation: UseInputProps;
 }
 
-const {
-  ADD_CARD_PAGE: {
-    FIRST_CARD_NUMBER,
-    SECOND_CARD_NUMBER,
-    THIRD_CARD_NUMBER,
-    FOURTH_CARD_NUMBER,
-  },
-} = TAB_INDEX_INFO;
+const { ADD_CARD_PAGE_TAB_INDEX } = TAB_INDEX_INFO;
 
 export default function CardNumberInput({
   firstNumberInformation,
@@ -36,7 +29,7 @@ export default function CardNumberInput({
           textAlign="center"
           placeholder="0000"
           autoComplete="off"
-          tabIndex={FIRST_CARD_NUMBER}
+          tabIndex={ADD_CARD_PAGE_TAB_INDEX.FIRST_CARD_NUMBER}
           {...firstNumberInformation}
         />
         <Dash>-</Dash>
@@ -44,7 +37,7 @@ export default function CardNumberInput({
           isNumber={true}
           type="text"
           placeholder="0000"
-          tabIndex={SECOND_CARD_NUMBER}
+          tabIndex={ADD_CARD_PAGE_TAB_INDEX.SECOND_CARD_NUMBER}
           autoComplete="off"
           textAlign="center"
           {...secondNumberInformation}
@@ -57,7 +50,7 @@ export default function CardNumberInput({
           isPassword={true}
           textAlign="center"
           autoComplete="off"
-          tabIndex={THIRD_CARD_NUMBER}
+          tabIndex={ADD_CARD_PAGE_TAB_INDEX.THIRD_CARD_NUMBER}
           {...thirdNumberInformation}
         />
         <Dash>-</Dash>
@@ -68,7 +61,7 @@ export default function CardNumberInput({
           autoComplete="off"
           isPassword={true}
           textAlign="center"
-          tabIndex={FOURTH_CARD_NUMBER}
+          tabIndex={ADD_CARD_PAGE_TAB_INDEX.FOURTH_CARD_NUMBER}
           {...fourthNumberInformation}
         />
       </Wrapper>
