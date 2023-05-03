@@ -38,7 +38,7 @@ const CardCompanyWrapper = styled.div`
   grid-template-columns: repeat(4, 1fr);
   width: 100%;
 
-  padding: 5% 15%;
+  padding: 17px 40px;
 `;
 
 const CardCompanyGroup = styled.div`
