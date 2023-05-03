@@ -9,9 +9,5 @@ export const useCard = () => {
     setCard({ ...card, [key]: value });
   };
 
-  // const setPassword = (value: string[]) => {
-  //   setCard({ ...card, password: value });
-  // };
-
   return [card, setNewCard] as const;
 };

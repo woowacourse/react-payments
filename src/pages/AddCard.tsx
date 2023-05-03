@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ModalDispatchContext } from "../context";
 import { ROUTER_PATH } from "../router/path";
@@ -35,9 +35,7 @@ const AddCard = () => {
   return (
     <Page>
       <Header title="카드 추가" isBack />
-      <div onClick={toggleModal}>
-        <Card {...card} />
-      </div>
+      <Card {...card} />
       <CardInputForm
         card={card}
         setNewCard={setNewCard}
