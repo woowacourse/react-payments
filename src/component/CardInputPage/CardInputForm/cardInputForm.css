@@ -1,7 +1,10 @@
 .form {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 3%;
+}
+
+.form > * {
+  margin-bottom: 7%;
 }
 
 p {

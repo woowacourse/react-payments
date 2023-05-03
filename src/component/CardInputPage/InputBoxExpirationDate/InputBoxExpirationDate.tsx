@@ -1,15 +1,18 @@
 import { useState, ChangeEvent } from "react";
+
 import Input from "../../common/Input";
 
-import "./inputBoxExpirationDate.css";
 import { CARD_ERROR_MESSAGE } from "../../../CONSTANT";
 import { validateExpirationDate } from "../../../validation/ExpirationDate";
 import { makeAppropriateExpirationDate } from "../../../util/trans";
 
+import "./inputBoxExpirationDate.css";
+
 interface InputBoxExpirationDateProps {
   changeCardExpirationDateStatus: (
-    key: "isComplete" | "userInput",
-    value: any
+    completeState: boolean,
+    value?: string,
+    index?: number
   ) => void;
 }
 
@@ -29,14 +32,13 @@ export default function InputBoxExpirationDate(
 
     if (!validateExpirationDate(appropriateExpirationDate)) {
       setHaveError(true);
-      changeCardExpirationDateStatus("isComplete", false);
+      changeCardExpirationDateStatus(false);
     } else if (appropriateExpirationDate.length === 5) {
       setHaveError(false);
-      changeCardExpirationDateStatus("isComplete", true);
-      changeCardExpirationDateStatus("userInput", appropriateExpirationDate);
+      changeCardExpirationDateStatus(true, appropriateExpirationDate);
     } else {
       setHaveError(false);
-      changeCardExpirationDateStatus("isComplete", false);
+      changeCardExpirationDateStatus(false);
     }
 
     setExpirationDate(appropriateExpirationDate);

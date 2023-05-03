@@ -1,15 +1,17 @@
 import { useState, ChangeEvent } from "react";
+
 import Input from "../../common/Input";
 
-import "./cardPassword.css";
 import { makeAppropriatePassword } from "../../../util/trans";
 import { nowStatus } from "../../../type";
+
+import "./cardPassword.css";
 
 interface CardPasswordProps {
   changeHasError: (partIndex: number, state: nowStatus) => void;
   changePasswordStatus: (
-    key: "isComplete" | "userInput",
-    value: any,
+    completeState: boolean,
+    value?: string,
     index?: number
   ) => void;
 }
@@ -28,7 +30,7 @@ export default function CardPassword(props: CardPasswordProps) {
         changeHasError(partIndex, 0);
       } else if (appropriatePassword.length === 1) {
         changeHasError(partIndex, 2);
-        changePasswordStatus("userInput", passwordStatus, partIndex);
+        changePasswordStatus(true, appropriatePassword, partIndex);
       } else {
         changeHasError(partIndex, 1);
       }

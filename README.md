@@ -32,193 +32,88 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 <br>
 
-# 1단계
+# 2단계
 
 ## 파일 구조
 
 ```
-src
- ┣ component
- ┃ ┣ CardInputPage
- ┃ ┃ ┣ CardInputForm
- ┃ ┃ ┃ ┣ CardInputForm.tsx
- ┃ ┃ ┃ ┗ cardInputForm.css
- ┃ ┃ ┃
- ┃ ┃ ┣ InputBoxCardNumber
- ┃ ┃ ┃ ┣ CardNumber.tsx
- ┃ ┃ ┃ ┣ InputBoxCardNumber.tsx
- ┃ ┃ ┃ ┣ cardNumber.css
- ┃ ┃ ┃ ┗ inputBoxCardNumber.css
- ┃ ┃ ┃
- ┃ ┃ ┣ InputBoxExpirationDate
- ┃ ┃ ┃ ┣ InputBoxExpirationDate.tsx
- ┃ ┃ ┃ ┗ inputBoxExpirationDate.css
- ┃ ┃ ┃
- ┃ ┃ ┣ InputBoxOwner
- ┃ ┃ ┃ ┣ InputBoxOwner.tsx
- ┃ ┃ ┃ ┗ inputBoxOwner.css
- ┃ ┃ ┃
- ┃ ┃ ┣ InputBoxPassword
- ┃ ┃ ┃ ┣ CardPassword.tsx
- ┃ ┃ ┃ ┣ InputBoxPassword.tsx
- ┃ ┃ ┃ ┣ cardPassword.css
- ┃ ┃ ┃ ┗ inputBoxPassword.css
- ┃ ┃ ┃
- ┃ ┃ ┣ InputBoxSecurityCode
- ┃ ┃ ┃ ┣ InputBoxSecurityCode.tsx
- ┃ ┃ ┃ ┗ inputBoxSecurityCode.css
- ┃ ┃ ┃
- ┃ ┃ ┣ CardInputPage.tsx
- ┃ ┃ ┗ cardInputPage.css
+📦src
+ ┣ 📂asset : svg 모음
+ ┃
+ ┣ 📂component
+ ┃ ┣ 📂CardInputPage : 카드정보 입력 페이지
+ ┃ ┃ ┣ 📂CardInputForm : 카드정보 입력폼
+ ┃ ┃ ┣ 📂InputBoxCardNumber : 입력폼 내 카드번호 입력칸
+ ┃ ┃ ┣ 📂InputBoxExpirationDate : 입력폼 내 카드 만료일 입력칸
+ ┃ ┃ ┣ 📂InputBoxOwner : 입력폼 내 카드 소유주 입력칸
+ ┃ ┃ ┣ 📂InputBoxPassword : 입력폼 내 카드 비밀번호 입력칸
+ ┃ ┃ ┗ 📂InputBoxSecurityCode : 입력폼 내 카드 보안코드 입력칸
  ┃ ┃
- ┃ ┣ CardListPage
- ┃ ┃ ┣ AddCardButton
- ┃ ┃ ┃ ┣ AddCardButton.tsx
- ┃ ┃ ┃ ┗ addCardButton.css
- ┃ ┃ ┃
- ┃ ┃ ┣ CardList
- ┃ ┃ ┃ ┣ CardList.tsx
- ┃ ┃ ┃ ┗ cardList.css
- ┃ ┃ ┃
- ┃ ┃ ┣ CardListPage.tsx
- ┃ ┃ ┗ cardListPage.css
+ ┃ ┣ 📂CardListPage : 카드 목록 페이지
+ ┃ ┃ ┣ 📂AddCardButton : 카드 추가 버튼
+ ┃ ┃ ┣ 📂CardList : 카드 목록
  ┃ ┃
- ┃ ┗ common
- ┃ ┃ ┣ Button.module.css
- ┃ ┃ ┣ Button.tsx
- ┃ ┃ ┣ CardPreview.module.css
- ┃ ┃ ┣ CardPreview.tsx
- ┃ ┃ ┣ Input.module.css
- ┃ ┃ ┗ Input.tsx
+ ┃ ┣ 📂CardNickInputPage : 카드별칭 입력 페이지
+ ┃ ┃ ┣ 📂InputBoxNick: 카드 별칭 입력칸
  ┃ ┃
- ┣ stories
- ┃ ┣ Button.stories.ts
- ┃ ┣ Button.tsx
- ┃ ┣ CardInputForm.stories.tsx
- ┃ ┣ CardNumber.stories.tsx
- ┃ ┣ CardPreview.stories.tsx
- ┃ ┣ Header.stories.ts
- ┃ ┣ Header.tsx
- ┃ ┣ Input.stories.tsx
- ┃ ┣ InputBoxCardNumber.stories.tsx
- ┃ ┣ InputBoxExpirationDate.stories.tsx
- ┃ ┣ InputBoxOwner.stories.tsx
- ┃ ┣ InputBoxPassword.stories.tsx
- ┃ ┣ InputBoxSecurityCode.stories.tsx
- ┃ ┣ Introduction.mdx
- ┃ ┣ Page.stories.ts
- ┃ ┣ Page.tsx
- ┃ ┣ button.css
- ┃ ┣ header.css
- ┃ ┗ page.css
- ┃
- ┣ style
- ┃ ┣ palette.css
- ┃ ┗ reset.css
- ┃
- ┣ validation
- ┃ ┣ ExpirationDate.ts
- ┃ ┣ cardNumber.ts
- ┃ ┣ password.ts
- ┃ ┗ securityNumber.ts
- ┃
- ┣ App.css
- ┣ App.tsx
- ┣ index.css
- ┣ index.js
- ┣ index.tsx
- ┗ react-app-env.d.ts
-```
-
-<br>
-
-## 2단계
-
-```
-src
- ┣ component
- ┃ ┣ CardInputPage
- ┃ ┃ ┣ CardInputForm
- ┃ ┃ ┃ ┣ CardInputForm.tsx
- ┃ ┃ ┃ ┗ cardInputForm.css
+ ┃ ┗ 📂common
+ ┃ ┃ ┣ 📜Button.tsx
+ ┃ ┃ ┣ 📜Input.tsx
  ┃ ┃ ┃
- ┃ ┃ ┣ InputBoxCardNumber
- ┃ ┃ ┃ ┣ CardNumber.tsx
- ┃ ┃ ┃ ┣ InputBoxCardNumber.tsx
- ┃ ┃ ┃ ┣ cardNumber.css
- ┃ ┃ ┃ ┗ inputBoxCardNumber.css
+ ┃ ┃ ┣ 📜CardCoButton.tsx
+ ┃ ┃ ┣ 📜CardCoModal.tsx
  ┃ ┃ ┃
- ┃ ┃ ┣ InputBoxExpirationDate
- ┃ ┃ ┃ ┣ InputBoxExpirationDate.tsx
- ┃ ┃ ┃ ┗ inputBoxExpirationDate.css
+ ┃ ┃ ┣ 📜CardPreview.tsx
  ┃ ┃ ┃
- ┃ ┃ ┣ InputBoxOwner
- ┃ ┃ ┃ ┣ InputBoxOwner.tsx
- ┃ ┃ ┃ ┗ inputBoxOwner.css
- ┃ ┃ ┃
- ┃ ┃ ┣ InputBoxPassword
- ┃ ┃ ┃ ┣ CardPassword.tsx
- ┃ ┃ ┃ ┣ InputBoxPassword.tsx
- ┃ ┃ ┃ ┣ cardPassword.css
- ┃ ┃ ┃ ┗ inputBoxPassword.css
- ┃ ┃ ┃
- ┃ ┃ ┣ InputBoxSecurityCode
- ┃ ┃ ┃ ┣ InputBoxSecurityCode.tsx
- ┃ ┃ ┃ ┗ inputBoxSecurityCode.css
- ┃ ┃ ┃
- ┃ ┃ ┣ CardInputPage.tsx
- ┃ ┃ ┗ cardInputPage.css
+ ┃ ┃ ┣ 📜button.css
+ ┃ ┃ ┣ 📜cardCoButton.css
+ ┃ ┃ ┣ 📜cardCoModal.css
+ ┃ ┃ ┣ 📜cardPreview.css
+ ┃ ┃ ┗ 📜input.css
  ┃ ┃
- ┃ ┣ CardListPage
- ┃ ┃ ┣ AddCardButton
- ┃ ┃ ┃ ┣ AddCardButton.tsx
- ┃ ┃ ┃ ┗ addCardButton.css
- ┃ ┃ ┃
- ┃ ┃ ┣ CardList
- ┃ ┃ ┃ ┣ CardList.tsx
- ┃ ┃ ┃ ┗ cardList.css
- ┃ ┃ ┣ CardListPage.tsx
- ┃ ┃ ┗ cardListPage.css
+ ┣ 📂stories
+ ┃ ┣ 📂CardInputPage
+ ┃ ┃ ┣ 📜CardInputForm.stories.tsx
+ ┃ ┃ ┣ 📜CardNumber.stories.tsx
+ ┃ ┃ ┣ 📜InputBoxCardNumber.stories.tsx
+ ┃ ┃ ┣ 📜InputBoxExpirationDate.stories.tsx
+ ┃ ┃ ┣ 📜InputBoxOwner.stories.tsx
+ ┃ ┃ ┣ 📜InputBoxPassword.stories.tsx
+ ┃ ┃ ┗ 📜InputBoxSecurityCode.stories.tsx
  ┃ ┃
- ┃ ┗ common
- ┃   ┣ Button.module.css
- ┃   ┣ Button.tsx
- ┃   ┣ CardPreview.module.css
- ┃   ┣ CardPreview.tsx
- ┃   ┣ Input.module.css
- ┃   ┗ Input.tsx
+ ┃ ┣ 📂CardListPage
+ ┃ ┃ ┗ 📜CardListPage.stories.tsx
+ ┃ ┃
+ ┃ ┣ 📂CardNickInputPage
+ ┃ ┃ ┣ 📜CardNickInputPage.stories.tsx
+ ┃ ┃ ┗ 📜InputBoxNick.stories.tsx
+ ┃ ┃
+ ┃ ┗ 📂common
+ ┃ ┃ ┣ 📜CardCoButton.stories.tsx
+ ┃ ┃ ┣ 📜CardCoModal.stories.tsx
+ ┃ ┃ ┣ 📜CardPreview.stories.tsx
+ ┃ ┃ ┗ 📜Input.stories.tsx
+ ┃ ┃
+ ┣ 📂style
+ ┃ ┣ 📜palette.css
+ ┃ ┗ 📜reset.css
  ┃
- ┣ stories
- ┃ ┣ CardInputForm.stories.tsx
- ┃ ┣ CardNumber.stories.tsx
- ┃ ┣ CardPreview.stories.tsx
- ┃ ┣ Input.stories.tsx
- ┃ ┣ InputBoxCardNumber.stories.tsx
- ┃ ┣ InputBoxExpirationDate.stories.tsx
- ┃ ┣ InputBoxOwner.stories.tsx
- ┃ ┣ InputBoxPassword.stories.tsx
- ┃ ┣ InputBoxSecurityCode.stories.tsx
- ┃ ┗ Introduction.mdx
+ ┣ 📂util
+ ┃ ┣ 📜colorMatch.ts
+ ┃ ┣ 📜getCardCoIcon.tsx
+ ┃ ┗ 📜trans.ts
  ┃
- ┣ style
- ┃ ┣ palette.css
- ┃ ┗ reset.css
+ ┣ 📂validation
+ ┃ ┣ 📜ExpirationDate.ts
+ ┃ ┣ 📜cardOwner.ts
+ ┃ ┗ 📜number.ts
  ┃
- ┣ util
- ┃ ┣ deepCopy.ts
- ┃ ┗ trans.ts  : 형식에 맞는 input값으로 변환
- ┃
- ┣ validation
- ┃ ┣ ExpirationDate.ts
- ┃ ┣ cardOwner.ts
- ┃ ┗ number.ts
- ┃
- ┣ App.css
- ┣ App.tsx
- ┣ CONSTANT.ts
- ┣ index.css
- ┣ index.js
- ┣ index.tsx
- ┣ react-app-env.d.ts
- ┗ type.ts
+ ┣ 📜App.css
+ ┣ 📜App.tsx
+ ┣ 📜CONSTANT.ts
+ ┣ 📜cardData.ts
+ ┣ 📜index.css
+ ┣ 📜index.tsx
+ ┣ 📜react-app-env.d.ts
+ ┗ 📜type.ts
 ```

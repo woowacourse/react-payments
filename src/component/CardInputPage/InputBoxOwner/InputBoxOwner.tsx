@@ -1,12 +1,18 @@
-import "./inputBoxOwner.css";
-
 import { useState, ChangeEvent } from "react";
+
 import Input from "../../common/Input";
+
 import { CARD_ERROR_MESSAGE } from "../../../CONSTANT";
 import { makeAppropriateName } from "../../../util/trans";
 
+import "./inputBoxOwner.css";
+
 interface InputBoxOwnerProps {
-  changeCardOwnerStatus: (key: "isComplete" | "userInput", value: any) => void;
+  changeCardOwnerStatus: (
+    completeState: boolean,
+    value?: string,
+    index?: number
+  ) => void;
 }
 
 export default function InputBoxOwner(props: InputBoxOwnerProps) {
@@ -21,13 +27,12 @@ export default function InputBoxOwner(props: InputBoxOwnerProps) {
 
     if (userInputName !== appropriateName) {
       setHaveError(true);
-      changeCardOwnerStatus("isComplete", false);
+      changeCardOwnerStatus(false);
     } else {
       setHaveError(false);
-      changeCardOwnerStatus("isComplete", true);
+      changeCardOwnerStatus(true, appropriateName);
     }
 
-    changeCardOwnerStatus("userInput", appropriateName);
     setName(appropriateName);
   };
 

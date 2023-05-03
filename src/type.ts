@@ -1,24 +1,30 @@
 export interface CreditCard {
-  bank?: string;
-  cardNumber: number[];
+  cardCo: CardCo;
+  nickName: string;
+  cardNumber: string[];
   expirationDate: string;
   owner: string;
   securityCode: string;
-  password: number[];
-}
-
-export interface EachUserInputState {
-  isComplete: boolean;
-  userInput: string | string[];
+  password: string[];
 }
 
 export type nowStatus = 0 | 1 | 2;
 
 export interface InputStatus {
-  bank?: EachUserInputState;
-  cardNumber: EachUserInputState;
-  expirationDate: EachUserInputState;
-  owner: EachUserInputState;
-  securityCode: EachUserInputState;
-  password: EachUserInputState;
+  cardCo: boolean;
+  cardNumber: boolean;
+  expirationDate: boolean;
+  owner: boolean;
+  securityCode: boolean;
+  password: boolean;
 }
+
+export type CardCo =
+  | "woori"
+  | "lotte"
+  | "hana"
+  | "kb"
+  | "kakao"
+  | "bc"
+  | "shinhan"
+  | "hyundai";

@@ -1,5 +1,7 @@
-import { CreditCard } from "../../type";
 import CardList from "./CardList/CardList";
+
+import { CreditCard } from "../../type";
+
 import "./cardListPage.css";
 
 interface CardListPageProps {

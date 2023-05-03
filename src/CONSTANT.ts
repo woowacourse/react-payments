@@ -22,3 +22,14 @@ export const REGULAR_EXPRESSION = {
   SPACE_OVER_TWO: /\s{2,}/,
   CAPITAL_LETTER_OR_SPACE: /^[A-Z\s]+$/,
 };
+
+export const CARD_CO_NAME = {
+  woori: "우리카드",
+  lotte: "롯데카드",
+  hana: "하나카드",
+  kb: "국민카드",
+  kakao: "카카오뱅크",
+  bc: "BC카드",
+  shinhan: "신한카드",
+  hyundai: "현대카드",
+};

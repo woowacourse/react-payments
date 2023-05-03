@@ -1,30 +1,51 @@
+import { CARD_CO_NAME } from "../../CONSTANT";
 import { CreditCard } from "../../type";
-import styles from "./CardPreview.module.css";
+import { colorMatch } from "../../util/colorMatch";
+
+import "./cardPreview.css";
 
 interface CardPreviewProps {
   card: CreditCard;
+  style?: object;
+  openCardCoModal?: () => void;
+  className?: string;
 }
 
-export default function CardPreview(props: CardPreviewProps) {
-  const { card } = props;
+export default function CardPreview({
+  card,
+  openCardCoModal,
+  style,
+  className,
+}: CardPreviewProps) {
+  const { cardCo, cardNumber, expirationDate, owner } = card;
 
-  const previewNumber = card.cardNumber.map((number, index) => {
-    return 1000 > number && number > 9999
-      ? "   "
-      : index === 1 || index === 2
-      ? " **** "
-      : ` ${number} `;
-  });
+  const previewNumber =
+    cardNumber.length === 4 &&
+    cardNumber.every((number) => number.length === 4) &&
+    `${cardNumber[0]} **** **** ${cardNumber[3]}`;
+
+  const { backgroundColor, color } = colorMatch[cardCo];
+  const cardCoName = CARD_CO_NAME[cardCo];
 
   return (
-    <div className={styles.container}>
-      <div className={styles.chip}></div>
-      <p className={styles.number}>{previewNumber}</p>
-      <span className={styles.name}>
-        {card.owner !== "" ? card.owner.slice(0, 15) : "NAME"}
+    <div
+      className={`card-preview-container ${className}`}
+      onClick={openCardCoModal}
+      style={{ ...{ backgroundColor: backgroundColor }, ...style }}
+    >
+      <p className="card-preview-card-co" style={{ color: color }}>
+        {cardCoName}
+      </p>
+      <div className="card-preview-chip"></div>
+
+      <p className="card-preview-number" style={{ color: color }}>
+        {previewNumber}
+      </p>
+      <span className="card-preview-name" style={{ color: color }}>
+        {owner !== "" ? owner.slice(0, 15) : "NAME"}
       </span>
-      <span className={styles.expireDate}>
-        {card.expirationDate !== "" ? card.expirationDate : "MM/YY"}
+      <span className="card-preview-expireDate" style={{ color: color }}>
+        {expirationDate !== "" ? expirationDate : "MM/YY"}
       </span>
     </div>
   );

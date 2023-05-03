@@ -1,6 +1,6 @@
 import { InputHTMLAttributes } from "react";
 
-import styles from "./Input.module.css";
+import "./input.css";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {}
 
@@ -18,7 +18,7 @@ export default function Input(props: InputProps) {
   return (
     <input
       name={name}
-      className={`${styles.input} ${className}`}
+      className={`input ${className}`}
       style={style}
       type={type}
       inputMode={inputMode}

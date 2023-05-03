@@ -6,4 +6,13 @@
   --input-text: #525252;
   --security-code-button-border: #bababa;
   --security-code-button-text: #969696;
+  --bc-card-co-color: #c03841;
+  --hana-card-co-color: #009490;
+  --hyundai-card-co-color: #000000;
+  --kakao-card-co-color: #ffe600;
+  --kb-card-co-color: #685e54;
+  --kb-card-co-font-color: rgb(237, 183, 13);
+  --lotte-card-co-color: #ed1c24;
+  --shinhan-card-co-color: #0046ff;
+  --woori-card-co-color: #007bc8;
 }

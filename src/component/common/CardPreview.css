@@ -1,4 +1,4 @@
-.container {
+.card-preview-container {
   width: 213px;
   height: 133px;
   margin: auto;
@@ -9,24 +9,14 @@
 
   border-radius: 5px;
   font-size: small;
+
+  cursor: pointer;
 }
 
-.chip {
+.card-preview-card-co {
   position: relative;
   left: 14px;
-  top: 47px;
-
-  width: 40px;
-  height: 26px;
-
-  background: #cbba64;
-  border-radius: 4px;
-}
-
-.number {
-  position: relative;
-  left: 14px;
-  top: 60px;
+  top: 10px;
 
   color: white;
   height: 15px;
@@ -35,20 +25,44 @@
   letter-spacing: 2px;
 }
 
-.name {
+.card-preview-chip {
   position: relative;
   left: 14px;
-  top: 65px;
+  top: 37px;
+
+  width: 40px;
+  height: 26px;
+
+  background: #cbba64;
+  border-radius: 4px;
+}
+
+.card-preview-number {
+  position: relative;
+  left: 14px;
+  top: 50px;
+
+  color: white;
+  height: 15px;
+  width: 172px;
+
+  letter-spacing: 2px;
+}
+
+.card-preview-name {
+  position: relative;
+  left: 14px;
+  top: 55px;
 
   display: inline-block;
   width: 150px;
   color: white;
 }
 
-.expireDate {
+.card-preview-expireDate {
   position: relative;
   left: 10px;
-  top: 65px;
+  top: 55px;
 
   display: inline-block;
   width: 35px;
