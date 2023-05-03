@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Layout } from '../layout';
-import { BackButton } from '../layout/BackButton';
+import { BackButton } from '../components/Button/BackButton';
 
 const imageUrl =
   'https://user-images.githubusercontent.com/24777828/233794760-2bc92a8d-4439-4dff-a46d-54f9311bffac.JPG';
@@ -8,10 +8,10 @@ const imageUrl =
 export function NotFound() {
   return (
     <Layout>
-      <Style.Wrapper>
-        <Style.ButtonContainer>
+      <Style.Container>
+        <Style.ButtonWrapper>
           <BackButton path='/' />
-        </Style.ButtonContainer>
+        </Style.ButtonWrapper>
         <Style.Image src={imageUrl} alt='페이지를 찾을 수 없습니다.'></Style.Image>
         <Style.Title>길을 잃으셨나요?</Style.Title>
         <Style.Content>
@@ -27,13 +27,13 @@ export function NotFound() {
           <br />
           감사합니다.
         </Style.Content>
-      </Style.Wrapper>
+      </Style.Container>
     </Layout>
   );
 }
 
 const Style = {
-  Wrapper: styled.div`
+  Container: styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -75,7 +75,7 @@ const Style = {
     }
   `,
 
-  ButtonContainer: styled.div`
+  ButtonWrapper: styled.div`
     display: flex;
     justify-content: center;
     align-items: center;

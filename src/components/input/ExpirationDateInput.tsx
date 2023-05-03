@@ -1,17 +1,16 @@
+import { useRef } from 'react';
 import styled from 'styled-components';
-import { useRef, useEffect } from 'react';
 import { Input } from './Input';
-import { InputWrapper } from './InputWrapper';
+import { InputContainer } from './InputContainer';
+import { useExpirationDateInput } from '../../hooks/input/useExpirationDateInput';
+import { MONTH_SIZE, YEAR_SIZE } from '../../constants';
 import { ExpirationDate } from '../../types';
-import { isValidDate } from '../../utils/validator';
-import { ERROR, MONTH_SIZE, YEAR_SIZE } from '../../constants';
-import { isEmptyInput, isFullInput } from '../../utils';
 
 interface Props {
   monthInputRef: React.RefObject<HTMLInputElement>;
   expirationDate: ExpirationDate;
-  setExpirationDate: React.Dispatch<React.SetStateAction<ExpirationDate>>;
-  moveFocusToOwnerName: () => void;
+  setExpirationDate: (input: ExpirationDate) => void;
+  moveFocusToOwnerName?: () => void;
 }
 
 export function ExpirationDateInput({
@@ -21,68 +20,46 @@ export function ExpirationDateInput({
   moveFocusToOwnerName,
 }: Props) {
   const yearInputRef = useRef<HTMLInputElement>(null);
-
-  const handleBackspacePress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Backspace' && isEmptyInput(expirationDate.year)) {
-      e.preventDefault();
-      monthInputRef.current?.focus();
-    }
-  };
-
-  const handleMonthInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setExpirationDate({
-      ...expirationDate,
-      month: e.target.value,
-    });
-
-    const month = e.target.value;
-    if (isFullInput(month, MONTH_SIZE)) yearInputRef.current?.focus();
-  };
-
-  const handleYearInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setExpirationDate({
-      ...expirationDate,
-      year: e.target.value,
-    });
-  };
-
-  const validateDate = () => {
-    if (!isValidDate(expirationDate.month, expirationDate.year)) {
-      alert(ERROR.INVALID_EXPIRATION_DATE);
-
-      setExpirationDate({ month: '', year: '' });
-
-      monthInputRef.current?.focus();
-    }
-  };
-
-  useEffect(() => {
-    if (isFullInput(expirationDate.year, YEAR_SIZE)) moveFocusToOwnerName();
-  }, [expirationDate.year]);
+  const {
+    expirationDateError,
+    updateExpirationDateError,
+    handleBackspacePress,
+    handleMonthInputChange,
+    handleYearInputChange,
+  } = useExpirationDateInput({
+    expirationDate,
+    monthInputRef,
+    yearInputRef,
+    setExpirationDate,
+    moveFocusToOwnerName,
+  });
 
   return (
-    <>
+    <Style.Container onBlur={updateExpirationDateError}>
       <Style.Label htmlFor='expirationDate'>
-        <Style.Title>만료일</Style.Title>
+        <Style.Title>
+          만료일<Style.Essential>*</Style.Essential>
+        </Style.Title>
       </Style.Label>
-      <InputWrapper width={137}>
+      <InputContainer width={'137px'}>
         <Input
           id='expirationDate'
           ref={monthInputRef}
           value={expirationDate.month}
-          width={30}
+          width={'30px'}
           minLength={MONTH_SIZE}
           maxLength={MONTH_SIZE}
           required
           inputMode='numeric'
           placeholder='MM'
           onChange={handleMonthInputChange}
+          aria-labelledby='ExpirationDateCaption'
         />
         <Style.Slash>/</Style.Slash>
         <Input
           ref={yearInputRef}
           value={expirationDate.year}
-          width={30}
+          width={'30px'}
           minLength={YEAR_SIZE}
           maxLength={YEAR_SIZE}
           required
@@ -90,19 +67,26 @@ export function ExpirationDateInput({
           placeholder='YY'
           onChange={handleYearInputChange}
           onKeyDown={handleBackspacePress}
-          onBlur={validateDate}
         />
-      </InputWrapper>
-    </>
+      </InputContainer>
+      <Style.Caption id='ExpirationDateCaption' aria-live='assertive'>
+        {expirationDateError}
+      </Style.Caption>
+    </Style.Container>
   );
 }
 
 const Style = {
+  Container: styled.fieldset`
+    border: none;
+  `,
+
   Label: styled.label`
     display: flex;
     justify-content: space-between;
 
     width: 318px;
+    margin-bottom: 10px;
 
     font-size: 12px;
   `,
@@ -111,7 +95,19 @@ const Style = {
     color: #2f2f2f;
   `,
 
+  Essential: styled.span`
+    color: red;
+  `,
+
   Slash: styled.span`
     padding: 0 5px;
+  `,
+
+  Caption: styled.p`
+    height: 8px;
+    margin-top: 8px;
+
+    font-size: 10px;
+    color: #db5959;
   `,
 };

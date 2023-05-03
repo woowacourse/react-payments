@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 import { Input } from './Input';
-import { InputWrapper } from './InputWrapper';
+import { InputContainer } from './InputContainer';
+import { useOwnerNameInput } from '../../hooks/input/useOwnerNameInput';
+import { MAX_NAME_SIZE } from '../../constants';
 import { OwnerName } from '../../types';
-import { isEnglish } from '../../utils/validator';
-import { ERROR, MAX_NAME_SIZE } from '../../constants';
 
 interface Props {
   ownerName: OwnerName;
   ownerNameInputRef: React.RefObject<HTMLInputElement>;
-  setOwnerName: React.Dispatch<React.SetStateAction<OwnerName>>;
-  moveFocusToSecurityCode: () => void;
+  setOwnerName: (input: OwnerName) => void;
+  moveFocusToSecurityCode?: () => void;
 }
 
 export function OwnerNameInput({
@@ -18,41 +18,36 @@ export function OwnerNameInput({
   setOwnerName,
   moveFocusToSecurityCode,
 }: Props) {
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!isEnglish(e.target.value, MAX_NAME_SIZE)) {
-      alert(ERROR.INVALID_OWNER_NAME);
-
-      e.target.value = '';
-    }
-
-    setOwnerName(e.target.value.toUpperCase());
-  };
-
-  const handleEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') moveFocusToSecurityCode();
-  };
+  const { ownerNameError, handleInputChange, handleEnterPress } = useOwnerNameInput({
+    setOwnerName,
+    moveFocusToSecurityCode,
+  });
 
   return (
-    <>
+    <div>
       <Style.Label htmlFor='ownerName'>
         <Style.Title>카드 소유자 이름(선택)</Style.Title>
         <Style.NameLength>
           {ownerName.length}/{MAX_NAME_SIZE}
         </Style.NameLength>
       </Style.Label>
-      <InputWrapper width={318}>
+      <InputContainer width={'318px'}>
         <Input
           id='ownerName'
           ref={ownerNameInputRef}
           value={ownerName}
-          width={318}
+          width={'318px'}
           maxLength={MAX_NAME_SIZE}
           placeholder='카드에 표시된 이름과 동일하게 입력하세요.'
           onChange={handleInputChange}
           onKeyDown={handleEnterPress}
+          aria-labelledby='ownerNameCaption'
         />
-      </InputWrapper>
-    </>
+      </InputContainer>
+      <Style.Caption id='ownerNameCaption' aria-live='assertive'>
+        {ownerNameError}
+      </Style.Caption>
+    </div>
   );
 }
 
@@ -62,6 +57,7 @@ const Style = {
     justify-content: space-between;
 
     width: 318px;
+    margin-bottom: 10px;
 
     font-size: 12px;
   `,
@@ -72,5 +68,13 @@ const Style = {
 
   Title: styled.span`
     color: #2f2f2f;
+  `,
+
+  Caption: styled.p`
+    height: 8px;
+    margin-top: 8px;
+
+    font-size: 10px;
+    color: #db5959;
   `,
 };

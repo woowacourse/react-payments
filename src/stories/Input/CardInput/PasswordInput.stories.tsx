@@ -1,10 +1,9 @@
 import type { Meta } from '@storybook/react';
 import { useRef, useState } from 'react';
-
-import { PasswordInput } from '../../components/input/PasswordInput';
+import { PasswordInput } from '../../../components/input/PasswordInput';
 
 const meta = {
-  title: 'Example/Input',
+  title: 'Example/Input/CardInput',
   component: PasswordInput,
   tags: ['autodocs'],
 } satisfies Meta<typeof PasswordInput>;

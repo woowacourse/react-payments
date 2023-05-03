@@ -1,10 +1,9 @@
-import React, { useRef, useState } from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
-
-import { OwnerNameInput } from '../../components/input/OwnerNameInput';
+import type { Meta } from '@storybook/react';
+import { useRef, useState } from 'react';
+import { OwnerNameInput } from '../../../components/input/OwnerNameInput';
 
 const meta = {
-  title: 'Example/Input',
+  title: 'Example/Input/CardInput',
   component: OwnerNameInput,
   tags: ['autodocs'],
 } satisfies Meta<typeof OwnerNameInput>;
@@ -18,7 +17,6 @@ export const OwnerName = () => {
   return (
     <OwnerNameInput
       ownerNameInputRef={ownerNameInputRef}
-      moveFocusToSecurityCode={() => {}}
       ownerName={ownerName}
       setOwnerName={setOwnerName}
     />

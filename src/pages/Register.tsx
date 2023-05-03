@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Layout } from '../layout';
-import { BackButton } from '../layout/BackButton';
-import { CardRegisterForm } from '../components/CardRegisterForm';
+import { BackButton } from '../components/Button/BackButton';
+import { CardRegisterForm } from '../components/Form/CardRegisterForm';
 
 export function Register() {
   return (
@@ -20,7 +20,7 @@ const Style = {
     display: flex;
     align-items: center;
 
-    margin-bottom: 25px;
+    margin-bottom: 15px;
 
     font-weight: bold;
   `,

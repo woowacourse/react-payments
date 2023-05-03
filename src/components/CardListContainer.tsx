@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import { v4 } from 'uuid';
+import { Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 import { CardViewer } from './CardViewer';
 import { cardDataService } from '../domains/cardDataService';
 
@@ -11,30 +11,28 @@ export function CardListContainer() {
   return (
     <>
       {!cardList.length && <Style.Caption>새로운 카드를 등록해주세요.</Style.Caption>}
-      <Style.CardListWrapper>
+      <Style.CardListContainer>
         {cardList.map((card) => {
-          const { cardNumber, expirationDate, ownerName } = card;
           return (
-            <CardViewer
-              key={v4()}
-              cardNumber={cardNumber}
-              expirationDate={expirationDate}
-              ownerName={ownerName}
-            />
+            <Fragment key={card.id}>
+              <CardViewer card={card} />
+              <Style.CardAlias>{card.cardAlias}</Style.CardAlias>
+            </Fragment>
           );
         })}
-        <Style.AddCardButton onClick={() => navigate('/register')}>+</Style.AddCardButton>
-      </Style.CardListWrapper>
+        <Style.AddCardButton aria-label='카드 추가' onClick={() => navigate('/register')}>
+          <span aria-hidden='true'>+</span>
+        </Style.AddCardButton>
+      </Style.CardListContainer>
     </>
   );
 }
 
 const Style = {
-  CardListWrapper: styled.div`
+  CardListContainer: styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 45px;
 
     width: 318px;
     min-height: 600px;
@@ -44,6 +42,16 @@ const Style = {
     margin-bottom: 10px;
 
     font-size: 14px;
+    text-align: center;
+    color: #575757;
+  `,
+
+  CardAlias: styled.p`
+    margin-top: 10px;
+    margin-bottom: 35px;
+
+    font-size: 14px;
+    font-weight: bold;
     text-align: center;
     color: #575757;
   `,
@@ -66,5 +74,9 @@ const Style = {
     color: #3a3a3a;
 
     cursor: pointer;
+    &:hover {
+      transition: all 0.2s linear;
+      transform: scale(1.01);
+    }
   `,
 };

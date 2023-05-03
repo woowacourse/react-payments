@@ -1,11 +1,9 @@
-import React, { useRef, useState } from 'react';
-
-import type { Meta, StoryObj } from '@storybook/react';
-
-import { SecurityCodeInput } from '../../components/input/SecurityCodeInput';
+import type { Meta } from '@storybook/react';
+import { useRef, useState } from 'react';
+import { SecurityCodeInput } from '../../../components/input/SecurityCodeInput';
 
 const meta = {
-  title: 'Example/Input',
+  title: 'Example/Input/CardInput',
   component: SecurityCodeInput,
   tags: ['autodocs'],
 } satisfies Meta<typeof SecurityCodeInput>;
@@ -19,7 +17,6 @@ export const SecurityCode = () => {
   return (
     <SecurityCodeInput
       securityCodeInputRef={securityCodeInputRef}
-      moveFocusToPassword={() => {}}
       securityCode={securityCode}
       setSecurityCode={setSecurityCode}
     />

@@ -2,8 +2,8 @@ export const isNumeric = (input: string) => {
   return /^[0-9]*$/.test(input);
 };
 
-export const isEnglish = (input: string, maxLength: number = 30) => {
-  return input.length <= maxLength && /^[a-zA-Z\s]*$/.test(input);
+export const isEnglish = (input: string) => {
+  return /^[a-zA-Z\s]*$/.test(input);
 };
 
 export const hasValidLength = (input: string, length: number = 3) => {
@@ -12,6 +12,10 @@ export const hasValidLength = (input: string, length: number = 3) => {
 
 export const isValidMonth = (input: string) => {
   return Number(input) >= 1 && Number(input) <= 12;
+};
+
+export const isOverMaxLength = (input: string, maxLength: number) => {
+  return input.length > maxLength;
 };
 
 export const isValidYear = (input: string) => {
