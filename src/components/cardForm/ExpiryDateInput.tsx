@@ -2,7 +2,7 @@ import Container from "../common/Container";
 import Input from "../common/Input";
 import InputLabel from "../common/InputLabel";
 
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { NewCardContext } from "../../contexts/NewCardContext";
 
 import { EXPRIYDATE_MAXLEGNTH, EXPRIYDATE_REGEX, TWO_TO_NINE_REGEX } from "../../constants";
@@ -32,18 +32,21 @@ const ExpiryDateInfo = {
 
 const ExpiryDateInput = ({ isInputsValid, setExpriyDateCompleted, setIsExpiryDateValid }: ExpiryDateInputProps) => {
   const { setExpiryDate } = useContext(NewCardContext);
+  const postText = useRef("");
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.replaceAll(" / ", "");
+    const value = e.target.value.replaceAll("/", "").replaceAll(" ", "");
 
     if (value.length > EXPRIYDATE_MAXLEGNTH) {
-      e.target.value = e.target.value.slice(0, -1);
+      e.target.value = postText.current;
       return;
     }
 
     const expriyDate = paddingSingleDigitMonth(value);
 
     e.target.value = (expriyDate.match(new RegExp(EXPRIYDATE_REGEX)) ?? []).join(" / ");
+    postText.current = e.target.value;
+
     setExpiryDate(e.target.value);
 
     setIsExpiryDateValid(true);
