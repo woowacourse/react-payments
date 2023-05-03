@@ -6,14 +6,14 @@ import {
 import { useContext } from 'react';
 import { CreditCardContext } from '../../contexts/CreditCardContext';
 import CreditCardContextType from '../../@types/creditCardContextType';
-import { ImageContainer, StyledBankImage } from './CardCompanyIconBox.style';
+import { ImageContainer, StyledBankImage } from './CardCompanyIconContainer.style';
 
 type Props = {
   cardCompany: CardCompanyEng;
   onClose: () => void;
 };
 
-const CardCompanyIconBox = ({ cardCompany, onClose }: Props) => {
+const CardCompanyIconContainer = ({ cardCompany, onClose }: Props) => {
   const KoreanName = KOR_NAME_BY_CARD_COMPANY[cardCompany];
   const { setCreditCard } = useContext(CreditCardContext) as CreditCardContextType;
 
@@ -37,4 +37,4 @@ const CardCompanyIconBox = ({ cardCompany, onClose }: Props) => {
   );
 };
 
-export default CardCompanyIconBox;
+export default CardCompanyIconContainer;

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { CardCompanyEng, KOR_NAME_BY_CARD_COMPANY } from '../../../@types/cardCompany';
-import CardCompanyIconBox from '../../cardCompanyIconBox/CardCompanyIconBox';
+import CardCompanyIconContainer from '../../cardCompanyIconContainer/CardCompanyIconContainer';
 
 interface Props {
   onClose: () => void;
@@ -12,7 +12,7 @@ const SelectCompanyModal = ({ onClose }: Props) => {
   return (
     <StyledContainer>
       {companyList.map((company) => (
-        <CardCompanyIconBox
+        <CardCompanyIconContainer
           key={`company-icon-box-${company}`}
           cardCompany={company}
           onClose={onClose}
