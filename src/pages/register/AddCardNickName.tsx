@@ -5,13 +5,14 @@ import {
   useCardInfoValueContext,
 } from '../../hooks/cardInfoContext';
 import { Layout } from '../../layout';
-import { Input } from '../../components/addCardForm/cardInfoInputs/template/Input';
 import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useCardList } from '../../hooks/useCardList';
 import { useRef } from 'react';
 
 export const AddCardNickName = () => {
   const navigate = useNavigate();
+  const { state } = useLocation();
 
   const { cardNumber, expirationDate, ownerName, companyId, cardId, nickName } =
     useCardInfoValueContext();
@@ -34,7 +35,11 @@ export const AddCardNickName = () => {
           navigate('/');
         }}
       >
-        <Style.Header>카드 등록이 완료되었습니다!</Style.Header>
+        <Style.Header>
+          {state === 'modify'
+            ? '카드 별명 수정!'
+            : '카드 등록이 완료되었습니다!'}
+        </Style.Header>
         <Style.CardWrapper>
           <CardViewer
             cardNumber={cardNumber}
@@ -64,6 +69,7 @@ const Style = {
 
     display: flex;
     flex-direction: column;
+    align-items: center;
 
     position: fixed;
     top: 50%;
@@ -86,6 +92,8 @@ const Style = {
   NickNameInput: styled.input`
     all: unset;
 
+    width: 100%;
+
     background-color: white;
     border-bottom: 1px solid;
     border-radius: 0;
@@ -93,16 +101,21 @@ const Style = {
     margin-top: 124px;
     font-size: 18px;
     height: max-content;
+    text-align: center;
     padding: 5px;
   `,
   ButtonWrapper: styled.div`
     display: flex;
     justify-content: flex-end;
 
+    width: 100%;
+
     margin-top: 50px;
   `,
   Button: styled.button`
     all: unset;
+
+    cursor: pointer;
 
     font-weight: bold;
   `,

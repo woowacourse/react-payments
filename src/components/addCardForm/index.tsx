@@ -69,7 +69,7 @@ export const AddNewCardForm = () => {
   return (
     <Style.Wrapper onSubmit={handleSubmitNewCardInfo}>
       {companyId ? (
-        <Style.InputContainer>
+        <>
           {inputOrder > 3 && (
             <Style.SubmitButton disabled={!canSubmit} autoFocus={true}>
               {canSubmit ? '제출' : '❌'}
@@ -90,7 +90,7 @@ export const AddNewCardForm = () => {
           )}
 
           <CardNumberInput viewNextInput={viewNextInput} />
-        </Style.InputContainer>
+        </>
       ) : (
         <Style.Caption>{isOpen || '카드 클릭!'}</Style.Caption>
       )}
@@ -107,14 +107,14 @@ const Style = {
 
     width: max-content;
   `,
-  InputContainer: styled.div`
-    display: flex;
-    flex-direction: column;
+  // InputContainer: styled.div`
+  //   display: flex;
+  //   flex-direction: column;
 
-    width: max-content;
+  //   width: max-content;
 
-    gap: 19px;
-  `,
+  //   gap: 19px;
+  // `,
   Caption: styled.span`
     width: 241px;
 

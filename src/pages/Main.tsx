@@ -65,7 +65,7 @@ export const Main = () => {
 
     setCardInfo(card);
 
-    navigate('/register/nickName');
+    navigate('/register/nickName', { state: 'modify' });
   };
 
   useEffect(() => {
