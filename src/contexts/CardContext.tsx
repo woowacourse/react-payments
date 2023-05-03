@@ -1,5 +1,5 @@
 import React, { Dispatch, createContext, useContext, useReducer } from "react";
-import { CreditCard, CREDIT_CARD_COMPANY } from "../types/card";
+import { CreditCard, CREDIT_CARD_COMPANY } from "types/card";
 
 type Action =
   | { type: "SET_ORIGIN_NUMBER"; originNumber: string }

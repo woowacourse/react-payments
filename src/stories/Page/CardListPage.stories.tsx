@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import CardListPage from "../../component/CardListPage/CardListPage";
+import CardListPage from "components/CardListPage/CardListPage";
 import {
   BCCard,
   HyundaiCard,

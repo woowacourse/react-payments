@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import AddCardResultPage from "../../component/AddCardResultPage/AddCardResultPage";
+import AddCardResultPage from "components/AddCardResultPage/AddCardResultPage";
 
 const meta = {
   component: AddCardResultPage,

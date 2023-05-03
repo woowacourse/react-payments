@@ -1,4 +1,4 @@
-import { CREDIT_CARD_COMPANY } from "../types/card";
+import { CREDIT_CARD_COMPANY } from "types/card";
 
 export const CREDIT_CARD_COMPANY_LOGO: {
   [key in CREDIT_CARD_COMPANY]: string;
