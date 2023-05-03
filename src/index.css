@@ -6,6 +6,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+body:has(.modal) {
+  overflow: hidden;
+}
+
 body::-webkit-scrollbar {
   display: none;
 }
