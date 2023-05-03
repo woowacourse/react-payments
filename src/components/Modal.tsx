@@ -15,7 +15,7 @@ const Modal = ({ closeButtonName, children, modalStyle }: Props) => {
   return (
     <>
       <S.ModalBackdrop className="modal-backdrop" onClick={handleModalClose} />
-      <S.Modal className="modal" modalStyle={modalStyle}>
+      <S.Modal role="dialog" className="modal" modalStyle={modalStyle}>
         {children}
         <CloseButton onClick={handleModalClose}>{closeButtonName}</CloseButton>
       </S.Modal>
