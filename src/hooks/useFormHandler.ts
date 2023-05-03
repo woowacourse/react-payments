@@ -2,7 +2,6 @@ import { FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card } from 'types/Card';
 import { getFormData } from 'utils/formDataGetter';
-import { setLocalStorage } from 'utils/localStorage';
 import { areValidInfo } from 'validator';
 
 export const useFormHandler = (cardInfo: Card) => {

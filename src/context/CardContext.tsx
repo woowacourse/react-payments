@@ -14,12 +14,12 @@ interface CardContext {
   name: Name;
   bank: Bank;
   cardName: CardName;
-  setIsModalActive: (value: boolean) => void;
-  setCardNumber: Dispatch<SetStateAction<CardNumber>>;
-  setDate: Dispatch<SetStateAction<Expiration>>;
-  setName: Dispatch<SetStateAction<Name>>;
-  setBank: Dispatch<SetStateAction<Bank>>;
-  setCardName: Dispatch<SetStateAction<CardName>>;
+  setIsModalActive: Dispatch<SetStateAction<boolean>> | null;
+  setCardNumber: Dispatch<SetStateAction<CardNumber>> | null;
+  setDate: Dispatch<SetStateAction<Expiration>> | null;
+  setName: Dispatch<SetStateAction<Name>> | null;
+  setBank: Dispatch<SetStateAction<Bank>> | null;
+  setCardName: Dispatch<SetStateAction<CardName>> | null;
 }
 
 const initialValue = {
@@ -44,12 +44,12 @@ const initialValue = {
   cardName: {
     cardName: '',
   },
-  setIsModalActive: (value: boolean) => {},
-  setCardNumber: () => {},
-  setDate: () => {},
-  setName: () => {},
-  setBank: () => {},
-  setCardName: () => {},
+  setIsModalActive: null,
+  setCardNumber: null,
+  setDate: null,
+  setName: null,
+  setBank: null,
+  setCardName: null,
 };
 
 export const AddCardContext = createContext<CardContext>(initialValue);

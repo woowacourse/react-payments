@@ -17,7 +17,8 @@ const CardNamePage = () => {
 
   const handleCardName = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    setCardName({ cardName: value });
+
+    setCardName?.({ cardName: value });
   };
 
   const onSubmitHandler = () => {

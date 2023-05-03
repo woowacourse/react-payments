@@ -6,15 +6,13 @@ interface ModalProps {
   height?: string;
   element: JSX.Element;
   modal: boolean;
-  setModal?: Dispatch<SetStateAction<boolean>>;
+  setModal: Dispatch<SetStateAction<boolean>> | null;
 }
 
 export const Modal = (props: ModalProps) => {
   const { width, height, element, setModal } = props;
   const closeModal = () => {
-    if (setModal) {
-      setModal(false);
-    }
+    setModal?.(false);
   };
 
   return (

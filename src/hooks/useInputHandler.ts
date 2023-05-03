@@ -3,7 +3,7 @@ import { changeToValidValue } from 'utils/inputValidator';
 import { ChangeEvent } from 'react';
 
 export const useInputHandler = <T>(
-  setInputState: React.Dispatch<React.SetStateAction<T>>,
+  setInputState: React.Dispatch<React.SetStateAction<T>> | null,
   inputConfig: {
     length: number;
     regex: RegExp;
@@ -19,7 +19,7 @@ export const useInputHandler = <T>(
       value = inputConfig.validator(target.name, value);
     }
 
-    setInputState((prevState: T) => {
+    setInputState?.((prevState: T) => {
       return {
         ...prevState,
         [target.name]: changeToValidValue(value, {

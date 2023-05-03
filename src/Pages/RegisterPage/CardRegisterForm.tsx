@@ -19,7 +19,7 @@ const CardRegisterForm = () => {
     useContext(AddCardContext);
 
   const handleModal = () => {
-    setIsModalActive(!isModalActive);
+    setIsModalActive?.(!isModalActive);
   };
 
   const cardInfo: Card = { ...cardNumber, ...date, ...name, ...bank };

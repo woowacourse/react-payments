@@ -31,7 +31,7 @@ const CardBankList = (props: CardBankListProps) => {
   const { setBank } = useContext(AddCardContext);
 
   const handleBank = (name: string, color: string) => {
-    setBank({ bank: name, color: color });
+    setBank?.({ bank: name, color: color });
     setModal(false);
   };
 
