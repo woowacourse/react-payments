@@ -1,82 +1,97 @@
-import { ChangeEvent, RefObject, useState } from 'react';
-import { Validator } from '../types/validator';
+import { ChangeEvent, FormEvent, useState } from 'react';
 
-interface ValuesState {
-  [key: string]: string;
+interface ErrorOptions {
+  initState: {
+    [key: string]: string;
+  };
+  validator: {
+    [key: string]: (value: string) => string;
+  };
 }
 
-interface ErrorState {
-  [key: string]: string;
+interface Props {
+  submitAction: () => void;
+  changeAction: (name: string, value: string) => void;
+  errorOptions?: ErrorOptions;
 }
 
-interface IRefs {
-  [key: string]: RefObject<HTMLInputElement>;
-}
+const useForm = ({ submitAction, changeAction, errorOptions }: Props) => {
+  const [error, setError] = useState(errorOptions?.initState || {});
 
-const useForm = (refs: IRefs, validator: Validator) => {
-  const refNames = Object.keys(refs);
-  const valueObj: ValuesState = {};
-  const errorObj: ErrorState = {};
+  const checkFormValidity = (elements: HTMLInputElement[]) => {
+    return elements.every((elem) => {
+      if (elem.tagName !== 'INPUT') return true;
 
-  refNames.forEach((name) => {
-    valueObj[name] = '';
-    errorObj[name] = '';
-  });
+      const { name, value } = elem;
 
-  const [values, setValues] = useState<ValuesState>(valueObj);
-  const [error, setError] = useState<ErrorState>(errorObj);
-
-  const findError = () => {
-    return Object.keys(validator).some((key) => {
-      const errorMessage = validator[key](values[key]);
-
+      const errorMessage = errorOptions?.validator && errorOptions?.validator[name]?.(value);
       if (errorMessage) {
-        setError((prev) => ({ ...prev, [key]: errorMessage }));
-        refs[key]?.current?.focus();
+        setError((prev: any) => ({ ...prev, [name]: errorMessage }));
+        elem.focus();
 
-        return true;
+        return false;
       }
 
-      return false;
+      return true;
     });
+  };
+
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formElements = (e.target as HTMLFormElement).elements;
+    const elements = formElements ? ([...formElements] as HTMLInputElement[]) : [];
+
+    const ok = checkFormValidity(elements);
+    if (!ok) return;
+
+    submitAction();
+  };
+
+  const onChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
+    const { name, value, maxLength } = target;
+
+    if (!canChange(target)) return;
+
+    setError((prev: any) => ({ ...prev, [name]: '' }));
+
+    if (value.length === maxLength) {
+      const formElements = target.form?.elements;
+      const elements = formElements ? ([...formElements] as HTMLInputElement[]) : [];
+      focusToNextFormElement(elements, target);
+    }
+
+    changeAction(name, value);
+  };
+
+  const focusToNextFormElement = (elements: HTMLInputElement[], target: HTMLInputElement) => {
+    elements.forEach((elem, index) => {
+      if (elem !== target) return;
+
+      elements[index + 1]?.focus();
+    });
+  };
+
+  const canChange = (target: HTMLInputElement) => {
+    const {
+      value,
+      maxLength,
+      dataset: { numeric },
+    } = target;
+
+    if (value.length > maxLength) return false;
+    if (numeric) {
+      if (!isNumeric(value)) return false;
+    }
+
+    return true;
   };
 
   const isNumeric = (value: string) => {
     return /^[0-9]*$/.test(value);
   };
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-
-    const {
-      name,
-      value,
-      maxLength,
-      dataset: { type, next },
-    } = e.target;
-
-    if (value.length > maxLength) return;
-    if ((type === 'number' || type === 'password') && !isNumeric(value)) return;
-
-    if (error[name]) {
-      setError((prev) => ({
-        ...prev,
-        [name]: '',
-      }));
-    }
-
-    if (value.length >= maxLength && next) {
-      refs[name]?.current?.blur();
-      refs[next]?.current?.focus();
-    }
-
-    setValues((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  return { values, onChange, error, findError };
+  return { onSubmit, onChange, error };
 };
 
 export default useForm;

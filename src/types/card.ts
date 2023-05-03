@@ -10,5 +10,6 @@ export interface CardInfo {
   securityNumbers: string;
   firstPassword: string;
   secondPassword: string;
-  submitButton: string;
+  bank: string;
+  nickname: string;
 }

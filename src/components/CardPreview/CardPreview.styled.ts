@@ -5,4 +5,6 @@ export const CardPreview = styled.div`
   justify-content: center;
 
   margin: 30px 0;
+
+  cursor: pointer;
 `;

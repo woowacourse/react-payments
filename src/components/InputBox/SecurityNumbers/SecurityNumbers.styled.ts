@@ -16,6 +16,7 @@ export const LabelHeader = styled.div`
 export const ErrorMessage = styled.span`
   position: absolute;
   bottom: -20px;
+  left: 0;
 
   color: red;
 
