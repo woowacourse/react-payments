@@ -6,7 +6,7 @@ import {
   useContext,
 } from "react";
 
-interface CardState {
+export interface CardState {
   color: string;
   title: string;
   cardNumber?: {
@@ -15,7 +15,7 @@ interface CardState {
     third: string;
     fourth: string;
   };
-  expiracy?: {
+  expiration?: {
     month: string;
     year: string;
   };
@@ -50,7 +50,7 @@ interface UpdateCardContextAction {
     third: string;
     fourth: string;
   };
-  expiracy: {
+  expiration: {
     month: string;
     year: string;
   };
@@ -105,9 +105,9 @@ function cardTypeReducer(state: CardState, action: Action) {
           third: action.cardNumber.third,
           fourth: action.cardNumber.fourth,
         },
-        expiracy: {
-          month: action.expiracy.month,
-          year: action.expiracy.year,
+        expiration: {
+          month: action.expiration.month,
+          year: action.expiration.year,
         },
         owner: action.owner,
         cvc: action.cvc,
@@ -138,7 +138,7 @@ export function CardContextProvider({ children }: PropsWithChildren) {
       third: "",
       fourth: "",
     },
-    expiracy: {
+    expiration: {
       month: "",
       year: "",
     },

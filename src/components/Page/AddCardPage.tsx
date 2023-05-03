@@ -2,7 +2,7 @@ import { useState } from "react";
 import Card from "../Card";
 import CardNumberInput from "../Input/CardNumberInput";
 import CvcInput from "../Input/CvcInput";
-import ExpiracyInput from "../Input/ExpiracyInput";
+import ExpirationInput from "../Input/ExpirationInput";
 import InformationButton from "../Button/InformationButton";
 import InputField from "../common/InputField";
 import NextButton from "../Button/NextButton";
@@ -70,7 +70,7 @@ export default function AddCardPage({ onSubmit, onClick }: AddCardPageProps) {
               thirdCardNumber.value,
               fourthCardNumber.value,
             ]}
-            expiracy={`${month.value ? month.value : "MM"}/${
+            expiration={`${month.value ? month.value : "MM"}/${
               year.value ? year.value : "YY"
             }`}
             owner={owner.value.toUpperCase()}
@@ -86,8 +86,8 @@ export default function AddCardPage({ onSubmit, onClick }: AddCardPageProps) {
                 fourthNumber={fourthCardNumber}
               />
             </InputField>
-            <InputField kind="expiracy">
-              <ExpiracyInput year={year} month={month} />
+            <InputField kind="expiration">
+              <ExpirationInput year={year} month={month} />
             </InputField>
             <InputField kind="owner" inputLength={`${owner.value.length}/30`}>
               <OwnerInput owner={owner} />

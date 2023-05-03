@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import CardNumberInput from "../components/Input/CardNumberInput";
 import CvcInput from "../components/Input/CvcInput";
-import ExpiracyInput from "../components/Input/ExpiracyInput";
+import ExpirationInput from "../components/Input/ExpirationInput";
 import InputField from "../components/common/InputField";
 import OwnerInput from "../components/Input/OwnerInput";
 import PasswordInput from "../components/Input/PasswordInput";
@@ -35,10 +35,10 @@ export const CardNumber: Story = {
   },
 };
 
-export const Expiracy: Story = {
+export const Expiration: Story = {
   args: {
-    kind: "expiracy",
-    children: <ExpiracyInput year={defaultState} month={defaultState} />,
+    kind: "expiration",
+    children: <ExpirationInput year={defaultState} month={defaultState} />,
   },
 };
 

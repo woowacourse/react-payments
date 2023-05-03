@@ -10,7 +10,6 @@ const meta: Meta<typeof Homepage> = {
 export default meta;
 type Story = StoryObj<typeof Homepage>;
 
-//title,cardNumberSet,owner,expiracy
 export const Home: Story = {
   args: {},
 };

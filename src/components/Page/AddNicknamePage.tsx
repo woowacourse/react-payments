@@ -41,25 +41,25 @@ export default function AddNicknamePage({
   setCardList,
   setPageIndex,
 }: addNicknamePageProps) {
-  const { color, title, cardNumber, expiracy, owner } = useCardState();
+  const { color, title, cardNumber, expiration, owner } = useCardState();
   const nickName = useInput(title, { name: "nickName" });
 
   if (!cardNumber) return <div>에러가 발생했습니다</div>;
-  if (!expiracy) return <div>에러가 발생했습니다</div>;
+  if (!expiration) return <div>에러가 발생했습니다</div>;
 
   const { first, second, third, fourth } = cardNumber;
-  const { month, year } = expiracy;
+  const { month, year } = expiration;
 
   const onClick = () => {
     const newCard = {
       cardTitle: title,
       cardNumber: {
-        fisrt: first,
+        first: first,
         second: second,
         third: third,
         fourth: fourth,
       },
-      expiracy: {
+      expiration: {
         month: month,
         year: year,
       },
@@ -79,7 +79,7 @@ export default function AddNicknamePage({
         cardColor={color}
         cardTitle={title}
         cardNumberSet={[first, second, third, fourth]}
-        expiracy={`${month}/${year}`}
+        expiration={`${month}/${year}`}
         owner={owner === undefined ? "" : owner.toUpperCase()}
       />
       <InputWrapper>

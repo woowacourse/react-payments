@@ -67,7 +67,7 @@ export default function Homepage({ onClick, cardList }: HomePageProps) {
               cardTitle={CARD_COMPANYS[card.cardTitle].title}
               owner={card.owner}
               cardNumberSet={Object.values(card.cardNumber)}
-              expiracy={`${card.expiracy.month}/${card.expiracy.year}`}
+              expiration={`${card.expiration.month}/${card.expiration.year}`}
             />
             <NickName>{card.nickName}</NickName>
           </div>

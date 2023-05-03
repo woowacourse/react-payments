@@ -8,7 +8,7 @@ interface CardProps {
   cardTitle: string;
   cardNumberSet: string[];
   owner: string;
-  expiracy: string;
+  expiration: string;
 }
 
 const StyledCard = styled.div<{ cardColor: string }>`
@@ -71,7 +71,7 @@ const StyledOwnerName = styled.span`
   word-break: break-all;
   font-size: 14px;
 `;
-const StyledExpiracy = styled.span`
+const StyledExpiration = styled.span`
   color: #fff;
   float: right;
   font-weight: bold;
@@ -83,7 +83,7 @@ const ENCRYPT_INDEX = 2;
 export default function Card({
   cardNumberSet,
   owner,
-  expiracy,
+  expiration,
   type,
   cardColor,
   cardTitle,
@@ -111,7 +111,7 @@ export default function Card({
           ))}
         </StyledCardNumber>
         <StyledOwnerName>{owner ? owner : "NAME"}</StyledOwnerName>
-        <StyledExpiracy>{expiracy}</StyledExpiracy>
+        <StyledExpiration>{expiration}</StyledExpiration>
       </div>
     </StyledCard>
   );

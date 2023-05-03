@@ -10,7 +10,6 @@ const meta: Meta<typeof AddCardPage> = {
 export default meta;
 type Story = StoryObj<typeof AddCardPage>;
 
-//title,cardNumberSet,owner,expiracy
 export const AddCard: Story = {
   args: {},
 };

@@ -2,7 +2,7 @@ body {
   margin: 0px;
 }
 .app {
-  min-height: 100vhh;
+  min-height: 100vh;
   justify-content: center;
   overflow-x: hidden;
 }

@@ -41,7 +41,7 @@ export default function App() {
         third: thirdCardNumber.value,
         fourth: fourthCardNumber.value,
       },
-      expiracy: {
+      expiration: {
         month: month.value,
         year: year.value,
       },

@@ -1,12 +1,12 @@
 export interface CardInfo {
   cardTitle: string,
   cardNumber: {
-    fisrt: string,
+    first: string,
     second: string,
     third: string,
     fourth: string
   }
-  expiracy: {
+  expiration: {
     month: string;
     year: string;
   }
