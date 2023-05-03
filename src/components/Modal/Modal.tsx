@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 type ModalProps = {
   children: React.ReactNode;
@@ -24,8 +24,20 @@ const ModalBackDrop = styled.div`
   height: 100%;
 
   z-index: 3;
+  overflow: hidden;
 
   background: rgba(0, 0, 0, 0.5);
+`;
+
+const slideUp = keyframes`
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 `;
 
 const ModalContent = styled.div`
@@ -46,5 +58,8 @@ const ModalContent = styled.div`
   bottom: 0;
 
   background: #f5f5f5;
+
+  animation: ${slideUp} 0.4s ease-out;
 `;
+
 export default Modal;

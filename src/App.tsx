@@ -12,7 +12,6 @@ function App() {
   return (
     <>
       <GlobalStyle />
-
       <Layout>
         <Routes>
           <Route index path={PAGE.CARD_LIST} element={<CardListPage />} />

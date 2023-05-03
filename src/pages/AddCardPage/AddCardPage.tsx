@@ -126,12 +126,6 @@ const Form = styled.form`
   height: 500px;
 
   overflow: scroll;
-
-  ::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-    background-color: transparent;
-  }
 `;
 
 export default AddCardPage;

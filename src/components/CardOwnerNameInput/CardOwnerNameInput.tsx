@@ -43,7 +43,7 @@ const CardOwnerNameInput = ({ ownerName, nameLength, setOwnerName }: CardOwnerNa
           maxLength={30}
           onChange={onChangeOwnerNameHandler}
           onBlur={onBlurOwnerNameHandler}
-          autoComplete="name"
+          autoComplete="cc-name"
         />
       </InputContainer>
     </Label>
