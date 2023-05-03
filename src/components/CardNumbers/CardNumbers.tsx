@@ -46,9 +46,7 @@ const CardNumbers = ({
           placeholder={'0000'}
           required={true}
         />
-        {cardRefs[0].current?.value.length === 4 && (
-          <Styled.Paragraph>-</Styled.Paragraph>
-        )}
+        {cardNumbers[0].length === 4 && <Styled.Paragraph>-</Styled.Paragraph>}
         <CardInput
           type="text"
           maxLength={4}
@@ -59,9 +57,7 @@ const CardNumbers = ({
           placeholder={'0000'}
           required={true}
         />
-        {cardRefs[1].current?.value.length === 4 && (
-          <Styled.Paragraph>-</Styled.Paragraph>
-        )}
+        {cardNumbers[1].length === 4 && <Styled.Paragraph>-</Styled.Paragraph>}
         <CardInput
           type="password"
           maxLength={4}
@@ -72,9 +68,7 @@ const CardNumbers = ({
           placeholder={'0000'}
           required={true}
         />
-        {cardRefs[2].current?.value.length === 4 && (
-          <Styled.Paragraph>-</Styled.Paragraph>
-        )}
+        {cardNumbers[2].length === 4 && <Styled.Paragraph>-</Styled.Paragraph>}
         <CardInput
           type="password"
           maxLength={4}

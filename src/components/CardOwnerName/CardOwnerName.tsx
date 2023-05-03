@@ -27,9 +27,7 @@ const CardOwnerName = ({
     <>
       <Styled.LabelWrapper>
         <CardLabel labelText="카드 소유자 이름(선택)" />
-        <CardLabel
-          labelText={`${cardRefs[6].current?.value.length || 0} / 30`}
-        />
+        <CardLabel labelText={`${cardOwnerName.length || 0} / 30`} />
       </Styled.LabelWrapper>
       <Styled.Wrapper>
         <CardInput

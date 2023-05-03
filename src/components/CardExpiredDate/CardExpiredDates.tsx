@@ -49,9 +49,7 @@ const CardExpiredDate = ({
           placeholder="MM"
           required={true}
         />
-        {cardRefs[4].current?.value.length === 2 && (
-          <Styled.Paragraph>/</Styled.Paragraph>
-        )}
+        {expiredDates[0].length === 2 && <Styled.Paragraph>/</Styled.Paragraph>}
         <CardInput
           type="text"
           maxLength={2}
