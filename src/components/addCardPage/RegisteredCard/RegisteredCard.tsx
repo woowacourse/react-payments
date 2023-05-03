@@ -15,6 +15,8 @@ interface RegisteredCardProps extends CardProps {
   createCard: () => void;
 }
 
+const INPUT_CARD_TITLE_ID = 'cardTitle';
+
 export default function RegisteredCard({
   cardTitleInformation,
   createCard,
@@ -40,10 +42,12 @@ export default function RegisteredCard({
       <form onSubmit={onSubmit}>
         <InputWrapper>
           <InputField
+            id={INPUT_CARD_TITLE_ID}
             text="카드 별칭"
             inputLength={`${cardTitleInformation.value.length}/20`}
           >
             <Input
+              id={INPUT_CARD_TITLE_ID}
               autoFocus
               {...cardTitleInformation}
               type="text"

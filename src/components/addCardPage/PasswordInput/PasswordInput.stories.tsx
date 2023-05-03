@@ -26,6 +26,7 @@ function PasswordStories() {
       onKeyDown={(e) => onInputKeydown(e)}
     >
       <PasswordInput
+        id=""
         firstPasswordInformation={firstPassword}
         secondPasswordInformation={secondPassword}
       />

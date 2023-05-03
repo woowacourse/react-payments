@@ -25,7 +25,7 @@ function CvcStories() {
       ref={cardForm}
       onKeyDown={(e) => onInputKeydown(e)}
     >
-      <CvcInput cvcInformation={cvc} />
+      <CvcInput id="" cvcInformation={cvc} />
     </InputWrapperParent>
   );
 }

@@ -31,6 +31,7 @@ function CardNumberStories() {
       onKeyDown={(e) => onInputKeydown(e)}
     >
       <CardNumberInput
+        id=""
         firstNumberInformation={firstCardNumber}
         secondNumberInformation={secondCardNumber}
         thirdNumberInformation={thirdCardNumber}

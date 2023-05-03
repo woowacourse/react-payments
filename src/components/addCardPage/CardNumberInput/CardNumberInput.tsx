@@ -5,6 +5,7 @@ import { Input } from '@components/common/Input';
 import { TAB_INDEX_INFO } from '@constants/constant';
 
 interface CardNumberInputProps {
+  id: string;
   firstNumberInformation: UseInputProps;
   secondNumberInformation: UseInputProps;
   thirdNumberInformation: UseInputProps;
@@ -14,6 +15,7 @@ interface CardNumberInputProps {
 const { ADD_CARD_PAGE_TAB_INDEX } = TAB_INDEX_INFO;
 
 export default function CardNumberInput({
+  id,
   firstNumberInformation,
   secondNumberInformation,
   thirdNumberInformation,
@@ -24,7 +26,7 @@ export default function CardNumberInput({
       <Wrapper>
         <Input
           isNumber={true}
-          id="cardNumber"
+          id={id}
           type="text"
           textAlign="center"
           placeholder="0000"

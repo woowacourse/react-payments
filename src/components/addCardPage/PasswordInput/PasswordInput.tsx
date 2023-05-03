@@ -6,6 +6,7 @@ import { Input } from '@components/common/Input';
 import { TAB_INDEX_INFO } from '@constants/constant';
 
 export interface PasswordInputProps {
+  id: string;
   firstPasswordInformation: UseInputProps;
   secondPasswordInformation: UseInputProps;
 }
@@ -13,6 +14,7 @@ export interface PasswordInputProps {
 const { ADD_CARD_PAGE_TAB_INDEX } = TAB_INDEX_INFO;
 
 export default function PasswordInput({
+  id,
   firstPasswordInformation,
   secondPasswordInformation,
 }: PasswordInputProps) {
@@ -22,7 +24,7 @@ export default function PasswordInput({
         <GrayWrapper>
           <Input
             isNumber={true}
-            id="password"
+            id={id}
             type="text"
             isPassword={true}
             placeholder="0"

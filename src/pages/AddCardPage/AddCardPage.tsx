@@ -35,6 +35,14 @@ interface AddCardPageProps {
   setPage: React.Dispatch<React.SetStateAction<PageInfo>>;
 }
 
+const INPUT_ID = {
+  CARD_NUMBER: 'cardNumber',
+  EXPIRATION: 'expiration',
+  OWNER: 'owner',
+  CVC: 'cvc',
+  PASSWORD: 'password',
+};
+
 export default function AddCardPage({
   cardList,
   setCardList,
@@ -212,33 +220,37 @@ export default function AddCardPage({
           onKeyDown={(e) => onInputKeydown(e)}
         >
           <InputWrapper>
-            <InputField text="카드 번호">
+            <InputField id={INPUT_ID.CARD_NUMBER} text="카드 번호">
               <CardNumberInput
+                id={INPUT_ID.CARD_NUMBER}
                 firstNumberInformation={firstCardNumber}
                 secondNumberInformation={secondCardNumber}
                 thirdNumberInformation={thirdCardNumber}
                 fourthNumberInformation={fourthCardNumber}
               />
             </InputField>
-            <InputField text="만료일">
+            <InputField id={INPUT_ID.EXPIRATION} text="만료일">
               <ExpirationInput
+                id={INPUT_ID.EXPIRATION}
                 yearInformation={year}
                 monthInformation={month}
               />
             </InputField>
             <InputField
+              id={INPUT_ID.OWNER}
               text="카드 소유자 이름(선택)"
               inputLength={`${owner.value.length}/30`}
             >
-              <OwnerInput ownerInformation={owner} />
+              <OwnerInput id={INPUT_ID.OWNER} ownerInformation={owner} />
             </InputField>
-            <InputField text="보안 코드(CVC/CVV)">
+            <InputField id={INPUT_ID.CVC} text="보안 코드(CVC/CVV)">
               <CvcWrapper>
-                <CvcInput cvcInformation={cvc} />
+                <CvcInput id={INPUT_ID.CVC} cvcInformation={cvc} />
               </CvcWrapper>
             </InputField>
-            <InputField text="카드 비밀번호">
+            <InputField id={INPUT_ID.PASSWORD} text="카드 비밀번호">
               <PasswordInput
+                id={INPUT_ID.PASSWORD}
                 firstPasswordInformation={firstPassword}
                 secondPasswordInformation={secondPassword}
               />

@@ -6,18 +6,19 @@ import { Input } from '@components/common/Input';
 import { TAB_INDEX_INFO } from '@constants/constant';
 
 export interface OwnerInputProps {
+  id: string;
   ownerInformation: UseInputProps;
 }
 
 const { ADD_CARD_PAGE_TAB_INDEX } = TAB_INDEX_INFO;
 
-export default function OwnerInput({ ownerInformation }: OwnerInputProps) {
+export default function OwnerInput({ id, ownerInformation }: OwnerInputProps) {
   return (
     <Container>
       <Wrapper>
         <Input
           type="text"
-          id="owner"
+          id={id}
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
           tabIndex={ADD_CARD_PAGE_TAB_INDEX.OWNER}
           autoComplete="off"

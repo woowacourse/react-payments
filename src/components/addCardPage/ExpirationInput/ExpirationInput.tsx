@@ -6,6 +6,7 @@ import { Input } from '@components/common/Input';
 import { TAB_INDEX_INFO } from '@constants/constant';
 
 interface ExpirationInputProps {
+  id: string;
   yearInformation: UseInputProps;
   monthInformation: UseInputProps;
 }
@@ -13,6 +14,7 @@ interface ExpirationInputProps {
 const { ADD_CARD_PAGE_TAB_INDEX } = TAB_INDEX_INFO;
 
 export default function ExpirationInput({
+  id,
   yearInformation,
   monthInformation,
 }: ExpirationInputProps) {
@@ -22,7 +24,7 @@ export default function ExpirationInput({
         <InputWrapper>
           <Input
             type="text"
-            id="expiration"
+            id={id}
             isNumber={true}
             placeholder="MM"
             textAlign="center"
