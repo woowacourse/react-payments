@@ -4,7 +4,7 @@ import CardForm from "../components/cardForm/CardForm";
 import BrandSelectModal from "../components/modal/BrandSelectModal";
 import styled from "styled-components";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { NewCardContext } from "../contexts/NewCardContext";
 
@@ -14,13 +14,13 @@ export const AddCard = () => {
   const [isModalOpen, setIsModalOpen] = useState(true);
   const { newCard, setNumbers, setExpiryDate, setBrand, setOwner, setCVC, setPassword } = useNewCard();
 
-  const openModal = () => {
+  const openModal = useCallback(() => {
     setIsModalOpen(true);
-  };
+  }, [setIsModalOpen]);
 
-  const closeModal = () => {
+  const closeModal = useCallback(() => {
     setIsModalOpen(false);
-  };
+  }, [setIsModalOpen]);
 
   const handleClickOpenModalButton = (e: React.MouseEvent<HTMLElement> | React.TouchEvent<HTMLElement>) => {
     e.preventDefault();

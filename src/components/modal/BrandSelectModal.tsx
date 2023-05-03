@@ -1,6 +1,7 @@
 import ModalButton from "./ModalButton";
 import styled from "styled-components";
 
+import React from "react";
 import { useContext } from "react";
 import { createPortal } from "react-dom";
 import { NewCardContext } from "../../contexts/NewCardContext";
@@ -53,4 +54,4 @@ const Container = styled.div`
   background: white;
 `;
 
-export default BrandSelectModal;
+export default React.memo(BrandSelectModal);
