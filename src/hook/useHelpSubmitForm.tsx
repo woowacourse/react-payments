@@ -1,16 +1,25 @@
-import { CardType } from "../types/card";
-import { ValidFlagType } from "../types/input";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { NewCardContext } from "../contexts/NewCardContext";
 
 import { validateExpiryDate, validateCardNumbers } from "../validation";
 
+import { CardType } from "../types/card";
+import { ValidFlagType } from "../types/input";
+
 interface Props {
-  newCard: CardType;
   cards: CardType[];
   setIsNumbersValid: (valid: boolean) => void;
   setIsExpiryDateValid: (valid: boolean) => void;
 }
 
-export const useHelpSubmitForm = ({ newCard, cards, setIsNumbersValid, setIsExpiryDateValid }: Props) => {
+export const useHelpSubmitForm = ({ cards, setIsNumbersValid, setIsExpiryDateValid }: Props) => {
+  const { newCard } = useContext(NewCardContext);
+  const navigate = useNavigate();
+  const moveToHome = () => {
+    navigate("/setAlias", { state: { newCard } });
+  };
+
   const isAllValid = () => {
     const validations: ValidFlagType = {
       isCardNumbersValid: validateCardNumbers(newCard, cards),
@@ -41,5 +50,5 @@ export const useHelpSubmitForm = ({ newCard, cards, setIsNumbersValid, setIsExpi
     return cardInfo;
   };
 
-  return { isAllValid, makeCardFormData };
+  return { isAllValid, makeCardFormData, moveToHome };
 };

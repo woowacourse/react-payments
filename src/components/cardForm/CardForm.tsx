@@ -5,21 +5,14 @@ import OwnerInput from "./OwnerInput";
 import PasswordInput from "./PasswordInput";
 import styled from "styled-components";
 
-import { useNavigate } from "react-router-dom";
 import { useContext, FormEvent } from "react";
 import { useCheckForm } from "../../hook/useCheckForm";
 import { useHelpSubmitForm } from "../../hook/useHelpSubmitForm";
 
 import { CardsContext } from "../../contexts/CardsContext";
-import { NewCardContext } from "../../contexts/NewCardContext";
 
 const CardForm = () => {
   const { cards, addNewCard } = useContext(CardsContext);
-  const { newCard } = useContext(NewCardContext);
-  const navigate = useNavigate();
-  const moveToHome = () => {
-    navigate("/setAlias", { state: { newCard } });
-  };
 
   const {
     isInputsCompleted,
@@ -35,8 +28,7 @@ const CardForm = () => {
     isAllCompleted,
   } = useCheckForm();
 
-  const { isAllValid, makeCardFormData } = useHelpSubmitForm({
-    newCard,
+  const { isAllValid, makeCardFormData, moveToHome } = useHelpSubmitForm({
     cards,
     setIsNumbersValid,
     setIsExpiryDateValid,

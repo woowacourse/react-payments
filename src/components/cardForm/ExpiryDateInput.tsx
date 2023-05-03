@@ -3,7 +3,6 @@ import Input from "../common/Input";
 import InputLabel from "../common/InputLabel";
 
 import { useContext } from "react";
-import { SubmitManageContext } from "../../contexts/SubmitManageContext";
 import { NewCardContext } from "../../contexts/NewCardContext";
 
 import { EXPRIYDATE_MAXLEGNTH, EXPRIYDATE_REGEX, TWO_TO_NINE_REGEX } from "../../constants";
