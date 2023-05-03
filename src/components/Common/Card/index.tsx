@@ -51,7 +51,7 @@ function Card({ cardInformation = defaultCardInformation, isAddForm, isShowName 
                 )}
               </StyledCardNumberTemplate>
               <StyledCardDetail>
-                {owner && <div>{owner[0].slice(0, 12)}</div>}
+                {owner && <div>{owner[0].slice(0, 20)}</div>}
                 {expirationDate && (
                   <div>
                     {expirationDate.at(0)?.padStart(CARD_EXPIRATION_MONTH_LENGTH, '0')}/
