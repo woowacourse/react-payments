@@ -77,7 +77,7 @@
       [https://wainaat.github.io/react-payments](https://wainaat.github.io/react-payments) 참새가 한 거는 자동완성이 잘되더라구요. 참고해봐도 좋을 것 같아요
 - [ ] src/components/Header/Header.tsx
       페이지 타이틀과 뒤로가기버튼을 별도 모듈에서 선언하고 있는데 페이지컴포넌트 모듈에서 관리하면 보다 연관깊은코드가 가까이에 있게될것같아요. PageLayout 컴포넌트와같이 페이지 컴포넌트가 공통적으로 사용하는 컴포넌트에 헤더컴포넌트를 포함시켜서 페이지컴포넌트에서 prop으로 넘겨주도록 변경해보면 어떨까요?
-- [ ] src/hooks/useTitle.ts
+- [x] src/hooks/useTitle.ts
       요런 단순 setState는 커스텀훅으로 분리하지 않아도 복잡도가 큰 차이가 없는 것 같아요
   ```tsx
   export const useTitle = (titleValue: string) => {
