@@ -1,9 +1,7 @@
-import React from 'react';
-
 import type { Meta } from '@storybook/react';
 
 import { CardNumberInput } from '../../components/addCardForm/cardInfoInputs/CardNumberInput';
-import { useState } from 'react';
+import { CardInfoProvider } from '../../components/providers/CardInfoProvider';
 
 const meta = {
   title: 'Example/Input',
@@ -14,14 +12,9 @@ const meta = {
 export default meta;
 
 export const CardNumber = () => {
-  const [cardNumber, setCardNumber] = useState(['', '', '', '']);
-
   return (
-    <CardNumberInput
-      cardNumber={cardNumber}
-      setCardNumber={setCardNumber}
-      focusCardNumberInputByIndex={() => {}}
-      viewNextInput={() => {}}
-    />
+    <CardInfoProvider>
+      <CardNumberInput viewNextInput={() => {}} />
+    </CardInfoProvider>
   );
 };

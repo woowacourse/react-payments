@@ -1,150 +1,99 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import { CardNumberInput } from './cardInfoInputs/CardNumberInput';
 import { ExpirationDateInput } from './cardInfoInputs/ExpirationDateInput';
 import { OwnerNameInput } from './cardInfoInputs/OwnerNameInput';
 import { SecurityCodeInput } from './cardInfoInputs/SecurityCodeInput';
 import { PasswordInput } from './cardInfoInputs/PasswordInput';
-import { CardViewer } from '../cardViewer';
 import { useNavigate } from 'react-router-dom';
-import { useFocus } from '../../hooks/useFocus';
-import { useCardData } from '../../hooks/useCardData';
+import {
+  useCardInfoActionContext,
+  useCardInfoValueContext,
+} from '../../hooks/cardInfoContext';
+import { useModalStateContext } from '../../hooks/useModalContext';
+import { v4 } from 'uuid';
+import { useCardList } from '../../hooks/useCardList';
+import { useFormValidation } from '../../hooks/useFormValidation';
 
 export const AddNewCardForm = () => {
   const navigate = useNavigate();
 
-  const { addNewCard } = useCardData();
+  const { addNewCard, modifyCardInfo, cardList } = useCardList();
+  const { setCardId } = useCardInfoActionContext();
+  const {
+    cardNumber,
+    expirationDate,
+    ownerName,
+    securityCode,
+    password,
+    companyId,
+    cardId,
+  } = useCardInfoValueContext();
+  const canSubmit = useFormValidation();
+
+  const { isOpen } = useModalStateContext();
 
   const [inputOrder, setInputOrder] = useState(0);
-  const [isInputFinish, setIsInputFinish] = useState(false);
-
-  const [cardNumber, setCardNumber] = useState(['', '', '', '']);
-  const [expirationDate, setExpirationDate] = useState({
-    month: '',
-    year: '',
-  });
-  const [ownerName, setOwnerName] = useState('');
-  const [securityCode, setSecurityCode] = useState('');
-  const [password, setPassword] = useState(['', '']);
-
-  const {
-    inputRefs: cardNumberInputRefs,
-    focusInputByIndex: focusCardNumberInputByIndex,
-  } = useFocus(4);
-
-  const {
-    inputRefs: expirationDateInputRefs,
-    focusInputByIndex: focusExpirationDateInputByIndex,
-  } = useFocus(2);
-
-  const { inputRefs: ownerNameInputRefs } = useFocus(1);
-
-  const { inputRefs: securityCodeInputRefs } = useFocus(1);
-
-  const {
-    inputRefs: passwordInputRefs,
-    focusInputByIndex: focusPasswordInputByIndex,
-  } = useFocus(2);
 
   const viewNextInput = useCallback(() => {
     setInputOrder((current) => current + 1);
   }, []);
 
-  const viewPreviousInput = useCallback(() => {
-    setInputOrder((current) => current - 1);
-  }, []);
+  const handleSubmitNewCardInfo: React.FormEventHandler = (e) => {
+    e.preventDefault();
 
-  const handleSubmitNewCardInfo = () => {
-    addNewCard({
+    const newCardInfo = {
       cardNumber,
       expirationDate,
       ownerName,
       securityCode,
       password,
-    });
+      companyId,
+      cardId,
+    };
 
-    navigate('/');
+    if (cardList.some((card) => card.cardId === cardId)) {
+      modifyCardInfo(cardId, newCardInfo);
+      navigate('/register/nickName');
+      return;
+    }
+
+    addNewCard(newCardInfo);
+    navigate('/register/nickName');
   };
 
+  useEffect(() => {
+    if (cardId === '') setCardId(v4());
+  }, [cardId]);
+
   return (
-    <Style.Wrapper
-      onSubmit={(e) => {
-        e.preventDefault();
+    <Style.Wrapper onSubmit={handleSubmitNewCardInfo}>
+      {companyId ? (
+        <>
+          {inputOrder > 3 && (
+            <Style.SubmitButton disabled={!canSubmit} autoFocus={true}>
+              {canSubmit ? '제출' : '❌'}
+            </Style.SubmitButton>
+          )}
 
-        addNewCard({
-          cardNumber,
-          expirationDate,
-          ownerName,
-          securityCode,
-          password,
-        });
+          {inputOrder > 2 && <PasswordInput viewNextInput={viewNextInput} />}
 
-        navigate('/');
-      }}
-    >
-      <CardViewer
-        cardNumber={cardNumber}
-        expirationDate={expirationDate}
-        ownerName={ownerName}
-      />
-      <Style.InputContainer>
-        {inputOrder === 0 && (
-          <CardNumberInput
-            ref={cardNumberInputRefs}
-            cardNumber={cardNumber}
-            setCardNumber={setCardNumber}
-            focusCardNumberInputByIndex={focusCardNumberInputByIndex}
-            viewNextInput={viewNextInput}
-          />
-        )}
+          {inputOrder > 1 && (
+            <>
+              <SecurityCodeInput viewNextInput={viewNextInput} />
+              <OwnerNameInput viewNextInput={viewNextInput} />
+            </>
+          )}
 
-        {inputOrder === 1 && (
-          <ExpirationDateInput
-            ref={expirationDateInputRefs}
-            expirationDate={expirationDate}
-            setExpirationDate={setExpirationDate}
-            focusNextExpirationDateInput={focusExpirationDateInputByIndex}
-            viewNextInput={viewNextInput}
-            viewPreviousInput={viewPreviousInput}
-          />
-        )}
+          {inputOrder > 0 && (
+            <ExpirationDateInput viewNextInput={viewNextInput} />
+          )}
 
-        {inputOrder === 2 && (
-          <OwnerNameInput
-            ref={ownerNameInputRefs}
-            ownerName={ownerName}
-            setOwnerName={setOwnerName}
-            viewNextInput={viewNextInput}
-            viewPreviousInput={viewPreviousInput}
-          />
-        )}
-
-        {inputOrder === 3 && (
-          <SecurityCodeInput
-            ref={securityCodeInputRefs}
-            securityCode={securityCode}
-            setSecurityCode={setSecurityCode}
-            viewNextInput={viewNextInput}
-            viewPreviousInput={viewPreviousInput}
-          />
-        )}
-
-        {inputOrder === 4 && (
-          <PasswordInput
-            ref={passwordInputRefs}
-            password={password}
-            setPassword={setPassword}
-            focusPasswordInputByIndex={focusPasswordInputByIndex}
-            viewPreviousInput={viewPreviousInput}
-            handleSubmitNewCardInfo={handleSubmitNewCardInfo}
-          />
-        )}
-      </Style.InputContainer>
-      <Style.ButtonContainer>
-        {isInputFinish && (
-          <Style.NextButton type="submit">다음</Style.NextButton>
-        )}
-      </Style.ButtonContainer>
+          <CardNumberInput viewNextInput={viewNextInput} />
+        </>
+      ) : (
+        <Style.Caption>{isOpen || '카드 클릭!'}</Style.Caption>
+      )}
     </Style.Wrapper>
   );
 };
@@ -158,24 +107,40 @@ const Style = {
 
     width: max-content;
   `,
-  InputContainer: styled.div`
+  // InputContainer: styled.div`
+  //   display: flex;
+  //   flex-direction: column;
+
+  //   width: max-content;
+
+  //   gap: 19px;
+  // `,
+  Caption: styled.span`
+    width: 241px;
+
     display: flex;
-    flex-direction: column;
+    justify-content: center;
 
-    width: max-content;
-
-    gap: 19px;
+    font-size: 20px;
+    margin-top: 5px;
+    color: grey;
   `,
-  ButtonContainer: styled.div`
-    display: flex;
-    justify-content: flex-end;
-
-    width: 100%;
-  `,
-  NextButton: styled.button`
+  SubmitButton: styled.button`
     all: unset;
 
-    font-weight: bold;
+    width: 100%;
+    height: 50px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #646464;
+    opacity: ${(props) => (props.disabled ? '0.3' : '1')};
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 7px;
     cursor: pointer;
   `,
 };

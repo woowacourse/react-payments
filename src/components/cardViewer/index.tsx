@@ -1,30 +1,35 @@
 import styled from 'styled-components';
 import { v4 } from 'uuid';
+import { COMPANIES } from '../../constants/cardCompany';
+import { isCompanyId } from '../modal/content/selectCardCompany';
+import { CardViewerProps } from '../../types/card';
 
-interface Props {
-  cardNumber: string[];
-  expirationDate: {
-    month: string;
-    year: string;
-  };
-  ownerName: string;
+interface Props extends CardViewerProps {
+  handleClick?: () => void;
 }
 
-export function CardViewer({ cardNumber, expirationDate, ownerName }: Props) {
+export function CardViewer({
+  cardNumber,
+  expirationDate,
+  ownerName,
+  companyId,
+  handleClick,
+}: Props) {
   return (
-    <Style.Wrapper>
+    <Style.Wrapper
+      onClick={handleClick}
+      color={isCompanyId(companyId) ? COMPANIES[companyId].color : ''}
+      aria-label="카드사 선택 버튼"
+    >
+      <Style.CompanyName>
+        {isCompanyId(companyId) && COMPANIES[companyId].name}
+      </Style.CompanyName>
       <Style.ICChip />
       <Style.CardNumberContainer>
         {cardNumber.map((number, index) => (
-          <Style.NumberInput
-            key={v4()}
-            style={{
-              letterSpacing:
-                window.innerWidth < 768 ? (index > 1 ? '-7px' : '0px') : '0px',
-            }}
-          >
-            {index < 2 ? number : '•'.repeat(number.length)}
-          </Style.NumberInput>
+          <Style.CardNumber key={v4()}>
+            {index < 2 ? number : '·'.repeat(number.length)}
+          </Style.CardNumber>
         ))}
       </Style.CardNumberContainer>
       <Style.NameAndDateContainer>
@@ -50,11 +55,18 @@ const Style = {
 
     border: none;
     border-radius: 5px;
-    background-color: #333333;
-
-    color: white;
+    background-color: ${(props) =>
+      props.color === '' ? '#333333' : props.color};
+    color: ${(props) =>
+      props.color === COMPANIES['KAKAO'].color ? '#5c210d3' : 'white'};
     padding: 14px;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+  `,
+  CompanyName: styled.div`
+    position: absolute;
+    top: 10px;
+    left: 10px;
   `,
   ICChip: styled.div`
     width: 40px;
@@ -75,9 +87,7 @@ const Style = {
 
     width: 100%;
   `,
-  NumberInput: styled.div`
-    all: unset;
-
+  CardNumber: styled.div`
     width: 30px;
   `,
   NameAndDateContainer: styled.div`

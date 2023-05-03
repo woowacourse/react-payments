@@ -1,8 +1,7 @@
-import React, { useRef, useState } from 'react';
-
 import type { Meta } from '@storybook/react';
 
 import { PasswordInput } from '../../components/addCardForm/cardInfoInputs/PasswordInput';
+import { CardInfoProvider } from '../../components/providers/CardInfoProvider';
 
 const meta = {
   title: 'Example/Input',
@@ -13,15 +12,9 @@ const meta = {
 export default meta;
 
 export const Password = () => {
-  const [password, setPassword] = useState(['', '']);
-
   return (
-    <PasswordInput
-      handleSubmitNewCardInfo={() => {}}
-      password={password}
-      setPassword={setPassword}
-      focusPasswordInputByIndex={(index: number) => {}}
-      viewPreviousInput={() => {}}
-    />
+    <CardInfoProvider>
+      <PasswordInput viewNextInput={() => {}} />
+    </CardInfoProvider>
   );
 };

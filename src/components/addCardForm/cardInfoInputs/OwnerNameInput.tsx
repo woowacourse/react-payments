@@ -1,18 +1,17 @@
-import { forwardRef } from 'react';
 import { InputWrapper } from './template/InputWrapper';
 import { ErrorMessage, Input } from './template/Input';
 import styled from 'styled-components';
-import { useError } from '../../../hooks/useError';
-import { MoveInput } from '../MoveInput';
+import { useErrorMessage } from '../../../hooks/useError';
+import {
+  useCardInfoActionContext,
+  useCardInfoValueContext,
+} from '../../../hooks/cardInfoContext';
 
 interface Props {
-  ownerName: string;
-  setOwnerName: React.Dispatch<React.SetStateAction<string>>;
   viewNextInput: () => void;
-  viewPreviousInput: () => void;
 }
 
-const ownerNameInputValidator = (input: string | string[]) => {
+export const ownerNameInputValidator = (input: string | string[]) => {
   if (typeof input === 'object') throw new Error('입력 객체 에러');
 
   if (input.length === 0) return;
@@ -24,66 +23,46 @@ const ownerNameInputValidator = (input: string | string[]) => {
     throw new Error('이름은 영문으로만 입력 가능합니다.');
 };
 
-export const OwnerNameInput = forwardRef<HTMLInputElement[], Props>(
-  function OwnerNameInput(
-    { ownerName, setOwnerName, viewNextInput, viewPreviousInput },
-    refs
-  ) {
-    const error = useError(ownerName, ownerNameInputValidator);
+export const OwnerNameInput = ({ viewNextInput }: Props) => {
+  const { ownerName } = useCardInfoValueContext();
+  const { setOwnerName } = useCardInfoActionContext();
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      setOwnerName(e.target.value.toUpperCase());
-    };
+  const error = useErrorMessage(ownerName, ownerNameInputValidator);
 
-    const handlePressKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
-      if (!(e.target instanceof HTMLInputElement)) return;
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setOwnerName(e.target.value.toUpperCase());
+  };
 
-      if (e.key === 'Backspace' && e.target.value === '') viewPreviousInput();
+  const handlePressKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!(e.target instanceof HTMLInputElement)) return;
+    if (e.key !== 'Enter') return;
+    if (error !== null) return;
 
-      if (e.key !== 'Enter') return;
+    e.preventDefault();
+    viewNextInput();
+  };
 
-      e.preventDefault();
-
-      if (error !== null) return;
-
-      viewNextInput();
-    };
-
-    return (
-      <div>
-        <Style.Label>
-          <Style.Title>카드 소유자 이름(선택)</Style.Title>
-          <Style.NameLength>{ownerName.length}/20</Style.NameLength>
-        </Style.Label>
-        <InputWrapper width={318}>
-          <Input
-            ref={(element) => {
-              if (!(element instanceof HTMLInputElement)) return;
-              if (typeof refs !== 'object') return;
-              if (refs?.current) refs.current[0] = element;
-            }}
-            autoFocus={true}
-            value={ownerName}
-            width={'318'}
-            minLength={1}
-            maxLength={20}
-            placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-            onChange={handleInputChange}
-            onKeyDown={handlePressKey}
-          />
-        </InputWrapper>
-        <ErrorMessage>{error ?? ''}</ErrorMessage>
-        <MoveInput
-          isLeftBtnShowed={true}
-          isRightBtnShowed={error === null}
-          viewNextInput={viewNextInput}
-          viewPreviousInput={viewPreviousInput}
-          progress={'3/5'}
+  return (
+    <div>
+      <Style.Label>
+        <Style.Title>카드 소유자 이름(선택)</Style.Title>
+        <Style.NameLength>{ownerName.length}/20</Style.NameLength>
+      </Style.Label>
+      <InputWrapper width={318}>
+        <Input
+          value={ownerName}
+          width={'318'}
+          minLength={1}
+          maxLength={20}
+          placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+          onChange={handleInputChange}
+          onKeyDown={handlePressKey}
         />
-      </div>
-    );
-  }
-);
+      </InputWrapper>
+      <ErrorMessage>{error ?? ''}</ErrorMessage>
+    </div>
+  );
+};
 
 const Style = {
   Label: styled.div`

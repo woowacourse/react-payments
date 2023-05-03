@@ -1,9 +1,11 @@
-import React from 'react';
+import { useEffect } from 'react';
 
 import type { Meta } from '@storybook/react';
 
 import { AddNewCardForm } from '../../components/addCardForm';
-import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
+import { useCardInfoActionContext } from '../../hooks/cardInfoContext';
+import { CardInfoProvider } from '../../components/providers/CardInfoProvider';
 
 const meta = {
   title: 'Example/Form',
@@ -13,10 +15,22 @@ const meta = {
 
 export default meta;
 
-export const NewCardForm = () => {
+export const CardForm = () => {
   return (
     <BrowserRouter>
-      <AddNewCardForm />
+      <CardInfoProvider>
+        <AddNewCardFormAfterSelectCompanyId />
+      </CardInfoProvider>
     </BrowserRouter>
   );
+};
+
+const AddNewCardFormAfterSelectCompanyId = () => {
+  const { setCompanyId } = useCardInfoActionContext();
+
+  useEffect(() => {
+    setCompanyId('HANA');
+  }, [setCompanyId]);
+
+  return <AddNewCardForm />;
 };

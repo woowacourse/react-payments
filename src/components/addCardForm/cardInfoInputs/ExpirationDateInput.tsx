@@ -1,27 +1,19 @@
-import { forwardRef, useEffect } from 'react';
 import { InputWrapper } from './template/InputWrapper';
 import { ErrorMessage, Input } from './template/Input';
 import styled from 'styled-components';
-import { useError } from '../../../hooks/useError';
-import { MoveInput } from '../MoveInput';
+import { useErrorMessage } from '../../../hooks/useError';
+import {
+  useCardInfoActionContext,
+  useCardInfoValueContext,
+} from '../../../hooks/cardInfoContext';
+import { useFocus } from '../../../hooks/useFocus';
+import { useEffect } from 'react';
 
 interface Props {
-  expirationDate: {
-    month: string;
-    year: string;
-  };
-  setExpirationDate: React.Dispatch<
-    React.SetStateAction<{
-      month: string;
-      year: string;
-    }>
-  >;
-  focusNextExpirationDateInput: (index: number, callback?: () => void) => void;
   viewNextInput: () => void;
-  viewPreviousInput: () => void;
 }
 
-const expirationDateInputValidator = (input: string | string[]) => {
+export const expirationDateInputValidator = (input: string | string[]) => {
   if (typeof input === 'string') throw new Error('입력 객체 에러');
 
   const inputYear = Number(input[1]);
@@ -29,11 +21,13 @@ const expirationDateInputValidator = (input: string | string[]) => {
   const currentYear = new Date().getFullYear() % 100;
   const currentMonth = new Date().getMonth() + 1;
 
+  if (input.every((num) => num === '')) throw new Error('');
+
   if (input.some((num) => num.length === 0))
     throw new Error('모든 입력창을 채워주세요.');
 
   if (inputMonth > 12 || inputMonth < 1)
-    throw new Error('유효한 날짜를 입력해주세요');
+    throw new Error('달에는 1 ~ 12까지의 숫자만 입력 가능합니다!');
 
   if (currentYear > inputYear)
     throw new Error('만료 일자는 현재 날짜보다 이후여야 합니다.');
@@ -42,113 +36,98 @@ const expirationDateInputValidator = (input: string | string[]) => {
     throw new Error('만료 일자는 현재 날짜보다 이후여야 합니다.');
 };
 
-export const ExpirationDateInput = forwardRef<HTMLInputElement[], Props>(
-  function ExpirationDateInput(
-    {
-      expirationDate,
-      setExpirationDate,
-      focusNextExpirationDateInput,
-      viewNextInput,
-      viewPreviousInput,
-    },
-    refs
-  ) {
-    const error = useError(
-      [expirationDate.month, expirationDate.year],
-      expirationDateInputValidator
-    );
+type ExpirationDate = 'month' | 'year';
 
-    const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const inputTarget = e.target.dataset.inputTarget;
-      const index = e.target.dataset.index;
+const isExpirationDate = (
+  inputTarget: string
+): inputTarget is ExpirationDate => {
+  return inputTarget === 'month' || inputTarget === 'year';
+};
 
-      if (index === undefined || inputTarget === undefined) return;
+export const ExpirationDateInput = ({ viewNextInput }: Props) => {
+  const { expirationDate } = useCardInfoValueContext();
+  const { setExpirationDate } = useCardInfoActionContext();
+  const { inputRefs, focusInputByIndex } = useFocus(2);
 
-      setExpirationDate({
-        ...expirationDate,
-        [inputTarget]: e.target.value.slice(0, 2),
-      });
+  const error = useErrorMessage(
+    [expirationDate.month, expirationDate.year],
+    expirationDateInputValidator
+  );
 
-      if (e.target.value.length >= 2)
-        focusNextExpirationDateInput(Number(index) + 1);
-    };
+  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputTarget = e.target.dataset.inputTarget;
+    const index = e.target.dataset.index;
 
-    const handleBackspacePress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-      if (!(e.target instanceof HTMLInputElement)) return;
+    if (index === undefined || inputTarget === undefined) return;
+    if (!isExpirationDate(inputTarget)) return;
 
-      const index = e.target.dataset.index;
+    setExpirationDate(inputTarget, e.target.value);
 
-      if (index === undefined) return;
+    if (e.target.value.length >= 2) focusInputByIndex(Number(index) + 1);
+  };
 
-      if (e.key === 'Backspace' && e.target.value === '')
-        focusNextExpirationDateInput(Number(index) - 1);
-    };
+  const handleBackspacePress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!(e.target instanceof HTMLInputElement)) return;
 
-    return (
-      <div>
-        <Style.Label>
-          <Style.Title>만료일</Style.Title>
-        </Style.Label>
-        <InputWrapper width={137}>
-          <Input
-            ref={(element) => {
-              if (element === null) return;
-              if (typeof refs !== 'object') return;
-              if (refs?.current) refs.current[0] = element;
-            }}
-            autoFocus={true}
-            type="number"
-            value={expirationDate.month}
-            data-input-target={'month'}
-            width={'30'}
-            required
-            inputMode="numeric"
-            placeholder="MM"
-            data-index="0"
-            maxLength={2}
-            onChange={handleChangeInput}
-            onKeyDown={handleBackspacePress}
-            onBlur={(e) => {
-              if (e.target.value.length === 1 && e.target.value !== '0') {
-                setExpirationDate({
-                  ...expirationDate,
-                  month: e.target.value.padStart(2, '0'),
-                });
-              }
-            }}
-          />
-          &nbsp;/&nbsp;
-          <Input
-            ref={(element) => {
-              if (element === null) return;
-              if (typeof refs !== 'object') return;
-              if (refs?.current) refs.current[1] = element;
-            }}
-            type="number"
-            value={expirationDate.year}
-            data-input-target={'year'}
-            width={'30'}
-            required
-            inputMode="numeric"
-            placeholder="YY"
-            data-index="1"
-            maxLength={2}
-            onChange={handleChangeInput}
-            onKeyDown={handleBackspacePress}
-          />
-        </InputWrapper>
-        <ErrorMessage>{error ?? ''}</ErrorMessage>
-        <MoveInput
-          isLeftBtnShowed={true}
-          isRightBtnShowed={error === null}
-          viewNextInput={viewNextInput}
-          viewPreviousInput={viewPreviousInput}
-          progress={'2/5'}
+    const index = e.target.dataset.index;
+
+    if (index === undefined) return;
+
+    if (e.key === 'Backspace' && e.target.value === '')
+      focusInputByIndex(Number(index) - 1);
+  };
+
+  useEffect(() => {
+    if (error === null) viewNextInput();
+  }, [error]);
+
+  return (
+    <div>
+      <Style.Label>
+        <Style.Title>만료일</Style.Title>
+      </Style.Label>
+      <InputWrapper width={137}>
+        <Input
+          ref={(element) => {
+            if (element === null) return;
+            inputRefs.current[0] = element;
+          }}
+          autoFocus={true}
+          type="number"
+          value={expirationDate.month}
+          data-input-target={'month'}
+          width={'30'}
+          required
+          inputMode="numeric"
+          placeholder="MM"
+          data-index="0"
+          maxLength={2}
+          onChange={handleChangeInput}
+          onKeyDown={handleBackspacePress}
         />
-      </div>
-    );
-  }
-);
+        &nbsp;/&nbsp;
+        <Input
+          ref={(element) => {
+            if (element === null) return;
+            inputRefs.current[1] = element;
+          }}
+          type="number"
+          value={expirationDate.year}
+          data-input-target={'year'}
+          width={'30'}
+          required
+          inputMode="numeric"
+          placeholder="YY"
+          data-index="1"
+          maxLength={2}
+          onChange={handleChangeInput}
+          onKeyDown={handleBackspacePress}
+        />
+      </InputWrapper>
+      <ErrorMessage>{error ?? ''}</ErrorMessage>
+    </div>
+  );
+};
 
 const Style = {
   Label: styled.div`

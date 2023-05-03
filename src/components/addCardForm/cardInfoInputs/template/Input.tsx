@@ -14,9 +14,9 @@ export const Input = styled.input`
   padding: 0;
   text-align: center;
 
-  :focus {
+  /* :focus {
     outline: none;
-  }
+  } */
 
   ::placeholder {
     color: #c6c6c6;
@@ -30,7 +30,7 @@ export const Input = styled.input`
 
 export const ErrorMessage = styled.div`
   width: 318px;
-  height: 25px;
+  height: max-content;
 
   display: flex;
   align-items: center;

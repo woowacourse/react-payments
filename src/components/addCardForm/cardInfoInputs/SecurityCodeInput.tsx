@@ -1,19 +1,21 @@
-import { forwardRef, useEffect } from 'react';
 import { InputWrapper } from './template/InputWrapper';
 import { ErrorMessage, Input } from './template/Input';
 import styled from 'styled-components';
-import { useError } from '../../../hooks/useError';
-import { MoveInput } from '../MoveInput';
+import { useErrorMessage } from '../../../hooks/useError';
+import {
+  useCardInfoActionContext,
+  useCardInfoValueContext,
+} from '../../../hooks/cardInfoContext';
+import { useEffect } from 'react';
 
 interface Props {
-  securityCode: string;
-  setSecurityCode: React.Dispatch<React.SetStateAction<string>>;
   viewNextInput: () => void;
-  viewPreviousInput: () => void;
 }
 
-const securityCodeInputValidator = (input: string | string[]) => {
+export const securityCodeInputValidator = (input: string | string[]) => {
   if (typeof input === 'object') return;
+
+  if (input === '') throw new Error('');
 
   if (!/^[0-9]*$/.test(input))
     throw new Error('보안 코드는 숫자만 입력가능합니다.');
@@ -22,61 +24,44 @@ const securityCodeInputValidator = (input: string | string[]) => {
     throw new Error('보안 코드 세자리를 모두 입력해주세요.');
 };
 
-export const SecurityCodeInput = forwardRef<HTMLInputElement[], Props>(
-  function SecurityCodeInput(
-    { securityCode, setSecurityCode, viewNextInput, viewPreviousInput },
-    refs
-  ) {
-    const error = useError(securityCode, securityCodeInputValidator);
+export const SecurityCodeInput = ({ viewNextInput }: Props) => {
+  const { securityCode } = useCardInfoValueContext();
+  const { setSecurityCode } = useCardInfoActionContext();
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      setSecurityCode(e.target.value);
-    };
+  const error = useErrorMessage(securityCode, securityCodeInputValidator);
 
-    const handlePressBackspace = (e: React.KeyboardEvent<HTMLInputElement>) => {
-      if (!(e.target instanceof HTMLInputElement)) return;
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSecurityCode(e.target.value);
+  };
 
-      if (e.key === 'Backspace' && e.target.value === '') viewPreviousInput();
-    };
+  useEffect(() => {
+    if (error === null) viewNextInput();
+  }, [error]);
 
-    return (
-      <div>
-        <Style.Label>
-          <Style.Title>보안 코드(CVC/CVV)</Style.Title>
-        </Style.Label>
-        <InputWrapper width={84}>
-          <Input
-            ref={(element) => {
-              if (!(element instanceof HTMLInputElement)) return;
-              if (typeof refs !== 'object') return;
-              if (refs?.current) refs.current[0] = element;
-            }}
-            autoFocus={true}
-            value={securityCode}
-            width={'84'}
-            minLength={3}
-            maxLength={3}
-            placeholder="•••"
-            onChange={handleInputChange}
-            onKeyDown={handlePressBackspace}
-            inputMode="numeric"
-            type="password"
-            autoComplete="off"
-            required
-          />
-        </InputWrapper>
-        <ErrorMessage>{error ?? ''}</ErrorMessage>
-        <MoveInput
-          isLeftBtnShowed={true}
-          isRightBtnShowed={error === null}
-          viewNextInput={viewNextInput}
-          viewPreviousInput={viewPreviousInput}
-          progress={'4/5'}
+  return (
+    <div>
+      <Style.Label>
+        <Style.Title>보안 코드(CVC/CVV)</Style.Title>
+      </Style.Label>
+      <InputWrapper width={84}>
+        <Input
+          autoFocus={true}
+          value={securityCode}
+          width={'84'}
+          minLength={3}
+          maxLength={3}
+          placeholder="•••"
+          onChange={handleInputChange}
+          inputMode="numeric"
+          type="password"
+          autoComplete="off"
+          required
         />
-      </div>
-    );
-  }
-);
+      </InputWrapper>
+      <ErrorMessage>{error ?? ''}</ErrorMessage>
+    </div>
+  );
+};
 
 const Style = {
   Label: styled.div`

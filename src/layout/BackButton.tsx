@@ -3,15 +3,17 @@ import styled from 'styled-components';
 
 interface Props {
   path: string;
+  callback?: () => void;
 }
 
-export const BackButton = ({ path }: Props) => {
+export const BackButton = ({ path, callback }: Props) => {
   const navigate = useNavigate();
 
   return (
     <Style.Wrapper
       onClick={() => {
         navigate(path);
+        if (callback) callback();
       }}
     >
       <svg

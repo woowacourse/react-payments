@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
 import type { Meta } from '@storybook/react';
 import { ExpirationDateInput } from '../../components/addCardForm/cardInfoInputs/ExpirationDateInput';
+import { CardInfoProvider } from '../../components/providers/CardInfoProvider';
 
 const meta = {
   title: 'Example/Input',
@@ -11,18 +11,9 @@ const meta = {
 export default meta;
 
 export const ExpirationDate = () => {
-  const [expirationDate, setExpirationDate] = useState({
-    month: '',
-    year: '',
-  });
-
   return (
-    <ExpirationDateInput
-      expirationDate={expirationDate}
-      setExpirationDate={setExpirationDate}
-      focusNextExpirationDateInput={(index: number) => {}}
-      viewNextInput={() => {}}
-      viewPreviousInput={() => {}}
-    />
+    <CardInfoProvider>
+      <ExpirationDateInput viewNextInput={() => {}} />
+    </CardInfoProvider>
   );
 };
