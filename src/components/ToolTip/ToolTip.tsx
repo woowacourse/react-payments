@@ -1,16 +1,16 @@
 import useModal from '../../hooks/useModal';
 import styled from 'styled-components';
 
-type TooTipProps = {
+type ToolTipProps = {
   message: string;
 };
 
-const TooTip = ({ children, message }: React.PropsWithChildren<TooTipProps>) => {
-  const { isModalOpen: isToolTipOpen, openModal: openToolTip, closeModal: closeTooTip } = useModal(false);
+const ToolTip = ({ children, message }: React.PropsWithChildren<ToolTipProps>) => {
+  const { isModalOpen: isToolTipOpen, openModal: openToolTip, closeModal: closeToolTip } = useModal(false);
 
   return (
     <>
-      <ToolTipBox onMouseOver={openToolTip} onMouseLeave={closeTooTip}>
+      <ToolTipBox onMouseOver={openToolTip} onMouseLeave={closeToolTip}>
         {children}
       </ToolTipBox>
       {isToolTipOpen && <Styled.ToolTipMessage>{message}</Styled.ToolTipMessage>}
@@ -18,7 +18,7 @@ const TooTip = ({ children, message }: React.PropsWithChildren<TooTipProps>) => 
   );
 };
 
-export default TooTip;
+export default ToolTip;
 
 const ToolTipBox = styled.div`
   cursor: pointer;

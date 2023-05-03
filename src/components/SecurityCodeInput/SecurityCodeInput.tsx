@@ -1,7 +1,7 @@
 import Label from '../Label';
 import { Input, InputBox } from '../Input';
 import styled from 'styled-components';
-import TooTip from '../ToolTip';
+import ToolTip from '../ToolTip';
 
 const SecurityCodeInput = () => {
   return (
@@ -19,9 +19,9 @@ const SecurityCodeInput = () => {
             autoComplete="off"
           />
         </Styled.Wrapper>
-        <TooTip message="카드 뒷면의 번호 3자리를 입력해주세요.">
-          <Styled.QuestionTooTip>?</Styled.QuestionTooTip>
-        </TooTip>
+        <ToolTip message="카드 뒷면의 번호 3자리를 입력해주세요.">
+          <Styled.QuestionToolTip>?</Styled.QuestionToolTip>
+        </ToolTip>
       </Styled.Flex>
     </>
   );
@@ -45,7 +45,7 @@ const Flex = styled.div`
   gap: 10px;
 `;
 
-const QuestionTooTip = styled.div`
+const QuestionToolTip = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,5 +59,5 @@ const QuestionTooTip = styled.div`
 const Styled = {
   Wrapper,
   Flex,
-  QuestionTooTip,
+  QuestionToolTip,
 };
