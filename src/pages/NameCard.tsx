@@ -16,8 +16,7 @@ const NameCard = () => {
   };
 
   const handleButtonClicked = (routerPath: string) => () => {
-    cards[cards.length - 1].name = name;
-    console.log(cards[cards.length - 1].name);
+    targetCard.name = name;
     setLocalStorage("card", cards);
     navigate(routerPath);
   };

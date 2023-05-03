@@ -3,7 +3,7 @@ export interface CardType {
   expiredDate: string;
   ownerName: string;
   cvc: string;
-  password: string[];
+  password: string;
   cardCompany: string;
   name: string;
 }

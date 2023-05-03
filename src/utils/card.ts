@@ -12,7 +12,7 @@ export const getEmptyCard = (): CardType => ({
   expiredDate: "",
   ownerName: "",
   cvc: "",
-  password: ["", ""],
+  password: "",
   cardCompany: CARD_COMPANY_NOT_SELECTED_STRING,
   name: "",
 });

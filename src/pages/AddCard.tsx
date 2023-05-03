@@ -15,7 +15,7 @@ import { useCard } from "../hooks";
 
 const AddCard = () => {
   const navigate = useNavigate();
-  const [card, setNewCard, setPassword] = useCard();
+  const [card, setNewCard] = useCard();
   const { toggleModal } = useContext(ModalDispatchContext);
 
   useEffect(() => {
@@ -41,7 +41,6 @@ const AddCard = () => {
       <CardInputForm
         card={card}
         setNewCard={setNewCard}
-        setPassword={setPassword}
         onSubmit={handleFormSubmited}
       />
       <BottomSheet>

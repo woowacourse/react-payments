@@ -14,7 +14,7 @@ const CARD_INPUT_LENGTH: Record<string, number> = {
   expiredDate: 7,
   ownerName: 12,
   cvc: 3,
-  password1: 1,
+  password: 2,
 } as const;
 
 const SEPERATED_CARD_NUMBER_LENGTH: Record<string, number> = {

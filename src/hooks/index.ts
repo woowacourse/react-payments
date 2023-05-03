@@ -5,13 +5,13 @@ import { getEmptyCard } from "../utils";
 export const useCard = () => {
   const [card, setCard] = useState<CardType>(getEmptyCard());
 
-  const setNewCard = (key: keyof Omit<CardType, "password">, value: string) => {
+  const setNewCard = (key: keyof CardType, value: string) => {
     setCard({ ...card, [key]: value });
   };
 
-  const setPassword = (value: string[]) => {
-    setCard({ ...card, password: value });
-  };
+  // const setPassword = (value: string[]) => {
+  //   setCard({ ...card, password: value });
+  // };
 
-  return [card, setNewCard, setPassword] as const;
+  return [card, setNewCard] as const;
 };

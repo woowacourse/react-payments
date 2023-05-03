@@ -15,7 +15,7 @@ const Template: StoryFn<CardType> = (props) => (
     expiredDate="12 / 24"
     name="카드"
     cvc="123"
-    password={["1", "2"]}
+    password="12"
   />
 );
 

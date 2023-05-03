@@ -8,7 +8,9 @@ export interface ButtonType
 
 const Button = (props: ButtonType) => {
   return (
-    <ButtonWrapper $isShown={props.isShown}>{props.children}</ButtonWrapper>
+    <ButtonWrapper {...props} $isShown={props.isShown}>
+      {props.children}
+    </ButtonWrapper>
   );
 };
 
