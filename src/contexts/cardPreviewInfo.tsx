@@ -1,6 +1,5 @@
-import { createContext } from 'react';
+import { createContext, useState } from 'react';
 
-import { useCompany } from '../hooks/useCompany';
 import { useInput } from '../hooks/useInput';
 import { cardRegisterValidator } from '../validation/cardRegister';
 
@@ -36,7 +35,12 @@ export const CardPreviewInfoContext = createContext({
     first: { ...optionalInput },
   },
   company: {
-    clicked: {} as ReturnType<typeof useCompany>,
+    clicked: {
+      value: '',
+      handleClick: (e: React.MouseEvent<HTMLImageElement>) => {
+        e;
+      },
+    },
   },
 });
 
@@ -45,6 +49,14 @@ export function CardPreviewInfoProvider({
 }: {
   children: React.ReactNode;
 }) {
+  const [company, setCompany] = useState('');
+
+  function handleClick(e: React.MouseEvent<HTMLImageElement>) {
+    if (e.target instanceof HTMLImageElement) {
+      setCompany(e.target.id);
+    }
+  }
+
   const previewInfo = {
     cardNumber: {
       first: {
@@ -81,7 +93,7 @@ export function CardPreviewInfoProvider({
       },
     },
     company: {
-      clicked: { ...useCompany() },
+      clicked: { value: company, handleClick: handleClick },
     },
   };
 
