@@ -38,20 +38,22 @@ export function AddCardNicknamePage() {
         }}
         bank={state.bank}
       />
-      <InputBox>
-        <InputGroup asChild>
-          <NicknameInutGroup />
-          <Input
-            name="nickname"
-            maxLength={15}
-            placeholder="카드의 별명을 입력해주세요 (선택)"
-            ref={nicknameInput}
-            asChild>
-            <NicknameInput />
-          </Input>
-        </InputGroup>
-      </InputBox>
-      <CompleteButton onClick={completeInputNickname}>확인</CompleteButton>
+      <Form>
+        <InputBox>
+          <InputGroup asChild>
+            <NicknameInutGroup />
+            <Input
+              name="nickname"
+              maxLength={15}
+              placeholder="카드의 별명을 입력해주세요 (선택)"
+              ref={nicknameInput}
+              asChild>
+              <NicknameInput />
+            </Input>
+          </InputGroup>
+        </InputBox>
+        <CompleteButton onClick={completeInputNickname}>확인</CompleteButton>
+      </Form>
     </Container>
   );
 }
@@ -69,6 +71,12 @@ const Title = styled.h1`
   margin-bottom: 4rem;
 
   ${({ theme }) => theme.fonts.title}
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const CompleteButton = styled.button`
