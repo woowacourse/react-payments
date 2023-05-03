@@ -4,6 +4,7 @@ import { InputContainer, InputLabel, Input } from "../common";
 import { isNumeric } from "../../utils/validate";
 import { useInputFocusChain } from "../../hook/useInputFocusChain";
 import { ERROR_MESSAGE, INPUT_FULL_LENGTH } from "../../constant/cardInput";
+import { useError } from "../../hook/useError";
 
 interface NumbersInputProps {
   setNumbers: (index: number, numbers: string) => void;
@@ -20,7 +21,7 @@ export const NumbersInput = ({
   validateNumbersInput,
 }: NumbersInputProps) => {
   const [inputValues, setInputValues] = useState(["", "", "", ""]);
-  const [isValid, setIsValid] = useState(true);
+  const { isError, setErrorState, removeError } = useError();
 
   const { moveFocusToNext, inputRefs } = useInputFocusChain(
     4,
@@ -59,32 +60,15 @@ export const NumbersInput = ({
 
     if (isEveryInputActivated) {
       const validity = validateNumbersInput(inputValues);
-      setIsValid(validity);
+      setErrorState(!validity);
     }
-  };
-
-  const eraseErrorMessage = () => {
-    setIsValid(true);
   };
 
   return (
     <InputContainer>
       <InputLabel text="카드 번호" name="numbers" />
       <Row>
-        <Input
-          error={{
-            isValid: isValid,
-            errorMessage: ERROR_MESSAGE.CARD_NUMBERS,
-          }}
-          {...numbersInputInfo}
-          type="text"
-          label="number1"
-          handleInput={handleInput(0)}
-          handleOutFocus={validate}
-          handleFocus={eraseErrorMessage}
-          ref={inputRefs[0]}
-        />
-        {[2, 3, 4].map((inputNumber) => (
+        {[1, 2, 3, 4].map((inputNumber) => (
           <Input
             key={inputNumber}
             {...numbersInputInfo}
@@ -92,8 +76,12 @@ export const NumbersInput = ({
             label={`number${inputNumber}`}
             handleInput={handleInput(inputNumber - 1)}
             handleOutFocus={validate}
-            handleFocus={eraseErrorMessage}
+            handleFocus={removeError}
             ref={inputRefs[inputNumber - 1]}
+            error={{
+              isError: isError,
+              errorMessage: inputNumber === 1 ? ERROR_MESSAGE.CARD_NUMBERS : "",
+            }}
           />
         ))}
       </Row>

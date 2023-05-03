@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { useState } from "react";
 import { InputContainer, Input, InputLabel } from "../common";
 import { isNumeric } from "../../utils/validate";
 import { ERROR_MESSAGE, INPUT_FULL_LENGTH } from "../../constant/cardInput";
+import { useError } from "../../hook/useError";
 
 const CVCInfo = {
   label: "cvc",
@@ -17,7 +17,7 @@ interface CVCInputProps {
 }
 
 export const CVCInput = ({ validateCVCInput, setCVC }: CVCInputProps) => {
-  const [isValid, setIsValid] = useState(true);
+  const { isError, setErrorState, removeError } = useError();
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -38,11 +38,7 @@ export const CVCInput = ({ validateCVCInput, setCVC }: CVCInputProps) => {
 
   const validate = (e: React.FocusEvent<HTMLInputElement>) => {
     const validity = validateCVCInput(Number(e.target.value));
-    setIsValid(validity);
-  };
-
-  const eraseErrorMessage = () => {
-    setIsValid(true);
+    setErrorState(!validity);
   };
 
   return (
@@ -53,9 +49,9 @@ export const CVCInput = ({ validateCVCInput, setCVC }: CVCInputProps) => {
           {...CVCInfo}
           handleInput={handleInput}
           handleOutFocus={validate}
-          handleFocus={eraseErrorMessage}
+          handleFocus={removeError}
           error={{
-            isValid: isValid,
+            isError: isError,
             errorMessage: ERROR_MESSAGE.CVC,
           }}
         />
