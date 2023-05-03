@@ -1,4 +1,5 @@
 import type { CompanyName } from '../constants/company';
+
 interface CardNumber {
   first: string;
   second: string;
@@ -15,6 +16,7 @@ interface CardPassword {
   first: string;
   second: string;
 }
+
 export interface CardInfo {
   company?: CompanyName;
   number: CardNumber;
@@ -31,3 +33,5 @@ export interface CardData {
   expiredDate: ExpiredDate;
   owner?: string;
 }
+
+export type CardInfoKey = keyof CardInfo;

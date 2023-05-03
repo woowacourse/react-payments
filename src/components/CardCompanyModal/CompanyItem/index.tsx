@@ -12,14 +12,14 @@ interface Props {
 }
 
 const CompanyItem = ({ name, onClose }: Props) => {
-  const { setCompany } = useCardFormAction();
+  const handleCardInfo = useCardFormAction();
 
   const handleItemClick: MouseEventHandler<HTMLLIElement> = (event) => {
     const { name } = event.currentTarget.dataset;
 
     if (!name || !isCompanyName(name)) return;
 
-    setCompany(name);
+    handleCardInfo(name, 'company');
     onClose();
   };
 

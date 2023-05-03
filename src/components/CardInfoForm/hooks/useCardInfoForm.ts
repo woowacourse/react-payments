@@ -1,11 +1,11 @@
 import type { ChangeEventHandler, RefObject } from 'react';
 
-import { isNotAlphabet, isNotNumber } from '../../../utils/validation';
 import useCardFormAction from '../../../hooks/useCardFormAction';
-import { InputAction } from '../../../contexts/CardFormContext';
+import { isNotAlphabet, isNotNumber } from '../../../utils/validation';
+import { isCardInfoKey } from '../../../contexts/CardFormContext';
 
 const useCardInfoForm = (inputRefs: RefObject<HTMLInputElement>[]) => {
-  const { inputAction } = useCardFormAction();
+  const handleCardInfo = useCardFormAction();
 
   const autoFocusNextInput = (target: HTMLInputElement) => {
     const { value, maxLength, tabIndex } = target;
@@ -19,30 +19,30 @@ const useCardInfoForm = (inputRefs: RefObject<HTMLInputElement>[]) => {
 
   const handleNumberChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     const {
-      dataset: { setValue },
       value,
+      name,
+      dataset: { property },
     } = event.currentTarget;
 
+    if (!isCardInfoKey(name)) return;
     if (isNotNumber(value)) return;
 
-    const setNumber = inputAction[setValue as keyof InputAction];
-
-    setNumber(value);
+    handleCardInfo(value, name, property);
     autoFocusNextInput(event.currentTarget);
   };
 
   const handleOwnerChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     const {
-      dataset: { setValue },
       value,
+      name,
+      dataset: { property },
     } = event.currentTarget;
 
+    if (!isCardInfoKey(name)) return;
     if (value.length === 1 && value === ' ') return;
     if (isNotAlphabet(value)) return;
 
-    const setOwner = inputAction[setValue as keyof InputAction];
-
-    setOwner(value.toUpperCase());
+    handleCardInfo(value.toUpperCase(), name, property);
     autoFocusNextInput(event.currentTarget);
   };
 

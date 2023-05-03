@@ -14,6 +14,7 @@ const ExpiredDateField = ({
     <TextField label="만료일" size="medium">
       <Input
         type="text"
+        name="expiredDate"
         inputMode="numeric"
         minLength={2}
         maxLength={2}
@@ -24,11 +25,12 @@ const ExpiredDateField = ({
         onChange={handleNumberChange}
         ref={inputRefs[4]}
         align="center"
-        data-set-value="setExpiredMonth"
+        data-property="month"
       />
       <span>/</span>
       <Input
         type="text"
+        name="expiredDate"
         inputMode="numeric"
         minLength={2}
         maxLength={2}
@@ -39,7 +41,7 @@ const ExpiredDateField = ({
         onChange={handleNumberChange}
         ref={inputRefs[5]}
         align="center"
-        data-set-value="setExpiredYear"
+        data-property="year"
       />
     </TextField>
   );

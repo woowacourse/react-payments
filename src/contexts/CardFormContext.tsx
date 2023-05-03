@@ -1,14 +1,13 @@
 import { ReactNode, createContext, useState } from 'react';
 
-import type { CardInfo } from '../types/card';
-import { CompanyName } from '../constants/company';
+import type { CardInfo, CardInfoKey } from '../types/card';
 
 const initialCardInfo: CardInfo = {
   number: {
     first: '',
     second: '',
     third: '',
-    fourth: ''
+    fourth: '',
   },
   expiredDate: {
     month: '',
@@ -18,30 +17,19 @@ const initialCardInfo: CardInfo = {
   cvc: '',
   password: {
     first: '',
-    second: ''
-  }
+    second: '',
+  },
 };
-
-export interface InputAction {
-  setFirstNumber: (number: string) => void;
-  setSecondNumber: (number: string) => void;
-  setThirdNumber: (number: string) => void;
-  setFourthNumber: (number: string) => void;
-  setExpiredMonth: (month: string) => void;
-  setExpiredYear: (year: string) => void;
-  setOwner: (owner: string) => void;
-  setCvc: (cvc: string) => void;
-  setFirstPassword: (password: string) => void;
-  setSecondPassword: (password: string) => void;
-}
-
-interface CardFormAction {
-  setCompany: (company: CompanyName) => void;
-  inputAction: InputAction;
-}
 
 export const CardFormValueContext = createContext<CardInfo | null>(null);
 export const CardFormActionContext = createContext<CardFormAction | null>(null);
+
+export const isCardInfoKey = (name: string): name is CardInfoKey =>
+  name in initialCardInfo;
+
+interface CardFormAction {
+  (value: string, target: CardInfoKey, property?: string): void;
+}
 
 interface Props {
   children?: ReactNode;
@@ -50,77 +38,24 @@ interface Props {
 const CardFormProvider = ({ children }: Props) => {
   const [cardInfo, setCardInfo] = useState<CardInfo>(initialCardInfo);
 
-  const setCompany = (company: CompanyName) => {
-    setCardInfo((prev) => ({ ...prev, company }));
-  };
+  const handleCardInfo = (
+    value: string,
+    target: CardInfoKey,
+    property?: string,
+  ) => {
+    setCardInfo((prev) => {
+      const targetValue = prev[target];
 
-  const inputAction: InputAction = {
-    setFirstNumber: (number: string) => {
-      setCardInfo((prev) => ({
-        ...prev,
-        number: { ...prev.number, first: number },
-      }));
-    },
-    setSecondNumber: (number: string) => {
-      setCardInfo((prev) => ({
-        ...prev,
-        number: { ...prev.number, second: number },
-      }));
-    },
-    setThirdNumber: (number: string) => {
-      setCardInfo((prev) => ({
-        ...prev,
-        number: { ...prev.number, third: number },
-      }));
-    },
-    setFourthNumber: (number: string) => {
-      setCardInfo((prev) => ({
-        ...prev,
-        number: { ...prev.number, fourth: number },
-      }));
-    },
-    setExpiredMonth: (month: string) => {
-      setCardInfo((prev) => ({
-        ...prev,
-        expiredDate: { ...prev.expiredDate, month },
-      }));
-    },
-    setExpiredYear: (year: string) => {
-      setCardInfo((prev) => ({
-        ...prev,
-        expiredDate: { ...prev.expiredDate, year },
-      }));
-    },
-    setOwner: (owner: string) => {
-      setCardInfo((prev) => ({
-        ...prev,
-        owner,
-      }));
-    },
-    setCvc: (cvc: string) => {
-      setCardInfo((prev) => ({
-        ...prev,
-        cvc,
-      }));
-    },
-    setFirstPassword: (password: string) => {
-      setCardInfo((prev) => ({
-        ...prev,
-        password: { ...prev.password, first: password },
-      }));
-    },
-    setSecondPassword: (password: string) => {
-      setCardInfo((prev) => ({
-        ...prev,
-        password: { ...prev.password, second: password },
-      }));
-    },
-  };
+      if (typeof targetValue === 'object' && property) {
+        return { ...prev, [target]: { ...targetValue, [property]: value } };
+      }
 
-  const action = { setCompany, inputAction };
+      return { ...prev, [target]: value };
+    });
+  };
 
   return (
-    <CardFormActionContext.Provider value={action}>
+    <CardFormActionContext.Provider value={handleCardInfo}>
       <CardFormValueContext.Provider value={cardInfo}>
         {children}
       </CardFormValueContext.Provider>

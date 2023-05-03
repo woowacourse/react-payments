@@ -1,10 +1,13 @@
 import Input from '../common/Input';
 import TextField from '../common/TextField';
-import type {  CardFormNumberFieldProps } from './types';
+import type { CardFormNumberFieldProps } from './types';
 
 import useCardFormValue from '../../hooks/useCardFormValue';
 
-const CvcField = ({ handleNumberChange, inputRefs }: CardFormNumberFieldProps) => {
+const CvcField = ({
+  handleNumberChange,
+  inputRefs,
+}: CardFormNumberFieldProps) => {
   const { cvc } = useCardFormValue();
 
   return (
@@ -15,6 +18,7 @@ const CvcField = ({ handleNumberChange, inputRefs }: CardFormNumberFieldProps) =
     >
       <Input
         type="password"
+        name="cvc"
         inputMode="numeric"
         minLength={3}
         maxLength={3}
@@ -24,7 +28,6 @@ const CvcField = ({ handleNumberChange, inputRefs }: CardFormNumberFieldProps) =
         onChange={handleNumberChange}
         ref={inputRefs[7]}
         align="center"
-        data-set-value="setCvc"
       />
     </TextField>
   );

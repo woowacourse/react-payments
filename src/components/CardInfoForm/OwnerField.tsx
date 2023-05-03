@@ -18,13 +18,13 @@ const OwnerField = ({
     >
       <Input
         type="text"
+        name="owner"
         maxLength={20}
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
         tabIndex={7}
         value={owner}
         onChange={handleOwnerChange}
         ref={inputRefs[6]}
-        data-set-value="setOwner"
       />
     </TextField>
   );
