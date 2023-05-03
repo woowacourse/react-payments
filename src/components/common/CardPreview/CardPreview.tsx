@@ -1,4 +1,5 @@
 import styles from './CardPreview.module.css';
+import { getHiddenCardNumber } from '../../../domains/getHiddenCardNumber';
 
 type CardPreviewProps = {
   cardIssuer: string;
@@ -17,12 +18,14 @@ const CardPreview = ({
   cardExpirationDate,
   image,
 }: CardPreviewProps) => {
+  const hiddenCardNumber = getHiddenCardNumber(cardNumber);
+
   return (
     <div className={styles.container}>
       <div className={styles.card} style={{ background: `url(${image})` }}>
         <span className={styles['issuer-name']}>{cardIssuer}</span>
         <div className={styles.chip} />
-        <span className={styles['card-number']}>{cardNumber}</span>
+        <span className={styles['card-number']}>{hiddenCardNumber}</span>
         <div className={styles['name-date-container']}>
           <span className={styles['owner-name']} title={cardOwnerName}>
             {cardOwnerName}
