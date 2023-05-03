@@ -4,7 +4,11 @@ import FormLabel from '../../@common/FormLabel';
 import Input from '../../@common/input/Input';
 import ErrorSpan from '../../@common/ErrorSpan';
 import { CreditCardContext } from '../../../contexts/CreditCardContext';
-import { ONLY_NUMBER_REGEXP } from '../../../utils/regexp';
+import {
+  ONLY_NUMBER_REGEXP,
+  VALID_EXPIRATION_MONTH_REGEX,
+  VALID_EXPIRATION_YEAR_REGEX,
+} from '../../../utils/regexp';
 import InputWrapper from '../../@common/InputWrapper';
 import CreditCardContextType from '../../../@types/creditCardContextType';
 import useAutoFocus from '../../../hooks/useAutoFocus';
@@ -53,7 +57,7 @@ function ExpirationDate() {
       });
     }
 
-    if (!/^(0[1-9]|1[1-2])$/.test(creditCard.expirationDate[0])) {
+    if (!VALID_EXPIRATION_MONTH_REGEX.test(creditCard.expirationDate[0])) {
       setValidStatus({
         isValid: false,
         message: '월은 01 ~ 12로 입력해주세요.',
@@ -62,7 +66,7 @@ function ExpirationDate() {
       return;
     }
 
-    if (!/^\d{2}$/.test(creditCard.expirationDate[1])) {
+    if (!VALID_EXPIRATION_YEAR_REGEX.test(creditCard.expirationDate[1])) {
       setValidStatus({
         isValid: false,
         message: '연도는 두 자리 숫자로 입력해주세요.',
