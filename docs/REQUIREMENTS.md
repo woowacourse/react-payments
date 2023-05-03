@@ -100,6 +100,14 @@
 ---
 
 - [x] refactor: 디자인 다듬기(버튼)
-- [ ] refactor: 상수화
+- [x] refactor: 상수화
 - [x] refactor: 지난 코드 리뷰 리마인드
-- [ ] docs: 리뷰 작성
+- [x] docs: 리뷰 작성
+
+---
+
+## step3 기능 목록
+
+- [ ] feat: 새롭게 만든 모달 라이브러리 import 하기
+- [ ] feat: 불러온 모달 교체하기
+- [ ] feat: 카드 등록 스피너 추가하기
