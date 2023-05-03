@@ -6,14 +6,17 @@ export default {
   component: Card,
 };
 
-export function Default() {
-  return <Card cardNumber={['1000', '1000', '1000', '1000']} ownerName="SANGWON" expireDate={['09', '17']} />;
+export function NoValue() {
+  return <Card cardCompany="" cardNumber={[]} ownerName="" expireDate={[]} />;
 }
 
-export function NameLee() {
-  return <Card cardNumber={['9123', '8274', '9382', '0938']} ownerName="LEE" expireDate={['12', '16']} />;
-}
-
-export function NotHaveInfo() {
-  return <Card expireDate={[]} cardNumber={[]} ownerName={''} />;
+export function FullValue() {
+  return (
+    <Card
+      cardCompany="쵸파은행"
+      cardNumber={['1999', '1216', '1999', '1216']}
+      ownerName="CHOPPER"
+      expireDate={['12', '25']}
+    />
+  );
 }

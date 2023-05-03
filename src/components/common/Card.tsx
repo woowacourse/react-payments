@@ -1,12 +1,17 @@
 import type { CardType } from '../../types';
 import styled from 'styled-components';
 
-interface Props extends Pick<CardType, 'cardNumber' | 'expireDate' | 'ownerName'> {}
+import { CARD_COMPANY_COLOR_MAP } from '../../constants';
 
-const Card = ({ cardNumber, ownerName, expireDate }: Props) => {
+interface Props extends Pick<CardType, 'cardCompany' | 'cardNumber' | 'expireDate' | 'ownerName'> {
+  onClick?: () => void;
+}
+
+const Card = ({ cardCompany, cardNumber, ownerName, expireDate, onClick }: Props) => {
   return (
-    <CardWrapper>
-      <CardChip></CardChip>
+    <CardWrapper onClick={onClick} cardCompany={cardCompany}>
+      <CardCompany>{cardCompany}</CardCompany>
+      <CardChip />
       <CardNumberArea>
         {cardNumber.map((number, index) => (
           <CardNumber>{number.length ? (index >= 2 ? '∙'.repeat(number.length) : number) : null}</CardNumber>
@@ -22,7 +27,7 @@ const Card = ({ cardNumber, ownerName, expireDate }: Props) => {
 
 export default Card;
 
-const CardWrapper = styled.div`
+const CardWrapper = styled.div<{ cardCompany: string }>`
   position: relative;
 
   display: flex;
@@ -30,21 +35,33 @@ const CardWrapper = styled.div`
   justify-content: flex-end;
 
   width: 214px;
-  height: 134px;
-
+  min-height: 134px;
   border-radius: 5px;
   padding: 12px 18px;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.25);
 
-  background: #333333;
+  background: ${({ cardCompany }) => CARD_COMPANY_COLOR_MAP[cardCompany]?.background || '#333333'};
+  color: ${({ cardCompany }) => CARD_COMPANY_COLOR_MAP[cardCompany]?.color || 'white'};
 
-  color: white;
+  transition: transform 0.2s;
+  &:hover {
+    transform: perspective(260px) rotateX(24deg);
+  }
+`;
+
+const CardCompany = styled.p`
+  position: absolute;
+  top: 14px;
+  left: 16px;
+
+  font-weight: 500;
+  font-size: 12px;
 `;
 
 const CardChip = styled.div`
   position: absolute;
+  top: 48px;
   left: 16px;
-  top: 42px;
   background: #cbba64;
   border-radius: 4px;
   width: 40px;
@@ -69,7 +86,6 @@ const CardInfoArea = styled.div`
   justify-content: space-between;
 
   width: 100%;
-
   margin-top: 10px;
 
   font-size: 11px;

@@ -5,8 +5,12 @@ const GlobalStyle = createGlobalStyle`
    v2.0 | 20110126
    License: none (public domain)
   */
+  html, body, #root {
+    width: 100%;
+    height: 100%;
+  }
 
-  *{
+  * {
     box-sizing: border-box;
   }
 

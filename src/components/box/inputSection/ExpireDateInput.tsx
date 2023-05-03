@@ -1,25 +1,20 @@
-import type { CardType } from '../../../types';
-
 import InputSectionTemplate from '../../template/InputSectionTemplate';
 import InputBox from '../../common/InputBox';
 import Input from '../../common/Input';
 
+import { useCardForm } from '../../../context/CardFormContext';
+import { validExpireDate } from '../../../domain/validator';
+
 interface Props {
-  expireDate: CardType['expireDate'];
-  setExpireDateIndex: (index: number) => (value: CardType['expireDate'][number]) => void;
   insert: (index: number) => (element: HTMLInputElement | null) => void;
   focus: (index: number) => (go: number) => void;
 }
 
-const ExpireDateInput = ({ expireDate, setExpireDateIndex, insert, focus }: Props) => {
-  const validExpireDate = (expireDate: CardType['expireDate']) => {
-    const [month, year] = expireDate.map(Number);
-    const currentYear = new Date().getFullYear() - 2000;
+const ExpireDateInput = ({ insert, focus }: Props) => {
+  const [{ expireDate }, dispatch] = useCardForm();
 
-    console.log(year, currentYear);
-    if (!(month >= 1 && month <= 12)) return '1월에서 12월 사이로 입력 해주세요';
-    if (!(year >= currentYear && year <= currentYear + 5)) return '유효기간은 현재부터 최대 5년입니다.';
-    return '';
+  const setExpireDateIndex = (index: number) => (value: string) => {
+    dispatch({ type: 'SET_LIST_VALUE', key: 'expireDate', index, value });
   };
 
   return (

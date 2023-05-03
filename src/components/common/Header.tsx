@@ -27,23 +27,30 @@ const Header = ({ title, onClickBack }: Props) => {
 export default Header;
 
 const HeaderWrapper = styled.header`
-  height: 72px;
+  position: absolute;
+  top: 0;
+
   display: flex;
-  width: 100%;
   align-items: center;
-  margin-bottom: 12px;
+
+  width: 100%;
+  height: 64px;
+  padding: 0 28px;
 `;
 
 const BackButton = styled.button`
-  font-size: 16px;
-  background-color: transparent;
-  border: none;
   cursor: pointer;
+
+  border: none;
+  background-color: transparent;
+
+  font-size: 16px;
 `;
 
 const Title = styled.h1`
+  margin-left: 16px;
+
   font-size: 16px;
   letter-spacing: -0.085em;
   color: #383838;
-  margin-left: 16px;
 `;

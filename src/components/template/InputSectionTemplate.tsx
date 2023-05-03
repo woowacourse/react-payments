@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 
 interface Props {
@@ -14,7 +13,7 @@ const InputSectionTemplate = ({ children, label, countLength, maxLength, message
     <InputSectionTemplateWrapper>
       <InputLabelWrapper>
         <p>{label}</p>
-        {countLength && maxLength && (
+        {maxLength && (
           <p>
             {countLength} / {maxLength}
           </p>
@@ -33,7 +32,7 @@ const InputSectionTemplateWrapper = styled.div`
   flex-direction: column;
 
   width: 100%;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 `;
 
 const InputLabelWrapper = styled.div`

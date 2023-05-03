@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import styled from 'styled-components';
+import { isNumberValue } from '../../domain/validator';
 
 type TextType = 'string' | 'number';
 type TextAlign = 'left' | 'center';
@@ -16,15 +18,25 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
 
 const Input = (props: Props) => {
   const { textType, setValue, length, required, insert, focus } = props;
+  const [warning, setWarning] = useState(false);
 
-  const onChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-    if (textType === 'number' && isNaN(Number(target.value))) return;
+  const riseWarning = () => {
+    setWarning(true);
+    setTimeout(() => {
+      setWarning(false);
+    }, 400);
+  };
 
-    setValue(target.value);
+  const onChange = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {
+    if (textType === 'number' && !isNumberValue(value)) {
+      riseWarning();
+      return;
+    }
+
+    setValue(value);
 
     if (!focus) return;
-    if (target.value.length === length) focus(1);
-    if (target.value.length === 0) focus(-1);
+    if (value.length === length) focus(1);
   };
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -32,6 +44,7 @@ const Input = (props: Props) => {
     if (!focus) return;
     if (!(target instanceof HTMLInputElement)) return;
 
+    if (target.selectionStart === 0 && key === 'Backspace') focus(-1);
     if (target.selectionStart === 0 && key === 'ArrowLeft') {
       focus(-1);
       e.preventDefault();
@@ -50,23 +63,32 @@ const Input = (props: Props) => {
       minLength={required ? length : 0}
       maxLength={length}
       ref={insert}
+      warning={warning}
     />
   );
 };
 
 export default Input;
 
-const StyledInput = styled.input<Props>`
+interface StyledInputProps extends Props {
+  warning: boolean;
+}
+
+const StyledInput = styled.input<StyledInputProps>`
+  transition: border 0.1s;
+  outline: none;
+
   width: ${({ length }) => length * 16}px;
   max-width: 100%;
-  height: 16px;
+  height: 100%;
   border: none;
+  border-top: solid 3px transparent;
+  border-bottom: solid 3px ${({ warning }) => (warning ? 'red' : 'transparent')};
   background-color: transparent;
 
   text-align: ${({ textAlign }) => textAlign || 'center'};
   font-size: 16px;
   color: #000000;
-  outline: none;
 
   &[type='number']::-webkit-outer-spin-button,
   &[type='number']::-webkit-inner-spin-button {
