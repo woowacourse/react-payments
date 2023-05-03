@@ -1,16 +1,12 @@
-type ButtonProps = {
-  type: 'submit' | 'button' | 'reset';
+import { ButtonHTMLAttributes } from 'react';
+
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   children: string;
   className: string;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 };
 
-const Button = ({ type, children, ...rest }: ButtonProps) => {
-  return (
-    <button type={type} {...rest}>
-      {children}
-    </button>
-  );
+const Button = ({ children, ...rest }: ButtonProps) => {
+  return <button {...rest}>{children}</button>;
 };
 
 export default Button;
