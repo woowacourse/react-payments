@@ -35,6 +35,7 @@ function CardPassword() {
       maxLength={EACH_PASSWORD}
       inputmode="numeric"
       type="password"
+      name="cardPassword"
       customInputStyle={S.PasswordInput}
       placeholder="•"
       ref={(el) => (refs.current[idx] = el as HTMLInputElement)}
@@ -43,7 +44,7 @@ function CardPassword() {
 
   return (
     <S.CardPasswordContainer>
-      <FormLabel>{"카드 비밀번호"}</FormLabel>
+      <FormLabel htmlFor="cardPassword">{"카드 비밀번호"}</FormLabel>
       <S.PasswordInputContainer>
         {inputs}
         <S.DotParagraph>•</S.DotParagraph>
