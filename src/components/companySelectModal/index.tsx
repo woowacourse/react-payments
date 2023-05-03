@@ -24,23 +24,30 @@ export const CompanySelectModal = ({
     closeModal();
   };
 
+  const closeModalWithCompany = () => {
+    setCardInfo((prev) => ({
+      ...prev,
+      color: prev.color || CARD_COMPANIES[0].color,
+      company: prev.company || CARD_COMPANIES[0].name,
+    }));
+
+    closeModal();
+  };
+
   return (
-    <>
-      <BackDrop />
-      <ModalContainer>
-        <IconWrapper>
-          {CARD_COMPANIES.map((company) => (
-            <CompanyIcon
-              key={company.name}
-              company={company}
-              selectCompany={selectCompany}
-            />
-          ))}
-        </IconWrapper>
-      </ModalContainer>
-    </>
+    <Modal closeModal={closeModalWithCompany}>
+      <IconWrapper>
+        {CARD_COMPANIES.map((company) => (
+          <CompanyIcon
+            key={company.name}
+            company={company}
+            selectCompany={selectCompany}
+          />
+        ))}
+      </IconWrapper>
+    </Modal>
   );
-`;
+};
 
 const IconWrapper = styled.div`
   width: 80%;
