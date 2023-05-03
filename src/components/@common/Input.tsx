@@ -1,12 +1,13 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, ComponentPropsWithoutRef } from "react";
 import styled, { CSSProp } from "styled-components";
 
-interface Props extends StyleInputProps {
+interface Props extends StyleInputProps, ComponentPropsWithoutRef<"input"> {
   value: string;
-  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
   maxLength?: number;
   placeholder?: string;
   type?: string;
+  name?: string;
   inputmode?: React.HTMLAttributes<HTMLLIElement>["inputMode"];
 }
 
@@ -15,7 +16,7 @@ interface StyleInputProps {
 }
 
 const Input = forwardRef<HTMLInputElement, Props>(function (
-  { value, placeholder, onChange, inputmode, type, ...props }: Props,
+  { value, placeholder, onChange, name, inputmode, type, ...props }: Props,
   ref,
 ) {
   return (
@@ -26,6 +27,7 @@ const Input = forwardRef<HTMLInputElement, Props>(function (
       placeholder={placeholder}
       ref={ref}
       type={type ?? "text"}
+      name={name}
       {...props}
     />
   );
@@ -37,7 +39,7 @@ const InputStyle = styled.input<StyleInputProps>`
   width: 100%;
   height: 45px;
 
-  background-color: #ecebf1;
+  background-color: var(--input-background);
   border-radius: 7px;
   border: none;
 

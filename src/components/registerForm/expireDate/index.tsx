@@ -4,36 +4,52 @@ import ErrorSpan from "src/components/@common/ErrorSpan";
 import FormLabel from "src/components/@common/FormLabel";
 import { Styled as S } from "./ExpireDate.styles";
 import { NUMBERS } from "src/utils/constant";
-import { MMYYValidation } from "src/utils/validation";
+import { expireDateValidation } from "src/utils/validation";
 import useCardInfoInput from "src/hooks/useCardInfoInput";
-import { ONLY_NUMBER_REGEXP } from "src/utils/regexp";
+import useAutoFocus from "src/hooks/useAutoFocus";
+import { getInputRefValueSum } from "src/utils";
 
 function ExpireDate() {
+  const { EACH_MM_YY } = NUMBERS;
+
+  const { refs, nextInputFocus } = useAutoFocus({
+    maxLength: EACH_MM_YY,
+  });
+
   const { value, onChange, error } = useCardInfoInput<string>({
     contextType: "expireDate",
     validation: (value) => {
-      const [MM, YY] = value.split("/");
-      const date = value.replace("/", "");
+      const date = getInputRefValueSum(refs);
 
-      if (!ONLY_NUMBER_REGEXP.test(date)) return;
-      const dateValitation = MMYYValidation(date, [MM, YY]);
-
-      if (dateValitation) {
-        throw new Error("유효한 만료일이 아닙니다.");
-      }
+      expireDateValidation(date);
     },
+    nextInputFocus,
   });
 
   return (
     <S.ExpireDateContainer>
       <FormLabel>{"만료일"}</FormLabel>
-      <Input
-        value={value}
-        onChange={onChange}
-        maxLength={NUMBERS.MAX_EXPIREDATE}
-        customInputStyle={S.ExpireDateInput}
-        placeholder="MM / YY"
-      />
+      <S.InputContainer>
+        <Input
+          value={value[0]}
+          data-index={0}
+          onChange={onChange}
+          maxLength={EACH_MM_YY}
+          customInputStyle={S.ExpireDateInput}
+          placeholder="MM"
+          ref={(el) => (refs.current[0] = el as HTMLInputElement)}
+        />
+        <span>/</span>
+        <Input
+          value={value[1]}
+          data-index={1}
+          onChange={onChange}
+          maxLength={EACH_MM_YY}
+          customInputStyle={S.ExpireDateInput}
+          placeholder="YY"
+          ref={(el) => (refs.current[1] = el as HTMLInputElement)}
+        />
+      </S.InputContainer>
       {error.isError && <ErrorSpan>{error.message}</ErrorSpan>}
     </S.ExpireDateContainer>
   );

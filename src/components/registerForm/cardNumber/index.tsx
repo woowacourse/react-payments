@@ -7,7 +7,7 @@ import { Styled as S } from "./CardNumber.styles";
 import { CARD_NUMBER_TYPES, NUMBERS } from "src/utils/constant";
 import { lengthMatchValidation } from "src/utils/validation";
 import useCardInfoInput from "src/hooks/useCardInfoInput";
-import { CardNumberObj } from "src/interfaces";
+import { CardNumberProps } from "src/interfaces";
 
 function CardNumber() {
   const { EACH_CARD } = NUMBERS;
@@ -16,7 +16,7 @@ function CardNumber() {
     maxLength: EACH_CARD,
   });
 
-  const { value, onChange, error } = useCardInfoInput<CardNumberObj>({
+  const { value, onChange, error } = useCardInfoInput<CardNumberProps>({
     contextType: "cardNumbers",
     validation: (value) => lengthMatchValidation(value, EACH_CARD),
     nextInputFocus,
@@ -26,9 +26,9 @@ function CardNumber() {
     <>
       <Input
         key={key}
-        data-order={key}
         data-index={idx}
-        value={value[key]}
+        name="cardNumber"
+        value={value[idx]}
         onChange={onChange}
         maxLength={EACH_CARD}
         customInputStyle={S.CardNumberInput}
@@ -43,7 +43,7 @@ function CardNumber() {
 
   return (
     <div>
-      <FormLabel>카드 번호</FormLabel>
+      <FormLabel htmlFor="cardNumber">카드 번호</FormLabel>
       <S.CardNumberInputContainer>{inputs}</S.CardNumberInputContainer>
       {error?.isError && <ErrorSpan>{error?.message}</ErrorSpan>}
     </div>
