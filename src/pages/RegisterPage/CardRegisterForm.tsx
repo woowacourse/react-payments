@@ -13,9 +13,11 @@ import { NextButton } from "components/style/ButtonStyle";
 import useRequiredCardInfo from "hooks/useRequiredCardInfo";
 import useInitCardInfo from "hooks/useInitCardInfo";
 import useModal from "hooks/useModal";
-import { VALID_INPUT } from "constants/limit";
 import { isInvalidDate } from "validation";
+import { VALID_INPUT } from "constants/limit";
+import { DIRECTION } from "constants/inputDirection";
 const { ONLY_NUMBER } = VALID_INPUT;
+const { NEXT, PREV } = DIRECTION;
 
 const CardRegisterForm = () => {
   const allCardInfo = useInitCardInfo().cardInfo;
@@ -31,8 +33,8 @@ const CardRegisterForm = () => {
 
     if (name === "name") {
       if (value.length !== maxLength) return;
-      
-      focusFormInput(form, target, 1);
+
+      focusFormInput(form, target, NEXT);
     }
 
     const { month, year } = allCardInfo;
@@ -45,7 +47,7 @@ const CardRegisterForm = () => {
 
     if (validValue.length !== maxLength) return;
 
-    focusFormInput(form, target, 1);
+    focusFormInput(form, target, NEXT);
   };
 
   const focusFormInput = (
@@ -68,12 +70,12 @@ const CardRegisterForm = () => {
   const handleKeyDown = (event: KeyboardEvent<HTMLFormElement>) => {
     const { key, target, currentTarget: form } = event;
 
-    if (key === "Enter") focusFormInput(form, target, 1);
+    if (key === "Enter") focusFormInput(form, target, NEXT);
 
     if (!(target instanceof HTMLInputElement)) return;
     if (key !== "Backspace" || target.value !== "") return;
 
-    focusFormInput(form, target, -1);
+    focusFormInput(form, target, PREV);
   };
 
   return (
