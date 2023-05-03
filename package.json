@@ -67,6 +67,7 @@
     "@testing-library/dom": "^9.2.0",
     "@types/styled-components": "^5.1.26",
     "babel-plugin-named-exports-order": "^0.0.2",
+    "chromatic": "^6.17.3",
     "prop-types": "^15.8.1",
     "storybook": "^7.0.5",
     "storybook-addon-react-router-v6": "^0.3.6",
