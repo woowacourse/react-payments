@@ -1,6 +1,6 @@
+import { useRef } from 'react';
 import styled from 'styled-components';
 import { useGroupedFocus } from '../../hooks/useGroupedFocus';
-import { useGroupedRef } from '../../hooks/useGroupedRef';
 import { NumberInput } from '../common/NumberInput';
 
 const StyledCardPasswordInput = styled.div`
@@ -16,7 +16,8 @@ type CardPasswordInputProps = {
 export const CardPasswordInput = (props: CardPasswordInputProps) => {
   const { value, onChange } = props;
 
-  const { refs, getRef } = useGroupedRef<[HTMLInputElement, HTMLInputElement]>(2);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const refs = Array.from({ length: 2 }, () => useRef<HTMLInputElement>(null));
   const { focusNext } = useGroupedFocus(refs);
 
   const handleCardPasswordChange = (index: number) => (newValue: string) => {
@@ -33,7 +34,7 @@ export const CardPasswordInput = (props: CardPasswordInputProps) => {
       {([0, 1] as const).map((index) => (
         <NumberInput
           key={index}
-          ref={getRef(index)}
+          ref={refs[index]}
           type="password"
           maxCount={1}
           value={value[index] ?? ''}

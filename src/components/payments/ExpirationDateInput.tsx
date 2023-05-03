@@ -1,6 +1,6 @@
+import { useRef } from 'react';
 import styled from 'styled-components';
 import { useGroupedFocus } from '../../hooks/useGroupedFocus';
-import { useGroupedRef } from '../../hooks/useGroupedRef';
 import { NumberInput } from '../common/NumberInput';
 
 const StyledExpirationDateInput = styled.div`
@@ -23,7 +23,8 @@ export const ExpirationDateInput = (props: ExpirationDateInputProps) => {
     onBlur,
   } = props;
 
-  const { refs } = useGroupedRef<[HTMLInputElement, HTMLInputElement]>(2);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const refs = Array.from({ length: 2 }, () => useRef<HTMLInputElement>(null));
   const [monthRef, yearRef] = refs;
   const { focusNext } = useGroupedFocus(refs, {
     onBlur,
