@@ -16,7 +16,7 @@ import useModal from "hooks/useModal";
 import { isInvalidDate } from "validation";
 import { VALID_INPUT } from "constants/limit";
 import { DIRECTION } from "constants/inputDirection";
-const { ONLY_NUMBER } = VALID_INPUT;
+const { ONLY_NUMBER, ONLY_ENGLISH } = VALID_INPUT;
 const { NEXT, PREV } = DIRECTION;
 
 const CardRegisterForm = () => {
@@ -38,7 +38,11 @@ const CardRegisterForm = () => {
   ) => {
     const { name, value, maxLength } = target;
 
-    if (name === "name") return value.length !== maxLength;
+    if (name === "name") {
+      const validValue = value.replace(ONLY_ENGLISH, "");
+
+      return validValue.length !== maxLength;
+    }
 
     const { month, year } = allCardInfo;
     const date = { month, year };
