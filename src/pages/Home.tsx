@@ -3,6 +3,7 @@ import Card from '../components/Card/Card';
 import CardType from '../types/Card';
 import Header from '../components/Header/Header';
 import * as Styled from './Home.styles';
+import React from 'react';
 
 const Home = ({ cards }: { cards: CardType[] }) => {
   return (
@@ -23,16 +24,15 @@ const Home = ({ cards }: { cards: CardType[] }) => {
             cardCompany,
             cardAlias,
           }: CardType) => (
-            <>
+            <React.Fragment key={id}>
               <Card
-                key={id}
                 cardNumbers={cardNumbers}
                 expiredDates={expiredDates}
                 cardOwnerName={cardOwnerName}
                 cardCompany={cardCompany}
               />
               <Styled.CardAlias>{cardAlias}</Styled.CardAlias>
-            </>
+            </React.Fragment>
           )
         )}
         <AddCardButton></AddCardButton>
