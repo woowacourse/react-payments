@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+
 import { COLOR } from '../../constants/card';
-import { COMPANY_LIST } from '../../constants/company';
+import { generateFontColor } from '../../domains/colorGenerator';
 
 export const CardBox = styled.div<Record<'backgroundColor', string | null>>`
   position: relative;
@@ -13,10 +14,7 @@ export const CardBox = styled.div<Record<'backgroundColor', string | null>>`
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
 
-  color: ${props =>
-    props.backgroundColor === COMPANY_LIST[2].BACKGROUND_COLOR
-      ? COLOR.BLACK
-      : COLOR.WHITE};
+  color: ${props => generateFontColor(props.backgroundColor)};
 
   font-size: 12px;
   letter-spacing: 0.1em;
@@ -88,8 +86,7 @@ export const SerialNumberBox = styled.div<
     font-size: 12px;
     letter-spacing: 2px;
     color: white;
-    color: ${props =>
-      props.backgroundColor === '#FFE600' ? COLOR.BLACK : COLOR.WHITE};
+    color: ${props => generateFontColor(props.backgroundColor)};
     background-color: inherit;
     border: none;
     text-align: center;

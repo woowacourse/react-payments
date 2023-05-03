@@ -12,7 +12,7 @@
       CardCompanyLogoList를 바텀싯이 알아야할것같진 않아서 children정도여도 좋을 것 같아요~
 - [x] src/components/Card/Card.styled.ts
       테마여서 프리셋으로 지정된 문자열으로 예상했는데 컬러값이네요! backgroundColor로 명확하게 변경해줘도 좋을 것 같아요
-- [ ] src/components/Card/Card.styled.ts
+- [x] src/components/Card/Card.styled.ts
       폰트컬러가 배경색에 따라 변경되는데 요거 계산식이 있을지 한 번 찾아보면 어떨까요?
 - [x] src/components/Card/Card.styled.ts
       Info는 붙어서 어떤 의미가 추가되지 않는 불용어이기 때문에 요기 그냥 Card로 명명해주면 어떨까 싶네요!
