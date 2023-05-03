@@ -1,35 +1,33 @@
-import { useFocus } from "hooks/useFocus";
-import { ChangeEvent, Dispatch, SetStateAction, Fragment } from "react";
-import { changeInvalidValueToBlank } from "utils/inputValidator";
+import { ChangeEvent, Fragment } from "react";
 import styled from "styled-components";
-import Input from "components/Input";
-import { Hyphen } from "components/DelimiterStyle";
-import { CardNumberCaption } from "components/CaptionStyle";
-import { CardNumberInputBox } from "components/InputBoxStyle";
 import { CardNumber } from "types";
+import { changeInvalidValueToBlank } from "utils/inputValidator";
+import Input, { CommonInputStyle } from "components/Input";
+import { Hyphen } from "components/style/DelimiterStyle";
+import { CardNumberCaption } from "components/style/CaptionStyle";
+import { CardNumberInputBox } from "components/style/InputBoxStyle";
+import { useFocus } from "hooks/useFocus";
+import useInitCardInfo from "hooks/useInitCardInfo";
 import { NUMBER_INPUT, LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
 const { ONLY_NUMBER } = VALID_INPUT;
 
-interface Props {
-  cardNumber: CardNumber;
-  setCardNumber: Dispatch<SetStateAction<CardNumber>>;
-}
+const CardNumberInput = () => {
+  const { cardInfo, initCardInfo } = useInitCardInfo();
+  const { number1, number2, number3, number4 } = cardInfo;
+  const cardNumber: CardNumber = { number1, number2, number3, number4 };
 
-const CardNumberInput = ({ cardNumber, setCardNumber }: Props) => {
-  const { handleRef, moveFocus } = useFocus();
+  const input = useFocus();
 
-  const handleCardNumber = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    setCardNumber((prevState) => {
-      return {
-        ...prevState,
-        [target.name]: changeInvalidValueToBlank(target.value, {
-          length: LIMIT_LENGTH.CARD_NUMBER,
-          regex: ONLY_NUMBER,
-        }),
-      };
-    });
-
-    moveFocus(target, LIMIT_LENGTH.CARD_NUMBER);
+  const handleCardNumberChange = ({
+    target,
+  }: ChangeEvent<HTMLInputElement>) => {
+    initCardInfo(
+      target.name,
+      changeInvalidValueToBlank(target.value, {
+        length: LIMIT_LENGTH.CARD_NUMBER,
+        regex: ONLY_NUMBER,
+      })
+    );
   };
 
   return (
@@ -49,10 +47,10 @@ const CardNumberInput = ({ cardNumber, setCardNumber }: Props) => {
               inputMode="numeric"
               value={cardNumber[`number${index + 1}`]}
               placeholder="0000"
-              autoFocus={index ? false : true}
               required
-              onChange={handleCardNumber}
-              ref={(el) => handleRef(el, index)}
+              inputStyle={CommonInputStyle}
+              onChange={handleCardNumberChange}
+              ref={!index ? input : null}
             />
             {index === NUMBER_INPUT.LAST_PART ? (
               ""
@@ -72,7 +70,7 @@ const CardNumberInput = ({ cardNumber, setCardNumber }: Props) => {
 const S = {
   Label: styled.label`
     display: inline-block;
-    margin-top: 26px;
+    margin-top: 24px;
   `,
 };
 

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Header from "components/Header";
 import CardPreview from "components/CardPreview";
-import { AddButton } from "components/ButtonStyle";
+import { AddButton } from "components/style/ButtonStyle";
 import useInitMainPage from "hooks/useInitMainPage";
 
 const MainPage = () => {
@@ -13,7 +13,10 @@ const MainPage = () => {
 
       <S.Main>
         {cardList.map((card, index) => (
-          <CardPreview key={index} cardInfo={card} />
+          <div key={index}>
+            <CardPreview cardInfo={card} />
+            <S.Nickname>{card.nickname}</S.Nickname>
+          </div>
         ))}
 
         {!cardList.length && (
@@ -30,12 +33,22 @@ const S = {
   Wrapper: styled.div`
     max-width: 480px;
     width: 88%;
+
+    & > header {
+      margin-bottom: 8px;
+    }
   `,
 
   Main: styled.main`
     display: flex;
     flex-direction: column;
     align-items: center;
+  `,
+
+  Nickname: styled.p`
+    margin: -6px 0 8px;
+    font-size: 14px;
+    text-align: center;
   `,
 
   Message: styled.p`

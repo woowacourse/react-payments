@@ -3,7 +3,7 @@ import CardNumberInput from "../FormInputs/CardNumberInput";
 
 const meta = {
   component: CardNumberInput,
-  title: "Section/CardNumbers",
+  title: "Input/CardNumbers",
 } satisfies Meta<typeof CardNumberInput>;
 
 export default meta;
@@ -18,7 +18,5 @@ export const CardNumbersStory: Story = {
       number3: "3333",
       number4: "4444",
     },
-
-    setCardNumber: () => {},
   },
 };

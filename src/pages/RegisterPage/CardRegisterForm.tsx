@@ -1,58 +1,108 @@
+import { ChangeEvent, KeyboardEvent } from "react";
+import { useNavigate } from "react-router";
 import styled from "styled-components";
-import { useState } from "react";
 import CardNumberInput from "./FormInputs/CardNumberInput";
 import ExpirationDateInput from "./FormInputs/ExpirationDateInput";
 import NameInput from "./FormInputs/NameInput";
 import PasswordInput from "./FormInputs/PasswordInput";
 import SecurityCodeInput from "./FormInputs/SecurityCodeInput";
+import CardCompanyModal from "./CardCompanyModal";
 import CardPreview from "components/CardPreview";
 import Header from "components/Header";
-import { NextButton } from "components/ButtonStyle";
-import useSetFormData from "hooks/useSetFormData";
-import useFormState from "hooks/useFormState";
+import { NextButton } from "components/style/ButtonStyle";
+import useRequiredCardInfo from "hooks/useRequiredCardInfo";
+import useInitCardInfo from "hooks/useInitCardInfo";
+import useModal from "hooks/useModal";
+import { isInvalidDate } from "validation";
+import { VALID_INPUT } from "constants/limit";
+import { DIRECTION } from "constants/inputDirection";
+const { ONLY_NUMBER, ONLY_ENGLISH } = VALID_INPUT;
+const { NEXT, PREV } = DIRECTION;
 
 const CardRegisterForm = () => {
-  const [cardNumber, setCardNumber] = useState({
-    number1: "",
-    number2: "",
-    number3: "",
-    number4: "",
-  });
+  const allCardInfo = useInitCardInfo().cardInfo;
 
-  const [date, setDate] = useState({
-    month: "",
-    year: "",
-  });
+  const { isFormFilled } = useRequiredCardInfo();
 
-  const [name, setName] = useState("");
+  const navigate = useNavigate();
+  const handlePageChange = () => navigate("/completion");
 
-  const [code, setCode] = useState("");
+  const handleFocusNext = ({ target }: ChangeEvent<HTMLFormElement>) => {
+    if (shouldPreventFocusMovement(target)) return;
 
-  const [password, setPassword] = useState({ password1: "", password2: "" });
+    focusFormInput(target.form, target, NEXT);
+  };
 
-  const PreviewCardInfo = { ...cardNumber, ...date, name };
-  const requiredCardInfo = { ...cardNumber, ...date, code, ...password };
+  const shouldPreventFocusMovement = (
+    target: EventTarget & HTMLFormElement
+  ) => {
+    const { name, value, maxLength } = target;
 
-  const { isFormFilled } = useFormState(requiredCardInfo);
-  const { handleFormData } = useSetFormData("card");
+    if (name === "name") {
+      const validValue = value.replace(ONLY_ENGLISH, "");
+
+      return validValue.length !== maxLength;
+    }
+
+    const { month, year } = allCardInfo;
+    const date = { month, year };
+    const isValidDate = isInvalidDate(target, date);
+
+    if ((name === "month" || name === "year") && isValidDate) return true;
+
+    const validValue = value.replace(ONLY_NUMBER, "");
+
+    return validValue.length !== maxLength;
+  };
+
+  const focusFormInput = (
+    form: HTMLFormElement,
+    currentInput: EventTarget,
+    direction: number
+  ) => {
+    const formControlList = [...form];
+
+    if (!(currentInput instanceof HTMLInputElement)) return;
+
+    const currentInputIndex = formControlList.indexOf(currentInput);
+    const nextInput = formControlList[currentInputIndex + direction];
+
+    if (!nextInput || !(nextInput instanceof HTMLInputElement)) return;
+
+    nextInput.focus();
+  };
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLFormElement>) => {
+    const { key, target, currentTarget: form } = event;
+
+    if (key === "Enter") focusFormInput(form, target, NEXT);
+
+    if (!(target instanceof HTMLInputElement)) return;
+    if (key !== "Backspace" || target.value !== "") return;
+
+    focusFormInput(form, target, PREV);
+  };
 
   return (
     <S.Wrapper>
       <Header navigator title="카드 추가" />
 
-      <CardPreview cardInfo={PreviewCardInfo} />
+      <CardPreview cardInfo={allCardInfo} />
 
-      <form onSubmit={handleFormData}>
-        <CardNumberInput
-          cardNumber={cardNumber}
-          setCardNumber={setCardNumber}
-        />
-        <ExpirationDateInput date={date} setDate={setDate} />
-        <NameInput name={name} setName={setName} />
-        <SecurityCodeInput code={code} setCode={setCode} />
-        <PasswordInput password={password} setPassword={setPassword} />
+      {useModal().isModalOpen && <CardCompanyModal />}
 
-        {isFormFilled && <NextButton>다음</NextButton>}
+      <form
+        onSubmit={handlePageChange}
+        onChange={handleFocusNext}
+        onKeyDown={handleKeyDown}
+      >
+        <CardNumberInput />
+        <ExpirationDateInput />
+        <NameInput />
+        <SecurityCodeInput />
+        <PasswordInput />
+
+        <NextButton disabled={!isFormFilled}>다음</NextButton>
       </form>
     </S.Wrapper>
   );
@@ -62,6 +112,14 @@ const S = {
   Wrapper: styled.div`
     max-width: 480px;
     width: 88%;
+
+    & > header {
+      margin-bottom: 4px;
+    }
+
+    & > header + div:nth-child(2) {
+      cursor: pointer;
+    }
   `,
 };
 

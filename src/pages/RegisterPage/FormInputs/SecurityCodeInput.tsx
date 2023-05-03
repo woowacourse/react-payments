@@ -1,19 +1,19 @@
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import { ChangeEvent } from "react";
 import styled from "styled-components";
 import { changeInvalidValueToBlank } from "utils/inputValidator";
-import Input from "components/Input";
-import { CodeCaption } from "components/CaptionStyle";
+import Input, { SecurityCodeInputStyle } from "components/Input";
+import { CodeCaption } from "components/style/CaptionStyle";
+import useInitCardInfo from "hooks/useInitCardInfo";
 import { LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
 const { ONLY_NUMBER } = VALID_INPUT;
 
-interface Props {
-  code: string;
-  setCode: Dispatch<SetStateAction<string>>;
-}
+const SecurityCodeInput = () => {
+  const { cardInfo, initCardInfo } = useInitCardInfo();
+  const { code } = cardInfo;
 
-const SecurityCodeInput = ({ code, setCode }: Props) => {
-  const handleCardNumber = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    setCode(
+  const handleCodeChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
+    initCardInfo(
+      "code",
       changeInvalidValueToBlank(target.value, {
         length: LIMIT_LENGTH.SECURITY_CODE,
         regex: ONLY_NUMBER,
@@ -28,20 +28,16 @@ const SecurityCodeInput = ({ code, setCode }: Props) => {
       </label>
       <S.Wrapper>
         <Input
-          display="block"
-          width="24%"
-          margin="0"
-          padding="0 4%"
-          borderRadius="8px"
           type="password"
           name="code"
           id="code"
           maxLength={LIMIT_LENGTH.SECURITY_CODE}
           inputMode="numeric"
           value={code}
-          onChange={handleCardNumber}
           placeholder="000"
           required
+          inputStyle={SecurityCodeInputStyle}
+          onChange={handleCodeChange}
         />
         <S.QuestionMark>?</S.QuestionMark>
       </S.Wrapper>

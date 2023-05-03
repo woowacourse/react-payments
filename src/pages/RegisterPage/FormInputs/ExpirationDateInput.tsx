@@ -1,37 +1,30 @@
-import { useFocus } from "hooks/useFocus";
-import { ChangeEvent, Dispatch, SetStateAction, Fragment } from "react";
-import { changeInvalidValueToBlank } from "utils/inputValidator";
-import Input from "components/Input";
-import { Slash } from "components/DelimiterStyle";
-import { DateCaption } from "components/CaptionStyle";
-import { DateInputBox } from "components/InputBoxStyle";
-import { isInvalidDate } from "validation";
+import { ChangeEvent, Fragment } from "react";
 import { ExpirationDate } from "types";
+import { changeInvalidValueToBlank } from "utils/inputValidator";
+import Input, { CommonInputStyle } from "components/Input";
+import { Slash } from "components/style/DelimiterStyle";
+import { DateCaption } from "components/style/CaptionStyle";
+import { DateInputBox } from "components/style/InputBoxStyle";
+import { isInvalidDate } from "validation";
+import useInitCardInfo from "hooks/useInitCardInfo";
 import { DATE_INPUT, LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
 const { ONLY_NUMBER } = VALID_INPUT;
 
-interface Props {
-  date: ExpirationDate;
-  setDate: Dispatch<SetStateAction<ExpirationDate>>;
-}
+const ExpirationDateInput = () => {
+  const { cardInfo, initCardInfo } = useInitCardInfo();
+  const { month, year } = cardInfo;
+  const date: ExpirationDate = { month, year };
 
-const ExpirationDateInput = ({ date, setDate }: Props) => {
-  const { handleRef, moveFocus } = useFocus();
-
-  const handleDate = ({ target }: ChangeEvent<HTMLInputElement>) => {
+  const handleDateChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     if (isInvalidDate(target, date)) return;
 
-    setDate((prevState) => {
-      return {
-        ...prevState,
-        [target.name]: changeInvalidValueToBlank(target.value, {
-          length: LIMIT_LENGTH.EXPIRATION_DATE,
-          regex: ONLY_NUMBER,
-        }),
-      };
-    });
-
-    moveFocus(target, LIMIT_LENGTH.EXPIRATION_DATE);
+    initCardInfo(
+      target.name,
+      changeInvalidValueToBlank(target.value, {
+        length: LIMIT_LENGTH.EXPIRATION_DATE,
+        regex: ONLY_NUMBER,
+      })
+    );
   };
 
   return (
@@ -49,22 +42,22 @@ const ExpirationDateInput = ({ date, setDate }: Props) => {
               aria-labelledby="date-label"
               maxLength={LIMIT_LENGTH.EXPIRATION_DATE}
               inputMode="numeric"
-              value={index ? date.year : date.month}
+              value={index ? year : month}
               placeholder={index ? "YY" : "MM"}
               required
-              onChange={handleDate}
-              ref={(el) => handleRef(el, index)}
+              inputStyle={CommonInputStyle}
+              onChange={handleDateChange}
             />
             {index === DATE_INPUT.LAST_PART ? (
               ""
             ) : (
-              <Slash month={date.month}>/</Slash>
+              <Slash month={month}>/</Slash>
             )}
           </Fragment>
         ))}
       </DateInputBox>
       <DateCaption date={Object.values(date)}>
-        카드에 표기된 월/연도 순으로 입력해주세요. ex&#41; 01/28
+        카드에 표기된 월/연도 순으로 입력해 주세요. ex&#41; 01/28
       </DateCaption>
     </>
   );

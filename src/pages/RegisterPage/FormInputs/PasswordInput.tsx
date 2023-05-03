@@ -1,10 +1,11 @@
-import { useFocus } from "hooks/useFocus";
-import { ChangeEvent, Dispatch, SetStateAction, Fragment } from "react";
+import { ChangeEvent, Fragment } from "react";
 import styled from "styled-components";
+import { Password } from "types";
 import { changeInvalidValueToBlank } from "utils/inputValidator";
-import Input from "components/Input";
-import { PasswordCaption } from "components/CaptionStyle";
-import { PasswordInputBox } from "components/InputBoxStyle";
+import Input, { PasswordInputStyle } from "components/Input";
+import { PasswordCaption } from "components/style/CaptionStyle";
+import { PasswordInputBox } from "components/style/InputBoxStyle";
+import useInitCardInfo from "hooks/useInitCardInfo";
 import {
   NUMBER_INPUT,
   LIMIT_LENGTH,
@@ -13,32 +14,19 @@ import {
 } from "constants/limit";
 const { ONLY_NUMBER } = VALID_INPUT;
 
-interface Password {
-  [key: string]: string;
-  password1: string;
-  password2: string;
-}
+const PasswordInput = () => {
+  const { cardInfo, initCardInfo } = useInitCardInfo();
+  const { password1, password2 } = cardInfo;
+  const password: Password = { password1, password2 };
 
-interface Props {
-  password: Password;
-  setPassword: Dispatch<SetStateAction<Password>>;
-}
-
-const PasswordInput = ({ password, setPassword }: Props) => {
-  const { handleRef, moveFocus } = useFocus();
-
-  const handlePassword = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    setPassword((prevState) => {
-      return {
-        ...prevState,
-        [target.name]: changeInvalidValueToBlank(target.value, {
-          length: LIMIT_LENGTH.PASSWORD,
-          regex: ONLY_NUMBER,
-        }),
-      };
-    });
-
-    moveFocus(target, LIMIT_LENGTH.PASSWORD);
+  const handlePasswordChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
+    initCardInfo(
+      target.name,
+      changeInvalidValueToBlank(target.value, {
+        length: LIMIT_LENGTH.PASSWORD,
+        regex: ONLY_NUMBER,
+      })
+    );
   };
 
   return (
@@ -51,9 +39,6 @@ const PasswordInput = ({ password, setPassword }: Props) => {
           <Fragment key={index}>
             {index < PASSWORD_PART ? (
               <Input
-                width="12%"
-                margin="0 2.2% 0 0"
-                borderRadius="8px"
                 type="password"
                 name={`password${index + 1}`}
                 id={index ? undefined : "password-label"}
@@ -63,8 +48,8 @@ const PasswordInput = ({ password, setPassword }: Props) => {
                 value={password[`password${index + 1}`]}
                 placeholder="0"
                 required
-                onChange={handlePassword}
-                ref={(el) => handleRef(el, index)}
+                inputStyle={PasswordInputStyle}
+                onChange={handlePasswordChange}
               />
             ) : (
               <S.HiddenPassword>ㆍ</S.HiddenPassword>

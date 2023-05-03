@@ -11,14 +11,14 @@ export const LIMIT_LENGTH: Readonly<{ [key: string]: number }> = {
 interface ValidInput {
   ONLY_NUMBER: RegExp;
   ONLY_ENGLISH: RegExp;
-  INVALID_BLANK: string;
+  NOT_ONLY_BLANK: RegExp;
   VALID_MONTH: number;
 }
 
 export const VALID_INPUT: Readonly<ValidInput> = {
   ONLY_NUMBER: /[^\d]/g,
   ONLY_ENGLISH: /[^a-z A-Z]/g,
-  INVALID_BLANK: "  ",
+  NOT_ONLY_BLANK: /^\s*$/,
   VALID_MONTH: 12,
 };
 

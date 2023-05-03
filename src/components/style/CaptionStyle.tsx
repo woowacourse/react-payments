@@ -29,3 +29,10 @@ export const CodeCaption = styled(Caption)<{ codeLength: number }>`
   visibility: ${({ codeLength }) =>
     codeLength === LIMIT_LENGTH.SECURITY_CODE && `${HIDDEN_ELEMENT_STYLE}`};
 `;
+
+export const CardCompanyCaption = styled(Caption)<{ cardCompany: string }>`
+  margin: 8px 0 0 0;
+  text-align: center;
+  visibility: ${({ cardCompany }) =>
+    cardCompany !== "" && `${HIDDEN_ELEMENT_STYLE}`};
+`;

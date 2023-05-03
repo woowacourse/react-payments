@@ -1,9 +1,9 @@
-import { ExpirationDate } from "types";
+import { CardInfo, ExpirationDate } from "types";
 import { LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
 const { VALID_MONTH } = VALID_INPUT;
 
 export const isInvalidDate = (
-  target: HTMLInputElement,
+  target: HTMLInputElement | HTMLFormElement,
   date: ExpirationDate
 ) => {
   const { isInvalidMonth, isExpired } = validation;
@@ -17,9 +17,9 @@ export const isInvalidDate = (
   if (isTargetYear && isExpired(date.month, target.value)) return true;
 };
 
-export const isValidInfo = (cardInfo: any) => {
-  const { month, year, code, password1, password2 } = cardInfo;
-  const { isAllValidLength, isValidLength } = validation;
+export const isValidInfo = (cardInfo: CardInfo) => {
+  const { cardCompany, month, year, code, password1, password2 } = cardInfo;
+  const { isAllValidLength, isValidLength, isValidCardCompany } = validation;
 
   const cardNumbers = Array.from(
     { length: LIMIT_LENGTH.CARD_NUMBER },
@@ -39,12 +39,14 @@ export const isValidInfo = (cardInfo: any) => {
     [password1, password2],
     LIMIT_LENGTH.PASSWORD
   );
+  const validateCardCompany = isValidCardCompany(cardCompany);
 
   const validationResult = [
     validateCardNumber,
     validateDate,
     validateCode,
     validatePassword,
+    validateCardCompany,
   ];
 
   return validationResult.every((result) => result === true);
@@ -59,7 +61,7 @@ const validation = {
     return value.length === length;
   },
 
-  isInvalidMonth(target: HTMLInputElement) {
+  isInvalidMonth(target: HTMLInputElement | HTMLFormElement) {
     const value = target.value;
     const isValidMonth = target.name === "month" && Number(value) > VALID_MONTH;
 
@@ -84,12 +86,21 @@ const validation = {
       ? Number(thisMonth) > Number(inputMonth)
       : true;
   },
+
+  isValidCardCompany(cardCompany: string) {
+    return Boolean(cardCompany.length);
+  },
 };
 
 export const validateJson = (data: string) => {
   try {
     return JSON.parse(data);
   } catch (error) {
-    if (error instanceof Error) throw Error(error.name);
+    if (error instanceof Error) {
+      console.log(error.message);
+
+      return [];
+    }
+    return [];
   }
 };
