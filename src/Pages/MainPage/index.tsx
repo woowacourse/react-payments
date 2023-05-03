@@ -1,8 +1,5 @@
-import CardPreview from 'Pages/RegisterPage/CardPreview';
+import CardPreview from 'pages/RegisterPage/CardPreview';
 import Header from 'components/Header';
-import Input from 'components/Input';
-import Modal from 'components/Modal';
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Card } from 'types/Card';
@@ -12,7 +9,7 @@ const MainPage = () => {
   const navigate = useNavigate();
 
   const goToRegister = () => {
-    navigate('/register');
+    navigate('/card-registration');
   };
 
   const cardInfoArray = getLocalStorage('card');
@@ -23,11 +20,14 @@ const MainPage = () => {
 
       {cardInfoArray.length > 0 ? (
         cardInfoArray.map((cardInfo: Card, index: number) => (
-          <CardPreview key={index} cardInfo={cardInfo}></CardPreview>
+          <>
+            <CardPreview key={index} cardInfo={cardInfo}></CardPreview>
+          </>
         ))
       ) : (
         <Message>새로운 카드를 등록해 주세요.</Message>
       )}
+
       <AddButton onClick={goToRegister}>+</AddButton>
     </div>
   );
@@ -43,6 +43,7 @@ const AddButton = styled.button`
   font-size: 34px;
   background: #e5e5e5;
   border-radius: 5px;
+  margin-bottom: 50px;
   cursor: pointer;
 `;
 

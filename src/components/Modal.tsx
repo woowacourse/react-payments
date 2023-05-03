@@ -1,20 +1,18 @@
 import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 
-interface Props {
+interface ModalProps {
   width?: string;
   height?: string;
   element: JSX.Element;
   modal: boolean;
-  setModal?: Dispatch<SetStateAction<boolean>>;
+  setModal: Dispatch<SetStateAction<boolean>> | null;
 }
 
-export const Modal = (props: Props) => {
+export const Modal = (props: ModalProps) => {
   const { width, height, element, setModal } = props;
   const closeModal = () => {
-    if (setModal) {
-      setModal(false);
-    }
+    setModal?.(false);
   };
 
   return (
@@ -32,6 +30,7 @@ const Container = styled.div<{ width?: string; height?: string }>`
   position: fixed;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   left: calc(50vw - ${(props) => props.width}px / 2);
   bottom: 0;
   width: ${(props) => (props.width ? `${props.width}px` : '100%')};

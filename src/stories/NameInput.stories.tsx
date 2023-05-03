@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import NameInput from './NameInput';
+import NameInput from 'pages/RegisterPage/FormInputs/NameInput';
 
 const NameInputMeta = {
   component: NameInput,
-  title: 'NameInput Component',
+  title: '/FormInput/NameInput Component',
 } satisfies Meta<typeof NameInput>;
 
 export default NameInputMeta;

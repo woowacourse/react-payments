@@ -1,42 +1,41 @@
-import { useState } from 'react';
-import CardNumberInput from './FormInputs/CardNumberInput';
-import ExpirationDateInput from './FormInputs/ExpirationDateInput';
-import NameInput from './FormInputs/NameInput';
-import PasswordInput from './FormInputs/PasswordInput';
-import SecurityCodeInput from './FormInputs/SecurityCodeInput';
-import CardPreview from './CardPreview';
-import { Card } from 'types/Card';
-import { useFormHandler } from 'hooks/useFormHandler';
 import Header from 'components/Header';
 import NextButton from 'components/Button';
 import Modal from 'components/Modal';
+import styled from 'styled-components';
+import CardPreview from './CardPreview';
+import CardNumberInput from './FormInputs/CardNumberInput';
+import ExpirationDateInput from './FormInputs/ExpirationDateInput';
+import NameInput from './FormInputs/NameInput';
+import SecurityCodeInput from './FormInputs/SecurityCodeInput';
+import PasswordInput from './FormInputs/PasswordInput';
+import CardBankList from './CardBankList';
+import { useContext } from 'react';
+import { useFormHandler } from 'hooks/useFormHandler';
+import { AddCardContext } from 'context/CardContext';
+import { Card } from 'types/Card';
 
 const CardRegisterForm = () => {
-  const [isModalActive, setIsModalActive] = useState(true);
+  const {
+    cardNumber,
+    date,
+    name,
+    cardCompany,
+    isModalActive,
+    setIsModalActive,
+  } = useContext(AddCardContext);
 
   const handleModal = () => {
-    setIsModalActive(!isModalActive);
+    setIsModalActive?.(!isModalActive);
   };
 
-  const [cardNumber, setCardNumber] = useState({
-    number1: '',
-    number2: '',
-    number3: '',
-    number4: '',
-  });
+  const cardInfo: Card = {
+    cardNumber: cardNumber,
+    date: date,
+    name: name,
+    cardCompany: cardCompany,
+  };
 
-  const [date, setDate] = useState({
-    month: '',
-    year: '',
-  });
-
-  const [name, setName] = useState({
-    name: '',
-  });
-
-  const cardInfo: Card = { ...cardNumber, ...date, ...name };
-
-  const { handleForm } = useFormHandler();
+  const { handleForm } = useFormHandler(cardInfo);
 
   return (
     <>
@@ -45,27 +44,31 @@ const CardRegisterForm = () => {
 
         <CardPreview cardInfo={cardInfo} handleModal={handleModal} />
 
-        <form onSubmit={handleForm}>
-          <CardNumberInput
-            cardNumber={cardNumber}
-            setCardNumber={setCardNumber}
-          />
-          <ExpirationDateInput date={date} setDate={setDate} />
-          <NameInput name={name} setName={setName} />
+        <AddCardForm onSubmit={handleForm}>
+          <CardNumberInput />
+          <ExpirationDateInput />
+          <NameInput />
           <SecurityCodeInput />
           <PasswordInput />
           <NextButton>다음</NextButton>
-        </form>
+        </AddCardForm>
       </div>
       {isModalActive && (
         <Modal
           modal={isModalActive}
+          setModal={handleModal}
           height="300"
-          element={<div>카드추가</div>}
+          element={<CardBankList setModal={handleModal} />}
         />
       )}
     </>
   );
 };
+
+const AddCardForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+`;
 
 export default CardRegisterForm;

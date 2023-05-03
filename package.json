@@ -19,6 +19,7 @@
     "react-scripts": "5.0.1",
     "storybook-addon-styled-component-theme": "^2.0.0",
     "styled-components": "^5.3.9",
+    "testing-library": "^0.0.2",
     "typescript": "^5.0.4",
     "web-vitals": "^2.1.4"
   },
@@ -69,6 +70,7 @@
     "@storybook/react": "^7.0.6",
     "@storybook/react-webpack5": "^7.0.6",
     "@storybook/testing-library": "^0.0.14-next.2",
+    "@testing-library/react-hooks": "^8.0.1",
     "@types/styled-components": "^5.1.26",
     "babel-plugin-named-exports-order": "^0.0.2",
     "prop-types": "^15.8.1",

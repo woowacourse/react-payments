@@ -2,12 +2,12 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Navigator from './Navigator';
 
-interface Props {
+interface HeaderProps {
   title: string;
   navigator: boolean;
 }
 
-const Header = ({ title, navigator }: Props) => {
+const Header = ({ title, navigator }: HeaderProps) => {
   const navigate = useNavigate();
 
   const goToMain = () => {
@@ -38,7 +38,7 @@ const Header = ({ title, navigator }: Props) => {
   );
 };
 
-const StyledHeader = styled.header`
+export const StyledHeader = styled.header`
   display: flex;
   align-items: center;
   margin-top: 24px;

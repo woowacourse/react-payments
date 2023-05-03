@@ -2,42 +2,76 @@ import { LENGTH } from 'constants/constants';
 import styled from 'styled-components';
 import { Card } from 'types/Card';
 
-const CardPreview = ({ cardInfo, handleModal }: any) => {
+interface CardPreviewProps {
+  cardInfo: Card;
+  handleModal?: () => void;
+}
+
+const CardPreview = ({ cardInfo, handleModal }: CardPreviewProps) => {
   return (
-    <StyledCard onClick={handleModal}>
-      <Chip />
-      <CardInfo>
-        <Numbers>
-          <Span>{cardInfo.number1}</Span>
-          <Span>{cardInfo.number2}</Span>
-          <Secret>{cardInfo.number3.replaceAll(/[0-9]/gi, 'ㆍ')}</Secret>
-          <Secret>{cardInfo.number4.replaceAll(/[0-9]/gi, 'ㆍ')}</Secret>
-        </Numbers>
-        <Wrapper>
-          <p>{cardInfo.name}</p>
-          <Date>{`${cardInfo.month} ${
-            cardInfo.month.length === LENGTH.EXPIRATION ? '/' : ''
-          } ${cardInfo.year}`}</Date>
-        </Wrapper>
-      </CardInfo>
-    </StyledCard>
+    <>
+      <StyledCard
+        onClick={handleModal}
+        $background={cardInfo.cardCompany.color}
+      >
+        <BankName $background={cardInfo.cardCompany.color}>
+          {cardInfo.cardCompany.company}
+        </BankName>
+        <Chip />
+        <CardInfo $background={cardInfo.cardCompany.color}>
+          <Numbers>
+            <Span>{cardInfo.cardNumber.number1}</Span>
+            <Span>{cardInfo.cardNumber.number2}</Span>
+            <Secret>
+              {cardInfo.cardNumber.number3.replaceAll(/[0-9]/gi, 'ㆍ')}
+            </Secret>
+            <Secret>
+              {cardInfo.cardNumber.number4.replaceAll(/[0-9]/gi, 'ㆍ')}
+            </Secret>
+          </Numbers>
+          <Wrapper>
+            <p>{cardInfo.name}</p>
+            <Date>{`${cardInfo.date.month} ${
+              cardInfo.date.month.length === LENGTH.EXPIRATION ? '/' : ''
+            } ${cardInfo.date.year}`}</Date>
+          </Wrapper>
+        </CardInfo>
+      </StyledCard>
+      <CardName>{cardInfo.cardName}</CardName>
+    </>
   );
 };
 
-const StyledCard = styled.div`
+type StyledCardProps = {
+  $background: string;
+};
+
+const CardName = styled.p`
+  text-align: center;
+  margin-bottom: 24px;
+`;
+
+const StyledCard = styled.div<StyledCardProps>`
   display: flex;
   flex-direction: column;
-  justify-content: end;
+  justify-content: flex-start;
   align-items: center;
   width: 213px;
   height: 133px;
   padding: 0 15px;
-  margin: 30px auto 26px;
+  margin: 30px auto 14px;
   border-radius: 5px;
+  background: ${(props) => props.$background};
   font-size: 14px;
-  background: var(--darken-color);
   box-shadow: rgba(0, 0, 0, 0.25) 3px 3px 5px;
   cursor: pointer;
+`;
+
+const BankName = styled.span<StyledCardProps>`
+  color: ${(props) =>
+    props.$background === '#fae20c' ? '#000000' : '#ffffff'};
+  align-self: flex-start;
+  margin: 15px 0 18px 0;
 `;
 
 const Chip = styled.div`
@@ -48,8 +82,9 @@ const Chip = styled.div`
   border-radius: 4px;
 `;
 
-const CardInfo = styled.div`
-  color: #fff;
+const CardInfo = styled.div<StyledCardProps>`
+  color: ${(props) =>
+    props.$background === '#fae20c' ? '#000000' : '#ffffff'};
 `;
 
 const Numbers = styled.p`
