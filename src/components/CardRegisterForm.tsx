@@ -1,49 +1,58 @@
 import { useNavigate } from 'react-router-dom';
-
 import styled from 'styled-components';
 
 import { InputBox } from './common';
-
+import { PATH } from '../constants/path';
 import { useCardRegisterForm } from '../hooks/useCardRegisterForm';
-
-import { cardList } from '../data/localStorage';
-
-import { Card, CardInfoOption } from '../type/card';
-import { InputInfo } from '../type/input';
+import { Card } from '../type/card';
+import { isCardInfoOption } from '../utils/checkType';
 
 export function CardRegisterForm() {
   const naviagte = useNavigate();
 
-  const { cardRegisterForm, isRequiredInputValid, isOptionalInputValid } =
-    useCardRegisterForm();
+  const {
+    cardRegisterForm,
+    company,
+    isRequiredInputValid,
+    isOptionalInputValid,
+  } = useCardRegisterForm();
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-
-    const submittedCardInfo = {} as unknown as Card;
+    const submittedCardInfo: Card = {
+      cardNumber: '',
+      expiredDate: '',
+      code: '',
+      password: '',
+      company: '',
+    };
 
     for (const [key, inputs] of Object.entries(cardRegisterForm)) {
-      submittedCardInfo[key as CardInfoOption] = Object.values(inputs)
-        .map((input) => input.value)
-        .join('');
+      if (isCardInfoOption(key, submittedCardInfo)) {
+        submittedCardInfo[key] = Object.values(inputs)
+          .map((input) => input.value)
+          .join('');
+      }
     }
 
-    cardList.updateData(submittedCardInfo);
+    if (company.clicked.value) {
+      submittedCardInfo.company = company.clicked.value;
+      moveAddCardNamePage(submittedCardInfo);
 
-    moveCardListPage();
+      return;
+    }
+
+    alert('카드 회사를 선택해주세요!');
   }
 
-  function moveCardListPage() {
-    naviagte('/');
+  function moveAddCardNamePage(formState: Card) {
+    naviagte(PATH.ADD_CARD_NAME, { state: { ...formState } });
   }
 
   return (
     <_Form onSubmit={handleSubmit}>
-      {Object.entries(cardRegisterForm).map(([key, inputs]) => (
-        <InputBox
-          id={key}
-          inputs={Object.values(inputs) as unknown as InputInfo[]}
-        ></InputBox>
+      {Object.entries(cardRegisterForm).map(([key, inputs], index) => (
+        <InputBox key={index} infoType={key} inputs={Object.values(inputs)} />
       ))}
       {isRequiredInputValid && isOptionalInputValid && (
         <_ButtonWrapper>

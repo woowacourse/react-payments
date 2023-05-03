@@ -24,4 +24,8 @@ export const cardRegisterValidator = {
   cardPassword(input: string) {
     return REGEX.CARD_PASSWORD.test(input);
   },
+
+  nickname(input: string) {
+    return REGEX.NICKNAME.test(input);
+  },
 };

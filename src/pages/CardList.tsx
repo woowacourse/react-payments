@@ -1,8 +1,9 @@
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { useNavigate } from 'react-router-dom';
-
 import { Header, CardItem } from '../components/common';
+import { PATH } from '../constants/path';
 import { cardList } from '../data/localStorage';
 
 export function CardList() {
@@ -10,7 +11,7 @@ export function CardList() {
 
   const navigate = useNavigate();
   function moveAddCardPage() {
-    navigate('/add-card');
+    navigate(PATH.ADD_CARD);
   }
 
   return (
@@ -21,8 +22,13 @@ export function CardList() {
           {cards?.length === 0 ? '새로운 카드를 추가하세요' : ''}
         </_Direction>
         {cards &&
-          cards?.map((card) => {
-            return <CardItem info={card}></CardItem>;
+          cards.reverse().map((card, index) => {
+            return (
+              <React.Fragment key={index}>
+                <CardItem info={card} />
+                <_CardNickName>{card.nickname}</_CardNickName>
+              </React.Fragment>
+            );
           })}
         <_Button onClick={moveAddCardPage}>+</_Button>
       </_Section>
@@ -49,12 +55,19 @@ const _Section = styled.section`
 `;
 
 const _Direction = styled.h3`
-  font: var(--text-subtitle);
-  color: #575757;
+  font: ${(props) => props.theme.text.subtitle};
+  color: ${(props) => props.theme.color.grey300};
+`;
+
+const _CardNickName = styled.p`
+  font-weight: 700;
+  font-size: 1.4rem;
+
+  color: ${(props) => props.theme.color.grey300};
 `;
 const _Button = styled.button`
-  background: #e5e5e5;
-  border-radius: 5px;
+  background: ${(props) => props.theme.color.grey200};
+  border-radius: 0.5rem;
 
   width: 21.3rem;
   height: 13.3rem;

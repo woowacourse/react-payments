@@ -29,6 +29,6 @@ const _Header = styled.header`
 `;
 
 const _Title = styled.h2`
-  font: var(--text-title);
+  font: ${(props) => props.theme.text.title};
   margin-left: 5rem;
 `;

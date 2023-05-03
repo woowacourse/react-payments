@@ -12,6 +12,7 @@ export const REGEX: {
   USERNAME: /^[a-zA-Z가-힣]{0,30}$/,
   CODE: /^\d{3}$/,
   CARD_PASSWORD: /^\d{1}$/,
+  NICKNAME: /^[a-zA-Z가-힣]{0,10}$/,
 } as const;
 
 export const LOCAL_STORAGE_KEY: { [key: string]: string } = {
