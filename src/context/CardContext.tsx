@@ -14,13 +14,11 @@ import {
 } from 'types/Card';
 
 interface CardContext {
-  isModalActive: boolean;
   cardNumber: CardNumber;
   date: Expiration;
   name: Name;
   cardCompany: CardCompany;
   cardName: CardName;
-  setIsModalActive: Dispatch<SetStateAction<boolean>> | null;
   setCardNumber: Dispatch<SetStateAction<CardNumber>> | null;
   setDate: Dispatch<SetStateAction<Expiration>> | null;
   setName: Dispatch<SetStateAction<Name>> | null;
@@ -29,7 +27,6 @@ interface CardContext {
 }
 
 const initialValue = {
-  isModalActive: true,
   cardNumber: {
     number1: '',
     number2: '',
@@ -46,7 +43,6 @@ const initialValue = {
     color: '',
   },
   cardName: '',
-  setIsModalActive: null,
   setCardNumber: null,
   setDate: null,
   setName: null,
@@ -61,8 +57,6 @@ export const AddCardContextProvider = ({
 }: {
   children: ReactNode;
 }) => {
-  const [isModalActive, setIsModalActive] = useState(true);
-
   const [cardNumber, setCardNumber] = useState<CardNumber>({
     number1: '',
     number2: '',
@@ -85,13 +79,11 @@ export const AddCardContextProvider = ({
   const [cardName, setCardName] = useState<CardName>('');
 
   const value = {
-    isModalActive,
     cardNumber,
     date,
     name,
     cardCompany,
     cardName,
-    setIsModalActive,
     setCardNumber,
     setDate,
     setName,

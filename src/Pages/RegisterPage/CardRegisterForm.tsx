@@ -9,20 +9,15 @@ import NameInput from './FormInputs/NameInput';
 import SecurityCodeInput from './FormInputs/SecurityCodeInput';
 import PasswordInput from './FormInputs/PasswordInput';
 import CardBankList from './CardBankList';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { useFormHandler } from 'hooks/useFormHandler';
 import { AddCardContext } from 'context/CardContext';
 import { Card } from 'types/Card';
 
 const CardRegisterForm = () => {
-  const {
-    cardNumber,
-    date,
-    name,
-    cardCompany,
-    isModalActive,
-    setIsModalActive,
-  } = useContext(AddCardContext);
+  const { cardNumber, date, name, cardCompany } = useContext(AddCardContext);
+
+  const [isModalActive, setIsModalActive] = useState(true);
 
   const handleModal = () => {
     setIsModalActive?.(!isModalActive);
