@@ -12,13 +12,22 @@ const CompanyLogoList = () => {
   return (
     <styled.CompanyLogoList>
       {COMPANY_LIST.map(company => {
+        const name = company.NAME;
+        const backgroundColor = company.BACKGROUND_COLOR;
+
+        const onClick = () => {
+          setCompany({
+            name,
+            backgroundColor,
+          });
+        };
+
         return (
           <CompanyLogoItem
-            key={company.NAME}
+            key={name}
             SvgLogo={<company.SVG_LOGO_COMPONENT />}
-            name={company.NAME}
-            backgroundColor={company.BACKGROUND_COLOR}
-            setCompany={setCompany}
+            name={name}
+            onClick={onClick}
           />
         );
       })}

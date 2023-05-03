@@ -15,18 +15,18 @@
       100vw 에서 100%로 변경한 이유는 어떤 것인가요?
 - [x] src/components/BottomSheet/BottomSheet.tsx
       CardCompanyLogoList를 바텀싯이 알아야할것같진 않아서 children정도여도 좋을 것 같아요~
-- [ ] src/components/Card/Card.styled.ts
+- [x] src/components/Card/Card.styled.ts
       테마여서 프리셋으로 지정된 문자열으로 예상했는데 컬러값이네요! backgroundColor로 명확하게 변경해줘도 좋을 것 같아요
-- [ ] src/components/Card/Card.styled.ts
+- [x] src/components/Card/Card.styled.ts
       Info는 붙어서 어떤 의미가 추가되지 않는 불용어이기 때문에 요기 그냥 Card로 명명해주면 어떨까 싶네요!
-- [ ] src/components/Card/Card.tsx
+- [x] src/components/Card/Card.tsx
       `card.company.name`
       요렇게 prop명이 네이밍 될수있으면 깔끔할 것 같아요 ㅎㅎ
       상위에서 이미 사용된 중복단어는 생략하는게 좋은것같아요.
       디렉토리명 등등 계층에 관한 이름짓기는 요걸 염두에 두면 명확해져서 좋아요
-- [ ] src/components/Card/Card.tsx
+- [x] src/components/Card/Card.tsx
       그러면 여기 네이밍이 겹쳐서 애매해질텐데 보통 컴포넌트는 UI의 늬앙스를 이름에 추가하면 더 명확해지는 것 같아요. ex) Section, ListItem 등등 ~~~
-- [ ] src/components/CardCompanyButton/CardCompanyButton.tsx
+- [x] src/components/CardCompanyButton/CardCompanyButton.tsx
       버튼의 클릭핸들러 콜백을 받으니 onClick을 prop명으로 받으면 어떨까요? setCardCompany는 범위가 많이 작은 것 같아요. 예를 들어서 클릭시 로깅을 할 수도 있구요. 토스트메시지를 띄울수도있구요. set한다는것을 이 컴포넌트가 알아야할 필요가 있어보이진 않아요
 - [ ] src/components/CardCompanyButton/CardCompanyButton.tsx
       타입은 파스칼케이스로 통일하면 좋을 것 같아요~!
