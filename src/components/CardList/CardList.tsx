@@ -12,12 +12,7 @@ const CardList = ({ cardInfo }: CardListProps) => {
       <ul>
         {cardInfo.map(card => (
           <li className={styles.card} key={crypto.randomUUID()}>
-            <CardPreview
-              cardNumber={card.cardNumber}
-              cardOwnerName={card.cardOwnerName}
-              expirationDate={card.expirationDate}
-              selectedCard={card.selectedCard}
-            />
+            <CardPreview {...card} />
             <div className={styles.cardNicknameBox}>
               <h4>{card.cardNickName}</h4>
             </div>
