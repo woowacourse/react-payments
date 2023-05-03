@@ -27,27 +27,26 @@ const CardRegisterForm = () => {
   const navigate = useNavigate();
   const handlePageChange = () => navigate("/completion");
 
-  // TODO: 상수화, 리팩터링, 분리
   const handleFocusNext = ({ target }: ChangeEvent<HTMLFormElement>) => {
-    const { form, maxLength, value, name } = target;
+    if (shouldPreventFocusMovement(target)) return;
 
-    if (name === "name") {
-      if (value.length !== maxLength) return;
+    focusFormInput(target.form, target, NEXT);
+  };
 
-      focusFormInput(form, target, NEXT);
-    }
+  const shouldPreventFocusMovement = (target: any) => {
+    const { name, value, maxLength } = target;
+
+    if (name === "name") return value.length !== maxLength;
 
     const { month, year } = allCardInfo;
     const date = { month, year };
     const isValidDate = isInvalidDate(target, date);
 
-    if ((name === "month" || name === "year") && isValidDate) return;
+    if ((name === "month" || name === "year") && isValidDate) return true;
 
     const validValue = value.replace(ONLY_NUMBER, "");
 
-    if (validValue.length !== maxLength) return;
-
-    focusFormInput(form, target, NEXT);
+    return validValue.length !== maxLength;
   };
 
   const focusFormInput = (
