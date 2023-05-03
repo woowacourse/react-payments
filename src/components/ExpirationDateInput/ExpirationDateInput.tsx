@@ -1,6 +1,6 @@
 import { Input, InputBox } from '../Input';
 import styled from 'styled-components';
-import Label from '../Label';
+import { Label } from '../Label';
 import useAutoFocus from '../../hooks/useAutoFocus';
 
 type ExpirationDateInputProps = {

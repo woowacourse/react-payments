@@ -1,3 +1,1 @@
-import CardPasswordInput from './CardPasswordInput';
-
-export default CardPasswordInput;
+export { default } from './CardPasswordInput';

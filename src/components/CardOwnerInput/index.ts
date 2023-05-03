@@ -1,3 +1,1 @@
-import CardOwnerInput from './CardOwnerInput';
-
-export default CardOwnerInput;
+export { default } from './CardOwnerInput';

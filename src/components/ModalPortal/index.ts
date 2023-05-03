@@ -1,5 +1,1 @@
-import ModalPortal, { PortalProvider } from './ModalPortal';
-
-export { PortalProvider };
-
-export default ModalPortal;
+export { default, PortalProvider } from './ModalPortal';

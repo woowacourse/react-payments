@@ -1,3 +1,1 @@
-import BankProfileButton from './BankProfileButton';
-
-export default BankProfileButton;
+export { default } from './BankProfileButton';

@@ -1,3 +1,1 @@
-import BankProfileList from './BankProfileList';
-
-export default BankProfileList;
+export { default } from './BankProfileList';

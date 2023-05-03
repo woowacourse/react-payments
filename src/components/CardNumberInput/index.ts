@@ -1,3 +1,1 @@
-import CardNumberInput from './CardNumberInput';
-
-export default CardNumberInput;
+export { default } from './CardNumberInput';

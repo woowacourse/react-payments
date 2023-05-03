@@ -1,3 +1,1 @@
-import CardRegistration from './CardRegistration';
-
-export default CardRegistration;
+export { default } from './CardRegistration';

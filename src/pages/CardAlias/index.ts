@@ -1,3 +1,1 @@
-import CardAlias from './CardAlias';
-
-export default CardAlias;
+export { default } from './CardAlias';

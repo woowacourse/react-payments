@@ -1,3 +1,2 @@
-import SecurityCodeInput from './SecurityCodeInput';
+export { default } from './SecurityCodeInput';
 
-export default SecurityCodeInput;

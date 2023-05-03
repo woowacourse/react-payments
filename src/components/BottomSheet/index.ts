@@ -1,3 +1,1 @@
-import BottomSheet from './BottomSheet';
-
-export default BottomSheet;
+export { default } from './BottomSheet';
