@@ -110,7 +110,7 @@ OwnerLessCreditCard.args = {
 };
 
 export const WrongCardCompanyName = Template.bind({});
-OwnerLessCreditCard.args = {
+WrongCardCompanyName.args = {
   fullFilled: true,
   creditCard: {
     companyId: 'invalid',
