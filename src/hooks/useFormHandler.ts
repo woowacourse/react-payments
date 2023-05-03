@@ -22,7 +22,7 @@ export const useFormHandler = (cardInfo: Card) => {
     }
 
     if (areValidInfo(formDataObject)) {
-      navigate('/register-name');
+      navigate('/card-name');
     } else {
       alert('값을 모두 입력해 주세요.');
     }

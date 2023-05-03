@@ -9,7 +9,7 @@ const MainPage = () => {
   const navigate = useNavigate();
 
   const goToRegister = () => {
-    navigate('/register');
+    navigate('/card-registration');
   };
 
   const cardInfoArray = getLocalStorage('card');
