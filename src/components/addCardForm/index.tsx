@@ -107,14 +107,6 @@ const Style = {
 
     width: max-content;
   `,
-  // InputContainer: styled.div`
-  //   display: flex;
-  //   flex-direction: column;
-
-  //   width: max-content;
-
-  //   gap: 19px;
-  // `,
   Caption: styled.span`
     width: 241px;
 
