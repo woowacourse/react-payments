@@ -7,6 +7,7 @@ interface Props extends StyleInputProps, ComponentPropsWithoutRef<"input"> {
   maxLength?: number;
   placeholder?: string;
   type?: string;
+  name?: string;
   inputmode?: React.HTMLAttributes<HTMLLIElement>["inputMode"];
 }
 
@@ -15,7 +16,7 @@ interface StyleInputProps {
 }
 
 const Input = forwardRef<HTMLInputElement, Props>(function (
-  { value, placeholder, onChange, inputmode, type, ...props }: Props,
+  { value, placeholder, onChange, name, inputmode, type, ...props }: Props,
   ref,
 ) {
   return (
@@ -26,6 +27,7 @@ const Input = forwardRef<HTMLInputElement, Props>(function (
       placeholder={placeholder}
       ref={ref}
       type={type ?? "text"}
+      name={name}
       {...props}
     />
   );
