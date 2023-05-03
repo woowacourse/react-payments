@@ -4,7 +4,7 @@ import type { CardType } from '../../type';
 import Card from '../../components/Card';
 import Header from '../../components/Header';
 import './index.css';
-import { fetchLocalStorage } from '../../utils/applicationUtil';
+import { fetchLocalStorage } from '../../utils/applicationStorage';
 
 const CardListPage = () => {
   const cardList = fetchLocalStorage('cardList', '[]');
@@ -23,19 +23,17 @@ const CardListPage = () => {
         {cardList.length === 0 ? (
           <span className="empty-card-list-title">새로운 카드를 등록해주세요.</span>
         ) : (
-          cardList.map((card: CardType) => (
-            <div key={card.id}>
+          cardList.map(({ id, cardNumber, alias, cardCompany, ...rest }: CardType) => (
+            <div key={id}>
               <Card
-                cardCompany={card.cardCompany}
-                cardFirstNumber={card.cardNumber.first}
-                cardSecondNumber={card.cardNumber.second}
-                cardThirdNumber={card.cardNumber.third}
-                cardFourthNumber={card.cardNumber.fourth}
-                cardOwner={card.cardOwner}
-                expireMonth={card.expireMonth}
-                expireYear={card.expireYear}
+                cardCompany={cardCompany}
+                cardFirstNumber={cardNumber.first}
+                cardSecondNumber={cardNumber.second}
+                cardThirdNumber={cardNumber.third}
+                cardFourthNumber={cardNumber.fourth}
+                {...rest}
               />
-              <p className="card-alias">{card.alias || card.cardCompany}</p>
+              <p className="card-alias">{alias || cardCompany}</p>
             </div>
           ))
         )}

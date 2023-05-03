@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import type { AddCardFormProps, CardType } from '../../../type';
-import { postLocalStorage as submitCard } from '../../../utils/applicationUtil';
+import { postLocalStorage as submitCard } from '../../../utils/applicationStorage';
 import ExpireDateInput from './ExpireDateInput';
 import OwnerInput from './OwnerInput';
 import SecurityCodeInput from './SecurityCodeInput';
@@ -12,55 +12,17 @@ import CardNumberInput from './CardNumberInput';
 import { useCurrentCardContext } from '../../../context/CurrentCardProvider';
 import { useIsAccessAliasPageContext } from '../../../context/IsAccessAliasPageProvider';
 import useTotalStatus from '../../../hooks/useTotalStatus';
+import { getSubmitData, getTotalStatus } from '../domain/domain';
 
-const AddCardForm = ({
-  cardCompany,
-  cardFirstNumber,
-  cardSecondNumber,
-  cardThirdNumber,
-  cardFourthNumber,
-  expireMonth,
-  expireYear,
-  cardOwner,
-  securityCode,
-  cardPassword1,
-  cardPassword2,
-}: AddCardFormProps) => {
+const AddCardForm = (props: AddCardFormProps) => {
   const navigate = useNavigate();
   const { setCurrentCard } = useCurrentCardContext();
   const { setIsAccessAliasPage } = useIsAccessAliasPageContext();
-  const isActive = useTotalStatus([
-    cardCompany.status,
-    cardFirstNumber.status,
-    cardSecondNumber.status,
-    cardThirdNumber.status,
-    cardFourthNumber.status,
-    cardOwner.status,
-    expireMonth.status,
-    expireYear.status,
-    securityCode.status,
-    cardPassword1.status,
-    cardPassword2.status,
-  ]);
+  const isActive = useTotalStatus(getTotalStatus(props));
+
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const submitData: Omit<CardType, 'id'> = {
-      cardCompany: cardCompany.value,
-      cardNumber: {
-        first: cardFirstNumber.value,
-        second: cardSecondNumber.value,
-        third: cardThirdNumber.value,
-        fourth: cardFourthNumber.value,
-      },
-      cardOwner: cardOwner.value,
-      expireMonth: expireMonth.value,
-      expireYear: expireYear.value,
-      securityCode: securityCode.value,
-      cardPassword: {
-        first: cardPassword1.value,
-        second: cardPassword2.value,
-      },
-    };
+    const submitData: Omit<CardType, 'id'> = getSubmitData(props);
     try {
       submitCard(submitData);
       setCurrentCard(submitData);
@@ -74,16 +36,11 @@ const AddCardForm = ({
 
   return (
     <form className="add-card-form" onSubmit={onSubmit}>
-      <CardNumberInput
-        cardFirstNumber={cardFirstNumber}
-        cardSecondNumber={cardSecondNumber}
-        cardThirdNumber={cardThirdNumber}
-        cardFourthNumber={cardFourthNumber}
-      />
-      <ExpireDateInput expireMonth={expireMonth} expireYear={expireYear} />
-      <OwnerInput cardOwner={cardOwner} />
-      <SecurityCodeInput securityCode={securityCode} />
-      <PasswordInput cardPassword1={cardPassword1} cardPassword2={cardPassword2} />
+      <CardNumberInput {...props} />
+      <ExpireDateInput expireMonth={props.expireMonth} expireYear={props.expireYear} />
+      <OwnerInput cardOwner={props.cardOwner} />
+      <SecurityCodeInput securityCode={props.securityCode} />
+      <PasswordInput cardPassword1={props.cardPassword1} cardPassword2={props.cardPassword2} />
       <div className="add-card-submit">{isActive && <button type="submit">다음</button>}</div>
     </form>
   );
