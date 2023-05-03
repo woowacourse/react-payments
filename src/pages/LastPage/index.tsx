@@ -4,7 +4,7 @@ import { changeInvalidValueToBlank } from "utils/inputValidator";
 import { NextButton } from "components/style/ButtonStyle";
 import CardPreview from "components/CardPreview";
 import Input, { CardNickname } from "components/Input";
-import LengthLimit from "components/LengthLimit";
+import TextLimit from "components/TextLimit";
 import GotLost from "pages/GotLost";
 import useSetCardInfo from "hooks/useSetCardInfo";
 import useInitCardInfo from "hooks/useInitCardInfo";
@@ -49,9 +49,9 @@ const LastPage = () => {
             onChange={handleNicknameChange}
             onKeyDown={handleEnterKeyDown}
           />
-          <LengthLimit
+          <TextLimit
             length={nickname.length}
-            lengthLimitStyle={nicknameLimitStyle}
+            textLimitStyle={nicknameLimitStyle}
           />
           <NextButton onClick={handleSave}>확인</NextButton>
         </S.Wrapper>

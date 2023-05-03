@@ -3,20 +3,20 @@ import { LIMIT_LENGTH } from "constants/limit";
 
 interface Props {
   length: number;
-  lengthLimitStyle: CSSProp;
+  textLimitStyle: CSSProp;
 }
 
-const LengthLimit = ({ length, lengthLimitStyle }: Props) => {
+const LengthLimit = ({ length, textLimitStyle }: Props) => {
   return (
-    <S.Limit lengthLimitStyle={lengthLimitStyle}>
+    <S.Limit textLimitStyle={textLimitStyle}>
       {length}/{LIMIT_LENGTH.NAME}
     </S.Limit>
   );
 };
 
 const S = {
-  Limit: styled.div<{ lengthLimitStyle: CSSProp }>`
-    ${(props) => props.lengthLimitStyle}
+  Limit: styled.div<{ textLimitStyle: CSSProp }>`
+    ${(props) => props.textLimitStyle}
   `,
 };
 
