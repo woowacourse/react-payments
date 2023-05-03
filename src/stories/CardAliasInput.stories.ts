@@ -3,7 +3,7 @@ import CardAliasInput from '../components/@common/CardAliasInput';
 
 const meta = {
   component: CardAliasInput,
-  title: 'Section/CardAliasInput',
+  title: 'Item/CardAliasInput',
 } satisfies Meta<typeof CardAliasInput>;
 
 export default meta;

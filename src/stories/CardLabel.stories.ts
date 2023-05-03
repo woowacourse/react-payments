@@ -3,7 +3,7 @@ import CardLabel from '../components/@common/CardLabel';
 
 const meta = {
   component: CardLabel,
-  title: 'Section/CardLabel',
+  title: 'Item/CardLabel',
 } satisfies Meta<typeof CardLabel>;
 
 export default meta;

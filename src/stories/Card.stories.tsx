@@ -3,10 +3,11 @@ import Card from '../components/Card/Card';
 
 const meta = {
   component: Card,
-  title: 'Section/Card',
+  title: 'Item/Card',
 } satisfies Meta<typeof Card>;
 
 export default meta;
+
 type Story = StoryObj<typeof meta>;
 
 export const CardStory: Story = {

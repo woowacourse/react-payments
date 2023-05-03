@@ -4,7 +4,7 @@ import { IMAGE_PATH } from '../types/Image';
 
 const meta = {
   component: CardLogo,
-  title: 'Section/CardLogo',
+  title: 'Item/CardLogo',
 } satisfies Meta<typeof CardLogo>;
 
 export default meta;

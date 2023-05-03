@@ -3,7 +3,7 @@ import SubmitButton from '../components/@common/SubmitButton';
 
 const meta = {
   component: SubmitButton,
-  title: 'Section/SubmitButton',
+  title: 'Item/SubmitButton',
 } satisfies Meta<typeof SubmitButton>;
 
 export default meta;
