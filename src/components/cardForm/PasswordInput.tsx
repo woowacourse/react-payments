@@ -3,6 +3,7 @@ import Input from "../common/Input";
 import InputLabel from "../common/InputLabel";
 import styled from "styled-components";
 
+import React from "react";
 import { useRef, useCallback } from "react";
 
 import { PASSWORD_MAXLEGNTH, NUMBER_REGEX } from "../../constants";
@@ -88,4 +89,4 @@ const HiddenPassword = styled.div`
   font-weight: 500;
 `;
 
-export default PasswordInput;
+export default React.memo(PasswordInput);
