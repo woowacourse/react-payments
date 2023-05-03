@@ -9,7 +9,9 @@
       "@styles/*": ["styles/*"],
       "@utils/*": ["utils/*"],
       "@constants/*": ["constants/*"],
-      "@type/*": ["types/*"]
+      "@type/*": ["types/*"],
+      "@providers/*": ["providers/*"],
+      "@contexts/*": ["contexts/*"]
     }
   }
 }

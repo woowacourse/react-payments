@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useCardListContext } from '@hooks/useCardContext';
-import { usePageContext } from '@hooks/usePageContext';
+import { useCardListContext } from '@contexts/useCardContext';
+import { usePageContext } from '@contexts/usePageContext';
 import { AddCardButton } from '@components/addCardPage/AddCardButton';
 import { Card } from '@components/common/Card';
 import { PAGE_KIND } from '@constants/constant';

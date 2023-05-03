@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { CardListContext } from 'provider/CardContextProvider';
+import { CardListContext } from '@providers/CardContextProvider';
 
 export const useCardListContext = () => {
   const context = useContext(CardListContext);

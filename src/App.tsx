@@ -1,5 +1,5 @@
-import { usePageContext } from '@hooks/usePageContext';
-import { ROUTER } from '@constants/page';
+import { usePageContext } from '@contexts/usePageContext';
+import { ROUTER } from '@constants/router';
 
 export default function App() {
   const { page } = usePageContext();

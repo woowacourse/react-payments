@@ -6,12 +6,12 @@ import React, {
   useState,
 } from 'react';
 import styled from 'styled-components';
-import { useCardListContext } from '@hooks/useCardContext';
 import { useFocusInput } from '@hooks/useFocusInput';
 import { useFormInputs } from '@hooks/useFormInputs';
 import { useHideScrollState } from '@hooks/useHideScrollState';
 import { type UseInputProps } from '@hooks/useInput';
-import { usePageContext } from '@hooks/usePageContext';
+import { useCardListContext } from '@contexts/useCardContext';
+import { usePageContext } from '@contexts/usePageContext';
 import { CardNumberInput } from '@components/addCardPage/CardNumberInput';
 import { CvcInput } from '@components/addCardPage/CvcInput';
 import { ExpirationInput } from '@components/addCardPage/ExpirationInput';
