@@ -10,7 +10,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const ExpirationDateStory: Story = {
+export const ExpirationDate: Story = {
   args: {
     date: {
       month: "11",

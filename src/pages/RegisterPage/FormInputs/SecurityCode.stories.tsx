@@ -10,7 +10,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const SecurityCodeStory: Story = {
+export const SecurityCode: Story = {
   args: {
     code: "123",
   },

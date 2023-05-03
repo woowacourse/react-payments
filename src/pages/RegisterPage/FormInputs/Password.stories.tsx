@@ -10,7 +10,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const PasswordStory: Story = {
+export const Password: Story = {
   args: {
     password: {
       password1: "2",

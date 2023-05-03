@@ -1,16 +1,16 @@
 import { Meta, StoryObj } from "@storybook/react";
-import CardPreview from "./CardPreview";
+import CardPreviewComponent from "./CardPreview";
 
 const meta = {
-  component: CardPreview,
+  component: CardPreviewComponent,
   title: "Preview/CardPreview",
-} satisfies Meta<typeof CardPreview>;
+} satisfies Meta<typeof CardPreviewComponent>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const CardPreviewStory: Story = {
+export const CardPreview: Story = {
   args: {
     cardInfo: {
       cardCompany: "현대카드",

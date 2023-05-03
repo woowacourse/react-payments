@@ -10,7 +10,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const CardNumbersStory: Story = {
+export const CardNumbers: Story = {
   args: {
     cardNumber: {
       number1: "1111",
