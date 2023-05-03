@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react';
 import { FormInputValueType, ValidatorResponseType } from '../types';
 
 type UpdaterFunctions = {
+  initialValue?: string;
   trimmer?: (rawValue: string) => string;
   validator: (rawValue: string) => ValidatorResponseType;
   contextSetter: (newValue: FormInputValueType) => void;
@@ -17,12 +18,13 @@ type UpdaterFunctions = {
  *
  * 컴포넌트 내에 복잡한 값 구현을 할 필요 없이, 사용할 함수만 지정해 주는 것으로 간편하게 구현할 수 있게 됩니다.
  *
+ * @param initialValue - 초깃값. 지정하지 않을 경우 빈 문자열 ('') 이 초깃값으로 할당됩니다.
  * @param trimmer - 값을 형식에 맞게 수정하는 데 사용할 함수
  * @param validator - 값을 검증하는 데 사용할 함수
  * @param contextSetter - Context API 값 업데이트를 위해 사용할 함수
  */
-const useInputUpdater = ({ trimmer, validator, contextSetter }: UpdaterFunctions) => {
-  const [inputValue, setInputValue] = useState('');
+const useInputUpdater = ({ initialValue = '', trimmer, validator, contextSetter }: UpdaterFunctions) => {
+  const [inputValue, setInputValue] = useState<string>(initialValue);
   const [errorMessage, setErrorMessage] = useState('');
 
   const setInputValueWithValidation = useCallback(
