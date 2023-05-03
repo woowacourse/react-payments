@@ -1,3 +1,4 @@
+import React from 'react';
 import Input from '../Input/Input';
 import styles from './CardNicknameInput.module.css';
 import { useCardStore } from '../../hook/useCardState';
@@ -13,4 +14,4 @@ const CardNicknameInput = () => {
   return <Input width="200px" value={cardNickName} onChange={handleNickNameChange} className={styles.input} required />;
 };
 
-export default CardNicknameInput;
+export default React.memo(CardNicknameInput);
