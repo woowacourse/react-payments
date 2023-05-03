@@ -1,40 +1,39 @@
-import { Dispatch, SetStateAction } from 'react';
-import { Card } from '../types';
-import Header from '../components/common/Header/Header';
-import CardItem from '../components/CardItem/CardItem';
+import { useEffect } from 'react';
 import CardAddForm from '../components/CardAddForm/CardAddForm';
-import { useCardAddition } from '../hooks/useCardAddition';
+import CardItem from '../components/CardItem/CardItem';
+import Header from '../components/common/Header/Header';
+import { useModalContext } from '../contexts/ModalContext';
+import { useCardAddForm } from '../hooks/cards/useCardAddForm';
 
-interface CardAddPageProps {
-  addCard: Dispatch<SetStateAction<Card[]>>;
-}
+const CardAddPage = () => {
+  const { resetModal } = useModalContext();
+  const { cardInformation, inputError, updateInputValue, updateInputError, handleSubmit } =
+    useCardAddForm();
 
-function CardAddPage({ addCard }: CardAddPageProps) {
-  const {
-    cardInformation,
-    onCardNumberChange,
-    onOwnerNameChange,
-    onExpirationDateChange,
-    onSecurityCodeChange,
-    onPasswordChange,
-    onCardInformationSubmit,
-  } = useCardAddition(addCard);
+  useEffect(() => {
+    return () => resetModal();
+  }, [resetModal]);
 
   return (
     <>
-      <Header content="카드 추가" isOverlayPage={true} />
-      <CardItem className="mg-b-24 center-hoz-item" information={cardInformation} />
-      <CardAddForm
-        cardInformation={cardInformation}
-        onCardNumberChange={onCardNumberChange}
-        onOwnerNameChange={onOwnerNameChange}
-        onExpirationDateChange={onExpirationDateChange}
-        onSecurityCodeChange={onSecurityCodeChange}
-        onPasswordChange={onPasswordChange}
-        onCardInformationSubmit={onCardInformationSubmit}
-      />
+      <Header content="카드 추가" isOverlayPage />
+      <main>
+        <CardItem
+          className="mg-b-24 center-hoz-item"
+          issuer={cardInformation.issuer}
+          cardNumber={cardInformation.cardNumber}
+          expirationDate={cardInformation.expirationDate}
+          ownerName={cardInformation.ownerName}
+        />
+        <CardAddForm
+          cardInputError={inputError}
+          updateInputValue={updateInputValue}
+          updateInputError={updateInputError}
+          handleSubmit={handleSubmit}
+        />
+      </main>
     </>
   );
-}
+};
 
 export default CardAddPage;

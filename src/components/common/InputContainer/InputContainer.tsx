@@ -1,43 +1,42 @@
-import styles from './style.module.css';
-import { ReactNode } from 'react';
+import { forwardRef } from 'react';
+import type { ComponentPropsWithRef, ForwardedRef, ReactNode } from 'react';
+import type { SupportingTextMessage } from '../../../types';
 import SupportingText from '../SupportingText/SupportingText';
+import styles from './style.module.css';
 
-interface InputContainerProps {
-  label: string;
-  id: string;
+interface InputContainerProps extends ComponentPropsWithRef<'div'> {
   children: ReactNode;
-  required?: boolean;
-  supportingText?: string;
+  supportingText?: SupportingTextMessage;
+  characterCounter?: {
+    currentCount: number;
+    maxCount: number;
+  };
   isError?: boolean;
-  characterCounter?: number[];
 }
 
-function InputContainer({
-  label,
-  id,
-  children,
-  required = false,
-  supportingText,
-  isError = false,
-  characterCounter,
-}: InputContainerProps) {
+const InputContainer = (
+  {
+    children,
+    className = '',
+    supportingText,
+    characterCounter,
+    isError = false,
+  }: InputContainerProps,
+  ref: ForwardedRef<HTMLDivElement>
+) => {
   return (
-    <div className={styles.inputContainer}>
-      <label htmlFor={id}>
-        {label}
-        {required && <span className={styles.required}> *</span>}
-      </label>
+    <div ref={ref} className={`${className} ${styles.inputContainer}`}>
       {children}
       <div className={styles.subInformation}>
         {supportingText && <SupportingText message={supportingText} isError={isError} />}
         {characterCounter && (
           <span className={styles.characterCounter}>
-            {characterCounter[0]}/{characterCounter[1]}
+            {characterCounter.currentCount}/{characterCounter.maxCount}
           </span>
         )}
       </div>
     </div>
   );
-}
+};
 
-export default InputContainer;
+export default forwardRef(InputContainer);

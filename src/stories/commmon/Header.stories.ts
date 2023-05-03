@@ -4,21 +4,21 @@ import Header from '../../components/common/Header/Header';
 const meta = {
   title: 'Payments/Common/Header',
   component: Header,
-  tags: ['autodocs'],
 } satisfies Meta<typeof Header>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const CardList: Story = {
+export const Default: Story = {
   args: {
-    content: '보유 카드',
+    content: 'Header',
+    isOverlayPage: false,
   },
 };
 
-export const CardAdd: Story = {
+export const Overlay: Story = {
   args: {
-    content: '카드 추가',
+    content: 'Header',
     isOverlayPage: true,
   },
 };

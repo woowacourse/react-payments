@@ -1,0 +1,28 @@
+.container button {
+  color: var(--light-gray-3);
+  font-weight: normal;
+}
+
+.container button:focus:enabled {
+  border-color: var(--light-blue-3);
+  box-shadow: 0 0 0 3px rgba(141, 201, 255, 0.4);
+  outline: 0;
+}
+
+.container button.selected {
+  color: var(--black);
+}
+
+.container button.error {
+  background-color: var(--light-red-1);
+  border-color: var(--light-red-3);
+}
+
+.container button.error:hover:enabled {
+  background-color: var(--light-red-2);
+}
+
+.container button.error:focus:enabled {
+  border-color: var(--light-red-3);
+  box-shadow: 0 0 0 3px rgba(255, 177, 177, 0.4);
+}

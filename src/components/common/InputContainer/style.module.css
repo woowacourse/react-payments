@@ -1,18 +1,11 @@
 .inputContainer {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-}
-
-.inputContainer label {
-  margin-bottom: 4px;
-  color: #525252;
-  font-size: 12px;
-  font-weight: 600;
 }
 
 .subInformation {
   position: relative;
+  margin-top: 4px;
 }
 
 .subInformation > * {
@@ -25,9 +18,9 @@
   height: 15px;
   margin-top: 4px;
   font-size: 12px;
-  color: #727272;
+  color: var(--light-gray-3);
 }
 
 .required {
-  color: #ce0000;
+  color: var(--red);
 }

@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import CardList from '../../components/CardList/CardList';
 
 const meta = {
@@ -8,32 +8,43 @@ const meta = {
 } satisfies Meta<typeof CardList>;
 
 export default meta;
+type Story = StoryObj<typeof CardList>;
 
-export const Empty = () => <CardList cardList={[]}></CardList>;
+export const Empty: Story = {
+  args: {
+    cardList: [],
+  },
+};
 
-export const List = () => (
-  <CardList
-    cardList={[
+export const List: Story = {
+  args: {
+    cardList: [
       {
-        cardNumber: ['1234', '1234', '1234', '1234'],
+        id: 1,
+        cardName: '카드 1',
+        issuer: '우리카드',
+        cardNumber: '1234123412341234',
         expirationDate: {
           month: '12',
           year: '23',
         },
-        ownerName: 'WOOWACOURSE',
+        ownerName: 'WOOWA',
         securityCode: '123',
         password: ['1', '1'],
       },
       {
-        cardNumber: ['1234', '1234', '1234', '1234'],
+        id: 2,
+        issuer: '현대카드',
+        cardName: 'WOOWA의 현대카드',
+        cardNumber: '1234123412341234',
         expirationDate: {
           month: '12',
           year: '23',
         },
-        ownerName: 'WOOWACOURSE',
+        ownerName: 'WOOWA',
         securityCode: '123',
         password: ['1', '1'],
       },
-    ]}
-  ></CardList>
-);
+    ],
+  },
+};
