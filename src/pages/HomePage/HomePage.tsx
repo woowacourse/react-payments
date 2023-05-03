@@ -1,22 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useCardListContext } from '@hooks/useCardContext';
+import { usePageContext } from '@hooks/usePageContext';
 import { AddCardButton } from '@components/addCardPage/AddCardButton';
 import { Card } from '@components/common/Card';
-import { type CardInfo } from '@type/card';
-import { type PageInfo } from '@type/types';
 import { PAGE_KIND } from '@constants/constant';
 
-interface HomePageProps {
-  cardList: CardInfo[];
-  setCardList: (data: CardInfo[]) => void;
-  setPage: React.Dispatch<React.SetStateAction<PageInfo>>;
-}
-
-export default function HomePage({
-  cardList,
-  setPage,
-  setCardList,
-}: HomePageProps) {
+export default function HomePage() {
+  const { setPage } = usePageContext();
+  const { cardList, setCardList } = useCardListContext();
   const onAddCardClick = () => {
     setPage(PAGE_KIND.ADD_CARD);
   };

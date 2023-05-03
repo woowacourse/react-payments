@@ -1,4 +1,6 @@
 import React from 'react';
+import { CardListContextProvider } from 'provider/CardContextProvider';
+import { PageContextProvider } from 'provider/PageContextProvider';
 import ReactDOM from 'react-dom/client';
 import { ThemeProvider } from 'styled-components';
 import App from './App';
@@ -12,7 +14,11 @@ root.render(
   <ThemeProvider theme={theme}>
     <React.StrictMode>
       <GlobalStyle />
-      <App />
+      <CardListContextProvider>
+        <PageContextProvider>
+          <App />
+        </PageContextProvider>
+      </CardListContextProvider>
     </React.StrictMode>
   </ThemeProvider>
 );

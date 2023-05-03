@@ -6,10 +6,12 @@ import React, {
   useState,
 } from 'react';
 import styled from 'styled-components';
+import { useCardListContext } from '@hooks/useCardContext';
 import { useFocusInput } from '@hooks/useFocusInput';
 import { useFormInputs } from '@hooks/useFormInputs';
 import { useHideScrollState } from '@hooks/useHideScrollState';
 import { type UseInputProps } from '@hooks/useInput';
+import { usePageContext } from '@hooks/usePageContext';
 import { CardNumberInput } from '@components/addCardPage/CardNumberInput';
 import { CvcInput } from '@components/addCardPage/CvcInput';
 import { ExpirationInput } from '@components/addCardPage/ExpirationInput';
@@ -22,18 +24,11 @@ import { Card } from '@components/common/Card';
 import { InputField } from '@components/common/InputField';
 import { Modal } from '@components/common/Modal';
 import { type CardCompanyType, type CardInfo } from '@type/card';
-import { type PageInfo } from '@type/types';
 import { createUniqueId, setNextInputFocus } from '@utils/common';
 import { formValidate } from '@utils/formValidate';
 import { isPastDate } from '@utils/validate';
 import { CARD_COMPANY, CARD_COMPANY_DATA } from '@constants/cardCompany';
 import { PAGE_KIND } from '@constants/constant';
-
-interface AddCardPageProps {
-  cardList: CardInfo[];
-  setCardList: (data: CardInfo[]) => void;
-  setPage: React.Dispatch<React.SetStateAction<PageInfo>>;
-}
 
 const INPUT_ID = {
   CARD_NUMBER: 'cardNumber',
@@ -43,11 +38,9 @@ const INPUT_ID = {
   PASSWORD: 'password',
 };
 
-export default function AddCardPage({
-  cardList,
-  setCardList,
-  setPage,
-}: AddCardPageProps) {
+export default function AddCardPage() {
+  const { cardList, setCardList } = useCardListContext();
+  const { setPage } = usePageContext();
   const cardForm = useRef<HTMLFormElement>(null);
   const { onInputKeydown } = useFocusInput(cardForm);
   const { formInputs } = useFormInputs();
