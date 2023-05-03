@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { cardLocalStorage } from '../components/domain/CardLocalStorage';
 import type { CardItemInfo } from './../types/Card';
 
-const useCardList = () => {
+export const useCardList = () => {
   const [cardList, setCardList] = useState<CardItemInfo[]>(
     cardLocalStorage.getCardList() || []
   );
@@ -13,5 +13,3 @@ const useCardList = () => {
 
   return { cardList, updateCardList };
 };
-
-export { useCardList };
