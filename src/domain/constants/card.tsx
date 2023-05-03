@@ -6,9 +6,10 @@ import { ReactComponent as Woori } from '../../assets/woori.svg';
 import { ReactComponent as Lotte } from '../../assets/lotte.svg';
 import { ReactComponent as Hana } from '../../assets/hana.svg';
 import { ReactComponent as KB } from '../../assets/kb.svg';
-import { CardType } from '../types/card';
+import type { CardType } from '../types/card';
+import type { HEX } from '../types/color';
 
-export const MAIN_COLOR = {
+export const MAIN_COLOR: Record<CardType, HEX> = {
   BC카드: '#E83F44',
   신한카드: '#0046FF',
   카카오카드: '#FFE300',
