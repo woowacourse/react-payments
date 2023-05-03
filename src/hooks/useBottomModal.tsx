@@ -1,5 +1,4 @@
-import React, { PropsWithChildren, useCallback, useState } from 'react';
-import BottomModal from '../components/@common/bottomModal/BottomModal';
+import { useCallback, useState } from 'react';
 
 const useBottomModal = (isShow: boolean) => {
   const [isOpen, setIsOpen] = useState(isShow);
@@ -13,11 +12,7 @@ const useBottomModal = (isShow: boolean) => {
   }, []);
 
   return {
-    BottomModal: ({ children }: PropsWithChildren) => (
-      <BottomModal isOpen={isOpen} onClose={closeModal}>
-        {children}
-      </BottomModal>
-    ),
+    isOpen,
     openModal,
     closeModal,
   };

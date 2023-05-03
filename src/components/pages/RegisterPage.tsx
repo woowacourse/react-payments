@@ -6,9 +6,10 @@ import { useContext } from 'react';
 import useBottomModal from '../../hooks/useBottomModal';
 import CreditCardContextType from '../../@types/creditCardContextType';
 import SelectCompanyModal from '../registerForm/selectCompanyModal/SelectCompanyModal';
+import BottomModal from '../@common/bottomModal/BottomModal';
 
 function RegisterPage() {
-  const { BottomModal, closeModal, openModal } = useBottomModal(true);
+  const { isOpen, closeModal, openModal } = useBottomModal(true);
   const { creditCard } = useContext(CreditCardContext) as CreditCardContextType;
   const { cardNumber, cardCompany, ownerName, expirationDate } = creditCard;
 
@@ -22,7 +23,7 @@ function RegisterPage() {
         cardCompany={cardCompany}
       />
       <CardRegisterForm />
-      <BottomModal>
+      <BottomModal isOpen={isOpen} onClose={closeModal}>
         <SelectCompanyModal onClose={closeModal}></SelectCompanyModal>
       </BottomModal>
     </>
