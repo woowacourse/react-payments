@@ -19,26 +19,26 @@ export function CardPreview() {
       : 'gray';
 
   return (
-    <CardContainer color={companyColor}>
+    <Container color={companyColor}>
       <_CompanyName>{companyName}</_CompanyName>
       <_Chip />
-      <NumberWrapper>
-        <NumberItem>{cardNumber.first.value}</NumberItem>
-        <NumberItem>{cardNumber.second.value}</NumberItem>
-        <NumberItem>{'•'.repeat(cardNumber.third.value.length)}</NumberItem>
-        <NumberItem>{'•'.repeat(cardNumber.fourth.value.length)}</NumberItem>
-      </NumberWrapper>
-      <InfoWrapper>
-        <Name>{username.first.value}</Name>
-        <Date>
+      <_NumberWrapper>
+        <_NumberItem>{cardNumber.first.value}</_NumberItem>
+        <_NumberItem>{cardNumber.second.value}</_NumberItem>
+        <_NumberItem>{'•'.repeat(cardNumber.third.value.length)}</_NumberItem>
+        <_NumberItem>{'•'.repeat(cardNumber.fourth.value.length)}</_NumberItem>
+      </_NumberWrapper>
+      <_InfoWrapper>
+        <_Name>{username.first.value}</_Name>
+        <_Date>
           {expiredDate.month.value}/{expiredDate.year.value}
-        </Date>
-      </InfoWrapper>
-    </CardContainer>
+        </_Date>
+      </_InfoWrapper>
+    </Container>
   );
 }
 
-const CardContainer = styled.section`
+const Container = styled.section`
   display: flex;
   flex-direction: column;
   width: 21.3rem;
@@ -78,21 +78,21 @@ const _Chip = styled.div`
   border-radius: 0.4rem;
 `;
 
-const NumberWrapper = styled.ul`
+const _NumberWrapper = styled.ul`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 
   margin: 1.3rem 1rem 0 2rem;
 `;
 
-const NumberItem = styled.li``;
+const _NumberItem = styled.li``;
 
-const InfoWrapper = styled.div`
+const _InfoWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 0.8rem 1.5em;
 `;
 
-const Name = styled.div``;
+const _Name = styled.div``;
 
-const Date = styled.div``;
+const _Date = styled.div``;
