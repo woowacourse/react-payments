@@ -29,7 +29,6 @@ const NicknameForm = () => {
     changeAction: (name: string, value: string) => {
       setCardInfo((prev) => ({ ...prev, [name]: value }));
     },
-    errorOptions: {},
   });
 
   return (

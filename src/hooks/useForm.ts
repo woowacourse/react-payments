@@ -1,13 +1,22 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 
+interface ErrorOptions {
+  initState: {
+    [key: string]: string;
+  };
+  validator: {
+    [key: string]: (value: string) => string;
+  };
+}
+
 interface Props {
   submitAction: () => void;
   changeAction: (name: string, value: string) => void;
-  errorOptions: any;
+  errorOptions?: ErrorOptions;
 }
 
 const useForm = ({ submitAction, changeAction, errorOptions }: Props) => {
-  const [error, setError] = useState(errorOptions?.initState);
+  const [error, setError] = useState(errorOptions?.initState || {});
 
   const checkFormValidity = (elements: HTMLInputElement[]) => {
     return elements.every((elem) => {
