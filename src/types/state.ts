@@ -33,5 +33,5 @@ export type Card = {
 };
 export type SetCard = React.Dispatch<SetStateAction<Card>>;
 
-export type CardList = Record<string, Card>;
+export type CardList = Record<string, Card> | null;
 export type SetCardList = React.Dispatch<React.SetStateAction<CardList>>;

@@ -6,12 +6,12 @@ import { useNavigationTo } from './useNavigationTo';
 
 export const useCheckFormCompletion = () => {
   const isFilled = useIsFilledForm();
-  const { navigationTo } = useNavigationTo(PATHNAME.HOME);
+  const { navigationTo } = useNavigationTo();
   useEffect(() => {
     if (isFilled) {
       return;
     }
 
-    navigationTo();
+    navigationTo(PATHNAME.HOME);
   }, []);
 };

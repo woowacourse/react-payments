@@ -2,7 +2,6 @@ import { MouseEvent, useContext } from 'react';
 
 import cardListContext from '../../contexts/CardContext';
 
-import { CardList } from '../../types/state';
 import { PATHNAME } from '../../constants/pathname';
 import { generateCardKey } from '../../domains/keyGenerator';
 import { useInitCard } from '../../hooks/useInitCard';
@@ -13,51 +12,51 @@ import CardBox from '../CardBox/CardBox';
 
 const CardBoxList = () => {
   const { cardList } = useContext(cardListContext);
-  const { navigationTo } = useNavigationTo(PATHNAME.NICKNAME);
+  const { navigationTo } = useNavigationTo();
   const initCard = useInitCard();
 
-  const onClick = ({ currentTarget }: MouseEvent<HTMLLIElement>) => {
-    if (!currentTarget.dataset.card) {
+  const onClickCardBoxItem = ({
+    currentTarget: {
+      dataset: { cardKey },
+    },
+  }: MouseEvent<HTMLLIElement>) => {
+    if (!cardList || !cardKey || !cardList[cardKey]) {
       return;
     }
 
-    const card = JSON.parse(currentTarget.dataset.card);
-    initCard(card);
-    navigationTo();
+    initCard(cardList[cardKey]);
+    navigationTo(PATHNAME.NICKNAME);
   };
 
-  const generateCardList = (cardList: CardList) => {
-    return Object.values(cardList).map(card => {
-      const key = generateCardKey(card);
-      const data = JSON.stringify(card);
-
-      return (
-        <styled.CardBoxItem
-          key={key + 'container'}
-          data-card-info={data}
-          onClick={onClick}
-        >
-          <CardBox
-            key={key + 'card'}
-            card={card}
-            backgroundColor={card.company.backgroundColor}
-          />
-          {card.nickname && (
-            <styled.NicknameParagraph key={key + 'alias'}>
-              {card.nickname}
-            </styled.NicknameParagraph>
-          )}
-        </styled.CardBoxItem>
-      );
-    });
-  };
+  if (!cardList) {
+    return null;
+  }
 
   return (
-    <>
-      {cardList && (
-        <styled.CardBoxList>{generateCardList(cardList)}</styled.CardBoxList>
-      )}
-    </>
+    <styled.CardBoxList>
+      {Object.values(cardList).map(card => {
+        const key = generateCardKey(card);
+
+        return (
+          <styled.CardBoxItem
+            key={key + 'box'}
+            data-card-key={key}
+            onClick={onClickCardBoxItem}
+          >
+            <CardBox
+              key={key + 'card'}
+              card={card}
+              backgroundColor={card.company.backgroundColor}
+            />
+            {card.nickname ? (
+              <styled.NicknameParagraph key={key + 'nickname'}>
+                {card.nickname}
+              </styled.NicknameParagraph>
+            ) : null}
+          </styled.CardBoxItem>
+        );
+      })}
+    </styled.CardBoxList>
   );
 };
 

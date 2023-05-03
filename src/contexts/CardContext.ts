@@ -38,7 +38,7 @@ const CardContext = createContext<{
   nickname: nickname;
   setNickname: setNickname;
 }>({
-  cardList: {},
+  cardList: null,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   setCardList: () => {},
   serialNumbers: DEFAULT_CARD_INFO_STATE.SERIAL_NUMBERS,

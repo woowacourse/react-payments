@@ -5,12 +5,15 @@ import { useNavigationTo } from '../../hooks/useNavigationTo';
 import * as styled from './FormSubmitButton.styled';
 
 const FormSubmitButton = () => {
-  const { navigationTo } = useNavigationTo(PATHNAME.NICKNAME);
+  const { navigationTo } = useNavigationTo();
 
   return (
     <>
       {useIsFilledForm() && (
-        <styled.FormSubmitButton onClick={navigationTo} autoFocus>
+        <styled.FormSubmitButton
+          onClick={() => navigationTo(PATHNAME.NICKNAME)}
+          autoFocus
+        >
           다음
         </styled.FormSubmitButton>
       )}

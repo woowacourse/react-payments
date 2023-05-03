@@ -8,11 +8,11 @@ import {
 
 export const useCardList = () => {
   const [cardList, setCardList] = useState<CardList>(
-    getLocalStorageItem('cardList') ?? {}
+    getLocalStorageItem('cardList')
   );
 
   useEffect(() => {
-    if (cardList && Object.keys(cardList).length) {
+    if (cardList) {
       setLocalStorageItem('cardList', cardList);
     }
   }, [cardList]);

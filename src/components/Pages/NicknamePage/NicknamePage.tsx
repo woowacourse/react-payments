@@ -39,7 +39,7 @@ const NicknamePage = () => {
     setCardList
   );
   useCheckFormCompletion();
-  const { navigationTo, history } = useNavigationTo(PATHNAME.HOME);
+  const { navigationTo, history } = useNavigationTo();
   const isFromRegisterPage = history.at(-1) === '/register';
   const title = useTitle(
     isFromRegisterPage ? '카드 등록이 완료되었습니다' : '카드 별칭을 수정합니다'
@@ -65,7 +65,7 @@ const NicknamePage = () => {
         ref={buttonRef}
         onClick={() => {
           updateCardList();
-          navigationTo();
+          navigationTo(PATHNAME.HOME);
         }}
       >
         확인

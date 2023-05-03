@@ -37,15 +37,15 @@
       export default 를 사용하면 rename할때 이름이 같이 안바뀌어서 많이 불편하더라구요
 - [ ] src/hooks/useNavigationTo.ts
       요거 페이지이동시 히스토리 유지되나요?
-- [ ] src/components/CardList/CardList.tsx
+- [x] src/components/CardList/CardList.tsx
       위에도 적긴했는데 jsx단이 분리가돼서 가독성이 좀 떨어지는 것 같아요
-- [ ] src/components/CardList/CardList.tsx
+- [x] src/components/CardList/CardList.tsx
       어떤 요소에대한 클릭이벤트핸들러인지 구체적으로 적어주면 좋을 것 같아요
-- [ ] src/components/CardList/CardList.tsx
+- [x] src/components/CardList/CardList.tsx
       홈으로 이동하는것같은데 인자로 명시적으로 전달해주면 더 읽기 좋을 것 같아요~
-- [ ] src/components/CardList/CardList.tsx
+- [x] src/components/CardList/CardList.tsx
       cardInfo가 여러가지 정보를 가지고 있는 객체인데 요거 html에 유효하지 않은 문자가 들어가면 화면이 깨지지 않을까싶어요. 데이터의 id값 정도만 저장하는게 어떨까요?
-- [ ] src/components/CardList/CardList.tsx
+- [x] src/components/CardList/CardList.tsx
 
   ```tsx
   if (cardList == null) {
