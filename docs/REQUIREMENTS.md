@@ -28,10 +28,10 @@
       그러면 여기 네이밍이 겹쳐서 애매해질텐데 보통 컴포넌트는 UI의 늬앙스를 이름에 추가하면 더 명확해지는 것 같아요. ex) Section, ListItem 등등 ~~~
 - [x] src/components/CardCompanyButton/CardCompanyButton.tsx
       버튼의 클릭핸들러 콜백을 받으니 onClick을 prop명으로 받으면 어떨까요? setCardCompany는 범위가 많이 작은 것 같아요. 예를 들어서 클릭시 로깅을 할 수도 있구요. 토스트메시지를 띄울수도있구요. set한다는것을 이 컴포넌트가 알아야할 필요가 있어보이진 않아요
-- [ ] src/components/CardCompanyButton/CardCompanyButton.tsx
+- [x] src/components/CardCompanyButton/CardCompanyButton.tsx
       타입은 파스칼케이스로 통일하면 좋을 것 같아요~!
       타입과 코드의 거리가 멀어보이는데 여기서 선언하면 어떨까요?
-- [ ] src/components/CardCompanyLogoList/CardCompanyLogoList.tsx
+- [x] src/components/CardCompanyLogoList/CardCompanyLogoList.tsx
       이렇게 함수로 분리한 이유는 어떤 것인가요?
 - [ ] src/components/CardList/CardList.tsx
       export default 를 사용하면 rename할때 이름이 같이 안바뀌어서 많이 불편하더라구요
