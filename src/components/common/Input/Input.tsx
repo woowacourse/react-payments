@@ -1,12 +1,10 @@
 import { InputHTMLAttributes } from 'react';
 import styled from 'styled-components';
 
-export type InputProps = InputHTMLAttributes<HTMLInputElement> & {
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-};
+export type InputProps = InputHTMLAttributes<HTMLInputElement>;
 
-export function Input({ onChange, ...restProps }: InputProps) {
-  return <_Input onChange={onChange} {...restProps} />;
+export function Input({ ...restProps }: InputProps) {
+  return <_Input {...restProps} />;
 }
 
 const _Input = styled.input`

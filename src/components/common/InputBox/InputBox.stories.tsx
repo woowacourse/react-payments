@@ -66,17 +66,17 @@ const invalidNameInput: InputInfo[] = [
 ];
 
 export const Default: React.FC = () => (
-  <InputBox id={'InputBox 예시'} inputs={defaultInput}></InputBox>
+  <InputBox infoType={'InputBox 예시'} inputs={defaultInput}></InputBox>
 );
 
 export const Invalid: React.FC = () => (
-  <InputBox id={'cardNumber'} inputs={invalidCardNumberInput}></InputBox>
+  <InputBox infoType={'cardNumber'} inputs={invalidCardNumberInput}></InputBox>
 );
 
 export const ValidCode: React.FC = () => (
-  <InputBox id={'code'} inputs={validCodeInput}></InputBox>
+  <InputBox infoType={'code'} inputs={validCodeInput}></InputBox>
 );
 
 export const InvalidName: React.FC = () => (
-  <InputBox id={'username'} inputs={invalidNameInput}></InputBox>
+  <InputBox infoType={'username'} inputs={invalidNameInput}></InputBox>
 );

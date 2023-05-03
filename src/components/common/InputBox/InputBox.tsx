@@ -8,35 +8,33 @@ import { camelToSnake } from '../../../utils/cardInfoFormat';
 import { ErrorMessage, Label, Input } from '../../common';
 
 export interface InputBoxProps extends React.HTMLAttributes<HTMLDivElement> {
+  infoType: string;
   inputs: InputInfo[];
 }
 
-export function InputBox({ id, inputs }: InputBoxProps) {
+export function InputBox({ infoType, inputs }: InputBoxProps) {
   return (
     <_InputContainer>
-      <Label htmlFor={`${id}`}>
-        {camelToSnake(String(id)) in LABEL
-          ? LABEL[camelToSnake(String(id))]
-          : String(id)}
-      </Label>
+      <Label htmlFor={infoType}>{LABEL[camelToSnake(infoType)]}</Label>
       <_InputWithErrorMessage>
         {inputs.map(
           ({ type, value, handleChange, required, isError }, index) => (
             <React.Fragment key={index}>
               <_InputWrapper>
-                <div>{id === 'username' ? `${value.length} / 30` : ''}</div>
+                <div>
+                  {infoType === 'username' ? `${value.length} / 30` : ''}
+                </div>
                 <Input
-                  id={`${id}${index}`}
-                  name={id}
+                  name={infoType}
                   type={type}
                   value={value}
                   onChange={handleChange}
                   required={required}
-                  maxLength={MAX_LENGTH[camelToSnake(String(id))]}
-                  size={SIZE_STYLE[camelToSnake(String(id))]}
+                  maxLength={MAX_LENGTH[camelToSnake(infoType)]}
+                  size={SIZE_STYLE[camelToSnake(infoType)]}
                 />
                 <ErrorMessage>
-                  {isError && ERROR_MESSAGE[camelToSnake(String(id))]}
+                  {isError && ERROR_MESSAGE[camelToSnake(infoType)]}
                 </ErrorMessage>
               </_InputWrapper>
             </React.Fragment>

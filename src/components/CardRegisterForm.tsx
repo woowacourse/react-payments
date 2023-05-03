@@ -52,7 +52,7 @@ export function CardRegisterForm() {
   return (
     <_Form onSubmit={handleSubmit}>
       {Object.entries(cardRegisterForm).map(([key, inputs], index) => (
-        <InputBox key={index} id={key} inputs={Object.values(inputs)} />
+        <InputBox key={index} infoType={key} inputs={Object.values(inputs)} />
       ))}
       {isRequiredInputValid && isOptionalInputValid && (
         <_ButtonWrapper>
