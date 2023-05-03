@@ -6,23 +6,25 @@ import { COLOR } from '../../../constants/card';
 export const NicknamePageLayout = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
 
   position: relative;
+  padding: 0 0 5rem 0;
 
   width: 100%;
   height: 100%;
 `;
 
 export const Title = styled.h2`
-  margin: 40% 0 8% 0;
+  margin: 1rem 0 3rem 0;
 
   font-size: x-large;
   font-weight: 400;
 `;
 
 export const InputBox = styled.div`
-  margin: 24% 0 0 0;
+  margin: 4rem 0 0 0;
 
   input {
     width: 240px;
