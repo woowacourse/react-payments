@@ -6,8 +6,11 @@ import * as styled from './FormSubmitButton.styled';
 
 const FormSubmitButton = ({
   handleClickFormSubmit,
+  text,
 }: {
+  buttonRef?: React.RefObject<HTMLButtonElement>;
   handleClickFormSubmit: (event: MouseEvent<HTMLButtonElement>) => void;
+  text: string;
 }) => {
   if (!useIsFilledForm()) {
     return null;
@@ -15,7 +18,7 @@ const FormSubmitButton = ({
 
   return (
     <styled.FormSubmitButton onClick={handleClickFormSubmit} autoFocus>
-      다음
+      {text}
     </styled.FormSubmitButton>
   );
 };

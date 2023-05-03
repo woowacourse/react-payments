@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 
-import { useResetCard } from '../../../hooks/useResetCard';
+import { useInitCard } from '../../../hooks/useInitCard';
 
 import * as styled from './MyPage.styled';
 import CardBoxList from '../../CardBoxList/CardBoxList';
 import RegisterEntryBox from '../../RegisterEntryBox/RegisterEntryBox';
 
 const MyPage = () => {
-  const resetCard = useResetCard();
+  const resetCard = useInitCard();
 
   useEffect(() => {
     resetCard();

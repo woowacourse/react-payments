@@ -8,4 +8,7 @@ export const PageLayout = styled.div`
   height: 100%;
 `;
 
-export const Main = styled.main``;
+export const Main = styled.main`
+  width: 100%;
+  height: 100%;
+`;

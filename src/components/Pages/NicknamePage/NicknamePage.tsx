@@ -3,15 +3,15 @@ import { useNavigate } from 'react-router-dom';
 
 import CardContext from '../../../contexts/CardContext';
 
+import { generateCardKey } from '../../../domains/keyGenerator';
 import { PATHNAME } from '../../../constants/pathname';
 import { useUpdateCardList } from '../../../hooks/useUpdateCardList';
 import { useIsFilledForm } from '../../../hooks/useIsFilledForm';
-import { useFocusButtonOnTextStateLength } from '../../../hooks/useFocusButtonOnTextStateLength';
 
 import * as styled from './NicknamePage.styled';
 import CardPreviewSection from '../../CardPreviewSection/CardPreviewSection';
 import Input from '../../Input/Input';
-import { generateCardKey } from '../../../domains/keyGenerator';
+import FormSubmitButton from '../../FormSubmitButton/FormSubmitButton';
 
 const NicknamePage = () => {
   const {
@@ -36,7 +36,6 @@ const NicknamePage = () => {
     nickname,
   };
   const updateCardList = useUpdateCardList(card, setCardList);
-  const buttonRef = useFocusButtonOnTextStateLength(nickname, 15);
   const navigation = useNavigate();
 
   const [title] = useState(
@@ -51,6 +50,11 @@ const NicknamePage = () => {
       navigation(PATHNAME.HOME);
     }
   }, [isFilledForm, navigation]);
+
+  const handleClickFormSubmit = () => {
+    updateCardList();
+    navigation(PATHNAME.HOME);
+  };
 
   return (
     <styled.NicknamePageLayout>
@@ -68,15 +72,10 @@ const NicknamePage = () => {
           isFocus={true}
         />
       </styled.InputBox>
-      <styled.SubmitButton
-        ref={buttonRef}
-        onClick={() => {
-          updateCardList();
-          navigation(PATHNAME.HOME);
-        }}
-      >
-        확인
-      </styled.SubmitButton>
+      <FormSubmitButton
+        handleClickFormSubmit={handleClickFormSubmit}
+        text="확인"
+      />
     </styled.NicknamePageLayout>
   );
 };

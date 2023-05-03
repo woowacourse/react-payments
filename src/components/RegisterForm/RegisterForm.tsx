@@ -27,7 +27,10 @@ const RegisterForm = () => {
       <OwnerNameBox />
       <SecurityCodeBox />
       <PasswordBox />
-      <FormSubmitButton handleClickFormSubmit={handleClickFormSubmit} />
+      <FormSubmitButton
+        handleClickFormSubmit={handleClickFormSubmit}
+        text="다음"
+      />
     </styled.RegisterForm>
   );
 };
