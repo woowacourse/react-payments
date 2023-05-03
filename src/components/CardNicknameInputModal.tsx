@@ -34,7 +34,11 @@ const CardNicknameInputModal = ({
           closeModal(false);
         }}
       ></div>
-      <div className="input-nickname-box">
+      <div
+        className="input-nickname-box"
+        role="dialog"
+        aria-label="카드 타입을 선택할 수 있는 모달"
+      >
         <div className="nickname-box-main-font">거의 다 왔어요!</div>
         <div className="card-box">
           <Card
