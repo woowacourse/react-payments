@@ -2,14 +2,16 @@ import React, { useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { InputBox } from "../components";
-import { Card } from "../components/@common/card/card";
+import { Card, CardProps } from "../components/@common/card/card";
 import { Input } from "../components/@common/input/Input";
 import { InputGroup } from "../components/@common/input/inputGroup";
 import { PATH } from "../constants/path";
+import { useGenericLocation } from "../hooks/useGenericLocation";
+import { CardInfo } from "../type/card";
 import { setData } from "../utils/localStorage";
 
 export function AddCardNicknamePage() {
-  const { state } = useLocation();
+  const state: CardInfo = useGenericLocation(useLocation());
   const navigate = useNavigate();
   const nicknameInput = useRef<HTMLInputElement>(null);
 
