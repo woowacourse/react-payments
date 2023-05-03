@@ -13,5 +13,11 @@ type Story = StoryObj<typeof meta>;
 export const CardCompanyModalStory: Story = {
   args: {
     cardCompany: '국민카드',
+    setCardCompany: () => {
+      return;
+    },
+    setIsModalOpen: () => {
+      return;
+    },
   },
 };
