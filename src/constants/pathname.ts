@@ -1,13 +1,13 @@
 export const PATHNAME = {
   HOME: '/',
   REGISTER: '/register',
-  CARD_ALIAS: '/alias',
+  NICKNAME: '/nickname',
 } as const;
 
-export type PageTitle = Record<'/' | '/register' | '/alias', string>;
+export type PageTitle = Record<'/' | '/register' | '/nickname', string>;
 
 export const PAGE_TITLE: PageTitle = {
   '/': '보유 카드',
   '/register': '카드 추가',
-  '/alias': '',
+  '/nickname': '',
 } as const;

@@ -1,34 +1,37 @@
 import { SetStateAction } from 'react';
 
-export type CardNumbers = Record<
-  'firstCardNumber' | 'secondCardNumber' | 'thirdCardNumber' | 'fourthCardNumber',
+export type SerialNumbers = Record<
+  | 'firstSerialNumber'
+  | 'secondSerialNumber'
+  | 'thirdSerialNumber'
+  | 'fourthSerialNumber',
   string
 >;
 export type ExpirationDate = Record<'month' | 'year', string | null>;
 export type OwnerName = string | null;
 export type SecurityCode = string;
 export type Password = Record<'firstPassword' | 'secondPassword', string>;
-export type CardCompany = Record<'name' | 'theme', string>;
-export type CardAlias = string;
+export type Company = Record<'name' | 'backgroundColor', string>;
+export type nickname = string;
 
-export type SetCardNumbers = React.Dispatch<SetStateAction<CardNumbers>>;
+export type SetSerialNumbers = React.Dispatch<SetStateAction<SerialNumbers>>;
 export type SetExpirationDate = React.Dispatch<SetStateAction<ExpirationDate>>;
 export type SetOwnerName = React.Dispatch<SetStateAction<OwnerName>>;
 export type SetSecurityCode = React.Dispatch<SetStateAction<SecurityCode>>;
 export type SetPassword = React.Dispatch<SetStateAction<Password>>;
-export type setCardCompany = React.Dispatch<SetStateAction<CardCompany>>;
-export type SetCardAlias = React.Dispatch<SetStateAction<CardAlias>>;
+export type setCompany = React.Dispatch<SetStateAction<Company>>;
+export type setNickname = React.Dispatch<SetStateAction<nickname>>;
 
-export type CardInfo = {
-  cardNumbers: CardNumbers;
+export type Card = {
+  serialNumbers: SerialNumbers;
   expirationDate: ExpirationDate;
   ownerName: OwnerName;
   securityCode: SecurityCode;
   password: Password;
-  cardCompany: CardCompany;
-  cardAlias: CardAlias;
+  company: Company;
+  nickname: nickname;
 };
-export type SetCardInfo = React.Dispatch<SetStateAction<CardInfo>>;
+export type SetCard = React.Dispatch<SetStateAction<Card>>;
 
-export type CardInfoList = Record<string, CardInfo>;
-export type SetCardInfoList = React.Dispatch<React.SetStateAction<CardInfoList>>;
+export type CardList = Record<string, Card>;
+export type SetCardList = React.Dispatch<React.SetStateAction<CardList>>;

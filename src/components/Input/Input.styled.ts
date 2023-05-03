@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { InputProps } from './Input';
-import { COLOR } from '../../constants/cardInfo';
+import { COLOR } from '../../constants/card';
 
 const InputWidth = {
   xl: '100%',

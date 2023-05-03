@@ -1,20 +1,20 @@
 import { Route, Routes } from 'react-router-dom';
 
-import CardInfoContext from '../../../contexts/CardInfoContext';
+import CardContext from '../../../contexts/CardContext';
 
-import { useCardInfoList } from '../../../hooks/useCardInfoList';
-import { useCardInfo } from '../../../hooks/useCardInfo';
+import { useCardList } from '../../../hooks/useCardList';
+import { useCard } from '../../../hooks/useCard';
 
 import * as styled from './CardPages.styled';
-import MyCardPage from '../MyCardPage/MyCardPage';
-import CardRegisterPage from '../CardRegisterPage/CardRegisterPage';
-import CardAliasPage from '../CardAliasPage/CardAliasPage';
+import MyPage from '../MyPage/MyPage';
+import RegisterPage from '../RegisterPage/RegisterPage';
+import NicknamePage from '../NicknamePage/NicknamePage';
 
 const CardPages = () => {
-  const { cardInfoList, setCardInfoList } = useCardInfoList();
+  const { cardList, setCardList } = useCardList();
   const {
-    cardNumbers,
-    setCardNumbers,
+    serialNumbers,
+    setSerialNumbers,
     expirationDate,
     setExpirationDate,
     ownerName,
@@ -23,20 +23,20 @@ const CardPages = () => {
     setSecurityCode,
     password,
     setPassword,
-    cardCompany,
-    setCardCompany,
-    cardAlias,
-    setCardAlias,
-  } = useCardInfo();
+    company,
+    setCompany,
+    nickname,
+    setNickname,
+  } = useCard();
 
   return (
     <styled.CardPages>
-      <CardInfoContext.Provider
+      <CardContext.Provider
         value={{
-          cardInfoList,
-          setCardInfoList,
-          cardNumbers,
-          setCardNumbers,
+          cardList,
+          setCardList,
+          serialNumbers,
+          setSerialNumbers,
           expirationDate,
           setExpirationDate,
           ownerName,
@@ -45,18 +45,18 @@ const CardPages = () => {
           setSecurityCode,
           password,
           setPassword,
-          cardCompany,
-          setCardCompany,
-          cardAlias,
-          setCardAlias,
+          company,
+          setCompany,
+          nickname,
+          setNickname,
         }}
       >
         <Routes>
-          <Route path="/" element={<MyCardPage />} />
-          <Route path="/register" element={<CardRegisterPage />} />
-          <Route path="/alias" element={<CardAliasPage />} />
+          <Route path="/" element={<MyPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/nickname" element={<NicknamePage />} />
         </Routes>
-      </CardInfoContext.Provider>
+      </CardContext.Provider>
     </styled.CardPages>
   );
 };

@@ -1,5 +1,11 @@
 import { PAGE_TITLE, PageTitle } from '../constants/pathname';
-import { CardNumbers, ExpirationDate, OwnerName, Password, SecurityCode } from './state';
+import {
+  SerialNumbers,
+  ExpirationDate,
+  OwnerName,
+  Password,
+  SecurityCode,
+} from './state';
 
 export const isPageTitleKey = (value: unknown): value is keyof PageTitle => {
   const pathname = value as PageTitle;
@@ -7,11 +13,20 @@ export const isPageTitleKey = (value: unknown): value is keyof PageTitle => {
   return pathname && typeof pathname === 'string' && pathname in PAGE_TITLE;
 };
 
-export const isCardNumbers = (state: unknown): state is CardNumbers => {
-  const cardNumbers = state as CardNumbers;
-  const keys = ['firstCardNumber', 'secondCardNumber', 'thirdCardNumber', 'fourthCardNumber'];
+export const isSerialNumbers = (state: unknown): state is SerialNumbers => {
+  const serialNumbers = state as SerialNumbers;
+  const keys = [
+    'firstSerialNumber',
+    'secondSerialNumber',
+    'thirdSerialNumber',
+    'fourthSerialNumber',
+  ];
 
-  return cardNumbers && typeof cardNumbers === 'object' && keys.every(key => key in cardNumbers);
+  return (
+    serialNumbers &&
+    typeof serialNumbers === 'object' &&
+    keys.every(key => key in serialNumbers)
+  );
 };
 
 export const isExpirationDate = (state: unknown): state is ExpirationDate => {
@@ -19,7 +34,9 @@ export const isExpirationDate = (state: unknown): state is ExpirationDate => {
   const keys = ['month', 'year'];
 
   return (
-    expirationData && typeof expirationData === 'object' && keys.every(key => key in expirationData)
+    expirationData &&
+    typeof expirationData === 'object' &&
+    keys.every(key => key in expirationData)
   );
 };
 
@@ -39,5 +56,9 @@ export const isPassword = (state: unknown): state is Password => {
   const password = state as Password;
   const keys = ['firstPassword', 'secondPassword'];
 
-  return password && typeof password === 'object' && keys.every(key => key in password);
+  return (
+    password &&
+    typeof password === 'object' &&
+    keys.every(key => key in password)
+  );
 };

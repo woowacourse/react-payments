@@ -14,7 +14,7 @@
 - [x] src/GlobalStyles.ts
       100vw 에서 100%로 변경한 이유는 어떤 것인가요?
 - [x] src/components/BottomSheet/BottomSheet.tsx
-      CardCompanyContents를 바텀싯이 알아야할것같진 않아서 children정도여도 좋을 것 같아요~
+      CardCompanyLogoList를 바텀싯이 알아야할것같진 않아서 children정도여도 좋을 것 같아요~
 - [ ] src/components/Card/Card.styled.ts
       테마여서 프리셋으로 지정된 문자열으로 예상했는데 컬러값이네요! backgroundColor로 명확하게 변경해줘도 좋을 것 같아요
 - [ ] src/components/Card/Card.styled.ts
@@ -31,7 +31,7 @@
 - [ ] src/components/CardCompanyButton/CardCompanyButton.tsx
       타입은 파스칼케이스로 통일하면 좋을 것 같아요~!
       타입과 코드의 거리가 멀어보이는데 여기서 선언하면 어떨까요?
-- [ ] src/components/CardCompanyContents/CardCompanyContents.tsx
+- [ ] src/components/CardCompanyLogoList/CardCompanyLogoList.tsx
       이렇게 함수로 분리한 이유는 어떤 것인가요?
 - [ ] src/components/CardList/CardList.tsx
       export default 를 사용하면 rename할때 이름이 같이 안바뀌어서 많이 불편하더라구요
@@ -48,11 +48,11 @@
 - [ ] src/components/CardList/CardList.tsx
 
   ```tsx
-  if (cardInfoList == null) {
+  if (cardList == null) {
       return null
     }
 
-    return <styled.CardList>{generateCardList(cardInfoList)}</styled.CardList>
+    return <styled.CardList>{generateCardList(cardList)}</styled.CardList>
   };
   ```
 
@@ -66,11 +66,11 @@
       아아 여기 else if 지옥인가요.. return을 통해 적절히 끊어보면 어떨까요?
 - [ ] src/hooks/useInputBox.ts
       그그 이전에 이함수가 존재해야하는 이유가 조금 이해가 어렵네요. 오히려 onChange 함수들을 한 개 함수로 묶음으로써 복잡도가 올라간것같아요
-- [ ] src/components/CardRegisterButtonContainer/CardRegisterButtonContainer.tsx
+- [ ] src/components/RegisterEntrySection/RegisterEntrySection.tsx
       컨테이너 컴포넌트가 이미 내부에 요소를 갖고있는것같은데 CardRegisterButton으로 명명되는게 자연스러울 것 같아요
-- [ ] src/components/CardRegisterForm/CardRegisterForm.tsx
+- [ ] src/components/RegisterForm/RegisterForm.tsx
       요소타입이 form 이었다면 submit핸들러함수가 여기서 사용되어서 로직이 위계적으로도 적절한 위치에 있었을것같아요
-- [ ] src/components/CardRegisterForm/CardRegisterForm.styled.ts
+- [ ] src/components/RegisterForm/RegisterForm.styled.ts
       form이 아닌데 form으로 명명됐어요. 현재 브라우저레벨에서 지원해주는 자동완성기능같은것들이 동작하지 않아요
       [https://wainaat.github.io/react-payments](https://wainaat.github.io/react-payments) 참새가 한 거는 자동완성이 잘되더라구요. 참고해봐도 좋을 것 같아요
 - [ ] src/components/Header/Header.tsx

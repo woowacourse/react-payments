@@ -1,18 +1,18 @@
 import { ChangeEvent } from 'react';
 import {
-  CardNumbers,
+  SerialNumbers,
   ExpirationDate,
   OwnerName,
   SecurityCode,
   Password,
-  SetCardNumbers,
+  SetSerialNumbers,
   SetExpirationDate,
   SetOwnerName,
   SetSecurityCode,
   SetPassword,
 } from '../types/state';
 import {
-  isCardNumbers,
+  isSerialNumbers,
   isExpirationDate,
   isOwnerName,
   isPassword,
@@ -21,17 +21,24 @@ import {
 
 export const useInputBox = (
   validate: (value: string) => boolean,
-  state: CardNumbers | ExpirationDate | OwnerName | SecurityCode | Password,
-  setState: SetCardNumbers | SetExpirationDate | SetOwnerName | SetSecurityCode | SetPassword
+  state: SerialNumbers | ExpirationDate | OwnerName | SecurityCode | Password,
+  setState:
+    | SetSerialNumbers
+    | SetExpirationDate
+    | SetOwnerName
+    | SetSecurityCode
+    | SetPassword
 ) => {
-  const onChange = ({ target: { name, value } }: ChangeEvent<HTMLInputElement>) => {
+  const onChange = ({
+    target: { name, value },
+  }: ChangeEvent<HTMLInputElement>) => {
     if (!validate(value)) {
       return;
     }
 
-    if (isCardNumbers(state)) {
-      const setCardNumbers = setState as SetCardNumbers;
-      setCardNumbers({
+    if (isSerialNumbers(state)) {
+      const setSerialNumbers = setState as SetSerialNumbers;
+      setSerialNumbers({
         ...state,
         [name]: value,
       });

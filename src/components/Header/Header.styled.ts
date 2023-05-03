@@ -11,7 +11,7 @@ export const Header = styled.header`
   font-size: 20px;
 `;
 
-export const BackwardButton = styled.div`
+export const BackwardBox = styled.div`
   margin-right: 25px;
 
   font-weight: bolder;

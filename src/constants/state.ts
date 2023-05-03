@@ -1,11 +1,11 @@
-import { COLOR } from './cardInfo';
+import { COLOR } from './card';
 
 export const DEFAULT_CARD_INFO_STATE = {
-  CARD_NUMBERS: {
-    firstCardNumber: '',
-    secondCardNumber: '',
-    thirdCardNumber: '',
-    fourthCardNumber: '',
+  SERIAL_NUMBERS: {
+    firstSerialNumber: '',
+    secondSerialNumber: '',
+    thirdSerialNumber: '',
+    fourthSerialNumber: '',
   },
   EXPIRATION_DATE: {
     month: null,
@@ -17,9 +17,9 @@ export const DEFAULT_CARD_INFO_STATE = {
     firstPassword: '',
     secondPassword: '',
   },
-  CARD_COMPANY: {
+  COMPANY: {
     name: '',
-    theme: COLOR.DEFAULT,
+    backgroundColor: COLOR.DEFAULT,
   },
-  CARD_ALIAS: '',
+  NICK_NAME: '',
 };

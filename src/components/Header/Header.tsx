@@ -11,9 +11,11 @@ const Header = () => {
   return (
     <styled.Header>
       {isOnRegisterPage && (
-        <styled.BackwardButton onClick={navigationTo}>{`<`}</styled.BackwardButton>
+        <styled.BackwardBox onClick={navigationTo}>{`<`}</styled.BackwardBox>
       )}
-      <styled.HeaderTitle onClick={navigationTo}>{pageTitle}</styled.HeaderTitle>
+      <styled.HeaderTitle onClick={navigationTo}>
+        {pageTitle}
+      </styled.HeaderTitle>
     </styled.Header>
   );
 };
