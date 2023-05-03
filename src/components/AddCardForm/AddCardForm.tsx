@@ -9,6 +9,8 @@ import {
   useSecurityCode,
   useExpiredDate,
   useAddCard,
+  useBottomSheet,
+  useCardCompany,
 } from '../../hooks';
 import Card from '../Card/Card';
 import CardNumbers from '../CardNumbers/CardNumbers';
@@ -16,26 +18,19 @@ import CardOwnerName from '../CardOwnerName/CardOwnerName';
 import CardPassword from '../CardPassword/CardPassword';
 import ExpiredDate from '../ExpiredDate/ExpiredDate';
 import Layout from '../Layout/Layout';
+import BottomSheet from '../BottomSheet/BottomSheet';
 import SecurityCode from '../SecurityCode/SecurityCode';
 import { v4 as uuidv4 } from 'uuid';
-import { CardCompanyName } from '../../types/Card';
 
-interface AddCardFormProps {
-  isBottomSheetOpen: boolean;
-  onOpenBottomSheet: () => void;
-  cardCompany: CardCompanyName;
-}
-
-const AddCardForm = ({
-  isBottomSheetOpen,
-  onOpenBottomSheet,
-  cardCompany,
-}: AddCardFormProps) => {
+const AddCardForm = () => {
   const { cardNumbers, checkCardNumbers } = useCardNumbers();
   const { cardOwnerName, checkCardOwnerName } = useCardOwnerName();
   const { password, checkPassword } = useCardPassword();
   const { securityCode, checkSecurityCode } = useSecurityCode();
   const { expiredDate, checkExpiredDate, validateDate } = useExpiredDate();
+  const { cardCompany, onSetCardCompany } = useCardCompany();
+  const { isBottomSheetOpen, onOpenBottomSheet, onCloseBottomSheet } =
+    useBottomSheet();
 
   const { disabled } = useAddCard(
     cardNumbers,
@@ -73,51 +68,60 @@ const AddCardForm = ({
   }, [isBottomSheetOpen]);
 
   return (
-    <Layout>
-      <form onSubmit={handleSubmitCard}>
-        <Styled.CardWrapper onClick={onOpenBottomSheet}>
-          <p>카드를 클릭해 카드사를 변경할 수 있습니다.</p>
-          <Card
+    <>
+      <Layout>
+        <form onSubmit={handleSubmitCard}>
+          <Styled.CardWrapper onClick={onOpenBottomSheet}>
+            <p>카드를 클릭해 카드사를 변경할 수 있습니다.</p>
+            <Card
+              cardNumbers={cardNumbers}
+              expiredDate={expiredDate}
+              cardOwnerName={cardOwnerName}
+              cardCompany={cardCompany}
+            />
+          </Styled.CardWrapper>
+          <CardNumbers
             cardNumbers={cardNumbers}
-            expiredDate={expiredDate}
-            cardOwnerName={cardOwnerName}
-            cardCompany={cardCompany}
+            checkCardNumbers={checkCardNumbers}
+            ref={refs.cardNumbers}
+            nextRef={refs.expiredDate}
+            onSetCardCompany={onSetCardCompany}
           />
-        </Styled.CardWrapper>
-        <CardNumbers
-          cardNumbers={cardNumbers}
-          checkCardNumbers={checkCardNumbers}
-          ref={refs.cardNumbers}
-          nextRef={refs.expiredDate}
+          <ExpiredDate
+            expiredDate={expiredDate}
+            checkExpiredDate={checkExpiredDate}
+            validateDate={validateDate}
+            ref={refs.expiredDate}
+            nextRef={refs.cardOwnerName}
+          />
+          <CardOwnerName
+            cardOwnerName={cardOwnerName}
+            checkCardOwnerName={checkCardOwnerName}
+            ref={refs.cardOwnerName}
+          />
+          <SecurityCode
+            securityCode={securityCode}
+            checkSecurityCode={checkSecurityCode}
+            ref={refs.securityCode}
+            nextRef={refs.password}
+          />
+          <CardPassword
+            password={password}
+            checkPassword={checkPassword}
+            ref={refs.password}
+          />
+          <Styled.ButtonWrapper>
+            <Styled.NextButton disabled={disabled}>다음</Styled.NextButton>
+          </Styled.ButtonWrapper>
+        </form>
+      </Layout>
+      {isBottomSheetOpen && (
+        <BottomSheet
+          onSetCardCompany={onSetCardCompany}
+          closeBottomSheet={onCloseBottomSheet}
         />
-        <ExpiredDate
-          expiredDate={expiredDate}
-          checkExpiredDate={checkExpiredDate}
-          validateDate={validateDate}
-          ref={refs.expiredDate}
-          nextRef={refs.cardOwnerName}
-        />
-        <CardOwnerName
-          cardOwnerName={cardOwnerName}
-          checkCardOwnerName={checkCardOwnerName}
-          ref={refs.cardOwnerName}
-        />
-        <SecurityCode
-          securityCode={securityCode}
-          checkSecurityCode={checkSecurityCode}
-          ref={refs.securityCode}
-          nextRef={refs.password}
-        />
-        <CardPassword
-          password={password}
-          checkPassword={checkPassword}
-          ref={refs.password}
-        />
-        <Styled.ButtonWrapper>
-          <Styled.NextButton disabled={disabled}>다음</Styled.NextButton>
-        </Styled.ButtonWrapper>
-      </form>
-    </Layout>
+      )}
+    </>
   );
 };
 

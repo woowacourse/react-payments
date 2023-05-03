@@ -1,4 +1,6 @@
 import { ForwardedRef, forwardRef, RefObject, useRef } from 'react';
+import { cardCompanies } from '../../constants/cards';
+import { CardCompanyName } from '../../types/Card';
 import CardInput from '../CardInput/CardInput';
 import CardLabel from '../CardLabel/CardLabel';
 import * as Styled from './CardNumbers.styles';
@@ -7,11 +9,17 @@ export interface CardNumbersProps {
   cardNumbers: Record<number, string>;
   checkCardNumbers: (order: number, value: string) => boolean;
   nextRef: RefObject<HTMLInputElement>;
+  onSetCardCompany: (value: CardCompanyName) => void;
 }
 
 const CardNumbers = forwardRef(
   (
-    { cardNumbers, checkCardNumbers, nextRef }: CardNumbersProps,
+    {
+      cardNumbers,
+      checkCardNumbers,
+      nextRef,
+      onSetCardCompany,
+    }: CardNumbersProps,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
     const cardNumberRefs: Record<number, RefObject<HTMLInputElement>> = {
@@ -24,10 +32,15 @@ const CardNumbers = forwardRef(
     const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       if (!(e.target instanceof HTMLInputElement)) return;
       const currentOrder = Number(e.target.dataset['order']);
+      const currentRef = cardNumberRefs[currentOrder].current;
+      const { value } = e.target;
 
-      if (!checkCardNumbers(currentOrder, e.target.value)) return;
-      if (cardNumberRefs[currentOrder].current?.value.length === 4)
-        focusNext(currentOrder);
+      if (currentOrder === 0) {
+        onSetCardCompany(getCardCompanyByCodeNumber(value));
+      }
+
+      if (!checkCardNumbers(currentOrder, value)) return;
+      if (currentRef?.value.length === 4) focusNext(currentOrder);
     };
 
     const focusNext = (currentOrder: number) => {
@@ -37,6 +50,16 @@ const CardNumbers = forwardRef(
         return;
       }
       cardNumberRefs[currentOrder + 1].current?.focus();
+    };
+
+    const getCardCompanyByCodeNumber = (value: string) => {
+      if (value.length !== 4) return '카드사';
+      const cardCompany = cardCompanies.find(
+        (company) => company.codeNumber === Number(value)
+      )?.name;
+
+      if (!cardCompany) return '카드사';
+      return cardCompany;
     };
 
     return (
