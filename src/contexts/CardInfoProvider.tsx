@@ -1,5 +1,6 @@
 import { createContext, useState } from 'react';
-import type { FormInputValueType, CardIssuerType } from '../types';
+import { saveCardToLocalStorage } from '../domains/cardLocalStorage';
+import type { FormInputValueType, CardIssuerType, CardInfo } from '../types';
 
 type CardInfoContextType = {
   cardIssuer: CardIssuerType;
@@ -17,6 +18,7 @@ type CardInfoContextType = {
   setCardExpirationDate: (expirationDate: FormInputValueType) => void;
   setHasCheckedValidation: (hasChecked: boolean) => void;
   reset: () => void;
+  saveCard: (cardInfo: CardInfo) => void;
 };
 
 const emptyFormInputValue = { isValid: false, value: '' };
@@ -37,6 +39,7 @@ const CardInfoContext = createContext<CardInfoContextType>({
   setCardExpirationDate: () => {},
   setHasCheckedValidation: () => {},
   reset: () => {},
+  saveCard: () => {},
 });
 
 interface CardInfoProviderProps {
@@ -55,11 +58,17 @@ const CardInfoProvider = ({ children }: CardInfoProviderProps) => {
   const reset = () => {
     setCardIssuer(() => 'BC카드');
     setCardNumber(() => emptyFormInputValue);
-    setCardOwnerName(() => emptyFormInputValue);
+    setCardOwnerName(() => ({ isValid: true, value: '' }));
     setCardPassword(() => emptyFormInputValue);
     setCardSecurityCode(() => emptyFormInputValue);
     setCardExpirationDate(() => emptyFormInputValue);
     setHasCheckedValidation(() => false);
+  };
+
+  const saveCard = (cardInfo: CardInfo) => {
+    saveCardToLocalStorage(cardInfo);
+    console.log(cardInfo);
+    reset();
   };
 
   return (
@@ -80,6 +89,7 @@ const CardInfoProvider = ({ children }: CardInfoProviderProps) => {
         setCardExpirationDate,
         setHasCheckedValidation,
         reset,
+        saveCard,
       }}
     >
       {children}
