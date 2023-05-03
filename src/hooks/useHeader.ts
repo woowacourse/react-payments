@@ -6,9 +6,9 @@ import { isPageTitleKey } from '../types/typeGuard';
 export const useHeader = () => {
   const { pathname } = useLocation();
 
-  const isOnRegisterPage = pathname === PATHNAME.REGISTER;
+  const shouldRenderBackwardBox = pathname === PATHNAME.REGISTER;
 
   const pageTitle = isPageTitleKey(pathname) ? PAGE_TITLE[pathname] : '404';
 
-  return { isOnRegisterPage, pageTitle };
+  return { shouldRenderBackwardBox, pageTitle };
 };

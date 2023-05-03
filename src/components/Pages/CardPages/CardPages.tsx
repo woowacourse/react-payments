@@ -9,6 +9,7 @@ import * as styled from './CardPages.styled';
 import MyPage from '../MyPage/MyPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import NicknamePage from '../NicknamePage/NicknamePage';
+import PageLayout from '../PageLayout/PageLayout';
 
 const CardPages = () => {
   const { cardList, setCardList } = useCardList();
@@ -51,11 +52,13 @@ const CardPages = () => {
           setNickname,
         }}
       >
-        <Routes>
-          <Route path="/" element={<MyPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/nickname" element={<NicknamePage />} />
-        </Routes>
+        <PageLayout>
+          <Routes>
+            <Route path="/" element={<MyPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/nickname" element={<NicknamePage />} />
+          </Routes>
+        </PageLayout>
       </CardContext.Provider>
     </styled.CardPages>
   );
