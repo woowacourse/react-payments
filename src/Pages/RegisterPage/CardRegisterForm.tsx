@@ -53,7 +53,7 @@ const CardRegisterForm = () => {
           modal={isModalActive}
           setModal={handleModal}
           height="300"
-          element={<CardBankList setModal={handleModal} />}
+          element={<CardBankList onBankSelected={handleModal} />}
         />
       )}
     </>
