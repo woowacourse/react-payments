@@ -3,7 +3,7 @@ import creditCard from '@Domains/creditCard';
 
 import useCreditCardValidation from '@Hooks/useCreditCardValidation';
 
-import CARD_COMPANY from '@Constants/cardCompany';
+import CARD_COMPANY from '@Constants/CardCompany';
 
 import * as S from './style';
 import { CreditCardProps } from './type';

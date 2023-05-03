@@ -1,4 +1,4 @@
-import CARD_COMPANY from '@Constants/cardCompany';
+import CARD_COMPANY from '@Constants/CardCompany';
 
 import * as S from './style';
 import { CreditCardCompanyProps } from './type';

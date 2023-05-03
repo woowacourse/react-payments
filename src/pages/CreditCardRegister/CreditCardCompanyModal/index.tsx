@@ -9,7 +9,7 @@ import useAnimationModal from '@Hooks/useAnimationModal';
 
 import { CreditCardRegisterUpdateContext } from '@Contexts/CreditCardRegister/CreditCardRegisterContext';
 
-import CARD_COMPANY from '@Constants/cardCompany';
+import CARD_COMPANY from '@Constants/CardCompany';
 
 import * as S from './style';
 

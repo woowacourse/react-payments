@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import ANIMATION from '@Constants/animation';
+import ANIMATION from '@Constants/Animation';
 
 import {
   ModalContentsAppear,

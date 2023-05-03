@@ -1,5 +1,5 @@
-import ANIMATION from '@Constants/animation';
-import CARD_COMPANY from '@Constants/cardCompany';
+import ANIMATION from '@Constants/Animation';
+import CARD_COMPANY from '@Constants/CardCompany';
 
 export type CreditCardPasswordType = {
   first: string;

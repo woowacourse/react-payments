@@ -2,7 +2,7 @@ import { useContext } from 'react';
 
 import ModalContext from '@Contexts/Modal/ModalContext';
 
-import ANIMATION from '@Constants/animation';
+import ANIMATION from '@Constants/Animation';
 
 const useAnimationModal = () => {
   const { isModalOpen, animation, delayMsTime, openModal, closeModal, changeAnimationMode, changeDelayMsTime } =

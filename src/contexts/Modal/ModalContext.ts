@@ -3,7 +3,7 @@ import { createContext } from 'react';
 
 import { AnimationTypes } from '@Types/index';
 
-import ANIMATION from '@Constants/animation';
+import ANIMATION from '@Constants/Animation';
 
 const ModalContext = createContext({
   isModalOpen: false,
