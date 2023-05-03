@@ -25,6 +25,7 @@ export function InputBox({ infoType, inputs }: InputBoxProps) {
                   {infoType === 'username' ? `${value.length} / 30` : ''}
                 </div>
                 <Input
+                  isError={isError}
                   name={infoType}
                   type={type}
                   value={value}

@@ -11,6 +11,9 @@ const Theme: DefaultTheme = {
     yellow: '#CBBA64',
     yellowKakao: '#FFE600',
     white: '#FFFFFF',
+    warning: '#FCC8D1',
+    skyblue100: '#eef8fb',
+    skyblue200: '#b4e0f2',
   },
 
   text: {

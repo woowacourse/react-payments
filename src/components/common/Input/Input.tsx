@@ -1,10 +1,19 @@
 import { InputHTMLAttributes } from 'react';
 import styled from 'styled-components';
 
-export type InputProps = InputHTMLAttributes<HTMLInputElement>;
+declare module 'react' {
+  interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
+    // extends React's HTMLAttributes
+    isError?: boolean;
+  }
+}
 
-export function Input({ ...restProps }: InputProps) {
-  return <_Input {...restProps} />;
+export type InputProps = InputHTMLAttributes<HTMLInputElement> & {
+  isError?: boolean;
+};
+
+export function Input({ isError, ...restProps }: InputProps) {
+  return <_Input isError={isError} {...restProps} />;
 }
 
 const _Input = styled.input`
@@ -13,8 +22,16 @@ const _Input = styled.input`
 
   padding: 0 1rem;
 
-  background: ${(props) => props.theme.color.grey100};
+  background: ${(props) =>
+    props.isError ? props.theme.color.warning : props.theme.color.grey100};
   border-radius: 0.7rem;
 
   text-align: center;
+
+  :focus {
+    border: 0.1rem solid;
+    border-color: ${(props) => props.theme.color.skyblue200};
+    outline: ${(props) => props.theme.color.skyblue200};
+    background: ${(props) => props.theme.color.skyblue100};
+  }
 `;
