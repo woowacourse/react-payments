@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import CardItem from '../CardListPageComponents/CardItem';
@@ -6,11 +6,13 @@ import Title from '../common/Title';
 import Input from '../common/Input';
 import { cardLocalStorage } from '../domain/CardLocalStorage';
 import { CardContext } from '../../context/CardContext';
+import CardLoading from '../CardLoadingComponents/CardLoading';
 
 const CardAdditionCompletionPage = () => {
   const navigate = useNavigate();
   const { card, cardName, setCardName, updateCardList } =
     useContext(CardContext);
+  const [isLoading, setIsLoading] = useState(false);
 
   if (!card) {
     return (
@@ -20,12 +22,20 @@ const CardAdditionCompletionPage = () => {
     );
   }
 
+  const handleCardLoading = () => {
+    setTimeout(() => {
+      setIsLoading(false);
+      navigate('/');
+    }, 3000);
+  };
+
   const handleComplete = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setIsLoading(true);
     setCardName((event.target as HTMLInputElement).value);
     updateCardList(card);
     cardLocalStorage.addCard(card);
-    navigate('/');
+    handleCardLoading();
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,18 +44,24 @@ const CardAdditionCompletionPage = () => {
 
   return (
     <CompletionContainer>
-      <Title title='카드등록이 완료되었습니다.' fontSize={24} />
-      <CardItemContainer>
-        <CardItem card={card} />
-      </CardItemContainer>
-      <form onSubmit={handleComplete}>
-        <Input
-          value={cardName}
-          borderBottom='1px solid var(--black-color)'
-          onChange={handleInputChange}
-        />
-        <CheckBtn>확인</CheckBtn>
-      </form>
+      {isLoading ? (
+        <CardLoading />
+      ) : (
+        <>
+          <Title title='카드의 별칭을 입력해주세요' fontSize={24} />
+          <CardItemContainer>
+            <CardItem card={card} />
+          </CardItemContainer>
+          <form onSubmit={handleComplete}>
+            <Input
+              value={cardName}
+              borderBottom='1px solid var(--black-color)'
+              onChange={handleInputChange}
+            />
+            <CheckBtn>확인</CheckBtn>
+          </form>
+        </>
+      )}
     </CompletionContainer>
   );
 };
