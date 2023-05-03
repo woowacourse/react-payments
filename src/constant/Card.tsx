@@ -1,11 +1,11 @@
-import { ReactComponent as BCLogo } from "../../assets/bccard-logo.svg";
-import { ReactComponent as HanaLogo } from "../../assets/hanacard-logo.svg";
-import { ReactComponent as HyundaiLogo } from "../../assets/hyundaicard-logo.svg";
-import { ReactComponent as KakaoBankLogo } from "../../assets/kakaobank-logo.svg";
-import { ReactComponent as KBLogo } from "../../assets/kbcard-logo.svg";
-import { ReactComponent as LotteLogo } from "../../assets/lottecard-logo.svg";
-import { ReactComponent as ShinhanLogo } from "../../assets/shinhancard-logo.svg";
-import { ReactComponent as WooriLogo } from "../../assets/wooricard-logo.svg";
+import { ReactComponent as BCLogo } from "../assets/bccard-logo.svg";
+import { ReactComponent as HanaLogo } from "../assets/hanacard-logo.svg";
+import { ReactComponent as HyundaiLogo } from "../assets/hyundaicard-logo.svg";
+import { ReactComponent as KakaoBankLogo } from "../assets/kakaobank-logo.svg";
+import { ReactComponent as KBLogo } from "../assets/kbcard-logo.svg";
+import { ReactComponent as LotteLogo } from "../assets/lottecard-logo.svg";
+import { ReactComponent as ShinhanLogo } from "../assets/shinhancard-logo.svg";
+import { ReactComponent as WooriLogo } from "../assets/wooricard-logo.svg";
 
 export const cardMap = new Map([
   [

@@ -1,5 +1,4 @@
 import { createContext, useState } from "react";
-import { CARD_LOGO } from "../components/CardCompanyIcon/CardCompanyIcon";
 import { Card, CardCompany, CardExpirationDate, CardNumber, CardPassword } from "../types";
 import {
   cardNumberInitialValue,
@@ -46,7 +45,7 @@ export const AddCardStateContext = createContext<AddCardState>(initialValue);
 export const AddCardStateContextProvider = ({ children }: React.PropsWithChildren) => {
   const [error, setError] = useState<boolean>(false);
   const [cardName, setCardName] = useState<string>("");
-  const [cardCompany, setCardCompany] = useState<keyof typeof CARD_LOGO>();
+  const [cardCompany, setCardCompany] = useState<CardCompany>();
   const [cardNumber, setCardNumber] = useState<CardNumber>(cardNumberInitialValue);
   const [expirationDate, setExpirationDate] = useState<CardExpirationDate>(expirationDateInitialValue);
   const [ownerName, setOwnerName] = useState<string>("");
