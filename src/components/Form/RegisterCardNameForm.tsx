@@ -4,7 +4,7 @@ import { CreditCard } from 'components/common/Card/CreditCard';
 import { CardInfoContext, CardInfoProvider } from 'context/CardInfoContext';
 import CardDB from 'db/Cards';
 import styled from 'styled-components';
-import { ModalContext } from 'context/ModalContext';
+import { Spinner } from 'components/Spinner/Spinner';
 
 export type RegisterCardNameFormProps = {
   onSubmit: () => void;
@@ -12,7 +12,7 @@ export type RegisterCardNameFormProps = {
 
 export function RegisterCardNameForm({ onSubmit }: RegisterCardNameFormProps) {
   const { cardInfo, setCardInfoName } = useContext(CardInfoContext);
-  const { setIsModalOpen } = useContext(ModalContext);
+  const [isLoading, setIsLoading] = useState(false);
   const [cardName, setCardName] = useState('');
 
   const handleCardNameInput: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -25,23 +25,35 @@ export function RegisterCardNameForm({ onSubmit }: RegisterCardNameFormProps) {
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
-    setIsModalOpen(true);
     CardDB.registerCard(cardInfo);
     setCardInfoName('');
-    onSubmit();
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      onSubmit();
+    }, 1500);
   };
 
   return (
-    <CardInfoProvider>
-      <FormContainer onSubmit={handleSubmit}>
-        <CompleteMsgSpan>카드 등록이 완료되었습니다</CompleteMsgSpan>
-        <CreditCard card={cardInfo} />
-        <CardNameInputContainer>
-          <CardNameInput value={cardName} onChange={handleCardNameInput} />
-          <CardNameFormButton type="submit">확인</CardNameFormButton>
-        </CardNameInputContainer>
-      </FormContainer>
-    </CardInfoProvider>
+    <>
+      {!isLoading ? (
+        <CardInfoProvider>
+          <FormContainer onSubmit={handleSubmit}>
+            <CompleteMsgSpan>카드 등록이 완료되었습니다</CompleteMsgSpan>
+            <CreditCard card={cardInfo} />
+            <CardNameInputContainer>
+              <CardNameInput value={cardName} onChange={handleCardNameInput} />
+              <CardNameFormButton type="submit">확인</CardNameFormButton>
+            </CardNameInputContainer>
+          </FormContainer>
+        </CardInfoProvider>
+      ) : (
+        <>
+          <Spinner />
+          <span>카드를 등록중입니다.</span>
+        </>
+      )}
+    </>
   );
 }
 
