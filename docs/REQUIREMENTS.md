@@ -60,15 +60,15 @@
 
   요렇게 분리해보면 어떨까요?
 
-- [ ] src/components/CardNumberInputBox/CardNumberInputBox.tsx
+- [x] src/components/CardNumberInputBox/CardNumberInputBox.tsx
       jsx를 사용하는곳에서 훅함수를 사용은 지양해봐도 좋을 것 같아요. 컴포넌트에서 한 번 호출된 훅함수는 항상 호출되어야합니다. 반면에 jsx는 얼마든지 조건부로 사용할 수 있어요
-- [ ] src/hooks/useInputBox.ts
+- [x] src/hooks/useInputBox.ts
       그보다 요거 훅함수가 아니네요. use prefix를 어떤 이유에서 붙여주셨나요? 왜 리액트에서 훅 이름에 use를 사용하도록 컨벤션으로 정했는지 알아보셔도 좋을 것 같습니다
-- [ ] src/hooks/useInputBox.ts
+- [x] src/hooks/useInputBox.ts
       아아 여기 else if 지옥인가요.. return을 통해 적절히 끊어보면 어떨까요?
-- [ ] src/hooks/useInputBox.ts
+- [x] src/hooks/useInputBox.ts
       그그 이전에 이함수가 존재해야하는 이유가 조금 이해가 어렵네요. 오히려 onChange 함수들을 한 개 함수로 묶음으로써 복잡도가 올라간것같아요
-- [ ] src/components/RegisterEntrySection/RegisterEntrySection.tsx
+- [x] src/components/RegisterEntryBox/RegisterEntryBox.tsx
       컨테이너 컴포넌트가 이미 내부에 요소를 갖고있는것같은데 CardRegisterButton으로 명명되는게 자연스러울 것 같아요
 - [ ] src/components/RegisterForm/RegisterForm.tsx
       요소타입이 form 이었다면 submit핸들러함수가 여기서 사용되어서 로직이 위계적으로도 적절한 위치에 있었을것같아요

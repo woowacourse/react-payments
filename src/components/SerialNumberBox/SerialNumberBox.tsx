@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { ChangeEvent, useContext } from 'react';
 
 import CardContext from '../../contexts/CardContext';
 
@@ -6,7 +6,6 @@ import { CARD_NUMBER } from '../../constants/card';
 import { ERROR_MESSAGE } from '../../constants/message';
 import { isNumeric } from '../validators/validator';
 import { useInputValidator } from '../../hooks/useInputValidator';
-import { useInputBox } from '../../hooks/useInputBox';
 
 import * as styled from './SerialNumberBox.styled';
 import * as commonStyled from '../Common/Common.styled';
@@ -19,6 +18,19 @@ const SerialNumberBox = () => {
     ERROR_MESSAGE.SHOULD_NUMBER,
     CARD_NUMBER.MAX_LENGTH
   );
+
+  const handleChangeInput = ({
+    target: { name, value },
+  }: ChangeEvent<HTMLInputElement>) => {
+    if (!validate(value)) {
+      return;
+    }
+
+    setSerialNumbers({
+      ...serialNumbers,
+      [name]: value,
+    });
+  };
 
   return (
     <styled.SerialNumberBox>
@@ -40,11 +52,7 @@ const SerialNumberBox = () => {
                 key={key}
                 name={key}
                 value={value}
-                onChange={useInputBox(
-                  validate,
-                  serialNumbers,
-                  setSerialNumbers
-                )}
+                onChange={handleChangeInput}
                 width="xl"
                 type={type}
                 maxLength={4}

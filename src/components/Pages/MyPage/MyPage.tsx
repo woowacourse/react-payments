@@ -4,7 +4,7 @@ import { useResetCard } from '../../../hooks/useResetCard';
 
 import * as styled from './MyPage.styled';
 import CardBoxList from '../../CardBoxList/CardBoxList';
-import RegisterEntrySection from '../../RegisterEntrySection/RegisterEntrySection';
+import RegisterEntryBox from '../../RegisterEntryBox/RegisterEntryBox';
 
 const MyPage = () => {
   const resetCard = useResetCard();
@@ -16,7 +16,7 @@ const MyPage = () => {
   return (
     <styled.MyPageLayout>
       <CardBoxList />
-      <RegisterEntrySection />
+      <RegisterEntryBox />
     </styled.MyPageLayout>
   );
 };

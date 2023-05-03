@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { ChangeEvent, useContext } from 'react';
 
 import CardContext from '../../contexts/CardContext';
 
@@ -6,7 +6,6 @@ import { PASSWORD } from '../../constants/card';
 import { ERROR_MESSAGE } from '../../constants/message';
 import { isNumeric } from '../validators/validator';
 import { useInputValidator } from '../../hooks/useInputValidator';
-import { useInputBox } from '../../hooks/useInputBox';
 
 import * as styled from './PasswordBox.styled';
 import * as commonStyled from '../Common/Common.styled';
@@ -19,6 +18,19 @@ const PasswordBox = () => {
     ERROR_MESSAGE.SHOULD_NUMBER,
     PASSWORD.MAX_LENGTH
   );
+
+  const handleChangeInput = ({
+    target: { name, value },
+  }: ChangeEvent<HTMLInputElement>) => {
+    if (!validate(value)) {
+      return;
+    }
+
+    setPassword({
+      ...password,
+      [name]: value,
+    });
+  };
 
   return (
     <styled.PasswordBox>
@@ -36,7 +48,7 @@ const PasswordBox = () => {
                 key={key}
                 name={key}
                 value={value}
-                onChange={useInputBox(validate, password, setPassword)}
+                onChange={handleChangeInput}
                 width="xs"
                 type="password"
                 maxLength={1}

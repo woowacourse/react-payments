@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { ChangeEvent, useContext } from 'react';
 
 import CardContext from '../../contexts/CardContext';
 
@@ -6,7 +6,6 @@ import { EXPIRATION_DATE } from '../../constants/card';
 import { ERROR_MESSAGE } from '../../constants/message';
 import { isNumeric } from '../validators/validator';
 import { useInputValidator } from '../../hooks/useInputValidator';
-import { useInputBox } from '../../hooks/useInputBox';
 
 import * as styled from './ExpirationDateBox.styled';
 import * as commonStyled from '../Common/Common.styled';
@@ -20,6 +19,19 @@ const ExpirationDateBox = () => {
     ERROR_MESSAGE.SHOULD_NUMBER,
     EXPIRATION_DATE.MAX_LENGTH
   );
+
+  const handleChangeInput = ({
+    target: { name, value },
+  }: ChangeEvent<HTMLInputElement>) => {
+    if (!validate(value)) {
+      return;
+    }
+
+    setExpirationDate({
+      ...expirationDate,
+      [name]: value,
+    });
+  };
 
   return (
     <styled.ExpirationDateBox>
@@ -39,11 +51,7 @@ const ExpirationDateBox = () => {
                 key={key}
                 name={key}
                 value={value ?? ''}
-                onChange={useInputBox(
-                  validate,
-                  expirationDate,
-                  setExpirationDate
-                )}
+                onChange={handleChangeInput}
                 width="s"
                 type="text"
                 maxLength={2}

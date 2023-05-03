@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { COLOR } from '../../constants/card';
 import { PATHNAME } from '../../constants/pathname';
 
-import * as styled from './RegisterEntrySection.styled';
+import * as styled from './RegisterEntryBox.styled';
 
-const RegisterEntrySection = () => {
+const RegisterEntryBox = () => {
   const navigation = useNavigate();
 
   return (
-    <styled.RegisterEntrySection>
+    <styled.RegisterEntryBox>
       <styled.GuideMessage>새로운 카드를 등록해 주세요</styled.GuideMessage>
       <styled.Button
         backgroundColor={COLOR.DEFAULT}
@@ -17,8 +17,8 @@ const RegisterEntrySection = () => {
       >
         <styled.ButtonIcon>+</styled.ButtonIcon>
       </styled.Button>
-    </styled.RegisterEntrySection>
+    </styled.RegisterEntryBox>
   );
 };
 
-export default RegisterEntrySection;
+export default RegisterEntryBox;

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { CardBox } from '../CardBox/CardBox.styled';
 
-export const RegisterEntrySection = styled.div`
+export const RegisterEntryBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

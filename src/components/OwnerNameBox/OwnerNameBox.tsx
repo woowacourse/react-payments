@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { ChangeEvent, useContext } from 'react';
 
 import CardContext from '../../contexts/CardContext';
 
@@ -6,7 +6,6 @@ import { OWNER_NAME } from '../../constants/card';
 import { ERROR_MESSAGE } from '../../constants/message';
 import { isAlpha } from '../validators/validator';
 import { useInputValidator } from '../../hooks/useInputValidator';
-import { useInputBox } from '../../hooks/useInputBox';
 
 import * as styled from './OwnerNameBox.styled';
 import * as commonStyled from '../Common/Common.styled';
@@ -20,6 +19,16 @@ const OwnerNameBox = () => {
     OWNER_NAME.MAX_LENGTH
   );
   const isExpirationDateFull = expirationDate.year?.length === 2;
+
+  const handleChangeInput = ({
+    target: { value },
+  }: ChangeEvent<HTMLInputElement>) => {
+    if (!validate(value)) {
+      return;
+    }
+
+    setOwnerName(value.toUpperCase());
+  };
 
   return (
     <styled.OwnerNameBox>
@@ -35,7 +44,7 @@ const OwnerNameBox = () => {
         <styled.InputBox>
           <Input
             value={ownerName ?? ''}
-            onChange={useInputBox(validate, ownerName, setOwnerName)}
+            onChange={handleChangeInput}
             width="xl"
             type="text"
             placeholder="카드에 표시된 이름과 동일하게 입력하세요."

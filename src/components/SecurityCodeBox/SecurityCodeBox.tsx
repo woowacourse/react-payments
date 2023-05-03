@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { ChangeEvent, useContext } from 'react';
 
 import CardContext from '../../contexts/CardContext';
 
@@ -7,7 +7,6 @@ import { SECURITY_CODE } from '../../constants/card';
 import { ERROR_MESSAGE } from '../../constants/message';
 import { isNumeric } from '../validators/validator';
 import { useInputValidator } from '../../hooks/useInputValidator';
-import { useInputBox } from '../../hooks/useInputBox';
 
 import * as styled from './SecurityCodeBox.styled';
 import * as commonStyled from '../Common/Common.styled';
@@ -21,8 +20,17 @@ const SecurityCodeBox = () => {
     ERROR_MESSAGE.SHOULD_NUMBER,
     SECURITY_CODE.MAX_LENGTH
   );
-
   const isOwnerNameFull = ownerName?.length === 30;
+
+  const handleChangeInput = ({
+    target: { value },
+  }: ChangeEvent<HTMLInputElement>) => {
+    if (!validate(value)) {
+      return;
+    }
+
+    setSecurityCode(value);
+  };
 
   return (
     <styled.SecurityCodeBox>
@@ -33,7 +41,7 @@ const SecurityCodeBox = () => {
         <styled.InputBox>
           <Input
             value={securityCode}
-            onChange={useInputBox(validate, securityCode, setSecurityCode)}
+            onChange={handleChangeInput}
             width="m"
             type="password"
             maxLength={3}
