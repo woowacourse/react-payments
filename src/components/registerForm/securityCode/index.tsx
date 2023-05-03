@@ -35,7 +35,7 @@ function SecurityCode() {
               번호입니다. 이 번호는 보안 확인 목적으로 사용되며, 온라인 결제에
               주로 사용됩니다.
             </p>
-            <img src={SecurityIcon} alt=" cvc-information" />
+            <img src={SecurityIcon} alt="cvc-information" />
           </S.CVVInfoContainer>
         }
       </S.SecurityInfoContainer>
