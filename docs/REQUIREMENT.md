@@ -55,3 +55,10 @@
 - 주요 컴포넌트에 대한 Storybook 상호 작용 테스트
 - Controlled & Uncontrolled Components에 입각하여 Form 핸들링
 - Context API를 활용해 전역 상태 관리 및 계층 재구성
+
+
+## 3단계
+
+- 사용하던 모달을 분리해서 npm으로 배포하고, 그 라이브러리를 직접 import해서 사용하기
+- 문서로서 스토리북을 고도화하기 위해 리팩터링
+- '카드를 등록중입니다' 스피너 추가
