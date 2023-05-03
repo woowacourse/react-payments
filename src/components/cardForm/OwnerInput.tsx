@@ -3,6 +3,7 @@ import Input from "../common/Input";
 import InputLabel from "../common/InputLabel";
 import styled from "styled-components";
 
+import React from "react";
 import { NewCardContext } from "../../contexts/NewCardContext";
 import { useContext } from "react";
 
@@ -47,4 +48,4 @@ const Row = styled.div`
   justify-content: space-between;
 `;
 
-export default OwnerInput;
+export default React.memo(OwnerInput);

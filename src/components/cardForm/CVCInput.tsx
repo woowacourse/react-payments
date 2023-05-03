@@ -3,6 +3,7 @@ import Input from "../common/Input";
 import InputLabel from "../common/InputLabel";
 import styled from "styled-components";
 
+import React from "react";
 import { useCallback } from "react";
 
 import { CVC_MAXLEGNTH, NUMBER_REGEX } from "../../constants";
@@ -81,4 +82,4 @@ const HelpIcon = styled.div`
   color: darkgray;
 `;
 
-export default CVCInput;
+export default React.memo(CVCInput);

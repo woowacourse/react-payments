@@ -2,6 +2,7 @@ import Container from "../common/Container";
 import InputLabel from "../common/InputLabel";
 import Input from "../common/Input";
 
+import React from "react";
 import { useCallback, useContext } from "react";
 import { NewCardContext } from "../../contexts/NewCardContext";
 import { useCardNumbersInput } from "../../hook/useCardNumbersInput";
@@ -84,4 +85,4 @@ const CardNumberInput = ({ isInputsValid, setIsNumbersCompleted, setIsNumbersVal
   );
 };
 
-export default CardNumberInput;
+export default React.memo(CardNumberInput);

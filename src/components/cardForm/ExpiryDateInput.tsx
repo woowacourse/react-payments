@@ -2,6 +2,7 @@ import Container from "../common/Container";
 import Input from "../common/Input";
 import InputLabel from "../common/InputLabel";
 
+import React from "react";
 import { useContext, useRef } from "react";
 import { NewCardContext } from "../../contexts/NewCardContext";
 
@@ -68,4 +69,4 @@ const ExpiryDateInput = ({ isInputsValid, setExpriyDateCompleted, setIsExpiryDat
   );
 };
 
-export default ExpiryDateInput;
+export default React.memo(ExpiryDateInput);
