@@ -1,5 +1,6 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import CardOwnerName from '../components/CardOwnerName/CardOwnerName';
+import useOwnerName from '../hooks/useOwnerName';
 
 const meta = {
   component: CardOwnerName,
@@ -7,14 +8,16 @@ const meta = {
 } satisfies Meta<typeof CardOwnerName>;
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryFn<typeof meta>;
 
-export const CardOwnerNameStory: Story = {
-  args: {
-    cardOwnerName: '',
-    errorMessage: '카드 소유자명은 30자 이내의 대문자 영문으로만 입력해주세요.',
-    handleCardOwnerName: () => {
-      return;
-    },
-  },
+export const CardOwnerNameStory: Story = () => {
+  const { cardOwnerName, ownerNameError, handleCardOwnerName } = useOwnerName();
+
+  return (
+    <CardOwnerName
+      cardOwnerName={cardOwnerName}
+      errorMessage={ownerNameError}
+      handleCardOwnerName={handleCardOwnerName}
+    />
+  );
 };

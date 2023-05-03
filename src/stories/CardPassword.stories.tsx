@@ -1,6 +1,7 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import CardPassword from '../components/CardPassword/CardPassword';
 import RefProvider from '../contexts/RefProvider';
+import usePassword from '../hooks/usePassword';
 
 const meta = {
   component: CardPassword,
@@ -16,14 +17,16 @@ const meta = {
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryFn<typeof meta>;
 
-export const CardPasswordStory: Story = {
-  args: {
-    cardPasswords: ['', ''],
-    errorMessage: '카드 비밀번호 앞 두 자리를 숫자로 입력해주세요.',
-    handleCardPasswords: () => {
-      return;
-    },
-  },
+export const CardPasswordStory: Story = () => {
+  const { cardPasswords, passwordError, handleCardPasswords } = usePassword();
+
+  return (
+    <CardPassword
+      cardPasswords={cardPasswords}
+      errorMessage={passwordError}
+      handleCardPasswords={handleCardPasswords}
+    />
+  );
 };

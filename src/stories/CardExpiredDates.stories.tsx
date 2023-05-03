@@ -1,10 +1,11 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import CardExpiredDate from '../components/CardExpiredDate/CardExpiredDates';
 import RefProvider from '../contexts/RefProvider';
+import useExpiredDates from '../hooks/useExpiredDates';
 
 const meta = {
   component: CardExpiredDate,
-  title: 'Section/ExpiredDate',
+  title: 'Section/CardExpiredDate',
   decorators: [
     (Story) => (
       <RefProvider>
@@ -16,14 +17,17 @@ const meta = {
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryFn<typeof meta>;
 
-export const CardExpiredDateStory: Story = {
-  args: {
-    expiredDates: ['', ''],
-    errorMessage: `유효한 만료일을 05/23의 형태로 입력해주세요.`,
-    handleExpiredDates: () => {
-      return;
-    },
-  },
+export const CardExpiredDateStory: Story = () => {
+  const { expiredDates, expiredDatesError, handleExpiredDates } =
+    useExpiredDates();
+
+  return (
+    <CardExpiredDate
+      expiredDates={expiredDates}
+      errorMessage={expiredDatesError}
+      handleExpiredDates={handleExpiredDates}
+    />
+  );
 };

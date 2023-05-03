@@ -1,6 +1,7 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import CardNumbers from '../components/CardNumbers/CardNumbers';
 import RefProvider from '../contexts/RefProvider';
+import useCardNumbers from '../hooks/useCardNumbers';
 
 const meta = {
   component: CardNumbers,
@@ -16,14 +17,16 @@ const meta = {
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryFn<typeof meta>;
 
-export const CardNumbersStory: Story = {
-  args: {
-    cardNumbers: ['', '', '', ''],
-    errorMessage: '숫자로만 카드 번호를 입력해주세요.',
-    handleCardNumbers: () => {
-      return;
-    },
-  },
+export const CardNumbersStory: Story = () => {
+  const { cardNumbers, cardNumbersError, handleCardNumbers } = useCardNumbers();
+
+  return (
+    <CardNumbers
+      cardNumbers={cardNumbers}
+      errorMessage={cardNumbersError}
+      handleCardNumbers={handleCardNumbers}
+    />
+  );
 };

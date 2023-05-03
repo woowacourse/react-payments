@@ -1,10 +1,11 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import CardSecurityCode from '../components/CardSecurityCode/CardSecurityCode';
 import RefProvider from '../contexts/RefProvider';
+import useSecurityCode from '../hooks/useSecurityCode';
 
 const meta = {
   component: CardSecurityCode,
-  title: 'Section/SecurityCode',
+  title: 'Section/CardSecurityCode',
   decorators: [
     (Story) => (
       <RefProvider>
@@ -16,14 +17,17 @@ const meta = {
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryFn<typeof meta>;
 
-export const SecurityCodeStory: Story = {
-  args: {
-    securityCode: '',
-    errorMessage: '보안 코드는 세 자리의 숫자로만 입력해주세요.',
-    handleSecurityCode: () => {
-      return;
-    },
-  },
+export const SecurityCodeStory: Story = () => {
+  const { securityCode, securityCodeError, handleSecurityCode } =
+    useSecurityCode();
+
+  return (
+    <CardSecurityCode
+      securityCode={securityCode}
+      errorMessage={securityCodeError}
+      handleSecurityCode={handleSecurityCode}
+    />
+  );
 };
