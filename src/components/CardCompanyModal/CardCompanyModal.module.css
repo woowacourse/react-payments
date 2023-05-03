@@ -10,23 +10,17 @@
 }
 
 .modalContainer {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-gap: 30px;
   padding: 15px;
   position: absolute;
   background-color: var(--white-color);
   width: 370px;
   height: 225px;
-  justify-content: space-evenly;
-  align-items: space-between;
   border-radius: 10px;
   top: 545px;
   font-size: 11px;
   font-weight: bolder;
-}
-
-.cardContainer {
-  display: flex;
-  justify-content: space-evenly;
-  gap: 30px;
 }
