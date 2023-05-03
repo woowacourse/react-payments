@@ -20,7 +20,7 @@ const Theme: DefaultTheme = {
     title: '600 2rem/1.9rem Roboto',
     subtitle: '700 1.5rem/1.6rem Roboto',
     body: '400 1.6rem/2.4rem Roboto',
-    caption: '500 1.2rem/1.4rem Roboto ',
+    caption: '600 1.2rem/1.4rem Roboto ',
   },
 };
 

@@ -21,9 +21,9 @@ export function InputBox({ infoType, inputs }: InputBoxProps) {
           ({ type, value, handleChange, required, isError }, index) => (
             <React.Fragment key={index}>
               <_InputWrapper>
-                <div>
+                <_TextCount>
                   {infoType === 'username' ? `${value.length} / 30` : ''}
-                </div>
+                </_TextCount>
                 <Input
                   isError={isError}
                   name={infoType}
@@ -49,7 +49,6 @@ export function InputBox({ infoType, inputs }: InputBoxProps) {
 const _InputContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
 
   margin: 1rem;
 `;
@@ -59,7 +58,7 @@ const _InputWrapper = styled.div`
   flex-direction: column;
   justify-content: space-around;
 
-  gap: 1rem;
+  gap: 0.7rem;
 `;
 
 const _InputWithErrorMessage = styled.div`
@@ -67,4 +66,12 @@ const _InputWithErrorMessage = styled.div`
   justify-content: start;
 
   gap: 0.7rem;
+`;
+
+const _TextCount = styled.div`
+  position: relative;
+  left: 35rem;
+  top: -1.3rem;
+
+  width: 5rem;
 `;
