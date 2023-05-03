@@ -1,12 +1,16 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import Card from '../@common/card/Card';
-import localStorageUtil from '../../utils/localStorageUtil';
-import CreditCardInfo from '../../@types/creditCardInfo';
+import { isCreditCardInfoType } from '../../@types/creditCardInfoWithId';
+import useCardList from '../../hooks/useCardList';
 
 function CardListPage() {
   const navigation = useNavigate();
-  const cardList = localStorageUtil.getItem('card-list') as CreditCardInfo[];
+
+  const { cardList } = useCardList();
+  if (!isCreditCardInfoType(cardList)) {
+    return null;
+  }
 
   const cardLists = () => {
     return cardList.length ? (
