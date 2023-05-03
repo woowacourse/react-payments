@@ -4,7 +4,6 @@ import { useCardAction } from "../context/CardContext";
 import useDrawer from "../hooks/useDrawer";
 
 interface CardLogoProps {
-  // onClick: React.MouseEventHandler;
   cardName: string;
 }
 
