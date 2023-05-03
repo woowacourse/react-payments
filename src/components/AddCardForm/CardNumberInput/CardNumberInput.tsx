@@ -7,8 +7,9 @@ import useInputUpdater from '../../../hooks/useInputUpdater';
 import { CardInfoContext } from '../../../contexts/CardInfoProvider';
 
 const CardNumberInput = () => {
-  const { setCardNumber } = useContext(CardInfoContext);
+  const { cardNumber, setCardNumber } = useContext(CardInfoContext);
   const { inputValue, errorMessage, setInputValueWithValidation } = useInputUpdater({
+    initialValue: cardNumber.value,
     trimmer: addHyphensInCardNumber,
     validator: checkValidCardNumber,
     contextSetter: setCardNumber,

@@ -7,8 +7,9 @@ import Input from '../../common/Input/Input';
 import useInputUpdater from '../../../hooks/useInputUpdater';
 
 const ExpirationDateInput = () => {
-  const { setCardExpirationDate } = useContext(CardInfoContext);
+  const { cardExpirationDate, setCardExpirationDate } = useContext(CardInfoContext);
   const { inputValue, errorMessage, setInputValueWithValidation } = useInputUpdater({
+    initialValue: cardExpirationDate.value,
     trimmer: addSlashInExpirationDate,
     validator: checkValidYearMonth,
     contextSetter: setCardExpirationDate,

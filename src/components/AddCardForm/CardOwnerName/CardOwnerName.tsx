@@ -6,8 +6,9 @@ import { checkOwnerNameLength } from '../../../domains/validators';
 import useInputUpdater from '../../../hooks/useInputUpdater';
 
 const CardOwnerName = () => {
-  const { setCardOwnerName } = useContext(CardInfoContext);
+  const { cardOwnerName, setCardOwnerName } = useContext(CardInfoContext);
   const { inputValue, errorMessage, setInputValueWithValidation } = useInputUpdater({
+    initialValue: cardOwnerName.value,
     validator: checkOwnerNameLength,
     contextSetter: setCardOwnerName,
   });

@@ -7,8 +7,9 @@ import MockPasswordInput from './MockPasswordInput/MockPasswordInput';
 import useInputUpdater from '../../../hooks/useInputUpdater';
 
 const CardPasswordInput = () => {
-  const { setCardPassword } = useContext(CardInfoContext);
+  const { cardPassword, setCardPassword } = useContext(CardInfoContext);
   const { inputValue, errorMessage, setInputValueWithValidation } = useInputUpdater({
+    initialValue: cardPassword.value,
     validator: checkValidPassword,
     contextSetter: setCardPassword,
   });

@@ -7,8 +7,9 @@ import LabeledInput from '../LabeledInput/LabeledInput';
 import useInputUpdater from '../../../hooks/useInputUpdater';
 
 const CardSecurityCodeInput = () => {
-  const { setCardSecurityCode } = useContext(CardInfoContext);
+  const { cardSecurityCode, setCardSecurityCode } = useContext(CardInfoContext);
   const { inputValue, errorMessage, setInputValueWithValidation } = useInputUpdater({
+    initialValue: cardSecurityCode.value,
     validator: checkValidCVC,
     contextSetter: setCardSecurityCode,
   });
