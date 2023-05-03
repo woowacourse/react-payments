@@ -1,16 +1,12 @@
 import CardList from '../../components/CardList/CardList';
 import Header from '../../components/common/Header/Header';
-import { CardInfo } from '../../types';
+import { loadCardsFromLocalStorage } from '../../domains/cardLocalStorage';
 
-type HomeProps = {
-  cardInfo: CardInfo[];
-};
-
-const Home = ({ cardInfo }: HomeProps) => {
+const Home = () => {
   return (
     <>
       <Header title="보유카드" />
-      <CardList cardInfo={cardInfo} />
+      <CardList cardInfo={loadCardsFromLocalStorage()} />
     </>
   );
 };

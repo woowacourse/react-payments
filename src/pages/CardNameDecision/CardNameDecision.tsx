@@ -5,13 +5,8 @@ import { CardInfoContext } from '../../contexts/CardInfoProvider';
 import styles from './CardNameDecision.module.css';
 import CardPreview from '../../components/common/CardPreview/CardPreview';
 import CardNameDecisionForm from '../../components/CardNameDecisionForm/CardNameDecisionForm';
-import type { CardInfo } from '../../types';
 
-type CardNameDecisionProps = {
-  saveCardToLocalStorage: (newCard: CardInfo) => void;
-};
-
-const CardNameDecision = ({ saveCardToLocalStorage }: CardNameDecisionProps) => {
+const CardNameDecision = () => {
   const { cardIssuer, cardNumber, cardOwnerName, cardExpirationDate } = useContext(CardInfoContext);
   const navigate = useNavigate();
 
@@ -32,7 +27,7 @@ const CardNameDecision = ({ saveCardToLocalStorage }: CardNameDecisionProps) => 
         cardExpirationDate={cardExpirationDate.value}
         image={cardImages[cardIssuer]}
       />
-      <CardNameDecisionForm saveCardToLocalStorage={saveCardToLocalStorage} />
+      <CardNameDecisionForm />
     </>
   );
 };

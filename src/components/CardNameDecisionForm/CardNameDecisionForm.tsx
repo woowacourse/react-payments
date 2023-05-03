@@ -6,13 +6,9 @@ import styles from './CardNameDecisionForm.module.css';
 import FooterButton from '../common/FooterButton/FooterButton';
 import UnderlinedInput from '../common/UnderlinedInput/UnderlinedInput';
 
-type CardNameDecisionFormProps = {
-  saveCardToLocalStorage: (newCard: CardInfo) => void;
-};
-
-const CardNameDecisionForm = ({ saveCardToLocalStorage }: CardNameDecisionFormProps) => {
+const CardNameDecisionForm = () => {
   const navigate = useNavigate();
-  const { cardIssuer, cardNumber, cardExpirationDate, cardOwnerName, cardSecurityCode, cardPassword, reset } =
+  const { cardIssuer, cardNumber, cardExpirationDate, cardOwnerName, cardSecurityCode, cardPassword, reset, saveCard } =
     useContext(CardInfoContext);
 
   const registerCardOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -33,7 +29,7 @@ const CardNameDecisionForm = ({ saveCardToLocalStorage }: CardNameDecisionFormPr
       cardPassword: cardPassword.value,
     };
 
-    saveCardToLocalStorage(newCard);
+    saveCard(newCard);
     reset();
     navigate('/');
   };
