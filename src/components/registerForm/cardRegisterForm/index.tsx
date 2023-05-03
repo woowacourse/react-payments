@@ -9,10 +9,10 @@ import useRegisterCardInfo from "src/hooks/useRegisterCardInfo";
 import Button from "src/components/@common/Button";
 
 function CardRegisterForm() {
-  const { onSubmit, isValidateInfo } = useRegisterCardInfo();
+  const { onSubmit, isValidateInfo, submitKeyDown } = useRegisterCardInfo();
 
   return (
-    <S.Form onSubmit={onSubmit}>
+    <S.Form onSubmit={onSubmit} onKeyDown={submitKeyDown}>
       <CardNumber />
       <ExpireDate />
       <OwnerNameInput />

@@ -83,6 +83,7 @@ export const isValidateFormValues = (cardInfo: CardInfoProps) => {
   const exceptOwnerName =
     objectValueToString(cardNumbers).length === MAX_CARD &&
     objectValueToString(expireDate).length === MAX_EXPIREDATE &&
+    MMYY_REGEXP.test(objectValueToString(expireDate)) &&
     securityCode.length === MAX_SECURITY &&
     objectValueToString(password).length === MAX_PASSWORD;
 
