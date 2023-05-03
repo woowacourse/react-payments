@@ -1,19 +1,24 @@
 import { useEffect, useState } from 'react';
 import CreditCardInfo from '../@types/creditCardInfo';
-import localStorageUtil from '../utils/localStorageUtil';
 
-interface CreditCardInfoWithId extends CreditCardInfo {
-  cardId: number;
-}
+import localStorageUtil from '../utils/localStorageUtil';
+import { CreditCardInfoWithId } from '../@types/creditCardInfoWithId';
+
 const initialValue: CreditCardInfoWithId[] = [];
 
 const key = 'card-list';
 
 const useCardList = () => {
-  const [cardList, setCardList] = useState(getSavedCardList(key));
+  const [cardList, setCardList] = useState<CreditCardInfoWithId[]>([]);
 
   useEffect(() => {
-    localStorageUtil.setItem(key, cardList);
+    setCardList(getSavedCardList('card-list'));
+  }, []);
+
+  useEffect(() => {
+    if (cardList.length !== 0) {
+      localStorageUtil.setItem(key, cardList);
+    }
   }, [cardList]);
 
   const saveCard = (cardInfo: CreditCardInfo, after: () => void = () => {}) => {
