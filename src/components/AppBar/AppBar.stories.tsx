@@ -1,23 +1,27 @@
+import type { Meta, StoryObj } from "@storybook/react";
+import { Children } from "react";
 import { Link } from "react-router-dom";
-import { PAGE } from "../../constant";
-import GlobalStyle from "../../styles/GlobalStyle";
+import { PAGE } from "../../constant/PagePath";
 import AppBar from "./AppBar";
 
-export default {
+const meta: Meta<typeof AppBar> = {
   title: "AppBar",
   component: AppBar,
 };
 
-export const CardListPage = () => (
-  <>
-    <GlobalStyle />
-    <AppBar title="보유카드"></AppBar>
-  </>
-);
+export default meta;
 
-export const AddCardPage = () => (
-  <>
-    <GlobalStyle />
-    <AppBar title="카드추가" children={<Link to={PAGE.CARD_LIST}>〈</Link>}></AppBar>
-  </>
-);
+type Story = StoryObj<typeof AppBar>;
+
+export const CardListPage: Story = {
+  args: {
+    title: "보유카드",
+  },
+};
+
+export const AddCardPage: Story = {
+  args: {
+    title: "카드추가",
+    children: <Link to={PAGE.CARD_LIST}>〈</Link>,
+  },
+};

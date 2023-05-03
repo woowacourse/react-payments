@@ -12,7 +12,7 @@ import { useContext } from "react";
 import { CardCompany } from "../../types";
 import { useNavigate } from "react-router-dom";
 import { isFulfilledObject, isFulfilledString } from "../../validator/Validator";
-import { PAGE } from "../../constant";
+import { PAGE } from "../../constant/PagePath";
 import Modal from "../../components/Modal/Modal";
 import CardCompanyIcon from "../../components/CardCompanyIcon/CardCompanyIcon";
 import { AddCardStateContext } from "../../context/AddCardStateProvider";

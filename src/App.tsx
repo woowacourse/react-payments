@@ -4,7 +4,7 @@ import AddCardPage from "./pages/AddCardPage/AddCardPage";
 import CardListPage from "./pages/CardListPage/CardListPage";
 
 import { Route, Routes } from "react-router-dom";
-import { PAGE } from "./constant";
+import { PAGE } from "./constant/PagePath";
 import { AddCardStateContextProvider } from "./context/AddCardStateProvider";
 import NameCardPage from "./pages/NameCardPage/NameCardPage";
 

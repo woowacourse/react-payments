@@ -65,7 +65,7 @@
     "@storybook/addon-links": "^7.0.5",
     "@storybook/blocks": "^7.0.5",
     "@storybook/preset-create-react-app": "^7.0.5",
-    "@storybook/react": "^7.0.5",
+    "@storybook/react": "^7.0.7",
     "@storybook/react-webpack5": "^7.0.5",
     "@storybook/testing-library": "^0.0.14-next.2",
     "@types/react-router-dom": "^5.3.3",

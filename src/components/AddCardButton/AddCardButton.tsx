@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { PAGE } from "../../constant";
+import { PAGE } from "../../constant/PagePath";
 
 const AddCardButton = () => {
   return (

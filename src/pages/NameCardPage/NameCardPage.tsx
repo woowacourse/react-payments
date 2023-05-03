@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import CardPreview from "../../components/CardPreview/CardPreview";
 import { GlobalContext } from "../../context/GlobalProvider";
-import { PAGE } from "../../constant/index";
+import { PAGE } from "../../constant/PagePath";
 import { Button } from "../../components/common/Button";
 import { AddCardStateContext } from "../../context/AddCardStateProvider";
 import { Card } from "../../types";

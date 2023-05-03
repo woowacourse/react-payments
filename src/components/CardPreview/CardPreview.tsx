@@ -2,23 +2,13 @@ import styled from "styled-components";
 import { Card, CardCompany } from "../../types";
 import { ReactComponent as ICChip } from "../../assets/ic-chip.svg";
 import { memo } from "react";
+import { cardMap } from "../../constant/Card";
 
 type PreviewCard = Pick<Card, "cardNumber" | "ownerName" | "expirationDate" | "cardCompany">;
 
 type CardPreviewProps = {
   card: PreviewCard;
   animation?: { transition: string; transform: string };
-};
-
-const CARD_COMPANY_COLOR = {
-  비씨카드: "#C03841",
-  하나카드: "#009490",
-  현대카드: "#000000",
-  카카오뱅크: "#FFE600",
-  국민카드: "#685E54",
-  롯데카드: "#ED1C24",
-  신한카드: "#0046FF",
-  우리카드: "#007BC8",
 };
 
 const CardPreview = ({ card, animation }: CardPreviewProps) => {
@@ -67,7 +57,7 @@ const CardLayout = styled.div<{ transition: string; transform: string; cardCompa
   justify-content: flex-end;
   gap: 4px;
 
-  background-color: ${({ cardCompany }) => (cardCompany ? CARD_COMPANY_COLOR[cardCompany] : "#333333")};
+  background-color: ${({ cardCompany }) => (cardCompany ? cardMap.get(cardCompany)?.color : "#333333")};
 
   min-height: 133px;
   width: 213px;
