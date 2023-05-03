@@ -28,7 +28,6 @@ const LastPage = () => {
   };
 
   const { handleSave, isCompleted } = useSetCardInfo(nickname, "card");
-  console.log(isCompleted);
   const handleEnterKeyDown: KeyboardEventHandler<HTMLInputElement> = ({
     key,
   }) => {

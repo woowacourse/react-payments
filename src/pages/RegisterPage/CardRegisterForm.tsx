@@ -36,7 +36,7 @@ const CardRegisterForm = () => {
         <SecurityCodeInput />
         <PasswordInput />
 
-        {isFormFilled && <NextButton>다음</NextButton>}
+        <NextButton disabled={!isFormFilled}>다음</NextButton>
       </form>
     </S.Wrapper>
   );

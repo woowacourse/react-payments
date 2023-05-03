@@ -14,6 +14,10 @@ export const NextButton = styled(Button)`
   font-size: 14px;
   font-weight: 700;
   background: none;
+
+  &:disabled {
+    opacity: 0.5;
+  }
 `;
 
 export const AddButton = styled(Button)`
