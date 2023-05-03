@@ -18,6 +18,7 @@
   display: flex;
   background-color: #ecebf1;
   align-items: center;
+  justify-content: center;
   padding: 5px;
   border-radius: 7px;
   font-size: 18px;
