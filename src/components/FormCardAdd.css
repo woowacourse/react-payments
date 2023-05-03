@@ -21,6 +21,11 @@
   padding: 5px;
   border-radius: 7px;
   font-size: 18px;
+  width: 318px;
+}
+
+.expired-box {
+  width: 137px;
 }
 
 .card-number {
@@ -49,7 +54,7 @@
   border: none;
   background-color: #ecebf1;
   height: 45px;
-  width: 100%;
+  width: 318px;
   font-size: 18px;
   border-radius: 7px;
 }
@@ -62,6 +67,7 @@
 .card-security-code-box {
   position: relative;
   display: flex;
+  width: 84px;
 }
 
 .card-security-code-box button {
@@ -74,6 +80,10 @@
   margin-left: 14px;
   background-color: white;
   cursor: pointer;
+}
+
+.card-password-container {
+  width: 162px;
 }
 
 .card-security-code-box img {

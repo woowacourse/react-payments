@@ -212,7 +212,7 @@ const FormCardAdd = ({
             />
           </div>
         </div>
-        <div>
+        <div className="expired-box">
           <span className="form-label">만료일</span>
           <InputCardData
             required={true}

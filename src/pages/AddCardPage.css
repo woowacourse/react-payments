@@ -8,3 +8,10 @@
   cursor: pointer;
   background-color: #ecebf1;
 }
+
+.add-card-page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
