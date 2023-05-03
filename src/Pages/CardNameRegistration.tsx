@@ -38,7 +38,7 @@ function CardNameRegistration() {
   return (
     <>
       <MainLayout>
-        <StyledMessage>카드 등록이 완료 되었습니다.</StyledMessage>
+        <StyledMessage>카드 등록이 거의 완료 되었어요!</StyledMessage>
         <Card cardInformation={card} isAddForm />
         <StyledForm onSubmit={handleSubmit}>
           <Input type="text" textAlign="center" onChange={handleChange} resetStyle />
