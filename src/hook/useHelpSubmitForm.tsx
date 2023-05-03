@@ -20,12 +20,12 @@ export const useHelpSubmitForm = ({ cards, setIsNumbersValid, setIsExpiryDateVal
     navigate("/assignAlias", { state: { newCard } });
   };
 
-  const isAllValid = () => {
-    const validations: ValidFlagType = {
-      isCardNumbersValid: validateCardNumbers(newCard, cards),
-      isExpiryDateValid: validateExpiryDate(newCard.expiryDate),
-    };
+  const validations: ValidFlagType = {
+    isCardNumbersValid: validateCardNumbers(newCard, cards),
+    isExpiryDateValid: validateExpiryDate(newCard.expiryDate),
+  };
 
+  const isAllValid = () => {
     if (!Object.values(validations).every((valid) => valid)) {
       setIsNumbersValid(validations.isCardNumbersValid);
       setIsExpiryDateValid(validations.isExpiryDateValid);

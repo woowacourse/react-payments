@@ -8,42 +8,11 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { NewCardContext } from "../contexts/NewCardContext";
 
-import { CardType, BrandType } from "../types/card";
+import { useNewCard } from "../hook/useNewCard";
 
 export const AddCard = () => {
-  const [newCard, setNewCard] = useState<CardType>({
-    numbers: "",
-    expiryDate: "",
-    brand: undefined,
-    CVC: 0,
-    password: [0, 0],
-  });
-
-  const setNumbers = (numbers: string) => {
-    setNewCard({ ...newCard, numbers });
-  };
-
-  const setExpiryDate = (expiryDate: string) => {
-    setNewCard({ ...newCard, expiryDate });
-  };
-
-  const setBrand = (brand: BrandType) => {
-    setNewCard({ ...newCard, brand });
-  };
-
-  const setCVC = (CVC: number) => {
-    setNewCard({ ...newCard, CVC });
-  };
-
-  const setPassword = (password: number[]) => {
-    setNewCard({ ...newCard, password });
-  };
-
-  const setOwner = (owner: string) => {
-    setNewCard({ ...newCard, owner });
-  };
-
   const [isModalOpen, setIsModalOpen] = useState(true);
+  const { newCard, setNumbers, setExpiryDate, setBrand, setOwner, setCVC, setPassword } = useNewCard();
 
   const openModal = () => {
     setIsModalOpen(true);
