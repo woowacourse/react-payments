@@ -33,7 +33,9 @@ const CardRegisterForm = () => {
     focusFormInput(target.form, target, NEXT);
   };
 
-  const shouldPreventFocusMovement = (target: any) => {
+  const shouldPreventFocusMovement = (
+    target: EventTarget & HTMLFormElement
+  ) => {
     const { name, value, maxLength } = target;
 
     if (name === "name") return value.length !== maxLength;
