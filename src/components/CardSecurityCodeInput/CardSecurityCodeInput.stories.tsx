@@ -1,15 +1,23 @@
-import GlobalStyle from "../../styles/GlobalStyle";
-import { emptyArrowFuction } from "../../util/initialValue";
+import { Meta, StoryObj } from "@storybook/react";
 import CardSecurityCodeInput from "./CardSecurityCodeInput";
 
-export default {
+const meta: Meta<typeof CardSecurityCodeInput> = {
   title: "CardSecurityCodeInput",
   component: CardSecurityCodeInput,
 };
 
-export const Default = () => (
-  <>
-    <GlobalStyle />
-    <CardSecurityCodeInput securityCode={""} setSecurityCode={emptyArrowFuction}></CardSecurityCodeInput>
-  </>
-);
+export default meta;
+
+type Story = StoryObj<typeof CardSecurityCodeInput>;
+
+export const Default: Story = {
+  args: {
+    securityCode: "",
+  },
+};
+
+export const Filled: Story = {
+  args: {
+    securityCode: "123",
+  },
+};

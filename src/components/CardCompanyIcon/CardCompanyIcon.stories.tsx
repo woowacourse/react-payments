@@ -1,15 +1,15 @@
-import GlobalStyle from "../../styles/GlobalStyle";
-import { emptyArrowFuction } from "../../util/initialValue";
+import { Meta, StoryObj } from "@storybook/react";
 import CardCompanyIcon from "./CardCompanyIcon";
 
-export default {
+const meta: Meta<typeof CardCompanyIcon> = {
   title: "CardCompanyIcon",
   component: CardCompanyIcon,
 };
 
-export const Default = () => (
-  <>
-    <GlobalStyle />
-    <CardCompanyIcon company={"하나카드"} onClickHandler={emptyArrowFuction}></CardCompanyIcon>
-  </>
-);
+export default meta;
+
+type Story = StoryObj<typeof CardCompanyIcon>;
+
+export const Primary: Story = {
+  args: { company: "비씨카드" },
+};

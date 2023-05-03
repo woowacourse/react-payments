@@ -1,15 +1,17 @@
-import GlobalStyle from "../../styles/GlobalStyle";
-import { cardNumberInitialValue, emptyArrowFuction } from "../../util/initialValue";
+import { Meta, StoryObj } from "@storybook/react";
 import CardNumberInput from "./CardNumberInput";
 
-export default {
+const meta: Meta<typeof CardNumberInput> = {
   title: "CardNumberInput",
   component: CardNumberInput,
 };
 
-export const Default = () => (
-  <>
-    <GlobalStyle />
-    <CardNumberInput cardNumber={cardNumberInitialValue} setCardNumber={emptyArrowFuction}></CardNumberInput>
-  </>
-);
+export default meta;
+
+type Story = StoryObj<typeof CardNumberInput>;
+
+export const Default: Story = {
+  args: {
+    cardNumber: { firstGroup: "1234", secondGroup: "1234", thirdGroup: "1234", fourthGroup: "1234" },
+  },
+};
