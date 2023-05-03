@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import CardLoadingScreen from '../components/CardLoadingScreen';
 import TransParentButton from '../components/Common/Button/TransParentButton';
 import Card from '../components/Common/Card';
 import Input from '../components/Common/Input';
@@ -11,28 +13,40 @@ import { useCardListStore } from '../context/CardListProvider';
 function CardNameRegistration() {
   const { dispatchCardList } = useCardListStore();
   const { card, setCardName, resetCardInformation } = useCardInformationStore();
+  const [isShowLoadingScreen, setIsShowLoadingScreen] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCardName(e.target.value);
   };
 
+  const closeLoadingScreen = () => {
+    setTimeout(() => {
+      setIsShowLoadingScreen(false);
+      navigate(PAGE_PATH.HOME);
+    }, 2000);
+  };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    setIsShowLoadingScreen(true);
     e.preventDefault();
     dispatchCardList(card);
     resetCardInformation();
-    navigate(PAGE_PATH.HOME);
+    closeLoadingScreen();
   };
 
   return (
-    <MainLayout>
-      <StyledMessage>카드 등록이 완료 되었습니다.</StyledMessage>
-      <Card cardInformation={card} isAddForm />
-      <StyledForm onSubmit={handleSubmit}>
-        <Input type="text" textAlign="center" onChange={handleChange} resetStyle />
-        <TransParentButton type="submit">확인</TransParentButton>
-      </StyledForm>
-    </MainLayout>
+    <>
+      <MainLayout>
+        <StyledMessage>카드 등록이 완료 되었습니다.</StyledMessage>
+        <Card cardInformation={card} isAddForm />
+        <StyledForm onSubmit={handleSubmit}>
+          <Input type="text" textAlign="center" onChange={handleChange} resetStyle />
+          <TransParentButton type="submit">확인</TransParentButton>
+        </StyledForm>
+      </MainLayout>
+      <CardLoadingScreen message="카드를 등록중입니다." isShow={isShowLoadingScreen} />
+    </>
   );
 }
 
