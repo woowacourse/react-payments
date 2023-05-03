@@ -52,11 +52,11 @@ function SuccessPage() {
             setIsValid(false);
             return;
           }
-          saveCard({ ...creditCard });
 
+          saveCard({ ...creditCard }, () => {
+            navigation('/', { replace: true });
+          });
           initCreditCard();
-
-          navigation('/');
         }}
       >
         확인

@@ -1,15 +1,16 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import useCardList from '../../hooks/useCardList';
 import Card from '../@common/card/Card';
+import localStorageUtil from '../../utils/localStorageUtil';
+import CreditCardInfo from '../../@types/creditCardInfo';
 
 function CardListPage() {
   const navigation = useNavigate();
-  const { savedCardList } = useCardList();
+  const cardList = localStorageUtil.getItem('card-list') as CreditCardInfo[];
 
   const cardLists = () => {
-    return savedCardList.length ? (
-      savedCardList.map(({ cardNumber, ownerName, expirationDate, cardCompany, cardAlias }) => {
+    return cardList.length ? (
+      cardList.map(({ cardNumber, ownerName, expirationDate, cardCompany, cardAlias }) => {
         return (
           <div key={`card-list-${ownerName}-${expirationDate}-${cardCompany}`}>
             <Card
@@ -32,7 +33,7 @@ function CardListPage() {
     <CardListSection>
       {cardLists()}
       <AddButton
-        isFirst={savedCardList.length ? false : true}
+        isFirst={cardList.length ? false : true}
         onClick={() => {
           navigation('/card-register');
         }}
