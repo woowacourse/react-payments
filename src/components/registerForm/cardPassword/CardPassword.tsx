@@ -22,7 +22,7 @@ function CardPassword() {
 
   const handleChangeByIndex: (index: number) => React.ChangeEventHandler<HTMLInputElement> =
     (index) => (event) => {
-      const enteredPassword = event.currentTarget.value as string;
+      const enteredPassword = event.currentTarget.value;
 
       if (!ONLY_NUMBER_REGEXP.test(enteredPassword)) {
         setValidationStatus({

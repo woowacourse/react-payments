@@ -22,7 +22,7 @@ export const CardNumber = () => {
 
   const handleChangeByIndex: (index: number) => React.ChangeEventHandler<HTMLInputElement> =
     (index) => (event) => {
-      const enteredNumber = event.currentTarget.value as string;
+      const enteredNumber = event.currentTarget.value;
 
       if (isNaN(Number(enteredNumber))) {
         setValidStatus({
@@ -47,8 +47,7 @@ export const CardNumber = () => {
     };
 
   const handleBlur: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    const enteredNumber = event.currentTarget.value as string;
-
+    const enteredNumber = event.currentTarget.value;
     if (enteredNumber.length !== 4) {
       return setValidStatus({
         isValid: false,

@@ -33,7 +33,7 @@ function SuccessPage() {
         <div>
           <Input
             onChange={(event) => {
-              const alias = event.currentTarget.value as string;
+              const alias = event.currentTarget.value;
 
               if (!setCreditCard) return;
               setCreditCard('cardAlias', alias);

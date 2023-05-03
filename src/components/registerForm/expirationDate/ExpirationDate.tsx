@@ -22,7 +22,7 @@ function ExpirationDate() {
 
   const handleChange: (index: number) => React.ChangeEventHandler<HTMLInputElement> =
     (index) => (event) => {
-      const enteredDate = event.currentTarget.value as string;
+      const enteredDate = event.currentTarget.value;
 
       if (!ONLY_NUMBER_REGEXP.test(enteredDate)) {
         setValidStatus({

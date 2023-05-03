@@ -18,7 +18,7 @@ function OwnerNameInput() {
   });
 
   const _onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    const enteredName = (event.currentTarget.value as string).toUpperCase();
+    const enteredName = event.currentTarget.value.toUpperCase();
 
     if (!ONLY_ENG_AND_EMPTY_REGEXP.test(enteredName)) {
       setValidationStatus({

@@ -16,7 +16,7 @@ function SecurityCode() {
   });
 
   const _onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    const enteredCode = event.currentTarget.value as string;
+    const enteredCode = event.currentTarget.value;
 
     if (!ONLY_NUMBER_REGEXP.test(enteredCode)) {
       setValidStatus({
@@ -39,7 +39,7 @@ function SecurityCode() {
   };
 
   const _onBlur: React.FocusEventHandler<HTMLInputElement> = (event) => {
-    const enteredValue = event.currentTarget.value as string;
+    const enteredValue = event.currentTarget.value;
     if (enteredValue.length !== 3) {
       setValidStatus({
         isValid: false,
