@@ -22,10 +22,10 @@ export const Input = styled.input<InputProps>`
 
   padding: ${(props) => props.name === 'ownerName' && '0 16px'};
 
-  background-color: ${(props) => props.name === 'nickname' && '#e5e5e5'};
+  background-color: ${(props) => props.name !== 'nickname' && '#e5e5e5'};
 
   border: none;
-  border-radius: ${(props) => props.name === 'nickname' && '10px'};
+  border-radius: ${(props) => props.name !== 'nickname' && '10px'};
   border-bottom: ${(props) => props.name === 'nickname' && '2px solid black'};
 
   font-weight: 600;
