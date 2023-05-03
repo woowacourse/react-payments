@@ -11,8 +11,8 @@ type Story = StoryObj<typeof meta>;
 
 export const CardOwnerNameStory: Story = {
   args: {
-    cardOwnerName: 'NAME',
-    errorMessage: '',
+    cardOwnerName: '',
+    errorMessage: '카드 소유자명은 30자 이내의 대문자 영문으로만 입력해주세요.',
     handleCardOwnerName: () => {
       return;
     },
