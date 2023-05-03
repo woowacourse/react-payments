@@ -20,7 +20,7 @@ export const Styled = {
     justify-content: flex-end;
 
     background: ${(props) =>
-      props.cardName ? theme.cardColors[props.cardName].background : "fff"};
+      props.cardName ? theme.cardColors[props.cardName].background : "#fff"};
 
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
