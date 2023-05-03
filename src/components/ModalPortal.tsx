@@ -1,5 +1,6 @@
 import React, { ReactChild, useEffect, useRef } from 'react';
 import ReactDom from 'react-dom';
+import styled from 'styled-components';
 
 interface Props {
   children: ReactChild;
@@ -33,10 +34,27 @@ const ModalPortal = (props: Props) => {
 
   return ReactDom.createPortal(
     <dialog ref={modalRef} onKeyDown={dialogKeyDownListener} onClick={dialogBackdropListener}>
-      {props.children}
+      <ModalContainer>{props.children}</ModalContainer>
     </dialog>,
     $modalRoot
   );
 };
+
+const ModalContainer = styled.div`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  max-height: 95%;
+  padding: 32px 16px;
+
+  display: flex;
+  flex-direction: column;
+
+  border-radius: 8px 8px 0px 0px;
+  background: #ffffff;
+
+  overflow: scroll;
+`;
 
 export default ModalPortal;

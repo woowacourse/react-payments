@@ -16,7 +16,7 @@ const ModalBanks = (props: Props) => {
     props.setCard(card);
   };
   return (
-    <ModalContainer>
+    <>
       <BanksWrapper>
         <Bank id={BANK_ID.BC_CARD} imgSrc={BcBank} onClick={e => cardColorHandler(e)} />
         <Bank id={BANK_ID.SHINHAN_CARD} imgSrc={ShinhanBank} onClick={e => cardColorHandler(e)} />
@@ -29,26 +29,9 @@ const ModalBanks = (props: Props) => {
         <Bank id={BANK_ID.HANA_CARD} imgSrc={HanaBank} onClick={e => cardColorHandler(e)} />
         <Bank id={BANK_ID.KOOKMIN_CARD} imgSrc={KookminBank} onClick={e => cardColorHandler(e)} />
       </BanksWrapper>
-    </ModalContainer>
+    </>
   );
 };
-
-const ModalContainer = styled.div`
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  max-height: 95%;
-  padding: 32px 16px;
-
-  display: flex;
-  flex-direction: column;
-
-  border-radius: 8px 8px 0px 0px;
-  background: #ffffff;
-
-  overflow: scroll;
-`;
 
 const BanksWrapper = styled.div`
   display: flex;
