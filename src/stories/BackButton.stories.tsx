@@ -12,7 +12,7 @@ const meta = {
   decorators: [
     Story => (
       <HashRouter>
-        <Story />
+        <Story>돌아가기</Story>
       </HashRouter>
     ),
   ],
