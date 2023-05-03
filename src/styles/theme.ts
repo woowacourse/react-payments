@@ -3,7 +3,7 @@ import { Color } from '../utils/Color';
 const SIZE_UNIT = 8;
 
 export const theme = {
-  size: (unit: number) => unit * SIZE_UNIT,
+  spacing: (unit: number) => unit * SIZE_UNIT,
 
   fontSize: {
     '0': '10px',

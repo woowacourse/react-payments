@@ -10,5 +10,5 @@ export const Icon = (props: IconProps) => {
   const { src, alt, size } = props;
   const theme = useTheme();
 
-  return <img src={src} alt={alt} width={theme.size(size)} height={theme.size(size)} />;
+  return <img src={src} alt={alt} width={theme.spacing(size)} height={theme.spacing(size)} />;
 };
