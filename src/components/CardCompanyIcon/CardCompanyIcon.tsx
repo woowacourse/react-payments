@@ -11,7 +11,7 @@ const CardCompanyIcon = ({ company, onClickHandler }: CardCompanyIconProps) => {
   return (
     <Wrapper name={company} onClick={onClickHandler}>
       {company && cardMap.get(company)?.component}
-      <span>{company}</span>
+      <Company>{company}</Company>
     </Wrapper>
   );
 };
@@ -28,4 +28,7 @@ const Wrapper = styled.button`
   cursor: pointer;
 `;
 
+const Company = styled.span`
+  color: #525252;
+`;
 export default CardCompanyIcon;
