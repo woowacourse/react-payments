@@ -6,23 +6,25 @@ type CardCompanyModalProps = {
   onClose: () => void;
 };
 
+const cardCompanies = [
+  { icon: cardIcons.bcCardIcon, name: '비씨카드', id: 1 },
+  { icon: cardIcons.shinhanCardIcon, name: '신한카드', id: 2 },
+  { icon: cardIcons.kakaoCardIcon, name: '카카오뱅크', id: 3 },
+  { icon: cardIcons.hyundaiCardIcon, name: '현대카드', id: 4 },
+  { icon: cardIcons.wooriCardIcon, name: '우리카드', id: 5 },
+  { icon: cardIcons.lotteCardIcon, name: '롯데카드', id: 6 },
+  { icon: cardIcons.hanaCardIcon, name: '하나카드', id: 7 },
+  { icon: cardIcons.kbCardIcon, name: '국민카드', id: 8 },
+];
+
 const CardCompanyModal = ({ onClose }: CardCompanyModalProps) => {
   return (
     <>
       <section className={styles.modalBackground} onClick={onClose} />
       <section className={styles.modalContainer}>
-        <section className={styles.cardContainer}>
-          <CardCompany image={cardIcons.bcCardIcon} cardName="비씨카드" onClose={onClose} />
-          <CardCompany image={cardIcons.shinhanCardIcon} cardName="신한카드" onClose={onClose} />
-          <CardCompany image={cardIcons.kakaoCardIcon} cardName="카카오뱅크" onClose={onClose} />
-          <CardCompany image={cardIcons.hyundaiCardIcon} cardName="현대카드" onClose={onClose} />
-        </section>
-        <section className={styles.cardContainer}>
-          <CardCompany image={cardIcons.wooriCardIcon} cardName="우리카드" onClose={onClose} />
-          <CardCompany image={cardIcons.lotteCardIcon} cardName="롯데카드" onClose={onClose} />
-          <CardCompany image={cardIcons.hanaCardIcon} cardName="하나카드" onClose={onClose} />
-          <CardCompany image={cardIcons.kbCardIcon} cardName="국민카드" onClose={onClose} />
-        </section>
+        {cardCompanies.map(cardCompany => (
+          <CardCompany key={cardCompany.id} image={cardCompany.icon} cardName={cardCompany.name} onClose={onClose} />
+        ))}
       </section>
     </>
   );
