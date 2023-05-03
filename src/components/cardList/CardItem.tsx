@@ -1,10 +1,10 @@
 import Card from "../common/Card";
 import styled from "styled-components";
 
-import { useMemo } from "react";
+import { CardType } from "../../types/card";
+import { DEFAULT_NAME, DEFAULT_BRAND, FONT_COLORMAP, BACKGROUND_COLORMAP } from "../../constants";
 
-import { CardType, BrandType } from "../../types/card";
-import { CARDNUMBERS_REGEX, DEFAULT_EXPRIYDATE, DEFAULT_NAME, DEFAULT_BRAND } from "../../constants";
+import { getShownNumbers, gethiddenNumbers, normalizeExpiryDate } from "../../utils/card";
 
 interface CardProps {
   card: CardType;
@@ -14,32 +14,18 @@ interface CardProps {
 const CardItem = ({ card, handleClick }: CardProps) => {
   const { numbers, expiryDate, owner = DEFAULT_NAME, brand = DEFAULT_BRAND } = card;
 
-  const memorizedNumbers = useMemo((): string => {
-    const shownNumbers = numbers.slice(0, 8);
-    return (shownNumbers.match(new RegExp(CARDNUMBERS_REGEX)) ?? []).join(" ");
-  }, [numbers]);
-
-  const memorizedHideNumbers = useMemo((): string => {
-    const hiddenNumbers = "●".repeat(numbers.slice(8).length);
-    return (hiddenNumbers.match(new RegExp(CARDNUMBERS_REGEX)) ?? []).join(" ");
-  }, [numbers]);
-
-  const memoizedExpiryDate = useMemo(() => {
-    return expiryDate ? expiryDate : DEFAULT_EXPRIYDATE;
-  }, [expiryDate]);
-
   return (
-    <Card $backgroundColor={backgroundColorMap[brand]}>
-      <Container $color={fontColorMap[brand]} onClick={handleClick}>
+    <Card $backgroundColor={BACKGROUND_COLORMAP[brand]}>
+      <Container $color={FONT_COLORMAP[brand]} onClick={handleClick}>
         <Brand>{brand}</Brand>
         <IcChip />
         <Numbers>
-          <ShownNumbers>{memorizedNumbers}</ShownNumbers>
-          <HiddenNumbers>{memorizedHideNumbers}</HiddenNumbers>
+          <ShownNumbers>{getShownNumbers(numbers)}</ShownNumbers>
+          <HiddenNumbers>{gethiddenNumbers(numbers)}</HiddenNumbers>
         </Numbers>
         <InfoWrapper>
           <Name>{owner}</Name>
-          <ExpiryDate>{memoizedExpiryDate}</ExpiryDate>
+          <ExpiryDate>{normalizeExpiryDate(expiryDate)}</ExpiryDate>
         </InfoWrapper>
       </Container>
     </Card>
