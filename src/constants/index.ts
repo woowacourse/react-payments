@@ -41,45 +41,26 @@ const REGEX = {
   english: /^[a-zA-Z]*$/,
 } as const;
 
-const CARD_COMPANY: Record<
-  string,
-  { img?: string; background: string; color: string }
-> = {
-  카드사선택필요: {
-    background: "gray",
-    color: "white",
-  },
+const CARD_COMPANY: Record<string, { img?: string }> = {
   BC카드: {
     img: BcCard,
-    background: "rgb(222, 84, 86)",
-    color: "white",
   },
   신한카드: {
     img: ShinhanCard,
-    background: "rgb(19, 74, 245)",
-    color: "white",
   },
   카카오뱅크: {
     img: KakaoCard,
-    background: "rgb(251, 230, 77)",
-    color: "black",
   },
-  현대카드: { img: HyundaiCard, background: "rgb(51, 51, 51)", color: "white" },
+  현대카드: { img: HyundaiCard },
   우리카드: {
     img: WooriCard,
-    background: "rgb(187, 223, 245)",
-    color: "rgb(51, 122, 194)",
   },
   롯데카드: {
     img: LotteCard,
-    background: "rgb(240, 240, 240)",
-    color: "rgb(225, 0, 0)",
   },
-  하나카드: { img: HanaCard, background: "rgb(64, 146, 143)", color: "white" },
+  하나카드: { img: HanaCard },
   국민카드: {
     img: KbCard,
-    background: "rgb(85, 79, 71)",
-    color: "rgb(247, 206, 71)",
   },
 } as const;
 
