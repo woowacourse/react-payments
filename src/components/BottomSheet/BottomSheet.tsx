@@ -6,6 +6,7 @@ import * as Styled from './BottomSheet.styles';
 interface BottomSheetProps {
   onSetCardCompany: (value: CardCompanyName) => void;
   closeBottomSheet: () => void;
+  onSetFirstCardNumbers: (cardCompanyName: CardCompanyName) => void;
 }
 
 const isCardCompany = (value: string): value is CardCompanyName => {
@@ -24,10 +25,12 @@ const isCardCompany = (value: string): value is CardCompanyName => {
 const BottomSheet = ({
   onSetCardCompany,
   closeBottomSheet,
+  onSetFirstCardNumbers,
 }: BottomSheetProps) => {
   const handleCardIconClick = (name: string) => {
     if (!isCardCompany(name)) return;
     onSetCardCompany(name);
+    onSetFirstCardNumbers(name);
     closeBottomSheet();
   };
 

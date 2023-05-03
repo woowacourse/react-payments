@@ -23,7 +23,8 @@ import SecurityCode from '../SecurityCode/SecurityCode';
 import { v4 as uuidv4 } from 'uuid';
 
 const AddCardForm = () => {
-  const { cardNumbers, checkCardNumbers } = useCardNumbers();
+  const { cardNumbers, checkCardNumbers, onSetFirstCardNumbers } =
+    useCardNumbers();
   const { cardOwnerName, checkCardOwnerName } = useCardOwnerName();
   const { password, checkPassword } = useCardPassword();
   const { securityCode, checkSecurityCode } = useSecurityCode();
@@ -119,6 +120,7 @@ const AddCardForm = () => {
         <BottomSheet
           onSetCardCompany={onSetCardCompany}
           closeBottomSheet={onCloseBottomSheet}
+          onSetFirstCardNumbers={onSetFirstCardNumbers}
         />
       )}
     </>

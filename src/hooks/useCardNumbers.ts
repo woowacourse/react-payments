@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { cardCompanies } from '../constants/cards';
 import { NOT_A_NUMBER_REGEX } from '../constants/regex';
+import { CardCompanyName } from '../types/Card';
 
 const useCardNumbers = () => {
   const [cardNumbers, setCardNumbers] = useState<Record<number, string>>({
@@ -24,7 +25,15 @@ const useCardNumbers = () => {
     return true;
   };
 
-  return { cardNumbers, checkCardNumbers };
+  const onSetFirstCardNumbers = (cardCompany: CardCompanyName) => {
+    const codeNumber = cardCompanies.find(
+      (company) => company.name === cardCompany
+    )?.codeNumber;
+    if (!codeNumber) return;
+    setCardNumbers({ ...cardNumbers, 0: codeNumber.toString() });
+  };
+
+  return { cardNumbers, checkCardNumbers, onSetFirstCardNumbers };
 };
 
 export default useCardNumbers;
