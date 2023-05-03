@@ -4,7 +4,7 @@ import { CreditCardProvider } from '../../contexts/CreditCardContext';
 
 const meta = {
   component: CardCompanyIconContainer,
-  title: 'BankIconBox',
+  title: 'CardCompanyIconContainer',
   argTypes: {
     cardCompany: {
       control: { type: 'radio' },
