@@ -11,7 +11,7 @@ const MyPage = () => {
 
   useEffect(() => {
     resetCard();
-  }, []);
+  }, [resetCard]);
 
   return (
     <styled.MyPageLayout>

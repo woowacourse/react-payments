@@ -18,7 +18,7 @@ export const useInputFocus = (
         nextInput.focus();
       }
     }
-  }, [value, isFocus]);
+  }, [value, isFocus, maxLength]);
 
   return inputRef;
 };

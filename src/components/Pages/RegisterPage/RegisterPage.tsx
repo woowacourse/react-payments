@@ -15,7 +15,7 @@ const RegisterPage = () => {
 
   useEffect(() => {
     if (company.name) handleCloseModal();
-  }, [company.name]);
+  }, [company.name, handleCloseModal]);
 
   return (
     <styled.RegisterPageLayout>
