@@ -10,7 +10,7 @@
   height: 116px;
   background: #333;
   border-radius: 10px;
-  animation: slideRight 1s ease-in-out forwards;
+  animation: slideRight 0.8s ease-in-out forwards;
 }
 
 @keyframes slideRight {
