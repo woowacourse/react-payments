@@ -1,67 +1,60 @@
-import styled from 'styled-components';
-import { CardType } from '../../types/Card';
+import * as Styled from './Card.styles';
+import CardType from '../../types/Card';
+import CardLabel from '../@common/CardLabel';
 
-const Wrapper = styled.div`
-  display: flex;
-  align-items: end;
-  width: 212px;
-  height: 132px;
-  padding: 12px;
-  background: #333333;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
-  border-radius: 5px;
-  font-size: 14px;
-  margin-bottom: 32px;
-`;
+type CardProps = Omit<CardType, 'id'> & {
+  setIsModalOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
-const ChipWrapper = styled.div`
-  width: 200px;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 12px;
-`;
+interface cardCompanyColorsType {
+  [cardName: string]: string;
+}
 
-const Chip = styled.div`
-  width: 40px;
-  height: 26px;
-  background: #cbba64;
-  border-radius: 4px;
-`;
+const cardCompanyColors: cardCompanyColorsType = {
+  BC카드: '#F04679',
+  하나카드: '#009490',
+  현대카드: '#333333',
+  카카오뱅크: '#F1D900',
+  롯데카드: '#ED1C24',
+  신한카드: '#0046FF',
+  우리카드: '#4BC2F1',
+  국민카드: '#5D544B',
+};
 
-const CardText = styled.p<{ cardName?: boolean }>`
-  width: ${(props) => (props.cardName ? '120px' : '')};
-  height: ${(props) => (props.cardName ? '32px' : '')};
-  color: #ffffff;
-  margin: 8px 8px 0 0;
-  word-break: break-all;
-`;
-
-const TextWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-type CardProps = Omit<CardType, 'id'>;
-
-const Card = ({ cardNumbers, expiredDates, cardOwnerName }: CardProps) => {
+const Card = ({
+  cardNumbers,
+  expiredDates,
+  cardOwnerName,
+  cardCompany,
+  setIsModalOpen,
+}: CardProps) => {
   return (
-    <Wrapper>
-      <ChipWrapper>
-        <Chip />
-        <TextWrapper>
-          <CardText>{cardNumbers[0]}</CardText>
-          <CardText>{cardNumbers[1]}</CardText>
-          <CardText>{'•'.repeat(cardNumbers[2].length)}</CardText>
-          <CardText>{'•'.repeat(cardNumbers[3].length)}</CardText>
-        </TextWrapper>
-        <TextWrapper>
-          <CardText cardName>{cardOwnerName || 'NAME'}</CardText>
-          <CardText>
+    <Styled.Wrapper
+      background={cardCompanyColors[cardCompany]}
+      onClick={() => {
+        setIsModalOpen && setIsModalOpen(true);
+      }}
+    >
+      <CardLabel
+        labelText={cardCompany || '00카드'}
+        color={cardCompany ? '#ffffff' : '#000000'}
+      />
+      <Styled.CardItemWrapper>
+        <Styled.Chip />
+        <Styled.TextWrapper>
+          <Styled.CardText>{cardNumbers[0]}</Styled.CardText>
+          <Styled.CardText>{cardNumbers[1]}</Styled.CardText>
+          <Styled.CardText>{'•'.repeat(cardNumbers[2].length)}</Styled.CardText>
+          <Styled.CardText>{'•'.repeat(cardNumbers[3].length)}</Styled.CardText>
+        </Styled.TextWrapper>
+        <Styled.TextWrapper>
+          <Styled.CardText cardName>{cardOwnerName || 'NAME'}</Styled.CardText>
+          <Styled.CardText>
             {expiredDates[0] || 'MM'} / {expiredDates[1] || 'YY'}
-          </CardText>
-        </TextWrapper>
-      </ChipWrapper>
-    </Wrapper>
+          </Styled.CardText>
+        </Styled.TextWrapper>
+      </Styled.CardItemWrapper>
+    </Styled.Wrapper>
   );
 };
 

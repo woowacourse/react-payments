@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import Card from './Card';
+import Card from '../components/Card/Card';
 
 const meta = {
   component: Card,
@@ -14,5 +14,6 @@ export const CardStory: Story = {
     cardNumbers: ['1111', '2222', '3333', '4444'],
     expiredDates: ['02', '12'],
     cardOwnerName: 'NAME',
+    cardCompany: '현대카드',
   },
 };

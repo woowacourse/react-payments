@@ -18,7 +18,7 @@ export const isCorrectExpiredDate = (expiredDates: Array<string>) => {
 
   if (
     (expiredMonth > nowDate.getMonth() &&
-      expiredYear >= nowDate.getFullYear() % 2000) ||
+      expiredYear === nowDate.getFullYear() % 2000) ||
     expiredYear > nowDate.getFullYear() % 2000
   ) {
     return true;

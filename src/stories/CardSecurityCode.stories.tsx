@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from '@storybook/react';
-import SecurityCode from './SecurityCode';
+import CardSecurityCode from '../components/CardSecurityCode/CardSecurityCode';
 
 const meta = {
-  component: SecurityCode,
+  component: CardSecurityCode,
   title: 'Section/SecurityCode',
-} satisfies Meta<typeof SecurityCode>;
+} satisfies Meta<typeof CardSecurityCode>;
 
 export default meta;
 
@@ -13,5 +13,9 @@ type Story = StoryObj<typeof meta>;
 export const SecurityCodeStory: Story = {
   args: {
     securityCode: '000',
+    errorMessage: '',
+    handleSecurityCode: () => {
+      return;
+    },
   },
 };

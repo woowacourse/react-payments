@@ -1,95 +1,137 @@
 import CardNumbers from '../components/CardNumbers/CardNumbers';
-import ExpiredDate from '../components/ExpiredDate/ExpiredDate';
+import CardExpiredDate from '../components/CardExpiredDate/CardExpiredDates';
 import CardOwnerName from '../components/CardOwnerName/CardOwnerName';
-import SecurityCode from '../components/SecurityCode/SecurityCode';
+import CardSecurityCode from '../components/CardSecurityCode/CardSecurityCode';
 import CardPassword from '../components/CardPassword/CardPassword';
 import Card from '../components/Card/Card';
 import Header from '../components/Header/Header';
-import { CardType } from '../types/Card';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import useAddCard from '../hooks/useAddCard';
-import styled from 'styled-components';
+import CardCompanyModal from '../components/CardCompanyModal/CardCompanyModal';
+import { useEffect, useState } from 'react';
+import CardLabel from '../components/@common/CardLabel';
+import * as Styled from './AddCard.styles';
+import SubmitButton from '../components/@common/SubmitButton';
+import CardList from '../types/CardList';
+import RefProvider from '../contexts/RefProvider';
 
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  margin: 32px 0;
-`;
-
-const NextButton = styled.button<{ disabled: boolean }>`
-  color: ${(props) => (props.disabled ? '#969696' : '#000')};
-  cursor: ${(props) => (props.disabled ? 'auto' : 'pointer')};
-`;
-
-const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: flex-end;
-`;
-
-interface SetCardsProps {
-  cards: CardType[];
-  setCards: React.Dispatch<React.SetStateAction<CardType[]>>;
-}
-
-const AddCard = ({ cards, setCards }: SetCardsProps) => {
+const AddCard = ({ cards, setCards }: CardList) => {
   const {
     cardNumbers,
-    setCardNumbers,
+    cardNumbersError,
+    handleCardNumbers,
     expiredDates,
-    setExpiredDates,
+    expiredDatesError,
+    handleExpiredDates,
     cardOwnerName,
-    setCardOwnerName,
+    ownerNameError,
+    handleCardOwnerName,
     securityCode,
-    setSecurityCode,
-    passwords,
-    setPasswords,
+    securityCodeError,
+    handleSecurityCode,
+    cardPasswords,
+    passwordError,
+    handleCardPasswords,
+    cardCompany,
+    setCardCompany,
     isDisabledForm,
   } = useAddCard();
-
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  const handleSetCards = () => {
+  const handleSetCards = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (isDisabledForm) {
+      setErrorMessage(
+        '잘못된 정보입니다. 올바른 카드 정보를 입력했는지 확인해주세요.'
+      );
+      return;
+    }
+
     setCards([
       ...cards,
-      { id: uuidv4(), cardNumbers, expiredDates, cardOwnerName },
+      {
+        id: uuidv4(),
+        cardNumbers,
+        expiredDates,
+        cardOwnerName,
+        cardCompany,
+      },
     ]);
-    navigate('/');
+    navigate('/add-card-alias');
   };
 
+  useEffect(() => {
+    setIsModalOpen(true);
+  }, []);
+
   return (
-    <>
-      <Header page="add-card" titleContent="&lt; &nbsp; 카드 추가" />
-      <form onSubmit={handleSetCards}>
-        <Wrapper>
-          <Card
+    <RefProvider>
+      <Styled.PageWrapper>
+        <Header page="add-card" titleContent="&lt; &nbsp; 카드 추가" />
+        <form onSubmit={handleSetCards}>
+          <Styled.CardWrapper>
+            <Styled.CardLabelWrapper>
+              {!isModalOpen && (
+                <CardLabel
+                  labelText="카드사를 수정하려면 카드를 클릭하세요."
+                  color="#969696"
+                />
+              )}
+            </Styled.CardLabelWrapper>
+            <Card
+              cardNumbers={cardNumbers}
+              expiredDates={expiredDates}
+              cardOwnerName={cardOwnerName}
+              cardCompany={cardCompany}
+              setIsModalOpen={setIsModalOpen}
+            />
+          </Styled.CardWrapper>
+          <CardNumbers
             cardNumbers={cardNumbers}
-            expiredDates={expiredDates}
-            cardOwnerName={cardOwnerName}
+            errorMessage={cardNumbersError}
+            handleCardNumbers={handleCardNumbers}
           />
-        </Wrapper>
-        <CardNumbers
-          cardNumbers={cardNumbers}
-          setCardNumbers={setCardNumbers}
+          <CardExpiredDate
+            expiredDates={expiredDates}
+            errorMessage={expiredDatesError}
+            handleExpiredDates={handleExpiredDates}
+          />
+          <CardOwnerName
+            cardOwnerName={cardOwnerName}
+            errorMessage={ownerNameError}
+            handleCardOwnerName={handleCardOwnerName}
+          />
+          <CardSecurityCode
+            securityCode={securityCode}
+            errorMessage={securityCodeError}
+            handleSecurityCode={handleSecurityCode}
+          />
+          <CardPassword
+            cardPasswords={cardPasswords}
+            errorMessage={passwordError}
+            handleCardPasswords={handleCardPasswords}
+          />
+          <Styled.ButtonWrapper>
+            <SubmitButton
+              textContent="다음"
+              cursor={!isDisabledForm}
+              color={!isDisabledForm}
+            />
+          </Styled.ButtonWrapper>
+        </form>
+        <Styled.ErrorTextWrapper>{errorMessage}</Styled.ErrorTextWrapper>
+      </Styled.PageWrapper>
+      {isModalOpen && (
+        <CardCompanyModal
+          cardCompany={cardCompany}
+          setIsModalOpen={setIsModalOpen}
+          setCardCompany={setCardCompany}
         />
-        <ExpiredDate
-          expiredDates={expiredDates}
-          setExpiredDates={setExpiredDates}
-        />
-        <CardOwnerName
-          cardOwnerName={cardOwnerName}
-          setCardOwnerName={setCardOwnerName}
-        />
-        <SecurityCode
-          securityCode={securityCode}
-          setSecurityCode={setSecurityCode}
-        />
-        <CardPassword passwords={passwords} setPasswords={setPasswords} />
-        <ButtonWrapper>
-          <NextButton disabled={isDisabledForm}>다음</NextButton>
-        </ButtonWrapper>
-      </form>
-    </>
+      )}
+    </RefProvider>
   );
 };
 

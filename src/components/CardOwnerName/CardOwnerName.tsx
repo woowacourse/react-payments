@@ -1,58 +1,48 @@
-import { useRef } from 'react';
-import CardInput from '../CardInput/CardInput';
-import CardLabel from '../CardLabel/CardLabel';
-import styled from 'styled-components';
-
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #ecebf1;
-  border-radius: 7px;
-  margin-bottom: 20px;
-`;
-
-const LabelWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
+import { useContext } from 'react';
+import CardInput from '../@common/CardInput';
+import CardLabel from '../@common/CardLabel';
+import * as Styled from './CardOwnerName.styles';
+import { RefContext } from '../../contexts/RefProvider';
 
 interface CardOwnerNameProps {
   cardOwnerName: string;
-  setCardOwnerName: React.Dispatch<React.SetStateAction<string>>;
+  errorMessage: string;
+  handleCardOwnerName: (value: string) => void;
 }
 
 const CardOwnerName = ({
   cardOwnerName,
-  setCardOwnerName,
+  errorMessage,
+  handleCardOwnerName,
 }: CardOwnerNameProps) => {
-  const nameRef = useRef<HTMLInputElement>(null);
+  const cardRefs = useContext(RefContext);
 
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!(e.target instanceof HTMLInputElement)) return;
 
-    if (e.target.value.length === 0) setCardOwnerName('');
-    if (/[^A-Za-z\s]+$/.test(e.target.value)) return;
-
-    setCardOwnerName(e.target.value.toUpperCase());
+    handleCardOwnerName(e.target.value);
   };
 
   return (
     <>
-      <LabelWrapper>
+      <Styled.LabelWrapper>
         <CardLabel labelText="카드 소유자 이름(선택)" />
-        <CardLabel labelText={`${nameRef.current?.value.length || 0} / 30`} />
-      </LabelWrapper>
-      <Wrapper>
+        <CardLabel
+          labelText={`${cardRefs[6].current?.value.length || 0} / 30`}
+        />
+      </Styled.LabelWrapper>
+      <Styled.Wrapper>
         <CardInput
           type="text"
           maxLength={30}
-          ref={nameRef}
+          ref={cardRefs[6]}
+          order={6}
           onChange={handleCardInputChange}
           value={cardOwnerName}
           placeholder="카드에 표시된 영어 이름을 입력하세요."
         />
-      </Wrapper>
+      </Styled.Wrapper>
+      <Styled.ErrorTextWrapper>{errorMessage}</Styled.ErrorTextWrapper>
     </>
   );
 };

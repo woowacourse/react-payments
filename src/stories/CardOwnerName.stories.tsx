@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import CardOwnerName from './CardOwnerName';
+import CardOwnerName from '../components/CardOwnerName/CardOwnerName';
 
 const meta = {
   component: CardOwnerName,
@@ -12,5 +12,9 @@ type Story = StoryObj<typeof meta>;
 export const CardOwnerNameStory: Story = {
   args: {
     cardOwnerName: 'NAME',
+    errorMessage: '',
+    handleCardOwnerName: () => {
+      return;
+    },
   },
 };

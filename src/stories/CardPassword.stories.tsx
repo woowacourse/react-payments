@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import CardPassword from './CardPassword';
+import CardPassword from '../components/CardPassword/CardPassword';
 
 const meta = {
   component: CardPassword,
@@ -12,6 +12,10 @@ type Story = StoryObj<typeof meta>;
 
 export const CardPasswordStory: Story = {
   args: {
-    passwords: ['1', '2'],
+    cardPasswords: ['1', '2'],
+    errorMessage: '',
+    handleCardPasswords: () => {
+      return;
+    },
   },
 };

@@ -5,18 +5,21 @@ import {
   isCorrectPassword,
   isCorrectSecurityCode,
 } from '../validations/validationCardInfo';
+import useCardNumbers from './useCardNumbers';
+import useExpiredDates from './useExpiredDates';
+import useOwnerName from './useOwnerName';
+import useSecurityCode from './useSecurityCode';
+import usePassword from './usePassword';
 
 const useAddCard = () => {
-  const [cardNumbers, setCardNumbers] = useState<Array<string>>([
-    '',
-    '',
-    '',
-    '',
-  ]);
-  const [expiredDates, setExpiredDates] = useState<Array<string>>(['', '']);
-  const [cardOwnerName, setCardOwnerName] = useState<string>('');
-  const [securityCode, setSecurityCode] = useState<string>('');
-  const [passwords, setPasswords] = useState<Array<string>>(['', '']);
+  const { cardNumbers, cardNumbersError, handleCardNumbers } = useCardNumbers();
+  const { expiredDates, expiredDatesError, handleExpiredDates } =
+    useExpiredDates();
+  const { cardOwnerName, ownerNameError, handleCardOwnerName } = useOwnerName();
+  const { securityCode, securityCodeError, handleSecurityCode } =
+    useSecurityCode();
+  const { cardPasswords, passwordError, handleCardPasswords } = usePassword();
+  const [cardCompany, setCardCompany] = useState<string>('');
   const [isDisabledForm, setIsDisabledForm] = useState(true);
 
   useEffect(() => {
@@ -24,25 +27,33 @@ const useAddCard = () => {
       isCorrectCardNumber(cardNumbers) &&
       isCorrectExpiredDate(expiredDates) &&
       isCorrectSecurityCode(securityCode) &&
-      isCorrectPassword(passwords)
+      isCorrectPassword(cardPasswords) &&
+      cardCompany
     ) {
       setIsDisabledForm(false);
       return;
     }
     setIsDisabledForm(true);
-  }, [cardNumbers, expiredDates, securityCode, passwords]);
+  }, [cardNumbers, expiredDates, securityCode, cardPasswords, cardCompany]);
 
   return {
     cardNumbers,
-    setCardNumbers,
+    cardNumbersError,
+    handleCardNumbers,
     expiredDates,
-    setExpiredDates,
+    expiredDatesError,
+    handleExpiredDates,
     cardOwnerName,
-    setCardOwnerName,
+    ownerNameError,
+    handleCardOwnerName,
     securityCode,
-    setSecurityCode,
-    passwords,
-    setPasswords,
+    securityCodeError,
+    handleSecurityCode,
+    cardPasswords,
+    passwordError,
+    handleCardPasswords,
+    cardCompany,
+    setCardCompany,
     isDisabledForm,
   };
 };
