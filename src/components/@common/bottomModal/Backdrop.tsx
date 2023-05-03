@@ -10,15 +10,11 @@ const Backdrop = ({ onClose }: BackdropProps) => {
     const handleKeyupEscape = (event: KeyboardEvent) => {
       if (event.key === 'Escape') onClose();
     };
-
     window.addEventListener('keyup', handleKeyupEscape);
-    document.body.style.overflow = 'hidden';
-
     return () => {
       window.removeEventListener('keyup', handleKeyupEscape);
-      document.body.style.overflow = 'unset';
     };
-  }, []);
+  }, [onClose]);
 
   return (
     <StyleBackDrop

@@ -23,7 +23,7 @@ function RegisterPage() {
         cardCompany={cardCompany}
       />
       <CardRegisterForm />
-      <BottomModal isOpen={isOpen} onClose={closeModal}>
+      <BottomModal className="modal" isOpen={isOpen} onClose={closeModal}>
         <SelectCompanyModal onClose={closeModal}></SelectCompanyModal>
       </BottomModal>
     </>
