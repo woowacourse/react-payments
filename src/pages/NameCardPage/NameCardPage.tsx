@@ -7,6 +7,7 @@ import { PAGE } from "../../constant/index";
 import { Button } from "../../components/common/Button";
 import { AddCardStateContext } from "../../context/AddCardStateProvider";
 import { Card } from "../../types";
+import { isValidCardName } from "../../validator/Validator";
 
 const NameCardPage = () => {
   const navigate = useNavigate();
@@ -31,6 +32,8 @@ const NameCardPage = () => {
   };
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!isValidCardName(e.target.value)) return;
+
     setCardName(e.target.value);
   };
 
@@ -39,7 +42,7 @@ const NameCardPage = () => {
       <h2>카드등록이 완료되었습니다.</h2>
       <CardPreview card={{ cardCompany, cardNumber, expirationDate, ownerName }} />
       <Form onSubmit={onSubmitHandler}>
-        <Input placeholder={"카드이름을 지어주세요."} onChange={onChangeHandler} autoFocus />
+        <Input value={cardName} placeholder={"카드이름을 지어주세요."} onChange={onChangeHandler} autoFocus />
         <Button isVisible={true}>확인</Button>
       </Form>
     </Container>

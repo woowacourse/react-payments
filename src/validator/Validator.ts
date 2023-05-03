@@ -20,7 +20,18 @@ export const isValidOwnerName = (value: string) => {
   const regexDuplicateSpaces = /\s{2,}/g;
 
   const isValid =
-    allowAlphabetAndBlank.test(value) || regexStartsWithSpace.test(value) || regexDuplicateSpaces.test(value);
+    (allowAlphabetAndBlank.test(value) || regexDuplicateSpaces.test(value)) && !regexStartsWithSpace.test(value);
+
+  return isValid;
+};
+
+export const isValidCardName = (value: string) => {
+  const allowStringAndBlank = /^[A-Za-zㄱ-힣\s]*$/;
+  const regexStartsWithSpace = /^\s/;
+  const regexDuplicateSpaces = /\s{2,}/g;
+
+  const isValid =
+    (allowStringAndBlank.test(value) || regexDuplicateSpaces.test(value)) && !regexStartsWithSpace.test(value);
 
   return isValid;
 };
