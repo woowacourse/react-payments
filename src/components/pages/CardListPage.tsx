@@ -12,30 +12,26 @@ function CardListPage() {
     return null;
   }
 
-  const cardLists = () => {
-    return cardList.length ? (
-      cardList.map(({ cardNumber, ownerName, expirationDate, cardCompany, cardAlias }) => {
-        return (
-          <div key={`card-list-${ownerName}-${expirationDate}-${cardCompany}`}>
-            <Card
-              onClick={() => {}}
-              cardNumber={cardNumber}
-              ownerName={ownerName}
-              expirationDate={expirationDate}
-              cardCompany={cardCompany}
-            />
-            <CardAlias>{cardAlias}</CardAlias>
-          </div>
-        );
-      })
-    ) : (
-      <CardRegisterParagraph>새로운 카드를 등록해주세요.</CardRegisterParagraph>
-    );
-  };
-
   return (
     <CardListSection>
-      {cardLists()}
+      {cardList.length ? (
+        cardList.map(({ cardNumber, ownerName, expirationDate, cardCompany, cardAlias }) => {
+          return (
+            <div key={`card-list-${ownerName}-${expirationDate}-${cardCompany}`}>
+              <Card
+                onClick={() => {}}
+                cardNumber={cardNumber}
+                ownerName={ownerName}
+                expirationDate={expirationDate}
+                cardCompany={cardCompany}
+              />
+              <CardAlias>{cardAlias}</CardAlias>
+            </div>
+          );
+        })
+      ) : (
+        <CardRegisterParagraph>새로운 카드를 등록해주세요.</CardRegisterParagraph>
+      )}
       <AddButton
         isFirst={cardList.length ? false : true}
         onClick={() => {
