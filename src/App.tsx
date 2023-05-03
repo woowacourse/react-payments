@@ -5,6 +5,7 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { CardListProvider } from "./context/cardListContext";
 import { RegisterCard } from "./page/RegisterCard";
 import { PAGE } from "./constant/routePath";
+import { Loading } from "./page/Loading";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <Routes>
           <Route path={PAGE.home} element={<Home />} />
           <Route path={PAGE.addCard} element={<AddCard />} />
+          <Route path={PAGE.loading} element={<Loading />} />
           <Route path={PAGE.registerCard} element={<RegisterCard />} />
         </Routes>
       </CardListProvider>

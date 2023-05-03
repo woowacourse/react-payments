@@ -33,7 +33,7 @@ export const CardForm = ({ setCardInfo, newCard }: CardFormProps) => {
     if (isEveryInputValid()) {
       cardListActions.addNewCard(newCard);
 
-      moveTo(PAGE.registerCard);
+      moveTo(PAGE.loading);
     }
   };
 
