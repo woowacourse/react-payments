@@ -24,6 +24,7 @@ import { IsAccessAliasPageProvider } from '../../context/IsAccessAliasPageProvid
 const AddCardPage = () => {
   const { isValidExpiredMonthFormat, isValidExpiredYearFormat } = useValidExpireDate();
   const navigate = useNavigate();
+  // TODO: 좀 더 선언적으로 해볼까?
   const cardCompany = useSelectCardCompany(isSelectCardType);
   const cardFirstNumber = useInput(isValidCardNumber);
   const cardSecondNumber = useInput(isValidCardNumber);

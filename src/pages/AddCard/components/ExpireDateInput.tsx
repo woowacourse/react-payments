@@ -1,10 +1,14 @@
+import { useMemo } from 'react';
 import InputContainer from '../../../components/InputContainer';
 import { ExpireDateInputProps } from '../../../type';
 import { calcMultipleStatus } from '../domain/domain';
 import './ExpireDateInput.css';
 
 const ExpireDateInput = ({ expireMonth, expireYear }: ExpireDateInputProps) => {
-  const status = calcMultipleStatus([expireMonth.status, expireYear.status]);
+  const status = useMemo(
+    () => calcMultipleStatus([expireMonth.status, expireYear.status]),
+    [expireMonth.status, expireYear.status]
+  );
   return (
     <InputContainer className="card-expired-input-container" status={status} inputType="expired">
       <span className="form-label">만료일</span>
