@@ -7,7 +7,7 @@ const ERROR_MESSAGES = {
   password: '카드 비밀번호 앞 2자리를 입력해주세요.',
 } as const;
 
-export function useCardFormValid(card: Card): [
+export function ValidateForm(card: Card): [
   isValid: boolean,
   errorMessages: {
     numbers: string;
@@ -28,7 +28,9 @@ export function useCardFormValid(card: Card): [
     isNumberLengthValid(expirationDate.month, 2) &&
     isNumberLengthValid(expirationDate.year, 2) &&
     Number(expirationDate.month) > 0 &&
-    Number(expirationDate.month) <= 12;
+    Number(expirationDate.month) <= 12 &&
+    Number(expirationDate.year) >= new Date().getFullYear() - 2000 &&
+    Number(expirationDate.year) <= new Date().getFullYear() - 1995;
 
   const isSecurityCodeValid = isNumberLengthValid(securityCode, 3);
 

@@ -2,7 +2,7 @@ import { StoryFn } from '@storybook/react';
 import AddCardForm, { AddCardFormProps } from './AddCardForm';
 
 export default {
-  title: 'AddCardForm',
+  title: 'Section/AddCardForm',
   component: AddCardForm,
 };
 
