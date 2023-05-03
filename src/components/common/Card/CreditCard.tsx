@@ -54,6 +54,7 @@ const Styled = {
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
     color: ${({ backgroundColor }) => (backgroundColor === '카카오뱅크' ? '#3A1D1D' : 'white')};
+    z-index: 1;
     cursor: pointer;
   `,
   Chip: styled.div`

@@ -1,5 +1,5 @@
 import { Input } from 'components/common';
-import React, { ChangeEventHandler } from 'react';
+import { ChangeEventHandler } from 'react';
 import { Styled as S } from './ExpirationDateInput.styles';
 import FormLabel from 'components/common/FormLabel/FormLabel';
 import { useExpirationDataInput } from 'hooks/useExpirationDateInput';
@@ -10,15 +10,13 @@ export interface ExpirationDateProps {
 }
 
 export function ExpirationDateInput({ onChangeMonth, onChangeYear }: ExpirationDateProps) {
-  const inputRefs = [React.createRef<HTMLInputElement>(), React.createRef<HTMLInputElement>()];
-  const { month, year } = useExpirationDataInput(inputRefs, onChangeMonth, onChangeYear);
+  const { month, year } = useExpirationDataInput(onChangeMonth, onChangeYear);
 
   return (
     <>
       <FormLabel>만료일</FormLabel>
       <S.ExpirationDateContainer>
         <Input
-          ref={inputRefs[0]}
           inputMode="numeric"
           value={month.value}
           type="text"
@@ -29,7 +27,6 @@ export function ExpirationDateInput({ onChangeMonth, onChangeYear }: ExpirationD
         />
         <S.SLASH />
         <Input
-          ref={inputRefs[1]}
           inputMode="numeric"
           value={year.value}
           type="text"

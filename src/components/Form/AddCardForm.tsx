@@ -6,7 +6,14 @@ import {
   CardNumberInputs,
 } from 'components/Input';
 import styled from 'styled-components';
-import { ChangeEvent, ChangeEventHandler, FormEventHandler, useContext, useState } from 'react';
+import {
+  ChangeEvent,
+  ChangeEventHandler,
+  FormEventHandler,
+  KeyboardEventHandler,
+  useContext,
+  useState,
+} from 'react';
 import { COMPANY_NAME, Card } from 'components/common/Card/types';
 import { ValueAndOnChange } from 'components/Input/types';
 import { CreditCard } from 'components/common/Card/CreditCard';
@@ -22,6 +29,7 @@ export type AddCardFormProps = {
 };
 
 const NOT_ALPHABET_REGEX = /[^A-Za-z\s]/gi;
+const NOT_NUMBER_REGEX = /[^0-9]/gi;
 
 function AddCardInfo({ onSubmit }: AddCardFormProps) {
   const { setCardInfo } = useContext(CardInfoContext);
@@ -107,6 +115,38 @@ function AddCardInfo({ onSubmit }: AddCardFormProps) {
     openModal();
   };
 
+  const focusFormInput = (
+    formInputList: HTMLFormElement[],
+    curInput: HTMLFormElement,
+    direction: number,
+  ) => {
+    const formInputArr = [...formInputList];
+    const currentIndex = formInputArr.indexOf(curInput);
+    const focusTarget = formInputArr[currentIndex + direction];
+
+    if (!focusTarget || focusTarget.name !== curInput.name) return;
+
+    focusTarget.focus();
+  };
+
+  const handleMovePrevFocus: KeyboardEventHandler<HTMLFormElement> = (e) => {
+    const { key, target } = e;
+    const { form: formInputList, value } = target as HTMLFormElement;
+
+    if (key !== 'Backspace' || value !== '') return;
+
+    focusFormInput(formInputList, target as HTMLFormElement, -1);
+  };
+
+  const handleMoveNextFocus: ChangeEventHandler<HTMLFormElement> = (e) => {
+    const { target } = e;
+    const { form: formInputList, maxLength, value } = target;
+
+    const filteredValue = value.trim().replace(NOT_NUMBER_REGEX, '');
+
+    if (filteredValue.length !== maxLength) return;
+
+    focusFormInput(formInputList, target, 1);
   };
 
   return (
@@ -120,7 +160,11 @@ function AddCardInfo({ onSubmit }: AddCardFormProps) {
         <CreditCard card={card} />
         <FormLabel>카드 이미지를 터치하여 카드사를 변경할 수 있습니다.</FormLabel>
       </CardWrapper>
-      <FormContainer onSubmit={handleSubmit}>
+      <FormContainer
+        onSubmit={handleSubmit}
+        onChange={handleMoveNextFocus}
+        onKeyDown={handleMovePrevFocus}
+      >
         <CardNumberInputs valueAndOnChanges={handleCardNumbersChange} />
         {<ErrorCaption>{!isValid && errorMessages.numbers}</ErrorCaption>}
 

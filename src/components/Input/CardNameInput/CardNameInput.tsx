@@ -16,6 +16,7 @@ export function CardNameInput({ value, onChange }: CardNameInputProps) {
         maxLength={30}
         placeholder="카드 별명을 입력해주세요(선택)"
         onChange={onChange}
+        autoFocus
       />
     </S.CardNameInputWrapper>
   );

@@ -1,5 +1,5 @@
 import { Input } from 'components/common';
-import React, { ChangeEventHandler } from 'react';
+import { ChangeEventHandler } from 'react';
 import { Styled as S } from './PasswordInput.styles';
 import FormLabel from 'components/common/FormLabel/FormLabel';
 import { usePasswordInput } from 'hooks/usePasswordInput';
@@ -10,15 +10,13 @@ export interface PasswordInputProps {
 }
 
 export function PasswordInput({ onChangeFirst, onChangeSecond }: PasswordInputProps) {
-  const inputRefs = [React.createRef<HTMLInputElement>(), React.createRef<HTMLInputElement>()];
-  const { first, second } = usePasswordInput(inputRefs, onChangeFirst, onChangeSecond);
+  const { first, second } = usePasswordInput(onChangeFirst, onChangeSecond);
 
   return (
     <>
       <FormLabel>카드 비밀번호</FormLabel>
       <S.PasswordInputContainer>
         <Input
-          ref={inputRefs[0]}
           inputMode="numeric"
           value={first.value}
           type="password"
@@ -27,7 +25,6 @@ export function PasswordInput({ onChangeFirst, onChangeSecond }: PasswordInputPr
           required
         />
         <Input
-          ref={inputRefs[1]}
           inputMode="numeric"
           value={second.value}
           type="password"

@@ -2,7 +2,6 @@ import { ChangeEventHandler, useState } from 'react';
 import { validateInput } from 'util/Validation';
 
 export type ExpirationDateInputTypes = (
-  inputRefs: React.RefObject<HTMLInputElement>[],
   onChangeMonth: ChangeEventHandler<HTMLInputElement>,
   onChangeYear: ChangeEventHandler<HTMLInputElement>,
 ) => {
@@ -17,7 +16,6 @@ export type ExpirationDateInputTypes = (
 };
 
 export const useExpirationDataInput: ExpirationDateInputTypes = (
-  inputRefs: React.RefObject<HTMLInputElement>[],
   onChangeMonth: ChangeEventHandler<HTMLInputElement>,
   onChangeYear: ChangeEventHandler<HTMLInputElement>,
 ) => {
@@ -27,9 +25,7 @@ export const useExpirationDataInput: ExpirationDateInputTypes = (
   const handleMonthChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { value } = e.target;
     if (validateInput(value)) return;
-    if (value.trim().length === e.target.maxLength) {
-      inputRefs[1].current?.focus();
-    }
+
     onChangeMonth(e);
     setMonth(value);
   };

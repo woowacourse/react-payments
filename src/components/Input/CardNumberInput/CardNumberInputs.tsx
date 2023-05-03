@@ -1,5 +1,4 @@
-import React, { Fragment } from 'react';
-
+import { Fragment } from 'react';
 import { ValueAndOnChange } from '../types';
 import { Input } from 'components/common';
 import FormLabel from 'components/common/FormLabel/FormLabel';
@@ -11,8 +10,7 @@ interface CardNumberInputProps {
 }
 
 export function CardNumberInputs({ valueAndOnChanges }: CardNumberInputProps) {
-  const inputRefs = valueAndOnChanges.map(() => React.createRef<HTMLInputElement>());
-  const { inputs } = useCardNumberInputs(inputRefs, valueAndOnChanges);
+  const { inputs } = useCardNumberInputs(valueAndOnChanges);
 
   return (
     <>
