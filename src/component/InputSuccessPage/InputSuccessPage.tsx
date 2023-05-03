@@ -5,7 +5,7 @@ import CardPreview from "../common/CardPreview";
 import Input from "../common/Input";
 import { cardCompanyEnglishToKorean } from "../../type/CardCompany";
 import styles from "./InputSuccessPage.module.css";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   card: CreditCard;
@@ -17,17 +17,6 @@ const InputSuccessPage = (props: Props) => {
 
   const [nickname, setNickname] = useState('');
   const navigate = useNavigate();
-
-  const location = useLocation();
-
-  useEffect(() => {
-    if (
-      !location.state
-      || !Object.prototype.hasOwnProperty.call(location.state, 'validAccess')
-    ) {
-      navigate('/');
-    }
-  }, [location]);
 
   const companyKoreanName = card.company ? cardCompanyEnglishToKorean(card.company) : '기타 카드';
 
