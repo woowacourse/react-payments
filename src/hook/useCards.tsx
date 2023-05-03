@@ -22,7 +22,7 @@ export const useCards = () => {
     setCards(newData);
   };
 
-  const setAlias = (cardNumbers: string, alias: string) => {
+  const assignAlias = (cardNumbers: string, alias: string) => {
     const index = cards.findIndex((card) => card.numbers === cardNumbers);
     if (index === -1) return;
 
@@ -32,5 +32,5 @@ export const useCards = () => {
     setCards(cards);
   };
 
-  return { cards, addNewCard, setAlias };
+  return { cards, addNewCard, assignAlias };
 };

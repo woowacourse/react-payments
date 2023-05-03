@@ -5,11 +5,11 @@ import styled from "styled-components";
 import { useRef, FormEvent } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-interface SetAliasProps {
-  setAlias: (numbers: string, alias: string) => void;
+interface AssignAliasProps {
+  assignAlias: (numbers: string, alias: string) => void;
 }
 
-export const SetAlias = ({ setAlias }: SetAliasProps) => {
+export const AssignAlias = ({ assignAlias }: AssignAliasProps) => {
   const navigate = useNavigate();
 
   const location = useLocation();
@@ -21,7 +21,7 @@ export const SetAlias = ({ setAlias }: SetAliasProps) => {
     const formData = new FormData(e.target as HTMLFormElement);
     const data = Object.fromEntries(formData.entries());
 
-    setAlias(newCard.numbers, String(data.alias));
+    assignAlias(newCard.numbers, String(data.alias));
     navigate("/");
   };
 

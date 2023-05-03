@@ -17,7 +17,7 @@ export const useHelpSubmitForm = ({ cards, setIsNumbersValid, setIsExpiryDateVal
   const { newCard } = useContext(NewCardContext);
   const navigate = useNavigate();
   const moveToHome = () => {
-    navigate("/setAlias", { state: { newCard } });
+    navigate("/assignAlias", { state: { newCard } });
   };
 
   const isAllValid = () => {

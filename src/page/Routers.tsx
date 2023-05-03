@@ -1,13 +1,13 @@
 import { Home } from "./Home";
 import { AddCard } from "./AddCard";
-import { SetAlias } from "./SetAlias";
+import { AssignAlias } from "./AssignAlias";
 
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { CardsContext } from "../contexts/CardsContext";
 import { useCards } from "../hook/useCards";
 
 export const Routers = () => {
-  const { cards, addNewCard, setAlias } = useCards();
+  const { cards, addNewCard, assignAlias } = useCards();
 
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
@@ -29,7 +29,7 @@ export const Routers = () => {
             </CardsContext.Provider>
           }
         />
-        <Route path="/setAlias" element={<SetAlias setAlias={setAlias} />} />
+        <Route path="/assignAlias" element={<AssignAlias assignAlias={assignAlias} />} />
       </Routes>
     </BrowserRouter>
   );
