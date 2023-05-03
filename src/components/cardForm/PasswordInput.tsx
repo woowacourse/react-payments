@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 import React from "react";
 import { useRef, useCallback } from "react";
+import { usePasswordInput } from "../../hook/usePasswordInput";
 
 import { PASSWORD_MAXLEGNTH, NUMBER_REGEX } from "../../constants";
 
@@ -29,10 +30,7 @@ const PasswordInput = ({ setIsPassWordCompleted }: PasswordInputProps) => {
   const isPassWordsCompleted = useRef<boolean[]>(new Array(passwordInfo.length).fill(false));
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const moveFocus = (index: number, text: string) => {
-    if (inputRef.current === null) return;
-    if (index === 0 && text.length === 1) inputRef.current.focus();
-  };
+  const { updateInputFlags, moveFocus } = usePasswordInput({ isPassWordsCompleted, inputRef, setIsPassWordCompleted });
 
   const handleInput = useCallback(
     (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,12 +45,7 @@ const PasswordInput = ({ setIsPassWordCompleted }: PasswordInputProps) => {
         return;
       }
 
-      isPassWordsCompleted.current[index] = false;
-      if (text.length === PASSWORD_MAXLEGNTH) isPassWordsCompleted.current[index] = true;
-
-      setIsPassWordCompleted(false);
-      if (isPassWordsCompleted.current.every((isCompleted) => isCompleted)) setIsPassWordCompleted(true);
-
+      updateInputFlags(index, text);
       moveFocus(index, text);
     },
     [setIsPassWordCompleted, cannotInput, isPassWordsCompleted]
