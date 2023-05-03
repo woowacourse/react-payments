@@ -1,15 +1,15 @@
 import styled from "styled-components";
-import { Spinner } from "../components/common/Spinner";
 import { useNavigate } from "react-router-dom";
 import { PAGE } from "../constant/routePath";
 import { useEffect } from "react";
+import { Spinner } from "../components/common/Spinner";
 
 export const Loading = () => {
   const moveTo = useNavigate();
 
   useEffect(() => {
     setTimeout(() => {
-      moveTo(PAGE.registerCard);
+      moveTo(PAGE.home);
     }, 1500);
   }, []);
 

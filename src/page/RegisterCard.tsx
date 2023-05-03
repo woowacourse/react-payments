@@ -22,7 +22,7 @@ export const RegisterCard = () => {
       cardListActions.updateCard(newCard.id, { name });
     }
 
-    moveTo(PAGE.home);
+    moveTo(PAGE.loading);
   };
 
   return (
