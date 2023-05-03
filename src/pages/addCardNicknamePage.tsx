@@ -27,17 +27,7 @@ export function AddCardNicknamePage() {
   return (
     <Container>
       <Title>카드 등록이 완료되었습니다</Title>
-      <Card
-        cardNumber={state.cardNumber}
-        month={state.month}
-        year={state.year}
-        userName={state.userName}
-        cardColor={{
-          bgColor: state.cardColor.bgColor,
-          fontColor: state.cardColor.fontColor,
-        }}
-        bank={state.bank}
-      />
+      <Card {...state} />
       <Form>
         <InputBox>
           <InputGroup asChild>
