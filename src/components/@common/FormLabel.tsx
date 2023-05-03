@@ -3,10 +3,11 @@ import styled from "styled-components";
 
 interface Props extends ComponentPropsWithoutRef<"label"> {
   children: React.ReactNode;
+  htmlFor?: string;
 }
 
-function FormLabel({ children }: Props) {
-  return <StyleLabel htmlFor="">{children}</StyleLabel>;
+function FormLabel({ children, htmlFor }: Props) {
+  return <StyleLabel htmlFor={htmlFor}>{children}</StyleLabel>;
 }
 
 export default FormLabel;
