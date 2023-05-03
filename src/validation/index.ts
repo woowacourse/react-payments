@@ -3,7 +3,7 @@ import { LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
 const { VALID_MONTH } = VALID_INPUT;
 
 export const isInvalidDate = (
-  target: HTMLInputElement,
+  target: HTMLInputElement | HTMLFormElement,
   date: ExpirationDate
 ) => {
   const { isInvalidMonth, isExpired } = validation;
@@ -61,7 +61,7 @@ const validation = {
     return value.length === length;
   },
 
-  isInvalidMonth(target: HTMLInputElement) {
+  isInvalidMonth(target: HTMLInputElement | HTMLFormElement) {
     const value = target.value;
     const isValidMonth = target.name === "month" && Number(value) > VALID_MONTH;
 

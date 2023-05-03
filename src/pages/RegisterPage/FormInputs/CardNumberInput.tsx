@@ -8,7 +8,6 @@ import { CardNumberCaption } from "components/style/CaptionStyle";
 import { CardNumberInputBox } from "components/style/InputBoxStyle";
 import { useFocus } from "hooks/useFocus";
 import useInitCardInfo from "hooks/useInitCardInfo";
-import useModal from "hooks/useModal";
 import { NUMBER_INPUT, LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
 const { ONLY_NUMBER } = VALID_INPUT;
 
@@ -17,11 +16,7 @@ const CardNumberInput = () => {
   const { number1, number2, number3, number4 } = cardInfo;
   const cardNumber: CardNumber = { number1, number2, number3, number4 };
 
-  const { handleRef, moveFocus, currentInput } = useFocus();
-
-  if (!useModal().isModalOpen && !currentInput[0].value.length) {
-    currentInput[0].focus();
-  }
+  const input = useFocus();
 
   const handleCardNumberChange = ({
     target,
@@ -33,8 +28,6 @@ const CardNumberInput = () => {
         regex: ONLY_NUMBER,
       })
     );
-
-    moveFocus(target, LIMIT_LENGTH.CARD_NUMBER);
   };
 
   return (
@@ -57,7 +50,7 @@ const CardNumberInput = () => {
               required
               inputStyle={CommonInputStyle}
               onChange={handleCardNumberChange}
-              ref={(el) => handleRef(el, index)}
+              ref={!index ? input : null}
             />
             {index === NUMBER_INPUT.LAST_PART ? (
               ""

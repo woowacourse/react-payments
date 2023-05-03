@@ -5,7 +5,6 @@ import { changeInvalidValueToBlank } from "utils/inputValidator";
 import Input, { PasswordInputStyle } from "components/Input";
 import { PasswordCaption } from "components/style/CaptionStyle";
 import { PasswordInputBox } from "components/style/InputBoxStyle";
-import { useFocus } from "hooks/useFocus";
 import useInitCardInfo from "hooks/useInitCardInfo";
 import {
   NUMBER_INPUT,
@@ -20,8 +19,6 @@ const PasswordInput = () => {
   const { password1, password2 } = cardInfo;
   const password: Password = { password1, password2 };
 
-  const { handleRef, moveFocus } = useFocus();
-
   const handlePasswordChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     initCardInfo(
       target.name,
@@ -30,8 +27,6 @@ const PasswordInput = () => {
         regex: ONLY_NUMBER,
       })
     );
-
-    moveFocus(target, LIMIT_LENGTH.PASSWORD);
   };
 
   return (
@@ -55,7 +50,6 @@ const PasswordInput = () => {
                 required
                 inputStyle={PasswordInputStyle}
                 onChange={handlePasswordChange}
-                ref={(el) => handleRef(el, index)}
               />
             ) : (
               <S.HiddenPassword>ㆍ</S.HiddenPassword>

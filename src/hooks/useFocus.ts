@@ -1,19 +1,13 @@
 import { useRef } from "react";
+import useModal from "./useModal";
 
 export const useFocus = () => {
-  const input = useRef<HTMLInputElement[]>([]);
+  const input = useRef<HTMLInputElement>(null);
   const currentInput = input.current;
 
-  const handleRef = (el: HTMLInputElement | null, index: number) => {
-    if (el) currentInput[index] = el;
-  };
+  const isNeededFocus = currentInput !== null && !currentInput.value.length;
 
-  const moveFocus = (target: HTMLInputElement, length: number) => {
-    const index = currentInput.indexOf(target);
-    const nextInput = currentInput[index + 1];
+  if (!useModal().isModalOpen && isNeededFocus) currentInput.focus();
 
-    if (target.value.length === length && nextInput) nextInput.focus();
-  };
-
-  return { handleRef, moveFocus, currentInput };
+  return input;
 };

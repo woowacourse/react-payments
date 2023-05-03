@@ -1,3 +1,4 @@
+import { ChangeEvent, KeyboardEvent } from "react";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
 import CardNumberInput from "./FormInputs/CardNumberInput";
@@ -12,6 +13,9 @@ import { NextButton } from "components/style/ButtonStyle";
 import useRequiredCardInfo from "hooks/useRequiredCardInfo";
 import useInitCardInfo from "hooks/useInitCardInfo";
 import useModal from "hooks/useModal";
+import { VALID_INPUT } from "constants/limit";
+import { isInvalidDate } from "validation";
+const { ONLY_NUMBER } = VALID_INPUT;
 
 const CardRegisterForm = () => {
   const allCardInfo = useInitCardInfo().cardInfo;
@@ -21,6 +25,57 @@ const CardRegisterForm = () => {
   const navigate = useNavigate();
   const handlePageChange = () => navigate("/completion");
 
+  // TODO: 상수화, 리팩터링, 분리
+  const handleFocusNext = ({ target }: ChangeEvent<HTMLFormElement>) => {
+    const { form, maxLength, value, name } = target;
+
+    if (name === "name") {
+      if (value.length !== maxLength) return;
+      
+      focusFormInput(form, target, 1);
+    }
+
+    const { month, year } = allCardInfo;
+    const date = { month, year };
+    const isValidDate = isInvalidDate(target, date);
+
+    if ((name === "month" || name === "year") && isValidDate) return;
+
+    const validValue = value.replace(ONLY_NUMBER, "");
+
+    if (validValue.length !== maxLength) return;
+
+    focusFormInput(form, target, 1);
+  };
+
+  const focusFormInput = (
+    form: HTMLFormElement,
+    currentInput: EventTarget,
+    direction: number
+  ) => {
+    const formControlList = [...form];
+
+    if (!(currentInput instanceof HTMLInputElement)) return;
+
+    const currentInputIndex = formControlList.indexOf(currentInput);
+    const nextInput = formControlList[currentInputIndex + direction];
+
+    if (!nextInput || !(nextInput instanceof HTMLInputElement)) return;
+
+    nextInput.focus();
+  };
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLFormElement>) => {
+    const { key, target, currentTarget: form } = event;
+
+    if (key === "Enter") focusFormInput(form, target, 1);
+
+    if (!(target instanceof HTMLInputElement)) return;
+    if (key !== "Backspace" || target.value !== "") return;
+
+    focusFormInput(form, target, -1);
+  };
+
   return (
     <S.Wrapper>
       <Header navigator title="카드 추가" />
@@ -29,7 +84,11 @@ const CardRegisterForm = () => {
 
       {useModal().isModalOpen && <CardCompanyModal />}
 
-      <form onSubmit={handlePageChange}>
+      <form
+        onSubmit={handlePageChange}
+        onChange={handleFocusNext}
+        onKeyDown={handleKeyDown}
+      >
         <CardNumberInput />
         <ExpirationDateInput />
         <NameInput />

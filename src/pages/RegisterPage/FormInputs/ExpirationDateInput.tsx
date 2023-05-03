@@ -6,7 +6,6 @@ import { Slash } from "components/style/DelimiterStyle";
 import { DateCaption } from "components/style/CaptionStyle";
 import { DateInputBox } from "components/style/InputBoxStyle";
 import { isInvalidDate } from "validation";
-import { useFocus } from "hooks/useFocus";
 import useInitCardInfo from "hooks/useInitCardInfo";
 import { DATE_INPUT, LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
 const { ONLY_NUMBER } = VALID_INPUT;
@@ -15,8 +14,6 @@ const ExpirationDateInput = () => {
   const { cardInfo, initCardInfo } = useInitCardInfo();
   const { month, year } = cardInfo;
   const date: ExpirationDate = { month, year };
-
-  const { handleRef, moveFocus } = useFocus();
 
   const handleDateChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     if (isInvalidDate(target, date)) return;
@@ -28,8 +25,6 @@ const ExpirationDateInput = () => {
         regex: ONLY_NUMBER,
       })
     );
-
-    moveFocus(target, LIMIT_LENGTH.EXPIRATION_DATE);
   };
 
   return (
@@ -52,7 +47,6 @@ const ExpirationDateInput = () => {
               required
               inputStyle={CommonInputStyle}
               onChange={handleDateChange}
-              ref={(el) => handleRef(el, index)}
             />
             {index === DATE_INPUT.LAST_PART ? (
               ""
