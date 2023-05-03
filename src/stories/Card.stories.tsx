@@ -31,7 +31,7 @@ ShinhanCard.args = {
 
 export const KakaoCard = Template.bind({});
 KakaoCard.args = {
-  cardCompany: "카카오카드",
+  cardCompany: "카카오뱅크",
 };
 
 export const HyundaiCard = Template.bind({});
@@ -61,11 +61,5 @@ KbCard.args = {
 
 export const EmptyCard = Template.bind({});
 EmptyCard.args = {
-  cardNumber: "",
-  ownerName: "",
-  expiredDate: "",
   cardCompany: "카드사선택필요",
-  name: "빈카드",
-  cvc: "",
-  password: ["", ""],
 };

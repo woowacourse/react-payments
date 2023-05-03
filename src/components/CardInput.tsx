@@ -1,7 +1,8 @@
 import { forwardRef } from "react";
 import styled from "styled-components";
 
-interface CardInputType extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface CardInputType
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   width: string;
   isSecured?: boolean;
   isAutoFocus?: boolean;

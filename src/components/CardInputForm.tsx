@@ -38,7 +38,7 @@ const CardInputForm = ({
   useEffect(() => {
     card.cardNumber.length === CARD_INPUT_LENGTH.cardNumber &&
     card.expiredDate.length === CARD_INPUT_LENGTH.expiredDate &&
-    // card.password.join("").length === CARD_INPUT_LENGTH.password1 * 2 &&
+    card.password.join("").length === CARD_INPUT_LENGTH.password1 * 2 &&
     card.cardCompany !== CARD_COMPANY_NOT_SELECTED_STRING
       ? setIsValidForm(true)
       : setIsValidForm(false);

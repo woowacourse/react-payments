@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import React from "react";
 import { ROUTER_PATH } from "../../router/path";
 
-interface HeaderType {
+export interface HeaderType {
   title: string;
   isBack: boolean;
 }

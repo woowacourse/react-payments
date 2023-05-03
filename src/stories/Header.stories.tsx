@@ -1,24 +1,21 @@
-import { StoryObj } from "@storybook/react";
-import Header from "../components/common/Header";
+import { StoryFn, Meta } from "@storybook/react";
+import Header, { HeaderType } from "../components/common/Header";
 
-const meta = {
+export default {
   title: "Header",
   component: Header,
+} as Meta<HeaderType>;
+
+const Template: StoryFn<HeaderType> = (props) => <Header {...props} />;
+
+export const MyCardHeader = Template.bind({});
+MyCardHeader.args = {
+  title: "보유 카드",
+  isBack: false,
 };
 
-export default meta;
-type Story = StoryObj<typeof meta>;
-
-export const MyCardHeader: Story = {
-  args: {
-    title: "보유 카드",
-    isBack: false,
-  },
-};
-
-export const AddCardHeader: Story = {
-  args: {
-    title: "카드 추가",
-    isBack: true,
-  },
+export const AddCardHeader = Template.bind({});
+AddCardHeader.args = {
+  title: "카드 추가",
+  isBack: true,
 };
