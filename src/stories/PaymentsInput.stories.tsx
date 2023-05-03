@@ -1,3 +1,4 @@
+import { userEvent, within } from '@storybook/testing-library';
 import { ReactComponent as Dot } from '../assets/dot.svg';
 import PaymentsInput from '../components/PaymentsInput';
 import QuestionToolTip from '../components/QuestionToolTip';
@@ -26,6 +27,19 @@ export const CardNumber: Story = {
       getInputListValue: () => {},
     },
   },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const input = canvas.queryAllByPlaceholderText('1234');
+
+    await new Promise(resolve => {
+      setTimeout(resolve, 700);
+    });
+    await userEvent.type(input[0], '1111', { delay: 200 });
+    await userEvent.type(input[1], '1111', { delay: 200 });
+    await userEvent.type(input[2], '1111', { delay: 200 });
+    await userEvent.type(input[3], '1111', { delay: 200 });
+  },
 };
 
 export const ExpirationDate: Story = {
@@ -39,6 +53,18 @@ export const ExpirationDate: Story = {
       bridgeLetter: '/',
       getInputListValue: () => {},
     },
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const monthInput = canvas.getByPlaceholderText('MM');
+    const yearInput = canvas.getByPlaceholderText('YY');
+
+    await new Promise(resolve => {
+      setTimeout(resolve, 700);
+    });
+    await userEvent.type(monthInput, '12', { delay: 200 });
+    await userEvent.type(yearInput, '26', { delay: 200 });
   },
 };
 
