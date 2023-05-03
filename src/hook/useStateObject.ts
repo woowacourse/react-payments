@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 const useStateObject = <T extends Object>(initialObject: T) => {
   const [state, setState] = useState(initialObject);
 
-  const setPartialState = (partialState: Partial<T>) => {
-    setState(Object.assign({}, state, partialState));
-  };
+  const setPartialState = useCallback(
+    (partialState: Partial<T>) => {
+      setState((prevState) => Object.assign({}, prevState, partialState));
+    },
+    [],
+  );
 
   return { state, setPartialState };
 };
