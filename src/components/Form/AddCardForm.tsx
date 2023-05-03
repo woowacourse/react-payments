@@ -10,11 +10,12 @@ import { ChangeEvent, ChangeEventHandler, FormEventHandler, useContext, useState
 import { COMPANY_NAME, Card } from 'components/common/Card/types';
 import { ValueAndOnChange } from 'components/Input/types';
 import { CreditCard } from 'components/common/Card/CreditCard';
-import { Modal } from 'components/Modal/CardCompanyModal';
+import { BottomSheet } from 'components/BottomSheet/BottomSheet';
 import { CardInfoContext, defaultCardInfo } from 'context/CardInfoContext';
 import FormLabel from 'components/common/FormLabel/FormLabel';
-import { ModalContext } from 'context/ModalContext';
 import { ValidateForm } from 'util/ValidateForm';
+import useModal from 'hooks/useModal';
+import { Modal } from 'components/common/Modal/Modal';
 
 export type AddCardFormProps = {
   onSubmit: () => void;
@@ -23,9 +24,9 @@ export type AddCardFormProps = {
 const NOT_ALPHABET_REGEX = /[^A-Za-z\s]/gi;
 
 function AddCardInfo({ onSubmit }: AddCardFormProps) {
-  const { isModalOpen, setIsModalOpen } = useContext(ModalContext);
   const { setCardInfo } = useContext(CardInfoContext);
   const [card, setCard] = useState<Card>(defaultCardInfo);
+  const { isModalOpen, openModal, closeModal } = useModal(true);
 
   const [isValid, errorMessages] = ValidateForm(card);
 
@@ -101,19 +102,21 @@ function AddCardInfo({ onSubmit }: AddCardFormProps) {
     onSubmit();
   };
 
-  const handleOpenModal = () => {
-    setIsModalOpen(!isModalOpen);
-  };
-
   const handleSelectCompany = (bank: COMPANY_NAME) => {
     setCard((prev) => ({ ...prev, bank: bank }));
-    handleOpenModal();
+    openModal();
+  };
+
   };
 
   return (
     <>
-      {isModalOpen && <Modal onClick={handleSelectCompany} />}
-      <CardWrapper onClick={handleOpenModal}>
+      {isModalOpen && (
+        <Modal closeModal={closeModal}>
+          <BottomSheet onClick={handleSelectCompany} closeModal={closeModal} />
+        </Modal>
+      )}
+      <CardWrapper onClick={openModal}>
         <CreditCard card={card} />
         <FormLabel>카드 이미지를 터치하여 카드사를 변경할 수 있습니다.</FormLabel>
       </CardWrapper>

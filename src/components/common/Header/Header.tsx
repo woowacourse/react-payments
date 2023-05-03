@@ -1,5 +1,4 @@
-import { ModalContext } from 'context/ModalContext';
-import { MouseEventHandler, useContext } from 'react';
+import { MouseEventHandler } from 'react';
 import styled from 'styled-components';
 
 type Props = {
@@ -8,9 +7,7 @@ type Props = {
 };
 
 function Header({ text, onClickBackButton }: Props) {
-  const { setIsModalOpen } = useContext(ModalContext);
   const handleClickBackButton: MouseEventHandler<HTMLSpanElement> = (e) => {
-    setIsModalOpen(true);
     if (onClickBackButton) onClickBackButton();
   };
 
