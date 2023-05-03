@@ -17,6 +17,8 @@
       CardCompanyLogoList를 바텀싯이 알아야할것같진 않아서 children정도여도 좋을 것 같아요~
 - [x] src/components/Card/Card.styled.ts
       테마여서 프리셋으로 지정된 문자열으로 예상했는데 컬러값이네요! backgroundColor로 명확하게 변경해줘도 좋을 것 같아요
+- [ ] src/components/Card/Card.styled.ts
+      폰트컬러가 배경색에 따라 변경되는데 요거 계산식이 있을지 한 번 찾아보면 어떨까요?
 - [x] src/components/Card/Card.styled.ts
       Info는 붙어서 어떤 의미가 추가되지 않는 불용어이기 때문에 요기 그냥 Card로 명명해주면 어떨까 싶네요!
 - [x] src/components/Card/Card.tsx
@@ -33,9 +35,9 @@
       타입과 코드의 거리가 멀어보이는데 여기서 선언하면 어떨까요?
 - [x] src/components/CardCompanyLogoList/CardCompanyLogoList.tsx
       이렇게 함수로 분리한 이유는 어떤 것인가요?
-- [ ] src/components/CardList/CardList.tsx
+- [x] src/components/CardList/CardList.tsx
       export default 를 사용하면 rename할때 이름이 같이 안바뀌어서 많이 불편하더라구요
-- [ ] src/hooks/useNavigationTo.ts
+- [x] src/hooks/useNavigationTo.ts
       요거 페이지이동시 히스토리 유지되나요?
 - [x] src/components/CardList/CardList.tsx
       위에도 적긴했는데 jsx단이 분리가돼서 가독성이 좀 떨어지는 것 같아요

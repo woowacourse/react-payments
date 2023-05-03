@@ -1,19 +1,19 @@
+import { useNavigate } from 'react-router-dom';
+
 import { COLOR } from '../../constants/card';
 import { PATHNAME } from '../../constants/pathname';
-
-import { useNavigationTo } from '../../hooks/useNavigationTo';
 
 import * as styled from './RegisterEntrySection.styled';
 
 const RegisterEntrySection = () => {
-  const { navigationTo } = useNavigationTo();
+  const navigation = useNavigate();
 
   return (
     <styled.RegisterEntrySection>
       <styled.GuideMessage>새로운 카드를 등록해 주세요</styled.GuideMessage>
       <styled.Button
         backgroundColor={COLOR.DEFAULT}
-        onClick={() => navigationTo(PATHNAME.REGISTER)}
+        onClick={() => navigation(PATHNAME.REGISTER)}
       >
         <styled.ButtonIcon>+</styled.ButtonIcon>
       </styled.Button>

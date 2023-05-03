@@ -1,18 +1,18 @@
 import { MouseEvent, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import cardListContext from '../../contexts/CardContext';
 
 import { PATHNAME } from '../../constants/pathname';
 import { generateCardKey } from '../../domains/keyGenerator';
 import { useInitCard } from '../../hooks/useInitCard';
-import { useNavigationTo } from '../../hooks/useNavigationTo';
 
 import * as styled from './CardBoxList.styled';
 import CardBox from '../CardBox/CardBox';
 
 const CardBoxList = () => {
   const { cardList } = useContext(cardListContext);
-  const { navigationTo } = useNavigationTo();
+  const navigation = useNavigate();
   const initCard = useInitCard();
 
   const onClickCardBoxItem = ({
@@ -25,7 +25,7 @@ const CardBoxList = () => {
     }
 
     initCard(cardList[cardKey]);
-    navigationTo(PATHNAME.NICKNAME);
+    navigation(PATHNAME.NICKNAME);
   };
 
   if (!cardList) {

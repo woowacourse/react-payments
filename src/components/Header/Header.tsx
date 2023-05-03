@@ -1,21 +1,22 @@
+import { useNavigate } from 'react-router-dom';
+
 import { PATHNAME } from '../../constants/pathname';
 import { useHeader } from '../../hooks/useHeader';
-import { useNavigationTo } from '../../hooks/useNavigationTo';
 
 import * as styled from './Header.styled';
 
 const Header = () => {
   const { isOnRegisterPage, pageTitle } = useHeader();
-  const { navigationTo } = useNavigationTo();
+  const navigation = useNavigate();
 
   return (
     <styled.Header>
       {isOnRegisterPage && (
         <styled.BackwardBox
-          onClick={() => navigationTo(PATHNAME.HOME)}
+          onClick={() => navigation(PATHNAME.HOME)}
         >{`<`}</styled.BackwardBox>
       )}
-      <styled.HeaderTitle onClick={() => navigationTo(PATHNAME.HOME)}>
+      <styled.HeaderTitle onClick={() => navigation(PATHNAME.HOME)}>
         {pageTitle}
       </styled.HeaderTitle>
     </styled.Header>
