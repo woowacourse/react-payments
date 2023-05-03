@@ -49,6 +49,7 @@ const ExpirationDateBox = () => {
             return (
               <Input
                 key={key}
+                inputmode="numeric"
                 name={key}
                 value={value ?? ''}
                 onChange={handleChangeInput}

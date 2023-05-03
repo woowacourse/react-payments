@@ -43,6 +43,7 @@ const OwnerNameBox = () => {
         </styled.LabelTextBox>
         <styled.InputBox>
           <Input
+            inputmode="text"
             value={ownerName ?? ''}
             onChange={handleChangeInput}
             width="xl"

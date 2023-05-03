@@ -57,6 +57,7 @@ const SerialNumberBox = () => {
                 type={type}
                 maxLength={4}
                 placeholder="0000"
+                inputmode="numeric"
                 isFocus={isFirstInput && isCloseModal}
               />
             );

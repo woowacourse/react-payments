@@ -8,6 +8,7 @@ export interface InputProps {
   type: 'password' | 'number' | 'text';
   maxLength: number;
   value: string | null;
+  inputmode: string;
   name?: string;
   placeholder?: string;
   isFocus?: boolean;
@@ -18,6 +19,7 @@ const Input = ({
   onChange,
   width,
   type,
+  inputmode,
   name,
   placeholder,
   maxLength,
@@ -30,6 +32,7 @@ const Input = ({
       name={name}
       value={value ?? ''}
       onChange={onChange}
+      inputmode={inputmode}
       width={width}
       type={type}
       placeholder={placeholder}

@@ -40,6 +40,7 @@ const SecurityCodeBox = () => {
         </commonStyled.LabelTextParagraph>
         <styled.InputBox>
           <Input
+            inputmode="numeric"
             value={securityCode}
             onChange={handleChangeInput}
             width="m"

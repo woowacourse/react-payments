@@ -61,6 +61,7 @@ const NicknamePage = () => {
       <CardPreviewSection />
       <styled.InputBox>
         <Input
+          inputmode="text"
           onChange={({ target: { value } }: ChangeEvent<HTMLInputElement>) =>
             setNickname(value)
           }
