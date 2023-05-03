@@ -9,6 +9,13 @@ import CardPassword from '../cardPassword/CardPassword';
 import { CreditCardContext } from '../../../contexts/CreditCardContext';
 import { NextButton } from './CardRegisterForm.style';
 import CreditCardContextType from '../../../@types/creditCardContextType';
+import {
+  VALID_CARD_NUMBER_REGEX,
+  VALID_EXPIRATION_MONTH_REGEX,
+  VALID_EXPIRATION_YEAR_REGEX,
+  VALID_PASSWORD_REGEX,
+  VALID_SECURITY_CODE_REGEX,
+} from '../../../utils/regexp';
 
 function CardRegisterForm() {
   const navigation = useNavigate();
@@ -16,11 +23,11 @@ function CardRegisterForm() {
   const { cardNumber, securityCode, password, expirationDate } = creditCard;
 
   const hasShowButton =
-    cardNumber.join('').length === 16 &&
-    /^(0[1-9]|1[0-2])$/.test(expirationDate[0]) &&
-    /^\d{2}$/.test(expirationDate[1]) &&
-    securityCode.length === 3 &&
-    password.join('').length === 2;
+    VALID_CARD_NUMBER_REGEX.test(cardNumber.join('')) &&
+    VALID_EXPIRATION_MONTH_REGEX.test(expirationDate[0]) &&
+    VALID_EXPIRATION_YEAR_REGEX.test(expirationDate[1]) &&
+    VALID_SECURITY_CODE_REGEX.test(securityCode) &&
+    VALID_PASSWORD_REGEX.test(password.join(''));
 
   const _onSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
