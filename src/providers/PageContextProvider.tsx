@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { PageInfo } from '@type/types';
 import { PAGE_KIND } from '@constants/constant';
 
@@ -15,8 +15,12 @@ const PageContext = React.createContext<PageContextProps>({
 function PageContextProvider({ children }: React.PropsWithChildren) {
   const [page, setPage] = useState<PageInfo>(PAGE_KIND.HOME);
 
+  const memoizedValue = useMemo(() => ({ page, setPage }), [page]);
+
   return (
-    <PageContext.Provider value={{ page, setPage }}>
+    <PageContext.Provider
+      value={{ page: memoizedValue.page, setPage: memoizedValue.setPage }}
+    >
       {children}
     </PageContext.Provider>
   );

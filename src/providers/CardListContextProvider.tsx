@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useLocalStorage } from '@hooks/useLocalStorage';
 import { CardInfo } from '@type/card';
 import { LOCAL_STORAGE_CARD_KEY } from '@constants/constant';
@@ -19,8 +19,18 @@ function CardListContextProvider({ children }: React.PropsWithChildren) {
     LOCAL_STORAGE_CARD_KEY
   );
 
+  const memoizedValue = useMemo(
+    () => ({ cardList, setCardList }),
+    [cardList, setCardList]
+  );
+
   return (
-    <CardListContext.Provider value={{ cardList, setCardList }}>
+    <CardListContext.Provider
+      value={{
+        cardList: memoizedValue.cardList,
+        setCardList: memoizedValue.setCardList,
+      }}
+    >
       {children}
     </CardListContext.Provider>
   );

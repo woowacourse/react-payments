@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { CardInputInfo } from '@type/card';
 import { CARD_COMPANY } from '@constants/cardCompany';
 
@@ -31,8 +31,18 @@ function CardInputInfoContextProvider({ children }: React.PropsWithChildren) {
   const [cardInputInfo, setCardInputInfo] =
     useState<CardInputInfo>(defaultValue);
 
+  const memoizedValue = useMemo(
+    () => ({ cardInputInfo, setCardInputInfo }),
+    [cardInputInfo]
+  );
+
   return (
-    <CardInputInfoContext.Provider value={{ cardInputInfo, setCardInputInfo }}>
+    <CardInputInfoContext.Provider
+      value={{
+        cardInputInfo: memoizedValue.cardInputInfo,
+        setCardInputInfo: memoizedValue.setCardInputInfo,
+      }}
+    >
       {children}
     </CardInputInfoContext.Provider>
   );
