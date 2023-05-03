@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Card from '../../components/Card';
@@ -18,6 +18,8 @@ import {
 } from './domain/validation';
 import './index.css';
 import useValidExpireDate from '../../hooks/useValidExpireDate';
+import { CurrentCardProvider } from '../../context/CurrentCardProvider';
+import { IsAccessAliasPageProvider } from '../../context/IsAccessAliasPageProvider';
 
 const AddCardPage = () => {
   const { isValidExpiredMonthFormat, isValidExpiredYearFormat } = useValidExpireDate();
@@ -60,19 +62,24 @@ const AddCardPage = () => {
             expireYear={expireYear.value}
             onClick={toggleOpen}
           />
-          <AddCardForm
-            cardCompany={cardCompany}
-            cardFirstNumber={cardFirstNumber}
-            cardSecondNumber={cardSecondNumber}
-            cardThirdNumber={cardThirdNumber}
-            cardFourthNumber={cardFourthNumber}
-            expireMonth={expireMonth}
-            expireYear={expireYear}
-            cardOwner={cardOwner}
-            securityCode={securityCode}
-            cardPassword1={cardPassword1}
-            cardPassword2={cardPassword2}
-          />
+
+          <IsAccessAliasPageProvider>
+            <CurrentCardProvider>
+              <AddCardForm
+                cardCompany={cardCompany}
+                cardFirstNumber={cardFirstNumber}
+                cardSecondNumber={cardSecondNumber}
+                cardThirdNumber={cardThirdNumber}
+                cardFourthNumber={cardFourthNumber}
+                expireMonth={expireMonth}
+                expireYear={expireYear}
+                cardOwner={cardOwner}
+                securityCode={securityCode}
+                cardPassword1={cardPassword1}
+                cardPassword2={cardPassword2}
+              />
+            </CurrentCardProvider>
+          </IsAccessAliasPageProvider>
         </article>
       </div>
       <CardNameBottomSheet
@@ -84,4 +91,4 @@ const AddCardPage = () => {
   );
 };
 
-export default AddCardPage;
+export default React.memo(AddCardPage);
