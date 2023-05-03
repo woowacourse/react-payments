@@ -1,4 +1,4 @@
-import { FormEvent } from 'react';
+import { MouseEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { PATHNAME } from '../../constants/pathname';
@@ -14,7 +14,7 @@ import FormSubmitButton from '../FormSubmitButton/FormSubmitButton';
 const RegisterForm = () => {
   const navigation = useNavigate();
 
-  const handleSubmit = (event: FormEvent<HTMLButtonElement>) => {
+  const handleClickFormSubmit = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
     navigation(PATHNAME.NICKNAME);
@@ -27,7 +27,7 @@ const RegisterForm = () => {
       <OwnerNameBox />
       <SecurityCodeBox />
       <PasswordBox />
-      <FormSubmitButton handleSubmit={handleSubmit} />
+      <FormSubmitButton handleClickFormSubmit={handleClickFormSubmit} />
     </styled.RegisterForm>
   );
 };

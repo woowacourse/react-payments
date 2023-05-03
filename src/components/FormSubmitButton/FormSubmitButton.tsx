@@ -1,20 +1,20 @@
-import { FormEvent } from 'react';
+import { MouseEvent } from 'react';
 
 import { useIsFilledForm } from '../../hooks/useIsFilledForm';
 
 import * as styled from './FormSubmitButton.styled';
 
 const FormSubmitButton = ({
-  handleSubmit,
+  handleClickFormSubmit,
 }: {
-  handleSubmit: (event: FormEvent<HTMLButtonElement>) => void;
+  handleClickFormSubmit: (event: MouseEvent<HTMLButtonElement>) => void;
 }) => {
   if (!useIsFilledForm()) {
     return null;
   }
 
   return (
-    <styled.FormSubmitButton type="submit" onSubmit={handleSubmit} autoFocus>
+    <styled.FormSubmitButton onClick={handleClickFormSubmit} autoFocus>
       다음
     </styled.FormSubmitButton>
   );

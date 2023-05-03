@@ -21,11 +21,11 @@ const RegisterPage = () => {
     <styled.RegisterPageLayout>
       <CardPreviewSection handleOpenModal={handleOpenModal} />
       <RegisterForm />
-      {isOpenModal && (
+      {isOpenModal ? (
         <BottomSheet handleCloseModal={handleCloseModal}>
           <CompanyLogoList />
         </BottomSheet>
-      )}
+      ) : null}
     </styled.RegisterPageLayout>
   );
 };
