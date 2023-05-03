@@ -14,13 +14,13 @@ const CardSelectButton = ({ title, src }: CardSelectButtonProps) => {
   const { closeModal } = useContext(ModalContext);
   const { setCardIssuer } = useContext(CardInfoContext);
 
-  const onClick = useCallback(() => {
+  const selectCardIssuer = useCallback(() => {
     setCardIssuer(title);
     closeModal();
   }, [title, closeModal, setCardIssuer]);
 
   return (
-    <button className={styles.button} onClick={onClick}>
+    <button className={styles.button} onClick={selectCardIssuer}>
       <img className={styles.logo} src={src} alt={title} />
       <span className={styles.title}>{title}</span>
     </button>
