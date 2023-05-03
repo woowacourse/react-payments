@@ -10,7 +10,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route
-          path="/register"
+          path="/card-registration"
           element={
             <AddCardContextProvider>
               <CardRegisterForm />
@@ -18,7 +18,7 @@ const App = () => {
           }
         />
         <Route
-          path="/register-name"
+          path="/card-name"
           element={
             <AddCardContextProvider>
               <CardNamePage />
