@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { RouterProvider } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 import { PaymentsProvider } from './context/PaymentsContext';
@@ -19,7 +18,7 @@ const Container = styled.div`
 
 export const App = () => {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-  const theme = useMemo(() => (prefersDarkMode ? dark : light), [prefersDarkMode]);
+  const theme = prefersDarkMode ? dark : light;
 
   return (
     <ThemeProvider theme={theme}>
