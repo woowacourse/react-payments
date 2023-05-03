@@ -1,4 +1,6 @@
+import { expect } from '@storybook/jest';
 import type { Meta, StoryObj } from '@storybook/react';
+import { userEvent, within } from '@storybook/testing-library';
 import { useState } from 'react';
 import styled from 'styled-components';
 import { Input } from './Input';
@@ -48,4 +50,25 @@ export const Default: Story = {
 export const Underlined: Story = {
   ...Default,
   args: { ...Default.args, variant: 'underlined' },
+};
+
+export const TypeInteraction: Story = {
+  args: {
+    value: '',
+  },
+  render: ({ value: initialValue, ...args }) => {
+    const [value, setValue] = useState(initialValue);
+
+    return <Input {...args} value={value} onChange={setValue} />;
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const input = canvas.getAllByRole('textbox').shift()!;
+    expect(input).not.toBeUndefined();
+
+    await userEvent.type(input, 'TypeScript is Awesome!');
+
+    expect(input).toHaveValue('TypeScript is Awesome!');
+  },
 };

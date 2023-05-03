@@ -48,6 +48,7 @@ export const CardNumberInput = (props: CardNumberInputProps) => {
           maxCount={4}
           value={getPartialCardNumber(index)}
           onChange={handleCardNumberChange(index)}
+          role="textbox"
           center
         />
       ))}

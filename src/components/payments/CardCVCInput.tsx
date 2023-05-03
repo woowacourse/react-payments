@@ -52,6 +52,7 @@ export const CardCVCInput = (props: CardCVCInputProps) => {
         type="password"
         onFocus={handleFocus}
         onBlur={handleBlur}
+        role="textbox"
       />
 
       {helperTooltip && (

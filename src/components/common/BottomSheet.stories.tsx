@@ -1,4 +1,6 @@
+import { expect } from '@storybook/jest';
 import type { Meta, StoryObj } from '@storybook/react';
+import { userEvent, within } from '@storybook/testing-library';
 import { useState } from 'react';
 import { BottomSheet } from './BottomSheet';
 import { Button } from './Button';
@@ -37,5 +39,14 @@ export const Default: Story = {
         </BottomSheet>
       </div>
     );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await userEvent.click(canvas.getByText('닫기'));
+    await expect(canvas.getByText('반갑습니다.')).not.toBeVisible();
+
+    await userEvent.click(canvas.getByText('열기'));
+    await expect(canvas.getByText('반갑습니다.')).toBeVisible();
   },
 };

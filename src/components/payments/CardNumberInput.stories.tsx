@@ -1,4 +1,6 @@
+import { expect } from '@storybook/jest';
 import type { Meta, StoryObj } from '@storybook/react';
+import { userEvent, within } from '@storybook/testing-library';
 import { useState } from 'react';
 import styled from 'styled-components';
 import { CardNumberInput } from './CardNumberInput';
@@ -27,16 +29,45 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+export const Default: Story = {
+  args: { value: '' },
+  render: ({ value: initialValue, ...args }) => {
+    const [value, setValue] = useState(initialValue);
+
+    return <CardNumberInput {...args} value={value} onChange={setValue} />;
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const inputs = canvas.getAllByRole('textbox');
+    await userEvent.type(inputs[0], '9672002422789048');
+
+    inputs.forEach((input, index) =>
+      expect(input).toHaveValue('9672002422789048'.slice(index * 4, (index + 1) * 4)),
+    );
+  },
+};
+
 export const WithMasks: Story = {
   args: { value: '9908-1121-1992-7328' },
-  render: (args) => {
-    const [value, setValue] = useState(args.value);
+  render: ({ value: initialValue, ...args }) => {
+    const [value, setValue] = useState(initialValue);
 
     return (
       <>
-        <CardNumberInput value={value} onChange={setValue} />
-        <CardNumberInput value={value} onChange={setValue} masks={[false, false, false, false]} />
-        <CardNumberInput value={value} onChange={setValue} masks={[true, true, true, true]} />
+        <CardNumberInput {...args} value={value} onChange={setValue} />
+        <CardNumberInput
+          {...args}
+          value={value}
+          onChange={setValue}
+          masks={[false, false, false, false]}
+        />
+        <CardNumberInput
+          {...args}
+          value={value}
+          onChange={setValue}
+          masks={[true, true, true, true]}
+        />
       </>
     );
   },

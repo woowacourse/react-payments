@@ -81,7 +81,7 @@ export const Tooltip = (props: TooltipProps) => {
     <TooltipTrigger $visible={visible}>
       {children}
       <TooltipSelected>
-        <TooltipBalloon>{content}</TooltipBalloon>
+        <TooltipBalloon role="tooltip">{content}</TooltipBalloon>
       </TooltipSelected>
     </TooltipTrigger>
   );
