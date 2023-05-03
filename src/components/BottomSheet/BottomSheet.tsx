@@ -33,7 +33,7 @@ const BottomSheet = ({
 
   return (
     <>
-      <Styled.BackDrop />
+      <Styled.BackDrop onClick={closeBottomSheet} />
       <Styled.Wrapper>
         {cardCompanies.map(({ type, name }) => (
           <Styled.IconWrapper
