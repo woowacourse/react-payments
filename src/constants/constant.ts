@@ -3,9 +3,14 @@ export const LOCAL_STORAGE_CARD_KEY = 'cardList';
 export const PAGE_KIND = Object.freeze({
   HOME: 'homePage',
   ADD_CARD: 'addCardPage',
+  REGISTER_CARD: 'registerCard',
 });
 
-export const PAGE = [PAGE_KIND.HOME, PAGE_KIND.ADD_CARD] as const;
+export const PAGE = [
+  PAGE_KIND.HOME,
+  PAGE_KIND.ADD_CARD,
+  PAGE_KIND.REGISTER_CARD,
+] as const;
 
 export const Z_INDEX_INFO = {
   MODAL: 1,

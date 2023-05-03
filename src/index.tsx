@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { ThemeProvider } from 'styled-components';
-import { CardListContextProvider } from '@providers/CardContextProvider';
+import { CardInputInfoContextProvider } from '@providers/CardInputInfoProvider';
+import { CardListContextProvider } from '@providers/CardListContextProvider';
 import { PageContextProvider } from '@providers/PageContextProvider';
 
 import App from './App';
@@ -17,7 +18,9 @@ root.render(
       <GlobalStyle />
       <CardListContextProvider>
         <PageContextProvider>
-          <App />
+          <CardInputInfoContextProvider>
+            <App />
+          </CardInputInfoContextProvider>
         </PageContextProvider>
       </CardListContextProvider>
     </React.StrictMode>

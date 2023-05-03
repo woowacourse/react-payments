@@ -1,30 +1,22 @@
-import React, {
-  type FormEvent,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { type FormEvent, useCallback, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { useFocusInput } from '@hooks/useFocusInput';
 import { useFormInputs } from '@hooks/useFormInputs';
 import { useHideScrollState } from '@hooks/useHideScrollState';
-import { type UseInputProps } from '@hooks/useInput';
-import { useCardListContext } from '@contexts/useCardContext';
+import { useCardInputInfoContext } from '@contexts/useCardInputInfo';
 import { usePageContext } from '@contexts/usePageContext';
 import { CardNumberInput } from '@components/addCardPage/CardNumberInput';
 import { CvcInput } from '@components/addCardPage/CvcInput';
 import { ExpirationInput } from '@components/addCardPage/ExpirationInput';
 import { OwnerInput } from '@components/addCardPage/OwnerInput';
 import { PasswordInput } from '@components/addCardPage/PasswordInput';
-import { RegisteredCard } from '@components/addCardPage/RegisteredCard';
 import { SelectCardCompany } from '@components/addCardPage/SelectCardCompany';
 import { Button } from '@components/common/Button';
 import { Card } from '@components/common/Card';
 import { InputField } from '@components/common/InputField';
 import { Modal } from '@components/common/Modal';
-import { type CardCompanyType, type CardInfo } from '@type/card';
-import { createUniqueId, setNextInputFocus } from '@utils/common';
+import { type CardCompanyType } from '@type/card';
+import { setNextInputFocus } from '@utils/common';
 import { formValidate } from '@utils/formValidate';
 import { isPastDate } from '@utils/validate';
 import { CARD_COMPANY, CARD_COMPANY_DATA } from '@constants/cardCompany';
@@ -39,12 +31,11 @@ const INPUT_ID = {
 };
 
 export default function AddCardPage() {
-  const { cardList, setCardList } = useCardListContext();
+  const { setCardInputInfo } = useCardInputInfoContext();
   const { setPage } = usePageContext();
   const cardForm = useRef<HTMLFormElement>(null);
   const { onInputKeydown } = useFocusInput(cardForm);
   const { formInputs } = useFormInputs();
-  const [isRegister, setIsRegister] = useState(false);
   const [cardCompany, setCardCompany] = useHideScrollState<CardCompanyType>(
     CARD_COMPANY.DEFAULT,
     (value) => {
@@ -68,28 +59,14 @@ export default function AddCardPage() {
     cvc,
     firstPassword,
     secondPassword,
-    cardTitle,
   } = formInputs.addCardPage;
 
-  /*
-  모든 인풋의 정보에서 카드 타이틀을 뺍니다.
-
-  인풋의 정보들을 기반으로 유효성 검사를 합니다.
-
-  유효성 검사를 통과한다면 카드 별칭 등록 페이지로 이동합니다.
-  */
   const onCardInfoValidateAndGoRegisterPage = (
     event: FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
 
-    const cardInformation: Record<string, UseInputProps> = {
-      ...formInputs.addCardPage,
-    };
-
-    delete cardInformation.cardTitle;
-
-    const { validationResult } = formValidate(cardInformation);
+    const { validationResult } = formValidate(formInputs.addCardPage);
 
     if (!validationResult) {
       return;
@@ -104,14 +81,8 @@ export default function AddCardPage() {
       return;
     }
 
-    setIsRegister(true);
-  };
-
-  const createCard = () => {
-    const newCard: CardInfo = {
-      id: createUniqueId(),
+    setCardInputInfo({
       company: cardCompany,
-      title: cardTitle.value,
       cardNumber: {
         first: firstCardNumber.value,
         second: secondCardNumber.value,
@@ -123,13 +94,9 @@ export default function AddCardPage() {
         year: year.value,
       },
       owner: owner.value.toUpperCase(),
-    };
+    });
 
-    const updatedCardList = [newCard, ...cardList];
-
-    setCardList(updatedCardList);
-
-    setPage(PAGE_KIND.HOME);
+    setPage(PAGE_KIND.REGISTER_CARD);
   };
 
   const askPrevPage = useCallback(() => {
@@ -155,25 +122,6 @@ export default function AddCardPage() {
       window.removeEventListener('popstate', askPrevPage);
     };
   }, [askPrevPage]);
-
-  if (isRegister) {
-    return (
-      <RegisteredCard
-        createCard={createCard}
-        cardTitleInformation={cardTitle}
-        companyKind={cardCompany}
-        cardNumberSet={[
-          firstCardNumber.value,
-          secondCardNumber.value,
-          thirdCardNumber.value,
-          fourthCardNumber.value,
-        ]}
-        month={month.value ? month.value : 'MM'}
-        year={year.value ? year.value : 'YY'}
-        owner={owner.value ? owner.value : 'NAME'}
-      />
-    );
-  }
 
   return (
     <div>

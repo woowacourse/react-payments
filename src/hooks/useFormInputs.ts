@@ -20,6 +20,8 @@ interface UseFormInputsProps {
     cvc: UseInputProps;
     firstPassword: UseInputProps;
     secondPassword: UseInputProps;
+  };
+  registerPage: {
     cardTitle: UseInputProps;
   };
 }
@@ -101,6 +103,8 @@ export const useFormInputs = () => {
         errorMessage: '오직 숫자만 입력 가능합니다.',
         validate: isNumber,
       }),
+    },
+    registerPage: {
       cardTitle: useInput('', {
         name: 'cardTitleInput',
         maxLength: 20,

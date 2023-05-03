@@ -1,9 +1,7 @@
 import { CARD_COMPANY, CARD_COMPANY_KIND } from '@constants/cardCompany';
 
-export interface CardInfo {
-  id: string;
+export interface CardInputInfo {
   company: CardCompanyType;
-  title: string;
   cardNumber: {
     first: string;
     second: string;
@@ -15,6 +13,11 @@ export interface CardInfo {
     year: string;
   };
   owner: string;
+}
+
+export interface CardInfo extends CardInputInfo {
+  id: string;
+  title: string;
 }
 
 export type CardCompanyRecord = Record<CardCompanyType, CardCompanyDetail>;

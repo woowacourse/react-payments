@@ -1,55 +1,82 @@
 import React, { FormEvent } from 'react';
 import styled from 'styled-components';
-import { type UseInputProps } from '@hooks/useInput';
+import { useFormInputs } from '@hooks/useFormInputs';
+import { useCardListContext } from '@contexts/useCardContext';
+import { useCardInputInfoContext } from '@contexts/useCardInputInfo';
+import { usePageContext } from '@contexts/usePageContext';
 import { Button } from '@components/common/Button';
 import { Card } from '@components/common/Card';
-import { type CardProps } from '@components/common/Card/Card';
 import { Error } from '@components/common/Error';
 import { Input } from '@components/common/Input';
 import { InputField } from '@components/common/InputField';
+import { CardInfo } from '@type/card';
+import { createUniqueId } from '@utils/common';
 import { formValidate } from '@utils/formValidate';
+import { PAGE_KIND } from '@constants/constant';
 import { colors } from '@styles/theme';
-
-interface RegisteredCardProps extends CardProps {
-  cardTitleInformation: UseInputProps;
-  createCard: () => void;
-}
 
 const INPUT_CARD_TITLE_ID = 'cardTitle';
 
-export default function RegisteredCard({
-  cardTitleInformation,
-  createCard,
-  ...rest
-}: RegisteredCardProps) {
+export default function RegisterCard() {
+  const { formInputs } = useFormInputs();
+  const { cardList, setCardList } = useCardListContext();
+  const { setPage } = usePageContext();
+  const { cardInputInfo } = useCardInputInfoContext();
+
+  const { cardTitle } = formInputs.registerPage;
+
+  const createCard = () => {
+    const card: CardInfo = {
+      id: createUniqueId(),
+      title: cardTitle.value,
+      ...cardInputInfo,
+    };
+
+    const updatedCardList = [card, ...cardList];
+
+    setCardList(updatedCardList);
+  };
+
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // 유효성 검사를 진행합니다
-    const { validationResult } = formValidate({ cardTitleInformation });
+    const { validationResult } = formValidate(formInputs.registerPage);
 
     if (!validationResult) {
       return;
     }
 
     createCard();
+
+    setPage(PAGE_KIND.HOME);
   };
 
   return (
     <Wrapper>
       <FinishMessage>카드등록이 완료되었습니다.</FinishMessage>
-      <Card {...rest} />
+      <Card
+        companyKind={cardInputInfo.company}
+        cardNumberSet={[
+          cardInputInfo.cardNumber.first,
+          cardInputInfo.cardNumber.second,
+          cardInputInfo.cardNumber.third,
+          cardInputInfo.cardNumber.fourth,
+        ]}
+        month={cardInputInfo.expirationDate.month}
+        year={cardInputInfo.expirationDate.year}
+        owner={cardInputInfo.owner}
+      />
       <form onSubmit={onSubmit}>
         <InputWrapper>
           <InputField
             id={INPUT_CARD_TITLE_ID}
             text="카드 별칭"
-            inputLength={`${cardTitleInformation.value.length}/20`}
+            inputLength={`${cardTitle.value.length}/20`}
           >
             <Input
               id={INPUT_CARD_TITLE_ID}
               autoFocus
-              {...cardTitleInformation}
+              {...cardTitle}
               type="text"
               bgColor={colors.white}
               textAlign="center"
@@ -65,9 +92,7 @@ export default function RegisteredCard({
           <Button text="확인" />
         </ButtonWrapper>
       </form>
-      {cardTitleInformation.error && (
-        <Error text={cardTitleInformation.error} />
-      )}
+      {cardTitle.error && <Error text={cardTitle.error} />}
     </Wrapper>
   );
 }
