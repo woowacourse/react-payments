@@ -30,7 +30,7 @@ export const expireDateValidation = (value: string) => {
   const dateValitation = MMYYValidation(value);
 
   if (dateValitation) {
-    throw new Error("유효한 만료일이 아닙니다.");
+    throw new Error("유효한 만료일이 아닙니다. ex) 50년 2월 02/50");
   }
 };
 
