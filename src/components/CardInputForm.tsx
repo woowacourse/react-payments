@@ -6,10 +6,6 @@ import { QuestionMark } from "../assets";
 import { PASSWORD_DIGIT_INDEX } from "../constants";
 import {
   getIsCardvalid,
-  getSeperatedCardNumber,
-  getSeperatedExpiredDate,
-  getSubCardNumber,
-  getSubExpiredDate,
   validateCardNumber,
   validateCvc,
   validateExpiredDate,
