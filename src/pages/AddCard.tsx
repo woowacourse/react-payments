@@ -2,8 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ModalDispatchContext } from "../context";
 import { ROUTER_PATH } from "../router/path";
-import type { CardType } from "../types";
-import { getLocalStorage, setLocalStorage, getEmptyCard } from "../utils";
+import { getLocalStorage, setLocalStorage } from "../utils";
 import {
   Page,
   Header,
@@ -12,10 +11,11 @@ import {
   BottomSheet,
   CardCompany,
 } from "../components";
+import { useCard } from "../hooks";
 
 const AddCard = () => {
   const navigate = useNavigate();
-  const [newCard, setNewCard] = useState<CardType>(getEmptyCard());
+  const [card, setNewCard, setPassword] = useCard();
   const { toggleModal } = useContext(ModalDispatchContext);
 
   useEffect(() => {
@@ -24,23 +24,24 @@ const AddCard = () => {
 
   const handleFormSubmited = () => {
     const cards = getLocalStorage("card");
-    setLocalStorage("card", [...cards, newCard]);
+    setLocalStorage("card", [...cards, card]);
     navigate(ROUTER_PATH.NameCard);
   };
 
-  const handleCardCompanyChanged = (companyName: string) => {
-    setNewCard((prev): CardType => ({ ...prev, cardCompany: companyName }));
+  const handleCardCompanyChanged = (newCardCompany: string) => {
+    setNewCard("cardCompany", newCardCompany);
   };
 
   return (
     <Page>
       <Header title="카드 추가" isBack />
       <div onClick={toggleModal}>
-        <Card {...newCard} />
+        <Card {...card} />
       </div>
       <CardInputForm
-        card={newCard}
-        setCard={setNewCard}
+        card={card}
+        setNewCard={setNewCard}
+        setPassword={setPassword}
         onSubmit={handleFormSubmited}
       />
       <BottomSheet>

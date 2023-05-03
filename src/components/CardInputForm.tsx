@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { CardInput, Button } from "./index";
 import { CardType } from "../types";
 import { QuestionMark } from "../assets";
-import { useCard } from "../hooks";
 import {
   CARD_COMPANY_NOT_SELECTED_STRING,
   CARD_INPUT_LENGTH,
@@ -21,70 +20,74 @@ import {
 
 interface CardInputFormType {
   card: CardType;
-  setCard: (value: CardType) => void;
+  setNewCard: (key: keyof Omit<CardType, "password">, value: string) => void;
+  setPassword: (value: string[]) => void;
   onSubmit: (e: FormEvent) => void;
 }
 
-const CardInputForm = ({ card, setCard, onSubmit }: CardInputFormType) => {
-  const [newCard, setNewCard] = useCard(
-    JSON.parse(JSON.stringify(card)),
-    setCard
-  );
+const CardInputForm = ({
+  card,
+  setNewCard,
+  setPassword,
+  onSubmit,
+}: CardInputFormType) => {
   const [isAnswered, setIsAnswered] = useState(false);
   const [isValidForm, setIsValidForm] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
-    newCard.cardNumber.length === CARD_INPUT_LENGTH.cardNumber &&
-    newCard.expiredDate.length === CARD_INPUT_LENGTH.expiredDate &&
-    newCard.password.join("").length === CARD_INPUT_LENGTH.password1 * 2 &&
-    newCard.cardCompany !== CARD_COMPANY_NOT_SELECTED_STRING
+    card.cardNumber.length === CARD_INPUT_LENGTH.cardNumber &&
+    card.expiredDate.length === CARD_INPUT_LENGTH.expiredDate &&
+    // card.password.join("").length === CARD_INPUT_LENGTH.password1 * 2 &&
+    card.cardCompany !== CARD_COMPANY_NOT_SELECTED_STRING
       ? setIsValidForm(true)
       : setIsValidForm(false);
-  }, [newCard]);
+  }, [card]);
 
-  const handleInputChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
-    switch (e.target.id) {
-      case "cardNumber":
-        e.target.value = getSeperatedCardNumber(e.target.value);
-        break;
-      case "expiredDate":
-        e.target.value = getSeperatedExpiredDate(e.target.value);
-        break;
-      case "ownerName":
-        e.target.value = e.target.value.toLocaleUpperCase();
-    }
+  const handleInputChanged =
+    (key: keyof Omit<CardType, "password">) =>
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      switch (key) {
+        case "cardNumber":
+          e.target.value = getSeperatedCardNumber(e.target.value);
+          break;
+        case "expiredDate":
+          e.target.value = getSeperatedExpiredDate(e.target.value);
+          break;
+        case "ownerName":
+          e.target.value = e.target.value.toLocaleUpperCase();
+      }
+      setNewCard(key, e.target.value);
+    };
 
-    setNewCard(e.target.id, e.target.value);
-  };
+  const handleInputKeyDown =
+    (key: keyof Omit<CardType, "password">) =>
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (!(e.target instanceof HTMLInputElement) || e.key !== "Backspace")
+        return;
 
-  const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (!(e.target instanceof HTMLInputElement) || e.key !== "Backspace")
-      return;
+      const value = e.target.value;
+      e.target.value = "";
+      e.target.value = value;
 
-    const value = e.target.value;
-    e.target.value = "";
-    e.target.value = value;
-
-    switch (e.target.id) {
-      case "cardNumber":
-        e.target.value = getSubCardNumber(e.target.value);
-        break;
-      case "expiredDate":
-        e.target.value = getSubExpiredDate(e.target.value);
-    }
-
-    setNewCard(e.target.id, e.target.value);
-  };
+      switch (key) {
+        case "cardNumber":
+          e.target.value = getSubCardNumber(e.target.value);
+          break;
+        case "expiredDate":
+          e.target.value = getSubExpiredDate(e.target.value);
+      }
+      setNewCard(key, e.target.value);
+    };
 
   const handlePasswordChanged =
     (digit: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
-      const newPassword = [...newCard.password];
-      newPassword[digit] = e.target.value;
-      setNewCard("password", newPassword);
-
-      if (e.target.nextSibling instanceof HTMLInputElement)
-        e.target.nextSibling.focus();
+      // const newPassword = [...card.password];
+      // newPassword[digit] = e.target.value;
+      // setPassword(newPassword);
+      // if (e.target.nextSibling instanceof HTMLInputElement)
+      //   e.target.nextSibling.focus();
+      // moveFocus();
     };
 
   return (
@@ -92,57 +95,53 @@ const CardInputForm = ({ card, setCard, onSubmit }: CardInputFormType) => {
       <InputSetWrapper>
         <label htmlFor="cardNumber">카드 번호</label>
         <CardInput
-          id="cardNumber"
-          value={newCard.cardNumber}
+          value={card.cardNumber}
           placeholder="카드 번호를 입력해 주세요."
           width="318px"
           isAutoFocus
           isRequired
-          onChange={handleInputChanged}
-          onKeyDown={handleInputKeyDown}
+          onChange={handleInputChanged("cardNumber")}
+          onKeyDown={handleInputKeyDown("cardNumber")}
         />
-        {<span>{validateNumber(newCard.cardNumber)}</span>}
+        {<span>{validateNumber(card.cardNumber)}</span>}
       </InputSetWrapper>
 
       <InputSetWrapper>
         <label htmlFor="expiredDate">만료일</label>
         <CardInput
-          id="expiredDate"
-          value={newCard.expiredDate}
+          value={card.expiredDate}
           placeholder="MM / YY"
           width="137px"
           isRequired
-          onChange={handleInputChanged}
-          onKeyDown={handleInputKeyDown}
+          onChange={handleInputChanged("expiredDate")}
+          onKeyDown={handleInputKeyDown("expiredDate")}
         />
-        {<span>{validateExpiredDate(newCard.expiredDate)}</span>}
+        {<span>{validateExpiredDate(card.expiredDate)}</span>}
       </InputSetWrapper>
 
       <InputSetWrapper>
         <OwnerNameLabelWrapper>
           <label htmlFor="ownerName">카드 소유자 이름 (선택)</label>
-          <span>{newCard.ownerName.length}/30</span>
+          <span>{card.ownerName.length}/30</span>
         </OwnerNameLabelWrapper>
         <CardInput
-          id="ownerName"
-          value={newCard.ownerName}
+          value={card.ownerName}
           width="318px"
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-          onChange={handleInputChanged}
+          onChange={handleInputChanged("ownerName")}
         />
-        {<span>{validateOwnerName(newCard.ownerName)}</span>}
+        {<span>{validateOwnerName(card.ownerName)}</span>}
       </InputSetWrapper>
 
       <InputSetWrapper>
         <label htmlFor="cvc">보안 코드(CVC/CVV)</label>
         <CvcInputWrapper>
           <CardInput
-            id="cvc"
-            value={newCard.cvc}
+            value={card.cvc}
             width="84px"
             isSecured
             isRequired
-            onChange={handleInputChanged}
+            onChange={handleInputChanged("cvc")}
           />
           <img
             src={QuestionMark}
@@ -150,7 +149,7 @@ const CardInputForm = ({ card, setCard, onSubmit }: CardInputFormType) => {
             onClick={() => setIsAnswered(!isAnswered)}
           />
         </CvcInputWrapper>
-        {<span>{validateNumber(newCard.cvc)}</span>}
+        {/* {<span>{validateNumber(card.cvc)}</span>} */}
       </InputSetWrapper>
 
       <InputSetWrapper>
@@ -158,7 +157,7 @@ const CardInputForm = ({ card, setCard, onSubmit }: CardInputFormType) => {
         <PasswordInputWrapper>
           <CardInput
             id="password1"
-            value={newCard.password[PASSWORD_DIGIT_INDEX.FIRST]}
+            // value={card.password[PASSWORD_DIGIT_INDEX.FIRST]}
             width="42px"
             isSecured
             isRequired
@@ -167,7 +166,7 @@ const CardInputForm = ({ card, setCard, onSubmit }: CardInputFormType) => {
           <CardInput
             id="password2"
             width="42px"
-            value={newCard.password[PASSWORD_DIGIT_INDEX.SECOND]}
+            // value={card.password[PASSWORD_DIGIT_INDEX.SECOND]}
             isSecured
             isRequired
             onChange={handlePasswordChanged(PASSWORD_DIGIT_INDEX.SECOND)}
@@ -175,14 +174,16 @@ const CardInputForm = ({ card, setCard, onSubmit }: CardInputFormType) => {
           <SecuredPasswordWrapper>●</SecuredPasswordWrapper>
           <SecuredPasswordWrapper>●</SecuredPasswordWrapper>
         </PasswordInputWrapper>
-        {<span>{validateNumber(newCard.password.join(""))}</span>}
+        {/* {<span>{validateNumber(card.password.join(""))}</span>} */}
       </InputSetWrapper>
       {isAnswered && (
         <AnswerBoxWrapper>
           <p>카드 뒷면의 보안 3자리 숫자를 입력해 주세요 😊</p>
         </AnswerBoxWrapper>
       )}
-      <Button isShown={isValidForm} text="다음" type="submit" />
+      <Button isShown={isValidForm} type="submit">
+        다음
+      </Button>
     </CardInputFormWrapper>
   );
 };

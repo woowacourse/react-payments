@@ -1,8 +1,17 @@
-export const useCard = (newCard: any, setCard: any) => {
-  const setNewCard = (key: string, value: string) => {
-    newCard[key] = value;
-    setCard(newCard);
+import { useState } from "react";
+import { CardType } from "../types";
+import { getEmptyCard } from "../utils";
+
+export const useCard = () => {
+  const [card, setCard] = useState<CardType>(getEmptyCard());
+
+  const setNewCard = (key: keyof Omit<CardType, "password">, value: string) => {
+    setCard({ ...card, [key]: value });
   };
 
-  return [newCard, setNewCard];
+  const setPassword = (value: string[]) => {
+    setCard({ ...card, password: value });
+  };
+
+  return [card, setNewCard, setPassword] as const;
 };
