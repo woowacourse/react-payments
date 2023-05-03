@@ -1,0 +1,24 @@
+.spinner {
+  width: 200px;
+  height: 116px;
+  background: #d9d9d9;
+  border-radius: 10px;
+}
+
+.innerSpinner {
+  width: 100px;
+  height: 116px;
+  background: #333;
+  border-radius: 10px;
+  animation: slideRight 1s ease-in-out forwards;
+}
+
+@keyframes slideRight {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(100%);
+  }
+}
