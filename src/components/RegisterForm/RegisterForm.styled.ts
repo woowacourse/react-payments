@@ -8,7 +8,7 @@ export const RegisterForm = styled.form`
   width: 100%;
   height: 70%;
 
-  & > *:not(:last-child) {
+  & > * {
     margin-bottom: 28px;
   }
 `;
