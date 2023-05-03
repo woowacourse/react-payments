@@ -35,6 +35,7 @@ function App() {
             path="/register/success"
             element={<InputSuccessPage card={newCard} setCardInfo={setNewCardInfo} />}
           />
+          <Route path="*" element={<CardListPage cardList={cardList} />}/>
         </Routes>
       </BrowserRouter>
     </div>
