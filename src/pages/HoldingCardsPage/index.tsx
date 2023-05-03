@@ -1,19 +1,35 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Card from '../../components/Card';
 import CardRegisterButton from '../../components/CardRegisterButton';
 
 import { useCardsContext } from '../../domain/context/CardsContext';
+import { usePreviousPath } from '../../utils/context/PreviousPathContext';
 
 import styles from './holdingCardsPage.module.css';
 
+const scrollToBottom = () => {
+  window.scrollTo({
+    top: document.body.scrollHeight,
+    behavior: 'smooth',
+  });
+};
+
 const HoldingCardsPage = () => {
   const navigate = useNavigate();
+  const { previousPath } = usePreviousPath();
   const { cards } = useCardsContext();
 
   const handleClick = () => {
     navigate('/card-register');
   };
+
+  useEffect(() => {
+    if (previousPath === '/waiting') {
+      scrollToBottom();
+    }
+  }, []);
 
   return (
     <div className={styles.container}>
