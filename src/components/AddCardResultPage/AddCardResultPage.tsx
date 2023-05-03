@@ -36,9 +36,10 @@ function AddCardResultPage({ addCreditCard }: AddCardResultPageProps) {
   const submitCreditCard = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    navigate("../loading", { replace: true });
+
     addCreditCard(creditCard);
     dispatch({ type: "RESET" });
-    navigate("/", { replace: true });
   };
 
   return (
