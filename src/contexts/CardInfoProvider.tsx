@@ -46,7 +46,7 @@ interface CardInfoProviderProps {
 const CardInfoProvider = ({ children }: CardInfoProviderProps) => {
   const [cardIssuer, setCardIssuer] = useState<CardIssuerType>('BC카드');
   const [cardNumber, setCardNumber] = useState(emptyFormInputValue);
-  const [cardOwnerName, setCardOwnerName] = useState(emptyFormInputValue);
+  const [cardOwnerName, setCardOwnerName] = useState({ isValid: true, value: '' });
   const [cardPassword, setCardPassword] = useState(emptyFormInputValue);
   const [cardSecurityCode, setCardSecurityCode] = useState(emptyFormInputValue);
   const [cardExpirationDate, setCardExpirationDate] = useState(emptyFormInputValue);
