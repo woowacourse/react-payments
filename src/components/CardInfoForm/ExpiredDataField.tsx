@@ -3,6 +3,8 @@ import TextField from '../common/TextField';
 import type { CardFormNumberFieldProps } from './types';
 
 import useCardFormValue from '../../hooks/useCardFormValue';
+import useInputError from '../../hooks/useInputError';
+import { useMemo } from 'react';
 
 const ExpiredDateField = ({
   handleNumberChange,
@@ -10,8 +12,16 @@ const ExpiredDateField = ({
 }: CardFormNumberFieldProps) => {
   const { expiredDate } = useCardFormValue();
 
+  const [isMonthError, handleMonthFocus, handleMonthBlur] = useInputError();
+  const [isYearError, handleYearFocus, handleYearBlur] = useInputError();
+
+  const isError = useMemo(
+    () => isMonthError || isYearError,
+    [isMonthError, isYearError],
+  );
+
   return (
-    <TextField label="만료일" size="medium">
+    <TextField label="만료일" size="medium" isError={isError}>
       <Input
         type="text"
         name="expiredDate"
@@ -23,6 +33,8 @@ const ExpiredDateField = ({
         placeholder="MM"
         value={expiredDate.month}
         onChange={handleNumberChange}
+        onFocus={handleMonthFocus}
+        onBlur={handleMonthBlur}
         ref={inputRefs[4]}
         align="center"
         data-property="month"
@@ -39,6 +51,8 @@ const ExpiredDateField = ({
         placeholder="YY"
         value={expiredDate.year}
         onChange={handleNumberChange}
+        onFocus={handleYearFocus}
+        onBlur={handleYearBlur}
         ref={inputRefs[5]}
         align="center"
         data-property="year"

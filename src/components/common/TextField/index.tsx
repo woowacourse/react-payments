@@ -11,6 +11,7 @@ interface Props {
   maxLength?: number;
   tooltipMessage?: string;
   split?: boolean;
+  isError?: boolean;
   children: ReactNode;
 }
 
@@ -21,6 +22,7 @@ const TextField = ({
   maxLength,
   tooltipMessage,
   split = false,
+  isError,
   children,
 }: Props) => {
   return (
@@ -34,7 +36,7 @@ const TextField = ({
       <div
         className={`${styles.inputContainer} ${styles[size]} ${
           split ? styles.split : ''
-        }`}
+        } ${isError ? styles.error : ''}`}
       >
         {children}
       </div>
@@ -43,6 +45,9 @@ const TextField = ({
           <Tooltip message={tooltipMessage} />
         </div>
       )}
+      <p className={styles.errorMessage}>
+        {isError && '유효한 입력값을 입력해주세요.'}
+      </p>
     </label>
   );
 };

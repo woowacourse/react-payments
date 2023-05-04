@@ -14,6 +14,10 @@
   border-radius: 8px;
 }
 
+.inputContainer.error {
+  border: 2px solid var(--error-primary);
+}
+
 .inputContainer > input {
   flex: 1 1;
 }
@@ -58,7 +62,7 @@
 
 .tooltipContainer {
   position: absolute;
-  top: 45%;
+  top: 35%;
 }
 
 .tooltipContainer.small {
@@ -71,4 +75,10 @@
 
 .tooltipContainer.fit {
   right: 0;
+}
+
+.errorMessage {
+  height: 24px;
+  line-height: 24px;
+  color: var(--error-primary);
 }

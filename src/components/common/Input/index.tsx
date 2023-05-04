@@ -11,7 +11,9 @@ const Input = forwardRef<HTMLInputElement, Props>(
   ({ align = 'left', underlined = false, ...props }, ref) => {
     return (
       <input
-        className={`${styles.input} ${styles[align]} ${underlined ? styles.underlined : ''}`}
+        className={`${styles.input} ${styles[align]} ${
+          underlined ? styles.underlined : ''
+        }`}
         {...props}
         ref={ref}
       />
