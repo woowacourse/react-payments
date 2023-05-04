@@ -15,11 +15,11 @@ const CardList = ({ setPageCardRegistration }: CardListProps) => {
     <Styled.Wrapper>
       <Header title="보유 카드" />
       <Styled.CardListWrapper>
-        {cardList.map(({ cardType, cardNumber, owner, expirationDate, alias }) => {
+        {cardList.map((card) => {
           return (
             <Styled.CardItemWrapper>
-              <Card cardType={cardType} cardNumber={cardNumber} owner={owner} expirationDate={expirationDate} />
-              <Styled.CardAlias>{alias}</Styled.CardAlias>
+              <Card card={card} />
+              <Styled.CardAlias>{card.alias}</Styled.CardAlias>
             </Styled.CardItemWrapper>
           );
         })}

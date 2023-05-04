@@ -13,7 +13,7 @@ type CardAliasProps = {
 const CardAlias = ({ setPageCardList, currentId }: CardAliasProps) => {
   const { cardList, setCardList } = useCardListContext();
   // TODO: 단언 없애려면 어떻게 로직을 분리하면 좋을지
-  const { cardType, owner, cardNumber, expirationDate } = cardList.find(({ id }) => id === currentId)!;
+  const card = cardList.find(({ id }) => id === currentId)!;
 
   const aliasRef = useRef<HTMLInputElement>(null);
 
@@ -34,7 +34,7 @@ const CardAlias = ({ setPageCardList, currentId }: CardAliasProps) => {
     <Styled.Wrapper>
       <Header title="카드 이름을 지어주세요." />
       <Styled.CardWrapper>
-        <Card cardType={cardType} owner={owner} cardNumber={cardNumber} expirationDate={expirationDate} />
+        <Card card={card} />
       </Styled.CardWrapper>
       <Styled.InputWrapper>
         <Styled.AliasInput width="240px" type="text" textAlign="center" maxLength={10} ref={aliasRef} />

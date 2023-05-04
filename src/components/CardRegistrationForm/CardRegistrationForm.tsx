@@ -32,6 +32,7 @@ type CardValidationError = {
 };
 
 const CardRegistrationForm = ({ setPageCardAlias, setCurrentId, cardType, openModal }: CardRegistrationFormProps) => {
+  // TODO: CardInformation state들을 하나의 state로 묶기
   const [cardNumber, setCardNumber] = useState<CardInformation['cardNumber']>(['', '', '', '']);
   const [expirationDate, setExpirationDate] = useState<CardInformation['expirationDate']>(['', '']);
   const [owner, setOwner] = useState<CardInformation['owner']>('');
@@ -50,7 +51,7 @@ const CardRegistrationForm = ({ setPageCardAlias, setCurrentId, cardType, openMo
     count: 4,
   });
 
-  const onChangeExpiraiontDate = useOnChangeHandler({
+  const onChangeExpirationDate = useOnChangeHandler({
     setState: setExpirationDate,
     count: 2,
   });
@@ -77,13 +78,7 @@ const CardRegistrationForm = ({ setPageCardAlias, setCurrentId, cardType, openMo
   return (
     <Styled.FormWrapper onSubmit={onSubmitCard}>
       <Styled.CardWrapper>
-        <Card
-          cardType={cardType}
-          owner={owner}
-          cardNumber={cardNumber}
-          expirationDate={expirationDate}
-          onClick={openModal}
-        />
+        <Card card={{ cardType, owner, cardNumber, expirationDate }} onClick={openModal} />
       </Styled.CardWrapper>
 
       <InputGroup>
@@ -92,7 +87,7 @@ const CardRegistrationForm = ({ setPageCardAlias, setCurrentId, cardType, openMo
       </InputGroup>
 
       <InputGroup>
-        <ExpirationDateInput onChange={onChangeExpiraiontDate} />
+        <ExpirationDateInput onChange={onChangeExpirationDate} />
         <ErrorMessage>{cardError.expirationDate?.message}</ErrorMessage>
       </InputGroup>
 

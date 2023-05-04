@@ -1,16 +1,19 @@
-import styled from 'styled-components';
+import styled, { CSSProperties } from 'styled-components';
 import { MAIN_COLOR } from '../../domain/constants/card';
 import type { CardType } from '../../domain/types/card';
 
 type CardProps = {
-  cardType: CardType;
-  owner: string;
-  cardNumber: [string, string, string, string];
-  expirationDate: [string, string];
+  card: {
+    cardType: CardType;
+    owner: string;
+    cardNumber: [string, string, string, string];
+    expirationDate: [string, string];
+  };
   onClick?: () => void;
 };
 
-const Card = ({ cardType, owner, cardNumber, expirationDate, onClick }: CardProps) => {
+const Card = ({ card, onClick }: CardProps) => {
+  const { cardType, cardNumber, owner, expirationDate } = card;
   const [month, year] = expirationDate;
 
   return (
@@ -36,7 +39,7 @@ const Card = ({ cardType, owner, cardNumber, expirationDate, onClick }: CardProp
 export default Card;
 
 type CardTemplateProps = {
-  bgColor: string;
+  bgColor: CSSProperties['backgroundColor'];
 };
 
 export const CardTemplate = styled.div<CardTemplateProps>`
