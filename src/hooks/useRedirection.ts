@@ -7,7 +7,7 @@ const useRedirection = (condition: boolean) => {
     if (condition) {
       navigate('/');
     }
-  }, []);
+  }, [navigate, condition]);
 };
 
 export default useRedirection;
