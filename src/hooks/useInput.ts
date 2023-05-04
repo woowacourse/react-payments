@@ -4,6 +4,7 @@ import {
   useEffect,
   useRef,
   useState,
+  useCallback,
 } from 'react';
 
 export interface UseInputProps {
@@ -70,17 +71,24 @@ export const useInput = (
     setError(errorMessage);
   };
 
-  useEffect(() => {
-    if (isNumber && maxLength === value.length) {
-      const isSuccess = validate(value);
+  const setErrorMessage = useCallback(
+    (inputValue: string) => {
+      const isSuccess = validate(inputValue);
 
       if (isSuccess) {
         setError('');
       } else {
         setError(errorMessage);
       }
+    },
+    [errorMessage, validate]
+  );
+
+  useEffect(() => {
+    if (isNumber && maxLength === value.length) {
+      setErrorMessage(value);
     }
-  }, [isNumber, setError, maxLength, errorMessage, validate, value]);
+  }, [maxLength, isNumber, setErrorMessage, value]);
 
   const onBlur = () => {
     if (validate(value)) {

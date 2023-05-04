@@ -68,15 +68,12 @@ export default function AddCardPage() {
 
     const { validationResult } = formValidate(formInputs.addCardPage);
 
-    if (!validationResult) {
+    if (!validationResult || !month.inputRef.current) {
       return;
     }
 
     if (isPastDate(Number(year.value), Number(month.value))) {
-      if (month.inputRef.current) {
-        month.inputRef.current.focus();
-      }
-
+      month.inputRef.current.focus();
       month.setError('지난 기간은 입력할 수 없습니다.');
       return;
     }
