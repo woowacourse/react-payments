@@ -1,4 +1,4 @@
-import Card from "src/components/@common/Card";
+import Card from "src/components/@common/Temp";
 import Input from "src/components/@common/Input";
 import useSaveNickName from "src/hooks/useSaveNickName";
 import { Styled as S } from "./CardNickName.styles";

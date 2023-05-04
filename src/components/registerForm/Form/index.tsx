@@ -1,9 +1,9 @@
 import React from "react";
-import CardNumber from "src/components/registerForm/CardNumber";
-import ExpireDate from "src/components/registerForm/ExpireDate";
-import OwnerNameInput from "src/components/registerForm/OwnerNameInput";
-import SecurityCode from "src/components/registerForm/SecurityCode";
-import CardPassword from "src/components/registerForm/CardPassword";
+import CardNumber from "src/components/registerForm/Number";
+import ExpireDate from "src/components/registerForm/Date";
+import OwnerNameInput from "src/components/registerForm/Owner";
+import SecurityCode from "src/components/registerForm/Code";
+import CardPassword from "src/components/registerForm/Password";
 import { Styled as S } from "./CardRegisterForm.styles";
 import useRegisterCardInfo from "src/hooks/useRegisterCardInfo";
 import Button from "src/components/@common/Button";
