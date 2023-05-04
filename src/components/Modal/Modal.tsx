@@ -4,15 +4,14 @@ import styled from 'styled-components';
 interface Props extends DialogHTMLAttributes<HTMLDialogElement> {
   isModalOpen: boolean;
   closeModal: () => void;
-  children?: React.ReactNode;
 }
 
-export function Modal({ isModalOpen, children, closeModal, ...props }: Props) {
+export function Modal({ isModalOpen, closeModal, ...props }: Props) {
   return (
     <>
       <Style.Backdrop isModalOpen={isModalOpen} onClick={closeModal} />
       <Style.Container open={isModalOpen} isModalOpen={isModalOpen} {...props}>
-        {children}
+        {props.children}
       </Style.Container>
     </>
   );
