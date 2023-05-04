@@ -51,7 +51,7 @@ function Card({ cardInformation = defaultCardInformation, isAddForm, isShowName 
                 )}
               </StyledCardNumberTemplate>
               <StyledCardDetail>
-                {owner && <div>{owner[0].slice(0, 20)}</div>}
+                {owner && <StyledCardOwner>{owner[0]}</StyledCardOwner>}
                 {expirationDate && (
                   <div>
                     {expirationDate.at(0)?.padStart(CARD_EXPIRATION_MONTH_LENGTH, '0')}/
@@ -145,6 +145,18 @@ const StyledCardDetail = styled.div`
   justify-content: space-between;
   margin-top: 6px;
   font-size: 14px;
+`;
+
+const StyledCardOwner = styled.div`
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  width: 140px;
+  max-height: 28px;
+  word-wrap: break-word;
+  text-align: left;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `;
 
 const StyledCardName = styled.div`
