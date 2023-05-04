@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { FormEvent } from 'react';
-import type { CardFormData } from '../../types';
+import type { CardFormData, CardFormValidation } from '../../types';
 import { useCardListContext } from '../../contexts/CardListContext';
 import { useCardInputValidation } from './useCardInputValidation';
 import { useFormComplete } from '../common/useFormComplete';
@@ -42,23 +42,13 @@ const useCardAddForm = () => {
   );
 
   const handleErrorInputFocus = (event: FormEvent<HTMLFormElement>) => {
-    if (!inputValidation.issuer) {
-      const issuerInputButton = Array.from(event.currentTarget.elements).find(
-        (element): element is HTMLButtonElement =>
-          element.tagName === 'BUTTON' && (element as HTMLButtonElement).name === 'issuer'
-      );
+    const errorInputElement = Array.from(event.currentTarget.elements).find(
+      (element): element is HTMLInputElement | HTMLButtonElement =>
+        (element instanceof HTMLInputElement || element instanceof HTMLButtonElement) &&
+        !inputValidation[element.name as keyof CardFormValidation]
+    );
 
-      issuerInputButton?.focus();
-    }
-
-    if (inputValidation.issuer) {
-      const errorInputElement = Array.from(event.currentTarget.elements).find(
-        (element): element is HTMLInputElement =>
-          element.tagName === 'INPUT' && !(element as HTMLInputElement).validity.valid
-      );
-
-      errorInputElement?.focus();
-    }
+    errorInputElement?.focus();
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
