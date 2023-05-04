@@ -52,6 +52,7 @@ export default function CardInputForm(props: CardInputFormProps) {
         <CardCoModal isOpen={modalOpen}>
           {cardCoList.map((cardCo) => (
             <CardCoButton
+              key={cardCo}
               cardCo={cardCo}
               changeCardCoStatus={changeInputStatus("cardCo")}
             />
