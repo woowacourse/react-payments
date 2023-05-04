@@ -8,6 +8,10 @@ const meta = {
   tags: ["autodocs"],
   argTypes: {
     cardCompanyName: {
+      options: Object.keys(CARD_COMPANIES).map((company) => company),
+      control: {
+        type: "select",
+      },
       description:
         "카드사를 선택하면 해당 카드사의 로고와 이름을 볼 수 있습니다.",
     },
@@ -17,21 +21,6 @@ const meta = {
 export default meta;
 
 type Story = StoryObj<typeof CardCompanyComponent>;
-
-export const CardCompany: Story = {
-  args: {
-    cardCompanyName: Object.keys(CARD_COMPANIES)[0],
-  },
-
-  argTypes: {
-    cardCompanyName: {
-      options: Object.keys(CARD_COMPANIES).map((company) => company),
-      control: {
-        type: "select",
-      },
-    },
-  },
-};
 
 export const BcCard: Story = {
   args: {
