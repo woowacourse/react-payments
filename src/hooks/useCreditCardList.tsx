@@ -1,9 +1,11 @@
+// eslint-disable-next-line
 import { useEffect, useState } from 'react';
 import * as T from 'types';
 
 interface UseCreditCard {
   creditCardList: T.CreditCard[];
   saveCreditCard: (creditCard: T.CreditCard) => void;
+  initCreditCardList: () => void;
   updateNickname: (number: string, newNickname: string) => void;
 }
 
@@ -21,6 +23,15 @@ export const useCreditCardList = (): UseCreditCard => {
     localStorage.setItem('creditCards', JSON.stringify(newCardList));
   };
 
+  const initCreditCardList = () => {
+    // eslint-disable-next-line no-restricted-globals
+    const isInit = confirm('모든 카드를 초기화합니다.');
+    if (isInit) {
+      localStorage.setItem('creditCards', '[]');
+      setCreditCardList(existCreditCards());
+    }
+  };
+
   const updateNickname = (number: string, newNickname: string) => {
     const copiedCreditCards = existCreditCards();
     const targetIndex = copiedCreditCards.findIndex(
@@ -32,5 +43,7 @@ export const useCreditCardList = (): UseCreditCard => {
     }
   };
 
-  return { creditCardList, saveCreditCard, updateNickname };
+  return {
+    creditCardList, saveCreditCard, initCreditCardList, updateNickname
+  };
 };

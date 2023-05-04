@@ -5,10 +5,13 @@ import * as S from './style';
 
 function Home() {
   const navigate = useNavigate();
-  const { creditCardList } = useCreditCardList();
+  const { creditCardList, initCreditCardList } = useCreditCardList();
   return (
     <S.HomeLayout>
-      <S.HomeHeader>보유카드</S.HomeHeader>
+      <S.HomeHeader>
+        <S.HomeTitle>보유카드</S.HomeTitle>
+        <S.InitButton onClick={initCreditCardList}>🗑</S.InitButton>
+      </S.HomeHeader>
       <S.CreditCardList>
         {creditCardList.map((creditCard) => (
           <div key={creditCard.number}>

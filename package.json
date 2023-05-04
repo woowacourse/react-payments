@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@gabrielyoon7/simple-modal": "^0.0.1",
     "@storybook/cli": "^7.0.5",
     "@storybook/react-docgen-typescript-plugin": "^1.0.1",
     "@testing-library/jest-dom": "^5.14.1",

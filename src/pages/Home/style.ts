@@ -4,10 +4,22 @@ export const HomeLayout = styled.div`
   padding: 20px 36px;
 `;
 
-export const HomeHeader = styled.h3`
+export const HomeHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const HomeTitle = styled.h3`
   font-size: 18px;
   line-height: 18.75px;
   margin-bottom: 25px;
+`;
+
+export const InitButton = styled.button`
+  font-size: 18px;
+  line-height: 18.75px;
+  margin-bottom: 25px;
+  cursor: pointer;
 `;
 
 export const CreditCardList = styled.div`

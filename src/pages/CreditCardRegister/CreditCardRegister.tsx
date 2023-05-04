@@ -1,7 +1,6 @@
 import CreditCard from 'components/CreditCard';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import Modal from 'components/Modal';
 import useModal from 'hooks/useModal';
 import useCreditCardForm from 'hooks/useCreditCardForm';
 import ControlButton from 'components/ControlButton';
@@ -9,6 +8,7 @@ import CreditCardRegisterLayout from 'components/CreditCardRegisterLayout';
 import CreditCardRegisterTopSheet from 'components/CreditCardRegisterTopSheet';
 import FlexBox from 'components/FlexBox';
 import { useCreditCardList } from 'hooks/useCreditCardList';
+import { Modal } from '@gabrielyoon7/simple-modal';
 import CreditCardNumberInput from './inputs/CreditCardNumberInput';
 import CreditCardExpiryInput from './inputs/CreditCardExpiryInput';
 import CreditCardOwnerInput from './inputs/CreditCardOwnerInput';
