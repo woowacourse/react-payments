@@ -49,6 +49,7 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-box-pack: center;
     justify-content: center;
     margin-bottom: 30px;
+    padding: 0 24px;
   }
 
   .label-text {
