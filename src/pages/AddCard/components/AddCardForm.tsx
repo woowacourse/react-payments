@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import type { AddCardFormProps, CardType } from '../../../type';
-import { postLocalStorage as submitCard } from '../../../utils/applicationStorage';
+import { newCardList } from '../../../utils/applicationStorage';
 import ExpireDateInput from './ExpireDateInput';
 import OwnerInput from './OwnerInput';
 import SecurityCodeInput from './SecurityCodeInput';
@@ -11,16 +11,18 @@ import './AddCardForm.css';
 import CardNumberInput from './CardNumberInput';
 import useTotalStatus from '../../../hooks/useTotalStatus';
 import { getSubmitData, getTotalStatus } from '../domain/domain';
+import useLocalStorage from '../../../hooks/useLocalStorage';
 
 const AddCardForm = (props: AddCardFormProps) => {
   const navigate = useNavigate();
   const isActive = useTotalStatus(getTotalStatus(props));
+  const { value: cardList, postLocalStorage } = useLocalStorage('cardList', '[]');
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const submitData: Omit<CardType, 'id'> = getSubmitData(props);
     try {
-      submitCard(submitData);
+      postLocalStorage(newCardList(cardList, submitData));
       navigate('/alias');
     } catch (error) {
       alert('중복된 카드 입니다.');

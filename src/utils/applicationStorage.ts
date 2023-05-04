@@ -10,17 +10,12 @@ export const getSerialNumber = (card: CardNumber): string => {
   return result;
 };
 
-export const postLocalStorage = (data: Omit<CardType, 'id'>) => {
-  const getData = localStorage.getItem('cardList');
-
-  if (!getData) {
-    localStorage.setItem('cardList', JSON.stringify([{ id: 0, ...data }]));
-    return;
+export const newCardList = (recentList: CardType[], data: Omit<CardType, 'id'>) => {
+  if (recentList.length === 0) {
+    return JSON.stringify([{ id: 0, ...data }]);
   }
 
-  const dataToArr = JSON.parse(getData);
-
-  const sameNumbers = dataToArr.filter((card: Omit<CardType, 'id'>) => {
+  const sameNumbers = recentList.filter((card: Omit<CardType, 'id'>) => {
     const { cardNumber } = card;
     let cardNumberSerial = getSerialNumber(cardNumber);
     let fetchCardNumberSerial = getSerialNumber(data.cardNumber);
@@ -30,8 +25,8 @@ export const postLocalStorage = (data: Omit<CardType, 'id'>) => {
   });
 
   if (sameNumbers.length > 0) throw new Error('이미 등록된 카드');
-  dataToArr.push({ id: dataToArr.length, ...data });
-  localStorage.setItem('cardList', JSON.stringify(dataToArr));
+  recentList.push({ id: recentList.length, ...data });
+  return JSON.stringify(recentList);
 };
 
 export const fetchLocalStorage = (key: string, initial = '') => {
