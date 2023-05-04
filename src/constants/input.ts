@@ -14,7 +14,7 @@ const SECURITY_CODE_MAX_LENGTH = 4;
 
 const PASSWORD_UNIT_MAX_LENGTH = 1;
 
-const CARD_NAME_INPUT_MAX_LENGTH = 20;
+const CARD_NAME_INPUT_MAX_LENGTH = 30;
 
 const PATTERN = {
   CARD_NUMBER: '^\\d{4} \\d{4} •{4} •{4}$',
