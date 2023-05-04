@@ -3,9 +3,14 @@ import Header from "components/Header";
 import CardPreview from "components/CardPreview";
 import { AddButton } from "components/style/ButtonStyle";
 import useInitMainPage from "hooks/useInitMainPage";
+import { CardInfo } from "types";
 
-const MainPage = () => {
-  const { goToRegister, cardList } = useInitMainPage();
+interface Props {
+  cardList: CardInfo[];
+}
+
+const MainPage = ({ cardList }: Props) => {
+  const { goToRegister } = useInitMainPage();
 
   return (
     <S.Wrapper>
@@ -32,7 +37,6 @@ const MainPage = () => {
 const S = {
   Wrapper: styled.div`
     max-width: 480px;
-    width: 88%;
 
     & > header {
       margin-bottom: 8px;

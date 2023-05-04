@@ -5,12 +5,15 @@ import MainPage from "pages/MainPage";
 import CardRegisterForm from "pages/RegisterPage/CardRegisterForm";
 import LastPage from "pages/LastPage";
 import GotLost from "pages/GotLost";
+import useInitMainPage from "hooks/useInitMainPage";
 
 const App = () => {
+  const { cardList } = useInitMainPage();
+
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Routes>
-        <Route path="/" element={<MainPage />} />
+        <Route path="/" element={<MainPage cardList={cardList} />} />
         <Route
           path="/register"
           element={
