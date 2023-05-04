@@ -14,10 +14,6 @@
   border-radius: 8px;
 }
 
-.inputContainer.error {
-  border: 2px solid var(--error-primary);
-}
-
 .inputContainer > input {
   flex: 1 1;
 }
@@ -77,8 +73,16 @@
   right: 0;
 }
 
-.errorMessage {
+.helperText {
   height: 24px;
   line-height: 24px;
+  color: var(--error-primary);
+}
+
+.helperText.normal {
+  color: var(--text-secondary);
+}
+
+.helperText.error {
   color: var(--error-primary);
 }

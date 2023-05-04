@@ -1,36 +1,27 @@
-import { useMemo } from 'react';
-
 import Input from '../common/Input';
 import TextField from '../common/TextField';
-import type { CardFormNumberFieldProps } from './types';
+import type { CardFormFieldProps } from './types';
 
+import useCardInfoForm from './hooks/useCardInfoForm';
+import useFieldFilled from './hooks/useFieldFilled';
 import useCardFormValue from '../../hooks/useCardFormValue';
-import useInputError from '../../hooks/useInputError';
 
-const PasswordField = ({
-  handleNumberChange,
-  inputRefs,
-}: CardFormNumberFieldProps) => {
+const PasswordField = ({ inputRefs }: CardFormFieldProps) => {
   const { password } = useCardFormValue();
-
-  const [
-    isFirstPasswordError,
-    handleFirstPasswordFocus,
-    handleFirstPasswordBlur,
-  ] = useInputError();
-  const [
-    isSecondPasswordError,
-    handleSecondPasswordFocus,
-    handleSecondPasswordBlur,
-  ] = useInputError();
-
-  const isError = useMemo(
-    () => isFirstPasswordError || isSecondPasswordError,
-    [isFirstPasswordError, isSecondPasswordError],
-  );
+  const { handleNumberChange } = useCardInfoForm();
+  const isFilled = useFieldFilled(inputRefs);
 
   return (
-    <TextField label="카드 비밀번호" size="medium" isError={isError} split>
+    <TextField
+      label="카드 비밀번호"
+      size="medium"
+      split
+      toggleHelperText={!isFilled}
+      helperText={{
+        text: '카드 비밀번호 앞 두 자리를 입력해 주세요.',
+        color: 'error',
+      }}
+    >
       <Input
         type="password"
         name="password"
@@ -38,12 +29,9 @@ const PasswordField = ({
         minLength={1}
         maxLength={1}
         required
-        tabIndex={9}
         value={password?.first}
         onChange={handleNumberChange}
-        onFocus={handleFirstPasswordFocus}
-        onBlur={handleFirstPasswordBlur}
-        ref={inputRefs[8]}
+        ref={inputRefs[0]}
         align="center"
         data-property="first"
       />
@@ -54,12 +42,9 @@ const PasswordField = ({
         minLength={1}
         maxLength={1}
         required
-        tabIndex={10}
         value={password?.second}
         onChange={handleNumberChange}
-        onFocus={handleSecondPasswordFocus}
-        onBlur={handleSecondPasswordBlur}
-        ref={inputRefs[9]}
+        ref={inputRefs[1]}
         align="center"
         data-property="second"
       />

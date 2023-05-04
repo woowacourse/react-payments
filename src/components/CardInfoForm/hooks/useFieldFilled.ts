@@ -16,7 +16,10 @@ const useFieldFilled = (inputRefs: InputRef[]) => {
   useEffect(() => {
     if (inputRefs.every(isMaxLength)) {
       setIsFilled(true);
+      return;
     }
+
+    setIsFilled(false);
   }, [inputRefs, isMaxLength, setIsFilled]);
 
   return isFilled;

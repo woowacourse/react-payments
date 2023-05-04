@@ -1,27 +1,26 @@
 import Input from '../common/Input';
 import TextField from '../common/TextField';
-import type { CardFormNumberFieldProps } from './types';
+import type { CardFormFieldProps } from './types';
 
+import useCardInfoForm from './hooks/useCardInfoForm';
+import useFieldFilled from './hooks/useFieldFilled';
 import useCardFormValue from '../../hooks/useCardFormValue';
-import useInputError from '../../hooks/useInputError';
-import { useMemo } from 'react';
 
-const ExpiredDateField = ({
-  handleNumberChange,
-  inputRefs,
-}: CardFormNumberFieldProps) => {
+const ExpiredDateField = ({ inputRefs }: CardFormFieldProps) => {
   const { expiredDate } = useCardFormValue();
-
-  const [isMonthError, handleMonthFocus, handleMonthBlur] = useInputError();
-  const [isYearError, handleYearFocus, handleYearBlur] = useInputError();
-
-  const isError = useMemo(
-    () => isMonthError || isYearError,
-    [isMonthError, isYearError],
-  );
+  const { handleNumberChange } = useCardInfoForm();
+  const isFilled = useFieldFilled(inputRefs);
 
   return (
-    <TextField label="만료일" size="medium" isError={isError}>
+    <TextField
+      label="만료일"
+      size="medium"
+      toggleHelperText={!isFilled}
+      helperText={{
+        text: '만료일을 MMYY 형식으로 입력해 주세요. (ex. 1223)',
+        color: 'error',
+      }}
+    >
       <Input
         type="text"
         name="expiredDate"
@@ -29,13 +28,10 @@ const ExpiredDateField = ({
         minLength={2}
         maxLength={2}
         required
-        tabIndex={5}
         placeholder="MM"
         value={expiredDate.month}
         onChange={handleNumberChange}
-        onFocus={handleMonthFocus}
-        onBlur={handleMonthBlur}
-        ref={inputRefs[4]}
+        ref={inputRefs[0]}
         align="center"
         data-property="month"
       />
@@ -47,13 +43,10 @@ const ExpiredDateField = ({
         minLength={2}
         maxLength={2}
         required
-        tabIndex={6}
         placeholder="YY"
         value={expiredDate.year}
         onChange={handleNumberChange}
-        onFocus={handleYearFocus}
-        onBlur={handleYearBlur}
-        ref={inputRefs[5]}
+        ref={inputRefs[1]}
         align="center"
         data-property="year"
       />

@@ -25,6 +25,8 @@ const CardInfoForm = () => {
   const { validateCompany, validateExpiredDate } = useCardFormValidation();
   const isFilled = useFieldFilled(inputRefs);
 
+  console.log(inputRefs[9].current?.value.length);
+
   const handleFormChange: ChangeEventHandler<HTMLFormElement> = (event) => {
     const { target } = event;
 
@@ -54,11 +56,13 @@ const CardInfoForm = () => {
       onChange={handleFormChange}
       onSubmit={handleFormSubmit}
     >
-      <NumberField inputRefs={inputRefs} />
-      <ExpiredDateField inputRefs={inputRefs} />
-      <OwnerField inputRefs={inputRefs} />
-      <CvcField inputRefs={inputRefs} />
-      <PasswordField inputRefs={inputRefs} />
+      <NumberField
+        inputRefs={[inputRefs[0], inputRefs[1], inputRefs[2], inputRefs[3]]}
+      />
+      <ExpiredDateField inputRefs={[inputRefs[4], inputRefs[5]]} />
+      <OwnerField inputRefs={[inputRefs[6]]} />
+      <CvcField inputRefs={[inputRefs[7]]} />
+      <PasswordField inputRefs={[inputRefs[8], inputRefs[9]]} />
       <div className={styles.submitButton}>
         {isFilled && <Button padding>다음</Button>}
       </div>

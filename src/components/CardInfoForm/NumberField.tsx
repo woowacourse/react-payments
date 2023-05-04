@@ -1,42 +1,23 @@
 import Input from '../common/Input';
 import TextField from '../common/TextField';
-import { CardFormNumberFieldProps } from './types';
+import { CardFormFieldProps } from './types';
 
+import useCardInfoForm from './hooks/useCardInfoForm';
+import useFieldFilled from './hooks/useFieldFilled';
 import useCardFormValue from '../../hooks/useCardFormValue';
-import useInputError from '../../hooks/useInputError';
-import { useMemo } from 'react';
 
-const NumberField = ({
-  handleNumberChange,
-  inputRefs,
-}: CardFormNumberFieldProps) => {
+const NumberField = ({ inputRefs }: CardFormFieldProps) => {
   const { number } = useCardFormValue();
-
-  const [isFirstNumberError, handleFirstNumberFocus, handleFirstNumberBlur] =
-    useInputError();
-  const [isSecondNumberError, handleSecondNumberFocus, handleSecondNumberBlur] =
-    useInputError();
-  const [isThirdNumberError, handleThirdNumberFocus, handleThirdNumberBlur] =
-    useInputError();
-  const [isFourthNumberError, handleFourthNumberFocus, handleFourthNumberBlur] =
-    useInputError();
-
-  const isError = useMemo(
-    () =>
-      isFirstNumberError ||
-      isSecondNumberError ||
-      isThirdNumberError ||
-      isFourthNumberError,
-    [
-      isFirstNumberError,
-      isSecondNumberError,
-      isThirdNumberError,
-      isFourthNumberError,
-    ],
-  );
+  const { handleNumberChange } = useCardInfoForm();
+  const isFilled = useFieldFilled(inputRefs);
 
   return (
-    <TextField label="카드 번호" size="fit" isError={isError}>
+    <TextField
+      label="카드 번호"
+      size="fit"
+      toggleHelperText={!isFilled}
+      helperText={{ text: '카드 번호 16자리를 입력해 주세요.', color: 'error' }}
+    >
       <Input
         type="text"
         name="number"
@@ -44,11 +25,8 @@ const NumberField = ({
         minLength={4}
         maxLength={4}
         required
-        tabIndex={1}
         value={number.first}
         onChange={handleNumberChange}
-        onFocus={handleFirstNumberFocus}
-        onBlur={handleFirstNumberBlur}
         ref={inputRefs[0]}
         placeholder="0000"
         align="center"
@@ -62,11 +40,8 @@ const NumberField = ({
         minLength={4}
         maxLength={4}
         required
-        tabIndex={2}
         value={number.second}
         onChange={handleNumberChange}
-        onFocus={handleSecondNumberFocus}
-        onBlur={handleSecondNumberBlur}
         ref={inputRefs[1]}
         placeholder="0000"
         align="center"
@@ -80,11 +55,8 @@ const NumberField = ({
         minLength={4}
         maxLength={4}
         required
-        tabIndex={3}
         value={number.third}
         onChange={handleNumberChange}
-        onFocus={handleThirdNumberFocus}
-        onBlur={handleThirdNumberBlur}
         ref={inputRefs[2]}
         placeholder="0000"
         align="center"
@@ -98,11 +70,8 @@ const NumberField = ({
         minLength={4}
         maxLength={4}
         required
-        tabIndex={4}
         value={number.fourth}
         onChange={handleNumberChange}
-        onFocus={handleFourthNumberFocus}
-        onBlur={handleFourthNumberBlur}
         ref={inputRefs[3]}
         placeholder="0000"
         align="center"
