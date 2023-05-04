@@ -17,4 +17,4 @@ const meta: Meta = {
 
 export default meta;
 
-export const InputTest = (args: any) => <CardNumber {...args}></CardNumber>;
+export const inputTest = (args: any) => <CardNumber {...args}></CardNumber>;

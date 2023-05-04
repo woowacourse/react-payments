@@ -17,6 +17,6 @@ const meta: Meta = {
 
 export default meta;
 
-export const submitTest = (args: any) => (
+export const inputTest = (args: any) => (
   <CardInputForm addNewCard={() => {}}></CardInputForm>
 );
