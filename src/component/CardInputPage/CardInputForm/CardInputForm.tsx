@@ -15,6 +15,7 @@ import { cardCoList, initialCard } from "../../../cardData";
 
 import "./cardInputForm.css";
 import CardCoButton from "../../common/CardCoButton";
+import { useModalState } from "../../../hook/modalHook";
 
 interface CardInputFormProps {
   addNewCard: (card: CreditCard) => void;
@@ -27,20 +28,6 @@ const cardInputComplete = {
   owner: false,
   securityCode: false,
   password: false,
-};
-
-const useCardCoModalState = () => {
-  const [modalOpen, setModalOpen] = useState(true);
-
-  function openCardCoModal() {
-    setModalOpen(true);
-  }
-
-  function closeCardCoModal() {
-    setModalOpen(false);
-  }
-
-  return { modalOpen, openCardCoModal, closeCardCoModal };
 };
 
 const useCardInfoAndInputState = (closeModal: Function) => {
@@ -76,12 +63,11 @@ const useCardInfoAndInputState = (closeModal: Function) => {
 };
 
 export default function CardInputForm(props: CardInputFormProps) {
-  const { modalOpen, openCardCoModal, closeCardCoModal } =
-    useCardCoModalState();
+  const { modalOpen, openModal, closeModal } = useModalState();
 
   const isFormFilled = useRef(false);
   const { inputStatus, nowCardInfo, changeInputStatus } =
-    useCardInfoAndInputState(closeCardCoModal);
+    useCardInfoAndInputState(closeModal);
   const { cardNumber, expirationDate, securityCode, password } = inputStatus;
   isFormFilled.current =
     cardNumber && expirationDate && securityCode && password;
@@ -109,7 +95,7 @@ export default function CardInputForm(props: CardInputFormProps) {
           ))}
         </CardCoModal>
       }
-      <CardPreview card={nowCardInfo} openCardCoModal={openCardCoModal} />
+      <CardPreview card={nowCardInfo} openCardCoModal={openModal} />
       <InputBoxCardNumber
         changeCardNumberStatus={changeInputStatus("cardNumber")}
       />
