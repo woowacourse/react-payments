@@ -6,13 +6,10 @@ import {
   InputHTMLAttributes,
   isValidElement,
   PropsWithChildren,
-  RefAttributes,
-  RefObject,
   useContext,
 } from "react";
 import styled from "styled-components";
 import { InputContext } from "../../../contexts/inputContext";
-import { Ref } from "../../../type/ref";
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;

@@ -32,11 +32,6 @@ export function AddCardForm() {
     const isAllValid = inputElements.every(
       (input) => input.value.length >= TEXT_LENGTH[input.name.toUpperCase()]
     );
-
-    inputElements.forEach((input) => {
-      console.log(input.name.toUpperCase());
-      console.log(TEXT_LENGTH[input.name.toUpperCase()]);
-    });
     isAllValid && setIsComplete(true);
   }
 
