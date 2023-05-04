@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { v4 } from 'uuid';
 import { COMPANIES } from '../../constants/cardCompany';
-import { isCompanyId } from '../modal/content/selectCardCompany';
+import { isCompanyId } from '../selectCardCompany';
 import { CardViewerProps } from '../../types/card';
 
 interface Props extends CardViewerProps {

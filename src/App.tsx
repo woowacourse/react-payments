@@ -3,8 +3,8 @@ import { Main } from './pages/Main';
 import { Register } from './pages/register';
 import { AddCardNickName } from './pages/register/AddCardNickName';
 import { CardInfoProvider } from './components/providers/CardInfoProvider';
-import { ModalProvider } from './components/providers/ModalProvider';
 import { CardListProvider } from './components/providers/CardListProvider';
+import { ModalProvider } from '@kyw0716/woowacourse-scent-modal';
 
 function App() {
   return (

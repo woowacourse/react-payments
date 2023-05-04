@@ -10,10 +10,10 @@ import {
   useCardInfoActionContext,
   useCardInfoValueContext,
 } from '../../hooks/cardInfoContext';
-import { useModalStateContext } from '../../hooks/useModalContext';
 import { v4 } from 'uuid';
 import { useCardList } from '../../hooks/useCardList';
 import { useFormValidation } from '../../hooks/useFormValidation';
+import { useModalStateContext } from '@kyw0716/woowacourse-scent-modal';
 
 export const AddNewCardForm = () => {
   const navigate = useNavigate();

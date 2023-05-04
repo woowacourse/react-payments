@@ -2,18 +2,18 @@ import styled from 'styled-components';
 import { AddNewCardForm } from '../../components/addCardForm';
 import { Layout } from '../../layout';
 import { BackButton } from '../../layout/BackButton';
-import { BottomSheet } from '../../components/modal/template/BottomSheet';
-import { SelectCardCompanyModal } from '../../components/modal/content/selectCardCompany';
-import {
-  useModalActionContext,
-  useModalStateContext,
-} from '../../hooks/useModalContext';
+import { SelectCardCompanyModal } from '../../components/selectCardCompany';
 import { useEffect } from 'react';
 import { CardViewer } from '../../components/cardViewer';
 import {
   useCardInfoActionContext,
   useCardInfoValueContext,
 } from '../../hooks/cardInfoContext';
+import {
+  useModalStateContext,
+  useModalActionContext,
+  BottomSheet,
+} from '@kyw0716/woowacourse-scent-modal';
 
 export const Register = () => {
   const { openModal } = useModalActionContext();
