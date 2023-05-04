@@ -5,7 +5,7 @@ import useInput from '../../hooks/useInput';
 import { isValidCardAlias } from '../AddCard/domain/validation';
 import { fetchLocalStorage, registerCardAlias } from '../../utils/applicationStorage';
 import './index.css';
-import { useEffect } from 'react';
+import useRedirection from '../../hooks/useRedirection';
 
 const CardAliasPage = () => {
   const navigate = useNavigate();
@@ -13,12 +13,8 @@ const CardAliasPage = () => {
   const cardList = fetchLocalStorage('cardList', '[]');
   const currentCard = cardList[cardList.length - 1];
 
-  useEffect(() => {
-    if (cardList.length === 0 || currentCard.alias) {
-      console.log(currentCard);
-      navigate('/');
-    }
-  }, []);
+  useRedirection(cardList.length === 0 || currentCard.alias);
+
   const onConfirmButtonClick = () => {
     registerCardAlias(value, currentCard.cardNumber);
     navigate('/');
