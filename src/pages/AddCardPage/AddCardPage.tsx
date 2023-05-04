@@ -1,5 +1,4 @@
 import React, { type FormEvent, useCallback, useEffect, useRef } from 'react';
-import styled from 'styled-components';
 import { useFocusInput } from '@hooks/useFocusInput';
 import { useFormInputs } from '@hooks/useFormInputs';
 import { useHideScrollState } from '@hooks/useHideScrollState';
@@ -21,6 +20,7 @@ import { formValidate } from '@utils/formValidate';
 import { isPastDate } from '@utils/validate';
 import { CARD_COMPANY, CARD_COMPANY_DATA } from '@constants/cardCompany';
 import { PAGE_KIND } from '@constants/constant';
+import * as S from './AddCardPage.Styles';
 
 const INPUT_ID = {
   CARD_NUMBER: 'cardNumber',
@@ -122,12 +122,12 @@ export default function AddCardPage() {
 
   return (
     <div>
-      <Page>
-        <TitleWrapper>
-          <Button icon={<PrevIcon />} text="" onClick={onPrevButtonClick} />
-          <Title>카드 추가</Title>
-        </TitleWrapper>
-        <CardWrapper>
+      <S.Page>
+        <S.TitleWrapper>
+          <Button icon={<S.PrevIcon />} text="" onClick={onPrevButtonClick} />
+          <S.Title>카드 추가</S.Title>
+        </S.TitleWrapper>
+        <S.CardWrapper>
           <Card
             companyKind={cardCompany}
             cardNumberSet={[
@@ -140,7 +140,7 @@ export default function AddCardPage() {
             year={year.value ? year.value : 'YY'}
             owner={owner.value ? owner.value : 'NAME'}
           />
-          <ChangeButtonWrapper>
+          <S.ChangeButtonWrapper>
             <Button
               color={CARD_COMPANY_DATA[cardCompany].COLOR}
               backgroundColor={CARD_COMPANY_DATA[cardCompany].BACKGROUND_COLOR}
@@ -150,14 +150,14 @@ export default function AddCardPage() {
               padding="8px"
               borderRadius="8px"
             />
-          </ChangeButtonWrapper>
-        </CardWrapper>
-        <InputWrapperParent
+          </S.ChangeButtonWrapper>
+        </S.CardWrapper>
+        <S.InputWrapperParent
           onSubmit={onCardInfoValidateAndGoRegisterPage}
           ref={cardForm}
           onKeyDown={(e) => onInputKeydown(e)}
         >
-          <InputWrapper>
+          <S.InputWrapper>
             <InputField id={INPUT_ID.CARD_NUMBER} text="카드 번호">
               <CardNumberInput
                 id={INPUT_ID.CARD_NUMBER}
@@ -182,9 +182,9 @@ export default function AddCardPage() {
               <OwnerInput id={INPUT_ID.OWNER} ownerInformation={owner} />
             </InputField>
             <InputField id={INPUT_ID.CVC} text="보안 코드(CVC/CVV)">
-              <CvcWrapper>
+              <S.CvcWrapper>
                 <CvcInput id={INPUT_ID.CVC} cvcInformation={cvc} />
-              </CvcWrapper>
+              </S.CvcWrapper>
             </InputField>
             <InputField id={INPUT_ID.PASSWORD} text="카드 비밀번호">
               <PasswordInput
@@ -193,17 +193,17 @@ export default function AddCardPage() {
                 secondPasswordInformation={secondPassword}
               />
             </InputField>
-          </InputWrapper>
-          <NextButtonWrapper>
+          </S.InputWrapper>
+          <S.NextButtonWrapper>
             <Button
               isDisable={
                 cardForm.current ? !cardForm.current.checkValidity() : true
               }
               text="다음"
             />
-          </NextButtonWrapper>
-        </InputWrapperParent>
-      </Page>
+          </S.NextButtonWrapper>
+        </S.InputWrapperParent>
+      </S.Page>
       <Modal
         isOpen={cardCompany === CARD_COMPANY.DEFAULT}
         ariaLabel="카드사 선택창"
@@ -213,81 +213,3 @@ export default function AddCardPage() {
     </div>
   );
 }
-
-function PrevIcon() {
-  return (
-    <Svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      strokeWidth={1.5}
-      stroke="currentColor"
-      className="w-6 h-6"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M15.75 19.5L8.25 12l7.5-7.5"
-      />
-    </Svg>
-  );
-}
-
-const Page = styled.div`
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  padding: 20px 28px;
-  min-height: 100vh;
-`;
-
-const TitleWrapper = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const Title = styled.h3`
-  font-size: 16px;
-  font-weight: 400;
-  color: ${({ theme }) => theme.colors.primaryText};
-  margin-left: 12px;
-`;
-
-const CardWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 25px;
-`;
-
-const ChangeButtonWrapper = styled.div`
-  margin-top: 20px;
-  opacity: 0.9;
-`;
-
-const InputWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-`;
-
-const InputWrapperParent = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 20px 0 25px 0;
-`;
-const CvcWrapper = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const NextButtonWrapper = styled.div`
-  margin-top: 25px;
-  align-self: end;
-`;
-
-const Svg = styled.svg`
-  width: 20px;
-  height: 20px;
-`;
