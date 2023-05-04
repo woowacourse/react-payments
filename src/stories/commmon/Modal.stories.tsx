@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { ModalProvider } from '../../contexts/ModalContext';
-import Modal from '../../components/common/Modal/Modal';
-import { useModalContext } from '../../contexts/ModalContext';
+import { Modal, ModalProvider, useModalContext } from '@ashleysyheo/react-modal';
+import Button from '../../components/common/Button/Button';
 
 const meta = {
   title: 'Payments/Common/Modal',
@@ -24,10 +23,15 @@ export const Default: Story = {
   },
 
   render: ({ children }) => {
-    const { openModal } = useModalContext();
+    const { isModalOpen, openModal } = useModalContext();
 
-    openModal();
-
-    return <Modal>{children}</Modal>;
+    return (
+      <>
+        <Button variant="default" onClick={openModal}>
+          Open
+        </Button>
+        {isModalOpen && <Modal>{children}</Modal>}
+      </>
+    );
   },
 };

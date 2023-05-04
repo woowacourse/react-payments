@@ -1,12 +1,11 @@
 import { memo, useEffect, useRef, useState } from 'react';
+import { Modal, useModalContext } from '@ashleysyheo/react-modal';
 import type { FocusEvent, MouseEvent } from 'react';
 import type { CardFormData, CardFormValidation, Issuer } from '../../../types';
 import Button from '../../common/Button/Button';
 import CardIssuerSelection from './CardIssuerSelection/CardIssuerSelection';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
-import Modal from '../../common/Modal/Modal';
-import { useModalContext } from '../../../contexts/ModalContext';
 import DownIcon from '../../../assets/down-icon.svg';
 import styles from './style.module.css';
 

@@ -2,9 +2,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { userEvent, within } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
+import { ModalProvider } from '@ashleysyheo/react-modal';
 import CardIssuer from '../../components/CardAddForm/CardIssuer/CardIssuer';
 import { CardListProvider } from '../../contexts/CardListContext';
-import { ModalProvider } from '../../contexts/ModalContext';
 import { useCardAddForm } from '../../hooks/cards/useCardAddForm';
 
 const meta = {

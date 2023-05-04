@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
+import { useModalContext } from '@ashleysyheo/react-modal';
 import CardAddForm from '../components/CardAddForm/CardAddForm';
 import CardItem from '../components/CardItem/CardItem';
 import Header from '../components/common/Header/Header';
-import { useModalContext } from '../contexts/ModalContext';
 import { useCardAddForm } from '../hooks/cards/useCardAddForm';
 
 const CardAddPage = () => {

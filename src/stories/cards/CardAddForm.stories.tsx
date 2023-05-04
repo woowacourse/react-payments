@@ -3,10 +3,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { userEvent, within } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
+import { ModalProvider } from '@ashleysyheo/react-modal';
 import CardAddForm from '../../components/CardAddForm/CardAddForm';
 import { CardListProvider } from '../../contexts/CardListContext';
 import { useCardAddForm } from '../../hooks/cards/useCardAddForm';
-import { ModalProvider } from '../../contexts/ModalContext';
 
 const meta = {
   title: 'Payments/Cards/CardAddForm',

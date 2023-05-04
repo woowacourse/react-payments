@@ -1,10 +1,10 @@
 import { Routes, Route } from 'react-router-dom';
+import { ModalProvider } from '@ashleysyheo/react-modal';
 import CardAddPage from './pages/CardAddPage';
 import CardListPage from './pages/CardListPage';
 import CardRegisteredPage from './pages/CardRegisteredPage';
 import NotFoundPage from './pages/NotFoundPage';
 import { CardListProvider } from './contexts/CardListContext';
-import { ModalProvider } from './contexts/ModalContext';
 import { PATH } from './constants';
 
 const App = () => {
