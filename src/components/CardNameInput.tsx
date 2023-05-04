@@ -8,7 +8,7 @@ interface RegisterCardNameInputProps extends HTMLAttributes<HTMLInputElement> {
 }
 
 const CardNameInput = (props: RegisterCardNameInputProps) => {
-  return (
+  return ( 
     <CardNameInputWrapper
       placeholder={props.placeholder}
       value={props.value}
@@ -30,6 +30,10 @@ const CardNameInputWrapper = styled.input`
   text-align: center;
   border: none;
   border-bottom: 1.5px solid #737373;
+
+  :focus {
+    outline: none;
+  }
 `;
 
 export default CardNameInput;
