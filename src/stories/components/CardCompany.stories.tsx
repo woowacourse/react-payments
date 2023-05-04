@@ -6,6 +6,7 @@ const meta = {
   component: CardCompanyComponent,
   title: "Components/CardCompany",
   tags: ["autodocs"],
+  
   argTypes: {
     cardCompanyName: {
       options: Object.keys(CARD_COMPANIES).map((company) => company),

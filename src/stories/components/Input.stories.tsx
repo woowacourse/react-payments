@@ -26,6 +26,7 @@ const meta = {
   component: InputComponent,
   title: "Components/Input",
   tags: ["autodocs"],
+  
   argTypes: {
     type: {
       options: ["number", "text"],
