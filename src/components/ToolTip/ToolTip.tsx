@@ -6,7 +6,11 @@ type ToolTipProps = {
 };
 
 const ToolTip = ({ children, message }: React.PropsWithChildren<ToolTipProps>) => {
-  const { isModalOpen: isToolTipOpen, openModal: openToolTip, closeModal: closeToolTip } = useModal(false);
+  const {
+    isModalOpen: isToolTipOpen,
+    openModal: openToolTip,
+    closeModal: closeToolTip,
+  } = useModal({ defaultVisible: false });
 
   return (
     <>

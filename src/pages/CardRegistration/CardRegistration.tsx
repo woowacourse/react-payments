@@ -15,7 +15,7 @@ type CardRegistrationProps = {
 };
 
 const CardRegistration = ({ setPageCardAlias, setPageCardList, setCurrentId }: CardRegistrationProps) => {
-  const { isModalOpen, openModal, closeModal } = useModal(true);
+  const { isModalOpen, openModal, closeModal } = useModal({ defaultVisible: true });
   const [cardType, setCardType] = useState<CardType>('우리카드');
 
   return (
