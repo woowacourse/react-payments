@@ -11,7 +11,7 @@ interface AddCardState {
   error: boolean;
   cardInfo: Card;
   setError: (value: boolean) => void;
-  setCardInfo: (value: Card) => void;
+  setCardInfo: React.Dispatch<React.SetStateAction<Card>>;
 }
 
 const initialValue = {

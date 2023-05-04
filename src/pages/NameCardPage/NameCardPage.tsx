@@ -7,7 +7,6 @@ import { PAGE } from "../../constant/PagePath";
 import { Button } from "../../components/common/Button";
 import { AddCardStateContext } from "../../context/AddCardStateProvider";
 import { Card } from "../../types";
-import { isValidCardName } from "../../validator/Validator";
 
 const NameCardPage = () => {
   const navigate = useNavigate();

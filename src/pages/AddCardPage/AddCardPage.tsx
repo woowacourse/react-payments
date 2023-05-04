@@ -8,8 +8,8 @@ import CardPasswordInput from "../../components/CardPasswordInput/CardPasswordIn
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Container } from "../../components/common";
-import { useContext } from "react";
-import { CardCompany } from "../../types";
+import { useCallback, useContext } from "react";
+import { CardCompany, CardExpirationDate, CardNumber, CardPassword } from "../../types";
 import { useNavigate } from "react-router-dom";
 import { isFulfilledObject, isFulfilledString } from "../../validator/Validator";
 import { PAGE } from "../../constant/PagePath";
@@ -50,6 +50,48 @@ const AddCardPage = () => {
     return addButtonAppearCondition;
   };
 
+  // const handleCardCompany = useCallback(
+  //   (value) => {
+  //     setCardInfo((prevCardInfo) => ({ ...prevCardInfo, cardCompany: value }));
+  //   },
+  //   [setCardInfo]
+  // );
+
+  const handleCardNumber = useCallback(
+    (value: CardNumber) => {
+      setCardInfo((prevCardInfo) => ({ ...prevCardInfo, cardNumber: value }));
+    },
+    [setCardInfo]
+  );
+
+  const handleExpirationDate = useCallback(
+    (value: CardExpirationDate) => {
+      setCardInfo((prevCardInfo) => ({ ...prevCardInfo, expirationDate: value }));
+    },
+    [setCardInfo]
+  );
+
+  const handleOwnerName = useCallback(
+    (value: string) => {
+      setCardInfo((prevCardInfo) => ({ ...prevCardInfo, ownerName: value }));
+    },
+    [setCardInfo]
+  );
+
+  const handleSecurityCode = useCallback(
+    (value: string) => {
+      setCardInfo((prevCardInfo) => ({ ...prevCardInfo, securityCode: value }));
+    },
+    [setCardInfo]
+  );
+
+  const handlePassword = useCallback(
+    (value: CardPassword) => {
+      setCardInfo((prevCardInfo) => ({ ...prevCardInfo, password: value }));
+    },
+    [setCardInfo]
+  );
+
   const onChangeFormHandler = (e: React.ChangeEvent<HTMLFormElement>) => {
     const { form, value, maxLength } = e.target;
     const formElements: HTMLElement[] = Array.from(form);
@@ -81,26 +123,16 @@ const AddCardPage = () => {
         <CardPreview card={{ cardCompany, cardNumber, expirationDate, ownerName }} />
       </CardPreviewButton>
       <Form onSubmit={onSubmitHandler} onChange={onChangeFormHandler}>
-        <CardNumberInput
-          cardNumber={cardNumber}
-          setCardNumber={(cardNumber) => setCardInfo({ ...cardInfo, cardNumber })}
-        />
+        <CardNumberInput cardNumber={cardNumber} setCardNumber={handleCardNumber} />
         <CardExpirationDateInput
           expirationDate={expirationDate}
           expirationError={error}
-          setExpirationDate={(expirationDate) => setCardInfo({ ...cardInfo, expirationDate })}
+          setExpirationDate={handleExpirationDate}
           setError={setError}
         />
-        <CardOwnerNameInput
-          ownerName={ownerName}
-          nameLength={ownerName.length}
-          setOwnerName={(ownerName) => setCardInfo({ ...cardInfo, ownerName })}
-        />
-        <CardSecurityCodeInput
-          securityCode={securityCode}
-          setSecurityCode={(securityCode) => setCardInfo({ ...cardInfo, securityCode })}
-        />
-        <CardPasswordInput password={password} setPassword={(password) => setCardInfo({ ...cardInfo, password })} />
+        <CardOwnerNameInput ownerName={ownerName} nameLength={ownerName.length} setOwnerName={handleOwnerName} />
+        <CardSecurityCodeInput securityCode={securityCode} setSecurityCode={handleSecurityCode} />
+        <CardPasswordInput password={password} setPassword={handlePassword} />
         <Button isVisible={isAddButtonVisibleConditionFulfilled()}>다음</Button>
       </Form>
     </Container>
