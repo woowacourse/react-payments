@@ -2,25 +2,15 @@ import "./App.css";
 import "./style/reset.css";
 import "./style/palette.css";
 
-import { useState } from "react";
-
 import CardInputPage from "./component/CardInputPage/CardInputPage";
 import CardListPage from "./component/CardListPage/CardListPage";
 import CardNickInputPage from "./component/CardNickInputPage/CardNickInputPage";
 
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import { CreditCard } from "./type";
+import { useCardList } from "./hook/cardListHook";
 
 function App() {
-  const [cardList, setCardList] = useState<CreditCard[]>([]);
-
-  const addNewCard = (card: CreditCard) => {
-    setCardList([...cardList, card]);
-  };
-
-  const setNickNewCard = (card: CreditCard) => {
-    setCardList([...cardList.slice(0, cardList.length - 1), card]);
-  };
+  const { cardList, addNewCard, setNickNewCard } = useCardList();
 
   return (
     <div className="App">
