@@ -20,7 +20,7 @@ const initialValue: CardFormData = {
 };
 
 const useCardAddForm = () => {
-  const { newCardId, cardListLength, addCard } = useCardListContext();
+  const { newCardId, addCard, generateDefaultCardName } = useCardListContext();
   const [cardInformation, setCardInformation] = useState(initialValue);
   const {
     inputValidation,
@@ -67,7 +67,7 @@ const useCardAddForm = () => {
     const newCard = {
       ...cardInformation,
       id: newCardId,
-      cardName: `카드 ${cardListLength + 1}`,
+      cardName: generateDefaultCardName(cardInformation.ownerName, cardInformation.issuer),
     };
 
     setTimeout(() => {
