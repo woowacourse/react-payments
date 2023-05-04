@@ -23,7 +23,7 @@ export function AddCardForm() {
   const { cardNumber } = useContext(NumberContext);
   const { month, year } = useContext(DateContext);
   const { userName } = useContext(NameContext);
-  const { selectedItem } = useContext(BankContext);
+  const { selectedId } = useContext(BankContext);
 
   function checkAllInputs(e: React.FormEvent<HTMLFormElement>) {
     const inputElements = Array.from(
@@ -52,10 +52,10 @@ export function AddCardForm() {
       year: year,
       userName: userName,
       cardColor: {
-        bgColor: bank[selectedItem]?.color,
-        fontColor: bank[selectedItem]?.font,
+        bgColor: bank[selectedId]?.color,
+        fontColor: bank[selectedId]?.font,
       },
-      bank: bank[selectedItem]?.logoName,
+      bank: bank[selectedId]?.logoName,
     };
   }
 

@@ -5,16 +5,16 @@ import { bank } from "../../core/bank";
 import { BankItem } from "./bankItem";
 
 interface BankMenuprops {
-  selectItem: (e: React.MouseEvent<HTMLUListElement>) => void;
+  selectId: (e: React.MouseEvent<HTMLUListElement>) => void;
 }
 
 export function BankMenu(props: BankMenuprops) {
-  const { selectItem } = props;
+  const { selectId } = props;
   const { closeLocalModal } = useContext(ModalContext);
 
   function clickHandle(e: React.MouseEvent<HTMLUListElement>) {
     closeLocalModal();
-    selectItem(e);
+    selectId(e);
   }
 
   return (

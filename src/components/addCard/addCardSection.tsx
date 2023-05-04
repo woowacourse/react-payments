@@ -18,7 +18,7 @@ export function AddCardSection() {
   const { cardNumber } = useContext(NumberContext);
   const { month, year } = useContext(DateContext);
   const { userName } = useContext(NameContext);
-  const { selectedItem, selectItem } = useContext(BankContext);
+  const { selectedId, selectId } = useContext(BankContext);
 
   return (
     <>
@@ -28,17 +28,17 @@ export function AddCardSection() {
         year={year}
         userName={userName}
         cardColor={{
-          bgColor: bank[selectedItem]?.color,
-          fontColor: bank[selectedItem]?.font,
+          bgColor: bank[selectedId]?.color,
+          fontColor: bank[selectedId]?.font,
         }}
-        bank={bank[selectedItem]?.logoName}
+        bank={bank[selectedId]?.logoName}
       />
       <AddCardForm />
       <ModalBox defaultOpen>
         <ModalTrigger />
         <ModalBackDrop />
         <ModalContent>
-          <BankMenu selectItem={selectItem} />
+          <BankMenu selectId={selectId} />
         </ModalContent>
       </ModalBox>
     </>
