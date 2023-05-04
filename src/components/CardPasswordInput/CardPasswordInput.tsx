@@ -13,16 +13,14 @@ const CardPasswordInput = () => {
   const [error, setError] = useState('');
 
   const updateDigit = (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
-    if (NUMBER_REGEX.test(e.target.value)) {
-      setError('0부터 9까지 숫자만 입력이 가능합니다.');
-      index === 1 ? setFirstDigit('') : setSecondDigit('');
-    } else {
-      const currentDigit = e.target.value;
-      index === 1 ? setFirstDigit(currentDigit) : setSecondDigit(currentDigit);
-      setError('');
-      if (index === 1 && currentDigit.length === 1) {
-        secondDigitRef.current?.focus();
-      }
+    const currentDigit = e.target.value;
+    const isNotNumber = NUMBER_REGEX.test(currentDigit);
+
+    setError(isNotNumber ? '0부터 9까지 숫자만 입력이 가능합니다.' : '');
+    index === 1 ? setFirstDigit(isNotNumber ? '' : currentDigit) : setSecondDigit(isNotNumber ? '' : currentDigit);
+
+    if (index === 1 && currentDigit.length === 1) {
+      secondDigitRef.current?.focus();
     }
   };
 
