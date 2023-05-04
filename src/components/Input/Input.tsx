@@ -1,7 +1,7 @@
-import styled from 'styled-components';
+import styled, { CSSProperties } from 'styled-components';
 
 type InputProps = {
-  textAlign: 'left' | 'center' | 'right';
+  textAlign: CSSProperties['textAlign'];
 };
 
 export const Input = styled.input<InputProps>`
@@ -13,7 +13,7 @@ export const Input = styled.input<InputProps>`
 `;
 
 type InputBoxProps = {
-  marginTop?: string;
+  marginTop?: CSSProperties['marginTop'];
 };
 
 export const InputBox = styled.div<InputBoxProps>`
