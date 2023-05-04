@@ -37,7 +37,7 @@ const CardRegisterForm = () => {
       <div>
         <Header navigator title="카드 추가" />
 
-        <CardPreview cardInfo={cardInfo} handleModal={handleModal} />
+        <CardPreview cardInfo={cardInfo} onClick={handleModal} />
 
         <AddCardForm onSubmit={handleForm}>
           <CardNumberInput />

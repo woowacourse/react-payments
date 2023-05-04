@@ -4,16 +4,13 @@ import { Card } from 'types/Card';
 
 interface CardPreviewProps {
   cardInfo: Card;
-  handleModal?: () => void;
+  onClick?: () => void;
 }
 
-const CardPreview = ({ cardInfo, handleModal }: CardPreviewProps) => {
+const CardPreview = ({ cardInfo, onClick }: CardPreviewProps) => {
   return (
     <>
-      <StyledCard
-        onClick={handleModal}
-        $background={cardInfo.cardCompany.color}
-      >
+      <StyledCard onClick={onClick} $background={cardInfo.cardCompany.color}>
         <BankName $background={cardInfo.cardCompany.color}>
           {cardInfo.cardCompany.company}
         </BankName>
