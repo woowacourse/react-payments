@@ -3,9 +3,6 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import AddCardPage from '../pages/AddCard';
 import CardListPage from '../pages/CardList';
 import CardAliasPage from '../pages/CardAlias';
-import { CurrentCardProvider } from '../context/CurrentCardProvider';
-import { IsAccessAliasPageProvider } from '../context/IsAccessAliasPageProvider';
-import PrivateRoute from './PrivateRoute';
 
 const router = createBrowserRouter([
   {
@@ -14,25 +11,11 @@ const router = createBrowserRouter([
   },
   {
     path: '/add',
-    element: (
-      <IsAccessAliasPageProvider>
-        <CurrentCardProvider>
-          <AddCardPage />
-        </CurrentCardProvider>
-      </IsAccessAliasPageProvider>
-    ),
+    element: <AddCardPage />,
   },
   {
     path: '/alias',
-    element: (
-      <IsAccessAliasPageProvider>
-        <CurrentCardProvider>
-          <PrivateRoute>
-            <CardAliasPage />
-          </PrivateRoute>
-        </CurrentCardProvider>
-      </IsAccessAliasPageProvider>
-    ),
+    element: <CardAliasPage />,
   },
 ]);
 

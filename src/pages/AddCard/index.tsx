@@ -18,8 +18,6 @@ import {
 } from './domain/validation';
 import './index.css';
 import useValidExpireDate from '../../hooks/useValidExpireDate';
-import { CurrentCardProvider } from '../../context/CurrentCardProvider';
-import { IsAccessAliasPageProvider } from '../../context/IsAccessAliasPageProvider';
 
 const AddCardPage = () => {
   const { isValidExpiredMonthFormat, isValidExpiredYearFormat } = useValidExpireDate();

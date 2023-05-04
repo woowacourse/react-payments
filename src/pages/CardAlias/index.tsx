@@ -2,23 +2,28 @@ import { useNavigate } from 'react-router-dom';
 
 import Card from '../../components/Card';
 import useInput from '../../hooks/useInput';
-import { useCurrentCardContext } from '../../context/CurrentCardProvider';
-import { useIsAccessAliasPageContext } from '../../context/IsAccessAliasPageProvider';
 import { isValidCardAlias } from '../AddCard/domain/validation';
+import { fetchLocalStorage, registerCardAlias } from '../../utils/applicationStorage';
 import './index.css';
-import { registerCardAlias } from '../../utils/applicationStorage';
+import { useEffect } from 'react';
 
 const CardAliasPage = () => {
   const navigate = useNavigate();
-  const { currentCard } = useCurrentCardContext();
   const { value, onChange } = useInput(isValidCardAlias);
-  const { setIsAccessAliasPage } = useIsAccessAliasPageContext();
+  const cardList = fetchLocalStorage('cardList', '[]');
+  const currentCard = cardList[cardList.length - 1];
 
+  useEffect(() => {
+    if (cardList.length === 0 || currentCard.alias) {
+      console.log(currentCard);
+      navigate('/');
+    }
+  }, []);
   const onConfirmButtonClick = () => {
     registerCardAlias(value, currentCard.cardNumber);
-    setIsAccessAliasPage(false);
     navigate('/');
   };
+
   return (
     <div className="card-alias-page">
       <h2>카드 등록이 완료되었습니다.</h2>
