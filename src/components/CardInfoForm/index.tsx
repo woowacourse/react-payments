@@ -25,8 +25,6 @@ const CardInfoForm = () => {
   const { validateCompany, validateExpiredDate } = useCardFormValidation();
   const isFilled = useFieldFilled(inputRefs);
 
-  console.log(inputRefs[9].current?.value.length);
-
   const handleFormChange: ChangeEventHandler<HTMLFormElement> = (event) => {
     const { target } = event;
 

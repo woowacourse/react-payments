@@ -16,19 +16,20 @@
 .cardNumber {
   display: flex;
   column-gap: 10px;
-  height: 14px;
-  margin: 8px 0;
+  height: 20px;
+  margin: 4px 0;
+  line-height: 20px;
   font-size: 13px;
 }
 
 .number {
-  width: 36px;
+  width: 40px;
   letter-spacing: 0.2em;
 }
 
 .password {
-  width: 42px;
-  letter-spacing: -0.2em;
+  width: 40px;
+  letter-spacing: -0.3em;
 }
 
 .detailContainer {

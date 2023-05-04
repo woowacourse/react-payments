@@ -25,19 +25,19 @@ const CardItem = ({ cardData }: Props) => {
         <span className={styles.number}>{number.first}</span>
         <span className={styles.number}>{number.second}</span>
         <span className={styles.password}>
-          {'third' in number ? '﹒'.repeat(number.third.length) : '﹒﹒﹒﹒'}
+          {'﹡'.repeat('third' in number ? number.third.length : 4)}
         </span>
         <span className={styles.password}>
-          {'fourth' in number ? '﹒'.repeat(number.fourth.length) : '﹒﹒﹒﹒'}
+          {'﹡'.repeat('fourth' in number ? number.third.length : 4)}
         </span>
       </div>
       <div className={styles.detailContainer}>
-        <p>{owner}</p>
-        <p>
+        <span>{owner}</span>
+        <span>
           {expiredDate.month}
           {expiredDate.month.length === 2 && <span>/</span>}
           {expiredDate.year}
-        </p>
+        </span>
       </div>
     </div>
   );

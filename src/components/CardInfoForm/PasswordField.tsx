@@ -48,8 +48,8 @@ const PasswordField = ({ inputRefs }: CardFormFieldProps) => {
         align="center"
         data-property="second"
       />
-      <p>﹒</p>
-      <p>﹒</p>
+      <p>﹡</p>
+      <p>﹡</p>
     </TextField>
   );
 };
