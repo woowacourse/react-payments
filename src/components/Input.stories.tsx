@@ -5,6 +5,7 @@ import { css } from "styled-components";
 const meta = {
   component: InputComponent,
   title: "Components/Input",
+  tags: ["autodocs"],
 } satisfies Meta<typeof InputComponent>;
 
 export default meta;
@@ -31,11 +32,9 @@ const ExtraSmall = css`
   border-radius: 8px;
 `;
 
-export const Input: Story = {
+export const DefaultInput: Story = {
   args: {
-    type: "number",
-    inputMode: "numeric",
-    placeholder: "0000",
+    type: "text",
     inputStyle: Default,
   },
 
@@ -45,6 +44,10 @@ export const Input: Story = {
       control: {
         type: "radio",
       },
+
+      description:
+        "number: 숫자만 입력할 수 있는 input<br> text: 영문/한글만 입력할 수 있는 input",
+      onClick: { action: "clicked" },
     },
 
     inputMode: {
@@ -69,10 +72,45 @@ export const Input: Story = {
     },
 
     inputStyle: {
-      options: [Large, Small, ExtraSmall],
+      options: [Default, Large, Small, ExtraSmall],
       control: {
         type: "radio",
       },
     },
+  },
+};
+
+export const LargeInput: Story = {
+  args: {
+    type: "text",
+    placeholder: "카드에 표시된 이름과 동일하게 입력하세요.",
+    inputStyle: Large,
+  },
+};
+
+export const SmallInput: Story = {
+  args: {
+    type: "number",
+    inputMode: "numeric",
+    placeholder: "MM",
+    inputStyle: Small,
+  },
+
+  argTypes: {
+    placeholder: {
+      options: ["MM", "YY"],
+      control: {
+        type: "radio",
+      },
+    },
+  },
+};
+
+export const ExtraSmallInput: Story = {
+  args: {
+    type: "number",
+    inputMode: "numeric",
+    placeholder: "0",
+    inputStyle: ExtraSmall,
   },
 };
