@@ -16,19 +16,17 @@ const CardRegisteredPage = () => {
   }
 
   return (
-    <main>
-      <div className="register-content">
-        <h2 className="align-center mg-b-24">카드 등록이 완료되었습니다</h2>
-        <CardItem
-          className="center-hoz-item"
-          issuer={card.issuer}
-          cardNumber={card.cardNumber}
-          expirationDate={card.expirationDate}
-          ownerName={card.ownerName}
-        />
-        <CardNameChangeForm id={card.id} defaultCardName={card.cardName} />
-      </div>
-    </main>
+    <div className="center-vert-item">
+      <h2 className="align-center mg-b-24">카드 등록이 완료되었습니다</h2>
+      <CardItem
+        className="center-hoz-item"
+        issuer={card.issuer}
+        cardNumber={card.cardNumber}
+        expirationDate={card.expirationDate}
+        ownerName={card.ownerName}
+      />
+      <CardNameChangeForm id={card.id} defaultCardName={card.cardName} />
+    </div>
   );
 };
 
