@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import PasswordInput from "../FormInputs/PasswordInput";
+import PasswordInput from "pages/RegisterPage/FormInputs/PasswordInput";
 
 const meta = {
   component: PasswordInput,

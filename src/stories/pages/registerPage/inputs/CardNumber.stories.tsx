@@ -1,8 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
-import CardNumberInput from "../FormInputs/CardNumberInput";
+import CardNumberInput from "pages/RegisterPage/FormInputs/CardNumberInput";
 import CardInfoProvider from "components/provider/CardInfoProvider";
 import ModalStateProvider from "components/provider/ModalStateProvider";
-
 
 const meta = {
   component: CardNumberInput,

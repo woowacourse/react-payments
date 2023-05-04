@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import TextLimitComponent from "./TextLimit";
+import TextLimitComponent from "../../components/TextLimit";
 import { css } from "styled-components";
 
 const meta = {

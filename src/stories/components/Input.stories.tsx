@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import InputComponent from "./Input";
+import InputComponent from "../../components/Input";
 import { css } from "styled-components";
 
 const meta = {

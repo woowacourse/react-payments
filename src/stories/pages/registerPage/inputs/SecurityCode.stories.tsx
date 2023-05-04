@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import SecurityCodeInput from "../FormInputs/SecurityCodeInput";
+import SecurityCodeInput from "pages/RegisterPage/FormInputs/SecurityCodeInput";
 
 const meta = {
   component: SecurityCodeInput,

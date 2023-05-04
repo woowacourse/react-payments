@@ -1,10 +1,11 @@
 import { Meta, StoryObj } from "@storybook/react";
-import CardCompanyComponent from "./CardCompany";
+import CardCompanyComponent from "../../components/CardCompany";
 import { CARD_COMPANIES } from "constants/cardCompanies";
 
 const meta = {
   component: CardCompanyComponent,
   title: "Components/CardCompany",
+  tags: ["autodocs"],
 } satisfies Meta<typeof CardCompanyComponent>;
 
 export default meta;

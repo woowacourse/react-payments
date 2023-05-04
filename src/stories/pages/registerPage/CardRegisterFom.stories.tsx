@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import CardRegisterFormComponent from "./CardRegisterForm";
+import CardRegisterFormComponent from "../../../pages/RegisterPage/CardRegisterForm";
 import { BrowserRouter } from "react-router-dom";
 import CardInfoProvider from "components/provider/CardInfoProvider";
 import ModalStateProvider from "components/provider/ModalStateProvider";

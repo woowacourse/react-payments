@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import GotLostPage from "./GotLost";
+import GotLostPage from "../../pages/GotLost";
 import { BrowserRouter } from "react-router-dom";
 
 const meta = {

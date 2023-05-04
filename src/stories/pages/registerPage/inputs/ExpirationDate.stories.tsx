@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import ExpirationDateInput from "../FormInputs/ExpirationDateInput";
+import ExpirationDateInput from "pages/RegisterPage/FormInputs/ExpirationDateInput";
 
 const meta = {
   component: ExpirationDateInput,

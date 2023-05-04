@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import HeaderComponent from "./Header";
+import HeaderComponent from "../../components/Header";
 import { BrowserRouter } from "react-router-dom";
 
 const meta = {

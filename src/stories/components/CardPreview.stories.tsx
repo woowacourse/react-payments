@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import CardPreviewComponent from "./CardPreview";
+import CardPreviewComponent from "../../components/CardPreview";
 
 const meta = {
   component: CardPreviewComponent,
