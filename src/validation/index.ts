@@ -91,16 +91,3 @@ const validation = {
     return Boolean(cardCompany.length);
   },
 };
-
-export const validateJson = (data: string) => {
-  try {
-    return JSON.parse(data);
-  } catch (error) {
-    if (error instanceof Error) {
-      console.log(error.message);
-
-      return [];
-    }
-    return [];
-  }
-};
