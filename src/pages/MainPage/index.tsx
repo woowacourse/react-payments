@@ -17,12 +17,14 @@ const MainPage = ({ cardList }: Props) => {
       <Header navigator={false} title="보유카드" />
 
       <S.Main>
-        {cardList.map((card, index) => (
-          <div key={index}>
-            <CardPreview cardInfo={card} />
-            <S.Nickname>{card.nickname}</S.Nickname>
-          </div>
-        ))}
+        {cardList
+          .map((card, index) => (
+            <div key={index}>
+              <CardPreview cardInfo={card} />
+              <S.Nickname>{card.nickname}</S.Nickname>
+            </div>
+          ))
+          .reverse()}
 
         {!cardList.length && (
           <S.Message>새로운 카드를 등록해 주세요.</S.Message>
