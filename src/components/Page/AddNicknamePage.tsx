@@ -6,10 +6,11 @@ import Input from "../common/Input";
 import ConfirmButton from "../Button/ConfirmButton";
 import { DownRightButtonWrapper } from "./AddCardPage.styles";
 import { CardInfo } from "../../types";
+import { SetStateAction } from "react";
 
 interface addNicknamePageProps {
   cardList: CardInfo[];
-  setCardList: (data: CardInfo[]) => void;
+  setCardList: (callback: SetStateAction<CardInfo[]>) => void;
   setPageIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
@@ -37,7 +38,6 @@ const InputWrapper = styled.div`
 `;
 
 export default function AddNicknamePage({
-  cardList,
   setCardList,
   setPageIndex,
 }: addNicknamePageProps) {
@@ -67,7 +67,7 @@ export default function AddNicknamePage({
       nickName: nickName.value,
     };
 
-    setCardList(cardList ? [...cardList, newCard] : [newCard]);
+    setCardList((prev) => [...prev, newCard]);
     setPageIndex(0);
   };
 

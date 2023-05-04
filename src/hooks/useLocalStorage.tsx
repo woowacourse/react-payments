@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 
-export const useLocalStorage = <T,>(
-  initialValue: T,
-  key: string
-): [T, (data: T) => void] => {
+type setStateParam<T> = SetStateAction<T> | T;
+
+export const useLocalStorage = <T,>(initialValue: T, key: string) => {
   const [value, setValue] = useState(initialValue);
 
   useEffect(() => {
@@ -16,10 +15,13 @@ export const useLocalStorage = <T,>(
     }
   }, []);
 
-  const setState = (data: T) => {
-    setValue(data);
-    localStorage.setItem(key, JSON.stringify(data));
+  useEffect(() => {
+    localStorage.setItem(key, JSON.stringify(value));
+  }, [value, key]);
+
+  const setState = (param: setStateParam<T>) => {
+    setValue(param);
   };
 
-  return [value, setState];
+  return [value, setState] as const;
 };
