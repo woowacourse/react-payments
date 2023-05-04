@@ -6,7 +6,7 @@ import { useCurrentCardContext } from '../../context/CurrentCardProvider';
 import { useIsAccessAliasPageContext } from '../../context/IsAccessAliasPageProvider';
 import { isValidCardAlias } from '../AddCard/domain/validation';
 import './index.css';
-import registerCardAlias from './registerCardAlias';
+import { registerCardAlias } from '../../utils/applicationStorage';
 
 const CardAliasPage = () => {
   const navigate = useNavigate();
