@@ -6,8 +6,8 @@ const customViewports = {
   Default: {
     name: 'Default',
     styles: {
-      width: '450px',
-      height: '754px',
+      width: '400px',
+      height: '700px',
     },
   },
 };
@@ -15,25 +15,26 @@ const customViewports = {
 const preview: Preview = {
   parameters: {
     actions: { argTypesRegex: '^on[A-Z].*' },
+    layout: 'centered',
     controls: {
       matchers: {
         color: /(background|color)$/i,
         date: /Date$/,
       },
     },
-    decorators: [
-      (Story) => (
-        <>
-          <GlobalStyle />
-          <Story />
-        </>
-      ),
-    ],
     viewport: {
       viewports: { ...customViewports },
       defaultViewport: 'Default',
     },
   },
+  decorators: [
+    (Story) => (
+      <>
+        <GlobalStyle />
+        <Story />
+      </>
+    ),
+  ],
 };
 
 export default preview;
