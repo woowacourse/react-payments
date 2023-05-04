@@ -6,14 +6,16 @@ export function useFormValidation(
   ref: React.RefObject<HTMLFormElement>,
   fields: UseInputProps["value"][]
 ) {
-  const [isFormFilled, setIsFormFilled] = useState(true);
+  const [isFormNotFilled, setIsFormFilled] = useState(true);
   const { title } = useCardState();
-  const isTitleFilled = title === "";
+  const isTitleEmpty = title === "";
+
   useEffect(() => {
     if (!ref.current) return;
-    setIsFormFilled(!ref.current.checkValidity() || isTitleFilled);
+    setIsFormFilled(!ref.current.checkValidity() || isTitleEmpty);
   }, [ref, fields]);
+
   return {
-    isFormFilled,
+    isFormNotFilled,
   };
 }

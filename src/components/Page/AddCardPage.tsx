@@ -44,7 +44,7 @@ export default function AddCardPage({ onSubmit, onClick }: AddCardPageProps) {
     firstPassword,
     secondPassword,
     formRef,
-    isFormFilled,
+    isFormNotFilled,
   } = useCardForm();
 
   const [isOpenToolTip, setIsOpenToolTip] = useState(false);
@@ -116,7 +116,7 @@ export default function AddCardPage({ onSubmit, onClick }: AddCardPageProps) {
             </InputField>
           </InputWrapper>
           <DownRightButtonWrapper>
-            <NextButton disabled={isFormFilled} />
+            <NextButton disabled={isFormNotFilled} />
           </DownRightButtonWrapper>
         </InputWrapperParent>
         <MemoizedCardTypeDrawer />
