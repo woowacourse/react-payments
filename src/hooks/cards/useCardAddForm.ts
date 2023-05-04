@@ -29,6 +29,7 @@ const useCardAddForm = () => {
     updateInputError,
     triggerAllInputErrors,
   } = useCardInputValidation();
+  const [isRegistering, setIsRegistering] = useState(false);
   const isFormComplete = useFormComplete(inputValidation);
 
   const navigate = useNavigate();
@@ -61,19 +62,25 @@ const useCardAddForm = () => {
       return;
     }
 
+    setIsRegistering(true);
+
     const newCard = {
       ...cardInformation,
       id: newCardId,
       cardName: `카드 ${cardListLength + 1}`,
     };
 
-    addCard(newCard);
-    navigate(`${PATH.REGISTER}/?id=${newCard.id}`);
+    setTimeout(() => {
+      setIsRegistering(false);
+      addCard(newCard);
+      navigate(`${PATH.REGISTER}/?id=${newCard.id}`);
+    }, 3000);
   };
 
   return {
     cardInformation,
     inputError,
+    isRegistering,
     updateInputValue,
     updateInputError,
     handleSubmit,
