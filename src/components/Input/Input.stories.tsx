@@ -22,7 +22,7 @@ export const Default: Story = {
 export const WithBox: Story = {
   args: {
     width: '400px',
-    textAign: 'center',
+    textAlign: 'center',
     type: 'text',
     maxLength: 20,
   },

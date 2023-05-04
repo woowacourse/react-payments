@@ -5,7 +5,7 @@ const useOnChangeHandler = ({
   setState: React.Dispatch<React.SetStateAction<any>>;
   count: number;
 }) => {
-  const genenrateOnChange = (index: number) => {
+  const generateOnChange = (index: number) => {
     return (e: React.ChangeEvent<HTMLInputElement>) => {
       setState((prev: unknown[]) => {
         const newState = [...prev];
@@ -15,7 +15,7 @@ const useOnChangeHandler = ({
     };
   };
 
-  return Array.from({ length: count }, (_, i) => genenrateOnChange(i));
+  return Array.from({ length: count }, (_, i) => generateOnChange(i));
 };
 
 export default useOnChangeHandler;
