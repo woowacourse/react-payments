@@ -1,3 +1,5 @@
+import { CardCo } from "./type";
+
 export const CARD_ERROR_MESSAGE = {
   INPUT_CARD_NUMBER: "각 숫자 4자리씩 입력해주세요",
   INPUT_CARD_EXPIRATION_DATE:
@@ -23,7 +25,7 @@ export const REGULAR_EXPRESSION = {
   CAPITAL_LETTER_OR_SPACE: /^[A-Z\s]+$/,
 };
 
-export const CARD_CO_NAME = {
+export const CARD_CO_NAME: Record<CardCo, string> = {
   woori: "우리카드",
   lotte: "롯데카드",
   hana: "하나카드",

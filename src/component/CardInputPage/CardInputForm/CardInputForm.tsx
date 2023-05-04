@@ -10,13 +10,13 @@ import InputBoxPassword from "../InputBoxPassword/InputBoxPassword";
 import InputBoxSecurityCode from "../InputBoxSecurityCode/InputBoxSecurityCode";
 import CardCoModal from "../../common/CardCoModal";
 
-import { CreditCard } from "../../../type";
-import { cardCoList } from "../../../cardData";
+import { CardCo, CreditCard } from "../../../type";
 
 import "./cardInputForm.css";
 import CardCoButton from "../../common/CardCoButton";
 import { useModalState } from "../../../hook/modalHook";
 import { useCardInfoAndInputState } from "../../../hook/cardInfoAndInputHook";
+import { CARD_CO_NAME } from "../../../CONSTANT";
 
 interface CardInputFormProps {
   addNewCard: (card: CreditCard) => void;
@@ -43,6 +43,8 @@ export default function CardInputForm(props: CardInputFormProps) {
       navigate("/CardNickInputPage");
     }
   };
+
+  const cardCoList = Object.keys(CARD_CO_NAME) as CardCo[];
 
   return (
     <form onSubmit={(e) => submitCardInfo(e)} className="form">
