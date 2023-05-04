@@ -5,6 +5,7 @@ import { useInputHandler } from 'hooks/useInputHandler';
 import { StyledInput } from 'components/Input';
 import { StyledInputBox } from 'components/InputBox';
 import { StyledCaption } from 'components/Caption';
+import { showCodeCaption } from 'utils/CaptionStyles';
 
 const SecurityCodeInput = () => {
   const [code, setCode] = useState({
@@ -103,9 +104,7 @@ const QuestionMark = styled.p`
 `;
 
 const SecurityCodeCaption = styled(StyledCaption)<{ codeLength: number }>`
-  visibility: ${({ codeLength }) =>
-    (codeLength === LENGTH.SECURITY_CODE || codeLength === 0) &&
-    `${HIDDEN_ELEMENT_STYLE}`};
+  visibility: ${({ codeLength }) => showCodeCaption(codeLength)};
 `;
 
 export default SecurityCodeInput;

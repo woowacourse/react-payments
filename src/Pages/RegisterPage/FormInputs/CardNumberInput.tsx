@@ -5,10 +5,11 @@ import { useInputHandler } from 'hooks/useInputHandler';
 import { StyledInput } from 'components/Input';
 import InputBox from 'components/InputBox';
 import { AddCardContext } from 'context/CardContext';
-import Hyphen, { StyledHyphen } from 'components/Hypen';
+import { StyledHyphen } from 'components/Hypen';
 import { CardNumber } from 'types/Card';
-import { showNumberHyphen } from 'utils/hyphenStyle';
+import { showNumberHyphen } from 'utils/hyphenStyles';
 import { StyledCaption } from 'components/Caption';
+import { showNumberCaption } from 'utils/CaptionStyles';
 
 const CardNumberInput = () => {
   const { cardNumber, setCardNumber } = useContext(AddCardContext);
@@ -94,10 +95,7 @@ const NumberHyphen = styled(StyledHyphen)<{
 `;
 
 const NumberCaption = styled(StyledCaption)<{ cardNumbers: string[] }>`
-  visibility: ${({ cardNumbers }) =>
-    (cardNumbers.join('').length === LENGTH.EACH_CARD_NUMBER * 4 ||
-      cardNumbers.join('').length === 0) &&
-    `${HIDDEN_ELEMENT_STYLE}`};
+  visibility: ${({ cardNumbers }) => showNumberCaption(cardNumbers)};
 `;
 
 export default CardNumberInput;

@@ -7,8 +7,9 @@ import { StyledInput } from 'components/Input';
 import { AddCardContext } from 'context/CardContext';
 import Hyphen, { StyledHyphen } from 'components/Hypen';
 import { Expiration } from 'types/Card';
-import { showDateHyphen } from 'utils/hyphenStyle';
+import { showDateHyphen } from 'utils/hyphenStyles';
 import { StyledCaption } from 'components/Caption';
+import { showDateCaption } from 'utils/CaptionStyles';
 
 const ExpirationDateInput = () => {
   const { date, setDate } = useContext(AddCardContext);
@@ -74,10 +75,7 @@ const DateHyphen = styled(StyledHyphen)<{ date?: Expiration }>`
 `;
 
 const DateCaption = styled(StyledCaption)<{ date: string[] }>`
-  visibility: ${({ date }) =>
-    (date.join('').length === LENGTH.EXPIRATION * 2 ||
-      date.join('').length === 0) &&
-    `${HIDDEN_ELEMENT_STYLE}`};
+  visibility: ${({ date }) => showDateCaption(date)};
 `;
 
 export default ExpirationDateInput;

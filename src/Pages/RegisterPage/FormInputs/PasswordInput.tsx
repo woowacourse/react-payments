@@ -5,6 +5,7 @@ import { useInputHandler } from 'hooks/useInputHandler';
 import { StyledInput } from 'components/Input';
 import InputBox from 'components/InputBox';
 import { StyledCaption } from 'components/Caption';
+import { showPasswordCaption } from 'utils/CaptionStyles';
 
 const PasswordInput = () => {
   const [password, setPassword] = useState({
@@ -72,10 +73,7 @@ const HiddenPassword = styled(StyledInput)`
 `;
 
 const PasswordCaption = styled(StyledCaption)<{ password: string[] }>`
-  visibility: ${({ password }) =>
-    (password.join('').length === LENGTH.EACH_PASSWORD * 2 ||
-      password.join('').length === 0) &&
-    `${HIDDEN_ELEMENT_STYLE}`};
+  visibility: ${({ password }) => showPasswordCaption(password)};
 `;
 
 export default PasswordInput;
