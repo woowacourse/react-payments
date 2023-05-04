@@ -211,6 +211,13 @@ const FormCardAdd = ({
               handleInputData={handleInputData}
             />
           </div>
+          {fulfilledData[0] && fulfilledData[1] && fulfilledData[2] && fulfilledData[3] ? (
+            ''
+          ) : (
+            <span className="error-message">
+              카드번호는 16자리 이내의 숫자로 이루어져야 합니다.
+            </span>
+          )}
         </div>
         <div className="expired-box">
           <span className="form-label">만료일</span>
@@ -234,7 +241,11 @@ const FormCardAdd = ({
             }}
             handleInputData={handleInputData}
           />
-          {inputError ? <span className="expired-error">만료일 입력값이 잘못되었습니다!</span> : ''}
+          {inputError ? (
+            <span className="error-message">만료일 입력은 현재 일자 이후여야만 합니다!</span>
+          ) : (
+            ''
+          )}
         </div>
         <div>
           <div className="card-owner-container-header">
@@ -282,6 +293,11 @@ const FormCardAdd = ({
             />
             <Tooltip title={CVC_TOOLTIP_TITLE} detail={CVC_TOOLTIP_DETAIL} />
           </div>
+          {fulfilledData[6] ? (
+            ''
+          ) : (
+            <span className="error-message">CVC 번호는 3자리 숫자로 입력 해 주세요!</span>
+          )}
         </div>
         <div className="card-password-container">
           <span className="form-label">카드 비밀번호</span>
@@ -330,6 +346,11 @@ const FormCardAdd = ({
             <span className="passwordDot">ㆍ</span>
             <span className="passwordDot">ㆍ</span>
           </div>
+          {fulfilledData[7] || fulfilledData[8] ? (
+            ''
+          ) : (
+            <span className="error-message">카드 비밀번호는 각 1자리 숫자를 입력해 주세요!</span>
+          )}
         </div>
         <div className="add-card-submit">
           {readyToPending && !inputError ? <button type="submit">다음</button> : ''}

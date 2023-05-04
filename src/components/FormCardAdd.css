@@ -84,7 +84,7 @@
 }
 
 .card-password-container {
-  width: 162px;
+  width: 100%;
 }
 
 .card-security-code-box img {
@@ -120,6 +120,6 @@
   font-size: 50px;
 }
 
-.expired-error {
-  color: red;
+.error-message {
+  color: blue;
 }
