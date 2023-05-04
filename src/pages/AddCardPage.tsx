@@ -57,15 +57,18 @@ const AddCardPage = () => {
       <div className="add-card-page">
         <Header headerTitle="뒤로가기" clickHandler={onBackButtonClick} />
         <section className="add-card-page-body">
-          <Card
-            cardType={cardType}
-            cardNumber={cardNumber}
-            cardOwner={cardOwner.value}
-            expired={cardExpire.value}
-            securityCode={securityCode.value}
-            cardFlipped={cardFlip}
-            openCardSelectModal={setModalOpen}
-          />
+          <div className="card-image-box">
+            <Card
+              cardType={cardType}
+              cardNumber={cardNumber}
+              cardOwner={cardOwner.value}
+              expired={cardExpire.value}
+              securityCode={securityCode.value}
+              cardFlipped={cardFlip}
+              openCardSelectModal={setModalOpen}
+            />
+            <span>이미지를 클릭하여 카드사를 변경할 수 있습니다.</span>
+          </div>
           <FormCardAdd
             cardType={cardType}
             cardNumber={cardNumberProps}
