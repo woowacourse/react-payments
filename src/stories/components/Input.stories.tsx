@@ -55,19 +55,24 @@ const meta = {
         "0",
       ],
       control: {
-        type: "select",
+        type: "text",
       },
       description:
         "값을 입력하기 전, input에 띄워주는 메시지를 수정할 수 있습니다.",
     },
 
     inputStyle: {
-      options: [Large, Medium, Small, ExtraSmall],
+      options: {
+        Large: Large,
+        Medium: Medium,
+        Small: Small,
+        ExtraSmall: ExtraSmall,
+      },
       control: {
         type: "radio",
       },
       description:
-        "1. Large Size<br> 2. Medium Size<br> 3.Small Size<br> 4. Extra Small Size<br> input 가로 사이즈를 선택할 수 있습니다.",
+        "1. Large Size (width: 100%)<br> 2. Medium Size (width: 40%)<br> 3.Small Size (width: 24%)<br> 4. Extra Small Size (width: 12%)<br> input 가로 사이즈를 선택할 수 있습니다.",
     },
   },
 } satisfies Meta<typeof InputComponent>;
