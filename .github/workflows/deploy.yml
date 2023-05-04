@@ -1,9 +1,9 @@
 name: Deploy
 
 on:
-  # step2브랜치에 커밋을 push할 때마다 실행
+  # step3브랜치에 커밋을 push할 때마다 실행
   push:
-    branches: ['step2']
+    branches: ['step3']
 
 jobs:
   # deploy라는 job에 배포에 필요한 과정 기술
