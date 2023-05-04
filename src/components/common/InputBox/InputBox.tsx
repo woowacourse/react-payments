@@ -62,6 +62,7 @@ const _InputWrapper = styled.div`
 `;
 
 const _InputWithErrorMessage = styled.div`
+  position: relative;
   display: flex;
   justify-content: start;
 
