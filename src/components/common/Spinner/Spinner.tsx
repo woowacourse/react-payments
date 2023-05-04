@@ -1,11 +1,17 @@
 import type { ComponentPropsWithoutRef } from 'react';
 import styles from './style.module.css';
 
-type SpinnerProps = ComponentPropsWithoutRef<'div'>;
+interface SpinnerProps extends ComponentPropsWithoutRef<'div'> {
+  size?: number;
+}
 
-const Spinner = ({ className = '', ...attributes }: SpinnerProps) => {
+const Spinner = ({ className = '', size = 70, ...attributes }: SpinnerProps) => {
   return (
-    <div className={`${className} ${styles.container}`}>
+    <div
+      className={`${className} ${styles.container}`}
+      style={{ width: `${size}px` }}
+      {...attributes}
+    >
       <svg className={styles.spinner} viewBox="25 25 50 50">
         <circle
           className={styles.path}
