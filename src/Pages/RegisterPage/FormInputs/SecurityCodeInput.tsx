@@ -4,6 +4,7 @@ import { HIDDEN_ELEMENT_STYLE, LENGTH, REGEX } from 'constants/constants';
 import { useInputHandler } from 'hooks/useInputHandler';
 import { StyledInput } from 'components/Input';
 import { StyledInputBox } from 'components/InputBox';
+import { StyledCaption } from 'components/Caption';
 
 const SecurityCodeInput = () => {
   const [code, setCode] = useState({
@@ -36,9 +37,9 @@ const SecurityCodeInput = () => {
         />
         <QuestionMark>?</QuestionMark>
       </CodeInputBox>
-      <Caption codeLength={code.code.length}>
+      <SecurityCodeCaption codeLength={code.code.length}>
         보안 코드 3자리를 모두 입력해 주세요.
-      </Caption>
+      </SecurityCodeCaption>
     </>
   );
 };
@@ -101,10 +102,7 @@ const QuestionMark = styled.p`
   }
 `;
 
-const Caption = styled.p<{ codeLength: number }>`
-  color: var(--caption-color);
-  font-size: 12px;
-  margin: 8px 0 16px 4px;
+const SecurityCodeCaption = styled(StyledCaption)<{ codeLength: number }>`
   visibility: ${({ codeLength }) =>
     (codeLength === LENGTH.SECURITY_CODE || codeLength === 0) &&
     `${HIDDEN_ELEMENT_STYLE}`};

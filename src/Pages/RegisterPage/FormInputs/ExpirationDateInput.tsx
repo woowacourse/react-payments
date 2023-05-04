@@ -5,6 +5,10 @@ import { useInputHandler } from 'hooks/useInputHandler';
 import InputBox from 'components/InputBox';
 import { StyledInput } from 'components/Input';
 import { AddCardContext } from 'context/CardContext';
+import Hyphen, { StyledHyphen } from 'components/Hypen';
+import { Expiration } from 'types/Card';
+import { showDateHyphen } from 'utils/hyphenStyle';
+import { StyledCaption } from 'components/Caption';
 
 const ExpirationDateInput = () => {
   const { date, setDate } = useContext(AddCardContext);
@@ -40,7 +44,7 @@ const ExpirationDateInput = () => {
           placeholder="MM"
           required
         />
-        <Hyphen month={date.month}>/</Hyphen>
+        <DateHyphen date={date} />
         <ExpirationInput
           type="text"
           name="year"
@@ -54,9 +58,9 @@ const ExpirationDateInput = () => {
           required
         />
       </InputBox>
-      <Caption date={Object.values(date)}>
+      <DateCaption date={Object.values(date)}>
         카드에 표기된 월/연도 순으로 입력해주세요. ex&#41; 01/28
-      </Caption>
+      </DateCaption>
     </>
   );
 };
@@ -65,17 +69,11 @@ const ExpirationInput = styled(StyledInput)`
   width: 12vw;
 `;
 
-const Hyphen = styled.p<{ month: string }>`
-  font-weight: 900;
-  align-self: center;
-  visibility: ${({ month }) =>
-    month.length !== LENGTH.EXPIRATION && `${HIDDEN_ELEMENT_STYLE}`};
+const DateHyphen = styled(StyledHyphen)<{ date?: Expiration }>`
+  visibility: ${(props) => showDateHyphen(props.date?.month)};
 `;
 
-const Caption = styled.p<{ date: string[] }>`
-  color: var(--caption-color);
-  font-size: 12px;
-  margin: 8px 0 16px 4px;
+const DateCaption = styled(StyledCaption)<{ date: string[] }>`
   visibility: ${({ date }) =>
     (date.join('').length === LENGTH.EXPIRATION * 2 ||
       date.join('').length === 0) &&

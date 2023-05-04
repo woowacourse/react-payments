@@ -4,6 +4,7 @@ import { HIDDEN_ELEMENT_STYLE, LENGTH, REGEX } from 'constants/constants';
 import { useInputHandler } from 'hooks/useInputHandler';
 import { StyledInput } from 'components/Input';
 import InputBox from 'components/InputBox';
+import { StyledCaption } from 'components/Caption';
 
 const PasswordInput = () => {
   const [password, setPassword] = useState({
@@ -49,9 +50,9 @@ const PasswordInput = () => {
         <HiddenPassword type="text" inputMode="numeric" value={'ㆍ'} disabled />
         <HiddenPassword type="text" inputMode="numeric" value={'ㆍ'} disabled />
       </InputBox>
-      <Caption password={Object.values(password)}>
+      <PasswordCaption password={Object.values(password)}>
         카드 비밀번호 앞 2자리를 입력해 주세요.
-      </Caption>
+      </PasswordCaption>
     </>
   );
 };
@@ -70,10 +71,7 @@ const HiddenPassword = styled(StyledInput)`
   border-radius: 8px;
 `;
 
-const Caption = styled.p<{ password: string[] }>`
-  color: var(--caption-color);
-  font-size: 12px;
-  margin: 8px 0 16px 4px;
+const PasswordCaption = styled(StyledCaption)<{ password: string[] }>`
   visibility: ${({ password }) =>
     (password.join('').length === LENGTH.EACH_PASSWORD * 2 ||
       password.join('').length === 0) &&

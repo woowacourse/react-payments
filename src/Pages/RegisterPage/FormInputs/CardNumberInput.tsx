@@ -5,6 +5,10 @@ import { useInputHandler } from 'hooks/useInputHandler';
 import { StyledInput } from 'components/Input';
 import InputBox from 'components/InputBox';
 import { AddCardContext } from 'context/CardContext';
+import Hyphen, { StyledHyphen } from 'components/Hypen';
+import { CardNumber } from 'types/Card';
+import { showNumberHyphen } from 'utils/hyphenStyle';
+import { StyledCaption } from 'components/Caption';
 
 const CardNumberInput = () => {
   const { cardNumber, setCardNumber } = useContext(AddCardContext);
@@ -34,7 +38,7 @@ const CardNumberInput = () => {
           autoFocus
           required
         />
-        <Hyphen cardNumber={cardNumber.number1}>-</Hyphen>
+        <NumberHyphen cardNumber={cardNumber} index={0} />
         <NumberInput
           type="text"
           name="number2"
@@ -46,7 +50,7 @@ const CardNumberInput = () => {
           placeholder="0000"
           required
         />
-        <Hyphen cardNumber={cardNumber.number2}>-</Hyphen>
+        <NumberHyphen cardNumber={cardNumber} index={1} />
         <NumberInput
           type="password"
           name="number3"
@@ -58,7 +62,7 @@ const CardNumberInput = () => {
           placeholder="0000"
           required
         />
-        <Hyphen cardNumber={cardNumber.number3}>-</Hyphen>
+        <NumberHyphen cardNumber={cardNumber} index={2} />
         <NumberInput
           type="password"
           name="number4"
@@ -71,9 +75,9 @@ const CardNumberInput = () => {
           required
         />
       </InputBox>
-      <Caption cardNumbers={Object.values(cardNumber)}>
+      <NumberCaption cardNumbers={Object.values(cardNumber)}>
         숫자 16자리를 모두 입력해 주세요.
-      </Caption>
+      </NumberCaption>
     </>
   );
 };
@@ -82,17 +86,14 @@ const NumberInput = styled(StyledInput)`
   width: 12vw;
 `;
 
-const Hyphen = styled.p<{ cardNumber: string }>`
-  font-weight: 900;
-  align-self: center;
-  visibility: ${({ cardNumber }) =>
-    cardNumber.length !== LENGTH.EACH_CARD_NUMBER && `${HIDDEN_ELEMENT_STYLE}`};
+const NumberHyphen = styled(StyledHyphen)<{
+  cardNumber: CardNumber;
+  index: number;
+}>`
+  visibility: ${({ cardNumber, index }) => showNumberHyphen(cardNumber)[index]};
 `;
 
-const Caption = styled.p<{ cardNumbers: string[] }>`
-  color: var(--caption-color);
-  font-size: 12px;
-  margin: 8px 0 16px 4px;
+const NumberCaption = styled(StyledCaption)<{ cardNumbers: string[] }>`
   visibility: ${({ cardNumbers }) =>
     (cardNumbers.join('').length === LENGTH.EACH_CARD_NUMBER * 4 ||
       cardNumbers.join('').length === 0) &&
