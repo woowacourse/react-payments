@@ -1,18 +1,17 @@
-import { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
 import styled from 'styled-components';
 import CardItem from '../CardListPageComponents/CardItem';
 import Title from '../common/Title';
 import Input from '../common/Input';
-import { cardLocalStorage } from '../domain/CardLocalStorage';
-import { CardContext } from '../../context/CardContext';
 import CardLoading from '../CardLoadingComponents/CardLoading';
+import { CardContext } from '../../context/CardContext';
+import { useCompletion } from '../../hooks/useCompletion';
+import { useLoading } from '../../hooks/useLoading';
 
 const CardAdditionCompletionPage = () => {
-  const navigate = useNavigate();
-  const { card, cardName, setCardName, updateCardList } =
-    useContext(CardContext);
-  const [isLoading, setIsLoading] = useState(false);
+  const { card, cardName } = useContext(CardContext);
+  const { handleComplete, handleInputChange } = useCompletion();
+  const { isLoading } = useLoading();
 
   if (!card) {
     return (
@@ -21,26 +20,6 @@ const CardAdditionCompletionPage = () => {
       </CompletionContainer>
     );
   }
-
-  const handleCardLoading = () => {
-    setTimeout(() => {
-      setIsLoading(false);
-      navigate('/');
-    }, 3000);
-  };
-
-  const handleComplete = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setIsLoading(true);
-    setCardName((event.target as HTMLInputElement).value);
-    updateCardList(card);
-    cardLocalStorage.addCard(card);
-    handleCardLoading();
-  };
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCardName(event.target.value);
-  };
 
   return (
     <CompletionContainer>
