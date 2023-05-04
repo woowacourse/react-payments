@@ -11,9 +11,10 @@ import InputBoxSecurityCode from "../InputBoxSecurityCode/InputBoxSecurityCode";
 import CardCoModal from "../../common/CardCoModal";
 
 import { CardCo, CreditCard, InputStatus } from "../../../type";
-import { initialCard } from "../../../cardData";
+import { cardCoList, initialCard } from "../../../cardData";
 
 import "./cardInputForm.css";
+import CardCoButton from "../../common/CardCoButton";
 
 interface CardInputFormProps {
   addNewCard: (card: CreditCard) => void;
@@ -98,21 +99,16 @@ export default function CardInputForm(props: CardInputFormProps) {
 
   return (
     <form onSubmit={(e) => submitCardInfo(e)} className="form">
-      {modalOpen && (
-        <CardCoModal
-          cardCoList={[
-            "woori",
-            "shinhan",
-            "hana",
-            "hyundai",
-            "lotte",
-            "bc",
-            "kb",
-            "kakao",
-          ]}
-          changeCardCoStatus={changeInputStatus("cardCo")}
-        />
-      )}
+      {
+        <CardCoModal isOpen={modalOpen}>
+          {cardCoList.map((cardCo) => (
+            <CardCoButton
+              cardCo={cardCo}
+              changeCardCoStatus={changeInputStatus("cardCo")}
+            />
+          ))}
+        </CardCoModal>
+      }
       <CardPreview card={nowCardInfo} openCardCoModal={openCardCoModal} />
       <InputBoxCardNumber
         changeCardNumberStatus={changeInputStatus("cardNumber")}

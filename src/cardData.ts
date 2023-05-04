@@ -1,4 +1,15 @@
-import { CreditCard } from "./type";
+import { CardCo, CreditCard } from "./type";
+
+export const cardCoList: CardCo[] = [
+  "woori",
+  "shinhan",
+  "hana",
+  "hyundai",
+  "lotte",
+  "bc",
+  "kb",
+  "kakao",
+];
 
 export const initialCard: CreditCard = {
   nickName: "",
