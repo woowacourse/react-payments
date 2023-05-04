@@ -13,7 +13,6 @@ interface CardContextType {
   setBankName: React.Dispatch<React.SetStateAction<string>>;
   card: CardItemInfo;
   setCard: React.Dispatch<React.SetStateAction<CardItemInfo>>;
-  cardList: CardItemInfo[];
   updateCardList: (cardItem: CardItemInfo) => void;
 }
 
@@ -33,7 +32,6 @@ export const CardContext = createContext<CardContextType>({
   setBankName: () => {},
   card: INIT_STATE,
   setCard: () => {},
-  cardList: [],
   updateCardList: () => {},
 });
 
@@ -42,7 +40,7 @@ export const CardContextProvider = ({ children }: CardProviderProps) => {
   const [bankName, setBankName] = useState('기타 은행');
   const [card, setCard] = useState<CardItemInfo>(INIT_STATE);
 
-  const { cardList, updateCardList } = useCardList();
+  const { updateCardList } = useCardList();
 
   return (
     <CardContext.Provider
@@ -51,7 +49,6 @@ export const CardContextProvider = ({ children }: CardProviderProps) => {
         setCardName,
         bankName,
         setBankName,
-        cardList,
         updateCardList,
         card,
         setCard,

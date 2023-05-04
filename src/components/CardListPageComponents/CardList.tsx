@@ -1,15 +1,14 @@
-import { useContext } from 'react';
 import styled from 'styled-components';
 import CardItem from './CardItem';
 import Title from '../common/Title';
-import { CardContext } from '../../context/CardContext';
+import { useCardList } from '../../hooks/useCardList';
 
 interface CardListProps {
   onOpen: () => void;
 }
 
 const CardList = ({ onOpen }: CardListProps) => {
-  const { cardList } = useContext(CardContext);
+  const { cardList } = useCardList();
 
   return (
     <CardListContainer>

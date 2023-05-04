@@ -1,17 +1,16 @@
-import { useContext } from 'react';
 import styled from 'styled-components';
 import Header from '../common/Header';
 import Title from '../common/Title';
 import AddCardButton from '../CardListPageComponents/AddCardButton';
 import CardList from '../CardListPageComponents/CardList';
-import { CardContext } from '../../context/CardContext';
+import { useCardList } from '../../hooks/useCardList';
 
 interface CardListPageProps {
   onOpen: () => void;
 }
 
 const CardListPage = ({ onOpen }: CardListPageProps) => {
-  const cardList = useContext(CardContext);
+  const cardList = useCardList();
 
   return (
     <>
