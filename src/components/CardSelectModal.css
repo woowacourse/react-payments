@@ -1,0 +1,55 @@
+.card-select-modal-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.35);
+  animation: backdrops 1s;
+}
+
+@keyframes backdrops {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.card-select-modal {
+  position: fixed;
+  display: grid;
+  width: 100%;
+  height: 30%;
+  grid-template-columns: repeat(4, 25%);
+  background: #ffffff;
+  top: 70%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  animation-name: modal-view;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0s;
+  animation-fill-mode: both;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+}
+
+@keyframes modal-view {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.card-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}

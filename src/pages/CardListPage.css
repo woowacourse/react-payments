@@ -23,7 +23,6 @@
 
 .add-card-page-body {
   display: flex;
-  overflow-y: scroll;
   flex-direction: column;
   gap: 46px;
   align-items: center;
@@ -44,4 +43,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.card-data-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.card-nickname {
+  margin-top: 10px;
 }

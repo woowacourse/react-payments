@@ -22,9 +22,9 @@
 
 .cvc-info-button:hover + .cvc-info-box {
   display: block;
-  animation: draw 1s ease;
+  animation: view 1s ease;
 }
-@keyframes draw {
+@keyframes view {
   0% {
     opacity: 0;
   }

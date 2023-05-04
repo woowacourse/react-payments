@@ -1,25 +1,13 @@
-import React, { ChangeEvent, RefObject } from 'react';
+import React from 'react';
 
+import { InputProps } from '../type';
 import './InputCardData.css';
 
-export type InputProps = {
-  inputType: string;
-  passwordType?: string;
-  className?: string;
-  value: string;
-  minDataLength: number;
-  maxDataLength: number;
-  name: string;
-  dataId: number;
-  refObject: RefObject<HTMLInputElement>;
-  handleError: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onFocus: (e: ChangeEvent) => void;
-  handleInputData: (index: number, e: ChangeEvent<HTMLInputElement>) => void;
-};
-
 const InputCardData = ({
+  required,
   inputType,
+  placeholder,
+  inputMode,
   passwordType,
   className,
   value,
@@ -30,7 +18,8 @@ const InputCardData = ({
   refObject: Ref,
   handleError,
   onChange,
-  onFocus,
+  nextFocus,
+  onFlip,
   handleInputData,
 }: InputProps) => {
   return inputType === 'password' ? (
@@ -38,35 +27,42 @@ const InputCardData = ({
       className={`input-password-container ${passwordType}`}
       type="password"
       value={value}
+      placeholder={placeholder}
+      inputMode={inputMode}
       maxLength={maxDataLength}
       minLength={minDataLength}
       data-id={dataId}
       ref={Ref}
       onChange={(e) => {
         onChange(e);
-        onFocus(e);
+        nextFocus(e);
         handleInputData(dataId, e);
+        if (handleError) handleError(e);
       }}
+      onFocus={onFlip}
       name={name}
-      required
+      required={required}
     />
   ) : (
     <input
       className={`input-box ${className}`}
       value={value}
+      placeholder={placeholder}
       type={inputType}
+      inputMode={inputMode}
       maxLength={maxDataLength}
       minLength={minDataLength}
       data-id={dataId}
       ref={Ref}
       onChange={(e) => {
         onChange(e);
-        handleError(e);
-        onFocus(e);
+        nextFocus(e);
         handleInputData(dataId, e);
+        if (handleError) handleError(e);
       }}
+      onFocus={onFlip}
       name={name}
-      required
+      required={required}
     />
   );
 };

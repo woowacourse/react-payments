@@ -1,0 +1,91 @@
+.input-nickname-box {
+  position: fixed;
+  top: 10%;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 90%;
+  animation-name: modal-view;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0s;
+  animation-fill-mode: both;
+  border-top-right-radius: 25px;
+  border-top-left-radius: 25px;
+}
+
+@keyframes modal-view {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.input-nickname-box-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.35);
+  animation: backdrops 1s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0s;
+}
+
+@keyframes backdrops {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.nickname-input {
+  width: 244px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  border-bottom: 1;
+}
+
+.nickname-box-main-font {
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28px;
+  margin-bottom: 36px;
+}
+
+.card-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 124px;
+}
+
+.card-submit-button {
+  position: absolute;
+  bottom: 5%;
+  left: 80%;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  color: #000000;
+  background-color: #ffffff;
+  border: 0;
+  text-align: right;
+  width: 51px;
+  height: 34px;
+}

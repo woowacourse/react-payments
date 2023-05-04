@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import './index.css';
 import AddCardPage from './pages/AddCardPage';
 import CardListPage from './pages/CardListPage';
+import NotFoundPage from './pages/NotFoundPage';
 import { LOCATION } from './utils/constants';
 
 const router = createBrowserRouter(
@@ -16,6 +17,14 @@ const router = createBrowserRouter(
     {
       path: LOCATION.ADD_CARD_PAGE,
       element: <AddCardPage />,
+    },
+    {
+      path: LOCATION.PAGE_NOT_FOUND,
+      element: <NotFoundPage />,
+    },
+    {
+      path: LOCATION.EXCEPT_PAGE,
+      element: <Navigate replace to={LOCATION.PAGE_NOT_FOUND} />,
     },
   ],
   {
