@@ -1,12 +1,12 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import type { CardInfo } from '../types';
 
 const useCardInfo = () => {
   const [cardInfo, setCardInfo] = useState<CardInfo[]>([]);
 
-  const registerNewCard = ({ cardNumber, expirationDate, cardOwnerName, selectedCard, cardNickName }: CardInfo) => {
-    setCardInfo([...cardInfo, { cardNumber, expirationDate, cardOwnerName, selectedCard, cardNickName }]);
-  };
+  const registerNewCard = useCallback((newCardInfo: CardInfo) => {
+    setCardInfo(prevCardInfo => [...prevCardInfo, newCardInfo]);
+  }, []);
 
   return { cardInfo, registerNewCard };
 };
