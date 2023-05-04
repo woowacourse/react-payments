@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { CardViewer } from '../CardViewer';
@@ -10,14 +10,14 @@ import { PasswordInput } from '../input/PasswordInput';
 import { Button } from '../Button/Button';
 import { useCardRegisterForm } from '../../hooks/useCardRegisterForm';
 import { cardDataService } from '../../domains/cardDataService';
-import { ModalWithCloseButton } from '../Modal/ModalWithCloseButton';
-import { CARD_SELECT_COMPLETE_BUTTON } from '../../constants';
+import { Modal } from '../Modal/Modal';
 import { CardSelectModalContent } from '../Modal/CardSelect/CardSelectModalContent';
 import { CardCompany } from '../../types';
+import { useModal } from '../../hooks/useModal';
 
 export function CardRegisterForm() {
   const navigate = useNavigate();
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const { isModalOpen, showModal, closeModal } = useModal();
   const { card, cardDispatch, isValidCardForm } = useCardRegisterForm();
 
   const cardNumberInputRef = useRef<HTMLInputElement>(null);
@@ -50,10 +50,6 @@ export function CardRegisterForm() {
     passwordInputRef.current?.focus();
   };
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
   useEffect(() => {
     if (isModalOpen) return;
     cardNumberInputRef.current?.focus();
@@ -61,19 +57,15 @@ export function CardRegisterForm() {
 
   return (
     <Style.Container onSubmit={handleCardInfoSubmit}>
-      <ModalWithCloseButton
-        isOpen={isModalOpen}
-        setIsOpen={setIsModalOpen}
-        buttonText={CARD_SELECT_COMPLETE_BUTTON}
-        aria-labelledby='title-dialog'
-      >
+      <Modal isModalOpen={isModalOpen} closeModal={closeModal} aria-labelledby='title-dialog'>
         <CardSelectModalContent
           setCardCompany={(input: CardCompany) =>
             cardDispatch({ type: 'SET_CARD_COMPANY', cardCompany: input })
           }
+          closeModal={closeModal}
         />
-      </ModalWithCloseButton>
-      <Style.CardCompanySelectButton type={'button'} onClick={openModal}>
+      </Modal>
+      <Style.CardCompanySelectButton type={'button'} onClick={showModal}>
         <CardViewer card={card} />
       </Style.CardCompanySelectButton>
       <Style.InputContainer>
