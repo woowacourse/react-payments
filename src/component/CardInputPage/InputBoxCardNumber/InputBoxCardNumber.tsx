@@ -19,17 +19,17 @@ export default function InputBoxCardNumber(props: InputBoxNumberProps) {
   const { changeCardNumberStatus } = props;
 
   const [allStatus, setAllStatus] = useState<nowStatus[]>([1, 1, 1, 1]);
-  let hasError = useRef(false);
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
-    hasError.current = allStatus.includes(0) ? true : false;
+    setHasError(allStatus.includes(0));
 
     allStatus.every((status) => status === 2)
       ? changeCardNumberStatus(true)
       : changeCardNumberStatus(false);
   }, [allStatus]);
 
-  const changeHasError = (partIndex: number, state: nowStatus) => {
+  const changeEachNumberStatus = (partIndex: number, state: nowStatus) => {
     const changedError = [...allStatus];
     changedError[partIndex] = state;
     return setAllStatus(changedError);
@@ -39,11 +39,11 @@ export default function InputBoxCardNumber(props: InputBoxNumberProps) {
     <div className="input-box-card-number">
       <p>카드번호</p>
       <CardNumber
-        changeHasError={changeHasError}
+        changeEachNumberStatus={changeEachNumberStatus}
         changeCardNumberStatus={changeCardNumberStatus}
       />
       <p className="error-message">
-        {hasError.current && CARD_ERROR_MESSAGE.INPUT_CARD_NUMBER}
+        {hasError && CARD_ERROR_MESSAGE.INPUT_CARD_NUMBER}
       </p>
     </div>
   );

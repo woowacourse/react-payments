@@ -8,7 +8,7 @@ import { nowStatus } from "../../../type";
 import "./cardPassword.css";
 
 interface CardPasswordProps {
-  changeHasError: (partIndex: number, state: nowStatus) => void;
+  changeEachPasswordStatus: (partIndex: number, state: nowStatus) => void;
   changePasswordStatus: (
     completeState: boolean,
     value?: string,
@@ -17,7 +17,7 @@ interface CardPasswordProps {
 }
 
 export default function CardPassword(props: CardPasswordProps) {
-  const { changeHasError, changePasswordStatus } = props;
+  const { changeEachPasswordStatus, changePasswordStatus } = props;
 
   const [passwordStatus, setPasswordStatus] = useState<string[]>([]);
 
@@ -27,12 +27,12 @@ export default function CardPassword(props: CardPasswordProps) {
       const appropriatePassword = makeAppropriatePassword(userPassword);
 
       if (appropriatePassword !== userPassword) {
-        changeHasError(partIndex, 0);
+        changeEachPasswordStatus(partIndex, 0);
       } else if (appropriatePassword.length === 1) {
-        changeHasError(partIndex, 2);
+        changeEachPasswordStatus(partIndex, 2);
         changePasswordStatus(true, appropriatePassword, partIndex);
       } else {
-        changeHasError(partIndex, 1);
+        changeEachPasswordStatus(partIndex, 1);
       }
 
       const result = [...passwordStatus];

@@ -8,7 +8,7 @@ import { makeAppropriateNumber } from "../../../util/trans";
 import "./cardNumber.css";
 
 interface CardNumberProps {
-  changeHasError: (partIndex: number, state: nowStatus) => void;
+  changeEachNumberStatus: (partIndex: number, state: nowStatus) => void;
   changeCardNumberStatus: (
     completeState: boolean,
     value?: string,
@@ -17,7 +17,7 @@ interface CardNumberProps {
 }
 
 export default function CardNumber({
-  changeHasError,
+  changeEachNumberStatus,
   changeCardNumberStatus,
 }: CardNumberProps) {
   const [cardNumber, setCardNumber] = useState<string[]>([]);
@@ -28,12 +28,12 @@ export default function CardNumber({
       const appropriateNumber = makeAppropriateNumber(userInputNumber);
 
       if (userInputNumber !== appropriateNumber) {
-        changeHasError(partIndex, 0);
+        changeEachNumberStatus(partIndex, 0);
       } else if (appropriateNumber.length === 4) {
-        changeHasError(partIndex, 2);
+        changeEachNumberStatus(partIndex, 2);
         changeCardNumberStatus(true, appropriateNumber, partIndex);
       } else {
-        changeHasError(partIndex, 1);
+        changeEachNumberStatus(partIndex, 1);
       }
 
       const result = [...cardNumber];

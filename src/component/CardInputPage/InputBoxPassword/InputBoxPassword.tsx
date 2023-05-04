@@ -19,17 +19,17 @@ export default function InputBoxPassword(props: InputBoxPasswordProps) {
   const { changePasswordStatus } = props;
 
   const [allStatus, setAllStatus] = useState<nowStatus[]>([1, 1]);
-  let hasError = useRef(false);
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
-    hasError.current = allStatus.includes(0) ? true : false;
+    setHasError(allStatus.includes(0));
 
     allStatus.every((status) => status === 2)
       ? changePasswordStatus(true)
       : changePasswordStatus(false);
   }, [allStatus]);
 
-  const changeHasError = (partIndex: number, state: nowStatus) => {
+  const changeEachPasswordStatus = (partIndex: number, state: nowStatus) => {
     const changedError = [...allStatus];
     changedError[partIndex] = state;
     return setAllStatus(changedError);
@@ -39,11 +39,11 @@ export default function InputBoxPassword(props: InputBoxPasswordProps) {
     <div className="input-box-card-password">
       <p>카드 비밀번호</p>
       <CardPassword
-        changeHasError={changeHasError}
+        changeEachPasswordStatus={changeEachPasswordStatus}
         changePasswordStatus={changePasswordStatus}
       />
       <p className="error-message">
-        {hasError.current && CARD_ERROR_MESSAGE.INPUT_CARD_PASSWORD}
+        {hasError && CARD_ERROR_MESSAGE.INPUT_CARD_PASSWORD}
       </p>
     </div>
   );
