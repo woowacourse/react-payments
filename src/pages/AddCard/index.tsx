@@ -33,7 +33,7 @@ const AddCardPage = () => {
   const expireMonth = useInput(isValidExpiredMonthFormat);
   const expireYear = useInput(isValidExpiredYearFormat);
   const securityCode = useInput(isValidSecurityCode);
-  const cardOwner = useInput(isValidOwnerName);
+  const cardOwner = useInput(isValidOwnerName, 'VALID');
   const { isOpen, toggleOpen } = useBottomSheet(true);
 
   const onBackButtonClick = useCallback(() => {
