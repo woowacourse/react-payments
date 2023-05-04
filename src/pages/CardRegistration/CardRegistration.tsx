@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import AddCardForm from '../../components/AddCardForm/AddCardForm';
 import ArrowHeader from '../../components/ArrowHeader/ArrowHeader';
 import CardPreview from '../../components/CardPreview/CardPreview';
@@ -13,13 +13,13 @@ const CardRegistration = () => {
   const selectedCard = get().selectedCard;
   const [isModalOpen, setIsModalOpen] = useState(true);
 
-  const handleOpenModal = () => {
+  const handleOpenModal = useCallback(() => {
     setIsModalOpen(true);
-  };
+  }, []);
 
-  const handleCloseModal = () => {
+  const handleCloseModal = useCallback(() => {
     setIsModalOpen(false);
-  };
+  }, []);
 
   return (
     <>
