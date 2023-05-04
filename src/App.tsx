@@ -5,8 +5,8 @@ import CardRegistrationPage from './components/pages/CardRegistrationPage';
 import NotFoundPage from './components/pages/NotFoundPage';
 import BankList from './components/BottomSheetComponents/BankList';
 import CardAdditionCompletionPage from './components/pages/CardAdditionCompletionPage';
-import { useBottomSheet } from './hooks/useBottomSheet';
 import { useChangeForm } from './hooks/useChangeForm';
+import { useBottomSheet } from 'hae-on-bottom-sheet';
 
 function App() {
   const { isBottomSheetOpen, handleBottomSheetOpen, handleBottomSheetClose } =

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import BankItem from './BankItem';
-import BottomSheet from './BottomSheet';
+import { BottomSheet } from 'hae-on-bottom-sheet';
 import { CONVERT_BANK_NAME } from '../../utils/Constants';
 
 interface BankListProps {
