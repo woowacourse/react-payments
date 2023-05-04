@@ -29,14 +29,13 @@ function CardPasswordInput() {
   };
 
   const firstPassword = {
-    id: CARD_PASSWORD.FIRST,
+    "data-password": CARD_PASSWORD.FIRST,
     value: cardPassword[0],
-
     ...props,
   };
 
   const secondPassword = {
-    id: CARD_PASSWORD.SECOND,
+    "data-password": CARD_PASSWORD.SECOND,
     value: cardPassword[1],
     inputRef: inputRef2,
     ...props,

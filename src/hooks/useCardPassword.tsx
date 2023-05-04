@@ -10,13 +10,13 @@ function useCardPassword() {
 
   const changeCardPassword = (e: React.FormEvent<HTMLInputElement>) => {
     const password = toOnlyNumber(e.currentTarget.value).slice(LENGTH.ZERO, 1);
-    const inputID = e.currentTarget.id;
+    const PasswordSection = e.currentTarget.dataset.password;
 
-    if (inputID === CARD_PASSWORD.FIRST) {
+    if (PasswordSection === CARD_PASSWORD.FIRST) {
       setCardPassword([password, cardPassword[1]]);
     }
 
-    if (inputID === CARD_PASSWORD.SECOND) {
+    if (PasswordSection === CARD_PASSWORD.SECOND) {
       setCardPassword([cardPassword[0], password]);
     }
   };
