@@ -47,8 +47,8 @@
 .cardNumber {
   color: var(--grey-100);
   text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
-  font-weight: 900;
-  font-size: large;
+  font-weight: 700;
+  font-size: medium;
   height: 23px;
 }
 
