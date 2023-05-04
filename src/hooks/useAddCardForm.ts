@@ -1,43 +1,70 @@
 import { isAlphabet, isNumber, validateMonth, validateYear } from '../utils/validateInput';
-import { SetState } from '../@types';
+import { InputCardInfo } from '../@types';
+import useMoveFocus from './useMoveFocus';
+import { useContext } from 'react';
+import { CardInformationContext } from '../context/CardInformationContext';
+
+const isCardExpirationDateKey = (key: string): key is Extract<ValidationKey, 'month' | 'year'> => {
+  return Object.keys(validationMap).includes(key);
+};
+
+const isInputType = (type: string): type is Exclude<ValidationKey, 'month' | 'year'> => {
+  return Object.keys(validationMap).includes(type);
+};
+
+const validationMap = {
+  month: validateMonth,
+  year: validateYear,
+  number: isNumber,
+  password: isNumber,
+  text: isAlphabet,
+};
+
+type ValidationKey = keyof typeof validationMap;
 
 const useAddCardForm = () => {
+  const { insert, move } = useMoveFocus();
+  const { CardInformationActions } = useContext(CardInformationContext);
+  const { setCardCVC, setCardExpirationDate, setCardNumbers, setCardOwner, setCardPWD } =
+    CardInformationActions;
+
+  const inputActions = {
+    cardNumbers: setCardNumbers,
+    cardExpirationDate: setCardExpirationDate,
+    cardOwner: setCardOwner,
+    cardCVC: setCardCVC,
+    cardPWD: setCardPWD,
+  };
+
   const onChangeCardDateState =
-    (type: string) =>
-    (setState: SetState, key: string) =>
+    (infoType: InputCardInfo, type: string, key: string) =>
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      switch (key) {
-        case 'month':
-          validateMonth(e.target);
-          break;
-        case 'year':
-          validateYear(e.target);
-          break;
-        default:
-      }
-      onChangeState(type)(setState, key)(e);
+      if (!isCardExpirationDateKey(key)) throw new Error('존재하지 않는 만료일 key입니다.');
+
+      validationMap[key](e.target);
+
+      onChangeState(infoType, type, key)(e);
     };
 
   const onChangeState =
-    (type: string) =>
-    (setState: SetState, key?: string) =>
+    (infoType: InputCardInfo, type: string, key?: string) =>
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      switch (type) {
-        case 'number':
-        case 'password':
-          if (!isNumber(e.target.value)) return;
-          break;
-        case 'text':
-          if (!isAlphabet(e.target.value)) return;
-          break;
+      if (!isInputType(type)) throw new Error('존재하지 않는 InputType입니다.');
+
+      if (!validationMap[type](e.target.value)) return;
+
+      inputActions[infoType](e.target.value, key);
+
+      if (e.target.value.length === 0) move(-1);
+      if (e.target.value.length === e.target.maxLength) {
+        move();
       }
-      if (key) setState(e.target.value, key);
-      else setState(e.target.value);
     };
 
   return {
     onChangeCardDateState,
     onChangeState,
+    insert,
   };
 };
 

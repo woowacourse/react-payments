@@ -14,8 +14,10 @@ type Card = {
 type CardCompany = (typeof CARD_COMPANY)[number] | '';
 
 type SetState = {
-  (value: string): void;
-  (key: string, value: string): void;
+  <T extends string>(value: T): void;
+  <T extends string>(value: T, key?: string): void;
 };
 
-export type { Card, CardCompany, SetState };
+type InputCardInfo = 'cardNumbers' | 'cardExpirationDate' | 'cardOwner' | 'cardCVC' | 'cardPWD';
+
+export type { Card, CardCompany, SetState, InputCardInfo };

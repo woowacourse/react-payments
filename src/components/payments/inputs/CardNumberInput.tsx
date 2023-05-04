@@ -1,26 +1,26 @@
 import { useContext } from 'react';
 import InputGroup from '../../common/InputGroup';
 import { CardInformationContext } from '../../../context/CardInformationContext';
-import useAddCardForm from '../../../hooks/useAddCardForm';
-import { SetState } from '../../../@types';
+import { InputCardInfo } from '../../../@types';
 
 type CardNumberInputProps = {
-  setState: SetState;
   insertRef: (element: HTMLElement | null) => void;
-  moveFocus: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  onChangeState: (
+    infoType: InputCardInfo,
+    type: string,
+    key?: string,
+  ) => (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const CardNumberInput = ({ setState, insertRef, moveFocus }: CardNumberInputProps) => {
+const CardNumberInput = ({ insertRef, onChangeState }: CardNumberInputProps) => {
   const { cardInformation } = useContext(CardInformationContext);
   const { cardNumbers } = cardInformation;
-  const { onChangeState } = useAddCardForm();
 
   return (
     <InputGroup
       labelText="카드 번호"
       autoMoveFocus={true}
       insertRef={insertRef}
-      moveFocus={moveFocus}
       inputInfoList={[
         {
           type: 'number',
@@ -29,7 +29,7 @@ const CardNumberInput = ({ setState, insertRef, moveFocus }: CardNumberInputProp
           width: '60px',
           center: true,
           value: cardNumbers.first,
-          onChange: onChangeState('number')(setState, 'first'),
+          onChange: onChangeState('cardNumbers', 'number', 'first'),
         },
         {
           type: 'number',
@@ -38,7 +38,7 @@ const CardNumberInput = ({ setState, insertRef, moveFocus }: CardNumberInputProp
           width: '60px',
           center: true,
           value: cardNumbers.second,
-          onChange: onChangeState('number')(setState, 'second'),
+          onChange: onChangeState('cardNumbers', 'number', 'second'),
         },
         {
           type: 'password',
@@ -47,7 +47,7 @@ const CardNumberInput = ({ setState, insertRef, moveFocus }: CardNumberInputProp
           width: '60px',
           center: true,
           value: cardNumbers.third,
-          onChange: onChangeState('password')(setState, 'third'),
+          onChange: onChangeState('cardNumbers', 'password', 'third'),
         },
         {
           type: 'password',
@@ -56,7 +56,7 @@ const CardNumberInput = ({ setState, insertRef, moveFocus }: CardNumberInputProp
           width: '60px',
           center: true,
           value: cardNumbers.fourth,
-          onChange: onChangeState('password')(setState, 'fourth'),
+          onChange: onChangeState('cardNumbers', 'password', 'fourth'),
         },
       ]}
     />

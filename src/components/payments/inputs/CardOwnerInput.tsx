@@ -1,18 +1,20 @@
 import { useContext } from 'react';
 import InputGroup from '../../common/InputGroup';
 import { CardInformationContext } from '../../../context/CardInformationContext';
-import useAddCardForm from '../../../hooks/useAddCardForm';
-import { SetState } from '../../../@types';
+import { InputCardInfo } from '../../../@types';
 
 type CardOwnerInputProps = {
-  setState: SetState;
   insertRef: (element: HTMLElement | null) => void;
+  onChangeState: (
+    infoType: InputCardInfo,
+    type: string,
+    key?: string,
+  ) => (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const CardOwnerInput = ({ setState, insertRef }: CardOwnerInputProps) => {
+const CardOwnerInput = ({ insertRef, onChangeState }: CardOwnerInputProps) => {
   const { cardInformation } = useContext(CardInformationContext);
   const { cardOwner } = cardInformation;
-  const { onChangeState } = useAddCardForm();
 
   return (
     <InputGroup
@@ -28,7 +30,7 @@ const CardOwnerInput = ({ setState, insertRef }: CardOwnerInputProps) => {
           width: '100%',
           center: false,
           value: cardOwner,
-          onChange: onChangeState('text')(setState),
+          onChange: onChangeState('cardOwner', 'text'),
         },
       ]}
     >

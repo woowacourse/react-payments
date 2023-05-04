@@ -1,26 +1,26 @@
 import { useContext } from 'react';
 import InputGroup from '../../common/InputGroup';
 import { CardInformationContext } from '../../../context/CardInformationContext';
-import useAddCardForm from '../../../hooks/useAddCardForm';
-import { SetState } from '../../../@types';
+import { InputCardInfo } from '../../../@types';
 
 type CardCVCInputProps = {
-  setState: SetState;
   insertRef: (element: HTMLElement | null) => void;
-  moveFocus: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  onChangeState: (
+    infoType: InputCardInfo,
+    type: string,
+    key?: string,
+  ) => (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const CardCVCInput = ({ setState, insertRef, moveFocus }: CardCVCInputProps) => {
+const CardCVCInput = ({ insertRef, onChangeState }: CardCVCInputProps) => {
   const { cardInformation } = useContext(CardInformationContext);
   const { cardCVC } = cardInformation;
-  const { onChangeState } = useAddCardForm();
 
   return (
     <InputGroup
       labelText="보안 코드(CVC/CVV)"
       autoMoveFocus={true}
       insertRef={insertRef}
-      moveFocus={moveFocus}
       inputInfoList={[
         {
           type: 'password',
@@ -29,7 +29,7 @@ const CardCVCInput = ({ setState, insertRef, moveFocus }: CardCVCInputProps) => 
           width: '110px',
           center: false,
           value: cardCVC,
-          onChange: onChangeState('password')(setState),
+          onChange: onChangeState('cardCVC', 'password'),
         },
       ]}
     />

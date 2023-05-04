@@ -1,30 +1,29 @@
 import { useContext } from 'react';
 import InputGroup from '../../common/InputGroup';
 import { CardInformationContext } from '../../../context/CardInformationContext';
-import useAddCardForm from '../../../hooks/useAddCardForm';
-import { SetState } from '../../../@types';
+import { InputCardInfo } from '../../../@types';
 
 type CardExpirationDateInputProps = {
-  setState: SetState;
   insertRef: (element: HTMLElement | null) => void;
-  moveFocus: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  onChangeCardDateState: (
+    infoType: InputCardInfo,
+    type: string,
+    key: string,
+  ) => (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 const CardExpirationDateInput = ({
-  setState,
   insertRef,
-  moveFocus,
+  onChangeCardDateState,
 }: CardExpirationDateInputProps) => {
   const { cardInformation } = useContext(CardInformationContext);
   const { cardExpirationDate } = cardInformation;
-  const { onChangeCardDateState } = useAddCardForm();
 
   return (
     <InputGroup
       labelText="만료일"
       autoMoveFocus={true}
       insertRef={insertRef}
-      moveFocus={moveFocus}
       inputInfoList={[
         {
           type: 'number',
@@ -34,7 +33,7 @@ const CardExpirationDateInput = ({
           width: '60px',
           center: true,
           value: cardExpirationDate.month,
-          onChange: onChangeCardDateState('number')(setState, 'month'),
+          onChange: onChangeCardDateState('cardExpirationDate', 'number', 'month'),
         },
         {
           type: 'number',
@@ -44,7 +43,7 @@ const CardExpirationDateInput = ({
           width: '60px',
           center: true,
           value: cardExpirationDate.year,
-          onChange: onChangeCardDateState('number')(setState, 'year'),
+          onChange: onChangeCardDateState('cardExpirationDate', 'number', 'year'),
         },
       ]}
     />

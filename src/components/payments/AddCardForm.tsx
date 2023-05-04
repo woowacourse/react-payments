@@ -7,9 +7,7 @@ import CardNumberInput from './inputs/CardNumberInput';
 import CardOwnerInput from './inputs/CardOwnerInput';
 import CardPasswordInput from './inputs/CardPasswordInput';
 import { StyledSubmitButton } from '../../pages/AddCardNamePage';
-import useMoveFocus from '../../hooks/useMoveFocus';
-import { useContext } from 'react';
-import { CardInformationContext } from '../../context/CardInformationContext';
+import useAddCardForm from '../../hooks/useAddCardForm';
 
 type AddCardFormProps = {
   expirationError: boolean;
@@ -17,36 +15,22 @@ type AddCardFormProps = {
 };
 
 const AddCardForm = ({ expirationError, onSubmit }: AddCardFormProps) => {
-  const { insert, move } = useMoveFocus();
-  const { CardInformationActions } = useContext(CardInformationContext);
-  const { setCardCVC, setCardExpirationDate, setCardNumbers, setCardOwner, setCardPWD } =
-    CardInformationActions;
-
-  const moveFocus = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    const target = e.target as HTMLInputElement;
-
-    if (target.value.length === 0) move(-1);
-    if (target.value.length === target.maxLength) move();
-  };
+  const { insert, onChangeCardDateState, onChangeState } = useAddCardForm();
 
   return (
     <StyledForm onSubmit={onSubmit}>
-      <CardNumberInput setState={setCardNumbers} insertRef={insert} moveFocus={moveFocus} />
-      <CardExpirationDateInput
-        setState={setCardExpirationDate}
-        insertRef={insert}
-        moveFocus={moveFocus}
-      />
+      <CardNumberInput onChangeState={onChangeState} insertRef={insert} />
+      <CardExpirationDateInput onChangeCardDateState={onChangeCardDateState} insertRef={insert} />
       {expirationError && <ErrorMessage message="유효한 카드 만료일을 입력해주세요." />}
-      <CardOwnerInput setState={setCardOwner} insertRef={insert} />
+      <CardOwnerInput onChangeState={onChangeState} insertRef={insert} />
       <StyledHeightCenter>
-        <CardCVCInput setState={setCardCVC} insertRef={insert} moveFocus={moveFocus} />
+        <CardCVCInput onChangeState={onChangeState} insertRef={insert} />
         <Tooltip text="카드 뒷면에 있는 3자리 숫자입니다.">
           <StyledHelperButton disabled>?</StyledHelperButton>
         </Tooltip>
       </StyledHeightCenter>
       <StyledHeightCenter>
-        <CardPasswordInput setState={setCardPWD} insertRef={insert} moveFocus={moveFocus} />
+        <CardPasswordInput onChangeState={onChangeState} insertRef={insert} />
         <StyledDotWrapper>
           <StyledDot />
         </StyledDotWrapper>

@@ -14,7 +14,6 @@ type InputInfo = {
 type InputGroupProps = {
   labelText: string;
   insertRef?: (element: HTMLElement | null) => void;
-  moveFocus?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   autoMoveFocus: boolean;
   inputInfoList: InputInfo[];
   children?: React.ReactNode;
@@ -30,7 +29,6 @@ const InputGroup = ({
   inputInfoList,
   children,
   autoMoveFocus,
-  moveFocus,
   insertRef,
 }: InputGroupProps) => {
   return (
@@ -61,7 +59,6 @@ const InputGroup = ({
                   textCenter={center}
                   ref={autoMoveFocus ? insertRef : null}
                   onChange={onChange}
-                  onInput={moveFocus}
                 />
               );
             },

@@ -1,5 +1,5 @@
 import { createContext, useState } from 'react';
-import { Card, SetState } from '../@types';
+import { Card, CardCompany, SetState } from '../@types';
 
 const initialValue: Card = {
   id: '',
@@ -75,7 +75,7 @@ export const CardInformationProvider = ({ children }: { children: React.ReactNod
         cardPWD: { ...prev.cardPWD, [key]: value },
       }));
     },
-    setCardCompany: (value: string) => {
+    setCardCompany: (value: CardCompany) => {
       setCardInformation((prev) => ({
         ...prev,
         cardCompany: value,
