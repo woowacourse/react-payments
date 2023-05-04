@@ -4,7 +4,6 @@ import { useInputName } from "../hooks/useInputName";
 import { useInputNumber } from "../hooks/useInputNumber";
 import { useSelect } from "../hooks/useSelect";
 import { CardNumberIndex } from "../type/input";
-import { Ref } from "../type/ref";
 
 export const NumberContext = createContext<{
   cardNumber: CardNumberIndex;
