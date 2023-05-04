@@ -7,7 +7,7 @@ import {
 import ImgButton from "../common/ImgButton/ImgButton";
 import { CardCompany } from "../../types/card";
 import { CardDetailContext } from "../../context/CardDetailContext";
-import BottomSheet from "../common/BottomSheet/BottomSheet";
+import { BottomSheet } from "rulu-modal";
 import CardDetailView from "../CardDetailView/CardDetailView";
 
 function CardModal() {
