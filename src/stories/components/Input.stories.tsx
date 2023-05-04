@@ -74,6 +74,12 @@ const meta = {
       description:
         "1. Large Size (width: 100%)<br> 2. Medium Size (width: 40%)<br> 3.Small Size (width: 24%)<br> 4. Extra Small Size (width: 12%)<br> input 가로 사이즈를 선택할 수 있습니다.",
     },
+
+    onChange: {
+      options: {
+        Whatever: () => {},
+      },
+    },
   },
 } satisfies Meta<typeof InputComponent>;
 
