@@ -7,7 +7,7 @@ import { useLoading } from './useLoading';
 export const useCompletion = () => {
   const navigate = useNavigate();
   const { card, setCardName, updateCardList } = useContext(CardContext);
-  const { setLoading } = useLoading();
+  const { isLoading, setLoading } = useLoading();
 
   const handleCardLoading = () => {
     setTimeout(() => {
@@ -29,5 +29,5 @@ export const useCompletion = () => {
     setCardName(event.target.value);
   };
 
-  return { handleComplete, handleInputChange };
+  return { isLoading, handleComplete, handleInputChange };
 };

@@ -6,12 +6,10 @@ import Input from '../common/Input';
 import CardLoading from '../CardLoadingComponents/CardLoading';
 import { CardContext } from '../../context/CardContext';
 import { useCompletion } from '../../hooks/useCompletion';
-import { useLoading } from '../../hooks/useLoading';
 
 const CardAdditionCompletionPage = () => {
   const { card, cardName } = useContext(CardContext);
-  const { handleComplete, handleInputChange } = useCompletion();
-  const { isLoading } = useLoading();
+  const { isLoading, handleComplete, handleInputChange } = useCompletion();
 
   if (!card) {
     return (
