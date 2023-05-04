@@ -19,12 +19,14 @@ function Home() {
           {CardDB.getCards().length ? null : (
             <AddMsgSpan>{'새로운 카드를 등록해주세요'}</AddMsgSpan>
           )}
-          {CardDB.getCards().map((card) => (
-            <CardWrapper>
-              <CreditCard card={card} />
-              {<CardNameSpan>{card.cardName}</CardNameSpan>}
-            </CardWrapper>
-          ))}
+          {CardDB.getCards()
+            .map((card) => (
+              <CardWrapper>
+                <CreditCard card={card} />
+                {<CardNameSpan>{card.cardName}</CardNameSpan>}
+              </CardWrapper>
+            ))
+            .reverse()}
           <RegisterButton onClick={goRegister}>+</RegisterButton>
         </CardContainer>
       </PageContainer>
