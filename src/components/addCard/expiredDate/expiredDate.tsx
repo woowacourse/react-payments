@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import {
   LABEL,
@@ -6,7 +6,7 @@ import {
   PLACEHOLDER,
   ERROR_MESSAGE,
 } from "../../../constants/inputInfo";
-import { DateContext } from "../../../contexts/cardInfo";
+import { useCardInfoContext } from "../../../hooks/useCardInfoContext";
 import { Date } from "../../../type/input";
 import { validation } from "../../../validation/input";
 import { Input } from "../../@common/input/Input";
@@ -15,7 +15,7 @@ import { InputGroup } from "../../@common/input/inputGroup";
 import { InputLabel } from "../../@common/input/inputLabel";
 
 export function ExpiredDate() {
-  const { month, year, handleChange } = useContext(DateContext);
+  const { month, year, changeDateInput } = useCardInfoContext();
   const [error, setError] = useState<boolean>(false);
 
   function checkIsCorrenctYear(e: React.FocusEvent<HTMLInputElement>) {
@@ -32,7 +32,8 @@ export function ExpiredDate() {
   }
 
   return (
-    <InputBox<Date> inputState={{ value: { month, year }, handleChange }}>
+    <InputBox<Date>
+      inputState={{ value: { month, year }, handleChange: changeDateInput }}>
       <Wrapper>
         <InputLabel text={LABEL.DATE} />
         <InputGroup>

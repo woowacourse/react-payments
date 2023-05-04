@@ -1,14 +1,14 @@
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 import { INPUT_TYPE, LABEL, PLACEHOLDER } from "../../../constants/inputInfo";
-import { NameContext } from "../../../contexts/cardInfo";
+import { useCardInfoContext } from "../../../hooks/useCardInfoContext";
 import { useCountText } from "../../../hooks/useCountText";
 import { Input } from "../../@common/input/Input";
 import { InputBox } from "../../@common/input/InputBox";
 import { InputLabel } from "../../@common/input/inputLabel";
 
 export function UserName() {
-  const { userName, handleChange } = useContext(NameContext);
+  const { userName, changeNameInput } = useCardInfoContext();
   const { count, countText } = useCountText();
 
   useEffect(() => {
@@ -24,7 +24,8 @@ export function UserName() {
   }
 
   return (
-    <InputBox<string> inputState={{ value: userName, handleChange }}>
+    <InputBox<string>
+      inputState={{ value: userName, handleChange: changeNameInput }}>
       <Wrapper>
         <InputLabel text={LABEL.NAME} render={renderCountText} />
         <Input

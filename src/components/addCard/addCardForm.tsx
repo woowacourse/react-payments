@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
@@ -7,23 +7,16 @@ import { CardPassword } from "./cardPassword/cardPassword";
 import { ExpiredDate } from "./expiredDate/expiredDate";
 import { SecurityCode } from "./securityCode/securityCode";
 import { UserName } from "./userName/userName";
-import {
-  BankContext,
-  DateContext,
-  NameContext,
-  NumberContext,
-} from "../../contexts/cardInfo";
 import { TEXT_LENGTH } from "../../constants/inputInfo";
 import { SubmitButton } from "../@common/button/submitButton";
 import { bank } from "../../core/bank";
+import { useCardInfoContext } from "../../hooks/useCardInfoContext";
 
 export function AddCardForm() {
   const navigate = useNavigate();
   const [isComplete, setIsComplete] = useState<boolean>(false);
-  const { cardNumber } = useContext(NumberContext);
-  const { month, year } = useContext(DateContext);
-  const { userName } = useContext(NameContext);
-  const { selectedId } = useContext(BankContext);
+  const { cardNumber, month, year, userName, selectedId } =
+    useCardInfoContext();
 
   function checkAllInputs(e: React.FormEvent<HTMLFormElement>) {
     const inputElements = Array.from(

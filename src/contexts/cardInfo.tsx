@@ -7,7 +7,7 @@ import { CardNumberIndex } from "../type/input";
 
 export const NumberContext = createContext<{
   cardNumber: CardNumberIndex;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  changeNumberInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }>({
   cardNumber: {
     first: "",
@@ -15,25 +15,25 @@ export const NumberContext = createContext<{
     third: "",
     fourth: "",
   },
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => {},
+  changeNumberInput: (e: React.ChangeEvent<HTMLInputElement>) => {},
 });
 
 export const DateContext = createContext<{
   month: string;
   year: string;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  changeDateInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }>({
   month: "",
   year: "",
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => {},
+  changeDateInput: (e: React.ChangeEvent<HTMLInputElement>) => {},
 });
 
 export const NameContext = createContext<{
   userName: string;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  changeNameInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }>({
   userName: "",
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => {},
+  changeNameInput: (e: React.ChangeEvent<HTMLInputElement>) => {},
 });
 
 export const BankContext = createContext<{

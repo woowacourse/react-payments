@@ -17,7 +17,7 @@ export function useInputDate() {
     month.length === 1 && setMonth(`0${month}`);
   }
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+  function changeDateInput(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
 
     switch (name) {
@@ -44,5 +44,5 @@ export function useInputDate() {
     }
   }
 
-  return { month, year, handleChange };
+  return { month, year, changeDateInput };
 }

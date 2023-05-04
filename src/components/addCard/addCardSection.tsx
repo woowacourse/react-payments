@@ -1,10 +1,3 @@
-import { useContext } from "react";
-import {
-  BankContext,
-  DateContext,
-  NameContext,
-  NumberContext,
-} from "../../contexts/cardInfo";
 import { bank } from "../../core/bank";
 import { AddCardForm } from "./addCardForm";
 import { BankMenu } from "../bankModal/bankMenu";
@@ -13,12 +6,11 @@ import { ModalBackDrop } from "../@common/modal/modalBackDrop";
 import { ModalBox } from "../@common/modal/modalBox";
 import { ModalContent } from "../@common/modal/modalContent";
 import { ModalTrigger } from "../@common/modal/modalTrigger";
+import { useCardInfoContext } from "../../hooks/useCardInfoContext";
 
 export function AddCardSection() {
-  const { cardNumber } = useContext(NumberContext);
-  const { month, year } = useContext(DateContext);
-  const { userName } = useContext(NameContext);
-  const { selectedId, selectId } = useContext(BankContext);
+  const { cardNumber, month, year, userName, selectedId, selectId } =
+    useCardInfoContext();
 
   return (
     <>
