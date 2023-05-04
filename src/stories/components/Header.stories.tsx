@@ -13,6 +13,15 @@ const meta = {
     ),
   ],
   tags: ["autodocs"],
+  argTypes: {
+    navigator: {
+      description:
+        "true: 왼쪽에 `<` 화살표 모양의 네비게이터 생성<br> false: 왼쪽에 `<` 화살표 모양의 네비게이터 제거",
+    },
+    title: {
+      description: "헤더 텍스트를 수정할 수 있습니다.",
+    },
+  },
 } satisfies Meta<typeof HeaderComponent>;
 
 export default meta;
@@ -32,4 +41,3 @@ export const MainHeader: Story = {
     title: "보유카드",
   },
 };
-
