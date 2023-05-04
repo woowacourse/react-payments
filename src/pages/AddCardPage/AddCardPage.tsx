@@ -23,6 +23,7 @@ import { useNavigate } from "react-router-dom";
 import { isFulfilledObject, isFulfilledString, isValidMonth } from "../../validator/Validator";
 import useModal from "../../hooks/useModal";
 import CardCompanyButtonList from "../../components/CardCompanyButtonList/CardCompanyButtonList";
+import ROUTE_PATH from "../../constants/routePath";
 
 const AddCardPage = () => {
   const [cardNumber, setCardNumber] = useState<CardNumber>({
@@ -97,7 +98,7 @@ const AddCardPage = () => {
       cardCompany,
     };
 
-    navigate("/alias", {
+    navigate(ROUTE_PATH.cardAlias, {
       state: card,
       replace: true,
     });

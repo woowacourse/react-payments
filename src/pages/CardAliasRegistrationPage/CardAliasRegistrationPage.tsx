@@ -5,6 +5,7 @@ import NotFound from "../../components/NotFound/NotFound";
 import CardPreview from "../../components/CardPreview/CardPreview";
 import { Container, Input } from "../../components/common";
 import type { Card } from "../../types";
+import ROUTE_PATH from "../../constants/routePath";
 
 type CardAliasRegistrationPageProps = {
   onSubmit: (card: Card) => void;
@@ -32,7 +33,7 @@ const CardAliasRegistrationPage = ({ onSubmit }: CardAliasRegistrationPageProps)
 
     onSubmit(newCard);
 
-    navigate("/", { replace: true });
+    navigate(ROUTE_PATH.root, { replace: true });
   };
 
   const isAliasInputFilled = !!cardAlias.length;
