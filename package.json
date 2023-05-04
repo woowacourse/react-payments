@@ -4,6 +4,7 @@
   "homepage": "https://ashleysyheo.github.io/react-payments",
   "private": true,
   "dependencies": {
+    "@ashleysyheo/react-modal": "^0.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.10.0",
