@@ -28,7 +28,7 @@ const CardItem = ({ cardData }: Props) => {
           {'﹡'.repeat('third' in number ? number.third.length : 4)}
         </span>
         <span className={styles.password}>
-          {'﹡'.repeat('fourth' in number ? number.third.length : 4)}
+          {'﹡'.repeat('fourth' in number ? number.fourth.length : 4)}
         </span>
       </div>
       <div className={styles.detailContainer}>
