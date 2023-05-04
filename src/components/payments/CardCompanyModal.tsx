@@ -35,9 +35,12 @@ const CardCompanyModal = ({ onClickLogo, isModalOpen, closeModal }: CardCompanyM
 
 const CardCompanyWrapper = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 55px);
+  grid-template-columns: repeat(4, 1fr);
   grid-column-gap: 36px;
   grid-row-gap: 26px;
+  @media screen and (max-width: 319px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 `;
 
 const CardCompanyButton = styled.button`

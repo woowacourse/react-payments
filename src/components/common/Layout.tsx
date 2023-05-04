@@ -25,6 +25,10 @@ const LayoutContent = styled.div`
   padding: 0 40px 40px 40px;
   background-color: #fff;
   overflow-y: auto;
+
+  @media screen and (max-width: 360px) {
+    width: 280px;
+  }
 `;
 
 export default Layout;
