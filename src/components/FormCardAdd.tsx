@@ -2,6 +2,12 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 
+import {
+  useHandleCVCNumberError,
+  useHandleCardNumberError,
+  useHandleCardPasswordError,
+  useHandleExpireError,
+} from '../hooks/useHandleExpireErrors';
 import { CardType, FormCardAddProps } from '../type';
 import { CVC_TOOLTIP_DETAIL, CVC_TOOLTIP_TITLE, LOCATION } from '../utils/constants';
 import { fetchNewCardData } from '../utils/fetchData';
@@ -20,13 +26,20 @@ const FormCardAdd = ({
   cardPasswordFirstDigit,
   cardPasswordSecondDigit,
 }: FormCardAddProps) => {
-  const [inputError, setInputError] = useState(false);
   const [readyToPending, setReadyToPending] = useState(false);
   const [nicknameModalOpen, setNicknameModalOpen] = useState(false);
   const [fulfilledData, setFulFilledData] = useState(Array.from({ length: 9 }, () => false));
+  const [expireError, setExpireError] = useHandleExpireError();
+  const [cardNumberError, setCardNumberError] = useHandleCardNumberError();
+  const [cardCVCNumberError, setCardCVCNumberError] = useHandleCVCNumberError();
+  const [cardPasswordError, setCardPasswordError] = useHandleCardPasswordError();
 
   const navigate = useNavigate();
   const [cardNickName, setCardNickName] = useState('');
+
+  const ableRequestData = () => {
+    return expireError && cardNumberError && cardCVCNumberError && cardPasswordError;
+  };
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -55,25 +68,6 @@ const FormCardAdd = ({
       return;
     }
     navigate(LOCATION.CARD_LIST_PAGE);
-  };
-
-  const handleExpireError = (element: ChangeEvent<HTMLInputElement>) => {
-    const data = element.target.value;
-    if (data.length === 5) {
-      const getMonth = Number(`${data[0]}${data[1]}`);
-      const getYear = Number(`20${data[3]}${data[4]}`);
-      const date = new Date();
-      const nowMonth = date.getMonth();
-      const nowYear = date.getFullYear();
-      if (getYear > nowYear) {
-        return setInputError(false);
-      }
-      if (getYear === nowYear && nowMonth <= getMonth) {
-        return setInputError(false);
-      }
-      element.target.value = '';
-      return setInputError(true);
-    }
   };
 
   const inputRef = Array.from({ length: 9 }).map(() => React.createRef<HTMLInputElement>());
@@ -137,7 +131,7 @@ const FormCardAdd = ({
               name="first"
               dataId={0}
               refObject={inputRef[0]}
-              handleError={() => {}}
+              handleError={setCardNumberError}
               onChange={cardNumber.onChange}
               nextFocus={moveFocus}
               onFlip={() => {
@@ -158,7 +152,7 @@ const FormCardAdd = ({
               name="second"
               dataId={1}
               refObject={inputRef[1]}
-              handleError={() => {}}
+              handleError={setCardNumberError}
               onChange={cardNumber.onChange}
               nextFocus={moveFocus}
               onFlip={() => {
@@ -180,7 +174,7 @@ const FormCardAdd = ({
               maxDataLength={4}
               name="third"
               refObject={inputRef[2]}
-              handleError={() => {}}
+              handleError={setCardNumberError}
               onChange={cardNumber.onChange}
               nextFocus={moveFocus}
               onFlip={() => {
@@ -202,7 +196,7 @@ const FormCardAdd = ({
               name="fourth"
               dataId={3}
               refObject={inputRef[3]}
-              handleError={() => {}}
+              handleError={setCardNumberError}
               onChange={cardNumber.onChange}
               nextFocus={moveFocus}
               onFlip={() => {
@@ -211,7 +205,7 @@ const FormCardAdd = ({
               handleInputData={handleInputData}
             />
           </div>
-          {fulfilledData[0] && fulfilledData[1] && fulfilledData[2] && fulfilledData[3] ? (
+          {cardNumberError ? (
             ''
           ) : (
             <span className="error-message">
@@ -233,7 +227,7 @@ const FormCardAdd = ({
             name="expireDate"
             dataId={4}
             refObject={inputRef[4]}
-            handleError={handleExpireError}
+            handleError={setExpireError}
             onChange={cardExpire.onChange}
             nextFocus={moveFocus}
             onFlip={() => {
@@ -241,7 +235,7 @@ const FormCardAdd = ({
             }}
             handleInputData={handleInputData}
           />
-          {inputError ? (
+          {expireError ? (
             <span className="error-message">만료일 입력은 현재 일자 이후여야만 합니다!</span>
           ) : (
             ''
@@ -285,7 +279,7 @@ const FormCardAdd = ({
               minDataLength={3}
               dataId={6}
               refObject={inputRef[6]}
-              handleError={() => {}}
+              handleError={setCardCVCNumberError}
               onChange={securityCode.onChange}
               nextFocus={moveFocus}
               onFlip={handleCardFlip}
@@ -293,7 +287,7 @@ const FormCardAdd = ({
             />
             <Tooltip title={CVC_TOOLTIP_TITLE} detail={CVC_TOOLTIP_DETAIL} />
           </div>
-          {fulfilledData[6] ? (
+          {cardCVCNumberError ? (
             ''
           ) : (
             <span className="error-message">CVC 번호는 3자리 숫자로 입력 해 주세요!</span>
@@ -314,7 +308,7 @@ const FormCardAdd = ({
               name="card-password-1"
               dataId={7}
               refObject={inputRef[7]}
-              handleError={() => {}}
+              handleError={setCardPasswordError}
               onChange={cardPasswordFirstDigit.onChange}
               nextFocus={moveFocus}
               onFlip={() => {
@@ -334,7 +328,7 @@ const FormCardAdd = ({
               name="card-password-2"
               dataId={8}
               refObject={inputRef[8]}
-              handleError={() => {}}
+              handleError={setCardPasswordError}
               onChange={cardPasswordSecondDigit.onChange}
               nextFocus={moveFocus}
               onFlip={() => {
@@ -346,14 +340,14 @@ const FormCardAdd = ({
             <span className="passwordDot">ㆍ</span>
             <span className="passwordDot">ㆍ</span>
           </div>
-          {fulfilledData[7] || fulfilledData[8] ? (
+          {cardPasswordError ? (
             ''
           ) : (
             <span className="error-message">카드 비밀번호는 각 1자리 숫자를 입력해 주세요!</span>
           )}
         </div>
         <div className="add-card-submit">
-          {readyToPending && !inputError ? <button type="submit">다음</button> : ''}
+          {readyToPending && !ableRequestData() ? <button type="submit">다음</button> : ''}
         </div>
       </form>
       {nicknameModalOpen ? (
