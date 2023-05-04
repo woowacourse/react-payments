@@ -2,23 +2,13 @@ import { Meta, StoryObj } from "@storybook/react";
 import InputComponent from "../../components/Input";
 import { css } from "styled-components";
 
-const meta = {
-  component: InputComponent,
-  title: "Components/Input",
-  tags: ["autodocs"],
-} satisfies Meta<typeof InputComponent>;
-
-export default meta;
-
-type Story = StoryObj<typeof InputComponent>;
-
-const Default = css`
-  width: 40%;
+const Large = css`
+  width: 100%;
   border-radius: 8px;
 `;
 
-const Large = css`
-  width: 100%;
+const Medium = css`
+  width: 40%;
   border-radius: 8px;
 `;
 
@@ -32,22 +22,18 @@ const ExtraSmall = css`
   border-radius: 8px;
 `;
 
-export const DefaultInput: Story = {
-  args: {
-    type: "text",
-    inputStyle: Default,
-  },
-
+const meta = {
+  component: InputComponent,
+  title: "Components/Input",
+  tags: ["autodocs"],
   argTypes: {
     type: {
       options: ["number", "text"],
       control: {
         type: "radio",
       },
-
       description:
         "number: 숫자만 입력할 수 있는 input<br> text: 영문/한글만 입력할 수 있는 input",
-      onClick: { action: "clicked" },
     },
 
     inputMode: {
@@ -55,6 +41,8 @@ export const DefaultInput: Story = {
       control: {
         type: "radio",
       },
+      description:
+        "numeric: 모바일에서는 숫자만 입력할 수 있는 숫자 키패드가 나온다.<br> text: 일반 텍스트 키패드가 나온다.",
     },
 
     placeholder: {
@@ -69,16 +57,24 @@ export const DefaultInput: Story = {
       control: {
         type: "select",
       },
+      description:
+        "값을 입력하기 전, input에 띄워주는 메시지를 수정할 수 있습니다.",
     },
 
     inputStyle: {
-      options: [Default, Large, Small, ExtraSmall],
+      options: [Large, Medium, Small, ExtraSmall],
       control: {
         type: "radio",
       },
+      description:
+        "1. Large Size<br> 2. Medium Size<br> 3.Small Size<br> 4. Extra Small Size<br> input 가로 사이즈를 선택할 수 있습니다.",
     },
   },
-};
+} satisfies Meta<typeof InputComponent>;
+
+export default meta;
+
+type Story = StoryObj<typeof InputComponent>;
 
 export const LargeInput: Story = {
   args: {
@@ -88,12 +84,12 @@ export const LargeInput: Story = {
   },
 };
 
-export const SmallInput: Story = {
+export const MediumInput: Story = {
   args: {
     type: "number",
     inputMode: "numeric",
     placeholder: "MM",
-    inputStyle: Small,
+    inputStyle: Medium,
   },
 
   argTypes: {
@@ -103,6 +99,15 @@ export const SmallInput: Story = {
         type: "radio",
       },
     },
+  },
+};
+
+export const SmallInput: Story = {
+  args: {
+    type: "number",
+    inputMode: "numeric",
+    placeholder: "000",
+    inputStyle: Small,
   },
 };
 
