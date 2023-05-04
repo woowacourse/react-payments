@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { ChangeEventHandler, useRef } from 'react';
 import type { FormEventHandler } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,6 +13,7 @@ import useCardInfoForm from './hooks/useCardInfoForm';
 import useCardFormValidation from '../../hooks/useCardFormValidation';
 
 import styles from './cardInfoForm.module.css';
+import useAutofocus from '../../hooks/useAutofocus';
 
 const CardInfoForm = () => {
   const inputRefs = Array.from({ length: 10 }).map(() =>
@@ -20,9 +21,18 @@ const CardInfoForm = () => {
   );
   const navigate = useNavigate();
 
+  const { handleNumberChange, handleOwnerChange } = useCardInfoForm();
+  const focusNextInput = useAutofocus(inputRefs);
   const { isValidCardData, validateCompany, validateExpiredDate } =
     useCardFormValidation();
-  const { handleNumberChange, handleOwnerChange } = useCardInfoForm(inputRefs);
+
+  const handleFormChange: ChangeEventHandler<HTMLFormElement> = (event) => {
+    const { target } = event;
+
+    if (target instanceof HTMLInputElement) {
+      focusNextInput(target);
+    }
+  };
 
   const handleFormSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
@@ -40,7 +50,11 @@ const CardInfoForm = () => {
   };
 
   return (
-    <form className={styles.form} onSubmit={handleFormSubmit}>
+    <form
+      className={styles.form}
+      onChange={handleFormChange}
+      onSubmit={handleFormSubmit}
+    >
       <NumberField
         handleNumberChange={handleNumberChange}
         inputRefs={inputRefs}
