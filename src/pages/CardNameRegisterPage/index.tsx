@@ -12,7 +12,9 @@ interface Props {
 const CardNameRegisterPage = ({ registerCard }: Props) => {
   return (
     <main className={styles.container}>
-      <h1 className={styles.title}>카드 등록이 완료되었습니다.</h1>
+      <h1 className={styles.title}>
+        카드 이름을 작성하고 등록을 완료해 주세요.
+      </h1>
       <CardItem />
       <section className={styles.formContainer}>
         <CardNameForm registerCard={registerCard} />

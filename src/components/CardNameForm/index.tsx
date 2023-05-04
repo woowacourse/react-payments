@@ -34,7 +34,7 @@ const CardNameForm = ({ registerCard }: Props) => {
     }
 
     const cardData: CardData = {
-      name: nameInputRef.current.value,
+      name: nameInputRef.current.value.trim(),
       company,
       number: { first: number.first, second: number.second },
       expiredDate,
