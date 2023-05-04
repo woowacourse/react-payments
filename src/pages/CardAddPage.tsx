@@ -26,6 +26,7 @@ const CardAddPage = () => {
           ownerName={cardInformation.ownerName}
         />
         <CardAddForm
+          cardInformation={cardInformation}
           cardInputError={inputError}
           updateInputValue={updateInputValue}
           updateInputError={updateInputError}

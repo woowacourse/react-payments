@@ -11,6 +11,7 @@ import { useFormFocus } from '../../hooks/common/useFormFocusMove';
 import styles from './style.module.css';
 
 interface CardAddFormProps {
+  cardInformation: CardFormData;
   cardInputError: CardFormValidation;
   updateInputValue: <K extends keyof CardFormData>(key: K, value: CardFormData[K]) => void;
   updateInputError: <K extends keyof CardFormValidation>(key: K, value: CardFormData[K]) => void;
@@ -18,6 +19,7 @@ interface CardAddFormProps {
 }
 
 const CardAddForm = ({
+  cardInformation,
   cardInputError,
   updateInputValue,
   updateInputError,
@@ -28,6 +30,7 @@ const CardAddForm = ({
   return (
     <form className={styles.form} onChange={moveFocus} onSubmit={handleSubmit} noValidate>
       <CardIssuer
+        value={cardInformation.issuer}
         isError={cardInputError.issuer}
         updateInputValue={updateInputValue}
         updateInputError={updateInputError}
@@ -42,13 +45,14 @@ const CardAddForm = ({
         updateInputValue={updateInputValue}
         updateInputError={updateInputError}
       />
-      <CardOwnerName updateInputValue={updateInputValue} />
+      <CardOwnerName value={cardInformation.ownerName} updateInputValue={updateInputValue} />
       <CardSecurityCode
         isError={cardInputError.securityCode}
         updateInputValue={updateInputValue}
         updateInputError={updateInputError}
       />
       <CardPassword
+        value={cardInformation.password}
         isError={cardInputError.password}
         updateInputValue={updateInputValue}
         updateInputError={updateInputError}

@@ -1,4 +1,4 @@
-import { memo, useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useRef } from 'react';
 import { Modal, useModalContext } from '@ashleysyheo/react-modal';
 import type { FocusEvent, MouseEvent } from 'react';
 import type { CardFormData, CardFormValidation, Issuer } from '../../../types';
@@ -10,14 +10,14 @@ import DownIcon from '../../../assets/down-icon.svg';
 import styles from './style.module.css';
 
 interface CardIssuerProps {
+  value: string;
   isError: boolean;
   updateInputValue: <K extends keyof CardFormData>(key: K, value: CardFormData[K]) => void;
   updateInputError: <K extends keyof CardFormValidation>(key: K, value: CardFormData[K]) => void;
 }
 
-const CardIssuer = ({ isError, updateInputValue, updateInputError }: CardIssuerProps) => {
+const CardIssuer = ({ value, isError, updateInputValue, updateInputError }: CardIssuerProps) => {
   const { isModalOpen, isModalClosed, openModal, closeModal } = useModalContext();
-  const [value, setValue] = useState<Issuer | ''>('');
   const containerRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -39,7 +39,6 @@ const CardIssuer = ({ isError, updateInputValue, updateInputError }: CardIssuerP
   };
 
   const onOptionClick = (event: MouseEvent<HTMLButtonElement>) => {
-    setValue(event.currentTarget.value as Issuer);
     updateInputValue('issuer', event.currentTarget.value as Issuer);
     closeModal();
   };

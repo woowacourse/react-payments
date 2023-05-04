@@ -26,10 +26,11 @@ type Story = StoryObj<typeof CardIssuer>;
 
 export const Default: Story = {
   render: () => {
-    const { inputError, updateInputValue, updateInputError } = useCardAddForm();
+    const { cardInformation, inputError, updateInputValue, updateInputError } = useCardAddForm();
 
     return (
       <CardIssuer
+        value={cardInformation.issuer}
         isError={inputError.issuer}
         updateInputValue={updateInputValue}
         updateInputError={updateInputError}
@@ -40,10 +41,11 @@ export const Default: Story = {
 
 export const SuccessInteraction: Story = {
   render: () => {
-    const { inputError, updateInputValue, updateInputError } = useCardAddForm();
+    const { cardInformation, inputError, updateInputValue, updateInputError } = useCardAddForm();
 
     return (
       <CardIssuer
+        value={cardInformation.issuer}
         isError={inputError.issuer}
         updateInputValue={updateInputValue}
         updateInputError={updateInputError}
@@ -70,10 +72,11 @@ export const SuccessInteraction: Story = {
 
 export const ErrorInteraction: Story = {
   render: () => {
-    const { inputError, updateInputValue, updateInputError } = useCardAddForm();
+    const { cardInformation, inputError, updateInputValue, updateInputError } = useCardAddForm();
 
     return (
       <CardIssuer
+        value={cardInformation.issuer}
         isError={inputError.issuer}
         updateInputValue={updateInputValue}
         updateInputError={updateInputError}

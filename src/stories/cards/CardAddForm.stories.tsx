@@ -27,10 +27,12 @@ type Story = StoryObj<typeof CardAddForm>;
 
 export const Default: Story = {
   render: () => {
-    const { inputError, updateInputValue, updateInputError, handleSubmit } = useCardAddForm();
+    const { cardInformation, inputError, updateInputValue, updateInputError, handleSubmit } =
+      useCardAddForm();
 
     return (
       <CardAddForm
+        cardInformation={cardInformation}
         cardInputError={inputError}
         updateInputValue={updateInputValue}
         updateInputError={updateInputError}
@@ -42,10 +44,12 @@ export const Default: Story = {
 
 export const SuccessInteraction: Story = {
   render: () => {
-    const { inputError, updateInputValue, updateInputError, handleSubmit } = useCardAddForm();
+    const { cardInformation, inputError, updateInputValue, updateInputError, handleSubmit } =
+      useCardAddForm();
 
     return (
       <CardAddForm
+        cardInformation={cardInformation}
         cardInputError={inputError}
         updateInputValue={updateInputValue}
         updateInputError={updateInputError}
@@ -122,10 +126,12 @@ export const SuccessInteraction: Story = {
 
 export const ErrorInteraction: Story = {
   render: () => {
-    const { inputError, updateInputValue, updateInputError, handleSubmit } = useCardAddForm();
+    const { cardInformation, inputError, updateInputValue, updateInputError, handleSubmit } =
+      useCardAddForm();
 
     return (
       <CardAddForm
+        cardInformation={cardInformation}
         cardInputError={inputError}
         updateInputValue={updateInputValue}
         updateInputError={updateInputError}
