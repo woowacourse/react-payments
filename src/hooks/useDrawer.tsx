@@ -1,15 +1,12 @@
-import { useDrawerDispatch, useDrawerState } from "../context/DrawerContext";
+import { useDrawerContext } from "../context/DrawerContext";
 
 export default function useDrawer() {
-  const drawerState = useDrawerState();
-  const drawerDispatch = useDrawerDispatch();
+  const context = useDrawerContext();
+  const { isDrawerOpen, setIsDrawerOpen } = context;
 
-  const openDrawer = () => {
-    drawerDispatch.setIsDrawerOpen(true);
-  };
-  const closeDrawer = () => {
-    drawerDispatch.setIsDrawerOpen(false);
-  };
+  const openDrawer = () => setIsDrawerOpen(true);
 
-  return { isDrawerOpen: drawerState.isDrawerOpen, openDrawer, closeDrawer };
+  const closeDrawer = () => setIsDrawerOpen(false);
+
+  return { isDrawerOpen, openDrawer, closeDrawer };
 }

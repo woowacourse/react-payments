@@ -6,8 +6,8 @@ import { useCardAction } from "./context/CardContext";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 import "./styles/index.css";
 import { CardInfo } from "./types";
-import { DrawerContextProvider } from "./context/DrawerContext";
 import AddNicknamePage from "./components/Page/AddNicknamePage";
+import { DrawerContextProvider } from "./context/DrawerContext";
 
 export default function App() {
   const [pageIndex, setPageIndex] = useState(0);
@@ -57,22 +57,25 @@ export default function App() {
 
   return (
     <div className="app">
-      {pageIndex === 0 && (
-        <Homepage cardList={cardList} onClick={() => setPageIndex(1)} />
-      )}
-      {pageIndex === 1 && (
-        <AddCardPage
-          onClick={() => setPageIndex(0)}
-          onSubmit={onCardInfoSubmit}
-        />
-      )}
-      {pageIndex === 2 && (
-        <AddNicknamePage
-          cardList={cardList}
-          setCardList={setCardList}
-          setPageIndex={setPageIndex}
-        />
-      )}
+      <DrawerContextProvider>
+        {pageIndex === 0 && (
+          <Homepage cardList={cardList} onClick={() => setPageIndex(1)} />
+        )}
+
+        {pageIndex === 1 && (
+          <AddCardPage
+            onClick={() => setPageIndex(0)}
+            onSubmit={onCardInfoSubmit}
+          />
+        )}
+        {pageIndex === 2 && (
+          <AddNicknamePage
+            cardList={cardList}
+            setCardList={setCardList}
+            setPageIndex={setPageIndex}
+          />
+        )}
+      </DrawerContextProvider>
     </div>
   );
 }

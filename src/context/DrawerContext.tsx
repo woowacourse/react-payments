@@ -1,15 +1,11 @@
 import { createContext, useContext, useState } from "react";
 
-interface DrawerState {
+interface DrawerContext {
   isDrawerOpen: boolean;
-}
-
-interface DrawerAction {
   setIsDrawerOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const DrawerStateContext = createContext<DrawerState | null>(null);
-export const DrawerDispatchContext = createContext<DrawerAction | null>(null);
+export const DrawerContext = createContext<DrawerContext | null>(null);
 
 export function DrawerContextProvider({
   children,
@@ -17,23 +13,17 @@ export function DrawerContextProvider({
   children: React.ReactNode;
 }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(true);
+  const contextValue = { isDrawerOpen, setIsDrawerOpen };
+
   return (
-    <DrawerStateContext.Provider value={{ isDrawerOpen }}>
-      <DrawerDispatchContext.Provider value={{ setIsDrawerOpen }}>
-        {children}
-      </DrawerDispatchContext.Provider>
-    </DrawerStateContext.Provider>
+    <DrawerContext.Provider value={contextValue}>
+      {children}
+    </DrawerContext.Provider>
   );
 }
 
-export function useDrawerState() {
-  const state = useContext(DrawerStateContext);
-  if (!state) throw new Error("DrawerProvider not found");
-  return state;
-}
-
-export function useDrawerDispatch() {
-  const dispatch = useContext(DrawerDispatchContext);
-  if (!dispatch) throw new Error("DrawerProvider not found");
-  return dispatch;
+export function useDrawerContext() {
+  const context = useContext(DrawerContext);
+  if (!context) throw new Error("DrawerProvider not found");
+  return context;
 }
