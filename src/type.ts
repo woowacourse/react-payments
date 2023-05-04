@@ -1,3 +1,5 @@
+import { CARD_CO_NAME } from "./CONSTANT";
+
 export interface CreditCard {
   cardCo: CardCo;
   nickName: string;
@@ -19,12 +21,4 @@ export interface InputStatus {
   password: boolean;
 }
 
-export type CardCo =
-  | "woori"
-  | "lotte"
-  | "hana"
-  | "kb"
-  | "kakao"
-  | "bc"
-  | "shinhan"
-  | "hyundai";
+export type CardCo = keyof typeof CARD_CO_NAME;

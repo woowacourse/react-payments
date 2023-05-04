@@ -25,7 +25,7 @@ export const REGULAR_EXPRESSION = {
   CAPITAL_LETTER_OR_SPACE: /^[A-Z\s]+$/,
 };
 
-export const CARD_CO_NAME: Record<CardCo, string> = {
+export const CARD_CO_NAME = {
   woori: "우리카드",
   lotte: "롯데카드",
   hana: "하나카드",
