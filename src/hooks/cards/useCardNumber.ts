@@ -25,7 +25,7 @@ const useCardNumber = () => {
     }
 
     if (nativeEvent.inputType === 'deleteContentBackward') {
-      if (cardNumberRef.current.length > 10) {
+      if (cardNumberRef.current.length > CARD_NUMBER_INPUT_MAX_VISIBLE_LENGTH) {
         cardNumberRef.current = cardNumberRef.current.slice(
           0,
           CARD_NUMBER_INPUT_MAX_VISIBLE_LENGTH - 1
