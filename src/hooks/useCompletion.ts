@@ -7,18 +7,18 @@ import { useLoading } from './useLoading';
 export const useCompletion = () => {
   const navigate = useNavigate();
   const { card, setCardName, updateCardList } = useContext(CardContext);
-  const { isLoading, setLoading } = useLoading();
+  const { isLoading, handleLoadingOn, handleLoadingOff } = useLoading();
 
   const handleCardLoading = () => {
     setTimeout(() => {
-      setLoading(false);
+      handleLoadingOff();
       navigate('/');
     }, 3000);
   };
 
   const handleComplete = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setLoading(true);
+    handleLoadingOn();
     setCardName((event.target as HTMLInputElement).value);
     updateCardList(card);
     cardLocalStorage.addCard(card);

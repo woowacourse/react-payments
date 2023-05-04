@@ -3,9 +3,13 @@ import { useState } from 'react';
 export const useLoading = () => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const setLoading = (loading: boolean) => {
-    setIsLoading(loading);
+  const handleLoadingOn = () => {
+    setIsLoading(true);
   };
 
-  return { isLoading, setLoading };
+  const handleLoadingOff = () => {
+    setIsLoading(false);
+  };
+
+  return { isLoading, handleLoadingOn, handleLoadingOff };
 };
