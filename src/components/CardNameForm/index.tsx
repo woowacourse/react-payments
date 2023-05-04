@@ -27,14 +27,18 @@ const CardNameForm = ({ registerCard }: Props) => {
       return;
     }
 
-    if (nameInputRef.current.value === '') {
-      alert('카드 이름을 작성하지 않았습니다. 작성 후 다시 제출해주세요.');
+    const { value } = nameInputRef.current;
+
+    if (value.trim() === '') {
+      alert(
+        '카드 이름은 공백이나 빈 값이 들어갈 수 없습니다. 작성 후 다시 제출해주세요.',
+      );
       nameInputRef.current.focus();
       return;
     }
 
     const cardData: CardData = {
-      name: nameInputRef.current.value.trim(),
+      name: value.trim(),
       company,
       number: { first: number.first, second: number.second },
       expiredDate,
