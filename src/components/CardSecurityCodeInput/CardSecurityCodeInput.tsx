@@ -16,10 +16,10 @@ const CardSecurityCodeInput = () => {
 
     if (NUMBER_REGEX.test(currentSecurityCode)) {
       setError('0부터 9까지 숫자만 입력이 가능합니다.');
-    } else {
-      setSecurityCode(currentSecurityCode);
-      setError('');
+      return;
     }
+    setSecurityCode(currentSecurityCode);
+    setError('');
   };
 
   return (
