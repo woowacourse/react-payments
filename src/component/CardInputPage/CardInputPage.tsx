@@ -17,8 +17,7 @@ export default function CardInputPage(props: CardInputPageProps) {
   return (
     <section className="card-Input-section">
       <div className="card-Input-section-header">
-        <Link to="/">
-          <button className="back-page-button" type="button"></button>
+        <Link to="/" className="back-page-button" type="button">
           <LessThanSide />
         </Link>
         <span className="page-explanation">카드 추가</span>
