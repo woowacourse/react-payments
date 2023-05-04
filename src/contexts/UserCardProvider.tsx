@@ -9,7 +9,7 @@ type CardProviderAction = {
 const userCardContext = createContext<[Card[], CardProviderAction] | undefined>(undefined);
 
 export function UserCardProvider({ children }: PropsWithChildren) {
-  const [userCards, setUserCards] = useState<Card[]>(CardDB.getCards());
+  const [userCards, setUserCards] = useState<Card[]>(() => CardDB.getCards());
 
   const actions: CardProviderAction = {
     addCard(card: Card) {
