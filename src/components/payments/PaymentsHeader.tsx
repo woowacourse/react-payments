@@ -4,12 +4,19 @@ import { PAGE_PATH, PATH_TITLE } from '../../constants';
 
 type Pathname = keyof typeof PATH_TITLE;
 
+const isValidPath = (path: string): path is Pathname => {
+  return Object.keys(PATH_TITLE).includes(path);
+};
+
 const PaymentsHeader = () => {
   const { pathname } = useLocation();
-  const pageTitle = PATH_TITLE[pathname as Pathname];
+
+  if (!isValidPath(pathname)) throw new Error('존재하지 않는 path입니다.');
+
+  const pageTitle = PATH_TITLE[pathname];
 
   return (
-    <StyledHeader>
+    <StyledHeader pageTitle={pageTitle}>
       <StyledLeftArrowButton to={PAGE_PATH.HOME} title={pageTitle} />
       <StyledHeaderTitle>{pageTitle}</StyledHeaderTitle>
     </StyledHeader>
@@ -40,8 +47,8 @@ const StyledLeftArrowButton = styled(Link)`
   }
 `;
 
-const StyledHeader = styled.header`
-  display: flex;
+const StyledHeader = styled.header<{ pageTitle: string }>`
+  display: ${(props) => (props.pageTitle === '' ? 'none' : 'flex')};
   height: 70px;
   align-items: center;
   position: sticky;
