@@ -17,7 +17,7 @@ export const passwordInput = {
   type: 'password',
 };
 
-export const CardPreviewInfoContext = createContext({
+export const previewInfoDefault = {
   cardNumber: {
     first: { ...defaultInput },
     second: { ...defaultInput },
@@ -39,4 +39,5 @@ export const CardPreviewInfoContext = createContext({
       },
     },
   },
-});
+};
+export const CardPreviewInfoContext = createContext(previewInfoDefault);
