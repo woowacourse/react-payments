@@ -1,4 +1,5 @@
 import type { ChangeEvent, MutableRefObject } from 'react';
+import { CARD_NUMBER_INPUT_MAX_VISIBLE_LENGTH } from '../../constants/input';
 import {
   encryptDisplayedCardNumber,
   formatDisplayedCardNumber,
@@ -24,8 +25,20 @@ const useCardNumber = () => {
     }
 
     if (nativeEvent.inputType === 'deleteContentBackward') {
-      cardNumberRef.current = '';
-      target.value = cardNumberRef.current;
+      if (cardNumberRef.current.length > 10) {
+        cardNumberRef.current = cardNumberRef.current.slice(
+          0,
+          CARD_NUMBER_INPUT_MAX_VISIBLE_LENGTH - 1
+        );
+      } else {
+        const modifiedValue =
+          cardNumberRef.current.slice(0, target.selectionStart) +
+          cardNumberRef.current.slice(target.selectionStart + 1);
+
+        cardNumberRef.current = formatDisplayedCardNumber(modifiedValue);
+      }
+
+      target.value = encryptDisplayedCardNumber(cardNumberRef.current);
     }
   };
 
