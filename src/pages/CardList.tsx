@@ -15,7 +15,7 @@ export function CardList() {
   }
 
   return (
-    <CardListContainer>
+    <_CardListContainer>
       <Header title='보유 카드' />
       <_Section>
         <_Direction>
@@ -32,11 +32,11 @@ export function CardList() {
           })}
         <_Button onClick={moveAddCardPage}>+</_Button>
       </_Section>
-    </CardListContainer>
+    </_CardListContainer>
   );
 }
 
-const CardListContainer = styled.div`
+const _CardListContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;

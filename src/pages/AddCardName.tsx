@@ -116,6 +116,3 @@ const _CompleteButton = styled.button`
 
   cursor: pointer;
 `;
-function naviagte(arg0: string) {
-  throw new Error('Function not implemented.');
-}

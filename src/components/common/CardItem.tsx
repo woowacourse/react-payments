@@ -14,20 +14,20 @@ export function CardItem(props: CardItemProps) {
   const companyName = company ? CARD_COMPANY[company].name : '';
 
   return (
-    <CardContainer color={companyColor}>
+    <_CardContainer color={companyColor}>
       <_CompanyName>{companyName}</_CompanyName>
       <_Chip />
-      <NumberWrapper>
+      <_NumberWrapper>
         <_NumberItem>{makeCardNumber(cardNumber)}</_NumberItem>
-      </NumberWrapper>
-      <InfoWrapper>
+      </_NumberWrapper>
+      <_InfoWrapper>
         <_Name>{username}</_Name>
         <_Date>{makeCardDate(expiredDate)}</_Date>
-      </InfoWrapper>
-    </CardContainer>
+      </_InfoWrapper>
+    </_CardContainer>
   );
 }
-const CardContainer = styled.section`
+const _CardContainer = styled.section`
   display: flex;
   flex-direction: column;
   width: 21.3rem;
@@ -66,7 +66,7 @@ const _Chip = styled.div`
   border-radius: 0.4rem;
 `;
 
-const NumberWrapper = styled.ul`
+const _NumberWrapper = styled.ul`
   display: flex;
   justify-content: space-around;
 
@@ -75,7 +75,7 @@ const NumberWrapper = styled.ul`
 
 const _NumberItem = styled.li``;
 
-const InfoWrapper = styled.div`
+const _InfoWrapper = styled.div`
   display: flex;
   justify-content: space-between;
 
