@@ -38,7 +38,9 @@ const CardRegisterForm = () => {
         <Header navigator title="카드 추가" />
 
         <CardPreview cardInfo={cardInfo} onClick={handleModal} />
-
+        <CardSelectMessage>
+          카드사를 변경하려면 카드를 클릭해주세요.
+        </CardSelectMessage>
         <AddCardForm onSubmit={handleForm}>
           <CardNumberInput />
           <ExpirationDateInput />
@@ -64,6 +66,12 @@ const AddCardForm = styled.form`
   display: flex;
   flex-direction: column;
   gap: 2px;
+`;
+
+const CardSelectMessage = styled.p`
+  font-size: 12px;
+  text-align: center;
+  margin-bottom: 24px;
 `;
 
 export default CardRegisterForm;
