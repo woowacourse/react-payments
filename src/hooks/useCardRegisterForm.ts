@@ -4,7 +4,7 @@ import { useInput } from './useInput';
 import {
   CardPreviewInfoContext,
   passwordInput,
-} from '../contexts/cardPreviewInfo';
+} from '../contexts/cardPreviewInfoContext';
 import { InputInfo } from '../type/input';
 import { checkInputValdiation } from '../utils/checkInputValidation';
 import { cardRegisterValidator } from '../validation/cardRegister';

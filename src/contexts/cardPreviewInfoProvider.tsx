@@ -1,50 +1,15 @@
-import { createContext, useState } from 'react';
+import { useState } from 'react';
 
+import {
+  CardPreviewInfoContext,
+  defaultInput,
+  optionalInput,
+  passwordInput,
+} from './cardPreviewInfoContext';
 import { useInput } from '../hooks/useInput';
 import { cardRegisterValidator } from '../validation/cardRegister';
 
-export const defaultInput = {
-  type: 'text',
-  required: true,
-  value: '',
-  isError: false,
-};
-
-const optionalInput = {
-  ...defaultInput,
-  required: false,
-};
-
-export const passwordInput = {
-  ...defaultInput,
-  type: 'password',
-};
-
-export const CardPreviewInfoContext = createContext({
-  cardNumber: {
-    first: { ...defaultInput },
-    second: { ...defaultInput },
-    third: { ...passwordInput },
-    fourth: { ...passwordInput },
-  },
-  expiredDate: {
-    month: { ...defaultInput },
-    year: { ...defaultInput },
-  },
-  username: {
-    first: { ...optionalInput },
-  },
-  company: {
-    clicked: {
-      value: '',
-      handleClick: (e: React.MouseEvent<HTMLImageElement>) => {
-        e;
-      },
-    },
-  },
-});
-
-export function CardPreviewInfoProvider({
+export default function CardPreviewInfoProvider({
   children,
 }: {
   children: React.ReactNode;

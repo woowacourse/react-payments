@@ -1,33 +1,51 @@
 import styled from 'styled-components';
 
 import { CARD_COMPANY } from '../../constants/cardCompany';
-import { Card } from '../../type/card';
-import { makeCardNumber, makeCardDate } from '../../utils/cardInfoFormat';
 
 interface CardItemProps {
-  info: Card;
+  cardNumberFirst: string;
+  cardNumberSecond: string;
+  cardNumberThird: string;
+  cardNumberFourth: string;
+  month: string;
+  year: string;
+  username?: string;
+  company: string;
 }
 
-export function CardItem(props: CardItemProps) {
-  const { cardNumber, expiredDate, username, company } = props.info;
+export function CardItem({
+  cardNumberFirst,
+  cardNumberSecond,
+  cardNumberThird,
+  cardNumberFourth,
+  month,
+  year,
+  username,
+  company,
+}: CardItemProps) {
   const companyColor = company ? CARD_COMPANY[company].color : 'gray';
   const companyName = company ? CARD_COMPANY[company].name : '';
 
   return (
-    <CardContainer color={companyColor}>
+    <_CardContainer color={companyColor}>
       <_CompanyName>{companyName}</_CompanyName>
       <_Chip />
-      <NumberWrapper>
-        <_NumberItem>{makeCardNumber(cardNumber)}</_NumberItem>
-      </NumberWrapper>
-      <InfoWrapper>
+      <_NumberWrapper>
+        <_NumberItem>{cardNumberFirst}</_NumberItem>
+        <_NumberItem>{cardNumberSecond}</_NumberItem>
+        <_NumberItem>{'•'.repeat(cardNumberThird.length)}</_NumberItem>
+        <_NumberItem>{'•'.repeat(cardNumberFourth.length)}</_NumberItem>
+      </_NumberWrapper>
+      <_InfoWrapper>
         <_Name>{username}</_Name>
-        <_Date>{makeCardDate(expiredDate)}</_Date>
-      </InfoWrapper>
-    </CardContainer>
+        <_Date>
+          {month}/{year}
+        </_Date>
+      </_InfoWrapper>
+    </_CardContainer>
   );
 }
-const CardContainer = styled.section`
+const _CardContainer = styled.section`
   display: flex;
   flex-direction: column;
   width: 21.3rem;
@@ -66,7 +84,7 @@ const _Chip = styled.div`
   border-radius: 0.4rem;
 `;
 
-const NumberWrapper = styled.ul`
+const _NumberWrapper = styled.ul`
   display: flex;
   justify-content: space-around;
 
@@ -75,7 +93,7 @@ const NumberWrapper = styled.ul`
 
 const _NumberItem = styled.li``;
 
-const InfoWrapper = styled.div`
+const _InfoWrapper = styled.div`
   display: flex;
   justify-content: space-between;
 

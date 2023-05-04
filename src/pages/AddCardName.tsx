@@ -35,7 +35,16 @@ export function AddCardName() {
       <_Section>
         <_Direction>카드 등록이 완료되었습니다.</_Direction>
         {currentCardInfo ? (
-          <CardItem info={currentCardInfo} />
+          <CardItem
+            cardNumberFirst={currentCardInfo.cardNumber.slice(0, 4)}
+            cardNumberSecond={currentCardInfo.cardNumber.slice(4, 8)}
+            cardNumberThird={currentCardInfo.cardNumber.slice(8, 12)}
+            cardNumberFourth={currentCardInfo.cardNumber.slice(12, 16)}
+            month={currentCardInfo.expiredDate.slice(0, 2)}
+            year={currentCardInfo.expiredDate.slice(2, 4)}
+            username={currentCardInfo.username}
+            company={currentCardInfo.company}
+          />
         ) : (
           <Navigate to='/' replace={true} />
         )}
@@ -116,6 +125,3 @@ const _CompleteButton = styled.button`
 
   cursor: pointer;
 `;
-function naviagte(arg0: string) {
-  throw new Error('Function not implemented.');
-}
