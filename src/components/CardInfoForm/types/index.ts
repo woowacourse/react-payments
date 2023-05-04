@@ -1,11 +1,7 @@
-import type { ChangeEventHandler, RefObject } from 'react';
+import type { RefObject } from 'react';
 
-export interface CardFormNumberFieldProps {
-  handleNumberChange: ChangeEventHandler<HTMLInputElement>;
-  inputRefs: RefObject<HTMLInputElement>[];
-}
+export type InputRef = RefObject<HTMLInputElement>;
 
-export interface CardFormOwnerFieldProps {
-  handleOwnerChange: ChangeEventHandler<HTMLInputElement>;
-  inputRefs: RefObject<HTMLInputElement>[];
+export interface CardFormFieldProps {
+  inputRefs: InputRef[];
 }

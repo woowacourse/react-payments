@@ -2,18 +2,7 @@ import useCardFormValue from './useCardFormValue';
 import { isValidExpiredDate } from '../utils/validation';
 
 const useCardFormValidation = () => {
-  const { company, number, expiredDate, cvc, password } = useCardFormValue();
-
-  const isValidCardData =
-    number.first.length === 4 &&
-    number.second.length === 4 &&
-    number.third.length === 4 &&
-    number.fourth.length === 4 &&
-    expiredDate.month.length === 2 &&
-    expiredDate.year.length === 2 &&
-    cvc.length === 3 &&
-    password.first.length === 1 &&
-    password.second.length === 1;
+  const { company, expiredDate } = useCardFormValue();
 
   const validateCompany = () => {
     if (!company) {
@@ -31,7 +20,7 @@ const useCardFormValidation = () => {
     }
   };
 
-  return { isValidCardData, validateCompany, validateExpiredDate };
+  return { validateCompany, validateExpiredDate };
 };
 
 export default useCardFormValidation;

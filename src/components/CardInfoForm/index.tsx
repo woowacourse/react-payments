@@ -1,5 +1,5 @@
-import { ChangeEventHandler, useRef } from 'react';
-import type { FormEventHandler } from 'react';
+import { useRef } from 'react';
+import type { FormEventHandler, ChangeEventHandler } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import NumberField from './NumberField';
@@ -9,11 +9,11 @@ import CvcField from './CvcField';
 import PasswordField from './PasswordField';
 import Button from '../common/Button';
 
-import useCardInfoForm from './hooks/useCardInfoForm';
+import useFieldFilled from './hooks/useFieldFilled';
+import useAutofocus from '../../hooks/useAutofocus';
 import useCardFormValidation from '../../hooks/useCardFormValidation';
 
 import styles from './cardInfoForm.module.css';
-import useAutofocus from '../../hooks/useAutofocus';
 
 const CardInfoForm = () => {
   const inputRefs = Array.from({ length: 10 }).map(() =>
@@ -21,10 +21,9 @@ const CardInfoForm = () => {
   );
   const navigate = useNavigate();
 
-  const { handleNumberChange, handleOwnerChange } = useCardInfoForm();
   const focusNextInput = useAutofocus(inputRefs);
-  const { isValidCardData, validateCompany, validateExpiredDate } =
-    useCardFormValidation();
+  const { validateCompany, validateExpiredDate } = useCardFormValidation();
+  const isFilled = useFieldFilled(inputRefs);
 
   const handleFormChange: ChangeEventHandler<HTMLFormElement> = (event) => {
     const { target } = event;
@@ -55,26 +54,13 @@ const CardInfoForm = () => {
       onChange={handleFormChange}
       onSubmit={handleFormSubmit}
     >
-      <NumberField
-        handleNumberChange={handleNumberChange}
-        inputRefs={inputRefs}
-      />
-      <ExpiredDateField
-        handleNumberChange={handleNumberChange}
-        inputRefs={inputRefs}
-      />
-      <OwnerField handleOwnerChange={handleOwnerChange} inputRefs={inputRefs} />
-      <CvcField handleNumberChange={handleNumberChange} inputRefs={inputRefs} />
-      <PasswordField
-        handleNumberChange={handleNumberChange}
-        inputRefs={inputRefs}
-      />
+      <NumberField inputRefs={inputRefs} />
+      <ExpiredDateField inputRefs={inputRefs} />
+      <OwnerField inputRefs={inputRefs} />
+      <CvcField inputRefs={inputRefs} />
+      <PasswordField inputRefs={inputRefs} />
       <div className={styles.submitButton}>
-        {isValidCardData && (
-          <Button tabIndex={11} padding>
-            다음
-          </Button>
-        )}
+        {isFilled && <Button padding>다음</Button>}
       </div>
     </form>
   );
