@@ -10,32 +10,32 @@ const Modal = ({ children, isOpen, closeModal }: PropsWithChildren<ModalProps>) 
   return (
     <>
       {isOpen ? (
-        <StyledModalContainer>
-          <StyledModalBackdrop onClick={closeModal}></StyledModalBackdrop>
-          <StyledModalContentWrapper>
+        <>
+          <ModalOverlay onClick={closeModal} />
+          <ModalContent>
             {children}
             <CloseButton onClick={closeModal}>✖</CloseButton>
-          </StyledModalContentWrapper>
-        </StyledModalContainer>
+          </ModalContent>
+        </>
       ) : null}
     </>
   );
 };
 
-const StyledModalContainer = styled.div`
+export default Modal;
+
+const ModalOverlay = styled.div`
   position: fixed;
-  width: 100%;
-  bottom: 0;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  cursor: pointer;
 `;
 
-const StyledModalContentWrapper = styled.div`
+const ModalContent = styled.div`
   position: absolute;
-  left: 0;
   bottom: 0;
   width: 100%;
-
   padding: 20px 36px;
-
   border-radius: 8px 8px 0px 0px;
   background-color: #fff;
 `;
@@ -44,27 +44,9 @@ const CloseButton = styled.button`
   position: absolute;
   top: 16px;
   right: 20px;
-
   width: 20px;
   height: 20px;
-
   border: none;
-
   background: transparent;
-
   cursor: pointer;
 `;
-
-const StyledModalBackdrop = styled.div`
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-
-  background: rgba(0, 0, 0, 0.35);
-
-  cursor: pointer;
-`;
-
-export default Modal;
