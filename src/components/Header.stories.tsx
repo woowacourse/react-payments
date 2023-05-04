@@ -12,24 +12,24 @@ const meta = {
       </BrowserRouter>
     ),
   ],
+  tags: ["autodocs"],
 } satisfies Meta<typeof HeaderComponent>;
 
 export default meta;
 
 type Story = StoryObj<typeof HeaderComponent>;
 
-export const Header: Story = {
+export const CardRegisterHeader: Story = {
   args: {
     navigator: true,
     title: "카드 추가",
   },
+};
 
-  argTypes: {
-    title: {
-      options: ["카드 추가", "보유카드"],
-      control: {
-        type: "radio",
-      },
-    },
+export const MainHeader: Story = {
+  args: {
+    navigator: false,
+    title: "보유카드",
   },
 };
+
