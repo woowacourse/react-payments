@@ -3,7 +3,7 @@ export const LOCAL_STORAGE_CARD_KEY = 'cardList';
 export const PAGE_KIND = Object.freeze({
   HOME: 'homePage',
   ADD_CARD: 'addCardPage',
-  REGISTER_CARD: 'registerCard',
+  REGISTER_CARD: 'registerCardPage',
 });
 
 export const PAGE = [

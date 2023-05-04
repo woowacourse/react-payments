@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import RegisterCard from './RegisterCard';
+import RegisterCard from './RegisterCardPage';
 
 function RegisterCardStories() {
   return <RegisterCard />;
