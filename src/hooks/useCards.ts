@@ -22,7 +22,7 @@ const useCards = () => {
   }, [cards]);
 
   const registerCard = (card: CardData) => {
-    setCards((prev) => [...prev, card]);
+    setCards((prev) => [card, ...prev]);
   };
 
   return { cards, registerCard };
