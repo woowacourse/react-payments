@@ -1,9 +1,7 @@
 import { Meta } from "@storybook/react";
 import React from "react";
 import CardCompany from ".";
-import { ModalProvider } from "src/context/ModalContext";
-import useModal from "src/hooks/useModal";
-import Modal from "src/components/@common/Modal";
+import { ModalProvider, useModal, Modal } from "@hozzijeong/react-modal";
 
 const cardNumber = {
   component: CardCompany,

@@ -1,10 +1,9 @@
 import { useMemo } from "react";
 import Card from "src/components/@common/Card";
 import Layout from "src/components/@common/Layout";
-import Modal from "src/components/@common/Modal";
+import { Modal, useModal } from "@hozzijeong/react-modal";
 import CardCompany from "src/components/registerForm/CardCompany";
 import CardRegisterForm from "src/components/registerForm/CardRegisterForm";
-import useModal from "src/hooks/useModal";
 import useRegisterCardInfo from "src/hooks/useRegisterCardInfo";
 
 function CardRegister() {

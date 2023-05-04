@@ -4,7 +4,7 @@ import { Styled as S } from "./CardList.styles";
 import { useNavigate } from "react-router-dom";
 import useCardList from "src/hooks/useCardList";
 import Card from "src/components/@common/Card";
-import useModal from "src/hooks/useModal";
+import { useModal } from "@hozzijeong/react-modal";
 import { PATHS } from "src/utils/constant";
 
 function CardList() {

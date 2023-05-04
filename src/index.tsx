@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
 import CardRoutes from "./routes";
 import GlobalStyle from "./styles/GlobalStyles";
-import { ModalProvider } from "./context/ModalContext";
+import { ModalProvider } from "@hozzijeong/react-modal";
 import { ThemeProvider } from "styled-components";
 import theme from "./styles/theme";
 import { CardInfoProvider } from "./context/CardInfoContext";

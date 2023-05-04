@@ -47,12 +47,10 @@ const GlobalStyle = createGlobalStyle`
   }
 
 
-  #modal-root {
-  position: relative;
-  z-index: 999;
-
-  
-}
+  /* #modal-root {
+    position: relative;
+    z-index: 999;
+  } */
 
 
 `;

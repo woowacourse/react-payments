@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import CardRegisterForm from ".";
 import { CardInfoProvider } from "src/context/CardInfoContext";
-import { ModalProvider } from "src/context/ModalContext";
+import { ModalProvider } from "@hozzijeong/react-modal";
 import { BrowserRouter } from "react-router-dom";
 
 const cardRegister = {
