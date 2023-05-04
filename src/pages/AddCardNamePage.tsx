@@ -4,20 +4,18 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useCardDispatch, useCardState } from '../context/CardListContext';
 import InputGroup from '../components/common/InputGroup';
 import CardPreview from '../components/payments/CardPreview';
-import useAddCardForm from '../hooks/useAddCardForm';
 import { PAGE_PATH } from '../constants';
 
 const AddCardNamePage = () => {
-  const { state } = useLocation();
+  const { state } = useLocation() as { state: { cardID: string } | undefined };
   const cardList = useCardState();
   const [cardName, setCardName] = useState('');
   const setCard = useCardDispatch();
   const navigate = useNavigate();
-  const { onChangeState } = useAddCardForm();
-  const currentCard = cardList.find((card) => card.id === state.cardID);
+  const currentCard = cardList.find((card) => card.id === state?.cardID);
 
   const successSubmit = () => {
-    const targetId = state.cardID;
+    const targetId = currentCard?.id;
     const nextState = cardList.map((value) =>
       value.id === targetId ? { ...value, cardName } : value,
     );
@@ -26,9 +24,17 @@ const AddCardNamePage = () => {
     navigate(PAGE_PATH.HOME);
   };
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCardName(e.target.value);
+  };
+
+  const handleClickHomeButton = () => {
+    navigate(PAGE_PATH.HOME);
+  };
+
   return (
     <AddCardNameLayout>
-      {currentCard && (
+      {currentCard ? (
         <>
           <AddCardMessage>카드등록이 완료되었습니다.</AddCardMessage>
           <CardPreview
@@ -50,13 +56,18 @@ const AddCardNamePage = () => {
                   width: '242px',
                   center: true,
                   value: cardName,
-                  onChange: onChangeState('text')(setCardName),
+                  onChange: handleChange,
                 },
               ]}
             />
             <StyledSubmitButton type="submit">확인</StyledSubmitButton>
           </StyledForm>
         </>
+      ) : (
+        <ErrorMessageLayout>
+          <p>잘못된 페이지 접근입니다.</p>
+          <HomeButton onClick={handleClickHomeButton}>홈으로 이동하기</HomeButton>
+        </ErrorMessageLayout>
       )}
     </AddCardNameLayout>
   );
@@ -67,7 +78,7 @@ const AddCardNameLayout = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 60px;
+  height: 100%;
 `;
 
 const AddCardMessage = styled.p`
@@ -79,8 +90,8 @@ const AddCardMessage = styled.p`
 `;
 
 const StyledForm = styled.form`
-  margin-top: 124px;
-  height: 240px;
+  margin-top: 60px;
+  height: 200px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -96,6 +107,22 @@ export const StyledSubmitButton = styled.button`
   font-weight: 700;
   font-size: 14px;
   line-height: 16px;
+`;
+
+const ErrorMessageLayout = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100%;
+`;
+
+const HomeButton = styled.button`
+  border: none;
+  width: 200px;
+  height: 30px;
+  border-radius: 8px;
+  cursor: pointer;
 `;
 
 export default AddCardNamePage;
