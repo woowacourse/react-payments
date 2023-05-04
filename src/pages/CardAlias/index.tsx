@@ -3,20 +3,21 @@ import { useNavigate } from 'react-router-dom';
 import Card from '../../components/Card';
 import useInput from '../../hooks/useInput';
 import { isValidCardAlias } from '../AddCard/domain/validation';
-import { fetchLocalStorage, registerCardAlias } from '../../utils/applicationStorage';
+import { registerCardAlias } from '../../utils/card';
 import './index.css';
 import useRedirection from '../../hooks/useRedirection';
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 const CardAliasPage = () => {
   const navigate = useNavigate();
   const { value, onChange } = useInput(isValidCardAlias);
-  const cardList = fetchLocalStorage('cardList', '[]');
+  const { value: cardList, postLocalStorage } = useLocalStorage('cardList', '[]');
   const currentCard = cardList[cardList.length - 1];
 
   useRedirection(cardList.length === 0 || currentCard.alias);
 
   const onConfirmButtonClick = () => {
-    registerCardAlias(value, currentCard.cardNumber);
+    postLocalStorage(registerCardAlias(cardList, value, currentCard.cardNumber));
     navigate('/');
   };
 

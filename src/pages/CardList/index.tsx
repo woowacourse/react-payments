@@ -4,10 +4,10 @@ import type { CardType } from '../../type';
 import Card from '../../components/Card';
 import Header from '../../components/Header';
 import './index.css';
-import { fetchLocalStorage } from '../../utils/applicationStorage';
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 const CardListPage = () => {
-  const cardList = fetchLocalStorage('cardList', '[]');
+  const { value: cardList } = useLocalStorage('cardList', '[]');
   const navigate = useNavigate();
 
   const onAddButton = () => {

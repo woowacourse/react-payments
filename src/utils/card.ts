@@ -29,13 +29,8 @@ export const newCardList = (recentList: CardType[], data: Omit<CardType, 'id'>) 
   return JSON.stringify(recentList);
 };
 
-export const fetchLocalStorage = (key: string, initial = '') => {
-  return JSON.parse(localStorage.getItem('cardList') ?? initial);
-};
-
-export const registerCardAlias = (alias: string, cardNumber: CardNumber) => {
+export const registerCardAlias = (cardList: CardType[], alias: string, cardNumber: CardNumber) => {
   const registerdCardNumber = getSerialNumber(cardNumber);
-  const cardList = fetchLocalStorage('cardList', '[]');
   const currentCard = cardList.find(
     (card: CardType) => getSerialNumber(card.cardNumber) === registerdCardNumber
   );
@@ -48,5 +43,5 @@ export const registerCardAlias = (alias: string, cardNumber: CardNumber) => {
 
   const newCardList = [...restCardList, addedAliasCard];
 
-  localStorage.setItem('cardList', JSON.stringify(newCardList));
+  return JSON.stringify(newCardList);
 };

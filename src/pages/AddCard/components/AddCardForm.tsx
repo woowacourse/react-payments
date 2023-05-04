@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import type { AddCardFormProps, CardType } from '../../../type';
-import { newCardList } from '../../../utils/applicationStorage';
+import { newCardList } from '../../../utils/card';
 import ExpireDateInput from './ExpireDateInput';
 import OwnerInput from './OwnerInput';
 import SecurityCodeInput from './SecurityCodeInput';
