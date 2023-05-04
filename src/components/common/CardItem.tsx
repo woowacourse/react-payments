@@ -1,15 +1,28 @@
 import styled from 'styled-components';
 
 import { CARD_COMPANY } from '../../constants/cardCompany';
-import { Card } from '../../type/card';
-import { makeCardNumber, makeCardDate } from '../../utils/cardInfoFormat';
 
 interface CardItemProps {
-  info: Card;
+  cardNumberFirst: string;
+  cardNumberSecond: string;
+  cardNumberThird: string;
+  cardNumberFourth: string;
+  month: string;
+  year: string;
+  username?: string;
+  company: string;
 }
 
-export function CardItem(props: CardItemProps) {
-  const { cardNumber, expiredDate, username, company } = props.info;
+export function CardItem({
+  cardNumberFirst,
+  cardNumberSecond,
+  cardNumberThird,
+  cardNumberFourth,
+  month,
+  year,
+  username,
+  company,
+}: CardItemProps) {
   const companyColor = company ? CARD_COMPANY[company].color : 'gray';
   const companyName = company ? CARD_COMPANY[company].name : '';
 
@@ -18,11 +31,16 @@ export function CardItem(props: CardItemProps) {
       <_CompanyName>{companyName}</_CompanyName>
       <_Chip />
       <_NumberWrapper>
-        <_NumberItem>{makeCardNumber(cardNumber)}</_NumberItem>
+        <_NumberItem>{cardNumberFirst}</_NumberItem>
+        <_NumberItem>{cardNumberSecond}</_NumberItem>
+        <_NumberItem>{'•'.repeat(cardNumberThird.length)}</_NumberItem>
+        <_NumberItem>{'•'.repeat(cardNumberFourth.length)}</_NumberItem>
       </_NumberWrapper>
       <_InfoWrapper>
         <_Name>{username}</_Name>
-        <_Date>{makeCardDate(expiredDate)}</_Date>
+        <_Date>
+          {month}/{year}
+        </_Date>
       </_InfoWrapper>
     </_CardContainer>
   );

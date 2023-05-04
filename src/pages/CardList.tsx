@@ -22,14 +22,30 @@ export function CardList() {
           {cards?.length === 0 ? '새로운 카드를 추가하세요' : ''}
         </_Direction>
         {cards &&
-          cards.reverse().map((card, index) => {
-            return (
-              <React.Fragment key={index}>
-                <CardItem info={card} />
-                <_CardNickName>{card.nickname}</_CardNickName>
-              </React.Fragment>
-            );
-          })}
+          cards
+            .reverse()
+            .map(
+              (
+                { cardNumber, expiredDate, username, company, nickname },
+                index
+              ) => {
+                return (
+                  <React.Fragment key={index}>
+                    <CardItem
+                      cardNumberFirst={cardNumber.slice(0, 4)}
+                      cardNumberSecond={cardNumber.slice(4, 8)}
+                      cardNumberThird={cardNumber.slice(8, 12)}
+                      cardNumberFourth={cardNumber.slice(12, 16)}
+                      month={expiredDate.slice(0, 2)}
+                      year={expiredDate.slice(2, 4)}
+                      username={username}
+                      company={company}
+                    />
+                    <_CardNickName>{nickname}</_CardNickName>
+                  </React.Fragment>
+                );
+              }
+            )}
         <_Button onClick={moveAddCardPage}>+</_Button>
       </_Section>
     </_CardListContainer>
