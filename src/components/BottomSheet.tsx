@@ -15,7 +15,6 @@ const BottomSheet = ({ children, isOpen, onToggleOpen }: PropsWithChildren<Botto
           </div>,
           document.body
         )}
-      )
     </>
   );
 };

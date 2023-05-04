@@ -63,24 +63,19 @@ const AddCardPage = () => {
             expireYear={expireYear.value}
             onClick={toggleOpen}
           />
-
-          <IsAccessAliasPageProvider>
-            <CurrentCardProvider>
-              <AddCardForm
-                cardCompany={cardCompany}
-                cardFirstNumber={cardFirstNumber}
-                cardSecondNumber={cardSecondNumber}
-                cardThirdNumber={cardThirdNumber}
-                cardFourthNumber={cardFourthNumber}
-                expireMonth={expireMonth}
-                expireYear={expireYear}
-                cardOwner={cardOwner}
-                securityCode={securityCode}
-                cardPassword1={cardPassword1}
-                cardPassword2={cardPassword2}
-              />
-            </CurrentCardProvider>
-          </IsAccessAliasPageProvider>
+          <AddCardForm
+            cardCompany={cardCompany}
+            cardFirstNumber={cardFirstNumber}
+            cardSecondNumber={cardSecondNumber}
+            cardThirdNumber={cardThirdNumber}
+            cardFourthNumber={cardFourthNumber}
+            expireMonth={expireMonth}
+            expireYear={expireYear}
+            cardOwner={cardOwner}
+            securityCode={securityCode}
+            cardPassword1={cardPassword1}
+            cardPassword2={cardPassword2}
+          />
         </article>
       </div>
       <CardNameBottomSheet

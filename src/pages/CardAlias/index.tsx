@@ -13,6 +13,7 @@ const CardAliasPage = () => {
   const { currentCard } = useCurrentCardContext();
   const { value, onChange } = useInput(isValidCardAlias);
   const { setIsAccessAliasPage } = useIsAccessAliasPageContext();
+
   const onConfirmButtonClick = () => {
     registerCardAlias(value, currentCard.cardNumber);
     setIsAccessAliasPage(false);

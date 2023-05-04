@@ -14,7 +14,13 @@ const router = createBrowserRouter([
   },
   {
     path: '/add',
-    element: <AddCardPage />,
+    element: (
+      <IsAccessAliasPageProvider>
+        <CurrentCardProvider>
+          <AddCardPage />
+        </CurrentCardProvider>
+      </IsAccessAliasPageProvider>
+    ),
   },
   {
     path: '/alias',
