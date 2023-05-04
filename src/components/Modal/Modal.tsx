@@ -34,7 +34,7 @@ const Style = {
 
     ${(props) => {
       if (props.isModalOpen) return 'animation:  modal-backdrop-show 1s;';
-      return 'animation:  modal-backdrop-close 1s; transform: translateY(100%);';
+      return 'animation:  modal-backdrop-close 1s forwards;';
     }}
 
     @keyframes modal-backdrop-show {
@@ -79,7 +79,7 @@ const Style = {
 
     ${(props) => {
       if (props.isModalOpen) return 'animation:  modal-show 1s;';
-      return 'animation:  modal-close 1s; transform: translateY(100%);';
+      return 'animation:  modal-close 1s forwards;';
     }}
 
     @keyframes modal-show {
