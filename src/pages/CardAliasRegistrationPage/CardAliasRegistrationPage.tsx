@@ -5,7 +5,7 @@ import styled, { CSSProperties } from "styled-components";
 import NotFound from "../../components/NotFound/NotFound";
 import CardPreview from "../../components/CardPreview/CardPreview";
 import { Container, Input } from "../../components/@common";
-import SwayWithGlare2 from "../../components/@animations/SwayWithGlare2/SwayWithGlare2";
+import SwayingLoader2 from "../../components/@animations/SwayingLoader2/SwayingLoader2";
 import useCardFetch from "../../hooks/useCardFetch";
 import ROUTE_PATH from "../../constants/routePath";
 import type { Card } from "../../types";
@@ -69,9 +69,9 @@ const CardAliasRegistrationPage = ({ onSubmit }: CardAliasRegistrationPageProps)
     return (
       <Container justify="center">
         <CompleteMessage>카드 등록중...</CompleteMessage>
-        <SwayWithGlare2>
+        <SwayingLoader2>
           <CardPreview card={previewCard} />
-        </SwayWithGlare2>
+        </SwayingLoader2>
       </Container>
     );
   }

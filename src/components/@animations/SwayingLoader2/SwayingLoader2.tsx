@@ -2,7 +2,7 @@ import { PropsWithChildren } from "react";
 import styled from "styled-components";
 import { glare, sway } from "../../../styles/keyframes/swayWithGlare2";
 
-const SwayWithGlare2 = ({ children }: PropsWithChildren) => {
+const SwayingLoader2 = ({ children }: PropsWithChildren) => {
   return (
     <AnimationFrame>
       <Sway>{children}</Sway>
@@ -46,4 +46,4 @@ const GlareStuff = styled.div`
   filter: blur(80px);
 `;
 
-export default SwayWithGlare2;
+export default SwayingLoader2;
