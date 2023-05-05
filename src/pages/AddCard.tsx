@@ -4,13 +4,13 @@ import Card from '../components/Card';
 import CardInputForm from '../components/CardInputForm';
 import Header from '../components/common/Header';
 import Page from '../components/common/Page';
-import ModalPortal from '../components/ModalPortal';
 import { CardType } from '../types';
 import { getLocalStorage, setLocalStorage } from '../utils/localStorage';
 import { ModalContext } from '../store/modalContext';
 import ModalBanks from '../components/ModalBanks';
 import { useNavigate } from 'react-router-dom';
 import { LOCALSTORAGE_KEY } from '../constants';
+import ModalPortal from "modal-patrick"
 
 const AddCard = () => {
   const [card, setCard] = useState<CardType>({
