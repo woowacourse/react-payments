@@ -35,12 +35,7 @@ export const CardInfoProvider = ({ children }: ContextProps) => {
   const updateCard = (card: Card) => {
     setCardInfo((prev) => ({
       ...prev,
-      bank: card.bank,
-      numbers: card.numbers,
-      expirationDate: card.expirationDate,
-      ownerName: card.ownerName,
-      securityCode: card.securityCode,
-      password: card.password,
+      ...card,
     }));
   };
 
