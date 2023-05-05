@@ -36,10 +36,10 @@ export function AddCardForm() {
   function getInputData() {
     return {
       cardNumber: {
-        first: cardNumber["first"],
-        second: cardNumber["second"],
-        third: cardNumber["third"],
-        fourth: cardNumber["fourth"],
+        first: cardNumber.first,
+        second: cardNumber.second,
+        third: cardNumber.third,
+        fourth: cardNumber.fourth,
       },
       month: month,
       year: year,

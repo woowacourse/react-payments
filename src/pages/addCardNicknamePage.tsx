@@ -17,7 +17,7 @@ export function AddCardNicknamePage() {
   function completeInputNickname() {
     const userCardInfo = { ...state };
     if (nicknameInput.current !== null) {
-      userCardInfo["nickname"] = nicknameInput.current.value;
+      userCardInfo.nickname = nicknameInput.current.value;
     }
     setData(userCardInfo);
     navigate(PATH.CARD_LIST);
