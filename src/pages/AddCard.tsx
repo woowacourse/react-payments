@@ -36,7 +36,7 @@ const AddCard = () => {
         setNewCard={setNewCard}
         onSubmit={handleFormSubmited}
       />
-      <BottomSheet isOpen={isModalOpen} onClose={toggleModal}>
+      <BottomSheet isOpen={isModalOpen} onClose={toggleModal} height={"227px"}>
         <CardCompany onChange={handleCardCompanyChanged} />
       </BottomSheet>
     </Page>
