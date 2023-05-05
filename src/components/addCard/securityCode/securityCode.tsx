@@ -13,14 +13,15 @@ export function SecurityCode() {
   return (
     <InputBox<string> inputState={{ value: code, handleChange }}>
       <Wrapper>
-        <InputLabel text={LABEL.CODE} />
+        <InputLabel>
+          <div>보안코드</div>
+        </InputLabel>
         <InputGroup>
           <Input
             maxLength={TEXT_LENGTH.CODE}
             minLength={TEXT_LENGTH.CODE}
             type="password"
-            name="code"
-            asChild>
+            name="code">
             <SecurityCodeInput />
           </Input>
         </InputGroup>

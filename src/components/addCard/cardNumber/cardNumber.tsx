@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 import { Input } from "../../@common/input/Input";
 import { InputBox } from "../../@common/input/InputBox";
 import { InputGroup } from "../../@common/input/inputGroup";
@@ -7,6 +7,7 @@ import { InputLabel } from "../../@common/input/inputLabel";
 import { INPUT_TYPE, LABEL } from "../../../constants/inputInfo";
 import { CardNumberIndex } from "../../../type/input";
 import { useCardInfoContext } from "../../../hooks/useCardInfoContext";
+import { NumberContext } from "../../../contexts/cardInfo";
 
 export function CardNumber() {
   const { cardNumber, changeNumberInput } = useCardInfoContext();
@@ -19,7 +20,9 @@ export function CardNumber() {
     <InputBox<CardNumberIndex>
       inputState={{ value: cardNumber, handleChange: changeNumberInput }}>
       <Wrapper>
-        <InputLabel text={LABEL.NUMBER} />
+        <InputLabel>
+          <div>카드 번호</div>
+        </InputLabel>
         <InputGroup>
           {Object.keys(cardNumber).map((cardInput, index, original) => {
             return (
@@ -32,7 +35,8 @@ export function CardNumber() {
                       : INPUT_TYPE.TEXT
                   }
                   maxLength={4}
-                  minLength={4}>
+                  minLength={4}
+                  asChild>
                   <CustomInput />
                 </Input>
                 {index < original.length - 1 && INPUT_TYPE.BAR}

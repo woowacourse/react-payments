@@ -27,12 +27,13 @@ export function UserName() {
     <InputBox<string>
       inputState={{ value: userName, handleChange: changeNameInput }}>
       <Wrapper>
-        <InputLabel text={LABEL.NAME} render={renderCountText} />
+        <InputLabel render={renderCountText}>
+          <div>카드 소유자명</div>
+        </InputLabel>
         <Input
           maxLength={INPUT_TYPE.MAX_LENGTH}
           placeholder={PLACEHOLDER.NAME}
-          name="name"
-          asChild>
+          name="name">
           <NameInput />
         </Input>
       </Wrapper>

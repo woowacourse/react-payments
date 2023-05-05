@@ -12,7 +12,9 @@ export function CardPassword() {
   return (
     <InputBox<Password> inputState={{ value: password, handleChange }}>
       <Wrapper>
-        <InputLabel text={LABEL.PASSWORD} />
+        <InputLabel>
+          <div>비밀번호</div>
+        </InputLabel>
         <InputWrapper>
           {Object.keys(password).map((cardInput, _) => {
             return (
@@ -21,7 +23,8 @@ export function CardPassword() {
                 name={cardInput}
                 maxLength={TEXT_LENGTH[cardInput.toUpperCase()]}
                 minLength={TEXT_LENGTH[cardInput.toUpperCase()]}
-                type="password">
+                type="password"
+                asChild>
                 <PasswordInput />
               </Input>
             );

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import styled from "styled-components";
 import {
   LABEL,
@@ -18,7 +18,7 @@ export function ExpiredDate() {
   const { month, year, changeDateInput } = useCardInfoContext();
   const [error, setError] = useState<boolean>(false);
 
-  function checkIsCorrenctYear(e: React.FocusEvent<HTMLInputElement>) {
+  function checkIsCorrectYear(e: React.FocusEvent<HTMLInputElement>) {
     const target = e.target as HTMLInputElement;
     if (target.value === "") {
       setError(false);
@@ -35,7 +35,9 @@ export function ExpiredDate() {
     <InputBox<Date>
       inputState={{ value: { month, year }, handleChange: changeDateInput }}>
       <Wrapper>
-        <InputLabel text={LABEL.DATE} />
+        <InputLabel>
+          <div>만료일</div>
+        </InputLabel>
         <InputGroup>
           <Input
             name="month"
@@ -45,13 +47,13 @@ export function ExpiredDate() {
             asChild>
             <DateInput />
           </Input>
-          /
+          <>/</>
           <Input
             name="year"
             maxLength={TEXT_LENGTH.YEAR}
             minLength={TEXT_LENGTH.YEAR}
             placeholder={PLACEHOLDER.YEAR}
-            onBlur={checkIsCorrenctYear}
+            onBlur={checkIsCorrectYear}
             asChild>
             <DateInput />
           </Input>
