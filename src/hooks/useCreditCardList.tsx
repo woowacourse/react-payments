@@ -2,8 +2,9 @@
 /* eslint-disable no-alert */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 // eslint-disable-next-line
-import { existCreditCards, getCards } from 'api/mockAPI';
+import { addCard, existCreditCards, getCards } from 'api/mockAPI';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as T from 'types';
 
 interface UseCreditCard {
@@ -14,6 +15,7 @@ interface UseCreditCard {
 }
 
 export const useCreditCardList = (): UseCreditCard => {
+  const navigate = useNavigate();
   const [creditCardList, setCreditCardList] = useState<T.CreditCard[]>([]);
 
   const loadCardList = async () => {
@@ -26,9 +28,12 @@ export const useCreditCardList = (): UseCreditCard => {
     loadCardList();
   }, []);
 
-  const saveCreditCard = (creditCard: T.CreditCard): void => {
-    const newCardList = [...existCreditCards(), creditCard];
-    localStorage.setItem('creditCards', JSON.stringify(newCardList));
+  const saveCreditCard = async (creditCard: T.CreditCard) => {
+    const response = await addCard(creditCard);
+    const cards = JSON.parse(response.data);
+    setCreditCardList(cards);
+
+    navigate('/register-done');
   };
 
   const initCreditCardList = () => {

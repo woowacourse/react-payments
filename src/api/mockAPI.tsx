@@ -15,6 +15,13 @@ export const getCards = () => new Promise<Response>((resolve) => setTimeout(() =
   data: existCreditCardsJSON,
 }), 500));
 
-// export const addCard = (creditCard: CreditCard) => new Promise((resolve) => setTimeout(() => resolve({
-//   data: JSON.stringify([...existCreditCards(), creditCard]),
-// }), 500));
+export const addCard = (creditCard: CreditCard) => new Promise<Response>((resolve) => {
+  setTimeout(() => {
+    const newCardList = [...existCreditCards(), creditCard];
+    const newCardListJSON = JSON.stringify(newCardList);
+    localStorage.setItem('creditCards', newCardListJSON);
+    resolve({
+      data: newCardListJSON,
+    });
+  }, 3000);
+});

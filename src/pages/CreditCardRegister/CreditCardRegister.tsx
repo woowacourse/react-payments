@@ -27,8 +27,6 @@ function CreditCardRegister() {
     if (isCreditCardError) return;
 
     saveCreditCard(creditCardForm);
-
-    navigate('/register-done');
   };
 
   useEffect(() => {
@@ -71,7 +69,7 @@ function CreditCardRegister() {
           <CreditCardPasswordInput />
           <ControlButton
             disabled={isCreditCardError}
-            type="submit"
+            type="button"
             onClick={handleSubmit}
           >
             다음
