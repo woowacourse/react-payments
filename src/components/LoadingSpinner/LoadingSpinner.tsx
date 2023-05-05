@@ -1,6 +1,8 @@
 import * as S from './style';
 
-function LoadingSpinner({ label }: { label?: string }) {
+export interface LoadingSpinnerProps { label?: string }
+
+function LoadingSpinner({ label }: LoadingSpinnerProps) {
   return (
     <div>
       <S.LoadingSpinnerWrapper>
