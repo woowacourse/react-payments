@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { ChangeEvent, useState } from 'react';
 import useCreditCardForm from 'hooks/useCreditCardForm';
 import ControlButton from 'components/ControlButton';
-import { useNavigate } from 'react-router-dom';
 import { useCreditCardList } from 'hooks/useCreditCardList';
 import * as S from './style';
 
@@ -26,7 +25,6 @@ const NicknameInput = styled.input`
 `;
 
 function CreditCardNicknameInputForm() {
-  const navigate = useNavigate();
   const { creditCardForm } = useCreditCardForm();
   const { updateNickname } = useCreditCardList();
   const [nickname, setNickname] = useState('');
@@ -37,7 +35,6 @@ function CreditCardNicknameInputForm() {
 
   const submitNicknameInput = () => {
     updateNickname(creditCardForm.number, nickname);
-    navigate('/');
   };
 
   return (

@@ -33,3 +33,19 @@ export const resetCards = () => new Promise<Response>((resolve) => {
     });
   }, 3000);
 });
+
+export const updateNicknameByNumber = (number: string, newNickname: string) => new Promise<Response>((resolve) => {
+  setTimeout(() => {
+    const copiedCreditCards = loadLocalCreditCards();
+    const targetIndex = copiedCreditCards.findIndex(
+      (card) => card.number === number
+    );
+    if (targetIndex !== -1) {
+      copiedCreditCards[targetIndex].nickname = newNickname;
+      localStorage.setItem('creditCards', JSON.stringify(copiedCreditCards));
+    }
+    resolve({
+      data: JSON.stringify(loadLocalCreditCards()),
+    });
+  }, 3000);
+});

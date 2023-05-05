@@ -1,8 +1,7 @@
 /* eslint-disable no-restricted-globals */
-/* eslint-disable no-alert */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-// eslint-disable-next-line
-import { addCard, loadLocalCreditCards, getCards, resetCards } from 'api/mockAPI';
+import {
+  addCard, getCards, resetCards, updateNicknameByNumber
+} from 'api/mockAPI';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as T from 'types';
@@ -24,10 +23,6 @@ export const useCreditCardList = (): UseCreditCard => {
     setCreditCardList(cards);
   };
 
-  useEffect(() => {
-    loadCardList();
-  }, []);
-
   const saveCreditCard = async (creditCard: T.CreditCard) => {
     const response = await addCard(creditCard);
     const cards = JSON.parse(response.data);
@@ -45,16 +40,17 @@ export const useCreditCardList = (): UseCreditCard => {
     }
   };
 
-  const updateNickname = (number: string, newNickname: string) => {
-    const copiedCreditCards = loadLocalCreditCards();
-    const targetIndex = copiedCreditCards.findIndex(
-      (card) => card.number === number
-    );
-    if (targetIndex !== -1) {
-      copiedCreditCards[targetIndex].nickname = newNickname;
-      localStorage.setItem('creditCards', JSON.stringify(copiedCreditCards));
-    }
+  const updateNickname = async (number: string, newNickname: string) => {
+    const response = await updateNicknameByNumber(number, newNickname);
+    const cards = JSON.parse(response.data);
+    setCreditCardList(cards);
+
+    navigate('/');
   };
+
+  useEffect(() => {
+    loadCardList();
+  }, []);
 
   return {
     creditCardList, saveCreditCard, initCreditCardList, updateNickname
