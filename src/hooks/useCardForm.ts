@@ -1,16 +1,6 @@
-import { BankCode, BankCodeList, Card } from 'components/common/Card/types';
+import { BankCode, Card } from 'components/common/Card/types';
+import { CardForm } from 'components/Form/types';
 import { useState } from 'react';
-
-type CardForm = {
-  cardNumbers: string[];
-  month: string;
-  year: string;
-  name: string;
-  firstDigit: string;
-  secondDigit: string;
-  securityCode: string;
-  bankCode?: BankCode;
-};
 
 const initialCardFormInformation: CardForm = {
   cardNumbers: ['', '', '', ''],
@@ -55,8 +45,7 @@ export const useCardForm = () => {
     isNumberLengthValid(card.password.first, 1) &&
     isNumberLengthValid(card.password.second, 1);
 
-  const isBankCodeValid =
-    card.bankCode !== undefined && card.bankCode in Object.values(BankCodeList);
+  const isBankCodeValid = card.bankCode !== undefined && card.bankCode in Object.values(BankCode);
 
   const errorMessages: Partial<Record<keyof Card, string>> = {
     numbers: isCardNumberValid ? '' : '카드번호는 16자리로 입력해주세요.',

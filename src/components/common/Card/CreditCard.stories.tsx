@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { CreditCard } from './CreditCard';
-import { BankCodeList, Card } from './types';
+import { BankCode, Card } from './types';
 import { theme } from 'components/style/theme';
 import { ThemeProvider } from 'styled-components';
 
@@ -33,7 +33,7 @@ const defaultCard: Card = {
     first: '1',
     second: '2',
   },
-  bankCode: BankCodeList.BCCard,
+  bankCode: BankCode.BCCard,
 };
 
 export const PartialCard: Story = {
@@ -50,55 +50,55 @@ export const PartialCard: Story = {
         first: '',
         second: '',
       },
-      // bankCode: BankCodeList.BCCard,
+      // bankCode: BankCode.BCCard,
     },
   },
 };
 
 export const BCCard: Story = {
   args: {
-    card: { ...defaultCard, bankCode: BankCodeList.BCCard },
+    card: { ...defaultCard, bankCode: BankCode.BCCard },
   },
 };
 
 export const ShinHanCard: Story = {
   args: {
-    card: { ...defaultCard, bankCode: BankCodeList.ShinHanCard },
+    card: { ...defaultCard, bankCode: BankCode.ShinHanCard },
   },
 };
 
 export const KakaoBank: Story = {
   args: {
-    card: { ...defaultCard, bankCode: BankCodeList.KakaoBank },
+    card: { ...defaultCard, bankCode: BankCode.KakaoBank },
   },
 };
 
 export const HyunDaiCard: Story = {
   args: {
-    card: { ...defaultCard, bankCode: BankCodeList.HyunDaiCard },
+    card: { ...defaultCard, bankCode: BankCode.HyunDaiCard },
   },
 };
 
 export const WooriCard: Story = {
   args: {
-    card: { ...defaultCard, bankCode: BankCodeList.WooriCard },
+    card: { ...defaultCard, bankCode: BankCode.WooriCard },
   },
 };
 
 export const LotteCard: Story = {
   args: {
-    card: { ...defaultCard, bankCode: BankCodeList.LotteCard },
+    card: { ...defaultCard, bankCode: BankCode.LotteCard },
   },
 };
 
 export const HanaCard: Story = {
   args: {
-    card: { ...defaultCard, bankCode: BankCodeList.HanaCard },
+    card: { ...defaultCard, bankCode: BankCode.HanaCard },
   },
 };
 
 export const KookMinCard: Story = {
   args: {
-    card: { ...defaultCard, bankCode: BankCodeList.KookMinCard },
+    card: { ...defaultCard, bankCode: BankCode.KookMinCard },
   },
 };

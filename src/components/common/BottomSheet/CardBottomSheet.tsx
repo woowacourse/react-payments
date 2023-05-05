@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import { BankCode, BankCodeList, CardName } from '../Card/types';
+import { BankCode, CardName } from '../Card/types';
 import { BottomSheet, BottomSheetProps } from './BottomSheet';
 
 export type CardBottomSheetProps = {
   onClickBankImage: (bankCode: BankCode) => void;
 } & BottomSheetProps;
 
-const bankCodes = Object.values(BankCodeList);
+const bankCodes = Object.values(BankCode);
 
 export const CardBottomSheet = ({ onClickBankImage, active }: CardBottomSheetProps) => {
   const handleClickBankImage = (bankCode: BankCode) => {
