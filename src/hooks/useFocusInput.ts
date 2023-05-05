@@ -11,6 +11,9 @@ export const useFocusInput = (formRef: RefObject<HTMLFormElement>) => {
 
     if (!active) return;
 
+    if (event.key === 'Backspace') {
+      return;
+    }
     const curMaxLength = active.getAttribute('maxLength');
     const curInputKind = active.getAttribute('inputMode');
 

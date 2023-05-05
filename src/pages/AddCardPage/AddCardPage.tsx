@@ -120,6 +120,18 @@ export default function AddCardPage() {
     };
   }, [askPrevPage]);
 
+  useEffect(() => {
+    if (month.error && month.inputRef.current) {
+      month.inputRef.current.focus();
+      return;
+    }
+
+    if (year.error && year.inputRef.current) {
+      year.inputRef.current.focus();
+      return;
+    }
+  }, [month.error, year.error, month.inputRef, year.inputRef]);
+
   return (
     <div>
       <S.Page>
