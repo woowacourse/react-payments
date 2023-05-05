@@ -1,6 +1,5 @@
 import React, { type FormEvent, useCallback, useEffect, useRef } from 'react';
 import { useFocusInput } from '@hooks/useFocusInput';
-import { useFormInputs } from '@hooks/useFormInputs';
 import { useHideScrollState } from '@hooks/useHideScrollState';
 import { useCardInputInfoContext } from '@contexts/useCardInputInfo';
 import { usePageContext } from '@contexts/usePageContext';
@@ -21,6 +20,7 @@ import { isPastDate } from '@utils/validate';
 import { CARD_COMPANY, CARD_COMPANY_DATA } from '@constants/cardCompany';
 import { PAGE_KIND } from '@constants/constant';
 import * as S from './AddCardPage.Styles';
+import { useAddCardFormData } from './hooks/useAddCardFormData';
 
 const INPUT_ID = {
   CARD_NUMBER: 'cardNumber',
@@ -35,7 +35,7 @@ export default function AddCardPage() {
   const { setPage } = usePageContext();
   const cardForm = useRef<HTMLFormElement>(null);
   const { onInputKeydown } = useFocusInput(cardForm);
-  const { formInputs } = useFormInputs();
+  const { formData } = useAddCardFormData();
   const [cardCompany, setCardCompany] = useHideScrollState<CardCompanyType>(
     CARD_COMPANY.DEFAULT,
     (value) => {
@@ -59,14 +59,14 @@ export default function AddCardPage() {
     cvc,
     firstPassword,
     secondPassword,
-  } = formInputs.addCardPage;
+  } = formData;
 
   const onCardInfoValidateAndGoRegisterPage = (
     event: FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
 
-    const { validationResult } = formValidate(formInputs.addCardPage);
+    const { validationResult } = formValidate(formData);
 
     if (!validationResult || !month.inputRef.current) {
       return;

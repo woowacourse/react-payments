@@ -1,6 +1,5 @@
 import React, { FormEvent } from 'react';
 import styled from 'styled-components';
-import { useFormInputs } from '@hooks/useFormInputs';
 import { useCardListContext } from '@contexts/useCardContext';
 import { useCardInputInfoContext } from '@contexts/useCardInputInfo';
 import { usePageContext } from '@contexts/usePageContext';
@@ -14,16 +13,17 @@ import { createUniqueId } from '@utils/common';
 import { formValidate } from '@utils/formValidate';
 import { PAGE_KIND } from '@constants/constant';
 import { colors } from '@styles/theme';
+import { useRegisterCardFormData } from './hooks/useRegisterCardFormData';
 
 const INPUT_CARD_TITLE_ID = 'cardTitle';
 
 export default function RegisterCard() {
-  const { formInputs } = useFormInputs();
+  const { formData } = useRegisterCardFormData();
   const { cardList, setCardList } = useCardListContext();
   const { setPage } = usePageContext();
   const { cardInputInfo } = useCardInputInfoContext();
 
-  const { cardTitle } = formInputs.registerPage;
+  const { cardTitle } = formData;
 
   const createCard = () => {
     const card: CardInfo = {
@@ -40,7 +40,7 @@ export default function RegisterCard() {
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const { validationResult } = formValidate(formInputs.registerPage);
+    const { validationResult } = formValidate(formData);
 
     if (!validationResult) {
       return;
