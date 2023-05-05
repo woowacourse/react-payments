@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import St from "./LoadingPageStyled";
 import { useNavigate } from "react-router";
+import Spinner from "components/common/Spinner/Spinner";
 
 function LoadingPage() {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ function LoadingPage() {
 
   return (
     <St.Page>
-      <St.Loader />
+      <Spinner />
       <St.Title>카드를 등록중입니다.</St.Title>
     </St.Page>
   );
