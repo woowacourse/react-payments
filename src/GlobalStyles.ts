@@ -1,6 +1,7 @@
-import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
-import { COLOR } from './constants/cardInfo';
+import { createGlobalStyle } from 'styled-components';
+
+import { COLOR } from './constants/card';
 
 const GlobalStyles = createGlobalStyle` 
   ${reset}
@@ -19,21 +20,11 @@ const GlobalStyles = createGlobalStyle`
 
 	#root {
 		display: flex;
-		flex-direction: column;
 		justify-content: center;
 		align-items: center;
 
 		width: 100%;
 		height: 100%;
-	}
-
-	.App {
-		width: 100%;
-		height: 100%;
-
-		padding: 28px 24px;
-
-		background-color: ${COLOR.WHITE};
 	}
 
   a {
@@ -58,20 +49,6 @@ const GlobalStyles = createGlobalStyle`
     padding: 0;
     cursor: pointer;
   }
-
-	@media (min-width: 992px) {
-		.App {
-			width: 50%;
-			height: 100%;
-		}
-	}
-
-	@media (min-width: 1200px) {
-		.App {
-			width: 30%;
-			height: 100%;
-		}
-	}
 `;
 
 export default GlobalStyles;

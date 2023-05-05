@@ -1,4 +1,9 @@
-import { validateNumeric, validateMonth, validateExpirationDate, validateValidUserName } from '../validator';
+import {
+  validateNumeric,
+  validateMonth,
+  validateExpirationDate,
+  validateValidUserName,
+} from '../components/validators/validator';
 
 describe('카드 정보 입력 값 유효성 검증 로직 테스트', () => {
   it.each(['1234', '12345678', '3'])('숫자로만 이루어진 값은 에러를 반환하지 않는다.', value => {

@@ -1,45 +1,83 @@
-# 기능 요구 사항
+## 기능 요구 사항
 
-## 페이지
+- [ ] 스토리북 상호작용 테스트하기
+- [x] 버튼 위치 페이지 벗어나지 않게 수정
 
-### 보유 카드 페이지
+## 피드백
 
-- [ ] 새로운 카드 등록 버튼을 누른다
-- [ ] 사용자가 등록한 카드를 볼 수 있다
+- [x] 자유도를 좀 더 생각해서 스킵이 가능하게 하되 제출만 막는 경험 구현하기
+- [x] src/GlobalStyles.ts
+      100vw 에서 100%로 변경한 이유는 어떤 것인가요?
+- [x] src/components/BottomSheet/BottomSheet.tsx
+      CardCompanyLogoList를 바텀싯이 알아야할것같진 않아서 children정도여도 좋을 것 같아요~
+- [x] src/components/Card/Card.styled.ts
+      테마여서 프리셋으로 지정된 문자열으로 예상했는데 컬러값이네요! backgroundColor로 명확하게 변경해줘도 좋을 것 같아요
+- [x] src/components/Card/Card.styled.ts
+      폰트컬러가 배경색에 따라 변경되는데 요거 계산식이 있을지 한 번 찾아보면 어떨까요?
+- [x] src/components/Card/Card.styled.ts
+      Info는 붙어서 어떤 의미가 추가되지 않는 불용어이기 때문에 요기 그냥 Card로 명명해주면 어떨까 싶네요!
+- [x] src/components/Card/Card.tsx
+      `card.company.name`
+      요렇게 prop명이 네이밍 될수있으면 깔끔할 것 같아요 ㅎㅎ
+      상위에서 이미 사용된 중복단어는 생략하는게 좋은것같아요.
+      디렉토리명 등등 계층에 관한 이름짓기는 요걸 염두에 두면 명확해져서 좋아요
+- [x] src/components/Card/Card.tsx
+      그러면 여기 네이밍이 겹쳐서 애매해질텐데 보통 컴포넌트는 UI의 늬앙스를 이름에 추가하면 더 명확해지는 것 같아요. ex) Section, ListItem 등등 ~~~
+- [x] src/components/CardCompanyButton/CardCompanyButton.tsx
+      버튼의 클릭핸들러 콜백을 받으니 onClick을 prop명으로 받으면 어떨까요? setCardCompany는 범위가 많이 작은 것 같아요. 예를 들어서 클릭시 로깅을 할 수도 있구요. 토스트메시지를 띄울수도있구요. set한다는것을 이 컴포넌트가 알아야할 필요가 있어보이진 않아요
+- [x] src/components/CardCompanyButton/CardCompanyButton.tsx
+      타입은 파스칼케이스로 통일하면 좋을 것 같아요~!
+      타입과 코드의 거리가 멀어보이는데 여기서 선언하면 어떨까요?
+- [x] src/components/CardCompanyLogoList/CardCompanyLogoList.tsx
+      이렇게 함수로 분리한 이유는 어떤 것인가요?
+- [x] src/components/CardList/CardList.tsx
+      export default 를 사용하면 rename할때 이름이 같이 안바뀌어서 많이 불편하더라구요
+- [x] src/hooks/useNavigationTo.ts
+      요거 페이지이동시 히스토리 유지되나요?
+- [x] src/components/CardList/CardList.tsx
+      위에도 적긴했는데 jsx단이 분리가돼서 가독성이 좀 떨어지는 것 같아요
+- [x] src/components/CardList/CardList.tsx
+      어떤 요소에대한 클릭이벤트핸들러인지 구체적으로 적어주면 좋을 것 같아요
+- [x] src/components/CardList/CardList.tsx
+      홈으로 이동하는것같은데 인자로 명시적으로 전달해주면 더 읽기 좋을 것 같아요~
+- [x] src/components/CardList/CardList.tsx
+      cardInfo가 여러가지 정보를 가지고 있는 객체인데 요거 html에 유효하지 않은 문자가 들어가면 화면이 깨지지 않을까싶어요. 데이터의 id값 정도만 저장하는게 어떨까요?
+- [x] src/components/CardList/CardList.tsx
 
-### 카드 추가 페이지
+  ```tsx
+  if (cardList == null) {
+      return null
+    }
 
-- [ ] 이전 페이지로 이동할 수 있다
-- [ ] 등록 버튼을 누를 수 있다
-- [ ] 카드 번호를 입력할 수 있다
-  - [x] 숫자만 입력할 수 있다
-  - [ ] 16개의 숫자를 입력하면 다음 만료일 Input으로 focus된다
-  - [ ] 4개의 숫자 입력마다 - 가 추가된다
-  - [ ] PreCardView를 업데이트 한다
-- [ ] 만료일을 입력할 수 있다
-  - [x] 숫자만 입력할 수 있다
-  - [ ] 4개의 숫자를 입력하면 다음 카드 소유자 이름 Input으로 focus된다
-  - [ ] PreCardView를 업데이트 한다
-  - [ ] 2개의 숫자를 입력하면 / 가 추가된다
-  - [x] YY는 이번연도부터 가능
-  - [x] MM에는 01~12까지의 값만 들어갈 수 있다
-  - [x] YY가 이번연도일 경우, MM은 이번달부터 가능
-- [ ] 카드 소유자 이름을 입력할 수 있다
-  - [x] 영어와 공백만 입력할 수 있다
-  - [x] 0글자 이상~30글자 이하까지만 입력이 가능하다
-- [ ] 보안 코드를 입력할 수 있다
-  - [x] 숫자만 입력할 수 있다
-  - [ ] 3개의 숫자를 입력하면 카드 비밀번호 Input으로 focus된다
-- [ ] 카드 비밀번호를 입력할 수 있다
-  - [x] 숫자만 입력할 수 있다
-  - [ ] 숫자를 입력하면 다음 비밀번호 Input으로 focus된다
+    return <styled.CardList>{generateCardList(cardList)}</styled.CardList>
+  };
+  ```
 
-## 공통 기능 목록
+  요렇게 분리해보면 어떨까요?
 
-- [x] 숫자만 입력할 수 있다
-- [ ] n개의 숫자 입력마다 어떤 문자가 추가된다
-- [ ] 다음 Input으로 focus된다
-
-## 기술 스택
-
-styled-components (css)
+- [x] src/components/CardNumberInputBox/CardNumberInputBox.tsx
+      jsx를 사용하는곳에서 훅함수를 사용은 지양해봐도 좋을 것 같아요. 컴포넌트에서 한 번 호출된 훅함수는 항상 호출되어야합니다. 반면에 jsx는 얼마든지 조건부로 사용할 수 있어요
+- [x] src/hooks/useInputBox.ts
+      그보다 요거 훅함수가 아니네요. use prefix를 어떤 이유에서 붙여주셨나요? 왜 리액트에서 훅 이름에 use를 사용하도록 컨벤션으로 정했는지 알아보셔도 좋을 것 같습니다
+- [x] src/hooks/useInputBox.ts
+      아아 여기 else if 지옥인가요.. return을 통해 적절히 끊어보면 어떨까요?
+- [x] src/hooks/useInputBox.ts
+      그그 이전에 이함수가 존재해야하는 이유가 조금 이해가 어렵네요. 오히려 onChange 함수들을 한 개 함수로 묶음으로써 복잡도가 올라간것같아요
+- [x] src/components/RegisterEntryBox/RegisterEntryBox.tsx
+      컨테이너 컴포넌트가 이미 내부에 요소를 갖고있는것같은데 CardRegisterButton으로 명명되는게 자연스러울 것 같아요
+- [x] src/components/RegisterForm/RegisterForm.tsx
+      요소타입이 form 이었다면 submit핸들러함수가 여기서 사용되어서 로직이 위계적으로도 적절한 위치에 있었을것같아요
+- [x] src/components/RegisterForm/RegisterForm.styled.ts
+      form이 아닌데 form으로 명명됐어요. 현재 브라우저레벨에서 지원해주는 자동완성기능같은것들이 동작하지 않아요
+      [https://wainaat.github.io/react-payments](https://wainaat.github.io/react-payments) 참새가 한 거는 자동완성이 잘되더라구요. 참고해봐도 좋을 것 같아요
+- [x] src/components/Header/Header.tsx
+      페이지 타이틀과 뒤로가기버튼을 별도 모듈에서 선언하고 있는데 페이지컴포넌트 모듈에서 관리하면 보다 연관깊은코드가 가까이에 있게될것같아요. PageLayout 컴포넌트와같이 페이지 컴포넌트가 공통적으로 사용하는 컴포넌트에 헤더컴포넌트를 포함시켜서 페이지컴포넌트에서 prop으로 넘겨주도록 변경해보면 어떨까요?
+- [x] src/hooks/useTitle.ts
+      요런 단순 setState는 커스텀훅으로 분리하지 않아도 복잡도가 큰 차이가 없는 것 같아요
+  ```tsx
+  export const useTitle = (titleValue: string) => {
+    const [title] = useState(titleValue);
+    return title;
+  };
+  ```
+  요렇게 해도될것같은데 useEffect에서 하는 이유는 어떤 것인가요?
