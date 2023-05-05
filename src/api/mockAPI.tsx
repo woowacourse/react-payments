@@ -20,7 +20,16 @@ export const addCard = (creditCard: CreditCard) => new Promise<Response>((resolv
     const newCardListJSON = JSON.stringify(newCardList);
     localStorage.setItem('creditCards', newCardListJSON);
     resolve({
-      data: newCardListJSON,
+      data: JSON.stringify(loadLocalCreditCards()),
+    });
+  }, 3000);
+});
+
+export const resetCards = () => new Promise<Response>((resolve) => {
+  setTimeout(() => {
+    localStorage.setItem('creditCards', '[]');
+    resolve({
+      data: JSON.stringify(loadLocalCreditCards()),
     });
   }, 3000);
 });

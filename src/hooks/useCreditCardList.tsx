@@ -2,7 +2,7 @@
 /* eslint-disable no-alert */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 // eslint-disable-next-line
-import { addCard, loadLocalCreditCards, getCards } from 'api/mockAPI';
+import { addCard, loadLocalCreditCards, getCards, resetCards } from 'api/mockAPI';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as T from 'types';
@@ -21,7 +21,6 @@ export const useCreditCardList = (): UseCreditCard => {
   const loadCardList = async () => {
     const response = await getCards();
     const cards = JSON.parse(response.data);
-    console.log(cards);
     setCreditCardList(cards);
   };
 
@@ -32,17 +31,17 @@ export const useCreditCardList = (): UseCreditCard => {
   const saveCreditCard = async (creditCard: T.CreditCard) => {
     const response = await addCard(creditCard);
     const cards = JSON.parse(response.data);
-    console.log(cards);
     setCreditCardList(cards);
 
     navigate('/register-done');
   };
 
-  const initCreditCardList = () => {
+  const initCreditCardList = async () => {
     const isInit = confirm('모든 카드를 초기화합니다.');
     if (isInit) {
-      localStorage.setItem('creditCards', '[]');
-      setCreditCardList(loadLocalCreditCards());
+      const response = await resetCards();
+      const cards = JSON.parse(response.data);
+      setCreditCardList(cards);
     }
   };
 
