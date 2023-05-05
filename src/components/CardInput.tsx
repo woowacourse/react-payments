@@ -9,18 +9,17 @@ export interface CardInputType
   isRequired?: boolean;
 }
 
-const CardInput = forwardRef<HTMLInputElement[], CardInputType>(
-  (props, ref) => {
-    return (
-      <CardInputWrapper
-        {...props}
-        type={props.isSecured ? "password" : "text"}
-        autoFocus={props.isAutoFocus}
-        required={props.isRequired}
-      />
-    );
-  }
-);
+const CardInput = forwardRef<HTMLInputElement, CardInputType>((props, ref) => {
+  return (
+    <CardInputWrapper
+      {...props}
+      ref={ref}
+      type={props.isSecured ? "password" : "text"}
+      autoFocus={props.isAutoFocus}
+      required={props.isRequired}
+    />
+  );
+});
 
 const CardInputWrapper = styled.input`
   width: ${(props) => props.width};

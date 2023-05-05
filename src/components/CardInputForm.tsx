@@ -1,17 +1,18 @@
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { FormEvent, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { CardInput, Button } from "./index";
 import { CardType } from "../types";
 import { QuestionMark } from "../assets";
 import { PASSWORD_DIGIT_INDEX } from "../constants";
 import {
-  getIsCardvalid,
   validateCardNumber,
   validateCvc,
   validateExpiredDate,
+  validateForm,
   validateOwnerName,
   validatePassword,
 } from "../utils";
+import { useCardInputRefs } from "../hooks";
 
 interface CardInputFormType {
   card: CardType;
@@ -24,8 +25,24 @@ const CardInputForm = ({ card, setNewCard, onSubmit }: CardInputFormType) => {
   const [isAnswered, setIsAnswered] = useState(false);
   const [isValidForm, setIsValidForm] = useState(false);
 
+  const [inputRefs] = useCardInputRefs();
+
   useEffect(() => {
-    getIsCardvalid(card) ? setIsValidForm(true) : setIsValidForm(false);
+    if (validateCardNumber(card.cardNumber) === "") {
+      console.log(1);
+      if (inputRefs[1].current) inputRefs[1].current.focus();
+    }
+    if (validateExpiredDate(card.expiredDate) === "") {
+      console.log(2);
+      if (inputRefs[2].current) inputRefs[2].current.focus();
+    }
+    if (validateCvc(card.cvc) === "") {
+      if (inputRefs[4].current) inputRefs[4].current.focus();
+    }
+  }, [card]);
+
+  useEffect(() => {
+    setIsValidForm(validateForm(card));
   }, [card]);
 
   const handleInputChanged =
@@ -57,6 +74,7 @@ const CardInputForm = ({ card, setNewCard, onSubmit }: CardInputFormType) => {
       <InputSetWrapper>
         <label htmlFor="cardNumber">카드 번호</label>
         <CardInput
+          ref={inputRefs[0]}
           value={card.cardNumber}
           placeholder="카드 번호를 입력해 주세요."
           width="318px"
@@ -72,6 +90,7 @@ const CardInputForm = ({ card, setNewCard, onSubmit }: CardInputFormType) => {
       <InputSetWrapper>
         <label htmlFor="expiredDate">만료일</label>
         <CardInput
+          ref={inputRefs[1]}
           value={card.expiredDate}
           placeholder="MM / YY"
           width="137px"
@@ -80,11 +99,7 @@ const CardInputForm = ({ card, setNewCard, onSubmit }: CardInputFormType) => {
           onChange={handleInputChanged("expiredDate")}
           onKeyDown={handleInputKeyDown("expiredDate")}
         />
-        {
-          <span>
-            {card.expiredDate && validateExpiredDate(card.expiredDate)}
-          </span>
-        }
+        <span>{card.expiredDate && validateExpiredDate(card.expiredDate)}</span>
       </InputSetWrapper>
 
       <InputSetWrapper>
@@ -93,6 +108,7 @@ const CardInputForm = ({ card, setNewCard, onSubmit }: CardInputFormType) => {
           <span>{card.ownerName.length}/14</span>
         </OwnerNameLabelWrapper>
         <CardInput
+          ref={inputRefs[2]}
           value={card.ownerName}
           width="318px"
           maxLength={14}
@@ -106,6 +122,7 @@ const CardInputForm = ({ card, setNewCard, onSubmit }: CardInputFormType) => {
         <label htmlFor="cvc">보안 코드(CVC/CVV)</label>
         <CvcInputWrapper>
           <CardInput
+            ref={inputRefs[3]}
             value={card.cvc}
             width="84px"
             isSecured
@@ -126,6 +143,7 @@ const CardInputForm = ({ card, setNewCard, onSubmit }: CardInputFormType) => {
         <label htmlFor="password">카드 비밀번호</label>
         <PasswordInputWrapper>
           <CardInput
+            ref={inputRefs[4]}
             id="password1"
             value={password[PASSWORD_DIGIT_INDEX.FIRST]}
             width="42px"
@@ -135,6 +153,7 @@ const CardInputForm = ({ card, setNewCard, onSubmit }: CardInputFormType) => {
             onChange={handlePasswordChanged(PASSWORD_DIGIT_INDEX.FIRST)}
           />
           <CardInput
+            ref={inputRefs[5]}
             id="password2"
             width="42px"
             value={password[PASSWORD_DIGIT_INDEX.SECOND]}

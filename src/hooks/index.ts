@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { CardType } from "../types";
 import {
   getEmptyCard,
@@ -34,4 +34,28 @@ export const useCard = () => {
   };
 
   return [card, setNewCard] as const;
+};
+
+export const useCardInputRefs = () => {
+  const cardNumberRef = useRef<HTMLInputElement>(null);
+  const expiredDateRef = useRef<HTMLInputElement>(null);
+  const ownerNameRef = useRef<HTMLInputElement>(null);
+  const cvcRef = useRef<HTMLInputElement>(null);
+  const password1Ref = useRef<HTMLInputElement>(null);
+  const password2Ref = useRef<HTMLInputElement>(null);
+
+  const inputRefs = [
+    cardNumberRef,
+    expiredDateRef,
+    ownerNameRef,
+    cvcRef,
+    password1Ref,
+    password2Ref,
+  ];
+
+  const moveFocus = () => {
+    inputRefs[1].current?.focus();
+  };
+
+  return [inputRefs];
 };
