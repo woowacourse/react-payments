@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 import CreditCard from 'components/CreditCard';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -10,6 +11,7 @@ import FlexBox from 'components/FlexBox';
 import { useCreditCardList } from 'hooks/useCreditCardList';
 import { Modal } from '@gabrielyoon7/simple-modal';
 import LoadingSpinner from 'components/LoadingSpinner';
+
 import CreditCardNumberInput from './inputs/CreditCardNumberInput';
 import CreditCardExpiryInput from './inputs/CreditCardExpiryInput';
 import CreditCardOwnerInput from './inputs/CreditCardOwnerInput';
@@ -37,53 +39,59 @@ function CreditCardRegister() {
 
   return (
     <>
-      <CreditCardRegisterLayout>
-        <CreditCardRegisterTopSheet>
-          <S.HomeButton type="button" onClick={() => navigate('/')}>
-            {`${'<'}`}
-          </S.HomeButton>
-          <S.CreditCardRegisterHeader>카드 추가</S.CreditCardRegisterHeader>
-        </CreditCardRegisterTopSheet>
-        <FlexBox justifyContent="center">
-          <CreditCard
-            fullFilled={false}
-            creditCard={{
-              companyId: creditCardForm.companyId,
-              number: creditCardForm.number,
-              expiry: creditCardForm.expiry,
-              owner: creditCardForm.owner,
-            }}
-          />
-        </FlexBox>
-        {!modalOpen && (
-          <FlexBox justifyContent="center">
-            <S.CreditCardChangeButton type="button" onClick={openModal}>
-              카드사 변경하기
-            </S.CreditCardChangeButton>
-          </FlexBox>
-        )}
-        <S.CreditCardRegisterForm>
-          <CreditCardNumberInput />
-          <CreditCardExpiryInput />
-          <CreditCardOwnerInput />
-          <CreditCardCVCInput />
-          <CreditCardPasswordInput />
-          {isLoading ? (
-            <LoadingSpinner label="카드를 등록중입니다." />
-          ) : (
-            <ControlButton
-              disabled={isCreditCardError}
-              type="button"
-              onClick={handleSubmit}
-            >
-              다음
-            </ControlButton>
-          )}
-        </S.CreditCardRegisterForm>
-      </CreditCardRegisterLayout>
-      <Modal modalOpen={modalOpen}>
-        <CreditCardCompanyInput closeModal={closeModal} />
-      </Modal>
+      {isLoading ? (
+        <S.CenteredLayout>
+          <LoadingSpinner label="카드를 등록중입니다." />
+        </S.CenteredLayout>
+      ) : (
+        <>
+          <CreditCardRegisterLayout>
+            <CreditCardRegisterTopSheet>
+              <S.HomeButton type="button" onClick={() => navigate('/')}>
+                {`${'<'}`}
+              </S.HomeButton>
+              <S.CreditCardRegisterHeader>카드 추가</S.CreditCardRegisterHeader>
+            </CreditCardRegisterTopSheet>
+            <FlexBox justifyContent="center">
+              <CreditCard
+                fullFilled={false}
+                creditCard={{
+                  companyId: creditCardForm.companyId,
+                  number: creditCardForm.number,
+                  expiry: creditCardForm.expiry,
+                  owner: creditCardForm.owner,
+                }}
+              />
+            </FlexBox>
+            {!modalOpen && (
+              <FlexBox justifyContent="center">
+                <S.CreditCardChangeButton type="button" onClick={openModal}>
+                  카드사 변경하기
+                </S.CreditCardChangeButton>
+              </FlexBox>
+            )}
+            <S.CreditCardRegisterForm>
+              <CreditCardNumberInput />
+              <CreditCardExpiryInput />
+              <CreditCardOwnerInput />
+              <CreditCardCVCInput />
+              <CreditCardPasswordInput />
+
+              <ControlButton
+                disabled={isCreditCardError}
+                type="button"
+                onClick={handleSubmit}
+              >
+                다음
+              </ControlButton>
+
+            </S.CreditCardRegisterForm>
+          </CreditCardRegisterLayout>
+          <Modal modalOpen={modalOpen}>
+            <CreditCardCompanyInput closeModal={closeModal} />
+          </Modal>
+        </>
+      )}
     </>
   );
 }
