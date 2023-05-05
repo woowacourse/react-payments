@@ -2,7 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { BrowserRouter } from 'react-router-dom';
 
 import CardNameRegisterPage from '../pages/CardNameRegisterPage';
-import { CardFormValueContext } from '../contexts/CardFormContext';
+import CardFormProvider, {
+  CardFormValueContext,
+} from '../contexts/CardFormContext';
 import { CardInfo } from '../types/card';
 
 const meta: Meta<typeof CardNameRegisterPage> = {
@@ -19,9 +21,11 @@ const meta: Meta<typeof CardNameRegisterPage> = {
         }}
       >
         <BrowserRouter>
-          <CardFormValueContext.Provider value={MOCK_CARD_CONTEXT}>
-            <Story />
-          </CardFormValueContext.Provider>
+          <CardFormProvider>
+            <CardFormValueContext.Provider value={MOCK_CARD_CONTEXT}>
+              <Story />
+            </CardFormValueContext.Provider>
+          </CardFormProvider>
         </BrowserRouter>
       </div>
     ),
