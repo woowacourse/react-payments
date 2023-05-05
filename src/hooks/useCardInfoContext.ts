@@ -10,7 +10,7 @@ export function useCardInfoContext() {
   const { cardNumber, changeNumberInput } = useContext(NumberContext);
   const { month, year, changeDateInput } = useContext(DateContext);
   const { userName, changeNameInput } = useContext(NameContext);
-  const { selectedId, selectId } = useContext(BankContext);
+  const { selectedBank, selectBank } = useContext(BankContext);
 
   return {
     cardNumber,
@@ -20,7 +20,7 @@ export function useCardInfoContext() {
     changeDateInput,
     userName,
     changeNameInput,
-    selectedId,
-    selectId,
+    selectedBank,
+    selectBank,
   };
 }

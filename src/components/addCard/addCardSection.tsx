@@ -9,7 +9,7 @@ import { ModalTrigger } from "../@common/modal/modalTrigger";
 import { useCardInfoContext } from "../../hooks/useCardInfoContext";
 
 export function AddCardSection() {
-  const { cardNumber, month, year, userName, selectedId, selectId } =
+  const { cardNumber, month, year, userName, selectedBank, selectBank } =
     useCardInfoContext();
 
   return (
@@ -20,17 +20,17 @@ export function AddCardSection() {
         year={year}
         userName={userName}
         cardColor={{
-          bgColor: bank[selectedId]?.color,
-          fontColor: bank[selectedId]?.font,
+          bgColor: selectedBank?.color,
+          fontColor: selectedBank?.font,
         }}
-        bank={bank[selectedId]?.logoName}
+        bank={selectedBank?.logoName}
       />
       <AddCardForm />
       <ModalBox defaultOpen>
         <ModalTrigger />
         <ModalBackDrop />
         <ModalContent>
-          <BankMenu selectId={selectId} />
+          <BankMenu selectBank={selectBank} />
         </ModalContent>
       </ModalBox>
     </>

@@ -5,7 +5,7 @@ interface BankItemProps {
   logoName: string;
 }
 
-export function BankItem(props: BankItemProps) {
+export function Bank(props: BankItemProps) {
   const { logo, logoName } = props;
 
   return (

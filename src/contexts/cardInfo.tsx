@@ -3,6 +3,7 @@ import { useInputDate } from "../hooks/useInputDate";
 import { useInputName } from "../hooks/useInputName";
 import { useInputNumber } from "../hooks/useInputNumber";
 import { useSelectId } from "../hooks/useSelectId";
+import { BankItem } from "../type/card";
 import { CardNumberIndex } from "../type/input";
 
 export const NumberContext = createContext<{
@@ -37,11 +38,17 @@ export const NameContext = createContext<{
 });
 
 export const BankContext = createContext<{
-  selectedId: number;
-  selectId: (e: React.MouseEvent<HTMLElement>) => void;
+  selectedBank: BankItem;
+  selectBank: (item: BankItem) => void;
 }>({
-  selectedId: -1,
-  selectId: (e: React.MouseEvent<HTMLElement>) => {},
+  selectedBank: {
+    id: 0,
+    logo: () => <></>,
+    logoName: "",
+    color: "#000000",
+    font: "",
+  },
+  selectBank: (item: BankItem) => {},
 });
 
 export function CardInfoProvider({ children }: { children: React.ReactNode }) {

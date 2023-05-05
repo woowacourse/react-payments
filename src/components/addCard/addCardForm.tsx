@@ -15,7 +15,7 @@ import { useCardInfoContext } from "../../hooks/useCardInfoContext";
 export function AddCardForm() {
   const navigate = useNavigate();
   const [isComplete, setIsComplete] = useState<boolean>(false);
-  const { cardNumber, month, year, userName, selectedId } =
+  const { cardNumber, month, year, userName, selectedBank } =
     useCardInfoContext();
 
   function checkAllInputs(e: React.FormEvent<HTMLFormElement>) {
@@ -45,10 +45,10 @@ export function AddCardForm() {
       year: year,
       userName: userName,
       cardColor: {
-        bgColor: bank[selectedId]?.color,
-        fontColor: bank[selectedId]?.font,
+        bgColor: selectedBank?.color,
+        fontColor: selectedBank?.font,
       },
-      bank: bank[selectedId]?.logoName,
+      bank: selectedBank?.logoName,
     };
   }
 

@@ -14,3 +14,11 @@ export interface CardInfo {
   bank: string;
   nickname?: string;
 }
+
+export interface BankItem {
+  id: number;
+  logo: () => JSX.Element;
+  logoName: string;
+  color: string;
+  font: string;
+}

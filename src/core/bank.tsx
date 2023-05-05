@@ -8,6 +8,7 @@ import {
   ShinhanIc,
   WorriIc,
 } from "../assets";
+import { BankItem } from "../type/card";
 
 export const bank: BankItem[] = [
   {
@@ -67,11 +68,3 @@ export const bank: BankItem[] = [
     font: "#ffffff",
   },
 ];
-
-interface BankItem {
-  id: number;
-  logo: () => JSX.Element;
-  logoName: string;
-  color: string;
-  font: string;
-}

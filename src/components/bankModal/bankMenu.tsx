@@ -2,27 +2,31 @@ import { useContext } from "react";
 import styled from "styled-components";
 import { ModalContext } from "../../contexts/modal";
 import { bank } from "../../core/bank";
-import { BankItem } from "./bankItem";
+import { BankItem } from "../../type/card";
+import { Bank } from "./bank";
 
 interface BankMenuprops {
-  selectId: (e: React.MouseEvent<HTMLUListElement>) => void;
+  selectBank: (item: BankItem) => void;
 }
 
 export function BankMenu(props: BankMenuprops) {
-  const { selectId } = props;
+  const { selectBank } = props;
   const { closeLocalModal } = useContext(ModalContext);
 
-  function clickHandle(e: React.MouseEvent<HTMLUListElement>) {
+  function clickHandle(item: BankItem) {
     closeLocalModal();
-    selectId(e);
+    selectBank(item);
   }
 
   return (
     <Container>
       {bank.map((item) => {
         return (
-          <section key={item.id} id={String(item.id)} onClick={clickHandle}>
-            <BankItem logo={item.logo} logoName={item.logoName} />
+          <section
+            key={item.id}
+            id={String(item.id)}
+            onClick={() => clickHandle(item)}>
+            <Bank logo={item.logo} logoName={item.logoName} />
           </section>
         );
       })}
