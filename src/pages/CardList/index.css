@@ -1,0 +1,45 @@
+.add-card-button {
+  background-color: #e5e5e5;
+  border-radius: 5px;
+  width: 208px;
+  padding: 49px 0;
+  border: none;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #575757;
+}
+
+.add-card-button:hover {
+  cursor: pointer;
+}
+
+.card-list-page-body {
+  display: flex;
+  overflow-y: scroll;
+  flex-direction: column;
+  gap: 46px;
+  align-items: center;
+  margin-bottom: 36px;
+}
+
+.card-list-page-body .card-alias {
+  color: #525252;
+  text-align: center;
+}
+
+.empty-card-list-title {
+  font-weight: 700;
+  font-size: 14px;
+  color: #575757;
+}
+
+.card-list-page-header-title {
+  margin-left: 36px;
+}

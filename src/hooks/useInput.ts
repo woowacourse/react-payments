@@ -1,21 +1,18 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
-const useInput = (
-  initialState: string,
-  prevConditionCallback: (e: React.ChangeEvent<HTMLInputElement>) => boolean,
-  formatCallback: (data: string) => string
-) => {
-  const [value, setValue] = useState(initialState);
+import { InputStatus } from '../type';
+
+const useInput = (formatDispatcher: (str: string) => InputStatus, init: InputStatus = 'INIT') => {
+  const [status, setStatus] = useState<InputStatus>(init);
+  const [value, setValue] = useState<string>('');
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!prevConditionCallback(e)) return;
-    setValue(formatCallback(e.target.value));
+    const inputValue = e.target.value;
+    setStatus(formatDispatcher(inputValue));
+    setValue(inputValue);
   };
 
-  return {
-    value,
-    onChange,
-  };
+  return { value, status, onChange };
 };
 
 export default useInput;

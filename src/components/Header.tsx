@@ -2,10 +2,7 @@ import React from 'react';
 
 import './Header.css';
 
-type HeaderType = {
-  children: React.ReactNode;
-};
-const Header = ({ children }: HeaderType) => {
+const Header = ({ children }: React.PropsWithChildren) => {
   return <div className="page-header">{children}</div>;
 };
 

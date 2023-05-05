@@ -1,0 +1,9 @@
+.card-name-select {
+  display: grid;
+  height: 100%;
+  align-items: center;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  row-gap: 10px;
+  column-gap: 10px;
+}

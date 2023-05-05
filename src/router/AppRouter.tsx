@@ -1,8 +1,8 @@
-import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import AddCardPage from '../pages/AddCardPage';
-import CardListPage from '../pages/CardListPage';
+import AddCardPage from '../pages/AddCard';
+import CardListPage from '../pages/CardList';
+import CardAliasPage from '../pages/CardAlias';
 
 const router = createBrowserRouter([
   {
@@ -13,14 +13,14 @@ const router = createBrowserRouter([
     path: '/add',
     element: <AddCardPage />,
   },
+  {
+    path: '/alias',
+    element: <CardAliasPage />,
+  },
 ]);
 
 const AppRouter = () => {
-  return (
-    <React.StrictMode>
-      <RouterProvider router={router} />
-    </React.StrictMode>
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default AppRouter;

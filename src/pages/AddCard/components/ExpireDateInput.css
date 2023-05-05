@@ -1,0 +1,17 @@
+.card-expired-input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ecebf1;
+  height: 47px;
+  width: 137px;
+  border-radius: 7px;
+}
+
+.card-expired {
+  text-align: center;
+  border: none;
+  background-color: #ecebf1;
+  height: 30px;
+  width: 30px;
+}

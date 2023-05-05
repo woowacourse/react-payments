@@ -1,0 +1,13 @@
+.card-owner-input-container-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-owner {
+  display: block;
+  border: none;
+  background-color: #ecebf1;
+  width: 308px;
+  padding-left: 10px;
+  border-radius: 7px;
+}

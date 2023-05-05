@@ -1,5 +1,6 @@
 import type { Preview } from '@storybook/react';
-import '../src/components/FormCardAdd.css';
+
+import '../src/pages/AddCard/components/AddCardForm.css';
 
 const preview: Preview = {
   parameters: {

@@ -4,7 +4,6 @@
   justify-content: space-around;
   width: 213px;
   height: 133px;
-  background-color: #333333;
   border-radius: 5px;
   color: white;
   font-size: 12px;
@@ -17,9 +16,6 @@
   padding: 14px 0 0 10px;
 }
 
-.card-type {
-}
-
 .ic-chip {
   width: 40px;
   height: 26px;
@@ -29,12 +25,14 @@
 }
 
 .card-track-3 {
-  padding: 7px 14px;
+  height: 25px;
+  padding: 10px 14px 0 14px;
   display: flex;
   justify-content: space-between;
 }
 
 .card-track-4 {
+  height: 12px;
   padding: 0px 14px;
   display: flex;
   margin-bottom: 13px;
@@ -46,7 +44,40 @@
 }
 
 .card-owner-view {
-  width: 50px;
+  width: 100px;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.hyundai,
+.default-company {
+  background-color: #333333;
+}
+
+.bc {
+  background-color: #c2474c;
+}
+
+.kakao {
+  background-color: #f5dd3f;
+}
+
+.woori {
+  background-color: #457ac4;
+}
+
+.kookmin {
+  background-color: darkgoldenrod;
+}
+
+.hana {
+  background-color: darkcyan;
+}
+
+.lotte {
+  background-color: crimson;
+}
+
+.sinhan {
+  background-color: #2848fa;
 }
