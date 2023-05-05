@@ -42,7 +42,8 @@ export function CardSelectModalContent({ setCardCompany, closeModal }: Props) {
 
 const Style = {
   Title: styled.h2`
-    width: 368px;
+    width: 358px;
+    padding: 0 10px;
     margin-left: 10px;
     margin-bottom: 20px;
 
@@ -62,7 +63,8 @@ const Style = {
     grid-column-gap: calc(20% / 3);
     grid-row-gap: 20px;
 
-    width: 368px;
+    width: 358px;
+    padding: 0 10px;
     list-style: none;
   `,
 
@@ -70,7 +72,8 @@ const Style = {
     display: flex;
     justify-content: center;
 
-    width: 368px;
+    width: 358px;
+    padding: 0 10px;
     margin-top: 20px;
 
     font-size: 20px;
