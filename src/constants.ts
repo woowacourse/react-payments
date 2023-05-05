@@ -50,7 +50,7 @@ export const CARD_COMPANY_OPTION_MATRIX = [
       cardCompany: '국민카드',
     },
   ],
-];
+] as const;
 
 export const EXPIRE_DATE_VALID_MESSAGE = {
   invalidMonth: '1월에서 12월 사이로 입력 해주세요',

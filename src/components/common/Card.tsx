@@ -3,8 +3,7 @@ import styled from 'styled-components';
 
 import { CARD_COMPANY_COLOR_MAP } from '../../constants';
 
-interface Props extends Pick<CardType, 'cardNumber' | 'expireDate' | 'ownerName'> {
-  cardCompany: CardType['cardCompany'] | '';
+interface Props extends Pick<CardType, 'cardCompany' | 'cardNumber' | 'expireDate' | 'ownerName'> {
   onClick?: () => void;
 }
 
@@ -28,7 +27,7 @@ const Card = ({ cardCompany, cardNumber, ownerName, expireDate, onClick }: Props
 
 export default Card;
 
-const CardWrapper = styled.div<{ cardCompany: CardType['cardCompany'] | '' }>`
+const CardWrapper = styled.div<{ cardCompany: CardType['cardCompany'] }>`
   position: relative;
 
   display: flex;
