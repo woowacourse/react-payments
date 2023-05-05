@@ -1,4 +1,4 @@
-import CreditCard from 'components/CreditCard/CreditCard';
+import CreditCard from 'components/CreditCard';
 import { ChangeEvent, useState } from 'react';
 import useCreditCardForm from 'hooks/useCreditCardForm';
 import ControlButton from 'components/ControlButton';
