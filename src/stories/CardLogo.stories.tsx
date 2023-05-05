@@ -1,10 +1,18 @@
 import { Meta, StoryObj } from '@storybook/react';
 import CardLogo from '../components/@common/CardLogo';
 import { IMAGE_PATH } from '../types/Image';
+import RefProvider from '../contexts/RefProvider';
 
 const meta = {
   component: CardLogo,
   title: 'Item/CardLogo',
+  decorators: [
+    (Story) => (
+      <RefProvider>
+        <Story />
+      </RefProvider>
+    ),
+  ],
 } satisfies Meta<typeof CardLogo>;
 
 export default meta;
