@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 200px 35px 0 35px;
+  gap: 15px;
+}
+
+.container * {
+  text-align: center;
+}
+
+.thinking-face {
+  width: 80px;
+}

@@ -1,6 +1,9 @@
 .container {
   display: flex;
   flex-direction: column;
+  overflow: auto;
+  max-height: 620px;
+  padding: 10px 0;
 }
 
 .card {

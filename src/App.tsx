@@ -1,27 +1,29 @@
 import { HashRouter, Routes, Route } from 'react-router-dom';
-import NotFound from './pages/NotFound';
-import Home from './pages/Home';
-import CardRegistration from './pages/CardRegistration';
+import { CardInfoProvider } from './contexts/CardInfoProvider';
+import { ModalProvider } from './contexts/ModalProvider';
 import styles from './App.module.css';
-import { useState } from 'react';
-import type { CardInfo } from './types';
+import CardNameDecision from './pages/CardNameDecision/CardNameDecision';
+import NotFound from './pages/NotFound/NotFound';
+import Home from './pages/Home/Home';
+import CardRegistration from './pages/CardRegistration/CardRegistration';
+import ModalBottomSheet from './components/common/ModalBottomSheet/ModalBottomSheet';
 
 const App = () => {
-  const [cardInfo, setCardInfo] = useState<CardInfo[]>([]);
-
-  const registerNewCard = ({ cardNumber, cardExpirationDate, cardOwnerName }: CardInfo) => {
-    setCardInfo(cardInfo => [...cardInfo, { cardNumber, cardExpirationDate, cardOwnerName }]);
-  };
-
   return (
     <div className={styles.container}>
-      <HashRouter>
-        <Routes>
-          <Route path="/" element={<Home cardInfo={cardInfo} />}></Route>
-          <Route path="/card-registration" element={<CardRegistration registerNewCard={registerNewCard} />}></Route>
-          <Route path="*" element={<NotFound />}></Route>
-        </Routes>
-      </HashRouter>
+      <CardInfoProvider>
+        <ModalProvider>
+          <HashRouter>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/card-registration" element={<CardRegistration />} />
+              <Route path="/card-name-decision" element={<CardNameDecision />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </HashRouter>
+          <ModalBottomSheet />
+        </ModalProvider>
+      </CardInfoProvider>
     </div>
   );
 };
