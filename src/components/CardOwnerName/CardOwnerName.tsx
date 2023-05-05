@@ -27,7 +27,7 @@ const CardOwnerName = ({
   return (
     <>
       <Styled.LabelWrapper>
-        <CardLabel labelText="카드 소유자 이름(선택)" />
+        <CardLabel labelText="카드 소유자 이름" />
         <CardLabel labelText={`${cardOwnerName.length || 0} / 30`} />
       </Styled.LabelWrapper>
       <Styled.Wrapper>
@@ -38,7 +38,7 @@ const CardOwnerName = ({
           order={6}
           onChange={handleCardInputChange}
           value={cardOwnerName}
-          placeholder="카드에 표시된 영어 이름을 입력하세요."
+          placeholder="(선택) 카드에 표시된 영어 이름을 입력하세요."
           inputMode="text"
         />
       </Styled.Wrapper>
