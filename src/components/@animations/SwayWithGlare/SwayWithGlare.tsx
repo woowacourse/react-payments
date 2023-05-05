@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { PropsWithChildren } from "react";
-import { glareX, glareY, swayX, swayY } from "../../../styles/keyframes/swayWIthGlare";
+import { glareX, glareY, swayX, swayY } from "../../../styles/keyframes/swayWithGlare";
 
 const SwayWithGlare = ({ children }: PropsWithChildren) => {
   return (
