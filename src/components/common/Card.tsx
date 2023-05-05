@@ -3,7 +3,8 @@ import styled from 'styled-components';
 
 import { CARD_COMPANY_COLOR_MAP } from '../../constants';
 
-interface Props extends Pick<CardType, 'cardCompany' | 'cardNumber' | 'expireDate' | 'ownerName'> {
+interface Props extends Pick<CardType, 'cardNumber' | 'expireDate' | 'ownerName'> {
+  cardCompany: CardType['cardCompany'] | '';
   onClick?: () => void;
 }
 
@@ -19,7 +20,7 @@ const Card = ({ cardCompany, cardNumber, ownerName, expireDate, onClick }: Props
       </CardNumberArea>
       <CardInfoArea>
         <OwnerName>{ownerName || 'NAME'}</OwnerName>
-        <ExpireDate>{expireDate.join('') !== '' ? expireDate.join('/') : 'MM/YY'}</ExpireDate>
+        <ExpireDate>{expireDate.join('') === '' ? 'MM/YY' : expireDate.join('/')}</ExpireDate>
       </CardInfoArea>
     </CardWrapper>
   );
@@ -27,7 +28,7 @@ const Card = ({ cardCompany, cardNumber, ownerName, expireDate, onClick }: Props
 
 export default Card;
 
-const CardWrapper = styled.div<{ cardCompany: string }>`
+const CardWrapper = styled.div<{ cardCompany: CardType['cardCompany'] | '' }>`
   position: relative;
 
   display: flex;
@@ -40,8 +41,9 @@ const CardWrapper = styled.div<{ cardCompany: string }>`
   padding: 12px 18px;
   box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.25);
 
-  background: ${({ cardCompany }) => CARD_COMPANY_COLOR_MAP[cardCompany]?.background || '#333333'};
-  color: ${({ cardCompany }) => CARD_COMPANY_COLOR_MAP[cardCompany]?.color || 'white'};
+  background: ${({ cardCompany }) =>
+    cardCompany === '' ? '#333333' : CARD_COMPANY_COLOR_MAP[cardCompany].background};
+  color: ${({ cardCompany }) => (cardCompany === '' ? '#333333' : CARD_COMPANY_COLOR_MAP[cardCompany].color)};
 
   transition: transform 0.2s;
   &:hover {
