@@ -1,6 +1,8 @@
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
+import Modal from "@chsua/bottom-modal";
+
 import Button from "../../common/Button";
 import CardPreview from "../../common/CardPreview";
 import InputBoxCardNumber from "../InputBoxCardNumber/InputBoxCardNumber";
@@ -8,7 +10,7 @@ import InputBoxExpirationDate from "../InputBoxExpirationDate/InputBoxExpiration
 import InputBoxOwner from "../InputBoxOwner/InputBoxOwner";
 import InputBoxPassword from "../InputBoxPassword/InputBoxPassword";
 import InputBoxSecurityCode from "../InputBoxSecurityCode/InputBoxSecurityCode";
-import CardCoModal from "../../common/CardCoModal";
+// import CardCoModal from "../../common/CardCoModal";
 
 import { CardCo, CreditCard } from "../../../type";
 
@@ -21,6 +23,17 @@ import { CARD_CO_NAME } from "../../../CONSTANT";
 interface CardInputFormProps {
   addNewCard: (card: CreditCard) => void;
 }
+
+const style = {
+  height: "250px",
+  inner: {
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr 1fr 1fr",
+    padding: "50px 10%",
+    minWidth: "375px",
+    rowGap: "20px",
+  },
+};
 
 export default function CardInputForm(props: CardInputFormProps) {
   const { modalOpen, openModal, closeModal } = useModalState();
@@ -48,17 +61,16 @@ export default function CardInputForm(props: CardInputFormProps) {
 
   return (
     <form onSubmit={(e) => submitCardInfo(e)} className="form">
-      {
-        <CardCoModal isOpen={modalOpen}>
-          {cardCoList.map((cardCo) => (
-            <CardCoButton
-              key={cardCo}
-              cardCo={cardCo}
-              changeCardCoStatus={changeInputStatus("cardCo")}
-            />
-          ))}
-        </CardCoModal>
-      }
+      <Modal className="modal" isOpen={modalOpen} style={style}>
+        {cardCoList.map((cardCo) => (
+          <CardCoButton
+            key={cardCo}
+            cardCo={cardCo}
+            changeCardCoStatus={changeInputStatus("cardCo")}
+          />
+        ))}
+      </Modal>
+
       <CardPreview card={nowCardInfo} openCardCoModal={openModal} />
       <InputBoxCardNumber
         changeCardNumberStatus={changeInputStatus("cardNumber")}
