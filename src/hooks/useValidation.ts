@@ -1,37 +1,64 @@
 import { useState } from 'react';
 
-type ValidateFunctions<Data extends object> = Partial<{
-  [K in keyof Data]: (value: Data[K]) => void;
+type Validation<Data extends object> = Partial<{
+  [Field in keyof Data]: (value: Data[Field]) => void;
 }>;
 
-type ValidationResult<Data> = Partial<Record<keyof Data, string | null>>;
+type ValidationResult<Data extends object> = Partial<Record<keyof Data, string>>;
 
-export const useValidation = <Data extends object>(
-  validationFunctions: ValidateFunctions<Data>,
-) => {
+export const useValidation = <Data extends object>(validateFns: Validation<Data>) => {
   const [validationResult, setValidationResult] = useState<ValidationResult<Data>>({});
 
+  /**
+   * 주어진 데이터에 대해 검증을 수행합니다.
+   *
+   * 검증 결과는 {@link validationResult} 상태에 업데이트됩니다.
+   *
+   * @param data 검증할 데이터 객체
+   * @returns {boolean} 검증 성공 여부
+   */
   const validate = (data: Data) => {
-    const nextValidationResult: ValidationResult<Data> = (
-      Object.keys(validationFunctions) as Array<keyof Data>
-    ).reduce((result, key) => {
-      // 각 필드마다 검증을 수행할 함수
-      const validateFn = validationFunctions[key];
+    const nextValidationResult = (Object.keys(validateFns) as Array<keyof Data>).reduce(
+      (progressValidationResult, field) => {
+        // 각 필드마다 검증을 수행할 함수
+        const validateFn = validateFns[field];
 
-      try {
-        validateFn?.(data[key]);
-        return { ...result, [key]: null };
-      } catch (e) {
-        const error = e as Error;
-        return { ...result, [key]: error.message };
-      }
-    }, {});
+        try {
+          validateFn?.(data[field]);
+          return progressValidationResult;
+        } catch (e) {
+          const error = e as Error;
+          return { ...progressValidationResult, [field]: error.message };
+        }
+      },
+      {},
+    );
 
     setValidationResult(nextValidationResult);
 
-    // 검증 성공 여부 반환: 객체 검증 성공 시 모든 필드의 값은 null
-    return Object.values(nextValidationResult).every((result) => result === null);
+    // 검증 성공 여부 반환
+    return Object.keys(nextValidationResult).length === 0;
   };
 
-  return { validate, validationResult };
+  const validateField = <Field extends keyof Data>(field: Field, value: Data[Field]) => {
+    const validateFn = validateFns[field];
+
+    try {
+      validateFn?.(value);
+
+      // validate 성공했으므로 validationResult에서 삭제
+      setValidationResult(
+        Object.fromEntries(
+          Object.entries(validationResult).filter(([itField]) => itField !== field),
+        ) as ValidationResult<Data>,
+      );
+      return true;
+    } catch (e) {
+      const error = e as Error;
+      setValidationResult({ ...validationResult, [field]: error.message });
+    }
+    return false;
+  };
+
+  return { validate, validateField, validationResult };
 };

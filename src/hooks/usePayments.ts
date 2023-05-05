@@ -1,13 +1,12 @@
 import { useContext } from 'react';
 import { PaymentsContext } from '../context/PaymentsContext';
-import type { CreditCard } from '../types/CreditCard';
 
 export const usePayments = () => {
-  const { creditCards, setCreditCards } = useContext(PaymentsContext);
+  const context = useContext(PaymentsContext);
 
-  const addCreditCard = (newCard: CreditCard) => {
-    setCreditCards([...creditCards, newCard]);
-  };
+  if (context === null) {
+    throw new Error('usePayments 훅을 사용하기 위해선 PaymentsProvider를 사용해야 합니다.');
+  }
 
-  return { creditCards, addCreditCard };
+  return context;
 };

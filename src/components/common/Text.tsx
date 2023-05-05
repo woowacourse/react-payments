@@ -1,10 +1,11 @@
 import type { PropsWithChildren } from 'react';
 import styled from 'styled-components';
+import type { Theme } from '../../styles/theme';
 
 type TextProps = PropsWithChildren<{
-  size?: 'small' | 'medium' | 'large';
-  weight?: 'normal' | 'bold';
-  color?: string;
+  size?: keyof Theme['fontSize'];
+  weight?: keyof Theme['fontWeight'];
+  color?: keyof Theme['fontColor'];
 }>;
 
 type StyledTextProps = {
@@ -13,21 +14,10 @@ type StyledTextProps = {
   $color: TextProps['color'];
 };
 
-const fontSizes: Record<StyledTextProps['$size'], string> = {
-  small: '12px',
-  medium: '14px',
-  large: '16px',
-};
-
-const fontWeights: Record<StyledTextProps['$weight'], number> = {
-  normal: 500,
-  bold: 700,
-};
-
 export const StyledText = styled.div<StyledTextProps>`
-  font-size: ${(props) => fontSizes[props.$size]};
-  font-weight: ${(props) => fontWeights[props.$weight]};
-  color: ${(props) => props.$color ?? 'inherit'};
+  font-size: ${(props) => props.theme.fontSize[props.$size]};
+  font-weight: ${(props) => props.theme.fontWeight[props.$weight]};
+  color: ${(props) => (props.$color ? props.theme.fontColor[props.$color] : 'inherit')};
 `;
 
 export const Text = (props: TextProps) => {

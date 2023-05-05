@@ -7,6 +7,7 @@ const Header = styled.header`
   align-items: center;
   gap: 16px;
 
+  min-height: 80px;
   padding: 20px 36px;
 `;
 

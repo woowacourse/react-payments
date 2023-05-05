@@ -24,3 +24,8 @@
 ## 🐞 Bug Report
 
 버그를 발견한다면, [Issues](https://github.com/woowacourse/react-payments/issues)에 등록해주세요.
+
+## 🚀 View Deployment
+
+- 앱: https://solo5star.github.io/react-payments/
+- 스토리북: https://solo5star.github.io/react-payments/storybook/
