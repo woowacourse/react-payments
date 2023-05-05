@@ -1,9 +1,11 @@
 :root {
+  --color-primary: #ff9500;
+  --color-secondary: #fcf7ed;
+
   --text-primary: #383838;
   --text-secondary: #575757;
   --text-white: #f5f5f5;
 
-  --background-input: #ecebf1;
   --background-white: #fff;
 
   --error-primary: #c2171d;
