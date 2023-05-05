@@ -1,31 +1,24 @@
 import CardLogo from '../@common/CardLogo';
-import * as Styled from './CardCompanyModal.styles';
+import * as Styled from './CardCompanyForm.styles';
 import { IMAGE_PATH } from '../../types/Image';
 import { Dispatch, SetStateAction } from 'react';
 
 interface cardCompanyModalProps {
-  cardCompany: string;
-  setIsModalOpen: Dispatch<SetStateAction<boolean>>;
   setCardCompany: Dispatch<SetStateAction<string>>;
+  setIsModalOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 const getCompanyInfos = () => {
   return Object.entries(IMAGE_PATH);
 };
 
-const CardCompanyModal = ({
-  cardCompany,
-  setIsModalOpen,
+const CardCompanyForm = ({
   setCardCompany,
+  setIsModalOpen,
 }: cardCompanyModalProps) => {
   return (
     <>
-      <Styled.ModalBackdrop
-        onClick={() => {
-          cardCompany && setIsModalOpen(false);
-        }}
-      ></Styled.ModalBackdrop>
-      <Styled.Modal>
+      <Styled.FormWrapper>
         {getCompanyInfos().map(([companyName, companyImage]) => (
           <CardLogo
             key={companyName}
@@ -35,9 +28,9 @@ const CardCompanyModal = ({
             setIsModalOpen={setIsModalOpen}
           />
         ))}
-      </Styled.Modal>
+      </Styled.FormWrapper>
     </>
   );
 };
 
-export default CardCompanyModal;
+export default CardCompanyForm;

@@ -11038,6 +11038,14 @@ schema-utils@2.7.0:
     ajv "^6.12.2"
     ajv-keywords "^3.4.1"
 
+seeen-react-payments-modal@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.npmjs.org/seeen-react-payments-modal/-/seeen-react-payments-modal-1.0.2.tgz"
+  integrity sha512-U2RyVrAKAY9GqJzkpLIe708A6oCL4Qt1kJICQpJrv02Y5drmkEMI9AmaSZWicGUpGbExh+BvI0LkFg5Y0hBzkQ==
+  dependencies:
+    react "^18.2.0"
+    react-dom "^18.2.0"
+
 select-hose@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/select-hose/-/select-hose-2.0.0.tgz"

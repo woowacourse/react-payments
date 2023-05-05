@@ -8,13 +8,14 @@ import Header from '../components/Header/Header';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import useAddCard from '../hooks/useAddCard';
-import CardCompanyModal from '../components/CardCompanyModal/CardCompanyModal';
+import CardCompanyForm from '../components/CardCompanyModal/CardCompanyForm';
 import { useEffect, useState } from 'react';
 import CardLabel from '../components/@common/CardLabel';
 import * as Styled from './AddCard.styles';
 import SubmitButton from '../components/@common/SubmitButton';
 import CardList from '../types/CardList';
 import RefProvider from '../contexts/RefProvider';
+import Modal from 'seeen-react-payments-modal';
 
 const AddCard = ({ cards, setCards }: CardList) => {
   const {
@@ -61,6 +62,10 @@ const AddCard = ({ cards, setCards }: CardList) => {
       },
     ]);
     navigate('/add-card-alias');
+  };
+
+  const handleOpenModal = () => {
+    setIsModalOpen(false);
   };
 
   useEffect(() => {
@@ -124,13 +129,12 @@ const AddCard = ({ cards, setCards }: CardList) => {
         </form>
         <Styled.ErrorTextWrapper>{errorMessage}</Styled.ErrorTextWrapper>
       </Styled.PageWrapper>
-      {isModalOpen && (
-        <CardCompanyModal
-          cardCompany={cardCompany}
-          setIsModalOpen={setIsModalOpen}
+      <Modal isModalOpen={isModalOpen} closeModal={handleOpenModal}>
+        <CardCompanyForm
           setCardCompany={setCardCompany}
+          setIsModalOpen={handleOpenModal}
         />
-      )}
+      </Modal>
     </RefProvider>
   );
 };

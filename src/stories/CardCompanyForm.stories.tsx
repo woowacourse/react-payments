@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from '@storybook/react';
-import CardCompanyModal from '../components/CardCompanyModal/CardCompanyModal';
+import CardCompanyForm from '../components/CardCompanyModal/CardCompanyForm';
 
 const meta = {
-  component: CardCompanyModal,
+  component: CardCompanyForm,
   title: 'Section/CardCompanyModal',
-} satisfies Meta<typeof CardCompanyModal>;
+} satisfies Meta<typeof CardCompanyForm>;
 
 export default meta;
 
@@ -12,7 +12,6 @@ type Story = StoryObj<typeof meta>;
 
 export const CardCompanyModalStory: Story = {
   args: {
-    cardCompany: '국민카드',
     setCardCompany: () => {
       return;
     },
