@@ -34,6 +34,7 @@ export default function CardNumberInput({
   return (
     <Wrapper>
       <Input
+        autoFocus
         isNumber={true}
         maxLength={4}
         id="cardNumber"

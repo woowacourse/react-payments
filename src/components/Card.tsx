@@ -1,16 +1,21 @@
 import styled from "styled-components";
+import { useCardState } from "../context/CardContext";
+import useDrawer from "../hooks/useDrawer";
 
 interface CardProps {
+  type: string;
+  cardColor: string;
+  cardTitle: string;
   cardNumberSet: string[];
   owner: string;
-  expiracy: string;
+  expiration: string;
 }
 
-const StyledCard = styled.div`
+const StyledCard = styled.div<{ cardColor: string }>`
   width: 213px;
   height: 133px;
-  background: #333;
   box-shadow: 3px 3px 5px #00000040;
+  background: ${(props) => props.cardColor ?? "#333"};
   border-radius: 5px;
   padding: 18px;
   display: flex;
@@ -19,10 +24,10 @@ const StyledCard = styled.div`
   position: relative;
 `;
 const StyledTitle = styled.div`
-  color: #383838;
+  color: rgb(255, 255, 255);
   font-size: 12px;
   height: 14px;
-  margin-bottom: 22px;
+  margin-bottom: 59px;
 `;
 const StyledMagnet = styled.div`
   background: #cbba64;
@@ -38,6 +43,7 @@ const StyledCardNumber = styled.div`
   font-weight: bold;
   font-size: 14px;
   width: 100%;
+  height: 25px;
   justify-content: space-between;
   margin-bottom: 8px;
   display: flex;
@@ -65,7 +71,7 @@ const StyledOwnerName = styled.span`
   word-break: break-all;
   font-size: 14px;
 `;
-const StyledExpiracy = styled.span`
+const StyledExpiration = styled.span`
   color: #fff;
   float: right;
   font-weight: bold;
@@ -74,10 +80,25 @@ const StyledExpiracy = styled.span`
 
 const ENCRYPT_INDEX = 2;
 
-export default function Card({ cardNumberSet, owner, expiracy }: CardProps) {
+export default function Card({
+  cardNumberSet,
+  owner,
+  expiration,
+  type,
+  cardColor,
+  cardTitle,
+}: CardProps) {
+  const cardState = useCardState();
+  const { openDrawer } = useDrawer();
+
+  const isHomePage = type === "homepage";
+  const cardColorToShow = isHomePage ? cardColor : cardState.color;
+  const cardTitleToShow = isHomePage ? cardTitle : cardState.title;
+  const onClickCard = isHomePage ? () => {} : openDrawer;
+
   return (
-    <StyledCard>
-      <StyledTitle></StyledTitle>
+    <StyledCard cardColor={cardColorToShow} onClick={onClickCard}>
+      <StyledTitle>{cardTitleToShow}</StyledTitle>
       <StyledMagnet />
       <div>
         <StyledCardNumber>
@@ -90,7 +111,7 @@ export default function Card({ cardNumberSet, owner, expiracy }: CardProps) {
           ))}
         </StyledCardNumber>
         <StyledOwnerName>{owner ? owner : "NAME"}</StyledOwnerName>
-        <StyledExpiracy>{expiracy}</StyledExpiracy>
+        <StyledExpiration>{expiration}</StyledExpiration>
       </div>
     </StyledCard>
   );

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export type InputTitle =
   | "cardNumber"
-  | "expiracy"
+  | "expiration"
   | "owner"
   | "cvc"
   | "password";
@@ -19,7 +19,7 @@ const INPUT_INFO = {
     title: "카드 번호",
     width: "318px",
   },
-  expiracy: {
+  expiration: {
     title: "만료일",
     width: "137px",
   },

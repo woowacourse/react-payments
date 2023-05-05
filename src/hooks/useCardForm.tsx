@@ -15,7 +15,7 @@ export function useCardForm() {
   const secondPassword = useInput("", { name: "secondPassword" });
 
   const formRef = useRef<HTMLFormElement>(null);
-  const { isFormFilled } = useFormValidation(formRef, [
+  const { isFormNotFilled } = useFormValidation(formRef, [
     firstCardNumber.value,
     secondCardNumber.value,
     thirdCardNumber.value,
@@ -39,6 +39,6 @@ export function useCardForm() {
     firstPassword,
     secondPassword,
     formRef,
-    isFormFilled,
+    isFormNotFilled,
   };
 }

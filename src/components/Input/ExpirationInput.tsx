@@ -3,7 +3,7 @@ import { REGEX_PATTERN } from "../../constant";
 import { UseInputProps } from "../../hooks/useInput";
 import Input from "../common/Input";
 
-interface ExpiracyInputProps {
+interface ExpirationInputProps {
   year: UseInputProps;
   month: UseInputProps;
 }
@@ -30,14 +30,14 @@ const Slash = styled.span`
   font-weight: 500;
   color: #737373;
 `;
-export default function ExpiracyInput({ year, month }: ExpiracyInputProps) {
+export default function ExpirationInput({ year, month }: ExpirationInputProps) {
   return (
     <Wrapper>
       <InputWrapper>
         <Input
           type="text"
           maxLength={2}
-          id="expiracy"
+          id="expiration"
           isNumber={true}
           pattern={REGEX_PATTERN.MONTH}
           required

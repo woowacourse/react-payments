@@ -1,6 +1,8 @@
 import { Meta, StoryObj } from "@storybook/react";
 
 import Card from "../components/Card";
+import { CardContextProvider } from "../context/CardContext";
+import { DrawerContextProvider } from "../context/DrawerContext";
 
 const meta: Meta<typeof Card> = {
   component: Card,
@@ -10,19 +12,48 @@ const meta: Meta<typeof Card> = {
 export default meta;
 type Story = StoryObj<typeof Card>;
 
-//title,cardNumberSet,owner,expiracy
 export const EmptyCard: Story = {
   args: {
     cardNumberSet: ["", "", "", ""],
     owner: "NAME",
-    expiracy: "MM/YY",
+    expiration: "MM/YY",
+    cardColor: "#f8f6f6",
+    cardTitle: "",
+    type: "addCard",
   },
+
+  decorators: [
+    (Story) => (
+      <CardContextProvider>
+        <DrawerContextProvider>
+          <Story />
+        </DrawerContextProvider>
+      </CardContextProvider>
+    ),
+  ],
 };
 
-export const FullfilledCard: Story = {
+const cardState = {
+  color: "#0b12d5",
+  title: "SINHAN",
+};
+
+export const FilledCard: Story = {
   args: {
-    cardNumberSet: ["1111", "2222", "····", "····"],
+    cardNumberSet: ["1234", "5678", "1234", "5678"],
     owner: "EYK",
-    expiracy: "12/21",
+    expiration: "05/23",
+    cardColor: cardState.color,
+    cardTitle: cardState.title,
+    type: "homepage",
   },
+  decorators: [
+    (Story) => (
+      <CardContextProvider>
+        <DrawerContextProvider>
+          <Story />
+        </DrawerContextProvider>
+      </CardContextProvider>
+    ),
+  ],
 };

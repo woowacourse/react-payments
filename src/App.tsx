@@ -2,9 +2,12 @@ import { useState } from "react";
 import AddCardPage from "./components/Page/AddCardPage";
 import Homepage from "./components/Page/Homepage";
 import { LOCAL_STORAGE_CARD_KEY } from "./constant";
+import { useCardAction } from "./context/CardContext";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 import "./styles/index.css";
 import { CardInfo } from "./types";
+import AddNicknamePage from "./components/Page/AddNicknamePage";
+import { DrawerContextProvider } from "./context/DrawerContext";
 
 export default function App() {
   const [pageIndex, setPageIndex] = useState(0);
@@ -12,6 +15,7 @@ export default function App() {
     [],
     LOCAL_STORAGE_CARD_KEY
   );
+  const cardAction = useCardAction();
 
   const onCardInfoSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -29,14 +33,15 @@ export default function App() {
       secondPassword,
     } = event.currentTarget;
 
-    const newCard: CardInfo = {
+    cardAction({
+      type: "UPDATE_CARD_CONTEXT",
       cardNumber: {
-        fisrt: firstCardNumber.value,
+        first: firstCardNumber.value,
         second: secondCardNumber.value,
         third: thirdCardNumber.value,
         fourth: fourthCardNumber.value,
       },
-      expiracy: {
+      expiration: {
         month: month.value,
         year: year.value,
       },
@@ -46,24 +51,31 @@ export default function App() {
         first: firstPassword.value,
         second: secondPassword.value,
       },
-    };
-
-    const updatedCardList = [...cardList, newCard];
-    setCardList(updatedCardList);
-    setPageIndex(0);
+    });
+    setPageIndex(2);
   };
 
   return (
     <div className="app">
-      {pageIndex === 0 && (
-        <Homepage cardList={cardList} onClick={() => setPageIndex(1)} />
-      )}
-      {pageIndex === 1 && (
-        <AddCardPage
-          onClick={() => setPageIndex(0)}
-          onSubmit={onCardInfoSubmit}
-        />
-      )}
+      <DrawerContextProvider>
+        {pageIndex === 0 && (
+          <Homepage cardList={cardList} onClick={() => setPageIndex(1)} />
+        )}
+
+        {pageIndex === 1 && (
+          <AddCardPage
+            onClick={() => setPageIndex(0)}
+            onSubmit={onCardInfoSubmit}
+          />
+        )}
+        {pageIndex === 2 && (
+          <AddNicknamePage
+            cardList={cardList}
+            setCardList={setCardList}
+            setPageIndex={setPageIndex}
+          />
+        )}
+      </DrawerContextProvider>
     </div>
   );
 }

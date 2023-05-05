@@ -1,8 +1,10 @@
 import { MouseEvent } from "react";
 import styled from "styled-components";
+import { CARD_COMPANYS } from "../../constant";
 import { CardInfo } from "../../types";
 import AddCardButton from "../Button/AddCardButton";
 import Card from "../Card";
+import { useResetCardContext } from "../../hooks/useResetCardContext";
 
 interface HomePageProps {
   cardList: CardInfo[];
@@ -10,8 +12,6 @@ interface HomePageProps {
 }
 
 const Page = styled.div`
-  width: 375px;
-  border: 1px solid;
   min-height: 100vh;
   padding: 20px 36px;
 `;
@@ -40,7 +40,16 @@ const CardWrapper = styled.div`
   gap: 46px;
 `;
 
+const NickName = styled.h4`
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  color: #383737;
+  opacity: 0.9;
+`;
+
 export default function Homepage({ onClick, cardList }: HomePageProps) {
+  useResetCardContext();
   return (
     <Page>
       <Title>보유카드</Title>
@@ -49,13 +58,21 @@ export default function Homepage({ onClick, cardList }: HomePageProps) {
       )}
       <CardWrapper>
         {cardList.map((card) => (
-          <Card
-            key={`${card.owner}${card.cardNumber.third}`}
-            owner={card.owner}
-            cardNumberSet={Object.values(card.cardNumber)}
-            expiracy={`${card.expiracy.month}/${card.expiracy.year}`}
-          />
+          <div
+            key={`${card.cardNumber.fourth}${card.cardNumber.third}${card.cardNumber.fourth}`}
+          >
+            <Card
+              type="homepage"
+              cardColor={CARD_COMPANYS[card.cardTitle].backgroundColor}
+              cardTitle={CARD_COMPANYS[card.cardTitle].title}
+              owner={card.owner}
+              cardNumberSet={Object.values(card.cardNumber)}
+              expiration={`${card.expiration.month}/${card.expiration.year}`}
+            />
+            <NickName>{card.nickName}</NickName>
+          </div>
         ))}
+
         <AddCardButton onClick={onClick} />
       </CardWrapper>
     </Page>

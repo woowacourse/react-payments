@@ -2,8 +2,7 @@ import styled from "styled-components";
 
 export const Page = styled.div`
   position: relative;
-  width: 375px;
-  border: 1px solid;
+  box-sizing: border-box;
   min-height: 100vh;
   padding: 20px 28px;
 `;
@@ -44,7 +43,7 @@ export const CvcButtonWrapper = styled.div`
   position: relative;
   margin-left: 11px;
 `;
-export const NextButtonWrapper = styled.div`
+export const DownRightButtonWrapper = styled.div`
   position: absolute;
   right: 25px;
   bottom: 25px;
