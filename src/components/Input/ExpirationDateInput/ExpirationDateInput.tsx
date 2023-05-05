@@ -27,6 +27,7 @@ export function ExpirationDateInput({ onChangeMonth, onChangeYear }: ExpirationD
             type="text"
             maxLength={2}
             placeholder="MM"
+            className={isMonthError ? 'error' : ''}
             onChange={month.onChange}
             required
           />
@@ -39,6 +40,7 @@ export function ExpirationDateInput({ onChangeMonth, onChangeYear }: ExpirationD
             type="text"
             maxLength={2}
             placeholder="YY"
+            className={isYearError ? 'error' : ''}
             onChange={year.onChange}
             required
           />

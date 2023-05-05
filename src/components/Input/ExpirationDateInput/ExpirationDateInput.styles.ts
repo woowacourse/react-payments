@@ -13,7 +13,12 @@ export const Styled = {
     justify-content: center;
     Input {
       height: 44px;
+      border-radius: 7px;
       text-align: center;
+    }
+    .error {
+      border: 1px solid red;
+      background-color: var(--primary-error-color);
     }
   `,
   SLASH: styled.span`
