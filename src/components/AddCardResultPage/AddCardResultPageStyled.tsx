@@ -16,16 +16,6 @@ const St = {
     font-size: 28px;
   `,
 
-  CardAlias: styled.input`
-    align-self: center;
-
-    width: 70%;
-    border-bottom: solid;
-
-    text-align: center;
-    font-size: 24px;
-  `,
-
   CardAliasForm: styled.form`
     display: flex;
     flex-direction: column;
