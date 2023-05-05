@@ -15,6 +15,11 @@ const GlobalStyle = createGlobalStyle`
   a {
     text-decoration: none;
   }
+
+  :root{
+    --color-primary: #d4e7fd;
+    --color-pale: #ececec;
+  }
 `;
 
 export default GlobalStyle;

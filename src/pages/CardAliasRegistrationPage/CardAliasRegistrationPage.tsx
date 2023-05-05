@@ -53,11 +53,11 @@ const CardAliasRegistrationPage = ({ onSubmit }: CardAliasRegistrationPageProps)
         <CardPreview card={previewCard} />
         <NavigateButtonContainer>
           <Link to={ROUTE_PATH.root}>
-            <NavigateButton type="button" $backgroundColor="#ececec">
+            <NavigateButton type="button" $backgroundColor="var(--color-pale)">
               홈으로
             </NavigateButton>
           </Link>
-          <NavigateButton onClick={addCard} type="button" $backgroundColor="#d4e7fd">
+          <NavigateButton onClick={addCard} type="button" $backgroundColor="var(--color-primary)">
             다시 시도하기
           </NavigateButton>
         </NavigateButtonContainer>
@@ -83,12 +83,12 @@ const CardAliasRegistrationPage = ({ onSubmit }: CardAliasRegistrationPageProps)
         <CardPreview card={previewCard} />
         <NavigateButtonContainer>
           <Link to={ROUTE_PATH.root}>
-            <NavigateButton type="button" $backgroundColor="#ececec">
+            <NavigateButton type="button" $backgroundColor="var(--color-pale)">
               홈으로
             </NavigateButton>
           </Link>
           <Link to={ROUTE_PATH.addCard}>
-            <NavigateButton type="button" $backgroundColor="#d4e7fd">
+            <NavigateButton type="button" $backgroundColor="var(--color-primary)">
               추가 등록하기
             </NavigateButton>
           </Link>
@@ -160,7 +160,7 @@ const AddCardButton = styled.button<{ isAliasInputFilled: boolean }>`
   font-size: 14px;
   font-weight: 700;
 
-  background-color: ${(props) => (props.isAliasInputFilled ? "#d4e7fd" : "#ececec")};
+  background-color: ${(props) => `var(--color-${props.isAliasInputFilled ? "primary" : "pale"})`};
 
   cursor: pointer;
 `;
