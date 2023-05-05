@@ -1,22 +1,30 @@
+import React, { Children, PropsWithChildren } from "react";
 import styled from "styled-components";
+import { getCustomElement } from "../../../utils/custumElement";
 
 interface InputLabelProps {
-  text: string;
   render?: () => JSX.Element;
+  children: React.ReactElement[] | React.ReactElement;
+  asChild?: boolean;
 }
 
 export function InputLabel(props: InputLabelProps) {
-  const { text, render } = props;
+  const { children, render, asChild = false } = props;
+  const customElement = getCustomElement(asChild, children, props);
 
-  return (
-    <TitleWrapper>
-      {text}
-      {render && render()}
-    </TitleWrapper>
-  );
+  if (!customElement) {
+    return (
+      <DefaultInputLabelStyle>
+        {children}
+        {render && render()}
+      </DefaultInputLabelStyle>
+    );
+  }
+
+  return customElement;
 }
 
-const TitleWrapper = styled.h2`
+const DefaultInputLabelStyle = styled.h2`
   display: flex;
   justify-content: space-between;
 `;

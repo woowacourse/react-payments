@@ -1,36 +1,34 @@
-import React, { Children, cloneElement, isValidElement } from "react";
+import React, { Children } from "react";
 import styled from "styled-components";
 import { ERROR_MESSAGE } from "../../../constants/inputInfo";
 import { useCheckLength } from "../../../hooks/useCheckLength";
+import { getCustomElement } from "../../../utils/custumElement";
 
 interface InputGroupProps {
-  children: React.ReactNode;
+  children: React.ReactElement | React.ReactElement[];
   asChild?: boolean;
 }
 
 export function InputGroup(props: InputGroupProps) {
-  const { children, asChild } = props;
-  const childrenList = Children.toArray(children);
+  const { children, asChild = false } = props;
   const { error, checkInputLength } = useCheckLength();
+  const customElement = getCustomElement(asChild, children, props);
 
-  return asChild &&
-    isValidElement<{ children: React.ReactNode }>(childrenList[0]) ? (
-    <>
-      {cloneElement(childrenList[0], {
-        children: childrenList[0].props.children,
-      })}
-      {children}
-      {error && <ErrorMessage>{ERROR_MESSAGE.COMMON}</ErrorMessage>}
-    </>
-  ) : (
-    <>
-      <GroupSection onBlur={checkInputLength}>{children}</GroupSection>
-      {error && <ErrorMessage>{ERROR_MESSAGE.COMMON}</ErrorMessage>}
-    </>
-  );
+  if (!customElement) {
+    return (
+      <>
+        <DefaultInputGroupStyle onBlur={checkInputLength}>
+          {children}
+        </DefaultInputGroupStyle>
+        {error && <ErrorMessage>{ERROR_MESSAGE.COMMON}</ErrorMessage>}
+      </>
+    );
+  }
+
+  return customElement;
 }
 
-const GroupSection = styled.section`
+const DefaultInputGroupStyle = styled.section`
   width: 100%;
   display: flex;
   justify-content: space-between;
