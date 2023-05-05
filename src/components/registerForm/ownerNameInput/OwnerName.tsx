@@ -3,13 +3,14 @@ import React, { useState, useContext } from 'react';
 import { CreditCardContext } from '../../../contexts/CreditCardContext';
 import { CONTINUOUS_EMPTY_REGEXP, ONLY_ENG_AND_EMPTY_REGEXP } from '../../../utils/regexp';
 import FormLabel from '../../@common/FormLabel';
-import Input from '../../@common/Input';
+import Input from '../../@common/input/Input';
 import ErrorSpan from '../../@common/ErrorSpan';
 import InputWrapper from '../../@common/InputWrapper';
 import LabelContainer from './OwnerName.style';
+import CreditCardContextType from '../../../@types/creditCardContextType';
 
 function OwnerNameInput() {
-  const [creditCardInfo, setCreditCardInfo] = useContext(CreditCardContext);
+  const { creditCard, setCreditCard } = useContext(CreditCardContext) as CreditCardContextType;
 
   const [validationStatus, setValidationStatus] = useState({
     isValid: true,
@@ -17,7 +18,7 @@ function OwnerNameInput() {
   });
 
   const _onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    const enteredName = (event.currentTarget.value as string).toUpperCase();
+    const enteredName = event.currentTarget.value.toUpperCase();
 
     if (!ONLY_ENG_AND_EMPTY_REGEXP.test(enteredName)) {
       setValidationStatus({
@@ -53,27 +54,27 @@ function OwnerNameInput() {
       return;
     }
 
-    if (!setCreditCardInfo) return;
+    if (!setCreditCard) return;
 
     setValidationStatus({
       isValid: true,
       message: '',
     });
 
-    setCreditCardInfo('ownerName', enteredName);
+    setCreditCard('ownerName', enteredName);
   };
 
   return (
     <InputWrapper>
       <LabelContainer>
         <FormLabel>카드 소유자 이름(선택)</FormLabel>
-        <span>{`${creditCardInfo.ownerName.length} / 30`}</span>
+        <span>{`${creditCard.ownerName.length} / 30`}</span>
       </LabelContainer>
       <Input
-        value={creditCardInfo.ownerName}
+        data-testid="owner-name"
+        value={creditCard.ownerName}
         onChange={_onChange}
         font-weight="500"
-        letter-spacing="1px"
         inputMode="text"
         textAlign="left"
       />

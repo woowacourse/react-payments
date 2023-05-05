@@ -1,18 +1,17 @@
-interface Props {
-  refs: Array<React.RefObject<HTMLInputElement>>;
-  maxLength: number;
-}
-
-const useAutoFocus = ({ refs, maxLength }: Props) => {
+const useAutoFocus = (
+  inputListRef: React.MutableRefObject<HTMLInputElement[]>,
+  valueLength: number
+) => {
   const focusNext = (index = 0) => {
-    if (index === refs.length - 1) return;
+    if (index === inputListRef.current.length - 1) return;
 
-    if (refs[index].current?.value.length === maxLength) {
-      refs[index + 1].current?.focus();
+    if (inputListRef.current[index].value.length === valueLength) {
+      index += 1;
+      inputListRef.current[index].focus();
     }
   };
 
-  return { focusNext };
+  return { inputListRef, focusNext };
 };
 
 export default useAutoFocus;

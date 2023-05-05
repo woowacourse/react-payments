@@ -1,58 +1,54 @@
-import React, { useState, useRef, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 
 import useAutoFocus from '../../../hooks/useAutoFocus';
 import { ONLY_NUMBER_REGEXP } from '../../../utils/regexp';
 import FormLabel from '../../@common/FormLabel';
-import Input from '../../@common/Input';
+import Input from '../../@common/input/Input';
 import ErrorSpan from '../../@common/ErrorSpan';
 import { CreditCardContext } from '../../../contexts/CreditCardContext';
 import InputWrapper from '../../@common/InputWrapper';
 import { DotParagraph, PasswordInputContainer } from './CardPassword.style';
+import CreditCardContextType from '../../../@types/creditCardContextType';
 
 function CardPassword() {
   const [validationStatus, setValidationStatus] = useState({
     isValid: true,
     message: '',
   });
-  const [creditCardInfo, setCreditCardInfo] = useContext(CreditCardContext);
+  const { creditCard, setCreditCard } = useContext(CreditCardContext) as CreditCardContextType;
 
-  const refs = [useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null)];
+  const inputListRef = useRef<HTMLInputElement[]>([]);
+  const { focusNext } = useAutoFocus(inputListRef, 1);
 
-  const { focusNext } = useAutoFocus({
-    refs: refs,
-    maxLength: 1,
-  });
+  const handleChangeByIndex: (index: number) => React.ChangeEventHandler<HTMLInputElement> =
+    (index) => (event) => {
+      const enteredPassword = event.currentTarget.value;
 
-  const _onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    const enteredPassword = event.currentTarget.value as string;
-    const inputIndex = Number(event.currentTarget.dataset['idx']);
+      if (!ONLY_NUMBER_REGEXP.test(enteredPassword)) {
+        setValidationStatus({
+          isValid: false,
+          message: '숫자만 입력 가능합니다.',
+        });
 
-    if (!ONLY_NUMBER_REGEXP.test(enteredPassword)) {
+        return;
+      }
+
+      if (!setCreditCard) return;
+
+      const newValue = [...creditCard.password];
+      newValue[index] = enteredPassword;
+
+      focusNext(index);
       setValidationStatus({
-        isValid: false,
-        message: '숫자만 입력 가능합니다.',
+        isValid: true,
+        message: '',
       });
+      setCreditCard('password', newValue);
+    };
 
-      return;
-    }
-
-    if (!setCreditCardInfo) return;
-
-    setValidationStatus({
-      isValid: true,
-      message: '',
-    });
-
-    const newValue = [...creditCardInfo.password];
-    newValue[inputIndex] = enteredPassword;
-
-    setCreditCardInfo('password', newValue);
-    focusNext(Number(inputIndex));
-  };
-
-  const _onBlur: React.FocusEventHandler<HTMLInputElement> = () => {
-    refs.forEach(({ current }) => {
-      if (current?.value.length === 0) {
+  const handleBlur: React.FocusEventHandler<HTMLInputElement> = () => {
+    creditCard.password.forEach((numberInput) => {
+      if (numberInput.length === 0) {
         setValidationStatus({
           isValid: false,
           message: '카드 비밀번호 2자리를 입력해주세요.',
@@ -65,28 +61,22 @@ function CardPassword() {
     <InputWrapper>
       <FormLabel>{'카드 비밀번호'}</FormLabel>
       <PasswordInputContainer>
-        <Input
-          data-idx="0"
-          value={creditCardInfo.password[0]}
-          onChange={_onChange}
-          onBlur={_onBlur}
-          maxLength={1}
-          inputMode="numeric"
-          type="password"
-          width="43px"
-          ref={refs[0]}
-        />
-        <Input
-          data-idx="1"
-          value={creditCardInfo.password[1]}
-          onChange={_onChange}
-          onBlur={_onBlur}
-          maxLength={1}
-          inputMode="numeric"
-          type="password"
-          width="43px"
-          ref={refs[1]}
-        />
+        {Array.from({ length: 2 }, (_, index) => (
+          <Input
+            data-testid={`password-${index}`}
+            key={`card-password-${index}`}
+            value={creditCard.password[index]}
+            onChange={handleChangeByIndex(index)}
+            onBlur={handleBlur}
+            maxLength={1}
+            inputMode="numeric"
+            type="password"
+            width="43px"
+            ref={(el: HTMLInputElement) => {
+              inputListRef.current[index] = el;
+            }}
+          />
+        ))}
         <DotParagraph>•</DotParagraph>
         <DotParagraph>•</DotParagraph>
       </PasswordInputContainer>

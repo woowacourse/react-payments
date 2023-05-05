@@ -1,45 +1,26 @@
-import { PropsWithChildren, createContext, useState } from 'react';
+import { PropsWithChildren, createContext } from 'react';
 import CreditCardInfo from '../@types/creditCardInfo';
+import { CardCompanyEng } from '../@types/cardCompany';
+import useCreditCard from '../hooks/useCreditCard';
+import CreditCardContextType from '../@types/creditCardContextType';
 
-export const CreditCardContext = createContext<
-  [
-    CreditCardInfo,
-    (<T extends keyof CreditCardInfo>(target: T, newValue: CreditCardInfo[T]) => void) | null
-  ]
->([
-  {
-    cardNumber: ['', '', '', ''],
-    expirationDate: ['', ''],
-    ownerName: '',
-    securityCode: '',
-    password: ['', ''],
-    bank: '현대카드',
-  },
-  null,
-]);
+const initialCreditCardInfo: CreditCardInfo = {
+  cardNumber: ['', '', '', ''],
+  expirationDate: ['', ''],
+  ownerName: '',
+  securityCode: '',
+  password: ['', ''],
+  cardCompany: 'hyundai' as CardCompanyEng,
+  cardAlias: '',
+};
+
+export const CreditCardContext = createContext<CreditCardContextType | null>(null);
 
 export const CreditCardProvider = ({ children }: PropsWithChildren) => {
-  const [creditCardEntered, setCreditCardEntered] = useState<CreditCardInfo>({
-    cardNumber: ['', '', '', ''],
-    expirationDate: ['', ''],
-    ownerName: '',
-    securityCode: '',
-    password: ['', ''],
-    bank: '현대카드',
-  });
-
-  const setCreditCard = <T extends keyof CreditCardInfo>(
-    target: T,
-    newValue: CreditCardInfo[T]
-  ) => {
-    setCreditCardEntered((prev) => ({
-      ...prev,
-      [target]: newValue,
-    }));
-  };
+  const { creditCard, setCreditCard, initCreditCard } = useCreditCard(initialCreditCardInfo);
 
   return (
-    <CreditCardContext.Provider value={[creditCardEntered, setCreditCard]}>
+    <CreditCardContext.Provider value={{ creditCard, setCreditCard, initCreditCard }}>
       {children}
     </CreditCardContext.Provider>
   );

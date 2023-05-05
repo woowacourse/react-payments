@@ -3,19 +3,20 @@ import React, { useState, useContext } from 'react';
 import { CreditCardContext } from '../../../contexts/CreditCardContext';
 import { ONLY_NUMBER_REGEXP } from '../../../utils/regexp';
 import FormLabel from '../../@common/FormLabel';
-import Input from '../../@common/Input';
+import Input from '../../@common/input/Input';
 import ErrorSpan from '../../@common/ErrorSpan';
 import InputWrapper from '../../@common/InputWrapper';
+import CreditCardContextType from '../../../@types/creditCardContextType';
 
 function SecurityCode() {
-  const [creditCardInfo, setCreditCard] = useContext(CreditCardContext);
+  const { creditCard, setCreditCard } = useContext(CreditCardContext) as CreditCardContextType;
   const [validStatus, setValidStatus] = useState({
     isValid: true,
     message: '',
   });
 
   const _onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    const enteredCode = event.currentTarget.value as string;
+    const enteredCode = event.currentTarget.value;
 
     if (!ONLY_NUMBER_REGEXP.test(enteredCode)) {
       setValidStatus({
@@ -38,7 +39,7 @@ function SecurityCode() {
   };
 
   const _onBlur: React.FocusEventHandler<HTMLInputElement> = (event) => {
-    const enteredValue = event.currentTarget.value as string;
+    const enteredValue = event.currentTarget.value;
     if (enteredValue.length !== 3) {
       setValidStatus({
         isValid: false,
@@ -53,7 +54,8 @@ function SecurityCode() {
     <InputWrapper>
       <FormLabel>{'보안 코드(CVC/CVV)'}</FormLabel>
       <Input
-        value={creditCardInfo.securityCode}
+        data-testid="security-code"
+        value={creditCard.securityCode}
         onChange={_onChange}
         onBlur={_onBlur}
         maxLength={3}

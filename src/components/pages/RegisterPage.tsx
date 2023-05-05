@@ -1,38 +1,32 @@
-import Card from '../@common/Card';
+import Card from '../@common/card/Card';
 import { CreditCardContext } from '../../contexts/CreditCardContext';
 import CardRegisterForm from '../registerForm/cardRegisterForm/CardRegisterForm';
-import { useState } from 'react';
-import CreditCardInfo from '../../@types/creditCardInfo';
+import { useContext } from 'react';
+
+import useBottomModal from '../../hooks/useBottomModal';
+import CreditCardContextType from '../../@types/creditCardContextType';
+import SelectCompanyModal from '../registerForm/selectCompanyModal/SelectCompanyModal';
+import BottomModal from '../@common/bottomModal/BottomModal';
 
 function RegisterPage() {
-  const [creditCardEntered, setCreditCardEntered] = useState<CreditCardInfo>({
-    cardNumber: ['', '', '', ''],
-    expirationDate: ['', ''],
-    ownerName: '',
-    securityCode: '',
-    password: ['', ''],
-    bank: '현대카드',
-  });
-
-  const setCreditCard = <T extends keyof CreditCardInfo>(
-    target: T,
-    newValue: CreditCardInfo[T]
-  ) => {
-    setCreditCardEntered((prev) => ({
-      ...prev,
-      [target]: newValue,
-    }));
-  };
+  const { isOpen, closeModal, openModal } = useBottomModal(true);
+  const { creditCard } = useContext(CreditCardContext) as CreditCardContextType;
+  const { cardNumber, cardCompany, ownerName, expirationDate } = creditCard;
 
   return (
-    <CreditCardContext.Provider value={[creditCardEntered, setCreditCard]}>
+    <>
       <Card
-        cardNumber={creditCardEntered.cardNumber}
-        ownerName={creditCardEntered.ownerName}
-        expirationDate={creditCardEntered.expirationDate}
+        cardNumber={cardNumber}
+        ownerName={ownerName}
+        expirationDate={expirationDate}
+        onClick={openModal}
+        cardCompany={cardCompany}
       />
       <CardRegisterForm />
-    </CreditCardContext.Provider>
+      <BottomModal className="modal" isOpen={isOpen} onClose={closeModal}>
+        <SelectCompanyModal onClose={closeModal}></SelectCompanyModal>
+      </BottomModal>
+    </>
   );
 }
 
