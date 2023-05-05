@@ -9,11 +9,22 @@ export default {
   component: ControlButton,
 } as Meta;
 
-const Template: Story<ControlButtonProps> = (args) => <ControlButton {...args} />;
+const Template: Story<ControlButtonProps> = (args) => (
+  <ControlButton {...args}>
+    다음
+  </ControlButton>
+);
 
 export const DisabledButton = Template.bind({});
 DisabledButton.args = {
   type: 'button',
   disabled: true,
+  onClick: () => { },
+};
+
+export const EnabledButton = Template.bind({});
+EnabledButton.args = {
+  type: 'button',
+  disabled: false,
   onClick: () => { },
 };
