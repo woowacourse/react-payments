@@ -19,8 +19,8 @@ export const usePasswordInput: ExpirationDateInputTypes = (
   onChangeFirst: ChangeEventHandler<HTMLInputElement>,
   onChangeSecond: ChangeEventHandler<HTMLInputElement>,
 ) => {
-  const [firstDigit, setFirstDigit] = useState<string>('');
-  const [secondDigit, setSecondDigit] = useState<string>('');
+  const [firstDigit, setFirstDigit] = useState('');
+  const [secondDigit, setSecondDigit] = useState('');
 
   const handleFirstChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { value } = e.target;

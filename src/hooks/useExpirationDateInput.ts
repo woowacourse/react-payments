@@ -19,8 +19,8 @@ export const useExpirationDataInput: ExpirationDateInputTypes = (
   onChangeMonth: ChangeEventHandler<HTMLInputElement>,
   onChangeYear: ChangeEventHandler<HTMLInputElement>,
 ) => {
-  const [month, setMonth] = useState<string>('');
-  const [year, setYear] = useState<string>('');
+  const [month, setMonth] = useState('');
+  const [year, setYear] = useState('');
 
   const handleMonthChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { value } = e.target;
