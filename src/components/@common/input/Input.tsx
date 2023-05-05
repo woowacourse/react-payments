@@ -1,11 +1,4 @@
-import {
-  Attributes,
-  ForwardedRef,
-  forwardRef,
-  HTMLAttributes,
-  InputHTMLAttributes,
-  useContext,
-} from "react";
+import { forwardRef, InputHTMLAttributes, useContext } from "react";
 import styled from "styled-components";
 import { InputContext } from "../../../contexts/inputContext";
 import { getCustomElement } from "../../../utils/custumElement";

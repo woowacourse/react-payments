@@ -1,11 +1,7 @@
-import { bank } from "../../core/bank";
 import { AddCardForm } from "./addCardForm";
 import { BankMenu } from "../bankModal/bankMenu";
 import { Card } from "../@common/card/card";
-import { ModalBackDrop } from "../@common/modal/modalBackDrop";
-import { Modal, ModalBox } from "../@common/modal/modalBox";
-import { ModalContent } from "../@common/modal/modalContent";
-import { ModalTrigger } from "../@common/modal/modalTrigger";
+import { Modal } from "../@common/modal/modalBox";
 import { useCardInfoContext } from "../../hooks/useCardInfoContext";
 
 export function AddCardSection() {

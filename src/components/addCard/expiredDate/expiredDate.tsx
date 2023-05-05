@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import {
   LABEL,
@@ -9,9 +9,7 @@ import {
 import { useCardInfoContext } from "../../../hooks/useCardInfoContext";
 import { Date } from "../../../type/input";
 import { validation } from "../../../validation/input";
-import { Input, InputBox } from "../../@common/input/InputBox";
-import { InputGroup } from "../../@common/input/inputGroup";
-import { InputLabel } from "../../@common/input/inputLabel";
+import { Input } from "../../@common/input/InputBox";
 
 export function ExpiredDate() {
   const { month, year, changeDateInput } = useCardInfoContext();
@@ -35,7 +33,7 @@ export function ExpiredDate() {
       inputState={{ value: { month, year }, handleChange: changeDateInput }}>
       <Wrapper>
         <Input.Label>
-          <div>만료일</div>
+          <div>{LABEL.DATE}</div>
         </Input.Label>
         <Input.Group>
           <Input.Unit

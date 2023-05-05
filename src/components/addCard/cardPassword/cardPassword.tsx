@@ -2,8 +2,7 @@ import styled from "styled-components";
 import { LABEL, TEXT_LENGTH } from "../../../constants/inputInfo";
 import { useInputPassword } from "../../../hooks/useInputPassword";
 import { Password } from "../../../type/input";
-import { Input, InputBox } from "../../@common/input/InputBox";
-import { InputLabel } from "../../@common/input/inputLabel";
+import { Input } from "../../@common/input/InputBox";
 
 export function CardPassword() {
   const { password, handleChange } = useInputPassword();
@@ -12,7 +11,7 @@ export function CardPassword() {
     <Input<Password> inputState={{ value: password, handleChange }}>
       <Wrapper>
         <Input.Label>
-          <div>비밀번호</div>
+          <div>{LABEL.PASSWORD}</div>
         </Input.Label>
         <InputWrapper>
           {Object.keys(password).map((cardInput, _) => {

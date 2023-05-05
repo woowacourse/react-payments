@@ -9,7 +9,6 @@ import { SecurityCode } from "./securityCode/securityCode";
 import { UserName } from "./userName/userName";
 import { TEXT_LENGTH } from "../../constants/inputInfo";
 import { SubmitButton } from "../@common/button/submitButton";
-import { bank } from "../../core/bank";
 import { useCardInfoContext } from "../../hooks/useCardInfoContext";
 import { PATH } from "../../constants/path";
 

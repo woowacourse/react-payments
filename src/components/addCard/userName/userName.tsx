@@ -1,10 +1,7 @@
-import { useEffect } from "react";
 import styled from "styled-components";
 import { INPUT_TYPE, LABEL, PLACEHOLDER } from "../../../constants/inputInfo";
 import { useCardInfoContext } from "../../../hooks/useCardInfoContext";
-import { useCountText } from "../../../hooks/useCountText";
-import { Input, InputBox } from "../../@common/input/InputBox";
-import { InputLabel } from "../../@common/input/inputLabel";
+import { Input } from "../../@common/input/InputBox";
 import { renderCountText } from "./textCount";
 
 export function UserName() {
@@ -15,7 +12,7 @@ export function UserName() {
       inputState={{ value: userName, handleChange: changeNameInput }}>
       <Wrapper>
         <Input.Label render={renderCountText}>
-          <div>카드 소유자명</div>
+          <div>{LABEL.NAME}</div>
         </Input.Label>
         <Input.Unit
           maxLength={INPUT_TYPE.MAX_LENGTH}

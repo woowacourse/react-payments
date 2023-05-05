@@ -1,9 +1,8 @@
 import { useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { Input, InputBox } from "../components";
+import { Input } from "../components";
 import { Card } from "../components/@common/card/card";
-import { InputGroup } from "../components/@common/input/inputGroup";
 import { PATH } from "../constants/path";
 import { useGenericLocation } from "../hooks/useGenericLocation";
 import { CardInfo } from "../type/card";
