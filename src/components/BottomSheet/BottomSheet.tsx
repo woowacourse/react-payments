@@ -3,6 +3,7 @@ import { Icon } from '../common/Icon/Icon';
 import { CARDS_INFO } from '../../constants';
 import { COMPANY_NAME } from 'components/common/Card/types';
 import { isCompanyName } from 'util/guard';
+import styled from 'styled-components';
 
 export interface ModalProps {
   onClick: (bank: COMPANY_NAME) => void;
@@ -21,7 +22,7 @@ export const BottomSheet = forwardRef<Ref, ModalProps>(({ onClick, closeModal }:
   };
 
   return (
-    <>
+    <S.BottomSheetWrapper>
       {Object.values(CARDS_INFO).map((value, index) => {
         return (
           <Icon
@@ -32,6 +33,14 @@ export const BottomSheet = forwardRef<Ref, ModalProps>(({ onClick, closeModal }:
           />
         );
       })}
-    </>
+    </S.BottomSheetWrapper>
   );
 });
+
+const S = {
+  BottomSheetWrapper: styled.div`
+    display: grid;
+    grid-template-columns: 80px 80px 80px 80px;
+    justify-content: center;
+  `,
+};
