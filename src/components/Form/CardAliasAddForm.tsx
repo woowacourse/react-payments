@@ -5,19 +5,20 @@ import { Input } from '../input/Input';
 import { Button } from '../Button/Button';
 import { CardViewer } from '../CardViewer';
 import { CardNotFound } from '../CardNotFound';
-import { cardDataService } from '../../domains/cardDataService';
+import { useCardDataService } from '../../hooks/useCardDataService';
 import { isOverMaxLength } from '../../utils/validator';
 import { CARD_ALIAS_SIZE, ERROR } from '../../constants';
 
 export function CardAliasAddForm() {
-  const [cardAlias, setCardAlias] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
+  const [cardAlias, setCardAlias] = useState('');
+  const { getCard, addAliasToCard } = useCardDataService();
 
   if (!location.state) return <CardNotFound />;
 
   const cardId = location.state.cardId;
-  const card = cardDataService.getCard(cardId);
+  const card = getCard(cardId);
 
   if (!card) return <CardNotFound />;
 
@@ -35,7 +36,7 @@ export function CardAliasAddForm() {
     e.preventDefault();
     if (!(e.target instanceof HTMLFormElement)) return;
 
-    cardDataService.addAliasToCard(card.id, e.target.alias.value);
+    addAliasToCard(card.id, e.target.alias.value);
     navigate('/');
   };
 

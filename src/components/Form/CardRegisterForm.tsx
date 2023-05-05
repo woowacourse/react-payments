@@ -9,14 +9,15 @@ import { OwnerNameInput } from '../input/OwnerNameInput';
 import { SecurityCodeInput } from '../input/SecurityCodeInput';
 import { PasswordInput } from '../input/PasswordInput';
 import { Button } from '../Button/Button';
-import { useCardRegisterForm } from '../../hooks/useCardRegisterForm';
-import { cardDataService } from '../../domains/cardDataService';
 import { CardSelectModalContent } from '../Modal/CardSelect/CardSelectModalContent';
-import { CardCompany } from '../../types';
 import { useModal } from '../../hooks/useModal';
+import { useCardRegisterForm } from '../../hooks/useCardRegisterForm';
+import { useCardDataService } from '../../hooks/useCardDataService';
+import { CardCompany } from '../../types';
 
 export function CardRegisterForm() {
   const navigate = useNavigate();
+  const { addNewCard } = useCardDataService();
   const { isModalOpen, showModal, closeModal } = useModal();
   const { card, cardDispatch, isValidCardForm } = useCardRegisterForm();
 
@@ -29,7 +30,7 @@ export function CardRegisterForm() {
   const handleCardInfoSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    cardDataService.addNewCard(card);
+    addNewCard(card);
 
     navigate('/add-alias', { state: { cardId: card.id } });
   };

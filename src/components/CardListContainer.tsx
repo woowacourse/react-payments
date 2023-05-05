@@ -2,11 +2,12 @@ import { Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { CardViewer } from './CardViewer';
-import { cardDataService } from '../domains/cardDataService';
+import { useCardDataService } from '../hooks/useCardDataService';
 
 export function CardListContainer() {
   const navigate = useNavigate();
-  const cardList = cardDataService.getCardList();
+  const { getCardList } = useCardDataService();
+  const cardList = getCardList();
 
   return (
     <>

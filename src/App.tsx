@@ -3,7 +3,7 @@ import { Main } from './pages/Main';
 import { Register } from './pages/Register';
 import { NotFound } from './pages/NotFound';
 import { AliasAddition } from './pages/AliasAddition';
-import { ScrollToTop } from './components/ScrollToTop';
+import { ScrollToTop } from './components/Etc/ScrollToTop';
 
 function App() {
   return (
