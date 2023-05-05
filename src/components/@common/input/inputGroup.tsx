@@ -14,18 +14,18 @@ export function InputGroup(props: InputGroupProps) {
   const { error, checkInputLength } = useCheckLength();
   const customElement = getCustomElement(asChild, children, props);
 
-  if (!customElement) {
-    return (
-      <>
-        <DefaultInputGroupStyle onBlur={checkInputLength}>
-          {children}
-        </DefaultInputGroupStyle>
-        {error && <ErrorMessage>{ERROR_MESSAGE.COMMON}</ErrorMessage>}
-      </>
-    );
+  if (customElement) {
+    return customElement;
   }
 
-  return customElement;
+  return (
+    <>
+      <DefaultInputGroupStyle onBlur={checkInputLength}>
+        {children}
+      </DefaultInputGroupStyle>
+      {error && <ErrorMessage>{ERROR_MESSAGE.COMMON}</ErrorMessage>}
+    </>
+  );
 }
 
 const DefaultInputGroupStyle = styled.section`

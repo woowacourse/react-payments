@@ -40,6 +40,7 @@ export function AddCardNicknamePage() {
               asChild>
               <NicknameInput />
             </Input>
+            {/* </NicknameInutGroup> */}
           </InputGroup>
         </InputBox>
         <CompleteButton onClick={completeInputNickname}>확인</CompleteButton>
@@ -87,6 +88,7 @@ const NicknameInput = styled.input`
   width: 22rem;
   border-bottom: 0.2rem solid black;
   outline: none;
+  background-color: transparent;
 `;
 
 const NicknameInutGroup = styled.div`
