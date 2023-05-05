@@ -1,7 +1,7 @@
 import React from "react";
 import St from "./CardCompanyModalStyled";
 import { CREDIT_CARD_COMPANY } from "types/card";
-import Modal from "components/common/Modal";
+import { Modal } from "guridaek-react-modal-hook";
 import useCardCompany from "hooks/card/useCardCompany";
 import { CREDIT_CARD_COMPANY_LOGO } from "data/creditCard";
 
@@ -13,7 +13,7 @@ function CardCompanyModal({ closeModal }: CardCompanyModalProps) {
   const { changeCardCompany } = useCardCompany();
 
   return (
-    <Modal closeModal={closeModal}>
+    <Modal elementID="modal" closeModal={closeModal}>
       <St.CardCompanyModal>
         <St.CardCompanies
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {

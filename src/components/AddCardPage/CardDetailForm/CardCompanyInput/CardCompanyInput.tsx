@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import St from "./CardCompanyInputStyled";
 import CardCompanyModal from "components/CardCompanyModal/CardCompanyModal";
 import useCardCompany from "hooks/card/useCardCompany";
-import useModal from "hooks/useModal";
+import { useModal } from "guridaek-react-modal-hook";
 import useInputRef from "hooks/useInputRef";
 
 function CardCompanyInput() {
