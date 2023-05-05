@@ -20,7 +20,7 @@ function CreditCardNicknameInputForm() {
   };
 
   return (
-    <>
+    <div>
       <S.CreditCardNicknameInputFormLayout>
         <S.CreditCardPreview>
           <CreditCard
@@ -34,21 +34,25 @@ function CreditCardNicknameInputForm() {
           />
         </S.CreditCardPreview>
 
-        <S.NicknameInput
-          value={nickname}
-          onChange={handleNicknameInput}
-          placeholder="카드 별명을 입력하세요"
-        />
+        {isLoading
+          ? (
+            <LoadingSpinner label={nickname.length > 0 ? '카드 별명을 설정중입니다...' : ''} />
+          ) : (
+            <S.NicknameInput
+              value={nickname}
+              onChange={handleNicknameInput}
+              placeholder="카드 별명을 입력하세요"
+            />
+          )}
       </S.CreditCardNicknameInputFormLayout>
-      {isLoading
-        ? (
-          <LoadingSpinner />
-        ) : (
-          <ControlButton onClick={submitNicknameInput}>
-            {nickname.length > 0 ? '확인' : '건너뛰기'}
-          </ControlButton>
-        )}
-    </>
+
+      {!isLoading && (
+        <ControlButton onClick={submitNicknameInput}>
+          {nickname.length > 0 ? '확인' : '건너뛰기'}
+        </ControlButton>
+      )}
+
+    </div>
   );
 }
 export default CreditCardNicknameInputForm;
