@@ -1,6 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 
-const initOpacityAnim = keyframes`
+const initAnim = keyframes`
 0% {
   opacity: 0;
   transform: translateY(-20px);
@@ -12,7 +12,7 @@ const initOpacityAnim = keyframes`
 }
 `;
 
-const initOpacity2Anim = keyframes`
+const initLateAnim = keyframes`
 0% {
   opacity: 0;
   transform: translateY(-20px);
@@ -43,7 +43,7 @@ export const Wrapper = styled.div`
 `;
 
 export const CardWrapper = styled.div`
-  animation: ${initOpacity2Anim} 1s linear 1;
+  animation: ${initLateAnim} 1s linear 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -51,7 +51,7 @@ export const CardWrapper = styled.div`
 `;
 
 export const CardLabelWrapper = styled.div`
-  animation: ${initOpacityAnim} 0.5s linear 1;
+  animation: ${initAnim} 0.5s linear 1;
   margin: 120px 0 36px 0;
   font-size: 24px;
 `;
