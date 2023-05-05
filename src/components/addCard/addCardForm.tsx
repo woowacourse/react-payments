@@ -11,6 +11,7 @@ import { TEXT_LENGTH } from "../../constants/inputInfo";
 import { SubmitButton } from "../@common/button/submitButton";
 import { bank } from "../../core/bank";
 import { useCardInfoContext } from "../../hooks/useCardInfoContext";
+import { PATH } from "../../constants/path";
 
 export function AddCardForm() {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ export function AddCardForm() {
 
   function saveData(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    navigate("/add-nickname", { state: getInputData() });
+    navigate(PATH.ADD_NICKNAME, { state: getInputData() });
   }
 
   function getInputData() {
