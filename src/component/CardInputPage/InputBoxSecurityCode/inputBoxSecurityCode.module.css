@@ -1,19 +1,19 @@
-.input-box-security-code p:last-child {
+.inputBox p:last-child {
   margin-left: 2%;
   color: red;
   font-weight: bold;
   visibility: hidden;
 }
 
-.input-box-security-code p:last-child.visible {
+.inputBox p:last-child.visible {
   visibility: visible;
 }
 
-.input-security-code {
+.input {
   width: 23%;
 }
 
-.button-security-code {
+.button {
   border: 1px solid var(--security-code-button-border);
   border-radius: 50%;
   color: var(--security-code-button-text);

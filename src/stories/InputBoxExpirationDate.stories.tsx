@@ -1,14 +1,25 @@
-import type { Meta } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 
 import InputBoxExpirationDate from "../component/CardInputPage/InputBoxExpirationDate/InputBoxExpirationDate";
+import { CreditCardProvider } from "../context/CreditCardContext";
+
+type Story = StoryObj<typeof InputBoxExpirationDate>;
 
 const meta: Meta = {
-  title: "InputBoxExpirationDate component",
+  title: "Expiration Date Input Box",
   component: InputBoxExpirationDate,
+  argTypes: {
+    setIsComplete: { action: 'Is input complete?' },
+  },
+  decorators: [
+    (Story) => (
+      <CreditCardProvider>
+        <Story />
+      </CreditCardProvider>
+    ),
+  ],
 };
 
 export default meta;
 
-export const InputTest = () => (
-  <InputBoxExpirationDate setIsComplete={() => {}} setPreviewDataHandler={() => {}}></InputBoxExpirationDate>
-);
+export const InputTest: Story = {};

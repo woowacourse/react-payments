@@ -1,63 +1,63 @@
-import { useState, useEffect, ChangeEvent } from "react";
+import { useState, useEffect } from "react";
 import Input from "../../common/Input";
 import { INPUT_STATUS } from "../../../type/InputStatus";
-import "./inputBoxExpirationDate.css";
+import styles from "./inputBoxExpirationDate.module.css";
 import { validateExpirationDate } from "../../../validation/ExpirationDate";
 import CONSTANT from "../../../Constant"
+import { useCreditCardContext } from "../../../context/CreditCardContext";
 
 interface Props {
   setIsComplete: (value: boolean) => void;
-  setPreviewDataHandler: () => void;
 }
 
 export default function InputBoxExpirationDate(props: Props) {
-  const { setIsComplete, setPreviewDataHandler } = props;
+  const { setIsComplete } = props;
 
   const [inputStatus, setInputStatus] = useState(INPUT_STATUS.NOT_COMPLETE);
+  const { setCardInfo } = useCreditCardContext();
 
-  const changeExpirationDate = (e: ChangeEvent<HTMLInputElement>) => {
-    const originDate = e.target.value
-      .split("/")
-      .join("")
-      .replace(/\s/g, '')
-      .slice(0, CONSTANT.MONTH_INPUT_MAX_LENGTH + CONSTANT.YEAR_INPUT_MAX_LENGTH);
+  const removeSlashParser = (value: string) => value.split("/").join("").replace(/\s/g, '');
 
-    const formattedDate =
-      originDate.length > CONSTANT.MONTH_INPUT_MAX_LENGTH
-        ? originDate.slice(0, CONSTANT.MONTH_INPUT_MAX_LENGTH) + "/" + originDate.slice(CONSTANT.YEAR_INPUT_MAX_LENGTH)
-        : originDate;
+  const lengthParser = (value: string) => value.slice(0, CONSTANT.MONTH_INPUT_MAX_LENGTH + CONSTANT.YEAR_INPUT_MAX_LENGTH)
 
-    e.target.value = formattedDate;
-    if (e.target.value.length > 5) e.target.value = e.target.value.slice(0, 5);
+  const dateFormatter = (value: string) => (
+    value.length > CONSTANT.MONTH_INPUT_MAX_LENGTH
+    ? value.slice(0, CONSTANT.MONTH_INPUT_MAX_LENGTH) + "/" + value.slice(CONSTANT.YEAR_INPUT_MAX_LENGTH)
+    : value
+  );
 
-    if (validateExpirationDate(e.target.value)) {
-      e.target.value.length === 5
-        ? setInputStatus(INPUT_STATUS.COMPLETE)
-        : setInputStatus(INPUT_STATUS.NOT_COMPLETE);
-    } else {
+  const inputStatusHandler = (value: string) => {
+    if (!validateExpirationDate(value)) {
       setInputStatus(INPUT_STATUS.ERROR);
+      return;
     }
+
+    const status =  value.length === CONSTANT.MONTH_INPUT_MAX_LENGTH + CONSTANT.YEAR_INPUT_MAX_LENGTH + 1
+      ? INPUT_STATUS.COMPLETE
+      : INPUT_STATUS.NOT_COMPLETE;
+
+    setInputStatus(status);
   };
+
+  const dateSetter = (value: string) => setCardInfo({ date: value });
 
   useEffect(() => {
     setIsComplete(inputStatus === INPUT_STATUS.COMPLETE ? true : false);
   }, [inputStatus]);
 
   return (
-    <div className="input-box-expiration-date">
+    <div className={styles.inputBox}>
       <p>만료일</p>
       <Input
-        name="expiration-date"
+        data-testid="expiration-date"
         className="input-expiration-date"
         type="text"
-        onChange={(e: ChangeEvent<HTMLInputElement>) => { 
-          changeExpirationDate(e);
-          setPreviewDataHandler();
-        }}
+        parsers={[removeSlashParser, lengthParser, dateFormatter]}
+        valueChangeSubscribers={[inputStatusHandler, dateSetter]}
         placeholder="MM / YY"
         inputMode="numeric"
       ></Input>
-      <p className={inputStatus === INPUT_STATUS.ERROR ? "visible" : ""}>
+      <p className={inputStatus === INPUT_STATUS.ERROR ? styles.visible : ""}>
         연과 월은 각각 두 자리의 숫자로 입력해 주세요!!!
       </p>
     </div>

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function AddCardButton() {
   return (
-    <Link to="/CardInputPage">
+    <Link to="/register">
       <button className="add-card-button">
         <svg
           className="add-card-button-icon"

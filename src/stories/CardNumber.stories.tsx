@@ -1,14 +1,27 @@
-import type { Meta } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 
 import CardNumber from "../component/CardInputPage/InputBoxCardNumber/CardNumber";
+import { CreditCardProvider } from "../context/CreditCardContext";
+
+type Story = StoryObj<typeof CardNumber>;
 
 const meta: Meta = {
-  title: "CardNumber component",
-  component: CardNumber,
+  title: "Card Number Input",
+  component: CardNumber,  
+  decorators: [
+    (Story) => (
+      <CreditCardProvider>
+        <Story />
+      </CreditCardProvider>
+    ),
+  ],
 };
 
 export default meta;
 
-export const InputTest = () => (
-  <CardNumber setError={() => {}} setIsComplete={() => {}} setPreviewDataHandler={() => {}}></CardNumber>
-);
+export const Input: Story = {
+  args: {
+    setHasError: () => {},
+    setIsComplete: () => {},
+  }
+};

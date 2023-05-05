@@ -1,11 +1,10 @@
 .button {
-  margin-right: 0;
-  margin-left: auto;
   font-size: 14px;
-  text-align: right;
+  text-align: center;
   color: black;
   height: 34px;
   width: 51px;
   background-color: rgba(0, 0, 0, 0);
+  border-bottom: 1px solid black;
   cursor: pointer;
 }

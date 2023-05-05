@@ -1,0 +1,36 @@
+.list {
+  display: flex;
+  flex-direction: column;
+
+  gap: 5%;
+  padding: 5% 0;
+  
+  overflow-y: auto;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  margin-bottom: 26px;
+}
+
+.container p {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  font-style: normal;
+
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  color: #575757;
+}
+
+.addCardExplanation {
+  text-align: center;
+  margin: 3%;
+  font-weight: bold;
+}

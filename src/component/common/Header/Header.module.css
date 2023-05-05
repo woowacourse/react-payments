@@ -1,0 +1,11 @@
+@import "../../../style/palette.css";
+
+.header {
+  margin: 30px 0;
+  display: flex;
+}
+
+.title {
+  margin-left: 4%;
+  color: var(input-text);
+}
