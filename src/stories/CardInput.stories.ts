@@ -15,5 +15,6 @@ export const CardInputStory: Story = {
     type: 'text',
     value: '',
     placeholder: '0000',
+    inputMode: 'numeric',
   },
 };
