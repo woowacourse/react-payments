@@ -18,10 +18,4 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
-  args: {
-    closeModal: () => {
-      console.log("close!");
-    },
-  },
-};
+export const Primary: Story = {};
