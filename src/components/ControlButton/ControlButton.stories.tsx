@@ -2,12 +2,23 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 import { Story, Meta } from '@storybook/react';
+import GlobalStyle, { GlobalLayout } from 'style/globalStyle';
 import ControlButton, { ControlButtonProps } from './ControlButton';
 
 export default {
   title: 'ControlButton',
   component: ControlButton,
-} as Meta;
+  decorators: [
+    (Story1) => (
+      <>
+        <GlobalStyle />
+        <GlobalLayout>
+          <Story1 />
+        </GlobalLayout>
+      </>
+    ),
+  ],
+} satisfies Meta<typeof ControlButton>;
 
 const Template: Story<ControlButtonProps> = (args) => (
   <ControlButton {...args}>
