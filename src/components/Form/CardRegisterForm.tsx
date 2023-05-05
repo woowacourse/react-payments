@@ -27,6 +27,11 @@ export function CardRegisterForm() {
   const securityCodeInputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
 
+  const moveFocusToExpirationDate = () => monthInputRef.current?.focus();
+  const moveFocusToOwnerName = () => ownerNameInputRef.current?.focus();
+  const moveFocusToSecurityCode = () => securityCodeInputRef.current?.focus();
+  const moveFocusToPassword = () => passwordInputRef.current?.focus();
+
   const handleCardInfoSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -35,25 +40,8 @@ export function CardRegisterForm() {
     navigate('/add-alias', { state: { cardId: card.id } });
   };
 
-  const moveFocusToExpirationDate = () => {
-    monthInputRef.current?.focus();
-  };
-
-  const moveFocusToOwnerName = () => {
-    ownerNameInputRef.current?.focus();
-  };
-
-  const moveFocusToSecurityCode = () => {
-    securityCodeInputRef.current?.focus();
-  };
-
-  const moveFocusToPassword = () => {
-    passwordInputRef.current?.focus();
-  };
-
   useEffect(() => {
-    if (isModalOpen) return;
-    cardNumberInputRef.current?.focus();
+    if (!isModalOpen) cardNumberInputRef.current?.focus();
   }, [isModalOpen]);
 
   return (

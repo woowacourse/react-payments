@@ -16,9 +16,7 @@ export function CardSelectModalContent({ setCardCompany, closeModal }: Props) {
     <>
       <Style.Title id='title-dialog'>카드사를 선택해주세요.</Style.Title>
       <Style.GridContainer>
-        {cardCompanies.map((cardCompany) => {
-          const { name, logo } = cardCompany;
-
+        {cardCompanies.map(({ name, logo }) => {
           return (
             <CardCompanyItem key={name} name={name} logo={logo} setCardCompany={setCardCompany} />
           );
