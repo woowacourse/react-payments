@@ -1,4 +1,4 @@
-export const emptyArrowFuction = () => {};
+export const emptyArrowFunction = () => {};
 
 export const cardNumberInitialValue = {
   firstGroup: "",
