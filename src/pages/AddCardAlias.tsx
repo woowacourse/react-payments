@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import CardList from '../types/CardList';
 import { REG_EXP } from '../constants/regexp';
 import { LoadingSpinner } from '../components/LoadingSpinner/LoadingSpinner';
+import { Link } from 'react-router-dom';
 
 const AddAlias = ({ cards, setCards }: CardList) => {
   const [cardAlias, setCardAlias] = useState<string>('');
@@ -45,7 +46,15 @@ const AddAlias = ({ cards, setCards }: CardList) => {
 
   return (
     <Styled.PageWrapper>
-      {isLoading ? (
+      {cards.length === 0 ? (
+        <Styled.Wrapper>
+          <Styled.NoCardTitle>등록한 카드가 없어요. 😥</Styled.NoCardTitle>
+          <Styled.NoCardText>
+            아래의 링크를 눌러 카드를 먼저 등록해주세요.
+          </Styled.NoCardText>
+          <Link to={'/add-card'}>카드 등록하러 가기</Link>
+        </Styled.Wrapper>
+      ) : isLoading ? (
         <LoadingSpinner />
       ) : (
         <form onSubmit={handleSetAlias}>

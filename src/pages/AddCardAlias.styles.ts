@@ -62,3 +62,11 @@ export const ButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
+
+export const NoCardTitle = styled.h2`
+  margin-top: 180px;
+`;
+
+export const NoCardText = styled.p`
+  margin: 20px 0;
+`;
