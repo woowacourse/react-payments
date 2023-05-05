@@ -46,7 +46,7 @@ export const validatePassword = (value: string) => {
     return "비밀번호를 입력해 주세요.";
   return "";
 };
-export const getIsCardvalid = (card: CardType) => {
+export const validateForm = (card: CardType) => {
   return (
     [
       validateCardNumber(card.cardNumber),

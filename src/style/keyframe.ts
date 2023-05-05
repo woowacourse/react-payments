@@ -21,3 +21,12 @@ export const slideUpToBottom = keyframes`
           transform: translateY(100%);
 }
 `;
+
+export const shrinkLeftToRight = keyframes`
+0% {
+  width: 213px;
+}
+100% {
+  width: 0px;
+}
+`;
