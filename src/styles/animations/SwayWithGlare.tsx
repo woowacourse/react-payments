@@ -1,7 +1,6 @@
 import styled from "styled-components";
-import { glareX, glareY } from "../keyframes/glare";
-import { swayX, swayY } from "../keyframes/sway";
 import { PropsWithChildren } from "react";
+import { glareX, glareY, swayX, swayY } from "../keyframes/swayWIthGlare";
 
 const SwayWithGlareAnimation = ({ children }: PropsWithChildren) => {
   return (
@@ -10,13 +9,13 @@ const SwayWithGlareAnimation = ({ children }: PropsWithChildren) => {
         <SwayX>{children}</SwayX>
       </SwayY>
       <GlareY>
-        <GlareX />
+        <GlareX>
+          <GlareStuff />
+        </GlareX>
       </GlareY>
     </AnimationFrame>
   );
 };
-
-export default SwayWithGlareAnimation;
 
 const AnimationFrame = styled.div`
   display: grid;
@@ -48,12 +47,6 @@ const SwayY = styled.div`
 `;
 
 const GlareX = styled.div`
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  background-color: #faf7ed;
-  filter: blur(70px);
-
   animation-name: ${glareX};
   animation-duration: 1s;
   animation-delay: -1s;
@@ -70,3 +63,13 @@ const GlareY = styled.div`
   animation-direction: alternate;
   animation-timing-function: ease-in-out;
 `;
+
+const GlareStuff = styled.div`
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #faf7ed;
+  filter: blur(70px);
+`;
+
+export default SwayWithGlareAnimation;
