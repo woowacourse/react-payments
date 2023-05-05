@@ -22,9 +22,8 @@ interface CardInputFormType {
 
 const CardInputForm = ({ card, setNewCard, onSubmit }: CardInputFormType) => {
   const [password, setPassword] = useState(["", ""]);
-  const [isAnswered, setIsAnswered] = useState(false);
   const [isValidForm, setIsValidForm] = useState(false);
-
+  const questionMarkRef = useRef(null);
   const [inputRefs] = useCardInputRefs();
 
   useEffect(() => {
@@ -130,11 +129,10 @@ const CardInputForm = ({ card, setNewCard, onSubmit }: CardInputFormType) => {
             maxLength={3}
             onChange={handleInputChanged("cvc")}
           />
-          <img
-            src={QuestionMark}
-            alt="도움말"
-            onClick={() => setIsAnswered(!isAnswered)}
-          />
+          <img ref={questionMarkRef} src={QuestionMark} alt="도움말" />
+          <AnswerBoxWrapper>
+            <p>카드 뒷면의 보안 3자리 숫자를 입력해 주세요 😊</p>
+          </AnswerBoxWrapper>
         </CvcInputWrapper>
         {<span>{card.cvc && validateCvc(card.cvc)}</span>}
       </InputSetWrapper>
@@ -167,11 +165,6 @@ const CardInputForm = ({ card, setNewCard, onSubmit }: CardInputFormType) => {
         </PasswordInputWrapper>
         {<span>{card.password && validatePassword(card.password)}</span>}
       </InputSetWrapper>
-      {isAnswered && (
-        <AnswerBoxWrapper>
-          <p>카드 뒷면의 보안 3자리 숫자를 입력해 주세요 😊</p>
-        </AnswerBoxWrapper>
-      )}
       <Button isShown={isValidForm} type="submit">
         다음
       </Button>
@@ -227,6 +220,7 @@ const OwnerNameLabelWrapper = styled.div`
 
 const CvcInputWrapper = styled.div`
   display: flex;
+  position: relative;
 
   & > img {
     width: 27px;
@@ -261,13 +255,16 @@ const SecuredPasswordWrapper = styled.div`
 `;
 
 const AnswerBoxWrapper = styled.div`
-  display: flex;
+  ${CvcInputWrapper} > img:hover + & {
+    display: flex;
+  }
+  display: none;
   width: 180px;
-  height: 6%;
+  height: 50px;
 
   position: absolute;
-  top: 520px;
-  right: 75px;
+  top: -20px;
+  left: 130px;
 
   padding: 10px;
 
