@@ -19,14 +19,13 @@ export const initialCardRegisterInfo = {
     passwordFirstDigit: '',
     passwordSecondDigit: '',
   },
+  bank: {},
+  alias: '우아한 카드',
 };
 
 export const CardRegisterContext = createContext<{
   cardRegisterInfo: CardRegisterInfo;
-  handleCardInfo<T extends keyof CardRegisterInfo>(
-    key: T,
-    value: CardRegisterInfo[T]
-  ): void;
+  handleCardInfo<T extends keyof CardRegisterInfo>(key: T, value: CardRegisterInfo[T]): void;
   initCardRegisterInfo(): void;
 }>({
   cardRegisterInfo: initialCardRegisterInfo,
@@ -37,22 +36,18 @@ export const CardRegisterContext = createContext<{
 export const useCardRegisterContext = () => useContext(CardRegisterContext);
 
 export default function CardRegisterProvider({ children }: PropsWithChildren) {
-  const [cardRegisterInfo, setCardRegisterInfo] = useState<CardRegisterInfo>(
-    initialCardRegisterInfo
-  );
+  const [cardRegisterInfo, setCardRegisterInfo] = useState<CardRegisterInfo>(initialCardRegisterInfo);
 
-  const initCardRegisterInfo = () =>
-    setCardRegisterInfo(initialCardRegisterInfo);
+  const initCardRegisterInfo = () => setCardRegisterInfo(initialCardRegisterInfo);
 
-  const handleCardInfo: <T extends keyof CardRegisterInfo>(
-    key: T,
-    value: CardRegisterInfo[T]
-  ) => void = (key, value) => {
+  const handleCardInfo: <T extends keyof CardRegisterInfo>(key: T, value: CardRegisterInfo[T]) => void = (
+    key,
+    value
+  ) => {
     setCardRegisterInfo((prev) => ({ ...prev, [key]: value }));
   };
   return (
-    <CardRegisterContext.Provider
-      value={{ cardRegisterInfo, handleCardInfo, initCardRegisterInfo }}>
+    <CardRegisterContext.Provider value={{ cardRegisterInfo, handleCardInfo, initCardRegisterInfo }}>
       {children}
     </CardRegisterContext.Provider>
   );

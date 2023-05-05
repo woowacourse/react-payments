@@ -11,7 +11,7 @@ export default function useErrors<T extends object>() {
     setErrors((errors) => ({ ...errors, ...error }));
   };
 
-  const initErrors = () => setErrors({});
+  const initError = (name: string) => setErrors((errors) => ({ ...errors, [name]: '' }));
 
-  return { error, errors, reportError, initErrors };
+  return { error, errors, reportError, initError };
 }

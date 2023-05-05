@@ -1,6 +1,8 @@
 const colors = {
   gray1: '#ecebf1',
   gray2: '#525252',
+  gray3: '#383838',
+  gray4: '#575757',
 } as const;
 
 const registerFormInput = {

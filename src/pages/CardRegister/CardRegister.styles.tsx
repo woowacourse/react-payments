@@ -11,7 +11,9 @@ export const Root = styled.main`
   align-items: center;
 `;
 
-export const CardSection = styled.section``;
+export const CardSection = styled.section`
+  padding-top: 46px;
+`;
 
 export const InfoSection = styled.section`
   width: 100%;

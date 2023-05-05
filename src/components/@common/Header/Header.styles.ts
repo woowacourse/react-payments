@@ -8,7 +8,6 @@ export const Root = styled.header`
   position: fixed;
   top: 0;
   left: 50%;
-  z-index: 99;
   transform: translateX(-50%);
 
   width: 414px;
@@ -16,6 +15,8 @@ export const Root = styled.header`
 
   padding: 0 25px;
   font-size: 1.2rem;
+
+  z-index: 1;
 
   background-color: white;
 `;

@@ -1,4 +1,13 @@
-import { Children, isValidElement, ReactElement, ReactNode, ElementType, RenderProps } from 'react';
+import {
+  Children,
+  isValidElement,
+  ReactElement,
+  ReactNode,
+  ElementType,
+  RenderProps,
+  PropsWithChildren,
+} from 'react';
+import { UnPack } from '../types/utility';
 
 export const getChildElement = <T extends ElementType>(
   children: ReactNode,
@@ -57,3 +66,27 @@ export const getResolvedChildren: <T>(
 ) => ReactNode | ReactElement<T> = (children, props) => {
   return typeof children === 'function' ? children(props) : children;
 };
+
+export const getValidChild = <T>(child: UnPack<ReturnType<typeof Children.toArray>>) => {
+  return isValidElement<T>(child) ? child : null;
+};
+
+export function getValidProps<P extends PropsWithChildren>(
+  props: P
+):
+  | (P & {
+      asChild: true;
+      firstChild: ReactElement<P>;
+    })
+  | (P & { asChild: false; firstChild: null }) {
+  const childrenArray = Children.toArray(props.children);
+  const firstChild = getValidChild<P>(childrenArray[0]);
+
+  if ('asChild' in props && props.asChild && firstChild) {
+    validateAsChild(childrenArray);
+
+    return { ...props, asChild: true, firstChild };
+  }
+
+  return { ...props, asChild: false, firstChild: null };
+}
