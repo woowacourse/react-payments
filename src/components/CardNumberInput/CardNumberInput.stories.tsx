@@ -7,7 +7,6 @@ import { CardNumber, CardNumberGroups } from "../../types";
 const meta: Meta<typeof CardNumberInput> = {
   title: "CardNumberInput",
   component: CardNumberInput,
-  tags: ["autodocs"],
 
   args: {
     cardNumber: {

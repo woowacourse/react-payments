@@ -5,7 +5,6 @@ import type { Meta, StoryObj } from "@storybook/react";
 const meta: Meta<typeof CardList> = {
   title: "CardList",
   component: CardList,
-  tags: ["autodocs"],
   argTypes: {
     cards: {
       description: "생성 완료된 카드로 이루어진 객체 배열입니다.",

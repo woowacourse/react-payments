@@ -4,7 +4,6 @@ import CardPreview from "./CardPreview";
 const meta: Meta<typeof CardPreview> = {
   title: "CardPreview",
   component: CardPreview,
-  tags: ["autodocs"],
   argTypes: {
     card: {
       description: "카드 미리보기에 필요한 정보가 담긴 카드 객체입니다. ",

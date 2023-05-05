@@ -8,7 +8,6 @@ import type { Card } from "../../types";
 const meta: Meta<typeof CardSecurityCodeInput> = {
   title: "CardSecurityCodeInput",
   component: CardSecurityCodeInput,
-  tags: ["autodocs"],
   argTypes: {
     securityCode: {
       description: "보안 코드 상태입니다.",

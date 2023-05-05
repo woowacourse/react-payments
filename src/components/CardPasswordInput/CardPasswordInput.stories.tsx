@@ -7,7 +7,6 @@ import { CardPassword, CardPasswordKey } from "../../types";
 const meta: Meta<typeof CardPasswordInput> = {
   title: "CardPasswordInput",
   component: CardPasswordInput,
-  tags: ["autodocs"],
 
   argTypes: {
     password: {

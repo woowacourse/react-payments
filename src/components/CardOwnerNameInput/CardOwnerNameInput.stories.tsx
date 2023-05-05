@@ -7,7 +7,6 @@ import { Card } from "../../types";
 const meta: Meta<typeof CardOwnerNameInput> = {
   title: "CardOwnerNameInput",
   component: CardOwnerNameInput,
-  tags: ["autodocs"],
 
   argTypes: {
     ownerName: {

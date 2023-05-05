@@ -4,7 +4,6 @@ import type { Meta, StoryObj } from "@storybook/react";
 const meta: Meta<typeof CardCompanyButton> = {
   title: "CardCompanyButton",
   component: CardCompanyButton,
-  tags: ["autodocs"],
   argTypes: {
     cardCompany: {
       description: "카드사 옵션입니다.",
