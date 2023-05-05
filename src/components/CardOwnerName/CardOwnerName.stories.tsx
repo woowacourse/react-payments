@@ -10,11 +10,20 @@ const meta = {
 
 export default meta;
 
-export const CardOwnerNameStory = (args: CardOwnerNameProps) => {
+export const CardOwnerNameFilled = (args: CardOwnerNameProps) => {
   const ref = useRef<HTMLInputElement>(null);
   return <CardOwnerName {...args} ref={ref} />;
 };
 
-CardOwnerNameStory.args = {
+CardOwnerNameFilled.args = {
   cardOwnerName: 'NAME',
+};
+
+export const CardOwnerNameEmpty = (args: CardOwnerNameProps) => {
+  const ref = useRef<HTMLInputElement>(null);
+  return <CardOwnerName {...args} ref={ref} />;
+};
+
+CardOwnerNameEmpty.args = {
+  cardOwnerName: '',
 };

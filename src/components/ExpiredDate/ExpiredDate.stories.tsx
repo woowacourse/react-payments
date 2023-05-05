@@ -17,16 +17,30 @@ const meta = {
 
 export default meta;
 
-export const ExpiredDateStory = (
+export const ExpiredDateFilled = (
   args: ExpiredDateProps & { nextRef: RefObject<HTMLInputElement> }
 ) => {
   const ref = useRef<HTMLInputElement>(null);
   return <ExpiredDate {...args} ref={ref} />;
 };
 
-ExpiredDateStory.args = {
+export const ExpiredDateEmpty = (
+  args: ExpiredDateProps & { nextRef: RefObject<HTMLInputElement> }
+) => {
+  const ref = useRef<HTMLInputElement>(null);
+  return <ExpiredDate {...args} ref={ref} />;
+};
+
+ExpiredDateFilled.args = {
   expiredDate: {
     0: '02',
     1: '32',
+  },
+};
+
+ExpiredDateEmpty.args = {
+  expiredDate: {
+    0: '',
+    1: '',
   },
 };
