@@ -17,8 +17,8 @@ export const newCardList = (recentList: CardType[], data: Omit<CardType, 'id'>) 
 
   const sameNumbers = recentList.filter((card: Omit<CardType, 'id'>) => {
     const { cardNumber } = card;
-    let cardNumberSerial = getSerialNumber(cardNumber);
-    let fetchCardNumberSerial = getSerialNumber(data.cardNumber);
+    const cardNumberSerial = getSerialNumber(cardNumber);
+    const fetchCardNumberSerial = getSerialNumber(data.cardNumber);
 
     if (cardNumberSerial.includes(fetchCardNumberSerial)) return true;
     return false;
