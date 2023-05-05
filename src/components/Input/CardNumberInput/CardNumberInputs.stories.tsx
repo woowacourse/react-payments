@@ -2,6 +2,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import { CardNumberInputs } from './CardNumberInputs';
 import React, { useState } from 'react';
 import { GlobalStyle } from 'GlobalStyle';
+import { userEvent, within } from '@storybook/testing-library';
 
 const meta = {
   title: 'Components/Input/CardNumberInput',
@@ -36,19 +37,16 @@ export const CardNumberInputsStory: Story = {
       return (
         <>
           <GlobalStyle />
-          <div>
-            <p>Current card number: {cardNumbers}</p>
-            <Story
-              args={{
-                valueAndOnChanges: [
-                  { value: cardNumbers[0], onChange: onChange(0) },
-                  { value: cardNumbers[1], onChange: onChange(1) },
-                  { value: cardNumbers[2], onChange: onChange(2) },
-                  { value: cardNumbers[3], onChange: onChange(3) },
-                ],
-              }}
-            />
-          </div>
+          <Story
+            args={{
+              valueAndOnChanges: [
+                { value: cardNumbers[0], onChange: onChange(0) },
+                { value: cardNumbers[1], onChange: onChange(1) },
+                { value: cardNumbers[2], onChange: onChange(2) },
+                { value: cardNumbers[3], onChange: onChange(3) },
+              ],
+            }}
+          />
         </>
       );
     },

@@ -21,7 +21,12 @@ export function CardNumberInputs({ valueAndOnChanges }: CardNumberInputProps) {
           return (
             <Fragment key={index}>
               <S.CardNumberWrapper>
-                <Input {...input} className={isError && index === curIndex ? 'error' : ''} />
+                <Input
+                  {...input}
+                  id={`card-number${index}`}
+                  aria-label="card-number"
+                  className={isError && index === curIndex ? 'error' : ''}
+                />
               </S.CardNumberWrapper>
               {index < valueAndOnChanges.length - 1 && <S.DASH>-</S.DASH>}
             </Fragment>

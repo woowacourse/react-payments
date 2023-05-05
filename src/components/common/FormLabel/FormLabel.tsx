@@ -9,13 +9,12 @@ function FormLabel({ children }: Props) {
   return <StyledLabel>{children}</StyledLabel>;
 }
 
-export const StyledLabel = styled.span`
+export const StyledLabel = styled.label`
   font-size: 12px;
   font-weight: 500;
   letter-spacing: -0.085em;
   color: var(--primary-text-color);
   margin-top: 16px;
-  margin-bottom: 3px;
 `;
 
 export default FormLabel;

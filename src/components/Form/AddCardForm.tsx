@@ -164,7 +164,7 @@ function AddCardInfo({ onSubmit }: AddCardFormProps) {
           onChangeSecond={handleSecondPasswordInputChange}
         />
 
-        <FormSubmitButton type="submit" disabled={!isValid}>
+        <FormSubmitButton id="card-submit-btn" type="submit" disabled={!isValid}>
           다음
         </FormSubmitButton>
       </FormContainer>

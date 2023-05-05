@@ -17,6 +17,7 @@ export function OwnerNameInput({ value, onChange }: OwnerNameInputProps) {
       </S.OwnerNameLabelContainer>
       <S.OwnerNameInputWrapper>
         <Input
+          id="owner-name"
           value={value}
           type="text"
           maxLength={30}

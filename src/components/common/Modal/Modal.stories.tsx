@@ -19,10 +19,26 @@ export const ModalStory: Story = {
   },
   decorators: [
     (Story) => {
+      const [isModalOpen, setIsModalOpen] = useState(true);
+      const closeModal = () => {
+        setIsModalOpen(false);
+      };
+      const openModal = () => {
+        setIsModalOpen(true);
+      };
       return (
-        <PageContainer>
-          <Story />
-        </PageContainer>
+        <>
+          <button onClick={openModal}>openModal</button>
+          <PageContainer>
+            <Story
+              args={{
+                isModalOpen: isModalOpen,
+                closeModal: closeModal,
+                children: <BottomSheet onClick={() => {}} closeModal={closeModal} />,
+              }}
+            />
+          </PageContainer>
+        </>
       );
     },
   ],

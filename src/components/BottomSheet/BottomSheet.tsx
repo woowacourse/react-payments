@@ -27,6 +27,7 @@ export const BottomSheet = forwardRef<Ref, ModalProps>(({ onClick, closeModal }:
         return (
           <Icon
             key={index}
+            id={value.name}
             imgSrc={value.iconSvgPath}
             name={value.name}
             onClick={handleSelectCompany}

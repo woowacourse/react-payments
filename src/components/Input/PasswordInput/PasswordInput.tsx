@@ -21,6 +21,7 @@ export function PasswordInput({ onChangeFirst, onChangeSecond }: PasswordInputPr
       <FormLabel>카드 비밀번호</FormLabel>
       <S.PasswordInputContainer>
         <Input
+          id="first-password"
           inputMode="numeric"
           value={first.value}
           type="password"
@@ -31,6 +32,7 @@ export function PasswordInput({ onChangeFirst, onChangeSecond }: PasswordInputPr
           onChange={first.onChange}
         />
         <Input
+          id="second-password"
           inputMode="numeric"
           value={second.value}
           type="password"

@@ -32,6 +32,7 @@ export function SecurityCodeInput({ value, onChange }: SecurityInputProps) {
       <S.SecurityCodeContainer>
         <S.SecurityCodeInputContainer className={isError ? 'error' : ''}>
           <Input
+            id="security-code"
             value={value}
             inputMode="numeric"
             type="password"

@@ -22,6 +22,7 @@ export function ExpirationDateInput({ onChangeMonth, onChangeYear }: ExpirationD
       <S.ExpirationDateContainer>
         <S.ExpirationDateWrapper>
           <Input
+            id="month"
             inputMode="numeric"
             value={month.value}
             type="text"
@@ -35,6 +36,7 @@ export function ExpirationDateInput({ onChangeMonth, onChangeYear }: ExpirationD
         <S.SLASH />
         <S.ExpirationDateWrapper>
           <Input
+            id="year"
             inputMode="numeric"
             value={year.value}
             type="text"
