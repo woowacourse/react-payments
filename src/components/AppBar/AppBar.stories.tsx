@@ -5,6 +5,6 @@ export default {
   component: AppBar,
 };
 
-export const Default = () => <AppBar title="보유카드" />;
+export const Default = () => <AppBar>보유카드</AppBar>;
 
-export const UsePrevButton = () => <AppBar title="카드추가" prevButton />;
+export const UsePrevButton = () => <AppBar prevButton>카드추가</AppBar>;
