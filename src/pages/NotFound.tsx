@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { PageWrapper, WrongPageText, WrongPageTitle } from './NotFound.styles';
 
-export const NotFound = () => {
+const NotFound = () => {
   return (
     <PageWrapper>
       <WrongPageTitle>잘못된 페이지 주소에요. 😥</WrongPageTitle>
@@ -10,3 +10,5 @@ export const NotFound = () => {
     </PageWrapper>
   );
 };
+
+export default NotFound;

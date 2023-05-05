@@ -7,7 +7,7 @@ import SubmitButton from '../components/@common/SubmitButton';
 import { useNavigate } from 'react-router-dom';
 import CardList from '../types/CardList';
 import { REG_EXP } from '../constants/regexp';
-import { LoadingSpinner } from '../components/LoadingSpinner/LoadingSpinner';
+import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
 import { Link } from 'react-router-dom';
 
 const AddAlias = ({ cards, setCards }: CardList) => {

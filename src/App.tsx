@@ -6,7 +6,7 @@ import AddCard from './pages/AddCard';
 import CardType from './types/Card';
 import { getLocalStorage, setLocalStorage } from './utils/handleLocalStorage';
 import AddCardAlias from './pages/AddCardAlias';
-import { NotFound } from './pages/NotFound';
+import NotFound from './pages/NotFound';
 
 const initCards = () => {
   const localStorageCards = getLocalStorage('cards');

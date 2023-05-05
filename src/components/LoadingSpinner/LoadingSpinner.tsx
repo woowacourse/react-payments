@@ -1,7 +1,7 @@
 import { LOADING_SPINNER } from '../../types/Image';
 import * as Styled from './LoadingSpinner.styles';
 
-export const LoadingSpinner = () => {
+const LoadingSpinner = () => {
   return (
     <Styled.SectionWrapper>
       <Styled.LoadingSpinnerWrapper src={LOADING_SPINNER} alt="로딩 스피너" />
@@ -10,3 +10,5 @@ export const LoadingSpinner = () => {
     </Styled.SectionWrapper>
   );
 };
+
+export default LoadingSpinner;
