@@ -5,10 +5,8 @@
   padding: 120px 0 0;
 }
 
-.title {
-  margin-bottom: 36px;
-  font-size: 18px;
-  font-weight: 500;
+.cardItemContainer {
+  margin-top: 36px;
 }
 
 .formContainer {
