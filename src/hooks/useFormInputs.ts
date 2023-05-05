@@ -27,6 +27,7 @@ interface UseFormInputsProps {
 }
 
 export const useFormInputs = () => {
+  const currentYear = new Date().getFullYear() % 100;
   const formInputs: UseFormInputsProps = {
     homePage: {},
     addCardPage: {
@@ -62,7 +63,9 @@ export const useFormInputs = () => {
         name: 'yearInput',
         isRequired: true,
         validate: yearValidate,
-        errorMessage: '카드의 연도를 확인해주세요',
+        errorMessage: `카드의 연도는 ${currentYear}년부터 ${
+          currentYear + 5
+        }년까지 입력이 가능합니다.`,
         maxLength: 2,
         isNumber: true,
       }),
@@ -70,7 +73,7 @@ export const useFormInputs = () => {
         name: 'monthInput',
         validate: monthValidate,
         isRequired: true,
-        errorMessage: '카드의 달을 확인해주세요.',
+        errorMessage: '카드의 달은 01월부터 12월까지 입력이 가능합니다.',
         maxLength: 2,
         isNumber: true,
       }),
@@ -79,7 +82,7 @@ export const useFormInputs = () => {
         maxLength: 30,
         validate: isOnlyEnglish,
         isRequired: false,
-        errorMessage: '영문만 입력할 수 있어요.',
+        errorMessage: '영문만 입력할 수 있어요. 영문으로 변환 해주세요.',
         convertValue: (text: string) => text.toUpperCase(),
       }),
       cvc: useInput('', {
