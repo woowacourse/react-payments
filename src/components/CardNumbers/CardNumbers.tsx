@@ -1,5 +1,6 @@
 import { ForwardedRef, forwardRef, RefObject, useRef } from 'react';
 import { cardCompanies } from '../../constants/cards';
+import { useCardNumbers } from '../../hooks';
 import { CardCompanyName } from '../../types/Card';
 import CardInput from '../CardInput/CardInput';
 import CardLabel from '../CardLabel/CardLabel';
@@ -10,12 +11,14 @@ export interface CardNumbersProps {
   checkCardNumbers: (order: number, value: string) => boolean;
   nextRef: RefObject<HTMLInputElement>;
   onSetCardCompany: (value: CardCompanyName) => void;
+  errorMessage: string;
 }
 
 const CardNumbers = forwardRef(
   (
     {
       cardNumbers,
+      errorMessage,
       checkCardNumbers,
       nextRef,
       onSetCardCompany,
@@ -63,7 +66,7 @@ const CardNumbers = forwardRef(
     };
 
     return (
-      <>
+      <Styled.Container>
         <CardLabel labelText="카드 번호" />
         <Styled.Wrapper>
           <CardInput
@@ -116,7 +119,10 @@ const CardNumbers = forwardRef(
             required={true}
           />
         </Styled.Wrapper>
-      </>
+        {errorMessage && (
+          <Styled.ErorMessage>{errorMessage}</Styled.ErorMessage>
+        )}
+      </Styled.Container>
     );
   }
 );

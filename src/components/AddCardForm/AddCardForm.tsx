@@ -24,7 +24,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Modal from 'tami-modal';
 
 const AddCardForm = () => {
-  const { cardNumbers, checkCardNumbers, onSetFirstCardNumbers } =
+  const { cardNumbers, errorMessage, checkCardNumbers, onSetFirstCardNumbers } =
     useCardNumbers();
   const { cardOwnerName, checkCardOwnerName } = useCardOwnerName();
   const { password, checkPassword } = useCardPassword();
@@ -85,6 +85,7 @@ const AddCardForm = () => {
           <CardNumbers
             cardNumbers={cardNumbers}
             checkCardNumbers={checkCardNumbers}
+            errorMessage={errorMessage}
             ref={refs.cardNumbers}
             nextRef={refs.expiredDate}
             onSetCardCompany={onSetCardCompany}

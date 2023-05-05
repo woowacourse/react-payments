@@ -10,17 +10,19 @@ const useCardNumbers = () => {
     2: '',
     3: '',
   });
+  const [errorMessage, setErrorMessage] = useState('');
   const cardCodeNumbers = cardCompanies.map((company) => company.codeNumber);
 
   const checkCardNumbers = (order: number, value: string) => {
     if (NOT_A_NUMBER_REGEX.test(value)) return false;
     if (order === 0 && value.length === 4) {
       if (!cardCodeNumbers.includes(Number(value))) {
-        alert('잘못된 카드 번호 입력입니다.');
+        setErrorMessage('잘못된 카드 번호입니다.');
         setCardNumbers({ ...cardNumbers, [order]: '' });
         return false;
       }
     }
+    setErrorMessage('');
     setCardNumbers({ ...cardNumbers, [order]: value });
     return true;
   };
@@ -33,7 +35,7 @@ const useCardNumbers = () => {
     setCardNumbers({ ...cardNumbers, 0: codeNumber.toString() });
   };
 
-  return { cardNumbers, checkCardNumbers, onSetFirstCardNumbers };
+  return { cardNumbers, errorMessage, checkCardNumbers, onSetFirstCardNumbers };
 };
 
 export default useCardNumbers;
