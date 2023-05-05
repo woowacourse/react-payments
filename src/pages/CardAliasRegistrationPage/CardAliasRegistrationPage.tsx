@@ -49,7 +49,7 @@ const CardAliasRegistrationPage = ({ onSubmit }: CardAliasRegistrationPageProps)
   if (isError) {
     return (
       <Container justify="center">
-        <CompleteMessage>카드 등록에 실패했어요...😥</CompleteMessage>
+        <StatusMessage>카드 등록에 실패했어요...😥</StatusMessage>
         <CardPreview card={previewCard} />
         <NavigateButtonContainer>
           <Link to={ROUTE_PATH.root}>
@@ -68,7 +68,7 @@ const CardAliasRegistrationPage = ({ onSubmit }: CardAliasRegistrationPageProps)
   if (isLoading) {
     return (
       <Container justify="center">
-        <CompleteMessage>카드 등록중...</CompleteMessage>
+        <StatusMessage>카드 등록중...</StatusMessage>
         <SwayingLoader2>
           <CardPreview card={previewCard} />
         </SwayingLoader2>
@@ -79,7 +79,7 @@ const CardAliasRegistrationPage = ({ onSubmit }: CardAliasRegistrationPageProps)
   if (isComplete) {
     return (
       <Container justify="center">
-        <CompleteMessage>카드 등록 완료✅</CompleteMessage>
+        <StatusMessage>카드 등록 완료✅</StatusMessage>
         <CardPreview card={previewCard} />
         <NavigateButtonContainer>
           <Link to={ROUTE_PATH.root}>
@@ -99,10 +99,10 @@ const CardAliasRegistrationPage = ({ onSubmit }: CardAliasRegistrationPageProps)
 
   return (
     <Container justify="center">
-      <CompleteMessage>
+      <StatusMessage>
         카드 별칭을 입력하면 <br />
         등록이 완료됩니다.
-      </CompleteMessage>
+      </StatusMessage>
       <CardPreview card={previewCard} />
       <AliasForm onSubmit={addCard}>
         <AliasInput
@@ -124,7 +124,7 @@ const CardAliasRegistrationPage = ({ onSubmit }: CardAliasRegistrationPageProps)
   );
 };
 
-const CompleteMessage = styled.span`
+const StatusMessage = styled.span`
   text-align: center;
   font-size: 22px;
 `;
