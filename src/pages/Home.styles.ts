@@ -34,6 +34,6 @@ export const EmptyCardText = styled.p`
 `;
 
 export const CardAlias = styled.p`
-  height: 20px;
-  margin: 8px 0 24px 0;
+  height: 24px;
+  margin: 8px 0 20px 0;
 `;
