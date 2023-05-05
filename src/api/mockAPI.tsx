@@ -22,7 +22,7 @@ export const addCard = (creditCard: CreditCard) => new Promise<Response>((resolv
     resolve({
       data: JSON.stringify(loadLocalCreditCards()),
     });
-  }, 3000);
+  }, 2000);
 });
 
 export const resetCards = () => new Promise<Response>((resolve) => {
@@ -47,5 +47,5 @@ export const updateNicknameByNumber = (number: string, newNickname: string) => n
     resolve({
       data: JSON.stringify(loadLocalCreditCards()),
     });
-  }, 3000);
+  }, 1000);
 });
