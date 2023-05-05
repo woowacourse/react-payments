@@ -51,6 +51,7 @@ export default memo(CardPreview, areEqual);
 
 const CardLayout = styled.div<{ transition: string; transform: string; cardCompany: CardCompany }>`
   position: relative;
+  z-index: 3;
 
   display: flex;
   flex-direction: column;

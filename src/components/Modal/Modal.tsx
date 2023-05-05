@@ -2,17 +2,18 @@ import styled, { keyframes } from "styled-components";
 
 type ModalProps = {
   children: React.ReactNode;
+  modalOpen: boolean;
 };
 
-const Modal = ({ children }: ModalProps) => {
+const Modal = ({ children, modalOpen }: ModalProps) => {
   return (
-    <ModalBackDrop>
-      <ModalContent>{children}</ModalContent>
+    <ModalBackDrop modalOpen={modalOpen}>
+      <ModalContent modalOpen={modalOpen}>{children}</ModalContent>
     </ModalBackDrop>
   );
 };
 
-const ModalBackDrop = styled.div`
+const ModalBackDrop = styled.div<{ modalOpen: boolean }>`
   position: absolute;
 
   top: 0;
@@ -27,10 +28,18 @@ const ModalBackDrop = styled.div`
   overflow: hidden;
 
   background: rgba(0, 0, 0, 0.5);
+
+  visibility: ${({ modalOpen }) => (modalOpen ? "visible" : "hidden")};
+
+  ${({ modalOpen }) =>
+    !modalOpen &&
+    `
+    transition-delay: 0.4s;
+  `};
 `;
 
 const slideUp = keyframes`
-  0% {
+  0% { 
     transform: translateY(100%);
     opacity: 0;
   }
@@ -40,7 +49,18 @@ const slideUp = keyframes`
   }
 `;
 
-const ModalContent = styled.div`
+const slideDown = keyframes`
+  0% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+`;
+
+const ModalContent = styled.div<{ modalOpen: boolean }>`
   display: grid;
   grid-template-rows: repeat(2, 1fr);
   grid-template-columns: repeat(4, 1fr);
@@ -59,7 +79,7 @@ const ModalContent = styled.div`
 
   background: #f5f5f5;
 
-  animation: ${slideUp} 0.4s ease-out;
+  animation: ${({ modalOpen }) => (modalOpen ? slideUp : slideDown)} 0.4s ease-out;
 `;
 
 export default Modal;
