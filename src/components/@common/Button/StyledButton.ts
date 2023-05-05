@@ -1,12 +1,12 @@
 import styled, { CSSProperties } from "styled-components";
 
-type ButtonProps = {
+export interface StyledButtonProps {
   width?: CSSProperties["width"];
   height?: CSSProperties["height"];
   bgColor?: CSSProperties["backgroundColor"];
-};
+}
 
-const Button = styled.button<ButtonProps>`
+const StyledButton = styled.button<StyledButtonProps>`
   width: ${({ width = "100%" }) => width};
   height: ${({ height = "50px" }) => height};
   background-color: ${({ bgColor = "transparent" }) => bgColor};
@@ -18,4 +18,4 @@ const Button = styled.button<ButtonProps>`
   cursor: pointer;
 `;
 
-export default Button;
+export default StyledButton;
