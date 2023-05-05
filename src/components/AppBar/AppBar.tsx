@@ -1,21 +1,21 @@
-import { useNavigate } from "react-router-dom";
+import { PropsWithChildren } from "react";
+import { Link } from "react-router-dom";
 
 import styled from "styled-components";
 
 type AppBarProps = {
-  title: string;
   prevButton?: boolean;
 };
 
-const AppBar = ({ title, prevButton = false }: AppBarProps) => {
-  const navigate = useNavigate();
-
-  const goBack = () => navigate(-1);
-
+const AppBar = ({ children, prevButton = false }: PropsWithChildren<AppBarProps>) => {
   return (
     <Header>
-      {prevButton && <PrevButton onClick={goBack}>〈</PrevButton>}
-      <Title>{title}</Title>
+      {prevButton && (
+        <Link to="..">
+          <PrevButton type="button">〈</PrevButton>
+        </Link>
+      )}
+      <Title>{children}</Title>
     </Header>
   );
 };

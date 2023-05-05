@@ -112,7 +112,7 @@ const AddCardPage = () => {
 
   return (
     <AddCardPageContainer>
-      <AppBar title={"카드 추가"} prevButton />
+      <AppBar prevButton>카드 추가</AppBar>
       <CardPreview card={{ cardNumber, expirationDate, ownerName, cardCompany }} onClick={modalOpen} />
       <HelperText onClick={modalOpen}>카드사 선택하기👆</HelperText>
       <Form onSubmit={addCard}>
