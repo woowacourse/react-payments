@@ -83,6 +83,7 @@ const CardInfoWrapper = styled.div`
 const UpInfoWrapper = styled.div`
   display: flex;
   max-width: max-content;
+  letter-spacing: 2.5px;
 `;
 
 const BottomInfoWrapper = styled.div`
