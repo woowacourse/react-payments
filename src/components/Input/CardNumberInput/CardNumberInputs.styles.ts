@@ -8,6 +8,7 @@ export const Styled = {
   `,
   CardNumberWrapper: styled(Container)`
     padding: 0;
+    width: 20%;
     Input {
       width: 100%;
       height: 44px;
@@ -18,5 +19,11 @@ export const Styled = {
       border: 1px solid red;
       background-color: var(--primary-error-color);
     }
+  `,
+  DASH: styled.span`
+    display: flex;
+    align-items: center;
+    margin: auto;
+    font-size: 24px;
   `,
 };

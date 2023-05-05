@@ -23,7 +23,7 @@ export function CardNumberInputs({ valueAndOnChanges }: CardNumberInputProps) {
               <S.CardNumberWrapper>
                 <Input {...input} className={isError && index === curIndex ? 'error' : ''} />
               </S.CardNumberWrapper>
-              {index < valueAndOnChanges.length - 1 && <span>-</span>}
+              {index < valueAndOnChanges.length - 1 && <S.DASH>-</S.DASH>}
             </Fragment>
           );
         })}
