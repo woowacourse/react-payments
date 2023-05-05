@@ -47,6 +47,7 @@ function useWarningText(minLength?: number, name?: string) {
 
     if (parseInt(month) > 12 || month == "00") {
       setWarningText(WARNING_TEXT.WRONG_MONTH);
+      return false;
     }
   };
 
@@ -65,7 +66,7 @@ function useWarningText(minLength?: number, name?: string) {
       cardPassword[1].length !== LENGTH.PASSWORD
     )
       isError = true;
-
+    if (!checkRightMonth(cardDate)) isError = true;
     if (isError) setWarningText(WARNING_TEXT.NO_COMPLETED_FORM);
 
     return isError;
