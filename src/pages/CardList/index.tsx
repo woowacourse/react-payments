@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { useCallback } from 'react';
 
 import type { CardType } from '../../type';
 import Card from '../../components/Card';
@@ -10,9 +11,9 @@ const CardListPage = () => {
   const { value: cardList } = useLocalStorage('cardList', '[]');
   const navigate = useNavigate();
 
-  const onAddButton = () => {
+  const onAddButton = useCallback(() => {
     navigate('/add');
-  };
+  }, [navigate]);
 
   return (
     <div className="card-list-page">
