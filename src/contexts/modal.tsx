@@ -22,7 +22,9 @@ export function ModalProvider(props: PropsWithChildren<ModalProviderProps>) {
   const [isOpen, setIsOpen] = useState(modalState?.modalOpen ?? false);
 
   useEffect(() => {
-    defaultOpen && setIsOpen(true);
+    if (defaultOpen) {
+      setIsOpen(true);
+    }
   }, []);
 
   function openLocalModal() {

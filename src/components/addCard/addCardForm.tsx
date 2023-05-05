@@ -26,7 +26,9 @@ export function AddCardForm() {
     const isAllValid = inputElements.every(
       (input) => input.value.length >= TEXT_LENGTH[input.name.toUpperCase()]
     );
-    isAllValid && setIsComplete(true);
+    if (isAllValid) {
+      setIsComplete(true);
+    }
   }
 
   function saveData(e: React.FormEvent<HTMLFormElement>) {
