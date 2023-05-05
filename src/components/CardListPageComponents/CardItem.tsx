@@ -1,7 +1,7 @@
 import styled from 'styled-components';
+import { useLocation } from 'react-router-dom';
 import { CARD_COLOR } from '../../utils/Constants';
 import type { CardItemInfo } from '../../types/Card';
-import { useLocation } from 'react-router-dom';
 
 interface CardItemProps {
   card: CardItemInfo;
