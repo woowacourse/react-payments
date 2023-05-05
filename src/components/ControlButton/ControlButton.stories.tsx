@@ -1,7 +1,7 @@
 /* eslint-disable react/function-component-definition */
 /* eslint-disable import/no-extraneous-dependencies */
 
-import { Story, Meta } from '@storybook/react';
+import { Story as StoryType, Meta } from '@storybook/react';
 import GlobalStyle, { GlobalLayout } from 'style/globalStyle';
 import ControlButton, { ControlButtonProps } from './ControlButton';
 
@@ -9,18 +9,18 @@ export default {
   title: 'ControlButton',
   component: ControlButton,
   decorators: [
-    (Story1) => (
+    (Story) => (
       <>
         <GlobalStyle />
         <GlobalLayout>
-          <Story1 />
+          <Story />
         </GlobalLayout>
       </>
     ),
   ],
 } satisfies Meta<typeof ControlButton>;
 
-const Template: Story<ControlButtonProps> = (args) => (
+const Template: StoryType<ControlButtonProps> = (args) => (
   <ControlButton {...args}>
     다음
   </ControlButton>
