@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Card from '../components/Card/Card';
 import Layout from '../components/Layout/Layout';
+import Loading from '../components/Loading/Loading';
 import { CardContext } from '../context/CardProvider';
 import { useCards } from '../hooks';
 
@@ -12,6 +13,7 @@ const RegisterCard = () => {
   const { card } = useContext(CardContext);
   const { cardNumbers, expiredDate, cardOwnerName, cardCompany } = card;
   const [nickname, setNickname] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleNicknameInputChange: React.ChangeEventHandler<
     HTMLInputElement
@@ -23,34 +25,53 @@ const RegisterCard = () => {
   const handleConfirmButton = () => {
     const newCard = { ...card, nickname: nickname };
     handleSetCards(newCard);
-    navigate('/');
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      navigate('/');
+    }, 4000);
   };
 
   return (
     <Layout>
-      <Wrapper>
-        <Title>카드 등록이 완료되었습니다.</Title>
-        <Card
-          cardNumbers={cardNumbers}
-          expiredDate={expiredDate}
-          cardOwnerName={cardOwnerName}
-          cardCompany={cardCompany}
-        />
-        <Input
-          value={nickname}
-          onChange={handleNicknameInputChange}
-          placeholder="카드 별칭을 입력해주세요.(선택)"
-        />
-      </Wrapper>
-      <ButtonWrapper>
-        <button onClick={handleConfirmButton}>확인</button>
-      </ButtonWrapper>
+      {isLoading ? (
+        <Wrapper>
+          <Loading />
+          <LoadingMessage>카드를 등록중입니다.</LoadingMessage>
+        </Wrapper>
+      ) : (
+        <>
+          <Wrapper>
+            <Title>거의 다 왔어요!</Title>
+            <Card
+              cardNumbers={cardNumbers}
+              expiredDate={expiredDate}
+              cardOwnerName={cardOwnerName}
+              cardCompany={cardCompany}
+            />
+            <Input
+              value={nickname}
+              onChange={handleNicknameInputChange}
+              placeholder="카드 별칭을 입력해주세요.(선택)"
+            />
+          </Wrapper>
+          <ButtonWrapper>
+            <button onClick={handleConfirmButton}>확인</button>
+          </ButtonWrapper>
+        </>
+      )}
     </Layout>
   );
 };
 
-const Title = styled.h2`
+const Title = styled.h3`
   margin-bottom: 36px;
+`;
+
+const LoadingMessage = styled.p`
+  font: ${(props) => props.theme.font.subtitle};
+  color: ${(props) => props.theme.color.grey400};
+  margin-top: 42px;
 `;
 
 const Wrapper = styled.div`
