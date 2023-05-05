@@ -3,7 +3,6 @@ import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { Card } from '../../../store/type';
 import Message from '../../atomics/Message';
-import { useCardModalDispatch } from '../../context/CardPaymentContext';
 import { SBetweenStack } from '../../layout/flexbox';
 import { color } from '../../stylesheet/theme';
 
@@ -12,12 +11,12 @@ type CardItemProps = {
 };
 
 const CardItem: React.FC<CardItemProps> = ({ card }) => {
-  const cardModalDispatch = useCardModalDispatch();
+  // const cardModalDispatch = useCardModalDispatch();
   const location = useLocation();
 
   const handleModal = () => {
     if (location.pathname !== '/addCard') return;
-    cardModalDispatch();
+    // cardModalDispatch();
   };
 
   return (

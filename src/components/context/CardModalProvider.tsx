@@ -7,7 +7,7 @@ type ChildProps = {
 };
 
 const CardModalProvider: React.FC<ChildProps> = ({ children }) => {
-  const [isModal, toggleModal] = useCardModal();
+  const [isModal, toggleModal] = useCardModal(true);
 
   return (
     <AddCardModalContext.Provider value={{ isModal, toggleModal }}>

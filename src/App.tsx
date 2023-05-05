@@ -7,26 +7,23 @@ import AddCardAlias from './pages/AddCardAlias';
 
 import CardListProvider from './components/context/CardListProvider';
 import PaymentProvider from './components/context/PaymentsProvider';
-import CardModalProvider from './components/context/CardModalProvider';
 
 function App() {
   return (
     <BrowserRouter>
       <CardListProvider>
-        <CardModalProvider>
-          <Routes>
-            <Route index element={<MyCard />} />
-            <Route
-              path="addCard"
-              element={
-                <PaymentProvider>
-                  <AddCard />
-                </PaymentProvider>
-              }
-            />
-            <Route path="addCardAlias" element={<AddCardAlias />} />
-          </Routes>
-        </CardModalProvider>
+        <Routes>
+          <Route index element={<MyCard />} />
+          <Route
+            path="addCard"
+            element={
+              <PaymentProvider>
+                <AddCard />
+              </PaymentProvider>
+            }
+          />
+          <Route path="addCardAlias" element={<AddCardAlias />} />
+        </Routes>
       </CardListProvider>
     </BrowserRouter>
   );
