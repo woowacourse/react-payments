@@ -7,13 +7,17 @@ export const Styled = {
     flex-direction: row;
     align-items: center;
     gap: 11px;
+    .error {
+      border: 1px solid red;
+      background-color: var(--primary-error-color);
+    }
   `,
   SecurityCodeInputContainer: styled(Container)`
     width: 84px;
-
     Input {
+      width: 100%;
+      height: 44px;
       text-align: center;
-      margin-left: 0.5rem;
       letter-spacing: 0.5rem;
     }
   `,

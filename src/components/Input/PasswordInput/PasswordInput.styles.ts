@@ -5,7 +5,6 @@ export const Styled = {
   PasswordInputContainer: styled(Container)`
     background-color: rgba(255, 255, 255, 0);
     width: 60%;
-    padding: 0;
     align-items: center;
     Input {
       width: 44px;

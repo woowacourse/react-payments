@@ -3,8 +3,13 @@ import { Container } from 'components/style/InputContainer';
 
 export const Styled = {
   OwnerNameInputWrapper: styled(Container)`
-    width: 318px;
+    width: 100%;
     margin-bottom: 16px;
+    input {
+      padding-left: 10px;
+      width: 100%;
+      height: 44px;
+    }
   `,
 
   OwnerNameLabelContainer: styled.div`
