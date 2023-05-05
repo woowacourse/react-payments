@@ -20,14 +20,14 @@ export default meta;
 type Story = StoryFn<typeof meta>;
 
 export const SecurityCodeStory: Story = () => {
-  const { securityCode, securityCodeError, handleSecurityCode } =
+  const { securityCode, securityCodeError, isValidatedSecurityCode } =
     useSecurityCode();
 
   return (
     <CardSecurityCode
       securityCode={securityCode}
       errorMessage={securityCodeError}
-      handleSecurityCode={handleSecurityCode}
+      isValidatedSecurityCode={isValidatedSecurityCode}
     />
   );
 };

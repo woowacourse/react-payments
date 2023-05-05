@@ -20,13 +20,14 @@ export default meta;
 type Story = StoryFn<typeof meta>;
 
 export const CardNumbersStory: Story = () => {
-  const { cardNumbers, cardNumbersError, handleCardNumbers } = useCardNumbers();
+  const { cardNumbers, cardNumbersError, isValidatedCardNumbers } =
+    useCardNumbers();
 
   return (
     <CardNumbers
       cardNumbers={cardNumbers}
       errorMessage={cardNumbersError}
-      handleCardNumbers={handleCardNumbers}
+      isValidatedCardNumbers={isValidatedCardNumbers}
     />
   );
 };

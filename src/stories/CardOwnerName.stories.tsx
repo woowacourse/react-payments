@@ -11,13 +11,14 @@ export default meta;
 type Story = StoryFn<typeof meta>;
 
 export const CardOwnerNameStory: Story = () => {
-  const { cardOwnerName, ownerNameError, handleCardOwnerName } = useOwnerName();
+  const { cardOwnerName, ownerNameError, isValidatedCardOwnerName } =
+    useOwnerName();
 
   return (
     <CardOwnerName
       cardOwnerName={cardOwnerName}
       errorMessage={ownerNameError}
-      handleCardOwnerName={handleCardOwnerName}
+      isValidatedCardOwnerName={isValidatedCardOwnerName}
     />
   );
 };

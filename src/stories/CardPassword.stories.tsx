@@ -20,13 +20,14 @@ export default meta;
 type Story = StoryFn<typeof meta>;
 
 export const CardPasswordStory: Story = () => {
-  const { cardPasswords, passwordError, handleCardPasswords } = usePassword();
+  const { cardPasswords, passwordError, isValidatedCardPasswords } =
+    usePassword();
 
   return (
     <CardPassword
       cardPasswords={cardPasswords}
       errorMessage={passwordError}
-      handleCardPasswords={handleCardPasswords}
+      isValidatedCardPasswords={isValidatedCardPasswords}
     />
   );
 };
