@@ -31,16 +31,16 @@ export function AddCardNicknamePage() {
       <Form>
         <InputBox>
           <InputGroup asChild>
-            <NicknameInutGroup />
-            <Input
-              name="nickname"
-              maxLength={15}
-              placeholder="카드의 별명을 입력해주세요 (선택)"
-              ref={nicknameInput}
-              asChild>
-              <NicknameInput />
-            </Input>
-            {/* </NicknameInutGroup> */}
+            <NicknameInutGroup>
+              <Input
+                name="nickname"
+                maxLength={15}
+                placeholder="카드의 별명을 입력해주세요 (선택)"
+                ref={nicknameInput}
+                asChild>
+                <NicknameInput />
+              </Input>
+            </NicknameInutGroup>
           </InputGroup>
         </InputBox>
         <CompleteButton onClick={completeInputNickname}>확인</CompleteButton>
