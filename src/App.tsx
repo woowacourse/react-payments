@@ -7,6 +7,7 @@ import BankList from './components/BottomSheetComponents/BankList';
 import CardAdditionCompletionPage from './components/pages/CardAdditionCompletionPage';
 import { useChangeForm } from './hooks/useChangeForm';
 import { useBottomSheet } from 'hae-on-bottom-sheet';
+import { CardFormProvider } from './context/CardFormContext';
 
 function App() {
   const { isBottomSheetOpen, handleBottomSheetOpen, handleBottomSheetClose } =
@@ -24,10 +25,12 @@ function App() {
           <Route
             path='/register'
             element={
-              <CardRegistrationPage
-                onOpen={handleBottomSheetOpen}
-                onChangeForm={handleChangeForm}
-              />
+              <CardFormProvider>
+                <CardRegistrationPage
+                  onOpen={handleBottomSheetOpen}
+                  onChangeForm={handleChangeForm}
+                />
+              </CardFormProvider>
             }
           />
           <Route path='/complete' element={<CardAdditionCompletionPage />} />

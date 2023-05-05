@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useContext, useRef } from 'react';
 import styled from 'styled-components';
 import Input from '../common/Input';
 import InputBox from '../common/InputBox';
@@ -10,16 +10,16 @@ import {
   isOverLength,
 } from '../../utils/InputValidate';
 import { ERROR_MESSAGE, INPUT_MAX_LENGTH } from '../../utils/Constants';
-import type { Card, InputProps } from '../../types/Card';
+import {
+  CardFormErrorValueContext,
+  CardFormValueContext,
+} from '../../context/CardFormContext';
 
-type PasswordInputProps = InputProps<Card['password']>;
-
-const PasswordInput = ({
-  value,
-  setValue,
-  errorMessage,
-  setErrorMessage,
-}: PasswordInputProps) => {
+const PasswordInput = () => {
+  const { password, setPassword } = useContext(CardFormValueContext);
+  const { passwordError, setPasswordError } = useContext(
+    CardFormErrorValueContext
+  );
   const inputRefs = [
     useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
@@ -31,15 +31,15 @@ const PasswordInput = ({
 
       if (isOverLength(inputValue, INPUT_MAX_LENGTH.PASSWORD_LENGTH)) return;
       if (isInputNumber(inputValue, INPUT_MAX_LENGTH.PASSWORD_LENGTH)) {
-        setErrorMessage(ERROR_MESSAGE.ONLY_NUMBER);
+        setPasswordError(ERROR_MESSAGE.ONLY_NUMBER);
         return;
       }
 
-      const newInputs = [...value];
+      const newInputs = [...password];
       newInputs[inputIndex] = inputValue;
 
-      setValue(newInputs);
-      setErrorMessage('');
+      setPassword(newInputs);
+      setPasswordError('');
 
       if (
         isNextInputFocusable({
@@ -56,21 +56,21 @@ const PasswordInput = ({
     };
 
   return (
-    <InputGroup labelValue='카드 비밀번호' errorMessage={errorMessage}>
+    <InputGroup labelValue='카드 비밀번호' errorMessage={passwordError}>
       <BoxContainer>
-        <InputBox width='43px' isError={!!errorMessage}>
+        <InputBox width='43px' isError={!!passwordError}>
           <Input
             type='password'
             ref={inputRefs[0]}
-            value={value[0]}
+            value={password[0]}
             onChange={handleChangeInput(0)}
           />
         </InputBox>
-        <InputBox width='43px' isError={!!errorMessage}>
+        <InputBox width='43px' isError={!!passwordError}>
           <Input
             type='password'
             ref={inputRefs[1]}
-            value={value[1]}
+            value={password[1]}
             onChange={handleChangeInput(1)}
           />
         </InputBox>

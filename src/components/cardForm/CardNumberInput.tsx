@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useContext, useRef } from 'react';
 import Input from '../common/Input';
 import InputBox from '../common/InputBox';
 import InputGroup from '../common/InputGroup';
@@ -9,16 +9,16 @@ import {
   isOverLength,
 } from '../../utils/InputValidate';
 import { ERROR_MESSAGE, INPUT, INPUT_MAX_LENGTH } from '../../utils/Constants';
-import type { CardItemInfo, InputProps } from '../../types/Card';
+import {
+  CardFormErrorValueContext,
+  CardFormValueContext,
+} from '../../context/CardFormContext';
 
-type CardNumberInputProps = InputProps<CardItemInfo['cardNumber']>;
-
-const CardNumberInput = ({
-  value,
-  setValue,
-  errorMessage,
-  setErrorMessage,
-}: CardNumberInputProps) => {
+const CardNumberInput = () => {
+  const { cardNumber, setCardNumber } = useContext(CardFormValueContext);
+  const { cardNumberError, setCardNumberError } = useContext(
+    CardFormErrorValueContext
+  );
   const inputRefs = [
     useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
@@ -32,7 +32,7 @@ const CardNumberInput = ({
 
       if (isOverLength(inputValue, INPUT_MAX_LENGTH.CARD_NUMBER_LENGTH)) return;
       if (isInputNumber(inputValue, INPUT_MAX_LENGTH.CARD_NUMBER_LENGTH)) {
-        setErrorMessage(ERROR_MESSAGE.ONLY_NUMBER);
+        setCardNumberError(ERROR_MESSAGE.ONLY_NUMBER);
         return;
       }
 
@@ -49,23 +49,23 @@ const CardNumberInput = ({
         }
       }
 
-      const newCardNumber = [...value];
+      const newCardNumber = [...cardNumber];
       newCardNumber[inputIndex] = inputValue;
 
-      setValue(newCardNumber);
-      setErrorMessage('');
+      setCardNumber(newCardNumber);
+      setCardNumberError('');
     };
 
   return (
-    <InputGroup labelValue='카드 번호' errorMessage={errorMessage}>
-      <InputBox isError={!!errorMessage}>
+    <InputGroup labelValue='카드 번호' errorMessage={cardNumberError}>
+      <InputBox isError={!!cardNumberError}>
         {Array.from({ length: INPUT_MAX_LENGTH.CARD_NUMBER_LENGTH }).map(
           (_, index) => (
             <React.Fragment key={index}>
               <Input
                 placeholder='0000'
                 ref={inputRefs[index]}
-                value={value[index]}
+                value={cardNumber[index]}
                 type={
                   index >= INPUT.CARD_NUMBER_VISIBLE_INPUT_ORDER
                     ? 'password'
@@ -76,7 +76,8 @@ const CardNumberInput = ({
               {index < INPUT.CARD_NUMBER_LAST_INPUT_ORDER && (
                 <InputSeparator
                   isActive={
-                    value[index].length === INPUT_MAX_LENGTH.CARD_NUMBER_LENGTH
+                    cardNumber[index].length ===
+                    INPUT_MAX_LENGTH.CARD_NUMBER_LENGTH
                   }
                 >
                   -
