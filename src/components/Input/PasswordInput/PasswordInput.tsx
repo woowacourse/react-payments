@@ -3,6 +3,7 @@ import { ChangeEventHandler } from 'react';
 import { Styled as S } from './PasswordInput.styles';
 import FormLabel from 'components/common/FormLabel/FormLabel';
 import { usePasswordInput } from 'hooks/usePasswordInput';
+import { ErrorCaption } from 'components/Form/AddCardForm';
 
 export interface PasswordInputProps {
   onChangeFirst: ChangeEventHandler<HTMLInputElement>;
@@ -10,7 +11,10 @@ export interface PasswordInputProps {
 }
 
 export function PasswordInput({ onChangeFirst, onChangeSecond }: PasswordInputProps) {
-  const { first, second } = usePasswordInput(onChangeFirst, onChangeSecond);
+  const { isFirstError, isSecondError, first, second } = usePasswordInput(
+    onChangeFirst,
+    onChangeSecond,
+  );
 
   return (
     <>
@@ -21,20 +25,29 @@ export function PasswordInput({ onChangeFirst, onChangeSecond }: PasswordInputPr
           value={first.value}
           type="password"
           maxLength={1}
-          onChange={first.onChange}
+          className={isFirstError ? 'error' : ''}
+          placeholder="•"
           required
+          onChange={first.onChange}
         />
         <Input
           inputMode="numeric"
           value={second.value}
           type="password"
           maxLength={1}
-          onChange={second.onChange}
+          className={isSecondError ? 'error' : ''}
+          placeholder="•"
           required
+          onChange={second.onChange}
         />
         <S.DotContainer>•</S.DotContainer>
         <S.DotContainer>•</S.DotContainer>
       </S.PasswordInputContainer>
+      {
+        <ErrorCaption>
+          {(isFirstError || isSecondError) && '카드 비밀번호 앞 두자리를 입력해주세요.'}
+        </ErrorCaption>
+      }
     </>
   );
 }
