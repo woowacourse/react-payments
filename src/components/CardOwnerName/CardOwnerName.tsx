@@ -3,6 +3,7 @@ import CardInput from '../@common/CardInput';
 import CardLabel from '../@common/CardLabel';
 import * as Styled from './CardOwnerName.styles';
 import { RefContext } from '../../contexts/RefProvider';
+import CardErrorLabel from '../@common/CardErrorLabel';
 
 interface CardOwnerNameProps {
   cardOwnerName: string;
@@ -40,7 +41,7 @@ const CardOwnerName = ({
           placeholder="카드에 표시된 영어 이름을 입력하세요."
         />
       </Styled.Wrapper>
-      <Styled.ErrorTextWrapper>{errorMessage}</Styled.ErrorTextWrapper>
+      <CardErrorLabel errorMessage={errorMessage} />
     </>
   );
 };

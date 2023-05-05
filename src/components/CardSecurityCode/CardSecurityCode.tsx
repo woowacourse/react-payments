@@ -3,6 +3,7 @@ import CardLabel from '../@common/CardLabel';
 import { useContext, useState } from 'react';
 import * as Styled from './CardSecurityCode.styles';
 import { RefContext } from '../../contexts/RefProvider';
+import CardErrorLabel from '../@common/CardErrorLabel';
 
 interface SecurityCodeProps {
   securityCode: string;
@@ -69,7 +70,7 @@ const CardSecurityCode = ({
           </Styled.QuestionButton>
         )}
       </Styled.Wrapper>
-      <Styled.ErrorTextWrapper>{errorMessage}</Styled.ErrorTextWrapper>
+      <CardErrorLabel errorMessage={errorMessage} />
     </>
   );
 };

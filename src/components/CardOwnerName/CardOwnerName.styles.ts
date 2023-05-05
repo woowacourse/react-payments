@@ -17,9 +17,3 @@ export const LabelWrapper = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-
-export const ErrorTextWrapper = styled.p`
-  height: 18px;
-  font-size: 14px;
-  color: red;
-`;

@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import * as Styled from './CardPassword.styles';
 import { RefContext } from '../../contexts/RefProvider';
 import { REF_INDEX } from '../../constants/refIndex';
+import CardErrorLabel from '../@common/CardErrorLabel';
 
 interface CardPasswordProps {
   cardPasswords: Array<string>;
@@ -66,7 +67,7 @@ const CardPassword = ({
         <Styled.Paragraph>•</Styled.Paragraph>
         <Styled.Paragraph>•</Styled.Paragraph>
       </Styled.Wrapper>
-      <Styled.ErrorTextWrapper>{errorMessage}</Styled.ErrorTextWrapper>
+      <CardErrorLabel errorMessage={errorMessage} />
     </>
   );
 };

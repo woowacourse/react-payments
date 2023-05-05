@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import * as Styled from './CardExpiredDates.styles';
 import { RefContext } from '../../contexts/RefProvider';
 import { REF_INDEX } from '../../constants/refIndex';
+import CardErrorLabel from '../@common/CardErrorLabel';
 
 interface ExpiredDateProps {
   expiredDates: Array<string>;
@@ -61,7 +62,7 @@ const CardExpiredDate = ({
           required={true}
         />
       </Styled.Wrapper>
-      <Styled.ErrorTextWrapper>{errorMessage}</Styled.ErrorTextWrapper>
+      <CardErrorLabel errorMessage={errorMessage} />
     </>
   );
 };
