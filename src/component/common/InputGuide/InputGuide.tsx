@@ -12,4 +12,4 @@ function InputGuide({ warningText }: InputGuideProps) {
   );
 }
 
-export default InputGuide;
+export default React.memo(InputGuide);

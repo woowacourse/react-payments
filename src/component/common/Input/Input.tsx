@@ -18,4 +18,4 @@ function Input({ isRequired, inputRef, ...props }: InputProps) {
   );
 }
 
-export default Input;
+export default React.memo(Input);

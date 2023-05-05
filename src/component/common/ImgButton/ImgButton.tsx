@@ -18,4 +18,4 @@ function ImgButton({ onClick, alt, src }: ImgButtonProps) {
   );
 }
 
-export default ImgButton;
+export default React.memo(ImgButton);

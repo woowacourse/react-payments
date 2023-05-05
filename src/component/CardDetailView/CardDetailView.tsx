@@ -53,4 +53,4 @@ function CardDetailView({
   );
 }
 
-export default CardDetailView;
+export default React.memo(CardDetailView);
