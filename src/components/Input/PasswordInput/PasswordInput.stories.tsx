@@ -1,9 +1,9 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { PasswordInput } from './PasswordInput';
+import { GlobalStyle } from 'GlobalStyle';
 
 const meta = {
   component: PasswordInput,
-  title: 'Section/Inputs/PasswordInput',
 } satisfies Meta<typeof PasswordInput>;
 
 export default meta;
@@ -14,4 +14,14 @@ export const PasswordInputStory: Story = {
     onChangeFirst: () => {},
     onChangeSecond: () => {},
   },
+  decorators: [
+    (Story) => {
+      return (
+        <>
+          <GlobalStyle />
+          <Story />
+        </>
+      );
+    },
+  ],
 };

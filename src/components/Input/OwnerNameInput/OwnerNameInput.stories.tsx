@@ -2,8 +2,8 @@ import { Meta, StoryObj } from '@storybook/react';
 import { OwnerNameInput } from './OwnerNameInput';
 
 const meta = {
+  title: 'Components/Input/OwnerNameInput',
   component: OwnerNameInput,
-  title: 'Section/Inputs/OwnerNameInput',
 } satisfies Meta<typeof OwnerNameInput>;
 
 export default meta;

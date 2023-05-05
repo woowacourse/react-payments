@@ -3,7 +3,6 @@ import { Icon } from './Icon';
 
 const meta = {
   component: Icon,
-  title: 'Section/Icon',
 } satisfies Meta<typeof Icon>;
 
 export default meta;

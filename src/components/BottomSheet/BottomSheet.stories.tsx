@@ -3,7 +3,6 @@ import { BottomSheet } from './BottomSheet';
 
 const meta = {
   component: BottomSheet,
-  title: 'Section/BottomSheet',
 } satisfies Meta<typeof BottomSheet>;
 
 export default meta;

@@ -3,7 +3,6 @@ import { CreditCard } from './CreditCard';
 
 const meta = {
   component: CreditCard,
-  title: 'Section/Card',
 } satisfies Meta<typeof CreditCard>;
 
 export default meta;

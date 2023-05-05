@@ -2,8 +2,8 @@ import { Meta, StoryObj } from '@storybook/react';
 import { SecurityCodeInput } from './SecurityCodeInput';
 
 const meta = {
+  title: 'Components/Input/SecurityCodeInput',
   component: SecurityCodeInput,
-  title: 'Section/Inputs/SecurityCodeInput',
 } satisfies Meta<typeof SecurityCodeInput>;
 
 export default meta;

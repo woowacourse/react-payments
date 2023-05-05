@@ -3,7 +3,6 @@ import { CardNameInput } from './CardNameInput';
 
 const meta = {
   component: CardNameInput,
-  title: 'Section/Inputs/CardNameInput',
 } satisfies Meta<typeof CardNameInput>;
 
 export default meta;
