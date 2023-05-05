@@ -27,6 +27,7 @@ function CreditCardRegisterProvider({ children }: PropsWithChildren) {
   const [alias, setAlias] = useState<string>('');
 
   const updateCompany = (newCompany: Type.CreditCardCompanies | undefined) => {
+    console.log(newCompany);
     setCompany(newCompany);
   };
 

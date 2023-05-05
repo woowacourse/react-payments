@@ -11994,10 +11994,10 @@ no-case@^3.0.4:
     lower-case "^2.0.2"
     tslib "^2.0.3"
 
-noah-modal@0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/noah-modal/-/noah-modal-0.0.4.tgz#2dfc651d6893471bc5547960bba82309a46ef0b4"
-  integrity sha512-3o6dUgea0JEn8CKbzmwqSXEfpchyCGwVXeJ4eo5NwpuWFDR4faxN1z/ZGVMOZnwCU24VRhq8zlgwjrN1A4HAVQ==
+noah-modal@1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/noah-modal/-/noah-modal-1.0.6.tgz#8b59c409c42ca50111b450adc8eb710c3df0c9f9"
+  integrity sha512-EwJGEST2FKz3Pybw1dpbuqUMwAwpb5xa2gDpePyZxOrmm8W+65+BZ4i+5Z+nJESVS93s70iSDN7VH6p0LX+Lgw==
   dependencies:
     web-vitals "^2.1.4"
 

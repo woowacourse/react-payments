@@ -5,8 +5,6 @@ import CreditCardAlias from '@Pages/CreditCardAlias';
 import CreditCardRegister from '@Pages/CreditCardRegister';
 import Home from '@Pages/Home';
 
-import CreditCardRegisterProvider from '@Contexts/CreditCardRegister/CreditCardRegisterProvider';
-
 const router = createBrowserRouter(
   [
     {
@@ -22,19 +20,11 @@ const router = createBrowserRouter(
           children: [
             {
               path: '',
-              element: (
-                <CreditCardRegisterProvider>
-                  <CreditCardRegister />
-                </CreditCardRegisterProvider>
-              ),
+              element: <CreditCardRegister />,
             },
             {
               path: 'alias',
-              element: (
-                <CreditCardRegisterProvider>
-                  <CreditCardAlias />
-                </CreditCardRegisterProvider>
-              ),
+              element: <CreditCardAlias />,
             },
           ],
         },

@@ -13,7 +13,6 @@ import { CreditCardRegisterContext } from '@Contexts/CreditCardRegister/CreditCa
 import scrollWindow from '@Utils/scrollWindow';
 
 import CreditCardCVCInput from './CreditCardCVCInput';
-import CreditCardCompanyModal from './CreditCardCompanyModal';
 import CreditCardExpiryInput from './CreditCardExpiryInput';
 import CreditCardNumberInput from './CreditCardNumberInput';
 import CreditCardOwnerInput from './CreditCardOwnerInput';
@@ -25,7 +24,7 @@ function CreditCardRegister() {
 
   const { creditCard, errorMessage } = useContext(CreditCardRegisterContext);
 
-  const { isModalOpen, openModal } = useModal();
+  const { openModal } = useModal();
   const isValid = useCreditCardValidation(creditCard, Object.values(errorMessage));
 
   const handleSubmit = () => {
@@ -36,13 +35,13 @@ function CreditCardRegister() {
   };
 
   const handleClickSelectCreditCompanyButton = () => {
-    openModal();
+    openModal('creditCardCompany');
   };
 
   useEffect(() => {
     scrollWindow.toTop();
     if (!creditCard.company) {
-      openModal();
+      openModal('creditCardCompany');
     }
   }, []);
 
@@ -73,7 +72,6 @@ function CreditCardRegister() {
           </S.ButtonWrapper>
         </S.CreditCardRegisterForm>
       </S.CreditCardRegister>
-      {isModalOpen && <CreditCardCompanyModal />}
     </>
   );
 }
