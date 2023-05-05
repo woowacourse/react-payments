@@ -5,6 +5,7 @@ import { RefObject, useRef } from 'react';
 const meta = {
   component: CardNumbers,
   title: 'Section/CardNumbers',
+  tags: ['autodocs'],
   argTypes: {
     checkCardNumbers: {
       table: {

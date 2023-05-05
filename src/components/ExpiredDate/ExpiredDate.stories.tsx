@@ -5,6 +5,7 @@ import ExpiredDate, { ExpiredDateProps } from './ExpiredDate';
 const meta = {
   component: ExpiredDate,
   title: 'Section/ExpiredDate',
+  tags: ['autodocs'],
   argTypes: {
     checkExpiredDate: {
       table: {

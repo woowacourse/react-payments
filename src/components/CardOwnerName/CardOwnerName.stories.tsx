@@ -5,6 +5,7 @@ import CardOwnerName, { CardOwnerNameProps } from './CardOwnerName';
 const meta = {
   component: CardOwnerName,
   title: 'Section/CardOwnerName',
+  tags: ['autodocs'],
 } satisfies Meta<typeof CardOwnerName>;
 
 export default meta;
