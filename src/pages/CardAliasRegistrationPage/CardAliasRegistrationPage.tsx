@@ -8,6 +8,7 @@ import { Container, Input } from "../../components/common";
 import useCardFetch from "../../hooks/useCardFetch";
 import ROUTE_PATH from "../../constants/routePath";
 import type { Card } from "../../types";
+import SwayWithGlareAnimation from "../../styles/animations/SwayWithGlare";
 
 type CardAliasRegistrationPageProps = {
   onSubmit: (card: Card) => void;
@@ -68,7 +69,9 @@ const CardAliasRegistrationPage = ({ onSubmit }: CardAliasRegistrationPageProps)
     return (
       <Container justify="center">
         <CompleteMessage>카드 등록중...</CompleteMessage>
-        <CardPreview card={previewCard} />
+        <SwayWithGlareAnimation>
+          <CardPreview card={previewCard} />
+        </SwayWithGlareAnimation>
       </Container>
     );
   }
