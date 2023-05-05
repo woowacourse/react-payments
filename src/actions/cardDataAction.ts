@@ -19,7 +19,6 @@ export const getCardListAction = () => {
     errorMessage: '카드 목록이 존재하지 않습니다!',
   };
 };
-
-export const cardAddAction = () => {
-  // asdfasdfadsfadsdasfds
-};
+// export const addCardRequest = ()=>{
+//   return type:
+// }
