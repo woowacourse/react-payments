@@ -21,19 +21,19 @@ const AddCard = ({ cards, setCards }: CardList) => {
   const {
     cardNumbers,
     cardNumbersError,
-    handleCardNumbers,
+    isValidatedCardNumbers,
     expiredDates,
     expiredDatesError,
-    handleExpiredDates,
+    isValidatedExpiredDates,
     cardOwnerName,
     ownerNameError,
-    handleCardOwnerName,
+    isValidatedCardOwnerName,
     securityCode,
     securityCodeError,
-    handleSecurityCode,
+    isValidatedSecurityCode,
     cardPasswords,
     passwordError,
-    handleCardPasswords,
+    isValidatedCardPasswords,
     cardCompany,
     setCardCompany,
     isDisabledForm,
@@ -97,27 +97,27 @@ const AddCard = ({ cards, setCards }: CardList) => {
           <CardNumbers
             cardNumbers={cardNumbers}
             errorMessage={cardNumbersError}
-            handleCardNumbers={handleCardNumbers}
+            isValidatedCardNumbers={isValidatedCardNumbers}
           />
           <CardExpiredDate
             expiredDates={expiredDates}
             errorMessage={expiredDatesError}
-            handleExpiredDates={handleExpiredDates}
+            isValidatedExpiredDates={isValidatedExpiredDates}
           />
           <CardOwnerName
             cardOwnerName={cardOwnerName}
             errorMessage={ownerNameError}
-            handleCardOwnerName={handleCardOwnerName}
+            isValidatedCardOwnerName={isValidatedCardOwnerName}
           />
           <CardSecurityCode
             securityCode={securityCode}
             errorMessage={securityCodeError}
-            handleSecurityCode={handleSecurityCode}
+            isValidatedSecurityCode={isValidatedSecurityCode}
           />
           <CardPassword
             cardPasswords={cardPasswords}
             errorMessage={passwordError}
-            handleCardPasswords={handleCardPasswords}
+            isValidatedCardPasswords={isValidatedCardPasswords}
           />
           <Styled.ButtonWrapper>
             <SubmitButton

@@ -9,23 +9,27 @@ import CardErrorLabel from '../@common/CardErrorLabel';
 interface CardPasswordProps {
   cardPasswords: Array<string>;
   errorMessage: string;
-  handleCardPasswords: (order: number, value: string) => void;
+  isValidatedCardPasswords: (order: number, value: string) => boolean;
 }
 
 const CardPassword = ({
   cardPasswords,
   errorMessage,
-  handleCardPasswords,
+  isValidatedCardPasswords,
 }: CardPasswordProps) => {
   const cardRefs = useContext(RefContext);
 
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const currentOrder = Number(e.target.dataset['order']);
 
-    handleCardPasswords(
-      currentOrder - REF_INDEX.lastSecurityCodeOrder,
-      e.target.value
-    );
+    if (
+      !isValidatedCardPasswords(
+        currentOrder - REF_INDEX.lastSecurityCodeOrder,
+        e.target.value
+      )
+    ) {
+      return;
+    }
 
     focusNextInput(currentOrder);
   };

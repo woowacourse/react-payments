@@ -8,13 +8,13 @@ import CardErrorLabel from '../@common/CardErrorLabel';
 interface CardNumbersProps {
   cardNumbers: Array<string>;
   errorMessage: string;
-  handleCardNumbers: (order: number, value: string) => void;
+  isValidatedCardNumbers: (order: number, value: string) => boolean;
 }
 
 const CardNumbers = ({
   cardNumbers,
   errorMessage,
-  handleCardNumbers,
+  isValidatedCardNumbers,
 }: CardNumbersProps) => {
   const cardRefs = useContext(RefContext);
 
@@ -22,7 +22,7 @@ const CardNumbers = ({
     if (!(e.target instanceof HTMLInputElement)) return;
     const currentOrder = Number(e.target.dataset['order']);
 
-    handleCardNumbers(currentOrder, e.target.value);
+    if (!isValidatedCardNumbers(currentOrder, e.target.value)) return;
 
     focusNextInput(currentOrder);
   };

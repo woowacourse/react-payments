@@ -8,13 +8,13 @@ import CardErrorLabel from '../@common/CardErrorLabel';
 interface SecurityCodeProps {
   securityCode: string;
   errorMessage: string;
-  handleSecurityCode: (value: string) => void;
+  isValidatedSecurityCode: (value: string) => boolean;
 }
 
 const CardSecurityCode = ({
   securityCode,
   errorMessage,
-  handleSecurityCode,
+  isValidatedSecurityCode,
 }: SecurityCodeProps) => {
   const cardRefs = useContext(RefContext);
   const [isShowToolTip, setIsShowToolTip] = useState(false);
@@ -23,7 +23,7 @@ const CardSecurityCode = ({
     if (!(e.target instanceof HTMLInputElement)) return;
     const currentOrder = Number(e.target.dataset['order']);
 
-    handleSecurityCode(e.target.value);
+    if (!isValidatedSecurityCode(e.target.value)) return;
 
     focusNextInput(currentOrder);
   };

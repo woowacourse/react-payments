@@ -8,20 +8,20 @@ import CardErrorLabel from '../@common/CardErrorLabel';
 interface CardOwnerNameProps {
   cardOwnerName: string;
   errorMessage: string;
-  handleCardOwnerName: (value: string) => void;
+  isValidatedCardOwnerName: (value: string) => boolean;
 }
 
 const CardOwnerName = ({
   cardOwnerName,
   errorMessage,
-  handleCardOwnerName,
+  isValidatedCardOwnerName,
 }: CardOwnerNameProps) => {
   const cardRefs = useContext(RefContext);
 
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!(e.target instanceof HTMLInputElement)) return;
 
-    handleCardOwnerName(e.target.value);
+    if (!isValidatedCardOwnerName(e.target.value)) return;
   };
 
   return (

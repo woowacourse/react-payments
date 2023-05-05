@@ -9,13 +9,13 @@ import CardErrorLabel from '../@common/CardErrorLabel';
 interface ExpiredDateProps {
   expiredDates: Array<string>;
   errorMessage: string;
-  handleExpiredDates: (order: number, value: string) => void;
+  isValidatedExpiredDates: (order: number, value: string) => boolean;
 }
 
 const CardExpiredDate = ({
   expiredDates,
   errorMessage,
-  handleExpiredDates,
+  isValidatedExpiredDates,
 }: ExpiredDateProps) => {
   const cardRefs = useContext(RefContext);
 
@@ -23,10 +23,15 @@ const CardExpiredDate = ({
     if (!(e.target instanceof HTMLInputElement)) return;
     const currentOrder = Number(e.target.dataset['order']);
 
-    handleExpiredDates(
-      currentOrder - REF_INDEX.lastCardNumbersOrder,
-      e.target.value
-    );
+    if (
+      !isValidatedExpiredDates(
+        currentOrder - REF_INDEX.lastCardNumbersOrder,
+        e.target.value
+      )
+    ) {
+      return;
+    }
+
     focusNextInput(currentOrder);
   };
 
