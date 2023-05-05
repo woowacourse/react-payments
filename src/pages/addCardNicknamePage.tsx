@@ -1,9 +1,8 @@
 import { useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { InputBox } from "../components";
+import { Input, InputBox } from "../components";
 import { Card } from "../components/@common/card/card";
-import { Input } from "../components/@common/input/Input";
 import { InputGroup } from "../components/@common/input/inputGroup";
 import { PATH } from "../constants/path";
 import { useGenericLocation } from "../hooks/useGenericLocation";
@@ -29,20 +28,20 @@ export function AddCardNicknamePage() {
       <Title>카드 등록이 완료되었습니다</Title>
       <Card {...state} />
       <Form>
-        <InputBox>
-          <InputGroup asChild>
+        <Input>
+          <Input.Group asChild>
             <NicknameInutGroup>
-              <Input
+              <Input.Unit
                 name="nickname"
                 maxLength={15}
                 placeholder="카드의 별명을 입력해주세요 (선택)"
                 ref={nicknameInput}
                 asChild>
                 <NicknameInput />
-              </Input>
+              </Input.Unit>
             </NicknameInutGroup>
-          </InputGroup>
-        </InputBox>
+          </Input.Group>
+        </Input>
         <CompleteButton onClick={completeInputNickname}>확인</CompleteButton>
       </Form>
     </Container>

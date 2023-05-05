@@ -9,8 +9,7 @@ import {
 import { useCardInfoContext } from "../../../hooks/useCardInfoContext";
 import { Date } from "../../../type/input";
 import { validation } from "../../../validation/input";
-import { Input } from "../../@common/input/Input";
-import { InputBox } from "../../@common/input/InputBox";
+import { Input, InputBox } from "../../@common/input/InputBox";
 import { InputGroup } from "../../@common/input/inputGroup";
 import { InputLabel } from "../../@common/input/inputLabel";
 
@@ -32,23 +31,23 @@ export function ExpiredDate() {
   }
 
   return (
-    <InputBox<Date>
+    <Input<Date>
       inputState={{ value: { month, year }, handleChange: changeDateInput }}>
       <Wrapper>
-        <InputLabel>
+        <Input.Label>
           <div>만료일</div>
-        </InputLabel>
-        <InputGroup>
-          <Input
+        </Input.Label>
+        <Input.Group>
+          <Input.Unit
             name="month"
             maxLength={2}
             minLength={TEXT_LENGTH.MONTH}
             placeholder={PLACEHOLDER.MONTH}
             asChild>
             <DateInput />
-          </Input>
+          </Input.Unit>
           <>/</>
-          <Input
+          <Input.Unit
             name="year"
             maxLength={TEXT_LENGTH.YEAR}
             minLength={TEXT_LENGTH.YEAR}
@@ -56,11 +55,11 @@ export function ExpiredDate() {
             onBlur={checkIsCorrectYear}
             asChild>
             <DateInput />
-          </Input>
-        </InputGroup>
+          </Input.Unit>
+        </Input.Group>
         {error && <ErrorMessage>{ERROR_MESSAGE.YEAR}</ErrorMessage>}
       </Wrapper>
-    </InputBox>
+    </Input>
   );
 }
 

@@ -2,23 +2,22 @@ import styled from "styled-components";
 import { LABEL, TEXT_LENGTH } from "../../../constants/inputInfo";
 import { useInputPassword } from "../../../hooks/useInputPassword";
 import { Password } from "../../../type/input";
-import { Input } from "../../@common/input/Input";
-import { InputBox } from "../../@common/input/InputBox";
+import { Input, InputBox } from "../../@common/input/InputBox";
 import { InputLabel } from "../../@common/input/inputLabel";
 
 export function CardPassword() {
   const { password, handleChange } = useInputPassword();
 
   return (
-    <InputBox<Password> inputState={{ value: password, handleChange }}>
+    <Input<Password> inputState={{ value: password, handleChange }}>
       <Wrapper>
-        <InputLabel>
+        <Input.Label>
           <div>비밀번호</div>
-        </InputLabel>
+        </Input.Label>
         <InputWrapper>
           {Object.keys(password).map((cardInput, _) => {
             return (
-              <Input
+              <Input.Unit
                 key={cardInput}
                 name={cardInput}
                 maxLength={TEXT_LENGTH[cardInput.toUpperCase()]}
@@ -26,14 +25,14 @@ export function CardPassword() {
                 type="password"
                 asChild>
                 <PasswordInput />
-              </Input>
+              </Input.Unit>
             );
           })}
           <DefaultDot>•</DefaultDot>
           <DefaultDot>•</DefaultDot>
         </InputWrapper>
       </Wrapper>
-    </InputBox>
+    </Input>
   );
 }
 

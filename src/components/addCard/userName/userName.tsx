@@ -3,8 +3,7 @@ import styled from "styled-components";
 import { INPUT_TYPE, LABEL, PLACEHOLDER } from "../../../constants/inputInfo";
 import { useCardInfoContext } from "../../../hooks/useCardInfoContext";
 import { useCountText } from "../../../hooks/useCountText";
-import { Input } from "../../@common/input/Input";
-import { InputBox } from "../../@common/input/InputBox";
+import { Input, InputBox } from "../../@common/input/InputBox";
 import { InputLabel } from "../../@common/input/inputLabel";
 
 export function UserName() {
@@ -24,20 +23,20 @@ export function UserName() {
   }
 
   return (
-    <InputBox<string>
+    <Input<string>
       inputState={{ value: userName, handleChange: changeNameInput }}>
       <Wrapper>
-        <InputLabel render={renderCountText}>
+        <Input.Label render={renderCountText}>
           <div>카드 소유자명</div>
-        </InputLabel>
-        <Input
+        </Input.Label>
+        <Input.Unit
           maxLength={INPUT_TYPE.MAX_LENGTH}
           placeholder={PLACEHOLDER.NAME}
           name="name">
           <NameInput />
-        </Input>
+        </Input.Unit>
       </Wrapper>
-    </InputBox>
+    </Input>
   );
 }
 

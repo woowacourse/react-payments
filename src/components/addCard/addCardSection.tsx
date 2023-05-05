@@ -3,7 +3,7 @@ import { AddCardForm } from "./addCardForm";
 import { BankMenu } from "../bankModal/bankMenu";
 import { Card } from "../@common/card/card";
 import { ModalBackDrop } from "../@common/modal/modalBackDrop";
-import { ModalBox } from "../@common/modal/modalBox";
+import { Modal, ModalBox } from "../@common/modal/modalBox";
 import { ModalContent } from "../@common/modal/modalContent";
 import { ModalTrigger } from "../@common/modal/modalTrigger";
 import { useCardInfoContext } from "../../hooks/useCardInfoContext";
@@ -26,13 +26,13 @@ export function AddCardSection() {
         bank={selectedBank?.logoName}
       />
       <AddCardForm />
-      <ModalBox defaultOpen>
-        <ModalTrigger />
-        <ModalBackDrop />
-        <ModalContent>
+      <Modal defaultOpen>
+        <Modal.Trigger />
+        <Modal.Backdrop />
+        <Modal.Content>
           <BankMenu selectBank={selectBank} />
-        </ModalContent>
-      </ModalBox>
+        </Modal.Content>
+      </Modal>
     </>
   );
 }

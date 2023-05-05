@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Fragment, useContext } from "react";
-import { Input } from "../../@common/input/Input";
-import { InputBox } from "../../@common/input/InputBox";
+import { InputUnit } from "../../@common/input/Input";
+import { Input, InputBox } from "../../@common/input/InputBox";
 import { InputGroup } from "../../@common/input/inputGroup";
 import { InputLabel } from "../../@common/input/inputLabel";
 import { INPUT_TYPE, LABEL } from "../../../constants/inputInfo";
@@ -17,17 +17,17 @@ export function CardNumber() {
   }
 
   return (
-    <InputBox<CardNumberIndex>
+    <Input<CardNumberIndex>
       inputState={{ value: cardNumber, handleChange: changeNumberInput }}>
       <Wrapper>
-        <InputLabel>
+        <Input.Label>
           <div>카드 번호</div>
-        </InputLabel>
-        <InputGroup>
+        </Input.Label>
+        <Input.Group>
           {Object.keys(cardNumber).map((cardInput, index, original) => {
             return (
               <Fragment key={cardInput}>
-                <Input
+                <Input.Unit
                   name={cardInput}
                   type={
                     checkIsPasswordType(cardInput)
@@ -38,14 +38,14 @@ export function CardNumber() {
                   minLength={4}
                   asChild>
                   <CustomInput />
-                </Input>
+                </Input.Unit>
                 {index < original.length - 1 && INPUT_TYPE.BAR}
               </Fragment>
             );
           })}
-        </InputGroup>
+        </Input.Group>
       </Wrapper>
-    </InputBox>
+    </Input>
   );
 }
 

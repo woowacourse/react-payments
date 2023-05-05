@@ -1,5 +1,8 @@
 import { PropsWithChildren } from "react";
 import { ModalProvider } from "../../../contexts/modal";
+import { ModalBackDrop } from "./modalBackDrop";
+import { ModalContent } from "./modalContent";
+import { ModalTrigger } from "./modalTrigger";
 
 interface ModalState {
   modalOpen: boolean;
@@ -21,3 +24,9 @@ export function ModalBox(props: PropsWithChildren<ModalProps>) {
     </ModalProvider>
   );
 }
+
+export const Modal = Object.assign(ModalBox, {
+  Backdrop: ModalBackDrop,
+  Trigger: ModalTrigger,
+  Content: ModalContent,
+});

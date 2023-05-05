@@ -2,8 +2,7 @@ import styled from "styled-components";
 import { WarningIc } from "../../../assets";
 import { LABEL, TEXT_LENGTH } from "../../../constants/inputInfo";
 import { useInputCode } from "../../../hooks/useInputCode";
-import { Input } from "../../@common/input/Input";
-import { InputBox } from "../../@common/input/InputBox";
+import { Input, InputBox } from "../../@common/input/InputBox";
 import { InputGroup } from "../../@common/input/inputGroup";
 import { InputLabel } from "../../@common/input/inputLabel";
 
@@ -11,23 +10,23 @@ export function SecurityCode() {
   const { code, handleChange } = useInputCode();
 
   return (
-    <InputBox<string> inputState={{ value: code, handleChange }}>
+    <Input<string> inputState={{ value: code, handleChange }}>
       <Wrapper>
-        <InputLabel>
+        <Input.Label>
           <div>보안코드</div>
-        </InputLabel>
-        <InputGroup>
-          <Input
+        </Input.Label>
+        <Input.Group>
+          <Input.Unit
             maxLength={TEXT_LENGTH.CODE}
             minLength={TEXT_LENGTH.CODE}
             type="password"
             name="code">
             <SecurityCodeInput />
-          </Input>
-        </InputGroup>
+          </Input.Unit>
+        </Input.Group>
         <WarningIcon />
       </Wrapper>
-    </InputBox>
+    </Input>
   );
 }
 
