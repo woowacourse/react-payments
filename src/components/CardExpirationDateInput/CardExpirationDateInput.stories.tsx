@@ -1,19 +1,25 @@
-import GlobalStyle from "../../styles/GlobalStyle";
+import { Meta, StoryObj } from "@storybook/react";
 import CardExpirationDateInput from "./CardExpirationDateInput";
 
-export default {
+const meta: Meta<typeof CardExpirationDateInput> = {
   title: "CardExpirationDateInput",
   component: CardExpirationDateInput,
 };
 
-export const Default = () => (
-  <>
-    <GlobalStyle />
-    <CardExpirationDateInput
-      expirationDate={{ month: "", year: "" }}
-      error={false}
-      onChange={() => {}}
-      onBlur={() => {}}
-    ></CardExpirationDateInput>
-  </>
-);
+export default meta;
+
+type Story = StoryObj<typeof CardExpirationDateInput>;
+
+export const Default: Story = {
+  args: {
+    expirationDate: { month: "", year: "" },
+    expirationError: false,
+  },
+};
+
+export const Error: Story = {
+  args: {
+    expirationDate: { month: "13", year: "23" },
+    expirationError: true,
+  },
+};

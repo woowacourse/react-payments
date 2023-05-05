@@ -1,7 +1,10 @@
 import styled from "styled-components";
-import { Card } from "../../types";
+import { Card, CardCompany } from "../../types";
+import { ReactComponent as ICChip } from "../../assets/ic-chip.svg";
+import { memo } from "react";
+import { cardMap } from "../../constant/Card";
 
-type PreviewCard = Pick<Card, "cardNumber" | "ownerName" | "expirationDate">;
+type PreviewCard = Pick<Card, "cardNumber" | "ownerName" | "expirationDate" | "cardCompany">;
 
 type CardPreviewProps = {
   card: PreviewCard;
@@ -9,49 +12,25 @@ type CardPreviewProps = {
 };
 
 const CardPreview = ({ card, animation }: CardPreviewProps) => {
-  const { cardNumber, ownerName, expirationDate } = card;
+  const { cardCompany, cardNumber, ownerName, expirationDate } = card;
   const { transition = "", transform = "" } = animation ?? {};
 
   return (
-    <CardLayout transition={transition} transform={transform}>
-      <ICChip width={31} height={24} viewBox="0 0 31 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect
-          x={0.375}
-          y={0.375}
-          width={30.25}
-          height={22.25}
-          rx={3.625}
-          fill="#9AA04E"
-          stroke="black"
-          strokeWidth={0.75}
-        />
-        <path d="M0 7.75H9.5" stroke="black" strokeWidth={0.5} />
-        <path
-          d="M21.5 22.5L21 21.0084L20.5 19.5168V18.0252V16.5336L21 15L20.5 12.5559V11.0643V9.57271L21.3333 7.6"
-          stroke="black"
-          strokeWidth={0.5}
-        />
-        <path
-          d="M9 23L9.5 21.4984L10 19.9968V18.4951L10 16.9935L9.5 15L10 12.9892V11.4876V9.98595L9.5 7.5"
-          stroke="black"
-          strokeWidth={0.5}
-        />
-        <path d="M9 0.5L10 2.56621L10 4.11627V5.66633L9.5 7.742" stroke="black" strokeWidth={0.5} />
-        <path d="M21.1055 7.75H31" stroke="black" strokeWidth={0.5} />
-        <path d="M0 14.75H9.75544" stroke="black" strokeWidth={0.5} />
-        <path d="M10 19.5L12.5 20H15.5L18 20L20.5 19.5" stroke="black" strokeWidth={0.5} />
-        <path d="M10 3.5L12.5 3L15.5 3L18 3L20.5 3.5" stroke="black" strokeWidth={0.5} />
-        <path d="M22.5 0.5L21.5 2L20.5 3.5V4.5" stroke="black" strokeWidth={0.5} />
-        <line x1={21} y1={14.75} x2={31} y2={14.75} stroke="black" strokeWidth={0.5} />
-      </ICChip>
+    <CardLayout transition={transition} transform={transform} cardCompany={cardCompany}>
+      <CardHeader>
+        <span>{cardCompany}</span>
+      </CardHeader>
+      <Div>
+        <ICChip />
+      </Div>
       <NumberContainer>
-        <span>{cardNumber.firstGroup}</span>
-        <span>{cardNumber.secondGroup}</span>
-        <span>{"•".repeat(cardNumber.thirdGroup.length)}</span>
-        <span>{"•".repeat(cardNumber.fourthGroup.length)}</span>
+        <NumberBox space="2px">{cardNumber.firstGroup}</NumberBox>
+        <NumberBox space="2px">{cardNumber.secondGroup}</NumberBox>
+        <NumberBox space="-5px">{"•".repeat(cardNumber.thirdGroup.length)}</NumberBox>
+        <NumberBox space="-5px">{"•".repeat(cardNumber.fourthGroup.length)}</NumberBox>
       </NumberContainer>
       <InfoContainer>
-        <Span>{ownerName ? ownerName : "NAME"}</Span>
+        <OwnerName>{ownerName ? ownerName : "NAME"}</OwnerName>
         <span>
           {expirationDate.month ? expirationDate.month : "MM"} / {expirationDate.year ? expirationDate.year : "YY"}
         </span>
@@ -60,17 +39,26 @@ const CardPreview = ({ card, animation }: CardPreviewProps) => {
   );
 };
 
-export default CardPreview;
+const areEqual = (prevProps: any, nextProps: any): boolean => {
+  return (
+    prevProps.card.cardCompany === nextProps.card.cardCompany &&
+    prevProps.card.cardNumber === nextProps.card.cardNumber &&
+    prevProps.card.ownerName === nextProps.card.ownerName &&
+    prevProps.card.expirationDate === nextProps.card.expirationDate
+  );
+};
+export default memo(CardPreview, areEqual);
 
-const CardLayout = styled.li<{ transition: string; transform: string }>`
+const CardLayout = styled.div<{ transition: string; transform: string; cardCompany: CardCompany }>`
   position: relative;
+  z-index: 3;
 
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   gap: 4px;
 
-  background-color: #333333;
+  background-color: ${({ cardCompany }) => (cardCompany ? cardMap.get(cardCompany)?.color : "#333333")};
 
   min-height: 133px;
   width: 213px;
@@ -90,23 +78,36 @@ const CardLayout = styled.li<{ transition: string; transform: string }>`
   }
 `;
 
-const ICChip = styled.svg`
+const CardHeader = styled.div`
+  position: absolute;
+
+  top: 12px;
+  left: 12px;
+
+  font-size: 16px;
+  letter-spacing: 1.5px;
+
+  z-index: 2;
+`;
+
+const Div = styled.div`
   position: absolute;
 
   top: 50px;
   left: 14px;
 `;
+
 const NumberContainer = styled.div`
   display: flex;
   justify-content: space-around;
 
   width: 100%;
+`;
 
-  span {
-    text-align: center;
-    width: 40px;
-    letter-spacing: 2px;
-  }
+const NumberBox = styled.span<{ space: string }>`
+  text-align: center;
+  width: 40px;
+  letter-spacing: ${({ space }) => space};
 `;
 
 const InfoContainer = styled.div`
@@ -118,7 +119,7 @@ const InfoContainer = styled.div`
   font-size: 12px;
 `;
 
-const Span = styled.span`
+const OwnerName = styled.span`
   width: 100px;
   overflow: hidden;
 `;

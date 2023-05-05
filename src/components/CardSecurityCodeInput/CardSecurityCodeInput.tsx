@@ -1,11 +1,21 @@
+import { memo } from "react";
+import { isNumeric } from "../../validator/Validator";
 import { InputContainer, Input, Label } from "../common";
 
 type CardSecurityCodeInputProp = {
   securityCode: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  setSecurityCode: (value: string) => void;
 };
 
-const CardSecurityCodeInput = ({ securityCode, onChange }: CardSecurityCodeInputProp) => {
+const CardSecurityCodeInput = ({ securityCode, setSecurityCode }: CardSecurityCodeInputProp) => {
+  const onChangeSecurityCodeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+
+    if (!isNumeric(value)) return;
+
+    setSecurityCode(value);
+  };
+
   return (
     <Label>
       보안 코드(CVC/CVV)
@@ -20,11 +30,11 @@ const CardSecurityCodeInput = ({ securityCode, onChange }: CardSecurityCodeInput
           minLength={3}
           maxLength={3}
           required
-          onChange={onChange}
+          onChange={onChangeSecurityCodeHandler}
         />
       </InputContainer>
     </Label>
   );
 };
 
-export default CardSecurityCodeInput;
+export default memo(CardSecurityCodeInput);

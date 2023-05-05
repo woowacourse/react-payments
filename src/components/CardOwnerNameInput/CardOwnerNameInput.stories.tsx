@@ -1,14 +1,18 @@
-import GlobalStyle from "../../styles/GlobalStyle";
+import { Meta, StoryObj } from "@storybook/react";
 import CardOwnerNameInput from "./CardOwnerNameInput";
 
-export default {
+const meta: Meta<typeof CardOwnerNameInput> = {
   title: "CardOwnerNameInput",
   component: CardOwnerNameInput,
 };
 
-export const Default = () => (
-  <>
-    <GlobalStyle />
-    <CardOwnerNameInput ownerName="" nameLength={0} onChange={() => {}}></CardOwnerNameInput>
-  </>
-);
+export default meta;
+
+type Story = StoryObj<typeof CardOwnerNameInput>;
+
+export const Default: Story = {
+  args: {
+    ownerName: "",
+    nameLength: 0,
+  },
+};

@@ -1,13 +1,12 @@
+import { useContext } from "react";
 import AppBar from "../../components/AppBar/AppBar";
-import CardList from "../../components/CardLIst/CardList";
+import CardList from "../../components/CardList/CardList";
 import { Container } from "../../components/common";
-import { Card } from "../../types";
+import { GlobalContext } from "../../context/GlobalProvider";
 
-type CardListPageProps = {
-  cards: Card[];
-};
+const CardListPage = () => {
+  const { cards } = useContext(GlobalContext);
 
-const CardListPage = ({ cards }: CardListPageProps) => {
   return (
     <Container>
       <AppBar title="보유카드" />

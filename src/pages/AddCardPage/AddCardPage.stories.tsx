@@ -1,5 +1,4 @@
 import { Layout } from "../../App";
-import GlobalStyle from "../../styles/GlobalStyle";
 import AddCardPage from "./AddCardPage";
 
 export default {
@@ -9,9 +8,8 @@ export default {
 
 export const Default = () => (
   <>
-    <GlobalStyle />
     <Layout>
-      <AddCardPage addCard={() => {}} />
+      <AddCardPage />
     </Layout>
   </>
 );

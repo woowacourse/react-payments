@@ -1,21 +1,40 @@
+import { memo } from "react";
 import styled from "styled-components";
 import { InputContainer, Input, Label } from "../common";
 import { CardExpirationDate } from "../../types";
+import { isNumeric, isValidMonth } from "../../validator/Validator";
 
 type CardExpirationDateInputProps = {
   expirationDate: CardExpirationDate;
-  error: boolean;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  expirationError: boolean;
+  setExpirationDate: (value: CardExpirationDate) => void;
+  setError: (value: boolean) => void;
 };
 
-const CardExpirationDateInput = ({ expirationDate, error, onChange, onBlur }: CardExpirationDateInputProps) => {
+const CardExpirationDateInput = ({
+  expirationDate,
+  expirationError,
+  setExpirationDate,
+  setError,
+}: CardExpirationDateInputProps) => {
   const { month, year } = expirationDate;
+
+  const onChangeExpirationDatehandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = e.target;
+
+    if (!isNumeric(value)) return;
+
+    setExpirationDate({ ...expirationDate, [name]: value });
+
+    if (name === "month") {
+      setError(isValidMonth(value) ? false : true);
+    }
+  };
 
   return (
     <Label>
       만료일
-      <InputContainer width="137px" border={error ? "3px solid #f09c9c" : "none"}>
+      <InputContainer width="137px" border={expirationError ? "3px solid #f09c9c" : "none"}>
         <Input
           value={month}
           name="month"
@@ -28,10 +47,9 @@ const CardExpirationDateInput = ({ expirationDate, error, onChange, onBlur }: Ca
           minLength={2}
           maxLength={2}
           required
-          onChange={onChange}
-          onBlur={onBlur}
+          onChange={onChangeExpirationDatehandler}
         />
-        <Span>/</Span>
+        <Slash>/</Slash>
         <Input
           value={year}
           name="year"
@@ -44,10 +62,10 @@ const CardExpirationDateInput = ({ expirationDate, error, onChange, onBlur }: Ca
           minLength={2}
           maxLength={2}
           required
-          onChange={onChange}
+          onChange={onChangeExpirationDatehandler}
         />
       </InputContainer>
-      {error && <ErrorMessage>날짜 입력 형식이 잘못되었습니다.</ErrorMessage>}
+      {expirationError && <ErrorMessage>날짜 입력 형식이 잘못되었습니다.</ErrorMessage>}
     </Label>
   );
 };
@@ -64,8 +82,8 @@ export const ErrorMessage = styled.div`
   color: rgb(33, 33, 33);
 `;
 
-const Span = styled.span`
+const Slash = styled.span`
   color: #737373;
 `;
 
-export default CardExpirationDateInput;
+export default memo(CardExpirationDateInput);

@@ -1,16 +1,37 @@
+import { memo, useState } from "react";
 import { CardNumber } from "../../types";
+import { isFulfilledObject, isFulfilledString, isNumeric, isTheOtherGroupFulfilled } from "../../validator/Validator";
 import { ErrorMessage } from "../CardExpirationDateInput/CardExpirationDateInput";
 import { InputContainer, Input, Label } from "../common";
 
 type CardNumberInputProps = {
   cardNumber: CardNumber;
-  error: boolean;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  setCardNumber: (value: CardNumber) => void;
 };
 
-const CardNumberInput = ({ cardNumber, error, onChange, onBlur }: CardNumberInputProps) => {
+const CardNumberInput = ({ cardNumber, setCardNumber }: CardNumberInputProps) => {
   const { firstGroup, secondGroup, thirdGroup, fourthGroup } = cardNumber;
+  const [error, setError] = useState<boolean>(false);
+
+  const onChangeCardNumberHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = e.target;
+
+    if (!isNumeric(value)) return;
+    setCardNumber({ ...cardNumber, [name]: value });
+
+    if (isTheOtherGroupFulfilled(cardNumber, name) && isFulfilledString(value, 4) && error) setError(false);
+  };
+
+  const onBlurCardNumberHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+
+    if (!isFulfilledString(value, 4) && !error) {
+      setError(true);
+      return;
+    }
+
+    if (isFulfilledObject(cardNumber, 4) && error) setError(false);
+  };
 
   return (
     <Label>
@@ -27,9 +48,8 @@ const CardNumberInput = ({ cardNumber, error, onChange, onBlur }: CardNumberInpu
           minLength={4}
           maxLength={4}
           required
-          autoFocus
-          onChange={onChange}
-          onBlur={onBlur}
+          onChange={onChangeCardNumberHandler}
+          onBlur={onBlurCardNumberHandler}
         />
         <span>-</span>
         <Input
@@ -43,8 +63,8 @@ const CardNumberInput = ({ cardNumber, error, onChange, onBlur }: CardNumberInpu
           minLength={4}
           maxLength={4}
           required
-          onChange={onChange}
-          onBlur={onBlur}
+          onChange={onChangeCardNumberHandler}
+          onBlur={onBlurCardNumberHandler}
         />
         <span>-</span>
         <Input
@@ -58,8 +78,8 @@ const CardNumberInput = ({ cardNumber, error, onChange, onBlur }: CardNumberInpu
           minLength={4}
           maxLength={4}
           required
-          onChange={onChange}
-          onBlur={onBlur}
+          onChange={onChangeCardNumberHandler}
+          onBlur={onBlurCardNumberHandler}
         />
         <span>-</span>
         <Input
@@ -73,8 +93,8 @@ const CardNumberInput = ({ cardNumber, error, onChange, onBlur }: CardNumberInpu
           minLength={4}
           maxLength={4}
           required
-          onChange={onChange}
-          onBlur={onBlur}
+          onChange={onChangeCardNumberHandler}
+          onBlur={onBlurCardNumberHandler}
         />
       </InputContainer>
       {error && <ErrorMessage>카드번호 입력 형식이 잘못되었습니다.</ErrorMessage>}
@@ -82,4 +102,8 @@ const CardNumberInput = ({ cardNumber, error, onChange, onBlur }: CardNumberInpu
   );
 };
 
-export default CardNumberInput;
+const areEqual = (prevState: any, nextState: any) => {
+  return prevState.cardNumber === nextState.cardNumber;
+};
+
+export default memo(CardNumberInput, areEqual);

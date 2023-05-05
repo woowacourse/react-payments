@@ -1,4 +1,4 @@
-import { Card, CardNumber } from "../types";
+import { CardNumber } from "../types";
 
 export const isNumeric = (value: string) => {
   const allowOnlyNumber = /^[0-9]*$/;
@@ -16,8 +16,30 @@ export const isValidMonth = (value: string) => {
 
 export const isValidOwnerName = (value: string) => {
   const allowAlphabetAndBlank = /^[A-Za-z\s]*$/;
+  const regexStartsWithSpace = /^\s/;
+  const regexDuplicateSpaces = /\s{2,}/g;
 
-  return allowAlphabetAndBlank.test(value);
+  const isValid =
+    (allowAlphabetAndBlank.test(value) || regexDuplicateSpaces.test(value)) && !regexStartsWithSpace.test(value);
+
+  return isValid;
+};
+
+export const isValidCardName = (value: string) => {
+  const allowStringAndBlank = /^[A-Za-zㄱ-힣\s]*$/;
+  const regexStartsWithSpace = /^\s/;
+  const regexDuplicateSpaces = /\s{2,}/g;
+
+  const isValid =
+    (allowStringAndBlank.test(value) || regexDuplicateSpaces.test(value)) && !regexStartsWithSpace.test(value);
+
+  return isValid;
+};
+
+export const isEndsWithSpace = (value: string) => {
+  const regexEndsWithSpace = /\s$/;
+
+  return regexEndsWithSpace.test(value);
 };
 
 export const isFulfilledObject = (obj: Record<string, string>, length: number) => {

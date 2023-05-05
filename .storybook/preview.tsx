@@ -1,16 +1,7 @@
 import React from "react";
 import { MemoryRouter } from "react-router";
 import type { Preview } from "@storybook/react";
-
-const customViewports = {
-  Default: {
-    name: "Default",
-    styles: {
-      width: "375px",
-      height: "700px",
-    },
-  },
-};
+import GlobalStyle from "../src/styles/GlobalStyle";
 
 const preview: Preview = {
   parameters: {
@@ -21,19 +12,24 @@ const preview: Preview = {
         date: /Date$/,
       },
     },
-    viewport: {
-      viewports: { ...customViewports },
-      defaultViewport: "Defalut",
-    },
   },
+  decorators: [
+    (Story) => (
+      <MemoryRouter initialEntries={["/"]}>
+        <GlobalStyle />
+        <Story />
+      </MemoryRouter>
+    ),
+  ],
 };
 
 export default preview;
 
-export const decorators = [
-  (Story) => (
-    <MemoryRouter initialEntries={["/"]}>
-      <Story />
-    </MemoryRouter>
-  ),
-];
+// export const decorators = [
+//   (Story) => (
+//     <MemoryRouter initialEntries={["/"]}>
+//       <GlobalStyle />
+//       <Story />
+//     </MemoryRouter>
+//   ),
+// ];
