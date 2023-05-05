@@ -6,7 +6,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const RegisterCardNickName = () => {
-  const [, { addCard }] = useUserCards();
+  const {
+    actions: { addCard },
+  } = useUserCards();
   const navigate = useNavigate();
   const location = useLocation();
 

@@ -6,7 +6,12 @@ type CardProviderAction = {
   addCard: Dispatch<Card>;
 };
 
-const userCardContext = createContext<[Card[], CardProviderAction] | undefined>(undefined);
+type UserCardContext = {
+  userCards: Card[];
+  actions: CardProviderAction;
+};
+
+const userCardContext = createContext<UserCardContext | undefined>(undefined);
 
 export function UserCardProvider({ children }: PropsWithChildren) {
   const [userCards, setUserCards] = useState<Card[]>(() => CardDB.getCards());
@@ -19,7 +24,7 @@ export function UserCardProvider({ children }: PropsWithChildren) {
   };
 
   return (
-    <userCardContext.Provider value={[userCards, actions]}>{children}</userCardContext.Provider>
+    <userCardContext.Provider value={{ userCards, actions }}>{children}</userCardContext.Provider>
   );
 }
 

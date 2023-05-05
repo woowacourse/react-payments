@@ -6,7 +6,7 @@ import { Fragment } from 'react';
 import { useUserCards } from 'contexts/UserCardProvider';
 
 function Home() {
-  const [userCards] = useUserCards();
+  const { userCards } = useUserCards();
   const navigate = useNavigate();
 
   const goRegister = () => {
