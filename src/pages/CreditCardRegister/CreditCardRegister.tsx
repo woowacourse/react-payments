@@ -72,7 +72,7 @@ function CreditCardRegister() {
           <CreditCardPasswordInput />
           {
             isLoading
-              ? <LoadingSpinner />
+              ? <LoadingSpinner label="카드를 등록중입니다." />
               : (
                 <ControlButton
                   disabled={isCreditCardError}

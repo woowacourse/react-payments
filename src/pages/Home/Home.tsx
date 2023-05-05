@@ -2,11 +2,19 @@ import CreditCard from 'components/CreditCard';
 import { useNavigate } from 'react-router-dom';
 import { useCreditCardList } from 'hooks/useCreditCardList';
 import LoadingSpinner from 'components/LoadingSpinner';
+import { useEffect } from 'react';
 import * as S from './style';
 
 function Home() {
   const navigate = useNavigate();
-  const { isLoading, creditCardList, initCreditCardList } = useCreditCardList();
+  const {
+    isLoading, loadCardList, creditCardList, initCreditCardList
+  } = useCreditCardList();
+
+  useEffect(() => {
+    loadCardList();
+  }, []);
+
   return (
     <S.HomeLayout>
       <S.HomeHeader>

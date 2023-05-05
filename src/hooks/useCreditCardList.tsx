@@ -2,13 +2,14 @@
 import {
   addCard, getCards, resetCards, updateNicknameByNumber
 } from 'api/mockAPI';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as T from 'types';
 
 interface UseCreditCard {
   isLoading: boolean;
   creditCardList: T.CreditCard[];
+  loadCardList: () => void;
   saveCreditCard: (creditCard: T.CreditCard) => void;
   initCreditCardList: () => void;
   updateNickname: (number: string, newNickname: string) => void;
@@ -58,11 +59,7 @@ export const useCreditCardList = (): UseCreditCard => {
     navigate('/');
   };
 
-  useEffect(() => {
-    loadCardList();
-  }, []);
-
   return {
-    isLoading, creditCardList, saveCreditCard, initCreditCardList, updateNickname
+    isLoading, creditCardList, loadCardList, saveCreditCard, initCreditCardList, updateNickname
   };
 };
