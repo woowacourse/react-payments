@@ -18,9 +18,10 @@ import CardOwnerName from '../CardOwnerName/CardOwnerName';
 import CardPassword from '../CardPassword/CardPassword';
 import ExpiredDate from '../ExpiredDate/ExpiredDate';
 import Layout from '../Layout/Layout';
-import BottomSheet from '../BottomSheet/BottomSheet';
+import CardComapnyIcons from '../CardCompanyIcons/CardCompanyIcons';
 import SecurityCode from '../SecurityCode/SecurityCode';
 import { v4 as uuidv4 } from 'uuid';
+import Modal from 'tami-modal';
 
 const AddCardForm = () => {
   const { cardNumbers, checkCardNumbers, onSetFirstCardNumbers } =
@@ -117,11 +118,17 @@ const AddCardForm = () => {
         </form>
       </Layout>
       {isBottomSheetOpen && (
-        <BottomSheet
-          onSetCardCompany={onSetCardCompany}
-          closeBottomSheet={onCloseBottomSheet}
-          onSetFirstCardNumbers={onSetFirstCardNumbers}
-        />
+        <Modal
+          isOpen={isBottomSheetOpen}
+          modalLocation="bottom"
+          onCloseModal={onCloseBottomSheet}
+        >
+          <CardComapnyIcons
+            onSetCardCompany={onSetCardCompany}
+            closeBottomSheet={onCloseBottomSheet}
+            onSetFirstCardNumbers={onSetFirstCardNumbers}
+          />
+        </Modal>
       )}
     </>
   );

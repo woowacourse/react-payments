@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from '@storybook/react';
-import BottomSheet from './BottomSheet';
+import CardComapnyIcons from './CardCompanyIcons';
 
 const meta = {
-  component: BottomSheet,
-  title: 'Section/BottomSheet',
-} satisfies Meta<typeof BottomSheet>;
+  component: CardComapnyIcons,
+  title: 'Section/CardComapnyIcons',
+} satisfies Meta<typeof CardComapnyIcons>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
