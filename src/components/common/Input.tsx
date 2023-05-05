@@ -1,42 +1,58 @@
+import { forwardRef } from "react";
 import styled from "styled-components";
 
-export interface InputProps {
+interface InputProps {
   label: string;
-  $width: string;
   placeholder: string;
-  $textPosition: string;
   type: string;
   error?: { isValid: boolean; errorMessage: string };
-  handleInput?: (e: any) => void;
+  handleInput?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  $width: string;
+  $textPosition: string;
 }
 
-export const Input = ({ label, $width, placeholder, $textPosition, type, handleInput, error }: InputProps) => {
-  const { isValid, errorMessage } = error ?? { isValid: true, errorMessage: "" };
-  return (
-    <Column>
-      <InputField
-        placeholder={placeholder}
-        id={label}
-        name={label}
-        $width={$width}
-        onInput={handleInput}
-        $textPosition={$textPosition}
-        type={type}
-      />
-      <ErrorMessage>{isValid ? "" : errorMessage}</ErrorMessage>
-    </Column>
-  );
-};
+const Input = forwardRef(
+  (
+    {
+      label,
+      placeholder,
+      type,
+      handleInput,
+      error = { isValid: true, errorMessage: "" },
+      $width,
+      $textPosition,
+    }: InputProps,
+    ref: React.ForwardedRef<HTMLInputElement>
+  ) => {
+    return (
+      <Column>
+        <InputField
+          placeholder={placeholder}
+          id={label}
+          name={label}
+          onInput={handleInput}
+          type={type}
+          $width={$width}
+          $textPosition={$textPosition}
+          ref={ref}
+        />
+        <ErrorMessage>{error.isValid ? "" : error.errorMessage}</ErrorMessage>
+      </Column>
+    );
+  }
+);
 
 const Column = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-const InputField = styled.input<{ $textPosition: string; $width: string }>`
+const InputField = styled.input<{
+  $textPosition: string;
+  $width: string;
+}>`
   height: 45px;
   width: ${(props) => props.$width};
-  background-color: #ecebf1;
   border-radius: 7px;
   text-align: ${(props) => props.$textPosition};
 
@@ -44,6 +60,8 @@ const InputField = styled.input<{ $textPosition: string; $width: string }>`
   font-weight: 500;
 
   padding: 0 10px;
+
+  background-color: #ecebf1;
 
   &::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -62,3 +80,5 @@ const ErrorMessage = styled.div`
 
   font-size: 11px;
 `;
+
+export default Input;

@@ -1,13 +1,16 @@
-import { Container } from "../common/Container";
-import { Input } from "../common/Input";
-import { InputLabel } from "../common/InputLabel";
-import { useRef, useCallback } from "react";
+import Container from "../common/Container";
+import Input from "../common/Input";
+import InputLabel from "../common/InputLabel";
 import styled from "styled-components";
+
+import React from "react";
+import { useRef, useCallback } from "react";
+import { usePasswordInput } from "../../hook/usePasswordInput";
 
 import { PASSWORD_MAXLEGNTH, NUMBER_REGEX } from "../../constants";
 
-interface PasswordProps {
-  setIsCompleted: (isCompleted: boolean) => void;
+interface PasswordInputProps {
+  setIsPassWordCompleted: (isCompleted: boolean) => void;
 }
 
 const passwordInfo = {
@@ -20,33 +23,32 @@ const passwordInfo = {
 };
 
 const cannotInput = (text: string): boolean => {
-  return text.length > PASSWORD_MAXLEGNTH || !/\d/g.test(text);
+  return text.length > PASSWORD_MAXLEGNTH || !new RegExp(NUMBER_REGEX).test(text);
 };
 
-export const PasswordInput = ({ setIsCompleted }: PasswordProps) => {
-  const isInputsCompleted = useRef<boolean[]>(new Array(passwordInfo.length).fill(false));
+const PasswordInput = ({ setIsPassWordCompleted }: PasswordInputProps) => {
+  const isPassWordsCompleted = useRef<boolean[]>(new Array(passwordInfo.length).fill(false));
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const { updateInputFlags, moveFocus } = usePasswordInput({ isPassWordsCompleted, inputRef, setIsPassWordCompleted });
 
   const handleInput = useCallback(
     (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
       const text = e.target.value;
       if (text.length === 0) {
-        isInputsCompleted.current[index] = false;
-        setIsCompleted(false);
+        isPassWordsCompleted.current[index] = false;
+        setIsPassWordCompleted(false);
       }
 
       if (cannotInput(text)) {
-        console.log(text.length > PASSWORD_MAXLEGNTH || !NUMBER_REGEX.test(text));
         e.target.value = text.slice(0, -1);
         return;
       }
 
-      isInputsCompleted.current[index] = false;
-      if (text.length === PASSWORD_MAXLEGNTH) isInputsCompleted.current[index] = true;
-
-      setIsCompleted(false);
-      if (isInputsCompleted.current.every((isCompleted) => isCompleted)) setIsCompleted(true);
+      updateInputFlags(index, text);
+      moveFocus(index, text);
     },
-    [setIsCompleted, cannotInput, isInputsCompleted]
+    [setIsPassWordCompleted, cannotInput, isPassWordsCompleted]
   );
 
   return (
@@ -54,7 +56,7 @@ export const PasswordInput = ({ setIsCompleted }: PasswordProps) => {
       <InputLabel text="비밀번호" name="password" />
       <Row>
         <Input {...passwordInfo} handleInput={handleInput(0)} label="password1" />
-        <Input {...passwordInfo} handleInput={handleInput(1)} label="password2" />
+        <Input {...passwordInfo} handleInput={handleInput(1)} label="password2" ref={inputRef} />
         <HiddenPassword>●</HiddenPassword>
         <HiddenPassword>●</HiddenPassword>
       </Row>
@@ -79,3 +81,5 @@ const HiddenPassword = styled.div`
   font-size: 9px;
   font-weight: 500;
 `;
+
+export default React.memo(PasswordInput);

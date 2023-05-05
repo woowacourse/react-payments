@@ -1,14 +1,27 @@
-import { Container } from "../common/Container";
-import { Input } from "../common/Input";
-import { InputLabel } from "../common/InputLabel";
+import Container from "../common/Container";
+import Input from "../common/Input";
+import InputLabel from "../common/InputLabel";
+
+import React from "react";
+import { useContext, useRef } from "react";
+import { NewCardContext } from "../../contexts/NewCardContext";
+
 import { EXPRIYDATE_MAXLEGNTH, EXPRIYDATE_REGEX, TWO_TO_NINE_REGEX } from "../../constants";
+import { ValidFlagType } from "../../types/input";
 
 interface ExpiryDateInputProps {
-  isValid: boolean;
-  setIsValid: (isValid: boolean) => void;
-  setExpiryDate: (value: string) => void;
-  setIsCompleted: (isCompleted: boolean) => void;
+  isInputsValid: ValidFlagType;
+  setExpriyDateCompleted: (isCompleted: boolean) => void;
+  setIsExpiryDateValid: (isValid: boolean) => void;
 }
+
+const paddingSingleDigitMonth = (expriyDate: string) => {
+  if (expriyDate.length === 2 && !new RegExp(TWO_TO_NINE_REGEX).test(expriyDate[0])) {
+    return `${"0"}${expriyDate}`;
+  }
+
+  return expriyDate;
+};
 
 const ExpiryDateInfo = {
   label: "expiryDate",
@@ -18,33 +31,27 @@ const ExpiryDateInfo = {
   $textPosition: "center",
 };
 
-export const ExpiryDateInput = ({ isValid, setExpiryDate, setIsCompleted, setIsValid }: ExpiryDateInputProps) => {
-  const paddingSingleDigitMonth = (expriyDate: string) => {
-    if (expriyDate.length === 2 && !new RegExp(TWO_TO_NINE_REGEX).test(expriyDate[0])) {
-      return `${"0"}${expriyDate}`;
-    }
-
-    return expriyDate;
-  };
+const ExpiryDateInput = ({ isInputsValid, setExpriyDateCompleted, setIsExpiryDateValid }: ExpiryDateInputProps) => {
+  const { setExpiryDate } = useContext(NewCardContext);
+  const postText = useRef("");
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.replaceAll(" / ", "");
+    const value = e.target.value.replaceAll("/", "").replaceAll(" ", "");
 
     if (value.length > EXPRIYDATE_MAXLEGNTH) {
-      e.target.value = e.target.value.slice(0, -1);
+      e.target.value = postText.current;
       return;
     }
 
     const expriyDate = paddingSingleDigitMonth(value);
 
     e.target.value = (expriyDate.match(new RegExp(EXPRIYDATE_REGEX)) ?? []).join(" / ");
+    postText.current = e.target.value;
+
     setExpiryDate(e.target.value);
 
-    setIsCompleted(false);
-    setIsValid(true);
-    if (value.length === EXPRIYDATE_MAXLEGNTH) {
-      setIsCompleted(true);
-    }
+    setIsExpiryDateValid(true);
+    setExpriyDateCompleted(value.length === EXPRIYDATE_MAXLEGNTH);
   };
 
   return (
@@ -54,10 +61,12 @@ export const ExpiryDateInput = ({ isValid, setExpiryDate, setIsCompleted, setIsV
         {...ExpiryDateInfo}
         handleInput={handleInput}
         error={{
-          isValid: isValid,
+          isValid: isInputsValid.isExpiryDateValid,
           errorMessage: "유효한 만료일을 입력해주세요.",
         }}
       />
     </Container>
   );
 };
+
+export default React.memo(ExpiryDateInput);

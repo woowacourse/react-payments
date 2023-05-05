@@ -1,4 +1,4 @@
-import { CardType } from "../types/card";
+import { CardType } from "./types/card";
 
 export const validateExpiryDate = (expiryDate: string): boolean => {
   const [month, year] = expiryDate.split(" / ").map((each) => Number(each));

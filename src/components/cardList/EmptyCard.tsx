@@ -1,8 +1,9 @@
-import styled from "styled-components";
 import Card from "../common/Card";
+import styled from "styled-components";
+
 import { Link } from "react-router-dom";
 
-export const EmptyCard = () => {
+const EmptyCard = () => {
   return (
     <Link to="/addCard">
       <Container>
@@ -27,3 +28,5 @@ const Container = styled.div`
   height: 125px;
   margin-bottom: 46px;
 `;
+
+export default EmptyCard;

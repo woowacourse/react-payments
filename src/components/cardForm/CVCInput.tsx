@@ -1,14 +1,15 @@
-import { Container } from "../common/Container";
-import { Input } from "../common/Input";
-import { InputLabel } from "../common/InputLabel";
+import Container from "../common/Container";
+import Input from "../common/Input";
+import InputLabel from "../common/InputLabel";
 import styled from "styled-components";
 
+import React from "react";
 import { useCallback } from "react";
 
 import { CVC_MAXLEGNTH, NUMBER_REGEX } from "../../constants";
 
-interface CVCProps {
-  setIsCompleted: (isCompleted: boolean) => void;
+interface CVCInputProps {
+  setIsCVCCompleted: (isCompleted: boolean) => void;
 }
 
 const CVCInfo = {
@@ -20,10 +21,10 @@ const CVCInfo = {
 };
 
 const cannotInput = (text: string): boolean => {
-  return text.length > CVC_MAXLEGNTH || !NUMBER_REGEX.test(text);
+  return text.length > CVC_MAXLEGNTH || !new RegExp(NUMBER_REGEX).test(text);
 };
 
-export const CVCInput = ({ setIsCompleted }: CVCProps) => {
+const CVCInput = ({ setIsCVCCompleted }: CVCInputProps) => {
   const handleInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       if (cannotInput(e.target.value)) {
@@ -31,12 +32,9 @@ export const CVCInput = ({ setIsCompleted }: CVCProps) => {
         return;
       }
 
-      setIsCompleted(false);
-      if (e.target.value.length === CVC_MAXLEGNTH) {
-        setIsCompleted(true);
-      }
+      setIsCVCCompleted(e.target.value.length === CVC_MAXLEGNTH);
     },
-    [setIsCompleted]
+    [setIsCVCCompleted]
   );
 
   return (
@@ -83,3 +81,5 @@ const HelpIcon = styled.div`
   font-weight: 700;
   color: darkgray;
 `;
+
+export default React.memo(CVCInput);

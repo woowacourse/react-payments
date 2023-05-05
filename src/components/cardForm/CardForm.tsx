@@ -1,60 +1,65 @@
+import CVCInput from "./CVCInput";
+import CardNumberInput from "./CardNumberInput";
+import ExpiryDateInput from "./ExpiryDateInput";
+import OwnerInput from "./OwnerInput";
+import PasswordInput from "./PasswordInput";
 import styled from "styled-components";
-import { CardType } from "../../types/card";
 
-import { CVCInput } from "./CVCInput";
-import { CardNumberInput } from "./CardNumberInput";
-import { ExpiryDateInput } from "./ExpiryDateInput";
-import { OwnerInput } from "./OwnerInput";
-import { PasswordInput } from "./PasswordInput";
+import { useContext, FormEvent } from "react";
+import { useCheckForm } from "../../hook/useCheckForm";
+import { useHelpSubmitForm } from "../../hook/useHelpSubmitForm";
 
-import useAddCardForm from "../../hook/useAddCardForm";
+import { CardsContext } from "../../contexts/CardsContext";
 
-interface CardFormProps {
-  cards: CardType[];
-  newCard: CardType;
-  setNewCard: (value: CardType) => void;
-  addNewCard: (newCard: CardType) => void;
-}
+const CardForm = () => {
+  const { cards, addNewCard } = useContext(CardsContext);
 
-export const CardForm = (props: CardFormProps) => {
-  const { numbers, owner } = props.newCard;
   const {
-    handleSubmit,
-
-    setCardNumbers,
-    setExpiryDate,
-    setOwner,
-
-    setCardNumbersCompleted,
+    isInputsCompleted,
+    setIsNumbersCompleted,
     setExpriyDateCompleted,
-    setCVCCompleted,
-    setPasswordCompleted,
+    setIsCVCCompleted,
+    setIsPassWordCompleted,
 
-    setExpiryDateValid,
-    setCardNumbersValid,
-    isInputValid,
+    isInputsValid,
+    setIsNumbersValid,
+    setIsExpiryDateValid,
 
     isAllCompleted,
-  } = useAddCardForm(props);
+  } = useCheckForm();
+
+  const { isAllValid, makeCardFormData, moveToHome } = useHelpSubmitForm({
+    cards,
+    setIsNumbersValid,
+    setIsExpiryDateValid,
+  });
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!isAllCompleted()) return;
+    if (!isAllValid()) return;
+
+    const cardInfo = makeCardFormData(e.target as HTMLFormElement);
+    addNewCard(cardInfo);
+    moveToHome();
+  };
 
   return (
     <Form onSubmit={handleSubmit}>
       <CardNumberInput
-        cardNumbers={numbers}
-        isValid={isInputValid.isCardNumbersValid}
-        setIsValid={setCardNumbersValid}
-        setCardNumbers={setCardNumbers}
-        setIsCompleted={setCardNumbersCompleted}
+        isInputsValid={isInputsValid}
+        setIsNumbersCompleted={setIsNumbersCompleted}
+        setIsNumbersValid={setIsNumbersValid}
       />
       <ExpiryDateInput
-        isValid={isInputValid.isExpiryDateValid}
-        setIsValid={setExpiryDateValid}
-        setExpiryDate={setExpiryDate}
-        setIsCompleted={setExpriyDateCompleted}
+        isInputsValid={isInputsValid}
+        setExpriyDateCompleted={setExpriyDateCompleted}
+        setIsExpiryDateValid={setIsExpiryDateValid}
       />
-      <OwnerInput owner={owner} setOwner={setOwner} />
-      <CVCInput setIsCompleted={setCVCCompleted} />
-      <PasswordInput setIsCompleted={setPasswordCompleted} />
+      <OwnerInput />
+      <CVCInput setIsCVCCompleted={setIsCVCCompleted} />
+      <PasswordInput setIsPassWordCompleted={setIsPassWordCompleted} />
       <SubmitButton $color={isAllCompleted() ? "#525252" : "#D3D3D3"} type="submit">
         다음
       </SubmitButton>
@@ -77,3 +82,5 @@ const SubmitButton = styled.button<{ $color: string }>`
 
   color: ${(props) => props.$color};
 `;
+
+export default CardForm;

@@ -1,61 +1,49 @@
-import styled from "styled-components";
-import { CardType } from "../../types/card";
 import Card from "../common/Card";
-import { CARDNUMBERS_REGEX, DEFAULT_EXPRIYDATE, DEFAULT_NAME } from "../../constants";
+import styled from "styled-components";
 
-import { useMemo } from "react";
+import { CardType } from "../../types/card";
+import { DEFAULT_NAME, DEFAULT_BRAND, FONT_COLORMAP, BACKGROUND_COLORMAP } from "../../constants";
+
+import { getShownNumbers, gethiddenNumbers, normalizeExpiryDate } from "../../utils/card";
 
 interface CardProps {
   card: CardType;
+  handleClick?: (e: React.MouseEvent<HTMLElement> | React.TouchEvent<HTMLElement>) => void;
 }
 
-export const CardItem = ({ card }: CardProps) => {
-  const memorizedNumbers = useMemo((): string => {
-    const shownNumbers = card.numbers.slice(0, 8);
-    return (shownNumbers.match(new RegExp(CARDNUMBERS_REGEX)) ?? []).join(" ");
-  }, [card.numbers]);
-
-  const memorizedHideNumbers = useMemo((): string => {
-    const hiddenNumbers = "●".repeat(card.numbers.slice(8).length);
-    return (hiddenNumbers.match(new RegExp(CARDNUMBERS_REGEX)) ?? []).join(" ");
-  }, [card.numbers]);
-
-  const memoizedName = useMemo(() => {
-    return card.owner ? card.owner : DEFAULT_NAME;
-  }, [card.owner]);
-
-  const memoizedExpiryDate = useMemo(() => {
-    return card.expiryDate ? card.expiryDate : DEFAULT_EXPRIYDATE;
-  }, [card.expiryDate]);
+const CardItem = ({ card, handleClick }: CardProps) => {
+  const { numbers, expiryDate, owner = DEFAULT_NAME, brand = DEFAULT_BRAND } = card;
 
   return (
-    <Card $backgroundColor={card.color}>
-      <Container>
+    <Card $backgroundColor={BACKGROUND_COLORMAP[brand]}>
+      <Container $color={FONT_COLORMAP[brand]} onClick={handleClick}>
+        <Brand>{brand}</Brand>
         <IcChip />
         <Numbers>
-          <ShownNumbers>{memorizedNumbers}</ShownNumbers>
-          <HiddenNumbers>{memorizedHideNumbers}</HiddenNumbers>
+          <ShownNumbers>{getShownNumbers(numbers)}</ShownNumbers>
+          <HiddenNumbers>{gethiddenNumbers(numbers)}</HiddenNumbers>
         </Numbers>
         <InfoWrapper>
-          <Name>{memoizedName}</Name>
-          <ExpiryDate>{memoizedExpiryDate}</ExpiryDate>
+          <Name>{owner}</Name>
+          <ExpiryDate>{normalizeExpiryDate(expiryDate)}</ExpiryDate>
         </InfoWrapper>
       </Container>
     </Card>
   );
 };
 
-const Container = styled.div`
+const Container = styled.div<{ $color: string }>`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+
   width: 183px;
   height: 100px;
-  color: white;
 
   font-size: 10px;
   font-weight: 500;
+  color: ${(props) => props.$color};
 
-  gap: 4px;
   white-space: pre;
 `;
 
@@ -64,7 +52,13 @@ const IcChip = styled.div`
   height: 26px;
   border-radius: 4px;
   background-color: #cbba64;
-  margin-top: 32px;
+
+  margin-top: 17px;
+`;
+
+const Brand = styled.div`
+  font-size: 11px;
+  font-weight: 400;
 `;
 
 const Numbers = styled.div`
@@ -118,3 +112,5 @@ const ExpiryDate = styled.div`
   margin-right: 2px;
   font-size: 11px;
 `;
+
+export default CardItem;
