@@ -31,7 +31,7 @@ const meta: Meta<typeof CardNumberInput> = {
 export default meta;
 type Story = StoryObj<typeof CardNumberInput>;
 
-const CardNumberInputwithHooks = () => {
+const CardNumberInputWithHooks = () => {
   const [cardNumber, setCardNumber] = useState<CardNumber>({
     firstGroup: "",
     secondGroup: "",
@@ -48,6 +48,6 @@ const CardNumberInputwithHooks = () => {
 
 export const Default: Story = {
   render: () => {
-    return <CardNumberInputwithHooks />;
+    return <CardNumberInputWithHooks />;
   },
 };
