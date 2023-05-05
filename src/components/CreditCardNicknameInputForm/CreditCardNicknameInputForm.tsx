@@ -59,15 +59,13 @@ function CreditCardNicknameInputForm() {
           placeholder="카드 별명을 입력하세요"
         />
       </S.CreditCardNicknameInputFormLayout>
-      {
-        isLoading
-          ? <LoadingSpinner />
-          : (
-            <ControlButton onClick={submitNicknameInput}>
-              {nickname.length > 0 ? '확인' : '건너뛰기'}
-            </ControlButton>
-          )
-      }
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : (
+        <ControlButton onClick={submitNicknameInput}>
+          {nickname.length > 0 ? '확인' : '건너뛰기'}
+        </ControlButton>
+      )}
     </>
   );
 }

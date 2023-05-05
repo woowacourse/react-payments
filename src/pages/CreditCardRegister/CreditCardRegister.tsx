@@ -55,35 +55,30 @@ function CreditCardRegister() {
             }}
           />
         </FlexBox>
-        {
-          !modalOpen && (
-            <FlexBox justifyContent="center">
-              <S.CreditCardChangeButton type="button" onClick={openModal}>
-                카드사 변경하기
-              </S.CreditCardChangeButton>
-            </FlexBox>
-          )
-        }
+        {!modalOpen && (
+          <FlexBox justifyContent="center">
+            <S.CreditCardChangeButton type="button" onClick={openModal}>
+              카드사 변경하기
+            </S.CreditCardChangeButton>
+          </FlexBox>
+        )}
         <S.CreditCardRegisterForm>
           <CreditCardNumberInput />
           <CreditCardExpiryInput />
           <CreditCardOwnerInput />
           <CreditCardCVCInput />
           <CreditCardPasswordInput />
-          {
-            isLoading
-              ? <LoadingSpinner label="카드를 등록중입니다." />
-              : (
-                <ControlButton
-                  disabled={isCreditCardError}
-                  type="button"
-                  onClick={handleSubmit}
-                >
-                  다음
-                </ControlButton>
-              )
-
-          }
+          {isLoading ? (
+            <LoadingSpinner label="카드를 등록중입니다." />
+          ) : (
+            <ControlButton
+              disabled={isCreditCardError}
+              type="button"
+              onClick={handleSubmit}
+            >
+              다음
+            </ControlButton>
+          )}
         </S.CreditCardRegisterForm>
       </CreditCardRegisterLayout>
       <Modal modalOpen={modalOpen}>

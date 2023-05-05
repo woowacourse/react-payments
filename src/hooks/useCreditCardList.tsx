@@ -1,6 +1,9 @@
 /* eslint-disable no-restricted-globals */
 import {
-  addCard, getCards, resetCards, updateNicknameByNumber
+  addCard,
+  getCards,
+  resetCards,
+  updateNicknameByNumber,
 } from 'api/mockAPI';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -60,6 +63,11 @@ export const useCreditCardList = (): UseCreditCard => {
   };
 
   return {
-    isLoading, creditCardList, loadCardList, saveCreditCard, initCreditCardList, updateNickname
+    isLoading,
+    creditCardList,
+    loadCardList,
+    saveCreditCard,
+    initCreditCardList,
+    updateNickname,
   };
 };

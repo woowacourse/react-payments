@@ -10,9 +10,12 @@ interface Response {
 
 export const loadLocalCreditCards = () => JSON.parse(localStorage.getItem('creditCards') || '[]') as CreditCard[];
 
-export const getCards = () => new Promise<Response>((resolve) => setTimeout(() => resolve({
-  data: JSON.stringify(loadLocalCreditCards()),
-}), 500));
+export const getCards = () => new Promise<Response>((resolve) => setTimeout(
+  () => resolve({
+    data: JSON.stringify(loadLocalCreditCards()),
+  }),
+  500
+));
 
 export const addCard = (creditCard: CreditCard) => new Promise<Response>((resolve) => {
   setTimeout(() => {

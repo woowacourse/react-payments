@@ -22,24 +22,24 @@ function Home() {
         <S.InitButton onClick={initCreditCardList}>🗑</S.InitButton>
       </S.HomeHeader>
       <S.CreditCardList>
-        {
-          isLoading
-            ? <LoadingSpinner />
-            : creditCardList.map((creditCard) => (
-              <div key={creditCard.number}>
-                <CreditCard
-                  fullFilled
-                  creditCard={{
-                    companyId: creditCard.companyId,
-                    number: creditCard.number,
-                    expiry: creditCard.expiry,
-                    owner: creditCard.owner,
-                  }}
-                />
-                <S.CreditCardNickname>{creditCard.nickname}</S.CreditCardNickname>
-              </div>
-            ))
-        }
+        {isLoading ? (
+          <LoadingSpinner />
+        ) : (
+          creditCardList.map((creditCard) => (
+            <div key={creditCard.number}>
+              <CreditCard
+                fullFilled
+                creditCard={{
+                  companyId: creditCard.companyId,
+                  number: creditCard.number,
+                  expiry: creditCard.expiry,
+                  owner: creditCard.owner,
+                }}
+              />
+              <S.CreditCardNickname>{creditCard.nickname}</S.CreditCardNickname>
+            </div>
+          ))
+        )}
       </S.CreditCardList>
       <S.RegisterCreditCardContainer>
         {!creditCardList.length && (
