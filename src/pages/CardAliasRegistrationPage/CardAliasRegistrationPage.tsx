@@ -73,6 +73,27 @@ const CardAliasRegistrationPage = ({ onSubmit }: CardAliasRegistrationPageProps)
     );
   }
 
+  if (isComplete) {
+    return (
+      <Container justify="center">
+        <CompleteMessage>카드 등록 완료✅</CompleteMessage>
+        <CardPreview card={previewCard} />
+        <NavigateButtonContainer>
+          <Link to={ROUTE_PATH.root}>
+            <NavigateButton type="button" $backgroundColor="#ececec">
+              홈으로
+            </NavigateButton>
+          </Link>
+          <Link to={ROUTE_PATH.addCard}>
+            <NavigateButton type="button" $backgroundColor="#d4e7fd">
+              추가 등록하기
+            </NavigateButton>
+          </Link>
+        </NavigateButtonContainer>
+      </Container>
+    );
+  }
+
   return (
     <Container justify="center">
       <CompleteMessage>
