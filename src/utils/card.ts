@@ -21,8 +21,7 @@ export const newCardList = (recentList: CardType[], data: Omit<CardType, 'id'>) 
     const cardNumberSerial = getSerialNumber(cardNumber);
     const fetchCardNumberSerial = getSerialNumber(data.cardNumber);
 
-    if (cardNumberSerial.includes(fetchCardNumberSerial)) return true;
-    return false;
+    return cardNumberSerial.includes(fetchCardNumberSerial);
   });
 
   if (sameNumbers.length > 0) throw new Error('이미 등록된 카드');
