@@ -5,6 +5,7 @@ import { NewCreditCardPageContent } from './NewCreditCardPageContent';
 const meta = {
   title: 'NewCreditCardPageContent',
   component: NewCreditCardPageContent,
+  tags: ["autodocs"],
   decorators: [
     (Story) => (
       <HashRouter>

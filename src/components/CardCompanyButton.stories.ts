@@ -5,6 +5,7 @@ const meta = {
   title: 'CardCompanyButton',
   component: CardCompanyButton,
   argTypes: { handleOnClick: { action: 'clicked' } },
+  tags: ['autodocs'],
 } satisfies Meta<typeof CardCompanyButton>;
 
 export default meta;

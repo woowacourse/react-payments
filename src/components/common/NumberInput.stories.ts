@@ -4,6 +4,7 @@ import { NumberInput } from './NumberInput';
 const meta = {
   title: 'CVCNumberInput',
   component: NumberInput,
+  tags: ['autodocs'],
 } satisfies Meta<typeof NumberInput>;
 
 export default meta;

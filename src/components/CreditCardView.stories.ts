@@ -4,6 +4,7 @@ import { CreditCardView } from './CreditCardView';
 const meta = {
   title: 'CreditCardView',
   component: CreditCardView,
+  tags: ['autodocs'],
 } satisfies Meta<typeof CreditCardView>;
 
 type Story = StoryObj<typeof meta>;

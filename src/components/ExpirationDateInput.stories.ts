@@ -4,6 +4,7 @@ import { ExpirationDateInput } from './ExpirationDateInput';
 const meta = {
   title: 'ExpirationDateInput',
   component: ExpirationDateInput,
+  tags: ['autodocs'],
 } satisfies Meta<typeof ExpirationDateInput>;
 
 export default meta;

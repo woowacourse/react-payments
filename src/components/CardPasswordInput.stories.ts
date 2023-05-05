@@ -4,6 +4,7 @@ import { CardPasswordInput } from './CardPasswordInput';
 const meta = {
   title: 'CardPasswordInput',
   component: CardPasswordInput,
+  tags: ['autodocs'],
 } satisfies Meta<typeof CardPasswordInput>;
 
 export default meta;
