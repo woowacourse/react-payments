@@ -26,9 +26,7 @@ const CardExpirationDateInput = ({
 
     setExpirationDate({ ...expirationDate, [name]: value });
 
-    if (name === "month") {
-      setError(isValidMonth(value) ? false : true);
-    }
+    if (name === "month") setError(isValidMonth(value) ? false : true);
   };
 
   return (
