@@ -3,6 +3,7 @@ import { withThemeFromJSXProvider } from '@storybook/addon-styling';
 import GlobalStyle from '../src/styles/GlobalStyle';
 import theme from '../src/styles/theme';
 import { ThemeProvider } from 'styled-components';
+import { withRouter } from 'storybook-addon-react-router-v6';
 
 export const decorators = [
   withThemeFromJSXProvider({
@@ -12,6 +13,7 @@ export const decorators = [
     },
     Provider: ThemeProvider,
   }),
+  withRouter,
 ];
 
 export const preview: Preview = {

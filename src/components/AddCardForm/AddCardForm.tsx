@@ -118,19 +118,17 @@ const AddCardForm = () => {
           </Styled.ButtonWrapper>
         </form>
       </Layout>
-      {isBottomSheetOpen && (
-        <Modal
-          isOpen={isBottomSheetOpen}
-          modalLocation="bottom"
-          onCloseModal={onCloseBottomSheet}
-        >
-          <CardComapnyIcons
-            onSetCardCompany={onSetCardCompany}
-            closeBottomSheet={onCloseBottomSheet}
-            onSetFirstCardNumbers={onSetFirstCardNumbers}
-          />
-        </Modal>
-      )}
+      <Modal
+        isOpen={isBottomSheetOpen}
+        modalLocation="bottom"
+        onCloseModal={onCloseBottomSheet}
+      >
+        <CardComapnyIcons
+          onSetCardCompany={onSetCardCompany}
+          closeBottomSheet={onCloseBottomSheet}
+          onSetFirstCardNumbers={onSetFirstCardNumbers}
+        />
+      </Modal>
     </>
   );
 };
