@@ -10,7 +10,7 @@
   align-items: center;
   height: 45px;
   margin-top: 8px;
-  background: var(--background-input);
+  background: var(--color-secondary);
   border-radius: 8px;
 }
 
