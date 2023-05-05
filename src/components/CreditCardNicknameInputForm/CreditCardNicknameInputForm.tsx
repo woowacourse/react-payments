@@ -4,6 +4,7 @@ import { ChangeEvent, useState } from 'react';
 import useCreditCardForm from 'hooks/useCreditCardForm';
 import ControlButton from 'components/ControlButton';
 import { useCreditCardList } from 'hooks/useCreditCardList';
+import LoadingSpinner from 'components/LoadingSpinner';
 import * as S from './style';
 
 const NicknameInput = styled.input`
@@ -26,7 +27,7 @@ const NicknameInput = styled.input`
 
 function CreditCardNicknameInputForm() {
   const { creditCardForm } = useCreditCardForm();
-  const { updateNickname } = useCreditCardList();
+  const { isLoading, updateNickname } = useCreditCardList();
   const [nickname, setNickname] = useState('');
 
   const handleNicknameInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -58,9 +59,15 @@ function CreditCardNicknameInputForm() {
           placeholder="카드 별명을 입력하세요"
         />
       </S.CreditCardNicknameInputFormLayout>
-      <ControlButton onClick={submitNicknameInput}>
-        {nickname.length > 0 ? '확인' : '건너뛰기'}
-      </ControlButton>
+      {
+        isLoading
+          ? <LoadingSpinner />
+          : (
+            <ControlButton onClick={submitNicknameInput}>
+              {nickname.length > 0 ? '확인' : '건너뛰기'}
+            </ControlButton>
+          )
+      }
     </>
   );
 }

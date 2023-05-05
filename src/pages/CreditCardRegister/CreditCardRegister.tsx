@@ -9,6 +9,7 @@ import CreditCardRegisterTopSheet from 'components/CreditCardRegisterTopSheet';
 import FlexBox from 'components/FlexBox';
 import { useCreditCardList } from 'hooks/useCreditCardList';
 import { Modal } from '@gabrielyoon7/simple-modal';
+import LoadingSpinner from 'components/LoadingSpinner';
 import CreditCardNumberInput from './inputs/CreditCardNumberInput';
 import CreditCardExpiryInput from './inputs/CreditCardExpiryInput';
 import CreditCardOwnerInput from './inputs/CreditCardOwnerInput';
@@ -21,7 +22,7 @@ function CreditCardRegister() {
   const navigate = useNavigate();
   const { modalOpen, openModal, closeModal } = useModal();
   const { creditCardForm, initCreditCardForm, isCreditCardError } = useCreditCardForm();
-  const { saveCreditCard } = useCreditCardList();
+  const { isLoading, saveCreditCard } = useCreditCardList();
 
   const handleSubmit = () => {
     if (isCreditCardError) return;
@@ -54,26 +55,35 @@ function CreditCardRegister() {
             }}
           />
         </FlexBox>
-        {!modalOpen && (
-          <FlexBox justifyContent="center">
-            <S.CreditCardChangeButton type="button" onClick={openModal}>
-              카드사 변경하기
-            </S.CreditCardChangeButton>
-          </FlexBox>
-        )}
+        {
+          !modalOpen && (
+            <FlexBox justifyContent="center">
+              <S.CreditCardChangeButton type="button" onClick={openModal}>
+                카드사 변경하기
+              </S.CreditCardChangeButton>
+            </FlexBox>
+          )
+        }
         <S.CreditCardRegisterForm>
           <CreditCardNumberInput />
           <CreditCardExpiryInput />
           <CreditCardOwnerInput />
           <CreditCardCVCInput />
           <CreditCardPasswordInput />
-          <ControlButton
-            disabled={isCreditCardError}
-            type="button"
-            onClick={handleSubmit}
-          >
-            다음
-          </ControlButton>
+          {
+            isLoading
+              ? <LoadingSpinner />
+              : (
+                <ControlButton
+                  disabled={isCreditCardError}
+                  type="button"
+                  onClick={handleSubmit}
+                >
+                  다음
+                </ControlButton>
+              )
+
+          }
         </S.CreditCardRegisterForm>
       </CreditCardRegisterLayout>
       <Modal modalOpen={modalOpen}>

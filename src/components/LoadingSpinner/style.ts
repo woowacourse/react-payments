@@ -1,31 +1,49 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const pgfill = keyframes`
+  0% {
+    background-image: linear-gradient(#FFF 20px, transparent 0),
+      linear-gradient(#FFF 20px, transparent 0),
+      linear-gradient(#FFF 20px, transparent 0),
+      linear-gradient(#FFF 20px, transparent 0);
+  }
+  25% {
+    background-image: linear-gradient(#FF3D00 20px, transparent 0),
+      linear-gradient(#FFF 20px, transparent 0),
+      linear-gradient(#FFF 20px, transparent 0),
+      linear-gradient(#FFF 20px, transparent 0);
+  }
+  50% {
+    background-image: linear-gradient(#FFF 20px, transparent 0),
+      linear-gradient(#FF3D00 20px, transparent 0),
+      linear-gradient(#FFF 20px, transparent 0),
+      linear-gradient(#FFF 20px, transparent 0);
+  }
+  75% {
+    background-image: linear-gradient(#FFF 20px, transparent 0),
+      linear-gradient(#FFF 20px, transparent 0),
+      linear-gradient(#FF3D00 20px, transparent 0),
+      linear-gradient(#FFF 20px, transparent 0);
+  }
+  100% {
+    background-image: linear-gradient(#FFF 20px, transparent 0),
+      linear-gradient(#FFF 20px, transparent 0),
+      linear-gradient(#FFF 20px, transparent 0),
+      linear-gradient(#FF3D00 20px, transparent 0);
+  }
+`;
 
 export const LoadingSpinner = styled.span`
-  .loader {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    display: block;
-    margin:15px auto;
-    position: relative;
-    background: #FFF;
-    box-shadow: -24px 0 #FFF, 24px 0 #FFF;
-    box-sizing: border-box;
-    animation: shadowPulse 2s linear infinite;
-  }
-
-  @keyframes shadowPulse {
-    33% {
-      background: #FFF;
-      box-shadow: -24px 0 #FF3D00, 24px 0 #FFF;
-    }
-    66% {
-      background: #FF3D00;
-      box-shadow: -24px 0 #FFF, 24px 0 #FFF;
-    }
-    100% {
-      background: #FFF;
-      box-shadow: -24px 0 #FFF, 24px 0 #FF3D00;
-    }
-  }
+  display: block;
+  position: relative;
+  height: 20px;
+  width: 140px;
+  background-image: linear-gradient(#FFF 20px, transparent 0),
+    linear-gradient(#FFF 20px, transparent 0),
+    linear-gradient(#FFF 20px, transparent 0),
+    linear-gradient(#FFF 20px, transparent 0);
+  background-repeat: no-repeat;
+  background-size: 20px auto;
+  background-position: 0 0, 40px 0, 80px 0, 120px 0;
+  animation: ${pgfill} 1s linear infinite;
 `;

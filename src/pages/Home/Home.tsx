@@ -1,11 +1,12 @@
 import CreditCard from 'components/CreditCard';
 import { useNavigate } from 'react-router-dom';
 import { useCreditCardList } from 'hooks/useCreditCardList';
+import LoadingSpinner from 'components/LoadingSpinner';
 import * as S from './style';
 
 function Home() {
   const navigate = useNavigate();
-  const { creditCardList, initCreditCardList } = useCreditCardList();
+  const { isLoading, creditCardList, initCreditCardList } = useCreditCardList();
   return (
     <S.HomeLayout>
       <S.HomeHeader>
@@ -13,20 +14,24 @@ function Home() {
         <S.InitButton onClick={initCreditCardList}>🗑</S.InitButton>
       </S.HomeHeader>
       <S.CreditCardList>
-        {creditCardList.map((creditCard) => (
-          <div key={creditCard.number}>
-            <CreditCard
-              fullFilled
-              creditCard={{
-                companyId: creditCard.companyId,
-                number: creditCard.number,
-                expiry: creditCard.expiry,
-                owner: creditCard.owner,
-              }}
-            />
-            <S.CreditCardNickname>{creditCard.nickname}</S.CreditCardNickname>
-          </div>
-        ))}
+        {
+          isLoading
+            ? <LoadingSpinner />
+            : creditCardList.map((creditCard) => (
+              <div key={creditCard.number}>
+                <CreditCard
+                  fullFilled
+                  creditCard={{
+                    companyId: creditCard.companyId,
+                    number: creditCard.number,
+                    expiry: creditCard.expiry,
+                    owner: creditCard.owner,
+                  }}
+                />
+                <S.CreditCardNickname>{creditCard.nickname}</S.CreditCardNickname>
+              </div>
+            ))
+        }
       </S.CreditCardList>
       <S.RegisterCreditCardContainer>
         {!creditCardList.length && (
