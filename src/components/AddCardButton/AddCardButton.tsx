@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import ROUTE_PATH from "../../constants/routePath";
 
 const AddCardButton = () => {
   return (
-    <Link to="/addCard">
+    <Link to={ROUTE_PATH.addCard}>
       <Button>✚</Button>
     </Link>
   );
