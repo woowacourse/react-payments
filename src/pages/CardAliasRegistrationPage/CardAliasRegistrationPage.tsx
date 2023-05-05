@@ -64,6 +64,15 @@ const CardAliasRegistrationPage = ({ onSubmit }: CardAliasRegistrationPageProps)
     );
   }
 
+  if (isLoading) {
+    return (
+      <Container justify="center">
+        <CompleteMessage>카드 등록중...</CompleteMessage>
+        <CardPreview card={previewCard} />
+      </Container>
+    );
+  }
+
   return (
     <Container justify="center">
       <CompleteMessage>
