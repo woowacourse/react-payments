@@ -7,6 +7,9 @@
 - AddCard
   - 뒤로가기 버튼 클릭 시 MyCard 페이지로 이동한다.
   - 다음 버튼 클릭 시 카드를 등록하고 MyCard 페이지로 이동한다.
+- NameCard
+  - 카드의 별칭을 지정한다.
+  - 로딩 컴포넌트를 관리한다.
 
 ## components
 
@@ -40,6 +43,6 @@
 - CardInputForm
   - input 종류에 맞는 예외를 보여준다.
   - card input들을 관리한다.
-- BottomSheet
 - Button
 - CardCompany
+- CardLoading
