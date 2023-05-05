@@ -1,71 +1,81 @@
-import styled from "styled-components";
+import { useContext, useMemo } from "react";
+import styled, { ThemeProvider } from "styled-components";
 import { IcChip } from "../assets";
-import { SEPERATOR_STRING } from "../constants";
+import { ModalDispatchContext } from "../context";
+import { cardCompanyTheme } from "../style/theme";
 import { CardType } from "../types";
+import { getCardNumberArray } from "../utils/card";
 
-const Card = ({ cardNumber, color, ownerName, expiredDate }: CardType) => {
-  const cardNumberArray = cardNumber
-    .replaceAll(SEPERATOR_STRING.cardNumber, " ")
-    .split(" ");
+const Card = ({
+  cardNumber,
+  ownerName,
+  expiredDate,
+  cardCompany,
+}: CardType) => {
+  const cardNumberArray = useMemo(
+    () => getCardNumberArray(cardNumber),
+    [cardNumber]
+  );
+  const { toggleModal } = useContext(ModalDispatchContext);
 
   return (
-    <CardWrapper style={{ background: color }}>
-      <img src={IcChip} alt="ic-chip" />
-      <CardInfoWrapper>
-        <UpInfoWrapper>
-          {cardNumberArray.map((cardNumber, index) => {
-            return (
-              <span
-                key={crypto.randomUUID()}
-                style={{ letterSpacing: index > 1 ? "-3px" : "3px" }}
-              >
-                {cardNumber}
-              </span>
-            );
-          })}
-        </UpInfoWrapper>
-        <BottomInfoWrapper>
-          <span>{ownerName}</span>
-          <span>{expiredDate}</span>
-        </BottomInfoWrapper>
-      </CardInfoWrapper>
-    </CardWrapper>
+    <ThemeProvider theme={cardCompanyTheme[cardCompany]}>
+      <CardWrapper onClick={toggleModal}>
+        <p>{cardCompany}</p>
+        <img src={IcChip} alt="ic-chip" />
+        <CardInfoWrapper>
+          <UpInfoWrapper>
+            {cardNumberArray.map((cardNumber) => (
+              <span key={crypto.randomUUID()}>{cardNumber}</span>
+            ))}
+          </UpInfoWrapper>
+          <BottomInfoWrapper>
+            <span>{ownerName}</span>
+            <span>{expiredDate}</span>
+          </BottomInfoWrapper>
+        </CardInfoWrapper>
+      </CardWrapper>
+    </ThemeProvider>
   );
 };
 
 const CardWrapper = styled.div`
   display: flex;
   flex-direction: column;
-
   align-items: flex-start;
-  width: 208px;
-  height: 123px;
+  width: 213px;
+  height: 133px;
 
+  padding: 15px 14px 0 14px;
   box-sizing: border-box;
 
-  padding: 40px 14px 0 14px;
   border-radius: 5px;
-
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+
+  background: ${(props) => props.theme.main};
+  color: ${(props) => props.theme.point};
+
+  & > p {
+    font-weight: 500;
+    font-size: 12px;
+    margin-bottom: 17px;
+  }
 `;
 
 const CardInfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
   width: 100%;
   height: 55px;
-
-  font-size: 14px;
-  font-weight: 600;
-  color: white;
 
   padding: 8px 5px;
   box-sizing: border-box;
 
+  font-size: 14px;
+
   & > div > span {
-    font-weight: 900;
+    font-weight: 600;
     padding-right: 6px;
   }
 `;

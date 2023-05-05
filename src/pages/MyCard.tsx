@@ -1,32 +1,39 @@
-import Header from "../components/common/Header";
-import Page from "../components/common/Page";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Card from "../components/Card";
-import { getLocalStorage } from "../utils";
-import { CardType } from "../types";
-import { ROUTER_PATH } from "../constants";
+import { useNavigate } from "react-router-dom";
+import { getLocalStorage } from "../utils/localStorage";
+import { ROUTER_PATH } from "../router/path";
+import { Page, Header, Card } from "../components";
 
 const MyCard = () => {
+  const navigate = useNavigate();
   const cards = getLocalStorage("card");
 
   return (
     <Page>
       <Header title="보유카드" isBack={false} />
-      {cards.map((card: CardType) => (
+      {cards.map((card) => (
         <CardWrapper key={crypto.randomUUID()}>
           <Card {...card} />
+          <p>{card.name}</p>
         </CardWrapper>
       ))}
-      <Link to={ROUTER_PATH.AddCard} style={{ textDecoration: "none" }}>
-        <EmptyCardWrapper>+</EmptyCardWrapper>
-      </Link>
+      <EmptyCardWrapper onClick={() => navigate(ROUTER_PATH.AddCard)}>
+        +
+      </EmptyCardWrapper>
     </Page>
   );
 };
 
 const CardWrapper = styled.div`
-  margin-bottom: 46px;
+  margin-bottom: 30px;
+
+  & > p {
+    text-align: center;
+    font-weight: 700;
+    font-size: 14px;
+    color: #575757;
+    margin-top: 17px;
+  }
 `;
 
 const EmptyCardWrapper = styled.div`

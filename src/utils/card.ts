@@ -1,23 +1,43 @@
 import {
+  CARD_COMPANY_NOT_SELECTED_STRING,
   REGEX,
   SEPERATED_CARD_NUMBER_LENGTH,
   SEPERATED_EXPIRED_DATE_LENGTH,
   SEPERATOR_STRING,
 } from "../constants";
+import { CardType } from "../types";
+
+export const getEmptyCard = (): CardType => ({
+  cardNumber: "",
+  expiredDate: "",
+  ownerName: "",
+  cvc: "",
+  password: "",
+  cardCompany: CARD_COMPANY_NOT_SELECTED_STRING,
+  name: "",
+});
 
 export const getReplacedCardNumber = (cardNumber: string) => {
   return cardNumber.length > SEPERATED_CARD_NUMBER_LENGTH.SECOND
     ? cardNumber.substring(0, 12) +
-        cardNumber.substring(12, cardNumber.length).replace(REGEX.number, "•")
+        cardNumber
+          .substring(12, cardNumber.length)
+          .replaceAll(REGEX.globalNumber, "•")
     : cardNumber;
 };
 
 export const getSeperatedCardNumber = (cardNumber: string) => {
-  return cardNumber.length === SEPERATED_CARD_NUMBER_LENGTH.FIRST ||
-    cardNumber.length === SEPERATED_CARD_NUMBER_LENGTH.SECOND ||
-    cardNumber.length === SEPERATED_CARD_NUMBER_LENGTH.THIRD
-    ? cardNumber + SEPERATOR_STRING.cardNumber
+  return cardNumber.length === SEPERATED_CARD_NUMBER_LENGTH.FIRST + 1 ||
+    cardNumber.length === SEPERATED_CARD_NUMBER_LENGTH.SECOND + 1 ||
+    cardNumber.length === SEPERATED_CARD_NUMBER_LENGTH.THIRD + 1
+    ? cardNumber.substring(0, cardNumber.length - 1) +
+        SEPERATOR_STRING.cardNumber +
+        cardNumber[cardNumber.length - 1]
     : cardNumber;
+};
+
+export const getCardNumberArray = (cardNumber: string) => {
+  return cardNumber.replaceAll(SEPERATOR_STRING.cardNumber, " ").split(" ");
 };
 
 export const getSubCardNumber = (cardNumber: string) => {
@@ -31,8 +51,10 @@ export const getSubCardNumber = (cardNumber: string) => {
 };
 
 export const getSeperatedExpiredDate = (expiredDate: string) => {
-  return expiredDate.length === SEPERATED_EXPIRED_DATE_LENGTH
-    ? expiredDate + SEPERATOR_STRING.expiredDate
+  return expiredDate.length === SEPERATED_EXPIRED_DATE_LENGTH + 1
+    ? expiredDate.substring(0, expiredDate.length - 1) +
+        SEPERATOR_STRING.expiredDate +
+        expiredDate[expiredDate.length - 1]
     : expiredDate;
 };
 

@@ -1,36 +1,49 @@
-import { useState } from "react";
-import Card from "../components/Card";
-import CardInputForm from "../components/CardInputForm";
-import Header from "../components/common/Header";
-import Page from "../components/common/Page";
-import { CARD_COLOR } from "../constants";
-import { CardType } from "../types";
+import { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { ModalDispatchContext } from "../context";
+import { ROUTER_PATH } from "../router/path";
 import { getLocalStorage, setLocalStorage } from "../utils";
+import {
+  Page,
+  Header,
+  Card,
+  CardInputForm,
+  BottomSheet,
+  CardCompany,
+} from "../components";
+import { useCard } from "../hooks";
 
 const AddCard = () => {
-  const [newCard, setNewCard] = useState<CardType>({
-    cardNumber: "",
-    expiredDate: "",
-    ownerName: "",
-    cvc: "",
-    password: ["", ""],
-    color: CARD_COLOR[Math.floor(Math.random() * 10)],
-  });
+  const navigate = useNavigate();
+  const [card, setNewCard] = useCard();
+  const { toggleModal } = useContext(ModalDispatchContext);
 
-  const registerCard = () => {
+  useEffect(() => {
+    toggleModal();
+  }, []);
+
+  const handleFormSubmited = () => {
     const cards = getLocalStorage("card");
-    setLocalStorage("card", [...cards, newCard]);
+    setLocalStorage("card", [...cards, card]);
+    navigate(ROUTER_PATH.NameCard);
+  };
+
+  const handleCardCompanyChanged = (newCardCompany: string) => {
+    setNewCard("cardCompany", newCardCompany);
   };
 
   return (
     <Page>
       <Header title="카드 추가" isBack />
-      <Card {...newCard} />
+      <Card {...card} />
       <CardInputForm
-        card={newCard}
-        setCard={setNewCard}
-        onSubmit={registerCard}
+        card={card}
+        setNewCard={setNewCard}
+        onSubmit={handleFormSubmited}
       />
+      <BottomSheet>
+        <CardCompany onChange={handleCardCompanyChanged} />
+      </BottomSheet>
     </Page>
   );
 };

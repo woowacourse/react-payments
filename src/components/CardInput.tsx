@@ -1,33 +1,26 @@
-import { HTMLAttributes } from "react";
+import { forwardRef } from "react";
 import styled from "styled-components";
-import { CARD_INPUT_MAX_LENGTH, CARD_INPUT_MIN_LENGTH } from "../constants";
 
-interface CardInputType extends HTMLAttributes<HTMLInputElement> {
-  id: "cardNumber" | "expiredDate" | "ownerName" | "cvc" | "password";
-  value: number | string | undefined;
+export interface CardInputType
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   width: string;
   isSecured?: boolean;
   isAutoFocus?: boolean;
   isRequired?: boolean;
 }
 
-const CardInput = (props: CardInputType) => {
-  return (
-    <CardInputWrapper
-      id={props.id}
-      value={props.value}
-      width={props.width}
-      type={props.isSecured ? "password" : "text"}
-      autoFocus={props.isAutoFocus}
-      required={props.isRequired}
-      maxLength={CARD_INPUT_MAX_LENGTH[props.id]}
-      minLength={CARD_INPUT_MIN_LENGTH[props.id]}
-      placeholder={props.placeholder}
-      onChange={props.onChange}
-      onKeyDown={props.onKeyDown}
-    />
-  );
-};
+const CardInput = forwardRef<HTMLInputElement[], CardInputType>(
+  (props, ref) => {
+    return (
+      <CardInputWrapper
+        {...props}
+        type={props.isSecured ? "password" : "text"}
+        autoFocus={props.isAutoFocus}
+        required={props.isRequired}
+      />
+    );
+  }
+);
 
 const CardInputWrapper = styled.input`
   width: ${(props) => props.width};

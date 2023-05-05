@@ -1,17 +1,20 @@
-const CARD_INPUT_MAX_LENGTH: Record<string, number> = {
-  cardNumber: 25,
-  expiredDate: 7,
-  ownerName: 30,
-  cvc: 3,
-  password: 1,
-} as const;
+import {
+  BcCard,
+  HanaCard,
+  HyundaiCard,
+  KakaoCard,
+  KbCard,
+  LotteCard,
+  ShinhanCard,
+  WooriCard,
+} from "../assets";
 
-const CARD_INPUT_MIN_LENGTH: Record<string, number> = {
+const CARD_INPUT_LENGTH: Record<string, number> = {
   cardNumber: 25,
   expiredDate: 7,
-  ownerName: 10,
+  ownerName: 12,
   cvc: 3,
-  password: 1,
+  password: 2,
 } as const;
 
 const SEPERATED_CARD_NUMBER_LENGTH: Record<string, number> = {
@@ -32,37 +35,47 @@ const SEPERATOR_STRING = {
   expiredDate: " / ",
 };
 
-const CARD_COLOR = [
-  "red",
-  "pink",
-  "green",
-  "blue",
-  "black",
-  "gray",
-  "yellow",
-  "orange",
-  "aqua",
-  "lime",
-];
-
-const ROUTER_PATH = {
-  MyCard: "/",
-  AddCard: "/AddCard",
-};
-
 const REGEX = {
+  globalNumber: /[0-9]/g,
   number: /^[0-9]+$/,
   english: /^[a-zA-Z]*$/,
 } as const;
 
+const CARD_COMPANY: Record<string, { img?: string }> = {
+  BC카드: {
+    img: BcCard,
+  },
+  신한카드: {
+    img: ShinhanCard,
+  },
+  카카오뱅크: {
+    img: KakaoCard,
+  },
+  현대카드: { img: HyundaiCard },
+  우리카드: {
+    img: WooriCard,
+  },
+  롯데카드: {
+    img: LotteCard,
+  },
+  하나카드: { img: HanaCard },
+  국민카드: {
+    img: KbCard,
+  },
+} as const;
+
+const CARD_COMPANY_NOT_SELECTED_STRING = "카드사선택필요";
+
+const VALID_CARD_INPUT_FORM_LENGTH = 477;
+
 export {
-  CARD_INPUT_MAX_LENGTH,
-  CARD_INPUT_MIN_LENGTH,
+  CARD_INPUT_LENGTH,
   SEPERATED_CARD_NUMBER_LENGTH,
   PASSWORD_DIGIT_INDEX,
-  CARD_COLOR,
-  ROUTER_PATH,
   REGEX,
   SEPERATOR_STRING,
   SEPERATED_EXPIRED_DATE_LENGTH,
+  CARD_COMPANY,
+  CARD_COMPANY_NOT_SELECTED_STRING,
+  VALID_CARD_INPUT_FORM_LENGTH,
 };
