@@ -4,13 +4,14 @@ import { Input } from 'components/common';
 import FormLabel from 'components/common/FormLabel/FormLabel';
 import { Styled as S } from './CardNumberInputs.styles';
 import { useCardNumberInputs } from 'hooks/useCardNumberInputs';
+import { ErrorCaption } from 'components/Form/AddCardForm';
 
 interface CardNumberInputProps {
   valueAndOnChanges: ValueAndOnChange[];
 }
 
 export function CardNumberInputs({ valueAndOnChanges }: CardNumberInputProps) {
-  const { inputs } = useCardNumberInputs(valueAndOnChanges);
+  const { isError, curIndex, inputs } = useCardNumberInputs(valueAndOnChanges);
 
   return (
     <>
@@ -19,12 +20,19 @@ export function CardNumberInputs({ valueAndOnChanges }: CardNumberInputProps) {
         {inputs.map((input, index) => {
           return (
             <Fragment key={index}>
-              <Input {...input} />
+              <S.CardNumberWrapper>
+                <Input {...input} className={isError && index === curIndex ? 'error' : ''} />
+              </S.CardNumberWrapper>
               {index < valueAndOnChanges.length - 1 && <span>-</span>}
             </Fragment>
           );
         })}
       </S.CardNumberContainer>
+      {
+        <ErrorCaption>
+          {isError && '카드 번호를 4자리씩 총 16자리의 숫자로 입력해주세요'}
+        </ErrorCaption>
+      }
     </>
   );
 }

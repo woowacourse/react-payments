@@ -24,7 +24,7 @@ function RegisterCard() {
   );
 }
 
-const CardFormContainer = styled.div`
+export const CardFormContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

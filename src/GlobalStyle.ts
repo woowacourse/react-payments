@@ -8,5 +8,6 @@ export const GlobalStyle = createGlobalStyle`
     --error-text-color: #ff0000;
     --gray-text-color: #969696;
     --light-gray-text-color: #bababa;
+    --primary-error-color: #f5ebf1;
 }
 `;
