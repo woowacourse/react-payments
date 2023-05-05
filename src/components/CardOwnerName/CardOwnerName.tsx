@@ -39,6 +39,7 @@ const CardOwnerName = ({
           onChange={handleCardInputChange}
           value={cardOwnerName}
           placeholder="카드에 표시된 영어 이름을 입력하세요."
+          inputMode="text"
         />
       </Styled.Wrapper>
       <CardErrorLabel errorMessage={errorMessage} />

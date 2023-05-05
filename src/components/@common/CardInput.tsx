@@ -9,6 +9,7 @@ interface CardInputProps {
   order?: number;
   required?: boolean;
   autoFocus?: boolean;
+  inputMode: 'text' | 'numeric';
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 

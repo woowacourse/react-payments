@@ -49,6 +49,7 @@ const CardExpiredDate = ({
           order={4}
           placeholder="MM"
           required={true}
+          inputMode="numeric"
         />
         {expiredDates[0].length === 2 && <Styled.Paragraph>/</Styled.Paragraph>}
         <CardInput
@@ -60,6 +61,7 @@ const CardExpiredDate = ({
           order={5}
           placeholder="YY"
           required={true}
+          inputMode="numeric"
         />
       </Styled.Wrapper>
       <CardErrorLabel errorMessage={errorMessage} />

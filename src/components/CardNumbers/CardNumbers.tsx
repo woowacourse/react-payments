@@ -46,6 +46,7 @@ const CardNumbers = ({
           order={0}
           placeholder={'0000'}
           required={true}
+          inputMode="numeric"
         />
         {cardNumbers[0].length === 4 && <Styled.Paragraph>-</Styled.Paragraph>}
         <CardInput
@@ -57,6 +58,7 @@ const CardNumbers = ({
           order={1}
           placeholder={'0000'}
           required={true}
+          inputMode="numeric"
         />
         {cardNumbers[1].length === 4 && <Styled.Paragraph>-</Styled.Paragraph>}
         <CardInput
@@ -68,6 +70,7 @@ const CardNumbers = ({
           order={2}
           placeholder={'0000'}
           required={true}
+          inputMode="numeric"
         />
         {cardNumbers[2].length === 4 && <Styled.Paragraph>-</Styled.Paragraph>}
         <CardInput
@@ -79,6 +82,7 @@ const CardNumbers = ({
           order={3}
           placeholder={'0000'}
           required={true}
+          inputMode="numeric"
         />
       </Styled.Wrapper>
       <CardErrorLabel errorMessage={errorMessage} />

@@ -48,6 +48,7 @@ const CardSecurityCode = ({
             order={7}
             placeholder="•••"
             required={true}
+            inputMode="numeric"
           />
         </Styled.InputWrapper>
         {isShowToolTip ? (

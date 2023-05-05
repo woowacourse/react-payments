@@ -50,6 +50,7 @@ const CardPassword = ({
             order={8}
             placeholder="•"
             required={true}
+            inputMode="numeric"
           />
         </Styled.PasswordInputWrapper>
         <Styled.PasswordInputWrapper>
@@ -62,6 +63,7 @@ const CardPassword = ({
             order={9}
             placeholder="•"
             required={true}
+            inputMode="numeric"
           />
         </Styled.PasswordInputWrapper>
         <Styled.Paragraph>•</Styled.Paragraph>
