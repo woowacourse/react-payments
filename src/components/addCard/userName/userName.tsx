@@ -5,22 +5,10 @@ import { useCardInfoContext } from "../../../hooks/useCardInfoContext";
 import { useCountText } from "../../../hooks/useCountText";
 import { Input, InputBox } from "../../@common/input/InputBox";
 import { InputLabel } from "../../@common/input/inputLabel";
+import { renderCountText } from "./textCount";
 
 export function UserName() {
   const { userName, changeNameInput } = useCardInfoContext();
-  const { count, countText } = useCountText();
-
-  useEffect(() => {
-    countText(userName);
-  }, [count]);
-
-  function renderCountText() {
-    return (
-      <div>
-        {count}/{INPUT_TYPE.MAX_LENGTH}
-      </div>
-    );
-  }
 
   return (
     <Input<string>
