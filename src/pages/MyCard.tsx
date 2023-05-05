@@ -10,7 +10,7 @@ const MyCard = () => {
 
   return (
     <Page>
-      <Header title="보유카드" isBack={false} />
+      <Header title="보유카드" />
       {cards.map((card) => (
         <CardWrapper key={crypto.randomUUID()}>
           <Card {...card} />
