@@ -2,8 +2,8 @@ import { useFocus } from './useFocus';
 import { changeToValidValue } from 'utils/inputValidator';
 import { ChangeEvent } from 'react';
 
-export const useInputHandler = (
-  setInputState: React.Dispatch<React.SetStateAction<any>>,
+export const useInputHandler = <T>(
+  setInputState: React.Dispatch<React.SetStateAction<T>> | null,
   inputConfig: {
     length: number;
     regex: RegExp;
@@ -19,7 +19,7 @@ export const useInputHandler = (
       value = inputConfig.validator(target.name, value);
     }
 
-    setInputState((prevState: any) => {
+    setInputState?.((prevState: T) => {
       return {
         ...prevState,
         [target.name]: changeToValidValue(value, {

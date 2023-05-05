@@ -1,20 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { ThemeProvider } from 'styled-components';
-import { GlobalStyle } from 'styles/GlobalStyle';
-import SecurityCodeInput, { S } from './SecurityCodeInput';
+import SecurityCodeInput from 'pages/RegisterPage/FormInputs/SecurityCodeInput';
 
 const SecurityCodeInputMeta = {
   component: SecurityCodeInput,
-  title: 'SecurityCodeInput Component',
-
-  decorators: [
-    (Story) => (
-      <ThemeProvider theme={S}>
-        <GlobalStyle />
-        <Story />
-      </ThemeProvider>
-    ),
-  ],
+  title: '/FormInput/SecurityCodeInput Component',
 } satisfies Meta<typeof SecurityCodeInput>;
 
 export default SecurityCodeInputMeta;

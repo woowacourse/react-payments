@@ -1,20 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { ThemeProvider } from 'styled-components';
-import NameInput, { S } from './NameInput';
-import { GlobalStyle } from 'styles/GlobalStyle';
+import NameInput from 'pages/RegisterPage/FormInputs/NameInput';
 
 const NameInputMeta = {
   component: NameInput,
-  title: 'NameInput Component',
-
-  decorators: [
-    (Story) => (
-      <ThemeProvider theme={S}>
-        <GlobalStyle />
-        <Story />
-      </ThemeProvider>
-    ),
-  ],
+  title: '/FormInput/NameInput Component',
 } satisfies Meta<typeof NameInput>;
 
 export default NameInputMeta;

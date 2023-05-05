@@ -1,20 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { ThemeProvider } from 'styled-components';
-import ExpirationDateInput, { S } from './ExpirationDateInput';
-import { GlobalStyle } from 'styles/GlobalStyle';
+import ExpirationDateInput from 'pages/RegisterPage/FormInputs/ExpirationDateInput';
 
 const ExpirationDateInputMeta = {
   component: ExpirationDateInput,
-  title: 'ExpirationDateInput Component',
-
-  decorators: [
-    (Story) => (
-      <ThemeProvider theme={S}>
-        <GlobalStyle />
-        <Story />
-      </ThemeProvider>
-    ),
-  ],
+  title: '/FormInput/ExpirationDateInput Component',
 } satisfies Meta<typeof ExpirationDateInput>;
 
 export default ExpirationDateInputMeta;

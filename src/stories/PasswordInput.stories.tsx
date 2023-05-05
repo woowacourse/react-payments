@@ -1,20 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { ThemeProvider } from 'styled-components';
-import { GlobalStyle } from 'styles/GlobalStyle';
-import PasswordInput, { S } from './PasswordInput';
+import PasswordInput from 'pages/RegisterPage/FormInputs/PasswordInput';
 
 const PassWordInputMeta = {
   component: PasswordInput,
-  title: 'PasswordInput Component',
-
-  decorators: [
-    (Story) => (
-      <ThemeProvider theme={S}>
-        <GlobalStyle />
-        <Story />
-      </ThemeProvider>
-    ),
-  ],
+  title: '/FormInput/PasswordInput Component',
 } satisfies Meta<typeof PasswordInput>;
 
 export default PassWordInputMeta;

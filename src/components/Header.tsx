@@ -1,22 +1,23 @@
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import Navigator from './Navigator';
 
-interface Props {
+interface HeaderProps {
   title: string;
   navigator: boolean;
 }
 
-const Header = ({ title, navigator }: Props) => {
+const Header = ({ title, navigator }: HeaderProps) => {
   const navigate = useNavigate();
 
   const goToMain = () => {
-    navigate("/");
+    navigate('/');
   };
 
   return (
-    <S.Header>
+    <StyledHeader>
       {navigator && (
-        <S.Navigator
+        <Navigator
           width="10"
           height="17"
           viewBox="0 0 10 17"
@@ -29,25 +30,18 @@ const Header = ({ title, navigator }: Props) => {
             stroke="#525252"
             strokeWidth="1.5"
           />
-        </S.Navigator>
+        </Navigator>
       )}
 
       <span>{title}</span>
-    </S.Header>
+    </StyledHeader>
   );
 };
 
-const S = {
-  Header: styled.header`
-    display: flex;
-    align-items: center;
-    margin-top: 24px;
-  `,
-
-  Navigator: styled.svg`
-    margin-right: 24px;
-    cursor: pointer;
-  `,
-};
+export const StyledHeader = styled.header`
+  display: flex;
+  align-items: center;
+  margin-top: 24px;
+`;
 
 export default Header;

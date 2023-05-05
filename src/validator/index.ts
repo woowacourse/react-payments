@@ -8,16 +8,16 @@ export const areValidInfo = (info: any) => {
     (_, index) => info[`number${index + 1}`]
   );
 
-  const validateCardNumber = validation.isAllValidLength(
+  const validateCardNumber = validator.isAllValidLength(
     cardNumbers,
     LENGTH.EACH_CARD_NUMBER
   );
-  const validateDate = validation.isAllValidLength(
+  const validateDate = validator.isAllValidLength(
     [month, year],
     LENGTH.EXPIRATION
   );
-  const validateCode = validation.isValidLength(code, LENGTH.SECURITY_CODE);
-  const validatePassword = validation.isAllValidLength(
+  const validateCode = validator.isValidLength(code, LENGTH.SECURITY_CODE);
+  const validatePassword = validator.isAllValidLength(
     [password1, password2],
     LENGTH.EACH_PASSWORD
   );
@@ -32,7 +32,7 @@ export const areValidInfo = (info: any) => {
   return validationResult.every((result) => result === true);
 };
 
-const validation = {
+const validator = {
   isAllValidLength(array: string[], length: number) {
     return array.every((value) => value.length === length);
   },
