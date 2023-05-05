@@ -21,7 +21,7 @@ const meta: Meta<typeof CardPasswordInput> = {
 export default meta;
 type Story = StoryObj<typeof CardPasswordInput>;
 
-const CardPasswordInputwithHooks = () => {
+const CardPasswordInputWithHooks = () => {
   const [password, setPassword] = useState<CardPassword>({
     first: "",
     second: "",
@@ -36,6 +36,6 @@ const CardPasswordInputwithHooks = () => {
 
 export const Default: Story = {
   render: () => {
-    return <CardPasswordInputwithHooks />;
+    return <CardPasswordInputWithHooks />;
   },
 };

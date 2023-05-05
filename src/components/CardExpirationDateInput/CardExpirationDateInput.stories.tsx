@@ -21,7 +21,7 @@ const meta: Meta<typeof CardExpirationDateInput> = {
 export default meta;
 type Story = StoryObj<typeof CardExpirationDateInput>;
 
-const CardExpirationDateInputwithHooks = () => {
+const CardExpirationDateInputWithHooks = () => {
   const [expirationDate, setExpirationDate] = useState<CardExpirationDate>({
     month: "",
     year: "",
@@ -36,6 +36,6 @@ const CardExpirationDateInputwithHooks = () => {
 
 export const Default: Story = {
   render: () => {
-    return <CardExpirationDateInputwithHooks />;
+    return <CardExpirationDateInputWithHooks />;
   },
 };

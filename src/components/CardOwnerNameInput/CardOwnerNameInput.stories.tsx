@@ -22,7 +22,7 @@ const meta: Meta<typeof CardOwnerNameInput> = {
 export default meta;
 type Story = StoryObj<typeof CardOwnerNameInput>;
 
-const CardOwnerNameInputwithHooks = () => {
+const CardOwnerNameInputWithHooks = () => {
   const [ownerName, setOwnerName] = useState<Card["ownerName"]>("");
 
   const handleOwnerName = (name: string) => {
@@ -35,6 +35,6 @@ const CardOwnerNameInputwithHooks = () => {
 
 export const Default: Story = {
   render: () => {
-    return <CardOwnerNameInputwithHooks />;
+    return <CardOwnerNameInputWithHooks />;
   },
 };
