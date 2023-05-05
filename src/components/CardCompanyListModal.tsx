@@ -1,10 +1,11 @@
+import Modal from 'react-yt-modal';
 import styled from 'styled-components';
 import { CARD_COMPANY } from '../constants/cardCompany';
 import type { CardCompanyButtonProps } from './CardCompanyButton';
 import { CardCompanyButton } from './CardCompanyButton';
-import { Modal } from './common/Modal';
 
 type CardCompanyListModalProps = {
+  isModalOpen: boolean;
   closeModal: () => void;
   handleOnClick: (value: CardCompanyButtonProps['cardCompany']) => void;
 };
@@ -17,9 +18,9 @@ const Contents = styled.div`
 `;
 
 export const CardCompanyListModal = (props: CardCompanyListModalProps) => {
-  const { handleOnClick, closeModal } = props;
+  const { isModalOpen, handleOnClick, closeModal } = props;
   return (
-    <Modal closeModal={closeModal}>
+    <Modal closeModal={closeModal} isOpen={isModalOpen}>
       <Contents>
         {CARD_COMPANY.map((cardCompany) => (
           <CardCompanyButton
