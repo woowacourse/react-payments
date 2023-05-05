@@ -3,7 +3,11 @@ import styled from "styled-components";
 import { CardInput, Button } from "./index";
 import { CardType } from "../types";
 import { QuestionMark } from "../assets";
-import { CARD_INPUT_REFS_INDEX, PASSWORD_DIGIT_INDEX } from "../constants";
+import {
+  CARD_INPUT_LENGTH,
+  CARD_INPUT_REFS_INDEX,
+  PASSWORD_DIGIT_INDEX,
+} from "../constants";
 import {
   validateCardInput,
   validateCardNumber,
@@ -32,7 +36,10 @@ const CardInputForm = ({ card, setNewCard, onSubmit }: CardInputFormType) => {
 
   const handleInputChanged =
     (key: keyof CardType) => (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (validateCardInput(key, e.target.value) === "") {
+      if (
+        key !== "ownerName" &&
+        validateCardInput(key, e.target.value) === ""
+      ) {
         moveFocus(key);
       }
       setNewCard(key, e.target.value);
@@ -56,6 +63,7 @@ const CardInputForm = ({ card, setNewCard, onSubmit }: CardInputFormType) => {
       password[digit] = e.target.value;
       setPassword(password);
       setNewCard("password", password.join(""));
+
       if (digit === 0) {
         inputRefs[CARD_INPUT_REFS_INDEX.password2].current?.focus();
       }
@@ -73,13 +81,13 @@ const CardInputForm = ({ card, setNewCard, onSubmit }: CardInputFormType) => {
       <InputSetWrapper>
         <label htmlFor="cardNumber">카드 번호</label>
         <CardInput
-          ref={inputRefs[CARD_INPUT_REFS_INDEX.cardNumber]}
           value={card.cardNumber}
           placeholder="카드 번호를 입력해 주세요."
           width="318px"
           isAutoFocus
           isRequired
-          maxLength={25}
+          ref={inputRefs[CARD_INPUT_REFS_INDEX.cardNumber]}
+          maxLength={CARD_INPUT_LENGTH.cardNumber}
           onChange={handleInputChanged("cardNumber")}
           onKeyDown={handleInputKeyDown("cardNumber")}
         />
@@ -89,12 +97,12 @@ const CardInputForm = ({ card, setNewCard, onSubmit }: CardInputFormType) => {
       <InputSetWrapper>
         <label htmlFor="expiredDate">만료일</label>
         <CardInput
-          ref={inputRefs[CARD_INPUT_REFS_INDEX.expiredDate]}
           value={card.expiredDate}
           placeholder="MM / YY"
           width="137px"
           isRequired
-          maxLength={7}
+          ref={inputRefs[CARD_INPUT_REFS_INDEX.expiredDate]}
+          maxLength={CARD_INPUT_LENGTH.expiredDate}
           onChange={handleInputChanged("expiredDate")}
           onKeyDown={handleInputKeyDown("expiredDate")}
         />
@@ -107,12 +115,13 @@ const CardInputForm = ({ card, setNewCard, onSubmit }: CardInputFormType) => {
           <span>{card.ownerName.length}/14</span>
         </OwnerNameLabelWrapper>
         <CardInput
-          ref={inputRefs[CARD_INPUT_REFS_INDEX.ownerName]}
           value={card.ownerName}
           width="318px"
-          maxLength={14}
+          ref={inputRefs[CARD_INPUT_REFS_INDEX.ownerName]}
+          maxLength={CARD_INPUT_LENGTH.ownerName}
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
           onChange={handleInputChanged("ownerName")}
+          onKeyDown={handleInputKeyDown("ownerName")}
         />
         {<span>{card.ownerName && validateOwnerName(card.ownerName)}</span>}
       </InputSetWrapper>
@@ -121,13 +130,14 @@ const CardInputForm = ({ card, setNewCard, onSubmit }: CardInputFormType) => {
         <label htmlFor="cvc">보안 코드(CVC/CVV)</label>
         <CvcInputWrapper>
           <CardInput
-            ref={inputRefs[CARD_INPUT_REFS_INDEX.cvc]}
             value={card.cvc}
             width="84px"
             isSecured
             isRequired
-            maxLength={3}
+            ref={inputRefs[CARD_INPUT_REFS_INDEX.cvc]}
+            maxLength={CARD_INPUT_LENGTH.cvc}
             onChange={handleInputChanged("cvc")}
+            onKeyDown={handleInputKeyDown("cvc")}
           />
           <img src={QuestionMark} alt="도움말" />
           <AnswerBoxWrapper>
@@ -141,24 +151,22 @@ const CardInputForm = ({ card, setNewCard, onSubmit }: CardInputFormType) => {
         <label htmlFor="password">카드 비밀번호</label>
         <PasswordInputWrapper>
           <CardInput
-            ref={inputRefs[CARD_INPUT_REFS_INDEX.password1]}
-            id="password1"
             value={password[PASSWORD_DIGIT_INDEX.FIRST]}
             width="42px"
-            maxLength={1}
             isSecured
             isRequired
+            ref={inputRefs[CARD_INPUT_REFS_INDEX.password1]}
+            maxLength={CARD_INPUT_LENGTH.password}
             onChange={handlePasswordChanged(PASSWORD_DIGIT_INDEX.FIRST)}
             onKeyDown={handlePasswordKeyDown(PASSWORD_DIGIT_INDEX.FIRST)}
           />
           <CardInput
-            ref={inputRefs[CARD_INPUT_REFS_INDEX.password2]}
-            id="password2"
-            width="42px"
             value={password[PASSWORD_DIGIT_INDEX.SECOND]}
+            width="42px"
             isSecured
             isRequired
-            maxLength={1}
+            ref={inputRefs[CARD_INPUT_REFS_INDEX.password2]}
+            maxLength={CARD_INPUT_LENGTH.password}
             onChange={handlePasswordChanged(PASSWORD_DIGIT_INDEX.SECOND)}
             onKeyDown={handlePasswordKeyDown(PASSWORD_DIGIT_INDEX.SECOND)}
           />

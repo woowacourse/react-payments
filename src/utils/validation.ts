@@ -42,7 +42,7 @@ export const validateCvc = (value: string) => {
 
 export const validatePassword = (value: string) => {
   if (!REGEX.number.test(value)) return "숫자만 입력해 주세요.";
-  if (value.length !== CARD_INPUT_LENGTH.password)
+  if (value.length !== CARD_INPUT_LENGTH.password * 2)
     return "비밀번호를 입력해 주세요.";
   return "";
 };
@@ -66,7 +66,7 @@ export const validateCardInput = (key: keyof CardType, value: string) => {
     case "expiredDate":
       return validateExpiredDate(value);
     case "ownerName":
-      return validateExpiredDate(value);
+      return validateOwnerName(value);
     case "cvc":
       return validateCvc(value);
     case "password":

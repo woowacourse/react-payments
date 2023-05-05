@@ -12,9 +12,9 @@ import {
 const CARD_INPUT_LENGTH: Record<string, number> = {
   cardNumber: 25,
   expiredDate: 7,
-  ownerName: 12,
+  ownerName: 14,
   cvc: 3,
-  password: 2,
+  password: 1,
 } as const;
 
 const SEPERATED_CARD_NUMBER_LENGTH: Record<string, number> = {
