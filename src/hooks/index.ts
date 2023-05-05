@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { CARD_INPUT_REFS_INDEX } from "../constants";
 import { CardType } from "../types";
 import {
   getEmptyCard,
@@ -53,9 +54,13 @@ export const useCardInputRefs = () => {
     password2Ref,
   ];
 
-  const moveFocus = () => {
-    inputRefs[1].current?.focus();
+  const moveFocus = (key: string) => {
+    if (
+      document.activeElement === inputRefs[CARD_INPUT_REFS_INDEX[key]].current
+    ) {
+      inputRefs[CARD_INPUT_REFS_INDEX[key] + 1].current?.focus();
+    }
   };
 
-  return [inputRefs];
+  return [inputRefs, moveFocus] as const;
 };

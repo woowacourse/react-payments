@@ -23,6 +23,15 @@ const SEPERATED_CARD_NUMBER_LENGTH: Record<string, number> = {
   THIRD: 18,
 } as const;
 
+const CARD_INPUT_REFS_INDEX: Record<string, number> = {
+  cardNumber: 0,
+  expiredDate: 1,
+  ownerName: 2,
+  cvc: 3,
+  password1: 4,
+  password2: 5,
+} as const;
+
 const SEPERATED_EXPIRED_DATE_LENGTH = 2;
 
 const PASSWORD_DIGIT_INDEX: Record<string, number> = {
@@ -41,7 +50,7 @@ const REGEX = {
   english: /^[a-zA-Z]*$/,
 } as const;
 
-const CARD_COMPANY: Record<string, { img?: string }> = {
+const CARD_COMPANY: Record<string, { img: string }> = {
   BC카드: {
     img: BcCard,
   },
@@ -78,4 +87,5 @@ export {
   CARD_COMPANY,
   CARD_COMPANY_NOT_SELECTED_STRING,
   VALID_CARD_INPUT_FORM_LENGTH,
+  CARD_INPUT_REFS_INDEX,
 };

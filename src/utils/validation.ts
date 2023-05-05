@@ -46,6 +46,7 @@ export const validatePassword = (value: string) => {
     return "비밀번호를 입력해 주세요.";
   return "";
 };
+
 export const validateForm = (card: CardType) => {
   return (
     [
@@ -56,4 +57,19 @@ export const validateForm = (card: CardType) => {
       validatePassword(card.password),
     ].join("") === ""
   );
+};
+
+export const validateCardInput = (key: keyof CardType, value: string) => {
+  switch (key) {
+    case "cardNumber":
+      return validateCardNumber(value);
+    case "expiredDate":
+      return validateExpiredDate(value);
+    case "ownerName":
+      return validateExpiredDate(value);
+    case "cvc":
+      return validateCvc(value);
+    case "password":
+      return validatePassword(value);
+  }
 };
