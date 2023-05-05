@@ -4,6 +4,7 @@ import { Navigate } from 'react-router-dom';
 import HoldingCardsPage from './HoldingCardsPage';
 import CardInfoRegisterPage from './CardInfoRegisterPage';
 import CardNameRegisterPage from './CardNameRegisterPage';
+import CardRegisterPage from './CardRegisterPage';
 import CardFormContext from './contexts/CardFormContext';
 import CardInfoRequired from './contexts/CardInfoRequired';
 
@@ -22,7 +23,11 @@ function App() {
           <Route element={<CardInfoRequired />}>
             <Route
               path="card-name-register"
-              element={<CardNameRegisterPage registerCard={registerCard} />}
+              element={<CardNameRegisterPage />}
+            />
+            <Route
+              path="card-register"
+              element={<CardRegisterPage registerCard={registerCard} />}
             />
           </Route>
         </Route>
