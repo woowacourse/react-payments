@@ -1,27 +1,31 @@
-import {
-  Children,
-  cloneElement,
-  isValidElement,
-  PropsWithChildren,
-  useContext,
-} from "react";
+import { useContext } from "react";
+import styled from "styled-components";
 import { ModalContext } from "../../../contexts/modal";
+import { getCustomElement } from "../../../utils/custumElement";
 
 interface ModalTriggerProps {
   asChild?: boolean;
+  children?: React.ReactElement[] | React.ReactElement | undefined;
 }
 
-export function ModalTrigger(props: PropsWithChildren<ModalTriggerProps>) {
-  const { asChild, children } = props;
+export function ModalTrigger(props: ModalTriggerProps) {
+  const { asChild = false, children } = props;
   const { isOpen, openLocalModal, closeLocalModal } = useContext(ModalContext);
-  const childrenList = Children.toArray(children);
+  const customElement = getCustomElement(asChild, children, props);
 
   function toggleLocalModal() {
     isOpen ? closeLocalModal() : openLocalModal();
   }
 
-  if (asChild && isValidElement<{ onClick: () => void }>(childrenList[0])) {
-    return cloneElement(childrenList[0], { onClick: toggleLocalModal });
+  if (customElement) {
+    return isOpen ? customElement : null;
   }
-  return <div onClick={toggleLocalModal}>{children}</div>;
+
+  return isOpen ? (
+    <DefaultModaltriggerStyle onClick={toggleLocalModal}>
+      {children}
+    </DefaultModaltriggerStyle>
+  ) : null;
 }
+
+const DefaultModaltriggerStyle = styled.div``;

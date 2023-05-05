@@ -1,18 +1,32 @@
 import { useContext } from "react";
 import styled from "styled-components";
 import { ModalContext } from "../../../contexts/modal";
+import { getCustomElement } from "../../../utils/custumElement";
 
-export function ModalBackDrop() {
+interface ModalBackDropProps {
+  asChild?: boolean;
+  children?: React.ReactElement[] | React.ReactElement | undefined;
+}
+
+export function ModalBackDrop(props: ModalBackDropProps) {
+  const { asChild = false, children } = props;
   const { isOpen, closeLocalModal } = useContext(ModalContext);
+  const customElement = getCustomElement(asChild, children, props);
 
   window.addEventListener("keyup", () => {
     closeLocalModal();
   });
 
-  return isOpen ? <ModalBackground onClick={closeLocalModal} /> : <></>;
+  if (customElement) {
+    return isOpen ? customElement : null;
+  }
+
+  return isOpen ? (
+    <DefaultModalBackdropStyle onClick={closeLocalModal} />
+  ) : null;
 }
 
-const ModalBackground = styled.div`
+const DefaultModalBackdropStyle = styled.div`
   position: fixed;
   top: 0;
   right: 0;

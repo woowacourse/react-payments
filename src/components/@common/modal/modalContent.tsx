@@ -1,23 +1,19 @@
-import {
-  Children,
-  cloneElement,
-  isValidElement,
-  PropsWithChildren,
-  useContext,
-} from "react";
+import { useContext } from "react";
 import { ModalContext } from "../../../contexts/modal";
+import { getCustomElement } from "../../../utils/custumElement";
 
 interface ModalContentProps {
   asChild?: boolean;
+  children?: React.ReactElement[] | React.ReactElement | undefined;
 }
-export function ModalContent(props: PropsWithChildren<ModalContentProps>) {
-  const { children, asChild } = props;
+export function ModalContent(props: ModalContentProps) {
+  const { children, asChild = false } = props;
   const { isOpen } = useContext(ModalContext);
-  const childrenList = Children.toArray(children);
+  const customElement = getCustomElement(asChild, children, props);
 
-  if (isOpen && asChild && isValidElement(childrenList[0])) {
-    return cloneElement(childrenList[0], {});
+  if (customElement) {
+    return isOpen ? customElement : null;
   }
 
-  return <div>{isOpen && children}</div>;
+  return isOpen ? <>{children}</> : null;
 }
