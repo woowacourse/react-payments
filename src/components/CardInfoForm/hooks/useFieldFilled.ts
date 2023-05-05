@@ -20,7 +20,7 @@ const useFieldFilled = (inputRefs: InputRef[]) => {
     }
 
     setIsFilled(false);
-  }, [inputRefs, isMaxLength, setIsFilled]);
+  }, [inputRefs, isMaxLength]);
 
   return isFilled;
 };

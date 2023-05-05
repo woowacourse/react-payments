@@ -15,7 +15,7 @@ const CardInfoRegisterPage = () => {
 
   useEffect(() => {
     openModal();
-  }, []);
+  }, [openModal]);
 
   return (
     <>
