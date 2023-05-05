@@ -5,6 +5,7 @@ import { CREDIT_CARD_COMPANY } from "types/card";
 const meta = {
   component: CardDetailView,
   title: "CardDetailView",
+  tags: ["autodocs"],
 } satisfies Meta<typeof CardDetailView>;
 
 export default meta;
