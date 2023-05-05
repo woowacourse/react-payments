@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { PropsWithChildren } from "react";
-import { glareX, glareY, swayX, swayY } from "../../styles/keyframes/swayWIthGlare";
+import { glareX, glareY, swayX, swayY } from "../../../styles/keyframes/swayWIthGlare";
 
-const SwayWithGlareAnimation = ({ children }: PropsWithChildren) => {
+const SwayWithGlare = ({ children }: PropsWithChildren) => {
   return (
     <AnimationFrame>
       <SwayY>
@@ -72,4 +72,4 @@ const GlareStuff = styled.div`
   filter: blur(70px);
 `;
 
-export default SwayWithGlareAnimation;
+export default SwayWithGlare;
