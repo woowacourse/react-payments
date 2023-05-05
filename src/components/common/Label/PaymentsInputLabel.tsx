@@ -11,7 +11,7 @@ export const PaymentsInputLabel = (props: PropsWithChildren<Props>) => {
   return <InputLabel {...props}>{children}</InputLabel>;
 };
 
-const InputLabel = styled.span<Props>`
+const InputLabel = styled.label<Props>`
   font-size: 12px;
   font-weight: 500;
   letter-spacing: -0.085em;
