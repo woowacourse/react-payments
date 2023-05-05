@@ -1,6 +1,6 @@
 import { CardNumber, CardNumberGroups } from "../../types";
 import { isNumeric } from "../../validator/Validator";
-import { InputContainer, Input, Label, RequiredInputIcon } from "../common";
+import { InputContainer, Input, Label, RequiredInputIcon } from "../@common";
 import requiredInputIcon from "../../assets/requiredInputIcon.png";
 
 type CardNumberInputProps = {

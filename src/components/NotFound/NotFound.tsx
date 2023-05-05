@@ -1,5 +1,5 @@
 import styled, { CSSProperties } from "styled-components";
-import { Container } from "../common";
+import { Container } from "../@common";
 import { useNavigate } from "react-router-dom";
 import ROUTE_PATH from "../../constants/routePath";
 

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { InputContainer, Input, Label } from "../common";
+import { InputContainer, Input, Label } from "../@common";
 import { isAlphabetic } from "../../validator/Validator";
 
 const MAX_NAME_LENGTH = 30;

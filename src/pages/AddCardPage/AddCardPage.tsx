@@ -7,7 +7,7 @@ import CardSecurityCodeInput from "../../components/CardSecurityCodeInput/CardSe
 import CardPasswordInput from "../../components/CardPasswordInput/CardPasswordInput";
 import { Modal } from "react-dobob-modal";
 import styled from "styled-components";
-import { Container } from "../../components/common";
+import { Container } from "../../components/@common";
 import { useState } from "react";
 import {
   Card,

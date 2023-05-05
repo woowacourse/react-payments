@@ -4,7 +4,7 @@ import styled, { CSSProperties } from "styled-components";
 
 import NotFound from "../../components/NotFound/NotFound";
 import CardPreview from "../../components/CardPreview/CardPreview";
-import { Container, Input } from "../../components/common";
+import { Container, Input } from "../../components/@common";
 import useCardFetch from "../../hooks/useCardFetch";
 import ROUTE_PATH from "../../constants/routePath";
 import type { Card } from "../../types";

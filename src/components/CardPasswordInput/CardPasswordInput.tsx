@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { InputContainer, Input, Label, RequiredInputIcon } from "../common";
+import { InputContainer, Input, Label, RequiredInputIcon } from "../@common";
 import requiredInputIcon from "../../assets/requiredInputIcon.png";
 
 import { CardPassword, CardPasswordKey } from "../../types";
