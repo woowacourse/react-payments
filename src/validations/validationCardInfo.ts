@@ -12,7 +12,10 @@ export const isCorrectCardNumber = (cardNumbers: Array<string>) => {
   return false;
 };
 
-export const isCorrectExpiredDate = (expiredDates: Array<string>) => {
+export const isCorrectExpiredDate = (expiredDates: {
+  0: string;
+  1: string;
+}) => {
   const expiredMonth = Number(expiredDates[0]);
   const expiredYear = Number(expiredDates[1]);
 

@@ -7,7 +7,7 @@ import { REF_INDEX } from '../../constants/refIndex';
 import CardErrorLabel from '../@common/CardErrorLabel';
 
 interface ExpiredDateProps {
-  expiredDates: Array<string>;
+  expiredDates: { 0: string; 1: string };
   errorMessage: string;
   isValidatedExpiredDates: (order: number, value: string) => boolean;
 }
@@ -40,6 +40,8 @@ const CardExpiredDate = ({
       cardRefs[order + 1].current?.focus();
     }
   };
+
+  console.log(expiredDates);
 
   return (
     <>

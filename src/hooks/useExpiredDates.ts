@@ -12,23 +12,26 @@ const getCurrentDateToString = () => {
 };
 
 const useExpiredDates = () => {
-  const [expiredDates, setExpiredDates] = useState<Array<string>>(['', '']);
+  const [expiredDates, setExpiredDates] = useState<{ 0: string; 1: string }>({
+    0: '',
+    1: '',
+  });
   const [expiredDatesError, setExpiredDatesError] = useState<string>('');
 
   const isValidatedExpiredDates = (order: number, value: string) => {
-    if (!checkExpiredDates(order, value)) {
-      setError(
+    if (!isCheckExpiredDates(order, value)) {
+      setExpiredDatesError(
         `유효한 만료일을 ${getCurrentDateToString()}의 형태로 입력해주세요.`
       );
       return false;
     }
 
-    setError('');
-    setState(order, value);
+    setExpiredDatesError('');
+    setExpiredDates({ ...expiredDates, [order]: value });
     return true;
   };
 
-  const checkExpiredDates = (order: number, value: string) => {
+  const isCheckExpiredDates = (order: number, value: string) => {
     const monthValue = order === 0 && value.length === 2;
     const yearValue = order === 1 && value.length === 2;
 
@@ -37,14 +40,6 @@ const useExpiredDates = () => {
     if (yearValue && Number(value) < nowYear) return false;
 
     return true;
-  };
-
-  const setState = (order: number, value: string) => {
-    setExpiredDates({ ...expiredDates, [order]: value });
-  };
-
-  const setError = (message: string) => {
-    setExpiredDatesError(message);
   };
 
   return { expiredDates, expiredDatesError, isValidatedExpiredDates };
