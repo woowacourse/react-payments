@@ -7,6 +7,7 @@ export const HomeLayout = styled.div`
 export const HomeHeader = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 
 export const HomeTitle = styled.h3`
@@ -20,6 +21,9 @@ export const InitButton = styled.button`
   line-height: 18.75px;
   margin-bottom: 25px;
   cursor: pointer;
+  border: 1px solid gray;
+  border-radius: 3px;
+  padding: 5px 10px 5px 10px;
 `;
 
 export const CreditCardList = styled.div`
