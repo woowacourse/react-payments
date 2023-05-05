@@ -1,7 +1,7 @@
 import type { CardType } from '../../types';
 import { Page } from '../../types';
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 import PageTemplate from '../template/PageTemplate';
 import Card from '../common/Card';
@@ -44,6 +44,20 @@ const GuideMessage = styled.p`
   color: #686868;
 `;
 
+const bounce = keyframes`
+  from  { margin: -100px; }
+
+  50% {
+    margin-top: 24px;
+    margin-bottom: 48px;
+  }
+
+  to {
+    margin-top: 16px;
+    margin-bottom: 32px;
+  }
+`;
+
 const CardName = styled.p`
   margin-top: 16px;
   margin-bottom: 32px;
@@ -52,6 +66,8 @@ const CardName = styled.p`
   font-weight: 700;
   font-size: 14px;
   color: #575757;
+
+  animation: ${bounce} 1s;
 `;
 
 const CardAddButton = styled.button`
