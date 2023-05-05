@@ -26,29 +26,30 @@ const Style = {
     padding: 0;
     border: 0;
     border-radius: 7px;
-    background-color: ${(props) => (props.backgroundColor ? props.backgroundColor : '#ecebf1')};
+    background-color: ${(props) =>
+      props.backgroundColor ? props.backgroundColor : 'var(--grey-200)'};
 
     font-size: 15px;
     text-align: center;
 
     :focus {
       outline: none;
-      border-color: #75c4d2;
-      box-shadow: 0 0 4px #75c4d2;
-      background-color: #cddfe3;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 4px var(--primary-color);
+      background-color: var(--lighten-color);
     }
 
     ::placeholder {
-      color: #c6c6c6;
+      color: var(--grey-400);
     }
 
     &.underline {
       border-radius: 0;
-      border-bottom: 1px solid #737373;
+      border-bottom: 1px solid var(--grey-300);
       background-color: transparent;
 
       :focus {
-        box-shadow: 0 4px 4px -4px #75c4d2;
+        box-shadow: 0 4px 4px -4px var(--primary-color);
       }
     }
   `,

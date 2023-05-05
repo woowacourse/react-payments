@@ -34,7 +34,7 @@ const Style = {
     font-size: 35px;
     font-weight: bold;
     text-align: center;
-    color: #000000;
+    color: var(--grey-700);
 
     .animation {
       opacity: 0;

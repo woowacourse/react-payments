@@ -54,5 +54,6 @@ const Style = {
 
     font-size: 14px;
     font-weight: 600;
+    color: var(--grey-700);
   `,
 };

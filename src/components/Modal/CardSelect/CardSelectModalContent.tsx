@@ -30,7 +30,6 @@ export function CardSelectModalContent({ setCardCompany, closeModal }: Props) {
           onClick={closeModal}
           width={'100%'}
           height={'45px'}
-          backgroundColor=' #75c4d2;'
           fontSize={'14px'}
         >
           {CARD_SELECT_COMPLETE_BUTTON}
@@ -49,6 +48,7 @@ const Style = {
 
     font-size: 16px;
     font-weight: 600;
+    color: var(--grey-700);
   `,
 
   ContentContainer: styled.div`

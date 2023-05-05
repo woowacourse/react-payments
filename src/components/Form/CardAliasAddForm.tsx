@@ -94,6 +94,7 @@ const Style = {
     font-size: 24px;
     font-weight: 500;
     text-align: center;
+    color: var(--grey-700);
   `,
 
   Form: styled.form`
@@ -122,6 +123,6 @@ const Style = {
     left: 290px;
 
     font-size: 12px;
-    color: #727272;
+    color: var(--grey-600);
   `,
 };

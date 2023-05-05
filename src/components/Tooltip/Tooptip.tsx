@@ -1,7 +1,7 @@
 import { HTMLAttributes, ReactNode } from 'react';
 import styled from 'styled-components';
 
-interface Props extends HTMLAttributes<HTMLDivElement> {
+interface Props extends HTMLAttributes<HTMLButtonElement> {
   designType?: 'basic';
   message?: string;
   width?: string;
@@ -13,7 +13,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
 export function Tooltip({ designType = 'basic', message, children, ...props }: Props) {
   return (
     <Style.Container>
-      <Style.Button type='button' aria-disabled='true'>
+      <Style.Button type='button' aria-disabled='true' {...props}>
         <span aria-hidden='true'>?</span>
         <Style.Content className='tooltipText'>{message}</Style.Content>
       </Style.Button>
@@ -40,11 +40,13 @@ const Style = {
     height: ${(props) => (props.height ? props.height : '20px')};
 
     position: relative;
-    border: 1px solid #bababa;
+    border: 1px solid;
     border-radius: 50%;
-    background-color: ${(props) => (props.backgroundColor ? props.backgroundColor : 'white')};
+    border-color: ${(props) => (props.color ? props.color : 'var(--grey-500)')};
+    background-color: ${(props) =>
+      props.backgroundColor ? props.backgroundColor : 'var(--grey-100)'};
 
-    color: ${(props) => (props.color ? props.color : '#949494')};
+    color: ${(props) => (props.color ? props.color : 'var(--grey-500)')};
 
     cursor: pointer;
 
@@ -66,14 +68,16 @@ const Style = {
     top: 50%;
     left: 150%;
     transform: translateY(-50%);
-    border: 1px solid #bababa;
+    border: 1px solid;
     border-radius: 7px;
-    background-color: ${(props) => (props.backgroundColor ? props.backgroundColor : 'white')};
+    border-color: ${(props) => (props.color ? props.color : 'var(--grey-500)')};
+    background-color: ${(props) =>
+      props.backgroundColor ? props.backgroundColor : 'var(--grey-100)'};
     padding: 5px;
 
     font-size: 10px;
     text-align: justify;
-    color: ${(props) => (props.color ? props.color : '#949494')};
+    color: ${(props) => (props.color ? props.color : 'var(--grey-500)')};
 
     z-index: 100;
   `,

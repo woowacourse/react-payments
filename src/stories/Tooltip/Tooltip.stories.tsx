@@ -14,7 +14,8 @@ export const BasicTooltip: Story = {
   args: {
     designType: 'basic',
     message: '카드 뒷면 서명란에 인쇄된 숫자 끝 3자리를 입력해주세요.',
-    width: '100px',
-    height: '100px',
+    width: '20px',
+    height: '20px',
+    color: 'var(--grey-500)',
   },
 };

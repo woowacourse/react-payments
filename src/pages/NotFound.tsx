@@ -15,17 +15,11 @@ export function NotFound() {
         <Style.Image src={imageUrl} alt='페이지를 찾을 수 없습니다.'></Style.Image>
         <Style.Title>길을 잃으셨나요?</Style.Title>
         <Style.Content>
-          방문하시려는 페이지의 주소가 잘못 입력되었거나, <br />
-          페이지 주소가 변경 혹은 삭제되어 요청하신 페이지를 찾을 수 없습니다. <br />
-          <br />
-          입력하신 주소가 정확한지 다시 한번 확인해 주시기 바랍니다.
-          <br />
-          {'관련 문의사항은 '}
+          {
+            '방문하시려는 페이지의 주소가 잘못 입력되었거나,\n페이지 주소가 변경 혹은 삭제되어 요청하신 페이지를 찾을 수 없습니다.\n입력하신 주소가 정확한지 다시 한번 확인해 주시기 바랍니다.\n\n관련 문의사항은 '
+          }
           <Style.Email href='mailto:chex1004@gmail.com'>고객센터</Style.Email>
-          {'에 연락주시면 친절하게 안내해드리겠습니다.'}
-          <br />
-          <br />
-          감사합니다.
+          {'에 연락주시면 친절하게 안내해드리겠습니다.\n\n감사합니다.'}
         </Style.Content>
       </Style.Container>
     </Layout>
@@ -56,7 +50,8 @@ const Style = {
 
     font-size: 16px;
     text-align: justify;
-    color: #6f6f6f;
+    color: var(--grey-600);
+    white-space: pre-line;
   `,
 
   Image: styled.img`
@@ -67,11 +62,11 @@ const Style = {
   `,
 
   Email: styled.a`
-    color: #ff8114;
+    color: var(--orange-100);
 
     :hover,
     :focus {
-      color: #8aba19;
+      color: var(--green-100);
     }
   `,
 
@@ -86,6 +81,6 @@ const Style = {
     position: absolute;
     left: 30px;
     border-radius: 5px;
-    background-color: #ffa759;
+    background-color: var(--orange-100);
   `,
 };

@@ -131,8 +131,6 @@ const Style = {
     flex-direction: column;
     align-items: center;
 
-    color: #9a9a9a;
-
     cursor: pointer;
     &:hover {
       transition: all 0.2s linear;

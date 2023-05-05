@@ -63,11 +63,11 @@ const Style = {
   `,
 
   NameLength: styled.span`
-    color: #2f2f2f;
+    color: var(--grey-600);
   `,
 
   Title: styled.span`
-    color: #2f2f2f;
+    color: var(--grey-700);
   `,
 
   Caption: styled.p`
@@ -75,6 +75,6 @@ const Style = {
     margin-top: 8px;
 
     font-size: 10px;
-    color: #db5959;
+    color: var(--red-200);
   `,
 };

@@ -75,7 +75,8 @@ const Style = {
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
 
     font-size: 14px;
-    color: ${(props) => (props.cardColor === CARD_COMPANY.KAKAO.color ? '#494949' : 'white')};
+    color: ${(props) =>
+      props.cardColor === CARD_COMPANY.KAKAO.color ? 'var(--grey-700)' : 'var(--grey-100)'};
   `,
 
   CardCompany: styled.h2`
@@ -97,7 +98,7 @@ const Style = {
     transform: translate(0, -50%);
     border: none;
     border-radius: 4px;
-    background-color: #cbba64;
+    background-color: var(--yellow-100);
   `,
 
   CardNumberContainer: styled.div`

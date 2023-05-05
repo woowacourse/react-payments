@@ -80,7 +80,7 @@ const Style = {
     border: none;
     border-radius: 5px 5px 0 0;
     box-sizing: border-box;
-    background-color: #fdfdfd;
+    background-color: var(--grey-100);
 
     ${(props) => {
       if (props.isModalOpen) return 'animation:  modal-show 0.7s;';

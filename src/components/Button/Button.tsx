@@ -25,9 +25,10 @@ const Style = {
     border: none;
     border-radius: 7px;
     outline: 0;
-    background-color: ${(props) => (props.backgroundColor ? props.backgroundColor : '#75c4d2')};
+    background-color: ${(props) =>
+      props.backgroundColor ? props.backgroundColor : 'var(--primary-color)'};
 
-    color: ${(props) => (props.color ? props.color : 'white')};
+    color: ${(props) => (props.color ? props.color : 'var(--grey-100)')};
     font-size: ${(props) => (props.fontSize ? props.fontSize : '24px')};
     font-weight: 600;
 
@@ -37,14 +38,14 @@ const Style = {
       width: ${(props) => (props.width ? `${props.width}` : 'max-content')};
       height: ${(props) => (props.height ? `${props.height}` : 'max-content')};
 
-      color: ${(props) => (props.color ? props.color : 'black')};
+      color: ${(props) => (props.color ? props.color : 'var(--grey-700)')};
       font-size: ${(props) => (props.fontSize ? props.fontSize : '16px')};
       font-weight: bold;
       background-color: transparent;
     }
 
     &:disabled {
-      color: #aeadb0;
+      color: var(--grey-500);
     }
 
     &:hover {

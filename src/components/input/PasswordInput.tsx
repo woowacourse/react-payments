@@ -71,11 +71,11 @@ const Style = {
   `,
 
   Title: styled.span`
-    color: #2f2f2f;
+    color: var(--grey-700);
   `,
 
   Essential: styled.span`
-    color: red;
+    color: var(--red-100);
   `,
 
   InputsContainer: styled.div`
@@ -100,6 +100,6 @@ const Style = {
     margin-top: 8px;
 
     font-size: 10px;
-    color: #db5959;
+    color: var(--red-200);
   `,
 };
