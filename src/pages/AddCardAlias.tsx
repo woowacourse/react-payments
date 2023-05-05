@@ -51,7 +51,7 @@ const AddAlias = ({ cards, setCards }: CardList) => {
         <form onSubmit={handleSetAlias}>
           <Styled.Wrapper>
             <Styled.CardLabelWrapper>
-              <CardLabel labelText="카드등록이 완료되었습니다." />
+              <CardLabel labelText="카드 등록을 완료했어요." />
             </Styled.CardLabelWrapper>
             <Styled.CardWrapper>
               <Card
@@ -60,18 +60,18 @@ const AddAlias = ({ cards, setCards }: CardList) => {
                 cardOwnerName={cards[cards.length - 1].cardOwnerName}
                 cardCompany={cards[cards.length - 1].cardCompany}
               />
+              <CardAliasInput
+                type="text"
+                value={cardAlias}
+                maxLength={10}
+                placeholder="(선택) 카드 별칭을 10글자 이내로 적어주세요."
+                onChange={handleOnChange}
+                autoFocus={true}
+              />
+              <Styled.ButtonWrapper>
+                <SubmitButton textContent="확인" color={true} cursor={true} />
+              </Styled.ButtonWrapper>
             </Styled.CardWrapper>
-            <CardAliasInput
-              type="text"
-              value={cardAlias}
-              maxLength={10}
-              placeholder="10글자 이내의 카드 별칭을 적어주세요."
-              onChange={handleOnChange}
-              autoFocus={true}
-            />
-            <Styled.ButtonWrapper>
-              <SubmitButton textContent="확인" color={true} cursor={true} />
-            </Styled.ButtonWrapper>
           </Styled.Wrapper>
         </form>
       )}
