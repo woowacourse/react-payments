@@ -37,7 +37,7 @@ function AddCardInfo({ onSubmit }: AddCardFormProps) {
 
   const { isModalOpen, openModal, closeModal } = useModal(true);
 
-  const [isValid, errorMessages] = ValidateForm(state);
+  const { isValid } = ValidateForm(state);
 
   const handleCardNumbersChange: ValueAndOnChange[] = state.numbers.map((cardNumber, index) => ({
     value: cardNumber,
@@ -149,24 +149,20 @@ function AddCardInfo({ onSubmit }: AddCardFormProps) {
         onKeyDown={handleMovePrevFocus}
       >
         <CardNumberInputs valueAndOnChanges={handleCardNumbersChange} />
-        {<ErrorCaption>{!isValid && errorMessages.numbers}</ErrorCaption>}
 
         <ExpirationDateInput
           onChangeMonth={handleMonthInputChange}
           onChangeYear={handleYearInputChange}
         />
-        {<ErrorCaption>{!isValid && errorMessages.expirationDate}</ErrorCaption>}
 
         <OwnerNameInput value={state.ownerName} onChange={handleOwnerNameInputChange} />
 
         <SecurityCodeInput value={state.securityCode} onChange={handleSecurityCodeChange} />
-        {<ErrorCaption>{!isValid && errorMessages.securityCode}</ErrorCaption>}
 
         <PasswordInput
           onChangeFirst={handleFirstPasswordInputChange}
           onChangeSecond={handleSecondPasswordInputChange}
         />
-        {<ErrorCaption>{!isValid && errorMessages.password}</ErrorCaption>}
 
         <FormSubmitButton type="submit" disabled={!isValid}>
           다음
@@ -200,10 +196,11 @@ const FormSubmitButton = styled.button`
 
   :disabled {
     color: var(--light-gray-text-color);
+    cursor: not-allowed;
   }
 `;
 
-const ErrorCaption = styled.span`
+export const ErrorCaption = styled.span`
   height: 10px;
   margin-top: 5px;
   font-size: 10px;
