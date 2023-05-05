@@ -1,4 +1,8 @@
+/* eslint-disable no-restricted-globals */
+/* eslint-disable no-alert */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // eslint-disable-next-line
+import { existCreditCards, getCards } from 'api/mockAPI';
 import { useEffect, useState } from 'react';
 import * as T from 'types';
 
@@ -9,13 +13,17 @@ interface UseCreditCard {
   updateNickname: (number: string, newNickname: string) => void;
 }
 
-const existCreditCards = () => JSON.parse(localStorage.getItem('creditCards') || '[]') as T.CreditCard[];
-
 export const useCreditCardList = (): UseCreditCard => {
   const [creditCardList, setCreditCardList] = useState<T.CreditCard[]>([]);
 
+  const loadCardList = async () => {
+    const response = await getCards();
+    const cards = JSON.parse(response.data);
+    setCreditCardList(cards);
+  };
+
   useEffect(() => {
-    setCreditCardList(existCreditCards());
+    loadCardList();
   }, []);
 
   const saveCreditCard = (creditCard: T.CreditCard): void => {
@@ -24,7 +32,6 @@ export const useCreditCardList = (): UseCreditCard => {
   };
 
   const initCreditCardList = () => {
-    // eslint-disable-next-line no-restricted-globals
     const isInit = confirm('모든 카드를 초기화합니다.');
     if (isInit) {
       localStorage.setItem('creditCards', '[]');
