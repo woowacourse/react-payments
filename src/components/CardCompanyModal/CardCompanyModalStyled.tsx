@@ -10,16 +10,6 @@ const St = {
 
     border-radius: 8px 8px 0px 0px;
     background: white;
-
-    animation: fadeInUp 0.5s;
-    @keyframes fadeInUp {
-      from {
-        transform: translate3d(0, 100%, 0);
-      }
-      to {
-        transform: translateZ(0);
-      }
-    }
   `,
 
   CardCompanies: styled.div`
