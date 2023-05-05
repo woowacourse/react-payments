@@ -1,4 +1,4 @@
-import { Card } from "../../types";
+import dummyCard from "../../utils/dummyCard";
 import CardList from "./CardList";
 import type { Meta, StoryObj } from "@storybook/react";
 
@@ -15,16 +15,6 @@ const meta: Meta<typeof CardList> = {
 export default meta;
 type Story = StoryObj<typeof CardList>;
 
-const card: Card = {
-  cardNumber: { firstGroup: "1234", secondGroup: "1234", thirdGroup: "1234", fourthGroup: "1234" },
-  ownerName: "KIM",
-  expirationDate: { month: "10", year: "96" },
-  securityCode: "123",
-  password: { first: "1", second: "2" },
-  cardCompany: "BC",
-  alias: "",
-};
-
 export const Default: Story = {
   render: () => {
     return <CardList cards={[]} />;
@@ -33,12 +23,12 @@ export const Default: Story = {
 
 export const SingleCard: Story = {
   render: () => {
-    return <CardList cards={[card]} />;
+    return <CardList cards={[dummyCard]} />;
   },
 };
 
 export const ManyCards: Story = {
   render: () => {
-    return <CardList cards={[card, card, card, card, card]} />;
+    return <CardList cards={[dummyCard, dummyCard, dummyCard, dummyCard, dummyCard]} />;
   },
 };

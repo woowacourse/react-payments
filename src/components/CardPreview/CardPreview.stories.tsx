@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import CardPreview from "./CardPreview";
+import dummyCard from "../../utils/dummyCard";
 
 const meta: Meta<typeof CardPreview> = {
   title: "CardPreview",
@@ -15,20 +16,7 @@ const meta: Meta<typeof CardPreview> = {
   },
 
   args: {
-    card: {
-      cardNumber: {
-        firstGroup: "1234",
-        secondGroup: "1234",
-        thirdGroup: "1234",
-        fourthGroup: "1234",
-      },
-      expirationDate: {
-        month: "12",
-        year: "12",
-      },
-      ownerName: "aaa",
-      cardCompany: "BC",
-    },
+    card: dummyCard,
   },
 };
 
