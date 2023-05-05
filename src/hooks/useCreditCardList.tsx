@@ -21,6 +21,7 @@ export const useCreditCardList = (): UseCreditCard => {
   const loadCardList = async () => {
     const response = await getCards();
     const cards = JSON.parse(response.data);
+    console.log(cards);
     setCreditCardList(cards);
   };
 
@@ -31,6 +32,7 @@ export const useCreditCardList = (): UseCreditCard => {
   const saveCreditCard = async (creditCard: T.CreditCard) => {
     const response = await addCard(creditCard);
     const cards = JSON.parse(response.data);
+    console.log(cards);
     setCreditCardList(cards);
 
     navigate('/register-done');

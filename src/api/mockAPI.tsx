@@ -8,11 +8,10 @@ interface Response {
   data: string;
 }
 
-const existCreditCardsJSON = localStorage.getItem('creditCards') || '[]';
-export const existCreditCards = () => JSON.parse(existCreditCardsJSON) as CreditCard[];
+export const existCreditCards = () => JSON.parse(localStorage.getItem('creditCards') || '[]') as CreditCard[];
 
 export const getCards = () => new Promise<Response>((resolve) => setTimeout(() => resolve({
-  data: existCreditCardsJSON,
+  data: JSON.stringify(existCreditCards()),
 }), 500));
 
 export const addCard = (creditCard: CreditCard) => new Promise<Response>((resolve) => {
