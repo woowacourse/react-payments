@@ -11,7 +11,7 @@ const spinAnimation = keyframes`
 `;
 
 export const SectionWrapper = styled.section`
-  margin-top: 180px;
+  margin-top: 184px;
   display: flex;
   flex-direction: column;
   justify-content: center;
