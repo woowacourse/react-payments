@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Input } from '../input/Input';
 import { Button } from '../Button/Button';
+import { Loading } from '../Loading';
 import { CardViewer } from '../CardViewer';
 import { CardNotFound } from '../CardNotFound';
 import { useCardDataService } from '../../hooks/useCardDataService';
@@ -12,6 +13,7 @@ import { CARD_ALIAS_SIZE, ERROR } from '../../constants';
 export function CardAliasAddForm() {
   const navigate = useNavigate();
   const location = useLocation();
+  const [isShowLoading, setIsShowLoading] = useState(false);
   const [cardAlias, setCardAlias] = useState('');
   const { getCard, addAliasToCard } = useCardDataService();
 
@@ -23,11 +25,7 @@ export function CardAliasAddForm() {
   if (!card) return <CardNotFound />;
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (isOverMaxLength(e.target.value, CARD_ALIAS_SIZE)) {
-      alert(ERROR.INVALID_CARD_ALIAS);
-
-      e.target.value = '';
-    }
+    if (isOverMaxLength(e.target.value, CARD_ALIAS_SIZE)) alert(ERROR.INVALID_CARD_ALIAS);
 
     setCardAlias(e.target.value);
   };
@@ -36,11 +34,21 @@ export function CardAliasAddForm() {
     e.preventDefault();
     if (!(e.target instanceof HTMLFormElement)) return;
 
+    setIsShowLoading(true);
     addAliasToCard(card.id, e.target.alias.value);
-    navigate('/');
+    closeLoading();
   };
 
-  return (
+  const closeLoading = () => {
+    setTimeout(() => {
+      setIsShowLoading(false);
+      navigate('/');
+    }, 5000);
+  };
+
+  return isShowLoading ? (
+    <Loading />
+  ) : (
     <Style.Container>
       <Style.Title>카드등록이 완료되었습니다.</Style.Title>
       <CardViewer card={card} />
