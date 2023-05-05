@@ -28,7 +28,7 @@ const Style = {
       border-radius: 50%;
       border: 10px solid #3498db;
       ${prixClipFix}
-      animation: prixClipFix 2s infinite linear;
+      animation: prixClipFix 3s infinite linear;
     }
   `,
 };
