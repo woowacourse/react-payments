@@ -28,6 +28,7 @@ const NAVIGATE = {
   HOME: "/",
   ADD_CARD_FORM: "/addCardForm",
   ADD_CARD_NAME: "/addCardName",
+  ADD_CARD_LOADING: "/addCardLoading",
 } as const;
 
 const STRING = {

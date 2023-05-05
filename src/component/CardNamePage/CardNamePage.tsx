@@ -40,38 +40,36 @@ function CardNamePage({ lastCard, addCreditCard }: CardNamePageProps) {
 
     addCreditCard(newCard);
 
-    navigate(NAVIGATE.HOME);
+    navigate(NAVIGATE.ADD_CARD_LOADING);
   };
 
   return (
-    <>
-      <Style.Page>
-        <Style.TopSection>
-          <Style.Title>카드등록이 완료되었습니다.</Style.Title>
-          <CardDetailView
-            cardNumberHidden={cardNumberHidden}
-            cardDate={cardDate}
-            cardOwnerName={cardOwnerName}
-            cardCompany={cardCompany}
-          />
-        </Style.TopSection>
-        <Style.Form onSubmit={registerCard}>
-          <Style.Input
-            type={TYPE.TEXT}
-            placeholder={PLACE_HOLDER.CARD_NAME_HINT}
-            ref={nameInputRef}
-            onChange={changeCardName}
-          />
-          <Style.SubmitLayout>
-            <InputGuide warningText={warningText} />
-            <Style.SubmitButton
-              type={TYPE.SUBMIT}
-              value={"확인"}
-            ></Style.SubmitButton>
-          </Style.SubmitLayout>
-        </Style.Form>
-      </Style.Page>
-    </>
+    <Style.Page>
+      <Style.TopSection>
+        <Style.Title>카드등록이 완료되었습니다.</Style.Title>
+        <CardDetailView
+          cardNumberHidden={cardNumberHidden}
+          cardDate={cardDate}
+          cardOwnerName={cardOwnerName}
+          cardCompany={cardCompany}
+        />
+      </Style.TopSection>
+      <Style.Form onSubmit={registerCard}>
+        <Style.Input
+          type={TYPE.TEXT}
+          placeholder={PLACE_HOLDER.CARD_NAME_HINT}
+          ref={nameInputRef}
+          onChange={changeCardName}
+        />
+        <Style.SubmitLayout>
+          <InputGuide warningText={warningText} />
+          <Style.SubmitButton
+            type={TYPE.SUBMIT}
+            value={"확인"}
+          ></Style.SubmitButton>
+        </Style.SubmitLayout>
+      </Style.Form>
+    </Style.Page>
   );
 }
 

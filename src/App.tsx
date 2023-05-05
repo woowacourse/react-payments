@@ -4,6 +4,7 @@ import CardDetailPage from "./component/CardDetailPage/CardDetailPage";
 import CardListPage from "./component/CardListPage/CardListPage";
 import { Card, CreditCard } from "./types/card";
 import CardNamePage from "./component/CardNamePage/CardNamePage";
+import CardLoadingPage from "./component/CardLoadingPage/CardLoadingPage";
 
 function App() {
   const [creditCardList, setCreditCardList] = useState<CreditCard[]>([]);
@@ -37,6 +38,10 @@ function App() {
             element={
               <CardNamePage addCreditCard={addCreditCard} lastCard={lastCard} />
             }
+          />
+          <Route
+            path="/addCardLoading"
+            element={<CardLoadingPage lastCard={lastCard} />}
           />
         </Routes>
       </BrowserRouter>
