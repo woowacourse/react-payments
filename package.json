@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://regularpark.github.io/react-payments/",
   "dependencies": {
+    "@storybook/addon-viewport": "^7.0.8",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
