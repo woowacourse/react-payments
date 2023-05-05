@@ -6,14 +6,13 @@ import App from './pages';
 
 import './styles/index.css';
 
-const basename = window.location.pathname || '';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 root.render(
   <React.StrictMode>
-    <BrowserRouter basename={basename}>
+    <BrowserRouter>
       <App />
     </BrowserRouter>
   </React.StrictMode>,

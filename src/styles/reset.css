@@ -2,13 +2,23 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-size: 100%;
 }
 
 input {
+  border: none;
   background: transparent;
 }
 
 button {
+  color: initial;
+  border: none;
   background: transparent;
   cursor: pointer;
+}
+
+ul,
+ol,
+li {
+  list-style: none;
 }

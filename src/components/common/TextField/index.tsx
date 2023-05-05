@@ -6,25 +6,29 @@ import styles from './textField.module.css';
 
 interface Props {
   label: string;
-  size: 'small' | 'medium' | 'fit';
+  size?: 'small' | 'medium' | 'fit';
   valueLength?: number;
   maxLength?: number;
   tooltipMessage?: string;
-  split?: true;
+  split?: boolean;
+  toggleHelperText?: boolean;
+  helperText?: { text: string; color: 'normal' | 'error' };
   children: ReactNode;
 }
 
 const TextField = ({
   label,
-  size,
+  size = 'fit',
   valueLength,
   maxLength,
   tooltipMessage,
-  split,
+  split = false,
+  toggleHelperText,
+  helperText,
   children,
 }: Props) => {
   return (
-    <label>
+    <label className={styles.label}>
       {label}
       {maxLength && (
         <span className={styles.valueLength}>
@@ -42,6 +46,11 @@ const TextField = ({
         <div className={`${styles.tooltipContainer} ${styles[size]}`}>
           <Tooltip message={tooltipMessage} />
         </div>
+      )}
+      {helperText && (
+        <p className={`${styles.helperText} ${styles[helperText.color]}`}>
+          {toggleHelperText ? helperText.text : ''}
+        </p>
       )}
     </label>
   );

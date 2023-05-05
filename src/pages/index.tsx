@@ -1,41 +1,32 @@
-import { useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router';
+import { Navigate } from 'react-router-dom';
 
 import HoldingCardsPage from './HoldingCardsPage';
-import CardRegisterPage from './CardRegisterPage';
+import CardInfoRegisterPage from './CardInfoRegisterPage';
+import CardNameRegisterPage from './CardNameRegisterPage';
+import CardFormContext from './contexts/CardFormContext';
+import CardInfoRequired from './contexts/CardInfoRequired';
 
 import Layout from '../components/common/Layout';
-import type { CardInfo } from '../types/card';
+import useCards from '../hooks/useCards';
 
 function App() {
-  const [cards, setCards] = useState<CardInfo[]>([]);
-
-  useEffect(() => {
-    const cardsData = localStorage.getItem('cards');
-
-    if (cardsData === null) return;
-
-    setCards(JSON.parse(cardsData));
-  }, []);
-
-  useEffect(() => {
-    if (cards.length > 0) {
-      localStorage.setItem('cards', JSON.stringify(cards));
-    }
-  }, [cards]);
-
-  const registerCard = (card: CardInfo) => {
-    setCards([...cards, card]);
-  };
+  const { cards, registerCard } = useCards();
 
   return (
     <Routes>
       <Route element={<Layout />}>
         <Route path="/" element={<HoldingCardsPage cards={cards} />} />
-        <Route
-          path="card-register"
-          element={<CardRegisterPage registerCard={registerCard} />}
-        />
+        <Route element={<CardFormContext />}>
+          <Route path="card-info-register" element={<CardInfoRegisterPage />} />
+          <Route element={<CardInfoRequired />}>
+            <Route
+              path="card-name-register"
+              element={<CardNameRegisterPage registerCard={registerCard} />}
+            />
+          </Route>
+        </Route>
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Routes>
   );

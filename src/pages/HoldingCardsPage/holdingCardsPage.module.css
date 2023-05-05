@@ -9,5 +9,19 @@
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
-  row-gap: 46px;
+}
+
+.cardList {
+  margin-bottom: 36px;
+}
+
+.cardItem + .cardItem {
+  margin-top: 36px;
+}
+
+.cardItem > p {
+  height: 30px;
+  margin-top: 10px;
+  text-align: center;
+  line-height: 30px;
 }

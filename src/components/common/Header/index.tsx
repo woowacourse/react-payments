@@ -1,15 +1,17 @@
 import type { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import Button from '../Button';
+
 import styles from './header.module.css';
 
 interface Props {
   title: string;
-  previousButton?: true;
+  previousButton?: boolean;
   children?: ReactNode;
 }
 
-const Header = ({ title, previousButton, children }: Props) => {
+const Header = ({ title, previousButton = false, children }: Props) => {
   const navigate = useNavigate();
 
   const handlePreviousButtonClick = () => {
@@ -19,13 +21,11 @@ const Header = ({ title, previousButton, children }: Props) => {
   return (
     <header className={styles.header}>
       {previousButton && (
-        <button
-          type="button"
-          className={styles.previousButton}
-          onClick={handlePreviousButtonClick}
-        >
-          &lt;
-        </button>
+        <div className={styles.previousButton}>
+          <Button type="button" onClick={handlePreviousButtonClick}>
+            &lt;
+          </Button>
+        </div>
       )}
       <h1 className={styles.title}>{title}</h1>
       {children}

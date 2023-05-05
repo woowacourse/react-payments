@@ -1,0 +1,78 @@
+.container {
+  width: 213px;
+  height: 133px;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  padding: 12px 14px;
+  color: var(--text-primary);
+  transition: background 0.2s ease-in 0s;
+}
+
+.company {
+  height: 36px;
+  font-size: 12px;
+}
+
+.cardNumber {
+  display: flex;
+  column-gap: 10px;
+  height: 20px;
+  margin: 4px 0;
+  line-height: 20px;
+  font-size: 13px;
+}
+
+.number {
+  width: 40px;
+  letter-spacing: 0.2em;
+}
+
+.password {
+  width: 40px;
+  letter-spacing: -0.3em;
+}
+
+.detailContainer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+}
+
+.container.bc {
+  color: var(--text-white);
+  background: var(--card-bc);
+}
+
+.container.shinhan {
+  color: var(--text-white);
+  background: var(--card-shinhan);
+}
+
+.container.kakaobank {
+  background: var(--card-kakaobank);
+}
+
+.container.hyundai {
+  color: var(--text-white);
+  background: var(--card-hyundai);
+}
+
+.container.woori {
+  color: var(--text-white);
+  background: var(--card-woori);
+}
+
+.container.lotte {
+  color: var(--text-white);
+  background: var(--card-lotte);
+}
+
+.container.hana {
+  color: var(--text-white);
+  background: var(--card-hana);
+}
+
+.container.kb {
+  color: var(--text-white);
+  background: var(--card-kb);
+}

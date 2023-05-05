@@ -1,0 +1,13 @@
+.cardSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.companySelectButton {
+  margin-top: 10px;
+}
+
+.formSection {
+  margin-top: 20px;
+}

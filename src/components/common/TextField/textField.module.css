@@ -1,4 +1,4 @@
-label {
+.label {
   display: block;
   position: relative;
   font-size: 12px;
@@ -21,6 +21,7 @@ label {
 .inputContainer > p {
   flex: 1 1;
   width: 100%;
+  text-align: center;
   font-size: 24px;
 }
 
@@ -58,7 +59,7 @@ label {
 
 .tooltipContainer {
   position: absolute;
-  top: 45%;
+  top: 35%;
 }
 
 .tooltipContainer.small {
@@ -66,9 +67,23 @@ label {
 }
 
 .tooltipContainer.medium {
-  left: 60%;
+  left: 55%;
 }
 
 .tooltipContainer.fit {
   right: 0;
+}
+
+.helperText {
+  height: 24px;
+  line-height: 24px;
+  color: var(--error-primary);
+}
+
+.helperText.normal {
+  color: var(--text-secondary);
+}
+
+.helperText.error {
+  color: var(--error-primary);
 }
