@@ -6,6 +6,7 @@ import AddCard from './pages/AddCard';
 import CardType from './types/Card';
 import { getLocalStorage, setLocalStorage } from './utils/handleLocalStorage';
 import AddCardAlias from './pages/AddCardAlias';
+import { NotFound } from './pages/NotFound';
 
 const initCards = () => {
   const localStorageCards = getLocalStorage('cards');
@@ -33,6 +34,7 @@ function App() {
           path="/add-card-alias"
           element={<AddCardAlias cards={cards} setCards={setCards} />}
         />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );
