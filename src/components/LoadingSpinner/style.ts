@@ -47,3 +47,9 @@ export const LoadingSpinner = styled.span`
   background-position: 0 0, 40px 0, 80px 0, 120px 0;
   animation: ${pgfill} 1s linear infinite;
 `;
+
+export const LoadingSpinnerWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 40px 0px 40px 0px;
+`;

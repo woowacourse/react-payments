@@ -2,7 +2,9 @@ import * as S from './style';
 
 function LoadingSpinner() {
   return (
-    <S.LoadingSpinner />
+    <S.LoadingSpinnerWrapper>
+      <S.LoadingSpinner />
+    </S.LoadingSpinnerWrapper>
   );
 }
 export default LoadingSpinner;
