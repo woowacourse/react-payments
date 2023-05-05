@@ -29,6 +29,7 @@ const meta: Meta<typeof CardRegisterPage> = {
 };
 
 const MOCK_CARD_CONTEXT: CardInfo = {
+  name: '황펭',
   company: '카카오뱅크',
   number: { first: '0000', second: '0000', third: '0000', fourth: '0000' },
   expiredDate: { month: '12', year: '24' },
