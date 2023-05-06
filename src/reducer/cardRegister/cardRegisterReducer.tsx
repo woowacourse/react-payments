@@ -23,7 +23,7 @@ export const initialCardRegisterInfo = {
   alias: '우아한 카드',
 };
 
-export function cardRegisterReducer(state: CardRegisterInfo, action: CardRegisterAction) {
+export function cardRegisterReducer(state: CardRegisterInfo, action: CardRegisterAction): CardRegisterInfo {
   switch (action.type) {
     case 'UPDATE_CARD_NUMBER': {
       const { field, value } = action.payload;
@@ -37,22 +37,57 @@ export function cardRegisterReducer(state: CardRegisterInfo, action: CardRegiste
       };
     }
     case 'UPDATE_EXPIRATION_DATE': {
-      return state;
+      const { field, value } = action.payload;
+
+      return {
+        ...state,
+        expirationDate: {
+          ...state.expirationDate,
+          [field]: value,
+        },
+      };
     }
     case 'UPDATE_HOLDER_NAME': {
-      return state;
+      const { value: holderName } = action.payload;
+
+      return {
+        ...state,
+        holderName,
+      };
     }
     case 'UPDATE_CVC': {
-      return state;
+      const { value: cvc } = action.payload;
+
+      return {
+        ...state,
+        cvc,
+      };
     }
     case 'UPDATE_PASSWORD': {
-      return state;
+      const { field, value } = action.payload;
+
+      return {
+        ...state,
+        password: {
+          ...state.password,
+          [field]: value,
+        },
+      };
     }
     case 'UPDATE_ALIAS': {
-      return state;
+      const { value: alias } = action.payload;
+
+      return {
+        ...state,
+        alias,
+      };
     }
     case 'UPDATE_BANK': {
-      return state;
+      const { value: bank } = action.payload;
+      return {
+        ...state,
+        bank,
+      };
     }
 
     default:

@@ -11,14 +11,15 @@ import CardPasswordInput from '../../components/pages/CardRegister/CardPasswordI
 import { BankInfo } from '../../constants/banks';
 import { useCardRegisterContext } from '../../context/CardRegisterContext';
 import { useCardRegister } from '../../hooks/card/card';
+import { createCardRegisterAction } from '../../reducer/cardRegister/cardRegisterAction';
 import * as Styled from './CardRegister.styles';
 
 export default function CardRegister() {
-  const { cardRegisterInfo, handleCardInfo } = useCardRegisterContext();
+  const { cardRegisterInfo, dispatch } = useCardRegisterContext();
   const { isAllFilled, handleSubmit, handleChange } = useCardRegister();
 
   const selectBank = (bank: BankInfo) => {
-    handleCardInfo('bank', bank);
+    dispatch(createCardRegisterAction('UPDATE_BANK', { value: bank }));
   };
 
   return (
