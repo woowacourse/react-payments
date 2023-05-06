@@ -12,13 +12,6 @@ const { NEXT, PREV } = DIRECTION;
 const meta = {
   component: ExpirationDateInput,
   title: "Input/ExpirationDate",
-  decorators: [
-    (Story) => (
-      <CardInfoProvider>
-        <Story />
-      </CardInfoProvider>
-    ),
-  ],
 } satisfies Meta<typeof ExpirationDateInput>;
 
 export default meta;
@@ -73,8 +66,10 @@ export const ExpirationDate = () => {
   };
 
   return (
-    <form onChange={handleFocusNext} onKeyDown={handleKeyDown}>
-      <ExpirationDateInput />
-    </form>
+    <CardInfoProvider>
+      <form onChange={handleFocusNext} onKeyDown={handleKeyDown}>
+        <ExpirationDateInput />
+      </form>
+    </CardInfoProvider>
   );
 };
