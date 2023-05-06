@@ -1,9 +1,13 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext } from 'react';
 import Input from '../common/Input';
 import InputBox from '../common/InputBox';
 import InputGroup from '../common/InputGroup';
 import InputSeparator from '../common/InputSeparator';
-import { INPUT, INPUT_MAX_LENGTH } from '../../utils/Constants';
+import {
+  INPUT,
+  INPUT_MAX_LENGTH,
+  INPUT_REF_LENGTH,
+} from '../../utils/Constants';
 import {
   CardFormErrorValueContext,
   CardFormValueContext,
@@ -15,22 +19,12 @@ const CardNumberInput = () => {
   const { cardNumberError, setCardNumberError } = useContext(
     CardFormErrorValueContext
   );
-  const inputRefs = [
-    useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null),
-  ];
 
-  const mutableInputRefs = inputRefs.map(
-    (inputRef) => inputRef as React.MutableRefObject<HTMLInputElement>
-  );
-
-  const { value, errorMessage, handleChangeInput } = useMultipleInput(
-    inputRefs.length,
-    mutableInputRefs,
-    INPUT_MAX_LENGTH.CARD_NUMBER_LENGTH
-  );
+  const { value, errorMessage, handleChangeInput, inputRefs } =
+    useMultipleInput(
+      INPUT_REF_LENGTH.CARD_NUMBER_LENGTH,
+      INPUT_MAX_LENGTH.CARD_NUMBER_LENGTH
+    );
 
   setCardNumber(value);
   setCardNumberError(errorMessage);

@@ -1,10 +1,10 @@
-import { useContext, useRef } from 'react';
+import { useContext } from 'react';
 import styled from 'styled-components';
 import Input from '../common/Input';
 import InputBox from '../common/InputBox';
 import InputGroup from '../common/InputGroup';
 import { DotIcon } from '../../assets/icons';
-import { INPUT_MAX_LENGTH } from '../../utils/Constants';
+import { INPUT_MAX_LENGTH, INPUT_REF_LENGTH } from '../../utils/Constants';
 import {
   CardFormErrorValueContext,
   CardFormValueContext,
@@ -16,20 +16,12 @@ const PasswordInput = () => {
   const { passwordError, setPasswordError } = useContext(
     CardFormErrorValueContext
   );
-  const inputRefs = [
-    useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null),
-  ];
 
-  const mutableInputRefs = inputRefs.map(
-    (inputRef) => inputRef as React.MutableRefObject<HTMLInputElement>
-  );
-
-  const { value, errorMessage, handleChangeInput } = useMultipleInput(
-    inputRefs.length,
-    mutableInputRefs,
-    INPUT_MAX_LENGTH.PASSWORD_LENGTH
-  );
+  const { value, errorMessage, handleChangeInput, inputRefs } =
+    useMultipleInput(
+      INPUT_REF_LENGTH.PASSWORD_LENGTH,
+      INPUT_MAX_LENGTH.PASSWORD_LENGTH
+    );
 
   setPassword(value);
   setPasswordError(errorMessage);

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { createRef, useState } from 'react';
 import {
   isInputNumber,
   isNextInputFocusable,
@@ -6,13 +6,12 @@ import {
 } from '../utils/InputValidate';
 import { ERROR_MESSAGE } from '../utils/Constants';
 
-export const useMultipleInput = (
-  numberOfInputs: number,
-  inputRefs: React.MutableRefObject<HTMLInputElement>[],
-  maxLength: number
-) => {
+export const useMultipleInput = (numberOfInputs: number, maxLength: number) => {
   const [value, setValue] = useState(Array(numberOfInputs).fill(''));
   const [errorMessage, setErrorMessage] = useState('');
+  const inputRefs = Array.from({ length: numberOfInputs }, () =>
+    createRef<HTMLInputElement>()
+  );
 
   const handleChangeInput =
     (inputIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,5 +43,5 @@ export const useMultipleInput = (
       setErrorMessage('');
     };
 
-  return { value, errorMessage, handleChangeInput };
+  return { value, errorMessage, handleChangeInput, inputRefs };
 };
