@@ -2,8 +2,8 @@ import { Meta, StoryObj } from '@storybook/react';
 import StoryProvider from 'stories/StoryProvider';
 import useCreditCardForm from 'hooks/useCreditCardForm';
 import { useEffect } from 'react';
-import { within } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { within, userEvent } from '@storybook/testing-library';
+
 import sleep from 'stories/sleep';
 import CreditCardNicknameInputForm from './CreditCardNicknameInputForm';
 

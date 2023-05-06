@@ -4,14 +4,25 @@
     "es6": true,
     "node": true
   },
-  "extends": ["airbnb", "airbnb-typescript"],
+  "extends": [
+    "airbnb",
+    "airbnb-typescript",
+    "plugin:storybook/recommended"
+  ],
   "parserOptions": {
     "project": "./tsconfig.json"
   },
   "rules": {
     "react/jsx-filename-extension": [
       1,
-      { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
+      {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx"
+        ]
+      }
     ],
     "import/extensions": [
       "error",
@@ -30,13 +41,23 @@
     "import/no-unresolved": "off",
     "@typescript-eslint/comma-dangle": "off",
     "react/jsx-props-no-spreading": "off",
-    "import/no-extraneous-dependencies": [0, { "devDependencies": true }],
-    "import/prefer-default-export": ["off"],
+    "import/no-extraneous-dependencies": [
+      0,
+      {
+        "devDependencies": true
+      }
+    ],
+    "import/prefer-default-export": [
+      "off"
+    ],
     "react/require-default-props": "off"
   },
   "overrides": [
     {
-      "files": ["*.ts", "*.tsx"],
+      "files": [
+        "*.ts",
+        "*.tsx"
+      ],
       "rules": {
         "no-undef": "off"
       }
