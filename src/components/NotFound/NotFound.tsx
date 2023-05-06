@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Container } from "../@common";
 import Button from "../@common/Button/Button";
 import ROUTE_PATH from "../../constants/routePath";
+import FlexBox from "../@common/FlexBox";
 
 const NotFound = () => {
   return (
@@ -11,7 +12,7 @@ const NotFound = () => {
         유효하지 않은 경로입니다😲
         <br /> 카드를 추가해 볼까요?
       </RecommendMessage>
-      <NavigateButtonContainer>
+      <FlexBox justify="space-around">
         <Link to={ROUTE_PATH.root}>
           <Button type="button" bgColor="var(--color-pale)" width="150px">
             홈으로
@@ -22,7 +23,7 @@ const NotFound = () => {
             카드 추가하기
           </Button>
         </Link>
-      </NavigateButtonContainer>
+      </FlexBox>
     </Container>
   );
 };
@@ -33,13 +34,4 @@ const RecommendMessage = styled.span`
   font-size: 20px;
   font-weight: 700;
   text-align: center;
-`;
-
-const NavigateButtonContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-
-  width: 100%;
 `;

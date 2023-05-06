@@ -10,6 +10,7 @@ import useCardFetch from "../../hooks/useCardFetch";
 import ROUTE_PATH from "../../constants/routePath";
 import type { Card } from "../../types";
 import Button from "../../components/@common/Button/Button";
+import FlexBox from "../../components/@common/FlexBox";
 
 type CardAliasRegistrationPageProps = {
   onSubmit: (card: Card) => void;
@@ -52,16 +53,16 @@ const CardAliasRegistrationPage = ({ onSubmit }: CardAliasRegistrationPageProps)
       <Container justify="center">
         <StatusMessage>카드 등록에 실패했어요...😥</StatusMessage>
         <CardPreview card={previewCard} />
-        <NavigateButtonContainer>
+        <FlexBox justify="space-around">
           <Link to={ROUTE_PATH.root}>
-            <Button type="button" bgColor="var(--color-pale)">
+            <Button type="button" bgColor="var(--color-pale)" width="150px">
               홈으로
             </Button>
           </Link>
-          <Button onClick={addCard} type="button" bgColor="var(--color-primary)">
+          <Button onClick={addCard} type="button" bgColor="var(--color-primary)" width="150px">
             다시 시도하기
           </Button>
-        </NavigateButtonContainer>
+        </FlexBox>
       </Container>
     );
   }
@@ -82,18 +83,18 @@ const CardAliasRegistrationPage = ({ onSubmit }: CardAliasRegistrationPageProps)
       <Container justify="center">
         <StatusMessage>카드 등록 완료✅</StatusMessage>
         <CardPreview card={previewCard} />
-        <NavigateButtonContainer>
+        <FlexBox justify="space-around">
           <Link to={ROUTE_PATH.root}>
-            <Button type="button" bgColor="var(--color-pale)">
+            <Button type="button" bgColor="var(--color-pale)" width="150px">
               홈으로
             </Button>
           </Link>
           <Link to={ROUTE_PATH.addCard}>
-            <Button type="button" bgColor="var(--color-primary)">
+            <Button type="button" bgColor="var(--color-primary)" width="150px">
               추가 등록하기
             </Button>
           </Link>
-        </NavigateButtonContainer>
+        </FlexBox>
       </Container>
     );
   }
@@ -151,15 +152,6 @@ const AddCardButton = styled(Button)<{ isAliasInputFilled: boolean }>`
   bottom: 26px;
   width: calc(100% - 56px);
   background-color: ${(props) => `var(--color-${props.isAliasInputFilled ? "primary" : "pale"})`};
-`;
-
-const NavigateButtonContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-
-  width: 100%;
 `;
 
 export default CardAliasRegistrationPage;
