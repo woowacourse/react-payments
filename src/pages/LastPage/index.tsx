@@ -7,13 +7,15 @@ import Input, { CardNickname } from "components/Input";
 import TextLimit from "components/TextLimit";
 import GotLost from "pages/GotLost";
 import useSetCardInfo from "hooks/useSetCardInfo";
-import useInitCardInfo from "hooks/useInitCardInfo";
+import { CardInfo } from "types";
 import { LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
 const { NOT_ONLY_BLANK } = VALID_INPUT;
 
-const LastPage = () => {
-  const cardInfo = useInitCardInfo().cardInfo;
+interface Props {
+  cardInfo: CardInfo;
+}
 
+const LastPage = ({ cardInfo }: Props) => {
   const [nickname, setNickname] = useState("");
 
   const handleNicknameChange = ({ target }: ChangeEvent<HTMLInputElement>) => {

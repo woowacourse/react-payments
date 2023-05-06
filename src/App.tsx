@@ -15,7 +15,14 @@ const App = () => {
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Routes>
-        <Route path="/" element={<MainPage cardList={cardList} />} />
+        <Route
+          path="/"
+          element={
+            <CardInfoProvider>
+              <MainPage cardList={cardList} />
+            </CardInfoProvider>
+          }
+        />
         <Route
           path="/register"
           element={
