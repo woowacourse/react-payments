@@ -1,4 +1,4 @@
-import AppBar from "../../components/AppBar/AppBar";
+import AppBar from "../../components/@common/AppBar/AppBar";
 import CardPreview from "../../components/CardPreview/CardPreview";
 import CardNumberInput from "../../components/CardNumberInput/CardNumberInput";
 import CardOwnerNameInput from "../../components/CardOwnerNameInput/CardOwnerNameInput";

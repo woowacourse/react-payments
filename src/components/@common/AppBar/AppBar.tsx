@@ -2,7 +2,7 @@ import { PropsWithChildren } from "react";
 import { Link } from "react-router-dom";
 
 import styled from "styled-components";
-import Button from "../@common/Button/Button";
+import Button from "../Button/Button";
 
 type AppBarProps = {
   prevButton?: boolean;
