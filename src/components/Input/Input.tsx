@@ -1,16 +1,7 @@
 import styles from './Input.module.css';
-import { forwardRef } from 'react';
+import { InputHTMLAttributes, forwardRef } from 'react';
 
-type InputProps = {
-  width: string;
-  value: string;
-  name?: string;
-  className?: string;
-  maxLength?: number;
-  type?: string;
-  required?: boolean;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-};
+type InputProps = InputHTMLAttributes<HTMLInputElement> & { width: string };
 
 const Input = forwardRef<HTMLInputElement, InputProps>(({ width, ...rest }, ref) => {
   return (
