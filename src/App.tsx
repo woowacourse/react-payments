@@ -19,9 +19,9 @@ const router = createBrowserRouter([
     element: <RegisterCardName />,
   },
   {
-    path: '/*',
+    path: '*',
     element: <NotFound />,
-  }
+  },
 ]);
 
 const App = () => {
