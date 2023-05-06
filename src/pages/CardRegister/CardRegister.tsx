@@ -16,7 +16,7 @@ import * as Styled from './CardRegister.styles';
 
 export default function CardRegister() {
   const { cardRegisterInfo, dispatch } = useCardRegisterContext();
-  const { isAllFilled, handleSubmit, handleChange } = useCardRegister();
+  const { isAllValid, handleSubmit, handleChange } = useCardRegister();
 
   const selectBank = (bank: BankInfo) => {
     dispatch(createCardRegisterAction('UPDATE_BANK', { value: bank }));
@@ -35,7 +35,7 @@ export default function CardRegister() {
             <CardNameInput />
             <CardCVCInput />
             <CardPasswordInput />
-            {isAllFilled && <Styled.CompleteButton>다음</Styled.CompleteButton>}
+            {isAllValid && <Styled.CompleteButton>다음</Styled.CompleteButton>}
           </Styled.RegisterForm>
         </Styled.InfoSection>
         <BankSelectDialog onClick={selectBank} />
