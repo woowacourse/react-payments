@@ -10,9 +10,9 @@ import SecurityCodeInput from './FormInputs/SecurityCodeInput';
 import PasswordInput from './FormInputs/PasswordInput';
 import CardBankList from './CardBankList';
 import { useContext, useState } from 'react';
-import { useFormHandler } from 'hooks/useFormHandler';
 import { AddCardContext } from 'context/CardContext';
 import { Card } from 'types/Card';
+import { useCardFormHandler } from 'pages/RegisterPage/hooks/useCardFormHandler';
 
 const CardRegisterForm = () => {
   const { cardNumber, date, name, cardCompany } = useContext(AddCardContext);
@@ -30,7 +30,7 @@ const CardRegisterForm = () => {
     cardCompany: cardCompany,
   };
 
-  const { handleForm } = useFormHandler(cardInfo);
+  const { handleForm } = useCardFormHandler(cardInfo);
 
   return (
     <>
