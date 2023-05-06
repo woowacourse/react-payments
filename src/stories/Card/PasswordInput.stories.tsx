@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from '@storybook/react';
+import { PasswordInput } from 'components/Input';
 import { useRef, useState } from 'react';
-import { PasswordInput } from '../../components/Input/PasswordInput';
 
 const meta = {
   title: 'Payments/Card/PasswordInput',

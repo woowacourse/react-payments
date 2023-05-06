@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from '@storybook/react';
+import { SecurityCodeInput } from 'components/Input';
 import { useRef, useState } from 'react';
-import { SecurityCodeInput } from '../../components/Input/SecurityCodeInput';
 
 const meta = {
   title: 'Payments/Card/SecurityCodeInput',

@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from '@storybook/react';
+import { OwnerNameInput } from 'components/Input';
 import { useRef, useState } from 'react';
-import { OwnerNameInput } from '../../components/Input/OwnerNameInput';
 
 const meta = {
   title: 'Payments/Card/OwnerNameInput',

@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from '@storybook/react';
+import { CardNumberInput } from 'components/Input';
 import { useRef, useState } from 'react';
-import { CardNumberInput } from '../../components/Input/CardNumberInput';
 
 const meta = {
   title: 'Payments/Card/CardNumberInput',
