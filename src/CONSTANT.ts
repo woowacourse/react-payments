@@ -37,3 +37,5 @@ export const CARD_CO_NAME = {
   shinhan: "신한카드",
   hyundai: "현대카드",
 };
+
+export const LOADING_TIME = 3000;
