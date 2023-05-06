@@ -2,7 +2,7 @@ import Card from '../../components/Card';
 import { useCardListContext } from '../../contexts/CardListContexts';
 import styled from 'styled-components';
 import CardAddButton from './CardAddButton';
-import Layout from '../../components/Layout/Layout';
+import Layout from '../../components/Layout';
 
 type CardListProps = {
   setPageCardRegistration: () => void;

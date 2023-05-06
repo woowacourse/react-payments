@@ -4,7 +4,7 @@ import BottomSheet from '../../components/BottomSheet';
 import CardRegistrationForm from '../../components/CardRegistrationForm';
 import { ReactComponent as ChevronLeft } from '../../assets/chevron-left.svg';
 import BankProfileList from '../../components/BankProfileList';
-import Layout from '../../components/Layout/Layout';
+import Layout from '../../components/Layout';
 import type { CardType } from '../../domain/types/card';
 
 type CardRegistrationProps = {
