@@ -2,13 +2,17 @@ import AppLayout from 'layouts/AppLayout';
 import CreditCardRegister from 'pages/CreditCardRegister';
 import CreditCardRegisterDone from 'pages/CreditCardRegisterDone';
 import Home from 'pages/Home';
-import { createBrowserRouter } from 'react-router-dom';
+import { Outlet, createBrowserRouter } from 'react-router-dom';
 
 const router = createBrowserRouter(
   [
     {
       path: '/',
-      element: <AppLayout />,
+      element: (
+        <AppLayout>
+          <Outlet />
+        </AppLayout>
+      ),
       children: [
         {
           path: '',

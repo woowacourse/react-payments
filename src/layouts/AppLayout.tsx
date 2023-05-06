@@ -1,12 +1,16 @@
-import { Outlet } from 'react-router-dom';
+import { ReactNode } from 'react';
 import GlobalStyle, { GlobalLayout } from 'style/globalStyle';
 
-function AppLayout() {
+interface AppLayoutProps {
+  children: ReactNode;
+}
+
+function AppLayout({ children }: AppLayoutProps) {
   return (
     <>
       <GlobalStyle />
       <GlobalLayout>
-        <Outlet />
+        {children}
       </GlobalLayout>
     </>
   );
