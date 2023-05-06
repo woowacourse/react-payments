@@ -1,5 +1,6 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta } from "@storybook/react";
 import NameInput from "pages/RegisterPage/FormInputs/NameInput";
+import CardInfoProvider from "components/provider/CardInfoProvider";
 
 const meta = {
   component: NameInput,
@@ -8,10 +9,10 @@ const meta = {
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
-
-export const Name: Story = {
-  args: {
-    name: "YUMMY",
-  },
+export const Name = () => {
+  return (
+    <CardInfoProvider>
+      <NameInput />
+    </CardInfoProvider>
+  );
 };
