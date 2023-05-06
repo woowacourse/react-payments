@@ -15,7 +15,8 @@
     "react-router-dom": "^6.10.0",
     "react-scripts": "5.0.1",
     "typescript": "^4.9.5",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "yunseong-bottom-sheet": "^1.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
