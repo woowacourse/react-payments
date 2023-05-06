@@ -1,7 +1,7 @@
 import StyledButton from "./StyledButton";
 import type { StyledButtonProps } from "./StyledButton";
 
-interface ButtonProps extends StyledButtonProps, React.ComponentPropsWithoutRef<"button"> {
+interface ButtonProps extends StyledButtonProps, React.ButtonHTMLAttributes<HTMLButtonElement> {
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
