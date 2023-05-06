@@ -1,0 +1,168 @@
+:root {
+  --slight-light-black: #3b3b3b;
+  --light-gray: #b2b2b2;
+  --pastel-red: #ff5b5b;
+  --pastel-yellow: #ffd45b;
+  --pastel-sky-blue: #5bb5ff;
+}
+
+.container {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  width: 123.77px;
+  height: 128px;
+  margin: 0 auto;
+}
+
+.moving-card,
+.wallet,
+.card,
+.pin {
+  border-radius: 10px;
+}
+
+.card {
+  position: absolute;
+  display: inline-block;
+  width: 88.96px;
+  height: 63.43px;
+  left: 8px;
+  bottom: 16px;
+  transition: 0.4s;
+}
+
+.card.blue {
+  background-color: var(--pastel-sky-blue);
+  box-shadow: 0 0 10px var(--pastel-sky-blue);
+  animation: blue-card-moving 2s infinite;
+}
+
+.card.yellow {
+  background-color: var(--pastel-yellow);
+  box-shadow: 0 0 10px var(--pastel-yellow);
+  animation: yellow-card-moving 2s infinite;
+}
+
+.card.red {
+  background-color: var(--pastel-red);
+  box-shadow: 0 0 10px var(--pastel-red);
+  animation: red-card-moving 2s infinite;
+}
+
+.wallet {
+  display: flex;
+  margin-bottom: 5px;
+  flex-wrap: nowrap;
+  align-items: center;
+  width: 113.71px;
+  height: 82px;
+  background-color: var(--slight-light-black);
+  animation: wallet-moving 2s infinite;
+  transition: 0.4s;
+  box-shadow: 0 0 15px var(--slight-light-black);
+  z-index: 1;
+}
+
+.handle {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-left: 87.81px;
+  width: 34.81px;
+  height: 25.52px;
+  background-color: var(--light-gray);
+  border-radius: 5px;
+}
+
+.pin {
+  display: inline-block;
+  margin-left: 6px;
+  width: 12px;
+  height: 12px;
+  background-color: var(--slight-light-black);
+}
+
+@keyframes blue-card-moving {
+  25% {
+    bottom: 21px;
+    left: 8px;
+  }
+
+  37.5% {
+    left: 22px;
+    bottom: 53px;
+    transform: rotate(16deg);
+  }
+
+  50% {
+    left: 22px;
+    bottom: 53px;
+    transform: rotate(16deg);
+  }
+
+  62.5% {
+    bottom: 21px;
+    left: 8px;
+  }
+}
+
+@keyframes yellow-card-moving {
+  12.5% {
+    bottom: 21px;
+    left: 8px;
+  }
+
+  25% {
+    left: 16px;
+    bottom: 45px;
+    transform: rotate(10deg);
+  }
+
+  50% {
+    left: 16px;
+    bottom: 45px;
+    transform: rotate(10deg);
+  }
+
+  62.5% {
+    bottom: 21px;
+    left: 8px;
+  }
+}
+
+@keyframes red-card-moving {
+  0% {
+    bottom: 21px;
+    left: 8px;
+  }
+
+  12.5% {
+    bottom: 37px;
+    transform: rotate(4deg);
+  }
+
+  50% {
+    bottom: 37px;
+    transform: rotate(4deg);
+  }
+
+  62.5% {
+    bottom: 21px;
+    left: 8px;
+  }
+}
+
+@keyframes wallet-moving {
+  50% {
+    margin-bottom: 5px;
+  }
+
+  62.5% {
+    margin-bottom: 0;
+  }
+
+  100% {
+    margin-bottom: 5px;
+  }
+}
