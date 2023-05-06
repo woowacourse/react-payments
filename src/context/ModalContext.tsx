@@ -7,16 +7,16 @@ type ModalContextType = {
 };
 
 export const ModalContext = createContext<ModalContextType>({
-  isModalOpen: false,
+  isModalOpen: true,
   openModal: () => {},
   closeModal: () => {},
 });
 
 type ModalProviderProps = {
-  defaultOpen: boolean;
+  defaultOpen?: boolean;
 };
 
-export const ModalProvider = ({ defaultOpen, children }: PropsWithChildren<ModalProviderProps>) => {
+export const ModalProvider = ({ defaultOpen = false, children }: PropsWithChildren<ModalProviderProps>) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(defaultOpen);
 
   const openModal = () => {
