@@ -1,16 +1,12 @@
 import styled from "styled-components";
 import { InputContainer, Input, Label, RequiredInputIcon } from "../@common";
 import requiredInputIcon from "../../assets/requiredInputIcon.png";
-
-import { CardPassword, CardPasswordKey } from "../../types";
+import { CardPasswordKey } from "../../types";
 import { isNumeric } from "../../validator/Validator";
+import useCardRegistrationInfoContext from "../../hooks/useCardRegistrationInfoContext";
 
-type CardPasswordInputProps = {
-  password: CardPassword;
-  onChange: (pw: string, targetDigit: CardPasswordKey) => void;
-};
-
-const CardPasswordInput = ({ password, onChange }: CardPasswordInputProps) => {
+const CardPasswordInput = () => {
+  const { password, setPassword } = useCardRegistrationInfoContext();
   const { first, second } = password;
 
   const handleCardPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,7 +16,7 @@ const CardPasswordInput = ({ password, onChange }: CardPasswordInputProps) => {
     if (!isNumeric(pw)) return;
     if (!isCardPasswordKeyType(targetDigit)) return;
 
-    onChange(pw, targetDigit);
+    setPassword(pw, targetDigit);
   };
 
   const isCardPasswordKeyType = (targetDigit: string): targetDigit is CardPasswordKey => {

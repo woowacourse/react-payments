@@ -3,19 +3,15 @@ import { CardCompany } from "../../types";
 import CardCompanyButton from "../CardCompanyButton/CardCompanyButton";
 import CARD_COMPANIES from "../../constants/cardCompanies";
 
-type CardCompanyButtonListProps = {
-  handleCardCompany: (company: CardCompany) => void;
-};
-
 const cardCompanies = Object.keys(CARD_COMPANIES) as CardCompany[];
 
-const CardCompanyButtonList = ({ handleCardCompany }: CardCompanyButtonListProps) => {
+const CardCompanyButtonList = () => {
   return (
     <>
       <Instruction>카드사 선택</Instruction>
       <CardCompanyButtonWrapper>
         {cardCompanies.map((company) => (
-          <CardCompanyButton key={company} cardCompany={company} onClick={() => handleCardCompany(company)} />
+          <CardCompanyButton key={company} cardCompany={company} />
         ))}
       </CardCompanyButtonWrapper>
     </>

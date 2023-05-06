@@ -1,21 +1,19 @@
 import styled from "styled-components";
 import { InputContainer, Input, Label } from "../@common";
 import { isAlphabetic } from "../../validator/Validator";
+import useCardRegistrationInfoContext from "../../hooks/useCardRegistrationInfoContext";
 
 const MAX_NAME_LENGTH = 30;
 
-type CardOwnerNameInputProp = {
-  ownerName: string;
-  onChange: (name: string) => void;
-};
+const CardOwnerNameInput = () => {
+  const { ownerName, setOwnerName } = useCardRegistrationInfoContext();
 
-const CardOwnerNameInput = ({ ownerName, onChange }: CardOwnerNameInputProp) => {
   const handleOwnerName = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.value;
 
     if (!isAlphabetic(name)) return;
 
-    onChange(name);
+    setOwnerName(name);
   };
 
   return (

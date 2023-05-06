@@ -10,6 +10,7 @@ import useStateWithStorage from "./hooks/useStateWithStorage";
 import ROUTE_PATH from "./constants/routePath";
 import { CARDS_KEY } from "./constants/storageKey";
 import type { Card } from "./types";
+import { CardRegistrationInfoProvider } from "./context/CardRegistrationInfoContext";
 
 function App() {
   const { storageValue: cards, setStorageValue: setCards } = useStateWithStorage<Card[]>(CARDS_KEY, []);
@@ -26,7 +27,14 @@ function App() {
       <Layout>
         <Routes>
           <Route index path={ROUTE_PATH.root} element={<CardListPage cards={cards} />} />
-          <Route path={ROUTE_PATH.addCard} element={<AddCardPage />} />
+          <Route
+            path={ROUTE_PATH.addCard}
+            element={
+              <CardRegistrationInfoProvider>
+                <AddCardPage />
+              </CardRegistrationInfoProvider>
+            }
+          />
           <Route path={ROUTE_PATH.cardAlias} element={<CardAliasRegistrationPage onSubmit={addCard} />} />
           <Route path={ROUTE_PATH.other} element={<NotFoundPage />} />
         </Routes>

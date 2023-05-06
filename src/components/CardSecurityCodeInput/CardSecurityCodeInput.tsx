@@ -1,19 +1,17 @@
 import { isNumeric } from "../../validator/Validator";
 import { InputContainer, Input, Label, RequiredInputIcon } from "../@common";
 import requiredInputIcon from "../../assets/requiredInputIcon.png";
+import useCardRegistrationInfoContext from "../../hooks/useCardRegistrationInfoContext";
 
-type CardSecurityCodeInputProp = {
-  securityCode: string;
-  onChange: (code: string) => void;
-};
+const CardSecurityCodeInput = () => {
+  const { securityCode, setSecurityCode } = useCardRegistrationInfoContext();
 
-const CardSecurityCodeInput = ({ securityCode, onChange }: CardSecurityCodeInputProp) => {
   const handleSecurityCode = (e: React.ChangeEvent<HTMLInputElement>) => {
     const code = e.target.value;
 
     if (!isNumeric(code)) return;
 
-    onChange(code);
+    setSecurityCode(code);
   };
 
   return (

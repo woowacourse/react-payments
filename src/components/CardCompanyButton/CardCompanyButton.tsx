@@ -2,15 +2,21 @@ import styled from "styled-components";
 import { CardCompany } from "../../types";
 import CARD_COMPANIES from "../../constants/cardCompanies";
 import Button from "../@common/Button/Button";
+import useCardRegistrationInfoContext from "../../hooks/useCardRegistrationInfoContext";
 
 type CardCompanyButtonProps = {
   cardCompany: CardCompany;
-  onClick: () => void;
 };
 
-const CardCompanyButton = ({ cardCompany, onClick }: CardCompanyButtonProps) => {
+const CardCompanyButton = ({ cardCompany }: CardCompanyButtonProps) => {
+  const { setCardCompany } = useCardRegistrationInfoContext();
+
+  const handleCardCompany = () => {
+    setCardCompany(cardCompany);
+  };
+
   return (
-    <CompanyButton type="button" onClick={onClick}>
+    <CompanyButton type="button" onClick={handleCardCompany}>
       <CompanyLogo src={CARD_COMPANIES[cardCompany].logoFilePath} alt={`card-company-${cardCompany}`} />
       <CompanyName>{CARD_COMPANIES[cardCompany].koreanName}</CompanyName>
     </CompanyButton>

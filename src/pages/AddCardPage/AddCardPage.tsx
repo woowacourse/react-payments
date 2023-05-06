@@ -8,78 +8,21 @@ import CardPasswordInput from "../../components/CardPasswordInput/CardPasswordIn
 import { Modal } from "react-dobob-modal";
 import styled from "styled-components";
 import { Container } from "../../components/@common";
-import { useState } from "react";
-import {
-  Card,
-  CardCompany,
-  CardExpirationDate,
-  CardExpirationDateKey,
-  CardNumber,
-  CardNumberGroups,
-  CardPassword,
-  CardPasswordKey,
-} from "../../types";
+import { Card } from "../../types";
 import { useNavigate } from "react-router-dom";
 import { isFulfilledObject, isFulfilledString, isValidMonth } from "../../validator/Validator";
 import useModal from "../../hooks/useModal";
-import CardCompanyButtonList from "../../components/CardCompanyButtonList/CardCompanyButtonList";
 import ROUTE_PATH from "../../constants/routePath";
 import Button from "../../components/@common/Button/Button";
+import useCardRegistrationInfoContext from "../../hooks/useCardRegistrationInfoContext";
+import CardCompanyButtonList from "../../components/CardCompanyButtonList/CardCompanyButtonList";
 
 const AddCardPage = () => {
-  const [cardNumber, setCardNumber] = useState<CardNumber>({
-    firstGroup: "",
-    secondGroup: "",
-    thirdGroup: "",
-    fourthGroup: "",
-  });
-
-  const [expirationDate, setExpirationDate] = useState<CardExpirationDate>({
-    month: "",
-    year: "",
-  });
-
-  const [ownerName, setOwnerName] = useState<Card["ownerName"]>("");
-  const [securityCode, setSecurityCode] = useState<Card["securityCode"]>("");
-
-  const [password, setPassword] = useState<CardPassword>({
-    first: "",
-    second: "",
-  });
-
-  const [cardCompany, setCardCompany] = useState<Card["cardCompany"]>("BC");
+  const { cardNumber, expirationDate, ownerName, securityCode, password, cardCompany } =
+    useCardRegistrationInfoContext();
 
   const { isModalOpen, modalClose, modalOpen } = useModal();
-
   const navigate = useNavigate();
-
-  const handleCardNumber = (value: string, targetGroup: CardNumberGroups) => {
-    setCardNumber({ ...cardNumber, [targetGroup]: value });
-  };
-
-  const handleExpirationDate = (value: string, dateType: CardExpirationDateKey) => {
-    setExpirationDate({ ...expirationDate, [dateType]: value });
-  };
-
-  const handleOwnerName = (name: string) => {
-    const upperCaseName = name.toUpperCase();
-
-    setOwnerName(upperCaseName);
-  };
-
-  const handleSecurityCode = (code: string) => {
-    setSecurityCode(code);
-  };
-
-  const handlePassword = (pw: string, targetDigit: CardPasswordKey) => {
-    setPassword({ ...password, [targetDigit]: pw });
-  };
-
-  const handleCardCompany = (company: CardCompany) => {
-    setCardCompany(company);
-
-    modalClose();
-  };
 
   const addCard = (e: React.FormEvent) => {
     e.preventDefault();
@@ -117,17 +60,17 @@ const AddCardPage = () => {
       <CardPreview card={{ cardNumber, expirationDate, ownerName, cardCompany }} onClick={modalOpen} />
       <HelperText onClick={modalOpen}>카드사 선택하기👆</HelperText>
       <Form onSubmit={addCard}>
-        <CardNumberInput cardNumber={cardNumber} onChange={handleCardNumber} />
-        <CardExpirationDateInput expirationDate={expirationDate} onChange={handleExpirationDate} />
-        <CardOwnerNameInput ownerName={ownerName} onChange={handleOwnerName} />
-        <CardSecurityCodeInput securityCode={securityCode} onChange={handleSecurityCode} />
-        <CardPasswordInput password={password} onChange={handlePassword} />
+        <CardNumberInput />
+        <CardExpirationDateInput />
+        <CardOwnerNameInput />
+        <CardSecurityCodeInput />
+        <CardPasswordInput />
         <NextButton type="submit" isFormFilled={isFormFilled}>
           입력 완료
         </NextButton>
       </Form>
       <Modal isOpen={isModalOpen} closeModal={modalClose}>
-        <CardCompanyButtonList handleCardCompany={handleCardCompany} />
+        <CardCompanyButtonList />
       </Modal>
     </AddCardPageContainer>
   );

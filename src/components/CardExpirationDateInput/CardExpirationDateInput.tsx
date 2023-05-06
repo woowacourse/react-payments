@@ -1,15 +1,12 @@
 import styled from "styled-components";
 import { InputContainer, Input, Label, RequiredInputIcon } from "../@common";
-import { CardExpirationDate, CardExpirationDateKey } from "../../types";
+import { CardExpirationDateKey } from "../../types";
 import { isNumeric } from "../../validator/Validator";
 import requiredInputIcon from "../../assets/requiredInputIcon.png";
+import useCardRegistrationInfoContext from "../../hooks/useCardRegistrationInfoContext";
 
-type CardExpirationDateInputProps = {
-  expirationDate: CardExpirationDate;
-  onChange: (value: string, dateType: CardExpirationDateKey) => void;
-};
-
-const CardExpirationDateInput = ({ expirationDate, onChange }: CardExpirationDateInputProps) => {
+const CardExpirationDateInput = () => {
+  const { expirationDate, setExpirationDate } = useCardRegistrationInfoContext();
   const { month, year } = expirationDate;
 
   const handleCardExpirationDate = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,7 +16,7 @@ const CardExpirationDateInput = ({ expirationDate, onChange }: CardExpirationDat
     if (!isNumeric(value)) return;
     if (!isCardExpirationDateKeyType(dateType)) return;
 
-    onChange(value, dateType);
+    setExpirationDate(value, dateType);
   };
 
   const isCardExpirationDateKeyType = (dateType: string): dateType is CardExpirationDateKey => {

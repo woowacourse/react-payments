@@ -1,14 +1,11 @@
-import { CardNumber, CardNumberGroups } from "../../types";
+import { CardNumberGroups } from "../../types";
 import { isNumeric } from "../../validator/Validator";
 import { InputContainer, Input, Label, RequiredInputIcon } from "../@common";
 import requiredInputIcon from "../../assets/requiredInputIcon.png";
+import useCardRegistrationInfoContext from "../../hooks/useCardRegistrationInfoContext";
 
-type CardNumberInputProps = {
-  cardNumber: CardNumber;
-  onChange: (value: string, targetGroup: CardNumberGroups) => void;
-};
-
-const CardNumberInput = ({ cardNumber, onChange }: CardNumberInputProps) => {
+const CardNumberInput = () => {
+  const { cardNumber, setCardNumber } = useCardRegistrationInfoContext();
   const { firstGroup, secondGroup, thirdGroup, fourthGroup } = cardNumber;
 
   const handleCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,7 +15,7 @@ const CardNumberInput = ({ cardNumber, onChange }: CardNumberInputProps) => {
     if (!isNumeric(value)) return;
     if (!isCardNumberGroupsType(targetGroup)) return;
 
-    onChange(value, targetGroup);
+    setCardNumber(value, targetGroup);
   };
 
   const isCardNumberGroupsType = (targetGroup: string): targetGroup is CardNumberGroups => {
