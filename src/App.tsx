@@ -1,11 +1,11 @@
 import MyCard from './pages/MyCard';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createHashRouter, RouterProvider } from 'react-router-dom';
 import AddCard from './pages/AddCard';
 import RegisterCardName from './pages/RegisterCardName';
 import { ModalContextProvider } from 'react-modal-patrick';
 import NotFound from './pages/NotFound';
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: '/',
     element: <MyCard />,
