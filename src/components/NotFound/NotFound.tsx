@@ -1,14 +1,10 @@
-import styled, { CSSProperties } from "styled-components";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { Container } from "../@common";
-import { useNavigate } from "react-router-dom";
+import Button from "../@common/Button/Button";
 import ROUTE_PATH from "../../constants/routePath";
 
 const NotFound = () => {
-  const navigate = useNavigate();
-
-  const goHome = () => navigate(ROUTE_PATH.root);
-  const goAddCard = () => navigate(ROUTE_PATH.addCard);
-
   return (
     <Container justify="center">
       <RecommendMessage>
@@ -16,12 +12,16 @@ const NotFound = () => {
         <br /> 카드를 추가해 볼까요?
       </RecommendMessage>
       <NavigateButtonContainer>
-        <NavigateButton type="button" onClick={goHome} $backgroundColor="#ececec">
-          홈으로
-        </NavigateButton>
-        <NavigateButton type="button" onClick={goAddCard} $backgroundColor="#d4e7fd">
-          카드 추가하기
-        </NavigateButton>
+        <Link to={ROUTE_PATH.root}>
+          <Button type="button" bgColor="var(--color-pale)" width="150px">
+            홈으로
+          </Button>
+        </Link>
+        <Link to={ROUTE_PATH.addCard}>
+          <Button type="button" bgColor="var(--color-primary)" width="150px">
+            카드 추가하기
+          </Button>
+        </Link>
       </NavigateButtonContainer>
     </Container>
   );
@@ -42,19 +42,4 @@ const NavigateButtonContainer = styled.div`
   justify-content: space-around;
 
   width: 100%;
-`;
-
-const NavigateButton = styled.button<{ $backgroundColor: CSSProperties["backgroundColor"] }>`
-  width: 150px;
-  height: 50px;
-
-  border: none;
-  border-radius: 4px;
-
-  font-size: 14px;
-  font-weight: 700;
-
-  background-color: ${(props) => props.$backgroundColor};
-
-  cursor: pointer;
 `;

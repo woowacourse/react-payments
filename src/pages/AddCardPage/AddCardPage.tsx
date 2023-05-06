@@ -24,6 +24,7 @@ import { isFulfilledObject, isFulfilledString, isValidMonth } from "../../valida
 import useModal from "../../hooks/useModal";
 import CardCompanyButtonList from "../../components/CardCompanyButtonList/CardCompanyButtonList";
 import ROUTE_PATH from "../../constants/routePath";
+import Button from "../../components/@common/Button/Button";
 
 const AddCardPage = () => {
   const [cardNumber, setCardNumber] = useState<CardNumber>({
@@ -150,19 +151,8 @@ const Form = styled.form`
   height: 100%;
 `;
 
-const NextButton = styled.button<{ isFormFilled: boolean }>`
-  width: 100%;
-  height: 50px;
-
-  border: none;
-  border-radius: 4px;
-
-  font-size: 14px;
-  font-weight: 700;
-
-  background-color: ${(props) => (props.isFormFilled ? "#d4e7fd" : "#ececec")};
-
-  cursor: pointer;
+const NextButton = styled(Button)<{ isFormFilled: boolean }>`
+  background-color: ${(props) => `var(--color-${props.isFormFilled ? "primary" : "pale"})`};
 `;
 
 export default AddCardPage;
