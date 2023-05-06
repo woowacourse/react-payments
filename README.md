@@ -49,8 +49,9 @@
 
 - <a href="https://6450fc4c05b9cc822a07bc18-kcqllgxxmt.chromatic.com">스토리북 실행하기</a>
 
-- <a href="https://www.npmjs.com/package/@gabrielyoon7/simple-modal">React Payments 용 모달 (@gabrielyoon7/simple-modal)
-  </a>
+- <a href="https://www.npmjs.com/package/@gabrielyoon7/simple-modal">React Payments 용 모달 (@gabrielyoon7/simple-modal) NPM</a>
+
+- <a href="https://github.com/gabrielyoon7/simple-modal">React Payments 용 모달 (@gabrielyoon7/simple-modal) Github</a>
 
 ### 📝 실행 방법
 
