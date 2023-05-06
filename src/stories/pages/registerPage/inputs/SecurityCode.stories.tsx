@@ -1,5 +1,6 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta } from "@storybook/react";
 import SecurityCodeInput from "pages/RegisterPage/FormInputs/SecurityCodeInput";
+import CardInfoProvider from "components/provider/CardInfoProvider";
 
 const meta = {
   component: SecurityCodeInput,
@@ -8,10 +9,10 @@ const meta = {
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
-
-export const SecurityCode: Story = {
-  args: {
-    code: "123",
-  },
+export const SecurityCode = () => {
+  return (
+    <CardInfoProvider>
+      <SecurityCodeInput />
+    </CardInfoProvider>
+  );
 };
