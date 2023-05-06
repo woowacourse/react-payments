@@ -7,7 +7,7 @@ type MockFetch = {
 
 const mockFetch = (url: string, card: Card) => {
   return new Promise<MockFetch>((resolve) => {
-    setTimeout(() => resolve({ data: "mock Fetch ok" }), 3000);
+    setTimeout(() => resolve({ data: "mock Fetch ok" }), 4000);
   });
 };
 
