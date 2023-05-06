@@ -48,7 +48,7 @@ function CreditCard({
           }
         </S.CreditCardNumber>
         <S.CreditCardContainer>
-          <S.CreditCardBox>{(owner || (owner as string).length > 0) ? owner : 'WOOWA COURSE'}</S.CreditCardBox>
+          <S.CreditCardBox>{(owner !== undefined) && (owner !== '') ? owner : 'WOOWA COURSE'}</S.CreditCardBox>
           <S.CreditCardBox>{markExpiry(expiry.length > 0 ? expiry : '0523')}</S.CreditCardBox>
         </S.CreditCardContainer>
       </S.CreditCardInfoFooter>
