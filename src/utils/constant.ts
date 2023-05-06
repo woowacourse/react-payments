@@ -96,4 +96,5 @@ export const PATHS = {
   cardList: "/card-list",
   cardNickName: "/card-nickname",
   cardRegister: "/card-register",
+  registerFinished: "/register-finished",
 } as const;
