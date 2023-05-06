@@ -10,7 +10,7 @@ import { REG_EXP } from '../constants/regexp';
 import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
 import { Link } from 'react-router-dom';
 
-const AddAlias = ({ cards, setCards }: CardList) => {
+const AddCardAlias = ({ cards, setCards }: CardList) => {
   const [cardAlias, setCardAlias] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const navigate = useNavigate();
@@ -88,4 +88,4 @@ const AddAlias = ({ cards, setCards }: CardList) => {
   );
 };
 
-export default AddAlias;
+export default AddCardAlias;
