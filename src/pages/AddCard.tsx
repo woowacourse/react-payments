@@ -1,5 +1,5 @@
 import { FormEvent } from 'react';
-import { useState} from 'react';
+import { useState } from 'react';
 import Card from '../components/Card';
 import CardInputForm from '../components/CardInputForm';
 import Header from '../components/common/Header';
@@ -46,11 +46,11 @@ const AddCard = () => {
         cvc={card.cvc}
         password={card.password}
       />
-      <Button text="카드사 선택" onClick={openModal}/>
+      <Button text="카드사 선택" onClick={openModal} />
       <CardInputForm card={card} setCard={setCard} onSubmit={e => registerCard(e)} />
       {isModalOpen && (
         <ModalPortal closeModalHandler={closeModal}>
-          <ModalBanks setCard={setCard} card={card} />
+          <ModalBanks setCard={setCard} card={card} closeModal={closeModal} />
         </ModalPortal>
       )}
     </Page>

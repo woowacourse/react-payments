@@ -7,6 +7,7 @@ import Bank from './Bank';
 interface Props {
   card: CardType;
   setCard: (value: CardType) => void;
+  closeModal: ()=>void
 }
 const ModalBanks = (props: Props) => {
   const card = JSON.parse(JSON.stringify(props.card));
@@ -14,6 +15,7 @@ const ModalBanks = (props: Props) => {
     card.color = CARD_BANK_COLOR_MAP[e.currentTarget.id].background;
     card.bankName = e.currentTarget.id;
     props.setCard(card);
+    props.closeModal();
   };
   return (
     <>
