@@ -1,9 +1,9 @@
 import { useModal } from '../../../hooks/useModal';
+import { AarkerModal as BottomSheet } from 'react-aarker-modal';
 
 import * as styled from './RegisterPage.styled';
 import CardPreviewSection from '../../CardPreviewSection/CardPreviewSection';
 import RegisterForm from '../../RegisterForm/RegisterForm';
-import BottomSheet from '../../BottomSheet/BottomSheet';
 import CompanyLogoList from '../../CompanyLogoList/CompanyLogoList';
 
 const RegisterPage = () => {
