@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import CardPreview from "../../components/CardPreview/CardPreview";
@@ -7,10 +7,12 @@ import { PAGE } from "../../constant/PagePath";
 import { Button } from "../../components/common/Button";
 import { AddCardStateContext } from "../../context/AddCardStateProvider";
 import { Card } from "../../types";
+import Spinner from "../../components/Spinner/Spinner";
 
 const NameCardPage = () => {
   const navigate = useNavigate();
 
+  const [isLoading, setIsLoading] = useState(false);
   const { cards, setCards } = useContext(GlobalContext);
   const { cardInfo, setCardInfo } = useContext(AddCardStateContext);
   const { cardName, cardCompany, cardNumber, expirationDate, ownerName, securityCode, password } = cardInfo;
@@ -27,12 +29,17 @@ const NameCardPage = () => {
     };
 
     setCards([...cards, card]);
-    navigate(PAGE.CARD_LIST);
+    setIsLoading(true);
   };
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCardInfo({ ...cardInfo, cardName: e.target.value });
   };
+
+  if (isLoading) {
+    setTimeout(() => navigate(PAGE.CARD_LIST), 2000);
+    return <Spinner />;
+  }
 
   return (
     <Container>
