@@ -17,7 +17,6 @@ type CardRegistrationInfoContextType = {
   securityCode: Card["securityCode"];
   password: CardPassword;
   cardCompany: Card["cardCompany"];
-  cardAlias: Card["alias"];
 
   setCardNumber: (value: string, targetGroup: CardNumberGroups) => void;
   setExpirationDate: (value: string, dateType: CardExpirationDateKey) => void;
@@ -25,7 +24,6 @@ type CardRegistrationInfoContextType = {
   setSecurityCode: (code: string) => void;
   setPassword: (pw: string, targetDigit: CardPasswordKey) => void;
   setCardCompany: (company: CardCompany) => void;
-  setCardAlias: (alias: string) => void;
 };
 
 export const CardRegistrationInfoContext = createContext<CardRegistrationInfoContextType>({
@@ -46,7 +44,6 @@ export const CardRegistrationInfoContext = createContext<CardRegistrationInfoCon
     second: "",
   },
   cardCompany: "BC",
-  cardAlias: "",
 
   setCardNumber(value: string, targetGroup: CardNumberGroups) {},
   setExpirationDate(value: string, dateType: CardExpirationDateKey) {},
@@ -54,7 +51,6 @@ export const CardRegistrationInfoContext = createContext<CardRegistrationInfoCon
   setSecurityCode(code: string) {},
   setPassword(pw: string, targetDigit: CardPasswordKey) {},
   setCardCompany(company: CardCompany) {},
-  setCardAlias(alias: string) {},
 });
 
 export const CardRegistrationInfoProvider = ({ children }: PropsWithChildren) => {
@@ -79,7 +75,6 @@ export const CardRegistrationInfoProvider = ({ children }: PropsWithChildren) =>
   });
 
   const [cardCompany, setCardCompany] = useState<Card["cardCompany"]>("BC");
-  const [cardAlias, setCardAlias] = useState<Card["alias"]>("");
 
   const handleCardNumber = (value: string, targetGroup: CardNumberGroups) => {
     setCardNumber({ ...cardNumber, [targetGroup]: value });
@@ -107,10 +102,6 @@ export const CardRegistrationInfoProvider = ({ children }: PropsWithChildren) =>
     setCardCompany(company);
   };
 
-  const handleAlias = (alias: string) => {
-    setCardAlias(alias);
-  };
-
   return (
     <CardRegistrationInfoContext.Provider
       value={{
@@ -120,14 +111,12 @@ export const CardRegistrationInfoProvider = ({ children }: PropsWithChildren) =>
         securityCode,
         password,
         cardCompany,
-        cardAlias,
         setCardNumber: handleCardNumber,
         setExpirationDate: handleExpirationDate,
         setOwnerName: handleOwnerName,
         setSecurityCode: handleSecurityCode,
         setPassword: handlePassword,
         setCardCompany: handleCardCompany,
-        setCardAlias: handleAlias,
       }}
     >
       {children}
