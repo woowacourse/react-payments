@@ -1,7 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { BrowserRouter } from 'react-router-dom';
-import GlobalStyle, { GlobalLayout } from 'style/globalStyle';
-import CardFormProvider from '../../providers/CardFormProvider';
+import StoryProvider from 'stories/StoryProvider';
 import CreditCardNicknameInputForm from './CreditCardNicknameInputForm';
 
 const meta = {
@@ -9,14 +7,9 @@ const meta = {
   component: CreditCardNicknameInputForm,
   decorators: [
     (Story) => (
-      <CardFormProvider>
-        <BrowserRouter>
-          <GlobalStyle />
-          <GlobalLayout>
-            <Story />
-          </GlobalLayout>
-        </BrowserRouter>
-      </CardFormProvider>
+      <StoryProvider>
+        <Story />
+      </StoryProvider>
     ),
   ],
 } satisfies Meta;
