@@ -1,5 +1,5 @@
 import styles from './Input.module.css';
-import { forwardRef, ForwardedRef } from 'react';
+import { forwardRef } from 'react';
 
 type InputProps = {
   width: string;
@@ -12,7 +12,7 @@ type InputProps = {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const Input = forwardRef(({ width, ...rest }: InputProps, ref: ForwardedRef<HTMLInputElement>) => {
+const Input = forwardRef<HTMLInputElement, InputProps>(({ width, ...rest }, ref) => {
   return (
     <>
       <input className={styles.input} style={{ width }} ref={ref} autoComplete="off" {...rest} />
