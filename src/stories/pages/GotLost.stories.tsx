@@ -1,23 +1,18 @@
-import { Meta, StoryObj } from "@storybook/react";
-import GotLostPage from "../../pages/GotLost";
+import { Meta } from "@storybook/react";
+import GotLostPage from "pages/GotLost";
 import { BrowserRouter } from "react-router-dom";
 
 const meta = {
   component: GotLostPage,
   title: "Pages/GotLost",
-  decorators: [
-    (Story) => (
-      <BrowserRouter>
-        <Story />
-      </BrowserRouter>
-    ),
-  ],
 } satisfies Meta<typeof GotLostPage>;
 
 export default meta;
 
-type Story = StoryObj<typeof GotLostPage>;
-
-export const GotLost: Story = {
-  args: {},
+export const GotLost = () => {
+  return (
+    <BrowserRouter>
+      <GotLostPage />
+    </BrowserRouter>
+  );
 };

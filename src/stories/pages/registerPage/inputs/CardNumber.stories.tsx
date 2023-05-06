@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta } from "@storybook/react";
 import { ChangeEvent, KeyboardEvent } from "react";
 import CardNumberInput from "pages/RegisterPage/FormInputs/CardNumberInput";
 import CardInfoProvider from "components/provider/CardInfoProvider";
@@ -51,23 +51,18 @@ const handleKeyDown = (event: KeyboardEvent<HTMLFormElement>) => {
 const meta = {
   component: CardNumberInput,
   title: "Input/CardNumbers",
-  decorators: [
-    (Story) => (
-      <CardInfoProvider>
-        <ModalStateProvider>
-          <form onChange={handleFocusNext} onKeyDown={handleKeyDown}>
-            <Story />
-          </form>
-        </ModalStateProvider>
-      </CardInfoProvider>
-    ),
-  ],
 } satisfies Meta<typeof CardNumberInput>;
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
-
-export const CardNumbers: Story = {
-  args: {},
+export const CardNumbers = () => {
+  return (
+    <CardInfoProvider>
+      <ModalStateProvider>
+        <form onChange={handleFocusNext} onKeyDown={handleKeyDown}>
+          <CardNumberInput />
+        </form>
+      </ModalStateProvider>
+    </CardInfoProvider>
+  );
 };
