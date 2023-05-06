@@ -1,6 +1,6 @@
-import styles from './CardCompanyModal.module.css';
 import cardIcons from '../../images/cardIcon/cardIconImages';
 import CardCompany from '../CardCompany/CardCompany';
+import { Modal } from 'react-payments-modal-release';
 
 type CardCompanyModalProps = {
   onClose: () => void;
@@ -19,14 +19,11 @@ const cardCompanies = [
 
 const CardCompanyModal = ({ onClose }: CardCompanyModalProps) => {
   return (
-    <>
-      <section className={styles.modalBackground} onClick={onClose} />
-      <section className={styles.modalContainer}>
-        {cardCompanies.map(cardCompany => (
-          <CardCompany key={cardCompany.id} image={cardCompany.icon} cardName={cardCompany.name} onClose={onClose} />
-        ))}
-      </section>
-    </>
+    <Modal onClose={onClose}>
+      {cardCompanies.map(cardCompany => (
+        <CardCompany key={cardCompany.id} image={cardCompany.icon} cardName={cardCompany.name} onClose={onClose} />
+      ))}
+    </Modal>
   );
 };
 
