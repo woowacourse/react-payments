@@ -10,6 +10,7 @@ import ModalBanks from '../components/ModalBanks';
 import { useNavigate } from 'react-router-dom';
 import { LOCALSTORAGE_KEY } from '../constants';
 import { ModalPortal, useModalContext } from 'modal-patrick';
+import Button from '../components/common/Button';
 
 const AddCard = () => {
   const [card, setCard] = useState<CardType>({
@@ -31,7 +32,7 @@ const AddCard = () => {
     navigate('/CardName');
   };
 
-  const { isModalOpen, closeModal } = useModalContext();
+  const { isModalOpen, openModal, closeModal } = useModalContext();
 
   return (
     <Page>
@@ -45,6 +46,7 @@ const AddCard = () => {
         cvc={card.cvc}
         password={card.password}
       />
+      <Button text="카드사 선택" onClick={openModal}/>
       <CardInputForm card={card} setCard={setCard} onSubmit={e => registerCard(e)} />
       {isModalOpen && (
         <ModalPortal closeModalHandler={closeModal}>
