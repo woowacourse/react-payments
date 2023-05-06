@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import styled, { CSSProp } from "styled-components";
-import { CloseButton } from "./style/ButtonStyle";
 import useModal from "hooks/useModal";
+import Button, { CloseButton } from "./Button";
 
 interface Props {
   modalStyle: CSSProp;
@@ -17,7 +17,12 @@ const Modal = ({ closeButtonName, children, modalStyle }: Props) => {
       <S.ModalBackdrop className="modal-backdrop" onClick={handleModalClose} />
       <S.Modal role="dialog" className="modal" modalStyle={modalStyle}>
         {children}
-        <CloseButton onClick={handleModalClose}>{closeButtonName}</CloseButton>
+        <Button
+          children={closeButtonName}
+          name={closeButtonName}
+          ButtonStyle={CloseButton}
+          onClick={handleModalClose}
+        />
       </S.Modal>
     </>
   );

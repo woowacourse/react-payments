@@ -1,7 +1,7 @@
 import { ChangeEvent, KeyboardEventHandler, useState } from "react";
 import styled, { css } from "styled-components";
 import { changeInvalidValueToBlank } from "utils/inputValidator";
-import { NextButton } from "components/style/ButtonStyle";
+import Button, { NextButton } from "components/Button";
 import CardPreview from "components/CardPreview";
 import Input, { CardNickname } from "components/Input";
 import TextLimit from "components/TextLimit";
@@ -53,7 +53,12 @@ const LastPage = () => {
             length={nickname.length}
             textLimitStyle={nicknameLimitStyle}
           />
-          <NextButton onClick={handleSave}>확인</NextButton>
+          <Button
+            children="확인"
+            name="확인 버튼"
+            ButtonStyle={NextButton}
+            onClick={handleSave}
+          />
         </S.Wrapper>
       ) : (
         <GotLost />

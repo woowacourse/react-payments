@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import Header from "components/Header";
+import Button from "components/Button";
 import CardPreview from "components/CardPreview";
-import { AddButton } from "components/style/ButtonStyle";
+import { AddButton } from "components/Button";
 import useInitMainPage from "hooks/useInitMainPage";
 import { CardInfo } from "types";
 
@@ -30,7 +31,12 @@ const MainPage = ({ cardList }: Props) => {
           <S.Message>새로운 카드를 등록해 주세요.</S.Message>
         )}
 
-        <AddButton onClick={goToRegister}>+</AddButton>
+        <Button
+          children="+"
+          name="카드 추가 버튼"
+          ButtonStyle={AddButton}
+          onClick={goToRegister}
+        />
       </S.Main>
     </S.Wrapper>
   );

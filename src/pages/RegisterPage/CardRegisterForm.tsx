@@ -7,9 +7,9 @@ import NameInput from "./FormInputs/NameInput";
 import PasswordInput from "./FormInputs/PasswordInput";
 import SecurityCodeInput from "./FormInputs/SecurityCodeInput";
 import CardCompanyModal from "./CardCompanyModal";
-import CardPreview from "components/CardPreview";
 import Header from "components/Header";
-import { NextButton } from "components/style/ButtonStyle";
+import Button, { NextButton } from "components/Button";
+import CardPreview from "components/CardPreview";
 import useRequiredCardInfo from "hooks/useRequiredCardInfo";
 import useInitCardInfo from "hooks/useInitCardInfo";
 import useModal from "hooks/useModal";
@@ -102,7 +102,12 @@ const CardRegisterForm = () => {
         <SecurityCodeInput />
         <PasswordInput />
 
-        <NextButton disabled={!isFormFilled}>다음</NextButton>
+        <Button
+          children="다음"
+          name="다음 버튼"
+          ButtonStyle={NextButton}
+          disabled={!isFormFilled}
+        />
       </form>
     </S.Wrapper>
   );
