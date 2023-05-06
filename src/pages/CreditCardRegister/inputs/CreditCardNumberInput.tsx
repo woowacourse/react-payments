@@ -45,6 +45,7 @@ function CreditCardNumberInput() {
           {markedCreditCardNumber}
         </MaskedViewer>
         <S.HiddenInput
+          data-testid="credit-card-number-input"
           ref={inputRef}
           type="string"
           value={creditCardForm.number}

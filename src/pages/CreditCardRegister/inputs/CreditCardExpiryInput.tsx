@@ -14,6 +14,7 @@ function CreditCardExpiryInput() {
     <div>
       <S.CreditCardRegisterLabel>만료일</S.CreditCardRegisterLabel>
       <Input
+        data-testid="credit-card-expiry-input"
         placeholder="MM/YY"
         type="string"
         value={markedExpiry}

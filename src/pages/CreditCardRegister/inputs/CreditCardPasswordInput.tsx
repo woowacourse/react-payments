@@ -16,6 +16,7 @@ function CreditCardPasswordInput() {
       <S.CreditCardRegisterLabel>카드 비밀번호</S.CreditCardRegisterLabel>
       <FlexBox justifyContent="flex-start">
         <Input
+          data-testid="credit-card-password1-input"
           type="password"
           value={creditCardForm.password[0]}
           width="48px"
@@ -24,6 +25,7 @@ function CreditCardPasswordInput() {
           onChange={handleCreditCardPasswordChange}
         />
         <Input
+          data-testid="credit-card-password2-input"
           type="password"
           value={creditCardForm.password[1]}
           width="48px"

@@ -15,6 +15,7 @@ function CreditCardCVCInput() {
 
       <FlexBox justifyContent="flex-start" alignItems="center">
         <Input
+          data-testid="credit-card-cvc-input"
           type="password"
           value={creditCardForm.cvc}
           width="72px"

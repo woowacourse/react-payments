@@ -10,7 +10,6 @@ import FlexBox from 'components/FlexBox';
 import { useCreditCardList } from 'hooks/useCreditCardList';
 import { Modal } from '@gabrielyoon7/simple-modal';
 import LoadingSpinner from 'components/LoadingSpinner';
-
 import CreditCardNumberInput from './inputs/CreditCardNumberInput';
 import CreditCardExpiryInput from './inputs/CreditCardExpiryInput';
 import CreditCardOwnerInput from './inputs/CreditCardOwnerInput';
@@ -76,6 +75,7 @@ function CreditCardRegister() {
             <CreditCardPasswordInput />
 
             <ControlButton
+              data-testid="credit-card-form-submit"
               disabled={isCreditCardError}
               type="button"
               onClick={handleSubmit}
