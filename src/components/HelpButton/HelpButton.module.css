@@ -4,6 +4,42 @@
   align-items: center;
 }
 
+.balloonMessageContainer {
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  flex-shrink: 1;
+  height: 110px;
+  width: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 210px;
+}
+
+.balloonMessageContainer::before {
+  content: '';
+  top: 50%;
+  left: 1em;
+  border: 1em solid transparent;
+  border-right: 1em solid var(--grey-100);
+  z-index: 0;
+}
+
+.messageBox {
+  display: flex;
+  position: relative;
+  font-weight: bolder;
+  width: 100%;
+  height: 60%;
+  justify-content: center;
+  align-items: center;
+  background: var(--grey-100);
+  border-radius: 15px;
+  padding-left: 1.8em;
+  padding-right: 1.8em;
+}
+
 .button {
   color: var(--grey-300);
   font-size: 30px;
@@ -13,4 +49,9 @@
 .button:hover {
   cursor: pointer;
   color: var(--grey-500);
+}
+
+.container:hover .balloonMessageContainer {
+  visibility: visible;
+  opacity: 1;
 }

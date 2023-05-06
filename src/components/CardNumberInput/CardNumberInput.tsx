@@ -1,30 +1,41 @@
 import { useState } from 'react';
 import CardInfoInput from '../CardInfoInput/CardInfoInput';
 import Input from '../Input/Input';
-import { NUMBER_REGEX } from '../../constant/regex';
+import { NUMBER_REGEX, ONE_TO_FOUR_NUMBER_REGEX } from '../../constant/regex';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import { useCardStore } from '../../hook/useCardState';
 
-type CardNumberInputProps = {
-  updateCardNumber: (cardNumber: string) => void;
-};
-
-const CardNumberInput = ({ updateCardNumber }: CardNumberInputProps) => {
-  const [cardNumber, setCardNumber] = useState('');
+const CardNumberInput = () => {
+  const { get, setCardNumber } = useCardStore();
+  const [error, setError] = useState('');
+  const cardNumber = get().cardNumber;
 
   const addHyphensInCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (NUMBER_REGEX.test(e.target.value)) return alert('숫자만 입력이 가능합니다!');
-
     const cardNumber = e.target.value;
+    if (NUMBER_REGEX.test(e.target.value)) {
+      setError('0부터 9까지 숫자만 입력 가능합니다.');
+      return;
+    }
     const hyphenRemovedCardNumber = cardNumber.replaceAll('-', '');
-    const cardNumberWithHyphens = (hyphenRemovedCardNumber.match(/.{1,4}/g) || []).join('-');
-
+    const cardNumberWithHyphens = (hyphenRemovedCardNumber.match(ONE_TO_FOUR_NUMBER_REGEX) || []).join('-');
     setCardNumber(cardNumberWithHyphens);
-    updateCardNumber(cardNumber);
+    setError('');
   };
 
   return (
-    <CardInfoInput title="카드 번호">
-      <Input width="100%" onChange={addHyphensInCardNumber} maxLength={19} name="cardNumber" value={cardNumber} />
-    </CardInfoInput>
+    <section>
+      <CardInfoInput title="카드 번호">
+        <Input
+          width="100%"
+          onChange={addHyphensInCardNumber}
+          maxLength={19}
+          name="cardNumber"
+          value={cardNumber}
+          required
+        />
+      </CardInfoInput>
+      <ErrorMessage>{error}</ErrorMessage>
+    </section>
   );
 };
 

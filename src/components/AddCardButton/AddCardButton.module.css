@@ -12,7 +12,7 @@
 }
 
 .card {
-  margin: 0 auto 0 auto;
+  margin: 0 auto 20px auto;
   background-color: var(--grey-200);
   width: 208px;
   height: 123px;

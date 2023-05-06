@@ -1,5 +1,7 @@
 export type CardInfo = {
   cardNumber: string;
-  cardExpirationDate: string;
+  expirationDate: string;
   cardOwnerName: string;
+  selectedCard: string;
+  cardNickName: string;
 };

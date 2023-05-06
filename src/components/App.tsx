@@ -1,36 +1,30 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import NotFound from '../pages/NotFound';
-import Home from '../pages/Home';
-import CardRegistration from '../pages/CardRegistration';
+import { HashRouter, Routes, Route } from 'react-router-dom';
+import NotFound from '../pages/NotFound/NotFound';
+import Home from '../pages/Home/Home';
+import CardRegistration from '../pages/CardRegistration/CardRegistration';
 import styles from './App.module.css';
-import { useState } from 'react';
-import type { CardInfo } from '../types';
+import CardRegistrationConfirmation from '../pages/CardRegistrationConfirmation/CardRegistrationConfirmation';
+import { CardProvider } from '../context/CardContext';
+import useCardInfo from '../hook/useCardInfo';
 
 const App = () => {
-  const [cardInfo, setCardInfo] = useState<CardInfo[]>([]);
-
-  const registerNewCard = ({ cardNumber, cardExpirationDate, cardOwnerName }: CardInfo) => {
-    setCardInfo([...cardInfo, { cardNumber, cardExpirationDate, cardOwnerName }]);
-  };
-
-  const router = createBrowserRouter([
-    {
-      path: '/',
-      element: <Home cardInfo={cardInfo} />,
-    },
-    {
-      path: '/card-registration',
-      element: <CardRegistration registerNewCard={registerNewCard} />,
-    },
-    {
-      path: '*',
-      element: <NotFound />,
-    },
-  ]);
+  const { cardInfo, registerNewCard } = useCardInfo();
 
   return (
     <div className={styles.container}>
-      <RouterProvider router={router} />
+      <CardProvider>
+        <HashRouter>
+          <Routes>
+            <Route path="/" element={<Home cardInfo={cardInfo} />} />
+            <Route path="/card-registration" element={<CardRegistration />} />
+            <Route
+              path="/card-registration-confirmation"
+              element={<CardRegistrationConfirmation registerNewCard={registerNewCard} />}
+            />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </HashRouter>
+      </CardProvider>
     </div>
   );
 };

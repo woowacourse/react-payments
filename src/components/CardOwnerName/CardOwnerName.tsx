@@ -1,19 +1,14 @@
-import { useState } from 'react';
 import CardInfoInput from '../CardInfoInput/CardInfoInput';
 import Input from '../Input/Input';
+import { useCardStore } from '../../hook/useCardState';
 
-type CardOwnerNameProps = {
-  updateCardOwnerName: (cardOwnerName: string) => void;
-};
-
-const CardOwnerName = ({ updateCardOwnerName }: CardOwnerNameProps) => {
-  const [cardOwnerName, setCardOwnerName] = useState('');
+const CardOwnerName = () => {
+  const { get, setCardOwnerName } = useCardStore();
+  const cardOwnerName = get().cardOwnerName;
 
   const checkCardOwnerNameLength = (e: React.ChangeEvent<HTMLInputElement>) => {
     const currentCardOwnerName = e.target.value;
-
     setCardOwnerName(currentCardOwnerName);
-    updateCardOwnerName(currentCardOwnerName);
   };
 
   return (

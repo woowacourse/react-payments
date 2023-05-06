@@ -8,19 +8,18 @@ type CardListProps = {
 
 const CardList = ({ cardInfo }: CardListProps) => {
   return (
-    <div className={styles.container}>
+    <section className={styles.container}>
       <ul>
         {cardInfo.map(card => (
           <li className={styles.card} key={crypto.randomUUID()}>
-            <CardPreview
-              cardNumber={card.cardNumber}
-              cardOwnerName={card.cardOwnerName}
-              cardExpirationDate={card.cardExpirationDate}
-            />
+            <CardPreview {...card} />
+            <div className={styles.cardNicknameBox}>
+              <h4>{card.cardNickName}</h4>
+            </div>
           </li>
         ))}
       </ul>
-    </div>
+    </section>
   );
 };
 

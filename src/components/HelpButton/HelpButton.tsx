@@ -6,16 +6,17 @@ type HelpButtonProps = {
   message: string;
 };
 
-const HelpButton = React.memo(({ message }: HelpButtonProps) => {
-  const showMessage = () => {
-    alert(message);
-  };
-
+const HelpButton = ({ message }: HelpButtonProps) => {
   return (
-    <div className={styles.container}>
-      <BsQuestionCircle className={styles.button} onClick={showMessage} />
-    </div>
+    <section className={styles.container}>
+      <BsQuestionCircle className={styles.button} />
+      <aside className={styles.balloonMessageContainer}>
+        <div className={styles.messageBox}>
+          <p>{message}</p>
+        </div>
+      </aside>
+    </section>
   );
-});
+};
 
-export default HelpButton;
+export default React.memo(HelpButton);
