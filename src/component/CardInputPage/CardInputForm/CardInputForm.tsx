@@ -4,6 +4,8 @@ import Modal from "@chsua/bottom-modal";
 
 import Button from "../../common/Button";
 import CardPreview from "../../common/CardPreview";
+import CardCoButton from "../../common/CardCoButton";
+
 import InputBoxCardNumber from "../InputBoxCardNumber/InputBoxCardNumber";
 import InputBoxExpirationDate from "../InputBoxExpirationDate/InputBoxExpirationDate";
 import InputBoxOwner from "../InputBoxOwner/InputBoxOwner";
@@ -11,12 +13,11 @@ import InputBoxPassword from "../InputBoxPassword/InputBoxPassword";
 import InputBoxSecurityCode from "../InputBoxSecurityCode/InputBoxSecurityCode";
 
 import { CardCo, CreditCard } from "../../../type";
-
+import { CARD_CO_NAME } from "../../../CONSTANT";
 import "./cardInputForm.css";
-import CardCoButton from "../../common/CardCoButton";
+
 import { useModalState } from "../../../hook/modalHook";
 import { useCardInfoAndInputState } from "../../../hook/cardInfoAndInputHook";
-import { CARD_CO_NAME } from "../../../CONSTANT";
 import { useLoading } from "../../../hook/spinnerPageHook";
 
 interface CardInputFormProps {
@@ -85,6 +86,7 @@ export default function CardInputForm(props: CardInputFormProps) {
       <Button
         type="submit"
         style={isFormFilled.current ? {} : { color: "lightgrey" }}
+        aria-disabled={!isFormFilled.current}
       >
         다음
       </Button>

@@ -24,14 +24,20 @@ export default function InputBoxNick({
   };
 
   return (
-    <div className="card-nick-input-container">
+    <label className="card-nick-input-container">
       <input
         className="card-nick-input"
         onChange={changeNickInput}
         onKeyDown={submitNickInput}
         value={nick}
+        placeholder="카드 별명을 10자 이내로 입력해주세요."
       />
-      <p className="card-nick-input-length">{nick.length} / 10</p>
-    </div>
+      <p
+        className="card-nick-input-length"
+        aria-label="현재 글자수/제한 글자수"
+      >
+        {nick.length} / 10
+      </p>
+    </label>
   );
 }

@@ -42,35 +42,27 @@ export default function CardPassword(props: CardPasswordProps) {
   };
 
   return (
-    <div className="input-box-card-password">
-      <Input
-        name="card-password-1"
-        className="input-password"
-        type="password"
-        onChange={onChangePassword(0)}
-        inputMode="numeric"
-        value={passwordStatus[0]}
-      />
-      <Input
-        name="card-password-2"
-        className="input-password"
-        type="password"
-        onChange={onChangePassword(1)}
-        inputMode="numeric"
-        value={passwordStatus[1]}
-      />
-      <input
-        className="input-password"
-        disabled
-        type="password"
-        defaultValue={0}
-      />
-      <input
-        className="input-password"
-        disabled
-        type="password"
-        defaultValue={0}
-      />
-    </div>
+    <>
+      {new Array(2).fill(0).map((_, index) => (
+        <Input
+          name={`card-password-${index + 1}`}
+          className="input-password input-password"
+          type="password"
+          inputMode="numeric"
+          onChange={onChangePassword(index)}
+          required={true}
+          ariaRequired={true}
+          value={passwordStatus[index]}
+        />
+      ))}
+      {new Array(2).fill(0).map((_, index) => (
+        <input
+          className="input-password"
+          disabled
+          type="password"
+          defaultValue={0}
+        />
+      ))}
+    </>
   );
 }

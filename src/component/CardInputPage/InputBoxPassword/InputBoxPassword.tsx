@@ -36,7 +36,7 @@ export default function InputBoxPassword(props: InputBoxPasswordProps) {
   };
 
   return (
-    <div className="input-box-card-password">
+    <label className="input-box-card-password">
       <p>카드 비밀번호</p>
       <CardPassword
         changeEachPasswordStatus={changeEachPasswordStatus}
@@ -45,6 +45,6 @@ export default function InputBoxPassword(props: InputBoxPasswordProps) {
       <p className="error-message">
         {hasError && CARD_ERROR_MESSAGE.INPUT_CARD_PASSWORD}
       </p>
-    </div>
+    </label>
   );
 }

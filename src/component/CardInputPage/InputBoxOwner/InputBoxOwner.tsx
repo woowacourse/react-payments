@@ -37,7 +37,7 @@ export default function InputBoxOwner(props: InputBoxOwnerProps) {
   };
 
   return (
-    <div className="input-box-card-owner">
+    <label className="input-box-card-owner">
       <p>카드 소유자 이름(선택)</p>
       <p>{name.length}/30</p>
       <Input
@@ -47,11 +47,12 @@ export default function InputBoxOwner(props: InputBoxOwnerProps) {
         onChange={changeName}
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
         inputMode="text"
+        required={true}
         value={name}
       />
       <p className="error-message">
         {haveError && CARD_ERROR_MESSAGE.INPUT_CARD_OWNER}
       </p>
-    </div>
+    </label>
   );
 }

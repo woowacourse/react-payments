@@ -45,7 +45,7 @@ export default function InputBoxExpirationDate(
   };
 
   return (
-    <div className="input-box-expiration-date">
+    <label className="input-box-expiration-date">
       <p>만료일</p>
       <Input
         name="expiration-date"
@@ -55,10 +55,12 @@ export default function InputBoxExpirationDate(
         placeholder="MM / YY"
         inputMode="numeric"
         value={expirationDate}
+        ariaRequired={true}
+        required={true}
       />
       <p className="error-message">
         {haveError && CARD_ERROR_MESSAGE.INPUT_CARD_EXPIRATION_DATE}
       </p>
-    </div>
+    </label>
   );
 }

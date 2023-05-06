@@ -3,10 +3,10 @@
   border-radius: 0;
 }
 
-.first {
+.card-number-1 {
   border-radius: 7px 0 0 7px;
 }
 
-.last {
+.card-number-4 {
   border-radius: 0 7px 7px 0;
 }

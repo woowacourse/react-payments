@@ -2,7 +2,9 @@ import { InputHTMLAttributes } from "react";
 
 import "./input.css";
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {}
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  ariaRequired?: boolean;
+}
 
 export default function Input(props: InputProps) {
   const {
@@ -14,6 +16,8 @@ export default function Input(props: InputProps) {
     style,
     className,
     value,
+    ariaRequired,
+    required,
   } = props;
   return (
     <input
@@ -24,6 +28,8 @@ export default function Input(props: InputProps) {
       inputMode={inputMode}
       onChange={onChange}
       placeholder={placeholder}
+      required={required}
+      aria-required={ariaRequired}
       value={value}
     />
   );

@@ -36,7 +36,7 @@ export default function InputBoxCardNumber(props: InputBoxNumberProps) {
   };
 
   return (
-    <div className="input-box-card-number">
+    <label className="input-box-card-number">
       <p>카드번호</p>
       <CardNumber
         changeEachNumberStatus={changeEachNumberStatus}
@@ -45,6 +45,6 @@ export default function InputBoxCardNumber(props: InputBoxNumberProps) {
       <p className="error-message">
         {hasError && CARD_ERROR_MESSAGE.INPUT_CARD_NUMBER}
       </p>
-    </div>
+    </label>
   );
 }

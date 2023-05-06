@@ -44,42 +44,19 @@ export default function CardNumber({
 
   return (
     <>
-      <Input
-        name="card-number-1"
-        className="first input-card-number"
-        type="text"
-        inputMode="numeric"
-        onChange={onChangeCardNumber(0)}
-        placeholder="XXXX"
-        value={cardNumber[0]}
-      />
-      <Input
-        name="card-number-2"
-        className=" input-card-number"
-        type="password"
-        inputMode="numeric"
-        onChange={onChangeCardNumber(1)}
-        placeholder="XXXX"
-        value={cardNumber[1]}
-      />
-      <Input
-        name="card-number-3"
-        className=" input-card-number"
-        type="password"
-        inputMode="numeric"
-        onChange={onChangeCardNumber(2)}
-        placeholder="XXXX"
-        value={cardNumber[2]}
-      />
-      <Input
-        name="card-number-4"
-        className="last input-card-number"
-        type="text"
-        inputMode="numeric"
-        onChange={onChangeCardNumber(3)}
-        placeholder="XXXX"
-        value={cardNumber[3]}
-      />
+      {new Array(4).fill(0).map((_, index) => (
+        <Input
+          name={`card-number-${index + 1}`}
+          className={`input-card-number card-number-${index + 1}`}
+          type={index === 1 || index === 2 ? "password" : "text"}
+          inputMode="numeric"
+          onChange={onChangeCardNumber(index)}
+          placeholder="XXXX"
+          required={true}
+          ariaRequired={true}
+          value={cardNumber[index]}
+        />
+      ))}
     </>
   );
 }

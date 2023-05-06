@@ -46,7 +46,7 @@ export default function InputBoxSecurityCode(props: InputBoxSecurityProps) {
   };
 
   return (
-    <div className="input-box-security-code">
+    <label className="input-box-security-code">
       <p>보안 코드(CVC/CVV)</p>
       <Input
         name="security-code"
@@ -54,6 +54,8 @@ export default function InputBoxSecurityCode(props: InputBoxSecurityProps) {
         type="password"
         onChange={changeSecurityCode}
         inputMode="numeric"
+        required={true}
+        ariaRequired={true}
         value={securityCode}
       />
       <button
@@ -64,11 +66,13 @@ export default function InputBoxSecurityCode(props: InputBoxSecurityProps) {
         ?
       </button>
       {guideClick && (
-        <p className="guide-security-code">{GUIDE_MESSAGE.SECURITY_CODE}</p>
+        <p className="guide-security-code" aria-label="보안코드 입력 가이드">
+          {GUIDE_MESSAGE.SECURITY_CODE}
+        </p>
       )}
       <p className="error-message">
         {haveError && CARD_ERROR_MESSAGE.INPUT_CARD_SECURITY}
       </p>
-    </div>
+    </label>
   );
 }
