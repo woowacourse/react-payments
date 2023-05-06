@@ -17,6 +17,8 @@ export const INPUT_STATUS = {
 
 export const GUIDE_MESSAGE = {
   SECURITY_CODE: "cvc/cvv번호는 카드 뒷면에 기재되어 있는 숫자 3자리입니다",
+  REGISTER_TEXT: "카드를 등록 중입니다.",
+  REGISTER_WAIT_TEXT: "잠시만 기다려주세요.",
 };
 
 export const REGULAR_EXPRESSION = {
