@@ -4,12 +4,15 @@ import { useNavigate } from 'react-router-dom';
 import { getCardListAction } from '../actions/cardDataAction';
 import Card from '../components/Card';
 import Header from '../components/Header';
-import cardReducer, { initialState } from '../reducer/cardReducer';
+import { cardListInitialState, cardListReducer } from '../reducer/cardReducer';
 import type { CardType } from '../type';
 import './CardListPage.css';
 
 const CardListPage = () => {
-  const [mainCardListData, dispatchMainCardListData] = useReducer(cardReducer, initialState);
+  const [mainCardListData, dispatchMainCardListData] = useReducer(
+    cardListReducer,
+    cardListInitialState
+  );
   const navigate = useNavigate();
 
   const onAddButton = () => {

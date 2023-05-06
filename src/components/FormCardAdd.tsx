@@ -1,16 +1,17 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useReducer, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 
+import { addCardAction, addCardRequestStartAction } from '../actions/cardDataAction';
 import {
   useHandleCVCNumberError,
   useHandleCardNumberError,
   useHandleCardPasswordError,
   useHandleExpireError,
 } from '../hooks/useHandleExpireErrors';
+import { cardAddReducer } from '../reducer/cardReducer';
 import { CardType, FormCardAddProps } from '../type';
 import { CVC_TOOLTIP_DETAIL, CVC_TOOLTIP_TITLE, LOCATION } from '../utils/constants';
-import { fetchNewCardData } from '../utils/fetchData';
 import Tooltip from './CVCTooltip';
 import CardNicknameInputModal from './CardNicknameInputModal';
 import './FormCardAdd.css';
@@ -33,6 +34,11 @@ const FormCardAdd = ({
   const [cardNumberError, setCardNumberError] = useHandleCardNumberError();
   const [cardCVCNumberError, setCardCVCNumberError] = useHandleCVCNumberError();
   const [cardPasswordError, setCardPasswordError] = useHandleCardPasswordError();
+  const [addCardResult, dispatchAddCardData] = useReducer(cardAddReducer, {
+    type: 'ADD_CARD_REQUEST',
+    isLoading: false,
+    errorMessage: 'string',
+  });
 
   const navigate = useNavigate();
   const [cardNickName, setCardNickName] = useState('');
@@ -41,7 +47,7 @@ const FormCardAdd = ({
     return expireError && cardNumberError && cardCVCNumberError && cardPasswordError;
   };
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const { first, second, third, fourth } = cardNumber.value;
     const id = uuidv4();
@@ -63,10 +69,10 @@ const FormCardAdd = ({
         second: cardPasswordSecondDigit.value,
       },
     };
-    if (!fetchNewCardData(postData)) {
-      alert('이미 등록된 카드입니다.');
-      return;
-    }
+    dispatchAddCardData(addCardRequestStartAction());
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+    dispatchAddCardData(addCardAction(postData));
+
     navigate(LOCATION.CARD_LIST_PAGE);
   };
 
