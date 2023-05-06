@@ -5,6 +5,7 @@ import "./style/palette.css";
 import CardInputPage from "./component/CardInputPage/CardInputPage";
 import CardListPage from "./component/CardListPage/CardListPage";
 import CardNickInputPage from "./component/CardNickInputPage/CardNickInputPage";
+import RegisterSpinnerPage from "./component/RegisterSpinnerPage/RegisterSpinnerPage";
 
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import { useCardList } from "./hook/cardListHook";
@@ -33,6 +34,10 @@ function App() {
                 setNickNewCard={setNickNewCard}
               />
             }
+          />
+          <Route
+            path="/RegisterSpinnerPage"
+            element={<RegisterSpinnerPage />}
           />
         </Routes>
       </BrowserRouter>
