@@ -33,7 +33,7 @@
   animation: emptyline 1.5s ease-in-out infinite;
 }
 
-.card {
+.spinner-card {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -49,6 +49,15 @@
 
 .loading-spinner-container {
   color: #666;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-spinner-message {
+  margin-top: 10px;
 }
 
 .hyundai,
