@@ -18,3 +18,9 @@ export const CREDIT_CARD_NUMBER = {
 } as const;
 
 export const CREDIT_CARD = 'creditCard';
+
+export const REGISTER_MIN_TIME = 1;
+
+export const REGISTER_MAX_TIME = 2;
+
+export const REGISTER_SPARE_TIME = 0.1;

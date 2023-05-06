@@ -8,25 +8,25 @@ import Input from '@Components/Input';
 import InputLabel from '@Components/InputLabel';
 import Loading from '@Components/Loading';
 
-import creditCard from '@Domains/creditCard';
-import creditCardStorage from '@Domains/creditCard/creditCardStorage';
-
-import * as Type from '@Types/index';
+import useRegisterCreditCard from '@Hooks/useRegisterCreditCard';
 
 import {
   CreditCardRegisterContext,
   CreditCardRegisterUpdateContext,
 } from '@Contexts/CreditCardRegister/CreditCardRegisterContext';
 
+import generatorRandomNumber from '@Utils/generatorRandomNumber';
+
 import CARD_COMPANY from '@Constants/CardCompany';
+import { REGISTER_MAX_TIME, REGISTER_MIN_TIME } from '@Constants/creditCard';
 
 import * as S from './style';
 
 function CreditCardAlias() {
   const navigate = useNavigate();
 
-  const [loading, setLoading] = useState(false);
   const [delayTime, setDelayTime] = useState(0);
+  const { loading, registerCreditCard } = useRegisterCreditCard(delayTime);
 
   const { creditCard: creditCardState } = useContext(CreditCardRegisterContext);
   const { update } = useContext(CreditCardRegisterUpdateContext);
@@ -35,31 +35,14 @@ function CreditCardAlias() {
     update.alias(event.target.value);
   };
 
-  const registerCreditCard = () => {
-    setLoading(true);
-    setTimeout(() => {
-      const newCreditCard: Type.CreditCard = {
-        id: creditCard.issueCreditCardId(),
-        numbers: creditCardState.numbers,
-        expiry: creditCardState.expiry,
-        owner: creditCardState.owner,
-        cvc: creditCardState.cvc,
-        password: {
-          first: creditCardState.password.first,
-          second: creditCardState.password.second,
-        },
-        company: creditCardState.company,
-        alias: creditCardState.alias,
-      };
-
-      creditCardStorage.saveCreditCard(newCreditCard);
-      navigate('/');
-    }, delayTime);
+  const handleClickConfirmButton = async () => {
+    await registerCreditCard(creditCardState);
+    navigate('/');
   };
 
   useEffect(() => {
     if (!creditCardState.company) navigate('/register');
-    setDelayTime(Math.random() + 1);
+    setDelayTime(generatorRandomNumber.generateWithDecimalPoint(REGISTER_MIN_TIME, REGISTER_MAX_TIME));
   }, []);
 
   return (
@@ -97,7 +80,7 @@ function CreditCardAlias() {
             text="확인"
             disabled={creditCardState.alias.length === 0}
             type="button"
-            handleClick={registerCreditCard}
+            handleClick={handleClickConfirmButton}
           />
         </S.CreditCardAlias>
       )}
