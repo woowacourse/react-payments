@@ -1,12 +1,12 @@
 import StyledButton from "./StyledButton";
 import type { StyledButtonProps } from "./StyledButton";
 
-interface ButtonProps extends StyledButtonProps, React.HTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends StyledButtonProps, React.ComponentPropsWithoutRef<"button"> {
   onClick?: () => void;
 }
 
-const Button = ({ onClick, ...$styledProps }: ButtonProps) => {
-  return <StyledButton onClick={onClick} {...$styledProps}></StyledButton>;
+const Button = ({ onClick, ...restProps }: ButtonProps) => {
+  return <StyledButton onClick={onClick} {...restProps}></StyledButton>;
 };
 
 export default Button;
