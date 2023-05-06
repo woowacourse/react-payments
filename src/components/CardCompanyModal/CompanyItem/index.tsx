@@ -1,4 +1,5 @@
 import type { MouseEventHandler } from 'react';
+import { useModalContext } from 'react-modal-hp';
 
 import { COMPANY_INFO, isCompanyName } from '../../../constants/company';
 import type { CompanyName } from '../../../constants/company';
@@ -8,11 +9,11 @@ import styles from './companyItem.module.css';
 
 interface Props {
   name: CompanyName;
-  onClose: () => void;
 }
 
-const CompanyItem = ({ name, onClose }: Props) => {
+const CompanyItem = ({ name }: Props) => {
   const handleCardInfo = useCardFormAction();
+  const { close } = useModalContext();
 
   const handleItemClick: MouseEventHandler<HTMLLIElement> = (event) => {
     const { name } = event.currentTarget.dataset;
@@ -20,7 +21,7 @@ const CompanyItem = ({ name, onClose }: Props) => {
     if (!name || !isCompanyName(name)) return;
 
     handleCardInfo(name, 'company');
-    onClose();
+    close();
   };
 
   return (

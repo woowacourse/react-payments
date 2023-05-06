@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import Modal, { useModal } from 'react-modal-hp';
 
 import Header from '../../components/common/Header';
 import CardItem from '../../components/CardItem';
@@ -6,12 +7,12 @@ import Button from '../../components/common/Button';
 import CardInfoForm from '../../components/CardInfoForm';
 import CardCompanyModal from '../../components/CardCompanyModal';
 
-import useModal from '../../hooks/useModal';
-
 import styles from './cardRegisterPage.module.css';
 
+const portal = document.getElementById('modal-root') as HTMLDivElement;
+
 const CardInfoRegisterPage = () => {
-  const { toggleModal, openModal, closeModal } = useModal();
+  const { isOpen, openModal, closeModal } = useModal();
 
   useEffect(() => {
     openModal();
@@ -32,7 +33,15 @@ const CardInfoRegisterPage = () => {
         <section className={styles.formSection}>
           <CardInfoForm />
         </section>
-        {toggleModal && <CardCompanyModal onClose={closeModal} />}
+        <Modal
+          open={isOpen}
+          onClose={closeModal}
+          position="bottom"
+          portal={portal}
+          animation
+        >
+          <CardCompanyModal />
+        </Modal>
       </main>
     </>
   );
