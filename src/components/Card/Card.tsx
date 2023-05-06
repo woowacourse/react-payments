@@ -1,6 +1,7 @@
 import * as Styled from './Card.styles';
 import CardType from '../../types/Card';
 import CardLabel from '../@common/CardLabel';
+import React from 'react';
 
 type CardProps = Omit<CardType, 'id'> & {
   setIsModalOpen?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -21,41 +22,49 @@ const cardCompanyColors: cardCompanyColorsType = {
   국민카드: '#5D544B',
 };
 
-const Card = ({
-  cardNumbers,
-  expiredDates,
-  cardOwnerName,
-  cardCompany,
-  setIsModalOpen,
-}: CardProps) => {
-  return (
-    <Styled.Wrapper
-      background={cardCompanyColors[cardCompany]}
-      onClick={() => {
-        setIsModalOpen && setIsModalOpen(true);
-      }}
-    >
-      <CardLabel
-        labelText={cardCompany || '00카드'}
-        color={cardCompany ? '#ffffff' : '#000000'}
-      />
-      <Styled.CardItemWrapper>
-        <Styled.Chip />
-        <Styled.TextWrapper>
-          <Styled.CardText>{cardNumbers[0]}</Styled.CardText>
-          <Styled.CardText>{cardNumbers[1]}</Styled.CardText>
-          <Styled.CardText>{'•'.repeat(cardNumbers[2].length)}</Styled.CardText>
-          <Styled.CardText>{'•'.repeat(cardNumbers[3].length)}</Styled.CardText>
-        </Styled.TextWrapper>
-        <Styled.TextWrapper>
-          <Styled.CardText cardName>{cardOwnerName || 'NAME'}</Styled.CardText>
-          <Styled.CardText>
-            {expiredDates[0] || 'MM'} / {expiredDates[1] || 'YY'}
-          </Styled.CardText>
-        </Styled.TextWrapper>
-      </Styled.CardItemWrapper>
-    </Styled.Wrapper>
-  );
-};
+const Card = React.memo(
+  ({
+    cardNumbers,
+    expiredDates,
+    cardOwnerName,
+    cardCompany,
+    setIsModalOpen,
+  }: CardProps) => {
+    return (
+      <Styled.Wrapper
+        background={cardCompanyColors[cardCompany]}
+        onClick={() => {
+          setIsModalOpen && setIsModalOpen(true);
+        }}
+      >
+        <CardLabel
+          labelText={cardCompany || '00카드'}
+          color={cardCompany ? '#ffffff' : '#000000'}
+        />
+        <Styled.CardItemWrapper>
+          <Styled.Chip />
+          <Styled.TextWrapper>
+            <Styled.CardText>{cardNumbers[0]}</Styled.CardText>
+            <Styled.CardText>{cardNumbers[1]}</Styled.CardText>
+            <Styled.CardText>
+              {'•'.repeat(cardNumbers[2].length)}
+            </Styled.CardText>
+            <Styled.CardText>
+              {'•'.repeat(cardNumbers[3].length)}
+            </Styled.CardText>
+          </Styled.TextWrapper>
+          <Styled.TextWrapper>
+            <Styled.CardText cardName>
+              {cardOwnerName || 'NAME'}
+            </Styled.CardText>
+            <Styled.CardText>
+              {expiredDates[0] || 'MM'} / {expiredDates[1] || 'YY'}
+            </Styled.CardText>
+          </Styled.TextWrapper>
+        </Styled.CardItemWrapper>
+      </Styled.Wrapper>
+    );
+  }
+);
 
 export default Card;
