@@ -3,6 +3,7 @@ import { MemoryRouter } from "react-router";
 import { withThemeFromJSXProvider } from "@storybook/addon-styling";
 import GlobalStyle from "../src/styles/GlobalStyle";
 import type { Preview } from "@storybook/react";
+import { CardRegistrationInfoProvider } from "../src/context/CardRegistrationInfoContext";
 
 const customViewports = {
   Default: {
@@ -34,9 +35,11 @@ export default preview;
 
 export const decorators = [
   (Story) => (
-    <MemoryRouter initialEntries={["/"]}>
-      <Story />
-    </MemoryRouter>
+    <CardRegistrationInfoProvider>
+      <MemoryRouter initialEntries={["/"]}>
+        <Story />
+      </MemoryRouter>
+    </CardRegistrationInfoProvider>
   ),
 
   withThemeFromJSXProvider({ GlobalStyles: GlobalStyle }),

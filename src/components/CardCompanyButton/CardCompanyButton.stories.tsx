@@ -10,11 +10,6 @@ const meta: Meta<typeof CardCompanyButton> = {
       defaultValue: "BC",
       control: "radio",
     },
-
-    onClick: {
-      action: "onClick",
-      description: "버튼 클릭 이벤트 함수입니다.",
-    },
   },
 };
 
@@ -22,8 +17,8 @@ export default meta;
 type Story = StoryObj<typeof CardCompanyButton>;
 
 export const Default: Story = {
-  render: ({ cardCompany, onClick }) => {
-    return <CardCompanyButton cardCompany={cardCompany} onClick={onClick} />;
+  render: ({ cardCompany }) => {
+    return <CardCompanyButton cardCompany={cardCompany} />;
   },
 
   args: {
