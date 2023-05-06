@@ -2,7 +2,7 @@ import MyCard from './pages/MyCard';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import AddCard from './pages/AddCard';
 import RegisterCardName from './pages/RegisterCardName';
-import { ModalContextProvider } from 'modal-patrick';
+import { ModalContextProvider } from 'react-modal-patrick';
 
 const router = createBrowserRouter([
   {

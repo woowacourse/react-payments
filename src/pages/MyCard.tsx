@@ -6,7 +6,7 @@ import Card from '../components/Card';
 import { getLocalStorage } from '../utils/localStorage';
 import { CardType } from '../types';
 import uuid from 'react-uuid';
-import { useModalContext } from 'modal-patrick';
+import { useModalContext } from 'react-modal-patrick';
 import { LOCALSTORAGE_KEY } from '../constants';
 
 const MyCard = () => {

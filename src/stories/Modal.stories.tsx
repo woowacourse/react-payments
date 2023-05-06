@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { useModalContext, ModalPortal, ModalContextProvider } from 'modal-patrick';
+import { useModalContext, ModalPortal, ModalContextProvider } from 'react-modal-patrick';
 import Button from '../components/common/Button';
 
 const meta: Meta<typeof ModalPortal> = {

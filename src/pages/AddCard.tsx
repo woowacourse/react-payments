@@ -9,7 +9,7 @@ import { getLocalStorage, setLocalStorage } from '../utils/localStorage';
 import ModalBanks from '../components/ModalBanks';
 import { useNavigate } from 'react-router-dom';
 import { LOCALSTORAGE_KEY } from '../constants';
-import { ModalPortal, useModalContext } from 'modal-patrick';
+import { ModalPortal, useModalContext } from 'react-modal-patrick';
 import Button from '../components/common/Button';
 
 const AddCard = () => {
