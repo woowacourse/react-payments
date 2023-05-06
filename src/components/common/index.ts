@@ -5,3 +5,4 @@ export * from './Input/Input';
 export * from './InputBox/InputBox';
 export * from './ErrorMessage';
 export * from './Label/Label';
+export * from './Loading';
