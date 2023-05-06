@@ -1,10 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import PaymentsHeader from '../components/payments/PaymentsHeader';
 
-import Header from '../components/Header';
-
-const meta: Meta<typeof Header> = {
-  title: 'Header',
-  component: Header,
+const meta: Meta<typeof PaymentsHeader> = {
+  title: 'PaymentsHeader',
+  component: PaymentsHeader,
 };
 
 export default meta;
