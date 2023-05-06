@@ -14,6 +14,8 @@ import React, {
   useRef,
   useEffect,
   LabelHTMLAttributes,
+  useCallback,
+  ForwardedRef,
 } from 'react';
 import { getAllChildElement, getResolvedChildren, validateAsChild } from '../../../utils/jsx';
 import * as Styled from './InputStyles.styles';
@@ -74,7 +76,6 @@ function Field(props: PropsWithChildren<FieldProps>) {
   };
 
   if (asChild) validateAsChild(childrenArray);
-
   if (asChild && isValidElement<InputContext & { pattern: string; 'data-item': 'field' }>(child)) {
     return (
       <InputItem>
@@ -117,6 +118,7 @@ function Label(props: PropsWithChildren<LabelProps>) {
 
   useEffect(() => {
     const fieldItem = itemMap.get('field');
+
     if (fieldItem && fieldItem.ref.current) {
       setFieldId(fieldItem.ref.current.id);
     }
@@ -187,12 +189,19 @@ function InputItem({ children }: PropsWithChildren) {
 
   validateAsChild(childrenArray);
 
-  if (!isValidElement<{ 'data-item': string; ref: RefObject<HTMLInputElement | null> }>(child))
+  if (!isValidElement<{ 'data-item': string; ref: ForwardedRef<HTMLInputElement> }>(child))
     throw new Error('Not valid element');
 
-  useEffect(() => {
+  const setRef = useCallback((node: HTMLInputElement | null) => {
+    ref.current = node;
     itemMap.set(child.props['data-item'], { ref });
   }, []);
 
-  return cloneElement(child, { ref });
+  useEffect(() => {
+    itemMap.set(child.props['data-item'], { ref });
+
+    return () => void itemMap.delete('data-item');
+  }, []);
+
+  return cloneElement(child, { ref: setRef });
 }

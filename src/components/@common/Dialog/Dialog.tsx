@@ -20,21 +20,27 @@ function Dialog(props: PropsWithChildren<DialogProps>) {
 }
 
 function Trigger(props: PropsWithChildren<TriggerProps>) {
-  const { asChild, firstChild, onClick: onClickProps, ...restProps } = getValidProps(props);
+  const {
+    asChild,
+    firstChild,
+    children = 'Trigger',
+    onClick: onClickProps,
+    ...restProps
+  } = getValidProps(props);
   const { openHandler } = useDialogContext();
 
-  if (asChild) {
-    return cloneElement(firstChild, {
+  const trigger = asChild ? (
+    cloneElement(firstChild, {
       ...restProps,
       onClick: composeEventHandlers(onClickProps, openHandler),
-    });
-  }
-
-  return (
+    })
+  ) : (
     <Styled.Trigger {...restProps} onClick={composeEventHandlers(onClickProps, openHandler)}>
-      Trigger
+      {children}
     </Styled.Trigger>
   );
+
+  return trigger;
 }
 
 function Portal({ children, container = document.body }: PropsWithChildren<PortalProps>) {
@@ -44,7 +50,7 @@ function Portal({ children, container = document.body }: PropsWithChildren<Porta
 }
 
 function BackDrop(props: PropsWithChildren<BackDropProps>) {
-  const { asChild, firstChild, onClick: onClickProps, ...restProps } = getValidProps(props);
+  const { asChild, firstChild, children, onClick: onClickProps, ...restProps } = getValidProps(props);
   const { isOpened, openHandler } = useDialogContext();
 
   const backDrop = asChild ? (
@@ -68,14 +74,14 @@ function Content(props: PropsWithChildren<ContentProps>) {
       ...restProps,
     })
   ) : (
-    <Styled.Content>{children}</Styled.Content>
+    <Styled.Content {...restProps}>{children}</Styled.Content>
   );
 
   return isOpened ? content : null;
 }
 
 function Close(props: PropsWithChildren<CloseProps>) {
-  const { asChild, firstChild, onClick: onClickProps, ...restProps } = getValidProps(props);
+  const { asChild, firstChild, children = 'X', onClick: onClickProps, ...restProps } = getValidProps(props);
   const { isOpened, openHandler } = useDialogContext();
 
   const close = asChild ? (
@@ -84,7 +90,9 @@ function Close(props: PropsWithChildren<CloseProps>) {
       onClick: composeEventHandlers(onClickProps, openHandler),
     })
   ) : (
-    <Styled.Close onClick={composeEventHandlers(onClickProps, openHandler)}>𝗫</Styled.Close>
+    <Styled.Close {...restProps} onClick={composeEventHandlers(onClickProps, openHandler)}>
+      {children}
+    </Styled.Close>
   );
 
   return isOpened ? close : null;
