@@ -1,4 +1,5 @@
-import { Meta } from "@storybook/react";
+import { userEvent, waitFor, within } from "@storybook/testing-library";
+import { Meta, StoryObj } from "@storybook/react";
 import { useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
 import LastPage from "pages/LastPage";
@@ -99,4 +100,54 @@ export const CardNicknameSetting = (args: PreviewCardInfo) => {
   }, [args]);
 
   return <LastPage />;
+};
+
+/******************** Interactions ********************/
+
+type Story = StoryObj<typeof meta>;
+
+export const SuccessInteraction: Story = {
+  render: () => {
+    return CardNicknameSetting(meta.args);
+  },
+
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    const cardNicknameInput =
+      canvas.getByPlaceholderText("카드 별칭을 입력해 주세요.");
+
+    await waitFor(() => cardNicknameInput);
+
+    await step("Typing Card Nickname", async () => {
+      await userEvent.type(cardNicknameInput, "🥰야미 카드🥰", { delay: 200 });
+    });
+
+    await step("Button Click", () => {
+      userEvent.click(canvas.getByRole("button"));
+    });
+  },
+};
+
+export const ErrorInteraction: Story = {
+  render: () => {
+    return CardNicknameSetting(meta.args);
+  },
+
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    const cardNicknameInput =
+      canvas.getByPlaceholderText("카드 별칭을 입력해 주세요.");
+
+    await waitFor(() => cardNicknameInput);
+
+    await step("Not Typing Card Nickname", async () => {
+      await userEvent.type(cardNicknameInput, "          ", { delay: 200 });
+    });
+
+    await step("Button Click", () => {
+      userEvent.click(canvas.getByRole("button"));
+    });
+  },
 };
