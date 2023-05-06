@@ -62,6 +62,7 @@ export function CardNumberInput({
                 onKeyDown={(e) => handleBackspacePress(index, e)}
                 placeholder={isPasswordInput(index) ? '••••' : '0000'}
                 aria-labelledby='cardNumberCaption'
+                data-testid={`cardNumberInput`}
               />
               {!isLast(index, CARD_NUMBER_INPUTS_LENGTH) && (
                 <Style.Hyphen visible={isFullInputs[index]}>-</Style.Hyphen>
