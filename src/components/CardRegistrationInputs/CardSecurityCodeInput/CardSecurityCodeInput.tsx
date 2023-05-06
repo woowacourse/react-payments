@@ -1,7 +1,7 @@
-import { isNumeric } from "../../validator/Validator";
-import { InputContainer, Input, Label, RequiredInputIcon } from "../@common";
+import { isNumeric } from "../../../validator/Validator";
+import { InputContainer, Input, Label, RequiredInputIcon } from "../../@common";
 import requiredInputIcon from "../../assets/requiredInputIcon.png";
-import useCardRegistrationInfoContext from "../../hooks/useCardRegistrationInfoContext";
+import useCardRegistrationInfoContext from "../../../hooks/useCardRegistrationInfoContext";
 
 const CardSecurityCodeInput = () => {
   const { securityCode, setSecurityCode } = useCardRegistrationInfoContext();
