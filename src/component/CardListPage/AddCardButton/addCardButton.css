@@ -12,3 +12,9 @@
 
   cursor: pointer;
 }
+
+.add-card-button-icon {
+  position: relative;
+  top: 55px;
+  left: 100px;
+}
