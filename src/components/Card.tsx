@@ -1,6 +1,7 @@
 import { useContext, useMemo } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import { IcChip } from "../assets";
+import { CARD_COMPANY, CARD_COMPANY_NOT_SELECTED_STRING } from "../constants";
 import { ModalDispatchContext } from "../context";
 import { cardCompanyTheme } from "../style/theme";
 import { CardType } from "../types";
@@ -34,6 +35,11 @@ const Card = ({
             <span>{expiredDate}</span>
           </BottomInfoWrapper>
         </CardInfoWrapper>
+        <CompanyLogoWrapper>
+          {cardCompany !== CARD_COMPANY_NOT_SELECTED_STRING && (
+            <img src={CARD_COMPANY[cardCompany].img} alt="카드사로고" />
+          )}
+        </CompanyLogoWrapper>
       </CardWrapper>
     </ThemeProvider>
   );
@@ -46,6 +52,7 @@ const CardWrapper = styled.div`
   width: 213px;
   height: 133px;
 
+  position: relative;
   padding: 15px 14px 0 14px;
   box-sizing: border-box;
 
@@ -60,6 +67,12 @@ const CardWrapper = styled.div`
     font-size: 12px;
     margin-bottom: 17px;
   }
+`;
+
+const CompanyLogoWrapper = styled.div`
+  position: absolute;
+  top: 20px;
+  right: 20px;
 `;
 
 const CardInfoWrapper = styled.div`

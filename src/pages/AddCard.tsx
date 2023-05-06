@@ -5,7 +5,7 @@ import { ROUTER_PATH } from "../router/path";
 import { getLocalStorage, setLocalStorage } from "../utils";
 import { Page, Header, Card, CardInputForm, CardCompany } from "../components";
 import { useCard } from "../hooks";
-import BottomSheet from "woowa-light-modal";
+import Modal from "woowa-light-modal";
 
 const AddCard = () => {
   const navigate = useNavigate();
@@ -36,9 +36,9 @@ const AddCard = () => {
         setNewCard={setNewCard}
         onSubmit={handleFormSubmited}
       />
-      <BottomSheet isOpen={isModalOpen} onClose={toggleModal} height={"227px"}>
+      <Modal isOpen={isModalOpen} onClose={toggleModal} height={"227px"}>
         <CardCompany onChange={handleCardCompanyChanged} />
-      </BottomSheet>
+      </Modal>
     </Page>
   );
 };
