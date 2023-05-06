@@ -1,17 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { ChangeEvent, HTMLAttributes } from 'react';
-import { ChangeEvent, HTMLAttributes } from 'react';
 import * as S from './style';
 
 export interface InputProps<T> extends HTMLAttributes<HTMLInputElement> {
   type: string;
-  value: T;
-  name?: string;
-  width: string;
-  textAlign: 'center' | 'start';
-  placeholder?: string;
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-  onClick?: () => void;
   value: T;
   name?: string;
   width: string;

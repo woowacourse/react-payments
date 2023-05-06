@@ -35,11 +35,6 @@ function CreditCardRegister() {
     openModal();
   }, []);
 
-  useEffect(() => {
-    initCreditCardForm();
-    openModal();
-  }, []);
-
   return (
     <>
       {isLoading ? (

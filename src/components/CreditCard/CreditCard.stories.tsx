@@ -90,126 +90,41 @@ HanaCard.args = {
 
 export const Kookmin = Template.bind({});
 Kookmin.args = {
-  export const ShinhanCard = Template.bind({});
-  ShinhanCard.args = {
-    fullFilled: true,
-    creditCard: {
-      companyId: 'shinhan',
-      number: '1234123412341234',
-      expiry: '0345',
-      owner: 'NOAH',
-    },
-  };
+  fullFilled: true,
+  creditCard: {
+    companyId: 'kookmin',
+    number: '1234123412341234',
+    expiry: '0345',
+    owner: 'NOAH',
+  },
+};
 
-  export const BCCard = Template.bind({});
-  BCCard.args = {
-    fullFilled: true,
-    creditCard: {
-      companyId: 'bc',
-      number: '1234123412341234',
-      expiry: '0345',
-      owner: 'NOAH',
-    },
-  };
+export const OwnerLessCreditCard = Template.bind({});
+OwnerLessCreditCard.args = {
+  fullFilled: true,
+  creditCard: {
+    companyId: 'hyundai',
+    number: '9999999999999999',
+    expiry: '0345',
+  },
+};
 
-  export const KakaoCard = Template.bind({});
-  KakaoCard.args = {
-    fullFilled: true,
-    creditCard: {
-      companyId: 'kakao',
-      number: '1234123412341234',
-      expiry: '0345',
-      owner: 'NOAH',
-    },
-  };
+export const WrongCardCompanyName = Template.bind({});
+WrongCardCompanyName.args = {
+  fullFilled: true,
+  creditCard: {
+    companyId: 'invalid',
+    number: '9999999999999999',
+    expiry: '0345',
+  },
+};
 
-  export const HyundaiCard = Template.bind({});
-  HyundaiCard.args = {
-    fullFilled: true,
-    creditCard: {
-      companyId: 'hyundai',
-      number: '1234123412341234',
-      expiry: '0345',
-      owner: 'NOAH',
-    },
-  };
-
-  export const WooriCard = Template.bind({});
-  WooriCard.args = {
-    fullFilled: true,
-    creditCard: {
-      companyId: 'woori',
-      number: '1234123412341234',
-      expiry: '0345',
-      owner: 'NOAH',
-    },
-  };
-
-  export const LotteCard = Template.bind({});
-  LotteCard.args = {
-    fullFilled: true,
-    creditCard: {
-      companyId: 'lotte',
-      number: '1234123412341234',
-      expiry: '0345',
-      owner: 'NOAH',
-    },
-  };
-
-  export const HanaCard = Template.bind({});
-  HanaCard.args = {
-    fullFilled: true,
-    creditCard: {
-      companyId: 'hana',
-      number: '1234123412341234',
-      expiry: '0345',
-      owner: 'NOAH',
-    },
-  };
-
-  export const Kookmin = Template.bind({});
-  Kookmin.args = {
-    fullFilled: true,
-    creditCard: {
-      companyId: 'kookmin',
-      companyId: 'kookmin',
-      number: '1234123412341234',
-      expiry: '0345',
-      expiry: '0345',
-      owner: 'NOAH',
-    },
-  };
-
-  export const OwnerLessCreditCard = Template.bind({});
-  OwnerLessCreditCard.args = {
-    fullFilled: true,
-    creditCard: {
-      companyId: 'hyundai',
-      number: '9999999999999999',
-      expiry: '0345',
-    },
-  };
-
-  export const WrongCardCompanyName = Template.bind({});
-  WrongCardCompanyName.args = {
-    fullFilled: true,
-    creditCard: {
-      companyId: 'invalid',
-      number: '9999999999999999',
-      expiry: '0345',
-    },
-  };
-
-  export const invalidCreditCard = Template.bind({});
-  invalidCreditCard.args = {
-    export const invalidCreditCard = Template.bind({});
-    invalidCreditCard.args = {
-      fullFilled: true,
-      creditCard: {
-        companyId: 'woori',
-        companyId: 'woori',
-        number: '12341234123',
-        expiry: '0345',
-        expiry: '0345',
-      },
-    };
+export const invalidCreditCard = Template.bind({});
+invalidCreditCard.args = {
+  fullFilled: true,
+  creditCard: {
+    companyId: 'woori',
+    number: '12341234123',
+    expiry: '0345',
+  },
+};
