@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { InputContainer, Input, Label, RequiredInputIcon } from "../../@common";
-import requiredInputIcon from "../../assets/requiredInputIcon.png";
+import requiredInputIcon from "../../../assets/requiredInputIcon.png";
 import { CardPasswordKey } from "../../../types";
 import { isNumeric } from "../../../validator/Validator";
 import useCardRegistrationInfoContext from "../../../hooks/useCardRegistrationInfoContext";

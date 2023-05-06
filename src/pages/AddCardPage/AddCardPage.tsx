@@ -1,15 +1,17 @@
+import { useNavigate } from "react-router-dom";
 import AppBar from "../../components/@common/AppBar/AppBar";
 import CardPreview from "../../components/CardPreview/CardPreview";
-import CardNumberInput from "../../components/CardNumberInput/CardNumberInput";
-import CardOwnerNameInput from "../../components/CardRegistrationInputs/CardOwnerNameInput/CardOwnerNameInput";
-import CardExpirationDateInput from "../../components/CardRegistrationInputs/CardExpirationDateInput/CardExpirationDateInput";
-import CardSecurityCodeInput from "../../components/CardRegistrationInputs/CardSecurityCodeInput/CardSecurityCodeInput";
-import CardPasswordInput from "../../components/CardRegistrationInputs/CardPasswordInput/CardPasswordInput";
+import {
+  CardNumberInput,
+  CardExpirationDateInput,
+  CardOwnerNameInput,
+  CardSecurityCodeInput,
+  CardPasswordInput,
+} from "../../components/CardRegistrationInputs";
 import { Modal } from "react-dobob-modal";
 import styled from "styled-components";
 import { Container } from "../../components/@common";
 import { Card } from "../../types";
-import { useNavigate } from "react-router-dom";
 import { isFulfilledObject, isFulfilledString, isValidMonth } from "../../validator/Validator";
 import useModal from "../../hooks/useModal";
 import ROUTE_PATH from "../../constants/routePath";

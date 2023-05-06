@@ -1,8 +1,8 @@
-import { CardNumberGroups } from "../../types";
-import { isNumeric } from "../../validator/Validator";
-import { InputContainer, Input, Label, RequiredInputIcon } from "../@common";
-import requiredInputIcon from "../../assets/requiredInputIcon.png";
-import useCardRegistrationInfoContext from "../../hooks/useCardRegistrationInfoContext";
+import { CardNumberGroups } from "../../../types";
+import { isNumeric } from "../../../validator/Validator";
+import { InputContainer, Input, Label, RequiredInputIcon } from "../../@common";
+import requiredInputIcon from "../../../assets/requiredInputIcon.png";
+import useCardRegistrationInfoContext from "../../../hooks/useCardRegistrationInfoContext";
 
 const CardNumberInput = () => {
   const { cardNumber, setCardNumber } = useCardRegistrationInfoContext();
