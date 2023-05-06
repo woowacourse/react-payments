@@ -107,7 +107,7 @@ export function useCardName() {
   const onChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
     if (value && !isEnglish(value)) return;
 
-    dispatch(createCardRegisterAction('UPDATE_HOLDER_NAME', { value }));
+    dispatch(createCardRegisterAction('UPDATE_HOLDER_NAME', { value: value.toUpperCase() }));
   };
 
   return { error, holderName, onChange, onBlur };
