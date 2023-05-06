@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Loading } from '../../components/common/Spinner/Loading';
 
 const meta = {
-  title: 'Example/Spinner',
+  title: 'Payments/Common/Spinner',
   component: Loading,
   tags: ['autodocs'],
 } satisfies Meta<typeof Loading>;
@@ -10,6 +10,4 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const WalkingDog: Story = {
-  render: () => <Loading />,
-};
+export const WalkingDog: Story = {};

@@ -1,16 +1,17 @@
-import type { Meta } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/react';
 import { useRef, useState } from 'react';
-import { CardNumberInput } from '../../../components/Input/CardNumberInput';
+import { CardNumberInput } from '../../components/Input/CardNumberInput';
 
 const meta = {
-  title: 'Example/Input/CardInput',
+  title: 'Payments/Card/CardNumberInput',
   component: CardNumberInput,
   tags: ['autodocs'],
 } satisfies Meta<typeof CardNumberInput>;
 
 export default meta;
+type Story = StoryFn<typeof meta>;
 
-export const CardNumber = () => {
+export const CardNumber: Story = () => {
   const cardNumberInputRef = useRef(null);
   const [cardNumber, setCardNumber] = useState(['', '', '', '']);
 

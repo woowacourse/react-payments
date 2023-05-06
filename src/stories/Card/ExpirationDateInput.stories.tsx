@@ -1,16 +1,17 @@
-import type { Meta } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/react';
 import { useState, useRef } from 'react';
-import { ExpirationDateInput } from '../../../components/Input/ExpirationDateInput';
+import { ExpirationDateInput } from '../../components/Input';
 
 const meta = {
-  title: 'Example/Input/CardInput',
+  title: 'Payments/Card/ExpirationDateInput',
   component: ExpirationDateInput,
   tags: ['autodocs'],
 } satisfies Meta<typeof ExpirationDateInput>;
 
 export default meta;
+type Story = StoryFn<typeof meta>;
 
-export const ExpirationDate = () => {
+export const ExpirationDate: Story = () => {
   const monthInputRef = useRef(null);
   const [expirationDate, setExpirationDate] = useState({
     month: '',

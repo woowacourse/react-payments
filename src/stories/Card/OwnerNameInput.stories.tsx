@@ -1,16 +1,17 @@
-import type { Meta } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/react';
 import { useRef, useState } from 'react';
-import { OwnerNameInput } from '../../../components/Input/OwnerNameInput';
+import { OwnerNameInput } from '../../components/Input/OwnerNameInput';
 
 const meta = {
-  title: 'Example/Input/CardInput',
+  title: 'Payments/Card/OwnerNameInput',
   component: OwnerNameInput,
   tags: ['autodocs'],
 } satisfies Meta<typeof OwnerNameInput>;
 
 export default meta;
+type Story = StoryFn<typeof meta>;
 
-export const OwnerName = () => {
+export const OwnerName: Story = () => {
   const ownerNameInputRef = useRef(null);
   const [ownerName, setOwnerName] = useState('');
 

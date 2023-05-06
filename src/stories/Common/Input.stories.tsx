@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Input } from '../../components/common/Input';
 
 const meta = {
-  title: 'Example/Input',
+  title: 'Payments/Common/Input',
   component: Input,
   tags: ['autodocs'],
 } satisfies Meta<typeof Input>;

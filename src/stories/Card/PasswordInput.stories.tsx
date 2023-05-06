@@ -1,16 +1,17 @@
-import type { Meta } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/react';
 import { useRef, useState } from 'react';
-import { PasswordInput } from '../../../components/Input/PasswordInput';
+import { PasswordInput } from '../../components/Input/PasswordInput';
 
 const meta = {
-  title: 'Example/Input/CardInput',
+  title: 'Payments/Card/PasswordInput',
   component: PasswordInput,
   tags: ['autodocs'],
 } satisfies Meta<typeof PasswordInput>;
 
 export default meta;
+type Story = StoryFn<typeof meta>;
 
-export const Password = () => {
+export const Password: Story = () => {
   const passwordInputRef = useRef(null);
   const [password, setPassword] = useState(['', '']);
 
