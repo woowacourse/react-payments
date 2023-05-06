@@ -5,7 +5,7 @@ import GlobalStyle from "./styles/GlobalStyle";
 import AddCardPage from "./pages/AddCardPage/AddCardPage";
 import CardListPage from "./pages/CardListPage/CardListPage";
 import CardAliasRegistrationPage from "./pages/CardAliasRegistrationPage/CardAliasRegistrationPage";
-import NotFound from "./components/NotFound/NotFound";
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import useStateWithStorage from "./hooks/useStateWithStorage";
 import ROUTE_PATH from "./constants/routePath";
 import { CARDS_KEY } from "./constants/storageKey";
@@ -28,7 +28,7 @@ function App() {
           <Route index path={ROUTE_PATH.root} element={<CardListPage cards={cards} />} />
           <Route path={ROUTE_PATH.addCard} element={<AddCardPage />} />
           <Route path={ROUTE_PATH.cardAlias} element={<CardAliasRegistrationPage onSubmit={addCard} />} />
-          <Route path={ROUTE_PATH.other} element={<NotFound />} />
+          <Route path={ROUTE_PATH.other} element={<NotFoundPage />} />
         </Routes>
       </Layout>
     </>

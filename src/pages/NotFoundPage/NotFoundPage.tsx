@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { Container } from "../@common";
-import Button from "../@common/Button/Button";
+import { Container } from "../../components/@common";
+import Button from "../../components/@common/Button/Button";
 import ROUTE_PATH from "../../constants/routePath";
-import FlexBox from "../@common/FlexBox";
+import FlexBox from "../../components/@common/FlexBox";
 
-const NotFound = () => {
+const NotFoundPage = () => {
   return (
     <Container justify="center">
       <RecommendMessage>
@@ -28,7 +28,7 @@ const NotFound = () => {
   );
 };
 
-export default NotFound;
+export default NotFoundPage;
 
 const RecommendMessage = styled.span`
   font-size: 20px;

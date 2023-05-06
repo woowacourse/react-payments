@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import styled from "styled-components";
 
-import NotFound from "../../components/NotFound/NotFound";
+import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import CardPreview from "../../components/CardPreview/CardPreview";
 import { Container, Input } from "../../components/@common";
 import SwayingLoader2 from "../../components/@animations/SwayingLoader2/SwayingLoader2";
@@ -46,7 +46,7 @@ const CardAliasRegistrationPage = ({ onSubmit }: CardAliasRegistrationPageProps)
 
   const isAliasInputFilled = !!cardAlias.length;
 
-  if (previewCard === null) return <NotFound />;
+  if (previewCard === null) return <NotFoundPage />;
 
   if (isError) {
     return (
