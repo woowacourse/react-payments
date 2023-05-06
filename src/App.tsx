@@ -1,17 +1,17 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import CardRegisterProvider from './context/CardRegisterContext';
 
 import Layout from './components/@common/Layout/Layout';
-import { BottomSheetProvider } from './context/BottomSheetContext';
 import { ToastProvider } from './context/ToastMessageContext';
 import MyCardListRoute from './routes/MyCardListRoute';
 import CardRegisterRoute from './routes/CardRegisterRoute';
+import CardRegisterProvider from './context/CardRegisterContext';
+import { BottomSheetProvider } from 'react-bottom-sheet-booungi';
 
 function App() {
   return (
-    <ToastProvider>
-      <BottomSheetProvider>
+    <BottomSheetProvider>
+      <ToastProvider>
         <CardRegisterProvider>
           <BrowserRouter basename={process.env.PUBLIC_URL}>
             <Routes>
@@ -22,8 +22,8 @@ function App() {
             </Routes>
           </BrowserRouter>
         </CardRegisterProvider>
-      </BottomSheetProvider>
-    </ToastProvider>
+      </ToastProvider>
+    </BottomSheetProvider>
   );
 }
 

@@ -13,6 +13,7 @@
     "@types/react-dom": "^18.0.11",
     "react": "^18.2.0",
     "react-app-rewired": "^2.2.1",
+    "react-bottom-sheet-booungi": "^0.3.3",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.10.0",
     "react-scripts": "^5.0.1",
