@@ -80,6 +80,14 @@
   }
 }
 
+.failure-text {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+  margin-bottom: 36px;
+  color: red;
+}
+
 .nickname-box-requesting-font {
   font-weight: 400;
   font-size: 24px;

@@ -2,7 +2,12 @@ import React, { ChangeEvent, useEffect, useReducer, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 
-import { addCardAction, addCardRequestStartAction } from '../actions/cardDataAction';
+import {
+  ADD_CARD_FAILURE,
+  ADD_CARD_SUCCESS,
+  addCardAction,
+  addCardRequestStartAction,
+} from '../actions/cardDataAction';
 import {
   useHandleCVCNumberError,
   useHandleCardNumberError,
@@ -73,7 +78,7 @@ const FormCardAdd = ({
     await new Promise((resolve) => setTimeout(resolve, 3000));
     dispatchAddCardData(addCardAction(postData));
 
-    navigate(LOCATION.CARD_LIST_PAGE);
+    navigate(LOCATION.CARD_LIST_PAGE, { state: { cardAdd: ADD_CARD_SUCCESS } });
   };
 
   const inputRef = Array.from({ length: 9 }).map(() => React.createRef<HTMLInputElement>());
@@ -360,6 +365,7 @@ const FormCardAdd = ({
         <CardNicknameInputModal
           closeModal={setNicknameModalOpen}
           isRequesting={addCardResult.isLoading}
+          isFailed={addCardResult.type === ADD_CARD_FAILURE}
           cardType={cardType}
           cardNumber={cardNumber}
           cardExpire={cardExpire}

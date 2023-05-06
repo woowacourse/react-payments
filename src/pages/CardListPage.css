@@ -56,3 +56,32 @@
 .card-nickname {
   margin-top: 10px;
 }
+
+.card-add-success {
+  z-index: 10;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 70%;
+  width: 70%;
+  height: 5%;
+  border-radius: 10px;
+  font-size: 20px;
+  background-color: #e5e5e5;
+  animation: card-success-view 5s;
+  animation-fill-mode: forwards;
+  opacity: 0;
+}
+@keyframes card-success-view {
+  0% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}

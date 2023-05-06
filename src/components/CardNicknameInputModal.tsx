@@ -8,6 +8,7 @@ import './CardNicknameInputModal.css';
 type CardNicknameInputModalProps = {
   cardType: string;
   isRequesting: boolean;
+  isFailed: boolean;
   cardNumber: InputHook<CardNumber>;
   cardExpire: InputHook<string>;
   cardOwner: InputHook<string>;
@@ -21,6 +22,7 @@ const CardNicknameInputModal = ({
   closeModal,
   cardType,
   isRequesting,
+  isFailed,
   cardNumber,
   cardExpire,
   cardOwner,
@@ -43,6 +45,8 @@ const CardNicknameInputModal = ({
       >
         {isRequesting ? (
           <div className="nickname-box-requesting-font">카드를 등록 중입니다!</div>
+        ) : isFailed ? (
+          <div className="failure-text">카드 등록에 실패했어요 😭 다시 시도해주세요!</div>
         ) : (
           <div className="nickname-box-main-font">거의 다 왔어요!</div>
         )}
@@ -51,7 +55,7 @@ const CardNicknameInputModal = ({
           <Card
             cardType={cardType}
             cardNumber={cardNumber.value}
-            classname={isRequesting ? 'adding-card' : ''}
+            classname={isRequesting ? 'adding-card' : isFailed ? 'add-card-failure' : ''}
             cardOwner={cardOwner.value}
             expired={cardExpire.value}
             securityCode={securityCode.value}
@@ -64,13 +68,18 @@ const CardNicknameInputModal = ({
             }}
             className="nickname-input"
             placeholder="카드 닉네임을 입력해주세요!"
+            readOnly={isRequesting}
             autoFocus
             type="text"
             maxLength={10}
           />
-          <button className="card-submit-button" type="submit">
-            확인
-          </button>
+          {isRequesting ? (
+            ''
+          ) : (
+            <button className="card-submit-button" type="submit">
+              확인
+            </button>
+          )}
         </form>
       </div>
     </>,

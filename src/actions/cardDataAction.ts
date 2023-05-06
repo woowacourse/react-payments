@@ -38,8 +38,6 @@ export const addCardAction = (data: CardType) => {
   console.log(failureRandom80);
   const returnData: any = [];
 
-  // await new Promise((resolve) => setTimeout(resolve, 3000));
-
   if (failureRandom80 > 1) {
     fetchNewCardData(data);
     returnData[0] = {

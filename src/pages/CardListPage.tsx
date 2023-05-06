@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-import { getCardListAction } from '../actions/cardDataAction';
+import { ADD_CARD_SUCCESS, getCardListAction } from '../actions/cardDataAction';
 import Card from '../components/Card';
 import Header from '../components/Header';
 import { cardListInitialState, cardListReducer } from '../reducer/cardReducer';
@@ -9,6 +9,9 @@ import type { CardType } from '../type';
 import './CardListPage.css';
 
 const CardListPage = () => {
+  const location = useLocation();
+  console.log(location.state);
+
   const [mainCardListData, dispatchMainCardListData] = useReducer(
     cardListReducer,
     cardListInitialState
@@ -25,6 +28,11 @@ const CardListPage = () => {
 
   return (
     <div className="add-card-page">
+      {location.state && location.state.cardAdd === ADD_CARD_SUCCESS ? (
+        <div className="card-add-success">카드 추가가 완료되었습니다😊</div>
+      ) : (
+        ''
+      )}
       <Header headerTitle="보유카드" />
       <main className="add-card-page-body">
         {mainCardListData.length === 0 ? (

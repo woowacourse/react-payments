@@ -72,6 +72,7 @@
 
 .adding-card {
   animation: vibration 2s infinite;
+  transition: all 1s;
 }
 
 @keyframes vibration {
@@ -79,17 +80,45 @@
     transform: rotate3d(0);
     transform: rotate(0deg);
   }
-  33% {
-    transform: rotate(5deg);
-    transform: rotate3d(2, -1, -1, -0.1turn);
+  20% {
+    transform: rotate3d(0, 1, 0, 0.1turn);
   }
-  66% {
-    transform: rotate(5deg);
-    transform: rotate3d(1, -1, 0, -0.1turn);
+  40% {
+    transform: rotate3d(1, 1, 0, 0.1turn);
+  }
+  60% {
+    transform: rotate3d(1, 0, 0, 0.1turn);
+  }
+  80% {
+    transform: rotate3d(0, -1, 0, 0.1turn);
   }
   100% {
-    transform: rotate3d(0);
-    transform: rotate(0deg);
+    transform: rotate3d(0, 0, 0, 0.1turn);
+  }
+}
+
+.add-card-failure {
+  animation: fail-vibration 0.1s;
+}
+
+@keyframes fail-vibration {
+  0% {
+    transform: translateX(10px);
+  }
+  20% {
+    transform: translateX(-20px);
+  }
+  40% {
+    transform: translateX(10px);
+  }
+  60% {
+    transform: translateX(10px);
+  }
+  80% {
+    transform: translateX(-20px);
+  }
+  100% {
+    transform: translateX(10px);
   }
 }
 
