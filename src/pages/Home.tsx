@@ -1,32 +1,38 @@
 import { useNavigate } from 'react-router-dom';
-import { CardDB } from 'db/Cards';
 import styled from 'styled-components';
 import { CreditCard, Header } from 'components/common';
 import { PageContainer } from 'components/style/PageContainer';
-
-const cards = CardDB.getCards();
+import { Fragment } from 'react';
+import { useUserCards } from 'contexts/UserCardProvider';
 
 function Home() {
+  const { userCards } = useUserCards();
   const navigate = useNavigate();
+
   const goRegister = () => {
     navigate('/register');
   };
 
   return (
-    <>
-      <PageContainer>
-        <Header text={'보유카드'} />
-        <CardContainer>
-          <span>새로운 카드를 등록해주세요</span>
-          {cards.map((card) => (
+    <PageContainer>
+      <Header text={'보유카드'} />
+      <CardContainer>
+        {userCards.length <= 0 && <Text>새로운 카드를 등록해주세요</Text>}
+        {userCards.map((card) => (
+          <Fragment>
             <CreditCard card={card} />
-          ))}
-          <RegisterButton onClick={goRegister}>+</RegisterButton>
-        </CardContainer>
-      </PageContainer>
-    </>
+            <CardNickName>{card.nickName}</CardNickName>
+          </Fragment>
+        ))}
+        <RegisterButton onClick={goRegister}>+</RegisterButton>
+      </CardContainer>
+    </PageContainer>
   );
 }
+
+const Text = styled.span`
+  margin-bottom: 20px;
+`;
 
 const RegisterButton = styled.button`
   width: 208px;
@@ -43,7 +49,10 @@ const CardContainer = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 22px;
-  gap: 35px;
+`;
+
+const CardNickName = styled.span`
+  padding: 20px;
 `;
 
 export default Home;

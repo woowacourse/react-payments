@@ -1,26 +1,29 @@
 import styled from 'styled-components';
-import { Card } from './types';
+import { Card, CardName } from './types';
 
-type Props = {
-  card: Card;
+export type CreditCardProps = {
+  card: Partial<Card>;
 };
 
-export function CreditCard({ card }: Props) {
+export function CreditCard({ card }: CreditCardProps) {
+  const { numbers, expirationDate, name, bankCode } = card;
+
   return (
-    <Styled.Wrapper>
+    <Styled.Wrapper card={card}>
+      <Styled.BankName>{bankCode && CardName[bankCode]}</Styled.BankName>
       <Styled.Chip />
       <Styled.CardNumbers>
-        <span>{card.numbers[0]}</span>
-        <span>{card.numbers[1]}</span>
-        <span>••••</span>
-        <span>••••</span>
+        <span>{numbers?.[0]}</span>
+        <span>{numbers?.[1]}</span>
+        <Styled.Dots>{'•'.repeat(numbers?.[2].length ?? 0)}</Styled.Dots>
+        <Styled.Dots>{'•'.repeat(numbers?.[3].length ?? 0)}</Styled.Dots>
       </Styled.CardNumbers>
       <Styled.Container>
-        <Styled.Name>{card.name}</Styled.Name>
+        <Styled.Name>{name || 'NAME'}</Styled.Name>
         <Styled.ExpirationDate>
-          <Styled.Month>{card.expirationDate.month}</Styled.Month>
+          <Styled.Month>{expirationDate?.month || 'MM'}</Styled.Month>
           <Styled.DateSeparator>/</Styled.DateSeparator>
-          <Styled.Year>{card.expirationDate.year}</Styled.Year>
+          <Styled.Year>{expirationDate?.year || 'YY'}</Styled.Year>
         </Styled.ExpirationDate>
       </Styled.Container>
     </Styled.Wrapper>
@@ -28,14 +31,27 @@ export function CreditCard({ card }: Props) {
 }
 
 const Styled = {
-  Wrapper: styled.div`
+  Wrapper: styled.div<CreditCardProps>`
     position: relative;
     width: 213px;
     height: 133px;
-    background: #333333;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
+    background: ${({ card, theme: { colors } }) =>
+      card.bankCode ? colors.card.background[card.bankCode] : 'white'};
+    color: ${({ card, theme: { colors } }) =>
+      card.bankCode ? colors.card.font[card.bankCode] : 'black'};
   `,
+
+  BankName: styled.span`
+    position: absolute;
+    left: 13px;
+    top: 11px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+  `,
+
   Chip: styled.div`
     position: absolute;
     width: 40px;
@@ -58,9 +74,12 @@ const Styled = {
 
     span {
       width: 34px;
-      color: #ffffff;
       font-size: 14px;
     }
+  `,
+
+  Dots: styled.span`
+    letter-spacing: -5.5px;
   `,
 
   Container: styled.div`
@@ -73,11 +92,9 @@ const Styled = {
     justify-content: space-between;
   `,
   Name: styled.span`
-    color: #ffffff;
     font-size: 12px;
   `,
   ExpirationDate: styled.div`
-    color: #ffffff;
     font-size: 12px;
     width: 36px;
     height: 10px;
@@ -85,15 +102,15 @@ const Styled = {
   `,
 
   Month: styled.span`
-    width: 14px;
+    flex: 1;
   `,
 
   Year: styled.span`
-    width: 14px;
+    flex: 1;
   `,
 
   DateSeparator: styled.span`
-    width: 6px;
     text-align: center;
+    flex: 1;
   `,
 };
