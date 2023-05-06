@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import StoryProvider from 'stories/StoryProvider';
-import { within, userEvent } from '@storybook/testing-library';
+import { within, userEvent, fireEvent } from '@storybook/testing-library';
 
 import sleep from 'stories/sleep';
 import CreditCardRegister from './CreditCardRegister';
@@ -27,8 +27,8 @@ export const Default: Story = {
   play: async ({ canvasElement }) => {
     await sleep(500);
 
-    const cardCompanyButton = within(canvasElement).getByTestId('credit-card-company-woori');
-    await userEvent.click(cardCompanyButton);
+    const woori = document.querySelector('[data-testid="credit-card-company-woori"]') as HTMLElement;
+    await fireEvent.click(woori);
 
     await sleep(500);
 
