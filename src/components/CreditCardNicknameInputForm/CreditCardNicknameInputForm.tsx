@@ -39,6 +39,7 @@ function CreditCardNicknameInputForm() {
             <LoadingSpinner label={nickname.length > 0 ? '카드 별명을 설정중입니다...' : ''} />
           ) : (
             <S.NicknameInput
+              data-testid="nickname-input"
               value={nickname}
               onChange={handleNicknameInput}
               placeholder="카드 별명을 입력하세요"
