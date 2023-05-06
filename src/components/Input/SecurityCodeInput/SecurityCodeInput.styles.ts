@@ -8,7 +8,6 @@ export const Styled = {
     align-items: center;
     gap: 11px;
     .error {
-      border: 1px solid red;
       background-color: var(--primary-error-color);
     }
   `,

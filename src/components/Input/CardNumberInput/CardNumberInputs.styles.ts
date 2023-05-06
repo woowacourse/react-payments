@@ -16,7 +16,6 @@ export const Styled = {
       text-align: center;
     }
     .error {
-      border: 1px solid red;
       background-color: var(--primary-error-color);
     }
   `,
