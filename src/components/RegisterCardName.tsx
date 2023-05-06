@@ -4,24 +4,28 @@ import styled from 'styled-components';
 import CardNameInput from './CardNameInput';
 import { CardType } from '../types';
 import { LOCALSTORAGE_KEY } from '../constants';
+import { useSetValue } from '../usehooks/useSetValue';
 
 interface Props {
   card: CardType;
   setLoading: (value: boolean) => void;
+  setCard: (value:string)=>void
 }
 
 const RegisterCardName = (props: Props) => {
   const navigator = useNavigate();
 
+  const [value, changeValue] = useSetValue(props.card, props.setCard)
+
   const handleRegisterCardNameChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
-    props.card.cardName = e.target.value;
+    changeValue("cardName", e.target.value);
   };
 
   const registerCardNameHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     const cards = getLocalStorage(LOCALSTORAGE_KEY.CARD);
-    const card = cards.pop();
-    card.cardName = props.card.cardName;
-    setLocalStorage(LOCALSTORAGE_KEY.CARD, [...cards, card]);
+    cards.pop();
+    
+    setLocalStorage(LOCALSTORAGE_KEY.CARD, [...cards, value]);
     props.setLoading(true);
 
     setTimeout(() => navigator('/'), 3000);

@@ -8,7 +8,7 @@ import { useState } from 'react';
 import CardRegisterLoading from '../components/CardRegisterLoading';
 
 const CardName = () => {
-  const card = getLocalStorage(LOCALSTORAGE_KEY.CARD).at(-1);
+  const [card, setCard] = useState(getLocalStorage(LOCALSTORAGE_KEY.CARD).at(-1));
 
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -33,7 +33,7 @@ const CardName = () => {
             )}
           </CardWrapper>
           <RegisterCardNameInputWrapper>
-            <RegisterCardName card={card} setLoading={setLoading}/>
+            <RegisterCardName card={card} setLoading={setLoading} setCard={setCard}/>
           </RegisterCardNameInputWrapper>
         </RegisterCardNameWrapper>
       )}
