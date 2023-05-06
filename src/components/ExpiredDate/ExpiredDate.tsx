@@ -53,6 +53,7 @@ const ExpiredDate = forwardRef(
             order={0}
             placeholder="MM"
             required={true}
+            inputMode={'numeric'}
           />
           <Styled.Pargraph>/</Styled.Pargraph>
           <CardInput
@@ -64,6 +65,7 @@ const ExpiredDate = forwardRef(
             order={1}
             placeholder="YY"
             required={true}
+            inputMode={'numeric'}
           />
         </Styled.Wrapper>
       </>

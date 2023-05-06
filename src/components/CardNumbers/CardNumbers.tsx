@@ -1,6 +1,5 @@
 import { ForwardedRef, forwardRef, RefObject, useRef } from 'react';
 import { cardCompanies } from '../../constants/cards';
-import { useCardNumbers } from '../../hooks';
 import { CardCompanyName } from '../../types/Card';
 import CardInput from '../CardInput/CardInput';
 import CardLabel from '../CardLabel/CardLabel';
@@ -70,7 +69,7 @@ const CardNumbers = forwardRef(
         <CardLabel labelText="카드 번호" />
         <Styled.Wrapper>
           <CardInput
-            type="text"
+            type="numeric"
             maxLength={4}
             ref={cardNumberRefs[0]}
             onChange={handleCardInputChange}
@@ -78,6 +77,7 @@ const CardNumbers = forwardRef(
             order={0}
             placeholder={'0000'}
             required={true}
+            inputMode={'numeric'}
           />
           {cardNumberRefs[0].current?.value.length === 4 && (
             <Styled.Pargraph>-</Styled.Pargraph>
@@ -91,6 +91,7 @@ const CardNumbers = forwardRef(
             order={1}
             placeholder={'0000'}
             required={true}
+            inputMode={'numeric'}
           />
           {cardNumberRefs[1].current?.value.length === 4 && (
             <Styled.Pargraph>-</Styled.Pargraph>
@@ -104,6 +105,7 @@ const CardNumbers = forwardRef(
             order={2}
             placeholder={'0000'}
             required={true}
+            inputMode={'numeric'}
           />
           {cardNumberRefs[2].current?.value.length === 4 && (
             <Styled.Pargraph>-</Styled.Pargraph>
@@ -117,6 +119,7 @@ const CardNumbers = forwardRef(
             order={3}
             placeholder={'0000'}
             required={true}
+            inputMode={'numeric'}
           />
         </Styled.Wrapper>
         {errorMessage && (

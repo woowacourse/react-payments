@@ -39,6 +39,7 @@ const SecurityCode = forwardRef(
               value={securityCode}
               placeholder="•••"
               required={true}
+              inputMode={'numeric'}
             />
           </Styled.Wrapper>
           <Styled.Tooltip type="button">?</Styled.Tooltip>
