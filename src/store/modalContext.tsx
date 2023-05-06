@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 
 export interface ModalContextType {
   isModalOpen: boolean;
@@ -7,6 +7,16 @@ export interface ModalContextType {
 }
 
 export const ModalContext = React.createContext<ModalContextType | null>(null);
+
+export const useModalContext = () => {
+  const modalContext = useContext(ModalContext);
+
+  if (modalContext === null) {
+    throw new Error('modalContext값이 null입니다.');
+  }
+
+  return modalContext;
+};
 
 const ModalContextProvider = (props: { children: React.ReactNode }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
