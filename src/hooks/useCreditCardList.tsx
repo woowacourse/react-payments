@@ -38,7 +38,7 @@ export const useCreditCardList = (): UseCreditCard => {
     setCreditCardList(cards);
     setLoading(false);
 
-    navigate('/register-done');
+    navigate('/register/done');
   };
 
   const initCreditCardList = async () => {

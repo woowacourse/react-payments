@@ -1,4 +1,5 @@
 import AppLayout from 'layouts/AppLayout';
+import CreditCardRegisterLayout from 'layouts/CreditCardRegisterLayout';
 import CreditCardRegister from 'pages/CreditCardRegister';
 import CreditCardRegisterDone from 'pages/CreditCardRegisterDone';
 import Home from 'pages/Home';
@@ -19,12 +20,22 @@ const router = createBrowserRouter(
           element: <Home />,
         },
         {
-          path: 'register',
-          element: <CreditCardRegister />,
-        },
-        {
-          path: 'register-done',
-          element: <CreditCardRegisterDone />,
+          path: '/register',
+          element: (
+            <CreditCardRegisterLayout>
+              <Outlet />
+            </CreditCardRegisterLayout>
+          ),
+          children: [
+            {
+              path: '',
+              element: <CreditCardRegister />,
+            },
+            {
+              path: 'done',
+              element: <CreditCardRegisterDone />,
+            },
+          ]
         },
       ],
     },
