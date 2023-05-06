@@ -6,9 +6,9 @@ import * as styled from './CardPreviewSection.styled';
 import CardBox from '../CardBox/CardBox';
 
 const CardPreviewSection = ({
-  handleOpenModal,
+  handleModalOpen,
 }: {
-  handleOpenModal?: () => void;
+  handleModalOpen?: () => void;
 }) => {
   const {
     serialNumbers,
@@ -21,7 +21,7 @@ const CardPreviewSection = ({
   } = useContext(CardContext);
 
   return (
-    <styled.CardPreviewSection onClick={handleOpenModal}>
+    <styled.CardPreviewSection onClick={handleModalOpen}>
       <CardBox
         card={{
           serialNumbers,

@@ -19,7 +19,7 @@ const PasswordBox = () => {
     PASSWORD.MAX_LENGTH
   );
 
-  const handleChangeInput = ({
+  const handleInputChange = ({
     target: { name, value },
   }: ChangeEvent<HTMLInputElement>) => {
     if (!validate(value)) {
@@ -49,7 +49,7 @@ const PasswordBox = () => {
                 inputmode="numeric"
                 name={key}
                 value={value}
-                onChange={handleChangeInput}
+                onChange={handleInputChange}
                 width="xs"
                 type="password"
                 maxLength={1}

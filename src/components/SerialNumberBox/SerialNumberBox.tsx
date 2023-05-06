@@ -19,7 +19,7 @@ const SerialNumberBox = () => {
     CARD_NUMBER.MAX_LENGTH
   );
 
-  const handleChangeInput = ({
+  const handleInputChange = ({
     target: { name, value },
   }: ChangeEvent<HTMLInputElement>) => {
     if (!validate(value)) {
@@ -52,7 +52,7 @@ const SerialNumberBox = () => {
                 key={key}
                 name={key}
                 value={value}
-                onChange={handleChangeInput}
+                onChange={handleInputChange}
                 width="xl"
                 type={type}
                 maxLength={4}

@@ -19,7 +19,7 @@
 ## Step2 피드백
 
 - [ ] useEvent를 사용해 함수의 레퍼런스 재사용하기
-- [ ] 이벤트 핸들러 네이밍 handle + target component + event type 규칙으로 수정하기
+- [x] 이벤트 핸들러 네이밍 handle + target component + event type 규칙으로 수정하기
 
 ## 버그
 

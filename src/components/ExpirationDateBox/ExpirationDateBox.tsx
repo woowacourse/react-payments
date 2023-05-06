@@ -20,7 +20,7 @@ const ExpirationDateBox = () => {
     EXPIRATION_DATE.MAX_LENGTH
   );
 
-  const handleChangeInput = ({
+  const handleInputChange = ({
     target: { name, value },
   }: ChangeEvent<HTMLInputElement>) => {
     if (!validate(value)) {
@@ -52,7 +52,7 @@ const ExpirationDateBox = () => {
                 inputmode="numeric"
                 name={key}
                 value={value ?? ''}
-                onChange={handleChangeInput}
+                onChange={handleInputChange}
                 width="s"
                 type="text"
                 maxLength={2}

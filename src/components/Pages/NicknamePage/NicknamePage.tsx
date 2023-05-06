@@ -50,7 +50,7 @@ const NicknamePage = () => {
     }
   }, [isFilledForm, navigation]);
 
-  const handleClickFormSubmit = () => {
+  const handleFormSubmitClick = () => {
     updateCardList();
     navigation(PATHNAME.HOME);
   };
@@ -73,7 +73,7 @@ const NicknamePage = () => {
         />
       </styled.InputBox>
       <FormSubmitButton
-        handleClickFormSubmit={handleClickFormSubmit}
+        handleFormSubmitClick={handleFormSubmitClick}
         text="확인"
       />
     </styled.NicknamePageLayout>

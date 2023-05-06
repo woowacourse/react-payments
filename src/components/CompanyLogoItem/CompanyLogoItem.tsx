@@ -5,14 +5,14 @@ import * as styled from './CompanyLogoItem.styled';
 const CompanyLogoItem = ({
   SvgLogo,
   name,
-  handleClickCompanyLogo,
+  handleCompanyLogoClick,
 }: {
   SvgLogo: ReactNode;
   name: string;
-  handleClickCompanyLogo: () => void;
+  handleCompanyLogoClick: () => void;
 }) => {
   return (
-    <styled.CompanyLogoItem onClick={handleClickCompanyLogo}>
+    <styled.CompanyLogoItem onClick={handleCompanyLogoClick}>
       {SvgLogo}
       <p>{name}</p>
     </styled.CompanyLogoItem>

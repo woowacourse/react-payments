@@ -20,7 +20,7 @@ const OwnerNameBox = () => {
   );
   const isExpirationDateFull = expirationDate.year?.length === 2;
 
-  const handleChangeInput = ({
+  const handleInputChange = ({
     target: { value },
   }: ChangeEvent<HTMLInputElement>) => {
     if (!validate(value)) {
@@ -45,7 +45,7 @@ const OwnerNameBox = () => {
           <Input
             inputmode="text"
             value={ownerName ?? ''}
-            onChange={handleChangeInput}
+            onChange={handleInputChange}
             width="xl"
             type="text"
             placeholder="카드에 표시된 이름과 동일하게 입력하세요."

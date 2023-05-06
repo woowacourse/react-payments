@@ -11,18 +11,18 @@ import CardContext from '../../../contexts/CardContext';
 
 const RegisterPage = () => {
   const { company } = useContext(CardContext);
-  const { isOpenModal, handleCloseModal, handleOpenModal } = useModal();
+  const { isOpenModal, handleModalClose, handleModalOpen } = useModal();
 
   useEffect(() => {
-    if (company.name) handleCloseModal();
-  }, [company.name, handleCloseModal]);
+    if (company.name) handleModalClose();
+  }, [company.name, handleModalClose]);
 
   return (
     <styled.RegisterPageLayout>
-      <CardPreviewSection handleOpenModal={handleOpenModal} />
+      <CardPreviewSection handleModalOpen={handleModalOpen} />
       <RegisterForm />
       {isOpenModal ? (
-        <BottomSheet handleCloseModal={handleCloseModal}>
+        <BottomSheet handleModalClose={handleModalClose}>
           <CompanyLogoList />
         </BottomSheet>
       ) : null}

@@ -4,17 +4,17 @@ import { createPortal } from 'react-dom';
 import * as styled from './BottomSheet.styled';
 
 const BottomSheet = ({
-  handleCloseModal,
+  handleModalClose,
   children,
 }: {
-  handleCloseModal: () => void;
+  handleModalClose: () => void;
   children: ReactNode;
 }) => {
   return (
     <>
       {createPortal(
         <styled.BottomSheetBox>
-          <styled.BackdropBox onClick={handleCloseModal} />
+          <styled.BackdropBox onClick={handleModalClose} />
           <styled.ContentSection>{children}</styled.ContentSection>;
         </styled.BottomSheetBox>,
         document.body

@@ -22,7 +22,7 @@ const SecurityCodeBox = () => {
   );
   const isOwnerNameFull = ownerName?.length === 30;
 
-  const handleChangeInput = ({
+  const handleInputChange = ({
     target: { value },
   }: ChangeEvent<HTMLInputElement>) => {
     if (!validate(value)) {
@@ -42,7 +42,7 @@ const SecurityCodeBox = () => {
           <Input
             inputmode="numeric"
             value={securityCode}
-            onChange={handleChangeInput}
+            onChange={handleInputChange}
             width="m"
             type="password"
             maxLength={3}
