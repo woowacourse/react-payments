@@ -52,8 +52,6 @@ export type actionName =
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   inputType: string;
   passwordType?: string;
-  minDataLength: number;
-  maxDataLength: number;
   dataId: number;
   refObject: React.Ref<HTMLInputElement>;
   handleError?: (e: ChangeEvent<HTMLInputElement>) => void;

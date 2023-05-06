@@ -18,8 +18,6 @@ export const CardNumberInput: Story = {
     required: true,
     inputType: 'number',
     className: 'card-number',
-    minDataLength: 4,
-    maxDataLength: 4,
     name: 'first',
     dataId: 0,
   },
