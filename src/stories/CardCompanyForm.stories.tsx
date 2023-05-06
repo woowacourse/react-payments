@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from '@storybook/react';
-import CardCompanyForm from '../components/CardCompanyModal/CardCompanyForm';
+import CardCompanyForm from '../components/CardCompanyForm/CardCompanyForm';
 import RefProvider from '../contexts/RefProvider';
 
 const meta = {
   component: CardCompanyForm,
-  title: 'Section/CardCompanyModal',
+  title: 'Section/CardCompanyForm',
   decorators: [
     (Story) => (
       <RefProvider>
@@ -18,7 +18,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const CardCompanyModalStory: Story = {
+export const CardCompanyFormStory: Story = {
   args: {
     setCardCompany: () => {
       return;

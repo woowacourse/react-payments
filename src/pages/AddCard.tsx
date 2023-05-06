@@ -8,7 +8,7 @@ import Header from '../components/Header/Header';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import useAddCard from '../hooks/useAddCard';
-import CardCompanyForm from '../components/CardCompanyModal/CardCompanyForm';
+import CardCompanyForm from '../components/CardCompanyForm/CardCompanyForm';
 import { useEffect, useState } from 'react';
 import CardLabel from '../components/@common/CardLabel';
 import * as Styled from './AddCard.styles';
