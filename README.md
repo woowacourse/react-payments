@@ -6,7 +6,7 @@
 
 ---
 
-## [💳 페이먼츠 페이지 링크](https://hyeryongchoi.github.io/react-payments/) / [📕 스토리북 페이지 링크](https://hyeryongchoi.github.io/react-payments/storybook/)
+## [💳 페이먼츠 페이지 링크](https://hyeryongchoi.github.io/react-payments/) | [📕 스토리북 페이지 링크](https://hyeryongchoi.github.io/react-payments/storybook/) | [👀 모달 라이브러리](https://www.npmjs.com/package/react-chex-modal)
 
 <table>
   <tr>
