@@ -1,12 +1,12 @@
 import { Meta, StoryObj } from "@storybook/react";
-import CardCompanyComponent from "../../components/CardCompany";
+import CardCompanyComponent from "components/CardCompany";
 import { CARD_COMPANIES } from "constants/cardCompanies";
 
 const meta = {
   component: CardCompanyComponent,
   title: "Components/CardCompany",
   tags: ["autodocs"],
-  
+
   argTypes: {
     cardCompanyName: {
       options: Object.keys(CARD_COMPANIES).map((company) => company),

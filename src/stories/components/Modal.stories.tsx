@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
-import Modal from "../../components/Modal";
 import { css } from "styled-components";
-import CardCompany from "../../components/CardCompany";
+import Modal from "components/Modal";
+import CardCompany from "components/CardCompany";
 import { CARD_COMPANIES } from "constants/cardCompanies";
 
 const meta = {

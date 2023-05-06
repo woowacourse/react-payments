@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import HeaderComponent from "../../components/Header";
+import HeaderComponent from "components/Header";
 import { BrowserRouter } from "react-router-dom";
 
 const meta = {
@@ -19,7 +19,7 @@ const meta = {
       description:
         "true: 왼쪽에 `<` 화살표 모양의 네비게이터 생성<br> false: 왼쪽에 `<` 화살표 모양의 네비게이터 제거",
     },
-    
+
     title: {
       description: "헤더 텍스트를 수정할 수 있습니다.",
     },
