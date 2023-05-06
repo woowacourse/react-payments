@@ -6,23 +6,30 @@ import { COMPANY_LIST } from '../../constants/company';
 import * as styled from './CompanyLogoList.styled';
 import CompanyLogoItem from '../CompanyLogoItem/CompanyLogoItem';
 
-const CompanyLogoList = () => {
+const CompanyLogoList = ({
+  handleModalClose,
+}: {
+  handleModalClose: () => void;
+}) => {
   const { setCompany } = useContext(CardContext);
 
   return (
     <styled.CompanyLogoList>
       {COMPANY_LIST.map(company => {
+        const handleCompanyLogoClick = () => {
+          setCompany({
+            name: company.NAME,
+            backgroundColor: company.BACKGROUND_COLOR,
+          });
+          handleModalClose();
+        };
+
         return (
           <CompanyLogoItem
             key={company.NAME}
             SvgLogo={<company.SVG_LOGO_COMPONENT />}
             name={company.NAME}
-            handleCompanyLogoClick={() => {
-              setCompany({
-                name: company.NAME,
-                backgroundColor: company.BACKGROUND_COLOR,
-              });
-            }}
+            handleCompanyLogoClick={handleCompanyLogoClick}
           />
         );
       })}
