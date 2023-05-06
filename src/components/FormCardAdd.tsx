@@ -34,7 +34,7 @@ const FormCardAdd = ({
   const [cardNumberError, setCardNumberError] = useHandleCardNumberError();
   const [cardCVCNumberError, setCardCVCNumberError] = useHandleCVCNumberError();
   const [cardPasswordError, setCardPasswordError] = useHandleCardPasswordError();
-  const [addCardResult, dispatchAddCardData] = useReducer(cardAddReducer, {
+  const [, dispatchAddCardData] = useReducer(cardAddReducer, {
     type: 'ADD_CARD_REQUEST',
     isLoading: false,
     errorMessage: 'string',
