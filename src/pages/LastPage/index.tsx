@@ -7,15 +7,12 @@ import Input, { CardNickname } from "components/Input";
 import TextLimit from "components/TextLimit";
 import GotLost from "pages/GotLost";
 import useSetCardInfo from "hooks/useSetCardInfo";
-import { CardInfo } from "types";
 import { LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
+import useInitCardInfo from "hooks/useInitCardInfo";
 const { NOT_ONLY_BLANK } = VALID_INPUT;
 
-interface Props {
-  cardInfo: CardInfo;
-}
-
-const LastPage = ({ cardInfo }: Props) => {
+const LastPage = () => {
+  const { cardInfo } = useInitCardInfo();
   const [nickname, setNickname] = useState("");
 
   const handleNicknameChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
@@ -45,6 +42,7 @@ const LastPage = ({ cardInfo }: Props) => {
           )}
           <CardPreview cardInfo={cardInfo} />
           <Input
+            placeholder="카드 별칭을 입력해 주세요."
             autoFocus
             value={nickname}
             inputStyle={CardNickname}

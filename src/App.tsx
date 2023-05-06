@@ -5,12 +5,10 @@ import MainPage from "pages/MainPage";
 import CardRegisterForm from "pages/RegisterPage/CardRegisterForm";
 import LastPage from "pages/LastPage";
 import GotLost from "pages/GotLost";
-import useInitCardInfo from "hooks/useInitCardInfo";
 import { getData } from "utils/getDataFromLocalStorage";
 
 const App = () => {
   const cardList = getData("card");
-  const cardInfo = useInitCardInfo().cardInfo;
 
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
@@ -37,7 +35,7 @@ const App = () => {
           path="/completion"
           element={
             <CardInfoProvider>
-              <LastPage cardInfo={cardInfo} />
+              <LastPage />
             </CardInfoProvider>
           }
         />
