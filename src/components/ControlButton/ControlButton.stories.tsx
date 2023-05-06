@@ -2,7 +2,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 import { Story as StoryType, Meta } from '@storybook/react';
-import GlobalStyle, { GlobalLayout } from 'style/globalStyle';
+import StoryProvider from 'stories/StoryProvider';
 import ControlButton, { ControlButtonProps } from './ControlButton';
 
 export default {
@@ -10,12 +10,9 @@ export default {
   component: ControlButton,
   decorators: [
     (Story) => (
-      <>
-        <GlobalStyle />
-        <GlobalLayout>
-          <Story />
-        </GlobalLayout>
-      </>
+      <StoryProvider>
+        <Story />
+      </StoryProvider>
     ),
   ],
 } satisfies Meta<typeof ControlButton>;
