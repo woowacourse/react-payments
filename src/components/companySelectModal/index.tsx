@@ -3,16 +3,18 @@ import { CompanyIcon } from "./CompanyIcon";
 import { CARD_COMPANIES } from "../../constant/cardCompany";
 import { CardType } from "../../types/card";
 import { Company } from "../../types/company";
-import { Modal } from "../common/Modal";
+import { Modal } from "@dahyeeee/react-components-library";
 
 interface CompanySelectModalProps {
   setCardInfo: React.Dispatch<React.SetStateAction<CardType>>;
   closeModal: () => void;
+  isModalOpen: boolean;
 }
 
 export const CompanySelectModal = ({
   setCardInfo,
   closeModal,
+  isModalOpen,
 }: CompanySelectModalProps) => {
   const selectCompany = (company: Company) => {
     setCardInfo((prev) => ({
@@ -35,7 +37,7 @@ export const CompanySelectModal = ({
   };
 
   return (
-    <Modal closeModal={closeModalWithCompany}>
+    <Modal isModalVisible={isModalOpen} closeModal={closeModalWithCompany}>
       <IconWrapper>
         {CARD_COMPANIES.map((company) => (
           <CompanyIcon

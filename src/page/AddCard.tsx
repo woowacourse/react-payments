@@ -42,9 +42,11 @@ export const AddCard = () => {
         </CardWrapper>
         <CardForm setCardInfo={setNewCard} newCard={newCard} />
       </Main>
-      {isModalOpen && (
-        <CompanySelectModal setCardInfo={setNewCard} closeModal={closeModal} />
-      )}
+      <CompanySelectModal
+        setCardInfo={setNewCard}
+        closeModal={closeModal}
+        isModalOpen={isModalOpen}
+      />
     </>
   );
 };
