@@ -12,10 +12,16 @@ function ControlButton({
   type,
   disabled,
   onClick,
+  ...props
 }: ControlButtonProps) {
   return (
     <S.ButtonWrapper>
-      <S.RegisterButton type={type} disabled={disabled} onClick={onClick}>
+      <S.RegisterButton
+        type={type}
+        disabled={disabled}
+        onClick={onClick}
+        {...props}
+      >
         {children}
       </S.RegisterButton>
     </S.ButtonWrapper>
