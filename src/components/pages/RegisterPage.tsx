@@ -3,13 +3,13 @@ import { CreditCardContext } from '../../contexts/CreditCardContext';
 import CardRegisterForm from '../registerForm/cardRegisterForm/CardRegisterForm';
 import { useContext } from 'react';
 
-import useBottomModal from '../../hooks/useBottomModal';
+import useModal from '../../hooks/useModal';
 import CreditCardContextType from '../../@types/creditCardContextType';
 import SelectCompanyModal from '../registerForm/selectCompanyModal/SelectCompanyModal';
 import BottomModal from '../@common/bottomModal/BottomModal';
 
 function RegisterPage() {
-  const { isOpen, closeModal, openModal } = useBottomModal(true);
+  const { isOpen, closeModal, openModal } = useModal(true);
   const { creditCard } = useContext(CreditCardContext) as CreditCardContextType;
   const { cardNumber, cardCompany, ownerName, expirationDate } = creditCard;
 

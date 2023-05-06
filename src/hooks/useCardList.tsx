@@ -9,28 +9,19 @@ const initialValue: CreditCardInfoWithId[] = [];
 const key = 'card-list';
 
 const useCardList = () => {
-  const [cardList, setCardList] = useState<CreditCardInfoWithId[]>([]);
+  const [cardList, setCardList] = useState<CreditCardInfoWithId[]>(() => getSavedCardList(key));
 
-  useEffect(() => {
-    setCardList(getSavedCardList('card-list'));
-  }, []);
+  const saveCard = (cardInfo: CreditCardInfo) => {
+    const newCardList = [
+      ...cardList,
+      {
+        ...cardInfo,
+        cardId: getNextId(cardList),
+      },
+    ];
 
-  useEffect(() => {
-    if (cardList.length !== 0) {
-      localStorageUtil.setItem(key, cardList);
-    }
-  }, [cardList]);
-
-  const saveCard = (cardInfo: CreditCardInfo, after: () => void = () => {}) => {
-    const newCard: CreditCardInfoWithId = {
-      ...cardInfo,
-      cardId: getNextId(cardList),
-    };
-
-    setCardList((prev) => {
-      after();
-      return [...prev, newCard];
-    });
+    localStorageUtil.setItem(key, newCardList);
+    setCardList(newCardList);
   };
 
   return { cardList, saveCard };

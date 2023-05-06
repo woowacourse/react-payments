@@ -53,10 +53,9 @@ function SuccessPage() {
             return;
           }
 
-          saveCard({ ...creditCard }, () => {
-            navigation('/', { replace: true });
-          });
+          saveCard({ ...creditCard });
           initCreditCard();
+          navigation('/', { replace: true });
         }}
       >
         확인
