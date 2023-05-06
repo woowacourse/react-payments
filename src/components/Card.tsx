@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { IcChip } from '../assets';
-import { useModalContext } from '../store/modalContext';
+import { useModalContext } from 'modal-patrick';
 import { CardType } from '../types';
 
 const Card = (props: CardType) => {

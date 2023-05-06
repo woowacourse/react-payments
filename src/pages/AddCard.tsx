@@ -6,11 +6,10 @@ import Header from '../components/common/Header';
 import Page from '../components/common/Page';
 import { CardType } from '../types';
 import { getLocalStorage, setLocalStorage } from '../utils/localStorage';
-import { useModalContext } from '../store/modalContext';
 import ModalBanks from '../components/ModalBanks';
 import { useNavigate } from 'react-router-dom';
 import { LOCALSTORAGE_KEY } from '../constants';
-import ModalPortal from 'modal-patrick';
+import { ModalPortal, useModalContext } from 'modal-patrick';
 
 const AddCard = () => {
   const [card, setCard] = useState<CardType>({
