@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import LastPage from "pages/LastPage";
 import CardInfoProvider from "components/provider/CardInfoProvider";
 import useInitCardInfo from "hooks/useInitCardInfo";
+import { PreviewCardInfo } from "types";
 import { CARD_COMPANIES } from "constants/cardCompanies";
 
 const date = {
@@ -88,7 +89,7 @@ const meta = {
 
 export default meta;
 
-export const CardNicknameSetting = (args: any) => {
+export const CardNicknameSetting = (args: PreviewCardInfo) => {
   const { initCardInfo } = useInitCardInfo();
 
   useEffect(() => {
