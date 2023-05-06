@@ -12,7 +12,7 @@ import useErrors, { INVALID_FORMAT } from '../@common/useError';
 
 export function useCardRegister() {
   const navigate = useNavigate();
-  const { isAllFilled, handleChange } = useAutoFocus();
+  const { isAllValid, handleChange } = useAutoFocus();
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -20,7 +20,7 @@ export function useCardRegister() {
     navigate(ROUTES.ALIAS, { replace: true });
   };
 
-  return { isAllFilled, handleSubmit, handleChange };
+  return { isAllValid, handleSubmit, handleChange };
 }
 
 export function useMyCardList() {
