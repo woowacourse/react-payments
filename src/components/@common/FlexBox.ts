@@ -16,7 +16,7 @@ const FlexBox = styled.div<FlexBoxProps>`
   align-items: ${({ align = "center" }) => align};
   gap: ${({ gap }) => gap};
   width: ${({ width = "100%" }) => width};
-  height: ${({ height = "50px" }) => height};
+  height: ${({ height }) => height};
 `;
 
 export default FlexBox;
