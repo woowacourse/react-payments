@@ -58,7 +58,7 @@ const meta = {
       </BrowserRouter>
     ),
   ],
-  
+
   argTypes: {
     cardList: {
       options: {

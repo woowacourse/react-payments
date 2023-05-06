@@ -22,4 +22,13 @@ export const TextLimit: Story = {
     length: 20,
     textLimitStyle: nicknameLimitStyle,
   },
+
+  argTypes: {
+    length: {
+      control: {
+        min: 0,
+        max: 20,
+      },
+    },
+  },
 };
