@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import GlobalStyle, { GlobalLayout } from 'style/globalStyle';
 
-function App() {
+function AppLayout() {
   return (
     <>
       <GlobalStyle />
@@ -12,4 +12,4 @@ function App() {
   );
 }
 
-export default App;
+export default AppLayout;

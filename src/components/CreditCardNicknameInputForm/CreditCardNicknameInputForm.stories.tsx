@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { BrowserRouter } from 'react-router-dom';
 import GlobalStyle, { GlobalLayout } from 'style/globalStyle';
-import CardFormProvider from '../../CardFormProvider';
+import CardFormProvider from '../../providers/CardFormProvider';
 import CreditCardNicknameInputForm from './CreditCardNicknameInputForm';
 
 const meta = {

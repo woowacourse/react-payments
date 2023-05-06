@@ -2,7 +2,7 @@
 import { act, renderHook } from '@testing-library/react';
 import { ChangeEvent, ReactNode } from 'react';
 import useCreditCardForm from './useCreditCardForm';
-import CardFormProvider from '../CardFormProvider';
+import CardFormProvider from '../providers/CardFormProvider';
 
 test('useCreditCardForm hook 테스트', () => {
   const wrapper = ({ children }: { children: ReactNode }) => (

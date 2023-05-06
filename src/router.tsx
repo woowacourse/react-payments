@@ -1,4 +1,4 @@
-import App from 'App';
+import AppLayout from 'layouts/AppLayout';
 import CreditCardRegister from 'pages/CreditCardRegister';
 import CreditCardRegisterDone from 'pages/CreditCardRegisterDone';
 import Home from 'pages/Home';
@@ -8,7 +8,7 @@ const router = createBrowserRouter(
   [
     {
       path: '/',
-      element: <App />,
+      element: <AppLayout />,
       children: [
         {
           path: '',
