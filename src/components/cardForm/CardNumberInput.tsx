@@ -3,16 +3,12 @@ import Input from '../common/Input';
 import InputBox from '../common/InputBox';
 import InputGroup from '../common/InputGroup';
 import InputSeparator from '../common/InputSeparator';
-import {
-  isNextInputFocusable,
-  isInputNumber,
-  isOverLength,
-} from '../../utils/InputValidate';
-import { ERROR_MESSAGE, INPUT, INPUT_MAX_LENGTH } from '../../utils/Constants';
+import { INPUT, INPUT_MAX_LENGTH } from '../../utils/Constants';
 import {
   CardFormErrorValueContext,
   CardFormValueContext,
 } from '../../context/CardFormContext';
+import { useMultipleInput } from '../../hooks/useMultipleInput';
 
 const CardNumberInput = () => {
   const { cardNumber, setCardNumber } = useContext(CardFormValueContext);
@@ -26,35 +22,18 @@ const CardNumberInput = () => {
     useRef<HTMLInputElement>(null),
   ];
 
-  const handleChangeInput =
-    (inputIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
-      const inputValue = event.target.value;
+  const mutableInputRefs = inputRefs.map(
+    (inputRef) => inputRef as React.MutableRefObject<HTMLInputElement>
+  );
 
-      if (isOverLength(inputValue, INPUT_MAX_LENGTH.CARD_NUMBER_LENGTH)) return;
-      if (isInputNumber(inputValue, INPUT_MAX_LENGTH.CARD_NUMBER_LENGTH)) {
-        setCardNumberError(ERROR_MESSAGE.ONLY_NUMBER);
-        return;
-      }
+  const { value, errorMessage, handleChangeInput } = useMultipleInput(
+    inputRefs.length,
+    mutableInputRefs,
+    INPUT_MAX_LENGTH.CARD_NUMBER_LENGTH
+  );
 
-      if (
-        isNextInputFocusable({
-          inputValue,
-          inputIndex,
-          maxLength: INPUT_MAX_LENGTH.CARD_NUMBER_LENGTH,
-        })
-      ) {
-        const nextInputRef = inputRefs.at(inputIndex + 1);
-        if (nextInputRef?.current) {
-          nextInputRef.current.focus();
-        }
-      }
-
-      const newCardNumber = [...cardNumber];
-      newCardNumber[inputIndex] = inputValue;
-
-      setCardNumber(newCardNumber);
-      setCardNumberError('');
-    };
+  setCardNumber(value);
+  setCardNumberError(errorMessage);
 
   return (
     <InputGroup labelValue='카드 번호' errorMessage={cardNumberError}>

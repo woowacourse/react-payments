@@ -3,17 +3,13 @@ import Input from '../common/Input';
 import InputBox from '../common/InputBox';
 import InputGroup from '../common/InputGroup';
 import InputSeparator from '../common/InputSeparator';
-import {
-  isInputNumber,
-  isNextInputFocusable,
-  isOverLength,
-  isValidMonth,
-} from '../../utils/InputValidate';
+import { isValidMonth } from '../../utils/InputValidate';
 import { ERROR_MESSAGE, INPUT_MAX_LENGTH } from '../../utils/Constants';
 import {
   CardFormErrorValueContext,
   CardFormValueContext,
 } from '../../context/CardFormContext';
+import { useMultipleInput } from '../../hooks/useMultipleInput';
 
 const ExpirationDateInput = () => {
   const { expirationDate, setExpirationDate } =
@@ -25,6 +21,18 @@ const ExpirationDateInput = () => {
     useRef<HTMLInputElement>(null),
     useRef<HTMLInputElement>(null),
   ];
+
+  const mutableInputRefs = inputRefs.map(
+    (inputRef) => inputRef as React.MutableRefObject<HTMLInputElement>
+  );
+
+  const { value, errorMessage, handleChangeInput } = useMultipleInput(
+    inputRefs.length,
+    mutableInputRefs,
+    INPUT_MAX_LENGTH.EXPIRATION_DATE_LENGTH
+  );
+
+  setExpirationDate(value);
 
   useEffect(() => {
     if (!expirationDate[0].length && !expirationDate[1].length) return;
@@ -44,39 +52,9 @@ const ExpirationDateInput = () => {
       setExpirationDateError(ERROR_MESSAGE.VALID_MONTH);
       return;
     }
+
+    setExpirationDateError(errorMessage);
   }, [expirationDate, setExpirationDateError]);
-
-  const handleChangeInput =
-    (inputIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
-      const inputValue = event.target.value;
-
-      if (isOverLength(inputValue, INPUT_MAX_LENGTH.EXPIRATION_DATE_LENGTH))
-        return;
-      if (isInputNumber(inputValue, INPUT_MAX_LENGTH.EXPIRATION_DATE_LENGTH)) {
-        setExpirationDateError(ERROR_MESSAGE.ONLY_NUMBER);
-        return;
-      }
-
-      const newInputs = [...expirationDate];
-      newInputs[inputIndex] = inputValue;
-
-      setExpirationDate(newInputs);
-
-      if (
-        isNextInputFocusable({
-          inputValue,
-          inputIndex,
-          maxLength: INPUT_MAX_LENGTH.EXPIRATION_DATE_LENGTH,
-        })
-      ) {
-        const nextInputRef = inputRefs.at(inputIndex + 1);
-        if (nextInputRef?.current) {
-          nextInputRef.current.focus();
-        }
-      }
-
-      setExpirationDateError('');
-    };
 
   return (
     <InputGroup labelValue='만료일' errorMessage={expirationDateError}>
