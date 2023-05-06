@@ -1,8 +1,9 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { BottomSheet } from './BottomSheet';
+import { BottomSheet } from '../../components/BottomSheet/BottomSheet';
 
 const meta = {
   component: BottomSheet,
+  tags: ['autodocs'],
 } satisfies Meta<typeof BottomSheet>;
 
 export default meta;

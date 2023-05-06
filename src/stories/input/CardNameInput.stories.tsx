@@ -1,9 +1,10 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { CardNameInput } from './CardNameInput';
+import { CardNameInput } from '../../components/Input/CardNameInput/CardNameInput';
 import { ChangeEventHandler, useState } from 'react';
 
 const meta = {
   component: CardNameInput,
+  tags: ['autodocs'],
 } satisfies Meta<typeof CardNameInput>;
 
 export default meta;

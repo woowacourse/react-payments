@@ -1,8 +1,9 @@
 import styled from 'styled-components';
-import { Icon } from './Icon';
+import { Icon } from '../../components/common/Icon/Icon';
 
 export default {
   component: Icon,
+  tags: ['autodocs'],
 };
 
 export const Icons = () => {

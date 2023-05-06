@@ -1,10 +1,11 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { ExpirationDateInput } from './ExpirationDateInput';
+import { ExpirationDateInput } from '../../components/Input/ExpirationDateInput/ExpirationDateInput';
 import { ChangeEventHandler, useState } from 'react';
 import { GlobalStyle } from 'GlobalStyle';
 
 const meta = {
   component: ExpirationDateInput,
+  tags: ['autodocs'],
 } satisfies Meta<typeof ExpirationDateInput>;
 
 export default meta;

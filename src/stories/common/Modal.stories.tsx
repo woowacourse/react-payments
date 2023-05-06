@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { Modal } from './Modal';
+import { Modal } from '../../components/common/Modal/Modal';
 import { PageContainer } from 'components/style/PageContainer';
 import { BottomSheet } from 'components/BottomSheet/BottomSheet';
 import { useState } from 'react';

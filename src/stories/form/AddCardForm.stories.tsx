@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import AddCardForm from './AddCardForm';
+import AddCardForm from '../../components/Form/AddCardForm';
 import { PageContainer } from 'components/style/PageContainer';
 import { CardFormContainer } from 'pages/RegisterCard';
 import { GlobalStyle } from 'GlobalStyle';

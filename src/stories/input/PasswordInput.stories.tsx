@@ -1,9 +1,10 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { PasswordInput } from './PasswordInput';
+import { PasswordInput } from '../../components/Input/PasswordInput/PasswordInput';
 import { GlobalStyle } from 'GlobalStyle';
 
 const meta = {
   component: PasswordInput,
+  tags: ['autodocs'],
 } satisfies Meta<typeof PasswordInput>;
 
 export default meta;

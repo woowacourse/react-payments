@@ -1,12 +1,11 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { CardNumberInputs } from './CardNumberInputs';
+import { CardNumberInputs } from '../../components/Input/CardNumberInput/CardNumberInputs';
 import React, { useState } from 'react';
 import { GlobalStyle } from 'GlobalStyle';
-import { userEvent, within } from '@storybook/testing-library';
 
 const meta = {
-  title: 'Components/Input/CardNumberInput',
   component: CardNumberInputs,
+  tags: ['autodocs'],
 } satisfies Meta<typeof CardNumberInputs>;
 
 export default meta;

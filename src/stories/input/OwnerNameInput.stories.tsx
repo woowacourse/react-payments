@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { OwnerNameInput } from './OwnerNameInput';
+import { OwnerNameInput } from '../../components/Input/OwnerNameInput/OwnerNameInput';
 import { ChangeEventHandler, useState } from 'react';
 
 const meta = {
-  title: 'Components/Input/OwnerNameInput',
   component: OwnerNameInput,
+  tags: ['autodocs'],
 } satisfies Meta<typeof OwnerNameInput>;
 
 export default meta;

@@ -1,8 +1,9 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { CreditCard } from './CreditCard';
+import { CreditCard } from '../../components/common/Card/CreditCard';
 
 const meta = {
   component: CreditCard,
+  tags: ['autodocs'],
 } satisfies Meta<typeof CreditCard>;
 
 export default meta;
