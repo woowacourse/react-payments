@@ -2,7 +2,7 @@ import Card from '../../components/Card';
 import { useCardListContext } from '../../contexts/CardListContexts';
 import styled from 'styled-components';
 import CardAddButton from './CardAddButton';
-import Header from '../../components/Header';
+import Layout from '../../components/Layout/Layout';
 
 type CardListProps = {
   setPageCardRegistration: () => void;
@@ -12,8 +12,7 @@ const CardList = ({ setPageCardRegistration }: CardListProps) => {
   const { cardList } = useCardListContext();
 
   return (
-    <Styled.Wrapper>
-      <Header title="보유 카드" />
+    <Layout title="보유 카드">
       <Styled.CardListWrapper>
         {cardList.map((card) => {
           return (
@@ -27,16 +26,11 @@ const CardList = ({ setPageCardRegistration }: CardListProps) => {
           <CardAddButton onClick={setPageCardRegistration} />
         </Styled.CardItemWrapper>
       </Styled.CardListWrapper>
-    </Styled.Wrapper>
+    </Layout>
   );
 };
 
 export default CardList;
-
-const Wrapper = styled.div`
-  padding: 20px 20px 0 20px;
-  height: 100%;
-`;
 
 const CardListWrapper = styled.ul`
   padding: 20px 0 10px 0;
@@ -64,7 +58,6 @@ const CardAlias = styled.div`
 `;
 
 const Styled = {
-  Wrapper,
   CardListWrapper,
   CardItemWrapper,
   CardAlias,
