@@ -7,7 +7,7 @@ import { PATHS } from "src/utils/constant";
 
 function RegisterFinishedCard() {
   const [cardInfo, dispatch] = useContext(CardInfoContext);
-  const { cardName, cardNumbers, ownerName, expireDate } = cardInfo;
+  const { cardName, cardNumbers, ownerName, expireDate, nickName } = cardInfo;
   const navigation = useNavigate();
 
   return (
@@ -19,6 +19,7 @@ function RegisterFinishedCard() {
         ownerName={ownerName}
         expireDate={expireDate}
       />
+      <p>{nickName}</p>
       <S.ButtonContainer>
         <S.NextButton
           onClick={() => {

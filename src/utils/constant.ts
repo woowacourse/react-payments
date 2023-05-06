@@ -90,6 +90,7 @@ export const initialCardInfos: CardInfoProps = {
   securityCode: "",
   password: ["", ""],
   cardName: null,
+  nickName: "",
 };
 
 export const PATHS = {

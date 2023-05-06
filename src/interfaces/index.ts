@@ -12,8 +12,5 @@ export interface CardInfoProps {
   securityCode: string;
   password: CardPasswordProps;
   cardName: CardIDProps;
-}
-
-export interface CardListProps extends CardInfoProps {
-  nickName?: string;
+  nickName: string;
 }
