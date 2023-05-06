@@ -1,13 +1,27 @@
 import styled from 'styled-components';
 
 interface Props {
-    text: string;
-    onClick: ()=>void
+  text: string;
+  onClick: () => void;
+  width?: string;
+  height?: string;
+  fontSize?: string;
 }
 
-const Button = (props:Props)=>{
-    return <ButtonWrapper onClick={props.onClick}>{props.text}</ButtonWrapper>
-}
+const Button = (props: Props) => {
+  return (
+    <ButtonWrapper
+      onClick={props.onClick}
+      style={{
+        width: props.width,
+        height: props.height,
+        fontSize: props.fontSize
+      }}
+    >
+      {props.text}
+    </ButtonWrapper>
+  );
+};
 
 const ButtonWrapper = styled.button`
   width: 70px;
@@ -26,11 +40,11 @@ const ButtonWrapper = styled.button`
 
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.25);
   color: #534747;
-  
+
   :hover {
     transform: scale(1.1);
     cursor: pointer;
   }
 `;
 
-export default Button
+export default Button;
