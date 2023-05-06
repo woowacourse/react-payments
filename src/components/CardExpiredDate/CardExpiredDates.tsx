@@ -41,8 +41,6 @@ const CardExpiredDate = ({
     }
   };
 
-  console.log(expiredDates);
-
   return (
     <>
       <CardLabel labelText="만료일" />
