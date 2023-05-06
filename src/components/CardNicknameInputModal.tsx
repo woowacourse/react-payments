@@ -7,6 +7,7 @@ import './CardNicknameInputModal.css';
 
 type CardNicknameInputModalProps = {
   cardType: string;
+  isRequesting: boolean;
   cardNumber: InputHook<CardNumber>;
   cardExpire: InputHook<string>;
   cardOwner: InputHook<string>;
@@ -19,6 +20,7 @@ type CardNicknameInputModalProps = {
 const CardNicknameInputModal = ({
   closeModal,
   cardType,
+  isRequesting,
   cardNumber,
   cardExpire,
   cardOwner,
@@ -39,7 +41,12 @@ const CardNicknameInputModal = ({
         role="dialog"
         aria-label="카드 타입을 선택할 수 있는 모달"
       >
-        <div className="nickname-box-main-font">거의 다 왔어요!</div>
+        {isRequesting ? (
+          <div className="nickname-box-requesting-font">카드를 등록 중입니다!</div>
+        ) : (
+          <div className="nickname-box-main-font">거의 다 왔어요!</div>
+        )}
+
         <div className="card-box">
           <Card
             cardType={cardType}

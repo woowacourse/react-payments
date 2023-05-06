@@ -34,7 +34,7 @@ const FormCardAdd = ({
   const [cardNumberError, setCardNumberError] = useHandleCardNumberError();
   const [cardCVCNumberError, setCardCVCNumberError] = useHandleCVCNumberError();
   const [cardPasswordError, setCardPasswordError] = useHandleCardPasswordError();
-  const [, dispatchAddCardData] = useReducer(cardAddReducer, {
+  const [addCardResult, dispatchAddCardData] = useReducer(cardAddReducer, {
     type: 'ADD_CARD_REQUEST',
     isLoading: false,
     errorMessage: 'string',
@@ -359,6 +359,7 @@ const FormCardAdd = ({
       {nicknameModalOpen ? (
         <CardNicknameInputModal
           closeModal={setNicknameModalOpen}
+          isRequesting={addCardResult.isLoading}
           cardType={cardType}
           cardNumber={cardNumber}
           cardExpire={cardExpire}
