@@ -17,9 +17,18 @@ export default meta;
 
 type Story = StoryObj<typeof Loading>;
 
-export const CreditCardPageHeader: Story = {
+export const DefaultLoading: Story = {
   args: {
-    explanation: '카드를 등록중입니다.',
-    delayTime: 2,
+    explanation: '로딩 문구를 입력하세요.',
+    delayTime: 1,
+    backgroundColor: '#0046FF',
+  },
+};
+
+export const CardRegisterLoading: Story = {
+  args: {
+    explanation: '엄카를 등록중입니다.',
+    delayTime: 1.5,
+    backgroundColor: '#F04651',
   },
 };
