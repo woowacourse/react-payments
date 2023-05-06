@@ -1,4 +1,4 @@
-import { MouseEventHandler, forwardRef } from 'react';
+import { MouseEventHandler } from 'react';
 import { Icon } from '../common/Icon/Icon';
 import { CARDS_INFO } from '../../constants';
 import { COMPANY_NAME } from 'components/common/Card/types';
@@ -10,9 +10,7 @@ export interface ModalProps {
   closeModal: () => void;
 }
 
-type Ref = HTMLDivElement;
-
-export const BottomSheet = forwardRef<Ref, ModalProps>(({ onClick, closeModal }: ModalProps) => {
+export const BottomSheet = ({ onClick, closeModal }: ModalProps) => {
   const handleSelectCompany: MouseEventHandler<HTMLSpanElement> = (e) => {
     if (isCompanyName(e.currentTarget.textContent!)) {
       const company: COMPANY_NAME = e.currentTarget.textContent;
@@ -36,7 +34,7 @@ export const BottomSheet = forwardRef<Ref, ModalProps>(({ onClick, closeModal }:
       })}
     </S.BottomSheetWrapper>
   );
-});
+};
 
 const S = {
   BottomSheetWrapper: styled.div`

@@ -1,4 +1,3 @@
-import { forwardRef } from 'react';
 import { Styled as S } from './Icon.styles';
 
 export interface IconProps extends React.ComponentPropsWithoutRef<'span'> {
@@ -8,11 +7,11 @@ export interface IconProps extends React.ComponentPropsWithoutRef<'span'> {
 
 type Ref = HTMLSpanElement;
 
-export const Icon = forwardRef<Ref, IconProps>(({ imgSrc, name, ...props }, ref) => {
+export const Icon = ({ imgSrc, name, ...props }: IconProps) => {
   return (
-    <S.Icon {...props} ref={ref}>
+    <S.Icon {...props}>
       <img src={`${process.env.PUBLIC_URL}${imgSrc ?? 'default'}`} alt={imgSrc} />
       <S.CardName>{name}</S.CardName>
     </S.Icon>
   );
-});
+};
