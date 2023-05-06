@@ -10,12 +10,11 @@ import {
 } from "../../components/CardRegistrationInputs";
 import { Modal } from "react-dobob-modal";
 import styled from "styled-components";
-import { Container } from "../../components/@common";
+import { Container, Button } from "../../components/@common";
 import { Card } from "../../types";
 import { isFulfilledObject, isFulfilledString, isValidMonth } from "../../validator/Validator";
 import useModal from "../../hooks/useModal";
 import ROUTE_PATH from "../../constants/routePath";
-import Button from "../../components/@common/Button/Button";
 import useCardRegistrationInfoContext from "../../hooks/useCardRegistrationInfoContext";
 import CardCompanyButtonList from "../../components/CardCompanyButtonList/CardCompanyButtonList";
 

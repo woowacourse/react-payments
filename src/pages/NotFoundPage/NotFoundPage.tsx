@@ -1,9 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { Container } from "../../components/@common";
-import Button from "../../components/@common/Button/Button";
+import { Container, Button, FlexBox } from "../../components/@common";
 import ROUTE_PATH from "../../constants/routePath";
-import FlexBox from "../../components/@common/FlexBox";
 
 const NotFoundPage = () => {
   return (

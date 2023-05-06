@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import ROUTE_PATH from "../../constants/routePath";
-import Button from "../@common/Button/Button";
+import { Button } from "../@common";
 
 const AddCardButton = () => {
   return (

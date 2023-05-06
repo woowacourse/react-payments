@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { CardCompany } from "../../types";
 import CARD_COMPANIES from "../../constants/cardCompanies";
-import Button from "../@common/Button/Button";
+import { Button } from "../@common";
 import useCardRegistrationInfoContext from "../../hooks/useCardRegistrationInfoContext";
 
 type CardCompanyButtonProps = {

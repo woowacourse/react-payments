@@ -4,13 +4,11 @@ import styled from "styled-components";
 
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import CardPreview from "../../components/CardPreview/CardPreview";
-import { Container, Input } from "../../components/@common";
+import { Container, Input, Button, FlexBox } from "../../components/@common";
 import SwayingLoader2 from "../../components/@animations/SwayingLoader2/SwayingLoader2";
 import useCardFetch from "../../hooks/useCardFetch";
 import ROUTE_PATH from "../../constants/routePath";
 import type { Card } from "../../types";
-import Button from "../../components/@common/Button/Button";
-import FlexBox from "../../components/@common/FlexBox";
 
 type CardAliasRegistrationPageProps = {
   onSubmit: (card: Card) => void;
