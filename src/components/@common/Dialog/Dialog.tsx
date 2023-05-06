@@ -20,7 +20,13 @@ function Dialog(props: PropsWithChildren<DialogProps>) {
 }
 
 function Trigger(props: PropsWithChildren<TriggerProps>) {
-  const { asChild, firstChild, onClick: onClickProps, ...restProps } = getValidProps(props);
+  const {
+    asChild,
+    firstChild,
+    children = 'Trigger',
+    onClick: onClickProps,
+    ...restProps
+  } = getValidProps(props);
   const { openHandler } = useDialogContext();
 
   const trigger = asChild ? (
@@ -30,7 +36,7 @@ function Trigger(props: PropsWithChildren<TriggerProps>) {
     })
   ) : (
     <Styled.Trigger {...restProps} onClick={composeEventHandlers(onClickProps, openHandler)}>
-      Trigger
+      {children}
     </Styled.Trigger>
   );
 
@@ -44,7 +50,7 @@ function Portal({ children, container = document.body }: PropsWithChildren<Porta
 }
 
 function BackDrop(props: PropsWithChildren<BackDropProps>) {
-  const { asChild, firstChild, onClick: onClickProps, ...restProps } = getValidProps(props);
+  const { asChild, firstChild, children, onClick: onClickProps, ...restProps } = getValidProps(props);
   const { isOpened, openHandler } = useDialogContext();
 
   const backDrop = asChild ? (
@@ -75,7 +81,7 @@ function Content(props: PropsWithChildren<ContentProps>) {
 }
 
 function Close(props: PropsWithChildren<CloseProps>) {
-  const { asChild, firstChild, onClick: onClickProps, ...restProps } = getValidProps(props);
+  const { asChild, firstChild, children = 'X', onClick: onClickProps, ...restProps } = getValidProps(props);
   const { isOpened, openHandler } = useDialogContext();
 
   const close = asChild ? (
@@ -85,7 +91,7 @@ function Close(props: PropsWithChildren<CloseProps>) {
     })
   ) : (
     <Styled.Close {...restProps} onClick={composeEventHandlers(onClickProps, openHandler)}>
-      𝗫
+      {children}
     </Styled.Close>
   );
 
