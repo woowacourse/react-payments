@@ -9,7 +9,7 @@ import { changeCardName } from '../../../store/action';
 import { VStack } from '../../layout/flexbox';
 
 import { useCardPaymentDispatch } from '../../context/CardPaymentContext';
-import { useModalContext } from '../../common/modal';
+import { useModalContext } from 'turtle601-modal-like-chakra-ui';
 
 type CardName = 'BC' | 'HANA' | 'HYUNDAI' | 'KAKAO' | 'KB' | 'LOTTE' | 'SHINHAN' | 'WORRI';
 

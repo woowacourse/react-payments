@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import Modal from 'turtle601-modal-like-chakra-ui';
+
 import { useCardModal } from '../../../hooks/useCardModal';
-import Modal from '../../common/modal';
 import CardCompanies from '../../organisms/CardCompanies';
 
 const AddCardModal: React.FC = () => {
