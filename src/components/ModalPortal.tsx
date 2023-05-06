@@ -36,7 +36,7 @@ const ModalPortal = (props: Props) => {
     <dialog ref={modalRef} onKeyDown={dialogKeyDownListener} onClick={dialogBackdropListener}>
       <ModalContainer>{props.children}</ModalContainer>
     </dialog>,
-    $modalRoot
+    $modalRoot ? $modalRoot : document.body
   );
 };
 

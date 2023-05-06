@@ -7,7 +7,7 @@ type CardIdType = (typeof CARD_ID_VALUE)[keyof typeof CARD_ID_VALUE];
 interface CardInputProps extends HTMLAttributes<HTMLInputElement> {
   id: CardIdType;
   width?: string;
-  value: number | string | undefined;
+  value?: number | string;
   isSecured: boolean;
   isAutoFocus: boolean;
   isRequired: boolean;
