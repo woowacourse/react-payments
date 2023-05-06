@@ -1,13 +1,14 @@
 import Input from '../common/Input';
 import InputBox from '../common/InputBox';
 import InputGroup from '../common/InputGroup';
-import { isInputNumber, isOverLength } from '../../utils/InputValidate';
-import { ERROR_MESSAGE, INPUT_MAX_LENGTH } from '../../utils/Constants';
+import { isInputNumber } from '../../utils/InputValidate';
+import { INPUT_MAX_LENGTH } from '../../utils/Constants';
 import { useContext } from 'react';
 import {
   CardFormErrorValueContext,
   CardFormValueContext,
 } from '../../context/CardFormContext';
+import { useInput } from '../../hooks/useInput';
 
 const SecurityCodeInput = () => {
   const { securityCode, setSecurityCode } = useContext(CardFormValueContext);
@@ -15,18 +16,13 @@ const SecurityCodeInput = () => {
     CardFormErrorValueContext
   );
 
-  const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = event.target.value;
+  const { value, errorMessage, handleChangeInput } = useInput(
+    isInputNumber,
+    INPUT_MAX_LENGTH.SECURITY_CODE_LENGTH
+  );
 
-    if (isOverLength(inputValue, INPUT_MAX_LENGTH.SECURITY_CODE_LENGTH)) return;
-    if (isInputNumber(inputValue, INPUT_MAX_LENGTH.SECURITY_CODE_LENGTH)) {
-      setSecurityCodeError(ERROR_MESSAGE.ONLY_NUMBER);
-      return;
-    }
-
-    setSecurityCode(inputValue.toUpperCase());
-    setSecurityCodeError('');
-  };
+  setSecurityCode(value);
+  setSecurityCodeError(errorMessage);
 
   return (
     <InputGroup

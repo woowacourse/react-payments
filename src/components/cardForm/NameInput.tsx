@@ -9,26 +9,19 @@ import {
   CardFormErrorValueContext,
   CardFormValueContext,
 } from '../../context/CardFormContext';
+import { useInput } from '../../hooks/useInput';
 
 const NameInput = () => {
   const { name, setName } = useContext(CardFormValueContext);
   const { nameError, setNameError } = useContext(CardFormErrorValueContext);
 
-  const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = event.target.value;
+  const { value, errorMessage, handleChangeInput } = useInput(
+    isInputEnglish,
+    INPUT_MAX_LENGTH.NAME_LENGTH
+  );
 
-    if (isOverLength(inputValue, INPUT_MAX_LENGTH.NAME_LENGTH)) {
-      setNameError(ERROR_MESSAGE.MAX_INPUT_LENGTH);
-      return;
-    }
-    if (isInputEnglish(inputValue)) {
-      setNameError(ERROR_MESSAGE.ONLY_ENGLISH);
-      return;
-    }
-
-    setName(inputValue.toUpperCase());
-    setNameError('');
-  };
+  setName(value);
+  setNameError(errorMessage);
 
   return (
     <InputGroup
