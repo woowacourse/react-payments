@@ -11,9 +11,13 @@ interface CardInputProps extends HTMLAttributes<HTMLInputElement> {
   isSecured: boolean;
   isAutoFocus: boolean;
   isRequired: boolean;
+  inputRef?:React.RefObject<HTMLInputElement>;
 }
 
 const CardInput = (props: CardInputProps) => {
+
+  // console.log(props.inputRef?.current)
+
   return (
     <CardInputWrapper
       id={props.id}
@@ -30,6 +34,7 @@ const CardInput = (props: CardInputProps) => {
       minLength={INPUT_MIN_LENGTH[props.id]}
       onChange={props.onChange}
       onKeyDown={props.onKeyDown}
+      ref={props.inputRef}
     />
   );
 };

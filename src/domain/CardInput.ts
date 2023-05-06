@@ -4,7 +4,6 @@ import {
   ERASE_UNTIL_CARD_NUMBER,
   EXPIRED_DATE_ERASE_SYMBOL,
   EXPIRED_DATE_PLUS_SYMBOL,
-  INPUT_MAX_LENGTH,
   SEPERATED_CARD_NUMBER_LENGTH,
 } from '../constants';
 
@@ -50,7 +49,6 @@ export const handleCardNumberKey = (e: React.KeyboardEvent<HTMLInputElement>) =>
 };
 
 export const handleExpiredDateChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
-  if (e.target.value.length > INPUT_MAX_LENGTH.expiredDate) return;
 
   if (e.target.value.length === EXPIRED_DATE_PLUS_SYMBOL) {
     e.target.value = e.target.value + ' / ';
