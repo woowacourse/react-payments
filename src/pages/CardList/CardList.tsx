@@ -16,7 +16,7 @@ const CardList = ({ setPageCardRegistration }: CardListProps) => {
       <Styled.CardListWrapper>
         {cardList.map((card) => {
           return (
-            <Styled.CardItemWrapper>
+            <Styled.CardItemWrapper key={card.id}>
               <Card card={card} />
               <Styled.CardAlias>{card.alias}</Styled.CardAlias>
             </Styled.CardItemWrapper>
