@@ -100,6 +100,8 @@ const creditCardValidation = {
     },
 
     checkLength: (numbers: string): Type.ValidationFnReturnType => {
+      if (!numbers.length) return { ok: true };
+
       if (numbers.length !== CREDIT_CARD_LENGTH.expiry) {
         return {
           ok: false,
@@ -158,7 +160,10 @@ const creditCardValidation = {
 
       return { ok: true };
     },
+
     checkLength: (numbers: string): Type.ValidationFnReturnType => {
+      if (!numbers.length) return { ok: true };
+
       if (numbers.length !== CREDIT_CARD_LENGTH.cvc) {
         return {
           ok: false,
@@ -199,6 +204,8 @@ const creditCardValidation = {
     },
 
     checkFirstLength: (numbers: Type.CreditCardPasswordType): Type.ValidationFnReturnType => {
+      if (!numbers.first.length && !numbers.second.length) return { ok: true };
+
       if (numbers.first.length !== CREDIT_CARD_LENGTH.password) {
         return {
           ok: false,
