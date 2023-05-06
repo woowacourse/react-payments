@@ -1,15 +1,22 @@
-import { ReactNode } from 'react';
+import { PropsWithChildren } from 'react';
 import { createPortal } from 'react-dom';
 
 import * as styled from './BottomSheet.styled';
 
+interface BottomSheetProps {
+  isOpenModal: boolean;
+  handleModalClose: () => void;
+}
+
 const BottomSheet = ({
+  isOpenModal,
   handleModalClose,
   children,
-}: {
-  handleModalClose: () => void;
-  children: ReactNode;
-}) => {
+}: PropsWithChildren<BottomSheetProps>) => {
+  if (!isOpenModal) {
+    return null;
+  }
+
   return (
     <>
       {createPortal(

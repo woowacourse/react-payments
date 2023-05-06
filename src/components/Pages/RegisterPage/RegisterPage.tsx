@@ -13,11 +13,12 @@ const RegisterPage = () => {
     <styled.RegisterPageLayout>
       <CardPreviewSection handleModalOpen={handleModalOpen} />
       <RegisterForm />
-      {isOpenModal ? (
-        <BottomSheet handleModalClose={handleModalClose}>
-          <CompanyLogoList handleModalClose={handleModalClose} />
-        </BottomSheet>
-      ) : null}
+      <BottomSheet
+        isOpenModal={isOpenModal}
+        handleModalClose={handleModalClose}
+      >
+        <CompanyLogoList handleModalClose={handleModalClose} />
+      </BottomSheet>
     </styled.RegisterPageLayout>
   );
 };
