@@ -11,9 +11,13 @@ export const HomeButton = styled.button`
   margin-right: 12px;
   margin-bottom: 3px;
   cursor: pointer;
+  margin-right: 12px;
+  margin-bottom: 3px;
+  cursor: pointer;
 `;
 
 export const CreditCardRegisterHeader = styled.h3`
+  line-height: 18.75px;
   line-height: 18.75px;
 `;
 
@@ -21,9 +25,13 @@ export const CreditCardRegisterForm = styled.form`
   margin-top: 36px;
   display: grid;
   row-gap: 20px;
+  margin-top: 36px;
+  display: grid;
+  row-gap: 20px;
 `;
 
 export const RelativeBox = styled.div`
+  position: relative;
   position: relative;
 `;
 
@@ -31,9 +39,30 @@ export const CreditCardRegisterLabel = styled.div`
   font-size: 12px;
   color: #525252;
   margin-bottom: 5px;
+  font-size: 12px;
+  color: #525252;
+  margin-bottom: 5px;
 `;
 
 export const HiddenInput = styled.input`
+  pointer-events: none;
+  cursor: not-allowed;
+  caret-color: transparent;
+  position: absolute;
+  text-align: center;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border: none;
+  background: transparent;
+  height: 48px;
+  font-size: 18px;
+  color: transparent;
+  border-radius: 7px;
+  :focus {
+    outline: none;
+    border: 2px solid gray;
+  }
   pointer-events: none;
   cursor: not-allowed;
   caret-color: transparent;
@@ -63,9 +92,22 @@ export const PasswordBox = styled.div`
   align-items: center;
   border: 1px solid #ecebf1;
   border-radius: 7px;
+  width: 48px;
+  height: 48px;
+  margin-right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ecebf1;
+  border-radius: 7px;
 `;
 
 export const QuestionBox = styled.div`
+  border: 1px solid #bababa;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
   border: 1px solid #bababa;
   width: 30px;
   height: 30px;
@@ -77,6 +119,9 @@ export const QuestionMark = styled.div`
   padding-left: 11px;
   padding-right: 11px;
   padding-top: 9px;
+  padding-left: 11px;
+  padding-right: 11px;
+  padding-top: 9px;
 `;
 
 export const ErrorMessage = styled.div`
@@ -84,8 +129,37 @@ export const ErrorMessage = styled.div`
   color: red;
   margin-top: 5px;
   margin-bottom: 5px;
+  font-size: 12px;
+  color: red;
+  margin-top: 5px;
+  margin-bottom: 5px;
 `;
 
+export const CreditCardCompanyInputLayout = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+`;
+
+export const CreditCardCompanyItem = styled.div`
+  text-align: center;
+  cursor: pointer;
+`;
+
+export const CreditCardCompanyImage = styled.img`
+  margin-bottom: 10px;
+`;
+
+export const CreditCardCompanyTitle = styled.div`
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
+export const CreditCardChangeButton = styled.button`
+  margin-top: 10px;
+  color: gray;
+  cursor: pointer;
+`;
 export const CreditCardCompanyInputLayout = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);

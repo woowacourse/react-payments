@@ -4,11 +4,7 @@
     "es6": true,
     "node": true
   },
-  "extends": [
-    "airbnb",
-    "airbnb-typescript",
-    "plugin:storybook/recommended"
-  ],
+  "extends": ["airbnb", "airbnb-typescript", "plugin:storybook/recommended"],
   "parserOptions": {
     "project": "./tsconfig.json"
   },
@@ -16,12 +12,7 @@
     "react/jsx-filename-extension": [
       1,
       {
-        "extensions": [
-          ".js",
-          ".jsx",
-          ".ts",
-          ".tsx"
-        ]
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
     ],
     "import/extensions": [
@@ -47,17 +38,12 @@
         "devDependencies": true
       }
     ],
-    "import/prefer-default-export": [
-      "off"
-    ],
+    "import/prefer-default-export": ["off"],
     "react/require-default-props": "off"
   },
   "overrides": [
     {
-      "files": [
-        "*.ts",
-        "*.tsx"
-      ],
+      "files": ["*.ts", "*.tsx"],
       "rules": {
         "no-undef": "off"
       }
