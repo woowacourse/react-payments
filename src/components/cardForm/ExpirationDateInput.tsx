@@ -28,7 +28,9 @@ const ExpirationDateInput = () => {
       INPUT_MAX_LENGTH.EXPIRATION_DATE_LENGTH
     );
 
-  setExpirationDate(value);
+  useEffect(() => {
+    setExpirationDate(value);
+  }, [value]);
 
   useEffect(() => {
     if (!expirationDate[0].length && !expirationDate[1].length) return;
@@ -50,7 +52,7 @@ const ExpirationDateInput = () => {
     }
 
     setExpirationDateError(errorMessage);
-  }, [expirationDate, setExpirationDateError]);
+  }, [expirationDate, errorMessage]);
 
   return (
     <InputGroup labelValue='만료일' errorMessage={expirationDateError}>

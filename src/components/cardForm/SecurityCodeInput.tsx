@@ -3,7 +3,7 @@ import InputBox from '../common/InputBox';
 import InputGroup from '../common/InputGroup';
 import { isInputNumber } from '../../utils/InputValidate';
 import { INPUT_MAX_LENGTH } from '../../utils/Constants';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import {
   CardFormErrorValueContext,
   CardFormValueContext,
@@ -21,8 +21,10 @@ const SecurityCodeInput = () => {
     INPUT_MAX_LENGTH.SECURITY_CODE_LENGTH
   );
 
-  setSecurityCode(value);
-  setSecurityCodeError(errorMessage);
+  useEffect(() => {
+    setSecurityCode(value);
+    setSecurityCodeError(errorMessage);
+  }, [value, errorMessage]);
 
   return (
     <InputGroup

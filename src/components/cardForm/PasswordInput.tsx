@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import Input from '../common/Input';
 import InputBox from '../common/InputBox';
@@ -23,8 +23,10 @@ const PasswordInput = () => {
       INPUT_MAX_LENGTH.PASSWORD_LENGTH
     );
 
-  setPassword(value);
-  setPasswordError(errorMessage);
+  useEffect(() => {
+    setPassword(value);
+    setPasswordError(errorMessage);
+  }, [value, errorMessage]);
 
   return (
     <InputGroup labelValue='카드 비밀번호' errorMessage={passwordError}>

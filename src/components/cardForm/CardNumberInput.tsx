@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Input from '../common/Input';
 import InputBox from '../common/InputBox';
 import InputGroup from '../common/InputGroup';
@@ -26,8 +26,10 @@ const CardNumberInput = () => {
       INPUT_MAX_LENGTH.CARD_NUMBER_LENGTH
     );
 
-  setCardNumber(value);
-  setCardNumberError(errorMessage);
+  useEffect(() => {
+    setCardNumber(value);
+    setCardNumberError(errorMessage);
+  }, [value, errorMessage]);
 
   return (
     <InputGroup labelValue='카드 번호' errorMessage={cardNumberError}>

@@ -4,7 +4,7 @@ import InputBox from '../common/InputBox';
 import InputGroup from '../common/InputGroup';
 import { isInputEnglish, isOverLength } from '../../utils/InputValidate';
 import { ERROR_MESSAGE, INPUT_MAX_LENGTH } from '../../utils/Constants';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import {
   CardFormErrorValueContext,
   CardFormValueContext,
@@ -20,8 +20,10 @@ const NameInput = () => {
     INPUT_MAX_LENGTH.NAME_LENGTH
   );
 
-  setName(value);
-  setNameError(errorMessage);
+  useEffect(() => {
+    setName(value);
+    setNameError(errorMessage);
+  }, [value, errorMessage]);
 
   return (
     <InputGroup
