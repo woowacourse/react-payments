@@ -10,7 +10,7 @@ export function useInputNumber() {
     fourth: "",
   });
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+  function changeNumberInput(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
     if (value && !validation.isNumber(value)) {
       e.target.value = cardNumber[name];
@@ -22,5 +22,5 @@ export function useInputNumber() {
     }
   }
 
-  return { cardNumber, handleChange };
+  return { cardNumber, changeNumberInput };
 }

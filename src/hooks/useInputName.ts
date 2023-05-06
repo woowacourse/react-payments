@@ -4,7 +4,7 @@ import { validation } from "../validation/input";
 export function useInputName() {
   const [userName, setUserName] = useState<string>("");
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+  function changeNameInput(e: React.ChangeEvent<HTMLInputElement>) {
     if (e.target.value && !validation.isString(e.target.value)) {
       e.target.value = userName;
     } else {
@@ -12,5 +12,5 @@ export function useInputName() {
     }
   }
 
-  return { userName, handleChange };
+  return { userName, changeNameInput };
 }

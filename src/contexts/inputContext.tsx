@@ -1,4 +1,4 @@
-import { createContext, ReactNode } from "react";
+import { ChangeEvent, createContext, ReactNode, useState } from "react";
 
 export const InputContext = createContext<{
   value: unknown;
@@ -10,7 +10,7 @@ export const InputContext = createContext<{
 
 interface InputProviderprops<T> {
   children: ReactNode;
-  inputState: {
+  inputState?: {
     value: T | null;
     handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   };
@@ -18,8 +18,17 @@ interface InputProviderprops<T> {
 
 export function InputProvider<T>(props: InputProviderprops<T>) {
   const { children, inputState } = props;
+  const [value, setValue] = useState(inputState?.value ?? "");
+
+  function handleInputValue(e: ChangeEvent<HTMLInputElement>) {
+    inputState?.handleChange(e);
+    setValue(e.target.value);
+  }
 
   return (
-    <InputContext.Provider value={inputState}>{children}</InputContext.Provider>
+    <InputContext.Provider
+      value={{ value: value, handleChange: handleInputValue }}>
+      {children}
+    </InputContext.Provider>
   );
 }

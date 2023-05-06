@@ -1,13 +1,14 @@
-import React, { createContext, useRef } from "react";
+import React, { createContext } from "react";
 import { useInputDate } from "../hooks/useInputDate";
 import { useInputName } from "../hooks/useInputName";
 import { useInputNumber } from "../hooks/useInputNumber";
+import { useSelectId } from "../hooks/useSelectId";
+import { BankItem } from "../type/card";
 import { CardNumberIndex } from "../type/input";
-import { Ref } from "../type/ref";
 
 export const NumberContext = createContext<{
   cardNumber: CardNumberIndex;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  changeNumberInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }>({
   cardNumber: {
     first: "",
@@ -15,46 +16,56 @@ export const NumberContext = createContext<{
     third: "",
     fourth: "",
   },
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => {},
+  changeNumberInput: (e: React.ChangeEvent<HTMLInputElement>) => {},
 });
 
 export const DateContext = createContext<{
   month: string;
   year: string;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  changeDateInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }>({
   month: "",
   year: "",
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => {},
+  changeDateInput: (e: React.ChangeEvent<HTMLInputElement>) => {},
 });
 
 export const NameContext = createContext<{
   userName: string;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  changeNameInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }>({
   userName: "",
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => {},
+  changeNameInput: (e: React.ChangeEvent<HTMLInputElement>) => {},
 });
 
-export const RefContext = createContext<React.MutableRefObject<Ref>>({
-  current: {},
+export const BankContext = createContext<{
+  selectedBank: BankItem;
+  selectBank: (item: BankItem) => void;
+}>({
+  selectedBank: {
+    id: 0,
+    logo: () => <></>,
+    logoName: "",
+    color: "#000000",
+    font: "",
+  },
+  selectBank: (item: BankItem) => {},
 });
 
 export function CardInfoProvider({ children }: { children: React.ReactNode }) {
   const numberInfo = useInputNumber();
   const dateInfo = useInputDate();
   const nameInfo = useInputName();
-  const inputRef = useRef<React.MutableRefObject<Ref>>({ current: {} });
+  const bankInfo = useSelectId();
 
   return (
-    <RefContext.Provider value={inputRef.current}>
-      <NumberContext.Provider value={numberInfo}>
-        <DateContext.Provider value={dateInfo}>
-          <NameContext.Provider value={nameInfo}>
+    <NumberContext.Provider value={numberInfo}>
+      <DateContext.Provider value={dateInfo}>
+        <NameContext.Provider value={nameInfo}>
+          <BankContext.Provider value={bankInfo}>
             {children}
-          </NameContext.Provider>
-        </DateContext.Provider>
-      </NumberContext.Provider>
-    </RefContext.Provider>
+          </BankContext.Provider>
+        </NameContext.Provider>
+      </DateContext.Provider>
+    </NumberContext.Provider>
   );
 }
