@@ -31,6 +31,7 @@ export const LoadingProgressAnimation = keyframes`
 
 type LoadingProgressType = {
   delayTime: number;
+  backgroundColor: string;
 };
 
 export const LoadingProgress = styled.div<LoadingProgressType>`
@@ -39,7 +40,7 @@ export const LoadingProgress = styled.div<LoadingProgressType>`
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: #333333;
+  background-color: ${(props) => props.backgroundColor};
   border-radius: 10px;
   animation: ${LoadingProgressAnimation} ${(props) => props.delayTime}s ease-in-out;
 `;
