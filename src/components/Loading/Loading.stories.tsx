@@ -18,5 +18,8 @@ export default meta;
 type Story = StoryObj<typeof Loading>;
 
 export const CreditCardPageHeader: Story = {
-  args: {},
+  args: {
+    explanation: '카드를 등록중입니다.',
+    delayTime: 2,
+  },
 };
