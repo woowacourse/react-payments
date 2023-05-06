@@ -23,42 +23,42 @@ export const BANKS_INFO = {
   BC: {
     label: 'BC카드',
     logo: <BC_IC />,
-    bg: '#C03841',
+    bgColor: '#C03841',
   },
   SINHAN: {
     label: '신한카드',
     logo: <SINHAN_IC />,
-    bg: '#0046FF',
+    bgColor: '#0046FF',
   },
   KAKAO: {
     label: '카카오뱅크',
     logo: <KAKAO_IC />,
-    bg: '#FFE600',
+    bgColor: '#FFE600',
   },
   HYUNDAI: {
     label: '현대카드',
     logo: <HYUNDAI_IC />,
-    bg: '#000000',
+    bgColor: '#000000',
   },
   WOORI: {
     label: '우리카드',
     logo: <WOORI_IC />,
-    bg: '#007BC8',
+    bgColor: '#007BC8',
   },
   LOTTE: {
     label: '롯데카드',
     logo: <LOTTE_IC />,
-    bg: '#ED1C24',
+    bgColor: '#ED1C24',
   },
   HANA: {
     label: '하나카드',
     logo: <HANA_IC />,
-    bg: '#009490',
+    bgColor: '#009490',
   },
   KB: {
     label: '국민카드',
     logo: <KB_IC />,
-    bg: '#685E54',
+    bgColor: '#685E54',
   },
 } as const;
 
