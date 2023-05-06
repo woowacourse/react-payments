@@ -32,6 +32,8 @@ const HeaderWrapper = styled.div`
 
   position: fixed;
   top: 0;
+  z-index: 1;
+  box-shadow: 0.5px 0.5px 7px rgba(0, 0, 0, 0.25);
 
   & > h3 {
     margin-left: 10px;

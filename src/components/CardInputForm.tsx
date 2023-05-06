@@ -64,14 +64,14 @@ const CardInputForm = ({ card, setNewCard, onSubmit }: CardInputFormType) => {
       setPassword(password);
       setNewCard("password", password.join(""));
 
-      if (digit === 0) {
+      if (digit === PASSWORD_DIGIT_INDEX.FIRST) {
         inputRefs[CARD_INPUT_REFS_INDEX.password2].current?.focus();
       }
     };
 
   const handlePasswordKeyDown =
     (digit: number) => (e: React.KeyboardEvent<HTMLInputElement>) => {
-      if (digit === 1 && e.key === "ArrowLeft") {
+      if (digit === PASSWORD_DIGIT_INDEX.SECOND && e.key === "ArrowLeft") {
         inputRefs[CARD_INPUT_REFS_INDEX.password1].current?.focus();
       }
     };

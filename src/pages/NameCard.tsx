@@ -8,7 +8,7 @@ import React, { useState } from "react";
 const NameCard = () => {
   const navigate = useNavigate();
   const [name, setName] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const cards = getLocalStorage("card");
   const targetCard = cards[cards.length - 1];
@@ -58,8 +58,9 @@ const NameCard = () => {
   );
 };
 
-const TitleWrapper = styled.h3`
-  font-size: 22px;
+const TitleWrapper = styled.p`
+  font-size: 20px;
+  font-weight: 600;
   margin-bottom: 40px;
   width: 100vw;
   text-align: center;
