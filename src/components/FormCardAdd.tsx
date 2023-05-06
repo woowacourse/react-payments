@@ -119,7 +119,6 @@ const FormCardAdd = ({
   };
 
   useEffect(() => {
-    if (!fulfilledData.includes(false)) setReadyToPending(true);
     fulfilledData[5] = true;
     if (!fulfilledData.includes(false)) setReadyToPending(true);
   }, [fulfilledData]);
