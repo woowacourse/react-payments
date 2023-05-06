@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import CardItem from './CardItem';
 import Title from '../common/Title';
 import { useCardList } from '../../hooks/useCardList';
+import { Fragment } from 'react';
 
 interface CardListProps {
   onOpen: () => void;
@@ -13,10 +14,10 @@ const CardList = ({ onOpen }: CardListProps) => {
   return (
     <CardListContainer>
       {cardList.map((card, id) => (
-        <>
-          <CardItem card={card} key={id} onOpen={onOpen} />
+        <Fragment key={id}>
+          <CardItem card={card} onOpen={onOpen} />
           <Title title={card.cardName} fontSize={14} />
-        </>
+        </Fragment>
       ))}
     </CardListContainer>
   );
