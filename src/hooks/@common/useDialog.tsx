@@ -12,6 +12,8 @@ export default function useDialog(opened = false) {
     isOpened
       ? document.addEventListener('keydown', closeWithEscape)
       : document.removeEventListener('keydown', closeWithEscape);
+
+    return () => document.removeEventListener('keydown', closeWithEscape);
   }, [isOpened]);
 
   return { isOpened, openDialog, closeDialog, closeWithEscape };
