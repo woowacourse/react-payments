@@ -81,11 +81,12 @@ const AddCardPage = () => {
           />
         </section>
       </div>
-      {modalOpen ? (
-        <CardSelectModal determineCardType={setCardType} closeModal={setModalOpen} />
-      ) : (
-        ''
-      )}
+
+      <CardSelectModal
+        determineCardType={setCardType}
+        isModalOpen={modalOpen}
+        closeModal={setModalOpen}
+      />
     </>
   );
 };

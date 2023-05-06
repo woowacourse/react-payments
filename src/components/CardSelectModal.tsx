@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Modal from 'react-slinky-modal';
 
 import { BANK_LIST } from '../utils/constants';
@@ -7,15 +7,14 @@ import './CardSelectModal.css';
 
 type modalProps = {
   determineCardType: React.Dispatch<React.SetStateAction<string>>;
+  isModalOpen: boolean;
   closeModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const CardSelectModal = ({ determineCardType, closeModal }: modalProps) => {
-  const [isModalOpen, setModalOpen] = useState(true);
-
+const CardSelectModal = ({ determineCardType, isModalOpen, closeModal }: modalProps) => {
   return (
     <>
-      <Modal isModalOpen={isModalOpen} closeModal={setModalOpen}>
+      <Modal isModalOpen={isModalOpen} closeModal={closeModal}>
         <div className="icon-sort">
           {BANK_LIST.map((name) => (
             <BankIcon
