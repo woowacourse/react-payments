@@ -7,7 +7,7 @@ import { useCardStore } from '../../hook/useCardState';
 
 const ExpirationDateInput = () => {
   const { get, setExpirationDate } = useCardStore();
-  const expirationDate = get().expirationDate;
+  const { expirationDate } = get();
   const [error, setError] = useState('');
 
   const addSlashInExpirationDate = (e: React.ChangeEvent<HTMLInputElement>) => {

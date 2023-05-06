@@ -11,11 +11,7 @@ import { useCardStore } from '../../hook/useCardState';
 const AddCardForm = () => {
   const navigate = useNavigate();
   const { get } = useCardStore();
-  const cardNumber = get().cardNumber;
-  const expirationDate = get().expirationDate;
-  const securityCode = get().securityCode;
-  const firstDigit = get().firstDigit;
-  const secondDigit = get().secondDigit;
+  const { cardNumber, expirationDate, securityCode, firstDigit, secondDigit } = get();
 
   const handleNextButtonClick = () => {
     if (!cardNumber || !expirationDate || !securityCode || !firstDigit || !secondDigit) {

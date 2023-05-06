@@ -18,11 +18,7 @@ const CardRegistrationConfirmation = ({ registerNewCard }: CardRegistrationConfi
   const resetCardState = useResetCardState();
   const navigate = useNavigate();
   const { get } = useCardStore();
-  const cardNumber = get().cardNumber;
-  const cardOwnerName = get().cardOwnerName;
-  const expirationDate = get().expirationDate;
-  const selectedCard = get().selectedCard;
-  const cardNickName = get().cardNickName;
+  const { cardNumber, cardOwnerName, expirationDate, selectedCard } = get();
 
   useEffect(() => {
     setTimeout(() => {
@@ -31,13 +27,7 @@ const CardRegistrationConfirmation = ({ registerNewCard }: CardRegistrationConfi
   }, []);
 
   const handleCardInfo = () => {
-    const cardInfo: CardInfo = {
-      cardNumber: cardNumber,
-      expirationDate: expirationDate,
-      cardOwnerName: cardOwnerName,
-      selectedCard: selectedCard,
-      cardNickName: cardNickName,
-    };
+    const cardInfo: CardInfo = { ...get() };
 
     registerNewCard(cardInfo);
 

@@ -8,7 +8,7 @@ import { useCardStore } from '../../hook/useCardState';
 const CardNumberInput = () => {
   const { get, setCardNumber } = useCardStore();
   const [error, setError] = useState('');
-  const cardNumber = get().cardNumber;
+  const { cardNumber } = get();
 
   const addHyphensInCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     const cardNumber = e.target.value;

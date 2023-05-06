@@ -7,8 +7,7 @@ import { useCardStore } from '../../hook/useCardState';
 
 const CardPasswordInput = () => {
   const { get, setFirstDigit, setSecondDigit } = useCardStore();
-  const firstDigit = get().firstDigit;
-  const secondDigit = get().secondDigit;
+  const { firstDigit, secondDigit } = get();
   const secondDigitRef = useRef<HTMLInputElement>(null);
   const [error, setError] = useState('');
 
