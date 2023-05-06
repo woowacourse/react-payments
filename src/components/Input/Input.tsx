@@ -24,6 +24,7 @@ function Input<T extends InputValueType>({
   placeholder,
   onChange,
   onClick,
+  ...props
 }: InputProps<T>) {
   return (
     <S.Input
@@ -35,11 +36,12 @@ function Input<T extends InputValueType>({
       onChange={onChange}
       onClick={onClick}
       placeholder={placeholder}
+      {...props}
     />
   );
 }
 export default Input;
 
 Input.defaultProps = {
-  onChange: (e: ChangeEvent<HTMLInputElement>) => {},
+  onChange: (e: ChangeEvent<HTMLInputElement>) => { },
 };
