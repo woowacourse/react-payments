@@ -1,0 +1,19 @@
+import * as AddCardOwnerInputStories from './AddCardOwnerInput.stories';
+import { Meta, Canvas } from '@storybook/blocks';
+
+<Meta of={AddCardOwnerInputStories} />
+
+# 카드 소유자 입력(AddCardOwnerInput)
+
+카드 소유자를 입력하는 입력창입니다.
+
+카드 소유자는 영어 대문자로 이루어진 이름을 받습니다.
+
+카드 소유자는 선택값이므로 사용자는 작성을 건너뛸 수 있습니다. (건너 뛴다면 해당 카드의 소유자 칸은 공백으로 남게 됩니다.)
+
+<Canvas of={AddCardOwnerInputStories.Primary} />
+
+## 오류 메세지 조건
+
+- 이름이 영어 대문자로만 이루어져있지 않다면 에러메세지를 출력합니다.
+- 이름이 30자를 초과하면 에러메세지를 출력합니다.

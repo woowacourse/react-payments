@@ -1,0 +1,16 @@
+import * as CardStories from './Card.stories';
+import { Meta, Canvas } from '@storybook/blocks';
+
+<Meta of={CardStories} />
+
+# 카드(Card)
+
+등록된 카드의 정보를 사용자에게 보여주는 컴포넌트입니다.
+
+통상적으로 사용되는 신용카드 디자인으로 구현되었습니다.
+
+컴포넌트에서 값을 변경해가며 테스트해볼 수 있습니다.
+
+카드회사 별로 카드의 색상이 해당 브랜드 칼러로 변경됩니다.
+
+<Canvas of={CardStories.Primary} />

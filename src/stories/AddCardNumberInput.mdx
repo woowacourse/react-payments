@@ -1,0 +1,17 @@
+import * as AddCardNumberInputStories from './AddCardNumberInput.stories';
+import { Meta, Canvas } from '@storybook/blocks';
+
+<Meta of={AddCardNumberInputStories} />
+
+# 카드번호 입력(AddCardNumberInput)
+
+카드 번호를 입력하는 입력창입니다.
+
+카드번호는 4칸이며 칸당 4자리의 숫자를 입력해야합니다.
+
+<Canvas of={AddCardNumberInputStories.Primary} />
+
+## 오류 메세지 조건
+
+- 카드번호는 0~9 사이의 숫자로 이루어져있지 않다면 에러메세지를 보여줍니다.
+- 제출시 칸당 4자리의 숫자가 작성되지 않아있다면 에러메세지를 보여줍니다.
