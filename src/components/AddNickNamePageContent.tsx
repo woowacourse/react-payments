@@ -1,5 +1,5 @@
 import type { ChangeEvent } from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useCreditCards } from '../hooks/useCreditCards';
@@ -103,6 +103,8 @@ export const AddNickNamePageContent = () => {
 
   const navigate = useNavigate();
 
+  const MemoCreditCardView = React.memo(CreditCardView);
+
   const handleChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
     setNewCard({ ...newCard, nickName: event.target.value });
   };
@@ -133,7 +135,7 @@ export const AddNickNamePageContent = () => {
       </IsVisibleExceptCardWrapper>
 
       <IsVisibleCardViewWrapper isShownOrTransForm={isCardTransform}>
-        <CreditCardView
+        <MemoCreditCardView
           cardCompany={newCard.cardCompany}
           cardNumbers={newCard.cardNumbers}
           expirationDate={newCard.expirationDate}
