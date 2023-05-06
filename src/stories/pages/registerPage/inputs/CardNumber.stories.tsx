@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from "@storybook/react";
+import { ChangeEvent, KeyboardEvent } from "react";
 import CardNumberInput from "pages/RegisterPage/FormInputs/CardNumberInput";
 import CardInfoProvider from "components/provider/CardInfoProvider";
 import ModalStateProvider from "components/provider/ModalStateProvider";
 import { VALID_INPUT } from "constants/limit";
 import { DIRECTION } from "constants/inputDirection";
-import { ChangeEvent, KeyboardEvent } from "react";
 const { ONLY_NUMBER } = VALID_INPUT;
 const { NEXT, PREV } = DIRECTION;
 
