@@ -9,6 +9,7 @@ type CardProps = {
   cardType: string;
   cardNumber: CardNumber;
   cardOwner: string;
+  classname?: string;
   expired: string;
   securityCode: string;
   cardFlipped?: boolean;
@@ -19,6 +20,7 @@ const Card = ({
   cardType,
   cardNumber,
   cardOwner,
+  classname,
   expired,
   securityCode,
   cardFlipped,
@@ -35,7 +37,7 @@ const Card = ({
     >
       <div className={cardFlipData}>
         <div
-          className="front"
+          className={`front ${classname}`}
           style={{
             backgroundColor: CARD_BACKGROUND_COLORS[cardType],
             color: CARD_FONT_COLOR[cardType],

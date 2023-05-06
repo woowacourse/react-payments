@@ -70,6 +70,29 @@
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
 }
 
+.adding-card {
+  animation: vibration 2s infinite;
+}
+
+@keyframes vibration {
+  0% {
+    transform: rotate3d(0);
+    transform: rotate(0deg);
+  }
+  33% {
+    transform: rotate(5deg);
+    transform: rotate3d(2, -1, -1, -0.1turn);
+  }
+  66% {
+    transform: rotate(5deg);
+    transform: rotate3d(1, -1, 0, -0.1turn);
+  }
+  100% {
+    transform: rotate3d(0);
+    transform: rotate(0deg);
+  }
+}
+
 .card-back-track-1 {
   width: 100%;
   background-color: #000000;

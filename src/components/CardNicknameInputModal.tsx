@@ -51,6 +51,7 @@ const CardNicknameInputModal = ({
           <Card
             cardType={cardType}
             cardNumber={cardNumber.value}
+            classname={isRequesting ? 'adding-card' : ''}
             cardOwner={cardOwner.value}
             expired={cardExpire.value}
             securityCode={securityCode.value}
