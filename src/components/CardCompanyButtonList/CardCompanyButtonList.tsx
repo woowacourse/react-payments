@@ -7,9 +7,9 @@ type CardCompanyButtonListProps = {
   handleCardCompany: (company: CardCompany) => void;
 };
 
-const CardCompanyButtonList = ({ handleCardCompany }: CardCompanyButtonListProps) => {
-  const cardCompanies = Object.keys(CARD_COMPANIES) as CardCompany[];
+const cardCompanies = Object.keys(CARD_COMPANIES) as CardCompany[];
 
+const CardCompanyButtonList = ({ handleCardCompany }: CardCompanyButtonListProps) => {
   return (
     <CardCompanyButtonContainer>
       <Instruction>카드사 선택</Instruction>
