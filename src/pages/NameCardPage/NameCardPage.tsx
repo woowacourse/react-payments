@@ -9,7 +9,7 @@ import { Card } from "../../types";
 import useSpinner from "../../hooks/useSpinner";
 
 const NameCardPage = () => {
-  const { isLoading, setIsLoading, navigateAfterLoading } = useSpinner();
+  const { isLoading, startLoading, navigateAfterLoading } = useSpinner();
   const { cards, setCards } = useContext(GlobalContext);
   const { cardInfo, setCardInfo } = useContext(AddCardStateContext);
   const { cardName, cardCompany, cardNumber, expirationDate, ownerName, securityCode, password } = cardInfo;
@@ -26,7 +26,7 @@ const NameCardPage = () => {
     };
 
     setCards([...cards, card]);
-    setIsLoading(true);
+    startLoading();
   };
 
   if (isLoading) return navigateAfterLoading(PAGE.CARD_LIST);

@@ -7,12 +7,16 @@ const useSpinner = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
+  const startLoading = () => {
+    setIsLoading(true);
+  };
+
   const navigateAfterLoading = (page: string) => {
     setTimeout(() => navigate(page), 2000);
     return <Spinner />;
   };
 
-  return { isLoading, setIsLoading, navigateAfterLoading };
+  return { isLoading, startLoading, navigateAfterLoading };
 };
 
 export default useSpinner;

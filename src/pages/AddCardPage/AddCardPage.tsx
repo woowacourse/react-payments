@@ -13,14 +13,13 @@ import { CardCompany, CardExpirationDate, CardNumber, CardPassword } from "../..
 import { useNavigate } from "react-router-dom";
 import { isFulfilledObject, isFulfilledString, isValidMonth } from "../../validator/Validator";
 import { PAGE } from "../../constant/PagePath";
-import Modal from "../../components/Modal/Modal";
 import CardCompanyIcon from "../../components/CardCompanyIcon/CardCompanyIcon";
 import { AddCardStateContext } from "../../context/AddCardStateProvider";
 import { Button } from "../../components/common/Button";
 import useModal from "../../hooks/useModal";
 
 const AddCardPage = () => {
-  const { modalOpen, closeModal, openModal } = useModal(true);
+  const { modalOpen, closeModal, openModal, Modal } = useModal(true);
   const { error, cardInfo, setError, setCardInfo } = useContext(AddCardStateContext);
   const { cardCompany, cardNumber, expirationDate, ownerName, securityCode, password } = cardInfo;
 
