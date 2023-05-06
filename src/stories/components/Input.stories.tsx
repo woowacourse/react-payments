@@ -22,11 +22,20 @@ const ExtraSmall = css`
   border-radius: 8px;
 `;
 
+const NoBackground = css`
+  display: block;
+  width: 213px;
+  height: 28px;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--darken-color);
+  background: transparent;
+`;
+
 const meta = {
   component: InputComponent,
   title: "Components/Input",
   tags: ["autodocs"],
-  
+
   argTypes: {
     type: {
       options: ["number", "text"],
@@ -68,12 +77,13 @@ const meta = {
         Medium: Medium,
         Small: Small,
         ExtraSmall: ExtraSmall,
+        NoBackground: NoBackground,
       },
       control: {
         type: "radio",
       },
       description:
-        "1. Large Size (width: 100%)<br> 2. Medium Size (width: 40%)<br> 3.Small Size (width: 24%)<br> 4. Extra Small Size (width: 12%)<br> input 가로 사이즈를 선택할 수 있습니다.",
+        "1. Large Size (width: 100%)<br> 2. Medium Size (width: 40%)<br> 3.Small Size (width: 24%)<br> 4. Extra Small Size (width: 12%)<br> 5. NoBackground(width: 213px)<br> input 가로 사이즈와 style을 선택할 수 있습니다.",
     },
 
     onChange: {
@@ -129,5 +139,13 @@ export const ExtraSmallInput: Story = {
     inputMode: "numeric",
     placeholder: "0",
     inputStyle: ExtraSmall,
+  },
+};
+
+export const NoBackgroundInput: Story = {
+  args: {
+    type: "text",
+    placeholder: "카드 별칭을 입력해 주세요.",
+    inputStyle: NoBackground,
   },
 };
