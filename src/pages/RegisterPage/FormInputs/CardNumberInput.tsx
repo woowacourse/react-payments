@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import styled from 'styled-components';
-import { HIDDEN_ELEMENT_STYLE, LENGTH, REGEX } from 'constants/constants';
+import { LENGTH, REGEX } from 'constants/constants';
 import { useInputHandler } from 'hooks/useInputHandler';
 import { StyledInput } from 'components/Input';
 import InputBox from 'components/InputBox';

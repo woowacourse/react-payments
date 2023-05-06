@@ -1,11 +1,11 @@
 import { useContext } from 'react';
 import styled from 'styled-components';
-import { HIDDEN_ELEMENT_STYLE, LENGTH, REGEX } from 'constants/constants';
+import { LENGTH, REGEX } from 'constants/constants';
 import { useInputHandler } from 'hooks/useInputHandler';
 import InputBox from 'components/InputBox';
 import { StyledInput } from 'components/Input';
 import { AddCardContext } from 'context/CardContext';
-import Hyphen, { StyledHyphen } from 'components/Hypen';
+import { StyledHyphen } from 'components/Hypen';
 import { Expiration } from 'types/Card';
 import { showDateHyphen } from 'utils/hyphenStyles';
 import { StyledCaption } from 'components/Caption';
