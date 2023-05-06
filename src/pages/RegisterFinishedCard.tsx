@@ -1,15 +1,18 @@
-import React, { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 import Card from "src/components/@common/Card";
-import { CardInfoContext } from "src/context/CardInfoContext";
+import useNavigateCardInfoStep from "src/hooks/useNavigateCardInfoStep";
 import { Styled as S } from "src/pages/CardNickName/CardNickName.styles";
-import { PATHS } from "src/utils/constant";
+import styled from "styled-components";
 
 function RegisterFinishedCard() {
-  const [cardInfo, dispatch] = useContext(CardInfoContext);
-  const { cardName, cardNumbers, ownerName, expireDate, nickName } = cardInfo;
-  const navigation = useNavigate();
-
+  const {
+    cardName,
+    cardNumbers,
+    ownerName,
+    expireDate,
+    nickName,
+    moveCardList,
+  } = useNavigateCardInfoStep();
   return (
     <S.NickNameContainer>
       <S.Title>카드 등록이 완료됐습니다</S.Title>
@@ -19,19 +22,22 @@ function RegisterFinishedCard() {
         ownerName={ownerName}
         expireDate={expireDate}
       />
-      <p>{nickName}</p>
+      <NickNameParagraph>{nickName}</NickNameParagraph>
       <S.ButtonContainer>
-        <S.NextButton
-          onClick={() => {
-            if (dispatch) dispatch({ type: "clear", payload: "" });
-            navigation(PATHS.cardList);
-          }}
-        >
-          확인
-        </S.NextButton>
+        <S.NextButton onClick={moveCardList}>확인</S.NextButton>
       </S.ButtonContainer>
     </S.NickNameContainer>
   );
 }
 
 export default RegisterFinishedCard;
+
+const NickNameParagraph = styled.p`
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
+
+  color: #383838;
+`;

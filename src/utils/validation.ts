@@ -12,6 +12,8 @@ export const isUnValidInputValue = (
   contextType: keyof CardInfoProps,
   value: string,
 ) => {
+  if (contextType === "nickName") return false;
+
   if (contextType !== "ownerName" && !ONLY_NUMBER_REGEXP.test(value))
     return true;
   if (contextType === "ownerName" && !ONLY_ENG_AND_EMPTY_REGEXP.test(value))

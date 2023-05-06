@@ -1,23 +1,21 @@
 import React from "react";
 import Card from "src/components/@common/Card";
 import Input from "src/components/@common/Input";
-import useSaveNickName from "src/hooks/useSaveNickName";
+import useNavigateCardInfoStep from "src/hooks/useNavigateCardInfoStep";
 import { Styled as S } from "./CardNickName.styles";
+import useCardInfoInput from "src/hooks/useCardInfoInput";
 
 function CardNickName() {
-  const {
-    cardName,
-    cardNumbers,
-    ownerName,
-    expireDate,
-    nickName,
-    onChange,
-    registerCard,
-  } = useSaveNickName();
+  const { cardName, cardNumbers, ownerName, expireDate, registerCard } =
+    useNavigateCardInfoStep();
+
+  const { value, onChange } = useCardInfoInput<string>({
+    contextType: "nickName",
+  });
 
   return (
     <S.NickNameContainer>
-      <S.Title>카드 이름을 등록해주세요</S.Title>
+      <S.Title>카드 이름을 입력해주세요</S.Title>
       <Card
         cardName={cardName}
         cardNumber={cardNumbers}
@@ -26,7 +24,7 @@ function CardNickName() {
       />
       <Input
         type="text"
-        value={nickName}
+        value={value}
         onChange={onChange}
         customInputStyle={S.NickNameInput}
       />
