@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Layout } from '../layout';
-import { BackButton } from './Button/BackButton';
+import { BackButton } from './common/Button/BackButton';
 
 const imageUrl =
   'https://img.freepik.com/free-photo/high-angle-dog-making-a-mess-with-toilet-paper_23-2149544912.jpg?w=2000&t=st=1683042025~exp=1683042625~hmac=d692d7303bf32037bf61ca2f6c8e0a8930b299e8e2c3f447ec45d5c3740267b3';

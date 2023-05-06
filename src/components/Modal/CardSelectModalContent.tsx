@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { CardCompanyItem } from './CardCompanyItem';
-import { CARD_COMPANY, CARD_SELECT_COMPLETE_BUTTON } from '../../../constants';
-import { CardCompany } from '../../../types';
-import { Button } from '../../Button/Button';
+import { CARD_COMPANY, CARD_SELECT_COMPLETE_BUTTON } from '../../constants';
+import { CardCompany } from '../../types';
+import { Button } from '../common/Button/Button';
 
 interface Props {
   setCardCompany: (input: CardCompany) => void;

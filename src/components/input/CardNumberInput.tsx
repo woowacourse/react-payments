@@ -1,7 +1,7 @@
 import React, { Fragment, useRef } from 'react';
 import styled from 'styled-components';
-import { Input } from './Input';
-import { InputContainer } from './InputContainer';
+import { Input } from '../common/Input';
+import { InputContainer } from '../common/InputContainer';
 import { useCardNumberInput } from '../../hooks/input/useCardNumberInput';
 import { isLast } from '../../utils';
 import { CardNumber } from '../../types';

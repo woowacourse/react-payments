@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { Tooltip } from '../Tooltip/Tooptip';
-import { Input } from './Input';
-import { InputContainer } from './InputContainer';
+import { Tooltip } from '../common/Tooltip';
+import { Input } from '../common/Input';
+import { InputContainer } from '../common/InputContainer';
 import { useSecurityCodeInput } from '../../hooks/input/useSecurityCodeInput';
 import { CVC_TOOLTIP_MESSAGE, PASSWORD_TEXT, SECURITY_CODE_SIZE } from '../../constants';
 import { SecurityCode } from '../../types';

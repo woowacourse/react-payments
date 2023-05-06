@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import styled from 'styled-components';
-import { Input } from './Input';
-import { InputContainer } from './InputContainer';
+import { Input } from '../common/Input';
+import { InputContainer } from '../common/InputContainer';
 import { useExpirationDateInput } from '../../hooks/input/useExpirationDateInput';
 import { MONTH_SIZE, YEAR_SIZE } from '../../constants';
 import { ExpirationDate } from '../../types';

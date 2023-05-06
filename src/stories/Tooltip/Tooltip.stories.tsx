@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Tooltip } from '../../components/Tooltip/Tooptip';
+import { Tooltip } from '../../components/common/Tooltip';
 
 const meta = {
   title: 'Example/Tooltip',
@@ -10,7 +10,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const BasicTooltip: Story = {
+export const Basic: Story = {
   args: {
     designType: 'basic',
     message: '카드 뒷면 서명란에 인쇄된 숫자 끝 3자리를 입력해주세요.',

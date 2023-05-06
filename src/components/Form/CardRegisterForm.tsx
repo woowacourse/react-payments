@@ -2,17 +2,20 @@ import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import ChexModal from 'react-chex-modal';
+
 import { CardViewer } from '../CardViewer';
 import { CardNumberInput } from '../input/CardNumberInput';
 import { ExpirationDateInput } from '../input/ExpirationDateInput';
 import { OwnerNameInput } from '../input/OwnerNameInput';
 import { SecurityCodeInput } from '../input/SecurityCodeInput';
 import { PasswordInput } from '../input/PasswordInput';
-import { Button } from '../Button/Button';
-import { CardSelectModalContent } from '../Modal/CardSelect/CardSelectModalContent';
+import { Button } from '../common/Button/Button';
+import { CardSelectModalContent } from '../Modal/CardSelectModalContent';
+
 import { useModal } from '../../hooks/useModal';
 import { useCardRegisterForm } from '../../hooks/useCardRegisterForm';
 import { useCardDataService } from '../../hooks/useCardDataService';
+
 import { CardCompany } from '../../types';
 
 export function CardRegisterForm() {

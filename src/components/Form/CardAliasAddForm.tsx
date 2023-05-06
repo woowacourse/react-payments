@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { Input } from '../input/Input';
-import { Button } from '../Button/Button';
-import { Loading } from '../Loading';
+import { Input } from '../common/Input';
+import { Button } from '../common/Button/Button';
+import { Loading } from '../common/Spinner/Loading';
 import { CardViewer } from '../CardViewer';
 import { CardNotFound } from '../CardNotFound';
 import { useCardDataService } from '../../hooks/useCardDataService';

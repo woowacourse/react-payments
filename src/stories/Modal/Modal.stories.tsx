@@ -1,5 +1,5 @@
 import type { Meta, StoryFn } from '@storybook/react';
-import { Modal } from '../../components/Modal/Modal';
+import { Modal } from '../../components/common/Modal';
 import { useModal } from '../../hooks/useModal';
 
 const meta: Meta<typeof Modal> = {

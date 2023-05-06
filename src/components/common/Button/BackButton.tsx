@@ -14,13 +14,17 @@ export function BackButton({ path }: Props) {
       }}
     >
       <svg
-        width='10'
+        width='12'
         height='17'
-        viewBox='0 0 10 17'
+        viewBox='0 0 12 17'
         fill='none'
         xmlns='http://www.w3.org/2000/svg'
       >
-        <path d='M8.30426 1L1.36476 8.78658L9.15134 15.7261' stroke='#525252' strokeWidth='1.5' />
+        <path
+          d='M8.30426 1L1.36476 8.78658L9.15134 15.7261'
+          stroke='var(--grey-700)'
+          strokeWidth='2'
+        />
       </svg>
     </Style.Wrapper>
   );

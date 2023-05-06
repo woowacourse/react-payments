@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { Input } from './Input';
-import { InputContainer } from './InputContainer';
+import { Input } from '../common/Input';
+import { InputContainer } from '../common/InputContainer';
 import { useOwnerNameInput } from '../../hooks/input/useOwnerNameInput';
 import { MAX_NAME_SIZE } from '../../constants';
 import { OwnerName } from '../../types';

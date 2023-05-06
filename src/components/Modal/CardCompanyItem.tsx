@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { CardCompany } from '../../../types';
+import { CardCompany } from '../../types';
 
 interface Props {
   name: CardCompany;

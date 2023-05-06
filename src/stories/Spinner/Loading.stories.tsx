@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Loading } from '../../components/Loading';
+import { Loading } from '../../components/common/Spinner/Loading';
 
 const meta = {
-  title: 'Example/LoadingAnimation',
+  title: 'Example/Spinner',
   component: Loading,
   tags: ['autodocs'],
 } satisfies Meta<typeof Loading>;

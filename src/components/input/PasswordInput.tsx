@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import styled from 'styled-components';
-import { Input } from './Input';
-import { InputContainer } from './InputContainer';
+import { Input } from '../common/Input';
+import { InputContainer } from '../common/InputContainer';
 import { usePasswordInput } from '../../hooks/input/usePasswordInput';
 import { PASSWORD_TEXT } from '../../constants';
 import { Password } from '../../types';
