@@ -1,30 +1,30 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta } from "@storybook/react";
+import { useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
 import LastPage from "pages/LastPage";
+import CardInfoProvider from "components/provider/CardInfoProvider";
+import useInitCardInfo from "hooks/useInitCardInfo";
 import { CARD_COMPANIES } from "constants/cardCompanies";
 
-const baseCardInfo = {
-  code: "123",
-  month: "12",
-  name: "",
-  nickname: "🥰",
-  number1: "1232",
-  number2: "1312",
-  number3: "3123",
-  number4: "2131",
-  password1: "1",
-  password2: "2",
-  year: "31",
+const date = {
+  maxLength: 2,
 };
 
-const bc = { cardCompany: "BC카드", ...baseCardInfo };
-const kb = { cardCompany: "국민카드", ...baseCardInfo };
-const shinhan = { cardCompany: "신한카드", ...baseCardInfo };
-const kakao = { cardCompany: "카카오뱅크", ...baseCardInfo };
-const woori = { cardCompany: "우리카드", ...baseCardInfo };
-const lotte = { cardCompany: "롯데카드", ...baseCardInfo };
-const hana = { cardCompany: "하나카드", ...baseCardInfo };
-const hyundai = { cardCompany: "현대카드", ...baseCardInfo };
+const cardNumber = {
+  control: {
+    maxLength: 4,
+  },
+  description: "숫자 4자리를 입력해 프리뷰 카드 번호를 변경할 수 있습니다.",
+};
+
+const disabledControl = {
+  disable: true,
+};
+
+const disabledCardNumber = {
+  control: disabledControl,
+  description: "카드 번호 마지막 8자리는 암호화 되어 표시됩니다.",
+};
 
 const meta = {
   component: LastPage,
@@ -33,55 +33,69 @@ const meta = {
   decorators: [
     (Story) => (
       <BrowserRouter>
-        <div id="root">
-          <Story />
-        </div>
+        <CardInfoProvider>
+          <div id="root">
+            <Story />
+          </div>
+        </CardInfoProvider>
       </BrowserRouter>
     ),
   ],
 
+  args: {
+    cardCompany: "국민카드",
+    number1: "1232",
+    number2: "1312",
+    number3: "3123",
+    number4: "2131",
+    name: "NAME",
+    month: "12",
+    year: "31",
+  },
+
   argTypes: {
-    cardInfo: {
-      options: {
-        BC카드: bc,
-        국민카드: kb,
-        신한카드: shinhan,
-        카카오뱅크: kakao,
-        우리카드: woori,
-        롯데카드: lotte,
-        하나카드: hana,
-        현대카드: hyundai,
-      },
-      cardCompany: {
-        options: Object.keys(CARD_COMPANIES).map((company) => company),
-      },
+    cardCompany: {
+      options: Object.keys(CARD_COMPANIES).map((company) => company),
       control: {
         type: "radio",
       },
-      description: "카드사를 선택해 카드를 변경할 수 있습니다.",
+      description:
+        "카드사를 선택해 프리뷰 카드사와 카드 색깔을 변경할 수 있습니다.",
     },
+    month: {
+      control: date,
+      description:
+        "유효한 월(ex. 01 ~ 12)을 입력해 프리뷰 카드의 만료일을 변경할 수 있습니다.",
+    },
+    year: {
+      control: date,
+      description:
+        "유효한 연도(ex. 23 ~)을 입력해 프리뷰 카드의 만료일을 변경할 수 있습니다.",
+    },
+    name: {
+      control: {
+        maxLength: 20,
+      },
+      description:
+        "20자 이내 영문을 입력해 프리뷰 카드 사용자 이름을 변경할 수 있습니다.",
+    },
+    number1: cardNumber,
+    number2: cardNumber,
+    number3: disabledCardNumber,
+    number4: disabledCardNumber,
   },
 } satisfies Meta<typeof LastPage>;
 
 export default meta;
 
-type Story = StoryObj<typeof LastPage>;
+export const CardNicknameSetting = (args: any) => {
+  const { initCardInfo } = useInitCardInfo();
 
-export const CardNicknameSetting: Story = {
-  args: {
-    cardInfo: {
-      cardCompany: "국민카드",
-      code: "123",
-      month: "12",
-      name: "",
-      nickname: "🥰",
-      number1: "1232",
-      number2: "1312",
-      number3: "3123",
-      number4: "2131",
-      password1: "1",
-      password2: "2",
-      year: "31",
-    },
-  },
+  useEffect(() => {
+    Object.entries(args).map(([arg, value]) =>
+      initCardInfo(arg, String(value))
+    );
+  }, [args]);
+
+  return <LastPage />;
 };
