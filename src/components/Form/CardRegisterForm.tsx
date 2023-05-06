@@ -11,7 +11,7 @@ import {
   OwnerNameInput,
   SecurityCodeInput,
   PasswordInput,
-} from '../input';
+} from '../Input';
 import { useModal } from '../../hooks/useModal';
 import { useCardRegisterForm } from '../../hooks/useCardRegisterForm';
 import { useCardDataService } from '../../hooks/useCardDataService';

@@ -1,6 +1,6 @@
 import type { Meta } from '@storybook/react';
 import { useRef, useState } from 'react';
-import { OwnerNameInput } from '../../../components/input/OwnerNameInput';
+import { OwnerNameInput } from '../../../components/Input/OwnerNameInput';
 
 const meta = {
   title: 'Example/Input/CardInput',

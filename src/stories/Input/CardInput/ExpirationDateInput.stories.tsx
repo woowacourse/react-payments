@@ -1,6 +1,6 @@
 import type { Meta } from '@storybook/react';
 import { useState, useRef } from 'react';
-import { ExpirationDateInput } from '../../../components/input/ExpirationDateInput';
+import { ExpirationDateInput } from '../../../components/Input/ExpirationDateInput';
 
 const meta = {
   title: 'Example/Input/CardInput',
