@@ -3,6 +3,7 @@ import { CardCompany } from "../../types";
 import CARD_COMPANIES from "../../constants/cardCompanies";
 import { Button } from "../@common";
 import useCardRegistrationInfoContext from "../../hooks/useCardRegistrationInfoContext";
+import useModalContext from "../../hooks/useModalContext";
 
 type CardCompanyButtonProps = {
   cardCompany: CardCompany;
@@ -10,9 +11,11 @@ type CardCompanyButtonProps = {
 
 const CardCompanyButton = ({ cardCompany }: CardCompanyButtonProps) => {
   const { setCardCompany } = useCardRegistrationInfoContext();
+  const { closeModal } = useModalContext();
 
   const handleCardCompany = () => {
     setCardCompany(cardCompany);
+    closeModal();
   };
 
   return (

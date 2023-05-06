@@ -13,16 +13,16 @@ import styled from "styled-components";
 import { Container, Button } from "../../components/@common";
 import { Card } from "../../types";
 import { isFulfilledObject, isFulfilledString, isValidMonth } from "../../validator/Validator";
-import useModal from "../../hooks/useModal";
 import ROUTE_PATH from "../../constants/routePath";
 import useCardRegistrationInfoContext from "../../hooks/useCardRegistrationInfoContext";
 import CardCompanyButtonList from "../../components/CardCompanyButtonList/CardCompanyButtonList";
+import useModalContext from "../../hooks/useModalContext";
 
 const AddCardPage = () => {
   const { cardNumber, expirationDate, ownerName, securityCode, password, cardCompany } =
     useCardRegistrationInfoContext();
 
-  const { isModalOpen, modalClose, modalOpen } = useModal();
+  const { isModalOpen, closeModal, openModal } = useModalContext();
   const navigate = useNavigate();
 
   const addCard = (e: React.FormEvent) => {
@@ -58,8 +58,8 @@ const AddCardPage = () => {
   return (
     <AddCardPageContainer>
       <AppBar prevButton>카드 추가</AppBar>
-      <CardPreview card={{ cardNumber, expirationDate, ownerName, cardCompany }} onClick={modalOpen} />
-      <HelperText onClick={modalOpen}>카드사 선택하기👆</HelperText>
+      <CardPreview card={{ cardNumber, expirationDate, ownerName, cardCompany }} onClick={openModal} />
+      <HelperText onClick={openModal}>카드사 선택하기👆</HelperText>
       <Form onSubmit={addCard}>
         <CardNumberInput />
         <CardExpirationDateInput />
@@ -70,7 +70,7 @@ const AddCardPage = () => {
           입력 완료
         </NextButton>
       </Form>
-      <Modal isOpen={isModalOpen} closeModal={modalClose}>
+      <Modal isOpen={isModalOpen} closeModal={closeModal}>
         <CardCompanyButtonList />
       </Modal>
     </AddCardPageContainer>

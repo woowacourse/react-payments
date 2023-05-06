@@ -11,6 +11,7 @@ import ROUTE_PATH from "./constants/routePath";
 import { CARDS_KEY } from "./constants/storageKey";
 import type { Card } from "./types";
 import { CardRegistrationInfoProvider } from "./context/CardRegistrationInfoContext";
+import { ModalProvider } from "./context/ModalContext";
 
 function App() {
   const { storageValue: cards, setStorageValue: setCards } = useStateWithStorage<Card[]>(CARDS_KEY, []);
@@ -30,9 +31,11 @@ function App() {
           <Route
             path={ROUTE_PATH.addCard}
             element={
-              <CardRegistrationInfoProvider>
-                <AddCardPage />
-              </CardRegistrationInfoProvider>
+              <ModalProvider defaultOpen>
+                <CardRegistrationInfoProvider>
+                  <AddCardPage />
+                </CardRegistrationInfoProvider>
+              </ModalProvider>
             }
           />
           <Route path={ROUTE_PATH.cardAlias} element={<CardAliasRegistrationPage onSubmit={addCard} />} />
