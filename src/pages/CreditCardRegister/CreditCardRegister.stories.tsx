@@ -1,11 +1,11 @@
-/* eslint-disable react/function-component-definition */
-/* eslint-disable import/no-extraneous-dependencies */
-
-import { Story as StoryType, Meta } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import StoryProvider from 'stories/StoryProvider';
+import { within, userEvent } from '@storybook/testing-library';
+
+import sleep from 'stories/sleep';
 import CreditCardRegister from './CreditCardRegister';
 
-export default {
+const meta = {
   title: 'CreditCardRegister Page',
   component: CreditCardRegister,
   decorators: [
@@ -15,13 +15,53 @@ export default {
       </StoryProvider>
     ),
   ],
-} satisfies Meta<typeof CreditCardRegister>;
+} satisfies Meta;
+export default meta;
 
-const Template: StoryType = (args) => (
-  <CreditCardRegister {...args} />
-);
+type Story = StoryObj<typeof meta>;
 
-export const Default = Template.bind({});
-Default.args = {
+export const Default: Story = {
+  render: () => (
+    <CreditCardRegister />
+  ),
+  play: async ({ canvasElement }) => {
+    await sleep(500);
 
+    const cardCompanyButton = within(canvasElement).getByTestId('credit-card-company-woori');
+    await userEvent.click(cardCompanyButton);
+
+    await sleep(500);
+
+    const creditCardNumberViewer = within(canvasElement).getByTestId('credit-card-number-viewer');
+    await userEvent.click(creditCardNumberViewer);
+    await userEvent.type(creditCardNumberViewer, '1234567812345678', { delay: 100 });
+
+    await sleep(100);
+    const creditCardExpiryInput = within(canvasElement).getByTestId('credit-card-expiry-input');
+    await userEvent.type(creditCardExpiryInput, '0199', { delay: 100 });
+
+    await sleep(100);
+    const creditCardOwnerInput = within(canvasElement).getByTestId('credit-card-owner-input');
+    await userEvent.type(creditCardOwnerInput, 'gabriel yoon', { delay: 100 });
+
+    await sleep(100);
+    const creditCardCVCInput = within(canvasElement).getByTestId('credit-card-cvc-input');
+    await userEvent.type(creditCardCVCInput, '345', { delay: 100 });
+
+    await sleep(100);
+    const creditCardPasswordInput1 = within(canvasElement).getByTestId('credit-card-password1-input');
+    await userEvent.type(creditCardPasswordInput1, '1', { delay: 100 });
+
+    await sleep(100);
+    const creditCardPasswordInput2 = within(canvasElement).getByTestId('credit-card-password2-input');
+    await userEvent.type(creditCardPasswordInput2, '2', { delay: 100 });
+
+    await sleep(1000);
+
+    const cardRegisterButton = within(canvasElement).getByTestId('credit-card-form-submit');
+    await userEvent.click(cardRegisterButton);
+  },
+  args: {
+
+  },
 };
