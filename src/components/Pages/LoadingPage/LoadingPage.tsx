@@ -6,12 +6,13 @@ import { Spinner } from '../../Spinner/Spinner';
 export const LoadingPage = () => {
   const navigation = useNavigate();
 
-  // setTimeout(() => {
-  //   navigation(PATHNAME.NICKNAME);
-  // }, 3000);
+  setTimeout(() => {
+    navigation(PATHNAME.NICKNAME);
+  }, 3000);
 
   return (
     <Styled.LoadingPageLayout>
+      <Styled.LoadingParagraph>카드를 등록하고 있어요</Styled.LoadingParagraph>
       <Spinner />
     </Styled.LoadingPageLayout>
   );
