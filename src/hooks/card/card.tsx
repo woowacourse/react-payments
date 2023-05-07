@@ -8,19 +8,25 @@ import { isInputElement } from '../../utils/dom';
 import { getCardList, setCardList } from '../../utils/localStorage';
 import { isEnglish, isLongerThan, isDigit } from '../../utils/validation';
 import useAutoFocus from '../@common/useAutoFocus';
+import useBoolean from '../@common/useBoolean';
 import useErrors, { INVALID_FORMAT } from '../@common/useError';
 
 export function useCardRegister() {
   const navigate = useNavigate();
+  const [isLoading, startLoading, endLoading] = useBoolean(false);
   const { isAllValid, handleChange } = useAutoFocus();
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+    startLoading();
 
-    navigate(ROUTES.ALIAS, { replace: true });
+    setTimeout(() => {
+      endLoading();
+      navigate(ROUTES.ALIAS, { replace: true });
+    }, 2000);
   };
 
-  return { isAllValid, handleSubmit, handleChange };
+  return { isLoading, isAllValid, handleSubmit, handleChange };
 }
 
 export function useMyCardList() {
