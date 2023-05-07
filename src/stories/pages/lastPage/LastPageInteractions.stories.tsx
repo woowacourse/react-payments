@@ -35,10 +35,12 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+const TYPING_SPEED = {
+  delay: 200,
+};
+
 export const SuccessInteraction: Story = {
-  render: () => {
-    return CardNicknameSetting(meta.args);
-  },
+  render: () => CardNicknameSetting(meta.args),
 
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
@@ -49,7 +51,7 @@ export const SuccessInteraction: Story = {
     await waitFor(() => cardNicknameInput);
 
     await step("Typing Card Nickname", async () => {
-      await userEvent.type(cardNicknameInput, "🥰야미 카드🥰", { delay: 200 });
+      await userEvent.type(cardNicknameInput, "🥰야미 카드🥰", TYPING_SPEED);
     });
 
     await step("Button Click", () => {
@@ -59,9 +61,7 @@ export const SuccessInteraction: Story = {
 };
 
 export const ErrorInteraction: Story = {
-  render: () => {
-    return CardNicknameSetting(meta.args);
-  },
+  render: () => CardNicknameSetting(meta.args),
 
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
@@ -72,7 +72,7 @@ export const ErrorInteraction: Story = {
     await waitFor(() => cardNicknameInput);
 
     await step("Not Typing Card Nickname", async () => {
-      await userEvent.type(cardNicknameInput, "          ", { delay: 200 });
+      await userEvent.type(cardNicknameInput, "          ", TYPING_SPEED);
     });
 
     await step("Button Click", () => {
