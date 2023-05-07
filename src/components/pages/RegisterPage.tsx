@@ -3,29 +3,31 @@ import { CreditCardContext } from '../../contexts/CreditCardContext';
 import CardRegisterForm from '../registerForm/cardRegisterForm/CardRegisterForm';
 import { useContext } from 'react';
 
-import useModal from '../../hooks/useModal';
 import CreditCardContextType from '../../@types/creditCardContextType';
+
+import Modal from 'ukko-modal/dist/Modal';
 import SelectCompanyModal from '../registerForm/selectCompanyModal/SelectCompanyModal';
-import BottomModal from '../@common/bottomModal/BottomModal';
 
 function RegisterPage() {
-  const { isOpen, closeModal, openModal } = useModal(true);
   const { creditCard } = useContext(CreditCardContext) as CreditCardContextType;
   const { cardNumber, cardCompany, ownerName, expirationDate } = creditCard;
 
   return (
     <>
-      <Card
-        cardNumber={cardNumber}
-        ownerName={ownerName}
-        expirationDate={expirationDate}
-        onClick={openModal}
-        cardCompany={cardCompany}
-      />
+      <Modal
+        trigger={
+          <Card
+            cardNumber={cardNumber}
+            ownerName={ownerName}
+            expirationDate={expirationDate}
+            cardCompany={cardCompany}
+          />
+        }
+        isShow={true}
+      >
+        <SelectCompanyModal />
+      </Modal>
       <CardRegisterForm />
-      <BottomModal className="modal" isOpen={isOpen} onClose={closeModal}>
-        <SelectCompanyModal onClose={closeModal}></SelectCompanyModal>
-      </BottomModal>
     </>
   );
 }
