@@ -190,7 +190,7 @@ MonthInput.args = {
   isNumber: true,
   shape: undefined,
   maxLength: 2,
-  required: false,
+  required: true,
   pattern: REGEX_PATTERN["MONTH"],
 };
 
@@ -207,6 +207,39 @@ MonthInputWithErrorMessage.play = async ({ canvasElement }) => {
   const input = canvas.getByRole("textbox") as HTMLInputElement;
   input.focus();
   await userEvent.type(input, "13", {
+    delay: 500,
+  });
+  input.blur();
+};
+
+export const YearInput: Story = (args: UseInputProps) => {
+  const { ...rest } = args;
+  const expirationDate = useInput("", { name: "year" });
+  return <Input {...rest} {...expirationDate} />;
+};
+
+YearInput.args = {
+  type: "text",
+  isNumber: true,
+  shape: undefined,
+  maxLength: 2,
+  required: true,
+  pattern: REGEX_PATTERN["YEAR"],
+};
+
+export const YearInputWithErrorMessage: Story = (args: UseInputProps) => {
+  const { ...rest } = args;
+  const year = useInput("", { name: "year" });
+  return <Input {...rest} {...year} />;
+};
+
+YearInputWithErrorMessage.args = YearInput.args;
+
+YearInputWithErrorMessage.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  const input = canvas.getByRole("textbox") as HTMLInputElement;
+  input.focus();
+  await userEvent.type(input, "19", {
     delay: 500,
   });
   input.blur();
