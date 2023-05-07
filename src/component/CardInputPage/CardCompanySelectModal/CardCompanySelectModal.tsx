@@ -1,9 +1,10 @@
-import BottomSheet, { BottomSheetProps } from "../../common/Modal/BottomSheet";
+// import BottomSheet, { BottomSheetProps } from "../../common/Modal/BottomSheet";
+import BottomSheet from "@wainaat/react-bottom-sheet";
 import { CARD_COMPANIES_ENGLISH, CardCompany } from "../../../type/CardCompany";
 import CardCompanyButton from "../CardCompany/CardCompanyButton";
 import styles from "./CardCompanySelectModal.module.css";
 
-interface Props extends BottomSheetProps {
+interface Props extends React.ComponentProps<typeof BottomSheet> {
   companyClickHandler: (value: CardCompany) => void;
 }
 
