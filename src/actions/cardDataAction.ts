@@ -35,7 +35,6 @@ export const addCardRequestStartAction = () => {
 
 export const addCardAction = (data: CardType) => {
   const failureRandom80 = Math.floor(Math.random() * 10);
-  console.log(failureRandom80);
   const returnData: any = [];
 
   if (failureRandom80 > 1) {

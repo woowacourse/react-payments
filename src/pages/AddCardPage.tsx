@@ -62,6 +62,7 @@ const AddCardPage = () => {
               cardType={cardType}
               cardNumber={cardNumber}
               cardOwner={cardOwner.value}
+              fadeCard={true}
               expired={cardExpire.value}
               securityCode={securityCode.value}
               cardFlipped={cardFlip}
