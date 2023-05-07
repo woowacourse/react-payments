@@ -2,6 +2,7 @@ import { CardChipIcon } from '../../assets/svgs';
 import { COMPANY_INFO } from '../../constants/company';
 import useCardFormValue from '../../hooks/useCardFormValue';
 import type { CardData } from '../../types/card';
+import { isMonthNumber, isValidYear } from '../../utils/validation';
 
 import styles from './cardItem.module.css';
 
@@ -33,11 +34,14 @@ const CardItem = ({ cardData }: Props) => {
       </div>
       <div className={styles.detailContainer}>
         <span>{owner}</span>
-        <span>
-          {expiredDate.month}
-          {expiredDate.month.length === 2 && <span>/</span>}
-          {expiredDate.year}
-        </span>
+        {expiredDate.month.length === 2 &&
+          isMonthNumber(Number(expiredDate.month)) && (
+            <span>
+              {expiredDate.month}
+              <span>/</span>
+              {isValidYear(Number(expiredDate.year)) && expiredDate.year}
+            </span>
+          )}
       </div>
     </div>
   );
