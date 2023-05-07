@@ -1,4 +1,4 @@
-import { LENGTH, REGEX } from 'constants/constants';
+import { LENGTH } from 'constants/constants';
 import { HIDDEN_ELEMENT_STYLE } from 'styles/HiddenStyle';
 
 const showNumberCaption = (cardNumbers: string[]) =>

@@ -30,7 +30,7 @@ const CardRegisterForm = () => {
     cardCompany: cardCompany,
   };
 
-  const { handleForm } = useCardFormHandler(cardInfo);
+  const { handleForm } = useCardFormHandler(cardInfo, handleModal);
 
   return (
     <>

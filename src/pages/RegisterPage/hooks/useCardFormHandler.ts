@@ -3,7 +3,7 @@ import { useForm } from '../../../hooks/useForm';
 import { Card } from 'types/Card';
 import { areValidCardInfo } from 'validator';
 
-export const useCardFormHandler = (cardInfo: Card) => {
+export const useCardFormHandler = (cardInfo: Card, handleModal: () => void) => {
   const bank = cardInfo.cardCompany.company;
 
   const navigate = useNavigate();
@@ -13,6 +13,7 @@ export const useCardFormHandler = (cardInfo: Card) => {
 
     if (!bank) {
       alert('카드사를 선택해주세요.');
+      handleModal();
       return;
     }
 
