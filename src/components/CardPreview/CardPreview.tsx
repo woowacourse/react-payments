@@ -4,15 +4,11 @@ import { useCardInfoValue } from '../../context/CardInfoContext';
 
 import { Card } from '../';
 
-interface CardPreviewProps {
-  openModal: () => void;
-}
-
-const CardPreview = ({ openModal }: CardPreviewProps) => {
+const CardPreview = () => {
   const cardInfo = useCardInfoValue();
 
   return (
-    <styled.CardPreview onClick={openModal}>
+    <styled.CardPreview>
       <Card cardInfo={cardInfo} />
     </styled.CardPreview>
   );
