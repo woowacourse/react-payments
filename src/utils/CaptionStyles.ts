@@ -1,4 +1,5 @@
-import { HIDDEN_ELEMENT_STYLE, LENGTH } from 'constants/constants';
+import { LENGTH } from 'constants/constants';
+import { HIDDEN_ELEMENT_STYLE } from 'styles/HiddenStyle';
 
 const showNumberCaption = (cardNumbers: string[]) =>
   (cardNumbers.join('').length === LENGTH.EACH_CARD_NUMBER * 4 ||
