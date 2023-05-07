@@ -9,16 +9,13 @@ const meta: Meta<typeof CardInfoRegisterPage> = {
   component: CardInfoRegisterPage,
   decorators: [
     (Story) => (
-      <>
-        <div style={{ maxWidth: '420px', margin: '0 auto' }}>
-          <CardFormProvider>
-            <BrowserRouter>
-              <Story />
-            </BrowserRouter>
-          </CardFormProvider>
-        </div>
-        <div id="modal-root"></div>
-      </>
+      <div style={{ maxWidth: '420px', margin: '0 auto' }}>
+        <CardFormProvider>
+          <BrowserRouter>
+            <Story />
+          </BrowserRouter>
+        </CardFormProvider>
+      </div>
     ),
   ],
 };
