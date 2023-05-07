@@ -37,7 +37,6 @@ export const decorators = [
           <Story />
         </MemoryRouter>
       </CardProvier>
-      <div id="modal" />
     </>
   ),
 ];
