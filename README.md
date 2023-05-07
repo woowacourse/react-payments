@@ -4,7 +4,7 @@
 
 ## [배포 페이지](https://guridaek.github.io/react-payments/)
 
-## [스토리북](https://644e3c3e4b0966ee7c0c88be-felnakybab.chromatic.com/)
+## [스토리북](https://644e3c3e4b0966ee7c0c88be-dimsuwvnrn.chromatic.com)
 
 ## 패키지 설치
 
