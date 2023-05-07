@@ -1,6 +1,11 @@
 import { Meta, StoryObj } from "@storybook/react";
 
 import Input from "../components/common/Input";
+import { REGEX_PATTERN } from "../constant";
+import { ERROR_MESSAGE } from "../constant";
+import { within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { UseInputProps, useInput } from "../hooks/useInput";
 
 const meta: Meta<typeof Input> = {
   component: Input,
@@ -10,23 +15,115 @@ const meta: Meta<typeof Input> = {
 export default meta;
 type Story = StoryObj<typeof Input>;
 
-export const TextInput: Story = {
+const showError = ({ target }: React.FocusEvent<HTMLInputElement>) => {
+  if (target.validity.patternMismatch) {
+    target.setCustomValidity(ERROR_MESSAGE[target.name]);
+    target.reportValidity();
+  }
+  if (target.validity.tooLong) {
+    target.setCustomValidity(ERROR_MESSAGE["LONG_INPUT"]);
+    target.reportValidity();
+  }
+};
+
+export const CommonInput: Story = {
   args: {
     type: "text",
-    placeholder: "",
+    textAlign: undefined,
+    isNumber: false,
+    shape: undefined,
+    maxLength: 4,
+    required: false,
+    pattern: undefined,
+    showError: undefined,
   },
 };
 
-export const NumberInput: Story = {
-  args: {
-    type: "number",
-    placeholder: "MM",
+CommonInput.argTypes = {
+  type: {
+    options: ["text", "number", "password"],
+    control: { type: "select" },
+  },
+  textAlign: {
+    options: ["undefined", "center"],
+    control: { type: "select" },
+  },
+  isNumber: {
+    options: [true, false],
+    control: { type: "select" },
+  },
+  shape: {
+    options: [undefined, "underline"],
+    control: { type: "select" },
+  },
+  maxLength: {
+    control: { type: "number" },
+  },
+  required: {
+    options: [true, false],
+    control: { type: "select" },
+  },
+  pattern: {
+    options: [...Object.keys(REGEX_PATTERN)],
+    control: { type: "select" },
+  },
+  showError: {
+    options: [showError],
+    control: { type: "function" },
   },
 };
 
-export const PasswordInput: Story = {
-  args: {
-    type: "password",
-    placeholder: "",
-  },
+export const FirstCardNumberInput: Story = (args: UseInputProps) => {
+  const { ...rest } = args;
+  const firstCardNumber = useInput("", { name: "firstCardNumber" });
+  return <Input {...rest} {...firstCardNumber} />;
+};
+
+FirstCardNumberInput.args = {
+  autoFocus: true,
+  isNumber: true,
+  maxLength: 4,
+  type: "text",
+  pattern: REGEX_PATTERN["CARD_NUMBER"],
+  required: true,
+  textAlign: "center",
+  autoComplete: "off",
+};
+
+export const FirstCardNumberInputWithErrorMessage: Story = (
+  args: UseInputProps
+) => {
+  const { ...rest } = args;
+  const firstCardNumber = useInput("", { name: "firstCardNumber" });
+  return <Input {...rest} {...firstCardNumber} />;
+};
+
+FirstCardNumberInputWithErrorMessage.args = FirstCardNumberInput.args;
+
+FirstCardNumberInputWithErrorMessage.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  const input = canvas.getByRole("textbox") as HTMLInputElement;
+  input.focus();
+  await userEvent.type(input, "143a", {
+    delay: 500,
+  });
+  input.blur();
+};
+
+export const FirstCardNumberInputSuccess: Story = (args: UseInputProps) => {
+  const { ...rest } = args;
+  const firstCardNumber = useInput("", { name: "firstCardNumber" });
+  return <Input {...rest} {...firstCardNumber} />;
+};
+
+FirstCardNumberInputSuccess.args = FirstCardNumberInput.args;
+
+FirstCardNumberInputSuccess.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  const input = canvas.getByRole("textbox") as HTMLInputElement;
+  input.focus();
+  await userEvent.type(input, "1432", {
+    delay: 500,
+  });
+  input.blur();
 };
