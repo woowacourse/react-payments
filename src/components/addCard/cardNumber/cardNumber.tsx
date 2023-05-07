@@ -3,10 +3,10 @@ import { Fragment } from "react";
 import { Input } from "../../@common/input/InputBox";
 import { INPUT_TYPE, LABEL } from "../../../constants/inputInfo";
 import { CardNumberIndex } from "../../../type/input";
-import { useCardInfoContext } from "../../../hooks/useCardInfoContext";
+import { useCardNumber } from "../../../hooks/useCardNumber";
 
 export function CardNumber() {
-  const { cardNumber, changeNumberInput } = useCardInfoContext();
+  const { cardNumber, changeNumberInput } = useCardNumber();
 
   function checkIsPasswordType(name: string) {
     return name === "third" || name === "fourth";

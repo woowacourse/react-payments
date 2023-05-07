@@ -9,14 +9,19 @@ import { SecurityCode } from "./securityCode/securityCode";
 import { UserName } from "./userName/userName";
 import { TEXT_LENGTH } from "../../constants/inputInfo";
 import { SubmitButton } from "../@common/button/submitButton";
-import { useCardInfoContext } from "../../hooks/useCardInfoContext";
 import { PATH } from "../../constants/path";
+import { useCardNumber } from "../../hooks/useCardNumber";
+import { useCardDate } from "../../hooks/useCardDate";
+import { useUserName } from "../../hooks/useUserName";
+import { useCardBank } from "../../hooks/useCardBank";
 
 export function AddCardForm() {
   const navigate = useNavigate();
   const [isComplete, setIsComplete] = useState<boolean>(false);
-  const { cardNumber, month, year, userName, selectedBank } =
-    useCardInfoContext();
+  const { cardNumber } = useCardNumber();
+  const { month, year } = useCardDate();
+  const { userName } = useUserName();
+  const { selectedBank } = useCardBank();
 
   function checkAllInputs(e: React.FormEvent<HTMLFormElement>) {
     const inputElements = Array.from(

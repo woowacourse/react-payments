@@ -38,6 +38,7 @@ export const ERROR_MESSAGE: ErrorMessage = {
   FIRSTPASSWORD: "옳바른 비밀번호를 입력해주세요",
   SECONDPASSWORD: "옳바른 비밀번호를 입력해주세요",
   COMMON: "옳바른 입력값을 넣어주세요.",
+  SCOPE: "유효한 범위에서만 context를 사용할 수 있습니다.",
 };
 
 export const INPUT_TYPE = {

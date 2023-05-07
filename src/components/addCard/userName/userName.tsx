@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import { INPUT_TYPE, LABEL, PLACEHOLDER } from "../../../constants/inputInfo";
-import { useCardInfoContext } from "../../../hooks/useCardInfoContext";
+import { useUserName } from "../../../hooks/useUserName";
 import { Input } from "../../@common/input/InputBox";
 import { renderCountText } from "./textCount";
 
 export function UserName() {
-  const { userName, changeNameInput } = useCardInfoContext();
+  const { userName, changeNameInput } = useUserName();
 
   return (
     <Input<string>
