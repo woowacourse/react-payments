@@ -12,7 +12,7 @@ const NextButton = (props: ButtonProps) => {
 
 export const StyledButton = styled.button`
   display: flex;
-  margin: 24px 0 24px auto;
+  margin: 0 0 24px auto;
   padding: 10px 16px;
   color: var(--darken-color);
   border: 1px solid var(--darken-color);

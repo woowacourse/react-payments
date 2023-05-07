@@ -74,6 +74,7 @@ const HiddenPassword = styled(StyledInput)`
 
 const PasswordCaption = styled(StyledCaption)<{ password: string[] }>`
   visibility: ${({ password }) => showPasswordCaption(password)};
+  margin-bottom: 8px;
 `;
 
 export default PasswordInput;
