@@ -17,7 +17,7 @@ import {
 
 import generatorRandomNumber from '@Utils/generatorRandomNumber';
 
-import CARD_COMPANY from '@Constants/CardCompany';
+import { CARD_COMPANY } from '@Constants/CardCompany';
 import { CREDIT_CARD_MAX_LENGTH, REGISTER_MAX_TIME, REGISTER_MIN_TIME } from '@Constants/creditCard';
 import { PATH_ALIAS } from '@Constants/routes';
 

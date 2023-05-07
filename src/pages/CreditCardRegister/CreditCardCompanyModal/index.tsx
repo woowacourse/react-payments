@@ -7,7 +7,7 @@ import * as Type from '@Types/index';
 
 import { CreditCardRegisterUpdateContext } from '@Contexts/CreditCardRegister/CreditCardRegisterContext';
 
-import CARD_COMPANY from '@Constants/CardCompany';
+import { CARD_COMPANY } from '@Constants/CardCompany';
 
 import * as S from './style';
 
