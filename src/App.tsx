@@ -5,6 +5,7 @@ import MainPage from "pages/MainPage";
 import CardRegisterForm from "pages/RegisterPage/CardRegisterForm";
 import LastPage from "pages/LastPage";
 import GotLost from "pages/GotLost";
+import LoadingPage from "pages/LoadingPage";
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
             </CardInfoProvider>
           }
         />
+        <Route path="/registering" element={<LoadingPage />} />
         <Route path="/got-lost" element={<GotLost />} />
         <Route path="*" element={<Navigate replace to="/got-lost" />} />
       </Routes>
