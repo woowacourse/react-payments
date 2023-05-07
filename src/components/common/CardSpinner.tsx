@@ -31,7 +31,7 @@ const Spinner = styled.div`
     position: absolute;
     top: 0;
     left: 0;
-    animation: ${cardMoving} 3s ease-in-out infinite;
+    animation: ${cardMoving} 2s ease-in-out infinite;
   }
 `;
 
