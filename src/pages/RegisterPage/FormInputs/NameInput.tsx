@@ -46,11 +46,11 @@ const NameInput = () => {
 };
 
 export const StyledNameInput = styled(StyledInput)`
-  width: 88vw;
+  width: 80%;
 `;
 
 export const NameInputBox = styled(StyledInputBox)`
-  margin-bottom: 12px;
+  margin-bottom: 24px;
 `;
 
 export const Wrapper = styled.div`

@@ -84,7 +84,7 @@ const CardNumberInput = () => {
 };
 
 const NumberInput = styled(StyledInput)`
-  width: 12vw;
+  width: 18%;
 `;
 
 const NumberHyphen = styled(StyledHyphen)<{

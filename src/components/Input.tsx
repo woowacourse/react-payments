@@ -51,6 +51,11 @@ export const StyledInput = styled.input`
   font-size: 14px;
   text-align: center;
   letter-spacing: 1px;
+  width: 100%;
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 export default Input;

@@ -34,7 +34,7 @@ const CardRegisterForm = () => {
 
   return (
     <>
-      <div>
+      <CardFormWrapper>
         <Header navigator title="카드 추가" />
 
         <CardPreview cardInfo={cardInfo} onClick={handleModal} />
@@ -49,7 +49,7 @@ const CardRegisterForm = () => {
           <PasswordInput />
           <NextButton>다음</NextButton>
         </AddCardForm>
-      </div>
+      </CardFormWrapper>
       {isModalActive && (
         <Modal
           modal={isModalActive}
@@ -72,6 +72,11 @@ const CardSelectMessage = styled.p`
   font-size: 12px;
   text-align: center;
   margin-bottom: 24px;
+`;
+
+const CardFormWrapper = styled.div`
+  max-width: 480px;
+  width: 84%;
 `;
 
 export default CardRegisterForm;

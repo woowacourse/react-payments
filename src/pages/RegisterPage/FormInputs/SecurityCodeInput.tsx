@@ -47,9 +47,8 @@ const SecurityCodeInput = () => {
 
 const CodeInput = styled(StyledInput)`
   display: d;
-  width: 24vw;
+  width: 30%;
   height: 48px;
-  padding: 0 4vw;
   margin: 0;
   border-radius: 8px;
 `;

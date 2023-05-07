@@ -67,7 +67,7 @@ const ExpirationDateInput = () => {
 };
 
 const ExpirationInput = styled(StyledInput)`
-  width: 12vw;
+  width: 24%;
 `;
 
 const DateHyphen = styled(StyledHyphen)<{ date?: Expiration }>`

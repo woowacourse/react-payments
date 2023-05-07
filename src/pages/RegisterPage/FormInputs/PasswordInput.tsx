@@ -59,13 +59,12 @@ const PasswordInput = () => {
 };
 
 const StyledPasswordInput = styled(StyledInput)`
-  width: 12vw;
+  width: 12%;
   font-size: 16px;
 `;
 
 const HiddenPassword = styled(StyledInput)`
-  width: 12vw;
-  margin-right: 2.2vw;
+  width: 12%;
   font-size: 30px;
   text-align: center;
   line-height: 48px;
