@@ -2,7 +2,10 @@ type CardInformation = {
   id: number;
   cardType: CardType;
   cardNumber: [string, string, string, string];
-  expirationDate: [string, string];
+  expirationDate: {
+    month: string;
+    year: string;
+  };
   owner: string;
   alias?: string;
 };

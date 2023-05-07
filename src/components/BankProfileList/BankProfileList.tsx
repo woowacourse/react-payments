@@ -1,14 +1,15 @@
 import BankProfileButton from '../BankProfileButton';
 import styled from 'styled-components';
 import { BANK_LIST } from '../../domain/constants/card';
-import type { CardType } from '../../domain/types/card';
+import { useCardContext } from '../../pages/CardRegistration/contexts/CardContext';
 
 type BankProfileListProps = {
-  setCardType: React.Dispatch<React.SetStateAction<CardType>>;
   closeModal: () => void;
 };
 
-const BankProfileList = ({ setCardType, closeModal }: BankProfileListProps) => {
+const BankProfileList = ({ closeModal }: BankProfileListProps) => {
+  const { setCard } = useCardContext();
+
   return (
     <Styled.ProfileList>
       {BANK_LIST.map(({ name, profile }) => {
@@ -17,7 +18,7 @@ const BankProfileList = ({ setCardType, closeModal }: BankProfileListProps) => {
             <BankProfileButton
               name={name}
               onClick={() => {
-                setCardType(name);
+                setCard((prev) => ({ ...prev, cardType: name }));
                 closeModal();
               }}
             >

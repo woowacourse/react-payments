@@ -6,20 +6,20 @@ import CardPasswordInput from '../CardPasswordInput';
 import ExpirationDateInput from '../ExpirationDateInput';
 import SecurityCodeInput from '../SecurityCodeInput';
 import styled from 'styled-components';
-import useOnChangeHandler from './hooks/useOnChangeHandler';
 import { useCardListContext } from '../../contexts/CardListContexts';
-import type { CardInformation, CardType } from '../../domain/types/card';
-
-const validateOwner = (owner: string) => {
-  if (/[^A-Za-z\s]/g.test(owner)) {
-    throw new Error('소유자 이름은 영어만 입력해주세요.');
-  }
-};
+import useOnChangeHandler from './hooks/useOnChangeHandler';
+import {
+  validateCardNumber,
+  validateExpirationDate,
+  validateMonth,
+  validateOwner,
+  validateYear,
+} from './validation/card';
+import { useCardContext } from '../../pages/CardRegistration/contexts/CardContext';
 
 type CardRegistrationFormProps = {
   setPageCardAlias: () => void;
   setCurrentId: React.Dispatch<React.SetStateAction<number>>;
-  cardType: CardType;
   openModal: () => void;
 };
 
@@ -31,11 +31,10 @@ type CardValidationError = {
   cardPassword: Error | null;
 };
 
-const CardRegistrationForm = ({ setPageCardAlias, setCurrentId, cardType, openModal }: CardRegistrationFormProps) => {
-  // TODO: CardInformation state들을 하나의 state로 묶기
-  const [cardNumber, setCardNumber] = useState<CardInformation['cardNumber']>(['', '', '', '']);
-  const [expirationDate, setExpirationDate] = useState<CardInformation['expirationDate']>(['', '']);
-  const [owner, setOwner] = useState<CardInformation['owner']>('');
+const CardRegistrationForm = ({ setPageCardAlias, setCurrentId, openModal }: CardRegistrationFormProps) => {
+  const { card, setCard } = useCardContext();
+  const { setCardList } = useCardListContext();
+
   const [cardError, setCardError] = useState<CardValidationError>({
     cardNumber: null,
     expirationDate: null,
@@ -44,73 +43,133 @@ const CardRegistrationForm = ({ setPageCardAlias, setCurrentId, cardType, openMo
     cardPassword: null,
   });
 
-  const { setCardList } = useCardListContext();
-
-  const onChangeCardNumber = useOnChangeHandler({
-    setState: setCardNumber,
-    count: 4,
-  });
-
-  const onChangeExpirationDate = useOnChangeHandler({
-    setState: setExpirationDate,
-    count: 2,
-  });
-
   const onSubmitCard: React.FormEventHandler = (e) => {
     e.preventDefault();
 
-    const newId = Date.now();
+    try {
+      validateExpirationDate(card.expirationDate);
 
-    setCurrentId(newId);
-    setCardList((prev) => [...prev, { id: newId, cardNumber, expirationDate, owner, cardType }]);
-    setPageCardAlias();
+      setCurrentId(card.id);
+      setCardList((prev) => [...prev, card]);
+      setPageCardAlias();
+    } catch (error) {
+      setCardError({
+        ...cardError,
+        expirationDate: error as Error,
+      });
+    }
   };
 
-  const submitDisabled =
-    cardError.cardNumber ||
-    cardError.cardPassword ||
-    cardError.owner ||
-    cardError.securityCode ||
-    cardError.expirationDate
-      ? true
-      : false;
+  const onChangeOwner: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    const owner = e.target.value;
+
+    try {
+      validateOwner(owner);
+
+      setCard((prev) => ({
+        ...prev,
+        owner,
+      }));
+      setCardError({
+        ...cardError,
+        owner: null,
+      });
+    } catch (error) {
+      setCardError({
+        ...cardError,
+        owner: error as Error,
+      });
+    }
+  };
+
+  const onChangeCardNumber = useOnChangeHandler({
+    key: 'cardNumber',
+    count: 4,
+    setCard,
+    setCardError,
+    validate: validateCardNumber,
+  });
+
+  const onChangeMonth: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    const month = e.target.value;
+
+    try {
+      validateMonth(month);
+
+      setCard((prev) => ({
+        ...prev,
+        expirationDate: { ...prev.expirationDate, month },
+      }));
+      setCardError({
+        ...cardError,
+        expirationDate: null,
+      });
+    } catch (error) {
+      setCardError({
+        ...cardError,
+        expirationDate: error as Error,
+      });
+    }
+  };
+
+  const onChangeYear: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    const year = e.target.value;
+
+    try {
+      validateYear(year);
+
+      setCard((prev) => ({
+        ...prev,
+        expirationDate: { ...prev.expirationDate, year },
+      }));
+      setCardError({
+        ...cardError,
+        expirationDate: null,
+      });
+    } catch (error) {
+      setCardError({
+        ...cardError,
+        expirationDate: error as Error,
+      });
+    }
+  };
+
+  const onBlurOwner: React.FocusEventHandler<HTMLInputElement> = (e) => {
+    const owner = e.target.value;
+
+    try {
+      validateOwner(owner);
+
+      setCardError({
+        ...cardError,
+        owner: null,
+      });
+    } catch (error) {
+      setCardError({
+        ...cardError,
+        owner: error as Error,
+      });
+    }
+  };
 
   return (
     <Styled.FormWrapper onSubmit={onSubmitCard}>
       <Styled.CardWrapper>
-        <Card card={{ cardType, owner, cardNumber, expirationDate }} onClick={openModal} />
+        <Card card={card} onClick={openModal} />
       </Styled.CardWrapper>
 
       <InputGroup>
-        <CardNumberInput onChange={onChangeCardNumber} />
+        <CardNumberInput cardNumber={card.cardNumber} onChange={onChangeCardNumber} />
         <ErrorMessage>{cardError.cardNumber?.message}</ErrorMessage>
       </InputGroup>
 
       <InputGroup>
-        <ExpirationDateInput onChange={onChangeExpirationDate} />
+        <ExpirationDateInput expirationDate={card.expirationDate} onChange={{ onChangeMonth, onChangeYear }} />
         <ErrorMessage>{cardError.expirationDate?.message}</ErrorMessage>
       </InputGroup>
 
       <InputGroup>
-        <CardOwnerInput
-          owner={owner}
-          onChange={(e) => {
-            try {
-              const owner = e.target.value;
-              validateOwner(owner);
-              setOwner(e.target.value);
-              setCardError({
-                ...cardError,
-                owner: null,
-              });
-            } catch (error) {
-              setCardError({
-                ...cardError,
-                owner: error as Error,
-              });
-            }
-          }}
-        />
+        <CardOwnerInput owner={card.owner} onChange={onChangeOwner} onBlur={onBlurOwner} />
         <ErrorMessage>{cardError.owner?.message}</ErrorMessage>
       </InputGroup>
 
@@ -123,7 +182,7 @@ const CardRegistrationForm = ({ setPageCardAlias, setCurrentId, cardType, openMo
         <CardPasswordInput />
         <ErrorMessage>{cardError.cardPassword?.message}</ErrorMessage>
       </InputGroup>
-      <SubmitButton disabled={submitDisabled}>다음</SubmitButton>
+      <SubmitButton disabled={false}>다음</SubmitButton>
     </Styled.FormWrapper>
   );
 };

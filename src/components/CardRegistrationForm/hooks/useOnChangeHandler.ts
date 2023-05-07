@@ -1,17 +1,39 @@
 const useOnChangeHandler = ({
-  setState,
+  key,
   count,
+  setCard,
+  setCardError,
+  validate,
 }: {
-  setState: React.Dispatch<React.SetStateAction<any>>;
+  key: string;
   count: number;
+  setCard: React.Dispatch<React.SetStateAction<any>>;
+  setCardError: React.Dispatch<React.SetStateAction<any>>;
+  validate: (value: string) => void;
 }) => {
   const generateOnChange = (index: number) => {
     return (e: React.ChangeEvent<HTMLInputElement>) => {
-      setState((prev: unknown[]) => {
-        const newState = [...prev];
-        newState[index] = e.target.value;
-        return newState;
-      });
+      try {
+        validate(e.target.value);
+        
+        setCard((prev: any) => {
+          const newState = [...prev[key]];
+          newState[index] = e.target.value;
+          return {
+            ...prev,
+            [key]: newState,
+          };
+        });
+        setCardError((prev: {}) => ({
+          ...prev,
+          [key]: null,
+        }));
+      } catch (error) {
+        setCardError((prev: {}) => ({
+          ...prev,
+          [key]: error as Error,
+        }));
+      }
     };
   };
 

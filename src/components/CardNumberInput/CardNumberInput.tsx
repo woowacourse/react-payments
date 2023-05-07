@@ -2,12 +2,14 @@ import { Input, InputBox } from '../Input';
 import styled from 'styled-components';
 import { Label } from '../Label';
 import useAutoFocus from '../../hooks/useAutoFocus';
+import type { CardInformation } from '../../domain/types/card';
 
 type CardNumberInputProps = {
+  cardNumber: CardInformation['cardNumber'];
   onChange: React.ChangeEventHandler<HTMLInputElement>[];
 };
 
-const CardNumberInput = ({ onChange }: CardNumberInputProps) => {
+const CardNumberInput = ({ cardNumber, onChange }: CardNumberInputProps) => {
   const [onFirstChange, onSecondChange, onThirdChange, onFourthChange] = onChange;
   const { inputRefs, focusNext } = useAutoFocus(4);
 
@@ -31,6 +33,7 @@ const CardNumberInput = ({ onChange }: CardNumberInputProps) => {
           ref={(node: HTMLInputElement) => {
             inputRefs.current[0] = node;
           }}
+          value={cardNumber[0]}
         />
         <Dash />
         <Input
@@ -48,6 +51,7 @@ const CardNumberInput = ({ onChange }: CardNumberInputProps) => {
           ref={(node: HTMLInputElement) => {
             inputRefs.current[1] = node;
           }}
+          value={cardNumber[1]}
         />
         <Dash />
         <Input
@@ -65,6 +69,7 @@ const CardNumberInput = ({ onChange }: CardNumberInputProps) => {
           ref={(node: HTMLInputElement) => {
             inputRefs.current[2] = node;
           }}
+          value={cardNumber[2]}
         />
         <Dash />
         <Input
@@ -79,6 +84,7 @@ const CardNumberInput = ({ onChange }: CardNumberInputProps) => {
           ref={(node: HTMLInputElement) => {
             inputRefs.current[3] = node;
           }}
+          value={cardNumber[3]}
         />
       </Styled.Box>
     </>

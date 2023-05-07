@@ -1,20 +1,15 @@
 import styled, { CSSProperties } from 'styled-components';
 import { MAIN_COLOR } from '../../domain/constants/card';
-import type { CardType } from '../../domain/types/card';
+import type { CardInformation } from '../../domain/types/card';
 
 type CardProps = {
-  card: {
-    cardType: CardType;
-    owner: string;
-    cardNumber: [string, string, string, string];
-    expirationDate: [string, string];
-  };
+  card: CardInformation;
   onClick?: () => void;
 };
 
 const Card = ({ card, onClick }: CardProps) => {
   const { cardType, cardNumber, owner, expirationDate } = card;
-  const [month, year] = expirationDate;
+  const { month, year } = expirationDate;
 
   return (
     <Styled.CardTemplate bgColor={MAIN_COLOR[cardType]} onClick={onClick}>

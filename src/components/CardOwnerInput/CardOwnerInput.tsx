@@ -5,9 +5,10 @@ import styled from 'styled-components';
 type CardOwnerInputProps = {
   owner: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
+  onBlur: React.FocusEventHandler<HTMLInputElement>;
 };
 
-const CardOwnerInput = ({ owner, onChange }: CardOwnerInputProps) => {
+const CardOwnerInput = ({ owner, onChange, onBlur }: CardOwnerInputProps) => {
   return (
     <>
       <Styled.LabelWrapper>
@@ -23,6 +24,7 @@ const CardOwnerInput = ({ owner, onChange }: CardOwnerInputProps) => {
           placeholder="이름을 입력해주세요."
           textAlign="center"
           onChange={onChange}
+          onBlur={onBlur}
           autoComplete="off"
           value={owner}
         />
