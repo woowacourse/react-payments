@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import styled from 'styled-components';
 import CardPreview from './CardPreview';
 import CardCompanyModal from './CardCompanyModal';
@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import { useCardDispatch } from '../../context/CardListContext';
 import useAddCardFormValidation from '../../hooks/useAddCardFormValidation';
 import { PAGE_PATH } from '../../constants';
+import AddCardSpinner from './AddCardSpinner';
 
 const AddCardContainer = () => {
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ const AddCardContainer = () => {
   const { isModalOpen, openModal, closeModal } = useModal(true);
   const { error, validateCardCompany, validateExpirationDate } = useAddCardFormValidation();
   const { cardCompany, cardOwner, cardNumbers, cardExpirationDate } = cardInformation;
+  const [loading, setLoading] = useState(false);
 
   const onClickLogo = (cardCompanyName: CardCompany) => {
     CardInformationActions.setCardCompany(cardCompanyName);
@@ -27,35 +29,43 @@ const AddCardContainer = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
 
     const cardID = getUniqueID();
 
     if (validateExpirationDate(cardExpirationDate) || validateCardCompany(cardCompany)) return;
 
-    setCard((prev) => {
-      return [...prev, { ...cardInformation, id: cardID }];
-    });
+    setCard((prev) => [...prev, { ...cardInformation, id: cardID }]);
 
-    navigate(PAGE_PATH.ADD_CARD_NAME, { state: { cardID } });
+    setTimeout(() => {
+      setLoading(false);
+      navigate(PAGE_PATH.ADD_CARD_NAME, { state: { cardID } });
+    }, 3000);
   };
 
   return (
     <AddCardContainerWrapper>
-      <CardCompanyButton onClick={openModal}>
-        <CardPreview
-          cardCompany={cardCompany}
-          cardNumbers={cardNumbers}
-          cardOwner={cardOwner}
-          cardExpirationDate={cardExpirationDate}
-        />
-      </CardCompanyButton>
-      {error.cardCompany && <ErrorMessage message="카드사를 선택해주세요." />}
-      <AddCardForm expirationError={error.cardExpirationDate} onSubmit={handleSubmit} />
-      <CardCompanyModal
-        isModalOpen={isModalOpen}
-        closeModal={closeModal}
-        onClickLogo={onClickLogo}
-      />
+      {loading ? (
+        <AddCardSpinner />
+      ) : (
+        <>
+          <CardCompanyButton onClick={openModal}>
+            <CardPreview
+              cardCompany={cardCompany}
+              cardNumbers={cardNumbers}
+              cardOwner={cardOwner}
+              cardExpirationDate={cardExpirationDate}
+            />
+          </CardCompanyButton>
+          {error.cardCompany && <ErrorMessage message="카드사를 선택해주세요." />}
+          <AddCardForm expirationError={error.cardExpirationDate} onSubmit={handleSubmit} />
+          <CardCompanyModal
+            isModalOpen={isModalOpen}
+            closeModal={closeModal}
+            onClickLogo={onClickLogo}
+          />
+        </>
+      )}
     </AddCardContainerWrapper>
   );
 };
@@ -80,6 +90,8 @@ const AddCardContainerWrapper = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex: 1;
+  padding: 0 40px;
 `;
 
 export default AddCardContainer;
