@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 
 import { Form, useNavigate } from 'react-router-dom';
 import { CardNumber } from '../cardNumber/CardNumber';
@@ -16,7 +16,7 @@ import {
   VALID_PASSWORD_REGEX,
   VALID_SECURITY_CODE_REGEX,
 } from '../../../utils/regexp';
-import { StyledMessage } from '../../pages/SuccessPage';
+import { StyledMessage } from '../../pages/SuccessPage.style';
 import styled, { keyframes } from 'styled-components';
 
 interface CardRegisterFormProps {

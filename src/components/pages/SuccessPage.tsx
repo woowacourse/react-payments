@@ -1,6 +1,5 @@
 import { useContext, useState } from 'react';
 
-import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import useCardList from '../../hooks/useCardList';
 import Card from '../@common/card/Card';
@@ -10,6 +9,13 @@ import Input from '../@common/input/Input';
 import CreditCardContextType from '../../@types/creditCardContextType';
 import { KOR_NAME_BY_CARD_COMPANY } from '../../@types/cardCompany';
 import Loading from '../loading/Loading';
+import {
+  CardInputContainer,
+  CardListSection,
+  StyleButton,
+  StyleErrorMessage,
+  StyledMessage,
+} from './SuccessPage.style';
 
 function SuccessPage() {
   const navigation = useNavigate();
@@ -76,54 +82,3 @@ function SuccessPage() {
 }
 
 export default SuccessPage;
-
-const CardListSection = styled.section`
-  margin: auto;
-  height: 648px;
-  align-items: center;
-  display: flex;
-  gap: 10px;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-export const StyledMessage = styled.p`
-  padding-top: 100px;
-  font-size: 24px;
-  font-weight: 400;
-  text-align: center;
-  margin-bottom: 50px;
-`;
-
-const StyleErrorMessage = styled.p`
-  margin-top: 10px;
-  font-size: 12px;
-  color: red;
-  text-align: center;
-`;
-
-const StyleButton = styled.button`
-  width: 51px;
-
-  background: none;
-  border: none;
-  box-sizing: border-box;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 16px;
-
-  margin: 0 0 0 auto;
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
-const CardInputContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  row-gap: 40px;
-  position: relative;
-  right: 0;
-`;
