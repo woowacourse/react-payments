@@ -4,15 +4,21 @@
 
 ## [배포 페이지](https://guridaek.github.io/react-payments/)
 
-## [스토리북](https://644e3c3e4b0966ee7c0c88be-ufptltvjyx.chromatic.com)
+## [스토리북](https://644e3c3e4b0966ee7c0c88be-felnakybab.chromatic.com/)
 
-## 로컬 실행 방법
+## 패키지 설치
+
+```
+npm i
+```
+
+## 로컬 실행
 
 ```
 npm start
 ```
 
-## 스토리북 실행 방법
+## 스토리북 실행
 
 ```
 npm run storybook
