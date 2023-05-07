@@ -28,6 +28,12 @@ export type AddCardFormProps = {
   onSubmit: () => void;
 };
 
+type FocusFormInputParams = {
+  formInputList: HTMLFormElement[];
+  currentInput: HTMLFormElement;
+  direction: number;
+};
+
 const NOT_ALPHABET_REGEX = /[^A-Za-z\s]/gi;
 const NOT_NUMBER_REGEX = /[^0-9]/gi;
 
@@ -99,16 +105,12 @@ function AddCardInfo({ onSubmit }: AddCardFormProps) {
     openModal();
   };
 
-  const focusFormInput = (
-    formInputList: HTMLFormElement[],
-    curInput: HTMLFormElement,
-    direction: number,
-  ) => {
+  const focusFormInput = ({ formInputList, currentInput, direction }: FocusFormInputParams) => {
     const formInputArr = [...formInputList];
-    const currentIndex = formInputArr.indexOf(curInput);
+    const currentIndex = formInputArr.indexOf(currentInput);
     const focusTarget = formInputArr[currentIndex + direction];
 
-    if (!focusTarget || focusTarget.name !== curInput.name) return;
+    if (!focusTarget || focusTarget.name !== currentInput.name) return;
 
     focusTarget.focus();
   };
@@ -119,7 +121,13 @@ function AddCardInfo({ onSubmit }: AddCardFormProps) {
 
     if (key !== 'Backspace' || value !== '') return;
 
-    focusFormInput(formInputList, target as HTMLFormElement, -1);
+    const PREV = -1;
+
+    focusFormInput({
+      formInputList: formInputList,
+      currentInput: target as HTMLFormElement,
+      direction: PREV,
+    });
   };
 
   const handleMoveNextFocus: ChangeEventHandler<HTMLFormElement> = (e) => {
@@ -130,7 +138,13 @@ function AddCardInfo({ onSubmit }: AddCardFormProps) {
 
     if (filteredValue.length !== maxLength) return;
 
-    focusFormInput(formInputList, target, 1);
+    const NEXT = 1;
+
+    focusFormInput({
+      formInputList: formInputList,
+      currentInput: target,
+      direction: NEXT,
+    });
   };
 
   return (
