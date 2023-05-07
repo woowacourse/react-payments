@@ -39,7 +39,7 @@ export default function CardInputForm(props: Props) {
     
     addNewCard({ ...card });
 
-    navigate("/register/success", { replace: true });
+    navigate("/register/pending", { replace: true });
   };
 
   const modalClickHandler = (company: CardCompany) => {

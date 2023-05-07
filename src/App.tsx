@@ -10,6 +10,7 @@ import { CreditCard, getDefaultCreditCard } from "./type/CreditCard";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import useStateObject from "./hook/useStateObject";
 import InputSuccessPage from "./component/InputSuccessPage/InputSuccessPage";
+import RegisterPendingPage from "./component/RegisterPendingPage/RegisterPendingPage";
 
 function App() {
   const [cardList, setCardList] = useState<CreditCard[]>([]);
@@ -31,6 +32,7 @@ function App() {
             path="/register"
             element={<CardInputPage addNewCard={setNewCardInfo} />}
           />
+          <Route path="/register/pending" element={<RegisterPendingPage/>}/>
           <Route
             path="/register/success"
             element={<InputSuccessPage card={newCard} setCardInfo={setNewCardInfo} />}
