@@ -43,14 +43,14 @@ export const BANK_LIST = [
 ];
 
 export const CARD_BACKGROUND_COLORS: Record<string, string> = {
-  현대카드: '#333333',
-  카카오뱅크: '#FFE600',
-  BC카드: '#F04652',
-  신한카드: '#0046FF',
-  우리카드: '#027BC8',
-  롯데카드: '#ED1C23',
-  하나카드: '#009490',
-  국민카드: '#6F655B',
+  현대카드: 'linear-gradient(45deg, #333333, #999999)',
+  카카오뱅크: 'linear-gradient(45deg, #Fdd900, #FFfd00)',
+  BC카드: 'linear-gradient(45deg, #Fd4652, #fdaaaa)',
+  신한카드: 'linear-gradient(45deg, #00464a, #0a44fa)',
+  우리카드: 'linear-gradient(45deg, #027BC8, #96c786)',
+  롯데카드: 'linear-gradient(60deg, #fD1a11, #a01300)',
+  하나카드: 'linear-gradient(45deg, #00464a, #009490)',
+  국민카드: 'linear-gradient(45deg, #6F655B, #555555)',
 };
 
 export const CARD_FONT_COLOR: Record<string, string> = {
@@ -60,6 +60,6 @@ export const CARD_FONT_COLOR: Record<string, string> = {
   신한카드: '#FFFFFF',
   우리카드: 'FFFFFF',
   롯데카드: '#FFFFFF',
-  하나카드: '#000000',
+  하나카드: '#ffffff',
   국민카드: '#FFFFFF',
 };
