@@ -9,7 +9,7 @@ const { NEXT, PREV } = DIRECTION;
 
 const meta = {
   component: PasswordInput,
-  title: "Input/Password",
+  title: "Form Inputs/Password",
 } satisfies Meta<typeof PasswordInput>;
 
 export default meta;

@@ -4,7 +4,7 @@ import CardInfoProvider from "components/provider/CardInfoProvider";
 
 const meta = {
   component: NameInput,
-  title: "Input/Name",
+  title: "Form Inputs/Name",
 } satisfies Meta<typeof NameInput>;
 
 export default meta;

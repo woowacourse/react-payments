@@ -50,7 +50,7 @@ const handleKeyDown = (event: KeyboardEvent<HTMLFormElement>) => {
 
 const meta = {
   component: CardNumberInput,
-  title: "Input/CardNumbers",
+  title: "Form Inputs/CardNumbers",
 } satisfies Meta<typeof CardNumberInput>;
 
 export default meta;

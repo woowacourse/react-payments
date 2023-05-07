@@ -4,7 +4,7 @@ import CardInfoProvider from "components/provider/CardInfoProvider";
 
 const meta = {
   component: SecurityCodeInput,
-  title: "Input/SecurityCode",
+  title: "Form Inputs/SecurityCode",
 } satisfies Meta<typeof SecurityCodeInput>;
 
 export default meta;

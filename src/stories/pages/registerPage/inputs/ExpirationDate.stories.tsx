@@ -11,7 +11,7 @@ const { NEXT, PREV } = DIRECTION;
 
 const meta = {
   component: ExpirationDateInput,
-  title: "Input/ExpirationDate",
+  title: "Form Inputs/ExpirationDate",
 } satisfies Meta<typeof ExpirationDateInput>;
 
 export default meta;
