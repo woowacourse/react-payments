@@ -1,8 +1,11 @@
 import styled, { css } from "styled-components";
 import Loader from "components/Loader";
 import { CardLoader } from "components/svg";
+import useSetCardInfo from "hooks/useSetCardInfo";
 
 const LoadingPage = () => {
+  useSetCardInfo();
+
   return (
     <S.Wrapper>
       <Loader message="카드를 등록중입니다." messageStyle={messageStyle}>

@@ -30,7 +30,14 @@ const App = () => {
             </CardInfoProvider>
           }
         />
-        <Route path="/registering" element={<LoadingPage />} />
+        <Route
+          path="/registering"
+          element={
+            <CardInfoProvider>
+              <LoadingPage />
+            </CardInfoProvider>
+          }
+        />
         <Route path="/got-lost" element={<GotLost />} />
         <Route path="*" element={<Navigate replace to="/got-lost" />} />
       </Routes>
