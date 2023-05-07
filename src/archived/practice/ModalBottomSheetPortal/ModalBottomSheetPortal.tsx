@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom';
-import ModalBottomSheet from '../../archived/ModalBottomSheet/ModalBottomSheet';
+import ModalBottomSheet from '../../ModalBottomSheet/ModalBottomSheet';
 
 /**
  * 실습용 컴포넌트입니다. 실제 프로젝트에서 랜더링 되지는 않아요!

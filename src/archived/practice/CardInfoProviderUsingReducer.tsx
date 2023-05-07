@@ -3,8 +3,8 @@
  * 실제 프로젝트에서 사용되지는 않았습니다.
  */
 import { createContext, useReducer } from 'react';
-import { saveCardToLocalStorage } from '../domains/cardLocalStorage';
-import type { FormInputValueType, CardIssuerType, CardInfo } from '../types';
+import { saveCardToLocalStorage } from '../../domains/cardLocalStorage';
+import type { FormInputValueType, CardIssuerType, CardInfo } from '../../types';
 
 type CardInfoState = {
   cardIssuer: CardIssuerType;
