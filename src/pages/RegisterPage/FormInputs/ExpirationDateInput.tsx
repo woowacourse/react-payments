@@ -9,7 +9,7 @@ import { StyledHyphen } from 'components/Hypen';
 import { Expiration } from 'types/Card';
 import { showDateHyphen } from 'utils/hyphenStyles';
 import { StyledCaption } from 'components/Caption';
-import { showDateCaption } from 'utils/CaptionStyles';
+import { showDateCaption } from 'utils/captionStyles';
 
 const ExpirationDateInput = () => {
   const { date, setDate } = useContext(AddCardContext);

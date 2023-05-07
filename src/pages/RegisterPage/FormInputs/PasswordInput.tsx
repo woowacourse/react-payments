@@ -5,7 +5,7 @@ import { useInputHandler } from 'hooks/useInputHandler';
 import { StyledInput } from 'components/Input';
 import InputBox from 'components/InputBox';
 import { StyledCaption } from 'components/Caption';
-import { showPasswordCaption } from 'utils/CaptionStyles';
+import { showPasswordCaption } from 'utils/captionStyles';
 
 const PasswordInput = () => {
   const [password, setPassword] = useState({

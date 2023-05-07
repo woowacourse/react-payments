@@ -5,7 +5,7 @@ import { useInputHandler } from 'hooks/useInputHandler';
 import { StyledInput } from 'components/Input';
 import { StyledInputBox } from 'components/InputBox';
 import { StyledCaption } from 'components/Caption';
-import { showCodeCaption } from 'utils/CaptionStyles';
+import { showCodeCaption } from 'utils/captionStyles';
 
 const SecurityCodeInput = () => {
   const [code, setCode] = useState({

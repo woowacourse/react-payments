@@ -9,7 +9,7 @@ import { StyledHyphen } from 'components/Hypen';
 import { CardNumber } from 'types/Card';
 import { showNumberHyphen } from 'utils/hyphenStyles';
 import { StyledCaption } from 'components/Caption';
-import { showNumberCaption } from 'utils/CaptionStyles';
+import { showNumberCaption } from 'utils/captionStyles';
 
 const CardNumberInput = () => {
   const { cardNumber, setCardNumber } = useContext(AddCardContext);
