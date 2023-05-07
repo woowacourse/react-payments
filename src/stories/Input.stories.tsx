@@ -127,3 +127,54 @@ FirstCardNumberInputSuccess.play = async ({ canvasElement }) => {
   });
   input.blur();
 };
+
+export const OwnerInput: Story = (args: UseInputProps) => {
+  const { ...rest } = args;
+  const owner = useInput("", { name: "owner" });
+  return <Input {...rest} {...owner} />;
+};
+
+OwnerInput.args = {
+  type: "text",
+  isNumber: false,
+  shape: undefined,
+  maxLength: 30,
+  required: false,
+  pattern: REGEX_PATTERN["OWNER"],
+};
+
+export const OwnerInputWithErrorMessage: Story = (args: UseInputProps) => {
+  const { ...rest } = args;
+  const owner = useInput("", { name: "owner" });
+  return <Input {...rest} {...owner} />;
+};
+
+OwnerInputWithErrorMessage.args = OwnerInput.args;
+
+OwnerInputWithErrorMessage.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  const input = canvas.getByRole("textbox") as HTMLInputElement;
+  input.focus();
+  await userEvent.type(input, "E4YK", {
+    delay: 500,
+  });
+  input.blur();
+};
+
+export const OwnerInputSuccess: Story = (args: UseInputProps) => {
+  const { ...rest } = args;
+  const owner = useInput("", { name: "owner" });
+  return <Input {...rest} {...owner} />;
+};
+
+OwnerInputSuccess.args = OwnerInput.args;
+
+OwnerInputSuccess.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  const input = canvas.getByRole("textbox") as HTMLInputElement;
+  input.focus();
+  await userEvent.type(input, "EYK", {
+    delay: 500,
+  });
+  input.blur();
+};
