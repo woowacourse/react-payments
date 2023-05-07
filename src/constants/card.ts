@@ -24,7 +24,9 @@ export const COLOR = {
   BLACK: 'black',
   GREY100: '#ECEBF1',
   GREY200: '#333333',
+  TOSS_GREY: '#202632',
   GOLD: '#CBBA64',
   RED: '#F04651',
   BLUE: '#0080FF',
+  TOSS_BLUE: '#0064FF',
 } as const;

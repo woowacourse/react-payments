@@ -17,7 +17,7 @@ const RegisterForm = () => {
   const handleFormSubmitClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
-    navigation(PATHNAME.NICKNAME);
+    navigation(PATHNAME.LOADING);
   };
 
   return (
