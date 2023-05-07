@@ -6,9 +6,11 @@ import { cardCompanyEnglishToKorean } from "../../type/CardCompany";
 import styles from "./InputSuccessPage.module.css";
 import { useNavigate } from "react-router-dom";
 import { useCreditCardContext } from "../../context/CreditCardContext";
+import { useCardListContext } from "../../context/CardListContext";
 
 const InputSuccessPage = () => {
-  const { card, setCardInfo } = useCreditCardContext();
+  const { card } = useCreditCardContext();
+  const { addNewCard } = useCardListContext();
 
   const [nickname, setNickname] = useState('');
   const navigate = useNavigate();
@@ -17,8 +19,9 @@ const InputSuccessPage = () => {
 
   const lengthParser = (value: string) => value.slice(0, 12);
   const clickHandler = () => {
-    if (nickname) setCardInfo({ nickname });
-    else setCardInfo({ nickname: `${companyKoreanName} ${card.number[3]}` });
+    const nicknameValue = nickname ? nickname : `${companyKoreanName} ${card.number[3]}`;
+
+    addNewCard({...card,  nickname: nicknameValue });
   
     navigate("/", { replace: true });
   };
