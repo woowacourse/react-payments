@@ -15,6 +15,7 @@ export const StyledLabel = styled.label`
   letter-spacing: -0.085em;
   color: var(--primary-text-color);
   margin-top: 16px;
+  margin-bottom: 0px;
 `;
 
 export default FormLabel;

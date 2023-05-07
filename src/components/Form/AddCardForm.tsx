@@ -173,16 +173,12 @@ function AddCardInfo({ onSubmit }: AddCardFormProps) {
 }
 
 const CardWrapper = styled.div`
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin: 37px 0 10px 10px;
 `;
 
 const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
-  Label {
-    margin-bottom: 12px;
-  }
 `;
 
 const FormSubmitButton = styled.button`

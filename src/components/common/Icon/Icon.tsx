@@ -5,8 +5,6 @@ export interface IconProps extends React.ComponentPropsWithoutRef<'span'> {
   name?: string;
 }
 
-type Ref = HTMLSpanElement;
-
 export const Icon = ({ imgSrc, name, ...props }: IconProps) => {
   return (
     <S.Icon {...props}>

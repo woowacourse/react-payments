@@ -23,6 +23,7 @@ const backdropAppear = keyframes`
 export const Styled = {
   Modal: styled.dialog`
     display: flex;
+    flex-direction: column;
     position: fixed;
     bottom: 0;
     height: 227px;
@@ -31,11 +32,6 @@ export const Styled = {
     background-color: white;
     overflow: scroll;
     animation: ${bottomSheetAppear} 0.5s ease-in;
-
-    button {
-      position: absolute;
-      right: 0;
-    }
   `,
   ModalBackdrop: styled.div`
     display: flex;
@@ -53,6 +49,8 @@ export const Styled = {
   `,
 
   ModalCloseButton: styled.button`
+    position: absolute;
+    right: 0;
     width: 20px;
     height: 20px;
     border: none;

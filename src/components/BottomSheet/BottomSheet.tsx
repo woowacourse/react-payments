@@ -12,10 +12,18 @@ export interface ModalProps {
 
 export const BottomSheet = ({ onClick, closeModal }: ModalProps) => {
   const handleSelectCompany: MouseEventHandler<HTMLSpanElement> = (e) => {
+    selectCompany(e);
+    closeModal();
+  };
+
+  const handleOnMouseEnter: MouseEventHandler<HTMLSpanElement> = (e) => {
+    selectCompany(e);
+  };
+
+  const selectCompany: MouseEventHandler<HTMLSpanElement> = (e) => {
     if (isCompanyName(e.currentTarget.textContent!)) {
       const company: COMPANY_NAME = e.currentTarget.textContent;
       onClick(company);
-      closeModal();
     }
   };
 
@@ -28,6 +36,7 @@ export const BottomSheet = ({ onClick, closeModal }: ModalProps) => {
             id={value.name}
             imgSrc={value.iconSvgPath}
             name={value.name}
+            onMouseEnter={handleOnMouseEnter}
             onClick={handleSelectCompany}
           />
         );
