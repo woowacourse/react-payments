@@ -71,7 +71,7 @@ const Numbers = styled.div`
   height: 12px;
   font-size: 12px;
   text-align: left;
-  letter-spacing: 3.2px;
+  letter-spacing: 1.1px;
 `;
 
 const InfoWrapper = styled.div`
