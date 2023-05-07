@@ -25,7 +25,7 @@ const CardRegisterForm = () => {
   const { isFormFilled } = useRequiredCardInfo();
 
   const navigate = useNavigate();
-  const handlePageChange = () => navigate("/completion");
+  const handlePageChange = () => navigate("/add-card-nickname");
 
   const handleFocusNext = ({ target }: ChangeEvent<HTMLFormElement>) => {
     if (shouldPreventFocusMovement(target)) return;

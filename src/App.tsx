@@ -23,7 +23,7 @@ const App = () => {
           }
         />
         <Route
-          path="/completion"
+          path="/add-card-nickname"
           element={
             <CardInfoProvider>
               <LastPage />
