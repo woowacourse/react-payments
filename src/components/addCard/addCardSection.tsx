@@ -1,7 +1,7 @@
 import { AddCardForm } from "./addCardForm";
 import { BankMenu } from "../bankModal/bankMenu";
 import { Card } from "../@common/card/card";
-import { Modal } from "../@common/modal/modalBox";
+import { Modal } from "navrary-modal";
 import { useCardInfoContext } from "../../hooks/useCardInfoContext";
 
 export function AddCardSection() {
