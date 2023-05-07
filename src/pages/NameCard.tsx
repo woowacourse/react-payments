@@ -17,7 +17,15 @@ const NameCard = () => {
     setName(e.target.value);
   };
 
-  const handleButtonClicked = (routerPath: string) => () => {
+  const handleNameKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") registerName(ROUTER_PATH.MyCard);
+  };
+
+  const handleButtonClicked = () => {
+    registerName(ROUTER_PATH.MyCard);
+  };
+
+  const registerName = (routerPath: string) => {
     setIsLoading(true);
     setTimeout(() => {
       targetCard.name = name;
@@ -41,15 +49,13 @@ const NameCard = () => {
             <NameInput
               id="cardName"
               value={name}
+              autoFocus
               onChange={handleNameChanged}
+              onKeyDown={handleNameKeyDown}
               placeholder="ex) 엄마카드"
             />
           </NameInputWrapper>
-          <Button
-            isShown={true}
-            type="button"
-            onClick={handleButtonClicked(ROUTER_PATH.MyCard)}
-          >
+          <Button isShown={true} type="button" onClick={handleButtonClicked}>
             확인
           </Button>
         </>
