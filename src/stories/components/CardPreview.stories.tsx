@@ -2,17 +2,17 @@ import { Meta, StoryObj } from "@storybook/react";
 import CardPreviewComponent from "components/CardPreview";
 
 const baseCardInfo = {
-  code: "123",
-  month: "12",
-  name: "",
-  nickname: "🥰",
   number1: "1232",
   number2: "1312",
   number3: "3123",
   number4: "2131",
+  month: "12",
+  year: "31",
+  name: "YUMMY",
+  code: "123",
   password1: "1",
   password2: "2",
-  year: "31",
+  nickname: "🥰",
 };
 
 const bc = { cardCompany: "BC카드", ...baseCardInfo };
@@ -38,16 +38,17 @@ export const CardPreview: Story = {
   args: {
     cardInfo: {
       cardCompany: "현대카드",
-      number1: "1234",
-      number2: "1234",
-      number3: "1234",
-      number4: "1234",
-      month: "02",
-      year: "24",
+      number1: "1232",
+      number2: "1312",
+      number3: "3123",
+      number4: "2131",
+      month: "12",
+      year: "31",
       name: "YUMMY",
-      code: "",
-      password1: "",
-      password2: "",
+      code: "123",
+      password1: "1",
+      password2: "2",
+      nickname: "🥰",
     },
   },
 
