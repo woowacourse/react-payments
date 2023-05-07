@@ -26,6 +26,8 @@ export const Card_Nickname_Modal: Story = {
     isModalOpen: false,
     closeModal: () => {},
     handleNickname: () => {},
-    submitData: () => {},
+    submitData: (e: React.FormEvent) => {
+      e.preventDefault();
+    },
   },
 };
