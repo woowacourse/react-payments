@@ -19,10 +19,11 @@ export const validateExpiredDate = (value: string) => {
     return "숫자만 입력해 주세요.";
   if (monthNumber < 1 || monthNumber > 12)
     return "유효한 달(월)을 입력해 주세요.";
+  if (yearNumber < today.getFullYear()) return "만료일이 지난 카드입니다.";
+  if (yearNumber === today.getFullYear() && monthNumber < today.getMonth())
+    return "만료일이 지난 카드입니다.";
   if (yearNumber < today.getFullYear() || yearNumber > today.getFullYear() + 5)
     return "유효한 년(해)을 입력해 주세요.";
-  if (yearNumber === today.getFullYear() && monthNumber <= today.getMonth())
-    return "만료일이 지난 카드입니다.";
   if (value.length !== CARD_INPUT_LENGTH.expiredDate)
     return "카드에 기입된 만료일을 모두 입력해 주세요.";
   return "";

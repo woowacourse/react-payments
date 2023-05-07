@@ -83,6 +83,7 @@ const CardInputForm = ({ card, setNewCard, onSubmit }: CardInputFormType) => {
           카드 번호 <span>*</span>
         </label>
         <CardInput
+          id="cardNumber"
           value={card.cardNumber}
           placeholder="카드 번호를 입력해 주세요."
           width="318px"
@@ -101,6 +102,7 @@ const CardInputForm = ({ card, setNewCard, onSubmit }: CardInputFormType) => {
           만료일 <span>*</span>
         </label>
         <CardInput
+          id="expiredDate"
           value={card.expiredDate}
           placeholder="MM / YY"
           width="137px"
@@ -119,6 +121,7 @@ const CardInputForm = ({ card, setNewCard, onSubmit }: CardInputFormType) => {
           <span>{card.ownerName.length}/14</span>
         </OwnerNameLabelWrapper>
         <CardInput
+          id="ownerName"
           value={card.ownerName}
           width="318px"
           ref={inputRefs[CARD_INPUT_REFS_INDEX.ownerName]}
@@ -136,6 +139,7 @@ const CardInputForm = ({ card, setNewCard, onSubmit }: CardInputFormType) => {
         </label>
         <CvcInputWrapper>
           <CardInput
+            id="cvc"
             value={card.cvc}
             width="84px"
             isSecured
@@ -159,6 +163,7 @@ const CardInputForm = ({ card, setNewCard, onSubmit }: CardInputFormType) => {
         </label>
         <PasswordInputWrapper>
           <CardInput
+            id="password"
             value={password[PASSWORD_DIGIT_INDEX.FIRST]}
             width="42px"
             isSecured
