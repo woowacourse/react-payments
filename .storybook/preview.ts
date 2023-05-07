@@ -23,7 +23,7 @@ const preview: Preview = {
     },
     viewport: {
       viewports: customViewports,
-      defaultViewport: 'someDefault',
+      defaultViewport: 'Default',
     },
   },
 };
