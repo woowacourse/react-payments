@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { getCustomElement } from "../../../utils/custumElement";
+import { getCustomElement } from "../../../utils/customElement";
 
 interface InputLabelProps {
   render?: () => JSX.Element;

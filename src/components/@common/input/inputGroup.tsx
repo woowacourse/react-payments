@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { ERROR_MESSAGE } from "../../../constants/inputInfo";
 import { useCheckLength } from "../../../hooks/useCheckLength";
-import { getCustomElement } from "../../../utils/custumElement";
+import { getCustomElement } from "../../../utils/customElement";
 
 interface InputGroupProps {
   children: React.ReactElement | React.ReactElement[];

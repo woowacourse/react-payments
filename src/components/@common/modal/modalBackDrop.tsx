@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import styled from "styled-components";
 import { ModalContext } from "../../../contexts/modal";
-import { getCustomElement } from "../../../utils/custumElement";
+import { getCustomElement } from "../../../utils/customElement";
 
 interface ModalBackDropProps {
   asChild?: boolean;
