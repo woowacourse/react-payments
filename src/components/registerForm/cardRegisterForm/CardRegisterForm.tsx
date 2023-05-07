@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { Form, useNavigate } from 'react-router-dom';
 import { CardNumber } from '../cardNumber/CardNumber';
@@ -16,9 +16,17 @@ import {
   VALID_PASSWORD_REGEX,
   VALID_SECURITY_CODE_REGEX,
 } from '../../../utils/regexp';
+import { StyledMessage } from '../../pages/SuccessPage';
+import styled, { keyframes } from 'styled-components';
 
-function CardRegisterForm() {
+interface CardRegisterFormProps {
+  isLoading: boolean;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function CardRegisterForm({ isLoading, setIsLoading }: CardRegisterFormProps) {
   const navigation = useNavigate();
+
   const { creditCard } = useContext(CreditCardContext) as CreditCardContextType;
   const { cardNumber, securityCode, password, expirationDate } = creditCard;
 
@@ -29,26 +37,48 @@ function CardRegisterForm() {
     VALID_SECURITY_CODE_REGEX.test(securityCode) &&
     VALID_PASSWORD_REGEX.test(password.join(''));
 
-  const _onSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
+    setIsLoading(true);
 
-    navigation('/register-success');
+    setTimeout(() => {
+      setIsLoading(false);
+      navigation('/register-success');
+    }, 3000);
   };
 
   return (
-    <Form onSubmit={_onSubmit}>
-      <CardNumber />
-      <ExpirationDate />
-      <OwnerNameInput />
-      <SecurityCode />
-      <CardPassword />
-      {hasShowButton && (
-        <div style={{ display: 'flex', justifyContent: 'end' }}>
-          <NextButton role="button">다음</NextButton>
-        </div>
+    <>
+      {!isLoading ? (
+        <Form onSubmit={handleSubmit}>
+          <CardNumber />
+          <ExpirationDate />
+          <OwnerNameInput />
+          <SecurityCode />
+          <CardPassword />
+          {hasShowButton && (
+            <div style={{ display: 'flex', justifyContent: 'end' }}>
+              <NextButton role="button">다음</NextButton>
+            </div>
+          )}
+        </Form>
+      ) : (
+        <StyledRegisterMessage>카드를 등록중입니다.</StyledRegisterMessage>
       )}
-    </Form>
+    </>
   );
 }
+
+const fadeOut = keyframes`
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+`;
+const StyledRegisterMessage = styled(StyledMessage)`
+  animation: ${fadeOut} 2s linear forwards;
+`;
 
 export default CardRegisterForm;

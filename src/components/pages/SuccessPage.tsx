@@ -8,6 +8,7 @@ import Card from '../@common/card/Card';
 import { CreditCardContext } from '../../contexts/CreditCardContext';
 import Input from '../@common/input/Input';
 import CreditCardContextType from '../../@types/creditCardContextType';
+import { KOR_NAME_BY_CARD_COMPANY } from '../../@types/cardCompany';
 
 function SuccessPage() {
   const navigation = useNavigate();
@@ -22,7 +23,7 @@ function SuccessPage() {
   return (
     <CardListSection>
       <CardInputContainer>
-        <StyledMessage>카드등록이 완료되었습니다.</StyledMessage>
+        <StyledMessage>카드 별칭을 정해주세요</StyledMessage>
 
         <Card
           ownerName={ownerName}
@@ -38,7 +39,7 @@ function SuccessPage() {
               if (!setCreditCard) return;
               setCreditCard('cardAlias', alias);
             }}
-            placeholder="카드 별칭을 입력해주세요."
+            placeholder={KOR_NAME_BY_CARD_COMPANY[cardCompany]}
           ></Input>
           {!isValid && (
             <StyleErrorMessage>{'1글자 이상 10글자 이하로 입력해주세요.'}</StyleErrorMessage>
@@ -77,12 +78,12 @@ const CardListSection = styled.section`
   justify-content: space-between;
 `;
 
-const StyledMessage = styled.p`
+export const StyledMessage = styled.p`
   padding-top: 100px;
   font-size: 24px;
   font-weight: 400;
   text-align: center;
-  margin-bottom: 36px;
+  margin-bottom: 50px;
 `;
 
 const StyleErrorMessage = styled.p`

@@ -1,7 +1,7 @@
 import Card from '../@common/card/Card';
 import { CreditCardContext } from '../../contexts/CreditCardContext';
 import CardRegisterForm from '../registerForm/cardRegisterForm/CardRegisterForm';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 
 import CreditCardContextType from '../../@types/creditCardContextType';
 
@@ -11,6 +11,7 @@ import SelectCompanyModal from '../registerForm/selectCompanyModal/SelectCompany
 function RegisterPage() {
   const { creditCard } = useContext(CreditCardContext) as CreditCardContextType;
   const { cardNumber, cardCompany, ownerName, expirationDate } = creditCard;
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <>
@@ -21,13 +22,14 @@ function RegisterPage() {
             ownerName={ownerName}
             expirationDate={expirationDate}
             cardCompany={cardCompany}
+            className={isLoading ? 'card-loading' : ''}
           />
         }
         isShow={true}
       >
         <SelectCompanyModal />
       </Modal>
-      <CardRegisterForm />
+      <CardRegisterForm isLoading={isLoading} setIsLoading={setIsLoading} />
     </>
   );
 }
