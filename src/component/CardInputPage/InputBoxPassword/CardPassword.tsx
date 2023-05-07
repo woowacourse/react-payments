@@ -6,6 +6,7 @@ import { makeAppropriatePassword } from "../../../util/trans";
 import { nowStatus } from "../../../type";
 
 import "./cardPassword.css";
+import { INPUT_LENGTH_LIMIT } from "../../../CONSTANT";
 
 interface CardPasswordProps {
   changeEachPasswordStatus: (partIndex: number, state: nowStatus) => void;
@@ -23,7 +24,10 @@ export default function CardPassword(props: CardPasswordProps) {
 
   const onChangePassword = (partIndex: number) => {
     return (e: ChangeEvent<HTMLInputElement>) => {
-      const userPassword = e.target.value.slice(0, 1);
+      const userPassword = e.target.value.slice(
+        0,
+        INPUT_LENGTH_LIMIT.MAX_EACH_PASSWORD
+      );
       const appropriatePassword = makeAppropriatePassword(userPassword);
 
       if (appropriatePassword !== userPassword) {

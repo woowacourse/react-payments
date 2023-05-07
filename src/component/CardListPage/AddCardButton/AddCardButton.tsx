@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 
 import "./addCardButton.css";
+import { ARIA_LABEL_MESSAGE } from "../../../CONSTANT";
 
 export default function AddCardButton() {
   return (
     <Link
       to="/CardInputPage"
       className="add-card-button"
-      aria-label="카드 추가를 위한 입력 폼으로 가기"
+      aria-label={ARIA_LABEL_MESSAGE.GO_ADD_CARD_FORM}
     >
       <svg
         className="add-card-button-icon"

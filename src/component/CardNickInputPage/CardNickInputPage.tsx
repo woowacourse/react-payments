@@ -8,6 +8,7 @@ import { CreditCard } from "../../type";
 import InputBoxNick from "./InputBoxNick/InputBoxNick";
 
 import "./cardNickInputPage.css";
+import { ARIA_LABEL_MESSAGE, EXPLANATION_MESSAGE } from "../../CONSTANT";
 
 interface CardNickInputPageProps {
   card: CreditCard;
@@ -26,7 +27,9 @@ export default function CardNickInputPage({
 
   return (
     <section className="card-nick-input-section">
-      <p className="card-nick-input-direction">카드 등록이 완료되었습니다</p>
+      <p className="card-nick-input-direction">
+        {EXPLANATION_MESSAGE.BE_REGISTERED_CARD}
+      </p>
       <CardPreview
         className="nick-input-section-card-preview"
         card={card}
@@ -36,8 +39,11 @@ export default function CardNickInputPage({
       <Link
         to="/CardListPage"
         className="card-nick-input-next-button-container"
+        aria-label={ARIA_LABEL_MESSAGE.END_PAGE}
       >
-        <Button style={{ float: "right" }}>확인</Button>
+        <Button style={{ float: "right" }}>
+          {EXPLANATION_MESSAGE.END_BUTTON}
+        </Button>
       </Link>
     </section>
   );

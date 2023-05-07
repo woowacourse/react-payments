@@ -2,7 +2,13 @@ import { useState, ChangeEvent } from "react";
 
 import Input from "../../common/Input";
 
-import { CARD_ERROR_MESSAGE, GUIDE_MESSAGE } from "../../../CONSTANT";
+import {
+  ARIA_LABEL_MESSAGE,
+  CARD_ERROR_MESSAGE,
+  DIRECTION_MESSAGE,
+  EXPLANATION_MESSAGE,
+  INPUT_LENGTH_LIMIT,
+} from "../../../CONSTANT";
 import { makeAppropriateSecurityCode } from "../../../util/trans";
 
 import "./inputBoxSecurityCode.css";
@@ -23,7 +29,10 @@ export default function InputBoxSecurityCode(props: InputBoxSecurityProps) {
   const [guideClick, isGuideClick] = useState(false);
 
   const changeSecurityCode = (e: ChangeEvent<HTMLInputElement>) => {
-    const userSecurityCode = e.target.value.slice(0, 3);
+    const userSecurityCode = e.target.value.slice(
+      0,
+      INPUT_LENGTH_LIMIT.MAX_SECURITY_CODE
+    );
     const appropriateSecurityCode =
       makeAppropriateSecurityCode(userSecurityCode);
 
@@ -47,7 +56,7 @@ export default function InputBoxSecurityCode(props: InputBoxSecurityProps) {
 
   return (
     <label className="input-box-security-code">
-      <p>보안 코드(CVC/CVV)</p>
+      <p>{EXPLANATION_MESSAGE.INPUT_SECURITY_CODE}</p>
       <Input
         name="security-code"
         className="input-security-code"
@@ -66,8 +75,11 @@ export default function InputBoxSecurityCode(props: InputBoxSecurityProps) {
         ?
       </button>
       {guideClick && (
-        <p className="guide-security-code" aria-label="보안코드 입력 가이드">
-          {GUIDE_MESSAGE.SECURITY_CODE}
+        <p
+          className="guide-security-code"
+          aria-label={ARIA_LABEL_MESSAGE.SECURITY_CODE_GUIDE_BUTTON}
+        >
+          {DIRECTION_MESSAGE.SECURITY_CODE}
         </p>
       )}
       <p className="error-message">

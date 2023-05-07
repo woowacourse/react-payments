@@ -2,7 +2,12 @@ import { useState, ChangeEvent } from "react";
 
 import Input from "../../common/Input";
 
-import { CARD_ERROR_MESSAGE } from "../../../CONSTANT";
+import {
+  CARD_ERROR_MESSAGE,
+  EXPLANATION_MESSAGE,
+  INPUT_LENGTH_LIMIT,
+  PLACE_HOLDER,
+} from "../../../CONSTANT";
 import { validateExpirationDate } from "../../../validation/ExpirationDate";
 import { makeAppropriateExpirationDate } from "../../../util/trans";
 
@@ -25,7 +30,10 @@ export default function InputBoxExpirationDate(
   const [expirationDate, setExpirationDate] = useState("");
 
   const changeExpirationDate = (e: ChangeEvent<HTMLInputElement>) => {
-    const userInputExpirationDate = e.target.value.slice(0, 5);
+    const userInputExpirationDate = e.target.value.slice(
+      0,
+      INPUT_LENGTH_LIMIT.MAX_EXPIRATION_DATE
+    );
     const appropriateExpirationDate = makeAppropriateExpirationDate(
       userInputExpirationDate
     );
@@ -46,13 +54,13 @@ export default function InputBoxExpirationDate(
 
   return (
     <label className="input-box-expiration-date">
-      <p>만료일</p>
+      <p>{EXPLANATION_MESSAGE.INPUT_EXPIRATION_DATE}</p>
       <Input
         name="expiration-date"
         className="input-expiration-date"
         type="text"
         onChange={changeExpirationDate}
-        placeholder="MM / YY"
+        placeholder={PLACE_HOLDER.EXPIRATION_DATE}
         inputMode="numeric"
         value={expirationDate}
         ariaRequired={true}

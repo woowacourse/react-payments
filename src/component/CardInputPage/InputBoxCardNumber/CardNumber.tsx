@@ -6,6 +6,7 @@ import { nowStatus } from "../../../type";
 import { makeAppropriateNumber } from "../../../util/trans";
 
 import "./cardNumber.css";
+import { INPUT_LENGTH_LIMIT, PLACE_HOLDER } from "../../../CONSTANT";
 
 interface CardNumberProps {
   changeEachNumberStatus: (partIndex: number, state: nowStatus) => void;
@@ -24,7 +25,10 @@ export default function CardNumber({
 
   const onChangeCardNumber = (partIndex: number) => {
     return (e: ChangeEvent<HTMLInputElement>) => {
-      const userInputNumber = e.target.value.slice(0, 4);
+      const userInputNumber = e.target.value.slice(
+        0,
+        INPUT_LENGTH_LIMIT.MAX_EACH_CARD_NUMBER
+      );
       const appropriateNumber = makeAppropriateNumber(userInputNumber);
 
       if (userInputNumber !== appropriateNumber) {
@@ -51,7 +55,7 @@ export default function CardNumber({
           type={index === 1 || index === 2 ? "password" : "text"}
           inputMode="numeric"
           onChange={onChangeCardNumber(index)}
-          placeholder="XXXX"
+          placeholder={PLACE_HOLDER.CARD_NUMBER}
           required={true}
           ariaRequired={true}
           value={cardNumber[index]}

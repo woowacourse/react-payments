@@ -13,7 +13,7 @@ import InputBoxPassword from "../InputBoxPassword/InputBoxPassword";
 import InputBoxSecurityCode from "../InputBoxSecurityCode/InputBoxSecurityCode";
 
 import { CardCo, CreditCard } from "../../../type";
-import { CARD_CO_NAME } from "../../../CONSTANT";
+import { CARD_CO_NAME, EXPLANATION_MESSAGE } from "../../../CONSTANT";
 import "./cardInputForm.css";
 
 import { useModalState } from "../../../hook/modalHook";
@@ -88,7 +88,7 @@ export default function CardInputForm(props: CardInputFormProps) {
         style={isFormFilled.current ? {} : { color: "lightgrey" }}
         aria-disabled={!isFormFilled.current}
       >
-        다음
+        {EXPLANATION_MESSAGE.NEXT_PAGE_BUTTON}
       </Button>
     </form>
   );

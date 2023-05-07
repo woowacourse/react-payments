@@ -1,4 +1,4 @@
-import { GUIDE_MESSAGE } from "../../CONSTANT";
+import { EXPLANATION_MESSAGE } from "../../CONSTANT";
 import "./registerSpinnerPage.css";
 
 export default function RegisterSpinnerPage() {
@@ -9,8 +9,10 @@ export default function RegisterSpinnerPage() {
         <div></div>
         <div></div>
       </div>
-      <p className="register-text">{GUIDE_MESSAGE.REGISTER_TEXT}</p>
-      <p className="register-wait-text">{GUIDE_MESSAGE.REGISTER_WAIT_TEXT}</p>
+      <p className="register-text">{EXPLANATION_MESSAGE.REGISTER_CARD}</p>
+      <p className="register-wait-text">
+        {EXPLANATION_MESSAGE.REGISTER_CARD_WAIT}
+      </p>
     </section>
   );
 }

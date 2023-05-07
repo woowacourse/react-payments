@@ -5,6 +5,7 @@ import CardPreviewBox from "./CardPreviewBox";
 import { CreditCard } from "../../../type";
 
 import "./cardList.css";
+import { DIRECTION_MESSAGE } from "../../../CONSTANT";
 
 interface CardListProps {
   cardList: CreditCard[];
@@ -17,7 +18,7 @@ export default function CardList(props: CardListProps) {
     <div className="card-list">
       {cardList.length === 0 ? (
         <p className="add-card-button-explanation">
-          새로운 카드를 등록해주세요.
+          {DIRECTION_MESSAGE.EMPTY_CARD_LIST}
         </p>
       ) : cardList.length === 1 ? (
         cardList.map((card) => CardPreview({ card }))

@@ -2,6 +2,11 @@ import { useNavigate } from "react-router-dom";
 import { ChangeEvent, KeyboardEvent, useState } from "react";
 
 import "./inputBoxNick.css";
+import {
+  ARIA_LABEL_MESSAGE,
+  INPUT_LENGTH_LIMIT,
+  PLACE_HOLDER,
+} from "../../../CONSTANT";
 
 interface InputBoxNickProps {
   submitNickAndSetCard: (nick: string) => void;
@@ -13,7 +18,10 @@ export default function InputBoxNick({
   const [nick, setNick] = useState("");
 
   const changeNickInput = (e: ChangeEvent<HTMLInputElement>) => {
-    const appropriateNick = e.target.value.slice(0, 10);
+    const appropriateNick = e.target.value.slice(
+      0,
+      INPUT_LENGTH_LIMIT.MAX_NICK
+    );
     setNick(appropriateNick);
     submitNickAndSetCard(appropriateNick);
   };
@@ -30,13 +38,13 @@ export default function InputBoxNick({
         onChange={changeNickInput}
         onKeyDown={submitNickInput}
         value={nick}
-        placeholder="카드 별명을 10자 이내로 입력해주세요."
+        placeholder={PLACE_HOLDER.NICK}
       />
       <p
         className="card-nick-input-length"
-        aria-label="현재 글자수/제한 글자수"
+        aria-label={ARIA_LABEL_MESSAGE.COMPARE_NOW_LENGTH_AND_LIMIT}
       >
-        {nick.length} / 10
+        {nick.length} / {INPUT_LENGTH_LIMIT.MAX_NICK}
       </p>
     </label>
   );

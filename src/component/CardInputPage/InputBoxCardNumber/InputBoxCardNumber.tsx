@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import CardNumber from "./CardNumber";
 
-import { CARD_ERROR_MESSAGE } from "../../../CONSTANT";
+import { CARD_ERROR_MESSAGE, EXPLANATION_MESSAGE } from "../../../CONSTANT";
 import { nowStatus } from "../../../type";
 
 import "./inputBoxCardNumber.css";
@@ -37,7 +37,7 @@ export default function InputBoxCardNumber(props: InputBoxNumberProps) {
 
   return (
     <label className="input-box-card-number">
-      <p>카드번호</p>
+      <p>{EXPLANATION_MESSAGE.INPUT_CARD_NUMBER}</p>
       <CardNumber
         changeEachNumberStatus={changeEachNumberStatus}
         changeCardNumberStatus={changeCardNumberStatus}
