@@ -71,29 +71,25 @@
 }
 
 .adding-card {
-  animation: vibration 2s infinite;
+  animation: card-spin 2s infinite;
   transition: all 1s;
 }
 
-@keyframes vibration {
+@keyframes card-spin {
   0% {
-    transform: rotate3d(0);
-    transform: rotate(0deg);
+    transform: perspective(600px) rotate(0deg);
   }
-  20% {
-    transform: rotate3d(0, 1, 0, 0.1turn);
+  25% {
+    transform: perspective(600px) rotate3d(0, 1, 0, 0.1turn);
   }
-  40% {
-    transform: rotate3d(1, 1, 0, 0.1turn);
+  50% {
+    transform: perspective(600px) rotate3d(1, 1, 0, 0.1turn);
   }
-  60% {
-    transform: rotate3d(1, 0, 0, 0.1turn);
-  }
-  80% {
-    transform: rotate3d(0, -1, 0, 0.1turn);
+  75% {
+    transform: perspective(600px) rotate3d(1, 0, 0, 0.1turn);
   }
   100% {
-    transform: rotate3d(0, 0, 0, 0.1turn);
+    transform: perspective(600px) rotate3d(0, 0, 0, 0.1turn);
   }
 }
 
