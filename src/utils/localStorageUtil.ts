@@ -25,7 +25,7 @@ const localStorageUtil: LocalStorageUtilType = {
         localStorage.setItem(key, JSON.stringify(value));
         console.log('>>> JSON.stringify(value):', JSON.stringify(value));
         resolve();
-      }, 3000);
+      }, 10000);
     });
   },
 
