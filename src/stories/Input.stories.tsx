@@ -6,6 +6,21 @@ const meta: Meta<typeof Input> = {
   title: 'Components/Input',
   component: Input,
   tags: ['autodocs'],
+  argTypes: {
+    value: { control: 'text' },
+    width: {
+      control: { options: ['xs', 's', 'm', 'l', 'xl'] },
+    },
+    type: {
+      control: {
+        options: ['number', 'text', 'password'],
+      },
+    },
+    inputmode: {
+      control: { options: ['numeric'] },
+    },
+    maxLength: { control: 'number' },
+  },
 };
 
 export default meta;
