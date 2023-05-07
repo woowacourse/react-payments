@@ -46,31 +46,35 @@ export function CardAliasAddForm() {
     }, 5000);
   };
 
-  return isShowLoading ? (
-    <Loading />
-  ) : (
+  return (
     <Style.Container>
-      <Style.Title>카드등록이 완료되었습니다.</Style.Title>
-      <CardViewer card={card} />
-      <Style.Form onSubmit={handleAliasSubmit}>
-        <Input
-          value={cardAlias}
-          designType='underline'
-          name='alias'
-          placeholder='카드 별칭을 입력해주세요.(선택)'
-          maxLength={CARD_ALIAS_SIZE}
-          autoFocus
-          width={'240px'}
-          height={'45px'}
-          onChange={handleInputChange}
-        />
-        <Style.AliasLength aria-label='카드 별칭 입력 길이 표시'>
-          {cardAlias.length}/{CARD_ALIAS_SIZE}
-        </Style.AliasLength>
-        <Style.ButtonWrapper>
-          <Button designType='text'>확인</Button>
-        </Style.ButtonWrapper>
-      </Style.Form>
+      {isShowLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <Style.Title>카드등록이 완료되었습니다.</Style.Title>
+          <CardViewer card={card} />
+          <Style.Form onSubmit={handleAliasSubmit}>
+            <Input
+              value={cardAlias}
+              designType='underline'
+              name='alias'
+              placeholder='카드 별칭을 입력해주세요.(선택)'
+              maxLength={CARD_ALIAS_SIZE}
+              autoFocus
+              width={'240px'}
+              height={'45px'}
+              onChange={handleInputChange}
+            />
+            <Style.AliasLength aria-label='카드 별칭 입력 길이 표시'>
+              {cardAlias.length}/{CARD_ALIAS_SIZE}
+            </Style.AliasLength>
+            <Style.ButtonWrapper>
+              <Button designType='text'>확인</Button>
+            </Style.ButtonWrapper>
+          </Style.Form>
+        </>
+      )}
     </Style.Container>
   );
 }
