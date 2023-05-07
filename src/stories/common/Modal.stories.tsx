@@ -15,7 +15,7 @@ export const ModalStory: Story = {
   args: {
     isModalOpen: true,
     closeModal: () => {},
-    children: <BottomSheet onClick={() => {}} closeModal={() => {}}></BottomSheet>,
+    children: <BottomSheet clickIcon={() => {}} closeModal={() => {}}></BottomSheet>,
   },
   decorators: [
     (Story) => {
@@ -34,7 +34,7 @@ export const ModalStory: Story = {
               args={{
                 isModalOpen: isModalOpen,
                 closeModal: closeModal,
-                children: <BottomSheet onClick={() => {}} closeModal={closeModal} />,
+                children: <BottomSheet clickIcon={() => {}} closeModal={closeModal} />,
               }}
             />
           </PageContainer>

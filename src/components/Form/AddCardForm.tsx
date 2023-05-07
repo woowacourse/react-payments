@@ -115,8 +115,7 @@ function AddCardInfo({ onSubmit }: AddCardFormProps) {
     focusTarget.focus();
   };
 
-  const handleMovePrevFocus: KeyboardEventHandler<HTMLFormElement> = (e) => {
-    const { key, target } = e;
+  const handleMovePrevFocus: KeyboardEventHandler<HTMLFormElement> = ({ key, target }) => {
     const { form: formInputList, value } = target as HTMLFormElement;
 
     if (key !== 'Backspace' || value !== '') return;
@@ -130,13 +129,12 @@ function AddCardInfo({ onSubmit }: AddCardFormProps) {
     });
   };
 
-  const handleMoveNextFocus: ChangeEventHandler<HTMLFormElement> = (e) => {
-    const { target } = e;
+  const handleMoveNextFocus: ChangeEventHandler<HTMLFormElement> = ({ target }) => {
     const { form: formInputList, maxLength, value } = target;
 
-    const filteredValue = value.trim().replace(NOT_NUMBER_REGEX, '');
+    const filteredBlankInput = value.trim().replace(NOT_NUMBER_REGEX, '');
 
-    if (filteredValue.length !== maxLength) return;
+    if (filteredBlankInput.length !== maxLength) return;
 
     const NEXT = 1;
 
@@ -150,7 +148,7 @@ function AddCardInfo({ onSubmit }: AddCardFormProps) {
   return (
     <>
       <Modal isModalOpen={isModalOpen} closeModal={closeModal}>
-        <BottomSheet onClick={handleSelectCompany} closeModal={closeModal} />
+        <BottomSheet clickIcon={handleSelectCompany} closeModal={closeModal} />
       </Modal>
 
       <CardWrapper onClick={openModal}>

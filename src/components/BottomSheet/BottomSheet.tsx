@@ -6,11 +6,11 @@ import { isCompanyName } from 'util/guard';
 import styled from 'styled-components';
 
 export interface ModalProps {
-  onClick: (bank: COMPANY_NAME) => void;
+  clickIcon: (bank: COMPANY_NAME) => void;
   closeModal: () => void;
 }
 
-export const BottomSheet = ({ onClick, closeModal }: ModalProps) => {
+export const BottomSheet = ({ clickIcon, closeModal }: ModalProps) => {
   const handleSelectCompany: MouseEventHandler<HTMLSpanElement> = (e) => {
     selectCompany(e);
     closeModal();
@@ -23,7 +23,7 @@ export const BottomSheet = ({ onClick, closeModal }: ModalProps) => {
   const selectCompany: MouseEventHandler<HTMLSpanElement> = (e) => {
     if (isCompanyName(e.currentTarget.textContent!)) {
       const company: COMPANY_NAME = e.currentTarget.textContent;
-      onClick(company);
+      clickIcon(company);
     }
   };
 
