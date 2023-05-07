@@ -9,26 +9,23 @@ import { useCards } from "../hook/useCards";
 export const Routers = () => {
   const { cards, addNewCard, assignAlias } = useCards();
 
+  const HomeWithContext = () => (
+    <CardsContext.Provider value={{ cards, addNewCard }}>
+      <Home />
+    </CardsContext.Provider>
+  );
+
+  const AddCardWithContext = () => (
+    <CardsContext.Provider value={{ cards, addNewCard }}>
+      <AddCard />
+    </CardsContext.Provider>
+  );
+
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <CardsContext.Provider value={{ cards, addNewCard }}>
-              <Home />
-            </CardsContext.Provider>
-          }
-        />
-        <Route
-          path="/addCard"
-          element={
-            <CardsContext.Provider value={{ cards, addNewCard }}>
-              {" "}
-              <AddCard />
-            </CardsContext.Provider>
-          }
-        />
+        <Route path="/" element={<HomeWithContext />} />
+        <Route path="/addCard" element={<AddCardWithContext />} />
         <Route path="/assignAlias" element={<AssignAlias assignAlias={assignAlias} />} />
       </Routes>
     </BrowserRouter>
