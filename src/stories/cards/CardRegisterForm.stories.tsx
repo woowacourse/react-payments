@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { BrowserRouter } from 'react-router-dom';
 
-import CardRegisterForm from '../components/CardRegisterForm';
-import { ModalProvider } from '../components/common/Modal/ModalContext';
+import CardRegisterForm from '../../components/CardRegisterForm';
+import { ModalProvider } from '../../utils/context/ModalContext';
 
 const meta: Meta<typeof CardRegisterForm> = {
-  title: 'components/CardRegisterForm',
+  title: 'components/cards/CardRegisterForm',
   component: CardRegisterForm,
   decorators: [
     (Story) => (

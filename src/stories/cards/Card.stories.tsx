@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import Card from '../components/Card';
+import Card from '../../components/Card';
 
 const meta: Meta<typeof Card> = {
-  title: 'components/Card',
+  title: 'components/cards/Card',
   component: Card,
   tags: ['autodocs'],
 };
@@ -12,7 +12,6 @@ export default meta;
 type Story = StoryObj<typeof Card>;
 
 export const Default: Story = {
-  // render: (args) => <Card {...args} />,
   args: {
     cardCompany: null,
     cardNumber1: '0000',
