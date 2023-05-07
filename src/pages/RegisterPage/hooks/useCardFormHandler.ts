@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router';
 import { useForm } from '../../../hooks/useForm';
 import { Card } from 'types/Card';
-import { areValidInfo } from 'validator';
+import { areValidCardInfo } from 'validator';
 
 export const useCardFormHandler = (cardInfo: Card) => {
   const bank = cardInfo.cardCompany.company;
@@ -16,7 +16,7 @@ export const useCardFormHandler = (cardInfo: Card) => {
       return;
     }
 
-    if (areValidInfo(formDataObject)) {
+    if (areValidCardInfo(formDataObject)) {
       navigate('/card-name');
     } else {
       alert('값을 모두 입력해 주세요.');

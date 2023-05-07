@@ -1,11 +1,11 @@
 import { LENGTH } from 'constants/constants';
 
-export const areValidInfo = (info: any) => {
-  const { month, year, code, password1, password2 } = info;
+export const areValidCardInfo = (cardInfo: any) => {
+  const { month, year, code, password1, password2 } = cardInfo;
 
   const cardNumbers = Array.from(
     { length: LENGTH.EACH_CARD_NUMBER },
-    (_, index) => info[`number${index + 1}`]
+    (_, index) => cardInfo[`number${index + 1}`]
   );
 
   const validateCardNumber = validator.isAllValidLength(

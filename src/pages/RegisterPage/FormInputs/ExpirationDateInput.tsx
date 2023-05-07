@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import styled from 'styled-components';
 import { LENGTH, REGEX } from 'constants/constants';
-import { useInputHandler } from 'hooks/useInputHandler';
+import { useInputHandler } from 'pages/RegisterPage/FormInputs/hooks/useInputHandler';
 import InputBox from 'components/InputBox';
 import { StyledInput } from 'components/Input';
 import { AddCardContext } from 'context/CardContext';

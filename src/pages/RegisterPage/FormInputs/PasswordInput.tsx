@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { LENGTH, REGEX } from 'constants/constants';
-import { useInputHandler } from 'hooks/useInputHandler';
+import { useInputHandler } from 'pages/RegisterPage/FormInputs/hooks/useInputHandler';
 import { StyledInput } from 'components/Input';
 import InputBox from 'components/InputBox';
 import { StyledCaption } from 'components/Caption';
