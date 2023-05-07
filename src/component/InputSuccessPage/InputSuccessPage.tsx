@@ -1,19 +1,14 @@
-import { useEffect, useState } from "react";
-import { CreditCard } from "../../type/CreditCard";
+import { useState } from "react";
 import Button from "../common/Button";
 import CardPreview from "../common/CardPreview";
 import Input from "../common/Input";
 import { cardCompanyEnglishToKorean } from "../../type/CardCompany";
 import styles from "./InputSuccessPage.module.css";
 import { useNavigate } from "react-router-dom";
+import { useCreditCardContext } from "../../context/CreditCardContext";
 
-interface Props {
-  card: CreditCard;
-  setCardInfo: (info: Partial<CreditCard>) => void;
-}
-
-const InputSuccessPage = (props: Props) => {
-  const { card, setCardInfo } = props;
+const InputSuccessPage = () => {
+  const { card, setCardInfo } = useCreditCardContext();
 
   const [nickname, setNickname] = useState('');
   const navigate = useNavigate();
