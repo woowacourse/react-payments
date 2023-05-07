@@ -46,7 +46,6 @@ const SecurityCodeInput = () => {
 };
 
 const CodeInput = styled(StyledInput)`
-  display: d;
   width: 30%;
   height: 48px;
   margin: 0;
@@ -81,8 +80,8 @@ const QuestionMark = styled.p`
     content: '카드 뒷면 서명란에 적힌 끝 번호 3자리를 입력해 주세요.';
     display: block;
     position: absolute;
-    left: 45vw;
-    width: 44vw;
+    left: 48%;
+    width: 150px;
     padding: 6px 6px 5px;
     font-size: 10px;
     word-break: keep-all;
@@ -90,15 +89,6 @@ const QuestionMark = styled.p`
     border: 1.4px solid var(--gray-color-200);
     border-radius: 8px;
     background: #fff;
-  }
-
-  &:hover::before {
-    content: '';
-    display: block;
-    position: absolute;
-    left: 42vw;
-    width: 4vw;
-    border: 0.7px solid var(--gray-color-200);
   }
 `;
 
