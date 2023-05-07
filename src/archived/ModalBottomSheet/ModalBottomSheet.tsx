@@ -1,6 +1,6 @@
 import styles from './ModalBottomSheet.module.css';
 import { useContext } from 'react';
-import { ModalContext } from '../../../contexts/ModalProvider';
+import { ModalContext } from '../../contexts/ModalProvider';
 
 const ModalBottomSheet = () => {
   const { isOpen, content, closeModal } = useContext(ModalContext);
