@@ -14,7 +14,6 @@ export const Styled = {
     color: ${({ backgroundColor }) => (backgroundColor === '카카오뱅크' ? '#3A1D1D' : 'white')};
     font-family: ${({ backgroundColor }) =>
       CARDS_INFO[Object.values(COMPANY_LIST).indexOf(backgroundColor)].font ?? 'Yoon'};
-    font-weight: 600;
     z-index: 1;
     cursor: pointer;
   `,
