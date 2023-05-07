@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import Modal from '../common/Modal';
 import { CARD_COMPANY_LOGO } from '../../constants/cardCompany';
 import { CardCompany } from '../../@types';
+import { Modal } from '@fine1012/react-modal';
 
 type CardCompanyModalProps = {
   isModalOpen: boolean;
