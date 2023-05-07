@@ -26,6 +26,22 @@ const CardListPage = () => {
     dispatchMainCardListData(getCardListAction());
   }, []);
 
+  useEffect(() => {
+    const cardDataItems = document.querySelectorAll('.flip');
+    const cardNickNames = document.querySelectorAll('.card-nickname');
+
+    cardDataItems.forEach((cardDataItem, index) => {
+      const intervalId = setTimeout(() => {
+        cardDataItem.classList.add('fade');
+        cardNickNames[index].classList.add('text-fade');
+      }, 150 * index);
+
+      return () => {
+        clearTimeout(intervalId);
+      };
+    });
+  }, [mainCardListData]);
+
   return (
     <div className="add-card-page">
       {location.state && location.state.cardAdd === ADD_CARD_SUCCESS ? (
@@ -51,6 +67,7 @@ const CardListPage = () => {
             </div>
           ))
         )}
+
         <div className="add-card">
           <button type="button" className="add-card-button" onClick={onAddButton}>
             +

@@ -17,6 +17,25 @@
   color: #575757;
 }
 
+.text-fade {
+  animation-name: fade-text;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0s;
+}
+
+@keyframes fade-text {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) translateX(-18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px) translateX(0px);
+  }
+}
+
 .add-card-button:hover {
   cursor: pointer;
 }
@@ -55,6 +74,7 @@
 
 .card-nickname {
   margin-top: 10px;
+  opacity: 0;
 }
 
 .card-add-success {

@@ -1,5 +1,4 @@
 import React, { ChangeEvent, SetStateAction } from 'react';
-import { createPortal } from 'react-dom';
 
 import { CardNumber, InputHook } from '../type';
 import Card from './Card';
@@ -9,6 +8,7 @@ type CardNicknameInputModalProps = {
   cardType: string;
   isRequesting: boolean;
   isFailed: boolean;
+  isModalOpen: boolean;
   cardNumber: InputHook<CardNumber>;
   cardExpire: InputHook<string>;
   cardOwner: InputHook<string>;
@@ -22,6 +22,7 @@ const CardNicknameInputModal = ({
   closeModal,
   cardType,
   isRequesting,
+  isModalOpen,
   isFailed,
   cardNumber,
   cardExpire,
@@ -30,7 +31,7 @@ const CardNicknameInputModal = ({
   handleNickname,
   submitData,
 }: CardNicknameInputModalProps) => {
-  return createPortal(
+  return isModalOpen ? (
     <>
       <div
         className="input-nickname-box-backdrop"
@@ -55,6 +56,7 @@ const CardNicknameInputModal = ({
           <Card
             cardType={cardType}
             cardNumber={cardNumber.value}
+            fadeCard={true}
             classname={isRequesting ? 'adding-card' : isFailed ? 'add-card-failure' : ''}
             cardOwner={cardOwner.value}
             expired={cardExpire.value}
@@ -82,8 +84,9 @@ const CardNicknameInputModal = ({
           )}
         </form>
       </div>
-    </>,
-    document.body
+    </>
+  ) : (
+    <>{''}</>
   );
 };
 

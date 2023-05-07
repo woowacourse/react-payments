@@ -1,4 +1,5 @@
-import React, { ChangeEvent, useEffect, useReducer, useState } from 'react';
+import React, { ChangeEvent, useCallback, useEffect, useReducer, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -40,10 +41,14 @@ const FormCardAdd = ({
   const [cardCVCNumberError, setCardCVCNumberError] = useHandleCVCNumberError();
   const [cardPasswordError, setCardPasswordError] = useHandleCardPasswordError();
   const [addCardResult, dispatchAddCardData] = useReducer(cardAddReducer, {
-    type: 'ADD_CARD_REQUEST',
+    type: 'ADD_CARD_DUPLICATED',
     isLoading: false,
     errorMessage: 'string',
   });
+
+  const handleAddCardData = useCallback((data: any) => {
+    dispatchAddCardData(data);
+  }, []);
 
   const navigate = useNavigate();
   const [cardNickName, setCardNickName] = useState('');
@@ -74,12 +79,18 @@ const FormCardAdd = ({
         second: cardPasswordSecondDigit.value,
       },
     };
-    dispatchAddCardData(addCardRequestStartAction());
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-    dispatchAddCardData(addCardAction(postData));
+    handleAddCardData(addCardRequestStartAction());
 
-    navigate(LOCATION.CARD_LIST_PAGE, { state: { cardAdd: ADD_CARD_SUCCESS } });
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+    handleAddCardData(addCardAction(postData));
   };
+
+  useEffect(() => {
+    console.log(addCardResult.type);
+    if (addCardResult.type === ADD_CARD_SUCCESS) {
+      navigate(LOCATION.CARD_LIST_PAGE, { state: { cardAdd: ADD_CARD_SUCCESS } });
+    }
+  }, [addCardResult.type, navigate]);
 
   const inputRef = Array.from({ length: 9 }).map(() => React.createRef<HTMLInputElement>());
 
@@ -360,11 +371,12 @@ const FormCardAdd = ({
           {readyToPending && !ableRequestData() ? <button type="submit">다음</button> : ''}
         </div>
       </form>
-      {nicknameModalOpen ? (
+      {createPortal(
         <CardNicknameInputModal
           closeModal={setNicknameModalOpen}
           isRequesting={addCardResult.isLoading}
           isFailed={addCardResult.type === ADD_CARD_FAILURE}
+          isModalOpen={nicknameModalOpen}
           cardType={cardType}
           cardNumber={cardNumber}
           cardExpire={cardExpire}
@@ -372,9 +384,8 @@ const FormCardAdd = ({
           securityCode={securityCode}
           handleNickname={setCardNickName}
           submitData={onSubmit}
-        />
-      ) : (
-        ''
+        />,
+        document.body
       )}
     </>
   );
