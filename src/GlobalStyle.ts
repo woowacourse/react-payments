@@ -5,9 +5,10 @@ export const GlobalStyle = createGlobalStyle`
     --primary-color: #ecebf1;
     --primary-text-color: #525252;
     --secondary-color: #fff;
-    --error-text-color: #ff0000;
     --gray-text-color: #969696;
     --light-gray-text-color: #bababa;
-    --primary-error-color: #f5ebf1;
+    --error-input-color: #ffebf1;
+    --error-text-color: #ff0000;
+    --focus-input-color:#d3ebff;
 }
 `;

@@ -6,18 +6,21 @@ export const Styled = {
     display: flex;
     flex-direction: row;
     gap: 10px;
+    input:focus {
+      background-color: var(--focus-input-color);
+    }
+    input.error {
+      background-color: var(--error-input-color);
+    }
   `,
   ExpirationDateWrapper: styled(Container)`
     padding: 0;
     width: 60px;
     justify-content: center;
-    Input {
+    input {
       height: 44px;
       border-radius: 7px;
       text-align: center;
-    }
-    .error {
-      background-color: var(--primary-error-color);
     }
   `,
   SLASH: styled.span`

@@ -10,6 +10,12 @@ export const Styled = {
       width: 100%;
       height: 44px;
     }
+    input:focus {
+      background-color: var(--focus-input-color);
+    }
+    input.error {
+      background-color: var(--error-input-color);
+    }
   `,
 
   OwnerNameLabelContainer: styled.div`

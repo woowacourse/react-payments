@@ -7,8 +7,11 @@ export const Styled = {
     flex-direction: row;
     align-items: center;
     gap: 11px;
+    input:focus {
+      background-color: var(--focus-input-color);
+    }
     .error {
-      background-color: var(--primary-error-color);
+      background-color: var(--error-input-color);
     }
   `,
   SecurityCodeInputContainer: styled(Container)`

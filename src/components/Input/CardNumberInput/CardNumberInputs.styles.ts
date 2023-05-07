@@ -5,6 +5,12 @@ export const Styled = {
   CardNumberContainer: styled.div`
     display: flex;
     flex-direction: row;
+    input:focus {
+      background-color: var(--focus-input-color);
+    }
+    input.error {
+      background-color: var(--error-input-color);
+    }
   `,
   CardNumberWrapper: styled(Container)`
     padding: 0;
@@ -14,9 +20,6 @@ export const Styled = {
       height: 44px;
       border-radius: 7px;
       text-align: center;
-    }
-    .error {
-      background-color: var(--primary-error-color);
     }
   `,
   DASH: styled.span`

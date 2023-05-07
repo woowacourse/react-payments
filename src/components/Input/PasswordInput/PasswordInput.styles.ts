@@ -15,8 +15,11 @@ export const Styled = {
       border-radius: 7px;
     }
 
-    .error {
-      background-color: var(--primary-error-color);
+    input:focus {
+      background-color: var(--focus-input-color);
+    }
+    input.error {
+      background-color: var(--error-input-color);
     }
   `,
   DotContainer: styled.div`
