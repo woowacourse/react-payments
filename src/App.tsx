@@ -7,6 +7,7 @@ import MyCardListRoute from './routes/MyCardListRoute';
 import CardRegisterRoute from './routes/CardRegisterRoute';
 import CardRegisterProvider from './context/CardRegisterContext';
 import { BottomSheetProvider } from 'react-bottom-sheet-booungi';
+import RegisterLoadingPage from './pages/RegisterLoading/RegisterLoadingPage';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
               <Route path='/' element={<Layout />}>
                 <Route index path='/' element={<MyCardListRoute />} />
                 <Route path='/registerCard/*' element={<CardRegisterRoute />} />
+                <Route path='/register-loading' element={<RegisterLoadingPage />} />
               </Route>
             </Routes>
           </BrowserRouter>
