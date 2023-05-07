@@ -3,12 +3,10 @@ import styled from 'styled-components';
 export const RegisterForm = styled.form`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
 
   width: 100%;
-  height: 70%;
+  height: 100vh;
 
-  & > * {
-    margin-bottom: 28px;
-  }
+  overflow: auto;
 `;

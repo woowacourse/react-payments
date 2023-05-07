@@ -4,7 +4,7 @@ import { COLOR } from '../../constants/card';
 
 export const FormSubmitButton = styled.button`
   position: absolute;
-  bottom: 0px;
+  bottom: 28px;
   right: 0px;
 
   height: 40px;

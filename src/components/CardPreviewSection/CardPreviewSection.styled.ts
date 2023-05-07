@@ -4,7 +4,8 @@ export const CardPreviewSection = styled.section`
   display: flex;
   justify-content: center;
 
-  width: 100%;
-
   margin-bottom: 28px;
+
+  width: 100%;
+  height: 140px;
 `;
