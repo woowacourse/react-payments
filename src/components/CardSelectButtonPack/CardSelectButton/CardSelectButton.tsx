@@ -1,9 +1,9 @@
 import React from 'react';
 import { useContext, useCallback } from 'react';
-import { ModalContext } from '../../../contexts/ModalProvider';
 import { CardInfoContext } from '../../../contexts/CardInfoProvider';
 import styles from './CardSelectButton.module.css';
 import { CardIssuerType } from '../../../types';
+import { BaeksulgiContext } from 'baeksulgi';
 
 type CardSelectButtonProps = {
   title: CardIssuerType;
@@ -11,7 +11,7 @@ type CardSelectButtonProps = {
 };
 
 const CardSelectButton = ({ title, src }: CardSelectButtonProps) => {
-  const { closeModal } = useContext(ModalContext);
+  const { closeModal } = useContext(BaeksulgiContext);
   const { setCardIssuer } = useContext(CardInfoContext);
 
   const selectCardIssuer = useCallback(() => {
