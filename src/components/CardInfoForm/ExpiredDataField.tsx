@@ -5,11 +5,14 @@ import type { CardFormFieldProps } from './types';
 import useCardInfoForm from './hooks/useCardInfoForm';
 import useFieldFilled from './hooks/useFieldFilled';
 import useCardFormValue from '../../hooks/useCardFormValue';
+import useExpiredDate from './hooks/useExpiredDate';
 
 const ExpiredDateField = ({ inputRefs }: CardFormFieldProps) => {
   const { expiredDate } = useCardFormValue();
   const { handleNumberChange } = useCardInfoForm();
+
   const isFilled = useFieldFilled(inputRefs);
+  const { errorMessage, handleDateInputBlur } = useExpiredDate();
 
   return (
     <TextField
@@ -17,7 +20,7 @@ const ExpiredDateField = ({ inputRefs }: CardFormFieldProps) => {
       size="medium"
       toggleHelperText={!isFilled}
       helperText={{
-        text: '만료일을 MMYY 형식으로 입력해 주세요. (ex. 1223)',
+        text: errorMessage,
         color: 'error',
       }}
     >
@@ -31,9 +34,11 @@ const ExpiredDateField = ({ inputRefs }: CardFormFieldProps) => {
         placeholder="MM"
         value={expiredDate.month}
         onChange={handleNumberChange}
+        onBlur={handleDateInputBlur}
         ref={inputRefs[0]}
         align="center"
         data-property="month"
+        pattern="^(0?[1-9]|1[0-2])$"
       />
       <span>/</span>
       <Input
@@ -46,9 +51,11 @@ const ExpiredDateField = ({ inputRefs }: CardFormFieldProps) => {
         placeholder="YY"
         value={expiredDate.year}
         onChange={handleNumberChange}
+        onBlur={handleDateInputBlur}
         ref={inputRefs[1]}
         align="center"
         data-property="year"
+        pattern="^(2[3-9]|[3-9]\d)$"
       />
     </TextField>
   );
