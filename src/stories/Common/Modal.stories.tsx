@@ -13,14 +13,14 @@ export default meta;
 type Story = StoryFn<typeof meta>;
 
 export const ModalFrame: Story = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isOpenModal, setIsOpenModal] = useState(false);
 
   return (
     <>
-      <Button onClick={() => setIsModalOpen(true)} width={'100px'} height={'50px'}>
+      <Button onClick={() => setIsOpenModal(true)} width={'100px'} height={'50px'}>
         Open
       </Button>
-      <Modal isModalOpen={isModalOpen} closeModal={() => setIsModalOpen(false)} />
+      <Modal isOpenModal={isOpenModal} closeModal={() => setIsOpenModal(false)} />
     </>
   );
 };

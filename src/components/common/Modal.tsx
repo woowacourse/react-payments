@@ -2,15 +2,15 @@ import { DialogHTMLAttributes } from 'react';
 import styled from 'styled-components';
 
 interface Props extends DialogHTMLAttributes<HTMLDialogElement> {
-  isModalOpen: boolean;
+  isOpenModal: boolean;
   closeModal: () => void;
 }
 
-export function Modal({ isModalOpen, closeModal, ...props }: Props) {
+export function Modal({ isOpenModal, closeModal, ...props }: Props) {
   return (
     <>
-      <Style.Backdrop isModalOpen={isModalOpen} onClick={closeModal} />
-      <Style.Container open={isModalOpen} isModalOpen={isModalOpen} {...props}>
+      <Style.Backdrop isOpenModal={isOpenModal} onClick={closeModal} />
+      <Style.Container open={isOpenModal} isOpenModal={isOpenModal} {...props}>
         {props.children}
       </Style.Container>
     </>
@@ -18,7 +18,7 @@ export function Modal({ isModalOpen, closeModal, ...props }: Props) {
 }
 
 const Style = {
-  Backdrop: styled.div<{ isModalOpen: boolean }>`
+  Backdrop: styled.div<{ isOpenModal: boolean }>`
     display: 'block';
 
     width: 100%;
@@ -32,7 +32,7 @@ const Style = {
     background-color: rgba(0, 0, 0, 0.5);
 
     ${(props) => {
-      return props.isModalOpen
+      return props.isOpenModal
         ? 'animation:  modal-backdrop-show 0.7s;'
         : 'animation:  modal-backdrop-close 0.7s forwards;';
     }}
@@ -64,7 +64,7 @@ const Style = {
     z-index: 999;
   `,
 
-  Container: styled.dialog<{ isModalOpen: boolean }>`
+  Container: styled.dialog<{ isOpenModal: boolean }>`
     display: flex;
 
     flex-direction: column;
@@ -84,7 +84,7 @@ const Style = {
     background-color: var(--grey-100);
 
     ${(props) => {
-      return props.isModalOpen
+      return props.isOpenModal
         ? 'animation:  modal-show 0.7s;'
         : 'animation:  modal-close 0.7s forwards;';
     }}
