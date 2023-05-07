@@ -5,11 +5,8 @@ import MainPage from "pages/MainPage";
 import CardRegisterForm from "pages/RegisterPage/CardRegisterForm";
 import LastPage from "pages/LastPage";
 import GotLost from "pages/GotLost";
-import { getData } from "utils/getDataFromLocalStorage";
 
 const App = () => {
-  const cardList = getData("card");
-
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Routes>
@@ -17,7 +14,7 @@ const App = () => {
           path="/"
           element={
             <CardInfoProvider>
-              <MainPage cardList={cardList} />
+              <MainPage />
             </CardInfoProvider>
           }
         />

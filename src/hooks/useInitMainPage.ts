@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { getData } from "utils/getDataFromLocalStorage";
 
 const useInitMainPage = () => {
   const navigate = useNavigate();
@@ -9,7 +10,9 @@ const useInitMainPage = () => {
     navigate("/register");
   };
 
-  return { goToRegister };
+  const cardList = getData("card");
+
+  return { goToRegister, cardList };
 };
 
 export default useInitMainPage;

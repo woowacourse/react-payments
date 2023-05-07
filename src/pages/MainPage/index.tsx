@@ -4,14 +4,9 @@ import Button from "components/Button";
 import CardPreview from "components/CardPreview";
 import { AddButton } from "components/Button";
 import useInitMainPage from "hooks/useInitMainPage";
-import { CardInfo } from "types";
 
-interface Props {
-  cardList: CardInfo[];
-}
-
-const MainPage = ({ cardList }: Props) => {
-  const { goToRegister } = useInitMainPage();
+const MainPage = () => {
+  const { goToRegister, cardList } = useInitMainPage();
 
   return (
     <S.Wrapper>
