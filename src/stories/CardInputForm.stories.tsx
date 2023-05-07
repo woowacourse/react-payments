@@ -39,38 +39,39 @@ export const Form: Story = {};
 export const FormInputSuccess: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
+    const inputBoxes = canvas.getAllByRole('textbox');
 
     await userEvent.keyboard(' {esc}', { delay: 500 });
 
-    const cardNumberInput1 = canvas.getByTestId('card-number-1');
-    const cardNumberInput2 = canvas.getByTestId('card-number-2');
-    const cardNumberInput3 = canvas.getByTestId('card-number-3');
-    const cardNumberInput4 = canvas.getByTestId('card-number-4');
+    const cardNumberInput1 = inputBoxes[0];
+    const cardNumberInput2 = inputBoxes[1];
+    const cardNumberInput3 = inputBoxes[2];
+    const cardNumberInput4 = inputBoxes[3];
 
     await waitAfterType(cardNumberInput1, '1234', 100);
     await waitAfterType(cardNumberInput2, '4567', 100);
     await waitAfterType(cardNumberInput3, '3546', 100);
     await waitAfterType(cardNumberInput4, '2345', 100);
 
-    const dateInput = canvas.getByTestId('expiration-date');
+    const dateInput = inputBoxes[4];
 
     await waitAfterType(dateInput, '0124', 100);
 
-    const nameInput = canvas.getByTestId('card-owner');
+    const nameInput = inputBoxes[5];
 
     await waitAfterType(nameInput, 'WOOWA', 100);
 
-    const securityCodeInput = canvas.getByTestId('security-code');
+    const securityCodeInput = inputBoxes[6];
 
     await waitAfterType(securityCodeInput, '234', 100);
 
-    const passwordInput1 = canvas.getByTestId('card-password-1');
-    const passwordInput2 = canvas.getByTestId('card-password-2');
+    const passwordInput1 = inputBoxes[7];
+    const passwordInput2 = inputBoxes[8];
 
     await waitAfterType(passwordInput1, '2', 100);
     await waitAfterType(passwordInput2, '2', 100);
 
-    const submitButton = canvas.getByTestId('submit-button');
+    const submitButton = canvas.getByRole('button', { name: '다음' });
 
     userEvent.click(submitButton);
   },
