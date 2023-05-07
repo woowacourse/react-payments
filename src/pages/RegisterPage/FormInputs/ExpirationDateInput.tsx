@@ -14,16 +14,16 @@ import { showDateCaption } from 'utils/captionStyles';
 const ExpirationDateInput = () => {
   const { date, setDate } = useContext(AddCardContext);
 
-  const DateValidatior = (name: string, value: string) => {
-    const ValidDate = Number(value);
-    return name === 'month' && (ValidDate > 12 || ValidDate < 0) ? '' : value;
+  const dateValidator = (name: string, value: string) => {
+    const validDate = Number(value);
+    return name === 'month' && (validDate > 12 || validDate < 0) ? '' : value;
   };
 
   const { handleInput: handleDate, handleRef: handleInputRef } =
     useInputHandler(setDate, {
       length: LENGTH.EXPIRATION,
       regex: REGEX.ONLY_NUMBER,
-      validator: DateValidatior,
+      validator: dateValidator,
     });
 
   return (

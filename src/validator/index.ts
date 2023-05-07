@@ -35,12 +35,29 @@ export const areValidCardInfo = (cardInfo: any) => {
   return validationResult.every((result) => result === true);
 };
 
-const validator = {
+export const validator = {
   isAllValidLength(array: string[], length: number) {
     return array.every((value) => value.length === length);
   },
 
   isValidLength(value: string, length: number) {
     return value.length === length;
+  },
+
+  isValidDate(date: string[]) {
+    const [inputMonth, inputYear] = date.map((item) => parseInt(item, 10));
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear() % 100;
+    const currentMonth = currentDate.getMonth() + 1;
+
+    if (inputYear < currentYear) {
+      return false;
+    }
+
+    if (inputYear === currentYear && inputMonth < currentMonth) {
+      return false;
+    }
+
+    return true;
   },
 };
