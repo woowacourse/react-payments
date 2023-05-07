@@ -1,8 +1,8 @@
 import React from 'react';
-import Dialog from '../../../@common/Dialog/Dialog';
 import { BANKS, BANKS_INFO } from '../../../../constants/banks';
 import * as Styled from './BankSelectDialog.styles';
 import { Bank } from '../../../../types/card.type';
+import { Dialog } from 'react-tiny-dialog';
 
 interface BankSelectDialogProps {
   onClick(bank: Bank): void;
