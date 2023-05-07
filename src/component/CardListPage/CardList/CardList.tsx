@@ -21,9 +21,11 @@ export default function CardList(props: CardListProps) {
           {DIRECTION_MESSAGE.EMPTY_CARD_LIST}
         </p>
       ) : cardList.length === 1 ? (
-        cardList.map((card) => CardPreview({ card }))
+        cardList.map((card) => <CardPreview card={card} />)
       ) : (
-        cardList.map((card) => CardPreviewBox({ card }))
+        cardList.map((card) => (
+          <CardPreviewBox key={card.cardNumber.join("")} card={card} />
+        ))
       )}
       <AddCardButton />
     </div>

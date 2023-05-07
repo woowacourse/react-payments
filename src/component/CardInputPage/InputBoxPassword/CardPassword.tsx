@@ -50,6 +50,7 @@ export default function CardPassword(props: CardPasswordProps) {
       {new Array(2).fill(0).map((_, index) => (
         <Input
           inputPlace="essential"
+          key={`card-password-${index + 1}`}
           name={`card-password-${index + 1}`}
           className="input-password input-password"
           type="password"
@@ -59,6 +60,7 @@ export default function CardPassword(props: CardPasswordProps) {
       ))}
       {new Array(2).fill(0).map((_, index) => (
         <input
+          key={`card-password-${index + 3}`}
           className="input-password"
           disabled
           type="password"
