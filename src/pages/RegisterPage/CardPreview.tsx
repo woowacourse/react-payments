@@ -5,6 +5,7 @@ import { Card } from 'types/Card';
 interface CardPreviewProps {
   cardInfo: Card;
   onClick?: () => void;
+  isLoading?: boolean;
 }
 
 const CardPreview = ({ cardInfo, onClick }: CardPreviewProps) => {
@@ -39,14 +40,15 @@ const CardPreview = ({ cardInfo, onClick }: CardPreviewProps) => {
   );
 };
 
-type StyledCardProps = {
-  $background: string;
-};
-
 const CardName = styled.p`
   text-align: center;
   margin-bottom: 24px;
 `;
+
+type StyledCardProps = {
+  $background: string;
+  isLoading?: boolean;
+};
 
 const StyledCard = styled.div<StyledCardProps>`
   display: flex;

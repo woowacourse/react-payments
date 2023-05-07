@@ -3,24 +3,34 @@ import { StyledInput } from 'components/Input';
 import { useCardNameHandler } from './hooks/useCardNameHandler';
 import CardPreview from 'pages/RegisterPage/CardPreview';
 import styled from 'styled-components';
+import Loading from 'components/Loading';
 
 const CardNamePage = () => {
-  const { cardInfo, handleCardName, onSubmitHandler } = useCardNameHandler();
+  const { cardInfo, handleCardName, onSubmitHandler, isLoading } =
+    useCardNameHandler();
 
   return (
     <>
       <Container>
-        <Span>카드 별칭을 입력하면 등록이 완료됩니다.</Span>
-        <CardPreview cardInfo={cardInfo}></CardPreview>
-        <form onSubmit={onSubmitHandler}>
-          <CardNameInput
-            autoFocus
-            value={cardInfo.cardName}
-            onChange={handleCardName}
-            required
-          ></CardNameInput>
-          <AddButton>등록</AddButton>
-        </form>
+        {isLoading ? (
+          <Span></Span>
+        ) : (
+          <Span>카드 별칭을 입력하면 등록이 완료됩니다.</Span>
+        )}
+        <CardPreview cardInfo={cardInfo} isLoading={isLoading}></CardPreview>
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <form onSubmit={onSubmitHandler}>
+            <CardNameInput
+              autoFocus
+              value={cardInfo.cardName}
+              onChange={handleCardName}
+              required
+            ></CardNameInput>
+            <AddButton>등록</AddButton>
+          </form>
+        )}
       </Container>
     </>
   );
