@@ -31,6 +31,7 @@ const InputSuccessPage = () => {
       <h1 className={styles.heading}>카드 등록을 완료했어요!</h1>
       <CardPreview card={card} />
       <Input
+        role="textbox"
         className={styles.input}
         placeholder="카드 별명을 설정해 주세요"
         parsers={[lengthParser]}

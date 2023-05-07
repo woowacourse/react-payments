@@ -61,7 +61,8 @@ export default function CardPassword(props: Props) {
   return (
     <div className={styles.inputBox}>
       <Input
-        data-testid="card-password-1"
+        role="textbox"
+        aria-label="카드 비밀번호 첫 번째 숫자"
         className={styles.input}
         type="password"
         parsers={[lengthParser]}
@@ -69,7 +70,8 @@ export default function CardPassword(props: Props) {
         inputMode="numeric"
       />
       <Input
-        data-testid="card-password-2"
+        role="textbox"
+        aria-label="카드 비밀번호 두 번째 숫자"
         className={styles.input}
         type="password"
         parsers={[lengthParser]}
