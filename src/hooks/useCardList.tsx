@@ -20,8 +20,9 @@ const useCardList = () => {
       },
     ];
 
-    localStorageUtil.setItem(key, newCardList);
     setCardList(newCardList);
+
+    return localStorageUtil.setItem(key, newCardList);
   };
 
   return { cardList, saveCard };
