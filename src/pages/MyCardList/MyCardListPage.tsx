@@ -21,7 +21,7 @@ export default function MyCardListPage() {
             </div>
           );
         })}
-      <AddCardButton onClick={() => navigate('/registerCard')} />
+      <AddCardButton onClick={() => navigate('/register-card')} />
     </Styled.Root>
   );
 }
