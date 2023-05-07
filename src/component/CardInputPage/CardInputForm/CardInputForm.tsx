@@ -1,4 +1,3 @@
-import { CreditCard } from "../../../type/CreditCard";
 import Button from "../../common/Button";
 import CardPreview from "../../common/CardPreview";
 import InputBoxCardNumber from "../InputBoxCardNumber/InputBoxCardNumber";
