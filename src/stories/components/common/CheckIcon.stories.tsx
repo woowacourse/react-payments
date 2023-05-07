@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import CheckIcon from '../components/common/CheckIcon';
+import CheckIcon from '../../../components/common/CheckIcon';
 
 const meta: Meta<typeof CheckIcon> = {
   title: 'components/common/CheckIcon',

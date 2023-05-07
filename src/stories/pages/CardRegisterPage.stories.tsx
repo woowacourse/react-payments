@@ -1,15 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { BrowserRouter } from 'react-router-dom';
 
-import CardNameRegisterPage from '../pages/CardNameRegisterPage';
-import CardFormProvider, {
-  CardFormValueContext,
-} from '../contexts/CardFormContext';
-import { CardInfo } from '../types/card';
+import CardRegisterPage from '../../pages/CardRegisterPage';
+import { CardFormValueContext } from '../../contexts/CardFormContext';
+import { CardData, CardInfo } from '../../types/card';
 
-const meta: Meta<typeof CardNameRegisterPage> = {
-  title: 'pages/CardNameRegisterPage',
-  component: CardNameRegisterPage,
+const meta: Meta<typeof CardRegisterPage> = {
+  title: 'pages/CardRegisterPage',
+  component: CardRegisterPage,
   decorators: [
     (Story) => (
       <div
@@ -21,11 +19,9 @@ const meta: Meta<typeof CardNameRegisterPage> = {
         }}
       >
         <BrowserRouter>
-          <CardFormProvider>
-            <CardFormValueContext.Provider value={MOCK_CARD_CONTEXT}>
-              <Story />
-            </CardFormValueContext.Provider>
-          </CardFormProvider>
+          <CardFormValueContext.Provider value={MOCK_CARD_CONTEXT}>
+            <Story />
+          </CardFormValueContext.Provider>
         </BrowserRouter>
       </div>
     ),
@@ -43,6 +39,10 @@ const MOCK_CARD_CONTEXT: CardInfo = {
 };
 
 export default meta;
-type Story = StoryObj<typeof CardNameRegisterPage>;
+type Story = StoryObj<typeof CardRegisterPage>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  args: {
+    registerCard: (cardData: CardData) => cardData,
+  },
+};

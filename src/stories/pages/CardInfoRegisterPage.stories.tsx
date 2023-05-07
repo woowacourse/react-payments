@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { BrowserRouter } from 'react-router-dom';
 
-import CardInfoRegisterPage from '../pages/CardInfoRegisterPage';
-import CardFormProvider from '../contexts/CardFormContext';
+import CardInfoRegisterPage from '../../pages/CardInfoRegisterPage';
+import CardFormProvider from '../../contexts/CardFormContext';
 
 const meta: Meta<typeof CardInfoRegisterPage> = {
   title: 'pages/CardInfoRegisterPage',
