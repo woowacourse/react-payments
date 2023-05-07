@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import St from "./CardAddButtonStyled";
+import St from "./AddCardButtonStyled";
 
 function CardAddButton() {
   const navigate = useNavigate();
