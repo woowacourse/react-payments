@@ -5,10 +5,12 @@ import CreditCardAlias from '@Pages/CreditCardAlias';
 import CreditCardRegister from '@Pages/CreditCardRegister';
 import Home from '@Pages/Home';
 
+import { PATH_ALIAS, PATH_NAME } from '@Constants/routes';
+
 const router = createBrowserRouter(
   [
     {
-      path: '/',
+      path: PATH_ALIAS.home,
       element: <App />,
       children: [
         {
@@ -16,14 +18,14 @@ const router = createBrowserRouter(
           element: <Home />,
         },
         {
-          path: 'register',
+          path: PATH_NAME.register,
           children: [
             {
               path: '',
               element: <CreditCardRegister />,
             },
             {
-              path: 'alias',
+              path: PATH_NAME.alias,
               element: <CreditCardAlias />,
             },
           ],
@@ -32,7 +34,7 @@ const router = createBrowserRouter(
     },
   ],
   {
-    basename: '/react-payments',
+    basename: PATH_ALIAS.base,
   },
 );
 

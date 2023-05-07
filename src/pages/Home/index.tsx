@@ -8,6 +8,8 @@ import creditCardStorage from '@Domains/creditCard/creditCardStorage';
 
 import * as Type from '@Types/index';
 
+import { PATH_ALIAS } from '@Constants/routes';
+
 import * as S from './style';
 
 function Home() {
@@ -37,7 +39,7 @@ function Home() {
         </S.CreditCardList>
         <S.RegisterCreditCardContainer>
           {!creditCardList.length && <S.RegisterCreditCardText>새로운 카드를 등록해주세요.</S.RegisterCreditCardText>}
-          <S.RegisterCreditCardButton type="button" onClick={() => navigate('/register')}>
+          <S.RegisterCreditCardButton type="button" onClick={() => navigate(PATH_ALIAS.register)}>
             +
           </S.RegisterCreditCardButton>
         </S.RegisterCreditCardContainer>

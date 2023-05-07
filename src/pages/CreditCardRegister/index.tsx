@@ -12,6 +12,8 @@ import { CreditCardRegisterContext } from '@Contexts/CreditCardRegister/CreditCa
 
 import scrollWindow from '@Utils/scrollWindow';
 
+import { PATH_ALIAS } from '@Constants/routes';
+
 import CreditCardCVCInput from './CreditCardCVCInput';
 import CreditCardExpiryInput from './CreditCardExpiryInput';
 import CreditCardNumberInput from './CreditCardNumberInput';
@@ -31,7 +33,7 @@ function CreditCardRegister() {
     if (!isValid) return;
     if (!creditCard.company) return;
 
-    navigate('/register/alias');
+    navigate(PATH_ALIAS.alias);
   };
 
   const handleClickSelectCreditCompanyButton = () => {

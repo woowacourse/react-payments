@@ -18,7 +18,8 @@ import {
 import generatorRandomNumber from '@Utils/generatorRandomNumber';
 
 import CARD_COMPANY from '@Constants/CardCompany';
-import { REGISTER_MAX_TIME, REGISTER_MIN_TIME } from '@Constants/creditCard';
+import { CREDIT_CARD_MAX_LENGTH, REGISTER_MAX_TIME, REGISTER_MIN_TIME } from '@Constants/creditCard';
+import { PATH_ALIAS } from '@Constants/routes';
 
 import * as S from './style';
 
@@ -37,11 +38,11 @@ function CreditCardAlias() {
 
   const handleClickConfirmButton = async () => {
     await registerCreditCard(creditCardState);
-    navigate('/');
+    navigate(PATH_ALIAS.home);
   };
 
   useEffect(() => {
-    if (!creditCardState.company) navigate('/register');
+    if (!creditCardState.company) navigate(PATH_ALIAS.register);
     setDelayTime(generatorRandomNumber.generateWithDecimalPoint(REGISTER_MIN_TIME, REGISTER_MAX_TIME));
   }, []);
 
@@ -74,7 +75,7 @@ function CreditCardAlias() {
               placeholder="카드 별칭을 등록하세요."
               onChange={handleChangeAlias}
             />
-            <InputLabel label={`${creditCardState.alias.length} / 10`} />
+            <InputLabel label={`${creditCardState.alias.length} / ${CREDIT_CARD_MAX_LENGTH.alias}`} />
           </S.AliasInputLayout>
           <Button
             text="확인"
