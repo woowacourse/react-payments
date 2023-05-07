@@ -57,7 +57,7 @@ const CardWrapper = styled.div`
   box-sizing: border-box;
 
   border-radius: 5px;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 3px 3px -3px rgba(0, 0, 0, 0.25);
 
   background: ${(props) => props.theme.main};
   color: ${(props) => props.theme.point};

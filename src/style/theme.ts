@@ -9,8 +9,8 @@ export const cardCompanyTheme: Record<string, { main: string; point: string }> =
       point: "white",
     },
     신한카드: {
-      main: "rgb(19, 74, 245)",
-      point: "white",
+      main: "white",
+      point: "rgb(19, 74, 245)",
     },
     카카오뱅크: {
       main: "rgb(251, 230, 77)",

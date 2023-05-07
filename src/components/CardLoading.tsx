@@ -53,7 +53,6 @@ const BoxWrapper = styled.div`
 const CardWrapper = styled.div`
   display: flex;
   justify-content: center;
-
   width: 230px;
   height: 140px;
 `;

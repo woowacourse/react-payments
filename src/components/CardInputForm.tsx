@@ -19,7 +19,7 @@ import {
 } from "../utils";
 import { useCardInputRefs } from "../hooks";
 
-interface CardInputFormType {
+export interface CardInputFormType {
   card: CardType;
   setNewCard: (key: keyof CardType, value: string) => void;
   onSubmit: (e: FormEvent) => void;
@@ -79,7 +79,9 @@ const CardInputForm = ({ card, setNewCard, onSubmit }: CardInputFormType) => {
   return (
     <CardInputFormWrapper onSubmit={onSubmit}>
       <InputSetWrapper>
-        <label htmlFor="cardNumber">카드 번호</label>
+        <label htmlFor="cardNumber">
+          카드 번호 <span>*</span>
+        </label>
         <CardInput
           value={card.cardNumber}
           placeholder="카드 번호를 입력해 주세요."
@@ -95,7 +97,9 @@ const CardInputForm = ({ card, setNewCard, onSubmit }: CardInputFormType) => {
       </InputSetWrapper>
 
       <InputSetWrapper>
-        <label htmlFor="expiredDate">만료일</label>
+        <label htmlFor="expiredDate">
+          만료일 <span>*</span>
+        </label>
         <CardInput
           value={card.expiredDate}
           placeholder="MM / YY"
@@ -127,7 +131,9 @@ const CardInputForm = ({ card, setNewCard, onSubmit }: CardInputFormType) => {
       </InputSetWrapper>
 
       <InputSetWrapper>
-        <label htmlFor="cvc">보안 코드(CVC/CVV)</label>
+        <label htmlFor="cvc">
+          보안 코드(CVC/CVV) <span>*</span>
+        </label>
         <CvcInputWrapper>
           <CardInput
             value={card.cvc}
@@ -148,7 +154,9 @@ const CardInputForm = ({ card, setNewCard, onSubmit }: CardInputFormType) => {
       </InputSetWrapper>
 
       <InputSetWrapper>
-        <label htmlFor="password">카드 비밀번호</label>
+        <label htmlFor="password">
+          카드 비밀번호 <span>*</span>
+        </label>
         <PasswordInputWrapper>
           <CardInput
             value={password[PASSWORD_DIGIT_INDEX.FIRST]}
@@ -201,6 +209,9 @@ const InputSetWrapper = styled.div`
     font-size: 12px;
     color: #525252;
     margin-bottom: 6px;
+    & > span {
+      color: red;
+    }
   }
 
   & > span {

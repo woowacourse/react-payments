@@ -24,7 +24,7 @@ export const validateExpiredDate = (value: string) => {
   if (yearNumber === today.getFullYear() && monthNumber <= today.getMonth())
     return "만료일이 지난 카드입니다.";
   if (value.length !== CARD_INPUT_LENGTH.expiredDate)
-    return "카드에 기입된 만료일 모두 입력해 주세요!";
+    return "카드에 기입된 만료일을 모두 입력해 주세요.";
   return "";
 };
 
@@ -36,14 +36,14 @@ export const validateOwnerName = (value: string) => {
 export const validateCvc = (value: string) => {
   if (!REGEX.number.test(value)) return "숫자만 입력해 주세요.";
   if (value.length !== CARD_INPUT_LENGTH.cvc)
-    return "cvc는 3자리로 입력해 주세요!";
+    return "cvc는 카드 뒤 3자리를 입력해 주세요.";
   return "";
 };
 
 export const validatePassword = (value: string) => {
   if (!REGEX.number.test(value)) return "숫자만 입력해 주세요.";
   if (value.length !== CARD_INPUT_LENGTH.password * 2)
-    return "비밀번호를 입력해 주세요.";
+    return "비밀번호 앞 2자리를 입력해 주세요.";
   return "";
 };
 
