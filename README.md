@@ -29,25 +29,18 @@
 
 > `Component-Driven Development` 에 따라 UI를 구성하고 재사용 가능한 `Component`를 작성합니다.
 
-✔️ `모바일 타겟`의 웹 앱을 구현하며 컴포넌트가 가지는 의미와 `편리한 모바일 UI/UX`에 대해 고민해봅니다.
-
-✔️ 다른 라이브러리나 프레임워크 없이 오로지 `React`만으로 상태를 관리하고 컴포넌트를 설계합니다.
-
-✔️ React `Hooks API`를 활용합니다.
-
-✔️ `재사용 가능한 Component`를 직접 작성하고 사용합니다.
-
-✔️ `Controlled` & `Uncontrolled Components`에 입각하여 `Form`을 핸들링합니다.
+- `모바일 타겟`의 웹 앱을 구현하며 컴포넌트가 가지는 의미와 `편리한 모바일 UI/UX`에 대해 고민해봅니다.
+- 다른 라이브러리나 프레임워크 없이 오로지 `React`만으로 상태를 관리하고 컴포넌트를 설계합니다.
+- React `Hooks API`를 활용합니다.
+- `재사용 가능한 Component`를 직접 작성하고 사용합니다.
+- `Controlled` & `Uncontrolled Components`에 입각하여 `Form`을 핸들링합니다.
 
 > TypeScript와 함께 페이먼츠 앱을 개발자를 위한 라이브러리로 출시합니다.
 
-✔️ 라이브러리를 사용하는 개발자에게 친절한 API 문서를 제공합니다.
-
-✔️ 라이브러리를 사용하는 개발자와 코드로 소통합니다.
-
-✔️ 다양한 모듈 대응 케이스를 고민해보고 실제로 NPM에 출시합니다.
-
-✔️ Semantic Versioning이 왜 필요한지 고민해봅니다.
+- 라이브러리를 사용하는 개발자에게 친절한 API 문서를 제공합니다.
+- 라이브러리를 사용하는 개발자와 코드로 소통합니다.
+- 다양한 모듈 대응 케이스를 고민해보고 실제로 NPM에 출시합니다.
+- Semantic Versioning이 왜 필요한지 고민해봅니다.
 
 ## 🚀 Step1 - Component-Driven Development
 
@@ -84,8 +77,8 @@
 
 **카드 등록을 위한 form을 CDD로 구현한다.**
 
-- Storybook으로 UI컴포넌트 렌더링
-- REQUIRMENTS.md에 요구 사항 도출
+- `Storybook`으로 UI컴포넌트 렌더링
+- `REQUIRMENTS.md`에 요구 사항 도출
 - 재사용 가능한 Component 작성
 
 ### ✅ 프로그래밍 요구사항
@@ -119,13 +112,12 @@
 #### **Performance**
 
 - react에서 제공하는 hook을 이용하여 성능 최적화를 고려한다.
-- Controlled & Uncontrolled Components를 고려하여 Form을 핸들링한다.
 
 ## 🚀 Step3 - Refactoring & Reusability
 
 ### 📝 필수 요구사항 - **재사용과 리팩터링**
 
-- 사용하던 모달을 분리해서 npm으로 배포하고, 그 라이브러리를 직접 import해서 사용하기
+- 사용하던 모달을 분리해서 npm으로 배포하고, 그 라이브러리를 직접 `import`해서 사용하기
 - 문서로서 스토리북을 고도화하기 위해 리팩터링
 - '카드를 등록중입니다' 스피너 추가
 
