@@ -5,6 +5,9 @@ import ExpirationInput from "../components/Input/ExpirationInput";
 import InputField from "../components/common/InputField";
 import OwnerInput from "../components/Input/OwnerInput";
 import PasswordInput from "../components/Input/PasswordInput";
+import { useInput } from "../hooks/useInput";
+import { within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 const meta: Meta<typeof InputField> = {
   component: InputField,
@@ -55,6 +58,23 @@ export const Cvc: Story = {
     kind: "cvc",
     children: <CvcInput cvc={defaultState} />,
   },
+};
+
+export const CvcErrorMessage: Story = () => {
+  const cvc = useInput("", { name: "cvc" });
+  return <InputField kind="cvc" children={<CvcInput cvc={cvc} />} />;
+};
+
+CvcErrorMessage.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  const input = canvas.getByLabelText("보안 코드(CVC/CVV)", {
+    selector: 'input[type="password"]',
+  });
+  input.focus();
+  await userEvent.type(input, "19a", {
+    delay: 500,
+  });
+  input.blur();
 };
 
 export const Password: Story = {
