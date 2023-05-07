@@ -1,10 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import CardDetailView from "../component/CardDetailView/CardDetailView";
-import { CREDIT_CARD_COMPANY } from "../types/card";
+import CardDetailView from "components/CardDetailView/CardDetailView";
+import { CREDIT_CARD_COMPANY } from "types/card";
 
 const meta = {
   component: CardDetailView,
   title: "CardDetailView",
+  tags: ["autodocs"],
 } satisfies Meta<typeof CardDetailView>;
 
 export default meta;

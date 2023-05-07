@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import AddCardPage from "./component/AddCardPage/AddCardPage";
-import CardListPage from "./component/CardListPage/CardListPage";
-import { CreditCard } from "./types/card";
-import { CardProvier } from "./contexts/CardContext";
-import AddCardResultPage from "./component/AddCardResultPage/AddCardResultPage";
+import { CreditCard } from "types/card";
+import { CardProvier } from "contexts/CardContext";
+import AddCardPage from "components/AddCardPage/AddCardPage";
+import CardListPage from "components/CardListPage/CardListPage";
+import AddCardResultPage from "components/AddCardResultPage/AddCardResultPage";
+import LoadingPage from "components/LoadingPage/LoadingPage";
 
 function App() {
   const [creditCardList, setCreditCardList] = useState<CreditCard[]>([]);
@@ -32,6 +33,10 @@ function App() {
               {
                 path: "result",
                 element: <AddCardResultPage addCreditCard={addCreditCard} />,
+              },
+              {
+                path: "loading",
+                element: <LoadingPage />,
               },
             ],
           },

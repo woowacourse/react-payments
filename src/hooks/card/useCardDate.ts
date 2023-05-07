@@ -1,4 +1,4 @@
-import { useCardDispatch, useCardState } from "../../contexts/CardContext";
+import { useCardDispatch, useCardState } from "contexts/CardContext";
 
 function useCardDate() {
   const dispatch = useCardDispatch();

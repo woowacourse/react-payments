@@ -1,5 +1,5 @@
-import { CREDIT_CARD_COMPANY } from "../../types/card";
-import { useCardDispatch, useCardState } from "../../contexts/CardContext";
+import { CREDIT_CARD_COMPANY } from "types/card";
+import { useCardDispatch, useCardState } from "contexts/CardContext";
 
 function useCardCompany() {
   const dispatch = useCardDispatch();
