@@ -1,18 +1,18 @@
-import BottomSheet from '../../../components/BottomSheet';
 import CardSelectButton from './CardSelectButton';
 import './CardNameBottomSheet.css';
 import { CardCompany, CardNameBottomSheetProps } from '../../../type';
 import { CARD_COMPANYS } from '../../../utils/constants';
+import BottomSheet from 'yunseong-bottom-sheet';
 
 const CardNameBottomSheet = ({
   isOpen,
   onToggleOpen,
   setCardCompany,
 }: CardNameBottomSheetProps) => {
-  const onCardSelectButtonClick = (cardCompany:CardCompany) => {
+  const onCardSelectButtonClick = (cardCompany: CardCompany) => {
     onToggleOpen();
     setCardCompany(cardCompany);
-  }
+  };
 
   return (
     <BottomSheet isOpen={isOpen} onToggleOpen={onToggleOpen}>

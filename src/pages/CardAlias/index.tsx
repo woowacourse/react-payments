@@ -21,6 +21,7 @@ const CardAliasPage = () => {
     navigate('/');
   };
 
+  // TODO: 객체 depth가 깊은 문제 해결하기
   return (
     <div className="card-alias-page">
       <h2>카드 등록이 완료되었습니다.</h2>
