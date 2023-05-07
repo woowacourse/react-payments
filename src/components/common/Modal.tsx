@@ -32,8 +32,9 @@ const Style = {
     background-color: rgba(0, 0, 0, 0.5);
 
     ${(props) => {
-      if (props.isModalOpen) return 'animation:  modal-backdrop-show 0.7s;';
-      return 'animation:  modal-backdrop-close 0.7s forwards;';
+      return props.isModalOpen
+        ? 'animation:  modal-backdrop-show 0.7s;'
+        : 'animation:  modal-backdrop-close 0.7s forwards;';
     }}
 
     @keyframes modal-backdrop-show {
@@ -83,8 +84,9 @@ const Style = {
     background-color: var(--grey-100);
 
     ${(props) => {
-      if (props.isModalOpen) return 'animation:  modal-show 0.7s;';
-      return 'animation:  modal-close 0.7s forwards;';
+      return props.isModalOpen
+        ? 'animation:  modal-show 0.7s;'
+        : 'animation:  modal-close 0.7s forwards;';
     }}
 
     @keyframes modal-show {
