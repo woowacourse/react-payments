@@ -1,18 +1,18 @@
-import React from 'react';
 import { COMPANY_NAME, Card } from './types';
 import { Styled as S } from './CreditCard.styles';
 
 export type CreditCardProps = {
   card: Card;
+  className?: string;
 };
 
-export interface CardColorProps extends React.ComponentPropsWithoutRef<'span'> {
+export interface CardColorProps {
   backgroundColor: COMPANY_NAME;
 }
 
-export function CreditCard({ card }: CreditCardProps) {
+export function CreditCard({ card, className }: CreditCardProps) {
   return (
-    <S.Wrapper backgroundColor={card.bank}>
+    <S.Wrapper backgroundColor={card.bank} className={className}>
       <S.Bank>{card.bank}</S.Bank>
       <S.Chip />
       <S.CardNumbers>

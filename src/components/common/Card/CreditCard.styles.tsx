@@ -9,9 +9,12 @@ export const Styled = {
     height: 133px;
     background-color: ${({ backgroundColor }) =>
       CARDS_INFO[Object.values(COMPANY_LIST).indexOf(backgroundColor)].color ?? 'black'};
-    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
     border-radius: 5px;
     color: ${({ backgroundColor }) => (backgroundColor === '카카오뱅크' ? '#3A1D1D' : 'white')};
+    font-family: ${({ backgroundColor }) =>
+      CARDS_INFO[Object.values(COMPANY_LIST).indexOf(backgroundColor)].font ?? 'Yoon'};
+    font-weight: 600;
     z-index: 1;
     cursor: pointer;
   `,
@@ -58,7 +61,7 @@ export const Styled = {
 
   Name: styled.span`
     width: 140px;
-    height: 12px;
+    height: 14px;
     font-size: 12px;
     overflow: hidden;
     text-overflow: ellipsis;

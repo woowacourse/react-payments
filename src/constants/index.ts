@@ -16,40 +16,48 @@ export const CARDS_INFO = [
     name: COMPANY_LIST.bc_card,
     iconSvgPath: '/assets/bc_card.svg',
     color: '#F04652',
+    font: 'BC',
   },
   {
     name: COMPANY_LIST.sh_card,
     iconSvgPath: '/assets/sh_card.svg',
     color: '#0046FF',
+    font: 'Shinhan',
   },
   {
     name: COMPANY_LIST.kakao_bank,
     iconSvgPath: '/assets/kakao_bank.svg',
     color: '#FFE600',
+    font: 'KakaoBank',
   },
   {
     name: COMPANY_LIST.hd_card,
     iconSvgPath: '/assets/hd_card.svg',
     color: '#000000',
+    font: 'Hyundai',
   },
   {
     name: COMPANY_LIST.wr_card,
     iconSvgPath: '/assets/wr_card.svg',
     color: '#007BC8',
+    font: 'Woori',
   },
   {
     name: COMPANY_LIST.lt_card,
     iconSvgPath: '/assets/lt_card.svg',
     color: '#ED1C24',
+    font: 'Lotte',
   },
   {
     name: COMPANY_LIST.hn_card,
     iconSvgPath: '/assets/hn_card.svg',
     color: '#009490',
+    font: 'Hana',
   },
   {
     name: COMPANY_LIST.kb_card,
     iconSvgPath: '/assets/kb_card.svg',
     color: '#685E54',
+    font: 'KB',
   },
 ] as const;
