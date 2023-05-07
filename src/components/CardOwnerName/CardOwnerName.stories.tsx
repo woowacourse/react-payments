@@ -10,18 +10,20 @@ const meta = {
 
 export default meta;
 
-export const CardOwnerNameFilled = (args: CardOwnerNameProps) => {
+const Template = (args: CardOwnerNameProps) => {
   const ref = useRef<HTMLInputElement>(null);
   return <CardOwnerName {...args} ref={ref} />;
 };
+
+Template.args = {
+  cardOwnerName: '',
+};
+
+export const CardOwnerNameFilled = Template.bind({});
+export const CardOwnerNameEmpty = Template.bind({});
 
 CardOwnerNameFilled.args = {
   cardOwnerName: 'NAME',
-};
-
-export const CardOwnerNameEmpty = (args: CardOwnerNameProps) => {
-  const ref = useRef<HTMLInputElement>(null);
-  return <CardOwnerName {...args} ref={ref} />;
 };
 
 CardOwnerNameEmpty.args = {

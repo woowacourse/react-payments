@@ -21,12 +21,19 @@ const meta = {
 } satisfies Meta<typeof CardNumbers>;
 export default meta;
 
-export const CardNumbersFilled = (
+const Template = (
   args: CardNumbersProps & { nextRef: RefObject<HTMLInputElement> }
 ) => {
   const ref = useRef<HTMLInputElement>(null);
   return <CardNumbers {...args} ref={ref} />;
 };
+
+Template.args = {
+  cardNumbers: {},
+};
+
+export const CardNumbersFilled = Template.bind({});
+export const CardNumbersEmpty = Template.bind({});
 
 CardNumbersFilled.args = {
   cardNumbers: {
@@ -35,13 +42,6 @@ CardNumbersFilled.args = {
     2: '3333',
     3: '4444',
   },
-};
-
-export const CardNumbersEmpty = (
-  args: CardNumbersProps & { nextRef: RefObject<HTMLInputElement> }
-) => {
-  const ref = useRef<HTMLInputElement>(null);
-  return <CardNumbers {...args} ref={ref} />;
 };
 
 CardNumbersEmpty.args = {

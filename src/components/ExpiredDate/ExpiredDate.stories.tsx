@@ -17,19 +17,16 @@ const meta = {
 
 export default meta;
 
-export const ExpiredDateFilled = (
+const Template = (
   args: ExpiredDateProps & { nextRef: RefObject<HTMLInputElement> }
 ) => {
   const ref = useRef<HTMLInputElement>(null);
   return <ExpiredDate {...args} ref={ref} />;
 };
+Template.args = { expiredDate: {} };
 
-export const ExpiredDateEmpty = (
-  args: ExpiredDateProps & { nextRef: RefObject<HTMLInputElement> }
-) => {
-  const ref = useRef<HTMLInputElement>(null);
-  return <ExpiredDate {...args} ref={ref} />;
-};
+export const ExpiredDateFilled = Template.bind({});
+export const ExpiredDateEmpty = Template.bind({});
 
 ExpiredDateFilled.args = {
   expiredDate: {
