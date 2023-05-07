@@ -1,8 +1,8 @@
+import { Input, InputContainer, InputLabel } from "components/common";
+import { ERROR_MESSAGE, INPUT_FULL_LENGTH } from "constant/cardInput";
+import { useError } from "hook/useError";
 import styled from "styled-components";
-import { InputContainer, Input, InputLabel } from "../common";
-import { isNumeric } from "../../utils/validate";
-import { ERROR_MESSAGE, INPUT_FULL_LENGTH } from "../../constant/cardInput";
-import { useError } from "../../hook/useError";
+import { isNumeric } from "utils/validate";
 
 const CVCInfo = {
   label: "cvc",

@@ -1,10 +1,10 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { InputContainer, InputLabel, Input } from "../common";
-import { isNumeric } from "../../utils/validate";
-import { useInputFocusChain } from "../../hook/useInputFocusChain";
-import { ERROR_MESSAGE, INPUT_FULL_LENGTH } from "../../constant/cardInput";
-import { useError } from "../../hook/useError";
+import { Input, InputContainer, InputLabel } from "components/common";
+import { ERROR_MESSAGE, INPUT_FULL_LENGTH } from "constant/cardInput";
+import { useError } from "hook/useError";
+import { useInputFocusChain } from "hook/useInputFocusChain";
+import { isNumeric } from "utils/validate";
 
 interface NumbersInputProps {
   setNumbers: (index: number, numbers: string) => void;

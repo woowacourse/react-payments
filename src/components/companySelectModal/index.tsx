@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import { CompanyIcon } from "./CompanyIcon";
-import { CARD_COMPANIES } from "../../constant/cardCompany";
-import { CardType } from "../../types/card";
-import { Company } from "../../types/company";
 import { Modal } from "@dahyeeee/react-components-library";
+import { CardType } from "types/card";
+import { Company } from "types/company";
+import { CARD_COMPANIES } from "constant/cardCompany";
+import { CompanySelect } from "./CompanySelect";
 
 interface CompanySelectModalProps {
   setCardInfo: React.Dispatch<React.SetStateAction<CardType>>;
@@ -40,7 +40,7 @@ export const CompanySelectModal = ({
     <Modal isModalVisible={isModalOpen} closeModal={closeModalWithCompany}>
       <IconWrapper>
         {CARD_COMPANIES.map((company) => (
-          <CompanyIcon
+          <CompanySelect
             key={company.name}
             company={company}
             selectCompany={selectCompany}

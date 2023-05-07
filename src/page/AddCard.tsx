@@ -1,14 +1,14 @@
-import { useState } from "react";
-import { CardItem } from "../components/cardList/CardItem";
-import { Header } from "../components/common/Header";
-import { CardType } from "../types/card";
 import styled from "styled-components";
-import { CardForm } from "../components/cardForm";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { CompanySelectModal } from "../components/companySelectModal";
-import { getRandomId } from "../utils/randomId";
-import { useModal } from "../hook/useModal";
-import { PAGE } from "../constant/routePath";
+import { CardType } from "types/card";
+import { getRandomId } from "utils/randomId";
+import { useModal } from "hook/useModal";
+import { Header } from "components/common";
+import { PAGE } from "constant/routePath";
+import { CardItem } from "components/cardList/CardItem";
+import { CardForm } from "components/cardForm";
+import { CompanySelectModal } from "components/companySelectModal";
 
 const defaultCard = {
   name: "",

@@ -1,10 +1,10 @@
-import { Home } from "./page/Home";
-import { AddCard } from "./page/AddCard";
 import { GlobalStyle } from "./style/resetStyle";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { CardListProvider } from "./context/cardListContext";
-import { RegisterCard } from "./page/RegisterCard";
 import { PAGE } from "./constant/routePath";
+import { Home } from "./page/Home";
+import { AddCard } from "./page/AddCard";
+import { RegisterCard } from "./page/RegisterCard";
 import { Loading } from "./page/Loading";
 
 const App = () => {

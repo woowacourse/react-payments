@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { InputContainer, Input, InputLabel } from "../common";
-import { INPUT_FULL_LENGTH } from "../../constant/cardInput";
 import { useState } from "react";
+import { INPUT_FULL_LENGTH } from "constant/cardInput";
+import { Input, InputContainer, InputLabel } from "components/common";
 
 interface OwnerInputProps {
   setOwner: (value: string) => void;

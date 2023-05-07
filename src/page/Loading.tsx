@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { PAGE } from "../constant/routePath";
 import { useEffect } from "react";
-import { Spinner } from "../components/common/Spinner";
+import { PAGE } from "constant/routePath";
+import { Spinner } from "components/common/Spinner";
 
 export const Loading = () => {
   const moveTo = useNavigate();
