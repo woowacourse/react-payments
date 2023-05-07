@@ -1,9 +1,11 @@
+import { StyledCaption } from 'components/Caption';
 import { StyledInput } from 'components/Input';
-import { StyledInputBox } from 'components/InputBox';
+import InputBox from 'components/InputBox';
 import { LENGTH, REGEX } from 'constants/constants';
 import { AddCardContext } from 'context/CardContext';
 import { ChangeEvent, useContext } from 'react';
 import styled from 'styled-components';
+import { showNameCaption } from 'utils/captionStyles';
 import { changeToValidValue } from 'utils/inputValidator';
 
 const NameInput = () => {
@@ -30,7 +32,7 @@ const NameInput = () => {
           {name.length}/{LENGTH.NAME}
         </p>
       </Wrapper>
-      <NameInputBox>
+      <InputBox>
         <StyledNameInput
           type="text"
           name="name"
@@ -40,17 +42,16 @@ const NameInput = () => {
           onChange={handleName}
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
         />
-      </NameInputBox>
+      </InputBox>
+      <NameInputCaption name={name}>
+        카드 이름은 영문만 입력 가능합니다.
+      </NameInputCaption>
     </>
   );
 };
 
 export const StyledNameInput = styled(StyledInput)`
   width: 80%;
-`;
-
-export const NameInputBox = styled(StyledInputBox)`
-  margin-bottom: 24px;
 `;
 
 export const Wrapper = styled.div`
@@ -61,6 +62,10 @@ export const Wrapper = styled.div`
     color: var(--label-color);
     font-size: 12px;
   }
+`;
+
+const NameInputCaption = styled(StyledCaption)<{ name: string }>`
+  visibility: ${({ name }) => showNameCaption(name)};
 `;
 
 export default NameInput;

@@ -12,11 +12,14 @@ export const areValidCardInfo = (cardInfo: any) => {
     cardNumbers,
     LENGTH.EACH_CARD_NUMBER
   );
+
   const validateDate = validator.isAllValidLength(
     [month, year],
     LENGTH.EXPIRATION
   );
+
   const validateCode = validator.isValidLength(code, LENGTH.SECURITY_CODE);
+
   const validatePassword = validator.isAllValidLength(
     [password1, password2],
     LENGTH.EACH_PASSWORD
