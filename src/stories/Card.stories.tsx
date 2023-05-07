@@ -13,6 +13,7 @@ type Story = StoryObj<typeof Card>;
 
 export const HyundaiCard: Story = {
   args: {
+    fadeCard: true,
     cardType: '현대카드',
     cardNumber: {
       first: '1234',
@@ -29,6 +30,7 @@ export const HyundaiCard: Story = {
 
 export const HyundaiCard_Back: Story = {
   args: {
+    fadeCard: true,
     cardType: '현대카드',
     cardNumber: {
       first: '1234',
@@ -45,6 +47,7 @@ export const HyundaiCard_Back: Story = {
 
 export const HyundaiCard_Spin: Story = {
   args: {
+    fadeCard: true,
     cardType: '현대카드',
     cardNumber: {
       first: '1234',
@@ -62,6 +65,7 @@ export const HyundaiCard_Spin: Story = {
 
 export const BCCard: Story = {
   args: {
+    fadeCard: true,
     cardType: 'BC카드',
     cardNumber: {
       first: '1234',
@@ -78,6 +82,7 @@ export const BCCard: Story = {
 
 export const BCCard_Back: Story = {
   args: {
+    fadeCard: true,
     cardType: 'BC카드',
     cardNumber: {
       first: '1234',
@@ -94,6 +99,7 @@ export const BCCard_Back: Story = {
 
 export const BCCard_Spin: Story = {
   args: {
+    fadeCard: true,
     cardType: 'BC카드',
     cardNumber: {
       first: '1234',
@@ -111,6 +117,7 @@ export const BCCard_Spin: Story = {
 
 export const ShinhanCard: Story = {
   args: {
+    fadeCard: true,
     cardType: '신한카드',
     cardNumber: {
       first: '1234',
@@ -127,6 +134,7 @@ export const ShinhanCard: Story = {
 
 export const ShinhanCard_Back: Story = {
   args: {
+    fadeCard: true,
     cardType: '신한카드',
     cardNumber: {
       first: '1234',
@@ -143,6 +151,7 @@ export const ShinhanCard_Back: Story = {
 
 export const ShinhanCard_Spin: Story = {
   args: {
+    fadeCard: true,
     cardType: '신한카드',
     cardNumber: {
       first: '1234',
@@ -160,6 +169,7 @@ export const ShinhanCard_Spin: Story = {
 
 export const KookminCard: Story = {
   args: {
+    fadeCard: true,
     cardType: '국민카드',
     cardNumber: {
       first: '1234',
@@ -176,6 +186,7 @@ export const KookminCard: Story = {
 
 export const KookminCard_Back: Story = {
   args: {
+    fadeCard: true,
     cardType: '국민카드',
     cardNumber: {
       first: '1234',
@@ -192,6 +203,7 @@ export const KookminCard_Back: Story = {
 
 export const KookminCard_Spin: Story = {
   args: {
+    fadeCard: true,
     cardType: '국민카드',
     cardNumber: {
       first: '1234',
@@ -209,6 +221,7 @@ export const KookminCard_Spin: Story = {
 
 export const LotteCard: Story = {
   args: {
+    fadeCard: true,
     cardType: '롯데카드',
     cardNumber: {
       first: '1234',
@@ -225,6 +238,7 @@ export const LotteCard: Story = {
 
 export const LotteCard_Back: Story = {
   args: {
+    fadeCard: true,
     cardType: '롯데카드',
     cardNumber: {
       first: '1234',
@@ -241,6 +255,7 @@ export const LotteCard_Back: Story = {
 
 export const LotteCard_Spin: Story = {
   args: {
+    fadeCard: true,
     cardType: '롯데카드',
     cardNumber: {
       first: '1234',
@@ -258,6 +273,7 @@ export const LotteCard_Spin: Story = {
 
 export const WooriCard: Story = {
   args: {
+    fadeCard: true,
     cardType: '우리카드',
     cardNumber: {
       first: '1234',
@@ -274,6 +290,7 @@ export const WooriCard: Story = {
 
 export const WooriCard_Back: Story = {
   args: {
+    fadeCard: true,
     cardType: '우리카드',
     cardNumber: {
       first: '1234',
@@ -290,6 +307,7 @@ export const WooriCard_Back: Story = {
 
 export const WooriCard_Spin: Story = {
   args: {
+    fadeCard: true,
     cardType: '우리카드',
     cardNumber: {
       first: '1234',
@@ -307,6 +325,7 @@ export const WooriCard_Spin: Story = {
 
 export const KakaoBank: Story = {
   args: {
+    fadeCard: true,
     cardType: '카카오뱅크',
     cardNumber: {
       first: '1234',
@@ -323,6 +342,7 @@ export const KakaoBank: Story = {
 
 export const KakaoBank_Back: Story = {
   args: {
+    fadeCard: true,
     cardType: '카카오뱅크',
     cardNumber: {
       first: '1234',
@@ -339,6 +359,7 @@ export const KakaoBank_Back: Story = {
 
 export const KakaoBank_Spin: Story = {
   args: {
+    fadeCard: true,
     cardType: '카카오뱅크',
     cardNumber: {
       first: '1234',
@@ -356,6 +377,7 @@ export const KakaoBank_Spin: Story = {
 
 export const HanaBank: Story = {
   args: {
+    fadeCard: true,
     cardType: '하나카드',
     cardNumber: {
       first: '1234',
@@ -372,6 +394,7 @@ export const HanaBank: Story = {
 
 export const HanaBank_Back: Story = {
   args: {
+    fadeCard: true,
     cardType: '하나카드',
     cardNumber: {
       first: '1234',
@@ -388,6 +411,7 @@ export const HanaBank_Back: Story = {
 
 export const HanaBank_Spin: Story = {
   args: {
+    fadeCard: true,
     cardType: '하나카드',
     cardNumber: {
       first: '1234',
