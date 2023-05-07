@@ -57,6 +57,8 @@ const FormCardAdd = ({
     return expireError && cardNumberError && cardCVCNumberError && cardPasswordError;
   };
 
+  const loadingRequest = () => new Promise((resolve) => setTimeout(resolve, 3000));
+
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const { first, second, third, fourth } = cardNumber.value;
@@ -80,8 +82,7 @@ const FormCardAdd = ({
       },
     };
     handleAddCardData(addCardRequestStartAction());
-
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    await loadingRequest();
     handleAddCardData(addCardAction(postData));
   };
 
