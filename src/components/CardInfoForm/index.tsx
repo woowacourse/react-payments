@@ -3,7 +3,7 @@ import type { FormEventHandler, ChangeEventHandler } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import NumberField from './NumberField';
-import ExpiredDateField from './ExpiredDataField';
+import ExpiredDateField from './ExpiredDateField';
 import OwnerField from './OwnerField';
 import CvcField from './CvcField';
 import PasswordField from './PasswordField';
