@@ -16,20 +16,16 @@ const CardCompanyModal = ({ onClickLogo, isModalOpen, closeModal }: CardCompanyM
   };
 
   return (
-    <>
-      {isModalOpen && (
-        <Modal onCloseModal={closeModal}>
-          <CardCompanyWrapper>
-            {CARD_COMPANY_LOGO.map(({ name, logo }, index) => (
-              <CardCompanyButton type="button" key={index} onClick={() => handleClickLogo(name)}>
-                <img src={logo} alt={name} />
-                <CardCompanyName>{name}</CardCompanyName>
-              </CardCompanyButton>
-            ))}
-          </CardCompanyWrapper>
-        </Modal>
-      )}
-    </>
+    <Modal open={isModalOpen} onCloseModal={closeModal}>
+      <CardCompanyWrapper>
+        {CARD_COMPANY_LOGO.map(({ name, logo }, index) => (
+          <CardCompanyButton type="button" key={index} onClick={() => handleClickLogo(name)}>
+            <img src={logo} alt={name} />
+            <CardCompanyName>{name}</CardCompanyName>
+          </CardCompanyButton>
+        ))}
+      </CardCompanyWrapper>
+    </Modal>
   );
 };
 

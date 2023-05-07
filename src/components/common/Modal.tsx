@@ -3,10 +3,11 @@ import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 
 type ModalProps = {
+  open: boolean;
   onCloseModal: () => void;
 };
 
-const Modal = ({ children, onCloseModal }: PropsWithChildren<ModalProps>) => {
+const Modal = ({ open, children, onCloseModal }: PropsWithChildren<ModalProps>) => {
   const onKeyDownEscape = (event: KeyboardEvent) => {
     if (event.code !== 'Escape') return;
     onCloseModal();
@@ -19,8 +20,12 @@ const Modal = ({ children, onCloseModal }: PropsWithChildren<ModalProps>) => {
 
   return createPortal(
     <ModalWrapper>
-      <ModalBackdrop onClick={onCloseModal} />
-      <ModalContent>{children}</ModalContent>
+      {open && (
+        <>
+          <ModalBackdrop onClick={onCloseModal} />
+          <ModalContent>{children}</ModalContent>
+        </>
+      )}
     </ModalWrapper>,
     document.body,
   );
