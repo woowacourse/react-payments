@@ -1,5 +1,4 @@
-import { userEvent, waitFor, within } from "@storybook/testing-library";
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta } from "@storybook/react";
 import { useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
 import LastPage from "pages/LastPage";
