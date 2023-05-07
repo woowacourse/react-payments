@@ -1,13 +1,15 @@
 import type { Meta } from "@storybook/react";
 
-import CardCoModal from "../../component/common/CardCoModal";
+// import CardCoModal from "../../component/common/CardCoModal";
+import Modal from "@chsua/bottom-modal";
+
 import CardCoButton from "../../component/common/CardCoButton";
 import { CARD_CO_NAME } from "../../CONSTANT";
 import { CardCo } from "../../type";
 
 const meta: Meta = {
   title: "CardCoModal component",
-  component: CardCoModal,
+  component: Modal,
   argTypes: {
     isOpen: {
       action: "카드사 상태 변경 및 카드사 입력 완료로 상태 변경",
@@ -18,7 +20,7 @@ const meta: Meta = {
 const cardCoList = Object.keys(CARD_CO_NAME) as CardCo[];
 
 export const iconModalTest = (args: any) => (
-  <CardCoModal {...args}>
+  <Modal {...args}>
     {cardCoList.map((cardCo) => (
       <CardCoButton
         key={cardCo}
@@ -26,8 +28,20 @@ export const iconModalTest = (args: any) => (
         changeCardCoStatus={() => {}}
       />
     ))}
-  </CardCoModal>
+  </Modal>
 );
-iconModalTest.args = {};
+iconModalTest.args = {
+  isOpen: true,
+  style: {
+    height: "250px",
+    inner: {
+      display: "grid",
+      gridTemplateColumns: "1fr 1fr 1fr 1fr",
+      padding: "50px 10%",
+      minWidth: "375px",
+      rowGap: "20px",
+    },
+  },
+};
 
 export default meta;
