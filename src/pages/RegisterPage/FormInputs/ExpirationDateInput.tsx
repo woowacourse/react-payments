@@ -32,14 +32,13 @@ const ExpirationDateInput = () => {
       <label className="label-text" htmlFor="date-label">
         만료일
       </label>
-      <DateInputBox>
+      <DateInputBox role="group" aria-labelledby="date-label">
         {Array.from({ length: DATE_INPUT.COUNT }).map((_, index) => (
           <Fragment key={index}>
             <Input
               type="text"
               name={index ? "year" : "month"}
               id={index ? undefined : "date-label"}
-              aria-labelledby="date-label"
               maxLength={LIMIT_LENGTH.EXPIRATION_DATE}
               inputMode="numeric"
               value={index ? year : month}

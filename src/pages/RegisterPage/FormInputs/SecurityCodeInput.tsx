@@ -23,14 +23,14 @@ const SecurityCodeInput = () => {
 
   return (
     <>
-      <label className="label-text" htmlFor="code">
+      <label className="label-text" htmlFor="code-required">
         보안 코드&#40;CVC/CVV&#41;
       </label>
-      <S.Wrapper>
+      <S.Wrapper aria-labelledby="code">
         <Input
           type="password"
           name="code"
-          id="code"
+          id="code-required"
           maxLength={LIMIT_LENGTH.SECURITY_CODE}
           inputMode="numeric"
           value={code}

@@ -13,12 +13,12 @@ export default meta;
 
 export const CardRegisterPage = () => {
   return (
-    <CardInfoProvider>
-      <ModalStateProvider>
-        <BrowserRouter>
+    <BrowserRouter>
+      <CardInfoProvider>
+        <ModalStateProvider>
           <CardRegisterFormComponent />
-        </BrowserRouter>
-      </ModalStateProvider>
-    </CardInfoProvider>
+        </ModalStateProvider>
+      </CardInfoProvider>
+    </BrowserRouter>
   );
 };

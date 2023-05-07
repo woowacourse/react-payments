@@ -34,7 +34,7 @@ const PasswordInput = () => {
       <label className="label-text" htmlFor="password-label">
         카드 비밀번호
       </label>
-      <PasswordInputBox>
+      <PasswordInputBox role="group" aria-labelledby="password-label">
         {Array.from({ length: NUMBER_INPUT.COUNT }).map((_, index) => (
           <Fragment key={index}>
             {index < PASSWORD_PART ? (
@@ -42,7 +42,6 @@ const PasswordInput = () => {
                 type="password"
                 name={`password${index + 1}`}
                 id={index ? undefined : "password-label"}
-                aria-labelledby="password-label"
                 maxLength={LIMIT_LENGTH.PASSWORD}
                 inputMode="numeric"
                 value={password[`password${index + 1}`]}

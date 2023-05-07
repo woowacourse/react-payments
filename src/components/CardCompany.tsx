@@ -8,6 +8,7 @@ const CardCompany = ({ cardCompanyName }: { cardCompanyName: string }) => {
   return (
     <S.Wrapper>
       <CardCompanyLogoSvg
+        aria-label={cardCompanyName}
         cardCompanyName={cardCompanyName}
         style={{ cursor: "pointer" }}
         onClick={() => initCardInfo("cardCompany", cardCompanyName)}
