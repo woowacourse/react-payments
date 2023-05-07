@@ -1,6 +1,6 @@
 import { useState, ChangeEvent } from "react";
 
-import Input from "../../common/Input";
+import Input from "../../common/CardInfoInput";
 
 import {
   ARIA_LABEL_MESSAGE,
@@ -51,13 +51,12 @@ export default function InputBoxOwner(props: InputBoxOwnerProps) {
         {name.length}/{INPUT_LENGTH_LIMIT.MAX_OWNER}
       </p>
       <Input
+        inputPlace="optional"
         name="card-owner"
         className="input-card-owner"
         type="text"
         onChange={changeName}
         placeholder={PLACE_HOLDER.OWNER}
-        inputMode="text"
-        required={true}
         value={name}
       />
       <p className="error-message">

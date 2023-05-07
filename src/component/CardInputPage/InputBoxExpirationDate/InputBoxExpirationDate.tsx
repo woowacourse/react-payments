@@ -1,6 +1,6 @@
 import { useState, ChangeEvent } from "react";
 
-import Input from "../../common/Input";
+import Input from "../../common/CardInfoInput";
 
 import {
   CARD_ERROR_MESSAGE,
@@ -56,15 +56,13 @@ export default function InputBoxExpirationDate(
     <label className="input-box-expiration-date">
       <p>{EXPLANATION_MESSAGE.INPUT_EXPIRATION_DATE}</p>
       <Input
+        inputPlace="essential"
         name="expiration-date"
         className="input-expiration-date"
         type="text"
         onChange={changeExpirationDate}
         placeholder={PLACE_HOLDER.EXPIRATION_DATE}
-        inputMode="numeric"
         value={expirationDate}
-        ariaRequired={true}
-        required={true}
       />
       <p className="error-message">
         {haveError && CARD_ERROR_MESSAGE.INPUT_CARD_EXPIRATION_DATE}

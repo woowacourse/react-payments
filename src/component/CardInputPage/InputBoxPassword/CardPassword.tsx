@@ -1,6 +1,6 @@
 import { useState, ChangeEvent } from "react";
 
-import Input from "../../common/Input";
+import Input from "../../common/CardInfoInput";
 
 import { makeAppropriatePassword } from "../../../util/trans";
 import { nowStatus } from "../../../type";
@@ -49,13 +49,11 @@ export default function CardPassword(props: CardPasswordProps) {
     <>
       {new Array(2).fill(0).map((_, index) => (
         <Input
+          inputPlace="essential"
           name={`card-password-${index + 1}`}
           className="input-password input-password"
           type="password"
-          inputMode="numeric"
           onChange={onChangePassword(index)}
-          required={true}
-          ariaRequired={true}
           value={passwordStatus[index]}
         />
       ))}

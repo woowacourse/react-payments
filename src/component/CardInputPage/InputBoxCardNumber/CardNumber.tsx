@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from "react";
 
-import Input from "../../common/Input";
+import Input from "../../common/CardInfoInput";
 
 import { nowStatus } from "../../../type";
 import { makeAppropriateNumber } from "../../../util/trans";
@@ -50,14 +50,13 @@ export default function CardNumber({
     <>
       {new Array(4).fill(0).map((_, index) => (
         <Input
+          inputPlace="essential"
+          key={`card-number-${index + 1}`}
           name={`card-number-${index + 1}`}
           className={`input-card-number card-number-${index + 1}`}
           type={index === 1 || index === 2 ? "password" : "text"}
-          inputMode="numeric"
           onChange={onChangeCardNumber(index)}
           placeholder={PLACE_HOLDER.CARD_NUMBER}
-          required={true}
-          ariaRequired={true}
           value={cardNumber[index]}
         />
       ))}

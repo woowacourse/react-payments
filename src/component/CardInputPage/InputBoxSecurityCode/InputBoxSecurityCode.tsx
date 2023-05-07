@@ -1,6 +1,6 @@
 import { useState, ChangeEvent } from "react";
 
-import Input from "../../common/Input";
+import Input from "../../common/CardInfoInput";
 
 import {
   ARIA_LABEL_MESSAGE,
@@ -58,13 +58,11 @@ export default function InputBoxSecurityCode(props: InputBoxSecurityProps) {
     <label className="input-box-security-code">
       <p>{EXPLANATION_MESSAGE.INPUT_SECURITY_CODE}</p>
       <Input
+        inputPlace="essential"
         name="security-code"
         className="input-security-code"
         type="password"
         onChange={changeSecurityCode}
-        inputMode="numeric"
-        required={true}
-        ariaRequired={true}
         value={securityCode}
       />
       <button
