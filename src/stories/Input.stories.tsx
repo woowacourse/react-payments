@@ -178,3 +178,36 @@ OwnerInputSuccess.play = async ({ canvasElement }) => {
   });
   input.blur();
 };
+
+export const MonthInput: Story = (args: UseInputProps) => {
+  const { ...rest } = args;
+  const expirationDate = useInput("", { name: "month" });
+  return <Input {...rest} {...expirationDate} />;
+};
+
+MonthInput.args = {
+  type: "text",
+  isNumber: true,
+  shape: undefined,
+  maxLength: 2,
+  required: false,
+  pattern: REGEX_PATTERN["MONTH"],
+};
+
+export const MonthInputWithErrorMessage: Story = (args: UseInputProps) => {
+  const { ...rest } = args;
+  const month = useInput("", { name: "month" });
+  return <Input {...rest} {...month} />;
+};
+
+MonthInputWithErrorMessage.args = MonthInput.args;
+
+MonthInputWithErrorMessage.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  const input = canvas.getByRole("textbox") as HTMLInputElement;
+  input.focus();
+  await userEvent.type(input, "13", {
+    delay: 500,
+  });
+  input.blur();
+};
