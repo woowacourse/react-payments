@@ -59,7 +59,10 @@ export default function InputBoxSecurityCode(props: Props) {
       <button className={styles.button} type="button" onClick={alertCvcInfo}>
         ?
       </button>
-      <p className={inputStatus === INPUT_STATUS.ERROR ? styles.visible : ""}>
+      <p 
+        className={inputStatus === INPUT_STATUS.ERROR ? styles.visible : ""}
+        aria-hidden={inputStatus !== INPUT_STATUS.ERROR}
+      >
         카드 뒷면에 적힌 세 자리 숫자의 보안 코드를 입력해 주세요.
       </p>
     </div>

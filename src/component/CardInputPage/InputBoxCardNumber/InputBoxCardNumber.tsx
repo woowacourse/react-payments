@@ -19,7 +19,7 @@ export default function InputBoxCardNumber(props: Props) {
         setHasError={setHasError}
         setIsComplete={setIsComplete}
       />
-      <p className={hasError ? styles.visible : ""}>카드 번호는 16자리의 숫자입니다.</p>
+      <p className={hasError ? styles.visible : ""} aria-hidden={!hasError}>카드 번호는 16자리의 숫자입니다.</p>
     </div>
   );
 }

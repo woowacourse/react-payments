@@ -59,7 +59,10 @@ export default function InputBoxExpirationDate(props: Props) {
         inputMode="numeric"
         required={true}
       ></Input>
-      <p className={inputStatus === INPUT_STATUS.ERROR ? styles.visible : ""}>
+      <p 
+        className={inputStatus === INPUT_STATUS.ERROR ? styles.visible : ""}
+        aria-hidden={inputStatus !== INPUT_STATUS.ERROR}
+      >
         연과 월은 각각 두 자리의 숫자로 입력해 주세요. (예: 23년 5월 - 05/23)
       </p>
     </div>
