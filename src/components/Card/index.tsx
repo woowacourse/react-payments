@@ -49,14 +49,14 @@ const Card = ({
         <span className={styles.number}>{cardNumber1}</span>
         <span className={styles.number}>{cardNumber2}</span>
         <span className={styles.password}>
-          {cardNumber3 !== undefined
-            ? '﹒'.repeat(cardNumber3.length)
-            : '﹒﹒﹒﹒'}
+          {cardNumber3 === undefined
+            ? '﹒﹒﹒﹒'
+            : '﹒'.repeat(cardNumber3.length)}
         </span>
         <span className={styles.password}>
-          {cardNumber4 !== undefined
-            ? '﹒'.repeat(cardNumber4.length)
-            : '﹒﹒﹒﹒'}
+          {cardNumber4 === undefined
+            ? '﹒﹒﹒﹒'
+            : '﹒'.repeat(cardNumber4.length)}
         </span>
       </div>
       <div className={styles.detailContainer}>
