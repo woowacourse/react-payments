@@ -1,4 +1,3 @@
-// import BottomSheet, { BottomSheetProps } from "../../common/Modal/BottomSheet";
 import BottomSheet from "@wainaat/react-bottom-sheet";
 import { CARD_COMPANIES_ENGLISH, CardCompany } from "../../../type/CardCompany";
 import CardCompanyButton from "../CardCompany/CardCompanyButton";
