@@ -1,4 +1,5 @@
 import React, { type FormEvent, useCallback, useEffect, useRef } from 'react';
+import { Modal } from 'react-wus-modal';
 import { useFocusInput } from '@hooks/useFocusInput';
 import { useHideScrollState } from '@hooks/useHideScrollState';
 import { useCardInputInfoContext } from '@contexts/useCardInputInfo';
@@ -12,13 +13,12 @@ import { SelectCardCompany } from '@components/addCardPage/SelectCardCompany';
 import { Button } from '@components/common/Button';
 import { Card } from '@components/common/Card';
 import { InputField } from '@components/common/InputField';
-import { Modal } from '@components/common/Modal';
 import { type CardCompanyType } from '@type/card';
 import { setNextInputFocus } from '@utils/common';
 import { formValidate } from '@utils/formValidate';
 import { isPastDate } from '@utils/validate';
 import { CARD_COMPANY, CARD_COMPANY_DATA } from '@constants/cardCompany';
-import { PAGE_KIND } from '@constants/constant';
+import { PAGE_KIND, Z_INDEX_INFO } from '@constants/constant';
 import * as S from './AddCardPage.Styles';
 import { useAddCardFormData } from './hooks/useAddCardFormData';
 
@@ -217,6 +217,7 @@ export default function AddCardPage() {
         </S.InputWrapperParent>
       </S.Page>
       <Modal
+        zIndex={Z_INDEX_INFO.MODAL}
         isOpen={cardCompany === CARD_COMPANY.DEFAULT}
         ariaLabel="카드사 선택창"
       >
