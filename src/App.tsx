@@ -1,10 +1,11 @@
 import GlobalStyle from './GlobalStyle';
 import CardList from './pages/CardList';
 import CardRegistration from './pages/CardRegistration';
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { CardListProvider } from './contexts/CardListContexts';
 import CardAlias from './pages/CardAlias';
 import { PortalProvider } from './components/ModalPortal';
+import CardRegisterLoader from './pages/CardAlias/CardRegisterLoader';
 
 const enum PAGE {
   CARD_LIST = 'card-list',
@@ -29,7 +30,9 @@ function App() {
           />
         )}
         {page === PAGE.CARD_ALIAS && (
-          <CardAlias setPageCardList={() => setPage(PAGE.CARD_LIST)} currentId={currentId} />
+          <Suspense fallback={<CardRegisterLoader />}>
+            <CardAlias setPageCardList={() => setPage(PAGE.CARD_LIST)} currentId={currentId} />
+          </Suspense>
         )}
       </CardListProvider>
       <PortalProvider />
