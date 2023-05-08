@@ -161,12 +161,13 @@ const SignAreaDescription = styled.div`
   }
 `;
 
-type CreditCardViewProps = Pick<CreditCard, 'owner' | 'vendor' | 'cardNumbers' | 'expirationDate'> &
-  Partial<Pick<CreditCard, 'cvc'>> & {
-    color?: string;
-    icon?: ReactNode;
-    showBackface?: boolean;
-  };
+type CreditCardViewProps = Partial<
+  Pick<CreditCard, 'owner' | 'vendor' | 'cardNumbers' | 'expirationDate' | 'cvc'>
+> & {
+  color?: string;
+  icon?: ReactNode;
+  showBackface?: boolean;
+};
 
 export const CreditCardView = (props: CreditCardViewProps) => {
   const {
@@ -184,7 +185,7 @@ export const CreditCardView = (props: CreditCardViewProps) => {
   const digits = [0, 1, 2, 3].flatMap((index) => {
     const isSensitive = [2, 3].includes(index);
 
-    const userDigits = (cardNumbers.split('-')[index] ?? '').split('');
+    const userDigits = (cardNumbers?.split('-')[index] ?? '').split('');
     const partialDigits = Array(4)
       .fill('')
       .map((digit, i) => userDigits[i] ?? '')
@@ -215,7 +216,7 @@ export const CreditCardView = (props: CreditCardViewProps) => {
         </CardNumber>
         <CardAdditionalInfo>
           <CardOwner>{owner}</CardOwner>
-          {expirationDate.some(Boolean) && (
+          {expirationDate?.some(Boolean) && (
             <Text size="small" weight="bold">
               {expirationDate.join('/')}
             </Text>

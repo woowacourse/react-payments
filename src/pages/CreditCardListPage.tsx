@@ -8,6 +8,7 @@ import { NewCreditCardVendorBottomSheet } from '../components/payments/NewCredit
 import type { CreditCardVendor } from '../domain/CreditCardVendor';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 import { usePayments } from '../hooks/usePayments';
+import { usePaymentsForm } from '../hooks/usePaymentsForm';
 
 const Content = styled.main`
   display: flex;
@@ -48,6 +49,7 @@ const CreditCardListBottomShadow = styled.div`
 export const CreditCardListPage = () => {
   const navigate = useNavigate();
   const { creditCards } = usePayments();
+  const { clear, setCreditCard } = usePaymentsForm();
 
   const bottomRef = useRef<HTMLDivElement>(null);
   const [isBottomSticky, setIsBottomSticky] = useState(false);
@@ -62,9 +64,9 @@ export const CreditCardListPage = () => {
   };
 
   const handleClickCreditCardVendor = (vendor: CreditCardVendor) => {
-    navigate('/register', {
-      state: { vendor },
-    });
+    clear();
+    setCreditCard({ vendor });
+    navigate('/new');
   };
 
   return (

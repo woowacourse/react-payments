@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Button } from '../components/common/Button';
 import { Input } from '../components/common/Input';
@@ -8,6 +8,7 @@ import { CreditCardView } from '../components/payments/CreditCardView';
 import { VendorIcon } from '../components/payments/VendorIcon';
 import { CREDIT_CARD_VENDOR_BRAND_COLORS } from '../domain/CreditCardBrandColors';
 import { usePayments } from '../hooks/usePayments';
+import { usePaymentsForm } from '../hooks/usePaymentsForm';
 
 const Content = styled.main`
   display: flex;
@@ -38,25 +39,21 @@ const ButtonGroup = styled.div`
   margin-top: auto;
 `;
 
-export const NewCreditCardDisplayNamePage = () => {
+export const NewCreditCardCompletionPage = () => {
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-  const { getCreditCardById, updateCreditCard } = usePayments();
+  const { updateCreditCard } = usePayments();
+  const { validatedCreditCard: creditCard } = usePaymentsForm();
 
-  const id = searchParams.get('id');
-  const creditCard = getCreditCardById(Number(id));
-
-  if (!creditCard) {
+  if (creditCard === null) {
     throw {
-      message: `존재하지 않는 신용카드입니다. (id=${id})`,
+      message: `올바르지 않은 신용카드 데이터입니다. (${JSON.stringify(creditCard)})`,
     };
   }
 
-  const [displayName, setDisplayName] = useState(creditCard.displayName);
+  const [displayName, setDisplayName] = useState(creditCard?.displayName ?? '');
 
   const handleClickConfirm = () => {
     updateCreditCard({ ...creditCard, displayName });
-
     navigate('/');
   };
 

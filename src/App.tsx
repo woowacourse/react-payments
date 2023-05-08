@@ -1,6 +1,7 @@
 import { RouterProvider } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 import { PaymentsProvider } from './context/PaymentsContext';
+import { PaymentsFormProvider } from './context/PaymentsFormContext';
 import { useMediaQuery } from './hooks/useMediaQuery';
 import { router } from './router';
 import { GlobalStyle } from './styles/GlobalStyle';
@@ -26,9 +27,11 @@ export const App = () => {
       <GlobalStyle />
 
       <PaymentsProvider>
-        <Container>
-          <RouterProvider router={router} />
-        </Container>
+        <PaymentsFormProvider>
+          <Container>
+            <RouterProvider router={router} />
+          </Container>
+        </PaymentsFormProvider>
       </PaymentsProvider>
     </ThemeProvider>
   );

@@ -10,7 +10,7 @@ type PaymentsContextValue = {
   getCreditCardById: (id: number) => CreditCard | null;
   assignCreditCardId: () => number;
   updateCreditCard: (creditCard: CreditCard) => void;
-  recommendCreditCardDisplayName: (owner: string) => string;
+  recommendCreditCardDisplayName: (owner: string | undefined) => string;
 };
 
 export const PaymentsContext = createContext<PaymentsContextValue | null>(null);
@@ -44,7 +44,7 @@ export const PaymentsProvider = (props: PropsWithChildren) => {
   );
 
   const recommendCreditCardDisplayName = useCallback(
-    (owner: string) => {
+    (owner: string | undefined) => {
       const displayName = owner ? `${owner}의 카드` : '카드';
       let alterDisplayName = displayName;
       let count = 2;

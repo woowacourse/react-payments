@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactComponent as ArrowDownIcon } from '../assets/common/arrow-down.svg';
 import { Button } from '../components/common/Button';
@@ -15,13 +15,7 @@ import { VendorIcon } from '../components/payments/VendorIcon';
 import type { CreditCard } from '../domain/CreditCard';
 import { CREDIT_CARD_VENDOR_BRAND_COLORS } from '../domain/CreditCardBrandColors';
 import { usePayments } from '../hooks/usePayments';
-import { useValidation } from '../hooks/useValidation';
-import {
-  validateCVC,
-  validateCardNumbers,
-  validateCardPassword,
-  validateExpirationDate,
-} from '../validations/Validation';
+import { usePaymentsForm } from '../hooks/usePaymentsForm';
 
 const Content = styled.main`
   display: flex;
@@ -67,35 +61,18 @@ const ButtonGroup = styled.div`
 `;
 
 export const NewCreditCardPage = () => {
-  const location = useLocation();
-  const vendor = location.state.vendor ?? '현대카드';
-
   const { creditCards, setCreditCards, assignCreditCardId, recommendCreditCardDisplayName } =
     usePayments();
 
-  const [newCard, setNewCard] = useState<Omit<CreditCard, 'id'>>({
-    owner: '',
-    displayName: '',
-    vendor,
-    cardNumbers: '',
-    expirationDate: ['', ''],
-    cvc: '',
-    password: '',
-  });
+  const { creditCard, setCreditCard, validate, validateField, validationResult } =
+    usePaymentsForm();
   const [showBackface, setShowBackface] = useState(false);
-
-  const { validate, validateField, validationResult } = useValidation<CreditCard>({
-    cardNumbers: validateCardNumbers,
-    expirationDate: validateExpirationDate,
-    cvc: validateCVC,
-    password: validateCardPassword,
-  });
 
   const handleChangeNewCardField =
     <Field extends keyof CreditCard>(field: Field) =>
     (value: CreditCard[Field]) => {
       validateField(field, value);
-      setNewCard({ ...newCard, [field]: value });
+      setCreditCard({ ...creditCard, [field]: value });
     };
 
   const navigate = useNavigate();
@@ -103,16 +80,16 @@ export const NewCreditCardPage = () => {
   const handleClickBackButton = () => navigate(-1);
 
   const handleClickNextButton = () => {
-    const newCardWithDisplayName: CreditCard = {
-      ...newCard,
+    const newCardWithDisplayName = {
+      ...creditCard,
       id: assignCreditCardId(),
-      displayName: recommendCreditCardDisplayName(newCard.owner),
+      displayName: recommendCreditCardDisplayName(creditCard.owner),
     };
 
     if (!validate(newCardWithDisplayName)) return;
 
     setCreditCards([...creditCards, newCardWithDisplayName]);
-    navigate(`/complete?id=${newCardWithDisplayName.id}`);
+    navigate(`/register`);
   };
 
   return (
@@ -128,20 +105,20 @@ export const NewCreditCardPage = () => {
       </Page.Header>
       <Content>
         <CreditCardView
-          owner={newCard.owner}
-          vendor={newCard.vendor}
-          cardNumbers={newCard.cardNumbers}
-          expirationDate={newCard.expirationDate}
-          cvc={newCard.cvc}
-          color={CREDIT_CARD_VENDOR_BRAND_COLORS[newCard.vendor]}
-          icon={<VendorIcon vendor={newCard.vendor} />}
+          owner={creditCard.owner}
+          vendor={creditCard.vendor}
+          cardNumbers={creditCard.cardNumbers}
+          expirationDate={creditCard.expirationDate}
+          cvc={creditCard.cvc}
+          color={creditCard.vendor ? CREDIT_CARD_VENDOR_BRAND_COLORS[creditCard.vendor] : '#fffff'}
+          icon={creditCard.vendor && <VendorIcon vendor={creditCard.vendor} />}
           showBackface={showBackface}
         />
 
         <FormGroup>
           <Text size="small">카드 번호</Text>
           <CardNumberInput
-            value={newCard.cardNumbers}
+            value={creditCard.cardNumbers ?? ''}
             onChange={handleChangeNewCardField('cardNumbers')}
           />
           <FormGroupErrorMessage>{validationResult.cardNumbers}</FormGroupErrorMessage>
@@ -150,7 +127,7 @@ export const NewCreditCardPage = () => {
         <FormGroup>
           <Text size="small">만료일</Text>
           <ExpirationDateInput
-            value={newCard.expirationDate}
+            value={creditCard.expirationDate ?? ['', '']}
             onChange={handleChangeNewCardField('expirationDate')}
           />
           <FormGroupErrorMessage>{validationResult.expirationDate}</FormGroupErrorMessage>
@@ -159,11 +136,11 @@ export const NewCreditCardPage = () => {
         <FormGroup>
           <FormGroupLabel>
             <Text size="small">카드 소유자 이름(선택)</Text>
-            <Text size="small">{newCard.owner.length} / 30</Text>
+            <Text size="small">{creditCard.owner?.length ?? 0} / 30</Text>
           </FormGroupLabel>
           <Input
             maxCount={30}
-            value={newCard.owner}
+            value={creditCard.owner ?? ''}
             onChange={handleChangeNewCardField('owner')}
             placeholder="카드에 표시된 이름과 동일하게 입력하세요."
           />
@@ -172,7 +149,7 @@ export const NewCreditCardPage = () => {
         <FormGroup>
           <Text size="small">보안 코드(CVC/CVV)</Text>
           <CardCVCInput
-            value={newCard.cvc}
+            value={creditCard.cvc ?? ''}
             onChange={handleChangeNewCardField('cvc')}
             onFocus={() => setShowBackface(true)}
             onBlur={() => setShowBackface(false)}
@@ -184,7 +161,7 @@ export const NewCreditCardPage = () => {
         <FormGroup>
           <Text size="small">카드 비밀번호</Text>
           <CardPasswordInput
-            value={newCard.password}
+            value={creditCard.password ?? ''}
             onChange={handleChangeNewCardField('password')}
           />
           <FormGroupErrorMessage>{validationResult.password}</FormGroupErrorMessage>
