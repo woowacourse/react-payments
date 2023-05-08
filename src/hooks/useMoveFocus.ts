@@ -1,10 +1,14 @@
-const useMoveFocus = (initialValue: any)=>{
+type InitialType = {
+    [key: string]: React.RefObject<HTMLInputElement>;
+  };
+
+const useMoveFocus = (initialValue: InitialType)=>{
     const refs = initialValue;
-    const moveFocus = (currentLength:any, maxLength:any, key:any)=>{
+    const moveFocus = (currentLength:number, maxLength:number, key:string)=>{
         if (currentLength >= maxLength) refs[key].current!.focus();
     }
 
-    return [refs, moveFocus]
+    return [refs, moveFocus] as const
 }
 
 export default useMoveFocus
