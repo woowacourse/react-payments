@@ -17,7 +17,7 @@ const CardName = () => {
       {loading ? (
         <CardRegisterLoading />
       ) : (
-        <RegisterCardNameWrapper>
+        <NameCardWrapper>
           <p>카드등록이 완료되었습니다.</p>
           <CardWrapper>
             {card && (
@@ -32,16 +32,16 @@ const CardName = () => {
               />
             )}
           </CardWrapper>
-          <RegisterCardNameInputWrapper>
+          <NameCardInputWrapper>
             <RegisterCardName card={card} setLoading={setLoading} setCard={setCard}/>
-          </RegisterCardNameInputWrapper>
-        </RegisterCardNameWrapper>
+          </NameCardInputWrapper>
+        </NameCardWrapper>
       )}
     </Page>
   );
 };
 
-const RegisterCardNameWrapper = styled.div`
+const NameCardWrapper = styled.div`
   > p {
     font-size: 24px;
     margin: 60px 0 36px 0;
@@ -53,7 +53,7 @@ const CardWrapper = styled.div`
   justify-content: center;
 `;
 
-const RegisterCardNameInputWrapper = styled.div`
+const NameCardInputWrapper = styled.div`
   margin-top: 120px;
 
   display: flex;

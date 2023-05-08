@@ -1,7 +1,7 @@
 import MyCard from './pages/MyCard';
 import { createHashRouter, RouterProvider } from 'react-router-dom';
 import AddCard from './pages/AddCard';
-import RegisterCardName from './pages/RegisterCardName';
+import NameCard from './pages/NameCard';
 import { ModalContextProvider } from 'react-modal-patrick';
 import NotFound from './pages/NotFound';
 
@@ -16,7 +16,7 @@ const router = createHashRouter([
   },
   {
     path: '/CardName',
-    element: <RegisterCardName />,
+    element: <NameCard />,
   },
   {
     path: '*',
