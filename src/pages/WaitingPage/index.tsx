@@ -1,25 +1,30 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+
 import Spinner from '../../components/Spinner';
 
-import styles from './waitingPage.module.css';
-import { useNavigate } from 'react-router-dom';
+import { fetchCard } from '../../domain/remote/fetchCard';
 
-const WAITING_DURATION = 1200;
+import styles from './waitingPage.module.css';
 
 const WaitingPage = () => {
   const navigate = useNavigate();
-  const timeoutId = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const { cardId } = useParams();
 
   useEffect(() => {
-    timeoutId.current = setTimeout(() => {
-      navigate('/');
-    }, WAITING_DURATION);
+    const request = async () => {
+      try {
+        await fetchCard();
+      } catch (error) {
+        if (error instanceof Error) {
+          navigate('/error');
+        }
+      }
 
-    return () => {
-      if (!timeoutId.current) return;
-
-      clearTimeout(timeoutId.current);
+      navigate(`/complete/${cardId}`);
     };
+
+    request();
   }, []);
 
   return (
