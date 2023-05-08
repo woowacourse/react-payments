@@ -7,13 +7,12 @@ import Header from '../../components/molecules/Header';
 import CardRegister from '../../components/organisms/CardRegister';
 import { useQuery } from '../../hooks/useQuery';
 import { Card } from '../../store/type';
+import { URL } from '../../utils/constant';
 import Loading from '../Loading';
 import NotFound from '../NotFound';
 
 const MyCard: React.FC = () => {
-  const [fetchingData, isLoading, isError] = useQuery<Card[]>(
-    'https://json-server-4140.onrender.com/payment',
-  );
+  const [fetchingData, isLoading, isError] = useQuery<Card[]>(URL);
 
   if (isError) {
     return <NotFound />;

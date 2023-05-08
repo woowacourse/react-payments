@@ -1,15 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import Modal from 'turtle601-modal-like-chakra-ui';
-
-import { useCardModal } from '../../../hooks/useCardModal';
 import CardCompanies from '../../organisms/CardCompanies';
 
 const AddCardModal: React.FC = () => {
-  const [isModal, closeModal, openModal] = useCardModal(true);
-
   return (
-    <Modal isModal={isModal} closeModal={closeModal} openModal={openModal} blockScrollOnMount>
+    <>
       <Modal.Overlay />
       <Modal.Content isBottom isCustom>
         <StyledContent>
@@ -18,7 +14,7 @@ const AddCardModal: React.FC = () => {
           </Modal.Body>
         </StyledContent>
       </Modal.Content>
-    </Modal>
+    </>
   );
 };
 

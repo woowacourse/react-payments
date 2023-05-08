@@ -4,15 +4,17 @@ import MyCard from './pages/MyCard';
 import AddCard from './pages/AddCard';
 
 import AddCardAlias from './pages/AddCardAlias';
-
-import CardListProvider from './components/context/CardListProvider';
 import PaymentProvider from './components/context/PaymentsProvider';
 import NotFound from './pages/NotFound';
+import { useCardModal } from './hooks/useCardModal';
+import Modal from 'turtle601-modal-like-chakra-ui';
 
 function App() {
+  const [isModal, closeModal, openModal] = useCardModal(true);
+
   return (
     <BrowserRouter>
-      <CardListProvider>
+      <Modal isModal={isModal} closeModal={closeModal} openModal={openModal}>
         <Routes>
           <Route index element={<MyCard />} />
           <Route
@@ -26,7 +28,7 @@ function App() {
           <Route path="addCardAlias" element={<AddCardAlias />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </CardListProvider>
+      </Modal>
     </BrowserRouter>
   );
 }
