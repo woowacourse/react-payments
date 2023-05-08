@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import Card from '../common/Card';
 import CardNumberInput from '../box/inputSection/CardNumberInput';
 import ExpireDateInput from '../box/inputSection/ExpireDateInput';
@@ -52,6 +52,10 @@ const CardRegisterPage = ({ navigate }: PageProps) => {
   const onChange = (key: keyof CardFormState) => (value: string | string[] | Bank) => {
     setCard((prev) => ({ ...prev, [key]: value }));
   };
+
+  useLayoutEffect(() => {
+    setIsOnBankModal(true);
+  }, []);
 
   const { cardNumber, expireDate, ownerName, securityCode, cardPassword1, cardPassword2, bank } = card;
 
