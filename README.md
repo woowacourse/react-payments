@@ -32,45 +32,57 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 <br>
 
-# 2단계
+# 3단계
 
 ## 파일 구조
 
 ```
 📦src
- ┣ 📂asset : svg 모음
- ┃
+ ┣ 📂asset
  ┣ 📂component
- ┃ ┣ 📂CardInputPage : 카드정보 입력 페이지
- ┃ ┃ ┣ 📂CardInputForm : 카드정보 입력폼
- ┃ ┃ ┣ 📂InputBoxCardNumber : 입력폼 내 카드번호 입력칸
- ┃ ┃ ┣ 📂InputBoxExpirationDate : 입력폼 내 카드 만료일 입력칸
- ┃ ┃ ┣ 📂InputBoxOwner : 입력폼 내 카드 소유주 입력칸
- ┃ ┃ ┣ 📂InputBoxPassword : 입력폼 내 카드 비밀번호 입력칸
- ┃ ┃ ┗ 📂InputBoxSecurityCode : 입력폼 내 카드 보안코드 입력칸
+ ┃ ┣ 📂CardInputPage
+ ┃ ┃ ┣ 📂CardInputForm
+ ┃ ┃ ┣ 📂InputBoxCardNumber
+ ┃ ┃ ┣ 📂InputBoxExpirationDate
+ ┃ ┃ ┣ 📂InputBoxOwner
+ ┃ ┃ ┣ 📂InputBoxPassword
+ ┃ ┃ ┣ 📂InputBoxSecurityCode
+ ┃ ┃ ┣ 📜CardInputPage.tsx
+ ┃ ┃ ┗ 📜cardInputPage.css
  ┃ ┃
- ┃ ┣ 📂CardListPage : 카드 목록 페이지
- ┃ ┃ ┣ 📂AddCardButton : 카드 추가 버튼
- ┃ ┃ ┣ 📂CardList : 카드 목록
+ ┃ ┣ 📂CardListPage
+ ┃ ┃ ┣ 📂AddCardButton
+ ┃ ┃ ┣ 📂CardList
+ ┃ ┃ ┣ 📜CardListPage.tsx
+ ┃ ┃ ┗ 📜cardListPage.css
  ┃ ┃
- ┃ ┣ 📂CardNickInputPage : 카드별칭 입력 페이지
- ┃ ┃ ┣ 📂InputBoxNick: 카드 별칭 입력칸
+ ┃ ┣ 📂CardNickInputPage
+ ┃ ┃ ┣ 📂InputBoxNick
+ ┃ ┃ ┣ 📜CardNickInputPage.tsx
+ ┃ ┃ ┗ 📜cardNickInputPage.css
+ ┃ ┃
+ ┃ ┣ 📂RegisterSpinnerPage
+ ┃ ┃ ┣ 📜RegisterSpinnerPage.tsx
+ ┃ ┃ ┗ 📜registerSpinnerPage.css
  ┃ ┃
  ┃ ┗ 📂common
- ┃ ┃ ┣ 📜Button.tsx
- ┃ ┃ ┣ 📜Input.tsx
- ┃ ┃ ┃
- ┃ ┃ ┣ 📜CardCoButton.tsx
- ┃ ┃ ┣ 📜CardCoModal.tsx
- ┃ ┃ ┃
- ┃ ┃ ┣ 📜CardPreview.tsx
- ┃ ┃ ┃
- ┃ ┃ ┣ 📜button.css
- ┃ ┃ ┣ 📜cardCoButton.css
- ┃ ┃ ┣ 📜cardCoModal.css
- ┃ ┃ ┣ 📜cardPreview.css
- ┃ ┃ ┗ 📜input.css
- ┃ ┃
+ ┃   ┣ 📜Button.tsx
+ ┃   ┣ 📜CardCoButton.tsx
+ ┃   ┣ 📜CardCoModal.tsx
+ ┃   ┣ 📜CardInfoInput.tsx
+ ┃   ┣ 📜CardPreview.tsx
+ ┃   ┣ 📜button.css
+ ┃   ┣ 📜cardCoButton.css
+ ┃   ┣ 📜cardCoModal.css
+ ┃   ┣ 📜cardInfoInput.css
+ ┃   ┗ 📜cardPreview.css
+ ┃
+ ┣ 📂hook
+ ┃ ┣ 📜cardInfoAndInputHook.ts
+ ┃ ┣ 📜cardListHook.ts
+ ┃ ┣ 📜modalHook.ts
+ ┃ ┗ 📜spinnerPageHook.ts
+ ┃
  ┣ 📂stories
  ┃ ┣ 📂CardInputPage
  ┃ ┃ ┣ 📜CardInputForm.stories.tsx
@@ -88,12 +100,15 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
  ┃ ┃ ┣ 📜CardNickInputPage.stories.tsx
  ┃ ┃ ┗ 📜InputBoxNick.stories.tsx
  ┃ ┃
- ┃ ┗ 📂common
- ┃ ┃ ┣ 📜CardCoButton.stories.tsx
- ┃ ┃ ┣ 📜CardCoModal.stories.tsx
- ┃ ┃ ┣ 📜CardPreview.stories.tsx
- ┃ ┃ ┗ 📜Input.stories.tsx
+ ┃ ┣ 📂RegisterSpinnerPage
+ ┃ ┃ ┗ 📜registerSpinnerPage.stories.tsx
  ┃ ┃
+ ┃ ┗ 📂common
+ ┃   ┣ 📜CardCoButton.stories.tsx
+ ┃   ┣ 📜CardCoModal.stories.tsx
+ ┃   ┣ 📜CardInfoInput.stories.tsx
+ ┃   ┗ 📜CardPreview.stories.tsx
+ ┃
  ┣ 📂style
  ┃ ┣ 📜palette.css
  ┃ ┗ 📜reset.css
@@ -111,6 +126,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
  ┣ 📜App.css
  ┣ 📜App.tsx
  ┣ 📜CONSTANT.ts
+ ┣ 📜autoFocus.ts
  ┣ 📜cardData.ts
  ┣ 📜index.css
  ┣ 📜index.tsx
