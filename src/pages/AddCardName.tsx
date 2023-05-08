@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useLocation, useNavigate, Navigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { CardItem, ErrorMessage, Loading } from '../components/common';
+import { CardItem, ErrorMessage, Spinner } from '../components/common';
 import { ERROR_MESSAGE } from '../constants/errors';
 import { PATH } from '../constants/path';
 import { cardList } from '../data/localStorage';
@@ -51,7 +51,7 @@ export function AddCardName() {
     return (
       <_AddCardNameContainer>
         <_Section>
-          <Loading />
+          <Spinner />
           <_Direction>카드 등록중입니다.</_Direction>
         </_Section>
       </_AddCardNameContainer>

@@ -1,6 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 
-export function Loading() {
+export function Spinner() {
   return (
     <_Wrapper>
       <_Background>
