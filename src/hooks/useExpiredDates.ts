@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { REG_EXP } from '../constants/regexp';
+import { ExpiredDatesType } from '../types/ExpiredDate';
 
 const nowYear = new Date().getFullYear() % 2000;
 const nowMonth = new Date().getMonth() + 1;
@@ -12,7 +13,7 @@ const getCurrentDateToString = () => {
 };
 
 const useExpiredDates = () => {
-  const [expiredDates, setExpiredDates] = useState<{ 0: string; 1: string }>({
+  const [expiredDates, setExpiredDates] = useState<ExpiredDatesType>({
     0: '',
     1: '',
   });

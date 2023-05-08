@@ -1,7 +1,9 @@
+import { ExpiredDatesType } from './ExpiredDate';
+
 export default interface CardType {
   id: string;
   cardNumbers: Array<string>;
-  expiredDates: { 0: string; 1: string };
+  expiredDates: ExpiredDatesType;
   cardOwnerName: string;
   cardCompany: string;
   cardAlias?: string;

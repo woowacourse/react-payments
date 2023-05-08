@@ -1,3 +1,5 @@
+import { ExpiredDatesType } from '../types/ExpiredDate';
+
 const nowDate = new Date();
 
 export const isCorrectCardNumber = (cardNumbers: Array<string>) => {
@@ -12,10 +14,7 @@ export const isCorrectCardNumber = (cardNumbers: Array<string>) => {
   return false;
 };
 
-export const isCorrectExpiredDate = (expiredDates: {
-  0: string;
-  1: string;
-}) => {
+export const isCorrectExpiredDate = (expiredDates: ExpiredDatesType) => {
   const expiredMonth = Number(expiredDates[0]);
   const expiredYear = Number(expiredDates[1]);
 

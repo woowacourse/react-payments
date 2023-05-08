@@ -5,9 +5,10 @@ import * as Styled from './CardExpiredDates.styles';
 import { RefContext } from '../../contexts/RefProvider';
 import { REF_INDEX } from '../../constants/refIndex';
 import CardErrorLabel from '../@common/CardErrorLabel';
+import { ExpiredDatesType } from '../../types/ExpiredDate';
 
 interface ExpiredDateProps {
-  expiredDates: { 0: string; 1: string };
+  expiredDates: ExpiredDatesType;
   errorMessage: string;
   isValidatedExpiredDates: (order: number, value: string) => boolean;
 }
