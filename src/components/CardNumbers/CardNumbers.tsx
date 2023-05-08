@@ -4,9 +4,10 @@ import CardInput from '../@common/CardInput';
 import CardLabel from '../@common/CardLabel';
 import { RefContext } from '../../contexts/RefProvider';
 import CardErrorLabel from '../@common/CardErrorLabel';
+import { CardNumbersType } from '../../types/CardNumbers';
 
 interface CardNumbersProps {
-  cardNumbers: Array<string>;
+  cardNumbers: CardNumbersType;
   errorMessage: string;
   isValidatedCardNumbers: (order: number, value: string) => boolean;
 }

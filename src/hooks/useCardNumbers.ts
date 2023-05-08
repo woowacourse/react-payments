@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { REG_EXP } from '../constants/regexp';
+import { CardNumbersType } from '../types/CardNumbers';
 
 const useCardNumbers = () => {
-  const [cardNumbers, setCardNumbers] = useState<Array<string>>([
-    '',
-    '',
-    '',
-    '',
-  ]);
+  const [cardNumbers, setCardNumbers] = useState<CardNumbersType>({
+    0: '',
+    1: '',
+    2: '',
+    3: '',
+  });
   const [cardNumbersError, setCardNumbersError] = useState<string>('');
 
   const isValidatedCardNumbers = (order: number, value: string) => {

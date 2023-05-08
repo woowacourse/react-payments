@@ -1,8 +1,9 @@
+import { CardNumbersType } from '../types/CardNumbers';
 import { ExpiredDatesType } from '../types/ExpiredDate';
 
 const nowDate = new Date();
 
-export const isCorrectCardNumber = (cardNumbers: Array<string>) => {
+export const isCorrectCardNumber = (cardNumbers: CardNumbersType) => {
   if (
     cardNumbers[0].length === 4 &&
     cardNumbers[1].length === 4 &&
