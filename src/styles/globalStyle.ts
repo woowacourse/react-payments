@@ -3,6 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 const GlobalStyle = createGlobalStyle`
   :root {
     --primary-color: #57dbc2;
+    --sub-primary-color: #DFFFFD;
     --font-size-small: 1.2rem;
     --font-size-medium: 1.6rem;
     --font-size-large: 2.0rem;
@@ -10,6 +11,8 @@ const GlobalStyle = createGlobalStyle`
     --white: #ffffff;
     --black: #000000;
     --gray: #666666;
+    --gray-light: #f1f3f5;
+    --error-color: #ff0000;
   }
 
 
