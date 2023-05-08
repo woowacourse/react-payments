@@ -4,7 +4,7 @@ import { within, userEvent } from '@storybook/testing-library';
 import styled from 'styled-components';
 import { useFocusInput } from '@hooks/useFocusInput';
 import { useAddCardFormData } from '@pages/AddCardPage/hooks/useAddCardFormData';
-import { TEST_ID } from '@constants/storybookTest';
+import { ADD_CARD_TEST_ID } from '@constants/storybookTest';
 import CvcInput from './CvcInput';
 
 function CvcStories() {
@@ -43,7 +43,7 @@ export const Cvc: Story = {
     const canvas = within(canvasElement);
 
     await step('CVC 번호를 입력합니다.', async () => {
-      await userEvent.type(canvas.getByTestId(TEST_ID.CVC), '1234', {
+      await userEvent.type(canvas.getByTestId(ADD_CARD_TEST_ID.CVC), '1234', {
         delay: 100,
       });
     });

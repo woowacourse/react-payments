@@ -48,8 +48,9 @@ export const useInput = (
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value;
+    const isOverLength = maxLength && maxLength < e.currentTarget.value.length;
 
-    if (maxLength && maxLength < e.currentTarget.value.length) {
+    if (isOverLength) {
       return;
     }
 
@@ -84,7 +85,9 @@ export const useInput = (
   );
 
   useEffect(() => {
-    if (isNumber && maxLength === value.length) {
+    const isNumberValidateCheck = isNumber && maxLength === value.length;
+
+    if (isNumberValidateCheck) {
       setErrorMessage(value);
     }
   }, [maxLength, isNumber, setErrorMessage, value]);

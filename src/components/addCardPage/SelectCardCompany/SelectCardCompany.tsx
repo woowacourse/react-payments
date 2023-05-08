@@ -28,7 +28,10 @@ export default function SelectCardCompany({
 
 const Wrapper = styled.div`
   position: fixed;
+  left: 0;
+  right: 0;
   bottom: 0;
+  margin: 0 auto;
   width: 375px;
   box-sizing: border-box;
   height: 227px;

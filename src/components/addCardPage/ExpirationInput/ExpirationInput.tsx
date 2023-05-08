@@ -4,7 +4,7 @@ import { type UseInputProps } from '@hooks/useInput';
 import { Error } from '@components/common/Error';
 import { Input } from '@components/common/Input';
 import { TAB_INDEX_INFO } from '@constants/constant';
-import { TEST_ID } from '@constants/storybookTest';
+import { ADD_CARD_TEST_ID } from '@constants/storybookTest';
 
 interface ExpirationInputProps {
   id: string;
@@ -31,7 +31,7 @@ export default function ExpirationInput({
             textAlign="center"
             autoComplete="off"
             tabIndex={ADD_CARD_PAGE_TAB_INDEX.MONTH}
-            data-testid={TEST_ID.MONTH}
+            data-testid={ADD_CARD_TEST_ID.MONTH}
             {...monthInformation}
           />
         </InputWrapper>
@@ -44,7 +44,7 @@ export default function ExpirationInput({
             textAlign="center"
             autoComplete="off"
             tabIndex={ADD_CARD_PAGE_TAB_INDEX.YEAR}
-            data-testid={TEST_ID.YEAR}
+            data-testid={ADD_CARD_TEST_ID.YEAR}
             {...yearInformation}
           />
         </InputWrapper>

@@ -13,7 +13,7 @@ import { CardInfo } from '@type/card';
 import { createUniqueId } from '@utils/common';
 import { formValidate } from '@utils/formValidate';
 import { PAGE_KIND } from '@constants/constant';
-import { TEST_ID } from '@constants/storybookTest';
+import { ADD_CARD_TEST_ID } from '@constants/storybookTest';
 import { colors } from '@styles/theme';
 import { useRegisterCardFormData } from './hooks/useRegisterCardFormData';
 
@@ -86,7 +86,7 @@ export default function RegisterCard() {
         <InputWrapper>
           <InputField
             id={INPUT_CARD_TITLE_ID}
-            text="카드 별칭"
+            text="카드 별칭 (선택)"
             inputLength={`${cardTitle.value.length}/20`}
           >
             <Input
@@ -97,11 +97,10 @@ export default function RegisterCard() {
               bgColor={colors.white}
               textAlign="center"
               enterKeyHint="done"
-              required
               autoComplete="off"
               maxLength={20}
               placeholder="카드 별칭을 입력해주세요."
-              data-testid={TEST_ID.CARD_TITLE}
+              data-testid={ADD_CARD_TEST_ID.CARD_TITLE}
             />
           </InputField>
         </InputWrapper>

@@ -13,7 +13,10 @@ export const useFocusInput = (formRef: RefObject<HTMLFormElement>) => {
 
     const curInputLength = active.value.length;
 
-    if (active.selectionStart === 0 && active.selectionEnd === curInputLength) {
+    const isInputAllSelect =
+      active.selectionStart === 0 && active.selectionEnd === curInputLength;
+
+    if (isInputAllSelect) {
       return;
     }
 

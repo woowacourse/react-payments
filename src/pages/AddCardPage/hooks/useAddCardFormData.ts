@@ -5,6 +5,7 @@ import {
   monthValidate,
   yearValidate,
 } from '@utils/validate';
+import { INPUT_ERROR_MESSAGE } from '@constants/InputErrorMessage';
 
 interface AddCardFormDataProps {
   firstCardNumber: UseInputProps;
@@ -28,28 +29,28 @@ export const useAddCardFormData = () => {
       maxLength: 4,
       validate: isNumber,
       isRequired: true,
-      errorMessage: '오직 숫자만 입력 가능합니다.',
+      errorMessage: INPUT_ERROR_MESSAGE.ONLY_NUMBER,
     }),
     secondCardNumber: useInput('', {
       name: 'secondCardInput',
       maxLength: 4,
       validate: isNumber,
       isRequired: true,
-      errorMessage: '오직 숫자만 입력 가능합니다.',
+      errorMessage: INPUT_ERROR_MESSAGE.ONLY_NUMBER,
     }),
     thirdCardNumber: useInput('', {
       name: 'thirdCardInput',
       maxLength: 4,
       validate: isNumber,
       isRequired: true,
-      errorMessage: '오직 숫자만 입력 가능합니다.',
+      errorMessage: INPUT_ERROR_MESSAGE.ONLY_NUMBER,
     }),
     fourthCardNumber: useInput('', {
       name: 'fourthCardInput',
       maxLength: 4,
       validate: isNumber,
       isRequired: true,
-      errorMessage: '오직 숫자만 입력 가능합니다.',
+      errorMessage: INPUT_ERROR_MESSAGE.ONLY_NUMBER,
     }),
     year: useInput('', {
       name: 'yearInput',
@@ -74,28 +75,28 @@ export const useAddCardFormData = () => {
       maxLength: 30,
       validate: isOnlyEnglish,
       isRequired: false,
-      errorMessage: '영문만 입력할 수 있어요. 영문으로 변환 해주세요.',
+      errorMessage: INPUT_ERROR_MESSAGE.ONLY_ENGLISH,
       convertValue: (text: string) => text.toUpperCase(),
     }),
     cvc: useInput('', {
       name: 'cvcInput',
       maxLength: 3,
       isRequired: true,
-      errorMessage: '오직 숫자만 입력 가능합니다.',
+      errorMessage: INPUT_ERROR_MESSAGE.ONLY_NUMBER,
       validate: isNumber,
     }),
     firstPassword: useInput('', {
       name: 'firstPasswordInput',
       maxLength: 1,
       isRequired: true,
-      errorMessage: '오직 숫자만 입력 가능합니다.',
+      errorMessage: INPUT_ERROR_MESSAGE.ONLY_NUMBER,
       validate: isNumber,
     }),
     secondPassword: useInput('', {
       name: 'secondPasswordInput',
       maxLength: 1,
       isRequired: true,
-      errorMessage: '오직 숫자만 입력 가능합니다.',
+      errorMessage: INPUT_ERROR_MESSAGE.ONLY_NUMBER,
       validate: isNumber,
     }),
   };

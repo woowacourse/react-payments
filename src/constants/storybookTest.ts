@@ -1,6 +1,6 @@
 import { CARD_COMPANY } from './cardCompany';
 
-export const TEST_ID = {
+export const ADD_CARD_TEST_ID = {
   FIRST_CARD_NUMBER: 'firstCardNumberInput',
   SECOND_CARD_NUMBER: 'secondCardNumberInput',
   THIRD_CARD_NUMBER: 'thridCardNumberInput',

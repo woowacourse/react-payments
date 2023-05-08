@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { within, userEvent } from '@storybook/testing-library';
-import { TEST_ID } from '@constants/storybookTest';
+import { ADD_CARD_TEST_ID } from '@constants/storybookTest';
 import RegisterCard from './RegisterCardPage';
 
 function RegisterCardStories() {
@@ -21,7 +21,7 @@ export const RegisterCardPage: Story = {
 
     await step('카드 별칭을 입력합니다.', async () => {
       await userEvent.type(
-        canvas.getByTestId(TEST_ID.CARD_TITLE),
+        canvas.getByTestId(ADD_CARD_TEST_ID.CARD_TITLE),
         '알뜰 카카오 카드',
         {
           delay: 100,

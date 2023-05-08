@@ -4,7 +4,7 @@ import { type UseInputProps } from '@hooks/useInput';
 import { Error } from '@components/common/Error';
 import { Input } from '@components/common/Input';
 import { TAB_INDEX_INFO } from '@constants/constant';
-import { TEST_ID } from '@constants/storybookTest';
+import { ADD_CARD_TEST_ID } from '@constants/storybookTest';
 
 export interface OwnerInputProps {
   id: string;
@@ -26,7 +26,7 @@ export default function OwnerInput({ id, ownerInformation }: OwnerInputProps) {
           autoCapitalize="characters"
           lang="en"
           enterKeyHint="next"
-          data-testid={TEST_ID.OWNER}
+          data-testid={ADD_CARD_TEST_ID.OWNER}
           {...ownerInformation}
         />
       </Wrapper>

@@ -16,7 +16,7 @@ export interface CardProps {
 }
 
 const ENCRYPT_INDEX = 2;
-const VIEW_LIMIT_LENGTH = 10;
+const VIEW_LIMIT_LENGTH = 15;
 
 export default function Card({
   cardNumberSet,
