@@ -28,7 +28,9 @@ const CardIssuer = ({ value, isError, updateInputValue, updateInputError }: Card
       buttonRef.current?.focus();
       updateInputError('issuer', value);
     } else {
-      (containerRef.current?.nextElementSibling?.children[1] as HTMLInputElement).focus();
+      (
+        containerRef.current?.nextElementSibling?.children[1].childNodes[0] as HTMLInputElement
+      ).focus();
     }
   }, [isModalClosed, updateInputError, value]);
 
