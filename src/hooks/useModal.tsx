@@ -8,18 +8,20 @@ type ModalProps = {
 
 const useModal = (initValue: boolean) => {
   const [modalOpen, setModalOpen] = useState(initValue);
-
+  const [isLoading, setIsLoading] = useState(initValue);
   const closeModal = () => {
     setModalOpen(false);
+    setTimeout(() => setIsLoading(false), 400);
   };
 
   const openModal = () => {
+    setIsLoading(true);
     setModalOpen(true);
   };
 
   const Modal = ({ children, modalOpen }: ModalProps) => {
     return (
-      <ModalBackDrop modalOpen={modalOpen}>
+      <ModalBackDrop modalOpen={modalOpen} isLoading={isLoading}>
         <ModalContent modalOpen={modalOpen}>{children}</ModalContent>
       </ModalBackDrop>
     );
@@ -28,7 +30,7 @@ const useModal = (initValue: boolean) => {
   return { modalOpen, closeModal, openModal, Modal };
 };
 
-const ModalBackDrop = styled.div<{ modalOpen: boolean }>`
+const ModalBackDrop = styled.div<{ modalOpen: boolean; isLoading: boolean }>`
   position: absolute;
 
   top: 0;
@@ -44,13 +46,8 @@ const ModalBackDrop = styled.div<{ modalOpen: boolean }>`
 
   background: rgba(0, 0, 0, 0.5);
 
-  visibility: ${({ modalOpen }) => (modalOpen ? "visible" : "hidden")};
-
-  ${({ modalOpen }) =>
-    !modalOpen &&
-    `
-    transition-delay: 0.4s;
-  `};
+  visibility: ${({ modalOpen, isLoading }) => (modalOpen ? "visible" : isLoading ? "visible" : "hidden")};
+  transition: visibility ${({ modalOpen }) => (modalOpen ? "0s" : "0.4s")} ease-out;
 `;
 
 const slideUp = keyframes`
