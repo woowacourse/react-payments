@@ -8,7 +8,7 @@ const OwnerNameInput = (props: InputStateProps) => {
       textType: 'text',
       maxLength: 30,
       placeholder: '카드에 표시된 이름과 동일하게 입력하세요.',
-      inputValues: props.inputValues as string,
+      inputValue: props.inputValues as string,
       setInputValues: props.setInputValues,
     },
   ];

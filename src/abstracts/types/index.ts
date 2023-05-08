@@ -10,7 +10,7 @@ export interface CardType {
   ownerName: string;
   securityCode: string;
   cardPassword: string;
-  bank?: Bank | undefined;
+  bank?: Bank;
   alias?: string;
 }
 

@@ -11,7 +11,7 @@ const SecurityCodeInput = (props: InputStateProps) => {
       maxLength: 3,
       required: true,
       textSecurity: true,
-      inputValues: props.inputValues as string,
+      inputValue: props.inputValues as string,
       setInputValues: props.setInputValues,
     },
   ];

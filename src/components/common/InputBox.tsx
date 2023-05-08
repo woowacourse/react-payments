@@ -4,7 +4,7 @@ import styled from 'styled-components';
 export interface InputType extends InputHTMLAttributes<HTMLInputElement> {
   textType: 'text' | 'number';
   textSecurity?: boolean;
-  inputValues: string;
+  inputValue: string;
   setInputValues: (val: string) => void;
 }
 
@@ -32,7 +32,7 @@ const InputBox = ({ inputs, align, separator, isFullWidth = false }: InputBoxPro
           <Input
             {...props}
             type="text"
-            value={props.inputValues}
+            value={props.inputValue}
             onChange={onChangeInput(props, index)}
             minLength={props.required ? props.maxLength : 0}
             align={align}

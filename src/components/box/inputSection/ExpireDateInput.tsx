@@ -15,7 +15,7 @@ const ExpireDateInput = (props: InputStateProps) => {
       maxLength: 2,
       placeholder: 'YY',
       required: true,
-      inputValues: props.inputValues[0],
+      inputValue: props.inputValues[0],
       setInputValues: setInput(0),
     },
     {
@@ -23,7 +23,7 @@ const ExpireDateInput = (props: InputStateProps) => {
       maxLength: 2,
       placeholder: 'MM',
       required: true,
-      inputValues: props.inputValues[1],
+      inputValue: props.inputValues[1],
       setInputValues: setInput(1),
     },
   ];

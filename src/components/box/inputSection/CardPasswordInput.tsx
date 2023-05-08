@@ -15,7 +15,7 @@ const CardPasswordInput = ({ cardPassword1Props, cardPassword2Props }: CardPassw
       maxLength: 1,
       required: true,
       textSecurity: true,
-      inputValues: cardPassword1Props.inputValues as string,
+      inputValue: cardPassword1Props.inputValues as string,
       setInputValues: cardPassword1Props.setInputValues,
     },
   ];
@@ -25,7 +25,7 @@ const CardPasswordInput = ({ cardPassword1Props, cardPassword2Props }: CardPassw
       maxLength: 1,
       required: true,
       textSecurity: true,
-      inputValues: cardPassword2Props.inputValues as string,
+      inputValue: cardPassword2Props.inputValues as string,
       setInputValues: cardPassword2Props.setInputValues,
     },
   ];

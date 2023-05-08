@@ -8,7 +8,7 @@ const CardAliasInput = (props: InputStateProps) => {
       textType: 'text',
       maxLength: 15,
       placeholder: '카드의 별칭을 입력해주세요.',
-      inputValues: props.inputValues as string,
+      inputValue: props.inputValues as string,
       setInputValues: props.setInputValues,
     },
   ];

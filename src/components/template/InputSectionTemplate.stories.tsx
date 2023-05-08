@@ -11,7 +11,7 @@ export const InputNumberType = () => {
   return (
     <InputSectionTemplate label="숫자">
       <InputBox
-        inputs={[{ textType: 'number', maxLength: 10, inputValues: '1234', setInputValues: () => {} }]}
+        inputs={[{ textType: 'number', maxLength: 10, inputValue: '1234', setInputValues: () => {} }]}
         align="center"
       />
     </InputSectionTemplate>
@@ -23,7 +23,7 @@ export const InputNameType = () => {
   return (
     <InputSectionTemplate label="이름" isCountLength maxLength={10} inputValues={inputValue}>
       <InputBox
-        inputs={[{ textType: 'text', maxLength: 10, inputValues: inputValue, setInputValues: () => {} }]}
+        inputs={[{ textType: 'text', maxLength: 10, inputValue: inputValue, setInputValues: () => {} }]}
         align="left"
         isFullWidth
       />
@@ -40,7 +40,7 @@ export const InputPasswordType = () => {
             textType: 'number',
             maxLength: 1,
             textSecurity: true,
-            inputValues: '1',
+            inputValue: '1',
             setInputValues: () => {},
           },
         ]}
@@ -52,7 +52,7 @@ export const InputPasswordType = () => {
             textType: 'number',
             maxLength: 1,
             textSecurity: true,
-            inputValues: '1',
+            inputValue: '1',
             setInputValues: () => {},
           },
         ]}
@@ -64,7 +64,7 @@ export const InputPasswordType = () => {
             textType: 'number',
             maxLength: 1,
             textSecurity: true,
-            inputValues: '1',
+            inputValue: '1',
             setInputValues: () => {},
           },
         ]}
@@ -76,7 +76,7 @@ export const InputPasswordType = () => {
             textType: 'number',
             maxLength: 1,
             textSecurity: true,
-            inputValues: '1',
+            inputValue: '1',
             setInputValues: () => {},
           },
         ]}
@@ -91,9 +91,9 @@ export const InputPhoneNumberType = () => {
     <InputSectionTemplate label="전화번호">
       <InputBox
         inputs={[
-          { textType: 'number', maxLength: 3, inputValues: '010', setInputValues: () => {} },
-          { textType: 'number', maxLength: 4, inputValues: '1234', setInputValues: () => {} },
-          { textType: 'number', maxLength: 4, inputValues: '5678', setInputValues: () => {} },
+          { textType: 'number', maxLength: 3, inputValue: '010', setInputValues: () => {} },
+          { textType: 'number', maxLength: 4, inputValue: '1234', setInputValues: () => {} },
+          { textType: 'number', maxLength: 4, inputValue: '5678', setInputValues: () => {} },
         ]}
         align="center"
         separator="-"

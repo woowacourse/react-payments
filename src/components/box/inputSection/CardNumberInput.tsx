@@ -15,7 +15,7 @@ const CardNumberInput = (props: InputStateProps) => {
       maxLength: 4,
       placeholder: '1234',
       required: true,
-      inputValues: props.inputValues[0],
+      inputValue: props.inputValues[0],
       setInputValues: setInput(0),
     },
     {
@@ -23,7 +23,7 @@ const CardNumberInput = (props: InputStateProps) => {
       maxLength: 4,
       placeholder: '5678',
       required: true,
-      inputValues: props.inputValues[1],
+      inputValue: props.inputValues[1],
       setInputValues: setInput(1),
     },
     {
@@ -32,7 +32,7 @@ const CardNumberInput = (props: InputStateProps) => {
       placeholder: '∙∙∙∙',
       required: true,
       textSecurity: true,
-      inputValues: props.inputValues[2],
+      inputValue: props.inputValues[2],
       setInputValues: setInput(2),
     },
     {
@@ -41,7 +41,7 @@ const CardNumberInput = (props: InputStateProps) => {
       placeholder: '∙∙∙∙',
       required: true,
       textSecurity: true,
-      inputValues: props.inputValues[3],
+      inputValue: props.inputValues[3],
       setInputValues: setInput(3),
     },
   ];
