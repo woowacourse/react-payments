@@ -1,2 +1,2 @@
 export * from './CardCompanyList';
-export * from './CardRegisterForm';
+export * from './CardRegisterForm/CardRegisterForm';

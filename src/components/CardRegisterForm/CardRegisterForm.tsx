@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { InputBox } from './common';
-import { PATH } from '../constants/path';
-import { useCardRegisterForm } from '../hooks/useCardRegisterForm';
-import { Card } from '../type/card';
-import { isCardInfoOption } from '../utils/checkType';
+import { PATH } from '../../constants/path';
+import { useCardRegisterForm } from '../../hooks/useCardRegisterForm';
+import { Card } from '../../type/card';
+import { isCardInfoOption } from '../../utils/checkType';
+import { InputBox } from '../common';
 
 export function CardRegisterForm() {
   const naviagte = useNavigate();
