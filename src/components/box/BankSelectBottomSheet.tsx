@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { VisibleDispatch } from '../template/BottomSheetTemplate';
+import { VisibleDispatch } from 'ksone02-modal';
 import { BANK } from '../../abstracts/constants';
 import BankSelector from '../common/BankSelector';
 import { Bank } from '../../abstracts/types';

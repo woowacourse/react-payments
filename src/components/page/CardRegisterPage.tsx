@@ -9,7 +9,7 @@ import styled from 'styled-components';
 import { Bank, CardType, Page, PageProps } from '../../abstracts/types';
 import PageTemplate from '../template/PageTemplate';
 import BankSelectBottomSheet from '../box/BankSelectBottomSheet';
-import BottomSheetTemplate from '../template/BottomSheetTemplate';
+import { BottomSheetProvider } from 'ksone02-modal';
 
 interface CardFormState extends Omit<CardType, 'id' | 'cardPassword'> {
   cardPassword1: string;
@@ -85,14 +85,14 @@ const CardRegisterPage = ({ navigate }: PageProps) => {
         </ButtonWrapper>
       </InputForm>
       {isOnBankModal && (
-        <BottomSheetTemplate onClose={() => setIsOnBankModal(false)} modalState={isOnBankModal}>
+        <BottomSheetProvider onClose={() => setIsOnBankModal(false)} modalState={isOnBankModal}>
           <BankSelectBottomSheet
             onClose={() => setIsOnBankModal(false)}
             modalState={isOnBankModal}
             bank={bank}
             setBank={(newBank: Bank) => onChange('bank')(newBank)}
           />
-        </BottomSheetTemplate>
+        </BottomSheetProvider>
       )}
     </PageTemplate>
   );
