@@ -1,11 +1,3 @@
-:root {
-  --size: 100px;
-  --thickness: 6px;
-  --base-color: #d5d5d5;
-  --wheel-color: #c30;
-  --speed: 800ms;
-}
-
 .loaderWrapper {
   position: fixed;
 
@@ -20,6 +12,12 @@
 }
 
 .loader {
+  --size: 100px;
+  --thickness: 6px;
+  --base-color: #d5d5d5;
+  --wheel-color: #c30;
+  --speed: 800ms;
+
   margin: 5% auto;
   height: var(--size);
   width: var(--size);
