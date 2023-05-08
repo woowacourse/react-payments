@@ -2,8 +2,7 @@ import Container from "../common/Container";
 import InputLabel from "../common/InputLabel";
 import Input from "../common/Input";
 
-import React from "react";
-import { useCallback, useContext } from "react";
+import React, { useCallback, useContext } from "react";
 import { NewCardContext } from "../../contexts/NewCardContext";
 import { useCardNumbersInput } from "../../hook/useCardNumbersInput";
 
@@ -37,11 +36,18 @@ interface CardNumberInputProps {
 
 const CardNumberInput = ({ isInputsValid, setIsNumbersCompleted, setIsNumbersValid }: CardNumberInputProps) => {
   const { setNumbers, newCard } = useContext(NewCardContext);
-  const { postText, saveNumbers, updateInputFlags } = useCardNumbersInput({
+  const { postText, saveNumbers } = useCardNumbersInput({
     setNumbers,
-    setIsNumbersCompleted,
-    setIsNumbersValid,
   });
+
+  const updateInputFlags = (postText: string, text: string) => {
+    if (postText.length < text.length) {
+      setIsNumbersCompleted(text.replaceAll(" - ", "").length === CARDNUMBERS_MAXLEGNTH);
+      return;
+    }
+    setIsNumbersValid(true);
+    setIsNumbersCompleted(false);
+  };
 
   const handleInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -79,7 +85,8 @@ const CardNumberInput = ({ isInputsValid, setIsNumbersCompleted, setIsNumbersVal
       <Input
         {...cardNumberInputInfo}
         handleInput={handleInput}
-        error={{ isValid: isInputsValid.isCardNumbersValid, errorMessage: "기존 카드 번호와 중복됩니다." }}
+        isValid={isInputsValid.isCardNumbersValid}
+        errorMessage={"기존 카드 번호와 중복됩니다."}
       />
     </Container>
   );

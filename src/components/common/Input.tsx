@@ -5,7 +5,8 @@ interface InputProps {
   label: string;
   placeholder: string;
   type: string;
-  error?: { isValid: boolean; errorMessage: string };
+  isValid?: boolean;
+  errorMessage?: string;
   handleInput?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   $width: string;
   $textPosition: string;
@@ -13,30 +14,13 @@ interface InputProps {
 
 const Input = forwardRef(
   (
-    {
-      label,
-      placeholder,
-      type,
-      handleInput,
-      error = { isValid: true, errorMessage: "" },
-      $width,
-      $textPosition,
-    }: InputProps,
+    { label, handleInput, isValid = true, errorMessage = "", ...rest }: InputProps,
     ref: React.ForwardedRef<HTMLInputElement>
   ) => {
     return (
       <Column>
-        <InputField
-          placeholder={placeholder}
-          id={label}
-          name={label}
-          onInput={handleInput}
-          type={type}
-          $width={$width}
-          $textPosition={$textPosition}
-          ref={ref}
-        />
-        <ErrorMessage>{error.isValid ? "" : error.errorMessage}</ErrorMessage>
+        <InputField id={label} name={label} onInput={handleInput} ref={ref} {...rest} />
+        <ErrorMessage>{isValid ? "" : errorMessage}</ErrorMessage>
       </Column>
     );
   }

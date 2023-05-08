@@ -1,6 +1,7 @@
 import CardItem from "../components/cardList/CardItem";
 import Header from "../components/common/Header";
 import CardForm from "../components/cardForm/CardForm";
+import Modal from "tkdrb12-react-modal";
 import BrandSelectModal from "../components/modal/BrandSelectModal";
 import styled from "styled-components";
 
@@ -11,9 +12,9 @@ import { NewCardContext } from "../contexts/NewCardContext";
 import { useNewCard } from "../hook/useNewCard";
 
 export const AddCard = () => {
-  const [isModalOpen, setIsModalOpen] = useState(true);
   const { newCard, setNumbers, setExpiryDate, setBrand, setOwner, setCVC, setPassword } = useNewCard();
 
+  const [isModalOpen, setIsModalOpen] = useState(true);
   const openModal = useCallback(() => {
     setIsModalOpen(true);
   }, [setIsModalOpen]);
@@ -28,6 +29,7 @@ export const AddCard = () => {
     openModal();
   };
 
+  const canBackdropClickClose = !!newCard.brand;
   return (
     <>
       <HeaderWrapper>
@@ -40,7 +42,11 @@ export const AddCard = () => {
         <Main>
           <CardItem card={newCard} handleClick={handleClickOpenModalButton} />
           <CardForm />
-          {isModalOpen && <BrandSelectModal closeModal={closeModal} />}
+          {isModalOpen && (
+            <Modal closeModal={closeModal} canBackdropClickClose={canBackdropClickClose}>
+              <BrandSelectModal closeModal={closeModal} />
+            </Modal>
+          )}
         </Main>
       </NewCardContext.Provider>
     </>

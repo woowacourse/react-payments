@@ -1,8 +1,9 @@
 import CardItem from "../components/cardList/CardItem";
 import AliasInput from "../components/cardForm/AliasInput";
+import RegisterCard from "../components/RegisterCard";
 import styled from "styled-components";
 
-import { useRef, FormEvent } from "react";
+import { FormEvent, useState, useCallback } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 interface AssignAliasProps {
@@ -11,28 +12,38 @@ interface AssignAliasProps {
 
 export const AssignAlias = ({ assignAlias }: AssignAliasProps) => {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
 
   const location = useLocation();
   const { newCard } = location.state;
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = useCallback(
+    (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
 
-    const formData = new FormData(e.target as HTMLFormElement);
-    const data = Object.fromEntries(formData.entries());
+      const formData = new FormData(e.target as HTMLFormElement);
+      const data = Object.fromEntries(formData.entries());
 
-    assignAlias(newCard.numbers, String(data.alias));
-    navigate("/");
-  };
+      assignAlias(newCard.numbers, String(data.alias));
+      navigate("/");
+    },
+    [newCard.numbers]
+  );
 
   return (
     <Main>
-      <Message>카드등록이 완료되었습니다.</Message>
-      <CardItem card={newCard} />
-      <AliasForm onSubmit={handleSubmit}>
-        <AliasInput />
-        <SubmitButton>확인</SubmitButton>
-      </AliasForm>
+      {isLoading ? (
+        <RegisterCard setIsLoading={setIsLoading} />
+      ) : (
+        <>
+          <Message>카드등록이 완료되었습니다.</Message>
+          <CardItem card={newCard} />
+          <AliasForm onSubmit={handleSubmit}>
+            <AliasInput />
+            <SubmitButton>확인</SubmitButton>
+          </AliasForm>
+        </>
+      )}
     </Main>
   );
 };

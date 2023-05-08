@@ -1,4 +1,6 @@
 import { StoryObj, Meta } from "@storybook/react";
+import { within, userEvent } from "@storybook/testing-library";
+
 import Input from "../components/common/Input";
 import { CARDNUMBERS_REGEX, EXPRIYDATE_REGEX } from "../constants";
 
@@ -28,6 +30,15 @@ export const CardNumberInput: Story = {
       e.target.value = (numbers.match(new RegExp(CARDNUMBERS_REGEX)) ?? []).join(" - ");
     },
   },
+
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const input = canvas.getByPlaceholderText("");
+
+    await userEvent.type(input, "1234567812345678", {
+      delay: 100,
+    });
+  },
 };
 
 export const ExpiryDateInput: Story = {
@@ -46,6 +57,15 @@ export const ExpiryDateInput: Story = {
 
       e.target.value = (value.match(new RegExp(EXPRIYDATE_REGEX)) ?? []).join(" / ");
     },
+  },
+
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const input = canvas.getByPlaceholderText("MM / YY");
+
+    await userEvent.type(input, "0224", {
+      delay: 100,
+    });
   },
 };
 

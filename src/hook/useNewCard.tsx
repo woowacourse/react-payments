@@ -40,29 +40,12 @@ const reducer = (newCard: CardType, action: Action): CardType => {
 export const useNewCard = () => {
   const [newCard, setNewCard] = useReducer<Reducer<CardType, Action>>(reducer, initialCard);
 
-  const setNumbers = (numbers: string) => {
-    setNewCard({ type: "numbers", numbers });
-  };
-
-  const setExpiryDate = (expiryDate: string) => {
-    setNewCard({ type: "expiryDate", expiryDate });
-  };
-
-  const setBrand = (brand: BrandType) => {
-    setNewCard({ type: "brand", brand });
-  };
-
-  const setOwner = (owner: string) => {
-    setNewCard({ type: "owner", owner });
-  };
-
-  const setCVC = (CVC: number) => {
-    setNewCard({ type: "CVC", CVC });
-  };
-
-  const setPassword = (password: number[]) => {
-    setNewCard({ type: "password", password });
-  };
+  const setNumbers = (numbers: string) => setNewCard({ type: "numbers", numbers });
+  const setExpiryDate = (expiryDate: string) => setNewCard({ type: "expiryDate", expiryDate });
+  const setBrand = (brand: BrandType) => setNewCard({ type: "brand", brand });
+  const setOwner = (owner: string) => setNewCard({ type: "owner", owner });
+  const setCVC = (CVC: number) => setNewCard({ type: "CVC", CVC });
+  const setPassword = (password: number[]) => setNewCard({ type: "password", password });
 
   return { newCard, setNumbers, setExpiryDate, setBrand, setOwner, setCVC, setPassword };
 };
