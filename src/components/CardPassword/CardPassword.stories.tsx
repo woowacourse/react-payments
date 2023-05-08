@@ -5,6 +5,7 @@ import CardPassword, { CardPasswordProps } from './CardPassword';
 const meta = {
   component: CardPassword,
   title: 'Section/CardPassword',
+  tags: ['autodocs'],
   argTypes: {
     checkPassword: {
       table: {

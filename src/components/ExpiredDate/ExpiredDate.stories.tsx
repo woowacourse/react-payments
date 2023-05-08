@@ -5,6 +5,7 @@ import ExpiredDate, { ExpiredDateProps } from './ExpiredDate';
 const meta = {
   component: ExpiredDate,
   title: 'Section/ExpiredDate',
+  tags: ['autodocs'],
   argTypes: {
     checkExpiredDate: {
       table: {
@@ -16,16 +17,27 @@ const meta = {
 
 export default meta;
 
-export const ExpiredDateStory = (
+const Template = (
   args: ExpiredDateProps & { nextRef: RefObject<HTMLInputElement> }
 ) => {
   const ref = useRef<HTMLInputElement>(null);
   return <ExpiredDate {...args} ref={ref} />;
 };
+Template.args = { expiredDate: {} };
 
-ExpiredDateStory.args = {
+export const ExpiredDateFilled = Template.bind({});
+export const ExpiredDateEmpty = Template.bind({});
+
+ExpiredDateFilled.args = {
   expiredDate: {
     0: '02',
     1: '32',
+  },
+};
+
+ExpiredDateEmpty.args = {
+  expiredDate: {
+    0: '',
+    1: '',
   },
 };

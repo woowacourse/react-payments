@@ -1,11 +1,12 @@
 import { cardCompanies } from '../../constants/cards';
 import { CardCompanyName } from '../../types/Card';
 import CardSvgIcon from '../Svg/CardSvgIcon';
-import * as Styled from './BottomSheet.styles';
+import * as Styled from './CardComapnyIcons.styles';
 
-interface BottomSheetProps {
+interface CardComapnyIconsProps {
   onSetCardCompany: (value: CardCompanyName) => void;
   closeBottomSheet: () => void;
+  onSetFirstCardNumbers: (cardCompanyName: CardCompanyName) => void;
 }
 
 const isCardCompany = (value: string): value is CardCompanyName => {
@@ -21,32 +22,31 @@ const isCardCompany = (value: string): value is CardCompanyName => {
   ].includes(value);
 };
 
-const BottomSheet = ({
+const CardComapnyIcons = ({
   onSetCardCompany,
   closeBottomSheet,
-}: BottomSheetProps) => {
+  onSetFirstCardNumbers,
+}: CardComapnyIconsProps) => {
   const handleCardIconClick = (name: string) => {
     if (!isCardCompany(name)) return;
     onSetCardCompany(name);
+    onSetFirstCardNumbers(name);
     closeBottomSheet();
   };
 
   return (
-    <>
-      <Styled.BackDrop />
-      <Styled.Wrapper>
-        {cardCompanies.map(({ type, name }) => (
-          <Styled.IconWrapper
-            onClick={() => handleCardIconClick(name)}
-            key={type}
-          >
-            <CardSvgIcon type={type} />
-            <p>{name}</p>
-          </Styled.IconWrapper>
-        ))}
-      </Styled.Wrapper>
-    </>
+    <Styled.Wrapper>
+      {cardCompanies.map(({ type, name }) => (
+        <Styled.IconWrapper
+          onClick={() => handleCardIconClick(name)}
+          key={type}
+        >
+          <CardSvgIcon type={type} />
+          <p>{name}</p>
+        </Styled.IconWrapper>
+      ))}
+    </Styled.Wrapper>
   );
 };
 
-export default BottomSheet;
+export default CardComapnyIcons;

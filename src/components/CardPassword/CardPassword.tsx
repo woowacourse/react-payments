@@ -46,6 +46,7 @@ const CardPassword = forwardRef(
               order={0}
               placeholder="•"
               required={true}
+              inputMode={'numeric'}
             />
           </Styled.Wrapper>
           <Styled.Wrapper>
@@ -58,6 +59,7 @@ const CardPassword = forwardRef(
               order={1}
               placeholder="•"
               required={true}
+              inputMode={'numeric'}
             />
           </Styled.Wrapper>
           <Styled.Pargraph>•</Styled.Pargraph>

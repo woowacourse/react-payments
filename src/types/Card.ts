@@ -32,4 +32,5 @@ export interface CardCompanies {
   type: CardCompanyType;
   name: CardCompanyName;
   color: string;
+  codeNumber: number;
 }

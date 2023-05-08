@@ -12,7 +12,10 @@ const GlobalStyle = createGlobalStyle`
     }
     html,
     body {
-        width: 375px;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         margin: 0 auto;
         font-family: sans-serif;
         font-size: 16px;
