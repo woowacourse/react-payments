@@ -23,19 +23,21 @@ const CompletePage = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.cardWrapper}>
-        <Card {...card} />
+      <div className={styles.innerContainer}>
+        <div className={styles.cardWrapper}>
+          <Card {...card} />
+        </div>
+        <Spacer height={42} />
+        <h2 className={styles.completeMessage}>카드 등록을 완료했어요.</h2>
+        <Spacer height={20} />
+        <h2 className={styles.completeMessage}>
+          <time>{count}초</time> 후에 카드 목록 페이지로 이동할게요.
+        </h2>
+        <Spacer height={30} />
+        <button onClick={() => navigate('/')} className={styles.completeButton}>
+          확인
+        </button>
       </div>
-      <Spacer height={42} />
-      <h2 className={styles.completeMessage}>카드 등록을 완료했어요.</h2>
-      <Spacer height={20} />
-      <h2 className={styles.completeMessage}>
-        <time>{count}초</time> 후에 카드 목록 페이지로 이동할게요.
-      </h2>
-      <Spacer height={30} />
-      <button onClick={() => navigate('/')} className={styles.completeButton}>
-        확인
-      </button>
     </div>
   );
 };
