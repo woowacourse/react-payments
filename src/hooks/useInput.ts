@@ -19,7 +19,7 @@ const useInput = (validator?: InputValidator) => {
     setErrorMessage("");
   };
 
-  return { inputValue, errorMessage, setErrorMessage, onChange };
+  return { inputValue, errorMessage, onChange };
 };
 
 export default useInput;

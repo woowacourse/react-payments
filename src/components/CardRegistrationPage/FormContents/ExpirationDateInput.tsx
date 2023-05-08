@@ -26,11 +26,6 @@ const ExpirationDateInput = () => {
 
     onChangeExpirationDate.onChangeYear(inputValue);
   };
-  // const handleChangeExpirationDate = (inputIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   const inputValue = event.target.value;
-
-  //   onChangeExpirationDate(inputIndex)(inputValue);
-  // };
 
   return (
     <InputGroup labelValue="만료일" errorMessage={expirationDateErrorMessage}>
