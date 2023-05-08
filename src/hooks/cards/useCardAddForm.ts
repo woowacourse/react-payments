@@ -1,11 +1,11 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { FormEvent } from 'react';
 import type { CardFormData, CardFormValidation } from '../../types';
 import { useCardListContext } from '../../contexts/CardListContext';
 import { useCardInputValidation } from './useCardInputValidation';
 import { useFormComplete } from '../common/useFormComplete';
-import { PATH } from '../../constants';
+import { LOADING_DURATION, PATH } from '../../constants';
 
 const initialValue: CardFormData = {
   issuer: '',
@@ -31,6 +31,7 @@ const useCardAddForm = () => {
   } = useCardInputValidation();
   const [isRegistering, setIsRegistering] = useState(false);
   const isFormComplete = useFormComplete(inputValidation);
+  const timeout = useRef<ReturnType<typeof setTimeout>>();
 
   const navigate = useNavigate();
 
@@ -62,19 +63,22 @@ const useCardAddForm = () => {
       return;
     }
 
-    setIsRegistering(true);
-
     const newCard = {
       ...cardInformation,
       id: newCardId,
       cardName: generateDefaultCardName(cardInformation.ownerName, cardInformation.issuer),
     };
 
-    setTimeout(() => {
+    setIsRegistering(true);
+    timeout.current && clearTimeout(timeout.current);
+
+    timeout.current = setTimeout(() => {
       setIsRegistering(false);
       addCard(newCard);
       navigate(`${PATH.REGISTER}/?id=${newCard.id}`);
-    }, 3000);
+    }, LOADING_DURATION);
+
+    console.log(timeout.current);
   };
 
   return {
