@@ -3,8 +3,7 @@ import Input from "../common/Input";
 import InputLabel from "../common/InputLabel";
 import styled from "styled-components";
 
-import React from "react";
-import { useRef, useCallback } from "react";
+import React, { useRef, useCallback } from "react";
 import { usePasswordInput } from "../../hook/usePasswordInput";
 
 import { PASSWORD_MAXLEGNTH, NUMBER_REGEX } from "../../constants";

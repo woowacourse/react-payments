@@ -3,9 +3,8 @@ import Input from "../common/Input";
 import InputLabel from "../common/InputLabel";
 import styled from "styled-components";
 
-import React from "react";
+import React, { useContext } from "react";
 import { NewCardContext } from "../../contexts/NewCardContext";
-import { useContext } from "react";
 
 import { NAME_MAXLEGNTH } from "../../constants";
 
@@ -36,7 +35,7 @@ const OwnerInput = () => {
         <InputLabel text="카드 소유자 이름 (선택)" name="owner" />
         <InputLabel text={`${newCard.owner ? newCard.owner.length : "0"}/${NAME_MAXLEGNTH}`} name="ownerLength" />
       </Row>
-      <Input error={{ isValid: true, errorMessage: "" }} {...OwnerInfo} handleInput={handleInput} />
+      <Input {...OwnerInfo} handleInput={handleInput} />
     </Container>
   );
 };
