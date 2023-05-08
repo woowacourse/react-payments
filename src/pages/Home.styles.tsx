@@ -11,15 +11,6 @@ const fadeIn = keyframes`
   }
 `;
 
-const fold = keyframes`
-    from {
-        transform: translateY(20%);
-    }
-    to {
-        transform: translateY(0);
-    }
-`;
-
 const testFold = keyframes`
 from  { 
     margin-top: 16px;
