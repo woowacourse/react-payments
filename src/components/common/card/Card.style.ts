@@ -22,7 +22,7 @@ export const StyleCardContainer = styled.div<CardContainerProps>`
   border-radius: 5px;
 
   padding: 14px;
-  margin: 10px auto;
+  margin: 30px auto;
 
   box-sizing: border-box;
 `;
