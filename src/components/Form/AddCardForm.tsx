@@ -23,6 +23,7 @@ import { ValidateForm } from 'util/ValidateForm';
 import useModal from 'hooks/useModal';
 import { Modal } from 'components/common/Modal/Modal';
 import { useCardInfo } from 'hooks/useCardInfo';
+import { filterBlankAndNotANumber } from 'util/FilterInvalidInput';
 
 export type AddCardFormProps = {
   onSubmit: () => void;
@@ -35,7 +36,6 @@ type FocusFormInputParams = {
 };
 
 const NOT_ALPHABET_REGEX = /[^A-Za-z\s]/gi;
-const NOT_NUMBER_REGEX = /[^0-9]/gi;
 
 function AddCardInfo({ onSubmit }: AddCardFormProps) {
   const { cardInfo, setCardInfo } = useContext(CardInfoContext);
@@ -132,9 +132,9 @@ function AddCardInfo({ onSubmit }: AddCardFormProps) {
   const handleMoveNextFocus: ChangeEventHandler<HTMLFormElement> = ({ target }) => {
     const { form: formInputList, maxLength, value } = target;
 
-    const filteredNumberInput = value.trim().replace(NOT_NUMBER_REGEX, '');
+    const filteredInput = filterBlankAndNotANumber(value);
 
-    if (filteredNumberInput.length !== maxLength) return;
+    if (filteredInput.length !== maxLength) return;
 
     const NEXT = 1;
 
