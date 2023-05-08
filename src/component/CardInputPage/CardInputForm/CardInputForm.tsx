@@ -1,4 +1,4 @@
-import { FormEventHandler, useEffect, useRef } from "react";
+import { useRef } from "react";
 
 import Modal from "@chsua/bottom-modal";
 

@@ -1,4 +1,4 @@
-import { CardCo, CreditCard } from "./type";
+import { CreditCard } from "./type";
 
 export const initialCardInputComplete = {
   cardCo: false,
