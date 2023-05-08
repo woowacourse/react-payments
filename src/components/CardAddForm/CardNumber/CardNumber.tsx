@@ -4,6 +4,7 @@ import type { CardFormData, CardFormValidation } from '../../../types';
 import Input from '../../common/Input/Input';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
+import { CARD_NUMBER_UNIT_MAX_LENGTH } from '../../../constants/input';
 import { formatNumber } from '../../../utils/formatter';
 import { isElementOfType } from '../../../utils/eventUtils';
 import styles from './style.module.css';
@@ -40,25 +41,63 @@ const CardNumber = ({ value, isError, updateInputValue, updateInputError }: Card
       }}
       isError={isError}
     >
-      <Label htmlFor="cardNumber" required>
+      <Label htmlFor="cardNumber" id="cardNumber-label" required>
         카드 번호
       </Label>
       <div className={`${styles.container} ${isError && styles.error}`} onBlur={onBlur}>
-        {Array.from({ length: 4 }, (_, index) => (
-          <Input
-            key={index}
-            id="cardNumber"
-            name="cardNumber"
-            type={index < 2 ? 'text' : 'password'}
-            data-index={index}
-            minLength={4}
-            maxLength={4}
-            autoComplete="cc-number"
-            inputMode="numeric"
-            required
-            onChange={onChange}
-          />
-        ))}
+        <Input
+          id="cardNumber"
+          name="cardNumber"
+          data-index={0}
+          minLength={CARD_NUMBER_UNIT_MAX_LENGTH}
+          maxLength={CARD_NUMBER_UNIT_MAX_LENGTH}
+          autoComplete="cc-number"
+          inputMode="numeric"
+          required
+          aria-label="첫 번째 카드번호 4자리 입력"
+          onChange={onChange}
+        />
+        <Input
+          id="cardNumber1"
+          name="cardNumber"
+          data-index={1}
+          minLength={CARD_NUMBER_UNIT_MAX_LENGTH}
+          maxLength={CARD_NUMBER_UNIT_MAX_LENGTH}
+          autoComplete="cc-number"
+          inputMode="numeric"
+          aria-label="두 번째 카드번호 4자리 입력"
+          aria-labelledby="cardNumber-label"
+          required
+          onChange={onChange}
+        />
+        <Input
+          id="cardNumber2"
+          name="cardNumber"
+          type="password"
+          data-index={2}
+          minLength={CARD_NUMBER_UNIT_MAX_LENGTH}
+          maxLength={CARD_NUMBER_UNIT_MAX_LENGTH}
+          autoComplete="cc-number"
+          inputMode="numeric"
+          aria-label="세 번째 카드번호 4자리 입력"
+          aria-labelledby="cardNumber-label"
+          required
+          onChange={onChange}
+        />
+        <Input
+          id="cardNumber3"
+          name="cardNumber"
+          type="password"
+          data-index={3}
+          minLength={CARD_NUMBER_UNIT_MAX_LENGTH}
+          maxLength={CARD_NUMBER_UNIT_MAX_LENGTH}
+          autoComplete="cc-number"
+          inputMode="numeric"
+          aria-label="네 번째 카드번호 4자리 입력"
+          aria-labelledby="cardNumber-label"
+          required
+          onChange={onChange}
+        />
       </div>
     </InputContainer>
   );
