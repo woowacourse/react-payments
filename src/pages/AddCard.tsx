@@ -130,7 +130,12 @@ const AddCard = ({ cards, setCards }: CardList) => {
         </form>
         <CardErrorLabel errorMessage={errorMessage}></CardErrorLabel>
       </Styled.PageWrapper>
-      <Modal isModalOpen={isModalOpen} closeModal={handleOpenModal}>
+      <Modal
+        isModalOpen={isModalOpen}
+        closeModal={handleOpenModal}
+        position="bottom"
+        width="100%"
+      >
         <CardCompanyForm
           setCardCompany={setCardCompany}
           setIsModalOpen={handleOpenModal}
