@@ -36,7 +36,8 @@
     "build-storybook": "storybook build",
     "lint": "eslint ./src/**/*.{ts, tsx}",
     "lint:fix": "eslint --fix ./src/**/*.{ts,tsx}",
-    "prettier": "prettier --write --ignore-unknown ."
+    "prettier": "prettier --write --ignore-unknown .",
+    "chromatic": "npx chromatic --project-token=82fb1995983d"
   },
   "eslintConfig": {
     "extends": [
@@ -72,6 +73,7 @@
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
     "babel-plugin-named-exports-order": "^0.0.2",
+    "chromatic": "^6.17.4",
     "eslint": "^8.38.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.0.0",
