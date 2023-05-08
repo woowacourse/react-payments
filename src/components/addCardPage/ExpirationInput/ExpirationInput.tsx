@@ -1,20 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
-import { TAB_INDEX_INFO } from '../../../constants/constant';
-import { type UseInputProps } from '../../../hooks/useInput';
-import { Error } from '../../common/Error';
-import { Input } from '../../common/Input';
+import { type UseInputProps } from '@hooks/useInput';
+import { Error } from '@components/common/Error';
+import { Input } from '@components/common/Input';
+import { TAB_INDEX_INFO } from '@constants/constant';
+import { ADD_CARD_TEST_ID } from '@constants/storybookTest';
 
 interface ExpirationInputProps {
+  id: string;
   yearInformation: UseInputProps;
   monthInformation: UseInputProps;
 }
 
-const {
-  ADD_CARD_PAGE: { MONTH, YEAR },
-} = TAB_INDEX_INFO;
+const { ADD_CARD_PAGE_TAB_INDEX } = TAB_INDEX_INFO;
 
 export default function ExpirationInput({
+  id,
   yearInformation,
   monthInformation,
 }: ExpirationInputProps) {
@@ -24,12 +25,13 @@ export default function ExpirationInput({
         <InputWrapper>
           <Input
             type="text"
-            id="expiration"
+            id={id}
             isNumber={true}
             placeholder="MM"
             textAlign="center"
             autoComplete="off"
-            tabIndex={MONTH}
+            tabIndex={ADD_CARD_PAGE_TAB_INDEX.MONTH}
+            data-testid={ADD_CARD_TEST_ID.MONTH}
             {...monthInformation}
           />
         </InputWrapper>
@@ -41,7 +43,8 @@ export default function ExpirationInput({
             placeholder="YY"
             textAlign="center"
             autoComplete="off"
-            tabIndex={YEAR}
+            tabIndex={ADD_CARD_PAGE_TAB_INDEX.YEAR}
+            data-testid={ADD_CARD_TEST_ID.YEAR}
             {...yearInformation}
           />
         </InputWrapper>

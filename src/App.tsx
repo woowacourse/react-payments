@@ -1,33 +1,8 @@
-import { useState } from 'react';
-import { useLocalStorage } from './hooks/useLocalStorage';
-import { AddCardPage } from './pages/AddCardPage';
-import { HomePage } from './pages/HomePage';
-import { type CardInfo, type PageInfo } from './types/types';
-import { LOCAL_STORAGE_CARD_KEY } from './constants/constant';
+import { usePageContext } from '@contexts/usePageContext';
+import { ROUTER } from '@constants/router';
 
 export default function App() {
-  const [page, setPage] = useState<PageInfo>('homePage');
-  const [cardList, setCardList] = useLocalStorage<CardInfo[]>(
-    [],
-    LOCAL_STORAGE_CARD_KEY
-  );
+  const { page } = usePageContext();
 
-  return (
-    <div className="app">
-      {page === 'homePage' && (
-        <HomePage
-          cardList={cardList}
-          setCardList={setCardList}
-          setPage={setPage}
-        />
-      )}
-      {page === 'addCardPage' && (
-        <AddCardPage
-          cardList={cardList}
-          setCardList={setCardList}
-          setPage={setPage}
-        />
-      )}
-    </div>
-  );
+  return <div className="app">{ROUTER[page]}</div>;
 }

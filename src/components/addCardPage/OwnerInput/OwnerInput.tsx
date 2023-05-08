@@ -1,31 +1,32 @@
 import React from 'react';
 import styled from 'styled-components';
-import { TAB_INDEX_INFO } from '../../../constants/constant';
-import { type UseInputProps } from '../../../hooks/useInput';
-import { Error } from '../../common/Error';
-import { Input } from '../../common/Input';
+import { type UseInputProps } from '@hooks/useInput';
+import { Error } from '@components/common/Error';
+import { Input } from '@components/common/Input';
+import { TAB_INDEX_INFO } from '@constants/constant';
+import { ADD_CARD_TEST_ID } from '@constants/storybookTest';
 
 export interface OwnerInputProps {
+  id: string;
   ownerInformation: UseInputProps;
 }
 
-const {
-  ADD_CARD_PAGE: { OWNER },
-} = TAB_INDEX_INFO;
+const { ADD_CARD_PAGE_TAB_INDEX } = TAB_INDEX_INFO;
 
-export default function OwnerInput({ ownerInformation }: OwnerInputProps) {
+export default function OwnerInput({ id, ownerInformation }: OwnerInputProps) {
   return (
     <Container>
       <Wrapper>
         <Input
           type="text"
-          id="owner"
+          id={id}
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-          tabIndex={OWNER}
+          tabIndex={ADD_CARD_PAGE_TAB_INDEX.OWNER}
           autoComplete="off"
           autoCapitalize="characters"
           lang="en"
           enterKeyHint="next"
+          data-testid={ADD_CARD_TEST_ID.OWNER}
           {...ownerInformation}
         />
       </Wrapper>

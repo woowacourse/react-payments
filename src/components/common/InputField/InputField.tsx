@@ -2,18 +2,20 @@ import { type PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
 export interface InputContainerProps {
+  id: string;
   text: string;
   inputLength?: string;
 }
 
 export default function InputField({
+  id,
   text,
   children,
   inputLength,
 }: PropsWithChildren<InputContainerProps>) {
   return (
     <Wrapper>
-      <Label htmlFor={text}>
+      <Label htmlFor={id}>
         <span>{text}</span>
         <InputLengthText>{inputLength}</InputLengthText>
       </Label>

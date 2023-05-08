@@ -1,27 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
-import { useLocalStorage } from '../../hooks/useLocalStorage';
-import { CardInfo, PageInfo } from '../../types/types';
 import HomePage from './HomePage';
 
-const STORIES_CARD_KEY = 'storiesCardKey';
-
 function HomepageStories() {
-  const [page, setPage] = useState<PageInfo>('homePage');
-  const [cardList, setCardList] = useLocalStorage<CardInfo[]>(
-    [],
-    STORIES_CARD_KEY
-  );
-
   return (
     <div className="app">
-      {page === 'homePage' && (
-        <HomePage
-          cardList={cardList}
-          setCardList={setCardList}
-          setPage={setPage}
-        />
-      )}
+      <HomePage />
     </div>
   );
 }

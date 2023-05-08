@@ -4,7 +4,7 @@ import React, {
   type KeyboardEvent,
 } from 'react';
 import styled from 'styled-components';
-import { setNextInputFocus } from '../../../utils/common';
+import { setNextInputFocus } from '@utils/common';
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   textAlign?: string;

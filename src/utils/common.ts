@@ -1,4 +1,4 @@
-import { TAB_INDEX_INFO } from '../constants/constant';
+import { TAB_INDEX_INFO } from '@constants/constant';
 
 export const createUniqueId = () => 'id' + Math.random().toString(16).slice(2);
 

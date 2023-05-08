@@ -1,19 +1,19 @@
 import React, { FormEvent, useRef } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
+import { within, userEvent } from '@storybook/testing-library';
 import styled from 'styled-components';
-import { useFocusInput } from '../../../hooks/useFocusInput';
-import { useFormInputs } from '../../../hooks/useFormInputs';
+import { useFocusInput } from '@hooks/useFocusInput';
+import { useAddCardFormData } from '@pages/AddCardPage/hooks/useAddCardFormData';
+import { ADD_CARD_TEST_ID } from '@constants/storybookTest';
 import CvcInput from './CvcInput';
 
 function CvcStories() {
   const cardForm = useRef<HTMLFormElement>(null);
   const { onInputKeydown } = useFocusInput(cardForm);
 
-  const {
-    formInputs: { addCardPage },
-  } = useFormInputs();
+  const { formData } = useAddCardFormData();
 
-  const { cvc } = addCardPage;
+  const { cvc } = formData;
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -25,7 +25,7 @@ function CvcStories() {
       ref={cardForm}
       onKeyDown={(e) => onInputKeydown(e)}
     >
-      <CvcInput cvcInformation={cvc} />
+      <CvcInput id="" cvcInformation={cvc} />
     </InputWrapperParent>
   );
 }
@@ -39,7 +39,15 @@ export default meta;
 type Story = StoryObj<typeof CvcStories>;
 
 export const Cvc: Story = {
-  args: {},
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('CVC 번호를 입력합니다.', async () => {
+      await userEvent.type(canvas.getByTestId(ADD_CARD_TEST_ID.CVC), '1234', {
+        delay: 100,
+      });
+    });
+  },
 };
 
 const InputWrapperParent = styled.form`

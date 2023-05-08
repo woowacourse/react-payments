@@ -1,0 +1,155 @@
+import React, { FormEvent, useState } from 'react';
+import styled from 'styled-components';
+import { useCardListContext } from '@contexts/useCardContext';
+import { useCardInputInfoContext } from '@contexts/useCardInputInfo';
+import { usePageContext } from '@contexts/usePageContext';
+import { CardSpinner } from '@components/addCardPage/CardSpinner';
+import { Button } from '@components/common/Button';
+import { Card } from '@components/common/Card';
+import { Error } from '@components/common/Error';
+import { Input } from '@components/common/Input';
+import { InputField } from '@components/common/InputField';
+import { CardInfo } from '@type/card';
+import { createUniqueId } from '@utils/common';
+import { formValidate } from '@utils/formValidate';
+import { PAGE_KIND } from '@constants/constant';
+import { ADD_CARD_TEST_ID } from '@constants/storybookTest';
+import { colors } from '@styles/theme';
+import { useRegisterCardFormData } from './hooks/useRegisterCardFormData';
+
+const INPUT_CARD_TITLE_ID = 'cardTitle';
+
+export default function RegisterCard() {
+  const [isLoading, setIsLoading] = useState(false);
+  const { formData } = useRegisterCardFormData();
+  const { cardList, setCardList } = useCardListContext();
+  const { setPage } = usePageContext();
+  const { cardInputInfo } = useCardInputInfoContext();
+
+  const { cardTitle } = formData;
+
+  const createCard = () => {
+    const card: CardInfo = {
+      id: createUniqueId(),
+      title: cardTitle.value,
+      ...cardInputInfo,
+    };
+
+    const updatedCardList = [card, ...cardList];
+
+    setCardList(updatedCardList);
+  };
+
+  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const { validationResult } = formValidate(formData);
+
+    if (!validationResult) {
+      return;
+    }
+
+    setIsLoading(true);
+
+    setTimeout(() => {
+      createCard();
+
+      setPage(PAGE_KIND.HOME);
+    }, 3000);
+  };
+
+  if (isLoading) {
+    return (
+      <Wrapper>
+        <CardSpinner />
+        <LoadingMessage>카드를 등록중입니다.</LoadingMessage>
+      </Wrapper>
+    );
+  }
+
+  return (
+    <Wrapper>
+      <FinishMessage>카드등록이 완료되었습니다.</FinishMessage>
+      <Card
+        companyKind={cardInputInfo.company}
+        cardNumberSet={[
+          cardInputInfo.cardNumber.first,
+          cardInputInfo.cardNumber.second,
+          cardInputInfo.cardNumber.third,
+          cardInputInfo.cardNumber.fourth,
+        ]}
+        month={cardInputInfo.expirationDate.month}
+        year={cardInputInfo.expirationDate.year}
+        owner={cardInputInfo.owner}
+      />
+      <form onSubmit={onSubmit}>
+        <InputWrapper>
+          <InputField
+            id={INPUT_CARD_TITLE_ID}
+            text="카드 별칭 (선택)"
+            inputLength={`${cardTitle.value.length}/20`}
+          >
+            <Input
+              id={INPUT_CARD_TITLE_ID}
+              autoFocus
+              {...cardTitle}
+              type="text"
+              bgColor={colors.white}
+              textAlign="center"
+              enterKeyHint="done"
+              autoComplete="off"
+              maxLength={20}
+              placeholder="카드 별칭을 입력해주세요."
+              data-testid={ADD_CARD_TEST_ID.CARD_TITLE}
+            />
+          </InputField>
+        </InputWrapper>
+        <ButtonWrapper>
+          <Button text="확인" />
+        </ButtonWrapper>
+      </form>
+      {cardTitle.error && <Error text={cardTitle.error} />}
+    </Wrapper>
+  );
+}
+
+const Wrapper = styled.div`
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding: 130px 0 0 0;
+`;
+
+const FinishMessage = styled.h2`
+  margin-bottom: 36px;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28px;
+  text-align: center;
+  color: ${({ theme }) => theme.colors.primaryText};
+`;
+
+const InputWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 124px;
+  border-bottom: 1px solid black;
+`;
+
+const ButtonWrapper = styled.div`
+  position: absolute;
+  right: 25px;
+  bottom: 25px;
+`;
+
+const LoadingMessage = styled.span`
+  margin-top: 42px;
+  font-weight: 700;
+  font-size: 14px;
+  text-align: center;
+  color: ${({ theme }) => theme.colors.darkGray};
+  opacity: 0.9;
+`;

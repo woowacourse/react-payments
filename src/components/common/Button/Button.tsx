@@ -1,5 +1,6 @@
 import React, { type ButtonHTMLAttributes, type ReactNode } from 'react';
 import styled from 'styled-components';
+import { theme } from '@styles/theme';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   isDisable?: boolean;
@@ -19,14 +20,15 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 export default function Button({
   isDisable,
   text,
-  backgroundColor,
-  color,
-  cursor,
+  backgroundColor = 'transparent',
+  color = theme.colors.primaryText,
+  cursor = 'pointer',
   tabIndex,
-  fontSize,
+  fontSize = '14px',
   icon,
   iconPosition = 'left',
   padding,
+  fontWeight = '700',
   borderRadius,
   ...rest
 }: ButtonProps) {
@@ -35,6 +37,7 @@ export default function Button({
       isDisable={isDisable}
       disabled={isDisable}
       tabIndex={tabIndex}
+      fontWeight={fontWeight}
       cursor={cursor}
       backgroundColor={backgroundColor}
       fontSize={fontSize}
@@ -52,11 +55,11 @@ export default function Button({
 
 interface ButtonWrapperProps {
   isDisable?: boolean;
-  cursor?: string;
-  backgroundColor?: string;
-  fontWeight?: string;
-  color?: string;
-  fontSize?: string;
+  cursor: string;
+  backgroundColor: string;
+  fontWeight: string;
+  color: string;
+  fontSize: string;
   padding?: string;
   borderRadius?: string;
   height?: string;
@@ -66,17 +69,15 @@ const Wrapper = styled.button<ButtonWrapperProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: ${({ isDisable, cursor }) =>
-    isDisable ? 'not-allowed' : cursor ? cursor : 'pointer'};
+  cursor: ${({ isDisable, cursor }) => (isDisable ? 'not-allowed' : cursor)};
   border: 0;
   padding: ${({ padding }) => padding};
   border-radius: ${({ borderRadius }) => borderRadius};
-  background-color: ${({ backgroundColor }) =>
-    backgroundColor ? backgroundColor : 'transparent'};
-  font-size: ${({ fontSize }) => (fontSize ? fontSize : '14px')};
-  font-weight: ${({ fontWeight }) => (fontWeight ? fontWeight : 700)};
+  background-color: ${({ backgroundColor }) => backgroundColor};
+  font-size: ${({ fontSize }) => fontSize};
+  font-weight: ${({ fontWeight }) => fontWeight};
   color: ${({ isDisable, theme, color }) =>
-    color ? color : isDisable ? theme.colors.gray : theme.colors.primaryText};
+    isDisable ? theme.colors.gray : color};
 `;
 
 const IconWrapper = styled.span`

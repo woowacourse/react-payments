@@ -13,7 +13,10 @@ export const useLocalStorage = <T>(
 
   useEffect(() => {
     const savedData = JSON.parse(localStorage.getItem(key) || '[]');
-    if (savedData && savedData.length > 0) setData(savedData);
+
+    if (savedData && savedData.length > 0) {
+      setData(savedData);
+    }
   }, [key]);
 
   return [value, setValue];

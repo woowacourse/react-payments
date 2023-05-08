@@ -4,6 +4,7 @@ import {
   useEffect,
   useRef,
   useState,
+  useCallback,
 } from 'react';
 
 export interface UseInputProps {
@@ -13,7 +14,6 @@ export interface UseInputProps {
   error: string | undefined;
   setError: Dispatch<React.SetStateAction<string | undefined>>;
   isWrong: boolean;
-  onBlur: () => void;
   maxLength: number;
   required: boolean;
   validate: (text: string) => boolean;
@@ -48,8 +48,9 @@ export const useInput = (
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value;
+    const isOverLength = maxLength && maxLength < e.currentTarget.value.length;
 
-    if (maxLength && maxLength < e.currentTarget.value.length) {
+    if (isOverLength) {
       return;
     }
 
@@ -70,23 +71,26 @@ export const useInput = (
     setError(errorMessage);
   };
 
-  useEffect(() => {
-    if (isNumber && maxLength === value.length) {
-      const isSuccess = validate(value);
+  const setErrorMessage = useCallback(
+    (inputValue: string) => {
+      const isSuccess = validate(inputValue);
 
       if (isSuccess) {
         setError('');
       } else {
         setError(errorMessage);
       }
-    }
-  }, [isNumber, setError, maxLength, errorMessage, validate, value]);
+    },
+    [errorMessage, validate]
+  );
 
-  const onBlur = () => {
-    if (validate(value)) {
-      setError('');
+  useEffect(() => {
+    const isNumberValidateCheck = isNumber && maxLength === value.length;
+
+    if (isNumberValidateCheck) {
+      setErrorMessage(value);
     }
-  };
+  }, [maxLength, isNumber, setErrorMessage, value]);
 
   return {
     inputRef,
@@ -96,7 +100,6 @@ export const useInput = (
     error,
     setError,
     isWrong: error !== '',
-    onBlur,
     required: isRequired,
     validate,
     maxLength,

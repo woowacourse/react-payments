@@ -1,20 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
-import { TAB_INDEX_INFO } from '../../../constants/constant';
-import { type UseInputProps } from '../../../hooks/useInput';
-import { Error } from '../../common/Error';
-import { Input } from '../../common/Input';
+import { type UseInputProps } from '@hooks/useInput';
+import { Error } from '@components/common/Error';
+import { Input } from '@components/common/Input';
+import { TAB_INDEX_INFO } from '@constants/constant';
+import { ADD_CARD_TEST_ID } from '@constants/storybookTest';
 
 export interface PasswordInputProps {
+  id: string;
   firstPasswordInformation: UseInputProps;
   secondPasswordInformation: UseInputProps;
 }
 
-const {
-  ADD_CARD_PAGE: { FIRST_PASSWORD, SECOND_PASSWORD },
-} = TAB_INDEX_INFO;
+const { ADD_CARD_PAGE_TAB_INDEX } = TAB_INDEX_INFO;
 
 export default function PasswordInput({
+  id,
   firstPasswordInformation,
   secondPasswordInformation,
 }: PasswordInputProps) {
@@ -24,13 +25,14 @@ export default function PasswordInput({
         <GrayWrapper>
           <Input
             isNumber={true}
-            id="password"
+            id={id}
             type="text"
             isPassword={true}
             placeholder="0"
             textAlign="center"
             autoComplete="off"
-            tabIndex={FIRST_PASSWORD}
+            tabIndex={ADD_CARD_PAGE_TAB_INDEX.FIRST_PASSWORD}
+            data-testid={ADD_CARD_TEST_ID.FIRST_PASSWORD}
             {...firstPasswordInformation}
           />
         </GrayWrapper>
@@ -41,8 +43,9 @@ export default function PasswordInput({
             type="text"
             isPassword={true}
             textAlign="center"
-            tabIndex={SECOND_PASSWORD}
+            tabIndex={ADD_CARD_PAGE_TAB_INDEX.SECOND_PASSWORD}
             autoComplete="off"
+            data-testid={ADD_CARD_TEST_ID.SECOND_PASSWORD}
             {...secondPasswordInformation}
           />
         </GrayWrapper>

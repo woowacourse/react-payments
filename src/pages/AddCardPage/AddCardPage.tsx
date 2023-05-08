@@ -1,55 +1,46 @@
-import React, {
-  type FormEvent,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
-import styled from 'styled-components';
-import { CardNumberInput } from '../../components/addCardPage/CardNumberInput';
-import { CvcInput } from '../../components/addCardPage/CvcInput';
-import { ExpirationInput } from '../../components/addCardPage/ExpirationInput';
-import { OwnerInput } from '../../components/addCardPage/OwnerInput';
-import { PasswordInput } from '../../components/addCardPage/PasswordInput';
-import { RegisteredCard } from '../../components/addCardPage/RegisteredCard';
-import { SelectCardCompany } from '../../components/addCardPage/SelectCardCompany';
-import { Button } from '../../components/common/Button';
-import { Card } from '../../components/common/Card';
-import { InputField } from '../../components/common/InputField';
-import { Modal } from '../../components/common/Modal';
-import { CARD_COMPANY_DATA } from '../../constants/cardCompany';
-import { useFocusInput } from '../../hooks/useFocusInput';
-import { useFormInputs } from '../../hooks/useFormInputs';
-import { useHideScrollState } from '../../hooks/useHideScrollState';
-import { type UseInputProps } from '../../hooks/useInput';
-import {
-  type CardCompanyType,
-  type CardInfo,
-  type PageInfo,
-} from '../../types/types';
-import { createUniqueId, setNextInputFocus } from '../../utils/common';
-import { formValidate } from '../../utils/formValidate';
-import { isPastDate } from '../../utils/validate';
+import React, { type FormEvent, useCallback, useEffect, useRef } from 'react';
+import { Modal } from 'react-wus-modal';
+import { useFocusInput } from '@hooks/useFocusInput';
+import { useHideScrollState } from '@hooks/useHideScrollState';
+import { useCardInputInfoContext } from '@contexts/useCardInputInfo';
+import { usePageContext } from '@contexts/usePageContext';
+import { CardNumberInput } from '@components/addCardPage/CardNumberInput';
+import { CvcInput } from '@components/addCardPage/CvcInput';
+import { ExpirationInput } from '@components/addCardPage/ExpirationInput';
+import { OwnerInput } from '@components/addCardPage/OwnerInput';
+import { PasswordInput } from '@components/addCardPage/PasswordInput';
+import { SelectCardCompany } from '@components/addCardPage/SelectCardCompany';
+import { Button } from '@components/common/Button';
+import { Card } from '@components/common/Card';
+import { InputField } from '@components/common/InputField';
+import { type CardCompanyType } from '@type/card';
+import { setNextInputFocus } from '@utils/common';
+import { formValidate } from '@utils/formValidate';
+import { isPastDate } from '@utils/validate';
+import { CARD_COMPANY, CARD_COMPANY_DATA } from '@constants/cardCompany';
+import { PAGE_KIND, Z_INDEX_INFO } from '@constants/constant';
+import { ADD_CARD_TEST_ID } from '@constants/storybookTest';
+import * as S from './AddCardPage.Styles';
+import { useAddCardFormData } from './hooks/useAddCardFormData';
 
-interface AddCardPageProps {
-  cardList: CardInfo[];
-  setCardList: (data: CardInfo[]) => void;
-  setPage: React.Dispatch<React.SetStateAction<PageInfo>>;
-}
+const INPUT_ID = {
+  CARD_NUMBER: 'cardNumber',
+  EXPIRATION: 'expiration',
+  OWNER: 'owner',
+  CVC: 'cvc',
+  PASSWORD: 'password',
+};
 
-export default function AddCardPage({
-  cardList,
-  setCardList,
-  setPage,
-}: AddCardPageProps) {
+export default function AddCardPage() {
+  const { setCardInputInfo } = useCardInputInfoContext();
+  const { setPage } = usePageContext();
   const cardForm = useRef<HTMLFormElement>(null);
   const { onInputKeydown } = useFocusInput(cardForm);
-  const { formInputs } = useFormInputs();
-  const [isRegister, setIsRegister] = useState(false);
+  const { formData } = useAddCardFormData();
   const [cardCompany, setCardCompany] = useHideScrollState<CardCompanyType>(
-    'default',
+    CARD_COMPANY.DEFAULT,
     (value) => {
-      return value === 'default';
+      return value === CARD_COMPANY.DEFAULT;
     }
   );
 
@@ -69,50 +60,27 @@ export default function AddCardPage({
     cvc,
     firstPassword,
     secondPassword,
-    cardTitle,
-  } = formInputs.addCardPage;
+  } = formData;
 
-  /*
-  모든 인풋의 정보에서 카드 타이틀을 뺍니다.
-
-  인풋의 정보들을 기반으로 유효성 검사를 합니다.
-
-  유효성 검사를 통과한다면 카드 별칭 등록 페이지로 이동합니다.
-  */
   const onCardInfoValidateAndGoRegisterPage = (
     event: FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
 
-    const cardInformation: Record<string, UseInputProps> = {
-      ...formInputs.addCardPage,
-    };
+    const { validationResult } = formValidate(formData);
 
-    delete cardInformation.cardTitle;
-
-    const { validationResult } = formValidate(cardInformation);
-
-    if (!validationResult) {
+    if (!validationResult || !month.inputRef.current) {
       return;
     }
 
     if (isPastDate(Number(year.value), Number(month.value))) {
-      if (month.inputRef.current) {
-        month.inputRef.current.focus();
-      }
-
+      month.inputRef.current.focus();
       month.setError('지난 기간은 입력할 수 없습니다.');
       return;
     }
 
-    setIsRegister(true);
-  };
-
-  const createCard = () => {
-    const newCard: CardInfo = {
-      id: createUniqueId(),
+    setCardInputInfo({
       company: cardCompany,
-      title: cardTitle.value,
       cardNumber: {
         first: firstCardNumber.value,
         second: secondCardNumber.value,
@@ -124,13 +92,9 @@ export default function AddCardPage({
         year: year.value,
       },
       owner: owner.value.toUpperCase(),
-    };
+    });
 
-    const updatedCardList = [newCard, ...cardList];
-
-    setCardList(updatedCardList);
-
-    setPage('homePage');
+    setPage(PAGE_KIND.REGISTER_CARD);
   };
 
   const askPrevPage = useCallback(() => {
@@ -139,7 +103,7 @@ export default function AddCardPage({
     );
 
     if (result) {
-      setPage('homePage');
+      setPage(PAGE_KIND.HOME);
     }
   }, [setPage]);
 
@@ -157,33 +121,26 @@ export default function AddCardPage({
     };
   }, [askPrevPage]);
 
-  if (isRegister) {
-    return (
-      <RegisteredCard
-        createCard={createCard}
-        cardTitleInformation={cardTitle}
-        companyKind={cardCompany}
-        cardNumberSet={[
-          firstCardNumber.value,
-          secondCardNumber.value,
-          thirdCardNumber.value,
-          fourthCardNumber.value,
-        ]}
-        month={month.value ? month.value : 'MM'}
-        year={year.value ? year.value : 'YY'}
-        owner={owner.value ? owner.value : 'NAME'}
-      />
-    );
-  }
+  useEffect(() => {
+    if (month.error && month.inputRef.current) {
+      month.inputRef.current.focus();
+      return;
+    }
+
+    if (year.error && year.inputRef.current) {
+      year.inputRef.current.focus();
+      return;
+    }
+  }, [month.error, year.error, month.inputRef, year.inputRef]);
 
   return (
     <div>
-      <Page>
-        <TitleWrapper>
-          <Button icon={<PrevIcon />} text="" onClick={onPrevButtonClick} />
-          <Title>카드 추가</Title>
-        </TitleWrapper>
-        <CardWrapper>
+      <S.Page>
+        <S.TitleWrapper>
+          <Button icon={<S.PrevIcon />} text="" onClick={onPrevButtonClick} />
+          <S.Title>카드 추가</S.Title>
+        </S.TitleWrapper>
+        <S.CardWrapper>
           <Card
             companyKind={cardCompany}
             cardNumberSet={[
@@ -196,147 +153,79 @@ export default function AddCardPage({
             year={year.value ? year.value : 'YY'}
             owner={owner.value ? owner.value : 'NAME'}
           />
-          <ChangeButtonWrapper>
+          <S.ChangeButtonWrapper>
             <Button
-              color={CARD_COMPANY_DATA[cardCompany].color}
-              backgroundColor={CARD_COMPANY_DATA[cardCompany].backgroundColor}
+              color={CARD_COMPANY_DATA[cardCompany].COLOR}
+              backgroundColor={CARD_COMPANY_DATA[cardCompany].BACKGROUND_COLOR}
               text="카드 변경"
-              onClick={() => setCardCompany('default')}
+              onClick={() => setCardCompany('DEFAULT')}
               type="button"
               padding="8px"
               borderRadius="8px"
+              data-testid={ADD_CARD_TEST_ID.CHANGE_CARD}
             />
-          </ChangeButtonWrapper>
-        </CardWrapper>
-        <InputWrapperParent
+          </S.ChangeButtonWrapper>
+        </S.CardWrapper>
+        <S.InputWrapperParent
           onSubmit={onCardInfoValidateAndGoRegisterPage}
           ref={cardForm}
           onKeyDown={(e) => onInputKeydown(e)}
         >
-          <InputWrapper>
-            <InputField text="카드 번호">
+          <S.InputWrapper>
+            <InputField id={INPUT_ID.CARD_NUMBER} text="카드 번호">
               <CardNumberInput
+                id={INPUT_ID.CARD_NUMBER}
                 firstNumberInformation={firstCardNumber}
                 secondNumberInformation={secondCardNumber}
                 thirdNumberInformation={thirdCardNumber}
                 fourthNumberInformation={fourthCardNumber}
               />
             </InputField>
-            <InputField text="만료일">
+            <InputField id={INPUT_ID.EXPIRATION} text="만료일">
               <ExpirationInput
+                id={INPUT_ID.EXPIRATION}
                 yearInformation={year}
                 monthInformation={month}
               />
             </InputField>
             <InputField
+              id={INPUT_ID.OWNER}
               text="카드 소유자 이름(선택)"
               inputLength={`${owner.value.length}/30`}
             >
-              <OwnerInput ownerInformation={owner} />
+              <OwnerInput id={INPUT_ID.OWNER} ownerInformation={owner} />
             </InputField>
-            <InputField text="보안 코드(CVC/CVV)">
-              <CvcWrapper>
-                <CvcInput cvcInformation={cvc} />
-              </CvcWrapper>
+            <InputField id={INPUT_ID.CVC} text="보안 코드(CVC/CVV)">
+              <S.CvcWrapper>
+                <CvcInput id={INPUT_ID.CVC} cvcInformation={cvc} />
+              </S.CvcWrapper>
             </InputField>
-            <InputField text="카드 비밀번호">
+            <InputField id={INPUT_ID.PASSWORD} text="카드 비밀번호">
               <PasswordInput
+                id={INPUT_ID.PASSWORD}
                 firstPasswordInformation={firstPassword}
                 secondPasswordInformation={secondPassword}
               />
             </InputField>
-          </InputWrapper>
-          <NextButtonWrapper>
+          </S.InputWrapper>
+          <S.NextButtonWrapper>
             <Button
               isDisable={
                 cardForm.current ? !cardForm.current.checkValidity() : true
               }
               text="다음"
+              data-testid="다음"
             />
-          </NextButtonWrapper>
-        </InputWrapperParent>
-      </Page>
-      <Modal isOpen={cardCompany === 'default'} ariaLabel="카드사 선택창">
+          </S.NextButtonWrapper>
+        </S.InputWrapperParent>
+      </S.Page>
+      <Modal
+        zIndex={Z_INDEX_INFO.MODAL}
+        isOpen={cardCompany === CARD_COMPANY.DEFAULT}
+        ariaLabel="카드사 선택창"
+      >
         <SelectCardCompany onCardCompanySelectClick={onBankSelectClick} />
       </Modal>
     </div>
   );
 }
-
-function PrevIcon() {
-  return (
-    <Svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      strokeWidth={1.5}
-      stroke="currentColor"
-      className="w-6 h-6"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M15.75 19.5L8.25 12l7.5-7.5"
-      />
-    </Svg>
-  );
-}
-
-const Page = styled.div`
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  padding: 20px 28px;
-  min-height: 100vh;
-`;
-
-const TitleWrapper = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const Title = styled.h3`
-  font-size: 16px;
-  font-weight: 400;
-  color: ${({ theme }) => theme.colors.primaryText};
-  margin-left: 12px;
-`;
-
-const CardWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 25px;
-`;
-
-const ChangeButtonWrapper = styled.div`
-  margin-top: 20px;
-  opacity: 0.9;
-`;
-
-const InputWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-`;
-
-const InputWrapperParent = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 20px 0 25px 0;
-`;
-const CvcWrapper = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const NextButtonWrapper = styled.div`
-  margin-top: 25px;
-  align-self: end;
-`;
-
-const Svg = styled.svg`
-  width: 20px;
-  height: 20px;
-`;

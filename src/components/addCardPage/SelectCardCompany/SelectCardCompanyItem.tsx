@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { CARD_COMPANY_DATA } from '../../../constants/cardCompany';
-import { type CardCompanyType } from '../../../types/types';
+import { type CardCompanyType } from '@type/card';
+import { CARD_COMPANY_DATA } from '@constants/cardCompany';
 
 interface SelectCardCompanyItemProps {
   kind: CardCompanyType;
@@ -13,9 +13,9 @@ export default function SelectCardCompanyItem({
   onCardCompanySelectClick,
 }: SelectCardCompanyItemProps) {
   return (
-    <Wrapper onClick={onCardCompanySelectClick}>
-      <Image src={CARD_COMPANY_DATA[kind].source} />
-      <Title>{CARD_COMPANY_DATA[kind].title}</Title>
+    <Wrapper data-testid={kind} onClick={onCardCompanySelectClick}>
+      <Image src={CARD_COMPANY_DATA[kind].SOURCE} />
+      <Title>{CARD_COMPANY_DATA[kind].TITLE}</Title>
     </Wrapper>
   );
 }

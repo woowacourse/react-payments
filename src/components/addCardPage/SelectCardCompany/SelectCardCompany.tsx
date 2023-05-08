@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { CARD_COMPANY_KIND } from '../../../constants/cardCompany';
-import { type CardCompanyType } from '../../../types/types';
+import { type CardCompanyType } from '@type/card';
+import { CARD_COMPANY_KIND } from '@constants/cardCompany';
 import BankInfo from './SelectCardCompanyItem';
 
 interface SelectCardCompanyProps {
@@ -28,7 +28,10 @@ export default function SelectCardCompany({
 
 const Wrapper = styled.div`
   position: fixed;
+  left: 0;
+  right: 0;
   bottom: 0;
+  margin: 0 auto;
   width: 375px;
   box-sizing: border-box;
   height: 227px;

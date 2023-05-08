@@ -1,26 +1,22 @@
 import styled from 'styled-components';
-import { TAB_INDEX_INFO } from '../../../constants/constant';
-import { type UseInputProps } from '../../../hooks/useInput';
-import { Error } from '../../common/Error';
-import { Input } from '../../common/Input';
+import { type UseInputProps } from '@hooks/useInput';
+import { Error } from '@components/common/Error';
+import { Input } from '@components/common/Input';
+import { TAB_INDEX_INFO } from '@constants/constant';
+import { ADD_CARD_TEST_ID } from '@constants/storybookTest';
 
 interface CardNumberInputProps {
+  id: string;
   firstNumberInformation: UseInputProps;
   secondNumberInformation: UseInputProps;
   thirdNumberInformation: UseInputProps;
   fourthNumberInformation: UseInputProps;
 }
 
-const {
-  ADD_CARD_PAGE: {
-    FIRST_CARD_NUMBER,
-    SECOND_CARD_NUMBER,
-    THIRD_CARD_NUMBER,
-    FOURTH_CARD_NUMBER,
-  },
-} = TAB_INDEX_INFO;
+const { ADD_CARD_PAGE_TAB_INDEX } = TAB_INDEX_INFO;
 
 export default function CardNumberInput({
+  id,
   firstNumberInformation,
   secondNumberInformation,
   thirdNumberInformation,
@@ -31,12 +27,13 @@ export default function CardNumberInput({
       <Wrapper>
         <Input
           isNumber={true}
-          id="cardNumber"
+          id={id}
           type="text"
           textAlign="center"
           placeholder="0000"
           autoComplete="off"
-          tabIndex={FIRST_CARD_NUMBER}
+          data-testid={ADD_CARD_TEST_ID.FIRST_CARD_NUMBER}
+          tabIndex={ADD_CARD_PAGE_TAB_INDEX.FIRST_CARD_NUMBER}
           {...firstNumberInformation}
         />
         <Dash>-</Dash>
@@ -44,9 +41,10 @@ export default function CardNumberInput({
           isNumber={true}
           type="text"
           placeholder="0000"
-          tabIndex={SECOND_CARD_NUMBER}
+          tabIndex={ADD_CARD_PAGE_TAB_INDEX.SECOND_CARD_NUMBER}
           autoComplete="off"
           textAlign="center"
+          data-testid={ADD_CARD_TEST_ID.SECOND_CARD_NUMBER}
           {...secondNumberInformation}
         />
         <Dash>-</Dash>
@@ -57,7 +55,8 @@ export default function CardNumberInput({
           isPassword={true}
           textAlign="center"
           autoComplete="off"
-          tabIndex={THIRD_CARD_NUMBER}
+          data-testid={ADD_CARD_TEST_ID.THIRD_CARD_NUMBER}
+          tabIndex={ADD_CARD_PAGE_TAB_INDEX.THIRD_CARD_NUMBER}
           {...thirdNumberInformation}
         />
         <Dash>-</Dash>
@@ -68,7 +67,8 @@ export default function CardNumberInput({
           autoComplete="off"
           isPassword={true}
           textAlign="center"
-          tabIndex={FOURTH_CARD_NUMBER}
+          tabIndex={ADD_CARD_PAGE_TAB_INDEX.FOURTH_CARD_NUMBER}
+          data-testid={ADD_CARD_TEST_ID.FOURTH_CARD_NUMBER}
           {...fourthNumberInformation}
         />
       </Wrapper>

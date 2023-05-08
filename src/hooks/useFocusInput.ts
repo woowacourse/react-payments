@@ -1,6 +1,6 @@
 import { type KeyboardEvent, type RefObject } from 'react';
-import { setNextInputFocus } from '../utils/common';
-import { isNumber, isOnlyKoreanAndEnglish } from '../utils/validate';
+import { setNextInputFocus } from '@utils/common';
+import { isNumber, isOnlyKoreanAndEnglish } from '@utils/validate';
 
 const numberType = 'numeric';
 const textType = 'text';
@@ -11,10 +11,17 @@ export const useFocusInput = (formRef: RefObject<HTMLFormElement>) => {
 
     if (!active) return;
 
+    const curInputLength = active.value.length;
+
+    const isInputAllSelect =
+      active.selectionStart === 0 && active.selectionEnd === curInputLength;
+
+    if (isInputAllSelect) {
+      return;
+    }
+
     const curMaxLength = active.getAttribute('maxLength');
     const curInputKind = active.getAttribute('inputMode');
-
-    const curInputLength = active.value.length;
 
     const isValueMaxLength = curInputLength + 1 >= Number(curMaxLength);
 
