@@ -8,6 +8,7 @@ import CardRegisterPage from './CardRegisterPage';
 import CardFormContext from './contexts/CardFormContext';
 import CardInfoRequired from './contexts/CardInfoRequired';
 
+import { ROUTES } from '../constants/routes';
 import Layout from '../components/common/Layout';
 import useCards from '../hooks/useCards';
 
@@ -17,16 +18,22 @@ function App() {
   return (
     <Routes>
       <Route element={<Layout />}>
-        <Route path="/" element={<HoldingCardsPage cards={cards} />} />
+        <Route
+          path={ROUTES.MAIN}
+          element={<HoldingCardsPage cards={cards} />}
+        />
         <Route element={<CardFormContext />}>
-          <Route path="card-info-register" element={<CardInfoRegisterPage />} />
+          <Route
+            path={ROUTES.CARD_INFO_REGISTER}
+            element={<CardInfoRegisterPage />}
+          />
           <Route element={<CardInfoRequired />}>
             <Route
-              path="card-name-register"
+              path={ROUTES.CARD_NAME_REGISTER}
               element={<CardNameRegisterPage />}
             />
             <Route
-              path="card-register"
+              path={ROUTES.CARD_REGISTER}
               element={<CardRegisterPage registerCard={registerCard} />}
             />
           </Route>

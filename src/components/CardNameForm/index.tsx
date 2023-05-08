@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Input from '../common/Input';
 import Button from '../common/Button';
 
+import { ROUTES } from '../../constants/routes';
 import useCardFormAction from '../../hooks/useCardFormAction';
 
 import styles from './cardNameForm.module.css';
@@ -33,7 +34,7 @@ const CardNameForm = () => {
     }
 
     handleCardInfo(value.trim(), 'name');
-    navigate('/card-register');
+    navigate(`/${ROUTES.CARD_REGISTER}`);
   };
 
   return (
