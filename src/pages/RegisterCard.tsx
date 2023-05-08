@@ -22,14 +22,18 @@ const RegisterCard = () => {
     setNickname(value);
   };
 
-  const handleConfirmButton = () => {
-    const newCard = { ...card, nickname: nickname };
-    handleSetCards(newCard);
-    setIsLoading(true);
+  const registerCard = () => {
     setTimeout(() => {
       setIsLoading(false);
       navigate('/');
     }, 4000);
+  };
+
+  const handleConfirmButton = () => {
+    const newCard = { ...card, nickname: nickname };
+    handleSetCards(newCard);
+    setIsLoading(true);
+    registerCard();
   };
 
   return (
