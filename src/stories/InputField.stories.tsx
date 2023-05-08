@@ -37,6 +37,56 @@ export const CardNumber: Story = {
     ),
   },
 };
+export const CardNumberInteraction: Story = () => {
+  const firstNumber = useInput("", { name: "firstNumber" });
+  const secondNumber = useInput("", { name: "secondNumber" });
+  const thirdNumber = useInput("", { name: "thirdNumber" });
+  const fourthNumber = useInput("", { name: "fourthNumber" });
+  return (
+    <InputField
+      kind="cardNumber"
+      children={
+        <CardNumberInput
+          firstNumber={firstNumber}
+          secondNumber={secondNumber}
+          thirdNumber={thirdNumber}
+          fourthNumber={fourthNumber}
+        />
+      }
+    />
+  );
+};
+
+CardNumberInteraction.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  const input = canvas.getByLabelText("카드 번호", {
+    selector: 'input[type="text"]',
+  });
+  input.focus();
+  await userEvent.type(input, "1234", {
+    delay: 500,
+  });
+  input.blur();
+
+  const input2 = canvas.getByLabelText("secondCardNumber");
+  input2.focus();
+  await userEvent.type(input2, "5678", {
+    delay: 500,
+  });
+
+  const input3 = canvas.getByLabelText("thirdCardNumber");
+  input3.focus();
+  await userEvent.type(input3, "9012", {
+    delay: 500,
+  });
+
+  const input4 = canvas.getByLabelText("fourthCardNumber");
+  input4.focus();
+  await userEvent.type(input4, "3456", {
+    delay: 500,
+  });
+  input4.blur();
+};
 
 export const Expiration: Story = {
   args: {
