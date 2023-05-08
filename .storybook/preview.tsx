@@ -1,5 +1,5 @@
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
+import GlobalStyle from '../src/GlobalStyle';
 import type { Preview } from '@storybook/react';
 
 const preview: Preview = {
@@ -12,14 +12,14 @@ const preview: Preview = {
       },
     },
   },
+  decorators: [
+    (Story) => (
+      <>
+        <GlobalStyle />
+        <Story />
+      </>
+    ),
+  ],
 };
-
-export const decorators = [
-  Story => (
-    <MemoryRouter initialEntries={['/']}>
-      <Story />
-    </MemoryRouter>
-  ),
-];
 
 export default preview;

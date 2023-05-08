@@ -1,14 +1,15 @@
 type CardInformation = {
-  cardNumber: CardNumber;
-  expirationDate: ExpirationDate;
-  owner?: string;
+  id: number;
+  cardType: CardType;
+  cardNumber: [string, string, string, string];
+  expirationDate: {
+    month: string;
+    year: string;
+  };
+  owner: string;
+  alias?: string;
 };
 
-type CardNumber = [string, string, string, string];
+type CardType = 'BC카드' | '신한카드' | '카카오카드' | '현대카드' | '우리카드' | '롯데카드' | '하나카드' | '국민카드';
 
-type ExpirationDate = {
-  year: string;
-  month: string;
-};
-
-export type { CardInformation, CardNumber, ExpirationDate };
+export type { CardInformation, CardType };
