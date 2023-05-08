@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { CARD_COMPANY } from '../../constants/cardCompany';
+import { CARD_COMPANY } from '../../../constants/cardCompany';
 
 interface CardItemProps {
   cardNumberFirst: string;
