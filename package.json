@@ -71,6 +71,8 @@
     "prop-types": "^15.8.1",
     "react-router-dom": "^6.10.0",
     "storybook": "^7.0.5",
-    "webpack": "^5.79.0"
+    "webpack": "^5.79.0",
+    "@types/storybook__addon-actions": "^3.4.2",
+    "@types/storybook__react": "^4.0.1"
   }
 }
