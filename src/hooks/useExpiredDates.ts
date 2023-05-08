@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { REG_EXP } from '../constants/regexp';
-import { ExpiredDatesType } from '../types/ExpiredDate';
+import { ExpiredDatesType } from '../types/';
 
 const nowYear = new Date().getFullYear() % 2000;
 const nowMonth = new Date().getMonth() + 1;

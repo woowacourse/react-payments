@@ -5,7 +5,7 @@ import * as Styled from './CardExpiredDates.styles';
 import { RefContext } from '../../contexts/RefProvider';
 import { REF_INDEX } from '../../constants/refIndex';
 import CardErrorLabel from '../@common/CardErrorLabel';
-import { ExpiredDatesType } from '../../types/ExpiredDate';
+import { ExpiredDatesType } from '../../types/';
 
 interface ExpiredDateProps {
   expiredDates: ExpiredDatesType;

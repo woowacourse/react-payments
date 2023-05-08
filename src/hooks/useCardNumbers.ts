@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { REG_EXP } from '../constants/regexp';
-import { CardNumbersType } from '../types/CardNumbers';
+import { CardNumbersType } from '../types/';
 
 const useCardNumbers = () => {
   const [cardNumbers, setCardNumbers] = useState<CardNumbersType>({

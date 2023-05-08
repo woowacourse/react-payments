@@ -13,7 +13,7 @@ import { useEffect, useState } from 'react';
 import CardLabel from '../components/@common/CardLabel';
 import * as Styled from './AddCard.styles';
 import SubmitButton from '../components/@common/SubmitButton';
-import CardList from '../types/CardList';
+import { CardList } from '../types/';
 import RefProvider from '../contexts/RefProvider';
 import Modal from 'seeen-react-payments-modal';
 import CardErrorLabel from '../components/@common/CardErrorLabel';

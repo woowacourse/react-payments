@@ -4,7 +4,7 @@ import CardInput from '../@common/CardInput';
 import CardLabel from '../@common/CardLabel';
 import { RefContext } from '../../contexts/RefProvider';
 import CardErrorLabel from '../@common/CardErrorLabel';
-import { CardNumbersType } from '../../types/CardNumbers';
+import { CardNumbersType } from '../../types/';
 
 interface CardNumbersProps {
   cardNumbers: CardNumbersType;

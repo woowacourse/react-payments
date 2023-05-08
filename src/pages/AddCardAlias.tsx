@@ -5,7 +5,7 @@ import CardAliasInput from '../components/@common/CardAliasInput';
 import React from 'react';
 import SubmitButton from '../components/@common/SubmitButton';
 import { useNavigate } from 'react-router-dom';
-import CardList from '../types/CardList';
+import { CardList } from '../types/';
 import AddCardLoadingSpinner from '../components/AddCardLoadingSpinner/AddCardLoadingSpinner';
 import { Link } from 'react-router-dom';
 import useAddCardAlias from '../hooks/useAddCardAlias';
