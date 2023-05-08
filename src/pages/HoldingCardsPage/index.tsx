@@ -20,7 +20,7 @@ const HoldingCardsPage = () => {
   };
 
   useEffect(() => {
-    if (previousPath === '/waiting') {
+    if (previousPath?.includes('/complete')) {
       scrollToBottom();
     }
   }, []);
