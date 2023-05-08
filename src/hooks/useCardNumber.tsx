@@ -25,7 +25,7 @@ function useCardNumber() {
         setCardNumberOrigin(deleteNumber(realNumber));
       }
     },
-    [cardNumberOrigin, cardNumberHidden]
+    [cardNumberOrigin]
   );
 
   const deleteNumber = (realNumber: string) => {

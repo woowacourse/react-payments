@@ -19,7 +19,7 @@ function useCardDate() {
 
       setCardDate(resultDate);
     },
-    [cardDate]
+    []
   );
 
   return { cardDate, changeCardDate };

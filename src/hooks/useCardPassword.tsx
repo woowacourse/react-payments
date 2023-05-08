@@ -17,14 +17,14 @@ function useCardPassword() {
       const PasswordSection = e.currentTarget.dataset.password;
 
       if (PasswordSection === CARD_PASSWORD.FIRST) {
-        setCardPassword([password, cardPassword[1]]);
+        setCardPassword((cardPassword) => [password, cardPassword[1]]);
       }
 
       if (PasswordSection === CARD_PASSWORD.SECOND) {
-        setCardPassword([cardPassword[0], password]);
+        setCardPassword((cardPassword) => [cardPassword[0], password]);
       }
     },
-    [cardPassword]
+    []
   );
 
   return { cardPassword, changeCardPassword };

@@ -10,7 +10,7 @@ function useCardCVC() {
       const cvc = toOnlyNumber(e.target.value).slice(LENGTH.ZERO, LENGTH.CVC);
       setCardCVC(cvc);
     },
-    [cardCVC]
+    []
   );
 
   return { cardCVC, changeCardCVC };
