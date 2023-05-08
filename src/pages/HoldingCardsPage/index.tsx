@@ -1,26 +1,26 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import Card from '../../components/Card';
 import CardRegisterButton from '../../components/CardRegisterButton';
 
 import { useCardsContext } from '../../domain/context/CardsContext';
-import { usePreviousPath } from '../../utils/context/PreviousPathContext';
 import { scrollToBottom } from '../../utils/scrollToBottom';
 
 import styles from './holdingCardsPage.module.css';
 
 const HoldingCardsPage = () => {
   const navigate = useNavigate();
-  const { previousPath } = usePreviousPath();
+  const location = useLocation();
   const { cards } = useCardsContext();
+  const previousPath = location.state?.from?.pathname;
 
   const handleClick = () => {
     navigate('/card-register');
   };
 
   useEffect(() => {
-    if (previousPath?.includes('/complete')) {
+    if (previousPath.includes('/complete')) {
       scrollToBottom();
     }
   }, []);
