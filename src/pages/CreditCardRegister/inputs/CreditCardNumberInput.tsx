@@ -36,6 +36,7 @@ function CreditCardNumberInput() {
       <S.RelativeBox>
         <S.CreditCardRegisterLabel>카드 번호</S.CreditCardRegisterLabel>
         <MaskedViewer
+          data-testid="credit-card-number-viewer"
           onClick={() => {
             if (inputRef.current) {
               inputRef.current.focus();
@@ -45,6 +46,7 @@ function CreditCardNumberInput() {
           {markedCreditCardNumber}
         </MaskedViewer>
         <S.HiddenInput
+          data-testid="credit-card-number-input-hidden"
           ref={inputRef}
           type="string"
           value={creditCardForm.number}

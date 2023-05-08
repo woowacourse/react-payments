@@ -1,4 +1,4 @@
-import { CardContext } from 'CardFormProvider';
+import { CardContext } from 'providers/CardFormProvider';
 import { defaultCreditCardForm } from 'data/creditCard';
 import {
   checkCreditCardValidations,

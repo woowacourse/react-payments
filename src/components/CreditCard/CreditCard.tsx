@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 /* eslint-disable react/no-array-index-key */
 import * as T from 'types';
 import {
@@ -21,10 +20,8 @@ function CreditCard({
 }: CreditCardProps) {
   const isValid = () => {
     if (!fullFilled) return true;
-
     if (number.length !== 16) return false;
     if (!number) return false;
-
     if (!expiry) return false;
 
     return true;
@@ -44,13 +41,15 @@ function CreditCard({
       <S.CreditCardICChip />
       <S.CreditCardInfoFooter>
         <S.CreditCardNumber>
-          {convertSecuredCreditCard(number).map((num, idx) => (
-            <div key={idx}>{num}</div>
-          ))}
+          {
+            convertSecuredCreditCard(number.length > 0 ? number : '0000000000000000').map((num, idx) => (
+              <div key={idx}>{num}</div>
+            ))
+          }
         </S.CreditCardNumber>
         <S.CreditCardContainer>
-          <S.CreditCardBox>{owner}</S.CreditCardBox>
-          <S.CreditCardBox>{markExpiry(expiry)}</S.CreditCardBox>
+          <S.CreditCardBox>{(owner !== undefined) && (owner !== '') ? owner : 'WOOWA COURSE'}</S.CreditCardBox>
+          <S.CreditCardBox>{markExpiry(expiry.length > 0 ? expiry : '0523')}</S.CreditCardBox>
         </S.CreditCardContainer>
       </S.CreditCardInfoFooter>
     </S.CreditCardLayout>

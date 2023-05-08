@@ -1,5 +1,12 @@
 import styled from 'styled-components';
 
+export const CenteredLayout = styled.div`
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  height: 100vh;
+`;
+
 export const HomeButton = styled.button`
   margin-right: 12px;
   margin-bottom: 3px;

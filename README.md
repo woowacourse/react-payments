@@ -43,9 +43,17 @@
 
 <br>
 
-### 📝 실행 방법
+## 배포 링크
 
 - <a href="https://gabrielyoon7.github.io/react-payments/">앱 바로 실행하기</a>
+
+- <a href="https://6450fc4c05b9cc822a07bc18-kcqllgxxmt.chromatic.com">스토리북 실행하기</a>
+
+- <a href="https://www.npmjs.com/package/@gabrielyoon7/simple-modal">React Payments 용 모달 (@gabrielyoon7/simple-modal) NPM</a>
+
+- <a href="https://github.com/gabrielyoon7/simple-modal">React Payments 용 모달 (@gabrielyoon7/simple-modal) Github</a>
+
+### 📝 실행 방법
 
 - 터미널에서 yarn 설치(`yarn`) 후 `yarn start` 커맨드로 앱을 실행할 수 있다.
 
@@ -79,6 +87,7 @@
 # 2단계 요구사항
 
 🚀 Getting Started
+
 Component-Driven Development 에 따라 UI를 구성하고 재사용 가능한 Component를 작성합니다.
 
 ✔️ 모바일 타겟의 웹 앱을 구현하며 사용하기 편리한 모바일 UI/UX에 대해 고민해봅니다.
@@ -100,6 +109,52 @@ Component-Driven Development 에 따라 UI를 구성하고 재사용 가능한 C
 - Context API를 활용해 전역 상태 관리 및 계층 재구성
 
 <br>
+
+# 3단계 요구사항
+
+🚀 Getting Started
+
+TypeScript와 함께 페이먼츠 앱을 개발자를 위한 라이브러리로 출시합니다.
+
+✔️ 라이브러리를 사용하는 개발자에게 친절한 API 문서를 제공합니다.
+
+✔️ 라이브러리를 사용하는 개발자와 코드로 소통합니다.
+
+✔️ 다양한 모듈 대응 케이스를 고민해보고 실제로 NPM에 출시합니다.
+
+✔️ Semantic Versioning이 왜 필요한지 고민해봅니다.
+
+📝 필수 요구사항
+
+재사용과 리팩터링
+
+사용하던 모달을 분리해서 npm으로 배포하고, 그 라이브러리를 직접 import해서 사용하기
+
+문서로서 스토리북을 고도화하기 위해 리팩터링
+
+'카드를 등록중입니다' 스피너 추가
+
+✅ 프로그래밍 요구사항
+
+이전 미션의 프로그래밍 요구사항은 기본으로 포함한다.
+
+Readability
+
+custom hook을 이용해 재사용 가능한 기능을 추출한다.
+
+공통적으로 사용되는 UI 컴포넌트를 재사용 가능하게 구현한다.
+
+Reusability
+
+각 스토리에 명확한 이름을 지정하고, 스토리 이름을 통해 컴포넌트의 사용 사례를 쉽게 이해할 수 있도록 한다.
+
+변동 가능한 값에 대해 사용자가 직접 조작해볼 수 있게 하여 컴포넌트를 더욱 쉽게 이해할 수 있도록 한다.
+
+Performance
+
+react에서 제공하는 hook을 이용하여 성능 최적화를 고려한다.
+
+Controlled & Uncontrolled Components를 고려하여 Form을 핸들링한다.
 
 ---
 

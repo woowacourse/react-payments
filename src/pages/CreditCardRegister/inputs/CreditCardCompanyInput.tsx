@@ -22,20 +22,24 @@ function CreditCardCompanyInput({ closeModal }: CreditCardCompanyInputProps) {
 
   return (
     <CreditCardCompanyInputLayout>
-      {creditCardCompanies.map((creditCardCompany) => (
-        <CreditCardCompanyItem
-          key={creditCardCompany.id}
-          onClick={() => handleCreditCardCompanyChange(creditCardCompany.id)}
-        >
-          <CreditCardCompanyImage
-            src={convertImage(creditCardCompany.id)}
-            alt={creditCardCompany.name}
-          />
-          <CreditCardCompanyTitle>
-            {creditCardCompany.name}
-          </CreditCardCompanyTitle>
-        </CreditCardCompanyItem>
-      ))}
+      {creditCardCompanies.map((creditCardCompany) => {
+        const id = `credit-card-company-${creditCardCompany.id}`;
+        return (
+          <CreditCardCompanyItem
+            key={id}
+            data-testid={id}
+            onClick={() => handleCreditCardCompanyChange(creditCardCompany.id)}
+          >
+            <CreditCardCompanyImage
+              src={convertImage(creditCardCompany.id)}
+              alt={creditCardCompany.name}
+            />
+            <CreditCardCompanyTitle>
+              {creditCardCompany.name}
+            </CreditCardCompanyTitle>
+          </CreditCardCompanyItem>
+        );
+      })}
     </CreditCardCompanyInputLayout>
   );
 }

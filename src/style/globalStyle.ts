@@ -5,7 +5,7 @@ const GlobalStyle = createGlobalStyle`
   ${resetStyle}
 
   body {
-    background-color: #E5E5E5;
+    background-color: white;
   }
 
   input {

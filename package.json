@@ -4,7 +4,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@storybook/cli": "^7.0.5",
+    "@gabrielyoon7/simple-modal": "^0.0.6",
+    "@storybook/cli": "^7.0.9",
     "@storybook/react-docgen-typescript-plugin": "^1.0.1",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
@@ -23,10 +24,11 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "sb": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
+    "sb": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "chromatic": "npx chromatic --project-token=875b2411f5b0"
   },
   "eslintConfig": {
     "extends": [
@@ -57,17 +59,17 @@
     ]
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^6.5.7",
-    "@storybook/addon-essentials": "^6.5.7",
-    "@storybook/addon-interactions": "^6.5.7",
-    "@storybook/addon-links": "^6.5.7",
-    "@storybook/builder-webpack5": "^6.5.7",
-    "@storybook/jest": "^0.0.10",
-    "@storybook/manager-webpack5": "^6.5.7",
-    "@storybook/node-logger": "^6.5.7",
-    "@storybook/preset-create-react-app": "^4.1.2",
-    "@storybook/react": "^6.5.7",
-    "@storybook/testing-library": "^0.0.11",
+    "@storybook/addon-actions": "^7.0.9",
+    "@storybook/addon-essentials": "^7.0.9",
+    "@storybook/addon-interactions": "^7.0.9",
+    "@storybook/addon-links": "^7.0.9",
+    "@storybook/addon-mdx-gfm": "7.0.9",
+    "@storybook/jest": "^0.1.0",
+    "@storybook/node-logger": "^7.0.9",
+    "@storybook/preset-create-react-app": "^7.0.9",
+    "@storybook/react": "^7.0.9",
+    "@storybook/react-webpack5": "7.0.9",
+    "@storybook/testing-library": "^0.1.0",
     "@testing-library/react-hooks": "^8.0.1",
     "@types/jest": "^27.0.1",
     "@types/node": "^16.7.13",
@@ -76,6 +78,7 @@
     "@types/styled-components": "^5.1.26",
     "@typescript-eslint/eslint-plugin": "^5.43.0",
     "babel-plugin-named-exports-order": "^0.0.2",
+    "chromatic": "^6.17.3",
     "eslint": "^8.2.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.0.0",
@@ -83,9 +86,12 @@
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-storybook": "^0.6.12",
     "gh-pages": "^5.0.0",
     "msw": "^0.42.0",
-    "msw-storybook-addon": "^1.6.3",
-    "prettier": "^2.8.8"
+    "msw-storybook-addon": "^1.8.0",
+    "prettier": "^2.8.8",
+    "storybook": "7.0.9",
+    "tsconfig-paths-webpack-plugin": "^4.0.1"
   }
 }
