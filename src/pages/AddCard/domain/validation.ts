@@ -1,5 +1,6 @@
 import { ALPHABET, NUMBERS } from '../../../utils/constants';
 
+// TODO: 둘 중 하나 없애기
 export const isSelectCardType = (str: string) => {
   return str.length === 0 ? 'INVALID' : 'VALID';
 };
@@ -30,6 +31,7 @@ export const isValidCardNumber = (str: string) => {
     : 'INVALID';
 };
 
+// TODO: 둘중 하나 없애기
 export const isValidCardAlias = (str: string) => {
   return str.length !== 0 ? 'VALID' : 'INVALID';
 };

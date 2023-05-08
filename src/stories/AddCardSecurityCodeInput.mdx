@@ -1,0 +1,16 @@
+import * as AddCardSecurityCodeInputStories from './AddCardSecurityCodeInput.stories';
+import { Meta, Canvas } from '@storybook/blocks';
+
+<Meta of={AddCardSecurityCodeInputStories} />
+
+# 보안코드 입력(AddCardSecurityCodeInput)
+
+카드 보안코드(CVC/CVV)를 입력하는 입력 창입니다.
+
+보안코드가 무엇인지 익숙하지 않을 사용자를 위해서 우측에 툴팁을 제공합니다.
+
+<Canvas of={AddCardSecurityCodeInputStories.Primary} />
+
+## 오류 메세지 조건
+
+- 숫자 0~9를 사용한 3자리 숫자가 아니면 에러 메세지를 보여줍니다.

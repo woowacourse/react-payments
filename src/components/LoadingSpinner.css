@@ -1,0 +1,94 @@
+@keyframes spin {
+  100% {
+    rotate: 360deg;
+  }
+}
+
+@keyframes emptyline {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -125;
+  }
+}
+
+.spin-circle {
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+.spin-circle circle {
+  fill: none;
+  stroke: #ddd;
+  stroke-width: 3px;
+  stroke-linecap: round;
+  animation: emptyline 1.5s ease-in-out infinite;
+}
+
+.spinner-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 213px;
+  height: 133px;
+  border-radius: 5px;
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+}
+
+.loading-spinner-container {
+  color: #666;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-spinner-message {
+  margin-top: 10px;
+}
+
+.hyundai,
+.default-company {
+  background-color: #333333;
+}
+
+.bc {
+  background-color: #c2474c;
+}
+
+.kakao {
+  background-color: #f5dd3f;
+}
+
+.woori {
+  background-color: #457ac4;
+}
+
+.kookmin {
+  background-color: darkgoldenrod;
+}
+
+.hana {
+  background-color: darkcyan;
+}
+
+.lotte {
+  background-color: crimson;
+}
+
+.sinhan {
+  background-color: #2848fa;
+}

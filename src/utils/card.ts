@@ -1,5 +1,6 @@
 import type { CardNumber, CardType } from '../type';
 
+// TODO: reducer 구현
 export const getSerialNumber = (card: CardNumber): string => {
   let result = '';
   const keys = Object.keys(card) as ('first' | 'second' | 'third' | 'fourth')[];
@@ -17,11 +18,10 @@ export const newCardList = (recentList: CardType[], data: Omit<CardType, 'id'>) 
 
   const sameNumbers = recentList.filter((card: Omit<CardType, 'id'>) => {
     const { cardNumber } = card;
-    let cardNumberSerial = getSerialNumber(cardNumber);
-    let fetchCardNumberSerial = getSerialNumber(data.cardNumber);
+    const cardNumberSerial = getSerialNumber(cardNumber);
+    const fetchCardNumberSerial = getSerialNumber(data.cardNumber);
 
-    if (cardNumberSerial.includes(fetchCardNumberSerial)) return true;
-    return false;
+    return cardNumberSerial.includes(fetchCardNumberSerial);
   });
 
   if (sameNumbers.length > 0) throw new Error('이미 등록된 카드');
@@ -32,13 +32,13 @@ export const newCardList = (recentList: CardType[], data: Omit<CardType, 'id'>) 
 export const registerCardAlias = (cardList: CardType[], alias: string, cardNumber: CardNumber) => {
   const registerdCardNumber = getSerialNumber(cardNumber);
   const currentCard = cardList.find(
-    (card: CardType) => getSerialNumber(card.cardNumber) === registerdCardNumber
+    (card) => getSerialNumber(card.cardNumber) === registerdCardNumber
   );
 
   const addedAliasCard = { alias, ...currentCard };
 
   const restCardList = cardList.filter(
-    (card: CardType) => getSerialNumber(card.cardNumber) !== registerdCardNumber
+    (card) => getSerialNumber(card.cardNumber) !== registerdCardNumber
   );
 
   const newCardList = [...restCardList, addedAliasCard];

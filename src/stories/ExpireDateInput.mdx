@@ -1,0 +1,17 @@
+import * as ExpireDateInputStories from './ExpireDateInput.stories';
+import { Meta, Canvas } from '@storybook/blocks';
+
+<Meta of={ExpireDateInputStories} />
+
+# 만료일 입력(ExpireDateInput)
+
+카드 유효기간을 입력하는 입력 창입니다.
+
+일반적인 카드의 유효기간 형식을 따라 월/년(MM/YY) 순으로 입력 받습니다.
+
+<Canvas of={ExpireDateInputStories.Primary} />
+
+## 오류 메세지 조건
+
+- 입력한 날짜가 현재의 날짜와 같거나 과거의 날짜이면 오류를 발생시킵니다.
+- 숫자 0~9를 사용한 2자리 숫자가 아니면, 입력받지 않습니다.
