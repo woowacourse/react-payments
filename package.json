@@ -67,6 +67,7 @@
     ]
   },
   "devDependencies": {
+    "@storybook/addon-storysource": "^7.0.9",
     "@types/styled-components": "^5.1.26",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
@@ -83,6 +84,8 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "prettier": "^2.8.7",
     "prop-types": "^15.8.1",
-    "react-router-dom": "^6.10.0"
+    "react-router-dom": "^6.10.0",
+    "storybook-addon-performance": "^0.17.1",
+    "storybook-addon-pseudo-states": "^2.0.1"
   }
 }

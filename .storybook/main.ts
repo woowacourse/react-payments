@@ -6,13 +6,23 @@ const config: StorybookConfig = {
     '@storybook/addon-essentials',
     '@storybook/preset-create-react-app',
     '@storybook/addon-interactions',
+    {
+      name: '@storybook/addon-storysource',
+      options: {
+        loaderOptions: {
+          prettierConfig: { printWidth: 80, singleQuote: false },
+        },
+      },
+    },
+    'storybook-addon-pseudo-states',
+    'storybook-addon-performance/register',
   ],
   framework: {
     name: '@storybook/react-webpack5',
     options: {},
   },
   docs: {
-    autodocs: 'tag',
+    autodocs: true,
   },
   staticDirs: ['../public'],
 };
