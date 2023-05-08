@@ -21,31 +21,29 @@ const CardAddPage = () => {
     return () => resetModal();
   }, [resetModal]);
 
+  if (isRegistering) {
+    return <SpinnerContainer message="카드 등록 중입니다" />;
+  }
+
   return (
     <>
-      {isRegistering ? (
-        <SpinnerContainer message="카드 등록 중입니다" />
-      ) : (
-        <>
-          <Header content="카드 추가" isOverlayPage />
-          <main>
-            <CardItem
-              className="mg-b-24 center-hoz-item"
-              issuer={cardInformation.issuer}
-              cardNumber={cardInformation.cardNumber}
-              expirationDate={cardInformation.expirationDate}
-              ownerName={cardInformation.ownerName}
-            />
-            <CardAddForm
-              cardInformation={cardInformation}
-              cardInputError={inputError}
-              updateInputValue={updateInputValue}
-              updateInputError={updateInputError}
-              handleSubmit={handleSubmit}
-            />
-          </main>
-        </>
-      )}
+      <Header content="카드 추가" isOverlayPage />
+      <main>
+        <CardItem
+          className="mg-b-24 center-hoz-item"
+          issuer={cardInformation.issuer}
+          cardNumber={cardInformation.cardNumber}
+          expirationDate={cardInformation.expirationDate}
+          ownerName={cardInformation.ownerName}
+        />
+        <CardAddForm
+          cardInformation={cardInformation}
+          cardInputError={inputError}
+          updateInputValue={updateInputValue}
+          updateInputError={updateInputError}
+          handleSubmit={handleSubmit}
+        />
+      </main>
     </>
   );
 };
