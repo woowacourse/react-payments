@@ -64,12 +64,15 @@ export function CardRegisterForm() {
 }
 
 const _Form = styled.form`
+  width: 33rem;
   display: flex;
   flex-direction: column;
 
   justify-content: space-between;
 
   gap: 1rem;
+
+  margin-top: 2rem;
 `;
 
 const _ButtonWrapper = styled.div`

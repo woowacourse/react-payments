@@ -24,9 +24,9 @@ export const MAX_LENGTH: { [key: string]: number } = {
 } as const;
 
 export const SIZE_STYLE: { [key: string]: number } = {
-  CARD_NUMBER: 8,
-  EXPIRED_DATE: 7,
-  USERNAME: 50,
-  CODE: 5,
+  CARD_NUMBER: 4,
+  EXPIRED_DATE: 3,
+  USERNAME: 41,
+  CODE: 4,
   PASSWORD: 1,
 } as const;
