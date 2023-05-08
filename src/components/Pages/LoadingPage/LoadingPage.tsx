@@ -1,19 +1,15 @@
-import { useNavigate } from 'react-router-dom';
-import { PATHNAME } from '../../../constants/pathname';
+import { useState } from 'react';
+
 import * as Styled from './LoadingPage.styled';
-import { Spinner } from '../../Spinner/Spinner';
+import { LoadingBox } from '../../LoadingBox/LoadingBox';
+import { CompleteBox } from '../../CompleteBox/CompleteBox';
 
 export const LoadingPage = () => {
-  const navigation = useNavigate();
-
-  setTimeout(() => {
-    navigation(PATHNAME.NICKNAME);
-  }, 3000);
+  const [isLoading, setIsLoading] = useState(true);
 
   return (
     <Styled.LoadingPageLayout>
-      <Styled.LoadingParagraph>카드를 등록하고 있어요</Styled.LoadingParagraph>
-      <Spinner />
+      {isLoading ? <LoadingBox setIsLoading={setIsLoading} /> : <CompleteBox />}
     </Styled.LoadingPageLayout>
   );
 };
