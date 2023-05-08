@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { CreditCardsProvider } from '../context/CreditCardsContext';
-import { ResisteringCreditCardProvider } from '../context/ResisteringCreditCardContext';
-import { AddNickNamePageContent } from './AddNickNamePageContent';
-import { Page } from './common/Page';
+import { CreditCardsProvider } from '../../context/CreditCardsContext';
+import { ResisteringCreditCardProvider } from '../../context/ResisteringCreditCardContext';
+import { AddNickNamePageContent } from '../../components/AddNickNamePageContent';
+import { Page } from '../../components/common/Page';
 
 const customViewports = {
   Default: {
@@ -17,7 +17,7 @@ const customViewports = {
 };
 
 const meta = {
-  title: 'AddNickNamePageContent',
+  title: 'PageContent/AddNickNamePageContent',
   component: AddNickNamePageContent,
   tags: ['autodocs'],
   parameters: {
@@ -50,7 +50,7 @@ export const FilledContent: Story = {
     const canvas = within(canvasElement);
 
     await userEvent.type(canvas.getByPlaceholderText('10자 이내로 입력해주세요.'), '엽토');
-    
+
     await userEvent.click(canvas.getByRole('button'));
   },
 };

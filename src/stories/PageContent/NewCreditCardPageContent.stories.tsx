@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { ResisteringCreditCardProvider } from '../context/ResisteringCreditCardContext';
-import { NewCreditCardPageContent } from './NewCreditCardPageContent';
-import { Page } from './common/Page';
+import { ResisteringCreditCardProvider } from '../../context/ResisteringCreditCardContext';
+import { NewCreditCardPageContent } from '../../components/NewCreditCardPageContent';
+import { Page } from '../../components/common/Page';
 
 const customViewports = {
   Default: {
@@ -14,7 +14,7 @@ const customViewports = {
 };
 
 const meta = {
-  title: 'NewCreditCardPageContent',
+  title: 'PageContent/NewCreditCardPageContent',
   component: NewCreditCardPageContent,
   tags: ['autodocs'],
   parameters: {
