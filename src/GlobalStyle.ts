@@ -26,8 +26,7 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
   }
 
-
-  body:has(.modal) {
+  body:has(.modal-open-true) {
     overflow: hidden;
   }
 
