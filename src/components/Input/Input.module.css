@@ -1,0 +1,8 @@
+.input {
+  border-style: none;
+  border-radius: 5px;
+  height: 45px;
+  background-color: var(--purple-color);
+  font-size: large;
+  text-align: center;
+}

@@ -1,0 +1,5 @@
+.container {
+  width: 370px;
+  height: 750px;
+  overflow: auto;
+}
