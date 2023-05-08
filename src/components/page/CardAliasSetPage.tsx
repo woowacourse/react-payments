@@ -24,7 +24,7 @@ const CardAliasSetPage = ({ navigate, navData }: PageProps) => {
     card['alias'] = cardAlias;
     pushLocalStorage(card);
 
-    navigate(Page.list);
+    navigate(Page.loading);
   };
 
   return (

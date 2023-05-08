@@ -23,6 +23,7 @@ export enum Page {
   list = 'list',
   register = 'register',
   aliasSet = 'aliasSet',
+  loading = 'loading',
 }
 
 export interface Bank {
