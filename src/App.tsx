@@ -7,6 +7,7 @@ import { ThemeProvider } from 'styled-components';
 import { theme } from 'components/style/theme';
 import { RegisterCardNickName } from 'pages/RegisterCardNickName';
 import { UserCardProvider } from 'contexts/UserCardProvider';
+import { CardAddFormProvider } from 'contexts/CardAddFormProvider';
 
 function App() {
   return (
@@ -15,11 +16,13 @@ function App() {
         <ThemeProvider theme={theme}>
           <GlobalStyles />
           <BrowserRouter basename={process.env.PUBLIC_URL}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/register" element={<RegisterCard />} />
-              <Route path="/register-nickname" element={<RegisterCardNickName />} />
-            </Routes>
+            <CardAddFormProvider>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/register" element={<RegisterCard />} />
+                <Route path="/register-nickname" element={<RegisterCardNickName />} />
+              </Routes>
+            </CardAddFormProvider>
           </BrowserRouter>
         </ThemeProvider>
       </UserCardProvider>

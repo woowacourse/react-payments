@@ -8,5 +8,6 @@ export type CardForm = {
   firstDigit: string;
   secondDigit: string;
   securityCode: string;
-  bankCode?: BankCode;
+  bankCode: BankCode;
+  nickName?: string;
 };

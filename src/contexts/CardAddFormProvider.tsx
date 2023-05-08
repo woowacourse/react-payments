@@ -1,6 +1,18 @@
 import { BankCode, Card } from 'components/common/Card/types';
 import { CardForm } from 'components/Form/types';
-import { useState } from 'react';
+import { createContext, Dispatch, PropsWithChildren, useContext, useState } from 'react';
+
+type CardAddFormContext = {
+  cardFormInformation: CardForm;
+  setCardFormInformation: Dispatch<React.SetStateAction<CardForm>>;
+  card: Card;
+  isCardNumberValid: boolean;
+  isExpirationDateValid: boolean;
+  isSecurityCodeValid: boolean;
+  isPasswordValid: boolean;
+  errorMessages: Partial<Record<keyof Card, string>>;
+  resetCardForm: () => void;
+};
 
 const initialCardFormInformation: CardForm = {
   cardNumbers: ['', '', '', ''],
@@ -10,13 +22,15 @@ const initialCardFormInformation: CardForm = {
   firstDigit: '',
   secondDigit: '',
   securityCode: '',
-  bankCode: undefined,
+  bankCode: BankCode.Default,
 };
 
-export const useCardForm = () => {
+const cardAddFormContext = createContext<CardAddFormContext | undefined>(undefined);
+
+export const CardAddFormProvider = ({ children }: PropsWithChildren) => {
   const [cardFormInformation, setCardFormInformation] = useState(initialCardFormInformation);
 
-  const card: Partial<Card> = {
+  const card: Card = {
     numbers: cardFormInformation.cardNumbers,
     expirationDate: { month: cardFormInformation.month, year: cardFormInformation.year },
     name: cardFormInformation.name,
@@ -55,14 +69,35 @@ export const useCardForm = () => {
     bankCode: isBankCodeValid ? '' : '카드사를 선택해주세요.',
   };
 
-  return {
-    cardFormInformation,
-    setCardFormInformation,
-    card,
-    isCardNumberValid,
-    isExpirationDateValid,
-    isSecurityCodeValid,
-    isPasswordValid,
-    errorMessages,
+  const resetCardForm = () => {
+    setCardFormInformation(initialCardFormInformation);
   };
+
+  return (
+    <cardAddFormContext.Provider
+      value={{
+        cardFormInformation,
+        setCardFormInformation,
+        card,
+        isCardNumberValid,
+        isExpirationDateValid,
+        isSecurityCodeValid,
+        isPasswordValid,
+        errorMessages,
+        resetCardForm,
+      }}
+    >
+      {children}
+    </cardAddFormContext.Provider>
+  );
+};
+
+export const useCardAddForm = () => {
+  const value = useContext(cardAddFormContext);
+
+  if (value === undefined) {
+    throw new Error('CardAddFormProvider 하위에 cardAddFormContext가 있어야 합니다.');
+  }
+
+  return value;
 };

@@ -14,11 +14,11 @@ import {
   CardBottomSheet,
   CardBottomSheetProps,
 } from 'components/common/BottomSheet/CardBottomSheet';
-import { useCardForm } from 'hooks/useCardForm';
 import { PaymentsButton } from 'components/common/Button/PaymentsButton';
+import { useCardAddForm } from 'contexts/CardAddFormProvider';
 
 export type AddCardFormProps = {
-  onSubmit: (card: Card) => void;
+  onSubmit: () => void;
 };
 
 export function AddCardForm(props: AddCardFormProps) {
@@ -32,7 +32,7 @@ export function AddCardForm(props: AddCardFormProps) {
     isSecurityCodeValid,
     isPasswordValid,
     errorMessages,
-  } = useCardForm();
+  } = useCardAddForm();
 
   const [isBottomSheetActive, setBottomSheetActive] = useState<boolean>(true);
   const { cardNumbers, month, year, name, firstDigit, secondDigit, securityCode, bankCode } =
@@ -92,12 +92,8 @@ export function AddCardForm(props: AddCardFormProps) {
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
-    if (!(isCardNumberValid && isExpirationDateValid && isSecurityCodeValid && isPasswordValid)) {
-      return alert(Object.values(errorMessages).join('\n'));
-    }
-
     if (isCard(card)) {
-      onSubmit(card);
+      onSubmit();
     }
   };
 

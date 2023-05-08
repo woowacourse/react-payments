@@ -17,15 +17,18 @@ export const CardBottomSheet = ({ onClickBankImage, active }: CardBottomSheetPro
   return (
     <KumaModal active={active}>
       <ContentContainer>
-        {bankCodes.map((bankCode, index) => (
-          <CardImageContainer key={index} onClick={() => handleClickBankImage(bankCode)}>
-            <img
-              src={`${process.env.PUBLIC_URL}/assets/bank/${CardName[bankCode]}.svg`}
-              alt={`${CardName[bankCode]}`}
-            ></img>
-            <span>{CardName[bankCode]}</span>
-          </CardImageContainer>
-        ))}
+        {bankCodes.map((bankCode, index) => {
+          if (bankCode === BankCode.Default) return null;
+          return (
+            <CardImageContainer key={index} onClick={() => handleClickBankImage(bankCode)}>
+              <img
+                src={`${process.env.PUBLIC_URL}/assets/bank/${CardName[bankCode]}.svg`}
+                alt={`${CardName[bankCode]}`}
+              ></img>
+              <span>{CardName[bankCode]}</span>
+            </CardImageContainer>
+          );
+        })}
       </ContentContainer>
     </KumaModal>
   );
