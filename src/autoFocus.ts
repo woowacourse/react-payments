@@ -24,19 +24,19 @@ export const useAutoFocus = () => {
         case 2:
         case 3:
           value.length >= INPUT_LENGTH_LIMIT.MAX_EACH_CARD_NUMBER &&
-            changedElement[index + 1].focus();
+            changedElement[index + 1].select();
           break;
         case 4:
           value.length >= INPUT_LENGTH_LIMIT.MAX_EXPIRATION_DATE &&
-            changedElement[index + 1].focus();
+            changedElement[index + 1].select();
           break;
         case 6:
           value.length >= INPUT_LENGTH_LIMIT.MAX_SECURITY_CODE &&
-            changedElement[index + +2].focus();
+            changedElement[index + 2].select();
           break;
         case 8:
           value.length >= INPUT_LENGTH_LIMIT.MAX_EACH_PASSWORD &&
-            changedElement[index + 1].focus();
+            changedElement[index + 1].select();
           break;
         case 9:
           value.length >= INPUT_LENGTH_LIMIT.MAX_EACH_PASSWORD &&
