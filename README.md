@@ -9,8 +9,21 @@
 
 ## step3
 
-<p align="middle" >
-</p>
+<table align="middle">
+<thead>
+    <tr>
+      <th>페이먼츠 앱 실행 과정</th>
+      <th>404 페이지</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><img src="https://user-images.githubusercontent.com/108778921/236866287-51eb38a5-0cd2-408f-a72b-b26ad7c807e4.gif" alt="페이먼츠 앱 사용하는 과정" width="600px"></td>
+      <td><img src="https://user-images.githubusercontent.com/108778921/236865074-759efa6a-56c0-4a5b-ac8f-4be8b035947a.png" alt="404 페이지" width="400px"></td>
+    </tr>
+  </tbody>
+</table>
+
 
 ### 📝 실행 방법
 
@@ -19,6 +32,7 @@
     <tr>
       <td><a href="https://feb-dain.github.io/react-payments/mockup.html">💳 페이먼츠 앱 실행하기</a></td>
       <td><a href="https://feb-dain.github.io/react-payments/storybook/">📕 스토리북 바로 보기</a></td>
+      <td><a href="https://www.npmjs.com/package/woowahan-yummy-modal">🔥 모달 라이브러리</a></td>
     </tr>
   </tbody>
 </table>
