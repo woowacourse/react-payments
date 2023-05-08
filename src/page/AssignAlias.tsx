@@ -3,7 +3,7 @@ import AliasInput from "../components/cardForm/AliasInput";
 import RegisterCard from "../components/RegisterCard";
 import styled from "styled-components";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, useCallback } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 interface AssignAliasProps {
@@ -17,15 +17,18 @@ export const AssignAlias = ({ assignAlias }: AssignAliasProps) => {
   const location = useLocation();
   const { newCard } = location.state;
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = useCallback(
+    (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
 
-    const formData = new FormData(e.target as HTMLFormElement);
-    const data = Object.fromEntries(formData.entries());
+      const formData = new FormData(e.target as HTMLFormElement);
+      const data = Object.fromEntries(formData.entries());
 
-    assignAlias(newCard.numbers, String(data.alias));
-    navigate("/");
-  };
+      assignAlias(newCard.numbers, String(data.alias));
+      navigate("/");
+    },
+    [newCard.numbers]
+  );
 
   return (
     <Main>

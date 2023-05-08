@@ -13,9 +13,9 @@ export const useCheckForm = () => {
   const useMakeSetInputCompleted = (key: keyof CompleteFlagsType) =>
     useCallback(
       (isCompleted: boolean) => {
-        setIsInputsCompleted({ ...isInputsCompleted, [key]: isCompleted });
+        setIsInputsCompleted((isInputsCompleted) => ({ ...isInputsCompleted, [key]: isCompleted }));
       },
-      [isInputsCompleted, setIsInputsCompleted]
+      [setIsInputsCompleted]
     );
 
   const setIsNumbersCompleted = useMakeSetInputCompleted("isCardNumberCompleted");
@@ -31,11 +31,9 @@ export const useCheckForm = () => {
   const useMakeSetInputValid = (key: keyof ValidFlagType) =>
     useCallback(
       (isValid: boolean) => {
-        setIsInputsValid((isInputsValid) => {
-          return { ...isInputsValid, [key]: isValid };
-        });
+        setIsInputsValid((isInputsValid) => ({ ...isInputsValid, [key]: isValid }));
       },
-      [isInputsValid, setIsInputsValid]
+      [setIsInputsValid]
     );
 
   const setIsNumbersValid = useMakeSetInputValid("isCardNumbersValid");

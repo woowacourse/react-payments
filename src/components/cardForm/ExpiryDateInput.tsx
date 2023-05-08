@@ -2,8 +2,7 @@ import Container from "../common/Container";
 import Input from "../common/Input";
 import InputLabel from "../common/InputLabel";
 
-import React from "react";
-import { useContext, useRef } from "react";
+import React, { useContext, useRef } from "react";
 import { NewCardContext } from "../../contexts/NewCardContext";
 
 import { EXPRIYDATE_MAXLEGNTH, EXPRIYDATE_REGEX, TWO_TO_NINE_REGEX } from "../../constants";
@@ -36,7 +35,7 @@ const ExpiryDateInput = ({ isInputsValid, setExpriyDateCompleted, setIsExpiryDat
   const postText = useRef("");
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.replaceAll("/", "").replaceAll(" ", "");
+    const value = e.target.value.replace(/[^0-9]/g, "");
 
     if (value.length > EXPRIYDATE_MAXLEGNTH) {
       e.target.value = postText.current;
@@ -60,10 +59,8 @@ const ExpiryDateInput = ({ isInputsValid, setExpriyDateCompleted, setIsExpiryDat
       <Input
         {...ExpiryDateInfo}
         handleInput={handleInput}
-        error={{
-          isValid: isInputsValid.isExpiryDateValid,
-          errorMessage: "유효한 만료일을 입력해주세요.",
-        }}
+        isValid={isInputsValid.isExpiryDateValid}
+        errorMessage={"유효한 만료일을 입력해주세요."}
       />
     </Container>
   );
