@@ -30,7 +30,7 @@ export const Main = () => {
   const setCardInfo = (card: Card) => {
     if (card.companyId) setCompanyId(card.companyId);
 
-    Array.from({ length: 4 }).forEach((_, i) => {
+    card.cardNumber.forEach((_, i) => {
       setCardNumber(i, card.cardNumber[i]);
     });
 
@@ -41,7 +41,7 @@ export const Main = () => {
 
     setSecurityCode(card.securityCode);
 
-    Array.from({ length: 2 }).forEach((_, i) => {
+    card.password.forEach((_, i) => {
       setPassword(i, card.password[i]);
     });
 

@@ -2,8 +2,8 @@ import type { Meta } from '@storybook/react';
 import { Main } from '../../pages/Main';
 import { BrowserRouter } from 'react-router-dom';
 import { Register } from '../../pages/register';
-import { ModalProvider } from '../../components/providers/ModalProvider';
 import { CardInfoProvider } from '../../components/providers/CardInfoProvider';
+import { ModalProvider } from '@kyw0716/woowacourse-scent-modal';
 
 const meta = {
   title: 'Example/Page',

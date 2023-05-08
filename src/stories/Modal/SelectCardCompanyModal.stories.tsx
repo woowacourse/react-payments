@@ -1,12 +1,12 @@
 import type { Meta } from '@storybook/react';
 
-import { BottomSheet } from '../../components/modal/template/BottomSheet';
-import { SelectCardCompanyModal } from '../../components/modal/content/selectCardCompany';
+import { SelectCardCompanyModal } from '../../components/selectCardCompany';
 import {
+  BottomSheet,
+  ModalProvider,
   useModalActionContext,
   useModalStateContext,
-} from '../../hooks/useModalContext';
-import { ModalProvider } from '../../components/providers/ModalProvider';
+} from '@kyw0716/woowacourse-scent-modal';
 
 const meta = {
   title: 'Example/Modal',

@@ -8,7 +8,8 @@ import { Layout } from '../../layout';
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { useCardList } from '../../hooks/useCardList';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
+import { RegisterLoading } from '../../components/skeleton/RegisterLoading';
 
 export const AddCardNickName = () => {
   const navigate = useNavigate();
@@ -19,6 +20,8 @@ export const AddCardNickName = () => {
   const { setNickName } = useCardInfoActionContext();
 
   const { setNickNameToCard } = useCardList();
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -32,32 +35,44 @@ export const AddCardNickName = () => {
 
           setNickNameToCard(cardId, inputRef.current?.value);
 
-          navigate('/');
+          setIsLoading(true);
+
+          setTimeout(() => {
+            navigate('/');
+          }, 4000);
         }}
       >
         <Style.Header>
-          {state === 'modify'
+          {isLoading
+            ? '카드를 등록중입니다!'
+            : state === 'modify'
             ? '카드 별명 수정!'
             : '카드 등록이 완료되었습니다!'}
         </Style.Header>
-        <Style.CardWrapper>
-          <CardViewer
-            cardNumber={cardNumber}
-            expirationDate={expirationDate}
-            ownerName={ownerName}
-            companyId={companyId}
-          />
-        </Style.CardWrapper>
-        <Style.NickNameInput
-          ref={inputRef}
-          autoFocus={true}
-          onChange={(e) => setNickName(e.target.value)}
-          value={nickName ?? ''}
-          placeholder="카드 별명"
-        />
-        <Style.ButtonWrapper>
-          <Style.Button>확인</Style.Button>
-        </Style.ButtonWrapper>
+        {isLoading ? (
+          <RegisterLoading />
+        ) : (
+          <>
+            <Style.CardWrapper>
+              <CardViewer
+                cardNumber={cardNumber}
+                expirationDate={expirationDate}
+                ownerName={ownerName}
+                companyId={companyId}
+              />
+            </Style.CardWrapper>
+            <Style.NickNameInput
+              ref={inputRef}
+              autoFocus={true}
+              onChange={(e) => setNickName(e.target.value)}
+              value={nickName ?? ''}
+              placeholder="카드 별명"
+            />
+            <Style.ButtonWrapper>
+              <Style.Button>확인</Style.Button>
+            </Style.ButtonWrapper>
+          </>
+        )}
       </Style.Wrapper>
     </Layout>
   );

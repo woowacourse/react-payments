@@ -53,6 +53,7 @@
     ]
   },
   "devDependencies": {
+    "@kyw0716/woowacourse-scent-modal": "^0.0.5",
     "@storybook/addon-essentials": "^7.0.5",
     "@storybook/addon-interactions": "^7.0.5",
     "@storybook/addon-links": "^7.0.5",

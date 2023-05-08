@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COMPANIES } from '../../../../constants/cardCompany';
+import { COMPANIES } from '../../constants/cardCompany';
 
 interface Props {
   companyId: string;

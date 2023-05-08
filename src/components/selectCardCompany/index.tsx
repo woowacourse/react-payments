@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { COMPANIES } from '../../../../constants/cardCompany';
+import { COMPANIES } from '../../constants/cardCompany';
 import { CardCompany } from './CardCompany';
 import { v4 } from 'uuid';
-import { useCardInfoActionContext } from '../../../../hooks/cardInfoContext';
-import { useModalActionContext } from '../../../../hooks/useModalContext';
+import { useCardInfoActionContext } from '../../hooks/cardInfoContext';
+import { useModalActionContext } from '@kyw0716/woowacourse-scent-modal';
 
 export const isCompanyId = (
   id: string | undefined
