@@ -29,7 +29,7 @@ const NameCardPage = () => {
     startLoading();
   };
 
-  if (isLoading) return navigateAfterLoading(PAGE.CARD_LIST);
+  // if (isLoading) return navigateAfterLoading(PAGE.CARD_LIST);
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCardInfo({ ...cardInfo, cardName: e.target.value });
@@ -39,10 +39,12 @@ const NameCardPage = () => {
     <Container>
       <h2>카드등록이 완료되었습니다.</h2>
       <CardPreview card={{ cardCompany, cardNumber, expirationDate, ownerName }} />
-      <Form onSubmit={onSubmitHandler}>
-        <Input value={cardName} placeholder={"카드이름을 지어주세요."} onChange={onChangeHandler} autoFocus />
-        <Button isVisible={true}>확인</Button>
-      </Form>
+      {!isLoading && (
+        <Form onSubmit={onSubmitHandler}>
+          <Input value={cardName} placeholder={"카드이름을 지어주세요."} onChange={onChangeHandler} autoFocus />
+          <Button isVisible={true}>확인</Button>
+        </Form>
+      )}
     </Container>
   );
 };

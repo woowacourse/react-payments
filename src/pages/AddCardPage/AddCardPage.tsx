@@ -16,7 +16,7 @@ import { PAGE } from "../../constant/PagePath";
 import CardCompanyIcon from "../../components/CardCompanyIcon/CardCompanyIcon";
 import { AddCardStateContext } from "../../context/AddCardStateProvider";
 import { Button } from "../../components/common/Button";
-import useModal from "my-modal-jeremyyyy";
+import useModal from "../../hooks/useModal";
 import { cardData } from "../../constant/Card";
 
 const AddCardPage = () => {

@@ -30,6 +30,16 @@ const useModal = (initValue: boolean) => {
   return { modalOpen, closeModal, openModal, Modal };
 };
 
+const fadeIn = keyframes`
+  from  { opacity: 0; }
+  to  { opacity: 1; }
+`;
+
+const fadeOut = keyframes`
+  from  { opacity: 1; }
+  to  { opacity: 0; }
+`;
+
 const ModalBackDrop = styled.div<{ modalOpen: boolean; isLoading: boolean }>`
   position: absolute;
 
@@ -47,7 +57,8 @@ const ModalBackDrop = styled.div<{ modalOpen: boolean; isLoading: boolean }>`
   background: rgba(0, 0, 0, 0.5);
 
   visibility: ${({ modalOpen, isLoading }) => (modalOpen ? "visible" : isLoading ? "visible" : "hidden")};
-  transition: visibility ${({ modalOpen }) => (modalOpen ? "0s" : "0.4s")} ease-out;
+
+  animation: ${({ modalOpen }) => (modalOpen ? fadeIn : fadeOut)} 0.4s;
 `;
 
 const slideUp = keyframes`
