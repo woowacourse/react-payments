@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import styled from 'styled-components';
-import { HIDDEN_ELEMENT_STYLE, LENGTH, REGEX } from 'constants/constants';
-import { useInputHandler } from 'hooks/useInputHandler';
+import { LENGTH, REGEX } from 'constants/constants';
+import { useInputHandler } from 'pages/RegisterPage/FormInputs/hooks/useInputHandler';
 import { StyledInput } from 'components/Input';
 import InputBox from 'components/InputBox';
 import { AddCardContext } from 'context/CardContext';
@@ -9,7 +9,7 @@ import { StyledHyphen } from 'components/Hypen';
 import { CardNumber } from 'types/Card';
 import { showNumberHyphen } from 'utils/hyphenStyles';
 import { StyledCaption } from 'components/Caption';
-import { showNumberCaption } from 'utils/CaptionStyles';
+import { showNumberCaption } from 'utils/captionStyles';
 
 const CardNumberInput = () => {
   const { cardNumber, setCardNumber } = useContext(AddCardContext);
@@ -84,7 +84,7 @@ const CardNumberInput = () => {
 };
 
 const NumberInput = styled(StyledInput)`
-  width: 12vw;
+  width: 14%;
 `;
 
 const NumberHyphen = styled(StyledHyphen)<{

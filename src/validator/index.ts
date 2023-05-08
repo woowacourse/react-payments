@@ -1,22 +1,25 @@
 import { LENGTH } from 'constants/constants';
 
-export const areValidInfo = (info: any) => {
-  const { month, year, code, password1, password2 } = info;
+export const areValidCardInfo = (cardInfo: any) => {
+  const { month, year, code, password1, password2 } = cardInfo;
 
   const cardNumbers = Array.from(
     { length: LENGTH.EACH_CARD_NUMBER },
-    (_, index) => info[`number${index + 1}`]
+    (_, index) => cardInfo[`number${index + 1}`]
   );
 
   const validateCardNumber = validator.isAllValidLength(
     cardNumbers,
     LENGTH.EACH_CARD_NUMBER
   );
+
   const validateDate = validator.isAllValidLength(
     [month, year],
     LENGTH.EXPIRATION
   );
+
   const validateCode = validator.isValidLength(code, LENGTH.SECURITY_CODE);
+
   const validatePassword = validator.isAllValidLength(
     [password1, password2],
     LENGTH.EACH_PASSWORD
@@ -32,12 +35,29 @@ export const areValidInfo = (info: any) => {
   return validationResult.every((result) => result === true);
 };
 
-const validator = {
+export const validator = {
   isAllValidLength(array: string[], length: number) {
     return array.every((value) => value.length === length);
   },
 
   isValidLength(value: string, length: number) {
     return value.length === length;
+  },
+
+  isValidDate(date: string[]) {
+    const [inputMonth, inputYear] = date.map((item) => parseInt(item, 10));
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear() % 100;
+    const currentMonth = currentDate.getMonth() + 1;
+
+    if (inputYear < currentYear) {
+      return false;
+    }
+
+    if (inputYear === currentYear && inputMonth < currentMonth) {
+      return false;
+    }
+
+    return true;
   },
 };

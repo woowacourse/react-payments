@@ -1,4 +1,5 @@
-import { HIDDEN_ELEMENT_STYLE, LENGTH } from 'constants/constants';
+import { LENGTH } from 'constants/constants';
+import { HIDDEN_ELEMENT_STYLE } from 'styles/HiddenStyle';
 
 const showNumberCaption = (cardNumbers: string[]) =>
   (cardNumbers.join('').length === LENGTH.EACH_CARD_NUMBER * 4 ||
@@ -9,6 +10,8 @@ const showDateCaption = (date: string[]) =>
   (date.join('').length === LENGTH.EXPIRATION * 2 ||
     date.join('').length === 0) &&
   `${HIDDEN_ELEMENT_STYLE}`;
+
+const showNameCaption = (Name: string) => Name && `${HIDDEN_ELEMENT_STYLE}`;
 
 const showPasswordCaption = (password: string[]) =>
   (password.join('').length === LENGTH.EACH_PASSWORD * 2 ||
@@ -22,6 +25,7 @@ const showCodeCaption = (codeLength: number) =>
 export {
   showNumberCaption,
   showDateCaption,
+  showNameCaption,
   showPasswordCaption,
   showCodeCaption,
 };

@@ -18,7 +18,7 @@ export const StyledInputBox = styled.div<{ width?: number }>`
   margin-top: 12px;
   background: var(--input-background);
   border-radius: 8px;
-  width: ${(props) => (props.width ? `${props.width}vw` : '100%')};
+  width: ${(props) => (props.width ? `${props.width}%` : '100%')};
 `;
 
 export default InputBox;

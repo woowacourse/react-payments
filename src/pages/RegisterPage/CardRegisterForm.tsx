@@ -1,6 +1,5 @@
 import Header from 'components/Header';
 import NextButton from 'components/Button';
-import Modal from 'components/Modal';
 import styled from 'styled-components';
 import CardPreview from './CardPreview';
 import CardNumberInput from './FormInputs/CardNumberInput';
@@ -10,9 +9,10 @@ import SecurityCodeInput from './FormInputs/SecurityCodeInput';
 import PasswordInput from './FormInputs/PasswordInput';
 import CardBankList from './CardBankList';
 import { useContext, useState } from 'react';
-import { useFormHandler } from 'hooks/useFormHandler';
 import { AddCardContext } from 'context/CardContext';
 import { Card } from 'types/Card';
+import { useCardFormHandler } from 'pages/RegisterPage/hooks/useCardFormHandler';
+import Modal from 'react-modal-bottom-sheet';
 
 const CardRegisterForm = () => {
   const { cardNumber, date, name, cardCompany } = useContext(AddCardContext);
@@ -30,11 +30,11 @@ const CardRegisterForm = () => {
     cardCompany: cardCompany,
   };
 
-  const { handleForm } = useFormHandler(cardInfo);
+  const { handleForm } = useCardFormHandler(cardInfo, handleModal);
 
   return (
     <>
-      <div>
+      <CardFormWrapper>
         <Header navigator title="카드 추가" />
 
         <CardPreview cardInfo={cardInfo} onClick={handleModal} />
@@ -49,7 +49,7 @@ const CardRegisterForm = () => {
           <PasswordInput />
           <NextButton>다음</NextButton>
         </AddCardForm>
-      </div>
+      </CardFormWrapper>
       {isModalActive && (
         <Modal
           modal={isModalActive}
@@ -72,6 +72,11 @@ const CardSelectMessage = styled.p`
   font-size: 12px;
   text-align: center;
   margin-bottom: 24px;
+`;
+
+const CardFormWrapper = styled.div`
+  max-width: 480px;
+  width: 84%;
 `;
 
 export default CardRegisterForm;

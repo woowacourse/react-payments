@@ -1,29 +1,29 @@
 import { useContext } from 'react';
 import styled from 'styled-components';
-import { HIDDEN_ELEMENT_STYLE, LENGTH, REGEX } from 'constants/constants';
-import { useInputHandler } from 'hooks/useInputHandler';
+import { LENGTH, REGEX } from 'constants/constants';
+import { useInputHandler } from 'pages/RegisterPage/FormInputs/hooks/useInputHandler';
 import InputBox from 'components/InputBox';
 import { StyledInput } from 'components/Input';
 import { AddCardContext } from 'context/CardContext';
-import Hyphen, { StyledHyphen } from 'components/Hypen';
+import { StyledHyphen } from 'components/Hypen';
 import { Expiration } from 'types/Card';
 import { showDateHyphen } from 'utils/hyphenStyles';
 import { StyledCaption } from 'components/Caption';
-import { showDateCaption } from 'utils/CaptionStyles';
+import { showDateCaption } from 'utils/captionStyles';
 
 const ExpirationDateInput = () => {
   const { date, setDate } = useContext(AddCardContext);
 
-  const DateValidatior = (name: string, value: string) => {
-    const ValidDate = Number(value);
-    return name === 'month' && (ValidDate > 12 || ValidDate < 0) ? '' : value;
+  const dateValidator = (name: string, value: string) => {
+    const validDate = Number(value);
+    return name === 'month' && (validDate > 12 || validDate < 0) ? '' : value;
   };
 
   const { handleInput: handleDate, handleRef: handleInputRef } =
     useInputHandler(setDate, {
       length: LENGTH.EXPIRATION,
       regex: REGEX.ONLY_NUMBER,
-      validator: DateValidatior,
+      validator: dateValidator,
     });
 
   return (
@@ -67,7 +67,7 @@ const ExpirationDateInput = () => {
 };
 
 const ExpirationInput = styled(StyledInput)`
-  width: 12vw;
+  width: 24%;
 `;
 
 const DateHyphen = styled(StyledHyphen)<{ date?: Expiration }>`

@@ -1,4 +1,4 @@
-import { useFocus } from './useFocus';
+import { useFocus } from '../../../../hooks/useFocus';
 import { changeToValidValue } from 'utils/inputValidator';
 import { ChangeEvent } from 'react';
 

@@ -1,9 +1,3 @@
-export const HIDDEN_ELEMENT_STYLE = `
-  visibility: hidden;
-  opacity: 0; 
-  pointer-events: none;
-`;
-
 export const LENGTH = {
   EACH_CARD_NUMBER: 4,
   EXPIRATION: 2,

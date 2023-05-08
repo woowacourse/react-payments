@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { HIDDEN_ELEMENT_STYLE, LENGTH, REGEX } from 'constants/constants';
-import { useInputHandler } from 'hooks/useInputHandler';
+import { LENGTH, REGEX } from 'constants/constants';
+import { useInputHandler } from 'pages/RegisterPage/FormInputs/hooks/useInputHandler';
 import { StyledInput } from 'components/Input';
 import InputBox from 'components/InputBox';
 import { StyledCaption } from 'components/Caption';
-import { showPasswordCaption } from 'utils/CaptionStyles';
+import { showPasswordCaption } from 'utils/captionStyles';
 
 const PasswordInput = () => {
   const [password, setPassword] = useState({
@@ -59,13 +59,12 @@ const PasswordInput = () => {
 };
 
 const StyledPasswordInput = styled(StyledInput)`
-  width: 12vw;
+  width: 12%;
   font-size: 16px;
 `;
 
 const HiddenPassword = styled(StyledInput)`
-  width: 12vw;
-  margin-right: 2.2vw;
+  width: 12%;
   font-size: 30px;
   text-align: center;
   line-height: 48px;
@@ -74,6 +73,7 @@ const HiddenPassword = styled(StyledInput)`
 
 const PasswordCaption = styled(StyledCaption)<{ password: string[] }>`
   visibility: ${({ password }) => showPasswordCaption(password)};
+  margin-bottom: 8px;
 `;
 
 export default PasswordInput;
