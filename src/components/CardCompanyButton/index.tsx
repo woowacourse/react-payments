@@ -9,7 +9,7 @@ import {
   WooriCardLogo,
 } from '../../assets/svg';
 
-import { useModalContext } from '../common/Modal/ModalContext';
+import { useModalContext } from '../../utils/context/ModalContext';
 import { useCardCompany } from '../../domain/context/CardCompanyContext';
 import type { CardCompany } from '../../domain/types/card';
 

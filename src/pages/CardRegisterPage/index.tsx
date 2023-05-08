@@ -1,16 +1,11 @@
 import { Link } from 'react-router-dom';
 
 import CardRegisterForm from '../../components/CardRegisterForm';
-import CardCompanySelectBottomSheet from '../../components/CardCompanySelectBottomSheet';
 import { CardCompanyProvider } from '../../domain/context/CardCompanyContext';
-
-import { useModalContext } from '../../components/common/Modal/ModalContext';
 
 import styles from './cardRegisterPage.module.css';
 
 const CardRegisterPage = () => {
-  const { isModalOpen } = useModalContext();
-
   return (
     <CardCompanyProvider>
       <div className={styles.container}>
@@ -36,7 +31,6 @@ const CardRegisterPage = () => {
           <CardRegisterForm />
         </main>
       </div>
-      {isModalOpen && <CardCompanySelectBottomSheet />}
     </CardCompanyProvider>
   );
 };

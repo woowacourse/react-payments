@@ -1,10 +1,9 @@
-import { ChangeEvent, FormEventHandler, useEffect, useRef } from 'react';
+import { ChangeEvent, FormEventHandler, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import useCardRegisterInput from './useCardRegisterInput';
 import { useCardCompany } from '../../domain/context/CardCompanyContext';
 import { useCardsContext } from '../../domain/context/CardsContext';
-import { useModalContext } from '../common/Modal/ModalContext';
 import { uuid } from '../../utils/uuid';
 
 const today = new Date();
@@ -15,7 +14,6 @@ const useCardRegisterForm = () => {
   const navigate = useNavigate();
   const cardNumberInputRef = useRef<HTMLInputElement>(null);
   const expiredMonthInputRef = useRef<HTMLInputElement>(null);
-  const { isModalOpen, openModal } = useModalContext();
   const { cardCompany } = useCardCompany();
   const { registerCard } = useCardsContext();
   const { cardData, handleNumberChange, handleOwnerChange } =
@@ -105,16 +103,6 @@ const useCardRegisterForm = () => {
       (inputEls[index + 1] as HTMLInputElement)?.focus();
     }
   };
-
-  useEffect(() => {
-    openModal();
-  }, []);
-
-  useEffect(() => {
-    if (isModalOpen === false) {
-      cardNumberInputRef.current?.focus();
-    }
-  }, [isModalOpen]);
 
   return {
     cardCompany,
