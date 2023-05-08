@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import type { Meta, StoryObj } from '@storybook/react';
 import { userEvent, within } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
@@ -75,14 +73,23 @@ export const SuccessInteraction: Story = {
 
     await new Promise((resolve) => setTimeout(resolve, 700));
 
-    const cardNumberInput = canvas.getByLabelText('카드 번호', {
+    const cardNumberInputs = canvas.queryAllByLabelText('카드 번호', {
       exact: false,
       selector: 'input',
     });
-    expect(cardNumberInput).toHaveFocus();
+    expect(cardNumberInputs[0]).toHaveFocus();
 
-    await userEvent.type(cardNumberInput, '1234123412341234', { delay: 200 });
-    expect(cardNumberInput).toHaveValue('1234 1234 •••• ••••');
+    await userEvent.type(cardNumberInputs[0], '1234', { delay: 200 });
+    expect(cardNumberInputs[0]).toHaveValue('1234');
+
+    await userEvent.type(cardNumberInputs[1], '1234', { delay: 200 });
+    expect(cardNumberInputs[1]).toHaveValue('1234');
+
+    await userEvent.type(cardNumberInputs[2], '1234', { delay: 200 });
+    expect(cardNumberInputs[2]).toHaveValue('1234');
+
+    await userEvent.type(cardNumberInputs[3], '1234', { delay: 200 });
+    expect(cardNumberInputs[3]).toHaveValue('1234');
 
     const expirationDateInput = canvas.getByLabelText('만료일', {
       exact: false,
@@ -151,13 +158,17 @@ export const ErrorInteraction: Story = {
 
     userEvent.tab();
 
-    const cardNumberInput = canvas.getByLabelText('카드 번호', {
+    const cardNumberInputs = canvas.queryAllByLabelText('카드 번호', {
       exact: false,
       selector: 'input',
     });
-    await userEvent.type(cardNumberInput, '123415', { delay: 200 });
-    expect(cardNumberInput).toHaveValue('1234 15');
+    expect(cardNumberInputs[0]).toHaveFocus();
 
+    await userEvent.type(cardNumberInputs[0], '1234', { delay: 200 });
+    expect(cardNumberInputs[0]).toHaveValue('1234');
+
+    userEvent.tab();
+    userEvent.tab();
     userEvent.tab();
 
     const expirationDateInput = canvas.getByLabelText('만료일', {
@@ -165,8 +176,6 @@ export const ErrorInteraction: Story = {
       selector: 'input',
     });
     await userEvent.type(expirationDateInput, '5789', { delay: 200 });
-
-    userEvent.tab();
 
     const ownerNameInput = canvas.getByLabelText('카드 소유자 이름', {
       exact: false,

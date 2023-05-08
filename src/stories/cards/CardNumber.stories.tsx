@@ -22,10 +22,11 @@ type Story = StoryObj<typeof CardNumber>;
 
 export const Default: Story = {
   render: () => {
-    const { inputError, updateInputValue, updateInputError } = useCardAddForm();
+    const { cardInformation, inputError, updateInputValue, updateInputError } = useCardAddForm();
 
     return (
       <CardNumber
+        value={cardInformation.cardNumber}
         isError={inputError.cardNumber}
         updateInputValue={updateInputValue}
         updateInputError={updateInputError}
@@ -36,10 +37,11 @@ export const Default: Story = {
 
 export const SuccessInteraction: Story = {
   render: () => {
-    const { inputError, updateInputValue, updateInputError } = useCardAddForm();
+    const { cardInformation, inputError, updateInputValue, updateInputError } = useCardAddForm();
 
     return (
       <CardNumber
+        value={cardInformation.cardNumber}
         isError={inputError.cardNumber}
         updateInputValue={updateInputValue}
         updateInputError={updateInputError}
@@ -51,18 +53,27 @@ export const SuccessInteraction: Story = {
     const canvas = within(canvasElement);
 
     const label = canvas.getByText('카드 번호');
-    const input = canvas.getByLabelText('카드 번호', {
+    const inputs = canvas.queryAllByLabelText('카드 번호', {
       exact: false,
       selector: 'input',
     });
-    expect(input).not.toHaveFocus();
+    expect(inputs[0]).not.toHaveFocus();
 
     userEvent.click(label);
 
-    expect(input).toHaveFocus();
+    expect(inputs[0]).toHaveFocus();
 
-    await userEvent.type(input, '1234123412341234', { delay: 200 });
-    expect(input).toHaveValue('1234 1234 •••• ••••');
+    await userEvent.type(inputs[0], '1234', { delay: 200 });
+    expect(inputs[0]).toHaveValue('1234');
+
+    await userEvent.type(inputs[1], '1234', { delay: 200 });
+    expect(inputs[1]).toHaveValue('1234');
+
+    await userEvent.type(inputs[2], '1234', { delay: 200 });
+    expect(inputs[2]).toHaveValue('1234');
+
+    await userEvent.type(inputs[3], '1234', { delay: 200 });
+    expect(inputs[3]).toHaveValue('1234');
 
     userEvent.tab();
   },
@@ -70,10 +81,11 @@ export const SuccessInteraction: Story = {
 
 export const ErrorInteraction: Story = {
   render: () => {
-    const { inputError, updateInputValue, updateInputError } = useCardAddForm();
+    const { cardInformation, inputError, updateInputValue, updateInputError } = useCardAddForm();
 
     return (
       <CardNumber
+        value={cardInformation.cardNumber}
         isError={inputError.cardNumber}
         updateInputValue={updateInputValue}
         updateInputError={updateInputError}
@@ -85,19 +97,23 @@ export const ErrorInteraction: Story = {
     const canvas = within(canvasElement);
 
     const label = canvas.getByText('카드 번호');
-    const input = canvas.getByLabelText('카드 번호', {
+    const inputs = canvas.queryAllByLabelText('카드 번호', {
       exact: false,
       selector: 'input',
     });
-    expect(input).not.toHaveFocus();
+    expect(inputs[0]).not.toHaveFocus();
 
     userEvent.click(label);
 
-    expect(input).toHaveFocus();
+    expect(inputs[0]).toHaveFocus();
 
-    await userEvent.type(input, '12345', { delay: 200 });
-    expect(input).toHaveValue('1234 5');
+    await userEvent.type(inputs[0], '1234', { delay: 200 });
+    expect(inputs[0]).toHaveValue('1234');
 
+    await userEvent.type(inputs[1], '1', { delay: 200 });
+
+    userEvent.tab();
+    userEvent.tab();
     userEvent.tab();
   },
 };

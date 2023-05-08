@@ -21,9 +21,9 @@ export const List: Story = {
     cardList: [
       {
         id: 1,
-        cardName: '카드 1',
+        cardName: '우리카드 1234',
         issuer: '우리카드',
-        cardNumber: '1234123412341234',
+        cardNumber: ['1234', '1234', '1234', '1234'],
         expirationDate: {
           month: '12',
           year: '23',
@@ -36,7 +36,7 @@ export const List: Story = {
         id: 2,
         issuer: '현대카드',
         cardName: 'WOOWA의 현대카드',
-        cardNumber: '1234123412341234',
+        cardNumber: ['1234', '1234', '1234', '1234'],
         expirationDate: {
           month: '12',
           year: '23',
