@@ -14,6 +14,8 @@ export const colors = {
   primaryRed: '#ff0033',
   secondRed: '#ea5270',
   shadow: '#00000040',
+  cardGray: '#D9D9D9',
+  cardBlack: '#333333',
 };
 
 export type ColorsType = typeof colors;
