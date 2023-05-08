@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { Page } from '../components/common/Page';
+import { Text } from '../components/common/Text';
 import { usePayments } from '../hooks/usePayments';
 import { usePaymentsForm } from '../hooks/usePaymentsForm';
 
@@ -10,9 +11,45 @@ const Content = styled.main`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 24px;
+  gap: 42px;
 
   flex: 1;
+`;
+
+const Progress = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 170px;
+  height: 100px;
+
+  border-radius: 10px;
+  background-color: #d9d9d9;
+
+  overflow: hidden;
+`;
+
+const ProgressBarAnimation = keyframes`
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(100%);
+  }
+`;
+
+const ProgressBar = styled.div`
+  width: 50%;
+  height: 100%;
+
+  border-radius: 10px;
+  background-color: #333333;
+
+  animation-name: ${ProgressBarAnimation};
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: cubic-bezier(0.46, 0.03, 0.52, 0.96);
 `;
 
 const delay = (ms: number) => {
@@ -23,8 +60,8 @@ const delay = (ms: number) => {
 
 export const NewCreditCardRegistrationPage = () => {
   const navigate = useNavigate();
-  const { validatedCreditCard: creditCard } = usePaymentsForm();
-  const { creditCards, setCreditCards } = usePayments();
+  const { registerCreditCard } = usePayments();
+  const { validatedCreditCard: creditCard, setCreditCard } = usePaymentsForm();
 
   if (creditCard === null) {
     throw {
@@ -34,14 +71,24 @@ export const NewCreditCardRegistrationPage = () => {
 
   useEffect(() => {
     delay(2000).then(() => {
-      setCreditCards([...creditCards, creditCard]);
+      const registeredCreditCard = registerCreditCard(creditCard);
+      setCreditCard(registeredCreditCard);
+
       navigate('/complete');
     });
   }, []);
 
   return (
     <Page>
-      <Content>카드를 등록중입니다 ...</Content>
+      <Content>
+        <Progress>
+          <ProgressBar />
+        </Progress>
+
+        <Text size="medium" weight="bold">
+          카드를 등록중입니다
+        </Text>
+      </Content>
     </Page>
   );
 };
