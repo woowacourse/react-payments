@@ -2,6 +2,7 @@ import { Input } from 'components/common';
 import { ChangeEventHandler } from 'react';
 import { Styled as S } from './OwnerNameInput.styles';
 import FormLabel from 'components/common/FormLabel/FormLabel';
+import { MAX_OWNER_NAME_LENGTH } from '../../../constants';
 
 export interface OwnerNameInputProps {
   value: string;
@@ -13,7 +14,7 @@ export function OwnerNameInput({ value, onChange }: OwnerNameInputProps) {
     <>
       <S.OwnerNameLabelContainer>
         <FormLabel>카드 소유자 이름(선택)</FormLabel>
-        <FormLabel>{`${value.length} / 30`}</FormLabel>
+        <FormLabel>{`${value.length} / ${MAX_OWNER_NAME_LENGTH}`}</FormLabel>
       </S.OwnerNameLabelContainer>
       <S.OwnerNameInputWrapper>
         <Input

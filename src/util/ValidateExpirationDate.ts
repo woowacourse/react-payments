@@ -1,13 +1,20 @@
+import { MAX_DATE_LENGTH, MAX_MONTH, MAX_YEAR, MIN_MONTH, MIN_YEAR } from '../constants';
 import { isNumberLengthValid } from './ValidateForm';
 
 export const validateExpirationMonth = (input: string) => {
-  return Number(input) > 0 && isNumberLengthValid(input, 2) && Number(input) <= 12;
+  return (
+    isNumberLengthValid(input, MAX_DATE_LENGTH) &&
+    Number(input) >= MIN_MONTH &&
+    Number(input) <= MAX_MONTH
+  );
 };
 
 export const validateExpirationYear = (input: string) => {
-  const minYear = new Date().getFullYear() - 2000;
-  const maxYear = new Date().getFullYear() - 1995;
-  return isNumberLengthValid(input, 2) && Number(input) >= minYear && Number(input) <= maxYear;
+  return (
+    isNumberLengthValid(input, MAX_DATE_LENGTH) &&
+    Number(input) >= MIN_YEAR &&
+    Number(input) <= MAX_YEAR
+  );
 };
 
 export const validateExpirationDate = (expirationDate: { month: string; year: string }) => {

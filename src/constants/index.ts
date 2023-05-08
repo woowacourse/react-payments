@@ -61,3 +61,15 @@ export const CARDS_INFO = [
     font: 'KB',
   },
 ] as const;
+
+export const MIN_MONTH = 1;
+export const MAX_MONTH = 12;
+
+export const MIN_YEAR = new Date().getFullYear() - 2000;
+export const MAX_YEAR = new Date().getFullYear() - 1995;
+
+export const MAX_DATE_LENGTH = 2;
+export const MAX_NUMBER_LENGTH = 4;
+export const MAX_SECURITY_CODE_LENGTH = 3;
+export const MAX_OWNER_NAME_LENGTH = 30;
+export const MAX_PASSWORD_LENGTH = 1;
