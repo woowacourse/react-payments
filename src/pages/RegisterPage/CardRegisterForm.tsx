@@ -1,6 +1,5 @@
 import Header from 'components/Header';
 import NextButton from 'components/Button';
-import Modal from 'components/Modal';
 import styled from 'styled-components';
 import CardPreview from './CardPreview';
 import CardNumberInput from './FormInputs/CardNumberInput';
@@ -13,6 +12,7 @@ import { useContext, useState } from 'react';
 import { AddCardContext } from 'context/CardContext';
 import { Card } from 'types/Card';
 import { useCardFormHandler } from 'pages/RegisterPage/hooks/useCardFormHandler';
+import Modal from 'react-modal-bottom-sheet';
 
 const CardRegisterForm = () => {
   const { cardNumber, date, name, cardCompany } = useContext(AddCardContext);
