@@ -1,6 +1,7 @@
 import InputSectionTemplate from '../../template/InputSectionTemplate';
 import InputBox, { InputType } from '../../common/InputBox';
 import { InputArrayStateProps } from '../../../abstracts/types';
+import useValidation from '../../../hooks/useValidation';
 
 const CardNumberInput = (props: InputArrayStateProps) => {
   const setInput = (index: number) => (val: string) => {
@@ -45,8 +46,11 @@ const CardNumberInput = (props: InputArrayStateProps) => {
       setInputValues: setInput(3),
     },
   ];
+
+  const { errorMessage } = useValidation(props.inputArrayValue, 'cardNumber');
+
   return (
-    <InputSectionTemplate label="카드 번호">
+    <InputSectionTemplate label="카드 번호" errorMessage={errorMessage}>
       <InputBox inputs={inputs} align="center" separator="-" isFullWidth {...props} />
     </InputSectionTemplate>
   );

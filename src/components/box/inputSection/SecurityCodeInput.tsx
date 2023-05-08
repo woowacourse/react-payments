@@ -3,6 +3,7 @@ import InputSectionTemplate from '../../template/InputSectionTemplate';
 import InputBox, { InputType } from '../../common/InputBox';
 import { InputStateProps } from '../../../abstracts/types';
 import HelpButtonImage from '../../../assets/buttonImage/HelpButtonImage';
+import useValidation from '../../../hooks/useValidation';
 
 const SecurityCodeInput = (props: InputStateProps) => {
   const inputs: InputType[] = [
@@ -15,8 +16,11 @@ const SecurityCodeInput = (props: InputStateProps) => {
       setInputValues: props.setInputValue,
     },
   ];
+
+  const { errorMessage } = useValidation(props.inputValue, 'cvc');
+
   return (
-    <InputSectionTemplate label="보안 코드(CVC/CVV)">
+    <InputSectionTemplate label="보안 코드(CVC/CVV)" errorMessage={errorMessage}>
       <InputBox inputs={inputs} align="center" {...props} />
       <HelpButton>
         <HelpButtonImage />
