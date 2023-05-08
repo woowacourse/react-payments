@@ -1,5 +1,6 @@
 import type { Preview } from '@storybook/react';
 import React from 'react';
+import { HashRouter } from 'react-router-dom';
 import { ResetStyle } from '../src/styles/ResetStyle';
 
 const preview: Preview = {
@@ -15,8 +16,10 @@ const preview: Preview = {
   decorators: [
     (Story) => (
       <>
-        <ResetStyle />
-        <Story />
+        <HashRouter>
+          <ResetStyle />
+          <Story />
+        </HashRouter>
       </>
     ),
   ],

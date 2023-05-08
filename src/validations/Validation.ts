@@ -24,3 +24,15 @@ export const validateCardPassword = (value: string) => {
     throw new Error(ERROR_MESSAGE.cardPassword);
   }
 };
+
+export const validateCardCompany = (value: string) => {
+  if (value === '카드사') {
+    throw new Error(ERROR_MESSAGE.cardCompany);
+  }
+};
+
+export const validateCardName = (value: string) => {
+  if (!/^[A-Z]+\s[A-Z]+$/.test(value)) {
+    throw new Error(ERROR_MESSAGE.cardName);
+  }
+};

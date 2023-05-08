@@ -1,10 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { CardCompanyButton } from './CardCompanyButton';
+import { CardCompanyButton } from '../../components/CardCompanyButton';
 
 const meta = {
-  title: 'CardCompanyButton',
+  title: 'Button/CardCompanyButton',
   component: CardCompanyButton,
   argTypes: { handleOnClick: { action: 'clicked' } },
+  tags: ['autodocs'],
 } satisfies Meta<typeof CardCompanyButton>;
 
 export default meta;

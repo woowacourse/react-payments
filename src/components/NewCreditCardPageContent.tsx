@@ -7,6 +7,8 @@ import { useValidation } from '../hooks/useValidation';
 import type { CreditCard, Month, Year } from '../types/CreditCard';
 import {
   validateCVC,
+  validateCardCompany,
+  validateCardName,
   validateCardNumbers,
   validateCardPassword,
   validateExpirationDate,
@@ -73,6 +75,8 @@ export const NewCreditCardPageContent = () => {
     expirationDate: validateExpirationDate,
     cvc: validateCVC,
     password: validateCardPassword,
+    cardCompany: validateCardCompany,
+    name: validateCardName,
   });
 
   const { isModalOpen, openModal, closeModal } = useModal(true);
@@ -123,6 +127,11 @@ export const NewCreditCardPageContent = () => {
         expirationDate={resisteringCreditCard.expirationDate}
         openModal={openModal}
       />
+      {validationResult.cardCompany?.success === false && (
+        <Text size="small" color="red">
+          {validationResult.cardCompany.errorMessage}
+        </Text>
+      )}
 
       <FormGroup>
         <Text size="small">카드 번호</Text>
@@ -161,6 +170,11 @@ export const NewCreditCardPageContent = () => {
           handleOnChange={handleCardNameChange}
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
         />
+        {validationResult.name?.success === false && (
+          <Text size="small" color="red">
+            {validationResult.name?.errorMessage}
+          </Text>
+        )}
       </FormGroup>
 
       <FormGroup>
@@ -197,9 +211,11 @@ export const NewCreditCardPageContent = () => {
         <Text weight="bold">다음</Text>
       </NextButton>
 
-      {isModalOpen && (
-        <CardCompanyListModal closeModal={closeModal} handleOnClick={handleCardCompanyChange} />
-      )}
+      <CardCompanyListModal
+        isModalOpen={isModalOpen}
+        closeModal={closeModal}
+        handleOnClick={handleCardCompanyChange}
+      />
     </Container>
   );
 };

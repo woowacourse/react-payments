@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import type { CreditCard } from '../types/CreditCard';
 import { Text } from './common/Text';
@@ -75,50 +74,43 @@ const CardAdditionalInfo = styled.div`
   height: 12px;
 `;
 
-export const CreditCardView = React.memo(
-  (props: CreditCardViewProps) => {
-    const { cardCompany, name, cardNumbers, expirationDate, openModal, nickName } = props;
+export const CreditCardView = (props: CreditCardViewProps) => {
+  const { cardCompany, name, cardNumbers, expirationDate, openModal, nickName } = props;
 
-    const getPartialCardNumber = (index: number) => {
-      const partialCardNumber = cardNumbers.split('-')[index] ?? '';
+  const getPartialCardNumber = (index: number) => {
+    const partialCardNumber = cardNumbers.split('-')[index] ?? '';
 
-      return [0, 1].includes(index) ? partialCardNumber : partialCardNumber.replaceAll(/\d/g, '•');
-    };
+    return [0, 1].includes(index) ? partialCardNumber : partialCardNumber.replaceAll(/\d/g, '•');
+  };
 
-    const partialCardNumbers = [0, 1, 2, 3].map(getPartialCardNumber);
+  const partialCardNumbers = [0, 1, 2, 3].map(getPartialCardNumber);
 
-    return (
-      <Container>
-        <StyledCreditCardView
-          $background={CREDIT_CARD_VIEW_BACKGROUND_COLOR[cardCompany]}
-          onClick={openModal}
-        >
-          <Text size="large" weight="bold">
-            {cardCompany}
-          </Text>
-          <ICChip />
-          <CardNumber>
-            {partialCardNumbers.map((partialCardNumber, index) => (
-              // eslint-disable-next-line react/no-array-index-key
-              <Text size="small" key={index}>
-                {partialCardNumber}
-              </Text>
-            ))}
-          </CardNumber>
-          <CardAdditionalInfo>
-            <Text size="small">{name}</Text>
-            {expirationDate.some(Boolean) && <Text size="small">{expirationDate.join('/')}</Text>}
-          </CardAdditionalInfo>
-        </StyledCreditCardView>
+  return (
+    <Container>
+      <StyledCreditCardView
+        $background={CREDIT_CARD_VIEW_BACKGROUND_COLOR[cardCompany]}
+        onClick={openModal}
+      >
         <Text size="large" weight="bold">
-          {nickName}
+          {cardCompany}
         </Text>
-      </Container>
-    );
-  },
-  (prev, next) =>
-    prev.cardCompany === next.cardCompany &&
-    prev.cardNumbers === next.cardNumbers &&
-    prev.expirationDate === next.expirationDate &&
-    prev.name === next.name,
-);
+        <ICChip />
+        <CardNumber>
+          {partialCardNumbers.map((partialCardNumber, index) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <Text size="small" key={index}>
+              {partialCardNumber}
+            </Text>
+          ))}
+        </CardNumber>
+        <CardAdditionalInfo>
+          <Text size="small">{name}</Text>
+          {expirationDate.some(Boolean) && <Text size="small">{expirationDate.join('/')}</Text>}
+        </CardAdditionalInfo>
+      </StyledCreditCardView>
+      <Text size="large" weight="bold">
+        {nickName}
+      </Text>
+    </Container>
+  );
+};

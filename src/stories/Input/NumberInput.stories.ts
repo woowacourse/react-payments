@@ -1,9 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { NumberInput } from './NumberInput';
+import { NumberInput } from '../../components/common/NumberInput';
 
 const meta = {
-  title: 'CVCNumberInput',
+  title: 'Input/CVCNumberInput',
   component: NumberInput,
+  tags: ['autodocs'],
 } satisfies Meta<typeof NumberInput>;
 
 export default meta;
