@@ -3,7 +3,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { BrowserRouter } from "react-router-dom";
 import CardInfoProvider from "components/provider/CardInfoProvider";
 import CardRegisterForm from "pages/RegisterPage/CardRegisterForm";
-import ModalStateProvider from "components/provider/ModalStateProvider";
+import ModalStateProvider from "woowahan-yummy-modal/dist/ModalStateProvider";
 
 const meta = {
   title: "Pages/CardRegisterPage",
@@ -11,7 +11,7 @@ const meta = {
     (Story) => (
       <BrowserRouter>
         <CardInfoProvider>
-          <ModalStateProvider>
+          <ModalStateProvider initialState>
             <Story />
           </ModalStateProvider>
         </CardInfoProvider>

@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import styled from "styled-components";
 import { CardCompanyCaption } from "./style/CaptionStyle";
 import { CardInfo } from "types";
-import useModal from "hooks/useModal";
+import useModal from "woowahan-yummy-modal/dist/useModal";
 import { NUMBER_INPUT, LIMIT_LENGTH, PASSWORD_PART } from "constants/limit";
 import { HIDDEN_VALUE, SECURITY_TARGET } from "constants/security";
 import {

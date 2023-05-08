@@ -17,7 +17,8 @@
     "react-scripts": "5.0.1",
     "styled-components": "^5.3.9",
     "typescript": "^5.0.4",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "woowahan-yummy-modal": "^0.0.1"
   },
   "scripts": {
     "start": "react-scripts start",

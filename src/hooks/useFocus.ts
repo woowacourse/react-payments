@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import useModal from "./useModal";
+import useModal from "woowahan-yummy-modal/dist/useModal";
 
 export const useFocus = () => {
   const input = useRef<HTMLInputElement>(null);

@@ -2,7 +2,7 @@ import { Meta } from "@storybook/react";
 import { ChangeEvent, KeyboardEvent } from "react";
 import CardNumberInput from "pages/RegisterPage/FormInputs/CardNumberInput";
 import CardInfoProvider from "components/provider/CardInfoProvider";
-import ModalStateProvider from "components/provider/ModalStateProvider";
+import ModalStateProvider from "woowahan-yummy-modal/dist/ModalStateProvider";
 import { VALID_INPUT } from "constants/limit";
 import { DIRECTION } from "constants/inputDirection";
 const { ONLY_NUMBER } = VALID_INPUT;
@@ -58,7 +58,7 @@ export default meta;
 export const CardNumbers = () => {
   return (
     <CardInfoProvider>
-      <ModalStateProvider>
+      <ModalStateProvider initialState>
         <form onChange={handleFocusNext} onKeyDown={handleKeyDown}>
           <CardNumberInput />
         </form>

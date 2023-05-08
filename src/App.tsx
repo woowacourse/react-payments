@@ -1,6 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import CardInfoProvider from "components/provider/CardInfoProvider";
-import ModalStateProvider from "components/provider/ModalStateProvider";
+import ModalStateProvider from "woowahan-yummy-modal/dist/ModalStateProvider";
 import MainPage from "pages/MainPage";
 import CardRegisterForm from "pages/RegisterPage/CardRegisterForm";
 import LastPage from "pages/LastPage";
@@ -16,7 +16,7 @@ const App = () => {
           path="/register"
           element={
             <CardInfoProvider>
-              <ModalStateProvider>
+              <ModalStateProvider initialState>
                 <CardRegisterForm />
               </ModalStateProvider>
             </CardInfoProvider>
