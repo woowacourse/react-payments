@@ -1,31 +1,26 @@
 import { useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Card from '../../components/Card';
 import Spacer from '../../components/common/Spacer';
 import Input from '../../components/common/Input';
+import ErrorPage from '../ErrorPage';
 
 import useCardNicknameInputPage from './useCardNicknameInputPage';
 import type { Focus } from '../../components/common/Input';
-import type { CardInfo } from '../../domain/types/card';
 
 import styles from './cardNicknameInputPage.module.css';
 
 const CardNicknameInputPage = () => {
+  const navigate = useNavigate();
   const inputRef = useRef<Focus>(null);
-  const {
-    lastRegisteredCard,
-    nickname,
-    handleNicknameSubmit,
-    handleNicknameChange,
-  } = useCardNicknameInputPage();
-  const {
-    cardCompany,
-    cardNumber1,
-    cardNumber2,
-    owner,
-    expiredMonth,
-    expiredYear,
-  } = lastRegisteredCard as CardInfo;
+  const { card, nickname, handleNicknameSubmit, handleNicknameChange } =
+    useCardNicknameInputPage();
+
+  if (!card) {
+    navigate('/error');
+    return <ErrorPage />;
+  }
 
   useEffect(() => {
     inputRef.current?.focus();
