@@ -13,11 +13,12 @@ const meta = {
 type Story = StoryObj<typeof meta>;
 
 export const Standard: Story = {
-  args: {},
+  args: { name: 'test' },
 };
 
 export const Short: Story = {
   args: {
+    name: 'test-2',
     placeholder: '다음',
     width: '30%',
   },
@@ -25,6 +26,7 @@ export const Short: Story = {
 
 export const Placeholder: Story = {
   args: {
+    name: 'test-3',
     placeholder: '다음',
   },
 };
