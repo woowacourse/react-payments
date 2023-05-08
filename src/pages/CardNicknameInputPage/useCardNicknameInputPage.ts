@@ -15,13 +15,13 @@ const useCardNicknameInputPage = () => {
     event.preventDefault();
 
     if (nickname === '') {
-      navigate('/waiting');
+      navigate(`/waiting/${cardId}`);
       return;
     }
 
     if (cardId) {
       modifyCardNickname(cardId, nickname);
-      navigate('/waiting');
+      navigate(`/waiting/${cardId}`);
     }
   };
 
