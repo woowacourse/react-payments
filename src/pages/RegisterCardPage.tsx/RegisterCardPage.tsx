@@ -1,8 +1,9 @@
-import React, { FormEvent } from 'react';
+import React, { FormEvent, useState } from 'react';
 import styled from 'styled-components';
 import { useCardListContext } from '@contexts/useCardContext';
 import { useCardInputInfoContext } from '@contexts/useCardInputInfo';
 import { usePageContext } from '@contexts/usePageContext';
+import { CardSpinner } from '@components/addCardPage/CardSpinner';
 import { Button } from '@components/common/Button';
 import { Card } from '@components/common/Card';
 import { Error } from '@components/common/Error';
@@ -18,6 +19,7 @@ import { useRegisterCardFormData } from './hooks/useRegisterCardFormData';
 const INPUT_CARD_TITLE_ID = 'cardTitle';
 
 export default function RegisterCard() {
+  const [isLoading, setIsLoading] = useState(false);
   const { formData } = useRegisterCardFormData();
   const { cardList, setCardList } = useCardListContext();
   const { setPage } = usePageContext();
@@ -46,10 +48,23 @@ export default function RegisterCard() {
       return;
     }
 
-    createCard();
+    setIsLoading(true);
 
-    setPage(PAGE_KIND.HOME);
+    setTimeout(() => {
+      createCard();
+
+      setPage(PAGE_KIND.HOME);
+    }, 3000);
   };
+
+  if (isLoading) {
+    return (
+      <Wrapper>
+        <CardSpinner />
+        <LoadingMessage>카드를 등록중입니다.</LoadingMessage>
+      </Wrapper>
+    );
+  }
 
   return (
     <Wrapper>
@@ -127,4 +142,13 @@ const ButtonWrapper = styled.div`
   position: absolute;
   right: 25px;
   bottom: 25px;
+`;
+
+const LoadingMessage = styled.span`
+  margin-top: 42px;
+  font-weight: 700;
+  font-size: 14px;
+  text-align: center;
+  color: ${({ theme }) => theme.colors.darkGray};
+  opacity: 0.9;
 `;
