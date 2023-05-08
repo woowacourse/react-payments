@@ -17,19 +17,17 @@ const CardCompanyForm = ({
   setIsModalOpen,
 }: cardCompanyModalProps) => {
   return (
-    <>
-      <Styled.FormWrapper>
-        {getCompanyInfos().map(([companyName, companyImage]) => (
-          <CardLogo
-            key={companyName}
-            companyImage={companyImage}
-            companyName={companyName}
-            setCardCompany={setCardCompany}
-            setIsModalOpen={setIsModalOpen}
-          />
-        ))}
-      </Styled.FormWrapper>
-    </>
+    <Styled.FormWrapper>
+      {getCompanyInfos().map(([companyName, companyImage]) => (
+        <CardLogo
+          key={companyName}
+          companyImage={companyImage}
+          companyName={companyName}
+          setCardCompany={setCardCompany}
+          setIsModalOpen={setIsModalOpen}
+        />
+      ))}
+    </Styled.FormWrapper>
   );
 };
 
