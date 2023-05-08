@@ -9,7 +9,6 @@ import {
   useSecurityCode,
   useExpiredDate,
   useAddCard,
-  useBottomSheet,
   useCardCompany,
 } from '../../hooks';
 import Card from '../Card/Card';
@@ -21,7 +20,7 @@ import Layout from '../Layout/Layout';
 import CardComapnyIcons from '../CardCompanyIcons/CardCompanyIcons';
 import SecurityCode from '../SecurityCode/SecurityCode';
 import { v4 as uuidv4 } from 'uuid';
-import Modal from 'tami-modal';
+import { Modal, useModal } from 'tami-modal';
 
 const AddCardForm = () => {
   const { cardNumbers, errorMessage, checkCardNumbers, onSetFirstCardNumbers } =
@@ -31,8 +30,7 @@ const AddCardForm = () => {
   const { securityCode, checkSecurityCode } = useSecurityCode();
   const { expiredDate, checkExpiredDate, validateDate } = useExpiredDate();
   const { cardCompany, onSetCardCompany } = useCardCompany();
-  const { isBottomSheetOpen, onOpenBottomSheet, onCloseBottomSheet } =
-    useBottomSheet();
+  const { isModalOpen, onOpenModal, onCloseModal } = useModal();
 
   const { disabled } = useAddCard(
     cardNumbers,
@@ -66,14 +64,14 @@ const AddCardForm = () => {
   };
 
   useEffect(() => {
-    if (!isBottomSheetOpen) refs.cardNumbers.current?.focus();
-  }, [isBottomSheetOpen]);
+    if (!isModalOpen) refs.cardNumbers.current?.focus();
+  }, [isModalOpen]);
 
   return (
     <>
       <Layout>
         <form onSubmit={handleSubmitCard}>
-          <Styled.CardWrapper onClick={onOpenBottomSheet}>
+          <Styled.CardWrapper onClick={onOpenModal}>
             <p>카드를 클릭해 카드사를 변경할 수 있습니다.</p>
             <Card
               cardNumbers={cardNumbers}
@@ -119,13 +117,13 @@ const AddCardForm = () => {
         </form>
       </Layout>
       <Modal
-        isOpen={isBottomSheetOpen}
+        isOpen={isModalOpen}
         modalLocation="bottom"
-        onCloseModal={onCloseBottomSheet}
+        onCloseModal={onCloseModal}
       >
         <CardComapnyIcons
           onSetCardCompany={onSetCardCompany}
-          closeBottomSheet={onCloseBottomSheet}
+          closeBottomSheet={onCloseModal}
           onSetFirstCardNumbers={onSetFirstCardNumbers}
         />
       </Modal>
