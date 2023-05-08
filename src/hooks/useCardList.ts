@@ -4,7 +4,7 @@ import type { CardItemInfo } from './../types/Card';
 
 export const useCardList = () => {
   const [cardList, setCardList] = useState<CardItemInfo[]>(
-    cardLocalStorage.getCardList() || []
+    cardLocalStorage.getCardList() ?? []
   );
 
   const updateCardList = (cardItem: CardItemInfo) => {
