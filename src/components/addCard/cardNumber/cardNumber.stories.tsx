@@ -1,6 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { getByLabelText, userEvent, within } from "@storybook/testing-library";
-import { LABEL } from "../../../constants/inputInfo";
+import { userEvent, within } from "@storybook/testing-library";
 import { CardInfoProvider } from "../../../contexts/cardInfo";
 import { CardNumber } from "./cardNumber";
 
