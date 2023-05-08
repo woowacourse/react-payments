@@ -1,6 +1,6 @@
 import { useState, ChangeEvent } from "react";
 
-import Input from "../../common/CardInfoInput";
+import CardInfoInput from "../../common/CardInfoInput";
 
 import {
   CARD_ERROR_MESSAGE,
@@ -55,7 +55,7 @@ export default function InputBoxExpirationDate(
   return (
     <label className="input-box-expiration-date">
       <p>{EXPLANATION_MESSAGE.INPUT_EXPIRATION_DATE}</p>
-      <Input
+      <CardInfoInput
         inputPlace="essential"
         name="expiration-date"
         className="input-expiration-date"

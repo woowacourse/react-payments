@@ -1,6 +1,6 @@
 import { useState, ChangeEvent } from "react";
 
-import Input from "../../common/CardInfoInput";
+import CardInfoInput from "../../common/CardInfoInput";
 
 import { makeAppropriatePassword } from "../../../util/trans";
 import { nowStatus } from "../../../type";
@@ -48,7 +48,7 @@ export default function CardPassword(props: CardPasswordProps) {
   return (
     <>
       {new Array(2).fill(0).map((_, index) => (
-        <Input
+        <CardInfoInput
           inputPlace="essential"
           key={`card-password-${index + 1}`}
           name={`card-password-${index + 1}`}
