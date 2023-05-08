@@ -48,7 +48,14 @@ const CardNamePage = ({ navigate }: Props) => {
   return (
     <PageTemplate>
       <Title>카드등록이 완료되었습니다.</Title>
-      <Card cardCompany={cardCompany} cardNumber={cardNumber} ownerName={ownerName} expireDate={expireDate} />
+      <CardArea>
+        <Card
+          cardCompany={cardCompany}
+          cardNumber={cardNumber}
+          ownerName={ownerName}
+          expireDate={expireDate}
+        />
+      </CardArea>
       <CardNameInput
         ref={inputRef}
         value={cardName}
@@ -65,20 +72,15 @@ const CardNamePage = ({ navigate }: Props) => {
 
 export default CardNamePage;
 
-const narrowing = keyframes`
-  from { 
-    transform: translate(0, -100px);
-    margin-bottom: 100px;
-  }
-  
-  to { 
-    transform: translate(0, 0); 
-    margin-bottom: 40px;
-  }
+const titleMove = keyframes`
+  from  { top: -30vh; }
+  30%   { top: -30vh; }
+  to    { top: 0; }
 `;
 
 const Title = styled.h2`
-  animation: ${narrowing} 3s;
+  position: absolute;
+  top: 0;
 
   margin-top: 10vh;
   margin-bottom: 40px;
@@ -87,10 +89,31 @@ const Title = styled.h2`
   font-weight: 400;
   font-size: 26px;
   color: #383838;
+
+  animation: ${titleMove} 1.5s;
+`;
+
+const cardMove = keyframes`
+  from  { top: 64px; }
+  20%   { top: 64px; }
+  to    { top: 28vh; }
+`;
+
+const CardArea = styled.div`
+  position: absolute;
+  top: 28vh;
+
+  animation: ${cardMove} 1.5s;
+`;
+
+const fadeIn = keyframes`
+  from  { opacity: 0; }
+  to  { opacity: 1; }
 `;
 
 const CardNameInput = styled.input`
-  outline: none;
+  position: absolute;
+  top: 40vh;
 
   width: 240px;
   height: 34px;
@@ -98,12 +121,15 @@ const CardNameInput = styled.input`
   border: none;
   border-bottom: 1.5px solid #737373;
   padding: 6px 0;
+  outline: none;
 
   background-color: transparent;
 
   text-align: center;
   font-size: 18px;
   color: #383838;
+
+  animation: ${fadeIn} 1s;
 `;
 
 const ButtonWrapper = styled.div`
