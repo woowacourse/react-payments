@@ -1,8 +1,8 @@
 import { Meta } from "@storybook/react";
 import { BrowserRouter } from "react-router-dom";
+import ModalStateProvider from "woowahan-yummy-modal/dist/ModalStateProvider";
 import CardRegisterFormComponent from "pages/RegisterPage/CardRegisterForm";
 import CardInfoProvider from "components/provider/CardInfoProvider";
-import ModalStateProvider from "woowahan-yummy-modal/dist/ModalStateProvider";
 
 const meta = {
   component: CardRegisterFormComponent,

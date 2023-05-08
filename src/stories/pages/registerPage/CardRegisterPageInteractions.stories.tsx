@@ -73,11 +73,14 @@ export const ErrorInteraction: Story = {
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
 
-    await step("Choosing Card Company", async () => {
-      const closeButton = canvas.getByRole("button", {
-        name: "나중에 선택할래요",
+    await step("Not Chose Card Company", async () => {
+      await waitFor(() => {
+        const closeButton = canvas.getByRole("button", {
+          name: "나중에 선택할래요",
+        });
+
+        userEvent.click(closeButton);
       });
-      userEvent.click(closeButton);
     });
 
     await step("Filling Out Form", async () => {
@@ -104,11 +107,13 @@ export const FixedErrorInteraction: Story = {
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
 
-    await step("Choosing Card Company", async () => {
-      const closeButton = canvas.getByRole("button", {
-        name: "나중에 선택할래요",
+    await step("Not Chose Card Company", async () => {
+      await waitFor(() => {
+        const closeButton = canvas.getByRole("button", {
+          name: "나중에 선택할래요",
+        });
+        userEvent.click(closeButton);
       });
-      userEvent.click(closeButton);
     });
 
     await step("Filling Out Form", async () => {
