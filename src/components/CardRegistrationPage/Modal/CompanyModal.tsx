@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import CompanyButton from "./CompanyButton";
 import { useModalAction } from "../../provider/ModalProvider";
-import Modal from "./Modal";
+import { Modal } from "luxo-react-modal";
 
 const CompanyModal = () => {
   const { isOpenModal, closeModal } = useModalAction();
