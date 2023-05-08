@@ -5,8 +5,8 @@ const useInput = (onChangeValidator?: InputValidator, onBlurValidator?: InputVal
   const [inputValue, setInputValue] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const validateInput = (validator: InputValidator, inputValue: string) => {
-    const { hasError, message, isAllowInput } = validator(inputValue);
+  const onChange = (inputValue: string) => {
+    const { hasError, message, isAllowInput } = onChangeValidator?.(inputValue) ?? { hasError: false };
 
     if (hasError) {
       setErrorMessage(message || "");
@@ -14,17 +14,18 @@ const useInput = (onChangeValidator?: InputValidator, onBlurValidator?: InputVal
       if (isAllowInput) setInputValue(inputValue);
       return;
     }
-  };
-
-  const onChange = (inputValue: string) => {
-    onChangeValidator && validateInput(onChangeValidator, inputValue);
 
     setInputValue(inputValue);
     setErrorMessage("");
   };
 
-  const onBlur = () => {
-    onBlurValidator && validateInput(onBlurValidator, inputValue);
+  const onBlur = (inputValue: string) => {
+    const { hasError, message } = onBlurValidator?.(inputValue) ?? { hasError: false };
+
+    if (hasError) {
+      setErrorMessage(message || "");
+      return;
+    }
   };
 
   return { inputValue, errorMessage, onChange, onBlur };
