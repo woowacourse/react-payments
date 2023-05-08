@@ -67,7 +67,6 @@ const CardInfoProvider = ({ children }: CardInfoProviderProps) => {
 
   const saveCard = (cardInfo: CardInfo) => {
     saveCardToLocalStorage(cardInfo);
-    console.log(cardInfo);
     reset();
   };
 
