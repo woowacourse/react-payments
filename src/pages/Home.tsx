@@ -27,10 +27,11 @@ function Home() {
       <PageContainer>
         <Header text={'보유카드'} />
         <S.CardContainer index={CardDB.getCards().length}>
-          <S.ToggleCardListButton onClick={toggleFold}>
-            {isFolded ? '카드 목록 펼치기 ▼' : '카드 목록 접기'}
-          </S.ToggleCardListButton>
-          {CardDB.getCards().length ? null : (
+          {CardDB.getCards().length ? (
+            <S.ToggleCardListButton onClick={toggleFold}>
+              {isFolded ? '카드 목록 펼치기 ▼' : '카드 목록 접기'}
+            </S.ToggleCardListButton>
+          ) : (
             <S.AddMsgSpan>{'새로운 카드를 등록해주세요'}</S.AddMsgSpan>
           )}
           <S.AnimatedCardContainer className={isFolded ? 'fold' : ''}>
