@@ -3,19 +3,20 @@ import { BcBank, ShinhanBank, KakaoBank, HyundaeBank, WooriBank, LotteBank, Hana
 import { BANK_ID, CARD_BANK_COLOR_MAP } from '../constants';
 import { CardType } from '../types';
 import Bank from './Bank';
+import { useModalContext } from 'react-modal-patrick';
 
 interface Props {
   card: CardType;
   setCard: (value: CardType) => void;
-  closeModal: ()=>void
 }
 const ModalBanks = (props: Props) => {
   const card = JSON.parse(JSON.stringify(props.card));
+  const { closeModal } = useModalContext();
   const cardColorHandler = (e: React.MouseEvent<HTMLElement>) => {
     card.color = CARD_BANK_COLOR_MAP[e.currentTarget.id].background;
     card.bankName = e.currentTarget.id;
     props.setCard(card);
-    props.closeModal();
+    closeModal();
   };
   return (
     <>
