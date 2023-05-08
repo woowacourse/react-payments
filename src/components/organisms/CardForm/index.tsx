@@ -12,26 +12,19 @@ import { useNavigate } from 'react-router-dom';
 import FocusRefProvider from '../../context/FocusRefsProvider';
 
 import { getUniqueID } from '../../../utils/key';
-import {
-  useCardListDispatch,
-  useCardListState,
-  useCardPaymentState,
-} from '../../context/CardPaymentContext';
+import { useCardPaymentState } from '../../context/CardPaymentContext';
 
 /* component */
 const CardForm: React.FC = () => {
-  const cardList = useCardListState();
   const state = useCardPaymentState();
-  const dispatch = useCardListDispatch();
 
   const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    dispatch([
-      ...cardList,
-      {
+    navigate('/addCardAlias', {
+      state: {
         id: getUniqueID(),
         cardName: state.cardName,
         cardNumbers: state.cardNumbers,
@@ -40,9 +33,7 @@ const CardForm: React.FC = () => {
         cardCVC: state.cardCVC,
         cardPWD: state.cardPWD,
       },
-    ]);
-
-    navigate('/addCardAlias');
+    });
   };
 
   return (

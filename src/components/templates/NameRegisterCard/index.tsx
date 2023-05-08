@@ -1,27 +1,29 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '../../atomics/Button';
 import Input from '../../atomics/Input';
 import Message from '../../atomics/Message';
-import { useCardListDispatch, useCardListState } from '../../context/CardPaymentContext';
 import { VStack } from '../../layout/flexbox';
 import CardItem from '../../molecules/CardItem';
 
 const NameRegisterCard: React.FC = () => {
   const [nickName, setNickName] = useState<string>('');
-
-  const cardList = useCardListState();
-  const cardListDispatcher = useCardListDispatch();
-
+  const { state } = useLocation();
   const navigate = useNavigate();
 
-  const card = cardList[cardList.length - 1];
+  const handleRegisterCard = async () => {
+    await fetch('https://json-server-4140.onrender.com/payment', {
+      method: 'POST',
+      body: JSON.stringify({
+        ...state,
+        nickName,
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    });
 
-  const handleRegisterCard = () => {
-    card.nickName = nickName;
-
-    cardListDispatcher([...cardList.slice(0, cardList.length - 1), card]);
     navigate('/');
   };
 
@@ -30,7 +32,7 @@ const NameRegisterCard: React.FC = () => {
       <Message fontSize="24px" lineHeight="28px" color="#383838">
         카드 등록이 완료되었습니다.
       </Message>
-      <CardItem card={card} />
+      <CardItem card={state} />
       <Input
         type="text"
         isValid={true}
