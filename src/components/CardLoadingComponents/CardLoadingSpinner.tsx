@@ -3,7 +3,7 @@ import CardSkeleton from './CardSkeleton';
 
 const registeredText = '카드를 등록중입니다.';
 
-const CardLoading = () => {
+const CardLoadingSpinner = () => {
   return (
     <LoadingContainer>
       <CardItemContainer>
@@ -54,4 +54,4 @@ const LoadingTitle = styled.span<{ index: number }>`
   animation-delay: calc(0.1s * (1 + ${(props) => props.index}));
 `;
 
-export default CardLoading;
+export default CardLoadingSpinner;

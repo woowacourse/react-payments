@@ -1,13 +1,13 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import CardLoading from '../components/CardLoadingComponents/CardLoading';
+import CardLoadingSpinner from '../components/CardLoadingComponents/CardLoadingSpinner';
 
 const meta = {
-  title: 'Payment/CardLoadingComponents/CardLoading',
-  component: CardLoading,
+  title: 'Payment/CardLoadingComponents/CardLoadingSpinner',
+  component: CardLoadingSpinner,
   tags: ['autodocs'],
-} satisfies Meta<typeof CardLoading>;
+} satisfies Meta<typeof CardLoadingSpinner>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

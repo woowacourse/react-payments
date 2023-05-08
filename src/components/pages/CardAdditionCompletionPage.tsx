@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import CardItem from '../CardListPageComponents/CardItem';
 import Title from '../common/Title';
 import Input from '../common/Input';
-import CardLoading from '../CardLoadingComponents/CardLoading';
+import CardLoadingSpinner from '../CardLoadingComponents/CardLoadingSpinner';
 import { CardContext } from '../../context/CardContext';
 import { useCompletion } from '../../hooks/useCompletion';
 
@@ -22,7 +22,7 @@ const CardAdditionCompletionPage = () => {
   return (
     <CompletionContainer>
       {isLoading ? (
-        <CardLoading />
+        <CardLoadingSpinner />
       ) : (
         <>
           <Title title='카드의 별칭을 입력해주세요' fontSize={24} />
