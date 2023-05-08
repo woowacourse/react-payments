@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { FormEventHandler, useEffect, useRef } from "react";
 
 import Modal from "@chsua/bottom-modal";
 
@@ -19,6 +19,7 @@ import "./cardInputForm.css";
 import { useModalState } from "../../../hook/modalHook";
 import { useCardInfoAndInputState } from "../../../hook/cardInfoAndInputHook";
 import { useLoading } from "../../../hook/spinnerPageHook";
+import { useAutoFocus } from "../../../autoFocus";
 
 interface CardInputFormProps {
   addNewCard: (card: CreditCard) => void;
@@ -35,7 +36,7 @@ const style = {
   },
 };
 
-export default function CardInputForm(props: CardInputFormProps) {
+export default function CardInputForm({ addNewCard }: CardInputFormProps) {
   const { modalOpen, openModal, closeModal } = useModalState();
   const { startLoading } = useLoading();
 
@@ -47,7 +48,6 @@ export default function CardInputForm(props: CardInputFormProps) {
   isFormFilled.current =
     cardNumber && expirationDate && securityCode && password;
 
-  const { addNewCard } = props;
   const submitCardInfo = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -60,7 +60,11 @@ export default function CardInputForm(props: CardInputFormProps) {
   const cardCoList = Object.keys(CARD_CO_NAME) as CardCo[];
 
   return (
-    <form onSubmit={(e) => submitCardInfo(e)} className="form">
+    <form
+      onSubmit={(e) => submitCardInfo(e)}
+      className="form"
+      onChange={useAutoFocus()}
+    >
       <Modal className="modal" isOpen={modalOpen} style={style}>
         {cardCoList.map((cardCo) => (
           <CardCoButton
