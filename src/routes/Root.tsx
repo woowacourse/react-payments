@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import { CardProvider } from '../../context/CardContext';
+import { CardProvider } from '../context/CardContext';
 
 const Root = () => {
   return (
