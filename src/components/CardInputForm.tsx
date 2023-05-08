@@ -27,8 +27,8 @@ import {
   handleExpiredDateKey,
   handleOwnerChanged,
 } from '../domain/CardInput';
-import { useSetValue } from '../usehooks/useSetValue';
-import useMoveFocus from '../usehooks/useMoveFocus';
+import { useSetValue } from '../hooks/useSetValue';
+import useMoveFocus from '../hooks/useMoveFocus';
 
 interface CardInputFormProps {
   card: CardType;
@@ -52,21 +52,21 @@ const CardInputForm = (props: CardInputFormProps) => {
   const handleCardChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
     switch (e.target.id) {
       case CARD_ID_VALUE.CARD_NUMBER:
-        moveFocus(e.target.value.length, INPUT_MAX_LENGTH.cardNumber,  CARD_ID_VALUE.EXPIRED_DATE)
+        moveFocus(e.target.value.length, INPUT_MAX_LENGTH.cardNumber, CARD_ID_VALUE.EXPIRED_DATE);
         setRealCardNumber(realCardNumber + e.target.value[e.target.value.length - 1].trim());
         handleCardNumberChanged(e);
         break;
       case CARD_ID_VALUE.EXPIRED_DATE:
-        moveFocus(e.target.value.length, INPUT_MAX_LENGTH.expiredDate,  CARD_ID_VALUE.OWNER_NAME)
+        moveFocus(e.target.value.length, INPUT_MAX_LENGTH.expiredDate, CARD_ID_VALUE.OWNER_NAME);
         handleExpiredDateChanged(e);
         break;
       case CARD_ID_VALUE.OWNER_NAME:
-        moveFocus(e.target.value.length, INPUT_MAX_LENGTH.ownerName,  CARD_ID_VALUE.CVC)
+        moveFocus(e.target.value.length, INPUT_MAX_LENGTH.ownerName, CARD_ID_VALUE.CVC);
         if (e.target.value.length >= INPUT_MAX_LENGTH.ownerName) refs.cvc.current!.focus();
         handleOwnerChanged(e);
         break;
       case CARD_ID_VALUE.CVC:
-        moveFocus(e.target.value.length, INPUT_MAX_LENGTH.cvc,  CARD_ID_VALUE.PASSWORD_FIRST)
+        moveFocus(e.target.value.length, INPUT_MAX_LENGTH.cvc, CARD_ID_VALUE.PASSWORD_FIRST);
     }
 
     changeValue(e.target.id, e.target.value);
@@ -87,7 +87,7 @@ const CardInputForm = (props: CardInputFormProps) => {
   };
 
   const handlePasswordChanged = (digit: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    moveFocus(e.target.value.length, INPUT_MAX_LENGTH.passwordFirst,  CARD_ID_VALUE.PASSWORD_SECOND)
+    moveFocus(e.target.value.length, INPUT_MAX_LENGTH.passwordFirst, CARD_ID_VALUE.PASSWORD_SECOND);
     const newPassword = [...value.password];
     newPassword[digit] = e.target.value;
     changeValue(e.target.type, newPassword);

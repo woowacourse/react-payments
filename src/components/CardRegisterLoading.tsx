@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import CardSpinner from './CardSpinner';
+import CardLoader from './CardLoader';
 
 const CardRegisterLoading = () => {
   return (
     <CardLoadingWrapper>
-      <CardSpinner />
+      <CardLoader />
       <span>카드를 등록 중입니다.</span>
     </CardLoadingWrapper>
   );

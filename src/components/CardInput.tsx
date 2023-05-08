@@ -15,8 +15,6 @@ interface CardInputProps extends HTMLAttributes<HTMLInputElement> {
 
 const CardInput = forwardRef<HTMLInputElement, CardInputProps>((props, ref) => {
 
-  // console.log(props.inputRef?.current)
-
   return (
     <CardInputWrapper
       id={props.id}

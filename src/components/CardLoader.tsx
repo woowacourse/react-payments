@@ -1,10 +1,10 @@
 import styled, { keyframes } from 'styled-components';
 
-const CardSpinner = () => {
+const CardLoader = () => {
   return (
-    <CardSpinnerBackWrapper>
-      <CardSPinnerWrapper />
-    </CardSpinnerBackWrapper>
+    <CardLoaderBackWrapper>
+      <CardLoaderWrapper />
+    </CardLoaderBackWrapper>
   );
 };
 
@@ -20,7 +20,7 @@ const Rotate = keyframes`
 }
 `;
 
-const CardSpinnerBackWrapper = styled.div`
+const CardLoaderBackWrapper = styled.div`
   background: #d9d9d9;
   border-radius: 10px;
 
@@ -28,7 +28,7 @@ const CardSpinnerBackWrapper = styled.div`
   height: 140px;
 `;
 
-const CardSPinnerWrapper = styled.div`
+const CardLoaderWrapper = styled.div`
   background: #333333;
   border-radius: 10px;
 
@@ -36,4 +36,4 @@ const CardSPinnerWrapper = styled.div`
   height: 140px;
   animation: ${Rotate} 2s linear infinite;
 `;
-export default CardSpinner;
+export default CardLoader;
