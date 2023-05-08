@@ -1,5 +1,5 @@
 import * as Styled from './Card.styles';
-import { CardType } from '../../types/';
+import { CardType } from '../../types/general';
 import CardLabel from '../@common/CardLabel';
 import React from 'react';
 

@@ -1,6 +1,6 @@
 import AddCardButton from '../components/AddCardButton/AddCardButton';
 import Card from '../components/Card/Card';
-import { CardType } from '../types/';
+import { CardType } from '../types/general';
 import Header from '../components/Header/Header';
 import * as Styled from './Home.styles';
 import React from 'react';

@@ -1,5 +1,5 @@
-import { CardNumbersType } from '../types/';
-import { ExpiredDatesType } from '../types/';
+import { CardNumbersType } from '../types/general';
+import { ExpiredDatesType } from '../types/general';
 
 const nowDate = new Date();
 
