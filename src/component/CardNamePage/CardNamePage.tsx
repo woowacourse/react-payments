@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useCallback } from "react";
 import { useNavigate } from "react-router";
 import Style from "./CardNamePageStyled";
 
@@ -29,49 +29,50 @@ function CardNamePage({ lastCard, addCreditCard }: CardNamePageProps) {
     nameInputRef.current?.focus();
   }, []);
 
-  const registerCard = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!isRightCardName(cardName)) return;
+  const registerCard = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      if (!isRightCardName(cardName)) return;
 
-    const newCard: CreditCard = {
-      ...lastCard,
-      cardName,
-    };
+      const newCard: CreditCard = {
+        ...lastCard,
+        cardName,
+      };
 
-    addCreditCard(newCard);
+      addCreditCard(newCard);
 
-    navigate(NAVIGATE.HOME);
-  };
+      navigate(NAVIGATE.ADD_CARD_LOADING);
+    },
+    [cardName]
+  );
 
   return (
-    <>
-      <Style.Page>
-        <Style.TopSection>
-          <Style.Title>카드등록이 완료되었습니다.</Style.Title>
-          <CardDetailView
-            cardNumberHidden={cardNumberHidden}
-            cardDate={cardDate}
-            cardOwnerName={cardOwnerName}
-            cardCompany={cardCompany}
-          />
-        </Style.TopSection>
-        <Style.Form onSubmit={registerCard}>
-          <Style.Input
-            type={TYPE.TEXT}
-            placeholder={PLACE_HOLDER.CARD_NAME_HINT}
-            ref={nameInputRef}
-            onChange={changeCardName}
-          />
-          <Style.SubmitLayout>
-            <InputGuide warningText={warningText} />
-            <Style.SubmitButton
-              type={TYPE.SUBMIT}
-              value={"확인"}
-            ></Style.SubmitButton>
-          </Style.SubmitLayout>
-        </Style.Form>
-      </Style.Page>
-    </>
+    <Style.Page>
+      <Style.TopSection>
+        <Style.Title>카드등록이 완료되었습니다.</Style.Title>
+        <CardDetailView
+          cardNumberHidden={cardNumberHidden}
+          cardDate={cardDate}
+          cardOwnerName={cardOwnerName}
+          cardCompany={cardCompany}
+        />
+      </Style.TopSection>
+      <Style.Form onSubmit={registerCard}>
+        <Style.Input
+          type={TYPE.TEXT}
+          placeholder={PLACE_HOLDER.CARD_NAME_HINT}
+          ref={nameInputRef}
+          onChange={changeCardName}
+        />
+        <Style.SubmitLayout>
+          <InputGuide warningText={warningText} />
+          <Style.SubmitButton
+            type={TYPE.SUBMIT}
+            value={"확인"}
+          ></Style.SubmitButton>
+        </Style.SubmitLayout>
+      </Style.Form>
+    </Style.Page>
   );
 }
 

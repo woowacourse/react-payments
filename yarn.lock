@@ -3151,7 +3151,7 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-18.16.3.tgz#6bda7819aae6ea0b386ebc5b24bdf602f1b42b01"
   integrity sha512-OPs5WnnT1xkCBiuQrZA4+YAV4HEJejmHneyraIaxsbev5yCEr6KMwINNFP9wQeFIw8FWcoTqF3vQsa5CDaI+8Q==
 
-"@types/node@^16.0.0", "@types/node@^16.18.23":
+"@types/node@^16.0.0", "@types/node@^16.18.23", "@types/node@^16.18.25":
   version "16.18.25"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-16.18.25.tgz#8863940fefa1234d3fcac7a4b7a48a6c992d67af"
   integrity sha512-rUDO6s9Q/El1R1I21HG4qw/LstTHCPO/oQNAwI/4b2f9EWvMnqt4d3HJwPMawfZ3UvodB8516Yg+VAq54YM+eA==
@@ -3208,10 +3208,26 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-dom@^18.2.3":
+  version "18.2.3"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-18.2.3.tgz#2fe492bb0e67047b7b43e18166d8f50d44e0525e"
+  integrity sha512-hxXEXWxFJXbY0LMj/T69mznqOZJXNtQMqVxIiirVAZnnpeYiD4zt+lPsgcr/cfWg2VLsxZ1y26vigG03prYB+Q==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react@*", "@types/react@>=16", "@types/react@^18.0.37":
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-18.2.0.tgz#15cda145354accfc09a18d2f2305f9fc099ada21"
   integrity sha512-0FLj93y5USLHdnhIhABk83rm8XEGA7kH3cr+YUlvxoUGp1xNt/DINUMvqPxLyOQMzLmZe8i4RTHbvb8MC7NmrA==
+  dependencies:
+    "@types/prop-types" "*"
+    "@types/scheduler" "*"
+    csstype "^3.0.2"
+
+"@types/react@^18.2.3":
+  version "18.2.3"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.2.3.tgz#509ad6c4c77378e686f9bb6e0f8756936392f0e8"
+  integrity sha512-myU58XyFvSCcF9stRlhYnPbHZu9md7VZNsLukY6D68JHzIHLvqxvutD5luAJLnrUKMswvAgGwdSlEUKKSD+9Fw==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -10390,6 +10406,24 @@ rollup@^2.43.1:
   integrity sha512-uKxbd0IhMZOhjAiD5oAFp7BqvkA4Dv47qpOCtaNvng4HBwdbWtdOh8f5nZNuk2rp51PMGk3bzfWu5oayNEuYnw==
   optionalDependencies:
     fsevents "~2.3.2"
+
+rulu-modal@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/rulu-modal/-/rulu-modal-0.0.3.tgz#b79ae31fb9f5abf7cc12eaa822e1adf885d0cac6"
+  integrity sha512-fMtVZXUAMuEdIF4KBSTWugscENQKe7M6q19BCWCg14yrCq01LBjX7ozT9Pmr2rp0RrgQtFryOvN3jcF0FUbRUw==
+  dependencies:
+    "@testing-library/jest-dom" "^5.16.5"
+    "@testing-library/react" "^13.4.0"
+    "@testing-library/user-event" "^13.5.0"
+    "@types/jest" "^27.5.2"
+    "@types/node" "^16.18.25"
+    "@types/react" "^18.2.3"
+    "@types/react-dom" "^18.2.3"
+    react "^18.2.0"
+    react-dom "^18.2.0"
+    react-scripts "5.0.1"
+    typescript "^4.9.5"
+    web-vitals "^2.1.4"
 
 run-parallel@^1.1.9:
   version "1.2.0"

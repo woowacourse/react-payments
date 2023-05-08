@@ -9,31 +9,25 @@ import { CardCompany } from "../types/card";
 import { DEFAULT_COMPANY } from "../abstract/constants";
 
 const CardDetailContext = createContext({
-  changeCardNumber: (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e);
-  },
+  // eslint-disable-next-line
+  changeCardNumber: (e: React.ChangeEvent<HTMLInputElement>) => {},
   cardNumberHidden: "",
   cardNumberOrigin: "",
-  changeCardDate: (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e);
-  },
+  // eslint-disable-next-line
+  changeCardDate: (e: React.ChangeEvent<HTMLInputElement>) => {},
   cardDate: "",
-  changeCardOwnerName: (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e);
-  },
+  // eslint-disable-next-line
+  changeCardOwnerName: (e: React.ChangeEvent<HTMLInputElement>) => {},
   cardOwnerName: "",
-  changeCardCVC: (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e);
-  },
+  // eslint-disable-next-line
+  changeCardCVC: (e: React.ChangeEvent<HTMLInputElement>) => {},
   cardCVC: "",
-  changeCardPassword: (e: React.FormEvent<HTMLInputElement>) => {
-    console.log(e);
-  },
+  // eslint-disable-next-line
+  changeCardPassword: (e: React.FormEvent<HTMLInputElement>) => {},
   cardPassword: ["", ""] as [string, string],
   cardCompany: DEFAULT_COMPANY as CardCompany,
-  changeCompany: (card: CardCompany) => {
-    console.log(card);
-  },
+  // eslint-disable-next-line
+  changeCompany: (card: CardCompany) => {},
 });
 
 const CardDetailProvider = ({ children }: PropsWithChildren) => {

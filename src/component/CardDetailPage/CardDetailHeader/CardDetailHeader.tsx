@@ -18,4 +18,4 @@ function CardDetailHeader() {
   );
 }
 
-export default CardDetailHeader;
+export default React.memo(CardDetailHeader);

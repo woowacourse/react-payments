@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 
 function useCardName() {
   const [cardName, setCardName] = useState("");
 
-  const changeCardName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const cardName = e.target.value;
-    setCardName(cardName);
-  };
+  const changeCardName = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const cardName = e.target.value;
+      setCardName(cardName);
+    },
+    []
+  );
 
   return { cardName, changeCardName };
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { toOnlyNumber, toHiddenNumber } from "../util/replace";
 import { LENGTH, STRING } from "../abstract/constants";
 
@@ -6,24 +6,27 @@ function useCardNumber() {
   const [cardNumberOrigin, setCardNumberOrigin] = useState("");
   const [cardNumberHidden, setCardNumberHidden] = useState("");
 
-  const changeCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const cardNumber = toHiddenNumber(e.target.value).slice(
-      LENGTH.ZERO,
-      LENGTH.CARD
-    );
-    const realNumber = toOnlyNumber(cardNumber);
+  const changeCardNumber = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const cardNumber = toHiddenNumber(e.target.value).slice(
+        LENGTH.ZERO,
+        LENGTH.CARD
+      );
+      const realNumber = toOnlyNumber(cardNumber);
 
-    const hiddenNumber = changeHidden(realNumber, cardNumber.length);
-    setCardNumberHidden(hiddenNumber);
+      const hiddenNumber = changeHidden(realNumber, cardNumber.length);
+      setCardNumberHidden(hiddenNumber);
 
-    if (cardNumberOrigin.length < cardNumber.length) {
-      setCardNumberOrigin(cardNumberOrigin + cardNumber.slice(-1));
-    }
+      if (cardNumberOrigin.length < cardNumber.length) {
+        setCardNumberOrigin(cardNumberOrigin + cardNumber.slice(-1));
+      }
 
-    if (cardNumberOrigin.length > cardNumber.length) {
-      setCardNumberOrigin(deleteNumber(realNumber));
-    }
-  };
+      if (cardNumberOrigin.length > cardNumber.length) {
+        setCardNumberOrigin(deleteNumber(realNumber));
+      }
+    },
+    [cardNumberOrigin]
+  );
 
   const deleteNumber = (realNumber: string) => {
     if (cardNumberOrigin.length <= LENGTH.CARD_BOUNDARY) return realNumber;

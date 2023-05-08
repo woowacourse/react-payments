@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useCallback, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Style from "./CardDetailFormStyled";
 
@@ -12,15 +12,14 @@ import InputGuide from "../../common/InputGuide/InputGuide";
 import useWarningText from "../../../hooks/useWarningText";
 import { TYPE, NAVIGATE } from "../../../abstract/constants";
 import { CardDetailContext } from "../../../context/CardDetailContext";
-import CardDetailView from "../../CardDetailView/CardDetailView";
 import { Card } from "../../../types/card";
+import CardModal from "../../CardModal/CardModal";
 
 interface CardDetailFormProps {
   setLastCard: (card: Card) => void;
-  openModal: () => void;
 }
 
-function CardDetailForm({ setLastCard, openModal }: CardDetailFormProps) {
+function CardDetailForm({ setLastCard }: CardDetailFormProps) {
   const navigate = useNavigate();
   const { warningText, isWrongForm } = useWarningText();
   const {
@@ -33,7 +32,7 @@ function CardDetailForm({ setLastCard, openModal }: CardDetailFormProps) {
     cardCompany,
   } = useContext(CardDetailContext);
 
-  const submitCreditCard = () => {
+  const submitCreditCard = useCallback(() => {
     const newCard: Card = {
       cardNumberOrigin,
       cardNumberHidden,
@@ -47,7 +46,15 @@ function CardDetailForm({ setLastCard, openModal }: CardDetailFormProps) {
     setLastCard(newCard);
 
     navigate(NAVIGATE.ADD_CARD_NAME);
-  };
+  }, [
+    cardNumberOrigin,
+    cardNumberHidden,
+    cardDate,
+    cardOwnerName,
+    cardCVC,
+    cardPassword,
+    cardCompany,
+  ]);
 
   const handelChange = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -67,13 +74,8 @@ function CardDetailForm({ setLastCard, openModal }: CardDetailFormProps) {
 
   return (
     <>
-      <Style.CardViewSection onClick={openModal}>
-        <CardDetailView
-          cardNumberHidden={cardNumberHidden}
-          cardDate={cardDate}
-          cardOwnerName={cardOwnerName}
-          cardCompany={cardCompany}
-        />
+      <Style.CardViewSection>
+        <CardModal />
       </Style.CardViewSection>
       <Style.Form onSubmit={handelChange}>
         <CardNumberInput />

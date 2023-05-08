@@ -2,7 +2,7 @@ name: NodeJS with Webpack
 
 on:
   push:
-    branches: [step2]
+    branches: [step3]
 
 jobs:
   deploy:
@@ -19,10 +19,10 @@ jobs:
           node-version: 18
 
       - run: |
-          npm ci
-          npm run build
+          yarn install --immutable --immutable-cache --check-cache
+          yarn run build
       - uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
-          publish_branch: step2-pg
+          publish_branch: step3-pg

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { FirstPassword, SecondPassword } from "../types/card";
 import { toHiddenNumber, toOnlyNumber } from "../util/replace";
 import { LENGTH, WARNING_TEXT } from "../abstract/constants";
@@ -6,7 +6,7 @@ import { LENGTH, WARNING_TEXT } from "../abstract/constants";
 function useWarningText(minLength?: number, name?: string) {
   const [warningText, setWarningText] = useState("");
 
-  const checkNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const checkNumber = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const inputNumber = e.target.value;
     const lastNumber = inputNumber.slice(-1);
     setWarningText("");
@@ -18,22 +18,25 @@ function useWarningText(minLength?: number, name?: string) {
     if (name === "date") {
       checkRightMonth(inputNumber);
     }
-  };
+  }, []);
 
-  const checkRightLength = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setWarningText("");
-    let inputNumber = e.target.value;
+  const checkRightLength = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setWarningText("");
+      let inputNumber = e.target.value;
 
-    if (name === "date") {
-      checkDateInput(inputNumber);
-      return;
-    }
-    if (name === "cardNumber") inputNumber = toHiddenNumber(inputNumber);
+      if (name === "date") {
+        checkDateInput(inputNumber);
+        return;
+      }
+      if (name === "cardNumber") inputNumber = toHiddenNumber(inputNumber);
 
-    if (minLength ? inputNumber.length < minLength : LENGTH.ZERO) {
-      setWarningText(`입력 숫자는 ${minLength}자 이어야 합니다`);
-    }
-  };
+      if (minLength ? inputNumber.length < minLength : LENGTH.ZERO) {
+        setWarningText(`입력 숫자는 ${minLength}자 이어야 합니다`);
+      }
+    },
+    []
+  );
 
   const checkDateInput = (inputNumber: string) => {
     const date = toOnlyNumber(inputNumber);
@@ -47,37 +50,44 @@ function useWarningText(minLength?: number, name?: string) {
 
     if (parseInt(month) > 12 || month == "00") {
       setWarningText(WARNING_TEXT.WRONG_MONTH);
+      return false;
     }
+    return true;
   };
 
-  const isWrongForm = (
-    cardNumberHidden: string,
-    cardDate: string,
-    cardCVC: string,
-    cardPassword: [FirstPassword, SecondPassword]
-  ) => {
-    let isError = false;
-    if (toHiddenNumber(cardNumberHidden).length !== LENGTH.CARD) isError = true;
-    if (toOnlyNumber(cardDate).length !== LENGTH.DATE) isError = true;
-    if (cardCVC.length !== LENGTH.CVC) isError = true;
-    if (
-      cardPassword[0].length !== LENGTH.PASSWORD ||
-      cardPassword[1].length !== LENGTH.PASSWORD
-    )
-      isError = true;
+  const isWrongForm = useCallback(
+    (
+      cardNumberHidden: string,
+      cardDate: string,
+      cardCVC: string,
+      cardPassword: [FirstPassword, SecondPassword]
+    ) => {
+      let isError = false;
+      if (toHiddenNumber(cardNumberHidden).length !== LENGTH.CARD)
+        isError = true;
+      if (toOnlyNumber(cardDate).length !== LENGTH.DATE) isError = true;
+      if (cardCVC.length !== LENGTH.CVC) isError = true;
+      if (
+        cardPassword[0].length !== LENGTH.PASSWORD ||
+        cardPassword[1].length !== LENGTH.PASSWORD
+      )
+        isError = true;
+      if (!checkRightMonth(cardDate)) isError = true;
 
-    if (isError) setWarningText(WARNING_TEXT.NO_COMPLETED_FORM);
+      if (isError) setWarningText(WARNING_TEXT.NO_COMPLETED_FORM);
 
-    return isError;
-  };
+      return isError;
+    },
+    []
+  );
 
-  const isRightCardName = (cardName: string) => {
+  const isRightCardName = useCallback((cardName: string) => {
     if (cardName.length === 0) {
       setWarningText("카드 별명을 입력해주세요");
       return false;
     }
     return true;
-  };
+  }, []);
 
   return {
     warningText,

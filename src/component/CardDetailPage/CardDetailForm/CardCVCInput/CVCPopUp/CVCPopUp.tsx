@@ -21,4 +21,4 @@ function CVCPopUp({ closePopup }: CVCPopUpProps) {
   );
 }
 
-export default CVCPopUp;
+export default React.memo(CVCPopUp);

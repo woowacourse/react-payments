@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { FirstPassword, SecondPassword } from "../types/card";
-import { ID, LENGTH } from "../abstract/constants";
+import { CARD_PASSWORD, LENGTH } from "../abstract/constants";
 import { toOnlyNumber } from "../util/replace";
 
 function useCardPassword() {
@@ -8,18 +8,24 @@ function useCardPassword() {
     [FirstPassword, SecondPassword]
   >(["", ""]);
 
-  const changeCardPassword = (e: React.FormEvent<HTMLInputElement>) => {
-    const password = toOnlyNumber(e.currentTarget.value).slice(LENGTH.ZERO, 1);
-    const inputID = e.currentTarget.id;
+  const changeCardPassword = useCallback(
+    (e: React.FormEvent<HTMLInputElement>) => {
+      const password = toOnlyNumber(e.currentTarget.value).slice(
+        LENGTH.ZERO,
+        1
+      );
+      const PasswordSection = e.currentTarget.dataset.password;
 
-    if (inputID === ID.FIRST) {
-      setCardPassword([password, cardPassword[1]]);
-    }
+      if (PasswordSection === CARD_PASSWORD.FIRST) {
+        setCardPassword((cardPassword) => [password, cardPassword[1]]);
+      }
 
-    if (inputID === ID.SECOND) {
-      setCardPassword([cardPassword[0], password]);
-    }
-  };
+      if (PasswordSection === CARD_PASSWORD.SECOND) {
+        setCardPassword((cardPassword) => [cardPassword[0], password]);
+      }
+    },
+    []
+  );
 
   return { cardPassword, changeCardPassword };
 }
