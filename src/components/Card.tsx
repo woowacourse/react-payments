@@ -57,7 +57,7 @@ const CardWrapper = styled.div`
   box-sizing: border-box;
 
   border-radius: 5px;
-  box-shadow: 0 3px 3px -3px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 8px 8px -3px rgba(0, 0, 0, 0.25);
 
   background: ${(props) => props.theme.main};
   color: ${(props) => props.theme.point};
@@ -66,6 +66,13 @@ const CardWrapper = styled.div`
     font-weight: 500;
     font-size: 12px;
     margin-bottom: 17px;
+  }
+
+  :hover {
+    cursor: pointer;
+    box-shadow: 0 16px 16px -3px rgba(0, 0, 0, 0.25);
+    margin: 0 12px 12px 0;
+    transition: all 0.3s ease;
   }
 `;
 
