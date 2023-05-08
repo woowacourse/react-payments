@@ -5,8 +5,10 @@ import RegisterCard from 'pages/RegisterCard';
 import NotFound from 'pages/NotFound';
 import RegisterCardName from 'pages/RegisterCardName';
 import { CardInfoProvider } from 'context/CardInfoContext';
+import CardDB from 'db/Cards';
 
 function App() {
+  CardDB.setInitialData();
   return (
     <>
       <CardInfoProvider>
