@@ -45,6 +45,7 @@ const AddCard = ({ cards, setCards }: CardList) => {
 
   const handleSetCards = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     if (isDisabledForm) {
       setErrorMessage(
         '잘못된 정보입니다. 선택한 카드사 및 카드 정보를 다시 확인해주세요.'

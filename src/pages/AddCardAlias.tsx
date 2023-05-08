@@ -2,29 +2,22 @@ import CardLabel from '../components/@common/CardLabel';
 import Card from '../components/Card/Card';
 import * as Styled from './AddCardAlias.styles';
 import CardAliasInput from '../components/@common/CardAliasInput';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import SubmitButton from '../components/@common/SubmitButton';
 import { useNavigate } from 'react-router-dom';
 import CardList from '../types/CardList';
-import { REG_EXP } from '../constants/regexp';
 import AddCardLoadingSpinner from '../components/AddCardLoadingSpinner/AddCardLoadingSpinner';
 import { Link } from 'react-router-dom';
+import useAddCardAlias from '../hooks/useAddCardAlias';
 
 const AddCardAlias = ({ cards, setCards }: CardList) => {
-  const [cardAlias, setCardAlias] = useState<string>('');
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const { cardAlias, isLoading, validateAlias } = useAddCardAlias();
   const navigate = useNavigate();
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!(e.target instanceof HTMLInputElement)) return;
 
     validateAlias(e.target.value);
-  };
-
-  const validateAlias = (alias: string) => {
-    if (REG_EXP.cardAliasForm.test(alias)) return;
-
-    setCardAlias(alias);
   };
 
   const handleSetAlias = () => {
@@ -38,23 +31,21 @@ const AddCardAlias = ({ cards, setCards }: CardList) => {
     navigate('/');
   };
 
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-  });
+  if (cards.length === 0) {
+    return (
+      <Styled.Wrapper>
+        <Styled.NoCardTitle>등록한 카드가 없어요. 😥</Styled.NoCardTitle>
+        <Styled.NoCardText>
+          아래의 링크를 눌러 카드를 먼저 등록해주세요.
+        </Styled.NoCardText>
+        <Link to={'/add-card'}>카드 등록하러 가기</Link>
+      </Styled.Wrapper>
+    );
+  }
 
   return (
     <Styled.PageWrapper>
-      {cards.length === 0 ? (
-        <Styled.Wrapper>
-          <Styled.NoCardTitle>등록한 카드가 없어요. 😥</Styled.NoCardTitle>
-          <Styled.NoCardText>
-            아래의 링크를 눌러 카드를 먼저 등록해주세요.
-          </Styled.NoCardText>
-          <Link to={'/add-card'}>카드 등록하러 가기</Link>
-        </Styled.Wrapper>
-      ) : isLoading ? (
+      {isLoading ? (
         <AddCardLoadingSpinner />
       ) : (
         <form onSubmit={handleSetAlias}>
