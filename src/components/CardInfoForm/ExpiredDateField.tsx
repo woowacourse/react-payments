@@ -4,6 +4,7 @@ import type { CardFormFieldProps } from './types';
 
 import { EXPIRED_DATE_MESSAGE } from './constants/message';
 import { EXPIRED_DATE_PATTERN } from './constants/pattern';
+import { EXPIRED_DATE_FIELDS } from './constants/fieldName';
 import useCardInfoForm from './hooks/useCardInfoForm';
 import useFieldFilled from './hooks/useFieldFilled';
 import useCardFormValue from '../../hooks/useCardFormValue';
@@ -26,39 +27,29 @@ const ExpiredDateField = ({ inputRefs }: CardFormFieldProps) => {
         color: 'error',
       }}
     >
-      <Input
-        type="text"
-        name="expiredDate"
-        inputMode="numeric"
-        minLength={2}
-        maxLength={2}
-        required
-        placeholder="MM"
-        value={expiredDate.month}
-        onChange={handleNumberChange}
-        onBlur={handleDateInputBlur}
-        ref={inputRefs[0]}
-        align="center"
-        data-property="month"
-        pattern={EXPIRED_DATE_PATTERN.month}
-      />
-      <span>/</span>
-      <Input
-        type="text"
-        name="expiredDate"
-        inputMode="numeric"
-        minLength={2}
-        maxLength={2}
-        required
-        placeholder="YY"
-        value={expiredDate.year}
-        onChange={handleNumberChange}
-        onBlur={handleDateInputBlur}
-        ref={inputRefs[1]}
-        align="center"
-        data-property="year"
-        pattern={EXPIRED_DATE_PATTERN.year}
-      />
+      {EXPIRED_DATE_FIELDS.map((field, index) =>
+        field !== 'slash' ? (
+          <Input
+            key={`expired-date-${field}`}
+            type="text"
+            name="expiredDate"
+            inputMode="numeric"
+            minLength={2}
+            maxLength={2}
+            required
+            placeholder={EXPIRED_DATE_MESSAGE.placeholder[field]}
+            value={expiredDate[field]}
+            onChange={handleNumberChange}
+            onBlur={handleDateInputBlur}
+            ref={inputRefs[index / 2]}
+            align="center"
+            data-property={field}
+            pattern={EXPIRED_DATE_PATTERN[field]}
+          />
+        ) : (
+          <span key={`expired-date-slash-${index}`}>/</span>
+        ),
+      )}
     </TextField>
   );
 };

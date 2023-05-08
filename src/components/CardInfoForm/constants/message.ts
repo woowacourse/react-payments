@@ -4,6 +4,11 @@ export const CARD_NUMBER_MESSAGE = {
   placeholder: '0000',
 } as const;
 
+const EXPIRED_DATE_PLACEHOLDER = {
+  month: 'MM',
+  year: 'YY',
+} as const;
+
 const EXPIRED_DATE_HELPER = {
   init: '만료일을 MM/YY 형식으로 입력해 주세요. (ex. 12/26)',
   month: '유효한 달을 입력해 주세요. (01-12 사이 숫자)',
@@ -16,6 +21,7 @@ export type ExpiredDateHelper =
 export const EXPIRED_DATE_MESSAGE = {
   label: '만료일',
   helper: EXPIRED_DATE_HELPER,
+  placeholder: EXPIRED_DATE_PLACEHOLDER,
 } as const;
 
 export const CARD_OWNER_MESSAGE = {

@@ -6,6 +6,7 @@ import useCardInfoForm from './hooks/useCardInfoForm';
 import useFieldFilled from './hooks/useFieldFilled';
 import useCardFormValue from '../../hooks/useCardFormValue';
 import { PASSWORD_MESSAGE } from './constants/message';
+import { PASSWORD_FIELDS } from './constants/fieldName';
 
 const PasswordField = ({ inputRefs }: CardFormFieldProps) => {
   const { password } = useCardFormValue();
@@ -23,34 +24,26 @@ const PasswordField = ({ inputRefs }: CardFormFieldProps) => {
         color: 'error',
       }}
     >
-      <Input
-        type="password"
-        name="password"
-        inputMode="numeric"
-        minLength={1}
-        maxLength={1}
-        required
-        value={password.first}
-        onChange={handleNumberChange}
-        ref={inputRefs[0]}
-        align="center"
-        data-property="first"
-      />
-      <Input
-        type="password"
-        name="password"
-        inputMode="numeric"
-        minLength={1}
-        maxLength={1}
-        required
-        value={password.second}
-        onChange={handleNumberChange}
-        ref={inputRefs[1]}
-        align="center"
-        data-property="second"
-      />
-      <p>﹡</p>
-      <p>﹡</p>
+      {PASSWORD_FIELDS.map((field, index) =>
+        field !== 'secret' ? (
+          <Input
+            key={`password-${field}`}
+            type="password"
+            name="password"
+            inputMode="numeric"
+            minLength={1}
+            maxLength={1}
+            required
+            value={password[field]}
+            onChange={handleNumberChange}
+            ref={inputRefs[index]}
+            align="center"
+            data-property={field}
+          />
+        ) : (
+          <p key={`password-secret-${index}`}>﹡</p>
+        ),
+      )}
     </TextField>
   );
 };
