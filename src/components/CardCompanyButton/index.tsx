@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import {
   BCCardLogo,
   HanaCardLogo,
@@ -24,7 +25,7 @@ const CARD_COMPANY_LOGO = {
   롯데카드: <LotteCardLogo />,
   하나카드: <HanaCardLogo />,
   국민카드: <KBCardLogo />,
-} as const;
+} as const satisfies Record<CardCompany, ReactNode>;
 
 interface Props {
   cardCompany: CardCompany;
