@@ -13,7 +13,7 @@ export function Loading() {
 const _Wrapper = styled.div`
   padding: 10px;
   background-color: #fff;
-  width: 20rem;
+  width: 30rem;
 `;
 
 const _Animation = keyframes`
@@ -35,7 +35,7 @@ const _Background = styled.div`
   background-color: #f6f7f8;
   background: linear-gradient(to right, #eeeeee 8%, #bbbbbb 18%, #eeeeee 33%);
   background-size: 800px 104px;
-  height: 11rem;
+  height: 16rem;
   position: relative;
 `;
 

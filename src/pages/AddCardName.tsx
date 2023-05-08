@@ -51,7 +51,8 @@ export function AddCardName() {
     return (
       <_AddCardNameContainer>
         <_Section>
-          <Loading /> <_Direction>카드 등록중입니다.</_Direction>
+          <Loading />
+          <_Direction>카드 등록중입니다.</_Direction>
         </_Section>
       </_AddCardNameContainer>
     );
@@ -102,7 +103,7 @@ const _AddCardNameContainer = styled.section`
   display: flex;
   flex-direction: column;
 
-  margin: 2rem;
+  margin: 5.5rem;
 `;
 
 const _Section = styled.section`
