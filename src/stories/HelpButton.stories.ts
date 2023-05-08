@@ -4,6 +4,7 @@ import HelpButton from '../components/HelpButton/HelpButton';
 const meta = {
   component: HelpButton,
   title: 'HelpButton',
+  tags: ['autodocs'],
 } satisfies Meta<typeof HelpButton>;
 
 type Story = StoryObj<typeof meta>;

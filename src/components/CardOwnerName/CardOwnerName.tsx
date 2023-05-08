@@ -4,7 +4,7 @@ import { useCardStore } from '../../hook/useCardState';
 
 const CardOwnerName = () => {
   const { get, setCardOwnerName } = useCardStore();
-  const cardOwnerName = get().cardOwnerName;
+  const { cardOwnerName } = get();
 
   const checkCardOwnerNameLength = (e: React.ChangeEvent<HTMLInputElement>) => {
     const currentCardOwnerName = e.target.value;

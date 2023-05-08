@@ -1,0 +1,50 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 370px;
+  height: 750px;
+  background-color: var(--white-color);
+  border-radius: 10px;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  box-shadow: inset 2px 2px 15px var(--grey-300), inset -1px -1px 2px var(--grey-200);
+}
+
+.wrapper::before {
+  content: '';
+  position: absolute;
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  box-shadow: -1px -1px 5px var(--grey-200), 2px 5px 5px var(--grey-300);
+}
+
+.wrapper span {
+  position: absolute;
+  height: 145px;
+  width: 145px;
+  animation: rotate 4s linear infinite;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.wrapper span::before {
+  content: '';
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  background-color: var(--grey-300);
+  border-radius: 50%;
+}

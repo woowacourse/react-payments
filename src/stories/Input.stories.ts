@@ -4,6 +4,7 @@ import Input from '../components/Input/Input';
 const meta = {
   component: Input,
   title: 'Input',
+  tags: ['autodocs'],
 } satisfies Meta<typeof Input>;
 
 type Story = StoryObj<typeof meta>;

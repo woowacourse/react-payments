@@ -5,30 +5,37 @@ import Button from '../../components/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import { CardInfo } from '../../types';
 import { useCardStore } from '../../hook/useCardState';
+import { useEffect, useState } from 'react';
+import Spinner from '../../components/Spinner/Spinner';
 
 type CardRegistrationConfirmationProps = {
   registerNewCard: (cardInfo: CardInfo) => void;
 };
 
 const CardRegistrationConfirmation = ({ registerNewCard }: CardRegistrationConfirmationProps) => {
+  const [showComponent, setShowComponent] = useState(true);
   const navigate = useNavigate();
-  const { get } = useCardStore();
-  const cardNumber = get().cardNumber;
-  const cardOwnerName = get().cardOwnerName;
-  const expirationDate = get().expirationDate;
-  const selectedCard = get().selectedCard;
-  const cardNickName = get().cardNickName;
+  const { get, resetState } = useCardStore();
+  const { cardNumber, cardOwnerName, expirationDate, selectedCard } = get();
 
-  const handleCardInfo = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const cardInfo: CardInfo = {
-      cardNumber: cardNumber,
-      expirationDate: expirationDate,
-      cardOwnerName: cardOwnerName,
-      selectedCard: selectedCard,
-      cardNickName: cardNickName,
-    };
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setShowComponent(false);
+    }, 3000);
+
+    return () => clearTimeout(timeoutId);
+  }, []);
+
+  if (showComponent) {
+    return <Spinner />;
+  }
+
+  const handleCardInfo = () => {
+    const cardInfo: CardInfo = { ...get() };
 
     registerNewCard(cardInfo);
+
+    resetState();
 
     navigate('/');
   };

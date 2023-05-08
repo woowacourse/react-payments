@@ -7,10 +7,7 @@ import { useCardStore } from '../../hook/useCardState';
 
 const CardRegistration = () => {
   const { get } = useCardStore();
-  const cardNumber = get().cardNumber;
-  const expirationDate = get().expirationDate;
-  const cardOwnerName = get().cardOwnerName;
-  const selectedCard = get().selectedCard;
+  const { cardNumber, expirationDate, cardOwnerName, selectedCard } = get();
   const [isModalOpen, setIsModalOpen] = useState(true);
 
   const handleOpenModal = useCallback(() => {

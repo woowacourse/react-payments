@@ -1,4 +1,4 @@
-import { useContext, useMemo } from 'react';
+import { useContext, useMemo, useCallback } from 'react';
 import { CardDispatchContext, CardStateContext } from '../context/CardContext';
 
 export const useCardState = () => {
@@ -21,6 +21,10 @@ export const useCardStore = () => {
   const state = useCardState();
   const dispatch = useCardDispatch();
 
+  const resetState = useCallback(() => {
+    dispatch({ type: 'RESET_CARD_STATE' });
+  }, [dispatch]);
+
   return useMemo(
     () => ({
       get: () => {
@@ -35,7 +39,8 @@ export const useCardStore = () => {
       setSecondDigit: (secondDigit: string) => dispatch({ type: 'SET_SECOND_DIGIT', parameter: secondDigit }),
       setSelectedCard: (selectedCard: string) => dispatch({ type: 'SET_SELECTED_CARD', parameter: selectedCard }),
       setCardNickName: (cardNickName: string) => dispatch({ type: 'SET_CARD_NICK_NAME', parameter: cardNickName }),
+      resetState,
     }),
-    [state, dispatch]
+    [state, dispatch, resetState]
   );
 };

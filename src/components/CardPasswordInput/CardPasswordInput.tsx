@@ -1,4 +1,4 @@
-import { useState, useRef, ChangeEvent } from 'react';
+import { useState, useRef } from 'react';
 import CardInfoInput from '../CardInfoInput/CardInfoInput';
 import Input from '../Input/Input';
 import { NUMBER_REGEX } from '../../constant/regex';
@@ -7,8 +7,7 @@ import { useCardStore } from '../../hook/useCardState';
 
 const CardPasswordInput = () => {
   const { get, setFirstDigit, setSecondDigit } = useCardStore();
-  const firstDigit = get().firstDigit;
-  const secondDigit = get().secondDigit;
+  const { firstDigit, secondDigit } = get();
   const secondDigitRef = useRef<HTMLInputElement>(null);
   const [error, setError] = useState('');
 
@@ -32,7 +31,7 @@ const CardPasswordInput = () => {
           width="15%"
           value={firstDigit}
           maxLength={1}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => updateDigit(1, e)}
+          onChange={e => updateDigit(1, e)}
           required
         />
         <Input
@@ -40,7 +39,7 @@ const CardPasswordInput = () => {
           width="15%"
           value={secondDigit}
           maxLength={1}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => updateDigit(2, e)}
+          onChange={e => updateDigit(2, e)}
           ref={secondDigitRef}
           required
         />
