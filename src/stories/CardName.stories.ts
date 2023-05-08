@@ -5,6 +5,7 @@ import CardNameInput from '../components/CardNameInput';
 const meta = {
   title: 'CardInput',
   component: CardNameInput,
+  tags: ['autodocs'],
 };
 
 export default meta;

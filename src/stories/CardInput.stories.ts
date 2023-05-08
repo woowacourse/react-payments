@@ -5,6 +5,7 @@ import CardInput from '../components/CardInput';
 const meta = {
   title: 'CardInput',
   component: CardInput,
+  tags: ['autodocs'],
   argTypes: {
     isSecured: {
       control: { type: 'boolean' },

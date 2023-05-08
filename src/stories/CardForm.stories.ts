@@ -5,17 +5,18 @@ import CardInputForm from '../components/CardInputForm';
 const meta = {
   title: 'CardInputForm',
   component: CardInputForm,
+  tags: ['autodocs'],
 };
   
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 const cardSuccess = {
-  cardNumber: '1232 - 2323 - 5455 - 6748',
-  expiredDate: '12 / 24',
-  ownerName: 'PATRICK',
-  cvc: '345',
-  password: ['1', '9'],
+  cardNumber: '',
+  expiredDate: '',
+  ownerName: '',
+  cvc: '',
+  password: ['', ''],
   color: 'black',
   bankName: '패트릭카드',
 };

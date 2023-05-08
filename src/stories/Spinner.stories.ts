@@ -4,6 +4,7 @@ import CardSpinner from '../components/CardSpinner';
 const meta = {
   title: 'CardSpinner',
   component: CardSpinner,
+  tags: ['autodocs'],
 };
 
 export default meta;

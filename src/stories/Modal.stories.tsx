@@ -5,6 +5,7 @@ import Button from '../components/common/Button';
 const meta: Meta<typeof ModalPortal> = {
   title: 'Modal',
   component: ModalPortal,
+  tags: ['autodocs'],
   decorators: [
     Story => (
       <ModalContextProvider>

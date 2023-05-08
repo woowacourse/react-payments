@@ -5,6 +5,7 @@ import { BcBank, ShinhanBank, KakaoBank, HyundaeBank, WooriBank, LotteBank, Hana
 const meta = {
   title: 'Bank',
   component: Bank,
+  tags: ['autodocs'],
 };
 
 export default meta;
