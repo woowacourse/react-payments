@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ROUTER_PATH } from "../router/path";
+import { ROUTER_PATH } from "../provider/router/path";
 import { useNavigate } from "react-router-dom";
 import { Button, Card, CardLoading, Page } from "../components";
 import { getLocalStorage, setLocalStorage } from "../utils";

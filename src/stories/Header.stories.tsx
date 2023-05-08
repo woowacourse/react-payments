@@ -1,6 +1,6 @@
 import { StoryFn, Meta } from "@storybook/react";
 import Header, { HeaderType } from "../components/common/Header";
-import { ROUTER_PATH } from "../router/path";
+import { ROUTER_PATH } from "../provider/router/path";
 
 export default {
   title: "Header",

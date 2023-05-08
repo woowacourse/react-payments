@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import styled from "styled-components";
 import { CARD_COMPANY } from "../constants";
-import { ModalDispatchContext } from "../context";
+import { ModalDispatchContext } from "../provider/context/modal";
 import { CardType } from "../types";
 
 interface CardCompanyType {

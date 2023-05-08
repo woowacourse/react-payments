@@ -1,7 +1,10 @@
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { ModalDispatchContext, ModalStateContext } from "../context";
-import { ROUTER_PATH } from "../router/path";
+import {
+  ModalDispatchContext,
+  ModalStateContext,
+} from "../provider/context/modal";
+import { ROUTER_PATH } from "../provider/router/path";
 import { getLocalStorage, setLocalStorage } from "../utils";
 import { Page, Header, Card, CardInputForm, CardCompany } from "../components";
 import { useCard } from "../hooks";

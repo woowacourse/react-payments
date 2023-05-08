@@ -1,9 +1,9 @@
 import { useContext, useMemo } from "react";
-import styled, { ThemeProvider } from "styled-components";
+import styled from "styled-components";
 import { IcChip } from "../assets";
 import { CARD_COMPANY, CARD_COMPANY_NOT_SELECTED_STRING } from "../constants";
-import { ModalDispatchContext } from "../context";
-import { cardCompanyTheme } from "../style/theme";
+import { ModalDispatchContext } from "../provider/context/modal";
+import { CardThemeProvider } from "../provider/theme/card";
 import { CardType } from "../types";
 import { getCardNumberArray } from "../utils/card";
 
@@ -20,7 +20,7 @@ const Card = ({
   const { toggleModal } = useContext(ModalDispatchContext);
 
   return (
-    <ThemeProvider theme={cardCompanyTheme[cardCompany]}>
+    <CardThemeProvider cardCompany={cardCompany}>
       <CardWrapper onClick={toggleModal}>
         <p>{cardCompany}</p>
         <img src={IcChip} alt="ic-chip" />
@@ -41,7 +41,7 @@ const Card = ({
           )}
         </CompanyLogoWrapper>
       </CardWrapper>
-    </ThemeProvider>
+    </CardThemeProvider>
   );
 };
 

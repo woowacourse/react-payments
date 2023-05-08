@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { getLocalStorage } from "../utils/localStorage";
-import { ROUTER_PATH } from "../router/path";
+import { ROUTER_PATH } from "../provider/router/path";
 import { Page, Header, Card } from "../components";
 
 const MyCard = () => {
