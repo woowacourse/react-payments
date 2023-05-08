@@ -9,7 +9,7 @@ import { PATH } from '../../constants';
 
 const initialValue: CardFormData = {
   issuer: '',
-  cardNumber: '',
+  cardNumber: ['', '', '', ''],
   expirationDate: {
     month: '',
     year: '',

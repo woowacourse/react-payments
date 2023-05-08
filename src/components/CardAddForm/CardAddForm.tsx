@@ -36,6 +36,7 @@ const CardAddForm = ({
         updateInputError={updateInputError}
       />
       <CardNumber
+        value={cardInformation.cardNumber}
         isError={cardInputError.cardNumber}
         updateInputValue={updateInputValue}
         updateInputError={updateInputError}

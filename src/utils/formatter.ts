@@ -1,10 +1,5 @@
-import { DATE_DIVIDER, REGEX, SECURITY_TEXT_ICON } from '../constants';
-import {
-  CARD_NUMBER_INPUT_MAX_LENGTH,
-  CARD_NUMBER_INPUT_MAX_VISIBLE_LENGTH,
-  EXPIRATION_DATE_INPUT_MAX_LENGTH,
-  EXPIRATION_DATE_UNIT_LENGTH,
-} from '../constants/input';
+import { DATE_DIVIDER, REGEX } from '../constants';
+import { EXPIRATION_DATE_INPUT_MAX_LENGTH, EXPIRATION_DATE_UNIT_LENGTH } from '../constants/input';
 
 const formatNumber = (input: string) => {
   return input.replace(REGEX.NON_NUMBER, '');
@@ -24,23 +19,6 @@ const formatExpirationDate = (input: string) => {
   return { month, year };
 };
 
-const formatDisplayedCardNumber = (input: string) => {
-  return input
-    .replace(REGEX.NON_NUMBER, '')
-    .replace(REGEX.FOUR_NUMBER_SEQUENCE, '$1 ')
-    .slice(0, CARD_NUMBER_INPUT_MAX_LENGTH)
-    .trim();
-};
-
-const encryptDisplayedCardNumber = (input: string) => {
-  return input.length > CARD_NUMBER_INPUT_MAX_VISIBLE_LENGTH
-    ? input.slice(0, CARD_NUMBER_INPUT_MAX_VISIBLE_LENGTH) +
-        input
-          .slice(CARD_NUMBER_INPUT_MAX_VISIBLE_LENGTH)
-          .replace(REGEX.NON_WHITESPACE_CHAR, SECURITY_TEXT_ICON)
-    : input;
-};
-
 const formatDisplayedExpirationDate = (input: string) => {
   const value = input.replace(REGEX.NON_NUMBER, '');
   const formattedValue =
@@ -55,6 +33,4 @@ export {
   formatEnglishCapitalization,
   formatExpirationDate,
   formatDisplayedExpirationDate,
-  formatDisplayedCardNumber,
-  encryptDisplayedCardNumber,
 };
