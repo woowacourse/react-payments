@@ -1,6 +1,6 @@
 import cardIcons from '../../images/cardIcon/cardIconImages';
 import CardCompany from '../CardCompany/CardCompany';
-import { Modal } from 'react-payments-modal-release';
+import Modal from 'react-payments-modal-release';
 
 type CardCompanyModalProps = {
   onClose: () => void;
