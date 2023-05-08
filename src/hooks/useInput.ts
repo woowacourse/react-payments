@@ -14,7 +14,9 @@ export const useInput = (
 
     if (isOverLength(inputValue, maxLength)) return;
     if (inputType(inputValue, maxLength)) {
-      setErrorMessage(ERROR_MESSAGE.ONLY_NUMBER);
+      inputType.name === 'isInputNumber'
+        ? setErrorMessage(ERROR_MESSAGE.ONLY_NUMBER)
+        : setErrorMessage(ERROR_MESSAGE.ONLY_ENGLISH);
       return;
     }
 
