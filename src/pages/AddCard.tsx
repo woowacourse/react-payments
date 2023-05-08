@@ -16,6 +16,7 @@ import SubmitButton from '../components/@common/SubmitButton';
 import CardList from '../types/CardList';
 import RefProvider from '../contexts/RefProvider';
 import Modal from 'seeen-react-payments-modal';
+import CardErrorLabel from '../components/@common/CardErrorLabel';
 
 const AddCard = ({ cards, setCards }: CardList) => {
   const {
@@ -46,7 +47,7 @@ const AddCard = ({ cards, setCards }: CardList) => {
     e.preventDefault();
     if (isDisabledForm) {
       setErrorMessage(
-        '잘못된 정보입니다. 올바른 카드 정보를 입력했는지 확인해주세요.'
+        '잘못된 정보입니다. 선택한 카드사 및 카드 정보를 다시 확인해주세요.'
       );
       return;
     }
@@ -127,7 +128,7 @@ const AddCard = ({ cards, setCards }: CardList) => {
             />
           </Styled.ButtonWrapper>
         </form>
-        <Styled.ErrorTextWrapper>{errorMessage}</Styled.ErrorTextWrapper>
+        <CardErrorLabel errorMessage={errorMessage}></CardErrorLabel>
       </Styled.PageWrapper>
       <Modal isModalOpen={isModalOpen} closeModal={handleOpenModal}>
         <CardCompanyForm
