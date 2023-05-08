@@ -12,10 +12,9 @@ import Button, { NextButton } from "components/Button";
 import CardPreview from "components/CardPreview";
 import useRequiredCardInfo from "hooks/useRequiredCardInfo";
 import useInitCardInfo from "hooks/useInitCardInfo";
-import { isInvalidDate } from "validation";
-import { VALID_INPUT } from "constants/limit";
+import { moveFormInputFocus } from "utils/moveFormInputFocus";
+import { shouldPreventFocusMovement } from "validation";
 import { DIRECTION } from "constants/inputDirection";
-const { ONLY_NUMBER, ONLY_ENGLISH } = VALID_INPUT;
 const { NEXT, PREV } = DIRECTION;
 
 const CardRegisterForm = () => {
@@ -27,59 +26,20 @@ const CardRegisterForm = () => {
   const handlePageChange = () => navigate("/add-card-nickname");
 
   const handleFocusNext = ({ target }: ChangeEvent<HTMLFormElement>) => {
-    if (shouldPreventFocusMovement(target)) return;
+    if (shouldPreventFocusMovement(target, allCardInfo)) return;
 
-    focusFormInput(target.form, target, NEXT);
-  };
-
-  const shouldPreventFocusMovement = (
-    target: EventTarget & HTMLFormElement
-  ) => {
-    const { name, value, maxLength } = target;
-
-    if (name === "name") {
-      const validValue = value.replace(ONLY_ENGLISH, "");
-
-      return validValue.length !== maxLength;
-    }
-
-    const { month, year } = allCardInfo;
-    const date = { month, year };
-
-    const isValidDate = isInvalidDate(target, date);
-    if ((name === "month" || name === "year") && isValidDate) return true;
-
-    const validValue = value.replace(ONLY_NUMBER, "");
-
-    return validValue.length !== maxLength;
-  };
-
-  const focusFormInput = (
-    form: HTMLFormElement,
-    currentInput: EventTarget,
-    direction: number
-  ) => {
-    const formControlList = [...form];
-
-    if (!(currentInput instanceof HTMLInputElement)) return;
-
-    const currentInputIndex = formControlList.indexOf(currentInput);
-    const nextInput = formControlList[currentInputIndex + direction];
-
-    if (!nextInput || !(nextInput instanceof HTMLInputElement)) return;
-
-    nextInput.focus();
+    moveFormInputFocus(target.form, target, NEXT);
   };
 
   const handleKeyDown = (event: KeyboardEvent<HTMLFormElement>) => {
     const { key, target, currentTarget: form } = event;
 
-    if (key === "Enter") focusFormInput(form, target, NEXT);
+    if (key === "Enter") moveFormInputFocus(form, target, NEXT);
 
     if (!(target instanceof HTMLInputElement)) return;
     if (key !== "Backspace" || target.value !== "") return;
 
-    focusFormInput(form, target, PREV);
+    moveFormInputFocus(form, target, PREV);
   };
 
   return (
