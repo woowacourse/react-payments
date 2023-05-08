@@ -1,7 +1,7 @@
 import CardItem from "../components/cardList/CardItem";
 import Header from "../components/common/Header";
 import CardForm from "../components/cardForm/CardForm";
-import Modal from "../components/common/Modal/Modal";
+import Modal from "tkdrb12-react-modal";
 import BrandSelectModal from "../components/modal/BrandSelectModal";
 import styled from "styled-components";
 
