@@ -6,6 +6,13 @@ const meta = {
   component: CardOwnerName,
   title: 'Section/CardOwnerName',
   tags: ['autodocs'],
+  argTypes: {
+    cardOwnerName: {
+      control: {
+        maxLength: 30,
+      },
+    },
+  },
 } satisfies Meta<typeof CardOwnerName>;
 
 export default meta;
