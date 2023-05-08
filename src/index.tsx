@@ -8,6 +8,7 @@ import HoldingCardsPage from './pages/HoldingCardsPage';
 import CardNicknameInputPage from './pages/CardNicknameInputPage';
 import WaitingPage from './pages/WaitingPage';
 import CompletePage from './pages/CompletePage';
+import ErrorPage from './pages/ErrorPage';
 
 import './styles/index.css';
 
@@ -15,6 +16,7 @@ const router = createHashRouter([
   {
     path: '/',
     element: <App />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: '',
@@ -35,6 +37,10 @@ const router = createHashRouter([
       {
         path: 'complete/:cardId',
         element: <CompletePage />,
+      },
+      {
+        path: 'error',
+        element: <ErrorPage />,
       },
     ],
   },
