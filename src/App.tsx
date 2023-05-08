@@ -7,6 +7,7 @@ import AddCardAlias from './pages/AddCardAlias';
 
 import CardListProvider from './components/context/CardListProvider';
 import PaymentProvider from './components/context/PaymentsProvider';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             }
           />
           <Route path="addCardAlias" element={<AddCardAlias />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </CardListProvider>
     </BrowserRouter>
