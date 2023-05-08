@@ -18,11 +18,14 @@ export function InputBox({ infoType, inputs }: InputBoxProps) {
       <Label htmlFor={infoType}>{LABEL[camelToSnake(infoType)]}</Label>
       <_InputWithErrorMessage>
         {inputs.map(
-          ({ type, value, handleChange, required, isError }, index) => (
+          (
+            { type, value, handleChange, required, isError, disabled },
+            index
+          ) => (
             <React.Fragment key={index}>
               <_InputWrapper>
                 <_TextCount>
-                  {infoType === 'username' ? `${value.length} / 30` : ''}
+                  {infoType === 'username' && `${value.length} / 30`}
                 </_TextCount>
                 <Input
                   isError={isError}
@@ -31,6 +34,7 @@ export function InputBox({ infoType, inputs }: InputBoxProps) {
                   value={value}
                   onChange={handleChange}
                   required={required}
+                  disabled={disabled}
                   maxLength={MAX_LENGTH[camelToSnake(infoType)]}
                   size={SIZE_STYLE[camelToSnake(infoType)]}
                 />
@@ -62,6 +66,7 @@ const _InputWrapper = styled.div`
 `;
 
 const _InputWithErrorMessage = styled.div`
+  position: relative;
   display: flex;
   justify-content: start;
 
@@ -70,7 +75,7 @@ const _InputWithErrorMessage = styled.div`
 
 const _TextCount = styled.div`
   position: relative;
-  left: 35rem;
+  left: 29.2rem;
   top: -1.3rem;
 
   width: 5rem;

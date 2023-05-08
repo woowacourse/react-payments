@@ -1,11 +1,23 @@
+import { Story } from '@storybook/react';
 import React from 'react';
+import { ThemeProvider } from 'styled-components';
 
 import { InputBox } from './InputBox';
+import Theme from '../../../styles/theme';
 import { InputInfo } from '../../../type/input';
 
 export default {
   component: InputBox,
   title: 'InputBox',
+  decorators: [
+    (Story: Story) => {
+      return (
+        <ThemeProvider theme={Theme}>
+          <Story />
+        </ThemeProvider>
+      );
+    },
+  ],
 };
 
 const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

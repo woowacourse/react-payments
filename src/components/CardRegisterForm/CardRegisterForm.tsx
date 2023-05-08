@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { InputBox } from './common';
-import { PATH } from '../constants/path';
-import { useCardRegisterForm } from '../hooks/useCardRegisterForm';
-import { Card } from '../type/card';
-import { isCardInfoOption } from '../utils/checkType';
+import { PATH } from '../../constants/path';
+import { useCardRegisterForm } from '../../hooks/useCardRegisterForm';
+import { Card } from '../../type/card';
+import { isCardInfoOption } from '../../utils/checkType';
+import { InputBox } from '../common';
 
 export function CardRegisterForm() {
   const naviagte = useNavigate();
@@ -64,12 +64,15 @@ export function CardRegisterForm() {
 }
 
 const _Form = styled.form`
+  width: 33rem;
   display: flex;
   flex-direction: column;
 
   justify-content: space-between;
 
   gap: 1rem;
+
+  margin-top: 2rem;
 `;
 
 const _ButtonWrapper = styled.div`

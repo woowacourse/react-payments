@@ -2,12 +2,12 @@ import { Story } from '@storybook/react';
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 
-import { Label } from './Label';
+import { Spinner } from './Spinner';
 import Theme from '../../../styles/theme';
 
 export default {
-  component: Label,
-  title: 'Label',
+  component: Spinner,
+  title: 'Spinner',
   decorators: [
     (Story: Story) => {
       return (
@@ -19,8 +19,7 @@ export default {
   ],
 };
 
-export const Default: React.FC = () => (
-  <Label htmlFor={'default'}>
-    <p>This is Label</p>
-  </Label>
-);
+const Template: Story = (args) => <Spinner {...args} />;
+
+export const Default = Template.bind({});
+Default.args = {};

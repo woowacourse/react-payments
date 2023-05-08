@@ -1,13 +1,6 @@
 import { InputHTMLAttributes } from 'react';
 import styled from 'styled-components';
 
-declare module 'react' {
-  interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
-    // extends React's HTMLAttributes
-    isError?: boolean;
-  }
-}
-
 export type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   isError?: boolean;
 };
@@ -16,7 +9,7 @@ export function Input({ isError, ...restProps }: InputProps) {
   return <_Input isError={isError} {...restProps} />;
 }
 
-const _Input = styled.input`
+const _Input = styled.input<InputProps>`
   box-sizing: border-box;
   height: 4.5rem;
 

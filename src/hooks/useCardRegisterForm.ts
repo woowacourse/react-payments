@@ -4,18 +4,10 @@ import { useInput } from './useInput';
 import {
   CardPreviewInfoContext,
   passwordInput,
-} from '../contexts/cardPreviewInfo';
-import { InputInfo } from '../type/input';
+} from '../contexts/cardPreviewInfoContext';
+import { AllInputsType, InputInfo } from '../type/input';
 import { checkInputValdiation } from '../utils/checkInputValidation';
 import { cardRegisterValidator } from '../validation/cardRegister';
-
-type InputsType = {
-  [key: string]: InputInfo;
-};
-
-type AllInputsType = {
-  [key: string]: InputsType;
-};
 
 export function useCardRegisterForm() {
   const previewInfo = useContext(CardPreviewInfoContext);
@@ -37,6 +29,16 @@ export function useCardRegisterForm() {
       second: {
         ...passwordInput,
         ...useInput(cardRegisterValidator.cardPassword),
+      },
+      third: {
+        ...passwordInput,
+        value: '•',
+        disabled: true,
+      },
+      fourth: {
+        ...passwordInput,
+        value: '•',
+        disabled: true,
       },
     },
   };

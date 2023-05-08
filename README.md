@@ -41,57 +41,75 @@
 
 - 카드의 이름, 카드 회사(+ 카드 색깔)이 추가로 반영되어야 한다.
 
+### 3단계
+
+14. 카드 회사를 선택하는 모달을 npm 라이브러리 publish 하고, import 하여 사용한다.
+15. '카드를 등록 중입니다' 스피너를 추가한다.
+
+### 테스트
+
+1. storybook을 이용하여 CDD(컴포넌트 주도 개발)을 따른다.
+2. 문서로서 storybook을 고도화하기 위해 리팩터링한다.
+   - 각 스토리에 명확한 이름을 지정하고, 스토리 이름을 통해 컴포넌트의 사용 사례를 쉽게 이해할 수 있도록 한다.
+   - 변동 가능한 값에 대해 사용자가 직접 조작해볼 수 있게 하여 컴포넌트를 더욱 쉽게 이해할 수 있도록 한다.
+
 ## 디렉토리 구조
 
 ```
 📦src
  ┣ 📂components
  ┃ ┣ 📂common
- ┃ ┃ ┣ 📜backButton.tsx
- ┃ ┃ ┣ 📜card.tsx
- ┃ ┃ ┣ 📜cardItem.tsx
- ┃ ┃ ┣ 📜countText.tsx
+ ┃ ┃ ┣ 📂Input
+ ┃ ┃ ┃ ┣ 📜Input.stories.tsx
+ ┃ ┃ ┃ ┗ 📜Input.tsx
+ ┃ ┃ ┣ 📂InputBox
+ ┃ ┃ ┃ ┣ 📜InputBox.stories.tsx
+ ┃ ┃ ┃ ┗ 📜InputBox.tsx
+ ┃ ┃ ┣ 📂Label
+ ┃ ┃ ┃ ┣ 📜Label.stories.tsx
+ ┃ ┃ ┃ ┗ 📜Label.tsx
+ ┃ ┃ ┣ 📜BackButton.tsx
+ ┃ ┃ ┣ 📜CardItem.tsx
+ ┃ ┃ ┣ 📜CardPreview.tsx
+ ┃ ┃ ┣ 📜ErrorMessage.tsx
  ┃ ┃ ┣ 📜Header.tsx
- ┃ ┃ ┣ 📜Input.tsx
- ┃ ┃ ┗ 📜InputBox.tsx
- ┃ ┣ 📜addCardForm.tsx
- ┃ ┣ 📜cardNumber.tsx
- ┃ ┣ 📜cardPassword.tsx
- ┃ ┣ 📜expiredDate.tsx
- ┃ ┣ 📜index.tsx
- ┃ ┣ 📜securityCode.tsx
- ┃ ┗ 📜userName.tsx
+ ┃ ┃ ┗ 📜index.ts
+ ┃ ┣ 📜CardCompanyList.tsx
+ ┃ ┣ 📜CardCompanySelectModal.tsx
+ ┃ ┣ 📜CardRegisterForm.tsx
+ ┃ ┗ 📜index.ts
  ┣ 📂constants
+ ┃ ┣ 📜cardCompany.ts
  ┃ ┣ 📜errors.ts
  ┃ ┣ 📜index.ts
- ┃ ┗ 📜inputInfo.ts
+ ┃ ┣ 📜inputInfo.ts
+ ┃ ┗ 📜path.ts
  ┣ 📂contexts
- ┃ ┣ 📜cardInfo.tsx
- ┃ ┗ 📜validate.tsx
+ ┃ ┗ 📜cardPreviewInfo.tsx
+ ┣ 📂data
+ ┃ ┗ 📜localStorage.ts
  ┣ 📂hooks
- ┃ ┣ 📜useCountText.ts
- ┃ ┣ 📜useError.ts
- ┃ ┣ 📜useInputCode.ts
- ┃ ┣ 📜useInputDate.ts
- ┃ ┣ 📜useInputName.ts
- ┃ ┣ 📜useInputNumber.ts
- ┃ ┗ 📜useInputPassword.ts
+ ┃ ┣ 📜useCardRegisterForm.ts
+ ┃ ┣ 📜useClickEvent.ts
+ ┃ ┗ 📜useInput.ts
  ┣ 📂pages
- ┃ ┣ 📜addCard.tsx
- ┃ ┗ 📜cardList.tsx
- ┣ 📂stories
- ┃ ┗ 📜NameInput.stories.tsx
+ ┃ ┣ 📜AddCard.tsx
+ ┃ ┣ 📜AddCardName.tsx
+ ┃ ┣ 📜CardList.tsx
+ ┃ ┗ 📜index.ts
  ┣ 📂styles
  ┃ ┣ 📜global-style.ts
- ┃ ┗ 📜variables.js
+ ┃ ┗ 📜theme.ts
  ┣ 📂type
- ┃ ┣ 📜input.ts
- ┃ ┗ 📜validator.ts
+ ┃ ┣ 📜card.ts
+ ┃ ┗ 📜input.ts
  ┣ 📂utils
- ┃ ┣ 📜formData.ts
+ ┃ ┣ 📜cardInfoFormat.ts
+ ┃ ┣ 📜checkInputValidation.ts
+ ┃ ┣ 📜checkType.ts
  ┃ ┗ 📜localStorage.ts
  ┣ 📂validation
- ┃ ┗ 📜index.ts
+ ┃ ┗ 📜cardRegister.ts
  ┣ 📜App.tsx
  ┣ 📜index.tsx
  ┗ 📜react-app-env.d.ts

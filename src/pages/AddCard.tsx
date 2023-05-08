@@ -1,11 +1,16 @@
-import { useState } from 'react';
+import { JeroModal } from 'jero-payments-modal';
+import { useState, useContext } from 'react';
 import styled from 'styled-components';
 
-import { CardCompanySelectModal, CardRegisterForm } from '../components';
-import { Header, BackButton, CardPreview } from '../components/common';
-import { CardPreviewInfoProvider } from '../contexts/cardPreviewInfo';
+import { CardCompanyList, CardRegisterForm } from '../components';
+import { Header, BackButton, CardItem } from '../components/common';
+import { CardPreviewInfoContext } from '../contexts/cardPreviewInfoContext';
 
 export function AddCard() {
+  const { cardNumber, expiredDate, username, company } = useContext(
+    CardPreviewInfoContext
+  );
+
   const [isModalOpen, setIsModalOpen] = useState(true);
 
   function handleClickButton() {
@@ -13,11 +18,20 @@ export function AddCard() {
   }
 
   return (
-    <CardPreviewInfoProvider>
+    <>
       <_AddCardContainer>
         <Header title='카드 추가' render={BackButton} />
         <_Section>
-          <CardPreview />
+          <CardItem
+            cardNumberFirst={cardNumber.first.value}
+            cardNumberSecond={cardNumber.second.value}
+            cardNumberThird={cardNumber.third.value}
+            cardNumberFourth={cardNumber.fourth.value}
+            month={expiredDate.month.value}
+            year={expiredDate.year.value}
+            username={username.first.value}
+            company={company.clicked.value}
+          />
           <CardRegisterForm />
           <_CompanySelectButton onClick={handleClickButton}>
             카드사 재선택
@@ -25,11 +39,11 @@ export function AddCard() {
         </_Section>
       </_AddCardContainer>
       {isModalOpen && (
-        <CardCompanySelectModal
-          onModalClose={setIsModalOpen}
-        ></CardCompanySelectModal>
+        <JeroModal onModalClose={setIsModalOpen}>
+          <CardCompanyList />
+        </JeroModal>
       )}
-    </CardPreviewInfoProvider>
+    </>
   );
 }
 
@@ -48,11 +62,14 @@ const _Section = styled.section`
 
 const _CompanySelectButton = styled.button`
   position: fixed;
-  bottom: 0;
-  width: 50%;
+  bottom: 2rem;
+  left: 2rem;
+  width: 30%;
   padding: 0.8rem;
   border-radius: 1rem 1rem 0 0;
 
   color: black;
   background-color: #a1d5f2;
+  opacity: 0.5;
+  font-weight: bold;
 `;
