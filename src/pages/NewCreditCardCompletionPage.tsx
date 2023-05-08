@@ -41,7 +41,7 @@ const ButtonGroup = styled.div`
 
 export const NewCreditCardCompletionPage = () => {
   const navigate = useNavigate();
-  const { updateCreditCard } = usePayments();
+  const { updateCreditCard, recommendCreditCardDisplayName } = usePayments();
   const { validatedCreditCard: creditCard } = usePaymentsForm();
 
   if (creditCard === null) {
@@ -50,7 +50,7 @@ export const NewCreditCardCompletionPage = () => {
     };
   }
 
-  const [displayName, setDisplayName] = useState(creditCard?.displayName ?? '');
+  const [displayName, setDisplayName] = useState(recommendCreditCardDisplayName(creditCard.owner));
 
   const handleClickConfirm = () => {
     updateCreditCard({ ...creditCard, displayName });

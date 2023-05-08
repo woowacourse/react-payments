@@ -14,7 +14,6 @@ import { ExpirationDateInput } from '../components/payments/ExpirationDateInput'
 import { VendorIcon } from '../components/payments/VendorIcon';
 import type { CreditCard } from '../domain/CreditCard';
 import { CREDIT_CARD_VENDOR_BRAND_COLORS } from '../domain/CreditCardBrandColors';
-import { usePayments } from '../hooks/usePayments';
 import { usePaymentsForm } from '../hooks/usePaymentsForm';
 
 const Content = styled.main`
@@ -61,9 +60,6 @@ const ButtonGroup = styled.div`
 `;
 
 export const NewCreditCardPage = () => {
-  const { creditCards, setCreditCards, assignCreditCardId, recommendCreditCardDisplayName } =
-    usePayments();
-
   const { creditCard, setCreditCard, validate, validateField, validationResult } =
     usePaymentsForm();
   const [showBackface, setShowBackface] = useState(false);
@@ -80,15 +76,8 @@ export const NewCreditCardPage = () => {
   const handleClickBackButton = () => navigate(-1);
 
   const handleClickNextButton = () => {
-    const newCardWithDisplayName = {
-      ...creditCard,
-      id: assignCreditCardId(),
-      displayName: recommendCreditCardDisplayName(creditCard.owner),
-    };
+    if (!validate(creditCard)) return;
 
-    if (!validate(newCardWithDisplayName)) return;
-
-    setCreditCards([...creditCards, newCardWithDisplayName]);
     navigate(`/register`);
   };
 

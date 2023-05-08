@@ -63,7 +63,7 @@ export const PaymentsFormProvider = (props: PropsWithChildren) => {
       validateField,
       clear,
     }),
-    [creditCard, validatedCreditCard, validationResult, setCreditCard],
+    [creditCard, validatedCreditCard, validationResult, setCreditCard, clear, validate],
   );
 
   return (

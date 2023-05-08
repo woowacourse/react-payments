@@ -9,6 +9,7 @@ type PaymentsContextValue = {
   setCreditCards: Dispatch<CreditCard[]>;
   getCreditCardById: (id: number) => CreditCard | null;
   assignCreditCardId: () => number;
+  registerCreditCard: (creditCard: CreditCard) => CreditCard;
   updateCreditCard: (creditCard: CreditCard) => void;
   recommendCreditCardDisplayName: (owner: string | undefined) => string;
 };
@@ -59,12 +60,26 @@ export const PaymentsProvider = (props: PropsWithChildren) => {
     [creditCards],
   );
 
+  const registerCreditCard = useCallback(
+    (creditCard: CreditCard) => {
+      const newCreditCard = {
+        ...creditCard,
+        id: assignCreditCardId(),
+        displayName: creditCard.owner,
+      };
+      setCreditCards([...creditCards, newCreditCard]);
+      return newCreditCard;
+    },
+    [creditCards, setCreditCards, assignCreditCardId],
+  );
+
   const contextValue = useMemo(
     () => ({
       creditCards,
       setCreditCards,
       getCreditCardById,
       assignCreditCardId,
+      registerCreditCard,
       updateCreditCard,
       recommendCreditCardDisplayName,
     }),
@@ -73,6 +88,7 @@ export const PaymentsProvider = (props: PropsWithChildren) => {
       setCreditCards,
       getCreditCardById,
       assignCreditCardId,
+      registerCreditCard,
       updateCreditCard,
       recommendCreditCardDisplayName,
     ],
