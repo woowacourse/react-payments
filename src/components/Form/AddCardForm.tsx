@@ -24,6 +24,7 @@ import useModal from 'hooks/useModal';
 import { Modal } from 'components/common/Modal/Modal';
 import { useCardInfo } from 'hooks/useCardInfo';
 import { filterBlankAndNotANumber } from 'util/FilterInvalidInput';
+import { NOT_ALPHABET_REGEX } from '../../constants';
 
 export type AddCardFormProps = {
   onSubmit: () => void;
@@ -34,8 +35,6 @@ type FocusFormInputParams = {
   currentInput: HTMLFormElement;
   direction: number;
 };
-
-const NOT_ALPHABET_REGEX = /[^A-Za-z\s]/gi;
 
 function AddCardInfo({ onSubmit }: AddCardFormProps) {
   const { cardInfo, setCardInfo } = useContext(CardInfoContext);

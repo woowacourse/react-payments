@@ -38,7 +38,7 @@ function Home() {
             {CardDB.getCards()
               .map((card, index) => (
                 <S.AnimatedCardWrapper index={CardDB.getCards().length - index - 1}>
-                  <CreditCard card={card} className={isFolded ? 'fold-card' : ''} />
+                  <CreditCard card={card} className={isFolded ? 'fold-card' : 'unfold-card'} />
                   {
                     <S.CardNameSpan className={isFolded ? 'fold-name' : ''}>
                       {card.cardName}

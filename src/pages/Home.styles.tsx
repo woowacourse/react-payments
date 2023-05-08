@@ -20,6 +20,32 @@ const fold = keyframes`
     }
 `;
 
+const testFold = keyframes`
+from  { 
+    margin-top: 16px;
+    margin-bottom: 32px;
+  }
+  50% {
+    margin-top: 24px;
+    margin-bottom: 48px;
+  }
+  to {
+    margin: 0px; 
+  }
+`;
+
+const bounce = keyframes`
+  from  { margin: 0px; }
+  50% {
+    margin-top: 24px;
+    margin-bottom: 48px;
+  }
+  to {
+    margin-top: 16px;
+    margin-bottom: 32px;
+  }
+`;
+
 export const Styled = {
   AddMsgSpan: styled.span`
     font-size: 14px;
@@ -62,7 +88,10 @@ export const Styled = {
     .fold-card {
       position: absolute;
       transition: all 0.5s ease-in-out;
-      animation: ${fold} 0.5s ease ${(props) => props.index * 0.05}s forwards;
+      animation: ${testFold} 0.5s ease ${(props) => props.index * 0.05}s forwards;
+    }
+    .unfold-card {
+      animation: ${bounce} 0.5s ease ${(props) => props.index * 0.05}s forwards;
     }
     .fold-name {
       display: none;

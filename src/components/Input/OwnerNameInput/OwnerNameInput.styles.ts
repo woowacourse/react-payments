@@ -4,7 +4,6 @@ import { Container } from 'components/style/InputContainer';
 export const Styled = {
   OwnerNameInputWrapper: styled(Container)`
     width: 375px;
-    margin-bottom: 16px;
     input {
       padding-left: 10px;
       width: 100%;

@@ -48,11 +48,11 @@ export function ExpirationDateInput({ onChangeMonth, onChangeYear }: ExpirationD
           />
         </S.ExpirationDateWrapper>
       </S.ExpirationDateContainer>
-      {<ErrorCaption>{isMonthError && '유효한 월(01,02,...,12)을 입력해주세요.'}</ErrorCaption>}
+
       {
         <ErrorCaption>
-          {isYearError &&
-            `유효한 연도(현재 연도 포함 최대 5년)를 입력해주세요. (현재 ${new Date().getFullYear()}년)`}
+          {(isYearError || isMonthError) &&
+            `유효한 연/월(현재 연도 포함 최대 5년)을 입력해주세요. (현재 ${new Date().getFullYear()}년)\n`}
         </ErrorCaption>
       }
     </>

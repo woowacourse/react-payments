@@ -73,3 +73,5 @@ export const MAX_NUMBER_LENGTH = 4;
 export const MAX_SECURITY_CODE_LENGTH = 3;
 export const MAX_OWNER_NAME_LENGTH = 30;
 export const MAX_PASSWORD_LENGTH = 1;
+
+export const NOT_ALPHABET_REGEX = /[^A-Za-z\s]/gi;
