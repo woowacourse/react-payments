@@ -76,6 +76,7 @@ export const NewCreditCardRegistrationPage = () => {
 
       navigate('/complete');
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

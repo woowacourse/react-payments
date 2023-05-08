@@ -47,7 +47,7 @@ export const PaymentsFormProvider = (props: PropsWithChildren) => {
 
   useEffect(() => {
     setValidatedCreditCard(validate(creditCard) ? creditCard : null);
-  }, [creditCard]);
+  }, [creditCard, setValidatedCreditCard, validate]);
 
   const clear = useCallback(() => {
     setCreditCard({});
@@ -63,7 +63,15 @@ export const PaymentsFormProvider = (props: PropsWithChildren) => {
       validateField,
       clear,
     }),
-    [creditCard, validatedCreditCard, validationResult, setCreditCard, clear, validate],
+    [
+      creditCard,
+      validatedCreditCard,
+      validateField,
+      validationResult,
+      setCreditCard,
+      clear,
+      validate,
+    ],
   );
 
   return (
