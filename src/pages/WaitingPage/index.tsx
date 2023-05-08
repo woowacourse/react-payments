@@ -25,7 +25,9 @@ const WaitingPage = () => {
   return (
     <div className={styles.container}>
       <Spinner />
-      <h2 className={styles.loadingMessage}>카드를 등록중입니다.</h2>
+      <h2 className={styles.loadingMessage}>
+        카드를 등록중이에요. 잠시만 기다려 주세요.
+      </h2>
     </div>
   );
 };
