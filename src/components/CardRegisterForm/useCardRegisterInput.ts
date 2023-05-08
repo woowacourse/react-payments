@@ -1,6 +1,6 @@
 import { ChangeEventHandler } from 'react';
 
-import { isNotAlphabet, isNotNumber } from '../../utils/validation';
+import { isNotAlphabet, isNotInteger } from '../../utils/validation';
 import useFormInput from '../../utils/hooks/useFormInput';
 
 const initialCardData = {
@@ -22,7 +22,7 @@ const useCardRegisterInput = () => {
   const handleNumberChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     const { name, value } = event.target;
 
-    if (isNotNumber(value)) return;
+    if (isNotInteger(value)) return;
 
     updateCardData(name, value);
   };
