@@ -14,7 +14,6 @@ export interface UseInputProps {
   error: string | undefined;
   setError: Dispatch<React.SetStateAction<string | undefined>>;
   isWrong: boolean;
-  onBlur: () => void;
   maxLength: number;
   required: boolean;
   validate: (text: string) => boolean;
@@ -90,12 +89,6 @@ export const useInput = (
     }
   }, [maxLength, isNumber, setErrorMessage, value]);
 
-  const onBlur = () => {
-    if (validate(value)) {
-      setError('');
-    }
-  };
-
   return {
     inputRef,
     value,
@@ -104,7 +97,6 @@ export const useInput = (
     error,
     setError,
     isWrong: error !== '',
-    onBlur,
     required: isRequired,
     validate,
     maxLength,

@@ -4,6 +4,7 @@ import { type UseInputProps } from '@hooks/useInput';
 import { Error } from '@components/common/Error';
 import { Input } from '@components/common/Input';
 import { TAB_INDEX_INFO } from '@constants/constant';
+import { TEST_ID } from '@constants/storybookTest';
 
 export interface PasswordInputProps {
   id: string;
@@ -31,6 +32,7 @@ export default function PasswordInput({
             textAlign="center"
             autoComplete="off"
             tabIndex={ADD_CARD_PAGE_TAB_INDEX.FIRST_PASSWORD}
+            data-testid={TEST_ID.FIRST_PASSWORD}
             {...firstPasswordInformation}
           />
         </GrayWrapper>
@@ -43,6 +45,7 @@ export default function PasswordInput({
             textAlign="center"
             tabIndex={ADD_CARD_PAGE_TAB_INDEX.SECOND_PASSWORD}
             autoComplete="off"
+            data-testid={TEST_ID.SECOND_PASSWORD}
             {...secondPasswordInformation}
           />
         </GrayWrapper>

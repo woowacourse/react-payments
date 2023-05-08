@@ -3,6 +3,7 @@ import { type UseInputProps } from '@hooks/useInput';
 import { Error } from '@components/common/Error';
 import { Input } from '@components/common/Input';
 import { TAB_INDEX_INFO } from '@constants/constant';
+import { TEST_ID } from '@constants/storybookTest';
 
 interface CardNumberInputProps {
   id: string;
@@ -31,6 +32,7 @@ export default function CardNumberInput({
           textAlign="center"
           placeholder="0000"
           autoComplete="off"
+          data-testid={TEST_ID.FIRST_CARD_NUMBER}
           tabIndex={ADD_CARD_PAGE_TAB_INDEX.FIRST_CARD_NUMBER}
           {...firstNumberInformation}
         />
@@ -42,6 +44,7 @@ export default function CardNumberInput({
           tabIndex={ADD_CARD_PAGE_TAB_INDEX.SECOND_CARD_NUMBER}
           autoComplete="off"
           textAlign="center"
+          data-testid={TEST_ID.SECOND_CARD_NUMBER}
           {...secondNumberInformation}
         />
         <Dash>-</Dash>
@@ -52,6 +55,7 @@ export default function CardNumberInput({
           isPassword={true}
           textAlign="center"
           autoComplete="off"
+          data-testid={TEST_ID.THIRD_CARD_NUMBER}
           tabIndex={ADD_CARD_PAGE_TAB_INDEX.THIRD_CARD_NUMBER}
           {...thirdNumberInformation}
         />
@@ -64,6 +68,7 @@ export default function CardNumberInput({
           isPassword={true}
           textAlign="center"
           tabIndex={ADD_CARD_PAGE_TAB_INDEX.FOURTH_CARD_NUMBER}
+          data-testid={TEST_ID.FOURTH_CARD_NUMBER}
           {...fourthNumberInformation}
         />
       </Wrapper>

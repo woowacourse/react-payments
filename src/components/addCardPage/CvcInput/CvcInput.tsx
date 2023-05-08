@@ -6,6 +6,7 @@ import { InformationButton } from '@components/common/InformationButton';
 import { Input } from '@components/common/Input';
 import { ToolTip } from '@components/common/ToolTip';
 import { TAB_INDEX_INFO } from '@constants/constant';
+import { TEST_ID } from '@constants/storybookTest';
 
 interface CvcInputProps {
   id: string;
@@ -34,6 +35,7 @@ export default function CvcInput({ id, cvcInformation }: CvcInputProps) {
             id={id}
             placeholder="000"
             tabIndex={ADD_CARD_PAGE_TAB_INDEX.CVC}
+            data-testid={TEST_ID.CVC}
             {...cvcInformation}
           />
         </Wrapper>

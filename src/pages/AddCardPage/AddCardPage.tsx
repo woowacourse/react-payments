@@ -19,6 +19,7 @@ import { formValidate } from '@utils/formValidate';
 import { isPastDate } from '@utils/validate';
 import { CARD_COMPANY, CARD_COMPANY_DATA } from '@constants/cardCompany';
 import { PAGE_KIND, Z_INDEX_INFO } from '@constants/constant';
+import { TEST_ID } from '@constants/storybookTest';
 import * as S from './AddCardPage.Styles';
 import { useAddCardFormData } from './hooks/useAddCardFormData';
 
@@ -161,6 +162,7 @@ export default function AddCardPage() {
               type="button"
               padding="8px"
               borderRadius="8px"
+              data-testid={TEST_ID.CHANGE_CARD}
             />
           </S.ChangeButtonWrapper>
         </S.CardWrapper>
@@ -212,6 +214,7 @@ export default function AddCardPage() {
                 cardForm.current ? !cardForm.current.checkValidity() : true
               }
               text="다음"
+              data-testid="다음"
             />
           </S.NextButtonWrapper>
         </S.InputWrapperParent>

@@ -1,8 +1,10 @@
 import React, { FormEvent, useRef } from 'react';
 import { Meta, StoryObj } from '@storybook/react';
+import { within, userEvent } from '@storybook/testing-library';
 import styled from 'styled-components';
 import { useFocusInput } from '@hooks/useFocusInput';
 import { useAddCardFormData } from '@pages/AddCardPage/hooks/useAddCardFormData';
+import { TEST_ID } from '@constants/storybookTest';
 import CardNumberInput from './CardNumberInput';
 
 function CardNumberStories() {
@@ -48,7 +50,40 @@ export default meta;
 type Story = StoryObj<typeof CardNumberStories>;
 
 export const CardNumber: Story = {
-  args: {},
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('카드 번호를 입력합니다.', async () => {
+      await userEvent.type(
+        canvas.getByTestId(TEST_ID.FIRST_CARD_NUMBER),
+        '1234',
+        {
+          delay: 100,
+        }
+      );
+      await userEvent.type(
+        canvas.getByTestId(TEST_ID.SECOND_CARD_NUMBER),
+        '1749',
+        {
+          delay: 100,
+        }
+      );
+      await userEvent.type(
+        canvas.getByTestId(TEST_ID.THIRD_CARD_NUMBER),
+        '5678',
+        {
+          delay: 100,
+        }
+      );
+      await userEvent.type(
+        canvas.getByTestId(TEST_ID.FOURTH_CARD_NUMBER),
+        '9012',
+        {
+          delay: 100,
+        }
+      );
+    });
+  },
 };
 
 const InputWrapperParent = styled.form`

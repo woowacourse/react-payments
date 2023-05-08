@@ -11,13 +11,14 @@ export const useFocusInput = (formRef: RefObject<HTMLFormElement>) => {
 
     if (!active) return;
 
-    if (event.key === 'Backspace') {
+    const curInputLength = active.value.length;
+
+    if (active.selectionStart === 0 && active.selectionEnd === curInputLength) {
       return;
     }
+
     const curMaxLength = active.getAttribute('maxLength');
     const curInputKind = active.getAttribute('inputMode');
-
-    const curInputLength = active.value.length;
 
     const isValueMaxLength = curInputLength + 1 >= Number(curMaxLength);
 

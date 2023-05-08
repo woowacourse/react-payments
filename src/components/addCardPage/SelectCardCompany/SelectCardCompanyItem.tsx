@@ -13,7 +13,7 @@ export default function SelectCardCompanyItem({
   onCardCompanySelectClick,
 }: SelectCardCompanyItemProps) {
   return (
-    <Wrapper onClick={onCardCompanySelectClick}>
+    <Wrapper data-testid={kind} onClick={onCardCompanySelectClick}>
       <Image src={CARD_COMPANY_DATA[kind].SOURCE} />
       <Title>{CARD_COMPANY_DATA[kind].TITLE}</Title>
     </Wrapper>

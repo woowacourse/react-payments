@@ -8,6 +8,7 @@ function BankDummy() {
     <div>
       {CARD_COMPANY_KIND.map((company) => (
         <SelectCardCompanyItem
+          key={company}
           kind={company}
           onCardCompanySelectClick={() => {}}
         ></SelectCardCompanyItem>

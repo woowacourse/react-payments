@@ -13,6 +13,7 @@ import { CardInfo } from '@type/card';
 import { createUniqueId } from '@utils/common';
 import { formValidate } from '@utils/formValidate';
 import { PAGE_KIND } from '@constants/constant';
+import { TEST_ID } from '@constants/storybookTest';
 import { colors } from '@styles/theme';
 import { useRegisterCardFormData } from './hooks/useRegisterCardFormData';
 
@@ -100,6 +101,7 @@ export default function RegisterCard() {
               autoComplete="off"
               maxLength={20}
               placeholder="카드 별칭을 입력해주세요."
+              data-testid={TEST_ID.CARD_TITLE}
             />
           </InputField>
         </InputWrapper>
