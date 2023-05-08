@@ -69,6 +69,7 @@ const CardRegisterForm = () => {
       >
         <label>
           카드 번호
+          <span className={styles.required}>*</span>
           <div className={styles.inputContainer}>
             <Input
               type="text"
@@ -123,6 +124,7 @@ const CardRegisterForm = () => {
 
         <label>
           만료일
+          <span className={styles.required}>*</span>
           <div className={styles.expirationDate}>
             <Input
               type="text"
@@ -170,6 +172,7 @@ const CardRegisterForm = () => {
 
         <label>
           보안 코드(CVC/CVV)
+          <span className={styles.required}>*</span>
           <div className={styles.cvcContainer}>
             <div className={styles.cvc}>
               <Input
@@ -192,6 +195,7 @@ const CardRegisterForm = () => {
 
         <label>
           카드 비밀번호
+          <span className={styles.required}>*</span>
           <div className={styles.cardPassword}>
             <Input
               type="password"
