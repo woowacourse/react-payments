@@ -31,6 +31,7 @@
     "react/jsx-uses-react": 0,
     "react/prop-types": 0,
     "import/no-unresolved": "off",
+    "react/no-children-prop": "off",
     "@typescript-eslint/comma-dangle": "off",
     "react/jsx-props-no-spreading": "off",
     "import/no-extraneous-dependencies": [
@@ -66,7 +67,7 @@
             "position": "after"
           },
           {
-            "pattern": "@Pages/*",
+            "pattern": "@Pages/**/*",
             "group": "internal",
             "position": "after"
           },

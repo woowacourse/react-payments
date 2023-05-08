@@ -91,6 +91,16 @@ function CreditCardRegisterProvider({ children }: PropsWithChildren) {
     setAlias(newAlias);
   };
 
+  const resetCreditCardValues = () => {
+    setAlias('');
+    setCompany(undefined);
+    setNumbers('');
+    setExpiry('');
+    setOwner('');
+    setPassword({ first: '', second: '' });
+    setCVC('');
+  };
+
   const initValue = {
     creditCard: { company, numbers, expiry, owner, cvc, password, alias },
 
@@ -116,6 +126,7 @@ function CreditCardRegisterProvider({ children }: PropsWithChildren) {
         second: updateSecondPassword,
       },
     },
+    resetCreditCardValues,
   };
 
   return (

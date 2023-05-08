@@ -16,6 +16,7 @@ export const CreditCardRegisterUpdateContext = createContext({
       second: (arg: string) => {},
     },
   },
+  resetCreditCardValues: () => {},
 });
 
 export const CreditCardRegisterContext = createContext({

@@ -11994,6 +11994,13 @@ no-case@^3.0.4:
     lower-case "^2.0.2"
     tslib "^2.0.3"
 
+noah-modal@1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/noah-modal/-/noah-modal-1.0.7.tgz#4d98d1332a8b6efef8e0ddd159defd0d40595ebb"
+  integrity sha512-rZr/hCY54XqfEjjbOWv4jI/lgghMcxyKy1Pb5i4s1llpnBwXKFai6moK4pEbUKEFGA/wV12Y5aDpYdCpczlyfA==
+  dependencies:
+    web-vitals "^2.1.4"
+
 node-abort-controller@^3.0.1:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/node-abort-controller/-/node-abort-controller-3.1.1.tgz#a94377e964a9a37ac3976d848cb5c765833b8548"
@@ -16472,7 +16479,7 @@ wcwidth@^1.0.0, wcwidth@^1.0.1:
   dependencies:
     defaults "^1.0.3"
 
-web-vitals@^2.1.0:
+web-vitals@^2.1.0, web-vitals@^2.1.4:
   version "2.1.4"
   resolved "https://registry.npmjs.org/web-vitals/-/web-vitals-2.1.4.tgz"
   integrity sha512-sVWcwhU5mX6crfI5Vd2dC4qchyTqxV8URinzt25XqVh+bHEPGH4C3NPrNionCP7Obx59wrYEbNlw4Z8sjALzZg==

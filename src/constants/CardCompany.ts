@@ -7,7 +7,11 @@ import LotteCard from '@Asset/cardCompany/LotteCard.png';
 import ShinhanCard from '@Asset/cardCompany/ShinhanCard.png';
 import WooriCard from '@Asset/cardCompany/WooriCard.png';
 
-const CARD_COMPANY = {
+import { Company, CompanyNames } from '@Types/index';
+
+export const CARD_COMPANY_NAMES = ['bc', 'shinhan', 'kakao', 'hyundai', 'woori', 'lotte', 'hana', 'kb'] as const;
+
+export const CARD_COMPANY: Record<CompanyNames, Company> = {
   bc: { name: 'BC카드', logo: BCCard, uniqueColor: '#F04651', gradientColor: '#e6636b', fontColor: '#FFFFFF' },
   shinhan: {
     name: '신한카드',
@@ -35,5 +39,3 @@ const CARD_COMPANY = {
   hana: { name: '하나카드', logo: HanaCard, uniqueColor: '#009490', gradientColor: '#1baba7', fontColor: '#ffffff' },
   kb: { name: '국민카드', logo: KBCard, uniqueColor: '#6E6559', gradientColor: '#7d7366', fontColor: '#FFCD05' },
 } as const;
-
-export default CARD_COMPANY;

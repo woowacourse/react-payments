@@ -1,3 +1,4 @@
+import { useModal } from 'noah-modal';
 import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -5,15 +6,15 @@ import Button from '@Components/Button';
 import CreditCard from '@Components/CreditCard';
 import Header from '@Components/Header';
 
-import useAnimationModal from '@Hooks/useAnimationModal';
 import useCreditCardValidation from '@Hooks/useCreditCardValidation';
 
 import { CreditCardRegisterContext } from '@Contexts/CreditCardRegister/CreditCardRegisterContext';
 
 import scrollWindow from '@Utils/scrollWindow';
 
+import { PATH_ALIAS } from '@Constants/routes';
+
 import CreditCardCVCInput from './CreditCardCVCInput';
-import CreditCardCompanyModal from './CreditCardCompanyModal';
 import CreditCardExpiryInput from './CreditCardExpiryInput';
 import CreditCardNumberInput from './CreditCardNumberInput';
 import CreditCardOwnerInput from './CreditCardOwnerInput';
@@ -25,24 +26,24 @@ function CreditCardRegister() {
 
   const { creditCard, errorMessage } = useContext(CreditCardRegisterContext);
 
-  const { isModalOpen, openModal } = useAnimationModal();
+  const { openModal } = useModal();
   const isValid = useCreditCardValidation(creditCard, Object.values(errorMessage));
 
   const handleSubmit = () => {
     if (!isValid) return;
     if (!creditCard.company) return;
 
-    navigate('/register/alias');
+    navigate(PATH_ALIAS.alias);
   };
 
   const handleClickSelectCreditCompanyButton = () => {
-    openModal();
+    openModal('creditCardCompany');
   };
 
   useEffect(() => {
     scrollWindow.toTop();
     if (!creditCard.company) {
-      openModal();
+      openModal('creditCardCompany');
     }
   }, []);
 
@@ -73,7 +74,6 @@ function CreditCardRegister() {
           </S.ButtonWrapper>
         </S.CreditCardRegisterForm>
       </S.CreditCardRegister>
-      {isModalOpen && <CreditCardCompanyModal />}
     </>
   );
 }
