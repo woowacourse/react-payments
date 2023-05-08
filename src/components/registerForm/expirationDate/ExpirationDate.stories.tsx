@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import ExpirationDate from './ExpirationDate';
 import { CreditCardProvider } from '../../../contexts/CreditCardContext';
+import GlobalStyle from '../../../styles/globalStyle';
 
 const expireDate = {
   component: ExpirationDate,
@@ -9,6 +10,7 @@ const expireDate = {
     (Story) => {
       return (
         <CreditCardProvider>
+          <GlobalStyle />
           <Story />
         </CreditCardProvider>
       );

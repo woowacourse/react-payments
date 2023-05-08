@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import CardPassword from './CardPassword';
 import { CreditCardProvider } from '../../../contexts/CreditCardContext';
+import GlobalStyle from '../../../styles/globalStyle';
 
 const cardPassword = {
   component: CardPassword,
@@ -9,6 +10,7 @@ const cardPassword = {
     (Story) => {
       return (
         <CreditCardProvider>
+          <GlobalStyle />
           <Story />
         </CreditCardProvider>
       );

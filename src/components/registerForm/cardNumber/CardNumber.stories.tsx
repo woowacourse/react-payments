@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { CardNumber } from './CardNumber';
 import { CreditCardProvider } from '../../../contexts/CreditCardContext';
+import GlobalStyle from '../../../styles/globalStyle';
 
 const cardNumber = {
   component: CardNumber,
@@ -9,6 +10,7 @@ const cardNumber = {
     (Story) => {
       return (
         <CreditCardProvider>
+          <GlobalStyle />
           <Story />
         </CreditCardProvider>
       );
