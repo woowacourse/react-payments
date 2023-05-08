@@ -10,7 +10,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const CardAliasInputStory: Story = {
+export const Default: Story = {
   args: {
     type: 'text',
     value: '',

@@ -19,7 +19,7 @@ export default meta;
 
 type Story = StoryFn<typeof meta>;
 
-export const CardPasswordStory: Story = () => {
+export const Default: Story = () => {
   const { cardPasswords, passwordError, isValidatedCardPasswords } =
     usePassword();
 

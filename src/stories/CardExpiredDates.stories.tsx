@@ -19,7 +19,7 @@ export default meta;
 
 type Story = StoryFn<typeof meta>;
 
-export const CardExpiredDateStory: Story = () => {
+export const Default: Story = () => {
   const { expiredDates, expiredDatesError, isValidatedExpiredDates } =
     useExpiredDates();
 

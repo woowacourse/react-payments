@@ -19,7 +19,7 @@ export default meta;
 
 type Story = StoryFn<typeof meta>;
 
-export const SecurityCodeStory: Story = () => {
+export const Default: Story = () => {
   const { securityCode, securityCodeError, isValidatedSecurityCode } =
     useSecurityCode();
 

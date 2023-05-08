@@ -10,7 +10,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const CardErrorLabelStory: Story = {
+export const Default: Story = {
   args: {
     errorMessage: '올바른 카드 정보를 입력해주세요',
   },

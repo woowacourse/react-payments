@@ -19,7 +19,7 @@ export default meta;
 
 type Story = StoryFn<typeof meta>;
 
-export const CardNumbersStory: Story = () => {
+export const Default: Story = () => {
   const { cardNumbers, cardNumbersError, isValidatedCardNumbers } =
     useCardNumbers();
 

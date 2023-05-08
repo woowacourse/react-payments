@@ -10,7 +10,7 @@ const meta = {
 export default meta;
 type Story = StoryFn<typeof meta>;
 
-export const CardOwnerNameStory: Story = () => {
+export const Default: Story = () => {
   const { cardOwnerName, ownerNameError, isValidatedCardOwnerName } =
     useOwnerName();
 
