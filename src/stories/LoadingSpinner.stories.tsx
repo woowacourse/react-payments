@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
+import LoadingSpinner from '../components/AddCardLoadingSpinner/AddCardLoadingSpinner';
 
 const meta = {
   component: LoadingSpinner,

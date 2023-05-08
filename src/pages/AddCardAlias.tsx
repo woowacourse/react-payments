@@ -7,7 +7,7 @@ import SubmitButton from '../components/@common/SubmitButton';
 import { useNavigate } from 'react-router-dom';
 import CardList from '../types/CardList';
 import { REG_EXP } from '../constants/regexp';
-import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
+import AddCardLoadingSpinner from '../components/AddCardLoadingSpinner/AddCardLoadingSpinner';
 import { Link } from 'react-router-dom';
 
 const AddCardAlias = ({ cards, setCards }: CardList) => {
@@ -55,7 +55,7 @@ const AddCardAlias = ({ cards, setCards }: CardList) => {
           <Link to={'/add-card'}>카드 등록하러 가기</Link>
         </Styled.Wrapper>
       ) : isLoading ? (
-        <LoadingSpinner />
+        <AddCardLoadingSpinner />
       ) : (
         <form onSubmit={handleSetAlias}>
           <Styled.Wrapper>

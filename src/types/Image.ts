@@ -6,7 +6,6 @@ import logoLotte from '../assets/logo-lotte.svg';
 import logoShinhan from '../assets/logo-shinhan.svg';
 import logoWoori from '../assets/logo-woori.svg';
 import logoKB from '../assets/logo-kb.svg';
-import loadingSpinner from '../assets/loading-spinner.png';
 
 export const IMAGE_PATH: { [cardCompany: string]: string } = {
   BC카드: logoBC,
@@ -18,5 +17,3 @@ export const IMAGE_PATH: { [cardCompany: string]: string } = {
   하나카드: logoHana,
   국민카드: logoKB,
 };
-
-export const LOADING_SPINNER: string = loadingSpinner;

@@ -1,14 +1,4 @@
-import styled, { keyframes } from 'styled-components';
-
-const spinAnimation = keyframes`
-0% {
-  transform: rotate(0deg)
-}
-
-100% {
-  transform : rotate(360deg) 
-}
-`;
+import styled from 'styled-components';
 
 export const SectionWrapper = styled.section`
   margin-top: 184px;
@@ -18,9 +8,8 @@ export const SectionWrapper = styled.section`
   align-items: center;
 `;
 
-export const LoadingSpinnerWrapper = styled.img`
+export const LoadingSpinnerWrapper = styled.div`
   margin-bottom: 36px;
-  animation: ${spinAnimation} 1s linear 2;
 `;
 
 export const LoadingText = styled.p`
