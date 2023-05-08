@@ -11,17 +11,26 @@ type CardStateType = {
   cardNickName: string;
 };
 
-type CardActionType = {
-  type:
-    | 'SET_CARD_NUMBER'
-    | 'SET_EXPIRATION_DATE'
-    | 'SET_CARD_OWNER_NAME'
-    | 'SET_SECURITY_CODE'
-    | 'SET_FIRST_DIGIT'
-    | 'SET_SECOND_DIGIT'
-    | 'SET_SELECTED_CARD'
-    | 'SET_CARD_NICK_NAME';
-  parameter: string;
+type CardActionType =
+  | { type: 'SET_CARD_NUMBER'; parameter: string }
+  | { type: 'SET_EXPIRATION_DATE'; parameter: string }
+  | { type: 'SET_CARD_OWNER_NAME'; parameter: string }
+  | { type: 'SET_SECURITY_CODE'; parameter: string }
+  | { type: 'SET_FIRST_DIGIT'; parameter: string }
+  | { type: 'SET_SECOND_DIGIT'; parameter: string }
+  | { type: 'SET_SELECTED_CARD'; parameter: string }
+  | { type: 'SET_CARD_NICK_NAME'; parameter: string }
+  | { type: 'RESET_CARD_STATE' };
+
+const initialState: CardStateType = {
+  cardNumber: '',
+  expirationDate: '',
+  cardOwnerName: '',
+  securityCode: '',
+  firstDigit: '',
+  secondDigit: '',
+  selectedCard: '',
+  cardNickName: '',
 };
 
 export const CardStateContext = createContext<CardStateType | null>(null);
@@ -46,22 +55,15 @@ const cardReducer = (state: CardStateType, action: CardActionType) => {
       return { ...state, selectedCard: action.parameter };
     case 'SET_CARD_NICK_NAME':
       return { ...state, cardNickName: action.parameter };
+    case 'RESET_CARD_STATE':
+      return initialState;
     default:
       return state;
   }
 };
 
-export const CardProvider = ({ children }: PropsWithChildren) => {
-  const [state, dispatch] = useReducer(cardReducer, {
-    cardNumber: '',
-    expirationDate: '',
-    cardOwnerName: '',
-    securityCode: '',
-    firstDigit: '',
-    secondDigit: '',
-    selectedCard: '',
-    cardNickName: '',
-  });
+export const CardProvider = ({ children }: PropsWithChildren<unknown>) => {
+  const [state, dispatch] = useReducer(cardReducer, initialState);
 
   return (
     <CardStateContext.Provider value={state}>

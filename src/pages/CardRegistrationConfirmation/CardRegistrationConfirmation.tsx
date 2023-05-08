@@ -7,7 +7,6 @@ import { CardInfo } from '../../types';
 import { useCardStore } from '../../hook/useCardState';
 import { useEffect, useState } from 'react';
 import Spinner from '../../components/Spinner/Spinner';
-import useResetCardState from '../../hook/useResetCardState';
 
 type CardRegistrationConfirmationProps = {
   registerNewCard: (cardInfo: CardInfo) => void;
@@ -15,9 +14,8 @@ type CardRegistrationConfirmationProps = {
 
 const CardRegistrationConfirmation = ({ registerNewCard }: CardRegistrationConfirmationProps) => {
   const [showComponent, setShowComponent] = useState(true);
-  const resetCardState = useResetCardState();
   const navigate = useNavigate();
-  const { get } = useCardStore();
+  const { get, resetState } = useCardStore();
   const { cardNumber, cardOwnerName, expirationDate, selectedCard } = get();
 
   useEffect(() => {
@@ -37,7 +35,7 @@ const CardRegistrationConfirmation = ({ registerNewCard }: CardRegistrationConfi
 
     registerNewCard(cardInfo);
 
-    resetCardState();
+    resetState();
 
     navigate('/');
   };
