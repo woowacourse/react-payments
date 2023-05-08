@@ -1,9 +1,9 @@
 import CardItem from "../components/cardList/CardItem";
 import AliasInput from "../components/cardForm/AliasInput";
-import CardLoading from "../components/CardLoading";
+import RegisterCard from "../components/RegisterCard";
 import styled from "styled-components";
 
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 interface AssignAliasProps {
@@ -12,6 +12,7 @@ interface AssignAliasProps {
 
 export const AssignAlias = ({ assignAlias }: AssignAliasProps) => {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
 
   const location = useLocation();
   const { newCard } = location.state;
@@ -26,14 +27,10 @@ export const AssignAlias = ({ assignAlias }: AssignAliasProps) => {
     navigate("/");
   };
 
-  const isLoading = false;
   return (
     <Main>
       {isLoading ? (
-        <>
-          <CardLoading />
-          <GuideText>카드를 등록중입니다.</GuideText>
-        </>
+        <RegisterCard setIsLoading={setIsLoading} />
       ) : (
         <>
           <Message>카드등록이 완료되었습니다.</Message>
@@ -47,12 +44,6 @@ export const AssignAlias = ({ assignAlias }: AssignAliasProps) => {
     </Main>
   );
 };
-const GuideText = styled.div`
-  font-size: 14px;
-  font-weight: 700;
-  color: #575757;
-  margin-top: 380px;
-`;
 
 const Message = styled.div`
   font-size: 24px;

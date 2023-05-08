@@ -1,6 +1,6 @@
 import styled, { Keyframes, keyframes } from "styled-components";
 
-const CardLoading = () => {
+const CardLoadingIcon = () => {
   return (
     <>
       <Container>
@@ -252,4 +252,4 @@ const $shake = keyframes`
 }
 `;
 
-export default CardLoading;
+export default CardLoadingIcon;
