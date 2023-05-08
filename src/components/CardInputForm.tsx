@@ -119,7 +119,7 @@ const CardInputForm = (props: CardInputFormProps) => {
           isRequired={true}
           onChange={handleCardChanged}
           onKeyDown={handleCardKeyDown}
-          inputRef={refs.cardNumber}
+          ref={refs.cardNumber}
         />
         <span>{cardNumberValidation(realCardNumber) ? '' : '카드 번호에는 숫자만 입력 가능합니다.'}</span>
       </InputSetWrapper>
@@ -136,7 +136,7 @@ const CardInputForm = (props: CardInputFormProps) => {
           isRequired={true}
           onChange={handleCardChanged}
           onKeyDown={handleCardKeyDown}
-          inputRef={refs.expiredDate}
+          ref={refs.expiredDate}
         />
         <span>{expiredDateValidation(value.expiredDate) ? '' : '유효하지 않은 입력(월/연)입니다.'}</span>
       </InputSetWrapper>
@@ -154,7 +154,7 @@ const CardInputForm = (props: CardInputFormProps) => {
           isAutoFocus={false}
           isRequired={false}
           onChange={handleCardChanged}
-          inputRef={refs.ownerName}
+          ref={refs.ownerName}
         />
         <span>{ownerNameValidation(value.ownerName) ? '' : '카드 소유자 이름은 영어만 가능합니다.'}</span>
       </InputSetWrapper>
@@ -170,7 +170,7 @@ const CardInputForm = (props: CardInputFormProps) => {
             isAutoFocus={false}
             isRequired={true}
             onChange={handleCardChanged}
-            inputRef={refs.cvc}
+            ref={refs.cvc}
           />
           <img src={QuestionMark} alt="도움말" onClick={() => setIsAnswered(!isAnswered)} />
           {isAnswered && (
@@ -193,7 +193,7 @@ const CardInputForm = (props: CardInputFormProps) => {
             isAutoFocus={false}
             isRequired={true}
             onChange={handlePasswordChanged(PASSWORD_DIGIT_INDEX.FIRST)}
-            inputRef={refs.passwordFirst}
+            ref={refs.passwordFirst}
           />
           <CardInput
             id={CARD_ID_VALUE.PASSWORD_SECOND}
@@ -203,7 +203,7 @@ const CardInputForm = (props: CardInputFormProps) => {
             isAutoFocus={false}
             isRequired={true}
             onChange={handlePasswordChanged(PASSWORD_DIGIT_INDEX.SECOND)}
-            inputRef={refs.passwordSecond}
+            ref={refs.passwordSecond}
           />
           <span>●</span>
           <span>●</span>

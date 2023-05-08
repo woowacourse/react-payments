@@ -1,4 +1,4 @@
-import React, { HTMLAttributes } from 'react';
+import React, { forwardRef, HTMLAttributes } from 'react';
 import styled from 'styled-components';
 import { INPUT_MAX_LENGTH, INPUT_MIN_LENGTH, CARD_ID_VALUE } from '../constants';
 
@@ -11,10 +11,9 @@ interface CardInputProps extends HTMLAttributes<HTMLInputElement> {
   isSecured: boolean;
   isAutoFocus: boolean;
   isRequired: boolean;
-  inputRef?:React.RefObject<HTMLInputElement>;
 }
 
-const CardInput = (props: CardInputProps) => {
+const CardInput = forwardRef<HTMLInputElement, CardInputProps>((props, ref) => {
 
   // console.log(props.inputRef?.current)
 
@@ -34,10 +33,10 @@ const CardInput = (props: CardInputProps) => {
       minLength={INPUT_MIN_LENGTH[props.id]}
       onChange={props.onChange}
       onKeyDown={props.onKeyDown}
-      ref={props.inputRef}
+      ref={ref}
     />
   );
-};
+});
 
 const CardInputWrapper = styled.input`
   width: 318px;
