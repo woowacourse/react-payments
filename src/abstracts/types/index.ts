@@ -1,6 +1,11 @@
 export interface InputStateProps {
-  inputValues: string | string[];
-  setInputValues: (val: string | string[]) => void;
+  inputValue: string;
+  setInputValue: (val: string) => void;
+}
+
+export interface InputArrayStateProps {
+  inputArrayValue: string[];
+  setInputArrayValue: (val: string[]) => void;
 }
 
 export interface CardType {

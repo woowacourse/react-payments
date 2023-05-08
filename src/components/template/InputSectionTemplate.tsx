@@ -5,7 +5,7 @@ type InputSectionTemplateType = PropsWithChildren<{
   label: string;
   isCountLength?: boolean;
   children: React.ReactNode;
-  inputValues?: string;
+  inputValue?: string;
   maxLength?: number;
 }>;
 
@@ -14,7 +14,7 @@ const InputSectionTemplate = ({
   isCountLength,
   children,
   maxLength,
-  inputValues,
+  inputValue,
 }: InputSectionTemplateType) => {
   return (
     <InputSectionTemplateWrapper>
@@ -22,7 +22,7 @@ const InputSectionTemplate = ({
         <p>{label}</p>
         {isCountLength && maxLength && (
           <p>
-            {inputValues?.length} / {maxLength}
+            {inputValue?.length} / {maxLength}
           </p>
         )}
       </InputLabelWrapper>

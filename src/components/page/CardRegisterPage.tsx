@@ -70,18 +70,18 @@ const CardRegisterPage = ({ navigate }: PageProps) => {
       />
 
       <InputForm onSubmit={submitNewCard}>
-        <CardNumberInput inputValues={cardNumber} setInputValues={onChange('cardNumber')} />
-        <ExpireDateInput inputValues={expireDate} setInputValues={onChange('expireDate')} />
-        <OwnerNameInput inputValues={ownerName} setInputValues={onChange('ownerName')} />
-        <SecurityCodeInput inputValues={securityCode} setInputValues={onChange('securityCode')} />
+        <CardNumberInput inputArrayValue={cardNumber} setInputArrayValue={onChange('cardNumber')} />
+        <ExpireDateInput inputArrayValue={expireDate} setInputArrayValue={onChange('expireDate')} />
+        <OwnerNameInput inputValue={ownerName} setInputValue={onChange('ownerName')} />
+        <SecurityCodeInput inputValue={securityCode} setInputValue={onChange('securityCode')} />
         <CardPasswordInput
           cardPassword1Props={{
-            inputValues: cardPassword1,
-            setInputValues: onChange('cardPassword1'),
+            inputValue: cardPassword1,
+            setInputValue: onChange('cardPassword1'),
           }}
           cardPassword2Props={{
-            inputValues: cardPassword2,
-            setInputValues: onChange('cardPassword2'),
+            inputValue: cardPassword2,
+            setInputValue: onChange('cardPassword2'),
           }}
         />
         <ButtonWrapper>

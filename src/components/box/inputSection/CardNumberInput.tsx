@@ -1,12 +1,12 @@
 import InputSectionTemplate from '../../template/InputSectionTemplate';
 import InputBox, { InputType } from '../../common/InputBox';
-import { InputStateProps } from '../../../abstracts/types';
+import { InputArrayStateProps } from '../../../abstracts/types';
 
-const CardNumberInput = (props: InputStateProps) => {
+const CardNumberInput = (props: InputArrayStateProps) => {
   const setInput = (index: number) => (val: string) => {
-    const newInputValues = props.inputValues.slice() as string[];
-    newInputValues[index] = val;
-    props.setInputValues(newInputValues);
+    const newInputValue = props.inputArrayValue.slice();
+    newInputValue[index] = val;
+    props.setInputArrayValue(newInputValue);
   };
 
   const inputs: InputType[] = [
@@ -15,7 +15,7 @@ const CardNumberInput = (props: InputStateProps) => {
       maxLength: 4,
       placeholder: '1234',
       required: true,
-      inputValue: props.inputValues[0],
+      inputValue: props.inputArrayValue[0],
       setInputValues: setInput(0),
     },
     {
@@ -23,7 +23,7 @@ const CardNumberInput = (props: InputStateProps) => {
       maxLength: 4,
       placeholder: '5678',
       required: true,
-      inputValue: props.inputValues[1],
+      inputValue: props.inputArrayValue[1],
       setInputValues: setInput(1),
     },
     {
@@ -32,7 +32,7 @@ const CardNumberInput = (props: InputStateProps) => {
       placeholder: '∙∙∙∙',
       required: true,
       textSecurity: true,
-      inputValue: props.inputValues[2],
+      inputValue: props.inputArrayValue[2],
       setInputValues: setInput(2),
     },
     {
@@ -41,7 +41,7 @@ const CardNumberInput = (props: InputStateProps) => {
       placeholder: '∙∙∙∙',
       required: true,
       textSecurity: true,
-      inputValue: props.inputValues[3],
+      inputValue: props.inputArrayValue[3],
       setInputValues: setInput(3),
     },
   ];

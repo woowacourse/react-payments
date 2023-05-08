@@ -21,7 +21,7 @@ export const InputNumberType = () => {
 export const InputNameType = () => {
   const inputValue = '강상원';
   return (
-    <InputSectionTemplate label="이름" isCountLength maxLength={10} inputValues={inputValue}>
+    <InputSectionTemplate label="이름" isCountLength maxLength={10} inputValue={inputValue}>
       <InputBox
         inputs={[{ textType: 'text', maxLength: 10, inputValue: inputValue, setInputValues: () => {} }]}
         align="left"

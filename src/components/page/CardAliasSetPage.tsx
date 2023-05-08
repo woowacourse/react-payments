@@ -34,8 +34,8 @@ const CardAliasSetPage = ({ navigate, navData }: PageProps) => {
         <Card {...card} />
         <CardAliasInputWrapper>
           <CardAliasInput
-            inputValues={cardAlias}
-            setInputValues={(value: string | string[]) => setCardAlias(value as string)}
+            inputValue={cardAlias}
+            setInputValue={(value: string | string[]) => setCardAlias(value as string)}
           />
         </CardAliasInputWrapper>
       </CardAliasSetWrapper>
