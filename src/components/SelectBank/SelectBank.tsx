@@ -6,23 +6,18 @@ import { useCardInfoActions } from '../../context/CardInfoContext';
 
 import { BANKS } from '../../constants';
 
-interface Props {
-  closeModal: () => void;
-}
-
-const SelectBank = ({ closeModal }: Props) => {
+const SelectBank = () => {
   const { setCardInfo } = useCardInfoActions();
 
   const onClick = ({ currentTarget: { id } }: MouseEvent<HTMLDivElement>) => {
     setCardInfo((prev) => ({ ...prev, bank: id }));
-    closeModal();
   };
 
   return (
     <styled.SelectBank>
       <styled.Banks>
         {Object.entries(BANKS).map(([key, bank]) => (
-          <styled.Bank key={key} id={key} onClick={onClick}>
+          <styled.Bank key={key} id={key} onClick={onClick} className="bank">
             <styled.Icon>
               <img src={bank.logo} alt={`${bank.name}_logo`} />
             </styled.Icon>
