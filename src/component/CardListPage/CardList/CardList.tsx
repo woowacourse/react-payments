@@ -42,4 +42,4 @@ function CardList({ creditCardList }: CardListProps) {
   );
 }
 
-export default CardList;
+export default React.memo(CardList);

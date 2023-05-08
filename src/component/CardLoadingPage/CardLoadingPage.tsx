@@ -35,4 +35,4 @@ function CardLoadingPage({ lastCard }: CardLoadingPageProps) {
   );
 }
 
-export default CardLoadingPage;
+export default React.memo(CardLoadingPage);

@@ -5,4 +5,4 @@ function CardListHeader() {
   return <Style.Title>보유 카드</Style.Title>;
 }
 
-export default React.memo(CardListHeader);
+export default CardListHeader;
