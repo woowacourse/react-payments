@@ -5,6 +5,7 @@ import { CardInfoContext, CardInfoProvider, defaultCardInfo } from 'context/Card
 import CardDB from 'db/Cards';
 import styled from 'styled-components';
 import { Spinner } from 'components/Spinner/Spinner';
+import { validateCard } from 'util/ValidateCard';
 
 export type RegisterCardNameFormProps = {
   onSubmit: () => void;
@@ -51,7 +52,9 @@ export function RegisterCardNameForm({ onSubmit }: RegisterCardNameFormProps) {
         <CreditCard card={cardInfo} />
         <CardNameInputContainer>
           <CardNameInput value={cardName} onChange={handleCardNameInput} />
-          <CardNameFormButton type="submit">확인</CardNameFormButton>
+          <CardNameFormButton type="submit" disabled={!validateCard(cardInfo)}>
+            확인
+          </CardNameFormButton>
         </CardNameInputContainer>
       </FormContainer>
     </CardInfoProvider>
@@ -80,6 +83,10 @@ const CardNameFormButton = styled.button`
   font-weight: 700;
   color: black;
   cursor: pointer;
+  :disabled {
+    color: var(--light-gray-text-color);
+    cursor: not-allowed;
+  }
 `;
 
 const CardNameInputContainer = styled.div`
