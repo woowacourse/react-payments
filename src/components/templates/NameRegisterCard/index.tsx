@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { URL } from '../../../utils/constant';
 import Button from '../../atomics/Button';
 import Input from '../../atomics/Input';
 import Message from '../../atomics/Message';
@@ -8,16 +9,16 @@ import { VStack } from '../../layout/flexbox';
 import CardItem from '../../molecules/CardItem';
 
 const NameRegisterCard: React.FC = () => {
-  const [nickName, setNickName] = useState<string>('');
-  const { state } = useLocation();
+  const nickName = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
+  const { state } = useLocation();
 
   const handleRegisterCard = async () => {
-    await fetch('https://json-server-4140.onrender.com/payment', {
+    await fetch(URL, {
       method: 'POST',
       body: JSON.stringify({
         ...state,
-        nickName,
+        nickName: nickName.current!.value,
       }),
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
@@ -40,9 +41,7 @@ const NameRegisterCard: React.FC = () => {
         width="244px"
         center={true}
         placeholder="엄마카드"
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-          setNickName(e.target.value);
-        }}
+        ref={nickName}
       />
       <ButtonWrapper>
         <Button type="button" width="50px" height="30px" onClick={handleRegisterCard}>

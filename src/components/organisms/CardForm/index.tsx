@@ -13,6 +13,7 @@ import FocusRefProvider from '../../context/FocusRefsProvider';
 
 import { getUniqueID } from '../../../utils/key';
 import { useCardPaymentState } from '../../context/CardPaymentContext';
+import { ROUTER } from '../../../utils/constant';
 
 /* component */
 const CardForm: React.FC = () => {
@@ -23,7 +24,7 @@ const CardForm: React.FC = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    navigate('/addCardAlias', {
+    navigate(ROUTER.addCardAlias, {
       state: {
         id: getUniqueID(),
         cardName: state.cardName,
