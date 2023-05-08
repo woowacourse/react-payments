@@ -23,7 +23,7 @@ const CardRegisterPage = () => {
       {showCardForm && <Header />}
       {showCardForm ? (
         <>
-          <Modal trigger={CardPreview()} options={modalOptions}>
+          <Modal trigger={<CardPreview />} options={modalOptions}>
             <SelectBank />
           </Modal>
           <CardRegisterForm turnToNicknameForm={turnToNicknameForm} />
