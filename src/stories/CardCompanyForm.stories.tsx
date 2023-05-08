@@ -21,9 +21,11 @@ type Story = StoryObj<typeof meta>;
 export const CardCompanyFormStory: Story = {
   args: {
     setCardCompany: () => {
+      alert(`Set CardCompany`);
       return;
     },
     setIsModalOpen: () => {
+      alert(`Modal Closed`);
       return;
     },
   },
