@@ -14,5 +14,6 @@ export interface CardType {
 export enum Page {
   list = 'list',
   register = 'register',
+  loading = 'loading',
   name = 'name',
 }
