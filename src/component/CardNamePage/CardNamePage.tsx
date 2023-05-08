@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useCallback } from "react";
 import { useNavigate } from "react-router";
 import Style from "./CardNamePageStyled";
 
@@ -29,19 +29,22 @@ function CardNamePage({ lastCard, addCreditCard }: CardNamePageProps) {
     nameInputRef.current?.focus();
   }, []);
 
-  const registerCard = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!isRightCardName(cardName)) return;
+  const registerCard = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      if (!isRightCardName(cardName)) return;
 
-    const newCard: CreditCard = {
-      ...lastCard,
-      cardName,
-    };
+      const newCard: CreditCard = {
+        ...lastCard,
+        cardName,
+      };
 
-    addCreditCard(newCard);
+      addCreditCard(newCard);
 
-    navigate(NAVIGATE.ADD_CARD_LOADING);
-  };
+      navigate(NAVIGATE.ADD_CARD_LOADING);
+    },
+    [cardName]
+  );
 
   return (
     <Style.Page>

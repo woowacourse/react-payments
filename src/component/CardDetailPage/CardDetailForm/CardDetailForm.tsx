@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useCallback, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Style from "./CardDetailFormStyled";
 
@@ -32,7 +32,7 @@ function CardDetailForm({ setLastCard }: CardDetailFormProps) {
     cardCompany,
   } = useContext(CardDetailContext);
 
-  const submitCreditCard = () => {
+  const submitCreditCard = useCallback(() => {
     const newCard: Card = {
       cardNumberOrigin,
       cardNumberHidden,
@@ -46,7 +46,15 @@ function CardDetailForm({ setLastCard }: CardDetailFormProps) {
     setLastCard(newCard);
 
     navigate(NAVIGATE.ADD_CARD_NAME);
-  };
+  }, [
+    cardNumberOrigin,
+    cardNumberHidden,
+    cardDate,
+    cardOwnerName,
+    cardCVC,
+    cardPassword,
+    cardCompany,
+  ]);
 
   const handelChange = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
