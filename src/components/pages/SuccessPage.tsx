@@ -5,17 +5,17 @@ import useCardList from '../../hooks/useCardList';
 import Card from '../common/card/Card';
 
 import { CreditCardContext } from '../../contexts/CreditCardContext';
-import Input from '../common/input/Input';
+import FormInput from '../common/FormInput';
 import CreditCardContextType from '../../@types/creditCardContextType';
 import { KOR_NAME_BY_CARD_COMPANY } from '../../@types/cardCompany';
 import Loading from '../loading/Loading';
 import {
   CardInputContainer,
   CardListSection,
-  StyleButton,
   StyleErrorMessage,
   StyledMessage,
 } from './SuccessPage.style';
+import Button from '../common/button/Button.style';
 
 function SuccessPage() {
   const navigation = useNavigate();
@@ -44,6 +44,13 @@ function SuccessPage() {
     navigation('/', { replace: true });
   };
 
+  const handleChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+    const alias = event.currentTarget.value;
+
+    if (!setCreditCard) return;
+    setCreditCard('cardAlias', alias);
+  };
+
   return (
     <>
       {!isLoading ? (
@@ -57,22 +64,18 @@ function SuccessPage() {
               cardNumber={cardNumber}
             ></Card>
             <div>
-              <Input
-                onChange={(event) => {
-                  const alias = event.currentTarget.value;
-
-                  if (!setCreditCard) return;
-                  setCreditCard('cardAlias', alias);
-                }}
+              <FormInput
+                onChange={handleChange}
                 placeholder={KOR_NAME_BY_CARD_COMPANY[cardCompany]}
-              ></Input>
+              ></FormInput>
               {!isValid && (
                 <StyleErrorMessage>{'1글자 이상 10글자 이하로 입력해주세요.'}</StyleErrorMessage>
               )}
             </div>
+            <Button $primary={true} width="full" onClick={handleSubmit}>
+              확인
+            </Button>
           </CardInputContainer>
-
-          <StyleButton onClick={handleSubmit}>확인</StyleButton>
         </CardListSection>
       ) : (
         <Loading />

@@ -18,6 +18,7 @@ import {
 } from '../../../utils/regexp';
 import { StyledMessage } from '../../pages/SuccessPage.style';
 import styled, { keyframes } from 'styled-components';
+import Button from '../../common/button/Button.style';
 
 interface CardRegisterFormProps {
   isLoading: boolean;
@@ -56,11 +57,12 @@ function CardRegisterForm({ isLoading, setIsLoading }: CardRegisterFormProps) {
           <OwnerNameInput />
           <SecurityCode />
           <CardPassword />
-          {hasShowButton && (
-            <div style={{ display: 'flex', justifyContent: 'end' }}>
-              <NextButton role="button">다음</NextButton>
-            </div>
-          )}
+
+          <div style={{ display: 'flex', justifyContent: 'end' }}>
+            <Button $primary={true} width="auto" size="large" disabled={!hasShowButton}>
+              다음
+            </Button>
+          </div>
         </Form>
       ) : (
         <StyledRegisterMessage>카드를 등록중입니다.</StyledRegisterMessage>
