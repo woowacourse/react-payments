@@ -11,17 +11,22 @@ const Loading = () => {
         <StyleCard4></StyleCard4>
       </StyleCircle>
 
-      <StyledRegisterMessage>카드를 등록중입니다</StyledRegisterMessage>
+      <StyledRegisterMessage>카드를 등록중...</StyledRegisterMessage>
     </StyleSpinnerContainer>
   );
 };
 
 const fadeOut = keyframes`
-  from {
-    opacity: 1;
+  0% {
+    opacity: 0.3;
   }
-  to {
-    opacity: 0;
+
+  50% {
+    opacity: 1.0;
+  }
+
+  100% {
+    opacity: 0.3;
   }
 `;
 
@@ -42,17 +47,17 @@ const floating = keyframes`
 const rotate = keyframes`
   0% {
     transform: rotate(0deg);
-    opacity: 0.2;
+    opacity: 0.8;
   }
   
   50% {
     transform: rotate(180deg);
-    opacity: 0.7;
+    opacity: 0.3;
   }
 
   100% {
     transform: rotate(360deg);
-    opacity: 0.2;
+    opacity: 1;
   }
 `;
 
@@ -112,7 +117,8 @@ const StyleCard4 = styled(StyleCard)`
 `;
 
 const StyledRegisterMessage = styled(StyledMessage)`
-  animation: ${fadeOut} 10s linear forwards;
+  margin-top: 30px;
+  animation: ${fadeOut} 4s linear infinite;
 `;
 
 export default Loading;
