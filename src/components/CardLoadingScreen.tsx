@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import styled, { keyframes } from 'styled-components';
+import useLetterRepeatAnimation from '../hooks/useLetterRepeat';
 
 interface CardLoadingScreenProps {
   message?: string;
@@ -8,21 +8,7 @@ interface CardLoadingScreenProps {
 }
 
 function CardLoadingScreen({ message, isShow = false }: CardLoadingScreenProps) {
-  const [loadingMessageAnimation, setLoadingMessageAnimation] = useState('');
-
-  useEffect(() => {
-    setTimeout(() => {
-      if (loadingMessageAnimation === '') {
-        setLoadingMessageAnimation('.');
-      }
-      if (loadingMessageAnimation === '.') {
-        setLoadingMessageAnimation('..');
-      }
-      if (loadingMessageAnimation === '..') {
-        setLoadingMessageAnimation('');
-      }
-    }, 200);
-  }, [setLoadingMessageAnimation, loadingMessageAnimation]);
+  const letterAnimation = useLetterRepeatAnimation('.');
 
   return createPortal(
     isShow && (
@@ -31,7 +17,7 @@ function CardLoadingScreen({ message, isShow = false }: CardLoadingScreenProps) 
           <div />
           <span>
             {message}
-            {loadingMessageAnimation}
+            {letterAnimation}
           </span>
         </StyledCardLoadingTemplate>
       </StyledCardLoadingScreenBackground>
