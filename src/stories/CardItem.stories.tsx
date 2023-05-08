@@ -1,11 +1,19 @@
 import { Meta, StoryObj } from '@storybook/react';
 import CardItem from '../components/CardListPageComponents/CardItem';
+import { BrowserRouter } from 'react-router-dom';
 
 const meta = {
   title: 'Payment/CardListPageComponents/CardItem',
   component: CardItem,
   tags: ['autodocs'],
   argTypes: {},
+  decorators: [
+    (Story) => (
+      <BrowserRouter>
+        <Story />
+      </BrowserRouter>
+    ),
+  ],
 } satisfies Meta<typeof CardItem>;
 
 export default meta;
