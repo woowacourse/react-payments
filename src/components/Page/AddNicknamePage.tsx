@@ -6,13 +6,21 @@ import Input from "../common/Input";
 import ConfirmButton from "../Button/ConfirmButton";
 import { DownRightButtonWrapper } from "./AddCardPage.styles";
 import { CardInfo } from "../../types";
-import { SetStateAction } from "react";
+import { SetStateAction, useState } from "react";
+import { Spinner } from "../Spinner";
 
 interface addNicknamePageProps {
   cardList: CardInfo[];
   setCardList: (callback: SetStateAction<CardInfo[]>) => void;
   setPageIndex: React.Dispatch<React.SetStateAction<number>>;
 }
+
+const SpinnerWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+`;
 
 const Page = styled.div`
   min-height: 100vh;
@@ -41,6 +49,7 @@ export default function AddNicknamePage({
   setCardList,
   setPageIndex,
 }: addNicknamePageProps) {
+  const [isLoading, setIsLoading] = useState(false);
   const { color, title, cardNumber, expiration, owner } = useCardState();
   const nickName = useInput(title, { name: "nickName" });
 
@@ -67,27 +76,37 @@ export default function AddNicknamePage({
       nickName: nickName.value,
     };
 
-    setCardList((prev) => [...prev, newCard]);
-    setPageIndex(0);
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      setCardList((prev) => [...prev, newCard]);
+      setPageIndex(0);
+    }, 3000);
   };
 
-  return (
-    <Page>
-      <Title>카드등록이 완료되었습니다.</Title>
-      <Card
-        type="addCard"
-        cardColor={color}
-        cardTitle={title}
-        cardNumberSet={[first, second, third, fourth]}
-        expiration={`${month}/${year}`}
-        owner={owner === undefined ? "" : owner.toUpperCase()}
-      />
-      <InputWrapper>
-        <Input autoFocus shape="underline" textAlign="center" {...nickName} />
-      </InputWrapper>
-      <DownRightButtonWrapper>
-        <ConfirmButton onClick={onClick} />
-      </DownRightButtonWrapper>
-    </Page>
+  return isLoading ? (
+    <SpinnerWrapper>
+      <Spinner />
+    </SpinnerWrapper>
+  ) : (
+    <>
+      <Page>
+        <Title>카드등록이 완료되었습니다.</Title>
+        <Card
+          type="addCard"
+          cardColor={color}
+          cardTitle={title}
+          cardNumberSet={[first, second, third, fourth]}
+          expiration={`${month}/${year}`}
+          owner={owner === undefined ? "" : owner.toUpperCase()}
+        />
+        <InputWrapper>
+          <Input autoFocus shape="underline" textAlign="center" {...nickName} />
+        </InputWrapper>
+        <DownRightButtonWrapper>
+          <ConfirmButton onClick={onClick} />
+        </DownRightButtonWrapper>
+      </Page>
+    </>
   );
 }
