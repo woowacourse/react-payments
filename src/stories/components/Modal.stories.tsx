@@ -1,8 +1,9 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { css } from "styled-components";
-import Modal from "components/Modal";
+import Modal from "woowahan-yummy-modal/dist/Modal";
 import CardCompany from "components/CardCompany";
 import { CARD_COMPANIES } from "constants/cardCompanies";
+import { CloseButton } from "components/Button";
 
 const meta = {
   component: Modal,
@@ -29,25 +30,13 @@ const modalStyle = css`
   padding: 42px 22px 98px;
   border-radius: 5px 5px 0 0;
   background: #fdfdfd;
-
-  animation: modal-show 0.6s;
   overflow: hidden;
-
-  @keyframes modal-show {
-    from {
-      opacity: 0;
-      bottom: -600px;
-    }
-    to {
-      opacity: 1;
-      bottom: 0;
-    }
-  }
 `;
 
 export const CardCompanyModal: Story = {
   args: {
     modalStyle: modalStyle,
+    buttonStyle: CloseButton,
     closeButtonName: "나중에 선택할래요",
     children: (
       <>
@@ -56,6 +45,7 @@ export const CardCompanyModal: Story = {
         ))}
       </>
     ),
+    direction: "bottom",
   },
 
   argTypes: {

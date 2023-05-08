@@ -12,7 +12,6 @@ import Button, { NextButton } from "components/Button";
 import CardPreview from "components/CardPreview";
 import useRequiredCardInfo from "hooks/useRequiredCardInfo";
 import useInitCardInfo from "hooks/useInitCardInfo";
-import useModal from "woowahan-yummy-modal/dist/useModal";
 import { isInvalidDate } from "validation";
 import { VALID_INPUT } from "constants/limit";
 import { DIRECTION } from "constants/inputDirection";
@@ -89,7 +88,7 @@ const CardRegisterForm = () => {
 
       <CardPreview cardInfo={allCardInfo} />
 
-      {useModal().isModalOpen && <CardCompanyModal />}
+      <CardCompanyModal />
 
       <form
         onSubmit={handlePageChange}
