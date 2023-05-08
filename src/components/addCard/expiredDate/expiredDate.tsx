@@ -23,6 +23,7 @@ export function ExpiredDate() {
     }
     if (!validation.isCorrectYear(target.value)) {
       setError(true);
+      console.log(target.value);
       return;
     }
     setError(false);
@@ -41,6 +42,7 @@ export function ExpiredDate() {
             maxLength={2}
             minLength={TEXT_LENGTH.MONTH}
             placeholder={PLACEHOLDER.MONTH}
+            role="month"
             asChild>
             <DateInput />
           </Input.Unit>
@@ -51,6 +53,7 @@ export function ExpiredDate() {
             minLength={TEXT_LENGTH.YEAR}
             placeholder={PLACEHOLDER.YEAR}
             onBlur={checkIsCorrectYear}
+            role="year"
             asChild>
             <DateInput />
           </Input.Unit>
