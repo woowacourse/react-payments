@@ -20,11 +20,11 @@ interface IconProps {
 }
 
 const CardIconButton: React.FC<IconProps> = ({ cardName, ...rest }) => {
-  const dispatcher = useCardPaymentDispatch();
+  const formDispatcher = useCardPaymentDispatch();
   const { closeModal } = useModalContext();
 
   const onClickCardIcon = (cardName: string) => () => {
-    dispatcher(changeCardName(cardName));
+    formDispatcher(changeCardName(cardName));
     closeModal();
   };
 
