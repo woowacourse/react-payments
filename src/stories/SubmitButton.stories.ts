@@ -10,7 +10,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const EnableToSubmitStory: Story = {
+export const EnableToSubmit: Story = {
   args: {
     textContent: '확인',
     color: true,
@@ -18,7 +18,7 @@ export const EnableToSubmitStory: Story = {
   },
 };
 
-export const DisableToSubmitStory: Story = {
+export const DisableToSubmit: Story = {
   args: {
     textContent: '확인',
     color: false,
