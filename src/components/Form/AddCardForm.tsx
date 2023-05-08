@@ -132,9 +132,9 @@ function AddCardInfo({ onSubmit }: AddCardFormProps) {
   const handleMoveNextFocus: ChangeEventHandler<HTMLFormElement> = ({ target }) => {
     const { form: formInputList, maxLength, value } = target;
 
-    const filteredBlankInput = value.trim().replace(NOT_NUMBER_REGEX, '');
+    const filteredNumberInput = value.trim().replace(NOT_NUMBER_REGEX, '');
 
-    if (filteredBlankInput.length !== maxLength) return;
+    if (filteredNumberInput.length !== maxLength) return;
 
     const NEXT = 1;
 
