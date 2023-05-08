@@ -39,16 +39,7 @@ const HoldingCardsPage = () => {
         <section className={styles.cardContainer}>
           {cards.map((card) => (
             <div key={card.id} className={styles.cardWrapper}>
-              <Card
-                cardCompany={card.cardCompany}
-                cardNumber1={card.cardNumber1}
-                cardNumber2={card.cardNumber2}
-                cardNumber3={card.cardNumber3}
-                cardNumber4={card.cardNumber4}
-                expiredMonth={card.expiredMonth}
-                expiredYear={card.expiredYear}
-                owner={card.owner}
-              />
+              <Card {...card} />
               {card.nickname && (
                 <span className="text-subtitle">{card.nickname}</span>
               )}
