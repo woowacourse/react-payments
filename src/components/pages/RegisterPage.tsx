@@ -1,4 +1,4 @@
-import Card from '../@common/card/Card';
+import Card from '../common/card/Card';
 import { CreditCardContext } from '../../contexts/CreditCardContext';
 import CardRegisterForm from '../registerForm/cardRegisterForm/CardRegisterForm';
 import { useContext, useState } from 'react';

@@ -1,15 +1,15 @@
 import React, { useState, useContext, useRef } from 'react';
 
-import FormLabel from '../../@common/FormLabel';
-import Input from '../../@common/input/Input';
-import ErrorSpan from '../../@common/ErrorSpan';
+import FormLabel from '../../common/FormLabel';
+import Input from '../../common/input/Input';
+import ErrorSpan from '../../common/ErrorSpan';
 import { CreditCardContext } from '../../../contexts/CreditCardContext';
 import {
   ONLY_NUMBER_REGEXP,
   VALID_EXPIRATION_MONTH_REGEX,
   VALID_EXPIRATION_YEAR_REGEX,
 } from '../../../utils/regexp';
-import InputWrapper from '../../@common/InputWrapper';
+import InputWrapper from '../../common/InputWrapper';
 import CreditCardContextType from '../../../@types/creditCardContextType';
 import useAutoFocus from '../../../hooks/useAutoFocus';
 

@@ -2,10 +2,10 @@ import { useContext, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 import useCardList from '../../hooks/useCardList';
-import Card from '../@common/card/Card';
+import Card from '../common/card/Card';
 
 import { CreditCardContext } from '../../contexts/CreditCardContext';
-import Input from '../@common/input/Input';
+import Input from '../common/input/Input';
 import CreditCardContextType from '../../@types/creditCardContextType';
 import { KOR_NAME_BY_CARD_COMPANY } from '../../@types/cardCompany';
 import Loading from '../loading/Loading';
