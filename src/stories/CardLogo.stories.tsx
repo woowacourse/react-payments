@@ -24,9 +24,11 @@ export const BCLogoStory: Story = {
     companyImage: IMAGE_PATH['BC카드'],
     companyName: 'BC카드',
     setCardCompany: () => {
+      alert('cardCompany : BC카드');
       return;
     },
     setIsModalOpen: () => {
+      alert('modal closed');
       return;
     },
   },
@@ -37,9 +39,11 @@ export const ShinhanLogoStory: Story = {
     companyImage: IMAGE_PATH['신한카드'],
     companyName: '신한카드',
     setCardCompany: () => {
+      alert('cardCompany : 신한카드');
       return;
     },
     setIsModalOpen: () => {
+      alert('modal closed');
       return;
     },
   },
@@ -50,9 +54,11 @@ export const KakaoLogoStory: Story = {
     companyImage: IMAGE_PATH['카카오뱅크'],
     companyName: '카카오뱅크',
     setCardCompany: () => {
+      alert('cardCompany : 카카오뱅크');
       return;
     },
     setIsModalOpen: () => {
+      alert('modal closed');
       return;
     },
   },
@@ -63,9 +69,11 @@ export const HyundaiLogoStory: Story = {
     companyImage: IMAGE_PATH['현대카드'],
     companyName: '현대카드',
     setCardCompany: () => {
+      alert('cardCompany : 현대카드');
       return;
     },
     setIsModalOpen: () => {
+      alert('modal closed');
       return;
     },
   },
@@ -76,9 +84,11 @@ export const WooriLogoStory: Story = {
     companyImage: IMAGE_PATH['우리카드'],
     companyName: '우리카드',
     setCardCompany: () => {
+      alert('cardCompany : 우리카드');
       return;
     },
     setIsModalOpen: () => {
+      alert('modal closed');
       return;
     },
   },
@@ -89,9 +99,11 @@ export const LotteLogoStory: Story = {
     companyImage: IMAGE_PATH['롯데카드'],
     companyName: '롯데카드',
     setCardCompany: () => {
+      alert('cardCompany : 롯데카드');
       return;
     },
     setIsModalOpen: () => {
+      alert('modal closed');
       return;
     },
   },
@@ -102,9 +114,11 @@ export const HanaLogoStory: Story = {
     companyImage: IMAGE_PATH['하나카드'],
     companyName: '하나카드',
     setCardCompany: () => {
+      alert('cardCompany : 하나카드');
       return;
     },
     setIsModalOpen: () => {
+      alert('modal closed');
       return;
     },
   },
@@ -115,9 +129,11 @@ export const KBLogoStory: Story = {
     companyImage: IMAGE_PATH['국민카드'],
     companyName: '국민카드',
     setCardCompany: () => {
+      alert('cardCompany : 국민카드');
       return;
     },
     setIsModalOpen: () => {
+      alert('modal closed');
       return;
     },
   },
