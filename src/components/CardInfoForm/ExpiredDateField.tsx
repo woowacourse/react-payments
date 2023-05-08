@@ -2,6 +2,8 @@ import Input from '../common/Input';
 import TextField from '../common/TextField';
 import type { CardFormFieldProps } from './types';
 
+import { EXPIRED_DATE_MESSAGE } from './constants/message';
+import { EXPIRED_DATE_PATTERN } from './constants/pattern';
 import useCardInfoForm from './hooks/useCardInfoForm';
 import useFieldFilled from './hooks/useFieldFilled';
 import useCardFormValue from '../../hooks/useCardFormValue';
@@ -16,7 +18,7 @@ const ExpiredDateField = ({ inputRefs }: CardFormFieldProps) => {
 
   return (
     <TextField
-      label="만료일"
+      label={EXPIRED_DATE_MESSAGE.label}
       size="medium"
       toggleHelperText={!isFilled}
       helperText={{
@@ -38,7 +40,7 @@ const ExpiredDateField = ({ inputRefs }: CardFormFieldProps) => {
         ref={inputRefs[0]}
         align="center"
         data-property="month"
-        pattern="^(0?[1-9]|1[0-2])$"
+        pattern={EXPIRED_DATE_PATTERN.month}
       />
       <span>/</span>
       <Input
@@ -55,7 +57,7 @@ const ExpiredDateField = ({ inputRefs }: CardFormFieldProps) => {
         ref={inputRefs[1]}
         align="center"
         data-property="year"
-        pattern="^(2[3-9]|[3-9]\d)$"
+        pattern={EXPIRED_DATE_PATTERN.year}
       />
     </TextField>
   );

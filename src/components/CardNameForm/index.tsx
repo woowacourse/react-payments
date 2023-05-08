@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Input from '../common/Input';
 import Button from '../common/Button';
 
+import { CARD_NAME_FORM_MESSAGE } from './constants/message';
 import { ROUTES } from '../../constants/routes';
 import useCardFormAction from '../../hooks/useCardFormAction';
 
@@ -26,9 +27,7 @@ const CardNameForm = () => {
     const { value } = nameInputRef.current;
 
     if (value.trim() === '') {
-      alert(
-        '카드 이름은 공백이나 빈 값이 들어갈 수 없습니다. 작성 후 다시 제출해주세요.',
-      );
+      alert(CARD_NAME_FORM_MESSAGE.error);
       nameInputRef.current.focus();
       return;
     }
@@ -42,7 +41,7 @@ const CardNameForm = () => {
       <div className={styles.inputContainer}>
         <Input
           type="text"
-          placeholder="카드 이름을 작성해주세요. (최대 10자)"
+          placeholder={CARD_NAME_FORM_MESSAGE.placeholder}
           maxLength={10}
           align="center"
           underlined

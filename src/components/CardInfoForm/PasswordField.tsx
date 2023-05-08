@@ -5,6 +5,7 @@ import type { CardFormFieldProps } from './types';
 import useCardInfoForm from './hooks/useCardInfoForm';
 import useFieldFilled from './hooks/useFieldFilled';
 import useCardFormValue from '../../hooks/useCardFormValue';
+import { PASSWORD_MESSAGE } from './constants/message';
 
 const PasswordField = ({ inputRefs }: CardFormFieldProps) => {
   const { password } = useCardFormValue();
@@ -13,12 +14,12 @@ const PasswordField = ({ inputRefs }: CardFormFieldProps) => {
 
   return (
     <TextField
-      label="카드 비밀번호"
+      label={PASSWORD_MESSAGE.label}
       size="medium"
       split
       toggleHelperText={!isFilled}
       helperText={{
-        text: '카드 비밀번호 앞 두 자리를 입력해 주세요.',
+        text: PASSWORD_MESSAGE.helper,
         color: 'error',
       }}
     >
@@ -29,7 +30,7 @@ const PasswordField = ({ inputRefs }: CardFormFieldProps) => {
         minLength={1}
         maxLength={1}
         required
-        value={password?.first}
+        value={password.first}
         onChange={handleNumberChange}
         ref={inputRefs[0]}
         align="center"
@@ -42,7 +43,7 @@ const PasswordField = ({ inputRefs }: CardFormFieldProps) => {
         minLength={1}
         maxLength={1}
         required
-        value={password?.second}
+        value={password.second}
         onChange={handleNumberChange}
         ref={inputRefs[1]}
         align="center"

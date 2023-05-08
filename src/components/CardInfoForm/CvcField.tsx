@@ -5,6 +5,7 @@ import type { CardFormFieldProps } from './types';
 import useCardInfoForm from './hooks/useCardInfoForm';
 import useFieldFilled from './hooks/useFieldFilled';
 import useCardFormValue from '../../hooks/useCardFormValue';
+import { CVC_MESSAGE } from './constants/message';
 
 const CvcField = ({ inputRefs }: CardFormFieldProps) => {
   const { cvc } = useCardFormValue();
@@ -13,12 +14,12 @@ const CvcField = ({ inputRefs }: CardFormFieldProps) => {
 
   return (
     <TextField
-      label="보안코드(CVC/CVV)"
+      label={CVC_MESSAGE.label}
       size="small"
-      tooltipMessage="카드 뒷면의 서명란에 인쇄된 숫자 끝 3자리가 CVC 번호입니다."
+      tooltipMessage={CVC_MESSAGE.tooltip}
       toggleHelperText={!isFilled}
       helperText={{
-        text: '보안코드 세 자리 숫자를 입력해 주세요.',
+        text: CVC_MESSAGE.helper,
         color: 'error',
       }}
     >

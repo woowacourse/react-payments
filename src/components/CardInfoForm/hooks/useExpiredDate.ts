@@ -4,18 +4,11 @@ import {
   expiredDateValidator,
   isExpiredValidatorKey,
 } from '../../../utils/validation';
-
-const ERROR_MESSAGE = {
-  init: '만료일을 MM/YY 형식으로 입력해 주세요. (ex. 12/26)',
-  month: '유효한 달을 입력해 주세요. (01-12 사이 숫자)',
-  year: '유효한 연도를 입력해 주세요. (현재 년도 이상의 숫자)',
-} as const;
-
-type ErrorMessage = (typeof ERROR_MESSAGE)[keyof typeof ERROR_MESSAGE];
+import { EXPIRED_DATE_MESSAGE, ExpiredDateHelper } from '../constants/message';
 
 const useExpiredDate = () => {
-  const [errorMessage, setErrorMessage] = useState<ErrorMessage>(
-    ERROR_MESSAGE.init,
+  const [errorMessage, setErrorMessage] = useState<ExpiredDateHelper>(
+    EXPIRED_DATE_MESSAGE.helper.init,
   );
 
   const handleDateInputBlur: FocusEventHandler<HTMLInputElement> = (event) => {
@@ -30,11 +23,11 @@ const useExpiredDate = () => {
     const validator = expiredDateValidator[property];
 
     if (validator(Number(value)) && event.currentTarget.checkValidity()) {
-      setErrorMessage(ERROR_MESSAGE.init);
+      setErrorMessage(EXPIRED_DATE_MESSAGE.helper.init);
       return;
     }
 
-    setErrorMessage(ERROR_MESSAGE[property]);
+    setErrorMessage(EXPIRED_DATE_MESSAGE.helper[property]);
   };
 
   return { errorMessage, handleDateInputBlur };

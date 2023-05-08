@@ -5,6 +5,7 @@ import { CardFormFieldProps } from './types';
 import useCardInfoForm from './hooks/useCardInfoForm';
 import useFieldFilled from './hooks/useFieldFilled';
 import useCardFormValue from '../../hooks/useCardFormValue';
+import { CARD_NUMBER_MESSAGE } from './constants/message';
 
 const NumberField = ({ inputRefs }: CardFormFieldProps) => {
   const { number } = useCardFormValue();
@@ -13,10 +14,10 @@ const NumberField = ({ inputRefs }: CardFormFieldProps) => {
 
   return (
     <TextField
-      label="카드 번호"
+      label={CARD_NUMBER_MESSAGE.label}
       size="fit"
       toggleHelperText={!isFilled}
-      helperText={{ text: '카드 번호 16자리를 입력해 주세요.', color: 'error' }}
+      helperText={{ text: CARD_NUMBER_MESSAGE.helper, color: 'error' }}
     >
       <Input
         type="text"
@@ -28,7 +29,7 @@ const NumberField = ({ inputRefs }: CardFormFieldProps) => {
         value={number.first}
         onChange={handleNumberChange}
         ref={inputRefs[0]}
-        placeholder="0000"
+        placeholder={CARD_NUMBER_MESSAGE.placeholder}
         align="center"
         data-property="first"
       />
@@ -43,7 +44,7 @@ const NumberField = ({ inputRefs }: CardFormFieldProps) => {
         value={number.second}
         onChange={handleNumberChange}
         ref={inputRefs[1]}
-        placeholder="0000"
+        placeholder={CARD_NUMBER_MESSAGE.placeholder}
         align="center"
         data-property="second"
       />
@@ -58,7 +59,7 @@ const NumberField = ({ inputRefs }: CardFormFieldProps) => {
         value={number.third}
         onChange={handleNumberChange}
         ref={inputRefs[2]}
-        placeholder="0000"
+        placeholder={CARD_NUMBER_MESSAGE.placeholder}
         align="center"
         data-property="third"
       />
@@ -73,7 +74,7 @@ const NumberField = ({ inputRefs }: CardFormFieldProps) => {
         value={number.fourth}
         onChange={handleNumberChange}
         ref={inputRefs[3]}
-        placeholder="0000"
+        placeholder={CARD_NUMBER_MESSAGE.placeholder}
         align="center"
         data-property="fourth"
       />
