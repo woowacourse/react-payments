@@ -21,9 +21,11 @@ const CardRegistrationConfirmation = ({ registerNewCard }: CardRegistrationConfi
   const { cardNumber, cardOwnerName, expirationDate, selectedCard } = get();
 
   useEffect(() => {
-    setTimeout(() => {
+    const timeoutId = setTimeout(() => {
       setShowComponent(false);
     }, 3000);
+
+    return () => clearTimeout(timeoutId);
   }, []);
 
   if (showComponent) {
