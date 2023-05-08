@@ -26,6 +26,10 @@ const CardRegistrationConfirmation = ({ registerNewCard }: CardRegistrationConfi
     }, 3000);
   }, []);
 
+  if (showComponent) {
+    return <Spinner />;
+  }
+
   const handleCardInfo = () => {
     const cardInfo: CardInfo = { ...get() };
 
@@ -37,27 +41,21 @@ const CardRegistrationConfirmation = ({ registerNewCard }: CardRegistrationConfi
   };
 
   return (
-    <>
-      {showComponent ? (
-        <Spinner />
-      ) : (
-        <section className={styles.container}>
-          <article className={styles.box}>
-            <h2 className={styles.registrationLetter}>카드등록이 완료되었습니다.</h2>
-            <CardPreview
-              cardNumber={cardNumber}
-              cardOwnerName={cardOwnerName}
-              expirationDate={expirationDate}
-              selectedCard={selectedCard}
-            />
-            <CardNicknameInput />
-            <Button type="button" className={styles.confirmButton} onClick={handleCardInfo}>
-              확인
-            </Button>
-          </article>
-        </section>
-      )}
-    </>
+    <section className={styles.container}>
+      <article className={styles.box}>
+        <h2 className={styles.registrationLetter}>카드등록이 완료되었습니다.</h2>
+        <CardPreview
+          cardNumber={cardNumber}
+          cardOwnerName={cardOwnerName}
+          expirationDate={expirationDate}
+          selectedCard={selectedCard}
+        />
+        <CardNicknameInput />
+        <Button type="button" className={styles.confirmButton} onClick={handleCardInfo}>
+          확인
+        </Button>
+      </article>
+    </section>
   );
 };
 
