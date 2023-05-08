@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 import { BankCode, CardName } from '../Card/types';
-import { BottomSheet, BottomSheetProps } from './BottomSheet';
+import { KumaModal } from 'kuma-modal';
+import { KumaModalProps } from 'kuma-modal/dist/KumaModal';
 
 export type CardBottomSheetProps = {
   onClickBankImage: (bankCode: BankCode) => void;
-} & BottomSheetProps;
+} & KumaModalProps;
 
 const bankCodes = Object.values(BankCode);
 
@@ -14,7 +15,7 @@ export const CardBottomSheet = ({ onClickBankImage, active }: CardBottomSheetPro
   };
 
   return (
-    <BottomSheet active={active}>
+    <KumaModal active={active}>
       <ContentContainer>
         {bankCodes.map((bankCode, index) => (
           <CardImageContainer key={index} onClick={() => handleClickBankImage(bankCode)}>
@@ -26,7 +27,7 @@ export const CardBottomSheet = ({ onClickBankImage, active }: CardBottomSheetPro
           </CardImageContainer>
         ))}
       </ContentContainer>
-    </BottomSheet>
+    </KumaModal>
   );
 };
 
