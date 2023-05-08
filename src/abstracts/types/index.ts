@@ -1,11 +1,13 @@
 export interface InputStateProps {
   inputValue: string;
   setInputValue: (val: string) => void;
+  errorMessage?: string;
 }
 
 export interface InputArrayStateProps {
   inputArrayValue: string[];
   setInputArrayValue: (val: string[]) => void;
+  errorMessage?: string;
 }
 
 export interface CardType {

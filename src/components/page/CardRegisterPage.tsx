@@ -10,6 +10,7 @@ import { Bank, CardType, Page, PageProps } from '../../abstracts/types';
 import PageTemplate from '../template/PageTemplate';
 import BankSelectBottomSheet from '../box/BankSelectBottomSheet';
 import { BottomSheetProvider } from 'ksone02-modal';
+import useValidation from '../../hooks/useValidation';
 
 interface CardFormState extends Omit<CardType, 'id' | 'cardPassword'> {
   cardPassword1: string;
@@ -59,6 +60,10 @@ const CardRegisterPage = ({ navigate }: PageProps) => {
 
   const { cardNumber, expireDate, ownerName, securityCode, cardPassword1, cardPassword2, bank } = card;
 
+  const { errorMessage: cardNumberErrorMessage } = useValidation(cardNumber, 'cardNumber');
+  const { errorMessage: expireDateErrorMessage } = useValidation(expireDate, 'expireDate');
+  const { errorMessage: securityErrorMessage } = useValidation(securityCode, 'cvc');
+
   return (
     <PageTemplate title="카드 추가" onClickBack={onClickBack}>
       <Card
@@ -70,10 +75,22 @@ const CardRegisterPage = ({ navigate }: PageProps) => {
       />
 
       <InputForm onSubmit={submitNewCard}>
-        <CardNumberInput inputArrayValue={cardNumber} setInputArrayValue={onChange('cardNumber')} />
-        <ExpireDateInput inputArrayValue={expireDate} setInputArrayValue={onChange('expireDate')} />
+        <CardNumberInput
+          inputArrayValue={cardNumber}
+          setInputArrayValue={onChange('cardNumber')}
+          errorMessage={cardNumberErrorMessage}
+        />
+        <ExpireDateInput
+          inputArrayValue={expireDate}
+          setInputArrayValue={onChange('expireDate')}
+          errorMessage={expireDateErrorMessage}
+        />
         <OwnerNameInput inputValue={ownerName} setInputValue={onChange('ownerName')} />
-        <SecurityCodeInput inputValue={securityCode} setInputValue={onChange('securityCode')} />
+        <SecurityCodeInput
+          inputValue={securityCode}
+          setInputValue={onChange('securityCode')}
+          errorMessage={securityErrorMessage}
+        />
         <CardPasswordInput
           cardPassword1Props={{
             inputValue: cardPassword1,
@@ -84,9 +101,18 @@ const CardRegisterPage = ({ navigate }: PageProps) => {
             setInputValue: onChange('cardPassword2'),
           }}
         />
-        <ButtonWrapper>
-          <SubmitButton type="submit">다음</SubmitButton>
-        </ButtonWrapper>
+        {!cardNumberErrorMessage &&
+          cardNumber.join('').length > 0 &&
+          !expireDateErrorMessage &&
+          expireDate.join('').length > 0 &&
+          !securityErrorMessage &&
+          securityCode &&
+          cardPassword1 &&
+          cardPassword2 && (
+            <ButtonWrapper>
+              <SubmitButton type="submit">다음</SubmitButton>
+            </ButtonWrapper>
+          )}
       </InputForm>
       {isOnBankModal && (
         <BottomSheetProvider onClose={() => setIsOnBankModal(false)} modalState={isOnBankModal}>

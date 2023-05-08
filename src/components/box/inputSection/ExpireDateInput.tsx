@@ -1,7 +1,6 @@
 import InputSectionTemplate from '../../template/InputSectionTemplate';
 import InputBox, { InputType } from '../../common/InputBox';
 import { InputArrayStateProps } from '../../../abstracts/types';
-import useValidation from '../../../hooks/useValidation';
 
 const ExpireDateInput = (props: InputArrayStateProps) => {
   const setInput = (index: number) => (val: string) => {
@@ -29,10 +28,8 @@ const ExpireDateInput = (props: InputArrayStateProps) => {
     },
   ];
 
-  const { errorMessage } = useValidation(props.inputArrayValue, 'expireDate');
-
   return (
-    <InputSectionTemplate label="만료일" errorMessage={errorMessage}>
+    <InputSectionTemplate label="만료일" errorMessage={props.errorMessage}>
       <InputBox inputs={inputs} align="center" separator="/" {...props} />
     </InputSectionTemplate>
   );
