@@ -29,6 +29,17 @@ export const Input = styled.input<InputProps>`
   opacity: 0.6;
 
   &:focus {
-    outline: solid ${COLOR.BLUE};
+    outline: solid ${props => (props.isError ? COLOR.RED : COLOR.BLUE)};
+
+    animation: ${props => (props.isError ? 'vibration 0.1s' : '')};
+
+    @keyframes vibration {
+      from {
+        transform: translate(2%);
+      }
+      to {
+        transform: translate(-2%);
+      }
+    }
   }
 `;

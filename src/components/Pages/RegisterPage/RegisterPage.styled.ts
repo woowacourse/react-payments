@@ -7,5 +7,5 @@ export const RegisterPageLayout = styled.div`
   position: relative;
 
   width: 100%;
-  height: 100%;
+  height: calc(100% - 48px);
 `;

@@ -12,6 +12,7 @@ export interface InputProps {
   name?: string;
   placeholder?: string;
   isFocus?: boolean;
+  isError?: boolean;
 }
 
 const Input = ({
@@ -24,6 +25,7 @@ const Input = ({
   placeholder,
   maxLength,
   isFocus,
+  isError,
 }: InputProps) => {
   const inputRef = useInputFocus(isFocus, value, maxLength);
 
@@ -40,6 +42,7 @@ const Input = ({
       maxLength={maxLength}
       autoFocus={isFocus}
       autoComplete="on"
+      isError={isError}
     />
   );
 };

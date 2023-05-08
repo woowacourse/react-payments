@@ -13,9 +13,8 @@ import Input from '../Input/Input';
 
 const SerialNumberBox = () => {
   const { serialNumbers, setSerialNumbers, company } = useContext(CardContext);
-  const { validate, errorMessageState } = useInputValidator(
+  const { validate, isError } = useInputValidator(
     isNumeric,
-    ERROR_MESSAGE.SHOULD_NUMBER,
     CARD_NUMBER.MAX_LENGTH
   );
 
@@ -59,13 +58,14 @@ const SerialNumberBox = () => {
                 placeholder="0000"
                 inputmode="numeric"
                 isFocus={isFirstInput && isCloseModal}
+                isError={isError}
               />
             );
           })}
         </styled.InputBox>
       </label>
-      <commonStyled.ErrorMessageParagraph>
-        {errorMessageState}
+      <commonStyled.ErrorMessageParagraph isError={isError}>
+        {ERROR_MESSAGE.SHOULD_NUMBER}
       </commonStyled.ErrorMessageParagraph>
     </styled.SerialNumberBox>
   );

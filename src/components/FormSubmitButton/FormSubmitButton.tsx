@@ -12,14 +12,14 @@ const FormSubmitButton = ({
   handleFormSubmitClick: (event: MouseEvent<HTMLButtonElement>) => void;
   text: string;
 }) => {
-  if (!useIsFilledForm()) {
-    return null;
-  }
+  const isFilledForm = useIsFilledForm();
 
   return (
-    <styled.FormSubmitButton onClick={handleFormSubmitClick} autoFocus>
-      {text}
-    </styled.FormSubmitButton>
+    <styled.FormSubmitBox isFilledForm={isFilledForm}>
+      <styled.FormSubmitButton onClick={handleFormSubmitClick} autoFocus>
+        {text}
+      </styled.FormSubmitButton>
+    </styled.FormSubmitBox>
   );
 };
 

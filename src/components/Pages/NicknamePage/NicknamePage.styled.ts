@@ -1,18 +1,21 @@
 import styled from 'styled-components';
 
-import { FormSubmitButton } from '../../FormSubmitButton/FormSubmitButton.styled';
 import { COLOR } from '../../../constants/card';
 
 export const NicknamePageLayout = styled.div`
   display: flex;
   flex-direction: column;
+
+  width: 100%;
+  height: 100%;
+`;
+
+export const RegisterBox = styled.div`
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  position: relative;
-  padding: 0 0 5rem 0;
-
-  width: 100%;
   height: 100%;
 `;
 
@@ -43,5 +46,3 @@ export const InputBox = styled.div`
     }
   }
 `;
-
-export const SubmitButton = styled(FormSubmitButton)``;
