@@ -6,13 +6,11 @@ import { useNavigate } from 'react-router-dom';
 import * as Styled from './CardAliasPage.styles';
 import Card from '../../../components/pages/CardList/CardContent/CardContent';
 import CardAliasInput from '../../../components/pages/CardRegister/CardAliasInput/CardAliasInput';
-import { useToastContext } from '../../../context/ToastMessageContext';
 
 const CardAliasPage = () => {
   const navigate = useNavigate();
   const { cardRegisterInfo, initCardRegisterInfo } = useCardRegisterContext();
   const [isValid, setIsValid] = useState(false);
-  const { showToast } = useToastContext();
 
   const handleChange = (e: FormEvent<HTMLFormElement>) => {
     const form = e.currentTarget as HTMLFormElement;
@@ -33,9 +31,8 @@ const CardAliasPage = () => {
     const newCardList = cardList !== null ? [cardRegisterInfo, ...cardList] : [cardRegisterInfo];
     setItemInLocalStorage('CardList', newCardList);
     initCardRegisterInfo();
-    showToast('카드 등록이 완료되었습니다 😀');
 
-    navigate('/');
+    navigate('/register-loading');
   };
 
   return (

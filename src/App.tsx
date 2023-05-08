@@ -1,29 +1,32 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import CardRegisterProvider from './context/CardRegisterContext';
 
 import Layout from './components/@common/Layout/Layout';
-import { BottomSheetProvider } from './context/BottomSheetContext';
 import { ToastProvider } from './context/ToastMessageContext';
 import MyCardListRoute from './routes/MyCardListRoute';
 import CardRegisterRoute from './routes/CardRegisterRoute';
+import CardRegisterProvider from './context/CardRegisterContext';
+import { BottomSheetProvider } from 'react-bottom-sheet-booungi';
+import RegisterLoadingPage from './pages/RegisterLoading/RegisterLoadingPage';
+import routes from './constants/Routes';
 
 function App() {
   return (
-    <ToastProvider>
-      <BottomSheetProvider>
+    <BottomSheetProvider>
+      <ToastProvider>
         <CardRegisterProvider>
           <BrowserRouter basename={process.env.PUBLIC_URL}>
             <Routes>
               <Route path='/' element={<Layout />}>
-                <Route index path='/' element={<MyCardListRoute />} />
-                <Route path='/registerCard/*' element={<CardRegisterRoute />} />
+                <Route index path={routes.home} element={<MyCardListRoute />} />
+                <Route path={routes.registerCard} element={<CardRegisterRoute />} />
+                <Route path={routes.registerLoading} element={<RegisterLoadingPage />} />
               </Route>
             </Routes>
           </BrowserRouter>
         </CardRegisterProvider>
-      </BottomSheetProvider>
-    </ToastProvider>
+      </ToastProvider>
+    </BottomSheetProvider>
   );
 }
 

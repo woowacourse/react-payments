@@ -8,9 +8,8 @@ import CardNumberInput from '../../components/pages/CardRegister/CardNumberInput
 import CardPasswordInput from '../../components/pages/CardRegister/CardPasswordInput/CardPasswordInput';
 import { useCardRegisterContext } from '../../context/CardRegisterContext';
 import * as Styled from './CardRegisterPage.styles';
-import { useBottomSheet } from '../../context/BottomSheetContext';
+import { useBottomSheet } from 'react-bottom-sheet-booungi';
 import BankListBottomSheetContent from '../../components/pages/CardRegister/BankListBottomSheetContent/BankListBottomSheetContent';
-import BottomSheet from '../../components/@common/BottomSheet/BottomSheet';
 import { BankNames } from '../../types/card.type';
 
 export type CardInputProps = {
@@ -18,11 +17,11 @@ export type CardInputProps = {
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
 };
 
-export default function CardRegisterPage() {
+const CardRegisterPage = () => {
   const navigate = useNavigate();
   const { cardRegisterInfo, handleCardInfo } = useCardRegisterContext();
 
-  const { isOpened, content, openBottomSheet, closeBottomSheet } = useBottomSheet();
+  const { showBottomSheet, hideBottomSheet } = useBottomSheet();
   const [bankName, setBankName] = useState<BankNames | null>(null);
   const [allValid, setAllValid] = useState(false);
   const [validationStatus, setValidationStatus] = useState({
@@ -73,8 +72,12 @@ export default function CardRegisterPage() {
     handleCardInfo('bankName', newBank);
   };
 
+  const openBottomSheet = () => {
+    showBottomSheet({ content: <BankListBottomSheetContent onChange={onChangeBank} onSelect={hideBottomSheet} />, overlay: true });
+  };
+
   useEffect(() => {
-    openBottomSheet(<BankListBottomSheetContent onChange={onChangeBank} onSelect={closeBottomSheet} />);
+    openBottomSheet();
   }, []);
 
   return (
@@ -103,9 +106,8 @@ export default function CardRegisterPage() {
           {<Styled.CompleteButton onClick={handleSubmit}>다음</Styled.CompleteButton>}
         </Styled.RegisterForm>
       </Styled.InfoSection>
-      <BottomSheet isOpened={isOpened} onClose={closeBottomSheet}>
-        {content}
-      </BottomSheet>
     </Styled.Root>
   );
-}
+};
+
+export default CardRegisterPage;
