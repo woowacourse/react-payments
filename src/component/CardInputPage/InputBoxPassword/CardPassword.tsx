@@ -32,7 +32,9 @@ export default function CardPassword(props: CardPasswordProps) {
 
       if (appropriatePassword !== userPassword) {
         changeEachPasswordStatus(partIndex, 0);
-      } else if (appropriatePassword.length === 1) {
+      } else if (
+        appropriatePassword.length === INPUT_LENGTH_LIMIT.MAX_EACH_PASSWORD
+      ) {
         changeEachPasswordStatus(partIndex, 2);
         changePasswordStatus(true, appropriatePassword, partIndex);
       } else {

@@ -33,7 +33,9 @@ export default function CardNumber({
 
       if (userInputNumber !== appropriateNumber) {
         changeEachNumberStatus(partIndex, 0);
-      } else if (appropriateNumber.length === 4) {
+      } else if (
+        appropriateNumber.length === INPUT_LENGTH_LIMIT.MAX_EACH_CARD_NUMBER
+      ) {
         changeEachNumberStatus(partIndex, 2);
         changeCardNumberStatus(true, appropriateNumber, partIndex);
       } else {

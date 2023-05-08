@@ -41,7 +41,10 @@ export default function InputBoxExpirationDate(
     if (!validateExpirationDate(appropriateExpirationDate)) {
       setHaveError(true);
       changeCardExpirationDateStatus(false);
-    } else if (appropriateExpirationDate.length === 5) {
+    } else if (
+      appropriateExpirationDate.length ===
+      INPUT_LENGTH_LIMIT.MAX_EXPIRATION_DATE
+    ) {
       setHaveError(false);
       changeCardExpirationDateStatus(true, appropriateExpirationDate);
     } else {

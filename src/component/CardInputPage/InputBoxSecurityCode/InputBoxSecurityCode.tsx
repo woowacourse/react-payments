@@ -39,7 +39,9 @@ export default function InputBoxSecurityCode(props: InputBoxSecurityProps) {
     if (userSecurityCode !== appropriateSecurityCode) {
       setHaveError(true);
       changeSecurityCodeStatus(false);
-    } else if (appropriateSecurityCode.length === 3) {
+    } else if (
+      appropriateSecurityCode.length === INPUT_LENGTH_LIMIT.MAX_SECURITY_CODE
+    ) {
       setHaveError(false);
       changeSecurityCodeStatus(true, appropriateSecurityCode);
     } else {
