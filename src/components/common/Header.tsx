@@ -5,15 +5,16 @@ import React from "react";
 
 export interface HeaderType {
   title: string;
+  isBack: boolean;
   path?: string;
 }
 
-const Header = ({ title, path }: HeaderType) => {
+const Header = ({ title, isBack, path }: HeaderType) => {
   const navigate = useNavigate();
 
   return (
     <HeaderWrapper>
-      {path && (
+      {isBack && path && (
         <img src={ArrowLeft} alt={"뒤로가기"} onClick={() => navigate(path)} />
       )}
       <h3>{title}</h3>
