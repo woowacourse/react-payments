@@ -1,35 +1,42 @@
 import Input from '../common/Input';
 import InputBox from '../common/InputBox';
 import InputGroup from '../common/InputGroup';
-import { isInputNumber, isOverLength } from '../../utils/InputValidate';
-import { ERROR_MESSAGE, INPUT_MAX_LENGTH } from '../../utils/Constants';
-import type { Card, InputProps } from '../../types/Card';
+import { isInputNumber } from '../../utils/InputValidate';
+import { INPUT_MAX_LENGTH } from '../../utils/Constants';
+import { useContext, useEffect } from 'react';
+import {
+  CardFormErrorValueContext,
+  CardFormValueContext,
+} from '../../context/CardFormContext';
+import { useInput } from '../../hooks/useInput';
 
-type SecurityCodeInputProps = InputProps<Card['securityCode']>;
+const SecurityCodeInput = () => {
+  const { securityCode, setSecurityCode } = useContext(CardFormValueContext);
+  const { securityCodeError, setSecurityCodeError } = useContext(
+    CardFormErrorValueContext
+  );
 
-const SecurityCodeInput = ({
-  value,
-  setValue,
-  errorMessage,
-  setErrorMessage,
-}: SecurityCodeInputProps) => {
-  const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = event.target.value;
+  const { value, errorMessage, handleChangeInput } = useInput(
+    isInputNumber,
+    INPUT_MAX_LENGTH.SECURITY_CODE_LENGTH
+  );
 
-    if (isOverLength(inputValue, INPUT_MAX_LENGTH.SECURITY_CODE_LENGTH)) return;
-    if (isInputNumber(inputValue, INPUT_MAX_LENGTH.SECURITY_CODE_LENGTH)) {
-      setErrorMessage(ERROR_MESSAGE.ONLY_NUMBER);
-      return;
-    }
-
-    setValue(inputValue.toUpperCase());
-    setErrorMessage('');
-  };
+  useEffect(() => {
+    setSecurityCode(value);
+    setSecurityCodeError(errorMessage);
+  }, [value, errorMessage]);
 
   return (
-    <InputGroup labelValue={'보안 코드(CVC/CVV)'} errorMessage={errorMessage}>
-      <InputBox width='100px' isError={!!errorMessage}>
-        <Input type='password' value={value} onChange={handleChangeInput} />
+    <InputGroup
+      labelValue={'보안 코드(CVC/CVV)'}
+      errorMessage={securityCodeError}
+    >
+      <InputBox width='100px' isError={!!securityCodeError}>
+        <Input
+          type='password'
+          value={securityCode}
+          onChange={handleChangeInput}
+        />
       </InputBox>
     </InputGroup>
   );

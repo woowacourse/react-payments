@@ -12,6 +12,12 @@ const GlobalStyle = createGlobalStyle`
     --red-color:#ec2f1b;
     --shadow-color:rgba(0, 0, 0, 0.25);
     --backdrop-color:rgba(0, 0, 0, 0.35);
+    --skeleton-color:linear-gradient(
+    90deg,
+    #ececec 8%,
+    #f5f5f5 18%,
+    #ececec 33%
+  );
   }
 
 body {

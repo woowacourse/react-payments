@@ -1,43 +1,45 @@
 import { useState } from 'react';
-import { Story } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import NameInput from '../components/cardForm/NameInput';
-import type { CardItemInfo, InputProps } from '../types/Card';
 
-export default {
+const meta = {
   title: 'Payment/cardForm/NameInput',
   component: NameInput,
   tags: ['autodocs'],
+  decorators: [
+    (Story) => {
+      const [value, setValue] = useState(['', '', '', '']);
+      const handleChange = (newValue: string[]) => {
+        setValue(newValue);
+      };
+      return <Story value={value} setValue={handleChange} />;
+    },
+  ],
+} satisfies Meta<typeof NameInput>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: {
+    value: '',
+    errorMessage: '',
+    setErrorMessage: () => {},
+  },
 };
 
-type NameInputProps = InputProps<CardItemInfo['name']>;
-
-const Template: Story<NameInputProps> = (args) => {
-  const [value, setValue] = useState(args.value);
-
-  const handleChange = (newValue: string) => {
-    setValue(newValue);
-  };
-
-  return <NameInput {...args} value={value} setValue={handleChange} />;
+export const FormatError: Story = {
+  args: {
+    value: ' ',
+    errorMessage: '영어만 입력해주세요',
+    setErrorMessage: () => {},
+  },
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  value: '',
-  errorMessage: '',
-  setErrorMessage: () => {},
-};
-
-export const FormatError = Template.bind({});
-FormatError.args = {
-  value: ' ',
-  errorMessage: '영어만 입력해주세요',
-  setErrorMessage: () => {},
-};
-
-export const FinishInput = Template.bind({});
-FinishInput.args = {
-  value: 'HAE ON',
-  errorMessage: '',
-  setErrorMessage: () => {},
+export const FinishInput: Story = {
+  args: {
+    value: 'HAE ON',
+    errorMessage: '',
+    setErrorMessage: () => {},
+  },
 };

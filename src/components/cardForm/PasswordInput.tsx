@@ -1,76 +1,49 @@
-import { useRef } from 'react';
+import { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import Input from '../common/Input';
 import InputBox from '../common/InputBox';
 import InputGroup from '../common/InputGroup';
 import { DotIcon } from '../../assets/icons';
+import { INPUT_MAX_LENGTH, INPUT_REF_LENGTH } from '../../utils/Constants';
 import {
-  isInputNumber,
-  isNextInputFocusable,
-  isOverLength,
-} from '../../utils/InputValidate';
-import { ERROR_MESSAGE, INPUT_MAX_LENGTH } from '../../utils/Constants';
-import type { Card, InputProps } from '../../types/Card';
+  CardFormErrorValueContext,
+  CardFormValueContext,
+} from '../../context/CardFormContext';
+import { useMultipleInput } from '../../hooks/useMultipleInput';
 
-type PasswordInputProps = InputProps<Card['password']>;
+const PasswordInput = () => {
+  const { password, setPassword } = useContext(CardFormValueContext);
+  const { passwordError, setPasswordError } = useContext(
+    CardFormErrorValueContext
+  );
 
-const PasswordInput = ({
-  value,
-  setValue,
-  errorMessage,
-  setErrorMessage,
-}: PasswordInputProps) => {
-  const inputRefs = [
-    useRef<HTMLInputElement>(null),
-    useRef<HTMLInputElement>(null),
-  ];
+  const { value, errorMessage, handleChangeInput, inputRefs } =
+    useMultipleInput(
+      INPUT_REF_LENGTH.PASSWORD_LENGTH,
+      INPUT_MAX_LENGTH.PASSWORD_LENGTH
+    );
 
-  const handleChangeInput =
-    (inputIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
-      const inputValue = event.target.value;
-
-      if (isOverLength(inputValue, INPUT_MAX_LENGTH.PASSWORD_LENGTH)) return;
-      if (isInputNumber(inputValue, INPUT_MAX_LENGTH.PASSWORD_LENGTH)) {
-        setErrorMessage(ERROR_MESSAGE.ONLY_NUMBER);
-        return;
-      }
-
-      const newInputs = [...value];
-      newInputs[inputIndex] = inputValue;
-
-      setValue(newInputs);
-      setErrorMessage('');
-
-      if (
-        isNextInputFocusable({
-          inputValue,
-          inputIndex,
-          maxLength: INPUT_MAX_LENGTH.PASSWORD_LENGTH,
-        })
-      ) {
-        const nextInputRef = inputRefs.at(inputIndex + 1);
-        if (nextInputRef?.current) {
-          nextInputRef.current.focus();
-        }
-      }
-    };
+  useEffect(() => {
+    setPassword(value);
+    setPasswordError(errorMessage);
+  }, [value, errorMessage]);
 
   return (
-    <InputGroup labelValue='카드 비밀번호' errorMessage={errorMessage}>
+    <InputGroup labelValue='카드 비밀번호' errorMessage={passwordError}>
       <BoxContainer>
-        <InputBox width='43px' isError={!!errorMessage}>
+        <InputBox width='43px' isError={!!passwordError}>
           <Input
             type='password'
             ref={inputRefs[0]}
-            value={value[0]}
+            value={password[0]}
             onChange={handleChangeInput(0)}
           />
         </InputBox>
-        <InputBox width='43px' isError={!!errorMessage}>
+        <InputBox width='43px' isError={!!passwordError}>
           <Input
             type='password'
             ref={inputRefs[1]}
-            value={value[1]}
+            value={password[1]}
             onChange={handleChangeInput(1)}
           />
         </InputBox>

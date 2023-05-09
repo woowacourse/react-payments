@@ -1,4 +1,4 @@
-import type { Meta, Story } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 import InputBox from '../components/common/InputBox';
 
 const meta = {
@@ -6,20 +6,19 @@ const meta = {
   component: InputBox,
   tags: ['autodocs'],
   argTypes: {},
-} as Meta<typeof InputBox>;
-
-const Template: Story = (args) => {
-  return <InputBox {...args} />;
-};
-
-export const Default = Template.bind({});
-Default.args = {
-  isError: false,
-};
-
-export const Error = Template.bind({});
-Error.args = {
-  isError: true,
-};
+} satisfies Meta<typeof InputBox>;
 
 export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: {
+    isError: false,
+  },
+};
+
+export const Error: Story = {
+  args: {
+    isError: true,
+  },
+};

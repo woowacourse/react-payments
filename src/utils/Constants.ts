@@ -11,6 +11,12 @@ export const INPUT_MAX_LENGTH: Readonly<{ [key: string]: number }> = {
   PASSWORD_LENGTH: 1,
 };
 
+export const INPUT_REF_LENGTH: Readonly<{ [key: string]: number }> = {
+  CARD_NUMBER_LENGTH: 4,
+  EXPIRATION_DATE_LENGTH: 2,
+  PASSWORD_LENGTH: 2,
+};
+
 export const ERROR_MESSAGE: Readonly<{ [key: string]: string }> = {
   ONLY_NUMBER: '숫자만 입력해주세요',
   ONLY_ENGLISH: '영어만 입력해주세요',

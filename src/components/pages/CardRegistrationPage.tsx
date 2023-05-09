@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from '../common/Header';
-import CardItem from '../common/CardItem';
+import CardItem from '../CardListPageComponents/CardItem';
 import CardForm from '../cardForm/CardForm';
 import { LeftArrowIcon } from '../../assets/icons';
 import { CardContext } from '../../context/CardContext';

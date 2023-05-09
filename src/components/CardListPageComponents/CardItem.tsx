@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useLocation } from 'react-router-dom';
 import { CARD_COLOR } from '../../utils/Constants';
 import type { CardItemInfo } from '../../types/Card';
 
@@ -8,13 +9,22 @@ interface CardItemProps {
 }
 
 const CardItem = ({ card, onOpen }: CardItemProps) => {
+  const location = useLocation();
   const cardColor = CARD_COLOR[card.bankName];
+
+  const handleBankChange = () => {
+    if (location.pathname !== '/') {
+      onOpen && onOpen();
+    }
+  };
 
   return (
     <CardItemContainer cardColor={cardColor}>
       {card && (
         <>
-          <BankChangeBtn onClick={onOpen}>{card.bankName}</BankChangeBtn>
+          <BankChangeBtn onClick={handleBankChange}>
+            {card.bankName}
+          </BankChangeBtn>
           <ICChip />
           <CardNumberContainer>
             <p>{card.cardNumber[0]}</p>

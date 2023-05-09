@@ -1,5 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
-
+import { Meta, StoryObj } from '@storybook/react';
 import Input from '../components/common/Input';
 
 const meta = {
@@ -12,4 +11,4 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {};
+export const Default: Story = {};

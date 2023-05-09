@@ -4,42 +4,37 @@ import InputBox from '../common/InputBox';
 import InputGroup from '../common/InputGroup';
 import { isInputEnglish, isOverLength } from '../../utils/InputValidate';
 import { ERROR_MESSAGE, INPUT_MAX_LENGTH } from '../../utils/Constants';
-import type { CardItemInfo, InputProps } from '../../types/Card';
+import { useContext, useEffect } from 'react';
+import {
+  CardFormErrorValueContext,
+  CardFormValueContext,
+} from '../../context/CardFormContext';
+import { useInput } from '../../hooks/useInput';
 
-type NameInputProps = InputProps<CardItemInfo['name']>;
+const NameInput = () => {
+  const { name, setName } = useContext(CardFormValueContext);
+  const { nameError, setNameError } = useContext(CardFormErrorValueContext);
 
-const NameInput = ({
-  value,
-  setValue,
-  errorMessage,
-  setErrorMessage,
-}: NameInputProps) => {
-  const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = event.target.value;
+  const { value, errorMessage, handleChangeInput } = useInput(
+    isInputEnglish,
+    INPUT_MAX_LENGTH.NAME_LENGTH
+  );
 
-    if (isOverLength(inputValue, INPUT_MAX_LENGTH.NAME_LENGTH)) {
-      setErrorMessage(ERROR_MESSAGE.MAX_INPUT_LENGTH);
-      return;
-    }
-    if (isInputEnglish(inputValue)) {
-      setErrorMessage(ERROR_MESSAGE.ONLY_ENGLISH);
-      return;
-    }
-
-    setValue(inputValue.toUpperCase());
-    setErrorMessage('');
-  };
+  useEffect(() => {
+    setName(value);
+    setNameError(errorMessage);
+  }, [value, errorMessage]);
 
   return (
     <InputGroup
-      labelValue={<LabelValue length={value.length} />}
-      errorMessage={errorMessage}
+      labelValue={<LabelValue length={name.length} />}
+      errorMessage={nameError}
     >
-      <InputBox isError={!!errorMessage}>
+      <InputBox isError={!!nameError}>
         <Input
           placeholder='카드에 표시된 이름과 동일하게 입력하세요.'
           textAlign='start'
-          value={value}
+          value={name}
           onChange={handleChangeInput}
         />
       </InputBox>

@@ -1,4 +1,3 @@
-import { useContext, useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
 import CardListPage from './components/pages/CardListPage';
@@ -6,43 +5,14 @@ import CardRegistrationPage from './components/pages/CardRegistrationPage';
 import NotFoundPage from './components/pages/NotFoundPage';
 import BankList from './components/BottomSheetComponents/BankList';
 import CardAdditionCompletionPage from './components/pages/CardAdditionCompletionPage';
-import { useBottomSheet } from './hooks/useBottomSheet';
-import { CardContext } from './context/CardContext';
-import type { CardItemInfo } from './types/Card';
+import { useChangeForm } from './hooks/useChangeForm';
+import { useBottomSheet } from 'hae-on-bottom-sheet';
+import { CardFormProvider } from './context/CardFormContext';
 
 function App() {
   const { isBottomSheetOpen, handleBottomSheetOpen, handleBottomSheetClose } =
     useBottomSheet();
-
-  const { bankName, cardName, setCard, setCardList } = useContext(CardContext);
-
-  const updateCardList = (cardItem: CardItemInfo) => {
-    setCardList((prevCardList) => [cardItem, ...prevCardList]);
-  };
-
-  const handleChangeForm = (
-    cardNumber: string[],
-    expirationDate: string[],
-    name: string
-  ) => {
-    const updatedCard = {
-      id: Date.now(),
-      cardNumber,
-      expirationDate,
-      name,
-      bankName,
-      cardName,
-    };
-    setCard(updatedCard);
-  };
-
-  useEffect(() => {
-    setCard((prevState) => ({
-      ...prevState,
-      bankName,
-      cardName,
-    }));
-  }, [bankName, cardName]);
+  const { handleChangeForm } = useChangeForm();
 
   return (
     <AppContainer className='App'>
@@ -55,18 +25,15 @@ function App() {
           <Route
             path='/register'
             element={
-              <CardRegistrationPage
-                onOpen={handleBottomSheetOpen}
-                onChangeForm={handleChangeForm}
-              />
+              <CardFormProvider>
+                <CardRegistrationPage
+                  onOpen={handleBottomSheetOpen}
+                  onChangeForm={handleChangeForm}
+                />
+              </CardFormProvider>
             }
           />
-          <Route
-            path='/complete'
-            element={
-              <CardAdditionCompletionPage onUpdateCardList={updateCardList} />
-            }
-          />
+          <Route path='/complete' element={<CardAdditionCompletionPage />} />
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>

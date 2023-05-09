@@ -1,7 +1,7 @@
-import styled from 'styled-components';
-import { CONVERT_BANK_NAME } from '../../utils/Constants';
 import { useContext, useState } from 'react';
+import styled from 'styled-components';
 import { CardContext } from '../../context/CardContext';
+import { CONVERT_BANK_NAME } from '../../utils/Constants';
 
 interface BankItemProps {
   bankName: string;

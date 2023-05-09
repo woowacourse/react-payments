@@ -1,22 +1,15 @@
-import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
 import styled from 'styled-components';
-import CardItem from '../common/CardItem';
+import CardItem from '../CardListPageComponents/CardItem';
 import Title from '../common/Title';
 import Input from '../common/Input';
-import { cardLocalStorage } from '../domain/CardLocalStorage';
-import type { CardItemInfo } from '../../types/Card';
-import { useContext } from 'react';
+import CardLoadingSpinner from '../CardLoadingComponents/CardLoadingSpinner';
 import { CardContext } from '../../context/CardContext';
+import { useCompletion } from '../../hooks/useCompletion';
 
-interface CardAdditionCompletionPageProps {
-  onUpdateCardList(card: CardItemInfo): void;
-}
-
-const CardAdditionCompletionPage = ({
-  onUpdateCardList,
-}: CardAdditionCompletionPageProps) => {
-  const navigate = useNavigate();
-  const { card, cardName, setCardName } = useContext(CardContext);
+const CardAdditionCompletionPage = () => {
+  const { card, cardName } = useContext(CardContext);
+  const { isLoading, handleComplete, handleInputChange } = useCompletion();
 
   if (!card) {
     return (
@@ -26,32 +19,26 @@ const CardAdditionCompletionPage = ({
     );
   }
 
-  const handleComplete = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setCardName((event.target as HTMLInputElement).value);
-    onUpdateCardList(card);
-    cardLocalStorage.addCard(card);
-    navigate('/');
-  };
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCardName(event.target.value);
-  };
-
   return (
     <CompletionContainer>
-      <Title title='카드등록이 완료되었습니다.' fontSize={24} />
-      <CardItemContainer>
-        <CardItem card={card} />
-      </CardItemContainer>
-      <form onSubmit={handleComplete}>
-        <Input
-          value={cardName}
-          borderBottom='1px solid var(--black-color)'
-          onChange={handleInputChange}
-        />
-        <CheckBtn>확인</CheckBtn>
-      </form>
+      {isLoading ? (
+        <CardLoadingSpinner />
+      ) : (
+        <>
+          <Title title='카드의 별칭을 입력해주세요' fontSize={24} />
+          <CardItemContainer>
+            <CardItem card={card} />
+          </CardItemContainer>
+          <form onSubmit={handleComplete}>
+            <Input
+              value={cardName}
+              borderBottom='1px solid var(--black-color)'
+              onChange={handleInputChange}
+            />
+            <CheckBtn>확인</CheckBtn>
+          </form>
+        </>
+      )}
     </CompletionContainer>
   );
 };
