@@ -1,4 +1,3 @@
-import { useContext } from 'react';
 import Header from '../components/common/Header';
 import Page from '../components/common/Page';
 import { useNavigate } from 'react-router-dom';
@@ -7,15 +6,13 @@ import Card from '../components/Card';
 import { getLocalStorage } from '../utils/localStorage';
 import { CardType } from '../types';
 import uuid from 'react-uuid';
-import { ModalContext } from '../store/modalContext';
+import { useModalContext } from 'react-modal-patrick';
 import { LOCALSTORAGE_KEY } from '../constants';
 
 const MyCard = () => {
   const cards = getLocalStorage(LOCALSTORAGE_KEY.CARD);
 
-  const { openModal } = useContext(ModalContext) ?? {
-    openModal: () => {},
-  };
+  const { openModal } = useModalContext();
   const navigate = useNavigate();
 
   const registerCard = () => {

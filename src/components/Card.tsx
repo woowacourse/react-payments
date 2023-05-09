@@ -1,18 +1,12 @@
-import { useContext } from 'react';
 import styled from 'styled-components';
 import { IcChip } from '../assets';
-import { ModalContext } from '../store/modalContext';
 import { CardType } from '../types';
 
 const Card = (props: CardType) => {
   const cardNumberArray = props.cardNumber.replaceAll(' - ', ' ').split(' ');
 
-  const { openModal } = useContext(ModalContext) ?? {
-    openModal: () => {},
-  };
-
   return (
-    <CardWrapper style={{ background: props.color }} onClick={() => openModal()}>
+    <CardWrapper style={{ background: props.color }}>
       <span>{props.bankName}</span>
       <img src={IcChip} alt="ic-chip" />
       <CardInfoWrapper>

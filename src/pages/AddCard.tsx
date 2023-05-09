@@ -1,16 +1,16 @@
 import { FormEvent } from 'react';
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import Card from '../components/Card';
 import CardInputForm from '../components/CardInputForm';
 import Header from '../components/common/Header';
 import Page from '../components/common/Page';
-import ModalPortal from '../components/ModalPortal';
 import { CardType } from '../types';
 import { getLocalStorage, setLocalStorage } from '../utils/localStorage';
-import { ModalContext } from '../store/modalContext';
 import ModalBanks from '../components/ModalBanks';
 import { useNavigate } from 'react-router-dom';
 import { LOCALSTORAGE_KEY } from '../constants';
+import { ModalPortal, useModalContext } from 'react-modal-patrick';
+import Button from '../components/common/Button';
 
 const AddCard = () => {
   const [card, setCard] = useState<CardType>({
@@ -32,10 +32,7 @@ const AddCard = () => {
     navigate('/CardName');
   };
 
-  const { isModalOpen, closeModal } = useContext(ModalContext) ?? {
-    isModalOpen: true,
-    closeModal: () => {},
-  };
+  const { isModalOpen, openModal, closeModal } = useModalContext();
 
   return (
     <Page>
@@ -49,6 +46,7 @@ const AddCard = () => {
         cvc={card.cvc}
         password={card.password}
       />
+      <Button text="카드사 선택" onClick={openModal} />
       <CardInputForm card={card} setCard={setCard} onSubmit={e => registerCard(e)} />
       {isModalOpen && (
         <ModalPortal closeModalHandler={closeModal}>

@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useRef, useState } from 'react';
 import styled from 'styled-components';
 import CardInput from './CardInput';
 import {
@@ -27,7 +27,8 @@ import {
   handleExpiredDateKey,
   handleOwnerChanged,
 } from '../domain/CardInput';
-import { useSetValue } from '../usehooks/useSetValue';
+import { useSetValue } from '../hooks/useSetValue';
+import useMoveFocus from '../hooks/useMoveFocus';
 
 interface CardInputFormProps {
   card: CardType;
@@ -39,20 +40,33 @@ const CardInputForm = (props: CardInputFormProps) => {
   const [value, changeValue] = useSetValue(JSON.parse(JSON.stringify(props.card)), props.setCard);
   const [isAnswered, setIsAnswered] = useState<boolean>(false);
   const [realCardNumber, setRealCardNumber] = useState<string>('');
+  const [refs, moveFocus] = useMoveFocus({
+    cardNumber: useRef<HTMLInputElement>(null),
+    expiredDate: useRef<HTMLInputElement>(null),
+    ownerName: useRef<HTMLInputElement>(null),
+    cvc: useRef<HTMLInputElement>(null),
+    passwordFirst: useRef<HTMLInputElement>(null),
+    passwordSecond: useRef<HTMLInputElement>(null),
+  });
 
   const handleCardChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
     switch (e.target.id) {
       case CARD_ID_VALUE.CARD_NUMBER:
-        if (e.target.value.length > INPUT_MAX_LENGTH.cardNumber) return;
+        moveFocus(e.target.value.length, INPUT_MAX_LENGTH.cardNumber, CARD_ID_VALUE.EXPIRED_DATE);
         setRealCardNumber(realCardNumber + e.target.value[e.target.value.length - 1].trim());
         handleCardNumberChanged(e);
         break;
       case CARD_ID_VALUE.EXPIRED_DATE:
+        moveFocus(e.target.value.length, INPUT_MAX_LENGTH.expiredDate, CARD_ID_VALUE.OWNER_NAME);
         handleExpiredDateChanged(e);
         break;
       case CARD_ID_VALUE.OWNER_NAME:
+        moveFocus(e.target.value.length, INPUT_MAX_LENGTH.ownerName, CARD_ID_VALUE.CVC);
+        if (e.target.value.length >= INPUT_MAX_LENGTH.ownerName) refs.cvc.current!.focus();
         handleOwnerChanged(e);
         break;
+      case CARD_ID_VALUE.CVC:
+        moveFocus(e.target.value.length, INPUT_MAX_LENGTH.cvc, CARD_ID_VALUE.PASSWORD_FIRST);
     }
 
     changeValue(e.target.id, e.target.value);
@@ -73,6 +87,7 @@ const CardInputForm = (props: CardInputFormProps) => {
   };
 
   const handlePasswordChanged = (digit: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    moveFocus(e.target.value.length, INPUT_MAX_LENGTH.passwordFirst, CARD_ID_VALUE.PASSWORD_SECOND);
     const newPassword = [...value.password];
     newPassword[digit] = e.target.value;
     changeValue(e.target.type, newPassword);
@@ -104,6 +119,7 @@ const CardInputForm = (props: CardInputFormProps) => {
           isRequired={true}
           onChange={handleCardChanged}
           onKeyDown={handleCardKeyDown}
+          ref={refs.cardNumber}
         />
         <span>{cardNumberValidation(realCardNumber) ? '' : '카드 번호에는 숫자만 입력 가능합니다.'}</span>
       </InputSetWrapper>
@@ -120,6 +136,7 @@ const CardInputForm = (props: CardInputFormProps) => {
           isRequired={true}
           onChange={handleCardChanged}
           onKeyDown={handleCardKeyDown}
+          ref={refs.expiredDate}
         />
         <span>{expiredDateValidation(value.expiredDate) ? '' : '유효하지 않은 입력(월/연)입니다.'}</span>
       </InputSetWrapper>
@@ -137,6 +154,7 @@ const CardInputForm = (props: CardInputFormProps) => {
           isAutoFocus={false}
           isRequired={false}
           onChange={handleCardChanged}
+          ref={refs.ownerName}
         />
         <span>{ownerNameValidation(value.ownerName) ? '' : '카드 소유자 이름은 영어만 가능합니다.'}</span>
       </InputSetWrapper>
@@ -152,6 +170,7 @@ const CardInputForm = (props: CardInputFormProps) => {
             isAutoFocus={false}
             isRequired={true}
             onChange={handleCardChanged}
+            ref={refs.cvc}
           />
           <img src={QuestionMark} alt="도움말" onClick={() => setIsAnswered(!isAnswered)} />
           {isAnswered && (
@@ -174,6 +193,7 @@ const CardInputForm = (props: CardInputFormProps) => {
             isAutoFocus={false}
             isRequired={true}
             onChange={handlePasswordChanged(PASSWORD_DIGIT_INDEX.FIRST)}
+            ref={refs.passwordFirst}
           />
           <CardInput
             id={CARD_ID_VALUE.PASSWORD_SECOND}
@@ -183,6 +203,7 @@ const CardInputForm = (props: CardInputFormProps) => {
             isAutoFocus={false}
             isRequired={true}
             onChange={handlePasswordChanged(PASSWORD_DIGIT_INDEX.SECOND)}
+            ref={refs.passwordSecond}
           />
           <span>●</span>
           <span>●</span>

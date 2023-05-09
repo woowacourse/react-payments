@@ -4,6 +4,7 @@ import ModalBanks from '../components/ModalBanks';
 const meta = {
   title: 'ModalBanks',
   component: ModalBanks,
+  tags: ['autodocs'],
 };
 
 export default meta;
