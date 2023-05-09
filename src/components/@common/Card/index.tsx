@@ -2,6 +2,7 @@ import React from "react";
 import { CardIDProps, CardNumberProps, ExpireDateProps } from "src/interfaces";
 import { Styled as S } from "./Card.styles";
 import { BANK_LIST, NUMBERS } from "src/utils/constant";
+import { getBankListName } from "src/utils";
 
 interface Props {
   cardName?: CardIDProps;
@@ -28,7 +29,7 @@ function Card({
     );
   });
 
-  const name = BANK_LIST.find(({ id }) => id === cardName)?.name;
+  const name = getBankListName(cardName ?? null);
   const expire =
     expireDate[0].length === NUMBERS.EACH_MM_YY
       ? expireDate.join("/")

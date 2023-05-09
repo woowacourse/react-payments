@@ -79,7 +79,7 @@ export const isValidateFormValues = (cardInfo: CardInfoProps) => {
     MAX_OWNER_NAME,
   } = NUMBERS;
 
-  const { cardNumbers, expireDate, securityCode, password, ownerName } =
+  const { cardNumbers, expireDate, securityCode, password, ownerName,cardName } =
     cardInfo;
 
   const exceptOwnerName =
@@ -87,7 +87,7 @@ export const isValidateFormValues = (cardInfo: CardInfoProps) => {
     objectValueToString(expireDate).length === MAX_EXPIREDATE &&
     MMYY_REGEXP.test(objectValueToString(expireDate)) &&
     securityCode.length === MAX_SECURITY &&
-    objectValueToString(password).length === MAX_PASSWORD;
+    objectValueToString(password).length === MAX_PASSWORD && cardName;
 
   const nameLength = ownerName.length;
 
