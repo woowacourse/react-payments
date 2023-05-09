@@ -2,11 +2,12 @@ import { Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { CardViewer } from './CardViewer';
-import { cardDataService } from '../domains/cardDataService';
+import { useCardDataService } from '../hooks/useCardDataService';
 
 export function CardListContainer() {
   const navigate = useNavigate();
-  const cardList = cardDataService.getCardList();
+  const { getCardList } = useCardDataService();
+  const cardList = getCardList();
 
   return (
     <>
@@ -43,7 +44,7 @@ const Style = {
 
     font-size: 14px;
     text-align: center;
-    color: #575757;
+    color: var(--grey-600);
   `,
 
   CardAlias: styled.p`
@@ -53,7 +54,7 @@ const Style = {
     font-size: 14px;
     font-weight: bold;
     text-align: center;
-    color: #575757;
+    color: var(--grey-600);
   `,
 
   AddCardButton: styled.button`
@@ -67,11 +68,11 @@ const Style = {
     height: 133px;
 
     border-radius: 5px;
-    background-color: #e5e5e5;
+    background-color: var(--grey-300);
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
 
     font-size: 35px;
-    color: #3a3a3a;
+    color: var(--grey-700);
 
     cursor: pointer;
     &:hover {

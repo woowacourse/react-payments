@@ -1,32 +1,31 @@
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { Input } from '../input/Input';
-import { Button } from '../Button/Button';
+import { Input } from '../common/Input';
+import { Button } from '../common/Button/Button';
+import { Loading } from '../common/Spinner/Loading';
 import { CardViewer } from '../CardViewer';
 import { CardNotFound } from '../CardNotFound';
-import { cardDataService } from '../../domains/cardDataService';
+import { useCardDataService } from '../../hooks/useCardDataService';
 import { isOverMaxLength } from '../../utils/validator';
 import { CARD_ALIAS_SIZE, ERROR } from '../../constants';
 
 export function CardAliasAddForm() {
-  const [cardAlias, setCardAlias] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
+  const [isShowLoading, setIsShowLoading] = useState(false);
+  const [cardAlias, setCardAlias] = useState('');
+  const { getCard, addAliasToCard } = useCardDataService();
 
   if (!location.state) return <CardNotFound />;
 
   const cardId = location.state.cardId;
-  const card = cardDataService.getCard(cardId);
+  const card = getCard(cardId);
 
   if (!card) return <CardNotFound />;
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (isOverMaxLength(e.target.value, CARD_ALIAS_SIZE)) {
-      alert(ERROR.INVALID_CARD_ALIAS);
-
-      e.target.value = '';
-    }
+    if (isOverMaxLength(e.target.value, CARD_ALIAS_SIZE)) alert(ERROR.INVALID_CARD_ALIAS);
 
     setCardAlias(e.target.value);
   };
@@ -35,33 +34,47 @@ export function CardAliasAddForm() {
     e.preventDefault();
     if (!(e.target instanceof HTMLFormElement)) return;
 
-    cardDataService.addAliasToCard(card.id, e.target.alias.value);
-    navigate('/');
+    setIsShowLoading(true);
+    addAliasToCard(card.id, e.target.alias.value);
+    closeLoading();
+  };
+
+  const closeLoading = () => {
+    setTimeout(() => {
+      setIsShowLoading(false);
+      navigate('/');
+    }, 5000);
   };
 
   return (
     <Style.Container>
-      <Style.Title>카드등록이 완료되었습니다.</Style.Title>
-      <CardViewer card={card} />
-      <Style.Form onSubmit={handleAliasSubmit}>
-        <Input
-          value={cardAlias}
-          designType='underline'
-          name='alias'
-          placeholder='카드 별칭을 입력해주세요.(선택)'
-          maxLength={CARD_ALIAS_SIZE}
-          autoFocus
-          width={'240px'}
-          height={'45px'}
-          onChange={handleInputChange}
-        />
-        <Style.AliasLength aria-label='카드 별칭 입력 길이 표시'>
-          {cardAlias.length}/{CARD_ALIAS_SIZE}
-        </Style.AliasLength>
-        <Style.ButtonWrapper>
-          <Button designType='text'>확인</Button>
-        </Style.ButtonWrapper>
-      </Style.Form>
+      {isShowLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <Style.Title>카드등록이 완료되었습니다.</Style.Title>
+          <CardViewer card={card} />
+          <Style.Form onSubmit={handleAliasSubmit}>
+            <Input
+              value={cardAlias}
+              designType='underline'
+              name='alias'
+              placeholder='카드 별칭을 입력해주세요.(선택)'
+              maxLength={CARD_ALIAS_SIZE}
+              autoFocus
+              width={'240px'}
+              height={'45px'}
+              onChange={handleInputChange}
+            />
+            <Style.AliasLength aria-label='카드 별칭 입력 길이 표시'>
+              {cardAlias.length}/{CARD_ALIAS_SIZE}
+            </Style.AliasLength>
+            <Style.ButtonWrapper>
+              <Button designType='text'>확인</Button>
+            </Style.ButtonWrapper>
+          </Style.Form>
+        </>
+      )}
     </Style.Container>
   );
 }
@@ -85,6 +98,7 @@ const Style = {
     font-size: 24px;
     font-weight: 500;
     text-align: center;
+    color: var(--grey-700);
   `,
 
   Form: styled.form`
@@ -113,6 +127,6 @@ const Style = {
     left: 290px;
 
     font-size: 12px;
-    color: #727272;
+    color: var(--grey-600);
   `,
 };

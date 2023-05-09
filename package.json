@@ -14,6 +14,7 @@
     "@types/react-router-dom": "^5.3.3",
     "@types/styled-components": "^5.1.26",
     "react": "^18.2.0",
+    "react-chex-modal": "^0.0.6",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.10.0",
     "react-scripts": "5.0.1",
@@ -59,18 +60,19 @@
     ]
   },
   "devDependencies": {
-    "@storybook/addon-essentials": "^7.0.5",
-    "@storybook/addon-interactions": "^7.0.5",
-    "@storybook/addon-links": "^7.0.5",
-    "@storybook/blocks": "^7.0.5",
-    "@storybook/preset-create-react-app": "^7.0.5",
-    "@storybook/react": "^7.0.5",
-    "@storybook/react-webpack5": "^7.0.5",
-    "@storybook/testing-library": "^0.0.14-next.2",
+    "@storybook/addon-essentials": "^7.0.9",
+    "@storybook/addon-interactions": "^7.0.9",
+    "@storybook/addon-links": "^7.0.9",
+    "@storybook/blocks": "^7.0.9",
+    "@storybook/jest": "^0.1.0",
+    "@storybook/preset-create-react-app": "^7.0.9",
+    "@storybook/react": "^7.0.9",
+    "@storybook/react-webpack5": "^7.0.9",
+    "@storybook/testing-library": "^0.1.0",
     "@types/uuid": "^9.0.1",
     "babel-plugin-named-exports-order": "^0.0.2",
     "prop-types": "^15.8.1",
-    "storybook": "^7.0.5",
+    "storybook": "^7.0.9",
     "webpack": "^5.79.0"
   }
 }

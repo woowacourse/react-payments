@@ -1,23 +1,26 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import ChexModal from 'react-chex-modal';
+import { Button } from '../common/Button/Button';
 import { CardViewer } from '../CardViewer';
-import { CardNumberInput } from '../input/CardNumberInput';
-import { ExpirationDateInput } from '../input/ExpirationDateInput';
-import { OwnerNameInput } from '../input/OwnerNameInput';
-import { SecurityCodeInput } from '../input/SecurityCodeInput';
-import { PasswordInput } from '../input/PasswordInput';
-import { Button } from '../Button/Button';
+import { CardSelectModalContent } from '../Modal/CardSelectModalContent';
+import {
+  CardNumberInput,
+  ExpirationDateInput,
+  OwnerNameInput,
+  SecurityCodeInput,
+  PasswordInput,
+} from '../Input';
+import { useModal } from '../../hooks/useModal';
 import { useCardRegisterForm } from '../../hooks/useCardRegisterForm';
-import { cardDataService } from '../../domains/cardDataService';
-import { ModalWithCloseButton } from '../Modal/ModalWithCloseButton';
-import { CARD_SELECT_COMPLETE_BUTTON } from '../../constants';
-import { CardSelectModalContent } from '../Modal/CardSelect/CardSelectModalContent';
+import { useCardDataService } from '../../hooks/useCardDataService';
 import { CardCompany } from '../../types';
 
 export function CardRegisterForm() {
   const navigate = useNavigate();
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const { addNewCard } = useCardDataService();
+  const { isModalOpen, showModal, closeModal } = useModal();
   const { card, cardDispatch, isValidCardForm } = useCardRegisterForm();
 
   const cardNumberInputRef = useRef<HTMLInputElement>(null);
@@ -26,54 +29,34 @@ export function CardRegisterForm() {
   const securityCodeInputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
 
+  const moveFocusToExpirationDate = () => monthInputRef.current?.focus();
+  const moveFocusToOwnerName = () => ownerNameInputRef.current?.focus();
+  const moveFocusToSecurityCode = () => securityCodeInputRef.current?.focus();
+  const moveFocusToPassword = () => passwordInputRef.current?.focus();
+
   const handleCardInfoSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    cardDataService.addNewCard(card);
+    addNewCard(card);
 
     navigate('/add-alias', { state: { cardId: card.id } });
   };
 
-  const moveFocusToExpirationDate = () => {
-    monthInputRef.current?.focus();
-  };
-
-  const moveFocusToOwnerName = () => {
-    ownerNameInputRef.current?.focus();
-  };
-
-  const moveFocusToSecurityCode = () => {
-    securityCodeInputRef.current?.focus();
-  };
-
-  const moveFocusToPassword = () => {
-    passwordInputRef.current?.focus();
-  };
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
   useEffect(() => {
-    if (isModalOpen) return;
-    cardNumberInputRef.current?.focus();
+    if (!isModalOpen) cardNumberInputRef.current?.focus();
   }, [isModalOpen]);
 
   return (
     <Style.Container onSubmit={handleCardInfoSubmit}>
-      <ModalWithCloseButton
-        isOpen={isModalOpen}
-        setIsOpen={setIsModalOpen}
-        buttonText={CARD_SELECT_COMPLETE_BUTTON}
-        aria-labelledby='title-dialog'
-      >
+      <ChexModal isModalOpen={isModalOpen} closeModal={closeModal} aria-labelledby='title-dialog'>
         <CardSelectModalContent
           setCardCompany={(input: CardCompany) =>
             cardDispatch({ type: 'SET_CARD_COMPANY', cardCompany: input })
           }
+          closeModal={closeModal}
         />
-      </ModalWithCloseButton>
-      <Style.CardCompanySelectButton type={'button'} onClick={openModal}>
+      </ChexModal>
+      <Style.CardCompanySelectButton type={'button'} onClick={showModal}>
         <CardViewer card={card} />
       </Style.CardCompanySelectButton>
       <Style.InputContainer>
@@ -137,8 +120,6 @@ const Style = {
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    color: #9a9a9a;
 
     cursor: pointer;
     &:hover {

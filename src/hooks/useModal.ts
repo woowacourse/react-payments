@@ -1,9 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-export const useModal = (setIsOpen: React.Dispatch<React.SetStateAction<boolean>>) => {
-  const closeModal = () => {
-    setIsOpen(false);
-  };
+export const useModal = () => {
+  const [isModalOpen, setIsModalOpen] = useState(true);
+
+  const showModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
   const handleEscPress = (e: KeyboardEvent) => {
     if (e.key === 'Escape') closeModal();
@@ -17,5 +18,5 @@ export const useModal = (setIsOpen: React.Dispatch<React.SetStateAction<boolean>
     };
   }, []);
 
-  return closeModal;
+  return { isModalOpen, showModal, closeModal };
 };

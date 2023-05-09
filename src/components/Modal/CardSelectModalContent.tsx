@@ -1,0 +1,81 @@
+import styled from 'styled-components';
+import { CardCompanyItem } from './CardCompanyItem';
+import { CARD_COMPANY, CARD_SELECT_COMPLETE_BUTTON } from '../../constants';
+import { CardCompany } from '../../types';
+import { Button } from '../common/Button/Button';
+
+interface Props {
+  setCardCompany: (input: CardCompany) => void;
+  closeModal: () => void;
+}
+
+export function CardSelectModalContent({ setCardCompany, closeModal }: Props) {
+  const cardCompanies = Object.values(CARD_COMPANY);
+
+  return (
+    <>
+      <Style.Title id='title-dialog'>카드사를 선택해주세요.</Style.Title>
+      <Style.GridContainer>
+        {cardCompanies.map(({ name, logo }) => {
+          return (
+            <CardCompanyItem key={name} name={name} logo={logo} setCardCompany={setCardCompany} />
+          );
+        })}
+      </Style.GridContainer>
+      <Style.ButtonWrapper>
+        <Button
+          type={'button'}
+          onClick={closeModal}
+          width={'100%'}
+          height={'45px'}
+          fontSize={'14px'}
+        >
+          {CARD_SELECT_COMPLETE_BUTTON}
+        </Button>
+      </Style.ButtonWrapper>
+    </>
+  );
+}
+
+const Style = {
+  Title: styled.h2`
+    width: 358px;
+    padding: 0 10px;
+    margin-left: 10px;
+    margin-bottom: 20px;
+
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--grey-700);
+  `,
+
+  ContentContainer: styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  `,
+
+  GridContainer: styled.ul`
+    display: grid;
+    grid-template-columns: repeat(4, calc(80% / 4));
+    grid-column-gap: calc(20% / 3);
+    grid-row-gap: 20px;
+
+    width: 358px;
+    padding: 0 10px;
+    list-style: none;
+  `,
+
+  ButtonWrapper: styled.div`
+    display: flex;
+    justify-content: center;
+
+    width: 358px;
+    padding: 0 10px;
+    margin-top: 20px;
+
+    font-size: 20px;
+
+    cursor: pointer;
+  `,
+};

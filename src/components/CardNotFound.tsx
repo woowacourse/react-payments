@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Layout } from '../layout';
-import { BackButton } from './Button/BackButton';
+import { BackButton } from './common/Button/BackButton';
 
 const imageUrl =
   'https://img.freepik.com/free-photo/high-angle-dog-making-a-mess-with-toilet-paper_23-2149544912.jpg?w=2000&t=st=1683042025~exp=1683042625~hmac=d692d7303bf32037bf61ca2f6c8e0a8930b299e8e2c3f447ec45d5c3740267b3';
@@ -21,8 +21,7 @@ export function CardNotFound() {
         </Style.ImageSource>
         <Style.Title>카드 등록에 문제가 생겼어요.</Style.Title>
         <Style.Content>
-          같은 문제가 반복된다면 웹 페이지를 껐다 켠 후<br />
-          처음부터 다시 한번 시도해주세요. <br />
+          {'같은 문제가 반복된다면 웹 페이지를 껐다 켠 후\n처음부터 다시 한번 시도해주세요.'}
         </Style.Content>
       </Style.Container>
     </Layout>
@@ -53,7 +52,8 @@ const Style = {
 
     font-size: 16px;
     text-align: justify;
-    color: #6f6f6f;
+    color: var(--grey-600);
+    white-space: pre-line;
   `,
 
   Image: styled.img`
@@ -74,14 +74,14 @@ const Style = {
     position: absolute;
     left: 30px;
     border-radius: 5px;
-    background-color: #ffa759;
+    background-color: var(--orange-100);
   `,
 
   ImageSource: styled.p`
     margin-top: 10px;
 
     font-size: 10px;
-    color: #6f6f6f;
+    color: var(--grey-500);
 
     & a {
       color: inherit;
