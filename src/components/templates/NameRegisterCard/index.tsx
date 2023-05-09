@@ -1,27 +1,30 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useRef } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { URL } from '../../../utils/constant';
 import Button from '../../atomics/Button';
 import Input from '../../atomics/Input';
 import Message from '../../atomics/Message';
-import { useCardListDispatch, useCardListState } from '../../context/CardPaymentContext';
 import { VStack } from '../../layout/flexbox';
 import CardItem from '../../molecules/CardItem';
 
 const NameRegisterCard: React.FC = () => {
-  const [nickName, setNickName] = useState<string>('');
-
-  const cardList = useCardListState();
-  const cardListDispatcher = useCardListDispatch();
-
+  const nickName = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
+  const { state } = useLocation();
 
-  const card = cardList[cardList.length - 1];
+  const handleRegisterCard = async () => {
+    await fetch(URL, {
+      method: 'POST',
+      body: JSON.stringify({
+        ...state,
+        nickName: nickName.current!.value,
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    });
 
-  const handleRegisterCard = () => {
-    card.nickName = nickName;
-
-    cardListDispatcher([...cardList.slice(0, cardList.length - 1), card]);
     navigate('/');
   };
 
@@ -30,7 +33,7 @@ const NameRegisterCard: React.FC = () => {
       <Message fontSize="24px" lineHeight="28px" color="#383838">
         카드 등록이 완료되었습니다.
       </Message>
-      <CardItem card={card} />
+      <CardItem card={state} />
       <Input
         type="text"
         isValid={true}
@@ -38,9 +41,7 @@ const NameRegisterCard: React.FC = () => {
         width="244px"
         center={true}
         placeholder="엄마카드"
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-          setNickName(e.target.value);
-        }}
+        ref={nickName}
       />
       <ButtonWrapper>
         <Button type="button" width="50px" height="30px" onClick={handleRegisterCard}>

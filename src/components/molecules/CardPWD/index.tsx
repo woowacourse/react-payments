@@ -20,7 +20,7 @@ const CardPWD: React.FC = () => {
   const [isErrorFirstPWD, handleErrorFirstPWD] = useInputError();
   const [isErrorSecondPWD, handleErrorSecondPWD] = useInputError();
   const moveFocus = useMoveFocus();
-  const dispatch = useCardPaymentDispatch();
+  const formDispatch = useCardPaymentDispatch();
 
   const isError = isErrorFirstPWD || isErrorSecondPWD;
 
@@ -28,7 +28,7 @@ const CardPWD: React.FC = () => {
     (id: number, handleError: (e: React.ChangeEvent<HTMLInputElement>) => void) =>
     (e: React.ChangeEvent<HTMLInputElement>) => {
       handleError(e);
-      dispatch(changeCardPWD(id, e.target.value));
+      formDispatch(changeCardPWD(id, e.target.value));
       moveFocus(e);
     };
 
@@ -40,7 +40,7 @@ const CardPWD: React.FC = () => {
         </Message>
         <StyledCardInputWrapper>
           <Input
-            type="text"
+            type="password"
             variant="underline"
             pattern="[0-9]{1}"
             width="40px"
@@ -53,7 +53,7 @@ const CardPWD: React.FC = () => {
             onChange={handleChange(0, handleErrorFirstPWD)}
           />
           <Input
-            type="text"
+            type="password"
             variant="underline"
             pattern="[0-9]{1}"
             width="40px"

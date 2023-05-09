@@ -18,11 +18,11 @@ const CardOwner: React.FC = () => {
   const inputRefs = useCardFocusRefs();
   const state = useCardPaymentState();
   const [isError, handleError] = useInputError();
-  const dispatch = useCardPaymentDispatch();
+  const formDispatch = useCardPaymentDispatch();
 
   const handleChange = (id: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
     handleError(e);
-    dispatch(changeCardOwner(id, e.target.value));
+    formDispatch(changeCardOwner(id, e.target.value));
   };
 
   return (

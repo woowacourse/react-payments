@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useCardPaymentState } from '../../components/context/CardPaymentContext';
-
 import CardItem from '../../components/molecules/CardItem';
 import Header from '../../components/molecules/Header';
 import CardForm from '../../components/organisms/CardForm';

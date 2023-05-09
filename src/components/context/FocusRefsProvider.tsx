@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { INPUT_COUNT } from '../../utils/constant';
 import { CardFocusRefContext, MoveFocusRefContext } from './CardPaymentContext';
 
 type ChildProps = {
@@ -10,7 +11,7 @@ const FocusRefProvider: React.FC<ChildProps> = ({ children }) => {
 
   const moveFocus = (e: React.ChangeEvent<HTMLInputElement>) => {
     const id = Number(e.target.dataset.formId);
-    if (!e.target.validity.valid || id >= 9) return;
+    if (!e.target.validity.valid || id >= INPUT_COUNT) return;
     inputRefs.current[id + 1].focus();
   };
 

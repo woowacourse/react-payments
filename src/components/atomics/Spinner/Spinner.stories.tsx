@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import CardList from '.';
+import Spinner from '.';
 
-const meta: Meta<typeof CardList> = {
-  title: 'organisms/CardList',
-  component: CardList,
+const meta: Meta<typeof Spinner> = {
+  title: 'atomics/Spinner',
+  component: Spinner,
 };
 
 export default meta;

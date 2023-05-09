@@ -20,10 +20,10 @@ const CardExpiration: React.FC = () => {
   const [{ isDateError, isMonthError, isYearError }, { handleMonthError, handleYearError }] =
     useExpirationError();
   const moveFocus = useMoveFocus();
-  const dispatch = useCardPaymentDispatch();
+  const formDispatcher = useCardPaymentDispatch();
 
   const handleChange = (id: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(changeCardExpirationDate(id, e.target.value));
+    formDispatcher(changeCardExpirationDate(id, e.target.value));
     moveFocus(e);
 
     if (id === 0) {

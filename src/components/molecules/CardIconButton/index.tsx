@@ -8,7 +8,8 @@ import { changeCardName } from '../../../store/action';
 
 import { VStack } from '../../layout/flexbox';
 
-import { useCardModalDispatch, useCardPaymentDispatch } from '../../context/CardPaymentContext';
+import { useCardPaymentDispatch } from '../../context/CardPaymentContext';
+import { useModalContext } from 'turtle601-modal-like-chakra-ui';
 
 type CardName = 'BC' | 'HANA' | 'HYUNDAI' | 'KAKAO' | 'KB' | 'LOTTE' | 'SHINHAN' | 'WORRI';
 
@@ -19,12 +20,12 @@ interface IconProps {
 }
 
 const CardIconButton: React.FC<IconProps> = ({ cardName, ...rest }) => {
-  const dispatcher = useCardPaymentDispatch();
-  const modalDispatcher = useCardModalDispatch();
+  const formDispatcher = useCardPaymentDispatch();
+  const { closeModal } = useModalContext();
 
   const onClickCardIcon = (cardName: string) => () => {
-    dispatcher(changeCardName(cardName));
-    modalDispatcher();
+    formDispatcher(changeCardName(cardName));
+    closeModal();
   };
 
   return (

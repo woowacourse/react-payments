@@ -18,10 +18,15 @@ import { VStack } from '../../layout/flexbox';
 const CardNumbers: React.FC = () => {
   const inputRefs = useCardFocusRefs();
   const moveFocus = useMoveFocus();
-  const errorList = [useInputError(), useInputError(), useInputError(), useInputError()];
+  const errorMap = {
+    first: useInputError(),
+    second: useInputError(),
+    third: useInputError(),
+    fourth: useInputError(),
+  };
   const dispatch = useCardPaymentDispatch();
-
-  const isError = errorList[0][0] || errorList[1][0] || errorList[2][0] || errorList[3][0];
+  const isError =
+    errorMap.first[0] || errorMap.second[0] || errorMap.third[0] || errorMap.fourth[0];
 
   const handleChange =
     (id: number, handleError: (e: React.ChangeEvent<HTMLInputElement>) => void) =>
@@ -38,7 +43,7 @@ const CardNumbers: React.FC = () => {
           카드 번호
         </Message>
         <StyledCardInputWrapper>
-          {errorList.map(([error, handleError], idx) => (
+          {Object.values(errorMap).map(([error, handleError], idx) => (
             <Input
               key={idx}
               type={idx < 2 ? 'text' : 'password'}

@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
+import { ROUTER } from '../../../utils/constant';
 import Button from '../../atomics/Button';
 import Message from '../../atomics/Message';
 
@@ -10,7 +11,7 @@ const CardRegister: React.FC = () => {
   const navigate = useNavigate();
 
   const goAddCardPage = () => {
-    navigate('/addCard');
+    navigate(ROUTER.addCard);
   };
 
   return (

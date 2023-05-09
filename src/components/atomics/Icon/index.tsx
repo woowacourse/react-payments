@@ -33,7 +33,7 @@ const Icon: React.FC<IconProps> = ({ cardName, width, height }) => {
       return <LOTTE width={width} height={height} />;
     case 'SHINHAN':
       return <SHINHAN width={width} height={height} />;
-    case 'WORRI':
+    default:
       return <WORRI width={width} height={height} />;
   }
 };

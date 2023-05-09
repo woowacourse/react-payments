@@ -18,12 +18,12 @@ import {
 const CardCVC: React.FC = () => {
   const inputRefs = useCardFocusRefs();
   const [isError, handleError] = useInputError();
-  const dispatch = useCardPaymentDispatch();
+  const formDispatch = useCardPaymentDispatch();
   const moveFocus = useMoveFocus();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     handleError(e);
-    dispatch(changeCardCVCAction(0, e.target.value));
+    formDispatch(changeCardCVCAction(0, e.target.value));
     moveFocus(e);
   };
 
