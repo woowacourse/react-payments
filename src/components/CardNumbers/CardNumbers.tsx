@@ -17,7 +17,7 @@ const CardNumbers = ({
   errorMessage,
   isValidatedCardNumbers,
 }: CardNumbersProps) => {
-  const cardRefs = useContext(RefContext);
+  const { inputRefs: cardRefs, focusNextInput } = useContext(RefContext);
 
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!(e.target instanceof HTMLInputElement)) return;
@@ -25,13 +25,7 @@ const CardNumbers = ({
 
     if (!isValidatedCardNumbers(currentOrder, e.target.value)) return;
 
-    focusNextInput(currentOrder);
-  };
-
-  const focusNextInput = (currentOrder: number) => {
-    if (cardRefs[currentOrder].current?.value.length === 4) {
-      cardRefs[currentOrder + 1].current?.focus();
-    }
+    focusNextInput(currentOrder, 4);
   };
 
   return (

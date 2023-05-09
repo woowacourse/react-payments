@@ -15,7 +15,7 @@ const CardLogo = ({
   setCardCompany,
   setIsModalOpen,
 }: CardLogoProps) => {
-  const cardRefs = useContext(RefContext);
+  const { inputRefs: cardRefs } = useContext(RefContext);
 
   const handleCardCompany = () => {
     setCardCompany(companyName);

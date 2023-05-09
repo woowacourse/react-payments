@@ -18,7 +18,7 @@ const CardExpiredDate = ({
   errorMessage,
   isValidatedExpiredDates,
 }: ExpiredDateProps) => {
-  const cardRefs = useContext(RefContext);
+  const { inputRefs: cardRefs, focusNextInput } = useContext(RefContext);
 
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!(e.target instanceof HTMLInputElement)) return;
@@ -33,13 +33,7 @@ const CardExpiredDate = ({
       return;
     }
 
-    focusNextInput(currentOrder);
-  };
-
-  const focusNextInput = (order: number) => {
-    if (cardRefs[order].current?.value.length === 2) {
-      cardRefs[order + 1].current?.focus();
-    }
+    focusNextInput(currentOrder, 2);
   };
 
   return (

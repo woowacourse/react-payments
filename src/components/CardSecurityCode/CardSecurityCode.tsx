@@ -16,7 +16,7 @@ const CardSecurityCode = ({
   errorMessage,
   isValidatedSecurityCode,
 }: SecurityCodeProps) => {
-  const cardRefs = useContext(RefContext);
+  const { inputRefs: cardRefs, focusNextInput } = useContext(RefContext);
   const [isShowToolTip, setIsShowToolTip] = useState(false);
 
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,13 +25,7 @@ const CardSecurityCode = ({
 
     if (!isValidatedSecurityCode(e.target.value)) return;
 
-    focusNextInput(currentOrder);
-  };
-
-  const focusNextInput = (currentOrder: number) => {
-    if (cardRefs[currentOrder].current?.value.length === 3) {
-      cardRefs[currentOrder + 1].current?.focus();
-    }
+    focusNextInput(currentOrder, 3);
   };
 
   return (

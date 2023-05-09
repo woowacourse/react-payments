@@ -16,7 +16,7 @@ const CardOwnerName = ({
   errorMessage,
   isValidatedCardOwnerName,
 }: CardOwnerNameProps) => {
-  const cardRefs = useContext(RefContext);
+  const { inputRefs: cardRefs } = useContext(RefContext);
 
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!(e.target instanceof HTMLInputElement)) return;

@@ -18,7 +18,7 @@ const CardPassword = ({
   errorMessage,
   isValidatedCardPasswords,
 }: CardPasswordProps) => {
-  const cardRefs = useContext(RefContext);
+  const { inputRefs: cardRefs, focusNextInput } = useContext(RefContext);
 
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const currentOrder = Number(e.target.dataset['order']);
@@ -32,13 +32,12 @@ const CardPassword = ({
       return;
     }
 
-    focusNextInput(currentOrder);
-  };
-
-  const focusNextInput = (currentOrder: number) => {
-    if (currentOrder === 8 && cardPasswords[0].length === 0) {
-      cardRefs[currentOrder + 1].current?.focus();
+    if (currentOrder === 9) {
+      focusNextInput(currentOrder, 1, true);
+      return;
     }
+
+    focusNextInput(currentOrder, 1);
   };
 
   return (
