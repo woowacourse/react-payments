@@ -1,17 +1,20 @@
 import styled from "styled-components";
-import { CompanyIcon } from "./CompanyIcon";
-import { CARD_COMPANIES } from "../../constant/cardCompany";
-import { CardType } from "../../types/card";
-import { Company } from "../../types/company";
+import { Modal } from "@dahyeeee/react-components-library";
+import { CardType } from "types/card";
+import { Company } from "types/company";
+import { CARD_COMPANIES } from "constant/cardCompany";
+import { CompanySelect } from "./CompanySelect";
 
 interface CompanySelectModalProps {
   setCardInfo: React.Dispatch<React.SetStateAction<CardType>>;
   closeModal: () => void;
+  isModalOpen: boolean;
 }
 
 export const CompanySelectModal = ({
   setCardInfo,
   closeModal,
+  isModalOpen,
 }: CompanySelectModalProps) => {
   const selectCompany = (company: Company) => {
     setCardInfo((prev) => ({
@@ -23,45 +26,30 @@ export const CompanySelectModal = ({
     closeModal();
   };
 
+  const closeModalWithCompany = () => {
+    setCardInfo((prev) => ({
+      ...prev,
+      color: prev.color || CARD_COMPANIES[0].color,
+      company: prev.company || CARD_COMPANIES[0].name,
+    }));
+
+    closeModal();
+  };
+
   return (
-    <>
-      <BackDrop />
-      <ModalContainer>
-        <IconWrapper>
-          {CARD_COMPANIES.map((company) => (
-            <CompanyIcon
-              key={company.name}
-              company={company}
-              selectCompany={selectCompany}
-            />
-          ))}
-        </IconWrapper>
-      </ModalContainer>
-    </>
+    <Modal isModalVisible={isModalOpen} closeModal={closeModalWithCompany}>
+      <IconWrapper>
+        {CARD_COMPANIES.map((company) => (
+          <CompanySelect
+            key={company.name}
+            company={company}
+            selectCompany={selectCompany}
+          />
+        ))}
+      </IconWrapper>
+    </Modal>
   );
 };
-
-const BackDrop = styled.div`
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.35);
-`;
-
-const ModalContainer = styled.div`
-  position: fixed;
-  bottom: 0;
-  height: 33%;
-  width: 100%;
-
-  display: flex;
-  align-items: center;
-
-  border-radius: 5px 5px 0 0;
-  background-color: white;
-`;
 
 const IconWrapper = styled.div`
   width: 80%;

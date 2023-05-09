@@ -1,30 +1,33 @@
-import { StoryFn } from "@storybook/react";
+import { StoryObj } from "@storybook/react";
+import type { Meta } from "@storybook/react";
 import { Card } from "../components/common/Card";
 
-export default {
+const meta: Meta<typeof Card> = {
   title: "Card",
   component: Card,
+  tags: ["autodocs"],
+  argTypes: {
+    backgroundColor: { control: "color" },
+  },
 };
 
-const Template: StoryFn<typeof Card> = (args: {
-  backgroundColor?: string;
-}): React.ReactElement => (
-  <Card {...args}>
-    <></>
-  </Card>
-);
+export default meta;
+type Story = StoryObj<typeof Card>;
 
-export const Purple = Template.bind({});
-Purple.args = {
-  backgroundColor: "#BA55D3",
+export const Purple: Story = {
+  args: {
+    backgroundColor: "#BA55D3",
+  },
 };
 
-export const Gray = Template.bind({});
-Gray.args = {
-  backgroundColor: "#E5E5E5",
+export const Green: Story = {
+  args: {
+    backgroundColor: "green",
+  },
 };
 
-export const Green = Template.bind({});
-Green.args = {
-  backgroundColor: "green",
+export const Pink: Story = {
+  args: {
+    backgroundColor: "pink",
+  },
 };

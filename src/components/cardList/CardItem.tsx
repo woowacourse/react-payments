@@ -10,28 +10,37 @@ export const CardItem = ({ card }: CardProps) => {
   const hideNumbers = (numbers: string[]): string => {
     return numbers
       .map((number, index) => {
-        if (index === 2 || index === 3) {
+        if (index > 1) {
           return "●".repeat(number.length);
         }
         return number;
       })
-      .join("   ");
+      .join("  ");
   };
 
   return (
-    <Card backgroundColor={card.color}>
-      <Container>
-        <Company>{card.company}</Company>
-        <IcChip />
-        <CardNumbers>{hideNumbers(card.numbers)}</CardNumbers>
-        <InfoWrapper>
-          <Owner>{card.owner}</Owner>
-          <ExpiryDate>{card.expiryDate}</ExpiryDate>
-        </InfoWrapper>
-      </Container>
-    </Card>
+    <CardWrapper>
+      <Card backgroundColor={card.color}>
+        <Container>
+          <Company>{card.company}</Company>
+          <IcChip />
+          <Numbers>{hideNumbers(card.numbers)}</Numbers>
+          <InfoWrapper>
+            <Owner>{card.owner}</Owner>
+            <ExpiryDate>{card.expiryDate}</ExpiryDate>
+          </InfoWrapper>
+        </Container>
+      </Card>
+      <Name>{card.name}</Name>
+    </CardWrapper>
   );
 };
+
+const CardWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const Container = styled.div`
   display: flex;
@@ -58,11 +67,11 @@ const IcChip = styled.div`
   background-color: #cbba64;
 `;
 
-const CardNumbers = styled.div`
+const Numbers = styled.div`
   height: 12px;
   font-size: 12px;
   text-align: left;
-  letter-spacing: 3.2px;
+  letter-spacing: 1.1px;
 `;
 
 const InfoWrapper = styled.div`
@@ -78,3 +87,9 @@ const Owner = styled.div`
 `;
 
 const ExpiryDate = styled.div``;
+
+const Name = styled.div`
+  font-size: 13px;
+  font-weight: 500;
+  margin-top: 10px;
+`;

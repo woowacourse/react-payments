@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import { useState } from "react";
-import { InputContainer, Input, InputLabel } from "../common";
-import { isNumeric } from "../../utils/validate";
-import { useInputFocusChain } from "../../hook/useInputFocusChain";
-import { ERROR_MESSAGE, INPUT_FULL_LENGTH } from "../../constant/cardInput";
+import { useError } from "hook/useError";
+import { useInputFocusChain } from "hook/useInputFocusChain";
+import { ERROR_MESSAGE, INPUT_FULL_LENGTH } from "constant/cardInput";
+import { isNumeric } from "utils/validate";
+import { Input, InputContainer, InputLabel } from "components/common";
 
 const passwordInfo = {
   $width: "43px",
@@ -21,8 +22,11 @@ export const PasswordInput = ({
   validatePasswordInput,
 }: PasswordInputProps) => {
   const [inputValues, setInputValues] = useState(["", ""]);
-  const [isValid, setIsValid] = useState(true);
-  const { inputRefs, moveFocusToNext } = useInputFocusChain(2, 1);
+  const { isError, setErrorState, removeError } = useError();
+  const { inputRefs, moveFocusToNext } = useInputFocusChain(
+    2,
+    INPUT_FULL_LENGTH.PASSWORD
+  );
 
   const handleInput =
     (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,11 +49,7 @@ export const PasswordInput = ({
 
   const validate = () => {
     const validity = validatePasswordInput(inputValues);
-    setIsValid(validity);
-  };
-
-  const eraseErrorMessage = () => {
-    setIsValid(true);
+    setErrorState(!validity);
   };
 
   return (
@@ -60,10 +60,10 @@ export const PasswordInput = ({
           {...passwordInfo}
           handleInput={handleInput(0)}
           handleOutFocus={validate}
-          handleFocus={eraseErrorMessage}
+          handleFocus={removeError}
           label="password1"
           error={{
-            isValid: isValid,
+            isError: isError,
             errorMessage: ERROR_MESSAGE.PASSWORDS,
           }}
           ref={inputRefs[0]}
@@ -72,7 +72,7 @@ export const PasswordInput = ({
           {...passwordInfo}
           handleInput={handleInput(1)}
           handleOutFocus={validate}
-          handleFocus={eraseErrorMessage}
+          handleFocus={removeError}
           label="password2"
           ref={inputRefs[1]}
         />

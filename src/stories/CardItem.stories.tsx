@@ -1,29 +1,27 @@
-import { StoryFn } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 import { CardItem } from "../components/cardList/CardItem";
-import { CardType } from "../types/card";
 
-export default {
+const meta: Meta<typeof CardItem> = {
   title: "CardItem",
   component: CardItem,
+  tags: ["atuodocs"],
 };
 
-const shinhanCard = {
-  id: "shinhanCard",
-  name: "nickname",
-  color: "purple",
-  company: "신한카드",
-  numbers: ["1234", "1234", "1234", "1234"],
-  owner: "DAHYE",
-  expiryDate: "12 / 25",
-  CVC: 123,
-  password: ["1", "2"],
-};
+export default meta;
+type Story = StoryObj<typeof CardItem>;
 
-const Template: StoryFn<typeof CardItem> = (args: {
-  card: CardType;
-}): React.ReactElement => <CardItem {...args} />;
-
-export const ShinhanCard = Template.bind({});
-ShinhanCard.args = {
-  card: shinhanCard,
+export const ShinhanCard: Story = {
+  args: {
+    card: {
+      numbers: ["1234", "1234", "1234", "1234"],
+      owner: "DAHYE",
+      expiryDate: "12 / 25",
+      CVC: 123,
+      password: ["1", "2"],
+      company: "신한카드",
+      color: "#A6D0DD",
+      name: "엄마카드",
+      id: "randomId",
+    },
+  },
 };

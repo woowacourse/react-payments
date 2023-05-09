@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import { Company } from "../../types/company";
+import { Company } from "types/company";
 
 interface CompanyProps {
   company: Company;
   selectCompany: (company: Company) => void;
 }
 
-export const CompanyIcon = ({ company, selectCompany }: CompanyProps) => {
+export const CompanySelect = ({ company, selectCompany }: CompanyProps) => {
   const handleClick = () => {
     selectCompany(company);
   };

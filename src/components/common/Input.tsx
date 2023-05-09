@@ -7,7 +7,7 @@ export interface InputProps {
   $textPosition: string;
   type: string;
   placeholder?: string;
-  error?: { isValid: boolean; errorMessage: string };
+  error?: { isError: boolean; errorMessage: string };
   handleInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleOutFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
   handleFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
@@ -21,14 +21,14 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       $textPosition,
       placeholder = "",
       type,
-      error = { isValid: true, errorMessage: "" },
+      error = { isError: false, errorMessage: "" },
       handleInput,
       handleOutFocus,
       handleFocus,
     },
     ref
   ) => {
-    const { isValid, errorMessage } = error;
+    const { isError, errorMessage } = error;
 
     return (
       <Colum $width={$width}>
@@ -43,7 +43,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           type={type}
           ref={ref}
         />
-        {<ErrorMessage>{!isValid ? errorMessage : ""}</ErrorMessage>}
+        {<ErrorMessage>{isError ? errorMessage : ""}</ErrorMessage>}
       </Colum>
     );
   }

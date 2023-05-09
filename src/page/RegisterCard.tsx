@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import { CardItem } from "../components/cardList/CardItem";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { PAGE } from "../constant/routePath";
-import { useCardList } from "../components/cardForm/hooks/useCardList";
+import { useCardList } from "components/cardForm/hooks/useCardList";
+import { PAGE } from "constant/routePath";
+import { CardItem } from "components/cardList/CardItem";
 
 export const RegisterCard = () => {
   const { cards, cardListActions } = useCardList();
@@ -22,7 +22,7 @@ export const RegisterCard = () => {
       cardListActions.updateCard(newCard.id, { name });
     }
 
-    moveTo(PAGE.home);
+    moveTo(PAGE.loading);
   };
 
   return (

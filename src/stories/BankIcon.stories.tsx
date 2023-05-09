@@ -1,17 +1,17 @@
 import { StoryFn } from "@storybook/react";
-import { CompanyIcon } from "../components/companySelectModal/CompanyIcon";
+import { CompanySelect } from "../components/companySelectModal/CompanySelect";
 import { kakaoLogo, shinhanLogo } from "../assets/card_company";
 import { Company } from "../types/company";
 
 export default {
   title: "CompanyIcon",
-  component: CompanyIcon,
+  component: CompanySelect,
 };
 
-const Template: StoryFn<typeof CompanyIcon> = (args: {
+const Template: StoryFn<typeof CompanySelect> = (args: {
   company: Company;
   selectCompany: (company: Company) => void;
-}): React.ReactElement => <CompanyIcon {...args} />;
+}): React.ReactElement => <CompanySelect {...args} />;
 
 export const KakaoBank = Template.bind({});
 

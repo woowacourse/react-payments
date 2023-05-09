@@ -5,7 +5,7 @@ import {
   useEffect,
   useMemo,
 } from "react";
-import { CardType } from "../types/card";
+import { CardType } from "types/card";
 
 type CardListContextType = {
   cards: CardType[];

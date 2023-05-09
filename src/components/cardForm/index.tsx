@@ -1,15 +1,15 @@
 import styled from "styled-components";
-import { CardType } from "../../types/card";
+import { FormEvent } from "react";
+import { useNavigate } from "react-router-dom";
 import { CVCInput } from "./CVCInput";
 import { NumbersInput } from "./NumbersInput";
 import { ExpiryDateInput } from "./ExpiryDateInput";
 import { OwnerInput } from "./OwnerInput";
 import { PasswordInput } from "./PasswordInput";
-import { FormEvent } from "react";
-import { useNavigate } from "react-router-dom";
 import { useValidation } from "./hooks/useValidation";
-import { PAGE } from "../../constant/routePath";
 import { useCardList } from "./hooks/useCardList";
+import { CardType } from "types/card";
+import { PAGE } from "constant/routePath";
 
 interface CardFormProps {
   setCardInfo: React.Dispatch<React.SetStateAction<CardType>>;
