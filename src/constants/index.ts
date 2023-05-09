@@ -9,21 +9,30 @@ import {
   WooriCard,
 } from "../assets";
 
-const CARD_INPUT_LENGTH: Record<string, number> = {
+const CARD_INPUT_LENGTH = {
   cardNumber: 25,
   expiredDate: 7,
-  ownerName: 12,
+  ownerName: 14,
   cvc: 3,
-  password: 2,
+  password: 1,
 } as const;
 
-const SEPERATED_CARD_NUMBER_LENGTH: Record<string, number> = {
+const SEPERATED_CARD_NUMBER_LENGTH = {
   FIRST: 4,
   SECOND: 11,
   THIRD: 18,
 } as const;
 
 const SEPERATED_EXPIRED_DATE_LENGTH = 2;
+
+const CARD_INPUT_REFS_INDEX: Record<string, number> = {
+  cardNumber: 0,
+  expiredDate: 1,
+  ownerName: 2,
+  cvc: 3,
+  password1: 4,
+  password2: 5,
+} as const;
 
 const PASSWORD_DIGIT_INDEX: Record<string, number> = {
   FIRST: 0,
@@ -33,7 +42,7 @@ const PASSWORD_DIGIT_INDEX: Record<string, number> = {
 const SEPERATOR_STRING = {
   cardNumber: " - ",
   expiredDate: " / ",
-};
+} as const;
 
 const REGEX = {
   globalNumber: /[0-9]/g,
@@ -41,7 +50,7 @@ const REGEX = {
   english: /^[a-zA-Z]*$/,
 } as const;
 
-const CARD_COMPANY: Record<string, { img?: string }> = {
+const CARD_COMPANY: Record<string, { img: string }> = {
   BC카드: {
     img: BcCard,
   },
@@ -66,8 +75,6 @@ const CARD_COMPANY: Record<string, { img?: string }> = {
 
 const CARD_COMPANY_NOT_SELECTED_STRING = "카드사선택필요";
 
-const VALID_CARD_INPUT_FORM_LENGTH = 477;
-
 export {
   CARD_INPUT_LENGTH,
   SEPERATED_CARD_NUMBER_LENGTH,
@@ -77,5 +84,5 @@ export {
   SEPERATED_EXPIRED_DATE_LENGTH,
   CARD_COMPANY,
   CARD_COMPANY_NOT_SELECTED_STRING,
-  VALID_CARD_INPUT_FORM_LENGTH,
+  CARD_INPUT_REFS_INDEX,
 };

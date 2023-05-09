@@ -1,5 +1,13 @@
-export const cardCompanyTheme: Record<string, { main: string; point: string }> =
-  {
+import { ThemeProvider } from "styled-components";
+
+export const CardThemeProvider = ({
+  children,
+  cardCompany,
+}: {
+  children: React.ReactNode;
+  cardCompany: string;
+}) => {
+  const cardCompanyTheme: Record<string, { main: string; point: string }> = {
     카드사선택필요: {
       main: "gray",
       point: "white",
@@ -9,8 +17,8 @@ export const cardCompanyTheme: Record<string, { main: string; point: string }> =
       point: "white",
     },
     신한카드: {
-      main: "rgb(19, 74, 245)",
-      point: "white",
+      main: "white",
+      point: "rgb(19, 74, 245)",
     },
     카카오뱅크: {
       main: "rgb(251, 230, 77)",
@@ -31,3 +39,10 @@ export const cardCompanyTheme: Record<string, { main: string; point: string }> =
       point: "rgb(247, 206, 71)",
     },
   };
+
+  return (
+    <ThemeProvider theme={cardCompanyTheme[cardCompany]}>
+      {children}
+    </ThemeProvider>
+  );
+};

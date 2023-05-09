@@ -1,21 +1,19 @@
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { ModalDispatchContext } from "../context";
-import { ROUTER_PATH } from "../router/path";
-import { getLocalStorage, setLocalStorage } from "../utils";
 import {
-  Page,
-  Header,
-  Card,
-  CardInputForm,
-  BottomSheet,
-  CardCompany,
-} from "../components";
+  ModalDispatchContext,
+  ModalStateContext,
+} from "../provider/context/modal";
+import { ROUTER_PATH } from "../provider/router/path";
+import { getLocalStorage, setLocalStorage } from "../utils";
+import { Page, Header, Card, CardInputForm, CardCompany } from "../components";
 import { useCard } from "../hooks";
+import Modal from "woowa-light-modal";
 
 const AddCard = () => {
   const navigate = useNavigate();
-  const [card, setNewCard] = useCard();
+  const [card, isValidCard, setNewCard] = useCard();
+  const { isModalOpen } = useContext(ModalStateContext);
   const { toggleModal } = useContext(ModalDispatchContext);
 
   useEffect(() => {
@@ -34,16 +32,17 @@ const AddCard = () => {
 
   return (
     <Page>
-      <Header title="카드 추가" isBack />
+      <Header title="카드 추가" isBack path={ROUTER_PATH.MyCard} />
       <Card {...card} />
       <CardInputForm
         card={card}
+        isValidCard={isValidCard}
         setNewCard={setNewCard}
         onSubmit={handleFormSubmited}
       />
-      <BottomSheet>
+      <Modal isOpen={isModalOpen} onClose={toggleModal} height={"227px"}>
         <CardCompany onChange={handleCardCompanyChanged} />
-      </BottomSheet>
+      </Modal>
     </Page>
   );
 };

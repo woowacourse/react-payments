@@ -16,7 +16,6 @@ const PageWrapper = styled.div`
   align-items: center;
   justify-content: center;
 
-  background: white;
   padding: 100px;
 `;
 

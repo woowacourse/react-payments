@@ -1,8 +1,9 @@
 import { useContext, useMemo } from "react";
-import styled, { ThemeProvider } from "styled-components";
+import styled from "styled-components";
 import { IcChip } from "../assets";
-import { ModalDispatchContext } from "../context";
-import { cardCompanyTheme } from "../style/theme";
+import { CARD_COMPANY, CARD_COMPANY_NOT_SELECTED_STRING } from "../constants";
+import { ModalDispatchContext } from "../provider/context/modal";
+import { CardThemeProvider } from "../provider/theme/card";
 import { CardType } from "../types";
 import { getCardNumberArray } from "../utils/card";
 
@@ -19,7 +20,7 @@ const Card = ({
   const { toggleModal } = useContext(ModalDispatchContext);
 
   return (
-    <ThemeProvider theme={cardCompanyTheme[cardCompany]}>
+    <CardThemeProvider cardCompany={cardCompany}>
       <CardWrapper onClick={toggleModal}>
         <p>{cardCompany}</p>
         <img src={IcChip} alt="ic-chip" />
@@ -34,8 +35,13 @@ const Card = ({
             <span>{expiredDate}</span>
           </BottomInfoWrapper>
         </CardInfoWrapper>
+        <CompanyLogoWrapper>
+          {cardCompany !== CARD_COMPANY_NOT_SELECTED_STRING && (
+            <img src={CARD_COMPANY[cardCompany].img} alt="카드사로고" />
+          )}
+        </CompanyLogoWrapper>
       </CardWrapper>
-    </ThemeProvider>
+    </CardThemeProvider>
   );
 };
 
@@ -46,11 +52,12 @@ const CardWrapper = styled.div`
   width: 213px;
   height: 133px;
 
+  position: relative;
   padding: 15px 14px 0 14px;
   box-sizing: border-box;
 
   border-radius: 5px;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 8px 8px -3px rgba(0, 0, 0, 0.25);
 
   background: ${(props) => props.theme.main};
   color: ${(props) => props.theme.point};
@@ -60,6 +67,19 @@ const CardWrapper = styled.div`
     font-size: 12px;
     margin-bottom: 17px;
   }
+
+  :hover {
+    cursor: pointer;
+    box-shadow: 0 16px 16px -3px rgba(0, 0, 0, 0.25);
+    margin: 0 12px 12px 0;
+    transition: all 0.3s ease;
+  }
+`;
+
+const CompanyLogoWrapper = styled.div`
+  position: absolute;
+  top: 20px;
+  right: 20px;
 `;
 
 const CardInfoWrapper = styled.div`
@@ -83,6 +103,7 @@ const CardInfoWrapper = styled.div`
 const UpInfoWrapper = styled.div`
   display: flex;
   max-width: max-content;
+  letter-spacing: 2.5px;
 `;
 
 const BottomInfoWrapper = styled.div`

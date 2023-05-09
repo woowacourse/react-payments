@@ -10,8 +10,8 @@ export default {
 const Template: StoryFn<CardType> = (props) => (
   <Card
     {...props}
-    cardNumber="1111-2222-3333-4444"
-    ownerName="light"
+    cardNumber="1111 2222 3333 4444"
+    ownerName="LIGHT"
     expiredDate="12 / 24"
     name="카드"
     cvc="123"
