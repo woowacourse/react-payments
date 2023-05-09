@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Card } from "../../types";
 import CARD_COMPANIES from "../../constants/cardCompanies";
 import ICChipIcon from "../../assets/ICChip.svg";
+import FlexBox from "../@common/FlexBox";
 
 type PreviewCard = Pick<Card, "cardNumber" | "ownerName" | "expirationDate" | "cardCompany">;
 
@@ -28,12 +29,12 @@ const CardPreview = ({ card, onClick }: CardPreviewProps) => {
         <span>{"•".repeat(cardNumber.thirdGroup.length)}</span>
         <span>{"•".repeat(cardNumber.fourthGroup.length)}</span>
       </NumberContainer>
-      <FlexContainer>
+      <FlexBox justify="space-between">
         <CardOwnerName>{ownerNameText}</CardOwnerName>
         <ExpirationDate>
           {expirationMonthText} / {expirationYearText}
         </ExpirationDate>
-      </FlexContainer>
+      </FlexBox>
     </CardLayout>
   );
 };
@@ -103,11 +104,4 @@ const CardOwnerName = styled.span`
 
 const ExpirationDate = styled.span`
   font-size: 12px;
-`;
-
-const FlexContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-
-  padding: 0 4px;
 `;

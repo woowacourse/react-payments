@@ -1,83 +1,29 @@
-import AppBar from "../../components/AppBar/AppBar";
-import CardPreview from "../../components/CardPreview/CardPreview";
-import CardNumberInput from "../../components/CardNumberInput/CardNumberInput";
-import CardOwnerNameInput from "../../components/CardOwnerNameInput/CardOwnerNameInput";
-import CardExpirationDateInput from "../../components/CardExpirationDateInput/CardExpirationDateInput";
-import CardSecurityCodeInput from "../../components/CardSecurityCodeInput/CardSecurityCodeInput";
-import CardPasswordInput from "../../components/CardPasswordInput/CardPasswordInput";
-import Modal from "../../components/common/Modal/Modal";
-import styled from "styled-components";
-import { Container } from "../../components/common";
-import { useState } from "react";
-import {
-  Card,
-  CardCompany,
-  CardExpirationDate,
-  CardExpirationDateKey,
-  CardNumber,
-  CardNumberGroups,
-  CardPassword,
-  CardPasswordKey,
-} from "../../types";
 import { useNavigate } from "react-router-dom";
+import AppBar from "../../components/@common/AppBar/AppBar";
+import CardPreview from "../../components/CardPreview/CardPreview";
+import {
+  CardNumberInput,
+  CardExpirationDateInput,
+  CardOwnerNameInput,
+  CardSecurityCodeInput,
+  CardPasswordInput,
+} from "../../components/CardRegistrationInputs";
+import { Modal } from "react-dobob-modal";
+import styled from "styled-components";
+import { Container, Button } from "../../components/@common";
+import { Card } from "../../types";
 import { isFulfilledObject, isFulfilledString, isValidMonth } from "../../validator/Validator";
-import useModal from "../../hooks/useModal";
+import ROUTE_PATH from "../../constants/routePath";
+import useCardRegistrationInfoContext from "../../hooks/useCardRegistrationInfoContext";
 import CardCompanyButtonList from "../../components/CardCompanyButtonList/CardCompanyButtonList";
+import useModalContext from "../../hooks/useModalContext";
 
 const AddCardPage = () => {
-  const [cardNumber, setCardNumber] = useState<CardNumber>({
-    firstGroup: "",
-    secondGroup: "",
-    thirdGroup: "",
-    fourthGroup: "",
-  });
+  const { cardNumber, expirationDate, ownerName, securityCode, password, cardCompany } =
+    useCardRegistrationInfoContext();
 
-  const [expirationDate, setExpirationDate] = useState<CardExpirationDate>({
-    month: "",
-    year: "",
-  });
-
-  const [ownerName, setOwnerName] = useState<Card["ownerName"]>("");
-  const [securityCode, setSecurityCode] = useState<Card["securityCode"]>("");
-
-  const [password, setPassword] = useState<CardPassword>({
-    first: "",
-    second: "",
-  });
-
-  const [cardCompany, setCardCompany] = useState<Card["cardCompany"]>("BC");
-
-  const { isModalOpen, modalClose, modalOpen } = useModal();
-
+  const { isModalOpen, closeModal, openModal } = useModalContext();
   const navigate = useNavigate();
-
-  const handleCardNumber = (value: string, targetGroup: CardNumberGroups) => {
-    setCardNumber({ ...cardNumber, [targetGroup]: value });
-  };
-
-  const handleExpirationDate = (value: string, dateType: CardExpirationDateKey) => {
-    setExpirationDate({ ...expirationDate, [dateType]: value });
-  };
-
-  const handleOwnerName = (name: string) => {
-    const upperCaseName = name.toUpperCase();
-
-    setOwnerName(upperCaseName);
-  };
-
-  const handleSecurityCode = (code: string) => {
-    setSecurityCode(code);
-  };
-
-  const handlePassword = (pw: string, targetDigit: CardPasswordKey) => {
-    setPassword({ ...password, [targetDigit]: pw });
-  };
-
-  const handleCardCompany = (company: CardCompany) => {
-    setCardCompany(company);
-
-    modalClose();
-  };
 
   const addCard = (e: React.FormEvent) => {
     e.preventDefault();
@@ -97,7 +43,7 @@ const AddCardPage = () => {
       cardCompany,
     };
 
-    navigate("/alias", {
+    navigate(ROUTE_PATH.cardAlias, {
       state: card,
       replace: true,
     });
@@ -111,21 +57,21 @@ const AddCardPage = () => {
 
   return (
     <AddCardPageContainer>
-      <AppBar title={"카드 추가"} prevButton />
-      <CardPreview card={{ cardNumber, expirationDate, ownerName, cardCompany }} onClick={modalOpen} />
-      <HelperText onClick={modalOpen}>카드사 선택하기👆</HelperText>
+      <AppBar prevButton>카드 추가</AppBar>
+      <CardPreview card={{ cardNumber, expirationDate, ownerName, cardCompany }} onClick={openModal} />
+      <HelperText onClick={openModal}>카드사 선택하기👆</HelperText>
       <Form onSubmit={addCard}>
-        <CardNumberInput cardNumber={cardNumber} onChange={handleCardNumber} />
-        <CardExpirationDateInput expirationDate={expirationDate} onChange={handleExpirationDate} />
-        <CardOwnerNameInput ownerName={ownerName} onChange={handleOwnerName} />
-        <CardSecurityCodeInput securityCode={securityCode} onChange={handleSecurityCode} />
-        <CardPasswordInput password={password} onChange={handlePassword} />
+        <CardNumberInput />
+        <CardExpirationDateInput />
+        <CardOwnerNameInput />
+        <CardSecurityCodeInput />
+        <CardPasswordInput />
         <NextButton type="submit" isFormFilled={isFormFilled}>
           입력 완료
         </NextButton>
       </Form>
-      <Modal isOpen={isModalOpen} closeModal={modalClose}>
-        <CardCompanyButtonList handleCardCompany={handleCardCompany} />
+      <Modal isOpen={isModalOpen} closeModal={closeModal}>
+        <CardCompanyButtonList />
       </Modal>
     </AddCardPageContainer>
   );
@@ -149,19 +95,8 @@ const Form = styled.form`
   height: 100%;
 `;
 
-const NextButton = styled.button<{ isFormFilled: boolean }>`
-  width: 100%;
-  height: 50px;
-
-  border: none;
-  border-radius: 4px;
-
-  font-size: 14px;
-  font-weight: 700;
-
-  background-color: ${(props) => (props.isFormFilled ? "#d4e7fd" : "#ececec")};
-
-  cursor: pointer;
+const NextButton = styled(Button)<{ isFormFilled: boolean }>`
+  background-color: ${(props) => `var(--color-${props.isFormFilled ? "primary" : "pale"})`};
 `;
 
 export default AddCardPage;

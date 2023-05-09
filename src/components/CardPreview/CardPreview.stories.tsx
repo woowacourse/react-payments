@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from "@storybook/react";
 import CardPreview from "./CardPreview";
+import dummyCard from "../../utils/dummyCard";
 
 const meta: Meta<typeof CardPreview> = {
   title: "CardPreview",
   component: CardPreview,
-  tags: ["autodocs"],
   argTypes: {
     card: {
       description: "카드 미리보기에 필요한 정보가 담긴 카드 객체입니다. ",
@@ -16,20 +16,7 @@ const meta: Meta<typeof CardPreview> = {
   },
 
   args: {
-    card: {
-      cardNumber: {
-        firstGroup: "1234",
-        secondGroup: "1234",
-        thirdGroup: "1234",
-        fourthGroup: "1234",
-      },
-      expirationDate: {
-        month: "12",
-        year: "12",
-      },
-      ownerName: "aaa",
-      cardCompany: "BC",
-    },
+    card: dummyCard,
   },
 };
 

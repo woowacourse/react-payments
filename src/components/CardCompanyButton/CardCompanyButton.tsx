@@ -1,41 +1,46 @@
 import styled from "styled-components";
 import { CardCompany } from "../../types";
 import CARD_COMPANIES from "../../constants/cardCompanies";
+import { Button } from "../@common";
+import useCardRegistrationInfoContext from "../../hooks/useCardRegistrationInfoContext";
+import useModalContext from "../../hooks/useModalContext";
 
 type CardCompanyButtonProps = {
   cardCompany: CardCompany;
-  onClick: () => void;
 };
 
-const CardCompanyButton = ({ cardCompany, onClick }: CardCompanyButtonProps) => {
+const CardCompanyButton = ({ cardCompany }: CardCompanyButtonProps) => {
+  const { setCardCompany } = useCardRegistrationInfoContext();
+  const { closeModal } = useModalContext();
+
+  const handleCardCompany = () => {
+    setCardCompany(cardCompany);
+    closeModal();
+  };
+
   return (
-    <Button type="button" onClick={onClick}>
+    <CompanyButton type="button" onClick={handleCardCompany}>
       <CompanyLogo src={CARD_COMPANIES[cardCompany].logoFilePath} alt={`card-company-${cardCompany}`} />
       <CompanyName>{CARD_COMPANIES[cardCompany].koreanName}</CompanyName>
-    </Button>
+    </CompanyButton>
   );
 };
 
-const Button = styled.button`
+const CompanyButton = styled(Button)`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-
   width: 60px;
   height: 64px;
-
-  border: none;
   background-color: transparent;
-
-  cursor: pointer;
 `;
 
 const CompanyLogo = styled.img`
   width: 38px;
   height: 38px;
 
-  transition: transform 100ms ease;
+  transition: transform 0.1s ease;
 
   &:hover {
     transform: scale(1.15);

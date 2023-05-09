@@ -15,10 +15,10 @@ const CardList = ({ cards }: CardListProps) => {
         const { cardNumber, ownerName, expirationDate, cardCompany, alias } = card;
 
         return (
-          <FlexContainer key={crypto.randomUUID()}>
+          <FlexList key={crypto.randomUUID()}>
             <CardPreview card={{ cardNumber, ownerName, expirationDate, cardCompany }} />
             <CardAlias>{alias}</CardAlias>
-          </FlexContainer>
+          </FlexList>
         );
       })}
     </Ul>
@@ -44,7 +44,7 @@ const Ul = styled.ul`
   }
 `;
 
-const FlexContainer = styled.li`
+const FlexList = styled.li`
   display: flex;
   flex-direction: column;
   gap: 10px;
