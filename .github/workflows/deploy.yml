@@ -2,7 +2,7 @@ name: NodeJS with Webpack
 
 on:
   push:
-    branches: [wzrabbit-step2]
+    branches: [wzrabbit-step3]
 
 jobs:
   deploy:
@@ -18,9 +18,16 @@ jobs:
         with:
           node-version: 18
 
-      - run: |
+      - name: build the react project
+        run: |
           npm ci
           npm run build
+
+      - name: build the storybook
+        run: |
+          npm run build-storybook
+          mv ./storybook-static ./build/storybook
+
       - uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}

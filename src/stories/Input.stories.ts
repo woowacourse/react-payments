@@ -13,7 +13,7 @@ const meta = {
 type Story = StoryObj<typeof meta>;
 
 export const Standard: Story = {
-  args: { width: '150px', value: '' },
+  args: { width: '150px', value: '', name: 'test' },
 };
 
 export default meta;

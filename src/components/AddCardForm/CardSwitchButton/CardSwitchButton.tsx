@@ -1,6 +1,6 @@
 import { ReactNode, useContext } from 'react';
-import { ModalContext } from '../../../contexts/ModalProvider';
 import { FaCreditCard } from 'react-icons/fa';
+import { BaeksulgiContext } from 'baeksulgi';
 import styles from './CardSwitchButton.module.css';
 
 type CardSwitchButtonProps = {
@@ -10,7 +10,7 @@ type CardSwitchButtonProps = {
 };
 
 const CardSwitchButton = ({ modalContent, top = '0', left = '0' }: CardSwitchButtonProps) => {
-  const { openModal } = useContext(ModalContext);
+  const { openModal } = useContext(BaeksulgiContext);
 
   return (
     <button

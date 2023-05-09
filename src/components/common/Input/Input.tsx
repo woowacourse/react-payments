@@ -4,7 +4,7 @@ import { forwardRef } from 'react';
 type InputProps = {
   width: string;
   value: string;
-  name?: string;
+  name: string;
   placeholder?: string;
   maxLength?: number;
   required?: boolean;

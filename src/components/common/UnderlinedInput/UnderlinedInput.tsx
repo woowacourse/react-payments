@@ -1,12 +1,12 @@
 import styles from './UnderlinedInput.module.css';
 
 type UnderlinedInputProps = {
-  width: string;
   name: string;
-  placeholder: string;
+  width?: string;
+  placeholder?: string;
 };
 
-const UnderlinedInput = ({ width = '50%', name, placeholder }: Partial<UnderlinedInputProps>) => {
+const UnderlinedInput = ({ name, width = '50%', placeholder }: UnderlinedInputProps) => {
   return <input className={styles.input} name={name} style={{ width: width }} placeholder={placeholder} />;
 };
 
