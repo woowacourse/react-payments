@@ -12,10 +12,15 @@ export default {
 } as Meta<CardInputFormType>;
 
 const Template: StoryFn<CardInputFormType> = (props) => {
-  const [card, setNewCard] = useCard();
+  const [card, isValidCard, setNewCard] = useCard();
 
   return (
-    <CardInputForm card={card} setNewCard={setNewCard} onSubmit={() => {}} />
+    <CardInputForm
+      card={card}
+      isValidCard={isValidCard}
+      setNewCard={setNewCard}
+      onSubmit={() => {}}
+    />
   );
 };
 

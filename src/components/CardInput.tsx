@@ -4,7 +4,6 @@ import styled from "styled-components";
 export interface CardInputType
   extends React.InputHTMLAttributes<HTMLInputElement> {
   width: string;
-  isSecured?: boolean;
   isAutoFocus?: boolean;
   isRequired?: boolean;
 }
@@ -14,7 +13,6 @@ const CardInput = forwardRef<HTMLInputElement, CardInputType>((props, ref) => {
     <CardInputWrapper
       {...props}
       ref={ref}
-      type={props.isSecured ? "password" : "text"}
       autoFocus={props.isAutoFocus}
       required={props.isRequired}
     />

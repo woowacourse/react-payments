@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { createRef, useEffect, useRef, useState } from "react";
 import { CARD_INPUT_REFS_INDEX } from "../constants";
 import { CardType } from "../types";
 import {
@@ -7,10 +7,16 @@ import {
   getSeperatedExpiredDate,
   getSubCardNumber,
   getSubExpiredDate,
+  validateForm,
 } from "../utils";
 
 export const useCard = () => {
+  const [isValidCard, setIsValidCard] = useState(false);
   const [card, setCard] = useState<CardType>(getEmptyCard());
+
+  useEffect(() => {
+    setIsValidCard(validateForm(card));
+  }, [card]);
 
   const setNewCard = (key: keyof CardType, value: string) => {
     switch (key) {
@@ -34,25 +40,11 @@ export const useCard = () => {
     }
   };
 
-  return [card, setNewCard] as const;
+  return [card, isValidCard, setNewCard] as const;
 };
 
 export const useCardInputRefs = () => {
-  const cardNumberRef = useRef<HTMLInputElement>(null);
-  const expiredDateRef = useRef<HTMLInputElement>(null);
-  const ownerNameRef = useRef<HTMLInputElement>(null);
-  const cvcRef = useRef<HTMLInputElement>(null);
-  const password1Ref = useRef<HTMLInputElement>(null);
-  const password2Ref = useRef<HTMLInputElement>(null);
-
-  const inputRefs = [
-    cardNumberRef,
-    expiredDateRef,
-    ownerNameRef,
-    cvcRef,
-    password1Ref,
-    password2Ref,
-  ];
+  const inputRefs = Array.from({ length: 6 }).map(createRef<HTMLInputElement>);
 
   const moveFocus = (key: string) => {
     if (

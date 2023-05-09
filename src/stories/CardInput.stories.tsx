@@ -39,7 +39,6 @@ export const Cvc = Template.bind({});
 Cvc.args = {
   id: "cvc",
   width: "84px",
-  isSecured: true,
   isRequired: true,
 };
 
@@ -47,6 +46,5 @@ export const Password = Template.bind({});
 Password.args = {
   id: "password1",
   width: "42px",
-  isSecured: true,
   isRequired: true,
 };

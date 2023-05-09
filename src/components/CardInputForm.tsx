@@ -13,7 +13,6 @@ import {
   validateCardNumber,
   validateCvc,
   validateExpiredDate,
-  validateForm,
   validateOwnerName,
   validatePassword,
 } from "../utils";
@@ -21,18 +20,19 @@ import { useCardInputRefs } from "../hooks";
 
 export interface CardInputFormType {
   card: CardType;
+  isValidCard: boolean;
   setNewCard: (key: keyof CardType, value: string) => void;
   onSubmit: (e: FormEvent) => void;
 }
 
-const CardInputForm = ({ card, setNewCard, onSubmit }: CardInputFormType) => {
+const CardInputForm = ({
+  card,
+  isValidCard,
+  setNewCard,
+  onSubmit,
+}: CardInputFormType) => {
   const [password, setPassword] = useState(["", ""]);
-  const [isValidForm, setIsValidForm] = useState(false);
   const [inputRefs, moveFocus] = useCardInputRefs();
-
-  useEffect(() => {
-    setIsValidForm(validateForm(card));
-  }, [card]);
 
   const handleInputChanged =
     (key: keyof CardType) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -142,7 +142,7 @@ const CardInputForm = ({ card, setNewCard, onSubmit }: CardInputFormType) => {
             id="cvc"
             value={card.cvc}
             width="84px"
-            isSecured
+            type="password"
             isRequired
             ref={inputRefs[CARD_INPUT_REFS_INDEX.cvc]}
             maxLength={CARD_INPUT_LENGTH.cvc}
@@ -166,7 +166,7 @@ const CardInputForm = ({ card, setNewCard, onSubmit }: CardInputFormType) => {
             id="password"
             value={password[PASSWORD_DIGIT_INDEX.FIRST]}
             width="42px"
-            isSecured
+            type="password"
             isRequired
             ref={inputRefs[CARD_INPUT_REFS_INDEX.password1]}
             maxLength={CARD_INPUT_LENGTH.password}
@@ -176,7 +176,7 @@ const CardInputForm = ({ card, setNewCard, onSubmit }: CardInputFormType) => {
           <CardInput
             value={password[PASSWORD_DIGIT_INDEX.SECOND]}
             width="42px"
-            isSecured
+            type="password"
             isRequired
             ref={inputRefs[CARD_INPUT_REFS_INDEX.password2]}
             maxLength={CARD_INPUT_LENGTH.password}
@@ -188,7 +188,7 @@ const CardInputForm = ({ card, setNewCard, onSubmit }: CardInputFormType) => {
         </PasswordInputWrapper>
         {<span>{card.password && validatePassword(card.password)}</span>}
       </InputSetWrapper>
-      <Button isShown={isValidForm} type="submit">
+      <Button isShown={isValidCard} type="submit">
         다음
       </Button>
     </CardInputFormWrapper>

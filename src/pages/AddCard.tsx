@@ -12,7 +12,7 @@ import Modal from "woowa-light-modal";
 
 const AddCard = () => {
   const navigate = useNavigate();
-  const [card, setNewCard] = useCard();
+  const [card, isValidCard, setNewCard] = useCard();
   const { isModalOpen } = useContext(ModalStateContext);
   const { toggleModal } = useContext(ModalDispatchContext);
 
@@ -32,10 +32,11 @@ const AddCard = () => {
 
   return (
     <Page>
-      <Header title="카드 추가" path={ROUTER_PATH.MyCard} />
+      <Header title="카드 추가" isBack path={ROUTER_PATH.MyCard} />
       <Card {...card} />
       <CardInputForm
         card={card}
+        isValidCard={isValidCard}
         setNewCard={setNewCard}
         onSubmit={handleFormSubmited}
       />
