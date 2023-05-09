@@ -1,17 +1,5 @@
-import styled, { keyframes } from "styled-components";
-
-// .MuiCircularProgress-indeterminate {
-// }
-const circleRotate = keyframes`
- 0% {
-    transform: rotate(0deg);
-    /* Fix IE11 wobbly */
-    transform-origin: 50% 50%;
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-`;
+import { rotateRound } from "src/styles/animations";
+import styled from "styled-components";
 
 export const Styled = {
   Wrapper: styled.div`
@@ -42,6 +30,6 @@ export const Styled = {
   SpinnerImage: styled.img`
     width: 24px;
     height: 24px;
-    animation: ${circleRotate} 2s linear infinite;
+    animation: ${rotateRound} 2s linear infinite;
   `,
 };
