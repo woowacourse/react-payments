@@ -1,0 +1,38 @@
+[
+  {
+    "bank": "롯데카드",
+    "cardName": "왼손카드",
+    "numbers": ["5272", "4823", "1234", "4321"],
+    "expirationDate": { "month": "04", "year": "24" },
+    "ownerName": "LEFT HAND",
+    "securityCode": "123",
+    "password": {
+      "first": "1",
+      "second": "2"
+    }
+  },
+  {
+    "bank": "카카오뱅크",
+    "cardName": "포코카드",
+    "numbers": ["1549", "0284", "1234", "4321"],
+    "expirationDate": { "month": "08", "year": "25" },
+    "ownerName": "POCO",
+    "securityCode": "123",
+    "password": {
+      "first": "1",
+      "second": "2"
+    }
+  },
+  {
+    "bank": "현대카드",
+    "cardName": "레고카드",
+    "numbers": ["4857", "2837", "1234", "4321"],
+    "expirationDate": { "month": "08", "year": "25" },
+    "ownerName": "REGULAR PARK",
+    "securityCode": "123",
+    "password": {
+      "first": "1",
+      "second": "2"
+    }
+  }
+]

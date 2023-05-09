@@ -5,24 +5,23 @@ import RegisterCard from 'pages/RegisterCard';
 import NotFound from 'pages/NotFound';
 import RegisterCardName from 'pages/RegisterCardName';
 import { CardInfoProvider } from 'context/CardInfoContext';
-import { ModalProvider } from 'context/ModalContext';
+import CardDB from 'db/Cards';
 
 function App() {
+  CardDB.setInitialData();
   return (
     <>
-      <ModalProvider>
-        <CardInfoProvider>
-          <GlobalStyle />
-          <BrowserRouter basename={process.env.PUBLIC_URL}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/register" element={<RegisterCard />} />
-              <Route path="/register-name" element={<RegisterCardName />} />
-              <Route path="/*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        </CardInfoProvider>
-      </ModalProvider>
+      <CardInfoProvider>
+        <GlobalStyle />
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/register" element={<RegisterCard />} />
+            <Route path="/register-name" element={<RegisterCardName />} />
+            <Route path="/*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </CardInfoProvider>
     </>
   );
 }

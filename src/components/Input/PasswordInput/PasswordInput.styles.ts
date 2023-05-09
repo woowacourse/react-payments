@@ -5,7 +5,6 @@ export const Styled = {
   PasswordInputContainer: styled(Container)`
     background-color: rgba(255, 255, 255, 0);
     width: 60%;
-    padding: 0;
     align-items: center;
     Input {
       width: 44px;
@@ -14,6 +13,13 @@ export const Styled = {
       background-color: var(--primary-color);
       margin-right: 7px;
       border-radius: 7px;
+    }
+
+    input:focus {
+      background-color: var(--focus-input-color);
+    }
+    input.error {
+      background-color: var(--error-input-color);
     }
   `,
   DotContainer: styled.div`

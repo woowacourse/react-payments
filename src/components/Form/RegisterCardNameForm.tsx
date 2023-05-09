@@ -1,18 +1,19 @@
 import { ChangeEventHandler, FormEventHandler, useContext, useState } from 'react';
 import { CardNameInput } from 'components/Input/CardNameInput/CardNameInput';
 import { CreditCard } from 'components/common/Card/CreditCard';
-import { CardInfoContext, CardInfoProvider } from 'context/CardInfoContext';
+import { CardInfoContext, CardInfoProvider, defaultCardInfo } from 'context/CardInfoContext';
 import CardDB from 'db/Cards';
 import styled from 'styled-components';
-import { ModalContext } from 'context/ModalContext';
+import { Spinner } from 'components/Spinner/Spinner';
+import { validateCard } from 'util/ValidateCard';
 
 export type RegisterCardNameFormProps = {
   onSubmit: () => void;
 };
 
 export function RegisterCardNameForm({ onSubmit }: RegisterCardNameFormProps) {
-  const { cardInfo, setCardInfoName } = useContext(CardInfoContext);
-  const { setIsModalOpen } = useContext(ModalContext);
+  const { cardInfo, setCardInfoName, setCardInfo } = useContext(CardInfoContext);
+  const [isLoading, setIsLoading] = useState(false);
   const [cardName, setCardName] = useState('');
 
   const handleCardNameInput: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -25,11 +26,24 @@ export function RegisterCardNameForm({ onSubmit }: RegisterCardNameFormProps) {
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
-    setIsModalOpen(true);
     CardDB.registerCard(cardInfo);
     setCardInfoName('');
-    onSubmit();
+    setIsLoading(true);
+    setTimeout(() => {
+      setCardInfo(defaultCardInfo);
+      setIsLoading(false);
+      onSubmit();
+    }, 1500);
   };
+
+  if (isLoading) {
+    return (
+      <>
+        <Spinner />
+        <span>카드를 등록중입니다.</span>
+      </>
+    );
+  }
 
   return (
     <CardInfoProvider>
@@ -38,7 +52,9 @@ export function RegisterCardNameForm({ onSubmit }: RegisterCardNameFormProps) {
         <CreditCard card={cardInfo} />
         <CardNameInputContainer>
           <CardNameInput value={cardName} onChange={handleCardNameInput} />
-          <CardNameFormButton type="submit">확인</CardNameFormButton>
+          <CardNameFormButton type="submit" disabled={!validateCard(cardInfo)}>
+            확인
+          </CardNameFormButton>
         </CardNameInputContainer>
       </FormContainer>
     </CardInfoProvider>
@@ -67,6 +83,10 @@ const CardNameFormButton = styled.button`
   font-weight: 700;
   color: black;
   cursor: pointer;
+  :disabled {
+    color: var(--light-gray-text-color);
+    cursor: not-allowed;
+  }
 `;
 
 const CardNameInputContainer = styled.div`

@@ -7,13 +7,19 @@ export const Styled = {
     flex-direction: row;
     align-items: center;
     gap: 11px;
+    input:focus {
+      background-color: var(--focus-input-color);
+    }
+    .error {
+      background-color: var(--error-input-color);
+    }
   `,
   SecurityCodeInputContainer: styled(Container)`
     width: 84px;
-
     Input {
+      width: 100%;
+      height: 44px;
       text-align: center;
-      margin-left: 0.5rem;
       letter-spacing: 0.5rem;
     }
   `,
@@ -26,7 +32,7 @@ export const Styled = {
     text-align: center;
     font-size: 22px;
     font-weight: 500;
-    color: var(--grey-text-color);
+    color: var(--light-gray-text-color);
 
     :hover + span {
       display: block;
@@ -36,10 +42,11 @@ export const Styled = {
   SecurityCodeNotification: styled.span`
     display: none;
     width: 170px;
-    padding: 0 2px;
+    padding: 3px;
     border-radius: 7px;
     border: 2px solid var(--light-gray-text-color);
+    font-size: 12px;
     font-weight: 600;
-    color: var(--gray-text-color);
+    color: var(--light-gray-text-color);
   `,
 };

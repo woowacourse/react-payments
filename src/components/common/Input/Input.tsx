@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -6,11 +6,9 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
-type Ref = HTMLInputElement;
-
-export const Input = forwardRef<Ref, InputProps>(({ backgroundColor, ...props }, ref) => {
-  return <Styled.Input backgroundColor={backgroundColor} ref={ref} {...props} />;
-});
+export const Input = ({ backgroundColor, ...props }: InputProps) => {
+  return <Styled.Input backgroundColor={backgroundColor} {...props} />;
+};
 
 const Styled = {
   Input: styled.input<InputProps>`

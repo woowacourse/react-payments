@@ -6,10 +6,56 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+body:has(.modal) {
+  overflow: hidden;
+}
+
 body::-webkit-scrollbar {
   display: none;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+@font-face {
+  font-family: 'Hyundai';
+  font-weight: 50;
+  src: url('./fonts/fontYouandiModernTR.ttf');
+}
+
+@font-face {
+  font-family: 'KB';
+  font-weight: 50;
+  src: url('./fonts/KBFGDisplayM.otf');
+}
+
+@font-face {
+  font-family: 'Woori';
+  font-weight: 50;
+  src: url('./fonts/WooridaumR.otf');
+}
+
+@font-face {
+  font-family: 'Lotte';
+  font-weight: 50;
+  src: url('./fonts/MyLotteLight.ttf');
+}
+
+@font-face {
+  font-family: 'BC';
+  font-weight: 50;
+  src: url('./fonts/BCcardL.ttf');
+}
+
+@font-face {
+  font-family: 'Hana';
+  font-weight: 50;
+  src: url('./fonts/Hana2-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Yoon';
+  font-weight: 50;
+  src: url('./fonts/YoonGothic320.ttf');
 }
