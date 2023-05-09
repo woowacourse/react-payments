@@ -1,8 +1,12 @@
 import { useState } from 'react';
 import { REG_EXP } from '../constants/regexp';
+import { CardPasswordType } from '../types/general';
 
 const usePassword = () => {
-  const [cardPasswords, setCardPasswords] = useState<Array<string>>(['', '']);
+  const [cardPasswords, setCardPasswords] = useState<CardPasswordType>({
+    0: '',
+    1: '',
+  });
   const [passwordError, setPasswordError] = useState<string>('');
 
   const isValidatedCardPasswords = (order: number, value: string) => {

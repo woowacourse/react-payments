@@ -1,4 +1,4 @@
-import { CardNumbersType } from '../types/general';
+import { CardNumbersType, CardPasswordType } from '../types/general';
 import { ExpiredDatesType } from '../types/general';
 
 const nowDate = new Date();
@@ -34,7 +34,7 @@ export const isCorrectSecurityCode = (securityCode: string) => {
   return false;
 };
 
-export const isCorrectPassword = (passwords: Array<string>) => {
+export const isCorrectPassword = (passwords: CardPasswordType) => {
   if (passwords[0].length === 1 && passwords[1].length === 1) return true;
   return false;
 };

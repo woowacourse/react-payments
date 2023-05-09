@@ -5,9 +5,10 @@ import * as Styled from './CardPassword.styles';
 import { RefContext } from '../../contexts/RefProvider';
 import { REF_INDEX } from '../../constants/refIndex';
 import CardErrorLabel from '../@common/CardErrorLabel';
+import { CardPasswordType } from '../../types/general';
 
 interface CardPasswordProps {
-  cardPasswords: Array<string>;
+  cardPasswords: CardPasswordType;
   errorMessage: string;
   isValidatedCardPasswords: (order: number, value: string) => boolean;
 }
