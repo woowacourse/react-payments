@@ -25,6 +25,7 @@ function CardRegistrationForm() {
     resetValidateForm,
   } = useCardInformationStore();
   const navigate = useNavigate();
+
   const handleForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 

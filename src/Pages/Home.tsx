@@ -12,7 +12,7 @@ function Home() {
     <>
       <Header title="보유 카드" hasBackHistory={false} />
       <StyledMain>
-        <StyledMessage>새로운 카드를 등록해주세요.</StyledMessage>
+        {cardList.length === 0 && <StyledMessage>새로운 카드를 등록해주세요.</StyledMessage>}
         {cardList?.map((cardInformation: CardInformation) => (
           <Card key={getUniqueKey()} cardInformation={cardInformation} isAddForm isShowName />
         ))}

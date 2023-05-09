@@ -1,3 +1,4 @@
+import { withPerformance } from 'storybook-addon-performance';
 import Dot from '../assets/dot.svg';
 import ProfileButtonList from '../components/Common/Profile/ProfileButtonList';
 import bankList from '../data/bankList';
@@ -8,6 +9,7 @@ type Story = StoryObj<typeof ProfileButtonList>;
 const meta: Meta<typeof ProfileButtonList> = {
   title: 'ProfileButtonList',
   component: ProfileButtonList,
+  decorators: [withPerformance],
 };
 
 export default meta;
