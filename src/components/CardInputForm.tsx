@@ -1,4 +1,4 @@
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { FormEvent, useState } from "react";
 import styled from "styled-components";
 import { CardInput, Button } from "./index";
 import { CardType } from "../types";
@@ -35,7 +35,8 @@ const CardInputForm = ({
   const [inputRefs, moveFocus] = useCardInputRefs();
 
   const handleInputChanged =
-    (key: keyof CardType) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    (key: keyof Omit<CardType, "cardCompany" | "name">) =>
+    (e: React.ChangeEvent<HTMLInputElement>) => {
       if (
         key !== "ownerName" &&
         validateCardInput(key, e.target.value) === ""

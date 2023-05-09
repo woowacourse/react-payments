@@ -60,17 +60,15 @@ export const validateForm = (card: CardType) => {
   );
 };
 
-export const validateCardInput = (key: keyof CardType, value: string) => {
-  switch (key) {
-    case "cardNumber":
-      return validateCardNumber(value);
-    case "expiredDate":
-      return validateExpiredDate(value);
-    case "ownerName":
-      return validateOwnerName(value);
-    case "cvc":
-      return validateCvc(value);
-    case "password":
-      return validatePassword(value);
-  }
+export const validateCardInput = (
+  key: keyof Omit<CardType, "cardCompany" | "name">,
+  value: string
+) => {
+  return {
+    cardNumber: validateCardNumber,
+    expiredDate: validateExpiredDate,
+    ownerName: validateOwnerName,
+    cvc: validateCvc,
+    password: validatePassword,
+  }[key](value);
 };
