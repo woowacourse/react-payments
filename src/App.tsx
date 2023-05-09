@@ -4,12 +4,13 @@ import styled from 'styled-components';
 
 import CardListPage from './components/page/CardListPage';
 import CardRegisterPage from './components/page/CardRegisterPage';
+import CardLoadingPage from './components/page/CardLoadingPage';
 import CardNamePage from './components/page/CardNamePage';
 
 import { CardFormProvider } from './context/CardFormContext';
 
 function App() {
-  const [currentPage, setCurrentPage] = useState<Page>(Page.list);
+  const [currentPage, setCurrentPage] = useState(Page.list);
   const navigate = (page: Page) => {
     setCurrentPage(page);
   };
@@ -17,6 +18,7 @@ function App() {
   const pageRoute: Record<Page, React.ReactNode> = {
     list: <CardListPage navigate={navigate} />,
     register: <CardRegisterPage navigate={navigate} />,
+    loading: <CardLoadingPage navigate={navigate} />,
     name: <CardNamePage navigate={navigate} />,
   };
 

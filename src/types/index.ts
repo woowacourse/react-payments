@@ -1,6 +1,8 @@
+import { CARD_COMPANY_COLOR_MAP } from '../constants';
+
 export interface CardType {
   id: number;
-  cardCompany: string;
+  cardCompany: keyof typeof CARD_COMPANY_COLOR_MAP | '';
   cardNumber: string[];
   expireDate: string[];
   ownerName: string;
@@ -12,5 +14,6 @@ export interface CardType {
 export enum Page {
   list = 'list',
   register = 'register',
+  loading = 'loading',
   name = 'name',
 }

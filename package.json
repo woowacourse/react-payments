@@ -17,6 +17,7 @@
     "@types/react-dom": "^18.0.11",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-portal-drawer": "^1.0.1",
     "react-scripts": "5.0.1",
     "styled-components": "^5.3.9",
     "typescript": "^4.9.5",

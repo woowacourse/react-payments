@@ -1,4 +1,4 @@
-import { CardType } from '../types';
+import type { CardType } from '../types';
 import { EXPIRE_DATE_VALID_MESSAGE } from '../constants';
 
 export const isNumberValue = (value: string) => {

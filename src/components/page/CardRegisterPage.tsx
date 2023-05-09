@@ -26,7 +26,7 @@ const CardRegisterPage = ({ navigate }: Props) => {
 
   const submitNewCard = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    navigate(Page.name);
+    navigate(Page.loading);
   };
 
   const onClickBack = () => {

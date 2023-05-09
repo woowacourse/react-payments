@@ -1,4 +1,4 @@
-import { CardType } from '../types';
+import type { CardType } from '../types';
 import { createContext, useContext, useReducer } from 'react';
 
 interface CardForm extends Omit<CardType, 'id'> {}
@@ -6,12 +6,12 @@ interface CardForm extends Omit<CardType, 'id'> {}
 type CardFormAction =
   | {
       type: 'SET_VALUE';
-      key: keyof CardForm;
+      key: keyof Omit<CardForm, 'cardNumber' | 'cardPassword' | 'expireDate'>;
       value: string;
     }
   | {
       type: 'SET_LIST_VALUE';
-      key: keyof CardForm;
+      key: keyof Pick<CardForm, 'cardNumber' | 'cardPassword' | 'expireDate'>;
       index: number;
       value: string;
     }
@@ -35,7 +35,7 @@ const cardFormReducer = (cardForm: CardForm, action: CardFormAction) => {
       return { ...cardForm, [action.key]: action.value };
     }
     case 'SET_LIST_VALUE': {
-      const newList = cardForm[action.key].slice() as string[];
+      const newList = cardForm[action.key].slice();
       newList[action.index] = action.value;
       return { ...cardForm, [action.key]: newList };
     }
@@ -49,7 +49,7 @@ const CardFormContext = createContext<readonly [CardForm, React.Dispatch<CardFor
 
 export const useCardForm = (): readonly [CardForm, React.Dispatch<CardFormAction>] => {
   const context = useContext(CardFormContext);
-  if (context === null) throw new Error('context is null');
+  if (context === null) throw new Error('CardForm context is null');
 
   return context;
 };

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+
 import { isNumberValue } from '../../domain/validator';
 
 type TextType = 'string' | 'number';
@@ -35,8 +36,7 @@ const Input = (props: Props) => {
 
     setValue(value);
 
-    if (!focus) return;
-    if (value.length === length) focus(1);
+    if (focus && value.length === length) focus(1);
   };
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {

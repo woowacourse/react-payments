@@ -1,17 +1,24 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
-  /* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-  */
-  html, body, #root {
+  * {
+    box-sizing: border-box;
+  }
+
+  html{
+    display: flex;
+    justify-content: center;
+
     width: 100%;
     height: 100%;
   }
 
-  * {
-    box-sizing: border-box;
+  body, #root {
+    position: relative;
+
+    width: 100%;
+    max-width: 480px;
+    height: 100%;
   }
 
   html, body, div, span, applet, object, iframe,
