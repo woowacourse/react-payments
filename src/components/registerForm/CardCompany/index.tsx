@@ -3,7 +3,7 @@ import { Styled as S } from "./CardCompany.styles";
 import useCardCompanySelect from "src/hooks/useCardCompanySelect";
 
 interface Props {
-  closeEvent: () => void;
+  closeEvent: () => void; 
 }
 
 function CardCompany({ closeEvent }: Props) {
@@ -13,13 +13,12 @@ function CardCompany({ closeEvent }: Props) {
 
   const cardLists = BANK_LIST.map((list, idx) => {
     return (
-      <S.CardContainer>
+      <S.CardContainer onMouseOver={onMouseOver}>
         <img
           id={list.id}
           src={list.src}
           alt={list.name}
           onClick={cardClickHandler}
-          onMouseOver={onMouseOver}
         />
         <p>{list.name}</p>
       </S.CardContainer>

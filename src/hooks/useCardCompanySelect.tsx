@@ -18,9 +18,10 @@ function useCardCompanySelect({ closeEvent }: { closeEvent: () => void }) {
     closeEvent();
   };
 
-  const onMouseOver: React.MouseEventHandler<HTMLImageElement> = (event) => {
-    const { id } = event.currentTarget;
-    changeCardColor(id);
+  const onMouseOver: React.MouseEventHandler<HTMLDivElement> = (event) => {
+    const image = event.currentTarget.childNodes[0] as HTMLImageElement;
+
+    changeCardColor(image.id);
   };
 
   return { cardClickHandler, onMouseOver };
