@@ -46,13 +46,6 @@ const GlobalStyle = createGlobalStyle`
     --kookmin-card: #6F655B;
   }
 
-
-  /* #modal-root {
-    position: relative;
-    z-index: 999;
-  } */
-
-
 `;
 
 export default GlobalStyle;
