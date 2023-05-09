@@ -17,3 +17,10 @@ export const getBankListName = (cardName:CardIDProps) =>{
   const bank = BANK_LIST.find(({ id }) => id === cardName) ?? null; 
   return bank ? bank.name : null
 }
+
+export async function delayForTime<T>(promise: Promise<T>, time:number) {
+  await new Promise((resolve) => {
+    setTimeout(resolve, time);
+  });
+  return await promise;
+}
