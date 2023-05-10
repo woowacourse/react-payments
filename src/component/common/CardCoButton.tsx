@@ -17,9 +17,9 @@ export default function CardCoButton({
   cardCo,
   changeCardCoStatus,
 }: CardCoButtonProps) {
-  function submitCardCo() {
+  const submitCardCo = () => {
     changeCardCoStatus(true, cardCo);
-  }
+  };
 
   return (
     <button

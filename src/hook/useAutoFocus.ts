@@ -4,7 +4,7 @@ import { INPUT_LENGTH_LIMIT } from "../constant/etc";
 export const useAutoFocus = () => {
   const originElementValues = useRef<string[]>([]);
 
-  return function (e: FormEvent<HTMLFormElement>) {
+  return (e: FormEvent<HTMLFormElement>) => {
     const changedElement = new Array(e.currentTarget.elements.length).fill(0);
     for (let i = 0; i < e.currentTarget.elements.length; i++) {
       changedElement[i] = e.currentTarget.elements[i];
