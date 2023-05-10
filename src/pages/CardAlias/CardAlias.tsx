@@ -1,9 +1,11 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import Card from '../../components/Card';
 import { useCardListContext } from '../../contexts/CardListContexts';
 import styled from 'styled-components';
 import { Input } from '../../components/Input';
 import Header from '../../components/Header';
+import PostResult from './PostResult';
+import { wrapPromise } from './wrapPromise';
 
 type CardAliasProps = {
   setPageCardList: () => void;
@@ -12,10 +14,28 @@ type CardAliasProps = {
 
 const CardAlias = ({ setPageCardList, currentId }: CardAliasProps) => {
   const { cardList, setCardList } = useCardListContext();
-  // TODO: 단언 없애려면 어떻게 로직을 분리하면 좋을지
+  // TODO: 단언 없애려면..? find는 애초에 undefined를 반환할 수 있다.
   const card = cardList.find(({ id }) => id === currentId)!;
+  const [postResource, setPostResource] = useState<any>({
+    result: {
+      read() {
+        return null;
+      },
+    },
+  });
 
   const aliasRef = useRef<HTMLInputElement>(null);
+
+  const postCard = () => {
+    const promise = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve('success');
+        setPageCardList();
+      }, 3000);
+    });
+
+    return wrapPromise(promise);
+  };
 
   const handleClickButton = () => {
     setCardList((prev) => {
@@ -27,7 +47,7 @@ const CardAlias = ({ setPageCardList, currentId }: CardAliasProps) => {
       });
     });
 
-    setPageCardList();
+    setPostResource({ result: postCard() });
   };
 
   return (
@@ -42,6 +62,7 @@ const CardAlias = ({ setPageCardList, currentId }: CardAliasProps) => {
       <Styled.ConfirmButton type="button" onClick={handleClickButton}>
         확인
       </Styled.ConfirmButton>
+      <PostResult resource={postResource} />
     </Styled.Wrapper>
   );
 };

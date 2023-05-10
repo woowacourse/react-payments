@@ -213,7 +213,7 @@ const SubmitButton = styled.button`
   }
 `;
 
-const InputGroup = styled.p`
+const InputGroup = styled.div`
   position: relative;
 `;
 
