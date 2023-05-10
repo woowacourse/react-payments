@@ -77,8 +77,6 @@ const useCardAddForm = () => {
       addCard(newCard);
       navigate(`${PATH.REGISTER}/?id=${newCard.id}`);
     }, LOADING_DURATION);
-
-    console.log(timeout.current);
   };
 
   return {
