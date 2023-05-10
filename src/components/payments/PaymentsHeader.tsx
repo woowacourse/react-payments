@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
 import { PAGE_PATH, PATH_TITLE } from '../../constants';
+import backButton from '../../assets/back-button.svg';
 
 type Pathname = keyof typeof PATH_TITLE;
 
@@ -17,45 +18,33 @@ const PaymentsHeader = () => {
 
   return (
     <StyledHeader pageTitle={pageTitle}>
-      <StyledLeftArrowButton to={PAGE_PATH.HOME} title={pageTitle} />
+      <StyledLeftArrowButton to={PAGE_PATH.HOME} title={pageTitle}>
+        <img src={backButton} alt="뒤로가기" />
+      </StyledLeftArrowButton>
       <StyledHeaderTitle>{pageTitle}</StyledHeaderTitle>
     </StyledHeader>
   );
 };
 
 const StyledLeftArrowButton = styled(Link)`
-  display: ${(props) => (props.title === '카드 추가' ? 'block' : 'none')};
-
-  position: relative;
+  display: ${(props) => (props.title === '카드 추가' ? 'flex' : 'none')};
   border: none;
   outline: none;
   background-color: transparent;
   cursor: pointer;
-
   margin-right: 8px;
-
-  &::after {
-    content: ' ';
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    top: 0%;
-    left: 54%;
-    border-right: 1.5px solid #525252;
-    border-bottom: 1.5px solid #525252;
-    transform: translate(-50%, -50%) rotate(135deg);
-  }
 `;
 
 const StyledHeader = styled.header<{ pageTitle: string }>`
   display: ${(props) => (props.pageTitle === '' ? 'none' : 'flex')};
-  height: 70px;
   align-items: center;
   position: sticky;
   top: 0px;
   background-color: #fff;
   z-index: 999;
   margin-bottom: 10px;
+  padding: 0 40px;
+  flex: 70px 0 0;
 `;
 
 const StyledHeaderTitle = styled.h1`

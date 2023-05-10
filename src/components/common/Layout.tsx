@@ -18,11 +18,12 @@ const LayoutWrapper = styled.div`
 `;
 
 const LayoutContent = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 360px;
   margin: 40px 0;
   height: 100%;
   border-radius: 12px;
-  padding: 0 40px 40px 40px;
   background-color: #fff;
   overflow-y: auto;
 

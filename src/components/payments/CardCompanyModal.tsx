@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import Modal from '../common/Modal';
 import { CARD_COMPANY_LOGO } from '../../constants/cardCompany';
 import { CardCompany } from '../../@types';
+import { Modal } from '@fine1012/react-modal';
 
 type CardCompanyModalProps = {
   isModalOpen: boolean;
@@ -16,20 +16,16 @@ const CardCompanyModal = ({ onClickLogo, isModalOpen, closeModal }: CardCompanyM
   };
 
   return (
-    <>
-      {isModalOpen && (
-        <Modal onCloseModal={closeModal}>
-          <CardCompanyWrapper>
-            {CARD_COMPANY_LOGO.map(({ name, logo }, index) => (
-              <CardCompanyButton type="button" key={index} onClick={() => handleClickLogo(name)}>
-                <img src={logo} alt={name} />
-                <CardCompanyName>{name}</CardCompanyName>
-              </CardCompanyButton>
-            ))}
-          </CardCompanyWrapper>
-        </Modal>
-      )}
-    </>
+    <Modal open={isModalOpen} onCloseModal={closeModal}>
+      <CardCompanyWrapper>
+        {CARD_COMPANY_LOGO.map(({ name, logo }, index) => (
+          <CardCompanyButton type="button" key={index} onClick={() => handleClickLogo(name)}>
+            <img src={logo} alt={name} />
+            <CardCompanyName>{name}</CardCompanyName>
+          </CardCompanyButton>
+        ))}
+      </CardCompanyWrapper>
+    </Modal>
   );
 };
 
