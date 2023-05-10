@@ -1,16 +1,15 @@
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useCardList from "./useCardList";
-import { useContext, useEffect, useState } from "react";
 import { PATHS } from "src/utils/constant";
 import { CardInfoContext } from "src/context/CardInfoContext";
 
-function useSaveNickName() {
+function useNavigateCardInfoStep() {
   const navigation = useNavigate();
   const [cardInfo, dispatch] = useContext(CardInfoContext);
-  const { cardName, cardNumbers, ownerName, expireDate } = cardInfo;
-  const { saveCard } = useCardList({ key: "card-list" });
+  const { cardName, cardNumbers, ownerName, expireDate, nickName } = cardInfo;
 
-  const [nickName, setNickName] = useState("");
+  const { saveCard } = useCardList({ key: "card-list" });
 
   useEffect(() => {
     if (!cardInfo.securityCode.length) {
@@ -19,12 +18,12 @@ function useSaveNickName() {
     }
   }, []);
 
-  const onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    setNickName(event.target.value);
+  const registerCard: React.MouseEventHandler<HTMLButtonElement> = () => {
+    saveCard({ ...cardInfo });
+    navigation(PATHS.registerFinished);
   };
 
-  const registerCard: React.MouseEventHandler<HTMLButtonElement> = () => {
-    saveCard({ ...cardInfo, nickName });
+  const moveCardList: React.MouseEventHandler<HTMLButtonElement> = () => {
     if (dispatch) dispatch({ type: "clear", payload: "" });
     navigation(PATHS.cardList);
   };
@@ -35,9 +34,9 @@ function useSaveNickName() {
     ownerName,
     expireDate,
     nickName,
-    onChange,
     registerCard,
+    moveCardList,
   };
 }
 
-export default useSaveNickName;
+export default useNavigateCardInfoStep;

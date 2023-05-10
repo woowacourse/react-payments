@@ -90,10 +90,12 @@ export const initialCardInfos: CardInfoProps = {
   securityCode: "",
   password: ["", ""],
   cardName: null,
+  nickName: "",
 };
 
 export const PATHS = {
   cardList: "/card-list",
   cardNickName: "/card-nickname",
   cardRegister: "/card-register",
+  registerFinished: "/register-finished",
 } as const;
