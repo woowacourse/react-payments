@@ -8,6 +8,7 @@ import { CARD_NUMBER_UNIT_MAX_LENGTH } from '../../../constants/input';
 import { formatNumber } from '../../../utils/formatter';
 import { isElementOfType } from '../../../utils/eventUtils';
 import styles from './style.module.css';
+import { useInputBackwardFocus } from '../../../hooks/common/useInputBackwardFocus';
 
 interface CardNumberProps {
   value: string[];
@@ -17,6 +18,8 @@ interface CardNumberProps {
 }
 
 const CardNumber = ({ value, isError, updateInputValue, updateInputError }: CardNumberProps) => {
+  const { handleBackspacePress } = useInputBackwardFocus();
+
   const onChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     target.value = formatNumber(target.value);
 
@@ -44,7 +47,11 @@ const CardNumber = ({ value, isError, updateInputValue, updateInputError }: Card
       <Label htmlFor="cardNumber" id="cardNumber-label" required>
         카드 번호
       </Label>
-      <div className={`${styles.container} ${isError && styles.error}`} onBlur={onBlur}>
+      <div
+        className={`${styles.container} ${isError && styles.error}`}
+        onBlur={onBlur}
+        onKeyDown={handleBackspacePress}
+      >
         <Input
           id="cardNumber"
           name="cardNumber"
