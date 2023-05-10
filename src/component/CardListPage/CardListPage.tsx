@@ -3,7 +3,7 @@ import CardList from "./CardList/CardList";
 import { CreditCard } from "../../type";
 
 import "./cardListPage.css";
-import { EXPLANATION_MESSAGE } from "../../CONSTANT";
+import { EXPLANATION_MESSAGE } from "../../constant/message";
 
 interface CardListPageProps {
   cardList: CreditCard[];

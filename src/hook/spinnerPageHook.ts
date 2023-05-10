@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { LOADING_TIME } from "../CONSTANT";
+import { LOADING_TIME } from "../constant/etc";
 import { useNavigate } from "react-router-dom";
 
 export const useLoading = () => {

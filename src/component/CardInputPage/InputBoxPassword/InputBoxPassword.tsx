@@ -2,7 +2,10 @@ import { useState, useEffect } from "react";
 
 import CardPassword from "./CardPassword";
 
-import { CARD_ERROR_MESSAGE, EXPLANATION_MESSAGE } from "../../../CONSTANT";
+import {
+  CARD_ERROR_MESSAGE,
+  EXPLANATION_MESSAGE,
+} from "../../../constant/message";
 import { nowStatus } from "../../../type";
 
 import "./inputBoxPassword.css";

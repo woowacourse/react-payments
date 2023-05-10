@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 import "./addCardButton.css";
-import { ARIA_LABEL_MESSAGE } from "../../../CONSTANT";
+import { ARIA_LABEL_MESSAGE } from "../../../constant/message";
 
 export default function AddCardButton() {
   return (

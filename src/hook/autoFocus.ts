@@ -1,5 +1,5 @@
 import { FormEvent, useRef } from "react";
-import { INPUT_LENGTH_LIMIT } from "./CONSTANT";
+import { INPUT_LENGTH_LIMIT } from "../constant/etc";
 
 export const useAutoFocus = () => {
   const originElementValues = useRef<string[]>([]);

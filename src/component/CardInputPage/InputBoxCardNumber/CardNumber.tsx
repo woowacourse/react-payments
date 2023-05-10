@@ -6,7 +6,8 @@ import { nowStatus } from "../../../type";
 import { makeAppropriateNumber } from "../../../util/trans";
 
 import "./cardNumber.css";
-import { INPUT_LENGTH_LIMIT, PLACE_HOLDER } from "../../../CONSTANT";
+import { PLACE_HOLDER } from "../../../constant/message";
+import { INPUT_LENGTH_LIMIT } from "../../../constant/etc";
 
 interface CardNumberProps {
   changeEachNumberStatus: (partIndex: number, state: nowStatus) => void;

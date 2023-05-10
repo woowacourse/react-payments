@@ -4,7 +4,7 @@ import type { Meta } from "@storybook/react";
 import Modal from "@chsua/bottom-modal";
 
 import CardCoButton from "../../component/common/CardCoButton";
-import { CARD_CO_NAME } from "../../CONSTANT";
+import { CARD_CO_NAME } from "../../constant/message";
 import { CardCo } from "../../type";
 
 const meta: Meta = {

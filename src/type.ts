@@ -1,4 +1,4 @@
-import { CARD_CO_NAME } from "./CONSTANT";
+import { CARD_CO_NAME } from "./constant/message";
 
 export interface CreditCard {
   cardCo: CardCo;

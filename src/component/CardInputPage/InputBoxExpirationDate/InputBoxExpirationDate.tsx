@@ -5,13 +5,14 @@ import CardInfoInput from "../../common/CardInfoInput";
 import {
   CARD_ERROR_MESSAGE,
   EXPLANATION_MESSAGE,
-  INPUT_LENGTH_LIMIT,
   PLACE_HOLDER,
-} from "../../../CONSTANT";
+} from "../../../constant/message";
+
 import { validateExpirationDate } from "../../../validation/ExpirationDate";
 import { makeAppropriateExpirationDate } from "../../../util/trans";
 
 import "./inputBoxExpirationDate.css";
+import { INPUT_LENGTH_LIMIT } from "../../../constant/etc";
 
 interface InputBoxExpirationDateProps {
   changeCardExpirationDateStatus: (

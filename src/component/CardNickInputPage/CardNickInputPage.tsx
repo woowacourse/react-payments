@@ -8,7 +8,10 @@ import { CreditCard } from "../../type";
 import InputBoxNick from "./InputBoxNick/InputBoxNick";
 
 import "./cardNickInputPage.css";
-import { ARIA_LABEL_MESSAGE, EXPLANATION_MESSAGE } from "../../CONSTANT";
+import {
+  ARIA_LABEL_MESSAGE,
+  EXPLANATION_MESSAGE,
+} from "../../constant/message";
 
 interface CardNickInputPageProps {
   card: CreditCard;

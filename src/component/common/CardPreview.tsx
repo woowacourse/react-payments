@@ -1,4 +1,6 @@
-import { CARD_CO_NAME, INPUT_LENGTH_LIMIT, PLACE_HOLDER } from "../../CONSTANT";
+import { CARD_CO_NAME, PLACE_HOLDER } from "../../constant/message";
+import { INPUT_LENGTH_LIMIT } from "../../constant/etc";
+
 import { CreditCard } from "../../type";
 import { colorMatch } from "../../util/colorMatch";
 

@@ -1,4 +1,4 @@
-import { EXPLANATION_MESSAGE } from "../../CONSTANT";
+import { EXPLANATION_MESSAGE } from "../../constant/message";
 import "./registerSpinnerPage.css";
 
 export default function RegisterSpinnerPage() {

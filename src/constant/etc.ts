@@ -1,0 +1,23 @@
+export const INPUT_STATUS = {
+  ERROR: 0,
+  NOT_COMPLETE: 1,
+  COMPLETE: 2,
+};
+
+export const REGULAR_EXPRESSION = {
+  ONE_NUMBER: /^\d{1}$/,
+  SPACE_OVER_TWO: /\s{2,}/,
+  CAPITAL_LETTER_OR_SPACE: /^[A-Z\s]+$/,
+};
+
+export const LOADING_TIME = 3000;
+
+export const INPUT_LENGTH_LIMIT = {
+  MAX_EACH_CARD_NUMBER: 4,
+  MAX_EXPIRATION_DATE: 5,
+  MAX_OWNER: 30,
+  MAX_SHOW_OWNER: 15,
+  MAX_EACH_PASSWORD: 1,
+  MAX_SECURITY_CODE: 3,
+  MAX_NICK: 10,
+};

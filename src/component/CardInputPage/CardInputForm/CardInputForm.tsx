@@ -13,13 +13,13 @@ import InputBoxPassword from "../InputBoxPassword/InputBoxPassword";
 import InputBoxSecurityCode from "../InputBoxSecurityCode/InputBoxSecurityCode";
 
 import { CardCo, CreditCard } from "../../../type";
-import { CARD_CO_NAME, EXPLANATION_MESSAGE } from "../../../CONSTANT";
+import { CARD_CO_NAME, EXPLANATION_MESSAGE } from "../../../constant/message";
 import "./cardInputForm.css";
 
 import { useModalState } from "../../../hook/modalHook";
 import { useCardInfoAndInputState } from "../../../hook/cardInfoAndInputHook";
 import { useLoading } from "../../../hook/spinnerPageHook";
-import { useAutoFocus } from "../../../autoFocus";
+import { useAutoFocus } from "../../../hook/autoFocus";
 
 interface CardInputFormProps {
   addNewCard: (card: CreditCard) => void;

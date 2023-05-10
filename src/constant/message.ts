@@ -7,12 +7,6 @@ export const CARD_ERROR_MESSAGE = {
   INPUT_CARD_PASSWORD: "카드 비밀번호 앞 두 자리 숫자를 입력해주세요",
 };
 
-export const INPUT_STATUS = {
-  ERROR: 0,
-  NOT_COMPLETE: 1,
-  COMPLETE: 2,
-};
-
 export const EXPLANATION_MESSAGE = {
   CARD_FORM_PAGE: "카드추가",
   CARD_LIST_PAGE: "보유카드",
@@ -53,12 +47,6 @@ export const ARIA_LABEL_MESSAGE = {
   COMPARE_NOW_LENGTH_AND_LIMIT: "현재 글자수와 제한 글자수 비교",
 };
 
-export const REGULAR_EXPRESSION = {
-  ONE_NUMBER: /^\d{1}$/,
-  SPACE_OVER_TWO: /\s{2,}/,
-  CAPITAL_LETTER_OR_SPACE: /^[A-Z\s]+$/,
-};
-
 export const CARD_CO_NAME = {
   woori: "우리카드",
   lotte: "롯데카드",
@@ -68,16 +56,4 @@ export const CARD_CO_NAME = {
   bc: "BC카드",
   shinhan: "신한카드",
   hyundai: "현대카드",
-};
-
-export const LOADING_TIME = 3000;
-
-export const INPUT_LENGTH_LIMIT = {
-  MAX_EACH_CARD_NUMBER: 4,
-  MAX_EXPIRATION_DATE: 5,
-  MAX_OWNER: 30,
-  MAX_SHOW_OWNER: 15,
-  MAX_EACH_PASSWORD: 1,
-  MAX_SECURITY_CODE: 3,
-  MAX_NICK: 10,
 };

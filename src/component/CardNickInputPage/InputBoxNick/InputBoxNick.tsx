@@ -2,11 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { ChangeEvent, KeyboardEvent, useState } from "react";
 
 import "./inputBoxNick.css";
-import {
-  ARIA_LABEL_MESSAGE,
-  INPUT_LENGTH_LIMIT,
-  PLACE_HOLDER,
-} from "../../../CONSTANT";
+import { ARIA_LABEL_MESSAGE, PLACE_HOLDER } from "../../../constant/message";
+import { INPUT_LENGTH_LIMIT } from "../../../constant/etc";
 
 interface InputBoxNickProps {
   submitNickAndSetCard: (nick: string) => void;

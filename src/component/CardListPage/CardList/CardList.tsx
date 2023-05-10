@@ -5,7 +5,7 @@ import CardPreviewBox from "./CardPreviewBox";
 import { CreditCard } from "../../../type";
 
 import "./cardList.css";
-import { DIRECTION_MESSAGE } from "../../../CONSTANT";
+import { DIRECTION_MESSAGE } from "../../../constant/message";
 
 interface CardListProps {
   cardList: CreditCard[];

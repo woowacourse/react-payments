@@ -6,9 +6,10 @@ import {
   ARIA_LABEL_MESSAGE,
   CARD_ERROR_MESSAGE,
   EXPLANATION_MESSAGE,
-  INPUT_LENGTH_LIMIT,
   PLACE_HOLDER,
-} from "../../../CONSTANT";
+} from "../../../constant/message";
+import { INPUT_LENGTH_LIMIT } from "../../../constant/etc";
+
 import { makeAppropriateName } from "../../../util/trans";
 
 import "./inputBoxOwner.css";

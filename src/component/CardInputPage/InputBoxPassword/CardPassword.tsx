@@ -6,7 +6,7 @@ import { makeAppropriatePassword } from "../../../util/trans";
 import { nowStatus } from "../../../type";
 
 import "./cardPassword.css";
-import { INPUT_LENGTH_LIMIT } from "../../../CONSTANT";
+import { INPUT_LENGTH_LIMIT } from "../../../constant/etc";
 
 interface CardPasswordProps {
   changeEachPasswordStatus: (partIndex: number, state: nowStatus) => void;

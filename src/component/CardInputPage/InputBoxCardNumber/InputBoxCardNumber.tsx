@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 
 import CardNumber from "./CardNumber";
 
-import { CARD_ERROR_MESSAGE, EXPLANATION_MESSAGE } from "../../../CONSTANT";
+import {
+  CARD_ERROR_MESSAGE,
+  EXPLANATION_MESSAGE,
+} from "../../../constant/message";
 import { nowStatus } from "../../../type";
 
 import "./inputBoxCardNumber.css";

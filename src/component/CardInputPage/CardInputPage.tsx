@@ -6,7 +6,10 @@ import { CreditCard } from "../../type";
 import { ReactComponent as LessThanSide } from "../../asset/lessThanSide.svg";
 
 import "./cardInputPage.css";
-import { ARIA_LABEL_MESSAGE, EXPLANATION_MESSAGE } from "../../CONSTANT";
+import {
+  ARIA_LABEL_MESSAGE,
+  EXPLANATION_MESSAGE,
+} from "../../constant/message";
 
 interface CardInputPageProps {
   addNewCard: (card: CreditCard) => void;

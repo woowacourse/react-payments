@@ -7,11 +7,12 @@ import {
   CARD_ERROR_MESSAGE,
   DIRECTION_MESSAGE,
   EXPLANATION_MESSAGE,
-  INPUT_LENGTH_LIMIT,
-} from "../../../CONSTANT";
+} from "../../../constant/message";
+
 import { makeAppropriateSecurityCode } from "../../../util/trans";
 
 import "./inputBoxSecurityCode.css";
+import { INPUT_LENGTH_LIMIT } from "../../../constant/etc";
 
 interface InputBoxSecurityProps {
   changeSecurityCodeStatus: (
