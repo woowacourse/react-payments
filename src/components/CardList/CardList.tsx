@@ -1,25 +1,26 @@
-import styles from './style.module.css';
-import { Card } from '../../types';
-import CardItem from '../CardItem/CardItem';
+import CardPreview from '../CardPreview/CardPreview';
+import { CardInfo } from '../../types';
+import styles from './CardList.module.css';
 
-interface CardListProps {
-  cardList: Card[];
-}
+type CardListProps = {
+  cardInfo: CardInfo[];
+};
 
-function CardList({ cardList }: CardListProps) {
+const CardList = ({ cardInfo }: CardListProps) => {
   return (
-    <div className={styles.container}>
-      {cardList.length ? (
-        <div className={styles.listContainer}>
-          {cardList.map((card, index) => (
-            <CardItem information={card} key={index} />
-          ))}
-        </div>
-      ) : (
-        <h4 className={styles.emptyListMessage}>새로운 카드를 등록해주세요.</h4>
-      )}
-    </div>
+    <section className={styles.container}>
+      <ul>
+        {cardInfo.map(card => (
+          <li className={styles.card} key={crypto.randomUUID()}>
+            <CardPreview {...card} />
+            <div className={styles.cardNicknameBox}>
+              <h4>{card.cardNickName}</h4>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
   );
-}
+};
 
 export default CardList;

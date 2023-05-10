@@ -1,0 +1,7 @@
+.container {
+  margin-top: 20px;
+  background-color: var(--white-color);
+  width: 370px;
+  height: 750px;
+  border-radius: 10px;
+}

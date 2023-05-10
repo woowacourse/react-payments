@@ -1,0 +1,15 @@
+.cardLogoContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cardCompanyLogo {
+  text-align: center;
+  cursor: pointer;
+}
+
+.cardLogo {
+  width: 45px;
+  height: 45px;
+}

@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  width: 375px;
+  height: 750px;
+}
+
+.box {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  width: 375px;
+}
+
+.registrationLetter {
+  text-align: center;
+  font-weight: 400;
+  font-size: 24px;
+}
+
+.confirmButton {
+  font-size: medium;
+  font-weight: 600;
+  background-color: var(--grey-200);
+  width: 200px;
+  height: 40px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}

@@ -1,11 +1,13 @@
 {
   "name": "react-payments",
   "version": "0.1.0",
-  "homepage": "https://ashleysyheo.github.io/react-payments",
+  "homepage": "https://geuntaek1013.github.io/react-payments",
   "private": true,
   "dependencies": {
+    "gh-pages": "^5.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-icons": "^4.8.0",
     "react-router-dom": "^6.10.0",
     "react-scripts": "5.0.1",
     "typescript": "^4.9.5",
@@ -17,7 +19,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "deploy": "gh-pages -d build",
+    "predeploy": "npm run build"
   },
   "eslintConfig": {
     "extends": [
