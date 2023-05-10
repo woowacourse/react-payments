@@ -1,15 +1,10 @@
 import CardList from "./CardList/CardList";
+import Header from "../common/Header/Header";
+import { useCardListContext } from "../../context/CardListContext";
 import "./cardListPage.css";
 
-import { CreditCard } from "../../type/CreditCard";
-import Header from "../common/Header/Header";
-
-interface Props {
-  cardList: CreditCard[];
-}
-
-export default function CardListPage(props: Props) {
-  const { cardList } = props;
+export default function CardListPage() {
+  const { cardList } = useCardListContext();
 
   return (
     <section className="card-list-section">

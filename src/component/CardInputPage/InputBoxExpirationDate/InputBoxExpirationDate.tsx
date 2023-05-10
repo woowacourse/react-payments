@@ -49,16 +49,21 @@ export default function InputBoxExpirationDate(props: Props) {
     <div className={styles.inputBox}>
       <p>만료일</p>
       <Input
-        data-testid="expiration-date"
+        role="textbox"
+        aria-label="카드 만료일"
         className="input-expiration-date"
         type="text"
         parsers={[removeSlashParser, lengthParser, dateFormatter]}
         valueChangeSubscribers={[inputStatusHandler, dateSetter]}
         placeholder="MM / YY"
         inputMode="numeric"
+        required={true}
       ></Input>
-      <p className={inputStatus === INPUT_STATUS.ERROR ? styles.visible : ""}>
-        연과 월은 각각 두 자리의 숫자로 입력해 주세요!!!
+      <p 
+        className={inputStatus === INPUT_STATUS.ERROR ? styles.visible : ""}
+        aria-hidden={inputStatus !== INPUT_STATUS.ERROR}
+      >
+        연과 월은 각각 두 자리의 숫자로 입력해 주세요. (예: 23년 5월 - 05/23)
       </p>
     </div>
   );

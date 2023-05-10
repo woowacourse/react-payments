@@ -54,7 +54,8 @@ export default function CardNumber(props: Props) {
   return (
     <>
       <Input
-        data-testid="card-number-1"
+        role="textbox"
+        aria-label="카드 번호 첫 번째부터 네 번째 숫자"
         className={`${styles.input} ${styles.first}`}
         type="text"
         inputMode="numeric"
@@ -63,10 +64,12 @@ export default function CardNumber(props: Props) {
           makeSetCardInfoSetter(0),
         ]}
         parsers={[lengthParser]}
+        required={true}
         placeholder="XXXX"
       />
       <Input
-        data-testid="card-number-2"
+        role="textbox"
+        aria-label="카드 번호 다섯 번째부터 여덟 번째 숫자"
         className={styles.input}
         type="password"
         inputMode="numeric"
@@ -75,10 +78,12 @@ export default function CardNumber(props: Props) {
           makeSetCardInfoSetter(1),
         ]}
         parsers={[lengthParser]}
+        required={true}
         placeholder="XXXX"
       />
       <Input
-        data-testid="card-number-3"
+        role="textbox"
+        aria-label="카드 번호 아홉 번째부터 열두 번째 숫자"
         className={styles.input}
         type="password"
         inputMode="numeric"
@@ -87,10 +92,12 @@ export default function CardNumber(props: Props) {
           makeSetCardInfoSetter(2),
         ]}
         parsers={[lengthParser]}
+        required={true}
         placeholder="XXXX"
       />
       <Input
-        data-testid="card-number-4"
+        role="textbox"
+        aria-label="카드 번호 열세 번째부터 열여섯 번째 숫자"
         className={`${styles.input} ${styles.last}`}
         type="text"
         inputMode="numeric"
@@ -99,6 +106,7 @@ export default function CardNumber(props: Props) {
           makeSetCardInfoSetter(3),
         ]}
         parsers={[lengthParser]}
+        required={true}
         placeholder="XXXX"
       />
     </>

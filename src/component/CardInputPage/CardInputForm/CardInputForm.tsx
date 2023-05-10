@@ -1,4 +1,3 @@
-import { CreditCard } from "../../../type/CreditCard";
 import Button from "../../common/Button";
 import CardPreview from "../../common/CardPreview";
 import InputBoxCardNumber from "../InputBoxCardNumber/InputBoxCardNumber";
@@ -17,13 +16,7 @@ import { createPortal } from "react-dom";
 import CardCompanySelectModal from "../CardCompanySelectModal/CardCompanySelectModal";
 import { CardCompany } from "../../../type/CardCompany";
 
-interface Props {
-  addNewCard: (card: CreditCard) => void;
-}
-
-export default function CardInputForm(props: Props) {
-  const { addNewCard } = props;
-
+export default function CardInputForm() {
   const { 
     isAllTrue: isAllComplete,
     getSetBooleanHandler: getSetCompleteStatus
@@ -36,10 +29,8 @@ export default function CardInputForm(props: Props) {
 
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
-    addNewCard({ ...card });
 
-    navigate("/register/success", { replace: true });
+    navigate("/register/pending", { replace: true });
   };
 
   const modalClickHandler = (company: CardCompany) => {

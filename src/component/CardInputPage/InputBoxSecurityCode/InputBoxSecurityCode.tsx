@@ -47,18 +47,23 @@ export default function InputBoxSecurityCode(props: Props) {
     <div className={styles.inputBox}>
       <p>보안 코드(CVC/CVV)</p>
       <Input
-        data-testid="security-code"
+        role="textbox"
+        aria-label="카드 보안 코드 세 자리 숫자"
         className={styles.input}
         type="password"
         inputMode="numeric"
         parsers={[lengthParser]}
         valueChangeSubscribers={[inputStatusHandler, securityCodeSetter]}
+        required={true}
       ></Input>
       <button className={styles.button} type="button" onClick={alertCvcInfo}>
         ?
       </button>
-      <p className={inputStatus === INPUT_STATUS.ERROR ? styles.visible : ""}>
-        보안 코드는 세 자리의 숫자로 입력해 주세요!!!
+      <p 
+        className={inputStatus === INPUT_STATUS.ERROR ? styles.visible : ""}
+        aria-hidden={inputStatus !== INPUT_STATUS.ERROR}
+      >
+        카드 뒷면에 적힌 세 자리 숫자의 보안 코드를 입력해 주세요.
       </p>
     </div>
   );
