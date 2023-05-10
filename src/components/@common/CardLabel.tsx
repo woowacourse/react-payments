@@ -1,3 +1,4 @@
+import React from 'react';
 import * as Styled from './CardLabel.styles';
 
 interface CardLabelProps {
@@ -5,8 +6,8 @@ interface CardLabelProps {
   color?: string;
 }
 
-const CardLabel = ({ labelText, color = '' }: CardLabelProps) => {
+const CardLabel = React.memo(({ labelText, color = '' }: CardLabelProps) => {
   return <Styled.Label color={color}>{labelText}</Styled.Label>;
-};
+});
 
 export default CardLabel;

@@ -3,33 +3,29 @@ import * as Styled from './CardNumbers.styles';
 import CardInput from '../@common/CardInput';
 import CardLabel from '../@common/CardLabel';
 import { RefContext } from '../../contexts/RefProvider';
+import CardErrorLabel from '../@common/CardErrorLabel';
+import { CardNumbersType } from '../../types/general';
 
 interface CardNumbersProps {
-  cardNumbers: Array<string>;
+  cardNumbers: CardNumbersType;
   errorMessage: string;
-  handleCardNumbers: (order: number, value: string) => void;
+  isValidatedCardNumbers: (order: number, value: string) => boolean;
 }
 
 const CardNumbers = ({
   cardNumbers,
   errorMessage,
-  handleCardNumbers,
+  isValidatedCardNumbers,
 }: CardNumbersProps) => {
-  const cardRefs = useContext(RefContext);
+  const { inputRefs: cardRefs, focusNextInput } = useContext(RefContext);
 
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!(e.target instanceof HTMLInputElement)) return;
     const currentOrder = Number(e.target.dataset['order']);
 
-    handleCardNumbers(currentOrder, e.target.value);
+    if (!isValidatedCardNumbers(currentOrder, e.target.value)) return;
 
-    focusNextInput(currentOrder);
-  };
-
-  const focusNextInput = (currentOrder: number) => {
-    if (cardRefs[currentOrder].current?.value.length === 4) {
-      cardRefs[currentOrder + 1].current?.focus();
-    }
+    focusNextInput(currentOrder, 4);
   };
 
   return (
@@ -45,10 +41,9 @@ const CardNumbers = ({
           order={0}
           placeholder={'0000'}
           required={true}
+          inputMode="numeric"
         />
-        {cardRefs[0].current?.value.length === 4 && (
-          <Styled.Paragraph>-</Styled.Paragraph>
-        )}
+        {cardNumbers[0].length === 4 && <Styled.Paragraph>-</Styled.Paragraph>}
         <CardInput
           type="text"
           maxLength={4}
@@ -58,10 +53,9 @@ const CardNumbers = ({
           order={1}
           placeholder={'0000'}
           required={true}
+          inputMode="numeric"
         />
-        {cardRefs[1].current?.value.length === 4 && (
-          <Styled.Paragraph>-</Styled.Paragraph>
-        )}
+        {cardNumbers[1].length === 4 && <Styled.Paragraph>-</Styled.Paragraph>}
         <CardInput
           type="password"
           maxLength={4}
@@ -71,10 +65,9 @@ const CardNumbers = ({
           order={2}
           placeholder={'0000'}
           required={true}
+          inputMode="numeric"
         />
-        {cardRefs[2].current?.value.length === 4 && (
-          <Styled.Paragraph>-</Styled.Paragraph>
-        )}
+        {cardNumbers[2].length === 4 && <Styled.Paragraph>-</Styled.Paragraph>}
         <CardInput
           type="password"
           maxLength={4}
@@ -84,9 +77,10 @@ const CardNumbers = ({
           order={3}
           placeholder={'0000'}
           required={true}
+          inputMode="numeric"
         />
       </Styled.Wrapper>
-      <Styled.ErrorTextWrapper>{errorMessage}</Styled.ErrorTextWrapper>
+      <CardErrorLabel errorMessage={errorMessage} />
     </>
   );
 };

@@ -37,9 +37,3 @@ export const ToolTip = styled.p`
   font-size: 13px;
   cursor: pointer;
 `;
-
-export const ErrorTextWrapper = styled.p`
-  height: 18px;
-  font-size: 14px;
-  color: red;
-`;

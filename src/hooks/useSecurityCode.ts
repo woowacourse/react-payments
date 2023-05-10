@@ -5,17 +5,18 @@ const useSecurityCode = () => {
   const [securityCode, setSecurityCode] = useState<string>('');
   const [securityCodeError, setSecurityCodeError] = useState('');
 
-  const handleSecurityCode = (value: string) => {
+  const isValidatedSecurityCode = (value: string) => {
     if (REG_EXP.cardNumberLimit.test(value)) {
       setSecurityCodeError('보안 코드는 세 자리의 숫자로만 입력해주세요.');
-      return;
+      return false;
     }
 
     setSecurityCodeError('');
     setSecurityCode(value);
+    return true;
   };
 
-  return { securityCode, securityCodeError, handleSecurityCode };
+  return { securityCode, securityCodeError, isValidatedSecurityCode };
 };
 
 export default useSecurityCode;

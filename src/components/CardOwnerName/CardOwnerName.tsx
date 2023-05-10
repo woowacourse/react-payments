@@ -3,33 +3,32 @@ import CardInput from '../@common/CardInput';
 import CardLabel from '../@common/CardLabel';
 import * as Styled from './CardOwnerName.styles';
 import { RefContext } from '../../contexts/RefProvider';
+import CardErrorLabel from '../@common/CardErrorLabel';
 
 interface CardOwnerNameProps {
   cardOwnerName: string;
   errorMessage: string;
-  handleCardOwnerName: (value: string) => void;
+  isValidatedCardOwnerName: (value: string) => boolean;
 }
 
 const CardOwnerName = ({
   cardOwnerName,
   errorMessage,
-  handleCardOwnerName,
+  isValidatedCardOwnerName,
 }: CardOwnerNameProps) => {
-  const cardRefs = useContext(RefContext);
+  const { inputRefs: cardRefs } = useContext(RefContext);
 
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!(e.target instanceof HTMLInputElement)) return;
 
-    handleCardOwnerName(e.target.value);
+    if (!isValidatedCardOwnerName(e.target.value)) return;
   };
 
   return (
     <>
       <Styled.LabelWrapper>
-        <CardLabel labelText="카드 소유자 이름(선택)" />
-        <CardLabel
-          labelText={`${cardRefs[6].current?.value.length || 0} / 30`}
-        />
+        <CardLabel labelText="카드 소유자 이름" />
+        <CardLabel labelText={`${cardOwnerName.length || 0} / 30`} />
       </Styled.LabelWrapper>
       <Styled.Wrapper>
         <CardInput
@@ -39,10 +38,11 @@ const CardOwnerName = ({
           order={6}
           onChange={handleCardInputChange}
           value={cardOwnerName}
-          placeholder="카드에 표시된 영어 이름을 입력하세요."
+          placeholder="(선택) 카드에 표시된 영어 이름을 입력하세요."
+          inputMode="text"
         />
       </Styled.Wrapper>
-      <Styled.ErrorTextWrapper>{errorMessage}</Styled.ErrorTextWrapper>
+      <CardErrorLabel errorMessage={errorMessage} />
     </>
   );
 };

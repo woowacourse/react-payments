@@ -7,6 +7,8 @@ const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
         overflow-x: hidden;
         overflow-y: auto;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
     }
     ul,
     li {
@@ -14,6 +16,9 @@ const GlobalStyle = createGlobalStyle`
     }
     button, input {
         all:unset;
+    }
+    ::-webkit-scrollbar {
+        display: none;
     }
 `;
 

@@ -4,35 +4,36 @@ import { useContext } from 'react';
 import * as Styled from './CardExpiredDates.styles';
 import { RefContext } from '../../contexts/RefProvider';
 import { REF_INDEX } from '../../constants/refIndex';
+import CardErrorLabel from '../@common/CardErrorLabel';
+import { ExpiredDatesType } from '../../types/general';
 
 interface ExpiredDateProps {
-  expiredDates: Array<string>;
+  expiredDates: ExpiredDatesType;
   errorMessage: string;
-  handleExpiredDates: (order: number, value: string) => void;
+  isValidatedExpiredDates: (order: number, value: string) => boolean;
 }
 
 const CardExpiredDate = ({
   expiredDates,
   errorMessage,
-  handleExpiredDates,
+  isValidatedExpiredDates,
 }: ExpiredDateProps) => {
-  const cardRefs = useContext(RefContext);
+  const { inputRefs: cardRefs, focusNextInput } = useContext(RefContext);
 
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!(e.target instanceof HTMLInputElement)) return;
     const currentOrder = Number(e.target.dataset['order']);
 
-    handleExpiredDates(
-      currentOrder - REF_INDEX.lastCardNumbersOrder,
-      e.target.value
-    );
-    focusNextInput(currentOrder);
-  };
-
-  const focusNextInput = (order: number) => {
-    if (cardRefs[order].current?.value.length === 2) {
-      cardRefs[order + 1].current?.focus();
+    if (
+      !isValidatedExpiredDates(
+        currentOrder - REF_INDEX.lastCardNumbersOrder,
+        e.target.value
+      )
+    ) {
+      return;
     }
+
+    focusNextInput(currentOrder, 2);
   };
 
   return (
@@ -48,10 +49,9 @@ const CardExpiredDate = ({
           order={4}
           placeholder="MM"
           required={true}
+          inputMode="numeric"
         />
-        {cardRefs[4].current?.value.length === 2 && (
-          <Styled.Paragraph>/</Styled.Paragraph>
-        )}
+        {expiredDates[0].length === 2 && <Styled.Paragraph>/</Styled.Paragraph>}
         <CardInput
           type="text"
           maxLength={2}
@@ -61,9 +61,10 @@ const CardExpiredDate = ({
           order={5}
           placeholder="YY"
           required={true}
+          inputMode="numeric"
         />
       </Styled.Wrapper>
-      <Styled.ErrorTextWrapper>{errorMessage}</Styled.ErrorTextWrapper>
+      <CardErrorLabel errorMessage={errorMessage} />
     </>
   );
 };

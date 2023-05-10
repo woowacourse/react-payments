@@ -17,9 +17,3 @@ export const Wrapper = styled.div`
 export const Paragraph = styled.p`
   width: 16px;
 `;
-
-export const ErrorTextWrapper = styled.p`
-  height: 18px;
-  font-size: 14px;
-  color: red;
-`;

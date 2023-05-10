@@ -8,31 +8,33 @@ import Header from '../components/Header/Header';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import useAddCard from '../hooks/useAddCard';
-import CardCompanyModal from '../components/CardCompanyModal/CardCompanyModal';
+import CardCompanyForm from '../components/CardCompanyForm/CardCompanyForm';
 import { useEffect, useState } from 'react';
 import CardLabel from '../components/@common/CardLabel';
 import * as Styled from './AddCard.styles';
 import SubmitButton from '../components/@common/SubmitButton';
-import CardList from '../types/CardList';
+import { CardList } from '../types/general';
 import RefProvider from '../contexts/RefProvider';
+import Modal from 'seeen-react-payments-modal';
+import CardErrorLabel from '../components/@common/CardErrorLabel';
 
 const AddCard = ({ cards, setCards }: CardList) => {
   const {
     cardNumbers,
     cardNumbersError,
-    handleCardNumbers,
+    isValidatedCardNumbers,
     expiredDates,
     expiredDatesError,
-    handleExpiredDates,
+    isValidatedExpiredDates,
     cardOwnerName,
     ownerNameError,
-    handleCardOwnerName,
+    isValidatedCardOwnerName,
     securityCode,
     securityCodeError,
-    handleSecurityCode,
+    isValidatedSecurityCode,
     cardPasswords,
     passwordError,
-    handleCardPasswords,
+    isValidatedCardPasswords,
     cardCompany,
     setCardCompany,
     isDisabledForm,
@@ -43,9 +45,10 @@ const AddCard = ({ cards, setCards }: CardList) => {
 
   const handleSetCards = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     if (isDisabledForm) {
       setErrorMessage(
-        '잘못된 정보입니다. 올바른 카드 정보를 입력했는지 확인해주세요.'
+        '잘못된 정보입니다. 선택한 카드사 및 카드 정보를 다시 확인해주세요.'
       );
       return;
     }
@@ -61,6 +64,10 @@ const AddCard = ({ cards, setCards }: CardList) => {
       },
     ]);
     navigate('/add-card-alias');
+  };
+
+  const handleOpenModal = () => {
+    setIsModalOpen(false);
   };
 
   useEffect(() => {
@@ -92,27 +99,27 @@ const AddCard = ({ cards, setCards }: CardList) => {
           <CardNumbers
             cardNumbers={cardNumbers}
             errorMessage={cardNumbersError}
-            handleCardNumbers={handleCardNumbers}
+            isValidatedCardNumbers={isValidatedCardNumbers}
           />
           <CardExpiredDate
             expiredDates={expiredDates}
             errorMessage={expiredDatesError}
-            handleExpiredDates={handleExpiredDates}
+            isValidatedExpiredDates={isValidatedExpiredDates}
           />
           <CardOwnerName
             cardOwnerName={cardOwnerName}
             errorMessage={ownerNameError}
-            handleCardOwnerName={handleCardOwnerName}
+            isValidatedCardOwnerName={isValidatedCardOwnerName}
           />
           <CardSecurityCode
             securityCode={securityCode}
             errorMessage={securityCodeError}
-            handleSecurityCode={handleSecurityCode}
+            isValidatedSecurityCode={isValidatedSecurityCode}
           />
           <CardPassword
             cardPasswords={cardPasswords}
             errorMessage={passwordError}
-            handleCardPasswords={handleCardPasswords}
+            isValidatedCardPasswords={isValidatedCardPasswords}
           />
           <Styled.ButtonWrapper>
             <SubmitButton
@@ -122,15 +129,19 @@ const AddCard = ({ cards, setCards }: CardList) => {
             />
           </Styled.ButtonWrapper>
         </form>
-        <Styled.ErrorTextWrapper>{errorMessage}</Styled.ErrorTextWrapper>
+        <CardErrorLabel errorMessage={errorMessage}></CardErrorLabel>
       </Styled.PageWrapper>
-      {isModalOpen && (
-        <CardCompanyModal
-          cardCompany={cardCompany}
-          setIsModalOpen={setIsModalOpen}
+      <Modal
+        isModalOpen={isModalOpen}
+        closeModal={handleOpenModal}
+        position="bottom"
+        width="100%"
+      >
+        <CardCompanyForm
           setCardCompany={setCardCompany}
+          setIsModalOpen={handleOpenModal}
         />
-      )}
+      </Modal>
     </RefProvider>
   );
 };

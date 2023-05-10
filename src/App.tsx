@@ -3,9 +3,10 @@ import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
 import GlobalStyle from './styles/GlobalStyle';
 import Home from './pages/Home';
 import AddCard from './pages/AddCard';
-import CardType from './types/Card';
+import { CardType } from './types/general';
 import { getLocalStorage, setLocalStorage } from './utils/handleLocalStorage';
 import AddCardAlias from './pages/AddCardAlias';
+import NotFound from './pages/NotFound';
 
 const initCards = () => {
   const localStorageCards = getLocalStorage('cards');
@@ -33,6 +34,7 @@ function App() {
           path="/add-card-alias"
           element={<AddCardAlias cards={cards} setCards={setCards} />}
         />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );

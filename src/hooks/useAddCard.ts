@@ -12,13 +12,16 @@ import useSecurityCode from './useSecurityCode';
 import usePassword from './usePassword';
 
 const useAddCard = () => {
-  const { cardNumbers, cardNumbersError, handleCardNumbers } = useCardNumbers();
-  const { expiredDates, expiredDatesError, handleExpiredDates } =
+  const { cardNumbers, cardNumbersError, isValidatedCardNumbers } =
+    useCardNumbers();
+  const { expiredDates, expiredDatesError, isValidatedExpiredDates } =
     useExpiredDates();
-  const { cardOwnerName, ownerNameError, handleCardOwnerName } = useOwnerName();
-  const { securityCode, securityCodeError, handleSecurityCode } =
+  const { cardOwnerName, ownerNameError, isValidatedCardOwnerName } =
+    useOwnerName();
+  const { securityCode, securityCodeError, isValidatedSecurityCode } =
     useSecurityCode();
-  const { cardPasswords, passwordError, handleCardPasswords } = usePassword();
+  const { cardPasswords, passwordError, isValidatedCardPasswords } =
+    usePassword();
   const [cardCompany, setCardCompany] = useState<string>('');
   const [isDisabledForm, setIsDisabledForm] = useState(true);
 
@@ -39,19 +42,19 @@ const useAddCard = () => {
   return {
     cardNumbers,
     cardNumbersError,
-    handleCardNumbers,
+    isValidatedCardNumbers,
     expiredDates,
     expiredDatesError,
-    handleExpiredDates,
+    isValidatedExpiredDates,
     cardOwnerName,
     ownerNameError,
-    handleCardOwnerName,
+    isValidatedCardOwnerName,
     securityCode,
     securityCodeError,
-    handleSecurityCode,
+    isValidatedSecurityCode,
     cardPasswords,
     passwordError,
-    handleCardPasswords,
+    isValidatedCardPasswords,
     cardCompany,
     setCardCompany,
     isDisabledForm,

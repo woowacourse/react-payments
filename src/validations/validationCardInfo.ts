@@ -1,6 +1,9 @@
+import { CardNumbersType, CardPasswordType } from '../types/general';
+import { ExpiredDatesType } from '../types/general';
+
 const nowDate = new Date();
 
-export const isCorrectCardNumber = (cardNumbers: Array<string>) => {
+export const isCorrectCardNumber = (cardNumbers: CardNumbersType) => {
   if (
     cardNumbers[0].length === 4 &&
     cardNumbers[1].length === 4 &&
@@ -12,7 +15,7 @@ export const isCorrectCardNumber = (cardNumbers: Array<string>) => {
   return false;
 };
 
-export const isCorrectExpiredDate = (expiredDates: Array<string>) => {
+export const isCorrectExpiredDate = (expiredDates: ExpiredDatesType) => {
   const expiredMonth = Number(expiredDates[0]);
   const expiredYear = Number(expiredDates[1]);
 
@@ -31,7 +34,7 @@ export const isCorrectSecurityCode = (securityCode: string) => {
   return false;
 };
 
-export const isCorrectPassword = (passwords: Array<string>) => {
+export const isCorrectPassword = (passwords: CardPasswordType) => {
   if (passwords[0].length === 1 && passwords[1].length === 1) return true;
   return false;
 };

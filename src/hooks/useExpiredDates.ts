@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { REG_EXP } from '../constants/regexp';
+import { ExpiredDatesType } from '../types/general';
 
 const nowYear = new Date().getFullYear() % 2000;
 const nowMonth = new Date().getMonth() + 1;
@@ -12,22 +13,26 @@ const getCurrentDateToString = () => {
 };
 
 const useExpiredDates = () => {
-  const [expiredDates, setExpiredDates] = useState<Array<string>>(['', '']);
+  const [expiredDates, setExpiredDates] = useState<ExpiredDatesType>({
+    0: '',
+    1: '',
+  });
   const [expiredDatesError, setExpiredDatesError] = useState<string>('');
 
-  const handleExpiredDates = (order: number, value: string) => {
-    if (!checkExpiredDates(order, value)) {
-      setError(
+  const isValidatedExpiredDates = (order: number, value: string) => {
+    if (!isCheckExpiredDates(order, value)) {
+      setExpiredDatesError(
         `유효한 만료일을 ${getCurrentDateToString()}의 형태로 입력해주세요.`
       );
-      return;
+      return false;
     }
 
-    setError('');
-    setState(order, value);
+    setExpiredDatesError('');
+    setExpiredDates({ ...expiredDates, [order]: value });
+    return true;
   };
 
-  const checkExpiredDates = (order: number, value: string) => {
+  const isCheckExpiredDates = (order: number, value: string) => {
     const monthValue = order === 0 && value.length === 2;
     const yearValue = order === 1 && value.length === 2;
 
@@ -38,15 +43,7 @@ const useExpiredDates = () => {
     return true;
   };
 
-  const setState = (order: number, value: string) => {
-    setExpiredDates({ ...expiredDates, [order]: value });
-  };
-
-  const setError = (message: string) => {
-    setExpiredDatesError(message);
-  };
-
-  return { expiredDates, expiredDatesError, handleExpiredDates };
+  return { expiredDates, expiredDatesError, isValidatedExpiredDates };
 };
 
 export default useExpiredDates;

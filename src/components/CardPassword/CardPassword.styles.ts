@@ -29,9 +29,3 @@ export const Paragraph = styled.p`
     margin-right: 0;
   }
 `;
-
-export const ErrorTextWrapper = styled.p`
-  height: 18px;
-  font-size: 14px;
-  color: red;
-`;

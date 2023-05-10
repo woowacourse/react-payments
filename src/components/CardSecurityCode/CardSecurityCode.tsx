@@ -3,34 +3,29 @@ import CardLabel from '../@common/CardLabel';
 import { useContext, useState } from 'react';
 import * as Styled from './CardSecurityCode.styles';
 import { RefContext } from '../../contexts/RefProvider';
+import CardErrorLabel from '../@common/CardErrorLabel';
 
 interface SecurityCodeProps {
   securityCode: string;
   errorMessage: string;
-  handleSecurityCode: (value: string) => void;
+  isValidatedSecurityCode: (value: string) => boolean;
 }
 
 const CardSecurityCode = ({
   securityCode,
   errorMessage,
-  handleSecurityCode,
+  isValidatedSecurityCode,
 }: SecurityCodeProps) => {
-  const cardRefs = useContext(RefContext);
+  const { inputRefs: cardRefs, focusNextInput } = useContext(RefContext);
   const [isShowToolTip, setIsShowToolTip] = useState(false);
 
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!(e.target instanceof HTMLInputElement)) return;
     const currentOrder = Number(e.target.dataset['order']);
 
-    handleSecurityCode(e.target.value);
+    if (!isValidatedSecurityCode(e.target.value)) return;
 
-    focusNextInput(currentOrder);
-  };
-
-  const focusNextInput = (currentOrder: number) => {
-    if (cardRefs[currentOrder].current?.value.length === 3) {
-      cardRefs[currentOrder + 1].current?.focus();
-    }
+    focusNextInput(currentOrder, 3);
   };
 
   return (
@@ -47,6 +42,7 @@ const CardSecurityCode = ({
             order={7}
             placeholder="•••"
             required={true}
+            inputMode="numeric"
           />
         </Styled.InputWrapper>
         {isShowToolTip ? (
@@ -69,7 +65,7 @@ const CardSecurityCode = ({
           </Styled.QuestionButton>
         )}
       </Styled.Wrapper>
-      <Styled.ErrorTextWrapper>{errorMessage}</Styled.ErrorTextWrapper>
+      <CardErrorLabel errorMessage={errorMessage} />
     </>
   );
 };
