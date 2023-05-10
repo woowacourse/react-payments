@@ -16,10 +16,10 @@ import { CardCo, CreditCard } from "../../../type";
 import { CARD_CO_NAME, EXPLANATION_MESSAGE } from "../../../constant/message";
 import "./cardInputForm.css";
 
-import { useModalState } from "../../../hook/modalHook";
-import { useCardInfoAndInputState } from "../../../hook/cardInfoAndInputHook";
-import { useLoading } from "../../../hook/spinnerPageHook";
-import { useAutoFocus } from "../../../hook/autoFocus";
+import { useModal } from "../../../hook/useModal";
+import { useCardInfoAndInput } from "../../../hook/useCardInfoAndInput";
+import { useLoading } from "../../../hook/useLoading";
+import { useAutoFocus } from "../../../hook/useAutoFocus";
 
 interface CardInputFormProps {
   addNewCard: (card: CreditCard) => void;
@@ -37,12 +37,12 @@ const style = {
 };
 
 export default function CardInputForm({ addNewCard }: CardInputFormProps) {
-  const { modalOpen, openModal, closeModal } = useModalState();
+  const { modalOpen, openModal, closeModal } = useModal();
   const { startLoading } = useLoading();
 
   const isFormFilled = useRef(false);
   const { inputStatus, nowCardInfo, changeInputStatus } =
-    useCardInfoAndInputState(closeModal);
+    useCardInfoAndInput(closeModal);
 
   const { cardNumber, expirationDate, securityCode, password } = inputStatus;
   isFormFilled.current =

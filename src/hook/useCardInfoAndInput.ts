@@ -2,7 +2,7 @@ import { useState } from "react";
 import { CardCo, CreditCard, InputStatus } from "../type";
 import { initialCard, initialCardInputComplete } from "../cardData";
 
-export const useCardInfoAndInputState = (closeModal: Function) => {
+export const useCardInfoAndInput = (closeModal: Function) => {
   const [inputStatus, setInputStatus] = useState<InputStatus>(
     initialCardInputComplete
   );

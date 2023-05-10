@@ -8,7 +8,7 @@ import CardNickInputPage from "./component/CardNickInputPage/CardNickInputPage";
 import RegisterSpinnerPage from "./component/RegisterSpinnerPage/RegisterSpinnerPage";
 
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import { useCardList } from "./hook/cardListHook";
+import { useCardList } from "./hook/useCardList";
 
 function App() {
   const { cardList, addNewCard, setNickNewCard } = useCardList();
