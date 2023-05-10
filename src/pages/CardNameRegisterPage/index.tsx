@@ -7,7 +7,7 @@ import styles from './cardNameRegisterPage.module.css';
 const CardNameRegisterPage = () => {
   return (
     <main className={styles.container}>
-      <Title text="카드 이름을 작성하고 등록을 완료해 주세요." />
+      <Title>카드 이름을 작성하고 등록을 완료해 주세요.</Title>
       <section className={styles.cardItemContainer}>
         <CardItem />
       </section>
