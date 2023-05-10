@@ -3,10 +3,10 @@
   border-radius: 0;
 }
 
-.card-number-1 {
+.input-card-number:first-child {
   border-radius: 7px 0 0 7px;
 }
 
-.card-number-4 {
+.input-card-number:last-child {
   border-radius: 0 7px 7px 0;
 }

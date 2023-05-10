@@ -56,7 +56,7 @@ export default function CardNumber({
           inputPlace="essential"
           key={`card-number-${index + 1}`}
           name={`card-number-${index + 1}`}
-          className={`input-card-number card-number-${index + 1}`}
+          className={`input-card-number`}
           type={index === 1 || index === 2 ? "password" : "text"}
           onChange={onChangeCardNumber(index)}
           placeholder={PLACE_HOLDER.CARD_NUMBER}
