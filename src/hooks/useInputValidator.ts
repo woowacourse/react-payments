@@ -3,27 +3,24 @@ import { isNumeric } from '../components/validators/validator';
 
 export const useInputValidator = (
   validator: typeof isNumeric,
-  errorMessage: string,
   maxLength: number
 ) => {
-  const [errorMessageState, setErrorMessageState] = useState('');
+  const [isError, setIsError] = useState(false);
 
   const validate = (value: string) => {
     if (!validator(value) && value.length) {
-      setErrorMessageState(errorMessage);
+      setIsError(true);
       return false;
-    }
-
-    if (errorMessageState) {
-      setErrorMessageState('');
     }
 
     if (value.length > maxLength) {
+      setIsError(true);
       return false;
     }
 
+    setIsError(false);
     return true;
   };
 
-  return { validate, errorMessageState };
+  return { validate, isError };
 };

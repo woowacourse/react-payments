@@ -13,13 +13,12 @@ import Input from '../Input/Input';
 
 const PasswordBox = () => {
   const { password, setPassword, securityCode } = useContext(CardContext);
-  const { validate, errorMessageState } = useInputValidator(
+  const { validate, isError } = useInputValidator(
     isNumeric,
-    ERROR_MESSAGE.SHOULD_NUMBER,
     PASSWORD.MAX_LENGTH
   );
 
-  const handleChangeInput = ({
+  const handleInputChange = ({
     target: { name, value },
   }: ChangeEvent<HTMLInputElement>) => {
     if (!validate(value)) {
@@ -49,11 +48,12 @@ const PasswordBox = () => {
                 inputmode="numeric"
                 name={key}
                 value={value}
-                onChange={handleChangeInput}
+                onChange={handleInputChange}
                 width="xs"
                 type="password"
                 maxLength={1}
                 isFocus={isFirstInput && isSecurityCodeFull}
+                isError={isError}
               />
             );
           })}
@@ -65,8 +65,8 @@ const PasswordBox = () => {
           </styled.RestPasswordContainer>
         </styled.InputBox>
       </label>
-      <commonStyled.ErrorMessageParagraph>
-        {errorMessageState}
+      <commonStyled.ErrorMessageParagraph isError={isError}>
+        {ERROR_MESSAGE.SHOULD_NUMBER}
       </commonStyled.ErrorMessageParagraph>
     </styled.PasswordBox>
   );

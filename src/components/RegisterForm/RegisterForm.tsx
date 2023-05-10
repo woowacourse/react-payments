@@ -14,10 +14,10 @@ import FormSubmitButton from '../FormSubmitButton/FormSubmitButton';
 const RegisterForm = () => {
   const navigation = useNavigate();
 
-  const handleClickFormSubmit = (event: MouseEvent<HTMLButtonElement>) => {
+  const handleFormSubmitClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
-    navigation(PATHNAME.NICKNAME);
+    navigation(PATHNAME.LOADING);
   };
 
   return (
@@ -28,7 +28,7 @@ const RegisterForm = () => {
       <SecurityCodeBox />
       <PasswordBox />
       <FormSubmitButton
-        handleClickFormSubmit={handleClickFormSubmit}
+        handleFormSubmitClick={handleFormSubmitClick}
         text="다음"
       />
     </styled.RegisterForm>

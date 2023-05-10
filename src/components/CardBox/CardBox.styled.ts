@@ -37,7 +37,7 @@ export const EmptyCardBox = styled.div<Record<'company', string>>`
   height: 100%;
 
   border-radius: 5px;
-  background-color: ${COLOR.GREY200};
+  background-color: ${COLOR.TOSS_GREY};
   opacity: 0.6;
 
   & > p {

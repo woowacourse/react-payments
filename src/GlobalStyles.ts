@@ -15,7 +15,7 @@ const GlobalStyles = createGlobalStyle`
 
 		font-family: "Roboto", sans-serif;
 
-		background-color: ${COLOR.GREY200};
+		background-color: ${COLOR.TOSS_GREY};
   }
 
 	#root {

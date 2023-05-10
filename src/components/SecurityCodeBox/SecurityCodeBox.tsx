@@ -15,14 +15,13 @@ import Tooltip from '../Tooltip/Tooltip';
 
 const SecurityCodeBox = () => {
   const { securityCode, setSecurityCode, ownerName } = useContext(CardContext);
-  const { validate, errorMessageState } = useInputValidator(
+  const { validate, isError } = useInputValidator(
     isNumeric,
-    ERROR_MESSAGE.SHOULD_NUMBER,
     SECURITY_CODE.MAX_LENGTH
   );
   const isOwnerNameFull = ownerName?.length === 30;
 
-  const handleChangeInput = ({
+  const handleInputChange = ({
     target: { value },
   }: ChangeEvent<HTMLInputElement>) => {
     if (!validate(value)) {
@@ -42,19 +41,20 @@ const SecurityCodeBox = () => {
           <Input
             inputmode="numeric"
             value={securityCode}
-            onChange={handleChangeInput}
+            onChange={handleInputChange}
             width="m"
             type="password"
             maxLength={3}
             isFocus={isOwnerNameFull}
+            isError={isError}
           />
           <Tooltip message="CVV/CVC 번호는 카드 뒷 면에 있는 3자리 숫자입니다.">
             <QSMark />
           </Tooltip>
         </styled.InputBox>
       </label>
-      <commonStyled.ErrorMessageParagraph>
-        {errorMessageState}
+      <commonStyled.ErrorMessageParagraph isError={isError}>
+        {ERROR_MESSAGE.SHOULD_NUMBER}
       </commonStyled.ErrorMessageParagraph>
     </styled.SecurityCodeBox>
   );

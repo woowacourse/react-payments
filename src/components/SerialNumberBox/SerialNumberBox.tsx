@@ -13,13 +13,12 @@ import Input from '../Input/Input';
 
 const SerialNumberBox = () => {
   const { serialNumbers, setSerialNumbers, company } = useContext(CardContext);
-  const { validate, errorMessageState } = useInputValidator(
+  const { validate, isError } = useInputValidator(
     isNumeric,
-    ERROR_MESSAGE.SHOULD_NUMBER,
     CARD_NUMBER.MAX_LENGTH
   );
 
-  const handleChangeInput = ({
+  const handleInputChange = ({
     target: { name, value },
   }: ChangeEvent<HTMLInputElement>) => {
     if (!validate(value)) {
@@ -52,20 +51,21 @@ const SerialNumberBox = () => {
                 key={key}
                 name={key}
                 value={value}
-                onChange={handleChangeInput}
+                onChange={handleInputChange}
                 width="xl"
                 type={type}
                 maxLength={4}
                 placeholder="0000"
                 inputmode="numeric"
                 isFocus={isFirstInput && isCloseModal}
+                isError={isError}
               />
             );
           })}
         </styled.InputBox>
       </label>
-      <commonStyled.ErrorMessageParagraph>
-        {errorMessageState}
+      <commonStyled.ErrorMessageParagraph isError={isError}>
+        {ERROR_MESSAGE.SHOULD_NUMBER}
       </commonStyled.ErrorMessageParagraph>
     </styled.SerialNumberBox>
   );

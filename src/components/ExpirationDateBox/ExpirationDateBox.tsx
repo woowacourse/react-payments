@@ -14,13 +14,12 @@ import Input from '../Input/Input';
 const ExpirationDateBox = () => {
   const { expirationDate, setExpirationDate, serialNumbers } =
     useContext(CardContext);
-  const { validate, errorMessageState } = useInputValidator(
+  const { validate, isError } = useInputValidator(
     isNumeric,
-    ERROR_MESSAGE.SHOULD_NUMBER,
     EXPIRATION_DATE.MAX_LENGTH
   );
 
-  const handleChangeInput = ({
+  const handleInputChange = ({
     target: { name, value },
   }: ChangeEvent<HTMLInputElement>) => {
     if (!validate(value)) {
@@ -52,19 +51,20 @@ const ExpirationDateBox = () => {
                 inputmode="numeric"
                 name={key}
                 value={value ?? ''}
-                onChange={handleChangeInput}
+                onChange={handleInputChange}
                 width="s"
                 type="text"
                 maxLength={2}
                 placeholder={placeholder}
                 isFocus={isMonthInput && isSerialNumbersFull}
+                isError={isError}
               />
             );
           })}
         </styled.InputBox>
       </label>
-      <commonStyled.ErrorMessageParagraph>
-        {errorMessageState}
+      <commonStyled.ErrorMessageParagraph isError={isError}>
+        {ERROR_MESSAGE.SHOULD_NUMBER}
       </commonStyled.ErrorMessageParagraph>
     </styled.ExpirationDateBox>
   );

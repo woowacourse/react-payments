@@ -8,7 +8,9 @@ export const useHeader = () => {
 
   const shouldRenderBackwardBox = pathname === PATHNAME.REGISTER;
 
-  const pageTitle = isPageTitleKey(pathname) ? PAGE_TITLE[pathname] : '404';
+  const pageTitle = isPageTitleKey(pathname)
+    ? PAGE_TITLE[pathname]
+    : '오류 페이지';
 
   return { shouldRenderBackwardBox, pageTitle };
 };

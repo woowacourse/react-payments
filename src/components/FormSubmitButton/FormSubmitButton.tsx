@@ -5,21 +5,21 @@ import { useIsFilledForm } from '../../hooks/useIsFilledForm';
 import * as styled from './FormSubmitButton.styled';
 
 const FormSubmitButton = ({
-  handleClickFormSubmit,
+  handleFormSubmitClick,
   text,
 }: {
   buttonRef?: React.RefObject<HTMLButtonElement>;
-  handleClickFormSubmit: (event: MouseEvent<HTMLButtonElement>) => void;
+  handleFormSubmitClick: (event: MouseEvent<HTMLButtonElement>) => void;
   text: string;
 }) => {
-  if (!useIsFilledForm()) {
-    return null;
-  }
+  const isFilledForm = useIsFilledForm();
 
   return (
-    <styled.FormSubmitButton onClick={handleClickFormSubmit} autoFocus>
-      {text}
-    </styled.FormSubmitButton>
+    <styled.FormSubmitBox isFilledForm={isFilledForm}>
+      <styled.FormSubmitButton onClick={handleFormSubmitClick} autoFocus>
+        {text}
+      </styled.FormSubmitButton>
+    </styled.FormSubmitBox>
   );
 };
 

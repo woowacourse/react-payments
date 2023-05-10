@@ -41,7 +41,7 @@ const NicknamePage = () => {
   const title =
     cardList && Object.hasOwn(cardList, generateCardKey(card))
       ? '카드 별칭을 수정합니다'
-      : '카드 등록이 완료되었습니다';
+      : '카드 별칭을 등록할 수 있어요';
 
   const isFilledForm = useIsFilledForm();
   useEffect(() => {
@@ -50,31 +50,33 @@ const NicknamePage = () => {
     }
   }, [isFilledForm, navigation]);
 
-  const handleClickFormSubmit = () => {
+  const handleFormSubmitClick = () => {
     updateCardList();
     navigation(PATHNAME.HOME);
   };
 
   return (
     <styled.NicknamePageLayout>
-      <styled.Title>{title}</styled.Title>
-      <CardPreviewSection />
-      <styled.InputBox>
-        <Input
-          inputmode="text"
-          onChange={({ target: { value } }: ChangeEvent<HTMLInputElement>) =>
-            setNickname(value)
-          }
-          width="xl"
-          type="text"
-          maxLength={15}
-          value={nickname}
-          isFocus={true}
-        />
-      </styled.InputBox>
+      <styled.RegisterBox>
+        <styled.Title>{title}</styled.Title>
+        <CardPreviewSection />
+        <styled.InputBox>
+          <Input
+            inputmode="text"
+            onChange={({ target: { value } }: ChangeEvent<HTMLInputElement>) =>
+              setNickname(value)
+            }
+            width="xl"
+            type="text"
+            maxLength={15}
+            value={nickname}
+            isFocus={true}
+          />
+        </styled.InputBox>
+      </styled.RegisterBox>
       <FormSubmitButton
-        handleClickFormSubmit={handleClickFormSubmit}
-        text="확인"
+        handleFormSubmitClick={handleFormSubmitClick}
+        text="등록"
       />
     </styled.NicknamePageLayout>
   );

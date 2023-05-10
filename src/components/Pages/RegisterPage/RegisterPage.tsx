@@ -1,31 +1,24 @@
-import { useContext, useEffect } from 'react';
-
 import { useModal } from '../../../hooks/useModal';
+import { AarkerModal as BottomSheet } from 'react-aarker-modal';
 
 import * as styled from './RegisterPage.styled';
 import CardPreviewSection from '../../CardPreviewSection/CardPreviewSection';
 import RegisterForm from '../../RegisterForm/RegisterForm';
-import BottomSheet from '../../BottomSheet/BottomSheet';
 import CompanyLogoList from '../../CompanyLogoList/CompanyLogoList';
-import CardContext from '../../../contexts/CardContext';
 
 const RegisterPage = () => {
-  const { company } = useContext(CardContext);
-  const { isOpenModal, handleCloseModal, handleOpenModal } = useModal();
-
-  useEffect(() => {
-    if (company.name) handleCloseModal();
-  }, [company.name, handleCloseModal]);
+  const { isOpenModal, handleModalClose, handleModalOpen } = useModal();
 
   return (
     <styled.RegisterPageLayout>
-      <CardPreviewSection handleOpenModal={handleOpenModal} />
+      <CardPreviewSection handleModalOpen={handleModalOpen} />
       <RegisterForm />
-      {isOpenModal ? (
-        <BottomSheet handleCloseModal={handleCloseModal}>
-          <CompanyLogoList />
-        </BottomSheet>
-      ) : null}
+      <BottomSheet
+        isOpenModal={isOpenModal}
+        handleModalClose={handleModalClose}
+      >
+        <CompanyLogoList handleModalClose={handleModalClose} />
+      </BottomSheet>
     </styled.RegisterPageLayout>
   );
 };

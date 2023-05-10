@@ -6,9 +6,5 @@ export const RegisterForm = styled.form`
   justify-content: space-between;
 
   width: 100%;
-  height: 70%;
-
-  & > * {
-    margin-bottom: 28px;
-  }
+  height: calc(100% - 168px);
 `;
