@@ -5,6 +5,7 @@ import CardItem from '../../components/CardItem';
 import Button from '../../components/common/Button';
 
 import { PlusIcon } from '../../assets/svgs';
+import { ROUTES } from '../../constants/routes';
 import type { CardData } from '../../types/card';
 
 import styles from './holdingCardsPage.module.css';
@@ -17,7 +18,7 @@ const HoldingCardsPage = ({ cards }: Props) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate('/card-info-register');
+    navigate(`/${ROUTES.CARD_INFO_REGISTER}`);
   };
 
   return (

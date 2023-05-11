@@ -1,9 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { BrowserRouter } from 'react-router-dom';
 
-import CardNameRegisterPage from '../pages/CardNameRegisterPage';
-import { CardFormValueContext } from '../contexts/CardFormContext';
-import { CardInfo } from '../types/card';
+import CardNameRegisterPage from '../../pages/CardNameRegisterPage';
+import CardFormProvider, {
+  CardFormValueContext,
+} from '../../contexts/CardFormContext';
+import { CardInfo } from '../../types/card';
 
 const meta: Meta<typeof CardNameRegisterPage> = {
   title: 'pages/CardNameRegisterPage',
@@ -19,9 +21,11 @@ const meta: Meta<typeof CardNameRegisterPage> = {
         }}
       >
         <BrowserRouter>
-          <CardFormValueContext.Provider value={MOCK_CARD_CONTEXT}>
-            <Story />
-          </CardFormValueContext.Provider>
+          <CardFormProvider>
+            <CardFormValueContext.Provider value={MOCK_CARD_CONTEXT}>
+              <Story />
+            </CardFormValueContext.Provider>
+          </CardFormProvider>
         </BrowserRouter>
       </div>
     ),
@@ -29,6 +33,7 @@ const meta: Meta<typeof CardNameRegisterPage> = {
 };
 
 const MOCK_CARD_CONTEXT: CardInfo = {
+  name: '황펭',
   company: '카카오뱅크',
   number: { first: '0000', second: '0000', third: '0000', fourth: '0000' },
   expiredDate: { month: '12', year: '24' },

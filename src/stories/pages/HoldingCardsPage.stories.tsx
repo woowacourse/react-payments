@@ -1,9 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-
-import HoldingCardsPage from '../pages/HoldingCardsPage';
 import { BrowserRouter } from 'react-router-dom';
 
-import type { CardData } from '../types/card';
+import HoldingCardsPage from '../../pages/HoldingCardsPage';
+import type { CardData } from '../../types/card';
 
 const meta: Meta<typeof HoldingCardsPage> = {
   title: 'pages/HoldingCardsPage',

@@ -5,48 +5,35 @@ import { useNavigate } from 'react-router-dom';
 import Input from '../common/Input';
 import Button from '../common/Button';
 
-import useCardFormValue from '../../hooks/useCardFormValue';
-import type { CardData } from '../../types/card';
+import { CARD_NAME_FORM_MESSAGE } from './constants/message';
+import { ROUTES } from '../../constants/routes';
+import useCardFormAction from '../../hooks/useCardFormAction';
 
 import styles from './cardNameForm.module.css';
 
-interface Props {
-  registerCard: (card: CardData) => void;
-}
-
-const CardNameForm = ({ registerCard }: Props) => {
+const CardNameForm = () => {
   const nameInputRef = useRef<HTMLInputElement>(null);
+  const handleCardInfo = useCardFormAction();
 
-  const { company, number, owner, expiredDate } = useCardFormValue();
   const navigate = useNavigate();
 
   const handleNameFormSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
 
-    if (nameInputRef.current === null || !company) {
+    if (nameInputRef.current === null) {
       return;
     }
 
     const { value } = nameInputRef.current;
 
     if (value.trim() === '') {
-      alert(
-        '카드 이름은 공백이나 빈 값이 들어갈 수 없습니다. 작성 후 다시 제출해주세요.',
-      );
+      alert(CARD_NAME_FORM_MESSAGE.error);
       nameInputRef.current.focus();
       return;
     }
 
-    const cardData: CardData = {
-      name: value.trim(),
-      company,
-      number: { first: number.first, second: number.second },
-      expiredDate,
-      owner,
-    };
-
-    registerCard(cardData);
-    navigate('/');
+    handleCardInfo(value.trim(), 'name');
+    navigate(`/${ROUTES.CARD_REGISTER}`);
   };
 
   return (
@@ -54,7 +41,7 @@ const CardNameForm = ({ registerCard }: Props) => {
       <div className={styles.inputContainer}>
         <Input
           type="text"
-          placeholder="카드 이름을 작성해주세요. (최대 10자)"
+          placeholder={CARD_NAME_FORM_MESSAGE.placeholder}
           maxLength={10}
           align="center"
           underlined

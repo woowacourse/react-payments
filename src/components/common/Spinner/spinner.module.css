@@ -1,0 +1,31 @@
+.spinner {
+  width: 100%;
+  height: 100%;
+  border: 6px solid var(--background-white);
+  border-radius: 50%;
+  animation: rotation 1s linear infinite, gradient 2s ease-in-out infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(359deg);
+  }
+}
+
+@keyframes gradient {
+  0% {
+    border-top-color: var(--color-secondary);
+  }
+
+  50% {
+    border-top-color: var(--color-primary);
+  }
+
+  100% {
+    border-top-color: var(--color-secondary);
+  }
+}

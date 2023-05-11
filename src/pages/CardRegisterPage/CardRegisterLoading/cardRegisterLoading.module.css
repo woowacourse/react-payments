@@ -1,0 +1,9 @@
+.section {
+  margin-top: 36px;
+}
+
+.spinnerContainer {
+  position: relative;
+  width: 180px;
+  height: 180px;
+}

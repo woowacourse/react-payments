@@ -5,7 +5,7 @@ import type { InputRef } from '../types';
 const useFieldFilled = (inputRefs: InputRef[]) => {
   const [isFilled, setIsFilled] = useState(false);
 
-  const isMaxLength = useCallback((inputRef: InputRef) => {
+  const isMinLength = useCallback((inputRef: InputRef) => {
     if (inputRef.current === null) return;
 
     const { value, minLength } = inputRef.current;
@@ -13,14 +13,19 @@ const useFieldFilled = (inputRefs: InputRef[]) => {
     return value.length >= minLength;
   }, []);
 
+  const isValid = useCallback(
+    (inputRef: InputRef) => inputRef.current?.checkValidity(),
+    [],
+  );
+
   useEffect(() => {
-    if (inputRefs.every(isMaxLength)) {
+    if (inputRefs.every(isMinLength) && inputRefs.every(isValid)) {
       setIsFilled(true);
       return;
     }
 
     setIsFilled(false);
-  }, [inputRefs, isMaxLength, setIsFilled]);
+  }, [inputRefs, isMinLength, isValid]);
 
   return isFilled;
 };

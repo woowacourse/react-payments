@@ -3,6 +3,7 @@ import { ReactNode, createContext, useState } from 'react';
 import type { CardInfo, CardInfoKey } from '../types/card';
 
 const initialCardInfo: CardInfo = {
+  name: '',
   number: {
     first: '',
     second: '',

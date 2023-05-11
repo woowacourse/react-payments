@@ -3,12 +3,13 @@ import type { FormEventHandler, ChangeEventHandler } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import NumberField from './NumberField';
-import ExpiredDateField from './ExpiredDataField';
+import ExpiredDateField from './ExpiredDateField';
 import OwnerField from './OwnerField';
 import CvcField from './CvcField';
 import PasswordField from './PasswordField';
 import Button from '../common/Button';
 
+import { ROUTES } from '../../constants/routes';
 import useFieldFilled from './hooks/useFieldFilled';
 import useAutofocus from '../../hooks/useAutofocus';
 import useCardFormValidation from '../../hooks/useCardFormValidation';
@@ -40,7 +41,7 @@ const CardInfoForm = () => {
       validateCompany();
       validateExpiredDate();
 
-      navigate('/card-name-register');
+      navigate(`/${ROUTES.CARD_NAME_REGISTER}`);
     } catch (error) {
       if (error instanceof Error) {
         alert(error.message);

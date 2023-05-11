@@ -41,6 +41,7 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-modal-hp": "^0.1.2",
     "react-router-dom": "^6.10.0",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
@@ -68,5 +69,8 @@
     "storybook": "^7.0.5",
     "typescript": "^5.0.4",
     "webpack": "^5.79.0"
+  },
+  "overrides": {
+    "typescript": "^5.0.4"
   }
 }
