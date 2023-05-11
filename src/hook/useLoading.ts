@@ -7,15 +7,19 @@ export const useLoading = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (loading === false) {
+    let timerId;
+
+    if (loading) {
+      navigate("/RegisterSpinnerPage");
+
+      timerId = setTimeout(() => {
+        setLoading(false);
+        navigate("/CardNickInputPage");
+      }, LOADING_TIME);
       return;
     }
 
-    navigate("/RegisterSpinnerPage");
-    setTimeout(() => {
-      setLoading(false);
-      navigate("/CardNickInputPage");
-    }, LOADING_TIME);
+    return clearTimeout(timerId);
   }, [loading]);
 
   const startLoading = () => {
