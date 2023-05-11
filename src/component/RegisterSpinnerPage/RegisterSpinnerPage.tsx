@@ -5,9 +5,9 @@ export default function RegisterSpinnerPage() {
   return (
     <section className="register-spinner-page">
       <div className="loader">
-        <div></div>
-        <div></div>
-        <div></div>
+        <div className="loading-spinner"></div>
+        <div className="loading-spinner"></div>
+        <div className="loading-spinner"></div>
       </div>
       <p className="register-text">{EXPLANATION_MESSAGE.REGISTER_CARD}</p>
       <p className="register-wait-text">
