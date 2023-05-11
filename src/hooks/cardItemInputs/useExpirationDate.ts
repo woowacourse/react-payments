@@ -3,8 +3,6 @@ import { isNumber, isOverMaxLength, isValidMonth } from "../../utils";
 import useInput from "../useInput";
 
 const onChangeMonthValidator = (inputValue: string) => {
-  console.log(inputValue.length);
-
   if (isOverMaxLength(inputValue, INPUT_MAX_LENGTH.EXPIRATION_DATE)) {
     return { hasError: true };
   }
