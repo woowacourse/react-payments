@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+// 카드 번호를 검증하는 룬 알고리즘을 이용한 검증 로직
 const luhnValidation = (cardNumber: string) => {
   let nCheck = 0,
     bEven = false;
