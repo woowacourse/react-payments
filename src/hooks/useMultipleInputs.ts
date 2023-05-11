@@ -29,7 +29,7 @@ const useMultipleInputs = (numberOfInputs: number, validator: InputValidator) =>
     setErrorMessage("");
   };
 
-  return { inputValues, errorMessage, setErrorMessage, onChange };
+  return { inputValues, errorMessage, onChange };
 };
 
 export default useMultipleInputs;

@@ -7,10 +7,11 @@ const CardCompany = () => {
   const { company } = useCardItemValue();
   const { companyErrorMessage } = useErrorMessageValue();
   const { openModal } = useModalAction();
+  const { isOpenModal } = useModalAction();
 
   return (
-    <InputGroup labelValue={"카드사"} errorMessage={companyErrorMessage}>
-      <CompanyContainer isError={!!companyErrorMessage} onClick={openModal}>
+    <InputGroup labelValue={"카드사"} errorMessage={isOpenModal ? "" : companyErrorMessage}>
+      <CompanyContainer isError={!isOpenModal && !!companyErrorMessage} onClick={openModal}>
         <p>{company}</p>
         <ChangeButton type="button">{company ? "변경" : "카드사 선택"}</ChangeButton>
       </CompanyContainer>

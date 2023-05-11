@@ -2,7 +2,7 @@ import { INPUT_MAX_LENGTH } from "../../constants";
 import { isNumber, isOverMaxLength, isValidMonth } from "../../utils";
 import useInput from "../useInput";
 
-const monthValidator = (inputValue: string) => {
+const onChangeMonthValidator = (inputValue: string) => {
   if (isOverMaxLength(inputValue, INPUT_MAX_LENGTH.EXPIRATION_DATE)) {
     return { hasError: true };
   }
@@ -11,6 +11,11 @@ const monthValidator = (inputValue: string) => {
     return { hasError: true, message: "숫자만 입력해주세요" };
   }
 
+  return { hasError: false };
+};
+
+const onBlurMonthValidator = (inputValue: string) => {
+  console.log(inputValue.length);
   if (inputValue.length < INPUT_MAX_LENGTH.EXPIRATION_DATE) {
     return { hasError: true, message: "만료일은 MM/YY 형식으로 입력해주세요", isAllowInput: true };
   }
@@ -22,7 +27,7 @@ const monthValidator = (inputValue: string) => {
   return { hasError: false };
 };
 
-const yearValidator = (inputValue: string) => {
+const onChangeYearValidator = (inputValue: string) => {
   if (isOverMaxLength(inputValue, INPUT_MAX_LENGTH.EXPIRATION_DATE)) {
     return { hasError: true };
   }
@@ -31,6 +36,10 @@ const yearValidator = (inputValue: string) => {
     return { hasError: true, message: "숫자만 입력해주세요" };
   }
 
+  return { hasError: false };
+};
+
+const onBlurYearValidator = (inputValue: string) => {
   if (inputValue.length < INPUT_MAX_LENGTH.EXPIRATION_DATE) {
     return { hasError: true, message: "만료일은 MM/YY 형식으로 입력해주세요", isAllowInput: true };
   }
@@ -39,8 +48,18 @@ const yearValidator = (inputValue: string) => {
 };
 
 const useExpirationDate = () => {
-  const { inputValue: monthValue, errorMessage: monthError, onChange: onChangeMonth } = useInput(monthValidator);
-  const { inputValue: yearValue, errorMessage: yearError, onChange: onChangeYear } = useInput(yearValidator);
+  const {
+    inputValue: monthValue,
+    errorMessage: monthError,
+    onChange: onChangeMonth,
+    onBlur: onBlurMonth,
+  } = useInput(onChangeMonthValidator, onBlurMonthValidator);
+  const {
+    inputValue: yearValue,
+    errorMessage: yearError,
+    onChange: onChangeYear,
+    onBlur: onBlurYear,
+  } = useInput(onChangeYearValidator, onBlurYearValidator);
 
   return {
     expirationDate: [monthValue, yearValue],
@@ -48,6 +67,10 @@ const useExpirationDate = () => {
     onChangeExpirationDate: {
       onChangeMonth,
       onChangeYear,
+    },
+    onBlurExpirationDate: {
+      onBlurMonth,
+      onBlurYear,
     },
   };
 };

@@ -41,6 +41,10 @@ interface CardItemAction {
     onChangeMonth: (inputValue: string) => void;
     onChangeYear: (inputValue: string) => void;
   };
+  onBlurExpirationDate: {
+    onBlurMonth: (inputValue: string) => void;
+    onBlurYear: (inputValue: string) => void;
+  };
   onChangeName: (inputValue: string) => void;
   onChangeSecurityCode: (inputValue: string) => void;
   onChangePassword: (inputIndex: number) => (inputValue: string) => void;
@@ -53,7 +57,8 @@ const ErrorMessageValueContext = createContext<ErrorMessageValue | null>(null);
 
 const CardItemProvider = ({ children }: CardItemProviderProps) => {
   const { cardNumber, cardNumberErrorMessage, onChangeCardNumber } = useCardNumber();
-  const { expirationDate, expirationDateErrorMessage, onChangeExpirationDate } = useExpirationDate();
+  const { expirationDate, expirationDateErrorMessage, onChangeExpirationDate, onBlurExpirationDate } =
+    useExpirationDate();
   const { name, nameErrorMessage, onChangeName } = useName();
   const { securityCode, securityCodeErrorMessage, onChangeSecurityCode } = useSecurityCode();
   const { password, passwordErrorMessage, onChangePassword } = usePassword();
@@ -94,6 +99,7 @@ const CardItemProvider = ({ children }: CardItemProviderProps) => {
   const cardItemAction = {
     onChangeCardNumber,
     onChangeExpirationDate,
+    onBlurExpirationDate,
     onChangeName,
     onChangeSecurityCode,
     onChangePassword,

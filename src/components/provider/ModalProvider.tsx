@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import useIsOpen from "../../hooks/useModal";
+import useIsOpen from "../../hooks/useIsOpen";
 
 interface ModalProviderProps {
   children: React.ReactNode;

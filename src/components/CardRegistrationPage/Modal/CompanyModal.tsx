@@ -1,17 +1,14 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import CompanyButton from "./CompanyButton";
 import { useModalAction } from "../../provider/ModalProvider";
+import { Modal } from "luxo-react-modal";
 
 const CompanyModal = () => {
   const { isOpenModal, closeModal } = useModalAction();
 
-  const handleClickModalContainer = (event: React.MouseEvent) => {
-    event.stopPropagation();
-  };
-
   return (
-    <BackDrop onClick={closeModal} isOpenModal={isOpenModal}>
-      <ModalContainer onClick={handleClickModalContainer} isOpenModal={isOpenModal}>
+    <Modal isOpen={isOpenModal} closeModal={closeModal}>
+      <CompanyContainer>
         <CompanyListColumn>
           <CompanyButton company="BC카드" />
           <CompanyButton company="신한카드" />
@@ -24,28 +21,18 @@ const CompanyModal = () => {
           <CompanyButton company="하나카드" />
           <CompanyButton company="국민카드" />
         </CompanyListColumn>
-      </ModalContainer>
-    </BackDrop>
+      </CompanyContainer>
+    </Modal>
   );
 };
 
-const BackDrop = styled.div<{ isOpenModal: boolean }>`
-  position: fixed;
-  top: 0;
-
-  width: inherit;
-  height: 100vh;
-
-  background: rgba(0, 0, 0, 0.5);
-
-  animation: ${({ isOpenModal }) => (isOpenModal ? fadeIn : fadeOut)} 0.2s ease-out;
-`;
-
-const ModalContainer = styled.div<{ isOpenModal: boolean }>`
+const CompanyContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 10px;
+
+  width: inherit;
 
   position: absolute;
   bottom: 0;
@@ -53,46 +40,11 @@ const ModalContainer = styled.div<{ isOpenModal: boolean }>`
   padding: 30px 45px;
 
   box-sizing: border-box;
-  border-radius: 5px 5px 0px 0px;
-
-  background-color: white;
-
-  width: 100%;
-  height: 227px;
-
-  animation: ${({ isOpenModal }) => isOpenModal && slideUp} 0.2s ease-out;
 `;
 
 const CompanyListColumn = styled.div`
   display: flex;
   justify-content: space-between;
-`;
-
-const fadeIn = keyframes`
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-`;
-
-const fadeOut = keyframes`
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-`;
-
-const slideUp = keyframes`
-  0% {
-    transform: translate(0, 100%);
-  }
-  100% {
-    transform: translate(0, 0);
-  }
 `;
 
 export default CompanyModal;

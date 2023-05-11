@@ -8,7 +8,7 @@ import { useCardItemAction, useCardItemValue, useErrorMessageValue } from "../..
 
 const ExpirationDateInput = () => {
   const { expirationDate } = useCardItemValue();
-  const { onChangeExpirationDate } = useCardItemAction();
+  const { onChangeExpirationDate, onBlurExpirationDate } = useCardItemAction();
   const { expirationDateErrorMessage } = useErrorMessageValue();
 
   const { registRef, isNextInputFocusable, focusNextInput } = useInputFocus(INPUT_MAX_LENGTH.EXPIRATION_DATE);
@@ -26,11 +26,18 @@ const ExpirationDateInput = () => {
 
     onChangeExpirationDate.onChangeYear(inputValue);
   };
-  // const handleChangeExpirationDate = (inputIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   const inputValue = event.target.value;
 
-  //   onChangeExpirationDate(inputIndex)(inputValue);
-  // };
+  const handleBlurMonth = (event: React.FocusEvent<HTMLInputElement>) => {
+    const inputValue = event.target.value;
+
+    onBlurExpirationDate.onBlurMonth(inputValue);
+  };
+
+  const handleBlurYear = (event: React.FocusEvent<HTMLInputElement>) => {
+    const inputValue = event.target.value;
+
+    onBlurExpirationDate.onBlurYear(inputValue);
+  };
 
   return (
     <InputGroup labelValue="만료일" errorMessage={expirationDateErrorMessage}>
@@ -40,6 +47,7 @@ const ExpirationDateInput = () => {
           ref={(element) => registRef(0, element)}
           value={expirationDate[0]}
           onChange={handleChangeMonth}
+          onBlur={handleBlurMonth}
         />
         <InputSeparator color="#737373">/</InputSeparator>
         <Input
@@ -47,6 +55,7 @@ const ExpirationDateInput = () => {
           ref={(element) => registRef(1, element)}
           value={expirationDate[1]}
           onChange={handleChangeYear}
+          onBlur={handleBlurYear}
         />
       </InputBox>
     </InputGroup>

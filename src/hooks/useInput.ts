@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { InputValidator } from "../types/Validate";
 
-const useInput = (validator?: InputValidator) => {
+const useInput = (onChangeValidator?: InputValidator, onBlurValidator?: InputValidator) => {
   const [inputValue, setInputValue] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
   const onChange = (inputValue: string) => {
-    const { hasError, message, isAllowInput } = validator?.(inputValue) ?? { hasError: false, message: "" };
+    const { hasError, message, isAllowInput } = onChangeValidator?.(inputValue) ?? { hasError: false };
 
     if (hasError) {
       setErrorMessage(message || "");
@@ -19,7 +19,16 @@ const useInput = (validator?: InputValidator) => {
     setErrorMessage("");
   };
 
-  return { inputValue, errorMessage, setErrorMessage, onChange };
+  const onBlur = (inputValue: string) => {
+    const { hasError, message } = onBlurValidator?.(inputValue) ?? { hasError: false };
+
+    if (hasError) {
+      setErrorMessage(message || "");
+      return;
+    }
+  };
+
+  return { inputValue, errorMessage, onChange, onBlur };
 };
 
 export default useInput;
