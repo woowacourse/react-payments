@@ -87,7 +87,6 @@ const FormCardAdd = ({
   };
 
   useEffect(() => {
-    console.log(addCardResult.type);
     if (addCardResult.type === ADD_CARD_SUCCESS) {
       navigate(LOCATION.CARD_LIST_PAGE, { state: { cardAdd: ADD_CARD_SUCCESS } });
     }
@@ -377,8 +376,8 @@ const FormCardAdd = ({
           closeModal={setNicknameModalOpen}
           isRequesting={addCardResult.isLoading}
           isFailed={addCardResult.type === ADD_CARD_FAILURE}
-          isModalOpen={nicknameModalOpen}
           cardType={cardType}
+          isModalOpen={nicknameModalOpen}
           cardNumber={cardNumber}
           cardExpire={cardExpire}
           cardOwner={cardOwner}
