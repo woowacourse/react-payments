@@ -12,6 +12,7 @@ import {
   ARIA_LABEL_MESSAGE,
   EXPLANATION_MESSAGE,
 } from "../../constant/message";
+import { LINK_KEYWORD } from "../../constant/page";
 
 interface CardNickInputPageProps {
   card: CreditCard;
@@ -40,7 +41,7 @@ export default function CardNickInputPage({
       />
       <InputBoxNick submitNickAndSetCard={submitNickAndSetCard} />
       <Link
-        to="/CardListPage"
+        to={LINK_KEYWORD.CARD_LIST}
         className="card-nick-input-next-button-container"
         aria-label={ARIA_LABEL_MESSAGE.END_PAGE}
       >

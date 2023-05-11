@@ -9,6 +9,7 @@ import RegisterSpinnerPage from "./component/RegisterSpinnerPage/RegisterSpinner
 
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import { useCardList } from "./hook/useCardList";
+import { LINK_KEYWORD } from "./constant/page";
 
 function App() {
   const { cardList, addNewCard, setNickNewCard } = useCardList();
@@ -19,15 +20,15 @@ function App() {
         <Routes>
           <Route path="/" element={<CardListPage cardList={cardList} />} />
           <Route
-            path="/CardListPage"
+            path={LINK_KEYWORD.CARD_LIST}
             element={<CardListPage cardList={cardList} />}
           />
           <Route
-            path="/CardInputPage"
+            path={LINK_KEYWORD.CARD_INPUT_FORM}
             element={<CardInputPage addNewCard={addNewCard} />}
           />
           <Route
-            path="/CardNickInputPage"
+            path={LINK_KEYWORD.CARD_INPUT_NICK}
             element={
               <CardNickInputPage
                 card={cardList[cardList.length - 1]}
@@ -36,7 +37,7 @@ function App() {
             }
           />
           <Route
-            path="/RegisterSpinnerPage"
+            path={LINK_KEYWORD.REGISTER_SPINNER}
             element={<RegisterSpinnerPage />}
           />
         </Routes>

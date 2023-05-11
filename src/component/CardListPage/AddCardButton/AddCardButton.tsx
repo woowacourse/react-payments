@@ -2,11 +2,12 @@ import { Link } from "react-router-dom";
 
 import "./addCardButton.css";
 import { ARIA_LABEL_MESSAGE } from "../../../constant/message";
+import { LINK_KEYWORD } from "../../../constant/page";
 
 export default function AddCardButton() {
   return (
     <Link
-      to="/CardInputPage"
+      to={LINK_KEYWORD.CARD_INPUT_FORM}
       className="add-card-button"
       aria-label={ARIA_LABEL_MESSAGE.GO_ADD_CARD_FORM}
     >

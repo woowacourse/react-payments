@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { LOADING_TIME } from "../constant/etc";
 import { useNavigate } from "react-router-dom";
+import { LINK_KEYWORD } from "../constant/page";
 
 export const useLoading = () => {
   const [loading, setLoading] = useState(false);
@@ -10,11 +11,11 @@ export const useLoading = () => {
     let timerId;
 
     if (loading) {
-      navigate("/RegisterSpinnerPage");
+      navigate(LINK_KEYWORD.REGISTER_SPINNER);
 
       timerId = setTimeout(() => {
         setLoading(false);
-        navigate("/CardNickInputPage");
+        navigate(LINK_KEYWORD.CARD_INPUT_NICK);
       }, LOADING_TIME);
       return;
     }
