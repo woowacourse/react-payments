@@ -46,21 +46,21 @@ export const cardAddReducer = (state: any, action: cardAddAction) => {
       return {
         type: ADD_CARD_FAILURE,
         isLoading: false,
-        errorMessage: '오류가 발생했습니다!',
+        errorMessage: '알 수 없는 오류가 발생했습니다!',
       };
 
     case ADD_CARD_DUPLICATED:
       return {
         type: ADD_CARD_FAILURE,
         isLoading: false,
-        errorMessage: '오류가 발생했습니다!',
+        errorMessage: '동일한 카드가 존재합니다! 다시 입력해주세요.',
       };
 
     default:
       return {
         type: ADD_CARD_FAILURE,
         isLoading: false,
-        errorMessage: '오류가 발생했습니다!',
+        errorMessage: '알 수 없는 오류가 발생했습니다!',
       };
   }
 };
