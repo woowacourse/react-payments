@@ -21,11 +21,16 @@ export const RegisterCardNickName = () => {
   };
 
   const handleCardNickNameSubmit = (card: Card) => {
-    setIsSubmitting((prev) => !prev);
-    resetCardForm();
+    setIsSubmitting(true);
     addCard(card)
-      .then(() => setIsSubmitting((prev) => !prev))
-      .then(goHome);
+      .then(() => {
+        resetCardForm();
+        goHome();
+      })
+      .catch((e) => {
+        alert(`[ERROR] ${e.message} 잠시후 다시 시도해주세요`);
+      })
+      .finally(() => setIsSubmitting(false));
   };
 
   return (
