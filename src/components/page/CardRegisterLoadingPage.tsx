@@ -1,4 +1,4 @@
-import Lottie from 'react-lottie';
+import Lottie, { Options as LottieOptions } from 'react-lottie';
 import animationData from '../../assets/lotties/cardanimating.json';
 import PageTemplate from '../template/PageTemplate';
 import styled from 'styled-components';
@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import { Page, PageProps } from '../../abstracts/types';
 
 const CardRegisterLoadingPage = ({ navigate }: PageProps) => {
-  const defaultOptions = {
+  const defaultOptions: LottieOptions = {
     loop: true,
     autoplay: true,
     animationData: animationData,
