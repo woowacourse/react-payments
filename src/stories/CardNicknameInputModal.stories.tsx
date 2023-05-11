@@ -23,7 +23,6 @@ export const Card_Nickname_Modal: Story = {
     cardOwner: { value: 'LEE', onChange: () => {} },
     securityCode: { value: '123', onChange: () => {} },
     cardExpire: { value: '01/01', onChange: () => {} },
-    isModalOpen: false,
     closeModal: () => {},
     handleNickname: () => {},
     submitData: (e: React.FormEvent) => {

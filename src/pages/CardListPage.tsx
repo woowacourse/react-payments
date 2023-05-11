@@ -10,7 +10,6 @@ import './CardListPage.css';
 
 const CardListPage = () => {
   const location = useLocation();
-  console.log(location.state);
 
   const [mainCardListData, dispatchMainCardListData] = useReducer(
     cardListReducer,

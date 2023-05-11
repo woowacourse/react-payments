@@ -13,20 +13,18 @@ type modalProps = {
 
 const CardSelectModal = ({ determineCardType, isModalOpen, closeModal }: modalProps) => {
   return (
-    <>
-      <Modal isModalOpen={isModalOpen} closeModal={closeModal}>
-        <div className="icon-sort">
-          {BANK_LIST.map((name) => (
-            <BankIcon
-              key={name}
-              bankName={name}
-              determineCardType={determineCardType}
-              selectCardType={closeModal}
-            />
-          ))}
-        </div>
-      </Modal>
-    </>
+    <Modal isModalOpen={isModalOpen} closeModal={closeModal}>
+      <div className="icon-sort">
+        {BANK_LIST.map((name) => (
+          <BankIcon
+            key={name}
+            bankName={name}
+            determineCardType={determineCardType}
+            iconClicked={closeModal}
+          />
+        ))}
+      </div>
+    </Modal>
   );
 };
 

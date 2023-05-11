@@ -31,6 +31,15 @@ const CardNicknameInputModal = ({
   handleNickname,
   submitData,
 }: CardNicknameInputModalProps) => {
+  const modalMainMessage = () => {
+    if (isRequesting) {
+      return <div className="nickname-box-requesting-font">카드를 등록 중입니다!</div>;
+    } else if (isFailed) {
+      return <div className="failure-text">카드 등록에 실패했어요 😭 다시 시도해주세요!</div>;
+    }
+    return <div className="nickname-box-main-font">거의 다 왔어요!</div>;
+  };
+
   return isModalOpen ? (
     <>
       <div
@@ -44,14 +53,7 @@ const CardNicknameInputModal = ({
         role="dialog"
         aria-label="카드 타입을 선택할 수 있는 모달"
       >
-        {isRequesting ? (
-          <div className="nickname-box-requesting-font">카드를 등록 중입니다!</div>
-        ) : isFailed ? (
-          <div className="failure-text">카드 등록에 실패했어요 😭 다시 시도해주세요!</div>
-        ) : (
-          <div className="nickname-box-main-font">거의 다 왔어요!</div>
-        )}
-
+        {modalMainMessage()}
         <div className="card-box">
           <Card
             cardType={cardType}
@@ -75,9 +77,7 @@ const CardNicknameInputModal = ({
             type="text"
             maxLength={10}
           />
-          {isRequesting ? (
-            ''
-          ) : (
+          {isRequesting ?? (
             <button className="card-submit-button" type="submit">
               확인
             </button>
@@ -86,7 +86,7 @@ const CardNicknameInputModal = ({
       </div>
     </>
   ) : (
-    <>{''}</>
+    <></>
   );
 };
 
