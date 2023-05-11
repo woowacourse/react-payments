@@ -1,34 +1,35 @@
 import InputSectionTemplate from '../../template/InputSectionTemplate';
 import InputBox, { InputType } from '../../common/InputBox';
-import { InputStateProps } from '../../../abstracts/types';
+import { InputArrayStateProps } from '../../../abstracts/types';
 
-const ExpireDateInput = (props: InputStateProps) => {
+const ExpireDateInput = (props: InputArrayStateProps) => {
   const setInput = (index: number) => (val: string) => {
-    const newInputValues = props.inputValues.slice() as string[];
+    const newInputValues = props.inputArrayValue.slice();
     newInputValues[index] = val;
-    props.setInputValues(newInputValues);
+    props.setInputArrayValue(newInputValues);
   };
 
   const inputs: InputType[] = [
     {
       textType: 'number',
       maxLength: 2,
-      placeholder: 'YY',
+      placeholder: 'MM',
       required: true,
-      inputValues: props.inputValues[0],
+      inputValue: props.inputArrayValue[0],
       setInputValues: setInput(0),
     },
     {
       textType: 'number',
       maxLength: 2,
-      placeholder: 'MM',
+      placeholder: 'YY',
       required: true,
-      inputValues: props.inputValues[1],
+      inputValue: props.inputArrayValue[1],
       setInputValues: setInput(1),
     },
   ];
+
   return (
-    <InputSectionTemplate label="만료일">
+    <InputSectionTemplate label="만료일" errorMessage={props.errorMessage}>
       <InputBox inputs={inputs} align="center" separator="/" {...props} />
     </InputSectionTemplate>
   );

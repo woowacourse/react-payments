@@ -3,6 +3,7 @@ import { Page } from './abstracts/types';
 import CardListPage from './components/page/CardListPage';
 import CardRegisterPage from './components/page/CardRegisterPage';
 import CardAliasSetPage from './components/page/CardAliasSetPage';
+import CardRegisterLoadingPage from './components/page/CardRegisterLoadingPage';
 
 const Router = () => {
   const [currentPage, setCurrentPage] = useState<{ page: Page; data?: any }>({ page: Page.list });
@@ -14,6 +15,7 @@ const Router = () => {
     list: <CardListPage navigate={navigate} />,
     register: <CardRegisterPage navigate={navigate} />,
     aliasSet: <CardAliasSetPage navigate={navigate} navData={currentPage.data} />,
+    loading: <CardRegisterLoadingPage navigate={navigate} />,
   };
 
   return <>{pageRoute[currentPage.page]}</>;

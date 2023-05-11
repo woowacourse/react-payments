@@ -11,12 +11,13 @@ const SecurityCodeInput = (props: InputStateProps) => {
       maxLength: 3,
       required: true,
       textSecurity: true,
-      inputValues: props.inputValues as string,
-      setInputValues: props.setInputValues,
+      inputValue: props.inputValue as string,
+      setInputValues: props.setInputValue,
     },
   ];
+
   return (
-    <InputSectionTemplate label="보안 코드(CVC/CVV)">
+    <InputSectionTemplate label="보안 코드(CVC/CVV)" errorMessage={props.errorMessage}>
       <InputBox inputs={inputs} align="center" {...props} />
       <HelpButton>
         <HelpButtonImage />

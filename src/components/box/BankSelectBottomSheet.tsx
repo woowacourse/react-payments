@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { VisibleDispatch } from '../template/BottomSheetTemplate';
+import { VisibleDispatch } from 'ksone02-modal';
 import { BANK } from '../../abstracts/constants';
 import BankSelector from '../common/BankSelector';
 import { Bank } from '../../abstracts/types';
@@ -16,17 +16,17 @@ const BankSelectBottomSheet = ({
   setBank: (newBank: Bank) => void;
   bank: Bank | undefined;
 }) => {
-  const closeModal = (newBank: Bank) => {
+  const setVisible = useContext(VisibleDispatch);
+
+  const setBankAndCloseModal = (newBank: Bank) => {
     setBank(newBank);
     setVisible && setVisible();
   };
 
-  const setVisible = useContext(VisibleDispatch);
-
   return (
     <BankSelectBottomSheetWrapper>
       {BANK.map((bankInfo) => (
-        <BankSelector key={bankInfo.id} newBank={bankInfo} setBank={closeModal} bank={bank} />
+        <BankSelector key={bankInfo.id} newBank={bankInfo} setBank={setBankAndCloseModal} bank={bank} />
       ))}
     </BankSelectBottomSheetWrapper>
   );

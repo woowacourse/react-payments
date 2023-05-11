@@ -24,7 +24,7 @@ const CardAliasSetPage = ({ navigate, navData }: PageProps) => {
     card['alias'] = cardAlias;
     pushLocalStorage(card);
 
-    navigate(Page.list);
+    navigate(Page.loading);
   };
 
   return (
@@ -34,8 +34,8 @@ const CardAliasSetPage = ({ navigate, navData }: PageProps) => {
         <Card {...card} />
         <CardAliasInputWrapper>
           <CardAliasInput
-            inputValues={cardAlias}
-            setInputValues={(value: string | string[]) => setCardAlias(value as string)}
+            inputValue={cardAlias}
+            setInputValue={(value: string | string[]) => setCardAlias(value as string)}
           />
         </CardAliasInputWrapper>
       </CardAliasSetWrapper>

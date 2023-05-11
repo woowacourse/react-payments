@@ -5,8 +5,9 @@ type InputSectionTemplateType = PropsWithChildren<{
   label: string;
   isCountLength?: boolean;
   children: React.ReactNode;
-  inputValues?: string;
+  inputValue?: string;
   maxLength?: number;
+  errorMessage?: string;
 }>;
 
 const InputSectionTemplate = ({
@@ -14,30 +15,45 @@ const InputSectionTemplate = ({
   isCountLength,
   children,
   maxLength,
-  inputValues,
+  inputValue,
+  errorMessage,
 }: InputSectionTemplateType) => {
   return (
     <InputSectionTemplateWrapper>
-      <InputLabelWrapper>
-        <p>{label}</p>
-        {isCountLength && maxLength && (
-          <p>
-            {inputValues?.length} / {maxLength}
-          </p>
-        )}
-      </InputLabelWrapper>
-      <ChildrenWrapper>{children}</ChildrenWrapper>
+      <InputAreaWrapper>
+        <InputLabelWrapper>
+          <p>{label}</p>
+          {isCountLength && maxLength && (
+            <p>
+              {inputValue?.length} / {maxLength}
+            </p>
+          )}
+        </InputLabelWrapper>
+        <ChildrenWrapper>{children}</ChildrenWrapper>
+      </InputAreaWrapper>
+      {errorMessage && <Warning>{errorMessage}</Warning>}
     </InputSectionTemplateWrapper>
   );
 };
 
 export default InputSectionTemplate;
 
+const Warning = styled.p`
+  color: #ff2f2f;
+  font-size: 12px;
+  align-self: flex-start;
+  margin-top: 5px;
+`;
+
 const InputSectionTemplateWrapper = styled.div`
   width: 100%;
   margin-bottom: 19px;
   display: flex;
   flex-direction: column;
+`;
+
+const InputAreaWrapper = styled.div`
+  flex-direction: row;
 `;
 
 const InputLabelWrapper = styled.div`

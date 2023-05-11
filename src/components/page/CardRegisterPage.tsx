@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import Card from '../common/Card';
 import CardNumberInput from '../box/inputSection/CardNumberInput';
 import ExpireDateInput from '../box/inputSection/ExpireDateInput';
@@ -9,7 +9,8 @@ import styled from 'styled-components';
 import { Bank, CardType, Page, PageProps } from '../../abstracts/types';
 import PageTemplate from '../template/PageTemplate';
 import BankSelectBottomSheet from '../box/BankSelectBottomSheet';
-import BottomSheetTemplate from '../template/BottomSheetTemplate';
+import { BottomSheetProvider } from 'ksone02-modal';
+import useValidation from '../../hooks/useValidation';
 
 interface CardFormState extends Omit<CardType, 'id' | 'cardPassword'> {
   cardPassword1: string;
@@ -53,7 +54,15 @@ const CardRegisterPage = ({ navigate }: PageProps) => {
     setCard((prev) => ({ ...prev, [key]: value }));
   };
 
+  useLayoutEffect(() => {
+    setIsOnBankModal(true);
+  }, []);
+
   const { cardNumber, expireDate, ownerName, securityCode, cardPassword1, cardPassword2, bank } = card;
+
+  const { errorMessage: cardNumberErrorMessage } = useValidation(cardNumber, 'cardNumber');
+  const { errorMessage: expireDateErrorMessage } = useValidation(expireDate, 'expireDate');
+  const { errorMessage: securityErrorMessage } = useValidation(securityCode, 'cvc');
 
   return (
     <PageTemplate title="카드 추가" onClickBack={onClickBack}>
@@ -66,33 +75,54 @@ const CardRegisterPage = ({ navigate }: PageProps) => {
       />
 
       <InputForm onSubmit={submitNewCard}>
-        <CardNumberInput inputValues={cardNumber} setInputValues={onChange('cardNumber')} />
-        <ExpireDateInput inputValues={expireDate} setInputValues={onChange('expireDate')} />
-        <OwnerNameInput inputValues={ownerName} setInputValues={onChange('ownerName')} />
-        <SecurityCodeInput inputValues={securityCode} setInputValues={onChange('securityCode')} />
+        <CardNumberInput
+          inputArrayValue={cardNumber}
+          setInputArrayValue={onChange('cardNumber')}
+          errorMessage={cardNumberErrorMessage}
+        />
+        <ExpireDateInput
+          inputArrayValue={expireDate}
+          setInputArrayValue={onChange('expireDate')}
+          errorMessage={expireDateErrorMessage}
+        />
+        <OwnerNameInput inputValue={ownerName} setInputValue={onChange('ownerName')} />
+        <SecurityCodeInput
+          inputValue={securityCode}
+          setInputValue={onChange('securityCode')}
+          errorMessage={securityErrorMessage}
+        />
         <CardPasswordInput
           cardPassword1Props={{
-            inputValues: cardPassword1,
-            setInputValues: onChange('cardPassword1'),
+            inputValue: cardPassword1,
+            setInputValue: onChange('cardPassword1'),
           }}
           cardPassword2Props={{
-            inputValues: cardPassword2,
-            setInputValues: onChange('cardPassword2'),
+            inputValue: cardPassword2,
+            setInputValue: onChange('cardPassword2'),
           }}
         />
-        <ButtonWrapper>
-          <SubmitButton type="submit">다음</SubmitButton>
-        </ButtonWrapper>
+        {!cardNumberErrorMessage &&
+          cardNumber.join('').length > 0 &&
+          !expireDateErrorMessage &&
+          expireDate.join('').length > 0 &&
+          !securityErrorMessage &&
+          securityCode &&
+          cardPassword1 &&
+          cardPassword2 && (
+            <ButtonWrapper>
+              <SubmitButton type="submit">다음</SubmitButton>
+            </ButtonWrapper>
+          )}
       </InputForm>
       {isOnBankModal && (
-        <BottomSheetTemplate onClose={() => setIsOnBankModal(false)} modalState={isOnBankModal}>
+        <BottomSheetProvider onClose={() => setIsOnBankModal(false)} modalState={isOnBankModal}>
           <BankSelectBottomSheet
             onClose={() => setIsOnBankModal(false)}
             modalState={isOnBankModal}
             bank={bank}
             setBank={(newBank: Bank) => onChange('bank')(newBank)}
           />
-        </BottomSheetTemplate>
+        </BottomSheetProvider>
       )}
     </PageTemplate>
   );

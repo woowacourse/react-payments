@@ -1,6 +1,13 @@
 export interface InputStateProps {
-  inputValues: string | string[];
-  setInputValues: (val: string | string[]) => void;
+  inputValue: string;
+  setInputValue: (val: string) => void;
+  errorMessage?: string;
+}
+
+export interface InputArrayStateProps {
+  inputArrayValue: string[];
+  setInputArrayValue: (val: string[]) => void;
+  errorMessage?: string;
 }
 
 export interface CardType {
@@ -10,7 +17,7 @@ export interface CardType {
   ownerName: string;
   securityCode: string;
   cardPassword: string;
-  bank?: Bank | undefined;
+  bank?: Bank;
   alias?: string;
 }
 
@@ -23,6 +30,7 @@ export enum Page {
   list = 'list',
   register = 'register',
   aliasSet = 'aliasSet',
+  loading = 'loading',
 }
 
 export interface Bank {
