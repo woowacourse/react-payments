@@ -1,4 +1,5 @@
 export enum BankCode {
+  Default = '-1',
   BCCard = '361',
   ShinHanCard = '366',
   KakaoBank = '090',
@@ -18,6 +19,7 @@ export const CardName = {
   [BankCode.LotteCard]: '롯데카드',
   [BankCode.HanaCard]: '하나카드',
   [BankCode.KookMinCard]: '국민카드',
+  [BankCode.Default]: '카드사',
 } as const;
 
 export type ExpirationDate = {

@@ -1,29 +1,21 @@
-import { Card } from 'components/common/Card/types';
+import { RegisterCardLoadingBar } from 'components/common/LodaingBar/RegisterCardLoadingBar';
 import { AddCardNickNameForm } from 'components/Form/AddCardNickNameForm';
 import { PageContainer } from 'components/style/PageContainer';
-import { useUserCards } from 'contexts/UserCardProvider';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useCardAddForm } from 'contexts/CardAddFormProvider';
+import { useHandleCardNickNameSubmit } from 'hooks/useHandleCardNickNameSubmit';
 import styled from 'styled-components';
 
 export const RegisterCardNickName = () => {
-  const {
-    actions: { addCard },
-  } = useUserCards();
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const goHome = () => {
-    navigate('/');
-  };
-
-  const handleCardNickNameSubmit = (card: Card) => {
-    addCard(card);
-    goHome();
-  };
+  const { card } = useCardAddForm();
+  const { handleCardNickNameSubmit, isSubmitting } = useHandleCardNickNameSubmit();
 
   return (
     <Container>
-      <AddCardNickNameForm card={location.state.card} onSubmit={handleCardNickNameSubmit} />
+      {!isSubmitting ? (
+        <AddCardNickNameForm card={card} onSubmit={handleCardNickNameSubmit} />
+      ) : (
+        <RegisterCardLoadingBar />
+      )}
     </Container>
   );
 };

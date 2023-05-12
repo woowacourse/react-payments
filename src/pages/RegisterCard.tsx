@@ -11,8 +11,8 @@ function RegisterCard() {
     navigate('/');
   };
 
-  const goRegisterCardNickName: AddCardFormProps['onSubmit'] = (card) => {
-    navigate('/register-nickname', { state: { card: card } });
+  const goRegisterCardNickName: AddCardFormProps['onSubmit'] = () => {
+    navigate('/register-nickname');
   };
 
   return (

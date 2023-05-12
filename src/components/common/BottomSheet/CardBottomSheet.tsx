@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 import { BankCode, CardName } from '../Card/types';
-import { BottomSheet, BottomSheetProps } from './BottomSheet';
+import { KumaModal } from 'kuma-modal';
+import { KumaModalProps } from 'kuma-modal/dist/KumaModal';
 
 export type CardBottomSheetProps = {
   onClickBankImage: (bankCode: BankCode) => void;
-} & BottomSheetProps;
+} & KumaModalProps;
 
 const bankCodes = Object.values(BankCode);
 
@@ -14,19 +15,22 @@ export const CardBottomSheet = ({ onClickBankImage, active }: CardBottomSheetPro
   };
 
   return (
-    <BottomSheet active={active}>
+    <KumaModal active={active}>
       <ContentContainer>
-        {bankCodes.map((bankCode, index) => (
-          <CardImageContainer key={index} onClick={() => handleClickBankImage(bankCode)}>
-            <img
-              src={`${process.env.PUBLIC_URL}/assets/bank/${CardName[bankCode]}.svg`}
-              alt={`${CardName[bankCode]}`}
-            ></img>
-            <span>{CardName[bankCode]}</span>
-          </CardImageContainer>
-        ))}
+        {bankCodes.map((bankCode, index) => {
+          if (bankCode === BankCode.Default) return null;
+          return (
+            <CardImageContainer key={index} onClick={() => handleClickBankImage(bankCode)}>
+              <img
+                src={`${process.env.PUBLIC_URL}/assets/bank/${CardName[bankCode]}.svg`}
+                alt={`${CardName[bankCode]}`}
+              ></img>
+              <span>{CardName[bankCode]}</span>
+            </CardImageContainer>
+          );
+        })}
       </ContentContainer>
-    </BottomSheet>
+    </KumaModal>
   );
 };
 

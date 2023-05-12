@@ -3,6 +3,7 @@ import { CreditCard } from 'components/common';
 import styled from 'styled-components';
 import { FormEventHandler, useRef } from 'react';
 import { PaymentsButton } from 'components/common/Button/PaymentsButton';
+import { useCardAddForm } from 'contexts/CardAddFormProvider';
 
 type Props = { card: Card; onSubmit: (card: Card) => void };
 
@@ -21,7 +22,7 @@ export const AddCardNickNameForm = ({ card, onSubmit }: Props) => {
 
   return (
     <Container>
-      <Text>카드 등록이 완료되었습니다</Text>
+      <Text>거의 다 왔어요!</Text>
       <CreditCard card={card} />
       <FormContainer onSubmit={handleSubmit}>
         <NickNameInput placeholder="별명을 적어주세요" ref={inputRef} autoFocus />

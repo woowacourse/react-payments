@@ -3,7 +3,7 @@ import { CardDB } from 'db/Cards';
 import { createContext, PropsWithChildren, useState, Dispatch, useContext } from 'react';
 
 type CardProviderAction = {
-  addCard: Dispatch<Card>;
+  addCard: typeof CardDB.registerCard;
 };
 
 type UserCardContext = {
@@ -17,9 +17,9 @@ export function UserCardProvider({ children }: PropsWithChildren) {
   const [userCards, setUserCards] = useState<Card[]>(() => CardDB.getCards());
 
   const actions: CardProviderAction = {
-    addCard(card: Card) {
+    addCard(card) {
       setUserCards((prevCards) => [...prevCards, card]);
-      CardDB.registerCard(card);
+      return CardDB.registerCard(card);
     },
   };
 

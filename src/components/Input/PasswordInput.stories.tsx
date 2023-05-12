@@ -1,6 +1,6 @@
 import { Meta, StoryFn, StoryObj } from '@storybook/react';
 import { theme } from 'components/style/theme';
-import { useCardForm } from 'hooks/useCardForm';
+import { useCardAddForm } from 'contexts/CardAddFormProvider';
 import { ThemeProvider } from 'styled-components';
 import { PasswordInput } from './PasswordInput';
 import { ValueAndOnChange } from './types';
@@ -24,7 +24,7 @@ type Story = StoryFn<typeof meta>;
 
 export const Default: Story = () => {
   const { cardFormInformation, setCardFormInformation, card, isCardNumberValid, errorMessages } =
-    useCardForm();
+    useCardAddForm();
 
   const { firstDigit, secondDigit } = cardFormInformation;
 
