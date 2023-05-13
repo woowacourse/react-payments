@@ -11,8 +11,8 @@ const InputCardData = ({
   passwordType,
   className,
   value,
-  minDataLength,
-  maxDataLength,
+  maxLength,
+  minLength,
   name,
   dataId,
   refObject: Ref,
@@ -29,8 +29,8 @@ const InputCardData = ({
       value={value}
       placeholder={placeholder}
       inputMode={inputMode}
-      maxLength={maxDataLength}
-      minLength={minDataLength}
+      maxLength={maxLength}
+      minLength={minLength}
       data-id={dataId}
       ref={Ref}
       onChange={(e) => {
@@ -50,8 +50,8 @@ const InputCardData = ({
       placeholder={placeholder}
       type={inputType}
       inputMode={inputMode}
-      maxLength={maxDataLength}
-      minLength={minDataLength}
+      maxLength={maxLength}
+      minLength={minLength}
       data-id={dataId}
       ref={Ref}
       onChange={(e) => {

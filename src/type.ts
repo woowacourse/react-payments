@@ -40,13 +40,18 @@ export type FormCardAddProps = {
   cardFlipper: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export type actionName = 'CARDLIST_REQUEST' | 'CARDLIST_SUCCESS' | 'CARDLIST_FAILURE';
+export type actionName =
+  | 'ADD_CARD_DUPLICATED'
+  | 'CARDLIST_REQUEST'
+  | 'CARDLIST_SUCCESS'
+  | 'CARDLIST_FAILURE'
+  | 'ADD_CARD_REQUEST'
+  | 'ADD_CARD_SUCCESS'
+  | 'ADD_CARD_FAILURE';
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   inputType: string;
   passwordType?: string;
-  minDataLength: number;
-  maxDataLength: number;
   dataId: number;
   refObject: React.Ref<HTMLInputElement>;
   handleError?: (e: ChangeEvent<HTMLInputElement>) => void;

@@ -1,18 +1,25 @@
 .flip {
   width: 213px;
   height: 133px;
-  animation-name: view;
+  opacity: 0;
+}
+
+.fade {
+  animation-name: fade-card;
   animation-duration: 1s;
+  animation-fill-mode: forwards;
   animation-timing-function: ease-in-out;
   animation-delay: 0s;
 }
 
-@keyframes view {
-  from {
+@keyframes fade-card {
+  0% {
     opacity: 0;
+    transform: translateX(-50px) perspective(600px) rotate3d(0.5, -1, 0, 0.1turn);
   }
   to {
     opacity: 1;
+    transform: translateX(0px) perspective(600px) rotate3d(0);
   }
 }
 
@@ -68,6 +75,54 @@
   font-size: 12px;
   font-weight: 500;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+}
+
+.adding-card {
+  animation: card-spin 2s infinite;
+  transition: all 1s;
+}
+
+@keyframes card-spin {
+  0% {
+    transform: perspective(600px) rotate(0deg);
+  }
+  25% {
+    transform: perspective(600px) rotate3d(0, 1, 0, 0.1turn);
+  }
+  50% {
+    transform: perspective(600px) rotate3d(1, 1, 0, 0.1turn);
+  }
+  75% {
+    transform: perspective(600px) rotate3d(1, -1, 0, 0.1turn);
+  }
+  100% {
+    transform: perspective(600px) rotate3d(0, 0, 0, 0.1turn);
+  }
+}
+
+.add-card-failure {
+  animation: fail-vibration 0.1s;
+}
+
+@keyframes fail-vibration {
+  0% {
+    transform: translateX(10px);
+  }
+  20% {
+    transform: translateX(-20px);
+  }
+  40% {
+    transform: translateX(10px);
+  }
+  60% {
+    transform: translateX(10px);
+  }
+  80% {
+    transform: translateX(-20px);
+  }
+  100% {
+    transform: translateX(10px);
+  }
 }
 
 .card-back-track-1 {

@@ -1,14 +1,14 @@
 import type { CardType } from '../type';
 import { LOCAL_STORAGE_CARD_LIST } from './constants';
 
-export const fetchNewCardData = (data: Omit<CardType, 'id'>): boolean => {
+export const fetchNewCardData = (data: CardType): boolean => {
   const getData = localStorage.getItem(LOCAL_STORAGE_CARD_LIST);
 
   if (getData) {
     const dataToArr = JSON.parse(getData);
 
     // eslint-disable-next-line array-callback-return
-    const sameNumbers = dataToArr.filter((card: Omit<CardType, 'id'>) => {
+    const sameNumbers = dataToArr.filter((card: CardType) => {
       const { cardNumber } = card;
       const keys = Object.keys(cardNumber) as ('first' | 'second' | 'third' | 'fourth')[];
       let cardNumberSerial = '';

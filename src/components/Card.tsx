@@ -9,6 +9,8 @@ type CardProps = {
   cardType: string;
   cardNumber: CardNumber;
   cardOwner: string;
+  fadeCard?: boolean;
+  classname?: string;
   expired: string;
   securityCode: string;
   cardFlipped?: boolean;
@@ -19,25 +21,27 @@ const Card = ({
   cardType,
   cardNumber,
   cardOwner,
+  fadeCard,
+  classname,
   expired,
   securityCode,
   cardFlipped,
   openCardSelectModal,
 }: CardProps) => {
-  const cardFlipData = cardFlipped ? 'card flipped' : 'card';
+  const isCardFlipped = cardFlipped ? 'card flipped' : 'card';
 
   return (
     <div
-      className="flip"
+      className={fadeCard ? 'flip fade' : 'flip'}
       onClick={() => {
         if (openCardSelectModal) openCardSelectModal(true);
       }}
     >
-      <div className={cardFlipData}>
+      <div className={isCardFlipped}>
         <div
-          className="front"
+          className={`front ${classname}`}
           style={{
-            backgroundColor: CARD_BACKGROUND_COLORS[cardType],
+            background: CARD_BACKGROUND_COLORS[cardType],
             color: CARD_FONT_COLOR[cardType],
           }}
         >
@@ -61,7 +65,7 @@ const Card = ({
         <div
           className="back"
           style={{
-            backgroundColor: CARD_BACKGROUND_COLORS[cardType],
+            background: CARD_BACKGROUND_COLORS[cardType],
             color: CARD_FONT_COLOR[cardType],
           }}
         >

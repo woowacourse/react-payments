@@ -17,6 +17,25 @@
   color: #575757;
 }
 
+.text-fade {
+  animation-name: fade-text;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0s;
+}
+
+@keyframes fade-text {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) translateX(-18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px) translateX(0px);
+  }
+}
+
 .add-card-button:hover {
   cursor: pointer;
 }
@@ -55,4 +74,35 @@
 
 .card-nickname {
   margin-top: 10px;
+  opacity: 0;
+}
+
+.card-add-success {
+  z-index: 10;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 70%;
+  height: 5%;
+  border-radius: 10px;
+  font-size: 20px;
+  padding-right: 10px;
+  padding-left: 10px;
+  background-color: #e5e5e5;
+  animation: card-success-view 5s;
+  animation-fill-mode: forwards;
+  opacity: 0;
+}
+@keyframes card-success-view {
+  0% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
 }

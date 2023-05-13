@@ -1,15 +1,20 @@
 import React, { useEffect, useReducer } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-import { getCardListAction } from '../actions/cardDataAction';
+import { ADD_CARD_SUCCESS, getCardListAction } from '../actions/cardDataAction';
 import Card from '../components/Card';
 import Header from '../components/Header';
-import cardReducer, { initialState } from '../reducer/cardReducer';
+import { cardListInitialState, cardListReducer } from '../reducer/cardReducer';
 import type { CardType } from '../type';
 import './CardListPage.css';
 
 const CardListPage = () => {
-  const [mainCardListData, dispatchMainCardListData] = useReducer(cardReducer, initialState);
+  const location = useLocation();
+
+  const [mainCardListData, dispatchMainCardListData] = useReducer(
+    cardListReducer,
+    cardListInitialState
+  );
   const navigate = useNavigate();
 
   const onAddButton = () => {
@@ -20,8 +25,29 @@ const CardListPage = () => {
     dispatchMainCardListData(getCardListAction());
   }, []);
 
+  useEffect(() => {
+    const cardDataItems = document.querySelectorAll('.flip');
+    const cardNickNames = document.querySelectorAll('.card-nickname');
+
+    cardDataItems.forEach((cardDataItem, index) => {
+      const intervalId = setTimeout(() => {
+        cardDataItem.classList.add('fade');
+        cardNickNames[index].classList.add('text-fade');
+      }, 150 * index);
+
+      return () => {
+        clearTimeout(intervalId);
+      };
+    });
+  }, [mainCardListData]);
+
   return (
     <div className="add-card-page">
+      {location.state && location.state.cardAdd === ADD_CARD_SUCCESS ? (
+        <div className="card-add-success">카드 추가가 완료되었습니다😊</div>
+      ) : (
+        ''
+      )}
       <Header headerTitle="보유카드" />
       <main className="add-card-page-body">
         {mainCardListData.length === 0 ? (
@@ -40,6 +66,7 @@ const CardListPage = () => {
             </div>
           ))
         )}
+
         <div className="add-card">
           <button type="button" className="add-card-button" onClick={onAddButton}>
             +

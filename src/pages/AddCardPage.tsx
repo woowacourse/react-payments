@@ -62,6 +62,7 @@ const AddCardPage = () => {
               cardType={cardType}
               cardNumber={cardNumber}
               cardOwner={cardOwner.value}
+              fadeCard={true}
               expired={cardExpire.value}
               securityCode={securityCode.value}
               cardFlipped={cardFlip}
@@ -81,11 +82,12 @@ const AddCardPage = () => {
           />
         </section>
       </div>
-      {modalOpen ? (
-        <CardSelectModal determineCardType={setCardType} closeModal={setModalOpen} />
-      ) : (
-        ''
-      )}
+
+      <CardSelectModal
+        determineCardType={setCardType}
+        isModalOpen={modalOpen}
+        closeModal={setModalOpen}
+      />
     </>
   );
 };

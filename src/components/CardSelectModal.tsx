@@ -1,4 +1,5 @@
 import React from 'react';
+import Modal from 'react-slinky-modal';
 
 import { BANK_LIST } from '../utils/constants';
 import BankIcon from './BankIcon';
@@ -6,24 +7,24 @@ import './CardSelectModal.css';
 
 type modalProps = {
   determineCardType: React.Dispatch<React.SetStateAction<string>>;
+  isModalOpen: boolean;
   closeModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const CardSelectModal = ({ determineCardType, closeModal }: modalProps) => {
+const CardSelectModal = ({ determineCardType, isModalOpen, closeModal }: modalProps) => {
   return (
-    <>
-      <div className="card-select-modal-backdrop" onClick={() => closeModal(false)}></div>
-      <div className="card-select-modal">
+    <Modal isModalOpen={isModalOpen} closeModal={closeModal}>
+      <div className="icon-sort">
         {BANK_LIST.map((name) => (
           <BankIcon
             key={name}
             bankName={name}
             determineCardType={determineCardType}
-            selectCardType={closeModal}
+            iconClicked={closeModal}
           />
         ))}
       </div>
-    </>
+    </Modal>
   );
 };
 

@@ -2,19 +2,19 @@ import React from 'react';
 
 import { BANK_ICONS } from '../utils/constants';
 
-type bankIconProps = {
+type BankIconProps = {
   bankName: string;
   determineCardType: React.Dispatch<React.SetStateAction<string>>;
-  selectCardType: React.Dispatch<React.SetStateAction<boolean>>;
+  iconClicked: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const BankIcon = ({ bankName, determineCardType, selectCardType }: bankIconProps) => {
+const BankIcon = ({ bankName, determineCardType, iconClicked }: BankIconProps) => {
   return (
     <div
       className="card-icon"
       onClick={() => {
         determineCardType(bankName);
-        selectCardType(false);
+        iconClicked(false);
       }}
     >
       <img src={BANK_ICONS[bankName]} alt={bankName} className="bank-icon" />

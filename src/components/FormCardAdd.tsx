@@ -1,16 +1,23 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useCallback, useEffect, useReducer, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 
+import {
+  ADD_CARD_FAILURE,
+  ADD_CARD_SUCCESS,
+  addCardAction,
+  addCardRequestStartAction,
+} from '../actions/cardDataAction';
 import {
   useHandleCVCNumberError,
   useHandleCardNumberError,
   useHandleCardPasswordError,
   useHandleExpireError,
 } from '../hooks/useHandleExpireErrors';
+import { cardAddReducer } from '../reducer/cardReducer';
 import { CardType, FormCardAddProps } from '../type';
 import { CVC_TOOLTIP_DETAIL, CVC_TOOLTIP_TITLE, LOCATION } from '../utils/constants';
-import { fetchNewCardData } from '../utils/fetchData';
 import Tooltip from './CVCTooltip';
 import CardNicknameInputModal from './CardNicknameInputModal';
 import './FormCardAdd.css';
@@ -33,6 +40,15 @@ const FormCardAdd = ({
   const [cardNumberError, setCardNumberError] = useHandleCardNumberError();
   const [cardCVCNumberError, setCardCVCNumberError] = useHandleCVCNumberError();
   const [cardPasswordError, setCardPasswordError] = useHandleCardPasswordError();
+  const [addCardResult, dispatchAddCardData] = useReducer(cardAddReducer, {
+    type: 'ADD_CARD_DUPLICATED',
+    isLoading: false,
+    errorMessage: 'string',
+  });
+
+  const handleAddCardData = useCallback((data: any) => {
+    dispatchAddCardData(data);
+  }, []);
 
   const navigate = useNavigate();
   const [cardNickName, setCardNickName] = useState('');
@@ -41,7 +57,9 @@ const FormCardAdd = ({
     return expireError && cardNumberError && cardCVCNumberError && cardPasswordError;
   };
 
-  const onSubmit = (e: React.FormEvent) => {
+  const loadingRequest = () => new Promise((resolve) => setTimeout(resolve, 3000));
+
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const { first, second, third, fourth } = cardNumber.value;
     const id = uuidv4();
@@ -63,12 +81,16 @@ const FormCardAdd = ({
         second: cardPasswordSecondDigit.value,
       },
     };
-    if (!fetchNewCardData(postData)) {
-      alert('이미 등록된 카드입니다.');
-      return;
-    }
-    navigate(LOCATION.CARD_LIST_PAGE);
+    handleAddCardData(addCardRequestStartAction());
+    await loadingRequest();
+    handleAddCardData(addCardAction(postData));
   };
+
+  useEffect(() => {
+    if (addCardResult.type === ADD_CARD_SUCCESS) {
+      navigate(LOCATION.CARD_LIST_PAGE, { state: { cardAdd: ADD_CARD_SUCCESS } });
+    }
+  }, [addCardResult.type, navigate]);
 
   const inputRef = Array.from({ length: 9 }).map(() => React.createRef<HTMLInputElement>());
 
@@ -108,7 +130,6 @@ const FormCardAdd = ({
   };
 
   useEffect(() => {
-    if (!fulfilledData.includes(false)) setReadyToPending(true);
     fulfilledData[5] = true;
     if (!fulfilledData.includes(false)) setReadyToPending(true);
   }, [fulfilledData]);
@@ -126,8 +147,8 @@ const FormCardAdd = ({
               placeholder="****"
               className="card-number"
               value={cardNumber.value.first}
-              minDataLength={4}
-              maxDataLength={4}
+              minLength={4}
+              maxLength={4}
               name="first"
               dataId={0}
               refObject={inputRef[0]}
@@ -147,8 +168,8 @@ const FormCardAdd = ({
               placeholder="****"
               className="card-number"
               value={cardNumber.value.second}
-              minDataLength={4}
-              maxDataLength={4}
+              minLength={4}
+              maxLength={4}
               name="second"
               dataId={1}
               refObject={inputRef[1]}
@@ -170,8 +191,8 @@ const FormCardAdd = ({
               className="card-number"
               value={cardNumber.value.third}
               dataId={2}
-              minDataLength={4}
-              maxDataLength={4}
+              minLength={4}
+              maxLength={4}
               name="third"
               refObject={inputRef[2]}
               handleError={setCardNumberError}
@@ -191,8 +212,8 @@ const FormCardAdd = ({
               passwordType="card-number"
               className="card-number"
               value={cardNumber.value.fourth}
-              minDataLength={4}
-              maxDataLength={4}
+              minLength={4}
+              maxLength={4}
               name="fourth"
               dataId={3}
               refObject={inputRef[3]}
@@ -222,8 +243,8 @@ const FormCardAdd = ({
             placeholder="MM/YY"
             className="card-expired"
             value={cardExpire.value}
-            minDataLength={1}
-            maxDataLength={5}
+            minLength={1}
+            maxLength={5}
             name="expireDate"
             dataId={4}
             refObject={inputRef[4]}
@@ -253,8 +274,8 @@ const FormCardAdd = ({
             placeholder="이름을 입력하세요."
             className="card-owner"
             value={cardOwner.value}
-            minDataLength={0}
-            maxDataLength={15}
+            minLength={0}
+            maxLength={15}
             name="owner"
             dataId={5}
             refObject={inputRef[5]}
@@ -275,8 +296,8 @@ const FormCardAdd = ({
               passwordType="password-cvc"
               value={securityCode.value}
               name="cvcData"
-              maxDataLength={3}
-              minDataLength={3}
+              maxLength={3}
+              minLength={3}
               dataId={6}
               refObject={inputRef[6]}
               handleError={setCardCVCNumberError}
@@ -303,9 +324,9 @@ const FormCardAdd = ({
               placeholder="*"
               passwordType="password-single"
               value={cardPasswordFirstDigit.value}
-              maxDataLength={1}
-              minDataLength={1}
-              name="card-password-1"
+              maxLength={1}
+              minLength={1}
+              name="maxLength-password-1"
               dataId={7}
               refObject={inputRef[7]}
               handleError={setCardPasswordError}
@@ -323,9 +344,9 @@ const FormCardAdd = ({
               placeholder="*"
               passwordType="password-single"
               value={cardPasswordSecondDigit.value}
-              maxDataLength={1}
-              minDataLength={1}
-              name="card-password-2"
+              maxLength={1}
+              minLength={1}
+              name="maxLength-password-2"
               dataId={8}
               refObject={inputRef[8]}
               handleError={setCardPasswordError}
@@ -350,19 +371,21 @@ const FormCardAdd = ({
           {readyToPending && !ableRequestData() ? <button type="submit">다음</button> : ''}
         </div>
       </form>
-      {nicknameModalOpen ? (
+      {createPortal(
         <CardNicknameInputModal
           closeModal={setNicknameModalOpen}
+          isRequesting={addCardResult.isLoading}
+          isFailed={addCardResult.type === ADD_CARD_FAILURE}
           cardType={cardType}
+          isModalOpen={nicknameModalOpen}
           cardNumber={cardNumber}
           cardExpire={cardExpire}
           cardOwner={cardOwner}
           securityCode={securityCode}
           handleNickname={setCardNickName}
           submitData={onSubmit}
-        />
-      ) : (
-        ''
+        />,
+        document.body
       )}
     </>
   );
