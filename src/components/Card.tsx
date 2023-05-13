@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useCardState } from "../context/CardContext";
-import useDrawer from "../hooks/useDrawer";
+import { useModal } from "eykmodal";
 
 interface CardProps {
   type: string;
@@ -89,12 +89,12 @@ export default function Card({
   cardTitle,
 }: CardProps) {
   const cardState = useCardState();
-  const { openDrawer } = useDrawer();
+  const { openModal } = useModal();
 
   const isHomePage = type === "homepage";
   const cardColorToShow = isHomePage ? cardColor : cardState.color;
   const cardTitleToShow = isHomePage ? cardTitle : cardState.title;
-  const onClickCard = isHomePage ? () => {} : openDrawer;
+  const onClickCard = isHomePage ? () => {} : openModal;
 
   return (
     <StyledCard cardColor={cardColorToShow} onClick={onClickCard}>

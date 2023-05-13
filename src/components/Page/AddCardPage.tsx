@@ -22,14 +22,14 @@ import {
   TitleWrapper,
 } from "./AddCardPage.styles";
 import { useCardForm } from "../../hooks/useCardForm";
-import CardTypeDrawer from "../CardTypeDrawer";
+import CardTypeModal from "../CardTypeModal";
 import { useCardState } from "../../context/CardContext";
 
 interface AddCardPageProps {
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   onClick: () => void;
 }
-const MemoizedCardTypeDrawer = React.memo(CardTypeDrawer);
+const MemoizedCardTypeModal = React.memo(CardTypeModal);
 
 export default function AddCardPage({ onSubmit, onClick }: AddCardPageProps) {
   const {
@@ -119,7 +119,7 @@ export default function AddCardPage({ onSubmit, onClick }: AddCardPageProps) {
             <NextButton disabled={isFormNotFilled} />
           </DownRightButtonWrapper>
         </InputWrapperParent>
-        <MemoizedCardTypeDrawer />
+        <MemoizedCardTypeModal />
       </Page>
     </>
   );

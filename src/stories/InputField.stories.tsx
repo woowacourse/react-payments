@@ -12,6 +12,7 @@ import userEvent from "@testing-library/user-event";
 const meta: Meta<typeof InputField> = {
   component: InputField,
   title: "InputField",
+  tags: ["autodocs"],
 };
 
 export default meta;

@@ -7,7 +7,7 @@ import { useLocalStorage } from "./hooks/useLocalStorage";
 import "./styles/index.css";
 import { CardInfo } from "./types";
 import AddNicknamePage from "./components/Page/AddNicknamePage";
-import { DrawerContextProvider } from "./context/DrawerContext";
+import { ModalContextProvider } from "eykmodal";
 
 export default function App() {
   const [pageIndex, setPageIndex] = useState(0);
@@ -57,7 +57,7 @@ export default function App() {
 
   return (
     <div className="app">
-      <DrawerContextProvider>
+      <ModalContextProvider>
         {pageIndex === 0 && (
           <Homepage cardList={cardList} onClick={() => setPageIndex(1)} />
         )}
@@ -75,7 +75,7 @@ export default function App() {
             setPageIndex={setPageIndex}
           />
         )}
-      </DrawerContextProvider>
+      </ModalContextProvider>
     </div>
   );
 }

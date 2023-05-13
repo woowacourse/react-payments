@@ -10,6 +10,7 @@ import { UseInputProps, useInput } from "../hooks/useInput";
 const meta: Meta<typeof Input> = {
   component: Input,
   title: "Input",
+  tags: ["autodocs"],
 };
 
 export default meta;

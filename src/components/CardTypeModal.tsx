@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import CardLogo from "./CardLogo";
-import Drawer from "./common/Drawer";
+import { Modal } from "eykmodal";
 
 const Wrapper = styled.div`
   align-items: center;
@@ -26,14 +26,14 @@ const COMPANY_LIST = [
   "SINHAN",
   "WOORI",
 ];
-export default function CardTypeDrawer() {
+export default function CardTypeModal() {
   return (
-    <Drawer>
+    <Modal>
       <Wrapper>
         {COMPANY_LIST.map((company) => (
           <CardLogo key={`${company}`} cardName={company} />
         ))}
       </Wrapper>
-    </Drawer>
+    </Modal>
   );
 }

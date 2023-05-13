@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 
 import CardLogo from "../components/CardLogo";
 import { CardContextProvider } from "../context/CardContext";
-import { DrawerContextProvider } from "../context/DrawerContext";
+import { ModalContextProvider } from "eykmodal";
 import { CARD_COMPANYS } from "../constant";
 
 const meta: Meta<typeof CardLogo> = {
@@ -21,9 +21,9 @@ export const CardLogoIcon: Story = {
   decorators: [
     (Story) => (
       <CardContextProvider>
-        <DrawerContextProvider>
+        <ModalContextProvider>
           <Story />
-        </DrawerContextProvider>
+        </ModalContextProvider>
       </CardContextProvider>
     ),
   ],
