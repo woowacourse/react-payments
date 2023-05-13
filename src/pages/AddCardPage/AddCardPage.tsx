@@ -17,7 +17,7 @@ import CardCompanyIcon from "../../components/CardCompanyIcon/CardCompanyIcon";
 import { AddCardStateContext } from "../../context/AddCardStateProvider";
 import { Button } from "../../components/common/Button";
 import useModal from "../../hooks/useModal";
-import { cardData } from "../../constant/Card";
+import { CART_COMPANY } from "../../constant/Card";
 
 const AddCardPage = () => {
   const { modalOpen, closeModal, openModal, Modal } = useModal(true);
@@ -100,8 +100,8 @@ const AddCardPage = () => {
     <Container>
       <Modal modalOpen={modalOpen}>
         <>
-          {Object.keys(cardData).map((company) => (
-            <CardCompanyIcon company={company as CardCompany} onClickHandler={handleCardCompany} />
+          {CART_COMPANY.map((company) => (
+            <CardCompanyIcon company={company} onClickHandler={handleCardCompany} />
           ))}
         </>
       </Modal>

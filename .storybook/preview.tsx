@@ -24,12 +24,3 @@ const preview: Preview = {
 };
 
 export default preview;
-
-// export const decorators = [
-//   (Story) => (
-//     <MemoryRouter initialEntries={["/"]}>
-//       <GlobalStyle />
-//       <Story />
-//     </MemoryRouter>
-//   ),
-// ];

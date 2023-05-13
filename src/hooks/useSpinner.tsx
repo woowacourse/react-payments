@@ -14,11 +14,6 @@ const useSpinner = () => {
 
   const navigateAfterLoading = (page: string) => {
     setTimeout(() => navigate(page), 2000);
-    return (
-      <Container>
-        <Spinner />
-      </Container>
-    );
   };
 
   return { isLoading, startLoading, navigateAfterLoading };

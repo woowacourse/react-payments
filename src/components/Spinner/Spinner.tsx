@@ -28,7 +28,7 @@ const Spinner = () => {
 
   return (
     <SpinnerContainer>
-      <SpinnerAnimation></SpinnerAnimation>
+      <SpinnerAnimation />
     </SpinnerContainer>
   );
 };

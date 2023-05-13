@@ -6,8 +6,20 @@ import { ReactComponent as KBLogo } from "../assets/kbcard-logo.svg";
 import { ReactComponent as LotteLogo } from "../assets/lottecard-logo.svg";
 import { ReactComponent as ShinhanLogo } from "../assets/shinhancard-logo.svg";
 import { ReactComponent as WooriLogo } from "../assets/wooricard-logo.svg";
+import { CardCompany, CardData } from "../types";
 
-export const cardData = {
+export const CART_COMPANY: CardCompany[] = [
+  "비씨카드",
+  "하나카드",
+  "현대카드",
+  "카카오뱅크",
+  "국민카드",
+  "롯데카드",
+  "우리카드",
+  "신한카드",
+];
+
+export const CARD_DATA: CardData = {
   비씨카드: {
     component: <BCLogo width={"37px"} height={"37px"} />,
     color: "#C03841",

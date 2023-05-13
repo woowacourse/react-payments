@@ -6,8 +6,14 @@ export type CardCompany =
   | "국민카드"
   | "롯데카드"
   | "신한카드"
-  | "우리카드"
-  | undefined;
+  | "우리카드";
+
+export type CardData = {
+  [key in CardCompany]: {
+    component: React.ReactNode;
+    color: string;
+  };
+};
 
 export type CardNumber = {
   firstGroup: string;
