@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { getData } from "utils/getDataFromLocalStorage";
+import { CARD_REGISTER_PAGE } from "constants/path";
 
 const useInitMainPage = () => {
   const navigate = useNavigate();
@@ -7,7 +8,7 @@ const useInitMainPage = () => {
   const goToRegister = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
 
-    navigate("/register");
+    navigate(CARD_REGISTER_PAGE);
   };
 
   const cardList = getData("card");

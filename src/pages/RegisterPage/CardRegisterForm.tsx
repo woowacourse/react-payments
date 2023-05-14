@@ -14,6 +14,7 @@ import useRequiredCardInfo from "hooks/useRequiredCardInfo";
 import useInitCardInfo from "hooks/useInitCardInfo";
 import { moveFormInputFocus } from "utils/moveFormInputFocus";
 import { shouldPreventFocusMovement } from "validation";
+import { CARD_NICKNAME_PAGE } from "constants/path";
 import { DIRECTION } from "constants/inputDirection";
 const { NEXT, PREV } = DIRECTION;
 
@@ -23,7 +24,7 @@ const CardRegisterForm = () => {
   const { isFormFilled } = useRequiredCardInfo();
 
   const navigate = useNavigate();
-  const handlePageChange = () => navigate("/add-card-nickname");
+  const handlePageChange = () => navigate(CARD_NICKNAME_PAGE);
 
   const handleFocusNext = ({ target }: ChangeEvent<HTMLFormElement>) => {
     if (shouldPreventFocusMovement(target, allCardInfo)) return;

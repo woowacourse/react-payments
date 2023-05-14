@@ -8,6 +8,7 @@ import Input, { CardNickname } from "components/Input";
 import TextLimit from "components/TextLimit";
 import GotLost from "pages/GotLost";
 import useInitCardInfo from "hooks/useInitCardInfo";
+import { LOADING_PAGE } from "constants/path";
 import { LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
 const { NOT_ONLY_BLANK } = VALID_INPUT;
 
@@ -30,7 +31,7 @@ const LastPage = () => {
   const handleButtonClick = () => {
     if (cardInfo.nickname === "") return alert("카드 별칭을 입력해 주세요.");
 
-    navigate("/registering");
+    navigate(LOADING_PAGE);
   };
 
   const handleEnterKeyDown: KeyboardEventHandler<HTMLInputElement> = ({

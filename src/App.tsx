@@ -6,14 +6,15 @@ import CardRegisterForm from "pages/RegisterPage/CardRegisterForm";
 import LastPage from "pages/LastPage";
 import GotLost from "pages/GotLost";
 import LoadingPage from "pages/LoadingPage";
+import { CARD_NICKNAME_PAGE, CARD_REGISTER_PAGE, ERROR_PAGE, LOADING_PAGE, MAIN_PAGE } from "constants/path";
 
 const App = () => {
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Routes>
-        <Route path="/" element={<MainPage />} />
+        <Route path={MAIN_PAGE} element={<MainPage />} />
         <Route
-          path="/register"
+          path={CARD_REGISTER_PAGE}
           element={
             <CardInfoProvider>
               <ModalStateProvider initialState>
@@ -23,7 +24,7 @@ const App = () => {
           }
         />
         <Route
-          path="/add-card-nickname"
+          path={CARD_NICKNAME_PAGE}
           element={
             <CardInfoProvider>
               <LastPage />
@@ -31,15 +32,15 @@ const App = () => {
           }
         />
         <Route
-          path="/registering"
+          path={LOADING_PAGE}
           element={
             <CardInfoProvider>
               <LoadingPage />
             </CardInfoProvider>
           }
         />
-        <Route path="/got-lost" element={<GotLost />} />
-        <Route path="*" element={<Navigate replace to="/got-lost" />} />
+        <Route path={ERROR_PAGE} element={<GotLost />} />
+        <Route path="*" element={<Navigate replace to={ERROR_PAGE} />} />
       </Routes>
     </BrowserRouter>
   );
