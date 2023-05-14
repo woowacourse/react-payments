@@ -41,9 +41,10 @@ const ButtonGroup = styled.div`
 
 export const NewCreditCardCompletionPage = () => {
   const navigate = useNavigate();
-  const { updateCreditCard, recommendCreditCardDisplayName } = usePayments();
-  const { validatedCreditCard: creditCard } = usePaymentsForm();
+  const { updateCreditCard, getCreditCardById, recommendCreditCardDisplayName } = usePayments();
+  const { validatedCreditCard } = usePaymentsForm();
 
+  const creditCard = validatedCreditCard ? getCreditCardById(validatedCreditCard.id) : null;
   if (creditCard === null) {
     throw {
       message: `올바르지 않은 신용카드 데이터입니다. (${JSON.stringify(creditCard)})`,
