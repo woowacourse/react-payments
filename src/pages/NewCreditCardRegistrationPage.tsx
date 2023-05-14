@@ -61,7 +61,7 @@ const delay = (ms: number) => {
 export const NewCreditCardRegistrationPage = () => {
   const navigate = useNavigate();
   const { registerCreditCard } = usePayments();
-  const { validatedCreditCard: creditCard, setCreditCard } = usePaymentsForm();
+  const { creditCard, setCreditCard, validate } = usePaymentsForm();
 
   if (creditCard === null) {
     throw {
@@ -71,6 +71,11 @@ export const NewCreditCardRegistrationPage = () => {
 
   useEffect(() => {
     delay(2000).then(() => {
+      if (!validate(creditCard)) {
+        throw {
+          message: `올바르지 않은 신용카드 데이터입니다. (${JSON.stringify(creditCard)})`,
+        };
+      }
       const registeredCreditCard = registerCreditCard(creditCard);
       setCreditCard(registeredCreditCard);
 
