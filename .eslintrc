@@ -19,6 +19,7 @@
   "rules": {
     "prettier/prettier": "off",
     "no-throw-literal": "off",
+    "no-shadow": "off",
     "@typescript-eslint/consistent-type-imports": "error",
     "import/prefer-default-export": "off",
     "import/no-unresolved": "off",
