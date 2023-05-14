@@ -105,9 +105,8 @@ export const shouldPreventFocusMovement = (
   }
 
   const { month, year } = allCardInfo;
-  const date = { month, year };
 
-  const isValidDate = isInvalidDate(target, date);
+  const isValidDate = isInvalidDate(target, { month, year });
   if ((name === "month" || name === "year") && isValidDate) return true;
 
   const validValue = value.replace(ONLY_NUMBER, "");

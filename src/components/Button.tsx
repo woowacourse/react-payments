@@ -62,7 +62,6 @@ export const CloseButton = css`
   }
 
   &:active {
-    position: fixed;
     bottom: 26px;
     padding: 14px 0;
   }
