@@ -1,6 +1,5 @@
 import type { PropsWithChildren } from 'react';
-import { createContext, useCallback, useEffect, useMemo, useState } from 'react';
-
+import { createContext, useCallback, useMemo } from 'react';
 import type { CreditCard } from '../domain/CreditCard';
 import { usePersistedState } from '../hooks/usePersistedState';
 import { useValidation } from '../hooks/useValidation';
@@ -13,7 +12,6 @@ import {
 
 type PaymentsFormContextValue = {
   creditCard: Partial<CreditCard>;
-  validatedCreditCard: CreditCard | null;
   validationResult: Partial<Record<keyof CreditCard, string>>;
   setCreditCard: (creditCard: Partial<Omit<CreditCard, 'id'>>) => void;
   validate: (data: Partial<CreditCard>) => data is CreditCard;
@@ -37,17 +35,13 @@ export const PaymentsFormProvider = (props: PropsWithChildren) => {
       load: (key) => sessionStorage.getItem(key),
     },
   );
+
   const { validate, validateField, validationResult } = useValidation<CreditCard>({
     cardNumbers: validateCardNumbers,
     expirationDate: validateExpirationDate,
     cvc: validateCVC,
     password: validateCardPassword,
   });
-  const [validatedCreditCard, setValidatedCreditCard] = useState<CreditCard | null>(null);
-
-  useEffect(() => {
-    setValidatedCreditCard(validate(creditCard) ? creditCard : null);
-  }, [creditCard, setValidatedCreditCard, validate]);
 
   const clear = useCallback(() => {
     setCreditCard({});
@@ -56,22 +50,13 @@ export const PaymentsFormProvider = (props: PropsWithChildren) => {
   const contextValue = useMemo(
     () => ({
       creditCard,
-      validatedCreditCard,
       validationResult,
       setCreditCard,
       validate,
       validateField,
       clear,
     }),
-    [
-      creditCard,
-      validatedCreditCard,
-      validateField,
-      validationResult,
-      setCreditCard,
-      clear,
-      validate,
-    ],
+    [creditCard, validationResult, setCreditCard, validate, validateField, clear],
   );
 
   return (
