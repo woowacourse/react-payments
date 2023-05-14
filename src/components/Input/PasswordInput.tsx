@@ -60,6 +60,7 @@ export default function PasswordInput({
           maxLength={1}
           pattern={REGEX_PATTERN.PASSWORD}
           required
+          placeholder=""
           type="password"
           textAlign="center"
           {...secondPassword}

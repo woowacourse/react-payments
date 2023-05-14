@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from "@storybook/react";
 
-import NextButton from "../components/Button/NextButton";
+import NextButton from "./NextButton";
 
 const meta: Meta<typeof NextButton> = {
   component: NextButton,
-  title: "Button",
+  title: "Components/Button",
 };
 
 export default meta;

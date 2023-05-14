@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import CardLogo from "./CardLogo";
+import CardLogo from "./Button/CardLogo";
 import { Modal } from "eykmodal";
 
 const Wrapper = styled.div`

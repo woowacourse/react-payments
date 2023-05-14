@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { CARD_COMPANYS } from "../constant";
-import { useCardAction } from "../context/CardContext";
+import { CARD_COMPANYS } from "../../constant";
+import { useCardAction } from "../../context/CardContext";
 import { useModal } from "eykmodal";
 
 interface CardLogoProps {

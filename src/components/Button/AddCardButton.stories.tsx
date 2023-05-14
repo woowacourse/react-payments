@@ -1,10 +1,9 @@
 import { Meta, StoryObj } from "@storybook/react";
-
-import AddCardButton from "../components/Button/AddCardButton";
+import AddCardButton from "./AddCardButton";
 
 const meta: Meta<typeof AddCardButton> = {
   component: AddCardButton,
-  title: "Button",
+  title: "Components/Button",
 };
 
 export default meta;

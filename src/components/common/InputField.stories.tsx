@@ -1,21 +1,28 @@
 import { Meta, StoryObj } from "@storybook/react";
-import CardNumberInput from "../components/Input/CardNumberInput";
-import CvcInput from "../components/Input/CvcInput";
-import ExpirationInput from "../components/Input/ExpirationInput";
-import InputField from "../components/common/InputField";
-import OwnerInput from "../components/Input/OwnerInput";
-import PasswordInput from "../components/Input/PasswordInput";
-import { useInput } from "../hooks/useInput";
+import CardNumberInput from "../Input/CardNumberInput";
+import CvcInput from "../Input/CvcInput";
+import ExpirationInput from "../Input/ExpirationInput";
+import InputField from "./InputField";
+import OwnerInput from "../Input/OwnerInput";
+import PasswordInput from "../Input/PasswordInput";
+import { useInput } from "../../hooks/useInput";
 import { within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-const meta: Meta<typeof InputField> = {
+export default {
+  title: "Components/InputField",
   component: InputField,
-  title: "InputField",
-  tags: ["autodocs"],
-};
+  argTypes: {
+    kind: {
+      control: {
+        type: "select",
+        options: ["expiration", "cardNumber", "owner", "cvc", "password"],
+      },
+      exclude: true,
+    },
+  },
+} as Meta;
 
-export default meta;
 type Story = StoryObj<typeof InputField>;
 
 const defaultState = {
@@ -38,6 +45,7 @@ export const CardNumber: Story = {
     ),
   },
 };
+
 export const CardNumberInteraction: Story = () => {
   const firstNumber = useInput("", { name: "firstNumber" });
   const secondNumber = useInput("", { name: "secondNumber" });
@@ -89,18 +97,18 @@ CardNumberInteraction.play = async ({ canvasElement }) => {
   input4.blur();
 };
 
-export const Expiration: Story = {
-  args: {
-    kind: "expiration",
-    children: <ExpirationInput year={defaultState} month={defaultState} />,
-  },
-};
-
 export const Owner: Story = {
   args: {
     kind: "owner",
     children: <OwnerInput owner={defaultState} />,
     inputLength: "0/30",
+  },
+};
+
+export const Expiration: Story = {
+  args: {
+    kind: "expiration",
+    children: <ExpirationInput year={defaultState} month={defaultState} />,
   },
 };
 

@@ -1,11 +1,12 @@
 import { Meta, StoryObj } from "@storybook/react";
 
-import Card from "../components/Card";
+import Card from "./Card";
 import { CardContextProvider } from "../context/CardContext";
 import { ModalContextProvider } from "eykmodal";
 const meta: Meta<typeof Card> = {
   component: Card,
-  title: "Card",
+  title: "Components/Card",
+  tags: ["autodocs"],
 };
 
 export default meta;
