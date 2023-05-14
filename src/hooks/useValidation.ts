@@ -7,7 +7,7 @@ type Validation<Data extends object> = Partial<{
 type ValidationResult<Data extends object> = Partial<Record<keyof Data, string>>;
 
 export const useValidation = <Data extends object>(validateFns: Validation<Data>) => {
-  const [validationResult, setValidationResult] = useState<ValidationResult<Data>>({});
+  const [validationResult, setValidationResult] = useState<ValidationResult<Data> | null>(null);
 
   /**
    * 주어진 데이터에 대해 검증을 수행합니다.
@@ -54,7 +54,7 @@ export const useValidation = <Data extends object>(validateFns: Validation<Data>
       // validate 성공했으므로 validationResult에서 삭제
       setValidationResult(
         Object.fromEntries(
-          Object.entries(validationResult).filter(([itField]) => itField !== field),
+          Object.entries(validationResult ?? {}).filter(([itField]) => itField !== field),
         ) as ValidationResult<Data>,
       );
       return true;
@@ -67,5 +67,10 @@ export const useValidation = <Data extends object>(validateFns: Validation<Data>
     return false;
   };
 
-  return { validate, validateField, validationResult };
+  return {
+    validate,
+    validateField,
+    validity: validationResult === null ? false : Object.keys(validationResult).length === 0,
+    validationResult: validationResult ?? {},
+  };
 };
