@@ -59,29 +59,46 @@ export default function AddNicknamePage({
   const { first, second, third, fourth } = cardNumber;
   const { month, year } = expiration;
 
-  const onClick = () => {
-    const newCard = {
-      cardTitle: title,
-      cardNumber: {
-        first: first,
-        second: second,
-        third: third,
-        fourth: fourth,
-      },
-      expiration: {
-        month: month,
-        year: year,
-      },
-      owner: owner ? owner : "",
-      nickName: nickName.value,
-    };
+  const newCard = {
+    cardTitle: title,
+    cardNumber: {
+      first: first,
+      second: second,
+      third: third,
+      fourth: fourth,
+    },
+    expiration: {
+      month: month,
+      year: year,
+    },
+    owner: owner ? owner : "",
+    nickName: nickName.value,
+  };
 
+  async function addCardToList(newCard: CardInfo): Promise<CardInfo> {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(newCard);
+      }, 3000);
+      // setTimeout(() => {
+      //   reject(new Error("카드등록에 실패했습니다."));
+      // }, 3000);
+    });
+  }
+
+  const onClick = async () => {
     setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-      setCardList((prev) => [...prev, newCard]);
+    try {
+      const result = await addCardToList(newCard);
+      setCardList((prev) => [...prev, result]);
       setPageIndex(0);
-    }, 3000);
+    } catch (error) {
+      window.alert("카드등록에 실패했습니다.");
+      setPageIndex(1);
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return isLoading ? (
