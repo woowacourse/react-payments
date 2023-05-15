@@ -18,10 +18,10 @@ export interface Props {
   cardCo: CardCo;
 }
 
-export const renderingTest = (args: any) => (
+export const iconButtonTest = (args: any) => (
   <CardCoButton {...args}></CardCoButton>
 );
-renderingTest.args = {
+iconButtonTest.args = {
   cardCo: "woori",
 };
 

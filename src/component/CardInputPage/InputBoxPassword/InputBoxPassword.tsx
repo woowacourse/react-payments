@@ -1,8 +1,11 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 import CardPassword from "./CardPassword";
 
-import { CARD_ERROR_MESSAGE } from "../../../CONSTANT";
+import {
+  CARD_ERROR_MESSAGE,
+  EXPLANATION_MESSAGE,
+} from "../../../constant/message";
 import { nowStatus } from "../../../type";
 
 import "./inputBoxPassword.css";
@@ -19,32 +22,32 @@ export default function InputBoxPassword(props: InputBoxPasswordProps) {
   const { changePasswordStatus } = props;
 
   const [allStatus, setAllStatus] = useState<nowStatus[]>([1, 1]);
-  let hasError = useRef(false);
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
-    hasError.current = allStatus.includes(0) ? true : false;
+    setHasError(allStatus.includes(0));
 
     allStatus.every((status) => status === 2)
       ? changePasswordStatus(true)
       : changePasswordStatus(false);
   }, [allStatus]);
 
-  const changeHasError = (partIndex: number, state: nowStatus) => {
+  const changeEachPasswordStatus = (partIndex: number, state: nowStatus) => {
     const changedError = [...allStatus];
     changedError[partIndex] = state;
     return setAllStatus(changedError);
   };
 
   return (
-    <div className="input-box-card-password">
-      <p>카드 비밀번호</p>
+    <label className="input-box-card-password">
+      <p>{EXPLANATION_MESSAGE.INPUT_PASSWORD}</p>
       <CardPassword
-        changeHasError={changeHasError}
+        changeEachPasswordStatus={changeEachPasswordStatus}
         changePasswordStatus={changePasswordStatus}
       />
       <p className="error-message">
-        {hasError.current && CARD_ERROR_MESSAGE.INPUT_CARD_PASSWORD}
+        {hasError && CARD_ERROR_MESSAGE.INPUT_CARD_PASSWORD}
       </p>
-    </div>
+    </label>
   );
 }

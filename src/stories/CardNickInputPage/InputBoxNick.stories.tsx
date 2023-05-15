@@ -3,6 +3,7 @@ import InputBoxNick from "../../component/CardNickInputPage/InputBoxNick/InputBo
 
 import "../../style/reset.css";
 import "../../component/CardNickInputPage/InputBoxNick/inputBoxNick.css";
+import { BrowserRouter } from "react-router-dom";
 
 const meta: Meta = {
   title: "InputBoxNick component",
@@ -12,11 +13,16 @@ const meta: Meta = {
       action: "입력창이 변경되면 발생하는 이벤트",
     },
   },
+  decorators: [
+    (Story) => (
+      <BrowserRouter>
+        <Story />
+      </BrowserRouter>
+    ),
+  ],
 };
 
 export default meta;
 
-export const InputBoxNickTest = (args: any) => (
-  <InputBoxNick {...args}></InputBoxNick>
-);
-InputBoxNickTest.args = {};
+export const inputTest = (args: any) => <InputBoxNick {...args}></InputBoxNick>;
+inputTest.args = {};

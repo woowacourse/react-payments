@@ -1,8 +1,15 @@
 import { useState, ChangeEvent } from "react";
 
-import Input from "../../common/Input";
+import CardInfoInput from "../../common/CardInfoInput";
 
-import { CARD_ERROR_MESSAGE } from "../../../CONSTANT";
+import {
+  ARIA_LABEL_MESSAGE,
+  CARD_ERROR_MESSAGE,
+  EXPLANATION_MESSAGE,
+  PLACE_HOLDER,
+} from "../../../constant/message";
+import { INPUT_LENGTH_LIMIT } from "../../../constant/etc";
+
 import { makeAppropriateName } from "../../../util/trans";
 
 import "./inputBoxOwner.css";
@@ -22,7 +29,9 @@ export default function InputBoxOwner(props: InputBoxOwnerProps) {
   const [name, setName] = useState("");
 
   const changeName = (e: ChangeEvent<HTMLInputElement>) => {
-    const userInputName = e.target.value.slice(0, 30).toUpperCase();
+    const userInputName = e.target.value
+      .slice(0, INPUT_LENGTH_LIMIT.MAX_OWNER)
+      .toUpperCase();
     const appropriateName = makeAppropriateName(userInputName);
 
     if (userInputName !== appropriateName) {
@@ -37,21 +46,23 @@ export default function InputBoxOwner(props: InputBoxOwnerProps) {
   };
 
   return (
-    <div className="input-box-card-owner">
-      <p>카드 소유자 이름(선택)</p>
-      <p>{name.length}/30</p>
-      <Input
+    <label className="input-box-card-owner">
+      <p>{EXPLANATION_MESSAGE.INPUT_OWNER}</p>
+      <p aria-label={ARIA_LABEL_MESSAGE.COMPARE_NOW_LENGTH_AND_LIMIT}>
+        {name.length}/{INPUT_LENGTH_LIMIT.MAX_OWNER}
+      </p>
+      <CardInfoInput
+        inputPlace="optional"
         name="card-owner"
         className="input-card-owner"
         type="text"
         onChange={changeName}
-        placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-        inputMode="text"
+        placeholder={PLACE_HOLDER.OWNER}
         value={name}
       />
       <p className="error-message">
         {haveError && CARD_ERROR_MESSAGE.INPUT_CARD_OWNER}
       </p>
-    </div>
+    </label>
   );
 }

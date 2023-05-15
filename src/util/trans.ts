@@ -1,4 +1,4 @@
-import { REGULAR_EXPRESSION } from "../CONSTANT";
+import { REGULAR_EXPRESSION } from "../constant/etc";
 import { validateCardOwner } from "../validation/cardOwner";
 import { validateNumber } from "../validation/number";
 

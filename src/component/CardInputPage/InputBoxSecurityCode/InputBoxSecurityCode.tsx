@@ -1,11 +1,18 @@
 import { useState, ChangeEvent } from "react";
 
-import Input from "../../common/Input";
+import CardInfoInput from "../../common/CardInfoInput";
 
-import { CARD_ERROR_MESSAGE, GUIDE_MESSAGE } from "../../../CONSTANT";
+import {
+  ARIA_LABEL_MESSAGE,
+  CARD_ERROR_MESSAGE,
+  DIRECTION_MESSAGE,
+  EXPLANATION_MESSAGE,
+} from "../../../constant/message";
+
 import { makeAppropriateSecurityCode } from "../../../util/trans";
 
 import "./inputBoxSecurityCode.css";
+import { INPUT_LENGTH_LIMIT } from "../../../constant/etc";
 
 interface InputBoxSecurityProps {
   changeSecurityCodeStatus: (
@@ -23,14 +30,19 @@ export default function InputBoxSecurityCode(props: InputBoxSecurityProps) {
   const [guideClick, isGuideClick] = useState(false);
 
   const changeSecurityCode = (e: ChangeEvent<HTMLInputElement>) => {
-    const userSecurityCode = e.target.value.slice(0, 3);
+    const userSecurityCode = e.target.value.slice(
+      0,
+      INPUT_LENGTH_LIMIT.MAX_SECURITY_CODE
+    );
     const appropriateSecurityCode =
       makeAppropriateSecurityCode(userSecurityCode);
 
     if (userSecurityCode !== appropriateSecurityCode) {
       setHaveError(true);
       changeSecurityCodeStatus(false);
-    } else if (appropriateSecurityCode.length === 3) {
+    } else if (
+      appropriateSecurityCode.length === INPUT_LENGTH_LIMIT.MAX_SECURITY_CODE
+    ) {
       setHaveError(false);
       changeSecurityCodeStatus(true, appropriateSecurityCode);
     } else {
@@ -46,14 +58,14 @@ export default function InputBoxSecurityCode(props: InputBoxSecurityProps) {
   };
 
   return (
-    <div className="input-box-security-code">
-      <p>보안 코드(CVC/CVV)</p>
-      <Input
+    <label className="input-box-security-code">
+      <p>{EXPLANATION_MESSAGE.INPUT_SECURITY_CODE}</p>
+      <CardInfoInput
+        inputPlace="essential"
         name="security-code"
         className="input-security-code"
         type="password"
         onChange={changeSecurityCode}
-        inputMode="numeric"
         value={securityCode}
       />
       <button
@@ -64,11 +76,16 @@ export default function InputBoxSecurityCode(props: InputBoxSecurityProps) {
         ?
       </button>
       {guideClick && (
-        <p className="guide-security-code">{GUIDE_MESSAGE.SECURITY_CODE}</p>
+        <p
+          className="guide-security-code"
+          aria-label={ARIA_LABEL_MESSAGE.SECURITY_CODE_GUIDE_BUTTON}
+        >
+          {DIRECTION_MESSAGE.SECURITY_CODE}
+        </p>
       )}
       <p className="error-message">
         {haveError && CARD_ERROR_MESSAGE.INPUT_CARD_SECURITY}
       </p>
-    </div>
+    </label>
   );
 }

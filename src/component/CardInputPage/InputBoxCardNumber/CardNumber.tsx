@@ -1,14 +1,16 @@
 import { ChangeEvent, useState } from "react";
 
-import Input from "../../common/Input";
+import Input from "../../common/CardInfoInput";
 
 import { nowStatus } from "../../../type";
 import { makeAppropriateNumber } from "../../../util/trans";
 
 import "./cardNumber.css";
+import { PLACE_HOLDER } from "../../../constant/message";
+import { INPUT_LENGTH_LIMIT } from "../../../constant/etc";
 
 interface CardNumberProps {
-  changeHasError: (partIndex: number, state: nowStatus) => void;
+  changeEachNumberStatus: (partIndex: number, state: nowStatus) => void;
   changeCardNumberStatus: (
     completeState: boolean,
     value?: string,
@@ -17,23 +19,28 @@ interface CardNumberProps {
 }
 
 export default function CardNumber({
-  changeHasError,
+  changeEachNumberStatus,
   changeCardNumberStatus,
 }: CardNumberProps) {
   const [cardNumber, setCardNumber] = useState<string[]>([]);
 
   const onChangeCardNumber = (partIndex: number) => {
     return (e: ChangeEvent<HTMLInputElement>) => {
-      const userInputNumber = e.target.value.slice(0, 4);
+      const userInputNumber = e.target.value.slice(
+        0,
+        INPUT_LENGTH_LIMIT.MAX_EACH_CARD_NUMBER
+      );
       const appropriateNumber = makeAppropriateNumber(userInputNumber);
 
       if (userInputNumber !== appropriateNumber) {
-        changeHasError(partIndex, 0);
-      } else if (appropriateNumber.length === 4) {
-        changeHasError(partIndex, 2);
+        changeEachNumberStatus(partIndex, 0);
+      } else if (
+        appropriateNumber.length === INPUT_LENGTH_LIMIT.MAX_EACH_CARD_NUMBER
+      ) {
+        changeEachNumberStatus(partIndex, 2);
         changeCardNumberStatus(true, appropriateNumber, partIndex);
       } else {
-        changeHasError(partIndex, 1);
+        changeEachNumberStatus(partIndex, 1);
       }
 
       const result = [...cardNumber];
@@ -44,42 +51,18 @@ export default function CardNumber({
 
   return (
     <>
-      <Input
-        name="card-number-1"
-        className="first input-card-number"
-        type="text"
-        inputMode="numeric"
-        onChange={onChangeCardNumber(0)}
-        placeholder="XXXX"
-        value={cardNumber[0]}
-      />
-      <Input
-        name="card-number-2"
-        className=" input-card-number"
-        type="password"
-        inputMode="numeric"
-        onChange={onChangeCardNumber(1)}
-        placeholder="XXXX"
-        value={cardNumber[1]}
-      />
-      <Input
-        name="card-number-3"
-        className=" input-card-number"
-        type="password"
-        inputMode="numeric"
-        onChange={onChangeCardNumber(2)}
-        placeholder="XXXX"
-        value={cardNumber[2]}
-      />
-      <Input
-        name="card-number-4"
-        className="last input-card-number"
-        type="text"
-        inputMode="numeric"
-        onChange={onChangeCardNumber(3)}
-        placeholder="XXXX"
-        value={cardNumber[3]}
-      />
+      {new Array(4).fill(0).map((_, index) => (
+        <Input
+          inputPlace="essential"
+          key={`card-number-${index + 1}`}
+          name={`card-number-${index + 1}`}
+          className={`input-card-number`}
+          type={index === 1 || index === 2 ? "password" : "text"}
+          onChange={onChangeCardNumber(index)}
+          placeholder={PLACE_HOLDER.CARD_NUMBER}
+          value={cardNumber[index]}
+        />
+      ))}
     </>
   );
 }

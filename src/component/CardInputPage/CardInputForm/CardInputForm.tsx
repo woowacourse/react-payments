@@ -1,119 +1,81 @@
-import { useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRef } from "react";
+
+import Modal from "@chsua/bottom-modal";
 
 import Button from "../../common/Button";
 import CardPreview from "../../common/CardPreview";
+import CardCoButton from "../../common/CardCoButton";
+
 import InputBoxCardNumber from "../InputBoxCardNumber/InputBoxCardNumber";
 import InputBoxExpirationDate from "../InputBoxExpirationDate/InputBoxExpirationDate";
 import InputBoxOwner from "../InputBoxOwner/InputBoxOwner";
 import InputBoxPassword from "../InputBoxPassword/InputBoxPassword";
 import InputBoxSecurityCode from "../InputBoxSecurityCode/InputBoxSecurityCode";
-import CardCoModal from "../../common/CardCoModal";
 
-import { CardCo, CreditCard, InputStatus } from "../../../type";
-import { initialCard } from "../../../cardData";
-
+import { CardCo, CreditCard } from "../../../type";
+import { CARD_CO_NAME, EXPLANATION_MESSAGE } from "../../../constant/message";
 import "./cardInputForm.css";
+
+import { useModal } from "../../../hook/useModal";
+import { useCardInfoAndInput } from "../../../hook/useCardInfoAndInput";
+import { useLoading } from "../../../hook/useLoading";
+import { useAutoFocus } from "../../../hook/useAutoFocus";
 
 interface CardInputFormProps {
   addNewCard: (card: CreditCard) => void;
 }
 
-const cardInputComplete = {
-  cardCo: false,
-  cardNumber: false,
-  expirationDate: false,
-  owner: false,
-  securityCode: false,
-  password: false,
+const style = {
+  height: "250px",
+  inner: {
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr 1fr 1fr",
+    padding: "50px 10%",
+    minWidth: "375px",
+    rowGap: "20px",
+  },
 };
 
-const useCardCoModalState = () => {
-  const [modalOpen, setModalOpen] = useState(true);
-
-  function openCardCoModal() {
-    setModalOpen(true);
-  }
-
-  function closeCardCoModal() {
-    setModalOpen(false);
-  }
-
-  return { modalOpen, openCardCoModal, closeCardCoModal };
-};
-
-const useCardInfoAndInputState = (closeModal: Function) => {
-  const [inputStatus, setInputStatus] =
-    useState<InputStatus>(cardInputComplete);
-  const [nowCardInfo, setNowCardInfo] = useState<CreditCard>(initialCard);
-
-  const changeInputStatus = (inputName: keyof InputStatus) => {
-    return (completeState: boolean, value?: string, index?: number) => {
-      // 완료/미완료 setting
-      const changeInputStatus = JSON.parse(JSON.stringify(inputStatus));
-      changeInputStatus[inputName] = completeState;
-      setInputStatus(changeInputStatus);
-
-      //user input 입력
-      if (!completeState || value === undefined) return;
-
-      const changeNowCard = JSON.parse(JSON.stringify(nowCardInfo));
-      if (inputName === "cardCo") {
-        changeNowCard[inputName] = value as CardCo;
-        setNowCardInfo(changeNowCard);
-        closeModal();
-      } else if (inputName !== "cardNumber" && inputName !== "password") {
-        changeNowCard[inputName] = value;
-        setNowCardInfo(changeNowCard);
-      } else if (index !== undefined) {
-        changeNowCard[inputName][index] = value;
-        setNowCardInfo(changeNowCard);
-      }
-    };
-  };
-  return { inputStatus, nowCardInfo, changeInputStatus };
-};
-
-export default function CardInputForm(props: CardInputFormProps) {
-  const { modalOpen, openCardCoModal, closeCardCoModal } =
-    useCardCoModalState();
+export default function CardInputForm({ addNewCard }: CardInputFormProps) {
+  const { modalOpen, openModal, closeModal } = useModal();
+  const { startLoading } = useLoading();
 
   const isFormFilled = useRef(false);
   const { inputStatus, nowCardInfo, changeInputStatus } =
-    useCardInfoAndInputState(closeCardCoModal);
+    useCardInfoAndInput(closeModal);
+
   const { cardNumber, expirationDate, securityCode, password } = inputStatus;
   isFormFilled.current =
     cardNumber && expirationDate && securityCode && password;
 
-  const navigate = useNavigate();
-  const { addNewCard } = props;
   const submitCardInfo = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (isFormFilled.current) {
       addNewCard(nowCardInfo);
-      navigate("/CardNickInputPage");
+      startLoading();
     }
   };
 
+  const cardCoList = Object.keys(CARD_CO_NAME) as CardCo[];
+
   return (
-    <form onSubmit={(e) => submitCardInfo(e)} className="form">
-      {modalOpen && (
-        <CardCoModal
-          cardCoList={[
-            "woori",
-            "shinhan",
-            "hana",
-            "hyundai",
-            "lotte",
-            "bc",
-            "kb",
-            "kakao",
-          ]}
-          changeCardCoStatus={changeInputStatus("cardCo")}
-        />
-      )}
-      <CardPreview card={nowCardInfo} openCardCoModal={openCardCoModal} />
+    <form
+      onSubmit={(e) => submitCardInfo(e)}
+      className="form"
+      onChange={useAutoFocus()}
+    >
+      <Modal className="modal" isOpen={modalOpen} style={style}>
+        {cardCoList.map((cardCo) => (
+          <CardCoButton
+            key={cardCo}
+            cardCo={cardCo}
+            changeCardCoStatus={changeInputStatus("cardCo")}
+          />
+        ))}
+      </Modal>
+
+      <CardPreview card={nowCardInfo} openCardCoModal={openModal} />
       <InputBoxCardNumber
         changeCardNumberStatus={changeInputStatus("cardNumber")}
       />
@@ -128,8 +90,9 @@ export default function CardInputForm(props: CardInputFormProps) {
       <Button
         type="submit"
         style={isFormFilled.current ? {} : { color: "lightgrey" }}
+        aria-disabled={!isFormFilled.current}
       >
-        다음
+        {EXPLANATION_MESSAGE.NEXT_PAGE_BUTTON}
       </Button>
     </form>
   );

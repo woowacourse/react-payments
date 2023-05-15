@@ -1,13 +1,13 @@
 import type { Meta } from "@storybook/react";
 
-import Input from "../../component/common/Input";
+import CardInfoInput from "../../component/common/CardInfoInput";
 
 import "../../style/reset.css";
-import "../../component/common/input.css";
+import "../../component/common/cardInfoInput.css";
 
 const meta: Meta = {
-  title: "Input common component",
-  component: Input,
+  title: "CardInfoInput common component",
+  component: CardInfoInput,
   argTypes: {
     onChange: {
       action: "입력창이 변경되면 발생하는 이벤트",
@@ -17,7 +17,9 @@ const meta: Meta = {
 
 export default meta;
 
-export const InputTest = (args: any) => <Input {...args}></Input>;
+export const InputTest = (args: any) => (
+  <CardInfoInput {...args}></CardInfoInput>
+);
 InputTest.args = {
   type: "text",
   placeholder: "미리보기",

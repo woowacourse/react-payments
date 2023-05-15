@@ -1,5 +1,14 @@
 import { CreditCard } from "./type";
 
+export const initialCardInputComplete = {
+  cardCo: false,
+  cardNumber: false,
+  expirationDate: false,
+  owner: false,
+  securityCode: false,
+  password: false,
+};
+
 export const initialCard: CreditCard = {
   nickName: "",
   owner: "",

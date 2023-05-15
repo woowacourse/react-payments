@@ -1,20 +1,26 @@
 import { InputHTMLAttributes } from "react";
 
-import "./input.css";
+import "./cardInfoInput.css";
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {}
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  inputPlace: "essential" | "optional";
+}
 
 export default function Input(props: InputProps) {
   const {
+    inputPlace,
     name,
     type,
     onChange,
     placeholder,
-    inputMode,
     style,
     className,
     value,
   } = props;
+
+  const required = inputPlace === "essential";
+  const inputMode = inputPlace === "essential" ? "numeric" : "text";
+
   return (
     <input
       name={name}
@@ -24,6 +30,8 @@ export default function Input(props: InputProps) {
       inputMode={inputMode}
       onChange={onChange}
       placeholder={placeholder}
+      required={required}
+      aria-required={required}
       value={value}
     />
   );

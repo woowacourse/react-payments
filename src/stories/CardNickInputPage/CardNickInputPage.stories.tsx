@@ -21,10 +21,10 @@ const meta: Meta = {
   ],
 };
 
-export const renderingTest = (args: any) => (
+export const inputTest = (args: any) => (
   <CardNickInputPage {...args}></CardNickInputPage>
 );
-renderingTest.args = {
+inputTest.args = {
   card: filledCard_test,
 };
 

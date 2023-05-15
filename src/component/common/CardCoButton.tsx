@@ -1,4 +1,4 @@
-import { CARD_CO_NAME } from "../../CONSTANT";
+import { CARD_CO_NAME } from "../../constant/message";
 import { CardCo } from "../../type";
 import { GetCardCoIcon } from "../../util/getCardCoIcon";
 
@@ -17,9 +17,9 @@ export default function CardCoButton({
   cardCo,
   changeCardCoStatus,
 }: CardCoButtonProps) {
-  function submitCardCo() {
+  const submitCardCo = () => {
     changeCardCoStatus(true, cardCo);
-  }
+  };
 
   return (
     <button

@@ -2,25 +2,17 @@ import "./App.css";
 import "./style/reset.css";
 import "./style/palette.css";
 
-import { useState } from "react";
-
 import CardInputPage from "./component/CardInputPage/CardInputPage";
 import CardListPage from "./component/CardListPage/CardListPage";
 import CardNickInputPage from "./component/CardNickInputPage/CardNickInputPage";
+import RegisterSpinnerPage from "./component/RegisterSpinnerPage/RegisterSpinnerPage";
 
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import { CreditCard } from "./type";
+import { useCardList } from "./hook/useCardList";
+import { LINK_KEYWORD } from "./constant/page";
 
 function App() {
-  const [cardList, setCardList] = useState<CreditCard[]>([]);
-
-  const addNewCard = (card: CreditCard) => {
-    setCardList([...cardList, card]);
-  };
-
-  const setNickNewCard = (card: CreditCard) => {
-    setCardList([...cardList.slice(0, cardList.length - 1), card]);
-  };
+  const { cardList, addNewCard, setNickNewCard } = useCardList();
 
   return (
     <div className="App">
@@ -28,21 +20,25 @@ function App() {
         <Routes>
           <Route path="/" element={<CardListPage cardList={cardList} />} />
           <Route
-            path="/CardListPage"
+            path={LINK_KEYWORD.CARD_LIST}
             element={<CardListPage cardList={cardList} />}
           />
           <Route
-            path="/CardInputPage"
+            path={LINK_KEYWORD.CARD_INPUT_FORM}
             element={<CardInputPage addNewCard={addNewCard} />}
           />
           <Route
-            path="/CardNickInputPage"
+            path={LINK_KEYWORD.CARD_INPUT_NICK}
             element={
               <CardNickInputPage
                 card={cardList[cardList.length - 1]}
                 setNickNewCard={setNickNewCard}
               />
             }
+          />
+          <Route
+            path={LINK_KEYWORD.REGISTER_SPINNER}
+            element={<RegisterSpinnerPage />}
           />
         </Routes>
       </BrowserRouter>

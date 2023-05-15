@@ -1,4 +1,6 @@
-import { CARD_CO_NAME } from "../../CONSTANT";
+import { CARD_CO_NAME, PLACE_HOLDER } from "../../constant/message";
+import { INPUT_LENGTH_LIMIT } from "../../constant/etc";
+
 import { CreditCard } from "../../type";
 import { colorMatch } from "../../util/colorMatch";
 
@@ -42,10 +44,12 @@ export default function CardPreview({
         {previewNumber}
       </p>
       <span className="card-preview-name" style={{ color: color }}>
-        {owner !== "" ? owner.slice(0, 15) : "NAME"}
+        {owner !== ""
+          ? owner.slice(0, INPUT_LENGTH_LIMIT.MAX_SHOW_OWNER)
+          : PLACE_HOLDER.PREVIEW_OWNER}
       </span>
       <span className="card-preview-expireDate" style={{ color: color }}>
-        {expirationDate !== "" ? expirationDate : "MM/YY"}
+        {expirationDate !== "" ? expirationDate : PLACE_HOLDER.EXPIRATION_DATE}
       </span>
     </div>
   );
