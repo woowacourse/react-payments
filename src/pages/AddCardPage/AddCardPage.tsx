@@ -99,11 +99,9 @@ const AddCardPage = () => {
   return (
     <Container>
       <Modal modalOpen={modalOpen}>
-        <>
-          {CART_COMPANY.map((company) => (
-            <CardCompanyIcon company={company} onClickHandler={handleCardCompany} />
-          ))}
-        </>
+        {CART_COMPANY.map((company) => (
+          <CardCompanyIcon company={company} onClickHandler={handleCardCompany} />
+        ))}
       </Modal>
       <AppBar title={"카드 추가"} children={<Link to={PAGE.CARD_LIST}>〈</Link>} />
       <CardPreviewButton onClick={openModal}>
