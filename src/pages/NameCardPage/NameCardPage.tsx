@@ -1,21 +1,20 @@
-import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import { useCallback, useContext } from "react";
+import styled, { keyframes } from "styled-components";
 import CardPreview from "../../components/CardPreview/CardPreview";
 import { GlobalContext } from "../../context/GlobalProvider";
 import { PAGE } from "../../constant/PagePath";
 import { Button } from "../../components/common/Button";
 import { AddCardStateContext } from "../../context/AddCardStateProvider";
 import { Card } from "../../types";
+import useSpinner from "../../hooks/useSpinner";
 
 const NameCardPage = () => {
-  const navigate = useNavigate();
-
+  const { isLoading, startLoading, navigateAfterLoading } = useSpinner();
   const { cards, setCards } = useContext(GlobalContext);
   const { cardInfo, setCardInfo } = useContext(AddCardStateContext);
   const { cardName, cardCompany, cardNumber, expirationDate, ownerName, securityCode, password } = cardInfo;
 
-  const onSubmitHandler = () => {
+  const onSubmitHandler = useCallback(() => {
     const card: Card = {
       cardName,
       cardCompany,
@@ -27,8 +26,10 @@ const NameCardPage = () => {
     };
 
     setCards([...cards, card]);
-    navigate(PAGE.CARD_LIST);
-  };
+    startLoading();
+  }, [isLoading]);
+
+  if (isLoading) return navigateAfterLoading(PAGE.CARD_LIST);
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCardInfo({ ...cardInfo, cardName: e.target.value });
@@ -36,7 +37,7 @@ const NameCardPage = () => {
 
   return (
     <Container>
-      <h2>카드등록이 완료되었습니다.</h2>
+      <Message>카드 별칭을 지어주세요.</Message>
       <CardPreview card={{ cardCompany, cardNumber, expirationDate, ownerName }} />
       <Form onSubmit={onSubmitHandler}>
         <Input value={cardName} placeholder={"카드이름을 지어주세요."} onChange={onChangeHandler} autoFocus />
@@ -45,6 +46,15 @@ const NameCardPage = () => {
     </Container>
   );
 };
+
+const fadeIn = keyframes`
+  from  { opacity: 0; }
+  to  { opacity: 1; }
+`;
+
+const Message = styled.h2`
+  animation: ${fadeIn} 1s;
+`;
 
 const Form = styled.form`
   display: flex;

@@ -2,7 +2,7 @@ import { createContext, useState } from "react";
 import { Card } from "../types";
 import {
   cardNumberInitialValue,
-  emptyArrowFuction,
+  emptyArrowFunction,
   expirationDateInitialValue,
   passwordInitialValue,
 } from "../util/initialValue";
@@ -25,8 +25,8 @@ const initialValue = {
     securityCode: "",
     password: passwordInitialValue,
   },
-  setError: emptyArrowFuction,
-  setCardInfo: emptyArrowFuction,
+  setError: emptyArrowFunction,
+  setCardInfo: emptyArrowFunction,
 };
 
 export const AddCardStateContext = createContext<AddCardState>(initialValue);

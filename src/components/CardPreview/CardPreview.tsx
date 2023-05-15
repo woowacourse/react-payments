@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Card, CardCompany } from "../../types";
 import { ReactComponent as ICChip } from "../../assets/ic-chip.svg";
 import { memo } from "react";
-import { cardMap } from "../../constant/Card";
+import { cardData } from "../../constant/Card";
 
 type PreviewCard = Pick<Card, "cardNumber" | "ownerName" | "expirationDate" | "cardCompany">;
 
@@ -58,7 +58,7 @@ const CardLayout = styled.div<{ transition: string; transform: string; cardCompa
   justify-content: flex-end;
   gap: 4px;
 
-  background-color: ${({ cardCompany }) => (cardCompany ? cardMap.get(cardCompany)?.color : "#333333")};
+  background-color: ${({ cardCompany }) => (cardCompany ? cardData[cardCompany].color : "#333333")};
 
   min-height: 133px;
   width: 213px;

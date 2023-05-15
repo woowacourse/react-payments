@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { cardMap } from "../../constant/Card";
+import { CARD_DATA } from "../../constant/Card";
 import { CardCompany } from "../../types";
 
 type CardCompanyIconProps = {
@@ -10,7 +10,7 @@ type CardCompanyIconProps = {
 const CardCompanyIcon = ({ company, onClickHandler }: CardCompanyIconProps) => {
   return (
     <Wrapper name={company} onClick={onClickHandler}>
-      {company && cardMap.get(company)?.component}
+      {company && CARD_DATA[company].component}
       <Company>{company}</Company>
     </Wrapper>
   );
