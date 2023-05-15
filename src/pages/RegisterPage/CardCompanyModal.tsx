@@ -1,8 +1,9 @@
 import { css } from "styled-components";
 import CardCompany from "components/CardCompany";
-import Modal from "components/Modal";
+import Modal from "woowahan-yummy-modal/dist/Modal";
 import useInitCardInfo from "hooks/useInitCardInfo";
 import { CARD_COMPANIES } from "constants/cardCompanies";
+import { CloseButton } from "components/Button";
 
 const CardCompanyModal = () => {
   const { cardCompany } = useInitCardInfo().cardInfo;
@@ -10,9 +11,11 @@ const CardCompanyModal = () => {
   return (
     <Modal
       modalStyle={modalStyle}
+      buttonStyle={CloseButton}
       closeButtonName={
         cardCompany === "" ? "나중에 선택할래요" : "카드사를 선택했어요"
       }
+      direction="bottom"
     >
       {Object.keys(CARD_COMPANIES).map((company) => (
         <CardCompany key={company} cardCompanyName={company} />
@@ -37,20 +40,7 @@ const modalStyle = css`
   padding: 42px 22px 98px;
   border-radius: 5px 5px 0 0;
   background: #fdfdfd;
-
-  animation: modal-show 0.6s;
   overflow: hidden;
-
-  @keyframes modal-show {
-    from {
-      opacity: 0;
-      bottom: -600px;
-    }
-    to {
-      opacity: 1;
-      bottom: 0;
-    }
-  }
 `;
 
 export default CardCompanyModal;

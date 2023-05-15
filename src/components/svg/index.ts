@@ -6,3 +6,4 @@ export { ReactComponent as KbCard } from "./kb-card.svg";
 export { ReactComponent as LotteCard } from "./lotte-card.svg";
 export { ReactComponent as ShinhanCard } from "./shinhan-card.svg";
 export { ReactComponent as WooriCard } from "./woori-card.svg";
+export { ReactComponent as CardLoader } from "./loader.svg";

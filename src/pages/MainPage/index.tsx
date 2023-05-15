@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import Header from "components/Header";
+import Button from "components/Button";
 import CardPreview from "components/CardPreview";
-import { AddButton } from "components/style/ButtonStyle";
+import { AddButton } from "components/Button";
 import useInitMainPage from "hooks/useInitMainPage";
 
 const MainPage = () => {
@@ -12,18 +13,25 @@ const MainPage = () => {
       <Header navigator={false} title="보유카드" />
 
       <S.Main>
-        {cardList.map((card, index) => (
-          <div key={index}>
-            <CardPreview cardInfo={card} />
-            <S.Nickname>{card.nickname}</S.Nickname>
-          </div>
-        ))}
+        {cardList
+          .map((card, index) => (
+            <div key={index}>
+              <CardPreview cardInfo={card} />
+              <S.Nickname>{card.nickname}</S.Nickname>
+            </div>
+          ))
+          .reverse()}
 
         {!cardList.length && (
           <S.Message>새로운 카드를 등록해 주세요.</S.Message>
         )}
 
-        <AddButton onClick={goToRegister}>+</AddButton>
+        <Button
+          children="+"
+          name="카드 추가 버튼"
+          ButtonStyle={AddButton}
+          onClick={goToRegister}
+        />
       </S.Main>
     </S.Wrapper>
   );
@@ -32,7 +40,6 @@ const MainPage = () => {
 const S = {
   Wrapper: styled.div`
     max-width: 480px;
-    width: 88%;
 
     & > header {
       margin-bottom: 8px;

@@ -35,14 +35,13 @@ const CardNumberInput = () => {
       <S.Label className="label-text" htmlFor="card-label">
         카드 번호
       </S.Label>
-      <CardNumberInputBox>
+      <CardNumberInputBox role="group" aria-labelledby="card-label">
         {Array.from({ length: NUMBER_INPUT.COUNT }).map((_, index) => (
           <Fragment key={index}>
             <Input
               type="text"
               name={`number${index + 1}`}
               id={index ? undefined : "card-label"}
-              aria-labelledby="card-label"
               maxLength={LIMIT_LENGTH.CARD_NUMBER}
               inputMode="numeric"
               value={cardNumber[`number${index + 1}`]}

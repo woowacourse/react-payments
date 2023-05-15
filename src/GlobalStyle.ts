@@ -20,7 +20,13 @@ export const GlobalStyle = createGlobalStyle`
     display: none;
   }
 
-  body:has(.modal) {
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  body:has(.modal-open-true) {
     overflow: hidden;
   }
 
@@ -42,6 +48,7 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-box-pack: center;
     justify-content: center;
     margin-bottom: 30px;
+    padding: 0 24px;
   }
 
   .label-text {

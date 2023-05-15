@@ -1,8 +1,12 @@
 import { createContext, useState } from "react";
 import { ModalState, ProviderChildren } from "types";
 
-const ModalStateProvider = ({ children }: ProviderChildren) => {
-  const [isModalOpen, setIsModalOpen] = useState(true);
+interface Props extends ProviderChildren {
+  initialState: boolean;
+}
+
+const ModalStateProvider = ({ initialState, children }: Props) => {
+  const [isModalOpen, setIsModalOpen] = useState(initialState);
 
   return (
     <ModalStateContext.Provider

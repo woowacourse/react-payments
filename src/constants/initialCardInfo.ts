@@ -10,4 +10,5 @@ export const INITIAL_CARD_INFO = {
   code: "",
   password1: "",
   password2: "",
+  nickname: "",
 };

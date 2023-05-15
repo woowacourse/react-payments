@@ -1,0 +1,8 @@
+<svg viewBox="0 0 280 106" xmlns="http://www.w3.org/2000/svg" height="106px">
+  <rect x="0" y="0" width="170" height="106" fill="#D9D9D9" rx="10" transform="translate(100)">
+    <animate attributeName="width" from="140" to="85" dur="2s" begin="0.2s" repeatCount="indefinite" />
+  </rect>
+  <rect x="-100" y="0" width="85" height="106" fill="#333" rx="10" >
+    <animate attributeName="x" from="50" to="100" dur="2s" begin="0.2s" repeatCount="indefinite" />
+  </rect>
+</svg>

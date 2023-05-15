@@ -1,6 +1,6 @@
 import { CardInfo, ExpirationDate } from "types";
 import { LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
-const { VALID_MONTH } = VALID_INPUT;
+const { ONLY_NUMBER, ONLY_ENGLISH, VALID_MONTH } = VALID_INPUT;
 
 export const isInvalidDate = (
   target: HTMLInputElement | HTMLFormElement,
@@ -92,15 +92,24 @@ const validation = {
   },
 };
 
-export const validateJson = (data: string) => {
-  try {
-    return JSON.parse(data);
-  } catch (error) {
-    if (error instanceof Error) {
-      console.log(error.message);
+export const shouldPreventFocusMovement = (
+  target: EventTarget & HTMLFormElement,
+  allCardInfo: CardInfo
+) => {
+  const { name, value, maxLength } = target;
 
-      return [];
-    }
-    return [];
+  if (name === "name") {
+    const validValue = value.replace(ONLY_ENGLISH, "");
+
+    return validValue.length !== maxLength;
   }
+
+  const { month, year } = allCardInfo;
+
+  const isValidDate = isInvalidDate(target, { month, year });
+  if ((name === "month" || name === "year") && isValidDate) return true;
+
+  const validValue = value.replace(ONLY_NUMBER, "");
+
+  return validValue.length !== maxLength;
 };

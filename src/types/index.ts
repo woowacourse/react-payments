@@ -26,6 +26,7 @@ export interface Password {
 
 export interface CardInfo extends PreviewCardInfo, Password {
   code: string;
+  nickname: string;
 }
 
 type SetCardInfo = Dispatch<SetStateAction<CardInfo>>;

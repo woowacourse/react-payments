@@ -5,7 +5,7 @@ import {
   preventInvalidBlank,
 } from "utils/inputValidator";
 import Input, { NameInputStyle } from "components/Input";
-import LengthLimit from "components/LengthLimit";
+import TextLimit from "components/TextLimit";
 import useInitCardInfo from "hooks/useInitCardInfo";
 import { LIMIT_LENGTH, VALID_INPUT } from "constants/limit";
 const { ONLY_ENGLISH } = VALID_INPUT;
@@ -30,18 +30,15 @@ const NameInput = () => {
   return (
     <>
       <S.Wrapper>
-        <label className="label-text" htmlFor="name">
+        <label className="label-text" htmlFor="name-optional">
           카드 소유자 이름&#40;선택&#41;
         </label>
-        <LengthLimit
-          length={name.length}
-          lengthLimitStyle={nicknameLimitStyle}
-        />
+        <TextLimit length={name.length} textLimitStyle={nicknameLimitStyle} />
       </S.Wrapper>
       <Input
         type="text"
         name="name"
-        id="name"
+        id="name-optional"
         maxLength={LIMIT_LENGTH.NAME}
         value={name}
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."

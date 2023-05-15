@@ -6,8 +6,9 @@ const CardCompany = ({ cardCompanyName }: { cardCompanyName: string }) => {
   const { initCardInfo } = useInitCardInfo();
 
   return (
-    <S.Wrapper>
+    <S.Wrapper tabIndex={0}>
       <CardCompanyLogoSvg
+        aria-label={cardCompanyName}
         cardCompanyName={cardCompanyName}
         style={{ cursor: "pointer" }}
         onClick={() => initCardInfo("cardCompany", cardCompanyName)}

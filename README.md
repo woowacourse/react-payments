@@ -7,17 +7,87 @@
 
 <br>
 
+## step3
+
+<table align="middle">
+<thead>
+    <tr>
+      <th>페이먼츠 앱 실행 과정</th>
+      <th>404 페이지</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><img src="https://user-images.githubusercontent.com/108778921/236866287-51eb38a5-0cd2-408f-a72b-b26ad7c807e4.gif" alt="페이먼츠 앱 사용하는 과정" width="600px"></td>
+      <td><img src="https://user-images.githubusercontent.com/108778921/236865074-759efa6a-56c0-4a5b-ac8f-4be8b035947a.png" alt="404 페이지" width="400px"></td>
+    </tr>
+  </tbody>
+</table>
+
+
+### 📝 실행 방법
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="https://feb-dain.github.io/react-payments/mockup.html">💳 페이먼츠 앱 실행하기</a></td>
+      <td><a href="https://feb-dain.github.io/react-payments/storybook/">📕 스토리북 바로 보기</a></td>
+      <td><a href="https://www.npmjs.com/package/woowahan-yummy-modal">🔥 모달 라이브러리</a></td>
+    </tr>
+  </tbody>
+</table>
+
+- 터미널에서 npm 설치(`npm install`) 후 `npm start` 커맨드로 앱을 실행할 수 있다.
+
+<br>
+
+### 🚀 학습 목표
+
+> TypeScript와 함께 페이먼츠 앱을 개발자를 위한 라이브러리로 출시합니다.
+
+✔️ 라이브러리를 사용하는 개발자에게 `친절한 API 문서를 제공`합니다.  
+✔️ 라이브러리를 사용하는 개발자와 코드로 소통합니다.  
+✔️ 다양한 모듈 대응 케이스를 고민해보고 `실제로 NPM에 출시`합니다.  
+✔️ `Semantic Versioning`이 왜 필요한지 고민해봅니다.
+
+<br>
+
+### ✨ 필수 요구 사항
+
+> 재사용과 리팩터링
+
+- 사용하던 모달을 분리해서 npm으로 배포하고, 그 라이브러리를 직접 import해서 사용하기
+- 문서로서 스토리북을 고도화하기 위해 리팩터링
+- '카드를 등록중입니다' 스피너 추가
+
+<br>
+
+### ✅ 프로그래밍 요구사항
+
+> 이전 미션의 프로그래밍 요구사항은 기본으로 포함한다.
+
+- **Readability**
+
+  - custom hook을 이용해 재사용 가능한 기능을 추출한다.
+  - 공통적으로 사용되는 UI 컴포넌트를 재사용 가능하게 구현한다.
+
+- **Reusability**
+
+  - 각 스토리에 명확한 이름을 지정하고, 스토리 이름을 통해 컴포넌트의 사용 사례를 쉽게 이해할 수 있도록 한다.
+  - 변동 가능한 값에 대해 사용자가 직접 조작해볼 수 있게 하여 컴포넌트를 더욱 쉽게 이해할 수 있도록 한다.
+
+- **Performance**
+  - react에서 제공하는 hook을 이용하여 성능 최적화를 고려한다.
+  - Controlled & Uncontrolled Components를 고려하여 Form을 핸들링한다.
+
+<br>
+<br>
+
 ## step2
 
 <p align="middle" >
   <img src="https://user-images.githubusercontent.com/108778921/235309605-d1758c3b-fe18-46a6-abb4-6ede24e5d604.png">
 </p>
-
-### 📝 실행 방법
-
-- <a href="https://feb-dain.github.io/react-payments/mockup.html">앱 바로 실행하기</a>
-
-- 터미널에서 npm 설치(`npm install`) 후 `npm start` 커맨드로 앱을 실행할 수 있다.
 
 <br>
 
@@ -33,21 +103,19 @@
 
 ### ✅ 프로그래밍 요구사항
 
-이전 미션의 프로그래밍 요구사항은 기본으로 포함한다.
+> 이전 미션의 프로그래밍 요구사항은 기본으로 포함한다.
 
-- Readability
+- **Readability**
+
   - custom hook을 이용여 재사용 가능한 기능을 추출한다.
   - 공통적으로 사용되는 UI 컴포넌트를 재사용 가능하게 구현한다.
 
-<br>
+- **Reusability**
 
-- Reusability
   - 각 스토리에 명확한 이름을 지정하고, 스토리 이름을 통해 컴포넌트의 사용 사례를 쉽게 이해할 수 있도록 한다.
   - 변동 가능한 값에 대해 사용자가 직접 조작해볼 수 있게 하여 컴포넌트를 더욱 쉽게 이해할 수 있도록 한다.
 
-<br>
-
-- Performance
+- **Performance**
   - react에서 제공하는 hook을 이용하여 성능 최적화를 고려한다.
   - Controlled & Uncontrolled Components를 고려하여 Form을 핸들링한다.
 
@@ -116,13 +184,12 @@
 
 ### ✅ 프로그래밍 요구사항
 
-- Readability
+- **Readability**
+
   - custom hook을 이용여 재사용 가능한 기능을 추출한다.
   - 공통적으로 사용되는 UI 컴포넌트를 재사용 가능하게 구현한다.
 
-<br>
-
-- Reusability
+- **Reusability**
   - 각 스토리에 명확한 이름을 지정하고, 스토리 이름을 통해 컴포넌트의 사용 사례를 쉽게 이해할 수 있도록 한다.
   - 변동 가능한 값에 대해 사용자가 직접 조작해볼 수 있게 하여 컴포넌트를 더욱 쉽게 이해할 수 있도록 한다.
 

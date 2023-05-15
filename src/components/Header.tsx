@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { MAIN_PAGE } from "constants/path";
 
 interface Props {
   title: string;
@@ -10,7 +11,7 @@ const Header = ({ title, navigator }: Props) => {
   const navigate = useNavigate();
 
   const goToMain = () => {
-    navigate("/");
+    navigate(MAIN_PAGE);
   };
 
   return (

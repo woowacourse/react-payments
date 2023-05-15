@@ -7,6 +7,16 @@ export const decorators = [
   }),
 ];
 
+const customViewport = {
+  Default: {
+    name: "Default",
+    styles: {
+      width: "375px",
+      height: "667px",
+    },
+  },
+};
+
 const preview = {
   parameters: {
     actions: { argTypesRegex: "^on[A-Z].*" },
@@ -15,6 +25,10 @@ const preview = {
         color: /(background|color)$/i,
         date: /Date$/,
       },
+    },
+    viewport: {
+      viewports: { ...customViewport },
+      defaultViewport: "Default",
     },
   },
 };
