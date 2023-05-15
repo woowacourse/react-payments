@@ -6,26 +6,24 @@ import useSwitch from '../../../hooks/useSwitch';
 import { Header, CardPreview, Card, SelectBank } from '../../';
 import { CardRegisterForm, NicknameForm } from '../../Form';
 
-import { Modal } from 'react-reusable-modal';
+import { useModal } from 'react-reusable-modal';
 
 const CardRegisterPage = () => {
   const cardInfo = useCardInfoValue();
   const { state: showCardForm, turnOff: turnToNicknameForm } = useSwitch(true);
 
+  const { isModalOpen, Modal } = useModal();
+
   const modalOptions = {
-    position: 'bottom' as const,
-    closeTrigger: 'bank' as const,
-    initState: true,
-  };
+    position: 'bottom',
+  } as const;
 
   return (
     <styled.CardRegisterPage>
       {showCardForm && <Header />}
       {showCardForm ? (
         <>
-          <Modal trigger={<CardPreview />} options={modalOptions}>
-            <SelectBank />
-          </Modal>
+          <CardPreview />
           <CardRegisterForm turnToNicknameForm={turnToNicknameForm} />
         </>
       ) : (
@@ -34,6 +32,11 @@ const CardRegisterPage = () => {
           <Card cardInfo={cardInfo} />
           <NicknameForm />
         </styled.NicknameFormContainer>
+      )}
+      {isModalOpen && (
+        <Modal options={modalOptions}>
+          <SelectBank />
+        </Modal>
       )}
     </styled.CardRegisterPage>
   );

@@ -6,11 +6,16 @@ import { useCardInfoActions } from '../../context/CardInfoContext';
 
 import { BANKS } from '../../constants';
 
+import { useModal } from 'react-reusable-modal';
+
 const SelectBank = () => {
+  const { closeModal } = useModal();
+
   const { setCardInfo } = useCardInfoActions();
 
   const onClick = ({ currentTarget: { id } }: MouseEvent<HTMLDivElement>) => {
     setCardInfo((prev) => ({ ...prev, bank: id }));
+    closeModal();
   };
 
   return (
