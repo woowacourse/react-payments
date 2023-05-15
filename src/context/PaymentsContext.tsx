@@ -9,8 +9,9 @@ type PaymentsContextValue = {
   setCreditCards: Dispatch<CreditCard[]>;
   getCreditCardById: (id: number) => CreditCard | null;
   assignCreditCardId: () => number;
+  registerCreditCard: (creditCard: CreditCard) => CreditCard;
   updateCreditCard: (creditCard: CreditCard) => void;
-  recommendCreditCardDisplayName: (owner: string) => string;
+  recommendCreditCardDisplayName: (owner: string | undefined) => string;
 };
 
 export const PaymentsContext = createContext<PaymentsContextValue | null>(null);
@@ -44,7 +45,7 @@ export const PaymentsProvider = (props: PropsWithChildren) => {
   );
 
   const recommendCreditCardDisplayName = useCallback(
-    (owner: string) => {
+    (owner: string | undefined) => {
       const displayName = owner ? `${owner}의 카드` : '카드';
       let alterDisplayName = displayName;
       let count = 2;
@@ -59,12 +60,26 @@ export const PaymentsProvider = (props: PropsWithChildren) => {
     [creditCards],
   );
 
+  const registerCreditCard = useCallback(
+    (creditCard: CreditCard) => {
+      const newCreditCard = {
+        ...creditCard,
+        id: assignCreditCardId(),
+        displayName: creditCard.owner,
+      };
+      setCreditCards([...creditCards, newCreditCard]);
+      return newCreditCard;
+    },
+    [creditCards, setCreditCards, assignCreditCardId],
+  );
+
   const contextValue = useMemo(
     () => ({
       creditCards,
       setCreditCards,
       getCreditCardById,
       assignCreditCardId,
+      registerCreditCard,
       updateCreditCard,
       recommendCreditCardDisplayName,
     }),
@@ -73,6 +88,7 @@ export const PaymentsProvider = (props: PropsWithChildren) => {
       setCreditCards,
       getCreditCardById,
       assignCreditCardId,
+      registerCreditCard,
       updateCreditCard,
       recommendCreditCardDisplayName,
     ],

@@ -1,13 +1,13 @@
 import { useState } from 'react';
 
 type Validation<Data extends object> = Partial<{
-  [Field in keyof Data]: (value: Data[Field]) => void;
+  [Field in keyof Data]: (value: unknown) => void;
 }>;
 
 type ValidationResult<Data extends object> = Partial<Record<keyof Data, string>>;
 
 export const useValidation = <Data extends object>(validateFns: Validation<Data>) => {
-  const [validationResult, setValidationResult] = useState<ValidationResult<Data>>({});
+  const [validationResult, setValidationResult] = useState<ValidationResult<Data> | null>(null);
 
   /**
    * 주어진 데이터에 대해 검증을 수행합니다.
@@ -17,7 +17,7 @@ export const useValidation = <Data extends object>(validateFns: Validation<Data>
    * @param data 검증할 데이터 객체
    * @returns {boolean} 검증 성공 여부
    */
-  const validate = (data: Data) => {
+  const validate = (data: Partial<Data>): data is Data => {
     const nextValidationResult = (Object.keys(validateFns) as Array<keyof Data>).reduce(
       (progressValidationResult, field) => {
         // 각 필드마다 검증을 수행할 함수
@@ -27,6 +27,8 @@ export const useValidation = <Data extends object>(validateFns: Validation<Data>
           validateFn?.(data[field]);
           return progressValidationResult;
         } catch (e) {
+          if (e instanceof TypeError) return progressValidationResult;
+
           const error = e as Error;
           return { ...progressValidationResult, [field]: error.message };
         }
@@ -40,7 +42,10 @@ export const useValidation = <Data extends object>(validateFns: Validation<Data>
     return Object.keys(nextValidationResult).length === 0;
   };
 
-  const validateField = <Field extends keyof Data>(field: Field, value: Data[Field]) => {
+  const validateField = <Field extends keyof Data>(
+    field: Field,
+    value: unknown,
+  ): value is Data[Field] => {
     const validateFn = validateFns[field];
 
     try {
@@ -49,16 +54,23 @@ export const useValidation = <Data extends object>(validateFns: Validation<Data>
       // validate 성공했으므로 validationResult에서 삭제
       setValidationResult(
         Object.fromEntries(
-          Object.entries(validationResult).filter(([itField]) => itField !== field),
+          Object.entries(validationResult ?? {}).filter(([itField]) => itField !== field),
         ) as ValidationResult<Data>,
       );
       return true;
     } catch (e) {
+      if (e instanceof TypeError) return true;
+
       const error = e as Error;
       setValidationResult({ ...validationResult, [field]: error.message });
     }
     return false;
   };
 
-  return { validate, validateField, validationResult };
+  return {
+    validate,
+    validateField,
+    validity: validationResult === null ? false : Object.keys(validationResult).length === 0,
+    validationResult: validationResult ?? {},
+  };
 };

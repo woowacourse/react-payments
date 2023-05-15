@@ -1,15 +1,26 @@
+import { Modal } from '@solo5star/react-modal';
 import type { ComponentProps } from 'react';
 import styled from 'styled-components';
 import type { CreditCardVendor } from '../../domain/CreditCardVendor';
 import { CREDIT_CARD_VENDORS } from '../../domain/CreditCardVendor';
-import { BottomSheet } from '../common/BottomSheet';
 import { Text } from '../common/Text';
 import { VendorIcon } from './VendorIcon';
 
-const BottomSheetContent = styled.div`
-  display: flex;
-  justify-content: center;
-`;
+const BottomSheet = {
+  ...Modal,
+  Content: styled(Modal.Content)`
+    display: flex;
+    justify-content: center;
+
+    width: 100%;
+
+    padding: 16px;
+    padding-bottom: 24px;
+
+    border-radius: 5px 5px 0 0;
+    background: ${(props) => props.theme.color.grey1};
+  `,
+};
 
 const VendorButtonGroup = styled.div`
   display: grid;
@@ -26,16 +37,17 @@ const VendorButton = styled.button`
   gap: 10px;
 `;
 
-type NewCreditCardVendorBottomSheetProps = ComponentProps<typeof BottomSheet> & {
+type NewCreditCardVendorBottomSheetProps = ComponentProps<typeof Modal.Root> & {
   onClickVendor?: (vendor: CreditCardVendor) => void;
 };
 
 export const NewCreditCardVendorBottomSheet = (props: NewCreditCardVendorBottomSheetProps) => {
-  const { onClickVendor, ...bottomSheetProps } = props;
+  const { open, onClose, onClickVendor } = props;
 
   return (
-    <BottomSheet {...bottomSheetProps}>
-      <BottomSheetContent>
+    <BottomSheet.Root open={open} onClose={onClose}>
+      <BottomSheet.Backdrop onClick={onClose} />
+      <BottomSheet.Content placement="bottom">
         <VendorButtonGroup>
           {CREDIT_CARD_VENDORS.map((vendor) => (
             <VendorButton key={vendor} onClick={() => onClickVendor?.(vendor)}>
@@ -45,7 +57,7 @@ export const NewCreditCardVendorBottomSheet = (props: NewCreditCardVendorBottomS
             </VendorButton>
           ))}
         </VendorButtonGroup>
-      </BottomSheetContent>
-    </BottomSheet>
+      </BottomSheet.Content>
+    </BottomSheet.Root>
   );
 };

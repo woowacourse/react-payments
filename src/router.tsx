@@ -1,8 +1,9 @@
 import { Outlet, createBrowserRouter } from 'react-router-dom';
 import { CreditCardListPage } from './pages/CreditCardListPage';
 import { ErrorPage } from './pages/ErrorPage';
-import { NewCreditCardDisplayNamePage } from './pages/NewCreditCardDisplayNamePage';
+import { NewCreditCardCompletionPage } from './pages/NewCreditCardCompletionPage';
 import { NewCreditCardPage } from './pages/NewCreditCardPage';
+import { NewCreditCardRegistrationPage } from './pages/NewCreditCardRegistrationPage';
 
 export const router = createBrowserRouter(
   [
@@ -16,12 +17,16 @@ export const router = createBrowserRouter(
           element: <CreditCardListPage />,
         },
         {
-          path: 'register',
+          path: 'new',
           element: <NewCreditCardPage />,
         },
         {
+          path: 'register',
+          element: <NewCreditCardRegistrationPage />,
+        },
+        {
           path: 'complete',
-          element: <NewCreditCardDisplayNamePage />,
+          element: <NewCreditCardCompletionPage />,
         },
       ],
     },
