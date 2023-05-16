@@ -23,7 +23,6 @@ export function ExpiredDate() {
     }
     if (!validation.isCorrectYear(target.value)) {
       setError(true);
-      console.log(target.value);
       return;
     }
     setError(false);
