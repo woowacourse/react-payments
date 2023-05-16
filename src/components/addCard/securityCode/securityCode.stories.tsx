@@ -19,7 +19,7 @@ export const FailedInput: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const code = canvas.getByRole("code");
+    const code = canvas.getByRole("textbox");
 
     await userEvent.type(code, "11", {
       delay: 100,
@@ -33,7 +33,7 @@ export const SuccessInput: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const code = canvas.getByRole("code");
+    const code = canvas.getByRole("textbox");
 
     await userEvent.type(code, "111", {
       delay: 100,

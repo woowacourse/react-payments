@@ -19,7 +19,7 @@ export function SecurityCode() {
             minLength={TEXT_LENGTH.CODE}
             type="password"
             name="code"
-            role="code">
+            role="textbox">
             <SecurityCodeInput />
           </Input.Unit>
         </Input.Group>

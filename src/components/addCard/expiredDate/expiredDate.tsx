@@ -42,7 +42,7 @@ export function ExpiredDate() {
             maxLength={2}
             minLength={TEXT_LENGTH.MONTH}
             placeholder={PLACEHOLDER.MONTH}
-            role="month"
+            role="textbox"
             asChild>
             <DateInput />
           </Input.Unit>
@@ -53,7 +53,7 @@ export function ExpiredDate() {
             minLength={TEXT_LENGTH.YEAR}
             placeholder={PLACEHOLDER.YEAR}
             onBlur={checkIsCorrectYear}
-            role="year"
+            role="textbox"
             asChild>
             <DateInput />
           </Input.Unit>

@@ -32,7 +32,7 @@ export function CardNumber() {
                   }
                   maxLength={4}
                   minLength={4}
-                  role={cardInput}
+                  role="textbox"
                   asChild>
                   <CustomInput />
                 </Input.Unit>

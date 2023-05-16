@@ -27,13 +27,13 @@ export const FailedInput: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const month = canvas.getByRole("month");
+    const month = canvas.getAllByRole("textbox")[0];
 
     await userEvent.type(month, "31", {
       delay: 100,
     });
 
-    const year = canvas.getByRole("year");
+    const year = canvas.getAllByRole("textbox")[1];
 
     await userEvent.type(year, "21", {
       delay: 100,
@@ -47,13 +47,13 @@ export const SuccessInput: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const month = canvas.getByRole("month");
+    const month = canvas.getAllByRole("textbox")[0];
 
     await userEvent.type(month, "3", {
       delay: 100,
     });
 
-    const year = canvas.getByRole("year");
+    const year = canvas.getAllByRole("textbox")[1];
 
     await userEvent.type(year, "25", {
       delay: 100,
