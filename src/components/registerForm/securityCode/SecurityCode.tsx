@@ -55,7 +55,7 @@ function SecurityCode() {
       <FormLabel>{'보안 코드(CVC/CVV)'}</FormLabel>
       <FormInput
         data-testid="security-code"
-        $primary={true}
+        primary={true}
         width="100px"
         value={creditCard.securityCode}
         onChange={_onChange}

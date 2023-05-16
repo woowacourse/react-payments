@@ -58,7 +58,7 @@ function CardRegisterForm({ isLoading, setIsLoading }: CardRegisterFormProps) {
           <CardPassword />
 
           <div style={{ display: 'flex', justifyContent: 'end' }}>
-            <Button $primary={true} width="auto" size="large" disabled={!hasShowButton}>
+            <Button primary={true} width="auto" size="large" disabled={!hasShowButton}>
               다음
             </Button>
           </div>

@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 export interface InputProps {
-  $primary?: boolean;
+  primary?: boolean;
   textAlign?: 'center' | 'left' | 'right';
   inputSize?: 'small' | 'medium' | 'large';
   width?: string;
@@ -45,8 +45,8 @@ export const Input = styled.input<InputProps>`
 
   ${({ inputSize: size }) => getSizeStyles(size)}
 
-  ${({ $primary }) =>
-    $primary &&
+  ${({ primary }) =>
+    primary &&
     css`
       box-shadow: 1px 1px 1px var(--primary-color);
     `}

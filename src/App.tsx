@@ -9,7 +9,7 @@ const App = () => {
       <GlobalStyle />
       <Layout>
         <CreditCardProvider>
-          <Outlet></Outlet>
+          <Outlet/>
         </CreditCardProvider>
       </Layout>
     </>

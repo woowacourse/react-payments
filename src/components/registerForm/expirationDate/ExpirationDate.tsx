@@ -87,7 +87,7 @@ function ExpirationDate() {
       <div style={{ display: 'flex', columnGap: '10px' }}>
         <FormInput
           data-testid="expiration-date-0"
-          $primary={true}
+          primary={true}
           value={creditCard.expirationDate[0]}
           ref={(el: HTMLInputElement) => {
             inputListRef.current[0] = el;
@@ -105,7 +105,7 @@ function ExpirationDate() {
 
         <FormInput
           data-testid="expiration-date-1"
-          $primary={true}
+          primary={true}
           value={creditCard.expirationDate[1]}
           ref={(el: HTMLInputElement) => {
             inputListRef.current[1] = el;

@@ -27,7 +27,7 @@ type Story = StoryObj<typeof meta>;
 
 export const small_primary = {
   args: {
-    $primary: true,
+    primary: true,
     size: 'small',
     children: '더보기',
     width: 'full',
@@ -36,7 +36,7 @@ export const small_primary = {
 
 export const large_non_primary = {
   args: {
-    $primary: false,
+    primary: false,
     size: 'large',
     children: '더보기',
   },
@@ -44,7 +44,7 @@ export const large_non_primary = {
 
 export const large_non_disabled_primary = {
   args: {
-    $primary: false,
+    primary: false,
     size: 'large',
     disabled: true,
     children: '더보기',

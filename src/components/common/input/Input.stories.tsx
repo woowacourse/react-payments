@@ -24,7 +24,7 @@ type Story = StoryObj<typeof meta>;
 
 export const 카드번호_뒷자리 = {
   args: {
-    $primary: true,
+    primary: true,
     type: 'password',
     maxLength: 4,
     size: 'small',
@@ -35,7 +35,7 @@ export const 카드번호_뒷자리 = {
 
 export const 소유자_이름 = {
   args: {
-    $primary: false,
+    primary: false,
     type: 'text',
     maxLength: 30,
     size: 'large',

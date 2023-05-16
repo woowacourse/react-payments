@@ -72,7 +72,7 @@ function SuccessPage() {
                 <StyleErrorMessage>{'1글자 이상 10글자 이하로 입력해주세요.'}</StyleErrorMessage>
               )}
             </div>
-            <Button $primary={true} width="full" onClick={handleSubmit}>
+            <Button primary={true} width="full" onClick={handleSubmit}>
               확인
             </Button>
           </CardInputContainer>

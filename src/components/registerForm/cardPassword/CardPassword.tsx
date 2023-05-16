@@ -63,7 +63,7 @@ function CardPassword() {
       <PasswordInputContainer>
         {Array.from({ length: 2 }, (_, index) => (
           <FormInput
-            $primary={true}
+            primary={true}
             width="50px"
             data-testid={`password-${index}`}
             key={`card-password-${index}`}

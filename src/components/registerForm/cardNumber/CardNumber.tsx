@@ -73,7 +73,7 @@ export const CardNumber = () => {
       <CardNumberInputContainer>
         {Array.from({ length: 4 }, (_, index) => (
           <FormInput
-            $primary={true}
+            primary={true}
             key={`card-number-${index}`}
             data-testid={`card-number-${index}`}
             value={creditCard.cardNumber[index]}

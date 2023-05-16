@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 interface ButtonProps {
-  $primary?: boolean;
+  primary?: boolean;
   size?: 'small' | 'medium' | 'large';
   width?: 'auto' | 'full';
 }
@@ -42,8 +42,8 @@ const Button = styled.button<ButtonProps>`
 
   ${({ size }) => getSizeStyles(size)}
 
-  ${({ $primary }) =>
-    !$primary &&
+  ${({ primary }) =>
+    !primary &&
     css`
       background: var(--white);
       color: var(--primary-color);
