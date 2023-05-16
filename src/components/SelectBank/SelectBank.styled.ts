@@ -1,29 +1,17 @@
 import styled from 'styled-components';
 
 export const SelectBank = styled.div`
-  position: fixed;
-  bottom: 0;
-
   display: flex;
   justify-content: center;
-
   width: 100%;
-  height: 227px;
-
   z-index: 1;
-
-  background-color: white;
 `;
 
 export const Banks = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-row-gap: 26px;
-  grid-column-gap: 36px;
-
-  padding: 34px 50px 40px 50px;
-
-  width: 100%;
+  grid-row-gap: 16px;
+  grid-column-gap: 26px;
   max-width: 600px;
 `;
 
@@ -31,8 +19,13 @@ export const Bank = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  padding: 10px;
+  border-radius: 4px;
+  transition: ease-in-out 0.1s;
   cursor: pointer;
+  &:hover {
+    background-color: rgba(1, 1, 1, 0.2);
+  }
 `;
 
 export const Icon = styled.div`

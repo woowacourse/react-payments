@@ -21,7 +21,7 @@ const SelectBankStories = () => {
       {state && (
         <CardInfoProvider>
           <Modal closeModal={closeModal}>
-            <SelectBank closeModal={closeModal} />
+            <SelectBank />
           </Modal>
         </CardInfoProvider>
       )}

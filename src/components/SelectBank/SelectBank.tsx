@@ -6,11 +6,11 @@ import { useCardInfoActions } from '../../context/CardInfoContext';
 
 import { BANKS } from '../../constants';
 
-interface Props {
-  closeModal: () => void;
-}
+import { useModal } from 'react-reusable-modal';
 
-const SelectBank = ({ closeModal }: Props) => {
+const SelectBank = () => {
+  const { closeModal } = useModal();
+
   const { setCardInfo } = useCardInfoActions();
 
   const onClick = ({ currentTarget: { id } }: MouseEvent<HTMLDivElement>) => {
@@ -22,7 +22,7 @@ const SelectBank = ({ closeModal }: Props) => {
     <styled.SelectBank>
       <styled.Banks>
         {Object.entries(BANKS).map(([key, bank]) => (
-          <styled.Bank key={key} id={key} onClick={onClick}>
+          <styled.Bank key={key} id={key} onClick={onClick} className="bank">
             <styled.Icon>
               <img src={bank.logo} alt={`${bank.name}_logo`} />
             </styled.Icon>

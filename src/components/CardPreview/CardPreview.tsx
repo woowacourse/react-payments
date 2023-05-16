@@ -4,11 +4,10 @@ import { useCardInfoValue } from '../../context/CardInfoContext';
 
 import { Card } from '../';
 
-interface CardPreviewProps {
-  openModal: () => void;
-}
+import { useModal } from 'react-reusable-modal';
 
-const CardPreview = ({ openModal }: CardPreviewProps) => {
+const CardPreview = () => {
+  const { openModal } = useModal();
   const cardInfo = useCardInfoValue();
 
   return (
