@@ -10,10 +10,9 @@ import { ImageContainer, StyledBankImage } from './CardCompanyIconContainer.styl
 
 type Props = {
   cardCompany: CardCompanyEng;
-  onClose: () => void;
 };
 
-const CardCompanyIconContainer = ({ cardCompany, onClose }: Props) => {
+const CardCompanyIconContainer = ({ cardCompany }: Props) => {
   const KoreanName = KOR_NAME_BY_CARD_COMPANY[cardCompany];
   const { setCreditCard } = useContext(CreditCardContext) as CreditCardContextType;
 
@@ -21,7 +20,6 @@ const CardCompanyIconContainer = ({ cardCompany, onClose }: Props) => {
     const company = event.currentTarget.dataset['company'] as CardCompanyEng;
 
     setCreditCard('cardCompany', company);
-    onClose();
   };
 
   return (
@@ -31,6 +29,7 @@ const CardCompanyIconContainer = ({ cardCompany, onClose }: Props) => {
         src={ICON_BY_CARD_COMPANY[cardCompany]}
         onClick={handleClickImage}
         data-testid={`company-icon-${cardCompany}`}
+        data-modal="close"
       ></StyledBankImage>
       <p>{KoreanName}</p>
     </ImageContainer>

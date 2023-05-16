@@ -1,15 +1,15 @@
 import { Outlet } from 'react-router-dom';
-import Layout from './components/@common/Layout';
+import Layout from './components/common/Layout';
 import { CreditCardProvider } from './contexts/CreditCardContext';
 import GlobalStyle from './styles/globalStyle';
 
 const App = () => {
   return (
     <>
+      <GlobalStyle />
       <Layout>
         <CreditCardProvider>
-          <GlobalStyle />
-          <Outlet></Outlet>
+          <Outlet/>
         </CreditCardProvider>
       </Layout>
     </>

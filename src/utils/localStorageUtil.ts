@@ -1,6 +1,6 @@
 interface LocalStorageUtilType {
   getItem: (key: string) => any;
-  setItem: (key: string, value: any) => void;
+  setItem: (key: string, value: any) => Promise<void>;
   removeItem: (key: string) => void;
   clear: () => void;
 }
@@ -19,7 +19,12 @@ const localStorageUtil: LocalStorageUtilType = {
   },
 
   setItem(key, value) {
-    localStorage.setItem(key, JSON.stringify(value));
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        localStorage.setItem(key, JSON.stringify(value));
+        resolve();
+      }, 10000);
+    });
   },
 
   removeItem(key) {

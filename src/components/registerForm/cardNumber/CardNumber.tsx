@@ -1,10 +1,10 @@
 import React, { useState, useContext, useRef } from 'react';
 
 import useAutoFocus from '../../../hooks/useAutoFocus';
-import FormLabel from '../../@common/FormLabel';
-import Input from '../../@common/input/Input';
-import ErrorSpan from '../../@common/ErrorSpan';
-import InputWrapper from '../../@common/InputWrapper';
+import FormLabel from '../../common/FormLabel';
+import FormInput from '../../common/FormInput';
+import ErrorSpan from '../../common/ErrorSpan';
+import InputWrapper from '../../common/InputWrapper';
 import CardNumberInputContainer from './CardNumber.style';
 import CreditCardContextType from '../../../@types/creditCardContextType';
 import { CreditCardContext } from '../../../contexts/CreditCardContext';
@@ -13,7 +13,7 @@ export const CardNumber = () => {
   const { creditCard, setCreditCard } = useContext(CreditCardContext) as CreditCardContextType;
 
   const [validStatus, setValidStatus] = useState({
-    isValid: false,
+    isValid: true,
     message: '',
   });
 
@@ -72,9 +72,10 @@ export const CardNumber = () => {
       <FormLabel>카드 번호</FormLabel>
       <CardNumberInputContainer>
         {Array.from({ length: 4 }, (_, index) => (
-          <Input
-            data-testid={`card-number-${index}`}
+          <FormInput
+            primary={true}
             key={`card-number-${index}`}
+            data-testid={`card-number-${index}`}
             value={creditCard.cardNumber[index]}
             onChange={handleChangeByIndex(index)}
             onBlur={index === 3 ? handleBlurLast : handleBlur}
@@ -83,6 +84,7 @@ export const CardNumber = () => {
             ref={(el: HTMLInputElement) => {
               inputListRef.current[index] = el;
             }}
+            hasError={!validStatus.isValid}
           />
         ))}
       </CardNumberInputContainer>

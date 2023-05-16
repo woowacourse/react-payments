@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import OwnerNameInput from './OwnerName';
 import { CreditCardProvider } from '../../../contexts/CreditCardContext';
+import GlobalStyle from '../../../styles/globalStyle';
 
 const ownerNameInput = {
   component: OwnerNameInput,
@@ -9,6 +10,7 @@ const ownerNameInput = {
     (Story) => {
       return (
         <CreditCardProvider>
+          <GlobalStyle />
           <Story />
         </CreditCardProvider>
       );

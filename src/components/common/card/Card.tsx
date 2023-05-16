@@ -10,9 +10,17 @@ interface CardProps {
   expirationDate: string[];
   onClick?: React.MouseEventHandler<HTMLDivElement>;
   cardCompany: CardCompanyEng;
+  className?: string;
 }
 
-const Card = ({ cardNumber, ownerName, expirationDate, cardCompany, onClick }: CardProps) => {
+const Card = ({
+  cardNumber,
+  ownerName,
+  expirationDate,
+  cardCompany,
+  className,
+  onClick,
+}: CardProps) => {
   const cardNumberList = useCardNumber(cardNumber);
 
   return (
@@ -22,6 +30,7 @@ const Card = ({ cardNumber, ownerName, expirationDate, cardCompany, onClick }: C
       cardCompany={cardCompany}
       color={cardCompany === 'hyundai' ? 'white' : 'black'}
       data-testid={'card-image'}
+      className={className}
     >
       <span>{KOR_NAME_BY_CARD_COMPANY[cardCompany]}</span>
       <StyleCardChip />

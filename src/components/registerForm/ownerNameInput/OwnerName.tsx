@@ -2,10 +2,10 @@ import React, { useState, useContext } from 'react';
 
 import { CreditCardContext } from '../../../contexts/CreditCardContext';
 import { CONTINUOUS_EMPTY_REGEXP, ONLY_ENG_AND_EMPTY_REGEXP } from '../../../utils/regexp';
-import FormLabel from '../../@common/FormLabel';
-import Input from '../../@common/input/Input';
-import ErrorSpan from '../../@common/ErrorSpan';
-import InputWrapper from '../../@common/InputWrapper';
+import FormLabel from '../../common/FormLabel';
+import FormInput from '../../common/FormInput';
+import ErrorSpan from '../../common/ErrorSpan';
+import InputWrapper from '../../common/InputWrapper';
 import LabelContainer from './OwnerName.style';
 import CreditCardContextType from '../../../@types/creditCardContextType';
 
@@ -70,7 +70,7 @@ function OwnerNameInput() {
         <FormLabel>카드 소유자 이름(선택)</FormLabel>
         <span>{`${creditCard.ownerName.length} / 30`}</span>
       </LabelContainer>
-      <Input
+      <FormInput
         data-testid="owner-name"
         value={creditCard.ownerName}
         onChange={_onChange}

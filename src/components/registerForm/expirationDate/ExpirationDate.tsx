@@ -1,15 +1,15 @@
 import React, { useState, useContext, useRef } from 'react';
 
-import FormLabel from '../../@common/FormLabel';
-import Input from '../../@common/input/Input';
-import ErrorSpan from '../../@common/ErrorSpan';
+import FormLabel from '../../common/FormLabel';
+import FormInput from '../../common/FormInput';
+import ErrorSpan from '../../common/ErrorSpan';
 import { CreditCardContext } from '../../../contexts/CreditCardContext';
 import {
   ONLY_NUMBER_REGEXP,
   VALID_EXPIRATION_MONTH_REGEX,
   VALID_EXPIRATION_YEAR_REGEX,
 } from '../../../utils/regexp';
-import InputWrapper from '../../@common/InputWrapper';
+import InputWrapper from '../../common/InputWrapper';
 import CreditCardContextType from '../../../@types/creditCardContextType';
 import useAutoFocus from '../../../hooks/useAutoFocus';
 
@@ -85,12 +85,14 @@ function ExpirationDate() {
     <InputWrapper>
       <FormLabel>{'만료일'}</FormLabel>
       <div style={{ display: 'flex', columnGap: '10px' }}>
-        <Input
+        <FormInput
           data-testid="expiration-date-0"
+          primary={true}
           value={creditCard.expirationDate[0]}
           ref={(el: HTMLInputElement) => {
             inputListRef.current[0] = el;
           }}
+          hasError={!validStatus.isValid}
           onChange={handleChange(0)}
           maxLength={2}
           inputMode="numeric"
@@ -101,21 +103,21 @@ function ExpirationDate() {
           line-height="21px"
         />
 
-        <Input
+        <FormInput
           data-testid="expiration-date-1"
+          primary={true}
           value={creditCard.expirationDate[1]}
           ref={(el: HTMLInputElement) => {
             inputListRef.current[1] = el;
           }}
+          width="100px"
+          hasError={!validStatus.isValid}
           onChange={handleChange(1)}
           onBlur={handleBlur}
           maxLength={2}
           inputMode="numeric"
           placeholder="YY"
-          width="100px"
           text-align="center"
-          font-weight="500"
-          line-height="21px"
         />
       </div>
       {!validStatus.isValid && <ErrorSpan>{validStatus.message}</ErrorSpan>}

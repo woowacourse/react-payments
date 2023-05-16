@@ -2,10 +2,10 @@ import React, { useState, useContext } from 'react';
 
 import { CreditCardContext } from '../../../contexts/CreditCardContext';
 import { ONLY_NUMBER_REGEXP } from '../../../utils/regexp';
-import FormLabel from '../../@common/FormLabel';
-import Input from '../../@common/input/Input';
-import ErrorSpan from '../../@common/ErrorSpan';
-import InputWrapper from '../../@common/InputWrapper';
+import FormLabel from '../../common/FormLabel';
+import FormInput from '../../common/FormInput';
+import ErrorSpan from '../../common/ErrorSpan';
+import InputWrapper from '../../common/InputWrapper';
 import CreditCardContextType from '../../../@types/creditCardContextType';
 
 function SecurityCode() {
@@ -53,15 +53,16 @@ function SecurityCode() {
   return (
     <InputWrapper>
       <FormLabel>{'보안 코드(CVC/CVV)'}</FormLabel>
-      <Input
+      <FormInput
         data-testid="security-code"
+        primary={true}
+        width="100px"
         value={creditCard.securityCode}
         onChange={_onChange}
         onBlur={_onBlur}
         maxLength={3}
         type="password"
         inputMode="numeric"
-        width="84px"
         text-align="center"
       />
       {!validStatus.isValid && <ErrorSpan>{validStatus.message}</ErrorSpan>}

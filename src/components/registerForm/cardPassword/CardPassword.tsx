@@ -2,11 +2,11 @@ import React, { useState, useContext, useRef } from 'react';
 
 import useAutoFocus from '../../../hooks/useAutoFocus';
 import { ONLY_NUMBER_REGEXP } from '../../../utils/regexp';
-import FormLabel from '../../@common/FormLabel';
-import Input from '../../@common/input/Input';
-import ErrorSpan from '../../@common/ErrorSpan';
+import FormLabel from '../../common/FormLabel';
+import FormInput from '../../common/FormInput';
+import ErrorSpan from '../../common/ErrorSpan';
 import { CreditCardContext } from '../../../contexts/CreditCardContext';
-import InputWrapper from '../../@common/InputWrapper';
+import InputWrapper from '../../common/InputWrapper';
 import { DotParagraph, PasswordInputContainer } from './CardPassword.style';
 import CreditCardContextType from '../../../@types/creditCardContextType';
 
@@ -62,7 +62,9 @@ function CardPassword() {
       <FormLabel>{'카드 비밀번호'}</FormLabel>
       <PasswordInputContainer>
         {Array.from({ length: 2 }, (_, index) => (
-          <Input
+          <FormInput
+            primary={true}
+            width="50px"
             data-testid={`password-${index}`}
             key={`card-password-${index}`}
             value={creditCard.password[index]}
@@ -71,7 +73,6 @@ function CardPassword() {
             maxLength={1}
             inputMode="numeric"
             type="password"
-            width="43px"
             ref={(el: HTMLInputElement) => {
               inputListRef.current[index] = el;
             }}

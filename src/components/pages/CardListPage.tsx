@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import Card from '../@common/card/Card';
+import Card from '../common/card/Card';
 import { isCreditCardInfoType } from '../../@types/creditCardInfoWithId';
 import useCardList from '../../hooks/useCardList';
 
@@ -8,6 +8,7 @@ function CardListPage() {
   const navigation = useNavigate();
 
   const { cardList } = useCardList();
+
   if (!isCreditCardInfoType(cardList)) {
     return null;
   }

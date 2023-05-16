@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import CreditCardInfo from '../@types/creditCardInfo';
 
 import localStorageUtil from '../utils/localStorageUtil';
@@ -9,28 +9,20 @@ const initialValue: CreditCardInfoWithId[] = [];
 const key = 'card-list';
 
 const useCardList = () => {
-  const [cardList, setCardList] = useState<CreditCardInfoWithId[]>([]);
+  const [cardList, setCardList] = useState<CreditCardInfoWithId[]>(() => getSavedCardList(key));
 
-  useEffect(() => {
-    setCardList(getSavedCardList('card-list'));
-  }, []);
+  const saveCard = (cardInfo: CreditCardInfo) => {
+    const newCardList = [
+      ...cardList,
+      {
+        ...cardInfo,
+        cardId: calcNextId(cardList),
+      },
+    ];
 
-  useEffect(() => {
-    if (cardList.length !== 0) {
-      localStorageUtil.setItem(key, cardList);
-    }
-  }, [cardList]);
+    setCardList(newCardList);
 
-  const saveCard = (cardInfo: CreditCardInfo, after: () => void = () => {}) => {
-    const newCard: CreditCardInfoWithId = {
-      ...cardInfo,
-      cardId: getNextId(cardList),
-    };
-
-    setCardList((prev) => {
-      after();
-      return [...prev, newCard];
-    });
+    return localStorageUtil.setItem(key, newCardList);
   };
 
   return { cardList, saveCard };
@@ -44,7 +36,7 @@ const getSavedCardList = (key: string): CreditCardInfoWithId[] => {
   }
 };
 
-const getNextId = (dataList: CreditCardInfoWithId[]): number => {
+const calcNextId = (dataList: CreditCardInfoWithId[]): number => {
   if (dataList.length === 0) return 1;
 
   return (
