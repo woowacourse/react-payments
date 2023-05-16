@@ -48,6 +48,7 @@ export default function CardNumberInput({
       <Input
         isNumber={true}
         maxLength={4}
+        aria-label="secondCardNumber"
         type="text"
         pattern={REGEX_PATTERN.CARD_NUMBER}
         required
@@ -59,6 +60,7 @@ export default function CardNumberInput({
         isNumber={true}
         maxLength={4}
         type="password"
+        aria-label="thirdCardNumber"
         pattern={REGEX_PATTERN.CARD_NUMBER}
         required
         textAlign="center"
@@ -69,6 +71,7 @@ export default function CardNumberInput({
         isNumber={true}
         maxLength={4}
         type="password"
+        aria-label="fourthCardNumber"
         pattern={REGEX_PATTERN.CARD_NUMBER}
         required
         textAlign="center"

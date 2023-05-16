@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { CARD_COMPANYS } from "../constant";
-import { useCardAction } from "../context/CardContext";
-import useDrawer from "../hooks/useDrawer";
+import { CARD_COMPANYS } from "../../constant";
+import { useCardAction } from "../../context/CardContext";
+import { useModal } from "eykmodal";
 
 interface CardLogoProps {
   cardName: string;
@@ -25,7 +25,7 @@ const CardTitle = styled.p`
 `;
 
 export default function CardLogo({ cardName }: CardLogoProps) {
-  const { closeDrawer } = useDrawer();
+  const { closeModal } = useModal();
 
   const cardAction = useCardAction();
   const setSelectedCard = () => {
@@ -37,7 +37,7 @@ export default function CardLogo({ cardName }: CardLogoProps) {
       type: "SET_CARD_TITLE",
       title: cardName,
     });
-    closeDrawer();
+    closeModal();
   };
   return (
     <Wrapper onClick={setSelectedCard}>

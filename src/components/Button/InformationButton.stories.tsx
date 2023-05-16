@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from "@storybook/react";
 
-import InformationButton from "../components/Button/InformationButton";
+import InformationButton from "./InformationButton";
 
 const meta: Meta<typeof InformationButton> = {
   component: InformationButton,
-  title: "Button",
+  title: "Components/Button",
 };
 
 export default meta;

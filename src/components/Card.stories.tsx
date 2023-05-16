@@ -1,12 +1,12 @@
 import { Meta, StoryObj } from "@storybook/react";
 
-import Card from "../components/Card";
+import Card from "./Card";
 import { CardContextProvider } from "../context/CardContext";
-import { DrawerContextProvider } from "../context/DrawerContext";
-
+import { ModalContextProvider } from "eykmodal";
 const meta: Meta<typeof Card> = {
   component: Card,
-  title: "Card",
+  title: "Components/Card",
+  tags: ["autodocs"],
 };
 
 export default meta;
@@ -25,9 +25,9 @@ export const EmptyCard: Story = {
   decorators: [
     (Story) => (
       <CardContextProvider>
-        <DrawerContextProvider>
+        <ModalContextProvider>
           <Story />
-        </DrawerContextProvider>
+        </ModalContextProvider>
       </CardContextProvider>
     ),
   ],
@@ -50,9 +50,9 @@ export const FilledCard: Story = {
   decorators: [
     (Story) => (
       <CardContextProvider>
-        <DrawerContextProvider>
+        <ModalContextProvider>
           <Story />
-        </DrawerContextProvider>
+        </ModalContextProvider>
       </CardContextProvider>
     ),
   ],
