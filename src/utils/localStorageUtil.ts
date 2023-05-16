@@ -21,9 +21,7 @@ const localStorageUtil: LocalStorageUtilType = {
   setItem(key, value) {
     return new Promise((resolve) => {
       setTimeout(() => {
-        console.log('inside setTimeOut');
         localStorage.setItem(key, JSON.stringify(value));
-        console.log('>>> JSON.stringify(value):', JSON.stringify(value));
         resolve();
       }, 10000);
     });

@@ -5,13 +5,11 @@ import { isCreditCardInfoType } from '../../@types/creditCardInfoWithId';
 import useCardList from '../../hooks/useCardList';
 
 function CardListPage() {
-  console.log('cardListPAge');
   const navigation = useNavigate();
 
   const { cardList } = useCardList();
-  console.log('>>> cardList:', cardList);
+
   if (!isCreditCardInfoType(cardList)) {
-    console.log('cardListPAge');
     return null;
   }
 
