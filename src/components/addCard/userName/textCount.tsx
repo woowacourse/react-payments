@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { INPUT_TYPE } from "../../../constants/inputInfo";
-import { useCardInfoContext } from "../../../hooks/useCardInfoContext";
 import { useCountText } from "../../../hooks/useCountText";
+import { useUserName } from "../../../hooks/useUserName";
 
 export function renderCountText() {
   const { count, countText } = useCountText();
-  const { userName } = useCardInfoContext();
+  const { userName } = useUserName();
   useEffect(() => {
     countText(userName);
   }, [userName]);

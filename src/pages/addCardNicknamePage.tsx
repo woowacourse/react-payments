@@ -1,25 +1,41 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Input } from "../components";
 import { Card } from "../components/@common/card/card";
+import { Loading } from "../components/@common/loading";
 import { PATH } from "../constants/path";
 import { useGenericLocation } from "../hooks/useGenericLocation";
 import { CardInfo } from "../type/card";
+import { useFetch } from "../utils/fetchData";
 import { setData } from "../utils/localStorage";
 
 export function AddCardNicknamePage() {
   const state: CardInfo = useGenericLocation(useLocation());
   const navigate = useNavigate();
   const nicknameInput = useRef<HTMLInputElement>(null);
+  const { isLoading, isSuccess, fetchData } = useFetch();
+
+  useEffect(() => {
+    if (isSuccess) {
+      navigate(PATH.CARD_LIST);
+    }
+  }, [isSuccess]);
 
   function completeInputNickname() {
     const userCardInfo = { ...state };
     if (nicknameInput.current !== null) {
       userCardInfo.nickname = nicknameInput.current.value;
     }
-    setData(userCardInfo);
-    navigate(PATH.CARD_LIST);
+    fetchData(() => setData(userCardInfo));
+  }
+
+  if (isLoading) {
+    return (
+      <Loading>
+        <LoadingText>카드 등록중입니다</LoadingText>
+      </Loading>
+    );
   }
 
   return (
@@ -92,4 +108,8 @@ const NicknameInput = styled.input`
 const NicknameInutGroup = styled.div`
   margin-top: 4rem;
   background-color: transparent;
+`;
+
+const LoadingText = styled.strong`
+  ${({ theme }) => theme.fonts.title}
 `;

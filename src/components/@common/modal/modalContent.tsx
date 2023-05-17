@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { ModalContext } from "../../../contexts/modal";
-import { getCustomElement } from "../../../utils/custumElement";
+import { getCustomElement } from "../../../utils/customElement";
 
 interface ModalContentProps {
   asChild?: boolean;

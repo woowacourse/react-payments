@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import { ModalContext } from "../../contexts/modal";
+import { ModalContext } from "navrary-modal";
 import { bank } from "../../core/bank";
 import { BankItem } from "../../type/card";
 import { Bank } from "./bank";

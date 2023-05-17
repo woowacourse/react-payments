@@ -1,7 +1,7 @@
 import { forwardRef, InputHTMLAttributes, useContext } from "react";
 import styled from "styled-components";
 import { InputContext } from "../../../contexts/inputContext";
-import { getCustomElement } from "../../../utils/custumElement";
+import { getCustomElement } from "../../../utils/customElement";
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;

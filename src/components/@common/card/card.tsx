@@ -11,13 +11,13 @@ export function Card(props: CardProps) {
       <BankName>{bank}</BankName>
       <ICcard />
       <NumberWrapper>
-        <NumberItem type="text">{cardNumber?.first}</NumberItem>
-        <NumberItem type="text">{cardNumber?.second}</NumberItem>
+        <NumberItem type="text">{cardNumber.first}</NumberItem>
+        <NumberItem type="text">{cardNumber.second}</NumberItem>
         <NumberItem type="password">
-          {"•".repeat(cardNumber?.third.length)}
+          {"•".repeat(cardNumber.third.length)}
         </NumberItem>
         <NumberItem type="password">
-          {"•".repeat(cardNumber?.fourth.length)}
+          {"•".repeat(cardNumber.fourth.length)}
         </NumberItem>
       </NumberWrapper>
       <InfoWrapper>

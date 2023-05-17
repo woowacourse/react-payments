@@ -6,13 +6,13 @@ import {
   PLACEHOLDER,
   ERROR_MESSAGE,
 } from "../../../constants/inputInfo";
-import { useCardInfoContext } from "../../../hooks/useCardInfoContext";
+import { useCardDate } from "../../../hooks/useCardDate";
 import { Date } from "../../../type/input";
 import { validation } from "../../../validation/input";
 import { Input } from "../../@common/input/InputBox";
 
 export function ExpiredDate() {
-  const { month, year, changeDateInput } = useCardInfoContext();
+  const { month, year, changeDateInput } = useCardDate();
   const [error, setError] = useState<boolean>(false);
 
   function checkIsCorrectYear(e: React.FocusEvent<HTMLInputElement>) {
@@ -41,6 +41,7 @@ export function ExpiredDate() {
             maxLength={2}
             minLength={TEXT_LENGTH.MONTH}
             placeholder={PLACEHOLDER.MONTH}
+            role="textbox"
             asChild>
             <DateInput />
           </Input.Unit>
@@ -51,6 +52,7 @@ export function ExpiredDate() {
             minLength={TEXT_LENGTH.YEAR}
             placeholder={PLACEHOLDER.YEAR}
             onBlur={checkIsCorrectYear}
+            role="textbox"
             asChild>
             <DateInput />
           </Input.Unit>

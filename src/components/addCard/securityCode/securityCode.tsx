@@ -18,7 +18,8 @@ export function SecurityCode() {
             maxLength={TEXT_LENGTH.CODE}
             minLength={TEXT_LENGTH.CODE}
             type="password"
-            name="code">
+            name="code"
+            role="textbox">
             <SecurityCodeInput />
           </Input.Unit>
         </Input.Group>
