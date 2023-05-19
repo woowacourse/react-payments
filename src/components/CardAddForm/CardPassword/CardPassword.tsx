@@ -1,4 +1,4 @@
-import { memo, useRef } from 'react';
+import { memo } from 'react';
 import type { ChangeEvent, FocusEvent } from 'react';
 import type { CardFormData, CardFormValidation } from '../../../types';
 import Input from '../../common/Input/Input';
@@ -7,31 +7,37 @@ import Label from '../../common/Label/Label';
 import { SECURITY_TEXT_ICON } from '../../../constants';
 import { PASSWORD_UNIT_MAX_LENGTH, PATTERN } from '../../../constants/input';
 import { formatNumber } from '../../../utils/formatter';
+import { isElementOfType } from '../../../utils/eventUtils';
 import styles from './style.module.css';
 
 interface CardPasswordProps {
+  value: string[];
   isError: boolean;
   updateInputValue: <K extends keyof CardFormData>(key: K, value: CardFormData[K]) => void;
   updateInputError: <K extends keyof CardFormValidation>(key: K, value: CardFormData[K]) => void;
 }
 
-const CardPassword = ({ isError, updateInputValue, updateInputError }: CardPasswordProps) => {
-  const passwordRef = useRef(['', '']);
-
+const CardPassword = ({
+  value,
+  isError,
+  updateInputValue,
+  updateInputError,
+}: CardPasswordProps) => {
   const onChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     target.value = formatNumber(target.value);
 
-    const newPassword = [...passwordRef.current];
+    const newPassword = [...value];
     newPassword[Number(target.dataset.index)] = target.value;
-
-    passwordRef.current = newPassword;
     updateInputValue('password', newPassword);
   };
 
   const onBlur = (event: FocusEvent<HTMLElement>) => {
     if (event.currentTarget.contains(event.relatedTarget)) return;
+    if (!isElementOfType<HTMLInputElement>(event)) return;
 
-    updateInputError('password', passwordRef.current);
+    const newPassword = [...value];
+    newPassword[Number(event.target.dataset.index)] = event.target.value;
+    updateInputError('password', newPassword);
   };
 
   return (

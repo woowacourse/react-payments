@@ -1,23 +1,21 @@
-import { memo, useState } from 'react';
+import { memo } from 'react';
 import type { ChangeEvent } from 'react';
 import type { CardFormData } from '../../../types';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Label from '../../common/Label/Label';
 import Input from '../../common/Input/Input';
 import { OWNER_NAME_MAX_LENGTH } from '../../../constants/input';
-import { formatEnglishCapitalization, formatSentence } from '../../../utils/formatter';
+import { formatEnglishCapitalization } from '../../../utils/formatter';
 
 interface CardOwnerNameProps {
+  value: string;
   updateInputValue: <K extends keyof CardFormData>(key: K, value: CardFormData[K]) => void;
 }
 
-const CardOwnerName = ({ updateInputValue }: CardOwnerNameProps) => {
-  const [value, setValue] = useState('');
-
+const CardOwnerName = ({ value, updateInputValue }: CardOwnerNameProps) => {
   const onChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     const newValue = formatEnglishCapitalization(target.value);
-    setValue(newValue);
-    updateInputValue('ownerName', formatSentence(newValue));
+    updateInputValue('ownerName', newValue);
   };
 
   return (

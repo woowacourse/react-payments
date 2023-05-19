@@ -1,18 +1,29 @@
 import { useEffect } from 'react';
+import { useModalContext } from '@ashleysyheo/react-modal';
 import CardAddForm from '../components/CardAddForm/CardAddForm';
 import CardItem from '../components/CardItem/CardItem';
 import Header from '../components/common/Header/Header';
-import { useModalContext } from '../contexts/ModalContext';
 import { useCardAddForm } from '../hooks/cards/useCardAddForm';
+import SpinnerContainer from '../components/common/SpinnerContainer/SpinnerContainer';
 
 const CardAddPage = () => {
   const { resetModal } = useModalContext();
-  const { cardInformation, inputError, updateInputValue, updateInputError, handleSubmit } =
-    useCardAddForm();
+  const {
+    cardInformation,
+    inputError,
+    isRegistering,
+    updateInputValue,
+    updateInputError,
+    handleSubmit,
+  } = useCardAddForm();
 
   useEffect(() => {
     return () => resetModal();
   }, [resetModal]);
+
+  if (isRegistering) {
+    return <SpinnerContainer message="카드 등록 중입니다" />;
+  }
 
   return (
     <>
@@ -26,6 +37,7 @@ const CardAddPage = () => {
           ownerName={cardInformation.ownerName}
         />
         <CardAddForm
+          cardInformation={cardInformation}
           cardInputError={inputError}
           updateInputValue={updateInputValue}
           updateInputError={updateInputError}

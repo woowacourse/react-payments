@@ -1,15 +1,15 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { FormEvent } from 'react';
-import type { CardFormData } from '../../types';
+import type { CardFormData, CardFormValidation } from '../../types';
 import { useCardListContext } from '../../contexts/CardListContext';
 import { useCardInputValidation } from './useCardInputValidation';
 import { useFormComplete } from '../common/useFormComplete';
-import { PATH } from '../../constants';
+import { LOADING_DURATION, PATH } from '../../constants';
 
 const initialValue: CardFormData = {
   issuer: '',
-  cardNumber: '',
+  cardNumber: ['', '', '', ''],
   expirationDate: {
     month: '',
     year: '',
@@ -20,7 +20,7 @@ const initialValue: CardFormData = {
 };
 
 const useCardAddForm = () => {
-  const { newCardId, cardListLength, addCard } = useCardListContext();
+  const { newCardId, addCard, generateDefaultCardName } = useCardListContext();
   const [cardInformation, setCardInformation] = useState(initialValue);
   const {
     inputValidation,
@@ -29,7 +29,9 @@ const useCardAddForm = () => {
     updateInputError,
     triggerAllInputErrors,
   } = useCardInputValidation();
+  const [isRegistering, setIsRegistering] = useState(false);
   const isFormComplete = useFormComplete(inputValidation);
+  const timeout = useRef<ReturnType<typeof setTimeout>>();
 
   const navigate = useNavigate();
 
@@ -42,23 +44,13 @@ const useCardAddForm = () => {
   );
 
   const handleErrorInputFocus = (event: FormEvent<HTMLFormElement>) => {
-    if (!inputValidation.issuer) {
-      const issuerInputButton = Array.from(event.currentTarget.elements).find(
-        (element): element is HTMLButtonElement =>
-          element.tagName === 'BUTTON' && (element as HTMLButtonElement).name === 'issuer'
-      );
+    const errorInputElement = Array.from(event.currentTarget.elements).find(
+      (element): element is HTMLInputElement | HTMLButtonElement =>
+        (element instanceof HTMLInputElement || element instanceof HTMLButtonElement) &&
+        !inputValidation[element.name as keyof CardFormValidation]
+    );
 
-      issuerInputButton?.focus();
-    }
-
-    if (inputValidation.issuer) {
-      const errorInputElement = Array.from(event.currentTarget.elements).find(
-        (element): element is HTMLInputElement =>
-          element.tagName === 'INPUT' && !(element as HTMLInputElement).validity.valid
-      );
-
-      errorInputElement?.focus();
-    }
+    errorInputElement?.focus();
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -74,16 +66,23 @@ const useCardAddForm = () => {
     const newCard = {
       ...cardInformation,
       id: newCardId,
-      cardName: `카드 ${cardListLength + 1}`,
+      cardName: generateDefaultCardName(cardInformation.ownerName, cardInformation.issuer),
     };
 
-    addCard(newCard);
-    navigate(`${PATH.REGISTER}/?id=${newCard.id}`);
+    setIsRegistering(true);
+    timeout.current && clearTimeout(timeout.current);
+
+    timeout.current = setTimeout(() => {
+      setIsRegistering(false);
+      addCard(newCard);
+      navigate(`${PATH.REGISTER}/?id=${newCard.id}`);
+    }, LOADING_DURATION);
   };
 
   return {
     cardInformation,
     inputError,
+    isRegistering,
     updateInputValue,
     updateInputError,
     handleSubmit,

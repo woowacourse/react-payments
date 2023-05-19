@@ -1,13 +1,13 @@
 import type { ExpirationDate, MultipleInputFieldCardInformation, Validator } from '../types';
 import { REGEX } from '../constants';
-import { CARD_NUMBER_MAX_LENGTH, MAX_VALID_EXPIRATION_YEAR } from '../constants/input';
+import { CARD_NUMBER_UNIT_MAX_LENGTH, MAX_VALID_EXPIRATION_YEAR } from '../constants/input';
 
 const validateNonEmptyInput = (input: string) => {
   return input !== '';
 };
 
-const validateCardNumber = (input: string) => {
-  return input.length === CARD_NUMBER_MAX_LENGTH;
+const validateCardNumber = (inputs: string[]) => {
+  return inputs.every((input) => input.length === CARD_NUMBER_UNIT_MAX_LENGTH);
 };
 
 const validateExpirationDate = (input: ExpirationDate) => {
@@ -34,8 +34,8 @@ const validateSecurityCode = (input: string) => {
   return input.length >= 3 && input.length <= 4;
 };
 
-const validatePassword = (passwordInputs: string[]) => {
-  return passwordInputs.every((password) => password.length === 1);
+const validatePassword = (inputs: string[]) => {
+  return inputs.every((input) => input.length === 1);
 };
 
 const validator: Validator = {

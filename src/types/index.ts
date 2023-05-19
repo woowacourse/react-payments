@@ -16,7 +16,7 @@ interface Card {
   id: number;
   cardName: string;
   issuer: Issuer | '';
-  cardNumber: string;
+  cardNumber: string[];
   expirationDate: ExpirationDate;
   ownerName: string;
   securityCode: string;
@@ -35,7 +35,7 @@ type MultipleInputFieldCardInformation = 'password';
 
 type ValidatorArgs = {
   issuer: string;
-  cardNumber: string;
+  cardNumber: string[];
   expirationDate: ExpirationDate;
   ownerName: string;
   securityCode: string;

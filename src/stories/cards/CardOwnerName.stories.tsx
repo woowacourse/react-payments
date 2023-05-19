@@ -22,17 +22,17 @@ type Story = StoryObj<typeof CardOwnerName>;
 
 export const Default: Story = {
   render: () => {
-    const { updateInputValue } = useCardAddForm();
+    const { cardInformation, updateInputValue } = useCardAddForm();
 
-    return <CardOwnerName updateInputValue={updateInputValue} />;
+    return <CardOwnerName value={cardInformation.ownerName} updateInputValue={updateInputValue} />;
   },
 };
 
 export const Interaction: Story = {
   render: () => {
-    const { updateInputValue } = useCardAddForm();
+    const { cardInformation, updateInputValue } = useCardAddForm();
 
-    return <CardOwnerName updateInputValue={updateInputValue} />;
+    return <CardOwnerName value={cardInformation.ownerName} updateInputValue={updateInputValue} />;
   },
 
   play: async ({ canvasElement }) => {

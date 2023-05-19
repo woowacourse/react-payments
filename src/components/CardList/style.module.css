@@ -5,6 +5,12 @@
   gap: 24px;
 }
 
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .cardName {
   margin-top: 12px;
   font-size: 14px;

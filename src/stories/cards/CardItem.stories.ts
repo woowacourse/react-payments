@@ -27,7 +27,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const defaultArgs = {
-  cardNumber: '1234567812345678',
+  cardNumber: ['1234', '1234', '1234', '1234'],
   expirationDate: {
     month: '12',
     year: '23',
@@ -38,7 +38,7 @@ const defaultArgs = {
 export const BlankCard: Story = {
   args: {
     issuer: '',
-    cardNumber: '',
+    cardNumber: ['', '', '', ''],
     expirationDate: {
       month: '',
       year: '',
