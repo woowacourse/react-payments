@@ -1,30 +1,25 @@
 import { PropsWithChildren, createContext, useContext } from 'react';
+import { useModal } from '@suyoungj/react-simple-modal-ts';
 
-import useModal from './hooks/useModal';
-
-import { noop } from '../../../utils/noop';
+import { noop } from '../noop';
 
 interface ModalContextProps {
   isModalOpen: boolean;
-  isClosing: boolean;
   openModal: () => void;
   closeModal: () => void;
 }
 
 export const ModalContext = createContext<ModalContextProps>({
   isModalOpen: false,
-  isClosing: false,
   openModal: noop,
   closeModal: noop,
 });
 
 export const ModalProvider = ({ children }: PropsWithChildren) => {
-  const { isModalOpen, isClosing, openModal, closeModal } = useModal();
+  const { isModalOpen, openModal, closeModal } = useModal();
 
   return (
-    <ModalContext.Provider
-      value={{ isModalOpen, isClosing, openModal, closeModal }}
-    >
+    <ModalContext.Provider value={{ isModalOpen, openModal, closeModal }}>
       {children}
     </ModalContext.Provider>
   );

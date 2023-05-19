@@ -9,25 +9,25 @@ const useCardNicknameInputPage = () => {
   const { cardId } = useParams();
   const { cards, modifyCardNickname } = useCardsContext();
   const [nickname, handleNicknameChange] = useInput('');
-  const lastRegisteredCard = cards.find((card) => card.id === cardId) ?? null;
+  const card = cards.find((card) => card.id === cardId);
 
   const handleNicknameSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
 
     if (nickname === '') {
-      navigate('/');
+      navigate(`/waiting/${cardId}`);
       return;
     }
 
     if (cardId) {
       modifyCardNickname(cardId, nickname);
-      navigate('/');
+      navigate(`/waiting/${cardId}`);
     }
   };
 
   return {
     nickname,
-    lastRegisteredCard,
+    card,
     handleNicknameSubmit,
     handleNicknameChange,
   };

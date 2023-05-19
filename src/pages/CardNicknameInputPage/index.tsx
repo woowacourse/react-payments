@@ -1,31 +1,26 @@
 import { useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Card from '../../components/Card';
 import Spacer from '../../components/common/Spacer';
 import Input from '../../components/common/Input';
+import ErrorPage from '../ErrorPage';
 
 import useCardNicknameInputPage from './useCardNicknameInputPage';
 import type { Focus } from '../../components/common/Input';
-import type { CardInfo } from '../../domain/types/card';
 
 import styles from './cardNicknameInputPage.module.css';
 
 const CardNicknameInputPage = () => {
+  const navigate = useNavigate();
   const inputRef = useRef<Focus>(null);
-  const {
-    lastRegisteredCard,
-    nickname,
-    handleNicknameSubmit,
-    handleNicknameChange,
-  } = useCardNicknameInputPage();
-  const {
-    cardCompany,
-    cardNumber1,
-    cardNumber2,
-    owner,
-    expiredMonth,
-    expiredYear,
-  } = lastRegisteredCard as CardInfo;
+  const { card, nickname, handleNicknameSubmit, handleNicknameChange } =
+    useCardNicknameInputPage();
+
+  if (!card) {
+    navigate('/error');
+    return <ErrorPage />;
+  }
 
   useEffect(() => {
     inputRef.current?.focus();
@@ -33,19 +28,12 @@ const CardNicknameInputPage = () => {
 
   return (
     <div className={styles.container}>
-      <Spacer height={130} />
-      <h1 className={`${styles.title} text-title`}>
-        카드등록이 완료되었습니다.
-      </h1>
-      <Spacer height={36} />
-      <Card
-        cardCompany={cardCompany}
-        cardNumber1={cardNumber1}
-        cardNumber2={cardNumber2}
-        owner={owner}
-        expiredMonth={expiredMonth}
-        expiredYear={expiredYear}
-      />
+      <Spacer height={180} />
+      <h2 className={`${styles.title} text-subtitle`}>
+        거의 다 왔어요! 별칭을 입력해 주세요.
+      </h2>
+      <Spacer height={20} />
+      <Card {...card} />
       <Spacer height={124} />
       <form className={styles.formContainer} onSubmit={handleNicknameSubmit}>
         <label>

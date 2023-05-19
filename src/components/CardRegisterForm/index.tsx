@@ -1,16 +1,19 @@
+import { useEffect } from 'react';
+
 import Card from '../Card';
 import Input from '../common/Input';
 import Tooltip from '../Tooltip';
 import TooltipButton from '../TooltipButton';
+import CardCompanySelectBottomSheet from '../CardCompanySelectBottomSheet';
 
 import useCardRegisterForm from './useCardRegisterForm';
-import { useModalContext } from '../common/Modal/ModalContext';
+import { useModalContext } from '../../utils/context/ModalContext';
 import { CARD_NUMBER_INPUT_PLACEHOLDER } from '../../domain/constants';
 
 import styles from './cardRegisterForm.module.css';
 
 const CardRegisterForm = () => {
-  const { openModal } = useModalContext();
+  const { isModalOpen, openModal } = useModalContext();
   const {
     cardCompany,
     cardNumber1,
@@ -31,6 +34,16 @@ const CardRegisterForm = () => {
     handleSubmit,
     handleFormChange,
   } = useCardRegisterForm();
+
+  useEffect(() => {
+    openModal();
+  }, []);
+
+  useEffect(() => {
+    if (isModalOpen === false) {
+      cardNumberInputRef.current?.focus();
+    }
+  }, [isModalOpen]);
 
   return (
     <>
@@ -56,6 +69,7 @@ const CardRegisterForm = () => {
       >
         <label>
           카드 번호
+          <span className={styles.required}>*</span>
           <div className={styles.inputContainer}>
             <Input
               type="text"
@@ -110,6 +124,7 @@ const CardRegisterForm = () => {
 
         <label>
           만료일
+          <span className={styles.required}>*</span>
           <div className={styles.expirationDate}>
             <Input
               type="text"
@@ -157,6 +172,7 @@ const CardRegisterForm = () => {
 
         <label>
           보안 코드(CVC/CVV)
+          <span className={styles.required}>*</span>
           <div className={styles.cvcContainer}>
             <div className={styles.cvc}>
               <Input
@@ -179,6 +195,7 @@ const CardRegisterForm = () => {
 
         <label>
           카드 비밀번호
+          <span className={styles.required}>*</span>
           <div className={styles.cardPassword}>
             <Input
               type="password"
@@ -209,6 +226,7 @@ const CardRegisterForm = () => {
           <button className={styles.submitButton}>다음</button>
         )}
       </form>
+      <CardCompanySelectBottomSheet />
     </>
   );
 };

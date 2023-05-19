@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 
-import { ModalProvider } from './components/common/Modal/ModalContext';
+import { ModalProvider } from './utils/context/ModalContext';
 import { CardsProvider } from './domain/context/CardsContext';
 
 const App = () => {

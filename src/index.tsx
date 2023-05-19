@@ -6,6 +6,9 @@ import App from './App';
 import CardRegisterPage from './pages/CardRegisterPage';
 import HoldingCardsPage from './pages/HoldingCardsPage';
 import CardNicknameInputPage from './pages/CardNicknameInputPage';
+import WaitingPage from './pages/WaitingPage';
+import CompletePage from './pages/CompletePage';
+import ErrorPage from './pages/ErrorPage';
 
 import './styles/index.css';
 
@@ -13,6 +16,7 @@ const router = createHashRouter([
   {
     path: '/',
     element: <App />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: '',
@@ -25,6 +29,18 @@ const router = createHashRouter([
       {
         path: 'card-nickname/:cardId',
         element: <CardNicknameInputPage />,
+      },
+      {
+        path: 'waiting/:cardId',
+        element: <WaitingPage />,
+      },
+      {
+        path: 'complete/:cardId',
+        element: <CompletePage />,
+      },
+      {
+        path: 'error',
+        element: <ErrorPage />,
       },
     ],
   },

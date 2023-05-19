@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import CardCompanySelectBottomSheet from '../components/CardCompanySelectBottomSheet';
+import CardCompanySelectBottomSheet from '../../components/CardCompanySelectBottomSheet';
 import {
   ModalProvider,
   useModalContext,
-} from '../components/common/Modal/ModalContext';
+} from '../../utils/context/ModalContext';
 
 const meta: Meta<typeof CardCompanySelectBottomSheet> = {
-  title: 'components/CardCompanySelectBottomSheet',
+  title: 'components/cards/CardCompanySelectBottomSheet',
   component: CardCompanySelectBottomSheet,
   decorators: [(Story) => <ModalProvider>{<Story />}</ModalProvider>],
 };

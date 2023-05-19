@@ -1,19 +1,29 @@
-import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import Card from '../../components/Card';
 import CardRegisterButton from '../../components/CardRegisterButton';
 
 import { useCardsContext } from '../../domain/context/CardsContext';
+import { scrollToBottom } from '../../utils/scrollToBottom';
 
 import styles from './holdingCardsPage.module.css';
 
 const HoldingCardsPage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { cards } = useCardsContext();
+  const previousPath = location.state?.from?.pathname;
 
   const handleClick = () => {
     navigate('/card-register');
   };
+
+  useEffect(() => {
+    if (previousPath?.includes('/complete')) {
+      scrollToBottom();
+    }
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -29,16 +39,7 @@ const HoldingCardsPage = () => {
         <section className={styles.cardContainer}>
           {cards.map((card) => (
             <div key={card.id} className={styles.cardWrapper}>
-              <Card
-                cardCompany={card.cardCompany}
-                cardNumber1={card.cardNumber1}
-                cardNumber2={card.cardNumber2}
-                cardNumber3={card.cardNumber3}
-                cardNumber4={card.cardNumber4}
-                expiredMonth={card.expiredMonth}
-                expiredYear={card.expiredYear}
-                owner={card.owner}
-              />
+              <Card {...card} />
               {card.nickname && (
                 <span className="text-subtitle">{card.nickname}</span>
               )}

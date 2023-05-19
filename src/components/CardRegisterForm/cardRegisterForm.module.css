@@ -23,6 +23,11 @@
   text-align: center;
 }
 
+.required {
+  margin-left: 3px;
+  color: #ce0000;
+}
+
 .form > label {
   font-family: 'Roboto';
   font-style: normal;

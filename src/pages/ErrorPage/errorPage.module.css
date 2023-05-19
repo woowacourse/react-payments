@@ -1,0 +1,34 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.emptyCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 213px;
+  height: 133px;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  padding: 11px 14px;
+  background: gray;
+}
+
+.mark {
+  position: absolute;
+  width: 72px;
+  height: 72px;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+}
+
+.button {
+  border: 0;
+  background: #fff;
+  cursor: pointer;
+}

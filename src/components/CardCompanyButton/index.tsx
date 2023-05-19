@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import {
   BCCardLogo,
   HanaCardLogo,
@@ -9,7 +10,7 @@ import {
   WooriCardLogo,
 } from '../../assets/svg';
 
-import { useModalContext } from '../common/Modal/ModalContext';
+import { useModalContext } from '../../utils/context/ModalContext';
 import { useCardCompany } from '../../domain/context/CardCompanyContext';
 import type { CardCompany } from '../../domain/types/card';
 
@@ -24,7 +25,7 @@ const CARD_COMPANY_LOGO = {
   롯데카드: <LotteCardLogo />,
   하나카드: <HanaCardLogo />,
   국민카드: <KBCardLogo />,
-} as const;
+} as const satisfies Record<CardCompany, ReactNode>;
 
 interface Props {
   cardCompany: CardCompany;
