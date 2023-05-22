@@ -32,13 +32,14 @@ export function useCardRegister() {
 export function useMyCardList() {
   const location = useLocation();
   const cardList = getCardList();
-  const { cardRegisterInfo } = useCardRegisterContext();
+  const { dispatch, cardRegisterInfo } = useCardRegisterContext();
   const [registeredCards, setRegisteredCards] = useState<CardRegisterInfo[]>(cardList);
 
   useEffect(() => {
     if (location.state?.registered) {
       setCardList([cardRegisterInfo, ...registeredCards]);
       setRegisteredCards((prev) => [cardRegisterInfo, ...prev]);
+      dispatch(createCardRegisterAction('INIT_CARD_REGISTER', {}));
     }
 
     return () => {

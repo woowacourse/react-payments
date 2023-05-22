@@ -2,8 +2,6 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import CardRegister from './pages/CardRegister/CardRegister';
 import MyCardList from './pages/MyCardList/MyCardList';
-
-import Layout from './components/@common/Layout/Layout';
 import CardRegisterProvider from './context/CardRegisterContext';
 import CardAlias from './pages/CardAlias/CardAlias';
 import { ROUTES } from './constants/routes';

@@ -14,6 +14,7 @@ export const UPDATE_CVC = 'UPDATE_CVC';
 export const UPDATE_PASSWORD = 'UPDATE_PASSWORD';
 export const UPDATE_BANK = 'UPDATE_BANK';
 export const UPDATE_ALIAS = 'UPDATE_ALIAS';
+export const INIT_CARD_REGISTER = 'INIT_CARD_REGISTER';
 
 export type ActionType =
   | typeof UPDATE_CARD_NUMBER
@@ -22,7 +23,8 @@ export type ActionType =
   | typeof UPDATE_CVC
   | typeof UPDATE_PASSWORD
   | typeof UPDATE_BANK
-  | typeof UPDATE_ALIAS;
+  | typeof UPDATE_ALIAS
+  | typeof INIT_CARD_REGISTER;
 
 export type ActionPayload<T extends ActionType> = T extends typeof UPDATE_CARD_NUMBER
   ? { field: keyof CardRegisterInfo['cardNumber']; value: string }
@@ -38,6 +40,8 @@ export type ActionPayload<T extends ActionType> = T extends typeof UPDATE_CARD_N
   ? { value: Record<string, unknown> }
   : T extends typeof UPDATE_ALIAS
   ? { value: string }
+  : T extends typeof INIT_CARD_REGISTER
+  ? object
   : never;
 
 export function createCardRegisterAction<T extends ActionType>(type: T, payload: ActionPayload<T>) {

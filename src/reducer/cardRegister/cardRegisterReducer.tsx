@@ -1,6 +1,5 @@
-import { ComponentPropsWithoutRef, useReducer } from 'react';
 import { CardRegisterInfo } from '../../types/card.type';
-import { ActionType, CardRegisterAction } from './cardRegisterAction';
+import { CardRegisterAction } from './cardRegisterAction';
 
 export const initialCardRegisterInfo = {
   cardNumber: {
@@ -25,6 +24,9 @@ export const initialCardRegisterInfo = {
 
 export function cardRegisterReducer(state: CardRegisterInfo, action: CardRegisterAction): CardRegisterInfo {
   switch (action.type) {
+    case 'INIT_CARD_REGISTER': {
+      return initialCardRegisterInfo;
+    }
     case 'UPDATE_CARD_NUMBER': {
       const { field, value } = action.payload;
 
