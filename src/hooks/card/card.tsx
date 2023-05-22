@@ -39,8 +39,9 @@ export function useMyCardList() {
     if (location.state?.registered) {
       setCardList([cardRegisterInfo, ...registeredCards]);
       setRegisteredCards((prev) => [cardRegisterInfo, ...prev]);
-      dispatch(createCardRegisterAction('INIT_CARD_REGISTER', {}));
     }
+
+    dispatch(createCardRegisterAction('INIT_CARD_REGISTER', {}));
 
     return () => {
       window.history.replaceState({}, document.title);
