@@ -33,10 +33,14 @@ export const Content = styled.div`
   animation: openContent 1050ms cubic-bezier(0.16, 1, 0.3, 1);
 `;
 
-export const Bank = styled.div`
+export const Bank = styled.button`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  background: transparent;
+  border: none;
+  padding: 0;
 
   cursor: pointer;
 `;

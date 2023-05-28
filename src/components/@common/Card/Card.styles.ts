@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
 export const Card = styled.div<{
-  bg?: string;
+  bgColor?: string;
 }>`
   width: 270px;
   aspect-ratio: 213 / 133;
   flex-shrink: 0;
   padding: 14.23px 18.45px;
-  background-color: ${({ bg }) => bg ?? '#333333'};
+  background-color: ${({ bgColor }) => bgColor ?? '#333333'};
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
   color: #ffffff;

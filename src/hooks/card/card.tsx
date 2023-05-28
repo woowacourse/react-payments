@@ -2,30 +2,37 @@ import React, { ChangeEvent, FocusEvent, FormEvent, useEffect, useRef, useState 
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../constants/routes';
 import { useCardRegisterContext } from '../../context/CardRegisterContext';
+import { createCardRegisterAction } from '../../reducer/cardRegister/cardRegisterAction';
 import { CardNumber, CardRegisterInfo, ExpirationDate, Password } from '../../types/card.type';
 import { isInputElement } from '../../utils/dom';
 import { getCardList, setCardList } from '../../utils/localStorage';
 import { isEnglish, isLongerThan, isDigit } from '../../utils/validation';
 import useAutoFocus from '../@common/useAutoFocus';
+import useBoolean from '../@common/useBoolean';
 import useErrors, { INVALID_FORMAT } from '../@common/useError';
 
 export function useCardRegister() {
   const navigate = useNavigate();
-  const { isAllFilled, handleChange } = useAutoFocus();
+  const [isLoading, startLoading, endLoading] = useBoolean(false);
+  const { isAllValid, handleChange } = useAutoFocus();
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+    startLoading();
 
-    navigate(ROUTES.ALIAS, { replace: true });
+    setTimeout(() => {
+      endLoading();
+      navigate(ROUTES.ALIAS, { replace: true });
+    }, 2000);
   };
 
-  return { isAllFilled, handleSubmit, handleChange };
+  return { isLoading, isAllValid, handleSubmit, handleChange };
 }
 
 export function useMyCardList() {
   const location = useLocation();
   const cardList = getCardList();
-  const { cardRegisterInfo } = useCardRegisterContext();
+  const { dispatch, cardRegisterInfo } = useCardRegisterContext();
   const [registeredCards, setRegisteredCards] = useState<CardRegisterInfo[]>(cardList);
 
   useEffect(() => {
@@ -33,6 +40,8 @@ export function useMyCardList() {
       setCardList([cardRegisterInfo, ...registeredCards]);
       setRegisteredCards((prev) => [cardRegisterInfo, ...prev]);
     }
+
+    dispatch(createCardRegisterAction('INIT_CARD_REGISTER', {}));
 
     return () => {
       window.history.replaceState({}, document.title);
@@ -45,7 +54,7 @@ export function useMyCardList() {
 export function useCardNumber() {
   const {
     cardRegisterInfo: { cardNumber },
-    handleCardInfo,
+    dispatch,
   } = useCardRegisterContext();
   const { error, reportError, initError } = useErrors<CardNumber>();
 
@@ -56,14 +65,11 @@ export function useCardNumber() {
   };
 
   const onChangeByKey =
-    (key: keyof CardNumber) =>
+    (field: keyof CardNumber) =>
     ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
       if (value && !isDigit(value)) return;
 
-      handleCardInfo('cardNumber', {
-        ...cardNumber,
-        [key]: value,
-      });
+      dispatch(createCardRegisterAction('UPDATE_CARD_NUMBER', { field, value }));
     };
 
   return { error, cardNumber, onChangeByKey, onBlur };
@@ -72,7 +78,7 @@ export function useCardNumber() {
 export function useCardExpirationDate() {
   const {
     cardRegisterInfo: { expirationDate },
-    handleCardInfo,
+    dispatch,
   } = useCardRegisterContext();
   const { error, reportError, initError } = useErrors<CardNumber>();
 
@@ -83,14 +89,11 @@ export function useCardExpirationDate() {
   };
 
   const onChangeByKey =
-    (key: keyof ExpirationDate) =>
+    (field: keyof ExpirationDate) =>
     ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
       if (value && !isDigit(value)) return;
 
-      handleCardInfo('expirationDate', {
-        ...expirationDate,
-        [key]: value,
-      });
+      dispatch(createCardRegisterAction('UPDATE_EXPIRATION_DATE', { field, value }));
     };
 
   return { error, expirationDate, onChangeByKey, onBlur };
@@ -99,7 +102,7 @@ export function useCardExpirationDate() {
 export function useCardName() {
   const {
     cardRegisterInfo: { holderName },
-    handleCardInfo,
+    dispatch,
   } = useCardRegisterContext();
   const { error, reportError, initError } = useErrors<CardNumber>();
 
@@ -112,7 +115,7 @@ export function useCardName() {
   const onChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
     if (value && !isEnglish(value)) return;
 
-    handleCardInfo('holderName', value.toUpperCase());
+    dispatch(createCardRegisterAction('UPDATE_HOLDER_NAME', { value: value.toUpperCase() }));
   };
 
   return { error, holderName, onChange, onBlur };
@@ -121,7 +124,7 @@ export function useCardName() {
 export function useCardCVC() {
   const {
     cardRegisterInfo: { cvc },
-    handleCardInfo,
+    dispatch,
   } = useCardRegisterContext();
   const { error, reportError, initError } = useErrors<CardNumber>();
 
@@ -134,7 +137,7 @@ export function useCardCVC() {
   const onChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
     if (value && !isDigit(value)) return;
 
-    handleCardInfo('cvc', value);
+    dispatch(createCardRegisterAction('UPDATE_CVC', { value }));
   };
 
   return { error, cvc, onChange, onBlur };
@@ -142,7 +145,7 @@ export function useCardCVC() {
 export function useCardPassword() {
   const {
     cardRegisterInfo: { password },
-    handleCardInfo,
+    dispatch,
   } = useCardRegisterContext();
   const { error, reportError, initError } = useErrors<CardNumber>();
 
@@ -153,14 +156,11 @@ export function useCardPassword() {
   };
 
   const onChangeByKey =
-    (key: keyof Password) =>
+    (field: keyof Password) =>
     ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
       if (value && !isDigit(value)) return;
 
-      handleCardInfo('password', {
-        ...password,
-        [key]: value,
-      });
+      dispatch(createCardRegisterAction('UPDATE_PASSWORD', { field, value }));
     };
 
   return { error, password, onChangeByKey, onBlur };
@@ -169,14 +169,14 @@ export function useCardPassword() {
 export const useCardAlias = () => {
   const {
     cardRegisterInfo: { alias },
-    handleCardInfo,
+    dispatch,
   } = useCardRegisterContext();
   const navigate = useNavigate();
 
   const onChange = ({ target: { value, maxLength } }: ChangeEvent<HTMLInputElement>) => {
     if (value && isLongerThan(maxLength)(value)) return;
 
-    handleCardInfo('alias', value);
+    dispatch(createCardRegisterAction('UPDATE_ALIAS', { value }));
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {

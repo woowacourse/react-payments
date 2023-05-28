@@ -60,6 +60,12 @@ export const validateAsChild = (childrenArray: ReturnType<typeof Children.toArra
   if (childrenArray.length === 0) throw new Error('Must use at least 1 child');
 };
 
+export const getValidChildAsChild = <P>(children: ReactNode) => {
+  const child = Children.only(children);
+
+  return isValidElement<P>(child) ? child : null;
+};
+
 export const getResolvedChildren: <T>(
   children: ReactNode | RenderProps<T>,
   props: T
@@ -71,7 +77,7 @@ export const getValidChild = <T>(child: UnPack<ReturnType<typeof Children.toArra
   return isValidElement<T>(child) ? child : null;
 };
 
-export function getValidProps<P extends PropsWithChildren>(
+export function getValidProps<P extends PropsWithChildren<{ asChild?: boolean }>>(
   props: P
 ):
   | (P & {
@@ -79,13 +85,10 @@ export function getValidProps<P extends PropsWithChildren>(
       firstChild: ReactElement<P>;
     })
   | (P & { asChild: false; firstChild: null }) {
-  const childrenArray = Children.toArray(props.children);
-  const firstChild = getValidChild<P>(childrenArray[0]);
+  if (props.asChild) {
+    const firstChild = getValidChildAsChild<P>(props.children);
 
-  if ('asChild' in props && props.asChild && firstChild) {
-    validateAsChild(childrenArray);
-
-    return { ...props, asChild: true, firstChild };
+    if (firstChild) return { ...props, asChild: props.asChild, firstChild };
   }
 
   return { ...props, asChild: false, firstChild: null };

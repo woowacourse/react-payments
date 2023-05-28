@@ -25,7 +25,7 @@ function AddButton({ onClick }: AddButtonProps) {
 
 function CardContent({ cardNumber, expirationDate, holderName, bank }: CardRegisterInfo) {
   return (
-    <Styled.Card bg={bank.bg}>
+    <Styled.Card bgColor={bank.bgColor}>
       <Styled.CardContainer>
         <Styled.CardBank>{bank.label}</Styled.CardBank>
         <Styled.CardMagnet />

@@ -1,7 +1,7 @@
-import React, { FormEvent, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
 import Card from '../../components/@common/Card/Card';
 import Layout from '../../components/@common/Layout/Layout';
+import Loading from '../../components/@common/Loading/Loading';
 import BankSelectDialog from '../../components/pages/CardRegister/BankSelectDialog/BankSelectDialog';
 import CardCVCInput from '../../components/pages/CardRegister/CardCVCInput/CardCVCInput';
 import CardExpirationDateInput from '../../components/pages/CardRegister/CardExpirationDateInput/CardExpirationDateInput';
@@ -11,15 +11,18 @@ import CardPasswordInput from '../../components/pages/CardRegister/CardPasswordI
 import { BankInfo } from '../../constants/banks';
 import { useCardRegisterContext } from '../../context/CardRegisterContext';
 import { useCardRegister } from '../../hooks/card/card';
+import { createCardRegisterAction } from '../../reducer/cardRegister/cardRegisterAction';
 import * as Styled from './CardRegister.styles';
 
 export default function CardRegister() {
-  const { cardRegisterInfo, handleCardInfo } = useCardRegisterContext();
-  const { isAllFilled, handleSubmit, handleChange } = useCardRegister();
+  const { cardRegisterInfo, dispatch } = useCardRegisterContext();
+  const { isLoading, isAllValid, handleSubmit, handleChange } = useCardRegister();
 
   const selectBank = (bank: BankInfo) => {
-    handleCardInfo('bank', bank);
+    dispatch(createCardRegisterAction('UPDATE_BANK', { value: bank }));
   };
+
+  if (isLoading) return <Loading>카드 등록중...</Loading>;
 
   return (
     <Layout>
@@ -34,7 +37,7 @@ export default function CardRegister() {
             <CardNameInput />
             <CardCVCInput />
             <CardPasswordInput />
-            {isAllFilled && <Styled.CompleteButton>다음</Styled.CompleteButton>}
+            {isAllValid && <Styled.CompleteButton>다음</Styled.CompleteButton>}
           </Styled.RegisterForm>
         </Styled.InfoSection>
         <BankSelectDialog onClick={selectBank} />

@@ -2,7 +2,7 @@ import React, { FormEvent, useState } from 'react';
 import { isPatternMatch } from '../../utils/validation';
 
 export default function useAutoFocus() {
-  const [isAllFilled, setIsAllFilled] = useState(false);
+  const [isAllValid, setIsAllValid] = useState(false);
 
   const findInvalidInput = (inputs: HTMLInputElement[]) => inputs.find((input) => !input.validity.valid);
   const validateAllInputs = (inputs: HTMLInputElement[]) => inputs.every((input) => input.validity.valid);
@@ -26,7 +26,7 @@ export default function useAutoFocus() {
       isPatternMatch(value, pattern) && nextInput?.focus();
     });
 
-    setIsAllFilled(validateAllInputs(inputs));
+    setIsAllValid(validateAllInputs(inputs));
   };
-  return { isAllFilled, handleChange };
+  return { isAllValid, handleChange };
 }
