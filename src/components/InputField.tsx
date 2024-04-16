@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { inputType } from "../types/input";
+import Validation from "../domain/InputValidation";
 
 const Container = styled.div`
   display: flex;
@@ -40,34 +42,31 @@ const Input = styled.input`
 interface props {
   title: string;
   subtitle?: string;
-  inputDesc: string;
-  inputNumber: number;
-  inputPlaceHolder: string;
+  inputTypes: inputType;
 }
 
-export default function InputField({
-  title,
-  subtitle,
-  inputDesc,
-  inputNumber,
-  inputPlaceHolder,
-  // TODO: validation 체크를 위한 타입
-  //   inputType,
-}: props) {
+export default function InputField({ title, subtitle, inputTypes }: props) {
   return (
     <>
       <Container>
         <Title> {title} </Title>
         <SubTitle> {subtitle} </SubTitle>
 
-        <Label> {inputDesc} </Label>
+        <Label> {inputTypes.inputLabel} </Label>
         <InputBox>
-          {Array.from({ length: inputNumber }, () => (
+          {inputTypes.inputInfo.map((info, index) => (
             <Input
+              key={index}
               type="text"
-              pattern="\d*"
-              maxLength={4}
-              placeholder={inputPlaceHolder}
+              maxLength={info.maxLength}
+              placeholder={info.placeHolder}
+              onChange={(e) => {
+                const isValid = Validation[info.validateType]?.(
+                  e.target.value as string
+                );
+                console.log("isValid", isValid);
+                // 여기서 유효성 검사 결과에 따라 필요한 조치를 취할 수 있습니다.
+              }}
             />
           ))}
         </InputBox>
