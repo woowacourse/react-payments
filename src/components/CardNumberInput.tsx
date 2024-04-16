@@ -1,3 +1,4 @@
+import Input from './Input';
 import styled from 'styled-components';
 
 const TitleContainer = styled.div`
@@ -37,14 +38,6 @@ const InputLabel = styled.p`
   font-size: 12px;
   font-weight: 500;
   line-height: 15px;
-`;
-
-const Input = styled.input`
-  width: 100%;
-  height: 32px;
-  padding: 8px;
-  border-radius: 2px;
-  border: 1px solid #acacac;
 `;
 
 function CardNumberInput() {
