@@ -52,6 +52,7 @@ function CardNumberInput({ cardNumber, setCardNumber }: CardNumberInputProps) {
               key={index}
               type="number"
               placeholder="1234"
+              maxLength={4}
               onChange={onCardNumberChange(index)}
               isValid={isValid}
             ></Input>

@@ -22,15 +22,51 @@ const InputLabel = styled.p`
   line-height: 15px;
 `;
 
+const ErrorMessage = styled.p`
+  color: #ff3d3d;
+  font-size: 9.5px;
+  font-weight: 400;
+  line-height: 13px;
+`;
+
 interface CardExpirationInputProps {
   setMonth: React.Dispatch<React.SetStateAction<string>>;
   setYear: React.Dispatch<React.SetStateAction<string>>;
 }
 
 function CardExpirationInput({ setMonth, setYear }: CardExpirationInputProps) {
-  const [isValid, setIsValid] = useState<boolean>(true);
+  const [isValidMonth, setIsValidMonth] = useState<boolean>(true);
+  const [isValidYear, setIsValidYear] = useState<boolean>(true);
+  const [errorMessage, setErrorMessage] = useState<string>('');
+
+  const validateMonth = (month: string) => {
+    if (month.length === 0) {
+      setErrorMessage('');
+      return true;
+    }
+
+    if (Number.isNaN(Number(month)) || month.length !== 2) {
+      setErrorMessage('유효기간의 월은 두 자리 숫자로 입력해 주세요.');
+      return false;
+    }
+
+    if (Number(month) < 1 || Number(month) > 12) {
+      setErrorMessage('유효기간의 월은 01~12 사이의 숫자로 입력해 주세요.');
+      return false;
+    }
+
+    setErrorMessage('');
+    return true;
+  };
 
   const onMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!validateMonth(e.target.value)) {
+      setIsValidMonth(false);
+      setMonth('');
+      return;
+    }
+
+    setIsValidMonth(true);
     setMonth(e.target.value);
   };
 
@@ -47,8 +83,9 @@ function CardExpirationInput({ setMonth, setYear }: CardExpirationInputProps) {
       <CardExpirationInputContainer>
         <InputLabel>유효기간</InputLabel>
         <InputContainer>
-          <Input type="text" placeholder="MM" onChange={onMonthChange} isValid={isValid}></Input>
-          <Input type="text" placeholder="YY" onChange={onYearChange} isValid={isValid}></Input>
+          <Input type="text" placeholder="MM" maxLength={2} onChange={onMonthChange} isValid={isValidMonth}></Input>
+          <Input type="text" placeholder="YY" maxLength={2} onChange={onYearChange} isValid={isValidYear}></Input>
+          <ErrorMessage>{errorMessage}</ErrorMessage>
         </InputContainer>
       </CardExpirationInputContainer>
     </div>

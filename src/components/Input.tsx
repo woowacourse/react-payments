@@ -14,8 +14,17 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   isValid: boolean;
 }
 
-function Input({ type, value, placeholder, onChange, isValid }: InputProps) {
-  return <StyledInput $isValid={isValid} type={type} placeholder={placeholder} value={value} onChange={onChange} />;
+function Input({ type, value, placeholder, maxLength, onChange, isValid }: InputProps) {
+  return (
+    <StyledInput
+      $isValid={isValid}
+      type={type}
+      placeholder={placeholder}
+      maxLength={maxLength}
+      value={value}
+      onChange={onChange}
+    />
+  );
 }
 
 export default Input;
