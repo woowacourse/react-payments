@@ -15,5 +15,51 @@ module.exports = {
       "warn",
       { allowConstantExport: true },
     ],
+    "no-console": "off",
+    "sort-imports": [
+      "error",
+      {
+        ignoreCase: true,
+        ignoreDeclarationSort: true,
+        ignoreMemberSort: false,
+        allowSeparatedGroups: true,
+      },
+    ],
+    "import/order": [
+      "error",
+      {
+        "newlines-between": "always",
+        groups: [
+          ["builtin", "external"],
+          "internal",
+          "parent",
+          "sibling",
+          "index",
+        ],
+        pathGroups: [
+          {
+            pattern: "next",
+            group: "builtin",
+          },
+          {
+            pattern: "react",
+            group: "builtin",
+          },
+          {
+            pattern: "@MyDesignSystem/**",
+            group: "internal",
+          },
+          {
+            pattern: "src/**",
+            group: "internal",
+          },
+        ],
+        pathGroupsExcludedImportTypes: ["src/**", "@MyDesignSystem/**"],
+        alphabetize: {
+          order: "asc",
+          caseInsensitive: true,
+        },
+      },
+    ],
   },
 };
