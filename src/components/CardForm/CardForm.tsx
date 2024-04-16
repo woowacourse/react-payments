@@ -1,17 +1,26 @@
+import { ChangeEvent } from "react";
+import { CARD_NUMBERS_INPUT_COUNTS } from "../../constants/condition";
 import useInput from "../../hooks/useInput";
 
-const cardNumbers: string[] = ["", "", "", ""];
-
 const CardForm = () => {
-  // const {
-  //   cardNumbers: values,
-  //   setCardNumbers: setValues,
-  //   onChangeCardNumbers: onChange,
-  //   errorMsg,
-  // } = useInput({ cardNumbers });
+  const {
+    input: cardNumbers,
+    setInput: setCardNumbers,
+    onChange: onChangeCardNumbers,
+    errorMessage,
+  } = useInput({
+    initialValue: Array.from({ length: CARD_NUMBERS_INPUT_COUNTS }, () => ""),
+  });
 
-  return cardNumbers.map((numbers, index) => {
-    <input />;
+  return cardNumbers.map((number, index) => {
+    <input
+      placeholder=""
+      onChange={(e: ChangeEvent<HTMLInputElement>) => {
+        onChangeCardNumbers(e, index);
+      }}
+    >
+      {number}
+    </input>;
   });
 };
 
