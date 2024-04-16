@@ -16,6 +16,11 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+export const Default: Story = {
+  name: "신용 카드 UI 기본값",
+  args: { cardInfo: {} },
+};
+
 const dummyCardInfo: CardInfo = {
   cardNumbers: [5, 1, 2, 3, 4, 5, 7, 8, 9, 9, 9, 1, 0, 1, 2],
   cardValidityPeriod: { month: 9, year: 2025 },
