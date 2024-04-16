@@ -1,0 +1,1 @@
+export const CARD_NUMBERS_INPUT_COUNTS = 4;
