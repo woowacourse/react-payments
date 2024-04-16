@@ -1,23 +1,27 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-interface UseInputProps {
-  validate: (value: string) => boolean;
-  handleError: () => void;
-}
+type ErrorMessage = string;
 
-const useInput = ({ validate, handleError }: UseInputProps) => {
-  const [value, setValue] = useState('');
+const useInput = (initialValue = '', inquireValidity: (value: string) => ErrorMessage) => {
+  const [value, setValue] = useState(initialValue);
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleChange = (value: string) => {
-    if (!validate(value)) {
-      handleError();
-      return;
-    }
-
-    setValue(value);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(() => e.target.value);
   };
 
-  return [value, handleChange];
+  useEffect(() => {
+    if (inquireValidity) {
+      setErrorMessage(() => inquireValidity(value));
+    }
+  }, [value, inquireValidity]);
+
+  return {
+    value,
+    setValue,
+    handleChange,
+    errorMessage,
+  };
 };
 
 export default useInput;
