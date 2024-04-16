@@ -1,21 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import Input from "./Input";
 
-export default function CardExpirationDate() {
-  const [cardExpirationDate, setCardDate] = useState({
-    cardExpirationMonth: "",
-    cardExpirationYear: "",
-  });
+interface Props {
+  inputHandler: (inputValue: string, inputId: string) => void;
+}
 
-  const inputHandler = (inputValue: string, inputId: string) => {
-    setCardDate((prev) => ({
-      ...prev,
-      [inputId]: inputValue,
-    }));
-
-    console.log(cardExpirationDate);
-  };
-
+export default function CardExpirationDate({ inputHandler }: Props) {
   return (
     <>
       <h2>카드 유효기간을 입력해 주세요</h2>

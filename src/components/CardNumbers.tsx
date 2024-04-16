@@ -1,23 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import Input from "./Input";
 
-export default function CardNumbers() {
-  const [cardNumbers, setCardNumbers] = useState({
-    cardNumber1: "",
-    cardNumber2: "",
-    cardNumber3: "",
-    cardNumber4: "",
-  });
+interface Props {
+  inputHandler: (inputValue: string, inputId: string) => void;
+}
 
-  const inputHandler = (inputValue: string, inputId: string) => {
-    setCardNumbers((prev) => ({
-      ...prev,
-      [inputId]: inputValue,
-    }));
-
-    console.log(cardNumbers);
-  };
-
+export default function CardNumbers({ inputHandler }: Props) {
   return (
     <>
       <h2>결제할 카드 번호를 입력해 주세요</h2>

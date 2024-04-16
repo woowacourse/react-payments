@@ -1,15 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import Input from "./Input";
 
-export default function CardOwnerName() {
-  const [cardOwnerName, setCardOwnerName] = useState("");
+interface Props {
+  inputHandler: (inputValue: string, inputId: string) => void;
+}
 
-  const inputHandler = (inputValue: string) => {
-    setCardOwnerName(inputValue);
-
-    console.log(cardOwnerName);
-  };
-
+export default function CardOwnerName({ inputHandler }: Props) {
   return (
     <>
       <h2>카드 소유자 이름을 입력해 주세요</h2>
@@ -17,7 +13,7 @@ export default function CardOwnerName() {
       <Input
         maxLength={50}
         placeholder="JOHN DOE"
-        inputHandler={(value) => inputHandler(value)}
+        inputHandler={(value) => inputHandler(value, "cardOwnerName")}
       />
     </>
   );
