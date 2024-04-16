@@ -18,15 +18,16 @@ const CardForm = styled.div`
 `;
 
 function App() {
+  const [cardNumber, setCardNumber] = useState<string[]>(['', '', '', '']);
   const [month, setMonth] = useState<string>('');
   const [year, setYear] = useState<string>('');
   const [owner, setOwner] = useState<string>('');
 
   return (
     <AppContainer>
-      <CardPreviewBox month={month} year={year} owner={owner} />
+      <CardPreviewBox cardNumber={cardNumber} month={month} year={year} owner={owner} />
       <CardForm>
-        <CardNumberInput />
+        <CardNumberInput cardNumber={cardNumber} setCardNumber={setCardNumber} />
         <CardExpirationInput setMonth={setMonth} setYear={setYear} />
         <CardOwnerInput setOwner={setOwner} />
       </CardForm>

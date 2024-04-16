@@ -21,7 +21,19 @@ const InputLabel = styled.p`
   line-height: 15px;
 `;
 
-function CardNumberInput() {
+interface CardNumberInputProps {
+  cardNumber: string[];
+  setCardNumber: React.Dispatch<React.SetStateAction<string[]>>;
+}
+
+function CardNumberInput({ cardNumber, setCardNumber }: CardNumberInputProps) {
+  const onCardNumberChange = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newCardNumber = [...cardNumber];
+    newCardNumber[index] = e.target.value;
+
+    setCardNumber(newCardNumber);
+  };
+
   return (
     <div>
       <TitleContainer>
@@ -31,10 +43,9 @@ function CardNumberInput() {
       <CardNumberInputContainer>
         <InputLabel>카드 번호</InputLabel>
         <InputContainer>
-          <Input type="number" placeholder="1234"></Input>
-          <Input type="number" placeholder="1234"></Input>
-          <Input type="number" placeholder="1234"></Input>
-          <Input type="number" placeholder="1234"></Input>
+          {Array.from({ length: 4 }).map((_, index) => (
+            <Input key={index} type="number" placeholder="1234" onChange={onCardNumberChange(index)}></Input>
+          ))}
         </InputContainer>
       </CardNumberInputContainer>
     </div>
