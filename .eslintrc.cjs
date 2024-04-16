@@ -21,6 +21,7 @@ module.exports = {
     'react/jsx-props-no-spreading': 'off',
     'import/extensions': 'off',
     'react/require-default-props': 'off',
+    'no-useless-return': 'off',
     //기본 설정
     'react/function-component-definition': [
       2,
