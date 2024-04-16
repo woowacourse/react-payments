@@ -25,3 +25,16 @@
   - [ ] 사용자가 카드 유효기간 입력 시 실시간으로 카드 프리뷰에 업데이트한다.
   - [ ] 사용자가 카드 소유자 이름 입력 시 실시간으로 카드 프리뷰에 업데이트한다.
 
+## 컴포넌트 설계
+- [ ] Input
+  - [ ] CardNumberInput
+  - [ ] CardExpirationDateInput
+    - [ ] CardExpirationMonthInput
+    - [ ] CardExpirationYearInput
+  - [ ] CardOwnerNameInput
+
+- [ ] Card
+
+- [ ] ShelfHeader
+  - [ ] MainHeader
+  - [ ] SubHeader
