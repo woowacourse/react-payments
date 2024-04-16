@@ -6,6 +6,7 @@ const CardContainer = styled.div`
   height: 132px;
   background: rgba(51, 51, 51, 1);
   border-radius: 4px;
+  color: rgba(255, 255, 255, 1);
 `;
 
 interface Props {

@@ -9,12 +9,15 @@ const CardEnrollFormContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 77px;
 `;
 
 const CardInformation = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  width: 376px;
+  padding: 30px;
 `;
 
 export default function CardEnrollForm() {
