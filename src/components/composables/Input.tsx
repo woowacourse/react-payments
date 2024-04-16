@@ -14,6 +14,7 @@ const StyledInput = styled.input`
   font-size: 0.6875rem;
   border-radius: 2px;
   height: 32px;
+  flex: 1;
 `;
 
 export default function Input({ value, onChange, type, placeholder, id }: InputProps) {
