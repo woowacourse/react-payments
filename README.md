@@ -1,4 +1,5 @@
 # react-payments
+## 💳 기능 요구 사항
 
 - [ ] 카드 번호 입력 및 식별
   - [ ] Visa나 MasterCard에 해당하면 해당 브랜드의 로고를 UI에 표시한다.
