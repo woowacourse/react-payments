@@ -8,6 +8,10 @@ const StyledInput = styled.input<{ $isValid: boolean }>`
   border-radius: 2px;
   border: 1px solid ${(props) => (props.$isValid ? '#acacac' : '#ff3d3d')};
   font-size: 11px;
+
+  &:focus {
+    border-color: #000;
+  }
 `;
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
