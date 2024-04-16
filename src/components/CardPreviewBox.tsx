@@ -51,10 +51,12 @@ const Info = styled.p`
 `;
 
 interface CardPreviewBoxProps {
+  month: string;
+  year: string;
   owner: string;
 }
 
-function CardPreviewBox({ owner }: CardPreviewBoxProps) {
+function CardPreviewBox({ month, year, owner }: CardPreviewBoxProps) {
   return (
     <CardContainer>
       <Card>
@@ -66,7 +68,7 @@ function CardPreviewBox({ owner }: CardPreviewBoxProps) {
         </CardHeader>
         <InfoContainer>
           <Info>1111 2222 3333 4444</Info>
-          <Info>04/21</Info>
+          <Info>{(month || year) && `${month} / ${year}`}</Info>
           <Info>{owner}</Info>
         </InfoContainer>
       </Card>

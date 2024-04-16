@@ -21,7 +21,20 @@ const InputLabel = styled.p`
   line-height: 15px;
 `;
 
-function CardExpirationInput() {
+interface CardExpirationInputProps {
+  setMonth: React.Dispatch<React.SetStateAction<string>>;
+  setYear: React.Dispatch<React.SetStateAction<string>>;
+}
+
+function CardExpirationInput({ setMonth, setYear }: CardExpirationInputProps) {
+  const onMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMonth(e.target.value);
+  };
+
+  const onYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setYear(e.target.value);
+  };
+
   return (
     <div>
       <TitleContainer>
@@ -31,8 +44,8 @@ function CardExpirationInput() {
       <CardExpirationInputContainer>
         <InputLabel>유효기간</InputLabel>
         <InputContainer>
-          <Input type="number"></Input>
-          <Input type="number"></Input>
+          <Input type="text" onChange={onMonthChange}></Input>
+          <Input type="text" onChange={onYearChange}></Input>
         </InputContainer>
       </CardExpirationInputContainer>
     </div>
