@@ -1,15 +1,15 @@
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  sizeString?: "small" | "medium" | "large";
+  sizePreset?: SizePresetType;
 }
 
-const SIZE: Record<NonNullable<InputProps["sizeString"]>, 18 | 38 | 78> = {
+const SIZE: Record<NonNullable<InputProps["sizePreset"]>, 18 | 38 | 78> = {
   small: 18,
   medium: 38,
   large: 78,
 };
 
-const FormInput: React.FC<InputProps> = ({ sizeString = "medium", ...props }) => {
-  return <input {...props} size={SIZE[sizeString]} />;
+const FormInput: React.FC<InputProps> = ({ sizePreset = "medium", ...props }) => {
+  return <input {...props} size={SIZE[sizePreset]} />;
 };
 
 export default FormInput;

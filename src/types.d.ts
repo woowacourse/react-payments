@@ -8,3 +8,5 @@ interface CardInfo {
   cardValidityPeriod: Partial<Period>;
   ownerName: string;
 }
+
+type SizePresetType = "small" | "medium" | "large";
