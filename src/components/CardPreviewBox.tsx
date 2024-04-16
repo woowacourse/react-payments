@@ -50,7 +50,11 @@ const Info = styled.p`
   text-align: left;
 `;
 
-function CardPreviewBox() {
+interface CardPreviewBoxProps {
+  owner: string;
+}
+
+function CardPreviewBox({ owner }: CardPreviewBoxProps) {
   return (
     <CardContainer>
       <Card>
@@ -63,7 +67,7 @@ function CardPreviewBox() {
         <InfoContainer>
           <Info>1111 2222 3333 4444</Info>
           <Info>04/21</Info>
-          <Info>LIM DONGJUN</Info>
+          <Info>{owner}</Info>
         </InfoContainer>
       </Card>
     </CardContainer>

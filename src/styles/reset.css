@@ -75,11 +75,6 @@ meter {
   box-sizing: border-box;
 }
 
-/* reset default text opacity of input placeholder */
-::placeholder {
-  color: unset;
-}
-
 /* fix the feature of 'hidden' attribute.
    display:revert; revert to element instead of attribute */
 :where([hidden]) {

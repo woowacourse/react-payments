@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import CardNumberInput from './components/CardNumberInput';
 import CardExpirationInput from './components/CardExpirationInput';
@@ -17,13 +18,15 @@ const CardForm = styled.div`
 `;
 
 function App() {
+  const [owner, setOwner] = useState<string>('');
+
   return (
     <AppContainer>
-      <CardPreviewBox />
+      <CardPreviewBox owner={owner} />
       <CardForm>
         <CardNumberInput />
         <CardExpirationInput />
-        <CardOwnerInput />
+        <CardOwnerInput setOwner={setOwner} />
       </CardForm>
     </AppContainer>
   );
