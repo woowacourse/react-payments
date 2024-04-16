@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { inputType } from "../types/input";
 import Validation from "../domain/InputValidation";
+import { useState } from "react";
 
 const Container = styled.div`
   display: flex;
@@ -46,6 +47,7 @@ interface props {
 }
 
 export default function InputField({ title, subtitle, inputTypes }: props) {
+  const [invalid, setInvalid] = useState<boolean>(true);
   return (
     <>
       <Container>
@@ -65,11 +67,13 @@ export default function InputField({ title, subtitle, inputTypes }: props) {
                   e.target.value as string
                 );
                 console.log("isValid", isValid);
-                // 여기서 유효성 검사 결과에 따라 필요한 조치를 취할 수 있습니다.
+                setInvalid(isValid);
+                console.log(invalid);
               }}
             />
           ))}
         </InputBox>
+        {invalid ? <p> true </p> : <p> false</p>}
       </Container>
     </>
   );

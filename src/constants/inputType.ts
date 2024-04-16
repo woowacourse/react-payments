@@ -5,6 +5,7 @@ const InputType = {
       validateType: "cardNumber",
       maxLength: 4,
       placeHolder: "1234",
+      error: "숫자만 입력 가능합니다.",
     })),
   },
   EXPIRY_DATE: {
