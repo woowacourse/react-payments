@@ -1,6 +1,5 @@
 import "./App.css";
 import CardNumbers from "./components/CardNumbers";
-import Input from "./components/Input";
 
 function App() {
   return (
