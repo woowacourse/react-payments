@@ -1,4 +1,5 @@
 import "./App.css";
+import CardExpirationDate from "./components/CardExpirationDate";
 import CardNumbers from "./components/CardNumbers";
 
 function App() {
@@ -6,6 +7,7 @@ function App() {
     <>
       <h1>React Payments</h1>
       <CardNumbers></CardNumbers>
+      <CardExpirationDate></CardExpirationDate>
     </>
   );
 }
