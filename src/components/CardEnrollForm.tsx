@@ -44,9 +44,22 @@ export default function CardEnrollForm() {
     <CardEnrollFormContainer>
       <CardPreview cardInformation={cardInformation}></CardPreview>
       <CardInformation>
-        <CardNumbers inputHandler={inputHandler}></CardNumbers>
-        <CardExpirationDate inputHandler={inputHandler}></CardExpirationDate>
-        <CardOwnerName inputHandler={inputHandler}></CardOwnerName>
+        <CardNumbers
+          cardNumber1={cardInformation.cardNumber1}
+          cardNumber2={cardInformation.cardNumber2}
+          cardNumber3={cardInformation.cardNumber3}
+          cardNumber4={cardInformation.cardNumber4}
+          inputHandler={inputHandler}
+        ></CardNumbers>
+        <CardExpirationDate
+          cardExpirationMonth={cardInformation.cardExpirationMonth}
+          cardExpirationYear={cardInformation.cardExpirationYear}
+          inputHandler={inputHandler}
+        ></CardExpirationDate>
+        <CardOwnerName
+          value={cardInformation.cardOwnerName}
+          inputHandler={inputHandler}
+        ></CardOwnerName>
       </CardInformation>
     </CardEnrollFormContainer>
   );

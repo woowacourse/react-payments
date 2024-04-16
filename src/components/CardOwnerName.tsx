@@ -11,9 +11,10 @@ const InputContainer = styled.div`
 
 interface Props {
   inputHandler: (inputValue: string, inputId: string) => void;
+  value: string;
 }
 
-export default function CardOwnerName({ inputHandler }: Props) {
+export default function CardOwnerName({ inputHandler, value }: Props) {
   return (
     <>
       <TitleText>카드 소유자 이름을 입력해 주세요</TitleText>
@@ -23,6 +24,7 @@ export default function CardOwnerName({ inputHandler }: Props) {
           maxLength={50}
           placeholder="JOHN DOE"
           inputHandler={(value) => inputHandler(value, "cardOwnerName")}
+          value={value}
         />
       </InputContainer>
     </>

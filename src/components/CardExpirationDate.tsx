@@ -10,10 +10,16 @@ const InputContainer = styled.div`
 `;
 
 interface Props {
+  cardExpirationMonth: string;
+  cardExpirationYear: string;
   inputHandler: (inputValue: string, inputId: string) => void;
 }
 
-export default function CardExpirationDate({ inputHandler }: Props) {
+export default function CardExpirationDate({
+  cardExpirationMonth,
+  cardExpirationYear,
+  inputHandler,
+}: Props) {
   return (
     <>
       <TitleText>카드 유효기간을 입력해 주세요</TitleText>
@@ -24,11 +30,13 @@ export default function CardExpirationDate({ inputHandler }: Props) {
           maxLength={2}
           placeholder="MM"
           inputHandler={(value) => inputHandler(value, "cardExpirationMonth")}
+          value={cardExpirationMonth}
         />
         <Input
           maxLength={2}
           placeholder="YY"
           inputHandler={(value) => inputHandler(value, "cardExpirationYear")}
+          value={cardExpirationYear}
         />
       </InputContainer>
     </>
