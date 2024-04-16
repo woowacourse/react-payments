@@ -1,10 +1,10 @@
 import "./App.css";
-import CardNumberInputField from "./components/cardNumberInputField/CardNumberInputField";
+import NewCreditCard from "./pages/newCreditCard/NewCreditCard";
 
 function App() {
   return (
     <>
-      <CardNumberInputField></CardNumberInputField>
+      <NewCreditCard />
     </>
   );
 }
