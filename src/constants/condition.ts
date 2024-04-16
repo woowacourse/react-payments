@@ -1,1 +1,11 @@
-export const CARD_NUMBERS_INPUT_COUNTS = 4;
+export const INPUT_COUNTS = {
+  CARD_NUMBERS: 4,
+  EXPIRATION_PERIOD: 2,
+};
+
+export const PLACE_HOLDER = {
+  CARD_NUMBERS: "1234",
+  EXPIRATION_MONTH: "MM",
+  EXPIRATION_YEAR: "YY",
+  OWNER: "JOHN DOE",
+};

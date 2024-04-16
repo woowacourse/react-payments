@@ -13,7 +13,6 @@ interface Props {
 const useInput = ({ initialValue = [], validate }: Props) => {
   const [input, setInput] = useState<string[]>(initialValue);
   const [errorMessage, setErrorMessage] = useState("");
-  const isError = errorMessage === "";
 
   const onChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -25,7 +24,9 @@ const useInput = ({ initialValue = [], validate }: Props) => {
       setErrorMessage(validate(inputValue));
     }
 
-    if (isError) return;
+    const isError = errorMessage !== "";
+    if (isError) return [];
+
     setInput((prev) => {
       const copy = [...prev];
       copy[index] = inputValue;
@@ -33,6 +34,6 @@ const useInput = ({ initialValue = [], validate }: Props) => {
     });
   };
 
-  return { input, onChange, setInput, errorMessage };
+  return { input, onChange, errorMessage };
 };
 export default useInput;
