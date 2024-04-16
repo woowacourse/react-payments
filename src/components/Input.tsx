@@ -7,10 +7,11 @@ const StyledInput = styled.input`
   padding: 8px;
   border-radius: 2px;
   border: 1px solid #acacac;
+  font-size: 11px;
 `;
 
-function Input({ type, value, onChange }: InputHTMLAttributes<HTMLInputElement>) {
-  return <StyledInput type={type} value={value} onChange={onChange}></StyledInput>;
+function Input({ type, value, placeholder, onChange }: InputHTMLAttributes<HTMLInputElement>) {
+  return <StyledInput type={type} placeholder={placeholder} value={value} onChange={onChange}></StyledInput>;
 }
 
 export default Input;

@@ -14,7 +14,15 @@ const InputLabel = styled.p`
   line-height: 15px;
 `;
 
-function CardOwnerInput() {
+interface CardOwnerInputProps {
+  setOwner: React.Dispatch<React.SetStateAction<string>>;
+}
+
+function CardOwnerInput({ setOwner }: CardOwnerInputProps) {
+  const onOwnerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setOwner(e.target.value);
+  };
+
   return (
     <div>
       <TitleContainer>
@@ -22,7 +30,7 @@ function CardOwnerInput() {
       </TitleContainer>
       <CardOwnerInputContainer>
         <InputLabel>소유자 이름</InputLabel>
-        <Input type="text"></Input>
+        <Input type="text" onChange={onOwnerChange}></Input>
       </CardOwnerInputContainer>
     </div>
   );

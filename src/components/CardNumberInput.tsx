@@ -31,10 +31,10 @@ function CardNumberInput() {
       <CardNumberInputContainer>
         <InputLabel>카드 번호</InputLabel>
         <InputContainer>
-          <Input type="number"></Input>
-          <Input type="number"></Input>
-          <Input type="number"></Input>
-          <Input type="number"></Input>
+          <Input type="number" placeholder="1234"></Input>
+          <Input type="number" placeholder="1234"></Input>
+          <Input type="number" placeholder="1234"></Input>
+          <Input type="number" placeholder="1234"></Input>
         </InputContainer>
       </CardNumberInputContainer>
     </div>
