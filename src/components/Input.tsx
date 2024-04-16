@@ -1,25 +1,19 @@
 import React from "react";
 
 interface Props {
-  idx: number;
   maxLength: number;
   placeholder: string;
-  inputHandler: (inputValue: string, index: number) => void;
+  inputHandler: (inputValue: string) => void;
 }
 
-export default function Input({
-  idx,
-  maxLength,
-  placeholder,
-  inputHandler,
-}: Props) {
+export default function Input({ maxLength, placeholder, inputHandler }: Props) {
   return (
     <>
       <input
         type="text"
         maxLength={maxLength}
         placeholder={placeholder}
-        onChange={(e) => inputHandler(e.target.value, idx)}
+        onChange={(e) => inputHandler(e.target.value)}
       ></input>
     </>
   );
