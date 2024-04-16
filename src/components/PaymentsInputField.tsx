@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 const Input = styled.input<{ hasError?: boolean }>`
+  font-family: 'Inter', sans-serif;
   width: 100%;
   height: Fixed (32px) px;
   padding: 8px;
