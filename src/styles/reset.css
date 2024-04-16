@@ -58,18 +58,6 @@ textarea {
   -webkit-user-select: auto;
 }
 
-/* Chrome, Safari, Edge, Opera - removes spin buttons in input[type='number'] */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Firefox - removes spin buttons in input[type='number'] */
-input[type='number'] {
-  -moz-appearance: textfield;
-}
-
 /* revert the 'white-space' property for textarea elements on Safari */
 textarea {
   white-space: revert;
@@ -85,6 +73,11 @@ meter {
 :where(pre) {
   all: revert;
   box-sizing: border-box;
+}
+
+/* reset default text opacity of input placeholder */
+::placeholder {
+  color: unset;
 }
 
 /* fix the feature of 'hidden' attribute.
