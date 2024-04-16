@@ -107,8 +107,8 @@ function CardExpirationInput({ setMonth, setYear }: CardExpirationInputProps) {
         <InputContainer>
           <Input type="text" placeholder="MM" maxLength={2} onChange={onMonthChange} isValid={isValidMonth}></Input>
           <Input type="text" placeholder="YY" maxLength={2} onChange={onYearChange} isValid={isValidYear}></Input>
-          <ErrorMessage>{errorMessage}</ErrorMessage>
         </InputContainer>
+        <ErrorMessage>{errorMessage}</ErrorMessage>
       </CardExpirationInputContainer>
     </div>
   );
