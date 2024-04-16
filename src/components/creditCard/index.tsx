@@ -1,22 +1,20 @@
 import styled from "@emotion/styled";
-import { CreditCardProps } from "../../@types/CreditCard";
 import CreditCardBrandLogo from "./CreditCardBrandLogo";
-import CreditCardInfo from "./CreditCardInfo";
 
-const CreditCard = ({ creditCardNumber, expirationPeriod, ownerName }: CreditCardProps) => {
+export type CardNumber = number | null;
+type CreditCardNumber = [CardNumber, CardNumber, CardNumber, CardNumber];
+
+interface CreditCardProps {
+  creditCardNumber: CreditCardNumber;
+}
+
+const CreditCard = ({ creditCardNumber }: CreditCardProps) => {
   return (
     <CreditCardContainer>
       <CreditCardHeader>
         <YellowBox />
-        <BrandLogoBox>
-          <CreditCardBrandLogo creditCardNumber={creditCardNumber[0]} />
-        </BrandLogoBox>
+        <BrandLogoBox>{CreditCardBrandLogo(creditCardNumber[0])}</BrandLogoBox>
       </CreditCardHeader>
-      <CreditCardInfo
-        creditCardNumber={creditCardNumber}
-        expirationPeriod={expirationPeriod}
-        ownerName={ownerName}
-      />
     </CreditCardContainer>
   );
 };
