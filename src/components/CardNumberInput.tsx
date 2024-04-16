@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import Input from './Input';
 import styled from 'styled-components';
 import { TitleContainer, Title, SubTitle } from '../styles/TitleContainer.styled';
@@ -27,6 +29,8 @@ interface CardNumberInputProps {
 }
 
 function CardNumberInput({ cardNumber, setCardNumber }: CardNumberInputProps) {
+  const [isValid, setIsValid] = useState<boolean>(true);
+
   const onCardNumberChange = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
     const newCardNumber = [...cardNumber];
     newCardNumber[index] = e.target.value;
@@ -44,7 +48,13 @@ function CardNumberInput({ cardNumber, setCardNumber }: CardNumberInputProps) {
         <InputLabel>카드 번호</InputLabel>
         <InputContainer>
           {Array.from({ length: 4 }).map((_, index) => (
-            <Input key={index} type="number" placeholder="1234" onChange={onCardNumberChange(index)}></Input>
+            <Input
+              key={index}
+              type="number"
+              placeholder="1234"
+              onChange={onCardNumberChange(index)}
+              isValid={isValid}
+            ></Input>
           ))}
         </InputContainer>
       </CardNumberInputContainer>

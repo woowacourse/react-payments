@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Input from './Input';
 import styled from 'styled-components';
 import { TitleContainer, Title, SubTitle } from '../styles/TitleContainer.styled';
@@ -27,6 +28,8 @@ interface CardExpirationInputProps {
 }
 
 function CardExpirationInput({ setMonth, setYear }: CardExpirationInputProps) {
+  const [isValid, setIsValid] = useState<boolean>(true);
+
   const onMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMonth(e.target.value);
   };
@@ -44,8 +47,8 @@ function CardExpirationInput({ setMonth, setYear }: CardExpirationInputProps) {
       <CardExpirationInputContainer>
         <InputLabel>유효기간</InputLabel>
         <InputContainer>
-          <Input type="text" onChange={onMonthChange}></Input>
-          <Input type="text" onChange={onYearChange}></Input>
+          <Input type="text" placeholder="MM" onChange={onMonthChange} isValid={isValid}></Input>
+          <Input type="text" placeholder="YY" onChange={onYearChange} isValid={isValid}></Input>
         </InputContainer>
       </CardExpirationInputContainer>
     </div>

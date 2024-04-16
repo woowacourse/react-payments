@@ -48,6 +48,7 @@ const Info = styled.p`
   line-height: 20px;
   letter-spacing: 0.16em;
   text-align: left;
+  word-break: break-all;
 `;
 
 interface CardPreviewBoxProps {
