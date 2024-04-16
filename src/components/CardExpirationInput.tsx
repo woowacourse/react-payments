@@ -59,6 +59,21 @@ function CardExpirationInput({ setMonth, setYear }: CardExpirationInputProps) {
     return true;
   };
 
+  const validateYear = (year: string) => {
+    if (year.length === 0) {
+      setErrorMessage('');
+      return true;
+    }
+
+    if (Number.isNaN(Number(year)) || year.length !== 2) {
+      setErrorMessage('유효기간의 년도는 두 자리 숫자로 입력해 주세요.');
+      return false;
+    }
+
+    setErrorMessage('');
+    return true;
+  };
+
   const onMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!validateMonth(e.target.value)) {
       setIsValidMonth(false);
@@ -71,6 +86,13 @@ function CardExpirationInput({ setMonth, setYear }: CardExpirationInputProps) {
   };
 
   const onYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!validateYear(e.target.value)) {
+      setIsValidYear(false);
+      setYear('');
+      return;
+    }
+
+    setIsValidYear(true);
     setYear(e.target.value);
   };
 
