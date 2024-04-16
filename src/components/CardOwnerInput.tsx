@@ -15,7 +15,7 @@ const InputLabel = styled.p`
   line-height: 15px;
 `;
 
-const ValidateMessage = styled.p`
+const ErrorMessage = styled.p`
   color: #ff3d3d;
   font-size: 9.5px;
   font-weight: 400;
@@ -28,7 +28,7 @@ interface CardOwnerInputProps {
 
 function CardOwnerInput({ setOwner }: CardOwnerInputProps) {
   const [isValid, setIsValid] = useState<boolean>(true);
-  const [validation, setValidation] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const onOwnerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!validateOwner(e.target.value)) {
@@ -45,21 +45,21 @@ function CardOwnerInput({ setOwner }: CardOwnerInputProps) {
     const regExp = /^[a-zA-Z]+$/;
 
     if (value.length === 0) {
-      setValidation('');
+      setErrorMessage('');
       return true;
     }
 
     if (!regExp.test(value)) {
-      setValidation('소유자 이름은 모두 영어 대소문자로 구성되어야 합니다.');
+      setErrorMessage('소유자 이름은 모두 영어 대소문자로 구성되어야 합니다.');
       return false;
     }
 
     if (value.length > 30) {
-      setValidation('소유자 이름은 30자 이하여야 합니다.');
+      setErrorMessage('소유자 이름은 30자 이하여야 합니다.');
       return false;
     }
 
-    setValidation('');
+    setErrorMessage('');
     return true;
   };
 
@@ -70,8 +70,8 @@ function CardOwnerInput({ setOwner }: CardOwnerInputProps) {
       </TitleContainer>
       <CardOwnerInputContainer>
         <InputLabel>소유자 이름</InputLabel>
-        <Input type="text" placeholder="STEVEN KING" onChange={onOwnerChange} isValid={isValid}></Input>
-        <ValidateMessage>{validation}</ValidateMessage>
+        <Input type="text" maxLength={30} placeholder="STEVEN KING" onChange={onOwnerChange} isValid={isValid}></Input>
+        <ErrorMessage>{errorMessage}</ErrorMessage>
       </CardOwnerInputContainer>
     </div>
   );
