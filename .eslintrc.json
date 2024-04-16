@@ -1,0 +1,21 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "extends": ["prettier", "plugin:@typescript-eslint/recommended"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    "import/extensions": "off",
+    "max-depth": ["error", 1],
+    "lines-between-class-members": "off",
+    "semi": ["error", "always"],
+    "@typescript-eslint/no-explicit-any": "error"
+  }
+}
