@@ -8,5 +8,10 @@ interface PaymentsInputFormProps {
   label: string;
   hasError: boolean;
   errorMessage: string;
-  inputFieldProp: PaymentsInputFieldProps[];
+  inputFieldProps: PaymentsInputFieldProps[];
+}
+
+interface PaymentsFormTitleProps {
+  title: string;
+  subTitle?: string;
 }
