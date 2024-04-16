@@ -23,7 +23,7 @@ const InputLabel = styled.p`
 
 function CardExpirationInput() {
   return (
-    <>
+    <div>
       <TitleContainer>
         <Title>카드 유효기간을 입력해 주세요</Title>
         <SubTitle>월/년도(MMYY)를 순서대로 입력해 주세요.</SubTitle>
@@ -35,7 +35,7 @@ function CardExpirationInput() {
           <Input type="number"></Input>
         </InputContainer>
       </CardExpirationInputContainer>
-    </>
+    </div>
   );
 }
 
