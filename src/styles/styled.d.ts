@@ -8,14 +8,18 @@ declare module 'styled-components' {
       label: string;
       input: string;
       cardNumber: string;
-      cardDate: string;
+      cardExpirationDate: string;
       cardUserName: string;
     };
     color: {
+      white: string;
       black: string;
       gray: string;
       red: string;
       lightGray: string;
+      darkGray: string;
+      magnetic: string;
+      dropShadow: string;
     };
   }
 }

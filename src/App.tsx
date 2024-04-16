@@ -1,7 +1,9 @@
+import CardInformationPreview from './components/CardInformationPreview/CardInformationPreview';
+
 function App() {
   return (
     <>
-      <h1>React Payments</h1>
+      <CardInformationPreview />
     </>
   );
 }
