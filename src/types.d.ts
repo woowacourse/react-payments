@@ -5,6 +5,6 @@ type Period = {
 
 interface CardInfo {
   cardNumbers: number[];
-  cardValidityPeriod: Period;
+  cardValidityPeriod: Partial<Period>;
   ownerName: string;
 }

@@ -1,17 +1,11 @@
 interface Props {
-  cardInfo: CardInfo;
+  cardInfo: Partial<CardInfo>;
 }
 
-const CreditCard: React.FC<Props> = ({
-  cardInfo: {
-    cardNumbers,
-    cardValidityPeriod: { month, year },
-    ownerName,
-  },
-}) => {
+const CreditCard: React.FC<Props> = ({ cardInfo: { cardNumbers, cardValidityPeriod, ownerName } }) => {
   return (
     <div>
-      {cardNumbers} | {month} | {year} | {ownerName}
+      {cardNumbers} | {cardValidityPeriod?.month} | {cardValidityPeriod?.year} | {ownerName}
     </div>
   );
 };
