@@ -1,13 +1,23 @@
 import { css } from '@emotion/react';
 import InputTitle from './InputTitle';
 import Input from './Input';
+import { CARD_NUMBER, CARD_OWNER, CARD_PERIOD } from '../constants/inputInfomation';
 
-function InputGroup() {
+interface InputGroupType {
+  setState: (s: string) => void;
+  inputType: typeof CARD_NUMBER | typeof CARD_PERIOD | typeof CARD_OWNER;
+}
+
+function InputGroup({ setState, inputType }: InputGroupType) {
+  const { title, subtitle, label, placeholders } = inputType;
   return (
     <>
-      <InputTitle title="결제할 카드 번호를 입력해 주세요" subtitle="본인 명의의 카드만 결제 가능합니다." />
-      <p>카드 번호</p>
-      <Input />
+      <InputTitle title={title} subtitle={subtitle} />
+      <label htmlFor="">{label}</label>
+      {placeholders.map((placeholder: string) => {
+        return <Input placeholder={placeholder} setState={(e) => setState(e)} />;
+      })}
+      {/* <ErrorMessage></ErrorMessage> */}
     </>
   );
 }
