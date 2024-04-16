@@ -58,14 +58,22 @@ interface CardPreviewBoxProps {
 }
 
 function CardPreviewBox({ cardNumber, month, year, owner }: CardPreviewBoxProps) {
+  const handleLogoImage = (cardNumber: string[]) => {
+    if (cardNumber[0].charAt(0) === '4') {
+      return <img src={Visa} />;
+    }
+
+    if (Number(cardNumber[0].slice(0, 2)) >= 51 && Number(cardNumber[0].slice(0, 2)) <= 55) {
+      return <img src={MasterCard} />;
+    }
+  };
+
   return (
     <CardContainer>
       <Card>
         <CardHeader>
           <Chip></Chip>
-          <Logo>
-            <img src={Visa} />
-          </Logo>
+          <Logo>{handleLogoImage(cardNumber)}</Logo>
         </CardHeader>
         <InfoContainer>
           <Info>{cardNumber.map((number) => `${number} `)}</Info>
