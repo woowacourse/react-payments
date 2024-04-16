@@ -5,7 +5,6 @@ const InputForm = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  width: 315px;
 `;
 
 const Label = styled.div`
