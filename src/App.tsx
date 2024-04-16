@@ -1,9 +1,10 @@
-import "./App.css";
+import './App.css';
+import InputGroup from './components/InputGroup';
 
 function App() {
   return (
     <>
-      <h1>React Payments</h1>
+      <InputGroup />
     </>
   );
 }
