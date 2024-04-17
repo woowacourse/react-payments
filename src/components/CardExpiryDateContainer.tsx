@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import Input from './common/Input';
+import { ErrorText } from '../styles/common';
 
 type MM = string;
 type YY = string;
@@ -54,10 +54,5 @@ const CardExpiryDateContainer = ({
     </>
   );
 };
-
-const ErrorText = styled.p`
-  color: red;
-  font-size: 14px;
-`;
 
 export default CardExpiryDateContainer;

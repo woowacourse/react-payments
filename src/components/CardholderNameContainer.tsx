@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import Input from './common/Input';
+import { ErrorText } from '../styles/common';
 
 interface CardholderNameContainerProps {
   cardholderName: string;
@@ -26,15 +26,11 @@ const CardholderNameContainer = ({
         onBlur={updateErrorMessage}
         placeholder="카드 소유자 이름을 입력해주세요"
         width="100%"
+        maxLength={100}
       />
       <ErrorText>{errorMessage}</ErrorText>
     </>
   );
 };
-
-const ErrorText = styled.p`
-  color: red;
-  font-size: 14px;
-`;
 
 export default CardholderNameContainer;
