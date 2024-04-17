@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PaymentsInputField from './PaymentsInputField';
 
 import styled from 'styled-components';
@@ -33,26 +33,104 @@ line-height: 12px;
   text-align: left;
 `;
 
+interface InputFieldState {
+  value: string;
+  hasError: boolean
+}
+
+const REGEX_TABLE: Record<InputType, RegExp> = {
+  text: /^.*$/,
+  english: /^[a-zA-Z]*$/,
+  number: /^[0-9]*$/,
+} as const;
+
+const ERROR_TABLE: Record<InputType, string> = {
+  text: '',
+  english: '영어만 입력 가능합니다.',
+  number: '숫자만 입력 가능합니다.',
+};
+
+const initializeInputFieldState = (length: number) => {
+  const obj = {};
+  for (let i = 0; i <= length; i++) {
+    obj[i] = {
+      value: '',
+      hasError: false
+    };
+  }
+  return obj;
+}
 
 const PaymentsInputForm = ({ ...props }: PaymentsInputFormProps) => {
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleErrorMessage = (errorMessage: string) => {
-    setErrorMessage(errorMessage);
+  const [inputState, setInputState] = useState<Record<number, InputFieldState>>(initializeInputFieldState(props.inputFieldProps.length));
+
+  const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const index = e.target.name;
+    const newValue = e.target.value;
+    const prop = props.inputFieldProps[index];
+
+    if (
+      newValue.length <= prop.maxLength &&
+      !REGEX_TABLE[prop.inputType].test(newValue)
+    ) {
+      setInputState({
+        ...inputState,
+        [e.target.name]:
+        {
+          value: newValue.slice(0, newValue.length - 1),
+          hasError: true
+        }
+      });
+      setErrorMessage(ERROR_TABLE[prop.inputType]);
+    } else if (newValue.length > prop.maxLength) {
+      setInputState({
+        ...inputState,
+        [e.target.name]:
+        {
+          value: newValue.slice(0, prop.maxLength),
+          hasError: false
+        }
+      });
+    } else {
+      setInputState({
+        ...inputState,
+        [e.target.name]:
+        {
+          value: newValue,
+          hasError: false
+        }
+      });
+    }
+  };
+
+  const hasNoError = () => {
+    const hasErrorArray = Object.values(inputState).map((state) => state.hasError);
+    return !hasErrorArray.some((value) => value === true)
   }
+
+  useEffect(() => {
+    if (hasNoError()) {
+      setErrorMessage('')
+    }
+  }, [inputState])
 
   return (
     <InputForm>
       <Label>{props.label}</Label>
       <InputFieldContainer className="input-field-container">
         {props.inputFieldProps.map(
-          (inputFieldProp: PaymentsInputFieldProps) => {
+          (inputFieldProp: PaymentsInputFieldProps, index: number) => {
             return (
               <PaymentsInputField
+                name={index}
                 inputType={inputFieldProp.inputType}
                 placeholder={inputFieldProp.placeholder}
                 maxLength={inputFieldProp.maxLength}
-                changeErrorMessage={handleErrorMessage}
+                value={inputState[index].value}
+                hasError={inputState[index].hasError}
+                handleValueChange={handleValueChange}
               />
             );
           },
