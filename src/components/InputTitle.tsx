@@ -6,14 +6,27 @@ interface InputTitlePropsType {
 }
 
 function InputTitle({ title, subtitle }: InputTitlePropsType) {
-  const titleStyle = css`
-    
+  const titleContainerStyle = css`
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
   `;
+
+  const titleStyle = css`
+    font-size: 18px;
+    font-weight: bold;
+  `;
+
+  const subtitleStyle = css`
+    color: #8b95a1;
+    font-size: 9.5px;
+  `;
+
   return (
-    <>
+    <div css={titleContainerStyle}>
       <h1 css={titleStyle}>{title}</h1>
-      <p>{subtitle}</p>
-    </>
+      <p css={subtitleStyle}>{subtitle}</p>
+    </div>
   );
 }
 

@@ -34,26 +34,62 @@ function InputGroup({ setState, section }: InputGroupType) {
     });
   };
 
-  return (
-    <>
-      <InputTitle title={title} subtitle={subtitle} />
-      <label htmlFor="">{label}</label>
-      {placeholders.map((placeholder: string, index: number) => {
-        const test: PeriodType[] = ['month', 'year'];
+  const inputGroupStyle = css`
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  `;
 
-        return (
-          <Input
-            keyProp={section + index.toString()}
-            type={section === 'period' ? test[index] : section}
-            placeholder={placeholder}
-            setState={(s) => updateState(s, index)}
-            setErrorMessage={setErrorMessage}
-          />
-        );
-      })}
+  const inputTitleStyle = css`
+    display: flex;
+    flex-direction: column;
+  `;
+
+  const labelStyle = css`
+    font-size: 12px;
+    color: #0a0d13;
+  `;
+
+  const inputContainerStyle = css`
+    display: flex;
+    gap: 8px;
+    flex-direction: column;
+    width: 100%;
+  `;
+
+  const inputBoxStyle = css`
+    display: flex;
+    gap: 10px;
+  `;
+
+  return (
+    <div css={inputGroupStyle}>
+      <div css={inputTitleStyle}>
+        <InputTitle title={title} subtitle={subtitle} />
+      </div>
+
+      <div css={inputContainerStyle}>
+        <label css={labelStyle} htmlFor={section}>
+          {label}
+        </label>
+        <div css={inputBoxStyle}>
+          {placeholders.map((placeholder: string, index: number) => {
+            const test: PeriodType[] = ['month', 'year'];
+            return (
+              <Input
+                keyProp={section + index.toString()}
+                type={section === 'period' ? test[index] : section}
+                placeholder={placeholder}
+                setState={(s) => updateState(s, index)}
+                setErrorMessage={setErrorMessage}
+              />
+            );
+          })}
+        </div>
+      </div>
 
       <ErrorMessage value={errorMessage}></ErrorMessage>
-    </>
+    </div>
   );
 }
 

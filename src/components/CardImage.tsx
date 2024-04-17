@@ -47,6 +47,7 @@ function CardImage({ cardNumber, cardPeriod, cardOwner }: CardImageType) {
     display: flex;
     flex-direction: column;
     gap: 14px;
+    margin: 0 auto;
   `;
 
   const cardHeaderStyle = css`
@@ -73,6 +74,8 @@ function CardImage({ cardNumber, cardPeriod, cardOwner }: CardImageType) {
   `;
 
   const cardDetailStyle = css`
+    height: 20px;
+
     color: #ffffff;
     font-size: 14px;
     line-height: 20px;
