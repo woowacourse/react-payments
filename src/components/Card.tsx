@@ -73,7 +73,7 @@ export default function CardView({ cardInfo }: { cardInfo: Card }) {
         </CardNumbers>
         <div>
           {cardInfo.month.length > 0
-            ? `${cardInfo.month} / ${cardInfo.year}`
+            ? `${cardInfo.month.length === 1 ? `0${cardInfo.month}` : cardInfo.month} / ${cardInfo.year.length === 1 ? `0${cardInfo.year}` : cardInfo.year}`
             : ''}
         </div>
         <div> {cardInfo.userName} </div>
