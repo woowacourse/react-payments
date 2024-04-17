@@ -1,33 +1,44 @@
 import './App.css';
 import useInput from './hooks/useInput';
 import CardholderNameContainer from './components/CardholderNameContainer';
-
-const inquireCardholderName = (cardholderName: string) => {
-  const isValidLength = cardholderName.length < 101;
-  if (!isValidLength) {
-    return '카드 소유자 이름은 100자 이하로 입력해주세요';
-  }
-
-  const isEnglish = /^[a-zA-Z]*$/.test(cardholderName);
-  if (!isEnglish) {
-    return '카드 소유자 이름은 영어로 입력해주세요';
-  }
-  return '';
-};
+import CardExpiryDateContainer from './components/CardExpiryDateContainer';
+import { inquireCardholderName, inquireExpiryMonth, inquireExpiryYear } from './inquiry';
 
 const App = () => {
   const {
     value: cardholderName,
     handleChange: handleChangeCardholderName,
+    updateErrorMessage: updateCardholderNameErrorMessage,
     errorMessage: cardholderNameErrorMessage,
   } = useInput('', inquireCardholderName);
+
+  const {
+    value: expiryMonth,
+    handleChange: handleChangeExpiryMonth,
+    updateErrorMessage: updateExpiryMonthErrorMessage,
+    errorMessage: expiryMonthErrorMessage,
+  } = useInput('', inquireExpiryMonth);
+
+  const {
+    value: expiryYear,
+    handleChange: handleChangeExpiryYear,
+    updateErrorMessage: updateExpiryYearErrorMessage,
+    errorMessage: expiryYearErrorMessage,
+  } = useInput('', inquireExpiryYear);
 
   return (
     <>
       <CardholderNameContainer
         cardholderName={cardholderName}
         handleChange={handleChangeCardholderName}
+        updateErrorMessage={updateCardholderNameErrorMessage}
         errorMessage={cardholderNameErrorMessage}
+      />
+      <CardExpiryDateContainer
+        expiryDate={{ month: expiryMonth, year: expiryYear }}
+        changeHandler={{ month: handleChangeExpiryMonth, year: handleChangeExpiryYear }}
+        errorMessageUpdater={{ month: updateExpiryMonthErrorMessage, year: updateExpiryYearErrorMessage }}
+        errorMessage={{ month: expiryMonthErrorMessage, year: expiryYearErrorMessage }}
       />
     </>
   );
