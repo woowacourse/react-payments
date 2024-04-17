@@ -10,7 +10,7 @@ const StyledInput = styled.input<{ $isValid: boolean }>`
   font-size: 11px;
 
   &:focus {
-    border-color: #000;
+    border-color: ${(props) => (props.$isValid ? '#000' : '#ff3d3d')};
   }
 `;
 
