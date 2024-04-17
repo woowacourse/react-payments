@@ -18,7 +18,7 @@ function App() {
   const [ownerName, setOwnerName] = useState<string>("");
   return (
     <>
-      <Card />
+      <Card cardNumbers={cardNumbers} date={date} ownerName={ownerName} />
       <Form>
         <div className="shelf-section">
           <ShelfHeader

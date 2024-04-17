@@ -10,11 +10,16 @@ export default function CardOwnerNameInputField({
   ownerName: string;
   setOwnerName: Dispatch<SetStateAction<string>>;
 }) {
+  const handleChange = (e) => {
+    const updateOwnerName = e.target.value;
+    setOwnerName(updateOwnerName.toUpperCase());
+  };
   return (
     <>
       <div>소유자 이름</div>
       <div>
         <Input
+          onChange={handleChange}
           placeholder={OWNER_NAME_PLACEHOLDER}
           maxLength={26} // 비자 21자, 마스터카드 26자!
           style={{ textTransform: "uppercase" }}

@@ -1,6 +1,14 @@
 import { CSSProperties } from "react";
 
-const Card = () => {
+const Card = ({
+  cardNumbers,
+  date,
+  ownerName,
+}: {
+  cardNumbers: string[];
+  date: string[];
+  ownerName: string;
+}) => {
   const cardStyle: CSSProperties = {
     backgroundColor: "#333333",
     borderRadius: "4px",
@@ -27,6 +35,19 @@ const Card = () => {
   return (
     <div style={cardStyle}>
       <div style={ICChipStyle}></div>
+      <div>
+        {cardNumbers.map((cardNumber) => (
+          <span style={{ color: "white" }}>{cardNumber}</span>
+        ))}
+      </div>
+      <div>
+        {date.map((date) => (
+          <span style={{ color: "white" }}>{date}</span>
+        ))}
+      </div>
+      <div>
+        <span style={{ color: "white" }}>{ownerName}</span>
+      </div>
     </div>
   );
 };
