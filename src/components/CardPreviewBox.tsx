@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Visa, MasterCard } from '../assets';
+import { Visa, MasterCard, Dot } from '../assets';
 
 const CardContainer = styled.div`
   display: flex;
@@ -41,14 +41,27 @@ const InfoContainer = styled.div`
   padding: 14px 5px;
 `;
 
-const Info = styled.p`
+const Info = styled.p<{ $length?: number }>`
+  display: flex;
+  align-items: center;
+  width: ${(props) => props.$length && `calc(100% / ${props.$length})`};
+  height: 20px;
   color: white;
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
-  letter-spacing: 0.16em;
-  text-align: left;
+  letter-spacing: 0.08em;
   word-break: break-all;
+
+  img {
+    width: 4px;
+    margin: 0px 2px;
+  }
+`;
+
+const InfoBox = styled.div`
+  display: flex;
+  column-gap: 5px;
 `;
 
 interface CardPreviewBoxProps {
@@ -77,7 +90,17 @@ function CardPreviewBox({ cardNumber, month, year, owner }: CardPreviewBoxProps)
           <Logo>{handleLogoImage(cardNumber)}</Logo>
         </CardHeader>
         <InfoContainer>
-          <Info>{cardNumber.map((number) => `${number} `)}</Info>
+          <InfoBox>
+            {cardNumber.map((number, index) => (
+              <Info $length={4} key={index}>
+                {number
+                  ? index <= 1
+                    ? `${number} `
+                    : Array.from({ length: 4 }).map((_, idx) => <img src={Dot} key={idx} alt="dot" />)
+                  : ''}
+              </Info>
+            ))}
+          </InfoBox>
           <Info>{(month || year) && `${month} / ${year}`}</Info>
           <Info>{owner}</Info>
         </InfoContainer>
