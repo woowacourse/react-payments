@@ -1,11 +1,14 @@
 type InputType = 'text' | 'number' | 'english';
 
 interface PaymentsInputFieldProps {
+  name: number;
   inputType?: InputType;
   placeholder?: string;
   maxLength?: number;
-  hasError?: boolean;
-  changeErrorMessage?: (errorMessage: string) => void;
+  // changeErrorMessage?: (errorMessage: string) => void;
+  hasError: boolean;
+  value: string;
+  handleValueChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 interface PaymentsInputFormProps {
