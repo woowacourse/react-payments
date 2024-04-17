@@ -3,6 +3,9 @@ import React, { ReactNode } from 'react';
 interface CardInputFormContainerProps {
   title: string;
   subTitle: string;
+  /**
+   * 커스텀한 CardInputForm
+   */
   children: ReactNode;
 }
 

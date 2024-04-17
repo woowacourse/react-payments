@@ -2,6 +2,9 @@ import React, { ReactNode, useId } from 'react';
 
 interface CardInputFormProps {
   label: string;
+  /**
+   * input 요소들
+   */
   children: ReactNode;
 }
 

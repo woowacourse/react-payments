@@ -18,6 +18,8 @@ export default function CardNumbersForm() {
     Array.from({ length }, () => false),
   );
   const validateCardNumber = (event: ChangeEvent<HTMLInputElement>) => {
+    if (!(event.target instanceof HTMLInputElement)) return;
+
     const { value, name } = event.target;
     const index = Number(name.replace(NUMBERS_NAME_PREFIX, ''));
     const regex = new RegExp(`^[${startNumber}-${endNumber}]{${length}}$`);
@@ -31,17 +33,16 @@ export default function CardNumbersForm() {
   return (
     <CardInputFormContainer title={title} subTitle={subTitle}>
       <CardInputForm label={label}>
-        <>
+        <div onChange={validateCardNumber}>
           {Array.from({ length }).map((_, index) => (
             <Input
               placeholder={placeholder}
               name={`${NUMBERS_NAME_PREFIX}${index}`}
               type="text"
               maxLength={length}
-              extraHandleChange={validateCardNumber}
             />
           ))}
-        </>
+        </div>
       </CardInputForm>
       <div>{validatedNumbers.some((i) => !i) && ERROR_MESSAGE.cardNumber}</div>
     </CardInputFormContainer>

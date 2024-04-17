@@ -5,6 +5,7 @@ import {
   CAR_EXPIRATION_PERIOD_FORM_MESSAGE,
   ERROR_MESSAGE,
 } from '../../constants';
+import debounceFunc from '../../utils/debounceFunc';
 import CardInputForm from '../CardInputForm';
 import CardInputFormContainer from '../CardInputFormContainer';
 import Input from '../Input';
@@ -48,13 +49,15 @@ export default function CardExpirationPeriodForm() {
     const isValidated = regex.test(value);
 
     if (!isValidated) {
-      setError('number');
+      debounceFunc(() => setError('number'), 10);
       return;
     }
-    setCard((prev) => ({
-      ...prev,
-      month: Number(value),
-    }));
+    debounceFunc(() => {
+      setCard((prev) => ({
+        ...prev,
+        month: Number(value),
+      }));
+    }, 10);
   };
 
   const validateYear = (event: ChangeEvent<HTMLInputElement>) => {
@@ -64,14 +67,27 @@ export default function CardExpirationPeriodForm() {
     const isValidated = regex.test(value);
 
     if (!isValidated) {
-      setError(isValidated ? null : 'number');
+      debounceFunc(() => setError(isValidated ? null : 'number'), 10);
+
       return;
     }
+    debounceFunc(() => {
+      setCard((prev) => ({
+        ...prev,
+        year: Number(`20${value}`),
+      }));
+    }, 10);
+  };
 
-    setCard((prev) => ({
-      ...prev,
-      year: Number(`20${value}`),
-    }));
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (!(event.target instanceof HTMLInputElement)) return;
+    const { name } = event.target;
+
+    if (name === 'month') {
+      validateMonth(event);
+      return;
+    }
+    validateYear(event);
   };
 
   useEffect(() => {
@@ -81,20 +97,21 @@ export default function CardExpirationPeriodForm() {
   return (
     <CardInputFormContainer title={title} subTitle={subTitle}>
       <CardInputForm label={label}>
-        <>
-          <Input
-            type="text"
-            placeholder={monthPlaceholder}
-            maxLength={length}
-            extraHandleChange={validateMonth}
-          />
-
-          <Input
-            type="text"
-            placeholder={yearPlaceholder}
-            maxLength={length}
-            extraHandleChange={validateYear}
-          />
+        <div>
+          <div onChange={handleInputChange}>
+            <Input
+              name="month"
+              type="text"
+              placeholder={monthPlaceholder}
+              maxLength={length}
+            />
+            <Input
+              name="year"
+              type="text"
+              placeholder={yearPlaceholder}
+              maxLength={length}
+            />
+          </div>
           <div>
             {error === 'number'
               ? ERROR_MESSAGE.cardExpirationPeriod.number
@@ -102,7 +119,7 @@ export default function CardExpirationPeriodForm() {
                 ? ERROR_MESSAGE.cardExpirationPeriod.period
                 : ''}
           </div>
-        </>
+        </div>
       </CardInputForm>
     </CardInputFormContainer>
   );

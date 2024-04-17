@@ -1,14 +1,16 @@
 import { ChangeEvent, useState } from 'react';
 
+import debounceFunc from '../../utils/debounceFunc';
+
 type InputValue = string | number | readonly string[] | undefined;
-interface UseInputProps {
+export interface UseInputProps {
   initialValue: InputValue;
   maxLength?: number;
-  extraHandleChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  extraHandleChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 function useInput(props: UseInputProps) {
-  const { initialValue, extraHandleChange, maxLength } = props;
+  const { initialValue, maxLength } = props;
   const [value, setValue] = useState<InputValue>(initialValue);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -16,17 +18,10 @@ function useInput(props: UseInputProps) {
     const newValue = maxLength
       ? targetValue.slice(0, maxLength + 1)
       : targetValue;
-    setValue(newValue);
-    if (extraHandleChange) extraHandleChange(e);
 
-    // TODO: 디바운스 적용하면 value의 마지막 글자를 읽어오지 못함
-    // debounceFunc(() => {
-    //   const newValue = maxLength
-    //     ? targetValue.slice(0, maxLength + 1)
-    //     : targetValue;
-    //   setValue(newValue);
-    //   if (extraHandleChange) extraHandleChange(e);
-    // }, 20);
+    debounceFunc(() => {
+      setValue(newValue);
+    }, 10);
   };
 
   return { value, handleChange };

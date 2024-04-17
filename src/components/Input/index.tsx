@@ -1,19 +1,17 @@
-import React, { ChangeEvent } from 'react';
+import React from 'react';
 
-import useInput from './useInput';
+import useInput, { UseInputProps } from './useInput';
 
-interface InputProps extends React.HTMLProps<HTMLInputElement> {
-  maxLength?: number;
-  extraHandleChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-}
+interface InputProps
+  extends React.HTMLProps<HTMLInputElement>,
+    Omit<UseInputProps, 'initialValue'> {}
 
 function Input(props: InputProps) {
-  const { extraHandleChange, maxLength } = props;
+  const { maxLength } = props;
 
   const { value, handleChange } = useInput({
     initialValue: undefined,
     maxLength,
-    extraHandleChange,
   });
 
   return <input {...props} value={value} onChange={handleChange} />;
