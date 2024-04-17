@@ -24,7 +24,7 @@ export default function CardExpirationDate({
   const [errorMessage, setErrorMessage] = useState("");
 
   const numberValidator = (numbers: string) => {
-    if (numbers.length !== 0 && !Number(numbers)) {
+    if (numbers.length !== 0 && !Number.isInteger(Number(numbers))) {
       setErrorMessage("숫자만 입력해주세요");
       return false;
     }
@@ -41,6 +41,15 @@ export default function CardExpirationDate({
     return true;
   };
 
+  const monthValidator = (numbers: string) => {
+    if (Number(numbers) < 1 || Number(numbers) > 12) {
+      setErrorMessage("1~12월 중 하나를 입력해주세요");
+      return false;
+    }
+    setErrorMessage("");
+    return true;
+  };
+
   const isValidInput = (value: string, fieldName: string) => {
     if (!numberValidator(value)) {
       return true;
@@ -50,34 +59,38 @@ export default function CardExpirationDate({
   };
 
   const isValidLength = (value: string) => {
-    if (!lengthValidator(value)) {
+    if (!lengthValidator(value) || !monthValidator(value)) {
       return true;
     }
     return false;
   };
 
   return (
-    <>
-      <TitleText>카드 유효기간을 입력해 주세요</TitleText>
-      <CaptionText>월/년도(MMYY)를 순서대로 입력해 주세요.</CaptionText>
-      <LabelText>유효기간</LabelText>
-      <InputContainer>
-        <Input
-          maxLength={2}
-          placeholder="MM"
-          onChange={(value) => isValidInput(value, "cardExpirationMonth")}
-          value={cardExpirationMonth}
-          onBlur={isValidLength}
-        />
-        <Input
-          maxLength={2}
-          placeholder="YY"
-          onChange={(value) => isValidInput(value, "cardExpirationYear")}
-          value={cardExpirationYear}
-          onBlur={isValidLength}
-        />
-      </InputContainer>
-      <ErrorMessage message={errorMessage}></ErrorMessage>
-    </>
+    <div>
+      <div>
+        <TitleText>카드 유효기간을 입력해 주세요</TitleText>
+        <CaptionText>월/년도(MMYY)를 순서대로 입력해 주세요.</CaptionText>
+      </div>
+      <div>
+        <LabelText>유효기간</LabelText>
+        <InputContainer>
+          <Input
+            maxLength={2}
+            placeholder="MM"
+            onChange={(value) => isValidInput(value, "cardExpirationMonth")}
+            value={cardExpirationMonth}
+            onBlur={isValidLength}
+          />
+          <Input
+            maxLength={2}
+            placeholder="YY"
+            onChange={(value) => isValidInput(value, "cardExpirationYear")}
+            value={cardExpirationYear}
+            onBlur={isValidLength}
+          />
+        </InputContainer>
+        <ErrorMessage message={errorMessage}></ErrorMessage>
+      </div>
+    </div>
   );
 }

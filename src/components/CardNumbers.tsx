@@ -27,7 +27,7 @@ export default function CardNumbers({
   const [errorMessage, setErrorMessage] = useState("");
 
   const numberValidator = (numbers: string) => {
-    if (numbers.length !== 0 && !Number(numbers)) {
+    if (numbers.length !== 0 && !Number.isInteger(Number(numbers))) {
       setErrorMessage("숫자만 입력해주세요");
       return false;
     }
@@ -60,41 +60,45 @@ export default function CardNumbers({
   };
 
   return (
-    <>
-      <TitleText>결제할 카드 번호를 입력해 주세요</TitleText>
-      <CaptionText>본인 명의의 카드만 결제 가능합니다.</CaptionText>
-      <LabelText>카드 번호</LabelText>
-      <InputContainer>
-        <Input
-          maxLength={4}
-          placeholder="1234"
-          onChange={(value) => isValidInput(value, "cardNumber1")}
-          value={cardNumber1}
-          onBlur={isValidLength}
-        />
-        <Input
-          maxLength={4}
-          placeholder="1234"
-          onChange={(value) => isValidInput(value, "cardNumber2")}
-          value={cardNumber2}
-          onBlur={isValidLength}
-        />
-        <Input
-          maxLength={4}
-          placeholder="1234"
-          onChange={(value) => isValidInput(value, "cardNumber3")}
-          value={cardNumber3}
-          onBlur={isValidLength}
-        />
-        <Input
-          maxLength={4}
-          placeholder="1234"
-          onChange={(value) => isValidInput(value, "cardNumber4")}
-          value={cardNumber4}
-          onBlur={isValidLength}
-        />
-      </InputContainer>
-      <ErrorMessage message={errorMessage}></ErrorMessage>
-    </>
+    <div>
+      <div>
+        <TitleText>결제할 카드 번호를 입력해 주세요</TitleText>
+        <CaptionText>본인 명의의 카드만 결제 가능합니다.</CaptionText>
+      </div>
+      <div>
+        <LabelText>카드 번호</LabelText>
+        <InputContainer>
+          <Input
+            maxLength={4}
+            placeholder="1234"
+            onChange={(value) => isValidInput(value, "cardNumber1")}
+            value={cardNumber1}
+            onBlur={isValidLength}
+          />
+          <Input
+            maxLength={4}
+            placeholder="1234"
+            onChange={(value) => isValidInput(value, "cardNumber2")}
+            value={cardNumber2}
+            onBlur={isValidLength}
+          />
+          <Input
+            maxLength={4}
+            placeholder="1234"
+            onChange={(value) => isValidInput(value, "cardNumber3")}
+            value={cardNumber3}
+            onBlur={isValidLength}
+          />
+          <Input
+            maxLength={4}
+            placeholder="1234"
+            onChange={(value) => isValidInput(value, "cardNumber4")}
+            value={cardNumber4}
+            onBlur={isValidLength}
+          />
+        </InputContainer>
+        <ErrorMessage message={errorMessage}></ErrorMessage>
+      </div>
+    </div>
   );
 }

@@ -24,16 +24,16 @@ export default function CardOwnerName({ cardOwnerName, inputHandler }: Props) {
 
     if (upperName.length !== 0 && !pattern.test(upperName)) {
       setErrorMessage("영문자만 입력해주세요");
-      return false;
+      return true;
     }
 
     inputHandler(upperName, "cardOwnerName");
     setErrorMessage("");
-    return true;
+    return false;
   };
 
   return (
-    <>
+    <div>
       <TitleText>카드 소유자 이름을 입력해 주세요</TitleText>
       <LabelText>소유자 이름</LabelText>
       <InputContainer>
@@ -45,6 +45,6 @@ export default function CardOwnerName({ cardOwnerName, inputHandler }: Props) {
         />
       </InputContainer>
       <ErrorMessage message={errorMessage}></ErrorMessage>
-    </>
+    </div>
   );
 }
