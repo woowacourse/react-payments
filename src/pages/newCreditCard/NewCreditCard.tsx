@@ -85,10 +85,36 @@ const NewCreditCard = () => {
     });
   };
 
+  const handleUserNameChange = (value: string) => {
+    setCardInfo({
+      ...cardInfo,
+      userName: value,
+    });
+
+    if (value !== "" && !/^[a-zA-Z]+$/.test(value)) {
+      setErrorMessage({
+        ...errorMessage,
+        userName: "영어만 입력 가능합니다.",
+      });
+      return;
+    }
+
+    setErrorMessage({
+      ...errorMessage,
+      userName: "",
+    });
+
+    setCardInfo({
+      ...cardInfo,
+      userName: value.toUpperCase(),
+    });
+  };
+
   return (
     <>
       {/* 프리뷰 */}
       <CardPreview cardInfo={cardInfo}></CardPreview>
+
       {/* 입력 - 카드 번호 */}
       <NewCardInputSection
         mainText="결제할 카드 번호를 입력해 주세요"
@@ -104,6 +130,7 @@ const NewCreditCard = () => {
           ></Input>
         ))}
       </NewCardInputSection>
+
       {/* 입력 - 유효 기간 */}
       <NewCardInputSection
         mainText="카드 유효기간을 입력해 주세요"
@@ -119,6 +146,18 @@ const NewCreditCard = () => {
           maxLength={2}
           placeholder="YY"
           onChange={(e) => handleCardExpirationChange(e.target.value, "year")}
+        ></Input>
+      </NewCardInputSection>
+
+      {/* 입력 - 소유자 이름 */}
+      <NewCardInputSection
+        mainText="카드 소유자 이름을 입력해 주세요"
+        errorMessage={errorMessage.userName}
+      >
+        <Input
+          value={cardInfo.userName}
+          placeholder="JOHN DOE"
+          onChange={(e) => handleUserNameChange(e.target.value)}
         ></Input>
       </NewCardInputSection>
     </>
