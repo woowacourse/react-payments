@@ -54,3 +54,10 @@ export const NoImageCard: Story = {
     cardInfo: { ...dummyCardInfo, cardNumbers: [3, 1, 2, 3, 4, 5, 7, 8, 9, 9, 9, 1, 0, 1, 2, 3] },
   },
 };
+
+export const NoNumbersButPeriod: Story = {
+  name: "기한만 제공될 경우 ui가 잘 나와야 한다.",
+  args: {
+    cardInfo: { cardValidityPeriod: { month: 9 } },
+  },
+};

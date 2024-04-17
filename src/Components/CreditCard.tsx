@@ -36,11 +36,14 @@ const width42 = css({
   width: "42px",
 });
 
-const cardInfoStyle = css({
-  display: "flex",
-  flexDirection: "column",
-  gap: "8px",
-});
+const cardInfoStyle = css`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  & > div {
+    height: 24px;
+  }
+`;
 
 const formatCardNumbers = (cardNumbers: number[] | undefined) => {
   if (!cardNumbers) return;
@@ -50,7 +53,8 @@ const formatCardNumbers = (cardNumbers: number[] | undefined) => {
   });
 };
 
-const formatTwoDigitNumber = (n: number) => {
+const formatTwoDigitNumber = (n: number | undefined) => {
+  if (!n) return;
   return String(n).padStart(2, "0");
 };
 
@@ -87,7 +91,9 @@ const CreditCard: React.FC<Props> = ({ cardInfo: { cardNumbers, cardValidityPeri
           ))}
         </div>
         <div>
-          {cardValidityPeriod?.month && formatTwoDigitNumber(cardValidityPeriod.month)}/{cardValidityPeriod?.year}
+          {formatTwoDigitNumber(cardValidityPeriod?.month)}
+          {cardValidityPeriod?.month && "/"}
+          {cardValidityPeriod?.year}
         </div>
         <div> {ownerName}</div>
       </section>
