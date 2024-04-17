@@ -2,6 +2,24 @@ import { useState } from 'react';
 import CardView from '../components/Card';
 import InputForm from '../components/InputForm';
 import { Card } from '../types/card';
+import styled from 'styled-components';
+
+const Page = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Container = styled.div`
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 45px;
+`;
 
 export default function EnrollCard() {
   const [cardInfo, setCardInfo] = useState<Card>({
@@ -14,9 +32,11 @@ export default function EnrollCard() {
     userName: '',
   });
   return (
-    <>
-      <CardView cardInfo={cardInfo} />
-      <InputForm cardInfo={cardInfo} handleInput={setCardInfo} />
-    </>
+    <Page>
+      <Container>
+        <CardView cardInfo={cardInfo} />
+        <InputForm cardInfo={cardInfo} handleInput={setCardInfo} />
+      </Container>
+    </Page>
   );
 }
