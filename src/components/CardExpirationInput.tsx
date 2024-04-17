@@ -3,6 +3,9 @@ import TitleContainer from './TitleContainer';
 import InputField from './InputField';
 import Input from './Input';
 
+import { CARD_EXPIRATION } from '../constants/Condition';
+import { ERROR_MESSAGE } from '../constants/Message';
+
 interface CardExpirationInputProps {
   setMonth: React.Dispatch<React.SetStateAction<string>>;
   setYear: React.Dispatch<React.SetStateAction<string>>;
@@ -14,13 +17,13 @@ function CardExpirationInput({ setMonth, setYear }: CardExpirationInputProps) {
   const [errorMessage, setErrorMessage] = useState<string>('');
 
   const validateMonth = (month: string) => {
-    if (Number.isNaN(Number(month)) || month.length !== 2) {
-      setErrorMessage('유효기간의 월은 두 자리 숫자로 입력해 주세요.');
+    if (Number.isNaN(Number(month)) || month.length !== CARD_EXPIRATION.MAX_LENGTH) {
+      setErrorMessage(ERROR_MESSAGE.INVALID_EXPIRATION_MONTH_LENGTH);
       return false;
     }
 
-    if (Number(month) < 1 || Number(month) > 12) {
-      setErrorMessage('유효기간의 월은 01~12 사이의 숫자로 입력해 주세요.');
+    if (Number(month) < CARD_EXPIRATION.MIN_MONTH_RANGE || Number(month) > CARD_EXPIRATION.MAX_MONTH_RANGE) {
+      setErrorMessage(ERROR_MESSAGE.INVALID_EXPIRATION_MONTH_RANGE);
       return false;
     }
 
@@ -29,8 +32,8 @@ function CardExpirationInput({ setMonth, setYear }: CardExpirationInputProps) {
   };
 
   const validateYear = (year: string) => {
-    if (Number.isNaN(Number(year)) || year.length !== 2) {
-      setErrorMessage('유효기간의 년도는 두 자리 숫자로 입력해 주세요.');
+    if (Number.isNaN(Number(year)) || year.length !== CARD_EXPIRATION.MAX_LENGTH) {
+      setErrorMessage(ERROR_MESSAGE.INVALID_EXPIRATION_YEAR_LENGTH);
       return false;
     }
 
@@ -81,11 +84,11 @@ function CardExpirationInput({ setMonth, setYear }: CardExpirationInputProps) {
   return (
     <div>
       <TitleContainer title="카드 유효기간을 입력해 주세요" subTitle="월/년도(MM/YY)를 순서대로 입력해 주세요." />
-      <InputField label="유효기간" length={2} errorMessage={errorMessage}>
+      <InputField label="유효기간" length={CARD_EXPIRATION.INPUT_FIELD_COUNT} errorMessage={errorMessage}>
         <Input
           type="text"
           placeholder="MM"
-          maxLength={2}
+          maxLength={CARD_EXPIRATION.MAX_LENGTH}
           onChange={onMonthChange}
           onBlur={onMonthBlur}
           isValid={isValidMonth}
@@ -93,7 +96,7 @@ function CardExpirationInput({ setMonth, setYear }: CardExpirationInputProps) {
         <Input
           type="text"
           placeholder="YY"
-          maxLength={2}
+          maxLength={CARD_EXPIRATION.MAX_LENGTH}
           onChange={onYearChange}
           onBlur={onYearBlur}
           isValid={isValidYear}

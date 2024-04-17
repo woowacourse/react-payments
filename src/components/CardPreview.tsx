@@ -1,6 +1,8 @@
 import { Visa, MasterCard, Dot } from '../assets';
 import * as S from '../styles/CardPreview.style';
 
+import { CARD, CARD_NUMBER } from '../constants/Condition';
+
 interface CardPreviewProps {
   cardNumber: string[];
   month: string;
@@ -10,11 +12,14 @@ interface CardPreviewProps {
 
 function CardPreview({ cardNumber, month, year, owner }: CardPreviewProps) {
   const handleLogoImage = (cardNumber: string[]) => {
-    if (cardNumber[0].charAt(0) === '4') {
+    if (Number(cardNumber[0].charAt(0)) === CARD.VISA) {
       return <img src={Visa} />;
     }
 
-    if (Number(cardNumber[0].slice(0, 2)) >= 51 && Number(cardNumber[0].slice(0, 2)) <= 55) {
+    if (
+      Number(cardNumber[0].slice(0, 2)) >= CARD.MIN_MASTER_CARD &&
+      Number(cardNumber[0].slice(0, 2)) <= CARD.MAX_MASTER_CARD
+    ) {
       return <img src={MasterCard} />;
     }
   };
@@ -28,11 +33,13 @@ function CardPreview({ cardNumber, month, year, owner }: CardPreviewProps) {
       <S.CardBody>
         <S.InfoContainer>
           {cardNumber.map((number, index) => (
-            <S.InfoBox $length={4} key={index}>
+            <S.InfoBox $length={CARD_NUMBER.INPUT_FIELD_COUNT} key={index}>
               {number
                 ? index <= 1
                   ? `${number} `
-                  : Array.from({ length: 4 }).map((_, idx) => <img src={Dot} key={idx} alt="dot" />)
+                  : Array.from({ length: CARD_NUMBER.INPUT_FIELD_COUNT }).map((_, idx) => (
+                      <img src={Dot} key={idx} alt="dot" />
+                    ))
                 : ''}
             </S.InfoBox>
           ))}
