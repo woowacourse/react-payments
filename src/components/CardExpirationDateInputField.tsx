@@ -1,7 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import Input from "./Input";
-
-const DATE_PLACEHOLDER = ["MM", "YY"];
+import { DATE_PLACEHOLDER } from "../constants";
 
 export default function CardExpirationDateInputField({
   date,
