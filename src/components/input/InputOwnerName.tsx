@@ -9,7 +9,7 @@ interface InputOwnerNameProps {
 
 const InputOwnerName = ({ inputValue, handleChange }: InputOwnerNameProps) => {
   return (
-    <>
+    <InputContainer>
       <InputLabel htmlFor="ownerName">{CARD_FORM_MESSAGE.cardOwner}</InputLabel>
       <InputBox
         inputValue={inputValue}
@@ -19,11 +19,16 @@ const InputOwnerName = ({ inputValue, handleChange }: InputOwnerNameProps) => {
         id="ownerName"
         name="name"
       />
-    </>
+    </InputContainer>
   );
 };
 
 export default InputOwnerName;
+
+const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 const InputLabel = styled.label`
   font-family: Noto Sans;
@@ -32,4 +37,5 @@ const InputLabel = styled.label`
   line-height: 15px;
   text-align: left;
   color: rgba(10, 13, 19, 1);
+  margin-bottom: 8px;
 `;
