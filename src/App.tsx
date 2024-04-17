@@ -10,11 +10,11 @@ function App() {
 
   return (
     <>
-      <InputGroup setState={setCardNumber} inputType={CARD_NUMBER} />
+      <InputGroup setState={setCardNumber} section="number" />
       {cardNumber}
-      <InputGroup setState={setCardPeriod} inputType={CARD_PERIOD} />
+      <InputGroup setState={setCardPeriod} section="period" />
       {cardPeriod}
-      <InputGroup setState={setCardOwner} inputType={CARD_OWNER} />
+      <InputGroup setState={setCardOwner} section="owner" />
       {cardOwner}
     </>
   );
