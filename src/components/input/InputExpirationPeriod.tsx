@@ -1,0 +1,62 @@
+import InputBox from "./common/InputBox";
+import CARD_FORM_MESSAGE from "../../constants/cardFormMessage";
+import styled from "@emotion/styled";
+import { ExpirationPeriodValue } from "../../@types/CreditCard";
+
+interface InputExpirationPeriodProps {
+  inputValue: ExpirationPeriodValue;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+const InputExpirationPeriod = ({
+  inputValue,
+  handleChange,
+}: InputExpirationPeriodProps) => {
+  return (
+    <InputContainer>
+      <InputLabel htmlFor="expirationDate">
+        {CARD_FORM_MESSAGE.expirationDate}
+      </InputLabel>
+      <InputWrapper>
+        <InputBox
+          inputValue={inputValue.month}
+          handleChange={handleChange}
+          size="medium"
+          placeholder="MM"
+          id="expirationDate"
+          name="month"
+        />
+        <InputBox
+          inputValue={inputValue.year}
+          handleChange={handleChange}
+          size="medium"
+          placeholder="YY"
+          id="expirationDate"
+          name="year"
+        />
+      </InputWrapper>
+    </InputContainer>
+  );
+};
+
+export default InputExpirationPeriod;
+
+const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const InputLabel = styled.label`
+  font-family: Noto Sans;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 15px;
+  text-align: left;
+  color: rgba(10, 13, 19, 1);
+  margin-bottom: 8px;
+`;
+
+const InputWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
