@@ -4,6 +4,7 @@ import TitleContainer from '../components/TitleContainer';
 const meta = {
   title: 'TitleContainer',
   component: TitleContainer,
+  tags: ['autodocs'],
 } satisfies Meta<typeof TitleContainer>;
 
 export default meta;
