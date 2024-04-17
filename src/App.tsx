@@ -1,7 +1,6 @@
 import './App.css';
-import Input from './components/common/Input';
-import styled from 'styled-components';
 import useInput from './hooks/useInput';
+import CardholderNameContainer from './components/CardholderNameContainer';
 
 const inquireCardholderName = (cardholderName: string) => {
   const isValidLength = cardholderName.length < 101;
@@ -17,27 +16,21 @@ const inquireCardholderName = (cardholderName: string) => {
 };
 
 const App = () => {
-  const { value: cardholderName, handleChange, errorMessage } = useInput('', inquireCardholderName);
+  const {
+    value: cardholderName,
+    handleChange: handleChangeCardholderName,
+    errorMessage: cardholderNameErrorMessage,
+  } = useInput('', inquireCardholderName);
 
   return (
     <>
-      <h1>카드 소유자 이름을 입력해주세요</h1>
-      <label htmlFor="cardholder-name-input">소유자 이름</label>
-      <Input
-        id="cardholder-name-input"
-        value={cardholderName}
-        handleChange={handleChange}
-        isError={!!errorMessage}
-        placeholder="카드 소유자 이름을 입력해주세요"
+      <CardholderNameContainer
+        cardholderName={cardholderName}
+        handleChange={handleChangeCardholderName}
+        errorMessage={cardholderNameErrorMessage}
       />
-      <ErrorText>{errorMessage}</ErrorText>
     </>
   );
 };
-
-const ErrorText = styled.p`
-  color: red;
-  font-size: 14px;
-`;
 
 export default App;
