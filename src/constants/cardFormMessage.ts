@@ -1,0 +1,14 @@
+const CARD_FORM_MESSAGE = {
+  inputCardNumber: "결제할 카드 번호를 입력해 주세요.",
+  cardNumberDescription: "본인 명의의 카드만 결제 가능합니다.",
+  cardNumber: "카드 번호",
+
+  inputCardExpirationDate: "카드 유효기간을 입력해 주세요.",
+  cardExpirationDateDescription: "월/년도(MMYY)를 순서대로 입력해 주세요.",
+  expirationDate: "유효기간",
+
+  inputCardOwner: "카드 소유자 이름을 입력해 주세요",
+  cardOwner: "소유자 이름",
+};
+
+export default CARD_FORM_MESSAGE;
