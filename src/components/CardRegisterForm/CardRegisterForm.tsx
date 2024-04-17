@@ -1,7 +1,6 @@
 import { ChangeEvent } from "react";
 import useInput from "@/hooks/useInput";
 import {
-  INPUT_COUNTS,
   PLACE_HOLDER,
   INPUT_INFO_TITLE,
   INPUT_INFO_SUBTITLE,
@@ -11,30 +10,31 @@ import InputField from "@/components/InputField/InputField";
 import Input from "@/components/Input/Input";
 import S from "./style";
 
-const CardRegisterForm = () => {
+interface Props {
+  cardNumbersState: ReturnType<typeof useInput>;
+  expiredPeriodState: ReturnType<typeof useInput>;
+  ownerNameState: ReturnType<typeof useInput>;
+}
+
+const CardRegisterForm = ({
+  cardNumbersState,
+  expiredPeriodState,
+  ownerNameState,
+}: Props) => {
   const {
     input: cardNumbers,
     onChange: onChangeCardNumbers,
     errorMessage: cardNumbersErrorMessage,
-  } = useInput({
-    initialValue: Array.from({ length: INPUT_COUNTS.CARD_NUMBERS }, () => ""),
-  });
+  } = cardNumbersState;
 
   const {
     input: expirationPeriod,
     onChange: onChangeExpirationPeriod,
     errorMessage: expirationPeriodErrorMessage,
-  } = useInput({
-    initialValue: Array.from(
-      { length: INPUT_COUNTS.EXPIRATION_PERIOD },
-      () => ""
-    ),
-  });
+  } = expiredPeriodState;
 
   const { onChange: onChangeOwnerName, errorMessage: ownerErrorMessage } =
-    useInput({
-      initialValue: [""],
-    });
+    ownerNameState;
 
   const expirationPlaceholder = [
     PLACE_HOLDER.EXPIRATION_MONTH,

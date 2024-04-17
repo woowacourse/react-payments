@@ -7,8 +7,16 @@ type CardType = "VISA" | "MASTER";
 
 interface Props {
   cardType: CardType;
+  cardNumbers: string[];
+  expirationDate: string;
+  ownerName: string;
 }
-const CreditCardPreview = ({ cardType }: Props) => {
+const CreditCardPreview = ({
+  cardType,
+  cardNumbers,
+  expirationDate,
+  ownerName,
+}: Props) => {
   return (
     <S.CardWrapper>
       <S.FlexBox>
@@ -20,13 +28,23 @@ const CreditCardPreview = ({ cardType }: Props) => {
 
       <S.CreditCardInfo>
         <S.CardNumbers>
-          <S.Input type="text" value="1234" readOnly $center></S.Input>
-          <S.Input type="text" value="1234" readOnly $center></S.Input>
-          <S.Input type="password" value="4534" readOnly $center></S.Input>
-          <S.Input type="password" value="1234" readOnly $center></S.Input>
+          {cardNumbers.map((number: string, index) => {
+            const isMasked = index >= 2;
+            return isMasked ? (
+              <S.Input
+                type="password"
+                value={number}
+                readOnly
+                $center
+              ></S.Input>
+            ) : (
+              <S.Input type="text" value={number} readOnly $center></S.Input>
+            );
+          })}
         </S.CardNumbers>
-        <S.Input type="text" value="04/21" readOnly></S.Input>
-        <S.Input type="text" value="LIM DONGJUN" readOnly></S.Input>
+
+        <S.Input type="text" value={expirationDate} readOnly></S.Input>
+        <S.Input type="text" value={ownerName} readOnly></S.Input>
       </S.CreditCardInfo>
     </S.CardWrapper>
   );

@@ -1,13 +1,41 @@
 import styled from "styled-components";
 import CardRegisterForm from "@/components/CardRegisterForm/CardRegisterForm";
 import CreditCardPreview from "@/components/CreditCardPreview/CreditCardPreview";
+import useInput from "@/hooks/useInput";
+import { INPUT_COUNTS } from "@/constants/condition";
 
 const CardRegister = () => {
+  const cardNumbersState = useInput({
+    initialValue: Array.from({ length: INPUT_COUNTS.CARD_NUMBERS }, () => ""),
+  });
+
+  const expiredDateState = useInput({
+    initialValue: Array.from(
+      { length: INPUT_COUNTS.EXPIRATION_PERIOD },
+      () => ""
+    ),
+  });
+
+  const ownerNameState = useInput({
+    initialValue: [""],
+  });
+
   return (
     <S.CardRegisterWrapper>
       <S.FlexWrapper>
-        <CreditCardPreview cardType="VISA" />
-        <CardRegisterForm />
+        <CreditCardPreview
+          cardType="VISA"
+          cardNumbers={cardNumbersState.input}
+          expirationDate={
+            expiredDateState.input[0] && expiredDateState.input.join("/")
+          }
+          ownerName={ownerNameState.input[0]}
+        />
+        <CardRegisterForm
+          cardNumbersState={cardNumbersState}
+          expiredPeriodState={expiredDateState}
+          ownerNameState={ownerNameState}
+        />
       </S.FlexWrapper>
     </S.CardRegisterWrapper>
   );

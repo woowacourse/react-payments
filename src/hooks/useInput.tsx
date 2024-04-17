@@ -9,7 +9,6 @@ interface Props {
 //TODO: validate : 에러가 없는 경우에는 빈 문자열 반환,
 //에러 있으면 에러 메세지 반환
 
-//[]
 const useInput = ({ initialValue = [], validate }: Props) => {
   const [input, setInput] = useState<string[]>(initialValue);
   const [errorMessage, setErrorMessage] = useState("");
