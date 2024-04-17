@@ -15,6 +15,10 @@ const CardPreview = ({ cardInfo }: Props) => {
           }
           return <span key={index}>{cardNumber !== 0 && cardNumber}</span>;
         })}
+        <div>
+          {cardInfo.cardExpiration["month"] !== 0 && cardInfo.cardExpiration["month"] + "/"}
+          {cardInfo.cardExpiration["year"] !== 0 && cardInfo.cardExpiration["year"]}
+        </div>
       </div>
     </>
   );
