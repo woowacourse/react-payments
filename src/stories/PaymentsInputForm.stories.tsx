@@ -17,21 +17,25 @@ export const CardNumber: Story = {
     errorMessage: 'ddd',
     inputFieldProps: [
       {
+        inputType: 'number',
         placeholder: '1234',
         maxLength: 4,
         hasError: true,
       },
       {
+        inputType: 'number',
         placeholder: '1234',
         maxLength: 4,
         hasError: false,
       },
       {
+        inputType: 'number',
         placeholder: '1234',
         maxLength: 4,
         hasError: false,
       },
       {
+        inputType: 'number',
         placeholder: '1234',
         maxLength: 4,
         hasError: false,
@@ -48,11 +52,13 @@ export const ExpirationDate: Story = {
     errorMessage: 'ddddd',
     inputFieldProps: [
       {
+        inputType: 'number',
         placeholder: 'MM',
         maxLength: 2,
         hasError: false,
       },
       {
+        inputType: 'number',
         placeholder: 'YY',
         maxLength: 2,
         hasError: false,
@@ -68,6 +74,7 @@ export const Name: Story = {
     errorMessage: '',
     inputFieldProps: [
       {
+        inputType: 'english',
         placeholder: 'FAMILY / GIVEN',
         maxLength: 50,
         hasError: false,

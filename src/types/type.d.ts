@@ -1,5 +1,8 @@
+type InputType = 'text' | 'number' | 'english';
+
 interface PaymentsInputFieldProps {
-  placeholder: string;
+  inputType?: InputType;
+  placeholder?: string;
   maxLength?: number;
   hasError?: boolean;
 }

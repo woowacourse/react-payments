@@ -1,3 +1,5 @@
+import useInput from "../hooks/useInput";
+
 import styled from 'styled-components';
 
 const Input = styled.input<{ hasError?: boolean }>`
@@ -12,7 +14,8 @@ const Input = styled.input<{ hasError?: boolean }>`
 
   &:focus {
     outline: none;
-    border: solid 1px #000000;
+    border: ${(props) =>
+    props.hasError ? 'solid 1px #ff3d3d' : 'solid 1px #000000'};
   }
 
   &::placeholder {
@@ -20,16 +23,16 @@ const Input = styled.input<{ hasError?: boolean }>`
   }
 `;
 
-const PaymentsInputField = ({ ...props }: PaymentsInputFieldProps) => {
+const PaymentsInputField = ({ maxLength = 50, ...props }: PaymentsInputFieldProps) => {
+  const [value, setValue, hasError] = useInput(maxLength, props.inputType ?? 'text');
+
   return (
-    <>
-      <Input
-        type="text"
-        placeholder={props.placeholder}
-        maxLength={props.maxLength}
-        hasError={props.hasError}
-      />
-    </>
+    <Input
+      placeholder={props.placeholder}
+      hasError={hasError}
+      value={value}
+      onChange={setValue}
+    />
   );
 };
 

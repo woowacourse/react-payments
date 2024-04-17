@@ -4,6 +4,15 @@ import PaymentsFormSection from '../components/PaymentsFormSection';
 const meta = {
   title: 'PaymentsFormSection',
   component: PaymentsFormSection,
+  argTypes: {
+    inputFormProps: {
+      regexp: {
+        control: {
+          type: 'object',
+        },
+      }
+    },
+  }
 } satisfies Meta<typeof PaymentsFormSection>;
 
 export default meta;
@@ -22,21 +31,25 @@ export const CardNumber: Story = {
       errorMessage: 'ddd',
       inputFieldProps: [
         {
+          inputType: 'number',
           placeholder: '1234',
           maxLength: 4,
           hasError: true,
         },
         {
+          inputType: 'number',
           placeholder: '1234',
           maxLength: 4,
           hasError: false,
         },
         {
+          inputType: 'number',
           placeholder: '1234',
           maxLength: 4,
           hasError: false,
         },
         {
+          inputType: 'number',
           placeholder: '1234',
           maxLength: 4,
           hasError: false,
@@ -58,11 +71,13 @@ export const ExpirationDate: Story = {
       errorMessage: '',
       inputFieldProps: [
         {
+          inputType: 'number',
           placeholder: 'MM',
           maxLength: 2,
           hasError: false,
         },
         {
+          inputType: 'number',
           placeholder: 'YY',
           maxLength: 2,
           hasError: false,
@@ -83,6 +98,7 @@ export const Name: Story = {
       errorMessage: '',
       inputFieldProps: [
         {
+          inputType: 'english',
           placeholder: 'FAMILY / GIVEN',
           maxLength: 50,
           hasError: false,

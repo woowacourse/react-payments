@@ -1,5 +1,6 @@
-import styled from 'styled-components';
 import PaymentsInputField from './PaymentsInputField';
+
+import styled from 'styled-components';
 
 const InputForm = styled.div`
   display: flex;
@@ -37,6 +38,7 @@ const PaymentsInputForm = ({ ...props }: PaymentsInputFormProps) => {
           (inputFieldProp: PaymentsInputFieldProps) => {
             return (
               <PaymentsInputField
+                inputType={inputFieldProp.inputType}
                 placeholder={inputFieldProp.placeholder}
                 maxLength={inputFieldProp.maxLength}
                 hasError={inputFieldProp.hasError}
