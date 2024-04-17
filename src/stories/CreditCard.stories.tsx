@@ -22,28 +22,35 @@ export const Default: Story = {
 };
 
 const dummyCardInfo: CardInfo = {
-  cardNumbers: [5, 1, 2, 3, 4, 5, 7, 8, 9, 9, 9, 1, 0, 1, 2],
-  cardValidityPeriod: { month: 9, year: 2025 },
+  cardNumbers: [5, 1, 2, 3, 4, 5, 7, 8, 9, 9, 9, 1, 0, 1, 2, 3],
+  cardValidityPeriod: { month: 9, year: 25 },
   ownerName: "River",
 };
 
 export const MasterCard: Story = {
   name: "51~56 숫자로 시작하는 숫자라면 마스터 카드 이미지가 나와야 한다",
   args: {
-    cardInfo: { ...dummyCardInfo, cardNumbers: [5, 1, 2, 3, 4, 5, 7, 8, 9, 9, 9, 1, 0, 1, 2] },
+    cardInfo: { ...dummyCardInfo, cardNumbers: [5, 1, 2, 3, 4, 5, 7, 8, 9, 9, 9, 1, 0, 1, 2, 3] },
+  },
+};
+
+export const CardNumbersUnder16: Story = {
+  name: "카드번호가 10자리인 경우",
+  args: {
+    cardInfo: { ...dummyCardInfo, cardNumbers: [5, 1, 2, 3, 4, 5, 7, 8, 9, 9, 9, 1, 0, 1] },
   },
 };
 
 export const VisaCard: Story = {
   name: "4 숫자로 시작하는 숫자라면 비자 카드 이미지가 나와야 한다",
   args: {
-    cardInfo: { ...dummyCardInfo, cardNumbers: [4, 1, 2, 3, 4, 5, 7, 8, 9, 9, 9, 1, 0, 1, 2] },
+    cardInfo: { ...dummyCardInfo, cardNumbers: [4, 1, 2, 3, 4, 5, 7, 8, 9, 9, 9, 1, 0, 1, 2, 3] },
   },
 };
 
 export const NoImageCard: Story = {
   name: "비자, 마스터카드가 아니면 이미지가 나오지 않는다.",
   args: {
-    cardInfo: { ...dummyCardInfo, cardNumbers: [3, 1, 2, 3, 4, 5, 7, 8, 9, 9, 9, 1, 0, 1, 2] },
+    cardInfo: { ...dummyCardInfo, cardNumbers: [3, 1, 2, 3, 4, 5, 7, 8, 9, 9, 9, 1, 0, 1, 2, 3] },
   },
 };
