@@ -39,6 +39,8 @@ const CardInfoContainer = styled.div`
 
 const CardInfoNumbers = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 10px;
 `;
 
@@ -49,6 +51,20 @@ const PreviewText = styled.span`
   line-height: 20px;
   letter-spacing: 0.08em;
   text-align: left;
+`;
+
+const HiddenNumberContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+`;
+
+const HiddenNumber = styled.div`
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 1);
 `;
 
 interface Props {
@@ -85,8 +101,20 @@ export default function CardPreview({ cardInformation }: Props) {
         <CardInfoNumbers>
           <PreviewText>{cardInformation.cardNumber1}</PreviewText>
           <PreviewText>{cardInformation.cardNumber2}</PreviewText>
-          <PreviewText>{cardInformation.cardNumber3}</PreviewText>
-          <PreviewText>{cardInformation.cardNumber4}</PreviewText>
+          <HiddenNumberContainer>
+            {Array.from({ length: cardInformation.cardNumber3.length }).map(
+              (_, index) => (
+                <HiddenNumber key={index} />
+              )
+            )}
+          </HiddenNumberContainer>
+          <HiddenNumberContainer>
+            {Array.from({ length: cardInformation.cardNumber4.length }).map(
+              (_, index) => (
+                <HiddenNumber key={index} />
+              )
+            )}
+          </HiddenNumberContainer>
         </CardInfoNumbers>
         <div className="card-info-expiration-date">
           <PreviewText>{cardInformation.cardExpirationMonth}</PreviewText>

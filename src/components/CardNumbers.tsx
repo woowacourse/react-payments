@@ -95,6 +95,7 @@ export default function CardNumbers({
             onBlur={isValidLength}
           />
           <Input
+            type="password"
             maxLength={4}
             placeholder="1234"
             onChange={(value) => isValidInput(value, "cardNumber3")}
@@ -102,6 +103,7 @@ export default function CardNumbers({
             onBlur={isValidLength}
           />
           <Input
+            type="password"
             maxLength={4}
             placeholder="1234"
             onChange={(value) => isValidInput(value, "cardNumber4")}

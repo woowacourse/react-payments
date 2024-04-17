@@ -27,6 +27,7 @@ const SInput = styled.input<{
 `;
 
 interface Props {
+  type?: string;
   maxLength: number;
   placeholder: string;
   onChange: (inputValue: string) => boolean;
@@ -35,6 +36,7 @@ interface Props {
 }
 
 export default function Input({
+  type,
   maxLength,
   placeholder,
   onChange,
@@ -46,7 +48,7 @@ export default function Input({
 
   return (
     <SInput
-      type="text"
+      type={type ? type : "text"}
       maxLength={maxLength}
       placeholder={placeholder}
       onChange={(e) => {
