@@ -1,27 +1,24 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 
 import {
-  CAR_EXPIRATION,
-  CAR_EXPIRATION_PERIOD_FORM_MESSAGE,
+  CARD_EXPIRATION,
+  CARD_EXPIRATION_PERIOD_FORM_MESSAGE,
   ERROR_MESSAGE,
 } from '../../constants';
+import { CardPeriod } from '../../modules/reducer';
 import debounceFunc from '../../utils/debounceFunc';
 import CardInputForm from '../CardInputForm';
 import CardInputFormContainer from '../CardInputFormContainer';
 import Input from '../Input';
 
-interface Card {
-  month: number | undefined;
-  year: number | undefined;
-}
 type Error = 'number' | 'period' | null;
 
 export default function CardExpirationPeriodForm() {
   const { title, subTitle, label, yearPlaceholder, monthPlaceholder } =
-    CAR_EXPIRATION_PERIOD_FORM_MESSAGE;
-  const { length } = CAR_EXPIRATION;
+    CARD_EXPIRATION_PERIOD_FORM_MESSAGE;
+  const { length } = CARD_EXPIRATION;
 
-  const [card, setCard] = useState<Card>({
+  const [cardPeriod, setCardPeriod] = useState<CardPeriod>({
     month: undefined,
     year: undefined,
   });
@@ -31,12 +28,12 @@ export default function CardExpirationPeriodForm() {
   const month = today.getMonth() + 1;
 
   const validatePeriod = () => {
-    if (!card.year || !card.month) return;
+    if (!cardPeriod.year || !cardPeriod.month) return;
     // 유효하지 않은 카드 기간
     // 카드 연도가 올해보다 이전 이거나
     // 카드 연도 === 올해, 카드 월 < 이번 달
-    const isOverYear = card.year > year;
-    const isOverMonth = card.year === year && card.month >= month;
+    const isOverYear = cardPeriod.year > year;
+    const isOverMonth = cardPeriod.year === year && cardPeriod.month >= month;
     const isValidatedPeriod = isOverYear || isOverMonth;
 
     setError(isValidatedPeriod ? null : 'period');
@@ -53,7 +50,7 @@ export default function CardExpirationPeriodForm() {
       return;
     }
     debounceFunc(() => {
-      setCard((prev) => ({
+      setCardPeriod((prev) => ({
         ...prev,
         month: Number(value),
       }));
@@ -71,8 +68,9 @@ export default function CardExpirationPeriodForm() {
 
       return;
     }
+
     debounceFunc(() => {
-      setCard((prev) => ({
+      setCardPeriod((prev) => ({
         ...prev,
         year: Number(`20${value}`),
       }));
@@ -87,12 +85,13 @@ export default function CardExpirationPeriodForm() {
       validateMonth(event);
       return;
     }
+
     validateYear(event);
   };
 
   useEffect(() => {
     validatePeriod();
-  }, [card]);
+  }, [cardPeriod]);
 
   return (
     <CardInputFormContainer title={title} subTitle={subTitle}>

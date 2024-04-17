@@ -4,10 +4,10 @@ export const CARD_NUMBERS = {
   endNumber: 9,
 };
 
-export const CAR_EXPIRATION = {
+export const CARD_EXPIRATION = {
   length: 2,
 };
 
-export const CAR_USER = {
+export const CARD_USER = {
   length: 100,
 };
