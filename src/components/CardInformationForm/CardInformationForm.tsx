@@ -48,10 +48,10 @@ const CardInformationForm = ({
       >
         <InputField label="카드 번호" error="">
           <>
-            <Input placeholder="1234" value={first} onChange={setFirst} />
-            <Input placeholder="1234" value={second} onChange={setSecond} />
-            <Input placeholder="1234" value={third} onChange={setThird} />
-            <Input placeholder="1234" value={fourth} onChange={setFourth} />
+            <Input placeholder="1234" value={first} maxLength={4} onChange={setFirst} />
+            <Input placeholder="1234" value={second} maxLength={4} onChange={setSecond} />
+            <Input placeholder="1234" value={third} maxLength={4} onChange={setThird} />
+            <Input placeholder="1234" value={fourth} maxLength={4} onChange={setFourth} />
           </>
         </InputField>
       </FormField>
@@ -61,14 +61,19 @@ const CardInformationForm = ({
       >
         <InputField label="유효기간" error="">
           <>
-            <Input placeholder="MM" value={month} onChange={setMonth} />
-            <Input placeholder="YY" value={year} onChange={setYear} />
+            <Input placeholder="MM" value={month} maxLength={2} onChange={setMonth} />
+            <Input placeholder="YY" value={year} maxLength={2} onChange={setYear} />
           </>
         </InputField>
       </FormField>
       <FormField title="카드 소유자 이름을 입력해 주세요">
         <InputField label="소유자 이름" error="">
-          <Input placeholder="SIMO" value={userNameState} onChange={setUserNameState} />
+          <Input
+            placeholder="SIMO"
+            value={userNameState}
+            maxLength={20}
+            onChange={setUserNameState}
+          />
         </InputField>
       </FormField>
     </Form>

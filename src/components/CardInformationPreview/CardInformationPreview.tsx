@@ -42,10 +42,10 @@ const CardInformationPreview = ({
             {second}
           </Preview.UserInfomation>
           <Preview.UserInfomation typo={theme.typography.cardNumber}>
-            {third}
+            {'*'.repeat(String(third).length)}
           </Preview.UserInfomation>
           <Preview.UserInfomation typo={theme.typography.cardNumber}>
-            {fourth}
+            {'*'.repeat(String(fourth).length)}
           </Preview.UserInfomation>
         </Preview.CardNumberContainer>
         <Preview.UserInfomation typo={theme.typography.cardExpirationDate}>
