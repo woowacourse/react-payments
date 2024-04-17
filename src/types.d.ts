@@ -1,12 +1,7 @@
-type Period = {
-  month?: number;
-  year?: number;
-};
-
 interface CardInfo {
-  cardNumbers: number[];
-  cardValidityPeriod: Period;
-  ownerName?: string;
+  cardNumbers: string[];
+  cardValidityPeriod: string[];
+  ownerName?: string[];
 }
 
 type SizePresetType = "small" | "medium" | "large";
@@ -18,5 +13,5 @@ interface FormFieldInfo {
   label: string;
   sizePreset?: SizePresetType;
   inputPlaceholderList: (string | null)[];
-  initialValue: Values<CardInfo>;
+  valueList: Values<CardInfo>;
 }
