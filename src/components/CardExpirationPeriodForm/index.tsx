@@ -47,14 +47,13 @@ export default function CardExpirationPeriodForm(
 
   const validateMonth = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    const regex = /^(0[1-9]|1[0-2])$/;
+    const regex = /^([0-9]{2})$/;
     const isValidated = regex.test(value);
 
-    if (!isValidated) {
-      debounceFunc(() => setError('number'), 10);
-    }
-
     debounceFunc(() => {
+      setError(!isValidated ? 'number' : null);
+      if (!isValidated) return;
+
       setCardPeriod((prev) => ({
         ...prev,
         month: value ? Number(value) : undefined,
@@ -68,11 +67,10 @@ export default function CardExpirationPeriodForm(
     const regex = /^\d{2}$/;
     const isValidated = regex.test(value);
 
-    if (!isValidated) {
-      debounceFunc(() => setError(isValidated ? null : 'number'), 10);
-    }
-
     debounceFunc(() => {
+      setError(!isValidated ? 'number' : null);
+      if (!isValidated) return;
+
       setCardPeriod((prev) => ({
         ...prev,
         year: value ? Number(value) : undefined,
