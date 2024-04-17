@@ -1,14 +1,7 @@
 import { useState } from 'react';
 import TitleContainer from './TitleContainer';
 import Input from './Input';
-import styled from 'styled-components';
-import * as S from '../styles/common.style';
-
-const CardNumberInputContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  row-gap: 8px;
-`;
+import InputField from './InputField';
 
 interface CardNumberInputProps {
   cardNumber: string[];
@@ -58,22 +51,18 @@ function CardNumberInput({ cardNumber, setCardNumber }: CardNumberInputProps) {
   return (
     <div>
       <TitleContainer title="결제할 카드 번호를 입력해 주세요." subTitle="본인 명의의 카드만 결제 가능합니다." />
-      <CardNumberInputContainer>
-        <S.InputLabel>카드 번호</S.InputLabel>
-        <S.InputContainer $length={4}>
-          {Array.from({ length: 4 }).map((_, index) => (
-            <Input
-              key={index}
-              type="text"
-              placeholder="1234"
-              maxLength={4}
-              onChange={onCardNumberChange(index)}
-              isValid={isValid[index]}
-            ></Input>
-          ))}
-        </S.InputContainer>
-        <S.ErrorMessage>{errorMessage}</S.ErrorMessage>
-      </CardNumberInputContainer>
+      <InputField label="카드 번호" length={4} errorMessage={errorMessage}>
+        {Array.from({ length: 4 }).map((_, index) => (
+          <Input
+            key={index}
+            type="text"
+            placeholder="1234"
+            maxLength={4}
+            onChange={onCardNumberChange(index)}
+            isValid={isValid[index]}
+          ></Input>
+        ))}
+      </InputField>
     </div>
   );
 }
