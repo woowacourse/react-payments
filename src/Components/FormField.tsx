@@ -3,15 +3,15 @@ import FormInput from "./FormInput";
 import Tooltip from "./Tooltip";
 
 interface Props {
-  title: string;
-  description?: string;
-  label: string;
-  sizePreset?: SizePresetType;
-  inputPlaceholderList: (string | null)[];
+  id: number;
+  formFieldInfo: FormFieldInfo;
+  setCardInfo?: React.Dispatch<React.SetStateAction<CardInfo>>;
 }
 
-const FormField: React.FC<Props> = ({ title, description, label, sizePreset, inputPlaceholderList }) => {
-  const [inputValues, setInputValues] = useState(Array(inputPlaceholderList.length).fill([]));
+const FormField: React.FC<Props> = ({
+  formFieldInfo: { title, description, label, sizePreset, inputPlaceholderList },
+}) => {
+  const [inputValues, setInputValues] = useState(Array(inputPlaceholderList.length).fill([])); // 각각의 input의 유효성을 검사하기 위한 상태
   const [errorMessage, setErrorMessage] = useState<null | string>(null);
 
   useEffect(() => {
@@ -23,6 +23,7 @@ const FormField: React.FC<Props> = ({ title, description, label, sizePreset, inp
 
   const handleChange = (e, index) => {
     //TODO: setInputValues[index]
+    //TODO: setCardInfo((prev)=>{prev[formFieldInfo.key] = e.target.value})
   };
 
   const handleSubmit = () => {
