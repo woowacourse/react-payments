@@ -3,6 +3,9 @@ import TitleContainer from './TitleContainer';
 import InputField from './InputField';
 import Input from './Input';
 
+import { CARD_NUMBER } from '../constants/Condition';
+import { ERROR_MESSAGE } from '../constants/Message';
+
 interface CardNumberInputProps {
   setCardNumber: React.Dispatch<React.SetStateAction<string[]>>;
 }
@@ -12,8 +15,8 @@ function CardNumberInput({ setCardNumber }: CardNumberInputProps) {
   const [errorMessage, setErrorMessage] = useState<string>('');
 
   const validateCardNumber = (number: string) => {
-    if (Number.isNaN(Number(number)) || number.length !== 4) {
-      setErrorMessage('카드 번호는 4자리 숫자여야 합니다.');
+    if (Number.isNaN(Number(number)) || number.length !== CARD_NUMBER.MAX_LENGTH) {
+      setErrorMessage(ERROR_MESSAGE.INVALID_CARD_NUMBER_LENGTH);
       return false;
     }
 
@@ -53,12 +56,12 @@ function CardNumberInput({ setCardNumber }: CardNumberInputProps) {
   return (
     <div>
       <TitleContainer title="결제할 카드 번호를 입력해 주세요." subTitle="본인 명의의 카드만 결제 가능합니다." />
-      <InputField label="카드 번호" length={4} errorMessage={errorMessage}>
-        {Array.from({ length: 4 }).map((_, index) => (
+      <InputField label="카드 번호" length={CARD_NUMBER.INPUT_FIELD_COUNT} errorMessage={errorMessage}>
+        {Array.from({ length: CARD_NUMBER.INPUT_FIELD_COUNT }).map((_, index) => (
           <Input
             key={index}
             type="text"
-            maxLength={4}
+            maxLength={CARD_NUMBER.MAX_LENGTH}
             placeholder="1234"
             onChange={onCardNumberChange(index)}
             onBlur={onCardNumberBlur(index)}
