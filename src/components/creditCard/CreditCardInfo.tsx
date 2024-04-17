@@ -19,7 +19,7 @@ const CreditCardInfo = ({ creditCardNumber, expirationPeriod, ownerName }: Credi
     <CreditCardInfoContainer>
       <CreditCardInfoWrapper>{maskLastEightDigits(creditCardNumber)}</CreditCardInfoWrapper>
       <h3>{expirationPeriod}</h3>
-      <h3>{ownerName}</h3>
+      <CreditCardOwnerInfo>{ownerName}</CreditCardOwnerInfo>
     </CreditCardInfoContainer>
   );
 };
@@ -48,8 +48,20 @@ const CreditCardInfoWrapper = styled.div`
   height: 20px;
 `;
 
-const CreditCardInfoNumber = styled.h3``;
+const CreditCardInfoNumber = styled.h3`
+  width: 42px;
+  overflow: hidden;
+`;
 
 const CreditCardInfoSymbol = styled.h3`
   font-size: 8px;
+  width: 42px;
+  overflow: hidden;
+`;
+
+const CreditCardOwnerInfo = styled.h3`
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
