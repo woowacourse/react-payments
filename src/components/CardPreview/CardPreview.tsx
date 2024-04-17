@@ -51,13 +51,19 @@ const CardPreview = ({
           {cardNumbers.map((cardNumber, index) => {
             const isMask = index >= 2;
             return (
-              <span className={`${styles.cardNumber} ${isMask && styles.mask}`}>
+              <span
+                key={index}
+                className={`${styles.cardNumber} ${isMask && styles.mask}`}
+              >
                 {index >= 2 ? '●'.repeat(cardNumber.length) : cardNumber}
               </span>
             );
           })}
         </div>
-        <div className={styles.expirationDate}>{expirationDate.join('/')}</div>
+        <div className={styles.expirationDate}>
+          {expirationDate.every((input) => input !== '') &&
+            expirationDate.join('/')}
+        </div>
         <div className={styles.ownerName}>{ownerName}</div>
       </div>
     </div>

@@ -42,3 +42,12 @@ input {
   -moz-appearance: none;
   appearance: none;
 }
+
+#root {
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

@@ -54,6 +54,8 @@ export default function CardNumberInput({ setCardData }: CardNumberInputProps) {
   const onBlur = (event: React.FocusEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
 
+    setCardData('cardNumbers', Object.values(cardNumbers));
+
     if (!hasFourDigit(value)) {
       setErrMsg('4자리 숫자를 입력해 주세요.');
       setIsError({ ...isError, [name]: true });
@@ -61,9 +63,6 @@ export default function CardNumberInput({ setCardData }: CardNumberInputProps) {
     }
     setIsError({ ...isError, [name]: false });
     setErrMsg('');
-
-    console.log(typeof setCardData);
-    setCardData('cardNumbers', Object.values(cardNumbers));
   };
 
   return (

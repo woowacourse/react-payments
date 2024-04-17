@@ -2,6 +2,8 @@
   background-color: var(--color-card-bg);
   border-radius: 4px;
 
+  width: 230px;
+  height: 132px;
   max-width: fit-content;
 
   box-shadow: 3px 3px 5px 0px #00000040;
@@ -45,6 +47,8 @@
   display: flex;
   gap: 10px;
   letter-spacing: 2px;
+
+  height: 20px;
 }
 
 .cardNumber {
@@ -54,4 +58,12 @@
 .mask {
   font-size: 4px;
   letter-spacing: 4px;
+}
+
+.expirationDate {
+  height: 20px;
+}
+
+.ownerName {
+  height: 20px;
 }

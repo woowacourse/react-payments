@@ -1,4 +1,5 @@
-import './App.css';
+import styles from './App.module.css';
+
 import CardNumberInput from './components/CardNumberInput/CardNumberInput';
 import ExpirationDateInput from './components/ExpirationDateInput/ExpirationDateInput';
 import OwnerNameInput from './components/OwnerNameInput/OwnerNameInput';
@@ -20,16 +21,19 @@ function App() {
   };
 
   return (
-    <>
+    <div className={styles.app}>
       <CardPreview
         cardNumbers={cardInfo.cardNumbers}
         expirationDate={cardInfo.expirationDate}
         ownerName={cardInfo.ownerName}
       />
-      <CardNumberInput setCardData={setCardData} />
-      <ExpirationDateInput setCardData={setCardData} />
-      <OwnerNameInput setCardData={setCardData} />
-    </>
+
+      <form>
+        <CardNumberInput setCardData={setCardData} />
+        <ExpirationDateInput setCardData={setCardData} />
+        <OwnerNameInput setCardData={setCardData} />
+      </form>
+    </div>
   );
 }
 

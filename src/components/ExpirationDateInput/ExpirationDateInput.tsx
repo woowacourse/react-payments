@@ -57,6 +57,8 @@ const ExpirationDateInput = ({ setCardData }: ExpirationDateInputProps) => {
   const onBlur = (event: React.FocusEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
 
+    setCardData('expirationDate', Object.values(expirationDate));
+
     if (!hasTwoDigit(value)) {
       setErrMsg('2자리 숫자를 입력해 주세요.');
       setIsError({ ...isError, [name]: true });
@@ -77,7 +79,6 @@ const ExpirationDateInput = ({ setCardData }: ExpirationDateInputProps) => {
 
     setIsError({ ...isError, [name]: false });
     setErrMsg('');
-    setCardData('expirationDate', Object.values(expirationDate));
   };
 
   return (
