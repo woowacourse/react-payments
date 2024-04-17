@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './App.css';
+import './reset.css';
 import InputGroup from './components/InputGroup';
-import { CARD_NUMBER, CARD_OWNER, CARD_PERIOD } from './constants/inputInformation';
 import CardImage from './components/CardImage';
 
 function App() {
