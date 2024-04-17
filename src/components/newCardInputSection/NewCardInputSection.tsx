@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 
 interface Props {
   mainText: string;
-  subText: string;
+  subText?: string;
   errorMessage: string;
   children: ReactNode;
 }
@@ -12,7 +12,7 @@ const NewCardInputSection = ({ mainText, subText, errorMessage, children }: Prop
     <>
       <div>
         <h1>{mainText}</h1>
-        <p>{subText}</p>
+        {subText && <p>{subText}</p>}
       </div>
       <form>{children}</form>
       {errorMessage && <span>{errorMessage}</span>}
