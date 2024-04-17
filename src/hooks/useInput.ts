@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 type ErrorMessage = string;
 
-const useInput = (initialValue = '', inquireValidity: (value: string) => ErrorMessage) => {
+const useInput = (initialValue = '', inquireValidity?: (value: string) => ErrorMessage) => {
   const [value, setValue] = useState(initialValue);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -11,7 +11,9 @@ const useInput = (initialValue = '', inquireValidity: (value: string) => ErrorMe
   };
 
   const updateErrorMessage = () => {
-    setErrorMessage(inquireValidity(value));
+    if (inquireValidity) {
+      setErrorMessage(inquireValidity(value));
+    }
   };
 
   return {
