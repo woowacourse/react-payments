@@ -11,7 +11,7 @@ const Input = ({ placeholder, isError, onChange }: Props) => {
   return (
     <S.InputBox
       onChange={onChange}
-      isError={isError}
+      $isError={isError}
       placeholder={placeholder}
     ></S.InputBox>
   );

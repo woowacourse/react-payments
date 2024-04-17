@@ -20,10 +20,10 @@ const CreditCardPreview = ({ cardType }: Props) => {
 
       <S.CreditCardInfo>
         <S.CardNumbers>
-          <S.Input type="text" value="1234" readOnly center></S.Input>
-          <S.Input type="text" value="1234" readOnly center></S.Input>
-          <S.Input type="password" value="4534" readOnly center></S.Input>
-          <S.Input type="password" value="1234" readOnly center></S.Input>
+          <S.Input type="text" value="1234" readOnly $center></S.Input>
+          <S.Input type="text" value="1234" readOnly $center></S.Input>
+          <S.Input type="password" value="4534" readOnly $center></S.Input>
+          <S.Input type="password" value="1234" readOnly $center></S.Input>
         </S.CardNumbers>
         <S.Input type="text" value="04/21" readOnly></S.Input>
         <S.Input type="text" value="LIM DONGJUN" readOnly></S.Input>

@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-const InputBox = styled.input<{ isError: boolean }>`
+const InputBox = styled.input<{ $isError: boolean }>`
   flex: 1;
   border: 1px solid
-    ${({ theme, isError }) =>
-      isError ? theme.COLOR.error : theme.COLOR["grey-2"]};
+    ${({ theme, $isError }) =>
+      $isError ? theme.COLOR.error : theme.COLOR["grey-2"]};
 
   padding: 8px;
   border-radius: 2px;

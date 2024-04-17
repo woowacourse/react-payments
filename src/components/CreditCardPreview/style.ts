@@ -49,12 +49,12 @@ const LogoBox = styled.div<{ color: string }>`
   align-items: center;
 `;
 
-const Input = styled.input<{ center?: boolean }>`
+const Input = styled.input<{ $center?: boolean }>`
   font-size: 14px;
   font-weight: 500;
   letter-spacing: 0.16em;
-  ${({ center }) =>
-    center &&
+  ${({ $center }) =>
+    $center &&
     css`
       text-align: center;
     `}
