@@ -1,5 +1,8 @@
-import { css } from "styled-components";
+import { createGlobalStyle } from "styled-components";
+import resetStyle from "./reset";
 
-export const font = {
-  caption: "",
-};
+const GlobalStyles = createGlobalStyle`
+  ${resetStyle}
+`;
+
+export default GlobalStyles;
