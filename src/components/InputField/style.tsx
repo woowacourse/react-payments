@@ -1,17 +1,18 @@
 import styled from "styled-components";
 
-const InputsWrapper = styled.div`
-  display: flex;
-  width: 100%;
-  gap: 8px;
-  height: 32px;
+const Label = styled.label`
+  font-size: 12px;
+  font-weight: 500;
 `;
 
-const InputBox = styled.input`
-  border: 1px solid #acacac;
-  padding: 8px;
-  border-radius: 2px;
-  font-size: 11px;
+const InputFieldWrapper = styled.div`
+  background-color: pink;
+`;
+
+const InputsWrapper = styled.div`
+  display: flex;
+  gap: 8px;
+  height: 32px;
 `;
 
 const ErrorMessageWrapper = styled.div`
@@ -20,6 +21,6 @@ const ErrorMessageWrapper = styled.div`
   font-weight: 400;
 `;
 
-const S = { InputsWrapper, InputBox, ErrorMessageWrapper };
+const S = { Label, InputsWrapper, ErrorMessageWrapper, InputFieldWrapper };
 
 export default S;
