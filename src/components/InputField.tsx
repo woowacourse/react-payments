@@ -1,30 +1,31 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import { InputInfo, InputType } from '../types/input';
 import Validation from '../domain/InputValidation';
-import { useState } from 'react';
 import { Card } from '../types/card';
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  margin: 8px;
-  gap: 8px;
+  height: 120px;
 `;
 
 const Title = styled.h1`
   color: #000;
   font-size: 18px;
+  margin-bottom: 4px;
 `;
 
 const SubTitle = styled.p`
   color: #8b95a1;
   font-size: 9.5px;
+  margin-bottom: 16px;
 `;
 
 const Label = styled.p`
   color: var(--Text, #0a0d13);
   font-size: 12px;
+  margin-bottom: 8px;
 `;
 
 const InputBox = styled.div`
@@ -34,14 +35,22 @@ const InputBox = styled.div`
   height: 2rem;
   align-items: center;
   gap: 0.5rem;
+  margin-bottom: 8px;
 `;
 
 const Input = styled.input`
   width: 100%;
   padding: 0.5rem;
+  border: 1px solid ${(props) => props.color};
+  border-radius: 3px;
 `;
 
-interface props {
+const ErrorBox = styled.div`
+  color: red;
+  font-size: 9.5px;
+`;
+
+interface Props {
   title: string;
   subtitle?: string;
   inputTypes: InputType;
@@ -55,42 +64,48 @@ export default function InputField({
   inputTypes,
   cardInfo,
   handleInput,
-}: props) {
-  const [errorMessage, setErrorMessage] = useState<string>('');
+}: Props) {
+  const [errorMessages, setErrorMessages] = useState<{ [key: number]: string }>(
+    {}
+  );
+
   return (
     <>
       <Container>
-        <Title> {title} </Title>
-        <SubTitle> {subtitle} </SubTitle>
-
-        <Label> {inputTypes.inputLabel} </Label>
+        <Title>{title}</Title>
+        <SubTitle>{subtitle}</SubTitle>
+        <Label>{inputTypes.inputLabel}</Label>
         <InputBox>
           {inputTypes.inputInfo.map((info: InputInfo, index: number) => (
             <Input
+              color={errorMessages[index] ? 'red' : 'grey'}
               key={index}
               type="text"
               maxLength={info.maxLength}
               placeholder={info.placeHolder}
               onChange={(e) => {
                 try {
-                  Validation[info.validateType]?.(e.target.value as string);
-                  setErrorMessage('');
+                  Validation[info.validateType]?.(e.target.value);
+                  setErrorMessages((prev) => ({ ...prev, [index]: '' }));
                   handleInput({
                     ...cardInfo,
                     [info.property]: e.target.value,
                   });
-                  console.log(cardInfo);
-                } catch (error: unknown) {
+                } catch (error) {
                   if (error instanceof Error) {
-                    setErrorMessage(error.message);
+                    setErrorMessages((prev) => ({
+                      ...prev,
+                      [index]: error.message,
+                    }));
                   }
                 }
               }}
             />
           ))}
         </InputBox>
-        {/* TODO: 스타일 작업 + 에러폼 보더 색상 변경 */}
-        {errorMessage}
+        <ErrorBox>
+          {Object.values(errorMessages).find((message) => message !== '')}
+        </ErrorBox>
       </Container>
     </>
   );
