@@ -1,4 +1,4 @@
-const replaceToMaskingNumber = (value: number | null): string => {
+const replaceToMaskingNumber = (value: string | null): string => {
   if (!value) return "";
 
   const maskingChar = "●";

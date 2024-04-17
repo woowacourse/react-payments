@@ -3,10 +3,10 @@ import CARD_THRESHOLD from "../../constants/cardThreshold";
 import styled from "@emotion/styled";
 
 const getFirstTwoNumber = (creditCardNumber: CardNumber): number | undefined => {
-  const tensDigit = 10;
+  const twoDigits = 2;
 
-  if (creditCardNumber && creditCardNumber >= tensDigit)
-    return Number(creditCardNumber.toString().slice(0, 2));
+  if (creditCardNumber && creditCardNumber.length >= twoDigits)
+    return Number(creditCardNumber.slice(0, 2));
 };
 
 const CreditCardBrandLogo = (creditCardNumber: CardNumber): JSX.Element | undefined => {
