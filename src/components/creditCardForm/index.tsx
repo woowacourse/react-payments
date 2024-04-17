@@ -1,19 +1,56 @@
 import styled from "@emotion/styled";
+import InputOwnerName from "../input/InputOwnerName";
+import InputExpirationPeriod from "../input/InputExpirationPeriod";
+import { CardNumberValue, ExpirationPeriodValue } from "../../@types/CreditCard";
+import InputCreditCardNumber from "../input/InputCreditCardNumber";
+
+type FormType = "owner" | "expirationPeriod" | "cardNumber";
 
 interface CreditCardFormProps {
   title: string;
   description?: string;
-  inputError: boolean;
-  children: React.ReactNode;
+  type: FormType;
+  inputValue: string | ExpirationPeriodValue | CardNumberValue;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const CreditCardForm = ({ title, description, children, inputError }: CreditCardFormProps) => {
+const CreditCardForm = ({
+  title,
+  description,
+  type,
+  inputValue,
+  handleChange,
+}: CreditCardFormProps) => {
+  const getComponentByType = (
+    type: string,
+    inputValue: string | ExpirationPeriodValue | CardNumberValue,
+    handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  ) => {
+    if (type === "owner")
+      return <InputOwnerName inputValue={inputValue as string} handleChange={handleChange} />;
+
+    if (type === "expirationPeriod")
+      return (
+        <InputExpirationPeriod
+          inputValue={inputValue as ExpirationPeriodValue}
+          handleChange={handleChange}
+        />
+      );
+
+    if (type === "cardNumber")
+      return (
+        <InputCreditCardNumber
+          inputValue={inputValue as CardNumberValue}
+          handleChange={handleChange}
+        />
+      );
+  };
+
   return (
     <CreditCardFormContainer>
       <TitleWrapper>{title}</TitleWrapper>
-      <DescriptionWrapper description={description}>{description}</DescriptionWrapper>
-      {children}
-      {inputError && <ErrorMessage>유효한 값을 입력하세요.</ErrorMessage>}
+      <DescriptionWrapper>{description}</DescriptionWrapper>
+      {getComponentByType(type, inputValue, handleChange)}
     </CreditCardFormContainer>
   );
 };
@@ -34,23 +71,12 @@ const TitleWrapper = styled.h1`
   margin-bottom: 4px;
 `;
 
-const DescriptionWrapper = styled.p<{ description?: string }>`
+const DescriptionWrapper = styled.h3`
   font-family: Noto Sans KR;
   font-size: 9.5px;
   font-weight: 400;
   line-height: 13.76px;
   text-align: left;
   color: rgba(139, 149, 161, 1);
-  height: 14px;
-  ${({ description }) => (description ? `margin-bottom: 16px;` : `margin-bottom: 0;`)}
-`;
-
-const ErrorMessage = styled.p`
-  font-family: Noto Sans KR;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 13.76px;
-  text-align: left;
-  color: red;
-  margin-top: 8px;
+  margin-bottom: 16px;
 `;
