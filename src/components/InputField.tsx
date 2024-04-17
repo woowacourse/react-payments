@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import { inputType } from "../types/input";
-import Validation from "../domain/InputValidation";
-import { useState } from "react";
+import styled from 'styled-components';
+import { inputType } from '../types/input';
+import Validation from '../domain/InputValidation';
+import { useState } from 'react';
 
 const Container = styled.div`
   display: flex;
@@ -47,7 +47,7 @@ interface props {
 }
 
 export default function InputField({ title, subtitle, inputTypes }: props) {
-  const [invalid, setInvalid] = useState<boolean>(true);
+  const [errorMessage, setErrorMessage] = useState<string>('');
   return (
     <>
       <Container>
@@ -63,17 +63,19 @@ export default function InputField({ title, subtitle, inputTypes }: props) {
               maxLength={info.maxLength}
               placeholder={info.placeHolder}
               onChange={(e) => {
-                const isValid = Validation[info.validateType]?.(
-                  e.target.value as string
-                );
-                console.log("isValid", isValid);
-                setInvalid(isValid);
-                console.log(invalid);
+                try {
+                  Validation[info.validateType]?.(e.target.value as string);
+                  setErrorMessage('');
+                } catch (error: unknown) {
+                  if (error instanceof Error) {
+                    setErrorMessage(error.message);
+                  }
+                }
               }}
             />
           ))}
         </InputBox>
-        {invalid ? <p> true </p> : <p> false</p>}
+        {errorMessage}
       </Container>
     </>
   );

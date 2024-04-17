@@ -1,29 +1,43 @@
 function validateNumber(n: string) {
-  return Number.isInteger(Number(n));
+  if (!Number.isInteger(Number(n))) {
+    throw new Error('숫자만 입력해주세요.');
+  }
 }
 
 function validateMonth(n: string) {
   const month = Number(n);
-  return 1 <= month && month <= 12;
+  if (!(1 <= month && month <= 12)) {
+    throw new Error('카드의 유효한 유효기간(월)을 입력해주세요.');
+  }
 }
 
 function validateYear(n: string) {
   const year = Number(n);
-  return 0 <= year && year <= 99;
+  if (!(0 <= year && year <= 99)) {
+    throw new Error('카드의 유효한 유효기간(년도)을 입력해주세요.');
+  }
 }
 
 function validateUpperCase(str: string) {
-  return /^[A-Z]+$/.test(str);
+  if (!/^[A-Z]+$/.test(str)) {
+    throw new Error('영대문자로만 입력해주세요.');
+  }
 }
 
 interface ValidationMap {
-  [key: string]: (n: string) => boolean;
+  [key: string]: (n: string) => void;
 }
 
 const Validation: ValidationMap = {
   cardNumber: (n: string) => validateNumber(n),
-  month: (n: string) => validateNumber(n) && validateMonth(n),
-  year: (n: string) => validateNumber(n) && validateYear(n),
+  month: (n: string) => {
+    validateNumber(n);
+    validateMonth(n);
+  },
+  year: (n: string) => {
+    validateNumber(n);
+    validateYear(n);
+  },
   userName: (n: string) => validateUpperCase(n),
 };
 
