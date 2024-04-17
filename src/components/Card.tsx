@@ -36,8 +36,17 @@ const Card = ({
     <div style={cardStyle}>
       <div style={ICChipStyle}></div>
       <div>
-        {cardNumbers.map((cardNumber) => (
-          <span style={{ color: "white" }}>{cardNumber}</span>
+        {cardNumbers.map((cardNumber, i) => (
+          <span
+            style={{
+              color: "white",
+              width: "20ch",
+            }}
+          >
+            {i >= cardNumbers.length / 2
+              ? "•".repeat(cardNumber.toString().length)
+              : cardNumber}
+          </span>
         ))}
       </div>
       <div>
