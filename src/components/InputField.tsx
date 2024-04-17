@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { InputInfo, InputType } from '../types/input';
-import Validation from '../domain/InputValidation';
 import { Card } from '../types/card';
+import Input from './Input';
 
 const Container = styled.div`
   display: flex;
@@ -38,13 +38,6 @@ const InputBox = styled.div`
   margin-bottom: 8px;
 `;
 
-const Input = styled.input`
-  width: 100%;
-  padding: 0.5rem;
-  border: 1px solid ${(props) => props.color};
-  border-radius: 3px;
-`;
-
 const ErrorBox = styled.div`
   color: red;
   font-size: 9.5px;
@@ -78,28 +71,12 @@ export default function InputField({
         <InputBox>
           {inputTypes.inputInfo.map((info: InputInfo, index: number) => (
             <Input
-              color={errorMessages[index] ? 'red' : 'grey'}
-              key={index}
-              type="text"
-              maxLength={info.maxLength}
-              placeholder={info.placeHolder}
-              onChange={(e) => {
-                try {
-                  Validation[info.validateType]?.(e.target.value);
-                  setErrorMessages((prev) => ({ ...prev, [index]: '' }));
-                  handleInput({
-                    ...cardInfo,
-                    [info.property]: e.target.value,
-                  });
-                } catch (error) {
-                  if (error instanceof Error) {
-                    setErrorMessages((prev) => ({
-                      ...prev,
-                      [index]: error.message,
-                    }));
-                  }
-                }
-              }}
+              info={info}
+              index={index}
+              cardInfo={cardInfo}
+              handleInput={handleInput}
+              errorMessages={errorMessages}
+              setErrorMessages={setErrorMessages}
             />
           ))}
         </InputBox>
