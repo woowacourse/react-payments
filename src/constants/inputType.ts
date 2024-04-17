@@ -1,35 +1,35 @@
 const InputType = {
   CARD_NUMBER: {
-    inputLabel: "카드번호",
+    inputLabel: '카드번호',
     inputInfo: Array.from({ length: 4 }, () => ({
-      validateType: "cardNumber",
+      validateType: 'cardNumber',
       maxLength: 4,
-      placeHolder: "1234",
-      error: "숫자만 입력 가능합니다.",
+      placeHolder: '1234',
+      error: '숫자만 입력 가능합니다.',
     })),
   },
   EXPIRY_DATE: {
-    inputLabel: "유효기간",
+    inputLabel: '유효기간',
     inputInfo: [
       {
-        validateType: "month",
+        validateType: 'month',
         maxLength: 2,
-        placeHolder: "MM",
+        placeHolder: 'MM',
       },
       {
-        validateType: "year",
+        validateType: 'year',
         maxLength: 2,
-        placeHolder: "YY",
+        placeHolder: 'YY',
       },
     ],
   },
   USER_NAME: {
-    inputLabel: "소유자 이름",
+    inputLabel: '소유자 이름',
     inputInfo: [
       {
-        validateType: "userName",
+        validateType: 'userName',
         maxLength: 30,
-        placeHolder: "JOHN DOE",
+        placeHolder: 'JOHN DOE',
       },
     ],
   },

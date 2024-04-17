@@ -1,5 +1,5 @@
-import InputType from "../constants/inputType";
-import InputField from "./InputField";
+import InputType from '../constants/inputType';
+import InputField from './InputField';
 
 export default function InputForm() {
   return (
