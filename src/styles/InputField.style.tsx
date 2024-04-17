@@ -1,5 +1,11 @@
 import styled from 'styled-components';
 
+export const InputField = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+`;
+
 export const InputContainer = styled.div<{ $length?: number }>`
   display: grid;
   grid-template-columns: ${(props) => `repeat(${props.$length}, 1fr)`};
