@@ -1,0 +1,57 @@
+.container {
+  background-color: var(--color-card-bg);
+  border-radius: 4px;
+
+  max-width: fit-content;
+
+  box-shadow: 3px 3px 5px 0px #00000040;
+  padding: 8px 12px;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.chip,
+.brandLogo {
+  width: 36px;
+  height: 22px;
+}
+
+.chip {
+  background-color: var(--color-card-chip);
+  border-radius: 2px;
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  width: 100%;
+  padding: 0 5px;
+
+  color: var(--color-grey-100);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+
+  letter-spacing: 1px;
+}
+
+.cardNumbers {
+  display: flex;
+  gap: 10px;
+  letter-spacing: 2px;
+}
+
+.cardNumber {
+  width: 36px;
+}
+
+.mask {
+  font-size: 4px;
+  letter-spacing: 4px;
+}
