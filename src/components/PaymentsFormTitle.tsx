@@ -1,9 +1,11 @@
+import React from 'react';
 import styled from 'styled-components';
 
 const TitleContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
+  color: black;
 `;
 
 const Title = styled.h1`
