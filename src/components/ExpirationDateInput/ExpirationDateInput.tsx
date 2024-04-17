@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Input from '../common/Input/Input';
-// import styles from './ExpirationDateInput.module.css';
 import Field from '../common/Field/Field';
 
 interface ExpirationDate {
@@ -8,7 +7,11 @@ interface ExpirationDate {
   year: string;
 }
 
-const ExpirationDateInput = () => {
+interface ExpirationDateInputProps {
+  setCardData: (key: keyof CardInfo, newData: CardInfo[keyof CardInfo]) => void;
+}
+
+const ExpirationDateInput = ({ setCardData }: ExpirationDateInputProps) => {
   const [expirationDate, setExpirationDate] = useState<ExpirationDate>({
     month: '',
     year: '',
@@ -74,6 +77,7 @@ const ExpirationDateInput = () => {
 
     setIsError({ ...isError, [name]: false });
     setErrMsg('');
+    setCardData('expirationDate', Object.values(expirationDate));
   };
 
   return (

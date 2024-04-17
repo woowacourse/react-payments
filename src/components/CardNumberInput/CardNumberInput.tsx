@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Input from '../common/Input/Input';
-// import styles from './CardNumberInput.module.css';
 import Field from '../common/Field/Field';
 
 interface CardNumbers {
@@ -10,7 +9,11 @@ interface CardNumbers {
   fourth: string;
 }
 
-export default function CardNumberInput() {
+interface CardNumberInputProps {
+  setCardData: (key: keyof CardInfo, newData: CardInfo[keyof CardInfo]) => void;
+}
+
+export default function CardNumberInput({ setCardData }: CardNumberInputProps) {
   const [cardNumbers, setCardNumbers] = useState<CardNumbers>({
     first: '',
     second: '',
@@ -58,6 +61,9 @@ export default function CardNumberInput() {
     }
     setIsError({ ...isError, [name]: false });
     setErrMsg('');
+
+    console.log(typeof setCardData);
+    setCardData('cardNumbers', Object.values(cardNumbers));
   };
 
   return (
