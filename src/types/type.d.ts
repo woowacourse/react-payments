@@ -11,7 +11,7 @@ interface PaymentsInputFieldProps {
 interface PaymentsInputFormProps {
   label: string;
   hasError: boolean;
-  errorMessage: string;
+  errorMessage?: string;
   inputFieldProps: PaymentsInputFieldProps[];
 }
 
