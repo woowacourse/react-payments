@@ -1,24 +1,19 @@
-import { ChangeEventHandler } from "react";
+import { ChangeEventHandler, ReactNode } from "react";
 import S from "./style";
 interface Props {
-  placeholder: string;
-  onChange: ChangeEventHandler<HTMLInputElement>;
-  value: string;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
   errorMessage: string;
+  children: ReactNode;
+  label: string;
 }
 
-const InputField = ({
-  // placeholder,
-  // onChange,
-  // value,
-  errorMessage,
-  // children,
-}: Props) => {
+const InputField = ({ label, errorMessage, children }: Props) => {
   return (
-    <S.InputsWrapper>
-      {/* {children} */}
+    <S.InputFieldWrapper>
+      <S.Label>{label}</S.Label>
+      <S.InputsWrapper>{children}</S.InputsWrapper>
       <S.ErrorMessageWrapper>{errorMessage}</S.ErrorMessageWrapper>
-    </S.InputsWrapper>
+    </S.InputFieldWrapper>
   );
 };
 

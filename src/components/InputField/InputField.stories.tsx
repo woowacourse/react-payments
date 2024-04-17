@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import InputField from "./InputField";
+import Input from "../Input/Input";
 
 const meta = {
   title: "InputField",
@@ -12,9 +13,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    placeholder: "",
-    onChange: () => {},
-    value: "",
+    children: <Input placeholder="" isError={false} />,
     errorMessage: "",
   },
 };
