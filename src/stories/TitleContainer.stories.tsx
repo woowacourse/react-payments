@@ -4,10 +4,10 @@ import TitleContainer from '../components/TitleContainer';
 const meta = {
   title: 'TitleContainer',
   component: TitleContainer,
-  tags: ['autodocs'],
 } satisfies Meta<typeof TitleContainer>;
 
 export default meta;
+
 type Story = StoryObj<typeof TitleContainer>;
 
 export const Default: Story = {

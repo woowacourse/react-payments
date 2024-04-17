@@ -4,10 +4,10 @@ import Input from '../components/Input';
 const meta = {
   title: 'Input',
   component: Input,
-  tags: ['autodocs'],
 } satisfies Meta<typeof Input>;
 
 export default meta;
+
 type Story = StoryObj<typeof Input>;
 
 export const Default: Story = {
