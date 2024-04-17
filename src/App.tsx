@@ -1,9 +1,10 @@
 import "./App.css";
+import CardEnrollForm from "./components/CardEnrollForm";
 
 function App() {
   return (
     <>
-      <h1>React Payments</h1>
+      <CardEnrollForm></CardEnrollForm>
     </>
   );
 }
