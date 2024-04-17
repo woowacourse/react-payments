@@ -1,9 +1,7 @@
-import SIGN from "../constants/sign";
+const replaceToMaskingNumber = (value: number | null): string => {
+  if (!value) return "";
 
-const replaceToMaskingNumber = (value: string | null): string => {
-  if (!value) return SIGN.empty;
-
-  const maskingChar = SIGN.mask;
+  const maskingChar = "●";
 
   return maskingChar.repeat(value.toString().length);
 };
