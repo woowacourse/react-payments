@@ -1,15 +1,17 @@
 interface InputProps {
   maxLength?: number;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  placeholder?: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Input = ({ maxLength, handleChange }: InputProps) => {
+const Input = ({ maxLength, placeholder, onChange }: InputProps) => {
   return (
     <>
       <input
         type="text"
         maxLength={maxLength}
-        onChange={handleChange}
+        placeholder={placeholder}
+        onChange={onChange}
       ></input>
     </>
   );
