@@ -20,6 +20,7 @@ export const InputLabel = styled.p`
 `;
 
 export const ErrorMessage = styled.p`
+  height: 14px;
   color: #ff3d3d;
   font-size: 9.5px;
   font-weight: 400;
