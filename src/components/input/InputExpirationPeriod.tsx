@@ -1,20 +1,14 @@
+import InputBox from "./common/InputBox";
+import CARD_FORM_MESSAGE from "../../constants/cardFormMessage";
 import styled from "@emotion/styled";
 import { ExpirationPeriodValue } from "../../@types/CreditCard";
-import CARD_FORM_MESSAGE from "../../constants/cardFormMessage";
-import CARD_INPUTBOX_NAME from "../../constants/cardInputBoxName";
-import InputBox from "./common/InputBox";
 
 interface InputExpirationPeriodProps {
   inputValue: ExpirationPeriodValue;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  inputError: boolean;
 }
 
-const InputExpirationPeriod = ({
-  inputValue,
-  handleChange,
-  inputError,
-}: InputExpirationPeriodProps) => {
+const InputExpirationPeriod = ({ inputValue, handleChange }: InputExpirationPeriodProps) => {
   return (
     <InputContainer>
       <InputLabel htmlFor="expirationDate">{CARD_FORM_MESSAGE.expirationDate}</InputLabel>
@@ -25,8 +19,7 @@ const InputExpirationPeriod = ({
           size="medium"
           placeholder="MM"
           id="expirationDate"
-          name={CARD_INPUTBOX_NAME.expirationPeriod.month}
-          isError={inputError}
+          name="month"
         />
         <InputBox
           inputValue={inputValue.year}
@@ -34,8 +27,7 @@ const InputExpirationPeriod = ({
           size="medium"
           placeholder="YY"
           id="expirationDate"
-          name={CARD_INPUTBOX_NAME.expirationPeriod.year}
-          isError={inputError}
+          name="year"
         />
       </InputWrapper>
     </InputContainer>
