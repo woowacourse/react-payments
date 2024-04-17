@@ -22,6 +22,7 @@ module.exports = {
     'import/extensions': 'off',
     'react/require-default-props': 'off',
     'no-useless-return': 'off',
+    'consistent-return': 'off',
     //기본 설정
     'react/function-component-definition': [
       2,
