@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import PaymentsInputField from './PaymentsInputField';
 
 import styled from 'styled-components';
@@ -29,7 +30,14 @@ const ErrorMessage = styled.div`
   text-align: left;
 `;
 
+
 const PaymentsInputForm = ({ ...props }: PaymentsInputFormProps) => {
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleErrorMessage = (errorMessage: string) => {
+    setErrorMessage(errorMessage);
+  }
+
   return (
     <InputForm>
       <Label>{props.label}</Label>
@@ -41,13 +49,13 @@ const PaymentsInputForm = ({ ...props }: PaymentsInputFormProps) => {
                 inputType={inputFieldProp.inputType}
                 placeholder={inputFieldProp.placeholder}
                 maxLength={inputFieldProp.maxLength}
-                hasError={inputFieldProp.hasError}
+                changeErrorMessage={handleErrorMessage}
               />
             );
           },
         )}
       </InputFieldContainer>
-      <ErrorMessage>{props.errorMessage}</ErrorMessage>
+      <ErrorMessage>{errorMessage}</ErrorMessage>
     </InputForm>
   );
 };

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import useInput from "../hooks/useInput";
 
 import styled from 'styled-components';
@@ -24,7 +25,11 @@ const Input = styled.input<{ hasError?: boolean }>`
 `;
 
 const PaymentsInputField = ({ maxLength = 50, ...props }: PaymentsInputFieldProps) => {
-  const [value, setValue, hasError] = useInput(maxLength, props.inputType ?? 'text');
+  const [value, setValue, hasError, errorMessage] = useInput(maxLength, props.inputType ?? 'text');
+
+  useEffect(() => {
+    if (props.changeErrorMessage) { props.changeErrorMessage(errorMessage) };
+  }, [errorMessage])
 
   return (
     <Input

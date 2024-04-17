@@ -5,6 +5,7 @@ interface PaymentsInputFieldProps {
   placeholder?: string;
   maxLength?: number;
   hasError?: boolean;
+  changeErrorMessage?: (errorMessage: string) => void;
 }
 
 interface PaymentsInputFormProps {
@@ -17,4 +18,9 @@ interface PaymentsInputFormProps {
 interface PaymentsFormTitleProps {
   title: string;
   subTitle?: string;
+}
+
+interface PaymentsFormSectionProps {
+  formTitleProps: PaymentsFormTitleProps;
+  inputFormProps: PaymentsInputFormProps;
 }
