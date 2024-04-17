@@ -6,7 +6,7 @@ const CardRegister = () => {
   return (
     <S.CardRegisterWrapper>
       <S.FlexWrapper>
-        <CreditCardPreview />
+        <CreditCardPreview cardType="VISA" />
         <CardRegisterForm />
       </S.FlexWrapper>
     </S.CardRegisterWrapper>

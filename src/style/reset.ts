@@ -6,6 +6,10 @@ const resetStyle = css`
     padding: 0;
   }
 
+  input[type="password"] {
+    letter-spacing: 4px;
+  }
+
   body::-webkit-scrollbar {
     display: none;
   }
