@@ -19,6 +19,10 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 45px;
+
+  @media screen and (max-width: 500px) {
+    width: 85vw;
+  }
 `;
 
 export default function EnrollCard() {
