@@ -1,5 +1,5 @@
 const inquireExpiryYear = (expiryYear: string) => {
-  const isValidLength = expiryYear.length < 3;
+  const isValidLength = expiryYear.length === 0 || expiryYear.length === 2;
   const isValidYear = Number(expiryYear) > 23 && Number(expiryYear) < 41;
 
   if (!isValidLength) {
