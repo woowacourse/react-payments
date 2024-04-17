@@ -1,30 +1,15 @@
-import React from 'react';
 import styled from 'styled-components';
 
 interface InputProps {
-  id: string;
-  value: string;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  isError: boolean;
-  placeholder: string;
-  width?: string;
+  [key: string]: any;
+  isError?: boolean;
 }
 
-const Input = ({ id, value, handleChange, isError, placeholder, width = '100%' }: InputProps) => {
-  return (
-    <StyledInput
-      id={id}
-      value={value}
-      onChange={handleChange}
-      placeholder={placeholder}
-      width={width}
-      isError={isError}
-    />
-  );
+const Input = ({ isError = false, ...rest }: InputProps) => {
+  return <StyledInput isError={isError} {...rest} />;
 };
 
 interface StyledInputProps {
-  width: string;
   isError: boolean;
 }
 
