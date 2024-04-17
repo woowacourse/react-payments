@@ -49,7 +49,7 @@ interface ValidationMap {
 const Validation: ValidationMap = {
   cardNumber: (n: string) => {
     checkBlank(n);
-    validateLength(n, 4);
+    // validateLength(n, 4);
     validateNumber(n);
   },
   month: (n: string) => {
