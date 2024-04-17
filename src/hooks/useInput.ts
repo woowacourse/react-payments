@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 type ErrorMessage = string;
 
@@ -10,16 +10,15 @@ const useInput = (initialValue = '', inquireValidity: (value: string) => ErrorMe
     setValue(() => e.target.value);
   };
 
-  useEffect(() => {
-    if (inquireValidity) {
-      setErrorMessage(() => inquireValidity(value));
-    }
-  }, [value, inquireValidity]);
+  const updateErrorMessage = () => {
+    setErrorMessage(inquireValidity(value));
+  };
 
   return {
     value,
     setValue,
     handleChange,
+    updateErrorMessage,
     errorMessage,
   };
 };
