@@ -19,7 +19,7 @@ function App() {
         <CardPreviewBox cardNumber={cardNumber} month={month} year={year} owner={owner} />
       </S.CardPreviewBox>
       <S.CardForm>
-        <CardNumberInput cardNumber={cardNumber} setCardNumber={setCardNumber} />
+        <CardNumberInput setCardNumber={setCardNumber} />
         <CardExpirationInput setMonth={setMonth} setYear={setYear} />
         <CardOwnerInput setOwner={setOwner} />
       </S.CardForm>
