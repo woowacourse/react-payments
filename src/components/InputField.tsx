@@ -3,23 +3,12 @@ import styled from 'styled-components';
 import { InputInfo, InputType } from '../types/input';
 import { Card } from '../types/card';
 import Input from './Input';
+import FieldTitle from './FieldTitle';
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   height: 120px;
-`;
-
-const Title = styled.h1`
-  color: #000;
-  font-size: 18px;
-  margin-bottom: 4px;
-`;
-
-const SubTitle = styled.p`
-  color: #8b95a1;
-  font-size: 9.5px;
-  margin-bottom: 16px;
 `;
 
 const Label = styled.p`
@@ -65,8 +54,7 @@ export default function InputField({
   return (
     <>
       <Container>
-        <Title>{title}</Title>
-        <SubTitle>{subtitle}</SubTitle>
+        <FieldTitle title={title} subtitle={subtitle} />
         <Label>{inputTypes.inputLabel}</Label>
         <InputBox>
           {inputTypes.inputInfo.map((info: InputInfo, index: number) => (
