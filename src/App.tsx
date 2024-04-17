@@ -28,7 +28,7 @@ function App() {
       <CardPreviewBox cardNumber={cardNumber} month={month} year={year} owner={owner} />
       <CardForm>
         <CardNumberInput cardNumber={cardNumber} setCardNumber={setCardNumber} />
-        <CardExpirationInput setMonth={setMonth} setYear={setYear} />
+        <CardExpirationInput month={month} setMonth={setMonth} setYear={setYear} />
         <CardOwnerInput setOwner={setOwner} />
       </CardForm>
     </AppContainer>
