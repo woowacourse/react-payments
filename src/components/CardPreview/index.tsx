@@ -57,7 +57,7 @@ function CardPreview(props: CardPreviewProps) {
           <div className="card-number">{cardNumbers}</div>
           <div className="period">
             {period.month}
-            {SLASH}
+            {period.month && period.year ? SLASH : ''}
             {period.year}
           </div>
           <div className="user">{userName}</div>

@@ -9,7 +9,13 @@ import {
 import useCardInfoReducer from './modules/useCardInfoReducer';
 
 function App() {
-  const { cardInfo, editCardMark, editCardNumbers } = useCardInfoReducer();
+  const {
+    cardInfo,
+    editCardMark,
+    editCardNumbers,
+    editCardPeriod,
+    editCardUserName,
+  } = useCardInfoReducer();
   return (
     <>
       <h1>React Payments</h1>
@@ -17,8 +23,8 @@ function App() {
         editCardMark={editCardMark}
         editCardNumbers={editCardNumbers}
       />
-      <CardExpirationPeriodForm />
-      <CardUserForm />
+      <CardExpirationPeriodForm editCardPeriod={editCardPeriod} />
+      <CardUserForm editCardUserName={editCardUserName} />
       <div>
         <CardPreview cardInfo={cardInfo} />
       </div>

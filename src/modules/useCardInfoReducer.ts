@@ -8,9 +8,9 @@ const EDIT_CARD_PERIOD = 'card/EDIT_CARD_PERIOD' as const;
 const EDIT_CARD_USER_NAME = 'card/EDIT_CARD_USER_NAME' as const;
 const RESET_CARD_INFO = 'card/RESET_CARD_INFO' as const;
 
-export interface CardPeriod {
-  month: number | undefined;
-  year: number | undefined;
+interface CardPeriod {
+  month: string | undefined;
+  year: string | undefined;
 }
 
 export type CardMark = keyof typeof CARD_MARK | undefined;
