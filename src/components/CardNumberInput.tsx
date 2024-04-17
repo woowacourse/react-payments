@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import TitleContainer from './TitleContainer';
-import Input from './Input';
 import InputField from './InputField';
+import Input from './Input';
 
 interface CardNumberInputProps {
   cardNumber: string[];
@@ -60,7 +60,7 @@ function CardNumberInput({ cardNumber, setCardNumber }: CardNumberInputProps) {
             maxLength={4}
             onChange={onCardNumberChange(index)}
             isValid={isValid[index]}
-          ></Input>
+          />
         ))}
       </InputField>
     </div>
