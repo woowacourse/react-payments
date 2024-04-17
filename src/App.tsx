@@ -1,3 +1,4 @@
+import './index.css';
 import styles from './App.module.css';
 
 import CardNumberInput from './components/CardNumberInput/CardNumberInput';
