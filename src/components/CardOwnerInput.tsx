@@ -11,17 +11,6 @@ function CardOwnerInput({ setOwner }: CardOwnerInputProps) {
   const [isValid, setIsValid] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string>('');
 
-  const onOwnerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!validateOwner(e.target.value)) {
-      setIsValid(false);
-      setOwner('');
-      return;
-    }
-
-    setIsValid(true);
-    setOwner(e.target.value.toUpperCase());
-  };
-
   const validateOwner = (value: string) => {
     const regExp = /^[a-zA-Z][a-zA-Z ]*$/;
 
@@ -42,6 +31,17 @@ function CardOwnerInput({ setOwner }: CardOwnerInputProps) {
 
     setErrorMessage('');
     return true;
+  };
+
+  const onOwnerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!validateOwner(e.target.value)) {
+      setIsValid(false);
+      setOwner('');
+      return;
+    }
+
+    setIsValid(true);
+    setOwner(e.target.value.toUpperCase());
   };
 
   return (
