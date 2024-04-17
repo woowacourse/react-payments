@@ -16,6 +16,12 @@ function validateNumber(n: string) {
   }
 }
 
+function validateLength(n: string, length: number) {
+  if (n.length !== length) {
+    throw new Error(`카드 번호를 ${length}자리씩 입력해주세요.`);
+  }
+}
+
 function validateMonth(n: string) {
   const month = Number(n);
   if (!(1 <= month && month <= 12)) {
@@ -43,6 +49,7 @@ interface ValidationMap {
 const Validation: ValidationMap = {
   cardNumber: (n: string) => {
     checkBlank(n);
+    validateLength(n, 4);
     validateNumber(n);
   },
   month: (n: string) => {
