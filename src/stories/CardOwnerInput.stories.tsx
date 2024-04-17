@@ -4,7 +4,6 @@ import CardOwnerInput from '../components/CardOwnerInput';
 const meta = {
   title: 'CardOwnerInput',
   component: CardOwnerInput,
-  tags: ['autodocs'],
 } satisfies Meta<typeof CardOwnerInput>;
 
 export default meta;

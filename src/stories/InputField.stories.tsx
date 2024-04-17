@@ -5,10 +5,10 @@ import Input from '../components/Input';
 const meta = {
   title: 'InputField',
   component: InputField,
-  tags: ['autodocs'],
 } satisfies Meta<typeof InputField>;
 
 export default meta;
+
 type Story = StoryObj<typeof InputField>;
 
 export const Default: Story = {

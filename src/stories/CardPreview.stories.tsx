@@ -4,7 +4,6 @@ import CardPreview from '../components/CardPreview';
 const meta = {
   title: 'CardPreview',
   component: CardPreview,
-  tags: ['autodocs'],
   argTypes: {
     cardNumber: {
       options: {
