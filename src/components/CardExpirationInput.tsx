@@ -1,32 +1,12 @@
 import { useState } from 'react';
 import Input from './Input';
 import styled from 'styled-components';
-import { TitleContainer, Title, SubTitle } from '../styles/TitleContainer.styled';
+import * as S from '../styles/common.style';
 
 const CardExpirationInputContainer = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 8px;
-`;
-
-const InputContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  column-gap: 10px;
-  width: 100%;
-`;
-
-const InputLabel = styled.p`
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 15px;
-`;
-
-const ErrorMessage = styled.p`
-  color: #ff3d3d;
-  font-size: 9.5px;
-  font-weight: 400;
-  line-height: 13px;
 `;
 
 interface CardExpirationInputProps {
@@ -111,17 +91,17 @@ function CardExpirationInput({ month, setMonth, setYear }: CardExpirationInputPr
 
   return (
     <div>
-      <TitleContainer>
-        <Title>카드 유효기간을 입력해 주세요</Title>
-        <SubTitle>월/년도(MMYY)를 순서대로 입력해 주세요.</SubTitle>
-      </TitleContainer>
+      <S.TitleContainer>
+        <S.Title>카드 유효기간을 입력해 주세요</S.Title>
+        <S.SubTitle>월/년도(MMYY)를 순서대로 입력해 주세요.</S.SubTitle>
+      </S.TitleContainer>
       <CardExpirationInputContainer>
-        <InputLabel>유효기간</InputLabel>
-        <InputContainer>
+        <S.InputLabel>유효기간</S.InputLabel>
+        <S.InputContainer $length={2}>
           <Input type="text" placeholder="MM" maxLength={2} onChange={onMonthChange} isValid={isValidMonth}></Input>
           <Input type="text" placeholder="YY" maxLength={2} onChange={onYearChange} isValid={isValidYear}></Input>
-        </InputContainer>
-        <ErrorMessage>{errorMessage}</ErrorMessage>
+        </S.InputContainer>
+        <S.ErrorMessage>{errorMessage}</S.ErrorMessage>
       </CardExpirationInputContainer>
     </div>
   );

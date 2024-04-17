@@ -1,25 +1,12 @@
 import Input from './Input';
 import styled from 'styled-components';
-import { TitleContainer, Title } from '../styles/TitleContainer.styled';
 import { useState } from 'react';
+import * as S from '../styles/common.style';
 
 const CardOwnerInputContainer = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 8px;
-`;
-
-const InputLabel = styled.p`
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 15px;
-`;
-
-const ErrorMessage = styled.p`
-  color: #ff3d3d;
-  font-size: 9.5px;
-  font-weight: 400;
-  line-height: 13px;
 `;
 
 interface CardOwnerInputProps {
@@ -65,13 +52,13 @@ function CardOwnerInput({ setOwner }: CardOwnerInputProps) {
 
   return (
     <div>
-      <TitleContainer>
-        <Title>카드 소유자 이름을 입력해 주세요</Title>
-      </TitleContainer>
+      <S.TitleContainer>
+        <S.Title>카드 소유자 이름을 입력해 주세요</S.Title>
+      </S.TitleContainer>
       <CardOwnerInputContainer>
-        <InputLabel>소유자 이름</InputLabel>
+        <S.InputLabel>소유자 이름</S.InputLabel>
         <Input type="text" maxLength={30} placeholder="STEVEN KING" onChange={onOwnerChange} isValid={isValid}></Input>
-        <ErrorMessage>{errorMessage}</ErrorMessage>
+        <S.ErrorMessage>{errorMessage}</S.ErrorMessage>
       </CardOwnerInputContainer>
     </div>
   );

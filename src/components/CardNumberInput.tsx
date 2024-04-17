@@ -1,33 +1,12 @@
 import { useState } from 'react';
-
 import Input from './Input';
 import styled from 'styled-components';
-import { TitleContainer, Title, SubTitle } from '../styles/TitleContainer.styled';
+import * as S from '../styles/common.style';
 
 const CardNumberInputContainer = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 8px;
-`;
-
-const InputContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  column-gap: 10px;
-  width: 100%;
-`;
-
-const InputLabel = styled.p`
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 15px;
-`;
-
-const ErrorMessage = styled.p`
-  color: #ff3d3d;
-  font-size: 9.5px;
-  font-weight: 400;
-  line-height: 13px;
 `;
 
 interface CardNumberInputProps {
@@ -77,13 +56,13 @@ function CardNumberInput({ cardNumber, setCardNumber }: CardNumberInputProps) {
 
   return (
     <div>
-      <TitleContainer>
-        <Title>결제할 카드 번호를 입력해 주세요.</Title>
-        <SubTitle>본인 명의의 카드만 결제 가능합니다.</SubTitle>
-      </TitleContainer>
+      <S.TitleContainer>
+        <S.Title>결제할 카드 번호를 입력해 주세요.</S.Title>
+        <S.SubTitle>본인 명의의 카드만 결제 가능합니다.</S.SubTitle>
+      </S.TitleContainer>
       <CardNumberInputContainer>
-        <InputLabel>카드 번호</InputLabel>
-        <InputContainer>
+        <S.InputLabel>카드 번호</S.InputLabel>
+        <S.InputContainer $length={4}>
           {Array.from({ length: 4 }).map((_, index) => (
             <Input
               key={index}
@@ -94,8 +73,8 @@ function CardNumberInput({ cardNumber, setCardNumber }: CardNumberInputProps) {
               isValid={isValid[index]}
             ></Input>
           ))}
-        </InputContainer>
-        <ErrorMessage>{errorMessage}</ErrorMessage>
+        </S.InputContainer>
+        <S.ErrorMessage>{errorMessage}</S.ErrorMessage>
       </CardNumberInputContainer>
     </div>
   );
