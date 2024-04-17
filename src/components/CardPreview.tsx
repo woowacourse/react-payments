@@ -37,10 +37,11 @@ const CardInfoContainer = styled.div`
   gap: 8px;
 `;
 
-const CardInfoNumbers = styled.div`
+const CardPreviewTextContainer = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  min-height: 20px;
   gap: 10px;
 `;
 
@@ -51,6 +52,7 @@ const PreviewText = styled.span`
   line-height: 20px;
   letter-spacing: 0.08em;
   text-align: left;
+  min-width: 38px;
 `;
 
 const HiddenNumberContainer = styled.div`
@@ -98,7 +100,7 @@ export default function CardPreview({ cardInformation }: Props) {
         {cardBrandImg && <img src={cardBrandImg}></img>}
       </CardHeader>
       <CardInfoContainer>
-        <CardInfoNumbers>
+        <CardPreviewTextContainer>
           <PreviewText>{cardInformation.cardNumber1}</PreviewText>
           <PreviewText>{cardInformation.cardNumber2}</PreviewText>
           <HiddenNumberContainer>
@@ -115,15 +117,17 @@ export default function CardPreview({ cardInformation }: Props) {
               )
             )}
           </HiddenNumberContainer>
-        </CardInfoNumbers>
-        <div className="card-info-expiration-date">
-          <PreviewText>{cardInformation.cardExpirationMonth}</PreviewText>
-          {cardInformation.cardExpirationMonth.length === 2 && "/"}
-          <PreviewText>{cardInformation.cardExpirationYear}</PreviewText>
-        </div>
-        <div className="card-info-owner-name">
+        </CardPreviewTextContainer>
+        <CardPreviewTextContainer>
+          <div>
+            <PreviewText>{cardInformation.cardExpirationMonth}</PreviewText>
+            {cardInformation.cardExpirationMonth.length === 2 && "/"}
+            <PreviewText>{cardInformation.cardExpirationYear}</PreviewText>
+          </div>
+        </CardPreviewTextContainer>
+        <CardPreviewTextContainer>
           <PreviewText>{cardInformation.cardOwnerName}</PreviewText>
-        </div>
+        </CardPreviewTextContainer>
       </CardInfoContainer>
     </CardContainer>
   );
