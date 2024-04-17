@@ -1,4 +1,5 @@
 import { CSSProperties } from "react";
+import { IMAGE_URL } from "../constants";
 
 const Card = ({
   cardNumbers,
@@ -6,7 +7,7 @@ const Card = ({
   ownerName,
 }: {
   cardNumbers: string[];
-  date: string[];
+  date: Record<string, string>;
   ownerName: string;
 }) => {
   const cardStyle: CSSProperties = {
@@ -50,13 +51,14 @@ const Card = ({
         ))}
       </div>
       <div>
-        {date.map((date) => (
+        {Object.values(date).map((date) => (
           <span style={{ color: "white" }}>{date}</span>
         ))}
       </div>
       <div>
         <span style={{ color: "white" }}>{ownerName}</span>
       </div>
+      <img src={IMAGE_URL.visa} style={}></img>
     </div>
   );
 };
