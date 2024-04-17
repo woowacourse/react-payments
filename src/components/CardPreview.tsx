@@ -55,7 +55,6 @@ interface Props {
 }
 
 export default function CardPreview({ cardInformation }: Props) {
-  console.log(cardInformation.cardExpirationMonth.length);
   return (
     <CardContainer>
       <CardHeader>

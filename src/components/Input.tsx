@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
-const SInput = styled.input<{ isError: boolean }>`
+const SInput = styled.input<{
+  isErrorOnChange: boolean;
+  isErrorOnBlur: boolean;
+}>`
   width: 100%;
   height: 15px;
   padding: 8px 15px 8px 8px;
   gap: 8px;
   border: 1px solid
-    ${(props) => (props.isError ? "red" : "rgba(172, 172, 172, 1)")};
+    ${(props) =>
+      props.isErrorOnChange || props.isErrorOnBlur
+        ? "red"
+        : "rgba(172, 172, 172, 1)"};
   border-radius: 2px;
   font-family: Inter;
   font-size: 11px;
@@ -23,26 +29,43 @@ const SInput = styled.input<{ isError: boolean }>`
 interface Props {
   maxLength: number;
   placeholder: string;
-  inputHandler: (inputValue: string) => void;
+  onChange: (inputValue: string) => boolean;
+  onBlur?: (inputValue: string) => boolean;
   value: string;
-  isError: boolean;
 }
 
 export default function Input({
   maxLength,
   placeholder,
-  inputHandler,
+  onChange,
+  onBlur,
   value,
-  isError,
 }: Props) {
+  const [isErrorOnChange, setIsErrorOnChange] = useState(false);
+  const [isErrorOnBlur, setIsErrorOnBlur] = useState(false);
+
   return (
     <SInput
       type="text"
       maxLength={maxLength}
       placeholder={placeholder}
-      onChange={(e) => inputHandler(e.target.value)}
+      onChange={(e) => {
+        if (!onChange) {
+          return;
+        }
+        const isError = onChange(e.target.value);
+        setIsErrorOnChange(isError);
+      }}
+      onBlur={(e) => {
+        if (!onBlur) {
+          return;
+        }
+        const isError = onBlur(e.target.value);
+        setIsErrorOnBlur(isError);
+      }}
       value={value}
-      isError={isError}
+      isErrorOnChange={isErrorOnChange}
+      isErrorOnBlur={isErrorOnBlur}
     ></SInput>
   );
 }

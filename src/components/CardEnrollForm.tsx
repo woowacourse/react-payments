@@ -36,8 +36,6 @@ export default function CardEnrollForm() {
       ...prev,
       [inputId]: inputValue,
     }));
-
-    console.log(cardInformation);
   };
 
   return (
@@ -57,7 +55,7 @@ export default function CardEnrollForm() {
           inputHandler={inputHandler}
         ></CardExpirationDate>
         <CardOwnerName
-          value={cardInformation.cardOwnerName}
+          cardOwnerName={cardInformation.cardOwnerName}
           inputHandler={inputHandler}
         ></CardOwnerName>
       </CardInformation>
