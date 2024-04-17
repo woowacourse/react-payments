@@ -7,11 +7,11 @@ const maskLastEightDigits = (creditCardNumber: CreditCardNumber) => {
 
   return creditCardNumber.map((number, idx) =>
     lastEightIndex.includes(idx) ? (
-      <CreditCardInfoSymbol>
+      <CreditCardInfoSymbol key={idx}>
         {replaceToMaskingNumber(number)}
       </CreditCardInfoSymbol>
     ) : (
-      <CreditCardInfoNumber>{number}</CreditCardInfoNumber>
+      <CreditCardInfoNumber key={idx}>{number}</CreditCardInfoNumber>
     )
   );
 };
