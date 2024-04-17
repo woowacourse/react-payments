@@ -1,37 +1,32 @@
 import styled from "@emotion/styled";
-import { CardNumberValue, ExpirationPeriodValue } from "../../@types/CreditCard";
 import CreditCard from "../../components/creditCard";
 import CreditCardForm from "../../components/creditCardForm";
-import CARD_FORM_MESSAGE from "../../constants/cardFormMessage";
-import SIGN from "../../constants/sign";
 import useInput from "../../hooks/useInput";
-import InputCreditCardNumber from "../../components/input/InputCreditCardNumber";
-import InputExpirationPeriod from "../../components/input/InputExpirationPeriod";
-import InputOwnerName from "../../components/input/InputOwnerName";
+import CARD_FORM_MESSAGE from "../../constants/cardFormMessage";
+import { CardNumberValue, ExpirationPeriodValue } from "../../@types/CreditCard";
 
 interface Owner {
   name: string;
 }
 
 const Payments = () => {
-  const [cardNumber, setCardNumber, cardNumberError] = useInput<CardNumberValue>({
-    firstValue: SIGN.empty,
-    secondValue: SIGN.empty,
-    thirdValue: SIGN.empty,
-    fourthValue: SIGN.empty,
+  const [cardNumber, setCardNumber] = useInput<CardNumberValue>({
+    firstValue: "",
+    secondValue: "",
+    thirdValue: "",
+    fourthValue: "",
   });
 
-  const [expirationPeriod, setExpirationPeriod, expirationPeriodError] =
-    useInput<ExpirationPeriodValue>({
-      month: SIGN.empty,
-      year: SIGN.empty,
-    });
+  const [expirationPeriod, setExpirationPeriod] = useInput<ExpirationPeriodValue>({
+    month: "",
+    year: "",
+  });
 
-  const [owner, setOwner, ownerError] = useInput<Owner>({ name: SIGN.empty });
+  const [owner, setOwner] = useInput<Owner>({ name: "" });
 
-  const formatExpirationPeriod = () =>
+  const concatPeriod = () =>
     expirationPeriod.year.length
-      ? expirationPeriod.month + SIGN.slash + expirationPeriod.year
+      ? expirationPeriod.month + "/" + expirationPeriod.year
       : expirationPeriod.month;
 
   return (
@@ -43,35 +38,30 @@ const Payments = () => {
           cardNumber.thirdValue,
           cardNumber.fourthValue,
         ]}
-        expirationPeriod={formatExpirationPeriod()}
+        expirationPeriod={concatPeriod()}
         ownerName={owner.name}
       />
       <InputFormContainer>
         <CreditCardForm
           title={CARD_FORM_MESSAGE.inputCardNumber}
           description={CARD_FORM_MESSAGE.cardNumberDescription}
-          inputError={cardNumberError}
-        >
-          <InputCreditCardNumber
-            inputValue={cardNumber}
-            handleChange={setCardNumber}
-            inputError={cardNumberError}
-          />
-        </CreditCardForm>
+          type="cardNumber"
+          inputValue={cardNumber}
+          handleChange={setCardNumber}
+        />
         <CreditCardForm
           title={CARD_FORM_MESSAGE.inputCardExpirationDate}
           description={CARD_FORM_MESSAGE.cardExpirationDateDescription}
-          inputError={expirationPeriodError}
-        >
-          <InputExpirationPeriod
-            inputValue={expirationPeriod}
-            handleChange={setExpirationPeriod}
-            inputError={expirationPeriodError}
-          />
-        </CreditCardForm>
-        <CreditCardForm title={CARD_FORM_MESSAGE.inputCardOwner} inputError={ownerError}>
-          <InputOwnerName inputValue={owner.name} handleChange={setOwner} inputError={ownerError} />
-        </CreditCardForm>
+          type="expirationPeriod"
+          inputValue={expirationPeriod}
+          handleChange={setExpirationPeriod}
+        />
+        <CreditCardForm
+          title={CARD_FORM_MESSAGE.inputCardOwner}
+          type="owner"
+          inputValue={owner.name}
+          handleChange={setOwner}
+        />
       </InputFormContainer>
     </PaymentsContainer>
   );
