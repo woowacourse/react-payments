@@ -1,16 +1,15 @@
 import { ThemeProvider } from "styled-components";
 import "./App.css";
-import CardForm from "./components/CardForm/CardForm";
-import { theme } from "./style/theme";
-import GlobalStyles from "./style/global";
+import { theme } from "@/style/theme";
+import GlobalStyles from "@/style/global";
+import CardRegister from "@/pages/CardRegister";
 
 function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
         <GlobalStyles />
-        <h1>React Payments</h1>
-        <CardForm />
+        <CardRegister />
       </ThemeProvider>
     </>
   );
