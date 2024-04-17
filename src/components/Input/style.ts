@@ -11,6 +11,8 @@ const InputBox = styled.input<{ isError: boolean }>`
   font-size: 11px;
   font-weight: 400;
   opacity: 0.8;
+  min-width: 10px;
+
   &:focus {
     border: 1px solid black;
   }
