@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const InputField = styled.div`
+export const InputField = styled.fieldset`
   display: flex;
   flex-direction: column;
   row-gap: 8px;
@@ -13,7 +13,8 @@ export const InputContainer = styled.div<{ $length?: number }>`
   width: 100%;
 `;
 
-export const InputLabel = styled.p`
+export const InputLabel = styled.legend`
+  display: contents;
   font-size: 12px;
   font-weight: 500;
   line-height: 15px;

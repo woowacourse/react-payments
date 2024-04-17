@@ -7,7 +7,7 @@ export const TitleContainer = styled.div`
   margin-bottom: 16px;
 `;
 
-export const Title = styled.p`
+export const Title = styled.h2`
   font-size: 18px;
   font-weight: 700;
   line-height: 26px;
