@@ -11,7 +11,8 @@ export const StyledInput = styled.input<{ invalid?: boolean }>`
   ${(props) => props.theme.typography.input};
 
   &:focus {
-    border-color: ${(props) => props.theme.color.black};
+    border-color: ${(props) => (props.invalid ? props.theme.color.red : props.theme.color.black)};
+    outline: none;
   }
 
   &::placeholder {

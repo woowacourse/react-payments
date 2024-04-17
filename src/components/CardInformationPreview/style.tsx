@@ -29,7 +29,7 @@ export const UserInformationContainer = styled.div`
   margin: 1.4rem 1.3rem 0.4rem 0.5rem;
 `;
 
-export const CardNumberContainer = styled.p`
+export const CardNumberContainer = styled.div`
   display: flex;
   gap: 1rem;
   width: 100%;

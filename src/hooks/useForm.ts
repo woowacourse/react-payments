@@ -9,7 +9,7 @@ interface FormState {
 }
 
 const useForm = (defaultValues: FormState) => {
-  const { firstState, secondState, thirdState, fourthState } = useCardNumber(
+  const { firstState, secondState, thirdState, fourthState, showImageCondition } = useCardNumber(
     defaultValues.cardNumber,
   );
   const { monthState, yearState } = useExpirationDate(defaultValues.expirationDate);
@@ -28,6 +28,12 @@ const useForm = (defaultValues: FormState) => {
       setThird: thirdState.setThird,
       setFourth: fourthState.setFourth,
     },
+    cardNumberErrorState: {
+      firstError: firstState.firstError,
+      secondError: secondState.secondError,
+      thirdError: thirdState.thirdError,
+      fourthError: fourthState.fourthError,
+    },
     expirationDateState: {
       month: monthState.month,
       year: yearState.year,
@@ -36,7 +42,12 @@ const useForm = (defaultValues: FormState) => {
       setMonth: monthState.setMonth,
       setYear: yearState.setYear,
     },
+    expirationDateErrorState: {
+      monthError: monthState.monthError,
+      yearError: yearState.yearError,
+    },
     ...userNameState,
+    showImageCondition,
   };
 };
 
