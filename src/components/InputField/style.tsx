@@ -6,7 +6,9 @@ const Label = styled.label`
 `;
 
 const InputFieldWrapper = styled.div`
-  background-color: pink;
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const InputsWrapper = styled.div`
@@ -16,9 +18,10 @@ const InputsWrapper = styled.div`
 `;
 
 const ErrorMessageWrapper = styled.div`
-  font-family: Noto Sans KR;
   font-size: 9.5px;
   font-weight: 400;
+  color: ${({ theme }) => theme.COLOR.error};
+  height: 14px;
 `;
 
 const S = { Label, InputsWrapper, ErrorMessageWrapper, InputFieldWrapper };

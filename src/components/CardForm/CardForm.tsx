@@ -2,6 +2,7 @@ import { ChangeEvent } from "react";
 import useInput from "../../hooks/useInput";
 import { INPUT_COUNTS, PLACE_HOLDER } from "../../constants/condition";
 import InputField from "../InputField/InputField";
+import Input from "../Input/Input";
 
 const CardForm = () => {
   const {
@@ -23,13 +24,10 @@ const CardForm = () => {
     ),
   });
 
-  const {
-    input: ownerName,
-    onChange: onChangeOwnerName,
-    errorMessage: ownerErrorMessage,
-  } = useInput({
-    initialValue: [""],
-  });
+  const { onChange: onChangeOwnerName, errorMessage: ownerErrorMessage } =
+    useInput({
+      initialValue: [""],
+    });
 
   const expirationPlaceholder = [
     PLACE_HOLDER.EXPIRATION_MONTH,
@@ -38,38 +36,41 @@ const CardForm = () => {
 
   return (
     <>
-      {cardNumbers.map((number, index) => (
-        <InputField
-          key={index}
-          placeholder={PLACE_HOLDER.CARD_NUMBERS}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => {
-            onChangeCardNumbers(e, index);
-          }}
-          value={number}
-          errorMessage={cardNumbersErrorMessage}
-        />
-      ))}
+      <InputField label="카드번호" errorMessage={cardNumbersErrorMessage}>
+        {cardNumbers.map((_, index) => (
+          <Input
+            key={index}
+            placeholder={PLACE_HOLDER.CARD_NUMBERS}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              onChangeCardNumbers(e, index);
+            }}
+            isError={false}
+          />
+        ))}
+      </InputField>
 
-      {expirationPeriod.map((value, index) => (
-        <InputField
-          key={index}
-          placeholder={expirationPlaceholder[index]}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => {
-            onChangeExpirationPeriod(e, index);
-          }}
-          value={value}
-          errorMessage={expirationPeriodErrorMessage}
-        />
-      ))}
+      <InputField label="유효기간" errorMessage={expirationPeriodErrorMessage}>
+        {expirationPeriod.map((_, index) => (
+          <Input
+            key={index}
+            placeholder={expirationPlaceholder[index]}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              onChangeExpirationPeriod(e, index);
+            }}
+            isError={false}
+          />
+        ))}
+      </InputField>
 
       <InputField
-        placeholder={PLACE_HOLDER.OWNER_NAME}
+        label="소유자이름"
         onChange={(e: ChangeEvent<HTMLInputElement>) => {
           onChangeOwnerName(e, 0);
         }}
-        value={ownerName[0]}
         errorMessage={ownerErrorMessage}
-      />
+      >
+        <Input placeholder={PLACE_HOLDER.OWNER_NAME} isError={false} />
+      </InputField>
     </>
   );
 };

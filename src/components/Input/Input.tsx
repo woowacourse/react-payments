@@ -1,12 +1,20 @@
+import { ChangeEvent } from "react";
 import S from "./style";
 
 interface Props {
-  placeholder: string;
+  placeholder?: string;
   isError: boolean;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Input = ({ placeholder, isError }: Props) => {
-  return <S.InputBox isError={isError} placeholder={placeholder}></S.InputBox>;
+const Input = ({ placeholder, isError, onChange }: Props) => {
+  return (
+    <S.InputBox
+      onChange={onChange}
+      isError={isError}
+      placeholder={placeholder}
+    ></S.InputBox>
+  );
 };
 
 export default Input;

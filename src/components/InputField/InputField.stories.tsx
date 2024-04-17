@@ -13,7 +13,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    children: <Input placeholder="" isError={false} />,
+    label: "라벨",
+    children: <Input onChange={() => {}} placeholder="" isError={false} />,
     errorMessage: "",
   },
 };
