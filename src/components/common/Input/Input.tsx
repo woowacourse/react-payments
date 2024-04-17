@@ -6,6 +6,7 @@ interface InputProps {
   value: string;
   isError: boolean;
   placeholder: string;
+  isRequired?: boolean;
   maxLength?: number;
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleOnBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
@@ -16,7 +17,8 @@ export default function Input({
   value,
   placeholder,
   isError,
-  maxLength = 0,
+  maxLength,
+  isRequired = false,
   handleChange,
   handleOnBlur,
 }: InputProps) {
@@ -26,6 +28,7 @@ export default function Input({
       placeholder={placeholder}
       value={value}
       maxLength={maxLength}
+      required={isRequired}
       onChange={handleChange}
       onBlur={handleOnBlur}
       className={`${styles.input} ${isError && styles.error}`}

@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import Input from '../common/Input';
-import styles from './CardNumberInput.module.css';
+import Input from '../common/Input/Input';
+// import styles from './CardNumberInput.module.css';
+import Field from '../common/Field/Field';
 
 interface CardNumbers {
-  first: '';
-  second: '';
-  third: '';
-  fourth: '';
+  first: string;
+  second: string;
+  third: string;
+  fourth: string;
 }
 
 export default function CardNumberInput() {
@@ -16,7 +17,7 @@ export default function CardNumberInput() {
     third: '',
     fourth: '',
   });
-  const [isError, setIsError] = useState<Record<string, boolean>>({
+  const [isError, setIsError] = useState<Record<keyof CardNumbers, boolean>>({
     first: false,
     second: false,
     third: false,
@@ -25,7 +26,7 @@ export default function CardNumberInput() {
 
   const [errMsg, setErrMsg] = useState('');
 
-  const isInteger = (name: string, value: string) => {
+  const isInteger = (value: string) => {
     return Number.isInteger(Number(value));
   };
 
@@ -33,17 +34,21 @@ export default function CardNumberInput() {
     return value.length === 4;
   };
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    if (isInteger(name, value)) {
-      setErrMsg('');
-      setCardNumbers({ ...cardNumbers, [name]: value });
-    } else {
+
+    if (!isInteger(value)) {
       setErrMsg('숫자만 입력 가능합니다.');
+      setIsError({ ...isError, [name]: true });
+      return;
     }
+    setErrMsg('');
+    setIsError({ ...isError, [name]: false });
+
+    setCardNumbers({ ...cardNumbers, [name]: value });
   };
 
-  const handleOnBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+  const onBlur = (event: React.FocusEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
 
     if (!hasFourDigit(value)) {
@@ -56,46 +61,24 @@ export default function CardNumberInput() {
   };
 
   return (
-    <div className={styles.container}>
-      <p>결제할 카드 번호를 입력해 주세요</p>
-      <p>본인 명의의 카드만 결제 가능합니다.</p>
-      <Input
-        name="first"
-        placeholder="1234"
-        value={cardNumbers.first}
-        isError={isError.first}
-        handleChange={handleChange}
-        handleOnBlur={handleOnBlur}
-        maxLength={4}
-      ></Input>
-      <Input
-        name="second"
-        placeholder="1234"
-        value={cardNumbers.second}
-        isError={isError.second}
-        handleChange={handleChange}
-        handleOnBlur={handleOnBlur}
-        maxLength={4}
-      ></Input>
-      <Input
-        name="third"
-        placeholder="1234"
-        value={cardNumbers.third}
-        isError={isError.third}
-        handleChange={handleChange}
-        handleOnBlur={handleOnBlur}
-        maxLength={4}
-      ></Input>
-      <Input
-        name="fourth"
-        placeholder="1234"
-        value={cardNumbers.fourth}
-        isError={isError.fourth}
-        handleChange={handleChange}
-        handleOnBlur={handleOnBlur}
-        maxLength={4}
-      ></Input>
-      <p>{errMsg}</p>
-    </div>
+    <Field
+      title="결제할 카드 번호를 입력해 주세요"
+      description="본인 명의의 카드만 결제 가능합니다."
+      labelText="카드 번호"
+      errMsg={errMsg}
+    >
+      {Object.keys(cardNumbers).map((name) => (
+        <Input
+          key={name}
+          name={name as keyof CardNumbers}
+          placeholder="1234"
+          value={cardNumbers[name as keyof CardNumbers]}
+          isError={isError[name as keyof CardNumbers]}
+          handleChange={onChange}
+          handleOnBlur={onBlur}
+          maxLength={4}
+        ></Input>
+      ))}
+    </Field>
   );
 }

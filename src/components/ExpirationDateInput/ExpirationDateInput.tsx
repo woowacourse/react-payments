@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import Input from '../common/Input';
-import styles from './ExpirationDateInput.module.css';
+import Input from '../common/Input/Input';
+// import styles from './ExpirationDateInput.module.css';
+import Field from '../common/Field/Field';
 
 interface ExpirationDate {
   month: string;
@@ -19,8 +20,7 @@ const ExpirationDateInput = () => {
 
   const [errMsg, setErrMsg] = useState('');
 
-  const isInteger = (name: string, value: string) =>
-    Number.isInteger(Number(value));
+  const isInteger = (value: string) => Number.isInteger(Number(value));
 
   const hasTwoDigit = (value: string) => value.length === 2;
 
@@ -28,25 +28,30 @@ const ExpirationDateInput = () => {
     1 <= Number(value) && Number(value) <= 12;
 
   const isValidateDate = () => {
-    const currentDate = new Date();
-
     const { year, month } = expirationDate;
+    if (year === '') return true;
+
+    const currentDate = new Date();
     const inputDate = new Date(Number(year) + 2000, Number(month));
 
     return inputDate > currentDate;
   };
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    if (isInteger(name, value)) {
-      setErrMsg('');
-      setExpirationDate({ ...expirationDate, [name]: value });
-    } else {
+    if (!isInteger(value)) {
       setErrMsg('숫자만 입력 가능합니다.');
+      setIsError({ ...isError, [name]: true });
+
+      return;
     }
+    setErrMsg('');
+    setIsError({ ...isError, [name]: false });
+
+    setExpirationDate({ ...expirationDate, [name]: value });
   };
 
-  const handleOnBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+  const onBlur = (event: React.FocusEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
 
     if (!hasTwoDigit(value)) {
@@ -61,8 +66,6 @@ const ExpirationDateInput = () => {
       return;
     }
 
-    console.log(isValidateDate());
-
     if (!isValidateDate()) {
       setErrMsg('만료된 카드는 사용할 수 없습니다');
       setIsError({ ...isError, [name]: true });
@@ -74,29 +77,25 @@ const ExpirationDateInput = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <p>결제할 카드 번호를 입력해 주세요</p>
-      <p>월/년도(MMYY)를 순서대로 입력해 주세요.</p>
-      <Input
-        name="month"
-        placeholder="MM"
-        value={expirationDate.month}
-        isError={isError.month}
-        handleChange={handleChange}
-        handleOnBlur={handleOnBlur}
-        maxLength={2}
-      ></Input>
-      <Input
-        name="year"
-        placeholder="YY"
-        value={expirationDate.year}
-        isError={isError.year}
-        handleChange={handleChange}
-        handleOnBlur={handleOnBlur}
-        maxLength={2}
-      ></Input>
-      <p>{errMsg}</p>
-    </div>
+    <Field
+      title="카드 유효기간을 입력해 주세요"
+      description="월/년도(MMYY)를 순서대로 입력해 주세요"
+      labelText="유효기간"
+      errMsg={errMsg}
+    >
+      {Object.keys(expirationDate).map((name) => (
+        <Input
+          key={name}
+          name={name as keyof ExpirationDate}
+          placeholder={name === 'month' ? 'MM' : 'YY'}
+          value={expirationDate[name as keyof ExpirationDate]}
+          isError={isError[name as keyof ExpirationDate]}
+          handleChange={onChange}
+          handleOnBlur={onBlur}
+          maxLength={2}
+        ></Input>
+      ))}
+    </Field>
   );
 };
 
