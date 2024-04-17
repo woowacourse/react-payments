@@ -10,7 +10,8 @@ const InputBox = styled.input<{ isError: boolean }>`
   border-radius: 2px;
   font-size: 11px;
   font-weight: 400;
-  :focus {
+  opacity: 0.8;
+  &:focus {
     border: 1px solid black;
   }
 `;

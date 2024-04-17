@@ -1,8 +1,15 @@
 import { ChangeEvent } from "react";
 import useInput from "../../hooks/useInput";
-import { INPUT_COUNTS, PLACE_HOLDER } from "../../constants/condition";
+import {
+  INPUT_COUNTS,
+  PLACE_HOLDER,
+  INPUT_INFO_TITLE,
+  INPUT_INFO_SUBTITLE,
+  INPUT_LABEL,
+} from "../../constants/condition";
 import InputField from "../InputField/InputField";
 import Input from "../Input/Input";
+import S from "./style";
 
 const CardForm = () => {
   const {
@@ -36,41 +43,69 @@ const CardForm = () => {
 
   return (
     <>
-      <InputField label="카드번호" errorMessage={cardNumbersErrorMessage}>
-        {cardNumbers.map((_, index) => (
-          <Input
-            key={index}
-            placeholder={PLACE_HOLDER.CARD_NUMBERS}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => {
-              onChangeCardNumbers(e, index);
-            }}
-            isError={false}
-          />
-        ))}
-      </InputField>
+      {/*카드 번호*/}
+      <S.InputFieldWithInfo>
+        <S.TitleWrapper>
+          <S.InputTitle>{INPUT_INFO_TITLE.CARD_NUMBERS}</S.InputTitle>
+          <S.InputSubtitle>{INPUT_INFO_SUBTITLE.CARD_NUMBERS}</S.InputSubtitle>
+        </S.TitleWrapper>
+        <InputField
+          label={INPUT_LABEL.CARD_NUMBERS}
+          errorMessage={cardNumbersErrorMessage}
+        >
+          {cardNumbers.map((_, index) => (
+            <Input
+              key={index}
+              placeholder={PLACE_HOLDER.CARD_NUMBERS}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                onChangeCardNumbers(e, index);
+              }}
+              isError={false}
+            />
+          ))}
+        </InputField>
+      </S.InputFieldWithInfo>
 
-      <InputField label="유효기간" errorMessage={expirationPeriodErrorMessage}>
-        {expirationPeriod.map((_, index) => (
-          <Input
-            key={index}
-            placeholder={expirationPlaceholder[index]}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => {
-              onChangeExpirationPeriod(e, index);
-            }}
-            isError={false}
-          />
-        ))}
-      </InputField>
+      {/*유효 기간*/}
+      <S.InputFieldWithInfo>
+        <S.TitleWrapper>
+          <S.InputTitle>{INPUT_INFO_TITLE.EXPIRATION_DATE}</S.InputTitle>
+          <S.InputSubtitle>
+            {INPUT_INFO_SUBTITLE.EXPIRATION_DATE}
+          </S.InputSubtitle>
+        </S.TitleWrapper>
+        <InputField
+          label={INPUT_LABEL.EXPIRATION_DATE}
+          errorMessage={expirationPeriodErrorMessage}
+        >
+          {expirationPeriod.map((_, index) => (
+            <Input
+              key={index}
+              placeholder={expirationPlaceholder[index]}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                onChangeExpirationPeriod(e, index);
+              }}
+              isError={false}
+            />
+          ))}
+        </InputField>
+      </S.InputFieldWithInfo>
 
-      <InputField
-        label="소유자이름"
-        onChange={(e: ChangeEvent<HTMLInputElement>) => {
-          onChangeOwnerName(e, 0);
-        }}
-        errorMessage={ownerErrorMessage}
-      >
-        <Input placeholder={PLACE_HOLDER.OWNER_NAME} isError={false} />
-      </InputField>
+      {/*소유자 이름*/}
+      <S.InputFieldWithInfo>
+        <S.TitleWrapper>
+          <S.InputTitle>{INPUT_INFO_TITLE.OWNER_NAME}</S.InputTitle>
+        </S.TitleWrapper>
+        <InputField
+          label={INPUT_LABEL.OWNER_NAME}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => {
+            onChangeOwnerName(e, 0);
+          }}
+          errorMessage={ownerErrorMessage}
+        >
+          <Input placeholder={PLACE_HOLDER.OWNER_NAME} isError={false} />
+        </InputField>
+      </S.InputFieldWithInfo>
     </>
   );
 };
