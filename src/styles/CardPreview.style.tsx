@@ -36,6 +36,7 @@ export const CardBody = styled.div`
 
 export const InfoBox = styled.p<{ $length?: number }>`
   display: flex;
+  justify-content: stretch;
   align-items: center;
   width: ${(props) => props.$length && `calc(100% / ${props.$length})`};
   height: 20px;
