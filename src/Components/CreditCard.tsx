@@ -45,14 +45,6 @@ const cardInfoStyle = css`
   }
 `;
 
-const formatCardNumbers = (cardNumbers: number[] | undefined) => {
-  if (!cardNumbers) return;
-  return cardNumbers.map((value, index) => {
-    if (index > 7) return "*";
-    return value;
-  });
-};
-
 const formatTwoDigitNumber = (n: number | undefined) => {
   if (!n) return;
   return String(n).padStart(2, "0");
@@ -63,18 +55,16 @@ interface Props {
 }
 
 const CreditCard: React.FC<Props> = ({ cardInfo: { cardNumbers, cardValidityPeriod, ownerName } }) => {
-  const formatNumbers =
-    formatCardNumbers(cardNumbers)
-      ?.join("")
-      .match(/.{1,4}/g) || [];
-
   const pattern = /^(51|52|53|54)/;
-
-  const cardImage = formatNumbers[0]?.startsWith("4")
-    ? visaImage
-    : formatNumbers[0] && pattern.test(formatNumbers[0])
-      ? masterImage
-      : null;
+  const [month, year] = cardValidityPeriod!;
+  let cardImage;
+  if (cardNumbers && cardNumbers[0]) {
+    cardImage = cardNumbers[0]?.startsWith("4")
+      ? visaImage
+      : cardNumbers[0] && pattern.test(cardNumbers[0])
+        ? masterImage
+        : null;
+  }
 
   return (
     <div css={style}>
@@ -84,16 +74,16 @@ const CreditCard: React.FC<Props> = ({ cardInfo: { cardNumbers, cardValidityPeri
       </div>
       <section css={cardInfoStyle}>
         <div css={rowStyle}>
-          {formatNumbers.map((part, index) => (
+          {cardNumbers?.map((part, index) => (
             <div key={index} css={width42}>
               {part}
             </div>
           ))}
         </div>
         <div>
-          {formatTwoDigitNumber(cardValidityPeriod?.month)}
-          {cardValidityPeriod?.month && "/"}
-          {cardValidityPeriod?.year}
+          {formatTwoDigitNumber(Number(month))}
+          {month && "/"}
+          {year}
         </div>
         <div> {ownerName}</div>
       </section>
