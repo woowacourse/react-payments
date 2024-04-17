@@ -8,8 +8,8 @@ interface InputProps {
   placeholder: string;
   isRequired?: boolean;
   maxLength?: number;
-  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  handleOnBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
+  handleChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleOnBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
 }
 
 export default function Input({

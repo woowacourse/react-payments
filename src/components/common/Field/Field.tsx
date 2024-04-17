@@ -21,9 +21,9 @@ export default function Field({
       <h2 className={styles.title}>{title}</h2>
       <p className={styles.description}>{description}</p>
 
-      <label className={styles.labelText}>
-        <span>{labelText}</span>
-        {children}
+      <label>
+        <p className={styles.labelText}>{labelText}</p>
+        <div className={styles.inputWrapper}>{children}</div>
       </label>
 
       <p className={styles.errMsg}>{errMsg}</p>
