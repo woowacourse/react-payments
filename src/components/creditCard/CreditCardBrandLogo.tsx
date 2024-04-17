@@ -1,4 +1,4 @@
-import { CardNumber } from ".";
+import { CardNumber } from "../../@types/CreditCard";
 import CARD_THRESHOLD from "../../constants/cardThreshold";
 import styled from "@emotion/styled";
 
