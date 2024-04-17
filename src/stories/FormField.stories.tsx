@@ -1,16 +1,16 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Form from "../Components/Form";
+import FormField from "../Components/FormField";
 
 const meta = {
-  title: "Components/Form",
-  component: Form,
+  title: "Components/FormField",
+  component: FormField,
   argTypes: {
     title: { control: "object", description: "타이틀" },
     description: { control: "object", description: "설명" },
     label: { control: "object", description: "라벨" },
     inputPlaceholderList: { control: "object", description: "입력 힌트" },
   },
-} satisfies Meta<typeof Form>;
+} satisfies Meta<typeof FormField>;
 
 export default meta;
 
