@@ -23,7 +23,7 @@ function CardOwnerInput({ setOwner }: CardOwnerInputProps) {
   };
 
   const validateOwner = (value: string) => {
-    const regExp = /^[a-zA-Z][a-zA-Z ]+$/;
+    const regExp = /^[a-zA-Z][a-zA-Z ]*$/;
 
     if (value.length === 0) {
       setErrorMessage('');
