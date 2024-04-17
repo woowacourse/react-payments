@@ -4,22 +4,16 @@ import InputField from './InputField';
 import Input from './Input';
 
 interface CardNumberInputProps {
-  cardNumber: string[];
   setCardNumber: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-function CardNumberInput({ cardNumber, setCardNumber }: CardNumberInputProps) {
+function CardNumberInput({ setCardNumber }: CardNumberInputProps) {
   const [isValid, setIsValid] = useState<boolean[]>([true, true, true, true]);
   const [errorMessage, setErrorMessage] = useState<string>('');
 
   const validateCardNumber = (number: string) => {
-    if (number.length === 0) {
-      setErrorMessage('');
-      return true;
-    }
-
     if (Number.isNaN(Number(number)) || number.length !== 4) {
-      setErrorMessage('카드 번호는 4자리의 숫자여야 합니다.');
+      setErrorMessage('카드 번호는 4자리 숫자여야 합니다.');
       return false;
     }
 
@@ -27,25 +21,33 @@ function CardNumberInput({ cardNumber, setCardNumber }: CardNumberInputProps) {
     return true;
   };
 
-  const onCardNumberChange = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    const isInputValid = validateCardNumber(value);
+  const onCardNumberChange = (inputIndex: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    const isInputValid = validateCardNumber(e.target.value);
 
-    const newIsValid = [...isValid];
-    newIsValid[index] = isInputValid;
-    setIsValid(newIsValid);
+    setIsValid((prev) => {
+      return prev.map((isValid, index) => (index === inputIndex ? isInputValid : isValid));
+    });
 
-    if (!isInputValid) {
-      const newCardNumber = [...cardNumber];
-      newCardNumber[index] = '';
-      setCardNumber(newCardNumber);
+    setCardNumber((prev) => {
+      return prev.map((number, index) => {
+        if (index === inputIndex) {
+          return isInputValid ? e.target.value : '';
+        }
 
-      return;
+        return number;
+      });
+    });
+  };
+
+  const onCardNumberBlur = (inputIndex: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!isValid[inputIndex]) {
+      e.target.value = '';
+      setErrorMessage('');
     }
 
-    const newCardNumber = [...cardNumber];
-    newCardNumber[index] = value;
-    setCardNumber(newCardNumber);
+    setIsValid((prev) => {
+      return prev.map((isValid, index) => (index === inputIndex ? true : isValid));
+    });
   };
 
   return (
@@ -56,9 +58,10 @@ function CardNumberInput({ cardNumber, setCardNumber }: CardNumberInputProps) {
           <Input
             key={index}
             type="text"
-            placeholder="1234"
             maxLength={4}
+            placeholder="1234"
             onChange={onCardNumberChange(index)}
+            onBlur={onCardNumberBlur(index)}
             isValid={isValid[index]}
           />
         ))}
