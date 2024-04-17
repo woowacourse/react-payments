@@ -24,21 +24,6 @@ function Input({ keyProp, type, placeholder, setState, setErrorMessage }: InputT
     }
   };
 
-  const inputStyle = ({ border, focusColor }: { border: string; focusColor: string }) => css`
-    border: 1px solid;
-    border-color: ${border};
-    border-radius: 4px;
-    padding: 8px;
-    font-size: 11px;
-    outline: none;
-    width: 100%;
-
-    &:active,
-    &:focus {
-      border-color: ${focusColor};
-    }
-  `;
-
   return (
     <>
       <input
@@ -52,5 +37,20 @@ function Input({ keyProp, type, placeholder, setState, setErrorMessage }: InputT
     </>
   );
 }
+
+const inputStyle = ({ border, focusColor }: { border: string; focusColor: string }) => css`
+  border: 1px solid;
+  border-color: ${border};
+  border-radius: 4px;
+  padding: 8px;
+  font-size: 11px;
+  outline: none;
+  width: 100%;
+
+  &:active,
+  &:focus {
+    border-color: ${focusColor};
+  }
+`;
 
 export default Input;

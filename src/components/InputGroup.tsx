@@ -34,34 +34,6 @@ function InputGroup({ setState, section }: InputGroupType) {
     });
   };
 
-  const inputGroupStyle = css`
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  `;
-
-  const inputTitleStyle = css`
-    display: flex;
-    flex-direction: column;
-  `;
-
-  const labelStyle = css`
-    font-size: 12px;
-    color: #0a0d13;
-  `;
-
-  const inputContainerStyle = css`
-    display: flex;
-    gap: 8px;
-    flex-direction: column;
-    width: 100%;
-  `;
-
-  const inputBoxStyle = css`
-    display: flex;
-    gap: 10px;
-  `;
-
   return (
     <div css={inputGroupStyle}>
       <div css={inputTitleStyle}>
@@ -86,11 +58,38 @@ function InputGroup({ setState, section }: InputGroupType) {
             );
           })}
         </div>
+        <ErrorMessage value={errorMessage}></ErrorMessage>
       </div>
-
-      <ErrorMessage value={errorMessage}></ErrorMessage>
     </div>
   );
 }
+
+const inputGroupStyle = css`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`;
+
+const inputTitleStyle = css`
+  display: flex;
+  flex-direction: column;
+`;
+
+const labelStyle = css`
+  font-size: 12px;
+  color: #0a0d13;
+`;
+
+const inputContainerStyle = css`
+  display: flex;
+  gap: 8px;
+  flex-direction: column;
+  width: 100%;
+`;
+
+const inputBoxStyle = css`
+  display: flex;
+  gap: 10px;
+`;
 
 export default InputGroup;

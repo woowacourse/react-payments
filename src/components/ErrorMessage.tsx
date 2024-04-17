@@ -7,9 +7,14 @@ interface ErrorMessageType {
 function ErrorMessage({ value }: ErrorMessageType) {
   return (
     <>
-      <p>{value}</p>
+      <p css={errorMessageStyle}>{value}</p>
     </>
   );
 }
+
+const errorMessageStyle = css`
+  font-size: 9.5px;
+  color: #ff3d3d;
+`;
 
 export default ErrorMessage;
