@@ -1,5 +1,5 @@
 import { useState } from 'react';
-// import CardView from '../components/Card';
+import CardView from '../components/Card';
 import InputForm from '../components/InputForm';
 import { Card } from '../types/card';
 
