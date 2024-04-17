@@ -1,21 +1,26 @@
 import './App.css';
+
 import {
   CardExpirationPeriodForm,
   CardNumbersForm,
+  CardPreview,
   CardUserForm,
 } from './components';
-import ReducerTest from './modules/ReducerTest';
+import useCardInfoReducer from './modules/useCardInfoReducer';
 
 function App() {
+  const { cardInfo, editCardMark, editCardNumbers } = useCardInfoReducer();
   return (
     <>
       <h1>React Payments</h1>
-      <CardNumbersForm />
+      <CardNumbersForm
+        editCardMark={editCardMark}
+        editCardNumbers={editCardNumbers}
+      />
       <CardExpirationPeriodForm />
       <CardUserForm />
       <div>
-        --reducer 테스트--
-        <ReducerTest />
+        <CardPreview cardInfo={cardInfo} />
       </div>
     </>
   );
