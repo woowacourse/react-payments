@@ -1,9 +1,10 @@
-export interface inputType {
+export interface InputType {
   inputLabel: string;
-  inputInfo: inputInfo[];
+  inputInfo: InputInfo[];
 }
 
-interface inputInfo {
+export interface InputInfo {
+  property: string;
   validateType: string;
   maxLength: number;
   placeHolder: string;

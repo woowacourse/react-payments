@@ -1,7 +1,8 @@
 import styled from 'styled-components';
-import { inputType } from '../types/input';
+import { InputInfo, InputType } from '../types/input';
 import Validation from '../domain/InputValidation';
 import { useState } from 'react';
+import { Card } from '../types/card';
 
 const Container = styled.div`
   display: flex;
@@ -43,10 +44,18 @@ const Input = styled.input`
 interface props {
   title: string;
   subtitle?: string;
-  inputTypes: inputType;
+  inputTypes: InputType;
+  cardInfo: Card;
+  handleInput: (value: Card) => void;
 }
 
-export default function InputField({ title, subtitle, inputTypes }: props) {
+export default function InputField({
+  title,
+  subtitle,
+  inputTypes,
+  cardInfo,
+  handleInput,
+}: props) {
   const [errorMessage, setErrorMessage] = useState<string>('');
   return (
     <>
@@ -56,7 +65,7 @@ export default function InputField({ title, subtitle, inputTypes }: props) {
 
         <Label> {inputTypes.inputLabel} </Label>
         <InputBox>
-          {inputTypes.inputInfo.map((info, index) => (
+          {inputTypes.inputInfo.map((info: InputInfo, index: number) => (
             <Input
               key={index}
               type="text"
@@ -66,6 +75,11 @@ export default function InputField({ title, subtitle, inputTypes }: props) {
                 try {
                   Validation[info.validateType]?.(e.target.value as string);
                   setErrorMessage('');
+                  handleInput({
+                    ...cardInfo,
+                    [info.property]: e.target.value,
+                  });
+                  console.log(cardInfo);
                 } catch (error: unknown) {
                   if (error instanceof Error) {
                     setErrorMessage(error.message);
@@ -75,6 +89,7 @@ export default function InputField({ title, subtitle, inputTypes }: props) {
             />
           ))}
         </InputBox>
+        {/* TODO: 스타일 작업 + 에러폼 보더 색상 변경 */}
         {errorMessage}
       </Container>
     </>

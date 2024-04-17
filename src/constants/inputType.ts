@@ -1,7 +1,8 @@
 const InputType = {
   CARD_NUMBER: {
     inputLabel: '카드번호',
-    inputInfo: Array.from({ length: 4 }, () => ({
+    inputInfo: Array.from({ length: 4 }, (_, index) => ({
+      property: `cardNumber${index + 1}`,
       validateType: 'cardNumber',
       maxLength: 4,
       placeHolder: '1234',
@@ -12,11 +13,13 @@ const InputType = {
     inputLabel: '유효기간',
     inputInfo: [
       {
+        property: 'month',
         validateType: 'month',
         maxLength: 2,
         placeHolder: 'MM',
       },
       {
+        property: 'year',
         validateType: 'year',
         maxLength: 2,
         placeHolder: 'YY',
@@ -27,6 +30,7 @@ const InputType = {
     inputLabel: '소유자 이름',
     inputInfo: [
       {
+        property: 'userName',
         validateType: 'userName',
         maxLength: 30,
         placeHolder: 'JOHN DOE',
