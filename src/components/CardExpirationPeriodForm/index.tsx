@@ -10,6 +10,7 @@ import debounceFunc from '../../utils/debounceFunc';
 import CardInputForm from '../CardInputForm';
 import CardInputFormContainer from '../CardInputFormContainer';
 import Input from '../Input';
+import FormErrorMessage from '../FormErrorMessage';
 
 type Error = 'number' | 'period' | null;
 interface CardExpirationPeriodFormProps {
@@ -102,6 +103,13 @@ export default function CardExpirationPeriodForm(
     editCardPeriod({ month: cardMonth, year: cardYear });
   };
 
+  const getErrorMessage = () => {
+    if (error === 'number') return ERROR_MESSAGE.cardExpirationPeriod.number;
+    if (error === 'period') return ERROR_MESSAGE.cardExpirationPeriod.period;
+
+    return undefined;
+  };
+
   useEffect(() => {
     validatePeriod();
     if (cardPeriod.month || cardPeriod.year) {
@@ -127,13 +135,7 @@ export default function CardExpirationPeriodForm(
               maxLength={length}
             />
           </div>
-          <div>
-            {error === 'number'
-              ? ERROR_MESSAGE.cardExpirationPeriod.number
-              : error === 'period'
-                ? ERROR_MESSAGE.cardExpirationPeriod.period
-                : ''}
-          </div>
+          <FormErrorMessage errorMessage={getErrorMessage()} />
         </div>
       </CardInputForm>
     </CardInputFormContainer>

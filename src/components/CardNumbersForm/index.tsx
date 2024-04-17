@@ -9,6 +9,7 @@ import { CardMark } from '../../modules/useCardInfoReducer';
 import CardInputForm from '../CardInputForm';
 import CardInputFormContainer from '../CardInputFormContainer';
 import Input from '../Input';
+import FormErrorMessage from '../FormErrorMessage';
 
 const NUMBERS_NAME_PREFIX = 'numbers_';
 
@@ -56,6 +57,11 @@ export default function CardNumbersForm(props: CardNumbersFormProps) {
     });
   };
 
+  const getErrorMessage = () => {
+    if (!isValidatedCardNumber()) return ERROR_MESSAGE.cardNumber;
+    return undefined;
+  };
+
   useEffect(() => {
     editCardNumbers(validatedNumbers.join());
     editCardMark(pickCardMark());
@@ -75,7 +81,7 @@ export default function CardNumbersForm(props: CardNumbersFormProps) {
           ))}
         </div>
       </CardInputForm>
-      <div>{!isValidatedCardNumber() && ERROR_MESSAGE.cardNumber}</div>
+      <FormErrorMessage errorMessage={getErrorMessage()} />
     </CardInputFormContainer>
   );
 }

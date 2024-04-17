@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 
 import {
   CARD_USER,
@@ -8,17 +8,22 @@ import {
 import debounceFunc from '../../utils/debounceFunc';
 import CardInputForm from '../CardInputForm';
 import CardInputFormContainer from '../CardInputFormContainer';
+import FormErrorMessage from '../FormErrorMessage';
 import Input from '../Input';
 
-export default function CardUserForm() {
+interface CardUserFormProps {
+  editCardUserName: (name: string | undefined) => void;
+}
+export default function CardUserForm(props: CardUserFormProps) {
+  const { editCardUserName } = props;
   const { title, subTitle, label, namePlaceholder } = CARD_USER_FORM_MESSAGE;
   const { length } = CARD_USER;
 
-  const [inputName, setName] = useState<string>('');
+  const [userName, setUserName] = useState<string>();
   const [error, setError] = useState<boolean>(false);
 
   const validateName = (name: string) => {
-    const regex = new RegExp(`^[a-zA-Z]{1,${length}}$`);
+    const regex = new RegExp(`^[a-zA-Z\\s]{1,${length}}$`);
     const isValidated = regex.test(name);
 
     setError(!isValidated);
@@ -26,13 +31,24 @@ export default function CardUserForm() {
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-
-    validateName(value);
+    const name = value.toUpperCase();
 
     debounceFunc(() => {
-      setName(value.toUpperCase());
+      validateName(value);
+      setUserName(name);
     }, 10);
   };
+
+  const getErrorMessage = () => {
+    if (error) return ERROR_MESSAGE.userName;
+    return;
+  };
+
+  useEffect(() => {
+    if (!error || userName === '') {
+      editCardUserName(userName || undefined);
+    }
+  }, [userName, error]);
 
   return (
     <CardInputFormContainer title={title} subTitle={subTitle}>
@@ -45,10 +61,9 @@ export default function CardUserForm() {
               type="text"
               placeholder={namePlaceholder}
               maxLength={length}
-              value={inputName}
             />
           </div>
-          <div>{error && ERROR_MESSAGE.userName}</div>
+          <FormErrorMessage errorMessage={getErrorMessage()} />
         </div>
       </CardInputForm>
     </CardInputFormContainer>

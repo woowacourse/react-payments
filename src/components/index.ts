@@ -4,6 +4,7 @@ import CardInputFormContainer from './CardInputFormContainer';
 import CardNumbersForm from './CardNumbersForm';
 import CardPreview from './CardPreview';
 import CardUserForm from './CardUserForm';
+import FormErrorMessage from './FormErrorMessage/index';
 import Input from './Input';
 
 export {
@@ -13,5 +14,6 @@ export {
   CardNumbersForm,
   CardPreview,
   CardUserForm,
+  FormErrorMessage,
   Input,
 };

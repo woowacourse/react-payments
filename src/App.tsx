@@ -17,18 +17,19 @@ function App() {
     editCardUserName,
   } = useCardInfoReducer();
   return (
-    <>
-      <h1>React Payments</h1>
-      <CardNumbersForm
-        editCardMark={editCardMark}
-        editCardNumbers={editCardNumbers}
-      />
-      <CardExpirationPeriodForm editCardPeriod={editCardPeriod} />
-      <CardUserForm editCardUserName={editCardUserName} />
-      <div>
+    <div id="app">
+      <div className="inner">
         <CardPreview cardInfo={cardInfo} />
+        <section>
+          <CardNumbersForm
+            editCardMark={editCardMark}
+            editCardNumbers={editCardNumbers}
+          />
+          <CardExpirationPeriodForm editCardPeriod={editCardPeriod} />
+          <CardUserForm editCardUserName={editCardUserName} />
+        </section>
       </div>
-    </>
+    </div>
   );
 }
 

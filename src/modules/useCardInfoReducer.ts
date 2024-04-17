@@ -8,7 +8,7 @@ const EDIT_CARD_PERIOD = 'card/EDIT_CARD_PERIOD' as const;
 const EDIT_CARD_USER_NAME = 'card/EDIT_CARD_USER_NAME' as const;
 const RESET_CARD_INFO = 'card/RESET_CARD_INFO' as const;
 
-interface CardPeriod {
+export interface CardPeriod {
   month: string | undefined;
   year: string | undefined;
 }
@@ -48,7 +48,7 @@ const editCardPeriodAction = (period: CardPeriod) => ({
   period,
 });
 
-const editCardUserNameAction = (userName: string) => ({
+const editCardUserNameAction = (userName: string | undefined) => ({
   type: EDIT_CARD_USER_NAME,
   userName,
 });
@@ -100,7 +100,7 @@ export default function useCardInfoReducer() {
     dispatch(editCardPeriodAction(period));
   };
 
-  const editCardUserName = (name: string) => {
+  const editCardUserName = (name: string | undefined) => {
     dispatch(editCardUserNameAction(name));
   };
 
