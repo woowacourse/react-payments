@@ -15,7 +15,9 @@ export default function CardNumbersInputField({
   type: "text" | "password";
 }) {
   const [errorMessages, setErrorMessages] = useState<[number, string][]>([]);
-  const [visibleErrorMessage, setVisibleErrorMessage] = useState("");
+  const [visibleErrorMessage, setVisibleErrorMessage] = useState<
+    [number, string] | []
+  >([]);
 
   const updateErrorMessage = (index: number, message: string) => {
     const errorMessageIndex = errorMessages.findIndex(([i, _]) => i === index);
@@ -35,39 +37,27 @@ export default function CardNumbersInputField({
   };
 
   const handleChange = (e, index) => {
-    let isError = false;
-
     if (isNaN(Number(e.target.value)) && e.target.value.length !== 0) {
-      setVisibleErrorMessage("숫자를 입력해주세요.");
-      // updateErrorMessage(index, "숫자를 입력해주세요.");
-
-      // const updatedErrorStates = [...errorStates];
-      // updatedErrorStates[index] = true;
-      // setErrorStates(updatedErrorStates);
+      setVisibleErrorMessage([index, "숫자를 입력해주세요."]);
       return;
     }
 
     if (e.target.value.length < 4) {
-      isError = true;
       updateErrorMessage(index, "4개의 숫자를 입력해주세요.");
-      // const updatedErrorStates = [...errorStates];
-      // updatedErrorStates[index] = true;
-      // setErrorStates(updatedErrorStates);
     }
 
-    setVisibleErrorMessage("");
+    setVisibleErrorMessage([]);
 
     const updatedCardNumbers = [...cardNumbers];
     updatedCardNumbers[index] = e.target.value;
     setCardNumbers(updatedCardNumbers);
 
-    console.log(e.target.value, index);
     if (e.target.value.length === 4) removeErrorMessage(index);
   };
 
-  useEffect(() => {
-    console.log(errorMessages);
-  }, [errorMessages]);
+  const checkError = (index: number): boolean => {
+    return errorMessages.filter(([i]) => i === index).length === 1;
+  };
 
   return (
     <>
@@ -76,16 +66,16 @@ export default function CardNumbersInputField({
         <Input
           onChange={(e) => handleChange(e, i)}
           placeholder={CARD_NUMBER_UNIT_PLACEHOLDER}
-          maxLength={4}
+          maxLength={CARD_NUMBER_UNIT_LENGTH}
           value={cardNumber}
           type={i >= cardNumbers.length / 2 ? "password" : "type"}
-          isError={errorMessages.filter(([index]) => index === i).length === 1}
+          isError={checkError(i)}
         />
       ))}
-      {(visibleErrorMessage !== "" || errorMessages.length !== 0) && (
+      {(visibleErrorMessage.length !== 0 || errorMessages.length !== 0) && (
         <div>
-          {visibleErrorMessage !== ""
-            ? visibleErrorMessage
+          {visibleErrorMessage.length !== 0
+            ? visibleErrorMessage[1]
             : errorMessages[errorMessages.length - 1][1]}
         </div>
       )}
