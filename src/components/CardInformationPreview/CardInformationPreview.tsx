@@ -4,7 +4,29 @@ import visa from '../../assets/image/visa.svg';
 import masterCard from '../../assets/image/masterCard.svg';
 import theme from '../../styles/theme';
 
-const CardInformationPreview = () => {
+interface CardInformationPreviewProps {
+  cardNumberState: {
+    first?: number;
+    second?: number;
+    third?: number;
+    fourth?: number;
+  };
+  expirationDateState: {
+    month?: number;
+    year?: number;
+  };
+  userNameState?: string;
+}
+
+const CardInformationPreview = ({
+  cardNumberState,
+  expirationDateState,
+  userNameState,
+}: CardInformationPreviewProps) => {
+  const { first, second, third, fourth } = cardNumberState;
+  const { month, year } = expirationDateState;
+  const slashViewCondition = month && year;
+
   return (
     <Preview.Container>
       <Preview.ImgContainer>
@@ -13,15 +35,25 @@ const CardInformationPreview = () => {
       </Preview.ImgContainer>
       <Preview.UserInformationContainer>
         <Preview.CardNumberContainer>
-          <Preview.UserInfomation typo={theme.typography.cardNumber}>1234</Preview.UserInfomation>
-          <Preview.UserInfomation typo={theme.typography.cardNumber}>5678</Preview.UserInfomation>
-          <Preview.UserInfomation typo={theme.typography.cardNumber}>ºººº</Preview.UserInfomation>
-          <Preview.UserInfomation typo={theme.typography.cardNumber}>ºººº</Preview.UserInfomation>
+          <Preview.UserInfomation typo={theme.typography.cardNumber}>
+            {first}
+          </Preview.UserInfomation>
+          <Preview.UserInfomation typo={theme.typography.cardNumber}>
+            {second}
+          </Preview.UserInfomation>
+          <Preview.UserInfomation typo={theme.typography.cardNumber}>
+            {third}
+          </Preview.UserInfomation>
+          <Preview.UserInfomation typo={theme.typography.cardNumber}>
+            {fourth}
+          </Preview.UserInfomation>
         </Preview.CardNumberContainer>
         <Preview.UserInfomation typo={theme.typography.cardExpirationDate}>
-          04/21
+          {`${month ?? ''}${slashViewCondition ? '/' : ''}${year ?? ''}`}
         </Preview.UserInfomation>
-        <Preview.UserInfomation typo={theme.typography.cardUserName}>COOKIE</Preview.UserInfomation>
+        <Preview.UserInfomation typo={theme.typography.cardUserName}>
+          {userNameState ?? ''}
+        </Preview.UserInfomation>
       </Preview.UserInformationContainer>
     </Preview.Container>
   );
