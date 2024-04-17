@@ -4,12 +4,11 @@ import InputField from './InputField';
 import Input from './Input';
 
 interface CardExpirationInputProps {
-  month: string;
   setMonth: React.Dispatch<React.SetStateAction<string>>;
   setYear: React.Dispatch<React.SetStateAction<string>>;
 }
 
-function CardExpirationInput({ month, setMonth, setYear }: CardExpirationInputProps) {
+function CardExpirationInput({ setMonth, setYear }: CardExpirationInputProps) {
   const [isValidMonth, setIsValidMonth] = useState<boolean>(true);
   const [isValidYear, setIsValidYear] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string>('');
@@ -42,18 +41,6 @@ function CardExpirationInput({ month, setMonth, setYear }: CardExpirationInputPr
 
     if (Number.isNaN(Number(year)) || year.length !== 2) {
       setErrorMessage('유효기간의 년도는 두 자리 숫자로 입력해 주세요.');
-      return false;
-    }
-
-    const date = new Date();
-
-    if (Number(year) < date.getFullYear() - 2000) {
-      setErrorMessage('유효하지 않은 기간입니다. 다시 확인해 주세요.');
-      return false;
-    }
-
-    if (Number(year) === date.getFullYear() - 2000 && Number(month) < date.getMonth()) {
-      setErrorMessage('유효하지 않은 기간입니다. 다시 확인해 주세요.');
       return false;
     }
 

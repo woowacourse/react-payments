@@ -12,7 +12,6 @@ type Story = StoryObj<typeof CardExpirationInput>;
 
 export const Default: Story = {
   args: {
-    month: '',
     setMonth: () => {},
     setYear: () => {},
   },
