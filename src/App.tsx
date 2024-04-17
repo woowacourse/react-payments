@@ -13,7 +13,10 @@ function App() {
     new Array(CARD_NUMBER_UNIT_LENGTH).fill("")
   );
 
-  const [date, setDate] = useState<string[]>(new Array(2).fill(""));
+  const [date, setDate] = useState<Record<string, string>>({
+    month: "",
+    year: "",
+  });
 
   const [ownerName, setOwnerName] = useState<string>("");
   return (
@@ -40,7 +43,7 @@ function App() {
         </div>
 
         <div className="shelf-section">
-          <ShelfHeader title="카드 소유자 이름을 입력해주세요." />
+          <ShelfHeader title="카드 소유자 이름을 입력해주세요" />
           <CardOwnerNameInputField
             ownerName={ownerName}
             setOwnerName={setOwnerName}
