@@ -1,7 +1,7 @@
 import { ChangeEvent } from "react";
 import useInput from "../../hooks/useInput";
 import { INPUT_COUNTS, PLACE_HOLDER } from "../../constants/condition";
-import InputField from "../Input/InputField";
+import InputField from "../InputField/InputField";
 
 const CardForm = () => {
   const {
