@@ -13,7 +13,7 @@ export default function CardExpirationDateInputField({
     <>
       <div>유효기간</div>
       {date.map((value, i) => (
-        <Input placeholder={DATE_PLACEHOLDER[i]} />
+        <Input placeholder={DATE_PLACEHOLDER[i]} maxLength={2} />
       ))}
       <div>에러메세지</div>
     </>
