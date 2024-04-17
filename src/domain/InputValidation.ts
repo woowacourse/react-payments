@@ -19,7 +19,7 @@ function validateYear(n: string) {
 }
 
 function validateUpperCase(str: string) {
-  if (!/^[A-Z]+$/.test(str)) {
+  if (!/^[A-Z]+$/.test(str) && str.length !== 0) {
     throw new Error('영대문자로만 입력해주세요.');
   }
 }
