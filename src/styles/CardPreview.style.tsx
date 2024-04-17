@@ -9,7 +9,7 @@ export const Card = styled.div`
   box-shadow: 3px 3px 5px 0px #00000040;
 `;
 
-export const CardHeader = styled.div`
+export const CardHeader = styled.header`
   display: flex;
   justify-content: space-between;
 `;

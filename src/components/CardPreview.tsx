@@ -13,14 +13,14 @@ interface CardPreviewProps {
 function CardPreview({ cardNumber, month, year, owner }: CardPreviewProps) {
   const handleLogoImage = (cardNumber: string[]) => {
     if (Number(cardNumber[0].charAt(0)) === CARD.VISA) {
-      return <img src={Visa} />;
+      return <img src={Visa} alt="비자 카드" />;
     }
 
     if (
       Number(cardNumber[0].slice(0, 2)) >= CARD.MIN_MASTER_CARD &&
       Number(cardNumber[0].slice(0, 2)) <= CARD.MAX_MASTER_CARD
     ) {
-      return <img src={MasterCard} />;
+      return <img src={MasterCard} alt="마스터 카드" />;
     }
   };
 
