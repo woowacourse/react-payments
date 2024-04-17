@@ -14,11 +14,6 @@ function CardExpirationInput({ setMonth, setYear }: CardExpirationInputProps) {
   const [errorMessage, setErrorMessage] = useState<string>('');
 
   const validateMonth = (month: string) => {
-    if (month.length === 0) {
-      setErrorMessage('');
-      return true;
-    }
-
     if (Number.isNaN(Number(month)) || month.length !== 2) {
       setErrorMessage('유효기간의 월은 두 자리 숫자로 입력해 주세요.');
       return false;
@@ -34,11 +29,6 @@ function CardExpirationInput({ setMonth, setYear }: CardExpirationInputProps) {
   };
 
   const validateYear = (year: string) => {
-    if (year.length === 0) {
-      setErrorMessage('');
-      return true;
-    }
-
     if (Number.isNaN(Number(year)) || year.length !== 2) {
       setErrorMessage('유효기간의 년도는 두 자리 숫자로 입력해 주세요.');
       return false;
@@ -70,12 +60,44 @@ function CardExpirationInput({ setMonth, setYear }: CardExpirationInputProps) {
     setYear(e.target.value);
   };
 
+  const onMonthBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!isValidMonth) {
+      e.target.value = '';
+      setErrorMessage('');
+    }
+
+    setIsValidMonth(true);
+  };
+
+  const onYearBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!isValidYear) {
+      e.target.value = '';
+      setErrorMessage('');
+    }
+
+    setIsValidYear(true);
+  };
+
   return (
     <div>
       <TitleContainer title="카드 유효기간을 입력해 주세요" subTitle="월/년도(MM/YY)를 순서대로 입력해 주세요." />
       <InputField label="유효기간" length={2} errorMessage={errorMessage}>
-        <Input type="text" placeholder="MM" maxLength={2} onChange={onMonthChange} isValid={isValidMonth} />
-        <Input type="text" placeholder="YY" maxLength={2} onChange={onYearChange} isValid={isValidYear} />
+        <Input
+          type="text"
+          placeholder="MM"
+          maxLength={2}
+          onChange={onMonthChange}
+          onBlur={onMonthBlur}
+          isValid={isValidMonth}
+        />
+        <Input
+          type="text"
+          placeholder="YY"
+          maxLength={2}
+          onChange={onYearChange}
+          onBlur={onYearBlur}
+          isValid={isValidYear}
+        />
       </InputField>
     </div>
   );
