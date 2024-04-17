@@ -1,11 +1,8 @@
+import React from 'react';
 import styled from 'styled-components';
 import PaymentsFormTitle from './PaymentsFormTitle';
 import PaymentsInputForm from './PaymentsInputForm';
 
-interface PaymentsFormSectionProps {
-  formTitleProps: PaymentsFormTitleProps;
-  inputFormProps: PaymentsInputFormProps;
-}
 
 const FormSection = styled.div`
   display: flex;
