@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import TitleContainer from './TitleContainer';
 import Input from './Input';
 import styled from 'styled-components';
 import * as S from '../styles/common.style';
@@ -56,10 +57,7 @@ function CardNumberInput({ cardNumber, setCardNumber }: CardNumberInputProps) {
 
   return (
     <div>
-      <S.TitleContainer>
-        <S.Title>결제할 카드 번호를 입력해 주세요.</S.Title>
-        <S.SubTitle>본인 명의의 카드만 결제 가능합니다.</S.SubTitle>
-      </S.TitleContainer>
+      <TitleContainer title="결제할 카드 번호를 입력해 주세요." subTitle="본인 명의의 카드만 결제 가능합니다." />
       <CardNumberInputContainer>
         <S.InputLabel>카드 번호</S.InputLabel>
         <S.InputContainer $length={4}>

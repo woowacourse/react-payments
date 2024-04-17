@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import TitleContainer from './TitleContainer';
 import Input from './Input';
 import styled from 'styled-components';
 import * as S from '../styles/common.style';
@@ -91,10 +92,7 @@ function CardExpirationInput({ month, setMonth, setYear }: CardExpirationInputPr
 
   return (
     <div>
-      <S.TitleContainer>
-        <S.Title>카드 유효기간을 입력해 주세요</S.Title>
-        <S.SubTitle>월/년도(MMYY)를 순서대로 입력해 주세요.</S.SubTitle>
-      </S.TitleContainer>
+      <TitleContainer title="카드 유효기간을 입력해 주세요" subTitle="월/년도(MM/YY)를 순서대로 입력해 주세요." />
       <CardExpirationInputContainer>
         <S.InputLabel>유효기간</S.InputLabel>
         <S.InputContainer $length={2}>

@@ -1,4 +1,5 @@
 import Input from './Input';
+import TitleContainer from './TitleContainer';
 import styled from 'styled-components';
 import { useState } from 'react';
 import * as S from '../styles/common.style';
@@ -52,9 +53,7 @@ function CardOwnerInput({ setOwner }: CardOwnerInputProps) {
 
   return (
     <div>
-      <S.TitleContainer>
-        <S.Title>카드 소유자 이름을 입력해 주세요</S.Title>
-      </S.TitleContainer>
+      <TitleContainer title="카드 소유자 이름을 입력해 주세요" />
       <CardOwnerInputContainer>
         <S.InputLabel>소유자 이름</S.InputLabel>
         <Input type="text" maxLength={30} placeholder="STEVEN KING" onChange={onOwnerChange} isValid={isValid}></Input>
