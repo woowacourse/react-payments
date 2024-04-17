@@ -6,7 +6,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const Input = ({ invalid, ...props }: InputProps) => {
-  return <StyledInput {...props} invalid={invalid} />;
+  return <StyledInput {...props} $invalid={invalid} />;
 };
 
 export default Input;
