@@ -1,55 +1,49 @@
+import InputBox from "./common/InputBox";
+import CARD_FORM_MESSAGE from "../../constants/cardFormMessage";
 import styled from "@emotion/styled";
 import { CardNumberValue } from "../../@types/CreditCard";
-import CARD_FORM_MESSAGE from "../../constants/cardFormMessage";
-import CARD_INPUTBOX_NAME from "../../constants/cardInputBoxName";
-import InputBox from "./common/InputBox";
 
 interface InputCreditCardNumberProps {
   inputValue: CardNumberValue;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  inputError: boolean;
 }
 
-const InputCreditCardNumber = ({
-  inputValue,
-  handleChange,
-  inputError,
-}: InputCreditCardNumberProps) => {
+const InputCreditCardNumber = ({ inputValue, handleChange }: InputCreditCardNumberProps) => {
   return (
     <InputContainer>
-      <InputLabel id="creditCardNumberLabel">{CARD_FORM_MESSAGE.cardNumber}</InputLabel>
-      <InputWrapper aria-labelledby="creditCardNumberLabel">
+      <InputLabel htmlFor="creditCardNumber">{CARD_FORM_MESSAGE.cardNumber}</InputLabel>
+      <InputWrapper>
         <InputBox
           inputValue={inputValue.firstValue}
           handleChange={handleChange}
           size="small"
           placeholder="1234"
-          name={CARD_INPUTBOX_NAME.cardNumber.firstValue}
-          isError={inputError}
+          id="creditCardNumber"
+          name="firstValue"
         />
         <InputBox
           inputValue={inputValue.secondValue}
           handleChange={handleChange}
           size="small"
           placeholder="1234"
-          name={CARD_INPUTBOX_NAME.cardNumber.secondValue}
-          isError={inputError}
+          id="creditCardNumber"
+          name="secondValue"
         />
         <InputBox
           inputValue={inputValue.thirdValue}
           handleChange={handleChange}
           size="small"
           placeholder="1234"
-          name={CARD_INPUTBOX_NAME.cardNumber.thirdValue}
-          isError={inputError}
+          id="creditCardNumber"
+          name="thirdValue"
         />
         <InputBox
           inputValue={inputValue.fourthValue}
           handleChange={handleChange}
           size="small"
           placeholder="1234"
-          name={CARD_INPUTBOX_NAME.cardNumber.fourthValue}
-          isError={inputError}
+          id="creditCardNumber"
+          name="fourthValue"
         />
       </InputWrapper>
     </InputContainer>
