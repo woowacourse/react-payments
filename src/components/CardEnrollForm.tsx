@@ -17,7 +17,8 @@ const CardInformation = styled.div`
   flex-direction: column;
   align-items: flex-start;
   width: 376px;
-  padding: 30px;
+  padding: 45px 30px;
+  gap: 16px;
 `;
 
 export default function CardEnrollForm() {

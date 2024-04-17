@@ -4,6 +4,18 @@ import { TitleText, CaptionText, LabelText } from "../styles/common";
 import styled from "styled-components";
 import ErrorMessage from "./ErrorMessage";
 
+const CardDateContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`;
+
+const CardDateBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
 const InputContainer = styled.div`
   display: flex;
   width: 100%;
@@ -66,12 +78,12 @@ export default function CardExpirationDate({
   };
 
   return (
-    <div>
+    <CardDateContainer>
       <div>
         <TitleText>카드 유효기간을 입력해 주세요</TitleText>
         <CaptionText>월/년도(MMYY)를 순서대로 입력해 주세요.</CaptionText>
       </div>
-      <div>
+      <CardDateBox>
         <LabelText>유효기간</LabelText>
         <InputContainer>
           <Input
@@ -90,7 +102,7 @@ export default function CardExpirationDate({
           />
         </InputContainer>
         <ErrorMessage message={errorMessage}></ErrorMessage>
-      </div>
-    </div>
+      </CardDateBox>
+    </CardDateContainer>
   );
 }

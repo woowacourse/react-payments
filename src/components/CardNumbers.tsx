@@ -4,6 +4,18 @@ import { TitleText, CaptionText, LabelText } from "../styles/common";
 import styled from "styled-components";
 import ErrorMessage from "./ErrorMessage";
 
+const CardNumbersContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`;
+
+const CardNumberBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
 const InputContainer = styled.div`
   display: flex;
   gap: 10px;
@@ -60,12 +72,12 @@ export default function CardNumbers({
   };
 
   return (
-    <div>
+    <CardNumbersContainer>
       <div>
         <TitleText>결제할 카드 번호를 입력해 주세요</TitleText>
         <CaptionText>본인 명의의 카드만 결제 가능합니다.</CaptionText>
       </div>
-      <div>
+      <CardNumberBox>
         <LabelText>카드 번호</LabelText>
         <InputContainer>
           <Input
@@ -98,7 +110,7 @@ export default function CardNumbers({
           />
         </InputContainer>
         <ErrorMessage message={errorMessage}></ErrorMessage>
-      </div>
-    </div>
+      </CardNumberBox>
+    </CardNumbersContainer>
   );
 }

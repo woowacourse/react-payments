@@ -4,6 +4,18 @@ import { TitleText, LabelText } from "../styles/common";
 import styled from "styled-components";
 import ErrorMessage from "./ErrorMessage";
 
+const CardOwnerNameContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`;
+
+const CardOwnerNameBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
 const InputContainer = styled.div`
   display: flex;
   width: 100%;
@@ -33,18 +45,20 @@ export default function CardOwnerName({ cardOwnerName, inputHandler }: Props) {
   };
 
   return (
-    <div>
+    <CardOwnerNameContainer>
       <TitleText>카드 소유자 이름을 입력해 주세요</TitleText>
-      <LabelText>소유자 이름</LabelText>
-      <InputContainer>
-        <Input
-          maxLength={15}
-          placeholder="JOHN DOE"
-          onChange={(value) => nameValidator(value)}
-          value={cardOwnerName}
-        />
-      </InputContainer>
-      <ErrorMessage message={errorMessage}></ErrorMessage>
-    </div>
+      <CardOwnerNameBox>
+        <LabelText>소유자 이름</LabelText>
+        <InputContainer>
+          <Input
+            maxLength={15}
+            placeholder="JOHN DOE"
+            onChange={(value) => nameValidator(value)}
+            value={cardOwnerName}
+          />
+        </InputContainer>
+        <ErrorMessage message={errorMessage}></ErrorMessage>
+      </CardOwnerNameBox>
+    </CardOwnerNameContainer>
   );
 }
