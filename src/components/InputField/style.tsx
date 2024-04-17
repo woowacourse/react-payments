@@ -3,8 +3,8 @@ import styled from "styled-components";
 const InputsWrapper = styled.div`
   display: flex;
   width: 100%;
-  height: 32px;
   gap: 8px;
+  height: 32px;
 `;
 
 const InputBox = styled.input`
@@ -20,4 +20,6 @@ const ErrorMessageWrapper = styled.div`
   font-weight: 400;
 `;
 
-export default { InputsWrapper, InputBox };
+const S = { InputsWrapper, InputBox, ErrorMessageWrapper };
+
+export default S;
