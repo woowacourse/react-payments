@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import Label from "../common/Label";
 import Input from "../common/Input";
+import { INPUT_LABEL, INPUT_RULES } from "../../constants/card-app";
 
 import { VALIDATION_MESSAGES } from "../../constants/card-app";
 
@@ -21,7 +22,7 @@ const CardOwnerNameInput = ({
 
   const handleInputChange = (value: string) => {
     const isAlphabetInput = /^[a-zA-Z ]*$/.test(value);
-    const isValidOwnerName = value.length <= 15;
+    const isValidOwnerName = value.length <= INPUT_RULES.maxCardOwnerNameLength;
 
     setIsError(!isAlphabetInput || !isValidOwnerName);
 
@@ -32,7 +33,7 @@ const CardOwnerNameInput = ({
 
   return (
     <InputField>
-      <Label htmlFor="card-owner">소유자 이름</Label>
+      <Label htmlFor="card-owner">{INPUT_LABEL.cardOwnerNameInput}</Label>
       <Input
         id="card-owner"
         type="text"

@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import Label from "../common/Label";
 import Input from "../common/Input";
+import { INPUT_LABEL, INPUT_RULES } from "../../constants/card-app";
 
 import styled from "styled-components";
 import { VALIDATION_MESSAGES } from "../../constants/card-app";
@@ -41,7 +42,7 @@ const CardNumberInput = ({
 
   return (
     <InputField>
-      <Label htmlFor="card-number">카드 번호</Label>
+      <Label htmlFor="card-number">{INPUT_LABEL.cardNumberInput}</Label>
       <InputContainer>
         {Array.from({ length: cardNumbers.length }, (_, index) => (
           <Input
@@ -50,7 +51,7 @@ const CardNumberInput = ({
             type="text"
             placeholder="1234"
             value={cardNumbers[index]}
-            maxLength={4}
+            maxLength={INPUT_RULES.maxCardNumberPartLength}
             size="small"
             isError={inputErrors[index]}
             onChange={(e) => handleInputChange(index, e.target.value)}

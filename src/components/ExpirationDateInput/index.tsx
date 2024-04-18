@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import Label from "../common/Label";
 import styled from "styled-components";
 import Input from "../common/Input";
+import { INPUT_LABEL, INPUT_RULES } from "../../constants/card-app";
 
 import cardInputValidator from "../../validators/cardInputValidator";
 import { VALIDATION_MESSAGES } from "../../constants/card-app";
@@ -58,7 +59,7 @@ const ExpirationDateInput = ({
 
   return (
     <InputField>
-      <Label htmlFor="expiration-date">유효기간</Label>
+      <Label htmlFor="expiration-date">{INPUT_LABEL.expirationDate}</Label>
       <InputContainer>
         <Input
           ref={monthRef}
@@ -66,7 +67,7 @@ const ExpirationDateInput = ({
           type="text"
           placeholder="MM"
           value={expirationDate[0]}
-          maxLength={2}
+          maxLength={INPUT_RULES.maxExpirationDateLength}
           size="medium"
           isError={inputErrors[0]}
           onChange={(e) => {
@@ -78,7 +79,7 @@ const ExpirationDateInput = ({
           type="text"
           placeholder="YY"
           value={expirationDate[1]}
-          maxLength={2}
+          maxLength={INPUT_RULES.maxExpirationDateLength}
           size="medium"
           isError={inputErrors[1]}
           onChange={(e) => {
