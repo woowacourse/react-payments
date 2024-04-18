@@ -42,7 +42,6 @@ const ExpirationDateFormSection = ({ ...props }) => {
   );
   const [errorMessage, setErrorMessage] = useState('');
 
-  const [hasNoError, setHasNoError] = useState(true);
   const [hasNoFocus, setHasNoFocus] = useState(true);
 
   const expirationMonthRef = useRef<HTMLInputElement>(null);
@@ -148,7 +147,6 @@ const ExpirationDateFormSection = ({ ...props }) => {
 
   useEffect(() => {
     changeExpiration({ month: inputState[0].value, year: inputState[1].value });
-    setHasNoError(Object.values(inputState).every((field) => !field.hasError));
     setHasNoFocus(Object.values(inputState).every((field) => !field.hasFocus));
   }, [inputState]);
 

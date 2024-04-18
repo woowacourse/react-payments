@@ -35,7 +35,7 @@ const CardNumber = styled.p`
   line-height: 15px;
   text-align: left;
   color: white;
-  width: 34px;
+  width: 36px;
 `;
 
 const CardNameAndExpiration = styled.div`
