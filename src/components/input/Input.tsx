@@ -1,6 +1,6 @@
 import * as Styled from "./Input.styles";
 
-interface InputProps {
+export interface InputProps {
   value?: string;
   maxLength?: number;
   placeholder?: string;
