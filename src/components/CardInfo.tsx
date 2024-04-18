@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from "styled-components";
-import PaymentsFormSection from "./PaymentsFormSection";
-import { CARD_NUMBER_PROP, EXPIRATION_PROP, NAME_PROP } from "../constants/cardInfoProp";
+import CardNumbersFormSection from './CardNumbersFormSection';
+import ExpirationDateFormSection from './ExpirationDateFormSection';
+import NameFormSection from './NameFormSection';
 
 const Container = styled.div`
   display: flex;
@@ -9,12 +10,26 @@ const Container = styled.div`
   gap: 24px;
 `
 
-const CardInfo = () => {
+const CardInfo = ({ changeCardInfo }) => {
+
+  const changeCardNumber = (cardNumber) => {
+    changeCardInfo(prev => ({ ...prev, cardNumber: cardNumber }))
+  }
+
+  const changeExpiration = ({ month, year }) => {
+    changeCardInfo(prev => ({ ...prev, expirationMonth: month, expirationYear: year }))
+  }
+
+  const changeName = (name) => {
+    changeCardInfo(prev => ({ ...prev, name: name }))
+  }
+
+
   return (
     <Container>
-      <PaymentsFormSection {...CARD_NUMBER_PROP} />
-      <PaymentsFormSection {...EXPIRATION_PROP} />
-      <PaymentsFormSection {...NAME_PROP} />
+      <CardNumbersFormSection changeCardNumber={changeCardNumber} />
+      <ExpirationDateFormSection changeExpiration={changeExpiration} />
+      <NameFormSection changeName={changeName} />
     </Container>
   )
 }

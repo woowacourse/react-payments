@@ -1,21 +1,13 @@
-type InputType = 'text' | 'number' | 'english';
-
 interface PaymentsInputFieldProps {
-  name: number;
-  inputType?: InputType;
+  ref: React.RefObject<HTMLInputElement>;
+  className?: string;
   placeholder?: string;
   maxLength?: number;
-  // changeErrorMessage?: (errorMessage: string) => void;
-  hasError: boolean;
-  value: string;
-  handleValueChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
-
-interface PaymentsInputFormProps {
-  label: string;
-  hasError: boolean;
-  errorMessage?: string;
-  inputFieldProps: PaymentsInputFieldProps[];
+  hasError?: boolean;
+  value?: string;
+  handleValueChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleOnFocus?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleOnBlur?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 interface PaymentsFormTitleProps {
@@ -23,7 +15,16 @@ interface PaymentsFormTitleProps {
   subTitle?: string;
 }
 
-interface PaymentsFormSectionProps {
-  formTitleProps: PaymentsFormTitleProps;
-  inputFormProps: PaymentsInputFormProps;
+interface InputState {
+  value: string;
+  hasError: boolean;
+  hasFocus: boolean;
+  isFilled: boolean;
+}
+
+interface CardInfo {
+  cardNumber: [string, string, string, string];
+  expirationMonth: string;
+  expirationYear: string;
+  name: string;
 }

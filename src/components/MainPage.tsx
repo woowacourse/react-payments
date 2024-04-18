@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from "styled-components";
 import CardInfo from "./CardInfo";
 import CardPreview from "./CardPreview";
@@ -18,10 +18,22 @@ const Main = styled.div`
 `
 
 const MainPage = () => {
+  const [cardInfo, setCardInfo] = useState<CardInfo>({
+    cardNumber: ["", "", "", ""],
+    expirationMonth: "",
+    expirationYear: "",
+    name: "",
+  })
+
+  const changeCardInfo = (cardInfo: CardInfo) => {
+    setCardInfo(cardInfo)
+  }
+
+
   return (
     <Main>
-      <CardPreview />
-      <CardInfo />
+      <CardPreview {...cardInfo} />
+      <CardInfo changeCardInfo={changeCardInfo} />
     </Main>
   )
 }

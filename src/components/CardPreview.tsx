@@ -2,8 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 
 import IcChip from "../asset/IcChip.svg";
-import Visa from "../asset/Visa.svg";
-import MasterCard from "../asset/Mastercard.svg";
+import CardBrand from './CardBrand';
 
 const Card = styled.div`
   display: flex;
@@ -38,11 +37,14 @@ const CardNumber = styled.p`
   line-height: 15px;
   text-align: left;
   color: white;
+  width: 34px;
+  
 `
 
 const CardNameAndExpiration = styled.div`
   display: flex;
   justify-content: space-between;
+  height: 36px;
 `
 
 const CardNameContainer = styled.div`
@@ -61,12 +63,17 @@ const NameLabel = styled.p`
 `
 
 const Name = styled.p`
+  max-width: inherit;
   font-family: 'Inter', sans-serif;
   font-size: 12px;
   font-weight: 500;
   line-height: 15px;
   text-align: left;
   color: white;
+  text-transform: uppercase;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `
 
 const CardExpirationContainer = styled.div`
@@ -97,28 +104,33 @@ const Image = styled.img`
   width: 36px;
   height: 28px;
 `
-const CardPreview = () => {
 
+const CardPreview = ({ ...props }: CardInfo) => {
+  const { cardNumber, expirationMonth, expirationYear, name } = props
+
+  const secureNumber = (number: string) => {
+    return number.replace(/\d/gi, '•')
+  }
   return (
     <Card>
       <CardHeader>
         <Image src={IcChip} />
-        <Image src={Visa} />
+        <CardBrand firstCardNumbers={cardNumber[0]} />
       </CardHeader>
       <CardNumbers>
-        <CardNumber>3456</CardNumber>
-        <CardNumber>3456</CardNumber>
-        <CardNumber>3456</CardNumber>
-        <CardNumber>3456</CardNumber>
+        <CardNumber>{cardNumber[0]}</CardNumber>
+        <CardNumber>{cardNumber[1]}</CardNumber>
+        <CardNumber>{secureNumber(cardNumber[2])}</CardNumber>
+        <CardNumber>{secureNumber(cardNumber[3])}</CardNumber>
       </CardNumbers>
       <CardNameAndExpiration>
         <CardNameContainer>
           <NameLabel>NAME</NameLabel>
-          <Name>KIM A.</Name>
+          <Name>{name}</Name>
         </CardNameContainer>
         <CardExpirationContainer>
           <ExpirationLabel>EXPIRATION</ExpirationLabel>
-          <Expiration>04/21</Expiration>
+          <Expiration>{`${expirationMonth}${expirationMonth ? '/' : ''}${expirationYear}`}</Expiration>
         </CardExpirationContainer>
       </CardNameAndExpiration>
     </Card>)
