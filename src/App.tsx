@@ -1,9 +1,240 @@
-import "./App.css";
+import styled from 'styled-components';
+import GlobalStyles from './GlobalStyles';
+import InputInfo from './components/InputSection';
+import Input from './components/composables/Input';
+import CreditCard from './components/CreditCard';
+import useCardNumber from './hooks/useCardNumber';
+import useInput from './hooks/useInput';
+import { useEffect, useState } from 'react';
+import Label from './components/composables/Label';
+import MasterCardImage from './assets/images/mastercard.png';
+import VisaCardImage from './assets/images/visa.png';
+import validate from './utils/validate';
+
+export const StyledInput = styled.input`
+  border: 1px solid #acacac;
+  padding: 8px;
+  font-size: 0.6875rem;
+  border-radius: 2px;
+  height: 32px;
+`;
+
+export type InitialCardNumberState = {
+  value: string;
+  isError: boolean;
+};
+
+const InitialCardNumberState: InitialCardNumberState = {
+  value: '',
+  isError: false,
+};
+
+const Container = styled.div`
+  padding: 20px 30px;
+
+  width: 376px;
+  height: 680px;
+  background-color: beige;
+`;
+
+const CardInfoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`;
+
+const ErrorContainer = styled.div`
+  height: 14px;
+`;
+
+const ErrorMessageSpan = styled.span`
+  color: #ff3d3d;
+
+  font-size: 0.5938rem;
+  font-weight: 400;
+  line-height: 0.875rem;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
 
 function App() {
+  const { cardNumbers, cardNumbersChangeHandler } = useCardNumber(
+    Array.from({ length: 4 }, () => InitialCardNumberState),
+  );
+  const [cardImageSrc, setCardImageSrc] = useState('');
+
+  const {
+    inputState: month,
+    inputChangeHandler: monthChangeHandler,
+    error: monthError,
+    setError: setMonthError,
+  } = useInput();
+
+  const {
+    inputState: year,
+    inputChangeHandler: yearChangeHandler,
+    error: yearError,
+    setError: setYearError,
+  } = useInput();
+
+  const {
+    inputState: name,
+    inputChangeHandler: nameChangeHandler,
+    error: nameError,
+    setError: setNameError,
+  } = useInput();
+
+  useEffect(() => {
+    if (
+      month !== '' &&
+      (!validate.isNumberInRange({ min: 1, max: 12, compareNumber: Number(month) }) ||
+        !validate.isValidDigit(month))
+    ) {
+      setMonthError(true);
+
+      return;
+    }
+
+    setMonthError(false);
+  }, [month, monthError]);
+
+  useEffect(() => {
+    if (year !== '' && !validate.isValidDigit(year)) {
+      setYearError(true);
+
+      return;
+    }
+
+    setYearError(false);
+  }, [year, yearError]);
+
+  useEffect(() => {
+    if (name !== '' && !validate.isEnglish(name)) {
+      setNameError(true);
+
+      return;
+    }
+
+    setNameError(false);
+  }, [name, nameError]);
+
+  useEffect(() => {
+    setCardImageSrc('');
+
+    const cardNumberString = cardNumbers.map((cardNumber) => cardNumber.value).join('');
+
+    if (validate.isVisa(cardNumberString)) {
+      setCardImageSrc(VisaCardImage);
+    }
+
+    if (validate.isMasterCard(cardNumberString)) {
+      setCardImageSrc(MasterCardImage);
+    }
+  }, [cardNumbers]);
+
   return (
     <>
-      <h1>React Payments</h1>
+      <GlobalStyles />
+      <Container>
+        <CreditCard
+          cardNumbers={cardNumbers}
+          month={month}
+          year={year}
+          name={name}
+          cardImageSrc={cardImageSrc}
+        />
+        <CardInfoContainer>
+          <Wrapper>
+            <InputInfo
+              title="결제할 카드 번호를 입력해 주세요"
+              description="본인 명의의 카드만 결제 가능합니다."
+              inputTitle="카드 번호"
+            >
+              {cardNumbers.map((cardNumber, index) => {
+                const uniqueId = 'cardNumbers' + index;
+                return (
+                  <>
+                    <Label htmlFor={uniqueId} />
+                    <Input
+                      key={uniqueId}
+                      id={uniqueId}
+                      placeholder="1234"
+                      type="text"
+                      maxLength={4}
+                      value={cardNumber.value}
+                      onChange={(e) => cardNumbersChangeHandler(e, index)}
+                      isError={cardNumber.isError}
+                    />
+                  </>
+                );
+              })}
+            </InputInfo>
+            <ErrorContainer>
+              <ErrorMessageSpan>
+                {cardNumbers.some((cardNumber) => cardNumber.isError) && 'cardNumberError'}
+              </ErrorMessageSpan>
+            </ErrorContainer>
+          </Wrapper>
+
+          <Wrapper>
+            <InputInfo
+              title="카드 유효기간을 입력해 주세요"
+              description="월/년도(MMYY)를 순서대로 입력해 주세요."
+              inputTitle="유효기간"
+            >
+              <Label htmlFor={'month'} />
+              <Input
+                id={'month'}
+                placeholder={'MM'}
+                type="text"
+                value={month}
+                maxLength={2}
+                onChange={monthChangeHandler}
+                isError={monthError}
+              />
+              <Label htmlFor={'year'} />
+              <Input
+                id={'year'}
+                placeholder={'YY'}
+                type="text"
+                maxLength={2}
+                value={year}
+                onChange={yearChangeHandler}
+                isError={yearError}
+              />
+            </InputInfo>
+            <ErrorContainer>
+              <ErrorMessageSpan>
+                {monthError && yearError ? 'MonthError' : ''}
+                {!monthError && yearError ? 'yearError' : ''}
+                {monthError && !yearError ? 'monthError' : ''}
+              </ErrorMessageSpan>
+            </ErrorContainer>
+          </Wrapper>
+
+          <Wrapper>
+            <InputInfo title="카드 소유자 이름을 입력해주세요" inputTitle="소유자 이름">
+              <Label htmlFor={'name'} />
+              <Input
+                id="name"
+                maxLength={30}
+                onChange={nameChangeHandler}
+                isError={nameError}
+                placeholder="JOHN DOE"
+                type="text"
+                value={name}
+              />
+            </InputInfo>
+            <ErrorContainer>
+              <ErrorMessageSpan>{nameError && 'nameError'}</ErrorMessageSpan>
+            </ErrorContainer>
+          </Wrapper>
+        </CardInfoContainer>
+      </Container>
     </>
   );
 }

@@ -13,6 +13,16 @@ const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
 
+  #root {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100vw;
+    height: auto;
+    min-height: 100vh;
+  }
+
   input, textarea { 
     -moz-user-select: auto;
     -webkit-user-select: auto;
