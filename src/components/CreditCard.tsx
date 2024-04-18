@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { InitialState } from '../App';
+import { InitialCardNumberState } from '../App';
 
 type CreditCardProps = {
-  cardNumbers: InitialState[];
+  cardNumbers: InitialCardNumberState[];
   month: string;
   year: string;
   name: string;
