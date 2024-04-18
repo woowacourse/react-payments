@@ -1,10 +1,10 @@
 export const ERROR_MESSAGE = {
-  cardNumber: '4자리 숫자만 입력 가능합니다.',
+  cardNumber: '4자리 숫자만 입력 가능해요.',
   cardExpirationPeriod: {
-    number: '숫자 오류',
-    period: '유효기간 오류',
+    number: '숫자만 입력해주세요.',
+    period: '유효한 기간을 입력해주세요.',
   },
-  userName: '소유자 이름은 영문만 가능합니다.',
+  userName: '소유자 이름은 영문과 공백만 가능해요.',
 };
 
 export const CARD_NUMBERS_FORM_MESSAGE = {
