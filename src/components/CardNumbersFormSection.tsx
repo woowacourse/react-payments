@@ -34,14 +34,7 @@ const CardNumbersFormSection = ({ ...props }) => {
     initializeInputFieldState(OPTION.cardNumberInputCount),
   );
   const [errorMessage, setErrorMessage] = useState('');
-
-  const [hasNoError, setHasNoError] = useState(true);
   const [hasNoFocus, setHasNoFocus] = useState(true);
-
-  const cardNumberRef1 = useRef<HTMLInputElement>(null);
-  const cardNumberRef2 = useRef<HTMLInputElement>(null);
-  const cardNumberRef3 = useRef<HTMLInputElement>(null);
-  const cardNumberRef4 = useRef<HTMLInputElement>(null);
 
   const handleValueChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -112,7 +105,6 @@ const CardNumbersFormSection = ({ ...props }) => {
       inputState[2].value,
       inputState[3].value,
     ]);
-    setHasNoError(Object.values(inputState).every((field) => !field.hasError));
     setHasNoFocus(Object.values(inputState).every((field) => !field.hasFocus));
   }, [inputState]);
 
@@ -129,7 +121,6 @@ const CardNumbersFormSection = ({ ...props }) => {
       acc[key] = { ...field, hasError: false };
       return acc;
     }, {});
-
     setInputState(newState);
     setErrorMessage('');
   };
@@ -169,7 +160,6 @@ const CardNumbersFormSection = ({ ...props }) => {
           {[...Array(OPTION.cardNumberInputCount)].map((_, index) => (
             <PaymentsInputField
               key={index}
-              ref={eval(`cardNumberRef${index + 1}`)}
               placeholder="1234"
               maxLength={OPTION.cardNumberMaxLength}
               value={inputState[index].value}

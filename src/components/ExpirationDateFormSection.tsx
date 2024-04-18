@@ -41,12 +41,7 @@ const ExpirationDateFormSection = ({ ...props }) => {
     initializeInputFieldState(OPTION.expirationDateInputCount),
   );
   const [errorMessage, setErrorMessage] = useState('');
-
-  const [hasNoError, setHasNoError] = useState(true);
   const [hasNoFocus, setHasNoFocus] = useState(true);
-
-  const expirationMonthRef = useRef<HTMLInputElement>(null);
-  const expirationYearRef = useRef<HTMLInputElement>(null);
 
   const handleValueChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -148,7 +143,6 @@ const ExpirationDateFormSection = ({ ...props }) => {
 
   useEffect(() => {
     changeExpiration({ month: inputState[0].value, year: inputState[1].value });
-    setHasNoError(Object.values(inputState).every((field) => !field.hasError));
     setHasNoFocus(Object.values(inputState).every((field) => !field.hasFocus));
   }, [inputState]);
 
@@ -216,7 +210,6 @@ const ExpirationDateFormSection = ({ ...props }) => {
         <Label>유효기간</Label>
         <InputFieldContainer className="input-field-container">
           <PaymentsInputField
-            ref={expirationMonthRef}
             placeholder="MM"
             maxLength={OPTION.expirationDateMaxLength}
             value={inputState[0].value}
@@ -226,7 +219,6 @@ const ExpirationDateFormSection = ({ ...props }) => {
             handleOnBlur={() => handleOnBlur(0)}
           />
           <PaymentsInputField
-            ref={expirationYearRef}
             placeholder="YY"
             maxLength={OPTION.expirationDateMaxLength}
             value={inputState[1].value}

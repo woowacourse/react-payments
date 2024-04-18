@@ -31,8 +31,6 @@ const NameFormSection = ({ ...props }) => {
   });
   const [errorMessage, setErrorMessage] = useState('');
 
-  const nameRef = useRef<HTMLInputElement>(null);
-
   const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
     const isFilled = newValue.length === OPTION.nameMaxLength;
@@ -98,7 +96,6 @@ const NameFormSection = ({ ...props }) => {
         <InputFieldContainer className="input-field-container">
           <PaymentsInputFieldUppercase
             className="name-form-section"
-            ref={nameRef}
             placeholder="FAMILY / GIVEN"
             maxLength={OPTION.nameMaxLength}
             value={inputState.value}
