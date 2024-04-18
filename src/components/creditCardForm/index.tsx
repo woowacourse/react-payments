@@ -3,8 +3,7 @@ import InputOwnerName from "../input/InputOwnerName";
 import InputExpirationPeriod from "../input/InputExpirationPeriod";
 import { CardNumberValue, ExpirationPeriodValue } from "../../@types/CreditCard";
 import InputCreditCardNumber from "../input/InputCreditCardNumber";
-
-type FormType = "owner" | "expirationPeriod" | "cardNumber";
+import { FormType, CARD_FORM_TYPE } from "../../constants/cardFormType";
 
 interface CreditCardFormProps {
   title: string;
@@ -28,7 +27,7 @@ const CreditCardForm = ({
     inputValue: string | ExpirationPeriodValue | CardNumberValue,
     handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   ) => {
-    if (type === "owner")
+    if (type === CARD_FORM_TYPE.cardNumber)
       return (
         <InputOwnerName
           inputValue={inputValue as string}
@@ -37,7 +36,7 @@ const CreditCardForm = ({
         />
       );
 
-    if (type === "expirationPeriod")
+    if (type === CARD_FORM_TYPE.expirationPeriod)
       return (
         <InputExpirationPeriod
           inputValue={inputValue as ExpirationPeriodValue}
@@ -46,7 +45,7 @@ const CreditCardForm = ({
         />
       );
 
-    if (type === "cardNumber")
+    if (type === CARD_FORM_TYPE.owner)
       return (
         <InputCreditCardNumber
           inputValue={inputValue as CardNumberValue}
