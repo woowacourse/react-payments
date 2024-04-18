@@ -43,7 +43,7 @@ function isCardYearValidated(value: string) {
 }
 
 function isCardOwnerValidated(value: string) {
-  isUpperCase(value);
+  isUpperCaseEnglish(value);
   isInRange(value.length, VALIDATION.cardOwnerLength.min, VALIDATION.cardOwnerLength.max);
 }
 
@@ -61,8 +61,9 @@ function isInRange(value: number, min: number, max: number) {
   return true;
 }
 
-function isUpperCase(value: string) {
-  if (value !== value.toUpperCase()) {
+function isUpperCaseEnglish(value: string) {
+  const regex = /^[A-Z]*$/;
+  if (!regex.test(value)) {
     throw new Error(ERROR_MESSAGE.upperCase);
   }
   return true;
