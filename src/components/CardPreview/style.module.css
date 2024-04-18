@@ -36,9 +36,16 @@
 }
 
 .info {
+  width: 100%;
   color: #ffff;
   font-size: 0.875rem;
   div {
     margin-top: 0.5rem;
   }
+}
+
+.user {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
