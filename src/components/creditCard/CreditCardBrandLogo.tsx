@@ -1,6 +1,8 @@
 import { CardNumber } from "../../@types/CreditCard";
 import CARD_THRESHOLD from "../../constants/cardThreshold";
 import styled from "@emotion/styled";
+import VisaCard from "/public/img/Visa.png";
+import MasterCard from "/public/img/MasterCardVisa.png";
 
 const getFirstTwoNumber = (creditCardNumber: CardNumber): number | undefined => {
   const twoDigits = 2;
@@ -17,13 +19,13 @@ const CreditCardBrandLogo = (creditCardNumber: CardNumber): JSX.Element | undefi
     CARD_THRESHOLD.minimumVisaNumber <= firstTwoNumber &&
     firstTwoNumber <= CARD_THRESHOLD.maximumVisaNumber
   )
-    return <CreditCardImg src="/img/Visa.png" alt="비자카드 이미지" />;
+    return <CreditCardImg src={VisaCard} alt="비자카드 이미지" />;
 
   if (
     CARD_THRESHOLD.minimumMasterCardNumber <= firstTwoNumber &&
     firstTwoNumber <= CARD_THRESHOLD.maximumMasterCardNumber
   )
-    return <CreditCardImg src="/img/Mastercard.png" alt="마스터카드 이미지" />;
+    return <CreditCardImg src={MasterCard} alt="마스터카드 이미지" />;
 };
 
 export default CreditCardBrandLogo;
