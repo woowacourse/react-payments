@@ -1,4 +1,3 @@
-import { IMAGE_URL } from "../../constants";
 import styles from "./Card.module.css";
 
 const Card = ({
@@ -24,9 +23,11 @@ const Card = ({
     const cardStyle = styles.logo;
 
     if (isMasterCard(cardNumbers[0]))
-      return <img src={IMAGE_URL.MASTER_CARD} className={cardStyle} />;
+      return (
+        <img src="/src/assets/image/Mastercard.png" className={cardStyle} />
+      );
     if (isVisaCard(cardNumbers[0]))
-      return <img src={IMAGE_URL.VISA} className={cardStyle} />;
+      return <img src="/src/assets/image/Visa.png" className={cardStyle} />;
   };
 
   return (
@@ -45,7 +46,7 @@ const Card = ({
                     .fill(0)
                     .map(() => (
                       <img
-                        src={IMAGE_URL.CARD_NUMBER_BLIND}
+                        src="/src/assets/image/CardNumberBlind.svg"
                         width="4"
                         height="4"
                       />
