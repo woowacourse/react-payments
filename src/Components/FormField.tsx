@@ -1,49 +1,56 @@
-import { useEffect, useState } from "react";
+/** @jsxImportSource @emotion/react */
 import FormInput from "./FormInput";
 import Tooltip from "./Tooltip";
 
+import { css } from "@emotion/react";
+
 interface Props {
-  id: number;
   formFieldInfo: FormFieldInfo;
-  setCardInfo?: React.Dispatch<React.SetStateAction<CardInfo>>;
+  formErrors: ErrorState;
 }
 
+const titleCss = css({
+  fontSize: "18px",
+  fontWeight: "700",
+  lineHeight: "26px",
+  textAlign: "left",
+});
+
+const descriptionCss = css({
+  fontSize: "10px",
+  fontWeight: "400",
+  lineHeight: "14px",
+  textAlign: "left",
+  color: "#8B95A1",
+  marginBottom: "30px",
+});
+
+const rowStyle = css({
+  display: "flex",
+  justifyContent: "space-between",
+});
+
 const FormField: React.FC<Props> = ({
-  formFieldInfo: { title, description, label, sizePreset, inputPlaceholderList },
+  formFieldInfo: { key, title, description, label, sizePreset, inputInfoList },
+  formErrors,
 }) => {
-  const [inputValues, setInputValues] = useState(Array(inputPlaceholderList.length).fill([])); // 각각의 input의 유효성을 검사하기 위한 상태
-  const [errorMessage, setErrorMessage] = useState<null | string>(null);
-
-  useEffect(() => {
-    inputValues.forEach((values) => {
-      // TODO: values 유효성 검사
-      // TODO: setErrorMessage
-    });
-  }, [inputValues]);
-
-  const handleChange = (e, index) => {
-    //TODO: setInputValues[index]
-    //TODO: setCardInfo((prev)=>{prev[formFieldInfo.key] = e.target.value})
-  };
-
-  const handleSubmit = () => {
-    //TODO: errorHandling
-  };
-
   return (
     <div>
-      <h1>{title}</h1>
-      {description && <p>{description}</p>}
+      <h1 css={titleCss}>{title}</h1>
+      <p css={descriptionCss}>{description}</p>
       <label htmlFor="id">{label}</label>
-      {inputPlaceholderList.map((placeholder, index) => (
-        <FormInput
-          onChange={(e) => handleChange(e, index)}
-          id={`id-${index}`}
-          sizePreset={sizePreset}
-          placeholder={placeholder ?? ""}
-        ></FormInput>
-      ))}
-      {errorMessage && <Tooltip>{errorMessage}</Tooltip>}
+
+      <div css={rowStyle}>
+        {inputInfoList.map((inputInfo, index) => (
+          <FormInput
+            key={`id-${index}`}
+            onChange={(e) => inputInfo.onInputChange(e, index)}
+            sizePreset={sizePreset}
+            placeholder={inputInfo.placeholder}
+          ></FormInput>
+        ))}
+      </div>
+      {formErrors[key].errorMessage && <Tooltip>{formErrors[key].errorMessage}</Tooltip>}
     </div>
   );
 };
