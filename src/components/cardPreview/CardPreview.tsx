@@ -7,7 +7,7 @@ import CardNumbers from "../cardNumbers/CardNumbers";
 import CardExpiration from "../cardExpiration/CardExpiration";
 import { CARD_BRAND } from "../../constants/setting";
 
-interface CardPreviewProps {
+export interface CardPreviewProps {
   cardInfo: ICardInfo;
 }
 

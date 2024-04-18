@@ -7,7 +7,6 @@ export interface CardNumberProps {
 }
 
 const CardNumbers = ({ cardNumbers }: CardNumberProps) => {
-  console.log(cardNumbers);
   return (
     <Styled.CardNumbersSection>
       {cardNumbers.map((cardNumber, index) => {
