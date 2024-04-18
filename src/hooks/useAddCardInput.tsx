@@ -32,6 +32,7 @@ export default function useAddCardInput<T extends InitialValuesType>({
   const [values, setValues] = useState<T>(initialValues);
   const [isError, setIsError] =
     useState<Record<keyof T, boolean>>(initialErrors);
+
   const [errMsg, setErrMsg] = useState('');
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
