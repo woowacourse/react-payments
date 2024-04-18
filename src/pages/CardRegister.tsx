@@ -7,6 +7,14 @@ import { INPUT_COUNTS } from "@/constants/condition";
 const CardRegister = () => {
   const cardNumbersState = useInput({
     initialValue: Array.from({ length: INPUT_COUNTS.CARD_NUMBERS }, () => ""),
+    validate: (input) => {
+      if (input[0].length > 3) {
+        console.log("fail");
+        return "3자리가 넘습니다.";
+      }
+      console.log("pass");
+      return "";
+    },
   });
 
   const expiredDateState = useInput({
