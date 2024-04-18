@@ -10,7 +10,9 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "chromatic": "npx chromatic --project-token=chpt_176e75dc7f1a514"
+    "chromatic": "npx chromatic --project-token=chpt_176e75dc7f1a514",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -36,9 +38,11 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
     "eslint-plugin-storybook": "^0.8.0",
+    "gh-pages": "^6.1.1",
     "prettier": "^3.2.5",
     "storybook": "^8.0.8",
     "typescript": "^5.2.2",
     "vite": "^5.2.0"
-  }
+  },
+  "homepage": "https://greetings1012.github.io/react-payments/"
 }
