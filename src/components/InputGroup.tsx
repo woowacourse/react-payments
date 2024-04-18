@@ -47,8 +47,10 @@ function InputGroup({ setState, section }: InputGroupType) {
         <div css={inputBoxStyle}>
           {placeholders.map((placeholder: string, index: number) => {
             const test: PeriodType[] = ['month', 'year'];
+            const isPassword = index === 2 || index === 3;
             return (
               <Input
+                isPassword={isPassword}
                 keyProp={section + index.toString()}
                 type={section === 'period' ? test[index] : section}
                 placeholder={placeholder}

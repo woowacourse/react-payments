@@ -3,6 +3,7 @@ import isValidateInput from '../validations/isValidateInput';
 import { useState } from 'react';
 
 interface InputType {
+  isPassword: boolean;
   type: 'number' | 'owner' | 'month' | 'year';
   placeholder: string;
   setState: (s: string) => void;
@@ -10,7 +11,7 @@ interface InputType {
   keyProp: string;
 }
 
-function Input({ keyProp, type, placeholder, setState, setErrorMessage }: InputType) {
+function Input({ isPassword, keyProp, type, placeholder, setState, setErrorMessage }: InputType) {
   const [isError, setIsError] = useState(false);
   const handleInputChange = (value: string) => {
     try {
@@ -29,6 +30,7 @@ function Input({ keyProp, type, placeholder, setState, setErrorMessage }: InputT
       <input
         // maxLength={}
         // name={}
+        type={isPassword ? 'password' : 'input'}
         css={inputStyle({ border: isError ? '#FF3D3D' : '#acacac', focusColor: isError ? '#FF3D3D' : '#000' })}
         key={keyProp}
         placeholder={placeholder}
