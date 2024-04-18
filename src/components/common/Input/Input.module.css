@@ -1,0 +1,15 @@
+.customInput {
+  border-radius: 5px;
+  border: 1px solid #acacac;
+  padding: 10px 8px;
+  width: 100%;
+  outline: none;
+}
+
+.isError {
+  border: 1px solid #ff3d3d !important;
+}
+
+.isFocus {
+  border: 1px solid black;
+}
