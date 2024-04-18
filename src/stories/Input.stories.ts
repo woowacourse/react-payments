@@ -16,28 +16,15 @@ type Story = StoryObj<typeof meta>;
 
 const mockIndex = 0;
 const mockInfo = InputType.CARD_NUMBER;
-const mockCardInfo = {
-  cardNumber1: '5123',
-  cardNumber2: '1234',
-  cardNumber3: '1212',
-  cardNumber4: '2323',
-  month: '1',
-  year: '12',
-  userName: 'HAILEY CHOI',
-};
 const mockHandleInput = action('handleInput');
-const mockErrorMessages = {
-  0: '',
-};
-const mockSetErrorMessages = action('setErrorMessages');
+const mockSetErrorMessages = action('handleErrorMessage');
 
 export const Default: Story = {
   args: {
     info: mockInfo.inputInfo[mockIndex],
     index: mockIndex,
-    cardInfo: mockCardInfo,
     handleInput: mockHandleInput,
-    errorMessages: mockErrorMessages,
-    setErrorMessages: mockSetErrorMessages,
+    isError: false,
+    handleErrorMessage: mockSetErrorMessages,
   },
 };
