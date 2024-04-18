@@ -14,14 +14,14 @@ const inputWidthSize: InputWidthSize = {
 } as const;
 
 interface InputProps {
-  size: InputSize;
+  id?: string;
   type: HTMLInputTypeAttribute;
   placeholder: string;
-  isError: boolean;
   value: string;
-  id?: string;
   minLength?: number;
-  maxLength: number;
+  maxLength?: number;
+  size: InputSize;
+  isError: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -30,8 +30,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <StyledInput
         ref={ref}
-        width={inputWidthSize[size]}
         onChange={onChange}
+        width={inputWidthSize[size]}
         isError={isError}
         {...props}
       />
