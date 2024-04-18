@@ -21,19 +21,27 @@ const meta = {
   argTypes: {
     value: {
       control: 'text',
-      description: '인풋 태그의 value 속성',
+      description: 'value 속성',
     },
     id: {
       control: 'text',
-      description: '인풋 태그의 id 속성',
+      description: 'id 속성',
     },
     type: {
-      options: ['text', 'number', 'email', 'password'],
-      description: '인풋 태그의 type 속성',
+      options: ['text', 'number', 'email', 'password', 'tel'],
+      description: 'type 속성',
     },
     placeholder: {
       control: 'string',
-      description: '인풋 태그의 placeholder 속성',
+      description: 'placeholder 속성',
+    },
+    isError: {
+      control: 'boolean',
+      description: '에러 감지 속성 값',
+    },
+    maxLength: {
+      control: 'number',
+      description: '입력값 최대 길이',
     },
   },
   args: {
@@ -43,11 +51,35 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const CardNumber: Story = {
   args: {
     id: '',
     value: '',
     type: 'text',
-    placeholder: '값을 입력하세요.',
+    placeholder: '1234',
+    isError: false,
+    maxLength: 4,
+  },
+};
+
+export const Month: Story = {
+  args: {
+    id: '',
+    value: '',
+    type: 'text',
+    placeholder: 'MM',
+    isError: false,
+    maxLength: 2,
+  },
+};
+
+export const Year: Story = {
+  args: {
+    id: '',
+    value: '',
+    type: 'text',
+    placeholder: 'YY',
+    isError: false,
+    maxLength: 2,
   },
 };
