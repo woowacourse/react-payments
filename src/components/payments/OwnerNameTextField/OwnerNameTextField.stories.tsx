@@ -58,14 +58,14 @@ export const OwnerNameError: Story = {
   parameters: {
     docs: {
       description: {
-        story: '영어 대문자를 입력하지 않았을 때의 상태',
+        story: '영문을 입력하지 않았을 때의 상태',
       },
     },
   },
 
   args: {
-    ownerName: 'son jinyoung',
-    ownerNameError: { isError: true, errorMessage: '카드 소유자 이름은 대문자로 입력해야 합니다.' },
+    ownerName: 'sonjinyoung',
+    ownerNameError: { isError: true, errorMessage: '카드 소유자 이름은 영문으로 입력해야 합니다.' },
   },
 };
 
@@ -79,7 +79,7 @@ export const Complete: Story = {
   },
 
   args: {
-    ownerName: 'SON JINYOUNG',
+    ownerName: 'SONJINYOUNG',
     ownerNameError: { isError: false, errorMessage: '' },
   },
 };
