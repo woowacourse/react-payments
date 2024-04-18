@@ -1,5 +1,6 @@
 import React from 'react';
 
+import styles from './style.module.css';
 import useInput, { UseInputProps } from './useInput';
 
 interface InputProps
@@ -14,7 +15,14 @@ function Input(props: InputProps) {
     maxLength,
   });
 
-  return <input {...props} value={value} onChange={handleChange} />;
+  return (
+    <input
+      className={styles.input}
+      {...props}
+      value={value}
+      onChange={handleChange}
+    />
+  );
 }
 
 export default Input;

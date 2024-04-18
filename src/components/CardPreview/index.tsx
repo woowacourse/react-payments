@@ -3,7 +3,7 @@ import React, { CSSProperties, useEffect, useState } from 'react';
 import styles from './style.module.css';
 import { CARD_COLOR, CARD_MARK, CARD_NUMBERS } from '../../constants';
 import { CardInfo } from '../../modules/useCardInfoReducer';
-
+import CardChip from '../../assets/images/cardChip.png';
 interface CardPreviewProps {
   cardInfo: CardInfo;
 }
@@ -53,18 +53,20 @@ function CardPreview(props: CardPreviewProps) {
         className={styles.cardImg}
         style={{ backgroundColor: CARD_COLOR[color] }}
       >
-        <div className="top">
-          <div className="chip"></div>
-          <img src={markInfo.src} alt={markInfo.alt} />
-        </div>
-        <div className="info">
-          <div className="card-number">{cardNumbers}</div>
-          <div className="period">
-            {period.month}
-            {period.month && period.year ? SLASH : ''}
-            {period.year}
-          </div>
-          <div className="user">{userName}</div>
+        <div className={styles.cardImgInner}>
+          <section className={styles.top}>
+            <img src={CardChip} alt="card chip" />
+            <img src={markInfo.src} alt={markInfo.alt} />
+          </section>
+          <section className={styles.info}>
+            <div className="card-number">{cardNumbers}</div>
+            <div className="period">
+              {period.month}
+              {period.month && period.year ? SLASH : ''}
+              {period.year}
+            </div>
+            <div className="user">{userName}</div>
+          </section>
         </div>
       </div>
     </div>

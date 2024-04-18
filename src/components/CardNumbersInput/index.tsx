@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
+import styles from './style.module.css';
 
 import {
   CARD_NUMBERS,
@@ -70,7 +71,7 @@ export default function CardNumbersInput(props: CardNumbersInputProps) {
   return (
     <CardInputContainer title={title} subTitle={subTitle}>
       <CardInput label={label}>
-        <div onChange={validateCardNumber}>
+        <div className={styles.inputWrap} onChange={validateCardNumber}>
           {Array.from({ length }).map((_, index) => (
             <Input
               placeholder={placeholder}

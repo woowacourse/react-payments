@@ -1,5 +1,5 @@
 import React from 'react';
-
+import styles from './style.module.css';
 interface FormErrorMessageProps {
   errorMessage?: string;
 }
@@ -7,7 +7,7 @@ interface FormErrorMessageProps {
 function FormErrorMessage(props: FormErrorMessageProps) {
   const { errorMessage } = props;
 
-  return <div>{errorMessage}</div>;
+  return <div className={styles.message}>{errorMessage}</div>;
 }
 
 export default FormErrorMessage;

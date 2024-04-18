@@ -1,5 +1,4 @@
-import './App.css';
-
+import './styles/App.css';
 import './styles/reset.css';
 import {
   CardExpirationPeriodInput,
@@ -21,7 +20,7 @@ function App() {
     <div id="app">
       <div className="inner">
         <CardPreview cardInfo={cardInfo} />
-        <form>
+        <form className="form-container">
           <fieldset>
             <CardNumbersInput
               editCardMark={editCardMark}

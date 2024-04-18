@@ -1,5 +1,6 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 
+import styles from './style.module.css';
 import {
   CARD_USER,
   CARD_USER_FORM_MESSAGE,
@@ -54,7 +55,7 @@ export default function CardUserNameInput(props: CardUserNameInputProps) {
     <CardInputContainer title={title} subTitle={subTitle}>
       <CardInput label={label}>
         <div>
-          <div onChange={handleChange}>
+          <div className={styles.inputWrap} onChange={handleChange}>
             <Input
               style={{ textTransform: 'uppercase' }}
               name="month"

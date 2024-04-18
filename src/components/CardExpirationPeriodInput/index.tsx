@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
+import styles from './style.module.css';
 
 import {
   CARD_EXPIRATION,
@@ -121,7 +122,7 @@ export default function CardExpirationPeriodInput(
     <CardInputContainer title={title} subTitle={subTitle}>
       <CardInput label={label}>
         <div>
-          <div onChange={handleInputChange}>
+          <div className={styles.inputWrap} onChange={handleInputChange}>
             <Input
               name="month"
               type="text"

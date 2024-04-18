@@ -1,5 +1,7 @@
 import React, { ReactNode, useId } from 'react';
 
+import styles from './style.module.css';
+
 interface CardInputProps {
   label: string;
   /**
@@ -14,7 +16,9 @@ export default function CardInput(props: CardInputProps) {
 
   return (
     <div>
-      <label htmlFor={id}>{label}</label>
+      <label className={styles.label} htmlFor={id}>
+        {label}
+      </label>
       <div id={id}>{children}</div>
     </div>
   );
