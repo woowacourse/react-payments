@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import styled from "styled-components";
+import styled from 'styled-components';
 import CardNumbersFormSection from './CardNumbersFormSection';
 import ExpirationDateFormSection from './ExpirationDateFormSection';
 import NameFormSection from './NameFormSection';
@@ -8,22 +7,30 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
-`
+`;
 
-const CardInfo = ({ changeCardInfo }) => {
+interface ChangeExpirationProps {
+  month: string;
+  year: string;
+}
 
-  const changeCardNumber = (cardNumber) => {
-    changeCardInfo(prev => ({ ...prev, cardNumber: cardNumber }))
-  }
+const CardInfo = ({ ...props }) => {
+  const { changeCardInfo } = props;
+  const changeCardNumber = (cardNumber: string) => {
+    changeCardInfo((prev: CardInfo) => ({ ...prev, cardNumber: cardNumber }));
+  };
 
-  const changeExpiration = ({ month, year }) => {
-    changeCardInfo(prev => ({ ...prev, expirationMonth: month, expirationYear: year }))
-  }
+  const changeExpiration = ({ month, year }: ChangeExpirationProps) => {
+    changeCardInfo((prev: CardInfo) => ({
+      ...prev,
+      expirationMonth: month,
+      expirationYear: year,
+    }));
+  };
 
-  const changeName = (name) => {
-    changeCardInfo(prev => ({ ...prev, name: name }))
-  }
-
+  const changeName = (name: string) => {
+    changeCardInfo((prev: CardInfo) => ({ ...prev, name: name }));
+  };
 
   return (
     <Container>
@@ -31,7 +38,7 @@ const CardInfo = ({ changeCardInfo }) => {
       <ExpirationDateFormSection changeExpiration={changeExpiration} />
       <NameFormSection changeName={changeName} />
     </Container>
-  )
-}
+  );
+};
 
-export default CardInfo
+export default CardInfo;

@@ -15,7 +15,7 @@ export const Default: Story = {
     cardNumber: ['1234', '5678', '9012', '3456'],
     expirationMonth: '04',
     expirationYear: '24',
-    name: "HONG GILDONG",
+    name: 'HONG GILDONG',
   },
 };
 
@@ -24,7 +24,7 @@ export const Visa: Story = {
     cardNumber: ['4234', '5678', '9012', '3456'],
     expirationMonth: '04',
     expirationYear: '24',
-    name: "HONG GILDONG",
+    name: 'HONG GILDONG',
   },
 };
 
@@ -33,7 +33,7 @@ export const Mastercard: Story = {
     cardNumber: ['5234', '5678', '9012', '3456'],
     expirationMonth: '04',
     expirationYear: '24',
-    name: "HONG GILDONG",
+    name: 'HONG GILDONG',
   },
 };
 
@@ -42,6 +42,6 @@ export const LongName: Story = {
     cardNumber: ['1234', '5678', '9012', '3456'],
     expirationMonth: '04',
     expirationYear: '24',
-    name: "KIM AREUMDAUNIDDANGEGUMSUGANGSANE",
+    name: 'KIM AREUMDAUNIDDANGEGUMSUGANGSANE',
   },
 };

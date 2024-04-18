@@ -1,34 +1,32 @@
-import React from 'react';
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import IcChip from "../asset/IcChip.svg";
+import IcChip from '../asset/IcChip.svg';
 import CardBrand from './CardBrand';
+
+import REGEX from '../constants/regex';
 
 const Card = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
   box-sizing: border-box;
   width: 246px;
   height: 154px;
   padding: 16px;
-  
   border-radius: 8px;
   background-color: #333333;
-
   box-shadow: rgba(0, 0, 0, 0.35) 8px 12px 16px;
-`
+`;
 
 const CardHeader = styled.div`
-  display:flex;
+  display: flex;
   justify-content: space-between;
-`
+`;
 
 const CardNumbers = styled.div`
   display: flex;
   justify-content: space-between;
-`
+`;
 
 const CardNumber = styled.p`
   font-family: 'Inter', sans-serif;
@@ -38,20 +36,19 @@ const CardNumber = styled.p`
   text-align: left;
   color: white;
   width: 34px;
-  
-`
+`;
 
 const CardNameAndExpiration = styled.div`
   display: flex;
   justify-content: space-between;
   height: 36px;
-`
+`;
 
 const CardNameContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
-`
+`;
 
 const NameLabel = styled.p`
   font-family: 'Inter', sans-serif;
@@ -60,7 +57,7 @@ const NameLabel = styled.p`
   line-height: 15px;
   text-align: left;
   color: white;
-`
+`;
 
 const Name = styled.p`
   max-width: 156px;
@@ -74,13 +71,13 @@ const Name = styled.p`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-`
+`;
 
 const CardExpirationContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
-`
+`;
 
 const ExpirationLabel = styled.p`
   font-family: 'Inter', sans-serif;
@@ -89,7 +86,7 @@ const ExpirationLabel = styled.p`
   line-height: 15px;
   text-align: right;
   color: white;
-`
+`;
 
 const Expiration = styled.p`
   font-family: 'Inter', sans-serif;
@@ -98,19 +95,19 @@ const Expiration = styled.p`
   line-height: 15px;
   text-align: right;
   color: white;
-`
+`;
 
 const Image = styled.img`
   width: 36px;
   height: 28px;
-`
+`;
 
 const CardPreview = ({ ...props }: CardInfo) => {
-  const { cardNumber, expirationMonth, expirationYear, name } = props
+  const { cardNumber, expirationMonth, expirationYear, name } = props;
 
   const secureNumber = (number: string) => {
-    return number.replace(/\d/gi, '∙')
-  }
+    return number.replace(REGEX.allNumbers, '∙');
+  };
 
   return (
     <Card>
@@ -134,7 +131,8 @@ const CardPreview = ({ ...props }: CardInfo) => {
           <Expiration>{`${expirationMonth}${expirationMonth ? '/' : ''}${expirationYear}`}</Expiration>
         </CardExpirationContainer>
       </CardNameAndExpiration>
-    </Card>)
-}
+    </Card>
+  );
+};
 
 export default CardPreview;

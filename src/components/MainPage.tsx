@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import styled from "styled-components";
-import CardInfo from "./CardInfo";
-import CardPreview from "./CardPreview";
+import { useState } from 'react';
+import styled from 'styled-components';
+
+import CardInfo from './CardInfo';
+import CardPreview from './CardPreview';
 
 const Main = styled.div`
   display: flex;
@@ -10,32 +11,30 @@ const Main = styled.div`
   justify-content: center;
   padding: 0 32px;
   gap: 48px;
-
   width: 100%;
   max-width: 375px;
   height: fit-content;
   background-color: white;
-`
+`;
 
 const MainPage = () => {
   const [cardInfo, setCardInfo] = useState<CardInfo>({
-    cardNumber: ["", "", "", ""],
-    expirationMonth: "",
-    expirationYear: "",
-    name: "",
-  })
+    cardNumber: ['', '', '', ''],
+    expirationMonth: '',
+    expirationYear: '',
+    name: '',
+  });
 
   const changeCardInfo = (cardInfo: CardInfo) => {
-    setCardInfo(cardInfo)
-  }
-
+    setCardInfo(cardInfo);
+  };
 
   return (
     <Main>
       <CardPreview {...cardInfo} />
       <CardInfo changeCardInfo={changeCardInfo} />
     </Main>
-  )
-}
+  );
+};
 
 export default MainPage;

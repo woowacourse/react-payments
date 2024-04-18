@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const FormSection = styled.div`
   display: flex;
@@ -27,13 +27,12 @@ const Label = styled.div`
 `;
 
 const ErrorMessage = styled.div`
-height: 12px;
-
-color: #ff3d3d;
-font-size: 9.5px;
-font-weight: 400;
-line-height: 12px;
+  height: 12px;
+  color: #ff3d3d;
+  font-size: 9.5px;
+  font-weight: 400;
+  line-height: 12px;
   text-align: left;
 `;
 
-export { FormSection, InputFieldContainer, InputForm, Label, ErrorMessage }
+export { FormSection, InputFieldContainer, InputForm, Label, ErrorMessage };

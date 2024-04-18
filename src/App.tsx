@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import './App.css';
 import MainPage from './components/MainPage';
@@ -7,9 +6,8 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
-  height  : 100vh ;
-`
+  height: 100vh;
+`;
 
 function App() {
   return (

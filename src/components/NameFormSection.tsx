@@ -1,22 +1,27 @@
-import React, { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
+import React, { useEffect, useRef, useState } from 'react';
+import styled from 'styled-components';
 
-import PaymentsFormTitle from "./common/PaymentsFormTitle";
-import PaymentsInputField from "./common/PaymentsInputField";
+import PaymentsFormTitle from './common/PaymentsFormTitle';
+import PaymentsInputField from './common/PaymentsInputField';
 
-import OPTION from "../constants/option";
+import ERROR_MESSAGE from '../constants/errorMessage';
+import OPTION from '../constants/option';
+import REGEX from '../constants/regex';
 
-import { FormSection, InputFieldContainer, InputForm, Label, ErrorMessage } from "./style/FormSection"
-
+import {
+  FormSection,
+  InputFieldContainer,
+  InputForm,
+  Label,
+  ErrorMessage,
+} from './style/FormSection';
 
 const PaymentsInputFieldUppercase = styled(PaymentsInputField)`
   text-transform: uppercase;
-`
+`;
 
-const NameFormSection = ({ changeName }) => {
-
-  const regex = /^[a-zA-Z]+ ?[a-zA-Z]*$/;
-  const typeErrorMessage = "영어만 입력 가능합니다.";
+const NameFormSection = ({ ...props }) => {
+  const { changeName } = props;
 
   const [inputState, setInputState] = useState<InputState>({
     value: '',
@@ -32,73 +37,62 @@ const NameFormSection = ({ changeName }) => {
     const newValue = e.target.value;
     const isFilled = newValue.length === OPTION.nameMaxLength;
 
-    if (
-      newValue.length <= OPTION.nameMaxLength &&
-      !regex.test(newValue)
-    ) {
-      setInputState(
-        {
-          ...inputState,
-          value: newValue.slice(0, newValue.length - 1),
-          hasError: true
-        });
-      setErrorMessage(typeErrorMessage);
+    if (newValue.length <= OPTION.nameMaxLength && !REGEX.name.test(newValue)) {
+      setInputState({
+        ...inputState,
+        value: newValue.slice(0, newValue.length - 1),
+        hasError: true,
+      });
+      setErrorMessage(ERROR_MESSAGE.onlyEnglish);
     } else if (newValue.length > OPTION.nameMaxLength) {
-      setInputState(
-        {
-          ...inputState,
-          value: newValue.slice(0, OPTION.nameMaxLength),
-          hasError: false
-        }
-      );
+      setInputState({
+        ...inputState,
+        value: newValue.slice(0, OPTION.nameMaxLength),
+        hasError: false,
+      });
     } else {
-      setInputState(
-        {
-          ...inputState,
-          value: newValue,
-          hasError: false,
-          isFilled: isFilled,
-        }
-      );
+      setInputState({
+        ...inputState,
+        value: newValue,
+        hasError: false,
+        isFilled: isFilled,
+      });
     }
   };
 
   const handleOnFocus = () => {
     setInputState({
       ...inputState,
-      hasFocus: true
+      hasFocus: true,
     });
   };
 
   const handleOnBlur = () => {
     setInputState({
       ...inputState,
-      hasFocus: false
+      hasFocus: false,
     });
   };
 
   useEffect(() => {
     resetErrors();
-  }, [inputState.hasFocus])
+  }, [inputState.hasFocus]);
 
   useEffect(() => {
-    changeName(inputState.value)
-  }, [inputState.value])
-
+    changeName(inputState.value);
+  }, [inputState.value]);
 
   const resetErrors = () => {
     setInputState({
       ...inputState,
-      hasError: false
+      hasError: false,
     });
-    setErrorMessage("");
-  }
-
+    setErrorMessage('');
+  };
 
   return (
     <FormSection>
-      <PaymentsFormTitle
-        title="카드 소유자 이름을 입력해 주세요" />
+      <PaymentsFormTitle title="카드 소유자 이름을 입력해 주세요" />
       <InputForm>
         <Label>소유자 이름</Label>
         <InputFieldContainer className="input-field-container">
@@ -117,7 +111,7 @@ const NameFormSection = ({ changeName }) => {
         <ErrorMessage>{errorMessage}</ErrorMessage>
       </InputForm>
     </FormSection>
-  )
-}
+  );
+};
 
 export default NameFormSection;

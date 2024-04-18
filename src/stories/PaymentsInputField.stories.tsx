@@ -32,6 +32,6 @@ export const OnError: Story = {
     placeholder: '1234',
     maxLength: 4,
     hasError: true,
-    width: 200
+    width: 200,
   },
 };
