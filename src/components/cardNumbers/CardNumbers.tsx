@@ -2,11 +2,12 @@ import React from "react";
 import * as Styled from "./CardNumbers.styles";
 import { MASKING } from "../../constants/setting";
 
-interface CardNumberProps {
+export interface CardNumberProps {
   cardNumbers: number[];
 }
 
 const CardNumbers = ({ cardNumbers }: CardNumberProps) => {
+  console.log(cardNumbers);
   return (
     <Styled.CardNumbersSection>
       {cardNumbers.map((cardNumber, index) => {
