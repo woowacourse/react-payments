@@ -7,6 +7,7 @@ import ErrorMessage from "./ErrorMessage";
 const CardOwnerNameContainer = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
   gap: 16px;
 `;
 
