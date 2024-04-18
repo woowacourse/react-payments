@@ -1,15 +1,15 @@
 import FormField from "./FormField";
 
 interface Props {
-  cardInfoState?: [CardInfo, React.Dispatch<React.SetStateAction<CardInfo>>];
   formFiledPropsList: FormFieldInfo[];
+  formErrors: ErrorState;
 }
 
-const Form = ({ cardInfoState, formFiledPropsList }: Props) => {
+const Form = ({ formFiledPropsList, formErrors }: Props) => {
   return (
     <form>
       {formFiledPropsList.map((formFieldProps, index) => (
-        <FormField id={index} formFieldInfo={formFieldProps} cardInfoState={cardInfoState} />
+        <FormField key={index} formFieldInfo={formFieldProps} formErrors={formErrors} />
       ))}
     </form>
   );
