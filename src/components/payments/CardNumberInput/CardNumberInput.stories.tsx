@@ -13,7 +13,7 @@ const meta = {
   decorators: [
     (Story, context) => {
       const [value, setValue] = useState(context.args.value);
-      const onAddCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value);
+      const onAddCardNumber = (event: React.ChangeEvent<HTMLInputElement>) => setValue(event.target.value);
 
       return <Story args={{ ...context.args, value, onAddCardNumber }} />;
     },
