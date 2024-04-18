@@ -7,11 +7,11 @@ import CardNumbers from "../cardNumbers/CardNumbers";
 import CardExpiration from "../cardExpiration/CardExpiration";
 import { CARD_BRAND } from "../../constants/setting";
 
-interface Props {
+interface CardPreviewProps {
   cardInfo: ICardInfo;
 }
 
-const CardPreview = ({ cardInfo }: Props) => {
+const CardPreview = ({ cardInfo }: CardPreviewProps) => {
   const [cardBrand, setCardBrand] = useState("");
 
   useEffect(() => {

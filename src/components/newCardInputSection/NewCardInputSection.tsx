@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import * as Styled from "./NewCardInputSection.styles";
 
-interface Props {
+interface NewCardInputSectionProps {
   label: string;
   mainText: string;
   subText?: string;
@@ -9,7 +9,7 @@ interface Props {
   children: ReactNode;
 }
 
-const NewCardInputSection = ({ label, mainText, subText, errorMessage, children }: Props) => {
+const NewCardInputSection = ({ label, mainText, subText, errorMessage, children }: NewCardInputSectionProps) => {
   return (
     <Styled.InputSection>
       <header>
