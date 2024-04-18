@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { CARD_NUMBER } from "../constants/card-app";
 import { visaCard, masterCard } from "../assets/image";
 
 const cardImages = {
@@ -10,26 +10,35 @@ const cardImages = {
 type CardLogo = keyof typeof cardImages;
 
 const useCardLogo = () => {
-  const [cardLogo, setLogoImagePath] = useState<CardLogo | null>(null);
+  const [cardLogo, setCardLogo] = useState<CardLogo | null>(null);
 
-  const handleCardLogo = (firstPart: string): void => {
-    if (firstPart[0] !== "4") {
-      setLogoImagePath(null);
-      return;
-    }
+  const isVisaCard = (firstPart: string) => {
+    return parseInt(firstPart[0], 10) === CARD_NUMBER.visaStartNumber;
+  };
 
-    if (firstPart[0] === "4") {
-      setLogoImagePath("visa");
-      return;
-    }
-
-    if (firstPart.length < 2) return;
+  const isMasterCard = (firstPart: string) => {
+    if (firstPart.length < 2) return false;
 
     const slicedFirstPart = parseInt(firstPart.slice(0, 2), 10);
 
-    if (slicedFirstPart >= 51 && slicedFirstPart <= 55) {
-      setLogoImagePath("master");
+    return (
+      slicedFirstPart >= CARD_NUMBER.minMasterNumber &&
+      slicedFirstPart <= CARD_NUMBER.maxMasterNumber
+    );
+  };
+
+  const handleCardLogo = (firstPart: string): void => {
+    if (isVisaCard(firstPart)) {
+      setCardLogo("visa");
+      return;
     }
+
+    if (isMasterCard(firstPart)) {
+      setCardLogo("master");
+      return;
+    }
+
+    setCardLogo(null);
   };
 
   return {
