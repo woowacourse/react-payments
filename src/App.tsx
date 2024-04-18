@@ -10,6 +10,7 @@ import Label from './components/composables/Label';
 import MasterCardImage from './assets/images/mastercard.png';
 import VisaCardImage from './assets/images/visa.png';
 import validate from './utils/validate';
+import { CARD_NUMBER, EXPIRATION_PERIOD, OWNER_NAME } from './constants/cardSection';
 
 export const StyledInput = styled.input`
   border: 1px solid #acacac;
@@ -150,9 +151,9 @@ function App() {
         <CardInfoContainer>
           <Wrapper>
             <InputInfo
-              title="결제할 카드 번호를 입력해 주세요"
-              description="본인 명의의 카드만 결제 가능합니다."
-              inputTitle="카드 번호"
+              title={CARD_NUMBER.title}
+              description={CARD_NUMBER.description}
+              inputTitle={CARD_NUMBER.inputTitle}
             >
               {cardNumbers.map((cardNumber, index) => {
                 const uniqueId = 'cardNumbers' + index;
@@ -175,16 +176,16 @@ function App() {
             </InputInfo>
             <ErrorContainer>
               <ErrorMessageSpan>
-                {cardNumbers.some((cardNumber) => cardNumber.isError) && 'cardNumberError'}
+                {cardNumbers.some((cardNumber) => cardNumber.isError) && CARD_NUMBER.errorMessage}
               </ErrorMessageSpan>
             </ErrorContainer>
           </Wrapper>
 
           <Wrapper>
             <InputInfo
-              title="카드 유효기간을 입력해 주세요"
-              description="월/년도(MMYY)를 순서대로 입력해 주세요."
-              inputTitle="유효기간"
+              title={EXPIRATION_PERIOD.title}
+              description={EXPIRATION_PERIOD.description}
+              inputTitle={EXPIRATION_PERIOD.inputTitle}
             >
               <Label htmlFor={'month'} />
               <Input
@@ -209,15 +210,15 @@ function App() {
             </InputInfo>
             <ErrorContainer>
               <ErrorMessageSpan>
-                {monthError && yearError ? 'MonthError' : ''}
-                {!monthError && yearError ? 'yearError' : ''}
-                {monthError && !yearError ? 'monthError' : ''}
+                {monthError && yearError ? EXPIRATION_PERIOD.monthErrorMessage : ''}
+                {!monthError && yearError ? EXPIRATION_PERIOD.yearErrorMessage : ''}
+                {monthError && !yearError ? EXPIRATION_PERIOD.monthErrorMessage : ''}
               </ErrorMessageSpan>
             </ErrorContainer>
           </Wrapper>
 
           <Wrapper>
-            <InputInfo title="카드 소유자 이름을 입력해주세요" inputTitle="소유자 이름">
+            <InputInfo title={OWNER_NAME.title} inputTitle={OWNER_NAME.inputTitle}>
               <Label htmlFor={'name'} />
               <Input
                 id="name"
@@ -230,7 +231,7 @@ function App() {
               />
             </InputInfo>
             <ErrorContainer>
-              <ErrorMessageSpan>{nameError && 'nameError'}</ErrorMessageSpan>
+              <ErrorMessageSpan>{nameError && OWNER_NAME.errorMessage}</ErrorMessageSpan>
             </ErrorContainer>
           </Wrapper>
         </CardInfoContainer>
