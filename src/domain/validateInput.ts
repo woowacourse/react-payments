@@ -4,19 +4,19 @@ import { ERROR_MESSAGE } from "../constants/message";
 
 export const validateOnlyDigit = (string: string) => {
   if (!/^[0-9]*$/.test(string)) {
-    throw new BlockedInputError("올바른 숫자(0~9)를 입력해주세요");
+    throw new BlockedInputError(ERROR_MESSAGE.notDigit);
   }
 };
 
 export const validateOnlyEnglishWithSpace = (string: string) => {
   if (!/^([a-zA-Z]+\s*)*$/.test(string)) {
-    throw new BlockedInputError("영어로 입력해주세요");
+    throw new BlockedInputError(ERROR_MESSAGE.notEnglish);
   }
 };
 
 export const validateLength = (string: string, length: number) => {
   if (string.length < length) {
-    throw new NonBlockedInputError(`${length}자리로 입력해주세요`);
+    throw new NonBlockedInputError(`${length}${ERROR_MESSAGE.underLengthTail}`);
   }
 };
 
