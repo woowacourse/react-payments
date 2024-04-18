@@ -1,9 +1,11 @@
-import React, { CSSProperties, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import styles from './style.module.css';
+import CardChip from '../../assets/images/cardChip.png';
 import { CARD_COLOR, CARD_MARK, CARD_NUMBERS } from '../../constants';
 import { CardInfo } from '../../modules/useCardInfoReducer';
-import CardChip from '../../assets/images/cardChip.png';
+
+import styles from './style.module.css';
+
 interface CardPreviewProps {
   cardInfo: CardInfo;
 }
