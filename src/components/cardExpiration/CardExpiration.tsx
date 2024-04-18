@@ -1,6 +1,6 @@
 import React from "react";
 
-interface CardExpirationProps {
+export interface CardExpirationProps {
   month: number;
   year: number;
 }
