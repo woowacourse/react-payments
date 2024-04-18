@@ -43,7 +43,7 @@ export const OwnerName: Story = {
   args: {
     type: "text",
     value: "Liver",
-    maxLength: 20,
+    maxLength: 18,
     minLength: 2,
     sizePreset: "large",
     onChange: () => {},

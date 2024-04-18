@@ -153,7 +153,7 @@ export const LargeInputForm: Story = {
         {
           name: "name",
           placeholder: "LURGI PARK",
-          maxLength: 20,
+          maxLength: 18,
           onInputChange: () => {},
         },
       ],

@@ -34,7 +34,7 @@ interface InputInfo {
   name: string;
   placeholder: string;
   maxLength: number;
-  onInputChange: (e: any, index: number) => void;
+  onInputChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
 }
 
 interface FormFieldInfo {
