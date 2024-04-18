@@ -2,9 +2,12 @@ import { Form } from './style';
 import FormField from '../FormField/FormField';
 import InputField from '../InputField/InputField';
 import Input from '../Input/Input';
-import { CARD_NUMBER_ERROR_MESSAGE } from '../../hooks/useCardNumber';
-import { MONTH_ERROR_MESSAGE, YEAR_ERROR_MESSAGE } from '../../hooks/useExpirationDate';
-import { USER_NAME_ERROR_MESSAGE } from '../../hooks/useUserName';
+import MESSAGE from '../../constants/Message';
+import CONDITION from '../../constants/Condition';
+
+const { TITLE, CAPTION, LABEL, ERROR, PLACEHOLDER } = MESSAGE;
+const { MAX_LENGTH } = CONDITION;
+
 import {
   CardNumberErrorState,
   CardNumberState,
@@ -45,82 +48,72 @@ const CardInformationForm = ({
   const { monthError, yearError } = expirationDateErrorState;
 
   const cardNumberErrorMessage =
-    firstError || secondError || thirdError || fourthError ? CARD_NUMBER_ERROR_MESSAGE : '';
-  const expirationErrorMessage = monthError
-    ? MONTH_ERROR_MESSAGE
-    : yearError
-    ? YEAR_ERROR_MESSAGE
-    : '';
-  const userNameErrorMessage = userNameErrorState ? USER_NAME_ERROR_MESSAGE : '';
+    firstError || secondError || thirdError || fourthError ? ERROR.cardNumber : '';
+  const expirationErrorMessage = monthError ? ERROR.month : yearError ? ERROR.year : '';
+  const userNameErrorMessage = userNameErrorState ? ERROR.userName : '';
 
   return (
     <Form>
-      <FormField
-        title="결제할 카드 번호를 입력해 주세요"
-        caption="본인 명의의 카드만 결제 가능합니다."
-      >
-        <InputField label="카드 번호" error={cardNumberErrorMessage}>
+      <FormField title={TITLE.cardNumber} caption={CAPTION.cardNumber}>
+        <InputField label={LABEL.cardNumber} error={cardNumberErrorMessage}>
           <>
             <Input
-              placeholder="1234"
+              placeholder={PLACEHOLDER.cardNumber}
               value={first}
-              maxLength={4}
+              maxLength={MAX_LENGTH.cardNumber}
               onChange={setFirst}
               invalid={firstError}
             />
             <Input
-              placeholder="1234"
+              placeholder={PLACEHOLDER.cardNumber}
               value={second}
-              maxLength={4}
+              maxLength={MAX_LENGTH.cardNumber}
               onChange={setSecond}
               invalid={secondError}
             />
             <Input
-              placeholder="1234"
+              placeholder={PLACEHOLDER.cardNumber}
               value={third}
-              maxLength={4}
+              maxLength={MAX_LENGTH.cardNumber}
               onChange={setThird}
               invalid={thirdError}
             />
             <Input
-              placeholder="1234"
+              placeholder={PLACEHOLDER.cardNumber}
               value={fourth}
-              maxLength={4}
+              maxLength={MAX_LENGTH.cardNumber}
               onChange={setFourth}
               invalid={fourthError}
             />
           </>
         </InputField>
       </FormField>
-      <FormField
-        title="카드 유효기간을 입력해 주세요"
-        caption="월/년도(MMYY)를 순서대로 입력해 주세요."
-      >
-        <InputField label="유효기간" error={expirationErrorMessage}>
+      <FormField title={TITLE.expirationDate} caption={CAPTION.expirationDate}>
+        <InputField label={LABEL.expirationDate} error={expirationErrorMessage}>
           <>
             <Input
-              placeholder="MM"
+              placeholder={PLACEHOLDER.month}
               value={month}
-              maxLength={2}
+              maxLength={MAX_LENGTH.expirationDate}
               onChange={setMonth}
               invalid={monthError}
             />
             <Input
-              placeholder="YY"
+              placeholder={PLACEHOLDER.year}
               value={year}
-              maxLength={2}
+              maxLength={MAX_LENGTH.expirationDate}
               onChange={setYear}
               invalid={yearError}
             />
           </>
         </InputField>
       </FormField>
-      <FormField title="카드 소유자 이름을 입력해 주세요">
-        <InputField label="소유자 이름" error={userNameErrorMessage}>
+      <FormField title={TITLE.userName}>
+        <InputField label={LABEL.userName} error={userNameErrorMessage}>
           <Input
-            placeholder="LAST_NAME FIRST_NAME"
+            placeholder={PLACEHOLDER.userName}
             value={userNameState}
-            maxLength={20}
+            maxLength={MAX_LENGTH.userName}
             onChange={setUserNameState}
             invalid={userNameErrorState}
           />

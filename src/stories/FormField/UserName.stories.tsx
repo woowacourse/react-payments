@@ -2,7 +2,11 @@ import type { Meta, StoryObj } from '@storybook/react';
 import InputField from '../../components/InputField/InputField';
 import Input from '../../components/Input/Input';
 import FormField from '../../components/FormField/FormField';
-import { USER_NAME_ERROR_MESSAGE } from '../../hooks/useUserName';
+import MESSAGE from '../../constants/Message';
+import CONDITION from '../../constants/Condition';
+
+const { TITLE, LABEL, PLACEHOLDER, ERROR } = MESSAGE;
+const { MAX_LENGTH } = CONDITION;
 
 const meta = {
   title: 'FormField_UserName',
@@ -15,10 +19,10 @@ type Story = StoryObj<typeof meta>;
 
 export const UserNameDefault: Story = {
   args: {
-    title: '카드 소유자 이름을 입력해 주세요',
+    title: TITLE.userName,
     children: (
-      <InputField label="소유자 이름" error="">
-        <Input placeholder="LAST_NAME FIRST_NAME" value="" maxLength={20} />
+      <InputField label={LABEL.userName} error="">
+        <Input placeholder={PLACEHOLDER.userName} value="" maxLength={MAX_LENGTH.userName} />
       </InputField>
     ),
   },
@@ -26,10 +30,14 @@ export const UserNameDefault: Story = {
 
 export const UserNameValid: Story = {
   args: {
-    title: '카드 소유자 이름을 입력해 주세요',
+    title: TITLE.userName,
     children: (
-      <InputField label="소유자 이름" error="">
-        <Input placeholder="LAST_NAME FIRST_NAME" value="SIMO COOKIE" maxLength={20} />
+      <InputField label={LABEL.userName} error="">
+        <Input
+          placeholder={PLACEHOLDER.userName}
+          value="SIMO COOKIE"
+          maxLength={MAX_LENGTH.userName}
+        />
       </InputField>
     ),
   },
@@ -37,10 +45,15 @@ export const UserNameValid: Story = {
 
 export const UserNameLowerCaseTypeError: Story = {
   args: {
-    title: '카드 소유자 이름을 입력해 주세요',
+    title: TITLE.userName,
     children: (
-      <InputField label="소유자 이름" error={USER_NAME_ERROR_MESSAGE}>
-        <Input placeholder="LASTNAME FIRSTNAME" value="simo cookie" maxLength={20} invalid />
+      <InputField label={LABEL.userName} error={ERROR.userName}>
+        <Input
+          placeholder={PLACEHOLDER.userName}
+          value="simo cookie"
+          maxLength={MAX_LENGTH.userName}
+          invalid
+        />
       </InputField>
     ),
   },
@@ -48,10 +61,15 @@ export const UserNameLowerCaseTypeError: Story = {
 
 export const UserNameKoreanTypeError: Story = {
   args: {
-    title: '카드 소유자 이름을 입력해 주세요',
+    title: TITLE.userName,
     children: (
-      <InputField label="소유자 이름" error={USER_NAME_ERROR_MESSAGE}>
-        <Input placeholder="LASTNAME FIRSTNAME" value="시모 쿠키" maxLength={20} invalid />
+      <InputField label={LABEL.userName} error={ERROR.userName}>
+        <Input
+          placeholder={PLACEHOLDER.userName}
+          value="시모 쿠키"
+          maxLength={MAX_LENGTH.userName}
+          invalid
+        />
       </InputField>
     ),
   },
@@ -59,10 +77,15 @@ export const UserNameKoreanTypeError: Story = {
 
 export const UserNameJoinTypeError: Story = {
   args: {
-    title: '카드 소유자 이름을 입력해 주세요',
+    title: TITLE.userName,
     children: (
-      <InputField label="소유자 이름" error={USER_NAME_ERROR_MESSAGE}>
-        <Input placeholder="LASTNAME FIRSTNAME" value="SIMOCOOKIE" maxLength={20} invalid />
+      <InputField label={LABEL.userName} error={ERROR.userName}>
+        <Input
+          placeholder={PLACEHOLDER.userName}
+          value="SIMOCOOKIE"
+          maxLength={MAX_LENGTH.userName}
+          invalid
+        />
       </InputField>
     ),
   },

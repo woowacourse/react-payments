@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 
-const useInput = <T>(defaultValue: T, errorCondition: RegExp) => {
+const useInput = <T>(defaultValue: T, condition: RegExp) => {
   const [value, setValue] = useState<T>(defaultValue);
   const [error, setError] = useState<boolean>(false);
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setError(!errorCondition.test(event.currentTarget.value));
+    setError(!condition.test(event.currentTarget.value));
     setValue(event.currentTarget.value as T);
   };
 

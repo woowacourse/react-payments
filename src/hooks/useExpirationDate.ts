@@ -1,13 +1,11 @@
 import useInput from './useInput';
+import CONDITION from '../constants/Condition';
 
-const MONTH_CONDITION = /^(0[1-9]|1[0-2])$/;
-const YEAR_CONDITION = /^\d{2}$/;
-export const MONTH_ERROR_MESSAGE = '01~12 사이의 숫자를 입력해주세요.';
-export const YEAR_ERROR_MESSAGE = '2자리 숫자를 입력해주세요.';
+const { REG_EXP } = CONDITION;
 
 const useExpirationDate = (defaultValues: Array<number | undefined>) => {
-  const [month, setMonth, monthError] = useInput(defaultValues[0], MONTH_CONDITION);
-  const [year, setYear, yearError] = useInput(defaultValues[1], YEAR_CONDITION);
+  const [month, setMonth, monthError] = useInput(defaultValues[0], REG_EXP.month);
+  const [year, setYear, yearError] = useInput(defaultValues[1], REG_EXP.year);
 
   return {
     monthState: {

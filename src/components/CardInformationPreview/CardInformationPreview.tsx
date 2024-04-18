@@ -4,6 +4,7 @@ import visa from '../../assets/image/visa.svg';
 import masterCard from '../../assets/image/masterCard.svg';
 import theme from '../../styles/theme';
 import { CardNumberState, ExpirationDateState, ShowImageCondition } from '../../types/Types';
+import CONDITION from '../../constants/Condition';
 
 interface CardInformationPreviewProps {
   cardNumberState: CardNumberState;
@@ -39,14 +40,14 @@ const CardInformationPreview = ({
             {second}
           </Preview.UserInfomation>
           <Preview.UserInfomation $typo={theme.typography.cardNumber}>
-            {'*'.repeat(String(third ?? '').length)}
+            {CONDITION.hiddenCardNumber.repeat(String(third ?? '').length)}
           </Preview.UserInfomation>
           <Preview.UserInfomation $typo={theme.typography.cardNumber}>
-            {'*'.repeat(String(fourth ?? '').length)}
+            {CONDITION.hiddenCardNumber.repeat(String(fourth ?? '').length)}
           </Preview.UserInfomation>
         </Preview.CardNumberContainer>
         <Preview.UserInfomation $typo={theme.typography.cardExpirationDate}>
-          {`${month ?? ''}${slashViewCondition ? '/' : ''}${year ?? ''}`}
+          {`${month ?? ''}${slashViewCondition ? CONDITION.splitSlash : ''}${year ?? ''}`}
         </Preview.UserInfomation>
         <Preview.UserInfomation $typo={theme.typography.cardUserName}>
           {userNameState ?? ''}

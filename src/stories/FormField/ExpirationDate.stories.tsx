@@ -2,7 +2,11 @@ import type { Meta, StoryObj } from '@storybook/react';
 import InputField from '../../components/InputField/InputField';
 import Input from '../../components/Input/Input';
 import FormField from '../../components/FormField/FormField';
-import { MONTH_ERROR_MESSAGE, YEAR_ERROR_MESSAGE } from '../../hooks/useExpirationDate';
+import MESSAGE from '../../constants/Message';
+import CONDITION from '../../constants/Condition';
+
+const { TITLE, CAPTION, LABEL, PLACEHOLDER, ERROR } = MESSAGE;
+const { MAX_LENGTH } = CONDITION;
 
 const meta = {
   title: 'FormField_ExpirationDate',
@@ -15,13 +19,13 @@ type Story = StoryObj<typeof meta>;
 
 export const ExpirationDateDefault: Story = {
   args: {
-    title: '카드 유효기간을 입력해 주세요',
-    caption: '월/년도(MMYY)를 순서대로 입력해 주세요.',
+    title: TITLE.expirationDate,
+    caption: CAPTION.expirationDate,
     children: (
-      <InputField label="유효기간" error="">
+      <InputField label={LABEL.expirationDate} error="">
         <>
-          <Input placeholder="MM" value="" maxLength={2} />
-          <Input placeholder="YY" value="" maxLength={2} />
+          <Input placeholder={PLACEHOLDER.month} value="" maxLength={MAX_LENGTH.expirationDate} />
+          <Input placeholder={PLACEHOLDER.year} value="" maxLength={MAX_LENGTH.expirationDate} />
         </>
       </InputField>
     ),
@@ -30,13 +34,13 @@ export const ExpirationDateDefault: Story = {
 
 export const ExpirationDateValid: Story = {
   args: {
-    title: '카드 유효기간을 입력해 주세요',
-    caption: '월/년도(MMYY)를 순서대로 입력해 주세요.',
+    title: TITLE.expirationDate,
+    caption: CAPTION.expirationDate,
     children: (
-      <InputField label="유효기간" error="">
+      <InputField label={LABEL.expirationDate} error="">
         <>
-          <Input placeholder="MM" value="04" maxLength={2} />
-          <Input placeholder="YY" value="24" maxLength={2} />
+          <Input placeholder={PLACEHOLDER.month} value="04" maxLength={MAX_LENGTH.expirationDate} />
+          <Input placeholder={PLACEHOLDER.year} value="24" maxLength={MAX_LENGTH.expirationDate} />
         </>
       </InputField>
     ),
@@ -45,13 +49,18 @@ export const ExpirationDateValid: Story = {
 
 export const ExpirationDateMonthTypeError: Story = {
   args: {
-    title: '카드 유효기간을 입력해 주세요',
-    caption: '월/년도(MMYY)를 순서대로 입력해 주세요.',
+    title: TITLE.expirationDate,
+    caption: CAPTION.expirationDate,
     children: (
-      <InputField label="유효기간" error={MONTH_ERROR_MESSAGE}>
+      <InputField label={LABEL.expirationDate} error={ERROR.month}>
         <>
-          <Input placeholder="MM" value="13" maxLength={2} invalid />
-          <Input placeholder="YY" value="24" maxLength={2} />
+          <Input
+            placeholder={PLACEHOLDER.month}
+            value="13"
+            maxLength={MAX_LENGTH.expirationDate}
+            invalid
+          />
+          <Input placeholder={PLACEHOLDER.year} value="24" maxLength={MAX_LENGTH.expirationDate} />
         </>
       </InputField>
     ),
@@ -60,13 +69,18 @@ export const ExpirationDateMonthTypeError: Story = {
 
 export const ExpirationDateMonthLengthError: Story = {
   args: {
-    title: '카드 유효기간을 입력해 주세요',
-    caption: '월/년도(MMYY)를 순서대로 입력해 주세요.',
+    title: TITLE.expirationDate,
+    caption: CAPTION.expirationDate,
     children: (
-      <InputField label="유효기간" error={MONTH_ERROR_MESSAGE}>
+      <InputField label={LABEL.expirationDate} error={ERROR.month}>
         <>
-          <Input placeholder="MM" value="1" maxLength={2} invalid />
-          <Input placeholder="YY" value="24" maxLength={2} />
+          <Input
+            placeholder={PLACEHOLDER.month}
+            value="1"
+            maxLength={MAX_LENGTH.expirationDate}
+            invalid
+          />
+          <Input placeholder={PLACEHOLDER.year} value="24" maxLength={MAX_LENGTH.expirationDate} />
         </>
       </InputField>
     ),
@@ -75,13 +89,18 @@ export const ExpirationDateMonthLengthError: Story = {
 
 export const ExpirationDateYearTypeError: Story = {
   args: {
-    title: '카드 유효기간을 입력해 주세요',
-    caption: '월/년도(MMYY)를 순서대로 입력해 주세요.',
+    title: TITLE.expirationDate,
+    caption: CAPTION.expirationDate,
     children: (
-      <InputField label="유효기간" error={YEAR_ERROR_MESSAGE}>
+      <InputField label={LABEL.expirationDate} error={ERROR.year}>
         <>
-          <Input placeholder="MM" value="04" maxLength={2} />
-          <Input placeholder="YY" value="2d" maxLength={2} invalid />
+          <Input placeholder={PLACEHOLDER.month} value="04" maxLength={MAX_LENGTH.expirationDate} />
+          <Input
+            placeholder={PLACEHOLDER.year}
+            value="2d"
+            maxLength={MAX_LENGTH.expirationDate}
+            invalid
+          />
         </>
       </InputField>
     ),
@@ -90,13 +109,18 @@ export const ExpirationDateYearTypeError: Story = {
 
 export const ExpirationDateYearLengthError: Story = {
   args: {
-    title: '카드 유효기간을 입력해 주세요',
-    caption: '월/년도(MMYY)를 순서대로 입력해 주세요.',
+    title: TITLE.expirationDate,
+    caption: CAPTION.expirationDate,
     children: (
-      <InputField label="유효기간" error={YEAR_ERROR_MESSAGE}>
+      <InputField label={LABEL.expirationDate} error={ERROR.year}>
         <>
-          <Input placeholder="MM" value="04" maxLength={2} />
-          <Input placeholder="YY" value="1" maxLength={2} invalid />
+          <Input placeholder={PLACEHOLDER.month} value="04" maxLength={MAX_LENGTH.expirationDate} />
+          <Input
+            placeholder={PLACEHOLDER.year}
+            value="1"
+            maxLength={MAX_LENGTH.expirationDate}
+            invalid
+          />
         </>
       </InputField>
     ),

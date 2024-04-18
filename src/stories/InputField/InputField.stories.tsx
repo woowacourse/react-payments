@@ -18,9 +18,9 @@ export const Default: Story = {
     children: (
       <>
         <Input placeholder="1234" />
+        <Input placeholder="5678" />
         <Input placeholder="1234" />
-        <Input placeholder="1234" />
-        <Input placeholder="1234" />
+        <Input placeholder="5678" />
       </>
     ),
   },
@@ -33,9 +33,9 @@ export const Valid: Story = {
     children: (
       <>
         <Input placeholder="1234" value="1234" />
+        <Input placeholder="5678" value="5678" />
         <Input placeholder="1234" value="1234" />
-        <Input placeholder="1234" value="1234" />
-        <Input placeholder="1234" value="1234" />
+        <Input placeholder="5678" value="5678" />
       </>
     ),
   },
@@ -48,9 +48,9 @@ export const Error: Story = {
     children: (
       <>
         <Input placeholder="1234" value="simo" invalid />
-        <Input placeholder="1234" value="cookie" invalid />
+        <Input placeholder="5678" value="cookie" invalid />
         <Input placeholder="1234" value="1234" />
-        <Input placeholder="1234" value="1234" />
+        <Input placeholder="5678" value="5678" />
       </>
     ),
   },

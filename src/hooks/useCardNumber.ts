@@ -1,29 +1,25 @@
 import useInput from './useInput';
+import CONDITION from '../constants/Condition';
 
-const CARD_NUMBER_CONDITION = /^\d{4}$/;
-export const CARD_NUMBER_ERROR_MESSAGE = '4자리 숫자를 입력해주세요.';
+const { REG_EXP, showVisa, showMasterCard } = CONDITION;
 
 const useCardNumber = (defaultValues: Array<number | undefined>) => {
   const [first, setFirst, firstError] = useInput<number | undefined>(
     defaultValues[0],
-    CARD_NUMBER_CONDITION,
+    REG_EXP.cardNumber,
   );
   const [second, setSecond, secondError] = useInput<number | undefined>(
     defaultValues[1],
-    CARD_NUMBER_CONDITION,
+    REG_EXP.cardNumber,
   );
   const [third, setThird, thirdError] = useInput<number | undefined>(
     defaultValues[2],
-    CARD_NUMBER_CONDITION,
+    REG_EXP.cardNumber,
   );
   const [fourth, setFourth, fourthError] = useInput<number | undefined>(
     defaultValues[3],
-    CARD_NUMBER_CONDITION,
+    REG_EXP.cardNumber,
   );
-
-  const visaShowCondition = String(first)[0] === '4';
-  const masterCardShowCondition =
-    String(first)[0] === '5' && ['1', '2', '3', '4', '5'].includes(String(first)[1]);
 
   return {
     firstState: {
@@ -47,8 +43,8 @@ const useCardNumber = (defaultValues: Array<number | undefined>) => {
       fourthError,
     },
     showImageCondition: {
-      visaShowCondition,
-      masterCardShowCondition,
+      visaShowCondition: showVisa(first),
+      masterCardShowCondition: showMasterCard(first),
     },
   };
 };
