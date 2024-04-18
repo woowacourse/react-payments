@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Input from "./Input";
 import { TitleText, CaptionText, LabelText } from "../styles/common";
 import styled from "styled-components";

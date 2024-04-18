@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Visa from "../static/Visa.png";
 import Mastercard from "../static/Mastercard.png";
