@@ -39,11 +39,11 @@ function App() {
     <div css={appStyle}>
       <div css={appContainerStyle}>
         <CardImage cardNumber={cardNumber} cardPeriod={cardPeriod} cardOwner={cardOwner} />
-        <div css={appInputStyle}>
+        <form css={appInputStyle}>
           <InputGroup setState={setCardNumber} section="number" />
           <InputGroup setState={setCardPeriod} section="period" />
           <InputGroup setState={setCardOwner} section="owner" />
-        </div>
+        </form>
       </div>
     </div>
   );
