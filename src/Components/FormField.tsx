@@ -47,10 +47,11 @@ const FormField: React.FC<Props> = ({
             onChange={(e) => inputInfo.onInputChange(e, index)}
             sizePreset={sizePreset}
             placeholder={inputInfo.placeholder}
+            maxLength={inputInfo.maxLength}
           ></FormInput>
         ))}
       </div>
-      {formErrors[key].errorMessage && <Tooltip>{formErrors[key].errorMessage}</Tooltip>}
+      {formErrors[key].errorMessage ? <Tooltip>{formErrors[key].errorMessage}</Tooltip> : <Tooltip>{""}</Tooltip>}
     </div>
   );
 };

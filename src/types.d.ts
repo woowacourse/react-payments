@@ -33,6 +33,7 @@ type SizePresetType = "small" | "medium" | "large";
 interface InputInfo {
   name: string;
   placeholder: string;
+  maxLength: number;
   onInputChange: (e: any, index: number) => void;
 }
 
