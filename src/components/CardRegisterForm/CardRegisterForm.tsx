@@ -134,6 +134,7 @@ const CardRegisterForm = ({
             type="text"
             maxLength={30}
             onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              e.target.value = e.target.value.toUpperCase();
               onChangeOwnerName(e, 0);
             }}
           />

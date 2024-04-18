@@ -21,13 +21,16 @@ const CreditCardPreview = ({
     <S.CardWrapper>
       <S.FlexBox>
         <S.LogoBox color={theme.COLOR.gold}></S.LogoBox>
-        <S.LogoBox color={theme.COLOR.white}>
-          {cardType === "VISA" ? (
+
+        {cardType === "VISA" ? (
+          <S.LogoBox color={theme.COLOR.white}>
             <VisaLogo />
-          ) : cardType === "MASTER" ? (
+          </S.LogoBox>
+        ) : cardType === "MASTER" ? (
+          <S.LogoBox color={theme.COLOR.white}>
             <MasterLogo />
-          ) : null}
-        </S.LogoBox>
+          </S.LogoBox>
+        ) : null}
       </S.FlexBox>
 
       <S.CreditCardInfo>

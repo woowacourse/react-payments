@@ -5,15 +5,17 @@ import { makeStringArray } from "@/components/utils/arrayHelper";
 
 interface Props {
   initialValue: string[];
-  validate?: (input: string[]) => string;
-  maxLength?: number;
+  onBlurValidate?: (input: string[]) => string;
+  onChangeValidate?: (input: string[]) => string;
+  maxNumberLength?: number;
   validLength?: number;
 }
 
 const useInput = ({
   initialValue = [],
-  validate,
-  maxLength,
+  onBlurValidate,
+  onChangeValidate,
+  maxNumberLength: maxLength,
   validLength,
 }: Props) => {
   const [input, setInput] = useState<string[]>(initialValue);
@@ -34,6 +36,23 @@ const useInput = ({
 
     const newValue = event.target.value;
 
+    if (onChangeValidate) {
+      const errorMessage = onChangeValidate([newValue]);
+      if (errorMessage.length > 0) {
+        setErrorMessages((prev) => {
+          const newErrorMessages = [...prev];
+          newErrorMessages[index] = errorMessage;
+          return newErrorMessages;
+        });
+      } else {
+        setErrorMessages((prev) => {
+          const newErrorMessages = [...prev];
+          newErrorMessages[index] = "";
+          return newErrorMessages;
+        });
+      }
+    }
+
     setInput((prev) => {
       const newInput = [...prev];
       newInput[index] = newValue;
@@ -53,10 +72,9 @@ const useInput = ({
       }
     }
 
-    if (validate) {
-      const errorMessage = validate(input);
+    if (onBlurValidate) {
+      const errorMessage = onBlurValidate(input);
       if (errorMessage.length > 0) {
-        console.log("errorM", errorMessage);
         setErrorMessages((prev) => {
           const newErrorMessages = [...prev];
           newErrorMessages[index] = errorMessage;
