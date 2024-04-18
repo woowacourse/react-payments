@@ -27,12 +27,12 @@ export const MASKING = "•";
 export const CARD_BRAND = {
   MASTERCARD: {
     NAME: "MasterCard",
-    MIN_NUMBER: 40,
-    MAX_NUMBER: 49,
+    MIN_NUMBER: 51,
+    MAX_NUMBER: 55,
   },
   VISA: {
     NAME: "Visa",
-    MIN_NUMBER: 51,
-    MAX_NUMBER: 55,
+    MIN_NUMBER: 40,
+    MAX_NUMBER: 49,
   },
 };
