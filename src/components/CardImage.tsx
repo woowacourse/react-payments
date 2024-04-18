@@ -1,6 +1,8 @@
 import { css } from '@emotion/react';
 import { MASTERCARD, VISA } from '../assets';
-import { useState } from 'react';
+import { isRange } from '../util/isRange';
+import { CARD_INFORMATION } from '../constants/cardInformation';
+import { cardBrand, CardBrandType } from '../types/cardType';
 
 interface CardImageType {
   cardNumber: string[];
@@ -15,15 +17,15 @@ interface CardImageTableType {
 }
 
 function CardImage({ cardNumber, cardPeriod, cardOwner }: CardImageType) {
-  const cardType = (): 'visa' | 'masterCard' | 'noneImage' => {
-    if (cardNumber[0][0] === '4') {
-      return 'visa';
-    }
+  const cardBrandType = (): CardBrandType => {
     const startNumber = Number(cardNumber[0].substring(0, 2));
-    if (startNumber >= 51 && startNumber <= 55) {
-      return 'masterCard';
+    if (cardNumber[0][0] === CARD_INFORMATION.visa) {
+      return cardBrand.visa;
     }
-    return 'noneImage';
+    if (!isRange(startNumber, CARD_INFORMATION.masterCard.min, CARD_INFORMATION.masterCard.max)) {
+      return cardBrand.masterCard;
+    }
+    return cardBrand.noneImage;
   };
 
   const getCardImage = () => {
@@ -32,11 +34,11 @@ function CardImage({ cardNumber, cardPeriod, cardOwner }: CardImageType) {
       visa: VISA,
       noneImage: '',
     };
-    return cardImageTable[cardType()];
+    return cardImageTable[cardBrandType()];
   };
 
   const imageUrl = getCardImage();
-  // const [displayedNumbers, setDisplayedNumbers] = useState([...cardNumber]);
+
   const displayNumber = () => {
     return cardNumber.map((value: string, index: number) => {
       if (index === 2 || index === 3) {

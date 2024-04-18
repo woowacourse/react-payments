@@ -1,5 +1,6 @@
 import { ERROR_MESSAGE } from '../constants/errorMessage';
 import { VALIDATION } from '../constants/validation';
+import { isRange } from '../util/isRange';
 
 interface isValidateInputTableType {
   number: () => void;
@@ -54,7 +55,7 @@ function isNumber(value: number) {
 }
 
 function isInRange(value: number, min: number, max: number) {
-  if (value < min || value > max) {
+  if (isRange(value, min, max)) {
     throw new Error(ERROR_MESSAGE.notInRange(min, max));
   }
   return true;
