@@ -20,8 +20,8 @@ const CardPreview = ({ cardNumbers, expiryDate, cardholderName }: CardPreviewPro
       <HeaderWrapper>
         <CardMagnetic />
         <BrandImageWrapper>
-          {isVisa && <StyledImage src={MasterCard} />}
-          {isMaster && <StyledImage src={VisaCard} />}
+          {isVisa && <StyledImage src={VisaCard} />}
+          {isMaster && <StyledImage src={MasterCard} />}
         </BrandImageWrapper>
       </HeaderWrapper>
       <BodyWrapper>
@@ -124,7 +124,6 @@ const ExpiryDateWrapper = styled.div`
 const CardholderNameWrapper = styled.div`
   display: flex;
   align-items: center;
-  flex-basis: 20%;
   font-size: 20px;
 `;
 
