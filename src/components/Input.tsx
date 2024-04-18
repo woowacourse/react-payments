@@ -21,9 +21,11 @@ function Input({ isPassword, keyProp, type, placeholder, setState, setErrorMessa
       setState(value);
       setErrorMessage('');
       setIsError(false);
-    } catch (error: Error) {
-      setErrorMessage(error.message);
-      setIsError(true);
+    } catch (error) {
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+        setIsError(true);
+      }
     }
   };
 
