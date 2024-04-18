@@ -22,7 +22,7 @@ const CardLogo = ({ cardNumbers }: { cardNumbers: CardInfo[] }) => {
   const firstCardNumberObject = cardNumbers
     .slice()
     .reverse()
-    .find((item) => item.index === 0);
+    .find((item) => item.index === "0");
   if (!firstCardNumberObject) {
     cardType = "";
   } else {
