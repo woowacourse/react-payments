@@ -1,5 +1,5 @@
 interface PaymentsInputFieldProps {
-  ref: React.RefObject<HTMLInputElement>;
+  ref?: React.RefObject<HTMLInputElement>;
   className?: string;
   placeholder?: string;
   maxLength?: number;
@@ -8,6 +8,7 @@ interface PaymentsInputFieldProps {
   handleValueChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleOnFocus?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleOnBlur?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  width?: number;
 }
 
 interface PaymentsFormTitleProps {
