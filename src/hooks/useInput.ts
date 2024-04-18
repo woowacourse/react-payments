@@ -1,28 +1,14 @@
 import { useState } from 'react';
-import { InitialState } from '../App';
 
-const useInput = (
-  initialState: InitialState,
-  isValid: (e: React.ChangeEvent<HTMLInputElement>) => boolean,
-) => {
-  const [inputState, setInputState] = useState(initialState);
+const useInput = () => {
+  const [inputState, setInputState] = useState('');
+  const [error, setError] = useState(false);
 
   const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (isValid(e)) {
-      setInputState({
-        value: e.target.value,
-        isError: true,
-      });
-      return;
-    }
-
-    setInputState({
-      value: e.target.value,
-      isError: false,
-    });
+    setInputState(e.target.value.toUpperCase());
   };
 
-  return { inputState, inputChangeHandler };
+  return { inputState, inputChangeHandler, error, setError };
 };
 
 export default useInput;
