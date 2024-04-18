@@ -32,6 +32,7 @@ const CardRegisterForm = ({
     input: expirationPeriod,
     onChange: onChangeExpirationPeriod,
     errorMessages: expirationPeriodErrorMessages,
+    onBlur: onBlurExpirationPeriod,
   } = expiredPeriodState;
 
   const { onChange: onChangeOwnerName, errorMessages: ownerErrorMessages } =
@@ -105,6 +106,9 @@ const CardRegisterForm = ({
               placeholder={expirationPlaceholder[index]}
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
                 onChangeExpirationPeriod(e, index);
+              }}
+              onBlur={(e: FocusEvent<Element, Element>) => {
+                onBlurExpirationPeriod(e, index);
               }}
               isError={
                 findFirstErrorMessageIndex(expirationPeriodErrorMessages) ===

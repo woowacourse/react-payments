@@ -33,27 +33,10 @@ const useInput = ({
     }
 
     const newValue = event.target.value;
+
     setInput((prev) => {
       const newInput = [...prev];
       newInput[index] = newValue;
-
-      if (validate) {
-        const validationError = validate(newInput);
-        if (validationError) {
-          setErrorMessages((prev) => {
-            const newErrorMessages = [...prev];
-            newErrorMessages[index] = "유효하지 않은 입력입니다.";
-            return newErrorMessages;
-          });
-        } else {
-          setErrorMessages((prev) => {
-            const newErrorMessages = [...prev];
-            newErrorMessages[index] = "";
-            return newErrorMessages;
-          });
-        }
-      }
-
       return newInput;
     });
   };
@@ -69,6 +52,26 @@ const useInput = ({
         return;
       }
     }
+
+    if (validate) {
+      const errorMessage = validate(input);
+      if (errorMessage.length > 0) {
+        console.log("errorM", errorMessage);
+        setErrorMessages((prev) => {
+          const newErrorMessages = [...prev];
+          newErrorMessages[index] = errorMessage;
+          return newErrorMessages;
+        });
+      } else {
+        setErrorMessages((prev) => {
+          const newErrorMessages = [...prev];
+          newErrorMessages[index] = "";
+          return newErrorMessages;
+        });
+      }
+      return;
+    }
+
     setErrorMessages((prev) => {
       const newErrorMessages = [...prev];
       newErrorMessages[index] = "";
