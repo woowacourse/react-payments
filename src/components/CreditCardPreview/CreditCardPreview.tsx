@@ -3,7 +3,7 @@ import MasterLogo from "@/assets/MasterLogo.svg?react";
 import VisaLogo from "@/assets/VisaLogo.svg?react";
 import { theme } from "@/style/theme";
 
-type CardType = "VISA" | "MASTER";
+type CardType = "VISA" | "MASTER" | "NONE";
 
 interface Props {
   cardType: CardType;
@@ -22,7 +22,11 @@ const CreditCardPreview = ({
       <S.FlexBox>
         <S.LogoBox color={theme.COLOR.gold}></S.LogoBox>
         <S.LogoBox color={theme.COLOR.white}>
-          {cardType === "VISA" ? <VisaLogo /> : <MasterLogo />}
+          {cardType === "VISA" ? (
+            <VisaLogo />
+          ) : cardType === "MASTER" ? (
+            <MasterLogo />
+          ) : null}
         </S.LogoBox>
       </S.FlexBox>
 

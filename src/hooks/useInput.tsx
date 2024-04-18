@@ -25,7 +25,6 @@ const useInput = ({ initialValue = [], validate }: Props) => {
       const newInput = [...prev];
       newInput[index] = newValue;
 
-      // 새 입력값으로 상태를 업데이트한 직후 검증 로직을 호출
       if (validate) {
         const validationError = validate(newInput);
         if (validationError) {
@@ -37,36 +36,7 @@ const useInput = ({ initialValue = [], validate }: Props) => {
 
       return newInput;
     });
-    // const inputValue = event.target.value;
-
-    // console.log("aaa");
-
-    // const isError = errorMessage !== "";
-    // if (isError) return [];
-
-    // if (validate) {
-    //   // console.log("aa");
-    //   setErrorMessage(validate(input));
-    // }
-
-    // setInput((prev) => {
-    //   const copy = [...prev];
-    //   copy[index] = inputValue;
-    //   return copy;
-    // });
   };
-
-  // const onBlur: React.FocusEventHandler<HTMLInputElement> = (event) => {
-  //   console.log(event.target);
-  //   const InputElement = event.target as HTMLInputElement & {
-  //     $isError: boolean;
-  //   };
-  //   InputElement.$isError = true;
-  //   if (validate) {
-  //     console.log(event.target);
-  //     setErrorMessage(validate(input));
-  //   }
-  // };
 
   return { input, onChange, errorMessage };
 };

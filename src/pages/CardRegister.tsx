@@ -28,11 +28,24 @@ const CardRegister = () => {
     initialValue: [""],
   });
 
+  const checkCardBrand = (cardNumbers: string[]) => {
+    if (cardNumbers[0][0] === "4") {
+      return "VISA";
+    }
+    if (
+      Number(cardNumbers[0].slice(0, 2)) <= 55 &&
+      Number(cardNumbers[0].slice(0, 2)) >= 51
+    ) {
+      return "MASTER";
+    }
+    return "NONE";
+  };
+
   return (
     <S.CardRegisterWrapper>
       <S.FlexWrapper>
         <CreditCardPreview
-          cardType="VISA"
+          cardType={checkCardBrand(cardNumbersState.input)}
           cardNumbers={cardNumbersState.input}
           expirationDate={
             expiredDateState.input[0] && expiredDateState.input.join("/")

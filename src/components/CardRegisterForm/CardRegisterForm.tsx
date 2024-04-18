@@ -55,6 +55,7 @@ const CardRegisterForm = ({
         >
           {cardNumbers.map((_, index) => (
             <Input
+              type="number"
               key={index}
               placeholder={PLACE_HOLDER.CARD_NUMBERS}
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
@@ -80,6 +81,7 @@ const CardRegisterForm = ({
         >
           {expirationPeriod.map((_, index) => (
             <Input
+              type="number"
               key={index}
               placeholder={expirationPlaceholder[index]}
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
