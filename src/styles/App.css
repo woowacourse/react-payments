@@ -12,6 +12,7 @@
   background-color: #ffffff;
   max-width: 480px;
   min-height: 100vh;
+  font-family: 'Noto Sans KR', sans-serif;
 }
 
 #app > .inner {

@@ -4,6 +4,7 @@
   align-items: center;
   width: 100%;
   height: calc(15.875rem - 1.1875rem * 2);
+  font-family: 'Inter', sans-serif;
 }
 .cardImg {
   -webkit-box-shadow: 0px 0px 1.1875rem 0.1875rem rgba(70, 70, 70, 0.43);
