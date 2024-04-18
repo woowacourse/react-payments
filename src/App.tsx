@@ -1,4 +1,4 @@
-import NewCardInput from "./pages/NewCardInput";
+import NewCardInputPage from "./pages/NewCardInputPage";
 
 import AppLayout from "./components/layout/AppLayout";
 
@@ -11,7 +11,7 @@ function App() {
       <GlobalStyle />
 
       <AppLayout>
-        <NewCardInput />
+        <NewCardInputPage />
       </AppLayout>
     </>
   );
