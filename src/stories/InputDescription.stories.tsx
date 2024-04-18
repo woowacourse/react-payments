@@ -1,19 +1,18 @@
-import { Meta, StoryFn } from "@storybook/react";
-import InputDescription, {
-  InputDescriptionInterface,
-} from "../components/Form/InputDescription";
+import { Meta, StoryObj } from "@storybook/react";
+import InputDescription from "../components/Form/InputDescription";
 
-export default {
+const meta = {
   title: "InputDescription",
   component: InputDescription,
-} as Meta;
+} satisfies Meta<typeof InputDescription>;
 
-const Template: StoryFn<InputDescriptionInterface> = (args) => (
-  <InputDescription {...args} />
-);
+export default meta;
 
-export const Default = Template.bind({});
-Default.args = {
-  title: "Title",
-  description: "Description",
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: {
+    title: "Title",
+    description: "Description",
+  },
 };

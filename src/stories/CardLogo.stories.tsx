@@ -1,21 +1,22 @@
 import { Meta, StoryObj } from "@storybook/react";
 import CardLogo from "../components/Card/CardLogo";
 
-export default {
+const meta = {
   title: "CardLogo",
   component: CardLogo,
-} as Meta;
+} satisfies Meta<typeof CardLogo>;
 
-type Story = StoryObj<typeof CardLogo>;
+export default meta;
 
-const Template: Story["template"] = (args) => <CardLogo {...args} />;
+type Story = StoryObj<typeof meta>;
 
-export const Default = Template.bind({});
-Default.args = {
-  cardNumbers: [
-    { index: "0", currentValue: "4" },
-    { index: "1", currentValue: "5678" },
-    { index: "2", currentValue: "9012" },
-    { index: "3", currentValue: "3456" },
-  ],
+export const Default: Story = {
+  args: {
+    cardNumbers: [
+      { index: 0, currentValue: "4" },
+      { index: 1, currentValue: "5678" },
+      { index: 2, currentValue: "9012" },
+      { index: 3, currentValue: "3456" },
+    ],
+  },
 };

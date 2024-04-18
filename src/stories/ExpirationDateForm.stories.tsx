@@ -1,19 +1,20 @@
 import { Meta, StoryObj } from "@storybook/react";
 import ExpirationDateForm from "../components/Form/ExpirationDateForm";
 
-export default {
+const meta = {
   title: "ExpirationDateForm",
   component: ExpirationDateForm,
-} as Meta;
+} satisfies Meta<typeof ExpirationDateForm>;
 
-type Story = StoryObj<typeof ExpirationDateForm>;
+export default meta;
 
-const Template: Story["template"] = (args) => <ExpirationDateForm {...args} />;
+type Story = StoryObj<typeof meta>;
 
-export const Default = Template.bind({});
-Default.args = {
-  labelContent: "Expiration Date",
-  inputCount: 2,
-  type: "text",
-  placeholders: ["MM", "YY"],
+export const Default: Story = {
+  args: {
+    labelContent: "Expiration Date",
+    inputCount: 2,
+    type: "text",
+    placeholders: ["MM", "YY"],
+  },
 };
