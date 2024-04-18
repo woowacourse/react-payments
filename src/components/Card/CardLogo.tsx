@@ -22,7 +22,7 @@ const CardLogo = ({ cardNumbers }: { cardNumbers: CardInfo[] }) => {
   const firstCardNumberObject = cardNumbers
     .slice()
     .reverse()
-    .find((item) => item.index === 0);
+    .find((item) => item.index === "0");
   if (!firstCardNumberObject) {
     cardType = "";
   } else {
@@ -40,8 +40,7 @@ const CardLogo = ({ cardNumbers }: { cardNumbers: CardInfo[] }) => {
     }
   }
 
-  if (cardType === Visa || cardType === MasterCard)
-    return <CardLogoWrapper src={cardType} />;
+  if (cardType === Visa || cardType === MasterCard) return <CardLogoWrapper src={cardType} />;
 };
 
 export default CardLogo;

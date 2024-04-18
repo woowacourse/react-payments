@@ -16,11 +16,7 @@ const PaymentApp = () => {
 
   return (
     <PaymentAppStyled>
-      <CardPreview
-        cardNumbers={cardNumbers}
-        expirationDate={expirationDate}
-        userName={userName}
-      />
+      <CardPreview cardNumbers={cardNumbers} expirationDate={expirationDate} userName={userName} />
       <Form
         setCardNumbers={setCardNumbers}
         setExpirationDate={setExpirationDate}

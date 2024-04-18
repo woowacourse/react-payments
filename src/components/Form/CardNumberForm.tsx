@@ -51,20 +51,12 @@ const CardNumberForm = ({
       maxLength={4}
       setErrorMessage={setErrorMessage}
       setData={setCardNumbers ? setCardNumbers : () => {}}
-      setAllInputValid={(isValid) =>
-        updateInputValidity(index.toString(), isValid)
-      }
+      setAllInputValid={(isValid) => updateInputValidity(index.toString(), isValid)}
       validationRule={(value) => /^[0-9]{4}$/.test(value)}
     />
   ));
 
-  return (
-    <FormElement
-      labelContent={labelContent}
-      inputs={inputs}
-      errorMessage={errorMessage}
-    />
-  );
+  return <FormElement labelContent={labelContent} inputs={inputs} errorMessage={errorMessage} />;
 };
 
 export default CardNumberForm;

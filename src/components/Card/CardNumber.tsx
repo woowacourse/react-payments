@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const CardNumber = ({ number }:{number:string}) => {
+const CardNumber = ({ number }: { number: string }) => {
   return <CardNumberWrapper>{number}</CardNumberWrapper>;
 };
 

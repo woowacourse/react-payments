@@ -2,7 +2,6 @@ import styled from "styled-components";
 import CardNumber from "./CardNumber";
 import { CardInfo } from "../PaymentApp";
 
-
 const CardNumbers = ({ cardNumbers }: { cardNumbers: CardInfo[] }) => {
   const latestCardNumbers: { [key: number]: string } = {};
 
