@@ -5,9 +5,10 @@ type OwnerNameInputProps = Omit<InputProps, 'placeholder' | 'type' | 'maxLength'
   placeholder: string;
 };
 
-const OwnerNameInput: React.FC<OwnerNameInputProps> = ({ isError = false, value, onAddOwnerName }) => {
+const OwnerNameInput: React.FC<OwnerNameInputProps> = ({ isError = false, value, onAddOwnerName, id }) => {
   return (
     <Input
+      id={id}
       maxLength={50}
       type="text"
       placeholder="JOHN DOE"

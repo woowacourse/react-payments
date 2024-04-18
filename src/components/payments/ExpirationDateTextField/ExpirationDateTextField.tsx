@@ -18,9 +18,10 @@ const ExpirationDateTextField: React.FC<ExpirationDateTextFieldProps> = ({
     <section>
       <TextField.Title title="카드 유효기간을 입력해 주세요" />
       <TextField.SubTitle subTitle="월/년도(MMYY)를 순서대로 입력해 주세요." />
-      <TextField.Label labelText="유효 기간" />
+      <TextField.Label htmlFor="expiration" labelText="유효 기간" />
       <TextField.Content>
         <ExpirationDateInput
+          id="expiration"
           placeholder="MM"
           isError={expirationError.isError}
           value={month}

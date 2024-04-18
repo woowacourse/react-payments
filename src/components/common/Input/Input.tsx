@@ -16,6 +16,7 @@ export interface InputProps {
   maxLength?: number;
   placeholder: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
+  id?: string;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -25,12 +26,14 @@ const Input: React.FC<InputProps> = ({
   placeholder,
   value,
   onChange,
+  id,
 }) => {
   const errorInputClass = `${isError ? styles.errorInput : ''}`;
 
   return (
     <input
       className={`${styles.inputStyle} ${errorInputClass}`}
+      id={id}
       maxLength={maxLength}
       type={type}
       placeholder={placeholder}

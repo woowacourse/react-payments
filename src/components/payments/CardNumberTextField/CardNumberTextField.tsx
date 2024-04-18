@@ -16,10 +16,11 @@ const CardNumberTextField: React.FC<CardNumberTextFieldProps> = ({
     <section>
       <TextField.Title title="결제할 카드 번호를 입력해 주세요" />
       <TextField.SubTitle subTitle="본인 명의의 카드만 결제 가능합니다." />
-      <TextField.Label labelText="카드 번호" />
+      <TextField.Label htmlFor="cardNumber" labelText="카드 번호" />
       <TextField.Content>
         {cardNumberParts.map((number, index) => (
           <CardNumberInput
+            id={index === 0 ? 'cardNumber' : ''}
             key={index}
             isError={cardNumberError.isError}
             value={number}

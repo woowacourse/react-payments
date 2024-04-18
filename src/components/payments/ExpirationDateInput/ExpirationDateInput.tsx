@@ -10,9 +10,11 @@ const ExpirationDateInput: React.FC<ExpirationDateInputProps> = ({
   value,
   placeholder,
   onAddExpirationDate,
+  id,
 }) => {
   return (
     <Input
+      id={id}
       maxLength={2}
       type="number"
       placeholder={placeholder}
