@@ -1,5 +1,5 @@
 import styled, { CSSProperties } from "styled-components";
-import { ellipse } from "../../assets/image";
+import ellipse from "../../assets/ellipse.png";
 
 interface CardTextProps {
   text: string;

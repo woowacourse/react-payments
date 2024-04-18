@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { CARD_NUMBER } from "../constants/card-app";
-import { visaCard, masterCard } from "../assets/image";
+import visaCard from "../assets/visaCard.png";
+import masterCard from "../assets/masterCard.png";
 
 const cardImages = {
   visa: visaCard,
