@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Field from '../common/Field/Field';
+import Field from '../layout/Field/Field';
 import Input from '../common/Input/Input';
 
 import { ERRORS, ADD_CARD_FORM_FIELDS } from '../../constants/messages';

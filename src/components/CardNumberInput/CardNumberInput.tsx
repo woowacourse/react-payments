@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+
 import Input from '../common/Input/Input';
-import Field from '../common/Field/Field';
+import Field from '../layout/Field/Field';
+
 import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../constants/messages';
 
 interface CardNumbers {

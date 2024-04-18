@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+
 import Input from '../common/Input/Input';
-import Field from '../common/Field/Field';
+import Field from '../layout/Field/Field';
+
 import { ERRORS, ADD_CARD_FORM_FIELDS } from '../../constants/messages';
 
 interface ExpirationDate {
