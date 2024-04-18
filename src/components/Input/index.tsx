@@ -5,19 +5,22 @@ import useInput, { UseInputProps } from './useInput';
 
 interface InputProps
   extends React.HTMLProps<HTMLInputElement>,
-    Omit<UseInputProps, 'initialValue'> {}
+    Omit<UseInputProps, 'initialValue'> {
+  error: boolean;
+}
 
 function Input(props: InputProps) {
-  const { maxLength } = props;
+  const { maxLength, error } = props;
 
   const { value, handleChange } = useInput({
     initialValue: undefined,
     maxLength,
   });
+  const className = `${styles.input} ${error ? styles.error : ''}`;
 
   return (
     <input
-      className={styles.input}
+      className={className}
       {...props}
       value={value}
       onChange={handleChange}

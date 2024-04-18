@@ -62,6 +62,7 @@ export default function CardUserNameInput(props: CardUserNameInputProps) {
               type="text"
               placeholder={namePlaceholder}
               maxLength={length}
+              error={error}
             />
           </div>
           <FormErrorMessage errorMessage={getErrorMessage()} />

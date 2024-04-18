@@ -1,5 +1,4 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import styles from './style.module.css';
 
 import {
   CARD_NUMBERS,
@@ -11,6 +10,8 @@ import CardInput from '../CardInput';
 import CardInputContainer from '../CardInputContainer';
 import FormErrorMessage from '../FormErrorMessage';
 import Input from '../Input';
+
+import styles from './style.module.css';
 
 const NUMBERS_NAME_PREFIX = 'numbers_';
 
@@ -28,6 +29,10 @@ export default function CardNumbersInput(props: CardNumbersInputProps) {
     (number | undefined)[]
   >(Array.from({ length }, () => undefined));
 
+  const [numbersError, setNumbersError] = useState<boolean[]>(
+    Array.from({ length }, () => false),
+  );
+
   const pickCardMark = (): CardMark => {
     const numberText = validatedNumbers.join('');
 
@@ -40,22 +45,30 @@ export default function CardNumbersInput(props: CardNumbersInputProps) {
     return 'etc';
   };
 
-  const isValidatedCardNumber = () => validatedNumbers.every((i) => i);
+  const changeNumbersError = (newNumbers: (number | undefined)[]) => {
+    const newNumbersError = newNumbers.map((item) => !item);
+
+    setNumbersError(newNumbersError);
+  };
+
+  const changeNumbersState = (index: number, value: string) => {
+    const regex = new RegExp(`^[${startNumber}-${endNumber}]{${length}}$`);
+    const newNumbers = [...validatedNumbers];
+    newNumbers[index] = regex.test(value) ? Number(value) : undefined;
+
+    setValidatedNumbers(newNumbers);
+    changeNumbersError(newNumbers);
+  };
+
+  const isValidatedCardNumber = () => numbersError.every((i) => !i);
 
   const validateCardNumber = (event: ChangeEvent<HTMLInputElement>) => {
     if (!(event.target instanceof HTMLInputElement)) return;
 
     const { value, name } = event.target;
     const index = Number(name.replace(NUMBERS_NAME_PREFIX, ''));
-    const regex = new RegExp(`^[${startNumber}-${endNumber}]{${length}}$`);
 
-    // TODO: 함수로 빼기
-    setValidatedNumbers((prev) => {
-      const newNumbers = [...prev];
-      newNumbers[index] = regex.test(value) ? Number(value) : undefined;
-
-      return newNumbers;
-    });
+    changeNumbersState(index, value);
   };
 
   const getErrorMessage = () => {
@@ -78,6 +91,7 @@ export default function CardNumbersInput(props: CardNumbersInputProps) {
               name={`${NUMBERS_NAME_PREFIX}${index}`}
               type="text"
               maxLength={length}
+              error={numbersError[index]}
             />
           ))}
         </div>

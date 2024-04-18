@@ -4,3 +4,7 @@
   border-radius: 6px;
   padding: 0.5rem;
 }
+
+.error {
+  border-color: #ff3d3d;
+}

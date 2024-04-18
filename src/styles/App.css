@@ -1,6 +1,7 @@
 #root {
   background-color: #f8f8f8;
   width: 100%;
+  height: 100vh;
 }
 
 #app {
@@ -10,7 +11,7 @@
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
   background-color: #ffffff;
   max-width: 480px;
-  height: 100vh;
+  height: 100%;
 }
 
 #app > .inner {
