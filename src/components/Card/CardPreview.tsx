@@ -23,9 +23,11 @@ const CardPreview = ({
           <ICChip />
           <CardLogo cardNumbers={cardNumbers} />
         </div>
-        <CardNumbers cardNumbers={cardNumbers} />
-        <ExpirationDate expirationDate={expirationDate} />
-        <UserName userName={userName} />
+        <div style={{display: "grid", gap: "8px" }}>
+          <CardNumbers cardNumbers={cardNumbers} />
+          <ExpirationDate expirationDate={expirationDate} />
+          <UserName userName={userName} />
+        </div>
       </CardFrame>
     </>
   );
@@ -37,7 +39,7 @@ const CardFrame = styled.div`
   width: 202px;
   height: 117px;
   display: grid;
-  gap-column: 10px;
+  gap: 10px;
   border-radius: 5px;
   box-shadow: 3px 3px 5px 0px #00000040;
 `;

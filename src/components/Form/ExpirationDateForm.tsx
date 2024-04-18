@@ -16,19 +16,19 @@ const ExpirationDateForm = ({
   const [errorMessage, setErrorMessage] = useState("");
   const [inputValidities, setInputValidities] = useState({});
 
-  const validateMonth = (value) => {
+  const validateMonth = (value: string) => {
     const regex = /^(0[1-9]|1[0-2]|1[0-9])$/;
 
     return regex.test(value);
   };
 
-  const validateYear = (value) => {
+  const validateYear = (value: string) => {
     const intValue = Number(value);
     return !isNaN(intValue) && intValue >= 24 && intValue <= 29;
   };
 
   // NOTE: 각 입력 필드의 유효성 검사 결과를 업데이트
-  const updateInputValidity = (index, isValid) => {
+  const updateInputValidity = (index: string, isValid: boolean) => {
     setInputValidities((prevValidities) => ({
       ...prevValidities,
       [index]: isValid,
@@ -50,8 +50,8 @@ const ExpirationDateForm = ({
       placeholder={placeholders[index]}
       maxLength={2}
       setErrorMessage={setErrorMessage}
-      setData={setExpirationDate}
-      setIsInputValid={(isValid) =>
+      setData={setExpirationDate ? setExpirationDate : () => {}}
+      setAllInputValid={(isValid: boolean) =>
         updateInputValidity(index.toString(), isValid)
       }
       validationRule={(value) =>

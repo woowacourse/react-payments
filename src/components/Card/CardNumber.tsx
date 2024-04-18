@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const CardNumber = ({ number }) => {
+const CardNumber = ({ number }:{number:string}) => {
   return <CardNumberWrapper>{number}</CardNumberWrapper>;
 };
 
@@ -9,7 +9,6 @@ const CardNumberWrapper = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
-
 `;
 
 export default CardNumber;

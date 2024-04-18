@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { CardInfo } from "../PaymentApp";
 
 const ExpirationDate = ({ expirationDate }: { expirationDate: CardInfo[] }) => {
-  const latestNumbers = {};
+  const latestNumbers: { [key: number]: string } = {};
 
   expirationDate.forEach((expirationInfo) => {
     const index = Number(expirationInfo.index);
@@ -10,10 +10,12 @@ const ExpirationDate = ({ expirationDate }: { expirationDate: CardInfo[] }) => {
     latestNumbers[index] = expirationInfo.currentValue;
   });
 
-  const latestNumbersKeys = Object.keys(latestNumbers);
+  const latestNumbersKeys: number[] = Object.keys(latestNumbers).map(Number);
 
   return (
-    <div style={{ display: "flex", justifyContent: "flex-start" }}>
+    <div
+      style={{ display: "flex", justifyContent: "flex-start", height: "20px" }}
+    >
       {Object.keys(latestNumbers).length !== 0 && (
         <>
           <ExpirationDateStyled key={latestNumbersKeys[0]}>

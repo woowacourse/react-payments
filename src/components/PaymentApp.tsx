@@ -10,9 +10,9 @@ export interface CardInfo {
 }
 
 const PaymentApp = () => {
-  const [cardNumbers, setCardNumbers] = useState<CardInfo[]>([{}]);
-  const [expirationDate, setExpirationDate] = useState<CardInfo[]>([{}]);
-  const [userName, setUserName] = useState<CardInfo[]>([{}]);
+  const [cardNumbers, setCardNumbers] = useState<CardInfo[]>([]);
+  const [expirationDate, setExpirationDate] = useState<CardInfo[]>([]);
+  const [userName, setUserName] = useState<CardInfo[]>([]);
 
   return (
     <PaymentAppStyled>

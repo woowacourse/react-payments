@@ -17,7 +17,7 @@ const UserNameForm = ({
   const [inputValidities, setInputValidities] = useState({});
 
   // NOTE: 각 입력 필드의 유효성 검사 결과를 업데이트
-  const updateInputValidity = (index, isValid) => {
+  const updateInputValidity = (index: string, isValid: boolean) => {
     setInputValidities((prevValidities) => ({
       ...prevValidities,
       [index]: isValid,
@@ -33,7 +33,7 @@ const UserNameForm = ({
     );
   }, [inputValidities]);
 
-  const validateName = (nameInput) => {
+  const validateName = (nameInput: string) => {
     const regex = /^[A-Z\s]{1,30}$/;
     return regex.test(nameInput);
   };
@@ -51,7 +51,6 @@ const UserNameForm = ({
         updateInputValidity(index.toString(), isValid)
       }
       validationRule={(value) => validateName(value)}
-      errorMessageText="이름은 30자 이하의 영문 대문자여야 합니다."
     />
   ));
 

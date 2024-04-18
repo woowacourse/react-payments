@@ -28,7 +28,7 @@ const CardNumberForm = ({
   const [inputValidities, setInputValidities] = useState({});
 
   // NOTE: 각 입력 필드의 유효성 검사 결과를 업데이트하는 함수
-  const updateInputValidity = (index, isValid) => {
+  const updateInputValidity = (index: string, isValid: boolean) => {
     setInputValidities((prevValidities) => ({
       ...prevValidities,
       [index]: isValid,
@@ -50,7 +50,7 @@ const CardNumberForm = ({
       placeholder={placeholders[index]}
       maxLength={4}
       setErrorMessage={setErrorMessage}
-      setData={setCardNumbers}
+      setData={setCardNumbers ? setCardNumbers : () => {}}
       setAllInputValid={(isValid) =>
         updateInputValidity(index.toString(), isValid)
       }

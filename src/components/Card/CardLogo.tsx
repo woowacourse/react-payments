@@ -18,11 +18,11 @@ const CardLogo = ({ cardNumbers }: { cardNumbers: CardInfo[] }) => {
   if (!cardNumbers || cardNumbers.length === 0) {
     return;
   }
- 
+
   const firstCardNumberObject = cardNumbers
     .slice()
     .reverse()
-    .find((item) => item.index === "0");
+    .find((item) => item.index === 0);
   if (!firstCardNumberObject) {
     cardType = "";
   } else {

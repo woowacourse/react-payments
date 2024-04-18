@@ -31,14 +31,14 @@ const Input = ({
   const [isValidInput, setIsValidInput] = useState(true);
 
   const inputChangeHandler = (e) => {
-    const currentValue = e.target.value;
+    const newValue = e.target.value;
 
-    setCurrentValue(currentValue);
+    setCurrentValue(newValue);
 
-    const newCardInfo: CardInfo = { index, currentValue };
+    const newCardInfo: CardInfo = { index, newValue };
     setData((prevCardNumbers) => [...prevCardNumbers, newCardInfo]);
 
-    if (!validationRule(currentValue)) {
+    if (!validationRule(newValue)) {
       setErrorMessage(errorMessageText);
       setIsValidInput(false);
       setAllInputValid(false);
