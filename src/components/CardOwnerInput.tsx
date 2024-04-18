@@ -17,11 +17,6 @@ function CardOwnerInput({ setOwner }: CardOwnerInputProps) {
   const validateOwner = (value: string) => {
     const regExp = CARD_OWNER.VALID_REGEX;
 
-    if (value.length === 0) {
-      setErrorMessage('');
-      return true;
-    }
-
     if (!regExp.test(value)) {
       setErrorMessage(ERROR_MESSAGE.INVALID_CARD_OWNER_CHARACTER);
       return false;
@@ -37,14 +32,10 @@ function CardOwnerInput({ setOwner }: CardOwnerInputProps) {
   };
 
   const onOwnerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!validateOwner(e.target.value)) {
-      setIsValid(false);
-      setOwner('');
-      return;
-    }
+    const newIsValid = validateOwner(e.target.value);
 
-    setIsValid(true);
-    setOwner(e.target.value.toUpperCase());
+    setIsValid(newIsValid);
+    setOwner(newIsValid ? e.target.value.toUpperCase() : '');
   };
 
   return (
