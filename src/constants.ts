@@ -1,6 +1,7 @@
 export const IMAGE_URL = {
-  mastercard: "/src/assets/image/Mastercard.png",
-  visa: "/src/assets/image/Visa.png",
+  MASTER_CARD: "/src/assets/image/Mastercard.png",
+  VISA: "/src/assets/image/Visa.png",
+  CARD_NUMBER_BLIND: "/src/assets/image/CardNumberBlind.svg",
 };
 
 export const CARD_NUMBER_UNIT_LENGTH = 4;
