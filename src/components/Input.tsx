@@ -3,14 +3,6 @@ import { InputInfo } from '../types/input';
 import Validation from '../domain/InputValidation';
 import { Card } from '../types/card';
 
-const InputContainer = styled.input`
-  width: 100%;
-  padding: 0.5rem;
-  border: 1px solid ${(props) => props.color};
-  outline-color: ${(props) => props.color};
-  border-radius: 3px;
-`;
-
 function updateErrorMessages(
   prev: { [key: number]: string },
   index: number,
@@ -21,6 +13,14 @@ function updateErrorMessages(
     [index]: message,
   };
 }
+
+const InputContainer = styled.input`
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid ${(props) => props.color};
+  outline-color: ${(props) => props.color};
+  border-radius: 3px;
+`;
 
 interface Props {
   info: InputInfo;

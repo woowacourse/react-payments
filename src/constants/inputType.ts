@@ -1,4 +1,4 @@
-const InputType = {
+const INPUT_TYPE_CATEGORIES = {
   CARD_NUMBER: {
     inputLabel: '카드번호',
     inputInfo: Array.from({ length: 4 }, (_, index) => ({
@@ -39,4 +39,4 @@ const InputType = {
   },
 };
 
-export default InputType;
+export default INPUT_TYPE_CATEGORIES;

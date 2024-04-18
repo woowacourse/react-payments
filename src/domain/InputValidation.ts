@@ -1,18 +1,26 @@
+import ERROR_MESSAGES from '../constants/error';
+import {
+  DOUBLE_BLANK,
+  MONTH_RANGE,
+  UPPERCASE_AND_SPACE_ONLY,
+  YEAR_RANGE,
+} from '../constants/system';
+
 function checkTrimBlank(n: string) {
   if ((n.trim() === '' && n !== '') || n.trim().length !== n.length) {
-    throw new Error('불필요한 공백이 포함되어 있습니다.');
+    throw new Error(ERROR_MESSAGES.INVALID_TRIM_BLANK);
   }
 }
 
 function checkDoubleBlank(n: string) {
-  if (/ {2,}/.test(n)) {
-    throw new Error('공백이 2번 이상 반복되고 있습니다.');
+  if (DOUBLE_BLANK.test(n)) {
+    throw new Error(ERROR_MESSAGES.INVALID_DOUBLE_BLANK);
   }
 }
 
 function validateNumber(n: string) {
   if (!Number.isInteger(Number(n))) {
-    throw new Error('숫자만 입력해주세요.');
+    throw new Error(ERROR_MESSAGES.INVALID_ONLY_NUMBER);
   }
 }
 
@@ -31,22 +39,22 @@ function checkEmpty(n: string) {
 function validateMonth(n: string) {
   if (checkEmpty(n)) return;
   const month = Number(n);
-  if (!(1 <= month && month <= 12)) {
-    throw new Error('카드의 유효한 유효기간(월)을 입력해주세요.');
+  if (!(MONTH_RANGE.MIN <= month && month <= MONTH_RANGE.MAX)) {
+    throw new Error(ERROR_MESSAGES.INVALID_MONTH);
   }
 }
 
 function validateYear(n: string) {
   if (checkEmpty(n)) return;
   const year = Number(n);
-  if (!(0 <= year && year <= 99)) {
-    throw new Error('카드의 유효한 유효기간(년도)을 입력해주세요.');
+  if (!(YEAR_RANGE.MIN <= year && year <= YEAR_RANGE.MAX)) {
+    throw new Error(ERROR_MESSAGES.INVALID_YEAR);
   }
 }
 
 function validateUpperCase(str: string) {
-  if (!/^[A-Z\s]+$/.test(str) && str.length !== 0) {
-    throw new Error('영대문자로만 입력해주세요.');
+  if (!UPPERCASE_AND_SPACE_ONLY.test(str) && str.length !== 0) {
+    throw new Error(ERROR_MESSAGES.INVALID_ONLY_UPPERCASE);
   }
 }
 

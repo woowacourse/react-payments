@@ -1,8 +1,9 @@
 import { Card } from '../types/card';
+import styled from 'styled-components';
 import CardChip from '../assets/image/cardChip.png';
 import Visa from '../assets/image/Visa.png';
 import Master from '../assets/image/Mastercard.png';
-import styled from 'styled-components';
+import { CARD_CONFIG } from '../constants/system';
 
 const CardContainer = styled.div`
   display: flex;
@@ -57,8 +58,12 @@ const SecretNumber = styled.div`
 export default function CardView({ cardInfo }: { cardInfo: Card }) {
   const checkCardType = (cardNumber: string) => {
     const cardBrandNumber = parseInt(cardNumber.substring(0, 2), 10);
-    if (Math.floor(cardBrandNumber / 10) === 4) return Visa;
-    if (51 <= cardBrandNumber && cardBrandNumber <= 55) return Master;
+    if (Math.floor(cardBrandNumber / 10) === CARD_CONFIG.VISA) return Visa;
+    if (
+      CARD_CONFIG.MASTER.START <= cardBrandNumber &&
+      cardBrandNumber <= CARD_CONFIG.MASTER.END
+    )
+      return Master;
   };
 
   const cardImgSrc = checkCardType(cardInfo.cardNumber1);

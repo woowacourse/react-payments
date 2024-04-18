@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import InputField from '../components/InputField';
-import InputType from '../constants/inputType';
+import INPUT_TYPE_CATEGORIES from '../constants/inputType';
 import { action } from '@storybook/addon-actions';
 
 const meta = {
@@ -11,9 +11,9 @@ const meta = {
     inputTypes: {
       options: ['CARD_NUMBER', 'EXPIRY_DATE', 'USER_NAME'],
       mapping: {
-        CARD_NUMBER: InputType.CARD_NUMBER,
-        EXPIRY_DATE: InputType.EXPIRY_DATE,
-        USER_NAME: InputType.USER_NAME,
+        CARD_NUMBER: INPUT_TYPE_CATEGORIES.CARD_NUMBER,
+        EXPIRY_DATE: INPUT_TYPE_CATEGORIES.EXPIRY_DATE,
+        USER_NAME: INPUT_TYPE_CATEGORIES.USER_NAME,
       },
     },
   },
@@ -57,7 +57,7 @@ export const CARD_NUMBER_FIELD: Story = {
   args: {
     title: '결제할 카드 번호를 입력해 주세요',
     subtitle: '본인 명의의 카드만 결제 가능합니다.',
-    inputTypes: InputType.CARD_NUMBER,
+    inputTypes: INPUT_TYPE_CATEGORIES.CARD_NUMBER,
     cardInfo: mockCardInfo,
     handleInput: mockHandleInput,
   },
@@ -67,7 +67,7 @@ export const EXPIRY_DATE_FIELD: Story = {
   args: {
     title: '카드 유효기간을 입력해 주세요',
     subtitle: '월/년도(MMYY)를 순서대로 입력해 주세요.',
-    inputTypes: InputType.EXPIRY_DATE,
+    inputTypes: INPUT_TYPE_CATEGORIES.EXPIRY_DATE,
     cardInfo: mockCardInfo,
     handleInput: mockHandleInput,
   },
@@ -76,7 +76,7 @@ export const EXPIRY_DATE_FIELD: Story = {
 export const USER_NAME_FIELD: Story = {
   args: {
     title: '카드 소유자 이름을 입력해 주세요',
-    inputTypes: InputType.USER_NAME,
+    inputTypes: INPUT_TYPE_CATEGORIES.USER_NAME,
     cardInfo: mockCardInfo,
     handleInput: mockHandleInput,
   },

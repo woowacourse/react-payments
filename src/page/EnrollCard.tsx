@@ -1,8 +1,8 @@
 import { useState } from 'react';
+import styled from 'styled-components';
 import CardView from '../components/Card';
 import InputForm from '../components/InputForm';
 import { Card } from '../types/card';
-import styled from 'styled-components';
 
 const Page = styled.div`
   width: 100vw;
