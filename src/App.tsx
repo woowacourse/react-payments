@@ -61,8 +61,8 @@ function App() {
           name: "firstNumbers",
           placeholder: "1234",
           maxLength: 4,
-          onInputChange: (e: any) => {
-            const inputs = e.target.parentNode.querySelectorAll("input") as HTMLInputElement[];
+          onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+            const inputs = e.target.parentNode!.querySelectorAll("input");
             const inputValues = Array.from(inputs).map((input) => input.value);
             const numbersList = inputValues.map((value) => value.split("").map(Number));
             if (isValidCardNumbers(numbersList)) {
@@ -88,8 +88,8 @@ function App() {
           name: "secondNumbers",
           placeholder: "1234",
           maxLength: 4,
-          onInputChange: (e: any) => {
-            const inputs = e.target.parentNode.querySelectorAll("input") as HTMLInputElement[];
+          onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+            const inputs = e.target.parentNode!.querySelectorAll("input");
             const inputValues = Array.from(inputs).map((input) => input.value);
             const numbersList = inputValues.map((value) => value.split("").map(Number));
             if (isValidCardNumbers(numbersList)) {
@@ -115,8 +115,8 @@ function App() {
           name: "thirdNumbers",
           placeholder: "1234",
           maxLength: 4,
-          onInputChange: (e: any) => {
-            const inputs = e.target.parentNode.querySelectorAll("input") as HTMLInputElement[];
+          onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+            const inputs = e.target.parentNode!.querySelectorAll("input");
             const inputValues = Array.from(inputs).map((input) => input.value);
             const numbersList = inputValues.map((value) => value.split("").map(Number));
             if (isValidCardNumbers(numbersList)) {
@@ -142,8 +142,8 @@ function App() {
           name: "fourthNumbers",
           placeholder: "1234",
           maxLength: 4,
-          onInputChange: (e: any) => {
-            const inputs = e.target.parentNode.querySelectorAll("input") as HTMLInputElement[];
+          onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+            const inputs = e.target.parentNode!.querySelectorAll("input");
             const inputValues = Array.from(inputs).map((input) => input.value);
             const numbersList = inputValues.map((value) => value.split("").map(Number));
             if (isValidCardNumbers(numbersList)) {
@@ -178,8 +178,8 @@ function App() {
           name: "validityMonth",
           placeholder: "MM",
           maxLength: 2,
-          onInputChange: (e: any) => {
-            const inputs = e.target.parentNode.querySelectorAll("input") as HTMLInputElement[];
+          onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+            const inputs = e.target.parentNode!.querySelectorAll("input");
             const inputValues = Array.from(inputs).map((input) => input.value);
             const [month, year] = inputValues.map((value) => Number(value));
             if (isValidPeriod({ month, year })) {
@@ -203,8 +203,8 @@ function App() {
           name: "validityYear",
           placeholder: "YY",
           maxLength: 2,
-          onInputChange: (e: any) => {
-            const inputs = e.target.parentNode.querySelectorAll("input") as HTMLInputElement[];
+          onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+            const inputs = e.target.parentNode!.querySelectorAll("input");
             const inputValues = Array.from(inputs).map((input) => input.value);
             const [month, year] = inputValues.map((value) => Number(value));
             if (isValidPeriod({ month, year })) {
@@ -235,8 +235,8 @@ function App() {
         {
           name: "ownerName",
           placeholder: "PARK JEONG-WOO",
-          maxLength: 20,
-          onInputChange: (e: any) => {
+          maxLength: 18,
+          onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => {
             if (isValidOwnerName(e.target.value) || e.target.value === "") {
               setCardInfo((prev) => ({
                 ...prev,
