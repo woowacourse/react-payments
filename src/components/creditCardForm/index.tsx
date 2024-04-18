@@ -12,6 +12,7 @@ interface CreditCardFormProps {
   type: FormType;
   inputValue: string | ExpirationPeriodValue | CardNumberValue;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  inputError: boolean;
 }
 
 const CreditCardForm = ({
@@ -20,6 +21,7 @@ const CreditCardForm = ({
   type,
   inputValue,
   handleChange,
+  inputError,
 }: CreditCardFormProps) => {
   const getComponentByType = (
     type: string,
@@ -27,13 +29,20 @@ const CreditCardForm = ({
     handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   ) => {
     if (type === "owner")
-      return <InputOwnerName inputValue={inputValue as string} handleChange={handleChange} />;
+      return (
+        <InputOwnerName
+          inputValue={inputValue as string}
+          handleChange={handleChange}
+          inputError={inputError}
+        />
+      );
 
     if (type === "expirationPeriod")
       return (
         <InputExpirationPeriod
           inputValue={inputValue as ExpirationPeriodValue}
           handleChange={handleChange}
+          inputError={inputError}
         />
       );
 
@@ -42,6 +51,7 @@ const CreditCardForm = ({
         <InputCreditCardNumber
           inputValue={inputValue as CardNumberValue}
           handleChange={handleChange}
+          inputError={inputError}
         />
       );
   };
@@ -51,6 +61,7 @@ const CreditCardForm = ({
       <TitleWrapper>{title}</TitleWrapper>
       <DescriptionWrapper>{description}</DescriptionWrapper>
       {getComponentByType(type, inputValue, handleChange)}
+      {inputError && <ErrorMessage>유효한 값을 입력하세요.</ErrorMessage>}
     </CreditCardFormContainer>
   );
 };
@@ -79,4 +90,14 @@ const DescriptionWrapper = styled.h3`
   text-align: left;
   color: rgba(139, 149, 161, 1);
   margin-bottom: 16px;
+`;
+
+const ErrorMessage = styled.h3`
+  font-family: Noto Sans KR;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 13.76px;
+  text-align: left;
+  color: red;
+  margin-top: 8px;
 `;
