@@ -18,3 +18,21 @@ export const Default: Story = {
     invalid: false,
   },
 };
+
+export const Filled: Story = {
+  args: {
+    placeholder: 'MM',
+    value: '12',
+    maxLength: 2,
+    invalid: false,
+  },
+};
+
+export const Error: Story = {
+  args: {
+    placeholder: 'MM',
+    value: 'aa',
+    maxLength: 2,
+    invalid: true,
+  },
+};
