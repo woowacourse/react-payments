@@ -134,7 +134,7 @@ const CardInformationForm = ({
       <FormField title="카드 소유자 이름을 입력해 주세요">
         <InputField label="소유자 이름" error={userNameErrorMessage}>
           <Input
-            placeholder="SIMO"
+            placeholder="LAST_NAME FIRST_NAME"
             value={userNameState}
             maxLength={20}
             onChange={setUserNameState}
