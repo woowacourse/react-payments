@@ -1,10 +1,12 @@
 import { css } from '@emotion/react';
 import validateInput from '../validations/validateInput';
 import { useState } from 'react';
+import { DetailSectionType } from '../types/cardType';
+import { CARD_NUMBER, CARD_OWNER, CARD_PERIOD } from '../constants/inputInformation';
 
 interface InputType {
   isPassword: boolean;
-  type: 'number' | 'owner' | 'month' | 'year';
+  type: DetailSectionType;
   placeholder: string;
   setState: (s: string) => void;
   setErrorMessage: (message: string) => void;
@@ -25,11 +27,20 @@ function Input({ isPassword, keyProp, type, placeholder, setState, setErrorMessa
     }
   };
 
+  const getInputMaxLength = (type: DetailSectionType): number => {
+    const maxLengthTable = {
+      number: CARD_NUMBER.maxLength,
+      owner: CARD_OWNER.maxLength,
+      month: CARD_PERIOD.maxLength,
+      year: CARD_PERIOD.maxLength,
+    };
+    return maxLengthTable[type];
+  };
+
   return (
     <>
       <input
-        // maxLength={}
-        // name={}
+        maxLength={getInputMaxLength(type)}
         type={isPassword ? 'password' : 'input'}
         css={inputStyle({ border: isError ? '#FF3D3D' : '#acacac', focusColor: isError ? '#FF3D3D' : '#000' })}
         key={keyProp}

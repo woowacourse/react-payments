@@ -3,15 +3,13 @@ import InputTitle from './InputTitle';
 import Input from './Input';
 import { useState } from 'react';
 import ErrorMessage from './ErrorMessage';
-import { SectionType } from '../types/cardType';
+import { SectionType, period } from '../types/cardType';
 import { CARD_NUMBER, CARD_OWNER, CARD_PERIOD } from '../constants/inputInformation';
 
 interface InputGroupType {
   setState: React.Dispatch<React.SetStateAction<string[]>>;
   section: SectionType;
 }
-
-type PeriodType = 'month' | 'year';
 
 function InputGroup({ setState, section }: InputGroupType) {
   const getType = (section: SectionType) => {
@@ -46,13 +44,12 @@ function InputGroup({ setState, section }: InputGroupType) {
         </label>
         <div css={inputBoxStyle}>
           {placeholders.map((placeholder: string, index: number) => {
-            const test: PeriodType[] = ['month', 'year'];
             const isPassword = index === 2 || index === 3;
             return (
               <Input
                 isPassword={isPassword}
                 keyProp={section + index.toString()}
-                type={section === 'period' ? test[index] : section}
+                type={section === 'period' ? period[index] : section}
                 placeholder={placeholder}
                 setState={(s) => updateState(s, index)}
                 setErrorMessage={setErrorMessage}

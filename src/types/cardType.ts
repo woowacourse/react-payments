@@ -12,3 +12,7 @@ export const cardBrand = {
 type Union<T> = T[keyof T];
 
 export type CardBrandType = Union<typeof cardBrand>;
+export const period = ['month', 'year'] as const;
+export type PeriodType = typeof period;
+
+export type DetailSectionType = 'number' | 'owner' | 'month' | 'year';
