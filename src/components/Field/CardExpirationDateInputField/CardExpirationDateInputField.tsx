@@ -46,7 +46,7 @@ export default function CardExpirationDateInputField({
     setErrorMessages(updatedErrorMessages.filter((data) => data.length !== 0));
   };
 
-  const checkExpired = (month, year) => {
+  const checkExpired = (month: string, year: string) => {
     if (year.length < 2 || month.length < 2) return false;
     const today = new Date();
     const todayMonth = today.getMonth() + 1;
@@ -63,7 +63,7 @@ export default function CardExpirationDateInputField({
     return false;
   };
 
-  const handleMonth = (e) => {
+  const handleMonth = (e: any) => {
     const input = Number(e.target.value);
 
     if (input <= 1 || e.target.value.length >= 2)
@@ -74,7 +74,7 @@ export default function CardExpirationDateInputField({
     checkValidDate({ month: e.target.value });
   };
 
-  const handleYear = (e) => {
+  const handleYear = (e: any) => {
     setDate({ ...date, year: e.target.value });
     checkValidDate({ year: e.target.value });
   };

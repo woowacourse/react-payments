@@ -29,7 +29,7 @@ export default function CardOwnerNameInputField({
       })
       .join("");
   };
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     const onlyEngStr = filterEnglish(e.target.value.toUpperCase());
     const normalizedOwnerName = normalizeSpaces(onlyEngStr);
     if (
@@ -50,7 +50,7 @@ export default function CardOwnerNameInputField({
     setOwnerName(normalizedOwnerName);
   };
 
-  const handleBlur = (e) => {
+  const handleBlur = (e: any) => {
     console.log("blur");
     if (e.target.value.length === 0) {
       setErrorMessage("이름을 입력해주세요.");

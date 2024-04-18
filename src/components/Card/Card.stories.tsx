@@ -14,7 +14,7 @@ type CardProps = {
   ownerName: string;
 };
 
-export const DefaultCard: StoryObj<CardProps> = (args) => (
+export const DefaultCard: StoryObj<CardProps> = (args: any) => (
   <Card {...args} cardNumbers={["1111", "1111", "1111", "1111"]} />
 );
 DefaultCard.args = {
@@ -22,7 +22,7 @@ DefaultCard.args = {
   date: { month: "02", year: "40" },
 };
 
-export const VisaCard: StoryObj<CardProps> = (args) => (
+export const VisaCard: StoryObj<CardProps> = (args: any) => (
   <Card {...args} cardNumbers={["4111", "1111", "1111", "1111"]} />
 );
 VisaCard.args = {
@@ -30,7 +30,7 @@ VisaCard.args = {
   date: { month: "01", year: "25" },
 };
 
-export const MasterCard: StoryObj<CardProps> = (args) => (
+export const MasterCard: StoryObj<CardProps> = (args: any) => (
   <Card {...args} cardNumbers={["5210", "1111", "1111", "1111"]} />
 );
 MasterCard.args = {

@@ -13,14 +13,18 @@ type InputProps = {
   isError: boolean;
 };
 
-export const DefaultInput: StoryObj<InputProps> = (args) => <Input {...args} />;
+export const DefaultInput: StoryObj<InputProps> = (args: any) => (
+  <Input {...args} />
+);
 
 DefaultInput.args = {
   value: "안녕하세요",
   isError: false,
 };
 
-export const ErrorInput: StoryObj<InputProps> = (args) => <Input {...args} />;
+export const ErrorInput: StoryObj<InputProps> = (args: any) => (
+  <Input {...args} />
+);
 
 ErrorInput.args = {
   value: "이건 에러",

@@ -36,7 +36,7 @@ export default function CardNumbersInputField({
     setErrorMessages(prevErrorMessages.filter(([i]) => i !== index));
   };
 
-  const handleChange = (e, index) => {
+  const handleChange = (e: any, index: number) => {
     if (isNaN(Number(e.target.value)) && e.target.value.length !== 0) {
       setVisibleErrorMessage([index, "숫자를 입력해주세요."]);
       return;
