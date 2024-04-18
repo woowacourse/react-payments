@@ -10,4 +10,13 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  args: {
+    keyProp: 'number0',
+    isPassword: true,
+    type: 'number',
+    placeholder: '1234',
+    setState: () => {},
+    setErrorMessage: () => {},
+  },
+};

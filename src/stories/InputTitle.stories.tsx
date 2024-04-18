@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import InputTitle from '../components/InputTitle';
+import { CARD_NUMBER, CARD_OWNER, CARD_PERIOD } from '../constants/inputInformation';
 
 const meta = {
   title: 'InputTitle',
@@ -10,4 +11,23 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const CardNumber: Story = {
+  args: {
+    title: CARD_NUMBER.title,
+    subtitle: CARD_NUMBER.subtitle,
+  },
+};
+
+export const CardPeriod: Story = {
+  args: {
+    title: CARD_PERIOD.title,
+    subtitle: CARD_PERIOD.subtitle,
+  },
+};
+
+export const CardOwner: Story = {
+  args: {
+    title: CARD_OWNER.title,
+    subtitle: CARD_OWNER.subtitle,
+  },
+};
