@@ -1,4 +1,5 @@
 .creditCardContainer {
+  position: relative;
   width: 212px;
   height: 132px;
   background-color: var(--grey-500);
@@ -49,6 +50,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  height: 20px;
 }
 
 .cardNumber {
@@ -62,11 +64,16 @@
   width: 38px;
 }
 
-.textStyles {
+.cardDetailText {
+  height: 20px;
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
   letter-spacing: 0.16em;
   text-align: left;
   color: var(--grey-100);
+}
+
+.cardNumberText {
+  width: 34px;
 }
