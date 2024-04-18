@@ -5,16 +5,16 @@ const Label = styled.label`
   font-weight: 500;
 `;
 
-const InputFieldWrapper = styled.div`
-  gap: 8px;
-  display: flex;
-  flex-direction: column;
-`;
-
 const InputsWrapper = styled.div`
   display: flex;
   gap: 8px;
   height: 32px;
+`;
+
+const InputFieldWrapper = styled.div`
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const ErrorMessageWrapper = styled.div`
