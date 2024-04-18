@@ -1,6 +1,7 @@
 import styles from './Card.module.css';
 import Visa from '../../assets/image/Visa.png';
 import MasterCard from '../../assets/image/Mastercard.png';
+import hideNumber from '../../assets/image/CardNumberBlind.svg';
 
 const Card = ({
   cardNumbers,
@@ -42,7 +43,7 @@ const Card = ({
               {i >= cardNumbers.length / 2
                 ? new Array(cardNumber.toString().length)
                     .fill(0)
-                    .map(() => <img src='/src/assets/image/CardNumberBlind.svg' width='4' height='4' />)
+                    .map(() => <img src={hideNumber} width='4' height='4' />)
                 : cardNumber}
             </span>
           ))}
