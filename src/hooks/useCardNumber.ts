@@ -1,16 +1,17 @@
 import { useState } from 'react';
-import { InitialState } from '../App';
+import { InitialCardNumberState } from '../App';
+import validate from '../utils/validate';
 
-const useCardNumber = (initialStates: InitialState[]) => {
-  const [cardNumbers, setCardNumbers] = useState<InitialState[]>(initialStates);
+const useCardNumber = (initialStates: InitialCardNumberState[]) => {
+  const [cardNumbers, setCardNumbers] = useState<InitialCardNumberState[]>(initialStates);
 
   const cardNumbersChangeHandler = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
-    if (e.target.value === 'a') {
+    if (e.target.value !== '' && !validate.isValidDigit(e.target.value)) {
       setCardNumbers(
         cardNumbers.map((cardNumber, i) => {
           if (i === index) {
             return {
-              value: e.target.value,
+              ...cardNumber,
               isError: true,
             };
           }
