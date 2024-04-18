@@ -16,6 +16,8 @@ const PreviewCreditCard: React.FC<PreviewCreditCardProps> = ({ cardNumbers, expi
 
   const cardLogo = useCreditCardLogo(cardNumbers);
 
+  const formattedMonth = month.length === 1 ? month.padStart(2, '0') : month;
+
   return (
     <div className={styles.creditCardContainer}>
       <div>
@@ -27,8 +29,8 @@ const PreviewCreditCard: React.FC<PreviewCreditCardProps> = ({ cardNumbers, expi
             </div>
           )}
         </div>
-        <div className={`${styles.cardDetailContainer} ${styles.textStyles}`}>
-          <div className={styles.cardNumberContainer}>
+        <div className={styles.cardDetailContainer}>
+          <div className={`${styles.cardDetailText} ${styles.cardNumberContainer}`}>
             <span className={styles.cardNumberText}>{firstCardNumbers}</span>
             <span className={styles.cardNumberText}>{secondCardNumbers}</span>
             <span className={styles.password}>
@@ -42,12 +44,12 @@ const PreviewCreditCard: React.FC<PreviewCreditCardProps> = ({ cardNumbers, expi
               ))}
             </span>
           </div>
-          <div>
-            <span>{month}</span>
+          <div className={styles.cardDetailText}>
+            <span>{formattedMonth}</span>
             {(month + year).length > 2 ? '/' : ''}
             <span>{year}</span>
           </div>
-          <div>
+          <div className={styles.cardDetailText}>
             <span>{ownerName}</span>
           </div>
         </div>
