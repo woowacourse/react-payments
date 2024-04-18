@@ -14,17 +14,17 @@
 
   - [x] 입력은 숫자만 가능하며 숫자가 아닐시 피드백을 제공한다.
   - [x] 유효하지 않은 월을 입력 시(ex 13월) 피드백을 제공한다.
-  - [ ] 현재보다 이전 날짜를 입력 시 피드백을 제공한다.
-  - [ ] 한 자리 숫자를 입력 시 자동으로 형식에 맞춰 0을 넣어준다.
+  - [x] 현재보다 이전 날짜를 입력 시 피드백을 제공한다.
+  - [x] 한 자리 숫자를 입력 시 자동으로 형식에 맞춰 0을 넣어준다.
 
 - [x] 카드 소유자 이름 입력
 
   - [x] 소문자로 입력 시 강제로 대문자로 변환한다.
   - [x] 영어가 아닌 문자 입력 시 입력을 제한하고 피드백을 제공한다.
 
-- [ ]실시간 프리뷰 업데이트
-  - [ ] 카드 번호가 4로 시작하면 Visa카드 로고를 카드 프리뷰에 업데이트한다.
-  - [ ] 카드 번호가 51~55로 시작하면 MasterCard 로고를 카드 프리뷰에 업데이트한다.
+- [x]실시간 프리뷰 업데이트
+  - [x] 카드 번호가 4로 시작하면 Visa카드 로고를 카드 프리뷰에 업데이트한다.
+  - [x] 카드 번호가 51~55로 시작하면 MasterCard 로고를 카드 프리뷰에 업데이트한다.
   - [x] 사용자가 카드 번호 입력 시 실시간으로 카드 프리뷰에 업데이트한다.
   - [x] 사용자가 카드 유효기간 입력 시 실시간으로 카드 프리뷰에 업데이트한다.
   - [x] 사용자가 카드 소유자 이름 입력 시 실시간으로 카드 프리뷰에 업데이트한다.
@@ -33,14 +33,14 @@
 
 - [x] Input
 
-  - [ ] CardNumberInput
-  - [ ] CardExpirationDateInput
-    - [ ] CardExpirationMonthInput
-    - [ ] CardExpirationYearInput
-  - [ ] CardOwnerNameInput
+  - [x] CardNumberInput
+  - [x] CardExpirationDateInput
+    - [x] CardExpirationMonthInput
+    - [x] CardExpirationYearInput
+  - [x] CardOwnerNameInput
 
-- [ ] Card
+- [x] Card
 
-- [ ] ShelfHeader
-  - [ ] MainHeader
-  - [ ] SubHeader
+- [x] ShelfHeader
+  - [x] MainHeader
+  - [x] SubHeader
