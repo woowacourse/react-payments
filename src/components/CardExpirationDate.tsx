@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Input from "./Input";
 import { TitleText, CaptionText, LabelText } from "../styles/common";
 import styled from "styled-components";
@@ -7,6 +7,7 @@ import ErrorMessage from "./ErrorMessage";
 const CardDateContainer = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
   gap: 16px;
 `;
 
