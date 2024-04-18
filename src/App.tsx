@@ -1,10 +1,15 @@
-import './styles/reset.css';
+import CreditCardForm from '@components/payments/CreditCardForm/CreditCardForm';
 
 function App() {
   return (
-    <>
-      <h1>React Payments</h1>
-    </>
+    <div
+      style={{
+        maxWidth: '375px',
+        margin: 'auto',
+      }}
+    >
+      <CreditCardForm />
+    </div>
   );
 }
 
