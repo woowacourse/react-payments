@@ -1,4 +1,3 @@
-import React from "react";
 import * as Styled from "./CardNumbers.styles";
 import { MASKING } from "../../constants/setting";
 

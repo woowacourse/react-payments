@@ -1,5 +1,3 @@
-import React from "react";
-
 export interface CardExpirationProps {
   month: number;
   year: number;

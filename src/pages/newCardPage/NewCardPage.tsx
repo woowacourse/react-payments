@@ -84,7 +84,7 @@ const NewCardPage = () => {
         subText={CARD_NUMBERS.SUB_TEXT}
         errorMessage={errorMessage.cardNumbers}
       >
-        {cardInfo.cardNumbers.map((cardNumber, index) => (
+        {cardInfo.cardNumbers.map((_, index) => (
           <Input
             key={index}
             maxLength={CARD_NUMBERS.MAX_LENGTH}
@@ -101,7 +101,7 @@ const NewCardPage = () => {
         subText={CARD_EXPIRATION.SUB_TEXT}
         errorMessage={errorMessage.cardExpiration}
       >
-        {cardInfo.cardExpiration.map((cardNumber, index) => (
+        {cardInfo.cardExpiration.map((_, index) => (
           <Input
             key={index}
             maxLength={CARD_EXPIRATION.MAX_LENGTH}
