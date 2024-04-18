@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
-import Field from '../layout/Field/Field';
 import Input from '../common/Input/Input';
+import Field from '../layout/Field/Field';
 
-import { ERRORS, ADD_CARD_FORM_FIELDS } from '../../constants/messages';
+import useAddCardInput from '../../hooks/useAddCardInput';
 
-interface OwnerName {
-  ownerName: string;
-}
+import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../constants/messages';
+import { isCharacter } from '../../domain/validators';
 
 const { OWNER_NAME } = ADD_CARD_FORM_FIELDS;
 
@@ -15,37 +13,70 @@ interface OwnerNameInputProps {
 }
 
 function OwnerNameInput({ setCardData }: OwnerNameInputProps) {
-  const [ownerName, setOwnerName] = useState<OwnerName>({ ownerName: '' });
-  const [isError, setIsError] = useState<Record<keyof OwnerName, boolean>>({
-    ownerName: false,
-  });
-  const [errMsg, setErrMsg] = useState('');
+  // const [ownerName, setOwnerName] = useState<OwnerName>({ ownerName: '' });
+  // const [isError, setIsError] = useState<Record<keyof OwnerName, boolean>>({
+  //   ownerName: false,
+  // });
+  // const [errMsg, setErrMsg] = useState('');
 
-  const isCharacter = (value: string) => {
-    const regex = /^[a-zA-Z]+$/;
-    return regex.test(value);
-  };
+  // const isCharacter = (value: string) => {
+  //   const regex = /^[a-zA-Z]+$/;
+  //   return regex.test(value);
+  // };
 
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
+  // const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value } = event.target;
 
+  //   if (value !== '' && !isCharacter(value)) {
+  //     setErrMsg(ERRORS.isNotAlphabet);
+  //     setIsError({ ...isError, [name]: true });
+  //     return;
+  //   }
+  //   setErrMsg('');
+  //   setIsError({ ...isError, [name]: false });
+
+  //   setOwnerName({ ...ownerName, [name]: value.toUpperCase() });
+  // };
+
+  // const onBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+  //   const { name, value } = event.target;
+
+  //   setOwnerName({ ...ownerName, [name]: value.trim() });
+  //   setCardData('ownerName', Object.values(ownerName));
+  // };
+
+  const validateInputOnChange = ({
+    value,
+  }: {
+    name?: string;
+    value: string;
+  }) => {
     if (value !== '' && !isCharacter(value)) {
-      setErrMsg(ERRORS.isNotAlphabet);
-      setIsError({ ...isError, [name]: true });
-      return;
+      return { isValid: false, errorMsg: ERRORS.isNotAlphabet };
     }
-    setErrMsg('');
-    setIsError({ ...isError, [name]: false });
-
-    setOwnerName({ ...ownerName, [name]: value.toUpperCase() });
+    return { isValid: true, errorMsg: '' };
   };
 
-  const onBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-
-    setOwnerName({ ...ownerName, [name]: value.trim() });
+  const processData = () => {
     setCardData('ownerName', Object.values(ownerName));
   };
+
+  const {
+    values: ownerName,
+    errMsg,
+    isError,
+    onChange,
+    onBlur,
+  } = useAddCardInput<OwnerName>({
+    initialValues: {
+      ownerName: '',
+    },
+    initialErrors: {
+      ownerName: false,
+    },
+    validateInputOnChange,
+    processData,
+  });
 
   return (
     <Field
