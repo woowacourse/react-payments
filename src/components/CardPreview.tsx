@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import MasterCard from '../../src/assets/images/mastercard.png';
-import VisaCard from './src/assets/images/visa.png';
+import VisaCard from '../../src/assets/images/visa.png';
 
 type CardNumberKey = 'first' | 'second' | 'third' | 'fourth';
 
