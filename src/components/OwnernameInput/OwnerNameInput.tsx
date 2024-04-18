@@ -9,6 +9,7 @@ interface OwnerName {
 }
 
 const { OWNER_NAME } = ADD_CARD_FORM_FIELDS;
+
 interface OwnerNameInputProps {
   setCardData: (key: keyof CardInfo, newData: CardInfo[keyof CardInfo]) => void;
 }
