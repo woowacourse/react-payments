@@ -51,10 +51,9 @@ const CardPreviewLayout = styled.div`
   flex-direction: column;
   width: 320px;
   height: 200px;
-  margin: 60px 0 50px 0;
 
   background-color: #333333;
-  padding: 16px 20px 20px 20px;
+  padding: 16px 20px 20px;
   border-radius: 8px;
 
   color: white;

@@ -53,25 +53,27 @@ const App = () => {
         expiryDate={{ month: expiryMonth, year: expiryYear }}
         cardholderName={cardholderName}
       />
-      <CardNumberContainer
-        cardNumbers={cardNumbers}
-        generateChangeHandler={generateCardNumbersChangeHandler}
-        generateErrorMessageUpdater={generateCardNumberErrorMessageUpdater}
-        errorMessage={cardNumbersErrorMessage}
-        errorStatus={cardNumbersErrorStatus}
-      />
-      <CardExpiryDateContainer
-        expiryDate={{ month: expiryMonth, year: expiryYear }}
-        changeHandler={{ month: handleChangeExpiryMonth, year: handleChangeExpiryYear }}
-        errorMessageUpdater={{ month: updateExpiryMonthErrorMessage, year: updateExpiryYearErrorMessage }}
-        errorMessage={{ month: expiryMonthErrorMessage, year: expiryYearErrorMessage }}
-      />
-      <CardholderNameContainer
-        cardholderName={cardholderName}
-        setCardholderName={setCardholderName}
-        updateErrorMessage={updateCardholderNameErrorMessage}
-        errorMessage={cardholderNameErrorMessage}
-      />
+      <CardInfoWrapper>
+        <CardNumberContainer
+          cardNumbers={cardNumbers}
+          generateChangeHandler={generateCardNumbersChangeHandler}
+          generateErrorMessageUpdater={generateCardNumberErrorMessageUpdater}
+          errorMessage={cardNumbersErrorMessage}
+          errorStatus={cardNumbersErrorStatus}
+        />
+        <CardExpiryDateContainer
+          expiryDate={{ month: expiryMonth, year: expiryYear }}
+          changeHandler={{ month: handleChangeExpiryMonth, year: handleChangeExpiryYear }}
+          errorMessageUpdater={{ month: updateExpiryMonthErrorMessage, year: updateExpiryYearErrorMessage }}
+          errorMessage={{ month: expiryMonthErrorMessage, year: expiryYearErrorMessage }}
+        />
+        <CardholderNameContainer
+          cardholderName={cardholderName}
+          setCardholderName={setCardholderName}
+          updateErrorMessage={updateCardholderNameErrorMessage}
+          errorMessage={cardholderNameErrorMessage}
+        />
+      </CardInfoWrapper>
     </AppLayout>
   );
 };
@@ -80,6 +82,11 @@ const AppLayout = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 60px;
+`;
+
+const CardInfoWrapper = styled.section`
+  margin-top: 50px;
 `;
 
 export default App;
