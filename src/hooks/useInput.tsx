@@ -23,6 +23,14 @@ const useInput = ({
     makeStringArray(initialValue.length)
   );
 
+  const updateErrorMessages = (errorMessage: string, index: number) => {
+    setErrorMessages((prev) => {
+      const newErrorMessages = [...prev];
+      newErrorMessages[index] = errorMessage;
+      return newErrorMessages;
+    });
+  };
+
   const onChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     index: number
@@ -39,18 +47,21 @@ const useInput = ({
     if (onChangeValidate) {
       const errorMessage = onChangeValidate([newValue]);
       if (errorMessage.length > 0) {
-        setErrorMessages((prev) => {
-          const newErrorMessages = [...prev];
-          newErrorMessages[index] = errorMessage;
-          return newErrorMessages;
-        });
+        updateErrorMessages(errorMessage, index);
       } else {
-        setErrorMessages((prev) => {
-          const newErrorMessages = [...prev];
-          newErrorMessages[index] = "";
-          return newErrorMessages;
-        });
+        updateErrorMessages("", index);
       }
+    }
+
+    if (onBlurValidate) {
+      const errorMessage = onBlurValidate([newValue]);
+      if (errorMessage.length == 0) {
+        updateErrorMessages("", index);
+      }
+    }
+
+    if (validLength && newValue.length === validLength) {
+      updateErrorMessages("", index);
     }
 
     setInput((prev) => {
@@ -63,11 +74,7 @@ const useInput = ({
   const onBlur = (event: FocusEvent<Element, Element>, index: number) => {
     if (validLength) {
       if (input[index].length > 0 && input[index].length !== validLength) {
-        setErrorMessages((prev) => {
-          const newErrorMessages = [...prev];
-          newErrorMessages[index] = "유효하지 않은 길이입니다.";
-          return newErrorMessages;
-        });
+        updateErrorMessages("유효하지 않은 길이입니다.", index);
         return;
       }
     }
@@ -75,26 +82,14 @@ const useInput = ({
     if (onBlurValidate) {
       const errorMessage = onBlurValidate(input);
       if (errorMessage.length > 0) {
-        setErrorMessages((prev) => {
-          const newErrorMessages = [...prev];
-          newErrorMessages[index] = errorMessage;
-          return newErrorMessages;
-        });
+        updateErrorMessages(errorMessage, index);
       } else {
-        setErrorMessages((prev) => {
-          const newErrorMessages = [...prev];
-          newErrorMessages[index] = "";
-          return newErrorMessages;
-        });
+        updateErrorMessages("", index);
       }
       return;
     }
 
-    setErrorMessages((prev) => {
-      const newErrorMessages = [...prev];
-      newErrorMessages[index] = "";
-      return newErrorMessages;
-    });
+    updateErrorMessages("", index);
   };
 
   return { input, onChange, errorMessages, onBlur };
