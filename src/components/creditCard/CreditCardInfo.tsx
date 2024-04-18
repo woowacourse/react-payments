@@ -18,7 +18,7 @@ const CreditCardInfo = ({ creditCardNumber, expirationPeriod, ownerName }: Credi
   return (
     <CreditCardInfoContainer>
       <CreditCardInfoWrapper>{maskLastEightDigits(creditCardNumber)}</CreditCardInfoWrapper>
-      <h3>{expirationPeriod}</h3>
+      <CreditCardExpirationPeriod>{expirationPeriod}</CreditCardExpirationPeriod>
       <CreditCardOwnerInfo>{ownerName}</CreditCardOwnerInfo>
     </CreditCardInfoContainer>
   );
@@ -50,17 +50,24 @@ const CreditCardInfoWrapper = styled.div`
 
 const CreditCardInfoNumber = styled.h3`
   width: 42px;
+  height: 20px;
   overflow: hidden;
 `;
 
 const CreditCardInfoSymbol = styled.h3`
   font-size: 8px;
   width: 42px;
+  height: 20px;
   overflow: hidden;
+`;
+
+const CreditCardExpirationPeriod = styled.h3`
+  height: 20px;
 `;
 
 const CreditCardOwnerInfo = styled.h3`
   width: 100%;
+  height: 20px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
