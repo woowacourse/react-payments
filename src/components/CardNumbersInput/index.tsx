@@ -6,19 +6,19 @@ import {
   ERROR_MESSAGE,
 } from '../../constants';
 import { CardMark } from '../../modules/useCardInfoReducer';
-import CardInputForm from '../CardInputForm';
-import CardInputFormContainer from '../CardInputFormContainer';
-import Input from '../Input';
+import CardInput from '../CardInput';
+import CardInputContainer from '../CardInputContainer';
 import FormErrorMessage from '../FormErrorMessage';
+import Input from '../Input';
 
 const NUMBERS_NAME_PREFIX = 'numbers_';
 
-interface CardNumbersFormProps {
+interface CardNumbersInputProps {
   editCardMark: (mark: CardMark) => void;
   editCardNumbers: (number: string) => void;
 }
 
-export default function CardNumbersForm(props: CardNumbersFormProps) {
+export default function CardNumbersInput(props: CardNumbersInputProps) {
   const { editCardMark, editCardNumbers } = props;
   const { length, startNumber, endNumber } = CARD_NUMBERS;
   const { title, subTitle, label, placeholder } = CARD_NUMBERS_FORM_MESSAGE;
@@ -68,8 +68,8 @@ export default function CardNumbersForm(props: CardNumbersFormProps) {
   }, [validatedNumbers]);
 
   return (
-    <CardInputFormContainer title={title} subTitle={subTitle}>
-      <CardInputForm label={label}>
+    <CardInputContainer title={title} subTitle={subTitle}>
+      <CardInput label={label}>
         <div onChange={validateCardNumber}>
           {Array.from({ length }).map((_, index) => (
             <Input
@@ -80,8 +80,8 @@ export default function CardNumbersForm(props: CardNumbersFormProps) {
             />
           ))}
         </div>
-      </CardInputForm>
+      </CardInput>
       <FormErrorMessage errorMessage={getErrorMessage()} />
-    </CardInputFormContainer>
+    </CardInputContainer>
   );
 }

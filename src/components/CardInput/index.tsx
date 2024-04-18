@@ -1,6 +1,6 @@
 import React, { ReactNode, useId } from 'react';
 
-interface CardInputFormProps {
+interface CardInputProps {
   label: string;
   /**
    * input 요소들
@@ -8,16 +8,14 @@ interface CardInputFormProps {
   children: ReactNode;
 }
 
-function CardInputForm(props: CardInputFormProps) {
+export default function CardInput(props: CardInputProps) {
   const { label, children } = props;
   const id = useId();
 
   return (
-    <form>
+    <div>
       <label htmlFor={id}>{label}</label>
       <div id={id}>{children}</div>
-    </form>
+    </div>
   );
 }
-
-export default CardInputForm;

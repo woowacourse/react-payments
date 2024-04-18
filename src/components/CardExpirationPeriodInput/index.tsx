@@ -7,16 +7,16 @@ import {
 } from '../../constants';
 import { CardPeriod } from '../../modules/useCardInfoReducer';
 import debounceFunc from '../../utils/debounceFunc';
-import CardInputForm from '../CardInputForm';
-import CardInputFormContainer from '../CardInputFormContainer';
-import Input from '../Input';
+import CardInput from '../CardInput';
+import CardInputContainer from '../CardInputContainer';
 import FormErrorMessage from '../FormErrorMessage';
+import Input from '../Input';
 
 type Error = 'number' | 'period' | null;
 interface CardExpirationPeriodFormProps {
   editCardPeriod: (period: CardPeriod) => void;
 }
-export default function CardExpirationPeriodForm(
+export default function CardExpirationPeriodInput(
   props: CardExpirationPeriodFormProps,
 ) {
   const { editCardPeriod } = props;
@@ -118,8 +118,8 @@ export default function CardExpirationPeriodForm(
   }, [cardPeriod]);
 
   return (
-    <CardInputFormContainer title={title} subTitle={subTitle}>
-      <CardInputForm label={label}>
+    <CardInputContainer title={title} subTitle={subTitle}>
+      <CardInput label={label}>
         <div>
           <div onChange={handleInputChange}>
             <Input
@@ -137,7 +137,7 @@ export default function CardExpirationPeriodForm(
           </div>
           <FormErrorMessage errorMessage={getErrorMessage()} />
         </div>
-      </CardInputForm>
-    </CardInputFormContainer>
+      </CardInput>
+    </CardInputContainer>
   );
 }

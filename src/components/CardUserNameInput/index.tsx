@@ -6,15 +6,15 @@ import {
   ERROR_MESSAGE,
 } from '../../constants';
 import debounceFunc from '../../utils/debounceFunc';
-import CardInputForm from '../CardInputForm';
-import CardInputFormContainer from '../CardInputFormContainer';
+import CardInput from '../CardInput';
+import CardInputContainer from '../CardInputContainer';
 import FormErrorMessage from '../FormErrorMessage';
 import Input from '../Input';
 
-interface CardUserFormProps {
+interface CardUserNameInputProps {
   editCardUserName: (name: string | undefined) => void;
 }
-export default function CardUserForm(props: CardUserFormProps) {
+export default function CardUserNameInput(props: CardUserNameInputProps) {
   const { editCardUserName } = props;
   const { title, subTitle, label, namePlaceholder } = CARD_USER_FORM_MESSAGE;
   const { length } = CARD_USER;
@@ -51,8 +51,8 @@ export default function CardUserForm(props: CardUserFormProps) {
   }, [userName, error]);
 
   return (
-    <CardInputFormContainer title={title} subTitle={subTitle}>
-      <CardInputForm label={label}>
+    <CardInputContainer title={title} subTitle={subTitle}>
+      <CardInput label={label}>
         <div>
           <div onChange={handleChange}>
             <Input
@@ -65,7 +65,7 @@ export default function CardUserForm(props: CardUserFormProps) {
           </div>
           <FormErrorMessage errorMessage={getErrorMessage()} />
         </div>
-      </CardInputForm>
-    </CardInputFormContainer>
+      </CardInput>
+    </CardInputContainer>
   );
 }
