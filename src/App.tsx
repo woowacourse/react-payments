@@ -3,9 +3,9 @@ import Form from "./components/common/Form/Form";
 import { useState } from "react";
 import ShelfHeader from "./components/ShelfHeader/ShelfHeader";
 import { CARD_NUMBER_UNIT_LENGTH } from "./constants";
-import CardNumbersInputField from "./components/CardNumbersInputField";
-import CardExpirationDateInputField from "./components/CardExpirationDateInputField";
-import CardOwnerNameInputField from "./components/CardOwnerNameInputField";
+import CardNumbersInputField from "./components/Field/CardNumbersInputField/CardNumbersInputField";
+import CardExpirationDateInputField from "./components/Field/CardExpirationDateInputField/CardExpirationDateInputField";
+import CardOwnerNameInputField from "./components/Field/CardOwnerNameInputField/CardOwnerNameInputField";
 import Card from "./components/Card/Card";
 
 function App() {

@@ -1,11 +1,11 @@
-import { Dispatch, SetStateAction, useState, useEffect } from "react";
-import Input from "./common/Input/Input";
-import styles from "../App.module.css";
+import { Dispatch, SetStateAction, useState } from "react";
+import Input from "../../common/Input/Input";
+import styles from "../../../App.module.css";
 
 import {
-  CARD_NUMBER_UNIT_LENGTH,
   CARD_NUMBER_UNIT_PLACEHOLDER,
-} from "../constants";
+  CARD_NUMBER_UNIT_LENGTH,
+} from "../../../constants";
 
 export default function CardNumbersInputField({
   cardNumbers,

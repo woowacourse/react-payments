@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useState } from "react";
-import Input from "./common/Input/Input";
-import styles from "../App.module.css";
+import Input from "../../common/Input/Input";
+import styles from "../../../App.module.css";
 
 const OWNER_NAME_PLACEHOLDER = "JOHN DOE";
 export default function CardOwnerNameInputField({

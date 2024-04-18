@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useState } from "react";
-import Input from "./common/Input/Input";
-import { DATE_PLACEHOLDER } from "../constants";
-import styles from "../App.module.css";
+import { DATE_PLACEHOLDER } from "../../../constants";
+import Input from "../../common/Input/Input";
+import styles from "../../../App.module.css";
 
 export default function CardExpirationDateInputField({
   date,

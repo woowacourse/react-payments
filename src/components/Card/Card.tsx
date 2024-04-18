@@ -1,4 +1,3 @@
-import { CSSProperties } from "react";
 import { IMAGE_URL } from "../../constants";
 import styles from "./Card.module.css";
 
