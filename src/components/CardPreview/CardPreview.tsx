@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import styled from "styled-components";
+
 import CardText from "./CardText";
 import CardNumberDisplay from "./CardNumberDisplay";
 import ExpirationDateDisplay from "./ExpirationDateDisplay";
@@ -23,15 +24,16 @@ const CardPreview = ({ cardInfo }: CardPreviewProps) => {
 
   return (
     <StyledCardPreview>
-      <StyledDiv>
-        <StyledChip />
-        {logoPath && <StyledLogo src={logoPath} />}
-      </StyledDiv>
-      <CardInfoContainer>
+      <CardHeader>
+        <CardChip />
+        {logoPath && <CardLogo src={logoPath} />}
+      </CardHeader>
+
+      <CardBody>
         <CardNumberDisplay cardNumbers={cardNumbers} />
         <ExpirationDateDisplay expirationDate={expirationDate} />
         <CardText type="longText" text={cardOwner} />
-      </CardInfoContainer>
+      </CardBody>
     </StyledCardPreview>
   );
 };
@@ -49,24 +51,16 @@ const StyledCardPreview = styled.div`
 
   margin: 0 auto;
   margin-top: 60px;
+  margin-bottom: 60px;
 `;
 
-const CardInfoContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  padding-left: 17px;
-
-  row-gap: 8px;
-`;
-
-const StyledDiv = styled.div`
+const CardHeader = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 8px 12px;
 `;
 
-const StyledChip = styled.div`
+const CardChip = styled.div`
   height: 22px;
   width: 36px;
 
@@ -74,7 +68,16 @@ const StyledChip = styled.div`
   background-color: #ddcd78;
 `;
 
-const StyledLogo = styled.img`
+const CardLogo = styled.img`
   height: 22px;
   width: 36px;
+`;
+
+const CardBody = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  padding-left: 17px;
+
+  row-gap: 8px;
 `;
