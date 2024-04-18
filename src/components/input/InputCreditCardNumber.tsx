@@ -2,6 +2,7 @@ import InputBox from "./common/InputBox";
 import CARD_FORM_MESSAGE from "../../constants/cardFormMessage";
 import styled from "@emotion/styled";
 import { CardNumberValue } from "../../@types/CreditCard";
+import CARD_INPUTBOX_NAME from "../../constants/cardInputBoxName";
 
 interface InputCreditCardNumberProps {
   inputValue: CardNumberValue;
@@ -24,7 +25,7 @@ const InputCreditCardNumber = ({
           size="small"
           placeholder="1234"
           id="creditCardNumber"
-          name="firstValue"
+          name={CARD_INPUTBOX_NAME.cardNumber.firstValue}
           isError={inputError}
         />
         <InputBox
@@ -33,7 +34,7 @@ const InputCreditCardNumber = ({
           size="small"
           placeholder="1234"
           id="creditCardNumber"
-          name="secondValue"
+          name={CARD_INPUTBOX_NAME.cardNumber.secondValue}
           isError={inputError}
         />
         <InputBox
@@ -42,7 +43,7 @@ const InputCreditCardNumber = ({
           size="small"
           placeholder="1234"
           id="creditCardNumber"
-          name="thirdValue"
+          name={CARD_INPUTBOX_NAME.cardNumber.thirdValue}
           isError={inputError}
         />
         <InputBox
@@ -51,7 +52,7 @@ const InputCreditCardNumber = ({
           size="small"
           placeholder="1234"
           id="creditCardNumber"
-          name="fourthValue"
+          name={CARD_INPUTBOX_NAME.cardNumber.fourthValue}
           isError={inputError}
         />
       </InputWrapper>

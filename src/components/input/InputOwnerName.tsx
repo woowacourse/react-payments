@@ -1,6 +1,7 @@
 import InputBox from "./common/InputBox";
 import CARD_FORM_MESSAGE from "../../constants/cardFormMessage";
 import styled from "@emotion/styled";
+import CARD_INPUTBOX_NAME from "../../constants/cardInputBoxName";
 
 interface InputOwnerNameProps {
   inputValue: string;
@@ -18,7 +19,7 @@ const InputOwnerName = ({ inputValue, handleChange, inputError }: InputOwnerName
         size="large"
         placeholder="JOHN DOE"
         id="ownerName"
-        name="name"
+        name={CARD_INPUTBOX_NAME.owner.name}
         isError={inputError}
       />
     </InputContainer>
