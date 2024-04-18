@@ -4,6 +4,7 @@ import CreditCardForm from "../../components/creditCardForm";
 import useInput from "../../hooks/useInput";
 import CARD_FORM_MESSAGE from "../../constants/cardFormMessage";
 import { CardNumberValue, ExpirationPeriodValue } from "../../@types/CreditCard";
+import { CARD_FORM_TYPE } from "../../constants/cardFormType";
 
 interface Owner {
   name: string;
@@ -46,7 +47,7 @@ const Payments = () => {
         <CreditCardForm
           title={CARD_FORM_MESSAGE.inputCardNumber}
           description={CARD_FORM_MESSAGE.cardNumberDescription}
-          type="cardNumber"
+          type={CARD_FORM_TYPE.cardNumber}
           inputValue={cardNumber}
           handleChange={setCardNumber}
           inputError={cardNumberError}
@@ -54,14 +55,14 @@ const Payments = () => {
         <CreditCardForm
           title={CARD_FORM_MESSAGE.inputCardExpirationDate}
           description={CARD_FORM_MESSAGE.cardExpirationDateDescription}
-          type="expirationPeriod"
+          type={CARD_FORM_TYPE.expirationPeriod}
           inputValue={expirationPeriod}
           handleChange={setExpirationPeriod}
           inputError={expirationPeriodError}
         />
         <CreditCardForm
           title={CARD_FORM_MESSAGE.inputCardOwner}
-          type="owner"
+          type={CARD_FORM_TYPE.owner}
           inputValue={owner.name}
           handleChange={setOwner}
           inputError={ownerError}
