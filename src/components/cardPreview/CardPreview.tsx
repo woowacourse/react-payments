@@ -5,6 +5,7 @@ import MasterCardImage from "../../assets/Mastercard.png";
 import VisaImage from "../../assets/Visa.png";
 import CardNumbers from "../cardNumbers/CardNumbers";
 import CardExpiration from "../cardExpiration/CardExpiration";
+import { CARD_BRAND } from "../../constants/setting";
 
 interface Props {
   cardInfo: ICardInfo;
@@ -14,12 +15,12 @@ const CardPreview = ({ cardInfo }: Props) => {
   const [cardBrand, setCardBrand] = useState("");
 
   useEffect(() => {
-    const firstNumber = Math.floor(cardInfo.cardNumbers[0] / 100);
+    const IIN = Math.floor(cardInfo.cardNumbers[0] / 100);
 
-    if (firstNumber >= 40 && firstNumber <= 49) {
-      setCardBrand("MasterCard");
-    } else if (firstNumber >= 51 && firstNumber <= 55) {
-      setCardBrand("Visa");
+    if (IIN >= CARD_BRAND.MASTERCARD.MIN_NUMBER && IIN <= CARD_BRAND.MASTERCARD.MAX_NUMBER) {
+      setCardBrand(CARD_BRAND.MASTERCARD.NAME);
+    } else if (IIN >= CARD_BRAND.VISA.MIN_NUMBER && IIN <= CARD_BRAND.VISA.MAX_NUMBER) {
+      setCardBrand(CARD_BRAND.VISA.NAME);
     } else {
       setCardBrand("");
     }
@@ -27,9 +28,9 @@ const CardPreview = ({ cardInfo }: Props) => {
 
   const getCardBrandImage = () => {
     switch (cardBrand) {
-      case "MasterCard":
+      case CARD_BRAND.MASTERCARD.NAME:
         return MasterCardImage;
-      case "Visa":
+      case CARD_BRAND.VISA.NAME:
         return VisaImage;
       default:
         return "";
@@ -52,8 +53,8 @@ const CardPreview = ({ cardInfo }: Props) => {
       <Styled.CardInfoSection>
         <CardNumbers cardNumbers={cardInfo.cardNumbers} />
         <CardExpiration
-          month={cardInfo.cardExpiration["month"]}
-          year={cardInfo.cardExpiration["year"]}
+          month={cardInfo.cardExpiration[0]}
+          year={cardInfo.cardExpiration[1]}
         />
         <div>{cardInfo.userName && cardInfo.userName}</div>
       </Styled.CardInfoSection>
