@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import CreditCard from "./Components/CreditCard";
 import Form from "./Components/Form";
+import { isValidCardNumbers } from "./validators";
 
 const initData: InitCardInfoType[] = [
   {
@@ -46,7 +47,6 @@ function App() {
   };
 
   const [cardInfo, setCardInfo] = useState(createCardInfo(initData));
-  console.log(cardInfo);
   const [formErrors, setFormErrors] = useState(createFormErrors(initData));
 
   const formFieldPropsList: FormFieldInfo[] = [
@@ -60,31 +60,110 @@ function App() {
         {
           name: "firstNumbers",
           placeholder: "1234",
-          onInputChange: () => {
-            console.log("첫번째 카드숫자가 바뀜!");
-            // setCardInfo
-            // setFormErrors
+          maxLength: 4,
+          onInputChange: (e: any) => {
+            const inputs = e.target.parentNode.querySelectorAll("input") as HTMLInputElement[];
+            const inputValues = Array.from(inputs).map((input) => input.value);
+            const numbersList = inputValues.map((value) => value.split("").map(Number));
+            if (isValidCardNumbers(numbersList)) {
+              setCardInfo((prev) => ({
+                ...prev,
+                cardNumbers: {
+                  firstNumbers: numbersList[0],
+                  secondNumbers: numbersList[1],
+                  thirdNumbers: numbersList[2],
+                  fourthNumbers: numbersList[3],
+                },
+              }));
+              setFormErrors((prev) => ({ ...prev, cardNumbers: { isError: false, errorMessage: "" } }));
+            } else {
+              setFormErrors((prev) => ({
+                ...prev,
+                cardNumbers: { isError: true, errorMessage: "카드번호에 잘못된 입력이 있습니다." },
+              }));
+            }
           },
         },
         {
           name: "secondNumbers",
           placeholder: "1234",
-          onInputChange: () => {
-            console.log("두번째 카드숫자가 바뀜!");
+          maxLength: 4,
+          onInputChange: (e: any) => {
+            const inputs = e.target.parentNode.querySelectorAll("input") as HTMLInputElement[];
+            const inputValues = Array.from(inputs).map((input) => input.value);
+            const numbersList = inputValues.map((value) => value.split("").map(Number));
+            if (isValidCardNumbers(numbersList)) {
+              setCardInfo((prev) => ({
+                ...prev,
+                cardNumbers: {
+                  firstNumbers: numbersList[0],
+                  secondNumbers: numbersList[1],
+                  thirdNumbers: numbersList[2],
+                  fourthNumbers: numbersList[3],
+                },
+              }));
+              setFormErrors((prev) => ({ ...prev, cardNumbers: { isError: false, errorMessage: "" } }));
+            } else {
+              setFormErrors((prev) => ({
+                ...prev,
+                cardNumbers: { isError: true, errorMessage: "카드번호에 잘못된 입력이 있습니다." },
+              }));
+            }
           },
         },
         {
           name: "thirdNumbers",
           placeholder: "1234",
-          onInputChange: () => {
+          maxLength: 4,
+          onInputChange: (e: any) => {
             console.log("세번째 카드숫자가 바뀜!");
+            const inputs = e.target.parentNode.querySelectorAll("input") as HTMLInputElement[];
+            const inputValues = Array.from(inputs).map((input) => input.value);
+            const numbersList = inputValues.map((value) => value.split("").map(Number));
+            if (isValidCardNumbers(numbersList)) {
+              setCardInfo((prev) => ({
+                ...prev,
+                cardNumbers: {
+                  firstNumbers: numbersList[0],
+                  secondNumbers: numbersList[1],
+                  thirdNumbers: numbersList[2],
+                  fourthNumbers: numbersList[3],
+                },
+              }));
+              setFormErrors((prev) => ({ ...prev, cardNumbers: { isError: false, errorMessage: "" } }));
+            } else {
+              setFormErrors((prev) => ({
+                ...prev,
+                cardNumbers: { isError: true, errorMessage: "카드번호에 잘못된 입력이 있습니다." },
+              }));
+            }
           },
         },
         {
           name: "fourthNumbers",
           placeholder: "1234",
-          onInputChange: () => {
-            console.log("네번째 카드숫자가 바뀜!");
+          maxLength: 4,
+          onInputChange: (e: any) => {
+            const inputs = e.target.parentNode.querySelectorAll("input") as HTMLInputElement[];
+            const inputValues = Array.from(inputs).map((input) => input.value);
+            const numbersList = inputValues.map((value) => value.split("").map(Number));
+            if (isValidCardNumbers(numbersList)) {
+              setCardInfo((prev) => ({
+                ...prev,
+                cardNumbers: {
+                  firstNumbers: numbersList[0],
+                  secondNumbers: numbersList[1],
+                  thirdNumbers: numbersList[2],
+                  fourthNumbers: numbersList[3],
+                },
+              }));
+              setFormErrors((prev) => ({ ...prev, cardNumbers: { isError: false, errorMessage: "" } }));
+            } else {
+              setFormErrors((prev) => ({
+                ...prev,
+                cardNumbers: { isError: true, errorMessage: "카드번호에 잘못된 입력이 있습니다." },
+              }));
+            }
           },
         },
       ],
@@ -99,6 +178,7 @@ function App() {
         {
           name: "validityMonth",
           placeholder: "MM",
+          maxLength: 2,
           onInputChange: () => {
             console.log("카드 유효기간 월이 바뀜!");
           },
@@ -106,6 +186,7 @@ function App() {
         {
           name: "validityYear",
           placeholder: "YY",
+          maxLength: 2,
           onInputChange: () => {
             console.log("카드 유효기간 년도가 바뀜!");
           },
@@ -121,6 +202,7 @@ function App() {
         {
           name: "ownerName",
           placeholder: "PARK JEONG-WOO",
+          maxLength: 20,
           onInputChange: () => {
             console.log("카드 소유자가 바뀜!");
           },

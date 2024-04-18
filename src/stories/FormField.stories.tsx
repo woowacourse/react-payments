@@ -25,6 +25,7 @@ export const Default: Story = {
         {
           name: "first",
           placeholder: "1234",
+          maxLength: 4,
           onInputChange: () => {},
         },
       ],
@@ -59,21 +60,25 @@ export const SmallInputForm: Story = {
         {
           name: "1",
           placeholder: "1234",
+          maxLength: 4,
           onInputChange: () => {},
         },
         {
           name: "2",
           placeholder: "1234",
+          maxLength: 4,
           onInputChange: () => {},
         },
         {
           name: "3",
           placeholder: "1234",
+          maxLength: 4,
           onInputChange: () => {},
         },
         {
           name: "4",
           placeholder: "1234",
+          maxLength: 4,
           onInputChange: () => {},
         },
       ],
@@ -108,11 +113,13 @@ export const MediumInputForm: Story = {
         {
           name: "1",
           placeholder: "MM",
+          maxLength: 2,
           onInputChange: () => {},
         },
         {
           name: "2",
           placeholder: "YY",
+          maxLength: 2,
           onInputChange: () => {},
         },
       ],
@@ -146,6 +153,7 @@ export const LargeInputForm: Story = {
         {
           name: "name",
           placeholder: "LURGI PARK",
+          maxLength: 20,
           onInputChange: () => {},
         },
       ],
