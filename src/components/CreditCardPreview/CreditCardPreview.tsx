@@ -49,7 +49,6 @@ const CreditCardPreview = ({
             );
           })}
         </S.CardNumbers>
-
         <S.Input type="text" value={expirationDate} readOnly></S.Input>
         <S.Input type="text" value={ownerName} readOnly></S.Input>
       </S.CreditCardInfo>
