@@ -5,7 +5,7 @@ export interface InputProps {
   maxLength?: number;
   placeholder?: string;
   isError?: boolean;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const Input = ({ value, maxLength, placeholder, isError, onChange }: InputProps) => {

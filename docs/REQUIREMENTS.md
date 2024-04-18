@@ -31,3 +31,4 @@
 - [x] 카드 번호 컴포넌트 (CardNumbers)
 - [x] 카드 유효기간 컴포넌트 (CardExpiration)
 - [x] 프리뷰 컴포넌트 (CardPreview)
+- [x] 카드 정보 입력 섹션 컴포넌트 (NewCardInputSection)

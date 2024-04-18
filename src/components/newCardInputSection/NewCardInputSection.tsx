@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import * as Styled from "./NewCardInputSection.styles";
 
-interface NewCardInputSectionProps {
+export interface NewCardInputSectionProps {
   label: string;
   mainText: string;
   subText?: string;
