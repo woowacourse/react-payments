@@ -100,12 +100,17 @@ const CardRegisterForm = ({
         </S.TitleWrapper>
         <InputField
           label={INPUT_LABEL.OWNER_NAME}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => {
-            onChangeOwnerName(e, 0);
-          }}
           errorMessage={ownerErrorMessage}
         >
-          <Input placeholder={PLACE_HOLDER.OWNER_NAME} isError={false} />
+          <Input
+            placeholder={PLACE_HOLDER.OWNER_NAME}
+            isError={false}
+            type="text"
+            maxLength={30}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              onChangeOwnerName(e, 0);
+            }}
+          />
         </InputField>
       </S.InputFieldWithInfo>
     </S.CardFormWrapper>

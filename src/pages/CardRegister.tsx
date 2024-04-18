@@ -2,39 +2,31 @@ import styled from "styled-components";
 import CardRegisterForm from "@/components/CardRegisterForm/CardRegisterForm";
 import CreditCardPreview from "@/components/CreditCardPreview/CreditCardPreview";
 import useInput from "@/hooks/useInput";
-import { INPUT_COUNTS } from "@/constants/condition";
+import { CARD_BRAND_INFO, INPUT_COUNTS } from "@/constants/condition";
+import { makeStringArray } from "@/components/utils/arrayHelper";
 
 const CardRegister = () => {
   const cardNumbersState = useInput({
-    initialValue: Array.from({ length: INPUT_COUNTS.CARD_NUMBERS }, () => ""),
-    validate: (input) => {
-      if (input[0].length > 3) {
-        console.log("fail");
-        return "3자리가 넘습니다.";
-      }
-      console.log("pass");
-      return "";
-    },
+    initialValue: makeStringArray(INPUT_COUNTS.CARD_NUMBERS),
+    maxLength: 4,
   });
 
   const expiredDateState = useInput({
-    initialValue: Array.from(
-      { length: INPUT_COUNTS.EXPIRATION_PERIOD },
-      () => ""
-    ),
+    initialValue: makeStringArray(INPUT_COUNTS.EXPIRATION_PERIOD),
+    maxLength: 2,
   });
 
   const ownerNameState = useInput({
-    initialValue: [""],
+    initialValue: makeStringArray(1),
   });
 
   const checkCardBrand = (cardNumbers: string[]) => {
-    if (cardNumbers[0][0] === "4") {
+    if (Number(cardNumbers[0][0]) === CARD_BRAND_INFO.VISA.START_NUMBER) {
       return "VISA";
     }
     if (
-      Number(cardNumbers[0].slice(0, 2)) <= 55 &&
-      Number(cardNumbers[0].slice(0, 2)) >= 51
+      Number(cardNumbers[0].slice(0, 2)) <= CARD_BRAND_INFO.MASTER.END_NUMBER &&
+      Number(cardNumbers[0].slice(0, 2)) >= CARD_BRAND_INFO.MASTER.START_NUMBER
     ) {
       return "MASTER";
     }

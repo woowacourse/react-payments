@@ -26,3 +26,13 @@ export const INPUT_INFO_SUBTITLE = {
   CARD_NUMBERS: "본인 명의의 카드만 결제 가능합니다.",
   EXPIRATION_DATE: "월/년도(MMYY)를 순서대로 입력해 주세요.",
 };
+
+export const CARD_BRAND_INFO = {
+  VISA: {
+    START_NUMBER: 4,
+  },
+  MASTER: {
+    START_NUMBER: 51,
+    END_NUMBER: 55,
+  },
+};

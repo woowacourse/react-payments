@@ -36,13 +36,20 @@ const CreditCardPreview = ({
             const isMasked = index >= 2;
             return isMasked ? (
               <S.Input
+                key={index}
                 type="password"
                 value={number}
                 readOnly
                 $center
               ></S.Input>
             ) : (
-              <S.Input type="text" value={number} readOnly $center></S.Input>
+              <S.Input
+                key={index}
+                type="text"
+                value={number}
+                readOnly
+                $center
+              ></S.Input>
             );
           })}
         </S.CardNumbers>
