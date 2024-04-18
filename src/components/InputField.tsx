@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { InputInfo, INPUT_TYPE } from '../types/input';
+import { InputInfo, InputType } from '../types/input';
 import { Card } from '../types/card';
 import Input from './Input';
 import FieldTitle from './FieldTitle';
@@ -35,7 +35,7 @@ const ErrorBox = styled.div`
 interface Props {
   title: string;
   subtitle?: string;
-  inputTypes: INPUT_TYPE;
+  inputTypes: InputType;
   cardInfo: Card;
   handleInput: (value: Card) => void;
 }
