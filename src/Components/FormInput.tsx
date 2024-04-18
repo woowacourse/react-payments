@@ -21,6 +21,7 @@ const FormInput: React.FC<InputProps> = ({ sizePreset = "medium", onChange, ...p
     padding: "8px",
     width: SIZE[sizePreset],
     marginTop: "10px",
+    textTransform: "uppercase",
   });
   return <input {...props} css={inputStyle} onChange={(e) => onChange(e)} />;
 };
