@@ -6,11 +6,13 @@ import { ExpirationPeriodValue } from "../../@types/CreditCard";
 interface InputExpirationPeriodProps {
   inputValue: ExpirationPeriodValue;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  inputError: boolean;
 }
 
 const InputExpirationPeriod = ({
   inputValue,
   handleChange,
+  inputError,
 }: InputExpirationPeriodProps) => {
   return (
     <InputContainer>
@@ -25,6 +27,7 @@ const InputExpirationPeriod = ({
           placeholder="MM"
           id="expirationDate"
           name="month"
+          isError={inputError}
         />
         <InputBox
           inputValue={inputValue.year}
@@ -33,6 +36,7 @@ const InputExpirationPeriod = ({
           placeholder="YY"
           id="expirationDate"
           name="year"
+          isError={inputError}
         />
       </InputWrapper>
     </InputContainer>

@@ -5,9 +5,14 @@ import styled from "@emotion/styled";
 interface InputOwnerNameProps {
   inputValue: string;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  inputError: boolean;
 }
 
-const InputOwnerName = ({ inputValue, handleChange }: InputOwnerNameProps) => {
+const InputOwnerName = ({
+  inputValue,
+  handleChange,
+  inputError,
+}: InputOwnerNameProps) => {
   return (
     <InputContainer>
       <InputLabel htmlFor="ownerName">{CARD_FORM_MESSAGE.cardOwner}</InputLabel>
@@ -18,6 +23,7 @@ const InputOwnerName = ({ inputValue, handleChange }: InputOwnerNameProps) => {
         placeholder="JOHN DOE"
         id="ownerName"
         name="name"
+        isError={inputError}
       />
     </InputContainer>
   );

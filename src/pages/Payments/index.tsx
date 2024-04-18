@@ -13,20 +13,21 @@ interface Owner {
 }
 
 const Payments = () => {
-  const [cardNumber, setCardNumber] = useInput<CardNumberValue>({
-    firstValue: "",
-    secondValue: "",
-    thirdValue: "",
-    fourthValue: "",
-  });
+  const [cardNumber, setCardNumber, cardNumberError] =
+    useInput<CardNumberValue>({
+      firstValue: "",
+      secondValue: "",
+      thirdValue: "",
+      fourthValue: "",
+    });
 
-  const [expirationPeriod, setExpirationPeriod] =
+  const [expirationPeriod, setExpirationPeriod, expirationPeriodError] =
     useInput<ExpirationPeriodValue>({
       month: "",
       year: "",
     });
 
-  const [owner, setOwner] = useInput<Owner>({ name: "" });
+  const [owner, setOwner, ownerError] = useInput<Owner>({ name: "" });
 
   const concatPeriod = () =>
     expirationPeriod.year.length
@@ -52,6 +53,7 @@ const Payments = () => {
           type="cardNumber"
           inputValue={cardNumber}
           handleChange={setCardNumber}
+          inputError={cardNumberError}
         />
         <CreditCardForm
           title={CARD_FORM_MESSAGE.inputCardExpirationDate}
@@ -59,12 +61,14 @@ const Payments = () => {
           type="expirationPeriod"
           inputValue={expirationPeriod}
           handleChange={setExpirationPeriod}
+          inputError={expirationPeriodError}
         />
         <CreditCardForm
           title={CARD_FORM_MESSAGE.inputCardOwner}
           type="owner"
           inputValue={owner.name}
           handleChange={setOwner}
+          inputError={ownerError}
         />
       </InputFormContainer>
     </PaymentsContainer>

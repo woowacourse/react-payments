@@ -6,11 +6,13 @@ import { CardNumberValue } from "../../@types/CreditCard";
 interface InputCreditCardNumberProps {
   inputValue: CardNumberValue;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  inputError: boolean;
 }
 
 const InputCreditCardNumber = ({
   inputValue,
   handleChange,
+  inputError,
 }: InputCreditCardNumberProps) => {
   return (
     <InputContainer>
@@ -25,6 +27,7 @@ const InputCreditCardNumber = ({
           placeholder="1234"
           id="creditCardNumber"
           name="firstValue"
+          isError={inputError}
         />
         <InputBox
           inputValue={inputValue.secondValue}
@@ -33,6 +36,7 @@ const InputCreditCardNumber = ({
           placeholder="1234"
           id="creditCardNumber"
           name="secondValue"
+          isError={inputError}
         />
         <InputBox
           inputValue={inputValue.thirdValue}
@@ -41,6 +45,7 @@ const InputCreditCardNumber = ({
           placeholder="1234"
           id="creditCardNumber"
           name="thirdValue"
+          isError={inputError}
         />
         <InputBox
           inputValue={inputValue.fourthValue}
@@ -49,6 +54,7 @@ const InputCreditCardNumber = ({
           placeholder="1234"
           id="creditCardNumber"
           name="fourthValue"
+          isError={inputError}
         />
       </InputWrapper>
     </InputContainer>
