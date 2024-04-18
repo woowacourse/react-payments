@@ -1,3 +1,7 @@
+import MASTERCARD_IMAGE from "../../assets/image/Mastercard.png";
+import VISA_IMAGE from "../../assets/image/Visa.png";
+import CARD_NUMBER_BLIND_IMAGE from "../../assets/image/CardNumberBlind.svg";
+
 import styles from "./Card.module.css";
 
 const Card = ({
@@ -23,11 +27,9 @@ const Card = ({
     const cardStyle = styles.logo;
 
     if (isMasterCard(cardNumbers[0]))
-      return (
-        <img src="/src/assets/image/Mastercard.png" className={cardStyle} />
-      );
+      return <img src={MASTERCARD_IMAGE} className={cardStyle} />;
     if (isVisaCard(cardNumbers[0]))
-      return <img src="/src/assets/image/Visa.png" className={cardStyle} />;
+      return <img src={VISA_IMAGE} className={cardStyle} />;
   };
 
   return (
@@ -45,11 +47,7 @@ const Card = ({
                 ? new Array(cardNumber.toString().length)
                     .fill(0)
                     .map(() => (
-                      <img
-                        src="/src/assets/image/CardNumberBlind.svg"
-                        width="4"
-                        height="4"
-                      />
+                      <img src={CARD_NUMBER_BLIND_IMAGE} width="4" height="4" />
                     ))
                 : cardNumber}
             </span>
