@@ -4,61 +4,81 @@ import Label from "../common/Label";
 import Input from "../common/Input";
 
 import styled from "styled-components";
+import { VALIDATION_MESSAGES } from "../../constants/card-app";
 
 interface CardNumberInputProps {
-  inputCount: number;
-  errorCaption: () => JSX.Element;
+  cardNumbers: string[];
+  errorCaption: (text: string) => JSX.Element;
   handleCardNumberChange: (index: number, value: string) => void;
 }
 
 const CardNumberInput = ({
-  inputCount,
+  cardNumbers,
   errorCaption,
   handleCardNumberChange,
 }: CardNumberInputProps) => {
   const [inputErrors, setInputErrors] = useState<boolean[]>(
-    Array.from<boolean>({ length: inputCount }).fill(false)
+    Array.from<boolean>({ length: cardNumbers.length }).fill(false)
   );
 
   const handleInputChange = (index: number, value: string) => {
-    const isError = !/^\d+$/.test(value);
+    const isNumericInput = /^(\d*)$/.test(value);
+    const isValidateCardNumber = value.length === 4;
 
-    setInputErrors((errors) =>
-      errors.map((error, errorIndex) =>
-        index === errorIndex ? isError : error
-      )
-    );
+    setInputErrors((prevErrors) => {
+      const newPrevErrors = [...prevErrors];
+      newPrevErrors[index] = !isNumericInput || !isValidateCardNumber;
+
+      return newPrevErrors;
+    });
+
+    if (!isNumericInput) return;
 
     handleCardNumberChange(index, value);
   };
 
-  const hasErrorInput = () => inputErrors.some((error) => error);
+  const hasErrorInput = inputErrors.some((error) => error);
 
   return (
-    <>
+    <InputField>
       <Label htmlFor="card-number">카드 번호</Label>
       <InputContainer>
-        {Array.from({ length: inputCount }, (_, index) => (
+        {Array.from({ length: cardNumbers.length }, (_, index) => (
           <Input
-            id={index === 0 ? "card-number" : ""}
             key={`input-${index}`}
-            size="small"
+            id={index === 0 ? "card-number" : ""}
             type="text"
             placeholder="1234"
+            value={cardNumbers[index]}
             maxLength={4}
+            size="small"
             isError={inputErrors[index]}
             onChange={(e) => handleInputChange(index, e.target.value)}
           />
         ))}
       </InputContainer>
-      {hasErrorInput() && errorCaption()}
-    </>
+      {hasErrorInput
+        ? errorCaption(VALIDATION_MESSAGES.onlyNumbersAllowed)
+        : errorCaption("")}
+    </InputField>
   );
 };
 
 export default CardNumberInput;
 
-const InputContainer = styled.section`
+const InputField = styled.section`
+  height: 77px;
+  width: 315px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  margin-top: 16px;
+  margin-bottom: 16px;
+`;
+
+const InputContainer = styled.div`
   display: flex;
   justify-content: space-between;
 `;
