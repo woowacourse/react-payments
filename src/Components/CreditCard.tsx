@@ -45,8 +45,17 @@ const cardInfoStyle = css`
   }
 `;
 
+const periodRowStyle = css({
+  display: "flex",
+  gap: "5px",
+});
+
+const periodStyle = css({
+  width: "20px",
+});
+
 const formatTwoDigitNumber = (n: number | undefined) => {
-  if (!n) return;
+  if (!n) return "";
   return String(n).padStart(2, "0");
 };
 
@@ -63,7 +72,7 @@ const CreditCard: React.FC<Props> = ({ cardInfo: { cardNumbers, cardValidityPeri
       : cardNumbers?.firstNumbers[0] && pattern.test(cardNumbers?.firstNumbers?.join(""))
         ? masterImage
         : null;
-  Object.values(cardNumbers);
+
   return (
     <div css={style}>
       <div css={rowStyle}>
@@ -74,14 +83,14 @@ const CreditCard: React.FC<Props> = ({ cardInfo: { cardNumbers, cardValidityPeri
         <div css={rowStyle}>
           {Object.values(cardNumbers)?.map((part, index) => (
             <div key={index} css={width42}>
-              {part.join("")}
+              {index < 2 ? part.join("") : part.map(() => "*").join("")}
             </div>
           ))}
         </div>
-        <div>
-          {formatTwoDigitNumber(Number(month))}
-          {month && "/"}
-          {year}
+        <div css={periodRowStyle}>
+          <span css={periodStyle}>{formatTwoDigitNumber(month)}</span>
+          <span>{(month || year) && "/"}</span>
+          <span css={periodStyle}>{formatTwoDigitNumber(year)}</span>
         </div>
         <div> {ownerName}</div>
       </section>
