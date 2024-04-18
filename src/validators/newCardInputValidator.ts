@@ -22,7 +22,7 @@ export const validateCardExpiration = (value: string, index: number): string => 
 };
 
 export const validateUserName = (value: string): string => {
-  if (value !== "" && !/^[a-zA-Z]+$/.test(value)) {
+  if (value !== "" && !/^[a-zA-Z\s]+$/.test(value)) {
     return "영어만 입력 가능합니다.";
   }
   return "";
