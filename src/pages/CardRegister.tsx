@@ -9,6 +9,7 @@ const CardRegister = () => {
   const cardNumbersState = useInput({
     initialValue: makeStringArray(INPUT_COUNTS.CARD_NUMBERS),
     maxLength: 4,
+    validLength: 4,
   });
 
   const expiredDateState = useInput({

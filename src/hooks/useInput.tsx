@@ -1,16 +1,25 @@
 import { limitNumberLength } from "@/components/utils/numberHelper";
-import { useState } from "react";
+import { FocusEvent, useState } from "react";
 import React from "react";
+import { makeStringArray } from "@/components/utils/arrayHelper";
 
 interface Props {
   initialValue: string[];
   validate?: (input: string[]) => string;
   maxLength?: number;
+  validLength?: number;
 }
 
-const useInput = ({ initialValue = [], validate, maxLength }: Props) => {
+const useInput = ({
+  initialValue = [],
+  validate,
+  maxLength,
+  validLength,
+}: Props) => {
   const [input, setInput] = useState<string[]>(initialValue);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessages, setErrorMessages] = useState(
+    makeStringArray(initialValue.length)
+  );
 
   const onChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -31,9 +40,17 @@ const useInput = ({ initialValue = [], validate, maxLength }: Props) => {
       if (validate) {
         const validationError = validate(newInput);
         if (validationError) {
-          setErrorMessage(validationError);
+          setErrorMessages((prev) => {
+            const newErrorMessages = [...prev];
+            newErrorMessages[index] = "유효하지 않은 입력입니다.";
+            return newErrorMessages;
+          });
         } else {
-          setErrorMessage("");
+          setErrorMessages((prev) => {
+            const newErrorMessages = [...prev];
+            newErrorMessages[index] = "";
+            return newErrorMessages;
+          });
         }
       }
 
@@ -41,6 +58,24 @@ const useInput = ({ initialValue = [], validate, maxLength }: Props) => {
     });
   };
 
-  return { input, onChange, errorMessage };
+  const onBlur = (event: FocusEvent<Element, Element>, index: number) => {
+    if (validLength) {
+      if (input[index].length > 0 && input[index].length !== validLength) {
+        setErrorMessages((prev) => {
+          const newErrorMessages = [...prev];
+          newErrorMessages[index] = "유효하지 않은 길이입니다.";
+          return newErrorMessages;
+        });
+        return;
+      }
+    }
+    setErrorMessages((prev) => {
+      const newErrorMessages = [...prev];
+      newErrorMessages[index] = "";
+      return newErrorMessages;
+    });
+  };
+
+  return { input, onChange, errorMessages, onBlur };
 };
 export default useInput;
