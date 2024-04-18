@@ -1,3 +1,6 @@
+import { ERROR_MESSAGE } from '../constants/errorMessage';
+import { VALIDATION } from '../constants/validation';
+
 interface isValidateInputTableType {
   number: () => void;
   month: () => void;
@@ -20,13 +23,13 @@ const isValidateInput = (value: string, section: 'number' | 'month' | 'year' | '
 function isCardNumberValidated(value: string) {
   const valueToNumber = Number(value);
   isNumber(valueToNumber);
-  isNumberCount(value, 4);
+  isNumberCount(value, VALIDATION.cardNumberCount);
 }
 
 function isCardMonthValidated(value: string) {
   const valueToNumber = Number(value);
   isNumber(valueToNumber);
-  isInRange(valueToNumber, 1, 12);
+  isInRange(valueToNumber, VALIDATION.cardMonthRange.min, VALIDATION.cardMonthRange.max);
 }
 
 function isCardYearValidated(value: string) {
@@ -35,31 +38,31 @@ function isCardYearValidated(value: string) {
   const year = now.getFullYear();
   const lastTwoDigits = year % 100;
   isNumber(valueToNumber);
-  isInRange(valueToNumber, lastTwoDigits, lastTwoDigits + 10);
+  isInRange(valueToNumber, lastTwoDigits, lastTwoDigits + VALIDATION.maximumYearPeriod);
 }
 
 function isCardOwnerValidated(value: string) {
   isUpperCase(value);
-  isInRange(value.length, 1, 30);
+  isInRange(value.length, VALIDATION.cardOwnerLength.min, VALIDATION.cardOwnerLength.max);
 }
 
 function isNumber(value: number) {
   if (isNaN(value)) {
-    throw new Error('숫자를 입력해주세요.');
+    throw new Error(ERROR_MESSAGE.notANumber);
   }
   return true;
 }
 
 function isInRange(value: number, min: number, max: number) {
   if (value < min || value > max) {
-    throw new Error(`${min} 이상 ${max} 이하로 작성해주세요.`);
+    throw new Error(ERROR_MESSAGE.notInRange(min, max));
   }
   return true;
 }
 
 function isUpperCase(value: string) {
   if (value !== value.toUpperCase()) {
-    throw new Error('이름은 영대문자로 입력해주세요.');
+    throw new Error(ERROR_MESSAGE.upperCase);
   }
   return true;
 }
@@ -67,7 +70,7 @@ function isUpperCase(value: string) {
 function isNumberCount(value: string, count: number) {
   const valueLength = value.length;
   if (valueLength !== count) {
-    throw new Error(`${count}글자를 입력해주세요.`);
+    throw new Error(ERROR_MESSAGE.inputCount(count));
   }
   return true;
 }
