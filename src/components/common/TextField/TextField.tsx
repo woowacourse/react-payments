@@ -10,7 +10,7 @@ const SubTitle: React.FC<{ subTitle: string }> = ({ subTitle }) => (
   <h1 className={`caption ${styles.textFieldSubTitle}`}>{subTitle}</h1>
 );
 
-const Label: React.FC<{ labelText: string; htmlFor: string }> = ({ labelText, htmlFor }) => (
+const Label: React.FC<{ labelText: string; htmlFor?: string }> = ({ labelText, htmlFor }) => (
   <label htmlFor={htmlFor} className="label">
     {labelText}
   </label>
