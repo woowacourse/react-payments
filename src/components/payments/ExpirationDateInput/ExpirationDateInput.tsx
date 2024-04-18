@@ -16,7 +16,7 @@ const ExpirationDateInput: React.FC<ExpirationDateInputProps> = ({
     <Input
       id={id}
       maxLength={2}
-      type="number"
+      type="text"
       placeholder={placeholder}
       value={value}
       isError={isError}

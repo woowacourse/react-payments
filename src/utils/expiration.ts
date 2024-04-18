@@ -7,7 +7,7 @@ const getExpirationDate = (month: string, year: string) => {
 };
 
 export const validateExpirationDate = (month: string, year: string) => {
-  if (!/^(0[1-9]|1[0-2])$/.test(month)) {
+  if (!/^([1-9]|1[0-2])$/.test(month)) {
     return { isError: true, errorMessage: '월은 01에서 12 사이의 숫자여야 합니다.' };
   }
 

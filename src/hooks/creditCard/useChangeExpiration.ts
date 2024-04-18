@@ -8,8 +8,12 @@ const useChangeExpiration = () => {
   const [expirationError, setExpirationError] = useState({ isError: false, errorMessage: '' });
 
   const handleExpirationChange = (field: 'month' | 'year', value: string) => {
-    const newExpiration = { ...expiration, [field]: value };
+    if (/\D/.test(value)) {
+      setExpirationError({ isError: true, errorMessage: '월은 01에서 12 사이의 숫자여야 합니다.' });
+      return;
+    }
 
+    const newExpiration = { ...expiration, [field]: value };
     const error = validateExpirationDate(newExpiration.month, newExpiration.year);
 
     setExpiration(newExpiration);

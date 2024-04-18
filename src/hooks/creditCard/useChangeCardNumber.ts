@@ -8,7 +8,17 @@ const useChangeCardNumber = () => {
   });
 
   const handleCardNumberChange = (index: number, value: string) => {
+    if (/\D/.test(value)) {
+      setCardNumberError({
+        isError: true,
+        errorMessage: '카드 번호는 16자리 숫자여야 합니다.',
+      });
+
+      return;
+    }
+
     const newParts = [...cardNumbers];
+
     newParts[index] = value;
 
     const completeCardNumber = newParts.join('');

@@ -10,7 +10,7 @@ const CardNumberInput: React.FC<CardNumberInputProps> = ({ isError = false, valu
       id={id}
       maxLength={4}
       placeholder="1234"
-      type="number"
+      type="text"
       value={value}
       isError={isError}
       onChange={onAddCardNumber}
