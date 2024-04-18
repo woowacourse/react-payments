@@ -1,7 +1,7 @@
 name: Deploy
 on:
   push:
-    branches: ['release']
+    branches: ['step1']
   workflow_dispatch:
 permissions:
   contents: read
