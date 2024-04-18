@@ -3,6 +3,7 @@ import { MASTERCARD, VISA } from '../assets';
 import { isRange } from '../util/isRange';
 import { CARD_INFORMATION } from '../constants/cardInformation';
 import { cardBrand, CardBrandType } from '../types/cardType';
+import { VALIDATION } from '../constants/validation';
 
 interface CardImageType {
   cardNumber: string[];
@@ -48,6 +49,18 @@ function CardImage({ cardNumber, cardPeriod, cardOwner }: CardImageType) {
     });
   };
 
+  const monthFormat = (month: string) => {
+    const monthNumber = Number(month);
+    if (month && !isRange(monthNumber, VALIDATION.singleDigit.min, VALIDATION.singleDigit.max)) {
+      return '0'.repeat(2 - month.length) + month;
+    }
+    return month;
+  };
+
+  const periodFormat = (month: string, year: string) => {
+    if (month) return [monthFormat(month), year].join('/');
+  };
+
   return (
     <>
       {/* 카드 배경 영역 */}
@@ -57,11 +70,14 @@ function CardImage({ cardNumber, cardPeriod, cardOwner }: CardImageType) {
           <div css={cardIcStyle}></div>
           {imageUrl && <img src={imageUrl} css={cardLogoStyle} />}
         </div>
-        {}
         {/* 컨텐츠 */}
         <div css={cardContentStyle}>
-          <p css={cardDetailStyle}>{displayNumber().join(' ')}</p>
-          <p css={cardDetailStyle}>{cardPeriod.join('/')}</p>
+          <div css={[cardDetailStyle, cardNumberGridStyle]}>
+            {displayNumber().map((numbers, index) => {
+              return <p key={index}>{numbers}</p>;
+            })}
+          </div>
+          <p css={cardDetailStyle}>{periodFormat(cardPeriod[0], cardPeriod[1])}</p>
           <p css={cardDetailStyle}>{cardOwner}</p>
         </div>
       </div>
@@ -112,8 +128,15 @@ const cardDetailStyle = css`
   color: #ffffff;
   font-size: 14px;
   line-height: 20px;
-  letter-spacing: 16%;
+  letter-spacing: inherit;
   white-space: pre-wrap;
+`;
+
+const cardNumberGridStyle = css`
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(4, 1fr);
+  justify-content: center;
 `;
 
 export default CardImage;

@@ -7,6 +7,10 @@ export const VALIDATION = {
   maximumYearPeriod: 10,
   cardOwnerLength: {
     min: 1,
-    max: 30,
+    max: 20,
+  },
+  singleDigit: {
+    min: 1,
+    max: 9,
   },
 };
