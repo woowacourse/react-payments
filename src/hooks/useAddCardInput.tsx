@@ -45,7 +45,10 @@ export default function useAddCardInput<T extends InitialValuesType>({
     } else {
       setErrMsg('');
       setIsError({ ...isError, [name]: false });
-      setValues({ ...values, [name]: value });
+      setValues({
+        ...values,
+        [name]: name === 'ownerName' ? value.toUpperCase() : value,
+      });
     }
   };
 
