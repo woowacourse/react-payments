@@ -1,6 +1,5 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 
-import styles from './style.module.css';
 import {
   CARD_USER,
   CARD_USER_FORM_MESSAGE,
@@ -11,6 +10,8 @@ import CardInput from '../CardInput';
 import CardInputContainer from '../CardInputContainer';
 import FormErrorMessage from '../FormErrorMessage';
 import Input from '../Input';
+
+import styles from './style.module.css';
 
 interface CardUserNameInputProps {
   editCardUserName: (name: string | undefined) => void;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import CardChip from '../../assets/images/cardChip.png';
 import { CARD_COLOR, CARD_MARK, CARD_NUMBERS } from '../../constants';

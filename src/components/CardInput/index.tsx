@@ -1,4 +1,4 @@
-import React, { ReactNode, useId } from 'react';
+import { ReactNode, useId } from 'react';
 
 import styles from './style.module.css';
 
