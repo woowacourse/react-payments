@@ -3,7 +3,7 @@ import MasterLogo from "@/assets/MasterLogo.svg?react";
 import VisaLogo from "@/assets/VisaLogo.svg?react";
 import { theme } from "@/style/theme";
 
-type CardType = "VISA" | "MASTER" | "NONE";
+export type CardType = "VISA" | "MASTER" | "NONE";
 
 interface Props {
   cardType: CardType;
@@ -49,7 +49,6 @@ const CreditCardPreview = ({
             );
           })}
         </S.CardNumbers>
-
         <S.Input type="text" value={expirationDate} readOnly></S.Input>
         <S.Input type="text" value={ownerName} readOnly></S.Input>
       </S.CreditCardInfo>
