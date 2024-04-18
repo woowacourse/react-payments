@@ -111,6 +111,7 @@ const cardDetailStyle = css`
   font-size: 14px;
   line-height: 20px;
   letter-spacing: 16%;
+  white-space: pre-wrap;
 `;
 
 export default CardImage;
