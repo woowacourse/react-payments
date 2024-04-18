@@ -28,7 +28,7 @@ const CreditCardForm: React.FC = () => {
       </PreviewCreditCardStyleContainer>
       <TextFieldStyleContainer>
         <CardNumberTextField
-          cardNumberParts={cardNumbers}
+          cardNumbers={cardNumbers}
           onAddCardNumber={handleCardNumberChange}
           cardNumberError={cardNumberError}
         />
