@@ -1,5 +1,7 @@
 import { Dispatch, SetStateAction, useState, useEffect } from "react";
-import Input from "./Input";
+import Input from "./common/Input/Input";
+import styles from "../App.module.css";
+
 import {
   CARD_NUMBER_UNIT_LENGTH,
   CARD_NUMBER_UNIT_PLACEHOLDER,
@@ -8,11 +10,9 @@ import {
 export default function CardNumbersInputField({
   cardNumbers,
   setCardNumbers,
-  type,
 }: {
   cardNumbers: string[];
   setCardNumbers: Dispatch<SetStateAction<string[]>>;
-  type: "text" | "password";
 }) {
   const [errorMessages, setErrorMessages] = useState<[number, string][]>([]);
   const [visibleErrorMessage, setVisibleErrorMessage] = useState<
@@ -61,19 +61,21 @@ export default function CardNumbersInputField({
 
   return (
     <>
-      <div>카드 번호</div>
-      {cardNumbers.map((cardNumber, i) => (
-        <Input
-          onChange={(e) => handleChange(e, i)}
-          placeholder={CARD_NUMBER_UNIT_PLACEHOLDER}
-          maxLength={CARD_NUMBER_UNIT_LENGTH}
-          value={cardNumber}
-          type={i >= cardNumbers.length / 2 ? "password" : "type"}
-          isError={checkError(i)}
-        />
-      ))}
+      <div className={styles.label}>카드 번호</div>
+      <div className={styles.horizon__gap__container}>
+        {cardNumbers.map((cardNumber, i) => (
+          <Input
+            onChange={(e) => handleChange(e, i)}
+            placeholder={CARD_NUMBER_UNIT_PLACEHOLDER}
+            maxLength={CARD_NUMBER_UNIT_LENGTH}
+            value={cardNumber}
+            type={i >= cardNumbers.length / 2 ? "password" : "type"}
+            isError={checkError(i)}
+          />
+        ))}
+      </div>
       {(visibleErrorMessage.length !== 0 || errorMessages.length !== 0) && (
-        <div>
+        <div className={styles.error_message}>
           {visibleErrorMessage.length !== 0
             ? visibleErrorMessage[1]
             : errorMessages[errorMessages.length - 1][1]}
