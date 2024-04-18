@@ -7,6 +7,7 @@ const InputContainer = styled.input`
   width: 100%;
   padding: 0.5rem;
   border: 1px solid ${(props) => props.color};
+  outline-color: ${(props) => props.color};
   border-radius: 3px;
 `;
 
