@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Validator from "../utils/Validator";
+import CARD_INPUTBOX_NAME from "../constants/cardInputBoxName";
 
 const useInput = <T extends object>(initialValue: T) => {
   const [inputValue, setInputValue] = useState<T>(initialValue);
@@ -12,7 +13,7 @@ const useInput = <T extends object>(initialValue: T) => {
     if (isError) return setInputError(true);
     if (!isValid) return;
 
-    const validValue = name === "name" ? value.toUpperCase() : value;
+    const validValue = name === CARD_INPUTBOX_NAME.owner.name ? value.toUpperCase() : value;
 
     setInputValue((prevState) => ({
       ...prevState,

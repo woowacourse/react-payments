@@ -2,6 +2,7 @@ import InputBox from "./common/InputBox";
 import CARD_FORM_MESSAGE from "../../constants/cardFormMessage";
 import styled from "@emotion/styled";
 import { ExpirationPeriodValue } from "../../@types/CreditCard";
+import CARD_INPUTBOX_NAME from "../../constants/cardInputBoxName";
 
 interface InputExpirationPeriodProps {
   inputValue: ExpirationPeriodValue;
@@ -24,7 +25,7 @@ const InputExpirationPeriod = ({
           size="medium"
           placeholder="MM"
           id="expirationDate"
-          name="month"
+          name={CARD_INPUTBOX_NAME.expirationPeriod.month}
           isError={inputError}
         />
         <InputBox
@@ -33,7 +34,7 @@ const InputExpirationPeriod = ({
           size="medium"
           placeholder="YY"
           id="expirationDate"
-          name="year"
+          name={CARD_INPUTBOX_NAME.expirationPeriod.year}
           isError={inputError}
         />
       </InputWrapper>

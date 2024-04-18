@@ -29,8 +29,8 @@ const CreditCardForm = ({
   ) => {
     if (type === CARD_FORM_TYPE.cardNumber)
       return (
-        <InputOwnerName
-          inputValue={inputValue as string}
+        <InputCreditCardNumber
+          inputValue={inputValue as CardNumberValue}
           handleChange={handleChange}
           inputError={inputError}
         />
@@ -47,8 +47,8 @@ const CreditCardForm = ({
 
     if (type === CARD_FORM_TYPE.owner)
       return (
-        <InputCreditCardNumber
-          inputValue={inputValue as CardNumberValue}
+        <InputOwnerName
+          inputValue={inputValue as string}
           handleChange={handleChange}
           inputError={inputError}
         />
