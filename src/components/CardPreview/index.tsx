@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { CSSProperties, useEffect, useState } from 'react';
 
-import { CARD_MARK, CARD_NUMBERS } from '../../constants';
+import styles from './style.module.css';
+import { CARD_COLOR, CARD_MARK, CARD_NUMBERS } from '../../constants';
 import { CardInfo } from '../../modules/useCardInfoReducer';
 
 interface CardPreviewProps {
@@ -8,7 +9,7 @@ interface CardPreviewProps {
 }
 function CardPreview(props: CardPreviewProps) {
   const { cardInfo } = props;
-  const { mark, number, period, userName } = cardInfo;
+  const { mark, number, period, userName, color } = cardInfo;
   const SLASH = '/';
   const DOT = '·';
   interface MarkInfo {
@@ -47,8 +48,11 @@ function CardPreview(props: CardPreviewProps) {
   }, [number]);
 
   return (
-    <div>
-      <div className="inner">
+    <div className={styles.cardPreview}>
+      <div
+        className={styles.cardImg}
+        style={{ backgroundColor: CARD_COLOR[color] }}
+      >
         <div className="top">
           <div className="chip"></div>
           <img src={markInfo.src} alt={markInfo.alt} />

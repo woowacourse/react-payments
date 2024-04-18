@@ -30,3 +30,7 @@ export const CARD_MARK = {
     alt: 'etc card',
   },
 };
+
+export const CARD_COLOR = {
+  default: '#333333',
+};
