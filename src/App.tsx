@@ -5,6 +5,8 @@ import CardholderNameContainer from './components/CardholderNameContainer';
 import CardExpiryDateContainer from './components/CardExpiryDateContainer';
 import { inquireCardNumber, inquireCardholderName, inquireExpiryMonth, inquireExpiryYear } from './inquiry';
 import CardNumberContainer from './components/CardNumbersContainer';
+import CardPreview from './components/CardPreview';
+import styled from 'styled-components';
 
 const App = () => {
   const {
@@ -12,6 +14,7 @@ const App = () => {
     generateChangeHandler: generateCardNumbersChangeHandler,
     generateErrorMessageUpdater: generateCardNumberErrorMessageUpdater,
     errorMessage: cardNumbersErrorMessage,
+    errorStatus: cardNumbersErrorStatus,
   } = useInputs(
     {
       first: '',
@@ -24,7 +27,7 @@ const App = () => {
 
   const {
     value: cardholderName,
-    handleChange: handleChangeCardholderName,
+    setValue: setCardholderName,
     updateErrorMessage: updateCardholderNameErrorMessage,
     errorMessage: cardholderNameErrorMessage,
   } = useInput('', inquireCardholderName);
@@ -44,12 +47,18 @@ const App = () => {
   } = useInput('', inquireExpiryYear);
 
   return (
-    <>
+    <AppLayout>
+      <CardPreview
+        cardNumbers={cardNumbers}
+        expiryDate={{ month: expiryMonth, year: expiryYear }}
+        cardholderName={cardholderName}
+      />
       <CardNumberContainer
         cardNumbers={cardNumbers}
         generateChangeHandler={generateCardNumbersChangeHandler}
         generateErrorMessageUpdater={generateCardNumberErrorMessageUpdater}
         errorMessage={cardNumbersErrorMessage}
+        errorStatus={cardNumbersErrorStatus}
       />
       <CardExpiryDateContainer
         expiryDate={{ month: expiryMonth, year: expiryYear }}
@@ -59,12 +68,18 @@ const App = () => {
       />
       <CardholderNameContainer
         cardholderName={cardholderName}
-        handleChange={handleChangeCardholderName}
+        setCardholderName={setCardholderName}
         updateErrorMessage={updateCardholderNameErrorMessage}
         errorMessage={cardholderNameErrorMessage}
       />
-    </>
+    </AppLayout>
   );
 };
+
+const AppLayout = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 export default App;
