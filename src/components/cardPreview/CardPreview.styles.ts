@@ -41,6 +41,7 @@ export const CardBrand = styled.div`
 export const CardInfoSection = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 8px;
   font-family: Inter;
   font-size: 14px;
@@ -50,4 +51,8 @@ export const CardInfoSection = styled.div`
   text-align: left;
   color: #ffffff;
   margin: 6px 17px;
+
+  div {
+    height: 20px;
+  }
 `;
