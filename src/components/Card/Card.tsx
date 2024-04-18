@@ -1,4 +1,6 @@
-import styles from "./Card.module.css";
+import styles from './Card.module.css';
+import Visa from '../../assets/image/Visa.png';
+import MasterCard from '../../assets/image/Mastercard.png';
 
 const Card = ({
   cardNumbers,
@@ -10,7 +12,7 @@ const Card = ({
   ownerName: string;
 }) => {
   const isVisaCard = (firstCardNumberUnit: string) => {
-    return firstCardNumberUnit.startsWith("4");
+    return firstCardNumberUnit.startsWith('4');
   };
 
   const isMasterCard = (firstCardNumberUnit: string) => {
@@ -22,12 +24,8 @@ const Card = ({
   const displayCardLogo = () => {
     const cardStyle = styles.logo;
 
-    if (isMasterCard(cardNumbers[0]))
-      return (
-        <img src="/src/assets/image/Mastercard.png" className={cardStyle} />
-      );
-    if (isVisaCard(cardNumbers[0]))
-      return <img src="/src/assets/image/Visa.png" className={cardStyle} />;
+    if (isMasterCard(cardNumbers[0])) return <img src={Visa} className={cardStyle} />;
+    if (isVisaCard(cardNumbers[0])) return <img src={MasterCard} className={cardStyle} />;
   };
 
   return (
@@ -44,13 +42,7 @@ const Card = ({
               {i >= cardNumbers.length / 2
                 ? new Array(cardNumber.toString().length)
                     .fill(0)
-                    .map(() => (
-                      <img
-                        src="/src/assets/image/CardNumberBlind.svg"
-                        width="4"
-                        height="4"
-                      />
-                    ))
+                    .map(() => <img src='/src/assets/image/CardNumberBlind.svg' width='4' height='4' />)
                 : cardNumber}
             </span>
           ))}
@@ -58,13 +50,13 @@ const Card = ({
         </div>
         <div>
           {Object.values(date).map((date, i) => (
-            <span style={{ color: "white" }}>
+            <span style={{ color: 'white' }}>
               {date}
-              {i < Object.values(date).length - 1 && "/"}
+              {i < Object.values(date).length - 1 && '/'}
             </span>
           ))}
         </div>
-        <span style={{ color: "white" }}>{ownerName}</span>
+        <span style={{ color: 'white' }}>{ownerName}</span>
       </div>
     </div>
   );
