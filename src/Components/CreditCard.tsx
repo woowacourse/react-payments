@@ -51,21 +51,19 @@ const formatTwoDigitNumber = (n: number | undefined) => {
 };
 
 interface Props {
-  cardInfo: Partial<CardInfo>;
+  cardInfo: CardInfo;
 }
 
 const CreditCard: React.FC<Props> = ({ cardInfo: { cardNumbers, cardValidityPeriod, ownerName } }) => {
   const pattern = /^(51|52|53|54)/;
-  const [month, year] = cardValidityPeriod!;
-  let cardImage;
-  if (cardNumbers && cardNumbers[0]) {
-    cardImage = cardNumbers[0]?.startsWith("4")
+  const { month, year } = cardValidityPeriod!;
+  const cardImage =
+    cardNumbers?.firstNumbers[0] === 4
       ? visaImage
-      : cardNumbers[0] && pattern.test(cardNumbers[0])
+      : cardNumbers?.firstNumbers[0] && pattern.test(cardNumbers?.firstNumbers?.join(""))
         ? masterImage
         : null;
-  }
-
+  Object.values(cardNumbers);
   return (
     <div css={style}>
       <div css={rowStyle}>
@@ -74,9 +72,9 @@ const CreditCard: React.FC<Props> = ({ cardInfo: { cardNumbers, cardValidityPeri
       </div>
       <section css={cardInfoStyle}>
         <div css={rowStyle}>
-          {cardNumbers?.map((part, index) => (
+          {Object.values(cardNumbers)?.map((part, index) => (
             <div key={index} css={width42}>
-              {part}
+              {part.join("")}
             </div>
           ))}
         </div>
