@@ -62,6 +62,15 @@ export default function CardExpirationDate({
     return true;
   };
 
+  const yearValidator = (numbers: string) => {
+    if (Number(numbers) < 24) {
+      setErrorMessage("유효한 년도를 입력해주세요");
+      return false;
+    }
+    setErrorMessage("");
+    return true;
+  };
+
   const isValidInput = (value: string, fieldName: string) => {
     if (!numberValidator(value)) {
       return true;
@@ -70,8 +79,15 @@ export default function CardExpirationDate({
     return false;
   };
 
-  const isValidLength = (value: string) => {
+  const isValidMonth = (value: string) => {
     if (!lengthValidator(value) || !monthValidator(value)) {
+      return true;
+    }
+    return false;
+  };
+
+  const isValidYear = (value: string) => {
+    if (!lengthValidator(value) || !yearValidator(value)) {
       return true;
     }
     return false;
@@ -91,14 +107,14 @@ export default function CardExpirationDate({
             placeholder="MM"
             onChange={(value) => isValidInput(value, "cardExpirationMonth")}
             value={cardExpirationMonth}
-            onBlur={isValidLength}
+            onBlur={isValidMonth}
           />
           <Input
             maxLength={2}
             placeholder="YY"
             onChange={(value) => isValidInput(value, "cardExpirationYear")}
             value={cardExpirationYear}
-            onBlur={isValidLength}
+            onBlur={isValidYear}
           />
         </InputContainer>
         <ErrorMessage message={errorMessage}></ErrorMessage>
