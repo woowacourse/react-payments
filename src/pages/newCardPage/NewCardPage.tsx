@@ -3,11 +3,11 @@ import Input from "../../components/input/Input";
 import CardPreview from "../../components/cardPreview/CardPreview";
 import { ICardInfo } from "../../types/type";
 import NewCardInputSection from "../../components/newCardInputSection/NewCardInputSection";
-import { NewCreditCardContainer } from "./NewCreditCard.styles";
+import { NewCardContainer } from "./NewCardPage.styles";
 import { validateCardExpiration, validateCardNumber, validateUserName } from "../../validators/newCardInputValidator";
 import { CARD_EXPIRATION, CARD_NUMBERS, USER_NAME } from "../../constants/setting";
 
-const NewCreditCard = () => {
+const NewCardPage = () => {
   const [cardInfo, setCardInfo] = useState<ICardInfo>({
     cardNumbers: [0, 0, 0, 0],
     cardExpiration: [0, 0],
@@ -74,7 +74,7 @@ const NewCreditCard = () => {
   };
 
   return (
-    <NewCreditCardContainer>
+    <NewCardContainer>
       {/* 프리뷰 */}
       <CardPreview cardInfo={cardInfo}></CardPreview>
       {/* 입력 - 카드 번호 */}
@@ -126,8 +126,8 @@ const NewCreditCard = () => {
           onChange={(e) => handleUserNameChange(e.target.value)}
         ></Input>
       </NewCardInputSection>
-    </NewCreditCardContainer>
+    </NewCardContainer>
   );
 };
 
-export default NewCreditCard;
+export default NewCardPage;

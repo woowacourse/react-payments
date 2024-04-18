@@ -1,9 +1,9 @@
-import NewCreditCard from "./pages/newCreditCard/NewCreditCard";
+import NewCardPage from "./pages/newCardPage/NewCardPage";
 
 function App() {
   return (
     <>
-      <NewCreditCard />
+      <NewCardPage />
     </>
   );
 }

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const NewCreditCardContainer = styled.div`
+export const NewCardContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
