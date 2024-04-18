@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import CreditCard from "./Components/CreditCard";
 import Form from "./Components/Form";
-import { isValidCardNumbers } from "./validators";
+import { isValidCardNumbers, isValidOwnerName, isValidPeriod } from "./validators";
 
 const initData: InitCardInfoType[] = [
   {
@@ -116,7 +116,6 @@ function App() {
           placeholder: "1234",
           maxLength: 4,
           onInputChange: (e: any) => {
-            console.log("세번째 카드숫자가 바뀜!");
             const inputs = e.target.parentNode.querySelectorAll("input") as HTMLInputElement[];
             const inputValues = Array.from(inputs).map((input) => input.value);
             const numbersList = inputValues.map((value) => value.split("").map(Number));
@@ -179,16 +178,50 @@ function App() {
           name: "validityMonth",
           placeholder: "MM",
           maxLength: 2,
-          onInputChange: () => {
-            console.log("카드 유효기간 월이 바뀜!");
+          onInputChange: (e: any) => {
+            const inputs = e.target.parentNode.querySelectorAll("input") as HTMLInputElement[];
+            const inputValues = Array.from(inputs).map((input) => input.value);
+            const [month, year] = inputValues.map((value) => Number(value));
+            if (isValidPeriod({ month, year })) {
+              setCardInfo((prev) => ({
+                ...prev,
+                cardValidityPeriod: {
+                  month,
+                  year,
+                },
+              }));
+              setFormErrors((prev) => ({ ...prev, cardValidityPeriod: { isError: false, errorMessage: "" } }));
+            } else {
+              setFormErrors((prev) => ({
+                ...prev,
+                cardValidityPeriod: { isError: true, errorMessage: "유효기간에 잘못된 입력이 있습니다." },
+              }));
+            }
           },
         },
         {
           name: "validityYear",
           placeholder: "YY",
           maxLength: 2,
-          onInputChange: () => {
-            console.log("카드 유효기간 년도가 바뀜!");
+          onInputChange: (e: any) => {
+            const inputs = e.target.parentNode.querySelectorAll("input") as HTMLInputElement[];
+            const inputValues = Array.from(inputs).map((input) => input.value);
+            const [month, year] = inputValues.map((value) => Number(value));
+            if (isValidPeriod({ month, year })) {
+              setCardInfo((prev) => ({
+                ...prev,
+                cardValidityPeriod: {
+                  month,
+                  year,
+                },
+              }));
+              setFormErrors((prev) => ({ ...prev, cardValidityPeriod: { isError: false, errorMessage: "" } }));
+            } else {
+              setFormErrors((prev) => ({
+                ...prev,
+                cardValidityPeriod: { isError: true, errorMessage: "유효기간에 잘못된 입력이 있습니다." },
+              }));
+            }
           },
         },
       ],
@@ -203,8 +236,22 @@ function App() {
           name: "ownerName",
           placeholder: "PARK JEONG-WOO",
           maxLength: 20,
-          onInputChange: () => {
-            console.log("카드 소유자가 바뀜!");
+          onInputChange: (e: any) => {
+            if (isValidOwnerName(e.target.value) || e.target.value === "") {
+              setCardInfo((prev) => ({
+                ...prev,
+                ownerName: e.target.value.toUpperCase(),
+              }));
+              setFormErrors((prev) => ({
+                ...prev,
+                ownerName: { isError: false, errorMessage: "" },
+              }));
+            } else {
+              setFormErrors((prev) => ({
+                ...prev,
+                ownerName: { isError: true, errorMessage: "카드 소유자 이름은 영어만 입력 가능합니다." },
+              }));
+            }
           },
         },
       ],
