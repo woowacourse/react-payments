@@ -1,20 +1,14 @@
 import Input from './common/Input';
-import { ErrorText } from '../styles/common';
+import { ErrorWrapper, ErrorText } from '../styles/common';
+import RegistrationLayout from './common/RegistrationLayout';
+
+type CardNumberKey = 'first' | 'second' | 'third' | 'fourth';
 
 export interface CardNumbersContainerProps {
-  cardNumbers: {
-    first: string;
-    second: string;
-    third: string;
-    fourth: string;
-  };
+  cardNumbers: Record<CardNumberKey, string>;
   generateChangeHandler: (targetKey: string) => (e: React.ChangeEvent<HTMLInputElement>) => void;
-  errorMessage: {
-    first: string;
-    second: string;
-    third: string;
-    fourth: string;
-  };
+  errorMessage: string;
+  errorStatus: Record<string, boolean>;
   generateErrorMessageUpdater: (targetKey: string) => () => void;
 }
 
@@ -22,35 +16,41 @@ export default function CardNumberContainer({
   cardNumbers,
   generateChangeHandler,
   errorMessage,
+  errorStatus,
   generateErrorMessageUpdater,
 }: CardNumbersContainerProps) {
   const arr = ['first', 'second', 'third', 'fourth'] as const;
   return (
-    <>
-      <h1>결제할 카드 번호를 입력해 주세요</h1>
-      <h2>본인 명의의 카드만 결제 가능합니다.</h2>
-      <label htmlFor="first-card-numbers-input">카드 번호</label>
-      {arr.map(key => {
-        const PASSWORD_INPUT_KEYS = ['third', 'fourth'];
-        const type = PASSWORD_INPUT_KEYS.includes(key) ? 'password' : 'text';
+    <div>
+      <RegistrationLayout
+        title="결제할 카드 번호를 입력해 주세요"
+        subtitle="본인 명의의 카드만 결제 가능합니다."
+        labelText="카드 번호"
+        labelFor="first-card-numbers-input"
+      >
+        {arr.map(key => {
+          const PASSWORD_INPUT_KEYS = ['third', 'fourth'];
+          const type = PASSWORD_INPUT_KEYS.includes(key) ? 'password' : 'text';
 
-        return (
-          <Input
-            key={key}
-            id={`${key}-card-numbers-input`}
-            isError={!!errorMessage[key]}
-            value={cardNumbers[key]}
-            onChange={generateChangeHandler(key)}
-            onBlur={generateErrorMessageUpdater(key)}
-            placeholder="1234"
-            maxLength={4}
-            type={type}
-          />
-        );
-      })}
-      {arr.map(key => (
-        <ErrorText key={key}>{errorMessage[key]}</ErrorText>
-      ))}
-    </>
+          return (
+            <Input
+              key={key}
+              id={`${key}-card-numbers-input`}
+              isError={errorStatus[key]}
+              value={cardNumbers[key]}
+              onChange={generateChangeHandler(key)}
+              onBlur={generateErrorMessageUpdater(key)}
+              placeholder="1234"
+              maxLength={4}
+              type={type}
+              width="23%"
+            />
+          );
+        })}
+      </RegistrationLayout>
+      <ErrorWrapper>
+        <ErrorText>{errorMessage}</ErrorText>
+      </ErrorWrapper>
+    </div>
   );
 }
