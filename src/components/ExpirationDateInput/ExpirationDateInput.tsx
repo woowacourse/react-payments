@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Input from '../common/Input/Input';
 import Field from '../common/Field/Field';
+import { ERRORS, ADD_CARD_FORM_FIELDS } from '../../constants/messages';
 
 interface ExpirationDate {
   month: string;
@@ -10,6 +11,8 @@ interface ExpirationDate {
 interface ExpirationDateInputProps {
   setCardData: (key: keyof CardInfo, newData: CardInfo[keyof CardInfo]) => void;
 }
+
+const { EXPIRATION_DATE } = ADD_CARD_FORM_FIELDS;
 
 const ExpirationDateInput = ({ setCardData }: ExpirationDateInputProps) => {
   const [expirationDate, setExpirationDate] = useState<ExpirationDate>({
@@ -43,7 +46,7 @@ const ExpirationDateInput = ({ setCardData }: ExpirationDateInputProps) => {
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     if (!isInteger(value)) {
-      setErrMsg('숫자만 입력 가능합니다.');
+      setErrMsg(ERRORS.isNotInteger);
       setIsError({ ...isError, [name]: true });
 
       return;
@@ -60,19 +63,19 @@ const ExpirationDateInput = ({ setCardData }: ExpirationDateInputProps) => {
     setCardData('expirationDate', Object.values(expirationDate));
 
     if (!hasTwoDigit(value)) {
-      setErrMsg('2자리 숫자를 입력해 주세요.');
+      setErrMsg(ERRORS.isNotTwoDigit);
       setIsError({ ...isError, [name]: true });
       return;
     }
 
     if (name === 'month' && !isValidateMonth(value)) {
-      setErrMsg('1에서 12사이의 숫자를 입력해 주세요.');
+      setErrMsg(ERRORS.inValidMonth);
       setIsError({ ...isError, [name]: true });
       return;
     }
 
     if (!isValidateDate()) {
-      setErrMsg('만료된 카드는 사용할 수 없습니다');
+      setErrMsg(ERRORS.deprecatedCard);
       setIsError({ ...isError, [name]: true });
       return;
     }
@@ -83,16 +86,20 @@ const ExpirationDateInput = ({ setCardData }: ExpirationDateInputProps) => {
 
   return (
     <Field
-      title="카드 유효기간을 입력해 주세요"
-      description="월/년도(MMYY)를 순서대로 입력해 주세요"
-      labelText="유효기간"
+      title={EXPIRATION_DATE.title}
+      description={EXPIRATION_DATE.description}
+      labelText={EXPIRATION_DATE.labelText}
       errMsg={errMsg}
     >
       {Object.keys(expirationDate).map((name) => (
         <Input
           key={name}
           name={name as keyof ExpirationDate}
-          placeholder={name === 'month' ? 'MM' : 'YY'}
+          placeholder={
+            name === 'month'
+              ? EXPIRATION_DATE.placeholder.month
+              : EXPIRATION_DATE.placeholder.year
+          }
           value={expirationDate[name as keyof ExpirationDate]}
           isError={isError[name as keyof ExpirationDate]}
           handleChange={onChange}

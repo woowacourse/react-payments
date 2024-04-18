@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import Field from '../common/Field/Field';
 import Input from '../common/Input/Input';
 
+import { ERRORS, ADD_CARD_FORM_FIELDS } from '../../constants/messages';
+
 interface OwnerName {
   ownerName: string;
 }
 
+const { OWNER_NAME } = ADD_CARD_FORM_FIELDS;
 interface OwnerNameInputProps {
   setCardData: (key: keyof CardInfo, newData: CardInfo[keyof CardInfo]) => void;
 }
@@ -26,7 +29,7 @@ function OwnerNameInput({ setCardData }: OwnerNameInputProps) {
     const { name, value } = event.target;
 
     if (value !== '' && !isCharacter(value)) {
-      setErrMsg('알파벳만 입력 가능합니다.');
+      setErrMsg(ERRORS.isNotAlphabet);
       setIsError({ ...isError, [name]: true });
       return;
     }
@@ -45,15 +48,15 @@ function OwnerNameInput({ setCardData }: OwnerNameInputProps) {
 
   return (
     <Field
-      title="카드 소유자 이름을 입력해 주세요"
-      labelText="소유자 이름"
+      title={OWNER_NAME.title}
+      labelText={OWNER_NAME.labelText}
       errMsg={errMsg}
     >
       {Object.keys(ownerName).map((name) => (
         <Input
           key={name}
           name={name as keyof OwnerName}
-          placeholder="JOHN DOE"
+          placeholder={OWNER_NAME.placeholder}
           value={ownerName[name as keyof OwnerName]}
           isError={isError[name as keyof OwnerName]}
           isRequired={true}
