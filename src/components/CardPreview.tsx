@@ -63,7 +63,7 @@ const NameLabel = styled.p`
 `
 
 const Name = styled.p`
-  max-width: inherit;
+  max-width: 156px;
   font-family: 'Inter', sans-serif;
   font-size: 12px;
   font-weight: 500;
@@ -109,8 +109,9 @@ const CardPreview = ({ ...props }: CardInfo) => {
   const { cardNumber, expirationMonth, expirationYear, name } = props
 
   const secureNumber = (number: string) => {
-    return number.replace(/\d/gi, '•')
+    return number.replace(/\d/gi, '∙')
   }
+
   return (
     <Card>
       <CardHeader>
