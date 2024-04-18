@@ -1,3 +1,5 @@
+import SIGN from "../constants/sign";
+
 const ValidatorCondition = {
   checkMaxDigit(value: string, digit: number) {
     return value.length > digit;
@@ -16,7 +18,7 @@ const ValidatorCondition = {
   },
 
   checkIsNotDoubleZero(value: string) {
-    return value !== "00";
+    return value !== SIGN.doubleZero;
   },
 };
 

@@ -5,6 +5,7 @@ import useInput from "../../hooks/useInput";
 import CARD_FORM_MESSAGE from "../../constants/cardFormMessage";
 import { CardNumberValue, ExpirationPeriodValue } from "../../@types/CreditCard";
 import { CARD_FORM_TYPE } from "../../constants/cardFormType";
+import SIGN from "../../constants/sign";
 
 interface Owner {
   name: string;
@@ -12,23 +13,23 @@ interface Owner {
 
 const Payments = () => {
   const [cardNumber, setCardNumber, cardNumberError] = useInput<CardNumberValue>({
-    firstValue: "",
-    secondValue: "",
-    thirdValue: "",
-    fourthValue: "",
+    firstValue: SIGN.empty,
+    secondValue: SIGN.empty,
+    thirdValue: SIGN.empty,
+    fourthValue: SIGN.empty,
   });
 
   const [expirationPeriod, setExpirationPeriod, expirationPeriodError] =
     useInput<ExpirationPeriodValue>({
-      month: "",
-      year: "",
+      month: SIGN.empty,
+      year: SIGN.empty,
     });
 
-  const [owner, setOwner, ownerError] = useInput<Owner>({ name: "" });
+  const [owner, setOwner, ownerError] = useInput<Owner>({ name: SIGN.empty });
 
   const concatPeriod = () =>
     expirationPeriod.year.length
-      ? expirationPeriod.month + "/" + expirationPeriod.year
+      ? expirationPeriod.month + SIGN.slash + expirationPeriod.year
       : expirationPeriod.month;
 
   return (
