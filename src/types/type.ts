@@ -1,5 +1,5 @@
 export interface ICardInfo {
   cardNumbers: number[];
-  cardExpiration: { month: number; year: number };
+  cardExpiration: number[];
   userName: string;
 }
