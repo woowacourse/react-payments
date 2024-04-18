@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import isValidateInput from '../validations/isValidateInput';
+import validateInput from '../validations/validateInput';
 import { useState } from 'react';
 
 interface InputType {
@@ -15,7 +15,7 @@ function Input({ isPassword, keyProp, type, placeholder, setState, setErrorMessa
   const [isError, setIsError] = useState(false);
   const handleInputChange = (value: string) => {
     try {
-      isValidateInput(value, type);
+      validateInput(value, type);
       setState(value);
       setErrorMessage('');
       setIsError(false);

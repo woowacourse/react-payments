@@ -2,38 +2,38 @@ import { ERROR_MESSAGE } from '../constants/errorMessage';
 import { VALIDATION } from '../constants/validation';
 import { isRange } from '../util/isRange';
 
-interface isValidateInputTableType {
+interface ValidateInputTableType {
   number: () => void;
   month: () => void;
   year: () => void;
   owner: () => void;
 }
 
-const isValidateInput = (value: string, section: 'number' | 'month' | 'year' | 'owner'): boolean => {
-  const isValidateInputTable: isValidateInputTableType = {
-    number: () => isCardNumberValidated(value),
-    month: () => isCardMonthValidated(value),
-    year: () => isCardYearValidated(value),
-    owner: () => isCardOwnerValidated(value),
+const validateInput = (value: string, section: 'number' | 'month' | 'year' | 'owner') => {
+  const validateInputTable: ValidateInputTableType = {
+    number: () => cardNumberValidated(value),
+    month: () => cardMonthValidated(value),
+    year: () => cardYearValidated(value),
+    owner: () => cardOwnerValidated(value),
   };
 
-  const validateFunction = isValidateInputTable[section];
+  const validateFunction = validateInputTable[section];
   validateFunction();
 };
 
-function isCardNumberValidated(value: string) {
+function cardNumberValidated(value: string) {
   const valueToNumber = Number(value);
   isNumber(valueToNumber);
   isNumberCount(value, VALIDATION.cardNumberCount);
 }
 
-function isCardMonthValidated(value: string) {
+function cardMonthValidated(value: string) {
   const valueToNumber = Number(value);
   isNumber(valueToNumber);
   isInRange(valueToNumber, VALIDATION.cardMonthRange.min, VALIDATION.cardMonthRange.max);
 }
 
-function isCardYearValidated(value: string) {
+function cardYearValidated(value: string) {
   const valueToNumber = Number(value);
   const now = new Date();
   const year = now.getFullYear();
@@ -42,7 +42,7 @@ function isCardYearValidated(value: string) {
   isInRange(valueToNumber, lastTwoDigits, lastTwoDigits + VALIDATION.maximumYearPeriod);
 }
 
-function isCardOwnerValidated(value: string) {
+function cardOwnerValidated(value: string) {
   isUpperCaseEnglish(value);
   isInRange(value.length, VALIDATION.cardOwnerLength.min, VALIDATION.cardOwnerLength.max);
 }
@@ -77,4 +77,4 @@ function isNumberCount(value: string, count: number) {
   return true;
 }
 
-export default isValidateInput;
+export default validateInput;
