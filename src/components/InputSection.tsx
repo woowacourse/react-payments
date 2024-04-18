@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 type InfoProps = {
   title: string;
-  description: string;
+  description?: string;
   inputTitle: string;
 };
 
@@ -33,7 +33,7 @@ const Description = styled.span`
   line-height: 0.875rem;
   font-size: 0.5938rem;
   font-weight: 400;
-  color: rgba(139, 149, 161, 1);
+  color: #8b95a1;
 `;
 
 const Span = styled.span`
@@ -61,16 +61,17 @@ export default function InputSection({
         <TitleContainer>
           <Title>{title}</Title>
         </TitleContainer>
-        <DescriptionContainer>
-          <Description>{description}</Description>
-        </DescriptionContainer>
+        {description ? (
+          <DescriptionContainer>
+            <Description>{description}</Description>
+          </DescriptionContainer>
+        ) : null}
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
         <SpanWrapper>
           <Span>{inputTitle}</Span>
         </SpanWrapper>
         <InputWrapper>{children}</InputWrapper>
-        {/* 에러 메시지 <span></span> */}
       </div>
     </Section>
   );
