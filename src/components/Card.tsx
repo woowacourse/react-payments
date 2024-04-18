@@ -30,11 +30,16 @@ const CardImg = styled.img`
   height: 22px;
 `;
 
-const CardNumbers = styled.div`
+const TextBox = styled.div`
+  display: flex;
+  align-items: flex-end;
+  height: 30px;
+`;
+
+const CardNumbers = styled(TextBox)`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
   gap: 10px;
 `;
 
@@ -71,12 +76,12 @@ export default function CardView({ cardInfo }: { cardInfo: Card }) {
           <SecretNumber>{'•'.repeat(cardInfo.cardNumber3.length)}</SecretNumber>
           <SecretNumber>{'•'.repeat(cardInfo.cardNumber4.length)}</SecretNumber>
         </CardNumbers>
-        <div>
-          {cardInfo.month.length > 0
-            ? `${cardInfo.month.length === 1 ? `0${cardInfo.month}` : cardInfo.month} / ${cardInfo.year.length === 1 ? `0${cardInfo.year}` : cardInfo.year}`
-            : ''}
-        </div>
-        <div> {cardInfo.userName} </div>
+        <TextBox>
+          {cardInfo.month.length === 1 ? `0${cardInfo.month}` : cardInfo.month}
+          {cardInfo.year.length > 0 ? ' / ' : ''}
+          {cardInfo.year.length === 1 ? `0${cardInfo.year}` : cardInfo.year}
+        </TextBox>
+        <TextBox> {cardInfo.userName} </TextBox>
       </CardContainer>
     </>
   );
