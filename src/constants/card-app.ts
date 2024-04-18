@@ -10,6 +10,8 @@ export const CAPTION = {
 };
 
 export const VALIDATION_MESSAGES = {
-  onlyNumbersAllowed: "숫자만 입력 가능합니다.",
+  onlyNumbersAllowed: "4자리의 숫자를 입력해 주세요.",
   onlyEnglishAllowed: "영문만 입력 가능합니다.",
+  invalidDate: "유효하지 않은 MM/YY 형식입니다.",
+  invalidOwnerName: "사용자 이름은 0 ~ 15자 사이의 영문이어야 합니다.",
 };
