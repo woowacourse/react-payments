@@ -27,6 +27,8 @@ export default Caption;
 const StyledCaption = styled.span<{
   color: CSSProperties["color"];
 }>`
+  height: 14px;
+
   color: ${({ color }) => color};
   font-size: 10px;
   font-weight: 400;

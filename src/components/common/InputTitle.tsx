@@ -13,6 +13,8 @@ const StyledTitle = styled.h3`
   font-size: 18px;
   font-weight: 700;
   line-height: 26px;
+
+  margin-bottom: 4px;
 `;
 
 export default InputTitle;

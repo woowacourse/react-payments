@@ -19,4 +19,5 @@ const Layout = styled.div`
   align-items: center;
 
   background-color: #f5f5f5;
+  overflow-y: scroll;
 `;
