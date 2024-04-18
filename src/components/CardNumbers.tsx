@@ -29,7 +29,7 @@ export default function CardNumbers() {
   const thirdInput = useInput(useInputProps);
   const fourthInput = useInput(useInputProps);
 
-  const hooks = [firstInput, secondInput, thirdInput, fourthInput];
+  const inputs = [firstInput, secondInput, thirdInput, fourthInput];
   const values: [string, string, string, string] = [
     firstInput.value,
     secondInput.value,
@@ -55,7 +55,7 @@ export default function CardNumbers() {
         labelText={PAYMENTS_INPUT_MESSAGE.cardNumberLabel}
         errorMessage={errorMessage}
       >
-        {hooks.map((hook, idx) => (
+        {inputs.map((hook, idx) => (
           <input
             key={idx}
             type="text"
