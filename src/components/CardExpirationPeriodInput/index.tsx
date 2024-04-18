@@ -74,17 +74,14 @@ export default function CardExpirationPeriodInput(
 
   const validateMonth = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    const regex = /^([0-9]{2})$/;
+    const regex = /^([0-9]{1,2})$/;
     const isValidated = regex.test(value);
 
     debounceFunc(() => {
-      setError((prev) => {
-        if (isValidated) return INITIAL_ERROR;
-
-        return {
-          ...prev,
-          month: true,
-        };
+      setError({
+        month: !isValidated,
+        year: !cardPeriod.year,
+        availability: error.availability,
       });
 
       setCardPeriod((prev) => ({
@@ -101,15 +98,11 @@ export default function CardExpirationPeriodInput(
     const isValidated = regex.test(value);
 
     debounceFunc(() => {
-      setError((prev) => {
-        if (isValidated) return INITIAL_ERROR;
-
-        return {
-          ...prev,
-          year: true,
-        };
+      setError({
+        month: !cardPeriod.month,
+        year: !isValidated,
+        availability: error.availability,
       });
-
       setCardPeriod((prev) => ({
         ...prev,
         year: value ? Number(value) : undefined,
@@ -136,7 +129,8 @@ export default function CardExpirationPeriodInput(
   };
 
   const handleEditCardPeriod = () => {
-    if (error) return;
+    if (error.month || error.year) return;
+
     const cardMonth = convertToTwoDigits(cardPeriod.month);
     const cardYear = convertToTwoDigits(cardPeriod.year);
     editCardPeriod({ month: cardMonth, year: cardYear });
