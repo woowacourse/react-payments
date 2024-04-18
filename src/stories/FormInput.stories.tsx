@@ -13,7 +13,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   name: "Input 기본값",
-  args: { placeholder: "MM" },
+  args: { placeholder: "MM", onChange: () => {} },
 };
 
 export const CardNumbers: Story = {
@@ -22,6 +22,8 @@ export const CardNumbers: Story = {
     type: "number",
     value: "1234",
     maxLength: 4,
+    sizePreset: "small",
+    onChange: () => {},
   },
 };
 
@@ -29,10 +31,12 @@ export const Period: Story = {
   name: "월, 년 Input",
   args: {
     type: "number",
-    value: "09",
+    value: "9",
     maxLength: 2,
+    sizePreset: "medium",
+    onChange: () => {},
   },
-}; // 기댓값 09
+};
 
 export const OwnerName: Story = {
   name: "이름 Input",
@@ -41,5 +45,7 @@ export const OwnerName: Story = {
     value: "Liver",
     maxLength: 20,
     minLength: 2,
+    sizePreset: "large",
+    onChange: () => {},
   },
 };
