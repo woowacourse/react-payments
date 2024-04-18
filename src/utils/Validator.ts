@@ -1,6 +1,3 @@
-import CARD_INPUTBOX_NAME from "../constants/cardInputBoxName";
-import SIGN from "../constants/sign";
-
 const ValidatorCondition = {
   checkMaxDigit(value: string, digit: number) {
     return value.length > digit;
@@ -19,7 +16,7 @@ const ValidatorCondition = {
   },
 
   checkIsNotDoubleZero(value: string) {
-    return value !== SIGN.doubleZero;
+    return value !== "00";
   },
 };
 
@@ -47,7 +44,7 @@ const Validator = {
     if (!ValidatorCondition.checkIsDigit(value)) return { isError: true, isValid: false };
 
     const isValidMonth =
-      name === CARD_INPUTBOX_NAME.expirationPeriod.month
+      name === "month"
         ? ValidatorCondition.checkIsBelowNumber(value, limitValue) &&
           ValidatorCondition.checkIsNotDoubleZero(value)
         : true;
@@ -64,16 +61,23 @@ const Validator = {
   },
 
   inputCreditCardInfo(value: string, name: string): { isError: boolean; isValid: boolean } {
-    if (Object.keys(CARD_INPUTBOX_NAME.cardNumber).includes(name))
-      return this.checkCreditCardNumber(value);
+    switch (name) {
+      case "firstValue":
+      case "secondValue":
+      case "thirdValue":
+      case "fourthValue":
+        return this.checkCreditCardNumber(value);
 
-    if (Object.keys(CARD_INPUTBOX_NAME.expirationPeriod).includes(name))
-      return this.checkCreditExpirationPeriod(value, name);
+      case "month":
+      case "year":
+        return this.checkCreditExpirationPeriod(value, name);
 
-    if (Object.keys(CARD_INPUTBOX_NAME.owner).includes(name))
-      return this.checkCreditCardOwner(value);
+      case "name":
+        return this.checkCreditCardOwner(value);
 
-    return { isError: false, isValid: false };
+      default:
+        return { isError: false, isValid: false };
+    }
   },
 };
 
