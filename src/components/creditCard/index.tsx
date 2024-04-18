@@ -3,11 +3,7 @@ import CreditCardBrandLogo from "./CreditCardBrandLogo";
 import CreditCardInfo from "./CreditCardInfo";
 import { CreditCardProps } from "../../@types/CreditCard";
 
-const CreditCard = ({
-  creditCardNumber,
-  expirationPeriod,
-  ownerName,
-}: CreditCardProps) => {
+const CreditCard = ({ creditCardNumber, expirationPeriod, ownerName }: CreditCardProps) => {
   return (
     <CreditCardContainer>
       <CreditCardHeader>

@@ -16,9 +16,7 @@ const InputExpirationPeriod = ({
 }: InputExpirationPeriodProps) => {
   return (
     <InputContainer>
-      <InputLabel htmlFor="expirationDate">
-        {CARD_FORM_MESSAGE.expirationDate}
-      </InputLabel>
+      <InputLabel htmlFor="expirationDate">{CARD_FORM_MESSAGE.expirationDate}</InputLabel>
       <InputWrapper>
         <InputBox
           inputValue={inputValue.month}

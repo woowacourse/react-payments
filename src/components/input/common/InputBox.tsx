@@ -59,8 +59,6 @@ const Input = styled.input<{ isError: boolean }>`
   }
 
   &:focus {
-    border: 1.01px solid
-      ${(props) =>
-        props.isError ? "rgba(255, 61, 61, 1)" : "rgba(0, 0, 0, 1)"};
+    border: 1.01px solid ${(props) => (props.isError ? "rgba(255, 61, 61, 1)" : "rgba(0, 0, 0, 1)")};
   }
 `;

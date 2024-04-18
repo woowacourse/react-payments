@@ -8,11 +8,7 @@ interface InputOwnerNameProps {
   inputError: boolean;
 }
 
-const InputOwnerName = ({
-  inputValue,
-  handleChange,
-  inputError,
-}: InputOwnerNameProps) => {
+const InputOwnerName = ({ inputValue, handleChange, inputError }: InputOwnerNameProps) => {
   return (
     <InputContainer>
       <InputLabel htmlFor="ownerName">{CARD_FORM_MESSAGE.cardOwner}</InputLabel>

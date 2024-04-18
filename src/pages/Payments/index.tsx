@@ -3,23 +3,19 @@ import CreditCard from "../../components/creditCard";
 import CreditCardForm from "../../components/creditCardForm";
 import useInput from "../../hooks/useInput";
 import CARD_FORM_MESSAGE from "../../constants/cardFormMessage";
-import {
-  CardNumberValue,
-  ExpirationPeriodValue,
-} from "../../@types/CreditCard";
+import { CardNumberValue, ExpirationPeriodValue } from "../../@types/CreditCard";
 
 interface Owner {
   name: string;
 }
 
 const Payments = () => {
-  const [cardNumber, setCardNumber, cardNumberError] =
-    useInput<CardNumberValue>({
-      firstValue: "",
-      secondValue: "",
-      thirdValue: "",
-      fourthValue: "",
-    });
+  const [cardNumber, setCardNumber, cardNumberError] = useInput<CardNumberValue>({
+    firstValue: "",
+    secondValue: "",
+    thirdValue: "",
+    fourthValue: "",
+  });
 
   const [expirationPeriod, setExpirationPeriod, expirationPeriodError] =
     useInput<ExpirationPeriodValue>({

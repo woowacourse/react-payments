@@ -2,18 +2,14 @@ import { CardNumber } from "../../@types/CreditCard";
 import CARD_THRESHOLD from "../../constants/cardThreshold";
 import styled from "@emotion/styled";
 
-const getFirstTwoNumber = (
-  creditCardNumber: CardNumber
-): number | undefined => {
+const getFirstTwoNumber = (creditCardNumber: CardNumber): number | undefined => {
   const twoDigits = 2;
 
   if (creditCardNumber && creditCardNumber.length >= twoDigits)
     return Number(creditCardNumber.slice(0, 2));
 };
 
-const CreditCardBrandLogo = (
-  creditCardNumber: CardNumber
-): JSX.Element | undefined => {
+const CreditCardBrandLogo = (creditCardNumber: CardNumber): JSX.Element | undefined => {
   const firstTwoNumber = getFirstTwoNumber(creditCardNumber);
   if (!firstTwoNumber) return;
 

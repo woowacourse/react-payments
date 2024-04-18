@@ -7,28 +7,18 @@ const maskLastEightDigits = (creditCardNumber: CreditCardNumber) => {
 
   return creditCardNumber.map((number, idx) =>
     lastEightIndex.includes(idx) ? (
-      <CreditCardInfoSymbol key={idx}>
-        {replaceToMaskingNumber(number)}
-      </CreditCardInfoSymbol>
+      <CreditCardInfoSymbol key={idx}>{replaceToMaskingNumber(number)}</CreditCardInfoSymbol>
     ) : (
       <CreditCardInfoNumber key={idx}>{number}</CreditCardInfoNumber>
     )
   );
 };
 
-const CreditCardInfo = ({
-  creditCardNumber,
-  expirationPeriod,
-  ownerName,
-}: CreditCardProps) => {
+const CreditCardInfo = ({ creditCardNumber, expirationPeriod, ownerName }: CreditCardProps) => {
   return (
     <CreditCardInfoContainer>
-      <CreditCardInfoWrapper>
-        {maskLastEightDigits(creditCardNumber)}
-      </CreditCardInfoWrapper>
-      <CreditCardExpirationPeriod>
-        {expirationPeriod}
-      </CreditCardExpirationPeriod>
+      <CreditCardInfoWrapper>{maskLastEightDigits(creditCardNumber)}</CreditCardInfoWrapper>
+      <CreditCardExpirationPeriod>{expirationPeriod}</CreditCardExpirationPeriod>
       <CreditCardOwnerInfo>{ownerName}</CreditCardOwnerInfo>
     </CreditCardInfoContainer>
   );

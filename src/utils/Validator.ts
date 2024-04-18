@@ -41,8 +41,7 @@ const Validator = {
     if (ValidatorCondition.checkMaxDigit(value, maxDigit))
       return { isError: false, isValid: false };
 
-    if (!ValidatorCondition.checkIsDigit(value))
-      return { isError: true, isValid: false };
+    if (!ValidatorCondition.checkIsDigit(value)) return { isError: true, isValid: false };
 
     const isValidMonth =
       name === "month"
@@ -56,16 +55,12 @@ const Validator = {
   },
 
   checkCreditCardOwner(value: string) {
-    if (ValidatorCondition.checkIsEnglish(value))
-      return { isError: false, isValid: true };
+    if (ValidatorCondition.checkIsEnglish(value)) return { isError: false, isValid: true };
 
     return { isError: true, isValid: false };
   },
 
-  inputCreditCardInfo(
-    value: string,
-    name: string
-  ): { isError: boolean; isValid: boolean } {
+  inputCreditCardInfo(value: string, name: string): { isError: boolean; isValid: boolean } {
     switch (name) {
       case "firstValue":
       case "secondValue":

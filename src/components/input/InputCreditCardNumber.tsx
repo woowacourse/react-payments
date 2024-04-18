@@ -16,9 +16,7 @@ const InputCreditCardNumber = ({
 }: InputCreditCardNumberProps) => {
   return (
     <InputContainer>
-      <InputLabel htmlFor="creditCardNumber">
-        {CARD_FORM_MESSAGE.cardNumber}
-      </InputLabel>
+      <InputLabel htmlFor="creditCardNumber">{CARD_FORM_MESSAGE.cardNumber}</InputLabel>
       <InputWrapper>
         <InputBox
           inputValue={inputValue.firstValue}

@@ -1,10 +1,7 @@
 import styled from "@emotion/styled";
 import InputOwnerName from "../input/InputOwnerName";
 import InputExpirationPeriod from "../input/InputExpirationPeriod";
-import {
-  CardNumberValue,
-  ExpirationPeriodValue,
-} from "../../@types/CreditCard";
+import { CardNumberValue, ExpirationPeriodValue } from "../../@types/CreditCard";
 import InputCreditCardNumber from "../input/InputCreditCardNumber";
 
 type FormType = "owner" | "expirationPeriod" | "cardNumber";
