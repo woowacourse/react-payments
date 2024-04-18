@@ -51,6 +51,22 @@ export default function InputField({
     {}
   );
 
+  const handleUpdateInput = (index: number, value: string) => {
+    handleInput({
+      ...cardInfo,
+      [inputTypes.inputInfo[index].property]: value,
+    });
+  };
+
+  const handleUpdateErrorMessages = (index: number, errorMessage: string) => {
+    setErrorMessages((prev) => {
+      return {
+        ...prev,
+        [index]: errorMessage,
+      };
+    });
+  };
+
   return (
     <>
       <Container>
@@ -61,10 +77,9 @@ export default function InputField({
             <Input
               info={info}
               index={index}
-              cardInfo={cardInfo}
-              handleInput={handleInput}
-              errorMessages={errorMessages}
-              setErrorMessages={setErrorMessages}
+              handleInput={handleUpdateInput}
+              isError={errorMessages[index] !== '' && errorMessages[index]!}
+              handleErrorMessage={handleUpdateErrorMessages}
             />
           ))}
         </InputBox>
