@@ -1,11 +1,15 @@
+import { useState } from "react";
+import styled from "styled-components";
+
 import Label from "../common/Label";
 import Input from "../common/Input";
-import { useState } from "react";
+
+import { VALIDATION_MESSAGES } from "../../constants/card-app";
 
 interface CardOwnerNameInputProps {
   ownerName: string;
+  errorCaption: (errorText: string) => JSX.Element;
   handleCardOwnerNameChange: (value: string) => void;
-  errorCaption: () => JSX.Element;
 }
 
 const CardOwnerNameInput = ({
@@ -16,35 +20,47 @@ const CardOwnerNameInput = ({
   const [isError, setIsError] = useState<boolean>(false);
 
   const handleInputChange = (value: string) => {
-    const isError = !/^[a-zA-Z ]*$/.test(value);
+    const isAlphabetInput = /^[a-zA-Z ]*$/.test(value);
+    const isValidOwnerName = value.length <= 15;
 
-    if (isError) {
-      setIsError(isError);
-      return;
-    }
+    setIsError(!isAlphabetInput || !isValidOwnerName);
 
-    setIsError((prev) => !prev);
+    if (!isAlphabetInput || !isValidOwnerName) return;
+
     handleCardOwnerNameChange(value.toUpperCase());
   };
 
   return (
-    <>
+    <InputField>
       <Label htmlFor="card-owner">소유자 이름</Label>
       <Input
-        value={ownerName}
         id="card-owner"
-        size="large"
         type="text"
         placeholder="JOHN DOE"
-        isError={false}
-        maxLength={30}
+        value={ownerName}
+        size="large"
+        isError={isError}
         onChange={(e) => {
           handleInputChange(e.target.value);
         }}
       />
-      {isError && errorCaption()}
-    </>
+      {isError
+        ? errorCaption(VALIDATION_MESSAGES.invalidOwnerName)
+        : errorCaption("")}
+    </InputField>
   );
 };
 
 export default CardOwnerNameInput;
+
+const InputField = styled.section`
+  height: 77px;
+  width: 315px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  margin-top: 16px;
+  margin-bottom: 16px;
+`;
