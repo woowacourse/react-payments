@@ -17,6 +17,7 @@ const style = css({
   flexDirection: "column",
   gap: "14px",
   fontFamily: "Roboto",
+  marginBottom: "20px",
 });
 
 const logoStyle = css({
