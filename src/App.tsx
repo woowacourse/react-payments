@@ -21,25 +21,29 @@ function App() {
     userName: '',
   });
 
+  const previewProps = {
+    cardNumberState,
+    expirationDateState,
+    userNameState: userName,
+    showImageCondition,
+  };
+
+  const formProps = {
+    cardNumberState,
+    setCardNumberState,
+    cardNumberErrorState,
+    expirationDateState,
+    setExpirationDateState,
+    expirationDateErrorState,
+    userNameState: userName,
+    setUserNameState: setUserName,
+    userNameErrorState: userNameError,
+  };
+
   return (
     <Container>
-      <CardInformationPreview
-        cardNumberState={cardNumberState}
-        expirationDateState={expirationDateState}
-        userNameState={userName}
-        showImageCondition={showImageCondition}
-      />
-      <CardInformationForm
-        cardNumberState={cardNumberState}
-        handleCardNumbers={setCardNumberState}
-        cardNumberErrorState={cardNumberErrorState}
-        expirationDateState={expirationDateState}
-        setExpirationDateState={setExpirationDateState}
-        expirationDateErrorState={expirationDateErrorState}
-        userNameState={userName}
-        setUserNameState={setUserName}
-        userNameErrorState={userNameError}
-      />
+      <CardInformationPreview {...previewProps} />
+      <CardInformationForm {...formProps} />
     </Container>
   );
 }

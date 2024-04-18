@@ -3,23 +3,13 @@ import magnetic from '../../assets/image/magnetic.svg';
 import visa from '../../assets/image/visa.svg';
 import masterCard from '../../assets/image/masterCard.svg';
 import theme from '../../styles/theme';
+import { CardNumberState, ExpirationDateState, ShowImageCondition } from '../../types/Types';
 
 interface CardInformationPreviewProps {
-  cardNumberState: {
-    first?: number;
-    second?: number;
-    third?: number;
-    fourth?: number;
-  };
-  expirationDateState: {
-    month?: number;
-    year?: number;
-  };
+  cardNumberState: CardNumberState;
+  expirationDateState: ExpirationDateState;
   userNameState?: string;
-  showImageCondition: {
-    visaShowCondition: boolean;
-    masterCardShowCondition: boolean;
-  };
+  showImageCondition: ShowImageCondition;
 }
 
 const CardInformationPreview = ({

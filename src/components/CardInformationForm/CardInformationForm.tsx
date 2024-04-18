@@ -5,38 +5,22 @@ import Input from '../Input/Input';
 import { CARD_NUMBER_ERROR_MESSAGE } from '../../hooks/useCardNumber';
 import { MONTH_ERROR_MESSAGE, YEAR_ERROR_MESSAGE } from '../../hooks/useExpirationDate';
 import { USER_NAME_ERROR_MESSAGE } from '../../hooks/useUserName';
+import {
+  CardNumberErrorState,
+  CardNumberState,
+  ExpirationDateErrorState,
+  ExpirationDateState,
+  SetCardNumberState,
+  SetExpirationDateState,
+} from '../../types/Types';
 
 interface CardInformationFormProps {
-  cardNumberState: {
-    first?: number;
-    second?: number;
-    third?: number;
-    fourth?: number;
-  };
-  handleCardNumbers: {
-    setFirst: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined;
-    setSecond: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined;
-    setThird: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined;
-    setFourth: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined;
-  };
-  cardNumberErrorState: {
-    firstError: boolean;
-    secondError: boolean;
-    thirdError: boolean;
-    fourthError: boolean;
-  };
-  expirationDateState: {
-    month?: number;
-    year?: number;
-  };
-  setExpirationDateState: {
-    setMonth: (event: React.ChangeEvent<HTMLInputElement>) => void;
-    setYear: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  };
-  expirationDateErrorState: {
-    monthError: boolean;
-    yearError: boolean;
-  };
+  cardNumberState: CardNumberState;
+  setCardNumberState: SetCardNumberState;
+  cardNumberErrorState: CardNumberErrorState;
+  expirationDateState: ExpirationDateState;
+  setExpirationDateState: SetExpirationDateState;
+  expirationDateErrorState: ExpirationDateErrorState;
   userNameState?: string;
   setUserNameState: (event: React.ChangeEvent<HTMLInputElement>) => void;
   userNameErrorState: boolean;
@@ -44,7 +28,7 @@ interface CardInformationFormProps {
 
 const CardInformationForm = ({
   cardNumberState,
-  handleCardNumbers,
+  setCardNumberState,
   cardNumberErrorState,
   expirationDateState,
   setExpirationDateState,
@@ -54,7 +38,7 @@ const CardInformationForm = ({
   userNameErrorState,
 }: CardInformationFormProps) => {
   const { first, second, third, fourth } = cardNumberState;
-  const { setFirst, setSecond, setThird, setFourth } = handleCardNumbers;
+  const { setFirst, setSecond, setThird, setFourth } = setCardNumberState;
   const { firstError, secondError, thirdError, fourthError } = cardNumberErrorState;
   const { month, year } = expirationDateState;
   const { setMonth, setYear } = setExpirationDateState;
