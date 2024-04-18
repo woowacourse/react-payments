@@ -7,5 +7,3 @@ export interface Card {
   year: string;
   userName: string;
 }
-
-// TODO : 네이밍 고민해보기
