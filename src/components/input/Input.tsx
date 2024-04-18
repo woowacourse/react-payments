@@ -1,20 +1,24 @@
+import * as Styled from "./Input.styles";
+
 interface InputProps {
   value?: string;
   maxLength?: number;
   placeholder?: string;
+  isError?: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Input = ({ value, maxLength, placeholder, onChange }: InputProps) => {
+const Input = ({ value, maxLength, placeholder, isError, onChange }: InputProps) => {
   return (
     <>
-      <input
+      <Styled.Input
         type="text"
         value={value}
         maxLength={maxLength}
         placeholder={placeholder}
+        isError={isError}
         onChange={onChange}
-      ></input>
+      ></Styled.Input>
     </>
   );
 };
