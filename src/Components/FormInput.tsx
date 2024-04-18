@@ -7,15 +7,15 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const SIZE: Record<NonNullable<InputProps["sizePreset"]>, "20%" | "45%" | "100%"> = {
-  small: "20%",
-  medium: "45%",
+const SIZE: Record<NonNullable<InputProps["sizePreset"]>, "17%" | "43%" | "100%"> = {
+  small: "17%",
+  medium: "43%",
   large: "100%",
 };
 
 const FormInput: React.FC<InputProps> = ({ sizePreset = "medium", onChange, ...props }) => {
   const inputStyle = css({
-    height: "32px",
+    height: "25px",
     borderRadius: "2px",
     border: "solid 1px #ACACAC",
     padding: "8px",

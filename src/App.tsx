@@ -1,3 +1,5 @@
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
 import { useState } from "react";
 import "./App.css";
 import CreditCard from "./Components/CreditCard";
@@ -26,6 +28,15 @@ const initData: InitCardInfoType[] = [
     initValue: "",
   },
 ];
+
+const mainStyle = css({
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  maxWidth: "376px",
+  margin: "auto",
+});
 
 function App() {
   const createCardInfo = (formFields: InitCardInfoType[]): CardInfo => {
@@ -259,10 +270,10 @@ function App() {
   ];
 
   return (
-    <main>
+    <div css={mainStyle}>
       <CreditCard cardInfo={cardInfo} />
       <Form formFiledPropsList={formFieldPropsList} formErrors={formErrors} />
-    </main>
+    </div>
   );
 }
 
