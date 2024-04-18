@@ -33,6 +33,10 @@ jobs:
         run: npm install
       - name: Build
         run: npm run build
+      - name: Build storybook
+        run: |
+          npm run build-storybook
+          mv ./storybook-static ./dist/storybook
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
