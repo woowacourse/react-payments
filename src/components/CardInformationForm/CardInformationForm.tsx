@@ -62,28 +62,28 @@ const CardInformationForm = ({
               value={first}
               maxLength={MAX_LENGTH.cardNumber}
               onChange={setFirst}
-              invalid={firstError}
+              aria-invalid={firstError}
             />
             <Input
               placeholder={PLACEHOLDER.cardNumber}
               value={second}
               maxLength={MAX_LENGTH.cardNumber}
               onChange={setSecond}
-              invalid={secondError}
+              aria-invalid={secondError}
             />
             <Input
               placeholder={PLACEHOLDER.cardNumber}
               value={third}
               maxLength={MAX_LENGTH.cardNumber}
               onChange={setThird}
-              invalid={thirdError}
+              aria-invalid={thirdError}
             />
             <Input
               placeholder={PLACEHOLDER.cardNumber}
               value={fourth}
               maxLength={MAX_LENGTH.cardNumber}
               onChange={setFourth}
-              invalid={fourthError}
+              aria-invalid={fourthError}
             />
           </>
         </InputField>
@@ -96,14 +96,14 @@ const CardInformationForm = ({
               value={month}
               maxLength={MAX_LENGTH.expirationDate}
               onChange={setMonth}
-              invalid={monthError}
+              aria-invalid={monthError}
             />
             <Input
               placeholder={PLACEHOLDER.year}
               value={year}
               maxLength={MAX_LENGTH.expirationDate}
               onChange={setYear}
-              invalid={yearError}
+              aria-invalid={yearError}
             />
           </>
         </InputField>
@@ -115,7 +115,7 @@ const CardInformationForm = ({
             value={userNameState}
             maxLength={MAX_LENGTH.userName}
             onChange={setUserNameState}
-            invalid={userNameErrorState}
+            aria-invalid={userNameErrorState}
           />
         </InputField>
       </FormField>
