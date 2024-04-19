@@ -5,7 +5,7 @@ interface TitleContainerProps {
   subTitle?: string;
 }
 
-export default function TitleContainer({ title, subTitle }: TitleContainerProps) {
+function TitleContainer({ title, subTitle }: TitleContainerProps) {
   return (
     <S.TitleContainer>
       <S.Title>{title}</S.Title>
@@ -13,3 +13,5 @@ export default function TitleContainer({ title, subTitle }: TitleContainerProps)
     </S.TitleContainer>
   );
 }
+
+export default TitleContainer;

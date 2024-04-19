@@ -5,10 +5,10 @@ export const Input = styled.input<{ $isValid: boolean }>`
   height: 32px;
   padding: 8px;
   border-radius: 2px;
-  border: 1px solid ${(props) => (props.$isValid ? 'var(--grey-200)' : 'var(--error)')};
-  font-size: var(--font-size-md);
+  border: 1px solid ${(props) => (props.$isValid ? '#acacac' : '#ff3d3d')};
+  font-size: 11px;
 
   &:focus {
-    border-color: ${(props) => (props.$isValid ? 'var(--grey-500)' : 'var(--error)')};
+    border-color: ${(props) => (props.$isValid ? '#000' : '#ff3d3d')};
   }
 `;

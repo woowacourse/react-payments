@@ -1,35 +1,30 @@
+import { useState } from 'react';
 import CardNumberInput from '../CardNumberInput/CardNumberInput';
 import CardExpirationInput from '../CardExpirationInput/CardExpirationInput';
 import CardOwnerInput from '../CardOwnerInput/CardOwnerInput';
 import CardPreviewBox from '../CardPreview/CardPreview';
 
-import '../../styles/reset.css';
-import '../../styles/common.css';
-
+import './reset.css';
 import * as S from './App.style';
-import useChangeCardNumbers from '../../hooks/useChangeCardNumbers';
-import useChangeOwner from '../../hooks/useChangeOwner';
-import useChangeExpireDate from '../../hooks/useChangeExpireDate';
 
-export default function App() {
-  const { cardNumbers, cardNumbersValid, handleChangeCardNumbers } = useChangeCardNumbers();
-  const { expireDate, expireMonthValid, expireYearValid, handleChangeDate } = useChangeExpireDate();
-  const { owner, ownerValid, handleChangeOwner } = useChangeOwner();
+function App() {
+  const [cardNumber, setCardNumber] = useState<string[]>(['', '', '', '']);
+  const [month, setMonth] = useState<string>('');
+  const [year, setYear] = useState<string>('');
+  const [owner, setOwner] = useState<string>('');
 
   return (
     <S.AppLayout>
       <S.CardPreviewBox>
-        <CardPreviewBox cardNumbers={cardNumbers} month={expireDate.month} year={expireDate.year} owner={owner} />
+        <CardPreviewBox cardNumber={cardNumber} month={month} year={year} owner={owner} />
       </S.CardPreviewBox>
       <S.CardForm>
-        <CardNumberInput isCardNumbersValid={cardNumbersValid} onChangeCardNumbers={handleChangeCardNumbers} />
-        <CardExpirationInput
-          isMonthValid={expireMonthValid}
-          isYearValid={expireYearValid}
-          onChangeExpireDate={handleChangeDate}
-        />
-        <CardOwnerInput isOwnerValid={ownerValid} onChangeOwner={handleChangeOwner} />
+        <CardNumberInput setCardNumber={setCardNumber} />
+        <CardExpirationInput setMonth={setMonth} setYear={setYear} />
+        <CardOwnerInput setOwner={setOwner} />
       </S.CardForm>
     </S.AppLayout>
   );
 }
+
+export default App;

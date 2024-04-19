@@ -5,7 +5,7 @@ const meta = {
   title: 'CardPreview',
   component: CardPreview,
   argTypes: {
-    cardNumbers: {
+    cardNumber: {
       options: {
         'No input': ['', '', '', ''],
         'First input': ['2222', '', '', ''],
@@ -47,7 +47,7 @@ type Story = StoryObj<typeof CardPreview>;
 
 export const Default: Story = {
   args: {
-    cardNumbers: ['2222', '3333', '4444', '5555'],
+    cardNumber: ['2222', '3333', '4444', '5555'],
     month: '12',
     year: '24',
     owner: 'PARSELY KIM',
@@ -56,7 +56,7 @@ export const Default: Story = {
 
 export const VisaCard: Story = {
   args: {
-    cardNumbers: ['4444', '3333', '4444', '5555'],
+    cardNumber: ['4444', '3333', '4444', '5555'],
     month: '12',
     year: '24',
     owner: 'PARSELY KIM',
@@ -65,7 +65,7 @@ export const VisaCard: Story = {
 
 export const MasterCard: Story = {
   args: {
-    cardNumbers: ['5555', '3333', '4444', '5555'],
+    cardNumber: ['5555', '3333', '4444', '5555'],
     month: '12',
     year: '24',
     owner: 'PARSELY KIM',

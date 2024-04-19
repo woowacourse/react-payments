@@ -7,7 +7,7 @@ interface InputFieldProps {
   children: React.ReactNode;
 }
 
-export default function InputField({ label, errorMessage, length, children }: InputFieldProps) {
+function InputField({ label, errorMessage, length, children }: InputFieldProps) {
   return (
     <S.InputField>
       <S.InputLabel>{label}</S.InputLabel>
@@ -16,3 +16,5 @@ export default function InputField({ label, errorMessage, length, children }: In
     </S.InputField>
   );
 }
+
+export default InputField;

@@ -1,43 +1,46 @@
 import { Visa, MasterCard, Dot } from '../../assets';
 import * as S from './CardPreview.style';
 
-import { CARD_NUMBER } from '../../constants/conditions';
-import { cardNumbersType } from '../../types/cardNumbers';
-import checkCardBrand from '../../utils/checkCardBrand';
+import { CARD, CARD_NUMBER } from '../../constants/Condition';
 
 interface CardPreviewProps {
-  cardNumbers: cardNumbersType;
+  cardNumber: string[];
   month: string;
   year: string;
   owner: string;
 }
 
-export default function CardPreview({ cardNumbers, month, year, owner }: CardPreviewProps) {
-  const handleLogoImage = (cardNumbers: cardNumbersType) => {
-    if (checkCardBrand(cardNumbers[0]) === 'Visa') {
+function CardPreview({ cardNumber, month, year, owner }: CardPreviewProps) {
+  const handleLogoImage = (cardNumber: string[]) => {
+    if (Number(cardNumber[0].charAt(0)) === CARD.VISA) {
       return <img src={Visa} alt="비자 카드" />;
     }
-    if (checkCardBrand(cardNumbers[0]) === 'MasterCard') {
+
+    if (
+      Number(cardNumber[0].slice(0, 2)) >= CARD.MIN_MASTER_CARD &&
+      Number(cardNumber[0].slice(0, 2)) <= CARD.MAX_MASTER_CARD
+    ) {
       return <img src={MasterCard} alt="마스터 카드" />;
     }
-  };
-
-  const getCardNumberComponent = (number: string, index: number) => {
-    if (index <= 1) return `${number} `;
-    return Array.from({ length: number.length }).map((_, idx) => <img src={Dot} key={idx} alt="dot" />);
   };
 
   return (
     <S.Card>
       <S.CardHeader>
         <S.ChipBox />
-        <S.LogoBox>{handleLogoImage(cardNumbers)}</S.LogoBox>
+        <S.LogoBox>{handleLogoImage(cardNumber)}</S.LogoBox>
       </S.CardHeader>
       <S.CardBody>
         <S.InfoContainer>
-          {cardNumbers.map((number, index) => (
+          {cardNumber.map((number, index) => (
             <S.InfoBox $length={CARD_NUMBER.INPUT_FIELD_COUNT} key={index}>
-              {getCardNumberComponent(number, index)}
+              {number
+                ? index <= 1
+                  ? `${number} `
+                  : Array.from({ length: CARD_NUMBER.INPUT_FIELD_COUNT }).map((_, idx) => (
+                      <img src={Dot} key={idx} alt="dot" />
+                    ))
+                : ''}
             </S.InfoBox>
           ))}
         </S.InfoContainer>
@@ -47,3 +50,5 @@ export default function CardPreview({ cardNumbers, month, year, owner }: CardPre
     </S.Card>
   );
 }
+
+export default CardPreview;

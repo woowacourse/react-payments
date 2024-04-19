@@ -1,9 +1,7 @@
 import styled from 'styled-components';
 
 export const AppLayout = styled.main`
-  padding: 77px 0;
-  max-width: 375px;
-  margin: auto;
+  padding: 77px 30px;
 `;
 
 export const CardPreviewBox = styled.section`

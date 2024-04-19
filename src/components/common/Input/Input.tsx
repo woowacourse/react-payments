@@ -5,6 +5,8 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   isValid: boolean;
 }
 
-export default function Input({ isValid, ...rest }: InputProps) {
+function Input({ isValid, ...rest }: InputProps) {
   return <S.Input $isValid={isValid} {...rest} />;
 }
+
+export default Input;
