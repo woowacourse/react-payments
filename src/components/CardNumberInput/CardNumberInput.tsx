@@ -5,37 +5,40 @@ import Input from '../common/Input/Input';
 
 import { CARD_NUMBER } from '../../constants/Condition';
 import { ERROR_MESSAGE } from '../../constants/Message';
+import { cardNumbersType } from '../App/App';
 
 interface CardNumberInputProps {
-  setCardNumber: React.Dispatch<React.SetStateAction<string[]>>;
+  setCardNumber: React.Dispatch<React.SetStateAction<cardNumbersType>>;
 }
 
+type inputValidStatesType = [boolean, boolean, boolean, boolean];
+
 function CardNumberInput({ setCardNumber }: CardNumberInputProps) {
-  const [isValid, setIsValid] = useState([true, true, true, true]);
+  const [inputValidStates, setInputValidStates] = useState<inputValidStatesType>([true, true, true, true]);
 
   const errorMessage = useMemo(() => {
-    return isValid.every(Boolean) ? '' : ERROR_MESSAGE.INVALID_CARD_NUMBER_LENGTH;
-  }, [isValid]);
+    return inputValidStates.every(Boolean) ? '' : ERROR_MESSAGE.INVALID_CARD_NUMBER_LENGTH;
+  }, [inputValidStates]);
 
   const validateCardNumber = (number: string) => {
     return !Number.isNaN(Number(number)) && number.length === CARD_NUMBER.MAX_LENGTH;
   };
 
   const onCardNumberChange = (inputIndex: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    const isInputValid = validateCardNumber(e.target.value);
+    const newInputValidState = validateCardNumber(e.target.value);
 
-    setIsValid((prev) => {
-      return prev.map((isValid, index) => (index === inputIndex ? isInputValid : isValid));
+    setInputValidStates((prev): inputValidStatesType => {
+      return prev.map((prevInputValidState, index) => (index === inputIndex ? newInputValidState : prevInputValidState)) as inputValidStatesType;
     });
 
     setCardNumber((prev) => {
       return prev.map((number, index) => {
         if (index === inputIndex) {
-          return isInputValid ? e.target.value : '';
+          return newInputValidState ? e.target.value : '';
         }
 
         return number;
-      });
+      }) as cardNumbersType;
     });
   };
 
@@ -50,7 +53,7 @@ function CardNumberInput({ setCardNumber }: CardNumberInputProps) {
             maxLength={CARD_NUMBER.MAX_LENGTH}
             placeholder="1234"
             onChange={onCardNumberChange(index)}
-            isValid={isValid[index]}
+            isValid={inputValidStates[index]}
           />
         ))}
       </InputField>
