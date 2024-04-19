@@ -3,18 +3,19 @@ import { FocusEvent, useState } from "react";
 import React from "react";
 import { makeStringArray } from "@/components/utils/arrayHelper";
 
+type validate = (input: string[]) => string;
 interface Props {
   initialValue: string[];
-  onBlurValidate?: (input: string[]) => string;
-  onChangeValidate?: (input: string[]) => string;
+  onBlurValidate?: validate;
+  onChangeValidate?: validate;
   maxNumberLength?: number;
   validLength?: number;
 }
 
 const useInput = ({
   initialValue = [],
-  onBlurValidate,
-  onChangeValidate,
+  onBlurValidate = (input) => "",
+  onChangeValidate = (input) => "",
   maxNumberLength: maxLength,
   validLength,
 }: Props) => {
@@ -31,6 +32,16 @@ const useInput = ({
     });
   };
 
+  const validateLength: validate = (inputs) =>
+    inputs.every((input) => input.length === 0 || input.length === validLength)
+      ? ""
+      : "유효하지 않은 길이입니다.";
+
+  const onBlurValidateWrapper: validate = (inputs) => {
+    if (validateLength(inputs).length > 0) return validateLength(inputs);
+    if (onBlurValidate(inputs).length > 0) return onBlurValidate(inputs);
+    return "";
+  };
   const onChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     index: number
@@ -50,38 +61,23 @@ const useInput = ({
       return newInput;
     });
 
-    if (onChangeValidate) {
-      const errorMessage = onChangeValidate([newValue]);
-      if (errorMessage.length !== 0) {
-        updateErrorMessages(errorMessage, index);
-        return;
-      }
+    const errorMessageOnChange = onChangeValidate([newValue]);
+    if (!errorMessageOnChange) {
+      updateErrorMessages(errorMessageOnChange, index);
+      return;
     }
 
-    if (onBlurValidate) {
-      const errorMessage = onBlurValidate([newValue]);
-      if (errorMessage.length !== 0) return;
-    }
-
-    if (!(validLength && newValue.length === validLength)) return;
+    const errorMessageOnBlur = onBlurValidateWrapper([newValue]);
+    if (!errorMessageOnBlur) return;
 
     updateErrorMessages("", index);
   };
 
   const onBlur = (event: FocusEvent<Element, Element>, index: number) => {
-    if (validLength) {
-      if (input[index].length > 0 && input[index].length !== validLength) {
-        updateErrorMessages("유효하지 않은 길이입니다.", index);
-        return;
-      }
-    }
-
-    if (onBlurValidate) {
-      const errorMessage = onBlurValidate(input);
-      if (errorMessage.length > 0) {
-        updateErrorMessages(errorMessage, index);
-        return;
-      }
+    const errorMessage = onBlurValidateWrapper(input);
+    if (errorMessage.length > 0) {
+      updateErrorMessages(errorMessage, index);
+      return;
     }
 
     updateErrorMessages("", index);
