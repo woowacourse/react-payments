@@ -9,46 +9,34 @@ interface FormState {
 }
 
 const useForm = (defaultValues: FormState) => {
-  const { firstState, secondState, thirdState, fourthState, showImageCondition } = useCardNumber(
-    defaultValues.cardNumber,
+  const { cardNumberState, setCardNumberState, cardNumberErrorState, showImageCondition } =
+    useCardNumber(defaultValues.cardNumber);
+  const { expirationDateState, setExpirationDateState, expirationDateErrorState } =
+    useExpirationDate(defaultValues.expirationDate);
+  const { userNameState, setUserNameState, userNameErrorState } = useUserName(
+    defaultValues.userName,
   );
-  const { monthState, yearState } = useExpirationDate(defaultValues.expirationDate);
-  const { userNameState } = useUserName(defaultValues.userName);
 
-  return {
-    cardNumberState: {
-      first: firstState.first,
-      second: secondState.second,
-      third: thirdState.third,
-      fourth: fourthState.fourth,
-    },
-    setCardNumberState: {
-      setFirst: firstState.setFirst,
-      setSecond: secondState.setSecond,
-      setThird: thirdState.setThird,
-      setFourth: fourthState.setFourth,
-    },
-    cardNumberErrorState: {
-      firstError: firstState.firstError,
-      secondError: secondState.secondError,
-      thirdError: thirdState.thirdError,
-      fourthError: fourthState.fourthError,
-    },
-    expirationDateState: {
-      month: monthState.month,
-      year: yearState.year,
-    },
-    setExpirationDateState: {
-      setMonth: monthState.setMonth,
-      setYear: yearState.setYear,
-    },
-    expirationDateErrorState: {
-      monthError: monthState.monthError,
-      yearError: yearState.yearError,
-    },
-    ...userNameState,
+  const previewProps = {
+    cardNumberState,
+    expirationDateState,
+    userNameState,
     showImageCondition,
   };
+
+  const formProps = {
+    cardNumberState,
+    setCardNumberState,
+    cardNumberErrorState,
+    expirationDateState,
+    setExpirationDateState,
+    expirationDateErrorState,
+    userNameState,
+    setUserNameState,
+    userNameErrorState,
+  };
+
+  return { previewProps, formProps };
 };
 
 export default useForm;

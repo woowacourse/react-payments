@@ -22,24 +22,22 @@ const useCardNumber = (defaultValues: Array<number | undefined>) => {
   );
 
   return {
-    firstState: {
+    cardNumberState: {
       first,
-      setFirst,
-      firstError,
-    },
-    secondState: {
       second,
-      setSecond,
-      secondError,
-    },
-    thirdState: {
       third,
-      setThird,
-      thirdError,
-    },
-    fourthState: {
       fourth,
+    },
+    setCardNumberState: {
+      setFirst,
+      setSecond,
+      setThird,
       setFourth,
+    },
+    cardNumberErrorState: {
+      firstError,
+      secondError,
+      thirdError,
       fourthError,
     },
     showImageCondition: {

@@ -8,14 +8,16 @@ const useExpirationDate = (defaultValues: Array<number | undefined>) => {
   const [year, setYear, yearError] = useInput(defaultValues[1], REG_EXP.year);
 
   return {
-    monthState: {
+    expirationDateState: {
       month,
-      setMonth,
-      monthError,
-    },
-    yearState: {
       year,
+    },
+    setExpirationDateState: {
+      setMonth,
       setYear,
+    },
+    expirationDateErrorState: {
+      monthError,
       yearError,
     },
   };
