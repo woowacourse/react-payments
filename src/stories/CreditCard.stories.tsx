@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import CreditCard from '../components/CreditCard';
-import GlobalStyles from '../GlobalStyles';
 import MasterCard from '../assets/images/mastercard.png';
 import VisaCard from '../assets/images/visa.png';
 
@@ -8,17 +7,9 @@ const meta = {
   title: 'CreditCard',
   component: CreditCard,
   tags: ['autodocs'],
-  decorators: [
-    (Story) => (
-      <>
-        <GlobalStyles />
-        <Story />
-      </>
-    ),
-  ],
   argTypes: {
     cardNumbers: {
-      control: 'text',
+      control: 'object',
       description: '카드 번호 입력 값',
     },
     month: {

@@ -1,20 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import InputSection from '../components/InputSection';
-import GlobalStyles from '../GlobalStyles';
 import { CARD_NUMBER, EXPIRATION_PERIOD, OWNER_NAME } from '../constants/cardSection';
 
 const meta = {
   title: 'InputSection',
   component: InputSection,
   tags: ['autodocs'],
-  decorators: [
-    (Story) => (
-      <>
-        <GlobalStyles />
-        <Story />
-      </>
-    ),
-  ],
   argTypes: {
     title: {
       control: 'text',

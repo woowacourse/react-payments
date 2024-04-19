@@ -1,20 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Input from '../components/composables/Input';
 import { fn } from '@storybook/test';
-import GlobalStyles from '../GlobalStyles';
 
 const meta = {
   title: 'Composable/Input',
   component: Input,
   tags: ['autodocs'],
-  decorators: [
-    (Story) => (
-      <>
-        <GlobalStyles />
-        <Story />
-      </>
-    ),
-  ],
   argTypes: {
     value: {
       control: 'text',
