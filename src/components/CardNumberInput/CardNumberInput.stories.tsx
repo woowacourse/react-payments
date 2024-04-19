@@ -12,6 +12,6 @@ type Story = StoryObj<typeof CardNumberInput>;
 
 export const Default: Story = {
   args: {
-    setCardNumber: () => {},
+    setCardNumbers: () => {},
   },
 };

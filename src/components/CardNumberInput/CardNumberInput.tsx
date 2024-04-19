@@ -5,15 +5,15 @@ import Input from '../common/Input/Input';
 
 import { CARD_NUMBER } from '../../constants/Condition';
 import { ERROR_MESSAGE } from '../../constants/Message';
-import { cardNumbersType } from '../App/App';
+import { cardNumbersType } from '../../types/cardNumbers';
 
 interface CardNumberInputProps {
-  setCardNumber: React.Dispatch<React.SetStateAction<cardNumbersType>>;
+  setCardNumbers: React.Dispatch<React.SetStateAction<cardNumbersType>>;
 }
 
 type inputValidStatesType = [boolean, boolean, boolean, boolean];
 
-function CardNumberInput({ setCardNumber }: CardNumberInputProps) {
+function CardNumberInput({ setCardNumbers }: CardNumberInputProps) {
   const [inputValidStates, setInputValidStates] = useState<inputValidStatesType>([true, true, true, true]);
 
   const errorMessage = useMemo(() => {
@@ -31,7 +31,7 @@ function CardNumberInput({ setCardNumber }: CardNumberInputProps) {
       return prev.map((prevInputValidState, index) => (index === inputIndex ? newInputValidState : prevInputValidState)) as inputValidStatesType;
     });
 
-    setCardNumber((prev) => {
+    setCardNumbers((prev) => {
       return prev.map((number, index) => {
         if (index === inputIndex) {
           return newInputValidState ? e.target.value : '';

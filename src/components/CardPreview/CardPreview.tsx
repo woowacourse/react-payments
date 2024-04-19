@@ -2,23 +2,24 @@ import { Visa, MasterCard, Dot } from '../../assets';
 import * as S from './CardPreview.style';
 
 import { CARD, CARD_NUMBER } from '../../constants/Condition';
+import { cardNumbersType } from '../../types/cardNumbers';
 
 interface CardPreviewProps {
-  cardNumber: string[];
+  cardNumbers: cardNumbersType;
   month: string;
   year: string;
   owner: string;
 }
 
-function CardPreview({ cardNumber, month, year, owner }: CardPreviewProps) {
-  const handleLogoImage = (cardNumber: string[]) => {
-    if (Number(cardNumber[0].charAt(0)) === CARD.VISA) {
+function CardPreview({ cardNumbers, month, year, owner }: CardPreviewProps) {
+  const handleLogoImage = (cardNumbers: cardNumbersType) => {
+    if (Number(cardNumbers[0].charAt(0)) === CARD.VISA) {
       return <img src={Visa} alt="비자 카드" />;
     }
 
     if (
-      Number(cardNumber[0].slice(0, 2)) >= CARD.MIN_MASTER_CARD &&
-      Number(cardNumber[0].slice(0, 2)) <= CARD.MAX_MASTER_CARD
+      Number(cardNumbers[0].slice(0, 2)) >= CARD.MIN_MASTER_CARD &&
+      Number(cardNumbers[0].slice(0, 2)) <= CARD.MAX_MASTER_CARD
     ) {
       return <img src={MasterCard} alt="마스터 카드" />;
     }
@@ -28,11 +29,11 @@ function CardPreview({ cardNumber, month, year, owner }: CardPreviewProps) {
     <S.Card>
       <S.CardHeader>
         <S.ChipBox />
-        <S.LogoBox>{handleLogoImage(cardNumber)}</S.LogoBox>
+        <S.LogoBox>{handleLogoImage(cardNumbers)}</S.LogoBox>
       </S.CardHeader>
       <S.CardBody>
         <S.InfoContainer>
-          {cardNumber.map((number, index) => (
+          {cardNumbers.map((number, index) => (
             <S.InfoBox $length={CARD_NUMBER.INPUT_FIELD_COUNT} key={index}>
               {number
                 ? index <= 1
