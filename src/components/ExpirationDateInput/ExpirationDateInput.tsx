@@ -20,7 +20,7 @@ interface ExpirationDateInputProps {
 const ExpirationDateInput = ({ setCardData }: ExpirationDateInputProps) => {
   const validateInputOnChange = ({ value }: { value: string }) => {
     if (!isInteger(value)) {
-      return { isValid: false, errorMsg: ERRORS.isNotFourDigit };
+      return { isValid: false, errorMsg: ERRORS.isNotInteger };
     }
     return { isValid: true, errorMsg: '' };
   };

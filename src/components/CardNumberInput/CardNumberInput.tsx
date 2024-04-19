@@ -19,7 +19,7 @@ export default function CardNumberInput({ setCardData }: CardNumberInputProps) {
     value: string;
   }) => {
     if (!isInteger(value)) {
-      return { isValid: false, errorMsg: ERRORS.isNotAlphabet };
+      return { isValid: false, errorMsg: ERRORS.isNotInteger };
     }
     return { isValid: true, errorMsg: '' };
   };
