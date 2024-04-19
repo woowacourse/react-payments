@@ -25,7 +25,8 @@ const meta = {
       description: '카드 소유자 입력 값',
     },
     cardImageSrc: {
-      control: [MasterCard, VisaCard],
+      control: 'select',
+      options: ['', MasterCard, VisaCard],
       description: '카드 브랜드 이미지',
     },
   },
