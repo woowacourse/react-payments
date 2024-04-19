@@ -1,7 +1,7 @@
 import { Visa, MasterCard, Dot } from '../../assets';
 import * as S from './CardPreview.style';
 
-import { CARD, CARD_NUMBER } from '../../constants/Condition';
+import { CARD, CARD_NUMBER } from '../../constants/condition';
 import { cardNumbersType } from '../../types/cardNumbers';
 
 interface CardPreviewProps {
