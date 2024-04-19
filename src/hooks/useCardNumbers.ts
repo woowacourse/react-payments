@@ -3,7 +3,7 @@ import CONDITION from '../constants/Condition';
 
 const { REG_EXP, showVisa, showMasterCard } = CONDITION;
 
-const useCardNumber = (defaultValues: Array<number | undefined>) => {
+const useCardNumbers = (defaultValues: Array<number | undefined>) => {
   const [first, setFirst, firstError] = useInput<number | undefined>(
     defaultValues[0],
     REG_EXP.cardNumber,
@@ -47,4 +47,4 @@ const useCardNumber = (defaultValues: Array<number | undefined>) => {
   };
 };
 
-export default useCardNumber;
+export default useCardNumbers;
