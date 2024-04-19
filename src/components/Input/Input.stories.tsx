@@ -14,6 +14,14 @@ export const Default: Story = {
   args: {
     onChange: () => {},
     isError: false,
-    placeholder: "",
+    placeholder: "1234",
+  },
+};
+
+export const ErrorInput: Story = {
+  args: {
+    onChange: () => {},
+    isError: true,
+    placeholder: "1234",
   },
 };

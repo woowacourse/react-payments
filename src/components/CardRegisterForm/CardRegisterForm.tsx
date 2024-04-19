@@ -4,7 +4,6 @@ import InputField from "@/components/InputField/InputField";
 import Input from "@/components/Input/Input";
 import S from "./style";
 import InputFieldHeader from "../InputFieldHeader/InputFieldHeader";
-import { findFirstFilledElementIndex } from "../utils/arrayHelper";
 import {
   EXPIRATION_DATE_PLACEHOLDER,
   INPUT_INFO_SUBTITLE,
@@ -39,7 +38,7 @@ const CardRegisterForm = ({
     onBlur: onBlurExpirationPeriod,
   } = expiredPeriodState;
 
-  const { onChange: onChangeOwnerName, errorMessages: ownerErrorMessages } =
+  const { onChange: onChangeOwnerName, errorMessages: ownerNameErrorMessages } =
     ownerNameState;
 
   return (
@@ -52,11 +51,7 @@ const CardRegisterForm = ({
         />
         <InputField
           label={INPUT_LABEL.CARD_NUMBERS}
-          errorMessage={
-            cardNumbersErrorMessages[
-              findFirstFilledElementIndex(cardNumbersErrorMessages)
-            ]
-          }
+          errorMessages={cardNumbersErrorMessages}
         >
           {cardNumbers.map((_, index) => (
             <Input
@@ -69,9 +64,7 @@ const CardRegisterForm = ({
               onBlur={(e: FocusEvent<Element, Element>) => {
                 onBlurCardNumbers(e, index);
               }}
-              isError={
-                findFirstFilledElementIndex(cardNumbersErrorMessages) === index
-              }
+              isError={!!cardNumbersErrorMessages[index].length}
             />
           ))}
         </InputField>
@@ -85,11 +78,7 @@ const CardRegisterForm = ({
         />
         <InputField
           label={INPUT_LABEL.EXPIRATION_DATE}
-          errorMessage={
-            expirationPeriodErrorMessages[
-              findFirstFilledElementIndex(expirationPeriodErrorMessages)
-            ]
-          }
+          errorMessages={cardNumbersErrorMessages}
         >
           {expirationPeriod.map((_, index) => (
             <Input
@@ -102,10 +91,7 @@ const CardRegisterForm = ({
               onBlur={(e: FocusEvent<Element, Element>) => {
                 onBlurExpirationPeriod(e, index);
               }}
-              isError={
-                findFirstFilledElementIndex(expirationPeriodErrorMessages) ===
-                index
-              }
+              isError={!!expirationPeriodErrorMessages[index].length}
             />
           ))}
         </InputField>
@@ -116,11 +102,11 @@ const CardRegisterForm = ({
         <InputFieldHeader title={INPUT_INFO_TITLE.OWNER_NAME} />
         <InputField
           label={INPUT_LABEL.OWNER_NAME}
-          errorMessage={ownerErrorMessages[0]}
+          errorMessages={cardNumbersErrorMessages}
         >
           <Input
             placeholder={PLACEHOLDER.OWNER_NAME}
-            isError={ownerErrorMessages[0] !== ""}
+            isError={!!ownerNameErrorMessages[0].length}
             type="text"
             maxLength={MAX_LENGTH.OWNER_NAME}
             onChange={(e: ChangeEvent<HTMLInputElement>) => {

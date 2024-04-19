@@ -2,6 +2,7 @@ import { limitNumberLength } from "@/components/utils/numberHelper";
 import { FocusEvent, useState } from "react";
 import React from "react";
 import { makeStringArray } from "@/components/utils/arrayHelper";
+import { ERROR_MESSAGE } from "@/constants/errorMessage";
 
 interface Props {
   initialValue: string[];
@@ -74,7 +75,7 @@ const useInput = ({
   const onBlur = (event: FocusEvent<Element, Element>, index: number) => {
     if (validLength) {
       if (input[index].length > 0 && input[index].length !== validLength) {
-        updateErrorMessages("유효하지 않은 길이입니다.", index);
+        updateErrorMessages(ERROR_MESSAGE.INVALID_LENGTH, index);
         return;
       }
     }

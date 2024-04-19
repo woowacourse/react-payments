@@ -2,20 +2,20 @@ import type { Meta, StoryObj } from "@storybook/react";
 import CardRegisterForm from "./CardRegisterForm";
 import useInput from "@/hooks/useInput";
 import { makeStringArray } from "../utils/arrayHelper";
-import { INPUT_COUNTS } from "@/constants/condition";
+import { INPUT_COUNTS, MAX_LENGTH, VALID_LENGTH } from "@/constants/condition";
 import { validateExpirationDate, validateOwnerName } from "../utils/validation";
 
 const CardRegisterFormWithHook = () => {
   const cardNumbersState = useInput({
     initialValue: makeStringArray(INPUT_COUNTS.CARD_NUMBERS),
-    maxNumberLength: 4,
-    validLength: 4,
+    maxNumberLength: MAX_LENGTH.CARD_NUMBERS,
+    validLength: VALID_LENGTH.CARD_NUMBERS,
   });
 
   const expiredDateState = useInput({
     initialValue: makeStringArray(INPUT_COUNTS.EXPIRATION_PERIOD),
-    maxNumberLength: 2,
-    validLength: 2,
+    maxNumberLength: MAX_LENGTH.EXPIRATION_PERIOD,
+    validLength: VALID_LENGTH.EXPIRATION_PERIOD,
     onBlurValidate: validateExpirationDate,
   });
 
