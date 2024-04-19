@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import CardExpiration, { CardExpirationProps } from "./CardExpiration"; // 컴포넌트 import
+import CardExpiration, { CardExpirationProps } from "./CardExpiration";
 
 const meta: Meta<CardExpirationProps> = {
   title: "Components/CardExpiration",
