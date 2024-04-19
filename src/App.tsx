@@ -6,18 +6,11 @@ import useUserName from './hooks/useUserName';
 import * as StyledApp from './styles/App.style';
 
 function App() {
-  const { cardNumberState, showImageCondition } = useCardNumber([]);
+  const { cardNumberState } = useCardNumber([]);
   const { expirationDateState } = useExpirationDate([]);
   const { userNameState } = useUserName('');
 
-  const previewProps = {
-    cardNumberState,
-    expirationDateState,
-    userNameState,
-    showImageCondition,
-  };
-
-  const formProps = {
+  const cardInformationProps = {
     cardNumberState,
     expirationDateState,
     userNameState,
@@ -25,8 +18,8 @@ function App() {
 
   return (
     <StyledApp.Container>
-      <CardInformationPreview {...previewProps} />
-      <CardInformationForm {...formProps} />
+      <CardInformationPreview {...cardInformationProps} />
+      <CardInformationForm {...cardInformationProps} />
     </StyledApp.Container>
   );
 }

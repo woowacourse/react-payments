@@ -3,6 +3,7 @@ export interface CardNumberState {
   secondState: SecondState;
   thirdState: ThirdState;
   fourthState: FourthState;
+  showImageCondition: ShowImageCondition;
 }
 interface FirstState {
   first: number | undefined;
@@ -28,6 +29,11 @@ interface FourthState {
   fourthError: boolean;
 }
 
+interface ShowImageCondition {
+  isVisa: boolean;
+  isMasterCard: boolean;
+}
+
 export interface ExpirationDateState {
   monthState: MonthState;
   yearState: YearState;
@@ -49,8 +55,4 @@ export interface UserNameState {
   userName: string | undefined;
   setUserName: (event: React.ChangeEvent<HTMLInputElement>) => void;
   userNameError: boolean;
-}
-export interface ShowImageCondition {
-  isVisa: boolean;
-  isMasterCard: boolean;
 }

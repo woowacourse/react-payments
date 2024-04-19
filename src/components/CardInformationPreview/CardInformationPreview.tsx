@@ -3,31 +3,24 @@ import magnetic from '../../assets/image/magnetic.svg';
 import visa from '../../assets/image/visa.svg';
 import masterCard from '../../assets/image/masterCard.svg';
 import theme from '../../styles/theme';
-import {
-  CardNumberState,
-  ExpirationDateState,
-  ShowImageCondition,
-  UserNameState,
-} from '../../types/Types';
+import { CardNumberState, ExpirationDateState, UserNameState } from '../../types/Types';
 import CONDITION from '../../constants/Condition';
 
 interface CardInformationPreviewProps {
   cardNumberState: CardNumberState;
   expirationDateState: ExpirationDateState;
   userNameState: UserNameState;
-  showImageCondition: ShowImageCondition;
 }
 
 const CardInformationPreview = ({
   cardNumberState,
   expirationDateState,
   userNameState,
-  showImageCondition,
 }: CardInformationPreviewProps) => {
   const { firstState, secondState, thirdState, fourthState } = cardNumberState;
   const { monthState, yearState } = expirationDateState;
   const isMonthYearAllVisible = monthState.month && yearState.year;
-  const { isVisa, isMasterCard } = showImageCondition;
+  const { isVisa, isMasterCard } = cardNumberState.showImageCondition;
 
   return (
     <Preview.Container>
