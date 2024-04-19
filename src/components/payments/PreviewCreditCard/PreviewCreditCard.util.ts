@@ -1,6 +1,6 @@
 import { MasterCard, VisaCard } from '@assets/images';
 
-const useCreditCardLogo = ([firstCardNumbers]: string[]): string | null => {
+export const determineCardLogo = ([firstCardNumbers]: string[]) => {
   /* [VisaCard 구분 방법] - 4로 시작한다. */
   const isVisaCardNumber = firstCardNumbers.startsWith('4');
 
@@ -14,5 +14,3 @@ const useCreditCardLogo = ([firstCardNumbers]: string[]): string | null => {
 
   return null;
 };
-
-export default useCreditCardLogo;

@@ -1,8 +1,8 @@
-import useCreditCardLogo from '@hooks/creditCard/useCreditCardLogo';
-
-import { Ellipse } from '@assets/images';
+import { determineCardLogo } from './PreviewCreditCard.util';
 
 import styles from './PreviewCreditCard.module.css';
+
+import { Ellipse } from '@assets/images';
 
 interface PreviewCreditCardProps {
   cardNumbers: string[];
@@ -14,7 +14,7 @@ const PreviewCreditCard: React.FC<PreviewCreditCardProps> = ({ cardNumbers, expi
   const [firstCardNumbers, secondCardNumbers, thirdCardNumbers, fourthCardNumbers] = cardNumbers;
   const { month, year } = expiration;
 
-  const cardLogo = useCreditCardLogo(cardNumbers);
+  const cardLogo = determineCardLogo(cardNumbers);
 
   const formattedMonth = month.length === 1 ? month.padStart(2, '0') : month;
 
