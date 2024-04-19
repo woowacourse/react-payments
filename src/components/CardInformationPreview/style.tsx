@@ -35,7 +35,7 @@ export const CardNumberContainer = styled.div`
   width: 100%;
 `;
 
-export const UserInfomation = styled.div<{ $typo: string }>`
+export const UserInformation = styled.div<{ $typo: string }>`
   flex: 1;
   ${(props) => props.$typo};
   color: ${(props) => props.theme.color.white};
