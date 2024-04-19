@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import styled from 'styled-components';
 
 import CardInfo from '../CardInfo/CardInfo';
 import CardPreview from '../CardPreview/CardPreview';
