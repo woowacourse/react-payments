@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
 export const Container = styled.section`
+  display: flex;
+  flex-direction: column;
   width: 21.2rem;
   height: 13.2rem;
   padding: 0.8rem 1.2rem;
@@ -26,10 +28,12 @@ export const UserInformationContainer = styled.div`
   flex-direction: column;
   gap: 0.8rem;
   width: 100%;
+  height: 100%;
   margin: 1.4rem 1.3rem 0.4rem 0.5rem;
 `;
 
 export const CardNumberContainer = styled.div`
+  flex: 1;
   display: flex;
   gap: 1rem;
   width: 100%;
