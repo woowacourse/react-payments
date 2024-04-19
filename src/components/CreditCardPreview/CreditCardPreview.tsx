@@ -37,16 +37,8 @@ const CreditCardPreview = ({
         <S.CardNumbers>
           {cardNumbers.map((number: string, index) => {
             const isMasked = index >= 2;
-            return isMasked ? (
-              <S.Input key={index} type="password" value={number} readOnly />
-            ) : (
-              <S.Input
-                key={index}
-                type="text"
-                value={number}
-                readOnly
-              ></S.Input>
-            );
+            const type = isMasked ? "password" : "text";
+            return <S.Input key={index} type={type} value={number} readOnly />;
           })}
         </S.CardNumbers>
         <S.Input type="text" value={expirationDate} readOnly></S.Input>
