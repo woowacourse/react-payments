@@ -8,11 +8,11 @@ interface InputFieldProps {
 
 const InputField = ({ label, error, children }: InputFieldProps) => {
   return (
-    <Field.Container>
-      <Field.Label>{label}</Field.Label>
-      <Field.Inputs>{children}</Field.Inputs>
+    <Field.Fieldset>
+      <Field.Legend>{label}</Field.Legend>
+      {children}
       <Field.Error>{error}</Field.Error>
-    </Field.Container>
+    </Field.Fieldset>
   );
 };
 

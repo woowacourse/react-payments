@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const Fieldset = styled.fieldset`
   display: flex;
-  flex-direction: column;
   gap: 0.8rem;
   width: 100%;
 `;
 
-export const Label = styled.label`
+export const Legend = styled.legend`
+  margin-bottom: 0.8rem;
   ${(props) => props.theme.typography.label};
   color: ${(props) => props.theme.color.black};
 `;
