@@ -20,7 +20,7 @@ export const isValidDate = ({ year, month }: ExpirationDate) => {
   return inputDate > currentDate;
 };
 
-export const isCharacter = (value: string) => {
+export const isEnglishCharacter = (value: string) => {
   const regex = /^[a-zA-Z]+$/;
   return regex.test(value);
 };
