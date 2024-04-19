@@ -8,7 +8,6 @@ const Input = ({ isError, ...restProps }: InputProps) => {
   return (
     <>
       <Styled.Input
-        type="text"
         isError={isError}
         {...restProps}
       ></Styled.Input>

@@ -1,25 +1,41 @@
-export const CARD_NUMBERS = {
-  LABEL: "카드 번호",
-  MAIN_TEXT: "결제할 카드 번호를 입력해 주세요",
-  SUB_TEXT: "본인 명의의 카드만 결제 가능합니다.",
-  PLACEHOLDER: "1234",
-  MAX_LENGTH: 4,
-};
+export interface FormField {
+  LABEL: string;
+  MAIN_TEXT: string;
+  SUB_TEXT: string;
+  PLACEHOLDER: string | { MONTH: string; YEAR: string };
+  MAX_LENGTH: number;
+}
 
-export const CARD_EXPIRATION = {
-  LABEL: "유효 기간",
-  MAIN_TEXT: "카드 유효기간을 입력해 주세요",
-  SUB_TEXT: "월/년도(MMYY)를 순서대로 입력해 주세요.",
-  PLACEHOLDER: { MONTH: "MM", YEAR: "YY" },
-  MAX_LENGTH: 2,
-};
+export interface CardBrand {
+  NAME: string;
+  MIN_NUMBER: number;
+  MAX_NUMBER: number;
+}
 
-export const USER_NAME = {
-  LABEL: "소유자 이름",
-  MAIN_TEXT: "카드 소유자 이름을 입력해 주세요",
-  SUB_TEXT: "",
-  PLACEHOLDER: "JOHN DOE",
-  MAX_LENGTH: 21,
+export const FORM_FIELDS = {
+  CARD_NUMBERS: {
+    LABEL: "카드 번호",
+    MAIN_TEXT: "결제할 카드 번호를 입력해 주세요",
+    SUB_TEXT: "본인 명의의 카드만 결제 가능합니다.",
+    PLACEHOLDER: "1234",
+    MAX_LENGTH: 4,
+  },
+
+  CARD_EXPIRATION: {
+    LABEL: "유효 기간",
+    MAIN_TEXT: "카드 유효기간을 입력해 주세요",
+    SUB_TEXT: "월/년도(MMYY)를 순서대로 입력해 주세요.",
+    PLACEHOLDER: { MONTH: "MM", YEAR: "YY" },
+    MAX_LENGTH: 2,
+  },
+
+  USER_NAME: {
+    LABEL: "소유자 이름",
+    MAIN_TEXT: "카드 소유자 이름을 입력해 주세요",
+    SUB_TEXT: "",
+    PLACEHOLDER: "JOHN DOE",
+    MAX_LENGTH: 21,
+  },
 };
 
 export const MASKING = "•";
