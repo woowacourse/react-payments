@@ -38,25 +38,25 @@ const mainStyle = css({
   margin: "auto",
 });
 
+const createCardInfo = (formFields: InitCardInfoType[]): CardInfo => {
+  return formFields.reduce((object, props) => {
+    const { key, initValue } = props;
+    object[key] = initValue;
+    return object;
+  }, {} as CardInfo);
+};
+
+const createFormErrors = (formFields: InitCardInfoType[]): ErrorState => {
+  return formFields.reduce((object, props) => {
+    object[props.key] = {
+      errorMessage: "",
+      isError: false,
+    };
+    return object;
+  }, {} as ErrorState);
+};
+
 function App() {
-  const createCardInfo = (formFields: InitCardInfoType[]): CardInfo => {
-    return formFields.reduce((object, props) => {
-      const { key, initValue } = props;
-      object[key] = initValue;
-      return object;
-    }, {} as CardInfo);
-  };
-
-  const createFormErrors = (formFields: InitCardInfoType[]): ErrorState => {
-    return formFields.reduce((object, props) => {
-      object[props.key] = {
-        errorMessage: "",
-        isError: false,
-      };
-      return object;
-    }, {} as ErrorState);
-  };
-
   const [cardInfo, setCardInfo] = useState(createCardInfo(initData));
   const [formErrors, setFormErrors] = useState(createFormErrors(initData));
 
@@ -73,8 +73,8 @@ function App() {
           placeholder: "1234",
           maxLength: 4,
           onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-            const inputs = e.target.parentNode!.querySelectorAll("input");
-            const inputValues = Array.from(inputs).map((input) => input.value);
+            const inputs = e.target.parentNode!.childNodes as unknown;
+            const inputValues = Array.from(inputs as HTMLInputElement[]).map((input) => input.value);
             const numbersList = inputValues.map((value) => value.split("").map(Number));
             if (isValidCardNumbers(numbersList)) {
               setCardInfo((prev) => ({
@@ -100,8 +100,8 @@ function App() {
           placeholder: "1234",
           maxLength: 4,
           onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-            const inputs = e.target.parentNode!.querySelectorAll("input");
-            const inputValues = Array.from(inputs).map((input) => input.value);
+            const inputs = e.target.parentNode!.childNodes as unknown;
+            const inputValues = Array.from(inputs as HTMLInputElement[]).map((input) => input.value);
             const numbersList = inputValues.map((value) => value.split("").map(Number));
             if (isValidCardNumbers(numbersList)) {
               setCardInfo((prev) => ({
@@ -127,8 +127,8 @@ function App() {
           placeholder: "1234",
           maxLength: 4,
           onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-            const inputs = e.target.parentNode!.querySelectorAll("input");
-            const inputValues = Array.from(inputs).map((input) => input.value);
+            const inputs = e.target.parentNode!.childNodes as unknown;
+            const inputValues = Array.from(inputs as HTMLInputElement[]).map((input) => input.value);
             const numbersList = inputValues.map((value) => value.split("").map(Number));
             if (isValidCardNumbers(numbersList)) {
               setCardInfo((prev) => ({
@@ -154,8 +154,8 @@ function App() {
           placeholder: "1234",
           maxLength: 4,
           onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-            const inputs = e.target.parentNode!.querySelectorAll("input");
-            const inputValues = Array.from(inputs).map((input) => input.value);
+            const inputs = e.target.parentNode!.childNodes as unknown;
+            const inputValues = Array.from(inputs as HTMLInputElement[]).map((input) => input.value);
             const numbersList = inputValues.map((value) => value.split("").map(Number));
             if (isValidCardNumbers(numbersList)) {
               setCardInfo((prev) => ({
@@ -190,8 +190,8 @@ function App() {
           placeholder: "MM",
           maxLength: 2,
           onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-            const inputs = e.target.parentNode!.querySelectorAll("input");
-            const inputValues = Array.from(inputs).map((input) => input.value);
+            const inputs = e.target.parentNode!.childNodes as unknown;
+            const inputValues = Array.from(inputs as HTMLInputElement[]).map((input) => input.value);
             const [month, year] = inputValues.map((value) => Number(value));
             if (isValidPeriod({ month, year })) {
               setCardInfo((prev) => ({
@@ -215,8 +215,8 @@ function App() {
           placeholder: "YY",
           maxLength: 2,
           onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-            const inputs = e.target.parentNode!.querySelectorAll("input");
-            const inputValues = Array.from(inputs).map((input) => input.value);
+            const inputs = e.target.parentNode!.childNodes as unknown;
+            const inputValues = Array.from(inputs as HTMLInputElement[]).map((input) => input.value);
             const [month, year] = inputValues.map((value) => Number(value));
             if (isValidPeriod({ month, year })) {
               setCardInfo((prev) => ({
