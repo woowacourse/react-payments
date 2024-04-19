@@ -4,10 +4,10 @@ const TextFieldContainer: React.FC<{ children: React.ReactNode }> = ({ children 
   return <>{children}</>;
 };
 
-const Title: React.FC<{ title: string }> = ({ title }) => <p className="title">{title}</p>;
+const Title: React.FC<{ title: string }> = ({ title }) => <h1 className="title">{title}</h1>;
 
 const SubTitle: React.FC<{ subTitle: string }> = ({ subTitle }) => (
-  <h1 className={`caption ${styles.textFieldSubTitle}`}>{subTitle}</h1>
+  <p className={`caption ${styles.textFieldSubTitle}`}>{subTitle}</p>
 );
 
 const Label: React.FC<{ labelText: string; htmlFor?: string }> = ({ labelText, htmlFor }) => (
