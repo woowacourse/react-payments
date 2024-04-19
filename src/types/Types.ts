@@ -1,49 +1,56 @@
 export interface CardNumberState {
-  first?: number;
-  second?: number;
-  third?: number;
-  fourth?: number;
+  firstState: FirstState;
+  secondState: SecondState;
+  thirdState: ThirdState;
+  fourthState: FourthState;
+}
+interface FirstState {
+  first: number | undefined;
+  setFirst: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  firstError: boolean;
+}
+
+interface SecondState {
+  second: number | undefined;
+  setSecond: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  secondError: boolean;
+}
+
+interface ThirdState {
+  third: number | undefined;
+  setThird: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  thirdError: boolean;
+}
+
+interface FourthState {
+  fourth: number | undefined;
+  setFourth: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  fourthError: boolean;
 }
 
 export interface ExpirationDateState {
-  month?: number;
-  year?: number;
+  monthState: MonthState;
+  yearState: YearState;
 }
 
+interface MonthState {
+  month: number | undefined;
+  setMonth: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  monthError: boolean;
+}
+
+interface YearState {
+  year: number | undefined;
+  setYear: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  yearError: boolean;
+}
+
+export interface UserNameState {
+  userName: string | undefined;
+  setUserName: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  userNameError: boolean;
+}
 export interface ShowImageCondition {
   isVisa: boolean;
   isMasterCard: boolean;
-}
-
-export interface CardNumberState {
-  first?: number;
-  second?: number;
-  third?: number;
-  fourth?: number;
-}
-
-export interface SetCardNumberState {
-  setFirst: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined;
-  setSecond: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined;
-  setThird: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined;
-  setFourth: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined;
-}
-
-export interface CardNumberErrorState {
-  firstError: boolean;
-  secondError: boolean;
-  thirdError: boolean;
-  fourthError: boolean;
-}
-export interface ExpirationDateState {
-  month?: number;
-  year?: number;
-}
-export interface SetExpirationDateState {
-  setMonth: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  setYear: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}
-export interface ExpirationDateErrorState {
-  monthError: boolean;
-  yearError: boolean;
 }

@@ -22,6 +22,7 @@ const useCardNumber = (defaultValues: Array<number | undefined>) => {
   );
 
   return {
+    cardNumberState: {
     firstState: {
       first,
       setFirst,
@@ -42,6 +43,7 @@ const useCardNumber = (defaultValues: Array<number | undefined>) => {
       setFourth,
       fourthError,
     },
+  },
     showImageCondition: {
       isVisa: showVisa(first),
       isMasterCard: showMasterCard(first),

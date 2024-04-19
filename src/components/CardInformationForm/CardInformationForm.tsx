@@ -1,4 +1,4 @@
-import * as CardInformation  from './style';
+import * as CardInformation from './style';
 import FormField from '../FormField/FormField';
 import InputField from '../InputField/InputField';
 import Input from '../Input/Input';
@@ -8,49 +8,35 @@ import CONDITION from '../../constants/Condition';
 const { TITLE, CAPTION, LABEL, ERROR, PLACEHOLDER } = MESSAGE;
 const { MAX_LENGTH } = CONDITION;
 
-import {
-  CardNumberErrorState,
-  CardNumberState,
-  ExpirationDateErrorState,
-  ExpirationDateState,
-  SetCardNumberState,
-  SetExpirationDateState,
-} from '../../types/Types';
+import { CardNumberState, ExpirationDateState, UserNameState } from '../../types/Types';
 
 interface CardInformationFormProps {
   cardNumberState: CardNumberState;
-  setCardNumberState: SetCardNumberState;
-  cardNumberErrorState: CardNumberErrorState;
   expirationDateState: ExpirationDateState;
-  setExpirationDateState: SetExpirationDateState;
-  expirationDateErrorState: ExpirationDateErrorState;
-  userNameState?: string;
-  setUserNameState: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  userNameErrorState: boolean;
+  userNameState: UserNameState;
 }
 
 const CardInformationForm = ({
   cardNumberState,
-  setCardNumberState,
-  cardNumberErrorState,
   expirationDateState,
-  setExpirationDateState,
-  expirationDateErrorState,
   userNameState,
-  setUserNameState,
-  userNameErrorState,
 }: CardInformationFormProps) => {
-  const { first, second, third, fourth } = cardNumberState;
-  const { setFirst, setSecond, setThird, setFourth } = setCardNumberState;
-  const { firstError, secondError, thirdError, fourthError } = cardNumberErrorState;
-  const { month, year } = expirationDateState;
-  const { setMonth, setYear } = setExpirationDateState;
-  const { monthError, yearError } = expirationDateErrorState;
+  const { firstState, secondState, thirdState, fourthState } = cardNumberState;
+  const { monthState, yearState } = expirationDateState;
 
   const cardNumberErrorMessage =
-    firstError || secondError || thirdError || fourthError ? ERROR.cardNumber : '';
-  const expirationErrorMessage = monthError ? ERROR.month : yearError ? ERROR.year : '';
-  const userNameErrorMessage = userNameErrorState ? ERROR.userName : '';
+    firstState.firstError ||
+    secondState.secondError ||
+    thirdState.thirdError ||
+    fourthState.fourthError
+      ? ERROR.cardNumber
+      : '';
+  const expirationErrorMessage = monthState.monthError
+    ? ERROR.month
+    : yearState.yearError
+      ? ERROR.year
+      : '';
+  const userNameErrorMessage = userNameState.userNameError ? ERROR.userName : '';
 
   return (
     <CardInformation.Form>
@@ -59,31 +45,31 @@ const CardInformationForm = ({
           <>
             <Input
               placeholder={PLACEHOLDER.cardNumber}
-              value={first}
+              value={firstState.first}
               maxLength={MAX_LENGTH.cardNumber}
-              onChange={setFirst}
-              invalid={firstError}
+              onChange={firstState.setFirst}
+              invalid={firstState.firstError}
             />
             <Input
               placeholder={PLACEHOLDER.cardNumber}
-              value={second}
+              value={secondState.second}
               maxLength={MAX_LENGTH.cardNumber}
-              onChange={setSecond}
-              invalid={secondError}
+              onChange={secondState.setSecond}
+              invalid={secondState.secondError}
             />
             <Input
               placeholder={PLACEHOLDER.cardNumber}
-              value={third}
+              value={thirdState.third}
               maxLength={MAX_LENGTH.cardNumber}
-              onChange={setThird}
-              invalid={thirdError}
+              onChange={thirdState.setThird}
+              invalid={thirdState.thirdError}
             />
             <Input
               placeholder={PLACEHOLDER.cardNumber}
-              value={fourth}
+              value={fourthState.fourth}
               maxLength={MAX_LENGTH.cardNumber}
-              onChange={setFourth}
-              invalid={fourthError}
+              onChange={fourthState.setFourth}
+              invalid={fourthState.fourthError}
             />
           </>
         </InputField>
@@ -93,17 +79,17 @@ const CardInformationForm = ({
           <>
             <Input
               placeholder={PLACEHOLDER.month}
-              value={month}
+              value={monthState.month}
               maxLength={MAX_LENGTH.expirationDate}
-              onChange={setMonth}
-              invalid={monthError}
+              onChange={monthState.setMonth}
+              invalid={monthState.monthError}
             />
             <Input
               placeholder={PLACEHOLDER.year}
-              value={year}
+              value={yearState.year}
               maxLength={MAX_LENGTH.expirationDate}
-              onChange={setYear}
-              invalid={yearError}
+              onChange={yearState.setYear}
+              invalid={yearState.yearError}
             />
           </>
         </InputField>
@@ -112,10 +98,10 @@ const CardInformationForm = ({
         <InputField label={LABEL.userName} error={userNameErrorMessage}>
           <Input
             placeholder={PLACEHOLDER.userName}
-            value={userNameState}
+            value={userNameState.userName}
             maxLength={MAX_LENGTH.userName}
-            onChange={setUserNameState}
-            invalid={userNameErrorState}
+            onChange={userNameState.setUserName}
+            invalid={userNameState.userNameError}
           />
         </InputField>
       </FormField>

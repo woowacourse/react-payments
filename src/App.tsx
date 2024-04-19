@@ -1,50 +1,33 @@
 import CardInformationForm from './components/CardInformationForm/CardInformationForm';
 import CardInformationPreview from './components/CardInformationPreview/CardInformationPreview';
-import useForm from './hooks/useForm';
-import { Container } from './styles/App.style';
+import useCardNumber from './hooks/useCardNumber';
+import useExpirationDate from './hooks/useExpirationDate';
+import useUserName from './hooks/useUserName';
+import * as StyledApp from './styles/App.style';
 
 function App() {
-  const {
-    cardNumberState,
-    setCardNumberState,
-    cardNumberErrorState,
-    expirationDateState,
-    setExpirationDateState,
-    expirationDateErrorState,
-    userName,
-    setUserName,
-    userNameError,
-    showImageCondition,
-  } = useForm({
-    cardNumber: [],
-    expirationDate: [],
-    userName: '',
-  });
+  const { cardNumberState, showImageCondition } = useCardNumber([]);
+  const { expirationDateState } = useExpirationDate([]);
+  const { userNameState } = useUserName('');
 
   const previewProps = {
     cardNumberState,
     expirationDateState,
-    userNameState: userName,
+    userNameState,
     showImageCondition,
   };
 
   const formProps = {
     cardNumberState,
-    setCardNumberState,
-    cardNumberErrorState,
     expirationDateState,
-    setExpirationDateState,
-    expirationDateErrorState,
-    userNameState: userName,
-    setUserNameState: setUserName,
-    userNameErrorState: userNameError,
+    userNameState,
   };
 
   return (
-    <Container>
+    <StyledApp.Container>
       <CardInformationPreview {...previewProps} />
       <CardInformationForm {...formProps} />
-    </Container>
+    </StyledApp.Container>
   );
 }
 
