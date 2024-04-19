@@ -9,7 +9,7 @@ import CardOwnerNameInputField from "./components/Field/CardOwnerNameInputField/
 import Card from "./components/Card/Card";
 
 function App() {
-  const [cardNumbers, setCardNumbers] = useState<string[]>(
+  const [cardNumbers, setCardNumbers] = useState<string[]>(() =>
     new Array(CARD_NUMBER_UNIT_LENGTH).fill("")
   );
 
