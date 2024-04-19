@@ -10,10 +10,6 @@ type ArgGenerateParameter =
       control: 'boolean';
     }
   | {
-      control: 'check';
-      options: string[] | readonly string[];
-    }
-  | {
       control: 'inline-check';
       options: string[] | readonly string[];
     }
@@ -68,9 +64,6 @@ export const generateArgTypes = (param: ArgGenerateParameter) => {
     case 'color':
       return { control: { type: param.control, presetColors: param.presetColors } } as const;
     case 'number':
-      return {
-        control: { type: param.control, min: param.min, max: param.max, step: param.step },
-      } as const;
     case 'range':
       return {
         control: { type: param.control, min: param.min, max: param.max, step: param.step },
