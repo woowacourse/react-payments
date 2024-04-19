@@ -21,15 +21,15 @@ const CardInformationPreview = ({
 }: CardInformationPreviewProps) => {
   const { first, second, third, fourth } = cardNumberState;
   const { month, year } = expirationDateState;
-  const slashViewCondition = month && year;
-  const { visaShowCondition, masterCardShowCondition } = showImageCondition;
+  const isMonthYearAllVisible = month && year;
+  const { isVisa, isMasterCard} = showImageCondition;
 
   return (
     <Preview.Container>
       <Preview.ImgContainer>
         <Preview.CardImg src={magnetic} alt="magnetic" />
-        {masterCardShowCondition && <Preview.CardImg src={masterCard} alt="masterCard" />}
-        {visaShowCondition && <Preview.CardImg src={visa} alt="visa" />}
+        {isVisa && <Preview.CardImg src={visa} alt="visa" />}
+        {isMasterCard && <Preview.CardImg src={masterCard} alt="masterCard" />}
       </Preview.ImgContainer>
       <Preview.UserInformationContainer>
         <Preview.CardNumberContainer>
@@ -47,7 +47,7 @@ const CardInformationPreview = ({
           </Preview.UserInfomation>
         </Preview.CardNumberContainer>
         <Preview.UserInfomation $typo={theme.typography.cardExpirationDate}>
-          {`${month ?? ''}${slashViewCondition ? CONDITION.splitSlash : ''}${year ?? ''}`}
+          {`${month ?? ''}${isMonthYearAllVisible ? CONDITION.splitSlash : ''}${year ?? ''}`}
         </Preview.UserInfomation>
         <Preview.UserInfomation $typo={theme.typography.cardUserName}>
           {userNameState ?? ''}

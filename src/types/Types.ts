@@ -11,8 +11,8 @@ export interface ExpirationDateState {
 }
 
 export interface ShowImageCondition {
-  visaShowCondition: boolean;
-  masterCardShowCondition: boolean;
+  isVisa: boolean;
+  isMasterCard: boolean;
 }
 
 export interface CardNumberState {

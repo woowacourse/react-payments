@@ -16,8 +16,8 @@ export const Default: Story = {
     expirationDateState: {},
     userNameState: '',
     showImageCondition: {
-      visaShowCondition: false,
-      masterCardShowCondition: false,
+      isVisa: false,
+      isMasterCard: false,
     },
   },
 };
@@ -28,8 +28,8 @@ export const Fulfilled: Story = {
     expirationDateState: { month: 12, year: 24 },
     userNameState: 'SIMO COOKIE',
     showImageCondition: {
-      visaShowCondition: false,
-      masterCardShowCondition: true,
+      isVisa: false,
+      isMasterCard: true,
     },
   },
 };
@@ -40,8 +40,8 @@ export const Visa: Story = {
     expirationDateState: {},
     userNameState: '',
     showImageCondition: {
-      visaShowCondition: true,
-      masterCardShowCondition: false,
+      isVisa: true,
+      isMasterCard: false,
     },
   },
 };
@@ -52,8 +52,8 @@ export const MasterCard: Story = {
     expirationDateState: {},
     userNameState: '',
     showImageCondition: {
-      visaShowCondition: false,
-      masterCardShowCondition: true,
+      isVisa: false,
+      isMasterCard: true,
     },
   },
 };
@@ -64,8 +64,8 @@ export const NormalCard: Story = {
     expirationDateState: {},
     userNameState: '',
     showImageCondition: {
-      visaShowCondition: false,
-      masterCardShowCondition: false,
+      isVisa: false,
+      isMasterCard: false,
     },
   },
 };
@@ -76,8 +76,8 @@ export const HiddenCardNumber: Story = {
     expirationDateState: {},
     userNameState: '',
     showImageCondition: {
-      visaShowCondition: false,
-      masterCardShowCondition: false,
+      isVisa: false,
+      isMasterCard: false,
     },
   },
 };

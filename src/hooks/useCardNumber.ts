@@ -43,8 +43,8 @@ const useCardNumber = (defaultValues: Array<number | undefined>) => {
       fourthError,
     },
     showImageCondition: {
-      visaShowCondition: showVisa(first),
-      masterCardShowCondition: showMasterCard(first),
+      isVisa: showVisa(first),
+      isMasterCard: showMasterCard(first),
     },
   };
 };
