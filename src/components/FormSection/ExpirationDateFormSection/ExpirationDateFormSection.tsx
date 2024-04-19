@@ -1,19 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-import PaymentsFormTitle from './common/PaymentsFormTitle';
-import PaymentsInputField from './common/PaymentsInputField';
+import PaymentsFormTitle from '../../common/PaymentsFormTitle/PaymentsFormTitle';
+import PaymentsInputField from '../../common/PaymentsInputField/PaymentsInputField';
 
-import ERROR_MESSAGE from '../constants/errorMessage';
-import OPTION from '../constants/option';
-import REGEX from '../constants/regex';
+import ERROR_MESSAGE from '../../../constants/errorMessage';
+import OPTION from '../../../constants/option';
+import REGEX from '../../../constants/regex';
 
-import {
-  FormSection,
-  InputFieldContainer,
-  InputForm,
-  Label,
-  ErrorMessage,
-} from './style/FormSection';
+import * as Styled from '../FormSection.styled';
 
 const nowDate = new Date();
 const year = nowDate.getFullYear().toString().slice(2, 4);
@@ -205,14 +199,14 @@ const ExpirationDateFormSection = ({ ...props }) => {
   };
 
   return (
-    <FormSection>
+    <Styled.FormSection>
       <PaymentsFormTitle
         title="카드 유효기간을 입력해 주세요"
         subTitle="월/년도(MM/YY)를 순서대로 입력해 주세요."
       />
-      <InputForm>
-        <Label>유효기간</Label>
-        <InputFieldContainer className="input-field-container">
+      <Styled.InputForm>
+        <Styled.Label>유효기간</Styled.Label>
+        <Styled.InputFieldContainer className="input-field-container">
           <PaymentsInputField
             ref={expirationMonthRef}
             placeholder="MM"
@@ -233,10 +227,10 @@ const ExpirationDateFormSection = ({ ...props }) => {
             handleOnFocus={() => handleOnFocus(1)}
             handleOnBlur={() => handleOnBlur(1)}
           />
-        </InputFieldContainer>
-        <ErrorMessage>{errorMessage}</ErrorMessage>
-      </InputForm>
-    </FormSection>
+        </Styled.InputFieldContainer>
+        <Styled.ErrorMessage>{errorMessage}</Styled.ErrorMessage>
+      </Styled.InputForm>
+    </Styled.FormSection>
   );
 };
 

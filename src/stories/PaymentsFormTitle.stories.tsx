@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import PaymentsFormTitle from '../components/common/PaymentsFormTitle';
+import PaymentsFormTitle from '../components/common/PaymentsFormTitle/PaymentsFormTitle';
 
 const meta = {
   title: 'PaymentsFormTitle',

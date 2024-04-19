@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import NameFormSection from '../components/NameFormSection';
+import NameFormSection from '../components/NameFormSection/NameFormSection';
 
 const meta = {
   title: 'NameFormSection',
@@ -11,5 +11,5 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: { changeName: () => {} },
+  args: { changeName: () => { } },
 };

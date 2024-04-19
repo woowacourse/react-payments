@@ -21,13 +21,4 @@ const SubTitle = styled.h2`
   color: #8b95a1;
 `;
 
-const PaymentsFormTitle = ({ ...props }: PaymentsFormTitleProps) => {
-  return (
-    <TitleContainer>
-      <Title>{props.title}</Title>
-      <SubTitle>{props.subTitle}</SubTitle>
-    </TitleContainer>
-  );
-};
-
-export default PaymentsFormTitle;
+export { TitleContainer, Title, SubTitle };

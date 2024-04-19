@@ -1,14 +1,12 @@
-import { useEffect } from 'react';
-import styled from 'styled-components';
-import Visa from '../asset/Visa.svg';
-import MasterCard from '../asset/Mastercard.svg';
-import { useState } from 'react';
-import REGEX from '../constants/regex';
+import { useEffect, useState } from 'react';
 
-const Image = styled.img`
-  width: 36px;
-  height: 28px;
-`;
+import Visa from '../../asset/Visa.svg';
+import MasterCard from '../../asset/Mastercard.svg';
+
+import REGEX from '../../constants/regex';
+
+import { Image } from './CardBrand.styled';
+
 type CardBrand = 'Visa' | 'MasterCard';
 
 const CardBrand = ({ ...props }) => {

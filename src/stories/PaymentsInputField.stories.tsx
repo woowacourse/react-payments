@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import PaymentsInputField from '../components/common/PaymentsInputField';
+import PaymentsInputField from '../components/common/PaymentsInputField/PaymentsInputField';
 
 const meta = {
   title: 'PaymentsInputField',

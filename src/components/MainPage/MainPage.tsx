@@ -1,21 +1,10 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 
-import CardInfo from './CardInfo';
-import CardPreview from './CardPreview';
+import CardInfo from '../CardInfo/CardInfo';
+import CardPreview from '../CardPreview/CardPreview';
 
-const Main = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 0 32px;
-  gap: 48px;
-  width: 100%;
-  max-width: 375px;
-  height: fit-content;
-  background-color: white;
-`;
+import { MainContainer } from './MainPage.styled';
 
 const MainPage = () => {
   const [cardInfo, setCardInfo] = useState<CardInfo>({
@@ -30,10 +19,10 @@ const MainPage = () => {
   };
 
   return (
-    <Main>
+    <MainContainer>
       <CardPreview {...cardInfo} />
       <CardInfo changeCardInfo={changeCardInfo} />
-    </Main>
+    </MainContainer>
   );
 };
 

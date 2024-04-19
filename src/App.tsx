@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import './App.css';
-import MainPage from './components/MainPage';
+import MainPage from './components/MainPage/MainPage';
 
 const Container = styled.div`
   display: flex;
