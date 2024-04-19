@@ -4,18 +4,19 @@ import React from "react";
 import { theme } from "../src/style/theme";
 import GlobalStyles from "../src/style/global.ts";
 
-export const preview: Preview = {
+const preview: Preview = {
   parameters: {
+    layout: "centered",
     controls: {
       matchers: {
         color: /(background|color)$/i,
-        date: /Date$/i,
+        // date: /Date$/i,
       },
     },
   },
 };
 
-export const decorators = [
+const decorators = [
   (Story) => (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
@@ -23,3 +24,8 @@ export const decorators = [
     </ThemeProvider>
   ),
 ];
+
+export default {
+  ...preview,
+  decorators,
+};

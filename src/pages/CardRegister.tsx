@@ -47,9 +47,7 @@ const CardRegister = () => {
         <CreditCardPreview
           cardType={checkCardBrand(cardNumbersState.input)}
           cardNumbers={cardNumbersState.input}
-          expirationDate={
-            expiredDateState.input[0] && expiredDateState.input.join("/")
-          }
+          expirationDate={expiredDateState.input}
           ownerName={ownerNameState.input[0]}
         />
         <CardRegisterForm

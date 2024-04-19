@@ -8,7 +8,7 @@ export type CardType = "VISA" | "MASTER" | "NONE";
 interface Props {
   cardType: CardType;
   cardNumbers: string[];
-  expirationDate: string;
+  expirationDate: string[];
   ownerName: string;
 }
 const CreditCardPreview = ({
@@ -49,7 +49,11 @@ const CreditCardPreview = ({
             );
           })}
         </S.CardNumbers>
-        <S.Input type="text" value={expirationDate} readOnly></S.Input>
+        <S.Input
+          type="text"
+          value={expirationDate[0] && expirationDate.join("/")}
+          readOnly
+        ></S.Input>
         <S.Input type="text" value={ownerName} readOnly></S.Input>
       </S.CreditCardInfo>
     </S.CardWrapper>

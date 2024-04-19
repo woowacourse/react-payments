@@ -9,6 +9,7 @@ import {
 import InputField from "@/components/InputField/InputField";
 import Input from "@/components/Input/Input";
 import S from "./style";
+import InputFieldHeader from "../InputFieldHeader/InputFieldHeader";
 
 interface Props {
   cardNumbersState: ReturnType<typeof useInput>;
@@ -52,10 +53,10 @@ const CardRegisterForm = ({
     <S.CardFormWrapper>
       {/*카드 번호*/}
       <S.InputFieldWithInfo>
-        <S.TitleWrapper>
-          <S.InputTitle>{INPUT_INFO_TITLE.CARD_NUMBERS}</S.InputTitle>
-          <S.InputSubtitle>{INPUT_INFO_SUBTITLE.CARD_NUMBERS}</S.InputSubtitle>
-        </S.TitleWrapper>
+        <InputFieldHeader
+          title={INPUT_INFO_TITLE.CARD_NUMBERS}
+          subTitle={INPUT_INFO_SUBTITLE.CARD_NUMBERS}
+        />
         <InputField
           label={INPUT_LABEL.CARD_NUMBERS}
           errorMessage={
@@ -85,12 +86,10 @@ const CardRegisterForm = ({
 
       {/*유효 기간*/}
       <S.InputFieldWithInfo>
-        <S.TitleWrapper>
-          <S.InputTitle>{INPUT_INFO_TITLE.EXPIRATION_DATE}</S.InputTitle>
-          <S.InputSubtitle>
-            {INPUT_INFO_SUBTITLE.EXPIRATION_DATE}
-          </S.InputSubtitle>
-        </S.TitleWrapper>
+        <InputFieldHeader
+          title={INPUT_INFO_TITLE.EXPIRATION_DATE}
+          subTitle={INPUT_INFO_SUBTITLE.EXPIRATION_DATE}
+        />
         <InputField
           label={INPUT_LABEL.EXPIRATION_DATE}
           errorMessage={
@@ -121,9 +120,7 @@ const CardRegisterForm = ({
 
       {/*소유자 이름*/}
       <S.InputFieldWithInfo>
-        <S.TitleWrapper>
-          <S.InputTitle>{INPUT_INFO_TITLE.OWNER_NAME}</S.InputTitle>
-        </S.TitleWrapper>
+        <InputFieldHeader title={INPUT_INFO_TITLE.OWNER_NAME} />
         <InputField
           label={INPUT_LABEL.OWNER_NAME}
           errorMessage={ownerErrorMessages[0]}

@@ -14,7 +14,7 @@ export const Default: Story = {
   args: {
     cardType: "MASTER",
     cardNumbers: ["1234", "1234", "1234", "1234"],
-    expirationDate: "04/18",
-    ownerName: "",
+    expirationDate: ["04", "24"],
+    ownerName: "RIAN OH",
   },
 };
