@@ -1,12 +1,14 @@
 import styled from 'styled-components';
 import { InitialCardNumberState } from '../hooks/useCardNumber';
+import MasterCardImage from '../assets/images/mastercard.png';
+import VisaCardImage from '../assets/images/visa.png';
 
 type CreditCardProps = {
   cardNumbers: InitialCardNumberState[];
   month: string;
   year: string;
   name: string;
-  cardImageSrc: string;
+  cardBrand: 'none' | 'Visa' | 'MasterCard';
 };
 
 const Container = styled.div`
@@ -95,13 +97,10 @@ const CardInfoWrapper = styled.div`
   margin-left: 5px;
 `;
 
-export default function CreditCard({
-  cardNumbers,
-  month,
-  year,
-  name,
-  cardImageSrc,
-}: CreditCardProps) {
+export default function CreditCard({ cardNumbers, month, year, name, cardBrand }: CreditCardProps) {
+  const cardBrandImageSrc =
+    cardBrand === 'MasterCard' ? MasterCardImage : cardBrand === 'Visa' ? VisaCardImage : '';
+
   return (
     <Container>
       <CardContainer>
@@ -110,7 +109,9 @@ export default function CreditCard({
             <IcChip />
           </CardHeaderContentWrapper>
           <CardHeaderContentWrapper>
-            {cardImageSrc ? <CardBrand src={cardImageSrc} alt={'cardBrandImage'} /> : null}
+            {cardBrandImageSrc ? (
+              <CardBrand src={cardBrandImageSrc} alt={'cardBrandImage'} />
+            ) : null}
           </CardHeaderContentWrapper>
         </CardHeader>
         <CardInfoWrapper>

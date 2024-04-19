@@ -1,7 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import CreditCard from '../components/CreditCard';
-import MasterCard from '../assets/images/mastercard.png';
-import VisaCard from '../assets/images/visa.png';
 
 const meta = {
   title: 'CreditCard',
@@ -24,9 +22,9 @@ const meta = {
       control: 'text',
       description: '카드 소유자 입력 값',
     },
-    cardImageSrc: {
+    cardBrand: {
       control: 'select',
-      options: ['', MasterCard, VisaCard],
+      options: ['none', 'MasterCard', 'Visa'],
       description: '카드 브랜드 이미지',
     },
   },
@@ -46,7 +44,7 @@ export const Default: Story = {
     month: '00',
     year: '00',
     name: 'JOHN DOE',
-    cardImageSrc: '',
+    cardBrand: 'none',
   },
 };
 
@@ -61,7 +59,7 @@ export const Visa: Story = {
     month: '12',
     year: '29',
     name: 'LIM DONGJUN',
-    cardImageSrc: VisaCard,
+    cardBrand: 'Visa',
   },
 };
 
@@ -76,6 +74,6 @@ export const Master: Story = {
     month: '12',
     year: '29',
     name: 'LIM DONGJUN',
-    cardImageSrc: MasterCard,
+    cardBrand: 'MasterCard',
   },
 };

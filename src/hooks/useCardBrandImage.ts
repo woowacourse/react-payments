@@ -1,27 +1,25 @@
 import { useState, useEffect } from 'react';
 import validate from '../utils/validate';
-import MasterCardImage from '../assets/images/mastercard.png';
-import VisaCardImage from '../assets/images/visa.png';
 import { InitialCardNumberState } from './useCardNumber';
 
 const useCardBrandImage = (cardNumberStates: InitialCardNumberState[]) => {
-  const [cardImageSrc, setCardImageSrc] = useState('');
+  const [cardBrand, setCardBrand] = useState<'none' | 'Visa' | 'MasterCard'>('none');
 
   useEffect(() => {
-    setCardImageSrc('');
+    setCardBrand('none');
 
     const cardNumberString = cardNumberStates.map((cardNumber) => cardNumber.value).join('');
 
     if (validate.isVisa(cardNumberString)) {
-      setCardImageSrc(VisaCardImage);
+      setCardBrand('Visa');
     }
 
     if (validate.isMasterCard(cardNumberString)) {
-      setCardImageSrc(MasterCardImage);
+      setCardBrand('MasterCard');
     }
   }, [cardNumberStates]);
 
-  return { cardImageSrc };
+  return { cardBrand };
 };
 
 export default useCardBrandImage;

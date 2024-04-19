@@ -74,7 +74,7 @@ function App() {
   const { cardNumbers, cardNumbersChangeHandler } = useCardNumber(
     Array.from({ length: CARD_NUMBER_LENGTH }, () => initialCardNumberState),
   );
-  const { cardImageSrc } = useCardBrandImage(cardNumbers);
+  const { cardBrand } = useCardBrandImage(cardNumbers);
 
   const {
     inputValue: month,
@@ -109,7 +109,7 @@ function App() {
           month={month}
           year={year}
           name={name}
-          cardImageSrc={cardImageSrc}
+          cardBrand={cardBrand}
         />
         <CardInfoContainer>
           <Wrapper>
