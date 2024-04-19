@@ -72,6 +72,9 @@
   letter-spacing: 0.16em;
   text-align: left;
   color: var(--grey-100);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .cardNumberText {
