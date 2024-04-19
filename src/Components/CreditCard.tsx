@@ -2,7 +2,7 @@
 import { css } from "@emotion/react";
 import masterImage from "../assets/masterImage.png";
 import visaImage from "../assets/visaImage.png";
-import { CardContext } from "../App";
+import { CardInfoContext } from "../App";
 import { useContext } from "react";
 
 const style = css({
@@ -63,7 +63,7 @@ const formatTwoDigitNumber = (n: number | undefined) => {
 };
 
 const CreditCard = () => {
-  const { cardNumbers, cardValidityPeriod, ownerName } = useContext(CardContext)![0];
+  const { cardNumbers, cardValidityPeriod, ownerName } = useContext(CardInfoContext)![0];
 
   const pattern = /^(51|52|53|54)/;
   const { month, year } = cardValidityPeriod!;
