@@ -27,7 +27,7 @@ const CardInformationPreview = ({
   return (
     <Preview.Container>
       <Preview.ImgContainer>
-        <Preview.CardImg src={magnetic} alt="magnetic" />
+        <Preview.CardImg src={magnetic} alt="" />
         {masterCardShowCondition && <Preview.CardImg src={masterCard} alt="masterCard" />}
         {visaShowCondition && <Preview.CardImg src={visa} alt="visa" />}
       </Preview.ImgContainer>
