@@ -2,20 +2,19 @@ import { useState } from 'react';
 
 type InitialValuesType = CardNumbers | ExpirationDate | OwnerName;
 
-interface useAddCardInputProps<T extends InitialValuesType> {
+export type InputType = {
+  name?: string;
+  value: string;
+};
+
+interface UseAddCardInputProps<T extends InitialValuesType> {
   initialValues: T;
   initialErrors: Record<keyof T, boolean>;
-  validateInputOnChange: ({
-    name,
-    value,
-  }: {
-    name?: string;
-    value: string;
-  }) => {
+  validateInputOnChange: ({ name, value }: InputType) => {
     isValid: boolean;
     errorMsg: string;
   };
-  validateInputOnBlur?: ({ name, value }: { name?: string; value: string }) => {
+  validateInputOnBlur?: ({ name, value }: InputType) => {
     isValid: boolean;
     errorMsg: string;
   };
@@ -28,7 +27,7 @@ export default function useAddCardInput<T extends InitialValuesType>({
   updateCardData,
   initialValues,
   initialErrors,
-}: useAddCardInputProps<T>) {
+}: UseAddCardInputProps<T>) {
   const [values, setValues] = useState<T>(initialValues);
   const [isError, setIsError] =
     useState<Record<keyof T, boolean>>(initialErrors);
@@ -57,6 +56,7 @@ export default function useAddCardInput<T extends InitialValuesType>({
 
     if (validateInputOnBlur) {
       const validation = validateInputOnBlur({ name, value });
+
       if (!validation.isValid) {
         setErrMsg(validation.errorMsg);
         setIsError({ ...isError, [name]: true });

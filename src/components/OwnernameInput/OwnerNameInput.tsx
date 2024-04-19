@@ -1,7 +1,7 @@
 import Input from '../common/Input/Input';
 import Field from '../common/Field/Field';
 
-import useAddCardInput from '../../hooks/useAddCardInput';
+import useAddCardInput, { InputType } from '../../hooks/useAddCardInput';
 
 import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../constants/messages';
 import { isEnglishCharacter } from '../../domain/validators';
@@ -13,12 +13,7 @@ interface OwnerNameInputProps {
 }
 
 function OwnerNameInput({ setCardData }: OwnerNameInputProps) {
-  const validateInputOnChange = ({
-    value,
-  }: {
-    name?: string;
-    value: string;
-  }) => {
+  const validateInputOnChange = ({ value }: InputType) => {
     if (value !== '' && !isEnglishCharacter(value)) {
       return { isValid: false, errorMsg: ERRORS.isNotAlphabet };
     }

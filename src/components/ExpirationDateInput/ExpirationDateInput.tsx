@@ -9,7 +9,7 @@ import {
 } from '../../domain/validators';
 
 import { ERRORS, ADD_CARD_FORM_FIELDS } from '../../constants/messages';
-import useAddCardInput from '../../hooks/useAddCardInput';
+import useAddCardInput, { InputType } from '../../hooks/useAddCardInput';
 
 const { EXPIRATION_DATE } = ADD_CARD_FORM_FIELDS;
 
@@ -25,7 +25,7 @@ const ExpirationDateInput = ({ setCardData }: ExpirationDateInputProps) => {
     return { isValid: true, errorMsg: '' };
   };
 
-  const validateInputOnBlur = ({ value }: { name?: string; value: string }) => {
+  const validateInputOnBlur = ({ value }: InputType) => {
     if (!hasTwoDigit(value)) {
       return { isValid: false, errorMsg: ERRORS.isNotTwoDigit };
     }

@@ -1,7 +1,7 @@
 import Input from '../common/Input/Input';
 import Field from '../common/Field/Field';
 
-import useAddCardInput from '../../hooks/useAddCardInput';
+import useAddCardInput, { InputType } from '../../hooks/useAddCardInput';
 import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../constants/messages';
 import { hasFourDigit, isInteger } from '../../domain/validators';
 
@@ -12,19 +12,14 @@ interface CardNumberInputProps {
 const { CARD_NUMBER } = ADD_CARD_FORM_FIELDS;
 
 export default function CardNumberInput({ setCardData }: CardNumberInputProps) {
-  const validateInputOnChange = ({
-    value,
-  }: {
-    name?: string;
-    value: string;
-  }) => {
+  const validateInputOnChange = ({ value }: InputType) => {
     if (!isInteger(value)) {
       return { isValid: false, errorMsg: ERRORS.isNotInteger };
     }
     return { isValid: true, errorMsg: '' };
   };
 
-  const validateInputOnBlur = ({ value }: { name?: string; value: string }) => {
+  const validateInputOnBlur = ({ value }: InputType) => {
     if (!hasFourDigit(value)) {
       return { isValid: false, errorMsg: ERRORS.isNotFourDigit };
     }
