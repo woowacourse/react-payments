@@ -1,19 +1,20 @@
 import { Meta, StoryObj } from "@storybook/react";
 import CardNumberForm from "../components/Form/CardNumberForm";
 
-export default {
+const meta = {
   title: "CardNumberForm",
   component: CardNumberForm,
-} as Meta;
+} satisfies Meta<typeof CardNumberForm>;
 
-type Story = StoryObj<typeof CardNumberForm>;
+export default meta;
 
-const Template: Story["template"] = (args) => <CardNumberForm {...args} />;
+type Story = StoryObj<typeof meta>;
 
-export const Default = Template.bind({});
-Default.args = {
-  labelContent: "Card Number",
-  inputCount: 4,
-  type: "text",
-  placeholders: ["1234", "1234", "1234", "1234"],
+export const Default: Story = {
+  args: {
+    labelContent: "Card Number",
+    inputCount: 4,
+    type: "text",
+    placeholders: ["1234", "1234", "1234", "1234"],
+  },
 };

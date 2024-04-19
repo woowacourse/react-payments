@@ -1,13 +1,13 @@
 import { Meta, StoryObj } from "@storybook/react";
 import PaymentApp from "../components/PaymentApp";
 
-export default {
+const meta = {
   title: "PaymentApp",
   component: PaymentApp,
-} as Meta;
+} satisfies Meta<typeof PaymentApp>;
 
-type Story = StoryObj<typeof PaymentApp>;
+export default meta;
 
-const Template: Story["template"] = (args) => <PaymentApp {...args} />;
+type Story = StoryObj<typeof meta>;
 
-export const Default = Template.bind({});
+export const Default: Story = {};

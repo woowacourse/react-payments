@@ -1,20 +1,20 @@
 import { Meta, StoryObj } from "@storybook/react";
 import UserNameForm from "../components/Form/UserNameForm";
 
-export default {
+const meta = {
   title: "UserNameForm",
   component: UserNameForm,
-} as Meta;
+} satisfies Meta<typeof UserNameForm>;
 
-type Story = StoryObj<typeof UserNameForm>;
+export default meta;
 
-const Template: Story["template"] = (args) => <UserNameForm {...args} />;
+type Story = StoryObj<typeof meta>;
 
-
-export const Default = Template.bind({});
-Default.args = {
-  labelContent: "User Name",
-  inputCount: 1,
-  type: "text",
-  placeholders: ["JOHN DOE"],
+export const Default: Story = {
+  args: {
+    labelContent: "User Name",
+    inputCount: 1,
+    type: "text",
+    placeholders: ["JOHN DOE"],
+  },
 };

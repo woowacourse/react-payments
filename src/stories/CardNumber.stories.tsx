@@ -1,16 +1,17 @@
 import { Meta, StoryObj } from "@storybook/react";
 import CardNumber from "../components/Card/CardNumber";
 
-export default {
+const meta = {
   title: "CardNumber",
   component: CardNumber,
-} as Meta;
+} satisfies Meta<typeof CardNumber>;
 
-type Story = StoryObj<typeof CardNumber>;
+export default meta;
 
-const Template: Story["template"] = (args) => <CardNumber {...args} />;
+type Story = StoryObj<typeof meta>;
 
-export const Default = Template.bind({});
-Default.args = {
-  number: "1234",
+export const Default: Story = {
+  args: {
+    number: "1234",
+  },
 };
