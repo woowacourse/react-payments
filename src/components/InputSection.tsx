@@ -49,6 +49,18 @@ const InputWrapper = styled.div`
   gap: 10px;
 `;
 
+const TitleDescriptionWrapper = styled.div`
+  display: 'flex';
+  flex-direction: 'column';
+  gap: '4px';
+`;
+
+const TitleChildrenWrapper = styled.div`
+  display: 'flex';
+  flex-direction: 'column';
+  gap: '8px';
+`;
+
 export default function InputSection({
   title,
   description,
@@ -57,7 +69,7 @@ export default function InputSection({
 }: PropsWithChildren<InfoProps>) {
   return (
     <Section>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+      <TitleDescriptionWrapper>
         <TitleContainer>
           <Title>{title}</Title>
         </TitleContainer>
@@ -66,13 +78,13 @@ export default function InputSection({
             <Description>{description}</Description>
           </DescriptionContainer>
         ) : null}
-      </div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+      </TitleDescriptionWrapper>
+      <TitleChildrenWrapper>
         <SpanWrapper>
           <Span>{inputTitle}</Span>
         </SpanWrapper>
         <InputWrapper>{children}</InputWrapper>
-      </div>
+      </TitleChildrenWrapper>
     </Section>
   );
 }
