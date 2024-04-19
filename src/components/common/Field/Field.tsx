@@ -19,7 +19,7 @@ export default function Field({
   return (
     <div className={styles.field}>
       <h2 className={styles.title}>{title}</h2>
-      <p className={styles.description}>{description}</p>
+      {description && <p className={styles.description}>{description}</p>}
 
       <label>
         <p className={styles.labelText}>{labelText}</p>
