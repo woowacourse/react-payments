@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import masterImage from "../assets/masterImage.png";
-import visaImage from "../assets/visaImage.png";
+import masterImage from "../assets/images/masterImage.png";
+import visaImage from "../assets/images/visaImage.png";
 
 const style = css({
   background: "#333",
@@ -64,13 +64,16 @@ interface Props {
   cardInfo: CardInfo;
 }
 
-const CreditCard: React.FC<Props> = ({ cardInfo: { cardNumbers, cardValidityPeriod, ownerName } }) => {
+const CreditCard: React.FC<Props> = ({
+  cardInfo: { cardNumbers, cardValidityPeriod, ownerName },
+}) => {
   const pattern = /^(51|52|53|54)/;
   const { month, year } = cardValidityPeriod!;
   const cardImage =
     cardNumbers?.firstNumbers[0] === 4
       ? visaImage
-      : cardNumbers?.firstNumbers[0] && pattern.test(cardNumbers?.firstNumbers?.join(""))
+      : cardNumbers?.firstNumbers[0] &&
+          pattern.test(cardNumbers?.firstNumbers?.join(""))
         ? masterImage
         : null;
 
