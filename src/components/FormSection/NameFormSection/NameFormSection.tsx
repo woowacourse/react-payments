@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import PaymentsFormTitle from '../../common/PaymentsFormTitle/PaymentsFormTitle';
@@ -25,8 +25,6 @@ const NameFormSection = ({ ...props }) => {
     isFilled: false,
   });
   const [errorMessage, setErrorMessage] = useState('');
-
-  const nameRef = useRef<HTMLInputElement>(null);
 
   const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
@@ -93,7 +91,6 @@ const NameFormSection = ({ ...props }) => {
         <Styled.InputFieldContainer className="input-field-container">
           <PaymentsInputFieldUppercase
             className="name-form-section"
-            ref={nameRef}
             placeholder="FAMILY / GIVEN"
             maxLength={OPTION.nameMaxLength}
             value={inputState.value}

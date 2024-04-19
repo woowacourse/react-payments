@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import PaymentsFormTitle from '../../common/PaymentsFormTitle/PaymentsFormTitle';
 import PaymentsInputField from '../../common/PaymentsInputField/PaymentsInputField';
@@ -37,9 +37,6 @@ const ExpirationDateFormSection = ({ ...props }) => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const [hasNoFocus, setHasNoFocus] = useState(true);
-
-  const expirationMonthRef = useRef<HTMLInputElement>(null);
-  const expirationYearRef = useRef<HTMLInputElement>(null);
 
   const handleValueChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -208,7 +205,6 @@ const ExpirationDateFormSection = ({ ...props }) => {
         <Styled.Label>유효기간</Styled.Label>
         <Styled.InputFieldContainer className="input-field-container">
           <PaymentsInputField
-            ref={expirationMonthRef}
             placeholder="MM"
             maxLength={OPTION.expirationDateMaxLength}
             value={inputState[0].value}
@@ -218,7 +214,6 @@ const ExpirationDateFormSection = ({ ...props }) => {
             handleOnBlur={() => handleOnBlur(0)}
           />
           <PaymentsInputField
-            ref={expirationYearRef}
             placeholder="YY"
             maxLength={OPTION.expirationDateMaxLength}
             value={inputState[1].value}
