@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Field from '../components/layout/Field/Field';
+import Field from '../components/common/Field/Field';
 import Input from '../components/common/Input/Input';
 
 const meta = {

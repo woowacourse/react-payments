@@ -1,5 +1,5 @@
 import Input from '../common/Input/Input';
-import Field from '../layout/Field/Field';
+import Field from '../common/Field/Field';
 
 import useAddCardInput from '../../hooks/useAddCardInput';
 import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../constants/messages';
