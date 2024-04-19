@@ -40,6 +40,7 @@ const useInput = ({
       ? ""
       : "유효하지 않은 길이입니다.";
   };
+
   const onBlurValidateWrapper: validate = (inputs) => {
     if (validateLength(inputs).length > 0) return validateLength(inputs);
     if (onBlurValidate(inputs).length > 0) return onBlurValidate(inputs);
