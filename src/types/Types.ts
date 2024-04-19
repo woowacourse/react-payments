@@ -5,23 +5,6 @@ export interface CardNumberState {
   fourth?: number;
 }
 
-export interface ExpirationDateState {
-  month?: number;
-  year?: number;
-}
-
-export interface ShowImageCondition {
-  visaShowCondition: boolean;
-  masterCardShowCondition: boolean;
-}
-
-export interface CardNumberState {
-  first?: number;
-  second?: number;
-  third?: number;
-  fourth?: number;
-}
-
 export interface SetCardNumberState {
   setFirst: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined;
   setSecond: ((event: React.ChangeEvent<HTMLInputElement>) => void) | undefined;
@@ -35,6 +18,7 @@ export interface CardNumberErrorState {
   thirdError: boolean;
   fourthError: boolean;
 }
+
 export interface ExpirationDateState {
   month?: number;
   year?: number;
@@ -46,4 +30,9 @@ export interface SetExpirationDateState {
 export interface ExpirationDateErrorState {
   monthError: boolean;
   yearError: boolean;
+}
+
+export interface ShowImageCondition {
+  visaShowCondition: boolean;
+  masterCardShowCondition: boolean;
 }
