@@ -3,9 +3,8 @@ import { useEffect, useState } from 'react';
 import Visa from '../../asset/Visa.svg';
 import MasterCard from '../../asset/Mastercard.svg';
 
-import REGEX from '../../constants/regex';
-
 import { Image } from './CardBrand.styled';
+import { startsWithNumberRegex } from '../../util/startsWithNumberRegex';
 
 type CardBrand = 'Visa' | 'MasterCard';
 
@@ -20,10 +19,10 @@ const CardBrand = ({ ...props }) => {
   const [isBrand, setIsBrand] = useState(false);
 
   const changBrand = () => {
-    if (REGEX.startsWith4.test(firstCardNumbers)) {
+    if (startsWithNumberRegex(4).test(firstCardNumbers)) {
       setBrand('Visa');
       setIsBrand(true);
-    } else if (REGEX.startsWith5155.test(firstCardNumbers)) {
+    } else if (startsWithNumberRegex(51, 55).test(firstCardNumbers)) {
       setBrand('MasterCard');
       setIsBrand(true);
     } else {
