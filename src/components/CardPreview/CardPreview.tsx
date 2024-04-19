@@ -14,7 +14,7 @@ interface CardPreviewProps {
 }
 
 const CardPreview = ({ cardInfo }: CardPreviewProps) => {
-  const { cardNumbers, expirationDate, cardOwner } = cardInfo;
+  const { cardNumbers, expirationDate, cardOwnerName: cardOwner } = cardInfo;
 
   const { logoPath, handleCardLogo } = useCardLogo();
 

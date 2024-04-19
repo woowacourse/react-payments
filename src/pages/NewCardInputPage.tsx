@@ -10,7 +10,7 @@ import CardNumberInput from "../components/CardNumberInput";
 import ExpirationDateInput from "../components/ExpirationDateInput";
 import CardOwnerNameInput from "../components/CardOwnerNameInput";
 
-import { INPUT_QUERY, CAPTION } from "../constants/card-app";
+import { CARD_META_INFO } from "../constants/card-app";
 
 import { CardInfo } from "../types/card";
 
@@ -18,7 +18,7 @@ const NewCardInputPage = () => {
   const [newCardInfo, setNewCardInfo] = useState<CardInfo>({
     cardNumbers: ["", "", "", ""],
     expirationDate: ["", ""],
-    cardOwner: "",
+    cardOwnerName: "",
   });
 
   const handleCardNumberChange = (index: number, value: string) => {
@@ -49,7 +49,7 @@ const NewCardInputPage = () => {
     setNewCardInfo((prev) => {
       return {
         ...prev,
-        cardOwner: value,
+        cardOwnerName: value,
       };
     });
   };
@@ -58,8 +58,8 @@ const NewCardInputPage = () => {
     <InputPageLayout>
       <CardPreview cardInfo={newCardInfo} />
 
-      <InputTitle text={INPUT_QUERY.cardNumberInput} />
-      <Caption text={CAPTION.cardNumberInput} type="input" />
+      <InputTitle text={CARD_META_INFO.cardNumbers.query!} />
+      <Caption text={CARD_META_INFO.cardNumbers.caption!} type="input" />
       <CardNumberInput
         cardNumbers={newCardInfo.cardNumbers}
         errorCaption={(errorText: string) => (
@@ -68,8 +68,8 @@ const NewCardInputPage = () => {
         handleCardNumberChange={handleCardNumberChange}
       />
 
-      <InputTitle text={INPUT_QUERY.expirationDate} />
-      <Caption text={CAPTION.expirationDate} type="input" />
+      <InputTitle text={CARD_META_INFO.expirationDate.query!} />
+      <Caption text={CARD_META_INFO.expirationDate.caption!} type="input" />
       <ExpirationDateInput
         expirationDate={newCardInfo.expirationDate}
         errorCaption={(errorText: string) => (
@@ -78,9 +78,9 @@ const NewCardInputPage = () => {
         handleExpirationDateChange={handleExpirationDateChange}
       />
 
-      <InputTitle text={INPUT_QUERY.cardOwner} />
+      <InputTitle text={CARD_META_INFO.cardOwnerName.query!} />
       <CardOwnerNameInput
-        ownerName={newCardInfo.cardOwner}
+        ownerName={newCardInfo.cardOwnerName}
         errorCaption={(errorText: string) => (
           <Caption text={errorText} type="error" />
         )}

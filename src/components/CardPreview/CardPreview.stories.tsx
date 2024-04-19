@@ -21,7 +21,7 @@ export const Default: Story = {
     cardInfo: {
       cardNumbers: ["1234", "1234", "1234", "1234"],
       expirationDate: ["05", "25"],
-      cardOwner: "CHULMIN PARK",
+      cardOwnerName: "CHULMIN PARK",
     },
   },
 };
@@ -31,7 +31,7 @@ export const Visa: Story = {
     cardInfo: {
       cardNumbers: ["4234", "1234", "1234", "1234"],
       expirationDate: ["05", "25"],
-      cardOwner: "CHULMIN PARK",
+      cardOwnerName: "CHULMIN PARK",
     },
   },
 };
@@ -41,7 +41,7 @@ export const Master: Story = {
     cardInfo: {
       cardNumbers: ["5134", "1234", "1234", "1234"],
       expirationDate: ["05", "25"],
-      cardOwner: "CHULMIN PARK",
+      cardOwnerName: "CHULMIN PARK",
     },
   },
 };
@@ -51,7 +51,7 @@ export const EnterFirstPartOnly: Story = {
     cardInfo: {
       cardNumbers: ["1234", "", "", ""],
       expirationDate: ["05", "25"],
-      cardOwner: "CHULMIN PARK",
+      cardOwnerName: "CHULMIN PARK",
     },
   },
 };
@@ -61,7 +61,7 @@ export const EnterSecondPartOnly: Story = {
     cardInfo: {
       cardNumbers: ["", "1234", "", ""],
       expirationDate: ["05", "25"],
-      cardOwner: "CHULMIN PARK",
+      cardOwnerName: "CHULMIN PARK",
     },
   },
 };
@@ -71,7 +71,7 @@ export const EnterThirdPartOnly: Story = {
     cardInfo: {
       cardNumbers: ["", "", "1234", ""],
       expirationDate: ["05", "25"],
-      cardOwner: "CHULMIN PARK",
+      cardOwnerName: "CHULMIN PARK",
     },
   },
 };
@@ -81,7 +81,7 @@ export const EnterFourthPartOnly: Story = {
     cardInfo: {
       cardNumbers: ["", "", "", "1234"],
       expirationDate: ["05", "25"],
-      cardOwner: "CHULMIN PARK",
+      cardOwnerName: "CHULMIN PARK",
     },
   },
 };
@@ -91,7 +91,7 @@ export const EnterMonthOnly: Story = {
     cardInfo: {
       cardNumbers: ["1234", "1234", "1234", "1234"],
       expirationDate: ["05", ""],
-      cardOwner: "CHULMIN PARK",
+      cardOwnerName: "CHULMIN PARK",
     },
   },
 };
@@ -101,7 +101,7 @@ export const EnterYearOnly: Story = {
     cardInfo: {
       cardNumbers: ["1234", "1234", "1234", "1234"],
       expirationDate: ["", "25"],
-      cardOwner: "CHULMIN PARK",
+      cardOwnerName: "CHULMIN PARK",
     },
   },
 };

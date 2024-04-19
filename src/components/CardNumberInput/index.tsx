@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import Label from "../common/Label";
 import Input from "../common/Input";
-import { INPUT_LABEL, INPUT_RULES } from "../../constants/card-app";
+import { CARD_META_INFO, INPUT_RULES } from "../../constants/card-app";
 
 import styled from "styled-components";
 import { VALIDATION_MESSAGES } from "../../constants/card-app";
@@ -42,7 +42,7 @@ const CardNumberInput = ({
 
   return (
     <InputField>
-      <Label htmlFor="card-number">{INPUT_LABEL.cardNumberInput}</Label>
+      <Label htmlFor="card-number">{CARD_META_INFO.cardNumbers.label}</Label>
       <InputContainer>
         {Array.from({ length: cardNumbers.length }, (_, index) => (
           <Input

@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import Label from "../common/Label";
 import styled from "styled-components";
 import Input from "../common/Input";
-import { INPUT_LABEL, INPUT_RULES } from "../../constants/card-app";
+import { CARD_META_INFO, INPUT_RULES } from "../../constants/card-app";
 
 import cardInputValidator from "../../validators/cardInputValidator";
 import { VALIDATION_MESSAGES } from "../../constants/card-app";
@@ -59,7 +59,7 @@ const ExpirationDateInput = ({
 
   return (
     <InputField>
-      <Label htmlFor="expiration-date">{INPUT_LABEL.expirationDate}</Label>
+      <Label htmlFor="expiration-date">{CARD_META_INFO.expirationDate.label}</Label>
       <InputContainer>
         <Input
           ref={monthRef}

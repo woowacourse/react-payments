@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import Label from "../common/Label";
 import Input from "../common/Input";
-import { INPUT_LABEL, INPUT_RULES } from "../../constants/card-app";
+import { CARD_META_INFO, INPUT_RULES } from "../../constants/card-app";
 
 import { VALIDATION_MESSAGES } from "../../constants/card-app";
 
@@ -33,7 +33,7 @@ const CardOwnerNameInput = ({
 
   return (
     <InputField>
-      <Label htmlFor="card-owner">{INPUT_LABEL.cardOwnerNameInput}</Label>
+      <Label htmlFor="card-owner">{CARD_META_INFO.cardOwnerName.label}</Label>
       <Input
         id="card-owner"
         type="text"
