@@ -1,14 +1,9 @@
+import { InputHTMLAttributes } from 'react';
 import styled from 'styled-components';
 
-type InputProps = {
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  type: 'text' | 'number' | 'email' | 'password' | 'tel';
-  placeholder: string;
-  id: string;
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   isError: boolean;
-  maxLength?: number;
-};
+}
 
 const StyledInput = styled.input<{ isError: boolean }>`
   border: 1px solid #acacac;
@@ -41,7 +36,7 @@ export default function Input({
       maxLength={maxLength}
       placeholder={placeholder}
       id={id}
-      isError={isError}
+      $isError={isError}
     />
   );
 }

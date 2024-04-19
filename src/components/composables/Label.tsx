@@ -1,11 +1,9 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, LabelHTMLAttributes } from 'react';
 import styled from 'styled-components';
 
-type LabelProps = {
-  htmlFor: string;
-};
+type LabelProps = LabelHTMLAttributes<HTMLLabelElement>;
 
-const SrOnly = styled.label`
+const StyledLabel = styled.label`
   position: absolute;
   width: 1px;
   height: 1px;
@@ -17,6 +15,6 @@ const SrOnly = styled.label`
   clip: rect(0 0 0 0);
 `;
 
-export default function Label({ htmlFor, children }: PropsWithChildren<LabelProps>) {
-  return <SrOnly htmlFor={htmlFor}>{children}</SrOnly>;
+export default function Label({ children, ...props }: PropsWithChildren<LabelProps>) {
+  return <StyledLabel {...props}>{children}</StyledLabel>;
 }
