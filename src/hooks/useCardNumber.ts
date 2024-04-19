@@ -1,7 +1,22 @@
 import useInput from './useInput';
 import CONDITION from '../constants/Condition';
+import {
+  FirstState,
+  FourthState,
+  SecondState,
+  ShowImageCondition,
+  ThirdState,
+} from '../types/Types';
 
 const { REG_EXP, showVisa, showMasterCard } = CONDITION;
+
+export interface CardNumberState {
+  firstState: FirstState;
+  secondState: SecondState;
+  thirdState: ThirdState;
+  fourthState: FourthState;
+  showImageCondition: ShowImageCondition;
+}
 
 const useCardNumber = (defaultValues: Array<number | undefined>) => {
   const [first, setFirst, firstError] = useInput<number | undefined>(

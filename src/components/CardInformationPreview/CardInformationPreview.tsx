@@ -3,8 +3,10 @@ import magnetic from '../../assets/image/magnetic.svg';
 import visa from '../../assets/image/visa.svg';
 import masterCard from '../../assets/image/masterCard.svg';
 import theme from '../../styles/theme';
-import { CardNumberState, ExpirationDateState, UserNameState } from '../../types/Types';
 import CONDITION from '../../constants/Condition';
+import { CardNumberState } from '../../hooks/useCardNumber';
+import { ExpirationDateState } from '../../hooks/useExpirationDate';
+import { UserNameState } from '../../hooks/useUserName';
 
 interface CardInformationPreviewProps {
   cardNumberState: CardNumberState;

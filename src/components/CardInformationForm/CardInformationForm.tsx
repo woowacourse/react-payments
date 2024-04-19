@@ -4,11 +4,12 @@ import InputField from '../InputField/InputField';
 import Input from '../Input/Input';
 import MESSAGE from '../../constants/Message';
 import CONDITION from '../../constants/Condition';
+import { CardNumberState } from '../../hooks/useCardNumber';
+import { ExpirationDateState } from '../../hooks/useExpirationDate';
+import { UserNameState } from '../../hooks/useUserName';
 
 const { TITLE, CAPTION, LABEL, ERROR, PLACEHOLDER } = MESSAGE;
 const { MAX_LENGTH } = CONDITION;
-
-import { CardNumberState, ExpirationDateState, UserNameState } from '../../types/Types';
 
 interface CardInformationFormProps {
   cardNumberState: CardNumberState;
