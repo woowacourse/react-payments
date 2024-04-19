@@ -1,7 +1,7 @@
 export const validateExpirationDate = (date: string[]) => {
   const [month, year] = date.map(Number);
-  if ((month && month < 1) || (month && month > 12)) {
-    return "월을 유효한 2자리수로 입력해 주세요.";
+  if (!(month >= 1 && month <= 12)) {
+    return "1~12월 범위의 월을 입력해 주세요.";
   }
   const today = new Date();
 

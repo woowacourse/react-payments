@@ -44,31 +44,28 @@ const useInput = ({
 
     const newValue = event.target.value;
 
-    if (onChangeValidate) {
-      const errorMessage = onChangeValidate([newValue]);
-      if (errorMessage.length > 0) {
-        updateErrorMessages(errorMessage, index);
-      } else {
-        updateErrorMessages("", index);
-      }
-    }
-
-    if (onBlurValidate) {
-      const errorMessage = onBlurValidate([newValue]);
-      if (errorMessage.length == 0) {
-        updateErrorMessages("", index);
-      }
-    }
-
-    if (validLength && newValue.length === validLength) {
-      updateErrorMessages("", index);
-    }
-
     setInput((prev) => {
       const newInput = [...prev];
       newInput[index] = newValue;
       return newInput;
     });
+
+    if (onChangeValidate) {
+      const errorMessage = onChangeValidate([newValue]);
+      if (errorMessage.length !== 0) {
+        updateErrorMessages(errorMessage, index);
+        return;
+      }
+    }
+
+    if (onBlurValidate) {
+      const errorMessage = onBlurValidate([newValue]);
+      if (errorMessage.length !== 0) return;
+    }
+
+    if (!(validLength && newValue.length === validLength)) return;
+
+    updateErrorMessages("", index);
   };
 
   const onBlur = (event: FocusEvent<Element, Element>, index: number) => {
@@ -83,15 +80,13 @@ const useInput = ({
       const errorMessage = onBlurValidate(input);
       if (errorMessage.length > 0) {
         updateErrorMessages(errorMessage, index);
-      } else {
-        updateErrorMessages("", index);
+        return;
       }
-      return;
     }
 
     updateErrorMessages("", index);
   };
 
-  return { input, onChange, errorMessages, onBlur };
+  return { input, errorMessages, onChange, onBlur };
 };
 export default useInput;
