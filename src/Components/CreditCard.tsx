@@ -2,6 +2,8 @@
 import { css } from "@emotion/react";
 import masterImage from "../assets/masterImage.png";
 import visaImage from "../assets/visaImage.png";
+import { CardContext } from "../App";
+import { useContext } from "react";
 
 const style = css({
   background: "#333",
@@ -60,11 +62,9 @@ const formatTwoDigitNumber = (n: number | undefined) => {
   return String(n).padStart(2, "0");
 };
 
-interface Props {
-  cardInfo: CardInfo;
-}
+const CreditCard = () => {
+  const { cardNumbers, cardValidityPeriod, ownerName } = useContext(CardContext)![0];
 
-const CreditCard: React.FC<Props> = ({ cardInfo: { cardNumbers, cardValidityPeriod, ownerName } }) => {
   const pattern = /^(51|52|53|54)/;
   const { month, year } = cardValidityPeriod!;
   const cardImage =

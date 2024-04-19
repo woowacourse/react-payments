@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import { useState } from "react";
+import { Dispatch, SetStateAction, createContext, useState } from "react";
 import "./App.css";
 import CreditCard from "./Components/CreditCard";
 import Form from "./Components/Form";
@@ -56,8 +56,11 @@ const createFormErrors = (formFields: InitCardInfoType[]): ErrorState => {
   }, {} as ErrorState);
 };
 
+export const CardContext = createContext<[CardInfo, Dispatch<SetStateAction<CardInfo>>] | null>(null);
+
 function App() {
-  const [cardInfo, setCardInfo] = useState(createCardInfo(initData));
+  const cardInfoStateHook = useState(createCardInfo(initData));
+  const setCardInfo = cardInfoStateHook[1];
   const [formErrors, setFormErrors] = useState(createFormErrors(initData));
 
   const formFieldPropsList: FormFieldInfo[] = [
@@ -270,10 +273,12 @@ function App() {
   ];
 
   return (
-    <div css={mainStyle}>
-      <CreditCard cardInfo={cardInfo} />
-      <Form formFiledPropsList={formFieldPropsList} formErrors={formErrors} />
-    </div>
+    <CardContext.Provider value={cardInfoStateHook}>
+      <div css={mainStyle}>
+        <CreditCard />
+        <Form formFiledPropsList={formFieldPropsList} formErrors={formErrors} />
+      </div>
+    </CardContext.Provider>
   );
 }
 
