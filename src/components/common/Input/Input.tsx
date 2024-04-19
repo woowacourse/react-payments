@@ -2,7 +2,7 @@ import { InputType } from './Input.type';
 
 import styles from './Input.module.css';
 
-export interface InputProps {
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   id?: string;
   type?: InputType;
   value?: string | number;
