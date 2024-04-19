@@ -27,3 +27,4 @@ dist-ssr
 *.sw?
 
 *storybook.log
+package.json
