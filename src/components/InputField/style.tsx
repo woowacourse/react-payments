@@ -18,7 +18,7 @@ export const Inputs = styled.div`
   width: 100%;
 `;
 
-export const Error = styled.span`
+export const ErrorCaption = styled.span`
   ${(props) => props.theme.typography.caption};
   color: ${(props) => props.theme.color.red};
 `;

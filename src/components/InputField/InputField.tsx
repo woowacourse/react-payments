@@ -11,7 +11,7 @@ const InputField = ({ label, error, children }: InputFieldProps) => {
     <Field.Fieldset>
       <Field.Legend>{label}</Field.Legend>
       {children}
-      <Field.Error>{error}</Field.Error>
+      {error && <Field.ErrorCaption>{error}</Field.ErrorCaption>}
     </Field.Fieldset>
   );
 };
