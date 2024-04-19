@@ -26,3 +26,8 @@
   line-height: 16px;
   color: var(--gray-400);
 }
+
+.app {
+  max-width: 375px;
+  margin: auto;
+}
