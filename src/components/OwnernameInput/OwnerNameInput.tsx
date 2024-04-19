@@ -25,7 +25,7 @@ function OwnerNameInput({ setCardData }: OwnerNameInputProps) {
     return { isValid: true, errorMsg: '' };
   };
 
-  const processData = () => {
+  const updateCardData = () => {
     setCardData('ownerName', Object.values(ownerName));
   };
 
@@ -43,7 +43,7 @@ function OwnerNameInput({ setCardData }: OwnerNameInputProps) {
       ownerName: false,
     },
     validateInputOnChange,
-    processData,
+    updateCardData,
   });
 
   return (

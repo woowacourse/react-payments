@@ -31,7 +31,7 @@ export default function CardNumberInput({ setCardData }: CardNumberInputProps) {
     return { isValid: true, errorMsg: '' };
   };
 
-  const processData = () => {
+  const updateCardData = () => {
     setCardData('cardNumbers', Object.values(cardNumbers));
   };
 
@@ -56,7 +56,7 @@ export default function CardNumberInput({ setCardData }: CardNumberInputProps) {
     },
     validateInputOnChange,
     validateInputOnBlur,
-    processData,
+    updateCardData,
   });
 
   return (

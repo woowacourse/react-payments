@@ -19,13 +19,13 @@ interface useAddCardInputProps<T extends InitialValuesType> {
     isValid: boolean;
     errorMsg: string;
   };
-  processData: () => void;
+  updateCardData: () => void;
 }
 
 export default function useAddCardInput<T extends InitialValuesType>({
   validateInputOnChange,
   validateInputOnBlur,
-  processData,
+  updateCardData,
   initialValues,
   initialErrors,
 }: useAddCardInputProps<T>) {
@@ -63,10 +63,10 @@ export default function useAddCardInput<T extends InitialValuesType>({
       } else {
         setErrMsg('');
         setIsError({ ...isError, [name]: false });
-        processData();
+        updateCardData();
       }
     } else {
-      processData();
+      updateCardData();
     }
   };
 

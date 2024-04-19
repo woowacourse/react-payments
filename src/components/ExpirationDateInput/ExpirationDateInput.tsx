@@ -41,7 +41,7 @@ const ExpirationDateInput = ({ setCardData }: ExpirationDateInputProps) => {
     return { isValid: true, errorMsg: '' };
   };
 
-  const processData = () => {
+  const updateCardData = () => {
     setCardData('expirationDate', Object.values(expirationDate));
   };
 
@@ -62,7 +62,7 @@ const ExpirationDateInput = ({ setCardData }: ExpirationDateInputProps) => {
     },
     validateInputOnChange,
     validateInputOnBlur,
-    processData,
+    updateCardData,
   });
 
   return (
