@@ -39,11 +39,11 @@ const FormField: React.FC<Props> = ({
       <h1 css={titleCss}>{title}</h1>
       <p css={descriptionCss}>{description}</p>
       <label htmlFor="id">{label}</label>
-
       <div css={rowStyle}>
         {inputInfoList.map((inputInfo, index) => (
           <FormInput
             key={`id-${index}`}
+            id={`id=${index}`}
             onChange={(e) => inputInfo.onInputChange(e, index)}
             sizePreset={sizePreset}
             placeholder={inputInfo.placeholder}
