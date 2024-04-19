@@ -1,28 +1,13 @@
 export const CARD_EXPIRATION = {
-  /**
-   * 카드 유효 기간을 검증하기 위한 규칙을 정합니다.
-   *
-   * - 오직 0 ~ 9 사이의 숫자 입력만 허용합니다.
-   * - 양수/음수 기호(+, -), 소수점 등의 입력을 허용하지 않기 위해 정규식으로 검증합니다.
-   */
   INPUT_FIELD_COUNT: 2,
-  INVALID_CHARS_REGEX: /[^0-9]/g,
   MAX_LENGTH: 2,
   MIN_MONTH_RANGE: 1,
   MAX_MONTH_RANGE: 12,
 } as const;
 
 export const CARD_NUMBER = {
-  /**
-   * 카드 번호를 검증하기 위한 규칙을 정합니다.
-   *
-   * - 오직 0 ~ 9 사이의 숫자 입력만 허용합니다.
-   * - 양수/음수 기호(+, -), 소수점 등의 입력을 허용하지 않기 위해 정규식으로 검증합니다.
-   */
   INPUT_FIELD_COUNT: 4,
-  INVALID_CHARS_REGEX: /[^0-9]/g,
   MAX_LENGTH: 4,
-  TOTAL_LENGTH: 16,
 } as const;
 
 export const CARD_OWNER = {
@@ -33,7 +18,7 @@ export const CARD_OWNER = {
    * - 소유자명은 최대 30글자까지 입력 가능합니다.
    */
   INPUT_FIELD_COUNT: 1,
-  INVALID_CHARS_REGEX: /[^a-zA-Z ]/g,
+  VALID_REGEX: /^[a-zA-Z][a-zA-Z ]*$/,
   MAX_LENGTH: 30,
 } as const;
 
