@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import InputFieldHeader from "./InputFieldHeader";
-import { INPUT_INFO_SUBTITLE, INPUT_INFO_TITLE } from "@/constants/condition";
+import { INPUT_INFO_SUBTITLE, INPUT_INFO_TITLE } from "@/constants/message";
 
 const meta = {
   title: "InputFieldHeader",

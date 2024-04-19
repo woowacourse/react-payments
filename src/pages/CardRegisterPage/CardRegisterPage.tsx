@@ -1,25 +1,30 @@
-import styled from "styled-components";
+import S from "./style";
 import CardRegisterForm from "@/components/CardRegisterForm/CardRegisterForm";
 import CreditCardPreview from "@/components/CreditCardPreview/CreditCardPreview";
 import useInput from "@/hooks/useInput";
-import { CARD_BRAND_INFO, INPUT_COUNTS } from "@/constants/condition";
+import {
+  CARD_BRAND_INFO,
+  INPUT_COUNTS,
+  MAX_LENGTH,
+  VALID_LENGTH,
+} from "@/constants/condition";
 import { makeStringArray } from "@/components/utils/arrayHelper";
 import {
   validateExpirationDate,
   validateOwnerName,
 } from "@/components/utils/validation";
 
-const CardRegister = () => {
+const CardRegisterPage = () => {
   const cardNumbersState = useInput({
     initialValue: makeStringArray(INPUT_COUNTS.CARD_NUMBERS),
-    maxNumberLength: 4,
-    validLength: 4,
+    maxNumberLength: MAX_LENGTH.CARD_NUMBERS,
+    validLength: VALID_LENGTH.CARD_NUMBERS,
   });
 
   const expiredDateState = useInput({
     initialValue: makeStringArray(INPUT_COUNTS.EXPIRATION_PERIOD),
-    maxNumberLength: 2,
-    validLength: 2,
+    maxNumberLength: MAX_LENGTH.EXPIRATION_PERIOD,
+    validLength: VALID_LENGTH.EXPIRATION_PERIOD,
     onBlurValidate: validateExpirationDate,
   });
 
@@ -60,26 +65,4 @@ const CardRegister = () => {
   );
 };
 
-export default CardRegister;
-
-const CardRegisterWrapper = styled.div`
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const FlexWrapper = styled.div`
-  width: 375px;
-  min-height: 600px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 50px;
-`;
-
-const S = {
-  CardRegisterWrapper,
-  FlexWrapper,
-};
+export default CardRegisterPage;

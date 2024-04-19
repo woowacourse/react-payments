@@ -1,15 +1,18 @@
 import { ChangeEvent, FocusEvent } from "react";
 import useInput from "@/hooks/useInput";
-import {
-  PLACE_HOLDER,
-  INPUT_INFO_TITLE,
-  INPUT_INFO_SUBTITLE,
-  INPUT_LABEL,
-} from "@/constants/condition";
 import InputField from "@/components/InputField/InputField";
 import Input from "@/components/Input/Input";
 import S from "./style";
 import InputFieldHeader from "../InputFieldHeader/InputFieldHeader";
+import { findFirstFilledElementIndex } from "../utils/arrayHelper";
+import {
+  EXPIRATION_DATE_PLACEHOLDER,
+  INPUT_INFO_SUBTITLE,
+  INPUT_INFO_TITLE,
+  INPUT_LABEL,
+  PLACEHOLDER,
+} from "@/constants/message";
+import { MAX_LENGTH } from "@/constants/condition";
 
 interface Props {
   cardNumbersState: ReturnType<typeof useInput>;
@@ -39,16 +42,6 @@ const CardRegisterForm = ({
   const { onChange: onChangeOwnerName, errorMessages: ownerErrorMessages } =
     ownerNameState;
 
-  const expirationPlaceholder = [
-    PLACE_HOLDER.EXPIRATION_MONTH,
-    PLACE_HOLDER.EXPIRATION_YEAR,
-  ];
-
-  const findFirstErrorMessageIndex = (errorMessages: string[]) => {
-    const targetIndex = errorMessages.findIndex((message) => message !== "");
-    return targetIndex;
-  };
-
   return (
     <S.CardFormWrapper>
       {/*카드 번호*/}
@@ -61,7 +54,7 @@ const CardRegisterForm = ({
           label={INPUT_LABEL.CARD_NUMBERS}
           errorMessage={
             cardNumbersErrorMessages[
-              findFirstErrorMessageIndex(cardNumbersErrorMessages)
+              findFirstFilledElementIndex(cardNumbersErrorMessages)
             ]
           }
         >
@@ -69,7 +62,7 @@ const CardRegisterForm = ({
             <Input
               type="number"
               key={index}
-              placeholder={PLACE_HOLDER.CARD_NUMBERS}
+              placeholder={PLACEHOLDER.CARD_NUMBERS}
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
                 onChangeCardNumbers(e, index);
               }}
@@ -77,7 +70,7 @@ const CardRegisterForm = ({
                 onBlurCardNumbers(e, index);
               }}
               isError={
-                findFirstErrorMessageIndex(cardNumbersErrorMessages) === index
+                findFirstFilledElementIndex(cardNumbersErrorMessages) === index
               }
             />
           ))}
@@ -94,7 +87,7 @@ const CardRegisterForm = ({
           label={INPUT_LABEL.EXPIRATION_DATE}
           errorMessage={
             expirationPeriodErrorMessages[
-              findFirstErrorMessageIndex(expirationPeriodErrorMessages)
+              findFirstFilledElementIndex(expirationPeriodErrorMessages)
             ]
           }
         >
@@ -102,7 +95,7 @@ const CardRegisterForm = ({
             <Input
               type="number"
               key={index}
-              placeholder={expirationPlaceholder[index]}
+              placeholder={EXPIRATION_DATE_PLACEHOLDER[index]}
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
                 onChangeExpirationPeriod(e, index);
               }}
@@ -110,7 +103,7 @@ const CardRegisterForm = ({
                 onBlurExpirationPeriod(e, index);
               }}
               isError={
-                findFirstErrorMessageIndex(expirationPeriodErrorMessages) ===
+                findFirstFilledElementIndex(expirationPeriodErrorMessages) ===
                 index
               }
             />
@@ -126,10 +119,10 @@ const CardRegisterForm = ({
           errorMessage={ownerErrorMessages[0]}
         >
           <Input
-            placeholder={PLACE_HOLDER.OWNER_NAME}
+            placeholder={PLACEHOLDER.OWNER_NAME}
             isError={ownerErrorMessages[0] !== ""}
             type="text"
-            maxLength={30}
+            maxLength={MAX_LENGTH.OWNER_NAME}
             onChange={(e: ChangeEvent<HTMLInputElement>) => {
               e.target.value = e.target.value.toUpperCase();
               onChangeOwnerName(e, 0);
