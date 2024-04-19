@@ -3,8 +3,8 @@ import TitleContainer from '../common/TitleContainer/TitleContainer';
 import InputField from '../common/InputField/InputField';
 import Input from '../common/Input/Input';
 
-import { CARD_NUMBER } from '../../constants/Condition';
-import { ERROR_MESSAGE } from '../../constants/Message';
+import { CARD_NUMBER } from '../../constants/condition';
+import { ERROR_MESSAGE } from '../../constants/message';
 import { cardNumbersType } from '../../types/cardNumbers';
 
 interface CardNumberInputProps {
