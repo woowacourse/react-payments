@@ -6,9 +6,6 @@ import { CARD_NUMBER, EXPIRATION_PERIOD, OWNER_NAME } from '../constants/cardSec
 const meta = {
   title: 'InputSection',
   component: InputSection,
-  parameters: {
-    layout: 'centered',
-  },
   tags: ['autodocs'],
   decorators: [
     (Story) => (

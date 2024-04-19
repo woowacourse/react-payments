@@ -6,9 +6,6 @@ import GlobalStyles from '../GlobalStyles';
 const meta = {
   title: 'Composable/Input',
   component: Input,
-  parameters: {
-    layout: 'centered',
-  },
   tags: ['autodocs'],
   decorators: [
     (Story) => (

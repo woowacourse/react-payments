@@ -7,9 +7,6 @@ import VisaCard from '../assets/images/visa.png';
 const meta = {
   title: 'CreditCard',
   component: CreditCard,
-  parameters: {
-    layout: 'centered',
-  },
   tags: ['autodocs'],
   decorators: [
     (Story) => (
