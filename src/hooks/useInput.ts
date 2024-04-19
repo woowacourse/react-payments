@@ -11,7 +11,8 @@ const useInput = (validators: { fn: (value: string) => boolean }[]) => {
     for (let validator of validators) {
       if (!validator.fn(inputValue)) {
         setError(true);
-        break;
+        setInputValue('');
+        return;
       }
     }
 

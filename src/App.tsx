@@ -3,14 +3,13 @@ import GlobalStyles from './GlobalStyles';
 import InputInfo from './components/InputSection';
 import Input from './components/composables/Input';
 import CreditCard from './components/CreditCard';
-import useCardNumber from './hooks/useCardNumber';
 import useInput from './hooks/useInput';
 import Label from './components/composables/Label';
 import validate from './utils/validate';
 import { CARD_NUMBER, EXPIRATION_PERIOD, OWNER_NAME } from './constants/cardSection';
 import useCardBrandImage from './hooks/useCardBrandImage';
 import * as React from 'react';
-import { InitialCardNumberState } from './hooks/useCardNumber';
+import useCardNumber, { InitialCardNumberState } from './hooks/useCardNumber';
 
 export const StyledInput = styled.input`
   border: 1px solid #acacac;
