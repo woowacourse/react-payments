@@ -5,12 +5,16 @@ const useChangeOwnerName = () => {
   const [ownerNameError, setOwnerNameError] = useState({ isError: false, errorMessage: '' });
 
   const handleOwnerNameChange = (value: string) => {
-    const error = /^[A-Za-z]{0,}$/.test(value)
+    const isValidName = /^[A-Za-z]{0,}$/.test(value);
+
+    const newOwnerNameError = isValidName
       ? { isError: false, errorMessage: '' }
       : { isError: true, errorMessage: '카드 소유자 이름은 영문으로 입력해야 합니다.' };
-    setOwnerNameError(error);
 
-    if (!/^[A-Za-z]{0,}$/.test(value)) return;
+    setOwnerNameError(newOwnerNameError);
+
+    if (!isValidName) return;
+
     setOwnerName(value);
   };
 
