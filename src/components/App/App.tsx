@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import CardNumberInput from './components/CardNumberInput';
-import CardExpirationInput from './components/CardExpirationInput';
-import CardOwnerInput from './components/CardOwnerInput';
-import CardPreviewBox from './components/CardPreview';
+import CardNumberInput from '../CardNumberInput/CardNumberInput';
+import CardExpirationInput from '../CardExpirationInput/CardExpirationInput';
+import CardOwnerInput from '../CardOwnerInput/CardOwnerInput';
+import CardPreviewBox from '../CardPreview/CardPreview';
 
-import './styles/reset.css';
-import * as S from './styles/App.style';
+import './reset.css';
+import * as S from './App.style';
 
 function App() {
   const [cardNumber, setCardNumber] = useState<string[]>(['', '', '', '']);

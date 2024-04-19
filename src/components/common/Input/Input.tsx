@@ -1,5 +1,5 @@
 import { InputHTMLAttributes } from 'react';
-import * as S from '../styles/Input.style';
+import * as S from './Input.style';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   isValid: boolean;
