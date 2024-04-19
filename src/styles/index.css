@@ -31,3 +31,7 @@
   max-width: 375px;
   margin: auto;
 }
+
+body {
+  font-family: 'Pretendard', sans-serif;
+}
