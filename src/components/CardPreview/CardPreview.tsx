@@ -38,8 +38,8 @@ function CardPreview({ cardNumbers, month, year, owner }: CardPreviewProps) {
               {number
                 ? index <= 1
                   ? `${number} `
-                  : Array.from({ length: CARD_NUMBER.INPUT_FIELD_COUNT }).map(() => (
-                      <img src={Dot} alt="dot" />
+                  : Array.from({ length: CARD_NUMBER.INPUT_FIELD_COUNT }).map((_, idx) => (
+                      <img src={Dot} key={idx} alt="dot" />
                     ))
                 : ''}
             </S.InfoBox>
