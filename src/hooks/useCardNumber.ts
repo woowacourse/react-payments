@@ -1,6 +1,10 @@
 import { useState } from 'react';
-import { InitialCardNumberState } from '../App';
 import validate from '../utils/validate';
+
+export type InitialCardNumberState = {
+  value: string;
+  isError: boolean;
+};
 
 const useCardNumber = (initialStates: InitialCardNumberState[]) => {
   const [cardNumbers, setCardNumbers] = useState<InitialCardNumberState[]>(initialStates);

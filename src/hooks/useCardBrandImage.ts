@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import validate from '../utils/validate';
 import MasterCardImage from '../assets/images/mastercard.png';
 import VisaCardImage from '../assets/images/visa.png';
-import { InitialCardNumberState } from '../App';
+import { InitialCardNumberState } from './useCardNumber';
 
 const useCardBrandImage = (cardNumberStates: InitialCardNumberState[]) => {
   const [cardImageSrc, setCardImageSrc] = useState('');

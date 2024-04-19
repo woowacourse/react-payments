@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { InitialCardNumberState } from '../App';
+import { InitialCardNumberState } from '../hooks/useCardNumber';
 
 type CreditCardProps = {
   cardNumbers: InitialCardNumberState[];
@@ -110,7 +110,7 @@ export default function CreditCard({
             <IcChip />
           </CardHeaderContentWrapper>
           <CardHeaderContentWrapper>
-            {cardImageSrc ? <CardBrand src={cardImageSrc} /> : null}
+            {cardImageSrc ? <CardBrand src={cardImageSrc} alt={'cardBrandImage'} /> : null}
           </CardHeaderContentWrapper>
         </CardHeader>
         <CardInfoWrapper>
