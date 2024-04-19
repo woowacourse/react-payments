@@ -1,10 +1,10 @@
-import Input from '../common/Input/Input';
-import Field from '../layout/Field/Field';
+import Input from "../common/Input/Input";
+import Field from "../layout/Field/Field";
 
-import useAddCardInput from '../../hooks/useAddCardInput';
+import useAddCardInput from "../../hooks/useAddCardInput";
 
-import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../constants/messages';
-import { isCharacter } from '../../domain/validators';
+import { ADD_CARD_FORM_FIELDS, ERRORS } from "../../constants/messages";
+import { isCharacter } from "../../utils/validators";
 
 const { OWNER_NAME } = ADD_CARD_FORM_FIELDS;
 
@@ -19,14 +19,14 @@ function OwnerNameInput({ setCardData }: OwnerNameInputProps) {
     name?: string;
     value: string;
   }) => {
-    if (value !== '' && !isCharacter(value)) {
+    if (value !== "" && !isCharacter(value)) {
       return { isValid: false, errorMsg: ERRORS.isNotAlphabet };
     }
-    return { isValid: true, errorMsg: '' };
+    return { isValid: true, errorMsg: "" };
   };
 
   const processData = () => {
-    setCardData('ownerName', Object.values(ownerName));
+    setCardData("ownerName", Object.values(ownerName));
   };
 
   const {
@@ -37,7 +37,7 @@ function OwnerNameInput({ setCardData }: OwnerNameInputProps) {
     onBlur,
   } = useAddCardInput<OwnerName>({
     initialValues: {
-      ownerName: '',
+      ownerName: "",
     },
     initialErrors: {
       ownerName: false,

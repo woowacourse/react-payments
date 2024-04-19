@@ -1,15 +1,15 @@
-import Input from '../common/Input/Input';
-import Field from '../layout/Field/Field';
+import Input from "../common/Input/Input";
+import Field from "../layout/Field/Field";
 
 import {
   isInteger,
   hasTwoDigit,
   isValidMonth,
   isValidDate,
-} from '../../domain/validators';
+} from "../../utils/validators";
 
-import { ERRORS, ADD_CARD_FORM_FIELDS } from '../../constants/messages';
-import useAddCardInput from '../../hooks/useAddCardInput';
+import { ERRORS, ADD_CARD_FORM_FIELDS } from "../../constants/messages";
+import useAddCardInput from "../../hooks/useAddCardInput";
 
 const { EXPIRATION_DATE } = ADD_CARD_FORM_FIELDS;
 
@@ -22,7 +22,7 @@ const ExpirationDateInput = ({ setCardData }: ExpirationDateInputProps) => {
     if (!isInteger(value)) {
       return { isValid: false, errorMsg: ERRORS.isNotFourDigit };
     }
-    return { isValid: true, errorMsg: '' };
+    return { isValid: true, errorMsg: "" };
   };
 
   const validateInputOnBlur = ({ value }: { name?: string; value: string }) => {
@@ -38,11 +38,11 @@ const ExpirationDateInput = ({ setCardData }: ExpirationDateInputProps) => {
       return { isValid: false, errorMsg: ERRORS.deprecatedCard };
     }
 
-    return { isValid: true, errorMsg: '' };
+    return { isValid: true, errorMsg: "" };
   };
 
   const processData = () => {
-    setCardData('expirationDate', Object.values(expirationDate));
+    setCardData("expirationDate", Object.values(expirationDate));
   };
 
   const {
@@ -53,8 +53,8 @@ const ExpirationDateInput = ({ setCardData }: ExpirationDateInputProps) => {
     onBlur,
   } = useAddCardInput<ExpirationDate>({
     initialValues: {
-      month: '',
-      year: '',
+      month: "",
+      year: "",
     },
     initialErrors: {
       month: false,
@@ -77,7 +77,7 @@ const ExpirationDateInput = ({ setCardData }: ExpirationDateInputProps) => {
           key={name}
           name={name as keyof ExpirationDate}
           placeholder={
-            name === 'month'
+            name === "month"
               ? EXPIRATION_DATE.placeholder.month
               : EXPIRATION_DATE.placeholder.year
           }

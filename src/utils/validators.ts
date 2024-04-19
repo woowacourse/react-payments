@@ -12,7 +12,7 @@ export const isValidMonth = (value: string) =>
   1 <= Number(value) && Number(value) <= 12;
 
 export const isValidDate = ({ year, month }: ExpirationDate) => {
-  if (year === '') return true;
+  if (year === "") return true;
 
   const currentDate = new Date();
   const inputDate = new Date(Number(year) + 2000, Number(month));

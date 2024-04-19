@@ -1,9 +1,9 @@
-import Input from '../common/Input/Input';
-import Field from '../layout/Field/Field';
+import Input from "../common/Input/Input";
+import Field from "../layout/Field/Field";
 
-import useAddCardInput from '../../hooks/useAddCardInput';
-import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../constants/messages';
-import { hasFourDigit, isInteger } from '../../domain/validators';
+import useAddCardInput from "../../hooks/useAddCardInput";
+import { ADD_CARD_FORM_FIELDS, ERRORS } from "../../constants/messages";
+import { hasFourDigit, isInteger } from "../../utils/validators";
 
 interface CardNumberInputProps {
   setCardData: (key: keyof CardInfo, newData: CardInfo[keyof CardInfo]) => void;
@@ -21,18 +21,18 @@ export default function CardNumberInput({ setCardData }: CardNumberInputProps) {
     if (!isInteger(value)) {
       return { isValid: false, errorMsg: ERRORS.isNotAlphabet };
     }
-    return { isValid: true, errorMsg: '' };
+    return { isValid: true, errorMsg: "" };
   };
 
   const validateInputOnBlur = ({ value }: { name?: string; value: string }) => {
     if (!hasFourDigit(value)) {
       return { isValid: false, errorMsg: ERRORS.isNotFourDigit };
     }
-    return { isValid: true, errorMsg: '' };
+    return { isValid: true, errorMsg: "" };
   };
 
   const processData = () => {
-    setCardData('cardNumbers', Object.values(cardNumbers));
+    setCardData("cardNumbers", Object.values(cardNumbers));
   };
 
   const {
@@ -43,10 +43,10 @@ export default function CardNumberInput({ setCardData }: CardNumberInputProps) {
     onBlur,
   } = useAddCardInput<CardNumbers>({
     initialValues: {
-      first: '',
-      second: '',
-      third: '',
-      fourth: '',
+      first: "",
+      second: "",
+      third: "",
+      fourth: "",
     },
     initialErrors: {
       first: false,

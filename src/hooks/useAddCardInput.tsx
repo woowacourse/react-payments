@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 type InitialValuesType = CardNumbers | ExpirationDate | OwnerName;
 
-interface useAddCardInputProps<T extends InitialValuesType> {
+interface UseAddCardInput<T extends InitialValuesType> {
   initialValues: T;
   initialErrors: Record<keyof T, boolean>;
   validateInputOnChange: ({
@@ -22,18 +22,18 @@ interface useAddCardInputProps<T extends InitialValuesType> {
   processData: () => void;
 }
 
-export default function useAddCardInput<T extends InitialValuesType>({
+export default function UseAddCardInput<T extends InitialValuesType>({
   validateInputOnChange,
   validateInputOnBlur,
   processData,
   initialValues,
   initialErrors,
-}: useAddCardInputProps<T>) {
+}: UseAddCardInput<T>) {
   const [values, setValues] = useState<T>(initialValues);
   const [isError, setIsError] =
     useState<Record<keyof T, boolean>>(initialErrors);
 
-  const [errMsg, setErrMsg] = useState('');
+  const [errMsg, setErrMsg] = useState("");
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -43,11 +43,11 @@ export default function useAddCardInput<T extends InitialValuesType>({
       setErrMsg(validation.errorMsg);
       setIsError({ ...isError, [name]: true });
     } else {
-      setErrMsg('');
+      setErrMsg("");
       setIsError({ ...isError, [name]: false });
       setValues({
         ...values,
-        [name]: name === 'ownerName' ? value.toUpperCase() : value,
+        [name]: name === "ownerName" ? value.toUpperCase() : value,
       });
     }
   };
@@ -61,7 +61,7 @@ export default function useAddCardInput<T extends InitialValuesType>({
         setErrMsg(validation.errorMsg);
         setIsError({ ...isError, [name]: true });
       } else {
-        setErrMsg('');
+        setErrMsg("");
         setIsError({ ...isError, [name]: false });
         processData();
       }
@@ -76,5 +76,5 @@ export default function useAddCardInput<T extends InitialValuesType>({
     isError,
     onChange,
     onBlur,
-  };
+  } as const;
 }
