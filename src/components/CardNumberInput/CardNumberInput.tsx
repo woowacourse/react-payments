@@ -25,7 +25,14 @@ function CardNumberInput({ setCardNumbers }: CardNumberInputProps) {
   };
 
   const onCardNumberChange = (inputIndex: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newInputValidState = validateCardNumber(e.target.value);
+    e.target.value = e.target.value.replace(CARD_NUMBER.VALID_REGEX, '');
+    if (e.target.value.length > CARD_NUMBER.MAX_LENGTH) {
+      e.target.value = e.target.value.slice(0, CARD_NUMBER.MAX_LENGTH);
+      return;
+    }
+
+    const inputValue = e.target.value;
+    const newInputValidState = validateCardNumber(inputValue);
 
     setInputValidStates((prev): inputValidStatesType => {
       return prev.map((prevInputValidState, index) => (index === inputIndex ? newInputValidState : prevInputValidState)) as inputValidStatesType;
@@ -34,7 +41,7 @@ function CardNumberInput({ setCardNumbers }: CardNumberInputProps) {
     setCardNumbers((prev) => {
       return prev.map((number, index) => {
         if (index === inputIndex) {
-          return newInputValidState ? e.target.value : '';
+          return newInputValidState ? inputValue : '';
         }
 
         return number;
@@ -50,8 +57,8 @@ function CardNumberInput({ setCardNumbers }: CardNumberInputProps) {
           <Input
             key={index}
             type="text"
-            maxLength={CARD_NUMBER.MAX_LENGTH}
             placeholder="1234"
+            maxLength={CARD_NUMBER.MAX_LENGTH}
             onChange={onCardNumberChange(index)}
             isValid={inputValidStates[index]}
           />
