@@ -3,13 +3,13 @@ import styled from 'styled-components';
 export const Field = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1.6rem;
   width: 100%;
 `;
 
 export const TitleContainer = styled.div`
   display: flex;
   flex-direction: column;
+  margin-bottom: 1.6rem;
   gap: 0.4rem;
 `;
 

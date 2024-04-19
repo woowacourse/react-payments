@@ -4,6 +4,7 @@ export const Fieldset = styled.fieldset`
   display: flex;
   gap: 0.8rem;
   width: 100%;
+  margin-bottom: 0.4rem;
 `;
 
 export const Legend = styled.legend`
