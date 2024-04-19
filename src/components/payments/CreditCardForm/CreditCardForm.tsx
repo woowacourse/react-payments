@@ -5,7 +5,10 @@ import {
   PreviewCreditCard,
 } from '@components/payments';
 
-import { PreviewCreditCardStyleContainer, TextFieldStyleContainer } from '@components/layout';
+import {
+  PreviewCreditCardStyleContainer,
+  TextFieldStyleContainer,
+} from '@components/payments/CreditCardForm/container';
 
 import { useChangeCardNumber, useChangeExpiration, useChangeOwnerName } from '@hooks/creditCard';
 import { initialExpiration } from '@hooks/creditCard/useChangeExpiration';
