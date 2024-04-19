@@ -1,13 +1,12 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-interface LabelProps {
-  htmlFor: string;
+interface LabelProps extends React.ComponentPropsWithoutRef<'label'> {
   children: React.ReactNode;
 }
 
-const Label = ({ htmlFor, children }: LabelProps) => {
-  return <StyledLabel htmlFor={htmlFor}>{children}</StyledLabel>;
+const Label = ({ children, ...props }: LabelProps) => {
+  return <StyledLabel {...props}>{children}</StyledLabel>;
 };
 
 export default Label;
