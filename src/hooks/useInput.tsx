@@ -14,8 +14,8 @@ interface Props {
 
 const useInput = ({
   initialValue = [],
-  onBlurValidate = (input) => "",
-  onChangeValidate = (input) => "",
+  onBlurValidate = (inputs) => "",
+  onChangeValidate = (inputs) => "",
   maxNumberLength: maxLength,
   validLength,
 }: Props) => {
@@ -32,16 +32,20 @@ const useInput = ({
     });
   };
 
-  const validateLength: validate = (inputs) =>
-    inputs.every((input) => input.length === 0 || input.length === validLength)
+  const validateLength: validate = (inputs) => {
+    if (validLength === undefined) return "";
+    return inputs.every(
+      (input) => input.length === 0 || input.length === validLength
+    )
       ? ""
       : "유효하지 않은 길이입니다.";
-
+  };
   const onBlurValidateWrapper: validate = (inputs) => {
     if (validateLength(inputs).length > 0) return validateLength(inputs);
     if (onBlurValidate(inputs).length > 0) return onBlurValidate(inputs);
     return "";
   };
+
   const onChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     index: number
@@ -62,13 +66,13 @@ const useInput = ({
     });
 
     const errorMessageOnChange = onChangeValidate([newValue]);
-    if (!errorMessageOnChange) {
+    if (errorMessageOnChange) {
       updateErrorMessages(errorMessageOnChange, index);
       return;
     }
 
     const errorMessageOnBlur = onBlurValidateWrapper([newValue]);
-    if (!errorMessageOnBlur) return;
+    if (errorMessageOnBlur) return;
 
     updateErrorMessages("", index);
   };

@@ -20,7 +20,6 @@ export const validateExpirationDate = (date: string[]) => {
 export const validateOwnerName = (name: string[]) => {
   const alphabetRegex = /^[a-zA-Z\s]*$/;
   if (!alphabetRegex.test(name[0])) {
-    console.log("error");
     return "이름은 영어 대문자로 입력해 주세요.";
   }
   const doubleSpaceRegex = /\s{2,}/;
