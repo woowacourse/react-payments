@@ -29,15 +29,12 @@ const ExpirationDateInput = ({ setCardData }: ExpirationDateInputProps) => {
     if (!hasTwoDigit(value)) {
       return { isValid: false, errorMsg: ERRORS.isNotTwoDigit };
     }
-
     if (!isValidMonth(expirationDate.month)) {
       return { isValid: false, errorMsg: ERRORS.inValidMonth };
     }
-
     if (!isValidDate(expirationDate)) {
       return { isValid: false, errorMsg: ERRORS.deprecatedCard };
     }
-
     return { isValid: true, errorMsg: '' };
   };
 
@@ -72,22 +69,25 @@ const ExpirationDateInput = ({ setCardData }: ExpirationDateInputProps) => {
       labelText={EXPIRATION_DATE.labelText}
       errMsg={errMsg}
     >
-      {Object.keys(expirationDate).map((name) => (
-        <Input
-          key={name}
-          name={name as keyof ExpirationDate}
-          placeholder={
-            name === 'month'
-              ? EXPIRATION_DATE.placeholder.month
-              : EXPIRATION_DATE.placeholder.year
-          }
-          value={expirationDate[name as keyof ExpirationDate]}
-          isError={isError[name as keyof ExpirationDate]}
-          handleChange={onChange}
-          handleOnBlur={onBlur}
-          maxLength={2}
-        ></Input>
-      ))}
+      {Object.keys(expirationDate).map((n) => {
+        const name = n as keyof ExpirationDate;
+        return (
+          <Input
+            key={name}
+            name={name}
+            placeholder={
+              name === 'month'
+                ? EXPIRATION_DATE.placeholder.month
+                : EXPIRATION_DATE.placeholder.year
+            }
+            value={expirationDate[name]}
+            isError={isError[name]}
+            handleChange={onChange}
+            handleOnBlur={onBlur}
+            maxLength={Object.keys(expirationDate).length}
+          />
+        );
+      })}
     </Field>
   );
 };

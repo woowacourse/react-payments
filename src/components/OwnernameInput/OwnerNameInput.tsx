@@ -52,18 +52,22 @@ function OwnerNameInput({ setCardData }: OwnerNameInputProps) {
       labelText={OWNER_NAME.labelText}
       errMsg={errMsg}
     >
-      {Object.keys(ownerName).map((name) => (
-        <Input
-          key={name}
-          name={name as keyof OwnerName}
-          placeholder={OWNER_NAME.placeholder}
-          value={ownerName[name as keyof OwnerName]}
-          isError={isError[name as keyof OwnerName]}
-          isRequired={true}
-          handleChange={onChange}
-          handleOnBlur={onBlur}
-        ></Input>
-      ))}
+      {Object.keys(ownerName).map((n) => {
+        const name = n as keyof OwnerName;
+        return (
+          <Input
+            key={name}
+            name={name}
+            placeholder={OWNER_NAME.placeholder}
+            value={ownerName[name]}
+            isError={isError[name]}
+            isRequired
+            maxLength={26}
+            handleChange={onChange}
+            handleOnBlur={onBlur}
+          />
+        );
+      })}
     </Field>
   );
 }
