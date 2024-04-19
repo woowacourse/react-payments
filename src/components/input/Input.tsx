@@ -1,4 +1,4 @@
-import * as Styled from "./Input.styles";
+import * as Styled from "./Input.styled";
 
 export interface InputProps {
   value?: string;

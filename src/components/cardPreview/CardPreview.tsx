@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ICardInfo } from "../../types/type";
-import * as Styled from "./CardPreview.styles";
+import * as Styled from "./CardPreview.styled";
 import MasterCardImage from "../../assets/Mastercard.png";
 import VisaImage from "../../assets/Visa.png";
 import CardNumbers from "../cardNumbers/CardNumbers";

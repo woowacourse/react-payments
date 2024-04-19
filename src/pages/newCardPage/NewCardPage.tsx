@@ -3,7 +3,7 @@ import Input from "../../components/input/Input";
 import CardPreview from "../../components/cardPreview/CardPreview";
 import { ICardInfo } from "../../types/type";
 import NewCardInputSection from "../../components/newCardInputSection/NewCardInputSection";
-import { NewCardContainer } from "./NewCardPage.styles";
+import { NewCardContainer } from "./NewCardPage.styled";
 import { validateCardExpiration, validateCardNumber, validateUserName } from "../../validators/newCardInputValidator";
 import { CARD_EXPIRATION, CARD_NUMBERS, USER_NAME } from "../../constants/setting";
 
