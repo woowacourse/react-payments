@@ -5,12 +5,12 @@ import Input from './components/composables/Input';
 import CreditCard from './components/CreditCard';
 import useCardNumber from './hooks/useCardNumber';
 import useInput from './hooks/useInput';
-import { useEffect, useState } from 'react';
 import Label from './components/composables/Label';
-import MasterCardImage from './assets/images/mastercard.png';
-import VisaCardImage from './assets/images/visa.png';
 import validate from './utils/validate';
 import { CARD_NUMBER, EXPIRATION_PERIOD, OWNER_NAME } from './constants/cardSection';
+import useCardBrandImage from './hooks/useCardBrandImage';
+import * as React from 'react';
+import { InitialCardNumberState } from './hooks/useCardNumber';
 
 export const StyledInput = styled.input`
   border: 1px solid #acacac;
@@ -20,12 +20,7 @@ export const StyledInput = styled.input`
   height: 32px;
 `;
 
-export type InitialCardNumberState = {
-  value: string;
-  isError: boolean;
-};
-
-const InitialCardNumberState: InitialCardNumberState = {
+const initialCardNumberState: InitialCardNumberState = {
   value: '',
   isError: false,
 };
@@ -62,80 +57,49 @@ const Wrapper = styled.div`
   gap: 8px;
 `;
 
+const CARD_NUMBER_LENGTH = 4;
+
+const MONTH = Object.freeze({
+  MIN: 1,
+  MAX: 12,
+});
+
+const MAX_LENGTH = Object.freeze({
+  CARD_NUMBERS: 4,
+  MONTH: 2,
+  YEAR: 2,
+  NAME: 30,
+});
+
 function App() {
   const { cardNumbers, cardNumbersChangeHandler } = useCardNumber(
-    Array.from({ length: 4 }, () => InitialCardNumberState),
+    Array.from({ length: CARD_NUMBER_LENGTH }, () => initialCardNumberState),
   );
-  const [cardImageSrc, setCardImageSrc] = useState('');
+  const { cardImageSrc } = useCardBrandImage(cardNumbers);
 
   const {
-    inputState: month,
-    inputChangeHandler: monthChangeHandler,
+    inputValue: month,
+    onChange: monthChangeHandler,
     error: monthError,
-    setError: setMonthError,
-  } = useInput();
+  } = useInput([
+    {
+      fn: (value) =>
+        validate.isNumberInRange({ min: MONTH.MIN, max: MONTH.MAX, compareNumber: Number(value) }),
+    },
+    { fn: (value) => validate.isValidDigit(value) },
+  ]);
 
   const {
-    inputState: year,
-    inputChangeHandler: yearChangeHandler,
+    inputValue: year,
+    onChange: yearChangeHandler,
     error: yearError,
-    setError: setYearError,
-  } = useInput();
+  } = useInput([{ fn: (value) => validate.isValidDigit(value) }]);
 
   const {
-    inputState: name,
-    inputChangeHandler: nameChangeHandler,
+    inputValue: name,
+    onChange: nameChangeHandler,
     error: nameError,
-    setError: setNameError,
-  } = useInput();
-
-  useEffect(() => {
-    if (
-      month !== '' &&
-      (!validate.isNumberInRange({ min: 1, max: 12, compareNumber: Number(month) }) ||
-        !validate.isValidDigit(month))
-    ) {
-      setMonthError(true);
-
-      return;
-    }
-
-    setMonthError(false);
-  }, [month, monthError]);
-
-  useEffect(() => {
-    if (year !== '' && !validate.isValidDigit(year)) {
-      setYearError(true);
-
-      return;
-    }
-
-    setYearError(false);
-  }, [year, yearError]);
-
-  useEffect(() => {
-    if (name !== '' && !validate.isEnglish(name)) {
-      setNameError(true);
-
-      return;
-    }
-
-    setNameError(false);
-  }, [name, nameError]);
-
-  useEffect(() => {
-    setCardImageSrc('');
-
-    const cardNumberString = cardNumbers.map((cardNumber) => cardNumber.value).join('');
-
-    if (validate.isVisa(cardNumberString)) {
-      setCardImageSrc(VisaCardImage);
-    }
-
-    if (validate.isMasterCard(cardNumberString)) {
-      setCardImageSrc(MasterCardImage);
-    }
-  }, [cardNumbers]);
+  } = useInput([{ fn: (value) => validate.isEnglish(value) }]);
 
   return (
     <>
@@ -158,19 +122,18 @@ function App() {
               {cardNumbers.map((cardNumber, index) => {
                 const uniqueId = 'cardNumbers' + index;
                 return (
-                  <>
+                  <React.Fragment key={uniqueId}>
                     <Label htmlFor={uniqueId} />
                     <Input
-                      key={uniqueId}
                       id={uniqueId}
                       placeholder="1234"
                       type="text"
-                      maxLength={4}
+                      maxLength={MAX_LENGTH.CARD_NUMBERS}
                       value={cardNumber.value}
                       onChange={(e) => cardNumbersChangeHandler(e, index)}
                       isError={cardNumber.isError}
                     />
-                  </>
+                  </React.Fragment>
                 );
               })}
             </InputInfo>
@@ -193,7 +156,7 @@ function App() {
                 placeholder={'MM'}
                 type="text"
                 value={month}
-                maxLength={2}
+                maxLength={MAX_LENGTH.MONTH}
                 onChange={monthChangeHandler}
                 isError={monthError}
               />
@@ -202,7 +165,7 @@ function App() {
                 id={'year'}
                 placeholder={'YY'}
                 type="text"
-                maxLength={2}
+                maxLength={MAX_LENGTH.YEAR}
                 value={year}
                 onChange={yearChangeHandler}
                 isError={yearError}
@@ -222,7 +185,7 @@ function App() {
               <Label htmlFor={'name'} />
               <Input
                 id="name"
-                maxLength={30}
+                maxLength={MAX_LENGTH.NAME}
                 onChange={nameChangeHandler}
                 isError={nameError}
                 placeholder="JOHN DOE"
