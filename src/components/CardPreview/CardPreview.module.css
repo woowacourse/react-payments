@@ -2,9 +2,7 @@
   background-color: var(--color-card-bg);
   border-radius: 4px;
 
-  width: 230px;
   height: 132px;
-  max-width: fit-content;
 
   box-shadow: 3px 3px 5px 0px #00000040;
   padding: 8px 12px;
@@ -52,11 +50,12 @@
 }
 
 .cardNumber {
-  width: 36px;
+  text-align: center;
+  width: 44px;
 }
 
 .mask {
-  font-size: 4px;
+  font-size: 8px;
   letter-spacing: 4px;
 }
 
