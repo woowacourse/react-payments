@@ -1,4 +1,4 @@
-import { Form } from './style';
+import * as CardInformation  from './style';
 import FormField from '../FormField/FormField';
 import InputField from '../InputField/InputField';
 import Input from '../Input/Input';
@@ -53,7 +53,7 @@ const CardInformationForm = ({
   const userNameErrorMessage = userNameErrorState ? ERROR.userName : '';
 
   return (
-    <Form>
+    <CardInformation.Form>
       <FormField title={TITLE.cardNumber} caption={CAPTION.cardNumber}>
         <InputField label={LABEL.cardNumber} error={cardNumberErrorMessage}>
           <>
@@ -119,7 +119,7 @@ const CardInformationForm = ({
           />
         </InputField>
       </FormField>
-    </Form>
+    </CardInformation.Form>
   );
 };
 
