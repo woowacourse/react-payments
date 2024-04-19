@@ -1,6 +1,7 @@
 import MASTERCARD_IMAGE from "../../assets/image/Mastercard.png";
 import VISA_IMAGE from "../../assets/image/Visa.png";
 import CARD_NUMBER_BLIND_IMAGE from "../../assets/image/CardNumberBlind.svg";
+import checkCardType from "../../utils/checkCardType";
 
 import styles from "./Card.module.css";
 
@@ -13,22 +14,12 @@ const Card = ({
   date: Record<string, string>;
   ownerName: string;
 }) => {
-  const isVisaCard = (firstCardNumberUnit: string) => {
-    return firstCardNumberUnit.startsWith("4");
-  };
-
-  const isMasterCard = (firstCardNumberUnit: string) => {
-    const startTwoNumber = Number(firstCardNumberUnit.slice(0, 2));
-
-    return startTwoNumber >= 51 && startTwoNumber <= 55;
-  };
-
   const displayCardLogo = () => {
     const cardStyle = styles.logo;
 
-    if (isMasterCard(cardNumbers[0]))
+    if (checkCardType(cardNumbers[0]) === "Mastercard")
       return <img src={MASTERCARD_IMAGE} className={cardStyle} />;
-    if (isVisaCard(cardNumbers[0]))
+    if (checkCardType(cardNumbers[0]) === "Visa")
       return <img src={VISA_IMAGE} className={cardStyle} />;
   };
 
