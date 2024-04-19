@@ -2,9 +2,12 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import { resolve } from 'path';
 
+const BASE_URL = process.env.NODE_ENV === 'production' ? '/react-payments/dist' : '/';
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  base: BASE_URL,
   resolve: {
     alias: [
       { find: '@src', replacement: resolve(__dirname, 'src') },
