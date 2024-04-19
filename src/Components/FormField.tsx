@@ -1,13 +1,10 @@
 /** @jsxImportSource @emotion/react */
+import { useContext } from "react";
 import FormInput from "./FormInput";
 import Tooltip from "./Tooltip";
 
 import { css } from "@emotion/react";
-
-interface Props {
-  formFieldInfo: FormFieldInfo;
-  formErrors: ErrorState;
-}
+import { FormErrorContext } from "../App";
 
 const titleCss = css({
   fontSize: "18px",
@@ -30,10 +27,14 @@ const rowStyle = css({
   justifyContent: "space-between",
 });
 
+interface Props {
+  formFieldInfo: FormFieldInfo;
+}
+
 const FormField: React.FC<Props> = ({
   formFieldInfo: { key, title, description, label, sizePreset, inputInfoList },
-  formErrors,
 }) => {
+  const formErrors = useContext(FormErrorContext)![0];
   return (
     <div>
       <h1 css={titleCss}>{title}</h1>

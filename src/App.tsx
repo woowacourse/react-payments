@@ -57,11 +57,13 @@ const createFormErrors = (formFields: InitCardInfoType[]): ErrorState => {
 };
 
 export const CardContext = createContext<[CardInfo, Dispatch<SetStateAction<CardInfo>>] | null>(null);
+export const FormErrorContext = createContext<[ErrorState, Dispatch<SetStateAction<ErrorState>>] | null>(null);
 
 function App() {
   const cardInfoStateHook = useState(createCardInfo(initData));
   const setCardInfo = cardInfoStateHook[1];
-  const [formErrors, setFormErrors] = useState(createFormErrors(initData));
+  const formErrorStateHook = useState(createFormErrors(initData));
+  const setFormErrors = formErrorStateHook[1];
 
   const formFieldPropsList: FormFieldInfo[] = [
     {
@@ -273,12 +275,14 @@ function App() {
   ];
 
   return (
-    <CardContext.Provider value={cardInfoStateHook}>
-      <div css={mainStyle}>
+    <div css={mainStyle}>
+      <CardContext.Provider value={cardInfoStateHook}>
         <CreditCard />
-        <Form formFiledPropsList={formFieldPropsList} formErrors={formErrors} />
-      </div>
-    </CardContext.Provider>
+      </CardContext.Provider>
+      <FormErrorContext.Provider value={formErrorStateHook}>
+        <Form formFiledPropsList={formFieldPropsList} />
+      </FormErrorContext.Provider>
+    </div>
   );
 }
 

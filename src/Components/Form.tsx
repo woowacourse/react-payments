@@ -2,14 +2,13 @@ import FormField from "./FormField";
 
 interface Props {
   formFiledPropsList: FormFieldInfo[];
-  formErrors: ErrorState;
 }
 
-const Form = ({ formFiledPropsList, formErrors }: Props) => {
+const Form = ({ formFiledPropsList }: Props) => {
   return (
     <form>
       {formFiledPropsList.map((formFieldProps, index) => (
-        <FormField key={index} formFieldInfo={formFieldProps} formErrors={formErrors} />
+        <FormField key={index} formFieldInfo={formFieldProps} />
       ))}
     </form>
   );
