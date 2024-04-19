@@ -3,8 +3,8 @@ import TitleContainer from '../common/TitleContainer/TitleContainer';
 import InputField from '../common/InputField/InputField';
 import Input from '../common/Input/Input';
 
-import { CARD_OWNER } from '../../constants/condition';
-import { ERROR_MESSAGE } from '../../constants/message';
+import { CARD_OWNER } from '../../constants/conditions';
+import { ERROR_MESSAGE } from '../../constants/messages';
 
 interface CardOwnerInputProps {
   setOwner: React.Dispatch<React.SetStateAction<string>>;
