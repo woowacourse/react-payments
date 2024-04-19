@@ -4,8 +4,8 @@ import CONDITION from '../constants/Condition';
 const { REG_EXP } = CONDITION;
 
 const useExpirationDate = (defaultValues: Array<number | undefined>) => {
-  const [month, setMonth, monthError] = useInput(defaultValues[0], REG_EXP.month);
-  const [year, setYear, yearError] = useInput(defaultValues[1], REG_EXP.year);
+  const [month, setMonth, isMonthError] = useInput(defaultValues[0], REG_EXP.month);
+  const [year, setYear, isYearError] = useInput(defaultValues[1], REG_EXP.year);
 
   return {
     expirationDateState: {
@@ -17,8 +17,8 @@ const useExpirationDate = (defaultValues: Array<number | undefined>) => {
       setYear,
     },
     expirationDateErrorState: {
-      monthError,
-      yearError,
+      isMonthError,
+      isYearError,
     },
   };
 };

@@ -4,19 +4,19 @@ import CONDITION from '../constants/Condition';
 const { REG_EXP, showVisa, showMasterCard } = CONDITION;
 
 const useCardNumbers = (defaultValues: Array<number | undefined>) => {
-  const [first, setFirst, firstError] = useInput<number | undefined>(
+  const [first, setFirst, isFirstError] = useInput<number | undefined>(
     defaultValues[0],
     REG_EXP.cardNumber,
   );
-  const [second, setSecond, secondError] = useInput<number | undefined>(
+  const [second, setSecond, isSecondError] = useInput<number | undefined>(
     defaultValues[1],
     REG_EXP.cardNumber,
   );
-  const [third, setThird, thirdError] = useInput<number | undefined>(
+  const [third, setThird, isThirdError] = useInput<number | undefined>(
     defaultValues[2],
     REG_EXP.cardNumber,
   );
-  const [fourth, setFourth, fourthError] = useInput<number | undefined>(
+  const [fourth, setFourth, isFourthError] = useInput<number | undefined>(
     defaultValues[3],
     REG_EXP.cardNumber,
   );
@@ -35,10 +35,10 @@ const useCardNumbers = (defaultValues: Array<number | undefined>) => {
       setFourth,
     },
     cardNumberErrorState: {
-      firstError,
-      secondError,
-      thirdError,
-      fourthError,
+      isFirstError,
+      isSecondError,
+      isThirdError,
+      isFourthError,
     },
     showImageCondition: {
       visaShowCondition: showVisa(first),

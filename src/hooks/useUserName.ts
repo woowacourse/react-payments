@@ -4,12 +4,12 @@ import CONDITION from '../constants/Condition';
 const { REG_EXP } = CONDITION;
 
 const useUserName = (defaultValue: string | undefined) => {
-  const [userName, setUserName, userNameError] = useInput(defaultValue, REG_EXP.userName);
+  const [userName, setUserName, isUserNameError] = useInput(defaultValue, REG_EXP.userName);
 
   return {
     userNameState: userName,
     setUserNameState: setUserName,
-    userNameErrorState: userNameError,
+    isUserNameError,
   };
 };
 

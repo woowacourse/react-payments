@@ -13,9 +13,7 @@ const useForm = (defaultValues: FormState) => {
     useCardNumber(defaultValues.cardNumber);
   const { expirationDateState, setExpirationDateState, expirationDateErrorState } =
     useExpirationDate(defaultValues.expirationDate);
-  const { userNameState, setUserNameState, userNameErrorState } = useUserName(
-    defaultValues.userName,
-  );
+  const { userNameState, setUserNameState, isUserNameError } = useUserName(defaultValues.userName);
 
   const previewProps = {
     cardNumberState,
@@ -33,7 +31,7 @@ const useForm = (defaultValues: FormState) => {
     expirationDateErrorState,
     userNameState,
     setUserNameState,
-    userNameErrorState,
+    isUserNameError,
   };
 
   return { previewProps, formProps };
