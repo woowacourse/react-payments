@@ -8,10 +8,10 @@ import './reset.css';
 import * as S from './App.style';
 
 function App() {
-  const [cardNumber, setCardNumber] = useState<string[]>(['', '', '', '']);
-  const [month, setMonth] = useState<string>('');
-  const [year, setYear] = useState<string>('');
-  const [owner, setOwner] = useState<string>('');
+  const [cardNumber, setCardNumber] = useState(['', '', '', '']);
+  const [month, setMonth] = useState('');
+  const [year, setYear] = useState('');
+  const [owner, setOwner] = useState('');
 
   return (
     <S.AppLayout>
