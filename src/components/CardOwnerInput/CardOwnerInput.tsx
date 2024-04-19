@@ -11,8 +11,8 @@ interface CardOwnerInputProps {
 }
 
 function CardOwnerInput({ setOwner }: CardOwnerInputProps) {
-  const [isValid, setIsValid] = useState<boolean>(true);
-  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [isValid, setIsValid] = useState(true);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const validateOwner = (value: string) => {
     const regExp = CARD_OWNER.VALID_REGEX;

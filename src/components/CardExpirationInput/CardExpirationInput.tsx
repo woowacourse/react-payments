@@ -12,8 +12,8 @@ interface CardExpirationInputProps {
 }
 
 function CardExpirationInput({ setMonth, setYear }: CardExpirationInputProps) {
-  const [isValidMonth, setIsValidMonth] = useState<boolean>(true);
-  const [isValidYear, setIsValidYear] = useState<boolean>(true);
+  const [isValidMonth, setIsValidMonth] = useState(true);
+  const [isValidYear, setIsValidYear] = useState(true);
 
   const errorMessage = useMemo(() => {
     if (!isValidMonth) return ERROR_MESSAGE.INVALID_EXPIRATION_MONTH_LENGTH;
