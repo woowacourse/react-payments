@@ -5,15 +5,9 @@ import {
   SYMBOLS,
 } from '../../constants/cardInfo';
 
-interface CardPreviewProps {
-  cardNumbers: string[];
-  expirationDate: string[];
-  ownerName: string;
-}
-
 type Brand = 'visa' | 'master' | null;
 
-const getCardbrand = (cardNumbers: CardPreviewProps['cardNumbers']): Brand => {
+const getCardbrand = (cardNumbers: CardInfo['cardNumbers']): Brand => {
   const { visa, master } = CARD_BRAND;
 
   if (cardNumbers[0].startsWith(visa.startNumber.toString())) return 'visa';
@@ -27,11 +21,7 @@ const getCardbrand = (cardNumbers: CardPreviewProps['cardNumbers']): Brand => {
   return null;
 };
 
-const CardPreview = ({
-  cardNumbers,
-  expirationDate,
-  ownerName,
-}: CardPreviewProps) => {
+const CardPreview = ({ cardNumbers, expirationDate, ownerName }: CardInfo) => {
   const brand = getCardbrand(cardNumbers);
 
   return (
