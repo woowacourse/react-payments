@@ -2,7 +2,7 @@ import { CardNumber } from "../../@types/CreditCard";
 import CARD_THRESHOLD from "../../constants/cardThreshold";
 import styled from "@emotion/styled";
 import VisaCard from "/public/img/Visa.png";
-import MasterCard from "/public/img/MasterCardVisa.png";
+import MasterCard from "/public/img/Mastercard.png";
 
 const getFirstTwoNumber = (creditCardNumber: CardNumber): number | undefined => {
   const twoDigits = 2;
