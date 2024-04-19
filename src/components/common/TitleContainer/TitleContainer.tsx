@@ -1,4 +1,4 @@
-import * as S from '../styles/TitleContainer.style';
+import * as S from './TitleContainer.style';
 
 interface TitleContainerProps {
   title: string;

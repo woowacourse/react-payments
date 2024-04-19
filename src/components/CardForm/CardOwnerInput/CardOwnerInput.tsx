@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import TitleContainer from './TitleContainer';
-import InputField from './InputField';
-import Input from './Input';
 
-import { CARD_OWNER } from '../constants/Condition';
-import { ERROR_MESSAGE } from '../constants/Message';
+import TitleContainer from '../../common/TitleContainer/TitleContainer';
+import InputField from '../../common/InputField/InputField';
+import Input from '../../common/Input/Input';
+
+import { CARD_OWNER } from '../../../constants/Condition';
+import { ERROR_MESSAGE } from '../../../constants/Message';
 
 interface CardOwnerInputProps {
   setOwner: React.Dispatch<React.SetStateAction<string>>;

@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import CardNumberInput from './components/CardNumberInput';
-import CardExpirationInput from './components/CardExpirationInput';
-import CardOwnerInput from './components/CardOwnerInput';
-import CardPreviewBox from './components/CardPreview';
+
+import CardNumberInput from './components/CardForm/CardNumberInput/CardNumberInput';
+import CardExpirationInput from './components/CardForm/CardExpirationInput/CardExpirationInput';
+import CardOwnerInput from './components/CardForm/CardOwnerInput/CardOwnerInput';
+import CardPreview from './components/CardForm/CardPreview/CardPreview';
 
 import './styles/reset.css';
 import * as S from './styles/App.style';
@@ -16,7 +17,7 @@ function App() {
   return (
     <S.AppLayout>
       <S.CardPreviewBox>
-        <CardPreviewBox cardNumber={cardNumber} month={month} year={year} owner={owner} />
+        <CardPreview cardNumber={cardNumber} month={month} year={year} owner={owner} />
       </S.CardPreviewBox>
       <S.CardForm>
         <CardNumberInput setCardNumber={setCardNumber} />

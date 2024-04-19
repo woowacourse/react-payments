@@ -1,4 +1,4 @@
-import * as S from '../styles/InputField.style';
+import * as S from './InputField.style';
 
 interface InputFieldProps {
   label: string;

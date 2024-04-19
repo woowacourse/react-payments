@@ -1,10 +1,11 @@
 import { useState, useMemo } from 'react';
-import TitleContainer from './TitleContainer';
-import InputField from './InputField';
-import Input from './Input';
 
-import { CARD_NUMBER } from '../constants/Condition';
-import { ERROR_MESSAGE } from '../constants/Message';
+import TitleContainer from '../../common/TitleContainer/TitleContainer';
+import InputField from '../../common/InputField/InputField';
+import Input from '../../common/Input/Input';
+
+import { CARD_NUMBER } from '../../../constants/Condition';
+import { ERROR_MESSAGE } from '../../../constants/Message';
 
 interface CardNumberInputProps {
   setCardNumber: React.Dispatch<React.SetStateAction<string[]>>;
