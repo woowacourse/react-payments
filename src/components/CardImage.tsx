@@ -14,7 +14,7 @@ interface CardImageType {
 interface CardImageTableType {
   masterCard: string;
   visa: string;
-  noneImage: string;
+  domesticCard: string;
 }
 
 function CardImage({ cardNumber, cardPeriod, cardOwner }: CardImageType) {
@@ -26,14 +26,14 @@ function CardImage({ cardNumber, cardPeriod, cardOwner }: CardImageType) {
     if (!isRange(startNumber, CARD_INFORMATION.masterCard.min, CARD_INFORMATION.masterCard.max)) {
       return cardBrand.masterCard;
     }
-    return cardBrand.noneImage;
+    return cardBrand.domesticCard;
   };
 
   const getCardImage = () => {
     const cardImageTable: CardImageTableType = {
       masterCard: MASTERCARD,
       visa: VISA,
-      noneImage: '',
+      domesticCard: '',
     };
     return cardImageTable[cardBrandType()];
   };

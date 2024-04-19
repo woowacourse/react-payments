@@ -6,7 +6,7 @@ export type SectionType = typeof CARD_NUMBER.type | typeof CARD_PERIOD.type | ty
 export const cardBrand = {
   visa: 'visa',
   masterCard: 'masterCard',
-  noneImage: 'noneImage',
+  domesticCard: 'domesticCard',
 } as const;
 
 type Union<T> = T[keyof T];
