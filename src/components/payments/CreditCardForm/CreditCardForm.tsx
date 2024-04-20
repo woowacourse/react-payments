@@ -17,7 +17,7 @@ const CreditCardForm: React.FC = () => {
 
   return (
     <>
-      <div className={styles.previewCreditCard}>
+      <div className={styles.previewCreditCardContainer}>
         <PreviewCreditCard
           cardNumbers={cardNumbers}
           expiration={expirationError.isError === true ? initialExpiration : expiration}
