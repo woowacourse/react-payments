@@ -37,7 +37,7 @@ const CardBrand = ({ ...props }) => {
     changBrand();
   }, [firstCardNumbers]);
 
-  return <>{isBrand ? <Image src={BRAND_TABLE[brand]} /> : <></>}</>;
+  return <>{isBrand ? <Image src={BRAND_TABLE[brand]} /> : null}</>;
 };
 
 export default CardBrand;
