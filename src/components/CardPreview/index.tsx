@@ -9,24 +9,21 @@ import styles from './style.module.css';
 interface CardPreviewProps {
   cardInfo: CardInfo;
 }
+
+const SLASH = '/';
+const DOT = '·';
+const COMMA = ',';
+
 function CardPreview(props: CardPreviewProps) {
   const { cardInfo } = props;
   const { mark, number, period, userName, color } = cardInfo;
-  const SLASH = '/';
-  const DOT = '·';
-  interface MarkInfo {
-    src: string | undefined;
-    alt: string | undefined;
-  }
 
-  const INITIAL_MARK_INFO: MarkInfo = { src: undefined, alt: undefined };
-  const [markInfo, setMarkInfo] = useState<MarkInfo>(INITIAL_MARK_INFO);
-  const [cardNumbers, setCardNumbers] = useState<string>();
+  const [cardNumbers, setCardNumbers] = useState('');
 
   const changeNumberToMasking = () => {
     if (!number) return;
     const numberList = number
-      .split(',')
+      .split(COMMA)
       .map((item, index) => {
         if (item && index > 1) {
           return DOT.repeat(CARD_NUMBERS.length);
@@ -38,12 +35,11 @@ function CardPreview(props: CardPreviewProps) {
     setCardNumbers(numberList);
   };
 
-  useEffect(() => {
-    if (!mark) {
-      return;
-    }
-    setMarkInfo(CARD_MARK[mark]);
-  }, [mark]);
+  const getMarkInfo = () => {
+    if (!mark) return;
+
+    return CARD_MARK[mark];
+  };
 
   useEffect(() => {
     changeNumberToMasking();
@@ -58,7 +54,7 @@ function CardPreview(props: CardPreviewProps) {
         <div className={styles.cardImgInner}>
           <section className={styles.top}>
             <img src={CardChip} alt="card chip" />
-            <img src={markInfo.src} alt={markInfo.alt} />
+            <img src={getMarkInfo()?.src} alt={getMarkInfo()?.alt} />
           </section>
           <section className={styles.info}>
             <div className="card-number">{cardNumbers}</div>
