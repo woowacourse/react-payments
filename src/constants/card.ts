@@ -1,6 +1,4 @@
-import EtcImg from '../assets/images/etc.png';
-import MasterCardImg from '../assets/images/mastercard.jpg';
-import VisaImg from '../assets/images/visa.jpg';
+import IMAGES from '../assets/images';
 
 export const CARD_NUMBERS = {
   length: 4,
@@ -18,15 +16,15 @@ export const CARD_USER = {
 
 export const CARD_MARK = {
   visa: {
-    src: VisaImg,
+    src: IMAGES.visaCard,
     alt: 'visa card',
   },
   master: {
-    src: MasterCardImg,
+    src: IMAGES.masterCard,
     alt: 'master card',
   },
   etc: {
-    src: EtcImg,
+    src: IMAGES.etcCard,
     alt: 'etc card',
   },
 };

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import CardChip from '../../assets/images/cardChip.png';
+import IMAGES from '../../assets/images';
 import { CARD_COLOR, CARD_MARK, CARD_NUMBERS } from '../../constants';
 import { CardInfo } from '../../modules/useCardInfoReducer';
 
@@ -57,7 +57,7 @@ function CardPreview(props: CardPreviewProps) {
       >
         <div className={styles.cardImgInner}>
           <section className={styles.top}>
-            <img src={CardChip} alt="card chip" />
+            <img src={IMAGES.cardChip} alt="card chip" />
             <img src={markInfo.src} alt={markInfo.alt} />
           </section>
           <section className={styles.info}>
