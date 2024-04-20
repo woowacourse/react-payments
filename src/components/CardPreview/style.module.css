@@ -25,7 +25,7 @@
 .top {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   width: 100%;
 
   img {
@@ -49,4 +49,28 @@
   width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.cardNumber {
+  display: flex;
+  span {
+    display: block;
+    margin-right: 1rem;
+    width: fit-content;
+  }
+
+  span:nth-child(3),
+  span:nth-child(4) {
+    font-size: 0;
+    letter-spacing: 1px;
+  }
+
+  span:nth-child(3)::before,
+  span:nth-child(4)::before {
+    display: block;
+    width: fit-content;
+    content: '\2022\2022\2022\2022'; /* 점 문자열 */
+    font-size: 0.875rem;
+    text-indent: 0;
+  }
 }
