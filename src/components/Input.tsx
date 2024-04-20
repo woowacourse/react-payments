@@ -16,6 +16,11 @@ const inputStyle = ({ borderColor, focusColor }: { borderColor: string; focusCol
     '&:active, &:focus': {
       borderColor: `${focusColor}`,
     },
+
+    '::-webkit-outer-spin-button, ::-webkit-inner-spin-button': {
+      WebkitAppearance: 'none',
+      margin: '0',
+    },
   });
 
 interface InputType {
@@ -52,11 +57,18 @@ function Input({ isPassword, informationDetail, placeholder, setState, setErrorM
     return maxLengthTable[inputType];
   };
 
+  const getInputType = () => {
+    if (isPassword) return 'password';
+    if (informationDetail === 'owner') return 'input';
+    return 'number';
+  };
+
   return (
     <>
       <input
         maxLength={getInputMaxLength(informationDetail)}
-        type={isPassword ? 'password' : 'input'}
+        type={getInputType()}
+        min={0}
         css={inputStyle({ borderColor: isError ? '#FF3D3D' : '#acacac', focusColor: isError ? '#FF3D3D' : '#000' })}
         placeholder={placeholder}
         onChange={(e) => handleInputChange(e.target.value)}
