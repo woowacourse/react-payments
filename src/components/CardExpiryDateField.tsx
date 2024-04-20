@@ -20,7 +20,7 @@ export default function CardExpiryDateField({
     });
   };
   return (
-    <>
+    <div>
       <FieldTitle
         title="카드 유효기간을 입력해 주세요"
         subtitle="월/년도(MMYY)를 순서대로 입력해 주세요."
@@ -29,6 +29,6 @@ export default function CardExpiryDateField({
         inputTypes={INPUT_TYPE_CATEGORIES.EXPIRY_DATE}
         handleInput={handleExpiryDateInput}
       />
-    </>
+    </div>
   );
 }

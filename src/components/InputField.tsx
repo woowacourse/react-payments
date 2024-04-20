@@ -59,7 +59,7 @@ export default function InputField({ inputTypes, handleInput }: Props) {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  height: 120px;
+  height: 80px;
 `;
 
 const Label = styled.p`

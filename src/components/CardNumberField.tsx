@@ -20,7 +20,7 @@ export default function CardNumberField({
     });
   };
   return (
-    <>
+    <div>
       <FieldTitle
         title="결제할 카드 번호를 입력해 주세요"
         subtitle="본인 명의의 카드만 결제 가능합니다."
@@ -29,6 +29,6 @@ export default function CardNumberField({
         inputTypes={INPUT_TYPE_CATEGORIES.CARD_NUMBER}
         handleInput={handleCardNumberInput}
       />
-    </>
+    </div>
   );
 }

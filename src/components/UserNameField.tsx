@@ -17,12 +17,12 @@ export default function UserNameField({
     });
   };
   return (
-    <>
+    <div>
       <FieldTitle title="카드 소유자 이름을 입력해 주세요" />
       <InputField
         inputTypes={INPUT_TYPE_CATEGORIES.USER_NAME}
         handleInput={handleUserNameInput}
       />
-    </>
+    </div>
   );
 }
