@@ -37,8 +37,7 @@ const CreditCardInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 6px;
-  margin-top: 44px;
-  padding: 0 12px;
+  padding: 44px 12px;
 `;
 
 const CreditCardInfoWrapper = styled.div`
