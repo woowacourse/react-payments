@@ -3,7 +3,7 @@ import INPUT_TYPE_CATEGORIES from '../constants/inputType';
 import { Card } from '../types/card';
 import InputField from './InputField';
 
-const FormContainer = styled.div`
+const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
   gap: 16px;
