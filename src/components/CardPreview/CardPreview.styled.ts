@@ -39,9 +39,9 @@ export const Light = styled.div<{ animationProps: CardAnimationProps }>`
   background-image: radial-gradient(
     circle at ${(props) => props.animationProps.left}px
       ${(props) => props.animationProps.top}px,
-    #00000000,
-    #ffffff10,
-    #ffffff30
+    #00000016,
+    #ffffff16,
+    #ffffff64
   );
 `;
 
