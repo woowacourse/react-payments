@@ -8,6 +8,7 @@ import { MainContainer } from './MainPage.styled';
 const MainPage = () => {
   const [cardInfo, setCardInfo] = useState<CardInfo>({
     cardNumber: ['', '', '', ''],
+    cardBrand: 'none',
     expirationMonth: '',
     expirationYear: '',
     name: '',

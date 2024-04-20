@@ -1,3 +1,4 @@
+import { startsWithNumberRegex } from '../../util/startsWithNumberRegex';
 import CardNumbersFormSection from '../FormSection/CardNumbersFormSection/CardNumbersFormSection';
 import ExpirationDateFormSection from '../FormSection/ExpirationDateFormSection/ExpirationDateFormSection';
 import NameFormSection from '../FormSection/NameFormSection/NameFormSection';
@@ -11,8 +12,19 @@ interface ChangeExpirationProps {
 
 const CardInfo = ({ ...props }) => {
   const { changeCardInfo } = props;
+
+  const changeCardBrand = (cardNumber: string[]) => {
+    if (startsWithNumberRegex(4).test(cardNumber[0])) {
+      return ('Visa');
+    } else if (startsWithNumberRegex(51, 55).test(cardNumber[0])) {
+      return ('MasterCard');
+    } else {
+      return ('none');
+    }
+  }
+
   const changeCardNumber = (cardNumber: string[]) => {
-    changeCardInfo((prev: CardInfo) => ({ ...prev, cardNumber }));
+    changeCardInfo((prev: CardInfo) => ({ ...prev, cardNumber, cardBrand: changeCardBrand(cardNumber) }));
   };
 
   const changeExpiration = ({ month, year }: ChangeExpirationProps) => {

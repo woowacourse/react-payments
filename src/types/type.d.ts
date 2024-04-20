@@ -24,8 +24,11 @@ interface InputState {
   isFilled: boolean;
 }
 
+type CardBrand = 'Visa' | 'MasterCard' | 'none';
+
 interface CardInfo {
   cardNumber: [string, string, string, string];
+  cardBrand: CardBrand;
   expirationMonth: string;
   expirationYear: string;
   name: string;

@@ -1,12 +1,20 @@
 import IcChip from '../../asset/IcChip.svg'
-import CardBrand from '../CardBrand/CardBrand';
 
 import REGEX from '../../constants/regex';
 
+import Visa from '../../asset/Visa.svg';
+import MasterCard from '../../asset/Mastercard.svg';
+
 import * as Styled from './CardPreview.styled'
 
+const BRAND_TABLE: Record<CardBrand, string> = {
+  Visa: Visa,
+  MasterCard: MasterCard,
+  none: ''
+};
+
 const CardPreview = ({ ...props }: CardInfo) => {
-  const { cardNumber, expirationMonth, expirationYear, name } = props;
+  const { cardNumber, cardBrand, expirationMonth, expirationYear, name } = props;
 
   const secureNumber = (number: string) => {
     return number.replace(REGEX.allNumbers, '∙');
@@ -16,7 +24,7 @@ const CardPreview = ({ ...props }: CardInfo) => {
     <Styled.Card>
       <Styled.CardHeader>
         <Styled.Image src={IcChip} />
-        <CardBrand firstCardNumbers={cardNumber[0]} />
+        {cardBrand !== 'none' ? <Styled.Image src={BRAND_TABLE[cardBrand]} /> : <></>}
       </Styled.CardHeader>
       <Styled.CardNumbers>
         <Styled.CardNumber>{cardNumber[0]}</Styled.CardNumber>
