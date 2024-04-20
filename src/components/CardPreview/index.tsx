@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import CardChip from '../../assets/images/cardChip.png';
 import { CARD_COLOR, CARD_MARK, CARD_NUMBERS } from '../../constants';
@@ -20,30 +20,35 @@ function CardPreview(props: CardPreviewProps) {
 
   const [cardNumbers, setCardNumbers] = useState('');
 
-  const changeNumberToMasking = () => {
-    if (!number) return;
-    const numberList = number
-      .split(COMMA)
-      .map((item, index) => {
-        if (item && index > 1) {
-          return DOT.repeat(CARD_NUMBERS.length);
-        }
-        return item;
-      })
-      .join(' ');
-
-    setCardNumbers(numberList);
-  };
-
-  const getMarkInfo = () => {
+  const markInfo = useMemo(() => {
     if (!mark) return;
 
     return CARD_MARK[mark];
-  };
+  }, [mark]);
+
+  const numberList = useMemo(
+    () =>
+      number
+        ?.split(COMMA)
+        .map((item, index) => {
+          if (item && index > 1) {
+            return DOT.repeat(CARD_NUMBERS.length);
+          }
+          return item;
+        })
+        .join(' '),
+    [number],
+  );
+
+  const changeNumberToMasking = useCallback(() => {
+    if (!numberList) return;
+
+    setCardNumbers(numberList);
+  }, [numberList]);
 
   useEffect(() => {
     changeNumberToMasking();
-  }, [number]);
+  }, [number, changeNumberToMasking]);
 
   return (
     <div className={styles.cardPreview}>
@@ -54,7 +59,7 @@ function CardPreview(props: CardPreviewProps) {
         <div className={styles.cardImgInner}>
           <section className={styles.top}>
             <img src={CardChip} alt="card chip" />
-            <img src={getMarkInfo()?.src} alt={getMarkInfo()?.alt} />
+            <img src={markInfo?.src} alt={markInfo?.alt} />
           </section>
           <section className={styles.info}>
             <div className="card-number">{cardNumbers}</div>
