@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import GlobalStyles from './GlobalStyles';
 import * as S from './App.style';
 
 import InputSection from './components/InputSection';
 import Input from './components/composables/Input';
-import Label from './components/composables/Label';
+import ScreenReaderOnlyLabel from './components/composables/ScreenReaderOnlyLabel';
 import CreditCard from './components/CreditCard';
 import MasterCardImage from './assets/images/mastercard.png';
 import VisaCardImage from './assets/images/visa.png';
@@ -121,10 +121,12 @@ function App() {
               {cardNumbers.map((cardNumber, index) => {
                 const uniqueId = 'cardNumbers' + index;
                 return (
-                  <>
-                    <Label htmlFor={uniqueId} />
+                  <Fragment key={uniqueId}>
+                    <ScreenReaderOnlyLabel
+                      htmlFor={uniqueId}
+                      description={`카드 번호 ${index + 1}번째 입력 섹션`}
+                    />
                     <Input
-                      key={uniqueId}
                       id={uniqueId}
                       placeholder="1234"
                       type="text"
@@ -133,7 +135,7 @@ function App() {
                       onChange={(e) => cardNumbersChangeHandler(e, index)}
                       isError={cardNumber.isError}
                     />
-                  </>
+                  </Fragment>
                 );
               })}
             </InputSection>
@@ -150,7 +152,7 @@ function App() {
               description={EXPIRATION_PERIOD.description}
               inputTitle={EXPIRATION_PERIOD.inputTitle}
             >
-              <Label htmlFor={'month'} />
+              <ScreenReaderOnlyLabel htmlFor={'month'} description={'월 입력'} />
               <Input
                 id={'month'}
                 placeholder={'MM'}
@@ -160,7 +162,7 @@ function App() {
                 onChange={monthChangeHandler}
                 isError={monthError}
               />
-              <Label htmlFor={'year'} />
+              <ScreenReaderOnlyLabel htmlFor={'year'} description={'년도 입력'} />
               <Input
                 id={'year'}
                 placeholder={'YY'}
@@ -182,7 +184,7 @@ function App() {
 
           <S.Wrapper>
             <InputSection title={OWNER_NAME.title} inputTitle={OWNER_NAME.inputTitle}>
-              <Label htmlFor={'name'} />
+              <ScreenReaderOnlyLabel htmlFor={'name'} description={'이름 입력'} />
               <Input
                 id="name"
                 maxLength={30}
