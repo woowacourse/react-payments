@@ -42,7 +42,7 @@ export default function InputField({ inputTypes, handleInput }: Props) {
           <Input
             info={info}
             handleInput={(value) => handleUpdateInput(index, value)}
-            isError={errorMessages[index] !== '' && errorMessages[index]!}
+            isError={!!errorMessages[index]}
             handleErrorMessage={(errorMessage) =>
               handleUpdateErrorMessages(index, errorMessage)
             }

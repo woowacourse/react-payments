@@ -66,8 +66,8 @@ interface ValidationMap {
 const Validation: ValidationMap = {
   cardNumber: (n: string) => {
     checkTrimBlank(n);
-    validateCardNumberLength(n);
     validateNumber(n);
+    validateCardNumberLength(n);
   },
   month: (n: string) => {
     checkTrimBlank(n);

@@ -5,7 +5,7 @@ import Validation from '../domain/InputValidation';
 interface Props {
   info: InputInfo;
   handleInput: (value: string) => void;
-  isError: boolean | string;
+  isError: boolean;
   handleErrorMessage: (errorMessage: string) => void;
 }
 
