@@ -6,10 +6,13 @@ const { REG_EXP } = CONDITION;
 const useUserName = (defaultValue: string | undefined) => {
   const userNameCondition = (value: string) => value.split(' ').length === 2;
 
+  const changeUpperCase = (value: string) => value.toUpperCase();
+
   const [userName, setUserName, isUserNameError] = useInput(
     defaultValue,
     REG_EXP.userName,
     userNameCondition,
+    changeUpperCase,
   );
 
   return {
