@@ -15,11 +15,6 @@ import {
   ErrorMessage,
 } from './style/FormSection';
 
-const nowDate = new Date();
-const year = nowDate.getFullYear().toString().slice(2, 4);
-const month = (nowDate.getMonth() + 1).toString().padStart(2, '0');
-const now = year + month;
-
 const ExpirationDateFormSection = ({ ...props }) => {
   const { changeExpiration } = props;
   const initializeInputFieldState = (length: number) => {
@@ -166,10 +161,12 @@ const ExpirationDateFormSection = ({ ...props }) => {
   };
 
   const validateExpired = () => {
-    const expireDate = +(inputState[1].value + inputState[0].value);
-    const nowDate = +now;
+    const inputExpirationDate = new Date(
+      `20${inputState[1].value}-${inputState[0].value}-01`,
+    );
+    const currentDate = new Date();
 
-    if (nowDate - expireDate > 0) {
+    if (inputExpirationDate < currentDate) {
       inputState[0].hasError = true;
       inputState[1].hasError = true;
       setErrorMessage(ERROR_MESSAGE.expiredCard);
