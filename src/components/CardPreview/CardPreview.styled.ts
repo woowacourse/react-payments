@@ -17,7 +17,7 @@ export const Card = styled.div<{ animationProps: CardAnimationProps }>`
     box-shadow 0.3s ease;
 
   &:hover {
-    transform: scale(1.05)
+    transform: scale(1.05) perspective(1200px)
       rotate3d(
         ${(props) => -props.animationProps.centerY / 100},
         ${(props) => props.animationProps.centerX / 100},
