@@ -2,6 +2,7 @@ import { CaptionText, LabelText, TitleText } from "../styles/common";
 
 import ErrorMessage from "./ErrorMessage";
 import Input from "./Input";
+import isNumericString from "../utils/isNumericString";
 import styled from "styled-components";
 import { useState } from "react";
 
@@ -22,6 +23,18 @@ const InputContainer = styled.div`
   gap: 10px;
 `;
 
+const validateCardNumberOnChange = (inputValue: string) => {
+  if (!isNumericString(inputValue)) {
+    throw new Error("카드 번호는 숫자만 입력할 수 있어요");
+  }
+};
+
+const validateCardNumberOnBlur = (inputValue: string) => {
+  if (inputValue.length !== 4) {
+    throw new Error("네 자리 수를 입력해주세요");
+  }
+};
+
 interface CardNumbersProps {
   cardNumbers: CardInformation["cardNumbers"];
   onChange: (inputValue: string, targetIndex: number) => void;
@@ -33,37 +46,31 @@ export default function CardNumbers({
 }: CardNumbersProps) {
   const [errorMessage, setErrorMessage] = useState("");
 
-  const numberValidator = (numbers: string) => {
-    if (numbers.length !== 0 && !Number.isInteger(Number(numbers))) {
-      setErrorMessage("숫자만 입력해주세요");
+  const onCardNumberChange = (inputValue: string, cardNumberIndex: number) => {
+    try {
+      validateCardNumberOnChange(inputValue);
+      setErrorMessage("");
+      onChange(inputValue, cardNumberIndex);
       return false;
-    }
-    setErrorMessage("");
-    return true;
-  };
-
-  const lengthValidator = (numbers: string) => {
-    if (numbers.length !== 4) {
-      setErrorMessage("네 자리 수를 입력해주세요");
-      return false;
-    }
-    setErrorMessage("");
-    return true;
-  };
-
-  const isValidInput = (value: string, targetIndex: number) => {
-    if (!numberValidator(value)) {
+    } catch (error) {
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      }
       return true;
     }
-    onChange(value, targetIndex);
-    return false;
   };
 
-  const isValidLength = (value: string) => {
-    if (!lengthValidator(value)) {
+  const onCardNumberBlur = (inputValue: string) => {
+    try {
+      validateCardNumberOnBlur(inputValue);
+      setErrorMessage("");
+      return false;
+    } catch (error) {
+      if (error instanceof Error) {
+        setErrorMessage(error.message);
+      }
       return true;
     }
-    return false;
   };
 
   return (
@@ -78,30 +85,30 @@ export default function CardNumbers({
           <Input
             maxLength={4}
             placeholder="1234"
-            onChange={(value) => isValidInput(value, 0)}
+            onChange={(value) => onCardNumberChange(value, 0)}
             value={cardNumbers[0]}
-            onBlur={isValidLength}
+            onBlur={onCardNumberBlur}
           />
           <Input
             maxLength={4}
             placeholder="1234"
-            onChange={(value) => isValidInput(value, 1)}
+            onChange={(value) => onCardNumberChange(value, 1)}
             value={cardNumbers[1]}
-            onBlur={isValidLength}
+            onBlur={onCardNumberBlur}
           />
           <Input
             maxLength={4}
             placeholder="1234"
-            onChange={(value) => isValidInput(value, 2)}
+            onChange={(value) => onCardNumberChange(value, 2)}
             value={cardNumbers[2]}
-            onBlur={isValidLength}
+            onBlur={onCardNumberBlur}
           />
           <Input
             maxLength={4}
             placeholder="1234"
-            onChange={(value) => isValidInput(value, 3)}
+            onChange={(value) => onCardNumberChange(value, 3)}
             value={cardNumbers[3]}
-            onBlur={isValidLength}
+            onBlur={onCardNumberBlur}
           />
         </InputContainer>
         <ErrorMessage message={errorMessage}></ErrorMessage>

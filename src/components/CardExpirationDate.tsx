@@ -2,6 +2,7 @@ import { CaptionText, LabelText, TitleText } from "../styles/common";
 
 import ErrorMessage from "./ErrorMessage";
 import Input from "./Input";
+import isNumericString from "../utils/isNumericString";
 import styled from "styled-components";
 import { useState } from "react";
 
@@ -23,11 +24,6 @@ const InputContainer = styled.div`
   width: 100%;
   gap: 10px;
 `;
-
-const isNumericString = (inputValue: string) => {
-  const regex = /^(\d+)?$/;
-  return regex.test(inputValue);
-};
 
 const validateExpirationMonthOnChange = (inputValue: string) => {
   if (!isNumericString(inputValue)) {
