@@ -3,6 +3,7 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import {
   CARD_USER,
   CARD_USER_FORM_MESSAGE,
+  CARD_USER_NAME_REGEXP,
   ERROR_MESSAGE,
 } from '../../constants';
 import debounceFunc from '../../utils/debounceFunc';
@@ -19,14 +20,15 @@ interface CardUserNameInputProps {
 export default function CardUserNameInput(props: CardUserNameInputProps) {
   const { editCardUserName } = props;
   const { title, subTitle, label, namePlaceholder } = CARD_USER_FORM_MESSAGE;
-  const { length } = CARD_USER;
 
   const [userName, setUserName] = useState<string>();
   const [error, setError] = useState<boolean>(false);
 
   const validateName = (name: string) => {
-    const regex = new RegExp(`^[a-zA-Z\\s]{1,${length}}$`);
-    const isValidated = regex.test(name);
+    const isAlphabeticWithSpaces = CARD_USER_NAME_REGEXP.test(name);
+    const isMinimumAlphabetLengthMet =
+      name.trim().length >= CARD_USER.length.min;
+    const isValidated = isAlphabeticWithSpaces && isMinimumAlphabetLengthMet;
 
     setError(!isValidated);
   };

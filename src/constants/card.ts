@@ -13,17 +13,26 @@ export const CARD_EXPIRATION = {
 };
 
 export const CARD_USER = {
-  length: 100,
+  length: {
+    max: 100,
+    min: 1,
+  },
 };
 
 export const CARD_MARK = {
   visa: {
     src: VisaImg,
     alt: 'visa card',
+    startNumber: 4,
   },
   master: {
     src: MasterCardImg,
     alt: 'master card',
+    startNumber: 5,
+    rangeOfSecondNumber: {
+      start: 1,
+      end: 4,
+    },
   },
   etc: {
     src: EtcImg,

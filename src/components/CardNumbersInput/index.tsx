@@ -1,6 +1,8 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 
 import {
+  CARD_MARK_REGEXP,
+  CARD_NUMBER_REGEXP,
   CARD_NUMBERS,
   CARD_NUMBERS_FORM_MESSAGE,
   ERROR_MESSAGE,
@@ -22,7 +24,6 @@ interface CardNumbersInputProps {
 
 export default function CardNumbersInput(props: CardNumbersInputProps) {
   const { editCardMark, editCardNumbers } = props;
-  const { length, startNumber, endNumber } = CARD_NUMBERS;
   const { title, subTitle, label, placeholder } = CARD_NUMBERS_FORM_MESSAGE;
 
   const [validatedNumbers, setValidatedNumbers] = useState<
@@ -36,10 +37,10 @@ export default function CardNumbersInput(props: CardNumbersInputProps) {
   const pickCardMark = (): CardMark => {
     const numberText = validatedNumbers.join('');
 
-    if (/^4\d{15}$/.test(numberText)) {
+    if (CARD_MARK_REGEXP.visa.test(numberText)) {
       return 'visa';
     }
-    if (/^5[1-5]\d{14}/.test(numberText)) {
+    if (CARD_MARK_REGEXP.master.test(numberText)) {
       return 'master';
     }
     return 'etc';

@@ -3,6 +3,7 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import {
   CARD_EXPIRATION,
   CARD_EXPIRATION_PERIOD_FORM_MESSAGE,
+  CARD_PERIOD_REGEXP,
   ERROR_MESSAGE,
 } from '../../constants';
 import { CardPeriod } from '../../modules/useCardInfoReducer';
@@ -29,6 +30,10 @@ interface CardExpirationPeriodFormProps {
   editCardPeriod: (period: CardPeriod) => void;
 }
 
+const ZERO = '0';
+const CENTURY_PREFIX = 2000;
+const MIN_NUMBER_OF_VALUE = 1;
+
 export default function CardExpirationPeriodInput(
   props: CardExpirationPeriodFormProps,
 ) {
@@ -51,6 +56,7 @@ export default function CardExpirationPeriodInput(
 
   const today = new Date();
   const year = today.getFullYear() - 2000;
+  const year = today.getFullYear() - CENTURY_PREFIX;
   const month = today.getMonth() + 1;
 
   const validatePeriod = () => {
@@ -74,8 +80,6 @@ export default function CardExpirationPeriodInput(
 
   const validateMonth = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    const regex = /^([0-9]{1,2})$/;
-    const isValidated = regex.test(value);
 
     debounceFunc(() => {
       setError({
@@ -89,13 +93,12 @@ export default function CardExpirationPeriodInput(
         month: value ? Number(value) : undefined,
       }));
     }, 10);
+
   };
 
   const validateYear = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
 
-    const regex = /^\d{2}$/;
-    const isValidated = regex.test(value);
 
     debounceFunc(() => {
       setError({
@@ -108,6 +111,7 @@ export default function CardExpirationPeriodInput(
         year: value ? Number(value) : undefined,
       }));
     }, 10);
+    const isValidated = CARD_PERIOD_REGEXP.year.test(value);
   };
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -123,9 +127,9 @@ export default function CardExpirationPeriodInput(
   };
 
   const convertToTwoDigits = (number: number | undefined) => {
-    if (number === undefined) return;
+    if (value.length > MIN_NUMBER_OF_VALUE) return;
 
-    return number < 10 ? `0${number}` : number.toString();
+    const text = value !== ZERO ? convertToTwoDigits(Number(value)) : value;
   };
 
   const handleEditCardPeriod = () => {
