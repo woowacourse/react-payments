@@ -6,7 +6,6 @@ import useInput from './hooks/useInput';
 import Label from './components/composables/Label';
 import validate from './utils/validate';
 import { CARD_NUMBER, EXPIRATION_PERIOD, OWNER_NAME } from './constants/cardSection';
-import useCardBrandImage from './hooks/useCardBrandImage';
 import * as React from 'react';
 import useCardNumber, { InitialCardNumberState } from './hooks/useCardNumber';
 import * as S from './app.style';
@@ -31,10 +30,9 @@ const MAX_LENGTH = Object.freeze({
 });
 
 function App() {
-  const { cardNumbers, cardNumbersChangeHandler } = useCardNumber(
+  const { cardNumbers, cardNumbersChangeHandler, cardBrand } = useCardNumber(
     Array.from({ length: CARD_NUMBER_LENGTH }, () => initialCardNumberState),
   );
-  const { cardBrand } = useCardBrandImage(cardNumbers);
 
   const {
     inputValue: month,
