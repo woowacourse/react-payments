@@ -60,3 +60,11 @@ interface UseExpirationFormSectionProps {
 interface UseNameFormSectionProps {
   changeName: (name: string) => void;
 }
+
+interface CardAnimationProps {
+  left: number;
+  top: number;
+  centerX: number;
+  centerY: number;
+  distance: number;
+}
