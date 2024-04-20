@@ -1,6 +1,6 @@
 import * as Styled from "./Input.styled";
 
-export interface InputProps extends React.HTMLProps<HTMLInputElement> {
+export interface InputProps extends React.ComponentPropsWithRef<"input"> {
   isError?: boolean;
 }
 
