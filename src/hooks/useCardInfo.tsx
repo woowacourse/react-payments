@@ -34,6 +34,11 @@ export default function useCardInfo() {
     cardHolder,
   };
 
+  useEffect(() => {
+    if (setCardIssuer)
+      setCardIssuer(matchCardIssuer(cardNumbers.join('')) ?? '');
+  }, [cardNumbers]);
+
   return {
     cardInfo,
     setCardNumbers,
