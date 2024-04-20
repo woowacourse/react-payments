@@ -70,6 +70,23 @@ const HiddenNumber = styled.div`
   background: rgba(255, 255, 255, 1);
 `;
 
+const isVisaCard = (cardNumbers: CardInformation["cardNumbers"]) => {
+  return isNumberStartWith(cardNumbers[0], "4");
+};
+
+const isMasterCard = (cardNumbers: CardInformation["cardNumbers"]) => {
+  return (
+    ["51", "52", "53", "54", "55"].filter((startingNumber) =>
+      isNumberStartWith(cardNumbers[0], startingNumber)
+    ).length > 0
+  );
+};
+
+const isNumberStartWith = (targetNumber: string, startNumber: string) => {
+  const lengthOfStartNumber = startNumber.length;
+  return targetNumber.slice(0, lengthOfStartNumber) === startNumber;
+};
+
 interface CardPreviewProps {
   cardInformation: CardInformation;
 }
@@ -78,15 +95,12 @@ export default function CardPreview({ cardInformation }: CardPreviewProps) {
   const [cardBrandImg, setCardBrandImg] = useState("");
 
   useEffect(() => {
-    if (cardInformation.cardNumbers[0][0] === "4") {
+    if (isVisaCard(cardInformation.cardNumbers)) {
       setCardBrandImg(Visa);
       return;
     }
 
-    if (
-      Number(cardInformation.cardNumbers[0].slice(0, 2)) >= 51 &&
-      Number(cardInformation.cardNumbers[0].slice(0, 2)) <= 55
-    ) {
+    if (isMasterCard(cardInformation.cardNumbers)) {
       setCardBrandImg(Mastercard);
       return;
     }
