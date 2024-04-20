@@ -5,27 +5,6 @@ import InputForm from '../components/InputForm';
 import { Card } from '../types/card';
 import { DEFAULT_BLANK } from '../constants/system';
 
-const Page = styled.div`
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Container = styled.div`
-  max-width: 400px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 45px;
-
-  @media screen and (max-width: 500px) {
-    width: 85vw;
-  }
-`;
-
 export default function EnrollCard() {
   const [cardInfo, setCardInfo] = useState<Card>({
     cardNumbers: {
@@ -49,3 +28,24 @@ export default function EnrollCard() {
     </Page>
   );
 }
+
+const Page = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Container = styled.div`
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 45px;
+
+  @media screen and (max-width: 500px) {
+    width: 85vw;
+  }
+`;
