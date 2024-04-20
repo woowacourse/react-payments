@@ -86,7 +86,7 @@ export default function CardView({ cardInfo }: { cardInfo: Card }) {
           {cardInfo.year.length > 0 ? ' / ' : ''}
           {cardInfo.year.length === 1 ? `0${cardInfo.year}` : cardInfo.year}
         </TextBox>
-        <TextBox> {cardInfo.userName} </TextBox>
+        <TextBox>{cardInfo.userName}</TextBox>
       </CardContainer>
     </>
   );
