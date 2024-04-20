@@ -4,6 +4,7 @@ import { InputInfo, InputType } from '../types/input';
 import { Card } from '../types/card';
 import Input from './Input';
 import FieldTitle from './FieldTitle';
+import Validation from '../domain/InputValidation';
 
 const Container = styled.div`
   display: flex;
@@ -47,6 +48,7 @@ export default function InputField({
   cardInfo,
   handleInput,
 }: Props) {
+
   const [errorMessages, setErrorMessages] = useState<{ [key: number]: string }>(
     {}
   );
@@ -66,6 +68,25 @@ export default function InputField({
     });
   };
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, info: InputInfo, index : number) => {
+    try {
+          Validation[info.validateType]?.(e.target.value);
+          handleUpdateErrorMessages(index, '');
+          handleUpdateInput(index, e.target.value);
+        } catch (error) {
+            if (error instanceof Error) {
+            handleUpdateErrorMessages(index, error.message);
+          }
+        }
+  };
+
+  const checkInputError = (index : number) => {
+    if(index in errorMessages){
+      return errorMessages[index] !== '';
+    }
+    return false;
+  }
+
   return (
       <Container>
         <FieldTitle title={title} subtitle={subtitle} />
@@ -73,14 +94,13 @@ export default function InputField({
         <InputBox>
           {inputTypes.inputInfo.map((info: InputInfo, index: number) => (
             <Input
-            info={info}
-            index={index}
-            handleInput={handleUpdateInput}
-            isError={errorMessages[index] !== '' && errorMessages[index]!}
-            handleErrorMessage={handleUpdateErrorMessages}
+            maxLength={info.maxLength}
+            placeholder={info.placeHolder}
+            onChange={(e) => handleInputChange(e, info, index)}
+            isError={checkInputError(index)}
           />
           ))}
-        </InputBox>
+          </InputBox>
         <ErrorBox>
           {Object.values(errorMessages).find((message) => message !== '')}
         </ErrorBox>
