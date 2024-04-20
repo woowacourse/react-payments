@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useMemo, useState } from 'react';
 
 import {
   CARD_USER,
@@ -14,7 +14,7 @@ import Input from '../Input';
 import styles from './style.module.css';
 
 interface CardUserNameInputProps {
-  editCardUserName: (name: string | undefined) => void;
+  editCardUserName: (name: string) => void;
 }
 export default function CardUserNameInput(props: CardUserNameInputProps) {
   const { editCardUserName } = props;
@@ -22,6 +22,11 @@ export default function CardUserNameInput(props: CardUserNameInputProps) {
 
   const [userName, setUserName] = useState('');
   const [error, setError] = useState(false);
+
+  const errorMessage = useMemo(
+    () => (error ? ERROR_MESSAGE.userName : undefined),
+    [error],
+  );
 
   const validateName = (name: string) => {
     const isAlphabeticWithSpaces = CARD_USER_NAME_REGEXP.test(name);
@@ -40,15 +45,10 @@ export default function CardUserNameInput(props: CardUserNameInputProps) {
     validateName(value);
   };
 
-  const getErrorMessage = () => {
-    if (error) return ERROR_MESSAGE.userName;
-    return;
-  };
-
   useEffect(() => {
     if (!error || userName === '') {
       // 이름 입력란의 앞뒤 공백 제거 후 카드 정보 업데이트
-      editCardUserName(userName?.trim() || undefined);
+      editCardUserName(userName?.trim());
     }
   }, [userName, error]);
 
@@ -68,7 +68,7 @@ export default function CardUserNameInput(props: CardUserNameInputProps) {
             />
           </div>
           <FormErrorMessage>
-            <p>{getErrorMessage()}</p>
+            <p>{errorMessage}</p>
           </FormErrorMessage>
         </div>
       </CardInput>
