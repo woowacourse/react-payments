@@ -7,7 +7,7 @@ import {
   CARD_NUMBERS_FORM_MESSAGE,
   ERROR_MESSAGE,
 } from '../../constants';
-import { CardMark } from '../../modules/useCardInfoReducer';
+import { CardMark, CardNumbers } from '../../modules/useCardInfoReducer';
 import { sliceText } from '../../utils/textChangerUtils';
 import CardInput from '../CardInput';
 import CardInputContainer from '../CardInputContainer';
@@ -18,10 +18,9 @@ import styles from './style.module.css';
 
 const NUMBERS_NAME_PREFIX = 'numbers_';
 
-type CardNumbers = (number | undefined)[];
 interface CardNumbersInputProps {
   editCardMark: (mark: CardMark) => void;
-  editCardNumbers: (number: string) => void;
+  editCardNumbers: (numbers: CardNumbers) => void;
 }
 
 export default function CardNumbersInput(props: CardNumbersInputProps) {
@@ -83,7 +82,7 @@ export default function CardNumbersInput(props: CardNumbersInputProps) {
   };
 
   useEffect(() => {
-    editCardNumbers(numbers.join());
+    editCardNumbers(numbers);
     editCardMark(cardMark);
   }, [numbers, cardMark]);
 

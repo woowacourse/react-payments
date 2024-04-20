@@ -14,7 +14,7 @@ type Story = StoryObj<typeof CardPreview>;
 export const Visa: Story = {
   args: {
     cardInfo: {
-      number: '4123 1111 ···· ····',
+      numbers: [4123, 2013, 1111, 4567],
       mark: 'visa',
       period: { month: '04', year: '24' },
       userName: 'BADA',
@@ -26,7 +26,7 @@ export const Visa: Story = {
 export const Master: Story = {
   args: {
     cardInfo: {
-      number: '5123 1111 ···· ····',
+      numbers: [5123, 4577, 8799, 5555],
       mark: 'master',
       period: { month: '04', year: '24' },
       userName: 'BINGBONG',
@@ -38,9 +38,9 @@ export const Master: Story = {
 export const Etc: Story = {
   args: {
     cardInfo: {
-      number: '2123 1111 ···· ····',
+      numbers: [2013, 1306, 7009, 2025],
       mark: 'etc',
-      period: { month: '04', year: '24' },
+      period: { month: '06', year: '13' },
       userName: 'JOON',
       color: 'default',
     },

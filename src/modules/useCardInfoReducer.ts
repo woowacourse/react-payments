@@ -16,8 +16,9 @@ export interface CardPeriod {
 
 export type CardMark = keyof typeof CARD_MARK | null;
 export type CardColor = keyof typeof CARD_COLOR;
+export type CardNumbers = (number | undefined)[];
 export interface CardInfo {
-  number: string | null;
+  numbers: CardNumbers | null;
   mark: CardMark;
   period: CardPeriod;
   userName: string | null;
@@ -25,7 +26,7 @@ export interface CardInfo {
 }
 
 const INITIAL_CARD_INFO: CardInfo = {
-  number: null,
+  numbers: null,
   mark: null,
   period: {
     month: null,
@@ -36,9 +37,9 @@ const INITIAL_CARD_INFO: CardInfo = {
 };
 
 // action
-const editCardNumbersAction = (number: string) => ({
+const editCardNumbersAction = (numbers: CardNumbers) => ({
   type: EDIT_CARD_NUMBERS,
-  number,
+  numbers,
 });
 
 const editCardMarkAction = (mark: CardMark) => ({
@@ -76,7 +77,7 @@ type CardInfoAction =
 const reducer = (state: CardInfo, action: CardInfoAction): CardInfo => {
   switch (action.type) {
     case EDIT_CARD_NUMBERS:
-      return { ...state, number: action.number };
+      return { ...state, numbers: action.numbers };
 
     case EDIT_CARD_MARK:
       return { ...state, mark: action.mark };
@@ -100,8 +101,8 @@ const reducer = (state: CardInfo, action: CardInfoAction): CardInfo => {
 export default function useCardInfoReducer() {
   const [state, dispatch] = useReducer(reducer, INITIAL_CARD_INFO);
 
-  const editCardNumbers = (number: string) => {
-    dispatch(editCardNumbersAction(number));
+  const editCardNumbers = (numbers: CardNumbers) => {
+    dispatch(editCardNumbersAction(numbers));
   };
 
   const editCardMark = (mark: CardMark) => {

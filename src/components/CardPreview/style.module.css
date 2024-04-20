@@ -40,7 +40,7 @@
   color: #ffff;
   font-size: 0.875rem;
   div {
-    margin-top: 0.5rem;
+    margin-top: 0.6rem;
     height: 0.875rem;
   }
 }
@@ -52,25 +52,24 @@
 }
 
 .cardNumber {
-  display: flex;
   span {
-    display: block;
-    margin-right: 1rem;
-    width: fit-content;
+    display: inline-block;
+    width: 25%;
   }
-
   span:nth-child(3),
   span:nth-child(4) {
-    font-size: 0;
-    letter-spacing: 1px;
+    font-size: 1rem;
+    text-align: center;
   }
+}
 
-  span:nth-child(3)::before,
-  span:nth-child(4)::before {
-    display: block;
-    width: fit-content;
-    content: '\2022\2022\2022\2022'; /* 점 문자열 */
-    font-size: 0.875rem;
-    text-indent: 0;
+.period {
+  span {
+    display: inline-block;
+    width: 20px;
+    text-align: center;
+  }
+  span:nth-child(2) {
+    width: 0.625rem;
   }
 }
