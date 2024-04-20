@@ -3,6 +3,8 @@ import { MASTERCARD, VISA } from '../assets';
 import { isRange } from '../util/isRange';
 import { VALIDATION } from '../constants/validation';
 import checkCardBrand from '../util/checkCardBrand';
+import formatCardDisplayNumber from '../util/formatCardDisplayNumber';
+import { CARD_DISPLAY_INDEX } from '../constants/cardInformation';
 
 interface CardImageType {
   cardNumber: string[];
@@ -28,15 +30,6 @@ function CardImage({ cardNumber, cardPeriod, cardOwner }: CardImageType) {
 
   const imageUrl = getCardImage();
 
-  const displayNumber = () => {
-    return cardNumber.map((value: string, index: number) => {
-      if (index === 2 || index === 3) {
-        return '*'.repeat(value.length);
-      }
-      return value;
-    });
-  };
-
   const monthFormat = (month: string) => {
     const monthNumber = Number(month);
     if (month && !isRange(monthNumber, VALIDATION.singleDigit.min, VALIDATION.singleDigit.max)) {
@@ -61,9 +54,11 @@ function CardImage({ cardNumber, cardPeriod, cardOwner }: CardImageType) {
         {/* 컨텐츠 */}
         <div css={cardContentStyle}>
           <div css={[cardDetailStyle, cardNumberGridStyle]}>
-            {displayNumber().map((numbers, index) => {
-              return <p key={index}>{numbers}</p>;
-            })}
+            {formatCardDisplayNumber(cardNumber, [CARD_DISPLAY_INDEX.third, CARD_DISPLAY_INDEX.fourth]).map(
+              (numbers, index) => {
+                return <p key={index}>{numbers}</p>;
+              },
+            )}
           </div>
           <p css={cardDetailStyle}>{periodFormat(cardPeriod[0], cardPeriod[1])}</p>
           <p css={cardDetailStyle}>{cardOwner}</p>
