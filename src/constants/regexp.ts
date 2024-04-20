@@ -6,7 +6,7 @@ export const CARD_NUMBER_REGEXP = new RegExp(
 
 export const CARD_PERIOD_REGEXP = {
   month: /^(0?[1-9]|10|11|12)$/,
-  year: /^\d{2}$/,
+  year: /^\d{1,2}$/,
 };
 
 export const CARD_USER_NAME_REGEXP = new RegExp(
