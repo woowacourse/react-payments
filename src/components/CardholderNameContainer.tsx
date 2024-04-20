@@ -26,7 +26,7 @@ const CardholderNameContainer = ({
       >
         <Input
           id="cardholder-name-input"
-          isError={!!errorMessage}
+          isError={Boolean(errorMessage)}
           value={cardholderName}
           onChange={handleChange}
           onBlur={updateErrorMessage}
