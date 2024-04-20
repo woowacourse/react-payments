@@ -15,19 +15,17 @@ const CardPreview = ({
   userName: Map<string, string>;
 }) => {
   return (
-    <>
-      <CardFrame>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <ICChip />
-          <CardLogo cardNumbers={cardNumbers} />
-        </div>
-        <div style={{ display: "grid", gap: "8px" }}>
-          <CardNumbers cardNumbers={cardNumbers} />
-          <ExpirationDate expirationDate={expirationDate} />
-          <UserName userName={userName} />
-        </div>
-      </CardFrame>
-    </>
+    <CardFrame>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <ICChip />
+        <CardLogo cardNumbers={cardNumbers} />
+      </div>
+      <div style={{ display: "grid", gap: "8px" }}>
+        <CardNumbers cardNumbers={cardNumbers} />
+        <ExpirationDate expirationDate={expirationDate} />
+        <UserName userName={userName} />
+      </div>
+    </CardFrame>
   );
 };
 
