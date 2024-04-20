@@ -1,9 +1,9 @@
-import styles from './CardPreview.module.css';
+import styles from "./CardPreview.module.css";
 import {
   CARD_BRAND,
   MASK_START_INDEX,
   SYMBOLS,
-} from '../../constants/cardInfo';
+} from "../../constants/cardInfo";
 
 interface CardPreviewProps {
   cardNumbers: string[];
@@ -11,18 +11,18 @@ interface CardPreviewProps {
   ownerName: string;
 }
 
-type Brand = 'visa' | 'master' | null;
+type Brand = "visa" | "master" | null;
 
-const getCardbrand = (cardNumbers: CardPreviewProps['cardNumbers']): Brand => {
+const getCardbrand = (cardNumbers: CardPreviewProps["cardNumbers"]): Brand => {
   const { visa, master } = CARD_BRAND;
 
-  if (cardNumbers[0].startsWith(visa.startNumber.toString())) return 'visa';
+  if (cardNumbers[0].startsWith(visa.startNumber.toString())) return "visa";
 
   if (
     Number(cardNumbers[0].slice(0, 2)) >= master.startNumber &&
     Number(cardNumbers[0].slice(0, 2)) <= master.endNumber
   )
-    return 'master';
+    return "master";
 
   return null;
 };
@@ -62,7 +62,7 @@ const CardPreview = ({
         </div>
 
         <div className={styles.expirationDate}>
-          {expirationDate.every((input) => input !== '') &&
+          {expirationDate.every((input) => input !== "") &&
             expirationDate.join(SYMBOLS.slash)}
         </div>
 

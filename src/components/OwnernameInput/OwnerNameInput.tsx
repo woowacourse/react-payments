@@ -22,7 +22,7 @@ function OwnerNameInput({ setCardData }: OwnerNameInputProps) {
     if (value !== "" && !isCharacter(value)) {
       return { isValid: false, errorMsg: ERRORS.isNotAlphabet };
     }
-    return { isValid: true, errorMsg: "" };
+    return { isValid: true, errorMessage: "" };
   };
 
   const processData = () => {
@@ -31,7 +31,7 @@ function OwnerNameInput({ setCardData }: OwnerNameInputProps) {
 
   const {
     values: ownerName,
-    errMsg,
+    errorMessage,
     isError,
     onChange,
     onBlur,
@@ -50,7 +50,7 @@ function OwnerNameInput({ setCardData }: OwnerNameInputProps) {
     <Field
       title={OWNER_NAME.title}
       labelText={OWNER_NAME.labelText}
-      errMsg={errMsg}
+      errorMessage={errorMessage}
     >
       {Object.keys(ownerName).map((name) => (
         <Input
@@ -60,8 +60,8 @@ function OwnerNameInput({ setCardData }: OwnerNameInputProps) {
           value={ownerName[name as keyof OwnerName]}
           isError={isError[name as keyof OwnerName]}
           isRequired={true}
-          handleChange={onChange}
-          handleOnBlur={onBlur}
+          onChange={onChange}
+          onBlur={onBlur}
         ></Input>
       ))}
     </Field>

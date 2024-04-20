@@ -1,11 +1,11 @@
-import styles from './Field.module.css';
-import React from 'react';
+import styles from "./Field.module.css";
+import React from "react";
 
 interface FieldProps {
   title: string;
   description?: string;
   labelText: string;
-  errMsg: string;
+  errorMessage: string;
   children: React.ReactNode;
 }
 
@@ -14,7 +14,7 @@ export default function Field({
   description,
   labelText,
   children,
-  errMsg,
+  errorMessage,
 }: FieldProps) {
   return (
     <div className={styles.field}>
@@ -26,7 +26,7 @@ export default function Field({
         <div className={styles.inputWrapper}>{children}</div>
       </label>
 
-      <p className={styles.errMsg}>{errMsg}</p>
+      <p className={styles.errorMessage}>{errorMessage}</p>
     </div>
   );
 }

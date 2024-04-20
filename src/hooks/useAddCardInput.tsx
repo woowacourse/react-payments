@@ -33,17 +33,17 @@ export default function UseAddCardInput<T extends InitialValuesType>({
   const [isError, setIsError] =
     useState<Record<keyof T, boolean>>(initialErrors);
 
-  const [errMsg, setErrMsg] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     const validation = validateInputOnChange({ name, value });
 
     if (!validation.isValid) {
-      setErrMsg(validation.errorMsg);
+      setErrorMessage(validation.errorMsg);
       setIsError({ ...isError, [name]: true });
     } else {
-      setErrMsg("");
+      setErrorMessage("");
       setIsError({ ...isError, [name]: false });
       setValues({
         ...values,
@@ -58,10 +58,10 @@ export default function UseAddCardInput<T extends InitialValuesType>({
     if (validateInputOnBlur) {
       const validation = validateInputOnBlur({ name, value });
       if (!validation.isValid) {
-        setErrMsg(validation.errorMsg);
+        setErrorMessage(validation.errorMsg);
         setIsError({ ...isError, [name]: true });
       } else {
-        setErrMsg("");
+        setErrorMessage("");
         setIsError({ ...isError, [name]: false });
         processData();
       }
@@ -72,7 +72,7 @@ export default function UseAddCardInput<T extends InitialValuesType>({
 
   return {
     values,
-    errMsg,
+    errorMessage,
     isError,
     onChange,
     onBlur,

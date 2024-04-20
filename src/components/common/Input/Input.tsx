@@ -1,15 +1,15 @@
-import React from 'react';
+import { HTMLAttributes, ChangeEvent, FocusEvent } from "react";
 
-import styles from './Input.module.css';
-interface InputProps {
+import styles from "./Input.module.css";
+interface InputProps extends HTMLAttributes<HTMLInputElement> {
   name: string;
   value: string;
   isError: boolean;
   placeholder: string;
   isRequired?: boolean;
   maxLength?: number;
-  handleChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  handleOnBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (event: FocusEvent<HTMLInputElement>) => void;
 }
 
 export default function Input({
@@ -19,8 +19,8 @@ export default function Input({
   isError,
   maxLength,
   isRequired = false,
-  handleChange,
-  handleOnBlur,
+  onChange,
+  onBlur,
 }: InputProps) {
   return (
     <input
@@ -29,8 +29,8 @@ export default function Input({
       value={value}
       maxLength={maxLength}
       required={isRequired}
-      onChange={handleChange}
-      onBlur={handleOnBlur}
+      onChange={onChange}
+      onBlur={onBlur}
       className={`${styles.input} ${isError && styles.error}`}
     ></input>
   );

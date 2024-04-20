@@ -47,7 +47,7 @@ const ExpirationDateInput = ({ setCardData }: ExpirationDateInputProps) => {
 
   const {
     values: expirationDate,
-    errMsg,
+    errorMessage,
     isError,
     onChange,
     onBlur,
@@ -70,7 +70,7 @@ const ExpirationDateInput = ({ setCardData }: ExpirationDateInputProps) => {
       title={EXPIRATION_DATE.title}
       description={EXPIRATION_DATE.description}
       labelText={EXPIRATION_DATE.labelText}
-      errMsg={errMsg}
+      errorMessage={errorMessage}
     >
       {Object.keys(expirationDate).map((name) => (
         <Input
@@ -83,8 +83,8 @@ const ExpirationDateInput = ({ setCardData }: ExpirationDateInputProps) => {
           }
           value={expirationDate[name as keyof ExpirationDate]}
           isError={isError[name as keyof ExpirationDate]}
-          handleChange={onChange}
-          handleOnBlur={onBlur}
+          onChange={onChange}
+          onBlur={onBlur}
           maxLength={2}
         ></Input>
       ))}

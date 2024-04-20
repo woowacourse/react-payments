@@ -37,7 +37,7 @@ export default function CardNumberInput({ setCardData }: CardNumberInputProps) {
 
   const {
     values: cardNumbers,
-    errMsg,
+    errorMessage,
     isError,
     onChange,
     onBlur,
@@ -64,7 +64,7 @@ export default function CardNumberInput({ setCardData }: CardNumberInputProps) {
       title={CARD_NUMBER.title}
       description={CARD_NUMBER.description}
       labelText={CARD_NUMBER.labelText}
-      errMsg={errMsg}
+      errorMessage={errorMessage}
     >
       {Object.keys(cardNumbers).map((name) => (
         <Input
@@ -73,10 +73,10 @@ export default function CardNumberInput({ setCardData }: CardNumberInputProps) {
           placeholder={CARD_NUMBER.placeholder}
           value={cardNumbers[name as keyof CardNumbers]}
           isError={isError[name as keyof CardNumbers]}
-          handleChange={onChange}
-          handleOnBlur={onBlur}
+          onChange={onChange}
+          onBlur={onBlur}
           maxLength={4}
-        ></Input>
+        />
       ))}
     </Field>
   );

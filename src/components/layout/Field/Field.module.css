@@ -36,7 +36,7 @@
   margin-bottom: 8px;
 }
 
-.errMsg {
+.errorMessage {
   color: var(--color-red);
   font-weight: 400;
   font-size: 10px;
