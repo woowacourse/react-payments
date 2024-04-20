@@ -12,6 +12,9 @@ export interface CardNumbersContainerProps {
   generateErrorMessageUpdater: (targetKey: string) => () => void;
 }
 
+const CARD_NUMBER_INDEXES: CardNumberKey[] = ['first', 'second', 'third', 'fourth'];
+const PASSWORD_INPUT_KEYS = ['third', 'fourth'];
+
 export default function CardNumberContainer({
   cardNumbers,
   generateChangeHandler,
@@ -19,7 +22,6 @@ export default function CardNumberContainer({
   errorStatus,
   generateErrorMessageUpdater,
 }: CardNumbersContainerProps) {
-  const arr = ['first', 'second', 'third', 'fourth'] as const;
   return (
     <div>
       <RegistrationLayout
@@ -28,8 +30,7 @@ export default function CardNumberContainer({
         labelText="카드 번호"
         labelFor="first-card-numbers-input"
       >
-        {arr.map(key => {
-          const PASSWORD_INPUT_KEYS = ['third', 'fourth'];
+        {CARD_NUMBER_INDEXES.map(key => {
           const type = PASSWORD_INPUT_KEYS.includes(key) ? 'password' : 'text';
 
           return (
