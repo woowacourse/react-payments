@@ -33,7 +33,7 @@ const CardNumbersFormSection = ({ ...props }) => {
     initializeInputFieldState(OPTION.cardNumberInputCount),
   );
   const [errorMessage, setErrorMessage] = useState('');
-  const [hasNoFocus, setHasNoFocus] = useState(true);
+  const [hasNoAllFocus, setHasNoAllFocus] = useState(true);
 
   const handleValueChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -104,15 +104,17 @@ const CardNumbersFormSection = ({ ...props }) => {
       inputState[2].value,
       inputState[3].value,
     ]);
-    setHasNoFocus(Object.values(inputState).every((field) => !field.hasFocus));
+    setHasNoAllFocus(
+      Object.values(inputState).every((field) => !field.hasFocus),
+    );
   }, [inputState]);
 
   useEffect(() => {
     resetErrors();
-    if (hasNoFocus) {
+    if (hasNoAllFocus) {
       handleValidate();
     }
-  }, [hasNoFocus]);
+  }, [hasNoAllFocus]);
 
   const resetErrors = () => {
     const newState = Object.keys(inputState).reduce<InputStates>((acc, key) => {
