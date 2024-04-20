@@ -1,19 +1,15 @@
-import { useState } from "react";
 import styled from "styled-components";
+import { useState } from "react";
 
 const SInput = styled.input<{
-  isErrorOnChange: boolean;
-  isErrorOnBlur: boolean;
+  isError: boolean;
 }>`
   width: 100%;
   height: 15px;
   padding: 8px 15px 8px 8px;
   gap: 8px;
   border: 1px solid
-    ${(props) =>
-      props.isErrorOnChange || props.isErrorOnBlur
-        ? "red"
-        : "rgba(172, 172, 172, 1)"};
+    ${(props) => (props.isError ? "red" : "rgba(172, 172, 172, 1)")};
   border-radius: 2px;
   font-family: Inter;
   font-size: 11px;
@@ -43,8 +39,7 @@ export default function Input({
   onBlur,
   value,
 }: Props) {
-  const [isErrorOnChange, setIsErrorOnChange] = useState(false);
-  const [isErrorOnBlur, setIsErrorOnBlur] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   return (
     <SInput
@@ -56,18 +51,17 @@ export default function Input({
           return;
         }
         const isError = onChange(e.target.value);
-        setIsErrorOnChange(isError);
+        setIsError(isError);
       }}
       onBlur={(e) => {
         if (!onBlur) {
           return;
         }
         const isError = onBlur(e.target.value);
-        setIsErrorOnBlur(isError);
+        setIsError(isError);
       }}
       value={value}
-      isErrorOnChange={isErrorOnChange}
-      isErrorOnBlur={isErrorOnBlur}
+      isError={isError}
     ></SInput>
   );
 }
