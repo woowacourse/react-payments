@@ -1,49 +1,49 @@
-import { PAYMENTS_INPUT_MESSAGE, PAYMENTS_MESSAGE } from "../constants/message";
-import { useContext, useEffect, useState } from "react";
-import { validateLength, validateOnlyDigit } from "../domain/validateInput";
+import {
+  ERROR_MESSAGE,
+  PAYMENTS_INPUT_MESSAGE,
+  PAYMENTS_MESSAGE,
+} from '../constants/message';
+import { isOnlyDigit, isUpperLength } from '../domain/checkIsValid';
 
-import { CardInfoContext } from "../App";
-import FormItem from "./FormItem";
-import SectionTitle from "./SectionTitle";
-import { matchCardIssuer } from "../domain/matchCardIssuer";
-import useInput from "../hooks/useInput";
+import { BOUND } from '../constants/number';
+import FormItem from './FormItem';
+import SectionTitle from './SectionTitle';
+import TextInput from './TextInput';
+import TextInputContainer from './InputContainer';
+import { useEffect } from 'react';
+import useLastValidValue from '../hooks/useLastValidValue';
+import useValidateInput from '../hooks/useValidateInput';
 
-export default function CardNumbers() {
-  const [errorMessage, setErrorMessage] = useState("");
+export default function CardNumbers({
+  setCardNumbers,
+}: {
+  setCardNumbers: React.Dispatch<
+    React.SetStateAction<[string, string, string, string]>
+  >;
+}) {
+  const firstInput = useValidateInput(useValidatedInputProps);
+  const secondInput = useValidateInput(useValidatedInputProps);
+  const thirdInput = useValidateInput(useValidatedInputProps);
+  const fourthInput = useValidateInput(useValidatedInputProps);
 
-  const useInputProps = {
-    validator: (string: string) => {
-      validateOnlyDigit(string);
-      validateLength(string, 4);
+  const hooks = [firstInput, secondInput, thirdInput, fourthInput];
+  const inputs = hooks.map(hook => hook.input);
+  const errorMessages = hooks.map(hook => hook.errorMessage);
 
-      setErrorMessage("");
-    },
-    errorHandler: (error: unknown) => {
-      if (!(error instanceof Error)) return;
-      setErrorMessage(error.message);
-    },
-  };
-
-  const firstInput = useInput(useInputProps);
-  const secondInput = useInput(useInputProps);
-  const thirdInput = useInput(useInputProps);
-  const fourthInput = useInput(useInputProps);
-
-  const inputs = [firstInput, secondInput, thirdInput, fourthInput];
-  const values: [string, string, string, string] = [
-    firstInput.value,
-    secondInput.value,
-    thirdInput.value,
-    fourthInput.value,
-  ];
-
-  const { setCardNumbers, setCardIssuer } = useContext(CardInfoContext);
+  const errorMessage = useLastValidValue({
+    checkValues: errorMessages,
+    invalidValues: [''],
+  });
 
   useEffect(() => {
-    if (setCardIssuer) setCardIssuer(matchCardIssuer(values.join("")) ?? "");
-
-    if (setCardNumbers) setCardNumbers(values);
-  }, values);
+    if (setCardNumbers)
+      setCardNumbers([
+        firstInput.input,
+        secondInput.input,
+        thirdInput.input,
+        fourthInput.input,
+      ]);
+  }, inputs);
 
   return (
     <section>
@@ -55,17 +55,36 @@ export default function CardNumbers() {
         labelText={PAYMENTS_INPUT_MESSAGE.cardNumberLabel}
         errorMessage={errorMessage}
       >
-        {inputs.map((hook, idx) => (
-          <input
-            key={idx}
-            type="text"
-            placeholder={PAYMENTS_INPUT_MESSAGE.cardNumberPlaceHolder}
-            maxLength={4}
-            onChange={hook.onChangeHandler}
-            value={hook.value}
-          />
-        ))}
+        <TextInputContainer>
+          {hooks.map((hook, idx) => (
+            <TextInput
+              key={idx}
+              placeholder={PAYMENTS_INPUT_MESSAGE.cardNumberPlaceHolder}
+              onChange={hook.onChange}
+              value={hook.input}
+              maxLength={BOUND.cardNumbersOnePartUpper}
+              border-color={hook.errorMessage ? 'error' : undefined}
+            />
+          ))}
+        </TextInputContainer>
       </FormItem>
     </section>
   );
 }
+
+const useValidatedInputProps = {
+  validatorPropsArray: [
+    {
+      checkIsValid: isOnlyDigit,
+      shouldReflect: false,
+      errorMessage: ERROR_MESSAGE.notDigit,
+    },
+    {
+      checkIsValid: (string: string) =>
+        isUpperLength(string, BOUND.cardNumbersOnePartUpper),
+      shouldReflect: true,
+      errorMessage: `${BOUND.cardNumbersOnePartUpper}${ERROR_MESSAGE.invalidLengthTail}`,
+    },
+  ],
+  maxLength: BOUND.cardNumbersOnePartUpper,
+};
