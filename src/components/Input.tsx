@@ -10,10 +10,9 @@ interface InputType {
   placeholder: string;
   setState: (s: string) => void;
   setErrorMessage: (message: string) => void;
-  keyProp: string;
 }
 
-function Input({ isPassword, keyProp, informationDetail, placeholder, setState, setErrorMessage }: InputType) {
+function Input({ isPassword, informationDetail, placeholder, setState, setErrorMessage }: InputType) {
   const [isError, setIsError] = useState(false);
   const handleInputChange = (value: string) => {
     try {
@@ -45,7 +44,6 @@ function Input({ isPassword, keyProp, informationDetail, placeholder, setState, 
         maxLength={getInputMaxLength(informationDetail)}
         type={isPassword ? 'password' : 'input'}
         css={inputStyle({ border: isError ? '#FF3D3D' : '#acacac', focusColor: isError ? '#FF3D3D' : '#000' })}
-        key={keyProp}
         placeholder={placeholder}
         onChange={(e) => handleInputChange(e.target.value)}
       ></input>

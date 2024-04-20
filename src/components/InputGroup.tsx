@@ -5,6 +5,7 @@ import { useState } from 'react';
 import ErrorMessage from './ErrorMessage';
 import { informationSectionType, period } from '../types/cardType';
 import { CARD_NUMBER, CARD_OWNER, CARD_PERIOD } from '../constants/inputInformation';
+import { CARD_DISPLAY_INDEX } from '../constants/cardInformation';
 
 interface InputGroupType {
   setState: React.Dispatch<React.SetStateAction<string[]>>;
@@ -44,11 +45,11 @@ function InputGroup({ setState, informationSection }: InputGroupType) {
         </label>
         <div css={inputBoxStyle}>
           {placeholders.map((placeholder: string, index: number) => {
-            const isPassword = index === 2 || index === 3;
+            const isPassword = index === CARD_DISPLAY_INDEX.third || index === CARD_DISPLAY_INDEX.fourth;
             return (
               <Input
                 isPassword={isPassword}
-                keyProp={informationSection + index.toString()}
+                key={index}
                 informationDetail={informationSection === 'period' ? period[index] : informationSection}
                 placeholder={placeholder}
                 setState={(s) => updateState(s, index)}
