@@ -68,10 +68,11 @@ export default function CardNumberInput({ setCardData }: CardNumberInputProps) {
         const name = n as keyof CardNumbers;
         return (
           <>
-            <Label htmlFor={name} labelText={name} hideLabel />
+            <Label key={name} htmlFor={name} labelText={name} hideLabel />
             <Input
               key={name}
               id={name}
+              name={name}
               placeholder={CARD_NUMBER.placeholder}
               value={cardNumbers[name]}
               isError={isError[name]}

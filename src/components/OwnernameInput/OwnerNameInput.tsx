@@ -7,6 +7,7 @@ import useAddCardInput, { InputType } from '../../hooks/useAddCardInput';
 import { isEnglishCharacter } from '../../domain/validators';
 
 import { ADD_CARD_FORM_FIELDS, ERRORS } from '../../constants/messages';
+import { useEffect } from 'react';
 
 const { OWNER_NAME } = ADD_CARD_FORM_FIELDS;
 
@@ -43,6 +44,10 @@ function OwnerNameInput({ setCardData }: OwnerNameInputProps) {
     updateCardData,
   });
 
+  useEffect(() => {
+    console.log(ownerName);
+  }, [ownerName]);
+
   return (
     <Field
       title={OWNER_NAME.title}
@@ -53,10 +58,11 @@ function OwnerNameInput({ setCardData }: OwnerNameInputProps) {
         const name = n as keyof OwnerName;
         return (
           <>
-            <Label htmlFor={name} labelText={name} hideLabel />
+            <Label key={name} htmlFor={name} labelText={name} hideLabel />
             <Input
               key={name}
               id={name}
+              name={name}
               placeholder={OWNER_NAME.placeholder}
               value={ownerName[name]}
               isError={isError[name]}

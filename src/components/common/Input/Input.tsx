@@ -3,6 +3,7 @@ import React from 'react';
 import styles from './Input.module.css';
 import clsx from 'clsx';
 interface InputProps {
+  name: string;
   id: string;
   value: string;
   isError: boolean;
@@ -14,6 +15,7 @@ interface InputProps {
 }
 
 export default function Input({
+  name,
   id,
   value,
   placeholder,
@@ -25,6 +27,7 @@ export default function Input({
 }: InputProps) {
   return (
     <input
+      name={name}
       id={id}
       placeholder={placeholder}
       value={value}

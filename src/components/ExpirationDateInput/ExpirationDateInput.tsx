@@ -75,10 +75,11 @@ const ExpirationDateInput = ({ setCardData }: ExpirationDateInputProps) => {
         const name = n as keyof ExpirationDate;
         return (
           <>
-            <Label htmlFor={name} labelText={name} hideLabel />
+            <Label key={name} htmlFor={name} labelText={name} hideLabel />
             <Input
               key={name}
               id={name}
+              name={name}
               placeholder={
                 name === 'month'
                   ? EXPIRATION_DATE.placeholder.month
