@@ -33,6 +33,10 @@ interface Props {
   children: React.ReactNode;
 }
 
+/**
+ *
+ * @param param0 내부 children 요소로 input요소를 입력받는다.
+ */
 const FormFieldComponent: React.FC<Props> = ({ formFieldInfo: { key, title, description, label }, children }) => {
   const formErrors = useContext(FormErrorContext)![0];
   return (
