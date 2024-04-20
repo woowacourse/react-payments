@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
-const CardNumber = ({ number }:{number:string}) => {
+import { ReactElement } from "react";
+
+const CardNumber = ({ number }: { number: string | ReactElement[] }) => {
   return <CardNumberWrapper>{number}</CardNumberWrapper>;
 };
 

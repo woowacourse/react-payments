@@ -1,16 +1,7 @@
 import styled from "styled-components";
 import CardNumber from "./CardNumber";
-import { CardInfo } from "../PaymentApp";
 
-
-const CardNumbers = ({ cardNumbers }: { cardNumbers: CardInfo[] }) => {
-  const latestCardNumbers: { [key: number]: string } = {};
-
-  cardNumbers.forEach((cardInfo) => {
-    const index = Number(cardInfo.index);
-    latestCardNumbers[index] = cardInfo.currentValue;
-  });
-
+const CardNumbers = ({ cardNumbers }: { cardNumbers: Map<string, string> }) => {
   return (
     <div
       style={{
@@ -20,23 +11,21 @@ const CardNumbers = ({ cardNumbers }: { cardNumbers: CardInfo[] }) => {
         height: "20px",
       }}
     >
-      {Object.entries(latestCardNumbers).map(([index, value]) => {
-        const numericIndex = Number(index);
-        if (value) {
-          return numericIndex <= 1 ? (
-            <CardNumber key={numericIndex} number={value} />
-          ) : (
-            <CardNumber
-              key={numericIndex}
-              number={Array(value.length)
-                .fill(0)
-                .map(() => (
-                  <Dot />
+      {Array.from(cardNumbers.entries())
+        .sort()
+        .map(([index, value]) => {
+          if (value) {
+            return Number(index) <= 1 ? (
+              <CardNumber number={value} />
+            ) : (
+              <CardNumber
+                number={Array.from({ length: value.length }).map((_, i) => (
+                  <Dot key={i} />
                 ))}
-            />
-          );
-        }
-      })}
+              />
+            );
+          }
+        })}
     </div>
   );
 };

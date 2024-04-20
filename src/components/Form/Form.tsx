@@ -12,7 +12,7 @@ const Form = ({
   setExpirationDate,
   setUserName,
 }: {
-  setCardNumbers: React.Dispatch<React.SetStateAction<CardInfo[]>>;
+  setCardNumbers: React.Dispatch<React.SetStateAction<Map<string, string>>>;
   setExpirationDate: React.Dispatch<React.SetStateAction<CardInfo[]>>;
   setUserName: React.Dispatch<React.SetStateAction<CardInfo[]>>;
 }) => {
@@ -20,7 +20,7 @@ const Form = ({
     <FormWrapper>
       <div style={{ height: "137px" }}>
         <InputDescription
-          title="결제할 카드 번호를 입력해 주세요."
+          title="결제할 카드 번호를 입력해 주세요"
           description="본인 명의의 카드만 결제 가능합니다."
         ></InputDescription>
         <CardNumberForm
@@ -47,9 +47,7 @@ const Form = ({
       </div>
 
       <div style={{ height: "137px" }}>
-        <InputDescription
-          title="카드 소유자 이름을 입력해 주세요"
-        ></InputDescription>
+        <InputDescription title="카드 소유자 이름을 입력해 주세요"></InputDescription>
         <UserNameForm
           labelContent="소유자 이름"
           inputCount={1}

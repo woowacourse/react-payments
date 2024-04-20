@@ -4,7 +4,7 @@ import Visa from "../../assets/Visa.png";
 import MasterCard from "../../assets/Mastercard.png";
 
 import { CARD_TYPE } from "../../constants/card";
-import { CardInfo } from "../PaymentApp";
+
 
 const CardLogoWrapper = styled.img`
   width: 36px;
@@ -13,8 +13,9 @@ const CardLogoWrapper = styled.img`
   opacity: 0px;
 `;
 
-const CardLogo = ({ cardNumbers }: { cardNumbers: CardInfo[] }) => {
-  if (cardNumbers.length === 0) return;
+const CardLogo = ({ cardNumbers }: { cardNumbers: Map<string, string> }) => {
+  const firstCardNumber = cardNumbers.get("0");
+  if (!firstCardNumber) return;
 
   const isVisa = (firstCardNumber: string) => {
     const firstDigit = Number(firstCardNumber.slice(0, 1));
@@ -30,21 +31,12 @@ const CardLogo = ({ cardNumbers }: { cardNumbers: CardInfo[] }) => {
     );
   };
 
-  const firstCardNumberObject = cardNumbers
-    .slice()
-    .reverse()
-    .find((item) => item.index === "0");
+  if (isVisa(firstCardNumber)) {
+    return <CardLogoWrapper src={Visa} />;
+  }
 
-  if (firstCardNumberObject) {
-    const firstCardNumber = firstCardNumberObject.currentValue;
-
-    if (isVisa(firstCardNumber)) {
-      return <CardLogoWrapper src={Visa} />;
-    }
-
-    if (isMasterCard(firstCardNumber)) {
-      return <CardLogoWrapper src={MasterCard} />;
-    }
+  if (isMasterCard(firstCardNumber)) {
+    return <CardLogoWrapper src={MasterCard} />;
   }
 };
 

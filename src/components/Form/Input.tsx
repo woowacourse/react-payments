@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
 
-import { CardInfo } from "../PaymentApp";
-
+// TODO: 인터페이스 이름 수정
 interface InputProps {
   index: string;
   type: string;
@@ -10,7 +9,7 @@ interface InputProps {
   maxLength: number;
   setErrorMessage: (errorMessage: string) => void;
   setAllInputValid: (isValidInput: boolean) => void;
-  setData: React.Dispatch<React.SetStateAction<CardInfo[]>>;
+  setData: React.Dispatch<React.SetStateAction<Map<string, string>>>;
 
   validationRule: (value: string) => boolean;
   errorMessageText: string;
@@ -35,8 +34,9 @@ const Input = ({
 
     setCurrentValue(currentValue);
 
-    const newCardInfo: CardInfo = { index, currentValue };
-    setData((prevCardNumbers) => [...prevCardNumbers, newCardInfo]);
+    setData((prevCardNumbers) =>
+      new Map(prevCardNumbers).set(index, currentValue)
+    );
 
     if (!validationRule(currentValue)) {
       setErrorMessage(errorMessageText);

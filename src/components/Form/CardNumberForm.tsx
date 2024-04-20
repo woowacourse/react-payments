@@ -10,7 +10,7 @@ export interface CardNumberFormProps {
   inputCount: number;
   type: string;
   placeholders: string[];
-  setCardNumbers?: React.Dispatch<React.SetStateAction<CardInfo[]>>;
+  setCardNumbers?: React.Dispatch<React.SetStateAction<Map<string, string>>>;
   setExpirationDate?: React.Dispatch<React.SetStateAction<CardInfo[]>>;
   setUserName?: React.Dispatch<React.SetStateAction<CardInfo[]>>;
 }
