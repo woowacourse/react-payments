@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const InputSection = styled.div`
+export const InputSection = styled.fieldset`
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -22,12 +22,6 @@ export const Subtext = styled.p`
   line-height: 13.76px;
   text-align: left;
   color: #8b95a1;
-`;
-
-export const Article = styled.article`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
 `;
 
 export const Form = styled.form`

@@ -12,17 +12,15 @@ export interface NewCardInputSectionProps {
 const NewCardInputSection = ({ mainText, subText, label, errorMessage, children }: NewCardInputSectionProps) => {
   return (
     <Styled.InputSection>
-      <fieldset>
-        <legend>
-          <Styled.MainText>{mainText}</Styled.MainText>
-          <Styled.Subtext>{subText}</Styled.Subtext>
-        </legend>
-        <Styled.Form>
-          <Styled.Label>{label}</Styled.Label>
-          <Styled.InputWrapper>{children}</Styled.InputWrapper>
-        </Styled.Form>
+      <div>
+        <Styled.MainText>{mainText}</Styled.MainText>
+        <Styled.Subtext>{subText}</Styled.Subtext>
+      </div>
+      <Styled.Form>
+        <Styled.Label>{label}</Styled.Label>
+        <Styled.InputWrapper>{children}</Styled.InputWrapper>
         <Styled.ErrorText>{errorMessage && errorMessage.find((item) => item !== "")}</Styled.ErrorText>
-      </fieldset>
+      </Styled.Form>
     </Styled.InputSection>
   );
 };
