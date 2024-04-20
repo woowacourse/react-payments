@@ -1,26 +1,44 @@
-import { validateExpirationDate } from '@utils/expiration';
 import { useState } from 'react';
+import { isValidMonthInput, isValidYearInput } from '../../utils/validator/index';
+import ERROR_MESSAGE from '../../constants/errorMessage';
 
-export const initialExpiration = { month: '', year: '' };
+const initialExpirationDate = { month: '', year: '' };
+const initialExpirationDateError = { isError: { month: false, year: false }, errorMessage: '' };
 
-const useChangeExpiration = () => {
-  const [expiration, setExpiration] = useState(initialExpiration);
-  const [expirationError, setExpirationError] = useState({ isError: false, errorMessage: '' });
+const validators = {
+  month: isValidMonthInput,
+  year: isValidYearInput,
+};
+
+const errorMessages = {
+  month: ERROR_MESSAGE.invalidMonthInput,
+  year: ERROR_MESSAGE.invalidYearInput,
+};
+
+const useChangeExpirationDate = () => {
+  const [expirationDate, setExpirationDate] = useState(initialExpirationDate);
+  const [expirationDateError, setExpirationDateError] = useState({
+    isError: { month: false, year: false },
+    errorMessage: '',
+  });
 
   const handleExpirationChange = (field: 'month' | 'year', value: string) => {
-    if (/\D/.test(value)) {
-      setExpirationError({ isError: true, errorMessage: '월은 01에서 12 사이의 숫자여야 합니다.' });
+    // 유효성 검사 실패
+    if (!validators[field](value)) {
+      setExpirationDateError({
+        isError: { ...initialExpirationDateError.isError, [field]: true },
+        errorMessage: errorMessages[field],
+      });
+
       return;
     }
 
-    const newExpiration = { ...expiration, [field]: value };
-    const error = validateExpirationDate(newExpiration.month, newExpiration.year);
-
-    setExpiration(newExpiration);
-    setExpirationError(error);
+    // 유효성 검사 통과
+    setExpirationDate((prev) => ({ ...prev, [field]: value }));
+    setExpirationDateError(initialExpirationDateError);
   };
 
-  return { expiration, expirationError, handleExpirationChange };
+  return { expiration: expirationDate, expirationError: expirationDateError, handleExpirationChange };
 };
 
-export default useChangeExpiration;
+export default useChangeExpirationDate;

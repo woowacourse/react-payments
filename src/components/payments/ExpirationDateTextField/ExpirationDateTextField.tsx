@@ -5,7 +5,7 @@ interface ExpirationDateTextFieldProps {
   month: string;
   year: string;
   onAddExpirationDate: (field: 'month' | 'year', value: string) => void;
-  expirationError: { isError: boolean; errorMessage: string };
+  expirationError: { isError: { month: boolean; year: boolean }; errorMessage: string };
 }
 
 const ExpirationDateTextField: React.FC<ExpirationDateTextFieldProps> = ({
@@ -23,18 +23,21 @@ const ExpirationDateTextField: React.FC<ExpirationDateTextFieldProps> = ({
         <ExpirationDateInput
           id="expiration"
           placeholder="MM"
-          isError={expirationError.isError}
+          isError={expirationError.isError.month}
           value={month}
           onAddExpirationDate={(event) => onAddExpirationDate('month', event.target.value)}
         />
         <ExpirationDateInput
           placeholder="YY"
-          isError={expirationError.isError}
+          isError={expirationError.isError.year}
           value={year}
           onAddExpirationDate={(event) => onAddExpirationDate('year', event.target.value)}
         />
       </TextField.Content>
-      <TextField.ErrorText isError={expirationError.isError} errorText={expirationError.errorMessage} />
+      <TextField.ErrorText
+        isError={expirationError.isError.month || expirationError.isError.year}
+        errorText={expirationError.errorMessage}
+      />
     </section>
   );
 };
