@@ -1,6 +1,6 @@
-import { BlockedInputError, NonBlockedInputError } from "../errors/InputError";
+import { BlockedInputError, NonBlockedInputError } from '../errors/InputError';
 
-import { ERROR_MESSAGE } from "../constants/message";
+import { ERROR_MESSAGE } from '../constants/message';
 
 export const validateOnlyDigit = (string: string) => {
   if (!/^[0-9]*$/.test(string)) {
@@ -10,7 +10,7 @@ export const validateOnlyDigit = (string: string) => {
 
 export const validateOnlyEnglishWithSpace = (string: string) => {
   if (!/^([a-zA-Z]+\s*)*$/.test(string)) {
-    throw new BlockedInputError(ERROR_MESSAGE.notEnglish);
+    throw new BlockedInputError(ERROR_MESSAGE.notEnglishOrSpace);
   }
 };
 
