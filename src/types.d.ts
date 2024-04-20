@@ -42,6 +42,4 @@ interface FormFieldInfo {
   title: string;
   description?: string;
   label: string;
-  sizePreset?: SizePresetType;
-  inputInfoList: InputInfo[];
 }
