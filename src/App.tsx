@@ -23,6 +23,8 @@ function App() {
 
   return (
     <div className={styles.app}>
+      <h1 className={styles.title}>카드 추가</h1>
+
       <CardPreview
         cardNumbers={cardInfo.cardNumbers}
         expirationDate={cardInfo.expirationDate}
