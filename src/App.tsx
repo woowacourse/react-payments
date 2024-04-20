@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import GlobalStyles from './GlobalStyles';
 import InputInfo from './components/InputSection';
 import Input from './components/composables/Input';
@@ -10,51 +9,12 @@ import { CARD_NUMBER, EXPIRATION_PERIOD, OWNER_NAME } from './constants/cardSect
 import useCardBrandImage from './hooks/useCardBrandImage';
 import * as React from 'react';
 import useCardNumber, { InitialCardNumberState } from './hooks/useCardNumber';
-
-export const StyledInput = styled.input`
-  border: 1px solid #acacac;
-  padding: 8px;
-  font-size: 0.6875rem;
-  border-radius: 2px;
-  height: 32px;
-`;
+import * as S from './app.style';
 
 const initialCardNumberState: InitialCardNumberState = {
   value: '',
   isError: false,
 };
-
-const Container = styled.div`
-  padding: 20px 30px;
-
-  width: 376px;
-  height: 680px;
-  background-color: beige;
-`;
-
-const CardInfoContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-`;
-
-const ErrorContainer = styled.div`
-  height: 14px;
-`;
-
-const ErrorMessageSpan = styled.span`
-  color: #ff3d3d;
-
-  font-size: 0.5938rem;
-  font-weight: 400;
-  line-height: 0.875rem;
-`;
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-`;
 
 const CARD_NUMBER_LENGTH = 4;
 
@@ -103,7 +63,7 @@ function App() {
   return (
     <>
       <GlobalStyles />
-      <Container>
+      <S.Container>
         <CreditCard
           cardNumbers={cardNumbers}
           month={month}
@@ -111,8 +71,8 @@ function App() {
           name={name}
           cardBrand={cardBrand}
         />
-        <CardInfoContainer>
-          <Wrapper>
+        <S.CardInfoContainer>
+          <S.Wrapper>
             <InputInfo
               title={CARD_NUMBER.title}
               description={CARD_NUMBER.description}
@@ -136,14 +96,14 @@ function App() {
                 );
               })}
             </InputInfo>
-            <ErrorContainer>
-              <ErrorMessageSpan>
+            <S.ErrorContainer>
+              <S.ErrorMessageSpan>
                 {cardNumbers.some((cardNumber) => cardNumber.isError) && CARD_NUMBER.errorMessage}
-              </ErrorMessageSpan>
-            </ErrorContainer>
-          </Wrapper>
+              </S.ErrorMessageSpan>
+            </S.ErrorContainer>
+          </S.Wrapper>
 
-          <Wrapper>
+          <S.Wrapper>
             <InputInfo
               title={EXPIRATION_PERIOD.title}
               description={EXPIRATION_PERIOD.description}
@@ -170,16 +130,16 @@ function App() {
                 isError={yearError}
               />
             </InputInfo>
-            <ErrorContainer>
-              <ErrorMessageSpan>
+            <S.ErrorContainer>
+              <S.ErrorMessageSpan>
                 {monthError && yearError ? EXPIRATION_PERIOD.monthErrorMessage : ''}
                 {!monthError && yearError ? EXPIRATION_PERIOD.yearErrorMessage : ''}
                 {monthError && !yearError ? EXPIRATION_PERIOD.monthErrorMessage : ''}
-              </ErrorMessageSpan>
-            </ErrorContainer>
-          </Wrapper>
+              </S.ErrorMessageSpan>
+            </S.ErrorContainer>
+          </S.Wrapper>
 
-          <Wrapper>
+          <S.Wrapper>
             <InputInfo title={OWNER_NAME.title} inputTitle={OWNER_NAME.inputTitle}>
               <Label htmlFor={'name'} />
               <Input
@@ -192,12 +152,12 @@ function App() {
                 value={name}
               />
             </InputInfo>
-            <ErrorContainer>
-              <ErrorMessageSpan>{nameError && OWNER_NAME.errorMessage}</ErrorMessageSpan>
-            </ErrorContainer>
-          </Wrapper>
-        </CardInfoContainer>
-      </Container>
+            <S.ErrorContainer>
+              <S.ErrorMessageSpan>{nameError && OWNER_NAME.errorMessage}</S.ErrorMessageSpan>
+            </S.ErrorContainer>
+          </S.Wrapper>
+        </S.CardInfoContainer>
+      </S.Container>
     </>
   );
 }

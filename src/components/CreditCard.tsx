@@ -1,7 +1,7 @@
-import styled from 'styled-components';
 import { InitialCardNumberState } from '../hooks/useCardNumber';
 import MasterCardImage from '../assets/images/mastercard.png';
 import VisaCardImage from '../assets/images/visa.png';
+import * as S from './creditCard.style';
 
 type CreditCardProps = {
   cardNumbers: InitialCardNumberState[];
@@ -11,132 +11,48 @@ type CreditCardProps = {
   cardBrand: 'none' | 'Visa' | 'MasterCard';
 };
 
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  margin-top: 50px;
-  margin-bottom: 45px;
-
-  width: 100%;
-`;
-
-const CardContainer = styled.div`
-  background-color: #333333;
-
-  width: 212px;
-  height: 132px;
-
-  padding: 8px 12px;
-
-  border-radius: 4px;
-`;
-
-const NumbersContainer = styled.div`
-  display: flex;
-  gap: 10px;
-  min-height: 20px;
-`;
-
-const NumbersWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 5px;
-
-  min-width: 32px;
-`;
-
-const Text = styled.span`
-  color: #fff;
-  font-size: 0.875rem;
-  font-weight: 500;
-  line-height: 1.25rem;
-`;
-
-const Dot = styled.span`
-  width: 4px;
-  height: 4px;
-
-  background-color: #fff;
-  border-radius: 50%;
-`;
-
-const CardHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const CardHeaderContentWrapper = styled.div`
-  width: 36px;
-  height: 22px;
-`;
-
-const IcChip = styled.div`
-  width: 100%;
-  height: 100%;
-
-  border-radius: 4px;
-
-  background-color: #ddcd78;
-`;
-
-const CardBrand = styled.img`
-  width: 100%;
-  height: 100%;
-
-  border-radius: 4px;
-`;
-
-const CardInfoWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-
-  margin-top: 14px;
-  margin-left: 5px;
-`;
+const DATE_SEPARATOR = '/';
 
 export default function CreditCard({ cardNumbers, month, year, name, cardBrand }: CreditCardProps) {
   const cardBrandImageSrc =
     cardBrand === 'MasterCard' ? MasterCardImage : cardBrand === 'Visa' ? VisaCardImage : '';
 
   return (
-    <Container>
-      <CardContainer>
-        <CardHeader>
-          <CardHeaderContentWrapper>
-            <IcChip />
-          </CardHeaderContentWrapper>
-          <CardHeaderContentWrapper>
+    <S.Container>
+      <S.CardContainer>
+        <S.CardHeader>
+          <S.CardHeaderContentWrapper>
+            <S.IcChip />
+          </S.CardHeaderContentWrapper>
+          <S.CardHeaderContentWrapper>
             {cardBrandImageSrc ? (
-              <CardBrand src={cardBrandImageSrc} alt={'cardBrandImage'} />
+              <S.CardBrand src={cardBrandImageSrc} alt={'cardBrandImage'} />
             ) : null}
-          </CardHeaderContentWrapper>
-        </CardHeader>
-        <CardInfoWrapper>
-          <NumbersContainer>
-            <NumbersWrapper>
-              <Text>{cardNumbers[0].value}</Text>
-            </NumbersWrapper>
-            <NumbersWrapper>
-              <Text>{cardNumbers[1].value}</Text>
-            </NumbersWrapper>
-            <NumbersWrapper>
+          </S.CardHeaderContentWrapper>
+        </S.CardHeader>
+        <S.CardInfoWrapper>
+          <S.NumbersContainer>
+            <S.NumbersWrapper>
+              <S.Text>{cardNumbers[0].value}</S.Text>
+            </S.NumbersWrapper>
+            <S.NumbersWrapper>
+              <S.Text>{cardNumbers[1].value}</S.Text>
+            </S.NumbersWrapper>
+            <S.NumbersWrapper>
               {Array.from({ length: cardNumbers[2].value.length }).map((_, index) => (
-                <Dot key={'third card section' + index} />
+                <S.Dot key={'third card section' + index} />
               ))}
-            </NumbersWrapper>
-            <NumbersWrapper>
+            </S.NumbersWrapper>
+            <S.NumbersWrapper>
               {Array.from({ length: cardNumbers[3].value.length }).map((_, index) => (
-                <Dot key={'fourth card section' + index} />
+                <S.Dot key={'fourth card section' + index} />
               ))}
-            </NumbersWrapper>
-          </NumbersContainer>
-          <Text>{month + `${month || year ? '/' : ''}` + year}</Text>
-          <Text>{name}</Text>
-        </CardInfoWrapper>
-      </CardContainer>
-    </Container>
+            </S.NumbersWrapper>
+          </S.NumbersContainer>
+          <S.Text>{month + `${month || year ? DATE_SEPARATOR : ''}` + year}</S.Text>
+          <S.Text>{name}</S.Text>
+        </S.CardInfoWrapper>
+      </S.CardContainer>
+    </S.Container>
   );
 }
