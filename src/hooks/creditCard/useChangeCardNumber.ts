@@ -1,4 +1,9 @@
 import { useState } from 'react';
+import { isValidCardNumbersInput, isValidCardTypeInput } from '../../utils/validator/inputField/cardNumbers';
+import ERROR_MESSAGE from '../../constants/errorMessage';
+import CARD from '../../constants/card';
+
+const validCardPrefixes = Object.values(CARD.PREFIXES).flat();
 
 const useChangeCardNumber = () => {
   const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
@@ -8,10 +13,19 @@ const useChangeCardNumber = () => {
   });
 
   const handleCardNumberChange = (index: number, value: string) => {
-    if (/\D/.test(value)) {
+    if (index === 0 && !isValidCardTypeInput(value, validCardPrefixes)) {
       setCardNumberError({
         isError: true,
-        errorMessage: '카드 번호는 16자리 숫자여야 합니다.',
+        errorMessage: ERROR_MESSAGE.invalidCardType,
+      });
+
+      return;
+    }
+
+    if (!isValidCardNumbersInput(value)) {
+      setCardNumberError({
+        isError: true,
+        errorMessage: ERROR_MESSAGE.invalidCardNumberInput,
       });
 
       return;
@@ -21,14 +35,10 @@ const useChangeCardNumber = () => {
 
     newParts[index] = value;
 
-    const completeCardNumber = newParts.join('');
-
-    const isError = !/^\d{16}$/.test(completeCardNumber);
-
     setCardNumbers(newParts);
     setCardNumberError({
-      isError,
-      errorMessage: isError ? '카드 번호는 16자리 숫자여야 합니다.' : '',
+      isError: false,
+      errorMessage: '',
     });
   };
 
