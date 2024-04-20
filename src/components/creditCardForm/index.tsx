@@ -1,65 +1,18 @@
 import styled from "@emotion/styled";
-import InputOwnerName from "../input/InputOwnerName";
-import InputExpirationPeriod from "../input/InputExpirationPeriod";
-import { CardNumberValue, ExpirationPeriodValue } from "../../@types/CreditCard";
-import InputCreditCardNumber from "../input/InputCreditCardNumber";
-import { FormType, CARD_FORM_TYPE } from "../../constants/cardFormType";
 
 interface CreditCardFormProps {
   title: string;
   description?: string;
-  type: FormType;
-  inputValue: string | ExpirationPeriodValue | CardNumberValue;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  children: React.ReactNode;
   inputError: boolean;
 }
 
-const CreditCardForm = ({
-  title,
-  description,
-  type,
-  inputValue,
-  handleChange,
-  inputError,
-}: CreditCardFormProps) => {
-  const getComponentByType = (
-    type: string,
-    inputValue: string | ExpirationPeriodValue | CardNumberValue,
-    handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  ) => {
-    if (type === CARD_FORM_TYPE.cardNumber)
-      return (
-        <InputCreditCardNumber
-          inputValue={inputValue as CardNumberValue}
-          handleChange={handleChange}
-          inputError={inputError}
-        />
-      );
-
-    if (type === CARD_FORM_TYPE.expirationPeriod)
-      return (
-        <InputExpirationPeriod
-          inputValue={inputValue as ExpirationPeriodValue}
-          handleChange={handleChange}
-          inputError={inputError}
-        />
-      );
-
-    if (type === CARD_FORM_TYPE.owner)
-      return (
-        <InputOwnerName
-          inputValue={inputValue as string}
-          handleChange={handleChange}
-          inputError={inputError}
-        />
-      );
-  };
-
+const CreditCardForm = ({ title, description, children, inputError }: CreditCardFormProps) => {
   return (
     <CreditCardFormContainer>
       <TitleWrapper>{title}</TitleWrapper>
       <DescriptionWrapper>{description}</DescriptionWrapper>
-      {getComponentByType(type, inputValue, handleChange)}
+      {children}
       {inputError && <ErrorMessage>유효한 값을 입력하세요.</ErrorMessage>}
     </CreditCardFormContainer>
   );
